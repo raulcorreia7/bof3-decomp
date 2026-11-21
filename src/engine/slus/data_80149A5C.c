@@ -2,7 +2,7 @@
 
 const MessageStateSteps g_MessageStateSteps = {{
     Message_RunScript,
-    UI_TickChoiceTimer,
+    Message_TickChoiceTimer,
     func_80150E48,
     func_80150F3C,
     func_801510DC,
@@ -15,7 +15,7 @@ const MessageStateSteps D_80149A7C = {{
     func_80150F8C,
     func_8015115C,
     func_801511C8,
-    UI_UpdateChoiceInput,
+    Message_UpdateChoiceInput,
     func_80151334,
     Message_DispatchAnswerStep,
     Message_RestartRequest,
@@ -23,9 +23,9 @@ const MessageStateSteps D_80149A7C = {{
 }};
 
 const MessageChoiceSteps D_80149A9C = {{
-    UI_ClosePanel,
+    Message_ClosePanel,
     func_801515F4,
-    UI_ScrollChoice,
+    Message_ScrollChoice,
     func_80151710,
     func_801517AC,
     func_8015102C,

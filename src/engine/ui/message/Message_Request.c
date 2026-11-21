@@ -12,5 +12,5 @@ MATCH void Message_Request(s32 request_id) {
     g_MessageScript  = handle;
     D_801490B0       = handle;
     g_MessageRequest = request_id;
-    UI_ResetMessage();
+    Message_Reset();
 }

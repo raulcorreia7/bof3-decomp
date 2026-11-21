@@ -4,7 +4,7 @@
  * the menu panel task's byte at +2.
  */
 /* func_80158F80 */
-MATCH void Menu_UpdateMessagePanel(void) {
+MATCH void Message_UpdatePanel(void) {
     struct MenuPanelModes table;
 
     table = g_MessagePanelModes;

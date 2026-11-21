@@ -1,28 +1,28 @@
 #include "slus.h"
 
 const struct MenuPanelModes g_MessagePanelModes = {{
-    Menu_UpdateMessageWindow,
-    Menu_UpdateMessageChoice,
-    Menu_UpdateMessagePreset,
+    Message_UpdateWindow,
+    Message_UpdateChoicePanel,
+    Message_UpdatePresetPanel,
 }};
 const struct MenuPanelSteps g_MessageWindowSteps = {{
-    Menu_OpenMessagePanel,
-    Menu_GrowMessagePanel,
-    Menu_DrawMessagePanel,
-    Menu_ShrinkMessagePanel,
+    Message_OpenPanel,
+    Message_GrowPanel,
+    Message_DrawPanel,
+    Message_ShrinkPanel,
     Menu_ClosePanel,
 }};
 const struct MenuPanelSteps g_MessageChoiceSteps = {{
-    Menu_OpenMessageChoice,
-    Menu_GrowMessagePanel,
-    Menu_DrawMessageChoice,
-    Menu_ShrinkMessagePanel,
-    Menu_ReleaseMessagePanel,
+    Message_OpenChoicePanel,
+    Message_GrowPanel,
+    Message_DrawChoicePanel,
+    Message_ShrinkPanel,
+    Message_ReleasePanel,
 }};
 const struct MenuPanelSteps g_MessagePresetSteps = {{
-    Menu_OpenMessagePreset,
-    Menu_GrowMessagePanel,
-    Menu_DrawMessagePreset,
-    Menu_ShrinkMessagePanel,
-    Menu_ReleaseMessagePanel,
+    Message_OpenPresetPanel,
+    Message_GrowPanel,
+    Message_DrawPresetPanel,
+    Message_ShrinkPanel,
+    Message_ReleasePanel,
 }};

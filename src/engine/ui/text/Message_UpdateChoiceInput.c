@@ -4,7 +4,7 @@
  * area request and steps once; the MENU_INPUT_CONFIRM cue steps twice; otherwise repeat-decoded input moves the choice
  * cursor, wrapping at zero through D_801490C6.
  */
-MATCH void UI_UpdateChoiceInput(void) {
+MATCH void Message_UpdateChoiceInput(void) {
     s32 action;
 
     if ((g_InputPressed & g_InputMasks[MENU_INPUT_CANCEL]) != 0) {

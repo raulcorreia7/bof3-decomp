@@ -6,7 +6,7 @@
  * redrawn through UI_DrawBoxOutline.
  */
 /* func_80159580 */
-MATCH void Menu_ShrinkMessagePanel(void) {
+MATCH void Message_ShrinkPanel(void) {
     MenuPanelTask* task;
     s32            count;
 
@@ -63,6 +63,6 @@ MATCH void Menu_ShrinkMessagePanel(void) {
         UI_DrawBoxOutline((s16)g_MenuCurrentPanel->pos.x >> 4, (s16)g_MenuCurrentPanel->pos.y >> 4, (g_MenuCurrentPanel->u.grow.w >> 4), (g_MenuCurrentPanel->u.grow.h >> 4));
     }
     if (g_MenuCurrentPanel->mode == 0) {
-        UI_UpdateLayout();
+        Message_UpdateLayout();
     }
 }

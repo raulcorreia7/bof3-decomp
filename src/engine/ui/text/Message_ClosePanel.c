@@ -3,7 +3,7 @@
 /* closes the front-end panel: clears the panel index, arms panel 1
  * with mode 0, marks the panel state, and advances the front-end step.
  */
-MATCH void UI_ClosePanel(void) {
+MATCH void Message_ClosePanel(void) {
     u8 count;
 
     g_MessageWindow.selection_index = 0;

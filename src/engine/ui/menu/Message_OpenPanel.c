@@ -5,7 +5,7 @@
  * step as a fifth of its centre.
  */
 /* func_80159050 */
-MATCH void Menu_OpenMessagePanel(void) {
+MATCH void Message_OpenPanel(void) {
     volatile u8* flags;
     /* FAKE: the merged panel pointer must survive the if/else in v1; the allocator
      * otherwise moves the branch stores off v1 (measured: a0, three sites). */

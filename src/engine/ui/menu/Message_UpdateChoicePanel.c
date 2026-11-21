@@ -4,7 +4,7 @@
  * menu panel task's state byte at +3.
  */
 /* func_801598F4 */
-MATCH void Menu_UpdateMessageChoice(void) {
+MATCH void Message_UpdateChoicePanel(void) {
     struct MenuPanelSteps table;
 
     table = g_MessageChoiceSteps;

@@ -5,7 +5,7 @@
  * committing the panel position to the window driver.
  */
 /* func_8015920C */
-MATCH void Menu_GrowMessagePanel(void) {
+MATCH void Message_GrowPanel(void) {
     MenuPanelTask* panel;
     u16            next_x;
     u16            next_y;

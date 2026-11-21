@@ -322,7 +322,7 @@ ASSERT_SIZE(Rec_8017F5B4, 0x04);
 
 /* Row of the D_8017F960 panel table: tile column offset, tile row offset and
  * the row step multiplied by the panel index; read through the interior symbols
- * D_8017F962 and D_8017F964 by Menu_DrawMessagePresetRows and Menu_DrawMessagePresetCursor. */
+ * D_8017F962 and D_8017F964 by Message_DrawPresetRows and Message_DrawPresetCursor. */
 typedef struct {
     s16 col_offset;
     s16 row_offset;
@@ -355,7 +355,7 @@ typedef union RecordKey {
 } RecordKey;
 
 /* The six-byte panel row view that starts at row +2: its last halfword is the
- * next row's +0. Menu_DrawMessagePresetCursor indexes it by the selection byte. */
+ * next row's +0. Message_DrawPresetCursor indexes it by the selection byte. */
 typedef struct PanelRowWindow {
     s16 row_offset;
     s16 scale;
@@ -1027,9 +1027,9 @@ void                              func_80151894(void);
 void                              Message_DispatchChoiceMode(void);
 void                              func_80151964(void);
 /* func_801519F8 */
-void                              UI_NextChoice(void);
+void                              Message_NextChoice(void);
 /* func_80151A48 */
-void                              UI_PrevChoice(void);
+void                              Message_PrevChoice(void);
 void                              func_80151A98(void);
 extern void                       func_80151B08(void);
 extern void                       func_80151B50(void);
@@ -1089,47 +1089,47 @@ void                              func_801583BC(void* obj);
 void                              func_80158830(void* obj);
 void                              func_80158940(void* obj);
 /* func_80158F80 */
-void                              Menu_UpdateMessagePanel(void);
+void                              Message_UpdatePanel(void);
 /* func_80158FE0 */
-void                              Menu_UpdateMessageWindow(void);
+void                              Message_UpdateWindow(void);
 /* func_80159050 */
-void                              Menu_OpenMessagePanel(void);
+void                              Message_OpenPanel(void);
 /* func_8015920C */
-void                              Menu_GrowMessagePanel(void);
+void                              Message_GrowPanel(void);
 /* func_80159510 */
-void                              Menu_DrawMessagePanel(void);
+void                              Message_DrawPanel(void);
 /* func_80159580 */
-void                              Menu_ShrinkMessagePanel(void);
+void                              Message_ShrinkPanel(void);
 void                              Menu_ClosePanel(void);
 /* func_801598F4 */
-void                              Menu_UpdateMessageChoice(void);
+void                              Message_UpdateChoicePanel(void);
 /* func_80159964 */
-void                              Menu_OpenMessageChoice(void);
+void                              Message_OpenChoicePanel(void);
 /* func_8015999C */
-void                              Menu_DrawMessageChoice(void);
+void                              Message_DrawChoicePanel(void);
 /* func_80159A00 */
-void                              Menu_ReleaseMessagePanel(void);
+void                              Message_ReleasePanel(void);
 /* func_80159A20 */
-void                              Menu_UpdateMessagePreset(void);
+void                              Message_UpdatePresetPanel(void);
 /* func_80159A90 */
-void                              Menu_OpenMessagePreset(void);
+void                              Message_OpenPresetPanel(void);
 /* func_80159B38 */
-void                              Menu_DrawMessagePreset(void);
+void                              Message_DrawPresetPanel(void);
 /* func_80159B9C */
 extern void                       UI_DrawPanelBox(s16 x, s16 y, u8 w, u8 h);
 /* func_80159FA0 */
 /* func_8015A098 */
-extern void                       Menu_DrawMessagePresetRows(void);
+extern void                       Message_DrawPresetRows(void);
 extern void                       func_8015A170(void);
 /* func_8015A1D8 */
-extern void                       Menu_DrawMessagePresetCursor(void);
+extern void                       Message_DrawPresetCursor(void);
 /* func_8015A264 */
-extern void                       Menu_DrawMessageChoiceCursor(void);
+extern void                       Message_DrawChoiceCursor(void);
 /* func_8015A2B0 */
 void                              UI_DrawLine(s16 start_x, s16 start_y, s16 end_x, s16 end_y, u8 gray);
 extern u8*                        UI_DrawTextAt(s32 x, s32 y, u8* text);
 /* func_8015A554 */
-void                              Menu_LayoutMessageChoice(void);
+void                              Message_LayoutChoicePanel(void);
 extern void                       func_8015A9A4(void);
 s8                                func_8015AD00(PanelSortItem* sort_list);
 void                              func_8015B2AC(s16* out, s32* in);

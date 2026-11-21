@@ -5,8 +5,8 @@
  * halfword g_MessageChoiceTimer down unless it is 0xFFFF, and clears g_MessageChoiceMode when the
  * count reaches zero.
  */
-MATCH void UI_UpdateChoice(void) {
-    ChoiceSteps table = {{UI_NextChoice, UI_PrevChoice}};
+MATCH void Message_UpdateChoice(void) {
+    ChoiceSteps table = {{Message_NextChoice, Message_PrevChoice}};
 
     table.steps[g_MessageChoiceStep]();
     if (g_MessageChoiceTimer != 0xFFFFu) {

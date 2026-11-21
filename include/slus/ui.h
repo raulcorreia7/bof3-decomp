@@ -34,23 +34,23 @@ void        Message_Request(s32 request_id);
 /* func_801502D0 */
 u8*         Message_GetText(u32 resource_id);
 /* func_80150304 */
-void        UI_ResetMessage(void);
+void        Message_Reset(void);
 /* func_801503E0 */
-extern s32  UI_UpdateLayout(void);
+extern s32  Message_UpdateLayout(void);
 /* func_80150470 */
-extern void UI_DrawMessageScript(void);
+extern void Message_DrawScript(void);
 /* func_80150E14 */
-void        UI_TickChoiceTimer(void);
+void        Message_TickChoiceTimer(void);
 /* func_80151210 */
-void        UI_UpdateChoiceInput(void);
+void        Message_UpdateChoiceInput(void);
 /* func_801515A8 */
-void        UI_ClosePanel(void);
+void        Message_ClosePanel(void);
 /* func_80151628 */
-void        UI_ScrollChoice(void);
+void        Message_ScrollChoice(void);
 /* func_8015196C */
-void        UI_UpdateChoice(void);
+void        Message_UpdateChoice(void);
 /* func_801526F4 */
-extern void UI_DrawWaitMarker(s16 x, s16 y);
+extern void Message_DrawWaitMarker(s16 x, s16 y);
 /* func_80158C80 */
 void        Menu_UpdatePanelTasks(void);
 /* func_80158E20 */

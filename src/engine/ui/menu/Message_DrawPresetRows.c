@@ -12,7 +12,7 @@ typedef struct {
  * UI_DrawTextAt.
  */
 /* func_8015A098 */
-MATCH void Menu_DrawMessagePresetRows(void) {
+MATCH void Message_DrawPresetRows(void) {
     MenuPanelTask* panel;
     u8*            state;
     PanelRowIndex* rowp;

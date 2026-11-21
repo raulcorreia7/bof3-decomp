@@ -4,7 +4,7 @@
  * the flags word, consumes one byte from a type-12 resource stream, then requests menu 0 mode 0 and arms the
  * front-end entry.
  */
-MATCH void UI_ResetMessage(void) {
+MATCH void Message_Reset(void) {
     u8* base;
     u8* cursor;
     u8  value;
