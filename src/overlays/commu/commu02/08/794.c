@@ -641,62 +641,51 @@ MATCH void func_801D3184(s32 x, s32 y) {
     UI_DrawText(x + 0x4E, y, 0, 1, D_801DACAC);
 }
 
-#ifdef NON_MATCHING
-NON_MATCHING void func_801D32A0(s32 x, s32 y, u8 mode) {
-    s32 x2;
-    s32 y2;
-    s32 ox;
-    s32 oy;
-    u8* buf;
+/* Draws the fairy casino value window; mode is the digit width the value is aligned to. */
+MATCH void func_801D32A0(s32 x, s32 y, u8 mode) {
+    s16 x2;
+    s16 y2;
 
+    x2 = x;
+    y2 = y;
     UI_DrawWindow(x + 1, y + 1, 0x6A, 0x28, UI_WINDOW_OPEN_TOP_LEFT, g_WindowStyle);
     FairyCasino_DrawFrame(x, y);
     UI_DrawText(x + 0x2C, y + 7, 0, 3, D_801DACB0);
-    x2 = x;
-    y2 = y;
     switch (mode) {
         case 2:
             if (D_801DB07C < 10) {
-                sprintf(buf = g_UiFormatBuffer, D_801D0C08, D_801DB07C);
-                ox = (s16)(x + 0x3E);
+                sprintf(g_UiFormatBuffer, D_801D0C08, D_801DB07C);
+                UI_DrawAsciiString(x + 0x3E, y + 0x18, 0, g_UiFormatBuffer);
             } else {
-                sprintf(buf = g_UiFormatBuffer, D_801D0C04, D_801DB07C);
-                ox = (s16)(x + 0x16);
+                sprintf(g_UiFormatBuffer, D_801D0C04, D_801DB07C);
+                UI_DrawAsciiString(x + 0x16, y + 0x18, 0, g_UiFormatBuffer);
             }
-            oy = y + 0x18;
             break;
         case 3:
             if (D_801DB07C < 100) {
-                sprintf(buf = g_UiFormatBuffer, D_801D0C10, D_801DB07C);
-                ox = (s16)(x + 0x36);
+                sprintf(g_UiFormatBuffer, D_801D0C10, D_801DB07C);
+                UI_DrawAsciiString(x + 0x36, y + 0x18, 0, g_UiFormatBuffer);
             } else {
-                sprintf(buf = g_UiFormatBuffer, D_801D0C04, D_801DB07C);
-                ox = (s16)(x + 0x16);
+                sprintf(g_UiFormatBuffer, D_801D0C04, D_801DB07C);
+                UI_DrawAsciiString(x + 0x16, y + 0x18, 0, g_UiFormatBuffer);
             }
-            oy = y + 0x18;
             break;
         case 4:
             if (D_801DB07C < 1000) {
-                sprintf(buf = g_UiFormatBuffer, D_801D0C18, D_801DB07C);
-                ox = (s16)(x + 0x2E);
+                sprintf(g_UiFormatBuffer, D_801D0C18, D_801DB07C);
+                UI_DrawAsciiString(x + 0x2E, y + 0x18, 0, g_UiFormatBuffer);
             } else {
-                sprintf(buf = g_UiFormatBuffer, D_801D0C04, D_801DB07C);
-                ox = (s16)(x + 0x16);
+                sprintf(g_UiFormatBuffer, D_801D0C04, D_801DB07C);
+                UI_DrawAsciiString(x + 0x16, y + 0x18, 0, g_UiFormatBuffer);
             }
-            oy = y + 0x18;
             break;
         default:
-            sprintf(buf = g_UiFormatBuffer, D_801D0C04, D_801DB07C);
-            ox = (s16)(x2 + 0x16);
-            oy = y2 + 0x18;
+            sprintf(g_UiFormatBuffer, D_801D0C04, D_801DB07C);
+            UI_DrawAsciiString(x2 + 0x16, y2 + 0x18, 0, g_UiFormatBuffer);
             break;
     }
-    UI_DrawAsciiString(ox, oy, 0, buf);
     UI_DrawText(x2 + 0x4E, y2 + 0x18, 0, 1, D_801DACB4);
 }
-#else
-INCLUDE_ASM(func_801D32A0);
-#endif
 
 MATCH void func_801D3568(void) {
     SYS_DISPATCH_BYTE(g_Commu02Event1Steps, D_801F294C);
