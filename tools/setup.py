@@ -74,8 +74,10 @@ def main(argv: list[str] | None = None) -> int:
     ).parse_args(argv)
     manifests = load_target_manifests(ROOT)
     extracted = ROOT / BUILD / "disc"
-    if extracted.is_dir() and all(
-        (ROOT / manifest.binary).is_file() for manifest in manifests.values()
+    if (
+        extracted.is_dir()
+        and all((ROOT / manifest.binary).is_file() for manifest in manifests.values())
+        and all('"kind"' in path.read_text() for path in extracted.rglob("emi.json"))
     ):
         print("payloads: current")
         return 0
@@ -94,7 +96,8 @@ def main(argv: list[str] | None = None) -> int:
         refuse(disc.verify_files(expected, extracted), "the extracted disc")
     for archive in sorted(extracted.rglob("*.EMI")):
         out = extracted / archive.relative_to(extracted).with_suffix("")
-        if (out / "emi.json").is_file():
+        manifest = out / "emi.json"
+        if manifest.is_file() and '"kind"' in manifest.read_text():
             continue
         out.parent.mkdir(parents=True, exist_ok=True)
         client = client or extractor()
