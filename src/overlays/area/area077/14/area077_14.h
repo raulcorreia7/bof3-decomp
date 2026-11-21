@@ -19,7 +19,6 @@
 #define AREA_SPIN_QUAD_WORD  ((0x2180u << 16) | 0x0133u)
 
 /* The four corner vectors RotTransPers4 projects; g_ScratchPadVectors forwards. */
-/* g_ScratchPadVectors */
 extern s16      D_800E4800;
 extern u16      D_800E5500;
 extern u8       D_800E5502;
