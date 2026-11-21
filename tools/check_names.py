@@ -180,6 +180,30 @@ def added_symbol_images(ref: str) -> set[str]:
     }
 
 
+def _stale_message(
+    splat: Path, boundary, image: str, named: dict, claims, source_folder
+) -> str | None:
+    """The message for one layout row that keeps a stale address name, or None."""
+    match = LAYOUT_ROW.fullmatch(boundary.name or "")
+    if not match or boundary.kind not in UNIT_KINDS + DATA_KINDS:
+        return None
+    address = int(match.group(1), 16)
+    entry = named.get(address)
+    if entry is None:
+        return None
+    if boundary.kind in UNIT_KINDS:
+        unit = Path("src") / source_folder(image) / f"{boundary.name}.c"
+        if not unit.is_file() or boundary.name in claims.c_definitions(unit):
+            return None
+    elif entry.type in ("func", "Callback"):
+        return None
+    return (
+        f"{splat}: [{boundary.file_start:#x}, {boundary.kind}, {boundary.name}]: "
+        f"the row keeps the address name of 0x{address:08X}, "
+        f"which {entry.name} names"
+    )
+
+
 def stale_rows(images: list[str]) -> list[str]:
     """One message per layout row that keeps an address name its symbol no longer uses."""
     from bof3.link import symbols
@@ -205,24 +229,11 @@ def stale_rows(images: list[str]) -> list[str]:
             if not entry.alias and not symbols.ADDRESS_NAME.match(entry.name)
         }
         for boundary in layout.boundaries:
-            match = LAYOUT_ROW.fullmatch(boundary.name or "")
-            if not match or boundary.kind not in UNIT_KINDS + DATA_KINDS:
-                continue
-            address = int(match.group(1), 16)
-            entry = named.get(address)
-            if entry is None:
-                continue
-            if boundary.kind in UNIT_KINDS:
-                unit = Path("src") / source_folder(image) / f"{boundary.name}.c"
-                if not unit.is_file() or boundary.name in claims.c_definitions(unit):
-                    continue
-            elif entry.type in ("func", "Callback"):
-                continue
-            messages.append(
-                f"{splat}: [{boundary.file_start:#x}, {boundary.kind}, {boundary.name}]: "
-                f"the row keeps the address name of 0x{address:08X}, "
-                f"which {entry.name} names"
+            message = _stale_message(
+                splat, boundary, image, named, claims, source_folder
             )
+            if message:
+                messages.append(message)
     return messages
 
 
@@ -458,75 +469,88 @@ def baseline_entries() -> set[str]:
     }
 
 
-def main(argv: list[str]) -> int:
-    if argv and argv[0] in ("-h", "--help"):
-        print(__doc__.strip())
-        return 0
-    if argv and argv[0] == "--diff":
-        if len(argv) != 2:
-            print("usage: python3 tools/check_names.py --diff REF", file=sys.stderr)
-            return 2
-        bad = 0
-        seen: set[str] = set()
-        for path, line, text in added_lines(argv[1]):
-            for name in unnamed_parameters(text):
-                print(
-                    f"{path}:{line}: {name}: an unnamed parameter; rename it to what it holds",
-                    file=sys.stderr,
-                )
-                bad = 1
-            if path.startswith(("include/psyq", "include/psx")):
+def _report_new_names(ref: str) -> bool:
+    """Print each added unnamed parameter and rejected name; True when any was found."""
+    bad = False
+    seen: set[str] = set()
+    for path, line, text in added_lines(ref):
+        for name in unnamed_parameters(text):
+            print(
+                f"{path}:{line}: {name}: an unnamed parameter; rename it to what it holds",
+                file=sys.stderr,
+            )
+            bad = True
+        if path.startswith(("include/psyq", "include/psx")):
+            continue
+        if path == "include/common/util.h":
+            continue  # the generic helpers may name arrays and bits directly
+        for name in rejected_names(text):
+            if name in seen or in_ref(ref, name):
                 continue
-            if path == "include/common/util.h":
-                continue  # the generic helpers may name arrays and bits directly
-            for name in rejected_names(text):
-                if name in seen or in_ref(argv[1], name):
-                    continue
-                seen.add(name)
-                print(
-                    f"{path}:{line}: {name}: {rejected_reason(name)} (new name)",
-                    file=sys.stderr,
-                )
-                bad = 1
-        moved = renamed_from(argv[1])
-        for path in changed_paths(argv[1]):
-            before = macro_counts(base_text(argv[1], moved.get(path, path)))
-            after_text = without_drafts(worktree_text(path))
-            after = macro_counts(after_text)
-            grown = {name: after[name] - before.get(name, 0) for name in after}
-            for name, extra in sorted(grown.items()):
-                if extra <= 0:
-                    continue
-                where = [
-                    f"{path}:{number}"
-                    for number, text in enumerate(after_text.splitlines(), 1)
-                    if name in offset_macros(text)
-                ]
-                print(
-                    f"{where[0]}: {name}(): {extra} new offset access(es); "
-                    "write the member of the record or of the scratchpad view",
-                    file=sys.stderr,
-                )
-                bad = 1
-        for message in stale_rows(layout_images(argv[1])):
-            print(message, file=sys.stderr)
-            bad = 1
-        if bad:
-            print(f"check-names: names against {argv[1]}", file=sys.stderr)
-            return 1
-        print(
-            f"check-names: no new rejected names, unnamed parameters, offset accesses "
-            f"or layout rows against {argv[1]}"
-        )
-        return 0
-    now = tree_entries()
-    if argv == ["--write"]:
-        BASELINE.write_text(
-            "# Identifiers that still carry an address (file, name). check_names.py only lets this shrink.\n"
-            + "".join(f"{e}\n" for e in sorted(now))
-        )
-        print(f"check-names: wrote {len(now)} entries to {BASELINE}")
-        return 0
+            seen.add(name)
+            print(
+                f"{path}:{line}: {name}: {rejected_reason(name)} (new name)",
+                file=sys.stderr,
+            )
+            bad = True
+    return bad
+
+
+def _report_new_offsets(ref: str) -> bool:
+    """Print each file that gained offset-macro accesses; True when any did."""
+    bad = False
+    moved = renamed_from(ref)
+    for path in changed_paths(ref):
+        before = macro_counts(base_text(ref, moved.get(path, path)))
+        after_text = without_drafts(worktree_text(path))
+        after = macro_counts(after_text)
+        grown = {name: after[name] - before.get(name, 0) for name in after}
+        for name, extra in sorted(grown.items()):
+            if extra <= 0:
+                continue
+            where = [
+                f"{path}:{number}"
+                for number, text in enumerate(after_text.splitlines(), 1)
+                if name in offset_macros(text)
+            ]
+            print(
+                f"{where[0]}: {name}(): {extra} new offset access(es); "
+                "write the member of the record or of the scratchpad view",
+                file=sys.stderr,
+            )
+            bad = True
+    return bad
+
+
+def check_diff(ref: str) -> int:
+    """Check the names a change adds against ``ref``."""
+    bad = _report_new_names(ref)
+    bad = _report_new_offsets(ref) or bad
+    for message in stale_rows(layout_images(ref)):
+        print(message, file=sys.stderr)
+        bad = True
+    if bad:
+        print(f"check-names: names against {ref}", file=sys.stderr)
+        return 1
+    print(
+        f"check-names: no new rejected names, unnamed parameters, offset accesses "
+        f"or layout rows against {ref}"
+    )
+    return 0
+
+
+def write_baseline(now: set[str]) -> int:
+    """Rewrite the baseline file with the current entries."""
+    BASELINE.write_text(
+        "# Identifiers that still carry an address (file, name). check_names.py only lets this shrink.\n"
+        + "".join(f"{e}\n" for e in sorted(now))
+    )
+    print(f"check-names: wrote {len(now)} entries to {BASELINE}")
+    return 0
+
+
+def check_baseline(now: set[str]) -> int:
+    """Check that the address names only shrink against the baseline."""
     base = baseline_entries()
     new, gone = fold_moves(now - base, base - now)
     new, gone = sorted(new), sorted(gone)
@@ -552,6 +576,21 @@ def main(argv: list[str]) -> int:
         return 1
     print(f"check-names: no new address names ({len(base)} left to rename)")
     return 0
+
+
+def main(argv: list[str]) -> int:
+    if argv and argv[0] in ("-h", "--help"):
+        print(__doc__.strip())
+        return 0
+    if argv and argv[0] == "--diff":
+        if len(argv) != 2:
+            print("usage: python3 tools/check_names.py --diff REF", file=sys.stderr)
+            return 2
+        return check_diff(argv[1])
+    now = tree_entries()
+    if argv == ["--write"]:
+        return write_baseline(now)
+    return check_baseline(now)
 
 
 if __name__ == "__main__":
