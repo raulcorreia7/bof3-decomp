@@ -125,7 +125,7 @@ NON_MATCHING s32 Area_ApplyTileToQuad(u32 part_word, void* prim, s32 mode) {
     poly  = prim;
     for (i = 0; i < mode; i++, poly++) {
         SetSemiTrans(poly, (word >> 15) & 1);
-        poly->r0 = poly->g0 = poly->b0 = lum;
+        setRGB0(poly, lum, lum, lum);
         poly->clut                     = clut;
         poly->tpage                    = tpage;
         poly->u0                       = uv[1].at.u;
