@@ -4,7 +4,7 @@ MATCH void func_801F47BC(void) {
     if ((D_801F58C6 & 0x8) != 0) {
         return;
     }
-    if ((g_InputPressed & 0x40) == 0) {
+    if ((g_InputPressed & PADRdown) == 0) {
         return;
     }
     g_SpawnedActors[D_801F58CE[1]].scene_step -= 1;

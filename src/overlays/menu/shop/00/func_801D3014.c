@@ -26,7 +26,7 @@ MATCH void func_801D3014(void) {
             price   = *wallet + g_ShopItemCount * g_ShopItemPrice;
             *wallet = price;
             if (price > 9999999) {
-                *wallet = 0x98967F;
+                *wallet = 9999999;
             }
             stock = D_801C8950[g_ShopItemCategory] + g_ShopStockIndex;
             *stock -= g_ShopItemCount;

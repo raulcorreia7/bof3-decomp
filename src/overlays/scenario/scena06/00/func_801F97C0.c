@@ -84,7 +84,7 @@ NON_MATCHING void func_801F97C0(void) {
             if (g_ScriptVars[0] != 2) {
                 break;
             }
-            Party_AddZenny(0x3E8, 0);
+            Party_AddZenny(1000, 0);
             g_ScriptVars[0]         = 3;
             g_ScenarioState.step_05 = 0x14;
             break;
@@ -129,7 +129,7 @@ NON_MATCHING void func_801F97C0(void) {
             if (g_ScriptVars[0] != 2) {
                 break;
             }
-            Party_AddZenny(0x3E8, 0);
+            Party_AddZenny(1000, 0);
             g_ScriptVars[0]         = 3;
             g_ScenarioState.step_05 = 0x1E;
             break;
