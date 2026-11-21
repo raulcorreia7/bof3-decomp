@@ -11,24 +11,21 @@ MATCH s32 func_801C0F9C(u8 source_row) {
         if (((g_Game.flags >> D_80146262) & 0x1) == 0) {
             prev = D_80146262 - 1;
             if (((g_Game.flags >> prev) & 0x1) != 0) {
-                goto select_slot; /* the previous slot is active, take it */
+                goto select_slot;
             }
             if (g_Game.members[prev].header.mode != 1) {
                 return 0;
             }
         }
     }
-    /* The two labelled exits below are the retail block layout: the tests at the
-     * head and at check_prev share select_slot, and select_slot falls back into
-     * the reloaded cursor. */
 check_prev:
     if (((g_Game.flags >> (D_80146262 - 0x1)) & 1) == 0) {
-        goto reload_slot; /* the previous slot is free, reload the cursor */
+        goto reload_slot;
     }
 select_slot:
     i = D_80146262;
     if (i != 2) {
-        goto scan_slot; /* the cursor is not 2, scan the slot */
+        goto scan_slot;
     }
     if (g_Game.members[0].header.mode != 1) {
         return 0;
@@ -40,7 +37,7 @@ scan_slot:
         if (((g_Game.flags >> i) & 0x1) == 0) {
             prev = i - 1;
             if (((g_Game.flags >> prev) & 0x1) != 0) {
-                goto clear_bit; /* the slot's active bit is clear, clear the selection bit */
+                goto clear_bit;
             }
             if (g_Game.members[prev].header.mode != 1) {
                 return 0;

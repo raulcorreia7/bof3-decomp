@@ -24,7 +24,6 @@ MATCH void func_801A0AE4(Actor* record) {
                 func_801A2C10(record);
                 if (g_Task->timer != 0) {
                     timer = RANDOM_MASK(3) + 3;
-                    /* Shared timer update after the random reload. */
                     goto block_7;
                 }
             }

@@ -54,7 +54,7 @@ MATCH void Fishing_HookedReel(void) {
             D_801468A4[g_FishingHookedFish].state = (s8)(D_801468A4[g_FishingHookedFish].state - (g_FishingRodRow->reel_cursor_size + 2));
             Actor_RequestScript(7);
             func_801DB04C();
-            goto counted_again; /* the slot timer moved, so the state changed */
+            goto counted_again;
         }
         if (g_InputHeld & PADRdown) {
             func_801DB0AC();

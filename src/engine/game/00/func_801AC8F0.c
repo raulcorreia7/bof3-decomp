@@ -11,7 +11,6 @@ MATCH u16 func_801AC8F0(ScriptState* state, u8 wanted_id, u8* base) {
         return cursor;
     }
     if (base[offset] == 0x0A && base[offset + 1] == wanted_id) {
-        /* the cursor's own record already matches: use the shared exit */
         goto done;
     }
 loop:
