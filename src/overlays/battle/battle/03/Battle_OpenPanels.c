@@ -33,14 +33,14 @@ MATCH void Battle_OpenPanels(void) {
             Menu_OpenPanelTask((battler + MENU_PANEL_BATTLER_FIRST) & BYTE_MASK, 3);
             D_80148332[MENU_PANEL_BATTLER_FIRST + battler].mode_00 = 5;
             D_80148332[MENU_PANEL_BATTLER_FIRST + battler].unk_01  = 0;
-            first                             = g_Game.members[battler].facing;
-            index                             = first * CHAR_ID_GARR + g_Game.members[battler].chr.character_id * 8;
-            panel_x                           = g_Game.members[battler].screen_x.value + g_BattlePanelOffsets[index];
-            panel_x                           = D_801EAEA4[(g_Battle.scroll_dir & 0xFE) ^ 0x2] + panel_x;
+            first                                                  = g_Game.members[battler].facing;
+            index                                                  = first * CHAR_ID_GARR + g_Game.members[battler].chr.character_id * 8;
+            panel_x                                                = g_Game.members[battler].screen_x.value + g_BattlePanelOffsets[index];
+            panel_x                                                = D_801EAEA4[(g_Battle.scroll_dir & 0xFE) ^ 0x2] + panel_x;
             D_80148332[MENU_PANEL_BATTLER_FIRST + battler].x_02    = panel_x;
             /* The y lookup reloads the row bytes; the x store may have changed them. */
-            index                             = g_Game.members[battler].facing * CHAR_ID_GARR + g_Game.members[battler].chr.character_id * 8;
-            panel_y                           = g_Game.members[battler].screen_y.value + (g_BattlePanelOffsets + 1)[index] + 0xC;
+            index                                                  = g_Game.members[battler].facing * CHAR_ID_GARR + g_Game.members[battler].chr.character_id * 8;
+            panel_y                                                = g_Game.members[battler].screen_y.value + (g_BattlePanelOffsets + 1)[index] + 0xC;
             D_80148332[MENU_PANEL_BATTLER_FIRST + battler].battler = battler;
             D_80148332[MENU_PANEL_BATTLER_FIRST + battler].unk_06  = 0;
             D_80148332[MENU_PANEL_BATTLER_FIRST + battler].unk_07  = 0;
