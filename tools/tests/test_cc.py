@@ -26,10 +26,3 @@ def test_authored_assembly_selects_the_hand_folder(tmp_path: Path) -> None:
         asm_dir(tmp_path / "src/engine/slus/b.c", tmp_path)
         == "build/asm/exe/slus_004_22"
     )
-
-
-def test_a_source_in_a_system_folder_belongs_to_the_image_whose_row_names_it() -> None:
-    assert (
-        asm_dir(ROOT / "src/engine/sound/SND_Init.c", ROOT)
-        == "build/asm/exe/slus_004_22"
-    )

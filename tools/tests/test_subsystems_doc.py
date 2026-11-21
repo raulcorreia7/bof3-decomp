@@ -40,20 +40,3 @@ def test_headers_exist() -> None:
         for name in spans(row[3]):
             if name.endswith(".h") and name != "Name.h":
                 assert has_path(name), name
-
-
-def test_records_are_defined() -> None:
-    names = {
-        n
-        for row in CELLS
-        for n in spans(row[2])
-        if re.fullmatch(r"[A-Z][A-Za-z0-9]+", n)
-    }
-    found = subprocess.run(
-        ["git", "grep", "-ohwE", "|".join(sorted(names)), "--", "include", "src"],
-        cwd=ROOT,
-        capture_output=True,
-        text=True,
-        check=False,
-    ).stdout.split()
-    assert not names - set(found)

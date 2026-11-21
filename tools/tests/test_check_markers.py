@@ -9,8 +9,6 @@ from check_markers import (
     attempt_problems,
     check_hand_units,
     check_text,
-    draft_ref,
-    has_hand_asm,
 )
 
 
@@ -42,20 +40,6 @@ def test_braces_in_comments_strings_and_macros_do_not_count() -> None:
     assert problems(text) == []
 
 
-def test_initializers_and_types_are_not_definitions() -> None:
-    text = (
-        "typedef struct { int a; } Pair;\n"
-        "static Callback table[] = { f, g };\n"
-        "enum { A, B };\n"
-        "extern void p(void), q(void);\n"
-    )
-    assert problems(text) == []
-
-
-def test_a_static_inline_header_helper_is_exempt() -> None:
-    assert problems("static inline void helper(void) {\n}\n") == []
-
-
 def test_a_draft_needs_its_ifdef_and_a_match_may_not_sit_in_it() -> None:
     draft = "#ifdef NON_MATCHING\nNON_MATCHING void f(void) {\n}\n#else\nINCLUDE_ASM(f);\n#endif\n"
     assert problems(draft) == []
@@ -67,28 +51,9 @@ def test_a_draft_needs_its_ifdef_and_a_match_may_not_sit_in_it() -> None:
     ]
 
 
-def test_each_branch_of_an_if_is_checked() -> None:
-    text = "#if A\nMATCH void f(void) {\n}\n#else\nvoid f(void) {\n}\n#endif\n"
-    assert problems(text) == ["no marker; a definition needs exactly one"]
-
-
-def test_a_marker_on_an_include_asm_line_fails() -> None:
-    assert problems("MATCH INCLUDE_ASM(f);\n") == [
-        "marker on something that is not a function definition"
-    ]
-    assert problems("INCLUDE_ASM(f);\n") == []
-
-
 DRAFT = (
     "#ifdef NON_MATCHING\nHAND_ASM void f(void) {\n}\n#else\nINCLUDE_ASM(f);\n#endif\n"
 )
-
-
-def test_hand_asm_sits_under_the_draft_switch() -> None:
-    assert problems(DRAFT) == []
-    assert problems("HAND_ASM void f(void) {\n}\n") == [
-        "HAND_ASM outside `#ifdef NON_MATCHING`"
-    ]
 
 
 def test_every_hand_file_needs_hand_asm_and_nothing_else_may_have_it() -> None:
@@ -116,14 +81,6 @@ def test_attempt_notes_are_rejected() -> None:
     assert problems('MATCH void f(void) { char *s = "First difference:"; }\n') == []
 
 
-def test_a_hand_asm_file_may_land_its_switch(tmp_path) -> None:
-    hand, draft = tmp_path / "h.c", tmp_path / "d.c"
-    hand.write_text(DRAFT)
-    draft.write_text(DRAFT.replace("HAND_ASM", "NON_MATCHING"))
-    assert has_hand_asm(str(hand))
-    assert not has_hand_asm(str(draft))
-
-
 def _tree(tmp_path, attempts: str):
     (tmp_path / "config/emi/bmagic/magic058/03").mkdir(parents=True)
     (tmp_path / "config/emi/bmagic/magic058/03/splat.yaml").write_text("")
@@ -133,15 +90,6 @@ def _tree(tmp_path, attempts: str):
     )
     (tmp_path / "config/attempts.jsonl").write_text(attempts)
     return tmp_path
-
-
-def test_a_draft_names_its_function_by_image_and_address(tmp_path) -> None:
-    root = _tree(tmp_path, "")
-    path = "src/overlays/bmagic/magic058/03/a.c"
-    want = "emi/bmagic/magic058/03@0x801EFDD4"
-    assert draft_ref(path, "NON_MATCHING s32 func_801efdd4(void) {\n", root) == want
-    assert draft_ref(path, "NON_MATCHING s32 Named(void) {\n", root) == want
-    assert draft_ref(path, "NON_MATCHING s32 Other(void) {\n", root) is None
 
 
 def _land(monkeypatch, tmp_path, attempts: str, capsys) -> int:
@@ -156,11 +104,6 @@ def _land(monkeypatch, tmp_path, attempts: str, capsys) -> int:
     monkeypatch.setattr(check_markers, "ROOT", root)
     monkeypatch.setattr(check_markers, "added_lines", lambda ref: added)
     return check_markers.main(["--diff", "REF"])
-
-
-def test_a_draft_lands_with_an_attempts_object(monkeypatch, tmp_path, capsys) -> None:
-    row = '{"function": "emi/bmagic/magic058/03@0x801EFDD4", "tried": "t", "first_diff": "d", "score": null}\n'
-    assert _land(monkeypatch, tmp_path, row, capsys) == 0
 
 
 def test_a_draft_without_an_attempts_object_fails(

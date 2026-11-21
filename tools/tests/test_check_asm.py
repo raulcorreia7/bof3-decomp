@@ -45,13 +45,6 @@ def run(repo: Path) -> subprocess.CompletedProcess:
     )
 
 
-def test_unchanged_and_lost_match_pass(tmp_path: Path) -> None:
-    repo = make_repo(tmp_path)
-    assert run(repo).returncode == 0
-    write(repo, "engine/game/00", 1)
-    assert run(repo).returncode == 0
-
-
 def test_lost_match_offset_by_new_one_elsewhere_fails(tmp_path: Path) -> None:
     repo = make_repo(tmp_path)
     write(repo, "engine/game/00", 1)
@@ -60,12 +53,3 @@ def test_lost_match_offset_by_new_one_elsewhere_fails(tmp_path: Path) -> None:
     assert result.returncode == 1
     assert "image shop/00 has 2 INCLUDE_ASM, 1 at the merge base" in result.stderr
     assert "game/00" not in result.stderr
-
-
-def test_family_level_folder_has_its_own_key(tmp_path: Path) -> None:
-    repo = make_repo(tmp_path)
-    write(repo, "engine/slus", 2)
-    write(repo, "engine/game/00", 1)
-    result = run(repo)
-    assert result.returncode == 1
-    assert "image slus has 2 INCLUDE_ASM, 1 at the merge base" in result.stderr

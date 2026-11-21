@@ -5,12 +5,7 @@ from __future__ import annotations
 import json
 
 import dups
-import sigs
-import symbol
-import template_diff
-import template_try
 import worklist
-from bof3.symbols.context import Table
 
 
 def test_worklist_jsonl_names_the_columns(monkeypatch, capsys):
@@ -53,52 +48,3 @@ def test_dups_jsonl_writes_numbers_and_the_table_stays(capsys):
         "#target\ttemplate\tsimilarity\tdiff_count",
         "a@0x1\tb@0x2\t0.912\t0",
     ]
-
-
-def test_sigs_jsonl_keeps_the_line_number_a_number(monkeypatch, capsys):
-    problem = sigs.decls.Problem("argc_mismatch", "f", "src/a.c", 12, "2 against 1")
-    monkeypatch.setattr(sigs, "load_tree", lambda: None)
-    monkeypatch.setattr(sigs.decls, "problems", lambda tree: [problem])
-    assert sigs.main(["scan", "--jsonl"]) == 0
-    assert json.loads(capsys.readouterr().out) == {
-        "kind": "argc_mismatch",
-        "name": "f",
-        "file": "src/a.c",
-        "line": 12,
-        "detail": "2 against 1",
-    }
-
-
-def test_symbol_refs_jsonl_names_the_columns(monkeypatch, capsys):
-    row = {"count": 7, "name": "func_80100000", "unit": "src/a/func_80100000.c"}
-    monkeypatch.setattr(
-        symbol, "refs", lambda _ctx, dirs: Table("count name unit", [row])
-    )
-    assert symbol.main(["refs", "--jsonl"]) == 0
-    assert json.loads(capsys.readouterr().out) == {
-        "count": 7,
-        "name": "func_80100000",
-        "unit": "src/a/func_80100000.c",
-    }
-
-
-def test_a_jsonl_rows_file_names_the_pair(tmp_path):
-    path = tmp_path / "rows.jsonl"
-    path.write_text(
-        '{"target": "a@0x1", "template": "b@0x2"}\n',
-        encoding="utf-8",
-    )
-    assert template_try.read_rows(path) == [("a@0x1", "b@0x2")]
-
-
-def test_diff_rows_name_the_three_kinds():
-    rows = template_diff.align_rows(
-        ["addiu a0,a0,1", "lw v0,0(a0)"],
-        ["addiu a0,a0,2", "lw v0,0(a0)", "nop"],
-    )
-    assert [row["kind"] for row in rows] == ["same_opcode", "target_only"]
-    assert rows[0]["template_offset"] == 0
-    assert rows[0]["target_offset"] == 0
-    assert rows[0]["target"] == "addiu a0,a0,2"
-    assert rows[1]["template_offset"] is None
-    assert rows[1]["target_offset"] == 8

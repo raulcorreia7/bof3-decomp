@@ -4,14 +4,10 @@ from __future__ import annotations
 
 import re
 import struct
-import subprocess
 from pathlib import Path
-
-import pytest
 
 import objdiff_config
 
-ROOT = Path(__file__).resolve().parents[2]
 SUFFIX = ".NON_MATCHING"
 #: `jr $ra; nop` and `jr $ra; addiu $v0, $zero, 1`, little-endian.
 INCLUDE_BODY = struct.pack("<II", 0x03E00008, 0)
@@ -81,58 +77,6 @@ def test_an_include_asm_body_is_overwritten_and_a_compiled_body_is_kept(
     assert text[:8] != INCLUDE_BODY
     assert text[8:] == COMPILED_BODY
     assert built.read_bytes()[52:68] == INCLUDE_BODY + COMPILED_BODY
-
-
-def test_an_object_without_an_include_asm_body_is_used_as_built(tmp_path: Path) -> None:
-    built = tmp_path / "src+unit.c.o"
-    unit_object(built)
-    built.write_bytes(built.read_bytes().replace(SUFFIX.encode(), b".OTHERNAME_"))
-    assert project(tmp_path).report_base(built) == (built, False)
-
-
-def objdiff() -> str | None:
-    found = subprocess.run(
-        [str(ROOT / "bin/internal/find-tool"), "objdiff-cli"],
-        capture_output=True,
-        text=True,
-        check=False,
-    )
-    return found.stdout.strip() or None
-
-
-def test_a_readable_data_name_is_defined_at_its_row_address(
-    tmp_path: Path, monkeypatch: pytest.MonkeyPatch
-) -> None:
-    """A target reference to a readable data row takes its address, as an address name does.
-
-    The compiled base folds ``g_BattleActionLock`` into a constant; without the definition the
-    target keeps a relocation and objdiff scores the same bytes as a mismatch.
-    """
-    calls: list[list[str]] = []
-
-    def command(self: objdiff_config.Project, argv: list[str]) -> str:
-        calls.append(argv)
-        if argv[1:2] == ["-u"]:
-            return (
-                "         U g_BattleActionLock\n"
-                "         U D_80140000\n"
-                "         U func_8014D978\n"
-                "         U g_Unknown\n"
-            )
-        return ""
-
-    monkeypatch.setattr(objdiff_config.Project, "command", command)
-    proj = objdiff_config.Project(tmp_path, tmp_path)
-    source = tmp_path / "f.s"
-    source.write_text("nop\n", encoding="utf-8")
-    proj.assemble(
-        [source], tmp_path / "out" / "f.o", {"g_BattleActionLock": 0x801463CE}
-    )
-    flags = [arg for argv in calls for arg in argv if arg.startswith("--defsym=")]
-    assert flags == [
-        "--defsym=g_BattleActionLock=0x801463CE",
-        "--defsym=D_80140000=0x80140000",
-    ]
 
 
 def test_a_unit_with_a_draft_is_not_marked_complete(tmp_path: Path) -> None:

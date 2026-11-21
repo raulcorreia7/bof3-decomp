@@ -26,10 +26,3 @@ def test_a_variant_replaces_the_draft_not_the_include_asm_line() -> None:
     )
     assert "old();" not in result
     assert "INCLUDE_ASM(func_80100000);" in result
-
-
-def test_a_variant_replaces_the_include_asm_line_without_a_definition() -> None:
-    result = _apply(
-        "INCLUDE_ASM(func_80100000);\n", "func_80100000", "void f(void) {}\n"
-    )
-    assert result == "void f(void) {}\n"

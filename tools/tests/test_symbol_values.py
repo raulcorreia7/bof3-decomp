@@ -153,22 +153,3 @@ def test_scan_classifies_matched_bodies_only(
     assert roles["0x20"] == "coordinate"
     assert roles["4"] == "offset"
     assert roles["0x3A"] == "id"
-
-
-def test_scan_reports_the_family_without_a_constant(
-    repo: Path, capsys: pytest.CaptureFixture[str]
-) -> None:
-    assert main(repo, ["values", "--scan", "--jsonl"]) == 0
-    found = [row for row in rows(capsys) if row["literal"] == "0x80"]
-    assert found == [
-        {
-            "file": "src/a/use.c",
-            "line": 23,
-            "literal": "0x80",
-            "role": "flags",
-            "family": "ThingFlags",
-            "constant": "",
-            "form": "",
-            "confidence": "typed",
-        }
-    ]

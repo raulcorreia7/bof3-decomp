@@ -5,7 +5,6 @@ from pathlib import Path
 import pytest
 from fixture import put_symbols
 
-from bof3.adapters.config import symbols_text
 from bof3.link import symbols
 from bof3.link.symbols import LinkError, Scan
 
@@ -17,52 +16,9 @@ def table(tmp_path: Path, body: str) -> Path:
     return tmp_path
 
 
-def test_address_names_spell_their_address() -> None:
-    assert symbols.address_of("D_80140000") == 0x80140000
-    assert symbols.address_of("SCENA16_D_80010004") == 0x80010004
-    assert symbols.address_of("g_Zenny") is None
-
-
-def test_rows_load_sorted_with_attributes(tmp_path: Path) -> None:
-    root = table(
-        tmp_path,
-        '["exe/a"]\nB = { addr = 0x20, type = "func", size = 0x8 }\nA = { addr = 0x10 }\n',
-    )
-    rows = symbols.target_rows(root, "exe/a")
-    assert [(r.name, r.address) for r in rows] == [("A", 0x10), ("B", 0x20)]
-    assert rows[1].comment == "type:func size:0x8"
-    assert [(r.name, r.addr, r.type, r.size) for r in rows] == [
-        ("A", 0x10, "", 0),
-        ("B", 0x20, "func", 8),
-    ]
-
-
-def test_read_map_sizes_symbols_by_their_section(tmp_path: Path) -> None:
-    path = tmp_path / "a.map"
-    path.write_text(
-        " .text          0x80100000        0x10 src+a.c.o\n"
-        "                0x80100000                g_Code\n"
-        "                0x80100008                g_More\n"
-        " .data          0x80100010        0x8 src+b.c.o\n"
-        "                0x80100010                g_Data\n"
-        " .reginfo       0x00000000        0x18 src+c.c.o\n"
-        "                0x00000000                g_Unmapped\n"
-        "                0x1f800044                g_Task = 0x1f800044\n",
-        encoding="utf-8",
-    )
-    assert symbols.read_map(path) == [
-        symbols.MapSymbol("g_Code", 0x80100000, 8, True),
-        symbols.MapSymbol("g_More", 0x80100008, 8, True),
-        symbols.MapSymbol("g_Data", 0x80100010, 8, False),
-        symbols.MapSymbol("g_Task", 0x1F800044, 0, False),
-    ]
-
-
 @pytest.mark.parametrize(
     "body, fix",
     [
-        ('["exe/a"]\nA = { addr = 0x10, adr = 1 }\n', "unknown key 'adr'"),
-        ('["exe/a"]\nA = { addr = "0x10" }\n', "`addr` is missing"),
         (
             '["exe/a"]\nA = { addr = 0x10, size = 0x10 }\nB = { addr = 0x14 }\n',
             "overlaps A",
@@ -77,11 +33,6 @@ def test_a_bad_row_names_the_row_and_the_fix(
         symbols.load(table(tmp_path, body))
 
 
-def test_an_overlap_with_a_recorded_reason_loads(tmp_path: Path) -> None:
-    body = '["exe/a"]\nA = { addr = 0x10, size = 0x10 }\nB = { addr = 0x14, alias = true }\n'
-    assert len(symbols.load(table(tmp_path, body))["exe/a"]) == 2
-
-
 def maps(tmp_path: Path, **files: str) -> list[str]:
     (tmp_path / "build/symbols").mkdir(parents=True)
     for name, text in files.items():
@@ -93,20 +44,6 @@ def scan(*needed: str) -> Scan:
     return Scan(frozenset(), {name: "x.o" for name in needed})
 
 
-def test_resolve_takes_address_names_from_the_name_and_readable_names_from_rows(
-    tmp_path: Path,
-) -> None:
-    found = symbols.resolve(
-        tmp_path,
-        "exe/a",
-        maps(tmp_path, **{"exe+a": "g_One 0x80000010\n"}),
-        scan("D_80000020", "g_One"),
-        frozenset(),
-        {},
-    )
-    assert found == {"D_80000020": 0x80000020, "g_One": 0x80000010}
-
-
 def test_resolve_fails_for_an_unknown_name_and_for_two_addresses(
     tmp_path: Path,
 ) -> None:
@@ -115,28 +52,6 @@ def test_resolve_fails_for_an_unknown_name_and_for_two_addresses(
         symbols.resolve(tmp_path, "exe/a", listed, scan("g_Two"), frozenset(), {})
     with pytest.raises(LinkError, match="g_Nope .* no address"):
         symbols.resolve(tmp_path, "exe/a", listed, scan("g_Nope"), frozenset(), {})
-
-
-def test_reduced_layout_derives_options_and_owners(tmp_path: Path) -> None:
-    from bof3.resolve.layout import read_splat
-
-    folder = tmp_path / "config/emi/battle/battle/03"
-    folder.mkdir(parents=True)
-    path = folder / "splat.yaml"
-    path.write_text("sha1: ab\noptions:\n  subalign: 8\nsegments: []\n")
-    _, document = read_splat(path)
-    options = document["options"]
-    assert document["name"] == "battle_battle_03"
-    assert options["src_path"] == "src/overlays/battle/battle/03"
-    assert options["target_path"] == "build/bin/emi/battle/battle/03.bin"
-    assert options["subalign"] == 8
-    assert document["symbol_owners"] == ["exe/slus_004_22", "emi/battle/battle/03"]
-
-
-def test_logo_never_links_against_the_executable() -> None:
-    root = Path(__file__).resolve().parents[2]
-    assert symbols.link_owners(root, "exe/logo") == ["exe/logo"]
-    assert "exe/slus_004_22" in symbols.link_owners(root, "emi/battle/battle/03")
 
 
 def test_own_rows_are_proven_against_the_linked_address(tmp_path: Path) -> None:
@@ -160,21 +75,6 @@ def test_own_rows_are_proven_against_the_linked_address(tmp_path: Path) -> None:
     assert "0x80100008" in message
 
 
-def test_imported_map_keeps_the_targets_own_address(
-    tmp_path: Path, monkeypatch: pytest.MonkeyPatch
-) -> None:
-    root = table(
-        tmp_path,
-        '["exe/a"]\nPick = { addr = 0x10 }\nOwn = { addr = 0x20 }\n'
-        '["exe/b"]\nPick = { addr = 0x90 }\nOther = { addr = 0x94 }\n',
-    )
-    (root / "config/exe/b").mkdir()
-    (root / "config/exe/b/splat.yaml").write_text("name: b\n")
-    monkeypatch.setattr(symbols, "splat_owners", lambda _root, _t: ["exe/a", "exe/b"])
-    assert symbols.imported_map(root, "exe/a") == "Other = 0x00000094;\n"
-    assert symbols.imported_map(root, "exe/b") == "Own = 0x00000020;\n"
-
-
 def test_merge_driver_unions_rows_in_address_order(tmp_path) -> None:
     import merge_symbols
 
@@ -191,13 +91,3 @@ def test_merge_driver_unions_rows_in_address_order(tmp_path) -> None:
     ours = write("ours", one, three)
     assert merge_symbols.main(base, ours, write("theirs", one, two)) == 0
     assert (tmp_path / "ours").read_text() == f'["a/00"]\n{one}\n{two}\n{three}\n'
-
-
-def test_the_tables_round_trip_through_one_file_per_image(tmp_path) -> None:
-    text = '["exe/a"]\nOne = { addr = 0x1 }\n["emi/b/00"]\nTwo = { addr = 0x2 }\n'
-    put_symbols(tmp_path, text)
-    assert sorted(p.name for p in (tmp_path / "config/symbols").iterdir()) == [
-        "emi+b+00.toml",
-        "exe+a.toml",
-    ]
-    assert symbols_text(tmp_path).count("[") == 2

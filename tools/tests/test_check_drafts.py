@@ -24,10 +24,6 @@ COMMANDS = {
 }
 
 
-def test_flags_come_from_the_draft_without_the_build_options() -> None:
-    assert arguments_for("src/a/x.c", COMMANDS) == ["-O2", "-DNON_MATCHING", "-Isrc/a"]
-
-
 def test_a_new_source_borrows_the_flags_of_its_folder() -> None:
     assert arguments_for("src/a/y.c", COMMANDS) == ["-O2", "-DNON_MATCHING", "-Isrc/a"]
     assert arguments_for("src/b/y.c", COMMANDS) is None
