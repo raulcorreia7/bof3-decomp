@@ -13,7 +13,7 @@ NON_MATCHING void func_801A3080(Actor* actor, s32 facing) {
     u8*    shadow;
     u16    angle;
 
-    slot    = (s32)(-(((s32)actor - (s32)D_80147A58) * 0xD79435E5)) >> 3;
+    slot    = (s32)(-(((s32)actor - (s32)g_PartyActors) * 0xD79435E5)) >> 3;
     work    = g_Task;
     angle_x = FIELD(s32, work, 0x64u);
     angle_y = FIELD(s32, work, 0x68u);

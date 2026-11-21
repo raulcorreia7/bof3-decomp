@@ -16,7 +16,7 @@ NON_MATCHING void func_801F2D20(void) {
     s32       semi_trans;
 
     work    = g_Task;
-    adopted = &D_80147A58[work->unk_18];
+    adopted = &g_PartyActors[work->unk_18];
 
     work->pos.x       = adopted->pos.x.fixed;
     work->pos.y       = adopted->pos.y.fixed;

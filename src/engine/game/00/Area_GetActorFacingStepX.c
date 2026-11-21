@@ -34,7 +34,7 @@ MATCH s32 Area_GetActorFacingStepX(void) {
     for (i = 0, offset = 0; i < 34; i++, offset += ACTOR_SIZE) {
         if (((u8*)g_Actors)[offset] != 0 && !((&D_8014688F)[offset] & 0x80)) {
             rec = (Actor*)((u8*)g_Actors + offset);
-            if (func_801BDD58(pos_x, pos_y, dist, g_Task->voice_flags.scene_flag, rec) & BYTE_MASK) {
+            if (Actor_IsInRange(pos_x, pos_y, dist, g_Task->voice_flags.scene_flag, rec) & BYTE_MASK) {
                 found        = 1;
                 rec->roll_90 = FIELD(u16, D_80146918, offset) + 1;
             }

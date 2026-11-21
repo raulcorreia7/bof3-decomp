@@ -32,7 +32,7 @@
 #define GAME_WORK_AREA_PTR     (*(volatile Actor**)&g_CurrentActor)
 
 /* NOTE: retail reads the window style byte at 0x80144952 signed (`lb`) in func_8019986C and
- * func_801AEBA0 and unsigned (`lbu`) in func_801999F8 and UI_DrawWindowOutline, so exports.h keeps u8 and only
+ * UI_DrawWindowFrame and unsigned (`lbu`) in func_801999F8 and UI_DrawWindowOutline, so exports.h keeps u8 and only
  * the signed readers view it as s8. */
 #define GAME_WINDOW_STYLE      (*(s8*)&g_WindowStyle)
 
@@ -370,7 +370,7 @@ extern s32                  D_801468C4;
  * The member form shares one slot offset between the stores and shortens each function by 0x34 bytes. */
 extern u8                   D_801468FF;
 extern u8                   D_80146900[ENTITY_MAX][ACTOR_SIZE]; /* 0x80146900 */
-/* FAKE: column views of g_Actors for func_801A65A0 and func_801A68C0, the only forms that match them. */
+/* FAKE: column views of g_Actors for Actor_SpawnPartyFromRecord and func_801A68C0, the only forms that match them. */
 extern u16                  D_80146904[ENTITY_MAX][ACTOR_SIZE / 2];       /* Actor.unk_7C */
 extern s32                  g_ActorWalkDestX[ENTITY_MAX][ACTOR_SIZE / 4]; /* Actor.walk_dest_x */
 extern s32                  g_ActorWalkDestY[ENTITY_MAX][ACTOR_SIZE / 4]; /* Actor.walk_dest_y */
@@ -378,7 +378,8 @@ extern s32                  D_80146910[ENTITY_MAX][ACTOR_SIZE / 4];       /* Act
 extern u16                  D_80146914;
 extern u16                  D_80146918[][ACTOR_SIZE / 2];
 extern u8                   D_8014691C[ENTITY_MAX][ACTOR_SIZE]; /* 0x8014691C */
-extern Actor                D_80147A58[];
+/* D_80147A58 */
+extern Actor                g_PartyActors[];
 extern u8                   D_80147CB8[]; /* 0x80147CB8 */
 extern s8                   D_80147CB9[]; /* 0x80147CB9 */
 extern s8                   D_80147CBA[]; /* 0x80147CBA */
@@ -556,7 +557,8 @@ void func_80117610(void);
 void func_80117A30(void);
 void func_80117BF4(void);
 void func_8015A7E8(void);
-s32  func_8015B870(u32 kind);
+/* func_8015B870 */
+s32  Script_ReadValue(u32 kind);
 void Party_ShowBattlers(void);
 s8   Actor_Run(s32 entry, s8 dir_x, s8 dir_y, s16 vz_start, s16 vz_delta, u8 landing_script, u8 landing_flags);
 /* The retail callers pass the id unnarrowed; the shared prototype narrows it. */

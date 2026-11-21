@@ -6,7 +6,8 @@
 
 #include "overlays/area/worlds/world01.h"
 
-extern Actor D_80147A58[];
+/* D_80147A58 */
+extern Actor g_PartyActors[];
 extern u8    D_80147A61;
 extern u8    D_80147AF9;
 

@@ -42,7 +42,7 @@ MATCH u8* Area_RunSetupRecord(u8* script) {
             func_801A68C0(script);
             break;
         case AREA_SETUP_TYPE_ENTITY_NO_SCENE_RECORD:
-            func_801A65A0(script);
+            Actor_SpawnPartyFromRecord(script);
             break;
         case AREA_SETUP_TYPE_ENTITY_7:
             func_801A623C(script);
@@ -67,7 +67,7 @@ MATCH u8* Area_RunSetupRecord(u8* script) {
             break;
         case AREA_SETUP_TYPE_ENTITY:
         default:
-            func_801A4D54(script);
+            Actor_SpawnFromRecord(script);
             break;
     }
     return script + s_ScriptOpcodeLengths[script[0] >> 4];

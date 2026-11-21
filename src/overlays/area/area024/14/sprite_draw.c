@@ -249,8 +249,8 @@ MATCH void func_801F2D5C(void) {
 MATCH void func_801F2DB4(void) {
     Actor* scratch;
 
-    scratch    = (Actor*)g_Task;
-    D_80147A58 = 0;
+    scratch       = (Actor*)g_Task;
+    g_PartyActors = 0;
     scratch->header.mode++;
 }
 
@@ -643,7 +643,7 @@ MATCH s32 func_801F3E48(u8 shade) {
 
     vec   = D_801F2C04;
     saved = (volatile Actor*)g_Task;
-    TASK_SET(&D_80147A58);
+    TASK_SET(&g_PartyActors);
     PushMatrix();
 
     mtxp  = &matrix;

@@ -69,7 +69,7 @@ MATCH void func_801F6E04(void) {
 
     work  = SCN_EFFECT;
     index = work->channel_18;
-    value = ((Actor*)D_80147A58)[index].range_54.raw;
+    value = ((Actor*)g_PartyActors)[index].range_54.raw;
 
     work->step   = 1;
     work->unk_54 = value;
@@ -92,7 +92,7 @@ MATCH void func_801F6E48(void) {
     work      = (u8*)g_Task;
     prim      = g_GfxPrimCursor;
     work_cell = (SceneEffect*)work;
-    adopted   = (Actor*)(D_80147A58 + work_cell->channel_18 * 0x98);
+    adopted   = (Actor*)(g_PartyActors + work_cell->channel_18 * 0x98);
 
     work_cell->pos.x       = adopted->pos.x.fixed;
     work_cell->pos.y       = adopted->pos.y.fixed;
@@ -894,7 +894,7 @@ MATCH void func_801F8D90(void) {
     work      = (u8*)g_Task;
     prim      = g_GfxPrimCursor;
     work_cell = (SceneEffect*)work;
-    first     = (Actor*)(D_80147A58 + work_cell->counter_0C * 0x98);
+    first     = (Actor*)(g_PartyActors + work_cell->counter_0C * 0x98);
 
     work_cell->pos.x       = first->pos.x.fixed;
     work_cell->pos.y       = first->pos.y.fixed;
@@ -920,7 +920,7 @@ MATCH void func_801F8D90(void) {
     poly->x0 = poly->x0 - 8;
     poly->y1 = poly->y0;
 
-    second = (Actor*)(D_80147A58 + work_cell->channel_18 * 0x98);
+    second = (Actor*)(g_PartyActors + work_cell->channel_18 * 0x98);
     TASK_SET(second);
     func_801AC1DC(origin, work[0x1C]);
 
