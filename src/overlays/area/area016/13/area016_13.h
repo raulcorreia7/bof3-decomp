@@ -48,8 +48,6 @@ extern u8       D_801F51E0[2];
 void func_801F30EC(void);
 /* func_801F32A0 */
 void Area_RequestRestartOnEntryChange(void);
-/* func_801F3608 */
-void Area_SlideHudBannerLeft(void);
 /* func_801F3460 */
 void func_801F34C8(void);
 /* func_801F350C */
@@ -58,6 +56,8 @@ void Actor_SlideScreenLeft(void);
 void Actor_SlideScreenX(void);
 /* func_801F35B8 */
 void Area_Update(void);
+/* func_801F3608 */
+void Area_SlideHudBannerLeft(void);
 void func_801F368C(void);
 /* func_801F36D0 */
 void Actor_SetScreenBottom(void);

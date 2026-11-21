@@ -29,13 +29,12 @@ extern u8  D_801F6B18[];
 /* The three x then three y corners of each of the four triangles the torch flame draws. */
 extern u16 D_801F6B2C[][6];
 
-void func_801F5418(s32 value, s32 flag);
-void func_801F555C(s16 x, s16 y, u8 row);
-
 /* func_801F367C */
 void Area_Update(void);
 /* func_801F3BC4 */
 void func_801F4E3C(void);
+void func_801F5418(s32 value, s32 flag);
+void func_801F555C(s16 x, s16 y, u8 row);
 void func_801F564C(void);
 void func_801F5738(void);
 

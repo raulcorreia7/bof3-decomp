@@ -21,26 +21,8 @@ typedef union ScenarioCallbacks {
 
 ASSERT_SIZE(ScenarioCallbacks, 0x40);
 
-/* 16 handlers at 0x801F8538. func_801F6C90 and func_801F7144 select from
- * entries 5 and 8; func_801F8358 calls entries 13-15 as (record, state). */
-static ScenarioCallbacks D_801F8538 = {{
-    func_801F6C90,
-    (Callback)func_801F8358,
-    (Callback)func_801F83A0,
-    (Callback)func_801F83A8,
-    0,
-    func_801F6CCC,
-    func_801F6D90,
-    func_801F7144,
-    func_801F7180,
-    func_801F7188,
-    func_801F7230,
-    func_801F7790,
-    func_801F7CC4,
-    (Callback)func_801F8398,
-    Scene_ClearParty,
-    func_801F8530,
-}};
+/* Declared here for the handlers below; defined at its address after them. */
+static ScenarioCallbacks D_801F8538;
 
 MATCH void func_801F6C90(void) {
     s8 mode;
@@ -739,3 +721,24 @@ MATCH void Scene_RestorePalette(void) {
 
 MATCH void func_801F8530(void) {
 }
+
+/* 16 handlers at 0x801F8538. func_801F6C90 and func_801F7144 select from
+ * entries 5 and 8; func_801F8358 calls entries 13-15 as (record, state). */
+static ScenarioCallbacks D_801F8538 = {{
+    func_801F6C90,
+    (Callback)func_801F8358,
+    (Callback)func_801F83A0,
+    (Callback)func_801F83A8,
+    0,
+    func_801F6CCC,
+    func_801F6D90,
+    func_801F7144,
+    func_801F7180,
+    func_801F7188,
+    func_801F7230,
+    func_801F7790,
+    func_801F7CC4,
+    (Callback)func_801F8398,
+    Scene_ClearParty,
+    func_801F8530,
+}};

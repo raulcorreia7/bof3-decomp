@@ -21,15 +21,15 @@ extern PartyMemberMessages g_PartyMemberMessages[7];
 extern Callback            D_801F4A80[];
 /* The two-byte step table the falling path indexes. */
 extern s8                  D_801F4A88[];
+s32                        func_801F2FC4(void);
+void                       func_801F30E4(void);
+void                       func_801F3110(u16 start, u16 end, Pos3* from, Pos3* to);
+s32                        func_801F3368(void);
+
+void func_801F3474(void);
 
 /* The image's step passes. */
 void func_801F3768(s32 x, s32 y);
-void func_801F30E4(void);
-void func_801F3474(void);
-void func_801F3110(u16 start, u16 end, Pos3* from, Pos3* to);
-
-s32 func_801F2FC4(void);
-s32 func_801F3368(void);
 
 /* The seeded sparks' launch speed, lifetime and shade; the dropped rows fall
  * twice as fast. */
