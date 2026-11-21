@@ -124,7 +124,6 @@ PREFIXES = (
     (re.compile(r"^Mem_"), "SYS_"),
     (re.compile(r"^Matrix_"), "MATH_"),
     (re.compile(r"^Fish_"), "Fishing_"),
-    (re.compile(r"^CD_"), "EMI_ or DISC_"),
 )
 
 
