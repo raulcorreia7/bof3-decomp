@@ -19,14 +19,14 @@
  * EMI_LdrLoadSequence). */
 #define EMI_LOADER_STEP         (*(volatile u32*)(D_80140000 + 0x646C))
 
+/* The load in flight: the disc sector it reads from, then its TOC row with `size` counting down. */
 typedef struct EMIActiveLoad {
-    u32 active_lba;
-    u32 remaining_size;
-    u32 load_arg;
-    u32 first_word;
-    u16 type;
-    u8  header_mode;
+    u32         active_lba;
+    EMITocEntry entry;
 } EMIActiveLoad;
+
+ASSERT_OFFSET(EMIActiveLoad, entry, 0x04);
+ASSERT_SIZE(EMIActiveLoad, 0x14);
 
 /* The EXE-side stream entry points are registry rows (EMI_Ldr*). */
 
