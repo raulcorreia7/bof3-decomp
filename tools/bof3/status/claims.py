@@ -107,11 +107,13 @@ def read(path: Path, unit_address: int, names: Mapping[str, int] = NO_NAMES) -> 
     for claim, named in found:
         if named == unit_address:
             return Marker(
-                kind=TYPE_OF_CLAIM[claim], foreign=None, claim=claim, path=path
+                claim_type=TYPE_OF_CLAIM[claim], foreign=None, claim=claim, path=path
             )
     if len(found) == 1 and found[0][1] is None:
         claim, _ = found[0]
-        return Marker(claim_type=TYPE_OF_CLAIM[claim], foreign=None, claim=claim, path=path)
+        return Marker(
+            claim_type=TYPE_OF_CLAIM[claim], foreign=None, claim=claim, path=path
+        )
     claim, foreign = found[0]
     return Marker(claim_type=None, foreign=foreign, claim=claim, path=path)
 
