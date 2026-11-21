@@ -9,6 +9,7 @@ report asks for an object that was never made.
 
 from __future__ import annotations
 
+import os
 import re
 import subprocess
 import sys
@@ -70,11 +71,17 @@ def images(root: Path) -> dict[str, tuple[str, set[str]]]:
         if not src_path:
             continue
         folder = src_path.removeprefix("src/")
-        names = layout_names(document)
-        found[folder] = (
-            splat.relative_to(root).as_posix(),
-            names | included(root, folder, names),
-        )
+        layout = splat.relative_to(root).as_posix()
+        # A row named for a file in another folder (``../sound/SND_Init``) claims it there.
+        home = set()
+        for name in layout_names(document):
+            if "/" not in name:
+                home.add(name)
+                continue
+            other, stem = os.path.split(os.path.normpath(os.path.join(folder, name)))
+            found.setdefault(other, (layout, set()))[1].add(stem)
+        names = home | found.get(folder, (layout, set()))[1]
+        found[folder] = (layout, names | included(root, folder, home))
     return found
 
 

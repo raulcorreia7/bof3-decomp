@@ -89,6 +89,8 @@ class TargetManifest:
     )
     companions: tuple[_CompanionOverlay, ...] = ()
     copies: tuple[CopyOverlay, ...] = ()
+    #: Sources outside ``source_dir`` that the image's ``c`` rows name, relative to the repository.
+    outside_sources: tuple[str, ...] = ()
 
     def __post_init__(self) -> None:
         if self.kind not in {"executable", "emi"}:
@@ -473,6 +475,7 @@ def _parse_target_manifest(path: Path, target_id: TargetId) -> TargetManifest:
             },
             companions=_parse_companions(raw, target_id),
             copies=_parse_copies(raw, target_id, load_address),
+            outside_sources=facts.outside,
         )
     except ManifestPathError:
         raise

@@ -60,7 +60,7 @@ OFFSET_NAME = re.compile(r"[0-9A-F]+")
 
 LIST_ROW = re.compile(
     r"^(?P<before>\s*-\s*\[\s*0x)(?P<start>[0-9A-Fa-f]+)"
-    r"(?P<middle>\s*,\s*(?P<kind>[A-Za-z_.]+)\s*,\s*)(?P<name>[A-Za-z0-9_]+)"
+    r"(?P<middle>\s*,\s*(?P<kind>[A-Za-z_.]+)\s*,\s*)(?:[./A-Za-z0-9_]*/)?(?P<name>[A-Za-z0-9_]+)"
     r"(?P<after>.*)$"
 )
 
@@ -68,7 +68,7 @@ LIST_ROW = re.compile(
 KEYED_ROW = re.compile(
     r"^(?P<before>\s*-\s*\{\s*start:\s*0x)(?P<start>[0-9A-Fa-f]+)"
     r"(?P<middle>.*?\btype:\s*(?P<kind>[A-Za-z_.]+).*?\bname:\s*)"
-    r"(?P<name>[A-Za-z0-9_]+)(?P<after>.*)$"
+    r"(?:[./A-Za-z0-9_]*/)?(?P<name>[A-Za-z0-9_]+)(?P<after>.*)$"
 )
 
 
@@ -104,7 +104,14 @@ def layout_rows(ctx: Context, image: str, name: str) -> list[RowRef]:
             boundary.virtual_start,
             boundary.kind,
             name,
-            ctx.root / "src" / source_folder(image) / f"{name}.c",
+            Path(
+                os.path.normpath(
+                    ctx.root
+                    / "src"
+                    / source_folder(image)
+                    / f"{boundary.folder}{name}.c"
+                )
+            ),
         )
         for boundary in layout.boundaries
         if boundary.name == name and boundary.kind in ROW_KINDS

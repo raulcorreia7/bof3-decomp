@@ -962,13 +962,14 @@ def _value_images(ctx: Context) -> dict[str, str]:
     found: dict[str, str] = {}
     for image, manifest in _layer_manifests(ctx).items():
         found.setdefault(manifest.source_dir, image)
+        found.update({path: image for path in manifest.outside_sources})
     return found
 
 
 def _value_image_of(path: str, images: dict[str, str]) -> str | None:
     """Return the image whose source folder holds ``path``, longest folder first."""
     parts = path.split("/")
-    for length in range(len(parts) - 1, 0, -1):
+    for length in range(len(parts), 0, -1):
         folder = "/".join(parts[:length])
         if folder in images:
             return images[folder]

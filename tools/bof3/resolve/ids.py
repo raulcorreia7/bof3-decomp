@@ -122,15 +122,46 @@ def source_folder(target: str) -> str:
     return f"overlays/{family}/{archive}/{slot}"
 
 
-def asm_dir(source: str | Path, root: str | Path) -> str | None:
-    """Return the `ASM_DIR` of a source under `src/`: its image folder, or its hand folder."""
+#: The engine images and their home folders. A system folder (``src/engine/sound``) holds files of
+#: both; the image's ``c`` row names such a file relative to its home, for example ``../sound/SND_Init``.
+_ENGINE_HOMES = {
+    "exe/slus_004_22": "src/engine/slus",
+    "emi/etc/game/00": "src/engine/game/00",
+}
+
+
+def _engine_target(source: Path, root: str | Path) -> str | None:
+    """Return the engine image whose ``c`` row names a source in a system folder."""
+    stem = source.with_suffix("")
+    for target, home in _ENGINE_HOMES.items():
+        row = os.path.relpath(stem, Path(root) / home)
+        splat = Path(root) / "config" / target / "splat.yaml"
+        if f", c, {row}]" in splat.read_text(encoding="utf-8"):
+            return target
+    return None
+
+
+def asm_dir(
+    source: str | Path, root: str | Path, target: str | None = None
+) -> str | None:
+    """Return the `ASM_DIR` of a source under `src/`: its image folder, or its hand folder.
+
+    ``target`` names the image when the caller knows it; a source in a system folder has no other
+    way to say which image it belongs to than the ``c`` row that names it.
+    """
     parts = os.path.relpath(os.path.abspath(source), root).split(os.sep)
     if parts[0] != "src":
         return None
-    if parts[1:3] == ["engine", "slus"]:
+    if target is not None:
+        pass
+    elif parts[1:3] == ["engine", "slus"]:
         target = "exe/slus_004_22"
     elif parts[1] == "logo":
         target = "exe/logo"
+    elif parts[1] == "engine" and parts[2] != "game":
+        target = _engine_target(Path(os.path.abspath(source)), root)
+        if target is None:
+            return None
     elif len(parts) >= 5:
         found = glob.glob(f"{root}/config/emi/*/{parts[-3]}/{parts[-2]}/splat.yaml")
         if len(found) != 1:

@@ -139,9 +139,10 @@ def _layer_tree(ctx: Context):
 
 def _visible_files(tree, manifest) -> set[str]:
     folder = manifest.source_dir
+    outside = set(manifest.outside_sources)
     visible: set[str] = set()
     for name in tree.texts:
-        if name.startswith(folder + "/") and name.endswith(".c"):
+        if (name.startswith(folder + "/") or name in outside) and name.endswith(".c"):
             visible.update(tree.closure(name))
     return visible
 
@@ -250,7 +251,15 @@ def _layer_tables(tree, known: set[str], manifests: dict) -> tuple[dict, set[str
         key=lambda pair: -len(pair[0]),
     )
 
+    owners = {
+        path: image
+        for image, manifest in manifests.items()
+        for path in manifest.outside_sources
+    }
+
     def image_of(name: str) -> str | None:
+        if name in owners:
+            return owners[name]
         for folder, image in folders:
             if name.startswith(folder + "/"):
                 return image

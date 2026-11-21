@@ -3,7 +3,7 @@
 from __future__ import annotations
 
 import re
-from collections.abc import Iterator, Mapping
+from collections.abc import Iterator, Mapping, Sequence
 from dataclasses import dataclass, field
 from pathlib import Path
 
@@ -102,7 +102,9 @@ def load_target(root: Path, manifest: TargetManifest) -> TargetMap:
         )
     payload_length = payload_bytes(root, manifest.binary, target)
     names = function_names(root, owners)
-    sources = source_index(source_dir, names)
+    sources = source_index(
+        source_dir, names, [root / path for path in manifest.outside_sources]
+    )
     try:
         layout = parse_splat_layout(splat_path, load_address)
     except (OSError, ValueError) as error:
@@ -202,12 +204,18 @@ def merged_functions(unit: Unit) -> tuple[Unit, ...]:
 
 
 def source_index(
-    source_dir: Path, names: Mapping[str, int] = claims.NO_NAMES
+    source_dir: Path,
+    names: Mapping[str, int] = claims.NO_NAMES,
+    outside: Sequence[Path] = (),
 ) -> dict[str, Path]:
-    """Map C file stems and marked or assembly-backed function names to sources."""
+    """Map C file stems and marked or assembly-backed function names to sources.
+
+    ``outside`` holds the sources the image's rows name in other folders.
+    """
     if not source_dir.is_dir():
         return {}
     paths = [path for path in sorted(source_dir.glob("*.c")) if path.stem != "symbols"]
+    paths += outside
     sources = {path.stem: path for path in paths}
     for path in paths:
         text = path.read_text(encoding="utf-8", errors="replace")
