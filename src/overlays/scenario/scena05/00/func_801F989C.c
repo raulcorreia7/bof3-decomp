@@ -166,7 +166,7 @@ NON_MATCHING void func_801F98A4(void) {
                 break;
             }
             SND_PlaySE(0x209);
-            Battle_StartScripted(0x15);
+            Game_BattleStartScripted(0x15);
             g_ScenarioState.step_05 = 25;
             break;
         case 25:

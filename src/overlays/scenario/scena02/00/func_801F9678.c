@@ -24,7 +24,7 @@ MATCH void func_801F9678(void) {
         case 2:
             if (g_ScriptVars[0] == 0x1F) {
                 func_801BFE34(TO_COORD(5), TO_COORD(55), 9);
-                Battle_StartScripted(9);
+                Game_BattleStartScripted(9);
                 g_ScenarioState.step_05 = 3;
             }
             break;

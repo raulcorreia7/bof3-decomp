@@ -1,10 +1,10 @@
 #include "engine/game/00/game_00.h"
 
 /* func_80197A60 */
-MATCH void Battle_TurnToEncounter(void) {
+MATCH void Game_BattleTurnToEncounter(void) {
     u16* state;
 
-    Battle_QueueEncounterTurns();
+    Game_BattleQueueEncounterTurns();
     Actor_RunInteractions();
     Area_RunLoadingFrame();
     state = &g_GameEntrySubstate;

@@ -31,7 +31,7 @@ Callback g_GameMenuSteps[3] = {Game_LoadMenu, Game_UpdateMenuFrame, Game_ReturnF
 
 u8 s_DirectionJitters[4] = {0xFF, 0x00, 0x01, 0x00};
 
-Callback g_GameBattleSteps[8] = {Battle_TurnToEncounter, Battle_LoadPartySprites, Battle_WalkToEncounter, Battle_LoadBattleArchive, Battle_BeginEntrance, func_801D1014, Game_ScrollToParty, Game_ReturnFromBattle};
+Callback g_GameBattleSteps[8] = {Game_BattleTurnToEncounter, Battle_LoadPartySprites, Game_BattleWalkToEncounter, Battle_LoadBattleArchive, Game_BattleBeginEntrance, func_801D1014, Game_ScrollToParty, Game_ReturnFromBattle};
 
 Step2 s_BattleScrollCellSteps[4] = {{4, 0}, {0, 4}, {-4, 0}, {0, -4}};
 
@@ -2347,7 +2347,7 @@ Pos2 D_801CD778[5] = {
     {4, 0}, {0, 4}, {-4, 0}, {0, -4}, {0, 0},
 };
 
-/* Stride 4: Battle_StartScripted reads byte 0 of the row [mode * 4] as the battle seed; bytes 1 to 3 have
+/* Stride 4: Game_BattleStartScripted reads byte 0 of the row [mode * 4] as the battle seed; bytes 1 to 3 have
  * no reader. needs: type. */
 u8 s_BattleModeRecords[224] = {
     0x00, 0x00, 0x00, 0x00, 0x4F, 0x01, 0x04, 0x04, 0x0D, 0x03, 0x07, 0x01, 0x25, 0x03, 0x07, 0x01, 0x45, 0x00, 0x07,

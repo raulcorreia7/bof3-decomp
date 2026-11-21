@@ -11,7 +11,7 @@ MATCH void Game_ReturnFromBattle(void) {
     if (g_AreaCameraMoving == 0 && EMI_IsReady() != 0) {
         g_AreaDrawMode = GFX_LAYER_FIELD_SCENE;
         Party_BuildBattlers(PARTY_ORDER_FIELD);
-        Battle_PlaceFieldMembers();
+        Game_BattlePlaceFieldMembers();
         flags            = &g_Battle.outcome.options;
         g_EncounterSteps = 0;
         if ((*flags & 0x2) == 0) {
@@ -32,7 +32,7 @@ MATCH void Game_ReturnFromBattle(void) {
         func_801C2018();
         changed = 1;
     }
-    Battle_RunPartyAnims();
+    Game_BattleRunPartyAnims();
     Actor_RunInteractions();
     Area_RunLoadingFrame();
     if (changed != 0) {

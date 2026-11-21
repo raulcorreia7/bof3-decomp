@@ -10,6 +10,8 @@ src/engine/game/00/func_8019A2E8.c	WorldMap_StepScript
 src/engine/game/00/func_8019A370.c	WorldMap_DrawClouds
 src/engine/game/00/game_00.h	AreaAction_Roll
 src/engine/game/00/game_00.h	Game_AddStepByFlag
+src/engine/state/battle/Battle_LoadBattleArchive.c	Battle_LoadBattleArchive
+src/engine/state/battle/Battle_LoadPartySprites.c	Battle_LoadPartySprites
 src/overlays/area/area000/13/Message_SelectAnswerValue.c	Message_SelectAnswerValue
 src/overlays/area/area003/13/Message_OpenAnswerMenu.c	Message_OpenAnswerMenu
 src/overlays/area/area008/13/Menu_DrawHeaderBar.c	Menu_DrawHeaderBar

@@ -49,7 +49,7 @@ MATCH void func_801FA6BC(void) {
         case 6:
             if (g_ScriptVars[0] == 0x24) {
                 SND_PlaySE(0x207);
-                Battle_StartScripted(0x24);
+                Game_BattleStartScripted(0x24);
                 g_ScenarioState.step_05 = 7;
             }
             break;

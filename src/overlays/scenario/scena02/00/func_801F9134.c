@@ -49,7 +49,7 @@ MATCH void func_801F9134(void) {
             break;
         case 8:
             if (g_ScriptVars[0] == 0x10) {
-                Battle_StartScripted(8);
+                Game_BattleStartScripted(8);
                 g_ScenarioState.step_05 = 9;
             }
             break;

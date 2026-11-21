@@ -1,7 +1,7 @@
 #include "engine/game/00/game_00.h"
 
 /* func_801BFE34 */
-MATCH void Battle_StartEncounter(s32 origin_x, s32 origin_y, s32 scroll_mode) {
+MATCH void Game_BattleStartEncounter(s32 origin_x, s32 origin_y, s32 scroll_mode) {
     s32 offset;
     s32 type;
     s32 count;
@@ -30,7 +30,7 @@ MATCH void Battle_StartEncounter(s32 origin_x, s32 origin_y, s32 scroll_mode) {
                     break;
             }
             type &= BYTE_MASK;
-            Battle_SetEncounterSpot(g_EncounterOriginX, g_EncounterOriginY, type);
+            Game_BattleSetEncounterSpot(g_EncounterOriginX, g_EncounterOriginY, type);
             type <<= 3;
             *(s32*)((u8*)g_EncounterParty + type)       = g_Task->pos.x.fixed;
             *(s32*)((u8*)&g_EncounterParty[0].y + type) = g_Task->pos.y.fixed;

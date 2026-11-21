@@ -1719,7 +1719,7 @@ MATCH void func_801FA7D8(void) {
         case 15:
             if (g_ScriptVarsReq.byte == 7u) {
                 func_801BFE34(g_Game.members[0].pos.x.fixed, g_Game.members[0].pos.y.fixed, 1u);
-                Battle_StartScripted(1u);
+                Game_BattleStartScripted(1u);
                 SYS_SetFlag(g_SceneFlags, 5u);
                 g_ScenarioState.step_05 = 0x10u;
                 return;
@@ -1759,7 +1759,7 @@ MATCH void func_801FAF6C(void) {
         case 11:
             if (g_ScriptVarsReq.byte == 0xB) {
                 func_801BFE34(g_Game.members[0].pos.x.fixed, g_Game.members[0].pos.y.fixed, 4);
-                Battle_StartScripted(4);
+                Game_BattleStartScripted(4);
                 g_ScenarioState.step_05 = 0xC;
             }
             break;
@@ -1782,7 +1782,7 @@ MATCH void func_801FAF6C(void) {
         case 21:
             if (g_ScriptVarsReq.byte == 5) {
                 func_801BFE34(g_Game.members[0].pos.x.fixed, g_Game.members[0].pos.y.fixed, 5);
-                Battle_StartScripted(5);
+                Game_BattleStartScripted(5);
                 g_ScenarioState.step_05 = 0x16;
             }
             break;
@@ -1799,7 +1799,7 @@ MATCH void func_801FAF6C(void) {
         case 31:
             if (g_ScriptVarsReq.byte == 4) {
                 func_801BFE34(g_Game.members[0].pos.x.fixed, g_Game.members[0].pos.y.fixed, 6);
-                Battle_StartScripted(6);
+                Game_BattleStartScripted(6);
                 g_ScenarioState.step_05 = 0x20;
             }
             break;
@@ -1834,7 +1834,7 @@ MATCH void func_801FB204(void) {
         case 1:
             if (g_ScriptVarsReq.byte == 0xD) {
                 func_801BFE34(g_Game.members[0].pos.x.fixed, g_Game.members[0].pos.y.fixed, 7);
-                Battle_StartScripted(7);
+                Game_BattleStartScripted(7);
                 g_ScenarioState.step_05 = 2;
             }
             break;
