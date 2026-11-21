@@ -49,7 +49,7 @@ def ensure_payload(root: Path, manifest: TargetManifest) -> Path:
     binary = root / manifest.binary
     if binary.is_file():
         return binary
-    if manifest.kind == "executable":
+    if manifest.type == "executable":
         source = root / BUILD / "disc" / manifest.disc_id
     else:
         _, family, archive, slot = manifest.id.value.split("/")

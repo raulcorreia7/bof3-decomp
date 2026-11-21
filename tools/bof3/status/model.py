@@ -11,6 +11,6 @@ def unit_state(unit: target_map.Unit) -> str:
     if unit.source is None:
         return "unlifted"
     marker = claims.read(unit.source, unit.vaddr, unit.names)
-    if marker.kind == "matching":
+    if marker.claim_type == "matching":
         return "exact"
-    return marker.kind or "untagged"
+    return marker.claim_type or "untagged"

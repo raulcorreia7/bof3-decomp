@@ -219,7 +219,7 @@ def materialize_reviewed_targets(*, root: Path) -> list[Path]:
     for manifest in sorted(
         load_target_manifests(root).values(), key=lambda item: item.id.value
     ):
-        if manifest.kind != "emi":
+        if manifest.type != "emi":
             continue
         entry = entry_for(root, manifest.disc_id)
         if manifest.load_address != int(entry["load_address"]):
