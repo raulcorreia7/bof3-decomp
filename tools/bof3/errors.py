@@ -13,3 +13,11 @@ class MissingInputError(Bof3Error):
 
 class UnknownFunctionError(Bof3Error):
     """A ``TARGET@NAME`` spec is malformed or names no function of the index."""
+
+
+class SymbolError(Bof3Error):
+    """A symbol verb's input names no row, file, record or target, or a check fails."""
+
+
+class RenameError(SymbolError):
+    """A rename is refused before it changes a file, or fails and is rolled back."""

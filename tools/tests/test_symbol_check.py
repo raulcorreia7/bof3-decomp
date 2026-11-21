@@ -6,17 +6,20 @@ import argparse
 from pathlib import Path
 
 import pytest
+from fixture import patch
 
-import symbol
+from bof3.link import symbols
 from bof3.link.symbols import Entry
+from bof3.symbols import check
+from bof3.symbols.context import Context
 
 
 def test_an_out_of_order_table_fails(
     monkeypatch: pytest.MonkeyPatch, capsys: pytest.CaptureFixture[str]
 ) -> None:
     entries = [Entry("B", 0x20), Entry("A", 0x10, source="why")]
-    monkeypatch.setattr(symbol.symbols, "load", lambda _root: {"exe/a": entries})
-    assert symbol.check(argparse.Namespace()) == 1
+    monkeypatch.setattr(symbols, "load", lambda _root: {"exe/a": entries})
+    assert check.check(Context(), argparse.Namespace()) == 1
     out = capsys.readouterr().out
     assert out.startswith("order\texe/a\tA 0x00000010 after B 0x00000020")
 
@@ -30,12 +33,12 @@ def test_repeats_and_unused_aliases_are_listed(
         Entry("Bare", 0x20),
     ]
     monkeypatch.setattr(
-        symbol.symbols,
+        symbols,
         "load",
         lambda _root: {"exe/a": entries, "emi/b": [Entry("Name", 0x10, source="why")]},
     )
-    monkeypatch.setattr(symbol, "mentioned", lambda _names: set())
-    assert symbol.check(argparse.Namespace()) == 0
+    patch(monkeypatch, "mentioned", lambda _ctx, _names: set())
+    assert check.check(Context(), argparse.Namespace()) == 0
     out = capsys.readouterr().out
     assert "repeat\t2\tName\t0x00000010\t-\texe/a emi/b" in out
     assert "alias-unused\texe/a\tAlias 0x00000010" in out
@@ -44,6 +47,6 @@ def test_repeats_and_unused_aliases_are_listed(
 
 def test_the_shipped_table_is_ordered() -> None:
     root = Path(__file__).resolve().parents[2]
-    for target, entries in symbol.symbols.load(root).items():
+    for target, entries in symbols.load(root).items():
         addresses = [entry.addr for entry in entries]
         assert addresses == sorted(addresses), target

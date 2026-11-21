@@ -12,6 +12,8 @@ from pathlib import Path
 
 from bof3.link import symbols
 from bof3.source.index import Func
+from bof3.symbols import lookup
+from bof3.symbols.context import Context as SymbolContext
 
 TACTIC = "docs/matching.md#tactics-for-gcc-272"
 ARGUMENTS = frozenset(("a0", "a1", "a2", "a3"))
@@ -499,17 +501,13 @@ def _at_strings(root: Path, image: str, addresses: set[int]) -> dict[int, str]:
     """Return ``tools/symbol.py at``'s owner line for each address."""
     if not addresses:
         return {}
-    try:
-        import symbol
-    except ImportError:
-        return {}
     args = argparse.Namespace(
         diff=None, image=image, addresses=[f"0x{address:08X}" for address in addresses]
     )
     buffer = io.StringIO()
     try:
         with contextlib.redirect_stdout(buffer):
-            symbol.at(args)
+            lookup.at(SymbolContext(root), args)
     except (SystemExit, Exception):
         return {}
     found = {}

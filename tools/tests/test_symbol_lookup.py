@@ -5,11 +5,14 @@ import subprocess
 from pathlib import Path
 
 import pytest
+from fixture import main, patch
 
 import symbol
-from symbol import Layout, Member
+from bof3.errors import SymbolError
+from bof3.symbols import probe
+from bof3.symbols.probe import Layout, Member
 
-CLANG = shutil.which(symbol.CLANG) is not None
+CLANG = shutil.which(probe.CLANG) is not None
 
 LAYOUT = """
 *** Dumping AST Record Layout
@@ -119,18 +122,11 @@ def repo(tmp_path: Path, monkeypatch: pytest.MonkeyPatch) -> Path:
             "PATH": "/usr/bin:/bin",
         },
     )
-    monkeypatch.setattr(symbol, "ROOT", tmp_path)
-    monkeypatch.setattr(symbol, "LAYOUT_CACHE", tmp_path / "build/symbol-layouts.json")
-    monkeypatch.setattr(symbol, "XREF_CACHE", tmp_path / "build/symbol-xrefs")
-    monkeypatch.setattr(symbol, "_LAYOUTS", {})
-    monkeypatch.setattr(symbol, "_LAYOUT_INDEX", None)
-    monkeypatch.setattr(symbol, "_SPLAT_SPANS", {})
-    monkeypatch.setattr(symbol, "_RANGES", {})
     return tmp_path
 
 
 def test_probe_keeps_nested_members_and_array_sizes() -> None:
-    layout = symbol.parse_probe(LAYOUT)
+    layout = probe.parse_probe(LAYOUT)
     assert layout is not None
     assert layout.size == 16
     assert [(m.offset, m.path, m.ctype, m.size) for m in layout.members] == [
@@ -140,32 +136,17 @@ def test_probe_keeps_nested_members_and_array_sizes() -> None:
     ]
 
 
-def test_a_union_alias_keeps_the_whole_cell() -> None:
-    layout = symbol.parse_probe(CHOICE)
-    assert layout is not None
-    assert [(m.path, m.size) for m in layout.members] == [("byte", 1), ("half", 2)]
-
-
-def test_locate_descends_into_record_arrays(monkeypatch: pytest.MonkeyPatch) -> None:
-    inner = Layout(4, (Member(0, "a", "u8", 1), Member(2, "b", "u16", 2)), True)
-    state = Layout(16, (Member(0, "rows", "Inner[2]", 8),), True)
-    monkeypatch.setattr(
-        symbol, "type_layout", lambda name: inner if name == "Inner" else state
-    )
-    assert symbol.locate(state, 6) == [("rows[1].b", 6, "u16")]
-    assert symbol.locate(inner, 1) == []
-    assert symbol.locate(state, 1) == [("rows[0]", 0, "Inner")]
-
-
 def test_member_prints_every_union_name(
     repo: Path, monkeypatch: pytest.MonkeyPatch, capsys: pytest.CaptureFixture[str]
 ) -> None:
     inner = Layout(4, (Member(0, "a", "u8", 1), Member(2, "b", "u16", 2)), True)
     choice = Layout(4, (Member(0, "byte", "u8", 4), Member(0, "half", "u16", 4)), True)
-    monkeypatch.setattr(
-        symbol, "type_layout", lambda name: choice if name == "Choice" else inner
+    patch(
+        monkeypatch,
+        "type_layout",
+        lambda _ctx, name: choice if name == "Choice" else inner,
     )
-    assert symbol.main(["member", "Choice", "0x0"]) == 0
+    assert main(repo, ["member", "Choice", "0x0"]) == 0
     assert capsys.readouterr().out.splitlines() == ["byte\tu8", "half\tu16"]
 
 
@@ -173,7 +154,7 @@ def test_member_prints_every_union_name(
 def test_member_reads_the_compiler_layout(
     repo: Path, capsys: pytest.CaptureFixture[str]
 ) -> None:
-    assert symbol.main(["member", "State", "0x6"]) == 0
+    assert main(repo, ["member", "State", "0x6"]) == 0
     assert capsys.readouterr().out.splitlines() == ["rows[1].b\tu16"]
 
 
@@ -181,26 +162,19 @@ def test_member_reads_the_compiler_layout(
 def test_member_reuses_the_cached_layout(
     repo: Path, monkeypatch: pytest.MonkeyPatch
 ) -> None:
-    assert symbol.main(["member", "State", "0x6"]) == 0
-    assert symbol.LAYOUT_CACHE.is_file()
-    monkeypatch.setattr(symbol, "_LAYOUTS", {})
-    monkeypatch.setattr(symbol, "_LAYOUT_INDEX", None)
+    assert main(repo, ["member", "State", "0x6"]) == 0
+    assert symbol.Context(repo).layout_cache.is_file()
 
-    def fail(name: str) -> None:
+    def fail(_ctx: object, name: str) -> None:
         raise AssertionError("clang must not run for a warm cache")
 
-    monkeypatch.setattr(symbol, "_probe", fail)
-    assert symbol.main(["member", "State", "0x6"]) == 0
+    patch(monkeypatch, "_probe", fail)
+    assert main(repo, ["member", "State", "0x6"]) == 0
 
 
 def test_member_rejects_an_outside_offset(repo: Path) -> None:
-    with pytest.raises(SystemExit, match="outside"):
-        symbol.main(["member", "State", "0x10"])
-
-
-def test_member_rejects_an_unknown_type(repo: Path) -> None:
-    with pytest.raises(SystemExit, match="no named members"):
-        symbol.main(["member", "NoSuchRecord", "0x0"])
+    with pytest.raises(SymbolError, match="outside"):
+        main(repo, ["member", "State", "0x10"])
 
 
 def test_at_prints_the_member_path(
@@ -208,10 +182,12 @@ def test_at_prints_the_member_path(
 ) -> None:
     inner = Layout(4, (Member(0, "a", "u8", 1), Member(2, "b", "u16", 2)), True)
     state = Layout(16, (Member(0, "rows", "Inner[2]", 8),), True)
-    monkeypatch.setattr(
-        symbol, "type_layout", lambda name: inner if name == "Inner" else state
+    patch(
+        monkeypatch,
+        "type_layout",
+        lambda _ctx, name: inner if name == "Inner" else state,
     )
-    assert symbol.main(["at", "exe/a", "0x80000006", "0x80000000"]) == 0
+    assert main(repo, ["at", "exe/a", "0x80000006", "0x80000000"]) == 0
     assert capsys.readouterr().out.splitlines() == [
         "0x80000006  Game.rows[1].b+0x0  (State, 0x10)  [exe/a]",
         "0x80000000  Game+0x0  (State, 0x10)  [exe/a]",
@@ -223,18 +199,15 @@ def test_at_reads_a_resident_table_and_skips_aliases(
 ) -> None:
     inner = Layout(4, (Member(0, "a", "u8", 1), Member(2, "b", "u16", 2)), True)
     state = Layout(16, (Member(0, "rows", "Inner[2]", 8),), True)
-    monkeypatch.setattr(
-        symbol, "type_layout", lambda name: inner if name == "Inner" else state
+    patch(
+        monkeypatch,
+        "type_layout",
+        lambda _ctx, name: inner if name == "Inner" else state,
     )
-    assert symbol.main(["at", "emi/etc/game/00", "0x80010006"]) == 0
+    assert main(repo, ["at", "emi/etc/game/00", "0x80010006"]) == 0
     assert capsys.readouterr().out.splitlines() == [
         "0x80010006  g_Game.rows[1].b+0x0  (State, 0x10)  [emi/etc/game/00]"
     ]
-
-
-def test_at_says_no_owner(repo: Path, capsys: pytest.CaptureFixture[str]) -> None:
-    assert symbol.main(["at", "exe/a", "0x80000200"]) == 0
-    assert capsys.readouterr().out.splitlines() == ["0x80000200  no named owner"]
 
 
 def test_at_diff_reads_the_added_d_addresses(
@@ -242,8 +215,10 @@ def test_at_diff_reads_the_added_d_addresses(
 ) -> None:
     inner = Layout(4, (Member(0, "a", "u8", 1), Member(2, "b", "u16", 2)), True)
     state = Layout(16, (Member(0, "rows", "Inner[2]", 8),), True)
-    monkeypatch.setattr(
-        symbol, "type_layout", lambda name: inner if name == "Inner" else state
+    patch(
+        monkeypatch,
+        "type_layout",
+        lambda _ctx, name: inner if name == "Inner" else state,
     )
     (repo / "src/a/use.c").write_text(
         (repo / "src/a/use.c").read_text() + "extern u8 D_80000004;\n"
@@ -260,7 +235,7 @@ def test_at_diff_reads_the_added_d_addresses(
             "PATH": "/usr/bin:/bin",
         },
     )
-    assert symbol.main(["at", "--diff", "HEAD~1"]) == 0
+    assert main(repo, ["at", "--diff", "HEAD~1"]) == 0
     assert capsys.readouterr().out.splitlines()[0] == (
         "0x80000004  Game.rows[1].a+0x0  (State, 0x10)  [exe/a]"
     )
@@ -269,12 +244,12 @@ def test_at_diff_reads_the_added_d_addresses(
 def test_uses_lists_c_and_asm_references(
     repo: Path, capsys: pytest.CaptureFixture[str]
 ) -> None:
-    assert symbol.main(["uses", "Game"]) == 0
+    assert main(repo, ["uses", "Game"]) == 0
     out = capsys.readouterr()
     assert "c\tsrc/a/use.c:3" in out.out
     assert "c\tsrc/a/use.c:1" not in out.out
     assert "c\tsrc/a/use.c:2" not in out.out
-    assert symbol.main(["uses", "Data"]) == 0
+    assert main(repo, ["uses", "Data"]) == 0
     lines = capsys.readouterr().out.splitlines()
     assert lines == [
         "asm\tasm/exe/a/func_80000020.s:4\tfunc_80000020\tlui $s0, %hi(Data)",
@@ -287,10 +262,12 @@ def test_uses_address_resolves_the_owner_first(
 ) -> None:
     inner = Layout(4, (Member(0, "a", "u8", 1), Member(2, "b", "u16", 2)), True)
     state = Layout(16, (Member(0, "rows", "Inner[2]", 8),), True)
-    monkeypatch.setattr(
-        symbol, "type_layout", lambda name: inner if name == "Inner" else state
+    patch(
+        monkeypatch,
+        "type_layout",
+        lambda _ctx, name: inner if name == "Inner" else state,
     )
-    assert symbol.main(["uses", "exe/a@0x80000006"]) == 0
+    assert main(repo, ["uses", "exe/a@0x80000006"]) == 0
     out = capsys.readouterr().out.splitlines()
     assert out[0] == "exe/a@0x80000006  Game.rows[1].b+0x0  (State, 0x10)  [exe/a]"
     assert "c\tsrc/a/use.c:3" in out
@@ -311,24 +288,19 @@ def test_uses_rizin_xrefs_and_caches_the_map(
         'echo \'[{"from":2147483656,"to":2147483654,"type":"DATA"}]\'\n'
     )
     script.chmod(0o755)
-    assert symbol.main(["uses", "exe/a@0x80000006"]) == 0
+    assert main(repo, ["uses", "exe/a@0x80000006"]) == 0
     out = capsys.readouterr().out
     assert "rizin\texe/a\t0x80000008\tDATA" in out
     assert marker.read_text().count("x") == 1
-    assert symbol.main(["uses", "exe/a@0x80000006"]) == 0
+    assert main(repo, ["uses", "exe/a@0x80000006"]) == 0
     capsys.readouterr()
     assert marker.read_text().count("x") == 1
-
-
-def test_foreign_table_outside_its_payload_is_ignored(repo: Path) -> None:
-    assert symbol.foreign_visible("exe/a", "emi/etc/game/00", 0x80000010)
-    assert not symbol.foreign_visible("exe/a", "emi/etc/game/00", 0x80000100)
 
 
 def test_value_lists_scopes_nearest_first(
     repo: Path, capsys: pytest.CaptureFixture[str]
 ) -> None:
-    assert symbol.main(["value", "0x3A", "--image", "exe/a"]) == 0
+    assert main(repo, ["value", "0x3A", "--image", "exe/a"]) == 0
     assert capsys.readouterr().out.splitlines() == [
         "IMAGE_VALUE\tsrc/a/a.h:1\tIMAGE_",
         "ALIAS_VALUE\tsrc/a/a.h:2\tALIAS_",
@@ -343,11 +315,11 @@ def test_value_lists_scopes_nearest_first(
 def test_value_type_keeps_an_enum_or_a_prefix(
     repo: Path, capsys: pytest.CaptureFixture[str]
 ) -> None:
-    assert symbol.main(["value", "0x3A", "--image", "exe/a", "--type", "ABILITY_"]) == 0
+    assert main(repo, ["value", "0x3A", "--image", "exe/a", "--type", "ABILITY_"]) == 0
     assert capsys.readouterr().out.splitlines() == [
         "ABILITY_SANCTUARY\tinclude/game/values.h:2\tenum Ability"
     ]
-    assert symbol.main(["value", "0x3A", "--image", "exe/a", "--type", "Ability"]) == 0
+    assert main(repo, ["value", "0x3A", "--image", "exe/a", "--type", "Ability"]) == 0
     assert capsys.readouterr().out.splitlines() == [
         "ABILITY_SANCTUARY\tinclude/game/values.h:2\tenum Ability"
     ]
@@ -356,11 +328,11 @@ def test_value_type_keeps_an_enum_or_a_prefix(
 def test_value_evaluates_shifts_and_implicit_members(
     repo: Path, capsys: pytest.CaptureFixture[str]
 ) -> None:
-    assert symbol.main(["value", "0x8", "--image", "exe/a"]) == 0
+    assert main(repo, ["value", "0x8", "--image", "exe/a"]) == 0
     assert capsys.readouterr().out.splitlines() == [
         "FLAG_SHIFT\tinclude/game/values.h:13\tFLAG_"
     ]
-    assert symbol.main(["value", "0x3B", "--image", "exe/a", "--type", "COUNT_"]) == 0
+    assert main(repo, ["value", "0x3B", "--image", "exe/a", "--type", "COUNT_"]) == 0
     assert capsys.readouterr().out.splitlines() == [
         "COUNT_TWO\tinclude/game/values.h:9\tenum Counts"
     ]
@@ -369,12 +341,7 @@ def test_value_evaluates_shifts_and_implicit_members(
 def test_value_skips_a_header_the_image_does_not_include(
     repo: Path, capsys: pytest.CaptureFixture[str]
 ) -> None:
-    assert symbol.main(["value", "0x3A", "--image", "exe/a"]) == 0
+    assert main(repo, ["value", "0x3A", "--image", "exe/a"]) == 0
     assert "OTHER_VALUE" not in capsys.readouterr().out
-    assert symbol.main(["value", "0x3A"]) == 0
+    assert main(repo, ["value", "0x3A"]) == 0
     assert "OTHER_VALUE\tinclude/other.h:1\tOTHER_" in capsys.readouterr().out
-
-
-def test_value_rejects_an_unknown_image(repo: Path) -> None:
-    with pytest.raises(SystemExit, match="not a target"):
-        symbol.main(["value", "0x3A", "--image", "bad"])

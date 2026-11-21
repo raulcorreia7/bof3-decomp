@@ -6,14 +6,25 @@ import subprocess
 from pathlib import Path
 
 
-def _run(args: tuple[str, ...], root: Path | None, check: bool, text: bool = True):
+def _run(
+    args: tuple[str, ...],
+    root: Path | None,
+    check: bool,
+    text: bool = True,
+    env: dict[str, str] | None = None,
+):
     return subprocess.run(
-        ["git", *args], cwd=root, capture_output=True, text=text, check=check
+        ["git", *args], cwd=root, capture_output=True, text=text, check=check, env=env
     )
 
 
-def git(*args: str, root: Path | None = None, check: bool = True) -> str:
-    return _run(args, root, check).stdout
+def git(
+    *args: str,
+    root: Path | None = None,
+    check: bool = True,
+    env: dict[str, str] | None = None,
+) -> str:
+    return _run(args, root, check, env=env).stdout
 
 
 def ok(*args: str, root: Path | None = None) -> bool:
