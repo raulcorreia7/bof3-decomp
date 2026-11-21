@@ -31,6 +31,7 @@ import re
 import sys
 from dataclasses import dataclass, field
 from pathlib import Path
+from typing import NamedTuple
 
 from bof3.adapters.cli import run_main
 from bof3.adapters.config import read_symbols
@@ -422,9 +423,17 @@ def lifted_function(f: Func, root: Path = ROOT) -> Lift:
     return lift(instructions(path.read_text(encoding="utf-8")))
 
 
-def measure(funcs: list[Func]) -> list[tuple[str, Func, int]]:
+class Measured(NamedTuple):
+    """One function with the shape of its assembly and its size."""
+
+    shape: str
+    func: Func
+    words: int
+
+
+def measure(funcs: list[Func]) -> list[Measured]:
     """Return ``(shape, function, words)`` for each function."""
-    return [(classify(lifted_function(f)), f, len(f.words)) for f in funcs]
+    return [Measured(classify(lifted_function(f)), f, len(f.words)) for f in funcs]
 
 
 class Tree:

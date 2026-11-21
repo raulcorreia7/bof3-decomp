@@ -32,6 +32,7 @@ import sys
 from collections.abc import Iterator
 from concurrent.futures import ThreadPoolExecutor
 from pathlib import Path
+from typing import NamedTuple
 
 import m2ctx
 import try_body
@@ -212,18 +213,24 @@ def drafts(root: Path, func: Func, ctx: Path, jobs: int = 1) -> dict[str, str]:
     return out
 
 
-def sweep_one(
-    root: Path, func: Func, found: dict[str, str]
-) -> tuple[str, int | None, str]:
+class Sweep(NamedTuple):
+    """How the drafts of one function fared."""
+
+    status: str
+    diff: int | None
+    variant: str
+
+
+def sweep_one(root: Path, func: Func, found: dict[str, str]) -> Sweep:
     """Try the drafts; return (EXACT|BEST|NONE, fewest differing instructions, variant)."""
     best: tuple[int, str] | None = None
     for variant, body in found.items():
         status, _, diff = try_body.trial(root, func, body)
         if status == "EXACT":
-            return "EXACT", 0, variant
+            return Sweep("EXACT", 0, variant)
         if diff is not None and (best is None or diff < best[0]):
             best = (diff, variant)
-    return ("BEST", *best) if best else ("NONE", None, "")
+    return Sweep("BEST", *best) if best else Sweep("NONE", None, "")
 
 
 def save_drafts(root: Path, func: Func, found: dict[str, str]) -> None:
