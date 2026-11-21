@@ -35,6 +35,7 @@ void func_801D0158(s32 kind, s32 x, s32 y, s32 code);
 
 extern s32 func_801D04C8(void);
 
-extern void func_801D066C(void);
+/* func_801D066C */
+extern void PlChar_ProbeFacingClearance(void);
 
 #endif

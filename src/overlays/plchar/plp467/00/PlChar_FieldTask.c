@@ -38,7 +38,7 @@ MATCH void func_801CE890(void) {
 }
 
 MATCH void PlChar_FaceFreeDirection(void) {
-    CHAR_FACE_FREE_DIRECTION(func_801CF3C0, func_801CF564);
+    CHAR_FACE_FREE_DIRECTION(func_801CF3C0, PlChar_ProbeFacingClearance);
 }
 
 #include "overlays/plchar/shared/PlChar_RunPersonalAction.h"
@@ -61,7 +61,7 @@ MATCH void func_801CF13C(void) {
 }
 
 MATCH void func_801CF180(void) {
-    CHAR_START_FACING_TURN(func_801CF564);
+    CHAR_START_FACING_TURN(PlChar_ProbeFacingClearance);
 }
 
 #include "overlays/plchar/shared/PlChar_ReleaseSpawnedActor.h"
@@ -71,13 +71,8 @@ MATCH void func_801CF180(void) {
 #include "overlays/plchar/shared/Char_ProbeFacingBlocked.h"
 CHAR_DEFINE_PROBE_FACING_BLOCKED(func_801CF3C0);
 
-MATCH void func_801CF564(void) {
-    s16 dist;
-    s32 x;
-    s32 y;
-
-    CHAR_PROBE_FACING_CLEARANCE(dist, x, y)
-}
+/* func_801CF564 */
+#include "overlays/plchar/shared/PlChar_ProbeFacingClearance.h"
 
 MATCH void func_801CF6C8(void) {
     SYS_DISPATCH_TASK(D_801D03EC, 2, g_Task);

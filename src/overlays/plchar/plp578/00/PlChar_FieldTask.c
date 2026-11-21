@@ -61,23 +61,8 @@ MATCH void func_801CF868(void) {
     SYS_DISPATCH_TASK(D_801CFAF4, 2, g_Task);
 }
 
-MATCH void func_801CF8AC(void) {
-    u8 slot;
-
-    if (!(g_Task->direction & 1)) {
-        g_Task->direction = (g_Task->direction - 1) & 7;
-    }
-    slot                     = func_8019601C();
-    g_Task->param.actor_slot = slot;
-    if (g_Task->param.actor_slot != GAME_NONE) {
-        g_SpawnedActors[g_Task->param.actor_slot].header.flags = 1;
-        g_SpawnedActors[g_Task->param.actor_slot].type         = 0x1B;
-    }
-    Actor_RequestScript((g_Task->direction >> 1) + 0x42);
-    /* FAKE: retail reads SND_PlaySE as void(s32). */
-    ((void (*)(s32))SND_PlaySE)(g_Task->unk_2C + 0x100);
-    g_Task->header.step++;
-}
+/* func_801CF8AC */
+#include "overlays/plchar/shared/PlChar_StartSpawnedActorTurn.h"
 
 #include "overlays/plchar/shared/PlChar_ClearModeIfSlotFree.h"
 

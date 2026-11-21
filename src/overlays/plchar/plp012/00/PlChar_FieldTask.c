@@ -68,18 +68,8 @@ MATCH void PlChar_RunGarrFieldTask(void) {
     PLCHAR_RUN_GARR_FIELD_TASK(func_801CFBDC);
 }
 
-/* Counts down the player character pause timer. */
 /* func_801CF938 */
-MATCH void PlChar_TickPauseTimer(void) {
-    if (g_Task->timer == 0) {
-        g_Game.current->u.field.mode.value = 0;
-        g_GameFlags &= ~0x1000;
-    } else {
-        g_Task->timer--;
-        Actor_UpdateMovement();
-    }
-    Actor_StepAnimLoop();
-}
+#include "overlays/plchar/shared/PlChar_TickPauseTimer.h"
 
 /* func_801CF9A8 */
 #include "overlays/plchar/shared/PlChar_FindGarrActorSlot.h"

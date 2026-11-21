@@ -37,6 +37,7 @@ extern Callback D_801D069C[];
 s32        func_801CFD24(s16 x, s16 y);
 extern s32 func_801D02A0(void);
 
-extern void func_801D0444(void);
+/* func_801D0444 */
+extern void PlChar_ProbeFacingClearance(void);
 
 #endif
