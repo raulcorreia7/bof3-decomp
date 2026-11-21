@@ -423,7 +423,6 @@ extern u32                   D_80143EA0;
 extern u32                   D_80143EA4;
 extern u8                    D_80143F48[];
 extern s16                   g_ScrollHeight[]; /* low half (+2) of the big-endian 0x80143F84 scroll word */
-extern volatile u8           g_SndMono;
 extern s32                   D_80144967;
 /* Retail data D_80145000-D_80146FFF (one declaration each). */
 extern s32                   D_80145030;

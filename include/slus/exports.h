@@ -108,6 +108,7 @@ extern s8           D_801448E9;
 extern s8           g_SceneEventMode;
 extern s8           g_SceneEventStep;
 extern u8           g_SceneEventSelection;
+extern volatile u8  g_SndMono;
 extern u8           g_WindowStyle;
 extern u8           g_SavedScriptVars[4];
 extern u8           D_80144955;
