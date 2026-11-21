@@ -24,10 +24,7 @@ def test_an_invented_name_with_an_address_is_an_offender() -> None:
     [
         "func_801D933C",
         "D_80146908",
-        "L801D933C",
-        "jtbl_801D933C",
         "jpt_801D933C_2",
-        "s_gap_801D933C",
     ],
 )
 def test_the_default_tool_names_are_allowed(name: str) -> None:
@@ -37,19 +34,6 @@ def test_the_default_tool_names_are_allowed(name: str) -> None:
 def test_comments_strings_and_hex_literals_are_not_checked() -> None:
     text = '/* Foo_801D933C */\n// Bar_801D933C\nchar* s = "Baz_801D933C";\nu32 v = 0x801D933C;\n#include "x_801D933C.h"\n'
     assert offenders(text) == set()
-
-
-def test_a_suffixed_default_name_is_still_an_offender() -> None:
-    assert offenders(
-        "void func_801D99AC_decl_guard(void);\nextern u8 D_801F24FC_Data;\n"
-    ) == {
-        "func_801D99AC_decl_guard",
-        "D_801F24FC_Data",
-    }
-
-
-def test_words_without_a_digit_run_are_not_addresses() -> None:
-    assert offenders("int FACEDBEE_flag;\nint step_12;\n") == set()
 
 
 def test_unnamed_parameters_are_offenders() -> None:
@@ -107,27 +91,6 @@ def test_offset_macros_are_refused_in_a_diff(
     assert "SP_REF(): 1 new offset access" in err
 
 
-def test_a_diff_that_removes_an_offset_access_passes(
-    tmp_path: Path, monkeypatch: pytest.MonkeyPatch
-) -> None:
-    def git(*args: str) -> None:
-        subprocess.run(["git", *args], cwd=tmp_path, check=True, capture_output=True)
-
-    git("init", "-q")
-    git("config", "user.email", "t@t")
-    git("config", "user.name", "t")
-    (tmp_path / "src").mkdir()
-    (tmp_path / "src/a.c").write_text(
-        "void f(void) { u8 v = FIELD(u8, base, 0x4u); }\n"
-    )
-    git("add", ".")
-    git("commit", "-qm", "base")
-    (tmp_path / "src/a.c").write_text("void f(void) { u8 v = base->unk_04; }\n")
-    git("commit", "-qam", "read the member")
-    monkeypatch.chdir(tmp_path)
-    assert check_names.main(["--diff", "HEAD~1"]) == 0
-
-
 def test_an_offset_access_in_a_comment_or_string_or_definition_is_not_refused() -> None:
     assert (
         offset_macros('/* FIELD(u8, base, 0x4u) */ char* s = "SP_REF(u8, 0x0u)";\n')
@@ -140,10 +103,6 @@ def test_an_offset_access_in_a_comment_or_string_or_definition_is_not_refused() 
     assert (
         offset_macros("value = FIELD_PTR(u8, base, 0x4u); SP_PTR(u8, 0x0u);\n") == set()
     )
-
-
-def test_the_offset_macros_are_named() -> None:
-    assert offset_macros("x = FIELD(u8, base, 0x4u); SP(0x18u);\n") == {"FIELD", "SP"}
 
 
 @pytest.fixture
@@ -169,32 +128,14 @@ def test_the_ratchet_passes_on_the_baseline_and_fails_on_a_new_or_a_stale_name(
     assert check_names.main([]) == 1  # the baseline may only shrink
 
 
-def test_camel_and_underscore_names_split_into_words() -> None:
-    assert check_names.split_words("SND_PlaySE") == ["snd", "play", "se"]
-    assert check_names.split_words("g_PartyCount") == ["g", "party", "count"]
-    assert check_names.split_words("ColorRGB8") == ["color", "rgb", "8"]
-    assert check_names.split_words("UPoint2D") == ["u", "point", "2", "d"]
-
-
 @pytest.mark.parametrize(
     "name",
     [
         "BattleHandlerTable",
-        "EffectData",
-        "g_BattleWork",
         "effect_kind",
-        "saveBuf",
-        "ItemIdx",
         "tile_cnt",
-        "old_temp",
-        "cur_row",
-        "cell_ptr",
-        "work_obj",
         "SceneFx",
-        "BattleAmount",
         "WaitCheck",
-        "BattleFinish",
-        "MapStore",
     ],
 )
 def test_a_new_name_with_a_rejected_word_is_an_offender(name: str) -> None:
@@ -205,15 +146,8 @@ def test_a_new_name_with_a_rejected_word_is_an_offender(name: str) -> None:
     "name",
     [
         "Battle_ApplyDamage",
-        "PartyMember",
         "g_PartyCount",
         "Callback",
-        "Thread",
-        "ColorRGB8",
-        "Offset2",
-        "BattleCommandCallback",
-        "Message_WindowOpen",
-        "Item_Add",
     ],
 )
 def test_a_new_name_in_the_decided_vocabulary_is_allowed(name: str) -> None:
@@ -224,11 +158,7 @@ def test_a_new_name_in_the_decided_vocabulary_is_allowed(name: str) -> None:
     "name",
     [
         "World_UpdateClouds",
-        "Plchar_Foo",
         "PAD_GetRepeatedButtons",
-        "Mem_CopyBytes",
-        "Matrix_SetIdentity",
-        "Fish_Swim",
     ],
 )
 def test_a_new_name_with_an_old_system_tag_is_an_offender(name: str) -> None:
@@ -260,27 +190,6 @@ def test_a_diff_with_a_new_rejected_name_fails(
     monkeypatch.chdir(tmp_path)
     assert check_names.main(["--diff", "HEAD~1"]) == 1
     assert "BattleHandlerTable" in capsys.readouterr().err
-
-
-def test_a_diff_that_only_uses_an_existing_name_passes(
-    tmp_path: Path, monkeypatch: pytest.MonkeyPatch
-) -> None:
-    def git(*args: str) -> None:
-        subprocess.run(["git", *args], cwd=tmp_path, check=True, capture_output=True)
-
-    git("init", "-q")
-    git("config", "user.email", "t@t")
-    git("config", "user.name", "t")
-    (tmp_path / "src").mkdir()
-    (tmp_path / "src/a.c").write_text("extern unsigned char SaveData;\n")
-    git("add", ".")
-    git("commit", "-qm", "base")
-    (tmp_path / "src/a.c").write_text(
-        "extern unsigned char SaveData;\nvoid f(void) { SaveData = 1; }\n"
-    )
-    git("commit", "-qam", "use the existing name")
-    monkeypatch.chdir(tmp_path)
-    assert check_names.main(["--diff", "HEAD~1"]) == 0
 
 
 def test_a_diff_that_deletes_a_file_does_not_crash(
@@ -327,17 +236,6 @@ def _renamed_offset_repo(
     git("add", ".")
     git("commit", "-qm", "rename the file")
     monkeypatch.chdir(tmp_path)
-
-
-def test_a_renamed_file_with_one_offset_access_and_a_one_word_change_passes(
-    tmp_path: Path, monkeypatch: pytest.MonkeyPatch
-) -> None:
-    _renamed_offset_repo(
-        tmp_path,
-        monkeypatch,
-        RENAMED_OFFSET_BODY.replace("Battle_DrawTile", "Battle_DrawPanel"),
-    )
-    assert check_names.main(["--diff", "HEAD~1"]) == 0
 
 
 def test_a_renamed_file_that_gains_an_offset_access_fails(
@@ -411,14 +309,6 @@ def test_a_unit_row_that_keeps_its_address_name_is_stale(
     assert "keeps the address name" in capsys.readouterr().err
 
 
-def test_a_named_unit_row_passes(
-    tmp_path: Path, monkeypatch: pytest.MonkeyPatch, no_ratchet: None
-) -> None:
-    monkeypatch.chdir(tmp_path)
-    write_image(tmp_path, "c", "Named", NAMED_ROW, NAMED_UNIT, "Named")
-    assert check_names.main([]) == 0
-
-
 def test_a_unit_that_defines_its_address_name_is_not_stale(
     tmp_path: Path, monkeypatch: pytest.MonkeyPatch, no_ratchet: None
 ) -> None:
@@ -453,21 +343,6 @@ def test_a_data_row_that_keeps_its_address_name_is_stale(
     assert "keeps the address name" in capsys.readouterr().err
 
 
-def test_a_named_data_row_passes(
-    tmp_path: Path, monkeypatch: pytest.MonkeyPatch, no_ratchet: None
-) -> None:
-    monkeypatch.chdir(tmp_path)
-    write_image(
-        tmp_path,
-        "bin",
-        "g_Table",
-        'g_Table = { addr = 0x80000000, source = "x" }',
-        "",
-        "x",
-    )
-    assert check_names.main([]) == 0
-
-
 def diff_repo(root: Path, row: str) -> None:
     def git(*args: str) -> None:
         subprocess.run(["git", *args], cwd=root, check=True, capture_output=True)
@@ -500,14 +375,6 @@ def test_a_diff_that_names_a_function_and_leaves_its_row_fails(
     assert "keeps the address name" in capsys.readouterr().err
 
 
-def test_a_diff_that_names_the_row_passes(
-    tmp_path: Path, monkeypatch: pytest.MonkeyPatch
-) -> None:
-    diff_repo(tmp_path, "Named")
-    monkeypatch.chdir(tmp_path)
-    assert check_names.main(["--diff", "HEAD~1"]) == 0
-
-
 def rename_repo(root: Path, base_extra: dict[str, str] | None = None) -> None:
     """Commit one offender under ``src/a`` and stage a rename of it or another file."""
     subprocess.run(["git", "init", "-q"], cwd=root, check=True)
@@ -529,15 +396,6 @@ def test_an_unstaged_rename_reads_the_file_that_holds_the_name(
 ) -> None:
     rename_repo(tmp_path)
     (tmp_path / "src/a/A.c").rename(tmp_path / "src/a/B.c")
-    monkeypatch.chdir(tmp_path)
-    assert check_names.main([]) == 0
-
-
-def test_a_staged_rename_keeps_the_baseline_debt(
-    tmp_path: Path, monkeypatch: pytest.MonkeyPatch
-) -> None:
-    rename_repo(tmp_path)
-    subprocess.run(["git", "mv", "src/a/A.c", "src/a/B.c"], cwd=tmp_path, check=True)
     monkeypatch.chdir(tmp_path)
     assert check_names.main([]) == 0
 

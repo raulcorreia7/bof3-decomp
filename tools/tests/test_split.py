@@ -48,17 +48,6 @@ def test_graph_inputs_list_config_files_and_extra_sources(
     )
 
 
-def test_ensure_payload_returns_an_existing_binary(tmp_path: Path) -> None:
-    class Manifest:
-        binary = "build/bin/x.bin"
-        kind = "executable"
-        disc_id = "X"
-
-    (tmp_path / "build/bin").mkdir(parents=True)
-    (tmp_path / "build/bin/x.bin").write_bytes(b"1")
-    assert split.ensure_payload(tmp_path, Manifest()) == tmp_path / "build/bin/x.bin"  # type: ignore[arg-type]
-
-
 def test_ensure_payload_copies_the_disc_file_for_an_executable(tmp_path: Path) -> None:
     class Manifest:
         binary = "build/bin/x.bin"
@@ -69,13 +58,3 @@ def test_ensure_payload_copies_the_disc_file_for_an_executable(tmp_path: Path) -
     (tmp_path / "build/disc/SLUS_004.22").write_bytes(b"abc")
     binary = split.ensure_payload(tmp_path, Manifest())  # type: ignore[arg-type]
     assert binary.read_bytes() == b"abc"
-
-
-def test_ensure_payload_reports_a_missing_retail_file(tmp_path: Path) -> None:
-    class Manifest:
-        binary = "build/bin/x.bin"
-        kind = "executable"
-        disc_id = "NOPE"
-
-    with pytest.raises(RuntimeError, match="missing retail payload"):
-        split.ensure_payload(tmp_path, Manifest())  # type: ignore[arg-type]

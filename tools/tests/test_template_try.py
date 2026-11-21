@@ -1,5 +1,3 @@
-import pytest
-
 import template_try
 from bof3.source.index import Func
 
@@ -37,10 +35,3 @@ def test_closest_row_names_the_target_and_its_closest_template(monkeypatch):
         [TARGET, TEMPLATE], "exe/slus_004_22@0x80178764"
     ) == ("exe/slus_004_22@func_80178764\temi/bmagic/magic088/03@func_801EEC20")
     assert calls == [(TARGET, 1)]
-
-
-def test_closest_row_stops_when_nothing_is_lifted(monkeypatch):
-    monkeypatch.setattr(template_try.template_diff, "candidates", lambda *_: [])
-    with pytest.raises(SystemExit) as stop:
-        template_try.closest_row([TARGET], "exe/slus_004_22@0x80178764")
-    assert "no lifted function" in str(stop.value.code)

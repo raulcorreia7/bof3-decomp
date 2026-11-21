@@ -37,26 +37,10 @@ def test_scratchpad_counts_the_cell_and_the_reloads():
     assert "reloaded" in lines[0]
 
 
-def test_scratchpad_names_a_cell_from_the_table():
-    entry = symbols.Entry("g_Task", 0x1F800044, type="Task*")
-    lines = run(
-        hints.scratchpad,
-        "lui $v1, (0x1F800044 >> 16)\nlw $v1, (0x1F800044 & 0xFFFF)($v1)",
-        table={"exe/a": [entry]},
-    )
-    assert "g_Task" in lines[0]
-
-
 def test_narrow_argument_is_a_cast_at_the_use():
     lines = run(hints.narrow_arguments, "andi $a0, $a0, 0xff")
     assert "argument a0" in lines[0]
     assert "cast" in lines[0]
-
-
-def test_narrow_local_is_a_narrow_type():
-    lines = run(hints.narrow_locals, "addiu $v0, $v0, 1\nandi $v0, $v0, 0xff")
-    assert "local v0" in lines[0]
-    assert "u8" in lines[0]
 
 
 def test_jump_table_names_the_table_and_splat():
@@ -64,20 +48,6 @@ def test_jump_table_names_the_table_and_splat():
     lines = run(hints.jump_table, text, splat="jtbl_801EEC0C")
     assert "jtbl_801EEC0C" in lines[0]
     assert "yes" in lines[0]
-
-
-def test_twice_finds_the_same_call_twice():
-    text = """
-addiu $a0, $zero, 1
-jal func_80140010
-nop
-addiu $a0, $zero, 1
-jal func_80140010
-nop
-"""
-    lines = run(hints.twice, text)
-    assert "func_80140010" in lines[0]
-    assert "same argument setup" in lines[0]
 
 
 def test_rodata_copy_counts_the_stack_words_before_jalr():

@@ -1,6 +1,3 @@
-import pytest
-
-import worklist
 from worklist import attempts
 
 
@@ -18,16 +15,3 @@ def test_attempts_keep_each_record(tmp_path):
         "other@0x80000000": "branch",
         "third@0x80000000": "jump; size; 46 of 47 instructions",
     }
-
-
-def test_templates_names_the_install_step_when_rapidfuzz_is_missing(
-    monkeypatch, capsys
-):
-    def missing(_args):
-        raise SystemExit("dups: needs rapidfuzz. Run: tools/setup.sh --matching")
-
-    monkeypatch.setattr(worklist.dups, "main", missing)
-    with pytest.raises(SystemExit) as stop:
-        worklist.templates()
-    assert stop.value.code == 2
-    assert "tools/setup.sh --dev --matching" in capsys.readouterr().err

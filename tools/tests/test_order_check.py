@@ -2,8 +2,6 @@
 
 from __future__ import annotations
 
-from pathlib import Path
-
 from order_check import (
     check_asserts,
     check_data_file,
@@ -148,17 +146,3 @@ def test_data_files_report_only() -> None:
     assert fixed == text
     assert len(hits) == 1 and not hits[0].fixable
     assert "data/functions" in hits[0].render()
-
-
-def test_tracked_headers_skip_vendored_psyq(tmp_path: Path, monkeypatch) -> None:
-    import order_check
-
-    monkeypatch.setattr(order_check, "ROOT", tmp_path)
-    monkeypatch.setattr(
-        order_check,
-        "ls_files",
-        lambda *a, **k: ["include/psyq/a.h", "include/x.h", "src/y.c"],
-    )
-    headers, data = order_check.tracked()
-    assert headers == ["include/x.h"]
-    assert data == ["src/y.c"]

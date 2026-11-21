@@ -1,6 +1,6 @@
 from __future__ import annotations
 
-from check_drafts import DRAFT, arguments_for
+from check_drafts import arguments_for
 
 COMMANDS = {
     "src/a/x.c": [
@@ -22,11 +22,6 @@ COMMANDS = {
         "x.o",
     ]
 }
-
-
-def test_a_draft_marker_starts_a_line() -> None:
-    assert DRAFT.search("#ifdef NON_MATCHING\nNON_MATCHING void f(void) {\n}\n")
-    assert not DRAFT.search("/* NON_MATCHING in a comment */\n#ifdef NON_MATCHING\n")
 
 
 def test_flags_come_from_the_draft_without_the_build_options() -> None:

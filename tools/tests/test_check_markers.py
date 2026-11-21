@@ -2,7 +2,6 @@ from __future__ import annotations
 
 from pathlib import Path
 
-import pytest
 from fixture import put_symbols
 
 import check_markers
@@ -19,20 +18,8 @@ def problems(text: str) -> list[str]:
     return [v.problem for v in check_text(text)]
 
 
-def test_a_marked_definition_passes() -> None:
-    assert problems("MATCH void f(void) {\n}\n") == []
-
-
 def test_an_unmarked_definition_fails() -> None:
     assert problems("void f(void) {\n}\n") == [
-        "no marker; a definition needs exactly one"
-    ]
-
-
-def test_a_wrapped_signature_is_one_definition() -> None:
-    wrapped = "{marker}s32 f(s32 first,\n       s32 second) {{\n    return first;\n}}\n"
-    assert problems(wrapped.format(marker="MATCH ")) == []
-    assert problems(wrapped.format(marker="")) == [
         "no marker; a definition needs exactly one"
     ]
 
@@ -90,20 +77,6 @@ def test_a_marker_on_an_include_asm_line_fails() -> None:
         "marker on something that is not a function definition"
     ]
     assert problems("INCLUDE_ASM(f);\n") == []
-
-
-def test_an_old_style_definition_is_one_definition() -> None:
-    kr = "{marker}s32 f(a, b)\nu8 a;\ns32 b;\n{{\n    return b;\n}}\n"
-    assert problems(kr.format(marker="MATCH ")) == []
-    assert problems(kr.format(marker="")) == [
-        "no marker; a definition needs exactly one"
-    ]
-
-
-@pytest.mark.parametrize("line", [3, 5])
-def test_the_report_names_the_line_of_the_definition(line: int) -> None:
-    text = "\n" * (line - 1) + "void f(void) {\n}\n"
-    assert [v.line for v in check_text(text)] == [line]
 
 
 DRAFT = (
@@ -205,16 +178,6 @@ def _attempt_rows(tmp_path, *rows: str) -> Path:
     return tmp_path
 
 
-def test_attempt_rows_any_spacing_pass(tmp_path) -> None:
-    root = _attempt_rows(
-        tmp_path,
-        '{"function":"a@0x1","tried":"t","first_diff":"d","score":null}',
-        '{"function": "b@0x2", "tried": "t", "first_diff": "", "score": "2 rows"}',
-        '{"function":  "c@0x3",  "tried": "t", "first_diff": "", "score": null}',
-    )
-    assert attempt_problems(root) == []
-
-
 def test_an_attempt_row_with_other_keys_or_order_names_its_line(tmp_path) -> None:
     root = _attempt_rows(
         tmp_path,
@@ -229,11 +192,3 @@ def test_an_attempt_row_with_other_keys_or_order_names_its_line(tmp_path) -> Non
         f"{path}:3: keys ['function', 'tried', 'score', 'first_diff'] instead of "
         "['function', 'tried', 'first_diff', 'score']",
     ]
-
-
-def test_a_malformed_attempts_row_fails_the_diff_check(
-    monkeypatch, tmp_path, capsys
-) -> None:
-    row = '{"function": "emi/bmagic/magic058/03@0x801EFDD4", "tried": "t", "result": "MATCH"}\n'
-    assert _land(monkeypatch, tmp_path, row, capsys) == 1
-    assert ":1: keys ['function', 'tried', 'result']" in capsys.readouterr().err

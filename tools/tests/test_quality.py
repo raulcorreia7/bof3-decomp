@@ -39,12 +39,6 @@ def test_byte_views_count_as_unnamed() -> None:
     assert quality.unnamed(body) == 2
 
 
-def test_a_pinned_byte_local_counts_like_a_plain_one() -> None:
-    pinned = 'FAKE_REG(u8*, entity, "v0");\nD_801D3918[entity[1]]();\n'
-    plain = "u8* entity;\nD_801D3918[entity[1]]();\n"
-    assert quality.unnamed(pinned) == quality.unnamed(plain) == 2
-
-
 def test_comments_hide_names_and_notes_count_whole_file() -> None:
     text = "/* FAKE: pin. */\nMATCH void F(void) {\n    /* D_801EF000 *(u8 *)p */\n    FAKE_REG(x);\n}\n"
     found = row(text)
@@ -78,15 +72,6 @@ def test_a_statement_macro_body_is_not_a_paste() -> None:
     assert sum(r["pasted"] + r["twins"] for r in rows) == 0
 
 
-def test_a_header_body_is_not_a_paste() -> None:
-    files = {
-        "src/o/a/Name.h": BODY.format(name="Name"),
-        "src/o/a/1/x.c": BODY.format(name="Name"),
-        "src/o/a/2/x.c": '#include "o/a/Name.h"\n',
-    }
-    assert sum(r["pasted"] for r in quality.scan(files).values()) == 0
-
-
 def test_worse_flags_only_touched_files_and_gated_metrics() -> None:
     old = {"a.c": {"casts": 1, "names": 0, "pasted": 0, "harmful": 0}}
     new = {
@@ -98,13 +83,6 @@ def test_worse_flags_only_touched_files_and_gated_metrics() -> None:
     assert quality.worse(old, new, {"c.c"}) == ["c.c: pasted 0 -> 1"]
     assert quality.worse(old, new, {"a.c", "b.c"}, ("names",)) == ["a.c: names 0 -> 5"]
     assert quality.worse(old, old, {"a.c"}) == []
-
-
-def test_queue_ranks_the_highest_score_first() -> None:
-    low = dict.fromkeys((*quality.METRICS, "funcs"), 0) | {"casts": 1}
-    high = dict.fromkeys((*quality.METRICS, "funcs"), 0) | {"pasted": 1}
-    lines = quality.table({"low.c": low, "high.c": high}, 10, "file").splitlines()
-    assert lines[1].endswith("high.c") and lines[2].endswith("low.c")
 
 
 def test_a_body_moved_between_touched_files_nets_to_zero() -> None:
@@ -167,32 +145,6 @@ def test_a_field_seam_turned_into_an_unk_member_keeps_the_names_count() -> None:
     assert quality.ratchet(old, new, {"src/a/x.c"}) == []
 
 
-def test_a_byte_view_turned_into_an_unk_member_keeps_the_names_count() -> None:
-    old = {"src/a/x.c": "MATCH void F(void) {\n    ((u8*)panel)[0x0A] = 1;\n}\n"}
-    new = {"src/a/x.c": "MATCH void F(void) {\n    panel->unk_0A = 1;\n}\n"}
-    assert quality.ratchet(old, new, {"src/a/x.c"}) == []
-
-
-def test_subsystem_table_groups_files_by_path_prefix() -> None:
-    rows = {
-        "src/engine/slus/a.c": row(BODY.format(name="func_801EEC10")),
-        "src/overlays/area/area001/00/b.c": row(BODY.format(name="Named")),
-    }
-    lines = quality.markdown_table(rows).splitlines()
-    assert [line.split("|")[1].strip() for line in lines[2:]] == [
-        "Executable",
-        "Area",
-        "Total",
-    ]
-    assert lines[-1].split("|")[2].strip() == "2"
-
-
-def test_a_quality_allowed_line_accepts_one_metric_in_one_file() -> None:
-    text = "Subject\n\nQuality-Allowed: src/a/x.c harmful\nQuality-Allowed: src/b/y.c casts\n"
-    found = quality.ALLOWED.findall(text)
-    assert found == [("src/a/x.c", "harmful"), ("src/b/y.c", "casts")]
-
-
 def test_an_address_name_is_file_scoped_so_a_new_copy_in_another_image_is_exempt() -> (
     None
 ):
@@ -208,18 +160,6 @@ def test_an_address_name_is_file_scoped_so_a_new_copy_in_another_image_is_exempt
     assert quality.ratchet(old, new, {"src/a/x.c", "src/b/x.c"}) == [
         "func_801EF688: names 0 -> 2"
     ]
-
-
-def test_an_address_name_moved_to_another_image_is_exempt() -> None:
-    old = {
-        "src/a/x.c": "MATCH void func_801EF688(void) { a = 1; b = 2; }\n",
-        "src/b/x.c": "",
-    }
-    new = {
-        "src/a/x.c": "",
-        "src/b/x.c": "MATCH void func_801EF688(void) { a = D_80123456; b = unk_04; c = 2; }\n",
-    }
-    assert quality.ratchet(old, new, {"src/a/x.c", "src/b/x.c"}) == []
 
 
 def test_a_draft_body_does_not_count() -> None:

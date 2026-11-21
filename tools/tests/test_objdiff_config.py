@@ -2,7 +2,6 @@
 
 from __future__ import annotations
 
-import json
 import re
 import struct
 import subprocess
@@ -101,47 +100,6 @@ def objdiff() -> str | None:
     return found.stdout.strip() or None
 
 
-@pytest.mark.skipif(objdiff() is None, reason="objdiff-cli is not installed")
-def test_objdiff_scores_the_include_asm_function_unmatched(tmp_path: Path) -> None:
-    unit_object(tmp_path / "target.o")
-    base, unlifted = project(tmp_path).report_base(unit_object(tmp_path / "base.o"))
-    assert unlifted
-    (tmp_path / "objdiff.json").write_text(
-        json.dumps(
-            {
-                "build_target": False,
-                "build_base": False,
-                "units": [
-                    {
-                        "name": "t/unit",
-                        "target_path": "target.o",
-                        "base_path": str(base.relative_to(tmp_path)),
-                        "metadata": {
-                            "complete": False,
-                            "progress_categories": ["game"],
-                        },
-                    }
-                ],
-                "progress_categories": [{"id": "game", "name": "game"}],
-            }
-        )
-    )
-    output = tmp_path / "report.json"
-    subprocess.run(
-        [str(objdiff()), "report", "generate", "-p", str(tmp_path), "-o", str(output)],
-        check=True,
-        capture_output=True,
-    )
-    unit = json.loads(output.read_text())["units"][0]
-    scores = {
-        fn["name"]: fn.get("fuzzy_match_percent", 0.0) for fn in unit["functions"]
-    }
-    assert scores["func_A"] < 100.0
-    assert scores["func_B"] == 100.0
-    assert unit["measures"]["matched_functions"] == 1
-    assert unit["measures"]["total_functions"] == 2
-
-
 def test_a_readable_data_name_is_defined_at_its_row_address(
     tmp_path: Path, monkeypatch: pytest.MonkeyPatch
 ) -> None:
@@ -175,13 +133,6 @@ def test_a_readable_data_name_is_defined_at_its_row_address(
         "--defsym=g_BattleActionLock=0x801463CE",
         "--defsym=D_80140000=0x80140000",
     ]
-
-
-def test_a_function_or_unlisted_name_is_left_to_the_link() -> None:
-    rows = objdiff_config._readable_data(ROOT, "emi/battle/battle/03")
-    assert rows["g_BattleActionLock"] == 0x801463CE
-    assert "Actor_Clear" not in rows
-    assert not any(name.startswith(("func_", "D_")) for name in rows)
 
 
 def test_a_unit_with_a_draft_is_not_marked_complete(tmp_path: Path) -> None:

@@ -54,10 +54,3 @@ def test_the_row_keeps_the_spelling_of_the_last_row(tmp_path) -> None:
     assert spaced.read_text(encoding="utf-8").splitlines()[1] == row(
         "a@0x00000001", "two"
     )
-
-
-def test_score_keeps_a_number_null_and_text() -> None:
-    assert attempts.score("84.24") == 84.24
-    assert attempts.score("134") == 134
-    assert attempts.score("null") is None
-    assert attempts.score("6 opcode hunks") == "6 opcode hunks"

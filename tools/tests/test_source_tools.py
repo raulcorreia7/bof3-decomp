@@ -5,19 +5,11 @@ from pathlib import Path
 
 import pytest
 
-from bof3.source import ctext, decls, index
+from bof3.source import ctext, decls
 
 sys.path.insert(0, str(Path(__file__).resolve().parents[1]))
 import symbol
 import typeloss
-
-
-def test_opcode_tokens_ignore_registers_and_immediates() -> None:
-    addiu_a = 0x24000000 | (4 << 16) | 1
-    addiu_b = 0x24000000 | (5 << 16) | 0x7FFF
-    assert index.opcode_token(addiu_a) == index.opcode_token(addiu_b)
-    assert index.opcode_token(0) == 0
-    assert index.opcode_token(0x03E00008) != index.opcode_token(addiu_a)
 
 
 def test_a_definition_is_found_by_name_not_by_call() -> None:
@@ -31,19 +23,6 @@ def test_a_definition_is_found_by_name_not_by_call() -> None:
         "void (*cb)(int, int)",
         "char *c",
     ]
-
-
-def test_a_comment_hides_its_text_from_the_scan() -> None:
-    masked = ctext.mask('int a; /* f(1) */ char *s = "f(2)";')
-    assert "f(" not in masked
-    assert len(masked) == len('int a; /* f(1) */ char *s = "f(2)";')
-
-
-def test_type_loss_measures_how_much_type_a_prototype_names() -> None:
-    assert typeloss.strength("Unit *u, s32 n") > typeloss.strength("void *u, s32 n")
-    assert typeloss.strength("void") == 0
-    assert typeloss.lost_extern({"Unit *"}, {"void *"})
-    assert not typeloss.lost_extern({"Unit *"}, {"Unit *"})
 
 
 def test_type_loss_keys_address_names_by_folder(

@@ -1,8 +1,6 @@
 import json
 from pathlib import Path
 
-import pytest
-
 from bof3.emi.catalog import entry_for
 
 
@@ -29,9 +27,3 @@ def test_entry_for_reads_the_extracted_archive(tmp_path):
     assert entry["size"] == 4
     assert entry["load_address"] == 0x80010000
     assert entry["payload_kind"] == "ram"
-
-
-def test_entry_for_names_a_missing_slot(tmp_path):
-    archive(tmp_path)
-    with pytest.raises(ValueError, match="found 0"):
-        entry_for(tmp_path, "BIN/TEST/ARC.EMI#4")

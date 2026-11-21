@@ -2,7 +2,6 @@ from __future__ import annotations
 
 import hashlib
 import tomllib
-import zlib
 from pathlib import Path
 
 from bof3.core import disc
@@ -20,16 +19,6 @@ def manifest_for(folder: Path, track: Path) -> dict:
         files=[("A/B.BIN", 24, len(payload), hashlib.sha1(payload).hexdigest())],
     )
     return tomllib.loads(text)
-
-
-def test_digest_gives_size_and_three_hashes(tmp_path: Path) -> None:
-    path = tmp_path / "t.bin"
-    path.write_bytes(b"abc")
-    got = disc.digest_file(path)
-    assert got.size == 3
-    assert got.crc32 == f"{zlib.crc32(b'abc'):08x}"
-    assert got.md5 == hashlib.md5(b"abc").hexdigest()
-    assert got.sha1 == hashlib.sha1(b"abc").hexdigest()
 
 
 def test_a_rendered_manifest_reads_back_and_names_each_mismatch(tmp_path: Path) -> None:

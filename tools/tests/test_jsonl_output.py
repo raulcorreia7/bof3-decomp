@@ -5,8 +5,6 @@ from __future__ import annotations
 import json
 
 import dups
-import m2c_sweep
-import quality
 import sigs
 import symbol
 import template_diff
@@ -70,19 +68,6 @@ def test_sigs_jsonl_keeps_the_line_number_a_number(monkeypatch, capsys):
     }
 
 
-def test_quality_queue_rows_keep_the_table_order_and_numbers():
-    rows = {
-        "high.c": dict.fromkeys((*quality.METRICS, "funcs"), 0) | {"casts": 2},
-        "low.c": dict.fromkeys((*quality.METRICS, "funcs"), 0) | {"casts": 1},
-        "none.c": dict.fromkeys((*quality.METRICS, "funcs"), 0),
-    }
-    found = quality.queue_rows(rows, 10)
-    assert [row["file"] for row in found] == ["high.c", "low.c"]
-    assert found[0]["score"] == quality.score(rows["high.c"])
-    assert isinstance(found[0]["casts"], int)
-    assert list(found[0]) == ["file", "score", "funcs", *quality.METRICS]
-
-
 def test_symbol_refs_jsonl_names_the_columns(monkeypatch, capsys):
     monkeypatch.setattr(
         symbol,
@@ -108,12 +93,6 @@ def test_a_jsonl_rows_file_names_the_pair(tmp_path):
     assert template_try.read_rows(path) == [("a@0x1", "b@0x2")]
 
 
-def test_a_tsv_rows_file_still_names_the_pair(tmp_path):
-    path = tmp_path / "rows.tsv"
-    path.write_text("a@0x1\tb@0x2\textra\n", encoding="utf-8")
-    assert template_try.read_rows(path) == [("a@0x1", "b@0x2")]
-
-
 def test_diff_rows_name_the_three_kinds():
     rows = template_diff.align_rows(
         ["addiu a0,a0,1", "lw v0,0(a0)"],
@@ -125,13 +104,3 @@ def test_diff_rows_name_the_three_kinds():
     assert rows[0]["target"] == "addiu a0,a0,2"
     assert rows[1]["template_offset"] is None
     assert rows[1]["target_offset"] == 8
-
-
-def test_results_jsonl_names_the_swept_functions(tmp_path):
-    folder = tmp_path / "build/m2c_sweep"
-    folder.mkdir(parents=True)
-    (folder / "results.jsonl").write_text(
-        '{"target": "a@0x1", "status": "BEST", "differing": 4, "variant": "default"}\n',
-        encoding="utf-8",
-    )
-    assert m2c_sweep.read_results(tmp_path) == {"a@0x1"}

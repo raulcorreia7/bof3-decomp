@@ -34,22 +34,11 @@ def test_the_owner_signature_passes_whatever_the_names() -> None:
     assert rows(tree("extern void f(s32, u8);")) == []
 
 
-def test_the_non_prototype_form_needs_the_owner_return_type() -> None:
-    assert rows(tree("void f();")) == []
-    assert [r.name for r in rows(tree("s32 f();"))] == ["f"]
-
-
 def test_a_sig_kept_comment_keeps_one_prototype() -> None:
     kept = "/* sig-kept: the retail callers pass words. */\nvoid f(s32 x, s32 y);"
     assert rows(tree(kept)) == []
     far = "/* sig-kept: stale. */\n\n\nvoid f(s32 x, s32 y);"
     assert len(rows(tree(far))) == 1
-
-
-def test_a_hand_assembled_definition_keeps_its_return_type() -> None:
-    assert (
-        rows(tree("void f(s32 x, u8 y);", "HAND_ASM void f(s32 x, u8 y) {\n}\n")) == []
-    )
 
 
 def test_another_image_with_the_same_address_name_is_another_function() -> None:

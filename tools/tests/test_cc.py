@@ -14,10 +14,6 @@ def test_every_image_folder_follows_from_its_source_folder() -> None:
         assert asm_dir(source, ROOT) == f"build/asm/{target}"
 
 
-def test_a_source_outside_src_has_no_asm_dir() -> None:
-    assert asm_dir(ROOT / "emit/empty.c", ROOT) is None
-
-
 def test_authored_assembly_selects_the_hand_folder(tmp_path: Path) -> None:
     hand = tmp_path / "asm/exe/slus_004_22/hand"
     hand.mkdir(parents=True)

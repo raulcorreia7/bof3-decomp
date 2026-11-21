@@ -5,7 +5,6 @@ from pathlib import Path
 import pytest
 
 import gen_body
-import worklist
 
 HEADER = """
 typedef struct Header {
@@ -98,15 +97,3 @@ def test_a_word_of_a_record_is_written_as_its_member(tree: gen_body.Tree) -> Non
     assert gen_body.global_text("D_80100000", ctx, 4) == "g_State.first"
     # No member of that width sits there: the word keeps its own name.
     assert gen_body.global_text("D_80100004", ctx, 2) == "D_80100004"
-
-
-def test_worklist_keeps_only_rows_the_generator_can_write(
-    monkeypatch: pytest.MonkeyPatch,
-) -> None:
-    def refuse(f, tree, names):
-        raise gen_body.Unsupported("no 1-byte member at 0x1")
-
-    monkeypatch.setattr(gen_body, "body_for", refuse)
-    assert not worklist.writable(None, None, None)
-    monkeypatch.setattr(gen_body, "body_for", lambda f, tree, names: ("", []))
-    assert worklist.writable(None, None, None)

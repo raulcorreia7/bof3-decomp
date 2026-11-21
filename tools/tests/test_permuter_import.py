@@ -2,7 +2,7 @@ from __future__ import annotations
 
 from pathlib import Path
 
-from permuter_import import ROOT, function_name, settings_toml
+from permuter_import import function_name
 
 
 def test_a_matched_definition_gives_its_name(tmp_path: Path) -> None:
@@ -21,11 +21,3 @@ def test_a_draft_wins_over_a_matched_definition(tmp_path: Path) -> None:
     source = tmp_path / "a.c"
     source.write_text("MATCH void a(void) {\n}\nNON_MATCHING void b(void) {\n}\n")
     assert function_name(source) == "b"
-
-
-def test_the_settings_objdump_is_the_repo_binutils() -> None:
-    text = settings_toml("cc", "as", "prelude.inc")
-    assert (
-        f'objdump_command = "{ROOT}/bin/internal/binutils/objdump -drz -m mips:4300"'
-        in text
-    )

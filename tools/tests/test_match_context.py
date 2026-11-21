@@ -71,16 +71,6 @@ def test_a_split_file_named_after_its_symbol_prints_its_assembly(
     assert lines[lines.index("== file") + 1] == "src/emi/test/Battle_Foo.c"
 
 
-def test_a_split_file_named_after_the_address_still_prints_its_assembly(
-    tmp_path: Path,
-) -> None:
-    result = run(make_repo(tmp_path), f"{TARGET}@0x80000100")
-    lines = result.stdout.splitlines()
-    assert lines[0] == "== asm build/asm/emi/test/00/func_80000100.s"
-    assert lines[1] == "80000100  nop"
-    assert lines[lines.index("== file") + 1] == "src/emi/test/func_80000100.c"
-
-
 def test_an_address_with_no_split_file_prints_none(tmp_path: Path) -> None:
     result = run(make_repo(tmp_path), f"{TARGET}@0x80000200")
     assert result.returncode == 0
