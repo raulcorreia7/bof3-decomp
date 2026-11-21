@@ -11,7 +11,7 @@ MATCH void func_801B6BC8(void) {
         g_GameState->u.field.countdown = (delay - 1);
         return;
     }
-    sel = func_801A8D38(&g_GameState->u.field.flags, g_GameState->u.field.index);
+    sel = Actor_RunScript(&g_GameState->u.field.flags, g_GameState->u.field.index);
     if (sel != GAME_NONE) {
         flags = g_GameState->u.field.flags;
         if (flags & 0x8) {
