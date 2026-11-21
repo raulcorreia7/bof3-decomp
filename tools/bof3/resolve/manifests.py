@@ -465,7 +465,7 @@ def _parse_target_manifest(path: Path, target_id: TargetId) -> TargetManifest:
         manifest = TargetManifest(
             id=target_id,
             disc_id=shipped_disc_id(target_id),
-            kind=target_id.type,
+            type=target_id.type,
             source_dir=_manifest_path(facts.source_dir, "source_dir", path),
             binary=_manifest_path(facts.binary, "binary", path),
             splat=f"config/{target_id.value}/splat.yaml",
