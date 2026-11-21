@@ -60,6 +60,15 @@ typedef struct WorldMapPoint {
 
 ASSERT_SIZE(WorldMapPoint, 4);
 
+/* One fishing location row: the location kind a WorldMapPoint carries, then the five fish ids
+ * the location lists on the Fishing_ShowLocation message. */
+typedef struct FishingLocationRow {
+    u8 kind;       /* 0x00 */
+    u8 fish_id[5]; /* 0x01 */
+} FishingLocationRow;
+
+ASSERT_SIZE(FishingLocationRow, 6);
+
 /* One world key row: the key matched against g_GameEntryAreaId and the mode it
  * selects. The area key tables are scanned at a 4-byte stride by func_801F30EC
  * and its per-area twins. */
