@@ -153,16 +153,16 @@ void PlChar_SpawnLinkedActor(s32 spawn_type, s32 spawn_x, s32 spawn_y, s32 code)
             D_801490E4[0] = 0;                                                  \
             if (Item_Add(ITEM_CATEGORY_ITEM, ITEM_BERRIES, 1, 0) & BYTE_MASK) { \
                 SND_PlaySE(EMI_SE_ID(SND_BANK_COMMON, 6));                      \
-                Message_Request(MSG_SYSTEM_FOUND_ITEM);                         \
+                UI_MessageRequest(MSG_SYSTEM_FOUND_ITEM);                       \
             } else {                                                            \
-                Message_Request(MSG_SYSTEM_FOUND_ITEM_NO_ROOM);                 \
+                UI_MessageRequest(MSG_SYSTEM_FOUND_ITEM_NO_ROOM);               \
             }                                                                   \
             g_Task->param.unk_0B = 2;                                           \
         } else if (roll >= 12) {                                                \
             CALLEE(2, x, y, cell & BYTE_MASK);                                  \
             func_801C308C(0);                                                   \
             Char_LoseHP(1, g_Game.current->chr.character_id);                   \
-            Message_Request(MSG_SYSTEM_STUNG_BY_CATERPILLAR);                   \
+            UI_MessageRequest(MSG_SYSTEM_STUNG_BY_CATERPILLAR);                 \
             g_GameStateIndex     = GAME_REQUEST_MESSAGE;                        \
             g_Task->param.unk_0B = 1;                                           \
         }                                                                       \

@@ -350,7 +350,7 @@ MATCH void func_801D1778(void) {
     func_801D3984(x, y, 1);
     y = func_801D4474();
     func_801D4178((s16)(52 * ((*cursor - 1) % 4) + 0x42), y, 0);
-    Menu_DrawCursorSprite((u16)((52 * ((*cursor - 1) % 4) + 0x44) & 0xFFFC), (u16)(y + 4 + (s8)D_801D4E28 * 16), 0);
+    UI_CursorDraw((u16)((52 * ((*cursor - 1) % 4) + 0x44) & 0xFFFC), (u16)(y + 4 + (s8)D_801D4E28 * 16), 0);
 }
 
 /* Moves the request line inside the chosen type and draws its grid. */
@@ -416,7 +416,7 @@ MATCH void func_801D1A94(void) {
     if (D_801D4E1C != 0xFF) {
         y = y + (12 + 16 * (s8)D_801D4E28);
         y = func_801D44E0((s16)(52 * ((*cursor - 1) % 4) + 0x4A), y, D_801D4E1C, 0);
-        Menu_DrawCursorSprite((u16)((52 * ((*cursor - 1) % 4) + 0x4C) & 0xFFFC), (u16)(y + 4 + (s8)D_801D4E2C * 16), 0);
+        UI_CursorDraw((u16)((52 * ((*cursor - 1) % 4) + 0x4C) & 0xFFFC), (u16)(y + 4 + (s8)D_801D4E2C * 16), 0);
     }
 }
 
@@ -455,7 +455,7 @@ MATCH void func_801D1E48(void) {
     if (D_801D4E20 != 0xFF) {
         y = y + (12 + 16 * (s8)D_801D4E2C);
         y = func_801D44E0((s16)(52 * ((*row - 1) % 4) + 0x52), y, D_801D4E20, 0);
-        Menu_DrawCursorSprite((u16)((52 * ((*row - 1) % 4) + 0x54) & 0xFFFC), (u16)(y + 4 + (s8)D_801D4E30 * 16), 0);
+        UI_CursorDraw((u16)((52 * ((*row - 1) % 4) + 0x54) & 0xFFFC), (u16)(y + 4 + (s8)D_801D4E30 * 16), 0);
     }
 }
 
@@ -533,18 +533,18 @@ MATCH void func_801D2110(void) {
     y = func_801D4474();
     if (D_801D4E1C == 0xFF) {
         func_801D4178((s16)(52 * ((*row - 1) % 4) + 0x42), y, 0);
-        Menu_DrawCursorSprite((u16)((52 * ((*row - 1) % 4) + 0x44) & 0xFFFC), (u16)(y + 4 + (s8)D_801D4E28 * 16), 0);
+        UI_CursorDraw((u16)((52 * ((*row - 1) % 4) + 0x44) & 0xFFFC), (u16)(y + 4 + (s8)D_801D4E28 * 16), 0);
     } else {
         func_801D4178((s16)(52 * ((*row - 1) % 4) + 0x42), y, 1);
         y = y + (12 + 16 * (s8)D_801D4E28);
         if (D_801D4E20 == 0xFF) {
             y = func_801D44E0((s16)(52 * ((*row - 1) % 4) + 0x4A), y, D_801D4E1C, 0);
-            Menu_DrawCursorSprite((u16)((52 * ((*row - 1) % 4) + 0x4C) & 0xFFFC), (u16)(y + 4 + (s8)D_801D4E2C * 16), 0);
+            UI_CursorDraw((u16)((52 * ((*row - 1) % 4) + 0x4C) & 0xFFFC), (u16)(y + 4 + (s8)D_801D4E2C * 16), 0);
         } else {
             y = func_801D44E0((s16)(52 * ((*row - 1) % 4) + 0x4A), y, D_801D4E1C, 1);
             y = y + (12 + 16 * (s8)D_801D4E2C);
             y = func_801D44E0((s16)(52 * ((*row - 1) % 4) + 0x52), y, D_801D4E20, 0);
-            Menu_DrawCursorSprite((u16)((52 * ((*row - 1) % 4) + 0x54) & 0xFFFC), (u16)(y + 4 + (s8)D_801D4E30 * 16), 0);
+            UI_CursorDraw((u16)((52 * ((*row - 1) % 4) + 0x54) & 0xFFFC), (u16)(y + 4 + (s8)D_801D4E30 * 16), 0);
         }
     }
 }
@@ -660,10 +660,10 @@ NON_MATCHING void func_801D3038(void) {
     u8    room;
     u8    job;
 
-    UI_DrawWindow(0x14, 0x12, 0x118, 0x13, 0xF2, g_WindowStyle);
-    UI_DrawWindowOutline(0x16, 0x14, 0x113, 0x0F, 0);
+    UI_WindowDraw(0x14, 0x12, 0x118, 0x13, 0xF2, g_WindowStyle);
+    UI_WindowDrawOutline(0x16, 0x14, 0x113, 0x0F, 0);
     if (D_801D4E0C != 0xFFFF) {
-        UI_DrawText(0x1D, 0x15, 0, 0xFF, MESSAGE_TABLE_TEXT(AREA_MESSAGE_TABLE, D_801D4E0C));
+        UI_TextDraw(0x1D, 0x15, 0, 0xFF, MESSAGE_TABLE_TEXT(AREA_MESSAGE_TABLE, D_801D4E0C));
 
         if (D_801D4E0C == 0x3D) {
             if (GetGraphType() != 1) {
@@ -685,9 +685,9 @@ NON_MATCHING void func_801D3038(void) {
         }
     }
 
-    UI_DrawWindow(0x15, 0x2E, 0x114, 0xAA, 0x80, g_WindowStyle);
+    UI_WindowDraw(0x15, 0x2E, 0x114, 0xAA, 0x80, g_WindowStyle);
     func_801D3594(0x14, 0x2D);
-    UI_DrawWindowOutline(0x20, 0x38, 0xA8, 0x10, 1);
+    UI_WindowDrawOutline(0x20, 0x38, 0xA8, 0x10, 1);
 
     count = Fairy_GetJobActive(0);
     for (icon = 0; icon < count; icon++) {
@@ -696,7 +696,7 @@ NON_MATCHING void func_801D3038(void) {
 
     for (group = 0; group < FAIRY_OVERVIEW_GROUP_COUNT; group++) {
         y = group * FAIRY_OVERVIEW_JOB_ROW_STEP;
-        UI_DrawWindowOutline(0xF2, y + 0x36, 0x30, 0x30, 1);
+        UI_WindowDrawOutline(0xF2, y + 0x36, 0x30, 0x30, 1);
         func_801D4030(0xEF, y + 0x33, group + 3);
         active = Fairy_GetJobActive(group + 9);
         for (job = 0; job < active; job++) {
@@ -709,9 +709,9 @@ NON_MATCHING void func_801D3038(void) {
     for (room = 0; room < FAIRY_OVERVIEW_ROOM_COUNT; room++) {
         cell_x = (room % FAIRY_OVERVIEW_ROOM_COLUMNS) * FAIRY_OVERVIEW_COLUMN_STEP;
         cell_y = (room / FAIRY_OVERVIEW_ROOM_COLUMNS) * FAIRY_OVERVIEW_ROW_STEP;
-        UI_DrawWindowOutline(cell_x + 0x20, cell_y + 0x6B, 0x28, 0x28, 1);
+        UI_WindowDrawOutline(cell_x + 0x20, cell_y + 0x6B, 0x28, 0x28, 1);
         if (room >= D_801F286D[g_GameAreaId]) {
-            UI_DrawWindow(cell_x + 0x20, cell_y + 0x6B, 0x28, 0x28, 1, g_WindowStyle);
+            UI_WindowDraw(cell_x + 0x20, cell_y + 0x6B, 0x28, 0x28, 1, g_WindowStyle);
         } else {
             func_801D4030(cell_x + 0x1A, cell_y + 0x5B, 0);
             room_type = g_FairyRooms[room * 8];
@@ -734,12 +734,12 @@ NON_MATCHING void func_801D3038(void) {
     }
 
     func_801D4030(0x30, 0x4C, 2);
-    buffer = g_UiFormatBuffer;
+    buffer = g_UiTextFormatBuffer;
     sprintf((char*)buffer, D_801D0C10, D_801455C2);
-    UI_DrawAsciiString(0x50, 0x4C, 0, buffer);
-    UI_DrawText(0x78, 0x4C, 0, 7, (u8*)D_801D4C18 + 0x18);
+    UI_TextDrawAscii(0x50, 0x4C, 0, buffer);
+    UI_TextDraw(0x78, 0x4C, 0, 7, (u8*)D_801D4C18 + 0x18);
     sprintf((char*)buffer, D_801D0C14, *((u8*)&D_801455C2 + 2));
-    UI_DrawAsciiString(0xB8, 0x4C, 0, buffer);
+    UI_TextDrawAscii(0xB8, 0x4C, 0, buffer);
 }
 #else
 INCLUDE_ASM(func_801D3038);
@@ -1014,14 +1014,14 @@ MATCH void func_801D4178(s16 x, s16 y, u8 mode) {
     height = *count << 4;
     span   = height;
     if (mode == 0) {
-        UI_DrawWindow((u16)(x + 4), (u16)(y + 5), 0x30, span, UI_WINDOW_OPEN_TOP_LEFT | UI_WINDOW_STYLE_DARK, g_WindowStyle);
+        UI_WindowDraw((u16)(x + 4), (u16)(y + 5), 0x30, span, UI_WINDOW_OPEN_TOP_LEFT | UI_WINDOW_STYLE_DARK, g_WindowStyle);
     }
-    UI_DrawWindow((u16)x, (u16)y, 0x50, height | 1, UI_WINDOW_OPEN_TOP_LEFT, g_WindowStyle);
+    UI_WindowDraw((u16)x, (u16)y, 0x50, height | 1, UI_WINDOW_OPEN_TOP_LEFT, g_WindowStyle);
     func_801D42DC((s16)x, (s16)(y - 1), span & 0xF0);
     i = 0;
     if (i < *count) {
         do {
-            UI_DrawText((s16)(x + 8), (s16)(y + 2 + i * 16), (mode * 7) & BYTE_MASK, 8, &D_801D4D34[i * 8]);
+            UI_TextDraw((s16)(x + 8), (s16)(y + 2 + i * 16), (mode * 7) & BYTE_MASK, 8, &D_801D4D34[i * 8]);
             i++;
         } while (i < D_801455C3);
     }
@@ -1088,14 +1088,14 @@ MATCH s16 func_801D44E0(s16 x, s16 y, u8 type, u8 mode) {
         y = 0xD4 - height;
     }
     if (mode == 0) {
-        UI_DrawWindow((u16)(x + 4), (u16)(y + 6), 0x30, span, UI_WINDOW_OPEN_TOP_LEFT | UI_WINDOW_STYLE_DARK, g_WindowStyle);
+        UI_WindowDraw((u16)(x + 4), (u16)(y + 6), 0x30, span, UI_WINDOW_OPEN_TOP_LEFT | UI_WINDOW_STYLE_DARK, g_WindowStyle);
     }
-    UI_DrawWindow((u16)x, (u16)y, 0x50, height | 1, UI_WINDOW_OPEN_TOP_LEFT, g_WindowStyle);
+    UI_WindowDraw((u16)x, (u16)y, 0x50, height | 1, UI_WINDOW_OPEN_TOP_LEFT, g_WindowStyle);
     func_801D42DC((s16)x, (s16)(y - 1), span & 0xF0);
     i = 0;
     if (i < D_801D4DD4[type].count) {
         do {
-            UI_DrawText((s16)(x + 8), (s16)(y + 2 + i * 16), (mode * 7) & BYTE_MASK, 8, &D_801D4D34[0x50 + (D_801D4DD4[type].first + i) * 8]);
+            UI_TextDraw((s16)(x + 8), (s16)(y + 2 + i * 16), (mode * 7) & BYTE_MASK, 8, &D_801D4D34[0x50 + (D_801D4DD4[type].first + i) * 8]);
             i++;
         } while (i < D_801D4DD4[type].count);
     }

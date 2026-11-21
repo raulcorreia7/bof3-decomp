@@ -13,8 +13,8 @@ MATCH void func_801D639C(void) {
     choice = &D_80144953;
     Menu_DrawClutStrip(*choice);
     choice += 0x15;
-    record = (g_CharSlot[g_PartyFieldOrder[g_MenuPanelTasks[MENU_START_PANEL_ITEMS].unk_0C]] * 0xA4) + choice;
-    switch (g_MenuPanelTasks[MENU_START_PANEL_ITEMS].unk_0A) {
+    record = (g_CharSlot[g_PartyFieldOrder[g_UiPanelTasks[MENU_START_PANEL_ITEMS].unk_0C]] * 0xA4) + choice;
+    switch (g_UiPanelTasks[MENU_START_PANEL_ITEMS].unk_0A) {
         case EQUIP_SLOT_WEAPON:
         default:
             group_index = ITEM_CATEGORY_WEAPON;
@@ -41,25 +41,25 @@ MATCH void func_801D639C(void) {
             choice      = record + 0x13;
             break;
     }
-    g_MenuPanelTasks[MENU_START_PANEL_DESCRIPTION].u.message.id = Item_GetDescription(group_index, *choice);
-    one                                                         = 1;
-    g_MenuPanelTasks[MENU_START_PANEL_CURSOR].active            = 1;
-    g_MenuPanelTasks[MENU_START_PANEL_CURSOR].pos.x             = (u16)g_MenuPanelTasks[MENU_START_PANEL_ITEMS].pos.x + 6;
-    g_MenuPanelTasks[MENU_START_PANEL_CURSOR].pos.y             = (u16)(g_MenuPanelTasks[MENU_START_PANEL_ITEMS].pos.y + (g_MenuPanelTasks[MENU_START_PANEL_ITEMS].unk_0A * 0xD + 0x57));
-    input                                                       = INPUT_REPEATED(g_PadStates[0].pressed, (PADLup | PADLdown));
+    g_UiPanelTasks[MENU_START_PANEL_DESCRIPTION].u.message.id = Item_GetDescription(group_index, *choice);
+    one                                                       = 1;
+    g_UiPanelTasks[MENU_START_PANEL_CURSOR].active            = 1;
+    g_UiPanelTasks[MENU_START_PANEL_CURSOR].pos.x             = (u16)g_UiPanelTasks[MENU_START_PANEL_ITEMS].pos.x + 6;
+    g_UiPanelTasks[MENU_START_PANEL_CURSOR].pos.y             = (u16)(g_UiPanelTasks[MENU_START_PANEL_ITEMS].pos.y + (g_UiPanelTasks[MENU_START_PANEL_ITEMS].unk_0A * 0xD + 0x57));
+    input                                                     = INPUT_REPEATED(g_PadStates[0].pressed, (PADLup | PADLdown));
     if (input & PADLdown) {
         SND_PlaySE(EMI_SE_ID(SND_BANK_COMMON, 1));
-        next_slot                                       = g_MenuPanelTasks[MENU_START_PANEL_ITEMS].unk_0A + 1;
-        g_MenuPanelTasks[MENU_START_PANEL_ITEMS].unk_0A = next_slot;
+        next_slot                                     = g_UiPanelTasks[MENU_START_PANEL_ITEMS].unk_0A + 1;
+        g_UiPanelTasks[MENU_START_PANEL_ITEMS].unk_0A = next_slot;
         if ((u32)(next_slot & BYTE_MASK) >= 6U) {
-            g_MenuPanelTasks[MENU_START_PANEL_ITEMS].unk_0A = 1;
+            g_UiPanelTasks[MENU_START_PANEL_ITEMS].unk_0A = 1;
         }
     } else if (input & PADLup) {
         SND_PlaySE(EMI_SE_ID(SND_BANK_COMMON, 1));
-        prev_slot                                       = g_MenuPanelTasks[MENU_START_PANEL_ITEMS].unk_0A - 1;
-        g_MenuPanelTasks[MENU_START_PANEL_ITEMS].unk_0A = prev_slot;
+        prev_slot                                     = g_UiPanelTasks[MENU_START_PANEL_ITEMS].unk_0A - 1;
+        g_UiPanelTasks[MENU_START_PANEL_ITEMS].unk_0A = prev_slot;
         if (!(prev_slot & BYTE_MASK)) {
-            g_MenuPanelTasks[MENU_START_PANEL_ITEMS].unk_0A = 5;
+            g_UiPanelTasks[MENU_START_PANEL_ITEMS].unk_0A = 5;
         }
     }
     slot_flag = func_801D70EC() & BYTE_MASK;
@@ -76,10 +76,10 @@ MATCH void func_801D639C(void) {
     }
     if (g_PadStates[0].pressed & g_InputMasks[MENU_INPUT_CANCEL]) {
         SND_PlaySE(EMI_SE_ID(SND_BANK_COMMON, 6));
-        g_MenuPanelTasks[MENU_START_PANEL_CURSOR_FRAME].unk_0B = 1;
-        g_MenuPanelTasks[MENU_START_PANEL_CURSOR].active       = 0;
-        g_MenuPanelTasks[MENU_START_PANEL_ITEMS].unk_0A        = 0xFF;
-        D_80148654                                             = 0;
+        g_UiPanelTasks[MENU_START_PANEL_CURSOR_FRAME].unk_0B = 1;
+        g_UiPanelTasks[MENU_START_PANEL_CURSOR].active       = 0;
+        g_UiPanelTasks[MENU_START_PANEL_ITEMS].unk_0A        = 0xFF;
+        D_80148654                                           = 0;
         D_80148651 -= 5;
     }
 }

@@ -36,11 +36,11 @@ MATCH void Fishing_DrawRank(s16 x, s16 y) {
         }
     }
 
-    TEXT_Format(g_UiFormatBuffer, D_801D0C8C, value & HALF_MASK);
+    TEXT_Format(g_UiTextFormatBuffer, D_801D0C8C, value & HALF_MASK);
     for (i = 0; i < 5; i++) {
-        if (g_UiFormatBuffer[i] == ' ') {
-            g_UiFormatBuffer[i] = STRING_SPACE;
+        if (g_UiTextFormatBuffer[i] == ' ') {
+            g_UiTextFormatBuffer[i] = STRING_SPACE;
         }
     }
-    UI_DrawText((x + 69), (y + 9), 0, 5, g_UiFormatBuffer);
+    UI_TextDraw((x + 69), (y + 9), 0, 5, g_UiTextFormatBuffer);
 }

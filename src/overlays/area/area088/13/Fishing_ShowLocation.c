@@ -29,7 +29,7 @@ MATCH void Fishing_ShowLocation(void) {
                         break;
                     }
                 }
-                Message_StartAreaMessage((s16)D_801F6090[index][g_ScenarioState.scenario_id]);
+                UI_MessageStartArea((s16)D_801F6090[index][g_ScenarioState.scenario_id]);
             } else {
                 at  = pos;
                 row = (WorldMapPoint*)D_801F591C;
@@ -77,7 +77,7 @@ MATCH void Fishing_ShowLocation(void) {
                         goto next;
                     }
                 }
-                Message_StartAreaMessage((s16)(index + 22));
+                UI_MessageStartArea((s16)(index + 22));
             }
             g_GameStateIndex = GAME_REQUEST_MESSAGE;
             g_SceneEventStep_u8[0]++;

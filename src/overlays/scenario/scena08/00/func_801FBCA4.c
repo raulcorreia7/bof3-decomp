@@ -15,7 +15,7 @@ NON_MATCHING void func_801FBCA4(void) {
             Game_RequestAreaChange(0x2E, 0xF8000, 0x2B0000, 0x80);
             break;
         case 1:
-            UI_SetMode(1);
+            UI_ModeSet(1);
             g_AreaDrawFlags         = 0x1F;
             g_ScenarioState.step_05 = 2;
             break;

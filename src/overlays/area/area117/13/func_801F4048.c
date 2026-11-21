@@ -1,9 +1,9 @@
 #include "area117_13.h"
 
 MATCH void func_801F4048(void) {
-    s8 choice = g_MessageChoice;
+    s8 choice = g_UiMessageChoice;
 
-    g_MessageRequest = D_801F55E4[choice];
+    g_UiMessageRequest = D_801F55E4[choice];
     switch (choice) {
         case 0:
         case 1:

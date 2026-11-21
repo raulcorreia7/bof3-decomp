@@ -14,8 +14,8 @@ MATCH void Game_LoadMenu(void) {
     g_MenuStep.step     = 0u;
     D_80148654          = 3;
     /* FAKE: keep the mode argument in the call delay slot. */
-    FAKE_ORDER_LOCK(UI_SetMode(3));
-    Menu_WaitWindowEffect(1u);
+    FAKE_ORDER_LOCK(UI_ModeSet(3));
+    UI_WindowWaitEffect(1u);
     if ((D_80143F20 == 0x6Eu) && !(SND_TestEffectVoicesBusy(&sep_index, &seq_index) & BYTE_MASK)) {
         SND_StartDecrescendo(sep_index, seq_index, 0x14, 0x10);
     }

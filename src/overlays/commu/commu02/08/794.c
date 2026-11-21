@@ -227,7 +227,7 @@ MATCH void func_801D1A50(void) {
     if ((s8)D_801DB0B4 < 8) {
         func_801D269C(((s8)D_801DB0B4 << 5) + 0x40, 0x6E);
     }
-    Menu_DrawCursorSprite(((D_801DB0B8 * 3) << 4) + 0x5E & 0xFFFE, 0x4A, 0);
+    UI_CursorDraw(((D_801DB0B8 * 3) << 4) + 0x5E & 0xFFFE, 0x4A, 0);
 }
 
 /* Slides the casino card row up and flips the step after four frames. */
@@ -315,10 +315,10 @@ MATCH void func_801D2078(void) {
     if (D_801DB0C4 == 4) {
         if (D_801DB0C0 != 0) {
             D_801DB07C = 0;
-            Message_StartAreaMessage(MSG_AREA175_HIGH_LOW_LOST);
+            UI_MessageStartArea(MSG_AREA175_HIGH_LOW_LOST);
         } else {
             D_801DB07C = (D_801DB07C * D_801DAC34[D_801448F2][(s8)D_801DB0BC - 1] + 50) / 100;
-            Message_StartAreaMessage(MSG_AREA175_HIGH_LOW_WON);
+            UI_MessageStartArea(MSG_AREA175_HIGH_LOW_WON);
         }
         g_GameStateIndex = GAME_REQUEST_MESSAGE;
         D_801F294D += 1;
@@ -332,11 +332,11 @@ MATCH void func_801D21FC(void) {
 
     if (*state != GAME_REQUEST_MESSAGE) {
         if (D_801DB07C >= 10000) {
-            Message_StartAreaMessage(MSG_AREA175_CANNOT_PAY_BET);
+            UI_MessageStartArea(MSG_AREA175_CANNOT_PAY_BET);
             *state = GAME_REQUEST_MESSAGE;
             D_801F294D += 1;
         } else {
-            Message_StartAreaMessage(MSG_AREA175_HIGH_LOW_START);
+            UI_MessageStartArea(MSG_AREA175_HIGH_LOW_START);
             *state     = GAME_REQUEST_MESSAGE;
             D_801F294D = 3;
         }
@@ -350,7 +350,7 @@ MATCH void func_801D22A4(void) {
 
     if (*state != GAME_REQUEST_MESSAGE) {
         Party_AddZenny(D_801DB07C, 0);
-        Message_StartAreaMessage(MSG_AREA175_ASK_PLAY_AGAIN_HIGH_LOW);
+        UI_MessageStartArea(MSG_AREA175_ASK_PLAY_AGAIN_HIGH_LOW);
         D_801DB07C = 0;
         *state     = GAME_REQUEST_MESSAGE;
     }
@@ -385,7 +385,7 @@ MATCH void func_801D2320(void) {
             func_801D32A0(0x6E - D_801DB0C4 * x2_delta, 0x74 - D_801DB0C4 * y2_delta, 0);
         }
         if (D_801DB0C4 == 0) {
-            Message_StartAreaMessage(MSG_AREA175_ASK_HOW_MUCH_BET);
+            UI_MessageStartArea(MSG_AREA175_ASK_HOW_MUCH_BET);
             *state     = GAME_REQUEST_MESSAGE;
             D_801DB07C = 0;
             D_801DB0B4 = 0;
@@ -627,13 +627,13 @@ MATCH void FairyCasino_DrawFrame(s16 x, s16 y) {
 }
 
 MATCH void func_801D3184(s32 x, s32 y) {
-    UI_DrawWindow(x + 1, y + 1, 0x6A, 0x28, UI_WINDOW_OPEN_TOP_LEFT, g_WindowStyle);
+    UI_WindowDraw(x + 1, y + 1, 0x6A, 0x28, UI_WINDOW_OPEN_TOP_LEFT, g_WindowStyle);
     FairyCasino_DrawFrame(x, y);
-    UI_DrawText(x + 0x24, y + 7, 0, 4, D_801DACA8);
-    sprintf(g_UiFormatBuffer, D_801D0C04, g_Zenny);
+    UI_TextDraw(x + 0x24, y + 7, 0, 4, D_801DACA8);
+    sprintf(g_UiTextFormatBuffer, D_801D0C04, g_Zenny);
     y = (s16)(y + 0x18);
-    UI_DrawAsciiString(x + 0x16, y, 0, g_UiFormatBuffer);
-    UI_DrawText(x + 0x4E, y, 0, 1, D_801DACAC);
+    UI_TextDrawAscii(x + 0x16, y, 0, g_UiTextFormatBuffer);
+    UI_TextDraw(x + 0x4E, y, 0, 1, D_801DACAC);
 }
 
 /* Draws the fairy casino value window; mode is the digit width the value is aligned to. */
@@ -643,43 +643,43 @@ MATCH void func_801D32A0(s32 x, s32 y, u8 mode) {
 
     x2 = x;
     y2 = y;
-    UI_DrawWindow(x + 1, y + 1, 0x6A, 0x28, UI_WINDOW_OPEN_TOP_LEFT, g_WindowStyle);
+    UI_WindowDraw(x + 1, y + 1, 0x6A, 0x28, UI_WINDOW_OPEN_TOP_LEFT, g_WindowStyle);
     FairyCasino_DrawFrame(x, y);
-    UI_DrawText(x + 0x2C, y + 7, 0, 3, D_801DACB0);
+    UI_TextDraw(x + 0x2C, y + 7, 0, 3, D_801DACB0);
     switch (mode) {
         case 2:
             if (D_801DB07C < 10) {
-                sprintf(g_UiFormatBuffer, D_801D0C08, D_801DB07C);
-                UI_DrawAsciiString(x + 0x3E, y + 0x18, 0, g_UiFormatBuffer);
+                sprintf(g_UiTextFormatBuffer, D_801D0C08, D_801DB07C);
+                UI_TextDrawAscii(x + 0x3E, y + 0x18, 0, g_UiTextFormatBuffer);
             } else {
-                sprintf(g_UiFormatBuffer, D_801D0C04, D_801DB07C);
-                UI_DrawAsciiString(x + 0x16, y + 0x18, 0, g_UiFormatBuffer);
+                sprintf(g_UiTextFormatBuffer, D_801D0C04, D_801DB07C);
+                UI_TextDrawAscii(x + 0x16, y + 0x18, 0, g_UiTextFormatBuffer);
             }
             break;
         case 3:
             if (D_801DB07C < 100) {
-                sprintf(g_UiFormatBuffer, D_801D0C10, D_801DB07C);
-                UI_DrawAsciiString(x + 0x36, y + 0x18, 0, g_UiFormatBuffer);
+                sprintf(g_UiTextFormatBuffer, D_801D0C10, D_801DB07C);
+                UI_TextDrawAscii(x + 0x36, y + 0x18, 0, g_UiTextFormatBuffer);
             } else {
-                sprintf(g_UiFormatBuffer, D_801D0C04, D_801DB07C);
-                UI_DrawAsciiString(x + 0x16, y + 0x18, 0, g_UiFormatBuffer);
+                sprintf(g_UiTextFormatBuffer, D_801D0C04, D_801DB07C);
+                UI_TextDrawAscii(x + 0x16, y + 0x18, 0, g_UiTextFormatBuffer);
             }
             break;
         case 4:
             if (D_801DB07C < 1000) {
-                sprintf(g_UiFormatBuffer, D_801D0C18, D_801DB07C);
-                UI_DrawAsciiString(x + 0x2E, y + 0x18, 0, g_UiFormatBuffer);
+                sprintf(g_UiTextFormatBuffer, D_801D0C18, D_801DB07C);
+                UI_TextDrawAscii(x + 0x2E, y + 0x18, 0, g_UiTextFormatBuffer);
             } else {
-                sprintf(g_UiFormatBuffer, D_801D0C04, D_801DB07C);
-                UI_DrawAsciiString(x + 0x16, y + 0x18, 0, g_UiFormatBuffer);
+                sprintf(g_UiTextFormatBuffer, D_801D0C04, D_801DB07C);
+                UI_TextDrawAscii(x + 0x16, y + 0x18, 0, g_UiTextFormatBuffer);
             }
             break;
         default:
-            sprintf(g_UiFormatBuffer, D_801D0C04, D_801DB07C);
-            UI_DrawAsciiString(x2 + 0x16, y2 + 0x18, 0, g_UiFormatBuffer);
+            sprintf(g_UiTextFormatBuffer, D_801D0C04, D_801DB07C);
+            UI_TextDrawAscii(x2 + 0x16, y2 + 0x18, 0, g_UiTextFormatBuffer);
             break;
     }
-    UI_DrawText(x2 + 0x4E, y2 + 0x18, 0, 1, D_801DACB4);
+    UI_TextDraw(x2 + 0x4E, y2 + 0x18, 0, 1, D_801DACB4);
 }
 
 MATCH void func_801D3568(void) {
@@ -902,7 +902,7 @@ MATCH void func_801D3E44(void) {
     if (hits != 3) {
         sprintf((char*)g_TextVariables[0], D_801D0C20, hits);
         sprintf((char*)&g_TextVariables[0][0x20], D_801D0C20, blows);
-        Message_StartAreaMessage(MSG_AREA175_SHOW_HITS_BLOWS);
+        UI_MessageStartArea(MSG_AREA175_SHOW_HITS_BLOWS);
         D_801F294D++;
     } else {
         sprintf((char*)g_TextVariables[0], D_801D0C20, (s8)D_801DB0B4 + 1);
@@ -916,7 +916,7 @@ MATCH void func_801D3E44(void) {
             g_TextVariables[0][0x20 + i] = record[i];
         }
         g_TextVariables[0][0x2C] = 0;
-        Message_StartAreaMessage(MSG_AREA175_NUMBERS_WON_PRIZE);
+        UI_MessageStartArea(MSG_AREA175_NUMBERS_WON_PRIZE);
         D_801F294D = 7;
     }
     g_GameStateIndex = GAME_REQUEST_MESSAGE;
@@ -954,7 +954,7 @@ MATCH void func_801D4158(void) {
             } while (i < 3);
             D_801F294D = 1;
         } else {
-            Message_StartAreaMessage(MSG_AREA175_NUMBERS_SHOW_ANSWER);
+            UI_MessageStartArea(MSG_AREA175_NUMBERS_SHOW_ANSWER);
             *state = 2;
             D_801F294D += 1;
         }
@@ -974,7 +974,7 @@ MATCH void func_801D42B4(void) {
 
     state = &g_GameStateIndex;
     if (*state != GAME_REQUEST_MESSAGE) {
-        Message_StartAreaMessage(MSG_AREA175_ASK_PLAY_AGAIN_NUMBERS);
+        UI_MessageStartArea(MSG_AREA175_ASK_PLAY_AGAIN_NUMBERS);
         *state     = GAME_REQUEST_MESSAGE;
         D_801F294D = 8;
     }
@@ -997,7 +997,7 @@ MATCH void func_801D437C(void) {
     if (*state != GAME_REQUEST_MESSAGE) {
         idx = ((s8)D_801DB0B4 * 3 + (s8)D_801DB0B8) * 2 + D_801448F2 * 48;
         if (!(u8)Item_Add(D_801DAD00[0][idx + 1], D_801DAD00[0][idx], 1, 0)) {
-            Message_StartAreaMessage(MSG_AREA175_ITEMS_FULL_DISCARD);
+            UI_MessageStartArea(MSG_AREA175_ITEMS_FULL_DISCARD);
             *state = GAME_REQUEST_MESSAGE;
         }
         D_801F294D = 6;
@@ -1145,7 +1145,7 @@ NON_MATCHING void func_801D4AE0(s16 x, s16 y, u8 flag) {
     left_x   = x + 6;
     middle_x = x + 0x2F;
     right_x  = x + 0x43;
-    UI_DrawWindow(x, y, 0x52, 0x7A, 0, g_WindowStyle);
+    UI_WindowDraw(x, y, 0x52, 0x7A, 0, g_WindowStyle);
     func_801D4910(x, y);
     dy = 7;
     gy = 9;
@@ -1154,38 +1154,38 @@ NON_MATCHING void func_801D4AE0(s16 x, s16 y, u8 flag) {
         sel = D_801DB0B4;
         if (i == sel) {
             if (flag == 0) {
-                sprintf(g_UiFormatBuffer, D_801DAD60);
+                sprintf(g_UiTextFormatBuffer, D_801DAD60);
                 ry = y + dy;
-                UI_DrawAsciiString(left_x, ry, 0, g_UiFormatBuffer);
-                sprintf(g_UiFormatBuffer, D_801DAD64);
-                UI_DrawAsciiString(middle_x, ry, UI_TEXT_HIGHLIGHT, g_UiFormatBuffer);
+                UI_TextDrawAscii(left_x, ry, 0, g_UiTextFormatBuffer);
+                sprintf(g_UiTextFormatBuffer, D_801DAD64);
+                UI_TextDrawAscii(middle_x, ry, UI_TEXT_HIGHLIGHT, g_UiTextFormatBuffer);
             } else {
-                sprintf(g_UiFormatBuffer, D_801D0C24, D_801DB080[k], D_801DB080[k + 1], D_801DB080[k + 2]);
+                sprintf(g_UiTextFormatBuffer, D_801D0C24, D_801DB080[k], D_801DB080[k + 1], D_801DB080[k + 2]);
                 ry = y + dy;
-                UI_DrawAsciiString(left_x, ry, 0, g_UiFormatBuffer);
-                sprintf(g_UiFormatBuffer, D_801D0C20, D_801DB080[k + 3]);
-                UI_DrawAsciiString(middle_x, ry, UI_TEXT_HIGHLIGHT, g_UiFormatBuffer);
-                sprintf(g_UiFormatBuffer, D_801D0C20, D_801DB080[k + 4]);
+                UI_TextDrawAscii(left_x, ry, 0, g_UiTextFormatBuffer);
+                sprintf(g_UiTextFormatBuffer, D_801D0C20, D_801DB080[k + 3]);
+                UI_TextDrawAscii(middle_x, ry, UI_TEXT_HIGHLIGHT, g_UiTextFormatBuffer);
+                sprintf(g_UiTextFormatBuffer, D_801D0C20, D_801DB080[k + 4]);
             }
-            UI_DrawAsciiString(right_x, ry, 1, g_UiFormatBuffer);
-            UI_DrawGlyphString(x + 0x39, y + gy, 0, D_801D0C2C);
+            UI_TextDrawAscii(right_x, ry, 1, g_UiTextFormatBuffer);
+            UI_TextDrawGlyphString(x + 0x39, y + gy, 0, D_801D0C2C);
         } else if (i < sel) {
-            sprintf(g_UiFormatBuffer, D_801D0C24, D_801DB080[k], D_801DB080[k + 1], D_801DB080[k + 2]);
+            sprintf(g_UiTextFormatBuffer, D_801D0C24, D_801DB080[k], D_801DB080[k + 1], D_801DB080[k + 2]);
             ry = y + dy;
-            UI_DrawAsciiString(left_x, ry, 0, g_UiFormatBuffer);
-            sprintf(g_UiFormatBuffer, D_801D0C20, D_801DB080[k + 3]);
-            UI_DrawAsciiString(middle_x, ry, UI_TEXT_HIGHLIGHT, g_UiFormatBuffer);
-            sprintf(g_UiFormatBuffer, D_801D0C20, D_801DB080[k + 4]);
-            UI_DrawAsciiString(right_x, ry, 1, g_UiFormatBuffer);
-            UI_DrawGlyphString(x + 0x39, y + gy, 0, D_801D0C2C);
+            UI_TextDrawAscii(left_x, ry, 0, g_UiTextFormatBuffer);
+            sprintf(g_UiTextFormatBuffer, D_801D0C20, D_801DB080[k + 3]);
+            UI_TextDrawAscii(middle_x, ry, UI_TEXT_HIGHLIGHT, g_UiTextFormatBuffer);
+            sprintf(g_UiTextFormatBuffer, D_801D0C20, D_801DB080[k + 4]);
+            UI_TextDrawAscii(right_x, ry, 1, g_UiTextFormatBuffer);
+            UI_TextDrawGlyphString(x + 0x39, y + gy, 0, D_801D0C2C);
         } else {
-            sprintf(g_UiFormatBuffer, D_801DAD60);
+            sprintf(g_UiTextFormatBuffer, D_801DAD60);
             ry = y + dy;
-            UI_DrawAsciiString(left_x, ry, UI_TEXT_DIM, g_UiFormatBuffer);
-            sprintf(g_UiFormatBuffer, D_801DAD64);
-            UI_DrawAsciiString(middle_x, ry, UI_TEXT_DIM, g_UiFormatBuffer);
-            UI_DrawAsciiString(right_x, ry, UI_TEXT_DIM, g_UiFormatBuffer);
-            UI_DrawGlyphString(x + 0x39, y + gy, UI_TEXT_DIM, D_801D0C2C);
+            UI_TextDrawAscii(left_x, ry, UI_TEXT_DIM, g_UiTextFormatBuffer);
+            sprintf(g_UiTextFormatBuffer, D_801DAD64);
+            UI_TextDrawAscii(middle_x, ry, UI_TEXT_DIM, g_UiTextFormatBuffer);
+            UI_TextDrawAscii(right_x, ry, UI_TEXT_DIM, g_UiTextFormatBuffer);
+            UI_TextDrawGlyphString(x + 0x39, y + gy, UI_TEXT_DIM, D_801D0C2C);
         }
         gy += 14;
         dy += 14;
@@ -1258,7 +1258,7 @@ MATCH void func_801D5070(void) {
 }
 
 MATCH void func_801D50AC(void) {
-    UI_SetMode(UI_MODE_FADE_OUT);
+    UI_ModeSet(UI_MODE_FADE_OUT);
     D_801F294D += 1;
 }
 
@@ -1344,7 +1344,7 @@ MATCH void func_801D5788(void) {
 MATCH void func_801D5924(void) {
     func_801D5B2C();
     if (g_PadStates[0].pressed != 0) {
-        UI_SetMode(0U);
+        UI_ModeSet(0U);
         D_801F294D += 1;
     }
 }
@@ -1363,7 +1363,7 @@ MATCH void func_801D5978(void) {
         }
         SND_PlayBGM(D_801DB0CC, BGM_CUE_LEVEL_DEFAULT, BGM_CUE_SHAPE_DEFAULT);
         g_AreaDrawFlags = 0x1F;
-        UI_SetMode(1U);
+        UI_ModeSet(1U);
         D_801F294D += 1;
         return;
     }
@@ -1399,15 +1399,15 @@ MATCH void func_801D5B2C(void) {
     u8  i;
     s32 j;
 
-    g_UiFormatBuffer[0] = 0x2A;
-    i                   = 1;
-    src                 = (u8*)AREA_MESSAGE_TABLE + MEM(u16, (u32)AREA_MESSAGE_TABLE + (256 + D_801DB0AD) * 2);
+    g_UiTextFormatBuffer[0] = 0x2A;
+    i                       = 1;
+    src                     = (u8*)AREA_MESSAGE_TABLE + MEM(u16, (u32)AREA_MESSAGE_TABLE + (256 + D_801DB0AD) * 2);
     while (*src != STRING_END) {
-        g_UiFormatBuffer[i] = *src;
+        g_UiTextFormatBuffer[i] = *src;
         i++;
         if ((u8)(*src - STRING_SKIP) < 2) {
             src++;
-            g_UiFormatBuffer[i] = *src;
+            g_UiTextFormatBuffer[i] = *src;
             i++;
         }
         src++;
@@ -1415,27 +1415,27 @@ MATCH void func_801D5B2C(void) {
     if (D_801DB0AE != 0xFF) {
         src = (u8*)AREA_MESSAGE_TABLE + MEM(u16, (u32)AREA_MESSAGE_TABLE + (256 + D_801DB0AE) * 2);
         while (*src != STRING_END) {
-            g_UiFormatBuffer[i] = *src;
+            g_UiTextFormatBuffer[i] = *src;
             i++;
             if ((u8)(*src - STRING_SKIP) < 2) {
                 src++;
-                g_UiFormatBuffer[i] = *src;
+                g_UiTextFormatBuffer[i] = *src;
                 i++;
             }
             src++;
         }
     }
-    g_UiFormatBuffer[i] = 0x2B;
+    g_UiTextFormatBuffer[i] = 0x2B;
     i++;
-    g_UiFormatBuffer[i] = STRING_SPACE;
+    g_UiTextFormatBuffer[i] = STRING_SPACE;
     i++;
     for (j = 0; j < 5; j++) {
-        g_UiFormatBuffer[i] = D_801457E8[D_801F2948[5]][j];
+        g_UiTextFormatBuffer[i] = D_801457E8[D_801F2948[5]][j];
         i++;
     }
-    g_UiFormatBuffer[i] = STRING_END;
-    UI_DrawText(0x32, 0x1E, 0, TEXT_LENGTH_MAX, g_UiFormatBuffer);
-    UI_DrawText(0x32, 0x42, 0, TEXT_LENGTH_MAX, MESSAGE_TABLE_TEXT(AREA_MESSAGE_TABLE, 227 + (s8)D_801DB0B4));
+    g_UiTextFormatBuffer[i] = STRING_END;
+    UI_TextDraw(0x32, 0x1E, 0, TEXT_LENGTH_MAX, g_UiTextFormatBuffer);
+    UI_TextDraw(0x32, 0x42, 0, TEXT_LENGTH_MAX, MESSAGE_TABLE_TEXT(AREA_MESSAGE_TABLE, 227 + (s8)D_801DB0B4));
 }
 
 MATCH void func_801D5D5C(void) {
@@ -1447,7 +1447,7 @@ MATCH void Fairy_StartEventMessage(void) {
     u8* state = &g_GameStateIndex;
 
     if (*state != GAME_REQUEST_MESSAGE) {
-        Message_StartAreaMessage(MSG_AREA175_ASK_NICKNAME_WHO);
+        UI_MessageStartArea(MSG_AREA175_ASK_NICKNAME_WHO);
         *state = GAME_REQUEST_MESSAGE;
         D_801F294C += 1;
     }
@@ -1543,7 +1543,7 @@ MATCH void func_801D6124(void) {
     if (D_801DB0C8 != 0xFFFF) {
         func_801D812C();
         if (D_801DB0C8 == 0xF1) {
-            Menu_DrawCursorSprite(((s32)D_801DB0B8 * 32 + 0xF4) & 0xFFFC, 0x15, 0);
+            UI_CursorDraw(((s32)D_801DB0B8 * 32 + 0xF4) & 0xFFFC, 0x15, 0);
         }
         func_801D8058(0x4A, 0x64);
         func_801D88A4(((s8)D_801DB0B4 * 8) + 0x55, 0x6D, 1);
@@ -1833,7 +1833,7 @@ MATCH void func_801D708C(void) {
     if (D_801DB0C8 != 0xFFFF) {
         func_801D812C();
         if (D_801DB0C8 == 0xF1) {
-            Menu_DrawCursorSprite(((s32)D_801DB0B8 * 32 + 0xF4) & 0xFFFC, 0x15, 0);
+            UI_CursorDraw(((s32)D_801DB0B8 * 32 + 0xF4) & 0xFFFC, 0x15, 0);
         }
     }
     func_801D9210();
@@ -2057,7 +2057,7 @@ MATCH void Fairy_StartEndMessage(void) {
     u8* state = &g_GameStateIndex;
 
     if (*state != GAME_REQUEST_MESSAGE && D_801F294D == 0) {
-        Message_StartAreaMessage(MSG_AREA175_ASK_KEEP_NICKNAMING);
+        UI_MessageStartArea(MSG_AREA175_ASK_KEEP_NICKNAMING);
         *state = GAME_REQUEST_MESSAGE;
     }
 }
@@ -2110,7 +2110,7 @@ NON_MATCHING void func_801D8058(s32 left, s32 top) {
     y      = top;
     base_x = x;
     i      = 0;
-    UI_DrawWindow(base_x, y, 172, 26, UI_WINDOW_OPEN_TOP_LEFT, g_WindowStyle);
+    UI_WindowDraw(base_x, y, 172, 26, UI_WINDOW_OPEN_TOP_LEFT, g_WindowStyle);
     grid_x = x << 16;
     func_801D7EF0(grid_x >> 16, y);
     count = Fairy_CountFairies() & BYTE_MASK;
@@ -2135,7 +2135,7 @@ MATCH void func_801D812C(void) {
     Menu_DrawHeaderBar(MENU_HEADER_X, 0x10, MENU_HEADER_WIDTH, MENU_HEADER_HEIGHT, g_WindowStyle);
     index = D_801DB0C8;
     if (index != 0xFFFF) {
-        UI_DrawText(0x1B, 0x13, 0, TEXT_LENGTH_MAX, MESSAGE_TABLE_TEXT(AREA_MESSAGE_TABLE, index));
+        UI_TextDraw(0x1B, 0x13, 0, TEXT_LENGTH_MAX, MESSAGE_TABLE_TEXT(AREA_MESSAGE_TABLE, index));
     }
 }
 
@@ -2362,7 +2362,7 @@ NON_MATCHING void Menu_DrawHeaderBar(s32 x, s32 y, s32 width, s32 height, u8 win
     setWH(window, 256, 256);
     SetDrawMode((DR_MODE*)g_GfxPrimCursor, 0, 1, getTPage(TPAGE_DEPTH_4BIT, TPAGE_ABR_HALF, FONT_TPAGE_X, FONT_TPAGE_Y), window);
     GFX_AddPrim(GFX_LAYER_UI, sizeof(DR_MODE));
-    UI_DrawWindowFrame(inner, y + 2, width - 4, height - 4, 0);
+    UI_WindowDrawFrame(inner, y + 2, width - 4, height - 4, 0);
 }
 #else
 INCLUDE_ASM(Menu_DrawHeaderBar);
@@ -2381,7 +2381,7 @@ NON_MATCHING void func_801D90D8(s32 x, s32 y, s32 character, s32 frame_mode) {
 
     window_style = &g_WindowStyle;
     window_top   = (u16)(y + 3);
-    UI_DrawWindow((u16)(x + 3), window_top, 0x7D, 0x2D, 0, *window_style);
+    UI_WindowDraw((u16)(x + 3), window_top, 0x7D, 0x2D, 0, *window_style);
     character = (u8)character;
     index     = ((((character << 2) + character) << 3) + character) << 2;
     Menu_DrawPortrait((u16)(x + 6), (u16)(y + 2), ((Character*)((u8*)g_Characters + index))->character_id, 0);
@@ -2393,7 +2393,7 @@ NON_MATCHING void func_801D90D8(s32 x, s32 y, s32 character, s32 frame_mode) {
     } else {
         text = D_801DB080;
     }
-    UI_DrawText((s16)(x + 0x3B), (s16)(y + 0x19), 0, 5, text);
+    UI_TextDraw((s16)(x + 0x3B), (s16)(y + 0x19), 0, 5, text);
     func_801AF390((s16)x_copy, (s16)y_copy, g_MenuPortraitAtlas + 0x24, 0);
 }
 #else
@@ -2515,7 +2515,7 @@ NON_MATCHING void func_801D94D0(s32 page, s32 left, s32 top, s32 cursor_col_arg,
     /* FAKE: retail reserves eight bytes outside the active locals. */
     FAKE_STACK_PADS(u8, 8);
     memcpy(tags, D_801D0C3C, 20);
-    UI_DrawWindow(left, top, 0x110, 123, 0, g_WindowStyle);
+    UI_WindowDraw(left, top, 0x110, 123, 0, g_WindowStyle);
     cell = D_801DAAAC + ((u8)page * 96);
     y    = top + 6;
     for (row = 0; row < 8; row++) {
@@ -2525,23 +2525,23 @@ NON_MATCHING void func_801D94D0(s32 page, s32 left, s32 top, s32 cursor_col_arg,
                 code = *cell;
                 switch (code) {
                     case 1:
-                        UI_DrawText((s16)x, (s16)y, 4, 5, tags);
+                        UI_TextDraw((s16)x, (s16)y, 4, 5, tags);
                         break;
                     case 2:
-                        UI_DrawText((s16)x, (s16)y, 4, 5, tags + 5);
+                        UI_TextDraw((s16)x, (s16)y, 4, 5, tags + 5);
                         break;
                     case 3:
-                        UI_DrawText((s16)x, (s16)y, UI_TEXT_HIGHLIGHT, 5, tags + 10);
+                        UI_TextDraw((s16)x, (s16)y, UI_TEXT_HIGHLIGHT, 5, tags + 10);
                         break;
                     case 4:
-                        UI_DrawText((s16)x, (s16)y, UI_TEXT_HIGHLIGHT, 5, tags + 15);
+                        UI_TextDraw((s16)x, (s16)y, UI_TEXT_HIGHLIGHT, 5, tags + 15);
                         break;
                     default:
-                        UI_DrawText((s16)x, (s16)y, 0, 1, cell);
+                        UI_TextDraw((s16)x, (s16)y, 0, 1, cell);
                         break;
                 }
             } else {
-                UI_DrawText((s16)x, (s16)y, 0, 1, cell);
+                UI_TextDraw((s16)x, (s16)y, 0, 1, cell);
             }
             x += (col == 4 || col == 9) ? 28 : 20;
             cell++;
@@ -2561,7 +2561,7 @@ NON_MATCHING void func_801D94D0(s32 page, s32 left, s32 top, s32 cursor_col_arg,
         cursor_x -= 20;
     }
     cursor_y = top + 8 + cursor_row * 14;
-    Menu_DrawCursorSprite(cursor_x, cursor_y, 0);
+    UI_CursorDraw(cursor_x, cursor_y, 0);
 }
 #else
 INCLUDE_ASM(func_801D94D0);
@@ -2579,14 +2579,14 @@ NON_MATCHING void func_801D97C8(s32 unused, s32 x, s32 y) {
 
     left   = x;
     labels = D_801DB038;
-    UI_DrawWindow((u16)(x + 3), (u16)(y + 3), 0x4D, 0x2F, 0, g_WindowStyle);
+    UI_WindowDraw((u16)(x + 3), (u16)(y + 3), 0x4D, 0x2F, 0, g_WindowStyle);
     for (row = 0; row < 5; row++) {
-        UI_DrawTextString((s16)(x + 0x2A), (s16)(y + (row * 8) + 6), 0, MENU_LABEL_LENGTH, labels[row]);
+        UI_TextDrawString((s16)(x + 0x2A), (s16)(y + (row * 8) + 6), 0, MENU_LABEL_LENGTH, labels[row]);
     }
     for (row = 0; row < 5; row++) {
         for (column = 0; column < 3; column++) {
             dots = D_801DB054;
-            UI_DrawTextString((s16)(left + (column * 4) + 0x1A), (s16)(y + (row * 8) + 6), 0, 1, dots);
+            UI_TextDrawString((s16)(left + (column * 4) + 0x1A), (s16)(y + (row * 8) + 6), 0, 1, dots);
         }
     }
 
@@ -2713,12 +2713,12 @@ NON_MATCHING void func_801D9B80(s32 x, s32 y, s32 width, s32 height) {
     SetDrawMode((DR_MODE*)g_GfxPrimCursor, 0, 0, getTPage(TPAGE_DEPTH_4BIT, TPAGE_ABR_HALF, 832, 256), &window);
     GFX_AddPrim(GFX_LAYER_UI, sizeof(DR_MODE));
 
-    UI_DrawSprite((s16)x, (s16)y, 0x23, UI_SPRITE_ALT_PAGE);
+    UI_SpriteDraw((s16)x, (s16)y, 0x23, UI_SPRITE_ALT_PAGE);
     columns = (u8)width - 2;
-    UI_DrawSprite((s16)(x + columns * 8), (s16)y, 0x26, UI_SPRITE_ALT_PAGE);
+    UI_SpriteDraw((s16)(x + columns * 8), (s16)y, 0x26, UI_SPRITE_ALT_PAGE);
     rows = (u8)height - 2;
-    UI_DrawSprite((s16)x, (s16)(y + rows * 8), 0x27, UI_SPRITE_ALT_PAGE);
-    UI_DrawSprite((s16)(x + columns * 8), (s16)(y + rows * 8), 0x29, UI_SPRITE_ALT_PAGE);
+    UI_SpriteDraw((s16)x, (s16)(y + rows * 8), 0x27, UI_SPRITE_ALT_PAGE);
+    UI_SpriteDraw((s16)(x + columns * 8), (s16)(y + rows * 8), 0x29, UI_SPRITE_ALT_PAGE);
 }
 #else
 INCLUDE_ASM(func_801D9B80);

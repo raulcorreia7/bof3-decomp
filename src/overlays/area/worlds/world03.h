@@ -2,7 +2,7 @@
 #define WORLD03_FAMILY_H
 
 #include "overlays/area/area.h"
-#include "overlays/area/shared/Message_ShowParty.h"
+#include "overlays/area/shared/UI_MessageShowParty.h"
 #include "overlays/area/shared/WorldAreaRequest.h"
 
 /* The work origin offset, step and threshold this overlay advances. */

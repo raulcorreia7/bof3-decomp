@@ -24,7 +24,7 @@ segments:
       - [0xC7C, c, func_801F387C]
       - [0xD0C, c, func_801F390C]
       - [0xE38, c, func_801F3A38]
-      - [0xEC0, c, Message_Clear]
+      - [0xEC0, c, UI_MessageClear]
       - [0xF04, c, func_801F3B04]
       - [0x1128, c, func_801F3D28]
       - [0x1558, c, func_801F4158]

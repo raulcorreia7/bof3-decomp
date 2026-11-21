@@ -51,7 +51,7 @@ NON_MATCHING void func_801D8690(s32 x, s32 y, s32 slot) {
     temp_v1_139 = g_BattleEnemyBattlers[var_s4].unk_7F;
     var_s7      = var_s1;
     if (temp_v1_139 == 1) {
-        func_801D9E9C(var_s3, (s16)(var_s1 + 0xA), (u16)g_MenuCurrentPanel->unk_0B, (u16)g_MenuCurrentPanel->flags, (s8)(s32)temp_v1_139);
+        func_801D9E9C(var_s3, (s16)(var_s1 + 0xA), (u16)g_UiPanelCurrent->unk_0B, (u16)g_UiPanelCurrent->flags, (s8)(s32)temp_v1_139);
         var_a0_154 = var_fp + 4;
     } else {
         func_801D94D4((s32)(s16)(var_s2 + 0x24), (u32)(s16)(var_s1 + 0xC), 0, 0xFFFF);
@@ -60,7 +60,7 @@ NON_MATCHING void func_801D8690(s32 x, s32 y, s32 slot) {
     var_s1 = var_s7 + 3;
     var_s1 <<= 0x10;
     var_s1 = var_s1 >> 0x10;
-    UI_DrawTextString(var_a0_154, (s16)var_s1, 0, ENEMY_NAME_LENGTH, g_BattleEnemyBattlers[var_s4].name);
+    UI_TextDrawString(var_a0_154, (s16)var_s1, 0, ENEMY_NAME_LENGTH, g_BattleEnemyBattlers[var_s4].name);
     var_s0 = var_fp + 2;
     var_s0 <<= 0x10;
     var_s0      = var_s0 >> 0x10;

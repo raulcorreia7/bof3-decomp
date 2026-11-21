@@ -6,7 +6,7 @@ NON_MATCHING void func_801D1A90(void) {
     u8             cursor;
     MenuPanelTask* panel;
 
-    panel = &g_MenuPanelTasks[9];
+    panel = &g_UiPanelTasks[9];
     /* FAKE: the panel store stays above the pad-state read, as retail orders them. */
     FAKE_BARRIER();
     panel->active = 1;

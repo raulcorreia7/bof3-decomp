@@ -92,12 +92,12 @@ MATCH void func_801F75EC(void) {
     char* fmt;
     u8    value;
 
-    buffer = (char*)g_UiFormatBuffer;
+    buffer = (char*)g_UiTextFormatBuffer;
     Menu_DrawHeaderBar(138, 30, 45, 20, 1u);
     value = D_801FD288.bytes[0];
     fmt   = D_801F6C04;
     TEXT_Format(buffer, fmt, value);
-    UI_DrawAsciiString(0x95, 0x22, 0, buffer);
+    UI_TextDrawAscii(0x95, 0x22, 0, buffer);
 }
 
 #ifdef NON_MATCHING
@@ -234,7 +234,7 @@ NON_MATCHING void Menu_DrawHeaderBar(s32 x, s32 y, s32 width, s32 height, u8 win
     setWH(window, 256, 256);
     SetDrawMode((DR_MODE*)g_GfxPrimCursor, 0, 1, getTPage(TPAGE_DEPTH_4BIT, TPAGE_ABR_HALF, FONT_TPAGE_X, FONT_TPAGE_Y), window);
     GFX_AddPrim(GFX_LAYER_UI, sizeof(DR_MODE));
-    UI_DrawWindowFrame(inner, y + 2, width - 4, height - 4, 0);
+    UI_WindowDrawFrame(inner, y + 2, width - 4, height - 4, 0);
 }
 #else
 INCLUDE_ASM(Menu_DrawHeaderBar);

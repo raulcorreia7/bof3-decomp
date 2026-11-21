@@ -47,7 +47,7 @@ MATCH void SYS_StartFrontend(void) {
         *dst = word;
         dst += 1;
     }
-    Menu_ResetPanelTasks();
+    UI_PanelResetTasks();
     GFX_ResetPaletteFades();
     GFX_FreeAllPaletteSlots();
     g_AreaDrawFlags = AREA_DRAW_ALL_FLAGS;

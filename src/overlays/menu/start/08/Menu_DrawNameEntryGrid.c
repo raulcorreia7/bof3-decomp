@@ -15,7 +15,7 @@ MATCH void Menu_DrawNameEntryGrid(u8 page, s16 grid_x, s32 grid_y) {
 
     memcpy(&labels, &D_801D0F00, sizeof(labels));
     base_y = grid_y;
-    UI_DrawWindow(grid_x & HALF_MASK, base_y, 272, 123, 0, g_WindowStyle);
+    UI_WindowDraw(grid_x & HALF_MASK, base_y, 272, 123, 0, g_WindowStyle);
     cell = D_801ECDBC + (page & BYTE_MASK) * 0x60;
     y    = base_y + 6;
     for (row = 0; row < 8; row++) {
@@ -24,20 +24,20 @@ MATCH void Menu_DrawNameEntryGrid(u8 page, s16 grid_x, s32 grid_y) {
             if (col == 10 && row >= 3) {
                 switch (*cell) {
                     case NAME_ENTRY_NEXT:
-                        UI_DrawText(x, y, 4, 5, labels.next);
+                        UI_TextDraw(x, y, 4, 5, labels.next);
                         break;
                     case NAME_ENTRY_BACK:
-                        UI_DrawText(x, y, 4, 5, labels.back);
+                        UI_TextDraw(x, y, 4, 5, labels.back);
                         break;
                     case NAME_ENTRY_QUIT:
-                        UI_DrawText(x, y, UI_TEXT_HIGHLIGHT, 5, labels.quit);
+                        UI_TextDraw(x, y, UI_TEXT_HIGHLIGHT, 5, labels.quit);
                         break;
                     case NAME_ENTRY_START:
-                        UI_DrawText(x, y, UI_TEXT_HIGHLIGHT, 5, labels.start);
+                        UI_TextDraw(x, y, UI_TEXT_HIGHLIGHT, 5, labels.start);
                         break;
                 }
             } else if (col != 11 || row < 3) {
-                UI_DrawText(x, y, 0, 1, cell);
+                UI_TextDraw(x, y, 0, 1, cell);
             }
             if (col == 4 || col == 9) {
                 x += 0x1C;
@@ -60,5 +60,5 @@ MATCH void Menu_DrawNameEntryGrid(u8 page, s16 grid_x, s32 grid_y) {
         x -= 0x14;
     }
     cursor_x = x;
-    Menu_DrawCursorSprite(cursor_x, y & HALF_MASK, 0);
+    UI_CursorDraw(cursor_x, y & HALF_MASK, 0);
 }

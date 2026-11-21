@@ -8,7 +8,7 @@ MATCH void Battle_ReloadFieldText(void) {
     func_801DD8AC(0);
     func_801DD8AC(1);
     func_801DD8AC(2);
-    Menu_ResetPanelTasks();
+    UI_PanelResetTasks();
     EMI_LoadArchive(EMI_SLOT_AFLDKWA);
     *state = *state + 1;
 }

@@ -109,7 +109,7 @@ MATCH void func_801F83C8(void) {
             if ((SND_IsXAIdle() & 0xFF) == 0) {
                 break;
             }
-            Message_StartAreaMessage(MSG_SCENA11_040);
+            UI_MessageStartArea(MSG_SCENA11_040);
             g_GameStateIndex        = 2;
             g_ScenarioState.step_05 = 0xC;
             break;
@@ -168,11 +168,11 @@ MATCH void func_801F83C8(void) {
             if ((Item_Add(ITEM_CATEGORY_ITEM, ITEM_VINEGAR, 4, 0) & 0xFF) == 0) {
                 strncpy((char*)g_TextVariables[0], (char*)Item_GetRecord(ITEM_CATEGORY_ITEM, ITEM_VINEGAR), 12);
                 D_801490E4[0] = 0;
-                Message_StartAreaMessage(MSG_SCENA11_051);
+                UI_MessageStartArea(MSG_SCENA11_051);
                 g_GameStateIndex        = 2;
                 g_ScenarioState.step_05 = 0x14;
             } else {
-                Message_StartAreaMessage(MSG_SCENA11_050);
+                UI_MessageStartArea(MSG_SCENA11_050);
                 g_GameStateIndex = 2;
                 SND_PlaySE(0x106);
                 g_ScenarioState.step_05 = 0x14;

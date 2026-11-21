@@ -3,7 +3,7 @@
 
 #include "menu/gameui.h"
 #include "overlays/area/area.h"
-#include "overlays/area/shared/Message_ShowParty.h"
+#include "overlays/area/shared/UI_MessageShowParty.h"
 #include "overlays/area/shared/WorldAreaRequest.h"
 
 /* The variant byte the cancel path stores in the game-overlay state. */
@@ -51,7 +51,7 @@ void Area_Update();
  * image's byte. */
 static inline void World04_StoreAnswerChoice(u8* target) {
     MESSAGE_REQUEST_CLEAR();
-    *target = g_MessageChoice;
+    *target = g_UiMessageChoice;
 }
 
 /* A trigger rectangle in tile units. */

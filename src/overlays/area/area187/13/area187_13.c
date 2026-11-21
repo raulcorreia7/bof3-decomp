@@ -2,7 +2,7 @@
 #include "area187_13.h"
 
 #include "overlays/area/shared/func_801F2C04.h"
-#include "overlays/area/shared/Message_ClearOnCancel.h"
+#include "overlays/area/shared/UI_MessageClearOnCancel.h"
 #include "func_801F2C90.c"
 #include "shared/Scene_ClearEventState.h"
 #include "func_801F2CDC.c"

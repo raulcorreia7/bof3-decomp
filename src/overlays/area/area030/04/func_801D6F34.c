@@ -55,10 +55,10 @@ MATCH void func_801D6F34(void) {
             }
         }
     }
-    TEXT_Format(g_UiFormatBuffer, D_801D0C04, FISHING_STATE->saved_index);
+    TEXT_Format(g_UiTextFormatBuffer, D_801D0C04, FISHING_STATE->saved_index);
     if (g_FrameCount & 0x4) {
-        UI_DrawAsciiString(172, 176, UI_TEXT_HIGHLIGHT, g_UiFormatBuffer);
+        UI_TextDrawAscii(172, 176, UI_TEXT_HIGHLIGHT, g_UiTextFormatBuffer);
     } else {
-        UI_DrawAsciiString(172, 176, 0, g_UiFormatBuffer);
+        UI_TextDrawAscii(172, 176, 0, g_UiTextFormatBuffer);
     }
 }

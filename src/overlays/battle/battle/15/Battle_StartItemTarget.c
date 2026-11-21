@@ -4,7 +4,7 @@
 MATCH void Battle_StartItemTarget(void) {
     u32 flags;
 
-    flags = Item_GetFlags(g_MenuPanelTasks[16].unk_0A, D_801C893C[g_MenuPanelTasks[16].unk_0A][g_MenuPanelTasks[16].unk_0C]);
+    flags = Item_GetFlags(g_UiPanelTasks[16].unk_0A, D_801C893C[g_UiPanelTasks[16].unk_0A][g_UiPanelTasks[16].unk_0C]);
     if ((flags & ITEM_SHOW_NAME) != 0u) {
         g_BattleActorTurn->command.target = Battle_TargetNext(3);
         g_Battle.ui_mode                  = 1u;

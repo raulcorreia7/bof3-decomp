@@ -9,7 +9,7 @@ MATCH void func_801E4E9C(MenuPanelTask* panel_task) {
     volatile u8* slot;
 
     base = &g_WindowStyle;
-    UI_DrawWindow((u16)(panel_task->pos.x + 3), (u16)(panel_task->pos.y + 3), 114, 88, 0, base[0]);
+    UI_WindowDraw((u16)(panel_task->pos.x + 3), (u16)(panel_task->pos.y + 3), 114, 88, 0, base[0]);
     col  = 0;
     row  = 0;
     i    = 0;

@@ -14,24 +14,24 @@
         FAKE_STACK_PADS(u8, 24);                                                                                                                                               \
                                                                                                                                                                                \
         base = &g_WindowStyle;                                                                                                                                                 \
-        UI_DrawWindow((u16)(x + 3), (u16)(y + 3), MENU_EXPERIENCE_WINDOW_WIDTH, MENU_EXPERIENCE_WINDOW_HEIGHT, 0, base[0]);                                                    \
+        UI_WindowDraw((u16)(x + 3), (u16)(y + 3), MENU_EXPERIENCE_WINDOW_WIDTH, MENU_EXPERIENCE_WINDOW_HEIGHT, 0, base[0]);                                                    \
         index_off = index * PARTY_RECORD_STRIDE;                                                                                                                               \
         base16    = base + CHARACTER_BLOCK_RECORDS;                                                                                                                            \
         entryp    = base16 + index_off;                                                                                                                                        \
         character = (Character*)entryp;                                                                                                                                        \
         pos_x     = x;                                                                                                                                                         \
         tx        = pos_x + MENU_EXPERIENCE_NEXT_X;                                                                                                                            \
-        UI_DrawText((flag == 0) ? pos_x + MENU_EXPERIENCE_EXP_X : tx, (s16)(y + MENU_EXPERIENCE_CAPTION_Y), 0, TEXT_LENGTH_MAX, (flag == 0) ? (exp_caption) : (next_caption)); \
+        UI_TextDraw((flag == 0) ? pos_x + MENU_EXPERIENCE_EXP_X : tx, (s16)(y + MENU_EXPERIENCE_CAPTION_Y), 0, TEXT_LENGTH_MAX, (flag == 0) ? (exp_caption) : (next_caption)); \
         if (flag == 0) {                                                                                                                                                       \
             value = character->exp;                                                                                                                                            \
         } else {                                                                                                                                                               \
             value = Char_GetExpForLevel(index, (character->level + 1) & BYTE_MASK);                                                                                            \
         }                                                                                                                                                                      \
         if (value != -1) {                                                                                                                                                     \
-            TEXT_Format(g_UiFormatBuffer, g_MenuExperienceFormat, value);                                                                                                      \
+            TEXT_Format(g_UiTextFormatBuffer, g_MenuExperienceFormat, value);                                                                                                  \
         } else {                                                                                                                                                               \
-            TEXT_FormatLiteral(g_UiFormatBuffer, g_MenuExperienceBlank);                                                                                                       \
+            TEXT_FormatLiteral(g_UiTextFormatBuffer, g_MenuExperienceBlank);                                                                                                   \
         }                                                                                                                                                                      \
-        UI_DrawAsciiString((s16)(x + MENU_EXPERIENCE_VALUE_X), (s16)(y + MENU_EXPERIENCE_VALUE_Y), 0, g_UiFormatBuffer);                                                       \
-        UI_DrawSpriteRun(x, y, (sprites), UI_SPRITE_ALT_PAGE);                                                                                                                 \
+        UI_TextDrawAscii((s16)(x + MENU_EXPERIENCE_VALUE_X), (s16)(y + MENU_EXPERIENCE_VALUE_Y), 0, g_UiTextFormatBuffer);                                                     \
+        UI_SpriteDrawRun(x, y, (sprites), UI_SPRITE_ALT_PAGE);                                                                                                                 \
     }

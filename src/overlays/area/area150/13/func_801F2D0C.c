@@ -32,9 +32,9 @@ MATCH void func_801F2D0C(void) {
         case 20:
             if (g_GameStateIndex == GAME_REQUEST_IDLE) {
                 if (SYS_TestFlag(D_80144EF8, 3)) {
-                    Message_StartAreaMessage(MSG_AREA150_037);
+                    UI_MessageStartArea(MSG_AREA150_037);
                 } else {
-                    Message_StartAreaMessage(MSG_AREA150_032);
+                    UI_MessageStartArea(MSG_AREA150_032);
                 }
                 g_GameStateIndex       = GAME_REQUEST_MESSAGE;
                 g_SceneEventState.step = 21;
@@ -51,7 +51,7 @@ MATCH void func_801F2D0C(void) {
             if (SND_IsXAIdle() & BYTE_MASK) {
                 g_ScriptVars[0] = 1;
                 SND_StartBGM(0x95, 100, 0x10);
-                UI_SetMode(UI_MODE_FADE_IN);
+                UI_ModeSet(UI_MODE_FADE_IN);
                 g_AreaDrawFlags = AREA_DRAW_ALL_FLAGS;
                 SYS_ClearFlag(D_80144EF8, 3);
                 SYS_ClearFlag(D_80144EF8 + 0x30, 0x8A);

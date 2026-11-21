@@ -1,5 +1,5 @@
 ["emi/world03/area121/14"]
-Message_ClearOnCancel = { addr = 0x801F2C08, type = "func", source = "Sets g_SceneEventStep to 2 when the menu selection is idle, and clears the message request." }
+UI_MessageClearOnCancel = { addr = 0x801F2C08, type = "func", source = "Sets g_SceneEventStep to 2 when the menu selection is idle, and clears the message request." }
 Area_InitSceneActor = { addr = 0x801F3078, type = "func", source = "Sets active_flags to 0x80, looks up scene record 0x158, sets byte 0x29 to 5, clears byte 0x2A and the tint bytes and sets header.mode (byte 0x01) to 1." }
 Area_WidenActor = { addr = 0x801F323C, type = "func", source = "Centres the actor and moves its scale at +0x40 up by 0x2000 each frame while counting byte 0x09 down; at 0 clears byte 0x48 and sets header.mode (byte 0x01) to 3." }
 Area_RequestRestartOnEntryChange = { addr = 0x801F32B8, type = "func", source = "Outside game entry state 1, when the step byte 0x0B no longer matches option_flags, an area change is requested, or a step-1 actor no longer matches g_GameEntryAreaId, arms the restart: byte 0x48 to 2, timer to 8, header.mode to 4." }

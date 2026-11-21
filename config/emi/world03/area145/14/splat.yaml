@@ -33,7 +33,7 @@ segments:
       - [0x1318, c, func_801F3F18]
       - [0x13D8, c, func_801F3FD8]
       - [0x1408, c, Actor_RunAreaStep]
-      - [0x143C, c, Message_ShowParty]
+      - [0x143C, c, UI_MessageShowParty]
       - [0x1500, c, func_801F4100]
       - [0x15C4, c, func_801F41C4]
       - [0x1688, c, func_801F4288]

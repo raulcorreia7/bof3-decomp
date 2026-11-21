@@ -31,7 +31,7 @@ typedef struct SaveData {
     /* 0x030 */ u8              unk_30[0x40];
     /* 0x070 */ u16             checksum;     /* zeroed while the payload is summed, then holds the sum */
     /* 0x072 */ u8              unk_72[8];    /* holds g_SndMono at 0x79, read through volatile views */
-    /* 0x07A */ u8              window_style; /* the last argument of UI_DrawWindow */
+    /* 0x07A */ u8              window_style; /* the last argument of UI_WindowDraw */
     /* 0x07B */ u8              unk_7B[0x15];
     /* 0x090 */ Character       characters[CHAR_INDEX_COUNT];
     /* 0x5B0 */ u8              scene_flag_words[160]; /* eight bytes per scenario */

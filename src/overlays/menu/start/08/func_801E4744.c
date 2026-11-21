@@ -162,7 +162,7 @@ NON_MATCHING void func_801E4744(void) {
             for (slot = 0; slot < 5; slot++) {
                 g_Characters[0].name[slot] = s_CampMenuState[slot];
             }
-            UI_SetMode(UI_MODE_FADE_OUT);
+            UI_ModeSet(UI_MODE_FADE_OUT);
             g_MenuStartStep += 1;
         }
     }

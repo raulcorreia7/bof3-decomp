@@ -66,7 +66,7 @@
         if ((SND_IsXAIdle() & BYTE_MASK) != 0) {     \
             count         = (cue_counter);           \
             (cue_counter) = count + 1;               \
-            UI_SetMode(UI_MODE_FADE_IN);             \
+            UI_ModeSet(UI_MODE_FADE_IN);             \
         }                                            \
     } while (0)
 
@@ -432,7 +432,7 @@ extern u8                 D_801E6264[];
 void Menu_DrawFormationPreview(u16 x, u16 y, u8 index, u8 blink, s32 angle);
 /* func_801AF494 */
 /* func_801AF930; sig-kept: the retail callers narrow x and y to s16 and pass the ability record. */
-void UI_DrawAbilityRow(s16 x, s16 y, u8 shade, u8 element, volatile Ability* ability, u8 cost, u8 flags);
+void UI_ListDrawAbilityRow(s16 x, s16 y, u8 shade, u8 element, volatile Ability* ability, u8 cost, u8 flags);
 void Menu_DispatchScreen(void);
 /* func_801D0EDC */
 void Menu_SelectScreen(void);
@@ -717,7 +717,7 @@ static inline void MenuTickCountdown(void) {
 
     *p = val;
     if (val == 0) {
-        Menu_ResetPanelTasks();
+        UI_PanelResetTasks();
         g_MenuStep.step = 1;
     }
 }

@@ -236,7 +236,7 @@ MATCH void func_801F9F0C(void) {
                 break;
             }
             SND_FadeOutSequence(0, 1, 4, 0x1E);
-            UI_SetMode(0xD);
+            UI_ModeSet(0xD);
             g_ScenarioState.step_05 = 0x14;
             break;
         case 20:

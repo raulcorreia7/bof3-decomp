@@ -11,7 +11,7 @@ MATCH void func_801FABD8(void) {
 
     switch (g_ScenarioState.step_05) {
         case 0:
-            Message_StartAreaMessage(MSG_SCENA07_017);
+            UI_MessageStartArea(MSG_SCENA07_017);
             g_GameStateIndex        = GAME_REQUEST_MESSAGE;
             g_ScenarioState.step_05 = 1;
             break;
@@ -24,7 +24,7 @@ MATCH void func_801FABD8(void) {
             break;
         case 3:
             if (g_GameStateIndex != GAME_REQUEST_MESSAGE) {
-                UI_SetMode(0);
+                UI_ModeSet(0);
                 if (g_SndBGMId != 0xFF) {
                     SND_FadeOutBGM(g_SndBGMId, 0x64, 8);
                 }
@@ -51,7 +51,7 @@ MATCH void func_801FABD8(void) {
         case 6:
             if (g_UiWindowEffectBusy == 0) {
                 g_AreaDrawFlags = 0x1F;
-                UI_SetMode(1);
+                UI_ModeSet(1);
                 g_ScenarioState.step_05 = 7;
             }
             break;
@@ -140,7 +140,7 @@ MATCH void func_801FABD8(void) {
             break;
         case 15:
             if (g_ScriptVars[0] == 0xD) {
-                UI_SetMode(0);
+                UI_ModeSet(0);
                 g_ScenarioState.step_05 = 0x10;
             }
             break;
@@ -153,7 +153,7 @@ MATCH void func_801FABD8(void) {
             break;
         case 17:
             if (g_ScriptVars[0] == 0x12) {
-                UI_SetMode(1);
+                UI_ModeSet(1);
                 g_AreaDrawFlags          = 0x1F;
                 g_AreaCameraAngle.vx     = -0x2AA;
                 g_AreaCameraAngle.vz     = 0x200;
@@ -180,13 +180,13 @@ MATCH void func_801FABD8(void) {
             }
             break;
         case 21:
-            UI_SetMode(0);
+            UI_ModeSet(0);
             g_ScenarioState.step_05 = 0x16;
             break;
         case 22:
             if (g_UiWindowEffectBusy == 0) {
                 g_ScriptVars[0]++;
-                UI_SetMode(1);
+                UI_ModeSet(1);
                 g_ScenarioState.step_05 = 0x19;
             }
             break;

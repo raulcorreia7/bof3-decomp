@@ -2,7 +2,7 @@
 #include "area131_13.h"
 
 #include "func_801F2C04.c"
-#include "overlays/area/shared/Message_ClearOnCancel.h"
+#include "overlays/area/shared/UI_MessageClearOnCancel.h"
 #include "func_801F2C40.c"
 #include "func_801F2CE0.c"
 #include "overlays/area/shared/Area_SubCameraOffsetY10.h"

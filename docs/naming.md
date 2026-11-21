@@ -48,7 +48,7 @@ void Item_Add(u16 item_id, u8 item_count);
 The tag is the owner: the engine module or the game part that holds the code. System tags are
 capitals, as SDL writes them; game tags are words. Every symbol carries one.
 
-**Caller test.** A tag names a layer (`SYS_ GFX_ SND_ EMI_ CD_ INPUT_ Actor_ Script_ Menu_ Message_
+**Caller test.** A tag names a layer (`SYS_ GFX_ SND_ EMI_ CD_ INPUT_ Actor_ Script_ Menu_
 UI_`) only when several parts call the code. Code one part calls takes that part's tag, wherever its
 file sits. A compound tag (`FairyCasino_`) names a part inside a part. The tag is the module the function is linked in and its header, checked against the callers; a subject in the arguments (party, actor, area) never decides it.
 
@@ -73,9 +73,12 @@ Engine modules (`src/engine/<module>`):
 | game loop and modes             | `Game_`              | `state/mode`, `state/progress`     |
 | scene host                      | `Scene_`             | `state/scene`                      |
 | field to battle hand-over       | `Game_`              | `state/battle`                     |
-| text, fonts, windows            | `UI_`                | `ui/text`                          |
-| message window and answers      | `Message_`           | `ui/message`, `ui/message_answers` |
-| menu panels and kit             | `Menu_`              | `ui/menu`                          |
+| text, fonts, glyphs             | `UI_`                | `ui/text`                          |
+| windows, frames, boxes, lines   | `UI_`                | `ui/window`                        |
+| sprites, icons, cursors         | `UI_`                | `ui/sprite`                        |
+| message window and answers      | `UI_`                | `ui/message`, `ui/message_answers` |
+| panels and their tasks          | `UI_`                | `ui/panel`, `ui/menu`              |
+| list rows and scrollbars        | `UI_`                | `ui/list`                          |
 | memory card, save slots         | `SAVE_`              | `overlays/menu/shared`             |
 | unnamed files                   | none                 | `slus`, `game/00`                  |
 
@@ -83,13 +86,13 @@ Game parts (`src/overlays`, `src/logo`):
 
 | Part                    | Tag                                                                                                 | Folder                                   |
 | ----------------------- | --------------------------------------------------------------------------------------------------- | ---------------------------------------- |
-| area load, scene, setup | `Area_`                                                                                             | `overlays/area`                          |
+| area load, scene, setup | `Area_ UI_`                                                                                         | `overlays/area`                          |
 | battle                  | `Battle_`                                                                                           | `overlays/battle`                        |
 | battle magic            | `BMagic_ Effect_`                                                                                   | `overlays/bmagic`                        |
 | boss                    | `Boss_`                                                                                             | `overlays/boss`                          |
 | player character        | `PlChar_`                                                                                           | `overlays/plchar`                        |
 | scenario                | `Scene_ Party_`                                                                                     | `overlays/scenario`                      |
-| menu screens            | `Menu_ Shop_ Master_ Shisu_`                                                                        | `overlays/menu`                          |
+| menu screens            | `Menu_ UI_ Shop_ Master_ Shisu_`                                                                    | `overlays/menu`                          |
 | title                   | `Title_`                                                                                            | `overlays/title`                         |
 | logo                    | `Logo_`                                                                                             | `logo`                                   |
 | fishing pond            | `Fishing_`                                                                                          | `overlays/area`                          |
@@ -105,8 +108,10 @@ magic, is a container tag.
 A subject with its own family of functions is a tag; a new tag goes into the tables above in the same
 change.
 
+The first word after an engine tag is the subsystem, the folder under the module, and the function says its verb after it: `UI_TextDraw`, `UI_WindowDrawFrame`, `UI_SpriteDraw`, `UI_IconDraw`, `UI_CursorDraw`, `UI_MessageStartArea`, `UI_MessageAnswerSelect`, `UI_PanelOpenTask`, `UI_ListDrawItemRow`, `UI_ModeSet`. A word the subsystem repeats is dropped.
+
 UI parts: shared text, fonts, glyphs and windows are `UI_`; the message window, its panels, answer
-lists and area messages are `Message_`; panels, cursors, portraits and icons are `Menu_`, and a widget
+lists and area messages are `UI_Message*` and `UI_MessageAnswer*`; panels, cursors, sprites and icons are `UI_Panel*`, `UI_Cursor*`, `UI_Sprite*` and `UI_Icon*`; `Menu_` is only the menu screens' own code, and a widget
 copied into another overlay keeps its name; battle panels and numbers are `Battle_`; a screen's own UI
 and the numbers, gauges and rows it draws take the screen tag (`Shop_`, `Master_`, `Fairy_`, `SAVE_`,
 `Menu_` for the start menu, `Title_` for the title).
@@ -176,13 +181,13 @@ A function name takes one of two orders:
    acted on: `Party_AddMember`, `Battle_FindTarget`, `Shop_Buy`.
 2. **Object first**, for a family: `Tag_ObjectVerb`. When three or more functions under one tag act
    on the same object, the object comes first, so the family sorts together, as PsyQ writes
-   `SsSeqOpen`, `SsSeqPlay` and `SsSeqClose`: `Message_WindowOpen`, `Message_WindowClose`,
-   `Message_WindowDraw`.
+   `SsSeqOpen`, `SsSeqPlay` and `SsSeqClose`: `UI_MessageWindowOpen`, `UI_MessageWindowClose`,
+   `UI_MessageWindowDraw`.
 
 Count the family across the whole tree. Two functions are not a family. When a third member gets a
 name, rename the other two in the same change. A qualifier goes last when two functions differ
 (`Battle_TargetNext`, `Battle_TargetPrev`). The subject is the tag, never a word glued to the verb
-(`Message_SelectAnswer`). One verb per concept: the [vocabulary](#vocabulary) fixes each verb's meaning. `NextStep` advances a step counter and `SetState` sets a state; `Play`, `Stop`, `Wait` and `Apply` mean what they say.
+(`UI_MessageAnswerSelect`). One verb per concept: the [vocabulary](#vocabulary) fixes each verb's meaning. `NextStep` advances a step counter and `SetState` sets a state; `Play`, `Stop`, `Wait` and `Apply` mean what they say.
 
 A function the game calls through a table or a hook takes a plain name for what it does, never a
 `Cb`, `Callback` or `Handler` suffix: in PsyQ, `Callback` names the function that registers one. One
@@ -193,15 +198,15 @@ function pointer the engine calls at an event is `g_<Tag><Event>Hook`.
 ```c
 void Battle_RunAttack(Battler* battler);
 u8   Party_FindMember(u8 character_id);   /* GAME_NONE when absent */
-void Message_WindowOpen(u8 window_id);    /* one of the Message_Window family */
-s32  Message_WindowIsOpen(u8 window_id);
+void UI_MessageWindowOpen(u8 window_id);    /* one of the UI_MessageWindow family */
+s32  UI_MessageWindowIsOpen(u8 window_id);
 ```
 
 **Don't**
 
 ```c
-void Message_OpenAnswerMenu(void);   /* no tag; subject before the verb */
-void Message_OpenWindow(u8 window_id); /* a family member in verb-first order */
+void MessageOpenAnswer(void);   /* no tag */
+void UI_MessageOpenWindow(u8 window_id); /* a family member in verb-first order */
 void Battle_AttackCb(Battler* battler);
 void Battle_AttackHandler(Battler* battler);
 u8   Party_GetMember(u8 character_id);    /* Get never fails; this searches */
@@ -506,7 +511,7 @@ old notes still finds it. The rename that names the address writes the line.
 
 ```c
 /* func_801F2C04 */
-MATCH void Message_OpenAnswerMenu(void) {
+MATCH void UI_MessageAnswerOpen(void) {
     WORLD_ARM_ANSWER_MESSAGE_IDLE(2, 4);
 }
 

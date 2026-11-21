@@ -131,7 +131,7 @@ MATCH void func_801F9184(void) {
             if (g_ScriptVars[0] != 0x14) {
                 break;
             }
-            UI_SetMode(0xD);
+            UI_ModeSet(0xD);
             g_ScenarioState.step_05 = 0xA;
             break;
 
@@ -144,7 +144,7 @@ MATCH void func_801F9184(void) {
             break;
 
         case 11:
-            Message_StartAreaMessage(MSG_SCENA11_004);
+            UI_MessageStartArea(MSG_SCENA11_004);
             g_GameStateIndex        = 2;
             g_ScenarioState.step_05 = 0xC;
             break;
@@ -218,7 +218,7 @@ MATCH void func_801F9184(void) {
                 break;
             }
             *claimed = 0;
-            Message_StartAreaMessage(MSG_SCENA11_026);
+            UI_MessageStartArea(MSG_SCENA11_026);
             g_GameStateIndex        = 2;
             g_ScenarioState.step_05 = 0x10;
             break;
@@ -228,7 +228,7 @@ MATCH void func_801F9184(void) {
             if (g_GameStateIndex == 2) {
                 break;
             }
-            UI_SetMode(0xD);
+            UI_ModeSet(0xD);
             g_ScenarioState.step_05 = 0x11;
             break;
 
@@ -407,7 +407,7 @@ MATCH void func_801F9184(void) {
             if (g_ScriptVars[0] != 2) {
                 break;
             }
-            UI_SetMode(4);
+            UI_ModeSet(4);
             g_ScenarioState.step_05 = 0x24;
             break;
 

@@ -24,8 +24,8 @@
 
 /* The resident game overlay's functions the other images call, in address order. */
 
-/* UI_DrawWindow frame_flags: the low nibble is the frame style, bits 4-7 cut one corner each.
- * UI_DrawWindowOutline uses its own corner order (see UI_WINDOW_OUTLINE_* below). */
+/* UI_WindowDraw frame_flags: the low nibble is the frame style, bits 4-7 cut one corner each.
+ * UI_WindowDrawOutline uses its own corner order (see UI_WINDOW_OUTLINE_* below). */
 #define UI_WINDOW_OPEN_TOP_LEFT             0x80
 #define UI_WINDOW_OPEN_BOTTOM_LEFT          0x20
 #define UI_WINDOW_OPEN_TOP_RIGHT            0x40
@@ -36,7 +36,7 @@
 #define UI_WINDOW_STYLE_DARK                1
 #define UI_WINDOW_STYLE_TRANSLUCENT         2
 
-/* UI_DrawWindowOutline flags: bit 0 blends the edge pieces, bits 4-7 cut the corners in this order. */
+/* UI_WindowDrawOutline flags: bit 0 blends the edge pieces, bits 4-7 cut the corners in this order. */
 #define UI_WINDOW_OUTLINE_OPEN_TOP_LEFT     0x10
 #define UI_WINDOW_OUTLINE_OPEN_TOP_RIGHT    0x20
 #define UI_WINDOW_OUTLINE_OPEN_BOTTOM_LEFT  0x40
@@ -44,7 +44,7 @@
 #define UI_WINDOW_OUTLINE_OPEN_ALL          0xF0
 #define UI_WINDOW_OUTLINE_BLEND             0x01
 
-/* UI_DrawSprite and UI_DrawSpriteRun flags: bit 0 picks the second sprite page, bit 1 the second CLUT row. */
+/* UI_SpriteDraw and UI_SpriteDrawRun flags: bit 0 picks the second sprite page, bit 1 the second CLUT row. */
 #define UI_SPRITE_ALT_PAGE                  0x01
 #define UI_SPRITE_ALT_CLUT                  0x02
 
@@ -79,7 +79,7 @@ u8   func_801ABD68(s32 pos_x, s32 pos_y, s32 step_count, void* deltas);
 /* func_801AC1DC */
 void func_801AC1DC(s32* out, u8 selector);
 /* func_801AE214 */
-void func_801AE214(s32 line_x, s32 line_y, s32 line_length, s32 line_mode);
+void UI_CursorDrawName(s32 line_x, s32 line_y, s32 line_length, s32 line_mode);
 /* func_801AF390 */
 s32  func_801AF390(s16 x, s16 y, u8* table, s32 flags);
 /* func_801AF5B0 */

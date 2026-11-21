@@ -40,10 +40,10 @@ MATCH void Battle_InitEquipChangePanel(void) {
     /* FAKE: block boundary keeps the second store base-relative off the pinned base. */
     FAKE_ORDER_FENCE();
     *latch             = one;
-    /* D_80148574 stays an address symbol here: a g_MenuPanelTasks[16] view changes the code. */
-    saved_x            = g_MenuPanelTasks[16].pos.x;
+    /* D_80148574 stays an address symbol here: a g_UiPanelTasks[16] view changes the code. */
+    saved_x            = g_UiPanelTasks[16].pos.x;
     D_80148597         = one;
-    saved_y            = g_MenuPanelTasks[16].pos.y;
+    saved_y            = g_UiPanelTasks[16].pos.y;
     D_80148596         = 4;
     D_80148595         = eight;
     D_801485A0         = 0;

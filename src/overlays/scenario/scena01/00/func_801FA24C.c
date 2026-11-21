@@ -101,7 +101,7 @@ NON_MATCHING void func_801FA24C(void) {
             g_ScenarioState.timer_06 = timer - 1;
             if (timer == 0) {
                 SND_PlaySE(0x204);
-                Message_StartAreaMessage(MSG_SCENA01_019);
+                UI_MessageStartArea(MSG_SCENA01_019);
                 g_GameStateIndex        = 2;
                 g_ScenarioState.step_05 = 17;
             }
@@ -109,7 +109,7 @@ NON_MATCHING void func_801FA24C(void) {
         }
         case 17:
             if (g_GameStateIndex != GAME_REQUEST_MESSAGE) {
-                UI_SetMode(0xE);
+                UI_ModeSet(0xE);
                 g_AreaDrawFlags         = 0x1F;
                 g_ScenarioState.step_05 = 18;
             }

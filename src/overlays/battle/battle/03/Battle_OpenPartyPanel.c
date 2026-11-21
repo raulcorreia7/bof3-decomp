@@ -4,7 +4,7 @@
 MATCH void Battle_OpenPartyPanel(u8 index) {
     u8 count;
 
-    Menu_OpenPanelTask(1, 3);
+    UI_PanelOpenTask(1, 3);
     count      = g_Battle.party_count;
     D_80148356 = 0;
     D_80148357 = index;

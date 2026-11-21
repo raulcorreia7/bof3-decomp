@@ -24,7 +24,7 @@ MATCH void func_801D1000(void) {
         slot[0x74] &= 0xDF;
         g_GameFlags &= ~GAME_FLAG_SCRIPT_ACTIVE;
     }
-    Menu_ResetPanelTasks();
+    UI_PanelResetTasks();
     /* Pointer form: retail keeps one base register across the counter load and
      * the store, which a symbol access would re-materialize. */
     counter = &g_GameEntrySubstate;

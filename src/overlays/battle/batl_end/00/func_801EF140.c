@@ -16,7 +16,7 @@ NON_MATCHING void func_801EF140(void) {
     D_801463B2 = g_Characters[g_Battle.cursor.gene.column].level;
     D_801463B4 = g_Characters[g_Battle.cursor.gene.column].level + func_801EF928(g_Battle.cursor.gene.column, 0);
     sprintf((char*)D_801490F8, D_801EEC04, D_801463B4);
-    g_BattleEventSlots[0].payload = Message_GetText(7);
+    g_BattleEventSlots[0].payload = UI_MessageGetText(7);
     for (i = 1; i < 7; i++) {
         if (func_801EF928(g_Battle.cursor.gene.column, (u8)i) != 0) {
             height += 0x10;
@@ -28,7 +28,7 @@ NON_MATCHING void func_801EF140(void) {
     if (g_LevelGrowth[g_Battle.cursor.gene.column][D_801463B2].extra_ability != 0) {
         height += 0x10;
     }
-    Menu_OpenPanelTask(1, 4);
+    UI_PanelOpenTask(1, 4);
     D_80148356 = 0;
     D_80148357 = 0;
     D_8014835D = height + 4;

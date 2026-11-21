@@ -399,7 +399,7 @@ extern u8                                s_BattleAbilityLine1FlagRun[12];
 /* D_800B6DA8 */
 extern u8                                s_BattleAbilityLine2FlagRun[12];
 /* The panel slots' palette and sprite blocks; func_800B4220 hands their
- * addresses to func_8014F800 and UI_DrawSpriteRun. */
+ * addresses to func_8014F800 and UI_SpriteDrawRun. */
 /* D_800B6DCC */
 extern u8                                s_BattlePanelSelectedMarker[6];
 /* D_800B6DD4 */
@@ -991,7 +991,7 @@ void        Menu_DrawEquipChoiceWindow(MenuPanelTask* task);
 void        func_800B4220(s16 x, s16 y, u8 selected);
 /* func_801AF494 */
 /* func_801AF930 */
-void        UI_DrawAbilityRow(s32 x, s32 y, u8 shade, u8 element, u8* name, u8 cost, u8 flags);
+void        UI_ListDrawAbilityRow(s32 x, s32 y, u8 shade, u8 element, u8* name, u8 cost, u8 flags);
 /* func_801DB5CC */
 u8          Battle_TargetNext(s32 start_slot);
 /* func_801DB6F4 */
@@ -1218,10 +1218,10 @@ static inline void BattleRunHandlerQuad(s32 offset) {
 
 /* Seed the panel task after the queued slot grid is filled. */
 static inline void Battle_SeedQueuedSlotPanel(u8 unk14, u8 unk08) {
-    g_MenuCurrentPanel->u.addr.unk_14 = unk14;
-    g_MenuCurrentPanel->unk_08        = unk08;
-    g_MenuCurrentPanel->unk_09        = 0x11;
-    g_MenuCurrentPanel->state         = (u8)(g_MenuCurrentPanel->state + 1);
+    g_UiPanelCurrent->u.addr.unk_14 = unk14;
+    g_UiPanelCurrent->unk_08        = unk08;
+    g_UiPanelCurrent->unk_09        = 0x11;
+    g_UiPanelCurrent->state         = (u8)(g_UiPanelCurrent->state + 1);
 }
 
 u8 func_800A40D0(u8 battler_index);
@@ -1235,7 +1235,7 @@ u8           Battle_SelectStepRule(void);
 
 /* Add the queued text message and advance the battle UI state. The member declares temp. */
 #define BATTLE_ADD_MESSAGE_AND_STEP() \
-    temp = Message_GetText(0x4000);   \
+    temp = UI_MessageGetText(0x4000); \
     Battle_AddMessage(2, 0xFF, temp); \
     *(u8*)&g_Battle.ui_mode += 1;
 

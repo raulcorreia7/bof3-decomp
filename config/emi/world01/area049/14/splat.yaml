@@ -9,7 +9,7 @@ segments:
     subsegments:
       - [0x0, .data, g_AreaModuleId]
       - [0x4, c, func_801F2C04]
-      - [0x54, c, Message_SetAnswerMessage]
+      - [0x54, c, UI_MessageAnswerSet]
       - [0x80, c, func_801F2C80]
       - [0xC0, c, func_801F2CC0]
       - [0x100, c, func_801F2D00]

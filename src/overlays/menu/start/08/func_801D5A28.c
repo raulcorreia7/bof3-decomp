@@ -10,14 +10,14 @@ MATCH void func_801D5A28(void) {
     MenuPanelTask* task;
     u8*            group;
 
-    task  = &g_MenuPanelTasks[MENU_START_PANEL_CURSOR];
-    group = &g_MenuPanelTasks[MENU_START_PANEL_ITEMS].unk_0A;
+    task  = &g_UiPanelTasks[MENU_START_PANEL_CURSOR];
+    group = &g_UiPanelTasks[MENU_START_PANEL_ITEMS].unk_0A;
     Menu_DrawClutStrip(D_80144953);
     task->active = 1;
-    task->pos.x  = g_MenuPanelTasks[MENU_START_PANEL_ITEMS].pos.x + 6;
-    task->pos.y  = g_MenuPanelTasks[MENU_START_PANEL_ITEMS].pos.y + (*group * 0xD + 0x57);
+    task->pos.x  = g_UiPanelTasks[MENU_START_PANEL_ITEMS].pos.x + 6;
+    task->pos.y  = g_UiPanelTasks[MENU_START_PANEL_ITEMS].pos.y + (*group * 0xD + 0x57);
     buttons      = INPUT_REPEATED(g_PadStates[0].pressed, INPUT_DIRECTIONAL);
-    task         = &g_MenuPanelTasks[MENU_START_PANEL_ITEMS];
+    task         = &g_UiPanelTasks[MENU_START_PANEL_ITEMS];
     task->flags  = 1;
     task->unk_0B = 0xFF;
     if (buttons & PADLdown) {
@@ -78,7 +78,7 @@ MATCH void func_801D5A28(void) {
             choice      = &record->equip.accessories[1];
             break;
     }
-    g_MenuPanelTasks[MENU_START_PANEL_DESCRIPTION].u.message.id = Item_GetDescription(group_index, *choice);
+    g_UiPanelTasks[MENU_START_PANEL_DESCRIPTION].u.message.id = Item_GetDescription(group_index, *choice);
     if (g_PadStates[0].pressed & g_InputMasks[MENU_INPUT_CONFIRM]) {
         u8* step;
 
@@ -105,17 +105,17 @@ MATCH void func_801D5A28(void) {
         SND_PlaySE(EMI_SE_ID(SND_BANK_COMMON, 2));
         D_8014852B   = 3;
         /* Byte constraint: the three stores below use the absolute cells. */
-        task         = &g_MenuPanelTasks[MENU_START_PANEL_ITEMS];
+        task         = &g_UiPanelTasks[MENU_START_PANEL_ITEMS];
         task->state  = 4;
         task->unk_0B = 0xFF;
         task->unk_0A = 0xFF;
         i            = 0;
         while (i < Party_CountOrder(PARTY_ORDER_FIELD)) {
-            g_MenuPanelTasks[i + 4].state = 8;
+            g_UiPanelTasks[i + 4].state = 8;
             i++;
         }
-        g_MenuPanelTasks[MENU_START_PANEL_CURSOR].active = 0;
-        D_80148654                                       = 0;
+        g_UiPanelTasks[MENU_START_PANEL_CURSOR].active = 0;
+        D_80148654                                     = 0;
         D_80148651 -= 2;
     }
 }

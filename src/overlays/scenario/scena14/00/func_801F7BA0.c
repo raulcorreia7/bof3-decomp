@@ -38,7 +38,7 @@ MATCH void func_801F7BA0(void) {
                 Scene_SpawnActor(0x13, g_AreaCameraAngle.vx, g_AreaCameraAngle.vy, -0x200, 0x20, 0);
                 g_ScenarioState.step_05 = 4;
             } else {
-                Menu_DrawCursorSprite(0x98, 0x28, 0);
+                UI_CursorDraw(0x98, 0x28, 0);
             }
             break;
         case 4:
@@ -51,7 +51,7 @@ MATCH void func_801F7BA0(void) {
                 Scene_SpawnActor(0x13, g_AreaCameraAngle.vx, g_AreaCameraAngle.vy, 0x400, 0x20, 0);
                 g_ScenarioState.step_05 = 6;
             } else {
-                Menu_DrawCursorSprite(0x98, 0x38, 0);
+                UI_CursorDraw(0x98, 0x38, 0);
             }
             break;
         case 6:
@@ -71,7 +71,7 @@ MATCH void func_801F7BA0(void) {
                 g_ScenarioState.step_05  = 0;
                 *flags &= ~1;
             } else {
-                Menu_DrawCursorSprite(0x98, 0x10, 0);
+                UI_CursorDraw(0x98, 0x10, 0);
             }
             break;
         case 20:

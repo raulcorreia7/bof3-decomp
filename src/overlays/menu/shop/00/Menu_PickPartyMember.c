@@ -11,10 +11,10 @@ MATCH void Menu_PickPartyMember(void) {
 
     func_801DF6A8();
     if (D_801E6254 == GAME_NONE) {
-        UI_DrawText(26, 20, 0, TEXT_LENGTH_MAX, Message_GetText(MSG_AREA175_PICK_ITEM));
+        UI_TextDraw(26, 20, 0, TEXT_LENGTH_MAX, UI_MessageGetText(MSG_AREA175_PICK_ITEM));
     } else {
-        Message_SetVariable(0, 5, g_Characters[MEM_PTR(u8, g_CharSlot)[D_801E6254]].name);
-        UI_DrawText(26, 20, 0, TEXT_LENGTH_MAX, Message_GetText(MSG_AREA175_CONFIRM_ITEM));
+        UI_MessageSetVariable(0, 5, g_Characters[MEM_PTR(u8, g_CharSlot)[D_801E6254]].name);
+        UI_TextDraw(26, 20, 0, TEXT_LENGTH_MAX, UI_MessageGetText(MSG_AREA175_CONFIRM_ITEM));
     }
     buttons    = INPUT_REPEATED(g_PadStates[0].pressed, INPUT_DIRECTIONAL);
     count      = Party_CountOrder(PARTY_ORDER_FIELD);
@@ -95,6 +95,6 @@ MATCH void Menu_PickPartyMember(void) {
         }
         g_MenuStep.state = 0;
         g_MenuStep.sub_step += 1;
-        UI_SetMode(UI_MODE_FAST_FADE_OUT);
+        UI_ModeSet(UI_MODE_FAST_FADE_OUT);
     }
 }

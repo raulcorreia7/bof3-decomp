@@ -24,9 +24,9 @@ MATCH s32 func_801A17A0(u8* entry_record) {
     }
     mode = FIELD(u16, entry_record, 0x8u);
     if ((mode & 0x2000) == 0) {
-        Message_StartAreaMessage((s16)mode);
+        UI_MessageStartArea((s16)mode);
     } else {
-        Message_Request(mode & 0xFFF);
+        UI_MessageRequest(mode & 0xFFF);
     }
     g_GameStateIndex = GAME_REQUEST_MESSAGE;
 stored:

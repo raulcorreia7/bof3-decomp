@@ -30,39 +30,39 @@ NON_MATCHING void Menu_UpdateFormation(void) {
     Menu_DrawClutStrip(D_80144953);
     *(u8*)(&D_801485DC) = 0;
     if (g_FormationPickColumn != 0x7F) {
-        tmp2                                                   = (g_FormationPickRow * 3) + g_FormationPickColumn;
-        D_801485E0                                             = D_801EC4D0[tmp2].unk_00;
-        *(u8*)(&D_801485DC)                                    = 1;
-        D_801485E2                                             = D_801EC4D0[tmp2].unk_02;
-        g_MenuPanelTasks[MENU_START_PANEL_CURSOR_FRAME].unk_0B = 0;
-        g_MenuPanelTasks[MENU_START_PANEL_CURSOR_FRAME].unk_0A = D_801EC4D0[tmp2].unk_04 + 1;
+        tmp2                                                 = (g_FormationPickRow * 3) + g_FormationPickColumn;
+        D_801485E0                                           = D_801EC4D0[tmp2].unk_00;
+        *(u8*)(&D_801485DC)                                  = 1;
+        D_801485E2                                           = D_801EC4D0[tmp2].unk_02;
+        g_UiPanelTasks[MENU_START_PANEL_CURSOR_FRAME].unk_0B = 0;
+        g_UiPanelTasks[MENU_START_PANEL_CURSOR_FRAME].unk_0A = D_801EC4D0[tmp2].unk_04 + 1;
     }
     tmp3                            = ((s8)g_FormationCursorRow * 3) + g_FormationCursorColumn;
-    g_MenuPanelTasks[20].pos.x      = D_801EC4D0[tmp3].unk_00;
+    g_UiPanelTasks[20].pos.x        = D_801EC4D0[tmp3].unk_00;
     FIELD(s8, (&D_801485DC), 0x24u) = 1;
-    g_MenuPanelTasks[20].pos.y      = D_801EC4D0[tmp3].unk_02;
+    g_UiPanelTasks[20].pos.y        = D_801EC4D0[tmp3].unk_02;
     val8                            = 0;
-    g_MenuPanelTasks[20].unk_0B     = 1;
-    g_MenuPanelTasks[20].unk_0A     = D_801EC4D0[tmp3].unk_04 + 1;
+    g_UiPanelTasks[20].unk_0B       = 1;
+    g_UiPanelTasks[20].unk_0A       = D_801EC4D0[tmp3].unk_04 + 1;
     val5                            = 0 << 0x18;
     do {
-        g_MenuPanelTasks[(val5 >> 0x18) + MENU_PANEL_CARD_FIRST].unk_0C = 0;
-        tmp4                                                            = val8 + 1;
-        val8                                                            = tmp4;
-        val5                                                            = val8 << 0x18;
+        g_UiPanelTasks[(val5 >> 0x18) + MENU_PANEL_CARD_FIRST].unk_0C = 0;
+        tmp4                                                          = val8 + 1;
+        val8                                                          = tmp4;
+        val5                                                          = val8 << 0x18;
     } while (tmp4 < 6);
     if (g_FormationCursorColumn == 0) {
         val9 = 1 << (s8)g_FormationCursorRow;
     } else {
         val9 = 7;
     }
-    g_MenuPanelTasks[(g_FormationRow * 2) + (g_FormationColumn + 0xB)].unk_0C = val9;
+    g_UiPanelTasks[(g_FormationRow * 2) + (g_FormationColumn + 0xB)].unk_0C = val9;
     if (g_FormationCursorColumn != 0) {
         val0 = ((s32)(g_FormationCursorRow << 0x18) >> 0x17) + (g_FormationCursorColumn + 0x76);
     } else {
         val0 = 0x3B;
     }
-    g_MenuPanelTasks[MENU_START_PANEL_DESCRIPTION].u.message.id = val0;
+    g_UiPanelTasks[MENU_START_PANEL_DESCRIPTION].u.message.id = val0;
     if (g_InputMasks[MENU_INPUT_CONFIRM] & g_PadStates[0].pressed) {
         *(u8*)(&D_801485DC) = 0;
         if (g_FormationCursorColumn != 0) {
@@ -88,8 +88,8 @@ NON_MATCHING void Menu_UpdateFormation(void) {
         }
     } else if (g_InputMasks[MENU_INPUT_CANCEL] & g_PadStates[0].pressed) {
         SND_PlaySE(EMI_SE_ID(SND_BANK_COMMON, 6));
-        *(u8*)(&D_801485DC)         = 0;
-        g_MenuPanelTasks[20].active = 0;
+        *(u8*)(&D_801485DC)       = 0;
+        g_UiPanelTasks[20].active = 0;
         if (g_FormationPickColumn != 0x7F) {
         block_20:
             g_FormationPickColumn = 0x7F;

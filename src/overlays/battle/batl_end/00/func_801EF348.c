@@ -23,18 +23,18 @@ MATCH void func_801EF348(void) {
         g_Battle.outcome.reward_zenny += (u32)g_Battle.outcome.reward_zenny >> 1;
     }
     D_80148354 = 0;
-    Menu_OpenPanelTask(1, 4);
+    UI_PanelOpenTask(1, 4);
     D_80148356 = 5;
     D_80148357 = 0;
     sprintf(g_TextVariables, D_801EEC04, g_Battle.outcome.reward_zenny);
-    g_BattleEventSlots[0].payload = Message_GetText(6);
+    g_BattleEventSlots[0].payload = UI_MessageGetText(6);
     if ((u32)g_Battle.outcome.reward_zenny < 30) {
         D_801463B0 = 1;
     } else {
         D_801463B0 = (u32)g_Battle.outcome.reward_zenny / 30;
     }
     if (g_Battle.outcome.drop_count != 0) {
-        Menu_OpenPanelTask(0x15, 4);
+        UI_PanelOpenTask(0x15, 4);
         D_80148626 = 1;
         D_80148628 = 0x14;
         D_8014862A = 0x46;

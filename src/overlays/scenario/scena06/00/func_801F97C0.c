@@ -28,7 +28,7 @@ NON_MATCHING void func_801F97C0(void) {
             g_GamePrevSelection = 0xFF;
             break;
         case 2:
-            Message_StartAreaMessage(MSG_SCENA06_001);
+            UI_MessageStartArea(MSG_SCENA06_001);
             g_GameStateIndex        = GAME_REQUEST_MESSAGE;
             g_ScenarioState.step_05 = 3;
             break;
@@ -113,7 +113,7 @@ NON_MATCHING void func_801F97C0(void) {
             entry_facing            = 0x80;
             goto set_area_entry;
         case 27:
-            Message_StartAreaMessage(MSG_SCENA06_001);
+            UI_MessageStartArea(MSG_SCENA06_001);
             g_GameStateIndex        = GAME_REQUEST_MESSAGE;
             g_ScenarioState.step_05 = 0x1C;
             break;

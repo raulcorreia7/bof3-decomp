@@ -7,7 +7,7 @@ MATCH u8 Menu_ChooseYesNo(void) {
 
     WinDrawCueText(MENU_PROMPT_X, MENU_PROMPT_Y, 0xF);
     flag = &D_8014865B;
-    Menu_DrawCursorSprite((u16)(((0x1F - (*flag * 4)) * 8) + 0x1B), 0x18, 0);
+    UI_CursorDraw((u16)(((0x1F - (*flag * 4)) * 8) + 0x1B), 0x18, 0);
     pad = g_PadStates[0].pressed;
     if (pad & g_InputMasks[MENU_INPUT_CANCEL]) {
         SND_PlaySE(EMI_SE_ID(SND_BANK_COMMON, 6));

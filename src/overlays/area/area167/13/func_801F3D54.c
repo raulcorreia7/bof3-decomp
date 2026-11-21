@@ -2,8 +2,8 @@
 
 MATCH void func_801F3D54(void) {
     MESSAGE_REQUEST_CLEAR();
-    if (g_MessageChoice != 2) {
-        if (g_MessageChoice == 0) {
+    if (g_UiMessageChoice != 2) {
+        if (g_UiMessageChoice == 0) {
             g_ScriptVars[2] = 0;
         } else {
             g_ScriptVars[2] = 2;

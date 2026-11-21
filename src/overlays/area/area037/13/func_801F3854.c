@@ -1,7 +1,7 @@
 #include "area037_13.h"
 
 MATCH void func_801F3854(void) {
-    s8 choice = g_MessageChoice;
+    s8 choice = g_UiMessageChoice;
 
     if (choice == 0) {
         Game_SetScriptActive();

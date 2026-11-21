@@ -1,4 +1,4 @@
 ["emi/world04/area187/13"]
 g_AreaModuleId = { addr = 0x801F2C00, source = "Module id of the area: the first payload word of its overlay, 52 + the area number." }
-Message_ClearOnCancel = { addr = 0x801F2C5C, type = "func", source = "Sets g_SceneEventStep to 2 when the menu selection is idle, and clears the message request." }
+UI_MessageClearOnCancel = { addr = 0x801F2C5C, type = "func", source = "Sets g_SceneEventStep to 2 when the menu selection is idle, and clears the message request." }
 Scene_ClearEventState = { addr = 0x801F2CA4, type = "func", source = "Ends the scene event: clears the script-active flag, sets g_SceneEventMode to SCENE_EVENT_NONE and zeroes g_SceneEventStep and g_SceneEventSelection." }

@@ -3,4 +3,4 @@
 #define BOSS_SET_END_WINDOW_BODY()                \
     u16* flags;                                   \
     BATTLE_RAISE_STATE(BATTLE_STATE_WINDOW_BUSY); \
-    UI_SetMode(4)
+    UI_ModeSet(4)

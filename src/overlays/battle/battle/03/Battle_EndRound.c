@@ -42,7 +42,7 @@ MATCH bool Battle_EndRound(void) {
     }
     if (count & BYTE_MASK) {
         Battle_OpenPanel();
-        Battle_QueueEvent(2, 0, 0, 45, Message_GetText(0x2D));
+        Battle_QueueEvent(2, 0, 0, 45, UI_MessageGetText(0x2D));
         return true;
     }
     return false;

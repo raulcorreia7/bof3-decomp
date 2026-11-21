@@ -12,10 +12,10 @@ MATCH void func_801F96E0(void) {
             }
             switch (g_EmiLoadedCharacterIndex & EMI_LOADED_INDEX_MASK) {
                 case 1:
-                    Message_StartAreaMessage(MSG_SCENA05_035);
+                    UI_MessageStartArea(MSG_SCENA05_035);
                     break;
                 case 2:
-                    Message_StartAreaMessage(MSG_SCENA05_036);
+                    UI_MessageStartArea(MSG_SCENA05_036);
                     break;
                 default:
                     return;

@@ -50,7 +50,7 @@ extern char D_801F2C04[];
 extern u8       D_801F61F8[];
 extern Callback D_801F6200[];
 
-/* The panel box words UI_DrawPanelBox draws: x, y, width and height. */
+/* The panel box words UI_WindowDrawPanelBox draws: x, y, width and height. */
 extern u16 D_801F6210;
 extern u16 D_801F6212;
 extern u16 D_801F6214;
@@ -128,9 +128,9 @@ extern u8       D_801F6B74[][13];
 
 /* func_80159B9C */
 /* No prototype: the retail callers pass the words unnarrowed. */
-void UI_DrawPanelBox();
+void UI_WindowDrawPanelBox();
 /* func_80159FA0; no prototype, as above. */
-void UI_DrawBoxOutline();
+void UI_WindowDrawBoxOutline();
 /* The engine places a work row from a spawn record. */
 /* The owner is src/engine/game/00/game_00.h; that header is not visible to this
  * overlay. */

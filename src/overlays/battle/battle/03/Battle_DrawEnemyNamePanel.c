@@ -26,12 +26,12 @@ MATCH void Battle_DrawEnemyNamePanel(s32 x, s32 y, s32 slot) {
     panel_x = x;
     panel_y = y;
     if (g_BattleEnemyBattlers[index].unk_7F == 1) {
-        func_801D9E9C((s16)(x + 6), (s16)(y + 0xA), (u16)FIELD(u8, (u8*)g_MenuCurrentPanel, 0xBu), (u16)FIELD(u8, (u8*)g_MenuCurrentPanel, 0xDu), 1);
+        func_801D9E9C((s16)(x + 6), (s16)(y + 0xA), (u16)FIELD(u8, (u8*)g_UiPanelCurrent, 0xBu), (u16)FIELD(u8, (u8*)g_UiPanelCurrent, 0xDu), 1);
     } else {
         func_801D94D4((s16)(x + 0x24), (s16)(y + 0xC), 0, 0xFFFF);
     }
     if (func_801DA69C(index) != 0) {
-        UI_DrawTextString((panel_x + 4), (panel_y + 3), 0, ENEMY_NAME_LENGTH, (const u8*)g_BattleEnemyBattlers[index].name);
+        UI_TextDrawString((panel_x + 4), (panel_y + 3), 0, ENEMY_NAME_LENGTH, (const u8*)g_BattleEnemyBattlers[index].name);
     }
     Battle_DrawPanelLine((panel_x + 2), (panel_y + 2), (panel_x + 0x49), (panel_y + 2), r, g, b);
     Battle_DrawPanelLine((panel_x + 2), (panel_y + 3), (panel_x + 2), (panel_y + 0x12), r, g, b);

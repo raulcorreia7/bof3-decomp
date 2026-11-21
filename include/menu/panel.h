@@ -42,7 +42,7 @@
         MenuPanelTask* panel;                   \
         s16            next;                    \
                                                 \
-        panel         = g_MenuCurrentPanel;     \
+        panel         = g_UiPanelCurrent;       \
         next          = panel->member + (step); \
         panel->member = next;                   \
         if (next >= (limit) + 1) {              \
@@ -56,7 +56,7 @@
         MenuPanelTask* panel;                   \
         s16            next;                    \
                                                 \
-        panel         = g_MenuCurrentPanel;     \
+        panel         = g_UiPanelCurrent;       \
         next          = panel->member - (step); \
         panel->member = next;                   \
         if (next < (limit)) {                   \
@@ -67,7 +67,7 @@
     } while (0)
 
 /* The choice-list view of a panel slot. The shop panel (slot 7 of
- * g_MenuPanelTasks, 0x8014842C) and the start-menu panel (slot 13,
+ * g_UiPanelTasks, 0x8014842C) and the start-menu panel (slot 13,
  * 0x80148504) walk the same group tables with this record, so the field names
  * and the layout are one record and the overlays include this view instead of
  * redeclaring it.
@@ -212,8 +212,8 @@ typedef struct MenuPanelRaw {
  * BattlePanelTask (battle/records.h). */
 typedef struct MenuPanelTask {
     u8    active; /* set to open the panel, cleared to close it */
-    u8    panel;  /* Menu_UpdatePanelTasks calls g_MenuPanels.handlers[panel] */
-    u8    mode;   /* the panel's own mode: g_MenuPanelModes[mode], the slide target choice, and the battle mode_00 */
+    u8    panel;  /* UI_PanelUpdateTasks calls g_UiPanels.handlers[panel] */
+    u8    mode;   /* the panel's own mode: g_UiPanelModes[mode], the slide target choice, and the battle mode_00 */
     u8    state;
     /* x and y are screen positions. Most readers load them with lhu; the slide
      * code compares them as s16 and stores signed constants through LOH, so the
@@ -248,23 +248,23 @@ ASSERT_OFFSET(MenuPanelTask, u, 0x10);
 ASSERT_OFFSET(MenuPanelTask, item_table, 0x20);
 ASSERT_SIZE(MenuPanelTask, MENU_PANEL_TASK_SIZE);
 
-/* The shop's choice panel is slot 7 of g_MenuPanelTasks (0x8014842C), built by
+/* The shop's choice panel is slot 7 of g_UiPanelTasks (0x8014842C), built by
  * `emi/etc/shop/00@0x801D2828` and `@0x801D334C`. Its retail symbol is
  * declared in menu/gameui.h, because the same address holds a different byte
  * in the battle overlays (equal addresses in different targets are
  * unrelated); the shop overlay casts it to this record. */
 
-/* First slot of a group of per-member panels in g_MenuPanelTasks. */
+/* First slot of a group of per-member panels in g_UiPanelTasks. */
 #define MENU_PANEL_BATTLER_FIRST    0xD /* battle: slot 0xD plus the battler holds the battler's panel */
 #define MENU_PANEL_CARD_FIRST       0xC /* start menu: one card per party member; its state follows the cursor */
 #define MENU_PANEL_MEMBER_ROW_FIRST 0xD /* start menu: the second per-member group, set to state 9 on cancel */
 
 /* D_80148330 */
-extern MenuPanelTask  g_MenuPanelTasks[MENU_PANEL_COUNT];
+extern MenuPanelTask  g_UiPanelTasks[MENU_PANEL_COUNT];
 extern s16            D_801485FA;
 /* Panel-task block bytes 0x80148648..0x80148652; read by etc/game/00 and etc/shop/00. */
 /* D_80148648 */
-extern MenuPanelTask* g_MenuCurrentPanel;
+extern MenuPanelTask* g_UiPanelCurrent;
 extern s8             D_8014865C;
 extern u8             D_80148699;
 

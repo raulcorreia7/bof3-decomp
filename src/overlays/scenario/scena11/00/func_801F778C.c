@@ -26,7 +26,7 @@ MATCH void func_801F778C(void) {
             if (g_ScriptVars[0] != 1) {
                 break;
             }
-            UI_SetMode(0xD);
+            UI_ModeSet(0xD);
             g_ScenarioState.step_05 = 2;
             break;
         case 2:
@@ -113,7 +113,7 @@ MATCH void func_801F778C(void) {
             if (g_ScriptVars[0] != 2) {
                 break;
             }
-            UI_SetMode(0xD);
+            UI_ModeSet(0xD);
             g_ScenarioState.step_05 = 0xD;
             break;
         case 13:
@@ -155,7 +155,7 @@ MATCH void func_801F778C(void) {
             break;
         }
         case 0x32:
-            Message_StartAreaMessage(MSG_SCENA11_006);
+            UI_MessageStartArea(MSG_SCENA11_006);
             g_GameStateIndex        = 2;
             g_ScenarioState.step_05 = 0x33;
             break;
@@ -168,7 +168,7 @@ MATCH void func_801F778C(void) {
             g_ScenarioState.state_04 = 0;
             break;
         case 0x3C:
-            Message_StartAreaMessage(MSG_SCENA11_007);
+            UI_MessageStartArea(MSG_SCENA11_007);
             g_GameStateIndex        = 2;
             g_ScenarioState.step_05 = 0x33;
             break;

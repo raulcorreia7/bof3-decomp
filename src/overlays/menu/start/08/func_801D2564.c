@@ -20,15 +20,15 @@ MATCH void func_801D2564(void) {
     selection_index = *selection;
     /* FAKE: preserve flag store after selection read. */
     FAKE_ORDER_LOCK(D_801485DC = 1);
-    D_801485E0 = g_MenuPanelTasks[selection_index + 4].pos.x;
+    D_801485E0 = g_UiPanelTasks[selection_index + 4].pos.x;
     /* FAKE: preserve first table store order. */
     FAKE_BARRIER();
-    D_801485E2 = g_MenuPanelTasks[selection_index + 4].pos.y;
-    Message_SetVariable(0U, 5U, g_CharSlot[g_PartyFieldOrder[selection_index]] * 0xA4 + panel_data);
-    g_MenuPanelTasks[MENU_START_PANEL_DESCRIPTION].u.message.id = 0x12;
-    input                                                       = INPUT_REPEATED(g_PadStates[0].pressed, (PADLup | PADLdown));
-    count                                                       = Party_CountOrder(PARTY_ORDER_FIELD);
-    old_selection                                               = *selection;
+    D_801485E2 = g_UiPanelTasks[selection_index + 4].pos.y;
+    UI_MessageSetVariable(0U, 5U, g_CharSlot[g_PartyFieldOrder[selection_index]] * 0xA4 + panel_data);
+    g_UiPanelTasks[MENU_START_PANEL_DESCRIPTION].u.message.id = 0x12;
+    input                                                     = INPUT_REPEATED(g_PadStates[0].pressed, (PADLup | PADLdown));
+    count                                                     = Party_CountOrder(PARTY_ORDER_FIELD);
+    old_selection                                             = *selection;
     if ((input & PADLup) != 0) {
         new_selection = old_selection - 1;
         *selection    = new_selection;
@@ -65,12 +65,12 @@ MATCH void func_801D2564(void) {
         SND_PlaySE(EMI_SE_ID(SND_BANK_COMMON, 2));
         i = 0;
         while (i < Party_CountOrder(PARTY_ORDER_FIELD)) {
-            g_MenuPanelTasks[i + 12].state = 1;
+            g_UiPanelTasks[i + 12].state = 1;
             i++;
         }
-        g_MenuPanelTasks[MENU_START_PANEL_DESCRIPTION].state = 1;
-        D_801485DC                                           = 0;
-        D_80148654                                           = 8;
+        g_UiPanelTasks[MENU_START_PANEL_DESCRIPTION].state = 1;
+        D_801485DC                                         = 0;
+        D_80148654                                         = 8;
         D_80148651 += 2;
     }
 }

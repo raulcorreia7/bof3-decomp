@@ -15,7 +15,7 @@ MATCH void Menu_DrawCommandRow(s16 x, s16 y, u8 row, u8 selected, s32 unused) {
         return;
     }
     do {
-        UI_DrawWindow((s32)(u16)(x + i * 48), (s32)(u16)y, 45, 20, 0, g_WindowStyle);
+        UI_WindowDraw((s32)(u16)(x + i * 48), (s32)(u16)y, 45, 20, 0, g_WindowStyle);
         color = UI_TEXT_NORMAL;
         if (selected < g_MenuCommandRows[row][0]) {
             color = (i != selected) ? UI_TEXT_DIM : UI_TEXT_NORMAL;
@@ -30,8 +30,8 @@ MATCH void Menu_DrawCommandRow(s16 x, s16 y, u8 row, u8 selected, s32 unused) {
         label_width = Game_ReadCommand(label);
         col         = i * 0x30;
         offset      = (4 - (label_width & BYTE_MASK)) * 4 + 6;
-        UI_DrawText((s16)(x + col + offset), (s16)(y + 3), color, MENU_LABEL_LENGTH, label);
-        UI_DrawSpriteRun((s16)(x + col), (s16)y, (i != selected) ? g_MenuCommandFrame : g_MenuCommandFrameSelected, 0);
+        UI_TextDraw((s16)(x + col + offset), (s16)(y + 3), color, MENU_LABEL_LENGTH, label);
+        UI_SpriteDrawRun((s16)(x + col), (s16)y, (i != selected) ? g_MenuCommandFrame : g_MenuCommandFrameSelected, 0);
         i++;
     } while (i < g_MenuCommandRows[row][0]);
 }

@@ -6,7 +6,7 @@ MATCH void func_801D1FDC(void) {
     u32            index;
     MenuPanelTask* panel;
 
-    Menu_ResetPanelTasks();
+    UI_PanelResetTasks();
     i = 0;
     for (;;) {
         count = Party_CountOrder(PARTY_ORDER_FIELD);
@@ -14,7 +14,7 @@ MATCH void func_801D1FDC(void) {
         if (index >= count) {
             break;
         }
-        panel = &g_MenuPanelTasks[4 + index];
+        panel = &g_UiPanelTasks[4 + index];
 
         panel->unk_0A = i;
         i += 1;
@@ -27,18 +27,18 @@ MATCH void func_801D1FDC(void) {
         panel->unk_0B = 0;
         panel->unk_0C = 0;
     }
-    panel         = &g_MenuPanelTasks[7];
+    panel         = &g_UiPanelTasks[7];
     panel->panel  = 6;
     panel->mode   = MENU_START_MODE_ZENNY;
     panel->state  = 0;
     panel->active = 1;
     panel++;
-    g_MenuPanelTasks[7].pos.x = 200;
-    g_MenuPanelTasks[7].pos.y = 16;
-    panel->panel              = 6;
-    panel->mode               = MENU_START_MODE_PLAY_TIME;
-    panel->state              = 0;
-    panel->active             = 1;
+    g_UiPanelTasks[7].pos.x = 200;
+    g_UiPanelTasks[7].pos.y = 16;
+    panel->panel            = 6;
+    panel->mode             = MENU_START_MODE_PLAY_TIME;
+    panel->state            = 0;
+    panel->active           = 1;
     panel++;
     panel->mode          = MENU_START_MODE_CAMP_ICONS;
     D_80148454           = 0x10;

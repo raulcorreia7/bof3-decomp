@@ -113,7 +113,7 @@ MATCH void func_801F87C4(void) {
         case 31:
             if (g_ScriptVars[0] == 0x50) {
                 SND_StopSequence(0, 1);
-                UI_SetMode(0xD);
+                UI_ModeSet(0xD);
                 g_ScenarioState.step_05 = 0x20;
             }
             break;

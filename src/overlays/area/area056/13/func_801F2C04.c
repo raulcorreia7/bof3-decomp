@@ -8,10 +8,10 @@ MATCH s32 func_801F2C04(void) {
         D_80145E93[0] = 0;
         Area_SetCellPalette(D_80145EC6, D_80145ECA);
     }
-    if (g_MessageChoice == 1) {
+    if (g_UiMessageChoice == 1) {
         SYS_SetFlag(D_80144EA0, 8);
     }
-    if (g_MessageChoice != 2) {
+    if (g_UiMessageChoice != 2) {
         SND_PlaySE(EMI_SE_ID(SND_BANK_AREA, 0x08));
     }
 }

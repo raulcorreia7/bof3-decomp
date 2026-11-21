@@ -9,7 +9,7 @@ segments:
     subsegments:
       - [0x0, .data, D_801F2C00]
       - [0x14, .rodata, func_801F2EA0]
-      - [0x70, c, Message_SetAnswerMessage]
+      - [0x70, c, UI_MessageAnswerSet]
       - [0x9C, c, func_801F2C9C]
       - [0xFC, c, Area_RefillWaterJugs]
       - [0x170, c, func_801F2D70]

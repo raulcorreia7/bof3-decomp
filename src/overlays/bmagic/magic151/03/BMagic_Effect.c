@@ -11,7 +11,7 @@ MATCH void func_801EECB0(void) {
 
     func_800A68A4();
     g_BattleMessageState = 1;
-    text                 = Message_GetText(D_800B4C90[g_Battle.dragon_form]);
+    text                 = UI_MessageGetText(D_800B4C90[g_Battle.dragon_form]);
     SYS_CopyString(D_80149298, text, 8);
     func_801DE560(1, 1, 0, 60, D_80149298);
     if (g_Battle.dragon_form == 3 || g_Battle.dragon_form == DRAGON_FORM_TIAMAT || g_Battle.dragon_form == DRAGON_FORM_MAMMOTH) {

@@ -53,15 +53,15 @@ u8 s_MenuLine1FlagRun[12] = {0x00, 0x00, 0x0B, 0x01, 0x00, 0x2D, 0x02, 0x00, 0x0
 
 u8 s_MenuLine2FlagRun[12] = {0x0F, 0x00, 0x09, 0x11, 0x00, 0x0A, 0x12, 0x00, 0x2E, 0x00, 0x00, 0xFF};
 
-Callback g_MenuPanelModes[5] = {func_801995A4, Menu_DrawPanelCursor, func_801996A8, func_8019977C, func_8019986C};
+Callback g_UiPanelModes[5] = {func_801995A4, UI_CursorDrawPanel, func_801996A8, func_8019977C, func_8019986C};
 
-Callback g_MenuPanelSteps[3] = {func_8019959C, func_801995F8, func_80199638};
+Callback g_UiPanelSteps[3] = {func_8019959C, func_801995F8, func_80199638};
 
-Callback g_MenuOptionSteps[3] = {func_8019959C, func_801996FC, Menu_SlidePanelLeft};
+Callback g_MenuOptionSteps[3] = {func_8019959C, func_801996FC, UI_PanelSlideLeft};
 
-Callback g_MenuActionSteps[3] = {func_8019959C, func_801997EC, Menu_SetPosX};
+Callback g_MenuActionSteps[3] = {func_8019959C, func_801997EC, UI_PanelSetPosX};
 
-Callback g_MenuTaskSteps[4] = {func_8019959C, func_80199938, func_80199978, func_801999B8};
+Callback g_UiPanelTaskSteps[4] = {func_8019959C, func_80199938, func_80199978, func_801999B8};
 
 char D_801C7C34[5][8] = {"ITEM" T_END T_END T_END T_END, "WEAPON" T_END T_END, "ARMOR" T_END T_END T_END,
                          "OPTION" T_END T_END, "VITAL" T_END T_END T_END};
@@ -379,7 +379,7 @@ Callback g_SceneSteps[2] = {Scene_ResetEventState, Scene_UpdateEvent};
 u8 s_EventFlagsReset[16] = {0x08, 0x00, 0x00, 0x0A, 0x00, 0x00, 0x00, 0x00,
                             0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00};
 
-Callback g_SceneEvents[64] = {func_801A7CE8, func_801F37E4, func_801F394C,       func_801F4B60,           Menu_OpenMaster, func_801A7E54,           Message_RunAreaMessage, func_801F4378,
+Callback g_SceneEvents[64] = {func_801A7CE8, func_801F37E4, func_801F394C,       func_801F4B60,           UI_PanelOpenMaster, func_801A7E54,           UI_MessageRunArea, func_801F4378,
                               func_801F34A0, func_801F3740, Scene_RunInn, (Callback)func_801F2C04, func_801F50F0,   (Callback)func_801F2C04, Fairy_RunCommu01Scene,          func_801F3F34,
                               func_801F3254, func_801F3EE8, func_801F529C,       func_801F3198,           func_801F45EC,   Fairy_RunGiftScene,           Fairy_RunExploreReward,          Fairy_RunCommu02Scene,
                               Fairy_RunCommu03Scene, Fairy_RunCommu04Scene, Fairy_RunCommu05Scene,       func_801A839C,           func_801F38D8,   func_801F2CDC,           func_801F37EC,          func_801F3C24,

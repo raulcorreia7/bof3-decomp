@@ -25,9 +25,9 @@ NON_MATCHING void func_801D7C10(s32 x, s32 y, s32 flags) {
     }
     seven = 7;
     strip = &D_801E21C0;
-    UI_DrawText((s16)(x + 6), (s16)(y + 4), (seven - slots[0] * 7) & BYTE_MASK, 4, strip);
-    UI_DrawText((s16)(x + 54), (s16)(y + 4), (seven - slots[1] * 7) & BYTE_MASK, 4, (strip + 4));
-    UI_DrawText((s16)(x + 102), (s16)(y + 4), (seven - slots[2] * 7) & BYTE_MASK, 4, (strip + 8));
+    UI_TextDraw((s16)(x + 6), (s16)(y + 4), (seven - slots[0] * 7) & BYTE_MASK, 4, strip);
+    UI_TextDraw((s16)(x + 54), (s16)(y + 4), (seven - slots[1] * 7) & BYTE_MASK, 4, (strip + 4));
+    UI_TextDraw((s16)(x + 102), (s16)(y + 4), (seven - slots[2] * 7) & BYTE_MASK, 4, (strip + 8));
 }
 #else
 INCLUDE_ASM(func_801D7C10);

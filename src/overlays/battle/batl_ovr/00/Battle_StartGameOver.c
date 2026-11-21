@@ -6,7 +6,7 @@
 MATCH void Battle_StartGameOver(void) {
     u8* counter = &g_Battle.ui_step;
 
-    UI_SetMode(0x13);
+    UI_ModeSet(0x13);
     GFX_CopyPalette(26);
 
     *counter += 1;

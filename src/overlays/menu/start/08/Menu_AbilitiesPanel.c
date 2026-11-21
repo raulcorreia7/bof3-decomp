@@ -2,6 +2,6 @@
 
 /* func_801EA698 */
 MATCH void Menu_AbilitiesPanel(void) {
-    g_MenuStartAbilitiesSteps[g_MenuCurrentPanel->state]();
-    Menu_DrawAbilitiesPanel(g_MenuCurrentPanel);
+    g_MenuStartAbilitiesSteps[g_UiPanelCurrent->state]();
+    Menu_DrawAbilitiesPanel(g_UiPanelCurrent);
 }

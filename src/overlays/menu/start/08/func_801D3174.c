@@ -29,40 +29,40 @@ MATCH void func_801D3174(void) {
     *step = mode;
     base  = step;
     base -= 8;
-    g_MenuPanelTasks[MENU_START_PANEL_DESCRIPTION].u.message.id = Item_GetDescription(D_8014850E, D_801C893C[D_8014850E][g_MenuPanelTasks[MENU_START_PANEL_ITEMS].unk_0C]);
-    pad                                                         = g_PadStates[0].pressed;
-    g_MenuPanelTasks[MENU_START_PANEL_CURSOR].active            = 1;
-    g_MenuPanelTasks[MENU_START_PANEL_CURSOR].pos.x             = (u16)g_MenuPanelTasks[MENU_START_PANEL_ITEMS].pos.x + 7;
-    offset                                                      = (D_80148510 - g_MenuPanelTasks[MENU_START_PANEL_ITEMS].unk_0B) * 13 + 0x1A;
-    g_MenuPanelTasks[MENU_START_PANEL_CURSOR].pos.y             = (u16)g_MenuPanelTasks[MENU_START_PANEL_ITEMS].pos.y + offset;
-    trigger                                                     = INPUT_REPEATED(pad, (INPUT_DIRECTIONAL | PADL1 | PADR1));
+    g_UiPanelTasks[MENU_START_PANEL_DESCRIPTION].u.message.id = Item_GetDescription(D_8014850E, D_801C893C[D_8014850E][g_UiPanelTasks[MENU_START_PANEL_ITEMS].unk_0C]);
+    pad                                                       = g_PadStates[0].pressed;
+    g_UiPanelTasks[MENU_START_PANEL_CURSOR].active            = 1;
+    g_UiPanelTasks[MENU_START_PANEL_CURSOR].pos.x             = (u16)g_UiPanelTasks[MENU_START_PANEL_ITEMS].pos.x + 7;
+    offset                                                    = (D_80148510 - g_UiPanelTasks[MENU_START_PANEL_ITEMS].unk_0B) * 13 + 0x1A;
+    g_UiPanelTasks[MENU_START_PANEL_CURSOR].pos.y             = (u16)g_UiPanelTasks[MENU_START_PANEL_ITEMS].pos.y + offset;
+    trigger                                                   = INPUT_REPEATED(pad, (INPUT_DIRECTIONAL | PADL1 | PADR1));
     if (trigger & PADLleft) {
         SND_PlaySE(EMI_SE_ID(SND_BANK_COMMON, 1));
-        g_MenuPanelTasks[MENU_START_PANEL_ITEMS].u.list.tabs                 = 0x32;
-        s_ChoiceMenuCursors[g_MenuPanelTasks[MENU_START_PANEL_ITEMS].unk_0A] = D_80148510;
-        s_ChoiceMenuValues[g_MenuPanelTasks[MENU_START_PANEL_ITEMS].unk_0A]  = g_MenuPanelTasks[MENU_START_PANEL_ITEMS].unk_0B;
-        step_down                                                            = g_MenuPanelTasks[MENU_START_PANEL_ITEMS].unk_0A - 1;
-        g_MenuPanelTasks[MENU_START_PANEL_ITEMS].unk_0A                      = step_down;
+        g_UiPanelTasks[MENU_START_PANEL_ITEMS].u.list.tabs                 = 0x32;
+        s_ChoiceMenuCursors[g_UiPanelTasks[MENU_START_PANEL_ITEMS].unk_0A] = D_80148510;
+        s_ChoiceMenuValues[g_UiPanelTasks[MENU_START_PANEL_ITEMS].unk_0A]  = g_UiPanelTasks[MENU_START_PANEL_ITEMS].unk_0B;
+        step_down                                                          = g_UiPanelTasks[MENU_START_PANEL_ITEMS].unk_0A - 1;
+        g_UiPanelTasks[MENU_START_PANEL_ITEMS].unk_0A                      = step_down;
         if (step_down < 0) {
-            g_MenuPanelTasks[MENU_START_PANEL_ITEMS].unk_0A = 3;
+            g_UiPanelTasks[MENU_START_PANEL_ITEMS].unk_0A = 3;
         }
         /* Both step directions converge on the shared reload block. */
         goto store_selection;
     }
     if (trigger & PADLright) {
-        g_MenuPanelTasks[MENU_START_PANEL_ITEMS].u.list.tabs = 0x31;
+        g_UiPanelTasks[MENU_START_PANEL_ITEMS].u.list.tabs = 0x31;
         SND_PlaySE(EMI_SE_ID(SND_BANK_COMMON, 1));
-        s_ChoiceMenuCursors[g_MenuPanelTasks[MENU_START_PANEL_ITEMS].unk_0A] = D_80148510;
-        s_ChoiceMenuValues[g_MenuPanelTasks[MENU_START_PANEL_ITEMS].unk_0A]  = g_MenuPanelTasks[MENU_START_PANEL_ITEMS].unk_0B;
-        step_up                                                              = g_MenuPanelTasks[MENU_START_PANEL_ITEMS].unk_0A + 1;
-        g_MenuPanelTasks[MENU_START_PANEL_ITEMS].unk_0A                      = step_up;
+        s_ChoiceMenuCursors[g_UiPanelTasks[MENU_START_PANEL_ITEMS].unk_0A] = D_80148510;
+        s_ChoiceMenuValues[g_UiPanelTasks[MENU_START_PANEL_ITEMS].unk_0A]  = g_UiPanelTasks[MENU_START_PANEL_ITEMS].unk_0B;
+        step_up                                                            = g_UiPanelTasks[MENU_START_PANEL_ITEMS].unk_0A + 1;
+        g_UiPanelTasks[MENU_START_PANEL_ITEMS].unk_0A                      = step_up;
         if ((u32)(step_up & BYTE_MASK) >= 4U) {
-            g_MenuPanelTasks[MENU_START_PANEL_ITEMS].unk_0A = 0;
+            g_UiPanelTasks[MENU_START_PANEL_ITEMS].unk_0A = 0;
         }
     /* Shared tail of both cursor-step directions. */
     store_selection:
-        g_MenuPanelTasks[MENU_START_PANEL_ITEMS].unk_0C = s_ChoiceMenuCursors[D_8014850E];
-        g_MenuPanelTasks[MENU_START_PANEL_ITEMS].unk_0B = s_ChoiceMenuValues[D_8014850E];
+        g_UiPanelTasks[MENU_START_PANEL_ITEMS].unk_0C = s_ChoiceMenuCursors[D_8014850E];
+        g_UiPanelTasks[MENU_START_PANEL_ITEMS].unk_0B = s_ChoiceMenuValues[D_8014850E];
         return;
     }
     old_cursor = D_80148510;
@@ -70,29 +70,29 @@ MATCH void func_801D3174(void) {
         if (old_cursor != 0) {
             D_80148510 = old_cursor - 1;
         }
-        if (D_80148510 < g_MenuPanelTasks[MENU_START_PANEL_ITEMS].unk_0B) {
-            g_MenuPanelTasks[MENU_START_PANEL_ITEMS].u.list.scroll = 0xF0;
+        if (D_80148510 < g_UiPanelTasks[MENU_START_PANEL_ITEMS].unk_0B) {
+            g_UiPanelTasks[MENU_START_PANEL_ITEMS].u.list.scroll = 0xF0;
         }
     } else if (trigger & PADLdown) {
         if (old_cursor < 0x7F) {
             D_80148510 = old_cursor + 1;
         }
-        if (D_80148510 >= g_MenuPanelTasks[MENU_START_PANEL_ITEMS].unk_0B + 9) {
-            g_MenuPanelTasks[MENU_START_PANEL_ITEMS].u.list.scroll = 0x10;
+        if (D_80148510 >= g_UiPanelTasks[MENU_START_PANEL_ITEMS].unk_0B + 9) {
+            g_UiPanelTasks[MENU_START_PANEL_ITEMS].u.list.scroll = 0x10;
         }
     } else if (trigger & PADL1) {
-        u8 group = g_MenuPanelTasks[MENU_START_PANEL_ITEMS].unk_0B;
+        u8 group = g_UiPanelTasks[MENU_START_PANEL_ITEMS].unk_0B;
         if (group == 0) {
             D_80148510 = 0;
         } else if (group < 9) {
-            D_80148510                                      = old_cursor - group;
-            g_MenuPanelTasks[MENU_START_PANEL_ITEMS].unk_0B = 0;
+            D_80148510                                    = old_cursor - group;
+            g_UiPanelTasks[MENU_START_PANEL_ITEMS].unk_0B = 0;
         } else {
             D_80148510 = old_cursor - 9;
             D_8014850F = group - 9;
         }
     } else if (trigger & PADR1) {
-        u8 group = g_MenuPanelTasks[MENU_START_PANEL_ITEMS].unk_0B;
+        u8 group = g_UiPanelTasks[MENU_START_PANEL_ITEMS].unk_0B;
         if (group == 0x77) {
             D_80148510 = 0x7F;
         } else if (group >= 0x6F) {
@@ -131,10 +131,10 @@ MATCH void func_801D3174(void) {
                             goto fail;
                         }
                     } else {
-                        saved                                            = base[0xC];
-                        D_80148656                                       = 0;
-                        g_MenuPanelTasks[MENU_START_PANEL_CURSOR].active = 0;
-                        counter                                          = g_MenuStep.sub_step + 4;
+                        saved                                          = base[0xC];
+                        D_80148656                                     = 0;
+                        g_UiPanelTasks[MENU_START_PANEL_CURSOR].active = 0;
+                        counter                                        = g_MenuStep.sub_step + 4;
                         /* Both success arms converge on the commit block. */
                         goto commit;
                     }

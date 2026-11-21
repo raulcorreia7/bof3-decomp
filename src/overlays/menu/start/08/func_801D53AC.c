@@ -8,16 +8,16 @@ NON_MATCHING void func_801D53AC(void) {
     u16 id;
 
     Menu_DrawClutStrip(D_80144953);
-    id                                                          = D_801EC440[(s8)D_801ED620];
-    x                                                           = (u16)g_MenuPanelTasks[MENU_START_PANEL_COMMANDS].pos.x + (s8)D_801ED620 * 0x30;
-    g_MenuPanelTasks[MENU_START_PANEL_CURSOR].active            = 1;
-    g_MenuPanelTasks[MENU_START_PANEL_CURSOR].pos.y             = (u16)g_MenuPanelTasks[MENU_START_PANEL_COMMANDS].pos.y + 4;
-    g_MenuPanelTasks[MENU_START_PANEL_ITEMS].flags              = 1;
-    g_MenuPanelTasks[MENU_START_PANEL_CURSOR].pos.x             = x;
-    g_MenuPanelTasks[MENU_START_PANEL_COMMANDS].unk_0B          = 0xFF;
-    g_MenuPanelTasks[MENU_START_PANEL_DESCRIPTION].u.message.id = id;
-    pressed                                                     = INPUT_GetRepeatedButtons(g_PadStates[0].pressed & (PADLright | PADLleft));
-    old                                                         = D_801ED620;
+    id                                                        = D_801EC440[(s8)D_801ED620];
+    x                                                         = (u16)g_UiPanelTasks[MENU_START_PANEL_COMMANDS].pos.x + (s8)D_801ED620 * 0x30;
+    g_UiPanelTasks[MENU_START_PANEL_CURSOR].active            = 1;
+    g_UiPanelTasks[MENU_START_PANEL_CURSOR].pos.y             = (u16)g_UiPanelTasks[MENU_START_PANEL_COMMANDS].pos.y + 4;
+    g_UiPanelTasks[MENU_START_PANEL_ITEMS].flags              = 1;
+    g_UiPanelTasks[MENU_START_PANEL_CURSOR].pos.x             = x;
+    g_UiPanelTasks[MENU_START_PANEL_COMMANDS].unk_0B          = 0xFF;
+    g_UiPanelTasks[MENU_START_PANEL_DESCRIPTION].u.message.id = id;
+    pressed                                                   = INPUT_GetRepeatedButtons(g_PadStates[0].pressed & (PADLright | PADLleft));
+    old                                                       = D_801ED620;
     if (pressed & PADLleft) {
         D_801ED620 = old - 1;
         if ((s8)(old - 1) < 0) {
@@ -35,8 +35,8 @@ NON_MATCHING void func_801D53AC(void) {
     }
     if (g_PadStates[0].pressed & g_InputMasks[MENU_INPUT_CONFIRM]) {
         SND_PlaySE(EMI_SE_ID(SND_BANK_COMMON, 4));
-        g_MenuPanelTasks[MENU_START_PANEL_CURSOR].active   = 0;
-        g_MenuPanelTasks[MENU_START_PANEL_COMMANDS].unk_0B = D_801ED620;
+        g_UiPanelTasks[MENU_START_PANEL_CURSOR].active   = 0;
+        g_UiPanelTasks[MENU_START_PANEL_COMMANDS].unk_0B = D_801ED620;
         g_MenuStep.sub_step += 1;
         return;
     }
@@ -45,13 +45,13 @@ NON_MATCHING void func_801D53AC(void) {
 
         SND_PlaySE(EMI_SE_ID(SND_BANK_COMMON, 2));
         SND_PlaySE(EMI_SE_ID(SND_BANK_COMMON, 6));
-        step                                                 = &g_MenuStep.sub_step;
-        g_MenuPanelTasks[MENU_START_PANEL_DESCRIPTION].state = 1;
-        g_MenuPanelTasks[MENU_START_PANEL_COMMANDS].state    = 1;
-        g_MenuPanelTasks[MENU_START_PANEL_ITEMS].state       = 1;
-        D_801485DC                                           = 0;
-        g_MenuPanelTasks[MENU_START_PANEL_CURSOR].active     = 0;
-        D_80148654                                           = 0;
+        step                                               = &g_MenuStep.sub_step;
+        g_UiPanelTasks[MENU_START_PANEL_DESCRIPTION].state = 1;
+        g_UiPanelTasks[MENU_START_PANEL_COMMANDS].state    = 1;
+        g_UiPanelTasks[MENU_START_PANEL_ITEMS].state       = 1;
+        D_801485DC                                         = 0;
+        g_UiPanelTasks[MENU_START_PANEL_CURSOR].active     = 0;
+        D_80148654                                         = 0;
         *step += 5;
     }
 }

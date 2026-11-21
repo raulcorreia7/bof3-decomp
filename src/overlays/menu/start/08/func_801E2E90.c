@@ -28,15 +28,15 @@ NON_MATCHING void func_801E2E90(s32 x, s32 y, s32 row_index) {
     index = row_index & BYTE_MASK;
     row   = table.rows[index];
 
-    UI_DrawWindow(x & HALF_MASK, y & HALF_MASK, 84, 16, 0, *(u8*)sel);
+    UI_WindowDraw(x & HALF_MASK, y & HALF_MASK, 84, 16, 0, *(u8*)sel);
     icon = *row;
     row++;
     text_left = x + 32;
-    UI_DrawText((s16)(text_left - icon * 4), (s16)(y + 1), 0, 6U, row);
+    UI_TextDraw((s16)(text_left - icon * 4), (s16)(y + 1), 0, 6U, row);
     if (index != 1) {
-        Message_GetText((u8)row_index + 0xCA);
+        UI_MessageGetText((u8)row_index + 0xCA);
     } else {
-        Message_GetText((u16)(*(u8*)(sel + 4) == 0 ? ((u8)row_index + 0xCA) : 0xD0));
+        UI_MessageGetText((u16)(*(u8*)(sel + 4) == 0 ? ((u8)row_index + 0xCA) : 0xD0));
     }
 
     line = (LINE_F2*)g_GfxPrimCursor;

@@ -24,9 +24,9 @@ NON_MATCHING void func_801D7EB0(s32 x, s32 y) {
     /* the accessory rows step down from the panel's first icon row */
     icon_y     = y + 25;
     row_offset = 0;
-    buffer     = g_UiFormatBuffer;
+    buffer     = g_UiTextFormatBuffer;
     slot_list  = (u8*)MEM_PTR(u8, (u8*)&g_WindowStyle + FISHING_ACCESSORY_SLOT_OFFSET);
-    UI_DrawWindow(x, (y + 1) & HALF_MASK, 139, 158, UI_WINDOW_OPEN_ALL, g_WindowStyle);
+    UI_WindowDraw(x, (y + 1) & HALF_MASK, 139, 158, UI_WINDOW_OPEN_ALL, g_WindowStyle);
     for (slot = 0; slot < FISHING_ACCESSORY_SLOT_COUNT; slot++, slot_list++) {
         if (g_Accessories[*slot_list].type != ITEM_TYPE_FISHING_ROD) {
             continue;
@@ -36,20 +36,20 @@ NON_MATCHING void func_801D7EB0(s32 x, s32 y) {
             FIELD(s16, work, 0x36u) = slot;
         }
         if (D_80145E94[0] == 2 && !(((work = (FishingState*)(void*)g_Task)->counter_07) & 1) && work->pos_x == row) {
-            UI_DrawText(x + 5, (s16)icon_y, UI_TEXT_DIM, ITEM_NAME_LENGTH, (u8*)&g_Accessories[*slot_list]);
-            UI_DrawText(x + 5, (s16)(y + 23 + row_offset), 0, ITEM_NAME_LENGTH, (u8*)&g_Accessories[*slot_list]);
+            UI_TextDraw(x + 5, (s16)icon_y, UI_TEXT_DIM, ITEM_NAME_LENGTH, (u8*)&g_Accessories[*slot_list]);
+            UI_TextDraw(x + 5, (s16)(y + 23 + row_offset), 0, ITEM_NAME_LENGTH, (u8*)&g_Accessories[*slot_list]);
             qty = g_InventoryCounts[3][slot];
             if (qty >= 2) {
                 TEXT_Format(buffer, D_801D0C14, qty);
-                UI_DrawGlyphString(x + 104, (s16)(y + 29 + row_offset), UI_TEXT_DIM, buffer);
-                UI_DrawGlyphString(x + 104, (s16)(y + 27 + row_offset), 0, buffer);
+                UI_TextDrawGlyphString(x + 104, (s16)(y + 29 + row_offset), UI_TEXT_DIM, buffer);
+                UI_TextDrawGlyphString(x + 104, (s16)(y + 27 + row_offset), 0, buffer);
             }
         } else {
-            UI_DrawText(x + 5, (s16)icon_y, 0, ITEM_NAME_LENGTH, (u8*)&g_Accessories[*slot_list]);
+            UI_TextDraw(x + 5, (s16)icon_y, 0, ITEM_NAME_LENGTH, (u8*)&g_Accessories[*slot_list]);
             qty = g_InventoryCounts[3][slot];
             if (qty >= 2) {
                 TEXT_Format(buffer, D_801D0C14, qty);
-                UI_DrawGlyphString(x + 104, (s16)(y + 29 + row_offset), 0, buffer);
+                UI_TextDrawGlyphString(x + 104, (s16)(y + 29 + row_offset), 0, buffer);
             }
         }
         icon_y += FISHING_ACCESSORY_ROW_HEIGHT;
@@ -63,7 +63,7 @@ NON_MATCHING void func_801D7EB0(s32 x, s32 y) {
     }
     func_801D90FC(x, y);
     func_801D8248(x + 128, y + 28, 114);
-    UI_DrawText(x + 58, y + 7, 0, 3, D_801E21CC);
+    UI_TextDraw(x + 58, y + 7, 0, 3, D_801E21CC);
 }
 #else
 INCLUDE_ASM(func_801D7EB0);

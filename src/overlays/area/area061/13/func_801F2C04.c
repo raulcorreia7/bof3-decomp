@@ -3,12 +3,12 @@
 MATCH s32 func_801F2C04(void) {
     s8 sel;
 
-    sel = g_MessageChoice;
+    sel = g_UiMessageChoice;
     if (sel == 0) {
-        g_Zenny          = 0;
-        g_MessageRequest = MSG_AREA061_MASTER_OFFER_APPRENTICE;
+        g_Zenny            = 0;
+        g_UiMessageRequest = MSG_AREA061_MASTER_OFFER_APPRENTICE;
     } else {
-        g_MessageRequest = MSG_AREA061_MASTER_ASK_QUIT;
-        g_MenuMasterStep = 6;
+        g_UiMessageRequest = MSG_AREA061_MASTER_ASK_QUIT;
+        g_MenuMasterStep   = 6;
     }
 }

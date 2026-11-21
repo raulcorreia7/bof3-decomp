@@ -33,7 +33,7 @@ NON_MATCHING void SAVE_BuildSlotImage(void) {
     SaveSlotSummary* row;
 
     SAVE_FormatSlot();
-    func_801EF27C(1, 0x13, g_UiFormatBuffer);
+    func_801EF27C(1, 0x13, g_UiTextFormatBuffer);
     g_SaveData.scene_state = g_ScenarioState;
     D_80144948             = 0;
     g_SavedScriptVars[0]   = g_ScriptVars[0];

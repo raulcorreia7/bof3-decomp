@@ -18,17 +18,17 @@ MATCH void func_801D8BA0(void) {
         off = 0x90;
         while (i < (Party_CountOrder(PARTY_ORDER_FIELD) & BYTE_MASK)) {
             i++;
-            temp                               = off;
-            (&g_MenuPanelTasks[0].state)[temp] = 4;
+            temp                             = off;
+            (&g_UiPanelTasks[0].state)[temp] = 4;
             off += 0x24;
         }
-        g_MenuPanelTasks[7].state  = 2;
-        g_MenuPanelTasks[8].state  = 2;
-        g_MenuPanelTasks[9].state  = 2;
-        g_MenuPanelTasks[10].state = 2;
-        D_80148654                 = 0;
-        g_MenuStep.step            = 1;
-        g_MenuStep.sub_step        = 0;
-        D_80148665                 = D_80148656;
+        g_UiPanelTasks[7].state  = 2;
+        g_UiPanelTasks[8].state  = 2;
+        g_UiPanelTasks[9].state  = 2;
+        g_UiPanelTasks[10].state = 2;
+        D_80148654               = 0;
+        g_MenuStep.step          = 1;
+        g_MenuStep.sub_step      = 0;
+        D_80148665               = D_80148656;
     }
 }

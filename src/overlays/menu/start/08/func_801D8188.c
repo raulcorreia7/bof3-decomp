@@ -12,14 +12,14 @@ MATCH void func_801D8188(void) {
     Menu_DrawClutStrip(D_80144953);
     /* FAKE: hides slot's constant so the bar read stays s1-relative; pure form 87.93%. */
     FAKE_OPAQUE(slot);
-    bar                                                         = *(u16*)(slot - 0x164);
-    *slot                                                       = 1;
-    g_MenuPanelTasks[MENU_START_PANEL_DESCRIPTION].u.message.id = 0x31;
-    toggle                                                      = &D_8014865B;
-    sel                                                         = 1 - *toggle;
-    g_MenuPanelTasks[MENU_START_PANEL_CURSOR].pos.x             = bar + (sel << 5) + 0xDE;
-    g_MenuPanelTasks[MENU_START_PANEL_CURSOR].pos.y             = g_MenuPanelTasks[MENU_START_PANEL_DESCRIPTION].pos.y + 5;
-    key                                                         = &g_PadStates[0].pressed;
+    bar                                                       = *(u16*)(slot - 0x164);
+    *slot                                                     = 1;
+    g_UiPanelTasks[MENU_START_PANEL_DESCRIPTION].u.message.id = 0x31;
+    toggle                                                    = &D_8014865B;
+    sel                                                       = 1 - *toggle;
+    g_UiPanelTasks[MENU_START_PANEL_CURSOR].pos.x             = bar + (sel << 5) + 0xDE;
+    g_UiPanelTasks[MENU_START_PANEL_CURSOR].pos.y             = g_UiPanelTasks[MENU_START_PANEL_DESCRIPTION].pos.y + 5;
+    key                                                       = &g_PadStates[0].pressed;
     slot -= 180;
     if (*key & (PADLright | PADLleft)) {
         SND_PlaySE(EMI_SE_ID(SND_BANK_COMMON, 1));
@@ -28,8 +28,8 @@ MATCH void func_801D8188(void) {
     if (*key & g_InputMasks[MENU_INPUT_CONFIRM]) {
         if (*toggle != 0) {
             SND_PlaySE(EMI_SE_ID(SND_BANK_COMMON, 4));
-            Char_AddAbility(*(Party_GetAbilities(g_MenuPanelTasks[16].unk_0A, g_MenuPanelTasks[16].unk_0B, CHAR_INDEX_RYU) + g_MenuPanelTasks[16].unk_0C), CHAR_INDEX_RYU, 1, 0);
-            *(Party_GetAbilities(g_MenuPanelTasks[16].unk_0A, g_MenuPanelTasks[16].unk_0B, 0) + g_MenuPanelTasks[16].unk_0C) = 0;
+            Char_AddAbility(*(Party_GetAbilities(g_UiPanelTasks[16].unk_0A, g_UiPanelTasks[16].unk_0B, CHAR_INDEX_RYU) + g_UiPanelTasks[16].unk_0C), CHAR_INDEX_RYU, 1, 0);
+            *(Party_GetAbilities(g_UiPanelTasks[16].unk_0A, g_UiPanelTasks[16].unk_0B, 0) + g_UiPanelTasks[16].unk_0C) = 0;
         } else {
             SND_PlaySE(EMI_SE_ID(SND_BANK_COMMON, 6));
         }
@@ -39,7 +39,7 @@ MATCH void func_801D8188(void) {
         return;
     }
     if (*key & g_InputMasks[MENU_INPUT_CANCEL]) {
-        g_MenuPanelTasks[16].flags = 0xFF;
+        g_UiPanelTasks[16].flags = 0xFF;
         D_80148651 -= 2;
         SND_PlaySE(EMI_SE_ID(SND_BANK_COMMON, 6));
     }

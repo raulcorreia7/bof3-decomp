@@ -24,7 +24,7 @@ MATCH void func_801D23E4(void) {
             SND_PlaySE(EMI_SE_ID(SND_BANK_COMMON, 0));
         }
     } else {
-        Message_SetVariable(0, 0xC, Item_GetRecord(g_ShopItemCategory, g_ShopItemId));
+        UI_MessageSetVariable(0, 0xC, Item_GetRecord(g_ShopItemCategory, g_ShopItemId));
         D_80148340 = 0x3A;
     }
     if (g_PadStates[0].pressed & g_InputMasks[MENU_INPUT_CONFIRM]) {
@@ -37,9 +37,9 @@ MATCH void func_801D23E4(void) {
         SND_PlaySE(EMI_SE_ID(SND_BANK_COMMON, 6));
         for (index = 0; index < Party_CountOrder(PARTY_ORDER_FIELD); index++) {
             if (index == (s8)D_80148656) {
-                g_MenuPanelTasks[index + 3].state = 4;
+                g_UiPanelTasks[index + 3].state = 4;
             } else {
-                g_MenuPanelTasks[index + 3].state = 2;
+                g_UiPanelTasks[index + 3].state = 2;
             }
         }
         D_8014840B = 1;

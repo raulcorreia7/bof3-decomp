@@ -21,17 +21,17 @@ MATCH void func_801D8DC8(void) {
     s32            next;
 
     Menu_DrawClutStrip(D_80144953);
-    panel = &g_MenuPanelTasks[17];
+    panel = &g_UiPanelTasks[17];
     if (D_801485A0 != 0) {
-        g_MenuPanelTasks[MENU_START_PANEL_DESCRIPTION].u.message.id = D_801485A0 + START_LIST_DESCRIPTION_ID;
+        g_UiPanelTasks[MENU_START_PANEL_DESCRIPTION].u.message.id = D_801485A0 + START_LIST_DESCRIPTION_ID;
     } else {
-        g_MenuPanelTasks[MENU_START_PANEL_DESCRIPTION].u.message.id = 0;
+        g_UiPanelTasks[MENU_START_PANEL_DESCRIPTION].u.message.id = 0;
     }
-    g_MenuPanelTasks[MENU_START_PANEL_CURSOR].active = 1;
-    g_MenuPanelTasks[MENU_START_PANEL_CURSOR].pos.x  = panel->pos.x + START_LIST_CURSOR_X;
-    g_MenuPanelTasks[MENU_START_PANEL_CURSOR].pos.y  = panel->pos.y + ((panel->unk_0B - panel->unk_0A) * START_LIST_ROW_HEIGHT + START_LIST_FIRST_ROW_Y);
-    buttons                                          = INPUT_REPEATED(g_PadStates[0].pressed, (PADLup | PADLdown | PADL1 | PADR1));
-    old                                              = panel->unk_0B;
+    g_UiPanelTasks[MENU_START_PANEL_CURSOR].active = 1;
+    g_UiPanelTasks[MENU_START_PANEL_CURSOR].pos.x  = panel->pos.x + START_LIST_CURSOR_X;
+    g_UiPanelTasks[MENU_START_PANEL_CURSOR].pos.y  = panel->pos.y + ((panel->unk_0B - panel->unk_0A) * START_LIST_ROW_HEIGHT + START_LIST_FIRST_ROW_Y);
+    buttons                                        = INPUT_REPEATED(g_PadStates[0].pressed, (PADLup | PADLdown | PADL1 | PADR1));
+    old                                            = panel->unk_0B;
     if (buttons & PADLup) {
         if (old != 0) {
             panel->unk_0B = old - 1;
@@ -70,15 +70,15 @@ MATCH void func_801D8DC8(void) {
         }
     }
     D_801ED891 = g_BattleListCursor;
-    D_801ED890 = g_MenuPanelTasks[17].unk_0A;
+    D_801ED890 = g_UiPanelTasks[17].unk_0A;
     if (old != panel->unk_0B) {
         SND_PlaySE(EMI_SE_ID(SND_BANK_COMMON, 0));
     }
     if (g_PadStates[0].pressed & g_InputMasks[MENU_INPUT_CANCEL]) {
         SND_PlaySE(EMI_SE_ID(SND_BANK_COMMON, 6));
-        D_80148597                                       = 1;
-        g_MenuPanelTasks[MENU_START_PANEL_CURSOR].active = 0;
-        D_80148654                                       = 7;
+        D_80148597                                     = 1;
+        g_UiPanelTasks[MENU_START_PANEL_CURSOR].active = 0;
+        D_80148654                                     = 7;
         D_80148652 += 1;
     }
 }

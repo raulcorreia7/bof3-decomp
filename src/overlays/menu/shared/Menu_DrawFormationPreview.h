@@ -31,10 +31,10 @@ MATCH void Menu_DrawFormationPreview(u16 x, u16 y, u8 index, u8 blink, s32 angle
 
     table = *(Formations*)g_MenuFormations;
     order = g_MenuFormationOrder;
-    UI_DrawWindow(x + 3, y + 3, MENU_FORMATION_WINDOW_WIDTH, MENU_FORMATION_WINDOW_HEIGHT, 0, CHARACTER_BLOCK->window_style);
+    UI_WindowDraw(x + 3, y + 3, MENU_FORMATION_WINDOW_WIDTH, MENU_FORMATION_WINDOW_HEIGHT, 0, CHARACTER_BLOCK->window_style);
 
     layout = &table.layouts[index];
-    UI_DrawTextString(x + FORMATION_PREVIEW_CENTER_X - layout->name_length * 4, y + FORMATION_PREVIEW_NAME_Y, 0, layout->name_length, layout->name);
+    UI_TextDrawString(x + FORMATION_PREVIEW_CENTER_X - layout->name_length * 4, y + FORMATION_PREVIEW_NAME_Y, 0, layout->name_length, layout->name);
 
     switch (index) {
         case 0:
@@ -116,9 +116,9 @@ MATCH void Menu_DrawFormationPreview(u16 x, u16 y, u8 index, u8 blink, s32 angle
                            GetClut(16, STAGE_PALETTE_Y), shade[i]);
     }
 
-    UI_DrawSpriteRun(x, y, g_MenuFormationFrameLeft, 0);
+    UI_SpriteDrawRun(x, y, g_MenuFormationFrameLeft, 0);
     for (i = 0; i < FORMATION_FRAME_COLUMNS; i++) {
-        UI_DrawSpriteRun(x + i * 8, y, g_MenuFormationFrameMiddle, 0);
+        UI_SpriteDrawRun(x + i * 8, y, g_MenuFormationFrameMiddle, 0);
     }
-    UI_DrawSpriteRun(x, y, g_MenuFormationFrameRight, 0);
+    UI_SpriteDrawRun(x, y, g_MenuFormationFrameRight, 0);
 }

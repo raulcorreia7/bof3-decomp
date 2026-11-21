@@ -4,5 +4,5 @@ MATCH void func_800B01F0(void) {
     BattleMenuPanel0Steps handlers;
 
     handlers = D_800969F8;
-    handlers.steps[g_MenuCurrentPanel->state]();
+    handlers.steps[g_UiPanelCurrent->state]();
 }

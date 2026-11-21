@@ -32,7 +32,7 @@ NON_MATCHING void func_801F98A4(void) {
             if (*mode == 2) {
                 break;
             }
-            Message_StartAreaMessage(MSG_SCENA05_032);
+            UI_MessageStartArea(MSG_SCENA05_032);
             *mode                   = 2;
             g_ScenarioState.step_05 = 2;
             break;

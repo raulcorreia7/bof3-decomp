@@ -8,7 +8,7 @@ MATCH void func_801D90FC(s32 x, s16 y) {
     s32 i;
 
     panel_x = x;
-    UI_DrawWindow(panel_x, (y + 2), 139, 20, 0, g_WindowStyle);
+    UI_WindowDraw(panel_x, (y + 2), 139, 20, 0, g_WindowStyle);
     Fishing_SetDrawMode(9, 1);
     Fishing_DrawSprite(63, 1, sx, sy);
     Fishing_DrawSprite(64, 1, (sx + 8), sy);

@@ -125,7 +125,7 @@ MATCH void func_801FBF30(void) {
             if (*state == GAME_REQUEST_MESSAGE) {
                 break;
             }
-            Message_StartAreaMessage(MSG_SCENA01_054);
+            UI_MessageStartArea(MSG_SCENA01_054);
             *state                  = GAME_REQUEST_MESSAGE;
             g_ScenarioState.step_05 = 0xE;
             break;
@@ -168,7 +168,7 @@ MATCH void func_801FBF30(void) {
             if (*state == GAME_REQUEST_MESSAGE) {
                 break;
             }
-            Message_StartAreaMessage(MSG_SCENA01_054);
+            UI_MessageStartArea(MSG_SCENA01_054);
             *state                  = GAME_REQUEST_MESSAGE;
             g_ScenarioState.step_05 = 0x11;
             break;

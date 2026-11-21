@@ -2,7 +2,7 @@
 
 /*
  * callback table read by func_80155B40, handler table g_BundleOpcodes and
- * the small value tables read by Area_DrawCellSides and Menu_ShrinkMessagePanel.
+ * the small value tables read by Area_DrawCellSides and UI_MessageShrinkPanel.
  */
 
 const CellDrawCallback D_8017F668[77] = {
@@ -139,7 +139,7 @@ const BundleOpcodeCallback g_BundleOpcodes[7] = {
     (BundleOpcodeCallback)Area_DrawGouraudQuad, func_80158830, func_80158940,
 };
 
-const u8 g_MenuPanelOrigins[32] = {
+const u8 g_UiPanelOrigins[32] = {
     0x3C, 0xAA, 0x3C, 0x5D, 0x3C, 0x18, 0x10, 0x18, 0x68, 0x18, 0x10, 0xAA, 0x68, 0xAA, 0x00, 0x00,
     0x64, 0xAA, 0x64, 0x5D, 0x64, 0x18, 0x10, 0x18, 0xB8, 0x18, 0x10, 0xAA, 0xB8, 0xAA, 0x00, 0x00,
 };

@@ -20,7 +20,7 @@ MATCH void func_801F84B8(void) {
             break;
         case 1:
             if (g_ScriptVars[0] == 8) {
-                UI_SetMode(0);
+                UI_ModeSet(0);
                 g_ScenarioState.step_05 = 2;
             }
             break;
@@ -45,7 +45,7 @@ MATCH void func_801F84B8(void) {
         case 4:
             if (g_GameStateIndex == 0) {
                 g_AreaDrawFlags = 0x1F;
-                UI_SetMode(1);
+                UI_ModeSet(1);
                 g_ScenarioState.step_05 = 5;
             }
             break;

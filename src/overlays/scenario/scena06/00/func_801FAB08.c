@@ -56,7 +56,7 @@ NON_MATCHING void func_801FAB08(void) {
             if (g_ScriptVars[0] != 2) {
                 break;
             }
-            UI_SetMode(0xD);
+            UI_ModeSet(0xD);
             g_ScenarioState.step_05 = 5;
             break;
         case 5:
@@ -122,7 +122,7 @@ NON_MATCHING void func_801FAB08(void) {
             }
             g_ScenarioState.step_05 = 13;
             SYS_SetFlag(g_SceneFlags, 0x2F);
-            UI_SetMode(0xD);
+            UI_ModeSet(0xD);
             break;
         case 13:
             if (g_UiWindowEffectBusy != 0) {

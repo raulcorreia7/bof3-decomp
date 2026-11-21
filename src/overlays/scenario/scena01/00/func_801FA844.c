@@ -15,7 +15,7 @@ NON_MATCHING void func_801FA844(void) {
             g_Game.flags |= 0x100;
             break;
         case 1:
-            Message_StartAreaMessage(1);
+            UI_MessageStartArea(1);
             g_GameStateIndex        = GAME_REQUEST_MESSAGE;
             g_ScenarioState.step_05 = 2;
             break;
@@ -48,7 +48,7 @@ NON_MATCHING void func_801FA844(void) {
             }
             break;
         case 4:
-            Message_StartAreaMessage(2);
+            UI_MessageStartArea(2);
             g_GameStateIndex        = GAME_REQUEST_MESSAGE;
             g_ScenarioState.step_05 = 5;
             break;
@@ -134,7 +134,7 @@ NON_MATCHING void func_801FA844(void) {
             }
             break;
         case 18:
-            Message_StartAreaMessage(0xC);
+            UI_MessageStartArea(0xC);
             g_GameStateIndex        = GAME_REQUEST_MESSAGE;
             g_ScenarioState.step_05 = 0x13;
             break;

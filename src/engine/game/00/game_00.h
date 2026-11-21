@@ -44,7 +44,7 @@
 /* Fixed retail addresses the units dereference. */
 #define ENCOUNTER_TABLE_BASE   0x800E4000u /* formations and enemy records (@source: wiki:formats/area) */
 #define GAME_AREA_ID_ADDR      0x80143F00  /* the u16 world id; MEM reads it non-volatile to match retail */
-#define AREA_MESSAGE_REQUEST   0xD8        /* the message Message_RunAreaMessage starts */
+#define AREA_MESSAGE_REQUEST   0xD8        /* the message UI_MessageRunArea starts */
 
 #define SCRATCH_WORK           SP_REF(volatile Actor*, 0x44u)
 #define GAME_ENTITY_COUNTER    SP_REF(s16, 0x0u)
@@ -53,7 +53,7 @@
 #define GAME_WORK_AREA_PTR     (*(volatile Actor**)&g_CurrentActor)
 
 /* NOTE: retail reads the window style byte at 0x80144952 signed (`lb`) in func_8019986C and
- * UI_DrawWindowFrame and unsigned (`lbu`) in func_801999F8 and UI_DrawWindowOutline, so exports.h keeps u8 and only
+ * UI_WindowDrawFrame and unsigned (`lbu`) in func_801999F8 and UI_WindowDrawOutline, so exports.h keeps u8 and only
  * the signed readers view it as s8. */
 #define GAME_WINDOW_STYLE      (*(s8*)&g_WindowStyle)
 
@@ -69,7 +69,7 @@
  * slot argument and the member's locals change the frame and register use; the
  * do/while form moves bytes. */
 #define GAME_START_STREAM_AND_STAGE_PALETTE(slot) \
-    UI_SetMode(2u);                               \
+    UI_ModeSet(2u);                               \
     if (WINDOW_EFFECT_BUSY()) {                   \
         do {                                      \
             Area_RunLoadingFrame();               \
@@ -431,7 +431,7 @@ extern AreaActionFadeSteps g_AreaActionFadeSteps; /* 0x80195F44 */
 extern char                D_80195F90[];
 /* The format that prints an ability row's cost. */
 /* D_80195F98 */
-extern char                g_UiAbilityRowFormat[]; /* 0x80195F98 */
+extern char                g_UiListAbilityRowFormat[]; /* 0x80195F98 */
 /* The format that prints the zenny reward. */
 /* D_80195FBC */
 extern char                g_GameRewardZennyFormat[]; /* 0x80195FBC */
@@ -1363,7 +1363,7 @@ static inline void GameRunMapLoadHandshake(void) {
     while (EMI_IsReady() == 0) {
         SYS_ThreadWait(1U);
     }
-    UI_SetMode(3U);
+    UI_ModeSet(3U);
     if (WINDOW_EFFECT_BUSY()) {
         do {
             Area_RunLoadingFrame();

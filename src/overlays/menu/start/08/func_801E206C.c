@@ -20,7 +20,7 @@ NON_MATCHING void func_801E206C(void) {
         WinDrawCueText(28, 19, 0xC5);
     }
     func_801E2D84(0xA8, 0x62);
-    Menu_DrawCursorSprite(0xB0, (((s8)D_80148655 - 8) * 0x12 + 0x6A) & 0xFFFE, 0);
+    UI_CursorDraw(0xB0, (((s8)D_80148655 - 8) * 0x12 + 0x6A) & 0xFFFE, 0);
     sel = g_PadStates[0].pressed & (PADRup | PADRdown | PADRleft | PADRright | PADL1 | PADR1);
     if (sel != 0) {
         SND_PlaySE(EMI_SE_ID(SND_BANK_COMMON, 3));

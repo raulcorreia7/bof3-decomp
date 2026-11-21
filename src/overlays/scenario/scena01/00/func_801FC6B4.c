@@ -11,7 +11,7 @@ MATCH void func_801FC6B4(void) {
                 if (g_ScriptVars[0] == 0x64) {
                     g_ScriptVars[0]         = 0;
                     g_ScenarioState.step_05 = 1;
-                    UI_SetMode(UI_MODE_LONG_FADE_OUT);
+                    UI_ModeSet(UI_MODE_LONG_FADE_OUT);
                     func_801C16B8();
                     SND_FadeOutSequence(0, 0, 4, 0x1E);
                 } else if (g_ScriptVars[0] == 0x65) {
@@ -36,7 +36,7 @@ MATCH void func_801FC6B4(void) {
             }
             break;
         case 3:
-            UI_SetMode(UI_MODE_LONG_FADE_IN);
+            UI_ModeSet(UI_MODE_LONG_FADE_IN);
             g_AreaDrawFlags         = AREA_DRAW_ALL_FLAGS;
             g_ScenarioState.step_05 = 4;
             break;

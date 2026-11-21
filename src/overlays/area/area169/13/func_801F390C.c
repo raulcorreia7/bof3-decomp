@@ -6,14 +6,14 @@ MATCH void func_801F390C(void) {
     state = &g_SceneEventState.step;
     switch (*state) {
         case 0:
-            UI_SetMode(8);
+            UI_ModeSet(8);
             *state = 1;
             return;
         case 1:
             if (WINDOW_EFFECT_IDLE()) {
                 SND_PlaySE(EMI_SE_ID(SND_BANK_AREA, 0x02));
                 Char_RebuildPartyStats();
-                UI_SetMode(9);
+                UI_ModeSet(9);
                 *state = 2;
             }
             return;

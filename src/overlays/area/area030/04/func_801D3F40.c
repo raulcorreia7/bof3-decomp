@@ -31,17 +31,17 @@ MATCH void func_801D3F40(void) {
     }
     if (FISHING_STATE->counter_49 != 0) {
         u16* ox = &D_80144154;
-        UI_DrawText(FISHING_STATE->origin_x, (*ox + 2), 0, FISHING_STATE->counter_49, FISHING_STATE->item.pointer);
+        UI_TextDraw(FISHING_STATE->origin_x, (*ox + 2), 0, FISHING_STATE->counter_49, FISHING_STATE->item.pointer);
         id = D_801E1E80[FISHING_STATE->row_4B * 0xC];
         if (id != GAME_NONE) {
             index = id * 3;
-            UI_DrawText((FISHING_STATE->origin_x + (FISHING_STATE->counter_49 * 8)), (*ox + 2), D_801E1F16[index], 1, (u8*)(index + D_801E1F14));
+            UI_TextDraw((FISHING_STATE->origin_x + (FISHING_STATE->counter_49 * 8)), (*ox + 2), D_801E1F16[index], 1, (u8*)(index + D_801E1F14));
         }
     } else {
         id = D_801E1E80[FISHING_STATE->row_4B * 0xC];
         if (id != GAME_NONE) {
             index = id * 3;
-            UI_DrawText(FISHING_STATE->origin_x, (D_80144154 + 2), D_801E1F16[index], 1, (u8*)(index + D_801E1F14));
+            UI_TextDraw(FISHING_STATE->origin_x, (D_80144154 + 2), D_801E1F16[index], 1, (u8*)(index + D_801E1F14));
             if ((s16)FISHING_STATE->origin_x == 0x1D) {
                 FISHING_STATE->step_timer = 4;
                 FISHING_STATE->handler_index += 1;

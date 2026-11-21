@@ -67,19 +67,19 @@ MATCH void func_801EECDC(void) {
             category = value >> 8;
             if (Item_Add(category, value & 0xFF, 1, 0)) {
                 BMagic_SetTextItemName(value & 0xFF, category & 0xFF);
-                func_801DE8C0(1, 0xFF, Message_GetText(0x38));
+                func_801DE8C0(1, 0xFF, UI_MessageGetText(0x38));
                 g_BattleEnemyBattlers[g_BattleTargetSelector - 3].drops[0].rate = 0;
                 g_BattleEnemyBattlers[g_BattleTargetSelector - 3].drops[0].item = 0;
             } else {
-                func_801DE8C0(1, 0xFF, Message_GetText(0x39));
+                func_801DE8C0(1, 0xFF, UI_MessageGetText(0x39));
             }
         } else {
-            func_801DE8C0(1, 0xFF, Message_GetText(0x3A));
+            func_801DE8C0(1, 0xFF, UI_MessageGetText(0x3A));
         }
     } else if (g_BattleEnemyBattlers[g_BattleTargetSelector - 3].drops[0].rate != 0) {
-        func_801DE8C0(1, 0xFF, Message_GetText(0x39));
+        func_801DE8C0(1, 0xFF, UI_MessageGetText(0x39));
     } else {
-        func_801DE8C0(1, 0xFF, Message_GetText(0x3A));
+        func_801DE8C0(1, 0xFF, UI_MessageGetText(0x3A));
     }
     g_Task->header.mode += 1;
 }

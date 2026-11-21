@@ -5,7 +5,7 @@ MATCH void func_800C2680(void) {
     u8   i;
 
     BATTLE_RAISE_STATE(BATTLE_STATE_WINDOW_BUSY);
-    UI_SetMode(4);
+    UI_ModeSet(4);
     g_PartySize = D_801FE4E4;
     for (i = 0; i < g_PartySize; i++) {
         g_PartyBattleOrder[i] = D_801FE4EC[i];
