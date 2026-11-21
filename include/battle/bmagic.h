@@ -24,28 +24,28 @@ typedef struct EffectDispatchSteps {
 ASSERT_SIZE(EffectDispatchSteps, 0xC);
 
 /* The mode routines Effect_DrawActor runs before it draws the effect's actor. */
-#define ACTOR_EFFECT_STEP_COUNT 3
+#define BMAGIC_ACTOR_STEP_COUNT 3
 
 typedef struct BMagicActorSteps {
-    Callback steps[ACTOR_EFFECT_STEP_COUNT];
+    Callback steps[BMAGIC_ACTOR_STEP_COUNT];
 } BMagicActorSteps;
 
 ASSERT_SIZE(BMagicActorSteps, 0xC);
 
 /* The step routines of the effect work record func_801EF37C advances. */
-#define BMAGIC_EFFECT_WORK_STEP_COUNT 3
+#define BMAGIC_TASK_STEP_COUNT 3
 
 typedef struct BMagicTaskSteps {
-    Callback steps[BMAGIC_EFFECT_WORK_STEP_COUNT];
+    Callback steps[BMAGIC_TASK_STEP_COUNT];
 } BMagicTaskSteps;
 
 ASSERT_SIZE(BMagicTaskSteps, 0xC);
 
 /* The step routines of one sparkle of the sparkle pool. */
-#define SPARKLE_EFFECT_STEP_COUNT 3
+#define BMAGIC_SPARKLE_STEP_COUNT 3
 
 typedef struct BMagicSparkleSteps {
-    Callback steps[SPARKLE_EFFECT_STEP_COUNT];
+    Callback steps[BMAGIC_SPARKLE_STEP_COUNT];
 } BMagicSparkleSteps;
 
 ASSERT_SIZE(BMagicSparkleSteps, 0xC);
