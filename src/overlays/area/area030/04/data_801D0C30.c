@@ -8,7 +8,8 @@ FishingAnchors D_801D0C30 = {
     },
 };
 
-char D_801D0C38[] = "%3d";
+/* The format that prints a catch row's count and score. */
+char g_FishingCatchRowFormat[] = "%3d";
 
 /* The roster panel icon rows, read by Fishing_DrawRank: icon id, x offset and the two marker flags, 13 rows. */
 FishingIcons g_FishingRankIcons = {

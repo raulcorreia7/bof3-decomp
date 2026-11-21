@@ -26,16 +26,16 @@ MATCH void func_800AB910(void) {
     }
     work = BATTLE_WORK;
     if ((u32)work->slot < 3) {
-        current                      = g_Game.current;
-        g_BattleEffects[slot].unk_2E = work->unk_2E.value + (s8)g_BattlePanelOffsets[current->chr.character_id * 8 + work->facing * 2];
-        panel_index                  = work->facing * 2 + current->chr.character_id * 8;
-        g_BattleEffects[slot].unk_30 = work->unk_30.value + (s8)g_BattlePanelOffsets[panel_index + 1];
-        g_BattleEffects[slot].unk_32 = work->depth;
-        g_BattleEffects[slot].unk_08 = g_Game.members[work->slot].facing;
+        current                        = g_Game.current;
+        g_BattleEffects[slot].screen_x = work->screen_x.value + (s8)g_BattlePanelOffsets[current->chr.character_id * 8 + work->facing * 2];
+        panel_index                    = work->facing * 2 + current->chr.character_id * 8;
+        g_BattleEffects[slot].screen_y = work->screen_y.value + (s8)g_BattlePanelOffsets[panel_index + 1];
+        g_BattleEffects[slot].depth    = work->depth;
+        g_BattleEffects[slot].unk_08   = g_Game.members[work->slot].facing;
     } else {
-        g_BattleEffects[slot].unk_2E = work->unk_2E.value + g_BattleCurrentEnemy->panel_offset_x;
-        g_BattleEffects[slot].unk_30 = work->unk_30.value + g_BattleCurrentEnemy->panel_offset_y;
-        g_BattleEffects[slot].unk_32 = work->depth;
-        g_BattleEffects[slot].unk_08 = ENEMY_COMBATANT(work->slot).unk_08;
+        g_BattleEffects[slot].screen_x = work->screen_x.value + g_BattleCurrentEnemy->panel_offset_x;
+        g_BattleEffects[slot].screen_y = work->screen_y.value + g_BattleCurrentEnemy->panel_offset_y;
+        g_BattleEffects[slot].depth    = work->depth;
+        g_BattleEffects[slot].unk_08   = ENEMY_COMBATANT(work->slot).unk_08;
     }
 }

@@ -2,9 +2,6 @@
 
 from __future__ import annotations
 
-import argparse
-import contextlib
-import io
 import re
 from collections import Counter
 from dataclasses import dataclass, field
@@ -479,51 +476,40 @@ def _addresses(insns: list[Insn], ctx: Context) -> set[int]:
     found = {int(text, 16) for insn in insns for text in SCRATCH.findall(insn.text)}
     pending: dict[str, int] = {}
     for insn in insns:
+        guesses = [
+            _symbol_operand_address(ctx, arg, r"^(D_|g_|jtbl_|s_)") for arg in insn.args
+        ]
         if insn.op == "lui" and len(insn.args) >= 2:
-            value = _number(insn.args[1])
-            if value is not None and 0x8000 <= value <= 0xFFFF:
-                pending[insn.args[0]] = value << 16
-            address = _symbol_operand_address(ctx, insn.args[1])
-            if address is not None:
-                found.add(address)
+            high = _number(insn.args[1])
+            if high is not None and 0x8000 <= high <= 0xFFFF:
+                pending[insn.args[0]] = high << 16
+            guesses.append(_symbol_operand_address(ctx, insn.args[1]))
         if len(insn.args) >= 3 and insn.args[1] in pending:
-            value = _number(insn.args[2])
-            if value is not None:
-                found.add(pending[insn.args[1]] + value)
-        for arg in insn.args:
-            address = _symbol_operand_address(ctx, arg, r"^(D_|g_|jtbl_|s_)")
-            if address is not None:
-                found.add(address)
+            low = _number(insn.args[2])
+            guesses.append(None if low is None else pending[insn.args[1]] + low)
+        found.update(address for address in guesses if address is not None)
     return found
 
 
 def _at_strings(root: Path, image: str, addresses: set[int]) -> dict[int, str]:
-    """Return ``tools/symbol.py at``'s owner line for each address."""
+    """Return ``tools/symbol.py at``'s owner text for each address."""
     if not addresses:
         return {}
-    args = argparse.Namespace(
-        diff=None, image=image, addresses=[f"0x{address:08X}" for address in addresses]
-    )
-    buffer = io.StringIO()
     try:
-        with contextlib.redirect_stdout(buffer):
-            lookup.at(SymbolContext(root), args)
+        rows = lookup.at(
+            SymbolContext(root), image, [f"0x{a:08X}" for a in addresses], None
+        ).rows
     except (SystemExit, Exception):
         return {}
     found = {}
-    for line in buffer.getvalue().splitlines():
-        match = re.match(r"0x([0-9A-Fa-f]+)\s+(.*?)\s+\(([^)]*)\)\s+\[", line)
-        if match:
-            path = re.sub(r"\+0x0$", "", match.group(2))
-            kind = match.group(3)
-            found[int(match.group(1), 16)] = (
-                f"{path} ({kind})" if kind != "untyped" else path
-            )
+    for row in rows:
+        if not row.owners:
+            found[row.addr] = f"0x{row.addr:08X} (no named owner)"
             continue
-        match = re.match(r"0x([0-9A-Fa-f]+)\s+no named owner", line)
-        if match:
-            address = int(match.group(1), 16)
-            found[address] = f"0x{address:08X} (no named owner)"
+        owner = row.owners[-1]
+        path = re.sub(r"\+0x0$", "", f"{owner.path}+{owner.delta:#x}")
+        kind = owner.size[1:-1]
+        found[row.addr] = f"{path} ({kind})" if kind != "untyped" else path
     return found
 
 

@@ -91,8 +91,8 @@ MATCH void func_801EF03C(void) {
         g_Task->facing = g_BattleEffectBattler->facing;
         Battle_CenterCamera();
         Battle_ProjectRange();
-        D_1F800008[2] = g_Task->unk_2E.value;
-        D_1F800008[3] = g_Task->unk_30.value;
+        D_1F800008[2] = g_Task->screen_x.value;
+        D_1F800008[3] = g_Task->screen_y.value;
         func_800B0118();
         battler           = g_BattleEffectBattler;
         task              = g_Task;
@@ -100,10 +100,10 @@ MATCH void func_801EF03C(void) {
         task->pos.y.fixed = battler->pos.y.fixed;
         task->pos.z.fixed = battler->pos.z.fixed;
         Battle_ProjectRange();
-        g_Task->unk_2E.value += g_Task->unk_0C;
-        g_Task->unk_30.value += g_Task->unk_10;
-        D_1F800008[0]        = g_Task->unk_2E.value;
-        D_1F800008[1]        = g_Task->unk_30.value;
+        g_Task->screen_x.value += g_Task->unk_0C;
+        g_Task->screen_y.value += g_Task->unk_10;
+        D_1F800008[0]        = g_Task->screen_x.value;
+        D_1F800008[1]        = g_Task->screen_y.value;
         g_Task->unk_14       = ratan2(D_1F800008[2] - D_1F800008[0], D_1F800008[3] - D_1F800008[1]);
         g_Task->unk_5D       = RANDOM_MASK(1);
         g_Task->unk_5E       = RANDOM_MASK(3);

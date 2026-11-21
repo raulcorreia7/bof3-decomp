@@ -5,7 +5,7 @@
  * LOBU keeps the byte's address live in s0 across the calls (82.97%). */
 
 /* resolves the active party record's step: clears its 0x118 result cells,
- * stages its stat block at D_801EC2E8, runs the step for the current action type,
+ * stages its stat block at g_BattleCalcStats[0], runs the step for the current action type,
  * applies the 0x11C and 0x11E cells, marks a knockout at zero hp, then
  * advances the step.
  */
@@ -33,7 +33,7 @@ MATCH void func_801DFCB4(void) {
     *(s16*)((u8*)self + 0x11C)               = 0;
     *(s16*)((u32)g_Battle.target_record + 6) = 0;
     *((u8*)g_Battle.target_record + 8)       = 0;
-    D_801EC2E8                               = g_Game.current->chr.stats;
+    g_BattleCalcStats[0]                     = g_Game.current->chr.stats;
     stats_work                               = g_Game.current;
     if (HAS_STATUS(*stats_work, 0x800)) {
         D_801EC2EE = 1;

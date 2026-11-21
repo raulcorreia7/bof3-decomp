@@ -46,9 +46,9 @@ MATCH void func_801EEDB4(void) {
         g_Task->param.unk_0B += 4;
         func_801EF23C(24, BOLT_RADIUS, BOLT_FLICKER_MASK);
         g_Task->param.unk_0B -= 10;
-        g_Task->unk_2E.value += 16;
+        g_Task->screen_x.value += 16;
         func_801EFC74();
-        g_Task->unk_2E.value -= 32;
+        g_Task->screen_x.value -= 32;
         func_801EFC74();
         PopMatrix();
     }
@@ -235,8 +235,8 @@ MATCH void func_801EFC74(void) {
         prim = (POLY_G3*)g_GfxPrimCursor;
         SetPolyG3(prim);
         SetSemiTrans(prim, 1);
-        setXY3(prim, g_Task->unk_2E.value, g_Task->unk_30.value, g_Task->unk_2E.value + FIXED_MUL(rsin(i << 9), *radius), g_Task->unk_30.value + FIXED_MUL(rcos(i << 9), *radius),
-               g_Task->unk_2E.value + FIXED_MUL(rsin((i + 1) << 9), *radius), g_Task->unk_30.value + FIXED_MUL(rcos((i + 1) << 9), *radius));
+        setXY3(prim, g_Task->screen_x.value, g_Task->screen_y.value, g_Task->screen_x.value + FIXED_MUL(rsin(i << 9), *radius), g_Task->screen_y.value + FIXED_MUL(rcos(i << 9), *radius),
+               g_Task->screen_x.value + FIXED_MUL(rsin((i + 1) << 9), *radius), g_Task->screen_y.value + FIXED_MUL(rcos((i + 1) << 9), *radius));
         setRGB0(prim, g_Task->timer * 8, g_Task->timer * 8, g_Task->timer * 6);
         setRGB1(prim, 1, 1, 1);
         setRGB2(prim, 1, 1, 1);

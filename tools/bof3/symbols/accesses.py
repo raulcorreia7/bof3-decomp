@@ -2,16 +2,13 @@
 
 from __future__ import annotations
 
-import argparse
 import collections
-import json
 import re
-import sys
 
 from bof3.adapters.config import read_symbols
 from bof3.errors import SymbolError
 from bof3.source import ctext
-from bof3.symbols.context import Context
+from bof3.symbols.context import Context, Table
 from bof3.symbols.headers import _match_brace
 from bof3.symbols.layers import LAYER_RESIDENT, _layer_manifests, _layer_tree
 from bof3.symbols.mips import (
@@ -283,9 +280,8 @@ def _access_rows(
     return rows
 
 
-def accesses(ctx: Context, args: argparse.Namespace) -> int:
+def accesses(ctx: Context, name: str) -> Table:
     """List the reads and writes of a record type or a global, per offset."""
-    name = args.name
     data = read_symbols(ctx.root)
     globals_found: list[tuple[str, dict]] = []
     for table, rows in data.items():
@@ -296,8 +292,20 @@ def accesses(ctx: Context, args: argparse.Namespace) -> int:
     images = sorted(functions)
     task_types = _task_types(ctx)
     all_accesses: list[MipsAccess] = []
-    traced = 0
-    untraced = 0
+    counts = [0, 0]
+
+    def scan(
+        scanned: list[str], ranges: list[AccessRange], cells: dict[int, str]
+    ) -> None:
+        for image in scanned:
+            names = {func.addr: func.name for func in functions.get(image, ())}
+            found, traced, untraced = _scan_image(
+                image, functions, ranges, cells, names
+            )
+            all_accesses.extend(found)
+            counts[0] += traced
+            counts[1] += untraced
+
     layout = None
     c_uses: dict[str, list[tuple[str, int, str]]] = {}
     if globals_found:
@@ -314,17 +322,7 @@ def accesses(ctx: Context, args: argparse.Namespace) -> int:
             extent = _row_extent(row, row_layout)
             start = int(row["addr"])
             item_range = AccessRange(start, start + extent, name, type_name)
-            for image in _visible_images(table, images):
-                found, part_traced, part_untraced = _scan_image(
-                    image,
-                    functions,
-                    [item_range],
-                    {},
-                    {func.addr: func.name for func in functions.get(image, ())},
-                )
-                all_accesses.extend(found)
-                traced += part_traced
-                untraced += part_untraced
+            scan(_visible_images(table, images), [item_range], {})
         member_names = (
             {member.path.rsplit(".", 1)[-1] for member in layout.members}
             if layout is not None
@@ -375,102 +373,48 @@ def accesses(ctx: Context, args: argparse.Namespace) -> int:
             item_range = AccessRange(
                 start, start + _row_extent(row, layout), row_name, name
             )
-            for image in _visible_images(table, images):
-                found, part_traced, part_untraced = _scan_image(
-                    image,
-                    functions,
-                    [item_range],
-                    {},
-                    {func.addr: func.name for func in functions.get(image, ())},
-                )
-                all_accesses.extend(found)
-                traced += part_traced
-                untraced += part_untraced
+            scan(_visible_images(table, images), [item_range], {})
         for table, row in pointer_rows:
             cell = int(row["addr"])
-            for image in _visible_images(table, images):
-                found, part_traced, part_untraced = _scan_image(
-                    image,
-                    functions,
-                    [],
-                    {cell: name},
-                    {func.addr: func.name for func in functions.get(image, ())},
-                )
-                all_accesses.extend(found)
-                traced += part_traced
-                untraced += part_untraced
+            scan(_visible_images(table, images), [], {cell: name})
         for image, task_type in task_types.items():
             if task_type == _normalized_type(name):
-                found, part_traced, part_untraced = _scan_image(
-                    image,
-                    functions,
-                    [],
-                    {0x1F800044: name},
-                    {func.addr: func.name for func in functions.get(image, ())},
-                )
-                all_accesses.extend(found)
-                traced += part_traced
-                untraced += part_untraced
+                scan([image], [], {0x1F800044: name})
         member_names = {member.path.rsplit(".", 1)[-1] for member in layout.members}
         c_uses = _c_member_uses(ctx, member_names)
         all_accesses = [access for access in all_accesses if access.type_name == name]
     rows = _access_rows(ctx, name, layout, all_accesses, c_uses, kind)
+    notes = ()
+    traced, untraced = counts
     if traced + untraced:
         share = 100.0 * traced / (traced + untraced)
-        print(
+        notes = (
             f"accesses: traced {traced} of {traced + untraced} memory operations "
             f"({share:.1f}%)",
-            file=sys.stderr,
         )
-    keys = [
-        "name",
-        "kind",
-        "offset",
-        "widths",
-        "reads",
-        "writes",
-        "member",
-        "member_type",
-        "examples",
-        "constants",
-        "slots",
-        "problem",
+    keys = "name kind offset widths reads writes member member_type examples constants slots problem"
+    return Table(keys, rows, notes, cells=_access_cells)
+
+
+def _access_cells(row: dict) -> list[str]:
+    widths = ",".join(f"{key}:{value}" for key, value in sorted(row["widths"].items()))
+    return [
+        row["name"],
+        row["kind"],
+        f"0x{row['offset']:X}",
+        widths,
+        str(row["reads"]),
+        str(row["writes"]),
+        row["member"] or "",
+        row["member_type"] or "",
+        "; ".join(row["examples"]),
+        ",".join(f"0x{value:X}" for value in row["constants"]),
+        ",".join(row["slots"]),
+        row["problem"],
     ]
-    if args.jsonl:
-        for row in rows:
-            item = {key: row[key] for key in keys}
-            item["widths"] = dict(row["widths"])
-            print(json.dumps(item, ensure_ascii=False))
-        return 0
-    print("\t".join(keys))
-    for row in rows:
-        widths = ",".join(
-            f"{key}:{value}" for key, value in sorted(row["widths"].items())
-        )
-        print(
-            "\t".join(
-                [
-                    row["name"],
-                    row["kind"],
-                    f"0x{row['offset']:X}",
-                    widths,
-                    str(row["reads"]),
-                    str(row["writes"]),
-                    row["member"] or "",
-                    row["member_type"] or "",
-                    "; ".join(row["examples"]),
-                    ",".join(f"0x{value:X}" for value in row["constants"]),
-                    ",".join(row["slots"]),
-                    row["problem"],
-                ]
-            )
-        )
-    return 0
 
 
 RECORD_HEAD = re.compile(r"(?m)\b(?:typedef\s+)?(?:struct|union)\s*(?:(\w+)\s*)?\{")
-
-
 TYPEDEF_RECORD = re.compile(r"(?m)^\s*typedef\s+(?:struct|union)\s+(\w+)\s+(\w+)\s*;")
 
 
@@ -578,7 +522,7 @@ def _record_direct_accesses(
     return dict(counts)
 
 
-def records(ctx: Context, args: argparse.Namespace) -> int:
+def records(ctx: Context) -> Table:
     """Summarise every record: size, members, duplicates, globals, parameters and accesses."""
     counts, header, names = _record_definitions(ctx)
     layouts = {}
@@ -640,23 +584,5 @@ def records(ctx: Context, args: argparse.Namespace) -> int:
             row["record"],
         )
     )
-    keys = [
-        "record",
-        "size",
-        "members",
-        "unknown",
-        "definitions",
-        "same_layout",
-        "globals",
-        "params",
-        "accesses",
-        "header",
-    ]
-    if args.jsonl:
-        for row in rows:
-            print(json.dumps({key: row[key] for key in keys}, ensure_ascii=False))
-        return 0
-    print("\t".join(keys))
-    for row in rows:
-        print("\t".join(str(row[key]) for key in keys))
-    return 0
+    keys = "record size members unknown definitions same_layout globals params accesses header"
+    return Table(keys, rows)

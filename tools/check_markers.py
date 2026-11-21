@@ -79,6 +79,21 @@ ATTEMPT_COMMENT = re.compile(
 NON_MATCHING_GUARD = re.compile(r"defined\s*\(?\s*NON_MATCHING\s*\)?")
 
 
+def _definition_problem(head: Head, markers: Head) -> str | None:
+    """Why a definition's markers are wrong, or None."""
+    if len(markers) != 1:
+        kind = "no marker" if not markers else f"{len(markers)} markers"
+        return f"{kind}; a definition needs exactly one"
+    marker, _, guard = head[0]
+    if marker not in MARKERS:
+        return "the marker must be the first token of the definition"
+    if marker in DRAFT_MARKERS and guard != "draft":
+        return f"{marker} outside `#ifdef NON_MATCHING`"
+    if marker == "MATCH" and guard == "draft":
+        return "MATCH inside `#ifdef NON_MATCHING`"
+    return None
+
+
 def _head_violation(
     path: str, head: Head, is_definition: bool, line: int
 ) -> Violation | None:
@@ -86,8 +101,7 @@ def _head_violation(
     markers = [t for t in head if t[0] in MARKERS]
     if not markers and (not is_definition or any(t[0] == "inline" for t in head)):
         return None  # `static inline` helpers are not lifted functions
-    first = head[0] if head else ("", line, "plain")
-    where = markers[0][1] if markers else first[1]
+    where = markers[0][1] if markers else head[0][1] if head else line
     if not is_definition:
         return Violation(
             path,
@@ -95,19 +109,8 @@ def _head_violation(
             _head_text(head),
             "marker on something that is not a function definition",
         )
-    name = _function_name(head)
-    if len(markers) != 1:
-        kind = "no marker" if not markers else f"{len(markers)} markers"
-        problem = f"{kind}; a definition needs exactly one"
-    elif head[0][0] not in MARKERS:
-        problem = "the marker must be the first token of the definition"
-    elif head[0][0] in DRAFT_MARKERS and head[0][2] != "draft":
-        problem = f"{head[0][0]} outside `#ifdef NON_MATCHING`"
-    elif head[0][0] == "MATCH" and head[0][2] == "draft":
-        problem = "MATCH inside `#ifdef NON_MATCHING`"
-    else:
-        return None
-    return Violation(path, where, name, problem)
+    problem = _definition_problem(head, markers)
+    return Violation(path, where, _function_name(head), problem) if problem else None
 
 
 def _comment_problem(comment: str, after: str) -> str | None:

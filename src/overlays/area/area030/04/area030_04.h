@@ -363,7 +363,9 @@ extern char                  D_801D0C08[];
 extern char                  D_801D0C10[];
 extern char                  D_801D0C14[];
 extern FishingAnchors        D_801D0C30;
-extern char                  D_801D0C38[];
+/* The format that prints a catch row's count and score. */
+/* D_801D0C38 */
+extern char                  g_FishingCatchRowFormat[];
 /* D_801D0C3C */
 extern FishingIcons          g_FishingRankIcons;
 extern FishingThreshold      D_801D0C70;

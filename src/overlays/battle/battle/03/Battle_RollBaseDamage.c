@@ -5,17 +5,17 @@ MATCH u32 Battle_RollBaseDamage(u8 attacker_slot, u8 target_slot, u8 skip_reduct
     s32 band;
 
     if (attacker_slot < PARTY_SLOT_COUNT) {
-        s32 base = D_801EC30C;
+        s32 base = g_BattleCalcStats[1].power;
 
         if (skip_reduction == 0)
-            damage = base - D_801EC2EE;
+            damage = base - g_BattleCalcStats[0].defense;
         else
             damage = base;
         if (damage < 0)
             damage = 0;
         damage += RANDOM_MASK(1);
     } else if (target_slot < PARTY_SLOT_COUNT) {
-        s32 base = D_801EC30C;
+        s32 base = g_BattleCalcStats[1].power;
 
         if (skip_reduction == 0)
             damage = base - (Battle_CalcPartyDefense() & HALF_MASK);
@@ -33,10 +33,10 @@ MATCH u32 Battle_RollBaseDamage(u8 attacker_slot, u8 target_slot, u8 skip_reduct
         damage >>= 8;
         damage += RANDOM_MASK(1);
     } else {
-        s32 base = D_801EC30C;
+        s32 base = g_BattleCalcStats[1].power;
 
         if (skip_reduction == 0)
-            damage = base - D_801EC2EE;
+            damage = base - g_BattleCalcStats[0].defense;
         else
             damage = base;
         if (damage < 0)

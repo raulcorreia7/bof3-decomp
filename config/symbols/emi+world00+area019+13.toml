@@ -1,2 +1,3 @@
 ["emi/world00/area019/13"]
 g_AreaModuleId = { addr = 0x801F2C00, source = "Module id of the area: the first payload word of its overlay, 52 + the area number." }
+Area_StopSequence = { addr = 0x801F2D6C, type = "func", source = "same body as Area_StopSequence (emi/world03/area130/13@0x801F373C)" }

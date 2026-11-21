@@ -6,8 +6,8 @@
     GFX_AddDitheredDrawMode(BMAGIC_LAYER_OVER_BATTLERS, tpage);                                                                                                                                  \
     i                            = 0;                                                                                                                                                            \
     g_ScratchPad.cells.halves[2] = (RADIUS);                                                                                                                                                     \
-    g_ScratchPad.cells.halves[0] = g_Task->unk_2E.value;                                                                                                                                         \
-    g_ScratchPad.cells.halves[1] = g_Task->unk_30.value;                                                                                                                                         \
+    g_ScratchPad.cells.halves[0] = g_Task->screen_x.value;                                                                                                                                       \
+    g_ScratchPad.cells.halves[1] = g_Task->screen_y.value;                                                                                                                                       \
     do {                                                                                                                                                                                         \
         poly = (POLY_G3*)g_GfxPrimCursor;                                                                                                                                                        \
         SetPolyG3(poly);                                                                                                                                                                         \

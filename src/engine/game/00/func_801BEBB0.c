@@ -34,8 +34,8 @@ MATCH void func_801BEBB0(void) {
                     g_SpawnedActors[id].header.flags = one;
                     g_SpawnedActors[id].type         = 6;
                     g_SpawnedActors[id].unk_06       = one;
-                    g_SpawnedActors[id].screen_x     = *(u16*)(((u8*)&g_Game.members[0].unk_2E) + offset);
-                    g_SpawnedActors[id].screen_y     = *(u16*)(((u8*)&g_Game.members[0].unk_2E) + offset + 2);
+                    g_SpawnedActors[id].screen_x     = *(u16*)(((u8*)&g_Game.members[0].screen_x) + offset);
+                    g_SpawnedActors[id].screen_y     = *(u16*)(((u8*)&g_Game.members[0].screen_x) + offset + 2);
                     g_SpawnedActors[id].scene_step   = s_BattleStartOffsets[row[0]][0];
                     g_SpawnedActors[id].selection    = s_BattleStartOffsets[row[0]][1];
                     /* FAKE: keeps the selection store ahead of the work-row id store (retail order). */

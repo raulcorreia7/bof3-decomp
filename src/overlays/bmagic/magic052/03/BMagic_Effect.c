@@ -30,10 +30,10 @@ MATCH void func_801EECBC(void) {
     g_BattleEffects[index].header.step  = 0;
     g_BattleEffects[index].target.party = target;
     rand();
-    x                                 = g_Battle.selected_actor->unk_2E.signed_value + (rand() & 0xF);
-    g_BattleEffects[index].unk_2E     = x;
-    g_BattleEffects[index].unk_30     = g_Battle.selected_actor->unk_30.value - (rand() & 0x1F);
-    g_BattleEffects[index].unk_32     = g_Battle.selected_actor->depth;
+    x                                 = g_Battle.selected_actor->screen_x.signed_value + (rand() & 0xF);
+    g_BattleEffects[index].screen_x   = x;
+    g_BattleEffects[index].screen_y   = g_Battle.selected_actor->screen_y.value - (rand() & 0x1F);
+    g_BattleEffects[index].depth      = g_Battle.selected_actor->depth;
     g_BattleEffects[index].arg.unk_09 = g_Task->unk_09;
     if (g_Task->unk_09-- != 0) {
         g_Task->timer = 8;

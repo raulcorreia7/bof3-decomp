@@ -96,8 +96,8 @@ MATCH void func_801F83C8(void) {
                 g_SpawnedActors[g_Task->param.actor_slot].scene_step   = 0;
                 g_SpawnedActors[g_Task->param.actor_slot].selection    = 0x3A;
                 work                                                   = g_TaskMember;
-                g_SpawnedActors[g_Task->param.actor_slot].screen_x     = work->unk_2E.value;
-                g_SpawnedActors[g_Task->param.actor_slot].screen_y     = work->unk_30.value;
+                g_SpawnedActors[g_Task->param.actor_slot].screen_x     = work->screen_x.value;
+                g_SpawnedActors[g_Task->param.actor_slot].screen_y     = work->screen_y.value;
                 g_ScenarioState.step_05                                = 0xA;
             }
             break;

@@ -345,9 +345,9 @@ MATCH void func_801F0504(void) {
 MATCH void func_801F0584(void) {
     PartyMember* src;
 
-    src                  = g_BattleEffectBattler;
-    g_Task->unk_2E.value = src->unk_2E.value;
-    g_Task->unk_30.value = src->unk_30.value;
+    src                    = g_BattleEffectBattler;
+    g_Task->screen_x.value = src->screen_x.value;
+    g_Task->screen_y.value = src->screen_y.value;
     func_800A9610(g_Battle.target_selector, 16);
     g_Task->param.unk_0B = 8;
     g_Task->unk_09       = 0;
@@ -417,8 +417,8 @@ MATCH void func_801F07A8(void) {
     g_ScratchPad.cells.halves[5] = work->unk_09 * 15;
     g_ScratchPad.cells.halves[6] = work->unk_09 * 8;
     g_ScratchPad.cells.halves[7] = work->unk_09 * 8;
-    x                            = work->unk_2E.value - 0x100;
-    y                            = work->unk_30.value;
+    x                            = work->screen_x.value - 0x100;
+    y                            = work->screen_y.value;
     for (i = 0; (u32)(i & BYTE_MASK) < 32; i++) {
         prim = (POLY_G4*)g_GfxPrimCursor;
         SetPolyG4(prim);

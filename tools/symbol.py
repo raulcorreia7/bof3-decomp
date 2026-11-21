@@ -146,21 +146,152 @@ Run `meson compile -C build/meson check-<image>` for every touched image afterwa
 from __future__ import annotations
 
 import argparse
+import dataclasses
+import json
 import subprocess
+import sys
 
 from bof3.adapters.cli import run_main
 from bof3.errors import SymbolError
 from bof3.source import symtab
 from bof3.symbols.accesses import accesses, records
-from bof3.symbols.check import add, check, params, refs
-from bof3.symbols.context import Context
-from bof3.symbols.extents import extents, homes
+from bof3.symbols.check import AddRequest, UnknownImageError, add, check, params, refs
+from bof3.symbols.context import Context, Table
 from bof3.symbols.headers import value
 from bof3.symbols.layers import layers
-from bof3.symbols.lookup import at, member, uses
-from bof3.symbols.rename import rename
-from bof3.symbols.signatures import signatures
+from bof3.symbols.lookup import AtRow, at, member, uses
+from bof3.symbols.rename import RenameRequest, rename
+from bof3.symbols.signatures import extents, homes, signatures
 from bof3.symbols.values import values
+
+
+def _show(table: Table, jsonl: bool) -> int:
+    for note in table.notes:
+        print(note, file=sys.stderr)
+    keys = table.keys.split()
+    if jsonl:
+        for row in table.rows:
+            print(json.dumps({key: row[key] for key in keys}, ensure_ascii=False))
+        return 0
+    heads = keys if table.heads is None else table.heads.split()
+    if heads:
+        print("\t".join(heads))
+    for row in table.rows:
+        cells = table.cells(row) if table.cells else [str(row[k]) for k in keys]
+        print("\t".join(cells))
+    return 0
+
+
+def _owner_lines(prefix: str, row: AtRow) -> None:
+    if not row.owners:
+        print(f"{prefix}  no named owner")
+    for found in row.owners:
+        print(f"{prefix}  {found.path}+{found.delta:#x}  {found.size}  [{found.table}]")
+
+
+def _add(ctx: Context, args: argparse.Namespace) -> int:
+    try:
+        add(
+            ctx,
+            AddRequest(
+                args.image,
+                args.name,
+                args.addr,
+                args.source,
+                args.type,
+                args.size,
+                args.alias,
+            ),
+        )
+    except UnknownImageError as error:
+        print(error, file=sys.stderr)
+        return 2
+    print(f"added {args.name} to [{args.image}]")
+    return 0
+
+
+def _rename(ctx: Context, args: argparse.Namespace) -> int:
+    done = rename(ctx, RenameRequest(
+        args.old, args.new, args.image, args.local, args.scope, args.source, args.type, args.size, args.dry_run,
+    ))  # fmt: skip
+    if done.applied:
+        print(f"renamed {args.old} -> {args.new} in {len(done.files)} files")
+    else:
+        print("\n".join(done.files))
+    return 0
+
+
+def _params(ctx: Context, args: argparse.Namespace) -> int:
+    params(ctx, args.func, args.pairs)
+    return 0
+
+
+def _check(ctx: Context, args: argparse.Namespace) -> int:
+    report = check(ctx)
+    if report.error:
+        print(f"symbols: {report.error}")
+        return 1
+    print("\n".join(report.findings))
+    sys.stderr.write(
+        f"symbols: {report.tables} tables, {report.rows} rows, {len(report.findings)} findings; "
+        f"{'FAIL' if report.failed else 'ok'}\n"
+    )
+    return int(report.failed)
+
+
+def _at(ctx: Context, args: argparse.Namespace) -> int:
+    found = at(ctx, args.image, args.addresses, args.diff)
+    if found.base is not None:
+        print(f"no added D_ address in {found.base}...HEAD")
+    for row in found.rows:
+        _owner_lines(f"{row.addr:#010x}", row)
+    return 0
+
+
+def _member(ctx: Context, args: argparse.Namespace) -> int:
+    for path, ctype in member(ctx, args.type, args.offset):
+        print(f"{path}\t{ctype}")
+    return 0
+
+
+def _uses(ctx: Context, args: argparse.Namespace) -> int:
+    found = uses(ctx, args.symbol)
+    if found.at is not None:
+        _owner_lines(f"{found.image}@0x{found.at.addr:08X}", found.at)
+    for path, number in found.c:
+        print(f"c\t{path}:{number}")
+    for path, number, function, instruction in found.asm:
+        print(f"asm\t{path}:{number}\t{function}\t{instruction}")
+    for image, source, kind in found.rizin:
+        print(f"rizin\t{image}\t0x{source:08X}\t{kind}")
+    return 0
+
+
+def _value(ctx: Context, args: argparse.Namespace) -> int:
+    for item in value(ctx, args.number, args.image, args.type):
+        print(f"{item.name}\t{item.header}:{item.line}\t{item.family}")
+    return 0
+
+
+def _values(ctx: Context, args: argparse.Namespace) -> int:
+    found = values(ctx)
+    if args.jsonl:
+        for site in found.sites:
+            print(json.dumps(dataclasses.asdict(site), ensure_ascii=False))
+        return 0
+    print(f"{len(found.sites)} sites")
+    for title, counter in found.counts.items():
+        print(f"\n{title}")
+        for key, count in counter.most_common():
+            print(f"{count}\t{key}")
+    return 0
+
+
+def _table_verb(run):
+    def handle(ctx: Context, args: argparse.Namespace) -> int:
+        return _show(run(ctx, args), args.jsonl)
+
+    return handle
 
 
 def main(argv: list[str] | None = None, ctx: Context | None = None) -> int:
@@ -177,7 +308,7 @@ def main(argv: list[str] | None = None, ctx: Context | None = None) -> int:
     one.add_argument("--type")
     one.add_argument("--size")
     one.add_argument("--alias", action="store_true")
-    one.set_defaults(run=add)
+    one.set_defaults(run=_add)
     two = verbs.add_parser("rename", help="rename a function or global")
     two.add_argument("old")
     two.add_argument("new")
@@ -199,17 +330,17 @@ def main(argv: list[str] | None = None, ctx: Context | None = None) -> int:
     two.add_argument(
         "--dry-run", action="store_true", help="list the files; change nothing"
     )
-    two.set_defaults(run=rename)
+    two.set_defaults(run=_rename)
     three = verbs.add_parser("params", help="rename parameters of one function")
     three.add_argument("func")
     three.add_argument("pairs", nargs="+", metavar="OLD=NEW")
-    three.set_defaults(run=params)
+    three.set_defaults(run=_params)
     four = verbs.add_parser("refs", help="rank address-named units by references")
     four.add_argument("dirs", nargs="*")
     four.add_argument("--jsonl", action="store_true", help="one JSON object per line")
-    four.set_defaults(run=refs)
+    four.set_defaults(run=_table_verb(lambda ctx, a: refs(ctx, a.dirs or ["src"])))
     check_parser = verbs.add_parser("check", help="report symbol-table problems")
-    check_parser.set_defaults(run=check)
+    check_parser.set_defaults(run=_check)
     five = verbs.add_parser(
         "at",
         help="show the symbol and member at an address",
@@ -225,7 +356,7 @@ def main(argv: list[str] | None = None, ctx: Context | None = None) -> int:
         metavar="BASE",
         help="read the D_ addresses the branch adds (default base: public/main)",
     )
-    five.set_defaults(run=at)
+    five.set_defaults(run=_at)
     six = verbs.add_parser(
         "member",
         help="show the member at a byte offset of a record",
@@ -234,7 +365,7 @@ def main(argv: list[str] | None = None, ctx: Context | None = None) -> int:
     )
     six.add_argument("type", help="a C record type")
     six.add_argument("offset", help="a byte offset, such as 0x44")
-    six.set_defaults(run=member)
+    six.set_defaults(run=_member)
     seven = verbs.add_parser(
         "uses",
         help="list every reference to a symbol",
@@ -245,7 +376,7 @@ def main(argv: list[str] | None = None, ctx: Context | None = None) -> int:
         formatter_class=argparse.RawDescriptionHelpFormatter,
     )
     seven.add_argument("symbol", help="a name, or IMAGE@0xADDR")
-    seven.set_defaults(run=uses)
+    seven.set_defaults(run=_uses)
     eight = verbs.add_parser(
         "value",
         help="find enum members and macros with one value",
@@ -259,7 +390,7 @@ def main(argv: list[str] | None = None, ctx: Context | None = None) -> int:
         "--image", help="a symbols.toml table; scan the headers its sources include"
     )
     eight.add_argument("--type", help="an enum name or a name prefix")
-    eight.set_defaults(run=value)
+    eight.set_defaults(run=_value)
     nine = verbs.add_parser(
         "layers",
         help="print the call-graph layer of every function",
@@ -267,7 +398,7 @@ def main(argv: list[str] | None = None, ctx: Context | None = None) -> int:
         formatter_class=argparse.RawDescriptionHelpFormatter,
     )
     nine.add_argument("--jsonl", action="store_true", help="one JSON object per line")
-    nine.set_defaults(run=layers)
+    nine.set_defaults(run=_table_verb(lambda ctx, a: layers(ctx)))
     ten = verbs.add_parser(
         "accesses",
         help="list the reads and writes of a record or global",
@@ -278,7 +409,7 @@ def main(argv: list[str] | None = None, ctx: Context | None = None) -> int:
         "name", help="a record type or a config/symbols/<image>.toml global"
     )
     ten.add_argument("--jsonl", action="store_true", help="one JSON object per line")
-    ten.set_defaults(run=accesses)
+    ten.set_defaults(run=_table_verb(lambda ctx, a: accesses(ctx, a.name)))
     eleven = verbs.add_parser(
         "records",
         help="summarise every record and its accesses",
@@ -286,7 +417,7 @@ def main(argv: list[str] | None = None, ctx: Context | None = None) -> int:
         formatter_class=argparse.RawDescriptionHelpFormatter,
     )
     eleven.add_argument("--jsonl", action="store_true", help="one JSON object per line")
-    eleven.set_defaults(run=records)
+    eleven.set_defaults(run=_table_verb(lambda ctx, a: records(ctx)))
     twelve = verbs.add_parser(
         "values",
         help="scan matched bodies for literals whose role is declared",
@@ -300,7 +431,7 @@ def main(argv: list[str] | None = None, ctx: Context | None = None) -> int:
         "--scan", action="store_true", help="scan the matched bodies (the only mode)"
     )
     twelve.add_argument("--jsonl", action="store_true", help="one JSON object per line")
-    twelve.set_defaults(run=values)
+    twelve.set_defaults(run=_values)
     thirteen = verbs.add_parser(
         "signatures",
         help="print the signature the bytes prove for each function",
@@ -317,7 +448,7 @@ def main(argv: list[str] | None = None, ctx: Context | None = None) -> int:
     thirteen.add_argument(
         "--jsonl", action="store_true", help="one JSON object per line"
     )
-    thirteen.set_defaults(run=signatures)
+    thirteen.set_defaults(run=_table_verb(lambda ctx, a: signatures(ctx, a.function)))
     fourteen = verbs.add_parser(
         "extents",
         help="print each global's extent and the accesses beyond it",
@@ -328,7 +459,7 @@ def main(argv: list[str] | None = None, ctx: Context | None = None) -> int:
     fourteen.add_argument(
         "--jsonl", action="store_true", help="one JSON object per line"
     )
-    fourteen.set_defaults(run=extents)
+    fourteen.set_defaults(run=_table_verb(lambda ctx, a: extents(ctx, a.image)))
     fifteen = verbs.add_parser(
         "homes",
         help="print each function's, global's and file's home from the graph",
@@ -338,7 +469,7 @@ def main(argv: list[str] | None = None, ctx: Context | None = None) -> int:
     fifteen.add_argument(
         "--jsonl", action="store_true", help="one JSON object per line"
     )
-    fifteen.set_defaults(run=homes)
+    fifteen.set_defaults(run=_table_verb(lambda ctx, a: homes(ctx)))
     args = parser.parse_args(argv)
     if args.verb == "add" and not args.source and not args.alias:
         parser.error("add needs --source (a description) or --alias")

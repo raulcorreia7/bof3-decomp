@@ -2,61 +2,69 @@
 
 from __future__ import annotations
 
-import argparse
 import collections
-import json
 import re
 import subprocess
-import sys
 import tempfile
+from dataclasses import dataclass
 
 from bof3.adapters.config import symbols_text, write_symbols
 from bof3.errors import SymbolError
 from bof3.link import symbols
 from bof3.source import symtab
-from bof3.symbols.context import Context, grep_files
+from bof3.symbols.context import Context, Table, grep_files
 
 
-def add(ctx: Context, args: argparse.Namespace) -> int:
+class UnknownImageError(SymbolError):
+    """The image is not a folder under ``config/`` with a ``splat.yaml``."""
+
+
+@dataclass(frozen=True)
+class AddRequest:
+    image: str
+    name: str
+    addr: str
+    source: str | None
+    type: str | None
+    size: str | None
+    alias: bool
+
+
+def add(ctx: Context, req: AddRequest) -> None:
     """Insert one row."""
-    if not (ctx.root / "config" / args.image / "splat.yaml").is_file():
-        print(
-            f"symbol: no image {args.image}; "
-            "use a folder id under config/ that holds a splat.yaml",
-            file=sys.stderr,
+    if not (ctx.root / "config" / req.image / "splat.yaml").is_file():
+        raise UnknownImageError(
+            f"symbol: no image {req.image}; "
+            "use a folder id under config/ that holds a splat.yaml"
         )
-        return 2
-    addr = int(args.addr, 16)
+    addr = int(req.addr, 16)
     row = symtab.format_row(
-        args.name, addr, type=args.type, size=int(args.size, 0) if args.size else None,
-        source=args.source, alias=args.alias,
+        req.name, addr, type=req.type, size=int(req.size, 0) if req.size else None,
+        source=req.source, alias=req.alias,
     )  # fmt: skip
     text = symbols_text(ctx.root)
-    write_symbols(ctx.root, symtab.add_row(text, args.image, args.name, row, addr))
-    print(f"added {args.name} to [{args.image}]")
-    return 0
+    write_symbols(ctx.root, symtab.add_row(text, req.image, req.name, row, addr))
 
 
-def params(ctx: Context, args: argparse.Namespace) -> int:
+def params(ctx: Context, func: str, pairs: list[str]) -> None:
     """Rename parameters in one function's unit file and its prototypes."""
-    pairs = [p.split("=", 1) for p in args.pairs]
-    if any(len(p) != 2 or not p[0] or not p[1] for p in pairs):
+    renames = [p.split("=", 1) for p in pairs]
+    if any(len(p) != 2 or not p[0] or not p[1] for p in renames):
         raise SymbolError("symbol: write each rename as OLD=NEW")
-    prototype = re.compile(r"\S[^=]*\b" + re.escape(args.func) + r"\s*\(.*\)\s*;")
-    for name in grep_files(ctx, args.func, ["src", "include"]):
+    prototype = re.compile(r"\S[^=]*\b" + re.escape(func) + r"\s*\(.*\)\s*;")
+    for name in grep_files(ctx, func, ["src", "include"]):
         path = ctx.root / name
         lines = path.read_text(encoding="utf-8").split("\n")
-        own = path.name == f"{args.func}.c"
+        own = path.name == f"{func}.c"
         for i, line in enumerate(lines):
             if own or (name.endswith(".h") and prototype.match(line)):
-                for a, b in pairs:
+                for a, b in renames:
                     line = re.sub(r"\b" + re.escape(a) + r"\b", b, line)
                 lines[i] = line
         path.write_text("\n".join(lines), encoding="utf-8")
-    return 0
 
 
-def ref_rows(ctx: Context, dirs: list[str]) -> list[dict]:
+def refs(ctx: Context, dirs: list[str]) -> Table:
     """Return the address-named units with their reference counts, most used first."""
     units = {}
     for folder in dirs:
@@ -70,20 +78,11 @@ def ref_rows(ctx: Context, dirs: list[str]) -> list[dict]:
                 counts.update(
                     word.findall(path.read_text(encoding="utf-8", errors="replace"))
                 )
-    return [
+    rows = [
         {"count": counts[name], "name": name, "unit": units[name]}
         for name in sorted(units, key=lambda n: (-counts[n], n))
     ]
-
-
-def refs(ctx: Context, args: argparse.Namespace) -> int:
-    """Print the address-named units with their reference counts, most used first."""
-    for row in ref_rows(ctx, args.dirs or ["src"]):
-        if args.jsonl:
-            print(json.dumps(row, ensure_ascii=False))
-        else:
-            print(row["count"], row["name"], row["unit"], sep="\t")
-    return 0
+    return Table("count name unit", rows, heads="")
 
 
 def mentioned(ctx: Context, names: set[str]) -> set[str]:
@@ -161,21 +160,27 @@ def _check_table(
     return status
 
 
-def check(ctx: Context, args: argparse.Namespace) -> int:
-    """Report the table's problems; a name at two addresses or an out-of-order table exits 1."""
+@dataclass(frozen=True)
+class CheckReport:
+    findings: list[str]
+    tables: int = 0
+    rows: int = 0
+    failed: bool = False
+    error: str = ""
+
+
+def check(ctx: Context) -> CheckReport:
+    """Report the table's problems; a name at two addresses or an out-of-order table fails."""
     try:
         tables = symbols.load(ctx.root)
     except symbols.LinkError as error:
-        print(f"symbols: {error}")
-        return 1
+        return CheckReport([], failed=True, error=str(error))
     findings: list[str] = []
     repeated: dict[tuple[str, int, str], list[str]] = collections.defaultdict(list)
     aliases: list[tuple[str, symbols.Entry]] = []
-    status = 0
-    rows = 0
+    failed = False
     for target, entries in tables.items():
-        rows += len(entries)
-        status |= _check_table(target, entries, findings, repeated, aliases)
+        failed |= bool(_check_table(target, entries, findings, repeated, aliases))
     for (name, address, type_), images in sorted(repeated.items()):
         if len(images) > 1:
             findings.append(
@@ -186,9 +191,5 @@ def check(ctx: Context, args: argparse.Namespace) -> int:
     for target, entry in aliases:
         if entry.name not in used:
             findings.append(f"alias-unused\t{target}\t{entry.name} 0x{entry.addr:08X}")
-    print("\n".join(findings))
-    sys.stderr.write(
-        f"symbols: {len(tables)} tables, {rows} rows, {len(findings)} findings; "
-        f"{'FAIL' if status else 'ok'}\n"
-    )
-    return status
+    rows = sum(len(entries) for entries in tables.values())
+    return CheckReport(findings, len(tables), rows, failed)

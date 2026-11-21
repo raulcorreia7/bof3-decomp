@@ -178,7 +178,7 @@ segments:
     align: 4
     section_order: [.data, .rodata]
     subsegments:
-      - [0x7BC, .data, D_80195FBC]
+      - [0x7BC, .data, g_GameRewardZennyFormat]
       - [0x7C0, .rodata, func_801BC4D0]
   # Placement: a source shared with the earlier segment must claim its sections first.
   - name: main

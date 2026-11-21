@@ -19,13 +19,13 @@ MATCH void func_801EEC9C(void) {
     u8           slot;
     u32          i;
 
-    actor                = g_Battle.selected_actor;
-    g_Task->unk_2E.value = actor->unk_2E.value;
-    g_Task->unk_30.value = actor->unk_30.value;
-    g_Task->pos.x.fixed  = actor->pos.x.fixed;
-    g_Task->pos.y.fixed  = actor->pos.y.fixed;
-    g_Task->pos.z.fixed  = actor->pos.z.fixed;
-    jitter               = D_801F065C;
+    actor                  = g_Battle.selected_actor;
+    g_Task->screen_x.value = actor->screen_x.value;
+    g_Task->screen_y.value = actor->screen_y.value;
+    g_Task->pos.x.fixed    = actor->pos.x.fixed;
+    g_Task->pos.y.fixed    = actor->pos.y.fixed;
+    g_Task->pos.z.fixed    = actor->pos.z.fixed;
+    jitter                 = D_801F065C;
     do {
         if (rand() & 1) {
             *jitter = -(rand() & 0xF);

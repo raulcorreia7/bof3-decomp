@@ -55,7 +55,7 @@ typedef struct PaletteFade {
 ASSERT_OFFSET(PaletteFade, target, 0x08);
 ASSERT_SIZE(PaletteFade, 0x0C);
 
-/* One 0x10-byte slot of the palette animation table at D_80145D94; bit 0 of flags marks it in use. */
+/* One 0x10-byte slot of the palette animation table at g_PaletteAnimations; bit 0 of flags marks it in use. */
 typedef struct GraphicsPaletteAnimation {
     u8  flags;
     u8  unk_01;
@@ -70,8 +70,9 @@ ASSERT_SIZE(GraphicsPaletteAnimation, 0x10);
 
 /* g_PaletteFades */
 extern PaletteFade              g_PaletteFades[PALETTE_FADE_COUNT];
+/* The palette animation slots. */
 /* D_80145D94 */
-extern GraphicsPaletteAnimation D_80145D94[8];
+extern GraphicsPaletteAnimation g_PaletteAnimations[8];
 
 /* The game's area state at 0x80143F00: the area being run, the area to return to and the pending area request.
  * func_8019FAA0 stores the current area, its cell type and the scroll target into last_*, and func_801B146C hands

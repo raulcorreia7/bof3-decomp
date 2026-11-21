@@ -46,6 +46,7 @@ g_GfxBuffers = { addr = 0x80143D48, source = "SYS_InitRuntime initializes the di
 g_GfxCurrentBuffer = { addr = 0x80143E68, source = "SYS_Main selects a display frame and passes its display and draw environments to PsyQ" }
 g_FrameCount = { addr = 0x80143E6C, source = "Absolute frame counter." }
 g_SysLastVSync = { addr = 0x80143EF8, source = "SYS_Main stores the VSync return value" }
+g_SysDrawTime = { addr = 0x80143EFC, source = "The VSync(1) value SYS_CaptureDrawTime stores at DrawSync; Area_CanStartEncounter reads it." }
 g_GameAreaId = { addr = 0x80143F00, source = "The area to load." }
 g_GameArea = { addr = 0x80143F00, size = 0x20, alias = true, source = "The current area and the request to change it." }
 g_GameRequestFlags = { addr = 0x80143F02, source = "Flags of the game request." }
@@ -114,6 +115,7 @@ D_801457A9 = { addr = 0x801457A9, alias = true, source = "Subtype of each fairy 
 g_GfxPalettePending = { addr = 0x80145988, source = "Palette upload pending flag." }
 g_GfxPrimCursor = { addr = 0x8014598C, size = 0x4, source = "Label primitive context." }
 g_Scripts = { addr = 0x801459F0, type = "u32", source = "Pointer to the active script table: Actor_BeginScript hands a record of it to Actor_SeekScript." }
+g_GfxTransferCount = { addr = 0x80145A00, source = "Count of queued VRAM transfers: Actor_SelectSprite appends and GFX_UpdateTransferQueue drains it." }
 g_InputHeld = { addr = 0x80145AA4, source = "Buttons held this frame." }
 g_InputPressed = { addr = 0x80145AA8, source = "Buttons pressed this frame." }
 g_InputMasks = { addr = 0x80145AB4, type = "u16", source = "Button masks of the controller." }
@@ -121,6 +123,8 @@ g_InputRepeatDelay = { addr = 0x80145AC6, source = "INPUT_GetRepeatedButtons rel
 g_InputRepeatButtons = { addr = 0x80145AC8, source = "INPUT_GetRepeatedButtons snapshots held buttons and tests them on repeat" }
 g_UiFormatBuffer = { addr = 0x80145AD4, source = "Buffer for formatted UI text." }
 g_PaletteFades = { addr = 0x80145BD4, type = "PaletteFade", size = 0x180, source = "Palette fade table: one PaletteFade row per fading target, claimed by GFX_AllocPaletteFade and released by GFX_FreePaletteFade." }
+g_PaletteCells = { addr = 0x80145D54, source = "The palette cell map read by GFX_FindPaletteCell and GFX_MarkPaletteCells (wiki formats/graphics.md)." }
+g_PaletteAnimations = { addr = 0x80145D94, source = "The palette animation slots GFX_StartPaletteAnimation and GFX_StepPaletteAnimation read (wiki formats/graphics.md)." }
 g_SysCardSoftwareIoEvent = { addr = 0x80145E14, source = "SYS_InitCard opens SwCARD EvSpIOE and save_card.c tests it" }
 g_SysCardSoftwareTimeoutEvent = { addr = 0x80145E18, source = "SYS_InitCard opens SwCARD EvSpTIMOUT and save_card.c tests it" }
 g_SysCardSoftwareNewEvent = { addr = 0x80145E1C, source = "SYS_InitCard opens SwCARD EvSpNEW and save_card.c tests it" }

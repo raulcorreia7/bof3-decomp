@@ -32,7 +32,7 @@ MATCH void func_801EECE4(void) {
 
     Battle_ProjectRange();
     ticks = g_Task->param.unk_0B;
-    g_Task->unk_2E.value -= 0x24;
+    g_Task->screen_x.value -= 0x24;
     if (ticks != 0) {
         func_801EEF5C();
     } else {

@@ -5,7 +5,7 @@
  * LOBU keeps the byte's address live in s0 across the calls (99.37%). */
 
 /* resolves the current enemy's step, the enemy twin of func_801DFCB4:
- * clears its 0xF4 result cells, stages its stat block at D_801EC2E8, runs
+ * clears its 0xF4 result cells, stages its stat block at g_BattleCalcStats[0], runs
  * the step for the current action type, applies the 0xF8 and 0xFA cells, marks a
  * knockout at zero hp, then advances the step.
  */
@@ -31,7 +31,7 @@ MATCH void func_801E3C14(void) {
     *(s16*)((u8*)self + 0xF8)                = 0;
     *(s16*)((u32)g_Battle.target_record + 6) = 0;
     *((u8*)g_Battle.target_record + 8)       = 0;
-    D_801EC2E8                               = g_BattleCurrentEnemy->stats;
+    g_BattleCalcStats[0]                     = g_BattleCurrentEnemy->stats;
     switch (LOBU(g_Battle.action_type)) {
         case BATTLE_ACTION_ATTACK:
             g_Battle.target_record->hp_change = Battle_ApplyDamage(g_Battle.active_battler, LOBU(g_Battle.target_selector));

@@ -246,8 +246,8 @@ MATCH void func_801EF6A0(void) {
     }
     shade                        = &g_ScratchPad.cells.halves[4];
     *shade                       = 0x80;
-    g_ScratchPad.cells.halves[2] = g_Task->unk_2E.value;
-    g_ScratchPad.cells.halves[3] = g_Task->unk_30.value;
+    g_ScratchPad.cells.halves[2] = g_Task->screen_x.value;
+    g_ScratchPad.cells.halves[3] = g_Task->screen_y.value;
     setXY4(prim, g_ScratchPad.cells.halves[2] + FIXED_MUL(rsin(0xC00), g_ScratchPad.cells.halves[0]), g_ScratchPad.cells.halves[3] + FIXED_MUL(rcos(0xC00), g_ScratchPad.cells.halves[0]),
            g_ScratchPad.cells.halves[2] + FIXED_MUL(rsin(0x800), g_ScratchPad.cells.halves[0]), g_ScratchPad.cells.halves[3] + FIXED_MUL(rcos(0x800), g_ScratchPad.cells.halves[0]),
            g_ScratchPad.cells.halves[2] + FIXED_MUL(rsin(0), g_ScratchPad.cells.halves[0]), g_ScratchPad.cells.halves[3] + FIXED_MUL(rcos(0), g_ScratchPad.cells.halves[0]),

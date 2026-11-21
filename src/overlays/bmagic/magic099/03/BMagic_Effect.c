@@ -319,14 +319,14 @@ MATCH void func_801F070C(void) {
     do {
         primitive = GFX_BeginPolyG3(1);
 
-        setXY0(primitive, g_Task->unk_2E.value, g_Task->unk_30.value);
+        setXY0(primitive, g_Task->screen_x.value, g_Task->screen_y.value);
         angle         = i << 9;
-        primitive->x1 = g_Task->unk_2E.value + FIXED_MUL(rsin(angle), *radius);
-        primitive->y1 = g_Task->unk_30.value + FIXED_MUL(rcos(angle), *radius);
+        primitive->x1 = g_Task->screen_x.value + FIXED_MUL(rsin(angle), *radius);
+        primitive->y1 = g_Task->screen_y.value + FIXED_MUL(rcos(angle), *radius);
         i++;
         angle         = i << 9;
-        primitive->x2 = g_Task->unk_2E.value + FIXED_MUL(rsin(angle), *radius);
-        primitive->y2 = g_Task->unk_30.value + FIXED_MUL(rcos(angle), *radius);
+        primitive->x2 = g_Task->screen_x.value + FIXED_MUL(rsin(angle), *radius);
+        primitive->y2 = g_Task->screen_y.value + FIXED_MUL(rcos(angle), *radius);
         setRGB0(primitive, g_Task->timer * 14, g_Task->timer * 14, g_Task->timer * 12);
         setRGB1(primitive, 1, 1, 1);
         setRGB2(primitive, 1, 1, 1);

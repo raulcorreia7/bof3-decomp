@@ -8,13 +8,13 @@ MATCH void func_800AD4D4(void) {
     u8                    remainder;
     u8                    index;
 
-    work               = (PartyMember*)g_Task;
-    first              = work->param.unk_0B;
-    second             = work->param.unk_0B;
-    remainder          = (u8)first % 6;
-    work->unk_2E.value = D_80148628 + (remainder * 0x1E + 0x13);
-    work->unk_30.value = (second / 3 * 0x10 & 0x1FE0) + (0x30 + D_8014862A);
-    index              = 0;
+    work                 = (PartyMember*)g_Task;
+    first                = work->param.unk_0B;
+    second               = work->param.unk_0B;
+    remainder            = (u8)first % 6;
+    work->screen_x.value = D_80148628 + (remainder * 0x1E + 0x13);
+    work->screen_y.value = (second / 3 * 0x10 & 0x1FE0) + (0x30 + D_8014862A);
+    index                = 0;
     if (g_Battle.gene_count != 0) {
         do {
             ptr = (PartyMember*)g_Task;

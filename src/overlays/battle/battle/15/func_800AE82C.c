@@ -28,8 +28,8 @@ MATCH void func_800AE82C(void) {
         tail_work         = BATTLE_WORK;
         tail_work->unk_10 = -0xE;
         tail_work->unk_09 = 0;
-        tail_work->unk_2E.value -= 0x18;
-        tail_work->unk_30.value -= tail_work->timer;
+        tail_work->screen_x.value -= 0x18;
+        tail_work->screen_y.value -= tail_work->timer;
         BATTLE_WORK->timer = 1;
         BATTLE_WORK->header.mode += 1;
     }

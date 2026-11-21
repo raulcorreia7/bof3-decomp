@@ -40,9 +40,9 @@ NON_MATCHING void Battle_InitEnemy(s32 enemy_slot, u16 enemy_index, s32 x, s32 y
     enemy->unk_20                        = 0;
     FIELD(s32, enemy, 0x1Cu)             = 0;
     FIELD(s32, enemy, 0x18u)             = 0;
-    enemy->unk_32                        = 0;
-    enemy->unk_30                        = 0;
-    enemy->unk_2E                        = 0;
+    enemy->depth                         = 0;
+    enemy->screen_y                      = 0;
+    enemy->screen_x                      = 0;
     ((EnemyBattler*)g_Task)->unk_5C      = 0;
     ((EnemyBattler*)g_Task)->unk_06      = 0;
     ((EnemyBattler*)g_Task)->unk_07      = 0;

@@ -132,8 +132,8 @@ MATCH void func_801EF2F4(s32 radius) {
         prim = (POLY_G3*)g_GfxPrimCursor;
         SetPolyG3(prim);
         SetSemiTrans(prim, 1);
-        setXY3(prim, g_Task->unk_2E.value, g_Task->unk_30.value, g_Task->unk_2E.value + FIXED_MUL(rsin(i << 8), radius), g_Task->unk_30.value + FIXED_MUL(rcos(i << 8), radius),
-               g_Task->unk_2E.value + FIXED_MUL(rsin((i + 1) << 8), radius), g_Task->unk_30.value + FIXED_MUL(rcos((i + 1) << 8), radius));
+        setXY3(prim, g_Task->screen_x.value, g_Task->screen_y.value, g_Task->screen_x.value + FIXED_MUL(rsin(i << 8), radius), g_Task->screen_y.value + FIXED_MUL(rcos(i << 8), radius),
+               g_Task->screen_x.value + FIXED_MUL(rsin((i + 1) << 8), radius), g_Task->screen_y.value + FIXED_MUL(rcos((i + 1) << 8), radius));
         setRGB0(prim, 0x60, 0x60, 0x60);
         setRGB1(prim, 0x20, 0x20, 0x40);
         setRGB2(prim, 0x20, 0x20, 0x40);
@@ -155,9 +155,9 @@ MATCH void func_801EF500(s32 outer, s32 inner) {
         prim = (POLY_G4*)g_GfxPrimCursor;
         SetPolyG4(prim);
         SetSemiTrans(prim, 1);
-        setXY4(prim, g_Task->unk_2E.value + FIXED_MUL(rsin(i << 8), outer), g_Task->unk_30.value + FIXED_MUL(rcos(i << 8), outer), g_Task->unk_2E.value + FIXED_MUL(rsin((i + 1) << 8), outer),
-               g_Task->unk_30.value + FIXED_MUL(rcos((i + 1) << 8), outer), g_Task->unk_2E.value + FIXED_MUL(rsin(i << 8), inner), g_Task->unk_30.value + FIXED_MUL(rcos(i << 8), inner),
-               g_Task->unk_2E.value + FIXED_MUL(rsin((i + 1) << 8), inner), g_Task->unk_30.value + FIXED_MUL(rcos((i + 1) << 8), inner));
+        setXY4(prim, g_Task->screen_x.value + FIXED_MUL(rsin(i << 8), outer), g_Task->screen_y.value + FIXED_MUL(rcos(i << 8), outer), g_Task->screen_x.value + FIXED_MUL(rsin((i + 1) << 8), outer),
+               g_Task->screen_y.value + FIXED_MUL(rcos((i + 1) << 8), outer), g_Task->screen_x.value + FIXED_MUL(rsin(i << 8), inner), g_Task->screen_y.value + FIXED_MUL(rcos(i << 8), inner),
+               g_Task->screen_x.value + FIXED_MUL(rsin((i + 1) << 8), inner), g_Task->screen_y.value + FIXED_MUL(rcos((i + 1) << 8), inner));
         setRGB0(prim, 0x20, 0x20, 0x40);
         setRGB1(prim, 0x20, 0x20, 0x40);
         setRGB2(prim, 1, 1, 1);

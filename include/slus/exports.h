@@ -85,7 +85,9 @@ extern u8*          g_GfxCurrentBuffer;
 extern u32          g_FrameCount;
 /* D_80143EF8 */
 extern s32          g_SysLastVSync;
-extern s32          D_80143EFC;
+/* The VSync count captured when drawing finished. */
+/* D_80143EFC */
+extern s32          g_SysDrawTime;
 /* D_80143F10 */
 extern u16          g_GameEntryAreaId;
 /* D_80143F1C */
@@ -125,7 +127,9 @@ extern u16          g_InputPressed;
 /* The palette cell map: 4 rows of 16 cells, 0xFF where a cell is free. */
 #define PALETTE_MAP_ROWS    4
 #define PALETTE_MAP_COLUMNS 16
-extern u8             D_80145D54[PALETTE_MAP_ROWS][PALETTE_MAP_COLUMNS];
+/* The palette cell map: which palette cells are in use. */
+/* D_80145D54 */
+extern u8             g_PaletteCells[PALETTE_MAP_ROWS][PALETTE_MAP_COLUMNS];
 /* D_80145E14 */
 extern s32            g_SysCardSoftwareIoEvent;
 /* D_80145E18 */

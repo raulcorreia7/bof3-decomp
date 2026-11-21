@@ -44,11 +44,9 @@ differs. Find candidates with `bin/coddog cluster <target>` ([coddog](../../../.
 
 A shared body follows these rules:
 
-- Bodies that differ in a value use a statement macro by default; a `static inline` helper only
-  where it gives the same bytes.
-- One body lives in `Name.h` at the lowest folder that holds every includer ([layout](../../../../docs/layout.md#tree)), named
-  for the function. Each image keeps a thin `Name.c` that includes the image header, then the body.
-  An image with one translation unit includes the body there instead ([layout](../../../../docs/layout.md#translation-units-of-an-image)).
+- A value that differs uses a statement macro by default; a `static inline` helper only where it
+  gives the same bytes.
+- `Name.h` lives at the lowest folder that holds every includer ([layout](../../../../docs/layout.md#tree)). Each image keeps a thin `Name.c` that includes the image header, then the body; an image with one translation unit includes the body there instead ([layout](../../../../docs/layout.md#translation-units-of-an-image)).
 - A group is a candidate when its members have equal bytes (exact, or equal after relocations).
   Equal text is not enough.
 - One name covers every copy. The same address gives the same `func_<ADDR>`; otherwise a name needs
@@ -60,19 +58,18 @@ A shared body follows these rules:
   name.
 - A per-unit compile switch (`FAKE_DECL_TASK_VOLATILE`) stays in the thin `.c`, above the image-header
   include.
-- A value that differs per image is a named setting in the image header. A body that needs more
-  than one or two settings, or a macro knot, stays per image.
+- A per-image value is a named setting in the image header; a body that needs more than two settings,
+  or a macro knot, stays per image.
 - The most typed copy is the body: struct members over `FIELD` or raw offsets, real parameter types
   over `s32` or `void*`, named locals. If only a less typed copy matches in some image, the group
   stays unshared.
-- A body of one statement stays per image. The first comment of a body states what it does and that
-  every change must verify every member; the includes are the member list.
+- The first comment of a body states what it does and that every change must verify every member; the
+  includes are the member list.
 - When a function matches, list its group first (`bin/coddog match`); a free twin is a thin `.c`.
 
 Never a body pasted inside `{ }`, a `#define` parameter before the include, an `#undef` after it, an
 `#ifndef` default, or `#define NAME func_<ADDR>`. A wrapper is not a match: it compiles as a call.
-Share only when every member is exact, verify every member image after an edit, and pull the share
-back the moment one diverges. The macro forms: [helpers and macros](../../../../docs/conventions.md#helpers-and-macros).
+Verify every member image after an edit. The macro forms: [helpers and macros](../../../../docs/conventions.md#helpers-and-macros).
 
 Report: `typed` or `shared` (record, member or group, the accesses that prove it, owning header),
 `kept` (the access that still matches, and why) or `needs`.

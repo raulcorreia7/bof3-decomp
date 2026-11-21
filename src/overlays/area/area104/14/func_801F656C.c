@@ -32,7 +32,7 @@ NON_MATCHING void func_801F656C(void) {
         } while (col < 0x55);
         row++;
     } while (row < 0x52);
-    index                = D_80145A00;
+    index                = g_GfxTransferCount;
     next                 = index + 1;
     pending              = g_GfxPalettePending + 1;
     D_80145A54[index]    = 0x380;
@@ -41,7 +41,7 @@ NON_MATCHING void func_801F656C(void) {
     D_800396C0[0]        = 0xFE10;
     D_800396C0[1]        = 0xDC00;
     D_800396C0[2]        = 0x8908;
-    D_80145A00           = next;
+    g_GfxTransferCount   = next;
     D_800396C0[3]        = 0x85F;
     g_GfxPalettePending  = pending;
 }

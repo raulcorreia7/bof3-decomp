@@ -9,7 +9,7 @@ MATCH u8 GFX_FindFreePaletteCell(u8 mode) {
 
     for (row = 0; row < PALETTE_MAP_ROWS; row++) {
         for (column = 0; column < PALETTE_MAP_COLUMNS; column++) {
-            map = D_80145D54[row];
+            map = g_PaletteCells[row];
             if (map[column] == 0xFFu) {
                 SP_REF(u8, 0x00u) = row;
                 SP_REF(u8, 0x01u) = column;

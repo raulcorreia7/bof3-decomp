@@ -118,15 +118,15 @@ MATCH void func_801EF0D8(void) {
         g_Task->facing = g_BattleEffectBattler->facing;
         Battle_CenterCamera();
         Battle_ProjectRange();
-        g_ScratchPad.cells.halves[6] = g_Task->unk_2E.value;
-        g_ScratchPad.cells.halves[7] = g_Task->unk_30.value;
+        g_ScratchPad.cells.halves[6] = g_Task->screen_x.value;
+        g_ScratchPad.cells.halves[7] = g_Task->screen_y.value;
         func_800B0118();
         WorldPos_Copy(&g_Task->pos, &g_BattleEffectBattler->pos);
         Battle_ProjectRange();
-        g_Task->unk_2E.value += g_Task->unk_0C;
-        g_Task->unk_30.value += g_Task->unk_10;
-        g_ScratchPad.cells.halves[4] = g_Task->unk_2E.value;
-        g_ScratchPad.cells.halves[5] = g_Task->unk_30.value;
+        g_Task->screen_x.value += g_Task->unk_0C;
+        g_Task->screen_y.value += g_Task->unk_10;
+        g_ScratchPad.cells.halves[4] = g_Task->screen_x.value;
+        g_ScratchPad.cells.halves[5] = g_Task->screen_y.value;
         angle                        = ratan2(g_ScratchPad.cells.halves[6] - g_ScratchPad.cells.halves[4], g_ScratchPad.cells.halves[7] - g_ScratchPad.cells.halves[5]);
         work                         = g_Task;
         work->param.unk_0B           = 17;
@@ -167,8 +167,8 @@ MATCH void BMagic_DrawWhelpBreath(void) {
 
     tpage = getTPage(TPAGE_DEPTH_4BIT, TPAGE_ABR_ADD, 320, 256);
     GFX_AddDitheredDrawMode(BMAGIC_LAYER_OVER_BATTLERS, tpage);
-    g_ScratchPad.cells.halves[4] = g_Task->unk_2E.value;
-    g_ScratchPad.cells.halves[5] = g_Task->unk_30.value;
+    g_ScratchPad.cells.halves[4] = g_Task->screen_x.value;
+    g_ScratchPad.cells.halves[5] = g_Task->screen_y.value;
     g_ScratchPad.cells.halves[1] = g_Task->unk_14;
     for (i = 1; i < g_Task->timer + 1; i++) {
         g_ScratchPad.cells.halves[6] = g_ScratchPad.cells.halves[4];

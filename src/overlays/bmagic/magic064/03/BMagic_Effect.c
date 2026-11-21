@@ -397,8 +397,8 @@ MATCH void func_801F04A0(void) {
     D_801F28B4->outer.fixed = TO_COORD(g_Task->param.unk_0B);
     D_801F28B4->inner_speed = 0x32000;
     D_801F28B4->outer_speed = 0x19800;
-    D_801F28B4->x           = BATTLE_ACTIVE_PARTY.unk_2E.signed_value + D_801F138C[BATTLE_ACTIVE_PARTY.facing][0];
-    D_801F28B4->y           = BATTLE_ACTIVE_PARTY.unk_30.signed_value + D_801F138C[BATTLE_ACTIVE_PARTY.facing][1];
+    D_801F28B4->x           = BATTLE_ACTIVE_PARTY.screen_x.signed_value + D_801F138C[BATTLE_ACTIVE_PARTY.facing][0];
+    D_801F28B4->y           = BATTLE_ACTIVE_PARTY.screen_y.signed_value + D_801F138C[BATTLE_ACTIVE_PARTY.facing][1];
     D_801F28B4->mode += 1;
 }
 
@@ -518,12 +518,12 @@ MATCH void func_801F0EEC(u32 sprite, s32 blend, s32 color) {
     setRGB0(prim, color, color, color);
     if ((sprite & BYTE_MASK) < 2) {
         task     = g_Task;
-        prim->x0 = task->unk_2E.value - 32;
+        prim->x0 = task->screen_x.value - 32;
     } else {
         task     = g_Task;
-        prim->x0 = task->unk_2E.value - 40;
+        prim->x0 = task->screen_x.value - 40;
     }
-    prim->y0 = task->unk_30.value - 64;
+    prim->y0 = task->screen_y.value - 64;
     /* FAKE: the barrier keeps the prim copy out of the load delay, as retail. */
     FAKE_BARRIER();
     setUV0(prim, D_801F13A4[sprite & BYTE_MASK].x, D_801F13A4[sprite & BYTE_MASK].y);

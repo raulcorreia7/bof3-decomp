@@ -102,10 +102,10 @@ MATCH void func_801EEEEC(void) {
     g_Task->unk_0C      = ratan2(target->pos.x.fixed - g_Task->pos.x.fixed, target->pos.y.fixed - g_Task->pos.y.fixed);
     g_Task->unk_10      = 0;
     Battle_ProjectRange();
-    BMagic_Trail[g_Task->unk_04][0].vx = g_Task->unk_2E.value;
-    BMagic_Trail[g_Task->unk_04][0].vy = g_Task->unk_30.value;
-    BMagic_Trail[g_Task->unk_04][1].vx = g_Task->unk_2E.value;
-    BMagic_Trail[g_Task->unk_04][1].vy = g_Task->unk_30.value;
+    BMagic_Trail[g_Task->unk_04][0].vx = g_Task->screen_x.value;
+    BMagic_Trail[g_Task->unk_04][0].vy = g_Task->screen_y.value;
+    BMagic_Trail[g_Task->unk_04][1].vx = g_Task->screen_x.value;
+    BMagic_Trail[g_Task->unk_04][1].vy = g_Task->screen_y.value;
     g_Task->param.unk_0B               = 0;
     g_Task->unk_09                     = 16;
     g_Task->timer                      = 1;
@@ -401,9 +401,9 @@ MATCH void func_801F075C(void) {
         prim = (POLY_G3*)g_GfxPrimCursor;
         SetPolyG3(prim);
         SetSemiTrans(prim, 1);
-        setXY3(prim, g_Task->unk_2E.value, g_Task->unk_30.value, g_Task->unk_2E.value + FIXED_MUL(rsin(i << 9), g_ScratchPad.cells.halves[0]),
-               g_Task->unk_30.value + FIXED_MUL(rcos(i << 9), g_ScratchPad.cells.halves[0]), g_Task->unk_2E.value + FIXED_MUL(rsin((i + 1) << 9), g_ScratchPad.cells.halves[0]),
-               g_Task->unk_30.value + FIXED_MUL(rcos((i + 1) << 9), g_ScratchPad.cells.halves[0]));
+        setXY3(prim, g_Task->screen_x.value, g_Task->screen_y.value, g_Task->screen_x.value + FIXED_MUL(rsin(i << 9), g_ScratchPad.cells.halves[0]),
+               g_Task->screen_y.value + FIXED_MUL(rcos(i << 9), g_ScratchPad.cells.halves[0]), g_Task->screen_x.value + FIXED_MUL(rsin((i + 1) << 9), g_ScratchPad.cells.halves[0]),
+               g_Task->screen_y.value + FIXED_MUL(rcos((i + 1) << 9), g_ScratchPad.cells.halves[0]));
         setRGB0(prim, g_ScratchPad.cells.halves[3], g_ScratchPad.cells.halves[3], g_ScratchPad.cells.halves[3]);
         setRGB1(prim, 1, 1, 1);
         setRGB2(prim, 1, 1, 1);

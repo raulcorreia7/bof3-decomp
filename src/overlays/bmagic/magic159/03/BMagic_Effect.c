@@ -45,8 +45,8 @@ MATCH void func_801EEE28(void) {
     SYS_DISPATCH_BYTE(D_801EF424, g_Task->header.step);
     if (g_Task->header.flags != 0 && g_Task->header.step != 0) {
         Battle_ProjectRange();
-        g_Task->unk_2E.value += 8;
-        g_Task->unk_30.value -= 0x10;
+        g_Task->screen_x.value += 8;
+        g_Task->screen_y.value -= 0x10;
         func_801EF08C();
     }
 }
@@ -120,10 +120,10 @@ MATCH void func_801EF08C(void) {
     prim                         = (POLY_GT4*)g_GfxPrimCursor;
     SetPolyGT4(prim);
     SetSemiTrans(prim, 1);
-    setXY4(prim, g_Task->unk_2E.value + FIXED_MUL(rcos(3584), g_ScratchPad.cells.halves[0]), g_Task->unk_30.value + FIXED_MUL(rsin(3584), g_ScratchPad.cells.halves[0]),
-           g_Task->unk_2E.value + FIXED_MUL(rcos(2560), g_ScratchPad.cells.halves[0]), g_Task->unk_30.value + FIXED_MUL(rsin(2560), g_ScratchPad.cells.halves[0]),
-           g_Task->unk_2E.value + FIXED_MUL(rcos(512), g_ScratchPad.cells.halves[0]), g_Task->unk_30.value + FIXED_MUL(rsin(512), g_ScratchPad.cells.halves[0]),
-           g_Task->unk_2E.value + FIXED_MUL(rcos(1536), g_ScratchPad.cells.halves[0]), g_Task->unk_30.value + FIXED_MUL(rsin(1536), g_ScratchPad.cells.halves[0]));
+    setXY4(prim, g_Task->screen_x.value + FIXED_MUL(rcos(3584), g_ScratchPad.cells.halves[0]), g_Task->screen_y.value + FIXED_MUL(rsin(3584), g_ScratchPad.cells.halves[0]),
+           g_Task->screen_x.value + FIXED_MUL(rcos(2560), g_ScratchPad.cells.halves[0]), g_Task->screen_y.value + FIXED_MUL(rsin(2560), g_ScratchPad.cells.halves[0]),
+           g_Task->screen_x.value + FIXED_MUL(rcos(512), g_ScratchPad.cells.halves[0]), g_Task->screen_y.value + FIXED_MUL(rsin(512), g_ScratchPad.cells.halves[0]),
+           g_Task->screen_x.value + FIXED_MUL(rcos(1536), g_ScratchPad.cells.halves[0]), g_Task->screen_y.value + FIXED_MUL(rsin(1536), g_ScratchPad.cells.halves[0]));
     prim->tpage = GetTPage(TPAGE_DEPTH_4BIT, TPAGE_ABR_ADD, 832, 256);
     prim->clut  = GetClut(0, 506);
     setUVWH(prim, 8, 8, 79, 64);
