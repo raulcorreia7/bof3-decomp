@@ -41,7 +41,6 @@ def _reject_unsafe_text(value: str) -> None:
 
 
 def _emi_id(family: str, archive: str, slot: str, shipped: str) -> TargetId:
-    """The one spelling of an EMI identity: ``emi/<family>/<archive>/<slot>``."""
     return TargetId(f"emi/{family.lower()}/{archive.lower()}/{int(slot):02d}", shipped)
 
 
@@ -75,7 +74,6 @@ class TargetId:
         return "executable" if self.value.startswith("exe/") else "emi"
 
     def __str__(self) -> str:
-        """Return the canonical target spelling."""
         return self.value
 
 

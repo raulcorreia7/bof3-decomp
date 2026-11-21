@@ -33,17 +33,14 @@ def _percent(score: object) -> str:
 
 
 def parse_lines(text: str) -> list[str]:
-    """The rows of ``text``, one line each."""
     return [line for line in text.splitlines() if line.strip()]
 
 
 def parse(line: str) -> Attempt:
-    """The attempt a row holds."""
     return Attempt(**json.loads(line))
 
 
 def function_of(line: str) -> str:
-    """The ``function`` of one row."""
     return json.loads(line)["function"]
 
 

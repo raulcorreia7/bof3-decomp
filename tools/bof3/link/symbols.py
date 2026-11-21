@@ -74,12 +74,10 @@ def _flat(target: str) -> str:
 
 
 def splat_map(target: str) -> str:
-    """Return the repository path of a target's generated Splat map."""
     return f"{OUT}/{_flat(target)}.splat"
 
 
 def link_map(target: str) -> str:
-    """Return the repository path of a target's generated link map."""
     return f"{OUT}/{_flat(target)}.link"
 
 

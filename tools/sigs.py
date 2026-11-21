@@ -20,7 +20,6 @@ from bof3.source import ctext, decls
 
 
 def load_tree() -> decls.Tree:
-    """Read every tracked C file under ``src/`` and ``include/``."""
     return decls.Tree({name: ctext.read(ROOT, name) for name in ctext.tracked_c(ROOT)})
 
 

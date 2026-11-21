@@ -604,7 +604,6 @@ def _reg_value(
 
 
 def narrow_sign(shift: int | None) -> str:
-    """Return the type a sign-extending shift amounts to: 24 is a byte and 16 a halfword."""
     return "s8" if shift == 24 else "s16"
 
 
@@ -825,7 +824,6 @@ def _control_returns(insns: list[Insn], labels: dict[str, int], control: int) ->
 
 
 def _is_control(mnemonic: str) -> bool:
-    """Whether an instruction branches or jumps, so the next one is its delay slot."""
     return mnemonic in BRANCHES or mnemonic in ("j", "jal", "jalr", "jr")
 
 

@@ -13,12 +13,10 @@ def _run(args: tuple[str, ...], root: Path | None, check: bool, text: bool = Tru
 
 
 def git(*args: str, root: Path | None = None, check: bool = True) -> str:
-    """Return the standard output of ``git args``; with ``check`` off a failed command gives ``""``."""
     return _run(args, root, check).stdout
 
 
 def ok(*args: str, root: Path | None = None) -> bool:
-    """Return whether ``git args`` exits 0."""
     return _run(args, root, False, text=False).returncode == 0
 
 
@@ -36,10 +34,8 @@ def merge_base(
 
 
 def changed_files(*args: str, root: Path | None = None) -> list[str]:
-    """Return the paths ``git diff --name-only args`` lists."""
     return git("diff", "--name-only", *args, root=root, check=False).split()
 
 
 def ls_files(*paths: str, root: Path | None = None) -> list[str]:
-    """Return the tracked files under ``paths``."""
     return git("ls-files", *paths, root=root).split()

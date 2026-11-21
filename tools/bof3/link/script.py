@@ -113,7 +113,6 @@ def shadowed(text: str, placements: dict[tuple[str, str], int]) -> frozenset[int
 
 
 def _object_paths(text: str) -> tuple[str, ...]:
-    """Return each named linker input once, in first-selector order."""
     return tuple(dict.fromkeys(entry.path for entry in parse(text)))
 
 

@@ -23,12 +23,10 @@ def tracked(root: Path, *paths: str) -> list[str]:
 
 
 def tracked_c(root: Path) -> list[str]:
-    """Return the tracked ``.c`` and ``.h`` files under ``src/`` and ``include/``."""
     return [name for name in tracked(root) if name.endswith((".c", ".h"))]
 
 
 def read(root: Path, name: str) -> str:
-    """Return one repo-relative file as text; undecodable bytes become U+FFFD."""
     return (root / name).read_text(encoding="utf-8", errors="replace")
 
 

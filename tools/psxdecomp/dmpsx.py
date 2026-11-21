@@ -110,7 +110,6 @@ class UnknownPlaceholder(ValueError):
 
 
 def _arguments(word: int) -> int:
-    """Return the retail argument bits for lm, cv, v, mx and sf."""
     return (
         (((word >> 18) & 1) << 10)
         | (((word >> 19) & 3) << 13)

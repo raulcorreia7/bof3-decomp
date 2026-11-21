@@ -164,7 +164,6 @@ def halve(op: str, src: tuple, n: int) -> tuple:
 
 
 def _is_number(text: str) -> bool:
-    """Whether ``text`` is a decimal or hexadecimal literal."""
     return bool(re.fullmatch(r"-?(0x[0-9A-Fa-f]+|\d+)", text))
 
 
@@ -179,11 +178,9 @@ class _Lifter:
         self.stack: dict[int, tuple] = {}
 
     def kind(self, reg: str, default: str = "unk") -> str:
-        """The expression kind a register holds."""
         return self.regs.get(reg, (default,))[0]
 
     def operand(self, reg: str) -> tuple:
-        """The value of a source register; ``zero`` is 0 and an unset one is an argument."""
         return ("c", 0) if reg == "zero" else self.regs.get(reg, ("arg", reg))
 
     def unsupported(self, line: str) -> None:
@@ -413,7 +410,6 @@ def classify(lifted: Lift) -> str:
 
 
 def asm_functions(root: Path = ROOT) -> list[Func]:
-    """Return the functions that are still assembly."""
     return [f for f in load_index(root) if f.status == "ASM"]
 
 
@@ -432,7 +428,6 @@ class Measured(NamedTuple):
 
 
 def measure(funcs: list[Func]) -> list[Measured]:
-    """Return ``(shape, function, words)`` for each function."""
     return [Measured(classify(lifted_function(f)), f, len(f.words)) for f in funcs]
 
 
@@ -899,7 +894,6 @@ def rets_used(events: list[tuple], inline: bool = False) -> set[int]:
 
 
 def call_at(events: list[tuple], ident: int) -> int:
-    """Return the position of the call with this id."""
     return next(i for i, e in enumerate(events) if e[0] == "call" and e[3] == ident)
 
 
@@ -1042,7 +1036,6 @@ class Item:
 
     @property
     def text(self) -> str:
-        """The body with its own name masked, to compare twins."""
         return self.body.replace(self.func.name, "@")
 
     @property

@@ -63,19 +63,16 @@ class Plan:
 
     @property
     def edits(self) -> bool:
-        """True when the template body needs a change."""
         return bool(self.symbols or self.literals)
 
     sites: int = 0  # positions explained by a symbol rename
 
     @property
     def total(self) -> int:
-        """Instructions that differ before any edit."""
         return self.hard + len(self.literals) + self.sites
 
 
 def _norm(words: tuple[int, ...]) -> list[int]:
-    """Return the words with a jump's target removed."""
     return [-(w >> 26) if w >> 26 in JUMP_OPS else w for w in words]
 
 
@@ -283,7 +280,6 @@ def declaration(text: str, name: str) -> str | None:
 
 
 def read_listing(root: Path, image: str) -> dict[int, str]:
-    """Return ``{address: instruction text}`` of the image's assembly files."""
     return _listing(str(root), image)
 
 
@@ -316,7 +312,6 @@ def _disassembly(root: str, obj: str) -> str:
 
 
 def object_insns(root: Path, obj: str, name: str, count: int) -> list[Insn] | None:
-    """Return the ``count`` instructions of ``name`` in ``build/meson/<obj>`` with relocations."""
     return template_insns(_disassembly(str(root), obj), name, count) or None
 
 

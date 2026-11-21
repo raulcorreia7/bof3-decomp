@@ -69,7 +69,6 @@ class Violation:
 
 
 def _in_draft(stack: list[tuple[str, bool]]) -> bool:
-    """True inside the first branch of an `#ifdef NON_MATCHING` (or `#if defined(...)`)."""
     return any(guard == "draft" and not in_else for guard, in_else in stack)
 
 
@@ -245,7 +244,6 @@ def tracked_sources() -> list[str]:
 
 
 def hand_functions(hand_files: list[str]) -> set[str]:
-    """The function names of the files in asm/*/hand/."""
     return {Path(f).stem for f in hand_files}
 
 
@@ -309,7 +307,6 @@ def draft_ref(path: str, text: str, root: Path | None = None) -> str | None:
 
 
 def attempted(root: Path | None = None) -> set[str]:
-    """The functions that `config/attempts.jsonl` holds an object for."""
     return {function_of(row) for row in read_lines((root or ROOT) / ROW_PATH)}
 
 

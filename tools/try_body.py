@@ -91,7 +91,6 @@ def image_header(root: Path, src: str) -> str | None:
 
 
 def split_decls(text: str) -> tuple[str, list[str]]:
-    """Return the body without its ``@decl`` lines, and those declarations."""
     return DECL.sub("", text).strip("\n"), [d.strip() for d in DECL.findall(text)]
 
 

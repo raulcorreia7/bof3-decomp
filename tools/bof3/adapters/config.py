@@ -14,12 +14,10 @@ _TITLE = re.compile(r'^\["([^"]+)"\]', re.MULTILINE)
 
 
 def table_file(image: str) -> str:
-    """The file that holds one image's table."""
     return f"{SPLIT}/{image.replace('/', '+')}.toml"
 
 
 def symbol_files(root: Path) -> list[Path]:
-    """The files that hold the symbol tables now."""
     return sorted((root / SPLIT).glob("*.toml"))
 
 
@@ -62,10 +60,8 @@ def write_symbols(root: Path, text: str) -> None:
 
 
 def read_symbols(root: Path) -> dict[str, Any]:
-    """Return the parsed symbol tables: image table -> name -> row."""
     return parse(symbols_text(root))
 
 
 def read_link(root: Path) -> dict[str, Any]:
-    """Return the parsed ``config/link.toml``."""
     return tomllib.loads((root / "config/link.toml").read_text(encoding="utf-8"))

@@ -350,7 +350,6 @@ def signatures(root: Path, cache: Path) -> list[Path]:
 
 
 def _relative(root: Path, path: Path) -> str:
-    """Return one generated path as the script's repository-relative spelling."""
     return path.relative_to(root).as_posix()
 
 

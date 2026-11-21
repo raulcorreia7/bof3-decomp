@@ -35,7 +35,6 @@ MIN_WORDS = 6
 
 
 def functions(args: argparse.Namespace, min_words: int = 0) -> list[Func]:
-    """Return the indexed functions, SDK code excluded."""
     return [
         f
         for f in load_index(ROOT, args.rebuild)

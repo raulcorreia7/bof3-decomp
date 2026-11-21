@@ -126,10 +126,6 @@ class Entities:
 # --- Text -----------------------------------------------------------------------------------
 
 
-def strip_comments(text: str) -> str:
-    return mask(text)
-
-
 def defines_in(text: str) -> dict[str, str]:
     """Every `#define` in one file, guards excepted: name -> normalized value."""
     found = {}
@@ -410,7 +406,7 @@ def read_tree(tree: Path) -> tuple[dict[str, set[str]], dict[str, str]]:
         rel = path.relative_to(tree).as_posix()
         if tracked(rel):
             text = path.read_text(encoding="utf-8", errors="replace")
-            uses[rel] = set(IDENT.findall(strip_comments(text)))
+            uses[rel] = set(IDENT.findall(mask(text)))
             defines.update(defines_in(text))
     return uses, defines
 

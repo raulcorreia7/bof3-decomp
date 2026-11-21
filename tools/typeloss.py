@@ -126,7 +126,6 @@ def sources(rev: str) -> Iterator[tuple[str, str]]:
 
 
 def squash(text: str) -> str:
-    """Normalise spaces."""
     return re.sub(r"\s+", " ", text.replace(" *", "*")).strip()
 
 

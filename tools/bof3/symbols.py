@@ -45,7 +45,6 @@ class Entry(NamedTuple):
 
     @property
     def address(self) -> int:
-        """The row's address."""
         return self.addr
 
     @property
@@ -150,5 +149,4 @@ def parse(text: str) -> dict[str, Any]:
 
 
 def table_entries(target: str, rows: dict[str, Any]) -> list[Entry]:
-    """Return one table's validated rows; a bad row is a :class:`LinkError`."""
     return [_entry(target, name, value) for name, value in rows.items()]

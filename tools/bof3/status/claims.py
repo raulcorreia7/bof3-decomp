@@ -106,7 +106,6 @@ def _own_marker_lines(path: Path) -> tuple[tuple[str, str], ...]:
 
 
 def _marker_lines(path: Path) -> list[tuple[str, str]]:
-    """Return the markers of the file and the headers it includes; each file is scanned once."""
     return [line for current in _closure(path) for line in _own_marker_lines(current)]
 
 
@@ -186,5 +185,4 @@ def unit_definitions(path: Path) -> set[str]:
 
 
 def c_definitions(path: Path) -> set[str]:
-    """Return the functions a unit defines in C, the quoted headers it includes followed."""
     return {match.group(1) for match in MARKED_NAME_RE.finditer(source_text(path))}

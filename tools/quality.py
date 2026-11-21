@@ -112,11 +112,6 @@ DECL = re.compile(
 MACRO_CALL = re.compile(r"[A-Z][A-Z0-9_]*\s*\(.*\)", re.S)
 
 
-def strip_comments(text: str) -> str:
-    """Return ``text`` with comments and strings blank, keeping the line count."""
-    return mask(text)
-
-
 def bodies(text: str) -> Iterator[tuple[str, str]]:
     """Yield ``(name, body)`` for each ``MATCH`` definition in comment-free ``text``."""
     for found in FUNC.finditer(text):
@@ -152,7 +147,6 @@ def shape(name: str, body: str) -> str:
 
 
 def image_of(path: str) -> str:
-    """Return the directory that holds ``path``, the image a row reports."""
     return path.rsplit("/", 1)[0] if "/" in path else "."
 
 
@@ -160,7 +154,7 @@ def _file_row(
     path: str, text: str, seen: dict[str, list[tuple[str, str]]]
 ) -> dict[str, int]:
     """Return the metrics of one file; its function shapes are added to ``seen``."""
-    clean = strip_comments(text)
+    clean = mask(text)
     row = dict.fromkeys(METRICS, 0)
     row["funcs"] = 0
     row["lines"] = 0
@@ -191,7 +185,6 @@ def scan(files: dict[str, str]) -> dict[str, dict[str, int]]:
 
 
 def work_files(root: Path = ROOT) -> dict[str, str]:
-    """Return every C file under ``src/`` in the working tree of ``root``."""
     return {
         str(p.relative_to(root)): p.read_text(encoding="utf-8", errors="ignore")
         for p in sorted((root / "src").rglob("*"))
@@ -223,7 +216,6 @@ def rev_files(rev: str) -> dict[str, str]:
 
 
 def merge_base(base: str, to: str) -> str:
-    """Return the commit ``to`` branched from ``base`` at, or ``base`` when there is none."""
     return branch_point(base, "HEAD" if to == "WORK" else to, root=ROOT, fallback=base)
 
 
@@ -286,7 +278,7 @@ def functions(
     functions in ``paths``; a name repeated in one file keeps the worst copy."""
     out: dict[tuple[str, str], tuple[int, str, bool]] = {}
     for path in sorted(set(paths) & files.keys()):
-        for name, body in bodies(strip_comments(files[path])):
+        for name, body in bodies(mask(files[path])):
             prior = out.get((path, name), (0, "", False))
             out[path, name] = (
                 max(unnamed(body), prior[0]),
@@ -345,7 +337,6 @@ def ratchet(
 
 
 def score(row: dict[str, int]) -> int:
-    """Return the weighted debt of one row."""
     return sum(WEIGHT[m] * row[m] for m in METRICS)
 
 
@@ -435,7 +426,6 @@ def ranked(
 
 
 def queue_rows(rows: dict[str, dict[str, int]], limit: int) -> list[dict]:
-    """Return the queue rows as objects keyed like the table columns."""
     return [
         {"file": key, "score": score(row), **{c: row[c] for c in ("funcs", *METRICS)}}
         for key, row in ranked(rows, limit)

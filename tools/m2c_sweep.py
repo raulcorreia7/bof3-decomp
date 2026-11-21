@@ -133,7 +133,6 @@ def typed_cell(text: str, image: str) -> str:
 
 
 def typed_asm(text: str) -> str:
-    """Return the assembly with the 0x1F800044 cell read as the symbol ``g_SpadView``."""
     return SPAD_LO.sub(
         f"%lo({SPAD_VIEW_NAME})", SPAD_HI.sub(f"%hi({SPAD_VIEW_NAME})", text)
     )

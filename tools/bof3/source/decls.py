@@ -88,7 +88,6 @@ def strip_comments(text: str) -> str:
 
 
 def normalize(text: str) -> str:
-    """Collapse spaces around ``*`` and between words."""
     return re.sub(r"\s+", " ", re.sub(r"\s*\*\s*", "*", text)).strip()
 
 
@@ -209,7 +208,6 @@ class Tree:
             self.variables.add(m.group(1))
 
     def kind(self, name: str, kind: str) -> list[Decl]:
-        """Return the ``kind`` declarations of ``name``."""
         return [d for d in self.decls.get(name, ()) if d.kind == kind]
 
     def views(self) -> dict[str, list[set[str]]]:
@@ -368,7 +366,6 @@ def _shape(d: Decl) -> str:
 
 
 def _image(path: str) -> str:
-    """Return the image folder of an overlay path (``src/overlays/<family>/<image>/<slot>``)."""
     return "/".join(path.split("/")[:5]) if path.startswith("src/overlays/") else ""
 
 

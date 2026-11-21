@@ -62,7 +62,6 @@ def attempts(path: Path = ROOT / ROW_PATH) -> dict[str, str]:
 
 
 def is_hand_asm(src: str) -> bool:
-    """True when the unit marks its function `HAND_ASM`: written in assembly, so done."""
     return "\nHAND_ASM " in (ROOT / src).read_text(encoding="utf-8")
 
 

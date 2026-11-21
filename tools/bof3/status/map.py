@@ -37,12 +37,10 @@ class Unit:
 
     @property
     def is_code(self) -> bool:
-        """Check whether the unit is a mapped code span."""
         return self.kind in CODE_KINDS
 
     @property
     def is_game_function(self) -> bool:
-        """Check whether the unit is a game function rather than a data blob."""
         return self.is_code and not is_data_name(self.name)
 
 
@@ -61,17 +59,14 @@ class TargetMap:
 
     @property
     def reviewed_code(self) -> tuple[Unit, ...]:
-        """The reviewed function spans; data blobs stay out of the build plan."""
         return tuple(unit for unit in self.units if unit.is_game_function)
 
 
 def bare_kind(kind: str) -> str:
-    """Return the Splat subsegment type without the section selector's dot."""
     return kind.removeprefix(".")
 
 
 def is_data_name(name: str) -> bool:
-    """Check whether the name is a table, blob or alignment slot of data."""
     return name.startswith(_DATA_PREFIXES) or name.endswith(_DATA_SUFFIXES)
 
 
@@ -87,7 +82,6 @@ def payload_bytes(root: Path, binary: str, target: str) -> int:
 
 
 def manifest_error(error: Exception) -> str:
-    """Return the status reports' manifest failure format."""
     return f"manifest: {type(error).__name__}: {error}"
 
 

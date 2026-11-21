@@ -43,7 +43,6 @@ class Func:
 
     @property
     def ref(self) -> str:
-        """The project's ``TARGET@0xADDRESS`` form."""
         return f"{self.image}@0x{self.addr:08X}"
 
 
@@ -64,7 +63,6 @@ def opcode_token(word: int) -> int:
 
 
 def opcode_string(words: tuple[int, ...]) -> str:
-    """Return the opcode tokens as one string, for sequence-similarity scorers."""
     return "".join(chr(0x100 + opcode_token(w)) for w in words)
 
 

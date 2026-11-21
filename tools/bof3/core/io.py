@@ -21,7 +21,6 @@ class RepoLayout:
 
 
 def repo_layout(root: Path | None = None) -> RepoLayout:
-    """Return the repository root."""
     return RepoLayout((root or ROOT).resolve())
 
 

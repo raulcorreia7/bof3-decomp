@@ -23,26 +23,21 @@ class MatchResult:
 
     @property
     def exact(self) -> bool:
-        """Whether the function's bytes equal retail."""
         return self.returncode == 0
 
     @property
     def lines(self) -> list[str]:
-        """The output lines."""
         return self.output.splitlines()
 
     @property
     def differing(self) -> list[str]:
-        """The lines ``--diff`` marks as differing."""
         return [line for line in self.lines if line.startswith("!")]
 
     @property
     def matched(self) -> bool:
-        """Whether ``--diff`` printed its ``match:`` line."""
         return any(line.startswith("match: ") for line in self.lines)
 
     def tail(self, count: int) -> list[str]:
-        """The last ``count`` non-blank-trimmed lines."""
         return self.output.strip().splitlines()[-count:]
 
     def errors(self) -> list[str]:

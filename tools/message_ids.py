@@ -76,12 +76,10 @@ MASK_RE = re.compile(
 
 
 def to_int(text: str) -> int:
-    """Parse a C integer literal, dropping any u/l suffix."""
     return int(text.rstrip("uUlL"), 0)
 
 
 def masked(text: str) -> str:
-    """Blank comments and string literals, keeping offsets and newlines."""
     return MASK_RE.sub(lambda match: re.sub(r"[^\n]", " ", match.group(0)), text)
 
 
@@ -220,7 +218,6 @@ def name(section: str | None, value: int, width: int, tags: Tags) -> str:
 
 
 def missing(ids: Ids, tags: Tags) -> list[tuple[str, int]]:
-    """Ids a tagged module uses that messages.def has no line for."""
     return [
         (section, value)
         for section in sorted(s for s in ids if s is not None)

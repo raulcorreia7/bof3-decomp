@@ -230,11 +230,9 @@ class Project:
         return base, False
 
     def marked(self, source: Path) -> bool:
-        """Return True when the source, or a header it includes, carries a ``MATCH`` marker."""
         return bool(self.match.search(source_text(source)))
 
     def drafted(self, source: Path) -> bool:
-        """Return True when the source, or a header it includes, holds a ``NON_MATCHING`` draft."""
         return bool(self.draft.search(source_text(source)))
 
     def hand_complete(self, source: Path) -> bool:
@@ -288,12 +286,10 @@ def _unique(paths: list[Path]) -> list[Path]:
 
 
 def _relative(path: Path, start: Path) -> str:
-    """Return one object path relative to the project directory."""
     return Path(os.path.relpath(path, start)).as_posix()
 
 
 def _target_rows(root: Path) -> list[dict[str, Any]]:
-    """Return every target with the identity its layout gives it."""
     return [
         {
             "id": manifest.id.value,
@@ -386,7 +382,6 @@ def _game_unit(
 
 
 def _claimed_functions(sources: list[Path]) -> set[str]:
-    """The ``func_<ADDRESS>`` names the C sources mention."""
     return {
         f"func_{match}"
         for source in sources

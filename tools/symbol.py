@@ -174,7 +174,6 @@ DEFAULT_SCOPE = ("src", "include", "config", "docs", "asm")
 
 
 def git(*args: str, check: bool = True, env: dict[str, str] | None = None) -> str:
-    """Run Git in the repository and return stdout."""
     return subprocess.run(
         ["git", *args], cwd=ROOT, capture_output=True, text=True, check=check, env=env
     ).stdout
@@ -278,7 +277,6 @@ class RowRef:
 
     @property
     def source(self) -> Path:
-        """The unit file the row names, whether or not it exists."""
         return ROOT / "src" / source_folder(self.image) / f"{self.name}.c"
 
 
@@ -308,12 +306,10 @@ def layout_rows(image: str, name: str) -> list[RowRef]:
 
 
 def unit_definitions(path: Path) -> set[str]:
-    """Return the functions a unit defines, or none when the unit file is missing."""
     return claims.unit_definitions(path) if path.is_file() else set()
 
 
 def under_scope(path: Path, scope: list[str]) -> bool:
-    """Whether ``path`` sits on or under one of the scope folders."""
     return any(
         path == ROOT / folder or ROOT / folder in path.parents for folder in scope
     )
@@ -1288,7 +1284,6 @@ def locate(layout: Layout, offset: int, prefix: str = "") -> list[tuple[str, int
 
 
 def symbol_tables() -> dict[str, dict[str, dict]]:
-    """Load config/symbols/<image>.toml as image table -> name -> row."""
     return parse(symbols_text(ROOT))
 
 
@@ -1767,7 +1762,6 @@ class NamedValue:
 
 
 def _without_comments(text: str) -> str:
-    """Blank comments but keep strings, so an include path and a char literal survive."""
     return COMMENT.sub(lambda match: re.sub(r"[^\n]", " ", match.group()), text)
 
 
@@ -2384,11 +2378,6 @@ def _value_dereference(ctype: str) -> str | None:
     return None
 
 
-def _value_element(ctype: str) -> str | None:
-    """Return the element type of an array or pointer type."""
-    return _value_dereference(ctype)
-
-
 def _value_member(
     index: dict,
     ctype: str,
@@ -2478,7 +2467,7 @@ def _value_type(
     subscript = re.match(r"^(.*)\[[^\]]*\]\s*$", text, re.S)
     if subscript is not None:
         base = _value_type(subscript.group(1), index, scope, depth + 1)
-        return _value_element(base) if base else None
+        return _value_dereference(base) if base else None
     return None
 
 
@@ -2604,7 +2593,6 @@ def _value_family_role(tag: str) -> str:
 
 
 def _value_camel(stem: str) -> str:
-    """Return ``item`` as ``Item``, for the enum tag an id family takes."""
     return "".join(part.capitalize() for part in stem.split("_"))
 
 
@@ -4559,10 +4547,6 @@ def _record_definitions() -> tuple[dict[str, int], dict[str, str], set[str]]:
     return dict(counts), header, names
 
 
-def _record_members(layout) -> list:
-    return list(layout.members)
-
-
 def _record_globals(symbols: dict, names: set[str]) -> dict[str, int]:
     found: dict[str, int] = collections.Counter()
     for rows in symbols.values():
@@ -4666,7 +4650,7 @@ def records(args: argparse.Namespace) -> int:
             owners[member.path.rsplit(".", 1)[-1]].add(name)
     rows = []
     for name, layout in layouts.items():
-        members = _record_members(layout)
+        members = list(layout.members)
         unknown = sum(
             1
             for member in members
@@ -4777,7 +4761,6 @@ class SymbolIndex:
         return found
 
     def resolve(self, image: str, name: str) -> Row | None:
-        """Return the row a name has in one image, else None."""
         return self.visible(image).get(name)
 
     def canonical(self, name: str, address: int) -> str:
@@ -4892,7 +4875,6 @@ def _assembly() -> Assembly:
 
 
 def _visible_sources(tree, manifests: dict) -> dict[str, set[str]]:
-    """Return each image's visible C files."""
     return {
         image: _visible_files(tree, manifest) for image, manifest in manifests.items()
     }
@@ -5393,7 +5375,6 @@ def _confidence(votes: collections.Counter, found_home: str) -> str:
 
 
 def _function_home(function, manifests: dict) -> str:
-    """Return the system a function belongs to by its name prefix or its folder."""
     return _name_system(function.name) or _folder_system(
         manifests[function.image].source_dir
     )
@@ -5975,7 +5956,6 @@ def _unit_of(tree, visible: set[str], function) -> str:
 
 
 def _is_split_unit(unit: str) -> bool:
-    """Whether a unit is a split assembly file rather than a C file."""
     return unit.startswith(("asm/", "build/asm/"))
 
 
