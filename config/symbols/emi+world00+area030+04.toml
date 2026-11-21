@@ -29,6 +29,7 @@ Fishing_ReelGaugeUpdate = { addr = 0x801D2DC4, type = "func", source = "reel gau
 Fishing_DrawReelCursor = { addr = 0x801D3244, type = "func", source = "draws the reel cursor strip of the given width, flashing red when enabled" }
 Fishing_PromptRun = { addr = 0x801D35CC, type = "func", source = "runs the prompt bar actor: g_FishingPromptSteps[handler_index_01], and frees it when the fishing state is not 0 and below 4" }
 Fishing_PromptSlideIn = { addr = 0x801D3684, type = "func", source = "prompt bar step 2: moves the bar down to its row (origin_y_30 0x12)" }
+Fishing_DrawPanelHeader = { addr = 0x801D3908, type = "func", source = "Draws the fishing panel header row." }
 Fishing_PromptSlideOut = { addr = 0x801D3938, type = "func", source = "prompt bar step 7: moves the bar up out of view, then goes to idle (or step 1 while counter_07 is set)" }
 Fishing_CatchPageRun = { addr = 0x801D42A0, type = "func", source = "runs the Data page actor: g_FishingSteps[handler_index_01]" }
 Fishing_CatchPageNext = { addr = 0x801D4884, type = "func", source = "Data page step: finds the next recorded fish in g_FishingBestCatch (key_3E) and starts the page slide" }
@@ -79,6 +80,8 @@ Fishing_DrawCautionBox = { addr = 0x801E19CC, type = "func", source = "Draws the
 Fishing_FishStacksFull = { addr = 0x801E1C10, type = "func", source = "reports whether every fish species (ITEM_JELLYFISH through ITEM_MACKEREL) is held at the 99-item stack limit; Fishing_ChooseAction diverts to sub step 7 once before the cast while it is true" }
 g_FishingCastGaugeSteps = { addr = 0x801E1D10, source = "cast power gauge steps: idle, start, sweep, label" }
 g_FishingLureSteps = { addr = 0x801E1D20, source = "lure actor steps: idle, cast, fly, settle, float, hooked" }
+g_FishingLureFlyCueSteps = { addr = 0x801E1D58, source = "Four cue rows of height offset and step speed for the lure fly." }
+g_FishingActorRunHandlers = { addr = 0x801E1D78, source = "Two handlers the fishing actor run dispatches through handler_index." }
 g_FishingReelGaugeSteps = { addr = 0x801E1D80, source = "reel gauge steps: idle, start, update" }
 g_FishingPromptSets = { addr = 0x801E1F20, source = "prompt ids of each prompt set (cue_index_06): up to three prompts, 0xFF ends the list, the last byte says whether a follow-up bar is spawned" }
 g_FishingPromptSteps = { addr = 0x801E1F44, source = "prompt bar steps: idle, init, slide in, first prompt, show, hold, wait, slide out, ready, scroll text, expand, button, close" }
