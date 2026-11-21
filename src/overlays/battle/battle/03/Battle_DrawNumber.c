@@ -9,7 +9,7 @@ MATCH void Battle_DrawNumber(s16 x, s16 y, u8 palette, u16 value) {
     SPRT* prim;
 
     i = 0;
-    TEXT_Format(g_UiFormatBuffer, g_BattleNumberFormat, value);
+    TEXT_Format(g_UiFormatBuffer, D_801D0C78, value);
     GFX_AddDrawMode(GetTPage(TPAGE_DEPTH_4BIT, TPAGE_ABR_HALF, FONT_TPAGE_X, FONT_TPAGE_Y) & HALF_MASK);
     do {
         if (g_UiFormatBuffer[i] != ' ') {

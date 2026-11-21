@@ -222,9 +222,7 @@ extern BattleIconPalette   g_BattleIconPalette;
 extern char                D_801D0C6C[];
 extern char                D_801D0C70[];
 extern char                D_801D0C74[];
-/* The format that prints a battle number. */
-/* D_801D0C78 */
-extern s8                  g_BattleNumberFormat[];
+extern s8                  D_801D0C78[];
 /* g_BattleDamageSpread */
 extern DamageSpread        g_BattleDamageSpread;
 

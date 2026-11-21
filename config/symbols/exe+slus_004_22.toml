@@ -318,8 +318,6 @@ jtbl_80149F40 = { addr = 0x80149F40, type = "Callback", source = "The switch tab
 jtbl_80149F58 = { addr = 0x80149F58, type = "Callback", source = "The switch table of Item_GetFlags: the jump targets of its jr dispatch." }
 jtbl_80149F70 = { addr = 0x80149F70, type = "Callback", source = "The switch table of Item_GetDescription: the jump targets of its jr dispatch." }
 jtbl_80149F88 = { addr = 0x80149F88, type = "Callback", source = "The switch table of Item_CanEquip: the jump targets of its jr dispatch." }
-g_SysFileNotFoundText = { addr = 0x80149F9C, source = "The FILE NOT FOUND text SYS_ShowFileNotFound draws." }
-g_SysFileNotFoundFormat = { addr = 0x80149FAC, source = "The ID %02X/%02X/%02X format SYS_ShowFileNotFound prints." }
 jtbl_8014A008 = { addr = 0x8014A008, type = "Callback", source = "The switch table of _SpuSetVoiceAttr: the jump targets of its jr dispatch." }
 jtbl_8014A028 = { addr = 0x8014A028, type = "Callback", source = "The switch table of _SpuSetVoiceAttr: the jump targets of its jr dispatch." }
 jtbl_8014A084 = { addr = 0x8014A084, type = "Callback", source = "The switch table of SpuSetCommonAttr: the jump targets of its jr dispatch." }

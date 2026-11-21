@@ -628,12 +628,8 @@ extern const struct MenuPanelSteps g_MessagePresetSteps;
 extern const VECTOR                D_80149BF0;
 extern const u32                   g_EmiCdSteps[];
 extern const EmiRingSteps          g_EmiRingSteps;
-/* The text shown when a file is not found. */
-/* D_80149F9C */
-extern const char                  g_SysFileNotFoundText[];
-/* The format that prints the id of the missing file. */
-/* D_80149FAC */
-extern const char                  g_SysFileNotFoundFormat[];
+extern const char                  D_80149F9C[];
+extern const char                  D_80149FAC[];
 extern const u32                   D_8014AAB8[4];
 /* func_8014BC70 */
 extern void                        Area_DrawGridActors(void);

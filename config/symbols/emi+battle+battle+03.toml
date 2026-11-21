@@ -25,7 +25,6 @@ g_BattlePhases = { addr = 0x801D0C04, source = "Battle mode handlers, one per ba
 g_BattleEntrances = { addr = 0x801D0C1C, source = "Battle entrance handlers." }
 jtbl_801D0C2C = { addr = 0x801D0C2C, type = "Callback", source = "The switch table of func_801D5024: the jump targets of its jr dispatch." }
 g_BattleIconPalette = { addr = 0x801D0C64, source = "The palette entries of the battle icon CLUT row." }
-g_BattleNumberFormat = { addr = 0x801D0C78, source = "The %3d format Battle_DrawNumber prints a value with." }
 g_BattleDamageSpread = { addr = 0x801D0C7C, source = "The eight random damage percentages Battle_CalcDamage picks from." }
 g_BattleEvents = { addr = 0x801D0C84, source = "Battle event handlers." }
 s_BattleSeIds = { addr = 0x801D0C98, source = "Picks a random battle SE id for the battle mode." }
