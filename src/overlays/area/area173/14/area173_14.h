@@ -52,11 +52,9 @@ extern u8 D_801F52E8[][2];
 extern u8 D_801F52E9[][2];
 
 /* The four corner vectors RotTransPers4 projects. */
-/* g_ScratchPadVectors */
-extern SVECTOR g_ScratchPadVectors[];
 /* The projected quad's origin: x then y. */
-extern s16     D_1F800034[2];
-extern s16     D_1F800036;
+extern s16 D_1F800034[2];
+extern s16 D_1F800036;
 
 /* The part-row bytes the draw addresses by offset: the base y, the four corner triples and the part word. */
 extern u8 D_801F4F15[];

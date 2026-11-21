@@ -14,10 +14,8 @@
 
 /* The scratchpad work pointer; the dispatch entry bytes select a handler. */
 
-/* g_ScratchPadVectors */
-extern SVECTOR g_ScratchPadVectors[];
 /* The world-area state byte tested by the work handlers. */
-extern u8      D_801F4CE8[];
+extern u8 D_801F4CE8[];
 
 /* Seed rows matched against g_GameEntryAreaId; column 0 is the seed, the
  * g_ScenarioState.scenario_id column is the message id. */

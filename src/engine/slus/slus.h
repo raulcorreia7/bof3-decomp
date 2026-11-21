@@ -391,8 +391,6 @@ typedef struct AreaCellPacketList {
 
 /* D_80142CC0 as lists: six per grid row. */
 extern AreaCellPacketList g_AreaCellPacketLists[][6];
-/* g_ScratchPadVectors */
-extern SVECTOR            g_ScratchPadVectors[];
 extern SVECTOR            D_1F80001C;
 extern SVECTOR            D_1F800024;
 extern SVECTOR            D_1F80002C;

@@ -11,8 +11,6 @@
 /* Reset sentinel stored to g_MessageRequest by the request handlers. */
 #define RESET_SENTINEL 0xFFFF
 
-/* g_ScratchPadVectors */
-extern SVECTOR  g_ScratchPadVectors[];
 extern Callback D_801F3ABC[];
 
 void      func_801F2C74(void);

@@ -7,8 +7,6 @@
 #include "overlays/area/worlds/world02.h"
 #include "area/spad.h"
 
-/* g_ScratchPadVectors */
-extern SVECTOR  g_ScratchPadVectors[];
 extern u8       D_801F58DC[];
 extern u8       D_801F5900[];
 extern u8       D_801F5902[];

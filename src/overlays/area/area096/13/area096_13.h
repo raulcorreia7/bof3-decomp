@@ -21,9 +21,6 @@ extern AreaQuadCell D_801F3624[];
 #define AREA_QUAD_PART_TILE     0xB102u
 #define AREA_QUAD_PART_WORD     (AREA_QUAD_PART_TAG | AREA_QUAD_PART_TILE)
 
-/* g_ScratchPadVectors */
-extern SVECTOR g_ScratchPadVectors[];
-
 void func_801F2ECC(s32 depth, s32 height);
 
 #endif

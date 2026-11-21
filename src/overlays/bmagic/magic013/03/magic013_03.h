@@ -12,7 +12,6 @@ extern Magic010Steps D_801EEC04;
 extern Callback     D_801F03C0[];
 extern u8           D_801F03D4[];
 extern Callback     D_801F03DC[];
-extern SVECTOR      g_ScratchPadVectors[];
 /* The effect slot table BMagic_AllocEffect scans, and its row count. */
 extern BattleEffect D_801F03E4[];
 #define BMAGIC_EFFECT_SLOTS D_801F03E4

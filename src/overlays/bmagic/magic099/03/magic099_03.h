@@ -20,8 +20,6 @@ extern s32 D_1F800004;
 
 /* The bolt point g_ScratchPadVectors, also read as halfwords, and the scratch words of the bolt: the segment length, the
  * swing angle, the flicker and the segment count. */
-/* g_ScratchPadVectors */
-extern SVECTOR       g_ScratchPadVectors[];
 extern s32           D_1F800008;
 extern s32           D_1F80000C;
 extern Magic068Steps D_801EEC04;

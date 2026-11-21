@@ -11,8 +11,6 @@
 
 #define AREA_HUD_SPRITE_CELLS ((u8*)D_801F5364 + 0x10)
 
-/* g_ScratchPadVectors */
-extern SVECTOR        g_ScratchPadVectors[];
 extern u8             D_801F4D7C[];
 /* The spawn step handler table indexed by the record's step byte. */
 extern Callback       D_801F5338[];

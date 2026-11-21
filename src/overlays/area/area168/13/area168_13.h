@@ -24,8 +24,6 @@ void               func_801F4158_area168(s32 index, s8 code);
 /* The cell-code write, taking the three values as full words (this image passes the table words unnarrowed). */
 void               func_801A4BC0(s32 column, s32 row, s32 code);
 /* The scratchpad quad the shadow pass fills and the GTE reads. */
-/* g_ScratchPadVectors */
-extern SVECTOR     g_ScratchPadVectors[];
 /* The shadow spread multiplier this pass indexes by the step code. */
 extern volatile u8 D_801F4BB4[];
 /* The two step tables this pass indexes by the menu selection. */
