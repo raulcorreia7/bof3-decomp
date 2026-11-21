@@ -826,6 +826,50 @@ def mentioned(names: set[str]) -> set[str]:
     return set(result.stdout.split())
 
 
+def _check_table(
+    target: str,
+    entries: list[symbols.Entry],
+    findings: list[str],
+    repeated: dict[tuple[str, int, str], list[str]],
+    aliases: list[tuple[str, symbols.Entry]],
+) -> int:
+    """Append one table's findings; return 1 when any of them fails the check."""
+    status = 0
+    for before, after in zip(entries, entries[1:], strict=False):
+        if before.addr > after.addr:
+            findings.append(
+                f"order\t{target}\t{after.name} 0x{after.addr:08X} after "
+                f"{before.name} 0x{before.addr:08X}"
+            )
+            status = 1
+            break
+    addresses: dict[str, set[int]] = collections.defaultdict(set)
+    names_at: dict[int, list[str]] = collections.defaultdict(list)
+    for entry in entries:
+        addresses[entry.name].add(entry.addr)
+        if entry.alias:
+            aliases.append((target, entry))
+        else:
+            names_at[entry.addr].append(entry.name)
+            repeated[(entry.name, entry.addr, entry.type)].append(target)
+        if not entry.source:
+            findings.append(f"no-source\t{target}\t{entry.name} 0x{entry.addr:08X}")
+    for name, found in addresses.items():
+        if len(found) > 1:
+            status = 1
+            findings.append(
+                f"name-two-addresses\t{target}\t{name}\t"
+                + " ".join(f"0x{a:08X}" for a in sorted(found))
+            )
+    for address, names in names_at.items():
+        if len(names) > 1:
+            status = 1
+            findings.append(
+                f"address-two-names\t{target}\t0x{address:08X}\t" + " ".join(names)
+            )
+    return status
+
+
 def check(args: argparse.Namespace) -> int:
     """Report the table's problems; a name at two addresses or an out-of-order table exits 1.
 
@@ -844,38 +888,7 @@ def check(args: argparse.Namespace) -> int:
     rows = 0
     for target, entries in tables.items():
         rows += len(entries)
-        for before, after in zip(entries, entries[1:], strict=False):
-            if before.addr > after.addr:
-                findings.append(
-                    f"order\t{target}\t{after.name} 0x{after.addr:08X} after "
-                    f"{before.name} 0x{before.addr:08X}"
-                )
-                status = 1
-                break
-        addresses: dict[str, set[int]] = collections.defaultdict(set)
-        names_at: dict[int, list[str]] = collections.defaultdict(list)
-        for entry in entries:
-            addresses[entry.name].add(entry.addr)
-            if entry.alias:
-                aliases.append((target, entry))
-            else:
-                names_at[entry.addr].append(entry.name)
-                repeated[(entry.name, entry.addr, entry.type)].append(target)
-            if not entry.source:
-                findings.append(f"no-source\t{target}\t{entry.name} 0x{entry.addr:08X}")
-        for name, found in addresses.items():
-            if len(found) > 1:
-                status = 1
-                findings.append(
-                    f"name-two-addresses\t{target}\t{name}\t"
-                    + " ".join(f"0x{a:08X}" for a in sorted(found))
-                )
-        for address, names in names_at.items():
-            if len(names) > 1:
-                status = 1
-                findings.append(
-                    f"address-two-names\t{target}\t0x{address:08X}\t" + " ".join(names)
-                )
+        status |= _check_table(target, entries, findings, repeated, aliases)
     for (name, address, type_), images in sorted(repeated.items()):
         if len(images) > 1:
             findings.append(
@@ -5069,16 +5082,10 @@ def _section_of(layout, address: int) -> str:
     return "unknown"
 
 
-def _extent_rows(assembly: Assembly, index: SymbolIndex, manifests: dict) -> list[dict]:
-    """Build one extent row per data and bss symbol the images hold."""
-    global _EXTENT_ROWS
-    if _EXTENT_ROWS is not None:
-        return _EXTENT_ROWS
-    from bof3.resolve.layout import parse_splat_layout
-
-    uses = _symbol_uses(assembly, index)
-    strides = _symbol_strides(assembly)
-    used_names = {name for (name, _address), found in uses.items() if found}
+def _extent_ladders(
+    index: SymbolIndex,
+) -> tuple[dict[str, list[int]], dict[tuple[str, int], int]]:
+    """Each table's sorted data addresses, and the next address after each one."""
     universes: dict[str, list[int]] = {}
     ladders: dict[tuple[str, int], int] = {}
     for table, table_rows in index.rows.items():
@@ -5086,18 +5093,56 @@ def _extent_rows(assembly: Assembly, index: SymbolIndex, manifests: dict) -> lis
         universes[table] = addresses
         for position, address in enumerate(addresses[:-1]):
             ladders[(table, address)] = addresses[position + 1]
+    return universes, ladders
+
+
+def _manifest_layout(manifest):
+    """The splat layout of an image manifest, or None when it cannot be read."""
+    from bof3.resolve.layout import parse_splat_layout
+
+    if manifest is None:
+        return None
+    try:
+        return parse_splat_layout(ROOT / manifest.splat, manifest.load_address)
+    except (OSError, ValueError):
+        return None
+
+
+def _absorbed_names(
+    row, uses: dict, index: SymbolIndex, used_names: set[str], gap: int | None
+) -> list[str]:
+    """The unused symbols inside ``row``'s gap that its own accesses reach."""
+    start = row.addr
+    end = start + (gap or 0)
+    hit = {
+        start + access.offset
+        for _image, _function, access in uses.get((row.name, start), ())
+    }
+    absorbed = []
+    for other in index.rows.get(row.table, ()):
+        if other.type == "func" or not start < other.addr < end:
+            continue
+        if other.name == row.name or other.name in used_names:
+            continue
+        size = index.span(other)
+        if any(other.addr <= address < other.addr + size for address in hit):
+            absorbed.append(other.name)
+    return absorbed
+
+
+def _extent_rows(assembly: Assembly, index: SymbolIndex, manifests: dict) -> list[dict]:
+    """Build one extent row per data and bss symbol the images hold."""
+    global _EXTENT_ROWS
+    if _EXTENT_ROWS is not None:
+        return _EXTENT_ROWS
+    uses = _symbol_uses(assembly, index)
+    strides = _symbol_strides(assembly)
+    used_names = {name for (name, _address), found in uses.items() if found}
+    universes, ladders = _extent_ladders(index)
     rows: list[dict] = []
     for row in _unique_data_rows(index):
         image = index.canonical(row.name, row.addr) or row.table
-        manifest = manifests.get(image)
-        layout = None
-        if manifest is not None:
-            try:
-                layout = parse_splat_layout(
-                    ROOT / manifest.splat, manifest.load_address
-                )
-            except (OSError, ValueError):
-                layout = None
+        layout = _manifest_layout(manifests.get(image))
         following_address = ladders.get((row.table, row.addr))
         if following_address is not None:
             gap = following_address - row.addr
@@ -5118,38 +5163,25 @@ def _extent_rows(assembly: Assembly, index: SymbolIndex, manifests: dict) -> lis
             for _image, function, access in found
             if declared is not None and access.offset >= declared
         ]
-        item = {
-            "symbol": row.name,
-            "image": image,
-            "address": f"0x{row.addr:08X}",
-            "gap": gap,
-            "declared_size": declared,
-            "stride": sorted(strides.get(row.name, set())),
-            "beyond": beyond[:20],
-            "beyond_count": len(beyond),
-            "absorbs": [],
-            "section": _section_of(layout, row.addr),
-            "type": row.type,
-            "evidence": [
-                f"{use_image}@0x{access.address:08X} {function} {access.mnemonic}"
-                for use_image, function, access in found[:5]
-            ],
-        }
-        start = row.addr
-        end = start + (gap or 0)
-        hit = {
-            start + access.offset
-            for _image, _function, access in uses.get((row.name, start), ())
-        }
-        for other in index.rows.get(row.table, ()):
-            if other.type == "func" or not start < other.addr < end:
-                continue
-            if other.name == row.name or other.name in used_names:
-                continue
-            size = index.span(other)
-            if any(other.addr <= address < other.addr + size for address in hit):
-                item["absorbs"].append(other.name)
-        rows.append(item)
+        rows.append(
+            {
+                "symbol": row.name,
+                "image": image,
+                "address": f"0x{row.addr:08X}",
+                "gap": gap,
+                "declared_size": declared,
+                "stride": sorted(strides.get(row.name, set())),
+                "beyond": beyond[:20],
+                "beyond_count": len(beyond),
+                "absorbs": _absorbed_names(row, uses, index, used_names, gap),
+                "section": _section_of(layout, row.addr),
+                "type": row.type,
+                "evidence": [
+                    f"{use_image}@0x{access.address:08X} {function} {access.mnemonic}"
+                    for use_image, function, access in found[:5]
+                ],
+            }
+        )
     _EXTENT_ROWS = rows
     return rows
 
