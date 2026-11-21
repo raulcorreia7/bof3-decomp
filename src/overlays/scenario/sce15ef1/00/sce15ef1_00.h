@@ -37,7 +37,8 @@ extern u32  D_801D40B4;
 
 extern SpinEffect g_WorldSpins[];
 
-void func_801D147C(s32* pos, s16 origin, s32 flags);
+/* func_801D147C */
+void GFX_DrawColorFan(s32* pos, s16 origin, s32 flags);
 void func_801D1678(s32* from, s32* to, u8 intensity);
 void func_801D36BC(s32* pos, s32 vx, s32 vy);
 

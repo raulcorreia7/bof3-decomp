@@ -23,7 +23,7 @@ extern Callback            D_801F4A80[];
 extern s8                  D_801F4A88[];
 
 /* The image's step passes. */
-void func_801F3768(s32 arg0, s32 arg1);
+void func_801F3768(s32 x, s32 y);
 void func_801F30E4(void);
 void func_801F3474(void);
 void func_801F3110(u16 start, u16 end, Pos3* from, Pos3* to);

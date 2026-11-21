@@ -131,7 +131,7 @@ s8 func_801DA114();
 
 void Menu_DrawHeaderBar(s32 x, s32 y, s32 width, s32 height, u8 window_style);
 void func_801D32A0(s32 x, s32 y, u8 mode);
-void func_801D4EA4(s32 arg0, s32 arg1, s32 arg2, s32 arg3);
+void func_801D4EA4(s32 left, s32 top, s32 icon_row, s32 raised);
 void func_801DA8E8(void);
 
 void func_801D2794(s32 count, s32 shown, s32 chosen);
@@ -149,7 +149,7 @@ void func_801D830C(s32 arg0, s32 arg1, s32 arg2, s32 arg3);
 #define FAIRY_NAME_SECOND_HALF_INDEX 560
 /* func_801D8968 */
 void Fairy_GenerateName(void);
-void func_801D90D8(s32 arg0, s32 arg1, s32 arg2, s32 arg3);
+void func_801D90D8(s32 x, s32 y, s32 character, s32 frame_mode);
 void func_801D94D0(s32 page, s32 left, s32 top, s32 cursor_col_arg, s32 cursor_row_arg);
 void func_801D97C8(s32 unused, s32 x, s32 y);
 void func_801D9B80(s32 x, s32 y, s32 width, s32 height);

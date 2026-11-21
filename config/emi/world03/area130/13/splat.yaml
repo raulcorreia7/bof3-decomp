@@ -11,7 +11,7 @@ segments:
       - [0x4, .rodata, func_801F3CD0]
       - [0x1C, c, func_801F2C1C]
       - [0x60, c, func_801F2C60]
-      - [0xDC, c, func_801F2CDC]
+      - [0xDC, c, Area_UpdateSpin]
       - [0x210, c, func_801F2E10]
       - [0x230, c, Area_DrawSpinTriangle]
       - [0x4D0, c, Area_InitSpin]

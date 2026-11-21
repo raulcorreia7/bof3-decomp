@@ -1,6 +1,8 @@
 #include "area033_13.h"
 
-MATCH void func_801F445C(void) {
+/* Moves the actor along its flight path. */
+/* func_801F445C */
+MATCH void Actor_Fly(void) {
     u8* scratch;
     u8* work;
 

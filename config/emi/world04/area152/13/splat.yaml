@@ -38,7 +38,7 @@ segments:
       - [0x1438, c, func_801F4038]
       - [0x147C, c, Actor_SpawnFlock]
       - [0x15B8, c, Actor_StartFlying]
-      - [0x17E8, c, func_801F43E8]
+      - [0x17E8, c, Actor_Fly]
       - [0x188C, c, func_801F448C]
       - [0x18D0, c, func_801F44D0]
       - [0x1A00, c, Area_StepStreamSetDrawMode]

@@ -430,7 +430,7 @@ Callback g_MenuStartMessageSteps[MENU_START_PANEL9_STATE_COUNT] = {Menu_PanelIdl
 CursorFrameSize g_MenuStartCursorFrames[4] = {{0x0110, 0x34}, {0x80, 0x34}, {0x44, 0x34}, {0x80, 0x30}};
 Callback g_MenuStartPanel11Steps[MENU_START_PANEL11_STATE_COUNT] = {Menu_PanelIdle, func_801E9EAC, func_801E9F04};
 Callback g_MenuStartInventorySteps[MENU_START_PANEL12_STATE_COUNT] = {Menu_PanelIdle, func_801E9FB0, func_801E9FF0, func_801EA030, Menu_SlidePanelLeft};
-Callback g_MenuStartCommandsSteps[MENU_START_PANEL13_STATE_COUNT] = {Menu_PanelIdle, func_801EA118, func_801EA158};
+Callback g_MenuStartCommandsSteps[MENU_START_PANEL13_STATE_COUNT] = {Menu_PanelIdle, func_801EA118, Menu_SetPosY};
 static u8 s_gap_801ED468[292] = {
     0x00, 0x00, 0x0B, 0x01, 0x00, 0x0C, 0x04, 0x00, 0x01, 0x05, 0x00, 0x01, 0x06, 0x00, 0x01, 0x07,
     0x00, 0x01, 0x08, 0x00, 0x01, 0x09, 0x00, 0x01, 0x0A, 0x00, 0x09, 0x0C, 0x00, 0x0A, 0x0D, 0x00,

@@ -1,6 +1,8 @@
-#include "area065_13.h"
+#include "area088_13.h"
 
-MATCH void func_801F32D8(void) {
+/* Requests an area restart when the entry changes. */
+/* func_801F3E04 */
+MATCH void Area_RequestRestartOnEntryChange(void) {
     Actor* scratch;
     u8     step;
 

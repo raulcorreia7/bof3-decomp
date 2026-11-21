@@ -25,8 +25,8 @@ u16       y;
         g_SpawnedActors[slot].scene_step   = step;
         g_SpawnedActors[slot].unk_06       = byte_value;
         g_SpawnedActors[slot].selection    = selection;
-        g_SpawnedActors[slot].unk_2E       = half_value;
-        g_SpawnedActors[slot].unk_30       = y;
+        g_SpawnedActors[slot].screen_x     = half_value;
+        g_SpawnedActors[slot].screen_y     = y;
     }
     return slot;
 }

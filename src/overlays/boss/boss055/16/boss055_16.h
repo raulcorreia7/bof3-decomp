@@ -43,7 +43,7 @@ extern Callback         D_800C35F8[];
 u8   Battle_IsEnemyBlocked(void);
 u8   Battle_IsEnemyBlockedOnce(void);
 void func_800C22F0(u8 index);
-void func_800C238C(u8 arg0, u8 arg1);
+void func_800C238C(u8 mode, u8 index);
 void func_800C2780(void);
 void func_800C27E8(void);
 void func_800C28E0(void);

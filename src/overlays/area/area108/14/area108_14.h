@@ -83,7 +83,7 @@ void func_801F55F0(u8 raise);
 s32  func_801F3034(void);
 void func_801F34B8(void);
 
-void func_801F4160(s32 arg0, s32 arg1);
+void func_801F4160(s32 step, s32 shade);
 u8   func_801F4F60(s32 x, s32 y);
 
 extern AreaPosEntry D_801F637C[];

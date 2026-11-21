@@ -186,7 +186,9 @@ MATCH void func_801EF58C(void) {
     }
 }
 
-MATCH void func_801EF648(void) {
+/* Lowers the effect ticker step once the effect is ready. */
+/* func_801EF648 */
+MATCH void Effect_LowerTickerStepOnReady(void) {
     if (Actor_StepAnimOnce() & BYTE_MASK) {
         BATTLE_ACTIVE_WORK->unk_09--;
         g_Task->header.step++;

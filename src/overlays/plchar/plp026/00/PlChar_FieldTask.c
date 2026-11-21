@@ -49,7 +49,7 @@ MATCH void PlChar_RunGarrFieldTask(void) {
     PLCHAR_RUN_GARR_FIELD_TASK(func_801CF808);
 }
 
-#include "overlays/plchar/shared/func_801CF564.h"
+#include "overlays/plchar/shared/PlChar_TickPauseTimer.h"
 
 /* func_801CF5D4 */
 #include "overlays/plchar/shared/PlChar_FindGarrActorSlot.h"

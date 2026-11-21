@@ -17,7 +17,7 @@ MATCH void Effect_NextStep(void) {
     BMagic_AdvanceEffectStep(5);
 }
 
-#include "overlays/bmagic/shared/func_801EF1A4.h"
+#include "overlays/bmagic/shared/Effect_FadePaletteOut.h"
 
 #include "overlays/bmagic/shared/Effect_MarkDamagedOnZeroTick.h"
 

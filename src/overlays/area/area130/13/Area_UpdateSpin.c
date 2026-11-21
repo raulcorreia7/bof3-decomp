@@ -1,6 +1,8 @@
 #include "area130_13.h"
 
-MATCH void func_801F2CDC(void) {
+/* Updates the area spin effect. */
+/* func_801F2CDC */
+MATCH void Area_UpdateSpin(void) {
     u8          scratch[0x20];
     SpinEffect* spin;
     u8          index;

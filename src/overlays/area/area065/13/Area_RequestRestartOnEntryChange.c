@@ -1,6 +1,8 @@
-#include "area151_13.h"
+#include "area065_13.h"
 
-MATCH s32 func_801F3210(void) {
+/* Requests an area restart when the entry changes. */
+/* func_801F32D8 */
+MATCH void Area_RequestRestartOnEntryChange(void) {
     Actor* scratch;
     u8     step;
 
@@ -10,15 +12,15 @@ MATCH s32 func_801F3210(void) {
         step    = scratch->param.unk_0B;
         if (step == scratch->option_flags && g_GameStateIndex != GAME_REQUEST_AREA_CHANGE) {
             if (step != 1) {
-                goto tail;
+                goto tail; /* skips the arming stores: run the step only */
             }
             if (scratch->unk_18 == g_GameEntryAreaId) {
-                goto tail;
+                goto tail; /* skips the arming stores: run the step only */
             }
         }
-        (g_Task)->unk_48      = 2;
-        (g_Task)->timer       = 8;
-        (g_Task)->header.mode = 4;
+        g_Task->unk_48      = 2;
+        g_Task->timer       = 8;
+        g_Task->header.mode = 4;
     }
 tail:
     Area_AddActor();

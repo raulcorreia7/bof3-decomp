@@ -64,7 +64,8 @@ void        func_800AE014(void);
 void        func_800B2218(void);
 void        func_800B22AC(void);
 void        func_800B23B8(void);
-void        func_800B23F8(void);
+/* func_800B23F8 */
+void        Menu_SetPosX_800B23F8(void);
 extern void func_801D8270(s32 x, s32 y);
 void        func_801D9484(void);
 void        func_801DAAE4(void);

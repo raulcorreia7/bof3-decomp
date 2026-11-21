@@ -60,6 +60,6 @@ void func_801F349C(void);
 
 void func_801F352C(s32* pos, s16 radius, u8 center_shade, u8 rim_shade);
 void func_801F5174(s32 steps, s32 radius);
-void func_801F53F0(s32 arg0);
+void func_801F53F0(s32 radius);
 
 #endif

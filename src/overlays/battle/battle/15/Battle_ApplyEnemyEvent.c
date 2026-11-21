@@ -69,7 +69,7 @@ MATCH void Battle_ApplyEnemyEvent(EnemyBattler* work_arg, BattleEventPacket* eve
             D_801463D7 = event->selector;
             break;
     }
-    work->choice_ai = event->unk_04;
+    work->choice_ai = event->choice_ai;
     for (i = 0; i < ENEMY_SKILL_COUNT; i++) {
         work->skills[i] = event->unk_08[i];
     }

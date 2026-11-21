@@ -1,6 +1,7 @@
 ["emi/world04/area188/13"]
 jtbl_801F2C04 = { addr = 0x801F2C04, type = "Callback", size = 0x38, source = "The switch table of func_801F4B80: 14 jump targets of its jr dispatch." }
 Area_UpdateSpawn = { addr = 0x801F3598, type = "func", source = "Runs one frame of the spawn work: claims a slot every fourth frame (unk_06 & 3 is 0), runs AREA_SPAWN_TICK and Area_UpdateSpawnSlots, counts the timer down and, at 0, copies the coordinates at +0x64, +0x68 and +0x6C into +0x18, +0x1C and gravity, sets vx to -0x1000 and vy to -0x400 and adds 1 to header.mode (byte 0x01)." }
+GFX_DrawColorFan = { addr = 0x801F38E0, type = "func", source = "same body as emi/scenario/sce15ef0/00@0x801D1A20 GFX_DrawColorFan" }
 Area_DrawYellowLine = { addr = 0x801F3ADC, type = "func", source = "Draws a yellow line from one point to another: two one-pixel-offset gradient quads with the colour byte intensity on the red and green channels, then up to eight dots stepped back along the line." }
 Area_ClearWorkColumn = { addr = 0x801F3DB4, type = "func", source = "Zeroes byte 0 of each of the 0x80 work rows, 0x14 bytes apart." }
 Area_ClaimSpawnSlot = { addr = 0x801F3DE0, type = "func", source = "Claims the first free of the eight spawn slots at the work window: sets it active and copies the actor position, with the image's life, radius and centre shade; the area098, area172 and area188 scene steps call it every fourth frame (unk_06 & 3 == 0) before Area_UpdateSpawnSlots." }

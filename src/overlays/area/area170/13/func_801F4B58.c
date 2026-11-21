@@ -92,8 +92,8 @@ MATCH void func_801F4B58(void) {
             if (slot != GAME_NONE) {
                 g_SpawnedActors[slot].header.flags = 1;
                 g_SpawnedActors[slot].type         = 0x7D;
-                g_SpawnedActors[slot].unk_2E       = 100;
-                g_SpawnedActors[slot].unk_30       = 100;
+                g_SpawnedActors[slot].screen_x     = 100;
+                g_SpawnedActors[slot].screen_y     = 100;
                 /* FAKE: barrier keeps the message byte load after the slot stores. */
                 FAKE_BARRIER();
                 g_SpawnedActors[slot].unk_06 = LOBU(g_MessageRequest) - 0xB;

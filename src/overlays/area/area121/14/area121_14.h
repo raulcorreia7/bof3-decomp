@@ -46,7 +46,7 @@ void func_801F5C7C(void);
 #define AREA_TURN_SYNC func_801F5C7C
 
 void func_801F4B4C(s32 input);
-void func_801F60F4(void* arg0);
+void func_801F60F4(void* actor);
 
 extern u8 D_801F68B8[];
 

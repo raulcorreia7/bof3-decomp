@@ -1,8 +1,10 @@
-#include "area151_13.h"
+#include "area152_13.h"
 
-MATCH void func_801F4494(void) {
+/* Moves the actor along its flight path. */
+/* func_801F43E8 */
+MATCH void Actor_Fly(void) {
     Actor* scratch;
-    Actor* work;
+    u8*    work;
 
     scratch = g_Task;
     if (scratch->param.unk_0B != 0) {
@@ -14,9 +16,9 @@ MATCH void func_801F4494(void) {
         scratch->param.unk_0B = 1;
     }
 
-    work = g_Task;
-    work->pos.x.fixed += work->vx;
-    work->pos.y.fixed += work->vy;
+    work = (u8*)g_Task;
+    *(s32*)(work + 0x34) += *(s32*)(work + 0x0C);
+    *(s32*)(work + 0x38) += *(s32*)(work + 0x10);
     Actor_StepAnimLoop();
     Area_AddGridActor();
 }

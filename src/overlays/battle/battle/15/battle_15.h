@@ -177,7 +177,7 @@ typedef struct BattleEventPacket {
     u8  effect_kind; /* +0x01 the kind Battle_ApplyEnemyEvent switches on to pick the record update */
     u8  selector;    /* +0x02 the bits that select the cells the packet updates */
     u8  value;       /* +0x03 the value the selected cells take */
-    u8  unk_04;      /* +0x04 the byte copied to the work row's +0x7E */
+    u8  choice_ai;   /* +0x04 the byte copied to the work row's +0x7E */
     u8  pad_05;
     s16 panel_id;  /* +0x06 the panel id; Battle_ApplyEnemyEvent stores it in the panel-owner table */
     u8  unk_08[8]; /* +0x08 the eight bytes copied to the work row's +0x8C */
@@ -187,7 +187,7 @@ ASSERT_OFFSET(BattleEventPacket, kind, 0x00);
 ASSERT_OFFSET(BattleEventPacket, effect_kind, 0x01);
 ASSERT_OFFSET(BattleEventPacket, selector, 0x02);
 ASSERT_OFFSET(BattleEventPacket, value, 0x03);
-ASSERT_OFFSET(BattleEventPacket, unk_04, 0x04);
+ASSERT_OFFSET(BattleEventPacket, choice_ai, 0x04);
 ASSERT_OFFSET(BattleEventPacket, panel_id, 0x06);
 ASSERT_OFFSET(BattleEventPacket, unk_08, 0x08);
 ASSERT_SIZE(BattleEventPacket, 0x10);

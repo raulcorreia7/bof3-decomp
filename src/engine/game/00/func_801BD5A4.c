@@ -23,8 +23,8 @@ MATCH void func_801BD5A4(void) {
                 ids                                                    = (u8*)g_Game.current;
                 g_SpawnedActors[tail->param.actor_slot].scene_step     = 0;
                 g_SpawnedActors[tail->param.actor_slot].selection      = D_80181B28[ids[0x79]];
-                g_SpawnedActors[tail->param.actor_slot].unk_2E         = tail->screen_x;
-                g_SpawnedActors[tail->param.actor_slot].unk_30         = tail->screen_y;
+                g_SpawnedActors[tail->param.actor_slot].screen_x       = tail->screen_x;
+                g_SpawnedActors[tail->param.actor_slot].screen_y       = tail->screen_y;
                 tail->header.step                                      = 2;
             } else {
                 ACTOR_CLEAR_STEP();

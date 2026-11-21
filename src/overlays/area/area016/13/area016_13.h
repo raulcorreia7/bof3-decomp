@@ -46,7 +46,10 @@ extern u8       D_801F51DC[4];
 extern u8       D_801F51E0[2];
 
 void func_801F30EC(void);
-void func_801F32A0(void);
+/* func_801F32A0 */
+void Area_RequestRestartOnEntryChange(void);
+/* func_801F3608 */
+void Area_SlideHudBannerLeft(void);
 /* func_801F3460 */
 void func_801F34C8(void);
 /* func_801F350C */
