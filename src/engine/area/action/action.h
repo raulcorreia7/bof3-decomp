@@ -10,40 +10,40 @@
 #define OVERLAY_AREA_ACTION_H_LOCAL
 
 /* func_801ACE10 */
-void FieldAction_Run(s32 step_index);
+void AreaAction_Run(s32 step_index);
 /* func_801ACEBC */
-void FieldAction_RunSteps(void);
+void AreaAction_RunSteps(void);
 /* func_801ACF2C */
-void FieldAction_RollStep(void);
+void AreaAction_RollStep(void);
 /* func_801AD0EC */
-void FieldAction_FindSmall(void);
+void AreaAction_FindSmall(void);
 /* func_801AD184 */
-void FieldAction_FindLarge(void);
+void AreaAction_FindLarge(void);
 /* func_801AD218 */
-void FieldAction_End(void);
+void AreaAction_End(void);
 /* func_801AD2CC */
-void FieldAction_WaitMessage(void);
+void AreaAction_WaitMessage(void);
 /* func_801AD35C */
-void FieldAction_RunReact(void);
+void AreaAction_RunReact(void);
 /* func_801AD3B4 */
-void FieldAction_React(void);
+void AreaAction_React(void);
 /* func_801AD44C */
-void FieldAction_None(void);
+void AreaAction_None(void);
 /* func_801AD46C */
-void FieldAction_RunAltSteps(void);
+void AreaAction_RunAltSteps(void);
 /* func_801AD4DC */
-void FieldAction_RollAltStep(void);
+void AreaAction_RollAltStep(void);
 /* func_801AD69C */
-void FieldAction_NoneAlt(void);
+void AreaAction_NoneAlt(void);
 /* func_801AD6BC */
-void FieldAction_RunFadeSteps(void);
+void AreaAction_RunFadeSteps(void);
 /* func_801AD734 */
-void FieldAction_RollFade(void);
+void AreaAction_RollFade(void);
 /* func_801AD90C */
-void FieldAction_ShowFind(void);
+void AreaAction_ShowFind(void);
 /* func_801AD9C4 */
-void FieldAction_WaitMessageFade(void);
+void AreaAction_WaitMessageFade(void);
 /* func_801AD9F0 */
-void FieldAction_Fade(void);
+void AreaAction_Fade(void);
 
 #endif

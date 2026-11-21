@@ -8,7 +8,7 @@ MATCH void func_800A8BD0(void) {
     work  = (u8*)g_BattleEffectBattler;
     saved = TASK_BYTES;
     TASK_SET(work);
-    Actor_SelectScript((((PartyMember*)work)->facing + 4) & BYTE_MASK);
+    Script_Select((((PartyMember*)work)->facing + 4) & BYTE_MASK);
     TASK_SET(saved);
     Effect_Reset();
 }

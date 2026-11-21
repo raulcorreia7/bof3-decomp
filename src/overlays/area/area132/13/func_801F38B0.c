@@ -5,7 +5,7 @@ MATCH u8 func_801F38B0(void) {
     u8 result;
     u8 index;
 
-    Area_SetCameraMatrix(scratch);
+    Camera_SetMatrix(scratch);
     result     = 0;
     D_801F4A88 = MEM_PTR(u8, AREA_WORK);
     index      = 0;

@@ -36,7 +36,7 @@ MATCH void Battle_StartEncounter(s32 origin_x, s32 origin_y, s32 scroll_mode) {
             *(s32*)((u8*)&g_EncounterParty[0].y + type) = g_Task->pos.y.fixed;
             g_Task->unk_48                              = 0;
             g_Task->direction                           = s_RouteIndexByMode[g_Battle.scroll_dir];
-            Actor_RequestScript(g_Task->direction);
+            Script_Request(g_Task->direction);
             offset += BATTLE_PARTY_STRIDE;
             count += 1;
         } while (count < g_Game.party_size);

@@ -17,14 +17,14 @@ MATCH void func_801F3500(void) {
     u8       i;
 
     /* The camera call ignores its argument, so camera stays unused. */
-    Area_SetCameraMatrix(&matrix);
+    Camera_SetMatrix(&matrix);
     angle    = 0;
     point[0] = g_Task->pos.x.fixed + (((s16)g_Task->screen_x * rcos(0)) >> 4);
     point[1] = g_Task->pos.y.fixed + (((s16)g_Task->screen_x * rsin(0)) >> 4);
     point[2] = g_Task->pos.z.fixed;
-    Area_ProjectPoint(point, &inner);
+    Camera_ProjectPoint(point, &inner);
     point[2] = g_Task->pos.z.fixed + TO_COORD((s16)g_Task->screen_y);
-    Area_ProjectPoint(point, &outer);
+    Camera_ProjectPoint(point, &outer);
     shade = ((g_FrameCount & 1) << 2) | 0x20;
     for (i = 0; i < AREA_RING_POINTS; i++) {
         last_inner = inner;
@@ -33,9 +33,9 @@ MATCH void func_801F3500(void) {
         point[0] = g_Task->pos.x.fixed + (((s16)g_Task->screen_x * rcos((u16)angle)) >> 4);
         point[1] = g_Task->pos.y.fixed + (((s16)g_Task->screen_x * rsin((u16)angle)) >> 4);
         point[2] = g_Task->pos.z.fixed;
-        Area_ProjectPoint(point, &inner);
+        Camera_ProjectPoint(point, &inner);
         point[2] = g_Task->pos.z.fixed + TO_COORD((s16)g_Task->screen_y);
-        Area_ProjectPoint(point, &outer);
+        Camera_ProjectPoint(point, &outer);
 
         SetDrawMode((DR_MODE*)g_GfxPrimCursor, 0, 1, GetTPage(TPAGE_DEPTH_4BIT, TPAGE_ABR_ADD, FONT_TPAGE_X, FONT_TPAGE_Y), 0);
         Area_AddCellPrim(point[0], point[1], 0, sizeof(DR_MODE));

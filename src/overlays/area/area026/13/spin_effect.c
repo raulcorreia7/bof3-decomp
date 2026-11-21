@@ -281,7 +281,7 @@ MATCH void func_801F2D5C(s32* center, s32 radius) {
     s32  i;
     s32  table_index;
 
-    Area_SetCameraMatrix(scratch);
+    Camera_SetMatrix(scratch);
     i       = 0;
     tbl33fc = (s32*)D_801F33FC;
     tbl340c = (s32*)D_801F340C;
@@ -300,11 +300,11 @@ MATCH void func_801F2E04(s32* center, s32 radius, u16 angle, s32 offset_x, s32 o
     s32      i;
     u8       scratch[0x20]; /* FAKE: unreferenced local pads frame to 0x80. */
 
-    Area_ProjectPoint(center, &screen0);
+    Camera_ProjectPoint(center, &screen0);
     point[0] = center[0] + FIXED_MUL(radius, rcos(angle));
     point[1] = center[1] + FIXED_MUL(radius, rsin(angle));
     point[2] = center[2];
-    Area_ProjectPoint(point, &screen1);
+    Camera_ProjectPoint(point, &screen1);
 
     i = 0;
     do {
@@ -318,7 +318,7 @@ MATCH void func_801F2E04(s32* center, s32 radius, u16 angle, s32 offset_x, s32 o
         point[0] = center[0] + FIXED_MUL(radius, rcos(angle));
         point[1] = center[1] + FIXED_MUL(radius, rsin(angle));
         i += 1;
-        Area_ProjectPoint(point, &screen1);
+        Camera_ProjectPoint(point, &screen1);
         packet->x2 = (u16)screen1.vx;
         packet->y2 = (u16)screen1.vy;
         PSX_SET_NEUTRAL_RGB(packet);

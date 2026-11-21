@@ -12,10 +12,10 @@ MATCH void func_801F332C(s32* first, s32* second) {
     s16     radius2;
 
     GFX_AddDitheredDrawMode(GFX_LAYER_UI, GetTPage(TPAGE_DEPTH_4BIT, TPAGE_ABR_ADD, FONT_TPAGE_X, FONT_TPAGE_Y));
-    Area_SetCameraMatrix(&matrix);
+    Camera_SetMatrix(&matrix);
     /* Each point keeps a full SVECTOR: the projection fills the SDK's two-word result. */
-    Area_ProjectPoint(first, (DVECTOR*)&screen[0]);
-    Area_ProjectPoint(second, (DVECTOR*)&screen[1]);
+    Camera_ProjectPoint(first, (DVECTOR*)&screen[0]);
+    Camera_ProjectPoint(second, (DVECTOR*)&screen[1]);
     angle   = ratan2(screen[1].vy - screen[0].vy, screen[1].vx - screen[0].vx);
     size[0] = 0x10;
     size[1] = 0;

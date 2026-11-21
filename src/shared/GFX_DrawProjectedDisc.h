@@ -14,7 +14,7 @@
                                                                                                                                               \
     size[0] = (SCALE);                                                                                                                        \
     Game_ProjectWorldPoint((POS), size, radius);                                                                                              \
-    Area_ProjectPoint((POS), &screen);                                                                                                        \
+    Camera_ProjectPoint((POS), &screen);                                                                                                      \
     scale = (s16)(radius[0] + (g_FrameCount & 1));                                                                                            \
     angle = 0;                                                                                                                                \
     do {                                                                                                                                      \

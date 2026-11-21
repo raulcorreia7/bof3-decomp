@@ -238,8 +238,8 @@ MATCH void func_801F2E3C(AreaTrail* trail) {
     out[0] = trail->pos.x + FIXED_MUL(trail->radius, rcos(trail->angle));
     out[1] = trail->pos.y + FIXED_MUL(trail->radius, rsin(trail->angle));
     out[2] = trail->pos.z << 8;
-    Area_SetCameraMatrix(scratch);
-    Area_ProjectPoint(out, trail->points);
+    Camera_SetMatrix(scratch);
+    Camera_ProjectPoint(out, trail->points);
 }
 
 MATCH void func_801F2F0C(const void* trail) {
@@ -282,8 +282,8 @@ MATCH void func_801F304C(AreaTrail* trail) {
     out[0] = trail->pos.x + FIXED_MUL(trail->radius, rcos(trail->angle));
     out[1] = trail->pos.y + FIXED_MUL(trail->radius, rsin(trail->angle));
     out[2] = trail->pos.z << 8;
-    Area_SetCameraMatrix(scratch);
-    Area_ProjectPoint(out, trail->points);
+    Camera_SetMatrix(scratch);
+    Camera_ProjectPoint(out, trail->points);
     i = 1;
     do {
         trail->points[i & BYTE_MASK] = trail->points[0];

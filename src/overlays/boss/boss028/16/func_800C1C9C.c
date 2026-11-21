@@ -14,7 +14,7 @@ NON_MATCHING void func_800C1C9C(void) {
     BOSS028_PARTY->unk_48 = 0;
     BOSS028_PARTY->unk_29 = 2;
     Area_SelectSceneRecord(0x15C);
-    Actor_SelectScript(4);
+    Script_Select(4);
     party                              = BOSS028_PARTY;
     battler                            = g_BattleEffectBattler;
     COORD_INT(party->pos.x)            = COORD_INT(battler->pos.x) + 7;

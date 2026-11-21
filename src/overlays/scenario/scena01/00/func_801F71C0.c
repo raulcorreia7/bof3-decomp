@@ -119,14 +119,14 @@ NON_MATCHING void func_801F7678(s32 shade_arg) {
     u32      color;
     u8       i;
 
-    Area_SetCameraMatrix(&matrix);
+    Camera_SetMatrix(&matrix);
     angle    = 0;
     point[0] = g_Task->pos.x.fixed + ((FIELD(s16, g_Task, 0x2E) * rcos(0)) >> 4);
     point[1] = g_Task->pos.y.fixed + ((FIELD(s16, g_Task, 0x2E) * rsin(0)) >> 4);
     point[2] = g_Task->pos.z.fixed;
-    Area_ProjectPoint(point, &inner);
+    Camera_ProjectPoint(point, &inner);
     point[2] = g_Task->pos.z.fixed + (FIELD(s16, g_Task, 0x30) << 16);
-    Area_ProjectPoint(point, &outer);
+    Camera_ProjectPoint(point, &outer);
     shade = ((g_FrameCount & 1) << 2) | 0x40;
     for (i = 0; i < AREA_RING_POINTS; i++) {
         last_inner = inner;
@@ -135,9 +135,9 @@ NON_MATCHING void func_801F7678(s32 shade_arg) {
         point[0] = g_Task->pos.x.fixed + ((FIELD(s16, g_Task, 0x2E) * rcos((u16)angle)) >> 4);
         point[1] = g_Task->pos.y.fixed + ((FIELD(s16, g_Task, 0x2E) * rsin((u16)angle)) >> 4);
         point[2] = g_Task->pos.z.fixed;
-        Area_ProjectPoint(point, &inner);
+        Camera_ProjectPoint(point, &inner);
         point[2] = g_Task->pos.z.fixed + (FIELD(s16, g_Task, 0x30) << 16);
-        Area_ProjectPoint(point, &outer);
+        Camera_ProjectPoint(point, &outer);
 
         SetDrawMode((DR_MODE*)g_GfxPrimCursor, 0, 1, GetTPage(TPAGE_DEPTH_4BIT, TPAGE_ABR_ADD, FONT_TPAGE_X, FONT_TPAGE_Y), 0);
         Area_AddCellPrim(point[0], point[1], 0, sizeof(DR_MODE));

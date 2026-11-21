@@ -28,7 +28,7 @@ MATCH void func_801D5B70(void) {
     FISHING_STATE->tint_5E    = 0;
     FISHING_STATE->tint_5F    = 0;
 
-    Actor_SelectScript(0xA);
+    Script_Select(0xA);
 
     {
         FishingState* record;

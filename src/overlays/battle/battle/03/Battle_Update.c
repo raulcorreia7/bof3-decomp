@@ -11,7 +11,7 @@ MATCH void Battle_Update(void) {
     Battle_UpdateParty();
     Battle_UpdateEnemies();
     Battle_UpdateEvents();
-    Area_UpdateCamera();
+    Camera_Update();
     Battle_UpdateEffects();
     Battle_UpdatePartyActors();
     Battle_UpdateEnemyActors();

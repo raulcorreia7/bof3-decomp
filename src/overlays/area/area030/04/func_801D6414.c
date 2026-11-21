@@ -31,7 +31,7 @@ MATCH void func_801D6414(void) {
     tail->step_timer = 0x40;
 
     FISHING_STATE->cue_index = 0;
-    Actor_SelectScript(3);
+    Script_Select(3);
 
     tail            = FISHING_STATE;
     tail->sub_index = (tail->sub_index + 1);

@@ -33,6 +33,6 @@ MATCH void func_8019C954(void) {
     }
     g_Task->tint.bytes.rgb.b = 0;
     g_Task->tint.bytes.flags = 0;
-    Actor_SelectScript(0x4E);
+    Script_Select(0x4E);
     g_Task->header.mode = 2;
 }

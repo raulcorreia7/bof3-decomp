@@ -17,5 +17,5 @@ MATCH void func_801C51B0(void) {
     if (route == FACING_LEFT) {
         index = 55;
     }
-    Actor_RequestScript(index);
+    Script_Request(index);
 }

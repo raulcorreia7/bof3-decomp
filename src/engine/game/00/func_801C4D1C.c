@@ -5,8 +5,8 @@ MATCH void func_801C4D1C(void) {
 
     route = g_Task->direction;
     if (route == FACING_LEFT) {
-        Actor_RequestScript(0x3C);
+        Script_Request(0x3C);
     } else {
-        Actor_RequestScript(0x3D);
+        Script_Request(0x3D);
     }
 }

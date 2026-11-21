@@ -1,6 +1,6 @@
 ["emi/world03/area119/13"]
 D_80146920 = { addr = 0x80146920, source = "func_801F2C88 and func_801F2D6C use this four-row field-work base" }
 g_AreaModuleId = { addr = 0x801F2C00, source = "Module id of the area: the first payload word of its overlay, 52 + the area number." }
-Area_AddCameraOffsetY2 = { addr = 0x801F41B8, type = "func", source = "Adds 2 to g_AreaCameraOffsetY, the Y shift Area_SetCameraMatrix adds to the projected camera translation, and sets g_AreaCameraRefreshCount to 2 so the camera refreshes for two frames." }
-Area_SubCameraOffsetY2 = { addr = 0x801F41E0, type = "func", source = "Subtracts 2 from g_AreaCameraOffsetY, the Y shift Area_SetCameraMatrix adds to the projected camera translation, and sets g_AreaCameraRefreshCount to 2 so the camera refreshes for two frames." }
+Area_AddCameraOffsetY2 = { addr = 0x801F41B8, type = "func", source = "Adds 2 to g_AreaCameraOffsetY, the Y shift Camera_SetMatrix adds to the projected camera translation, and sets g_AreaCameraRefreshCount to 2 so the camera refreshes for two frames." }
+Area_SubCameraOffsetY2 = { addr = 0x801F41E0, type = "func", source = "Subtracts 2 from g_AreaCameraOffsetY, the Y shift Camera_SetMatrix adds to the projected camera translation, and sets g_AreaCameraRefreshCount to 2 so the camera refreshes for two frames." }
 Area_ResetCameraOffsetY = { addr = 0x801F4208, type = "func", source = "Zeroes g_AreaCameraOffsetY, the Y shift of the camera, and sets g_AreaCameraRefreshCount to 2 so the camera refreshes for two frames." }

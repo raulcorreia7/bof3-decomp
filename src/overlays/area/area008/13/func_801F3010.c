@@ -13,7 +13,7 @@ MATCH void func_801F3010(void) {
     TASK_SET(&g_BattlePartyBattlers[1]);
     D_801460E8 |= 0x40;
     SND_PlaySE(EMI_SE_ID(SND_BANK_AREA, 14));
-    Actor_SelectScript(0x57);
+    Script_Select(0x57);
     g_Task                = previous;
     previous->header.mode = 7;
 }

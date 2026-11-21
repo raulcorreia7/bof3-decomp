@@ -2,7 +2,7 @@
 #include "area/spad.h"
 
 MATCH void func_800C18FC(void) {
-    Actor_RequestScript(3);
+    Script_Request(3);
     Actor_StepAnimOnce();
     Battle_DefeatEnemy();
     g_BattleCurrentEnemy->turn.damage_flags.value |= BATTLER_DAMAGE_SKIP_ACTION_STEP;

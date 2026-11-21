@@ -16,17 +16,17 @@ NON_MATCHING void func_801F2DA0(void* position, s32 radius1, s32 radius2) {
     pos = position;
     SetDrawMode((DR_MODE*)g_GfxPrimCursor, 0, 1, GetTPage(TPAGE_DEPTH_4BIT, TPAGE_ABR_ADD, 0x380, 0x100), 0);
     GFX_AddPrim(GFX_LAYER_EFFECT_FRONT, sizeof(DR_MODE));
-    Area_SetCameraMatrix(&camera);
+    Camera_SetMatrix(&camera);
     point.vx = pos[0] + (((s16)radius1 * rcos(0)) >> 4);
     sine     = rsin(0);
     point.vy = pos[1] + (((s16)radius1 * sine) >> 4);
     point.vz = pos[2] + (((s16)radius1 * sine) << 4);
-    Area_ProjectPoint(&point, &inner);
+    Camera_ProjectPoint(&point, &inner);
     point.vx = pos[0] + (((s16)radius2 * rcos(0)) >> 4);
     sine     = rsin(0);
     point.vy = pos[1] + (((s16)radius2 * sine) >> 4);
     point.vz = pos[2] + (((s16)radius2 * sine) << 4);
-    Area_ProjectPoint(&point, &outer);
+    Camera_ProjectPoint(&point, &outer);
     turn = 0;
     i    = 0;
     do {
@@ -45,12 +45,12 @@ NON_MATCHING void func_801F2DA0(void* position, s32 radius1, s32 radius2) {
         sine     = rsin(angle);
         point.vy = pos[1] + (((s16)radius1 * sine) >> 4);
         point.vz = pos[2] + (((s16)radius1 * sine) << 4);
-        Area_ProjectPoint(&point, &inner);
+        Camera_ProjectPoint(&point, &inner);
         point.vx = pos[0] + (((s16)radius2 * rcos(angle)) >> 4);
         sine     = rsin(angle);
         point.vy = pos[1] + (((s16)radius2 * sine) >> 4);
         point.vz = pos[2] + (((s16)radius2 * sine) << 4);
-        Area_ProjectPoint(&point, &outer);
+        Camera_ProjectPoint(&point, &outer);
         prim->x2 = inner.vx;
         prim->y2 = inner.vy;
         prim->x3 = outer.vx;

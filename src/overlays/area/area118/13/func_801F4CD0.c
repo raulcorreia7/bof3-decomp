@@ -36,7 +36,7 @@ MATCH void func_801F4CD0(void) {
                 if (SYS_TestFlag(g_SceneEventFlags, D_801F5999[bounds * 6]) != 0) {
                     ((PartyMember*)g_Task)->facing ^= 4;
                 }
-                Actor_RequestScript(((PartyMember*)g_Task)->facing);
+                Script_Request(((PartyMember*)g_Task)->facing);
                 goto next_record;
             }
             if (((PartyMember*)g_Task)->unk_09 == 0) {

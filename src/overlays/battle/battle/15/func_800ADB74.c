@@ -22,7 +22,7 @@ MATCH void func_800ADB74(void) {
     row                  = &rows[(s16)g_MenuPanelTasks[18].u.battle.row_base + work->unk_09];
     slot                 = (&row->slot_00)[work->timer];
     if (slot != GAME_NONE) {
-        Actor_RequestScript(slot);
+        Script_Request(slot);
         /* FAKE: opaque slot so CSE cannot fold the second test. */
         FAKE_OPAQUE(slot);
     }

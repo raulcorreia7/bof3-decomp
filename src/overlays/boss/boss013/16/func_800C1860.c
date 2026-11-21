@@ -11,6 +11,6 @@ MATCH void func_800C1860(void) {
         g_BattleCurrentEnemy->hp           = 65535;
     }
     Area_SelectSceneRecord(0xEE);
-    Actor_SelectScript(0U);
+    Script_Select(0U);
     g_Task->unk_2A = 1;
 }

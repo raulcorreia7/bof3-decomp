@@ -88,7 +88,7 @@ MATCH void func_801EEFC8(void) {
         g_Task->unk_2C.value = 0;
         g_Task->unk_2B       = 1;
         g_Task->unk_24       = 0;
-        Actor_SelectScript(0U);
+        Script_Select(0U);
         g_Task->unk_09 = 0x10;
         g_Task->header.step += 1;
     }

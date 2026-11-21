@@ -13,9 +13,9 @@ DiscLba EMI_GetArchiveSector(EMISlotId emi_id);
 /* func_80162178 */
 void    EMI_StartArchive(void);
 /* func_801621E8 */
-void    EMI_CdOnSync(s32 status, u8* result);
+void    CD_OnSync(s32 status, u8* result);
 /* func_80162230 */
-void    EMI_CdOnReady(u8 status, u8* result);
+void    CD_OnReady(u8 status, u8* result);
 /* func_80162C14 */
 void    EMI_CopySector(void);
 /* func_80162CD8 */
@@ -23,23 +23,23 @@ void    EMI_EndArchive(void);
 /* func_80162D00 */
 bool    EMI_IsReady(void);
 /* func_80162D18 */
-void    EMI_CdUpdate(void);
+void    CD_Update(void);
 /* func_80162D9C */
-void    EMI_CdIdle(void);
+void    CD_Idle(void);
 /* func_80162DA4 */
-void    EMI_CdSetSpeed(void);
+void    CD_SetSpeed(void);
 /* func_80162E18 */
-void    EMI_CdSeek(void);
+void    CD_Seek(void);
 /* func_80162E70 */
-void    EMI_CdOnSeek(void);
+void    CD_OnSeek(void);
 /* func_80162E98 */
-void    EMI_CdRead(void);
+void    CD_Read(void);
 /* func_80162F04 */
-void    EMI_CdOnRead(void);
+void    CD_OnRead(void);
 /* func_80162F34 */
-void    EMI_CdPause(void);
+void    CD_Pause(void);
 /* func_80162F88 */
-void    EMI_CdOnPause(void);
+void    CD_OnPause(void);
 /* func_8016305C */
 void    EMI_UpdateStream(void);
 void    func_80163230(void);

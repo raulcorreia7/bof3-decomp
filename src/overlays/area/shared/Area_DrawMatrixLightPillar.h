@@ -14,14 +14,14 @@ MATCH void Area_DrawMatrixLightPillar(s32* pos) {
     u8       i;
 
     /* The retail frame holds 48 bytes after the matrix that no statement uses. */
-    Area_SetCameraMatrix(&matrix);
+    Camera_SetMatrix(&matrix);
     angle    = 0;
     point[0] = pos[0] + ((rcos(0) * 0x200) >> 4);
     point[1] = pos[1] + ((rsin(0) * 0x200) >> 4);
     point[2] = pos[2];
-    Area_ProjectPoint(point, &inner);
+    Camera_ProjectPoint(point, &inner);
     point[2] = pos[2] + TO_COORD(2048);
-    Area_ProjectPoint(point, &outer);
+    Camera_ProjectPoint(point, &outer);
     shade = ((g_FrameCount & 1) << 2) | 0x20;
     for (i = 0; i < AREA_RING_POINTS; i++) {
         last_inner = inner;
@@ -30,9 +30,9 @@ MATCH void Area_DrawMatrixLightPillar(s32* pos) {
         point[0] = pos[0] + ((rcos((u16)angle) * 0x200) >> 4);
         point[1] = pos[1] + ((rsin((u16)angle) * 0x200) >> 4);
         point[2] = pos[2];
-        Area_ProjectPoint(point, &inner);
+        Camera_ProjectPoint(point, &inner);
         point[2] = pos[2] + TO_COORD(2048);
-        Area_ProjectPoint(point, &outer);
+        Camera_ProjectPoint(point, &outer);
 
         SetDrawMode((DR_MODE*)g_GfxPrimCursor, 0, 1, GetTPage(TPAGE_DEPTH_4BIT, TPAGE_ABR_ADD, FONT_TPAGE_X, FONT_TPAGE_Y), 0);
         Area_AddCellPrim(point[0], point[1], 0, sizeof(DR_MODE));

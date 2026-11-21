@@ -11,7 +11,7 @@ MATCH void func_801F39BC(void) {
     index = s->param.unk_0B;
     e     = &g_Actors[index];
     TASK_SET(e);
-    Actor_SelectScript(1);
+    Script_Select(1);
     g_Task = s;
     Actor_Clear();
 }

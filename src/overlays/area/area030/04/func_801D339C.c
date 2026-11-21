@@ -25,7 +25,7 @@ MATCH void func_801D339C(void) {
     FISHING_STATE->tint_5F  = 0;
     FISHING_STATE->state_2A = 0;
 
-    Actor_SelectScript(FISHING_STATE->cue_index);
+    Script_Select(FISHING_STATE->cue_index);
 
     cue = D_801E1DA0[FISHING_STATE->cue_index];
     if (cue != 0xFFFF) {

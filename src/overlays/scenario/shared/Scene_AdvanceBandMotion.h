@@ -15,7 +15,7 @@
     work = g_Task;                                                                                     \
     setVector(work, work->vx ADD work->unk_18, work->vy ADD work->unk_1C, work->vz ADD work->gravity); \
                                                                                                        \
-    Area_SetCameraMatrix(&matrix);                                                                     \
+    Camera_SetMatrix(&matrix);                                                                         \
                                                                                                        \
     actor = g_Task;                                                                                    \
     PROJECT(&actor->pos.x, &actor->vx);                                                                \

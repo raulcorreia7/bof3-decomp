@@ -119,13 +119,13 @@ MATCH void func_801D10AC(void) {
     g_Task->unk_32      = 0;
     g_Task->timer       = 8;
     g_Task->header.mode++;
-    Area_SetCameraMatrix(&camera);
+    Camera_SetMatrix(&camera);
     point[0] = g_Task->pos.x.fixed;
     point[1] = g_Task->pos.y.fixed;
     point[2] = g_Task->pos.z.fixed;
-    Area_ProjectPoint(point, &start);
+    Camera_ProjectPoint(point, &start);
     point[2] -= TO_COORD(256);
-    Area_ProjectPoint(point, &end);
+    Camera_ProjectPoint(point, &end);
     g_Task->unk_32 = ratan2(end.vy - start.vy, end.vx - start.vx) + 0x400;
     SND_PlaySE(0x202);
 }
@@ -272,7 +272,7 @@ MATCH void func_801D1758(SpriteSpark* spark) {
 
     GFX_SET_DRAW_MODE(GetTPage(TPAGE_DEPTH_4BIT, TPAGE_ABR_ADD, FONT_TPAGE_X, FONT_TPAGE_Y));
     Area_AddCellPrim(spark->pos.vx, spark->pos.vy, 0, sizeof(DR_MODE));
-    Area_ProjectPoint(&spark->pos.vx, &xy);
+    Camera_ProjectPoint(&spark->pos.vx, &xy);
     dot = (TILE_1*)g_GfxPrimCursor;
     SetTile1(dot);
     SetSemiTrans(dot, 1);
@@ -306,7 +306,7 @@ MATCH s32 func_801D18CC(void) {
     u8           life;
 
     active = 0;
-    Area_SetCameraMatrix(&camera);
+    Camera_SetMatrix(&camera);
     spark = MEM_PTR(SpriteSpark, AREA_WORK);
     i     = 0;
     do {
@@ -355,11 +355,11 @@ MATCH void func_801D1D20(WorldPos* pos, s32* step, u8 red, u8 green) {
     point[0] = pos->x.fixed + ((((rcos((u16)angle) * 5) << 6) >> 4));
     point[1] = pos->y.fixed + ((((rsin((u16)angle) * 5) << 6) >> 4));
     point[2] = pos->z.fixed;
-    Area_ProjectPoint(point, (DVECTOR*)&screen[0]);
+    Camera_ProjectPoint(point, (DVECTOR*)&screen[0]);
     point2[0] = step[0] + ((((rcos((u16)angle) * 5) << 6) >> 4));
     point2[1] = step[1] + ((((rsin((u16)angle) * 5) << 6) >> 4));
     point2[2] = step[2];
-    Area_ProjectPoint(point2, (DVECTOR*)&screen[1]);
+    Camera_ProjectPoint(point2, (DVECTOR*)&screen[1]);
 
     i = 0;
     do {
@@ -376,11 +376,11 @@ MATCH void func_801D1D20(WorldPos* pos, s32* step, u8 red, u8 green) {
         point[0] = pos->x.fixed + ((((rcos(angle16) * 5) << 6) >> 4));
         point[1] = pos->y.fixed + ((((rsin(angle16) * 5) << 6) >> 4));
         point[2] = pos->z.fixed;
-        Area_ProjectPoint(point, (DVECTOR*)&screen[0]);
+        Camera_ProjectPoint(point, (DVECTOR*)&screen[0]);
         point2[0] = step[0] + ((((rcos(angle16) * 5) << 6) >> 4));
         point2[1] = step[1] + ((((rsin(angle16) * 5) << 6) >> 4));
         point2[2] = step[2];
-        Area_ProjectPoint(point2, (DVECTOR*)&screen[1]);
+        Camera_ProjectPoint(point2, (DVECTOR*)&screen[1]);
 
         prim->x2 = screen[0].vx;
         prim->y2 = screen[0].vy;
@@ -418,8 +418,8 @@ NON_MATCHING void func_801D1FF8(Pos3* pos, s16 radius_x_arg, s16 radius_y_arg, u
     shade_value = shade_arg;
     color_byte  = color_value;
     shade_byte  = shade_value;
-    Area_SetCameraMatrix(&camera);
-    Area_ProjectPoint((s32*)pos, &center);
+    Camera_SetMatrix(&camera);
+    Camera_ProjectPoint((s32*)pos, &center);
     size.vx = radius_x_arg;
     size.vy = radius_y_arg;
     Game_ProjectWorldPoint(pos, &size, &scale);

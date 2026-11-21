@@ -8,7 +8,7 @@ MATCH void func_801B7EF0(void) {
     if (g_Task->direction == FACING_RIGHT) {
         value = 0x3C;
     }
-    Actor_RequestScript(value);
+    Script_Request(value);
     if (g_Task->unk_05 != 0) {
         Actor_SetSemiTransparent();
         g_Task->tint.steps.delta.r = -0x80;

@@ -1,15 +1,15 @@
 #include "slus.h"
 
-const u32 g_EmiCdSteps[9] = {
-    (u32)EMI_CdIdle,
-    (u32)EMI_CdSetSpeed,
-    (u32)EMI_CdSeek,
-    (u32)EMI_CdOnSeek,
-    (u32)EMI_CdRead,
-    (u32)EMI_CdOnRead,
-    (u32)EMI_CdPause,
-    (u32)EMI_CdOnPause,
-    (u32)EMI_CdIdle,
+const u32 g_CdSteps[9] = {
+    (u32)CD_Idle,
+    (u32)CD_SetSpeed,
+    (u32)CD_Seek,
+    (u32)CD_OnSeek,
+    (u32)CD_Read,
+    (u32)CD_OnRead,
+    (u32)CD_Pause,
+    (u32)CD_OnPause,
+    (u32)CD_Idle,
 };
 
 const EmiRingSteps g_EmiRingSteps = {{

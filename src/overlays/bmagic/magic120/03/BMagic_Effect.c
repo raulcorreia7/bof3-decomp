@@ -267,15 +267,15 @@ MATCH void func_801EFDD4(void) {
             if (g_Task->facing & 2) {
                 g_Task->unk_29 = 4;
                 g_Task->unk_2A = ~g_Task->facing & 1;
-                Actor_SelectScript(3);
+                Script_Select(3);
             } else {
-                Actor_SelectScript(0);
+                Script_Select(0);
             }
             break;
         case 1:
             g_Task->unk_09      = 120;
             g_Task->header.step = 2;
-            Actor_SelectScript(1);
+            Script_Select(1);
             break;
         case 2:
             for (i = 0; i < 6; i++) {

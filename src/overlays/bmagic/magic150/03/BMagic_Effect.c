@@ -103,21 +103,21 @@ MATCH void func_801EF040(void) {
         pos[0] = D_801EFA9C.origin.vx;
         pos[1] = D_801EFA9C.origin.vy + ((D_801EFA9C.radius * rcos(angle)) >> 4);
         pos[2] = D_801EFA9C.origin.vz + ((D_801EFA9C.radius * rsin(angle)) << 4);
-        Area_ProjectPoint(pos, &screen);
+        Camera_ProjectPoint(pos, &screen);
         setXY0(prim, screen.vx, screen.vy);
         pos[0] = D_801EFA9C.origin.vx + TO_COORD(16);
-        Area_ProjectPoint(pos, &screen);
+        Camera_ProjectPoint(pos, &screen);
         prim->x1 = screen.vx;
         prim->y1 = screen.vy;
         angle += 0x100;
         pos[0] = D_801EFA9C.origin.vx;
         pos[1] = D_801EFA9C.origin.vy + ((D_801EFA9C.radius * rcos(angle)) >> 4);
         pos[2] = D_801EFA9C.origin.vz + ((D_801EFA9C.radius * rsin(angle)) << 4);
-        Area_ProjectPoint(pos, &screen);
+        Camera_ProjectPoint(pos, &screen);
         prim->x2 = screen.vx;
         prim->y2 = screen.vy;
         pos[0]   = D_801EFA9C.origin.vx + TO_COORD(16);
-        Area_ProjectPoint(pos, &screen);
+        Camera_ProjectPoint(pos, &screen);
         prim->x3 = screen.vx;
         prim->y3 = screen.vy;
         setRGB0(prim, 128, 0, 0);
@@ -138,11 +138,11 @@ MATCH void func_801EF254(void) {
 /* Projects the point and the points half a unit to its left and right to the screen. */
 /* func_801EF2C0 */
 MATCH void BMagic_ProjectSpan(ProjectedSpan* span) {
-    Area_ProjectPoint(&span->pos.vx, &span->screen[1]);
+    Camera_ProjectPoint(&span->pos.vx, &span->screen[1]);
     span->pos.vx -= COORD_HALF;
-    Area_ProjectPoint(&span->pos.vx, &span->screen[0]);
+    Camera_ProjectPoint(&span->pos.vx, &span->screen[0]);
     span->pos.vx += TO_COORD(1);
-    Area_ProjectPoint(&span->pos.vx, &span->screen[2]);
+    Camera_ProjectPoint(&span->pos.vx, &span->screen[2]);
 }
 
 /* Draws the beam segment between two projected spans: two gouraud quads join
@@ -269,7 +269,7 @@ MATCH u8 func_801EF8EC(void) {
             origin[0] = D_801EFA9C.origin.vx;
             origin[1] = D_801EFA9C.origin.vy + ((D_801EFAF4->offset * rcos(D_801EFAF4->angle)) >> 4);
             origin[2] = D_801EFA9C.origin.vz + ((D_801EFAF4->offset * rsin(D_801EFAF4->angle)) << 4);
-            Area_ProjectPoint(origin, &screen);
+            Camera_ProjectPoint(origin, &screen);
             func_801EF790(screen.vx, screen.vy, D_801EFAF4->life, GFX_COLOR_NEUTRAL, 0);
             drawn              = 1;
             D_801EFAF4->angle  = D_801EFAF4->angle + 128;

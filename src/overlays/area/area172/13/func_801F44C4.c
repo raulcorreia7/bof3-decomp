@@ -18,7 +18,7 @@ MATCH void func_801F44C4(void) {
         g_Task->vz               = 0;
         g_Task->gravity          = 0;
         g_Task->unk_04           = 2;
-        Actor_SelectScript(0x39);
+        Script_Select(0x39);
         g_ScriptState->unk_01 = 4;
     } else {
         g_ScriptState->cursor -= 2;

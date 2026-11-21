@@ -19,9 +19,9 @@ MATCH void func_801F4400(void) {
         g_Actors[second_index].header.flags = 1;
         g_ScratchPad.cells.halves[0]        = (u8)first;
         Actor_SpawnPartyFromRecord(D_801F4DDC);
-        Actor_BeginScript(107, 0);
+        Script_Begin(107, 0);
         g_ScratchPad.cells.halves[0] = (u8)second;
         Actor_SpawnPartyFromRecord(D_801F4DDC + 0x10);
-        Actor_BeginScript(88, 0);
+        Script_Begin(88, 0);
     }
 }

@@ -12,6 +12,6 @@ MATCH void func_800C1A2C(void) {
     work = g_BattleCurrentEnemy;
     EnemyBattler_SetScript(work, D_800C2C44, func_800C1B18, D_800C2C94);
     ACTOR_SET_MODE(1);
-    Actor_RequestScript(2);
+    Script_Request(2);
     Actor_StepAnimLoop();
 }

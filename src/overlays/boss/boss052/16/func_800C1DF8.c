@@ -7,7 +7,7 @@ MATCH void func_800C1DF8(void) {
     g_Task->param.unk_0B = 0;
     type                 = g_BattleEnemyBattlers[0].type;
     g_Task->timer        = ENCOUNTER_ENEMIES[type].unk_84[2];
-    Actor_SelectScript(4);
+    Script_Select(4);
     Actor_StepAnimLoop();
     Area_AddActor();
     g_Task->header.step++;

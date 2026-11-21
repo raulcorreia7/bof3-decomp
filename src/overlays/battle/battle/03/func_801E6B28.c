@@ -10,9 +10,9 @@ MATCH void func_801E6B28(void) {
     global         = (u8*)(PARTY_STATE_PTR);
     type           = *(u16*)((*(u32*)((global + 0x6380u)) + 2u));
     if ((D_801CA71C[type].mask & 0x200u) != 0u) {
-        Actor_SelectScript(0);
+        Script_Select(0);
     } else {
-        Actor_SelectScript(2);
+        Script_Select(2);
     }
     g_Task->header.mode += 1;
 }

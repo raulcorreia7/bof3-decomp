@@ -7,7 +7,7 @@ MATCH void Area_DrawSparkCell(AreaSpark* spark) {
     TILE_1* tile;
     u8      shade;
 
-    Area_ProjectPoint(&spark->pos.vx, &screen);
+    Camera_ProjectPoint(&spark->pos.vx, &screen);
     tile = (TILE_1*)g_GfxPrimCursor;
     SetTile1(tile);
     SetSemiTrans(tile, 0);

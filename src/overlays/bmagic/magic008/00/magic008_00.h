@@ -69,7 +69,7 @@ extern u16                D_80145A54[];
         if (g_Battle.target_selector < BATTLE_PARTY_CHARACTERS_COUNT) {                                             \
             if (g_Game.members[g_Battle.target_selector].header.mode != 6) {                                        \
                 if (g_Battle.active_battler < BATTLE_PARTY_CHARACTERS_COUNT) {                                      \
-                    Actor_SelectScript(g_Task->facing + 12);                                                        \
+                    Script_Select(g_Task->facing + 12);                                                             \
                     count                = --g_GfxTransferCount;                                                    \
                     (&D_80145A04)[count] = 0;                                                                       \
                     D_80145A54[count]    = 0;                                                                       \
@@ -84,7 +84,7 @@ extern u16                D_80145A54[];
         } else {                                                                                                    \
             if (g_BattleEnemyBattlers[g_Battle.target_selector - BATTLE_PARTY_CHARACTERS_COUNT].header.mode != 6) { \
                 if (g_Battle.active_battler < BATTLE_PARTY_CHARACTERS_COUNT) {                                      \
-                    Actor_SelectScript(g_Task->facing + 12);                                                        \
+                    Script_Select(g_Task->facing + 12);                                                             \
                     count                = --g_GfxTransferCount;                                                    \
                     (&D_80145A04)[count] = 0;                                                                       \
                     D_80145A54[count]    = 0;                                                                       \

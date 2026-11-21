@@ -5,7 +5,7 @@ MATCH void func_801F2FBC(void) {
 
     func_80196718(g_Task);
     Area_SelectSceneRecord(0x1BD);
-    Actor_SelectScript(0);
+    Script_Select(0);
     g_Task->mirror           = 0;
     g_Task->scale.x          = 57344;
     g_Task->scale.y          = 57344;
