@@ -51,13 +51,13 @@ MATCH void Area_DrawObjectSprite(void) {
         y                = g_Task->screen_y + 0x10;
         g_Task->screen_y = y + (g_GfxBufferIndex ^ 0x1) * 0xF0;
     }
-    list  = g_Task->range_54.table + g_Task->unk_5A;
+    list  = g_Task->range_54.table + g_Task->frame_cells;
     count = *list;
     cell  = (SpriteCell*)(list + 1);
     Area_BuildClut(&clut);
     for (; count != 0; cell++, count--) {
         mode = cell->size >> 7;
-        if (g_Task->unk_2A != 0) {
+        if (g_Task->mirror != 0) {
             mode |= 2;
         }
         if (g_Task->unk_48 != 0) {
@@ -74,7 +74,7 @@ MATCH void Area_DrawObjectSprite(void) {
                 clip_y = 0;
             }
             page_offset = 0;
-            if (g_Task->unk_28 != PALETTE_TYPE_CELL) {
+            if (g_Task->palette_8bit != PALETTE_TYPE_CELL) {
                 page_offset = -1;
                 if (cell->u >= 0x28) {
                     page_offset = cell->u >= 0xA1;
@@ -131,7 +131,7 @@ MATCH void Area_DrawObjectSprite(void) {
             }
             prim->y1    = prim->y0;
             prim->y3    = prim->y2;
-            prim->v0    = g_Task->unk_26 + cell->v;
+            prim->v0    = g_Task->sheet_row + cell->v;
             prim->v2    = prim->v0 + height - clip_y;
             prim->v1    = prim->v0;
             prim->v3    = prim->v2;
@@ -142,7 +142,7 @@ MATCH void Area_DrawObjectSprite(void) {
             tint        = g_Task->tint.bytes.rgb.b - 0x80;
             prim->b0    = tint;
             /* The page is assigned inside the macro: retail computes it once in each branch. */
-            tpage       = getTPage(g_Task->unk_28 ? 1 : 0, g_Task->tint.bytes.flags, (page % 16) << 6, ((page = g_Task->unk_25 + page_offset) / 16) << 8);
+            tpage       = getTPage(g_Task->palette_8bit ? 1 : 0, g_Task->tint.bytes.flags, (page % 16) << 6, ((page = g_Task->sheet_page + page_offset) / 16) << 8);
             prim->tpage = tpage;
             prim->clut  = clut;
             SetSemiTrans(prim, (g_Task->header.flags & ACTOR_FLAG_SEMI_TRANSPARENT) != 0);

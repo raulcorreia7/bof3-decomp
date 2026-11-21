@@ -8,7 +8,7 @@ MATCH void func_8019B3A8(void) {
     g_Task->draw_layer   = 6;
     g_Task->unk_48       = 1;
     g_Task->active_flags = 0;
-    g_Task->unk_2A       = 0;
+    g_Task->mirror       = 0;
     ACTOR_CLEAR_TINT();
     work               = g_Task;
     work->option_flags = 0;

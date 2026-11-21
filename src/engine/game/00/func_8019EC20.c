@@ -9,7 +9,7 @@ MATCH void func_8019EC20(void) {
     if (FIELD(u16, MAP_BUNDLE_BASE, (COORD_INT(work->pos.y) * MEM(u8, MAP_BUNDLE_BASE) * 2 + g_AreaMapBundle.grid_offset * 4 + COORD_INT(work->pos.x) * 2)) != 0) {
         if (func_8019EEE4()) {
             func_8019EE10();
-            g_Task->unk_27 = g_Game.members[0].unk_27;
+            g_Task->clut_select = g_Game.members[0].unk_27;
             Actor_SelectScript(0x4A);
             SND_PlaySE(EMI_SE_ID(SND_BANK_COMMON, 14));
             g_Task->header.mode++;

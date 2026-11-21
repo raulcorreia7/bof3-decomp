@@ -18,7 +18,7 @@ MATCH s32 Party_JoinMember(s32 char_id) {
         /* FAKE: retail reads g_CharSlot as u8[]. */
         g_Game.members[g_Game.party_size].chr             = g_Characters[((u8*)g_CharSlot)[id]];
         g_Task->unk_05                                    = g_PartySize;
-        g_Task->unk_4B                                    = 0xFF;
+        g_Task->script_record                             = 0xFF;
         /* FAKE: retail reads g_CharSlot as u8[]. */
         g_Game.members[g_Game.party_size].character_index = ((u8*)g_CharSlot)[char_id & BYTE_MASK];
         /* FAKE: retail keeps the incremented party count in v0. */

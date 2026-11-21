@@ -24,7 +24,7 @@ NON_MATCHING void func_801F30E0(void) {
     if (work->param.unk_0B != 0) {
         selector = g_Game.members[0].unk_4B;
     } else {
-        selector = g_Actors[2].unk_4B;
+        selector = g_Actors[2].script_record;
     }
     for (index = 0; index < 5; index++) {
         if (D_801F3D70[index * 3] == selector) {

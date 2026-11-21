@@ -31,7 +31,7 @@ MATCH s8 Actor_StepMovement(s32 entry, s8 dir_x, s8 dir_y, s16 vz_start, s16 vz_
     }
     if (g_Task->vz <= 0 && speed >= 0 && landing_script != GAME_NONE) {
         if (g_Task->unk_06 != 6) {
-            g_Task->unk_2A = flags & 0x1;
+            g_Task->mirror = flags & 0x1;
         }
         Actor_RequestScript(landing_script);
     }

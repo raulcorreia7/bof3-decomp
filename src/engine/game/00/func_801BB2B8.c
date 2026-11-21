@@ -109,7 +109,7 @@ NON_MATCHING s32 func_801BB2B8(s32 x0, s32 y0, s32 x1, s32 y1) {
 
 case80:
     work = g_Task;
-    if (work->direction != 0)
+    if (work->unk_05 != 0)
         return 0xFF;
 block43:
     if ((func_801BB6F0(code2 & BYTE_MASK) & BYTE_MASK) != 0)
@@ -179,7 +179,7 @@ caseA0:
         if (low == 0xAF)
             return 0xA1;
         work = g_Task;
-        if (work->direction != 0)
+        if (work->unk_05 != 0)
             return 0xFF;
         return low;
     }

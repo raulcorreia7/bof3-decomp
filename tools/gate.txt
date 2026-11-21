@@ -11,6 +11,7 @@ check-tree|none|par|check-tree|tools/check_tree.sh $ref
 externs|none|par||tools/check_externs.sh $ref
 check-asm|none|par|check-asm|tools/check_asm.sh $ref
 format-check|none|par|format-check|tools/format.sh --check
+shell|none|par||for f in $(git ls-files 'tools/*.sh' 'bin/*'); do sh -n "$f" || exit 1; done; shellcheck --severity=warning $(git ls-files 'tools/*.sh')
 test|none|par||meson test -C $bld --no-rebuild --print-errorlogs
 typeloss|none|par||python3 tools/typeloss.py $base HEAD
 markers|none|par||python3 tools/check_markers.py --diff $ref

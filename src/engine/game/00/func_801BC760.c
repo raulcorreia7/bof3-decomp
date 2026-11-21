@@ -26,8 +26,8 @@ NON_MATCHING s32 func_801BC760(void) {
     dir    = g_Task->direction;
     goal_x = D_80145EC4 + (g_Game.members[0].unk_0C * g_Game.members[0].unk_09);
     goal_y = D_80145EC8 + (g_Game.members[0].unk_10 * g_Game.members[0].unk_09);
-    if (g_Game.members[g_Task->direction ^ 3].u.field.mode.unsigned_value != 9) {
-        if (g_Task->direction == 2) {
+    if (g_Game.members[g_Task->unk_05 ^ 3].u.field.mode.unsigned_value != 9) {
+        if (g_Task->unk_05 == 2) {
             if (D_80145FD6 == 0) {
                 g_Task->unk_06 = 1;
             } else {

@@ -9,29 +9,29 @@ MATCH void Area_BuildClut(u16* dst) {
     u32 sel;
 
     base = ((g_Task->active_flags & 0x4) != 0) ? STAGE_PALETTE_Y + 16 : STAGE_PALETTE_Y;
-    switch (g_Task->unk_28) {
+    switch (g_Task->palette_8bit) {
         case PALETTE_TYPE_CELL:
-            sel  = g_Task->unk_27;
+            sel  = g_Task->clut_select;
             *dst = (((base + (sel >> 4)) << 6) | (sel & 0xF));
             break;
         case PALETTE_TYPE_ROW: {
             u32 n;
 
-            n    = g_Task->unk_27;
+            n    = g_Task->clut_select;
             *dst = ((base + n) << 6);
             break;
         }
         case PALETTE_TYPE_CELLS_2:
-            sel  = g_Task->unk_27;
+            sel  = g_Task->clut_select;
             *dst = (((base + (sel >> 3)) << 6) | ((sel & 0x7) * 2));
             break;
         case PALETTE_TYPE_CELLS_4:
-            sel  = g_Task->unk_27;
+            sel  = g_Task->clut_select;
             *dst = (((base + (sel >> 2)) << 6) | ((sel & 0x3) * 4));
             break;
         case PALETTE_TYPE_CELLS_8:
         default:
-            sel  = g_Task->unk_27;
+            sel  = g_Task->clut_select;
             *dst = (((base + (sel >> 0x1)) << 6) | ((sel & 1) * 8));
             break;
     }

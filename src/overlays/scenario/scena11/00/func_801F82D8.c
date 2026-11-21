@@ -13,7 +13,7 @@ MATCH void func_801F82D8(s32 slot) {
     Area_SelectSceneRecord(0x18);
 
     g_Task->active_flags = 0;
-    g_Task->unk_2A       = 0;
+    g_Task->mirror       = 0;
     g_Task->unk_2B       = (g_Task->unk_2B + 1);
     g_Task->unk_48       = 0;
 

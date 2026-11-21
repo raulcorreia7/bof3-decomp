@@ -10,5 +10,5 @@ MATCH void Actor_RequestRoute(u8 route_index) {
     }
     index = route_index * 2;
     Actor_RequestScript(s_RouteStepScratch[index]);
-    g_Task->unk_2A = s_RouteStepScratch[index + 1];
+    g_Task->mirror = s_RouteStepScratch[index + 1];
 }

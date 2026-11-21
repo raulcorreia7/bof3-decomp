@@ -331,7 +331,7 @@ D_801C85C4 = { addr = 0x801C85C4, size = 0x2C, source = "The 11 area handlers (F
 g_SceneObjects = { addr = 0x801C85F0, size = 0x108, source = "Scene object callbacks, indexed by the callback_index of the actor by Scene_DispatchObject." }
 g_AreaHooks = { addr = 0x801C86F8, type = "AreaHooks", size = 0xE0, source = "per-area callbacks selected by Game_CallArea" }
 s_TalkMessageIds = { addr = 0x801C87D8, size = 0x24, source = "Message id by talk id and party slot, read by func_801A8F94." }
-s_ScriptOpcodeOffsets = { addr = 0x801C87FC, size = 0x100, source = "Offset each script opcode adds to the cursor; func_801AC8F0 advances by it." }
+s_ActorScriptLengths = { addr = 0x801C87FC, size = 0x100, source = "Offset each script opcode adds to the cursor; func_801AC8F0 advances by it." }
 D_801C88FC = { addr = 0x801C88FC, size = 0x8, source = "The two tint-lighten handlers func_801ACA14 and func_801ACAC0 that actor script stage 0x88 runs through func_801AC9D0." }
 D_801C8904 = { addr = 0x801C8904, size = 0x8, source = "The two tint-darken handlers func_801ACC08 and func_801ACCD8 that actor script stage 0x87 runs through func_801ACBC4." }
 g_FieldActions = { addr = 0x801C890C, source = "The field action of each party leader, by CharacterId." }

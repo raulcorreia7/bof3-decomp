@@ -4,6 +4,7 @@
  * s16 although the definition names it u16; the low halfword is identical. */
 
 /* func_801AB8B0 */
+/* Runs one helper-spawn opcode. */
 /* Opcodes 0x90 to 0x9F of the actor script: spawn a helper actor. */
 typedef enum ActorScriptSpawn {
     ACTOR_SCRIPT_SPAWN_CLAIM_AT_SCREEN_FIRST = 0x90, /* args: [dx] [dy]; Actor_ClaimSlot at the screen position; 0x91 to 0x95 pick the next kinds */

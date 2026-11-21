@@ -44,6 +44,6 @@ MATCH void Actor_StartFlying(void) {
 
     Actor_SelectScript(g_FlockScript[g_Task->direction][0]);
 
-    g_Task->unk_2A = g_FlockScript[g_Task->direction][1];
+    g_Task->mirror = g_FlockScript[g_Task->direction][1];
     Area_AddGridActor();
 }

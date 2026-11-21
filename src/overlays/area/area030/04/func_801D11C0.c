@@ -13,10 +13,10 @@ MATCH void func_801D11C0(void) {
     if (g_AreaTargetCellY >= 0x39) {
         g_Task->header.step = 3;
     }
-    g_Task->unk_2A              = g_Game.members[0].unk_2A;
+    g_Task->mirror              = g_Game.members[0].unk_2A;
     g_Task->unk_49              = D_80145ED9;
     g_Task->unk_4A              = D_80145EDA;
-    g_Task->unk_4B              = D_80145EDB;
+    g_Task->script_record       = D_80145EDB;
     *(s32*)&g_Task->script      = D_80145EE0;
     *(s32*)((u8*)g_Task + 0x54) = D_80145EE4;
     *(u16*)((u8*)g_Task + 0x58) = D_80145EE8;

@@ -11,7 +11,7 @@
     Area_SelectSceneRecord(0x205);                                                                            \
     g_Task->unk_48       = 0;                                                                                 \
     g_Task->active_flags = 0;                                                                                 \
-    g_Task->unk_2A       = 0;                                                                                 \
+    g_Task->mirror       = 0;                                                                                 \
     ACTOR_CLEAR_TINT();                                                                                       \
     row_offset                                           = g_Task->param.unk_0B * 4;                          \
     map_offset                                           = CELL_Y[row_offset] * g_AreaMapBundle.width;        \

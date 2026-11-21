@@ -10,7 +10,7 @@ MATCH void func_801F2DBC(void) {
     g_Task->unk_0A = RANDOM_MASK(7);
     idx            = idx * 2;
     Actor_RequestScript(D_801F40F8[idx]);
-    g_Task->unk_2A = D_801F40F9[idx];
+    g_Task->mirror = D_801F40F9[idx];
     g_Task->unk_04 = 1;
     g_ScriptState->cursor -= 2;
 }

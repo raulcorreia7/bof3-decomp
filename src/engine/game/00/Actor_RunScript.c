@@ -1,6 +1,22 @@
 #include "game_00.h"
 
+/* The high nibble of an actor script opcode selects its handler group. */
+typedef enum ActorScriptGroup {
+    ACTOR_SCRIPT_GROUP_FLOW       = 0x00, /* jumps, branches, calls: Actor_RunFlowOps */
+    ACTOR_SCRIPT_GROUP_WALK       = 0x10, /* 0x10 to 0x4F: step toward a facing (bits 3-5) for a count (bits 0-2) */
+    ACTOR_SCRIPT_GROUP_SET_UNK_01 = 0x50, /* store the low nibble in the interaction state byte 1 */
+    ACTOR_SCRIPT_GROUP_FACE       = 0x60, /* Actor_RunFaceOps */
+    ACTOR_SCRIPT_GROUP_STAGE      = 0x80, /* Actor_RunStageOps */
+    ACTOR_SCRIPT_GROUP_SPAWN      = 0x90, /* Actor_RunSpawnOps */
+    ACTOR_SCRIPT_GROUP_STEP_BACK  = 0xA0, /* move the cursor back one record */
+    ACTOR_SCRIPT_GROUP_APPEARANCE = 0xC0, /* Actor_RunAppearanceOps */
+    ACTOR_SCRIPT_GROUP_WAIT       = 0xD0, /* Actor_RunWaitOps */
+    ACTOR_SCRIPT_GROUP_CONTROL    = 0xE0, /* Actor_RunControlOps */
+    ACTOR_SCRIPT_GROUP_MOTION     = 0xF0, /* Actor_RunMotionOps */
+} ActorScriptGroup;
+
 /* func_801A8D38 */
+/* Runs the actor script at the cursor and returns the facing it selects. */
 MATCH u8 Actor_RunScript(void* sub, s32 target) {
     u8 script;
     u8 value;
@@ -11,10 +27,10 @@ MATCH u8 Actor_RunScript(void* sub, s32 target) {
     sel           = Actor_RunFlowOps(sub, (u8*)target, sel);
     script        = ((u8*)target)[((ScriptState*)sub)->cursor];
     switch (script & 0xF0) {
-        case 0x10:
-        case 0x20:
-        case 0x30:
-        case 0x40:
+        case ACTOR_SCRIPT_GROUP_WALK:
+        case ACTOR_SCRIPT_GROUP_WALK + 0x10:
+        case ACTOR_SCRIPT_GROUP_WALK + 0x20:
+        case ACTOR_SCRIPT_GROUP_WALK + 0x30:
             value = ((u8*)target)[((ScriptState*)sub)->cursor];
             sel   = (u8)(value - 0x10) >> 3;
             value &= 7;
@@ -27,31 +43,31 @@ MATCH u8 Actor_RunScript(void* sub, s32 target) {
                 }
             }
             break;
-        case 0x50:
+        case ACTOR_SCRIPT_GROUP_SET_UNK_01:
             ((ScriptState*)sub)->unk_01 = script & 0xF;
             break;
-        case 0x60:
+        case ACTOR_SCRIPT_GROUP_FACE:
             sel = Actor_RunFaceOps(sub, target, sel);
             break;
-        case 0x80:
+        case ACTOR_SCRIPT_GROUP_STAGE:
             sel = Actor_RunStageOps(sub, (const u8*)target, sel);
             break;
-        case 0x90:
+        case ACTOR_SCRIPT_GROUP_SPAWN:
             sel = Actor_RunSpawnOps(sub, (u8*)target, sel);
             break;
-        case 0xA0:
+        case ACTOR_SCRIPT_GROUP_STEP_BACK:
             ((ScriptState*)sub)->cursor--;
             break;
-        case 0xC0:
+        case ACTOR_SCRIPT_GROUP_APPEARANCE:
             sel = Actor_RunAppearanceOps(sub, target, sel);
             break;
-        case 0xD0:
+        case ACTOR_SCRIPT_GROUP_WAIT:
             sel = Actor_RunWaitOps(sub, target, sel);
             break;
-        case 0xE0:
+        case ACTOR_SCRIPT_GROUP_CONTROL:
             sel = Actor_RunControlOps(sub, target, sel);
             break;
-        case 0xF0:
+        case ACTOR_SCRIPT_GROUP_MOTION:
             sel = Actor_RunMotionOps(sub, (const u8*)target, sel);
             break;
     }

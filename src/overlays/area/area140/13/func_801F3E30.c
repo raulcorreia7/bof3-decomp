@@ -31,7 +31,7 @@ NON_MATCHING void func_801F3E30(void) {
             g_ScriptState->flags |= 0x40;
             g_Task->option_flags |= ACTOR_OPT_ROUTE_LOCKED;
             Actor_SelectScript(D_801F4A6C[index * 2]);
-            g_Task->unk_2A = D_801F4A6D[index * 2];
+            g_Task->mirror = D_801F4A6D[index * 2];
             func_801F4380(x, y);
         } else {
             g_ScriptState->cursor += 4;

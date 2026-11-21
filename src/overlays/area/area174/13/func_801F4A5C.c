@@ -6,5 +6,5 @@ MATCH void func_801F4A5C(u8* pairs, s32 facing) {
     offset            = facing * 2;
     g_Task->direction = facing;
     Actor_SelectScript(pairs[offset]);
-    g_Task->unk_2A = pairs[offset + 1];
+    g_Task->mirror = pairs[offset + 1];
 }

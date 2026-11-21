@@ -32,11 +32,11 @@ MATCH void Area_DrawSpriteCell(s32 mirror, SpriteCell* cell, u16 clut) {
         work       = g_Task;
         draw_value = work->tint.bytes.flags;
         mode_bit   = (draw_value & 0x3) << 7;
-        scratch    = work->unk_25;
+        scratch    = work->sheet_page;
         draw_value = scratch * 2;
         packed     = draw_value & 0x60;
         scratch    = scratch & 0xF;
-        if (work->unk_28 != PALETTE_TYPE_CELL) {
+        if (work->palette_8bit != PALETTE_TYPE_CELL) {
             draw_value = packed | 0x200;
             draw_value = mode_bit | draw_value;
         } else {
@@ -46,7 +46,7 @@ MATCH void Area_DrawSpriteCell(s32 mirror, SpriteCell* cell, u16 clut) {
         scratch    = g_Task;
         draw_value = ((Actor*)scratch)->tint.bytes.flags;
         mode_flags = (draw_value & 0x3) << 5;
-        packed     = ((Actor*)scratch)->unk_25;
+        packed     = ((Actor*)scratch)->sheet_page;
         draw_value = ((u32)packed >> 4) << 8;
         mode_bits  = draw_value & 0x100;
         /* FAKE: hide the masked bit's range so the shift stays arithmetic. */
@@ -54,7 +54,7 @@ MATCH void Area_DrawSpriteCell(s32 mirror, SpriteCell* cell, u16 clut) {
         mode_bit   = mode_bits >> 4;
         packed     = packed & 0xF;
         draw_value = draw_value & 0x200;
-        mode_bits  = ((Actor*)scratch)->unk_28;
+        mode_bits  = ((Actor*)scratch)->palette_8bit;
         scratch    = draw_value * 4;
         if (mode_bits != 0) {
             draw_value = mode_bit | 0x80;
@@ -70,7 +70,7 @@ MATCH void Area_DrawSpriteCell(s32 mirror, SpriteCell* cell, u16 clut) {
     SetSprt(sprite);
     setWH(sprite, g_SpriteSizes[sprite_cell->size & GFX_SPRITE_SIZE_MASK][0], g_SpriteSizes[sprite_cell->size & GFX_SPRITE_SIZE_MASK][1]);
     sprite->y0 = SPAD_CURSOR->screen_y + (s8)sprite_cell->y;
-    setUV0(sprite, sprite_cell->u, SPAD_CURSOR->unk_26 + sprite_cell->v);
+    setUV0(sprite, sprite_cell->u, SPAD_CURSOR->sheet_row + sprite_cell->v);
     delta        = SPAD_CURSOR->tint.bytes.rgb.r - 0x80;
     sprite->r0   = delta;
     delta        = SPAD_CURSOR->tint.bytes.rgb.g - 0x80;
