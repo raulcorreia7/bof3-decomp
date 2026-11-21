@@ -165,7 +165,7 @@ MATCH void func_801F363C(void) {
     if (g_MessageChoice == 1) {
         previous = (u8*)g_Task;
         g_Task   = g_Game.members;
-        Actor_SelectScript(0x80);
+        Script_Select(0x80);
         g_Task = previous;
     }
 }

@@ -27,8 +27,8 @@ MATCH void func_801FD07C(void) {
     counter                       = &g_ScratchPad.cells.halves[0];
     *counter                      = D_801FEA74;
     Actor_SpawnPartyFromRecord(D_801FE9A0);
-    Actor_BeginScript(0x4C, 0);
+    Script_Begin(0x4C, 0);
     *counter = D_801FEA78;
     Actor_SpawnPartyFromRecord(D_801FE9A0 + 0x10);
-    Actor_BeginScript(0x36, 0);
+    Script_Begin(0x36, 0);
 }

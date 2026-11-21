@@ -11,7 +11,7 @@ MATCH void func_801B6BC8(void) {
         g_GameState->u.field.countdown = (delay - 1);
         return;
     }
-    sel = Actor_RunScript(&g_GameState->u.field.flags, g_GameState->u.field.index);
+    sel = Script_Run(&g_GameState->u.field.flags, g_GameState->u.field.index);
     if (sel != GAME_NONE) {
         flags = g_GameState->u.field.flags;
         if (flags & 0x8) {
@@ -19,7 +19,7 @@ MATCH void func_801B6BC8(void) {
             if (!(g_ScenarioState.flags_01 & SCENARIO_STATE_SCRIPT_ACTIVE)) {
                 g_GameFlags &= ~GAME_FLAG_SCRIPT_ACTIVE;
             }
-            Actor_RequestScript(g_Task->direction);
+            Script_Request(g_Task->direction);
             g_Game.current->status.field.flags.unsigned_value &= 0xFB;
             func_801C3204();
             g_Task->header.mode = 1;
@@ -34,7 +34,7 @@ MATCH void func_801B6BC8(void) {
             if (!(g_Task->option_flags & ACTOR_OPT_NO_SCRIPT_START)) {
                 if (!(g_Task->option_flags & ACTOR_OPT_ROUTE_LOCKED)) {
                     g_Task->direction = sel;
-                    Actor_RequestScript(g_Task->direction);
+                    Script_Request(g_Task->direction);
                 }
                 g_Task->unk_03 = 3;
                 return;
@@ -48,7 +48,7 @@ MATCH void func_801B6BC8(void) {
             g_Task->tint.steps.delta.g = -0x40;
             g_Task->tint.steps.delta.b = -0x40;
             g_Task->tint.bytes.flags   = 1;
-            Actor_RequestScript(g_Task->direction);
+            Script_Request(g_Task->direction);
             g_Task->unk_03 = 4;
             return;
         }
@@ -56,7 +56,7 @@ MATCH void func_801B6BC8(void) {
             g_Task->direction = sel;
             Actor_SetSemiTransparent();
             g_Task->tint.bytes.flags = 1;
-            Actor_RequestScript(g_Task->direction);
+            Script_Request(g_Task->direction);
             g_Task->unk_03 = 5;
             return;
         }
@@ -76,7 +76,7 @@ MATCH void func_801B6BC8(void) {
             g_Task->unk_03  = 1;
         }
         if ((g_Game.current->u.field.flags & 0x40) == 0) {
-            Actor_RequestScript(sel);
+            Script_Request(sel);
         }
     }
 }

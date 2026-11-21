@@ -95,7 +95,7 @@ static inline void FieldActivateActor(void) {
     g_ScriptVars[2] = 3;
     e               = &g_Actors[index];
     g_Task          = e;
-    Actor_SelectScript(1);
+    Script_Select(1);
     s->header.mode = 1;
     g_Task         = s;
 }

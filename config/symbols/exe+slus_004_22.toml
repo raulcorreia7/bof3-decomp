@@ -114,7 +114,7 @@ g_FairyRooms = { addr = 0x801457A8, source = "Fairy village rooms." }
 D_801457A9 = { addr = 0x801457A9, alias = true, source = "Subtype of each fairy village room." }
 g_GfxPalettePending = { addr = 0x80145988, source = "Palette upload pending flag." }
 g_GfxPrimCursor = { addr = 0x8014598C, size = 0x4, source = "Label primitive context." }
-g_Scripts = { addr = 0x801459F0, type = "u32", source = "Pointer to the active script table: Actor_BeginScript hands a record of it to Actor_SeekScript." }
+g_Scripts = { addr = 0x801459F0, type = "u32", source = "Pointer to the active script table: Script_Begin hands a record of it to Script_Seek." }
 g_GfxTransferCount = { addr = 0x80145A00, source = "Count of queued VRAM transfers: Actor_SelectSprite appends and GFX_UpdateTransferQueue drains it." }
 g_InputHeld = { addr = 0x80145AA4, source = "Buttons held this frame." }
 g_InputPressed = { addr = 0x80145AA8, source = "Buttons pressed this frame." }
@@ -188,20 +188,20 @@ g_BattleGeneCount = { addr = 0x801463C7, type = "u8", source = "Number of genes 
 g_DragonForm = { addr = 0x801463C9, type = "u8", source = "Selected dragon form; the dragon_form member of g_Battle.", alias = true }
 g_BattleActionLock = { addr = 0x801463CE, type = "u8", source = "Frames during which the battle actions are locked; the action_lock member of g_Battle.", alias = true }
 g_BattlePendingStatus = { addr = 0x801463D8, type = "u16", source = "Status effects to apply to a battler; the pending_status member of g_Battle.", alias = true }
-g_EmiStartSector = { addr = 0x80146450, source = "EMI_NextEntry loads it from g_EmiSlotSectors[slot]; EMI_CdOnReady checks it against g_EmiSectorCursor on the first sector" }
+g_EmiStartSector = { addr = 0x80146450, source = "EMI_NextEntry loads it from g_EmiSlotSectors[slot]; CD_OnReady checks it against g_EmiSectorCursor on the first sector" }
 g_EmiBytesLeft = { addr = 0x80146454, source = "Bytes left to load from the EMI archive." }
 g_EmiLoadArg = { addr = 0x80146458, source = "Load argument of the EMI entry being loaded." }
-g_EmiFirstWord = { addr = 0x8014645C, source = "EMI_NextEntry copies EMITocEntry.first_word; EMI_CdOnReady compares it with the first word of the first sector" }
+g_EmiFirstWord = { addr = 0x8014645C, source = "EMI_NextEntry copies EMITocEntry.first_word; CD_OnReady compares it with the first word of the first sector" }
 g_EmiEntryType = { addr = 0x80146460, source = "Type of the EMI entry being loaded." }
 g_EmiRingBase = { addr = 0x80146464, source = "EMI_LoadArchive stores the CD base and EMI_CopySector, StageSector and UploadSector index it by sector" }
 g_EmiRequestedSlotId = { addr = 0x80146468, source = "Slot id stored by EMI_LoadArchive before stream dispatch." }
-g_EmiStep = { addr = 0x8014646C, source = "EMI_NextEntry clears it; the payload loaders count sectors in it and EMI_CdOnReady checks the first sector at 0" }
-g_EmiReadStatus = { addr = 0x80146480, source = "EMI_StartArchive clears it; EMI_CdOnReady sets 1 on a sector mismatch and the VAB body loaders set 2; EMI_UpdateStream tests it" }
-g_EmiNextSlot = { addr = 0x80146481, source = "EMI_LoadArchive clears it and EMI_CdOnReady passes it, then increments it, to EMI_NextEntry" }
+g_EmiStep = { addr = 0x8014646C, source = "EMI_NextEntry clears it; the payload loaders count sectors in it and CD_OnReady checks the first sector at 0" }
+g_EmiReadStatus = { addr = 0x80146480, source = "EMI_StartArchive clears it; CD_OnReady sets 1 on a sector mismatch and the VAB body loaders set 2; EMI_UpdateStream tests it" }
+g_EmiNextSlot = { addr = 0x80146481, source = "EMI_LoadArchive clears it and CD_OnReady passes it, then increments it, to EMI_NextEntry" }
 g_EmiRingSlot = { addr = 0x80146489, source = "Slot of the EMI sector ring." }
 g_EmiStreamIdleFrames = { addr = 0x80146490, source = "Frames since the EMI stream last made progress; EMI_StartArchive clears it and EMI_UpdateStream restarts the read at EMI_STREAM_TIMEOUT_FRAMES." }
 g_EmiStreamState = { addr = 0x80146494, source = "State of the EMI stream." }
-g_EmiRingStates = { addr = 0x801464A0, source = "EMI_CdOnReady tests bit 7 of the ring slot state; EMI_LoadToVram and EMI_LoadVabBody store 3 and 4" }
+g_EmiRingStates = { addr = 0x801464A0, source = "CD_OnReady tests bit 7 of the ring slot state; EMI_LoadToVram and EMI_LoadVabBody store 3 and 4" }
 g_EmiSlotSectors = { addr = 0x80146678, source = "Start sector of each EMI slot." }
 g_EmiBanks = { addr = 0x8014677C, size = 0x8C, source = "The seven sound bank records of the EMI loader: SPU address, VAB header, SE table, sequence buffer and VAB id of each bank; SND_SetBankLayout fills them." }
 g_EmiSectorCursor = { addr = 0x80146808, source = "Current sector of the EMI stream." }
@@ -306,7 +306,7 @@ g_MessageChoiceSteps = { addr = 0x80149B50, source = "Steps of the answer list p
 g_MessagePresetSteps = { addr = 0x80149B64, source = "Steps of the preset answer list panel: open, grow, draw, shrink, release." }
 jtbl_80149B78 = { addr = 0x80149B78, type = "Callback", source = "The switch table of UI_DrawTextAt: the jump targets of its jr dispatch." }
 jtbl_80149C00 = { addr = 0x80149C00, type = "Callback", source = "The switch table of Script_ReadValue: the jump targets of its jr dispatch." }
-g_EmiCdSteps = { addr = 0x80149C3C, alias = true, source = "CD step handlers of the EMI loader." }
+g_CdSteps = { addr = 0x80149C3C, alias = true, source = "CD step handlers of the EMI loader." }
 g_EmiRingSteps = { addr = 0x80149C60, alias = true, source = "EMI_UpdateStream copies it" }
 jtbl_80149C90 = { addr = 0x80149C90, type = "Callback", source = "The switch table of Char_ApplyMaster: the jump targets of its jr dispatch." }
 jtbl_80149CC8 = { addr = 0x80149CC8, type = "Callback", source = "The switch table of Char_PreviewEquip: the jump targets of its jr dispatch." }
@@ -363,17 +363,17 @@ Area_DrawSpriteCell = { addr = 0x8014CF9C, type = "func", source = "Draws one pl
 Area_SetDrawMode = { addr = 0x8014D260, type = "func", source = "Sets the draw mode of the actor." }
 Area_AddGridActor = { addr = 0x8014D290, type = "func", source = "Adds the current task actor to the draw list: derives its depth sort key from the grid position (or from the x, y or z position by draw mode), retires it when the key leaves the ordering table, projects its position through the GTE, stores the screen pair at +0x2E and +0x30 and appends it to the 40-entry draw list." }
 Area_AddActor = { addr = 0x8014D4E0, type = "func", source = "Adds an actor to the draw list." }
-Actor_CopyScriptRecord = { addr = 0x8014D54C, type = "func", source = "Copies a script entry to the staging buffer." }
-Actor_SwitchScript = { addr = 0x8014D5F0, type = "func", source = "Switches the actor to another script." }
-Actor_StageScript = { addr = 0x8014D664, type = "func", source = "Stages a script record for the actor." }
-Actor_SelectScript = { addr = 0x8014D6B8, type = "func", source = "Selects a script for the actor." }
-Actor_BeginScript = { addr = 0x8014D6DC, type = "func", source = "Selects the stream entry for a selector and re-arms the staged position." }
-Actor_RequestScript = { addr = 0x8014D8D4, type = "func", source = "Requests a script for the actor unless it is already selected." }
-Actor_SeekScript = { addr = 0x8014D910, type = "func", source = "Seeks to the next script entry." }
+Script_CopyRecord = { addr = 0x8014D54C, type = "func", source = "Copies a script entry to the staging buffer." }
+Script_Switch = { addr = 0x8014D5F0, type = "func", source = "Switches the actor to another script." }
+Script_Stage = { addr = 0x8014D664, type = "func", source = "Stages a script record for the actor." }
+Script_Select = { addr = 0x8014D6B8, type = "func", source = "Selects a script for the actor." }
+Script_Begin = { addr = 0x8014D6DC, type = "func", source = "Selects the stream entry for a selector and re-arms the staged position." }
+Script_Request = { addr = 0x8014D8D4, type = "func", source = "Requests a script for the actor unless it is already selected." }
+Script_Seek = { addr = 0x8014D910, type = "func", source = "Seeks to the next script entry." }
 Actor_StepAnimLoop = { addr = 0x8014D978, type = "func", source = "Counts the step delay at +0x4A down and, at zero, moves the animation stream to its next step: wraps to step 0 at the end or follows a jump step (delay >= 0x80), returning 1 on a wrap or jump, then stages the step." }
 Actor_StepAnimReverse = { addr = 0x8014DA24, type = "func", source = "Plays the animation stream backwards: counts the delay at +0x4A down, at step 0 wraps to the end and returns 1, ignores jump steps, stages the step before the current position." }
 Actor_StepAnimOnce = { addr = 0x8014DAEC, type = "func", source = "As the looping step function, but at the end of the stream it sets +0x4A to 1 and returns 1 without staging, so the last frame holds; callers wait on it for a one-shot animation to end." }
-Actor_StageAnimStep = { addr = 0x8014DB98, type = "func", source = "Stages the next two-byte step of the animation stream at +0x50: the delay byte to +0x4A, the frame byte through the frame table at +0x54 to +0x5A, then +0x58 += 2. Called by the loop and one-shot step functions and Actor_SeekScript." }
+Actor_StageAnimStep = { addr = 0x8014DB98, type = "func", source = "Stages the next two-byte step of the animation stream at +0x50: the delay byte to +0x4A, the frame byte through the frame table at +0x54 to +0x5A, then +0x58 += 2. Called by the loop and one-shot step functions and Script_Seek." }
 Actor_SelectSprite = { addr = 0x8014DC08, type = "func", source = "Selects a sprite record of the actor: its sheet, animation and mirror." }
 Area_SelectSceneRecord = { addr = 0x8014DD3C, type = "func", source = "Finds a scene record by id." }
 Actor_ReadValue = { addr = 0x8014DFE8, type = "func", source = "Reads a field record value for the actor." }
@@ -459,7 +459,7 @@ Message_SetAnswerMessage13 = { addr = 0x80152670, type = "func", source = "Sets 
 Message_SetAnswerMessage14 = { addr = 0x8015269C, type = "func", source = "Sets the message that answers the menu choice." }
 Message_SetAnswerMessage15 = { addr = 0x801526C8, type = "func", source = "Sets the message that answers the menu choice." }
 UI_DrawWaitMarker = { addr = 0x801526F4, type = "func", source = "Draws the message wait marker." }
-Area_UpdateCamera = { addr = 0x801527E4, type = "func", source = "Steps the area camera." }
+Camera_Update = { addr = 0x801527E4, type = "func", source = "Steps the area camera." }
 Area_LoadCellColumnPrev = { addr = 0x80152C9C, type = "func", source = "Streams the cell column before the first one when the camera passes -0x200." }
 Area_LoadCellColumnNext = { addr = 0x80152D9C, type = "func", source = "Streams the cell column past the last one into the ring when the camera passes +0x200." }
 Area_LoadCellRowsPrev = { addr = 0x80152E94, type = "func", source = "Streams the two cell rows before the first one when the vertical remainder passes -0x200." }
@@ -542,8 +542,8 @@ Area_UpdateParty = { addr = 0x8015A758, type = "func", source = "Runs the party 
 Actor_ProjectForDraw = { addr = 0x8015A944, type = "func", source = "Sets the actor draw layer, projects its position, and registers it when on screen." }
 SYS_InitScratchpad = { addr = 0x8015AC8C, type = "func", source = "comment: initializes the scratch work record for a new panel: marks it active, sets the mode (+0x24) and state (+0x48) bytes, seeds the +0x40/+0x44 scroll pair " }
 Actor_BuildTransformMatrix = { addr = 0x8015B410, type = "func", source = "Builds a matrix from the current actor position and rotation." }
-Area_ApplyCameraMatrix = { addr = 0x8015B4B0, type = "func", source = "composes a matrix with the camera matrix and loads it into the GTE" }
-Actor_FindScriptSlot = { addr = 0x8015B4F4, type = "func", source = "Resolves a script's actor reference to a slot: without bit 0x80 the low six bits plus 30, with it the code-th actor record whose first byte is 10. Called by Actor_ReadValue." }
+Camera_ApplyMatrix = { addr = 0x8015B4B0, type = "func", source = "composes a matrix with the camera matrix and loads it into the GTE" }
+Script_FindSlot = { addr = 0x8015B4F4, type = "func", source = "Resolves a script's actor reference to a slot: without bit 0x80 the low six bits plus 30, with it the code-th actor record whose first byte is 10. Called by Actor_ReadValue." }
 SYS_SetFlag = { addr = 0x8015B580, type = "func", source = "Sets a flag bit." }
 SYS_ClearFlag = { addr = 0x8015B5A8, type = "func", source = "Clears a flag bit." }
 SYS_TestFlag = { addr = 0x8015B5D4, type = "func", source = "Tests a flag bit." }
@@ -569,14 +569,14 @@ Game_SetScriptVar = { addr = 0x8015BA2C, type = "func", source = "Sets a script 
 Game_IsScriptVarEqual = { addr = 0x8015BA50, type = "func", source = "Compares a script variable with a value." }
 Game_IncScriptVar = { addr = 0x8015BA84, type = "func", source = "Increments a script variable." }
 Game_TestNever = { addr = 0x8015BABC, type = "func", source = "Script condition (table g_AreaScriptTests): always false; the last table entry." }
-Actor_DispatchSelectorScript = { addr = 0x8015BAC4, type = "func", source = "Dispatches the actor script selected by the selector, task mode, and current actor context." }
-Area_TurnCameraX = { addr = 0x8015BBA4, type = "func", source = "Turns the camera around the x axis." }
-Area_StepCameraX = { addr = 0x8015BC14, type = "func", source = "Steps the camera x angle." }
-Area_TurnCameraY = { addr = 0x8015BCA4, type = "func", source = "Turns the camera around the y axis." }
-Area_StepCameraY = { addr = 0x8015BD14, type = "func", source = "Steps the camera y angle." }
-Area_TurnCameraZ = { addr = 0x8015BDA0, type = "func", source = "Turns the camera around the z axis." }
-Area_StepCameraZ = { addr = 0x8015BE10, type = "func", source = "Steps the camera z angle." }
-Area_StepCameraAngle = { addr = 0x8015BEA0, type = "func", source = "Turns the camera angle over a number of frames." }
+Script_DispatchSelector = { addr = 0x8015BAC4, type = "func", source = "Dispatches the actor script selected by the selector, task mode, and current actor context." }
+Camera_TurnX = { addr = 0x8015BBA4, type = "func", source = "Turns the camera around the x axis." }
+Camera_StepX = { addr = 0x8015BC14, type = "func", source = "Steps the camera x angle." }
+Camera_TurnY = { addr = 0x8015BCA4, type = "func", source = "Turns the camera around the y axis." }
+Camera_StepY = { addr = 0x8015BD14, type = "func", source = "Steps the camera y angle." }
+Camera_TurnZ = { addr = 0x8015BDA0, type = "func", source = "Turns the camera around the z axis." }
+Camera_StepZ = { addr = 0x8015BE10, type = "func", source = "Steps the camera z angle." }
+Camera_StepAngle = { addr = 0x8015BEA0, type = "func", source = "Turns the camera angle over a number of frames." }
 Game_ClearScriptActive = { addr = 0x8015C058, type = "func", source = "Marks the script as inactive." }
 Game_SetScriptActive = { addr = 0x8015C088, type = "func", source = "Marks the script as active." }
 Party_ShowBattlers = { addr = 0x8015C0B8, type = "func", source = "Shows the party battlers." }
@@ -633,8 +633,8 @@ EMI_Init = { addr = 0x80161F58, type = "func", source = "CdInit loop, VSync(3), 
 EMI_LoadArchive = { addr = 0x80161FDC, type = "func", source = "Latch slot id, reset ring, install CD callbacks." }
 EMI_GetArchiveSector = { addr = 0x80162160, type = "func", source = "Returns the disc sector of an EMI file." }
 EMI_StartArchive = { addr = 0x80162178, type = "func", source = "Reset transfer counters, LBA to CdlLOC, arm the next CD step." }
-EMI_CdOnSync = { addr = 0x801621E8, type = "func", source = "CD sync callback installed by EMI_LoadArchive" }
-EMI_CdOnReady = { addr = 0x80162230, type = "func", source = "Handles a finished CD sector of the EMI stream." }
+CD_OnSync = { addr = 0x801621E8, type = "func", source = "CD sync callback installed by EMI_LoadArchive" }
+CD_OnReady = { addr = 0x80162230, type = "func", source = "Handles a finished CD sector of the EMI stream." }
 EMI_ReadToc = { addr = 0x80162500, type = "func", source = "MATH_TBL check and the entry sector offsets" }
 EMI_LoadToRam = { addr = 0x801625E4, type = "func", source = "Type 0, copy the payload to its destination." }
 EMI_LoadCompressed = { addr = 0x80162618, type = "func", source = "Types 1 and 2, queue the payload for the streaming ring." }
@@ -647,15 +647,15 @@ EMI_NextEntry = { addr = 0x80162B08, type = "func", source = "Starts the next re
 EMI_CopySector = { addr = 0x80162C14, type = "func", source = "Copy the next part of the CD sector to its destination." }
 EMI_EndArchive = { addr = 0x80162CD8, type = "func", source = "Ends the EMI stream." }
 EMI_IsReady = { addr = 0x80162D00, type = "func", source = "Loader state is ready." }
-EMI_CdUpdate = { addr = 0x80162D18, type = "func", source = "Runs the current CD step of the EMI loader." }
-EMI_CdIdle = { addr = 0x80162D9C, type = "func", source = "Loader modes 0 and 8, no-op." }
-EMI_CdSetSpeed = { addr = 0x80162DA4, type = "func", source = "Sets the CD speed for the EMI loader." }
-EMI_CdSeek = { addr = 0x80162E18, type = "func", source = "Mode 2, CdSeekP to the armed CdlLOC." }
-EMI_CdOnSeek = { addr = 0x80162E70, type = "func", source = "Mode 3, latch the seek result." }
-EMI_CdRead = { addr = 0x80162E98, type = "func", source = "Mode 4, CdlReadN from the armed CdlLOC." }
-EMI_CdOnRead = { addr = 0x80162F04, type = "func", source = "Finishes an EMI read." }
-EMI_CdPause = { addr = 0x80162F34, type = "func", source = "Mode 6, CdPause." }
-EMI_CdOnPause = { addr = 0x80162F88, type = "func", source = "Mode 7, latch the pause result and rearm." }
+CD_Update = { addr = 0x80162D18, type = "func", source = "Runs the current CD step of the EMI loader." }
+CD_Idle = { addr = 0x80162D9C, type = "func", source = "Loader modes 0 and 8, no-op." }
+CD_SetSpeed = { addr = 0x80162DA4, type = "func", source = "Sets the CD speed for the EMI loader." }
+CD_Seek = { addr = 0x80162E18, type = "func", source = "Mode 2, CdSeekP to the armed CdlLOC." }
+CD_OnSeek = { addr = 0x80162E70, type = "func", source = "Mode 3, latch the seek result." }
+CD_Read = { addr = 0x80162E98, type = "func", source = "Mode 4, CdlReadN from the armed CdlLOC." }
+CD_OnRead = { addr = 0x80162F04, type = "func", source = "Finishes an EMI read." }
+CD_Pause = { addr = 0x80162F34, type = "func", source = "Mode 6, CdPause." }
+CD_OnPause = { addr = 0x80162F88, type = "func", source = "Mode 7, latch the pause result and rearm." }
 EMI_Update = { addr = 0x80163010, type = "func", source = "Per frame, mode 1 streaming and mode 2 CD requests." }
 EMI_UpdateStream = { addr = 0x8016305C, type = "func", source = "Services the EMI stream." }
 EMI_DecompressSector = { addr = 0x80163238, type = "func", source = "Reads a sector of the EMI stream." }

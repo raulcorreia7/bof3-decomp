@@ -259,7 +259,7 @@ MATCH void func_801EFBEC(void) {
     g_Task->unk_29       = 4;
     g_Task->unk_2C.value = 0;
     g_Task->unk_2B       = 1;
-    Actor_SelectScript(0);
+    Script_Select(0);
     g_Task->unk_09 = D_801EFE34[g_Task->unk_04];
     g_Task->header.step += 1;
 }

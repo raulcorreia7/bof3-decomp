@@ -35,6 +35,6 @@ MATCH void func_8019E5D4(void) {
     }
 
     ACTOR_CLEAR_TINT();
-    Actor_SelectScript(sel + 0xB);
+    Script_Select(sel + 0xB);
     g_Task->header.step++;
 }

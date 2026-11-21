@@ -310,7 +310,7 @@ MATCH void func_801F038C(void) {
 MATCH void func_801F03EC(void) {
     g_Task->param.phase = 0;
     g_Task->unk_09      = 0;
-    Actor_SelectScript(3);
+    Script_Select(3);
     g_Task->header.step++;
 }
 

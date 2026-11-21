@@ -47,7 +47,7 @@ MATCH void func_801EEFB4(void) {
     g_Task->unk_29       = 3;
     g_Task->unk_2C.value = 0;
     g_Task->unk_2B       = flag;
-    Actor_SelectScript(0);
+    Script_Select(0);
     g_Task->unk_09 = 0x3C;
     g_Task->timer  = 0xFF;
     g_Task->header.step += 1;

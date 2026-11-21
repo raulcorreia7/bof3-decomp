@@ -135,7 +135,7 @@ MATCH void func_801EF1AC(void) {
         work               = g_Task;
         work->unk_2B       = 0;
         work->unk_2C.value = 0;
-        Actor_SelectScript(D_801EF9C0[g_Task->param.unk_0B]);
+        Script_Select(D_801EF9C0[g_Task->param.unk_0B]);
         g_Task->header.step += 1;
     }
 }

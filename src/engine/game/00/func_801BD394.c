@@ -44,7 +44,7 @@ MATCH void func_801BD394(void) {
         D_801CD1D8[g_EmiLoadedCharacterIndex & EMI_LOADED_INDEX_MASK]();
     }
     if (g_Game.current->u.field.mode.unsigned_value == 0) {
-        Actor_RequestScript(g_Task->direction);
+        Script_Request(g_Task->direction);
         g_Task->timer = 0;
         Party_ClearBattlerState(g_Task->unk_05);
         g_Task->header.mode  = 1;

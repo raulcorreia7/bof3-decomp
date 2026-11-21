@@ -13,7 +13,7 @@ NON_MATCHING void func_801F3514(void) {
 
     script = &D_80145EDB;
     if (g_Task->script_record != *script) {
-        Actor_RequestScript(*script);
+        Script_Request(*script);
         g_Task->script_record = *script;
     }
     if (D_80145E92[0] == 3) {

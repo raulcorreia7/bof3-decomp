@@ -9,11 +9,11 @@ MATCH void func_801F2F38(void) {
     u8        row;
     u8        col;
 
-    Area_SetCameraMatrix(scratch);
+    Camera_SetMatrix(scratch);
     point[0] = g_Game.members[g_Task->option_flags].pos.x.fixed;
     point[1] = g_Game.members[g_Task->option_flags].pos.y.fixed;
     point[2] = g_Game.members[g_Task->option_flags].pos.z.fixed;
-    Area_ProjectPoint(point, &screen);
+    Camera_ProjectPoint(point, &screen);
     D_801F651C = 0;
     pixels     = MEM_PTR(u16, AREA_WORK);
     dot        = AREA_TRAIL_DOTS;

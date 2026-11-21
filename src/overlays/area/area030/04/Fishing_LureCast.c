@@ -51,7 +51,7 @@ NON_MATCHING void Fishing_LureCast(void) {
     FISHING_STATE->counter_48   = 1;
 
     Area_SelectSceneRecord(g_FishingLureRow->unk_0C);
-    Actor_SelectScript(1);
+    Script_Select(1);
     index = Actor_FindFreeSpawned() & BYTE_MASK;
     if (index != GAME_NONE) {
         g_SpawnedActors[index].header.flags = 1;

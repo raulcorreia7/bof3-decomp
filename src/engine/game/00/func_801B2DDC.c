@@ -17,7 +17,7 @@ MATCH void func_801B2DDC(void) {
         Actor_RequestRoute(g_Task->direction);
     } else {
         work = g_Task;
-        Actor_RequestScript(((work->direction >> 1) + 0x10));
+        Script_Request(((work->direction >> 1) + 0x10));
     }
     value = FIELD(s16, sel, 0x4u);
     if (((value & 0x8000) != 0) && ((type = FIELD(u8, sel, 0x6u)) != GAME_NONE)) {

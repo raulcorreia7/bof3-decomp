@@ -45,7 +45,7 @@ MATCH void func_801EEEA8(void) {
     saved_work = g_Task;
     battler    = &g_Game.members[g_Battle.active_battler];
     g_Task     = battler;
-    Actor_RequestScript((battler->facing + 0x3C) & BYTE_MASK);
+    Script_Request((battler->facing + 0x3C) & BYTE_MASK);
     g_Task = saved_work;
     saved_work->unk_03 += 1;
 }
@@ -116,7 +116,7 @@ MATCH void func_801EF138(void) {
         GFX_LoadPalette((g_Task->slot << 6) + BATTLE_ACTION_BLOCK_TABLE, g_Battle.unk_D0[9]);
         func_801DDAB4(g_Game.members[g_Battle.active_battler].chr.status);
         GFX_UploadPaletteRows();
-        Actor_RequestScript((g_Task->facing + 4) & BYTE_MASK);
+        Script_Request((g_Task->facing + 4) & BYTE_MASK);
         g_Task = saved;
         saved->unk_03 += 1;
     }

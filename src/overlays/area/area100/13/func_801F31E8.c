@@ -12,14 +12,14 @@ MATCH void func_801F31E8(Pos3* pos, s32 height) {
     s32      shade;
     u8       i;
 
-    Area_SetCameraMatrix(camera);
+    Camera_SetMatrix(camera);
     angle    = 0;
     point[0] = pos->x + ((rcos(0) * 0x200) >> 4);
     point[1] = pos->y + ((rsin(0) * 0x200) >> 4);
     point[2] = pos->z;
-    Area_ProjectPoint(point, &inner);
+    Camera_ProjectPoint(point, &inner);
     point[2] = pos->z + height;
-    Area_ProjectPoint(point, &outer);
+    Camera_ProjectPoint(point, &outer);
     shade = ((g_FrameCount & 0x1) << 2) | 0x20;
     for (i = 0; i < AREA_RING_POINTS; i++) {
         last_inner = inner;
@@ -28,9 +28,9 @@ MATCH void func_801F31E8(Pos3* pos, s32 height) {
         point[0] = pos->x + ((rcos((u16)angle) * 0x200) >> 4);
         point[1] = pos->y + ((rsin((u16)angle) * 0x200) >> 4);
         point[2] = pos->z;
-        Area_ProjectPoint(point, &inner);
+        Camera_ProjectPoint(point, &inner);
         point[2] = pos->z + height;
-        Area_ProjectPoint(point, &outer);
+        Camera_ProjectPoint(point, &outer);
 
         SetDrawMode((DR_MODE*)g_GfxPrimCursor, 0, 1, GetTPage(TPAGE_DEPTH_4BIT, TPAGE_ABR_ADD, FONT_TPAGE_X, FONT_TPAGE_Y), 0);
         Area_AddCellPrim(point[0], point[1], 0, sizeof(DR_MODE));

@@ -28,7 +28,7 @@ MATCH void func_801E16B4(void) {
             } else {
                 g_Task->unk_09 = g_BattleCharacterStepIds[work->chr.character_id];
             }
-            Actor_RequestScript((g_Task->facing + 0x2C) & BYTE_MASK);
+            Script_Request((g_Task->facing + 0x2C) & BYTE_MASK);
             g_Task->header.step = g_Task->header.step + 1;
         } else {
             g_Task->header.mode = g_Task->header.mode + 1;

@@ -23,7 +23,7 @@ MATCH void Battle_RunAilmentActor(void) {
         g_Task->unk_27 = 0xFF;
         g_Task->timer  = 60;
         if (g_Task->param.unk_0B != id) {
-            Actor_SelectScript(s_BattleBattlerStepIds[id]);
+            Script_Select(s_BattleBattlerStepIds[id]);
             g_Task->param.unk_0B = id;
         }
     } else {

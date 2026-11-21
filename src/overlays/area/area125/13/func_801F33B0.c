@@ -8,7 +8,7 @@ MATCH s32 func_801F33B0(void) {
     u8              i;
     s32             y;
 
-    Area_SetCameraMatrix(scratch);
+    Camera_SetMatrix(scratch);
     handled = 0;
     sprite  = MEM_PTR(AreaQuadSprite, AREA_WORK);
     i       = 0;

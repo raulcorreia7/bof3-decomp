@@ -10,7 +10,7 @@ MATCH s32 func_801F2EF0(void) {
 
     active     = 0;
     D_801F5310 = 0;
-    Area_SetCameraMatrix(&camera);
+    Camera_SetMatrix(&camera);
     spark = MEM_PTR(SpriteSpark, AREA_WORK);
     i     = 0;
     do {

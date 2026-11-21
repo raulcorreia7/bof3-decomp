@@ -618,7 +618,7 @@ extern const struct MenuPanelSteps g_MessageChoiceSteps;
 /* D_80149B64 */
 extern const struct MenuPanelSteps g_MessagePresetSteps;
 extern const VECTOR                D_80149BF0;
-extern const u32                   g_EmiCdSteps[];
+extern const u32                   g_CdSteps[];
 extern const EmiRingSteps          g_EmiRingSteps;
 extern const char                  D_80149F9C[];
 extern const char                  D_80149FAC[];

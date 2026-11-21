@@ -12,7 +12,7 @@ MATCH void func_801D6CB0(void) {
         if (D_801E207C[FISHING_STATE->step_index].animation_id == -1) {
             FISHING_STATE->step_index = D_801E207C[FISHING_STATE->step_index].next_step;
         }
-        Actor_RequestScript(D_801E207C[FISHING_STATE->step_index].animation_id & 0x7F);
+        Script_Request(D_801E207C[FISHING_STATE->step_index].animation_id & 0x7F);
         FISHING_STATE->step_timer = D_801E207C[FISHING_STATE->step_index].next_step;
         FISHING_STATE->step_index = FISHING_STATE->step_index + 1;
     } else {

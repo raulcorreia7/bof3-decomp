@@ -676,7 +676,7 @@ MATCH void func_801F0D6C(void) {
     work->unk_2C.value = 0;
     g_Task->unk_09     = 0;
     g_Task->header.step += 1;
-    Actor_SelectScript(0);
+    Script_Select(0);
     Area_AddGridActor();
 }
 

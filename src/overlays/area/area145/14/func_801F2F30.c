@@ -10,13 +10,13 @@ MATCH void func_801F2F30(s32* first, s32* second) {
     s32      delta;
     u8       i;
 
-    Area_SetCameraMatrix(&camera);
+    Camera_SetMatrix(&camera);
     tpage = GetTPage(TPAGE_DEPTH_4BIT, TPAGE_ABR_ADD, FONT_TPAGE_X, FONT_TPAGE_Y);
     GFX_ADD_DITHERED_DRAW_MODE(GFX_LAYER_UI, tpage);
 
     memcpy(&vertex, first, sizeof(vertex));
     vz = vertex.vz;
-    Area_ProjectPoint(&vertex.vx, &screen);
+    Camera_ProjectPoint(&vertex.vx, &screen);
 
     i = 1;
     do {
@@ -39,7 +39,7 @@ MATCH void func_801F2F30(s32* first, s32* second) {
         if (i < 16) {
             vertex.vz = vertex.vz - (0x800000 - ((rand() & 0xFFF) << 12));
         }
-        Area_ProjectPoint(&vertex.vx, &screen);
+        Camera_ProjectPoint(&vertex.vx, &screen);
         prim->x1 = screen.vx;
         prim->y1 = screen.vy;
         setRGB0(prim, 0x80, 0x80, 0x80);

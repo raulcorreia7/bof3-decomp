@@ -363,7 +363,7 @@ MATCH void func_801F0540(void) {
     g_Task->unk_29       = 3;
     g_Task->unk_2C.value = 0;
     g_Task->unk_2B       = 1;
-    Actor_SelectScript(0U);
+    Script_Select(0U);
     g_Task->unk_09 = 0;
     g_Task->header.step += 1;
 }

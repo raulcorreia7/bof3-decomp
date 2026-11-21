@@ -7,7 +7,7 @@ MATCH void func_80199230(void) {
     func_8015A7E8();
     Party_RunFrame();
     Actor_RunInteractions();
-    Area_UpdateCamera();
+    Camera_Update();
     Area_UpdateParty();
     func_801BDAB8();
     func_801A0514();

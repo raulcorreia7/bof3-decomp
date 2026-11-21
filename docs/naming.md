@@ -50,36 +50,33 @@ capitals, as SDL writes them; game tags are words. Every symbol carries one.
 
 **Caller test.** A tag names a layer (`SYS_ GFX_ SND_ EMI_ CD_ INPUT_ Actor_ Script_ Menu_ Message_
 UI_`) only when several parts call the code. Code one part calls takes that part's tag, wherever its
-file sits. A compound tag (`FairyCasino_`) names a part inside a part.
+file sits. A compound tag (`FairyCasino_`) names a part inside a part. The tag is the module the function is linked in and its header, checked against the callers; a subject in the arguments (party, actor, area) never decides it.
 
 Engine modules (`src/engine/<module>`):
 
-| Module                     | Tag                  | Folders                            |
-| -------------------------- | -------------------- | ---------------------------------- |
-| boot, threads, frame, bits | `SYS_`               | `sys/boot`, `sys/flags`            |
-| the game's own math        | `MATH_`              | `sys/math`                         |
-| pad                        | `INPUT_`             | `input/pad`                        |
-| disc drive                 | `CD_`                | `cd/drive`                         |
-| LZ77 decoder               | `LZ77_`              | `cd/lz77`                          |
-| EMI archive loader         | `EMI_`               | `emi/loader`                       |
-| graphics, fades, palettes  | `GFX_`               | `gfx/*`                            |
-| sound, music, SE, XA       | `SND_`               | `sound/*`                          |
-| actor records and motion   | `Actor_`             | `actor/task`, `actor/motion`       |
-| actor script machine       | `Script_`            | `actor/script`, `actor/ops`        |
-| map renderer               | `Map_`               | `field/map`                        |
-| camera                     | `Camera_`            | `field/camera`                     |
-| cell heights and blocking  | `Collision_`         | `field/collision`                  |
-| random encounters          | `Encounter_`         | `field/encounter`                  |
-| field actions              | `FieldAction_`       | `field/action`                     |
-| world-map actors           | `WorldMap_`          | `field/world`                      |
-| party, characters, items   | `Party_ Char_ Item_` | `party/*`                          |
-| game loop and modes        | `Game_`              | `state/mode`, `state/progress`     |
-| scene host                 | `Scene_`             | `state/scene`                      |
-| text, fonts, windows       | `UI_`                | `ui/text`                          |
-| message window and answers | `Message_`           | `ui/message`, `ui/message_answers` |
-| menu panels and kit        | `Menu_`              | `ui/menu`                          |
-| memory card, save slots    | `SAVE_`              | `overlays/menu/shared`             |
-| unnamed files              | none                 | `slus`, `game/00`                  |
+| Module                          | Tag                  | Folders                            |
+| ------------------------------- | -------------------- | ---------------------------------- |
+| boot, threads, frame, bits      | `SYS_`               | `sys/boot`, `sys/flags`            |
+| the game's own math             | `MATH_`              | `sys/math`                         |
+| pad                             | `INPUT_`             | `input/pad`                        |
+| disc drive                      | `CD_`                | `cd/drive`                         |
+| LZ77 decoder                    | `LZ77_`              | `cd/lz77`                          |
+| EMI archive loader              | `EMI_`               | `emi/loader`                       |
+| graphics, fades, palettes       | `GFX_`               | `gfx/*`                            |
+| sound, music, SE, XA            | `SND_`               | `sound/*`                          |
+| actor records and motion        | `Actor_`             | `actor/task`, `actor/motion`       |
+| actor script machine            | `Script_`            | `actor/script`, `actor/ops`        |
+| map, cells, heights, encounters | `Area_ AreaAction_`  | `area/*`                           |
+| camera                          | `Camera_`            | `camera`                           |
+| world-map actors                | `WorldMap_`          | `worldmap`                         |
+| party, characters, items        | `Party_ Char_ Item_` | `party/*`                          |
+| game loop and modes             | `Game_`              | `state/mode`, `state/progress`     |
+| scene host                      | `Scene_`             | `state/scene`                      |
+| text, fonts, windows            | `UI_`                | `ui/text`                          |
+| message window and answers      | `Message_`           | `ui/message`, `ui/message_answers` |
+| menu panels and kit             | `Menu_`              | `ui/menu`                          |
+| memory card, save slots         | `SAVE_`              | `overlays/menu/shared`             |
+| unnamed files                   | none                 | `slus`, `game/00`                  |
 
 Game parts (`src/overlays`, `src/logo`):
 
@@ -491,7 +488,7 @@ for "Faerie". Retail text keeps its spelling (`ITEM_FAERIE_TIARA`, "Faerie Tiara
 theirs (`CdlPause`, `SpuSetKey`).
 
 Acronyms follow the SDK library their value belongs to, and are capitals otherwise. The drive is
-`Cd` (libcd: `SYS_ReadCd`, `g_EmiCdSteps`), the sound library is `Snd` in a type (`SndBank`,
+`Cd` (libcd: `SYS_ReadCd`, `g_CdSteps`), the sound library is `Snd` in a type (`SndBank`,
 libsnd's `SndVolume`), and `XA`, `HP`, `AP`, `BGM` and `SE` are capitals (`SND_IsXAIdle`,
 `SND_XAStateIdle`). `SE` is the disc's word for a sound effect, as `BGM` is for music
 (`BIN/BATTLE/BATL_SE`, `COMN_SE`): `SND_PlaySE(u16 se_id)`.

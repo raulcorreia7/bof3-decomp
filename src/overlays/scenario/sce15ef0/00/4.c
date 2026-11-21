@@ -133,12 +133,12 @@ NON_MATCHING void func_801D1220(s32 value) {
         prim = (POLY_F4*)g_GfxPrimCursor;
         SetPolyF4(prim);
         SetSemiTrans(prim, 1);
-        Area_ProjectPoint(front, (DVECTOR*)&prim->x0);
-        Area_ProjectPoint(back, (DVECTOR*)&prim->x1);
+        Camera_ProjectPoint(front, (DVECTOR*)&prim->x0);
+        Camera_ProjectPoint(back, (DVECTOR*)&prim->x1);
         front[0] += TO_COORD(1);
         back[0] += TO_COORD(1);
-        Area_ProjectPoint(front, (DVECTOR*)&prim->x2);
-        Area_ProjectPoint(back, (DVECTOR*)&prim->x3);
+        Camera_ProjectPoint(front, (DVECTOR*)&prim->x2);
+        Camera_ProjectPoint(back, (DVECTOR*)&prim->x3);
         setRGB0(prim, value, value, value);
         GFX_AddPrim(GFX_LAYER_UI, sizeof(POLY_F4));
         i++;
@@ -161,12 +161,12 @@ MATCH void func_801D1370(s32* first, s32* second, s16 width) {
     s16      radius2;
 
     GFX_AddDitheredDrawMode(3, GetTPage(TPAGE_DEPTH_4BIT, TPAGE_ABR_ADD, FONT_TPAGE_X, FONT_TPAGE_Y));
-    Area_SetCameraMatrix(&camera);
+    Camera_SetMatrix(&camera);
     line = (LINE_F2*)g_GfxPrimCursor;
     SetLineF2(line);
     SetSemiTrans(line, 0);
-    Area_ProjectPoint(first, (DVECTOR*)&line->x0);
-    Area_ProjectPoint(second, (DVECTOR*)&line->x1);
+    Camera_ProjectPoint(first, (DVECTOR*)&line->x0);
+    Camera_ProjectPoint(second, (DVECTOR*)&line->x1);
     setRGB0(line, 64, 0, 0);
     GFX_AddPrim(GFX_LAYER_EFFECT, sizeof(LINE_F2));
     angle   = ratan2(line->y1 - line->y0, line->x1 - line->x0);
@@ -265,12 +265,12 @@ MATCH void func_801D1C1C(s32* from, s32* to, u8 level) {
     prim = (POLY_G4*)g_GfxPrimCursor;
     SetPolyG4(prim);
     SetSemiTrans(prim, 1);
-    Area_ProjectPoint(from, &projected);
+    Camera_ProjectPoint(from, &projected);
     prim->x0 = projected.vx + 1;
     prim->y0 = projected.vy + 2;
     prim->x1 = projected.vx;
     prim->y1 = projected.vy;
-    Area_ProjectPoint(to, &projected);
+    Camera_ProjectPoint(to, &projected);
     prim->x2 = projected.vx - 1;
     prim->y2 = projected.vy - 2;
     prim->x3 = projected.vx;
@@ -284,12 +284,12 @@ MATCH void func_801D1C1C(s32* from, s32* to, u8 level) {
     prim = (POLY_G4*)g_GfxPrimCursor;
     SetPolyG4(prim);
     SetSemiTrans(prim, 1);
-    Area_ProjectPoint(from, &projected);
+    Camera_ProjectPoint(from, &projected);
     prim->x0 = projected.vx;
     prim->y0 = projected.vy;
     prim->x1 = projected.vx + 1;
     prim->y1 = projected.vy + 2;
-    Area_ProjectPoint(to, &projected);
+    Camera_ProjectPoint(to, &projected);
     prim->x2 = projected.vx;
     prim->y2 = projected.vy;
     prim->x3 = projected.vx - 1;
@@ -311,7 +311,7 @@ MATCH void func_801D1C1C(s32* from, s32* to, u8 level) {
         if (current.y < to[1]) {
             break;
         }
-        Area_ProjectPoint(&current.x, &projected);
+        Camera_ProjectPoint(&current.x, &projected);
         segment = (TILE_1*)g_GfxPrimCursor;
         SetTile1(segment);
         SetSemiTrans(segment, 1);

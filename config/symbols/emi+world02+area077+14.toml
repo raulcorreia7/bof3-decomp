@@ -6,6 +6,6 @@ Area_InitSpin = { addr = 0x801F4A68, type = "func", source = "Starts one spin-ef
 Area_CopyPaletteRow = { addr = 0x801F529C, type = "func", source = "Copies one row of colours within the area palette work buffer." }
 Message_SetAnswerMessage = { addr = 0x801F59DC, type = "func", source = "Stores the message id the answer table D_801F6B1C holds for the menu choice g_MessageChoice in g_MessageRequest." }
 Area_TakeFlameChrysm = { addr = 0x801F5BAC, type = "func", source = "Removes one Flame Chrysm from the inventory through Item_Remove; no C caller, it is reached through the area077 script tables." }
-Area_AddCameraOffsetY20 = { addr = 0x801F5DC0, type = "func", source = "Adds 0x14 to g_AreaCameraOffsetY, the Y shift Area_SetCameraMatrix adds to the projected camera translation, and sets g_AreaCameraRefreshCount to 2 so the camera refreshes for two frames." }
+Area_AddCameraOffsetY20 = { addr = 0x801F5DC0, type = "func", source = "Adds 0x14 to g_AreaCameraOffsetY, the Y shift Camera_SetMatrix adds to the projected camera translation, and sets g_AreaCameraRefreshCount to 2 so the camera refreshes for two frames." }
 Area_ResetCameraOffsetY = { addr = 0x801F5DE8, type = "func", source = "Zeroes g_AreaCameraOffsetY, the Y shift of the camera, and sets g_AreaCameraRefreshCount to 2 so the camera refreshes for two frames." }
 Actor_InitSlot = { addr = 0x801F61F0, type = "func", source = "finds a free actor slot and sets its flags and type (called by func_801F6084 and func_801F60A4)" }

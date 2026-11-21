@@ -217,8 +217,8 @@ MATCH void GFX_DrawColorFan(s32* pos, s16 origin, s32 flags) {
     s32      i;
 
     GFX_AddDitheredDrawMode(2u, GetTPage(TPAGE_DEPTH_4BIT, TPAGE_ABR_ADD, 0x2C0, 0x100));
-    Area_SetCameraMatrix(&camera);
-    Area_ProjectPoint(pos, &screen);
+    Camera_SetMatrix(&camera);
+    Camera_ProjectPoint(pos, &screen);
     size.vx = size.vy = origin;
     Game_ProjectWorldPoint(pos, &size, &scale);
     scale.vx += g_FrameCount & 1;
@@ -256,12 +256,12 @@ MATCH void func_801D1678(s32* from, s32* to, u8 intensity) {
     prim = (POLY_G4*)g_GfxPrimCursor;
     SetPolyG4(prim);
     SetSemiTrans(prim, 1);
-    Area_ProjectPoint(from, &projected);
+    Camera_ProjectPoint(from, &projected);
     prim->x0 = projected.vx + 1;
     prim->y0 = projected.vy - 1;
     prim->x1 = projected.vx;
     prim->y1 = projected.vy;
-    Area_ProjectPoint(to, &projected);
+    Camera_ProjectPoint(to, &projected);
     prim->x2 = projected.vx + 1;
     prim->y2 = projected.vy - 1;
     prim->x3 = projected.vx;
@@ -275,12 +275,12 @@ MATCH void func_801D1678(s32* from, s32* to, u8 intensity) {
     prim = (POLY_G4*)g_GfxPrimCursor;
     SetPolyG4(prim);
     SetSemiTrans(prim, 1);
-    Area_ProjectPoint(from, &projected);
+    Camera_ProjectPoint(from, &projected);
     prim->x0 = projected.vx;
     prim->y0 = projected.vy;
     prim->x1 = projected.vx - 1;
     prim->y1 = projected.vy + 1;
-    Area_ProjectPoint(to, &projected);
+    Camera_ProjectPoint(to, &projected);
     prim->x2 = projected.vx;
     prim->y2 = projected.vy;
     prim->x3 = projected.vx - 1;
@@ -299,7 +299,7 @@ MATCH void func_801D1678(s32* from, s32* to, u8 intensity) {
     current.vy = to[1] + step.vy * phase;
     current.vz = to[2] + step.vz * phase;
     while (from[0] < current.vx) {
-        Area_ProjectPoint(&current.vx, &projected);
+        Camera_ProjectPoint(&current.vx, &projected);
         segment = (TILE*)g_GfxPrimCursor;
         SetTile1(segment);
         SetSemiTrans(segment, 1);
@@ -350,7 +350,7 @@ MATCH s32 func_801D1A60(void) {
     AreaSpawnSlot* slot;
 
     alive = 0;
-    Area_SetCameraMatrix(&matrix);
+    Camera_SetMatrix(&matrix);
     slot = D_801D39A8;
     for (i = 0; i < EFFECT_SLOT_COUNT; slot++, i++) {
         if (slot->active != 0) {
@@ -380,7 +380,7 @@ MATCH void func_801D1CD4(const SpinEffect* spin) {
 
     SetPolyG3(primitive);
     SetSemiTrans(primitive, 1);
-    Area_ProjectPoint(&work->origin.x, POLY_XY(primitive, 0));
+    Camera_ProjectPoint(&work->origin.x, POLY_XY(primitive, 0));
 
     point[0] = ((rcos(work->spin_angle) * work->vertex_a.vx - rsin(work->spin_angle) * work->vertex_a.vy) >> 8) * work->scale;
     point[1] = ((rsin(work->spin_angle) * work->vertex_a.vx + rcos(work->spin_angle) * work->vertex_a.vy) >> 8) * work->scale;
@@ -388,7 +388,7 @@ MATCH void func_801D1CD4(const SpinEffect* spin) {
     point[0] += work->origin.x;
     point[1] += work->origin.y;
     point[2] += work->origin.z;
-    Area_ProjectPoint(point, POLY_XY(primitive, 1));
+    Camera_ProjectPoint(point, POLY_XY(primitive, 1));
 
     point[0] = ((rcos(work->spin_angle) * work->vertex_b.vx - rsin(work->spin_angle) * work->vertex_b.vy) >> 8) * work->scale;
     point[1] = ((rsin(work->spin_angle) * work->vertex_b.vx + rcos(work->spin_angle) * work->vertex_b.vy) >> 8) * work->scale;
@@ -396,7 +396,7 @@ MATCH void func_801D1CD4(const SpinEffect* spin) {
     point[0] += work->origin.x;
     point[1] += work->origin.y;
     point[2] += work->origin.z;
-    Area_ProjectPoint(point, POLY_XY(primitive, 2));
+    Camera_ProjectPoint(point, POLY_XY(primitive, 2));
 
     fade = work->fade;
     tmp  = fade;
@@ -425,7 +425,7 @@ MATCH void func_801D2088(void) {
     s32         i;
 
     GFX_AddDitheredDrawMode(2, GetTPage(TPAGE_DEPTH_4BIT, TPAGE_ABR_ADD, 0x380, 0x100));
-    Area_SetCameraMatrix(&matrix);
+    Camera_SetMatrix(&matrix);
     spin  = g_WorldSpins;
     i     = 0;
     angle = &spin->spin_angle;
@@ -482,10 +482,10 @@ MATCH void func_801D21B4(void) {
         g_Task = actor;
         if (actor->active_flags & 1) {
             if (actor->unk_2C == 0) {
-                Actor_BeginScript(0x4D, 0x1C);
+                Script_Begin(0x4D, 0x1C);
                 g_Task->mirror = 0;
             } else {
-                Actor_BeginScript(0x50, 0x24);
+                Script_Begin(0x50, 0x24);
             }
         }
         Area_AddGridActor();
@@ -528,11 +528,11 @@ NON_MATCHING void func_801D2474(void) {
     u8        col;
     u8        step;
 
-    Area_SetCameraMatrix(&matrix);
+    Camera_SetMatrix(&matrix);
     pos[0] = ((Actor*)g_Task->unk_4C)->pos.x.fixed;
     pos[1] = ((Actor*)g_Task->unk_4C)->pos.y.fixed;
     pos[2] = ((Actor*)g_Task->unk_4C)->pos.z.fixed;
-    Area_ProjectPoint(pos, &screen);
+    Camera_ProjectPoint(pos, &screen);
     for (row = (D_801D393C[D_801D40AC].h >> 1) * g_Task->timer; row < (D_801D393C[D_801D40AC].h >> 1) * (g_Task->timer + 1); row++) {
         for (col = 0; col < D_801D393C[D_801D40AC].w; col++) {
             if (*(u16*)D_801D40B0 != 0) {
@@ -775,7 +775,7 @@ MATCH void func_801D2E30(void) {
             actor->active_flags |= 0x88;
             parent = g_Task;
             g_Task = actor;
-            Actor_SelectScript(7);
+            Script_Select(7);
             Area_AddGridActor();
             func_80196070();
             g_Task        = parent;
@@ -816,11 +816,11 @@ NON_MATCHING void func_801D30AC(void) {
     u8        row;
     u8        col;
 
-    Area_SetCameraMatrix(&matrix);
+    Camera_SetMatrix(&matrix);
     pos[0] = ((Actor*)g_Task->unk_4C)->pos.x.fixed;
     pos[1] = ((Actor*)g_Task->unk_4C)->pos.y.fixed;
     pos[2] = ((Actor*)g_Task->unk_4C)->pos.z.fixed;
-    Area_ProjectPoint(pos, &screen);
+    Camera_ProjectPoint(pos, &screen);
     for (row = (D_801D393C[D_801D40AC].h >> 1) * g_Task->timer; row < (D_801D393C[D_801D40AC].h >> 1) * (g_Task->timer + 1); row++) {
         for (col = 0; col < D_801D393C[D_801D40AC].w; col++) {
             if (*(u16*)D_801D40B0 != 0) {
@@ -941,13 +941,13 @@ MATCH void func_801D36BC(s32* point, s32 orange_radius, s32 black_radius) {
 
     tpage = GetTPage(TPAGE_DEPTH_4BIT, TPAGE_ABR_ADD, 0x2C0, 0x100);
     GFX_ADD_LAYER_DRAW_MODE(GFX_LAYER_EFFECT_FRONT, tpage);
-    Area_SetCameraMatrix(&camera);
+    Camera_SetMatrix(&camera);
     vertex.vx = point[0] + (orange_radius << 4);
     vertex.vy = point[1];
     vertex.vz = point[2];
-    Area_ProjectPoint(&vertex.vx, &inner);
+    Camera_ProjectPoint(&vertex.vx, &inner);
     vertex.vx = point[0] + (black_radius << 4);
-    Area_ProjectPoint(&vertex.vx, &outer);
+    Camera_ProjectPoint(&vertex.vx, &outer);
     turn = 0;
     i    = 0;
     do {
@@ -960,10 +960,10 @@ MATCH void func_801D36BC(s32* point, s32 orange_radius, s32 black_radius) {
         angle     = turn;
         vertex.vx = point[0] + ((orange_radius * rcos(angle)) >> 8);
         vertex.vy = point[1] + ((orange_radius * rsin(angle)) >> 8);
-        Area_ProjectPoint(&vertex.vx, &inner);
+        Camera_ProjectPoint(&vertex.vx, &inner);
         vertex.vx = point[0] + ((black_radius * rcos(angle)) >> 8);
         vertex.vy = point[1] + ((black_radius * rsin(angle)) >> 8);
-        Area_ProjectPoint(&vertex.vx, &outer);
+        Camera_ProjectPoint(&vertex.vx, &outer);
         prim->x2 = inner.vx;
         prim->y2 = inner.vy;
         prim->x3 = outer.vx;

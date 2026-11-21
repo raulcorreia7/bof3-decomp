@@ -37,9 +37,9 @@ MATCH void func_801F395C(void) {
     D_801F44A4->active = 1;
     D_801F44A4->life   = 0x20;
 
-    Area_SetCameraMatrix(scratch);
-    Area_ProjectPoint(&D_801F44A4->origin.x.fixed, &D_801F44A4->origin_trail[0]);
-    Area_ProjectPoint(&D_801F44A4->pos.x.fixed, &D_801F44A4->pos_trail[0]);
+    Camera_SetMatrix(scratch);
+    Camera_ProjectPoint(&D_801F44A4->origin.x.fixed, &D_801F44A4->origin_trail[0]);
+    Camera_ProjectPoint(&D_801F44A4->pos.x.fixed, &D_801F44A4->pos_trail[0]);
     for (i = 1; i < AREA_SPARK_TRAIL_POINTS; i++) {
         D_801F44A4->origin_trail[i] = D_801F44A4->origin_trail[0];
         D_801F44A4->pos_trail[i]    = D_801F44A4->pos_trail[0];

@@ -8,7 +8,7 @@ MATCH void func_801F3468(AreaRow* row) {
 
     GFX_SET_DRAW_MODE(GetTPage(TPAGE_DEPTH_4BIT, TPAGE_ABR_ADD, 0x380, 0x100));
     Area_AddCellPrim(row->x, row->z, 0, 0xC);
-    Area_ProjectPoint(&row->x, (DVECTOR*)&screen[0]);
+    Camera_ProjectPoint(&row->x, (DVECTOR*)&screen[0]);
 
     dot = (TILE_1*)g_GfxPrimCursor;
     SetTile1(dot);

@@ -10,7 +10,7 @@ MATCH s32 func_801F49A0(void) {
     /* FAKE: retail reserves 16 bytes no local here uses. */
     FAKE_STACK_PADS(u8, 16);
 
-    Area_SetCameraMatrix(&matrix);
+    Camera_SetMatrix(&matrix);
     found = 0;
     work  = (AreaQuadSprite*)AREA_WORK;
     i     = 0;

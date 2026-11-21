@@ -42,7 +42,7 @@ MATCH void Actor_StartFlying(void) {
     COORD_INT(scratch->pos.y) = y;
     g_Task->header.mode++;
 
-    Actor_SelectScript(g_FlockScript[g_Task->direction][0]);
+    Script_Select(g_FlockScript[g_Task->direction][0]);
 
     g_Task->mirror = g_FlockScript[g_Task->direction][1];
     Area_AddGridActor();

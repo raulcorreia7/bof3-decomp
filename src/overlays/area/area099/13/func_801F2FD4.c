@@ -24,7 +24,7 @@ NON_MATCHING void func_801F2FD4(void) {
     COORD_INT(scratch->pos.z) += scratch->vz >> 8;
     scratch->vz = vz - 0x700;
     if (vz > 0 && g_Task->vz < 0) {
-        Actor_RequestScript(0x51);
+        Script_Request(0x51);
     }
     check = g_Task;
     if (check->unk_0A == 0) {

@@ -27,6 +27,6 @@ MATCH void Battle_StartPoseActor(void) {
     }
     g_Task->header.mode = g_Task->header.mode + 1;
     table               = D_801EB4B0 + (g_Task->unk_07 << 1);
-    Actor_SelectScript(table[g_Task->facing >> 1]);
+    Script_Select(table[g_Task->facing >> 1]);
     Area_AddActor();
 }

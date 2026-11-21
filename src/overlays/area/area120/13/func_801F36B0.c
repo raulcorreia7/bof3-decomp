@@ -6,7 +6,7 @@ MATCH u8 func_801F36B0(void) {
     u16      i;
     u8       handled;
 
-    Area_SetCameraMatrix(scratch);
+    Camera_SetMatrix(scratch);
 
     handled = 0;
     row     = MEM_PTR(AreaRow, AREA_WORK);
