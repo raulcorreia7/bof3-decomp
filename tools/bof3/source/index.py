@@ -17,6 +17,7 @@ from concurrent.futures import ThreadPoolExecutor
 from dataclasses import dataclass
 from pathlib import Path
 
+from bof3.errors import MissingInputError, UnknownFunctionError
 from bof3.source.ctext import read
 
 CACHE = "build/func_index.json.gz"
@@ -146,7 +147,9 @@ def load_index(root: Path, rebuild: bool = False) -> list[Func]:
     cache = root / CACHE
     elfs = sorted((root / "build/meson").glob("*.elf"))
     if not elfs:
-        raise SystemExit("index: no built images. Run: meson compile -C build/meson")
+        raise MissingInputError(
+            "index: no built images. Run: meson compile -C build/meson"
+        )
     if (
         rebuild
         or not cache.is_file()
@@ -169,12 +172,12 @@ def load_index(root: Path, rebuild: bool = False) -> list[Func]:
 def find(funcs: list[Func], spec: str) -> Func:
     """Resolve ``TARGET@NAME`` or ``TARGET@0xADDRESS`` to one function."""
     if "@" not in spec:
-        raise SystemExit(f"{spec}: write TARGET@NAME or TARGET@0xADDRESS")
+        raise UnknownFunctionError(f"{spec}: write TARGET@NAME or TARGET@0xADDRESS")
     image, _, ident = spec.partition("@")
     for f in funcs:
         if f.image == image and (f.name == ident or _same_address(f, ident)):
             return f
-    raise SystemExit(f"not in the index: {spec}")
+    raise UnknownFunctionError(f"not in the index: {spec}")
 
 
 def _same_address(f: Func, ident: str) -> bool:

@@ -22,6 +22,7 @@ import subprocess
 import tempfile
 from pathlib import Path
 
+from bof3.adapters.cli import run_main
 from bof3.source.index import CACHE, OBJDUMP, Func, find, load_index, opcode_string
 
 ROOT = Path(__file__).resolve().parent.parent
@@ -213,4 +214,4 @@ def main(argv: list[str] | None = None) -> int:
 
 
 if __name__ == "__main__":
-    raise SystemExit(main())
+    raise SystemExit(run_main(main))

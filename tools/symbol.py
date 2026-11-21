@@ -160,6 +160,7 @@ import tempfile
 from dataclasses import dataclass
 from pathlib import Path
 
+from bof3.adapters.cli import run_main
 from bof3.link import symbols
 from bof3.resolve.ids import source_folder
 from bof3.source import asmtext, ctext, symtab
@@ -6439,4 +6440,4 @@ def main(argv: list[str] | None = None) -> int:
 
 
 if __name__ == "__main__":
-    raise SystemExit(main())
+    raise SystemExit(run_main(main))

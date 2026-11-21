@@ -34,6 +34,7 @@ import m2c_sweep
 import template_diff
 import template_try
 import try_body
+from bof3.adapters.cli import run_main
 from bof3.source import hints
 from bof3.source.ctext import read
 from bof3.source.index import Func, find, load_index
@@ -153,4 +154,4 @@ def main(argv: list[str] | None = None) -> int:
 
 
 if __name__ == "__main__":
-    raise SystemExit(main())
+    raise SystemExit(run_main(main))

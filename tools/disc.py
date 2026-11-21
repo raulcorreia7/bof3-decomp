@@ -18,6 +18,7 @@ import sys
 import tempfile
 from pathlib import Path
 
+from bof3.adapters.cli import run_main
 from bof3.core import disc
 
 ROOT = Path(__file__).resolve().parents[1]
@@ -144,4 +145,4 @@ def main(argv: list[str] | None = None) -> int:
 
 
 if __name__ == "__main__":
-    raise SystemExit(main())
+    raise SystemExit(run_main(main))

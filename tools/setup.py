@@ -15,6 +15,7 @@ import subprocess
 import sys
 from pathlib import Path
 
+from bof3.adapters.cli import run_main
 from bof3.core import disc
 from bof3.core.paths import BUILD
 from bof3.emi.catalog import materialize_reviewed_targets
@@ -116,7 +117,7 @@ def main(argv: list[str] | None = None) -> int:
 
 if __name__ == "__main__":
     try:
-        raise SystemExit(main())
+        raise SystemExit(run_main(main))
     except subprocess.CalledProcessError as error:
         command = " ".join(str(part) for part in error.cmd[:3])
         sys.exit(

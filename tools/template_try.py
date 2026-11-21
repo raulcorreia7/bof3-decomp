@@ -28,6 +28,7 @@ from pathlib import Path
 
 import template_diff
 import try_body
+from bof3.adapters.cli import run_main
 from bof3.source.ctext import find_definition, read
 from bof3.source.index import Func, find, load_index
 from bof3.source.remap import (
@@ -184,4 +185,4 @@ def main(argv: list[str] | None = None) -> int:
 
 
 if __name__ == "__main__":
-    raise SystemExit(main())
+    raise SystemExit(run_main(main))
