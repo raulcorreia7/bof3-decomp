@@ -41,7 +41,7 @@
 #include "engine/ui/text/text.h"
 #include "engine/ui/message/message.h"
 #include "engine/ui/menu/menu.h"
-#include "engine/field/map/map.h"
+#include "engine/area/map/map.h"
 #include "engine/gfx/palette/palette.h"
 #include "engine/gfx/prim/prim.h"
 

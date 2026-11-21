@@ -4,8 +4,8 @@
 #include "types.h"
 #include "gfx/prim.h"
 #include "slus/part.h"
-#include "engine/field/collision/collision.h"
-#include "engine/field/map/map.h"
-#include "engine/field/camera/camera.h"
+#include "engine/area/collision/collision.h"
+#include "engine/area/map/map.h"
+#include "engine/camera/camera.h"
 
 #endif

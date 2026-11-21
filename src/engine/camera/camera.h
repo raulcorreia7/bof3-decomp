@@ -1,5 +1,5 @@
-#ifndef OVERLAY_FIELD_CAMERA_H
-#define OVERLAY_FIELD_CAMERA_H
+#ifndef OVERLAY_CAMERA_H
+#define OVERLAY_CAMERA_H
 
 #include "types.h"
 #include "psx/psyq.h"
@@ -24,8 +24,8 @@ void  Area_ProjectPoint(s32* pos, DVECTOR* screen_xy);
 #endif
 
 /* Declarations of the executable and game/00 sources: an overlay that calls these without a prototype compiles the call differently, so they are visible only after ENGINE_LOCAL_DECLS. */
-#if defined(ENGINE_LOCAL_DECLS) && !defined(OVERLAY_FIELD_CAMERA_H_LOCAL)
-#define OVERLAY_FIELD_CAMERA_H_LOCAL
+#if defined(ENGINE_LOCAL_DECLS) && !defined(OVERLAY_CAMERA_H_LOCAL)
+#define OVERLAY_CAMERA_H_LOCAL
 
 /* func_801C7244 */
 void Area_SetEncounterCamera(s32 mode);

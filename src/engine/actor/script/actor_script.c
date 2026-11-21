@@ -1,0 +1,13 @@
+#include "engine/slus/slus.h"
+
+#include "Actor_CopyScriptRecord.c"
+#include "Actor_SwitchScript.c"
+#include "Actor_StageScript.c"
+#include "Actor_SelectScript.c"
+#include "Actor_BeginScript.c"
+#include "Actor_RequestScript.c"
+#include "Actor_SeekScript.c"
+#include "Actor_StepAnimLoop.c"
+#include "Actor_StepAnimReverse.c"
+#include "Actor_StepAnimOnce.c"
+#include "Actor_StageAnimStep.c"

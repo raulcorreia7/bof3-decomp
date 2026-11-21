@@ -10,7 +10,7 @@
 #include "engine/state/battle/battle.h"
 #include "engine/state/mode/mode.h"
 #include "engine/state/scene/scene.h"
-#include "engine/field/world/world.h"
+#include "engine/worldmap/worldmap.h"
 #include "engine/sys/math/math.h"
 #include "engine/actor/motion/motion.h"
 #include "engine/actor/task/task.h"
@@ -19,8 +19,8 @@
 #include "engine/party/item/item.h"
 #include "engine/ui/text/text.h"
 #include "engine/ui/menu/menu.h"
-#include "engine/field/map/map.h"
-#include "engine/field/camera/camera.h"
+#include "engine/area/map/map.h"
+#include "engine/camera/camera.h"
 
 /* The resident game overlay's functions the other images call, in address order. */
 

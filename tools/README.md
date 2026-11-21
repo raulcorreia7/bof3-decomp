@@ -116,7 +116,7 @@ Helpers for one function against the retail bytes; each prints its usage with `-
 
 ```sh
 tools/opcode_diff.py exe/slus_004_22@0x801530D0 2
-tools/alloc_priority.py src/engine/field/map/Area_DrawCellRing.c Area_DrawCellRing
+tools/alloc_priority.py src/engine/area/map/Area_DrawCellRing.c Area_DrawCellRing
 ```
 
 ## m2c sweep

@@ -64,8 +64,7 @@ by its path from that folder (`[0xC6D00, c, ../sound/SND_Init]`; `../../sound/SN
 A system folder holds the files of both engine images, and the row says which image links a file.
 A named file lives in the module folder of its name prefix: `sys` (boot, flags, math), `input/pad`, `cd`
 (drive, `lz77`), `emi/loader`, `gfx` (palette, fade, prim), `sound` (seq, vab, xa, se), `sdk` (PsyQ
-members), `actor` (ops, script, motion, task), `field` (map, camera, collision, encounter, action,
-world), `ui` (text, message, message_answers, menu), `party` and `state` (mode, progress, scene,
+members), `actor` (ops, script, motion, task), `area` (map, collision, encounter, action), `camera`, `worldmap`, `ui` (text, message, message_answers, menu), `party` and `state` (mode, progress, scene,
 battle). The module boundaries are designed, not proven by the bytes, except `ui/message_answers` and
 `actor/ops`. A file keeps its image folder until it is named.
 `config/` and `build/asm/` follow the id, which is the disc path; `src/` follows what the code does.
@@ -148,7 +147,8 @@ view in a second block of the header, behind `ENGINE_LOCAL_DECLS`: an overlay th
 a prototype compiles the call differently. A module whose functions are not contiguous in link order stays one unit per function
 file, or joins its neighbour where the bytes need it (`emi/loader/emi.c` holds the CD drive states of
 `cd/drive`, which interleave with the loader). A function with `INCLUDE_ASM` stays out of a unit: the
-split assembly is named for the row. `game/00` is never one unit: `"%d"` is pooled twice in its
+split assembly is named for the row; `actor/ops`, `area/action` and `gfx/palette` of `game/00` also stay per function, because
+their jump-table `.rodata` alternates with `.data` rows of other objects, which one unit cannot hold. `game/00` is never one unit: `"%d"` is pooled twice in its
 `.rodata`, so `func_8019F5B8` and `FieldAction_FindSmall` lie in different objects.
 
 ### Definitions

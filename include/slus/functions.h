@@ -22,8 +22,8 @@
 #include "engine/state/mode/mode.h"
 #include "engine/actor/task/task.h"
 #include "engine/ui/text/text.h"
-#include "engine/field/map/map.h"
-#include "engine/field/camera/camera.h"
+#include "engine/area/map/map.h"
+#include "engine/camera/camera.h"
 
 volatile u8* func_800AC754(u8 entry_id);
 void         func_8015C214(s32 slot, u8 value);

@@ -16,7 +16,9 @@ Every `src/` directory belongs to one row (the engine rows follow `src/engine/<m
 | Sound            | `engine/sound`                                                                      | `XAState`                                                                                                  | `slus/sound.h`, `audio/*.h`                                                                                | `psyq/*.h`                                                                           |
 | SDK              | `engine/sdk`                                                                        | none                                                                                                       | none                                                                                                       | `psyq/*.h`                                                                           |
 | Actor            | `engine/actor`                                                                      | `Actor`, `ActorType`, `SpawnedActor`                                                                       | `sys/actor.h`, `slus/actor.h`, `game/records.h`                                                            | `common/vector.h`                                                                    |
-| Field            | `engine/field`                                                                      | `GameAreaState`, `ActorToss`                                                                               | `slus/area.h`, `game/game.h`                                                                               | `common/fixed.h`                                                                     |
+| Area engine      | `engine/area`                                                                       | `GameAreaState`, `ActorToss`                                                                               | `slus/area.h`, `game/game.h`                                                                               | `common/fixed.h`                                                                     |
+| Camera           | `engine/camera`                                                                     | none                                                                                                       | `slus/area.h`                                                                                              | none                                                                                 |
+| World map        | `engine/worldmap`                                                                   | none                                                                                                       | `slus/area.h`                                                                                              | none                                                                                 |
 | UI               | `engine/ui`                                                                         | `TextCommand`, `MenuStep`                                                                                  | `slus/ui.h`, `game/text.h`, `msg/message_ids.h`                                                            | `menu/gameui.h`                                                                      |
 | Party            | `engine/party`                                                                      | `Character`, `Item`, `Ability`, `Gene`, `Enemy`, `Encounter`                                               | `slus/party.h`, `game/character.h`, `game/item.h`, `game/ability.h`, `game/gene.h`, `game/enemy.h`         | `common/util.h`                                                                      |
 | Game state       | `engine/state`                                                                      | `SceneEventMode`, `Fairy`                                                                                  | `slus/exports.h`, `game/functions.h`, `game/game.h`, `game/fairy.h`                                        | the executable's helpers                                                             |
@@ -29,7 +31,9 @@ Every `src/` directory belongs to one row (the engine rows follow `src/engine/<m
 | Graphics         | `engine/gfx`                                                                        | `PaletteFade`                                                                                              | `gfx/*.h`                                                                                                  | `psyq/*.h`                                                                           |
 | SDK              | `engine/sdk`                                                                        | none                                                                                                       | `psyq/*.h`                                                                                                 | `psyq/*.h`                                                                           |
 | Actor            | `engine/actor`                                                                      | `Actor`, `SpawnedActor`                                                                                    | `sys/actor.h`, `slus/actor.h`, `game/spawn.h`                                                              | `common/util.h`                                                                      |
-| Field            | `engine/field`                                                                      | `Encounter`                                                                                                | `slus/area.h`, `game/enemy.h`                                                                              | `common/facing.h`                                                                    |
+| Area engine      | `engine/area`                                                                       | `Encounter`                                                                                                | `slus/area.h`, `game/enemy.h`                                                                              | `common/facing.h`                                                                    |
+| Camera           | `engine/camera`                                                                     | none                                                                                                       | `slus/area.h`                                                                                              | none                                                                                 |
+| World map        | `engine/worldmap`                                                                   | none                                                                                                       | `slus/area.h`                                                                                              | none                                                                                 |
 | UI               | `engine/ui`                                                                         | `TextCommand`                                                                                              | `slus/ui.h`, `game/text.h`                                                                                 | `shared/*.h`                                                                         |
 | Party            | `engine/party`                                                                      | `Character`, `Enemy`, `Item`, `Ability`, `Gene`                                                            | `slus/party.h`, `game/character.h`, `game/item.h`, `game/ability.h`                                        | `common/util.h`                                                                      |
 | Engine images    | `engine/slus`, `engine/game`                                                        | none                                                                                                       | `engine/slus/slus.h`, `slus/data.h`, `slus/functions.h`                                                    | unnamed `func_` files and data files of the two images                               |
@@ -55,34 +59,36 @@ The table is generated by `tools/quality.py --markdown --update`, which a schedu
 
 <!-- quality:begin (tools/quality.py --markdown) -->
 
-| Subsystem        | Matched functions |           `addr` |         `names` |    `casts` | `harmful` | `twins` | `pasted` |
-| ---------------- | ----------------: | ---------------: | --------------: | ---------: | --------: | ------: | -------: |
-| System           |                35 |                0 |              51 |          6 |         7 |       0 |        0 |
-| Input            |    `engine/input` |             none | `slus/system.h` |  `psx/*.h` |           |         |          |
-| Disc             |                38 |                0 |             118 |         15 |         2 |       0 |        0 |
-| EMI              |      `engine/emi` | `EMILoaderState` |     `sys/emi.h` | `psyq/*.h` |           |         |          |
-| Graphics         |                35 |                0 |              37 |          7 |         0 |       0 |        0 |
-| Sound            |                54 |                0 |             413 |         15 |        10 |       0 |        0 |
-| SDK              |                 5 |                0 |               3 |          0 |         0 |       0 |        0 |
-| Actor            |                29 |                0 |             115 |         23 |         0 |       0 |        0 |
-| Field            |                70 |                0 |             102 |         61 |        13 |       0 |        0 |
-| UI               |                70 |                0 |             113 |         18 |         8 |       0 |        0 |
-| Party            |                48 |                0 |              23 |          0 |         0 |       0 |        0 |
-| Game state       |                21 |                0 |               1 |          0 |         0 |       0 |        0 |
-| Engine images    |               702 |              475 |            1461 |        139 |        51 |       4 |        0 |
-| Logo             |                12 |                0 |              54 |          0 |         0 |       0 |        0 |
-| Shared bodies    |                27 |                0 |              14 |          0 |         0 |       0 |        0 |
-| Area             |              2832 |             2473 |            3860 |        134 |        53 |      73 |        0 |
-| Battle           |               920 |              578 |            1803 |        172 |        75 |       0 |        0 |
-| Battle magic     |              1848 |             1658 |            6972 |          4 |         3 |      66 |        2 |
-| Boss             |               725 |              560 |             799 |          6 |         1 |       0 |        0 |
-| Fairy Village    |               241 |              203 |            1154 |         14 |         2 |       0 |        0 |
-| Menu             |               684 |              520 |            2386 |         45 |        20 |       0 |        0 |
-| Player character |               286 |              230 |             287 |          0 |        12 |       2 |        0 |
-| Scenario         |              1208 |             1080 |            1170 |         16 |         3 |      11 |        0 |
-| Title            |                20 |                0 |              12 |          3 |         0 |       0 |        0 |
-| Other            |                 0 |                0 |               0 |          0 |         0 |       0 |        0 |
-| Total            |              9910 |             7777 |           20948 |        678 |       260 |     156 |        2 |
+| Subsystem        | Matched functions | `addr` | `names` | `casts` | `harmful` | `twins` | `pasted` |
+| ---------------- | ----------------: | -----: | ------: | ------: | --------: | ------: | -------: |
+| System           |                35 |      0 |      51 |       6 |         7 |       0 |        0 |
+| Input            |                 1 |      0 |       0 |       0 |         0 |       0 |        0 |
+| Disc             |                11 |      0 |      27 |       4 |         0 |       0 |        0 |
+| EMI              |                27 |      0 |      91 |      11 |         2 |       0 |        0 |
+| Graphics         |                47 |      0 |      46 |      11 |         6 |       0 |        0 |
+| Sound            |                54 |      0 |     413 |      15 |        10 |       0 |        0 |
+| SDK              |                 5 |      0 |       3 |       0 |         0 |       0 |        0 |
+| Actor            |                56 |      0 |     181 |      30 |         2 |       0 |        0 |
+| Area engine      |               124 |      0 |     180 |      76 |        21 |       0 |        0 |
+| Camera           |                12 |      0 |      36 |       1 |         0 |       0 |        0 |
+| World map        |                 2 |      0 |       1 |       0 |         0 |       0 |        0 |
+| UI               |                83 |      0 |     116 |      19 |         8 |       0 |        0 |
+| Party            |                61 |      0 |      41 |       4 |         2 |       0 |        0 |
+| Game state       |               109 |      0 |     112 |      19 |         4 |       0 |        0 |
+| Engine images    |               480 |    475 |    1139 |      88 |        29 |       4 |        0 |
+| Logo             |                12 |      0 |      54 |       0 |         0 |       0 |        0 |
+| Shared bodies    |                27 |      0 |      14 |       0 |         0 |       0 |        0 |
+| Area             |              2830 |   2471 |    3856 |     134 |        53 |      73 |        0 |
+| Battle           |               920 |    578 |    1803 |     172 |        75 |       0 |        0 |
+| Battle magic     |              1848 |   1658 |    6972 |       4 |         3 |      66 |        2 |
+| Boss             |               725 |    560 |     799 |       6 |         1 |       0 |        0 |
+| Fairy Village    |               241 |    203 |    1154 |      14 |         2 |       0 |        0 |
+| Menu             |               684 |    520 |    2386 |      45 |        20 |       0 |        0 |
+| Player character |               286 |    230 |     287 |       0 |        12 |       2 |        0 |
+| Scenario         |              1208 |   1080 |    1170 |      16 |         3 |      11 |        0 |
+| Title            |                20 |      0 |      12 |       3 |         0 |       0 |        0 |
+| Other            |                 0 |      0 |       0 |       0 |         0 |       0 |        0 |
+| Total            |              9908 |   7775 |   20944 |     678 |       260 |     156 |        2 |
 
 <!-- quality:end -->
 
@@ -91,30 +97,30 @@ The table is generated by `tools/quality.py --markdown --update`, which a schedu
 A seam is a name or header one subsystem offers another. The table lists the seams the seam work has
 named, with the owner whose header declares each and how many call sites or files reach it.
 
-| Seam                                                                            | Owner      | Header                                 | Callers                                                                                               |
-| ------------------------------------------------------------------------------- | ---------- | -------------------------------------- | ----------------------------------------------------------------------------------------------------- |
-| `Scene_SetupParty`                                                              | Game state | `game/functions.h`                     | Scenario 153, Area 59                                                                                 |
-| `Area_AddGridActor`                                                             | Field      | `slus/area.h`                          | Battle magic 56, Area 16, Scenario 8, Engine 7, Battle 6, Boss 5                                      |
-| `Battle_EndVictory`                                                             | Battle     | `battle/handlers.h`                    | Boss 37                                                                                               |
-| `Battle_EndDefeat`                                                              | Battle     | `battle/handlers.h`                    | Boss 36                                                                                               |
-| `Battle_EndToArea`                                                              | Battle     | `battle/handlers.h`                    | Boss 18, Battle 1                                                                                     |
-| `Battle_RequestEnemyScript`                                                     | Battle     | `battle/handlers.h`                    | Battle 16, Boss 13                                                                                    |
-| `Battle_FadePoisonedBattler`                                                    | Battle     | `battle/functions.h`                   | Battle magic 30                                                                                       |
-| `Area_InitMapRenderer`                                                          | Field      | `slus/area.h`                          | Scenario 10, Menu 4, Engine 3, Area 2                                                                 |
-| `Area_ApplyTileToQuad`                                                          | Field      | `slus/area.h`                          | Area 31, Engine 12, Battle magic 3                                                                    |
-| `g_ScratchPad`                                                                  | System     | `sys/scratchpad.h`                     | 195 files, every overlay                                                                              |
-| `g_ScratchPadVectors`                                                           | System     | `sys/scratchpad.h`                     | 142 files, Area, Scenario, Battle magic                                                               |
-| `g_ScratchPadHalves`                                                            | System     | `sys/scratchpad.h`                     | 21 files, Battle magic                                                                                |
-| `g_ScratchPadVectorHalves`                                                      | System     | `sys/scratchpad.h`                     | 6 files, Battle magic                                                                                 |
-| `g_ScenarioState` members and `g_ScriptVars`                                    | Scenario   | `scenario/state.h`                     | the scene step, state, timer and script variable bytes by member, 150 files, Area, Scenario, Boss     |
-| Engine function prototypes                                                      | Engine     | `game/functions.h`, `slus/<domain>.h`  | 19 functions, Menu 78, Engine 39, Scenario 29, Area 28, Battle 15, Battle magic 5, Player character 3 |
-| `g_GameCellType`, `g_GameLastAreaId`                                            | Game state | `game/game.h`                          | 72 and 13 files                                                                                       |
-| `Area_AddGridActor`                                                             | Field      | `slus/functions.h`                     | Battle magic 56, Area 16, Scenario 8, Engine 7, Battle 6, Boss 5                                      |
-| `Area_InitMapRenderer`                                                          | Field      | `slus/functions.h`                     | Scenario 10, Menu 4, Engine 3, Area 2                                                                 |
-| `Area_ApplyTileToQuad`                                                          | Field      | `slus/functions.h`                     | Area 31, Engine 12, Battle magic 3                                                                    |
-| Engine function prototypes                                                      | Engine     | `game/functions.h`, `slus/functions.h` | 19 functions, Menu 78, Engine 39, Scenario 29, Area 28, Battle 15, Battle magic 5, Player character 3 |
-| `AreaSpark`, `SparkEmitter`, `SpriteSpark`, `SpinEffect`, `TrailPoint`, `Trail` | Area       | `area/effects.h`                       | 16 files                                                                                              |
-| `Battle_SelectActiveBattlerScript`                                              | Battle     | `battle/functions.h`                   | Battle magic 14 files                                                                                 |
-| `Battle_PlayActiveBattlerSE`                                                    | Battle     | `battle/functions.h`                   | Battle magic 11 files                                                                                 |
-| `Battle_ShowActorEntry`                                                         | Battle     | `battle/handlers.h`                    | Boss 19 files                                                                                         |
-| `Battle_CopyActorEntry`                                                         | Battle     | `battle/functions.h`                   | Boss 9 files                                                                                          |
+| Seam                                                                            | Owner       | Header                                 | Callers                                                                                               |
+| ------------------------------------------------------------------------------- | ----------- | -------------------------------------- | ----------------------------------------------------------------------------------------------------- |
+| `Scene_SetupParty`                                                              | Game state  | `game/functions.h`                     | Scenario 153, Area 59                                                                                 |
+| `Area_AddGridActor`                                                             | Area engine | `slus/area.h`                          | Battle magic 56, Area 16, Scenario 8, Engine 7, Battle 6, Boss 5                                      |
+| `Battle_EndVictory`                                                             | Battle      | `battle/handlers.h`                    | Boss 37                                                                                               |
+| `Battle_EndDefeat`                                                              | Battle      | `battle/handlers.h`                    | Boss 36                                                                                               |
+| `Battle_EndToArea`                                                              | Battle      | `battle/handlers.h`                    | Boss 18, Battle 1                                                                                     |
+| `Battle_RequestEnemyScript`                                                     | Battle      | `battle/handlers.h`                    | Battle 16, Boss 13                                                                                    |
+| `Battle_FadePoisonedBattler`                                                    | Battle      | `battle/functions.h`                   | Battle magic 30                                                                                       |
+| `Area_InitMapRenderer`                                                          | Area engine | `slus/area.h`                          | Scenario 10, Menu 4, Engine 3, Area 2                                                                 |
+| `Area_ApplyTileToQuad`                                                          | Area engine | `slus/area.h`                          | Area 31, Engine 12, Battle magic 3                                                                    |
+| `g_ScratchPad`                                                                  | System      | `sys/scratchpad.h`                     | 195 files, every overlay                                                                              |
+| `g_ScratchPadVectors`                                                           | System      | `sys/scratchpad.h`                     | 142 files, Area, Scenario, Battle magic                                                               |
+| `g_ScratchPadHalves`                                                            | System      | `sys/scratchpad.h`                     | 21 files, Battle magic                                                                                |
+| `g_ScratchPadVectorHalves`                                                      | System      | `sys/scratchpad.h`                     | 6 files, Battle magic                                                                                 |
+| `g_ScenarioState` members and `g_ScriptVars`                                    | Scenario    | `scenario/state.h`                     | the scene step, state, timer and script variable bytes by member, 150 files, Area, Scenario, Boss     |
+| Engine function prototypes                                                      | Engine      | `game/functions.h`, `slus/<domain>.h`  | 19 functions, Menu 78, Engine 39, Scenario 29, Area 28, Battle 15, Battle magic 5, Player character 3 |
+| `g_GameCellType`, `g_GameLastAreaId`                                            | Game state  | `game/game.h`                          | 72 and 13 files                                                                                       |
+| `Area_AddGridActor`                                                             | Area engine | `slus/functions.h`                     | Battle magic 56, Area 16, Scenario 8, Engine 7, Battle 6, Boss 5                                      |
+| `Area_InitMapRenderer`                                                          | Area engine | `slus/functions.h`                     | Scenario 10, Menu 4, Engine 3, Area 2                                                                 |
+| `Area_ApplyTileToQuad`                                                          | Area engine | `slus/functions.h`                     | Area 31, Engine 12, Battle magic 3                                                                    |
+| Engine function prototypes                                                      | Engine      | `game/functions.h`, `slus/functions.h` | 19 functions, Menu 78, Engine 39, Scenario 29, Area 28, Battle 15, Battle magic 5, Player character 3 |
+| `AreaSpark`, `SparkEmitter`, `SpriteSpark`, `SpinEffect`, `TrailPoint`, `Trail` | Area        | `area/effects.h`                       | 16 files                                                                                              |
+| `Battle_SelectActiveBattlerScript`                                              | Battle      | `battle/functions.h`                   | Battle magic 14 files                                                                                 |
+| `Battle_PlayActiveBattlerSE`                                                    | Battle      | `battle/functions.h`                   | Battle magic 11 files                                                                                 |
+| `Battle_ShowActorEntry`                                                         | Battle      | `battle/handlers.h`                    | Boss 19 files                                                                                         |
+| `Battle_CopyActorEntry`                                                         | Battle      | `battle/functions.h`                   | Boss 9 files                                                                                          |
