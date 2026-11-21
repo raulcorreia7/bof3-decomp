@@ -1,0 +1,7 @@
+["emi/boss/boss030/16"]
+Boss_InstallBattleHooks = { addr = 0x800C19DC, type = "func", source = "Installs the boss battle hooks of boss030: Boss_ChooseBattleEnding into g_BattleChooseEndingHook, Boss_EndBattle into g_BattleEndHook and Boss_RunBattleEvent into g_BossBattleEventHook." }
+Boss_RunBattleEvent = { addr = 0x800C1A14, type = "func", source = "Handles the boss battle events of boss030: ignores every event mode and returns 0." }
+Boss_ChooseBattleEnding = { addr = 0x800C1A1C, type = "func", source = "Chooses how the boss battle of boss030 ends (g_BattleChooseEndingHook). On victory sets visit_count to &g_ScriptVars[0], advances (*visit_count), sets g_ScenarioState.step_05 to 0xC, runs Battle_EndVictory, sets g_SndBGMId to 0x5A; otherwise runs Battle_EndDefeat." }
+Boss_EndBattle = { addr = 0x800C1A84, type = "func", source = "Ends the boss battle of boss030 (g_BattleEndHook): runs func_800AC934 for battle slots 0, 1 and 2." }
+Battle_EndVictory = { addr = 0x801DDED8, type = "func", source = "Ends the battle in victory: sets the battle phase to the result mode at step 1, which plays the victory sequence, poses the party and opens the result panel. Boss battles call it from their ending hook when the result is a victory.", alias = true }
+Battle_EndDefeat = { addr = 0x801DDF00, type = "func", source = "Ends the battle in defeat: sets the battle phase to the result mode at step 2, which plays the defeat sequence and shows the defeat message. Boss battles call it from their ending hook when the result is not a victory.", alias = true }

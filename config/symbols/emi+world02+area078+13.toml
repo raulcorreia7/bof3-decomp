@@ -1,0 +1,3 @@
+["emi/world02/area078/13"]
+g_AreaModuleId = { addr = 0x801F2C00, source = "Module id of the area: the first payload word of its overlay, 52 + the area number." }
+Actor_Spawn = { addr = 0x801F2E1C, type = "func", source = "Claims a free g_SpawnedActors entry, sets header.flags to 1 and type to 0x44; does nothing when no slot is free." }

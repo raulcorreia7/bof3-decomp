@@ -1,0 +1,29 @@
+["emi/scenario/scena01/00"]
+jtbl_801F6C04 = { addr = 0x801F6C04, type = "Callback", source = "The switch table of func_801F8050: the jump targets of its jr dispatch." }
+jtbl_801F6C1C = { addr = 0x801F6C1C, type = "Callback", source = "The switch table of func_801F8050: the jump targets of its jr dispatch." }
+jtbl_801F6C34 = { addr = 0x801F6C34, type = "Callback", source = "The switch table of func_801F8050: the jump targets of its jr dispatch." }
+jtbl_801F6C5C = { addr = 0x801F6C5C, type = "Callback", source = "The switch table of func_801F8050: the jump targets of its jr dispatch." }
+jtbl_801F6C7C = { addr = 0x801F6C7C, type = "Callback", source = "The switch table of func_801F8C0C: the jump targets of its jr dispatch." }
+jtbl_801F6CAC = { addr = 0x801F6CAC, type = "Callback", source = "The switch table of func_801F8F34: the jump targets of its jr dispatch." }
+jtbl_801F6D0C = { addr = 0x801F6D0C, type = "Callback", source = "The switch table of func_801F9874: the jump targets of its jr dispatch." }
+jtbl_801F6D44 = { addr = 0x801F6D44, type = "Callback", source = "The switch table of func_801F9AA0: the jump targets of its jr dispatch." }
+jtbl_801F6DB4 = { addr = 0x801F6DB4, type = "Callback", source = "The switch table of func_801FA24C: the jump targets of its jr dispatch." }
+jtbl_801F6EAC = { addr = 0x801F6EAC, type = "Callback", source = "The switch table of func_801FA844: the jump targets of its jr dispatch." }
+jtbl_801F6F64 = { addr = 0x801F6F64, type = "Callback", source = "The switch table of func_801FB218: the jump targets of its jr dispatch." }
+jtbl_801F6FE4 = { addr = 0x801F6FE4, type = "Callback", source = "The switch table of func_801FB5BC: the jump targets of its jr dispatch." }
+jtbl_801F7034 = { addr = 0x801F7034, type = "Callback", source = "The switch table of func_801FBB1C: the jump targets of its jr dispatch." }
+jtbl_801F7064 = { addr = 0x801F7064, type = "Callback", source = "The switch table of func_801FBF30: the jump targets of its jr dispatch." }
+jtbl_801F70B4 = { addr = 0x801F70B4, type = "Callback", source = "The switch table of func_801FC488: the jump targets of its jr dispatch." }
+jtbl_801F70DC = { addr = 0x801F70DC, type = "Callback", source = "The switch table of func_801FC6B4: the jump targets of its jr dispatch." }
+jtbl_801F70F4 = { addr = 0x801F70F4, type = "Callback", source = "The switch table of func_801FC898: the jump targets of its jr dispatch." }
+jtbl_801F715C = { addr = 0x801F715C, type = "Callback", source = "The switch table of func_801FCEC0: the jump targets of its jr dispatch." }
+Area_DrawSparkCell = { addr = 0x801F7A24, type = "func", source = "Draws one spark as a shaded 1x1 cell at its screen position and adds it to the area cell list at its world position." }
+Area_ClearWorkColumn = { addr = 0x801F7AB8, type = "func", source = "Clears one byte of each row in the actor window." }
+Area_AddSpark = { addr = 0x801F7AE4, type = "func", source = "Adds one falling spark to the first free row of the 128-spark work table: marks it active, sets its fall speed and places it around the work position at a random angle and radius." }
+Area_StepSparks = { addr = 0x801F7C54, type = "func", source = "Steps every live spark: drops it by its fall speed, draws it and frees it below the work floor; one body shared by scena01 and area082." }
+Scene_EnterCedarWoods = { addr = 0x801F8000, type = "func", source = "requests the area change to Cedar Woods before Nue and resets scene script state in scena01" }
+Scenario_TryStartPositionEvent = { addr = 0x801FDA6C, type = "func", size = 0x5D0, source = "checks the player's position for scene triggers and starts the matching scene script" }
+Scene_InitOpeningParty = { addr = 0x801FE10C, type = "func", source = "loads Ryu pajamas, Teepo, and Rei archives and joins Ryu pajamas as the opening party in scena01" }
+Scene_SetPartyRyuTeepoRei = { addr = 0x801FE1B0, type = "func", source = "sets young Ryu's character id, streams party archives and joins Ryu, Teepo and Rei for the scene setup" }
+Party_JoinRei = { addr = 0x801FE224, type = "func", source = "Adds Rei to the party." }
+Scene_RemoveRei = { addr = 0x801FE244, type = "func", source = "Removes character 4 (CHAR_ID_REI) from the party through Party_RemoveMember, which clears the id from the walking and battle orders and shrinks g_Game.party_size, then restages every party palette through Party_LoadPalettes." }

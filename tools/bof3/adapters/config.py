@@ -1,17 +1,69 @@
-"""Read the repository's TOML configuration from disk."""
+"""Read and write the repository's TOML configuration."""
 
 from __future__ import annotations
 
+import re
 import tomllib
 from pathlib import Path
 from typing import Any
 
-from bof3.symbols import TABLE, parse
+from bof3.adapters.git import git
+from bof3.symbols import SPLIT, TABLE, parse
+
+_TITLE = re.compile(r'^\["([^"]+)"\]', re.MULTILINE)
+
+
+def table_file(image: str) -> str:
+    """The file that holds one image's table."""
+    return f"{SPLIT}/{image.replace('/', '+')}.toml"
+
+
+def symbol_files(root: Path) -> list[Path]:
+    """The files that hold the symbol tables now."""
+    return sorted((root / SPLIT).glob("*.toml"))
+
+
+def symbols_text(root: Path, rev: str | None = None) -> str:
+    """The symbol tables as one TOML text: every file of `config/symbols/`, or at `rev` a base that still has `config/symbols.toml`."""
+    if rev is None:
+        return "".join(p.read_text(encoding="utf-8") for p in symbol_files(root))
+    whole = git("show", f"{rev}:{TABLE}", root=root, check=False)
+    if whole:
+        return whole
+    names = git("ls-tree", "--name-only", rev, f"{SPLIT}/", root=root).split()
+    return "".join(git("show", f"{rev}:{name}", root=root) for name in names)
+
+
+def split_tables(text: str) -> dict[str, str]:
+    """Each image's table text, without the header comment of the whole document."""
+    titles = list(_TITLE.finditer(text))
+    ends = [m.start() for m in titles[1:]] + [len(text)]
+    return {
+        m[1]: text[m.start() : end].rstrip() + "\n"
+        for m, end in zip(titles, ends, strict=True)
+    }
+
+
+def symbol_edits(root: Path, text: str) -> dict[Path, str]:
+    """The files whose content differs from the symbol tables `text`."""
+    edits = {}
+    for image, table in split_tables(text).items():
+        path = root / table_file(image)
+        if not path.is_file() or path.read_text(encoding="utf-8") != table:
+            edits[path] = table
+    return edits
+
+
+def write_symbols(root: Path, text: str) -> None:
+    """Write the symbol tables `text` back to where they live."""
+    for path, contents in symbol_edits(root, text).items():
+        path.parent.mkdir(exist_ok=True)
+        path.write_text(contents, encoding="utf-8")
 
 
 def read_symbols(root: Path) -> dict[str, Any]:
-    """Return the parsed ``config/symbols.toml``: image table -> name -> row."""
-    return parse((root / TABLE).read_text(encoding="utf-8"))
+    """Return the parsed symbol tables: image table -> name -> row."""
+    return parse(symbols_text(root))
 
 
 def read_link(root: Path) -> dict[str, Any]:

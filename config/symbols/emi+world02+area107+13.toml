@@ -1,0 +1,3 @@
+["emi/world02/area107/13"]
+g_AreaModuleId = { addr = 0x801F2C00, source = "Module id of the area: the first payload word of its overlay, 52 + the area number." }
+Area_EndMessage = { addr = 0x801F2DFC, type = "func", source = "Last step of the area107 task step table D_801F2E44: func_801F2D4C starts message 1 and sets mode 4, and this step waits until g_GameStateIndex leaves GAME_REQUEST_MESSAGE, then clears the script-active flag, plays area SE 6 and returns the task to mode 0." }

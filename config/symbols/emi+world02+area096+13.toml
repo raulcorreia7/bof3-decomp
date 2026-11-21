@@ -1,0 +1,5 @@
+["emi/world02/area096/13"]
+g_AreaModuleId = { addr = 0x801F2C00, source = "Module id of the area: the first payload word of its overlay, 52 + the area number." }
+Area_StartDirectionalScript = { addr = 0x801F33E0, type = "func", source = "Starts the directional script of the actor: selects script direction | 8 from direction & 7, sets ACTOR_OPT_ROUTE_LOCKED, then turns the actor to direction 3 when it faced 7, otherwise to 7." }
+Area_FlipStoredActorFacingX = { addr = 0x801F3580, type = "func", source = "Sets direction of the actor stored at scratch cell 0x44 to FACING_RIGHT when it is FACING_LEFT, otherwise to FACING_LEFT." }
+Area_UpdateCameraHeight = { addr = 0x801F35A8, type = "func", source = "Stores the ground height at the party position D_80145EC4/D_80145EC8 in g_AreaCameraHeight, 0x20 lower when the camera already sits at that height, and advances g_AreaCameraRefreshCount by 2 (func_801F3618 in area095/13, func_801F35A8 in area096/13)." }

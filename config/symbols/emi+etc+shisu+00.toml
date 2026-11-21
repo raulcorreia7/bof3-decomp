@@ -1,0 +1,138 @@
+["emi/etc/shisu/00"]
+g_EmiOverlayHeader = { addr = 0x801D0C00, source = "The overlay's payload prologue: the overlay id word the EMI loader compares with the archive's table of contents." }
+g_MenuStatFormat = { addr = 0x801D0C04, source = "Format string of the four stat values of the menu: Menu_DrawStatPanel prints power, defense, intelligence and agility through it, and Menu_DrawItemRow prints the HP and AP columns of a party row through it." }
+g_MenuCurrentValueFormat = { addr = 0x801D0C08, alias = true, source = "Format of the current value of an HP or AP pair: Menu_DrawCharacterWindow prints hp or ap through it, then the maximum through g_MenuMaxValueFormat. The shop overlay owns the same string at the same address of its own payload." }
+g_MenuMaxValueFormat = { addr = 0x801D0C10, alias = true, source = "Format of the maximum value of an HP or AP pair, printed after the current value (g_MenuCurrentValueFormat)." }
+g_MenuZennyFormat = { addr = 0x801D0C28, source = "Format string of the menu amounts: Menu_DrawZennyWindow prints the zenny caption value through it and Menu_DrawItemRow prints the character experience and the experience of the next level." }
+g_MenuNextExpBlank = { addr = 0x801D0C2C, source = "Dashes Menu_DrawItemRow prints in place of the next-level experience once the character level reaches 99." }
+g_MenuFormations = { addr = 0x801D0C34, size = 0xC8, source = "The ten formation layouts of the party formation menu: a name, its length and the screen offset of each of the three members." }
+g_MenuFormationOrder = { addr = 0x801D0CFC, source = "Starting member order of the formation preview: Menu_DrawFormationPreview copies it and sorts it with the member icons back to front." }
+g_MenuClockFormat = { addr = 0x801D0D00, source = "Format string of the play time digits: Menu_DrawPlayTimeWindow prints g_PlayClock hours and minutes through it." }
+jtbl_801D0D0C = { addr = 0x801D0D0C, type = "Callback", source = "The switch table of Menu_DrawEquipStatWindow: the jump targets of its jr dispatch." }
+g_MenuInventoryCountFormat = { addr = 0x801D0D40, source = "the inventory panel's held count and capacity, two right-aligned numbers" }
+jtbl_801D0D4C = { addr = 0x801D0D4C, type = "Callback", source = "The switch table of Menu_DrawEquipChoiceWindow: the jump targets of its jr dispatch." }
+g_SaveSlotLevelFormat = { addr = 0x801D0D64, source = "Format of the level on a save slot row." }
+g_SaveSlotTimeFormat = { addr = 0x801D0D68, source = "Format of the play time on a save slot row." }
+g_SaveSlotTimeColon = { addr = 0x801D0D74, source = "Colon glyphs between the hours and minutes of a save slot row." }
+g_SaveCardPortLabelFirst = { addr = 0x801D0D78, source = "Label of memory card port 1 in the port tabs." }
+g_SaveCardPortLabelSecond = { addr = 0x801D0D7C, source = "Label of memory card port 2 in the port tabs." }
+func_801D0D80 = { addr = 0x801D0D80, type = "func", source = "Entry of the Shisu menu: dispatches on the menu step byte g_MenuStep.step through the D_801D96DC handlers." }
+Menu_SetState = { addr = 0x801D18E4, type = "func", source = "the body stores into g_MenuStep.state" }
+Menu_DrawPanelCursor = { addr = 0x801D2FE8, type = "func", source = "Draws the menu panel cursor at the x and y of the current task root through Menu_DrawCursorSprite." }
+Shisu_UpdateCommandPanel = { addr = 0x801D3164, type = "func", source = "Entry at 0x801D9754 of the shisu step table: runs the g_ShisuTask2Steps handler of the panel state and draws the command row, like Menu_CommandsPanel in the start menu." }
+Menu_SetPosY = { addr = 0x801D320C, type = "func", source = "the body stores into g_MenuCurrentPanel->pos.y" }
+Menu_SetPosX = { addr = 0x801D32E0, type = "func", source = "the body stores into g_MenuCurrentPanel->pos.x" }
+Menu_DrawCharacterWindow = { addr = 0x801D376C, type = "func", source = "Draws the window of one party member of the Bate menu from g_Characters: portrait, name, level, poison and confusion labels, HP and AP values and the experience bar." }
+Menu_DrawStatPanel = { addr = 0x801D3BD4, type = "func", source = "Draws the stat panel of party member palette_index at panel_x, panel_y: the power, defense, intelligence and agility labels with their u16 values from the character record, the status text when the status byte is not GAME_NONE, and the panel border sprite runs." }
+Shop_DrawEquipment = { addr = 0x801D3F0C, type = "func", source = "Draws the equipment panel of character record_index: the filled panel, the EQUIP caption, the emblem and six rows with the weapon, shield, helmet, armor and two accessories, each with its row icon." }
+Menu_DrawCursorFrame = { addr = 0x801D432C, type = "func", source = "Draws the cursor frame of a menu cell at x, y as one LINE_F3 and one LINE_F4. The colour is white, or blinks with g_FrameCount bit 3 when color is nonzero, and each party slot bit set in frame_mode lights one colour channel." }
+Menu_DrawPortrait = { addr = 0x801D44C0, type = "func", source = "Draws a 40x48 character portrait from g_MenuPortraitAtlas record atlas_index at sprite_x, sprite_y, shaded dark when shade_mode is nonzero." }
+Menu_DrawCharacterPortrait = { addr = 0x801D460C, type = "func", source = "Draws the portrait of a character id with Menu_DrawPortrait; Rei (CHAR_ID_REI) shows portrait 0xB once g_ScenarioState.scenario_id reaches 8." }
+Menu_DrawTintedLine = { addr = 0x801D4660, type = "func", source = "Draws one semi-transparent LINE_F2 from (line_x0, line_y0) to (line_x1, line_y1) in the colour given by color_r, color_g and color_b, with the draw mode tpage in the font page." }
+Menu_DrawItemRow = { addr = 0x801D4754, type = "func", source = "Draws the party row of character item: HP and AP values with their labels, the experience icon with the experience, and the next-level experience, or dashes from level 99; the palette is 7 when selection is nonzero." }
+Menu_DrawEquipment = { addr = 0x801D4AF4, type = "func", source = "Draws the equipment list of g_Characters[index]: the weapon, shield, helmet, armor and two accessory names with their row icons; the palette is 7 when selection is nonzero." }
+Menu_DrawFormationPreview = { addr = 0x801D4DC0, type = "func", source = "Draws the formation preview of the party formation menu: the formation's name, its ground arrow and its members' icons, turned by angle, sorted back to front, members whose blink bit is set pulsing." }
+Menu_DrawIcon = { addr = 0x801D550C, type = "func", source = "Draws a 16x8 menu icon from column icon_column of row 216 of the icon atlas at sprite_x, sprite_y, dark (0x10) when shade_mode is nonzero." }
+Menu_DrawPanelIcon = { addr = 0x801D5620, type = "func", source = "Draws one menu icon cell at x, y from atlas position u, v with clut and the grey level color, through MenuDrawPanelIcon." }
+Menu_DrawExperienceLine = { addr = 0x801D56D8, type = "func", source = "Draws the red experience line of a character from x, y: its length is the experience gained since level, scaled by 57 over the span to the next level, and is zero when both levels need the same experience." }
+Menu_DrawZennyWindow = { addr = 0x801D57F4, type = "func", source = "Draws the zenny window at panel_x, panel_y: the caption_value printed through g_MenuZennyFormat, the zenny icon and the caption glyph runs." }
+Menu_DrawPlayTimeWindow = { addr = 0x801D597C, type = "func", source = "Draws the play time window at panel_x, panel_y: hours and minutes of g_PlayClock and a colon that shows while g_PlayClock.thirtieths is below 15, then the clock caption and glyph runs." }
+Menu_ChooseYesNo = { addr = 0x801D5B78, type = "func", source = "Runs the yes/no prompt of the menu: the cursor sits at a position set by flag D_8014865B, left or right flips the flag, Cancel clears it and returns true, Confirm keeps it and returns true." }
+Menu_DrawCommandRow = { addr = 0x801D5C7C, type = "func", source = "Draws the command buttons of g_MenuCommandRows[row] (up to four, count in byte 0): label and frame per button, the selected one with the selected frame. A button is dimmed (colour 7) when it is not the selected one, when label 0x12 shows without g_GameRequestFlags bit 0, or when label 8 shows without the fountain pen and without ink." }
+Item_GetPrice = { addr = 0x801D5EC4, type = "func", source = "Returns the u16 price of item_id from the table of its category: item, weapon, armor or accessory." }
+Char_GetExpForLevel = { addr = 0x801D5F78, type = "func", source = "Returns the experience a character needs to reach a level: the sum of the first level u16 entries of the character row of g_LevelGrowth, or -1 from level 100." }
+Char_GetExpProgress = { addr = 0x801D5FF4, type = "func", source = "Returns how far exp is between the experience of level and of level + 1, scaled to 0x18 steps (0 when both levels need the same experience)." }
+Menu_DrawHeaderBar = { addr = 0x801D6090, type = "func", source = "Draws the window of a menu header bar from x, y, width and height with the window style g_WindowStyle." }
+Menu_DrawEquipCompareWindow = { addr = 0x801D65DC, type = "func", source = "Draws the equipment compare window: the party member's power, defense, intelligence and agility, the values the equipment in patch would give with an icon chosen by each compare flag, and the six equipment slots with the task's two selected slots raised." }
+Menu_DrawRowIcons = { addr = 0x801D6E38, type = "func", source = "Draws the party row at the position in row_record (u16 x at byte 4, y at byte 6): its window, then Menu_DrawEquipment and Menu_DrawItemRow for the character at D_80145FCC[row_record[0xC]]." }
+Menu_DrawEquipStatWindow = { addr = 0x801D6EF0, type = "func", source = "Draws the power, defense and agility rows a character would have with an item equipped in a slot, and greys the window when the character cannot equip it." }
+Menu_DrawClutStrip = { addr = 0x801D7224, type = "func", source = "Draws the five-row CLUT strip of 0x20-wide sprite cells; the shared body with the shop and start overlays, bound to the shisu tables." }
+Menu_DrawFilledPanel = { addr = 0x801D7418, type = "func", source = "Draws a filled menu panel at x, y of width and height cells: the window body and its tiled 8-pixel border sprites." }
+Menu_DrawWindowFrame = { addr = 0x801D76F4, type = "func", source = "Draws a window frame of width x height 8-pixel cells from stretched border sprites and four corner sprites." }
+Menu_DrawInventoryWindow = { addr = 0x801D7BFC, type = "func", source = "Draws the inventory panel of one item category: the item rows with their counts, dimmed when the party member cannot use them and raised on the cursor rows, the category title, the held count against the capacity, the two tab runs and the scroll bar." }
+Menu_DrawPanelFrame = { addr = 0x801D8850, type = "func", source = "Draws the 8-pixel frame of a menu panel of width x height cells at x, y: border sprites 0x29 to 0x2E along the edges and corner sprites 0x28, 0x2A, 0x2D and 0x2F." }
+Menu_DrawEquipChoiceWindow = { addr = 0x801D8A78, type = "func", source = "Draws the equip list: gathers the inventory rows of the equipment slot's category (unk_09) that the party member can equip, armor only of the slot's type, into g_MenuEquipChoiceIds and g_MenuEquipChoiceCounts, then draws them with the category title, the choice count and the scroll bar." }
+SAVE_DrawSlotRow = { addr = 0x801D91B0, type = "func", source = "Draws one save slot row: the window, the party icons, the name, the level, the play time and the experience line; a NULL row draws only the window." }
+SAVE_DrawPortTabs = { addr = 0x801D94B0, type = "func", source = "Draws the memory card port panel: the title, the two port tabs and the cursor at the selected port." }
+g_ShisuScales = { addr = 0x801D9688, source = "Scale per amount (ONE = 0x1000): the base model's scale by shaly seeds used less rounds (1-20), the topping's by g_ShisuIngredients.topping_size (9-16)." }
+g_ShisuSteps = { addr = 0x801D96DC, source = "the shisu overlay step handlers, indexed by the menu step byte" }
+g_ShisuStep1Steps = { addr = 0x801D96F0, source = "2 sub-step handlers of step 1 of the shisu screen, called by func_801D0E4C (the step 1 handler) and indexed by the menu sub-step byte g_MenuStep.sub_step" }
+g_ShisuStep3Steps = { addr = 0x801D96F8, source = "2 sub-step handlers of step 3 of the shisu screen, called by func_801D0F24 (the step 3 handler) and indexed by the menu sub-step byte g_MenuStep.sub_step" }
+g_ShisuStep2Steps = { addr = 0x801D9700, source = "3 sub-step handlers of step 2 of the shisu screen, called by func_801D11A4 (the step 2 handler) and indexed by the menu sub-step byte g_MenuStep.sub_step" }
+g_ShisuStep2Sub2Steps = { addr = 0x801D970C, source = "5 handlers of sub-step 2 of step 2 of the shisu screen, called by func_801D1898 (the sub-step 2 handler of step 2) and indexed by the menu sub-sub-step byte g_MenuStep.state" }
+g_ShisuTaskSteps = { addr = 0x801D974C, source = "Task state handlers of the shisu screen, dispatched by SYS_DISPATCH_TASK." }
+g_ShisuTask1Steps = { addr = 0x801D975C, source = "the state handlers of panel task mode 1, indexed by the panel task state" }
+g_ShisuTask2Steps = { addr = 0x801D9768, source = "the state handlers of panel task mode 2, indexed by the panel task state" }
+g_ShisuTask3Steps = { addr = 0x801D9774, source = "the state handlers of panel task mode 3, indexed by the panel task state" }
+D_801D97A4 = { addr = 0x801D97A4, source = "Sprite run drawn by Menu_DrawCharacterWindow: it follows D_801D979C, the play time caption, by 8 bytes." }
+g_MenuStatFrameLeft = { addr = 0x801D9834, source = "Sprite run of the left end of the stat panel border, drawn by Menu_DrawStatPanel." }
+g_MenuStatFrameMiddle = { addr = 0x801D9860, source = "Sprite run repeated 16 times along the stat panel border, drawn by Menu_DrawStatPanel." }
+g_MenuStatFrameRight = { addr = 0x801D986C, source = "Sprite run of the right end of the stat panel border, drawn by Menu_DrawStatPanel." }
+g_MenuCaptionLeft = { addr = 0x801D9884, source = "Sprite run of the left end of a caption row, drawn by Menu_DrawZennyWindow." }
+g_MenuCaptionMiddle = { addr = 0x801D9890, source = "Sprite run repeated along a caption row, drawn by Menu_DrawZennyWindow 11 times and by Menu_DrawPlayTimeWindow 6 times." }
+g_MenuCaptionRight = { addr = 0x801D989C, source = "Sprite run of the right end of a caption row, drawn by Menu_DrawZennyWindow and Menu_DrawPlayTimeWindow." }
+g_MenuClockCaption = { addr = 0x801D98A8, source = "Sprite run of the play time caption, drawn at the left edge of the play time window by Menu_DrawPlayTimeWindow." }
+g_MenuFormationFrameLeft = { addr = 0x801D98BC, source = "Sprite run of the formation preview frame's left edge." }
+g_MenuFormationFrameMiddle = { addr = 0x801D98E0, source = "Sprite run of one column of the formation preview frame's top and bottom edges; Menu_DrawFormationPreview draws it six times, 8 pixels apart." }
+g_MenuFormationFrameRight = { addr = 0x801D98EC, source = "Sprite run of the formation preview frame's right edge." }
+g_MenuCommandFrame = { addr = 0x801D9904, source = "Sprite run drawn over each unselected command button by Menu_DrawCommandRow." }
+g_MenuCommandFrameSelected = { addr = 0x801D991C, source = "Sprite run drawn over the selected command button by Menu_DrawCommandRow." }
+g_MenuEquipCompareSprites = { addr = 0x801D9934, source = "Sprite run of the equipment compare window frame that Menu_DrawEquipCompareWindow draws over the window." }
+g_MenuListTab2OffSprites = { addr = 0x801D9960, source = "the sprite run of the list panel's second tab while its flag is clear" }
+g_MenuInventoryTab1OffSprites = { addr = 0x801D996C, source = "the sprite run of the inventory panel's first tab while its flag is clear" }
+g_MenuListTab2OnSprites = { addr = 0x801D9978, source = "the sprite run of the list panel's second tab while its flag is set" }
+g_MenuInventoryTab1OnSprites = { addr = 0x801D9984, source = "the sprite run of the inventory panel's first tab while its flag is set" }
+g_MenuEquipStatSprites = { addr = 0x801D9A04, source = "Sprite run of the equip stat window frame that Menu_DrawEquipStatWindow draws over the window." }
+g_SaveSlotFrameSprites = { addr = 0x801D9A60, source = "Sprite run of a save slot row frame." }
+D_801D9B3C = { addr = 0x801D9B3C, alias = true, source = "The poison label text, drawn by Menu_DrawCharacterWindow beside the name of a poisoned character; the same label the shop overlay owns as D_801E5814." }
+D_801D9B44 = { addr = 0x801D9B44, alias = true, source = "The confusion label text, drawn by Menu_DrawCharacterWindow beside the name of a confused character; the same label the shop overlay owns as D_801E581C." }
+g_MenuLabelPower = { addr = 0x801D9B4C, source = "Text of the power label, drawn by Menu_DrawStatPanel at the left of the first stat row." }
+g_MenuLabelDefense = { addr = 0x801D9B50, source = "Text of the defense label, drawn by Menu_DrawStatPanel at the left of the second stat row." }
+g_MenuLabelIntelligence = { addr = 0x801D9B54, source = "Text of the intelligence label, drawn by Menu_DrawStatPanel at the second column of the first stat row." }
+g_MenuLabelAgility = { addr = 0x801D9B58, source = "Text of the agility label, drawn by Menu_DrawStatPanel at the second column of the second stat row." }
+g_MenuEquipRowIcons = { addr = 0x801D9B5C, source = "Icon index of each of the six equipment rows (weapon, shield, helmet, armor, two accessories) drawn by Shop_DrawEquipment." }
+g_MenuLabelEquip = { addr = 0x801D9B64, source = "Text of the EQUIP caption of the equipment panel, drawn by Shop_DrawEquipment." }
+g_MenuPortraitAtlas = { addr = 0x801D9B78, source = "4-byte portrait atlas records read by Menu_DrawPortrait by atlas index; Menu_DrawItemRow also draws its HP and AP label texts from offsets 0x30, 0x36, 0x3C and 0x42." }
+g_MenuFormationArrow = { addr = 0x801D9BC0, source = "The three corners of the formation preview's ground arrow, x and y." }
+g_MenuCaptionIcon = { addr = 0x801D9BD8, source = "Icon and label record drawn at the right of the zenny caption by Menu_DrawZennyWindow." }
+g_MenuClockColon = { addr = 0x801D9BDC, source = "Colon text Menu_DrawPlayTimeWindow draws twice between hours and minutes while g_PlayClock.thirtieths is below 15." }
+g_MenuCommandLabels = { addr = 0x801D9C8C, source = "Button text by label id; Menu_DrawCommandRow draws the entry named by g_MenuCommandRows on each button." }
+g_MenuCommandRows = { addr = 0x801D9CE8, source = "Command rows, 5 bytes each: the button count, then up to four label ids; Menu_DrawCommandRow reads the row it is given." }
+g_MenuEquipCompareLabels = { addr = 0x801D9D18, source = "Labels of the equipment compare window stat rows (Pwr, Def, Int, Agl), six bytes each." }
+g_MenuEquipSlotIcons = { addr = 0x801D9D30, source = "Sprite ids of the six equipment slot icons (weapon, shield, helmet, armor, two accessories) that Menu_DrawEquipCompareWindow draws beside each item name." }
+g_MenuEquipStatLabels = { addr = 0x801D9D38, source = "Labels of the equip stat window rows (Pwr, Def, Agl), six bytes each; Menu_DrawEquipStatWindow draws them shaded when the party member cannot equip the item." }
+g_MenuClutStripCells = { addr = 0x801D9D4C, source = "Cell rectangles that Menu_DrawClutStrip draws, indexed by the strip entry." }
+g_MenuClutStripEntries = { addr = 0x801D9DF8, source = "Cell ids that Menu_DrawClutStrip draws down each strip column, a run per palette." }
+g_MenuClutStripPalettes = { addr = 0x801D9E44, source = "Entry offset of each clut strip palette, indexed by the clut index." }
+g_MenuInventoryTitles = { addr = 0x801D9E70, source = "the inventory panel's category titles, ITEM, WEAPON, ARMOR, OPTION and VITAL, by ItemCategory" }
+g_MenuEquipTitles = { addr = 0x801D9EDC, source = "the equip list's category titles, ITEM, WEAPON, ARMOR, OPTION and VITAL, by ItemCategory" }
+g_MenuFormationArrowTurned = { addr = 0x801D9EF8, source = "The ground arrow corners turned by the preview angle, x at twice the scale of y." }
+g_MenuFormationSpots = { addr = 0x801D9F10, source = "Each party member's formation offset turned by the preview angle; Menu_DrawFormationPreview sorts them back to front with the member order." }
+g_MenuEquipChoiceIds = { addr = 0x801D9F28, source = "the item ids of the equip list: the inventory rows the party member can equip in the chosen slot, then zeros" }
+g_MenuEquipChoiceCounts = { addr = 0x801D9FA8, source = "the held counts of the g_MenuEquipChoiceIds rows" }
+g_ShisuIngredients = { addr = 0x801DA028, type = "ShisuIngredients", size = 0xC, source = "Item ids the shisu screen counts into held[] (four items) and passes to Item_Remove when one is used." }
+D_801DA07C = { addr = 0x801DA07C, type = "s32", source = "Scratch word assigned the first scroll x value by func_801D27BC." }
+D_801DA080 = { addr = 0x801DA080, type = "s32", source = "Scratch word assigned the first scroll y value by func_801D27BC." }
+g_ShisuBaseScale = { addr = 0x801DA088, source = "Scale of the shisu base model, from g_ShisuScales; the topping settles at its height plus scale * 0xA00." }
+D_801DA090 = { addr = 0x801DA090, type = "u8", source = "Scratch byte cleared by func_801D27BC during the first scroll-height setup." }
+D_801DA098 = { addr = 0x801DA098, type = "s32", source = "Scratch word assigned the record value read by func_801D27BC." }
+D_801DA09C = { addr = 0x801DA09C, type = "s32", source = "Scratch pointer assigned and reloaded by func_801D27BC during the first scroll-height setup." }
+g_ShisuBaseR = { addr = 0x801DA0A5, source = "The base model's red tint; vinegar used shifts it while drawing." }
+g_ShisuBaseG = { addr = 0x801DA0A6, source = "The base model's green tint; vinegar used shifts it while drawing." }
+g_ShisuBaseB = { addr = 0x801DA0A7, source = "The base model's blue tint; vinegar used shifts it while drawing." }
+D_801DA0AC = { addr = 0x801DA0AC, type = "s32", source = "Scratch word cleared by func_801D27BC during the first scroll-height setup." }
+D_801DA0B0 = { addr = 0x801DA0B0, type = "s32", source = "Scratch word cleared by func_801D27BC during the first scroll-height setup." }
+g_ShisuBaseAngle = { addr = 0x801DA0B4, source = "12-bit turn angle of the shisu base model: each frame adds 0x20, and a stop snaps it to a multiple of 0x40." }
+D_801DA0F4 = { addr = 0x801DA0F4, type = "s32", source = "Scratch word assigned the second scroll x value by func_801D27BC." }
+D_801DA0F8 = { addr = 0x801DA0F8, type = "s32", source = "Scratch word assigned the second scroll y value by func_801D27BC." }
+g_ShisuToppingScale = { addr = 0x801DA100, source = "Scale of the shisu topping model, g_ShisuScales[topping_size]." }
+D_801DA108 = { addr = 0x801DA108, type = "u8", source = "Scratch byte cleared by func_801D27BC during the second scroll-height setup." }
+D_801DA110 = { addr = 0x801DA110, type = "s32", source = "Scratch word assigned the record value read by func_801D27BC during the second setup." }
+D_801DA114 = { addr = 0x801DA114, type = "s32", source = "Scratch pointer assigned and reloaded by func_801D27BC during the second scroll-height setup." }
+g_ShisuToppingR = { addr = 0x801DA11D, source = "The topping model's red tint; horseradish used shifts it while drawing." }
+g_ShisuToppingG = { addr = 0x801DA11E, source = "The topping model's green tint; horseradish used shifts it while drawing." }
+g_ShisuToppingB = { addr = 0x801DA11F, source = "The topping model's blue tint; horseradish used shifts it while drawing." }
+D_801DA124 = { addr = 0x801DA124, type = "s32", source = "Scratch word cleared by func_801D27BC during the second scroll-height setup." }
+D_801DA128 = { addr = 0x801DA128, type = "s32", source = "Scratch word cleared by func_801D27BC during the second scroll-height setup." }
+g_ShisuToppingAngle = { addr = 0x801DA12C, source = "12-bit turn angle of the shisu topping model: each frame adds or subtracts 0x20, and a stop snaps it to a multiple of 0x40." }
+D_801F501C = { addr = 0x801F501C, type = "s32", source = "Pointer cell read by func_801D27BC; its value points to the record whose words 1 and 3 the function reads." }

@@ -1,0 +1,11 @@
+["emi/bmagic/magic108/03"]
+Battle_MarkDamaged = { addr = 0x800A9820, alias = true, source = "Marks the selected battlers as damaged." }
+Battle_StepRangeToward = { addr = 0x800AF3A0, type = "func", source = "Moves the battle range one step toward a point: the range's x and y axes and its vertical span each move by the step along the unit direction to the point. battle/15 owns the body." }
+Effect_RotatePosition = { addr = 0x801DD350, type = "func", source = "Integrates the effect velocity pairs the effect steps read; battle/03 owns the body." }
+Battle_AllocEffect = { addr = 0x801E590C, alias = true, source = "Claims a free battle effect slot." }
+Effect_Reset = { addr = 0x801E5988, type = "func", source = "Clears every timer, state and flag byte of the shared BattleEffect work record; every effect countdown calls it first. battle/03 owns the body." }
+g_BattleEnemies = { addr = 0x801EB2E8, alias = true, source = "The enemy battlers." }
+g_BattleEffectBattler = { addr = 0x801EB4E0, source = "the battler the running effect acts on; Battle_UpdateEffects stores it for each effect step (emi/battle/battle/03 owns the cell)" }
+g_BattleEffects = { addr = 0x801EC330, alias = true, source = "Battle effect work records (stride 0x78); Battle_AllocEffect claims a free one by setting bit 0 of header.flags." }
+Effect_PlayOnIdleTick = { addr = 0x801EED1C, type = "func", source = "When the effect ticker (byte 0x0B) is 0xFF marks the battlers of the target selector damaged, raises BATTLE_STATE_EFFECT_PLAYING and resets the effect in magic108 (Hypnotize, Confuse)." }
+Effect_AdvanceOnTick = { addr = 0x801EF090, type = "func", source = "Raises the effect timer (byte 0x09) by 8 and advances header.mode (byte 0x01) when it reaches 0x80 in magic108 (Hypnotize, Confuse)." }

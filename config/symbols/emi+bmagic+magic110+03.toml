@@ -1,0 +1,18 @@
+["emi/bmagic/magic110/03"]
+Battle_MarkDamaged = { addr = 0x800A9820, type = "func", source = "Marks the selected battlers as damaged." }
+Battle_CenterCamera = { addr = 0x800AFD9C, type = "func", source = "Centres the battle camera on the living battlers." }
+Battle_AllocEffect = { addr = 0x801E590C, alias = true, source = "Claims a free battle effect slot." }
+Effect_Reset = { addr = 0x801E5988, type = "func", source = "Clears every timer, state and flag byte of the shared BattleEffect work record; every effect countdown calls it first. battle/03 owns the body." }
+g_BattleEffectBattler = { addr = 0x801EB4E0, source = "the battler the running effect acts on; Battle_UpdateEffects stores it for each effect step (emi/battle/battle/03 owns the cell)" }
+g_BattleEffects = { addr = 0x801EC330, alias = true, source = "Battle effect work records (stride 0x78); Battle_AllocEffect claims a free one by setting bit 0 of header.flags." }
+Effect_DispatchMode = { addr = 0x801EEC1C, type = "func", source = "Runs the handler that header.mode (byte 0x01) selects from the six-handler table at the module head in magic110 (Ragnarok)." }
+Effect_StartPlaying = { addr = 0x801EF114, type = "func", source = "Raises BATTLE_STATE_EFFECT_PLAYING and clears the effect work record in magic110 (Ragnarok)." }
+BMagic_DispatchEffectMode = { addr = 0x801EF3F8, type = "func", source = "Runs the handler that header.mode (byte 0x01) selects from the effect handlers of magic110." }
+Effect_CountDownTimerStep = { addr = 0x801EF4DC, type = "func", source = "Counts the effect timer (byte 0x09) down and advances header.step (byte 0x02) at zero in magic110 (Ragnarok)." }
+Effect_StepWhileTickUnderThree = { addr = 0x801EF8F8, type = "func", source = "Advances header.step (byte 0x02) while the ticker (byte 0x0B) of g_BattleEffectBattler is under 3 in magic110 (Ragnarok)." }
+Effect_TickOnTimerZero = { addr = 0x801EF93C, type = "func", source = "Counts the effect timer (byte 0x09) down by 1 per frame; at zero lowers the ticker (byte 0x0B) of g_BattleEffectBattler and clears the effect in magic110 (Ragnarok)." }
+Effect_SetActorMatrix = { addr = 0x801EF998, type = "func", source = "Sets the actor's GTE matrix from its coordinates and half its vertical span, times the camera in magic110 (Ragnarok)." }
+BMagic_DrawDarkRing = { addr = 0x801EFC98, type = "func", source = "draws 64 subtractive POLY_G4 quads in a flat ring; the inner edge subtracts four times the shade byte, the outer edge nothing" }
+Effect_SetActorMatrix2 = { addr = 0x801F0138, type = "func", source = "Sets the actor's GTE matrix from its coordinates and half its vertical span, times the camera in magic110 (Ragnarok)." }
+g_BMagicEffectModes = { addr = 0x801F046C, source = "Handlers of magic110 (Ragnarok), run by header.mode (byte 0x01)." }
+D_801F04A4 = { addr = 0x801F04A4, type = "Offset2", size = 0x30, source = "Six points." }

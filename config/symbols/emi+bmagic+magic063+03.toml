@@ -1,0 +1,16 @@
+["emi/bmagic/magic063/03"]
+Battle_ApplyDamageFlags = { addr = 0x800A9610, type = "func", source = "Applies the damage flags to the selected battlers." }
+Battle_MarkDamaged = { addr = 0x800A9820, alias = true, source = "Marks the selected battlers as damaged." }
+Battle_SlotIsBlocked = { addr = 0x801DB524, alias = true, source = "Tells whether a battler slot can not be selected." }
+Battle_AllocEffect = { addr = 0x801E590C, alias = true, source = "Claims a free battle effect slot." }
+Effect_Reset = { addr = 0x801E5988, type = "func", source = "Clears every timer, state and flag byte of the shared BattleEffect work record; every effect countdown calls it first. battle/03 owns the body." }
+g_BattleEnemies = { addr = 0x801EB2E8, alias = true, source = "The enemy battlers." }
+g_BattleEffectBattler = { addr = 0x801EB4E0, source = "the battler the running effect acts on; Battle_UpdateEffects stores it for each effect step (emi/battle/battle/03 owns the cell)" }
+g_BattleEffects = { addr = 0x801EC330, alias = true, source = "Battle effect work records (stride 0x78); Battle_AllocEffect claims a free one by setting bit 0 of header.flags." }
+Effect_StartOnZeroTick = { addr = 0x801EEEE4, type = "func", source = "When the effect ticker (byte 0x0B) is zero raises BATTLE_STATE_EFFECT_PLAYING and clears the effect in magic063 (SuddenDeath)." }
+BMagic_DispatchEffectMode = { addr = 0x801EEF30, type = "func", source = "Runs the handler that header.mode (byte 0x01) selects from the effect handlers of magic063." }
+Effect_EndOnZeroTick = { addr = 0x801EF2E4, type = "func", source = "When the effect ticker (byte 0x0B) is zero marks the targets of the side mask in byte 0x04, lowers the active battler's ticker and clears the effect in magic063 (SuddenDeath)." }
+Effect_StartOrbit = { addr = 0x801EF40C, type = "func", source = "Starts the next cycle of the orbiting effect of magic063: picks its angle, radius and random timers." }
+Effect_StepOrbit = { addr = 0x801EF704, type = "func", source = "Turns the orbiting effect of magic063 one step around its battler and ages its timers." }
+g_BMagicEffectModes = { addr = 0x801F0400, source = "Handlers of magic063 (SuddenDeath), run by header.mode (byte 0x01)." }
+g_BMagicOrbit = { addr = 0x801F1054, type = "BMagicOrbit*", source = "Work record of the orbiting sub-effect of magic063 whose handlers run by header.step (byte 0x02)." }

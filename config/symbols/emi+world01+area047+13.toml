@@ -1,0 +1,3 @@
+["emi/world01/area047/13"]
+g_AreaModuleId = { addr = 0x801F2C00, source = "Module id of the area: the first payload word of its overlay, 52 + the area number." }
+Area_DrawRingQuads = { addr = 0x801F2F60, type = "func", source = "Draws the two ring passes of quads the fading trail row leaves around the lead member." }

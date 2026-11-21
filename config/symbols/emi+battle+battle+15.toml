@@ -1,0 +1,272 @@
+["emi/battle/battle/15"]
+g_BattleWorkCell = { addr = 0x1F800044, alias = true, source = "The task cell at 0x1F800044 as one u32: the plain word Battle_CureStatus saves and restores without reloading g_Task." }
+jtbl_80096804 = { addr = 0x80096804, type = "Callback", source = "The switch table of Battle_TriggerEnemyEvents: the jump targets of its jr dispatch." }
+jtbl_8009689C = { addr = 0x8009689C, type = "Callback", source = "The switch table of Battle_RunEnemyEvents: the jump targets of its jr dispatch." }
+jtbl_80096914 = { addr = 0x80096914, type = "Callback", source = "The switch table of Battle_ApplyEnemyEvent: the jump targets of its jr dispatch." }
+jtbl_80096934 = { addr = 0x80096934, type = "Callback", source = "The switch table of Battle_ScaleEnemyStat: the jump targets of its jr dispatch." }
+jtbl_80096954 = { addr = 0x80096954, type = "Callback", source = "The switch table of func_8009CF80: the jump targets of its jr dispatch." }
+jtbl_80096974 = { addr = 0x80096974, type = "Callback", source = "The switch table of func_800A805C: the jump targets of its jr dispatch." }
+g_MenuInventoryCountFormat = { addr = 0x80096A4C, source = "the inventory panel's held count and capacity, two right-aligned numbers" }
+jtbl_80096A5C = { addr = 0x80096A5C, type = "Callback", source = "The switch table of Menu_DrawEquipChoiceWindow: the jump targets of its jr dispatch." }
+Battle_RunAttackCommand = { addr = 0x80096A74, type = "func", source = "Runs the Attack command: calls the step its ui_step selects. Entry 0 of the battle command sub-steps." }
+Battle_ShowAttackName = { addr = 0x80096AB0, type = "func", source = "Shows the Attack action name over the command and advances ui_step." }
+Battle_StartAttackTarget = { addr = 0x80096B24, type = "func", source = "Aims the Attack at the first target Battle_TargetNext gives, clears the selection latch and enters the next ui_mode." }
+Battle_SelectAttackEnemyTarget = { addr = 0x80096B7C, type = "func", source = "Attack target pick among the enemy slots: confirm and cancel set ui_mode, directions move the target with SE 1." }
+Battle_SelectAttackPartyTarget = { addr = 0x80096CC8, type = "func", source = "Attack target pick among the party slots: confirm and cancel set ui_mode, directions move the target with SE 1." }
+Battle_ConfirmAttack = { addr = 0x80096E14, type = "func", source = "Plays SE 4, sets the command type to Attack, counts the command and returns the battle to phase step 1." }
+Battle_CancelAttack = { addr = 0x80096E90, type = "func", source = "Plays SE 6, shows the active message slot and returns the battle to phase step 2." }
+Battle_RunAbilityCommand = { addr = 0x80096F00, type = "func", source = "Runs the Ability command: calls the step its ui_step selects. Entry 1 of the battle command sub-steps." }
+Battle_SetCommandType = { addr = 0x80096FBC, type = "func", source = "the body stores into g_BattleActorTurn->command.type" }
+Battle_ChooseAbility = { addr = 0x8009704C, type = "func", source = "Ability list step: moves the group and page cursor; confirm stores the ability id as the command id." }
+Battle_IsAbilityLocked = { addr = 0x80097574, type = "func", source = "returns true when the selected ability cannot be used in battle" }
+Battle_ResetAbilitySelection = { addr = 0x800975D4, type = "func", source = "Ability step that calls BattleResetSelectionState." }
+Battle_RouteAbilityTarget = { addr = 0x8009761C, type = "func", source = "Reads the ability flags of the menu entry and picks the next ui_step or the action target." }
+Battle_SetCommandId = { addr = 0x80097778, type = "func", source = "the body stores into g_BattleActorTurn->command.id" }
+Battle_SelectAbilityEnemyTarget = { addr = 0x80097844, type = "func", source = "Ability target pick among enemies: the both-sides flag gates up/down, left/right move the target with SE 1." }
+Battle_SelectAbilityPartyTarget = { addr = 0x800979E4, type = "func", source = "Ability target pick among the party: the both-sides flag gates up/down, left/right move the target with SE 1." }
+Battle_ResetSelectionLatch = { addr = 0x80097C0C, type = "func", source = "the body stores into g_Battle.selection_latch" }
+Battle_SetPhaseStep = { addr = 0x80097CBC, type = "func", source = "the body stores into g_Battle.phase.step" }
+Battle_SetAbilityTargetSide = { addr = 0x80097D58, type = "func", source = "Sets the action target to the enemy or party side from the ability's opponent flag." }
+Battle_ToggleAbilityTargetSide = { addr = 0x80097DC0, type = "func", source = "Toggles the both-sides target bit on direction input when the ability allows it." }
+Battle_InitAbilityPanel = { addr = 0x80097EC0, type = "func", source = "Initializes the choice panel for an ability command from the message slot and the D_801454F4 entry." }
+Battle_RunExamineCommand = { addr = 0x800980A8, type = "func", source = "Runs the Examine command: calls the step its ui_step selects. Entry 3 of g_BattleRunCommandSteps between Item and Defend; the confirm sets BATTLE_COMMAND_EXAMINE and the start shows action name 2, the retail Examine." }
+Battle_StartExamineTarget = { addr = 0x800980E4, type = "func", source = "Aims the Examine at the first enemy Battle_TargetNext gives, shows action name 2 (the retail Examine row of s_BattleActionNames), sets the selection latch and steps the party state." }
+Battle_SelectExamineEnemyTarget = { addr = 0x80098144, type = "func", source = "Examine target pick among the enemy slots: cancel returns to ui_step 3, confirm to 2, left and right move the target with SE 1." }
+Battle_ConfirmExamine = { addr = 0x80098254, type = "func", source = "Plays SE 4, sets the command to BATTLE_COMMAND_EXAMINE with the command-entered flag, counts the command and returns the battle to phase step 1." }
+Battle_CancelExamine = { addr = 0x800982E4, type = "func", source = "Plays SE 6, shows the active message slot and returns the battle to phase step 2." }
+Battle_RunItemCommand = { addr = 0x8009834C, type = "func", source = "Runs the Item command: calls the step its ui_step selects. Entry 2 of the battle command sub-steps." }
+Battle_StartItemCommand = { addr = 0x80098408, type = "func", source = "Sets the command type to Item, initializes the item panel and moves the party-state step on." }
+Battle_SelectItem = { addr = 0x80098450, type = "func", source = "Item picker: directions move the panel mode and the group and page cursor; confirm tests the item." }
+Battle_ResetItemSelection = { addr = 0x800989B4, type = "func", source = "Item step that calls BattleResetSelectionState." }
+Battle_RouteItemTarget = { addr = 0x800989FC, type = "func", source = "Reads the item flags of the menu entry and picks the next ui_step or the action target." }
+Battle_StartItemTarget = { addr = 0x80098B44, type = "func", source = "Sets the action target and ui_mode from the item flags, clears the repeat buttons and sets the selection latch." }
+Battle_SelectItemEnemyTarget = { addr = 0x80098C18, type = "func", source = "Item target pick among enemies: confirm and cancel set ui_mode, directions move the target with SE 1." }
+Battle_SelectItemPartyTarget = { addr = 0x80098DC4, type = "func", source = "Item target pick among the party: confirm and cancel set ui_mode, directions move the target with SE 1." }
+Battle_ConfirmItem = { addr = 0x80098FD4, type = "func", source = "Plays SE 4, sets the command type to Item, spends the item and clears its panels." }
+Battle_CancelItem = { addr = 0x80099114, type = "func", source = "Plays SE 6, shows the active message slot and returns to phase step 4." }
+Battle_SetItemTargetSide = { addr = 0x800991B4, type = "func", source = "Sets the action target to the enemy or party side from the item flags." }
+Battle_ToggleItemTargetSide = { addr = 0x80099248, type = "func", source = "Toggles the both-sides target bit on direction input for items that allow it." }
+Battle_ChooseEquipAction = { addr = 0x80099364, type = "func", source = "The equip menu's choice step: left and right toggle the prompt between battle messages 47 (Use an equipped item) and 49 (Change equipped items); confirm enters the use or the change flow." }
+Battle_SelectEquipRow = { addr = 0x80099568, type = "func", source = "Change-equipment step: walks the six equipment rows under battle message 50 (Choose the item to change); the square button hands the row to Battle_Unequip; confirm enters the replacement pick." }
+Battle_SelectEquipChoice = { addr = 0x80099830, type = "func", source = "Walks the equip choice list for the chosen slot: confirm applies the new equipment through Battle_ApplyEquipment, cancel returns to the row pick." }
+Battle_SelectEquipItem = { addr = 0x80099B74, type = "func", source = "Use-equipment step: walks the six equipment rows under battle message 48 (Choose the item to equip); confirm stores the worn item as the command id and enters its use flow." }
+Battle_RouteEquipItem = { addr = 0x80099E80, type = "func", source = "Routes the equipped item's use by its flags: show-animation items enter the target picks (story items ui_step 9, the rest ui_step 8), the others take the flag target and go to the confirm." }
+Battle_SetEquipTarget = { addr = 0x80099FCC, type = "func", source = "Sets the equipped item's action target from its flags (the first enemy for show-name items, the first party slot otherwise) and sets the selection latch." }
+Battle_ConfirmEquipItem = { addr = 0x8009A468, type = "func", source = "Plays SE 4, sets the command type to Item, clears the menu panels and returns the battle to phase step 1." }
+Battle_CancelEquipItem = { addr = 0x8009A518, type = "func", source = "Plays SE 6, shows the active message slot and returns the battle to phase step 4." }
+Battle_ApplyEquipment = { addr = 0x8009A744, type = "func", source = "Applies the equipment chosen in the item list: moves the six equipment slots through Item_Remove and Item_Add and rebuilds the stats." }
+Battle_PreviewEquipment = { addr = 0x8009AAE8, type = "func", source = "Records whether the character can equip the selected item and fills s_BattleEquipment with the equipment changed at the row." }
+Battle_Unequip = { addr = 0x8009AC18, type = "func", source = "Removes the equipment at the row back to the inventory and rebuilds the stats." }
+Battle_InitItemPanel = { addr = 0x8009AF84, type = "func", source = "Initializes the choice panel for an item command." }
+Battle_InitEquipChangePanel = { addr = 0x8009B03C, type = "func", source = "Sets up the equipment panel for the change flow: panel mode 2, the six worn items of s_BattleEquipment as the list, the scroll and cursor fields." }
+Battle_InitEquipUsePanel = { addr = 0x8009B160, type = "func", source = "Sets up the equipment panel for the use flow: panel mode 3 with the six worn items of s_BattleEquipment as the list." }
+Battle_ClearMenuPanels = { addr = 0x8009B20C, type = "func", source = "Clears menu panel tasks 16 through 19 with Menu_ClearPanel." }
+Battle_RunEscapeCommand = { addr = 0x8009B274, type = "func", source = "Runs the Escape command: calls the step its ui_step selects. Entry 6 of the battle command sub-steps." }
+Battle_TryEscape = { addr = 0x8009B2B0, type = "func", source = "Counts an escape attempt and rolls it against the agility of the party and the enemies; sets ui_step." }
+Battle_StartEscapeScroll = { addr = 0x8009B488, type = "func", source = "Starts the scroll after the escape roll: clears the event slot, loads the battle SE archive, applies the scroll delta to the area target cell, sets the camera height step and resets the party command modes." }
+Battle_ScrollEscapeOut = { addr = 0x8009B700, type = "func", source = "Scrolls the area camera away by the battle scroll delta (camera step 0x80) while the party attempts the escape." }
+Battle_ScrollEscapeBack = { addr = 0x8009B794, type = "func", source = "Scrolls the area camera back by the battle scroll delta (camera step 0x40) after the failed escape attempt." }
+Battle_FailEscape = { addr = 0x8009B828, type = "func", source = "Shows battle message 15 (You can't escape!) for 45 frames, resets the party facing and returns the battle to turns." }
+Battle_SucceedEscape = { addr = 0x8009B9A0, type = "func", source = "Frees the palette fade of the eight enemy battlers, shows battle message 16 (You managed to escape...) for 45 frames and advances the scroll." }
+Battle_EndEscape = { addr = 0x8009BA7C, type = "func", source = "Ends the escape: when no outcome event flag holds it, sets the phase mode to result and clears the camera step." }
+Battle_CalcEscapeChance = { addr = 0x8009BACC, type = "func", source = "Escape chance from the agility difference, raised on the second attempt and by a status bonus, clamped to 0x40." }
+Battle_TriggerEnemyEvents = { addr = 0x8009BBE8, type = "func", source = "Walks the four event packets of the current enemy and triggers each one whose condition holds, once per battle unless it is a repeating trigger." }
+Battle_RunEnemyEvents = { addr = 0x8009BFC4, type = "func", source = "Runs the enemy event packets of the eight enemy slots, firing or clearing each by its condition." }
+Battle_EnemyEventTriggered = { addr = 0x8009C868, type = "func", source = "Tells whether the event packet at an index has already been triggered for the enemy." }
+Battle_SetEnemyEventTriggered = { addr = 0x8009C87C, type = "func", source = "Sets or clears the triggered bit of an event packet index for the enemy." }
+Battle_ActionHasElement = { addr = 0x8009C8AC, type = "func", source = "Tells whether the running ability or the attacker's weapon carries any element of the mask and the current enemy took a nonzero hp change." }
+Battle_ApplyEnemyEvent = { addr = 0x8009C994, type = "func", source = "Applies one enemy event packet to the enemy battler: sets its event flags, status, record cells, panel or skills by the packet's effect kind." }
+Battle_ScaleEnemyStat = { addr = 0x8009CCBC, type = "func", source = "Scales one of an enemy's seven stat fields by a percentage (the enemy event of type 3): hit points and magic points stay within their maximums, the other fields cap at 999." }
+Battle_MergeEnemyPanels = { addr = 0x8009CFEC, type = "func", source = "Removes the entries of the enemy panel list D_801ED9B0 that repeat an enemy kind and panel id, keeping the first; called after the enemy events trigger." }
+Battle_DealNoDamage = { addr = 0x8009DA94, type = "func", source = "Marks the damage applied and changes nothing else." }
+Battle_ApplyAbilityDamage = { addr = 0x8009DCC8, type = "func", source = "reads the ability row and stores the computed hp_change into g_Battle.target_record" }
+Battle_CurePoison = { addr = 0x8009DD20, type = "func", source = "Cures STATUS_POISONED on the action target and marks the damage applied." }
+Battle_ApplyHeal = { addr = 0x8009DE18, type = "func", source = "Stores Battle_CalcHeal as the action target's hp change. The Heal ability's handler calls it and it is entry 7 of the action handler table." }
+Battle_Heal20Hp = { addr = 0x8009DE50, type = "func", source = "Sets the action target's hp change to -20, a heal of 20." }
+Battle_Heal40Hp = { addr = 0x8009DE64, type = "func", source = "Sets the action target's hp change to -40, a heal of 40." }
+Battle_Heal100Hp = { addr = 0x8009DE78, type = "func", source = "Sets the action target's hp change to -100, a heal of 100." }
+Battle_HealFullHp = { addr = 0x8009DE8C, type = "func", source = "Sets the action target's hp change to its negated max HP." }
+Battle_CureStatusChance = { addr = 0x8009DF70, type = "func", source = "The Croc Tear and Vinegar effect: heals 5 and on a roll under 0x27 cures the blind, confused and sleeping mask; the retail description reads Chance of restoring status." }
+Battle_CureBlindness = { addr = 0x8009DFEC, type = "func", source = "Cures STATUS_BLIND on the action target and marks the damage applied." }
+Battle_CurePetrification = { addr = 0x8009E01C, type = "func", source = "THE MOCHI effect: cures status 0x100; the retail description reads Cures petrification." }
+Battle_CureAilments = { addr = 0x8009E04C, type = "func", source = "Cures the ailment status mask on the action target and marks the damage applied." }
+Battle_ReviveOneHp = { addr = 0x8009E07C, type = "func", source = "Revives a KO action target with 1 HP and counts it among the living." }
+Battle_Heal20Ap = { addr = 0x8009E200, type = "func", source = "Sets the action target's ap change to -0x14." }
+Battle_Heal100Ap = { addr = 0x8009E224, type = "func", source = "Sets the action target's ap change to -0x64." }
+Battle_DrainHp = { addr = 0x8009E248, type = "func", source = "Takes a fifth of the target's HP and gives it to the active battler." }
+Battle_DrainAp = { addr = 0x8009E500, type = "func", source = "Takes a fifth of the target's AP and gives it to the active battler." }
+Battle_InflictSleep = { addr = 0x8009E804, type = "func", source = "Adds STATUS_SLEEPING to the battle action target through Battle_InflictStatus." }
+Battle_InflictConfusion = { addr = 0x8009E824, type = "func", source = "Adds STATUS_CONFUSED to the battle action target through Battle_InflictStatus." }
+Battle_ReviveQuarterHp = { addr = 0x8009E844, type = "func", source = "Revives a KO party target on a random roll with a quarter of its max HP." }
+Battle_ReviveFullHp = { addr = 0x8009E98C, type = "func", source = "Revives a KO party target with a 10000 point heal." }
+Battle_InflictSilence = { addr = 0x8009F258, type = "func", source = "Adds STATUS_SILENCED to the battle action target through Battle_InflictStatus." }
+Battle_CastQuake = { addr = 0x8009F278, type = "func", source = "The Dynamite effect: sets the battle action to the Quake ability and applies its damage; the retail description reads Earthquake attack vs all targets." }
+Battle_CastTyphoon = { addr = 0x8009F2B0, type = "func", source = "The Weather Vane effect: sets the battle action to the Typhoon ability and applies its damage; the retail description reads Wind attack vs all targets." }
+Battle_CastLightning = { addr = 0x8009F2E8, type = "func", source = "The Taser and Royal Sword effect: sets the battle action to the Lightning ability and applies its damage; the retail description reads Electric attack vs all targets." }
+Battle_HalveDamage = { addr = 0x8009F320, type = "func", source = "sets the damage-halved action flag on the current target" }
+Battle_CastMight = { addr = 0x8009F3DC, type = "func", source = "Sets the battle action to the Might ability, then applies the ability's target and stat rescale through func_800A403C." }
+Battle_CastInferno = { addr = 0x8009F414, type = "func", source = "Sets the battle action to the Inferno ability and applies its ability damage." }
+Battle_CastBlizzard = { addr = 0x8009F44C, type = "func", source = "The Icicle effect: sets the battle action to the Blizzard ability and applies its damage; the retail description reads Frost attack vs all targets." }
+Battle_CastSirocco = { addr = 0x8009F484, type = "func", source = "The Napalm effect: sets the battle action to the Sirocco ability and applies its damage; the retail description reads Flame wind attack vs all targets." }
+Battle_CastFlare = { addr = 0x8009F4BC, type = "func", source = "Sets the battle action to the Flare ability and applies its ability damage." }
+Battle_CastProtect = { addr = 0x8009F4F4, type = "func", source = "Sets the battle action to the Protect ability, then applies the ability's target and stat rescale through func_800A403C." }
+Battle_CastWeaken = { addr = 0x8009F52C, type = "func", source = "Sets the battle action to the Weaken ability, then applies the ability's target and stat rescale through func_800A403C." }
+Battle_CastFireblast = { addr = 0x8009F564, type = "func", source = "Sets the battle action to the Fireblast ability and applies its ability damage." }
+Battle_CastCyclone = { addr = 0x8009F59C, type = "func", source = "The WindCutter use effect: sets the battle action to the Cyclone ability and applies its damage; the weapon's description reads Property Wind." }
+Battle_CastSilence = { addr = 0x8009F5D4, type = "func", source = "The LacquerStaff use effect: sets the battle action to the Silence ability and inflicts STATUS_SILENCED." }
+Battle_CastJolt = { addr = 0x8009F60C, type = "func", source = "The Thunder Rod use effect: sets the battle action to the Jolt ability and applies its damage; the weapon's description reads Property Electric." }
+Battle_CastSimoon = { addr = 0x8009F67C, type = "func", source = "The Brass Claws use effect: sets the battle action to the Simoon ability and applies its damage." }
+Battle_CastBarrier = { addr = 0x8009F6B4, type = "func", source = "Sets the battle action to the Barrier ability and raises the damage-halved flag through Battle_HalveDamage." }
+Battle_ThirdHpDamage = { addr = 0x8009F7EC, type = "func", source = "Stores Battle_RollHpDamage(3) as the action target's hp change: a third of the attacker's hp, scaled by the random percent and the element resistance." }
+Battle_FullHpDamage = { addr = 0x8009F814, type = "func", source = "Stores Battle_RollHpDamage(1) as the action target's hp change: the attacker's whole hp, scaled by the random percent and the element resistance." }
+Battle_HalfHpDamage = { addr = 0x8009F83C, type = "func", source = "Stores Battle_RollHpDamage(2) as the action target's hp change: half the attacker's hp, scaled by the random percent and the element resistance." }
+Battle_InflictParalysis = { addr = 0x8009F864, type = "func", source = "Adds STATUS_PARALYZED to the battle action target through Battle_InflictStatus." }
+Battle_InflictBlindness = { addr = 0x8009F978, type = "func", source = "Adds STATUS_BLIND to the battle action target through Battle_InflictStatus." }
+Battle_InflictPoison = { addr = 0x8009F998, type = "func", source = "Adds STATUS_POISONED to the battle action target through Battle_InflictStatus." }
+Battle_Heal1Hp = { addr = 0x8009FE70, type = "func", source = "The Jellyfish and Man-o'-War effect: sets the action target's hp change to -1; the retail description reads Restores 1HP." }
+Battle_Heal80Hp = { addr = 0x8009FE84, type = "func", source = "The Bass, Sea Bass and Black Bass effect: sets the action target's hp change to -80; the retail description reads Restores 80HP." }
+Battle_Heal240Hp = { addr = 0x8009FE98, type = "func", source = "The Barandy and Spearfish effect: sets the action target's hp change to -240; the retail description reads Restores 240HP." }
+Battle_Heal5Ap = { addr = 0x8009FEAC, type = "func", source = "The RainbowTrout and Sea Bream effect: sets the action target's ap change to -5; the retail description reads Restores 5AP." }
+Battle_CastMyollnir = { addr = 0x8009FF7C, type = "func", source = "The Devilfish effect: sets the battle action to the Myollnir ability and applies its damage; the retail description reads Electric attack vs one target." }
+Battle_FullRestore = { addr = 0x8009FFB4, type = "func", source = "The Moon Tears and Whale effect: cures the ailment mask 0xBFC and heals to full; the retail description reads Restores party's HP and status." }
+Battle_Heal5Hp = { addr = 0x8009FFE4, type = "func", source = "The Shaly Seed, Berries and Horseradish effect: sets the action target's hp change to -5; the retail description reads Restores 5HP." }
+Battle_DoubleRewards = { addr = 0x800A07D0, type = "func", source = "The Ivory Dice effect: doubles the target enemy's zenny and exp, each capped at 0xFFFF; the retail description reads Mystery effect if used on enemies." }
+Battle_StopTurns = { addr = 0x800A0920, type = "func", source = "The Hourglass effect: empties the turn order after the user and locks the actions; the retail description reads Stops all but user for 3 turns." }
+Battle_GrantReprisal = { addr = 0x800A1414, type = "func", source = "sets the reprisal damage flag on the active battler" }
+Battle_GrantAlwaysHits = { addr = 0x800A1704, type = "func", source = "sets the always-hits action flag on the active battler" }
+Battle_GrantDamageImmunity = { addr = 0x800A1A30, type = "func", source = "sets the damage-immune damage flag on the active battler" }
+Battle_CastDeath = { addr = 0x800A2404, type = "func", source = "The Belladonna effect: sets the battle action to the Death ability and applies its damage; the retail description reads Destroy one target." }
+Battle_GetActionId = { addr = 0x800A2880, type = "func", source = "the body returns g_Battle.action_id" }
+Battle_GetFireResistance = { addr = 0x800A2AE0, type = "func", source = "the body returns g_Game.members[battler_index].chr.stats.resistances[0]" }
+Battle_CalcHeal = { addr = 0x800A30E8, type = "func", source = "Computes the heal an action gives: the ability's power row scaled by the rate byte and the target's holy resistance, returned as a negative hp change." }
+Battle_AddStatus = { addr = 0x800A31E0, type = "func", source = "Adds the status bits of the mask to one battler (players below 3, enemies from 3): each bit goes into g_Battle.pending_status unless the battler already has it or a blocking status, then the merged word is stored back and published." }
+Battle_CureStatus = { addr = 0x800A36F0, type = "func", source = "Cures the status bits of the mask on one battler: clears them from its status word, restores a confused battler's position and publishes the new status through the work cell." }
+Battle_SetTarget = { addr = 0x800A39B4, type = "func", source = "the body stores into g_Battle.target_record" }
+Battle_PickAbility = { addr = 0x800A3A10, type = "func", source = "picks an ability for the battler and selection kind, using g_Abilities and rand" }
+Battle_MarkDamageApplied = { addr = 0x800A3F28, type = "func", source = "existing bottom-up proposal: ORs BATTLE_STATE_DAMAGE_APPLIED into g_Battle.state and marks the damage row" }
+Battle_InflictStatus = { addr = 0x800A41D8, type = "func", source = "Marks the battle damage applied, then adds the given status mask to the action target through Battle_AddStatus unless the ability picker still holds the action." }
+Battle_RollHpDamage = { addr = 0x800A4294, type = "func", source = "Rolls the damage of the active battler's hp divided by the divisor, scaled by the random percent table D_800B498C and the target's resistance to the action's element; 0 when the target is damage-immune." }
+Battle_LoadDraArchive = { addr = 0x800A4700, type = "func", source = "Loads the BATL_DRA archive when no choice phase is pending and advances ui_state; step 0 of the D_800B4CAC battle UI step table. The archive's job is not proven, so the name keeps the disc label." }
+Battle_EndDraLoad = { addr = 0x800A4744, type = "func", source = "Waits EMI_IsReady for the BATL_DRA stream started by Battle_LoadDraArchive, copies palette rows 0x1A and 0x1B and raises g_GfxPalettePending; step 1 of D_800B4CC8." }
+Battle_OpenMenu = { addr = 0x800A47AC, type = "func", source = "Opens the battle menu." }
+Battle_LoadRe2Archive = { addr = 0x800A4B2C, type = "func", source = "Shows the battle message, then streams EMI_SLOT_BATL_RE2 and advances ui_state; step 3 of D_800B4CD0. The archive's job is not proven, so the name keeps the disc label." }
+Battle_EndRe2Load = { addr = 0x800A4BB4, type = "func", source = "Waits EMI_IsReady for the BATL_RE2 stream started by Battle_LoadRe2Archive, copies palette row 0x1B, raises g_GfxPalettePending and resets the UI step; step 4 of D_800B4CD0." }
+Battle_StartAbilityPose = { addr = 0x800A581C, type = "func", source = "Step 2 of the ability panel step table D_800B4D00: plays common SE 4, sets D_80148627 to 2 and BATTLER_ACTION_ABILITY_ALT_POSE on the active row, and advances ui_state." }
+Battle_AppendComboIds = { addr = 0x800A7B40, type = "func", source = "appends the combo ids of one gene combination to the active battler's queued action list, skipping duplicates, and returns the new count" }
+Battle_SetGeneCount = { addr = 0x800A82F8, type = "func", source = "the body stores into g_Battle.gene_count" }
+Effect_ShakeScreen = { addr = 0x800A8EB8, type = "func", source = "Sets the three screen shake offsets (bytes 0x5D to 0x5F) to -16 times the effect ticker (byte 0x0B) and counts the effect timer (byte 0x09) down, clearing the effect at the wrap past zero in the shared battle effects." }
+Battle_ApplyDamageFlags = { addr = 0x800A9610, type = "func", source = "Applies the damage flags to the selected battlers." }
+Battle_MarkDamaged = { addr = 0x800A9820, type = "func", source = "Marks the selected battlers as damaged." }
+Battle_RescaleStats = { addr = 0x800A9BD8, type = "func", source = "Rescales one battler's stats." }
+Battle_RescalePanel = { addr = 0x800A9FC4, type = "func", source = "Rescales the local battler panel." }
+Battle_ApplyFormationStats = { addr = 0x800AAA74, type = "func", source = "Applies the formation's stat changes to the party." }
+Battle_QueueAction = { addr = 0x800AAC88, type = "func", source = "Queues one battler action." }
+Battle_PickRandomTarget = { addr = 0x800AB760, type = "func", source = "Picks a random selectable target for a command." }
+Battle_LoadScriptedEncounter = { addr = 0x800ABBE0, type = "func", source = "Loads the encounter enemies with Battle_LoadEncounterEnemies and runs the setup handler D_800B5108[g_Battle.encounter]; func_800ABBA4 calls it when BATTLE_IS_SCRIPTED and func_800ABC30 otherwise." }
+Battle_InitEnemy = { addr = 0x800ABCE0, type = "func", source = "Sets up an enemy battler in a slot and queues its script." }
+Battle_LoadEncounterEnemies = { addr = 0x800ABF5C, type = "func", source = "Adds the enemies of the encounter to the battle." }
+Battle_AddEnemy = { addr = 0x800AC01C, type = "func", source = "Adds an enemy to the battle." }
+Battle_LoadEnemyBattler = { addr = 0x800AC218, type = "func", source = "Loads an area enemy's stats into its battler." }
+Battle_FindActorEntry = { addr = 0x800AC754, type = "func", source = "existing proposal: finds the battle actor entry for a battler" }
+Battle_ShowActorEntry = { addr = 0x800AC844, type = "func", source = "Clears the hidden flag of the actor entry entry_id, which draws the battler again." }
+Battle_CopyActorEntry = { addr = 0x800AC870, type = "func", source = "Copies a record into the actor entry entry_id: mode 0 copies its state fields and marks the entry, mode 1 copies its position." }
+Actor_Clear = { addr = 0x800ACFF4, type = "func", source = "Clears an actor record." }
+Battle_IsEnemyDefeated = { addr = 0x800AD044, type = "func", source = "Tests the bit of an enemy kind in the bit set D_80144F60 that Battle_DefeatEnemy fills; Battle_InitEnemy stores the result in the battler's unk_7F, which the enemy name panel reads." }
+Battle_SetEnemyDefeated = { addr = 0x800AD074, type = "func", source = "Sets the bit of an enemy kind in the bit set D_80144F60; Battle_DefeatEnemy calls it and Battle_IsEnemyDefeated reads it." }
+Battle_LoadSelectionEffect = { addr = 0x800AE1F8, type = "func", source = "Loads the effect module of a battle selection: the row of g_BattleSelections that the action selects gives the EMI slot, which the loader streams in." }
+Battle_AllocActionEffect = { addr = 0x800AE260, type = "func", source = "sets the action id, allocates a battle action effect from the action table and stores its target" }
+Battle_CanTarget = { addr = 0x800AED5C, type = "func", source = "Tells whether the battler can be a target of the selector: it makes the battler the current target, runs the selector's target test and restores the target; true when the test passes." }
+Battle_SelectActiveBattlerScript = { addr = 0x800AEF98, type = "func", source = "Selects the active battler's actor script for a step and payload; a party member's facing offsets the step." }
+Battle_MoveRangeToward = { addr = 0x800AF2B4, type = "func", source = "moves the range work toward the target along a normalized vector by the step" }
+Battle_StepRangeToward = { addr = 0x800AF3A0, type = "func", source = "Moves the battle range one step toward a point: the range's x and y axes and its vertical span each move by the step along the unit direction to the point." }
+Battle_ProjectRange = { addr = 0x800AF764, type = "func", source = "Projects the battle range to the screen." }
+Battle_FadePoisonedBattler = { addr = 0x800AF814, type = "func", source = "Starts the palette fade of the battler at battler_index when it is poisoned: party members 0 to 2 from g_Game.members, enemies from g_BattleEnemies; does nothing for a blocked slot." }
+Battle_SetCellPaletteStp = { addr = 0x800AF8F0, type = "func", source = "Sets bit 15 (STP) of each palette entry after the first in the palette row of the battle sprite cell." }
+Battle_ClearCellPaletteStp = { addr = 0x800AF9D4, type = "func", source = "Clears bit 15 (STP) of each palette entry after the first in the palette row of the battle sprite cell." }
+Battle_ClearCellPaletteEntry = { addr = 0x800AFAB8, type = "func", source = "Zeroes one palette entry (index 0x1F) of the palette row of the battle sprite cell." }
+Battle_CopyCellPalette = { addr = 0x800AFB48, type = "func", source = "Copies the palette rows of the battle sprite cell into the second palette bank and returns the value the effect keeps in unk_27, from the row divisor." }
+Battle_PlayActiveBattlerSE = { addr = 0x800AFC98, type = "func", source = "Plays the active battler's SEs: a party member's two effect SEs, or the enemy SE and selection voice." }
+Battle_CenterCamera = { addr = 0x800AFD9C, type = "func", source = "Centres the battle camera on the living battlers." }
+Battle_SelectStepRule = { addr = 0x800AFF98, type = "func", source = "existing proposal: selects a battle step rule for a player battler" }
+Battle_DrawCommandList = { addr = 0x800B1728, type = "func", source = "Draws the battle command list." }
+Battle_DrawTitledFrame = { addr = 0x800B1A74, type = "func", source = "Draws a bordered battle panel with a title." }
+Menu_DrawPanelCursor = { addr = 0x800B20D4, type = "func", source = "Draws the front-end panel cursor at the task root x and y through Menu_DrawCursorSprite." }
+Battle_DrawInventoryPanel = { addr = 0x800B2104, type = "func", source = "runs the panel state handler and draws the inventory window" }
+Menu_SlidePanelLeft = { addr = 0x800B254C, type = "func", source = "Slides the menu panel to the left." }
+Menu_DrawInventoryWindow = { addr = 0x800B25C0, type = "func", source = "Draws the inventory panel of one item category: the item rows with their counts, dimmed when the party member cannot use them and raised on the cursor rows, the category title, the held count against the capacity, the two tab runs and the scroll bar." }
+Menu_DrawPanelIcon = { addr = 0x800B326C, type = "func", source = "Draws one MenuIconPrim from uv/clut." }
+Menu_DrawEquipChoiceWindow = { addr = 0x800B3AE8, type = "func", source = "Draws the equip list: gathers the inventory rows of the equipment slot's category (unk_09) that the party member can equip, armor only of the slot's type, into g_MenuEquipChoiceIds and g_MenuEquipChoiceCounts, then draws them with the category title, the choice count and the scroll bar." }
+g_BattleExamineSteps = { addr = 0x800B4418, source = "The Examine command's four step routines (start, pick enemy, confirm, cancel); Battle_RunExamineCommand and func_80097D1C index it." }
+g_BattleScrollDeltas = { addr = 0x800B44C0, source = "The camera scroll step of each scroll direction; the battle scroll routines add one entry indexed by g_Battle.scroll_dir." }
+g_BattleEscapeThresholds = { addr = 0x800B44F0, source = "Escape chances by party and enemy agility difference." }
+g_BattleItemEffectIds = { addr = 0x800B45E0, source = "The battle effect id of each ITEM-category item: D_800B470C[0] reads the row the item id selects and D_800B471C runs the handler the id names. The Antidote row holds the cure-poison id, the Firecracker row the Inferno id." }
+g_BattleWeaponEffectIds = { addr = 0x800B4640, source = "The battle effect id of each weapon: D_800B470C[1] reads the row the weapon id selects. The Dragon Blade row holds the Fireblast id, the BlessedStaff row the Heal id." }
+g_BattleArmorEffectIds = { addr = 0x800B469C, source = "The battle effect id of each armor: D_800B470C[2] reads the row the armor id selects. The Force row holds the Barrier id, the Mind row the Drain AP id." }
+g_BattleAccessoryEffectIds = { addr = 0x800B46E4, source = "The battle effect id of each worn accessory: D_800B470C[3] reads the row the accessory id selects; every row is zero, so no accessory has a battle effect." }
+D_800B470C = { addr = 0x800B470C, size = 0x10, source = "The four byte tables that select a handler in D_800B471C." }
+g_BattleItemEffects = { addr = 0x800B471C, source = "The battle item effects, one handler per effect id: the four g_BattleItemEffectIds tables name the row that selects each handler." }
+D_800B4D7C = { addr = 0x800B4D7C, size = 0xFC, source = "Rows of 14 bytes added to the 14 bytes at D_800B6F60." }
+D_800B4E78 = { addr = 0x800B4E78, size = 0x19, source = "Five rows of five bytes." }
+s_BattleAffinityLevelBonus = { addr = 0x800B4E94, source = "Affinity bonus by affinity level." }
+D_800B4EE0 = { addr = 0x800B4EE0, size = 0x126, source = "Rows of 14 bytes, one per form." }
+D_800B5008 = { addr = 0x800B5008, size = 0xA8, source = "Rows of eight bytes, one per form." }
+D_800B50B0 = { addr = 0x800B50B0, size = 0x1C, source = "Mode handlers of queued battle effect handler 0x0F: select the facing script, close on the target, hop until the vertical speed reaches -0x40, then restore the battler." }
+D_800B50CC = { addr = 0x800B50CC, size = 0x8, source = "Mode handlers of queued battle effect handler 0x10: select the facing script, then run the active effect until its mode 5 releases it." }
+D_800B50D4 = { addr = 0x800B50D4, source = "Mode handlers of queued battle effect handler 0x12: a semi-transparent tint set from the parameter, then Effect_ShakeScreen." }
+D_800B50DC = { addr = 0x800B50DC, size = 0x8, source = "func_800AA5F4 rolls rand() % entry == 0 with the entry the ability high nibble selects (D_800B50E4 for char 6); needs: what the roll decides" }
+D_800B51E8 = { addr = 0x800B51E8, size = 0x10, source = "Four pairs of halfwords." }
+g_BattleActionSelection = { addr = 0x800B6510, type = "u8", size = 0xE8, source = "Battle action row selector: the action id (the ability index, low byte of g_BattleActionId) picks a row of g_BattleSelections." }
+g_BattleSelections = { addr = 0x800B65F8, source = "Battle selection rows." }
+D_800B6BF0 = { addr = 0x800B6BF0, size = 0x4, source = "Four bytes the effects index by selector." }
+g_BattlePanelUV = { addr = 0x800B6C04, source = "Texture coordinates of the battle panel quads." }
+s_BattleCellRowCount = { addr = 0x800B6C28, source = "Battle_SetCellPaletteStp, Battle_ClearCellPaletteStp and Battle_CopyCellPalette bound the sprite-cell row copy at this byte times 16" }
+s_BattleCellRowDivisor = { addr = 0x800B6C30, source = "Battle_SetCellPaletteStp, Battle_ClearCellPaletteStp, Battle_ClearCellPaletteEntry and Battle_CopyCellPalette divide the sprite cell value by this byte" }
+s_BattleCellRowScale = { addr = 0x800B6C38, source = "Battle_SetCellPaletteStp, Battle_ClearCellPaletteStp, Battle_ClearCellPaletteEntry and Battle_CopyCellPalette scale the cell remainder by this byte for the palette bank offset" }
+D_800B6C40 = { addr = 0x800B6C40, source = "func_800AFF98 returns this row for a player battler, keyed by D_80145F09[battler][0]" }
+D_800B6C4C = { addr = 0x800B6C4C, source = "func_800AFF98 returns this row for a flagged player battler, keyed by g_DragonForm" }
+D_800B6C68 = { addr = 0x800B6C68, source = "func_800B0058 returns this row for a player battler, keyed by D_80145F09[battler][0]" }
+D_800B6C74 = { addr = 0x800B6C74, source = "func_800B0058 returns this row for a flagged player battler, keyed by g_DragonForm" }
+D_800B6D00 = { addr = 0x800B6D00, source = "func_800B0118 selects a D_800B6C90 offset pair through this byte, keyed by g_DragonForm" }
+s_BattleFrameTitles = { addr = 0x800B6D5C, source = "Titles of the battle panel frames." }
+s_BattleAbilityIcon = { addr = 0x800B6D68, source = "Ability icon index." }
+s_BattleAbilityLine1Run = { addr = 0x800B6D84, source = "Sprite run for the first line of the ability panel." }
+s_BattleAbilityLine2Run = { addr = 0x800B6D90, source = "Sprite run for the second line of the ability panel." }
+s_BattleAbilityLine1FlagRun = { addr = 0x800B6D9C, source = "Sprite run for the flagged first line of the ability panel." }
+s_BattleAbilityLine2FlagRun = { addr = 0x800B6DA8, source = "Sprite run for the flagged second line of the ability panel." }
+s_BattlePanelSelectedMarker = { addr = 0x800B6DCC, source = "Sprite run marking the selected panel slot." }
+s_BattlePanelUnselectedMarker = { addr = 0x800B6DD4, source = "Sprite run marking an unselected panel slot." }
+s_BattlePanelValueRun = { addr = 0x800B6DDC, source = "Sprite run for the battle panel values." }
+g_MenuInventoryTitles = { addr = 0x800B6E88, source = "the inventory panel's category titles, ITEM, WEAPON, ARMOR, OPTION and VITAL, by ItemCategory" }
+g_MenuEquipTitles = { addr = 0x800B6F28, source = "the equip list's category titles, ITEM, WEAPON, ARMOR, OPTION and VITAL, by ItemCategory" }
+s_BattlePanelUseLabel = { addr = 0x800B6F3C, source = "Label for the use entry of a battle panel." }
+s_BattlePanelEquipLabel = { addr = 0x800B6F40, source = "Label for the equip entry of a battle panel." }
+s_BattleEquipment = { addr = 0x800B6F50, source = "The six equipment item ids of the battle panel character: weapon, shield, helmet, armor and two accessories." }
+g_MenuEquipChoiceIds = { addr = 0x800B6F70, source = "the item ids of the equip list: the inventory rows the party member can equip in the chosen slot, then zeros" }
+g_MenuEquipChoiceCounts = { addr = 0x800B6FF0, source = "the held counts of the g_MenuEquipChoiceIds rows" }
+g_BattleEnemyEvents = { addr = 0x800E407C, source = "The event packets of each enemy kind record of the encounter block, one 0x88-byte record per kind; Battle_TriggerEnemyEvents walks them." }
+D_801454F4 = { addr = 0x801454F4, source = "Group index of each battle selection row, 3 bytes per row, row number D_8014857A." }
+D_80145F04 = { addr = 0x80145F04, source = "The battle panel records, stride 0x140, one per party slot: Battle_RescaleStats and the battle overlays read a member's stats, name and command state from a row." }
+D_80145F2A = { addr = 0x80145F2A, size = 0x2, source = "Halfword cell written by func_800A4458 and read by func_8009F010" }
+D_801461CA = { addr = 0x801461CA, source = "The stat halfword at +0x46 of the third battle panel row (D_80145F04 + 0x2C6); Battle_ApplyFormationStats adds or subtracts growth on it and the two rows before it at -0x140 steps." }
+g_BattleUIStep_nv = { addr = 0x801462E3, alias = true, source = "The g_Battle.ui_step byte (0x801462E3) under a symbol of its own; Battle_OpenMenu steps it and the battle sites need the separate %hi/%lo load." }
+D_801462F0_state = { addr = 0x801462F0, alias = true, source = "The g_BattlePartyCount byte (0x801462F0) read as a BattleSelectionState: func_800A1CB4 tests its selection_index and walks its active_count slots." }
+g_BattleTurnOrder = { addr = 0x8014630C, size = 0xB, source = "Battler index of each turn-order rank, 0xFF for an empty or cancelled entry; Battle_BuildTurnOrder fills it; the turn_order member of g_Battle.", alias = true }
+g_BattleTurnCursor = { addr = 0x80146322, source = "Index into g_BattleTurnOrder of the battler whose turn is next; Battle_BuildTurnOrder resets it to 0 and Battle_InsertTurnFirst steps it back; the turn_cursor member of g_Battle.", alias = true }
+g_BattleTurnCount = { addr = 0x80146323, source = "Number of battlers ranked in g_BattleTurnOrder, set by Battle_BuildTurnOrder; the turn_count member of g_Battle.", alias = true }
+g_BattleActiveBattler_nv = { addr = 0x80146374, alias = true, source = "The g_Battle.active_battler byte (0x80146374) under a symbol of its own; the battle sites that need a separate %hi/%lo load match through it." }
+g_BattleTarget_nv = { addr = 0x80146394, alias = true, source = "The g_Battle.target byte (0x80146394) under a symbol of its own; the battle sites that need a separate %hi/%lo load match through it." }
+g_BattleSelectionHead = { addr = 0x80148570, alias = true, source = "The first byte of g_BattleChoicePanel (0x80148570) under a scalar symbol: the direct %lo store form the battle keeps for it." }
+D_801485DD = { addr = 0x801485DD, size = 0x1, source = "Set to 8 when a battle selection starts." }
+D_80148656 = { addr = 0x80148656, size = 0x1, source = "Party slot of the battler whose message the battle shows; the field menu line draw also uses it as an index into g_PartyFieldOrder." }
+D_801C893C = { addr = 0x801C893C, size = 0x14, source = "Pointers to the five item categories." }
+Battle_PlayEffectSE = { addr = 0x801DD858, source = "plays the SE of one battle effect for the current character from the effect SE table", alias = true }
+g_BattleEnemies = { addr = 0x801EB2E8, source = "The enemy battlers." }
+g_BattleActorTurn = { addr = 0x801EB4D8, source = "the acting party battler's BattleTurn; the emi/battle/battle/15 target-selection handlers read it for command.target and the action and damage flags (set by emi/battle/battle/03)" }
+g_BattleEffectBattler = { addr = 0x801EB4E0, source = "the battler the running effect acts on; Battle_UpdateEffects stores it for each effect step (emi/battle/battle/03 owns the cell)" }
+g_BattleEnemyBattlers = { addr = 0x801EB630, alias = true }
+D_801EB6DA = { addr = 0x801EB6DA, size = 0x2, source = "Halfword cell written by Battle_RescaleStats and read by func_8009F010" }
+D_801EB72C_rows = { addr = 0x801EB72C, alias = true, source = "enemy battler rows read through EnemyBattler fields since #495" }
+D_801EBEF0 = { addr = 0x801EBEF0, type = "BattleStatDisplayTemplate", size = 0x18, source = "Stat display template immediately before g_BattleMessageSlot; func_800A4458 reads it and func_800A7C14 writes the dragon form stats." }
+s_BattleBattlerTemplates = { addr = 0x801EBF20, alias = true }
+g_BattleEffects = { addr = 0x801EC330, alias = true }
+g_BattleTemplateStats = { addr = 0x801EC364, source = "Template stat rows of the battlers." }

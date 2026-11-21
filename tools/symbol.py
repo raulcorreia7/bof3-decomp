@@ -19,13 +19,13 @@
     tools/symbol.py extents [IMAGE] [--jsonl]
     tools/symbol.py homes [--jsonl]
 
-`add` writes one row of config/symbols.toml in address order. The image is a folder under
+`add` writes one row of config/symbols/<image>.toml in address order. The image is a folder under
 `config/` that holds a `splat.yaml`; any other id is refused.
 
 `rename` changes a function or global in every tracked file of the scope: the definition, each
 prototype and use, `config/` references, and the unit file `OLD.c` (`git mv`). It never edits
 `config/attempts.jsonl`: the history keeps the names it was written with. It writes the
-row of config/symbols.toml: a new row for an address name (`--source` describes the symbol), or the
+row of config/symbols/<image>.toml: a new row for an address name (`--source` describes the symbol), or the
 renamed key of an existing row. Naming an address replaces the row already keyed with its address
 name, so no key repeats. An address name (`func_<ADDR>`, `D_<ADDR>`) stays in a comment
 above its definition and declaration. A named symbol is one name in every image: with no
@@ -161,14 +161,14 @@ from dataclasses import dataclass
 from pathlib import Path
 
 from bof3.adapters.cli import run_main
+from bof3.adapters.config import symbol_edits, symbols_text, write_symbols
 from bof3.core.paths import ROOT
 from bof3.link import symbols
 from bof3.resolve.ids import source_folder
 from bof3.source import asmtext, ctext, symtab
 from bof3.status import claims
-from bof3.symbols import TABLE, parse
+from bof3.symbols import parse
 
-SYMBOLS = ROOT / TABLE
 RESIDENT = ("exe/slus_004_22", "emi/etc/game/00")
 DEFAULT_SCOPE = ("src", "include", "config", "docs", "asm")
 
@@ -219,10 +219,8 @@ def add(args: argparse.Namespace) -> int:
         args.name, addr, type=args.type, size=int(args.size, 0) if args.size else None,
         source=args.source, alias=args.alias,
     )  # fmt: skip
-    text = SYMBOLS.read_text(encoding="utf-8")
-    SYMBOLS.write_text(
-        symtab.add_row(text, args.image, args.name, row, addr), encoding="utf-8"
-    )
+    text = symbols_text(ROOT)
+    write_symbols(ROOT, symtab.add_row(text, args.image, args.name, row, addr))
     print(f"added {args.name} to [{args.image}]")
     return 0
 
@@ -653,7 +651,7 @@ def _rename_edits(
     repair: bool,
 ) -> dict[Path, str]:
     """The new contents of every file the rename rewrites."""
-    edits = {SYMBOLS: text}
+    edits = symbol_edits(ROOT, text)
     if not repair:
         pattern = re.compile(r"\b" + re.escape(old) + r"\b")
         for name in files:
@@ -707,7 +705,7 @@ def rename(args: argparse.Namespace) -> int:
     ):
         raise SystemExit(f"symbol: {new} is not an identifier")
     address = LAYOUT_ADDRESS.match(old)
-    text = SYMBOLS.read_text(encoding="utf-8")
+    text = symbols_text(ROOT)
     images = args.image or ([] if address else tables_with(text, old))
     if not images:
         raise SystemExit(
@@ -817,7 +815,7 @@ def mentioned(names: set[str]) -> set[str]:
                 "include",
                 "asm",
                 "config",
-                ":(exclude)config/symbols.toml",
+                ":(exclude)config/symbols/<image>.toml",
             ],
             cwd=ROOT,
             capture_output=True,
@@ -971,7 +969,7 @@ class Layout:
 
 @dataclass(frozen=True)
 class Row:
-    """One non-alias row of config/symbols.toml."""
+    """One non-alias row of config/symbols/<image>.toml."""
 
     name: str
     addr: int
@@ -1290,8 +1288,8 @@ def locate(layout: Layout, offset: int, prefix: str = "") -> list[tuple[str, int
 
 
 def symbol_tables() -> dict[str, dict[str, dict]]:
-    """Load config/symbols.toml as image table -> name -> row."""
-    return parse(SYMBOLS.read_text(encoding="utf-8"))
+    """Load config/symbols/<image>.toml as image table -> name -> row."""
+    return parse(symbols_text(ROOT))
 
 
 def table_rows(data: dict[str, dict[str, dict]], table: str) -> list[Row]:
@@ -4744,7 +4742,7 @@ UNNAMED_PREFIXES = ("func_", "unk_", "D_", "jtbl_", "g_")
 
 
 class SymbolIndex:
-    """A row lookup over config/symbols.toml: by name, by address and per image."""
+    """A row lookup over config/symbols/<image>.toml: by name, by address and per image."""
 
     def __init__(self, data: dict[str, dict[str, dict]]) -> None:
         self.rows: dict[str, list[Row]] = {}
@@ -6359,7 +6357,9 @@ def main(argv: list[str] | None = None) -> int:
         epilog="Example: tools/symbol.py accesses PartyMember --jsonl",
         formatter_class=argparse.RawDescriptionHelpFormatter,
     )
-    ten.add_argument("name", help="a record type or a config/symbols.toml global")
+    ten.add_argument(
+        "name", help="a record type or a config/symbols/<image>.toml global"
+    )
     ten.add_argument("--jsonl", action="store_true", help="one JSON object per line")
     ten.set_defaults(run=accesses)
     eleven = verbs.add_parser(

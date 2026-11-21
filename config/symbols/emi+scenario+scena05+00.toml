@@ -1,0 +1,55 @@
+["emi/scenario/scena05/00"]
+jtbl_801F6C04 = { addr = 0x801F6C04, type = "Callback", source = "The switch table of func_801F7AC8: the jump targets of its jr dispatch." }
+jtbl_801F6C1C = { addr = 0x801F6C1C, type = "Callback", source = "The switch table of func_801F7AC8: the jump targets of its jr dispatch." }
+jtbl_801F6C3C = { addr = 0x801F6C3C, type = "Callback", source = "The switch table of func_801F8564: the jump targets of its jr dispatch." }
+jtbl_801F6C94 = { addr = 0x801F6C94, type = "Callback", source = "The switch table of func_801F87C4: the jump targets of its jr dispatch." }
+jtbl_801F6D24 = { addr = 0x801F6D24, type = "Callback", source = "The switch table of func_801F8CAC: the jump targets of its jr dispatch." }
+jtbl_801F6D44 = { addr = 0x801F6D44, type = "Callback", source = "The switch table of func_801F8EB0: the jump targets of its jr dispatch." }
+jtbl_801F6D7C = { addr = 0x801F6D7C, type = "Callback", source = "The switch table of func_801F9384: the jump targets of its jr dispatch." }
+jtbl_801F6DCC = { addr = 0x801F6DCC, type = "Callback", source = "The switch table of func_801F96E0: the jump targets of its jr dispatch." }
+jtbl_801F6DE4 = { addr = 0x801F6DE4, type = "Callback", source = "The switch table of func_801F98A4: the jump targets of its jr dispatch." }
+jtbl_801F6F84 = { addr = 0x801F6F84, type = "Callback", source = "The switch table of func_801F98A4: the jump targets of its jr dispatch." }
+jtbl_801F6F9C = { addr = 0x801F6F9C, type = "Callback", source = "The switch table of func_801F98A4: the jump targets of its jr dispatch." }
+jtbl_801F6FB4 = { addr = 0x801F6FB4, type = "Callback", source = "The switch table of func_801F98A4: the jump targets of its jr dispatch." }
+jtbl_801F6FF4 = { addr = 0x801F6FF4, type = "Callback", source = "The switch table of func_801F98A4: the jump targets of its jr dispatch." }
+jtbl_801F7034 = { addr = 0x801F7034, type = "Callback", source = "The switch table of func_801F98A4: the jump targets of its jr dispatch." }
+jtbl_801F7054 = { addr = 0x801F7054, type = "Callback", source = "The switch table of func_801F98A4: the jump targets of its jr dispatch." }
+jtbl_801F7094 = { addr = 0x801F7094, type = "Callback", source = "The switch table of func_801F98A4: the jump targets of its jr dispatch." }
+jtbl_801F70B4 = { addr = 0x801F70B4, type = "Callback", source = "The switch table of func_801F98A4: the jump targets of its jr dispatch." }
+jtbl_801F70D4 = { addr = 0x801F70D4, type = "Callback", source = "The switch table of func_801F98A4: the jump targets of its jr dispatch." }
+jtbl_801F70F4 = { addr = 0x801F70F4, type = "Callback", source = "The switch table of func_801F98A4: the jump targets of its jr dispatch." }
+jtbl_801F7114 = { addr = 0x801F7114, type = "Callback", source = "The switch table of func_801F98A4: the jump targets of its jr dispatch." }
+jtbl_801F7154 = { addr = 0x801F7154, type = "Callback", source = "The switch table of func_801F98A4: the jump targets of its jr dispatch." }
+jtbl_801F7194 = { addr = 0x801F7194, type = "Callback", source = "The switch table of func_801F98A4: the jump targets of its jr dispatch." }
+jtbl_801F71B4 = { addr = 0x801F71B4, type = "Callback", source = "The switch table of func_801F98A4: the jump targets of its jr dispatch." }
+jtbl_801F71D4 = { addr = 0x801F71D4, type = "Callback", source = "The switch table of func_801F98A4: the jump targets of its jr dispatch." }
+jtbl_801F71F4 = { addr = 0x801F71F4, type = "Callback", source = "The switch table of func_801F98A4: the jump targets of its jr dispatch." }
+jtbl_801F7234 = { addr = 0x801F7234, type = "Callback", source = "The switch table of func_801F98A4: the jump targets of its jr dispatch." }
+jtbl_801F7274 = { addr = 0x801F7274, type = "Callback", source = "The switch table of func_801F98A4: the jump targets of its jr dispatch." }
+jtbl_801F72B4 = { addr = 0x801F72B4, type = "Callback", source = "The switch table of func_801F98A4: the jump targets of its jr dispatch." }
+jtbl_801F72D4 = { addr = 0x801F72D4, type = "Callback", source = "The switch table of func_801F98A4: the jump targets of its jr dispatch." }
+jtbl_801F72F4 = { addr = 0x801F72F4, type = "Callback", source = "The switch table of func_801F98A4: the jump targets of its jr dispatch." }
+jtbl_801F7314 = { addr = 0x801F7314, type = "Callback", source = "The switch table of func_801FB66C: the jump targets of its jr dispatch." }
+jtbl_801F7394 = { addr = 0x801F7394, type = "Callback", source = "The switch table of func_801FBDBC: the jump targets of its jr dispatch." }
+jtbl_801F73DC = { addr = 0x801F73DC, type = "Callback", source = "The switch table of func_801FC380: the jump targets of its jr dispatch." }
+Scene_DispatchEntity = { addr = 0x801F73F8, type = "func", source = "dispatches a scene entity by its callback index" }
+func_801F7400 = { addr = 0x801F7400, alias = true, source = "Scene_DispatchEntity+0x8, after its g_Task load; the start the split used before the function was moved back to that load" }
+Scene_DispatchActor = { addr = 0x801FCA58, type = "func", source = "dispatches a scenario actor to its callback handler" }
+Scene_JoinMomoNinaPeco = { addr = 0x801FD298, type = "func", source = "builds battlers and joins Momo, young Nina and Peco to the party for the scene" }
+Party_JoinNinaYoung = { addr = 0x801FD30C, type = "func", source = "Adds Nina Young to the party." }
+Party_JoinMomo = { addr = 0x801FD32C, type = "func", source = "Adds Momo to the party." }
+Party_JoinPeco = { addr = 0x801FD34C, type = "func", source = "Adds Peco to the party." }
+Party_JoinRyuYoung = { addr = 0x801FD36C, type = "func", source = "Adds Ryu Young to the party." }
+func_801FD38C = { addr = 0x801FD38C, type = "func", source = "Loads the RyuYoung, NinaYoung and Momo archives, rebuilds the field battlers and joins Momo. Scene_JoinMomo names the adult-era body shared by scena09, scena11 and scena12, so this body needs a role word the evidence does not give." }
+Scene_JoinNinaYoung = { addr = 0x801FD3C8, type = "func", source = "Loads the RyuYoung, NinaYoung and Momo archives, rebuilds the field battlers and joins young Nina; Party_JoinNinaYoung only joins her." }
+func_801FD404 = { addr = 0x801FD404, type = "func", source = "Loads the RyuYoung, NinaYoung and Peco archives, rebuilds the field battlers and joins Peco. Scene_JoinPeco names the adult-era body shared by scena09, scena11 and scena12, so this body needs a role word the evidence does not give." }
+Party_JoinGarr = { addr = 0x801FD440, type = "func", source = "Adds Garr to the party." }
+Scene_JoinNina = { addr = 0x801FD460, type = "func", source = "Streams the party resource family through EMI_LoadPartyArchives, rebuilds the battlers with Party_BuildBattlers and joins character 1 (CHAR_ID_NINA_YOUNG) with Party_JoinMember, without the palette restage of Scene_JoinAdultNina." }
+Scene_JoinNina2 = { addr = 0x801FD49C, type = "func", source = "Streams the party resource family through EMI_LoadPartyArchives, rebuilds the battlers with Party_BuildBattlers and joins character 1 (CHAR_ID_NINA_YOUNG) with Party_JoinMember, without the palette restage of Scene_JoinAdultNina." }
+Scene_RemoveMomoNina = { addr = 0x801FD4D8, type = "func", source = "removes Momo and young Nina from the party and reloads palettes (scena05)" }
+Scene_RemoveNina = { addr = 0x801FD508, type = "func", source = "Removes character 1 (CHAR_ID_NINA_YOUNG) from the party through Party_RemoveMember, which clears the id from the walking and battle orders and shrinks g_Game.party_size, then restages every party palette through Party_LoadPalettes." }
+Scene_RemoveMomo = { addr = 0x801FD530, type = "func", source = "Removes character 5 (CHAR_ID_MOMO) from the party through Party_RemoveMember, which clears the id from the walking and battle orders and shrinks g_Game.party_size, then restages every party palette through Party_LoadPalettes." }
+Scene_RemovePeco = { addr = 0x801FD558, type = "func", source = "Removes character 6 (CHAR_ID_PECO) from the party through Party_RemoveMember, which clears the id from the walking and battle orders and shrinks g_Game.party_size, then restages every party palette through Party_LoadPalettes." }
+Scene_RemoveRyuYoung = { addr = 0x801FD580, type = "func", source = "removes young Ryu from the party and restages party palettes" }
+g_SceneEntityDispatch = { addr = 0x801FD5A8, source = "scenario entity dispatch table" }
+g_SceneActorDispatch = { addr = 0x801FD644, source = "scenario actor dispatch table" }

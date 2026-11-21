@@ -1,0 +1,7 @@
+["emi/scenario/sce10eff/00"]
+Scene_UpdateEffect = { addr = 0x801D0C10, type = "func", source = "SCE10EFF.EMI entry, runs the effect handler selected by the work byte" }
+Scene_EffectBegin = { addr = 0x801D0C70, type = "func", source = "Entry 0 of the sce10eff scene effect (D_801D0C04): publishes the work pointer, initialises the record slots with ids 1 and 2 and the batch index, and queues SE 0x203." }
+Scene_EffectEnd = { addr = 0x801D0E64, type = "func", source = "Entry 1 of the sce10eff scene effect (D_801D0C04): resets the work area when the ticker reaches 9." }
+Scene_UpdateEffectState = { addr = 0x801D0E9C, type = "func", source = "Entry 2 of the sce10eff scene effect (D_801D0C04): runs the D_801D2708 handler selected by the work state byte." }
+Scene_EffectSetMatrix = { addr = 0x801D0EE0, type = "func", source = "Builds the rotated and translated matrix for the scratchpad projected vertex of the sce10eff effect." }
+Scene_DrawBands = { addr = 0x801D165C, type = "func", source = "Draws 17 depth slices of semi-transparent gradient strips from the scratchpad vertices of the sce10eff effect; the y of each follows a sine of a nibble-stepped angle scaled by a radius plus a masked random jitter. Called after Scene_EffectSetMatrix." }

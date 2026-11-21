@@ -10,7 +10,7 @@ that changed between `git merge-base REF HEAD` and HEAD, at both revisions, and 
 - struct and union definitions, nested records included, and their named members.
 
 A thing is lost when its name is gone from HEAD and no successor holds it. A successor is a new
-name at the same `config/symbols.toml` address (functions and globals), a new member at the same
+name at the same `config/symbols/<image>.toml` address (functions and globals), a new member at the same
 offset of the same record, a new define with the same value, a new enumerator with the same value
 in the same enum, or a new record with the same layout. A thing degrades when its successor is a
 default or unknown name (`func_`, `D_`, `unk_`, `pad`), when a typed member's successor is raw
@@ -40,10 +40,11 @@ from concurrent.futures import ThreadPoolExecutor
 from dataclasses import dataclass, field
 from pathlib import Path
 
+from bof3.adapters.config import symbols_text
 from bof3.adapters.git import changed_files, git, merge_base
 from bof3.core.paths import ROOT
 from bof3.source.ctext import mask
-from bof3.symbols import TABLE, parse
+from bof3.symbols import parse
 
 CLANG = os.environ.get("CHECK_KEPT_CLANG", "clang")
 CLANG_FLAGS = [
@@ -417,7 +418,7 @@ def read_tree(tree: Path) -> tuple[dict[str, set[str]], dict[str, str]]:
 def addresses(
     rev: str,
 ) -> tuple[dict[str, set[tuple[str, int]]], dict[tuple[str, int], str]]:
-    text = git("show", f"{rev}:{TABLE}", root=ROOT)
+    text = symbols_text(ROOT, rev)
     by_name: dict[str, set[tuple[str, int]]] = defaultdict(set)
     by_addr: dict[tuple[str, int], str] = {}
     for target, rows in parse(text).items():

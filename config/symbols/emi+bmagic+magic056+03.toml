@@ -1,0 +1,29 @@
+["emi/bmagic/magic056/03"]
+Battle_ApplyDamageFlags = { addr = 0x800A9610, type = "func", source = "Applies the damage flags to the selected battlers." }
+Battle_MarkDamaged = { addr = 0x800A9820, alias = true, source = "Marks the selected battlers as damaged." }
+Battle_SelectActiveBattlerScript = { addr = 0x800AEF98, type = "func", source = "Selects the active battler's actor script for a step and payload; a party member's facing offsets the step.", alias = true }
+Battle_SetCellPaletteStp = { addr = 0x800AF8F0, type = "func", source = "Sets bit 15 (STP) of each palette entry after the first in the palette row of the battle sprite cell. battle/15 owns the body." }
+Battle_CopyCellPalette = { addr = 0x800AFB48, type = "func", source = "Copies the palette rows of the battle sprite cell into the second palette bank and returns the value the effect keeps in unk_27, from the row divisor. battle/15 owns the body." }
+Battle_CenterCamera = { addr = 0x800AFD9C, type = "func", source = "Centres the battle camera on the living battlers." }
+g_GameState = { addr = 0x80146250, alias = true, source = "The member of g_Game that the running mode works on; the current member of g_Game." }
+Battle_PlayEffectSE = { addr = 0x801DD858, source = "plays the SE of one battle effect for the current character from the effect SE table", alias = true }
+Battle_AllocEffect = { addr = 0x801E590C, alias = true, source = "Claims a free battle effect slot." }
+Effect_Reset = { addr = 0x801E5988, type = "func", source = "Clears every timer, state and flag byte of the shared BattleEffect work record; every effect countdown calls it first. battle/03 owns the body." }
+g_BattleEnemies = { addr = 0x801EB2E8, alias = true, source = "The enemy battlers." }
+g_BattleEffectBattler = { addr = 0x801EB4E0, source = "the battler the running effect acts on; Battle_UpdateEffects stores it for each effect step (emi/battle/battle/03 owns the cell)" }
+g_BattleEnemyBattlers = { addr = 0x801EB630, type = "EnemyBattler", size = 0x8C0, source = "Battle enemy battlers, one per enemy slot." }
+g_BattleEffects = { addr = 0x801EC330, alias = true, source = "Battle effect work records (stride 0x78); Battle_AllocEffect claims a free one by setting bit 0 of header.flags." }
+D_801EEC10 = { addr = 0x801EEC10, type = "Magic056Steps", source = "Nine step handlers of magic056, copied to the stack and run by header.step (byte 0x02) from func_801EFF28." }
+BMagic_DispatchMode = { addr = 0x801EEC34, type = "func", source = "Runs the handler that header.mode (byte 0x01) selects from the module head's three callbacks in magic056 (Sacrifice)." }
+Effect_StartPlaying = { addr = 0x801EF17C, type = "func", source = "Raises BATTLE_STATE_EFFECT_PLAYING and clears the effect work record in magic056 (Sacrifice)." }
+BMagic_DispatchEffectMode = { addr = 0x801EF1B0, type = "func", source = "Runs the handler that header.mode (byte 0x01) selects from the effect handlers of magic056." }
+Effect_CopyBattlerCoords = { addr = 0x801EF27C, type = "func", source = "Copies the position of g_BattleEffectBattler into the effect, clears the effect timer (byte 0x09) and counter (byte 0x0A) and advances header.step (byte 0x02) in magic056 (Sacrifice)." }
+Effect_SetActorMatrix = { addr = 0x801EF410, type = "func", source = "Sets the actor's GTE matrix from its coordinates and half its vertical span, times the camera in magic056 (Sacrifice)." }
+BMagic_DrawDome = { addr = 0x801EF4C0, type = "func", source = "Draws the textured dome as eight bands of 32 semi-transparent quads in magic056 (Sacrifice)." }
+Effect_CopyBattlerCoords2 = { addr = 0x801EFAD8, type = "func", source = "Copies the position of g_BattleEffectBattler into the effect, clears the effect timer (byte 0x09) and counter (byte 0x0A) and advances header.step (byte 0x02) in magic056 (Sacrifice)." }
+Effect_CountUpAndStepAt30 = { addr = 0x801EFBA4, type = "func", source = "Counts the effect timer (byte 0x09) up and advances header.step (byte 0x02) at 30 in magic056 (Sacrifice)." }
+Effect_CountDownTimerCapped = { addr = 0x801EFBF4, type = "func", source = "Raises the effect timer (byte 0x09) up to 0x2E, counts the effect counter (byte 0x0A) down and at zero lowers the active battler's ticker (byte 0x0B) and clears the effect in magic056 (Sacrifice)." }
+Effect_PrimeTintOnScriptReady = { addr = 0x801F0024, type = "func", source = "Once the script stream reports ready (Actor_StepAnimOnce) makes the actor semi-transparent, starts its tint at zero and advances header.step (byte 0x02) in magic056 (Sacrifice)." }
+g_BMagicEffectModes = { addr = 0x801F0744, source = "Handlers of magic056 (Sacrifice), run by header.mode (byte 0x01)." }
+D_801F0754 = { addr = 0x801F0754, source = "First step handlers of the magic056 effect, run by header.step (byte 0x02) from func_801EF1F4." }
+D_801F0760 = { addr = 0x801F0760, source = "Second step handlers of the magic056 effect, run by header.step (byte 0x02) from func_801EFA50." }

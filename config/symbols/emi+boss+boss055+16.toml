@@ -1,0 +1,21 @@
+["emi/boss/boss055/16"]
+Battle_MarkDamaged = { addr = 0x800A9820, type = "func", source = "Marks the selected battlers as damaged." }
+Battle_ShowActorEntry = { addr = 0x800AC844, type = "func", source = "Clears the hidden flag of the actor entry entry_id, which draws the battler again.", alias = true }
+Boss_RaiseEffectPlaying = { addr = 0x800C1BF0, type = "func", source = "raises BATTLE_STATE_EFFECT_PLAYING and runs Battle_TriggerCritical and func_801E567C when func_801E30F8 is ready in boss055" }
+Boss_InstallBattleHooks = { addr = 0x800C24A0, type = "func", source = "Installs the boss battle hooks of boss055: Boss_ChooseBattleEnding into g_BattleChooseEndingHook, Boss_EndBattle into g_BattleEndHook and Boss_RunBattleEvent into g_BossBattleEventHook." }
+Boss_RunBattleEvent = { addr = 0x800C24D8, type = "func", source = "Handles the boss battle events of boss055: ignores every event mode and returns 0." }
+Boss_ChooseBattleEnding = { addr = 0x800C24E0, type = "func", source = "Chooses how the boss battle of boss055 ends: g_BattleChooseEndingHook runs it from Battle_LoadEndOverlay once the battle result is set; the body is not decompiled." }
+Boss_EndBattle = { addr = 0x800C26B4, type = "func", source = "Ends the boss battle of boss055 (g_BattleEndHook): runs Battle_ShowActorEntry(0)." }
+Area_RoundSpriteCoordinate = { addr = 0x800C3254, type = "func", source = "Rounds a 16.16 sprite cell coordinate up to the next whole unit when its fraction is nonzero and step is not negative, and returns the whole part." }
+Boss_CopyEffectTransform = { addr = 0x800C3284, type = "func", source = "copies the g_BattleEffectBattler transform, scale and flags into the task and rounds the sprite coordinates" }
+Battle_EndDefeat = { addr = 0x801DDF00, type = "func", source = "Ends the battle in defeat: sets the battle phase to the result mode at step 2, which plays the defeat sequence and shows the defeat message. Boss battles call it from their ending hook when the result is not a victory.", alias = true }
+Battle_EndToArea = { addr = 0x801DDF28, type = "func", source = "Ends the battle without a result panel: sets the battle phase to the result mode at step 3, which reloads the party sprites and the area audio and hands the scene back to its script.", alias = true }
+Battle_RequestEnemyScript = { addr = 0x801E2314, type = "func", source = "Requests the script at index script_index of the current enemy (g_BattleCurrentEnemy) for the task actor, by its facing; bit 0x80 of the script byte sets the actor flag unk_2A.", alias = true }
+g_BattleEffectBattler = { addr = 0x801EB4E0, source = "the battler the running effect acts on; Battle_UpdateEffects stores it for each effect step (emi/battle/battle/03 owns the cell)" }
+D_801EC331 = { addr = 0x801EC331, type = "u8", alias = true, source = "The slot byte at +0x01 of g_BattleEffects: func_800C238C stores its first argument there." }
+D_801EC332 = { addr = 0x801EC332, type = "u8", alias = true, source = "The slot byte at +0x02 of g_BattleEffects, cleared by func_800C238C." }
+D_801EC335 = { addr = 0x801EC335, type = "u8", alias = true, source = "The slot byte at +0x05 of g_BattleEffects, set to 5 by func_800C238C." }
+D_801EC336 = { addr = 0x801EC336, type = "u8", alias = true, source = "The slot byte at +0x06 of g_BattleEffects, set to 3 by func_800C238C." }
+D_801EC339 = { addr = 0x801EC339, type = "u8", alias = true, source = "The slot byte at +0x09 of g_BattleEffects, cleared by func_800C238C." }
+D_801EC359 = { addr = 0x801EC359, type = "u8", alias = true, source = "The slot byte at +0x29 of g_BattleEffects: func_800C238C stores its second argument there." }
+D_801EC3A4 = { addr = 0x801EC3A4, type = "u32", alias = true, source = "The slot pointer at +0x74 of g_BattleEffects: func_800C238C stores the address of g_BattleEnemyBattlers there." }

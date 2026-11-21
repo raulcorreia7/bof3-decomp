@@ -1,0 +1,3 @@
+["emi/world00/area028/13"]
+g_RingScreenPoints = { addr = 0x800E4A04, source = "Screen points of the area028 ring: 4 bytes per ring cell, whose halfwords place the cell on the screen." }
+g_AreaModuleId = { addr = 0x801F2C00, source = "Module id of the area: the first payload word of its overlay, 52 + the area number." }

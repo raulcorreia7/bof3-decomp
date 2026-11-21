@@ -122,7 +122,8 @@ def graph_inputs(root: Path, sources: set[str]) -> list[str]:
     files = {
         path.relative_to(root).as_posix()
         for path in (root / CONFIG).rglob("*")
-        if path.is_file() and path.name in GRAPH_CONFIG
+        if path.is_file()
+        and (path.name in GRAPH_CONFIG or path.parent.name == "symbols")
     }
     for module in list(sys.modules.values()):
         path = getattr(module, "__file__", None)

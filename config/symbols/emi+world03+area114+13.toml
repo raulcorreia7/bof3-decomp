@@ -1,0 +1,3 @@
+["emi/world03/area114/13"]
+jtbl_801F2C04 = { addr = 0x801F2C04, type = "Callback", size = 0x30, source = "The switch table of func_801F2CF0: 12 jump targets of its jr dispatch." }
+jtbl_801F2C34 = { addr = 0x801F2C34, type = "Callback", size = 0x34, source = "The switch table of func_801F2E48: 13 jump targets of its jr dispatch." }

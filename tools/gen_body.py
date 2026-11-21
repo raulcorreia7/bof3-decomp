@@ -675,7 +675,7 @@ def tracked_headers(root: Path) -> list[str]:
 
 
 class Names:
-    """Game names from ``config/symbols.toml``: the asm still says ``func_<ADDR>`` for renamed symbols."""
+    """Game names from ``config/symbols/<image>.toml``: the asm still says ``func_<ADDR>`` for renamed symbols."""
 
     ADDRESS = re.compile(r"^(?:func|D|jtbl)_([0-9A-F]{8})$")
 

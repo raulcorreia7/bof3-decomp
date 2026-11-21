@@ -1,0 +1,276 @@
+["exe/logo"]
+jtbl_801CE278 = { addr = 0x801CE278, type = "Callback", source = "The switch table of getintr: the jump targets of its jr dispatch." }
+__SN_ENTRY_POINT = { addr = 0x801CE724, type = "func", size = 0x34, source = "PsyQ startup routine." }
+__main = { addr = 0x801CE758, type = "func", size = 0x8, source = "PsyQ startup routine." }
+Logo_Init = { addr = 0x801CE760, type = "func", source = "Sets the logo work buffers from work_base (+0x2D00, +0xA500, +0x10480), waits for CdReadSync, inits the pad, then runs Logo_InitDisplay, Logo_StartStream(disc_lba) and Logo_FadeInAudio." }
+Logo_InitDisplay = { addr = 0x801CE7F4, type = "func", source = "Resets the GPU, sets NTSC video and two 320x240 display environments at y 0 and 240, clears the 960x480 frame buffer and shows the second environment with the display mask on." }
+Logo_FlipDisplay = { addr = 0x801CE8DC, type = "func", source = "PutDispEnv of the other logo buffer" }
+Logo_StartStream = { addr = 0x801CE930, type = "func", source = "Sets the 15-sector stream ring at D_801EB448, starts the CD stream of the movie at disc_lba (filter file 1, channel 1) retrying until each CD command is accepted, then decodes the first frame header into D_801EB468 and the first buffer." }
+Logo_DrawFrame = { addr = 0x801CEA98, type = "func", source = "StGetNext to VLC to MDEC slice, returns when the picture is complete" }
+Logo_StopStream = { addr = 0x801CEBFC, type = "func", source = "StUnSetRing, stop the CD, clear the MDEC callback" }
+Logo_WaitFrame = { addr = 0x801CEC88, type = "func", source = "Spins while D_801EB46C, the pending slice transfer flag, is nonzero." }
+Logo_DecodeSlice = { addr = 0x801CECA4, type = "func", source = "DMA-out callback: loads the decoded slice to the frame at D_801EB45C, adds 0x18 to its x and starts the next DecDCTout while x is below 0x1E0, otherwise clears D_801EB46C." }
+Logo_FadeInAudio = { addr = 0x801CED48, type = "func", source = "Raises the left and right movie audio volume in s_LogoCDVolume from 0 to 0x80 in steps of 2 through CdMix." }
+Logo_FadeOutAudio = { addr = 0x801CEDA4, type = "func", source = "Lowers the left and right movie audio volume in s_LogoCDVolume from 0x80 to 0 in steps of 2 through CdMix." }
+Logo_Main = { addr = 0x801CEDFC, type = "func", source = "Logo player main: runs Logo_Init, then Logo_DrawFrame each frame until the stream ends or PADstart is pressed, then stops the stream, StopCallback, PadStop and SetDispMask(0)." }
+PadInit = { addr = 0x801CEE7C, type = "func", source = "LIBETC.LIB 152 bytes" }
+PadRead = { addr = 0x801CEECC, type = "func", source = "LIBETC.LIB 152 bytes" }
+PadStop = { addr = 0x801CEEF4, type = "func", size = 0x20, source = "PsyQ LIBETC library routine." }
+VSync = { addr = 0x801CEF14, type = "func", source = "LIBETC.LIB 484 bytes" }
+v_wait = { addr = 0x801CF05C, type = "func", size = 0x9C, source = "PsyQ LIBETC library routine." }
+ResetCallback = { addr = 0x801CF0F8, type = "func", source = "LIBETC.LIB 1808 bytes" }
+InterruptCallback = { addr = 0x801CF128, type = "func", source = "PsyQ LIBETC library routine." }
+DMACallback = { addr = 0x801CF158, type = "func", source = "PsyQ LIBETC library routine." }
+VSyncCallback = { addr = 0x801CF188, type = "func", source = "PsyQ LIBETC library routine." }
+VSyncCallbacks = { addr = 0x801CF1BC, type = "func", source = "PsyQ LIBETC library routine." }
+StopCallback = { addr = 0x801CF1EC, type = "func", source = "LIBETC.LIB 1808 bytes" }
+RestartCallback = { addr = 0x801CF21C, type = "func", source = "PsyQ LIBETC library routine." }
+CheckCallback = { addr = 0x801CF24C, type = "func", source = "LIBETC.LIB 1808 bytes" }
+GetIntrMask = { addr = 0x801CF25C, type = "func", source = "LIBETC.LIB 1808 bytes" }
+SetIntrMask = { addr = 0x801CF274, type = "func", source = "LIBETC.LIB 1808 bytes" }
+startIntr = { addr = 0x801CF290, type = "func", size = 0xDC, source = "PsyQ LIBETC library routine." }
+trapIntr = { addr = 0x801CF36C, type = "func", size = 0x1E8, source = "PsyQ LIBETC library routine." }
+setIntr = { addr = 0x801CF554, type = "func", size = 0x154, source = "PsyQ LIBETC library routine." }
+stopIntr = { addr = 0x801CF6A8, type = "func", size = 0xAC, source = "PsyQ LIBETC library routine." }
+restartIntr = { addr = 0x801CF754, type = "func", size = 0xB4, source = "PsyQ LIBETC library routine." }
+startIntrVSync = { addr = 0x801CF808, type = "func", size = 0x58, source = "PsyQ LIBETC library routine." }
+trapIntrVSync = { addr = 0x801CF860, type = "func", size = 0x78, source = "PsyQ LIBETC library routine." }
+setIntrVSync = { addr = 0x801CF8D8, type = "func", size = 0x58, source = "PsyQ LIBETC library routine." }
+startIntrDMA = { addr = 0x801CF930, type = "func", size = 0x50, source = "PsyQ LIBETC library routine." }
+trapIntrDMA = { addr = 0x801CF980, type = "func", size = 0x184, source = "PsyQ LIBETC library routine." }
+setIntrDMA = { addr = 0x801CFB04, type = "func", size = 0xD4, source = "PsyQ LIBETC library routine." }
+SetVideoMode = { addr = 0x801CFBD8, type = "func", source = "LIBETC.LIB 40 bytes" }
+GetVideoMode = { addr = 0x801CFBF0, type = "func", size = 0x10, source = "PsyQ LIBETC library routine." }
+StSetRing = { addr = 0x801CFC00, type = "func", size = 0x30, source = "PsyQ LIBCD library routine." }
+CdInit = { addr = 0x801CFC30, type = "func", source = "LIBCD.LIB 264 bytes" }
+def_cbsync = { addr = 0x801CFCC0, type = "func", size = 0x28, source = "PsyQ LIBCD library routine." }
+def_cbready = { addr = 0x801CFCE8, type = "func", size = 0x28, source = "PsyQ LIBCD library routine." }
+def_cbread = { addr = 0x801CFD10, type = "func", size = 0x28, source = "PsyQ LIBCD library routine." }
+CdStatus = { addr = 0x801CFD38, type = "func", size = 0x10, source = "PsyQ LIBCD library routine." }
+CdMode = { addr = 0x801CFD48, type = "func", size = 0x10, source = "PsyQ LIBCD library routine." }
+CdLastCom = { addr = 0x801CFD58, type = "func", size = 0x10, source = "PsyQ LIBCD library routine." }
+CdLastPos = { addr = 0x801CFD68, type = "func", size = 0x10, source = "PsyQ LIBCD library routine." }
+CdReset = { addr = 0x801CFD78, type = "func", source = "PsyQ LIBCD library routine." }
+CdFlush = { addr = 0x801CFDE4, type = "func", size = 0x20, source = "PsyQ LIBCD library routine." }
+CdSetDebug = { addr = 0x801CFE04, type = "func", size = 0x18, source = "PsyQ LIBCD library routine." }
+CdComstr = { addr = 0x801CFE1C, type = "func", source = "PsyQ LIBCD library routine." }
+CdIntstr = { addr = 0x801CFE50, type = "func", source = "PsyQ LIBCD library routine." }
+CdSync = { addr = 0x801CFE84, type = "func", size = 0x20, source = "PsyQ LIBCD library routine." }
+CdReady = { addr = 0x801CFEA4, type = "func", size = 0x20, source = "PsyQ LIBCD library routine." }
+CdSyncCallback = { addr = 0x801CFEC4, type = "func", size = 0x18, source = "PsyQ LIBCD library routine." }
+CdReadyCallback = { addr = 0x801CFEDC, type = "func", size = 0x18, source = "PsyQ LIBCD library routine." }
+CdControl = { addr = 0x801CFEF4, type = "func", source = "PsyQ LIBCD library routine." }
+CdControlF = { addr = 0x801D002C, type = "func", source = "PsyQ LIBCD library routine." }
+CdControlB = { addr = 0x801D0158, type = "func", source = "PsyQ LIBCD library routine." }
+CdMix = { addr = 0x801D029C, type = "func", source = "PsyQ LIBCD library routine." }
+CdGetSector = { addr = 0x801D02BC, type = "func", source = "PsyQ LIBCD library routine." }
+CdDataCallback = { addr = 0x801D02DC, type = "func", size = 0x24, source = "PsyQ LIBCD library routine." }
+CdDataSync = { addr = 0x801D0300, type = "func", size = 0x20, source = "PsyQ LIBCD library routine." }
+CdIntToPos = { addr = 0x801D0320, type = "func", size = 0x104, source = "PsyQ LIBCD library routine." }
+CdPosToInt = { addr = 0x801D0424, type = "func", size = 0x80, source = "PsyQ LIBCD library routine." }
+getintr = { addr = 0x801D04A4, type = "func", size = 0x588, source = "PsyQ LIBCD library routine." }
+CD_sync = { addr = 0x801D0A2C, type = "func", size = 0x280, source = "PsyQ LIBCD library routine." }
+CD_ready = { addr = 0x801D0CAC, type = "func", size = 0x2CC, source = "PsyQ LIBCD library routine." }
+CD_cw = { addr = 0x801D0F78, type = "func", size = 0x41C, source = "PsyQ LIBCD library routine." }
+CD_vol = { addr = 0x801D1394, type = "func", size = 0x88, source = "PsyQ LIBCD library routine." }
+CD_flush = { addr = 0x801D141C, type = "func", size = 0xE0, source = "PsyQ LIBCD library routine." }
+CD_initvol = { addr = 0x801D14FC, type = "func", size = 0xF4, source = "PsyQ LIBCD library routine." }
+CD_initintr = { addr = 0x801D15F0, type = "func", size = 0x50, source = "PsyQ LIBCD library routine." }
+CD_init = { addr = 0x801D1640, type = "func", size = 0x1EC, source = "PsyQ LIBCD library routine." }
+CD_datasync = { addr = 0x801D182C, type = "func", size = 0x16C, source = "PsyQ LIBCD library routine." }
+CD_getsector = { addr = 0x801D1998, type = "func", size = 0x100, source = "PsyQ LIBCD library routine." }
+CD_set_test_parmnum = { addr = 0x801D1A98, type = "func", size = 0x10, source = "PsyQ LIBCD library routine." }
+CD_callback = { addr = 0x801D1AA8, type = "func", size = 0xE4, source = "PsyQ LIBCD library routine." }
+cb_read = { addr = 0x801D1B8C, type = "func", size = 0x214, source = "PsyQ LIBCD library routine." }
+cd_read_retry = { addr = 0x801D1DA0, type = "func", size = 0x1CC, source = "PsyQ LIBCD library routine." }
+CdReadBreak = { addr = 0x801D1F6C, type = "func", size = 0x50, source = "PsyQ LIBCD library routine." }
+CdRead = { addr = 0x801D1FBC, type = "func", size = 0xE0, source = "PsyQ LIBCD library routine." }
+CdReadSync = { addr = 0x801D209C, type = "func", source = "LIBCD.LIB 1524 bytes" }
+CdReadCallback = { addr = 0x801D2168, type = "func", size = 0x18, source = "PsyQ LIBCD library routine." }
+CdRead2 = { addr = 0x801D2180, type = "func", size = 0x94, source = "PsyQ LIBCD library routine." }
+StCdInterrupt2 = { addr = 0x801D2214, type = "func", size = 0x20, source = "PsyQ LIBCD library routine." }
+StClearRing = { addr = 0x801D2234, type = "func", size = 0x60, source = "PsyQ LIBCD library routine." }
+StUnSetRing = { addr = 0x801D2294, type = "func", size = 0x58, source = "PsyQ LIBCD library routine." }
+data_ready_callback = { addr = 0x801D22EC, type = "func", size = 0x90, source = "PsyQ LIBCD library routine." }
+StGetBackloc = { addr = 0x801D237C, type = "func", size = 0x60, source = "PsyQ LIBCD library routine." }
+StSetStream = { addr = 0x801D23DC, type = "func", size = 0x88, source = "PsyQ LIBCD library routine." }
+StFreeRing = { addr = 0x801D2464, type = "func", size = 0xB8, source = "PsyQ LIBCD library routine." }
+init_ring_status = { addr = 0x801D251C, type = "func", size = 0x3C, source = "PsyQ LIBCD library routine." }
+StGetNext = { addr = 0x801D2558, type = "func", size = 0xC4, source = "PsyQ LIBCD library routine." }
+StSetMask = { addr = 0x801D261C, type = "func", size = 0x20, source = "PsyQ LIBCD library routine." }
+StCdInterrupt = { addr = 0x801D263C, type = "func", size = 0x970, source = "PsyQ LIBCD library routine." }
+mem2mem = { addr = 0x801D2FAC, type = "func", size = 0x34, source = "PsyQ LIBCD library routine." }
+dma_execute = { addr = 0x801D2FE0, type = "func", size = 0x1BC, source = "PsyQ LIBCD library routine." }
+LoadTPage = { addr = 0x801D319C, type = "func", source = "PsyQ LIBGPU library routine." }
+LoadClut = { addr = 0x801D3288, type = "func", size = 0x68, source = "PsyQ LIBGPU library routine." }
+LoadClut2 = { addr = 0x801D32F0, type = "func", size = 0x68, source = "PsyQ LIBGPU library routine." }
+SetDefDrawEnv = { addr = 0x801D3358, type = "func", size = 0xD0, source = "PsyQ LIBGPU library routine." }
+SetDefDispEnv = { addr = 0x801D3428, type = "func", source = "LIBGPU.LIB 712 bytes" }
+GetTPage = { addr = 0x801D3464, type = "func", size = 0xD0, source = "PsyQ LIBGPU library routine." }
+GetClut = { addr = 0x801D3534, type = "func", size = 0x18, source = "PsyQ LIBGPU library routine." }
+DumpTPage = { addr = 0x801D354C, type = "func", size = 0xD0, source = "PsyQ LIBGPU library routine." }
+DumpClut = { addr = 0x801D361C, type = "func", size = 0x40, source = "PsyQ LIBGPU library routine." }
+NextPrim = { addr = 0x801D365C, type = "func", size = 0x1C, source = "PsyQ LIBGPU library routine." }
+IsEndPrim = { addr = 0x801D3678, type = "func", size = 0x1C, source = "PsyQ LIBGPU library routine." }
+AddPrim = { addr = 0x801D3694, type = "func", size = 0x3C, source = "PsyQ LIBGPU library routine." }
+AddPrims = { addr = 0x801D36D0, type = "func", size = 0x3C, source = "PsyQ LIBGPU library routine." }
+CatPrim = { addr = 0x801D370C, type = "func", size = 0x24, source = "PsyQ LIBGPU library routine." }
+TermPrim = { addr = 0x801D3730, type = "func", size = 0x18, source = "PsyQ LIBGPU library routine." }
+SetSemiTrans = { addr = 0x801D3748, type = "func", size = 0x28, source = "PsyQ LIBGPU library routine." }
+SetShadeTex = { addr = 0x801D3770, type = "func", size = 0x28, source = "PsyQ LIBGPU library routine." }
+SetPolyF3 = { addr = 0x801D3798, type = "func", size = 0x14, source = "PsyQ LIBGPU library routine." }
+SetPolyFT3 = { addr = 0x801D37AC, type = "func", size = 0x14, source = "PsyQ LIBGPU library routine." }
+SetPolyG3 = { addr = 0x801D37C0, type = "func", size = 0x14, source = "PsyQ LIBGPU library routine." }
+SetPolyGT3 = { addr = 0x801D37D4, type = "func", size = 0x14, source = "PsyQ LIBGPU library routine." }
+SetPolyF4 = { addr = 0x801D37E8, type = "func", size = 0x14, source = "PsyQ LIBGPU library routine." }
+SetPolyFT4 = { addr = 0x801D37FC, type = "func", size = 0x14, source = "PsyQ LIBGPU library routine." }
+SetPolyG4 = { addr = 0x801D3810, type = "func", size = 0x14, source = "PsyQ LIBGPU library routine." }
+SetPolyGT4 = { addr = 0x801D3824, type = "func", size = 0x14, source = "PsyQ LIBGPU library routine." }
+SetSprt8 = { addr = 0x801D3838, type = "func", size = 0x14, source = "PsyQ LIBGPU library routine." }
+SetSprt16 = { addr = 0x801D384C, type = "func", size = 0x14, source = "PsyQ LIBGPU library routine." }
+SetSprt = { addr = 0x801D3860, type = "func", size = 0x14, source = "PsyQ LIBGPU library routine." }
+SetTile1 = { addr = 0x801D3874, type = "func", size = 0x14, source = "PsyQ LIBGPU library routine." }
+SetTile8 = { addr = 0x801D3888, type = "func", size = 0x14, source = "PsyQ LIBGPU library routine." }
+SetTile16 = { addr = 0x801D389C, type = "func", size = 0x14, source = "PsyQ LIBGPU library routine." }
+SetTile = { addr = 0x801D38B0, type = "func", size = 0x14, source = "PsyQ LIBGPU library routine." }
+SetLineF2 = { addr = 0x801D38C4, type = "func", size = 0x14, source = "PsyQ LIBGPU library routine." }
+SetLineG2 = { addr = 0x801D38D8, type = "func", size = 0x14, source = "PsyQ LIBGPU library routine." }
+SetLineF3 = { addr = 0x801D38EC, type = "func", source = "LIBGPU.LIB 2284 bytes" }
+SetLineG3 = { addr = 0x801D390C, type = "func", size = 0x20, source = "PsyQ LIBGPU library routine." }
+SetLineF4 = { addr = 0x801D392C, type = "func", source = "LIBGPU.LIB 2284 bytes" }
+SetLineG4 = { addr = 0x801D394C, type = "func", size = 0x20, source = "PsyQ LIBGPU library routine." }
+SetDrawTPage = { addr = 0x801D396C, type = "func", size = 0xB4, source = "PsyQ LIBGPU library routine." }
+SetDrawMove = { addr = 0x801D3A20, type = "func", source = "LIBGPU.LIB 2284 bytes" }
+SetDrawLoad = { addr = 0x801D3A80, type = "func", source = "PsyQ LIBGPU library routine." }
+MargePrim = { addr = 0x801D3AEC, type = "func", source = "PsyQ LIBGPU library routine." }
+DumpDrawEnv = { addr = 0x801D3B24, type = "func", size = 0x180, source = "PsyQ LIBGPU library routine." }
+DumpDispEnv = { addr = 0x801D3CA4, type = "func", source = "PsyQ LIBGPU library routine." }
+ResetGraph = { addr = 0x801D3D50, type = "func", source = "LIBGPU.LIB 12436 bytes" }
+SetGraphReverse = { addr = 0x801D3ED4, type = "func", source = "PsyQ LIBGPU library routine." }
+SetGraphDebug = { addr = 0x801D3FE8, type = "func", source = "PsyQ LIBGPU library routine." }
+SetGraphQueue = { addr = 0x801D404C, type = "func", source = "PsyQ LIBGPU library routine." }
+GetGraphType = { addr = 0x801D40F8, type = "func", size = 0x10, source = "PsyQ LIBGPU library routine." }
+GetGraphDebug = { addr = 0x801D4108, type = "func", size = 0x10, source = "PsyQ LIBGPU library routine." }
+DrawSyncCallback = { addr = 0x801D4118, type = "func", size = 0x5C, source = "PsyQ LIBGPU library routine." }
+SetDispMask = { addr = 0x801D4174, type = "func", source = "LIBGPU.LIB 12436 bytes" }
+DrawSync = { addr = 0x801D4210, type = "func", source = "LIBGPU.LIB 12436 bytes" }
+checkRECT = { addr = 0x801D427C, type = "func", size = 0x128, source = "PsyQ LIBGPU library routine." }
+ClearImage = { addr = 0x801D43A4, type = "func", source = "LIBGPU.LIB 12436 bytes" }
+ClearImage2 = { addr = 0x801D4438, type = "func", source = "PsyQ LIBGPU library routine." }
+LoadImage = { addr = 0x801D44D4, type = "func", size = 0x64, source = "PsyQ LIBGPU library routine." }
+StoreImage = { addr = 0x801D4538, type = "func", size = 0x64, source = "PsyQ LIBGPU library routine." }
+MoveImage = { addr = 0x801D459C, type = "func", source = "PsyQ LIBGPU library routine." }
+ClearOTag = { addr = 0x801D4660, type = "func", source = "PsyQ LIBGPU library routine." }
+ClearOTagR = { addr = 0x801D4718, type = "func", source = "PsyQ LIBGPU library routine." }
+DrawPrim = { addr = 0x801D47B0, type = "func", source = "PsyQ LIBGPU library routine." }
+DrawOTag = { addr = 0x801D4810, type = "func", size = 0x74, source = "PsyQ LIBGPU library routine." }
+PutDrawEnv = { addr = 0x801D4884, type = "func", source = "PsyQ LIBGPU library routine." }
+DrawOTagEnv = { addr = 0x801D4988, type = "func", source = "PsyQ LIBGPU library routine." }
+GetDrawEnv = { addr = 0x801D4AA4, type = "func", source = "PsyQ LIBGPU library routine." }
+PutDispEnv = { addr = 0x801D4ADC, type = "func", source = "LIBGPU.LIB 12436 bytes" }
+GetDispEnv = { addr = 0x801D4F84, type = "func", source = "PsyQ LIBGPU library routine." }
+GetODE = { addr = 0x801D4FBC, type = "func", source = "PsyQ LIBGPU library routine." }
+SetTexWindow = { addr = 0x801D4FEC, type = "func", size = 0x3C, source = "PsyQ LIBGPU library routine." }
+SetDrawArea = { addr = 0x801D5028, type = "func", source = "PsyQ LIBGPU library routine." }
+SetDrawOffset = { addr = 0x801D50AC, type = "func", source = "PsyQ LIBGPU library routine." }
+SetPriority = { addr = 0x801D50F0, type = "func", size = 0x2C, source = "PsyQ LIBGPU library routine." }
+SetDrawMode = { addr = 0x801D511C, type = "func", size = 0x58, source = "PsyQ LIBGPU library routine." }
+SetDrawEnv = { addr = 0x801D5174, type = "func", size = 0x218, source = "PsyQ LIBGPU library routine." }
+SetDrawEnv2 = { addr = 0x801D538C, type = "func", size = 0x290, source = "PsyQ LIBGPU library routine." }
+get_mode = { addr = 0x801D561C, type = "func", size = 0x58, source = "PsyQ LIBGPU library routine." }
+get_cs = { addr = 0x801D5674, type = "func", size = 0xCC, source = "PsyQ LIBGPU library routine." }
+get_ce = { addr = 0x801D5740, type = "func", size = 0xCC, source = "PsyQ LIBGPU library routine." }
+get_ofs = { addr = 0x801D580C, type = "func", size = 0x44, source = "PsyQ LIBGPU library routine." }
+get_tw = { addr = 0x801D5850, type = "func", size = 0x84, source = "PsyQ LIBGPU library routine." }
+get_dx = { addr = 0x801D58D4, type = "func", size = 0xB0, source = "PsyQ LIBGPU library routine." }
+_status = { addr = 0x801D5984, type = "func", size = 0x18, source = "PsyQ LIBGPU library routine." }
+_otc = { addr = 0x801D599C, type = "func", size = 0xE8, source = "PsyQ LIBGPU library routine." }
+_clr = { addr = 0x801D5A84, type = "func", size = 0x25C, source = "PsyQ LIBGPU library routine." }
+_dws = { addr = 0x801D5CE0, type = "func", size = 0x23C, source = "PsyQ LIBGPU library routine." }
+_drs = { addr = 0x801D5F1C, type = "func", size = 0x284, source = "PsyQ LIBGPU library routine." }
+_ctl = { addr = 0x801D61A0, type = "func", size = 0x28, source = "PsyQ LIBGPU library routine." }
+_getctl = { addr = 0x801D61C8, type = "func", size = 0x14, source = "PsyQ LIBGPU library routine." }
+_cwb = { addr = 0x801D61DC, type = "func", size = 0x50, source = "PsyQ LIBGPU library routine." }
+_cwc = { addr = 0x801D622C, type = "func", size = 0x4C, source = "PsyQ LIBGPU library routine." }
+_param = { addr = 0x801D6278, type = "func", size = 0x30, source = "PsyQ LIBGPU library routine." }
+_addque = { addr = 0x801D62A8, type = "func", size = 0x24, source = "PsyQ LIBGPU library routine." }
+_addque2 = { addr = 0x801D62CC, type = "func", size = 0x2E0, source = "PsyQ LIBGPU library routine." }
+_exeque = { addr = 0x801D65AC, type = "func", size = 0x2EC, source = "PsyQ LIBGPU library routine." }
+_reset = { addr = 0x801D6898, type = "func", size = 0x15C, source = "PsyQ LIBGPU library routine." }
+_sync = { addr = 0x801D69F4, type = "func", size = 0x148, source = "PsyQ LIBGPU library routine." }
+set_alarm = { addr = 0x801D6B3C, type = "func", size = 0x34, source = "PsyQ LIBGPU library routine." }
+get_alarm = { addr = 0x801D6B70, type = "func", size = 0x16C, source = "PsyQ LIBGPU library routine." }
+_version = { addr = 0x801D6CDC, type = "func", size = 0xDC, source = "PsyQ LIBGPU library routine." }
+memset = { addr = 0x801D6DB8, type = "func", size = 0x2C, source = "PsyQ LIBGPU library routine." }
+DecDCTReset = { addr = 0x801D6DE4, type = "func", source = "LIBPRESS.LIB 1888 bytes" }
+DecDCTGetEnv = { addr = 0x801D6E1C, type = "func", size = 0x8C, source = "PsyQ LIBPRESS library routine." }
+DecDCTPutEnv = { addr = 0x801D6EA8, type = "func", size = 0x9C, source = "PsyQ LIBPRESS library routine." }
+DecDCTBufSize = { addr = 0x801D6F44, type = "func", size = 0xC, source = "PsyQ LIBPRESS library routine." }
+DecDCTin = { addr = 0x801D6F50, type = "func", size = 0x7C, source = "PsyQ LIBPRESS library routine." }
+DecDCTout = { addr = 0x801D6FCC, type = "func", size = 0x20, source = "PsyQ LIBPRESS library routine." }
+DecDCTinSync = { addr = 0x801D6FEC, type = "func", size = 0x3C, source = "PsyQ LIBPRESS library routine." }
+DecDCToutSync = { addr = 0x801D7028, type = "func", size = 0x3C, source = "PsyQ LIBPRESS library routine." }
+DecDCTinCallback = { addr = 0x801D7064, type = "func", size = 0x24, source = "PsyQ LIBPRESS library routine." }
+DecDCToutCallback = { addr = 0x801D7088, type = "func", source = "LIBPRESS.LIB 1888 bytes" }
+MDEC_reset = { addr = 0x801D70AC, type = "func", size = 0xFC, source = "PsyQ LIBPRESS library routine." }
+MDEC_in = { addr = 0x801D71A8, type = "func", size = 0x94, source = "PsyQ LIBPRESS library routine." }
+MDEC_out = { addr = 0x801D723C, type = "func", size = 0x90, source = "PsyQ LIBPRESS library routine." }
+MDEC_in_sync = { addr = 0x801D72CC, type = "func", size = 0x98, source = "PsyQ LIBPRESS library routine." }
+MDEC_out_sync = { addr = 0x801D7364, type = "func", size = 0x98, source = "PsyQ LIBPRESS library routine." }
+MDEC_status = { addr = 0x801D73FC, type = "func", size = 0x18, source = "PsyQ LIBPRESS library routine." }
+timeout = { addr = 0x801D7414, type = "func", size = 0x134, source = "PsyQ LIBPRESS library routine." }
+DecDCTvlcSize = { addr = 0x801D7548, type = "func", source = "LIBPRESS vlc.o DecDCTvlcSize, words equal retail" }
+func_801D7568 = { addr = 0x801D7568, type = "func", source = "LIBPRESS.LIB 920 bytes" }
+DecDCTvlc = { addr = 0x801D7578, type = "func", source = "LIBPRESS.LIB 920 bytes" }
+puts = { addr = 0x801D78E4, type = "func", source = "LIBC.LIB 32 bytes" }
+setjmp = { addr = 0x801D78FC, type = "func", source = "LIBC.LIB 16 bytes" }
+memcpy = { addr = 0x801D790C, type = "func", source = "LIBC.LIB 16 bytes" }
+printf = { addr = 0x801D791C, type = "func", source = "LIBC.LIB 16 bytes" }
+GPU_cw = { addr = 0x801D792C, type = "func", source = "LIBAPI.LIB 16 bytes" }
+_96_remove = { addr = 0x801D7944, type = "func", source = "LIBAPI.LIB 32 bytes" }
+DeliverEvent = { addr = 0x801D795C, type = "func", source = "LIBAPI.LIB 16 bytes" }
+PAD_dr = { addr = 0x801D796C, type = "func", source = "LIBAPI.LIB 16 bytes" }
+ReturnFromException = { addr = 0x801D797C, type = "func", source = "LIBAPI.LIB 16 bytes" }
+ResetEntryInt = { addr = 0x801D798C, type = "func", source = "LIBAPI.LIB 16 bytes" }
+HookEntryInt = { addr = 0x801D799C, type = "func", source = "LIBAPI.LIB 16 bytes" }
+EnterCriticalSection = { addr = 0x801D79AC, type = "func", source = "LIBAPI.LIB 16 bytes" }
+ExitCriticalSection = { addr = 0x801D79BC, type = "func", source = "LIBAPI.LIB 16 bytes" }
+ChangeClearPAD = { addr = 0x801D79CC, type = "func", source = "LIBAPI.LIB 16 bytes" }
+ChangeClearRCnt = { addr = 0x801D79DC, type = "func", source = "LIBAPI.LIB 16 bytes" }
+SetInitPadFlag = { addr = 0x801D79EC, type = "func", size = 0x10, source = "Marks the controller library as initialized." }
+ReadInitPadFlag = { addr = 0x801D79FC, type = "func", source = "LIBAPI.LIB pad.o 16 bytes" }
+PAD_init = { addr = 0x801D7A0C, type = "func", size = 0x8C, source = "Initializes the controller library." }
+InitPAD = { addr = 0x801D7A98, type = "func", size = 0x8C, source = "LIBAPI pad.o InitPAD, four words" }
+StartPAD = { addr = 0x801D7B24, type = "func", size = 0x30, source = "LIBAPI pad.o StartPAD" }
+StopPAD = { addr = 0x801D7B54, type = "func", source = "LIBAPI.LIB pad.o 48 bytes" }
+SetPatchPad = { addr = 0x801D7B84, type = "func", size = 0x80, source = "LIBAPI pad.o SetPatchPad - queues the handler pair and clears the PAD work word" }
+RemovePatchPad = { addr = 0x801D7C04, type = "func", size = 0x38, source = "LIBAPI pad.o RemovePatchPad - dequeues the PAD interrupt record" }
+_Pad1 = { addr = 0x801D7C3C, type = "func", size = 0x68, source = "LIBAPI pad.o _Pad1 - clears the PAD work halfword then spins" }
+_IsVSync = { addr = 0x801D7CA4, type = "func", size = 0x40, source = "LIBAPI pad.o _IsVSync - tests both PAD record words" }
+InitPAD2 = { addr = 0x801D7CE4, type = "func", source = "LIBAPI.LIB 16 bytes" }
+StartPAD2 = { addr = 0x801D7CF4, type = "func", source = "LIBAPI.LIB 16 bytes" }
+StopPAD2 = { addr = 0x801D7D04, type = "func", source = "LIBAPI.LIB 16 bytes" }
+PAD_init2 = { addr = 0x801D7D14, type = "func", source = "LIBAPI.LIB 16 bytes" }
+SysEnqIntRP = { addr = 0x801D7D24, type = "func", source = "LIBAPI.LIB 16 bytes" }
+SysDeqIntRP = { addr = 0x801D7D34, type = "func", source = "LIBAPI.LIB 16 bytes" }
+EnablePAD = { addr = 0x801D7D44, type = "func", size = 0x14, source = "PsyQ LIBAPI library routine." }
+DesablePAD = { addr = 0x801D7D58, type = "func", size = 0x14, source = "PsyQ LIBAPI library routine." }
+_patch_pad = { addr = 0x801D7D6C, type = "func", size = 0x68, source = "PsyQ LIBAPI library routine." }
+FlushCache = { addr = 0x801D7DD4, type = "func", source = "LIBAPI.LIB 16 bytes" }
+CD_cbsync = { addr = 0x801D9D64, alias = true, source = "PsyQ 3.7 LIBCD data symbol kept so the split accounts for the library data the game never names." }
+CD_cbready = { addr = 0x801D9D68, alias = true, source = "PsyQ 3.7 LIBCD data symbol kept so the split accounts for the library data the game never names." }
+CD_debug = { addr = 0x801D9D70, alias = true, source = "PsyQ 3.7 LIBCD data symbol kept so the split accounts for the library data the game never names." }
+CD_status = { addr = 0x801D9D74, alias = true, source = "PsyQ 3.7 LIBCD data symbol kept so the split accounts for the library data the game never names." }
+CD_pos = { addr = 0x801D9D80, alias = true, source = "PsyQ 3.7 LIBCD data symbol kept so the split accounts for the library data the game never names." }
+CD_mode = { addr = 0x801D9D84, alias = true, source = "PsyQ 3.7 LIBCD data symbol kept so the split accounts for the library data the game never names." }
+CD_com = { addr = 0x801D9D85, alias = true, source = "PsyQ 3.7 LIBCD data symbol kept so the split accounts for the library data the game never names." }
+CD_comstr = { addr = 0x801D9D88, alias = true, source = "PsyQ 3.7 LIBCD data symbol kept so the split accounts for the library data the game never names." }
+CD_intstr = { addr = 0x801D9E08, alias = true, source = "PsyQ 3.7 LIBCD data symbol kept so the split accounts for the library data the game never names." }
+GPU_printf = { addr = 0x801DA1BC, alias = true, source = "The libgpu debug printf hook GPU_printf (libgpu.h), a function pointer the GPU library calls." }
+DCL_DVLC = { addr = 0x801DA424, source = "LIBPRESS table.o DCL_DVLC, 1024 bytes equal retail" }
+DCC_DVLC = { addr = 0x801DA824, source = "LIBPRESS table.o DCC_DVLC, 1024 bytes equal retail" }
+CF_DVLC = { addr = 0x801DAC24, source = "LIBPRESS table.o CF_DVLC, 65536 bytes equal retail" }
+jtbl_801EB430 = { addr = 0x801EB430, type = "Callback", source = "The switch table of _patch_pad: the jump targets of its jr dispatch." }
+jtbl_801EB438 = { addr = 0x801EB438, type = "Callback", size = 0x4, source = "The switch table of EnablePAD: 1 jump targets of its jr dispatch." }
+jtbl_801EB43C = { addr = 0x801EB43C, type = "Callback", size = 0x4, source = "The switch table of DesablePAD: 1 jump targets of its jr dispatch." }
+s_LogoCDVolume = { addr = 0x801EB470, source = "CdMix attenuator bytes of the movie audio: left volume at 0, right volume at 2, cross-channel 0 at 1 and 3." }

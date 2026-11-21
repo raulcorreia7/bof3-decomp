@@ -3,7 +3,9 @@ from __future__ import annotations
 from pathlib import Path
 
 import pytest
+from fixture import put_symbols
 
+from bof3.adapters.config import symbols_text
 from bof3.link import symbols
 from bof3.link.symbols import LinkError, Scan
 
@@ -11,7 +13,7 @@ from bof3.link.symbols import LinkError, Scan
 def table(tmp_path: Path, body: str) -> Path:
     (tmp_path / "config/exe/a").mkdir(parents=True)
     (tmp_path / "config/exe/a/splat.yaml").write_text("name: a\n")
-    (tmp_path / "config/symbols.toml").write_text(body)
+    put_symbols(tmp_path, body)
     return tmp_path
 
 
@@ -189,3 +191,13 @@ def test_merge_driver_unions_rows_in_address_order(tmp_path) -> None:
     ours = write("ours", one, three)
     assert merge_symbols.main(base, ours, write("theirs", one, two)) == 0
     assert (tmp_path / "ours").read_text() == f'["a/00"]\n{one}\n{two}\n{three}\n'
+
+
+def test_the_tables_round_trip_through_one_file_per_image(tmp_path) -> None:
+    text = '["exe/a"]\nOne = { addr = 0x1 }\n["emi/b/00"]\nTwo = { addr = 0x2 }\n'
+    put_symbols(tmp_path, text)
+    assert sorted(p.name for p in (tmp_path / "config/symbols").iterdir()) == [
+        "emi+b+00.toml",
+        "exe+a.toml",
+    ]
+    assert symbols_text(tmp_path).count("[") == 2

@@ -1,0 +1,7 @@
+["emi/bmagic/magic109/03"]
+Battle_ApplyDamageFlags = { addr = 0x800A9610, type = "func", source = "Applies the damage flags to the selected battlers." }
+Battle_MarkDamaged = { addr = 0x800A9820, type = "func", source = "Marks the selected battlers as damaged." }
+Effect_Reset = { addr = 0x801E5988, type = "func", source = "Clears every timer, state and flag byte of the shared BattleEffect work record; every effect countdown calls it first. battle/03 owns the body." }
+D_801EF9F8 = { addr = 0x801EF9F8, type = "Offset2", size = 0x80, source = "Sixteen points of the effect." }
+D_801EFA78 = { addr = 0x801EFA78, type = "Offset2", size = 0x80, source = "Sixteen points of the effect." }
+D_801EFAF8 = { addr = 0x801EFAF8, type = "Offset2", size = 0x80, source = "Sixteen points of the effect." }

@@ -3,7 +3,7 @@
 
 Headers follow docs/layout.md#header-layout: constants and enums first, one block per record in
 table order, an ID enum in value order, ASSERT_OFFSETs in offset order then ASSERT_SIZE, and
-prototypes in address order. config/symbols.toml rows are in address order. A file lists data and
+prototypes in address order. config/symbols/<image>.toml rows are in address order. A file lists data and
 functions in address order. docs/conventions.md#values adds #define runs by topic, ids and flags by
 value, offsets in layout order and arguments in natural order.
 
@@ -26,7 +26,7 @@ from pathlib import Path
 
 from bof3.adapters.git import changed_files, ls_files, merge_base
 from bof3.core.paths import ROOT
-from bof3.symbols import TABLE as SYMBOLS
+from bof3.symbols import SPLIT
 
 ADDR_NAME = re.compile(r"\b(?:func|D|jtbl|jpt|L|s_gap)_([0-9A-Fa-f]{6,8})\b")
 ADDR_COMMENT = re.compile(
@@ -488,7 +488,7 @@ def changed(ref: str) -> tuple[list[str], list[str]]:
         "--",
         "include",
         "src",
-        SYMBOLS,
+        SPLIT,
         root=ROOT,
     )
     return (
@@ -550,13 +550,14 @@ def inspect(headers: list[str], data: list[str], fix: bool) -> list[Finding]:
             if fix and any(h.fixable for h in hits):
                 write_fixes(target, lines, hits)
                 lines = target.read_text(errors="replace").splitlines(keepends=True)
-    target = ROOT / SYMBOLS
-    if target.is_file():
-        lines = target.read_text(errors="replace").splitlines(keepends=True)
-        hits = check_symbols(SYMBOLS, lines)
-        findings.extend(hits)
-        if fix and hits:
-            write_fixes(target, lines, hits)
+    for target in sorted((ROOT / SPLIT).glob("*.toml")):
+        if target.is_file():
+            name = target.relative_to(ROOT).as_posix()
+            lines = target.read_text(errors="replace").splitlines(keepends=True)
+            hits = check_symbols(name, lines)
+            findings.extend(hits)
+            if fix and hits:
+                write_fixes(target, lines, hits)
     for path in data:
         target = ROOT / path
         if target.is_file():
@@ -582,7 +583,7 @@ def main() -> int:
     args = parser.parse_args()
     if args.paths:
         headers = [p for p in args.paths if p.endswith(".h")]
-        data = [p for p in args.paths if p.endswith(".c") and p != SYMBOLS]
+        data = [p for p in args.paths if p.endswith(".c")]
     elif args.diff:
         headers, data = changed(args.diff)
     else:

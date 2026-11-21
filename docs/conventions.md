@@ -225,7 +225,7 @@ Ids not yet converted keep flat `MSG_nnn` names in `include/menu/message_ids.h`.
 A name needs evidence from a reader, writer, API argument or other source. Record the evidence in
 the commit body. A name without evidence stays an address name or `unk_<OFF>`.
 
-The `source` field of a function or global's `config/symbols.toml` row describes what it does or
+The `source` field of a function or global's `config/symbols/<image>.toml` row describes what it does or
 holds in one short present-tense sentence, using game terms. It does not record callers, addresses,
 implementation details or naming evidence. Leave it out when the role is unknown.
 
@@ -317,7 +317,7 @@ not a comment.
 ### Values
 
 1. Every raw RAM address becomes its symbol. A raw address in `src/` is a lookup failure: search
-   `config/symbols.toml`, `include/` and `src/` for `0xADDR` to name the global, constant or
+   `config/symbols/<image>.toml`, `include/` and `src/` for `0xADDR` to name the global, constant or
    region macro.
 2. A value gets a name only when its evidence gives it one meaning
    ([constants](naming.md#constants-and-macros)). Its role picks `enum` or `#define`:
@@ -638,7 +638,7 @@ only renames or forwards goes.
 | A cast view of a global where the bytes need it, with the reason in its comment          | An `#ifndef` default, or a second definition of the same name                        |
 | A per-image setting in each image header                                                 | A `#define` nothing uses and that holds no fact                                      |
 
-A `#define` that only aliases a proven name folds into that name: add or fix the name's `config/symbols.toml`
+A `#define` that only aliases a proven name folds into that name: add or fix the name's `config/symbols/<image>.toml`
 row, rename the definition and declaration to it, then delete the macro. Only a name with no
 evidence goes back to the address.
 

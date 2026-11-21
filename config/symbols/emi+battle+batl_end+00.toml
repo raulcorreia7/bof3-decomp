@@ -1,0 +1,7 @@
+["emi/battle/batl_end/00"]
+jtbl_801EEC0C = { addr = 0x801EEC0C, type = "Callback", size = 0x1C, source = "The switch table of func_801EF928: 7 jump targets of its jr dispatch." }
+D_801EEC40 = { addr = 0x801EEC40, size = 0x4, source = "The decimal number format." }
+Battle_WaitVictoryLoad = { addr = 0x801EEFCC, type = "func", source = "Last substate of ui_step 0 of the battle victory overlay (D_801F0CA4): waits for EMI_IsReady after func_801EECD0 requested the member archive, then resets the row cursor and ui_state and advances ui_step." }
+Battle_GrantQueuedItems = { addr = 0x801EF870, type = "func", source = "Gives the items queued in the battle." }
+Battle_DrawVictoryZenny = { addr = 0x801F09F4, type = "func", source = "Draws the zenny reward of the battle victory screen: formats g_Zenny with TEXT_Format and draws the amount and its caption; the second entry of the table in func_801F097C." }
+Char_GetExpToNextLevel = { addr = 0x801F0BB0, type = "func", source = "Returns the experience a party member still needs for its next level; 0 once its exp already covers it." }

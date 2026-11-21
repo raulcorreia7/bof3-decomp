@@ -1,0 +1,38 @@
+["emi/etc/sisyou/00"]
+g_MasterMenuOverlayHeader = { addr = 0x801D0C00, source = "The master menu overlay's payload prologue: its overlay id and the three number formats of its panels." }
+g_MenuCurrentValueFormat = { addr = 0x801D0C08, source = "Format of the current value of an HP or AP pair printed in a party row (Menu_DrawMasterPartyRow); the maximum follows through g_MenuMaxValueFormat." }
+g_MenuMaxValueFormat = { addr = 0x801D0C10, source = "Format of the maximum value of an HP or AP pair, printed after the current value (g_MenuCurrentValueFormat)." }
+Menu_ResetMasterPanel = { addr = 0x801D0C18, type = "func", source = "Clears the master panel step, sub-step, lock and scroll bytes D_801D4285 to D_801D4289; the game overlay calls it after streaming slot 0x267." }
+Menu_DrawStatPanel = { addr = 0x801D1444, type = "func", source = "Draws the stat panel of party member palette_index at panel_x, panel_y: the power, defense, intelligence and agility labels with their u16 values from the character record, the status text when the status byte is not GAME_NONE, and the panel border sprite runs." }
+Menu_DrawMasterPartyRow = { addr = 0x801D177C, type = "func", source = "Draws one party row of the master menu: portrait, name, level and experience line, with the poison and confusion tags." }
+Menu_DrawExperienceLine = { addr = 0x801D1B28, type = "func", source = "Draws the red experience line of a character from x, y: its length is the experience gained since level, scaled by 57 over the span to the next level, and is zero when both levels need the same experience." }
+Char_GetExpForLevel = { addr = 0x801D1C44, type = "func", source = "Returns the experience a character needs to reach a level: the sum of the first level u16 entries of the character row of g_LevelGrowth, or -1 from level 100." }
+Menu_DrawCursorFrame = { addr = 0x801D1CC0, type = "func", source = "Draws the cursor frame of a menu cell at x, y as one LINE_F3 and one LINE_F4. The colour is white, or blinks with g_FrameCount bit 3 when color is nonzero, and each party slot bit set in frame_mode lights one colour channel." }
+Menu_DrawHeaderBar = { addr = 0x801D1E54, type = "func", source = "Draws the window of a menu header bar from x, y, width and height with the window style g_WindowStyle." }
+Menu_DrawPortrait = { addr = 0x801D23A0, type = "func", source = "Draws a 40x48 character portrait from g_MenuPortraitAtlas record atlas_index at sprite_x, sprite_y, shaded dark when shade_mode is nonzero." }
+Menu_DrawPanelIcon = { addr = 0x801D2520, type = "func", source = "Draws one menu icon cell at x, y from atlas position u, v with clut and the grey level color, through MenuDrawPanelIcon." }
+Menu_UpdateMaster = { addr = 0x801D25D8, type = "func", source = "Runs the g_MasterMenuSteps handler selected by the panel step byte g_MenuMasterStep; the game overlay runs it each frame." }
+Master_StartOffer = { addr = 0x801D27C8, type = "func", source = "starts the master skill offer message in the sisyou menu" }
+Master_StartFarewell = { addr = 0x801D2B64, type = "func", source = "Starts the master's farewell message (g_MenuMasterMessageIds + MASTER_MESSAGE_FAREWELL) once and moves the master menu to step 6; the last entry of g_MenuMasterStep2Steps, which starts with Master_StartOffer." }
+Menu_ApplyMasterMode = { addr = 0x801D3ED0, type = "func", source = "Writes the actor mode g_MenuMasterActorModes[g_SceneEventSelection] into the header of g_Actors[g_ScriptVars[3]] and closes the panel." }
+g_MenuLabelPower = { addr = 0x801D4038, source = "Text of the power label, drawn by Menu_DrawStatPanel at the left of the first stat row." }
+g_MenuLabelDefense = { addr = 0x801D403C, source = "Text of the defense label, drawn by Menu_DrawStatPanel at the left of the second stat row." }
+g_MenuLabelIntelligence = { addr = 0x801D4040, source = "Text of the intelligence label, drawn by Menu_DrawStatPanel at the second column of the first stat row." }
+g_MenuLabelAgility = { addr = 0x801D4044, source = "Text of the agility label, drawn by Menu_DrawStatPanel at the second column of the second stat row." }
+g_MenuLabelPoison = { addr = 0x801D4048, source = "Menu_DrawMasterPartyRow draws it for STATUS_POISONED; its text is Pois" }
+g_MenuLabelConfusion = { addr = 0x801D4050, source = "Menu_DrawMasterPartyRow draws it for STATUS_CONFUSED; its text is Conf" }
+g_MenuPortraitAtlas = { addr = 0x801D4058, source = "4-byte portrait atlas records read by Menu_DrawPortrait by portrait index." }
+g_MenuMasterSkills = { addr = 0x801D4088, source = "Ability rows each master teaches: func_801D3A24 compares the level of each row of the current master and teaches the ability." }
+g_MenuMasterStats = { addr = 0x801D4154, source = "Stat growth row of each master; func_801D2CA4 copies the row of the current master into the character level_up_modifiers." }
+g_MenuMasterMessageIds = { addr = 0x801D41BC, source = "Message id of each master; func_801D2CA4 adds an offset to the entry of the current master and starts it with Message_StartAreaMessage." }
+g_MenuMasterStep2Steps = { addr = 0x801D4204, source = "sub-handler table dispatched by func_801D278C, entry 2 of g_MasterMenuSteps" }
+g_MenuMasterStep3Steps = { addr = 0x801D421C, source = "sub-handler table dispatched by func_801D2BE8, entry 3 of g_MasterMenuSteps" }
+g_MenuMasterStep4Steps = { addr = 0x801D4240, source = "sub-handler table dispatched by func_801D32D4, entry 4 of g_MasterMenuSteps" }
+g_MenuMasterStep5Steps = { addr = 0x801D4264, source = "sub-handler table dispatched by func_801D3924, entry 5 of g_MasterMenuSteps" }
+g_MenuMasterActorModes = { addr = 0x801D4270, type = "u8", size = 0x14, source = "the actor mode Menu_ApplyMasterMode writes for each MasterId; GAME_NONE leaves it" }
+g_MenuMasterBannerLock = { addr = 0x801D4284, source = "Nonzero while the info banner owns the master panel." }
+g_MenuMasterStep = { addr = 0x801D4285, source = "Current step of the master menu, indexing g_MasterMenuSteps." }
+g_MenuMasterSubStep = { addr = 0x801D4286, source = "Current sub-step of the master menu that the step handlers advance." }
+g_MenuMasterPanelLock = { addr = 0x801D4287, source = "Lock byte of the master panel (D_801D4287)." }
+g_MenuMasterScrollOffset = { addr = 0x801D4289, source = "Scroll offset of the master panel (D_801D4289)." }
+g_MenuMasterCursor = { addr = 0x801D428A, source = "indexes the 0x140-byte stock rows" }

@@ -373,7 +373,7 @@ def frame(insns: list[Insn], _ctx: Context) -> list[str]:
 
 
 def addresses(insns: list[Insn], ctx: Context) -> list[str]:
-    """Every address the assembly reads, resolved through ``config/symbols.toml``."""
+    """Every address the assembly reads, resolved through ``config/symbols/<image>.toml``."""
     found: dict[int, str] = {}
     pending: dict[str, int] = {}
     for insn in insns:

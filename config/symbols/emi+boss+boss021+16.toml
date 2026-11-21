@@ -1,0 +1,7 @@
+["emi/boss/boss021/16"]
+Battle_ShowActorEntry = { addr = 0x800AC844, type = "func", source = "Clears the hidden flag of the actor entry entry_id, which draws the battler again.", alias = true }
+jtbl_800C1804 = { addr = 0x800C1804, type = "Callback", size = 0x18, source = "The switch table of Boss_RunBattleEvent: 6 jump targets of its jr dispatch." }
+Boss_InstallBattleHooks = { addr = 0x800C1AD0, type = "func", source = "Installs the boss battle hooks of boss021: Boss_ChooseBattleEnding into g_BattleChooseEndingHook, Boss_EndBattle into g_BattleEndHook and Boss_RunBattleEvent into g_BossBattleEventHook." }
+Boss_RunBattleEvent = { addr = 0x800C1B08, type = "func", source = "Handles the boss battle events of boss021: g_BossBattleEventHook calls it with the event mode (0 to 6) from the battle loop and tests its u8 result." }
+Boss_ChooseBattleEnding = { addr = 0x800C1C18, type = "func", source = "Chooses how the boss battle of boss021 ends (g_BattleChooseEndingHook). On victory sets script variable 0 to 0x0A, runs Battle_EndVictory; otherwise runs Battle_EndDefeat." }
+Boss_EndBattle = { addr = 0x800C1C64, type = "func", source = "Ends the boss battle of boss021 (g_BattleEndHook): runs Battle_ShowActorEntry(0), clears work byte 0x2A of the actor func_800AC754(0) returns, selects its script 4 and runs func_800AC934 for slots 1 and 2." }

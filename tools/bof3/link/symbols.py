@@ -1,6 +1,6 @@
 """Symbols: the one tracked table, the files generated from it, and link-time resolution.
 
-``config/symbols.toml`` is the only hand-kept symbol file. One table per target holds that
+``config/symbols/<image>.toml`` is the only hand-kept symbol file. One table per target holds that
 target's rows, one row per name:
 
     ["exe/slus_004_22"]
@@ -29,9 +29,10 @@ from collections.abc import Sequence
 from pathlib import Path
 from typing import NamedTuple
 
+from bof3.adapters.config import read_symbols, symbol_files
 from bof3.core.cache import file_memo
 from bof3.core.paths import BUILD, CONFIG
-from bof3.symbols import TABLE, Entry, LinkError, overlaps, parse, table_entries
+from bof3.symbols import SPLIT, Entry, LinkError, overlaps, table_entries
 
 __all__ = [
     "ADDRESS_NAME",
@@ -112,21 +113,20 @@ def link_owners(root: Path, target: str) -> list[str]:
 
 def load(root: Path) -> dict[str, list[Entry]]:
     """Return every target's rows in file order; a bad row is a :class:`LinkError`."""
-    path = root / TABLE
 
     def read() -> dict[str, list[Entry]]:
-        document = parse(path.read_text(encoding="utf-8"))
+        document = read_symbols(root)
         tables: dict[str, list[Entry]] = {}
         problems: list[str] = []
         for target, rows in document.items():
             if not (root / CONFIG / target / "splat.yaml").is_file():
                 raise LinkError(
-                    f"{TABLE}: [{target}] names no target. Use a folder id under config/ "
+                    f"{SPLIT}: [{target}] names no target. Use a folder id under config/ "
                     "that holds a splat.yaml."
                 )
             if not isinstance(rows, dict):
                 raise LinkError(
-                    f'{TABLE}: [{target}] is not a table. Write `["{target}"]`.'
+                    f'{SPLIT}: [{target}] is not a table. Write `["{target}"]`.'
                 )
             entries = table_entries(target, rows)
             problems += overlaps(target, entries)
@@ -135,7 +135,7 @@ def load(root: Path) -> dict[str, list[Entry]]:
             raise LinkError("\n".join(problems))
         return tables
 
-    return file_memo("symbols-table", [path], None, read)
+    return file_memo("symbols-table", symbol_files(root), None, read)
 
 
 def target_rows(root: Path, target: str) -> list[Entry]:
@@ -330,14 +330,14 @@ def resolve(
             expected = assigned.get(name)
             if expected is not None and rows and set(rows) != {expected}:
                 problems.append(
-                    f"{name}: the split link script gives 0x{expected:08X} but {TABLE} gives "
+                    f"{name}: the split link script gives 0x{expected:08X} but {SPLIT} gives "
                     f"{_where(rows)}. Fix the row so one address remains."
                 )
             continue
         if spelled is not None:
             if rows and set(rows) != {spelled}:
                 problems.append(
-                    f"{name}: the name spells 0x{spelled:08X} but {TABLE} gives {_where(rows)}. "
+                    f"{name}: the name spells 0x{spelled:08X} but {SPLIT} gives {_where(rows)}. "
                     "Rename the row or fix its address."
                 )
             else:
@@ -347,13 +347,13 @@ def resolve(
         elif rows:
             problems.append(
                 f"{name} (needed by {Path(owner).name}) has {len(rows)} addresses visible to "
-                f"{target}: {_where(rows)}. Rename one of the rows in {TABLE} so each name has "
+                f"{target}: {_where(rows)}. Rename one of the rows in {SPLIT} so each name has "
                 "one address."
             )
         elif not partial:
             problems.append(
                 f"{name} (needed by {Path(owner).name}) has no address. Add "
-                f"`{name} = {{ addr = 0x... }}` to [{target}] in {TABLE}, or fix the spelling."
+                f"`{name} = {{ addr = 0x... }}` to [{target}] in {SPLIT}, or fix the spelling."
             )
     if problems:
         raise LinkError(
@@ -397,7 +397,7 @@ def own_checks(
     """
     table = read_maps(root, maps)
     return [
-        f'ASSERT({name} == 0x{addr:08X}, "{TABLE} [{target}] {name}: the row says '
+        f'ASSERT({name} == 0x{addr:08X}, "{SPLIT} [{target}] {name}: the row says '
         f'0x{addr:08X} but the image links it elsewhere");'
         for name in sorted(defined & table.keys())
         for addr, owner in table[name].items()
@@ -420,7 +420,7 @@ def explain(root: Path, target: str, map_path: Path) -> list[str]:
         if symbol.name in own:
             placed.setdefault(symbol.name, symbol.address)
     return [
-        f"{TABLE} [{target}] {name}: the row says 0x{want:08X} but the image links it at "
+        f"{SPLIT} [{target}] {name}: the row says 0x{want:08X} but the image links it at "
         f"0x{placed[name]:08X}. Fix the row's address, or the source that moved the symbol."
         for name, rows in sorted(own.items())
         if name in placed

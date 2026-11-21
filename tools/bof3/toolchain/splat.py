@@ -331,7 +331,7 @@ def splat_inputs(root: Path, target: str) -> list[Path]:
 
     ``splat.yaml``, its owners' generated symbol maps, and the target bytes named by
     ``options.target_path`` all affect the generated assembly and linker script. The
-    target's own ``config/symbols.toml`` rows count too (see :func:`splat_input_digest`).
+    target's own ``config/symbols/<image>.toml`` rows count too (see :func:`splat_input_digest`).
     """
     manifest = root / CONFIG / target / "splat.yaml"
     paths = [manifest]

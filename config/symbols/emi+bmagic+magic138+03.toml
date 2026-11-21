@@ -1,0 +1,14 @@
+["emi/bmagic/magic138/03"]
+D_80036C00 = { addr = 0x80036C00, type = "u16", size = 0x200, source = "Row 26 of the palette arena." }
+g_BattleEffectPalette = { addr = 0x8003AC00, type = "u16", size = 0x200, source = "Row 26 of the working copy of the palette banks." }
+Battle_MarkDamaged = { addr = 0x800A9820, type = "func", source = "Marks the selected battlers as damaged." }
+Battle_AllocEffect = { addr = 0x801E590C, alias = true, source = "Claims a free battle effect slot." }
+Effect_Reset = { addr = 0x801E5988, type = "func", source = "Clears every timer, state and flag byte of the shared BattleEffect work record; every effect countdown calls it first. battle/03 owns the body." }
+g_BattleEffectBattler = { addr = 0x801EB4E0, source = "the battler the running effect acts on; Battle_UpdateEffects stores it for each effect step (emi/battle/battle/03 owns the cell)" }
+g_BattleEnemyBattlers = { addr = 0x801EB630, alias = true }
+g_BattleEffects = { addr = 0x801EC330, alias = true, source = "Battle effect work records (stride 0x78); Battle_AllocEffect claims a free one by setting bit 0 of header.flags." }
+D_801EEC1C = { addr = 0x801EEC1C, type = "Magic138Steps", source = "Step handlers of magic138 (Whelp Breath's sibling in this image), run by header.step (byte 0x02) from func_801EF52C." }
+BMagic_DispatchMode = { addr = 0x801EEC28, type = "func", source = "Runs the handler that header.mode (byte 0x01) selects from the module head's three callbacks in magic138 (Main Cannon)." }
+BMagic_DispatchEffectMode = { addr = 0x801EEF60, type = "func", source = "Runs the handler that header.mode (byte 0x01) selects from the effect handlers of magic138." }
+Effect_TickDownAndClear = { addr = 0x801EF6F8, type = "func", source = "Lowers the active battler's ticker (byte 0x0B) and clears the effect in magic138 (Main Cannon)." }
+g_BMagicEffectModes = { addr = 0x801EF72C, source = "Handlers of magic138 (Main Cannon), run by header.mode (byte 0x01)." }

@@ -1,0 +1,19 @@
+["emi/bmagic/magic118/03"]
+Battle_ApplyDamageFlags = { addr = 0x800A9610, type = "func", source = "Applies the damage flags to the selected battlers." }
+Battle_MarkDamaged = { addr = 0x800A9820, alias = true, source = "Marks the selected battlers as damaged." }
+Battle_AllocEffect = { addr = 0x801E590C, alias = true, source = "Claims a free battle effect slot." }
+Effect_Reset = { addr = 0x801E5988, type = "func", source = "Clears every timer, state and flag byte of the shared BattleEffect work record; every effect countdown calls it first. battle/03 owns the body." }
+g_BattleEffectBattler = { addr = 0x801EB4E0, source = "the battler the running effect acts on; Battle_UpdateEffects stores it for each effect step (emi/battle/battle/03 owns the cell)" }
+g_BattleEffects = { addr = 0x801EC330, alias = true, source = "Battle effect work records (stride 0x78); Battle_AllocEffect claims a free one by setting bit 0 of header.flags." }
+BMagic_UpdateBurn = { addr = 0x801EEC18, type = "func", source = "per-frame update of the Burn effect: runs the step handler D_801EEC04 selects, then draws the flame quads and triangles while the effect is active" }
+BMagic_SpawnBurnFlames = { addr = 0x801EECD4, type = "func", source = "starts the Burn effect: claims eight flame effect slots with Battle_AllocEffect, each pointing at the effect work record, copies a palette row with the semi-transparent bit set and queues SE 0x100" }
+BMagic_ApplyBurnDamage = { addr = 0x801EEE20, type = "func", source = "counts the effect timer at +0x09 up and, at 16, applies the damage flags 0x10 to the battlers of g_BattleTargetSelector through Battle_ApplyDamageFlags, then advances the step byte at +0x01" }
+Effect_NextStepOnWorkLastTick = { addr = 0x801EEE8C, type = "func", source = "Advances header.mode (byte 0x01) when the effect ticker (byte 0x0B) is 1 in magic118 (Burn)." }
+Effect_CountDownTimerNextStep = { addr = 0x801EEEC0, type = "func", source = "Counts the effect timer (byte 0x09) down and advances header.mode (byte 0x01) at zero in magic118 (Burn)." }
+Effect_MarkDamagedOnZeroTick = { addr = 0x801EEF0C, type = "func", source = "When the effect ticker (byte 0x0B) is zero marks the battlers of the target selector damaged, raises BATTLE_STATE_EFFECT_PLAYING and resets the effect in magic118 (Burn)." }
+BMagic_UpdateBurnSprites = { addr = 0x801EEF6C, type = "func", source = "updates the Burn sprite phase: runs the handler D_801EFCD4 selects by mode, then draws the textured flame sprites while the effect is active" }
+BMagic_DrawBurnSprites = { addr = 0x801EF194, type = "func", source = "draws the textured flame sprites (POLY_GT4 with the texture page and CLUT of the effect) into the ordering table cells" }
+Effect_SetActorMatrix = { addr = 0x801EF60C, type = "func", source = "Sets the actor's GTE matrix from its coordinates and half its vertical span, times the camera in magic118 (Burn)." }
+BMagic_DrawBurnFlameQuads = { addr = 0x801EF6BC, type = "func", source = "draws the Burn flame quads (POLY_G4, semi-transparent) with sine and cosine offsets" }
+BMagic_DrawBurnFlameTris = { addr = 0x801EFA1C, type = "func", source = "draws the Burn flame triangles (POLY_G3, semi-transparent) with the same sine and cosine offsets as the quads" }
+D_801EFCD4 = { addr = 0x801EFCD4, source = "Mode handlers of the bmagic/magic118/03 effect, run by header.mode from BMagic_UpdateBurnSprites." }

@@ -35,7 +35,7 @@ CHOICE = """
 def repo(tmp_path: Path, monkeypatch: pytest.MonkeyPatch) -> Path:
     subprocess.run(["git", "init", "-q", str(tmp_path)], check=True)
     files = {
-        "config/symbols.toml": (
+        "config/symbols/exe+a.toml": (
             '["exe/a"]\n'
             'Game = { addr = 0x80000000, type = "State", size = 0x10, source = "test" }\n'
             'Data = { addr = 0x80000020, type = "u8", size = 0x2, source = "test" }\n'
@@ -120,7 +120,6 @@ def repo(tmp_path: Path, monkeypatch: pytest.MonkeyPatch) -> Path:
         },
     )
     monkeypatch.setattr(symbol, "ROOT", tmp_path)
-    monkeypatch.setattr(symbol, "SYMBOLS", tmp_path / "config/symbols.toml")
     monkeypatch.setattr(symbol, "LAYOUT_CACHE", tmp_path / "build/symbol-layouts.json")
     monkeypatch.setattr(symbol, "XREF_CACHE", tmp_path / "build/symbol-xrefs")
     monkeypatch.setattr(symbol, "_LAYOUTS", {})

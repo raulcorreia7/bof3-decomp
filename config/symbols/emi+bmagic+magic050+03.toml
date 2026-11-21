@@ -1,0 +1,15 @@
+["emi/bmagic/magic050/03"]
+Battle_ApplyDamageFlags = { addr = 0x800A9610, source = "Applies the damage flags to the selected battlers.", alias = true }
+Battle_MarkDamaged = { addr = 0x800A9820, alias = true, source = "Marks the selected battlers as damaged." }
+Battle_ProjectRange = { addr = 0x800AF764, type = "func", source = "Projects the battle range to the screen." }
+Battle_CenterCamera = { addr = 0x800AFD9C, alias = true }
+Effect_RotatePosition = { addr = 0x801DD350, type = "func", source = "Integrates the effect velocity pairs the effect steps read; battle/03 owns the body." }
+Battle_AllocEffect = { addr = 0x801E590C, alias = true }
+Effect_Reset = { addr = 0x801E5988, type = "func", source = "Clears every timer, state and flag byte of the shared BattleEffect work record; every effect countdown calls it first. battle/03 owns the body." }
+g_BattleEffectBattler = { addr = 0x801EB4E0, source = "the battler the running effect acts on; Battle_UpdateEffects stores it for each effect step (emi/battle/battle/03 owns the cell)" }
+g_BattleEffects = { addr = 0x801EC330, alias = true }
+BMagic_DispatchMode = { addr = 0x801EEC10, type = "func", source = "Runs the handler that header.mode (byte 0x01) selects from the module head's three callbacks in magic050 (Pollen, Venom Breath)." }
+Effect_MarkDamagedOnZeroTick = { addr = 0x801EEEA8, type = "func", source = "When the effect ticker (byte 0x0B) is zero marks the battlers of the target selector damaged, raises BATTLE_STATE_EFFECT_PLAYING and resets the effect in magic050 (Pollen, Venom Breath)." }
+BMagic_DispatchEffectMode = { addr = 0x801EEF08, type = "func", source = "Runs the handler that header.mode (byte 0x01) selects from the effect handlers of magic050." }
+Effect_CountUpTimerByTwoAndStep = { addr = 0x801EF0E8, type = "func", source = "Counts the effect counter (byte 0x0A) up by two and advances header.step (byte 0x02) at 16 in magic050 (Pollen, Venom Breath)." }
+g_BMagicEffectModes = { addr = 0x801EFA9C, source = "Handlers of magic050 (Pollen, Venom Breath), run by header.mode (byte 0x01)." }

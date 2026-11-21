@@ -1,0 +1,18 @@
+["emi/bmagic/magic059/03"]
+D_80036C00 = { addr = 0x80036C00, type = "u16", size = 0x200, source = "Row 26 of the palette arena, the source palette this effect copies.", alias = true }
+g_BattleEffectPalette = { addr = 0x8003AC00, type = "u16", size = 0x200, source = "Row 26 of the working palette copy, the destination this effect stages.", alias = true }
+Battle_MarkDamaged = { addr = 0x800A9820, alias = true, source = "Marks the selected battlers as damaged." }
+Battle_ProjectRange = { addr = 0x800AF764, type = "func", source = "Projects the battle range to the screen." }
+Battle_SlotIsBlocked = { addr = 0x801DB524, alias = true, source = "Tells whether a battler slot can not be selected." }
+Effect_RotatePosition = { addr = 0x801DD350, source = "Integrates the effect velocity pairs read by effect steps; battle/battle/03 owns the body.", alias = true }
+Battle_AllocEffect = { addr = 0x801E590C, source = "Claims a free battle effect slot.", alias = true }
+Effect_Reset = { addr = 0x801E5988, type = "func", source = "Clears every timer, state and flag byte of the shared BattleEffect work record; every effect countdown calls it first. battle/03 owns the body." }
+g_BattleEffectBattler = { addr = 0x801EB4E0, source = "the battler the running effect acts on; Battle_UpdateEffects stores it for each effect step (emi/battle/battle/03 owns the cell)" }
+g_BattleEnemyBattlers = { addr = 0x801EB630, type = "EnemyBattler", size = 0x8C0, source = "The enemy battlers of the battle, indexed by slot minus BATTLE_PARTY_CHARACTERS_COUNT; Battle_DrawEnemyNamePanel draws the name of each one whose unk_7F is 1." }
+g_BattleEffects = { addr = 0x801EC330, source = "Battle effect work records (stride 0x78); Battle_AllocEffect claims a free one by setting bit 0 of header.flags.", alias = true }
+BMagic_DispatchEffectMode = { addr = 0x801EF1E0, type = "func", source = "Runs the handler that header.mode (byte 0x01) selects from the effect handlers of magic059." }
+Effect_CountDownTimer = { addr = 0x801EF5C0, type = "func", source = "Raises the effect timer (byte 0x09) by 1, counts the effect counter (byte 0x0A) down and at zero lowers the active battler's ticker (byte 0x0B) and clears the effect in magic059 (Tornado)." }
+BMagic_AllocEffect = { addr = 0x801F0490, type = "func", source = "Claims the first free slot of the effect table (bit 0 of header.flags) and returns its index, or 0xFF when all 24 slots are in use in magic059 (Tornado)." }
+Actor_Clear = { addr = 0x801F04F4, type = "func", source = "Clears the effect work record: header flags, mode (byte 0x01), step (byte 0x02) and bytes 0x03 and 0x04." }
+D_801F065C = { addr = 0x801F065C, type = "u32", size = 0x10, source = "The four-entry facing lookup that seeds the actor timer in magic059 (Tornado)." }
+g_BMagicEffectModes = { addr = 0x801F066C, source = "Handlers of magic059 (Tornado), run by header.mode (byte 0x01)." }

@@ -1,0 +1,7 @@
+["emi/world02/area082/13"]
+g_AreaModuleId = { addr = 0x801F2C00, source = "Module id of the area: the first payload word of its overlay, 52 + the area number." }
+Area_DrawSparkCell = { addr = 0x801F387C, type = "func", source = "Draws one spark as a shaded 1x1 cell at its screen position and adds it to the area cell list at its world position." }
+Area_ClearWorkColumn = { addr = 0x801F3910, type = "func", source = "Zeroes byte 0 of each of the 0x80 work rows, 0x14 bytes apart." }
+Area_AddSpark = { addr = 0x801F393C, type = "func", source = "Adds one falling spark to the first free row of the 128-spark work table: marks it active, sets its fall speed and places it around the work position at a random angle and radius." }
+Area_StepSparks = { addr = 0x801F3AAC, type = "func", source = "Steps every live spark: drops it by its fall speed, draws it and frees it below the work floor; one body shared by scena01 and area082." }
+Area_DrawGradient = { addr = 0x801F5428, type = "func", source = "Draws a full-screen two-tone colour gradient quad." }

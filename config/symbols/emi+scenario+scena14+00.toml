@@ -1,0 +1,17 @@
+["emi/scenario/scena14/00"]
+jtbl_801F6C04 = { addr = 0x801F6C04, type = "Callback", source = "The switch table of func_801F7BA0: the jump targets of its jr dispatch." }
+jtbl_801F6C6C = { addr = 0x801F6C6C, type = "Callback", source = "The switch table of func_801F7FB8: the jump targets of its jr dispatch." }
+jtbl_801F6D04 = { addr = 0x801F6D04, type = "Callback", source = "The switch table of func_801F88DC: the jump targets of its jr dispatch." }
+jtbl_801F6D3C = { addr = 0x801F6D3C, type = "Callback", source = "The switch table of func_801F8CE4: the jump targets of its jr dispatch." }
+jtbl_801F6DA4 = { addr = 0x801F6DA4, type = "Callback", source = "The switch table of func_801F9320: the jump targets of its jr dispatch." }
+jtbl_801F6E2C = { addr = 0x801F6E2C, type = "Callback", source = "The switch table of func_801F9834: the jump targets of its jr dispatch." }
+jtbl_801F6F54 = { addr = 0x801F6F54, type = "Callback", source = "The switch table of func_801FA9C8: the jump targets of its jr dispatch." }
+Scene_SpawnActor = { addr = 0x801F7A18, type = "func", source = "Claims a free actor slot and seeds its type, camera angles, scene step and layer; returns whether a slot was free; one role shared by scena14 and scena15." }
+Scene_DispatchActor = { addr = 0x801FB37C, type = "func", source = "dispatches a scenario actor to its callback handler" }
+Scene_JoinPartyRyuAdultReiNinaAdult = { addr = 0x801FBD2C, type = "func", source = "Streams the EMI family for adult Ryu, adult Nina and Rei, empties g_Game.party_size and joins adult Ryu, Rei then adult Nina with Party_JoinMember, without the palette restage and in a different join order than Scene_SetPartyRyuAdultNinaAdultRei." }
+Scene_SetPartyRyuAdultReiPeco = { addr = 0x801FBD78, type = "func", source = "Streams the EMI family for adult Ryu, Rei and Peco, empties g_Game.party_size and joins the three in that order with Party_JoinMember." }
+Scene_SetPartyRyuAdultMomoPeco = { addr = 0x801FBDC4, type = "func", source = "Streams the EMI family for adult Ryu, Momo and Peco, empties g_Game.party_size and joins the three in that order with Party_JoinMember." }
+Scene_SetPartyRyuAdultGarrPeco = { addr = 0x801FC020, type = "func", source = "Streams the EMI family for adult Ryu, Garr and Peco, empties g_Game.party_size, joins the three in that order with Party_JoinMember and restages the party palettes." }
+Scene_SetPartyRyuAdultGarrNinaAdult = { addr = 0x801FC074, type = "func", source = "Streams the EMI family for adult Ryu, Garr and adult Nina, empties g_Game.party_size, joins the three with Party_JoinMember and restages the party palettes." }
+Scene_SetPartyRyuAdultNinaAdultRei = { addr = 0x801FC22C, type = "func", source = "Streams the EMI family for adult Ryu, adult Nina and Rei, empties g_Game.party_size, joins the three with Party_JoinMember and restages the party palettes." }
+g_SceneActorDispatch = { addr = 0x801FC468, source = "scenario actor dispatch table" }

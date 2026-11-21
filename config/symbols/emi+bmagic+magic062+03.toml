@@ -1,0 +1,25 @@
+["emi/bmagic/magic062/03"]
+g_ScratchPadHalves = { addr = 0x1F800000, type = "s16", source = "The scratchpad base 0x1F800000 as signed halfwords; func_801F00EC stages the ring radius there for its rsin and rcos scaling.", alias = true }
+Battle_MarkDamaged = { addr = 0x800A9820, alias = true, source = "Marks the selected battlers as damaged." }
+Battle_RescaleStats = { addr = 0x800A9BD8, source = "Rescales one battler stats.", alias = true }
+Battle_ProjectRange = { addr = 0x800AF764, type = "func", source = "Projects the battle range to the screen." }
+Battle_FadePoisonedBattler = { addr = 0x800AF814, type = "func", source = "Starts the palette fade of the battler at battler_index when it is poisoned: party members 0 to 2 from g_Game.members, enemies from g_BattleEnemies; does nothing for a blocked slot.", alias = true }
+g_BattleTargetRecord = { addr = 0x801463A0, source = "Result cells of the target battler; the target_record member of g_Battle.", alias = true }
+g_Abilities = { addr = 0x801CA70C, source = "The 228 Ability records of GAME.EMI.", alias = true }
+Battle_AllocEffect = { addr = 0x801E590C, alias = true, source = "Claims a free battle effect slot." }
+Effect_Reset = { addr = 0x801E5988, type = "func", source = "Clears every timer, state and flag byte of the shared BattleEffect work record; every effect countdown calls it first. battle/03 owns the body." }
+g_BattleEffectBattler = { addr = 0x801EB4E0, source = "the battler the running effect acts on; Battle_UpdateEffects stores it for each effect step (emi/battle/battle/03 owns the cell)" }
+g_BattleEnemyBattlers = { addr = 0x801EB630, source = "The enemy battlers of the battle.", alias = true }
+g_BattleEffects = { addr = 0x801EC330, alias = true }
+Effect_DispatchMode = { addr = 0x801EEC1C, type = "func", source = "Runs the handler that header.mode (byte 0x01) selects from the six-handler table at the module head in magic062 (Celerity)." }
+Effect_ReplacePaletteFade = { addr = 0x801EEEC0, type = "func", source = "When the effect timer (byte 0x09) reaches zero frees the selected actor's palette fade, allocates a new one (index in byte 0x0A), restarts the timer at 8 and advances header.mode (byte 0x01) in magic062 (Celerity)." }
+Effect_BrightenPalette = { addr = 0x801EEF68, type = "func", source = "Raises the red, green and blue offsets of the palette fade entry the effect counter (byte 0x0A) names by one per frame and advances header.mode (byte 0x01) when the effect timer (byte 0x09) reaches zero in magic062 (Celerity)." }
+Effect_NextStep = { addr = 0x801EF078, type = "func", source = "While the effect ticker (byte 0x0B) is under 2, reloads the effect timer (byte 0x09) with 8 and advances header.mode (byte 0x01) in magic062 (Celerity)." }
+Effect_SetActorMatrix = { addr = 0x801EF414, type = "func", source = "Sets the actor's GTE matrix from its coordinates and half its vertical span, times the camera in magic062 (Celerity)." }
+BMagic_DispatchEffectMode = { addr = 0x801EF4C4, type = "func", source = "Runs the handler that header.mode (byte 0x01) selects from the effect handlers of magic062." }
+Effect_CountUpAndStep = { addr = 0x801EF588, type = "func", source = "Counts the effect timer (byte 0x09) up and advances header.step (byte 0x02) at 16 in magic062 (Celerity)." }
+Effect_StepWhileTickUnderThree = { addr = 0x801EF5D8, type = "func", source = "Advances header.step (byte 0x02) while the ticker (byte 0x0B) of g_BattleEffectBattler is under 3 in magic062 (Celerity)." }
+Effect_TickOnTimerZero = { addr = 0x801EF61C, type = "func", source = "Counts the effect timer (byte 0x09) down by 1 per frame; at zero lowers the ticker (byte 0x0B) of g_BattleEffectBattler and clears the effect in magic062 (Celerity)." }
+Effect_CountDownAndStep = { addr = 0x801EFC00, type = "func", source = "Counts the effect counter (byte 0x0A) down and advances header.step (byte 0x02) at zero in magic062 (Celerity)." }
+Effect_LaunchFromRing = { addr = 0x801EFC4C, type = "func", source = "Counts the effect down, then places it on a ring of 22 units around its battler at the angle stored in the work byte 0x0B and launches it upward (rise 0x40, gravity -4, 12-frame timer) in magic062." }
+g_BMagicEffectModes = { addr = 0x801F0C10, source = "Handlers of magic062 (Celerity), run by header.mode (byte 0x01) and by header.step (byte 0x02) in its sub-effects." }

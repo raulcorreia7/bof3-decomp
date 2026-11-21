@@ -1,0 +1,25 @@
+["emi/scenario/scena08/00"]
+jtbl_801F6C04 = { addr = 0x801F6C04, type = "Callback", source = "The switch table of func_801FABA0: the jump targets of its jr dispatch." }
+jtbl_801F6C3C = { addr = 0x801F6C3C, type = "Callback", source = "The switch table of func_801FB270: the jump targets of its jr dispatch." }
+jtbl_801F6C8C = { addr = 0x801F6C8C, type = "Callback", source = "The switch table of func_801FB8A0: the jump targets of its jr dispatch." }
+jtbl_801F6CBC = { addr = 0x801F6CBC, type = "Callback", source = "The switch table of func_801FBCA4: the jump targets of its jr dispatch." }
+jtbl_801F6CE4 = { addr = 0x801F6CE4, type = "Callback", source = "The switch table of func_801FC21C: the jump targets of its jr dispatch." }
+jtbl_801F6D24 = { addr = 0x801F6D24, type = "Callback", source = "The switch table of func_801FC45C: the jump targets of its jr dispatch." }
+jtbl_801F6D94 = { addr = 0x801F6D94, type = "Callback", source = "The switch table of func_801FD1A4: the jump targets of its jr dispatch." }
+jtbl_801F6DB4 = { addr = 0x801F6DB4, type = "Callback", source = "The switch table of func_801FD704: the jump targets of its jr dispatch." }
+Scene_DispatchEntity = { addr = 0x801F6F48, type = "func", source = "dispatches a scene entity by its callback index" }
+func_801F6F50 = { addr = 0x801F6F50, alias = true, source = "Scene_DispatchEntity+0x8, after its g_Task load; the start the split used before the function was moved back to that load" }
+Scene_InitSpark = { addr = 0x801F8B50, type = "func", source = "Starts one spark at a random point near the actor position, falling from rest; one body shared by scena07 and scena08." }
+Actor_Wait = { addr = 0x801F8D18, type = "func", source = "Counts the actor wait byte down reloads it at zero and advances the handler index." }
+Trail_Update = { addr = 0x801F8D98, type = "func", source = "Pushes the task position onto a chain of 32 points, projects every point to the screen with its width, and sets each point's angle from the headings to its neighbours." }
+MATH_AverageAngle = { addr = 0x801F9420, type = "func", source = "Averages two 12-bit angles along the shorter arc." }
+GFX_DrawFan = { addr = 0x801F9470, type = "func", source = "Draws a fan of eight semi-transparent POLY_G3 triangles from a screen point, the centre corner shaded by the colour byte; one body shared by scena07, scena08 and area088" }
+Scene_DispatchActor = { addr = 0x801FE018, type = "func", source = "dispatches a scenario actor to its callback handler" }
+Scene_SetPartyWhelp = { addr = 0x801FE698, type = "func", source = "clears the party, streams archives and joins the Whelp with party palettes for the scene" }
+Scene_SetPartyRyuAdult = { addr = 0x801FE6DC, type = "func", source = "clears the party and joins adult Ryu for the scene" }
+Party_JoinGarr = { addr = 0x801FE740, type = "func", source = "Adds Garr to the party." }
+Scene_SetPartyRyuAdultGarrNinaAdult = { addr = 0x801FE7AC, type = "func", source = "Streams the EMI family for adult Ryu, Garr and adult Nina, empties g_Game.party_size, joins the three with Party_JoinMember and restages the party palettes." }
+Party_RemoveGarr = { addr = 0x801FE874, type = "func", source = "Removes Garr from the party." }
+g_SceneEntityDispatch = { addr = 0x801FE894, source = "scenario entity dispatch table" }
+g_SceneActorDispatch = { addr = 0x801FE9C0, source = "scenario actor dispatch table" }
+D_801FEA6C = { addr = 0x801FEA6C, type = "u8", size = 0x1, source = "A byte the scene handlers store and reload." }

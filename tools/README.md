@@ -133,7 +133,7 @@ tools/alloc_priority.py src/engine/slus/Area_DrawCellRing.c Area_DrawCellRing
 ## Body generators
 
 `gen_body.py` lifts the assembly of a branch-free function into calls and stores and writes C from
-it with the repo's names (`config/symbols.toml` by address, `g_Task` members by offset).
+it with the repo's names (`config/symbols/<image>.toml` by address, `g_Task` members by offset).
 `shapes` counts every `INCLUDE_ASM` function by shape (`call-seq`, `store-seq`, `spad`, `dispatch`,
 `straight`, `branch`); `tools/gen_body.py <shape> [rows.tsv] [--dry-run]` writes a body per member
 (`MATCH`, one statement per call or store), declares missing globals in the image header and keeps
@@ -218,7 +218,7 @@ and keeps the logs in `build/pre-push/`. CI runs it too. `BASE_REF` defaults to 
 | `markers`       | a definition in `src/` lacks exactly one status marker, a change adds a `NON_MATCHING` draft with no `config/attempts.jsonl` object, or an `attempts.jsonl` row carries other keys or another key order | none |
 | `drafts`        | a `.c` file the change touches holds a `NON_MATCHING` draft that does not compile with `-DNON_MATCHING` | compiler   |
 | `names`         | a new name carries an 8-digit address, a listed legacy one is gone, an added line names a parameter `argN`, or a changed image keeps an address-named layout row for a named symbol | none |
-| `addrs`         | a symbol address that `config/symbols.toml` records on `main` is gone                   | none       |
+| `addrs`         | a symbol address that `config/symbols/<image>.toml` records on `main` is gone                   | none       |
 | `kept`          | a named helper, define, global, type, member or function is lost or degraded            | none       |
 | `quality`       | a touched file gains casts, fake helpers, `func_`/`D_` names or pasted bodies           | none       |
 | `order`         | declarations or symbols in a changed file are out of their recorded order               | none       |

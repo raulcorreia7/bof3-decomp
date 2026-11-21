@@ -64,7 +64,7 @@ case $hex in
 *)
 	hex=$(awk -v n="$func" '$1 == n { sub(/^0x/, "", $2); print $2; exit }' \
 		"build/symbols/$flat.link" 2>/dev/null) || :
-	[ -n "$hex" ] || die "no function '$func' in [$target] of config/symbols.toml. Give its address instead: tools/match.sh $target@0xADDRESS"
+	[ -n "$hex" ] || die "no function '$func' in [$target] of config/symbols/<image>.toml. Give its address instead: tools/match.sh $target@0xADDRESS"
 	;;
 esac
 addr=$(printf %08X "0x$hex")
@@ -139,7 +139,7 @@ set -- $(awk -v n="$fname" '$NF == n && $(NF - 1) ~ /^[Tt]$/ && NF == 4 { print 
 [ $# -eq 2 ] || {
 	there=$(awk -v r="$rel" 'function hex(s, n, i) { n = 0; for (i = 1; i <= length(s); i++) n = n * 16 + index("0123456789abcdef", tolower(substr(s, i, 1))) - 1; return n }
 		NF == 4 && $3 ~ /^[Tt]$/ && $4 !~ /\.NON_MATCHING$/ && hex($1) == r { print $4; exit }' "$tmp/nm.txt")
-	die "$co defines no text symbol '$fname'${there:+; the symbol at +0x$(printf %X "$rel") is '$there'}. The C name must equal the symbol in [$target] of config/symbols.toml: rename the definition in $src, or the symbol."
+	die "$co defines no text symbol '$fname'${there:+; the symbol at +0x$(printf %X "$rel") is '$there'}. The C name must equal the symbol in [$target] of config/symbols/<image>.toml: rename the definition in $src, or the symbol."
 }
 coff=$((0x$1)) csize=$((0x$2))
 
@@ -254,9 +254,9 @@ if ! link; then
 		sed -n '1,6p' "$tmp/ld.log" >&2
 		missing=$(sed -n "s/.*undefined reference to \`\(.*\)'\$/\1/p" "$tmp/ld.log" | sort -u | tr '\n' ' ')
 		if [ -f "$map" ]; then
-			die "link failed for $fname: ${missing}is in no map of [$target] in config/symbols.toml, build/asm/$target or $map. Add a row to [$target] of config/symbols.toml, then retry."
+			die "link failed for $fname: ${missing}is in no map of [$target] in config/symbols/<image>.toml, build/asm/$target or $map. Add a row to [$target] of config/symbols/<image>.toml, then retry."
 		fi
-		die "link failed for $fname: ${missing}is in no map of [$target] in config/symbols.toml or build/asm/$target. If a C file of the image defines it, build the image once so its map exists (meson compile -C $B $flat.bin), then retry; otherwise add a row to [$target] of config/symbols.toml."
+		die "link failed for $fname: ${missing}is in no map of [$target] in config/symbols/<image>.toml or build/asm/$target. If a C file of the image defines it, build the image once so its map exists (meson compile -C $B $flat.bin), then retry; otherwise add a row to [$target] of config/symbols/<image>.toml."
 	}
 fi
 "$BIN/objcopy" -O binary -j .text "$tmp/cand.elf" "$tmp/text.bin"

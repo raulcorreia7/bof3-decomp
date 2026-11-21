@@ -1,0 +1,21 @@
+["emi/bmagic/magic044/03"]
+Battle_ApplyDamageFlags = { addr = 0x800A9610, alias = true, source = "Applies the damage flags to the selected battlers." }
+Battle_MarkDamaged = { addr = 0x800A9820, alias = true, source = "Marks the selected battlers as damaged." }
+Battle_StepRangeToward = { addr = 0x800AF3A0, type = "func", source = "Moves the battle range one step toward a point: the range's x and y axes and its vertical span each move by the step along the unit direction to the point. battle/15 owns the body." }
+Battle_ProjectRange = { addr = 0x800AF764, type = "func", source = "Projects the battle range to the screen." }
+g_BattleActiveBattler = { addr = 0x80146374, type = "u8", alias = true, source = "Slot of the acting battler; the active_battler member of g_Battle." }
+g_BattleSelectedActor = { addr = 0x8014638C, type = "PartyMember", alias = true, source = "The selected battle actor; the selected_actor member of g_Battle." }
+Effect_RotatePosition = { addr = 0x801DD350, type = "func", source = "Integrates the effect velocity pairs the effect steps read; battle/03 owns the body." }
+Battle_AllocEffect = { addr = 0x801E590C, alias = true, source = "Claims a free battle effect slot." }
+Effect_Reset = { addr = 0x801E5988, type = "func", source = "Clears every timer, state and flag byte of the shared BattleEffect work record; every effect countdown calls it first. battle/03 owns the body." }
+g_BattleEffectBattler = { addr = 0x801EB4E0, source = "the battler the running effect acts on; Battle_UpdateEffects stores it for each effect step (emi/battle/battle/03 owns the cell)" }
+g_BattleEnemyBattlers = { addr = 0x801EB630, alias = true, source = "The enemy battlers of the battle, indexed by slot minus BATTLE_PARTY_CHARACTERS_COUNT; Battle_DrawEnemyNamePanel draws the name of each one whose unk_7F is 1." }
+g_BattleEffects = { addr = 0x801EC330, alias = true, source = "Battle effect work records (stride 0x78); Battle_AllocEffect claims a free one by setting bit 0 of header.flags." }
+Effect_MarkDamagedOnZeroTick = { addr = 0x801EEDA0, type = "func", source = "When the effect ticker (byte 0x0B) is zero marks the battlers of the target selector damaged, raises BATTLE_STATE_EFFECT_PLAYING and resets the effect in magic044 (Evil Eye)." }
+BMagic_DispatchEffectMode = { addr = 0x801EEE00, type = "func", source = "Runs the handler that header.mode (byte 0x01) selects from the effect handlers of magic044." }
+Effect_EndTrail = { addr = 0x801EF478, type = "func", source = "Clears the trail, counts the timer down, and finishes the effect at zero." }
+Effect_RecordTrail = { addr = 0x801F02A0, type = "func", source = "Records the current battle magic trail position." }
+g_BMagicEffectModes = { addr = 0x801F0A14, source = "Handlers of magic044 (Evil Eye), run by header.mode (byte 0x01)." }
+D_801F0A1C = { addr = 0x801F0A1C, source = "Step handlers of the magic044 effect (Evil Eye), run by header.step (byte 0x02) from func_801EEE44; the fourth entry is reached before the table's second half." }
+D_801F0A2C = { addr = 0x801F0A2C, source = "Step handlers of the bmagic/magic044/03 effect, run by header.step from func_801F0478." }
+BMagic_Trail = { addr = 0x801F0A38, source = "Trail points of the magic044 effect, one x and y per trail slot and step, shifted each frame by BMAGIC_SHIFT_TRAIL." }

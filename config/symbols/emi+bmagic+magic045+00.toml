@@ -1,0 +1,14 @@
+["emi/bmagic/magic045/00"]
+Battle_MarkDamaged = { addr = 0x800A9820, alias = true, source = "Marks the selected battlers as damaged." }
+Battle_StepRangeToward = { addr = 0x800AF3A0, type = "func", source = "Moves the battle range one step toward a point: the range's x and y axes and its vertical span each move by the step along the unit direction to the point. battle/15 owns the body." }
+Effect_RotatePosition = { addr = 0x801DD350, type = "func", source = "Integrates the effect velocity pairs the effect steps read; battle/03 owns the body." }
+Battle_AllocEffect = { addr = 0x801E590C, source = "Claims a free battle effect slot.", alias = true }
+Effect_Reset = { addr = 0x801E5988, type = "func", source = "Clears every timer, state and flag byte of the shared BattleEffect work record; every effect countdown calls it first. battle/03 owns the body." }
+g_BattleEffectBattler = { addr = 0x801EB4E0, source = "the battler the running effect acts on; Battle_UpdateEffects stores it for each effect step (emi/battle/battle/03 owns the cell)" }
+g_BattleEnemyBattlers = { addr = 0x801EB630, source = "The enemy battlers of the battle, indexed by slot minus BATTLE_PARTY_CHARACTERS_COUNT.", alias = true }
+g_BattleEffects = { addr = 0x801EC330, alias = true, source = "Battle effect work records (stride 0x78); Battle_AllocEffect claims a free one by setting bit 0 of header.flags." }
+Effect_StartOnZeroTick = { addr = 0x801EEE58, type = "func", source = "When the effect ticker (byte 0x0B) is zero raises BATTLE_STATE_EFFECT_PLAYING and clears the effect in magic045 (Bone Dart)." }
+BMagic_DispatchEffectMode = { addr = 0x801EEEA4, type = "func", source = "Runs the handler that header.mode (byte 0x01) selects from the effect handlers of magic045." }
+Effect_TickDownAndClear = { addr = 0x801EF3D8, type = "func", source = "Lowers the active battler's ticker (byte 0x0B) and clears the effect in magic045 (Bone Dart)." }
+Effect_TickDownAndClear3 = { addr = 0x801EF8A4, type = "func", source = "Lowers the active battler's ticker (byte 0x0B) and clears the effect in magic045 (Bone Dart)." }
+g_BMagicEffectModes = { addr = 0x801EF8D8, source = "Handlers of magic045 (Bone Dart), run by header.mode (byte 0x01)." }

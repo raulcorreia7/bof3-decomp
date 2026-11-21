@@ -1,0 +1,8 @@
+["emi/world01/area041/13"]
+g_MenuMasterStep = { addr = 0x801D4285, source = "Current step of the master menu (retail text Master), indexing the step handlers." }
+g_MenuMasterSubStep = { addr = 0x801D4286, source = "Current sub-step of the master menu that the step handlers advance." }
+g_AreaModuleId = { addr = 0x801F2C00, source = "Module id of the area: the first payload word of its overlay, 52 + the area number." }
+Message_ClearRequest = { addr = 0x801F3B08, type = "func", source = "Clears the message request; when the menu selection is idle sets g_SceneEventMode to SCENE_EVENT_SHOP_SAVE, g_SceneEventStep to 0 and g_SceneEventSelection to AREA_RESET_VARIANT." }
+Message_Clear = { addr = 0x801F3DBC, type = "func", source = "Clears the message request; when the menu selection is idle sets g_SceneEventMode to SCENE_EVENT_SHOP_SAVE, g_SceneEventStep to 5 and g_SceneEventSelection to 0xFF." }
+Area_SetCameraZOffset = { addr = 0x801F3E00, type = "func", source = "Sets g_AreaCameraOffsetZ to -0x100, the Z shift of the camera, and g_AreaCameraRefreshCount to 2 so the camera refreshes for two frames." }
+Area_ResetCameraOffsetZ = { addr = 0x801F3E20, type = "func", source = "Zeroes g_AreaCameraOffsetZ, the Z shift of the camera, and sets g_AreaCameraRefreshCount to 2 so the camera refreshes for two frames." }

@@ -1,0 +1,10 @@
+["emi/world03/area131/13"]
+g_AreaModuleId = { addr = 0x801F2C00, source = "Module id of the area: the first payload word of its overlay, 52 + the area number." }
+Message_ClearOnCancel = { addr = 0x801F2C0C, type = "func", source = "Clears the message request." }
+Area_SubCameraOffsetY10 = { addr = 0x801F2D78, type = "func", source = "Shifts the area camera up." }
+Area_AddCameraOffsetY10 = { addr = 0x801F2DA0, type = "func", source = "Adds 0xA to g_AreaCameraOffsetY, the Y shift Area_SetCameraMatrix adds to the projected camera translation, and sets g_AreaCameraRefreshCount to 2 so the camera refreshes for two frames." }
+Area_SubCameraOffsetY20 = { addr = 0x801F2DC8, type = "func", source = "Shifts the area camera up." }
+Area_AddCameraOffsetY20 = { addr = 0x801F2DF0, type = "func", source = "Shifts the area camera down." }
+Area_SubCameraOffsetY2 = { addr = 0x801F2E68, type = "func", source = "Subtracts 2 from g_AreaCameraOffsetY, the Y shift Area_SetCameraMatrix adds to the projected camera translation, and sets g_AreaCameraRefreshCount to 2 so the camera refreshes for two frames." }
+Area_AddCameraOffsetY2 = { addr = 0x801F2E90, type = "func", source = "Adds 2 to g_AreaCameraOffsetY, the Y shift Area_SetCameraMatrix adds to the projected camera translation, and sets g_AreaCameraRefreshCount to 2 so the camera refreshes for two frames." }
+Scene_ClearEventState = { addr = 0x801F2F1C, type = "func", source = "Clears the scene event state." }

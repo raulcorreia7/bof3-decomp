@@ -1,0 +1,8 @@
+["emi/boss/boss032/16"]
+Battle_ShowActorEntry = { addr = 0x800AC844, type = "func", source = "Clears the hidden flag of the actor entry entry_id, which draws the battler again.", alias = true }
+Boss_InstallBattleHooks = { addr = 0x800C19C8, type = "func", source = "Installs the boss battle hooks of boss032: Boss_ChooseBattleEnding into g_BattleChooseEndingHook, Boss_EndBattle into g_BattleEndHook and Boss_RunBattleEvent into g_BossBattleEventHook." }
+Boss_RunBattleEvent = { addr = 0x800C1A00, type = "func", source = "Handles the boss battle events of boss032: ignores every event mode and returns 0." }
+Boss_ChooseBattleEnding = { addr = 0x800C1A08, type = "func", source = "Chooses how the boss battle of boss032 ends: the ending hook (g_BattleChooseEndingHook) of this set." }
+Boss_EndBattle = { addr = 0x800C1BEC, type = "func", source = "Ends the boss battle of boss032: the battle-end hook (g_BattleEndHook) of this set, which runs Battle_ShowActorEntry(0) and func_800AC754(0)." }
+Battle_EndVictory = { addr = 0x801DDED8, type = "func", source = "Ends the battle in victory: sets the battle phase to the result mode at step 1, which plays the victory sequence, poses the party and opens the result panel. Boss battles call it from their ending hook when the result is a victory.", alias = true }
+Battle_EndDefeat = { addr = 0x801DDF00, type = "func", source = "Ends the battle in defeat: sets the battle phase to the result mode at step 2, which plays the defeat sequence and shows the defeat message. Boss battles call it from their ending hook when the result is not a victory.", alias = true }

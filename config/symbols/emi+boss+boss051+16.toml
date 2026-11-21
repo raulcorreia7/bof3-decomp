@@ -1,0 +1,14 @@
+["emi/boss/boss051/16"]
+Battle_MarkDamaged = { addr = 0x800A9820, type = "func", source = "Marks the selected battlers as damaged." }
+Boss_SetEnemyScript = { addr = 0x800C1858, type = "func", source = "sets boss051 enemy script, mode handler and action table and starts task mode 2" }
+Boss_EnemyScriptMode = { addr = 0x800C19C4, type = "func", source = "boss051 enemy script mode handler" }
+Boss_InstallBattleHooks = { addr = 0x800C1A14, type = "func", source = "Installs the boss battle hooks of boss051: Boss_ChooseBattleEnding into g_BattleChooseEndingHook, Boss_EndBattle into g_BattleEndHook and Boss_RunBattleEvent into g_BossBattleEventHook." }
+Boss_RunBattleEvent = { addr = 0x800C1A4C, type = "func", source = "Handles the boss battle events of boss051: ignores every event mode and returns 0." }
+Boss_ChooseBattleEnding = { addr = 0x800C1A54, type = "func", source = "Chooses how the boss battle of boss051 ends (g_BattleChooseEndingHook). On victory sets g_ScenarioState.step_05 to 15, runs Battle_EndVictory; otherwise runs Battle_EndDefeat." }
+Boss_EndBattle = { addr = 0x800C1AA0, type = "func", source = "Ends the boss battle of boss051 (g_BattleEndHook): does nothing." }
+Effect_StartPlaying = { addr = 0x800C1D7C, type = "func", source = "Raises BATTLE_STATE_EFFECT_PLAYING and clears the effect work record in the boss051 battle." }
+g_BossEnemyScript = { addr = 0x800C1DB0, source = "boss051 enemy script data" }
+g_BossEnemyActions = { addr = 0x800C1DBC, source = "boss051 enemy action table" }
+Battle_EndVictory = { addr = 0x801DDED8, type = "func", source = "Ends the battle in victory: sets the battle phase to the result mode at step 1, which plays the victory sequence, poses the party and opens the result panel. Boss battles call it from their ending hook when the result is a victory.", alias = true }
+Battle_EndDefeat = { addr = 0x801DDF00, type = "func", source = "Ends the battle in defeat: sets the battle phase to the result mode at step 2, which plays the defeat sequence and shows the defeat message. Boss battles call it from their ending hook when the result is not a victory.", alias = true }
+g_BattleEffectBattler = { addr = 0x801EB4E0, source = "the battler the running effect acts on; Battle_UpdateEffects stores it for each effect step (emi/battle/battle/03 owns the cell)" }

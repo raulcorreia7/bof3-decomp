@@ -1,0 +1,23 @@
+["emi/bmagic/magic067/03"]
+Battle_ApplyDamageFlags = { addr = 0x800A9610, alias = true, source = "Applies the damage flags to the selected battlers." }
+Battle_MarkDamaged = { addr = 0x800A9820, type = "func", source = "Marks the selected battlers as damaged." }
+Battle_SlotIsBlocked = { addr = 0x801DB524, alias = true, source = "Tells whether a battler slot can not be selected." }
+Effect_RotatePosition = { addr = 0x801DD350, type = "func", source = "Integrates the effect velocity pairs the effect steps read; battle/03 owns the body." }
+Battle_AllocEffect = { addr = 0x801E590C, alias = true, source = "Claims a free battle effect slot." }
+Effect_Reset = { addr = 0x801E5988, type = "func", source = "Clears every timer, state and flag byte of the shared BattleEffect work record; every effect countdown calls it first. battle/03 owns the body." }
+g_BattleEffectBattler = { addr = 0x801EB4E0, source = "the battler the running effect acts on; Battle_UpdateEffects stores it for each effect step (emi/battle/battle/03 owns the cell)" }
+g_BattleEnemyBattlers = { addr = 0x801EB630, type = "EnemyBattler", size = 0x8C0, source = "Battle enemy battlers, one per enemy slot." }
+g_BattleEffects = { addr = 0x801EC330, alias = true, source = "Battle effect work records (stride 0x78); Battle_AllocEffect claims a free one by setting bit 0 of header.flags." }
+Effect_CountDownTimerCallSelector = { addr = 0x801EEF3C, type = "func", source = "Counts the effect timer (byte 0x09) down; at zero asks the target selector for targets (Battle_ApplyDamageFlags with 0x20) and advances header.mode (byte 0x01) in magic067 (Chill)." }
+Effect_StartOnZeroTick = { addr = 0x801EF284, type = "func", source = "When the effect ticker (byte 0x0B) is zero raises BATTLE_STATE_EFFECT_PLAYING and clears the effect in magic067 (Chill)." }
+BMagic_DispatchEffectMode = { addr = 0x801EF2D0, type = "func", source = "Runs the handler that header.mode (byte 0x01) selects from the effect handlers of magic067." }
+Effect_Drift = { addr = 0x801EF59C, type = "func", source = "Drifts the effect actor each frame along its phase (header.param.phase) and at effect timer (byte 0x09) value 0x30 lowers the ticker (byte 0x0B) of g_BattleEffectBattler and clears the effect in magic067 (Chill)." }
+Effect_SetFacingMatrix = { addr = 0x801EF688, type = "func", source = "Sets the GTE model matrix from the effect's facing and its position, half its height span deep, viewed through the camera in magic067." }
+Effect_ArmCounterNextStep = { addr = 0x801EFF8C, type = "func", source = "Clears the effect timer (byte 0x09), loads the effect counter (byte 0x0A) with 0x88 and runs the next-step routine in magic067 (Chill)." }
+Effect_CountUpAndStep = { addr = 0x801EFFCC, type = "func", source = "Counts the effect timer (byte 0x09) up and advances header.step (byte 0x02) at 16 in magic067 (Chill)." }
+Effect_CountDownAndStep = { addr = 0x801F001C, type = "func", source = "Counts the effect counter (byte 0x0A) down and advances header.step (byte 0x02) at zero in magic067 (Chill)." }
+Effect_TickOnTimerZero = { addr = 0x801F0068, type = "func", source = "Counts the effect timer (byte 0x09) down by 1 per frame; at zero lowers the ticker (byte 0x0B) of g_BattleEffectBattler and clears the effect in magic067 (Chill)." }
+Effect_QueueEntry = { addr = 0x801F02E4, type = "func", source = "Writes a battle queue entry from bytes 0x04 and 0x03 (func_800AEEC8), sets the effect ticker (byte 0x0B) to 1 and advances header.step (byte 0x02) in magic067 (Chill)." }
+Effect_TickOnZeroTick = { addr = 0x801F033C, type = "func", source = "When the effect ticker (byte 0x0B) is zero lowers the ticker of g_BattleEffectBattler and clears the effect in magic067 (Chill)." }
+Effect_AddActor = { addr = 0x801F043C, type = "func", source = "Adds the effect's actor and advances header.step (byte 0x02) once BATTLE_STATE_EFFECT_PLAYING is set in magic067 (Chill)." }
+g_BMagicEffectModes = { addr = 0x801F04B8, source = "Handlers of magic067 (Chill), run by header.mode (byte 0x01) and by header.step (byte 0x02) in its sub-effects." }

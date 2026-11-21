@@ -1,0 +1,4 @@
+["emi/etc/commu05/07"]
+g_EmiOverlayHeader = { addr = 0x801D0C00, source = "The overlay's payload prologue: the overlay id word the EMI loader compares with the archive's table of contents." }
+func_801D0C10 = { addr = 0x801D0C10, type = "func", source = "Entry of the commu05 scene: dispatches on the step byte D_801F294C through the D_801D1950 handlers." }
+g_Commu05Steps = { addr = 0x801D1950, source = "the 3 step handlers of the commu05 scene, called by func_801D0C10 (the overlay entry) and indexed by the commu step byte D_801F294C" }

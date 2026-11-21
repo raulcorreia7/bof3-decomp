@@ -1,0 +1,4 @@
+["emi/scenario/scena19/00"]
+Scene_DispatchActor = { addr = 0x801F6D10, type = "func", source = "dispatches a scenario actor to its callback handler" }
+Scene_SetPartyRyuYoungTeepoRei = { addr = 0x801F6D68, type = "func", source = "Streams the EMI family for young Ryu, Teepo and Rei, empties g_Game.party_size and joins the three with Party_JoinMember." }
+g_SceneActorDispatch = { addr = 0x801F6DE0, source = "scenario actor dispatch table" }

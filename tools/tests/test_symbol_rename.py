@@ -5,6 +5,7 @@ import tomllib
 from pathlib import Path
 
 import pytest
+from fixture import put_symbols
 
 import symbol
 
@@ -13,7 +14,7 @@ import symbol
 def repo(tmp_path: Path, monkeypatch: pytest.MonkeyPatch) -> Path:
     subprocess.run(["git", "init", "-q", str(tmp_path)], check=True)
     files = {
-        "config/symbols.toml": '["exe/a"]\nOld = { addr = 0x80000000, type = "func" }\n',
+        "config/symbols/exe+a.toml": '["exe/a"]\nOld = { addr = 0x80000000, type = "func" }\n',
         "config/exe/a/splat.yaml": "- [0x0, c, Old]\n",
         "src/a/Old.c": "MATCH void Old(void) {}\n",
         "include/a.h": "void Old(void);\n",
@@ -24,7 +25,6 @@ def repo(tmp_path: Path, monkeypatch: pytest.MonkeyPatch) -> Path:
         path.write_text(text)
     subprocess.run(["git", "-C", str(tmp_path), "add", "."], check=True)
     monkeypatch.setattr(symbol, "ROOT", tmp_path)
-    monkeypatch.setattr(symbol, "SYMBOLS", tmp_path / "config/symbols.toml")
     return tmp_path
 
 
@@ -158,7 +158,7 @@ def test_address_renames_keep_provenance_and_other_images(repo: Path) -> None:
     for name, content in snapshot(repo)[0].items():
         (repo / name).write_bytes(content.replace(b"Old", b"func_80000000"))
     (repo / "src/a/Old.c").rename(repo / "src/a/func_80000000.c")
-    (repo / "config/symbols.toml").write_text('["exe/a"]\n')
+    put_symbols(repo, '["exe/a"]\n')
     unrelated = repo / "src/other/func_80000000.c"
     unrelated.parent.mkdir()
     unrelated.write_text("MATCH void func_80000000(void) {}\n")
@@ -190,8 +190,9 @@ def test_renaming_an_address_name_drops_its_alias_row(repo: Path) -> None:
     for name, content in snapshot(repo)[0].items():
         (repo / name).write_bytes(content.replace(b"Old", b"func_80000000"))
     (repo / "src/a/Old.c").rename(repo / "src/a/func_80000000.c")
-    (repo / "config/symbols.toml").write_text(
-        '["exe/a"]\nfunc_80000000 = { addr = 0x80000000, type = "func", alias = true }\n'
+    put_symbols(
+        repo,
+        '["exe/a"]\nfunc_80000000 = { addr = 0x80000000, type = "func", alias = true }\n',
     )
     symbol.git("add", ".")
     assert (
@@ -212,7 +213,7 @@ def test_renaming_an_address_name_drops_its_alias_row(repo: Path) -> None:
         )
         == 0
     )
-    assert tomllib.loads((repo / "config/symbols.toml").read_text()) == {
+    assert tomllib.loads((repo / "config/symbols/exe+a.toml").read_text()) == {
         "exe/a": {
             "New": {
                 "addr": 0x80000000,
@@ -224,7 +225,7 @@ def test_renaming_an_address_name_drops_its_alias_row(repo: Path) -> None:
 
 
 def test_add_refuses_an_image_that_is_not_a_target(repo: Path) -> None:
-    table = repo / "config/symbols.toml"
+    table = repo / "config/symbols/exe+a.toml"
     before = table.read_bytes()
     assert symbol.main(["add", "exe/b", "New", "0x80000010", "--source", "x"]) == 2
     assert table.read_bytes() == before
@@ -308,7 +309,7 @@ def test_a_named_symbol_repairs_its_address_row_and_unit_file(repo: Path) -> Non
         repo,
         {
             "config/exe/a/splat.yaml": LAYOUT + "      - [0x0, c, func_80000000]\n",
-            "config/symbols.toml": '["exe/a"]\nNew = { addr = 0x80000000, type = "func", source = "test purpose" }\n',
+            "config/symbols/exe+a.toml": '["exe/a"]\nNew = { addr = 0x80000000, type = "func", source = "test purpose" }\n',
             "src/a/func_80000000.c": "MATCH void New(void) {}\n",
             "src/a/Old.c": None,
             "include/a.h": None,
@@ -321,7 +322,7 @@ def test_a_named_symbol_repairs_its_address_row_and_unit_file(repo: Path) -> Non
     assert (repo / "src/a/New.c").read_text() == "MATCH void New(void) {}\n"
     assert not (repo / "src/a/func_80000000.c").exists()
     assert "[0x0, c, New]" in (repo / "config/exe/a/splat.yaml").read_text()
-    assert tomllib.loads((repo / "config/symbols.toml").read_text()) == {
+    assert tomllib.loads((repo / "config/symbols/exe+a.toml").read_text()) == {
         "exe/a": {
             "New": {
                 "addr": 0x80000000,
@@ -337,7 +338,7 @@ def test_a_repair_refuses_a_unit_that_defines_another_name(repo: Path) -> None:
         repo,
         {
             "config/exe/a/splat.yaml": LAYOUT + "      - [0x0, c, func_80000000]\n",
-            "config/symbols.toml": '["exe/a"]\nOther = { addr = 0x80000000, type = "func", source = "x" }\n',
+            "config/symbols/exe+a.toml": '["exe/a"]\nOther = { addr = 0x80000000, type = "func", source = "x" }\n',
             "src/a/func_80000000.c": "MATCH void Stale_Name(void) {}\n",
             "src/a/Old.c": None,
             "include/a.h": None,
@@ -355,7 +356,7 @@ def test_an_offset_row_takes_its_own_offset(repo: Path) -> None:
         {
             "config/exe/a/splat.yaml": LAYOUT
             + "      - [0x10C, .rodata, 1EFC]\n      - [0x1EDC, c, 1EFC]\n",
-            "config/symbols.toml": '["exe/a"]\n',
+            "config/symbols/exe+a.toml": '["exe/a"]\n',
             "src/a/1EFC.c": "MATCH void func_80001EDC(void) {}\n",
             "src/a/Old.c": None,
             "include/a.h": None,
@@ -382,9 +383,10 @@ def test_a_local_rename_keeps_the_other_image(repo: Path) -> None:
     (repo / "src/b/Old.c").write_text("MATCH void Old(void) {}\n")
     (repo / "config/exe/b").mkdir(parents=True)
     (repo / "config/exe/b/splat.yaml").write_text("- [0x0, c, Old]\n")
-    (repo / "config/symbols.toml").write_text(
+    put_symbols(
+        repo,
         '["exe/a"]\nOld = { addr = 0x80000000, type = "func" }\n'
-        '\n["exe/b"]\nOld = { addr = 0x80010000, type = "func" }\n'
+        '\n["exe/b"]\nOld = { addr = 0x80010000, type = "func" }\n',
     )
     symbol.git("add", "-A")
     assert symbol.main(["rename", "Old", "New", "--image", "exe/a", "--local"]) == 0
@@ -393,9 +395,12 @@ def test_a_local_rename_keeps_the_other_image(repo: Path) -> None:
     assert (repo / "src/b/Old.c").read_text() == "MATCH void Old(void) {}\n"
     assert "[0x0, c, New]" in (repo / "config/exe/a/splat.yaml").read_text()
     assert "[0x0, c, Old]" in (repo / "config/exe/b/splat.yaml").read_text()
-    tables = tomllib.loads((repo / "config/symbols.toml").read_text())
-    assert set(tables["exe/a"]) == {"New"}
-    assert set(tables["exe/b"]) == {"Old"}
+    assert set(
+        tomllib.loads((repo / "config/symbols/exe+a.toml").read_text())["exe/a"]
+    ) == {"New"}
+    assert set(
+        tomllib.loads((repo / "config/symbols/exe+b.toml").read_text())["exe/b"]
+    ) == {"Old"}
 
 
 def test_an_address_name_is_unique_only_inside_its_image(repo: Path) -> None:
@@ -441,7 +446,7 @@ def test_an_address_name_clashes_in_a_visible_table(repo: Path) -> None:
         repo,
         {
             "config/link.toml": '[[resident]]\ntarget = "exe/b"\nvisible_to = ["exe"]\n',
-            "config/symbols.toml": (
+            "config/symbols/exe+a.toml": (
                 '["exe/a"]\nOld = { addr = 0x80000000, type = "func" }\n'
                 '\n["exe/b"]\nfunc_80000000 = { addr = 0x80001000, type = "func" }\n'
             ),

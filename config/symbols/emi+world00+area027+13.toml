@@ -1,0 +1,4 @@
+["emi/world00/area027/13"]
+g_AreaModuleId = { addr = 0x801F2C00, source = "Module id of the area: the first payload word of its overlay, 52 + the area number." }
+jtbl_801F2C04 = { addr = 0x801F2C04, type = "Callback", size = 0x18, source = "The switch table of func_801F37E4: 6 jump targets of its jr dispatch." }
+jtbl_801F2C1C = { addr = 0x801F2C1C, type = "Callback", size = 0x14, source = "The switch table of func_801F394C: 5 jump targets of its jr dispatch." }

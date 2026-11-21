@@ -1,0 +1,8 @@
+["emi/etc/commu03/06"]
+g_EmiOverlayHeader = { addr = 0x801D0C00, source = "The overlay's payload prologue: the overlay id word the EMI loader compares with the archive's table of contents." }
+func_801D0C44 = { addr = 0x801D0C44, type = "func", source = "Entry of the commu03 scene: dispatches on the step byte D_801F294C through the D_801D18C8 handlers." }
+Fairy_EndCommuScene = { addr = 0x801D121C, type = "func", source = "Last slot of g_Commu03Step2Steps; adds 1 to g_SceneEventStep unless g_GameStateIndex is GAME_REQUEST_MESSAGE." }
+g_Commu03Steps = { addr = 0x801D18C8, source = "the 3 step handlers of the commu03 scene, called by func_801D0C44 (the overlay entry) and indexed by the commu step byte D_801F294C" }
+g_Commu03Step0Steps = { addr = 0x801D18D4, source = "2 sub-step handlers of step 0 of the commu03 scene, called by func_801D0C80 (the step 0 handler) and indexed by the commu sub-step byte D_801F294D" }
+g_Commu03Step1Steps = { addr = 0x801D18DC, source = "2 sub-step handlers of step 1 of the commu03 scene, called by func_801D0DEC (the step 1 handler) and indexed by the commu sub-step byte D_801F294D" }
+g_Commu03Step2Steps = { addr = 0x801D18E4, source = "4 sub-step handlers of step 2 of the commu03 scene, called by func_801D1058 (the step 2 handler) and indexed by the commu sub-step byte D_801F294D" }

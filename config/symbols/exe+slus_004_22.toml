@@ -1,0 +1,1385 @@
+["exe/slus_004_22"]
+g_ScratchPad = { addr = 0x1F800000, source = "The PlayStation scratchpad at 0x1F800000 as one record: the work cells at 0x00 read as bytes, halfwords or words, the pointer cell at 0x10, the RotTransPers4 vectors at 0x14 and the task pointer at 0x44." }
+D_1F800002 = { addr = 0x1F800002, source = "ScratchPad.cells.halves[1]: the spawn record's packed word and the area entity entry data (GAME_ENTITY_ENTRY_DATA)." }
+D_1F800004 = { addr = 0x1F800004, source = "ScratchPad.cells.words[1]: a map-coordinate counter (func_801B13BC) and the party archive load's temporary word." }
+D_1F800006 = { addr = 0x1F800006, source = "ScratchPad.cells.halves[3]: the second map-coordinate counter (func_801B13BC)." }
+D_1F800008 = { addr = 0x1F800008, source = "ScratchPad.cells.words[2]: the staged x coordinate and its per-axis bias flag (func_801B13BC, func_801B0E44)." }
+D_1F80000A = { addr = 0x1F80000A, source = "ScratchPad.cells.halves[5]: the staged x source halfword (func_801B13BC)." }
+D_1F80000C = { addr = 0x1F80000C, source = "ScratchPad.cells.words[3]: the staged y bias flag, the tile-window half-width (Area_DrawCellRing) and the scene math word." }
+D_1F80000E = { addr = 0x1F80000E, source = "ScratchPad.cells.halves[7]: the staged y source halfword (func_801B13BC)." }
+D_1F800010 = { addr = 0x1F800010, source = "ScratchPad.unk_10: scena00 points the cell at the area load record's rotation offset and steps the camera through it." }
+g_ScratchPadVectors = { addr = 0x1F800014, source = "ScratchPad.vectors: the four SVECTORs RotTransPers4 projects; the area sprite and effect passes write the vertices." }
+D_1F80001C = { addr = 0x1F80001C, type = "SVECTOR", source = "ScratchPad.vectors[1]: the second corner vector RotTransPers4 projects, written on its own by the tile-ring draw (Area_DrawCellRing)." }
+D_1F800024 = { addr = 0x1F800024, type = "SVECTOR", source = "ScratchPad.vectors[2]: the third corner vector RotTransPers4 projects, written on its own by the tile-ring draw (Area_DrawCellRing)." }
+D_1F80002C = { addr = 0x1F80002C, type = "SVECTOR", source = "ScratchPad.vectors[3]: the fourth corner vector RotTransPers4 projects, written on its own by the tile-ring draw (Area_DrawCellRing)." }
+g_Task = { addr = 0x1F800044, size = 0x4, source = "ScratchPad.task: the work record the current overlay runs; each header types it with a g_Task view." }
+jtbl_800327B0 = { addr = 0x800327B0, type = "Callback", source = "The switch table of LZ77_DecodeStep: the jump targets of its jr dispatch." }
+D_80033A08 = { addr = 0x80033A08, type = "u16", source = "Window colors, 0x40 bytes per window style." }
+g_AreaMapBundle = { addr = 0x80104000, type = "AreaMapBundle", size = 0x30, source = "Header of the area map bundle." }
+g_AreaCells = { addr = 0x8012C000, size = 0x1880, source = "The area cells." }
+g_AreaCellPrims = { addr = 0x8012D880, size = 0x14000, source = "The primitives of the area cells." }
+g_AreaCellGrid = { addr = 0x80141880, type = "u16", size = 0xC40, source = "The grid of area cells." }
+g_AreaCellPrimFreeIds = { addr = 0x801424C0, type = "u16", size = 0x800, source = "Free primitive row ids of the area cells." }
+g_AreaCellPacketLists = { addr = 0x80142CC0, type = "AreaCellPacketList", alias = true, source = "D_80142CC0 as the cell ordering lists: per grid row, six lists of a first and a last packet. Area_DrawCellRing appends to them by the last packet; Area_DrawGridActors splices a whole list in by its first and last." }
+D_80142CC4 = { addr = 0x80142CC4, alias = true, source = "The last-packet word of the first cell ordering list (g_AreaCellPacketLists[0][0].tail), which the cell draws index by byte offset." }
+g_AreaCellPackets = { addr = 0x80143740, source = "Cell packet words: layer in the top byte, depth in the high halfword, primitive index in the low bits." }
+g_SysThreads = { addr = 0x80143B40, type = "Thread", source = "The scheduler's thread records, indexed by thread index." }
+g_GameEntryState = { addr = 0x80143B90, source = "Game state the main loop runs next: Game_NewGame sets it to 1, Game_LoadShopOverlay to 2 and Game_UpdateAreaLoad to 8." }
+g_GameEntrySubstate = { addr = 0x80143B92, source = "Stage within the current game state; the state handlers read it to pick their stage and add 1 as they advance." }
+g_GameStateIndex = { addr = 0x80143BB0, source = "Game request code that picks the next game state." }
+g_UiTitleState = { addr = 0x80143C10, source = "Index into s_TitleSteps of the title screen state that runs each frame; each state adds 1 when it is done, and the start button sets it to 2 below state 3 or to 7." }
+g_UiTitleSubstate = { addr = 0x80143C12, source = "Substate of the title screen state, cleared to 0 when the title screen starts." }
+g_UiTitleTimer = { addr = 0x80143C20, source = "Frame countdown of the title screen states: Game_WaitTitleFade arms it to 360 and Game_AdvanceTitleFade to 900, and the state advances when it reaches 0." }
+g_UiTitleBannerScroll = { addr = 0x80143C22, source = "Horizontal scroll of the title banner: starts at 200 and the banner draw adds 2 each frame." }
+g_UiTitleBannerAlpha = { addr = 0x80143C24, source = "Alpha of the title banner, cleared to 0 when the title screen starts." }
+g_UiTitlePrimaryAlpha = { addr = 0x80143C26, source = "Alpha of the primary title choice labels, raised by 4 per frame up to 128 while the choices are open." }
+g_UiTitleSecondaryAlpha = { addr = 0x80143C28, source = "Alpha of the secondary title choice panels, raised by 2 per frame up to 128 while the choices are open." }
+g_UiPopupRequest = { addr = 0x80143C30, source = "Window popup request flags: the title draw clears its low byte, and the title start button acts when WIN_POPUP_PENDING_MASK shows WIN_POPUP_PENDING_OPEN." }
+g_UiTitleFadePhase = { addr = 0x80143C31, source = "Phase of the title fade: 1 when the title screen starts, 2 when the fade is done (Game_WaitTitleFade waits for it), 3 once the choices open, 0 when the game starts." }
+g_UiTitleChoicePhase = { addr = 0x80143C32, source = "Phase of the title choices: 0 at the start, 1 once the title fade ends (Game_AdvanceTitleFade) and 0 again when the game starts; nonzero draws the choice panels." }
+g_UiTitleInputGate = { addr = 0x80143C33, source = "Gate of the title start button: 1 from the title screen start until the button is accepted or the game starts, then 0." }
+g_UiWindowEffectBusy = { addr = 0x80143C40, source = "Tells whether a window effect is running." }
+g_UiLocalMode = { addr = 0x80143C90, source = "Set by UI_SetMode, which arms UI_DispatchLocalMode." }
+g_SysCurrentThread = { addr = 0x80143D40, type = "Thread", source = "The thread record the scheduler runs now." }
+g_GfxBufferIndex = { addr = 0x80143D44, source = "Index of the frame buffer being drawn." }
+g_GfxBuffers = { addr = 0x80143D48, source = "SYS_InitRuntime initializes the display frames and SYS_Main selects one by g_GfxBufferIndex" }
+g_GfxCurrentBuffer = { addr = 0x80143E68, source = "SYS_Main selects a display frame and passes its display and draw environments to PsyQ" }
+g_FrameCount = { addr = 0x80143E6C, source = "Absolute frame counter." }
+g_SysLastVSync = { addr = 0x80143EF8, source = "SYS_Main stores the VSync return value" }
+g_GameAreaId = { addr = 0x80143F00, source = "The area to load." }
+g_GameArea = { addr = 0x80143F00, size = 0x20, alias = true, source = "The current area and the request to change it." }
+g_GameRequestFlags = { addr = 0x80143F02, source = "Flags of the game request." }
+g_GameCellType = { addr = 0x80143F03, source = "The cell type of the party's cell: func_8019FAA0 stores the type of the entry cell here; the previous type goes to last_cell_type." }
+g_GameLastAreaId = { addr = 0x80143F04, source = "The area the party came from: func_8019FAA0 stores the current area id here before it loads the next one." }
+g_GameLastCellType = { addr = 0x80143F06, source = "The cell type before the last area load: func_8019FAA0 copies it from the cell type." }
+g_GameLastX = { addr = 0x80143F08, source = "The scroll target x before the last area load: func_8019FAA0 stores it here." }
+g_GameLastY = { addr = 0x80143F0C, source = "The scroll target y before the last area load: func_8019FAA0 stores it here." }
+g_GameEntryAreaId = { addr = 0x80143F10, source = "The area id Game_RequestAreaChange enters." }
+g_GameEntryPosX = { addr = 0x80143F14, source = "Entry x position of the game." }
+g_GameEntryPosY = { addr = 0x80143F18, source = "Entry y position of the game." }
+g_GameEntryFacing = { addr = 0x80143F1C, source = "The entry facing Game_RequestAreaChange stores beside the entry position." }
+g_GameRequestKind = { addr = 0x80143F1D, source = "Kind of the game request." }
+g_GameEntryMode = { addr = 0x80143F1E, source = "Entry mode of the field: Game_UpdateAreaLoad sets it to 10, 20 or 0 and Game_UpdateField tests it against GAME_NONE." }
+g_GamePrevSelection = { addr = 0x80143F1F, source = "The previous game selection." }
+g_EncounterSteps = { addr = 0x80143F22, source = "Steps walked since the last encounter: Area_WalkStep and func_801B146C add 1 per step (2 when direction is 2 or 6), func_80197F48 and func_801984E8 reset it, and Area_CanStartEncounter starts a fight once it reaches the threshold Area_RollEncounterThreshold stores in D_80145FB8." }
+g_EncounterOriginX = { addr = 0x80143F24, type = "s32", source = "Area_BuildEncounter and func_801BFE34 store the field-battle formation origin x; Area_PlaceEncounterEnemies and func_801C6658 offset party start positions from it" }
+g_EncounterOriginY = { addr = 0x80143F28, type = "s32", source = "Area_BuildEncounter and func_801BFE34 store the field-battle formation origin y; Area_PlaceEncounterEnemies and func_801C6658 offset party start positions from it" }
+g_EncounterParty = { addr = 0x80143F2C, type = "FormationPos", size = 0x18, source = "func_801BFE34 and func_801C6658 store one field-battle start position per party order slot; func_801C6888 and func_801C69C8 test them for overlap and height" }
+g_SysResetHoldFrames = { addr = 0x80143F44, source = "SYS_Main counts held reset-key frames until EMI_IsReady" }
+g_PartyX = { addr = 0x80143F7C, type = "s32", source = "X position of the party." }
+g_PartyY = { addr = 0x80143F80, type = "s32", source = "Y position of the party." }
+g_ScrollHeight = { addr = 0x80143F86, type = "s16", source = "Ground height under the party." }
+g_SpawnedActors = { addr = 0x80143FC8, size = 0x910, source = "The actor slots." }
+g_SaveData = { addr = 0x801448D8, size = 0x10B0, alias = true, source = "The save data." }
+g_SceneEventMode = { addr = 0x801448EB, type = "s8", source = "Current scene event." }
+g_SceneEventState = { addr = 0x801448EB, type = "SceneEventState", source = "g_SceneEventMode at 0x801448EB as the live scene event: mode selects the g_SceneEvents handler, step advances inside it and selection is the entry it works on.", alias = true }
+g_SceneEventStep = { addr = 0x801448EC, type = "s8", source = "Fairy_EndCommuScene adds one to it, Fishing_ShowLocation steps it from 0 to 1, Scene_ClearEventState clears it" }
+g_SceneEventSelection = { addr = 0x801448ED, type = "u8", source = "The entry the scene event works on: the fairy job index in Fairy_GrantGift and Fairy_RollExploreReward, the master id in the sisyou menu, a copy of active_ui[5] in the commu00 cursor functions." }
+g_SavedScriptVars = { addr = 0x801448F8, size = 0x4, source = "Script variables kept in the save." }
+g_SaveAreaId = { addr = 0x801448FC, type = "u16", source = "Area where the game was saved." }
+g_SaveEntryFacing = { addr = 0x801448FF, type = "u8", source = "Facing of the party leader where the game was saved, restored by Game_NewGame." }
+g_SaveEntryX = { addr = 0x80144900, type = "u32", source = "X position of the party where the game was saved, restored by Game_NewGame." }
+g_SaveEntryY = { addr = 0x80144904, type = "u32", source = "Y position of the party where the game was saved, restored by Game_NewGame." }
+g_SndMono = { addr = 0x80144951, type = "u8", source = "SAVE_RunLoadVerify selects SsSetStereo for 0 and SsSetMono otherwise; SND_SetCDVolume halves the CD mix for nonzero" }
+g_WindowStyle = { addr = 0x80144952, type = "u8", source = "The last argument of UI_DrawWindow and Menu_DrawHeaderBar in the menu and battle overlays; SYS_StartFrontend zeroes it at boot; the head of the CharacterRoster view." }
+g_AutoRun = { addr = 0x80144956, source = "Auto Run option: 1 walks by default and runs while the run button is held, 0 the reverse (func_801B0C88, func_80167428; the option panel of func_801E26A8 lists it)" }
+g_Characters = { addr = 0x80144968, size = 0x520, source = "The characters." }
+g_SceneFlagWords = { addr = 0x80144E88, type = "u8", source = "Scene flag words, one per scenario." }
+g_Scenario2Flags = { addr = 0x80144E98, type = "u8", source = "Scene flag words of scenario 2." }
+g_SceneEventFlags = { addr = 0x80144F28, type = "u8", source = "Scene event flags." }
+g_Zenny = { addr = 0x80144F50, size = 0x4, source = "Party_SpendZenny subtracts from it when the balance covers the price, Party_AddZenny adds to it and clamps it at 9999999, and every shop panel prints it as the money held" }
+g_PartyFormation = { addr = 0x80144F58, source = "Party formation." }
+g_PartyMenuFlags = { addr = 0x80144F59, size = 0x1, source = "Menu flags of the party: the master menu (emi/etc/sisyou/00 func_801D3A24) sets bit 3, 4 or 5 (1 << the character index of Teepo, Rei, Momo) with the first reward of the special master; the shop tests the same bits to enable the item classes 11, 13 and 14." }
+g_PartyFieldOrder = { addr = 0x80144F5A, size = 0x3, source = "Party order in the field." }
+g_PartyBattleOrder = { addr = 0x80144F5D, size = 0x3, source = "Party order in battle." }
+g_LearnedAbilities = { addr = 0x80144F80, size = 0x20, source = "One bit per ability id, set once the party has learned it: the sisyou master lesson tests and sets it before Char_AddAbility, and battle/15 sets it when a party member learns an enemy skill." }
+g_IdentifiedEnemies = { addr = 0x80144FA0, size = 0x20, source = "One bit per enemy kind byte (256 bits): Identify sets the bit of the targeted enemy and the identified test reads it." }
+g_PlayClock = { addr = 0x80144FC0, size = 0x4, source = "Play time." }
+g_FishingBestCatch = { addr = 0x80144FE4, size = 0x20, source = "Best catch of each fish." }
+g_EmiLoadedCharacterIndex = { addr = 0x80145024, source = "Index of the last loaded EMI character." }
+g_FishingLure = { addr = 0x80145026, source = "Accessory id of the equipped lure; Item_Count counts it with the held accessories." }
+g_FishingLureQty = { addr = 0x80145027, source = "Number of equipped lures held; Item_Count adds it to the lure's item count." }
+g_FishingRod = { addr = 0x80145028, source = "Accessory id of the equipped rod; Item_Count counts it with the held accessories." }
+g_SndBGMId = { addr = 0x80145029, source = "Id of the background music being played." }
+g_BattleCount = { addr = 0x8014502C, source = "Number of battles fought." }
+g_InventoryIds = { addr = 0x8014504C, size = 0x200, source = "Item ids of each inventory category." }
+g_InventoryCounts = { addr = 0x8014524C, size = 0x200, source = "Item counts of each inventory category." }
+g_VitalItemIds = { addr = 0x8014544C, size = 0x20, source = "Item_VitalHas scans it for an id, Item_VitalAdd stores an id in a free entry and returns 0 when the table is full (32 entries)" }
+g_BattleTargetRows = { addr = 0x80145500, type = "BattleSlot", source = "Gene selection rows of the battle." }
+g_GameCelerityTimer = { addr = 0x80145554, size = 0x4, source = "Time during which celerity can not be used again." }
+g_GameBonebreakTimer = { addr = 0x80145558, size = 0x4, source = "Time during which bonebreak can not be used again." }
+g_FairyJobs = { addr = 0x801455C8, size = 0x1E0, source = "Fairy village jobs." }
+g_FairyRooms = { addr = 0x801457A8, source = "Fairy village rooms." }
+D_801457A9 = { addr = 0x801457A9, alias = true, source = "Subtype of each fairy village room." }
+g_GfxPalettePending = { addr = 0x80145988, source = "Palette upload pending flag." }
+g_GfxPrimCursor = { addr = 0x8014598C, size = 0x4, source = "Label primitive context." }
+g_Scripts = { addr = 0x801459F0, type = "u32", source = "Pointer to the active script table: Actor_BeginScript hands a record of it to Actor_SeekScript." }
+g_InputHeld = { addr = 0x80145AA4, source = "Buttons held this frame." }
+g_InputPressed = { addr = 0x80145AA8, source = "Buttons pressed this frame." }
+g_InputMasks = { addr = 0x80145AB4, type = "u16", source = "Button masks of the controller." }
+g_InputRepeatDelay = { addr = 0x80145AC6, source = "INPUT_GetRepeatedButtons reloads and decrements the repeat countdown" }
+g_InputRepeatButtons = { addr = 0x80145AC8, source = "INPUT_GetRepeatedButtons snapshots held buttons and tests them on repeat" }
+g_UiFormatBuffer = { addr = 0x80145AD4, source = "Buffer for formatted UI text." }
+g_PaletteFades = { addr = 0x80145BD4, type = "PaletteFade", size = 0x180, source = "Palette fade table: one PaletteFade row per fading target, claimed by GFX_AllocPaletteFade and released by GFX_FreePaletteFade." }
+g_SysCardSoftwareIoEvent = { addr = 0x80145E14, source = "SYS_InitCard opens SwCARD EvSpIOE and save_card.c tests it" }
+g_SysCardSoftwareTimeoutEvent = { addr = 0x80145E18, source = "SYS_InitCard opens SwCARD EvSpTIMOUT and save_card.c tests it" }
+g_SysCardSoftwareNewEvent = { addr = 0x80145E1C, source = "SYS_InitCard opens SwCARD EvSpNEW and save_card.c tests it" }
+g_SysCardSoftwareErrorEvent = { addr = 0x80145E20, source = "SYS_InitCard opens SwCARD EvSpERROR and save_card.c tests it" }
+g_SysCardHardwareIoEvent = { addr = 0x80145E24, source = "SYS_InitCard opens HwCARD EvSpIOE and save_card.c tests it" }
+g_SysCardHardwareTimeoutEvent = { addr = 0x80145E28, source = "SYS_InitCard opens HwCARD EvSpTIMOUT and save_card.c tests it" }
+g_SysCardHardwareErrorEvent = { addr = 0x80145E2C, source = "SYS_InitCard opens HwCARD EvSpERROR and save_card.c tests it" }
+g_FairyVillagePendingQueueCount = { addr = 0x80145E5C, source = "Number of fairy village jobs waiting in the queue." }
+g_FairyVillageUpdateCount = { addr = 0x80145E5D, type = "u8", source = "Number of fairy village updates." }
+g_Game = { addr = 0x80145E90, type = "GameState", size = 0x41C, source = "The game's party state: the three party members, the member the running mode points at, the party size and order, and the game and walk flags." }
+g_BattlePartyBattlers = { addr = 0x80145E90, alias = true, source = "The three party members; the members of g_Game." }
+g_AreaPartySpeed = { addr = 0x80145FAC, alias = true, source = "The speed level of each party member (u.field.counter_11C), one per 0x140-byte member of g_Game; Area_CanStartEncounter reads member 0." }
+g_GameState = { addr = 0x80146250, alias = true, source = "The member of g_Game that the running mode works on; the current member of g_Game." }
+g_PartySize = { addr = 0x80146254, alias = true, source = "Number of characters in the party; the party_size member of g_Game." }
+g_BattlePartyOrder = { addr = 0x80146255, alias = true, source = "Party order command list applied when play resumes; the battle_order member of g_Game." }
+g_GameFlags = { addr = 0x80146258, alias = true, source = "Game flags; the flags member of g_Game." }
+g_AreaWalkFlags = { addr = 0x8014625A, alias = true, source = "Walk flags of the area; the walk_flags member of g_Game." }
+g_Battle = { addr = 0x801462E0, type = "BattleState", size = 0x100, source = "The battle's state: phase, UI step, cursors, state flags, combatant counts, turn order, outcome, the chosen action and its target, the end hooks, the genes of Accession and the pending status." }
+g_BattleMode = { addr = 0x801462E0, type = "u8", source = "Top level of g_BattlePhase, set to 0 with the step and sub-step when a battle begins; the phase.mode member of g_Battle.", alias = true }
+g_BattlePhase = { addr = 0x801462E0, size = 3, alias = true, source = "Battle mode, step and sub-step; the phase member of g_Battle." }
+g_BattleStep = { addr = 0x801462E1, type = "u8", source = "Step within the battle mode, set to 0 when a battle begins and advanced by the mode handlers; the phase.step member of g_Battle.", alias = true }
+g_BattleSubStep = { addr = 0x801462E2, type = "u8", source = "Sub-step within the battle step, set to 0 when a battle begins and when a step starts; the phase.sub_step member of g_Battle.", alias = true }
+g_BattleUIStep = { addr = 0x801462E3, type = "u8", source = "Step of the battle UI, set to 0 when a battle begins and advanced by 1 as each UI stage finishes; the ui_step member of g_Battle.", alias = true }
+g_BattleUIState = { addr = 0x801462E4, type = "u8", source = "Index of the battle UI state handler that runs each frame (D_801F0CA4[g_BattleUIState] in the battle end overlay); the ui_state member of g_Battle.", alias = true }
+g_BattleRowCursor = { addr = 0x801462E5, type = "u8", source = "Battle row cursor; the row_cursor member of g_Battle.", alias = true }
+g_BattlePanelEntry = { addr = 0x801462E6, type = "u8", source = "Selected entry of the battle panel; the cursor.panel_entry member of g_Battle.", alias = true }
+g_GeneCursor = { addr = 0x801462E6, size = 2, alias = true, source = "Row and column of the Accession gene picker cursor over the gene grid; row is -1 on the confirm line; the cursor.gene member of g_Battle." }
+g_BattleState = { addr = 0x801462E8, type = "u16", source = "Battle state flags; the state member of g_Battle.", alias = true }
+g_BattleEncounter = { addr = 0x801462EA, type = "u8", source = "Current encounter id; the encounter member of g_Battle.", alias = true }
+g_BattleScrollDir = { addr = 0x801462EC, type = "u8", source = "Camera scroll direction in battle; the scroll_dir member of g_Battle.", alias = true }
+g_BattleBossFlags = { addr = 0x801462ED, type = "u8", source = "Boss battle flags; the boss_flags member of g_Battle.", alias = true }
+g_BattleSelectionLatch = { addr = 0x801462EF, type = "u8", source = "Enables the selection highlight; the selection_latch member of g_Battle.", alias = true }
+g_BattlePartyCount = { addr = 0x801462F0, type = "u8", source = "Number of party members in the battle; the party_count member of g_Battle.", alias = true }
+g_BattleLivingPartyCount = { addr = 0x801462F1, source = "Number of living party members in the battle; the living_party_count member of g_Battle.", alias = true }
+g_BattleEnemyCount = { addr = 0x801462F2, type = "u8", source = "Number of enemies in the battle; the enemy_count member of g_Battle.", alias = true }
+g_BattleLivingEnemyCount = { addr = 0x801462F3, type = "u8", source = "Battle_DefeatEnemy decrements it per removed enemy and sets BATTLE_RESULT_VICTORY at zero; the fourth combatant counter byte, after party, living party and enemy count; the living_enemy_count member of g_Battle.", alias = true }
+g_BattlePanelSlot = { addr = 0x801462F4, type = "u8", source = "Selected battle panel slot; the panel_slot member of g_Battle.", alias = true }
+g_BattlePanelWidths = { addr = 0x801462FC, source = "Widths of the battle panel rows; the panel_widths member of g_Battle.", alias = true }
+g_BattleCommandCount = { addr = 0x80146303, type = "u8", source = "Number of queued battle commands; the command_count member of g_Battle.", alias = true }
+g_BattleOutcome = { addr = 0x80146324, type = "BattleOutcome", size = 0x40, source = "How the battle went: surprise and option flags, escape attempts, result, event flags, the experience and zenny it pays and its drops; the outcome member of g_Battle.", alias = true }
+g_BattleSurprise = { addr = 0x80146324, source = "Surprise state of the battle; the member of g_BattleOutcome.", alias = true }
+g_BattleOptions = { addr = 0x80146325, source = "Battle option flags; the member of g_BattleOutcome.", alias = true }
+g_BattleDrops = { addr = 0x80146326, alias = true, source = "The escape attempts and drop count of g_BattleOutcome, where the drop list used to start." }
+g_BattleResult = { addr = 0x80146328, source = "Battle result flags; the member of g_BattleOutcome.", alias = true }
+g_BattleEventFlags = { addr = 0x80146329, source = "Flags of the battle events that fired; the member of g_BattleOutcome.", alias = true }
+g_BattleRewardExp = { addr = 0x8014632C, source = "Experience gained in the battle; the member of g_BattleOutcome.", alias = true }
+g_BattleRewardZenny = { addr = 0x80146330, source = "Zenny gained in the battle; the member of g_BattleOutcome.", alias = true }
+g_BattleActiveBattler = { addr = 0x80146374, type = "u8", source = "Slot of the acting battler; the active_battler member of g_Battle.", alias = true }
+g_BattleActionType = { addr = 0x80146375, type = "u8", source = "Type of the chosen battle action; the action_type member of g_Battle.", alias = true }
+g_BattleAction = { addr = 0x80146380, type = "BattleAction", source = "The current battle action; the action member of g_Battle.", alias = true }
+g_BattleTargetSelector = { addr = 0x80146384, type = "u8", source = "Target of the current action; the target_selector member of g_Battle.", alias = true }
+g_BattleSelectedActor = { addr = 0x8014638C, type = "PartyMember", source = "The selected battle actor; the selected_actor member of g_Battle.", alias = true }
+g_BattleTarget = { addr = 0x80146394, type = "u8", source = "Target battler of the current hit; the target member of g_Battle.", alias = true }
+g_BattleTargetRecord = { addr = 0x801463A0, type = "BattleTurn", source = "Result cells of the target battler; the target_record member of g_Battle.", alias = true }
+g_BattleChooseEndingHook = { addr = 0x801463A4, type = "Callback", source = "Hook that chooses how the battle ends; the choose_ending_hook member of g_Battle.", alias = true }
+g_BattleEndHook = { addr = 0x801463A8, type = "Callback", source = "Hook that runs when the battle ends; the end_hook member of g_Battle.", alias = true }
+g_BossBattleEventHook = { addr = 0x801463AC, type = "BossEventCallback", source = "Hook that handles boss battle events; the boss_event_hook member of g_Battle.", alias = true }
+g_BattleActionId = { addr = 0x801463C0, type = "u16", source = "selected action/command id indexes D_801CA71C (src/overlays/battle/Battle_RollHitChance.h 22) and g_BattleActionSelection (func_801D3E80.c 14) written with the command id (func_8009F278.c 5); the action_id member of g_Battle.", alias = true }
+g_BattleGenes = { addr = 0x801463C4, type = "u8", size = 0x3, source = "The three genes chosen for Accession; the genes member of g_Battle.", alias = true }
+g_BattleGeneCount = { addr = 0x801463C7, type = "u8", source = "Number of genes chosen for Accession; the gene_count member of g_Battle.", alias = true }
+g_DragonForm = { addr = 0x801463C9, type = "u8", source = "Selected dragon form; the dragon_form member of g_Battle.", alias = true }
+g_BattleActionLock = { addr = 0x801463CE, type = "u8", source = "Frames during which the battle actions are locked; the action_lock member of g_Battle.", alias = true }
+g_BattlePendingStatus = { addr = 0x801463D8, type = "u16", source = "Status effects to apply to a battler; the pending_status member of g_Battle.", alias = true }
+g_EmiStartSector = { addr = 0x80146450, source = "EMI_NextEntry loads it from g_EmiSlotSectors[slot]; EMI_CdOnReady checks it against g_EmiSectorCursor on the first sector" }
+g_EmiBytesLeft = { addr = 0x80146454, source = "Bytes left to load from the EMI archive." }
+g_EmiLoadArg = { addr = 0x80146458, source = "Load argument of the EMI entry being loaded." }
+g_EmiFirstWord = { addr = 0x8014645C, source = "EMI_NextEntry copies EMITocEntry.first_word; EMI_CdOnReady compares it with the first word of the first sector" }
+g_EmiEntryType = { addr = 0x80146460, source = "Type of the EMI entry being loaded." }
+g_EmiRingBase = { addr = 0x80146464, source = "EMI_LoadArchive stores the CD base and EMI_CopySector, StageSector and UploadSector index it by sector" }
+g_EmiRequestedSlotId = { addr = 0x80146468, source = "Slot id stored by EMI_LoadArchive before stream dispatch." }
+g_EmiStep = { addr = 0x8014646C, source = "EMI_NextEntry clears it; the payload loaders count sectors in it and EMI_CdOnReady checks the first sector at 0" }
+g_EmiReadStatus = { addr = 0x80146480, source = "EMI_StartArchive clears it; EMI_CdOnReady sets 1 on a sector mismatch and the VAB body loaders set 2; EMI_UpdateStream tests it" }
+g_EmiNextSlot = { addr = 0x80146481, source = "EMI_LoadArchive clears it and EMI_CdOnReady passes it, then increments it, to EMI_NextEntry" }
+g_EmiRingSlot = { addr = 0x80146489, source = "Slot of the EMI sector ring." }
+g_EmiStreamIdleFrames = { addr = 0x80146490, source = "Frames since the EMI stream last made progress; EMI_StartArchive clears it and EMI_UpdateStream restarts the read at EMI_STREAM_TIMEOUT_FRAMES." }
+g_EmiStreamState = { addr = 0x80146494, source = "State of the EMI stream." }
+g_EmiRingStates = { addr = 0x801464A0, source = "EMI_CdOnReady tests bit 7 of the ring slot state; EMI_LoadToVram and EMI_LoadVabBody store 3 and 4" }
+g_EmiSlotSectors = { addr = 0x80146678, source = "Start sector of each EMI slot." }
+g_EmiBanks = { addr = 0x8014677C, size = 0x8C, source = "The seven sound bank records of the EMI loader: SPU address, VAB header, SE table, sequence buffer and VAB id of each bank; SND_SetBankLayout fills them." }
+g_EmiSectorCursor = { addr = 0x80146808, source = "Current sector of the EMI stream." }
+g_EmiServiceState = { addr = 0x8014682D, type = "u8", source = "func_801638B0 sets 1/8 in the read loop and func_80163EA0 returns == 0 func_80163AF0/80163C58/80163D20 set 4/6/7" }
+g_SndCDVolume = { addr = 0x80146830, type = "u8", source = "SND_SetCDVolume latches the level; SND_FadeCDVolume steps it toward the requested level" }
+g_SndCDMix = { addr = 0x8014683C, type = "CdlATV", size = 4, source = "Api:CdMix SND_SetCDVolume fills the four attenuator bytes." }
+g_EmiStreamMode = { addr = 0x80146840, source = "EMI_Update runs EMI_UpdateStream for 1 and SND_UpdateXA for 2" }
+g_EmiStreamFlags = { addr = 0x80146854, source = "Flags of the EMI stream." }
+g_ScriptVars = { addr = 0x80146864, type = "u8", size = 0x4, source = "Script variables." }
+g_ScriptVarsWord = { addr = 0x80146864, type = "u32", alias = true, source = "The four script variable bytes of g_ScriptVars read and cleared as one word." }
+g_SceneFlags = { addr = 0x8014686C, type = "u32", source = "Flags of the current scenario." }
+g_ScenarioState = { addr = 0x80146870, source = "The scene state." }
+g_CurrentActor = { addr = 0x80146884, type = "Actor", source = "The current actor." }
+g_Actors = { addr = 0x80146888, size = 0x1170, source = "The field actors." }
+D_80146904 = { addr = 0x80146904, size = 0x11D0, alias = true, source = "The Actor.unk_7C halfword (byte 0x7C) seen as a column of g_Actors" }
+g_ActorWalkDestX = { addr = 0x80146908, size = 0x4, alias = true, source = "x of the destination func_801AC33C walks the actor to; the Actor.walk_dest_x word (byte 0x80) seen as a column of g_Actors" }
+g_ActorWalkDestY = { addr = 0x8014690C, size = 0x4, alias = true, source = "y of the destination func_801AC33C walks the actor to; the Actor.walk_dest_y word (byte 0x84) seen as a column of g_Actors" }
+D_80146910 = { addr = 0x80146910, size = 0x4, alias = true, source = "The Actor.unk_88 word (byte 0x88) seen as a column of g_Actors" }
+g_AreaFocusY = { addr = 0x80147A90, source = "Y focus of the area." }
+g_ScriptWorkRecord = { addr = 0x80148208, type = "Actor", source = "The script work record." }
+g_ScriptState = { addr = 0x80148210, type = "ScriptState", source = "The script state." }
+g_AreaGridActors = { addr = 0x8014828C, source = "The grid actors queued for the frame, as task pointers." }
+g_AreaDrawState = { addr = 0x8014832C, size = 0x4, alias = true, source = "Area draw counts." }
+g_AreaGridActorCount = { addr = 0x8014832D, source = "Number of grid actors in the queue." }
+g_AreaDrawFlags = { addr = 0x8014832E, source = "Flags that select the area draw passes." }
+g_MenuPanelTasks = { addr = 0x80148330, source = "The menu panel tasks." }
+g_BattleMessageState = { addr = 0x801483C3, type = "u8", source = "State of the battle message window." }
+g_BattleChoicePanel = { addr = 0x80148570, source = "The battle choice panel." }
+g_BattleChoicePhase = { addr = 0x80148573, type = "u8", source = "Phase of the battle choice panel." }
+g_BattleListCursor = { addr = 0x8014859F, type = "u8", source = "Cursor row of the battle list." }
+g_BattlePanelMode = { addr = 0x801485BB, type = "u8", source = "Current battle panel mode." }
+g_BattleItemRow = { addr = 0x801485C2, type = "u8", source = "Selected row of the battle item panel." }
+g_BattleTargetCursorCol = { addr = 0x801485C8, type = "s16", source = "Target cursor column of the battle." }
+g_MenuCurrentPanel = { addr = 0x80148648, source = "The current menu panel." }
+g_MenuPanelMode = { addr = 0x8014864C, type = "u8", source = "Mode of the menu panel tasks." }
+g_MenuStep = { addr = 0x80148650, size = 3, source = "The menu step record: step, sub-step and state bytes that the menu, shop and start overlays dispatch on." }
+D_80148650 = { addr = 0x80148650, alias = true, source = "Byte of g_MenuStep read as a symbol of its own." }
+D_80148651 = { addr = 0x80148651, alias = true, source = "Byte of g_MenuStep read as a symbol of its own." }
+D_80148652 = { addr = 0x80148652, alias = true, source = "Byte of g_MenuStep read as a symbol of its own." }
+D_8014865C = { addr = 0x8014865C, source = "Font-state param." }
+g_SndBankSe = { addr = 0x801486A0, size = 0x364, source = "The SE tables of the seven sound banks, 124 bytes each; the SE readers of SND_ReadSeBank0 to SND_ReadSeBank6 read them." }
+g_SndBankHeaders = { addr = 0x80148A18, size = 0x1C, source = "The address of each sound bank's VAB header; SND_SetBankLayout lays the banks end to end and the SE readers resolve tones through it." }
+g_SndBankSequences = { addr = 0x80148A34, size = 0x1C, source = "The address of each sound bank's sequence data, right after its VAB header; SND_SetBankLayout stores it." }
+g_SndVabIds = { addr = 0x80148FB0, type = "s8", size = 0x7, source = "SND_Init seeds slot i with i and SND_Exit passes each to SsVabClose" }
+g_SelectionEffectVoices = { addr = 0x80148FC0, type = "s8", source = "Voices of the selection sound effects." }
+g_SndVoiceVolume = { addr = 0x80148FC8, type = "s8", size = 0x18, source = "SND_StartVolumeSweep passes [voice] to SsUtAutoVol as the start level and stores the target back" }
+g_SndVoiceTargetVolume = { addr = 0x80148FF8, type = "u8", size = 0x18, source = "SND_StartVolumeSweep passes [voice] as the end level; SND_DecreaseVoiceTargetVolume lowers it clamped at zero" }
+g_MessageState = { addr = 0x801490A0, source = "State of the message window." }
+g_UiWindowStep = { addr = 0x801490A1, type = "u8", source = "Step of the window script." }
+g_MessageChoiceMode = { addr = 0x801490A2, source = "Mode of the message choice." }
+g_MessageChoiceStep = { addr = 0x801490A3, source = "Step of the message choice." }
+g_UiWindowChannel = { addr = 0x801490A4, type = "u16", source = "The window channel record." }
+g_MessageStateTimer = { addr = 0x801490A6, source = "Timer of the message state." }
+g_MessageRequest = { addr = 0x801490A8, type = "u16", source = "Message requested by the answer step." }
+g_MessageChoiceTimer = { addr = 0x801490AA, source = "Timer of the message choice." }
+g_MessageScript = { addr = 0x801490AC, source = "The message script being shown." }
+g_MessageWindow = { addr = 0x801490BC, source = "MenuState block the text, panel and cue handlers share: text_x/text_y cursor, origin_x/origin_y window origin, selection_index choice; UI_DrawGlyph draws at its text_x/text_y" }
+g_MessageChoice = { addr = 0x801490C7, source = "The player's choice in the message window." }
+g_TextVariables = { addr = 0x801490D8, type = "u8", size = 0x200, source = "Text variables." }
+g_AreaCameraAngle = { addr = 0x801492D8, size = 0x8, source = "Angle of the area camera." }
+g_AreaPreviousCameraAngle = { addr = 0x801492E0, type = "SVECTOR", size = 0x8, source = "The previous frame camera angle copied from g_AreaCameraAngle when it changes." }
+g_CameraMatrix = { addr = 0x801492E8, type = "MATRIX", source = "View matrix of the camera." }
+g_AreaScrollTargetX = { addr = 0x80149308, type = "s32", source = "X scroll target of the area." }
+g_AreaTargetCellX = { addr = 0x8014930A, source = "Cell x of the area scroll target." }
+g_AreaScrollTargetY = { addr = 0x8014930C, type = "s32", source = "Y scroll target of the area." }
+g_AreaTargetCellY = { addr = 0x8014930E, source = "Cell y of the area scroll target." }
+g_AreaCameraX = { addr = 0x80149310, source = "X of the camera position." }
+g_AreaCameraY = { addr = 0x80149314, source = "Y of the camera position." }
+g_AreaCameraHeight = { addr = 0x80149318, type = "s32", source = "Height of the area camera." }
+g_AreaCellCodes = { addr = 0x8014931C, type = "u8", source = "Cell codes of the area." }
+g_AreaTileOriginX = { addr = 0x80149320, type = "s16", source = "X origin of the area tiles." }
+g_AreaTileOriginY = { addr = 0x80149322, type = "s16", source = "Y origin of the area tiles." }
+g_AreaGridColCursor = { addr = 0x80149324, type = "s16", source = "Column cursor of the area grid." }
+g_AreaGridRowCursor = { addr = 0x80149326, type = "s16", source = "Row cursor of the area grid." }
+g_AreaCameraOffsetX = { addr = 0x80149328, type = "s16", source = "X offset of the camera." }
+g_AreaCameraOffsetY = { addr = 0x8014932A, type = "s16", source = "Y offset of the camera." }
+g_AreaCameraOffsetZ = { addr = 0x8014932C, type = "s16", source = "Depth offset of the camera." }
+g_AreaCameraOffsetZHalf = { addr = 0x8014932C, type = "u16", alias = true, source = "The camera depth offset read as the unsigned halfword the scena11 camera arms step down; the same cell as g_AreaCameraOffsetZ." }
+g_AreaCameraStep = { addr = 0x8014932E, type = "s16", source = "Step of the area camera." }
+g_AreaCameraHeightStep = { addr = 0x80149330, type = "s16", source = "Height step of the area camera." }
+g_AreaCameraMoving = { addr = 0x80149332, type = "u8", source = "Tells whether the area camera is moving." }
+g_AreaCameraRefreshCount = { addr = 0x80149333, type = "u8", source = "Frames the area camera keeps refreshing." }
+g_AreaCellPrimFreeIndex = { addr = 0x80149334, type = "u16", source = "Area_AllocCellPrimRow advances it past the popped id and Area_FreeCellPrimRow steps it back before storing; 0 means no id is left" }
+g_AreaTileRemainderY = { addr = 0x80149338, type = "s16", source = "Y remainder of the area tiles." }
+g_AreaSceneMode = { addr = 0x8014933B, type = "u8", source = "Mode of the area scene." }
+g_AreaCellPacketCount = { addr = 0x8014933D, source = "Number of words in the cell packet list." }
+g_AreaDrawMode = { addr = 0x8014933E, type = "u8", source = "Draw mode of the area." }
+g_AreaHeightOffsetEnabled = { addr = 0x80149340, source = "Enables the height offset of the area." }
+g_LogoExePath = { addr = 0x80149800, size = 0x14, source = "SYS_StartLogo passes this LOGO executable path to SYS_LoadExe" }
+D_80149814 = { addr = 0x80149814, size = 0x184, source = "The 51 name cells of the executable's export strings, starting at 0x80149814; D_8017F470 holds their pointers." }
+jtbl_80149998 = { addr = 0x80149998, type = "Callback", source = "The switch table of Area_BuildClut: the jump targets of its jr dispatch." }
+D_80149998 = { addr = 0x80149998, size = 0x178, alias = true, source = "View of a record member; the row names the address the link reads, not a second object." }
+g_UiLocalModes = { addr = 0x801499AC, size = 0x54, alias = true, source = "Local UI mode handlers." }
+jtbl_80149A00 = { addr = 0x80149A00, type = "Callback", source = "The switch table of UI_DrawMessageScript: the jump targets of its jr dispatch." }
+g_MessageStateSteps = { addr = 0x80149A5C, size = 0x20, alias = true, source = "Message state handlers." }
+g_MessageChoiceModes = { addr = 0x80149AB4, size = 0x18, alias = true, source = "Message choice handlers." }
+g_MessageSteps = { addr = 0x80149ACC, size = 0x40, alias = true, source = "Message answer step handlers." }
+g_MessagePanelModes = { addr = 0x80149B30, source = "Handlers of the three message panel modes: window, answer list, preset answer list." }
+g_MessageWindowSteps = { addr = 0x80149B3C, source = "Steps of the plain message panel: open, grow, draw, shrink, close." }
+g_MessageChoiceSteps = { addr = 0x80149B50, source = "Steps of the answer list panel: open, grow, draw, shrink, release." }
+g_MessagePresetSteps = { addr = 0x80149B64, source = "Steps of the preset answer list panel: open, grow, draw, shrink, release." }
+jtbl_80149B78 = { addr = 0x80149B78, type = "Callback", source = "The switch table of UI_DrawTextAt: the jump targets of its jr dispatch." }
+jtbl_80149C00 = { addr = 0x80149C00, type = "Callback", source = "The switch table of func_8015B870: the jump targets of its jr dispatch." }
+g_EmiCdSteps = { addr = 0x80149C3C, alias = true, source = "CD step handlers of the EMI loader." }
+g_EmiRingSteps = { addr = 0x80149C60, alias = true, source = "EMI_UpdateStream copies it" }
+jtbl_80149C90 = { addr = 0x80149C90, type = "Callback", source = "The switch table of Char_ApplyMaster: the jump targets of its jr dispatch." }
+jtbl_80149CC8 = { addr = 0x80149CC8, type = "Callback", source = "The switch table of Char_PreviewEquip: the jump targets of its jr dispatch." }
+jtbl_80149CE0 = { addr = 0x80149CE0, type = "Callback", source = "The switch table of Char_ApplyWeapon: the jump targets of its jr dispatch." }
+jtbl_80149DE8 = { addr = 0x80149DE8, type = "Callback", source = "The switch table of Char_ApplyArmor: the jump targets of its jr dispatch." }
+jtbl_80149EC8 = { addr = 0x80149EC8, type = "Callback", source = "The switch table of Char_ApplyAccessories: the jump targets of its jr dispatch." }
+jtbl_80149F28 = { addr = 0x80149F28, type = "Callback", source = "The switch table of Item_GetRecord: the jump targets of its jr dispatch." }
+jtbl_80149F40 = { addr = 0x80149F40, type = "Callback", source = "The switch table of Item_GetEquipability: the jump targets of its jr dispatch." }
+jtbl_80149F58 = { addr = 0x80149F58, type = "Callback", source = "The switch table of Item_GetFlags: the jump targets of its jr dispatch." }
+jtbl_80149F70 = { addr = 0x80149F70, type = "Callback", source = "The switch table of Item_GetDescription: the jump targets of its jr dispatch." }
+jtbl_80149F88 = { addr = 0x80149F88, type = "Callback", source = "The switch table of Item_CanEquip: the jump targets of its jr dispatch." }
+jtbl_8014A008 = { addr = 0x8014A008, type = "Callback", source = "The switch table of _SpuSetVoiceAttr: the jump targets of its jr dispatch." }
+jtbl_8014A028 = { addr = 0x8014A028, type = "Callback", source = "The switch table of _SpuSetVoiceAttr: the jump targets of its jr dispatch." }
+jtbl_8014A084 = { addr = 0x8014A084, type = "Callback", source = "The switch table of SpuSetCommonAttr: the jump targets of its jr dispatch." }
+jtbl_8014A0A4 = { addr = 0x8014A0A4, type = "Callback", source = "The switch table of SpuSetCommonAttr: the jump targets of its jr dispatch." }
+jtbl_8014A0C4 = { addr = 0x8014A0C4, type = "Callback", source = "The switch table of SsSetTickMode: the jump targets of its jr dispatch." }
+jtbl_8014A354 = { addr = 0x8014A354, type = "Callback", source = "The switch table of getintr: the jump targets of its jr dispatch." }
+jtbl_8014A950 = { addr = 0x8014A950, type = "Callback", source = "The switch table of sprintf: the jump targets of its jr dispatch." }
+__main = { addr = 0x8014AA04, type = "func", source = "Entry point of the executable." }
+stup2 = { addr = 0x8014AA0C, type = "func", source = "Clears the BSS and starts the runtime." }
+stup1 = { addr = 0x8014AA30, type = "func", source = "Sets up the stack and heap and starts the game." }
+stup0 = { addr = 0x8014AAAC, type = "func", source = "Startup stub that clears the BSS." }
+SYS_Main = { addr = 0x8014AAC8, type = "func", source = "Runs the main frame loop." }
+SYS_InitRuntime = { addr = 0x8014ACA0, type = "func", source = "Initializes the runtime." }
+SYS_InitHardware = { addr = 0x8014AD28, type = "func", source = "ResetGraph, video mode, geometry, pad, EMI_Init and the trap event" }
+SYS_InitDisplay = { addr = 0x8014AE08, type = "func", source = "Initializes the display." }
+SYS_ResetDisplayFrame = { addr = 0x8014AE9C, type = "func", source = "Clears a render record." }
+SYS_StartLogo = { addr = 0x8014AEE0, type = "func", source = "Loads and runs the logo executable." }
+SYS_UpdateKeyState = { addr = 0x8014AFC0, type = "func", source = "Reads the controller state." }
+SYS_PrepareFrame = { addr = 0x8014B020, type = "func", source = "Rebuilds the active buffer's OT and packet pointers and the arena bounds." }
+SYS_LinkOt = { addr = 0x8014B0F0, type = "func", source = "AddPrims links the eight OT heads to the packet chain" }
+SYS_CaptureDrawTime = { addr = 0x8014B17C, type = "func", source = "Records the time taken to draw." }
+SYS_InitCard = { addr = 0x8014B1A4, type = "func", source = "Opens and enables the seven SwCARD and HwCARD events, InitCARD and StartCARD." }
+SYS_ThreadStopAll = { addr = 0x8014B33C, type = "func", source = "Closes every non-empty scheduler thread before a boot hand-over." }
+SYS_ShowException = { addr = 0x8014B3C4, type = "func", source = "HwCPU EvSpTRAP handler, register dump on the debug screen" }
+SYS_ThreadInit = { addr = 0x8014B6B4, type = "func", source = "Sets up the scheduler threads." }
+SYS_ThreadRun = { addr = 0x8014B73C, type = "func", source = "Runs the scheduler threads." }
+SYS_ThreadRegister = { addr = 0x8014B854, type = "func", source = "Stores a callback in one thread and marks it SYS_THREAD_OPEN." }
+SYS_ThreadWait = { addr = 0x8014B87C, type = "func", source = "Arms the current thread's countdown and forces a switch." }
+SYS_ThreadExit = { addr = 0x8014B8B0, type = "func", source = "Empties the current thread, closes it, switches away." }
+SYS_ThreadClose = { addr = 0x8014B900, type = "func", source = "Empties one thread and closes it." }
+SYS_ThreadReplace = { addr = 0x8014B954, type = "func", source = "Replaces the running callback." }
+SYS_ClearCurrentThread = { addr = 0x8014BA04, type = "func", source = "Clears the current thread work area at offsets 0x60 through 0x7F." }
+Area_DrawScene = { addr = 0x8014BA54, type = "func", source = "Draws the area scene." }
+Area_SwapGridActors = { addr = 0x8014BAB8, type = "func", source = "Swaps two objects of the draw list." }
+Area_SwapActors = { addr = 0x8014BAEC, type = "func", source = "Swaps two actors of the draw list." }
+Area_DrawActors = { addr = 0x8014BB20, type = "func", source = "Sorts and draws the area actors." }
+Area_DrawGridActors = { addr = 0x8014BC70, type = "func", source = "Draws the queued grid actors per scene layer, merged by depth with the cell packets." }
+MATH_SwapVectors = { addr = 0x8014C47C, type = "func", source = "swaps two 3-word vectors" }
+Area_DrawObjectSprite = { addr = 0x8014C4D4, type = "func", source = "Draws the sprite cells of an actor." }
+Area_RoundSpriteCoordinate = { addr = 0x8014CE48, type = "func", source = "Returns pair >> 16, rounded up by 1 when step is not negative and the low halfword of pair is nonzero." }
+Area_BuildClut = { addr = 0x8014CE78, type = "func", source = "Builds the CLUT of an actor sprite." }
+Area_DrawSpriteCell = { addr = 0x8014CF9C, type = "func", source = "Draws one plain sprite cell." }
+Area_SetDrawMode = { addr = 0x8014D260, type = "func", source = "Sets the draw mode of the actor." }
+Area_AddGridActor = { addr = 0x8014D290, type = "func", source = "Adds the current task actor to the draw list: derives its depth sort key from the grid position (or from the x, y or z position by draw mode), retires it when the key leaves the ordering table, projects its position through the GTE, stores the screen pair at +0x2E and +0x30 and appends it to the 40-entry draw list." }
+Area_AddActor = { addr = 0x8014D4E0, type = "func", source = "Adds an actor to the draw list." }
+Actor_CopyScriptRecord = { addr = 0x8014D54C, type = "func", source = "Copies a script entry to the staging buffer." }
+Actor_SwitchScript = { addr = 0x8014D5F0, type = "func", source = "Switches the actor to another script." }
+Actor_StageScript = { addr = 0x8014D664, type = "func", source = "Stages a script record for the actor." }
+Actor_SelectScript = { addr = 0x8014D6B8, type = "func", source = "Selects a script for the actor." }
+Actor_BeginScript = { addr = 0x8014D6DC, type = "func", source = "Selects the stream entry for a selector and re-arms the staged position." }
+Actor_RequestScript = { addr = 0x8014D8D4, type = "func", source = "Requests a script for the actor unless it is already selected." }
+Actor_SeekScript = { addr = 0x8014D910, type = "func", source = "Seeks to the next script entry." }
+Actor_StepAnimLoop = { addr = 0x8014D978, type = "func", source = "Counts the step delay at +0x4A down and, at zero, moves the animation stream to its next step: wraps to step 0 at the end or follows a jump step (delay >= 0x80), returning 1 on a wrap or jump, then stages the step." }
+Actor_StepAnimReverse = { addr = 0x8014DA24, type = "func", source = "Plays the animation stream backwards: counts the delay at +0x4A down, at step 0 wraps to the end and returns 1, ignores jump steps, stages the step before the current position." }
+Actor_StepAnimOnce = { addr = 0x8014DAEC, type = "func", source = "As the looping step function, but at the end of the stream it sets +0x4A to 1 and returns 1 without staging, so the last frame holds; callers wait on it for a one-shot animation to end." }
+Actor_StageAnimStep = { addr = 0x8014DB98, type = "func", source = "Stages the next two-byte step of the animation stream at +0x50: the delay byte to +0x4A, the frame byte through the frame table at +0x54 to +0x5A, then +0x58 += 2. Called by the loop and one-shot step functions and Actor_SeekScript." }
+Actor_SelectSprite = { addr = 0x8014DC08, type = "func", source = "Selects a sprite record of the actor: its sheet, animation and mirror." }
+Area_SelectSceneRecord = { addr = 0x8014DD3C, type = "func", source = "Finds a scene record by id." }
+Actor_ReadValue = { addr = 0x8014DFE8, type = "func", source = "Reads a field record value for the actor." }
+SYS_ReadCd = { addr = 0x8014E0A8, type = "func", source = "Reads sectors from the CD." }
+SYS_LoadExe = { addr = 0x8014E0FC, type = "func", source = "Loads the logo executable from the CD." }
+GFX_UploadPalette = { addr = 0x8014E22C, type = "func", source = "Uploads the palette to video memory when it changed." }
+GFX_ResetPalette = { addr = 0x8014E284, type = "func", source = "Resets the palette." }
+GFX_CopyPalette = { addr = 0x8014E3A0, type = "func", source = "Copies a palette slot." }
+GFX_ResetPaletteFades = { addr = 0x8014E3F4, type = "func", source = "Resets the palette fades." }
+GFX_FreePaletteSlot = { addr = 0x8014E484, type = "func", source = "Frees a palette slot." }
+GFX_FreePaletteSlotOwner = { addr = 0x8014E4BC, type = "func", source = "Frees the palette slots of an owner." }
+GFX_FreeAllPaletteSlots = { addr = 0x8014E528, type = "func", source = "Frees all palette slots." }
+GFX_ClearRect = { addr = 0x8014E564, type = "func", source = "ClearImage of one rectangle - SYS_InitRuntime - SYS_StartLogo and SYS_StartFrontend call it" }
+GFX_AddPrim = { addr = 0x8014E5A0, type = "func", source = "Adds a primitive to the ordering table." }
+INPUT_GetRepeatedButtons = { addr = 0x8014E640, type = "func", source = "Input repeat decoder." }
+GFX_UpdateTransferQueue = { addr = 0x8014E6D0, type = "func", source = "Runs the queued video memory transfers." }
+GFX_ExpandRgb555 = { addr = 0x8014E7F8, type = "func", source = "Expands RGB555 pixels and uploads them." }
+GFX_DecodeLzss = { addr = 0x8014E8FC, type = "func", source = "Decodes an LZSS stream and uploads it." }
+SYS_StartFrontend = { addr = 0x8014EA80, type = "func", source = "Starts the frontend." }
+SYS_EnterFrontend = { addr = 0x8014EC64, type = "func", source = "Loads the frontend overlay." }
+UI_SetMode = { addr = 0x8014ECAC, type = "func", source = "Sets the UI mode." }
+UI_SetModeWait = { addr = 0x8014ECEC, type = "func", source = "Sets the UI mode and waits for the window effect." }
+UI_DispatchLocalMode = { addr = 0x8014ED6C, type = "func", source = "Runs the handler of the current UI mode." }
+GFX_FadeToBlack = { addr = 0x8014EDF0, type = "func", source = "Fades the screen to black at the normal speed (scheduler thread)." }
+GFX_FadeFromBlack = { addr = 0x8014EE18, type = "func", source = "Fades the screen back in from black at the normal speed (scheduler thread)." }
+GFX_FadeToBlackFast = { addr = 0x8014EE40, type = "func", source = "Fades the screen to black at the fast speed (scheduler thread)." }
+GFX_FadeFromBlackFast = { addr = 0x8014EE68, type = "func", source = "Fades the screen back in from black at the fast speed (scheduler thread)." }
+GFX_FadeToBlackSlow = { addr = 0x8014EE90, type = "func", source = "Fades the screen to black at the slow speed (scheduler thread)." }
+GFX_FadeFromBlackSlow = { addr = 0x8014EEB8, type = "func", source = "Fades the screen back in from black at the slow speed (scheduler thread)." }
+GFX_FadeToBlackFront = { addr = 0x8014EEE0, type = "func", source = "Screen effect 6: fades the screen to black on the front effect layer." }
+GFX_FadeFromBlackFront = { addr = 0x8014EF08, type = "func", source = "Screen effect 7: fades the screen back from black on the front effect layer." }
+GFX_FadeToWhite = { addr = 0x8014EF30, type = "func", source = "Fades the screen to white at the normal speed (scheduler thread)." }
+GFX_FadeFromWhite = { addr = 0x8014EF58, type = "func", source = "Fades the screen back in from white at the normal speed (scheduler thread)." }
+GFX_ZoomToBlackSlow = { addr = 0x8014EF80, type = "func", source = "Screen effect 10: fades to black at the slow rate while the camera spins and pulls in." }
+GFX_ZoomFromBlackSlow = { addr = 0x8014F024, type = "func", source = "Screen effect 11: fades in from black at the slow rate while the camera spins back and pulls out." }
+GFX_FadeToBlackSlower = { addr = 0x8014F1AC, type = "func", source = "Fades the screen to black at the slower speed (scheduler thread)." }
+GFX_FadeFromBlackSlower = { addr = 0x8014F1D4, type = "func", source = "Fades the screen back in from black at the slower speed (scheduler thread)." }
+GFX_FadeToWhiteSlower = { addr = 0x8014F1FC, type = "func", source = "Fades the screen to white at the slower speed (scheduler thread)." }
+GFX_FadeFromWhiteSlower = { addr = 0x8014F224, type = "func", source = "Fades the screen back in from white at the slower speed (scheduler thread)." }
+GFX_ZoomToBlackSlower = { addr = 0x8014F24C, type = "func", source = "Screen effect 17: fades to black at the slower rate while the camera spins and pulls in." }
+GFX_FadeToBlackSlowest = { addr = 0x8014F438, type = "func", source = "Fades the screen to black at the slowest speed (scheduler thread)." }
+GFX_SpinToBlack = { addr = 0x8014F460, type = "func", source = "Screen effect 20: fades to black while the camera rolls, then clears the tint bytes." }
+GFX_RunBlackFade = { addr = 0x8014F514, type = "func", source = "Fades the screen to black." }
+GFX_RunWhiteFade = { addr = 0x8014F5F0, type = "func", source = "Fades the screen to white." }
+GFX_UpdateScreenFade = { addr = 0x8014F704, type = "func", source = "Draws one step of a screen fade." }
+UI_DrawText = { addr = 0x8014F800, type = "func", source = "Draws a text record." }
+UI_DrawTextGlyphs = { addr = 0x8014F84C, type = "func", source = "Draws a text record's control bytes and glyphs through the shared sprite cursor." }
+UI_AddTextDrawMode = { addr = 0x8014FC00, type = "func", source = "Adds the draw mode used by the text and glyph renderers." }
+UI_DrawTextString = { addr = 0x8014FC90, type = "func", source = "Draws a glyph string." }
+UI_DrawAsciiString = { addr = 0x8014FF0C, type = "func", source = "Draws an ASCII string." }
+UI_DrawGlyphString = { addr = 0x80150098, type = "func", source = "Draws a glyph string." }
+SYS_CopyString = { addr = 0x801501E4, type = "func", source = "Bounded NUL-terminated copy - battle copies item and character names through it." }
+Message_StartAreaMessage = { addr = 0x80150224, type = "func", source = "Resolves the area message bank index into the shared handle pair - Fairy_GrantGift/RollReward call it." }
+Message_Request = { addr = 0x80150284, type = "func", source = "Resolves an area resource into the shared handle pair and resets the front-end state." }
+Message_GetText = { addr = 0x801502D0, type = "func", source = "Returns the text of a resource id." }
+UI_ResetMessage = { addr = 0x80150304, type = "func", source = "Resets the front-end selection state and requests menu 0 mode 0." }
+UI_UpdateLayout = { addr = 0x801503E0, type = "func", source = "Rebuilds the layout of the message window." }
+UI_DrawMessageScript = { addr = 0x80150470, type = "func", source = "Draws a message script." }
+Message_DispatchState = { addr = 0x801507BC, type = "func", source = "Runs the handler of the message window state." }
+Message_RunScript = { addr = 0x8015083C, type = "func", source = "Runs the message script at the cursor until an opcode ends the step, and sets the next message state." }
+UI_TickChoiceTimer = { addr = 0x80150E14, type = "func", source = "Counts the message state timer down and clears the state at zero." }
+UI_UpdateChoiceInput = { addr = 0x80151210, type = "func", source = "Handles the choice input and moves the choice cursor." }
+Message_DispatchAnswerStep = { addr = 0x8015136C, type = "func", source = "Runs the current answer step of the message." }
+Message_RestartRequest = { addr = 0x8015142C, type = "func", source = "Entry 6 of the message state table D_80149A7C, after Message_DispatchAnswerStep: when the first menu panel task is in state 2, sets g_MessageStateTimer to 0x10, restarts the request with Message_StartRequest and toggles FRONTEND_FLAG_SELECTION in g_UiWindowChannel." }
+Message_StartRequest = { addr = 0x801514D0, type = "func", source = "Starts the requested message." }
+UI_ClosePanel = { addr = 0x801515A8, type = "func", source = "Clears the panel index - arms panel 1 mode 0 and advances the front-end step." }
+UI_ScrollChoice = { addr = 0x80151628, type = "func", source = "Moves the choice cursor." }
+Message_DispatchChoiceMode = { addr = 0x801518F4, type = "func", source = "Runs the handler of the message choice mode." }
+UI_UpdateChoice = { addr = 0x8015196C, type = "func", source = "Runs the current message choice step." }
+UI_NextChoice = { addr = 0x801519F8, type = "func", source = "Moves the message choice list one entry on: advances g_MessageChoiceStep when the scroll countdown reaches -2, else steps the countdown by -2. Called by UI_UpdateChoice." }
+UI_PrevChoice = { addr = 0x80151A48, type = "func", source = "Moves the message choice list one entry back: lowers g_MessageChoiceStep when the scroll countdown reaches 2, else steps the countdown by 2. Called by UI_UpdateChoice." }
+UI_DrawGlyph = { addr = 0x80151E24, type = "func", source = "Draws one text glyph." }
+Message_DispatchStep = { addr = 0x801522F8, type = "func", source = "Runs a step of the message answer table." }
+Message_SetAnswerMessage5 = { addr = 0x80152510, type = "func", source = "Sets the message that answers the menu choice." }
+Message_SetAnswerMessage6 = { addr = 0x8015253C, type = "func", source = "Sets the message that answers the menu choice." }
+Message_SetAnswerMessage7 = { addr = 0x80152568, type = "func", source = "Sets the message that answers the menu choice." }
+Message_SetAnswerMessage8 = { addr = 0x80152594, type = "func", source = "Sets the message that answers the menu choice." }
+Message_SetAnswerMessage9 = { addr = 0x801525C0, type = "func", source = "Sets the message that answers the menu choice." }
+Message_SetAnswerMessage10 = { addr = 0x801525EC, type = "func", source = "Sets the message that answers the menu choice." }
+Message_SetAnswerMessage11 = { addr = 0x80152618, type = "func", source = "Sets the message that answers the menu choice." }
+Message_SetAnswerMessage12 = { addr = 0x80152644, type = "func", source = "Sets the message that answers the menu choice." }
+Message_SetAnswerMessage13 = { addr = 0x80152670, type = "func", source = "Sets the message that answers the menu choice." }
+Message_SetAnswerMessage14 = { addr = 0x8015269C, type = "func", source = "Sets the message that answers the menu choice." }
+Message_SetAnswerMessage15 = { addr = 0x801526C8, type = "func", source = "Sets the message that answers the menu choice." }
+UI_DrawWaitMarker = { addr = 0x801526F4, type = "func", source = "Draws the message wait marker." }
+Area_UpdateCamera = { addr = 0x801527E4, type = "func", source = "Steps the area camera." }
+Area_LoadCellColumnPrev = { addr = 0x80152C9C, type = "func", source = "Streams the cell column before the first one when the camera passes -0x200." }
+Area_LoadCellColumnNext = { addr = 0x80152D9C, type = "func", source = "Streams the cell column past the last one into the ring when the camera passes +0x200." }
+Area_LoadCellRowsPrev = { addr = 0x80152E94, type = "func", source = "Streams the two cell rows before the first one when the vertical remainder passes -0x200." }
+Area_LoadCellRowsNext = { addr = 0x80152FB0, type = "func", source = "Streams the two cell rows past the last one when the vertical remainder passes +0x200." }
+Area_DrawCellRing = { addr = 0x801530D0, type = "func", source = "Projects the visible window of the tile ring, builds each cell's packet pair and links it into the ordering table by depth." }
+Area_ResetCellPacketLists = { addr = 0x80153CC4, type = "func", source = "Empties the cell packet lists of the current frame buffer." }
+Area_SortCellPackets = { addr = 0x80153D34, type = "func", source = "Sorts the cell packet words by their depth halfword." }
+Area_InitMapRenderer = { addr = 0x80153DE8, type = "func", source = "Initializes the field map renderer: sets the geometry screen, offset and back color, resets the 0x400 double FT4 primitives, seeds the camera and scroll state from the scroll target, clears the 0x38 by 0x1C cell table, fills the identity draw order and builds the first view." }
+Area_GetCell = { addr = 0x801541C0, type = "func", source = "Returns the area cell at panel coordinates." }
+Area_UploadCell = { addr = 0x80154294, type = "func", source = "Uploads an area cell." }
+Area_ApplyMapBundleObjects = { addr = 0x80154438, type = "func", source = "Applies each area map bundle object record to its selected map row." }
+Area_AllocCellPrimRow = { addr = 0x8015456C, type = "func", source = "Allocates a primitive row for an area cell." }
+Area_RequestCellRows = { addr = 0x801545B4, type = "func", source = "Queues the rows of an area cell." }
+Area_FreeCellPrimRow = { addr = 0x80154664, type = "func", source = "Frees a primitive row of the area cells." }
+Area_RefreshCellGrid = { addr = 0x80154698, type = "func", source = "Refreshes the area cell grid." }
+Area_SampleHeight = { addr = 0x8015477C, type = "func", source = "Returns the ground height at a point." }
+Area_GetHeight = { addr = 0x80154ABC, type = "func", source = "the body returns g_AreaMapBundle.height" }
+Area_EnableHeightOffset = { addr = 0x80154ED0, type = "func", source = "Enables the height offset of the active mode." }
+Area_ReadHeight = { addr = 0x80154F28, type = "func", source = "Reads the height of a point with the mode height offset." }
+Area_ReadStepHeight = { addr = 0x80154F78, type = "func", source = "Reads the height of a step." }
+Area_AdvanceScroll = { addr = 0x80154FD8, type = "func", source = "Records the sampled value and advances the vertical scroll accumulator." }
+Area_StoreHeight = { addr = 0x80155038, type = "func", source = "Stores a value in the map bundle at the scaled index." }
+Area_SetCellPalette = { addr = 0x8015507C, type = "func", source = "Sets the palette of an area cell." }
+Area_ClearCellPalette = { addr = 0x80155218, type = "func", source = "Clears the palette of an area cell." }
+Area_ClearCell = { addr = 0x801553B8, type = "func", source = "Clears an area cell." }
+Area_ApplyTileToQuad = { addr = 0x80155560, type = "func", source = "Sets the texture of the quad prim from the tile word part_word: reads the tile rectangle (table or inline), sets the four u, v corners with the flip and rotate bits of the word, and stores the palette and texture page." }
+Area_GetCellId = { addr = 0x801558F0, type = "func", source = "Returns the id of a probed area cell." }
+Area_FindCellQuad = { addr = 0x801559AC, type = "func", source = "Returns the pool record for the current display buffer - or 0 when the cell has no live entry." }
+Area_AddCellPrim = { addr = 0x80155A08, type = "func", source = "Adds a primitive to an area cell." }
+Area_UpdatePaletteTint = { addr = 0x80155AF8, type = "func", source = "Updates the tint of the area palette." }
+Area_DrawCellLayer = { addr = 0x80155B40, type = "func", source = "Draws a layer of area cells." }
+Area_AddScenePrim = { addr = 0x80155D88, type = "func", source = "Chooses the draw mode and queues the scene packet." }
+Area_TestCondition = { addr = 0x80155E7C, type = "func", source = "Resolves the class and polarity of a palette tint request." }
+Area_DrawPartQuads = { addr = 0x80156000, type = "func", source = "Projects each five-record part in the list and appends its textured quadrangle." }
+Area_DrawQuad = { addr = 0x80156228, type = "func", source = "Draws the textured quads of a scene part." }
+Area_DrawPartAnimation = { addr = 0x80156C18, type = "func", source = "Draws the parts of a scene record." }
+Area_DrawCellAtPoint = { addr = 0x80156E00, type = "func", source = "probes the bundle cell grid at a world point, rotated by the grid cursors, and draws the tile code's cell quad" }
+Area_DrawCellQuad = { addr = 0x80156ED4, type = "func", source = "Copies the selected pool records into one flat quad and appends it." }
+Area_DrawGouraudQuads = { addr = 0x8015707C, type = "func", source = "Draws one Gouraud-shaded quadrangle per eight-record part." }
+Area_DrawParts = { addr = 0x80157358, type = "func", source = "Draws the textured quads in part_list through the GTE." }
+Area_DrawSceneSprite = { addr = 0x801579A8, type = "func", source = "Draws one scene record's sprite as an FT4 quad." }
+Area_DrawCellSides = { addr = 0x80157CE4, type = "func", source = "draws one or two vertical side quads of a map cell, with the heights of the lower neighbour" }
+Area_RunBundleOpcodes = { addr = 0x80157F98, type = "func", source = "Runs the opcodes of the area bundle." }
+Area_CyclePalette = { addr = 0x801580A4, type = "func", source = "Copies a palette record to the graphics palette." }
+Area_ReadTintRecord = { addr = 0x801581B4, type = "func", source = "Reads a palette tint record." }
+Area_ApplyPaletteTint = { addr = 0x8015822C, type = "func", source = "Offsets the selected palette planes by the signed RGB deltas." }
+Area_WriteCellRecord = { addr = 0x80158400, type = "func", source = "Writes a cell record of the area bundle." }
+Area_RunBundleRecords = { addr = 0x801584A4, type = "func", source = "Runs the records of the area bundle." }
+Area_AnimateClut = { addr = 0x80158550, type = "func", source = "Copies the current frame of an area CLUT animation into the palette." }
+Area_DrawGouraudQuad = { addr = 0x8015864C, type = "func", source = "Draws a Gouraud-shaded quadrangle from the record when inside the draw area." }
+Area_IndexCells = { addr = 0x80158B24, type = "func", source = "Maps the area map records to cells." }
+Menu_UpdatePanelTasks = { addr = 0x80158C80, type = "func", source = "Runs the menu panel tasks." }
+Menu_OpenPanelTask = { addr = 0x80158DB8, type = "func", source = "Arms a menu panel task." }
+Menu_ClearPanel = { addr = 0x80158E20, type = "func", source = "existing proposal: clears the menu panel" }
+Menu_ResetPanelTasks = { addr = 0x80158E50, type = "func", source = "SYS_StartFrontend clears the 22 g_MenuPanelTasks slots and g_MenuPanelMode" }
+Menu_UpdateMessagePanel = { addr = 0x80158F80, type = "func", source = "Panel handler 0 of g_MenuPanels, the message window panel: runs the handler of its mode from its table." }
+Menu_UpdateMessageWindow = { addr = 0x80158FE0, type = "func", source = "Mode 0 of the message panel, the plain window: runs the step of its state from its table." }
+Menu_OpenMessagePanel = { addr = 0x80159050, type = "func", source = "State 0 of the plain message panel: arms the size, the slide targets and the grow steps from the origin tables." }
+Menu_GrowMessagePanel = { addr = 0x8015920C, type = "func", source = "State 1 of every message panel mode: grows the box toward its size and draws it." }
+Menu_DrawMessagePanel = { addr = 0x80159510, type = "func", source = "State 2 of the plain message panel: draws the box and updates the layout." }
+Menu_ShrinkMessagePanel = { addr = 0x80159580, type = "func", source = "State 3 of every message panel mode: shrinks the box toward its centre and draws it." }
+Menu_ClosePanel = { addr = 0x801598B8, type = "func", source = "Clears the menu panel mode and resets the panel task when the layout update finishes." }
+Menu_UpdateMessageChoice = { addr = 0x801598F4, type = "func", source = "Mode 1 of the message panel, the answer list laid out from the message text: runs the step of its state from its table." }
+Menu_OpenMessageChoice = { addr = 0x80159964, type = "func", source = "State 0 of the answer list panel: lays out the rows from the message text and steps the panel." }
+Menu_DrawMessageChoice = { addr = 0x8015999C, type = "func", source = "State 2 of the answer list panel: draws the box, the text rows and the cursor." }
+Menu_ReleaseMessagePanel = { addr = 0x80159A00, type = "func", source = "State 4 of the answer list panels: clears the panel task." }
+Menu_UpdateMessagePreset = { addr = 0x80159A20, type = "func", source = "Mode 2 of the message panel, the answer list at a preset position: runs the step of its state from its table." }
+Menu_OpenMessagePreset = { addr = 0x80159A90, type = "func", source = "State 0 of the preset answer list panel: sets the position from the preset table and the grow steps." }
+Menu_DrawMessagePreset = { addr = 0x80159B38, type = "func", source = "State 2 of the preset answer list panel: draws the box, the rows and the cursor." }
+UI_DrawPanelBox = { addr = 0x80159B9C, type = "func", source = "Draws a window panel box at x, y of w by h tiles: a dark translucent tile, the window texture in the current style over it, a grey outline and a darker line outside each edge." }
+UI_DrawBoxOutline = { addr = 0x80159FA0, type = "func", source = "Draws the grey outline of the box at x, y of width by height: a closed line strip one pixel outside it, then its left edge again as a line." }
+Menu_DrawMessagePresetRows = { addr = 0x8015A098, type = "func", source = "Draws the text rows of the preset answer list panel at the preset row positions." }
+UI_DrawTextRows = { addr = 0x8015A170, type = "func", source = "Draws each row of the message window up to g_MessageWindow.last_row through UI_DrawTextAt, carrying the text cursor from row to row." }
+Menu_DrawMessagePresetCursor = { addr = 0x8015A1D8, type = "func", source = "Draws the cursor beside the selected row of the preset answer list panel." }
+Menu_DrawMessageChoiceCursor = { addr = 0x8015A264, type = "func", source = "Draws the cursor beside the selected row of the answer list panel." }
+UI_DrawLine = { addr = 0x8015A2B0, type = "func", source = "Draws a line." }
+UI_DrawTextAt = { addr = 0x8015A344, type = "func", source = "Draws message text at a position." }
+Menu_LayoutMessageChoice = { addr = 0x8015A554, type = "func", source = "Counts the rows of the message text and sizes the answer list panel from them." }
+Area_UpdateParty = { addr = 0x8015A758, type = "func", source = "Runs the party in the area." }
+Actor_ProjectForDraw = { addr = 0x8015A944, type = "func", source = "Sets the actor draw layer, projects its position, and registers it when on screen." }
+SYS_InitScratchpad = { addr = 0x8015AC8C, type = "func", source = "comment: initializes the scratch work record for a new panel: marks it active, sets the mode (+0x24) and state (+0x48) bytes, seeds the +0x40/+0x44 scroll pair " }
+Actor_BuildTransformMatrix = { addr = 0x8015B410, type = "func", source = "Builds a matrix from the current actor position and rotation." }
+Area_ApplyCameraMatrix = { addr = 0x8015B4B0, type = "func", source = "composes a matrix with the camera matrix and loads it into the GTE" }
+Actor_FindScriptSlot = { addr = 0x8015B4F4, type = "func", source = "Resolves a script's actor reference to a slot: without bit 0x80 the low six bits plus 30, with it the code-th actor record whose first byte is 10. Called by Actor_ReadValue." }
+SYS_SetFlag = { addr = 0x8015B580, type = "func", source = "Sets a flag bit." }
+SYS_ClearFlag = { addr = 0x8015B5A8, type = "func", source = "Clears a flag bit." }
+SYS_TestFlag = { addr = 0x8015B5D4, type = "func", source = "Tests a flag bit." }
+SYS_ToggleFlag = { addr = 0x8015B5F4, type = "func", source = "Toggles a flag bit." }
+Game_IsScenarioEqual = { addr = 0x8015B61C, type = "func", source = "Tests whether the scenario equals a value." }
+Game_IsAreaEqual = { addr = 0x8015B644, type = "func", source = "Tests whether the area equals a value." }
+Game_TestSceneFlag = { addr = 0x8015B66C, type = "func", source = "Tests a scene flag." }
+Game_IsLeaderEqual = { addr = 0x8015B73C, type = "func", source = "script test: the record byte equals the party leader's character id" }
+Game_TestEventFlag = { addr = 0x8015B764, type = "func", source = "Tests a scene event flag." }
+Game_HasVitalItem = { addr = 0x8015B798, type = "func", source = "Tests whether a vital item is held." }
+Game_IsScenarioAtMost = { addr = 0x8015B7C4, type = "func", source = "Tests whether the scenario is at least a value." }
+func_8015B83C = { addr = 0x8015B83C, type = "func", source = "Entry of the script condition table data_8018214C: tests bit **cursor of the D_80145548 mask, whose owner is not proven." }
+Game_IsScriptVar0Equal = { addr = 0x8015B98C, type = "func", source = "Tests whether a script variable equals a value." }
+Game_IsScriptVar1Equal = { addr = 0x8015B9B4, type = "func", source = "Tests whether a script variable equals a value." }
+Game_IsScriptVar2Equal = { addr = 0x8015B9DC, type = "func", source = "Tests whether a script variable equals a value." }
+Game_IsScriptVar3Equal = { addr = 0x8015BA04, type = "func", source = "Tests whether a script variable equals a value." }
+Game_SetScriptVar = { addr = 0x8015BA2C, type = "func", source = "Sets a script variable." }
+Game_IsScriptVarEqual = { addr = 0x8015BA50, type = "func", source = "Compares a script variable with a value." }
+Game_IncScriptVar = { addr = 0x8015BA84, type = "func", source = "Increments a script variable." }
+Actor_DispatchSelectorScript = { addr = 0x8015BAC4, type = "func", source = "Dispatches the actor script selected by the selector, task mode, and current actor context." }
+Area_TurnCameraX = { addr = 0x8015BBA4, type = "func", source = "Turns the camera around the x axis." }
+Area_StepCameraX = { addr = 0x8015BC14, type = "func", source = "Steps the camera x angle." }
+Area_TurnCameraY = { addr = 0x8015BCA4, type = "func", source = "Turns the camera around the y axis." }
+Area_StepCameraY = { addr = 0x8015BD14, type = "func", source = "Steps the camera y angle." }
+Area_TurnCameraZ = { addr = 0x8015BDA0, type = "func", source = "Turns the camera around the z axis." }
+Area_StepCameraZ = { addr = 0x8015BE10, type = "func", source = "Steps the camera z angle." }
+Area_StepCameraAngle = { addr = 0x8015BEA0, type = "func", source = "Turns the camera angle over a number of frames." }
+Game_ClearScriptActive = { addr = 0x8015C058, type = "func", source = "Marks the script as inactive." }
+Game_SetScriptActive = { addr = 0x8015C088, type = "func", source = "Marks the script as active." }
+Party_ShowBattlers = { addr = 0x8015C0B8, type = "func", source = "Shows the party battlers." }
+Party_HideBattlers = { addr = 0x8015C100, type = "func", source = "Hides the party battlers." }
+Actor_GetOwner = { addr = 0x8015C148, type = "func", source = "Returns the kind of the current task." }
+Actor_Run = { addr = 0x8015C264, type = "func", source = "Runs the handler of the actor." }
+Actor_InitMovement = { addr = 0x8015C2D4, type = "func", source = "Seeds the hold counter and velocity dividers from the handler entry - or publishes the direction into the scroll globals." }
+Actor_StepMovement = { addr = 0x8015C540, type = "func", source = "Moves the actor and requests the next script at the end of the route." }
+Actor_StepScroll = { addr = 0x8015C750, type = "func", source = "Steps the actor scroll." }
+Actor_RiseToGround = { addr = 0x8015C940, type = "func", source = "Advances the speed accumulator and raises the distance counter to the measured distance." }
+Actor_ApplyVelocity = { addr = 0x8015C9CC, type = "func", source = "Moves an actor by its velocity." }
+Actor_FindFreeField = { addr = 0x8015CA48, type = "func", source = "Returns the index of the first g_Actors entry whose first byte is 0, or 0xFF when all ACTOR_COUNT are in use." }
+Actor_ReadState = { addr = 0x8015CA9C, type = "func", source = "Reads the script state of an actor." }
+Actor_ClaimSlot = { addr = 0x8015CB18, type = "func", source = "claims the free record slot, fills its header, id, step and halfword fields; comment says the same" }
+Actor_SpawnHelper = { addr = 0x8015CC00, type = "func", source = "Creates a helper actor from its script id, step, selection and position." }
+SND_Init = { addr = 0x8015CD00, type = "func", source = "Initializes the sound system." }
+SND_Start = { addr = 0x8015CE70, type = "func", source = "Starts the sound system." }
+SND_Exit = { addr = 0x8015CEBC, type = "func", source = "Shuts down the sound system." }
+SND_UpdateVoiceStatus = { addr = 0x8015D044, type = "func", source = "Updates the status of the sound voices." }
+SND_DecreaseVoiceTargetVolume = { addr = 0x8015D104, type = "func", source = "Subtracts from a voice target volume and clamps it at zero." }
+SND_LowerVoiceLevel = { addr = 0x8015D148, type = "func", source = "Lowers a voice level." }
+SND_RaiseVoiceLevel = { addr = 0x8015D1BC, type = "func", source = "Raises a voice level." }
+SND_StartVolumeSweep = { addr = 0x8015D228, type = "func", source = "starts a volume sweep from g_SndVoiceVolume to g_SndVoiceTargetVolume on the voice" }
+SND_StartPanSweep = { addr = 0x8015D290, type = "func", source = "Starts a pan sweep on a voice." }
+SND_PlaySequence = { addr = 0x8015D300, type = "func", source = "Starts the BGM's effect voice through SsSepPlay after the volume/duck setup." }
+SND_StopSequence = { addr = 0x8015D404, type = "func", source = "Stops a sound sequence." }
+SND_SetSequenceVolume = { addr = 0x8015D438, type = "func", source = "Sets the volume of a sound sequence." }
+SND_FadeInSequence = { addr = 0x8015D49C, type = "func", source = "Pins the SsSepVol pair and forwards the effect group and id to SsSepSetCrescendo." }
+SND_StartDecrescendo = { addr = 0x8015D4F8, type = "func", source = "Starts a decrescendo on a sound sequence." }
+SND_FadeOutSequence = { addr = 0x8015D554, type = "func", source = "Fades out a sound sequence." }
+SND_StopAllSequences = { addr = 0x8015D5D8, type = "func", source = "Stops all four voices of every live selection effect." }
+SND_TestEffectVoicesBusy = { addr = 0x8015D660, type = "func", source = "Returns 1 when no effect voice is free; otherwise returns 0 and writes the entry index and seq of the first voice of the sep table whose seq slot reports end-of-sequence." }
+SND_QueueSelectionSE = { addr = 0x8015D71C, type = "func", source = "Marks the four effect voice slots free and queues the SE through SND_PlaySE." }
+SND_QueueSeVolume = { addr = 0x8015D7C8, type = "func", source = "Queues a sound SE with its volume." }
+SND_QueueProximitySE = { addr = 0x8015DC08, type = "func", source = "Plays the proximity SE of the area." }
+SND_PlaySE = { addr = 0x8015DF18, type = "func", source = "Dispatches a SE's bank and record, updates the interpolated channel values and keys the requested voices." }
+SND_ReadSeBank0 = { addr = 0x8015E994, type = "func", source = "Reads a SE of sound bank 0 into voice slots (entry 0 of g_SndSeReaders)." }
+SND_ReadSeBank1 = { addr = 0x8015EFAC, type = "func", source = "Reads a SE of sound bank 1 into voice slots (entry 1 of g_SndSeReaders)." }
+SND_ReadSeBank2 = { addr = 0x8015F5C8, type = "func", source = "Reads a SE of sound bank 2 into voice slots (entry 2 of g_SndSeReaders)." }
+SND_ReadSeBank3 = { addr = 0x8015FBE4, type = "func", source = "Reads a SE of sound bank 3 into voice slots (entry 3 of g_SndSeReaders)." }
+SND_ReadSeBank4 = { addr = 0x80160200, type = "func", source = "Reads a SE of sound bank 4 into voice slots (entry 4 of g_SndSeReaders)." }
+SND_ReadSeBank5 = { addr = 0x8016081C, type = "func", source = "Reads a SE of sound bank 5 into voice slots (entry 5 of g_SndSeReaders)." }
+SND_ReadSeBank6 = { addr = 0x80160E38, type = "func", source = "Reads a SE of sound bank 6 into voice slots (entry 6 of g_SndSeReaders)." }
+SND_SetBankLayout = { addr = 0x80161808, type = "func", source = "Lays the seven sound banks of the given layout row (header size, sequence size and SPU address each) end to end from the sound heap base: stores each bank's header and sequence addresses in g_SndBankHeaders and g_SndBankSequences and its SPU address, header, sequence buffer and number in g_EmiBanks." }
+SND_StartBGM = { addr = 0x80161B24, type = "func", source = "Waits for the loader then starts the requested BGM's cue." }
+SND_RequestBGM = { addr = 0x80161BBC, type = "func", source = "Starts the background music if it changed." }
+SND_PlayBGM = { addr = 0x80161C20, type = "func", source = "Starts the background music cue." }
+SND_FadeOutBGM = { addr = 0x80161CD0, type = "func", source = "Fades out the background music." }
+SND_PauseBGM = { addr = 0x80161D20, type = "func", source = "Pauses the sequence player for the selected entry." }
+SND_ResumeBGM = { addr = 0x80161D74, type = "func", source = "Replays the selected entry's sequence." }
+SND_InstallSequenceFuncs = { addr = 0x80161DC8, type = "func", source = "fills SsFCALL, the libsnd note, program, pitch bend, meta event and control-change handler table" }
+EMI_Init = { addr = 0x80161F58, type = "func", source = "CdInit loop, VSync(3), clears the 24 callback states" }
+EMI_LoadArchive = { addr = 0x80161FDC, type = "func", source = "Latch slot id, reset ring, install CD callbacks." }
+EMI_GetArchiveSector = { addr = 0x80162160, type = "func", source = "Returns the disc sector of an EMI file." }
+EMI_StartArchive = { addr = 0x80162178, type = "func", source = "Reset transfer counters, LBA to CdlLOC, arm the next CD step." }
+EMI_CdOnSync = { addr = 0x801621E8, type = "func", source = "CD sync callback installed by EMI_LoadArchive" }
+EMI_CdOnReady = { addr = 0x80162230, type = "func", source = "Handles a finished CD sector of the EMI stream." }
+EMI_ReadToc = { addr = 0x80162500, type = "func", source = "MATH_TBL check and the entry sector offsets" }
+EMI_LoadToRam = { addr = 0x801625E4, type = "func", source = "Type 0, copy the payload to its destination." }
+EMI_LoadCompressed = { addr = 0x80162618, type = "func", source = "Types 1 and 2, queue the payload for the streaming ring." }
+EMI_LoadToVram = { addr = 0x80162698, type = "func", source = "Type 3, upload the graphics payload." }
+EMI_LoadVabHeader = { addr = 0x80162790, type = "func", source = "Type 6, VAB header." }
+EMI_LoadVabBody = { addr = 0x80162898, type = "func", source = "Type 7, VAB body." }
+EMI_LoadSE = { addr = 0x801629F0, type = "func", source = "Type 8, one VAB bank's SE table." }
+EMI_LoadSequence = { addr = 0x80162A6C, type = "func", source = "Loads a sequence of the EMI archive." }
+EMI_NextEntry = { addr = 0x80162B08, type = "func", source = "Starts the next read of the EMI stream." }
+EMI_CopySector = { addr = 0x80162C14, type = "func", source = "Copy the next part of the CD sector to its destination." }
+EMI_EndArchive = { addr = 0x80162CD8, type = "func", source = "Ends the EMI stream." }
+EMI_IsReady = { addr = 0x80162D00, type = "func", source = "Loader state is ready." }
+EMI_CdUpdate = { addr = 0x80162D18, type = "func", source = "Runs the current CD step of the EMI loader." }
+EMI_CdIdle = { addr = 0x80162D9C, type = "func", source = "Loader modes 0 and 8, no-op." }
+EMI_CdSetSpeed = { addr = 0x80162DA4, type = "func", source = "Sets the CD speed for the EMI loader." }
+EMI_CdSeek = { addr = 0x80162E18, type = "func", source = "Mode 2, CdSeekP to the armed CdlLOC." }
+EMI_CdOnSeek = { addr = 0x80162E70, type = "func", source = "Mode 3, latch the seek result." }
+EMI_CdRead = { addr = 0x80162E98, type = "func", source = "Mode 4, CdlReadN from the armed CdlLOC." }
+EMI_CdOnRead = { addr = 0x80162F04, type = "func", source = "Finishes an EMI read." }
+EMI_CdPause = { addr = 0x80162F34, type = "func", source = "Mode 6, CdPause." }
+EMI_CdOnPause = { addr = 0x80162F88, type = "func", source = "Mode 7, latch the pause result and rearm." }
+EMI_Update = { addr = 0x80163010, type = "func", source = "Per frame, mode 1 streaming and mode 2 CD requests." }
+EMI_UpdateStream = { addr = 0x8016305C, type = "func", source = "Services the EMI stream." }
+EMI_DecompressSector = { addr = 0x80163238, type = "func", source = "Reads a sector of the EMI stream." }
+EMI_CopySectorToScratchpad = { addr = 0x8016327C, type = "func", source = "Stages a sector of the EMI stream." }
+EMI_UploadSectorImage = { addr = 0x80163378, type = "func", source = "Uploads a sector of the EMI stream to video memory." }
+EMI_UploadVabBody = { addr = 0x80163418, type = "func", source = "Transfers the body of a sound bank to the SPU." }
+SND_StartXAStream = { addr = 0x801636A0, type = "func", source = "Starts loading an overlay." }
+SND_ResolveXAStream = { addr = 0x80163744, type = "func", source = "Resolves one loader entry from its packed key and latches the base and scaled entry bounds." }
+SND_StoreXASyncResult = { addr = 0x80163858, type = "func", source = "Callback that reads the result of an XA stream command." }
+SND_UpdateXA = { addr = 0x801638B0, type = "func", source = "Runs the current XA audio state." }
+SND_XAStateIdle = { addr = 0x801639B8, type = "func", source = "XA audio state: idle." }
+SND_XAStateSeek = { addr = 0x801639D0, type = "func", source = "XA audio state: seeking." }
+SND_XAStateSeekResult = { addr = 0x80163A54, type = "func", source = "State 2, negative status retries state 1 or moves to 8, success goes to state 3." }
+SND_XAStateRead = { addr = 0x80163AF0, type = "func", source = "State 3, sets the CD filter and issues CdlReadS, accepted goes to state 4." }
+SND_XAStateReadProgress = { addr = 0x80163B74, type = "func", source = "XA audio state: reading progress." }
+SND_XAStateReadResult = { addr = 0x80163C58, type = "func", source = "XA audio state: read result." }
+SND_XAStatePause = { addr = 0x80163D20, type = "func", source = "State 6, issues CdlPause, accepted goes to state 7." }
+SND_XAStatePauseResult = { addr = 0x80163D80, type = "func", source = "State 7, negative retries state 6 or 8, success resets to state 0 and sets progress 3." }
+SND_XAStateWaitSync = { addr = 0x80163E3C, type = "func", source = "State 8, waits for CdSync, completion returns to state 6." }
+SND_HasXACDError = { addr = 0x80163E88, type = "func", source = "Tells whether the CD reported an error." }
+SND_IsXAIdle = { addr = 0x80163EA0, type = "func", source = "Tells whether the CD is idle." }
+SND_SetCDVolume = { addr = 0x80163EB0, type = "func", source = "Latches the level and halves the four CdMix output bytes when the mode flag is set." }
+SND_FadeCDVolume = { addr = 0x80163F50, type = "func", source = "Steps the latched level toward the requested level through SND_SetCDVolume." }
+LZ77_DecodeBegin = { addr = 0x80164028, type = "func", source = "Starts decoding an EMI entry." }
+LZ77_DecodeStep = { addr = 0x80164064, type = "func", source = "Decodes one step of the EMI stream." }
+func_801642D0 = { addr = 0x801642D0, type = "func", source = "The restore tail of the handwritten dispatcher func_801642CC: it restores $s0-$s7 from the $t0 context base and returns." }
+UI_DrawIconCell = { addr = 0x801644D8, type = "func", source = "Draws one indexed icon cell as a textured quad with its selected texture page and palette." }
+Menu_DrawCursorSprite = { addr = 0x801647C4, type = "func", source = "Draws the menu cursor sprite." }
+Char_ApplyMaster = { addr = 0x801648A0, type = "func", source = "Applies the character's master bonuses." }
+Char_RebuildStats = { addr = 0x80164A44, type = "func", source = "Rebuilds the stats of a character from base, fatigue and equipment." }
+Char_PreviewEquip = { addr = 0x80164D2C, type = "func", source = "Copies a party record, puts item_id in its equipment slot, rebuilds the stats and returns the four stat values with up/down flags; the equip stat windows of the start and shop menus call it." }
+Item_Add = { addr = 0x801650B4, type = "func", source = "Adds items to the inventory." }
+Char_AddAbility = { addr = 0x801651DC, type = "func", source = "Teaches an ability to a character." }
+Char_RestoreHP = { addr = 0x80165280, type = "func", source = "Restores HP of a character." }
+Char_RestoreAP = { addr = 0x8016534C, type = "func", source = "Restores AP of a character." }
+Char_RestoreWillpower = { addr = 0x801653DC, type = "func", source = "Adds the amount to current_willpower of a character record, clamps at willpower, and amount 0 restores to willpower." }
+Char_AddCappedStat = { addr = 0x8016546C, type = "func", source = "Adds to a stat, capped at 999." }
+Char_AddWillpower = { addr = 0x801654B0, type = "func", source = "Adds to the willpower of a character, capped at 99." }
+Char_AddStat = { addr = 0x801654F4, type = "func", source = "Adds to a stat, between 0 and 999." }
+Char_AddPoints = { addr = 0x80165570, type = "func", source = "Adds or removes HP or AP and returns the change." }
+Char_AddResistance = { addr = 0x801655F4, type = "func", source = "Adds to a resistance." }
+Char_AddPercent = { addr = 0x80165694, type = "func", source = "Adds to a percentage stat, between 0 and 100." }
+Char_ClearStatus = { addr = 0x801656EC, type = "func", source = "Clears status effects of a character." }
+Char_ApplyWeapon = { addr = 0x80165760, type = "func", source = "Adds the equipped weapon bonuses to a character." }
+Char_ApplyArmor = { addr = 0x801658DC, type = "func", source = "Adds the equipped armor bonuses to a character." }
+Char_ApplyAccessories = { addr = 0x80165B3C, type = "func", source = "Adds the equipped accessory bonuses to a character." }
+Item_GetRecord = { addr = 0x80165D48, type = "func", source = "Returns the record of an item." }
+Item_GetIcon = { addr = 0x80165E04, type = "func", source = "Returns the item icon index; armor uses its equip type as the index." }
+Item_GetEquipability = { addr = 0x80165EC0, type = "func", source = "Returns which characters can equip an item." }
+Item_GetFlags = { addr = 0x80165F68, type = "func", source = "Returns the flags of an item." }
+Item_GetPower = { addr = 0x80166034, type = "func", source = "Returns the power of a weapon or armor." }
+UI_ClearFormatBuffer = { addr = 0x801660B0, type = "func", source = "Clears the UI format buffer." }
+Char_GetAbilityElement = { addr = 0x801660DC, type = "func", source = "Returns the element of an ability." }
+Item_VitalHas = { addr = 0x80166140, type = "func", source = "Tells whether a vital item is held." }
+Item_VitalAdd = { addr = 0x80166180, type = "func", source = "Adds a vital item." }
+Item_VitalRemove = { addr = 0x801661C4, type = "func", source = "Removes a vital item." }
+Message_SetVariable = { addr = 0x8016620C, type = "func", source = "Sets a text variable." }
+Item_Count = { addr = 0x8016628C, type = "func", source = "Counts an item in the inventory or equipment." }
+Item_CountHeld = { addr = 0x80166438, type = "func", source = "Counts the items held in a category." }
+Party_CountAbilities = { addr = 0x801664A0, type = "func", source = "Counts the non-zero entries of the selected ability panel." }
+Item_Remove = { addr = 0x801665A0, type = "func", source = "Removes items from the inventory." }
+Party_SpendZenny = { addr = 0x8016663C, type = "func", source = "Subtracts the amount from PARTY_ZENNY when the balance covers it." }
+Party_AddZenny = { addr = 0x8016666C, type = "func", source = "Adds zenny to the party, capped at 9999999." }
+Item_GetDescription = { addr = 0x801666C8, type = "func", source = "Returns the resource id of a choice entry." }
+Party_AddMember = { addr = 0x801667A4, type = "func", source = "Appends a character to the field and battle order arrays - replacing a free field slot after three." }
+Item_CanEquip = { addr = 0x80166904, type = "func", source = "Returns whether the character with equip bit bit can equip the item in the slot role: the item icon selects the equip slot, its equipability byte must have the bit." }
+Char_GetAbilityCost = { addr = 0x80166A10, type = "func", source = "Returns the AP cost of an ability." }
+Party_GetAbilities = { addr = 0x80166AE4, type = "func", source = "Resolves the party record a slot kind points at and returns its ability panel." }
+Char_GetAbilities = { addr = 0x80166B94, type = "func", source = "Resolves the character record and returns the panel its ability-kind record selects." }
+GFX_LoadPalette = { addr = 0x80166C48, type = "func", source = "Stages a palette." }
+Area_GetCellCode = { addr = 0x80166CB0, type = "func", source = "Returns the code of an area cell." }
+Party_ClearBattlerState = { addr = 0x80166CEC, type = "func", source = "Clears the state of a party battler." }
+Party_ResetBattlers = { addr = 0x80166D34, type = "func", source = "Resets the party battlers." }
+Party_ClearActiveBattlers = { addr = 0x80166D8C, type = "func", source = "Clears the state of the active party battlers." }
+SYS_ShowFileNotFound = { addr = 0x80166DF4, type = "func", source = "Shows the file not found screen." }
+EMI_LoadPartyArchives = { addr = 0x80166E88, type = "func", source = "Arms the overlay loader for a family key and waits for the stream to become ready." }
+EMI_LoadPartyCode = { addr = 0x80166F3C, type = "func", source = "Loads the party archive of the PLP family." }
+EMI_LoadParty = { addr = 0x80166F84, type = "func", source = "Loads the party archive of a family." }
+EMI_FindPartyArchive = { addr = 0x80166FF8, type = "func", source = "Finds the archive of the current party." }
+EMI_LoadFamilyArchive = { addr = 0x8016728C, type = "func", source = "Maps a content family and index to a loader slot and starts its stream." }
+Area_DispatchScene = { addr = 0x80167344, type = "func", source = "Dispatches the area scene." }
+Area_InitScene = { addr = 0x801673AC, type = "func", source = "Sets up the area scene." }
+Area_StepSceneTimer = { addr = 0x80167800, type = "func", source = "Ticks the scene timer and runs Area_ResetScene on expiry." }
+Area_SyncScrollHeight = { addr = 0x80167848, type = "func", source = "Syncs the scroll height with the actor." }
+Area_ResetScene = { addr = 0x8016788C, type = "func", source = "Resets the mode work record: clears the camera step counters and the actor velocity, sets byte 0x11C of the mode work area to 3, then runs func_80167428 when a directional input is held or sets mode 1." }
+Char_AddHP = { addr = 0x80167FDC, type = "func", source = "Heals HP of a character." }
+Char_AddAP = { addr = 0x801680CC, type = "func", source = "Adds to current_ap clamped at max_ap." }
+Char_LoseHP = { addr = 0x8016813C, type = "func", source = "Damages HP of a character." }
+Char_SpendAP = { addr = 0x80168248, type = "func", source = "Clamps the amount to one below current_ap and debits it." }
+SpuGetKeyStatus = { addr = 0x801682E0, type = "func", source = "LIBSPU.LIB 148 bytes" }
+_spu_init = { addr = 0x80168374, type = "func", source = "LIBSPU.LIB 2988 bytes" }
+_spu_writeByIO = { addr = 0x80168608, type = "func", source = "LIBSPU.LIB 2988 bytes" }
+_spu_FiDMA = { addr = 0x801687D4, type = "func", source = "LIBSPU.LIB 2988 bytes" }
+_spu_r_ = { addr = 0x801688A4, type = "func", source = "LIBSPU.LIB 2988 bytes" }
+_spu_t = { addr = 0x80168960, type = "func", source = "LIBSPU.LIB 2988 bytes" }
+_spu_write = { addr = 0x80168BF0, type = "func", source = "LIBSPU.LIB 2988 bytes" }
+_spu_read = { addr = 0x80168C78, type = "func", source = "LIBSPU.LIB 2988 bytes" }
+_spu_FsetRXX = { addr = 0x80168CE0, type = "func", source = "LIBSPU.LIB 2988 bytes" }
+_spu_FsetRXXa = { addr = 0x80168D28, type = "func", source = "LIBSPU.LIB 2988 bytes" }
+_spu_FgetRXXa = { addr = 0x80168DCC, type = "func", source = "LIBSPU.LIB 2988 bytes" }
+_spu_FsetPCR = { addr = 0x80168E08, type = "func", source = "LIBSPU.LIB 2988 bytes" }
+_spu_FsetDelayW = { addr = 0x80168E68, type = "func", source = "LIBSPU.LIB 2988 bytes" }
+_spu_FsetDelayR = { addr = 0x80168E94, type = "func", source = "LIBSPU.LIB 2988 bytes" }
+_spu_FwaitFs = { addr = 0x80168EC0, type = "func", source = "LIBSPU.LIB 2988 bytes" }
+_SpuInit = { addr = 0x80168F20, type = "func", source = "LIBSPU.LIB 372 bytes" }
+SpuStart = { addr = 0x80169018, type = "func", source = "LIBSPU.LIB 372 bytes" }
+_SpuDataCallback = { addr = 0x80169094, type = "func", source = "LIBSPU.LIB 36 bytes" }
+SpuSetTransferMode = { addr = 0x801690B8, type = "func", source = "LIBSPU.LIB 52 bytes" }
+SpuSetVoiceVolume = { addr = 0x801690EC, type = "func", source = "LIBSPU.LIB 136 bytes" }
+SpuGetVoiceVolume = { addr = 0x80169174, type = "func", source = "LIBSPU.LIB 96 bytes" }
+SpuSetVoiceAttr = { addr = 0x801691D4, type = "func", source = "LIBSPU.LIB 1688 bytes" }
+_SpuSetVoiceAttr = { addr = 0x801691FC, type = "func", source = "LIBSPU.LIB 1688 bytes" }
+_spu_note2pitch = { addr = 0x8016986C, type = "func", source = "LIBSPU.LIB 588 bytes" }
+_spu_pitch2note = { addr = 0x8016995C, type = "func", source = "LIBSPU.LIB 588 bytes" }
+_SsContDataEntry = { addr = 0x80169AB8, type = "func", source = "LIBSND.LIB 1072 bytes" }
+_SsContMainVol = { addr = 0x80169EE8, type = "func", source = "LIBSND.LIB 216 bytes" }
+_SsContPanpot = { addr = 0x80169FC0, type = "func", source = "LIBSND.LIB 208 bytes" }
+_SsContDamper = { addr = 0x8016A090, type = "func", source = "LIBSND.LIB 176 bytes" }
+_SsContNrpn1 = { addr = 0x8016A140, type = "func", source = "LIBSND.LIB 312 bytes" }
+_SsContNrpn2 = { addr = 0x8016A278, type = "func", source = "LIBSND.LIB 316 bytes" }
+_SsContRpn1 = { addr = 0x8016A3B4, type = "func", source = "LIBSND.LIB 120 bytes" }
+_SsContRpn2 = { addr = 0x8016A42C, type = "func", source = "LIBSND.LIB 120 bytes" }
+_SsSetPitchBend = { addr = 0x8016A4A4, type = "func", source = "LIBSND.LIB 184 bytes" }
+_SsSetControlChange = { addr = 0x8016A55C, type = "func", source = "LIBSND.LIB 576 bytes" }
+_SsGetMetaEvent = { addr = 0x8016A79C, type = "func", source = "LIBSND.LIB 472 bytes" }
+_SsNoteOn = { addr = 0x8016A974, type = "func", source = "LIBSND.LIB 232 bytes" }
+_SsSetProgramChange = { addr = 0x8016AA5C, type = "func", source = "LIBSND.LIB 120 bytes" }
+_SsReadDeltaValue = { addr = 0x8016AAD4, type = "func", source = "LIBSND.LIB 184 bytes" }
+_SsClose = { addr = 0x8016AB8C, type = "func", source = "LIBSND.LIB 452 bytes" }
+SsSeqClose = { addr = 0x8016AD08, type = "func", source = "LIBSND.LIB 452 bytes" }
+SsSepClose = { addr = 0x8016AD2C, type = "func", source = "LIBSND.LIB 452 bytes" }
+_SsSndSetCres = { addr = 0x8016AD50, type = "func", source = "LIBSND.LIB 472 bytes" }
+SsSeqSetCrescendo = { addr = 0x8016ADFC, type = "func", source = "LIBSND.LIB 472 bytes" }
+SsSepSetCrescendo = { addr = 0x8016AE7C, type = "func", source = "LIBSND.LIB 472 bytes" }
+_SsSndSetDecres = { addr = 0x8016AF28, type = "func", source = "LIBSND.LIB 472 bytes" }
+SsSeqSetDecrescendo = { addr = 0x8016AFD4, type = "func", source = "LIBSND.LIB 472 bytes" }
+SsSepSetDecrescendo = { addr = 0x8016B054, type = "func", source = "LIBSND.LIB 472 bytes" }
+SsEnd = { addr = 0x8016B100, type = "func", source = "LIBSND.LIB 196 bytes" }
+_SsInit = { addr = 0x8016B1C4, type = "func", source = "LIBSND.LIB 232 bytes" }
+SsInit = { addr = 0x8016B2AC, type = "func", size = 0x30, source = "LIBSND ssinit_c.o SsInit - resets callbacks - SpuInit then initializes sound" }
+SpuInit = { addr = 0x8016B2DC, type = "func", source = "Initializes the SPU." }
+SsSetLoop = { addr = 0x8016B2FC, type = "func", source = "LIBSND.LIB 144 bytes" }
+SsIsEos = { addr = 0x8016B344, type = "func", source = "LIBSND.LIB 144 bytes" }
+SsSepOpenJ = { addr = 0x8016B38C, type = "func", source = "LIBSND.LIB 300 bytes" }
+_SsInitSoundSep = { addr = 0x8016B4B8, type = "func", source = "LIBSND.LIB 944 bytes" }
+_SsSndSetPauseMode = { addr = 0x8016B868, type = "func", source = "LIBSND.LIB 300 bytes" }
+SsSeqPause = { addr = 0x8016B940, type = "func", source = "LIBSND.LIB 300 bytes" }
+SsSepPause = { addr = 0x8016B968, type = "func", source = "LIBSND.LIB 300 bytes" }
+SsSeqPlay = { addr = 0x8016B994, type = "func", source = "LIBSND.LIB 112 bytes" }
+SsSepPlay = { addr = 0x8016B9CC, type = "func", source = "LIBSND.LIB 112 bytes" }
+SND_QuitSpu = { addr = 0x8016BA04, type = "func", source = "Shuts the SPU down when the sound system exits." }
+SpuQuit = { addr = 0x8016BA24, type = "func", source = "LIBSPU.LIB 124 bytes" }
+_SsSndSetReplayMode = { addr = 0x8016BAA0, type = "func", source = "LIBSND.LIB 248 bytes" }
+SsSeqReplay = { addr = 0x8016BB44, type = "func", source = "LIBSND.LIB 248 bytes" }
+SsSepReplay = { addr = 0x8016BB6C, type = "func", source = "LIBSND.LIB 248 bytes" }
+Snd_SetPlayMode = { addr = 0x8016BB98, type = "func", source = "LIBSND.LIB 256 bytes" }
+SsSetSerialAttr = { addr = 0x8016BC98, type = "func", source = "LIBSND.LIB 148 bytes" }
+SpuSetCommonAttr = { addr = 0x8016BD2C, type = "func", source = "LIBSPU.LIB 916 bytes" }
+SsSetMVol = { addr = 0x8016C0C0, type = "func", source = "LIBSND.LIB 80 bytes" }
+SsSetRVol = { addr = 0x8016C110, type = "func", source = "LIBSND.LIB 136 bytes" }
+SpuSetReverbDepth = { addr = 0x8016C198, type = "func", source = "LIBSPU.LIB 120 bytes" }
+_SsStart = { addr = 0x8016C210, type = "func", source = "LIBSND.LIB 824 bytes" }
+SsStart = { addr = 0x8016C478, type = "func", source = "LIBSND.LIB 824 bytes" }
+SsStart2 = { addr = 0x8016C498, type = "func", source = "LIBSND.LIB 824 bytes" }
+_SsTrapIntrVSync = { addr = 0x8016C4B8, type = "func", source = "LIBSND.LIB 824 bytes" }
+_SsSeqCalledTbyT_1per2 = { addr = 0x8016C4F8, type = "func", source = "LIBSND.LIB 824 bytes" }
+SsSeqCalledTbyT = { addr = 0x8016C548, type = "func", source = "LIBSND.LIB 628 bytes" }
+_SsSndCrescendo = { addr = 0x8016C7BC, type = "func", source = "LIBSND.LIB 736 bytes" }
+_SsSndDecrescendo = { addr = 0x8016CA9C, type = "func", source = "LIBSND.LIB 672 bytes" }
+_SsSndPause = { addr = 0x8016CD3C, type = "func", source = "LIBSND.LIB 164 bytes" }
+_SsSndPlay = { addr = 0x8016CDE0, type = "func", source = "LIBSND.LIB 44 bytes" }
+_SsSeqPlay = { addr = 0x8016CE0C, type = "func", source = "LIBSND.LIB 1464 bytes" }
+_SsSeqGetEof = { addr = 0x8016CF1C, type = "func", source = "LIBSND.LIB 1464 bytes" }
+_SsGetSeqData = { addr = 0x8016D0E0, type = "func", source = "LIBSND.LIB 1464 bytes" }
+_SsSndNextSep = { addr = 0x8016D3C4, type = "func", source = "LIBSND.LIB 264 bytes" }
+_SsSndReplay = { addr = 0x8016D4CC, type = "func", source = "LIBSND.LIB 104 bytes" }
+_SsSndStop = { addr = 0x8016D534, type = "func", source = "LIBSND.LIB 444 bytes" }
+SsSeqStop = { addr = 0x8016D69C, type = "func", source = "LIBSND.LIB 444 bytes" }
+SsSepStop = { addr = 0x8016D6C4, type = "func", source = "LIBSND.LIB 444 bytes" }
+SsSetSerialVol = { addr = 0x8016D6F0, type = "func", source = "LIBSND.LIB 252 bytes" }
+SsSetTableSize = { addr = 0x8016D7EC, type = "func", source = "LIBSND.LIB 480 bytes" }
+SsSetTickMode = { addr = 0x8016D9CC, type = "func", source = "LIBSND.LIB 364 bytes" }
+_SsSndSetVol = { addr = 0x8016DB38, type = "func", source = "LIBSND.LIB 212 bytes" }
+SsSeqSetVol = { addr = 0x8016DB70, type = "func", source = "LIBSND.LIB 212 bytes" }
+SsSepSetVol = { addr = 0x8016DBA0, type = "func", source = "LIBSND.LIB 212 bytes" }
+SsSeqGetVol = { addr = 0x8016DBD8, type = "func", source = "LIBSND.LIB 212 bytes" }
+_SsSndTempo = { addr = 0x8016DC0C, type = "func", source = "LIBSND.LIB 480 bytes" }
+_SsSndSetVolData = { addr = 0x8016DDEC, type = "func", source = "LIBSND.LIB 208 bytes" }
+SsUtAllKeyOff = { addr = 0x8016DEBC, type = "func", source = "LIBSND.LIB 312 bytes" }
+SsUtAutoPan = { addr = 0x8016DFF4, type = "func", source = "Automatically pans a voice." }
+SsUtAutoVol = { addr = 0x8016E058, type = "func", source = "Automatically changes the volume of a voice." }
+SsUtGetProgAtr = { addr = 0x8016E0BC, type = "func", source = "LIBSND.LIB 264 bytes" }
+SsUtGetVagAtr = { addr = 0x8016E1C4, type = "func", source = "LIBSND.LIB 572 bytes" }
+SsUtKeyOnV = { addr = 0x8016E400, type = "func", source = "LIBSND.LIB 1036 bytes" }
+SsUtKeyOffV = { addr = 0x8016E794, type = "func", source = "LIBSND.LIB 1036 bytes" }
+SsUtSetReverbDepth = { addr = 0x8016E80C, type = "func", source = "LIBSND.LIB 152 bytes" }
+SpuSetReverbModeParam = { addr = 0x8016E8A4, type = "func", source = "LIBSPU.LIB 1272 bytes" }
+_SpuIsInAllocateArea = { addr = 0x8016ED9C, type = "func", source = "LIBSPU.LIB 268 bytes" }
+_SpuIsInAllocateArea_ = { addr = 0x8016EE1C, type = "func", source = "LIBSPU.LIB 268 bytes" }
+_spu_setReverbAttr = { addr = 0x8016EEA8, type = "func", source = "LIBSPU.LIB 1232 bytes" }
+SpuClearReverbWorkArea = { addr = 0x8016F378, type = "func", source = "LIBSPU.LIB 412 bytes" }
+SsUtSetReverbType = { addr = 0x8016F514, type = "func", source = "LIBSND.LIB 180 bytes" }
+SsUtGetReverbType = { addr = 0x8016F5B8, type = "func", source = "LIBSND.LIB 180 bytes" }
+SpuSetReverb = { addr = 0x8016F5C8, type = "func", source = "LIBSPU.LIB 208 bytes" }
+SsUtReverbOff = { addr = 0x8016F698, type = "func", source = "Turns the reverb off." }
+SsUtReverbOn = { addr = 0x8016F6B8, type = "func", source = "LIBSND.LIB 32 bytes" }
+SsUtSetVagAtr = { addr = 0x8016F6D8, type = "func", source = "LIBSND.LIB 456 bytes" }
+SsUtGetDetVVol = { addr = 0x8016F8A0, type = "func", source = "LIBSND.LIB 476 bytes" }
+SsUtSetDetVVol = { addr = 0x8016F8F8, type = "func", source = "LIBSND.LIB 476 bytes" }
+SsUtGetVVol = { addr = 0x8016F964, type = "func", source = "LIBSND.LIB 476 bytes" }
+SsUtSetVVol = { addr = 0x8016F9F0, type = "func", source = "LIBSND.LIB 476 bytes" }
+_SsVmDoAllocate = { addr = 0x8016FA7C, type = "func", source = "LIBSND.LIB 532 bytes" }
+SeAutoPan = { addr = 0x8016FC90, type = "func", source = "LIBSND.LIB 1268 bytes" }
+SetAutoPan = { addr = 0x8016FE40, type = "func", source = "LIBSND.LIB 1268 bytes" }
+SeAutoVol = { addr = 0x80170184, type = "func", source = "LIBSND.LIB 1276 bytes" }
+SetAutoVol = { addr = 0x80170334, type = "func", source = "LIBSND.LIB 1276 bytes" }
+_SsVmDamperOff = { addr = 0x80170680, type = "func", source = "LIBSND.LIB 16 bytes" }
+_SsVmDamperOn = { addr = 0x80170690, type = "func", source = "LIBSND.LIB 20 bytes" }
+_SsVmFlush = { addr = 0x801706A4, type = "func", source = "LIBSND.LIB 948 bytes" }
+SpuSetNoiseVoice = { addr = 0x80170A58, type = "func", source = "LIBSPU.LIB 36 bytes" }
+_SpuSetAnyVoice = { addr = 0x80170A7C, type = "func", source = "LIBSPU.LIB 520 bytes" }
+_SsVmInit = { addr = 0x80170C84, type = "func", source = "LIBSND.LIB 784 bytes" }
+SpuInitMalloc = { addr = 0x80170F94, type = "func", source = "LIBSPU.LIB 84 bytes" }
+_spu_setInTransfer = { addr = 0x80170FE8, type = "func", source = "LIBSPU.LIB 68 bytes" }
+_spu_getInTransfer = { addr = 0x80171014, type = "func", source = "LIBSPU.LIB 68 bytes" }
+_SsVmKeyOn = { addr = 0x8017102C, type = "func", source = "LIBSND.LIB 1988 bytes" }
+_SsVmKeyOff = { addr = 0x8017157C, type = "func", source = "LIBSND.LIB 1988 bytes" }
+_SsVmSeKeyOn = { addr = 0x801716C8, type = "func", source = "LIBSND.LIB 1988 bytes" }
+_SsVmSeKeyOff = { addr = 0x801717B4, type = "func", source = "LIBSND.LIB 1988 bytes" }
+KeyOnCheck = { addr = 0x801717E8, type = "func", source = "LIBSND.LIB 1988 bytes" }
+_SsVmAlloc = { addr = 0x801717F0, type = "func", source = "LIBSND.LIB 620 bytes" }
+note2pitch = { addr = 0x80171A5C, type = "func", source = "LIBSND.LIB 448 bytes" }
+note2pitch2 = { addr = 0x80171B20, type = "func", source = "LIBSND.LIB 448 bytes" }
+vmNoiseOn = { addr = 0x80171C1C, type = "func", source = "LIBSND.LIB 1228 bytes" }
+vmNoiseOff = { addr = 0x801720E8, type = "func", source = "LIBSND.LIB 68 bytes" }
+_SsVmKeyOffNow = { addr = 0x8017212C, type = "func", source = "LIBSND.LIB 208 bytes" }
+_SsVmKeyOnNow = { addr = 0x801721FC, type = "func", source = "LIBSND.LIB 1252 bytes" }
+_SsVmPBVoice = { addr = 0x801726E0, type = "func", source = "LIBSND.LIB 752 bytes" }
+_SsVmPitchBend = { addr = 0x801728E0, type = "func", source = "LIBSND.LIB 752 bytes" }
+_SsVmSetSeqVol = { addr = 0x801729D0, type = "func", source = "LIBSND.LIB 1768 bytes" }
+_SsVmGetSeqVol = { addr = 0x80172F10, type = "func", source = "LIBSND.LIB 1768 bytes" }
+_SsVmGetSeqLVol = { addr = 0x80172F7C, type = "func", source = "LIBSND.LIB 1768 bytes" }
+_SsVmGetSeqRVol = { addr = 0x80172FCC, type = "func", source = "LIBSND.LIB 1768 bytes" }
+_SsVmSeqKeyOff = { addr = 0x8017301C, type = "func", source = "LIBSND.LIB 1768 bytes" }
+_SsVmSelectToneAndVag = { addr = 0x801730B8, type = "func", source = "LIBSND.LIB 180 bytes" }
+_SsVmSetVol = { addr = 0x8017316C, type = "func", source = "LIBSND.LIB 1412 bytes" }
+_SsVmVSetUp = { addr = 0x801736F0, type = "func", source = "LIBSND.LIB 196 bytes" }
+SsSetAutoKeyOffMode = { addr = 0x801737B4, type = "func", source = "LIBSND vs_auto.o SsSetAutoKeyOffMode, words equal retail, linked before vs_mono.o" }
+SsSetMono = { addr = 0x801737C4, type = "func", source = "LIBSND.LIB 36 bytes" }
+SsSetStereo = { addr = 0x801737D8, type = "func", source = "LIBSND.LIB 36 bytes" }
+SsSetReservedVoice = { addr = 0x801737E8, type = "func", source = "LIBSND.LIB 48 bytes" }
+SsVabClose = { addr = 0x80173818, type = "func", source = "LIBSND.LIB 132 bytes" }
+SpuFree = { addr = 0x8017389C, type = "func", source = "LIBSPU.LIB 124 bytes" }
+_spu_gcSPU = { addr = 0x80173918, type = "func", source = "LIBSPU.LIB 776 bytes" }
+SsVabOpenHead = { addr = 0x80173C20, type = "func", source = "LIBSND.LIB 1132 bytes" }
+SsVabOpenHeadSticky = { addr = 0x80173C50, type = "func", source = "LIBSND.LIB 1132 bytes" }
+SsVabFakeHead = { addr = 0x80173C80, type = "func", source = "LIBSND.LIB 1132 bytes" }
+SsVabOpenHeadWithMode = { addr = 0x80173CB0, type = "func", source = "LIBSND.LIB 1132 bytes" }
+SpuMalloc = { addr = 0x8017408C, type = "func", source = "LIBSPU.LIB 712 bytes" }
+SsVabTransBodyPartly = { addr = 0x80174354, type = "func", source = "LIBSND.LIB 352 bytes" }
+SpuSetTransferStartAddr = { addr = 0x801744B4, type = "func", source = "LIBSPU.LIB 88 bytes" }
+SpuWritePartly = { addr = 0x8017450C, type = "func", source = "LIBSPU.LIB 140 bytes" }
+SsVabTransCompleted = { addr = 0x80174598, type = "func", source = "LIBSND.LIB 40 bytes" }
+SpuIsTransferCompleted = { addr = 0x801745C0, type = "func", source = "LIBSPU.LIB 168 bytes" }
+PadInit = { addr = 0x80174668, type = "func", source = "LIBETC.LIB 152 bytes" }
+PadRead = { addr = 0x801746B8, type = "func", source = "LIBETC.LIB 152 bytes" }
+PadStop = { addr = 0x801746E0, type = "func", source = "LIBETC.LIB 152 bytes" }
+VSync = { addr = 0x80174700, type = "func", source = "LIBETC.LIB 484 bytes" }
+v_wait = { addr = 0x80174848, type = "func", size = 0x9C, source = "PsyQ LIBETC library routine." }
+ResetCallback = { addr = 0x801748E4, type = "func", source = "LIBETC.LIB 1808 bytes" }
+InterruptCallback = { addr = 0x80174914, type = "func", source = "LIBETC.LIB 1808 bytes" }
+DMACallback = { addr = 0x80174944, type = "func", source = "LIBETC.LIB 1808 bytes" }
+VSyncCallback = { addr = 0x80174974, type = "func", source = "LIBETC.LIB 1808 bytes" }
+VSyncCallbacks = { addr = 0x801749A8, type = "func", source = "LIBETC.LIB 1808 bytes" }
+StopCallback = { addr = 0x801749D8, type = "func", source = "LIBETC.LIB 1808 bytes" }
+RestartCallback = { addr = 0x80174A08, type = "func", source = "LIBETC.LIB 1808 bytes" }
+CheckCallback = { addr = 0x80174A38, type = "func", source = "LIBETC.LIB 1808 bytes" }
+GetIntrMask = { addr = 0x80174A48, type = "func", source = "LIBETC.LIB 1808 bytes" }
+SetIntrMask = { addr = 0x80174A60, type = "func", source = "LIBETC.LIB 1808 bytes" }
+startIntr = { addr = 0x80174A7C, type = "func", source = "LIBETC.LIB 1808 bytes" }
+trapIntr = { addr = 0x80174B58, type = "func", source = "LIBETC.LIB 1808 bytes" }
+setIntr = { addr = 0x80174D40, type = "func", source = "LIBETC.LIB 1808 bytes" }
+stopIntr = { addr = 0x80174E94, type = "func", source = "LIBETC.LIB 1808 bytes" }
+restartIntr = { addr = 0x80174F40, type = "func", source = "LIBETC.LIB 1808 bytes" }
+startIntrVSync = { addr = 0x80174FF4, type = "func", source = "LIBETC.LIB 296 bytes" }
+trapIntrVSync = { addr = 0x8017504C, type = "func", source = "LIBETC.LIB 296 bytes" }
+setIntrVSync = { addr = 0x801750C4, type = "func", source = "LIBETC.LIB 296 bytes" }
+startIntrDMA = { addr = 0x8017511C, type = "func", source = "LIBETC.LIB 680 bytes" }
+trapIntrDMA = { addr = 0x8017516C, type = "func", source = "LIBETC.LIB 680 bytes" }
+setIntrDMA = { addr = 0x801752F0, type = "func", source = "LIBETC.LIB 680 bytes" }
+SetVideoMode = { addr = 0x801753C4, type = "func", source = "LIBETC.LIB 40 bytes" }
+GetVideoMode = { addr = 0x801753DC, type = "func", source = "LIBETC.LIB 40 bytes" }
+CdInit = { addr = 0x801753EC, type = "func", source = "LIBCD.LIB 264 bytes" }
+def_cbsync = { addr = 0x8017547C, type = "func", source = "LIBCD.LIB 264 bytes" }
+def_cbready = { addr = 0x801754A4, type = "func", source = "LIBCD.LIB 264 bytes" }
+def_cbread = { addr = 0x801754CC, type = "func", source = "LIBCD.LIB 264 bytes" }
+CdStatus = { addr = 0x801754F4, type = "func", source = "LIBCD.LIB 1900 bytes" }
+CdMode = { addr = 0x80175504, type = "func", source = "LIBCD.LIB 1900 bytes" }
+CdLastCom = { addr = 0x80175514, type = "func", source = "LIBCD.LIB 1900 bytes" }
+CdLastPos = { addr = 0x80175524, type = "func", source = "LIBCD.LIB 1900 bytes" }
+CdReset = { addr = 0x80175534, type = "func", source = "LIBCD.LIB 1900 bytes" }
+CdFlush = { addr = 0x801755A0, type = "func", source = "LIBCD.LIB 1900 bytes" }
+CdSetDebug = { addr = 0x801755C0, type = "func", source = "LIBCD.LIB 1900 bytes" }
+CdComstr = { addr = 0x801755D8, type = "func", source = "LIBCD.LIB 1900 bytes" }
+CdIntstr = { addr = 0x8017560C, type = "func", source = "LIBCD.LIB 1900 bytes" }
+CdSync = { addr = 0x80175640, type = "func", source = "LIBCD.LIB 1900 bytes" }
+CdReady = { addr = 0x80175660, type = "func", source = "LIBCD.LIB 1900 bytes" }
+CdSyncCallback = { addr = 0x80175680, type = "func", source = "LIBCD.LIB 1900 bytes" }
+CdReadyCallback = { addr = 0x80175698, type = "func", source = "LIBCD.LIB 1900 bytes" }
+CdControl = { addr = 0x801756B0, type = "func", source = "LIBCD.LIB 1900 bytes" }
+CdControlF = { addr = 0x801757E8, type = "func", source = "LIBCD.LIB 1900 bytes" }
+CdControlB = { addr = 0x80175914, type = "func", source = "LIBCD.LIB 1900 bytes" }
+CdMix = { addr = 0x80175A58, type = "func", source = "LIBCD.LIB 1900 bytes" }
+CdGetSector = { addr = 0x80175A78, type = "func", source = "LIBCD.LIB 1900 bytes" }
+CdDataCallback = { addr = 0x80175A98, type = "func", source = "LIBCD.LIB 1900 bytes" }
+CdDataSync = { addr = 0x80175ABC, type = "func", source = "LIBCD.LIB 1900 bytes" }
+CdIntToPos = { addr = 0x80175ADC, type = "func", source = "LIBCD.LIB 1900 bytes" }
+CdPosToInt = { addr = 0x80175BE0, type = "func", source = "LIBCD.LIB 1900 bytes" }
+getintr = { addr = 0x80175C60, type = "func", source = "LIBCD.LIB 5864 bytes" }
+CD_sync = { addr = 0x801761E8, type = "func", source = "LIBCD.LIB 5864 bytes" }
+CD_ready = { addr = 0x80176468, type = "func", source = "LIBCD.LIB 5864 bytes" }
+CD_cw = { addr = 0x80176734, type = "func", source = "LIBCD.LIB 5864 bytes" }
+CD_vol = { addr = 0x80176B50, type = "func", source = "LIBCD.LIB 5864 bytes" }
+CD_flush = { addr = 0x80176BD8, type = "func", source = "LIBCD.LIB 5864 bytes" }
+CD_initvol = { addr = 0x80176CB8, type = "func", source = "LIBCD.LIB 5864 bytes" }
+CD_initintr = { addr = 0x80176DAC, type = "func", source = "LIBCD.LIB 5864 bytes" }
+CD_init = { addr = 0x80176DFC, type = "func", source = "LIBCD.LIB 5864 bytes" }
+CD_datasync = { addr = 0x80176FE8, type = "func", source = "LIBCD.LIB 5864 bytes" }
+CD_getsector = { addr = 0x80177154, type = "func", source = "LIBCD.LIB 5864 bytes" }
+CD_set_test_parmnum = { addr = 0x80177254, type = "func", source = "LIBCD.LIB 5864 bytes" }
+CD_callback = { addr = 0x80177264, type = "func", source = "LIBCD.LIB 5864 bytes, SDK label callback" }
+CdSearchFile = { addr = 0x80177348, type = "func", source = "LIBCD.LIB 2496 bytes" }
+_cmp = { addr = 0x80177614, type = "func", source = "LIBCD.LIB 2496 bytes" }
+CD_newmedia = { addr = 0x80177634, type = "func", source = "LIBCD.LIB 2496 bytes" }
+CD_searchdir = { addr = 0x80177914, type = "func", source = "LIBCD.LIB 2496 bytes" }
+CD_cachefile = { addr = 0x801779BC, type = "func", source = "LIBCD.LIB 2496 bytes" }
+cd_read = { addr = 0x80177C68, type = "func", source = "LIBCD.LIB 2496 bytes" }
+SYS_CopyBytes = { addr = 0x80177CD4, type = "func", source = "Copies count bytes from src to dst, front to back." }
+cb_read = { addr = 0x80177D08, type = "func", source = "LIBCD.LIB 1524 bytes" }
+cd_read_retry = { addr = 0x80177F1C, type = "func", source = "LIBCD.LIB 1524 bytes" }
+CdReadBreak = { addr = 0x801780E8, type = "func", source = "LIBCD.LIB 1524 bytes" }
+CdRead = { addr = 0x80178138, type = "func", source = "LIBCD.LIB 1524 bytes" }
+CdReadSync = { addr = 0x80178218, type = "func", source = "LIBCD.LIB 1524 bytes" }
+CdReadCallback = { addr = 0x801782E4, type = "func", source = "LIBCD.LIB 1524 bytes" }
+rsin = { addr = 0x801782FC, type = "func", source = "LIBGTE.LIB 204 bytes" }
+sin_1 = { addr = 0x80178338, type = "func", source = "LIBGTE.LIB 204 bytes" }
+rcos = { addr = 0x801783C8, type = "func", source = "LIBGTE.LIB 160 bytes" }
+csqrt_1 = { addr = 0x80178468, type = "func", source = "LIBGTE.LIB 496 bytes" }
+csqrt = { addr = 0x801785BC, type = "func", source = "LIBGTE.LIB 496 bytes" }
+InitGeom = { addr = 0x80178660, type = "func", source = "LIBGTE.LIB 144 bytes" }
+SquareRoot0 = { addr = 0x801786E8, type = "func", source = "LIBGTE.LIB 144 bytes" }
+func_80178764 = { addr = 0x80178764, type = "func", source = "LIBGTE msc01.o SquareRoot0, the return-zero tail it branches to" }
+InvSquareRoot = { addr = 0x80178778, type = "func", source = "LIBGTE.LIB 672 bytes" }
+VectorNormalS = { addr = 0x80178804, type = "func", source = "Normalizes a vector." }
+VectorNormal = { addr = 0x80178818, type = "func", source = "LIBGTE.LIB 672 bytes" }
+VectorNormalSS = { addr = 0x80178844, type = "func", source = "LIBGTE.LIB 672 bytes" }
+func_80178858 = { addr = 0x80178858, type = "func", source = "The last 0x1C bytes of the LIBGTE.LIB msc02.o VectorNormalSS member, the retail split assembly unit that calls VectorNormalSS at 0x80178874." }
+MatrixNormal = { addr = 0x80178930, type = "func", source = "LIBGTE.LIB 672 bytes" }
+ApplyMatrixLV = { addr = 0x80178A18, type = "func", source = "LIBGTE.LIB 352 bytes" }
+PushMatrix = { addr = 0x80178B78, type = "func", source = "LIBGTE.LIB 320 bytes" }
+PopMatrix = { addr = 0x80178C18, type = "func", source = "LIBGTE.LIB 320 bytes" }
+MulMatrix2 = { addr = 0x80178CB8, type = "func", source = "LIBGTE.LIB 272 bytes" }
+ApplyMatrix = { addr = 0x80178DC8, type = "func", source = "LIBGTE.LIB 80 bytes" }
+ApplyMatrixSV = { addr = 0x80178E18, type = "func", source = "LIBGTE.LIB 96 bytes" }
+TransMatrix = { addr = 0x80178E78, type = "func", source = "LIBGTE.LIB 48 bytes" }
+ScaleMatrix = { addr = 0x80178EA8, type = "func", source = "LIBGTE.LIB 304 bytes" }
+SetRotMatrix = { addr = 0x80178FD8, type = "func", source = "LIBGTE.LIB 48 bytes" }
+SetLightMatrix = { addr = 0x80179008, type = "func", source = "LIBGTE.LIB 48 bytes" }
+SetColorMatrix = { addr = 0x80179038, type = "func", source = "LIBGTE.LIB 48 bytes" }
+SetTransMatrix = { addr = 0x80179068, type = "func", source = "LIBGTE.LIB 32 bytes" }
+SetBackColor = { addr = 0x80179088, type = "func", source = "LIBGTE.LIB 32 bytes" }
+SetGeomOffset = { addr = 0x801790A8, type = "func", source = "LIBGTE.LIB 32 bytes" }
+SetGeomScreen = { addr = 0x801790C8, type = "func", source = "LIBGTE.LIB 16 bytes" }
+LocalLight = { addr = 0x801790D8, type = "func", source = "LIBGTE.LIB 480 bytes" }
+DpqColor = { addr = 0x801790FC, type = "func", source = "LIBGTE.LIB 480 bytes" }
+NormalColor = { addr = 0x80179118, type = "func", source = "LIBGTE.LIB 480 bytes" }
+NormalColor3 = { addr = 0x80179134, type = "func", source = "LIBGTE.LIB 480 bytes" }
+NormalColorDpq = { addr = 0x80179170, type = "func", source = "LIBGTE.LIB 480 bytes" }
+NormalColorDpq3 = { addr = 0x80179194, type = "func", source = "LIBGTE.LIB 480 bytes" }
+NormalColorCol = { addr = 0x801791DC, type = "func", source = "LIBGTE.LIB 480 bytes" }
+NormalColorCol3 = { addr = 0x801791FC, type = "func", source = "LIBGTE.LIB 480 bytes" }
+ColorDpq = { addr = 0x80179240, type = "func", source = "LIBGTE.LIB 480 bytes" }
+ColorCol = { addr = 0x80179268, type = "func", source = "LIBGTE.LIB 480 bytes" }
+AverageSZ3 = { addr = 0x8017928C, type = "func", source = "LIBGTE smp.o AverageSZ3, words equal retail" }
+AverageSZ4 = { addr = 0x8017929C, type = "func", source = "LIBGTE.LIB 480 bytes" }
+gte_reg02_1_ReadOTZ = { addr = 0x801792A0, type = "func", source = "LIBGTE.LIB 480 bytes" }
+LightColor = { addr = 0x801792B8, type = "func", source = "LIBGTE.LIB 528 bytes" }
+DpqColorLight = { addr = 0x801792E0, type = "func", source = "LIBGTE.LIB 528 bytes" }
+DpqColor3 = { addr = 0x80179308, type = "func", source = "LIBGTE.LIB 528 bytes" }
+Intpl = { addr = 0x80179344, type = "func", source = "LIBGTE.LIB 528 bytes" }
+Square12 = { addr = 0x80179368, type = "func", source = "LIBGTE.LIB 528 bytes" }
+Square0 = { addr = 0x80179390, type = "func", source = "LIBGTE.LIB 528 bytes" }
+AverageZ3 = { addr = 0x801793B8, type = "func", source = "LIBGTE.LIB 528 bytes" }
+AverageZ4 = { addr = 0x801793D8, type = "func", source = "LIBGTE.LIB 528 bytes" }
+OuterProduct12 = { addr = 0x801793FC, type = "func", source = "LIBGTE.LIB 528 bytes" }
+OuterProduct0 = { addr = 0x80179454, type = "func", source = "LIBGTE.LIB 528 bytes" }
+Lzc = { addr = 0x801794AC, type = "func", source = "LIBGTE.LIB 528 bytes" }
+ReadLZC = { addr = 0x801794B8, alias = true, source = "The mfc2 half of the LIBGTE.LIB smp_00.o Lzc member at Lzc+0xC: it reads LZCR, and the split's Lzc label covers it (config/sdk/library-units.jsonl names the unit)." }
+RotTransPers = { addr = 0x801794C8, type = "func", source = "LIBGTE.LIB 48 bytes" }
+RotTransPers3 = { addr = 0x801794F8, type = "func", source = "LIBGTE.LIB 96 bytes" }
+RotTrans = { addr = 0x80179558, type = "func", source = "LIBGTE.LIB 48 bytes" }
+RotTransPers4 = { addr = 0x80179588, type = "func", source = "LIBGTE.LIB 128 bytes" }
+RotAverage3 = { addr = 0x80179608, type = "func", source = "LIBGTE.LIB 96 bytes" }
+RotAverage4 = { addr = 0x80179668, type = "func", source = "LIBGTE.LIB 128 bytes" }
+TransposeMatrix = { addr = 0x801796E8, type = "func", source = "LIBGTE.LIB 80 bytes" }
+RotMatrix = { addr = 0x80179738, type = "func", source = "LIBGTE.LIB 656 bytes" }
+RotMatrixYXZ = { addr = 0x801799C8, type = "func", source = "LIBGTE.LIB 656 bytes" }
+RotMatrixX = { addr = 0x80179C58, type = "func", source = "LIBGTE.LIB 416 bytes" }
+RotMatrixY = { addr = 0x80179DF8, type = "func", source = "LIBGTE.LIB 416 bytes" }
+RotMatrixZ = { addr = 0x80179F98, type = "func", source = "LIBGTE.LIB 416 bytes" }
+ratan2 = { addr = 0x8017A138, type = "func", source = "LIBGTE.LIB 384 bytes" }
+_patch_gte = { addr = 0x8017A2B8, type = "func", source = "LIBGTE.LIB 160 bytes" }
+LoadTPage = { addr = 0x8017A358, type = "func", source = "LIBGPU.LIB 712 bytes" }
+LoadClut = { addr = 0x8017A444, type = "func", source = "LIBGPU.LIB 712 bytes" }
+LoadClut2 = { addr = 0x8017A4AC, type = "func", source = "LIBGPU.LIB 712 bytes" }
+SetDefDrawEnv = { addr = 0x8017A514, type = "func", source = "LIBGPU.LIB 712 bytes" }
+SetDefDispEnv = { addr = 0x8017A5E4, type = "func", source = "LIBGPU.LIB 712 bytes" }
+GetTPage = { addr = 0x8017A620, type = "func", source = "LIBGPU.LIB 2284 bytes" }
+GetClut = { addr = 0x8017A6F0, type = "func", source = "LIBGPU.LIB 2284 bytes" }
+DumpTPage = { addr = 0x8017A708, type = "func", source = "LIBGPU.LIB 2284 bytes" }
+DumpClut = { addr = 0x8017A7D8, type = "func", source = "LIBGPU.LIB 2284 bytes" }
+NextPrim = { addr = 0x8017A818, type = "func", source = "LIBGPU.LIB 2284 bytes" }
+IsEndPrim = { addr = 0x8017A834, type = "func", source = "LIBGPU.LIB 2284 bytes" }
+AddPrim = { addr = 0x8017A850, type = "func", source = "LIBGPU.LIB 2284 bytes" }
+AddPrims = { addr = 0x8017A88C, type = "func", source = "LIBGPU.LIB 2284 bytes" }
+CatPrim = { addr = 0x8017A8C8, type = "func", source = "LIBGPU.LIB 2284 bytes" }
+TermPrim = { addr = 0x8017A8EC, type = "func", source = "LIBGPU.LIB 2284 bytes" }
+SetSemiTrans = { addr = 0x8017A904, type = "func", source = "LIBGPU.LIB 2284 bytes" }
+SetShadeTex = { addr = 0x8017A92C, type = "func", source = "LIBGPU.LIB 2284 bytes" }
+SetPolyF3 = { addr = 0x8017A954, type = "func", source = "LIBGPU.LIB 2284 bytes" }
+SetPolyFT3 = { addr = 0x8017A968, type = "func", source = "LIBGPU.LIB 2284 bytes" }
+SetPolyG3 = { addr = 0x8017A97C, type = "func", source = "LIBGPU.LIB 2284 bytes" }
+SetPolyGT3 = { addr = 0x8017A990, type = "func", source = "LIBGPU.LIB 2284 bytes" }
+SetPolyF4 = { addr = 0x8017A9A4, type = "func", source = "LIBGPU.LIB 2284 bytes" }
+SetPolyFT4 = { addr = 0x8017A9B8, type = "func", source = "LIBGPU.LIB 2284 bytes" }
+SetPolyG4 = { addr = 0x8017A9CC, type = "func", source = "LIBGPU.LIB 2284 bytes" }
+SetPolyGT4 = { addr = 0x8017A9E0, type = "func", source = "LIBGPU.LIB 2284 bytes" }
+SetSprt8 = { addr = 0x8017A9F4, type = "func", source = "LIBGPU.LIB 2284 bytes" }
+SetSprt16 = { addr = 0x8017AA08, type = "func", source = "LIBGPU.LIB 2284 bytes" }
+SetSprt = { addr = 0x8017AA1C, type = "func", source = "LIBGPU.LIB 2284 bytes" }
+SetTile1 = { addr = 0x8017AA30, type = "func", source = "LIBGPU.LIB 2284 bytes" }
+SetTile8 = { addr = 0x8017AA44, type = "func", source = "LIBGPU.LIB 2284 bytes" }
+SetTile16 = { addr = 0x8017AA58, type = "func", source = "LIBGPU.LIB 2284 bytes" }
+SetTile = { addr = 0x8017AA6C, type = "func", source = "LIBGPU.LIB 2284 bytes" }
+SetLineF2 = { addr = 0x8017AA80, type = "func", source = "LIBGPU.LIB 2284 bytes" }
+SetLineG2 = { addr = 0x8017AA94, type = "func", source = "LIBGPU.LIB 2284 bytes" }
+SetLineF3 = { addr = 0x8017AAA8, type = "func", source = "LIBGPU.LIB 2284 bytes" }
+SetLineG3 = { addr = 0x8017AAC8, type = "func", source = "LIBGPU.LIB 2284 bytes" }
+SetLineF4 = { addr = 0x8017AAE8, type = "func", source = "LIBGPU.LIB 2284 bytes" }
+SetLineG4 = { addr = 0x8017AB08, type = "func", source = "LIBGPU.LIB 2284 bytes" }
+SetDrawTPage = { addr = 0x8017AB28, type = "func", source = "LIBGPU.LIB 2284 bytes" }
+SetDrawMove = { addr = 0x8017ABDC, type = "func", source = "LIBGPU.LIB 2284 bytes" }
+SetDrawLoad = { addr = 0x8017AC3C, type = "func", source = "LIBGPU.LIB 2284 bytes" }
+MargePrim = { addr = 0x8017ACA8, type = "func", source = "LIBGPU.LIB 2284 bytes" }
+DumpDrawEnv = { addr = 0x8017ACE0, type = "func", source = "LIBGPU.LIB 2284 bytes" }
+DumpDispEnv = { addr = 0x8017AE60, type = "func", source = "LIBGPU.LIB 2284 bytes" }
+ResetGraph = { addr = 0x8017AF0C, type = "func", source = "LIBGPU.LIB 12436 bytes" }
+SetGraphReverse = { addr = 0x8017B090, type = "func", source = "LIBGPU.LIB 12436 bytes" }
+SetGraphDebug = { addr = 0x8017B1A4, type = "func", source = "LIBGPU.LIB 12436 bytes" }
+SetGraphQueue = { addr = 0x8017B208, type = "func", source = "LIBGPU.LIB 12436 bytes" }
+GetGraphType = { addr = 0x8017B2B4, type = "func", source = "LIBGPU.LIB 12436 bytes" }
+GetGraphDebug = { addr = 0x8017B2C4, type = "func", source = "LIBGPU.LIB 12436 bytes" }
+DrawSyncCallback = { addr = 0x8017B2D4, type = "func", source = "LIBGPU.LIB 12436 bytes" }
+SetDispMask = { addr = 0x8017B330, type = "func", source = "LIBGPU.LIB 12436 bytes" }
+DrawSync = { addr = 0x8017B3CC, type = "func", source = "LIBGPU.LIB 12436 bytes" }
+checkRECT = { addr = 0x8017B438, type = "func", source = "LIBGPU.LIB 12436 bytes" }
+ClearImage = { addr = 0x8017B560, type = "func", source = "LIBGPU.LIB 12436 bytes" }
+ClearImage2 = { addr = 0x8017B5F4, type = "func", source = "LIBGPU.LIB 12436 bytes" }
+LoadImage = { addr = 0x8017B690, type = "func", source = "LIBGPU.LIB 12436 bytes" }
+StoreImage = { addr = 0x8017B6F4, type = "func", source = "LIBGPU.LIB 12436 bytes" }
+MoveImage = { addr = 0x8017B758, type = "func", source = "LIBGPU.LIB 12436 bytes" }
+ClearOTag = { addr = 0x8017B81C, type = "func", source = "LIBGPU.LIB 12436 bytes" }
+ClearOTagR = { addr = 0x8017B8D4, type = "func", source = "LIBGPU.LIB 12436 bytes" }
+DrawPrim = { addr = 0x8017B96C, type = "func", source = "LIBGPU.LIB 12436 bytes" }
+DrawOTag = { addr = 0x8017B9CC, type = "func", source = "LIBGPU.LIB 12436 bytes" }
+PutDrawEnv = { addr = 0x8017BA40, type = "func", source = "LIBGPU.LIB 12436 bytes" }
+DrawOTagEnv = { addr = 0x8017BB44, type = "func", source = "LIBGPU.LIB 12436 bytes" }
+GetDrawEnv = { addr = 0x8017BC60, type = "func", source = "LIBGPU.LIB 12436 bytes" }
+PutDispEnv = { addr = 0x8017BC98, type = "func", source = "LIBGPU.LIB 12436 bytes" }
+GetDispEnv = { addr = 0x8017C140, type = "func", source = "LIBGPU.LIB 12436 bytes" }
+GetODE = { addr = 0x8017C178, type = "func", source = "LIBGPU.LIB 12436 bytes" }
+SetTexWindow = { addr = 0x8017C1A8, type = "func", source = "LIBGPU.LIB 12436 bytes" }
+SetDrawArea = { addr = 0x8017C1E4, type = "func", source = "LIBGPU.LIB 12436 bytes" }
+SetDrawOffset = { addr = 0x8017C268, type = "func", source = "LIBGPU.LIB 12436 bytes" }
+SetPriority = { addr = 0x8017C2AC, type = "func", source = "LIBGPU.LIB 12436 bytes" }
+SetDrawMode = { addr = 0x8017C2D8, type = "func", source = "LIBGPU.LIB 12436 bytes" }
+SetDrawEnv = { addr = 0x8017C330, type = "func", source = "LIBGPU.LIB 12436 bytes" }
+SetDrawEnv2 = { addr = 0x8017C548, type = "func", source = "LIBGPU.LIB 12436 bytes" }
+get_mode = { addr = 0x8017C7D8, type = "func", source = "LIBGPU.LIB 12436 bytes" }
+get_cs = { addr = 0x8017C830, type = "func", source = "LIBGPU.LIB 12436 bytes" }
+get_ce = { addr = 0x8017C8FC, type = "func", source = "LIBGPU.LIB 12436 bytes" }
+get_ofs = { addr = 0x8017C9C8, type = "func", source = "LIBGPU.LIB 12436 bytes" }
+get_tw = { addr = 0x8017CA0C, type = "func", source = "LIBGPU.LIB 12436 bytes" }
+get_dx = { addr = 0x8017CA90, type = "func", source = "LIBGPU.LIB 12436 bytes" }
+_status = { addr = 0x8017CB40, type = "func", source = "LIBGPU.LIB 12436 bytes" }
+_otc = { addr = 0x8017CB58, type = "func", source = "LIBGPU.LIB 12436 bytes" }
+_clr = { addr = 0x8017CC40, type = "func", source = "LIBGPU.LIB 12436 bytes" }
+_dws = { addr = 0x8017CE9C, type = "func", source = "LIBGPU.LIB 12436 bytes" }
+_drs = { addr = 0x8017D0D8, type = "func", source = "LIBGPU.LIB 12436 bytes" }
+_ctl = { addr = 0x8017D35C, type = "func", source = "LIBGPU.LIB 12436 bytes" }
+_getctl = { addr = 0x8017D384, type = "func", source = "LIBGPU.LIB 12436 bytes" }
+_cwb = { addr = 0x8017D398, type = "func", source = "LIBGPU.LIB 12436 bytes" }
+_cwc = { addr = 0x8017D3E8, type = "func", source = "LIBGPU.LIB 12436 bytes" }
+_param = { addr = 0x8017D434, type = "func", source = "LIBGPU.LIB 12436 bytes" }
+_addque = { addr = 0x8017D464, type = "func", source = "LIBGPU.LIB 12436 bytes" }
+_addque2 = { addr = 0x8017D488, type = "func", source = "LIBGPU.LIB 12436 bytes" }
+_exeque = { addr = 0x8017D768, type = "func", source = "LIBGPU.LIB 12436 bytes" }
+_reset = { addr = 0x8017DA54, type = "func", source = "LIBGPU.LIB 12436 bytes" }
+_sync = { addr = 0x8017DBB0, type = "func", source = "LIBGPU.LIB 12436 bytes" }
+set_alarm = { addr = 0x8017DCF8, type = "func", source = "LIBGPU.LIB 12436 bytes" }
+get_alarm = { addr = 0x8017DD2C, type = "func", source = "LIBGPU.LIB 12436 bytes" }
+_version = { addr = 0x8017DE98, type = "func", source = "LIBGPU.LIB 12436 bytes" }
+memset = { addr = 0x8017DF74, type = "func", source = "LIBGPU.LIB 12436 bytes" }
+_bu_init = { addr = 0x8017DFA0, type = "func", source = "LIBAPI.LIB 16 bytes" }
+_card_info = { addr = 0x8017DFB0, type = "func", source = "LIBCARD.LIB 16 bytes" }
+_card_load = { addr = 0x8017DFC0, type = "func", source = "LIBCARD.LIB 16 bytes" }
+_card_clear = { addr = 0x8017DFD0, type = "func", source = "LIBCARD.LIB 56 bytes" }
+_card_write = { addr = 0x8017E008, type = "func", source = "LIBCARD.LIB 16 bytes" }
+_new_card = { addr = 0x8017E018, type = "func", source = "LIBCARD.LIB 16 bytes" }
+InitCARD = { addr = 0x8017E028, type = "func", source = "LIBCARD.LIB 188 bytes" }
+StartCARD = { addr = 0x8017E07C, type = "func", source = "LIBCARD.LIB 188 bytes" }
+StopCARD = { addr = 0x8017E0B4, type = "func", source = "LIBCARD.LIB 188 bytes" }
+InitCARD2 = { addr = 0x8017E0E4, type = "func", source = "LIBCARD.LIB 16 bytes" }
+StartCARD2 = { addr = 0x8017E0F4, type = "func", source = "LIBCARD.LIB 16 bytes" }
+StopCARD2 = { addr = 0x8017E104, type = "func", source = "LIBCARD.LIB 16 bytes" }
+_patch_card = { addr = 0x8017E16C, type = "func", source = "LIBCARD.LIB 416 bytes" }
+_patch_card2 = { addr = 0x8017E224, type = "func", source = "LIBCARD.LIB 416 bytes" }
+_ExitCard = { addr = 0x8017E2B4, type = "func", source = "LIBCARD.LIB 128 bytes" }
+puts = { addr = 0x8017E33C, type = "func", source = "LIBC.LIB 32 bytes" }
+setjmp = { addr = 0x8017E354, type = "func", source = "LIBC.LIB 16 bytes" }
+strcat = { addr = 0x8017E364, type = "func", source = "LIBC.LIB 16 bytes" }
+strcmp = { addr = 0x8017E374, type = "func", source = "LIBC.LIB 16 bytes" }
+strncmp = { addr = 0x8017E384, type = "func", source = "LIBC.LIB 16 bytes" }
+strcpy = { addr = 0x8017E394, type = "func", source = "LIBC.LIB 16 bytes" }
+strncpy = { addr = 0x8017E3A4, type = "func", source = "LIBC.LIB 16 bytes" }
+strlen = { addr = 0x8017E3B4, type = "func", source = "LIBC.LIB 16 bytes" }
+memcpy = { addr = 0x8017E3C4, type = "func", source = "LIBC.LIB 16 bytes" }
+rand = { addr = 0x8017E3D4, type = "func", source = "LIBC.LIB 16 bytes" }
+printf = { addr = 0x8017E3E4, type = "func", source = "LIBC.LIB 16 bytes" }
+sprintf = { addr = 0x8017E3F4, type = "func", source = "LIBC.LIB 2140 bytes" }
+bios_JumpVector_0x8017EC04 = { addr = 0x8017EC04, type = "func", source = "LIBC.LIB 2140 bytes" }
+memchr = { addr = 0x8017EC50, type = "func", source = "LIBC.LIB 16 bytes" }
+memmove = { addr = 0x8017EC60, type = "func", source = "LIBC.LIB 108 bytes" }
+InitHeap = { addr = 0x8017ECCC, type = "func", source = "LIBAPI.LIB 16 bytes" }
+Exec = { addr = 0x8017ECDC, type = "func", source = "LIBAPI.LIB 16 bytes" }
+FlushCache = { addr = 0x8017ECEC, type = "func", source = "LIBAPI.LIB 16 bytes" }
+GPU_cw = { addr = 0x8017ECFC, type = "func", source = "LIBAPI.LIB 16 bytes" }
+_96_remove = { addr = 0x8017ED14, type = "func", source = "LIBAPI c114.o `_96_remove`: the kernel entry that removes the exception handler." }
+DeliverEvent = { addr = 0x8017ED2C, type = "func", source = "LIBAPI.LIB 16 bytes" }
+OpenEvent = { addr = 0x8017ED3C, type = "func", source = "LIBAPI.LIB 16 bytes" }
+CloseEvent = { addr = 0x8017ED4C, type = "func", source = "LIBAPI.LIB 16 bytes" }
+WaitEvent = { addr = 0x8017ED5C, type = "func", source = "LIBAPI.LIB 16 bytes" }
+TestEvent = { addr = 0x8017ED6C, type = "func", source = "LIBAPI.LIB 16 bytes" }
+EnableEvent = { addr = 0x8017ED7C, type = "func", source = "LIBAPI.LIB 16 bytes" }
+DisableEvent = { addr = 0x8017ED8C, type = "func", source = "LIBAPI.LIB 16 bytes" }
+OpenTh = { addr = 0x8017ED9C, type = "func", source = "LIBAPI.LIB 16 bytes" }
+CloseTh = { addr = 0x8017EDAC, type = "func", source = "LIBAPI.LIB 16 bytes" }
+ChangeTh = { addr = 0x8017EDBC, type = "func", source = "LIBAPI.LIB 16 bytes" }
+PAD_dr = { addr = 0x8017EDCC, type = "func", source = "LIBAPI.LIB 16 bytes" }
+ReturnFromException = { addr = 0x8017EDDC, type = "func", source = "LIBAPI.LIB 16 bytes" }
+ResetEntryInt = { addr = 0x8017EDEC, type = "func", source = "LIBAPI.LIB 16 bytes" }
+HookEntryInt = { addr = 0x8017EDFC, type = "func", source = "LIBAPI.LIB 16 bytes" }
+EnterCriticalSection = { addr = 0x8017EE0C, type = "func", source = "LIBAPI.LIB 16 bytes" }
+ExitCriticalSection = { addr = 0x8017EE1C, type = "func", source = "LIBAPI.LIB 16 bytes" }
+SetSp = { addr = 0x8017EE2C, type = "func", source = "LIBAPI.LIB 16 bytes" }
+open = { addr = 0x8017EE3C, type = "func", source = "LIBAPI.LIB 16 bytes" }
+lseek = { addr = 0x8017EE4C, type = "func", source = "LIBAPI.LIB 16 bytes" }
+read = { addr = 0x8017EE5C, type = "func", source = "LIBAPI.LIB 16 bytes" }
+write = { addr = 0x8017EE6C, type = "func", source = "LIBAPI.LIB 16 bytes" }
+close = { addr = 0x8017EE7C, type = "func", source = "LIBAPI.LIB 16 bytes" }
+format = { addr = 0x8017EE8C, type = "func", source = "LIBAPI.LIB 16 bytes" }
+firstfile = { addr = 0x8017EE9C, type = "func", source = "LIBAPI.LIB 16 bytes" }
+nextfile = { addr = 0x8017EEAC, type = "func", source = "LIBAPI.LIB 16 bytes" }
+ChangeClearPAD = { addr = 0x8017EEBC, type = "func", source = "LIBAPI.LIB 16 bytes" }
+GetSp = { addr = 0x8017EECC, type = "func", source = "LIBAPI.LIB 16 bytes" }
+ChangeClearRCnt = { addr = 0x8017EEDC, type = "func", source = "LIBAPI.LIB 16 bytes" }
+SetRCnt = { addr = 0x8017EEEC, type = "func", size = 0x9C, source = "LIBAPI counter.o SetRCnt, words equal retail" }
+GetRCnt = { addr = 0x8017EF88, type = "func", size = 0x38, source = "LIBAPI counter.o GetRCnt, words equal retail" }
+StartRCnt = { addr = 0x8017EFC0, type = "func", size = 0x34, source = "LIBAPI counter.o StartRCnt, words equal retail" }
+StopRCnt = { addr = 0x8017EFF4, type = "func", size = 0x38, source = "LIBAPI counter.o StopRCnt, words equal retail" }
+ResetRCnt = { addr = 0x8017F02C, type = "func", size = 0x38, source = "LIBAPI counter.o ResetRCnt, words equal retail" }
+SetInitPadFlag = { addr = 0x8017F064, type = "func", size = 0x10, source = "Marks the controller library as initialized." }
+ReadInitPadFlag = { addr = 0x8017F074, type = "func", source = "LIBAPI.LIB pad.o 16 bytes" }
+PAD_init = { addr = 0x8017F084, type = "func", size = 0x8C, source = "Initializes the controller library." }
+InitPAD = { addr = 0x8017F110, type = "func", size = 0x8C, source = "LIBAPI pad.o InitPAD, four words" }
+StartPAD = { addr = 0x8017F19C, type = "func", size = 0x30, source = "LIBAPI pad.o StartPAD" }
+StopPAD = { addr = 0x8017F1CC, type = "func", size = 0x30, source = "LIBAPI pad.o StopPAD - stops PAD2 and detaches the interrupt queue" }
+SetPatchPad = { addr = 0x8017F1FC, type = "func", size = 0x80, source = "LIBAPI pad.o SetPatchPad - queues the handler pair and clears the PAD work word" }
+RemovePatchPad = { addr = 0x8017F27C, type = "func", size = 0x38, source = "LIBAPI pad.o RemovePatchPad - dequeues the PAD interrupt record" }
+_Pad1 = { addr = 0x8017F2B4, type = "func", size = 0x68, source = "LIBAPI pad.o _Pad1 - clears the PAD work halfword then spins" }
+_IsVSync = { addr = 0x8017F31C, type = "func", size = 0x40, source = "LIBAPI pad.o _IsVSync - tests both PAD record words" }
+InitPAD2 = { addr = 0x8017F35C, type = "func", source = "LIBAPI.LIB 16 bytes" }
+StartPAD2 = { addr = 0x8017F36C, type = "func", source = "LIBAPI.LIB 16 bytes" }
+StopPAD2 = { addr = 0x8017F37C, type = "func", source = "LIBAPI.LIB 16 bytes" }
+PAD_init2 = { addr = 0x8017F38C, type = "func", source = "LIBAPI.LIB 16 bytes" }
+SysEnqIntRP = { addr = 0x8017F39C, type = "func", source = "LIBAPI.LIB 16 bytes" }
+SysDeqIntRP = { addr = 0x8017F3AC, type = "func", source = "LIBAPI.LIB 16 bytes" }
+EnablePAD = { addr = 0x8017F3BC, type = "func", size = 0x14, source = "LIBAPI patch.o EnablePAD - tail-dispatches the saved BIOS PAD entry" }
+DesablePAD = { addr = 0x8017F3D0, type = "func", source = "LIBAPI patch.o DesablePAD, words equal retail" }
+_patch_pad = { addr = 0x8017F3E4, type = "func", size = 0x90, source = "PsyQ LIBAPI library routine." }
+g_ExceptionTitle = { addr = 0x8017F504, source = "The EXCEPTION text pointer SYS_ShowException draws as its header." }
+g_ExceptionCauseNames = { addr = 0x8017F508, source = "The INTERRRUPT text cells SYS_ShowException indexes by the exception code." }
+g_SpriteSizes = { addr = 0x8017F53C, source = "Sprite cell sizes by shape." }
+g_SpriteCellRotations = { addr = 0x8017F55C, source = "Sprite cell rotations by shape." }
+g_NumberRowShades = { addr = 0x8017F580, source = "Shades of the number font rows." }
+g_TextRowShades = { addr = 0x8017F5A0, source = "Shades of the window font rows." }
+g_TextRowOffsets = { addr = 0x8017F620, source = "UI_DrawGlyph takes the per-row pixel offset of the window text" }
+g_AnswerMessages = { addr = 0x8017F628, source = "Messages that answer menu choices." }
+g_SpriteCellPartCounts = { addr = 0x8017F79C, source = "Sprite part counts by cell." }
+g_SpriteCellTopV = { addr = 0x8017F894, source = "Top texture coordinates of the sprite cells." }
+g_SpriteCellBottomV = { addr = 0x8017F8A8, source = "Bottom texture coordinates of the sprite cells." }
+g_SpriteCellLeftU = { addr = 0x8017F8BC, source = "Left texture coordinates of the sprite cells." }
+g_SpriteCellRightU = { addr = 0x8017F8C8, source = "Right texture coordinates of the sprite cells." }
+g_SpriteCellCluts = { addr = 0x8017F8D4, source = "CLUTs of the sprite cells." }
+g_BundleOpcodes = { addr = 0x8017F8F0, source = "Handlers of the area bundle opcodes." }
+g_BundleRecordOpcodes = { addr = 0x8017F8FC, source = "Handlers of the area bundle records." }
+g_MenuPanelOrigins = { addr = 0x8017F90C, source = "Origins of the menu panels." }
+g_AreaLoads = { addr = 0x8017F974, source = "Pointers to the 200 AreaLoad records, indexed by area id." }
+g_AreaEncounterZones = { addr = 0x8017FC94, source = "The area encounter zones." }
+g_EncounterZones = { addr = 0x80181164, source = "Encounter zone lists, one per map." }
+g_SceneFlagPairs = { addr = 0x80181484, source = "Two flag bytes per scene id; Area_SelectSceneRecord copies the pair of the matched scene id into the task." }
+g_FacingOffsets = { addr = 0x80181AC0, type = "Offset2", source = "8 facing offsets of two words each, added to a position by the plchar route walkers" }
+g_CharSlot = { addr = 0x80181B10, size = 12, source = "Character slot map." }
+g_FacingSteps = { addr = 0x80181B94, type = "Offset2", source = "8 facing steps, PlChar_ProbeFacingCell adds step x and y to a position" }
+g_FacingStepY = { addr = 0x80181B98, source = "Y steps of the facing directions." }
+g_RouteSpeedScale = { addr = 0x80181BD4, source = "8 speed scales the route walkers multiply a step by" }
+s_LoaderRecordBytes = { addr = 0x80181D98, source = "Record list bytes of the loader." }
+g_SelectionSepSlots = { addr = 0x80181EBA, source = "SEP slot of each BGM track (byte 0x02 of a g_BGMTracks row)." }
+g_SelectionSequences = { addr = 0x80181EBB, source = "Sequence byte of each g_BGMTracks row (+0x03, read with a 4-byte row stride), the partner of g_SelectionSepSlots; consumers keep these byte views because a typed g_BGMTracks access moves the generated bytes." }
+s_ScriptCopyBlock = { addr = 0x8018216C, source = "Copy block of the script interpreter." }
+g_AreaScriptTests = { addr = 0x8018217C, source = "Condition tests of the area setup stream." }
+g_VabProgramOffsets = { addr = 0x801821E0, source = "Program block offsets of the sound banks." }
+g_VabToneOffsets = { addr = 0x801821E8, source = "Tone offsets of the sound banks." }
+g_SndSeReaders = { addr = 0x8018232C, source = "Handlers that read a sound SE." }
+g_SndBankSpuAddress = { addr = 0x80182348, source = "SPU start address of each sound bank." }
+g_SndBankHeaderSize = { addr = 0x8018239C, source = "Header size of each sound bank." }
+g_SndBankSequenceSize = { addr = 0x801823F0, source = "Sequence size of each sound bank." }
+g_EmiSlotLbas = { addr = 0x80182444, source = "EMI_GetArchiveSector returns its entry for a slot id" }
+g_EmiHeaderTag = { addr = 0x80183224, source = "Tag of the EMI header." }
+g_XAStreamSlots = { addr = 0x80183230, source = "Slot ids of the XA streams." }
+g_XACues = { addr = 0x8018323C, source = "Cue tables of the XA stream groups." }
+g_EmiEntryTypes = { addr = 0x80183248, source = "Handlers of the EMI entry types." }
+g_XAStates = { addr = 0x80183274, source = "Handlers of the XA audio states." }
+_spu_RXX = { addr = 0x80183AB0, source = "LIBSPU spu.o _spu_RXX, 24 bytes equal retail, the pointer to SPU_V0_VOL_L the sound code drives" }
+_spu_tsa = { addr = 0x80183AC8, alias = true, source = "PsyQ 3.7 LIBSPU data symbol kept so the split accounts for the library data the game never names." }
+_spu_transMode = { addr = 0x80183ACC, alias = true, source = "PsyQ 3.7 LIBSPU data symbol kept so the split accounts for the library data the game never names." }
+_spu_mem_mode_plus = { addr = 0x80183AD8, alias = true, source = "PsyQ 3.7 LIBSPU data symbol kept so the split accounts for the library data the game never names." }
+_spu_mem_mode_unitM = { addr = 0x80183AE0, alias = true, source = "PsyQ 3.7 LIBSPU data symbol kept so the split accounts for the library data the game never names." }
+_spu_inTransfer = { addr = 0x80183AE4, alias = true, source = "PsyQ 3.7 LIBSPU data symbol kept so the split accounts for the library data the game never names." }
+_spu_transferCallback = { addr = 0x80183AE8, alias = true, source = "PsyQ 3.7 LIBSPU data symbol kept so the split accounts for the library data the game never names." }
+_spu_IRQCallback = { addr = 0x80183AEC, source = "LIBSPU spu.o _spu_IRQCallback, equal retail" }
+_spu_EVdma = { addr = 0x80183B14, alias = true, source = "PsyQ 3.7 LIBSPU data symbol kept so the split accounts for the library data the game never names." }
+_spu_keystat = { addr = 0x80183B18, alias = true, source = "PsyQ 3.7 LIBSPU data symbol kept so the split accounts for the library data the game never names." }
+_spu_trans_mode = { addr = 0x80183B1C, alias = true, source = "PsyQ 3.7 LIBSPU data symbol kept so the split accounts for the library data the game never names." }
+_spu_rev_flag = { addr = 0x80183B20, alias = true, source = "PsyQ 3.7 LIBSPU data symbol kept so the split accounts for the library data the game never names." }
+_spu_rev_reserve_wa = { addr = 0x80183B24, alias = true, source = "PsyQ 3.7 LIBSPU data symbol kept so the split accounts for the library data the game never names." }
+_spu_rev_offsetaddr = { addr = 0x80183B28, alias = true, source = "PsyQ 3.7 LIBSPU data symbol kept so the split accounts for the library data the game never names." }
+_spu_rev_attr = { addr = 0x80183B2C, alias = true, source = "PsyQ 3.7 LIBSPU data symbol kept so the split accounts for the library data the game never names." }
+_spu_RQmask = { addr = 0x80183B44, alias = true, source = "PsyQ 3.7 LIBSPU data symbol kept so the split accounts for the library data the game never names." }
+_spu_voice_centerNote = { addr = 0x80183B48, source = "LIBSPU s_ini.o _spu_voice_centerNote, 48 bytes equal retail" }
+_spu_zerobuf = { addr = 0x80183B78, alias = true, source = "PsyQ 3.7 LIBSPU data symbol kept so the split accounts for the library data the game never names." }
+_spu_env = { addr = 0x80183F78, alias = true, source = "PsyQ 3.7 LIBSPU data symbol kept so the split accounts for the library data the game never names." }
+_spu_isCalled = { addr = 0x80183F7C, alias = true, source = "PsyQ 3.7 LIBSPU data symbol kept so the split accounts for the library data the game never names." }
+_spu_AllocBlockNum = { addr = 0x80183F80, alias = true, source = "PsyQ 3.7 LIBSPU data symbol kept so the split accounts for the library data the game never names." }
+_spu_AllocLastNum = { addr = 0x80183F84, alias = true, source = "PsyQ 3.7 LIBSPU data symbol kept so the split accounts for the library data the game never names." }
+_spu_memList = { addr = 0x80183F88, alias = true, source = "PsyQ 3.7 LIBSPU data symbol kept so the split accounts for the library data the game never names." }
+_spu_rev_startaddr = { addr = 0x80183F8C, source = "LIBSPU s_rmp.o _spu_rev_startaddr, 40 bytes equal retail" }
+_spu_rev_workareasize = { addr = 0x80183FB4, source = "LIBSPU s_rmp.o _spu_rev_workareasize, 40 bytes equal retail" }
+_spu_rev_param = { addr = 0x80183FDC, source = "LIBSPU s_rmp.o _spu_rev_param, 680 bytes equal retail" }
+_snd_seq_tick_env = { addr = 0x80184440, alias = true, source = "PsyQ 3.7 LIBSND data symbol kept so the split accounts for the library data the game never names." }
+_svm_sreg = { addr = 0x80184458, alias = true, source = "PsyQ 3.7 LIBSND data symbol kept so the split accounts for the library data the game never names." }
+Vcount = { addr = 0x801856C4, size = 0x4, source = "PsyQ LIBETC vblank counter, one per vblank; v_wait spins until it reaches its target." }
+CD_cbsync = { addr = 0x80185780, alias = true, source = "PsyQ 3.7 LIBCD data symbol kept so the split accounts for the library data the game never names." }
+CD_cbready = { addr = 0x80185784, alias = true, source = "PsyQ 3.7 LIBCD data symbol kept so the split accounts for the library data the game never names." }
+CD_debug = { addr = 0x8018578C, alias = true, source = "PsyQ 3.7 LIBCD data symbol kept so the split accounts for the library data the game never names." }
+CD_status = { addr = 0x80185790, alias = true, source = "PsyQ 3.7 LIBCD data symbol kept so the split accounts for the library data the game never names." }
+CD_pos = { addr = 0x8018579C, alias = true, source = "PsyQ 3.7 LIBCD data symbol kept so the split accounts for the library data the game never names." }
+CD_mode = { addr = 0x801857A0, alias = true, source = "PsyQ 3.7 LIBCD data symbol kept so the split accounts for the library data the game never names." }
+CD_com = { addr = 0x801857A1, alias = true, source = "PsyQ 3.7 LIBCD data symbol kept so the split accounts for the library data the game never names." }
+CD_comstr = { addr = 0x801857A4, alias = true, source = "PsyQ 3.7 LIBCD data symbol kept so the split accounts for the library data the game never names." }
+CD_intstr = { addr = 0x80185824, alias = true, source = "PsyQ 3.7 LIBCD data symbol kept so the split accounts for the library data the game never names." }
+g_CdIndex = { addr = 0x80185A44, source = "Pointer to the CD index register." }
+rsin_tbl = { addr = 0x80185AC4, source = "LIBGTE sincos.o rsin_tbl, 2050 bytes equal retail" }
+jtbl_801862C8 = { addr = 0x801862C8, type = "Callback", source = "The switch table of InitGeom: the jump targets of its jr dispatch." }
+SQRT = { addr = 0x801862D8, source = "LIBGTE sqrtbl.o SQRT, 384 bytes equal retail" }
+rcossin_tbl = { addr = 0x80186908, source = "LIBGTE cstbl.o rcossin_tbl, 16384 bytes equal retail" }
+ratan_tbl = { addr = 0x8018A908, source = "LIBGTE ratan.o ratan_tbl, 2050 bytes equal retail" }
+GPU_printf = { addr = 0x8018B158, alias = true, source = "The libgpu debug printf hook GPU_printf (libgpu.h), a function pointer the GPU library calls." }
+g_GpuGp1 = { addr = 0x8018B230, source = "Pointer to the GPU GP1 register." }
+g_SysStartupReturn = { addr = 0x8018B2B8, size = 0x4, source = "Return address saved by the startup code." }
+jtbl_8018B2BC = { addr = 0x8018B2BC, type = "Callback", source = "The switch table of _patch_gte: the jump targets of its jr dispatch." }
+jtbl_8018B2CC = { addr = 0x8018B2CC, type = "Callback", source = "The switch table of _patch_card: the jump targets of its jr dispatch." }
+jtbl_8018B2D0 = { addr = 0x8018B2D0, type = "Callback", source = "The switch table of func_8017E114: the jump targets of its jr dispatch." }
+jtbl_8018B2DC = { addr = 0x8018B2DC, type = "Callback", source = "The switch table of _ExitCard: the jump targets of its jr dispatch." }
+jtbl_8018B2EC = { addr = 0x8018B2EC, type = "Callback", source = "The switch table of _patch_pad: the jump targets of its jr dispatch." }
+jtbl_8018B2F4 = { addr = 0x8018B2F4, type = "Callback", source = "The switch table of EnablePAD: the jump targets of its jr dispatch." }
+jtbl_8018B2F8 = { addr = 0x8018B2F8, type = "Callback", source = "The switch table of DesablePAD: the jump targets of its jr dispatch." }
+g_SysHardwareInitialized = { addr = 0x8018B300, source = "SYS_Main clears it and SYS_InitHardware sets it after initialization" }
+_svm_okon1 = { addr = 0x8018DB50, alias = true, source = "PsyQ 3.7 LIBSND data symbol kept so the split accounts for the library data the game never names." }
+_svm_okon2 = { addr = 0x8018DB52, alias = true, source = "PsyQ 3.7 LIBSND data symbol kept so the split accounts for the library data the game never names." }
+_svm_orev1 = { addr = 0x8018DB54, alias = true, source = "PsyQ 3.7 LIBSND data symbol kept so the split accounts for the library data the game never names." }
+_svm_orev2 = { addr = 0x8018DB56, alias = true, source = "PsyQ 3.7 LIBSND data symbol kept so the split accounts for the library data the game never names." }
+SsFCALL = { addr = 0x8018DB58, alias = true, source = "LIBSND ssinit.o `SsFCALL`, the sound driver's callback table declared in libsnd.h." }
+_svm_voice = { addr = 0x8018DBF0, alias = true, source = "PsyQ 3.7 LIBSND data symbol kept so the split accounts for the library data the game never names." }
+_svm_rattr = { addr = 0x8018E0D0, alias = true, source = "PsyQ 3.7 LIBSND data symbol kept so the split accounts for the library data the game never names." }
+_svm_sreg_dirty = { addr = 0x8018E0E8, alias = true, source = "PsyQ 3.7 LIBSND data symbol kept so the split accounts for the library data the game never names." }
+_svm_vab_pg = { addr = 0x8018E100, alias = true, source = "PsyQ 3.7 LIBSND data symbol kept so the split accounts for the library data the game never names." }
+g_SndVoiceStatus = { addr = 0x8018E140, source = "Status of the sound voices." }
+_svm_vab_vh = { addr = 0x8018E1A0, alias = true, source = "PsyQ 3.7 LIBSND data symbol kept so the split accounts for the library data the game never names." }
+_svm_damper = { addr = 0x8018E1E0, alias = true, source = "PsyQ 3.7 LIBSND data symbol kept so the split accounts for the library data the game never names." }
+_svm_vab_tn = { addr = 0x8018E1E8, alias = true, source = "PsyQ 3.7 LIBSND data symbol kept so the split accounts for the library data the game never names." }
+g_SaveCardStatus = { addr = 0x8018E228, type = "u32", source = "Status of the memory card." }
+_spu_RQ = { addr = 0x8018E230, alias = true, source = "PsyQ 3.7 LIBSPU data symbol kept so the split accounts for the library data the game never names." }
+_svm_stereo_mono = { addr = 0x8018E246, alias = true, source = "PsyQ 3.7 LIBSND data symbol kept so the split accounts for the library data the game never names." }
+_snd_ev_flag = { addr = 0x8018E248, alias = true, source = "PsyQ 3.7 LIBSND data symbol kept so the split accounts for the library data the game never names." }
+kMaxPrograms = { addr = 0x8018E24C, alias = true, source = "PsyQ 3.7 LIBSND data symbol kept so the split accounts for the library data the game never names." }
+_svm_pg = { addr = 0x8018E250, alias = true, source = "PsyQ 3.7 LIBSND data symbol kept so the split accounts for the library data the game never names." }
+_svm_vh = { addr = 0x8018E258, alias = true, source = "PsyQ 3.7 LIBSND data symbol kept so the split accounts for the library data the game never names." }
+_svm_tn = { addr = 0x8018E25C, alias = true, source = "PsyQ 3.7 LIBSND data symbol kept so the split accounts for the library data the game never names." }
+g_SaveCardPort = { addr = 0x8018E260, source = "Memory card port in use." }
+_SsVmMaxVoice = { addr = 0x8018E264, alias = true, source = "PsyQ 3.7 LIBSND data symbol kept so the split accounts for the library data the game never names." }
+_snd_openflag = { addr = 0x8018E7D0, alias = true, source = "PsyQ 3.7 LIBSND data symbol kept so the split accounts for the library data the game never names." }
+_svm_cur = { addr = 0x8018E7D8, alias = true, source = "PsyQ 3.7 LIBSND data symbol kept so the split accounts for the library data the game never names." }
+_svm_vab_used = { addr = 0x8018E7F8, alias = true, source = "PsyQ 3.7 LIBSND data symbol kept so the split accounts for the library data the game never names." }
+_svm_sreg_buf = { addr = 0x8018E808, alias = true, source = "PsyQ 3.7 LIBSND data symbol kept so the split accounts for the library data the game never names." }
+g_SaveCardDirectory = { addr = 0x8018E990, source = "The memory card directory." }
+# Boot and frame state read by the reviewed boot code.
+
+VBLANK_MINUS = { addr = 0x80190300, alias = true, source = "PsyQ 3.7 LIBSND data symbol kept so the split accounts for the library data the game never names." }
+_ss_score = { addr = 0x80190308, alias = true, source = "PsyQ 3.7 LIBSND data symbol kept so the split accounts for the library data the game never names." }
+_SsMarkCallback = { addr = 0x80190388, alias = true, source = "PsyQ 3.7 LIBSND data symbol kept so the split accounts for the library data the game never names." }
+_snd_seq_s_max = { addr = 0x80190B88, alias = true, source = "PsyQ 3.7 LIBSND data symbol kept so the split accounts for the library data the game never names." }
+_snd_seq_t_max = { addr = 0x80190B8A, alias = true, source = "PsyQ 3.7 LIBSND data symbol kept so the split accounts for the library data the game never names." }
+_svm_vab_total = { addr = 0x80190B90, alias = true, source = "PsyQ 3.7 LIBSND data symbol kept so the split accounts for the library data the game never names." }
+_svm_vab_count = { addr = 0x80190BD0, alias = true, source = "PsyQ 3.7 LIBSND data symbol kept so the split accounts for the library data the game never names." }
+_svm_vab_start = { addr = 0x80190BD8, alias = true, source = "PsyQ 3.7 LIBSND data symbol kept so the split accounts for the library data the game never names." }
+_svm_envx_hist = { addr = 0x80190C18, alias = true, source = "PsyQ 3.7 LIBSND data symbol kept so the split accounts for the library data the game never names." }
+_svm_okof1 = { addr = 0x80190C58, alias = true, source = "PsyQ 3.7 LIBSND data symbol kept so the split accounts for the library data the game never names." }
+_svm_okof2 = { addr = 0x80190C5A, alias = true, source = "PsyQ 3.7 LIBSND data symbol kept so the split accounts for the library data the game never names." }

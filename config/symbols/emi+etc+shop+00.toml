@@ -1,0 +1,189 @@
+["emi/etc/shop/00"]
+g_SaveBuffer = { addr = 0x800C1A00, source = "The resident save image in memory; the start overlay uses the same address as SAVE_IMAGE_ADDR." }
+jtbl_801D0C04 = { addr = 0x801D0C04, type = "Callback", source = "The switch table of Shop_Equip: the jump targets of its jr dispatch." }
+jtbl_801D0C3C = { addr = 0x801D0C3C, type = "Callback", source = "The switch table of func_801D543C: the jump targets of its jr dispatch." }
+jtbl_801D0C7C = { addr = 0x801D0C7C, type = "Callback", source = "The switch table of func_801D5E88: the jump targets of its jr dispatch." }
+g_MenuStatFormat = { addr = 0x801D0CE4, source = "Format string of the four stat values of the menu: Menu_DrawStatPanel prints power, defense, intelligence and agility through it, and Menu_DrawItemRow prints the HP and AP columns of a party row through it." }
+g_MenuCurrentValueFormat = { addr = 0x801D0CE8, source = "Format of the current value of an HP or AP pair: the character window prints hp or ap through it, then the maximum through g_MenuMaxValueFormat." }
+g_MenuMaxValueFormat = { addr = 0x801D0CF0, source = "Format of the maximum value of an HP or AP pair, printed after the current value (g_MenuCurrentValueFormat)." }
+g_MenuExperienceFormat = { addr = 0x801D0CF8, source = "Format of the experience panel value: the character's experience, or the experience of the next level." }
+g_MenuExperienceBlank = { addr = 0x801D0CFC, source = "Dashes the experience panel prints in place of the value when it is -1." }
+g_MenuZennyFormat = { addr = 0x801D0D08, source = "Format string of the menu amounts: Menu_DrawZennyWindow prints the zenny caption value through it and Menu_DrawItemRow prints the character experience and the experience of the next level." }
+g_MenuNextExpBlank = { addr = 0x801D0D0C, source = "Dashes Menu_DrawItemRow prints in place of the next-level experience once the character level reaches 99." }
+g_MenuFormations = { addr = 0x801D0D14, size = 0xC8, source = "The ten formation layouts of the party formation menu: a name, its length and the screen offset of each of the three members." }
+g_MenuFormationOrder = { addr = 0x801D0DDC, source = "Starting member order of the formation preview: Menu_DrawFormationPreview copies it and sorts it with the member icons back to front." }
+g_MenuClockFormat = { addr = 0x801D0DE0, source = "Format string of the play time digits: Menu_DrawPlayTimeWindow prints g_PlayClock hours and minutes through it." }
+jtbl_801D0DEC = { addr = 0x801D0DEC, type = "Callback", source = "The switch table of Menu_DrawEquipStatWindow: the jump targets of its jr dispatch." }
+g_MenuInventoryCountFormat = { addr = 0x801D0E20, source = "the inventory panel's held count and capacity, two right-aligned numbers" }
+jtbl_801D0E2C = { addr = 0x801D0E2C, type = "Callback", source = "The switch table of Menu_DrawEquipChoiceWindow: the jump targets of its jr dispatch." }
+g_SaveSlotLevelFormat = { addr = 0x801D0E44, source = "Format of the level on a save slot row." }
+g_SaveSlotTimeFormat = { addr = 0x801D0E48, source = "Format of the play time on a save slot row: hours and minutes." }
+g_SaveSlotTimeColon = { addr = 0x801D0E54, source = "The colon drawn between the hours and minutes of a save slot row." }
+g_SaveCardPortLabelFirst = { addr = 0x801D0E58, source = "Label of memory card port 1 in the port tabs." }
+g_SaveCardPortLabelSecond = { addr = 0x801D0E5C, source = "Label of memory card port 2 in the port tabs." }
+Shop_DispatchStep = { addr = 0x801D0EA0, type = "func", source = "Entry of the shop: dispatches on the menu step byte g_MenuStep.step through the D_801E5144 handlers." }
+Shop_ApplyPercent = { addr = 0x801D3654, type = "func", source = "Returns value * percent / 100, at least 1; the item list prices its rows through it." }
+Shop_GetSellPrice = { addr = 0x801D3688, type = "func", source = "Returns half the item price, or 50 times the price for antique shop items from Clay Vase through Dragon Tear." }
+Shop_Equip = { addr = 0x801D3828, type = "func", source = "Swaps one equipment slot of a party member for the chosen item; called by the shop equip step func_801D23E4." }
+SAVE_DispatchState = { addr = 0x801D46A4, type = "func", source = "Runs the save state handler selected by g_MenuStep.state from the 21-entry table D_801E530C." }
+SAVE_DrawSlots = { addr = 0x801D67B0, type = "func", source = "Draws the visible rows of the shop stock list from g_SaveSlotFirst for g_SaveSlotCount rows, and the panel header." }
+SAVE_BuildSlotImage = { addr = 0x801D69E0, type = "func", source = "Builds the save image at D_801448D8: copies g_ScenarioState, the party order and the five-byte name, sums the image and stores the sum in D_800C1A70." }
+SAVE_FormatSlot = { addr = 0x801D7080, type = "func", source = "Formats the play time and leader level line of a save slot." }
+Menu_SwapBytes = { addr = 0x801D7E08, type = "func", source = "Swaps the two bytes that two pointers address; the shop callers pass entries of the party order D_80144F5A and of D_801E6244." }
+Menu_DrawCharacterWindow = { addr = 0x801D826C, type = "func", source = "Draws the window of one party member of the Bate menu from g_Characters: portrait, name, level, poison and confusion labels, HP and AP values and the experience bar." }
+Menu_DrawStatPanel = { addr = 0x801D86D4, type = "func", source = "Draws the stat panel of party member palette_index at panel_x, panel_y: the power, defense, intelligence and agility labels with their u16 values from the character record, the status text when the status byte is not GAME_NONE, and the panel border sprite runs." }
+Shop_DrawEquipment = { addr = 0x801D8A0C, type = "func", source = "Draws the equipment panel of character record_index: the filled panel, the EQUIP caption, the emblem and six rows with the weapon, shield, helmet, armor and two accessories, each with its row icon." }
+Menu_DrawCursorFrame = { addr = 0x801D8E2C, type = "func", source = "Draws the cursor frame of a menu cell at x, y as one LINE_F3 and one LINE_F4. The colour is white, or blinks with g_FrameCount bit 3 when color is nonzero, and each party slot bit set in frame_mode lights one colour channel." }
+Menu_DrawPortrait = { addr = 0x801D8FC0, type = "func", source = "Draws a 40x48 character portrait from g_MenuPortraitAtlas record atlas_index at sprite_x, sprite_y, shaded dark when shade_mode is nonzero." }
+Menu_DrawCharacterPortrait = { addr = 0x801D910C, type = "func", source = "Draws the portrait of a character id with Menu_DrawPortrait; Rei (CHAR_ID_REI) shows portrait 0xB once g_ScenarioState.scenario_id reaches 8." }
+Menu_DrawTintedLine = { addr = 0x801D9160, type = "func", source = "Draws one semi-transparent LINE_F2 from (line_x0, line_y0) to (line_x1, line_y1) in the colour given by color_r, color_g and color_b, with the draw mode tpage in the font page." }
+Menu_DrawItemRow = { addr = 0x801D9254, type = "func", source = "Draws the party row of character item: HP and AP values with their labels, the experience icon with the experience, and the next-level experience, or dashes from level 99; the palette is 7 when selection is nonzero." }
+Menu_DrawEquipment = { addr = 0x801D95F4, type = "func", source = "Draws the equipment list of g_Characters[index]: the weapon, shield, helmet, armor and two accessory names with their row icons; the palette is 7 when selection is nonzero." }
+Menu_DrawFormationPreview = { addr = 0x801D98C0, type = "func", source = "Draws the formation preview of the party formation menu: the formation's name, its ground arrow and its members' icons, turned by angle, sorted back to front, members whose blink bit is set pulsing." }
+Menu_DrawIcon = { addr = 0x801DA00C, type = "func", source = "Draws a 16x8 menu icon from column icon_column of row 216 of the icon atlas at sprite_x, sprite_y, dark (0x10) when shade_mode is nonzero." }
+Menu_DrawPanelIcon = { addr = 0x801DA120, type = "func", source = "Draws one menu icon cell at x, y from atlas position u, v with clut and the grey level color, through MenuDrawPanelIcon." }
+Menu_DrawExperienceLine = { addr = 0x801DA1D8, type = "func", source = "Draws the red experience line of a character from x, y: its length is the experience gained since level, scaled by 57 over the span to the next level, and is zero when both levels need the same experience." }
+Menu_DrawZennyWindow = { addr = 0x801DA2F4, type = "func", source = "Draws the zenny window at panel_x, panel_y: the caption_value printed through g_MenuZennyFormat, the zenny icon and the caption glyph runs." }
+Menu_DrawPlayTimeWindow = { addr = 0x801DA47C, type = "func", source = "Draws the play time window at panel_x, panel_y: hours and minutes of g_PlayClock and a colon that shows while g_PlayClock.thirtieths is below 15, then the clock caption and glyph runs." }
+Menu_ChooseYesNo = { addr = 0x801DA678, type = "func", source = "Runs the yes/no prompt of the menu: the cursor sits at a position set by flag D_8014865B, left or right flips the flag, Cancel clears it and returns true, Confirm keeps it and returns true." }
+Menu_DrawCommandRow = { addr = 0x801DA77C, type = "func", source = "Draws the command buttons of g_MenuCommandRows[row] (up to four, count in byte 0): label and frame per button, the selected one with the selected frame. A button is dimmed (colour 7) when it is not the selected one, when label 0x12 shows without g_GameRequestFlags bit 0, or when label 8 shows without the fountain pen and without ink." }
+Item_GetPrice = { addr = 0x801DA9C4, type = "func", source = "Returns the u16 price of item_id from the table of its category: item, weapon, armor or accessory." }
+Char_GetExpForLevel = { addr = 0x801DAA78, type = "func", source = "Returns the experience a character needs to reach a level: the sum of the first level u16 entries of the character row of g_LevelGrowth, or -1 from level 100." }
+Char_GetExpProgress = { addr = 0x801DAAF4, type = "func", source = "Returns how far exp is between the experience of level and of level + 1, scaled to 0x18 steps (0 when both levels need the same experience)." }
+Menu_DrawHeaderBar = { addr = 0x801DAB90, type = "func", source = "Draws the window of a menu header bar from x, y, width and height with the window style g_WindowStyle." }
+Menu_DrawEquipCompareWindow = { addr = 0x801DB0DC, type = "func", source = "Draws the equipment compare window: the party member's power, defense, intelligence and agility, the values the equipment in patch would give with an icon chosen by each compare flag, and the six equipment slots with the task's two selected slots raised." }
+Menu_DrawRowIcons = { addr = 0x801DB938, type = "func", source = "Draws the party row at the position in row_record (u16 x at byte 4, y at byte 6): its window, then Menu_DrawEquipment and Menu_DrawItemRow for the character at D_80145FCC[row_record[0xC]]." }
+Menu_DrawEquipStatWindow = { addr = 0x801DB9F0, type = "func", source = "Draws the power, defense and agility rows a character would have with an item equipped in a slot, and greys the window when the character cannot equip it." }
+Menu_DrawClutStrip = { addr = 0x801DBD24, type = "func", source = "Draws the five-row strip of 0x20-wide sprite cells with the clut at index clut_index of the four strip palettes, covering the screen height of 240." }
+Menu_DrawFilledPanel = { addr = 0x801DBF18, type = "func", source = "Draws a filled menu panel at x, y of width and height cells: the window body and its tiled 8-pixel border sprites." }
+Menu_DrawWindowFrame = { addr = 0x801DC1F4, type = "func", source = "Draws a window frame of width x height 8-pixel cells from stretched border sprites and four corner sprites." }
+Menu_DrawInventoryWindow = { addr = 0x801DC6FC, type = "func", source = "Draws the inventory panel of one item category: the item rows with their counts, dimmed when the party member cannot use them and raised on the cursor rows, the category title, the held count against the capacity, the two tab runs and the scroll bar." }
+Menu_DrawAbilityList = { addr = 0x801DCE5C, type = "func", source = "Draws the ten visible rows of the ability list with cost and level, the cursor tabs and the window frame." }
+Menu_DrawPanelFrame = { addr = 0x801DD350, type = "func", source = "Draws the 8-pixel frame of a menu panel of width x height cells at x, y: border sprites 0x29 to 0x2E along the edges and corner sprites 0x28, 0x2A, 0x2D and 0x2F." }
+Menu_DrawEquipChoiceWindow = { addr = 0x801DD578, type = "func", source = "Draws the equip list: gathers the inventory rows of the equipment slot's category (unk_09) that the party member can equip, armor only of the slot's type, into g_MenuEquipChoiceIds and g_MenuEquipChoiceCounts, then draws them with the category title, the choice count and the scroll bar." }
+SAVE_DrawSlot = { addr = 0x801DDCB0, type = "func", source = "Draws one row of the stock list: its window, icons, name and the values formatted through g_MenuZennyFormat." }
+SAVE_DrawPortTabs = { addr = 0x801DDFB0, type = "func", source = "Draws the memory card port panel: the title, the two port tabs and the cursor at the selected port." }
+Shop_StartFadeIn = { addr = 0x801DE3C8, type = "func", source = "Starts the fast UI fade in once the window effect is idle and advances the shop step state; Menu_StartFadeIn does the same in the Bate menu." }
+Shop_PickMember = { addr = 0x801DE4C8, type = "func", source = "Cursor step of the party member swap: draws the pick prompt, moves the two-list cursor and records the chosen member." }
+Menu_SwapBytes5 = { addr = 0x801DF464, type = "func", source = "Swaps the two bytes that two pointers address; same bytes as Menu_SwapBytes at 0x801D7E08." }
+Menu_RunAbilityStockSort = { addr = 0x801E1B80, type = "func", source = "runs the stock command the cursor row selects through g_AbilityStockCommands" }
+Menu_SwapBytes6 = { addr = 0x801E1BB8, type = "func", source = "Swaps the two bytes that two pointers address; same bytes as Menu_SwapBytes at 0x801D7E08." }
+Menu_PackAbilityStock = { addr = 0x801E1BCC, type = "func", source = "moves the empty slots of the 128-entry ability stock to its end" }
+Menu_SortAbilityStockByCostDescending = { addr = 0x801E1C88, type = "func", source = "packs the ability stock, then orders it by the ability cost, highest first" }
+Menu_SortAbilityStockByCostAscending = { addr = 0x801E1D84, type = "func", source = "packs the ability stock, then orders it by the ability cost, lowest first" }
+Shop_IdleStep = { addr = 0x801E2800, type = "func", source = "the empty step-0 handler every shop panel state table starts with" }
+Menu_MessagePanel = { addr = 0x801E2808, type = "func", source = "panel mode 0 of the shop: the full-width header bar with a message" }
+Menu_CommandsPanel = { addr = 0x801E29C8, type = "func", source = "panel mode 2 of the shop: the command row" }
+Menu_ZennyPanel = { addr = 0x801E2AB0, type = "func", source = "panel mode 1 of the shop: the zenny window" }
+Menu_DrawPanelCursor = { addr = 0x801E2B94, type = "func", source = "Draws the menu panel cursor at the x and y of the current task root through Menu_DrawCursorSprite." }
+Menu_CursorFramePanel = { addr = 0x801E2BC4, type = "func", source = "panel mode 4 of the shop: the frame drawn around the selected entry" }
+Menu_EquipStatPanel = { addr = 0x801E2C18, type = "func", source = "panel mode 5 of the shop: the equipment stat window" }
+Menu_EquipmentPanel = { addr = 0x801E2DB4, type = "func", source = "panel mode 6 of the shop: the equipment window" }
+Battle_PickFormationTarget = { addr = 0x801E2E30, type = "func", source = "Picks a random live target by formation weight." }
+Menu_ItemsPanel = { addr = 0x801E2EB0, type = "func", source = "panel mode 7 of the shop: the item list" }
+Shop_DrawItems = { addr = 0x801E2F04, type = "func", source = "Draws the shop item rows with price, icon and name, shaded when the item is not affordable and when it is selected." }
+Menu_InventoryPanel = { addr = 0x801E3720, type = "func", source = "panel mode 9 of the shop: the inventory window" }
+Menu_CharacterPanel = { addr = 0x801E3E4C, type = "func", source = "panel mode 13 of the shop: the character window" }
+Party_HasSkill = { addr = 0x801E4D4C, type = "func", source = "Returns whether item_id is in the seven character item rows or the 128-entry item list." }
+Shop_DrawCuePanel = { addr = 0x801E4DF4, type = "func", source = "draws the shop cue text panel window and frame" }
+g_ShopSteps = { addr = 0x801E5144, source = "the 11 step handlers of the shop, called by Shop_DispatchStep and indexed by the menu step byte g_MenuStep.step" }
+g_ShopStep2Steps = { addr = 0x801E5170, source = "5 sub-step handlers of step 2 of the shop, called by func_801D10E4 (the step 2 handler) and indexed by the menu sub-step byte g_MenuStep.sub_step" }
+g_ShopStep2Sub0Steps = { addr = 0x801E5184, source = "2 handlers of sub-step 0 of step 2 of the shop, called by func_801D1120 (the sub-step 0 handler of step 2) and indexed by the menu sub-sub-step byte g_MenuStep.state" }
+g_ShopStep2Sub1Steps = { addr = 0x801E518C, source = "1 handlers of sub-step 1 of step 2 of the shop, called by func_801D12C0 (the sub-step 1 handler of step 2) and indexed by the menu sub-sub-step byte g_MenuStep.state" }
+g_ShopStep2Sub2Steps = { addr = 0x801E5190, source = "8 handlers of sub-step 2 of step 2 of the shop, called by func_801D14B0 (the sub-step 2 handler of step 2) and indexed by the menu sub-sub-step byte g_MenuStep.state" }
+g_ShopStep2Sub3Steps = { addr = 0x801E51B0, source = "5 handlers of sub-step 3 of step 2 of the shop, called by func_801D27EC (the sub-step 3 handler of step 2) and indexed by the menu sub-sub-step byte g_MenuStep.state" }
+g_ShopStep8Steps = { addr = 0x801E51C4, source = "4 sub-step handlers of step 8 of the shop, called by func_801D3310 (the step 8 handler) and indexed by the menu sub-step byte g_MenuStep.sub_step" }
+g_ShopStep8Sub2Steps = { addr = 0x801E51D4, source = "5 handlers of sub-step 2 of step 8 of the shop, called by func_801D34F0 (the sub-step 2 handler of step 8) and indexed by the menu sub-sub-step byte g_MenuStep.state" }
+g_ShopStep3Steps = { addr = 0x801E52C4, source = "5 sub-step handlers of step 3 of the shop, called by func_801D39BC (the step 3 handler) and indexed by the menu sub-step byte g_MenuStep.sub_step" }
+g_ShopStep3Sub1Steps = { addr = 0x801E52D8, source = "6 handlers of sub-step 1 of step 3 of the shop, called by func_801D3AA8 (the sub-step 1 handler of step 3) and indexed by the menu sub-sub-step byte g_MenuStep.state" }
+g_ShopStep3Sub2Steps = { addr = 0x801E52F0, source = "7 handlers of sub-step 2 of step 3 of the shop, called by func_801D41B0 (the sub-step 2 handler of step 3) and indexed by the menu sub-sub-step byte g_MenuStep.state" }
+g_SaveSteps = { addr = 0x801E530C, source = "the 21 state handlers of the save screen of the shop overlay, called by SAVE_DispatchState and indexed by the menu sub-sub-step byte g_MenuStep.state" }
+g_ShopStep10Steps = { addr = 0x801E5360, source = "7 sub-step handlers of step 10 of the shop, called by func_801D6184 (the step 10 handler) and indexed by the menu sub-step byte g_MenuStep.sub_step" }
+g_ShopStep5Steps = { addr = 0x801E545C, source = "8 sub-step handlers of step 5 of the shop, called by func_801D7344 (the step 5 handler) and indexed by the menu sub-step byte g_MenuStep.sub_step" }
+g_MenuStatFrameLeft = { addr = 0x801E550C, source = "Sprite run of the left end of the stat panel border, drawn by Menu_DrawStatPanel." }
+g_MenuStatFrameMiddle = { addr = 0x801E5538, source = "Sprite run repeated 16 times along the stat panel border, drawn by Menu_DrawStatPanel." }
+g_MenuStatFrameRight = { addr = 0x801E5544, source = "Sprite run of the right end of the stat panel border, drawn by Menu_DrawStatPanel." }
+g_MenuCaptionLeft = { addr = 0x801E555C, source = "Sprite run of the left end of a caption row, drawn by Menu_DrawZennyWindow." }
+g_MenuCaptionMiddle = { addr = 0x801E5568, source = "Sprite run repeated along a caption row, drawn by Menu_DrawZennyWindow 11 times and by Menu_DrawPlayTimeWindow 6 times." }
+g_MenuCaptionRight = { addr = 0x801E5574, source = "Sprite run of the right end of a caption row, drawn by Menu_DrawZennyWindow and Menu_DrawPlayTimeWindow." }
+g_MenuClockCaption = { addr = 0x801E5580, source = "Sprite run of the play time caption, drawn at the left edge of the play time window by Menu_DrawPlayTimeWindow." }
+g_MenuFormationFrameLeft = { addr = 0x801E5594, source = "Sprite run of the formation preview frame's left edge." }
+g_MenuFormationFrameMiddle = { addr = 0x801E55B8, source = "Sprite run of one column of the formation preview frame's top and bottom edges; Menu_DrawFormationPreview draws it six times, 8 pixels apart." }
+g_MenuFormationFrameRight = { addr = 0x801E55C4, source = "Sprite run of the formation preview frame's right edge." }
+g_MenuCommandFrame = { addr = 0x801E55DC, source = "Sprite run drawn over each unselected command button by Menu_DrawCommandRow." }
+g_MenuCommandFrameSelected = { addr = 0x801E55F4, source = "Sprite run drawn over the selected command button by Menu_DrawCommandRow." }
+g_MenuEquipCompareSprites = { addr = 0x801E560C, source = "Sprite run of the equipment compare window frame that Menu_DrawEquipCompareWindow draws over the window." }
+g_MenuListTab2OffSprites = { addr = 0x801E5638, source = "the sprite run of the list panel's second tab while its flag is clear" }
+g_MenuInventoryTab1OffSprites = { addr = 0x801E5644, source = "the sprite run of the inventory panel's first tab while its flag is clear" }
+g_MenuListTab2OnSprites = { addr = 0x801E5650, source = "the sprite run of the list panel's second tab while its flag is set" }
+g_MenuInventoryTab1OnSprites = { addr = 0x801E565C, source = "the sprite run of the inventory panel's first tab while its flag is set" }
+g_MenuListTab1OffSprites = { addr = 0x801E5668, source = "the sprite run of the list panel's first tab while its flag is clear" }
+g_MenuListTab1OnSprites = { addr = 0x801E5674, source = "the sprite run of the list panel's first tab while its flag is set" }
+g_MenuEquipStatSprites = { addr = 0x801E56DC, source = "Sprite run of the equip stat window frame that Menu_DrawEquipStatWindow draws over the window." }
+g_SaveSlotFrameSprites = { addr = 0x801E5738, source = "Sprite run of a save slot row frame." }
+g_MenuLabelPower = { addr = 0x801E5824, source = "Text of the power label, drawn by Menu_DrawStatPanel at the left of the first stat row." }
+g_MenuLabelDefense = { addr = 0x801E5828, source = "Text of the defense label, drawn by Menu_DrawStatPanel at the left of the second stat row." }
+g_MenuLabelIntelligence = { addr = 0x801E582C, source = "Text of the intelligence label, drawn by Menu_DrawStatPanel at the second column of the first stat row." }
+g_MenuLabelAgility = { addr = 0x801E5830, source = "Text of the agility label, drawn by Menu_DrawStatPanel at the second column of the second stat row." }
+g_MenuEquipRowIcons = { addr = 0x801E5834, source = "Icon index of each of the six equipment rows (weapon, shield, helmet, armor, two accessories) drawn by Shop_DrawEquipment." }
+g_MenuLabelEquip = { addr = 0x801E583C, source = "Text of the EQUIP caption of the equipment panel, drawn by Shop_DrawEquipment." }
+g_MenuPortraitAtlas = { addr = 0x801E5850, source = "4-byte portrait atlas records read by Menu_DrawPortrait by atlas index; Menu_DrawItemRow also draws its HP and AP label texts from offsets 0x30, 0x36, 0x3C and 0x42." }
+g_MenuFormationArrow = { addr = 0x801E5898, source = "The three corners of the formation preview's ground arrow, x and y." }
+g_MenuCaptionIcon = { addr = 0x801E58B0, source = "Icon and label record drawn at the right of the zenny caption by Menu_DrawZennyWindow." }
+g_MenuClockColon = { addr = 0x801E58B4, source = "Colon text Menu_DrawPlayTimeWindow draws twice between hours and minutes while g_PlayClock.thirtieths is below 15." }
+g_MenuCommandLabels = { addr = 0x801E5964, source = "Button text by label id; Menu_DrawCommandRow draws the entry named by g_MenuCommandRows on each button." }
+g_MenuCommandRows = { addr = 0x801E59C0, source = "Command rows, 5 bytes each: the button count, then up to four label ids; Menu_DrawCommandRow reads the row it is given." }
+g_MenuEquipCompareLabels = { addr = 0x801E59F0, source = "Labels of the equipment compare window stat rows (Pwr, Def, Int, Agl), six bytes each." }
+g_MenuEquipSlotIcons = { addr = 0x801E5A08, source = "Sprite ids of the six equipment slot icons (weapon, shield, helmet, armor, two accessories) that Menu_DrawEquipCompareWindow draws beside each item name." }
+g_MenuEquipStatLabels = { addr = 0x801E5A10, source = "Labels of the equip stat window rows (Pwr, Def, Agl), six bytes each; Menu_DrawEquipStatWindow draws them shaded when the party member cannot equip the item." }
+g_MenuClutStripCells = { addr = 0x801E5A24, source = "Sprite cells (u, v, w, h) of the CLUT strip, indexed by the ids in g_MenuClutStripEntries." }
+g_MenuClutStripEntries = { addr = 0x801E5AD0, source = "Cell ids that Menu_DrawClutStrip draws down each strip column, a run per palette." }
+g_MenuClutStripPalettes = { addr = 0x801E5B1C, source = "Start of the run in g_MenuClutStripEntries for each of the four strip palettes." }
+g_MenuInventoryTitles = { addr = 0x801E5B48, source = "the inventory panel's category titles, ITEM, WEAPON, ARMOR, OPTION and VITAL, by ItemCategory" }
+g_MenuAbilityListNames = { addr = 0x801E5B7C, source = "the list names indexed by the ability type, drawn above the ability list" }
+g_MenuEquipTitles = { addr = 0x801E5BB4, source = "the equip list's category titles, ITEM, WEAPON, ARMOR, OPTION and VITAL, by ItemCategory" }
+g_ShopStep6Steps = { addr = 0x801E5BEC, source = "4 sub-step handlers of step 6 of the shop, called by func_801DE188 (the step 6 handler) and indexed by the menu sub-step byte g_MenuStep.sub_step" }
+g_ShopStep6Sub0Steps = { addr = 0x801E5BFC, source = "3 handlers of sub-step 0 of step 6 of the shop, called by func_801DE1C4 (the sub-step 0 handler of step 6) and indexed by the menu sub-sub-step byte g_MenuStep.state" }
+g_ShopStep6Sub3Steps = { addr = 0x801E5C08, source = "4 handlers of sub-step 3 of step 6 of the shop, called by func_801DE850 (the sub-step 3 handler of step 6) and indexed by the menu sub-sub-step byte g_MenuStep.state" }
+g_ShopBoatPartyPositions = { addr = 0x801E5C18, size = 0x30, source = "Where each of the three party members stands on the boat after the Black Ship: x, y and height, read by the field party setup func_801DE944." }
+g_ShopFacingSteps = { addr = 0x801E5C48, size = 0x20, source = "The x and y step of each of the eight facings, added to the scroll target by func_801DE944." }
+g_ShopStep7Steps = { addr = 0x801E5CE8, source = "5 sub-step handlers of step 7 of the shop, called by func_801DF978 (the step 7 handler) and indexed by the menu sub-step byte g_MenuStep.sub_step" }
+g_ShopStep7Sub2Steps = { addr = 0x801E5CFC, source = "5 handlers of sub-step 2 of step 7 of the shop, called by func_801DFDB8 (the sub-step 2 handler of step 7) and indexed by the menu sub-sub-step byte g_MenuStep.state" }
+g_ShopStep7Sub3Steps = { addr = 0x801E5D10, source = "3 handlers of sub-step 3 of step 7 of the shop, called by func_801E092C (the sub-step 3 handler of step 7) and indexed by the menu sub-sub-step byte g_MenuStep.state" }
+g_AbilityStockCommands = { addr = 0x801E5D2C, source = "the stock commands of the ability menu, indexed by its cursor row: pack, sort by cost highest first, sort by cost lowest first" }
+g_ShopStep9Steps = { addr = 0x801E5D3C, source = "3 sub-step handlers of step 9 of the shop, called by func_801E200C (the step 9 handler) and indexed by the menu sub-step byte g_MenuStep.sub_step" }
+g_ShopStep9Sub0Steps = { addr = 0x801E5D48, source = "2 handlers of sub-step 0 of step 9 of the shop, called by func_801E2048 (the sub-step 0 handler of step 9) and indexed by the menu sub-sub-step byte g_MenuStep.state" }
+g_ShopStep9Sub1Steps = { addr = 0x801E5D50, source = "3 handlers of sub-step 1 of step 9 of the shop, called by func_801E2114 (the sub-step 1 handler of step 9) and indexed by the menu sub-sub-step byte g_MenuStep.state" }
+g_ShopStep9Sub2Steps = { addr = 0x801E5D5C, source = "3 handlers of sub-step 2 of step 9 of the shop, called by func_801E2590 (the sub-step 2 handler of step 9) and indexed by the menu sub-sub-step byte g_MenuStep.state" }
+g_ShopPanelModes = { addr = 0x801E5D68, source = "the Shop panel handlers, indexed by the panel task mode; the dispatcher of each is one entry" }
+g_ShopMessageSteps = { addr = 0x801E5DB4, source = "the state handlers of panel mode 0, indexed by the panel task state" }
+g_ShopCommandsSteps = { addr = 0x801E5DC0, source = "the state handlers of panel mode 2, indexed by the panel task state" }
+g_ShopZennySteps = { addr = 0x801E5DCC, source = "the state handlers of panel mode 1, indexed by the panel task state" }
+g_ShopEquipStatSteps = { addr = 0x801E5DDC, source = "the state handlers of panel mode 5, indexed by the panel task state" }
+g_ShopEquipmentSteps = { addr = 0x801E5DF0, source = "the state handlers of panel mode 6, indexed by the panel task state" }
+g_ShopItemsSteps = { addr = 0x801E5DFC, source = "the state handlers of panel mode 7, indexed by the panel task state" }
+g_ShopInventorySteps = { addr = 0x801E5E2C, source = "the state handlers of panel mode 9, indexed by the panel task state" }
+g_ShopPanel11Steps = { addr = 0x801E5E48, source = "the state handlers of panel mode 11, indexed by the panel task state" }
+g_ShopPanel12Steps = { addr = 0x801E5E5C, source = "the state handlers of panel mode 12, indexed by the panel task state" }
+g_ShopCharacterSteps = { addr = 0x801E5E70, source = "the state handlers of panel mode 13, indexed by the panel task state" }
+g_ShopPanel15Steps = { addr = 0x801E5F14, source = "the state handlers of panel mode 15, indexed by the panel task state" }
+g_ShopPanel16Steps = { addr = 0x801E5F24, source = "the state handlers of panel mode 16, indexed by the panel task state" }
+g_ShopPanel17Steps = { addr = 0x801E5F30, source = "the state handlers of panel mode 17, indexed by the panel task state" }
+g_ShopPanel18Steps = { addr = 0x801E5F3C, source = "the state handlers of panel mode 18, indexed by the panel task state" }
+g_ShopPortraitAtlas = { addr = 0x801E600C, size = 0x30, source = "Portrait cells by portrait index, read by func_801E4FC8: u, v and the palette position of each portrait; the same cells as g_MenuPortraitAtlas." }
+g_ShopStockIndex = { addr = 0x801E6044, source = "Index of the selected row of the shop stock at D_8018E7CC (count byte, then category and item pairs); func_801D163C wraps it at the count." }
+g_ShopItemCategory = { addr = 0x801E6048, source = "Item category of the selected shop row, loaded from the stock row by func_801D163C and passed to Item_Add and Item_GetIcon by func_801D1D60." }
+g_ShopItemId = { addr = 0x801E604C, source = "Item id of the selected shop row, loaded from the stock row by func_801D163C and passed to Item_Add by func_801D1D60." }
+g_ShopItemCount = { addr = 0x801E6050, source = "Quantity of the selected shop item: func_801D2D64 steps it with the arrows, and func_801D1D60 passes it to Item_Add and multiplies the price by it." }
+g_ShopItemCountMax = { addr = 0x801E605C, source = "Largest quantity the player can buy: g_Zenny / price capped at 99 minus the held count, set by func_801D163C and used by func_801D2D64 as the clamp." }
+g_ShopItemPrice = { addr = 0x801E6060, source = "Unit price of the selected shop item: Shop_ApplyPercent(Item_GetPrice(...)) from func_801D163C; func_801D1D60 subtracts price * count from g_Zenny." }
+g_ShopPricePercent = { addr = 0x801E6064, source = "Price percentage of the shop, the percent argument func_801D163C gives Shop_ApplyPercent." }
+g_SaveSlotFirst = { addr = 0x801E6074, source = "Index of the first visible row of the shop stock list." }
+g_SaveSlotCount = { addr = 0x801E6078, source = "Number of visible rows of the shop stock list." }
+g_SaveSlots = { addr = 0x801E6098, size = 0x54, source = "The three visible rows of the shop stock list." }
+g_MenuFormationArrowTurned = { addr = 0x801E6114, source = "The ground arrow corners turned by the preview angle, x at twice the scale of y." }
+g_MenuFormationSpots = { addr = 0x801E612C, source = "Each party member's formation offset turned by the preview angle; Menu_DrawFormationPreview sorts them back to front with the member order." }
+g_MenuEquipChoiceIds = { addr = 0x801E6144, source = "the item ids of the equip list: the inventory rows the party member can equip in the chosen slot, then zeros" }
+g_MenuEquipChoiceCounts = { addr = 0x801E61C4, source = "the held counts of the g_MenuEquipChoiceIds rows" }
+SAVE_AccessFile = { addr = 0x801EEC30, type = "func", source = "Reads or writes the save file on the memory card: waits out the card status, loads the directory, opens the save file and transfers it through SAVE_TransferFile (body in start/09)." }
+SAVE_ScanDirectory = { addr = 0x801EFCA8, alias = true, source = "Copies the firstfile and nextfile entries that match prefix into the 15-slot g_SaveCardDirectory table." }

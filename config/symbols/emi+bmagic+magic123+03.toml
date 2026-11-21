@@ -1,0 +1,12 @@
+["emi/bmagic/magic123/03"]
+Battle_ApplyDamageFlags = { addr = 0x800A9610, alias = true, source = "Applies the damage flags to the selected battlers." }
+Battle_MarkDamaged = { addr = 0x800A9820, alias = true, source = "Marks the selected battlers as damaged." }
+Battle_ProjectRange = { addr = 0x800AF764, alias = true, source = "Projects the battle range to the screen." }
+Battle_CenterCamera = { addr = 0x800AFD9C, alias = true, source = "Centres the battle camera on the living battlers." }
+Effect_Reset = { addr = 0x801E5988, type = "func", source = "Clears every timer, state and flag byte of the shared BattleEffect work record; every effect countdown calls it first. battle/03 owns the body.", alias = true }
+g_BattleEffectBattler = { addr = 0x801EB4E0, source = "the battler the running effect acts on; Battle_UpdateEffects stores it for each effect step (emi/battle/battle/03 owns the cell)" }
+Effect_MarkDamagedOnZeroTick = { addr = 0x801EF064, type = "func", source = "When the effect ticker (byte 0x0B) is zero marks the battlers of the target selector damaged, raises BATTLE_STATE_EFFECT_PLAYING and resets the effect in magic123 (Frost Breath)." }
+BMagic_DispatchEffectMode = { addr = 0x801EF0C4, type = "func", source = "Runs the handler that header.mode (byte 0x01) selects from the effect handlers of magic123." }
+BMagic_AllocEffect = { addr = 0x801EFCA0, type = "func", source = "Claims the first free slot of the effect table (bit 0 of header.flags) and returns its index, or 0xFF when all 90 slots are in use in magic123 (Frost Breath)." }
+Actor_Clear = { addr = 0x801EFD04, type = "func", source = "Clears the effect work record: header flags, mode (byte 0x01), step (byte 0x02) and bytes 0x03 and 0x04." }
+g_BMagicEffectModes = { addr = 0x801EFD54, source = "Handlers of magic123 (Frost Breath), run by header.mode (byte 0x01) and by header.step (byte 0x02) in its sub-effects." }

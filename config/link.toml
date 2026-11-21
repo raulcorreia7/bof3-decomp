@@ -2,7 +2,7 @@
 #
 # Retail keeps the main executable and the base game overlay in RAM while a
 # scene overlay runs, so overlay code names their globals. A readable name
-# resolves against the image that owns its row in `config/symbols.toml`, in this
+# resolves against the image that owns its row in `config/symbols/<image>.toml`, in this
 # order: the target's own table, then the resident images below, then the owners
 # its `splat.yaml` names. Engine code and tool config stay generic; the resident
 # list is the BoF3 memory map.

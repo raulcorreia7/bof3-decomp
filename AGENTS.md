@@ -38,7 +38,7 @@ pages.
 - One worktree per task ([worktrees](tools/README.md#worktrees)); rebase on `main` before each push.
 - Merge `main` right before opening the pull request, so the gate and the diff run on the current base.
 - `meson compile -C build/meson format`, then `pre-push` ([checks](tools/README.md#pre-push)).
-- A `config/symbols.toml` conflict keeps both sides, one row per symbol per image, in address order.
+- `config/symbols/<image>.toml` holds one image's table; `tools/setup.sh` installs the merge driver that unions rows in address order.
 - A failed try is one line in `config/attempts.jsonl`, never a comment in `src/`.
 
 ## Writing

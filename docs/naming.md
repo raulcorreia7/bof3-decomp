@@ -498,7 +498,7 @@ line.
 
 - Write a name in full. Build no name by token pasting (`##`) and split none across lines when the
   match allows it.
-- A table row is one line: a `config/symbols.toml` row, a data-table entry, a `@source` line.
+- A table row is one line: a `config/symbols/<image>.toml` row, a data-table entry, a `@source` line.
 - A rename changes every spelling in one commit ([renames](#renames)); no second name stays.
 - A base plus offset (`&D_80144952 + 0x16`) hides the symbol at the sum. Name that symbol when the
   bytes still match; keep the sum only where the name changes them.
@@ -540,7 +540,7 @@ extern volatile u8 g_BattlePanelStep;
 
 ### Rename steps
 
-`tools/symbol.py rename` adds the symbol's `config/symbols.toml` row with its `source`, rewrites every
+`tools/symbol.py rename` adds the symbol's `config/symbols/<image>.toml` row with its `source`, rewrites every
 tracked user (definition, prototypes, uses, `config/`), keeps the address name in a comment and moves
 the unit file. Then prove every touched image with `check-<image>`:
 

@@ -3,7 +3,7 @@
 
 A name says what a thing is for the game, never where it lives. The default tool names are the
 only identifiers allowed to hold an address: ``func_<ADDR>``, ``D_<ADDR>``, ``L<ADDR>``,
-``jtbl_*``, ``jpt_*`` and ``s_gap_*``. Comments, strings and config/symbols.toml text are not
+``jtbl_*``, ``jpt_*`` and ``s_gap_*``. Comments, strings and config/symbols/<image>.toml text are not
 checked.
 
 The check is a ratchet. ``config/address_names.txt`` lists the offenders that exist today as
@@ -19,7 +19,7 @@ form to write, so those uses can only shrink (plan section AY). A rebuild that m
 use changes no count, so it passes.
 
 A layout row must not keep an address name its symbol has left. A ``c`` row fails when its unit
-defines no C body under the row name and ``config/symbols.toml`` names its address; a ``bin``,
+defines no C body under the row name and ``config/symbols/<image>.toml`` names its address; a ``bin``,
 ``.data`` or ``data`` row fails when its address has a named non-alias data symbol. ``--diff``
 checks the images whose layout or symbol table the change touches; without it, every image.
 ``tools/symbol.py rename`` moves the row and the unit file.
@@ -33,7 +33,7 @@ import re
 import sys
 from pathlib import Path
 
-from bof3.adapters.config import read_symbols
+from bof3.adapters.config import SPLIT, read_symbols
 from bof3.adapters.git import changed_files, git, ls_files, ok
 from bof3.diff import added_lines as added_diff_lines
 from bof3.diff import renames
@@ -155,7 +155,7 @@ def layout_images(ref: str | None) -> list[str]:
 
 def added_symbol_images(ref: str) -> set[str]:
     """The images whose table a change gives a new row."""
-    diff = git("diff", "-U0", f"{ref}...HEAD", "--", TABLE, check=False)
+    diff = git("diff", "-U0", f"{ref}...HEAD", "--", TABLE, SPLIT, check=False)
     added = {
         match.group(1)
         for row in diff.splitlines()
@@ -163,7 +163,7 @@ def added_symbol_images(ref: str) -> set[str]:
         for match in [SYMBOL_ROW.match(row[1:])]
         if match
     }
-    if not added or not Path("config/symbols.toml").is_file():
+    if not added:
         return set()
     tables = read_symbols(Path())
     return {

@@ -1,0 +1,2 @@
+["emi/world00/area021/13"]
+Message_SetAnswerMessage = { addr = 0x801F2C6C, type = "func", source = "Stores the message id the answer table D_801F33B4 holds for the menu choice g_MessageChoice in g_MessageRequest." }

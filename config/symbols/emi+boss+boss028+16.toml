@@ -1,0 +1,11 @@
+["emi/boss/boss028/16"]
+Battle_MarkDamaged = { addr = 0x800A9820, type = "func", source = "Marks the selected battlers as damaged." }
+Boss_RaiseEffectPlaying = { addr = 0x800C1AA0, type = "func", source = "raises BATTLE_STATE_EFFECT_PLAYING and runs Battle_TriggerCritical and func_801E567C when func_801E30F8 is ready in boss028" }
+Boss_InstallBattleHooks = { addr = 0x800C1B40, type = "func", source = "Installs the boss battle hooks of boss028: Boss_ChooseBattleEnding into g_BattleChooseEndingHook, Boss_EndBattle into g_BattleEndHook and Boss_RunBattleEvent into g_BossBattleEventHook." }
+Boss_RunBattleEvent = { addr = 0x800C1B78, type = "func", source = "Handles the boss battle events of boss028: ignores every event mode and returns 0." }
+Boss_ChooseBattleEnding = { addr = 0x800C1B80, type = "func", source = "Chooses how the boss battle of boss028 ends (g_BattleChooseEndingHook). On victory sets script variable 0 to 30, runs Battle_EndVictory; otherwise runs Battle_EndDefeat." }
+Boss_EndBattle = { addr = 0x800C1BCC, type = "func", source = "Ends the boss battle of boss028: the battle-end hook (g_BattleEndHook) of this set, which runs func_800AC934(0)." }
+Battle_EndVictory = { addr = 0x801DDED8, type = "func", source = "Ends the battle in victory: sets the battle phase to the result mode at step 1, which plays the victory sequence, poses the party and opens the result panel. Boss battles call it from their ending hook when the result is a victory.", alias = true }
+Battle_EndDefeat = { addr = 0x801DDF00, type = "func", source = "Ends the battle in defeat: sets the battle phase to the result mode at step 2, which plays the defeat sequence and shows the defeat message. Boss battles call it from their ending hook when the result is not a victory.", alias = true }
+Battle_RequestEnemyScript = { addr = 0x801E2314, type = "func", source = "Requests the script at index script_index of the current enemy (g_BattleCurrentEnemy) for the task actor, by its facing; bit 0x80 of the script byte sets the actor flag unk_2A.", alias = true }
+g_BattleEffectBattler = { addr = 0x801EB4E0, source = "the battler the running effect acts on; Battle_UpdateEffects stores it for each effect step (emi/battle/battle/03 owns the cell)" }

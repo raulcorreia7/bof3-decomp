@@ -1,0 +1,22 @@
+["emi/scenario/scena15/00"]
+jtbl_801F6C04 = { addr = 0x801F6C04, type = "Callback", source = "The switch table of func_801FA9DC: the jump targets of its jr dispatch." }
+jtbl_801F6C6C = { addr = 0x801F6C6C, type = "Callback", source = "The switch table of func_801FADFC: the jump targets of its jr dispatch." }
+jtbl_801F6C84 = { addr = 0x801F6C84, type = "Callback", source = "The switch table of func_801FAFA8: the jump targets of its jr dispatch." }
+jtbl_801F6D5C = { addr = 0x801F6D5C, type = "Callback", source = "The switch table of func_801FB788: the jump targets of its jr dispatch." }
+jtbl_801F6DC4 = { addr = 0x801F6DC4, type = "Callback", source = "The switch table of func_801FC1D8: the jump targets of its jr dispatch." }
+jtbl_801F6E5C = { addr = 0x801F6E5C, type = "Callback", source = "The switch table of func_801FCBAC: the jump targets of its jr dispatch." }
+Scene_DispatchEntity = { addr = 0x801F6F38, type = "func", source = "dispatches a scene entity by its callback index" }
+func_801F6F40 = { addr = 0x801F6F40, alias = true, source = "Scene_DispatchEntity+0x8, after its g_Task load; the start the split used before the function was moved back to that load" }
+Scene_InitTaskArea = { addr = 0x801F6F7C, type = "func", source = "sets the task screen position and timer, clears the work column and advances the task mode" }
+Scene_DrawLightPillar = { addr = 0x801F71B0, type = "func", source = "pillar of light with a fade: twin of Area_DrawLightPillar; callers fade it in, hold at 0xFF, and out" }
+Area_ClearWorkColumn = { addr = 0x801F75AC, type = "func", source = "Clears one byte of each row in the actor window." }
+Area_AddSpark = { addr = 0x801F75D8, type = "func", source = "Adds one falling spark to the first free row of the 128-spark work table: marks it active, sets its fall speed and places it around the work position at a random angle and radius." }
+Scene_DrawSparks = { addr = 0x801F7748, type = "func", source = "Falls and draws every active light pillar spark, retiring one below the task; returns whether any remain." }
+Scene_ClearActor = { addr = 0x801F9000, type = "func", source = "clears the current actor" }
+Scene_SpawnActor = { addr = 0x801FA854, type = "func", source = "Claims a free actor slot and seeds its type, camera angles, scene step and layer; returns whether a slot was free; one role shared by scena14 and scena15." }
+Scene_DispatchActor = { addr = 0x801FDD80, type = "func", source = "dispatches a scenario actor to its callback handler" }
+Scene_ShowEntityMessage = { addr = 0x801FDDC0, type = "func", source = "starts the entity callback-indexed area message for the current desert camp area and enters the message state" }
+Scene_SetPartyRyuAdultNinaAdultGarr = { addr = 0x801FE4CC, type = "func", source = "Streams the EMI family for adult Ryu, adult Nina and Garr, empties g_Game.party_size, joins the three in that order with Party_JoinMember and restages the party palettes." }
+Scene_SetPartyRyuAdultNinaAdultRei = { addr = 0x801FE520, type = "func", source = "Streams the EMI family for adult Ryu, adult Nina and Rei, empties g_Game.party_size, joins the three with Party_JoinMember and restages the party palettes." }
+g_SceneEntityDispatch = { addr = 0x801FE57C, source = "scenario entity dispatch table" }
+g_SceneActorDispatch = { addr = 0x801FE6EC, source = "scenario actor dispatch table" }

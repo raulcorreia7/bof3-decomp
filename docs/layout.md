@@ -294,7 +294,7 @@ that include it needs it.
 ### Globals
 
 A global is one `extern` with its real type in the owning header, a name and an address. The address
-is a `config/symbols.toml` row, or the name itself for an address name (`D_80145E90`). C and headers keep the address name in a comment as described in [renames](naming.md#renames).
+is a `config/symbols/<image>.toml` row, or the name itself for an address name (`D_80145E90`). C and headers keep the address name in a comment as described in [renames](naming.md#renames).
 Retail RAM address literals stay out of C and headers; hardware registers, the scratchpad range,
 BIOS addresses and format offsets stay as defines.
 
@@ -343,7 +343,7 @@ splat names an unnamed unit by its uppercase hex offset. When its functions are 
 
 ## Symbols and the link
 
-A global's address is its row in `config/symbols.toml`, or the name itself for an address name
+A global's address is its row in `config/symbols/<image>.toml`, or the name itself for an address name
 (`D_80145E90`). `g_Task` is one row in the `["exe/slus_004_22"]` table. The row is the whole
 edit: the link finds the address by itself, with no per-image list to extend and no reconfigure.
 

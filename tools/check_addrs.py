@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Fail when a symbol address that config/symbols.toml records at REF is gone at HEAD.
+"""Fail when a symbol address that config/symbols/<image>.toml records at REF is gone at HEAD.
 
 Every function and data address found so far stays findable: a rename keeps its row's
 `addr`, and a global folded into a record keeps its old address as an `alias = true` row
@@ -11,13 +11,15 @@ Usage: python3 tools/check_addrs.py REF [HEAD]
 """
 
 import sys
+from pathlib import Path
 
-from bof3.adapters.git import git, merge_base
-from bof3.symbols import TABLE, parse
+from bof3.adapters.config import symbols_text
+from bof3.adapters.git import merge_base
+from bof3.symbols import parse
 
 
 def addresses(rev):
-    text = git("show", f"{rev}:{TABLE}")
+    text = symbols_text(Path.cwd(), rev)
     found = {}
     for target, rows in parse(text).items():
         for name, row in rows.items():

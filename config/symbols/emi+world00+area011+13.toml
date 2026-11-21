@@ -1,0 +1,2 @@
+["emi/world00/area011/13"]
+g_AreaModuleId = { addr = 0x801F2C00, source = "Module id of the area: the first payload word of its overlay, 52 + the area number." }

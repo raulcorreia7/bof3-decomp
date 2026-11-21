@@ -4,6 +4,7 @@ import subprocess
 from pathlib import Path
 
 import pytest
+from fixture import put_symbols
 
 import check_names
 from check_names import offenders, offset_macros, unnamed_parameters
@@ -383,7 +384,7 @@ def write_image(
     """Write one image layout, its symbol table and its one source file."""
     (root / "config/exe/a").mkdir(parents=True, exist_ok=True)
     (root / "config/exe/a/splat.yaml").write_text(LAYOUT % (kind, row))
-    (root / "config/symbols.toml").write_text('["exe/a"]\n' + table + "\n")
+    put_symbols(root, '["exe/a"]\n' + table + "\n")
     (root / "src/a").mkdir(parents=True, exist_ok=True)
     (root / "src/a" / f"{unit_name}.c").write_text(unit)
 
@@ -482,7 +483,7 @@ def diff_repo(root: Path, row: str) -> None:
         "MATCH void func_80000000(void) {}\n",
         "func_80000000",
     )
-    (root / "config/symbols.toml").write_text('["exe/a"]\n')
+    put_symbols(root, '["exe/a"]\n')
     git("add", ".")
     git("commit", "-qm", "base")
     write_image(root, "c", row, NAMED_ROW, NAMED_UNIT, "func_80000000")

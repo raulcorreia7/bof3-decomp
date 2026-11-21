@@ -1,0 +1,18 @@
+["emi/bmagic/magic081/03"]
+D_80036C00 = { addr = 0x80036C00, type = "u16", size = 0x200, alias = true, source = "Row 26 of the palette arena, the source magic081 stages from." }
+g_BattleEffectPalette = { addr = 0x8003AC00, type = "u16", size = 0x200, alias = true, source = "Row 26 of the working palette copy, the row magic081 stages." }
+Battle_MarkDamaged = { addr = 0x800A9820, type = "func", source = "Marks the selected battlers as damaged." }
+Battle_ProjectRange = { addr = 0x800AF764, type = "func", source = "Projects the battle range to the screen." }
+Battle_CenterCamera = { addr = 0x800AFD9C, type = "func", source = "Centres the battle camera on the living battlers." }
+SND_QueueSelectionSE = { addr = 0x8015D71C, alias = true, source = "Marks the four effect voice slots free and queues the SE through SND_PlaySE." }
+Battle_AllocEffect = { addr = 0x801E590C, alias = true, source = "Claims a free battle effect slot." }
+Effect_Reset = { addr = 0x801E5988, type = "func", source = "Clears every timer, state and flag byte of the shared BattleEffect work record; every effect countdown calls it first. battle/03 owns the body." }
+g_BattleEffectBattler = { addr = 0x801EB4E0, source = "the battler the running effect acts on; Battle_UpdateEffects stores it for each effect step (emi/battle/battle/03 owns the cell)" }
+D_801EC2E0 = { addr = 0x801EC2E0, source = "Pointer to the battle effect the magic081 effect runs on; func_801EEE74 and func_801EEF88 read its target party record." }
+g_BattleEffects = { addr = 0x801EC330, alias = true, source = "Battle effect work records (stride 0x78); Battle_AllocEffect claims a free one by setting bit 0 of header.flags." }
+BMagic_UpdateRottenBreath = { addr = 0x801EEC30, type = "func", source = "Per-frame update of the magic081 effect (RottenBreath): runs the handler that header.mode (byte 0x01) selects, then runs func_801EF330 for each active slot of the effect table." }
+BMagic_DispatchEffectMode = { addr = 0x801EF014, type = "func", source = "Runs the handler that header.mode (byte 0x01) selects from the effect handlers of magic081." }
+Effect_TickOnZeroTick = { addr = 0x801EF2A0, type = "func", source = "When the effect ticker (byte 0x0B) is zero lowers the ticker of g_BattleEffectBattler and clears the effect in magic081 (RottenBreath)." }
+BMagic_AllocEffect = { addr = 0x801EFA20, type = "func", source = "Claims the first free slot of the effect table (bit 0 of header.flags) and returns its index, or 0xFF when all effect slots are in use in magic081 (RottenBreath)." }
+g_BMagicEffectModes = { addr = 0x801EFA84, source = "Handlers of magic081 (RottenBreath), run by header.mode (byte 0x01)." }
+D_801EFA8C = { addr = 0x801EFA8C, source = "Effect slot table of the magic081 effect, scanned by BMagic_AllocEffect." }

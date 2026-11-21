@@ -1,0 +1,12 @@
+["emi/boss/boss035/16"]
+jtbl_800C1804 = { addr = 0x800C1804, type = "Callback", size = 0x18, source = "The switch table of Boss_RunBattleEvent: 6 jump targets of its jr dispatch." }
+Boss_InstallBattleHooks = { addr = 0x800C1B4C, type = "func", source = "Installs the boss battle hooks of boss035: Boss_ChooseBattleEnding into g_BattleChooseEndingHook, Boss_EndBattle into g_BattleEndHook and Boss_RunBattleEvent into g_BossBattleEventHook." }
+Boss_RunBattleEvent = { addr = 0x800C1B84, type = "func", source = "Handles the boss battle events of boss035: g_BossBattleEventHook calls it with the event mode (0 to 6) from the battle loop and tests its u8 result." }
+Boss_ChooseBattleEnding = { addr = 0x800C1BF0, type = "func", source = "Chooses how the boss battle of boss035 ends (g_BattleChooseEndingHook). On victory sets g_ScenarioState.step_05 to 21, runs Battle_EndVictory; otherwise runs Battle_EndDefeat." }
+Boss_EndBattle = { addr = 0x800C1C3C, type = "func", source = "Ends the boss battle of boss035: the battle-end hook (g_BattleEndHook) of this set, which runs ." }
+Boss_InstallBattleHooks2 = { addr = 0x800C1C70, type = "func", source = "Installs the boss battle hooks of boss035 (set 2): Boss_ChooseBattleEnding2 into g_BattleChooseEndingHook, Boss_EndBattle2 into g_BattleEndHook and Boss_RunBattleEvent2 into g_BossBattleEventHook." }
+Boss_RunBattleEvent2 = { addr = 0x800C1CA8, type = "func", source = "Handles the boss battle events of boss035 (set 2): ignores every event mode and returns 0." }
+Boss_ChooseBattleEnding2 = { addr = 0x800C1CB0, type = "func", source = "Chooses how the boss battle of boss035 (set 2) ends (g_BattleChooseEndingHook). On victory sets g_ScenarioState.step_05 to 5, runs Battle_EndVictory; otherwise runs Battle_EndDefeat." }
+Boss_EndBattle2 = { addr = 0x800C1CFC, type = "func", source = "Ends the boss battle of boss035 (set 2): the battle-end hook (g_BattleEndHook) of this set, which does nothing." }
+Battle_EndVictory = { addr = 0x801DDED8, type = "func", source = "Ends the battle in victory: sets the battle phase to the result mode at step 1, which plays the victory sequence, poses the party and opens the result panel. Boss battles call it from their ending hook when the result is a victory.", alias = true }
+Battle_EndDefeat = { addr = 0x801DDF00, type = "func", source = "Ends the battle in defeat: sets the battle phase to the result mode at step 2, which plays the defeat sequence and shows the defeat message. Boss battles call it from their ending hook when the result is not a victory.", alias = true }

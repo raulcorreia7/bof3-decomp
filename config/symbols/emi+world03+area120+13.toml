@@ -1,0 +1,3 @@
+["emi/world03/area120/13"]
+g_GameEntryStateWord = { addr = 0x80143B90, alias = true, source = "The game entry state word (0x80143B90); func_801F3B28 tests it against 0x50005." }
+jtbl_801F2C04 = { addr = 0x801F2C04, type = "Callback", size = 0x14, source = "The switch table of func_801F36B0: 5 jump targets of its jr dispatch." }

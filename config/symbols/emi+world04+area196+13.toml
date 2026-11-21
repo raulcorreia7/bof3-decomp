@@ -1,0 +1,5 @@
+["emi/world04/area196/13"]
+g_AreaModuleId = { addr = 0x801F2C00, source = "Module id of the area: the first payload word of its overlay, 52 + the area number." }
+Game_SetCurrentActor = { addr = 0x801F3030, type = "func", source = "the body stores into g_Game.current" }
+Message_ShowParty = { addr = 0x801F3F90, type = "func", source = "Looks through the tags of g_PartyMemberMessages[0] for the first one matching a party member's tag byte (D_80145F09[j][0]), starts its area message and sets g_GameStateIndex to GAME_REQUEST_MESSAGE." }
+g_PartyMemberMessages = { addr = 0x801F42F4, size = 0x18, source = "Tag and message id pairs of the party member talk: Message_ShowParty matches each tags[i] against byte 0 of a party member row and starts messages[i] with Message_StartAreaMessage." }

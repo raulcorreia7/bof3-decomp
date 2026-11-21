@@ -1,0 +1,2 @@
+["emi/world02/area099/13"]
+Area_ResetCameraOffsetZ = { addr = 0x801F2C24, type = "func", source = "Zeroes g_AreaCameraOffsetZ, the Z shift of the camera, and sets g_AreaCameraRefreshCount to 2 so the camera refreshes for two frames." }

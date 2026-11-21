@@ -1,0 +1,22 @@
+["emi/bmagic/magic001/00"]
+Battle_ApplyDamageFlags = { addr = 0x800A9610, type = "func", source = "Applies the damage flags to the selected battlers." }
+Battle_MarkDamaged = { addr = 0x800A9820, type = "func", source = "Marks the selected battlers as damaged." }
+Battle_SelectActiveBattlerScript = { addr = 0x800AEF98, type = "func", source = "Selects the active battler's actor script for a step and payload; a party member's facing offsets the step.", alias = true }
+Battle_SetCellPaletteStp = { addr = 0x800AF8F0, type = "func", source = "Sets bit 15 (STP) of each palette entry after the first in the palette row of the battle sprite cell. battle/15 owns the body." }
+Battle_ClearCellPaletteEntry = { addr = 0x800AFAB8, type = "func", source = "Zeroes one palette entry (index 0x1F) of the palette row of the battle sprite cell. battle/15 owns the body." }
+Battle_CopyCellPalette = { addr = 0x800AFB48, type = "func", source = "Copies the palette rows of the battle sprite cell into the second palette bank and returns the value the effect keeps in unk_27, from the row divisor. battle/15 owns the body." }
+Battle_PlayActiveBattlerSE = { addr = 0x800AFC98, type = "func", source = "Plays the active battler's SEs: a party member's two effect SEs, or the enemy SE and selection voice.", alias = true }
+g_BattleSelectedActor = { addr = 0x8014638C, type = "PartyMember", alias = true, source = "The selected battle actor; the selected_actor member of g_Battle." }
+Effect_RotatePosition = { addr = 0x801DD350, type = "func", alias = true, source = "Integrates the effect velocity pairs the magic044 step reads; battle/03 owns the body." }
+Battle_AllocEffect = { addr = 0x801E590C, alias = true, source = "Claims a free battle effect slot." }
+Effect_Reset = { addr = 0x801E5988, type = "func", source = "Clears every timer, state and flag byte of the shared BattleEffect work record; every effect countdown calls it first. battle/03 owns the body.", alias = true }
+g_BattleEffectBattler = { addr = 0x801EB4E0, source = "the battler the running effect acts on; Battle_UpdateEffects stores it for each effect step (emi/battle/battle/03 owns the cell)" }
+g_BattleEnemyBattlers = { addr = 0x801EB630, alias = true, source = "The enemy battlers of the battle, indexed by slot minus BATTLE_PARTY_CHARACTERS_COUNT; Battle_DrawEnemyNamePanel draws the name of each one whose unk_7F is 1." }
+g_BattleEffects = { addr = 0x801EC330, alias = true, source = "Battle effect work records (stride 0x78); Battle_AllocEffect claims a free one by setting bit 0 of header.flags." }
+D_801EEC10 = { addr = 0x801EEC10, type = "Magic001Steps", source = "Eleven step handlers of magic001, copied to the stack and run by header.step (byte 0x02) from func_801EF01C." }
+BMagic_DispatchMode = { addr = 0x801EEC64, type = "func", source = "Runs the handler that header.mode (byte 0x01) selects from the module head's three callbacks in magic001 (Nue Stomp, Jump)." }
+Effect_StartPlaying = { addr = 0x801EEFA4, type = "func", source = "Raises BATTLE_STATE_EFFECT_PLAYING and clears the effect work record in magic001 (Nue Stomp, Jump)." }
+BMagic_DispatchEffectMode = { addr = 0x801EEFD8, type = "func", source = "Runs the handler that header.mode (byte 0x01) selects from the effect handlers of magic001." }
+Effect_StartPlaying6 = { addr = 0x801EFA84, type = "func", source = "Raises BATTLE_STATE_EFFECT_PLAYING and clears the effect work record in magic001 (Nue Stomp, Jump)." }
+Effect_PrimeTintOnScriptReady = { addr = 0x801EFF28, type = "func", source = "Once the script stream reports ready (Actor_StepAnimOnce) makes the actor semi-transparent, starts its tint at zero and advances header.step (byte 0x02) in magic001 (Nue Stomp, Jump)." }
+g_BMagicEffectModes = { addr = 0x801F04B4, source = "Handlers of magic001 (Nue Stomp, Jump), run by header.mode (byte 0x01)." }

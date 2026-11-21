@@ -3,6 +3,7 @@ from __future__ import annotations
 from pathlib import Path
 
 import pytest
+from fixture import put_symbols
 
 import check_markers
 from check_markers import (
@@ -153,8 +154,9 @@ def test_a_hand_asm_file_may_land_its_switch(tmp_path) -> None:
 def _tree(tmp_path, attempts: str):
     (tmp_path / "config/emi/bmagic/magic058/03").mkdir(parents=True)
     (tmp_path / "config/emi/bmagic/magic058/03/splat.yaml").write_text("")
-    (tmp_path / "config/symbols.toml").write_text(
-        '["emi/bmagic/magic058/03"]\nNamed = { addr = 0x801EFDD4, type = "func" }\n'
+    put_symbols(
+        tmp_path,
+        '["emi/bmagic/magic058/03"]\nNamed = { addr = 0x801EFDD4, type = "func" }\n',
     )
     (tmp_path / "config/attempts.jsonl").write_text(attempts)
     return tmp_path

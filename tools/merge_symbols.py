@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Git merge driver for `config/symbols.toml`: `merge_symbols.py BASE OURS THEIRS` writes OURS.
+"""Git merge driver for `config/symbols/<image>.toml`: `merge_symbols.py BASE OURS THEIRS` writes OURS.
 
 Rows merge per table by name and stay in address order; a comment travels with the row below it. A row both sides changed differently is a conflict.
 """

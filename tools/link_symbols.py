@@ -10,7 +10,7 @@ Usage: tools/link_symbols.py --root ROOT --build-dir DIR --target ID --output FI
 partial link, which reports it.
 
 Reads the image's link script, its objects and the symbol maps it may use
-(``build/ld/<image>.maps``, written by tools/split.py from ``config/symbols.toml``). It writes
+(``build/ld/<image>.maps``, written by tools/split.py from ``config/symbols/<image>.toml``). It writes
 
 - ``PROVIDE(name = address);`` for each name that no object and no other link script defines;
   a name that cannot be resolved for certain fails with the row and the fix;

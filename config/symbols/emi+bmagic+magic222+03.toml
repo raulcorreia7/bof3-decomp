@@ -1,0 +1,21 @@
+["emi/bmagic/magic222/03"]
+Battle_MarkDamaged = { addr = 0x800A9820, alias = true, source = "Marks the selected battlers as damaged." }
+Battle_ProjectRange = { addr = 0x800AF764, type = "func", source = "Projects the battle range to the screen." }
+Battle_CenterCamera = { addr = 0x800AFD9C, alias = true }
+Battle_AllocEffect = { addr = 0x801E590C, alias = true, source = "Claims a free battle effect slot." }
+Effect_Reset = { addr = 0x801E5988, type = "func", source = "Clears every timer, state and flag byte of the shared BattleEffect work record; every effect countdown calls it first. battle/03 owns the body." }
+g_BattleEffectBattler = { addr = 0x801EB4E0, source = "the battler the running effect acts on; Battle_UpdateEffects stores it for each effect step (emi/battle/battle/03 owns the cell)" }
+g_BattleEffects = { addr = 0x801EC330, alias = true, source = "Battle effect work records (stride 0x78); Battle_AllocEffect claims a free one by setting bit 0 of header.flags." }
+BMagic_DispatchMode = { addr = 0x801EEC10, type = "func", source = "Runs the handler that header.mode (byte 0x01) selects from the module head's three callbacks in magic222 (Combustion)." }
+Effect_CountDownTimerQueueEffect = { addr = 0x801EEE20, type = "func", source = "Counts the effect timer (byte 0x09) down; at zero queues the selection sound (0x100) and advances header.mode (byte 0x01) in magic222 (Combustion)." }
+Effect_MarkDamagedOnZeroTick = { addr = 0x801EEE80, type = "func", source = "When the effect ticker (byte 0x0B) is zero marks the battlers of the target selector damaged, raises BATTLE_STATE_EFFECT_PLAYING and resets the effect in magic222 (Combustion)." }
+BMagic_DispatchEffectMode = { addr = 0x801EEEE0, type = "func", source = "Runs the handler that header.mode (byte 0x01) selects from the effect handlers of magic222." }
+Effect_SwingCameraAngle = { addr = 0x801EF274, type = "func", source = "Swings the area camera pitch by 20 per frame, up on odd effect timer (byte 0x09) values and down on even ones; at zero resets the pitch, reloads the timer with the image's swing ticks and advances header.step (byte 0x02) in magic222 (Combustion)." }
+Effect_StartTint = { addr = 0x801EF448, type = "func", source = "Counts the effect timer (byte 0x09) down; at zero sets ACTOR_FLAG_SEMI_TRANSPARENT in header.flags, loads the tint selector (byte 0x5C) with 1, clears the tint colours (bytes 0x5D to 0x5F) and advances header.step (byte 0x02) in magic222 (Combustion)." }
+Effect_CountDownAndStep = { addr = 0x801EF724, type = "func", source = "Counts the effect counter (byte 0x0A) down and advances header.step (byte 0x02) at zero in magic222 (Combustion)." }
+Effect_TickOnTimerZero = { addr = 0x801EF770, type = "func", source = "Counts the effect timer (byte 0x09) down by 1 per frame; at zero lowers the ticker (byte 0x0B) of battler g_BattleEffectBattler and clears the effect in magic222 (Combustion)." }
+Effect_SetActorMatrix = { addr = 0x801EF7CC, type = "func", source = "Sets the actor's GTE matrix from its coordinates and half its vertical span, times the camera in magic222 (Combustion)." }
+BMagic_DrawDarkRing = { addr = 0x801EFACC, type = "func", source = "draws 64 subtractive POLY_G4 quads in a flat ring; the inner edge subtracts four times the shade byte, the outer edge nothing" }
+Effect_SetActorMatrix3 = { addr = 0x801F0168, type = "func", source = "Sets the actor's GTE matrix from its coordinates and half its vertical span, times the camera in magic222 (Combustion)." }
+Effect_CountUpByTwoAndStep = { addr = 0x801F061C, type = "func", source = "Counts the effect timer (byte 0x09) up by two and advances header.step (byte 0x02) at 16 in magic222 (Combustion)." }
+g_BMagicEffectModes = { addr = 0x801F0D54, source = "Handlers of magic222 (Combustion), run by header.mode (byte 0x01)." }

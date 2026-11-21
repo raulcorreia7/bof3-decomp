@@ -1,0 +1,3 @@
+["emi/world01/area067/14"]
+g_AreaModuleId = { addr = 0x801F2C00, source = "Module id of the area: the first payload word of its overlay, 52 + the area number." }
+Message_SetAnswerMessage = { addr = 0x801F3E50, type = "func", source = "Stores the message id the answer table D_801F5390 holds for the menu choice g_MessageChoice in g_MessageRequest." }

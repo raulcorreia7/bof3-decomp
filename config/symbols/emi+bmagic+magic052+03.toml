@@ -1,0 +1,7 @@
+["emi/bmagic/magic052/03"]
+Battle_MarkDamaged = { addr = 0x800A9820, type = "func", source = "Marks the selected battlers as damaged." }
+Battle_AllocEffect = { addr = 0x801E590C, source = "Claims a free queued effect slot and returns its index, 0xFF when the table is full." }
+Effect_Reset = { addr = 0x801E5988, type = "func", source = "Clears every timer, state and flag byte of the shared BattleEffect work record; every effect countdown calls it first. battle/03 owns the body." }
+g_BattleEffects = { addr = 0x801EC330, source = "Battle effect work records (stride 0x78); Battle_AllocEffect claims a free one by setting bit 0 of header.flags.", alias = true }
+D_801EEC10 = { addr = 0x801EEC10, type = "Magic052Steps", source = "Step handlers of magic052, run by header.step (byte 0x02) from func_801EEEE0; the three Callback slots are copied to a local table first." }
+BMagic_DispatchMode = { addr = 0x801EEC1C, type = "func", source = "Runs the handler that header.mode (byte 0x01) selects from the module head's three callbacks in magic052 (Ovum)." }

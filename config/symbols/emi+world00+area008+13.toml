@@ -1,0 +1,9 @@
+["emi/world00/area008/13"]
+g_AreaModuleId = { addr = 0x801F2C00, source = "Module id of the area: the first payload word of its overlay, 52 + the area number." }
+Menu_DrawHeaderBar = { addr = 0x801F3D88, type = "func", source = "Draws the header bar window from x, y, width and height with window_style (the callers pass the master menu frame rect and D_80144952)." }
+Area_AddCameraOffsetX20 = { addr = 0x801F450C, type = "func", source = "Adds 0x14 to g_AreaCameraOffsetX, the X shift Area_SetCameraMatrix adds to the projected camera translation, and sets g_AreaCameraRefreshCount to 2 so the camera refreshes for two frames." }
+Area_SubCameraOffsetX20 = { addr = 0x801F4534, type = "func", source = "Subtracts 0x14 from g_AreaCameraOffsetX, the X shift Area_SetCameraMatrix adds to the projected camera translation, and sets g_AreaCameraRefreshCount to 2 so the camera refreshes for two frames." }
+Area_ResetCameraOffsetX = { addr = 0x801F455C, type = "func", source = "Zeroes g_AreaCameraOffsetX, the X shift Area_SetCameraMatrix adds to the projected camera translation, and sets g_AreaCameraRefreshCount to 2 so the camera refreshes for two frames." }
+Area_AddCameraOffsetY20 = { addr = 0x801F4578, type = "func", source = "Adds 0x14 to g_AreaCameraOffsetY, the Y shift Area_SetCameraMatrix adds to the projected camera translation, and sets g_AreaCameraRefreshCount to 2 so the camera refreshes for two frames." }
+Area_SubCameraOffsetY20 = { addr = 0x801F45A0, type = "func", source = "Subtracts 0x14 from g_AreaCameraOffsetY, the Y shift Area_SetCameraMatrix adds to the projected camera translation, and sets g_AreaCameraRefreshCount to 2 so the camera refreshes for two frames." }
+Area_ResetCameraOffsetY = { addr = 0x801F45C8, type = "func", source = "Zeroes g_AreaCameraOffsetY, the Y shift of the camera, and sets g_AreaCameraRefreshCount to 2 so the camera refreshes for two frames." }

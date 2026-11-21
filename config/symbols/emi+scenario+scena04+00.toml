@@ -1,0 +1,13 @@
+["emi/scenario/scena04/00"]
+jtbl_801F6C04 = { addr = 0x801F6C04, type = "Callback", source = "The switch table of func_801F8680: the jump targets of its jr dispatch." }
+jtbl_801F6C84 = { addr = 0x801F6C84, type = "Callback", source = "The switch table of func_801F8F98: the jump targets of its jr dispatch." }
+Scene_DispatchEntity = { addr = 0x801F6D00, type = "func", source = "dispatches a scene entity by its callback index" }
+func_801F6D08 = { addr = 0x801F6D08, alias = true, source = "Scene_DispatchEntity+0x8, after its g_Task load; the start the split used before the function was moved back to that load" }
+Scene_DispatchActor = { addr = 0x801F9D48, type = "func", source = "dispatches a scenario actor to its callback handler" }
+Scene_ShowMessage = { addr = 0x801F9FD0, type = "func", source = "Starts the area message of the given index, switches the game state to 2 and sets the script-active flag." }
+Scene_DispatchByPosition = { addr = 0x801FA010, type = "func", source = "dispatches a scene handler by position index" }
+Scene_SetPartyRyuYoungNinaYoungMomo = { addr = 0x801FA12C, type = "func", source = "Streams the EMI family for young Ryu, young Nina and Momo, empties g_Game.party_size and joins the three with Party_JoinMember." }
+g_SceneEntityDispatch = { addr = 0x801FA180, source = "scenario entity dispatch table" }
+g_SceneActorDispatch = { addr = 0x801FA224, source = "scenario actor dispatch table" }
+g_ScenePositions = { addr = 0x801FA228, source = "scene position lookup table" }
+g_ScenePositionDispatch = { addr = 0x801FA230, source = "scene position dispatch handlers" }

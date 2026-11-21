@@ -8,7 +8,7 @@ overlay's load address; an executable project opens its own image. The script
 defines every function in the mapped Splat layouts and symbol rows, flags every
 symbol in the mapped images' linker maps (``build/meson/<image>.map``), applies
 PsyQ FLIRT signatures, loads the target header with ``to``, and saves project.
-Rows in ``config/symbols.toml`` take priority for name, size and type; the map
+Rows in ``config/symbols/<image>.toml`` take priority for name, size and type; the map
 fills in the rest. With no linker map the project holds rows and layouts only,
 and the tool says so.
 """

@@ -32,6 +32,7 @@ from pathlib import Path
 from typing import Any
 
 import quality
+from bof3.adapters.config import symbol_files
 from bof3.core.paths import ROOT
 from bof3.link import symbols
 from bof3.link.graph import source_object
@@ -112,7 +113,7 @@ class Project:
         addresses; a reference to one resolves as the compiled base's constant does.
         """
         output.parent.mkdir(parents=True, exist_ok=True)
-        inputs = [*sources, self.root / symbols.TABLE]
+        inputs = [*sources, *symbol_files(self.root)]
         if output.is_file() and all(
             source.stat().st_mtime <= output.stat().st_mtime for source in inputs
         ):

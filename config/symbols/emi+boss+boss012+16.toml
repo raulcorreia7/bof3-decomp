@@ -1,0 +1,7 @@
+["emi/boss/boss012/16"]
+Boss_InstallBattleHooks = { addr = 0x800C1B68, type = "func", source = "Installs the boss battle hooks of boss012: Boss_ChooseBattleEnding into g_BattleChooseEndingHook, Boss_EndBattle into g_BattleEndHook and Boss_RunBattleEvent into g_BossBattleEventHook." }
+Boss_RunBattleEvent = { addr = 0x800C1BA0, type = "func", source = "Handles the boss battle events of boss012: ignores every event mode and returns 0." }
+Boss_ChooseBattleEnding = { addr = 0x800C1BA8, type = "func", source = "Chooses how the boss battle of boss012 ends (g_BattleChooseEndingHook). On victory sets script variable 0 to 0x23, sets BATTLE_RESULT_NO_BGM in g_BattleResult and runs Battle_EndVictory; otherwise runs Battle_EndDefeat." }
+Boss_EndBattle = { addr = 0x800C1C00, type = "func", source = "Ends the boss battle of boss012: the battle-end hook (g_BattleEndHook) of this set, which does nothing." }
+Battle_EndVictory = { addr = 0x801DDED8, type = "func", source = "Ends the battle in victory: sets the battle phase to the result mode at step 1, which plays the victory sequence, poses the party and opens the result panel. Boss battles call it from their ending hook when the result is a victory.", alias = true }
+Battle_EndDefeat = { addr = 0x801DDF00, type = "func", source = "Ends the battle in defeat: sets the battle phase to the result mode at step 2, which plays the defeat sequence and shows the defeat message. Boss battles call it from their ending hook when the result is not a victory.", alias = true }

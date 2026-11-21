@@ -1,4 +1,4 @@
-"""The rows of ``config/symbols.toml``: parse the document, validate each row, reject overlaps.
+"""The rows of ``config/symbols/``: parse the document, validate each row, reject overlaps.
 
 Pure: the caller reads the file. A bad document or row is a :class:`LinkError`.
 """
@@ -11,7 +11,8 @@ from typing import Any, NamedTuple
 
 from bof3.core.paths import CONFIG
 
-TABLE = f"{CONFIG}/symbols.toml"
+TABLE = f"{CONFIG}/symbols.toml"  # the single file before the split into SPLIT
+SPLIT = f"{CONFIG}/symbols"
 
 _NAME = re.compile(r"^[A-Za-z_]\w*$")
 _TYPE = re.compile(r"^[A-Za-z_][\w*]*$")
@@ -59,7 +60,7 @@ class Entry(NamedTuple):
 
 
 def _row_error(target: str, name: str, problem: str, fix: str) -> LinkError:
-    return LinkError(f"{TABLE} [{target}] {name}: {problem}. {fix}")
+    return LinkError(f"{SPLIT} [{target}] {name}: {problem}. {fix}")
 
 
 def _entry(target: str, name: str, value: object) -> Entry:
@@ -130,7 +131,7 @@ def overlaps(target: str, entries: list[Entry]) -> list[str]:
         if holder is not None and entry.addr < reach:
             if not (entry.alias or holder.alias):
                 problems.append(
-                    f"{TABLE} [{target}] {entry.name} (0x{entry.addr:08X}) overlaps {holder.name} "
+                    f"{SPLIT} [{target}] {entry.name} (0x{entry.addr:08X}) overlaps {holder.name} "
                     f"(0x{holder.addr:08X}+0x{max(holder.size, 1):X}). Fix an address or size, or "
                     "mark the second name `alias = true` (a link-only name)."
                 )
@@ -145,7 +146,7 @@ def parse(text: str) -> dict[str, Any]:
     try:
         return tomllib.loads(text)
     except tomllib.TOMLDecodeError as error:
-        raise LinkError(f"{TABLE}: {error}. Fix the line named above.") from None
+        raise LinkError(f"{SPLIT}: {error}. Fix the line named above.") from None
 
 
 def table_entries(target: str, rows: dict[str, Any]) -> list[Entry]:

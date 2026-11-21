@@ -1,0 +1,16 @@
+["emi/bmagic/magic122/03"]
+Battle_ApplyDamageFlags = { addr = 0x800A9610, alias = true, source = "Applies the damage flags to the selected battlers." }
+Battle_MarkDamaged = { addr = 0x800A9820, alias = true, source = "Marks the selected battlers as damaged." }
+Battle_ProjectRange = { addr = 0x800AF764, type = "func", source = "Projects the battle range to the screen." }
+Battle_CenterCamera = { addr = 0x800AFD9C, type = "func", source = "Centres the battle camera on the living battlers." }
+Battle_AllocEffect = { addr = 0x801E590C, alias = true, source = "Claims a free battle effect slot." }
+Effect_Reset = { addr = 0x801E5988, type = "func", source = "Clears every timer, state and flag byte of the shared BattleEffect work record; every effect countdown calls it first. battle/03 owns the body.", alias = true }
+g_BattleEffectBattler = { addr = 0x801EB4E0, source = "the battler the running effect acts on; Battle_UpdateEffects stores it for each effect step (emi/battle/battle/03 owns the cell)" }
+g_BattleEffects = { addr = 0x801EC330, alias = true, source = "Battle effect work records (stride 0x78); Battle_AllocEffect claims a free one by setting bit 0 of header.flags." }
+Effect_PlayOnIdleTick = { addr = 0x801EEDFC, type = "func", source = "When the effect ticker (byte 0x0B) is 0xFF marks the battlers of the target selector damaged, raises BATTLE_STATE_EFFECT_PLAYING and resets the effect in magic122 (Flame Breath)." }
+BMagic_DispatchEffectMode = { addr = 0x801EEE5C, type = "func", source = "Runs the handler that header.mode (byte 0x01) selects from the effect handlers of magic122." }
+Effect_CountUpTimerCallSelector = { addr = 0x801EF1C4, type = "func", source = "Lowers the effect ticker (byte 0x0B) and counts the effect timer (byte 0x09) up; at 24 marks the selected battlers pending with flag 0x10 and advances header.step (byte 0x02) in magic122 (Flame Breath)." }
+Effect_CountUpAndStepAt120 = { addr = 0x801EF24C, type = "func", source = "Counts the effect timer (byte 0x09) up and advances header.step (byte 0x02) at 120 in magic122 (Flame Breath)." }
+Effect_CountUpAndFinishAt136 = { addr = 0x801EF29C, type = "func", source = "Raises the effect ticker (byte 0x0B), lowers byte 0x04 and counts the effect timer (byte 0x09) up; at 136 sets the active battler's ticker to 0xFF and clears the effect in magic122 (Flame Breath)." }
+g_BMagicEffectModes = { addr = 0x801F02CC, source = "Handlers of magic122 (Flame Breath), run by header.mode (byte 0x01)." }
+D_801F02D0 = { addr = 0x801F02D0, source = "Step handlers of the effect, run by header.step (byte 0x02) through SYS_DISPATCH_BYTE." }

@@ -1,0 +1,7 @@
+["emi/world03/area139/13"]
+g_AreaModuleId = { addr = 0x801F2C00, source = "Module id of the area: the first payload word of its overlay, 52 + the area number." }
+Actor_AdvanceWhenPartyNear = { addr = 0x801F3C68, type = "func", source = "Runs Area_Update after WorldMap_AdvanceWhenPartyNear, which adds 1 to header.step (byte 0x02) and plays SE EMI_SE_ID(2, 0) when g_GameStateIndex is 0, once the party is within half a cell of the work cell along one axis and within a cell of it along the other (axes by direction)." }
+Actor_SlideScreenOffBottom = { addr = 0x801F3DA8, type = "func", source = "Subtracts 0x20 from the actor screen_y and adds 1 to header.step (byte 0x02) once it is below -0xFF; then runs Area_Update." }
+Actor_AdvanceWhenPartyAway = { addr = 0x801F3E04, type = "func", source = "Adds 1 to header.step (byte 0x02) when the party position (D_80145EC4, D_80145EC8) is more than two cells from the work cell along one axis, or from both of its halves along the other (axes by direction); then runs Area_Update." }
+Actor_SlideScreenUp = { addr = 0x801F3F14, type = "func", source = "Adds 0x20 to the actor screen_y; at 0 or above sets header.step (byte 0x02) to 1 and plays SE EMI_SE_ID(2, 1) when g_GameStateIndex is GAME_REQUEST_IDLE; then runs Area_Update." }
+Area_Update = { addr = 0x801F3F84, type = "func", source = "Sets header.step (byte 0x02) to 3 when D_801454F2 is 2, then draws the area HUD at the actor screen_x with Area_DrawHud." }

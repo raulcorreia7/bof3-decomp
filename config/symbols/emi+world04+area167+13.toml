@@ -1,0 +1,9 @@
+["emi/world04/area167/13"]
+jtbl_801F2C04 = { addr = 0x801F2C04, type = "Callback", size = 0x84, source = "The switch table of func_801F4494: 33 jump targets of its jr dispatch." }
+Actor_AdvanceWhenPartyNear = { addr = 0x801F2EA0, type = "func", source = "Runs Area_Update after WorldMap_AdvanceWhenPartyNear, which adds 1 to header.step (byte 0x02) and plays SE EMI_SE_ID(2, 0) when g_GameStateIndex is 0, once the party is within half a cell of the work cell along one axis and within a cell of it along the other (axes by direction)." }
+Actor_SlideScreenX = { addr = 0x801F2FE0, type = "func", source = "Adds ACTOR_SCREEN_X_STEP to the screen origin of the work record and, once it reaches ACTOR_SCREEN_X_THRESHOLD, adds 1 to the step (byte 0x02); runs Area_Update." }
+Actor_AdvanceWhenPartyAway = { addr = 0x801F303C, type = "func", source = "Adds 1 to header.step (byte 0x02) when the party position (D_80145EC4, D_80145EC8) is more than two cells from the work cell along one axis, or from both of its halves along the other (axes by direction); then runs Area_Update." }
+Actor_SlideScreenDown16 = { addr = 0x801F314C, type = "func", source = "Subtracts 0x10 from the actor screen_y; at 0 or below sets header.step (byte 0x02) to 1 and plays SE EMI_SE_ID(2, 1) when g_GameStateIndex is GAME_REQUEST_IDLE; then runs Area_Update." }
+Area_Update = { addr = 0x801F31BC, type = "func", source = "Sets header.step (byte 0x02) to 3 when D_801454F2 is 2, then draws the area HUD at the actor screen_x with Area_DrawHud." }
+Area_EndCutscene = { addr = 0x801F3F28, type = "func", source = "Clears scene event flag 0x46 (g_SceneEventFlags) and returns g_AreaSceneMode to 0." }
+Actor_PlaceAtFocus = { addr = 0x801F4434, type = "func", source = "Copies D_80147A8C, g_AreaFocusY and D_80147A94 into the actor position at bytes 0x34, 0x38 and 0x3C." }
