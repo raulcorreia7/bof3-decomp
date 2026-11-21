@@ -8,9 +8,7 @@
 #include "shared/etc.h"
 #include <string.h>
 
-/* Save-directory entries and the address of the save file buffer (g_SaveHeader, then the save data). */
-#define SAVE_DIR_NAME_MAX     20
-#define SAVE_DIR_SIZE         0x18
+/* The address of the save file buffer (g_SaveHeader, then the save data). */
 #define SAVE_FILE_ADDR        0x800C1800u
 
 /* Card-name table dimensions. */
@@ -46,14 +44,8 @@ typedef enum TimFlags {
     TIM_FLAG_CLUT = 1 << 3,
 } TimFlags;
 
-typedef struct SaveFile {
-    char name[SAVE_DIR_NAME_MAX];
-    s32  size;
-} SaveFile;
-
-ASSERT_OFFSET(SaveFile, name, 0x00);
-ASSERT_OFFSET(SaveFile, size, 0x14);
-ASSERT_SIZE(SaveFile, SAVE_DIR_SIZE);
+/* SaveFile (menu/shop.h) is the directory entry's record; shared/etc.h brings
+ * it into this image. */
 
 typedef struct {
     u32  unk_00;                       /* 0x00 0x141; no reader */
