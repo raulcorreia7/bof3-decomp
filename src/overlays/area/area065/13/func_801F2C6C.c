@@ -40,15 +40,15 @@ MATCH void func_801F2C6C(void) {
                     }
                     row++;
                 }
-                for (offset = 0, index = 0; index < 2; index++, offset += 6) {
-                    if (row->kind == D_801F525C[offset]) {
+                for (index = 0; index < 2; index++) {
+                    if (row->kind == D_801F525C[index].kind) {
                         break;
                     }
                 }
                 count = 1;
                 slot  = 0;
                 dst   = (u8*)g_TextVariables;
-                from  = D_801F525D + index * 6;
+                from  = D_801F525C[index].fish_id;
             next:
                 id = *from;
                 if ((id & BYTE_MASK) != GAME_NONE) {

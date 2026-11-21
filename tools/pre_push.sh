@@ -5,12 +5,20 @@
 #
 # The checks are the rows of tools/gate.txt, described in tools/README.md#pre-push. BASE_REF is what the work is compared with; it defaults to the newest of
 # public/main, origin/main and main; comparisons use the merge base with HEAD. Each log is
-# build/pre-push/<check>.log. Format first with `meson compile -C build/meson format`.
+# build/pre-push/<check>.log. Format first with `meson compile -C build/meson format`, then commit:
+# a tree with uncommitted changes fails.
 set -u
 case "${1:-}" in
 -h | --help) sed -n '2,9p' "$0" | sed 's/^# \{0,1\}//'; exit 0 ;;
 esac
 cd "$(dirname "$0")/.." || exit 2
+# Most checks compare commits, so an uncommitted change would pass them unchecked.
+dirty=$(git status --porcelain --ignore-submodules) || exit 2
+if [ -n "$dirty" ]; then
+	printf '%s\n' "$dirty" | head -n 5 >&2
+	echo "pre-push: uncommitted changes; commit them first, the checks compare commits" >&2
+	exit 1
+fi
 bld=${BUILD_DIR:-build/meson}
 logs=build/pre-push
 mkdir -p "$logs"
