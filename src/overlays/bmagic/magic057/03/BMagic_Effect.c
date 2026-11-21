@@ -144,7 +144,7 @@ NON_MATCHING void func_801EF134(void) {
     g_Task->unk_5E             = 0;
     g_Task->unk_5F             = 0;
     g_Task->unk_5C             = 0;
-    g_Task->mirror             = 0;
+    g_Task->unk_2A             = 0;
     g_Task->unk_29             = 4;
     g_Task->unk_2C.value       = 0;
     Actor_SelectScript(0);
