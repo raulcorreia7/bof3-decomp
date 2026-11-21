@@ -6,7 +6,7 @@
  * times g_MessageChoice.
  */
 /* func_8015A1D8 */
-MATCH void Menu_DrawMessagePresetCursor(void) {
+MATCH void Message_DrawPresetCursor(void) {
     MenuPanelTask* panel;
     s32            index;
     s32            row_offset;

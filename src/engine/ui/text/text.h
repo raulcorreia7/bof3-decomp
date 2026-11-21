@@ -19,23 +19,23 @@ void        UI_DrawAsciiString(s16 left, s16 top, s32 flags, u8* text);
 /* func_80150098 */
 void        UI_DrawGlyphString(s16 x, s16 y, u32 clut, const u8* text);
 /* func_80150304 */
-void        UI_ResetMessage(void);
+void        Message_Reset(void);
 /* func_801503E0 */
-extern s32  UI_UpdateLayout(void);
+extern s32  Message_UpdateLayout(void);
 /* func_80150470 */
-extern void UI_DrawMessageScript(void);
+extern void Message_DrawScript(void);
 /* func_80150E14 */
-void        UI_TickChoiceTimer(void);
+void        Message_TickChoiceTimer(void);
 /* func_80151210 */
-void        UI_UpdateChoiceInput(void);
+void        Message_UpdateChoiceInput(void);
 /* func_801515A8 */
-void        UI_ClosePanel(void);
+void        Message_ClosePanel(void);
 /* func_80151628 */
-void        UI_ScrollChoice(void);
+void        Message_ScrollChoice(void);
 /* func_8015196C */
-void        UI_UpdateChoice(void);
+void        Message_UpdateChoice(void);
 /* func_801526F4 */
-extern void UI_DrawWaitMarker(s16 x, s16 y);
+extern void Message_DrawWaitMarker(s16 x, s16 y);
 /* UI_DrawIconCell */
 /* func_801644D8 */
 void        UI_DrawIconCell(s32 index, s32 x, s32 y, s32 width, s32 height, s32 shade);
@@ -69,9 +69,9 @@ void        UI_DrawBoxOutline(s32 x, s32 y, u8 width, u8 height);
 
 #define OVERLAY_UI_TEXT_H_LOCAL
 /* func_801519F8 */
-void        UI_NextChoice(void);
+void        Message_NextChoice(void);
 /* func_80151A48 */
-void        UI_PrevChoice(void);
+void        Message_PrevChoice(void);
 void        UI_DrawGlyph(s32 color, u8* text);
 /* func_80159B9C */
 extern void UI_DrawPanelBox(s16 x, s16 y, u8 w, u8 h);

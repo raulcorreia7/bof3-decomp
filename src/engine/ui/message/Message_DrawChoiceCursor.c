@@ -9,7 +9,7 @@
  * group and the selected byte-table entry name.
  */
 /* func_8015A264 */
-MATCH void Menu_DrawMessageChoiceCursor(void) {
+MATCH void Message_DrawChoiceCursor(void) {
     /* FAKE: signed cursor-call prototype. */
     ((void (*)(s16, u16, s32))Menu_DrawCursorSprite)(((s16)g_MenuCurrentPanel->pos.x >> 4) + 4, D_801490CF[g_MessageWindow.selection_index], 0);
 }

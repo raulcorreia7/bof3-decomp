@@ -5,7 +5,7 @@
  * cursor into the next call.
  */
 /* func_8015A170 */
-MATCH void UI_DrawTextRows(void) {
+MATCH void Message_DrawTextRows(void) {
     u8* cursor;
     s32 i;
 

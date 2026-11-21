@@ -1700,7 +1700,7 @@ MATCH void func_801D6634(void) {
 
 MATCH void func_801D67F0(void) {
     func_801D830C(0x44, 0x32, Fairy_FindActiveJob(D_801DB0B4) & BYTE_MASK, 1);
-    func_801AE214((D_801DB0D0 * 8) + 0x4A, 0x42, 8, 0);
+    Menu_DrawNameCursor((D_801DB0D0 * 8) + 0x4A, 0x42, 8, 0);
     func_801D97C8(D_801DAAA8, 0xB0, 0x2B);
     func_801D9B80(0x12, 0x61, 0x24, 0x11);
     func_801D94D0(D_801DAAA8, 0x18, 0x67, D_801DB0D4, D_801DB0D8);
@@ -2015,7 +2015,7 @@ MATCH void func_801D769C(void) {
 
 MATCH void func_801D7878(void) {
     func_801D90D8(0x20, 0x2B, Party_GetJoinedCharacter(D_801DB0B4) & BYTE_MASK, 1);
-    func_801AE214((D_801DB0D0 * 8) + 0x5B, 0x50, 8, 0);
+    Menu_DrawNameCursor((D_801DB0D0 * 8) + 0x5B, 0x50, 8, 0);
     func_801D97C8(D_801DAAA8, 0xB0, 0x2B);
     func_801D9B80(0x12, 0x61, 0x24, 0x11);
     func_801D94D0(D_801DAAA8, 0x18, 0x67, D_801DB0D4, D_801DB0D8);

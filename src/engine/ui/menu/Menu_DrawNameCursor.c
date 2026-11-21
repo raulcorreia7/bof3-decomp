@@ -1,6 +1,8 @@
-#include "game_00.h"
+#include "engine/game/00/game_00.h"
 
-MATCH void func_801AE214(s32 line_x, s32 line_y, s32 line_length, s32 line_mode) {
+/* draws the underline of the current name-entry letter: bright when the mode is 0, dim otherwise */
+/* func_801AE214 */
+MATCH void Menu_DrawNameCursor(s32 line_x, s32 line_y, s32 line_length, s32 line_mode) {
     s32      x;
     s32      y;
     u8       mode;

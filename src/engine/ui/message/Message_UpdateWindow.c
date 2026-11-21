@@ -3,10 +3,10 @@
 /* dispatches through a stack copy of the five-entry table using the
  * menu panel task's state byte at +3.
  */
-/* func_80159A20 */
-MATCH void Menu_UpdateMessagePreset(void) {
+/* func_80158FE0 */
+MATCH void Message_UpdateWindow(void) {
     struct MenuPanelSteps table;
 
-    table = g_MessagePresetSteps;
+    table = g_MessageWindowSteps;
     table.steps[g_MenuCurrentPanel->state]();
 }

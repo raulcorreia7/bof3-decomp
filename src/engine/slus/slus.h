@@ -312,7 +312,7 @@ ASSERT_SIZE(Rec_8017F5B4, 0x04);
 
 /* Row of the D_8017F960 panel table: tile column offset, tile row offset and
  * the row step multiplied by the panel index; read through the interior symbols
- * D_8017F962 and D_8017F964 by Menu_DrawMessagePresetRows and Menu_DrawMessagePresetCursor. */
+ * D_8017F962 and D_8017F964 by Message_DrawPresetRows and Message_DrawPresetCursor. */
 typedef struct {
     s16 col_offset;
     s16 row_offset;
@@ -340,7 +340,7 @@ typedef union RecordKey {
 } RecordKey;
 
 /* The six-byte panel row view that starts at row +2: its last halfword is the
- * next row's +0. Menu_DrawMessagePresetCursor indexes it by the selection byte. */
+ * next row's +0. Message_DrawPresetCursor indexes it by the selection byte. */
 typedef struct PanelRowWindow {
     s16 row_offset;
     s16 scale;

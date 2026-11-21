@@ -4,7 +4,7 @@
  * D_80148334/D_80148336, runs the layout and selection passes, and reports
  * whether the shared word's confirm bit is clear.
  */
-MATCH s32 UI_UpdateLayout(void) {
+MATCH s32 Message_UpdateLayout(void) {
     u16 confirm;
 
     /* D_80148334/D_80148336 stay address symbols: a g_MenuPanelTasks[0].pos view changes the code. */
@@ -13,7 +13,7 @@ MATCH s32 UI_UpdateLayout(void) {
     Message_DispatchState();
     Message_DispatchChoiceMode();
     if ((g_UiWindowChannel & FRONTEND_FLAG_SELECTION) == 0) {
-        UI_DrawMessageScript();
+        Message_DrawScript();
     }
     confirm = g_UiWindowChannel & FRONTEND_FLAG_CONFIRM;
     return confirm == 0;

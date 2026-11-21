@@ -2,7 +2,7 @@
 
 /* decrements g_MessageStateTimer and clears g_MessageState when it reaches zero.
  */
-MATCH void UI_TickChoiceTimer(void) {
+MATCH void Message_TickChoiceTimer(void) {
     u8 value;
 
     value                  = g_MessageStateTimer[0] - 1;

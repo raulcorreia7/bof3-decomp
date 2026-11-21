@@ -30,40 +30,40 @@ void        Menu_WaitWindowEffect(u8 wait_steps);
 void        Menu_SetPosX(void);
 void        Menu_OpenMaster(void);
 /* func_80158F80 */
-void        Menu_UpdateMessagePanel(void);
+void        Message_UpdatePanel(void);
 /* func_80158FE0 */
-void        Menu_UpdateMessageWindow(void);
+void        Message_UpdateWindow(void);
 /* func_80159050 */
-void        Menu_OpenMessagePanel(void);
+void        Message_OpenPanel(void);
 /* func_8015920C */
-void        Menu_GrowMessagePanel(void);
+void        Message_GrowPanel(void);
 /* func_80159510 */
-void        Menu_DrawMessagePanel(void);
+void        Message_DrawPanel(void);
 /* func_80159580 */
-void        Menu_ShrinkMessagePanel(void);
+void        Message_ShrinkPanel(void);
 void        Menu_ClosePanel(void);
 /* func_801598F4 */
-void        Menu_UpdateMessageChoice(void);
+void        Message_UpdateChoicePanel(void);
 /* func_80159964 */
-void        Menu_OpenMessageChoice(void);
+void        Message_OpenChoicePanel(void);
 /* func_8015999C */
-void        Menu_DrawMessageChoice(void);
+void        Message_DrawChoicePanel(void);
 /* func_80159A00 */
-void        Menu_ReleaseMessagePanel(void);
+void        Message_ReleasePanel(void);
 /* func_80159A20 */
-void        Menu_UpdateMessagePreset(void);
+void        Message_UpdatePresetPanel(void);
 /* func_80159A90 */
-void        Menu_OpenMessagePreset(void);
+void        Message_OpenPresetPanel(void);
 /* func_80159B38 */
-void        Menu_DrawMessagePreset(void);
+void        Message_DrawPresetPanel(void);
 /* func_80159FA0 */
 /* func_8015A098 */
-extern void Menu_DrawMessagePresetRows(void);
+extern void Message_DrawPresetRows(void);
 /* func_8015A1D8 */
-extern void Menu_DrawMessagePresetCursor(void);
+extern void Message_DrawPresetCursor(void);
 /* func_8015A264 */
-extern void Menu_DrawMessageChoiceCursor(void);
+extern void Message_DrawChoiceCursor(void);
 /* func_8015A554 */
-void        Menu_LayoutMessageChoice(void);
+void        Message_LayoutChoicePanel(void);
 
 #endif

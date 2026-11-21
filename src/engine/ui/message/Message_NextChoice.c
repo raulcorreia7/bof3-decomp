@@ -4,7 +4,7 @@
  * countdown down by two otherwise.
  */
 /* func_801519F8 */
-MATCH void UI_NextChoice(void) {
+MATCH void Message_NextChoice(void) {
     s8 value;
 
     value = D_801490BA[0];

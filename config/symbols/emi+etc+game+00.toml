@@ -164,6 +164,7 @@ AreaAction_WaitMessageFade = { addr = 0x801AD9C4, type = "func", source = "Waits
 AreaAction_Fade = { addr = 0x801AD9F0, type = "func", source = "Brightens the actor's tint back, then ends the field action." }
 Actor_SpawnSceneActor = { addr = 0x801ADAC0, type = "func", source = "spawns the type-0x19 scene actor at the task position with its selection from func_801ADC98 and links it to the task" }
 Char_ApplyLevelUps = { addr = 0x801ADDD4, type = "func", source = "Raises the character to the level its exp reaches: adds each gained level's growth to the base stats (capped at 999), grants its abilities and rebuilds the stats." }
+Menu_DrawNameCursor = { addr = 0x801AE214, type = "func", source = "The underline that marks the current letter of a name entry: a line at the cursor column, bright when the mode is 0 (the start menu and commu02 name entries call it)." }
 UI_DrawWindow = { addr = 0x801AE3F0, type = "func", source = "Draws a window from x with a left cap and a body stretched to width, height rows tall, with the palette column of the style argument; flags 0x80 and 0x20 trim the top and the bottom." }
 UI_DrawIcon = { addr = 0x801AEA80, type = "func", source = "Draws one 8x8 icon sprite; callers pass item icon ids and ability element ids." }
 UI_DrawWindowFrame = { addr = 0x801AEBA0, type = "func", source = "Draws the four border lines of a window frame in the window style color; the header bar draws callers pass the inner rectangle." }

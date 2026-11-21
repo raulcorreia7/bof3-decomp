@@ -12,6 +12,6 @@ MATCH void Message_StartAreaMessage(s32 message_index) {
     handle += SLUS_LOAD_ADDRESS;
     g_MessageScript = handle;
     D_801490B0      = (u8*)handle;
-    UI_ResetMessage();
+    Message_Reset();
     g_MessageRequest = message_index;
 }

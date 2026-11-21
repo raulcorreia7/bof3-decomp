@@ -6,7 +6,7 @@
  */
 /* func_8015A554 */
 #ifdef NON_MATCHING
-NON_MATCHING void Menu_LayoutMessageChoice(void) {
+NON_MATCHING void Message_LayoutChoicePanel(void) {
     u8* cursor;
     u8  flag;
     u8  count;
@@ -63,5 +63,5 @@ NON_MATCHING void Menu_LayoutMessageChoice(void) {
     }
 }
 #else
-INCLUDE_ASM(Menu_LayoutMessageChoice);
+INCLUDE_ASM(Message_LayoutChoicePanel);
 #endif

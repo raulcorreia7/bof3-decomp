@@ -4,7 +4,7 @@
  * TPage, then the sprite primitive with CLUT, RGB, position, size and semi-transparency, appended to the output
  * table.
  */
-MATCH void UI_DrawWaitMarker(s16 x, s16 y) {
+MATCH void Message_DrawWaitMarker(s16 x, s16 y) {
     SPRT* prim;
 
     if (g_FrameCount & 0x20) {
