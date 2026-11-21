@@ -11,10 +11,10 @@ def values(text: str) -> set[int]:
 
 def test_rewrite_names_the_site_once() -> None:
     names = {60: "MSG_060"}
-    once = message_ids.rewrite_text("Message_StartAreaMessage(60);", names)
-    assert once == "Message_StartAreaMessage(MSG_060);"
+    once = message_ids.rewrite_text("UI_MessageStartArea(60);", names)
+    assert once == "UI_MessageStartArea(MSG_060);"
     assert message_ids.rewrite_text(once, names) == once
     assert (
-        message_ids.rewrite_text("/* Message_Request(60) */", names)
-        == "/* Message_Request(60) */"
+        message_ids.rewrite_text("/* UI_MessageRequest(60) */", names)
+        == "/* UI_MessageRequest(60) */"
     )

@@ -390,7 +390,7 @@ segments:
       - [0x19C40, c, func_801EA840]
       - [0x19C80, c, func_801EA880]
       - [0x19CC0, c, func_801EA8C0]
-      - [0x19D00, c, Menu_SlidePanelLeft2]
+      - [0x19D00, c, UI_PanelSlideLeft2]
       - [0x19D40, c, func_801EA940]
       - [0x19D94, c, func_801EA994]
       - [0x19DD4, c, func_801EA9D4]

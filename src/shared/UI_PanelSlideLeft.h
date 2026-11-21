@@ -1,4 +1,4 @@
-/* Slide the master panel 32 pixels left and clamp its x at 152. Members: func_800B254C (battle), func_8019973C (game), func_801EA070 (start), and the start copy Menu_SlidePanelLeft2. */
+/* Slide the master panel 32 pixels left and clamp its x at 152. Members: func_800B254C (battle), func_8019973C (game), func_801EA070 (start), and the start copy UI_PanelSlideLeft2. */
 /* The statements of UI_PanelSlideLeft. */
 #define MENU_SLIDE_PANEL_LEFT()                 \
     do {                                        \
