@@ -1203,7 +1203,7 @@ NON_MATCHING void func_801D4AE0(s16 x, s16 y, u8 flag) {
                 sprintf(g_UiTextFormatBuffer, D_801D0C20, D_801DB080[k + 4]);
             }
             UI_TextDrawAscii(right_x, ry, 1, g_UiTextFormatBuffer);
-            UI_TextDrawGlyphs(x + 0x39, y + gy, 0, D_801D0C2C);
+            UI_TextDrawGlyphString(x + 0x39, y + gy, 0, D_801D0C2C);
         } else if (i < sel) {
             sprintf(g_UiTextFormatBuffer, D_801D0C24, D_801DB080[k], D_801DB080[k + 1], D_801DB080[k + 2]);
             ry = y + dy;
@@ -1212,7 +1212,7 @@ NON_MATCHING void func_801D4AE0(s16 x, s16 y, u8 flag) {
             UI_TextDrawAscii(middle_x, ry, UI_TEXT_HIGHLIGHT, g_UiTextFormatBuffer);
             sprintf(g_UiTextFormatBuffer, D_801D0C20, D_801DB080[k + 4]);
             UI_TextDrawAscii(right_x, ry, 1, g_UiTextFormatBuffer);
-            UI_TextDrawGlyphs(x + 0x39, y + gy, 0, D_801D0C2C);
+            UI_TextDrawGlyphString(x + 0x39, y + gy, 0, D_801D0C2C);
         } else {
             sprintf(g_UiTextFormatBuffer, D_801DAD60);
             ry = y + dy;
@@ -1220,7 +1220,7 @@ NON_MATCHING void func_801D4AE0(s16 x, s16 y, u8 flag) {
             sprintf(g_UiTextFormatBuffer, D_801DAD64);
             UI_TextDrawAscii(middle_x, ry, UI_TEXT_DIM, g_UiTextFormatBuffer);
             UI_TextDrawAscii(right_x, ry, UI_TEXT_DIM, g_UiTextFormatBuffer);
-            UI_TextDrawGlyphs(x + 0x39, y + gy, UI_TEXT_DIM, D_801D0C2C);
+            UI_TextDrawGlyphString(x + 0x39, y + gy, UI_TEXT_DIM, D_801D0C2C);
         }
         gy += 14;
         dy += 14;
@@ -1435,8 +1435,8 @@ MATCH void func_801D5B2C(void) {
     s32 j;
 
     g_UiTextFormatBuffer[0] = 0x2A;
-    i                   = 1;
-    src                 = (u8*)AREA_MESSAGE_TABLE + MEM(u16, (u32)AREA_MESSAGE_TABLE + (256 + D_801DB0AD) * 2);
+    i                       = 1;
+    src                     = (u8*)AREA_MESSAGE_TABLE + MEM(u16, (u32)AREA_MESSAGE_TABLE + (256 + D_801DB0AD) * 2);
     while (*src != STRING_END) {
         g_UiTextFormatBuffer[i] = *src;
         i++;
