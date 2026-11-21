@@ -48,6 +48,7 @@ A shared body follows these rules:
   where it gives the same bytes.
 - One body lives in `Name.h` at the lowest folder that holds every includer ([layout](../../../../docs/layout.md#tree)), named
   for the function. Each image keeps a thin `Name.c` that includes the image header, then the body.
+  An image with one translation unit includes the body there instead ([layout](../../../../docs/layout.md#translation-units-of-an-image)).
 - A group is a candidate when its members have equal bytes (exact, or equal after relocations).
   Equal text is not enough.
 - One name covers every copy. The same address gives the same `func_<ADDR>`; otherwise a name needs

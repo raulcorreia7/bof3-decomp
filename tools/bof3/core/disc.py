@@ -9,6 +9,7 @@ import zlib
 from dataclasses import dataclass
 from pathlib import Path
 
+from bof3.core.hashing import file_digest
 from bof3.errors import MissingInputError
 
 MANIFEST = "config/disc.toml"
@@ -36,15 +37,6 @@ def digest_file(path: Path) -> Digest:
             crc = zlib.crc32(chunk, crc)
             size += len(chunk)
     return Digest(size, f"{crc:08x}", md5.hexdigest(), sha1.hexdigest())
-
-
-def sha1_file(path: Path) -> str:
-    """Return the SHA-1 of ``path``."""
-    sha1 = hashlib.sha1()
-    with path.open("rb") as stream:
-        for chunk in iter(lambda: stream.read(1 << 20), b""):
-            sha1.update(chunk)
-    return sha1.hexdigest()
 
 
 def load_manifest(root: Path) -> dict:
@@ -84,7 +76,7 @@ def verify_tracks(manifest: dict, bins: list[Path]) -> list[str]:
                 f"{path.name}: size {path.stat().st_size}, expected {want['size']}"
             )
             continue
-        got = sha1_file(path)
+        got = file_digest(path, "sha1")
         if got != want["sha1"]:
             problems.append(f"{path.name}: SHA-1 {got}, expected {want['sha1']}")
     return problems
@@ -101,7 +93,7 @@ def verify_files(manifest: dict, folder: Path) -> list[str]:
             problems.append(
                 f"{entry['path']}: size {path.stat().st_size}, expected {entry['size']}"
             )
-        elif sha1_file(path) != entry["sha1"]:
+        elif file_digest(path, "sha1") != entry["sha1"]:
             problems.append(f"{entry['path']}: SHA-1 differs")
     return problems
 
@@ -118,7 +110,7 @@ def verify_images(root: Path) -> list[str]:
             problems.append(f"{manifest.splat}: no sha1")
         elif not path.is_file():
             problems.append(f"{manifest.binary}: missing")
-        elif sha1_file(path) != wanted[1]:
+        elif file_digest(path, "sha1") != wanted[1]:
             problems.append(f"{manifest.binary}: SHA-1 differs from {manifest.splat}")
     return problems
 
