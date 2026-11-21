@@ -22,6 +22,6 @@ MATCH void func_800C1E0C(void) {
     g_Task->unk_48 = 0;
     g_Task->unk_2A = 0;
     g_Task->unk_29 = 2;
-    Actor_SelectScript(3);
+    Script_Select(3);
     g_Task->header.step++;
 }

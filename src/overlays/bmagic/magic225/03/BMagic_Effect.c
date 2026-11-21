@@ -342,7 +342,7 @@ MATCH void func_801EFEE8(void) {
         g_Task->unk_29       = 2;
         g_Task->unk_2C.value = 0;
         g_Task->unk_2B       = 1;
-        Actor_SelectScript(0);
+        Script_Select(0);
         task         = g_Task;
         task->unk_09 = 16;
         task->unk_0C = 12;

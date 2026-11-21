@@ -25,7 +25,7 @@ MATCH void func_801DE944(void) {
     party = g_PartyFieldOrder;
     actor = &g_Game.members[0].chr.character_id;
     mode  = actor[0];
-    EMI_LoadPartyArchives(party[0], g_PartyFieldOrder[1], g_PartyFieldOrder[2], 0);
+    Party_LoadArchives(party[0], g_PartyFieldOrder[1], g_PartyFieldOrder[2], 0);
     if (D_8014504A == 0 || (SYS_TestFlag(party - 0x32, 119) != 0 && g_GameAreaId != AREA_ID_ADULT_CAMP) || g_GameAreaId == AREA_ID_BOAT_AFTER_BLACK_SHIP) {
         g_PartySize = Party_CountOrder(PARTY_ORDER_FIELD);
         Party_BuildBattlers(PARTY_ORDER_FIELD);
@@ -35,7 +35,7 @@ MATCH void func_801DE944(void) {
             do {
                 TASK_SET(((u8*)g_Game.members + row));
                 Party_LoadMemberSprite(((PartyMember*)((u8*)&g_Game.members[0] + row))->chr.character_id, (u8)i);
-                Actor_SelectScript(g_Task->direction);
+                Script_Select(g_Task->direction);
                 if (D_8014504A != 0) {
                     ACTOR_SET_MODE(0);
                     g_Task->header.step = 0;
@@ -62,7 +62,7 @@ MATCH void func_801DE944(void) {
         *(Character*)(actor - 5) = *(Character*)(party - 0x5F2);
         g_Task->unk_48           = 0;
         Party_LoadMemberSprite(g_Game.members[0].chr.character_id, 0);
-        Actor_SelectScript(g_Task->direction);
+        Script_Select(g_Task->direction);
         ACTOR_SET_MODE(0);
         g_Task->header.step = 0;
         g_Task->unk_03      = 0;
@@ -92,7 +92,7 @@ MATCH void func_801DE944(void) {
             do {
                 g_Game.members[i].pos.x.fixed = scroll_x;
                 g_Game.members[i].pos.y.fixed = scroll_y;
-                g_Game.members[i].pos.z.fixed = Area_SampleHeight(scroll[0], scroll[1]) << 16;
+                g_Game.members[i].pos.z.fixed = Collision_SampleHeight(scroll[0], scroll[1]) << 16;
                 i++;
             } while (i < g_Game.party_size);
         }

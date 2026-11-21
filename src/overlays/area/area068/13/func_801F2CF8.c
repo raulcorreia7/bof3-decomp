@@ -10,7 +10,7 @@ MATCH void func_801F2CF8(void) {
     g_GameState = g_Game.members;
     TASK_SET(g_Game.members);
     if (D_80145EE8 == 0xC && D_80145EDA == 1) {
-        Actor_SelectScript(0x6E);
+        Script_Select(0x6E);
         g_Task = actor;
         g_Game.members[0].unk_07 &= 0x11;
         actor->header.mode = 3;

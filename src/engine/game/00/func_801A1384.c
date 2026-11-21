@@ -22,7 +22,7 @@ MATCH void func_801A1384(void* entity) {
     if (rec[0x7B] == 0) {
         FAKE_ORDER_LOCK(sub = rec + 0x74); /* FAKE: order lock holds the pointer setup. */
         if (mode != 0) {
-            sel = Actor_RunScript(sub, (*(s32**)((u8*)g_AreaLoads[g_GameAreaId] + 0x10))[rec[0x77]]);
+            sel = Script_Run(sub, (*(s32**)((u8*)g_AreaLoads[g_GameAreaId] + 0x10))[rec[0x77]]);
             if (rec[0x75] != 0) {
                 func_801A275C(sub);
             }

@@ -21,7 +21,7 @@ MATCH void func_801C5874(void) {
     target     = list[D_80143FBF];
     /* The cells at D_80143FBD are g_Task's interaction_flags and timer. */
     g_Task     = (Actor*)(base - 0x75);
-    sel        = Actor_RunScript(base - 1, target);
+    sel        = Script_Run(base - 1, target);
     D_80143F50 = sel;
     if (base[-1] & 0x8) {
         base[-1] &= 0xF7;
@@ -46,7 +46,7 @@ MATCH void func_801C5874(void) {
             }
             range *= 2;
             g_AreaCameraStep       = (g_RouteSpeedScale[D_80143FC0] * 8);
-            step                   = (D_80143F84 - (Area_SampleHeight(g_AreaScrollTargetX, g_AreaScrollTargetY) << 16)) / ((0x80 / g_AreaCameraStep) * (range >> 16));
+            step                   = (D_80143F84 - (Collision_SampleHeight(g_AreaScrollTargetX, g_AreaScrollTargetY) << 16)) / ((0x80 / g_AreaCameraStep) * (range >> 16));
             g_AreaCameraHeightStep = 0;
             D_80143F4A             = 3;
             g_ScrollHeight         = g_AreaCameraHeight;

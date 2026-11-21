@@ -159,9 +159,9 @@ void  UI_DrawScrollbar(u8* marks, u8 thumb_top, s16 x, s16 y, u8 thumb_size, u8 
 /* func_801AFD10 */
 s32   func_801AFD10(u8* column_counter, u8* row_offset, u8* row_flag, u8* position);
 /* func_801AFE18 */
-void* Area_SetCameraMatrix(void* out_matrix);
+void* Camera_SetMatrix(void* out_matrix);
 /* func_801AFF04 */
-void  Area_ProjectPoint(s32* pos, DVECTOR* screen_xy);
+void  Camera_ProjectPoint(s32* pos, DVECTOR* screen_xy);
 /* func_801AFF64 */
 void  MATH_SetIdentity(MATRIX* matrix);
 /* func_801AFF90 */

@@ -14,6 +14,6 @@ MATCH void func_8019B150(void) {
     work         = g_Task;
     work->mirror = (work->unk_06 >> 7);
 
-    Actor_SelectScript((g_Task->unk_06 & 0x7F));
+    Script_Select((g_Task->unk_06 & 0x7F));
     g_Task->header.mode = flag;
 }

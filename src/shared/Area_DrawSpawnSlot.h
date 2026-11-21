@@ -15,7 +15,7 @@ MATCH void Area_DrawSpawnSlot(AreaSpawnSlot* slot) {
     GFX_AddDitheredDrawMode(2u, GetTPage(TPAGE_DEPTH_4BIT, TPAGE_ABR_ADD, FONT_TPAGE_X, FONT_TPAGE_Y));
     size[0] = slot->radius;
     Game_ProjectWorldPoint(&slot->pos, size, scale);
-    Area_ProjectPoint(&slot->pos.x.fixed, &screen);
+    Camera_ProjectPoint(&slot->pos.x.fixed, &screen);
     radius = scale[0] + (g_FrameCount & 1);
     angle  = 0;
     do {

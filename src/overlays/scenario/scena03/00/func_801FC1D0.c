@@ -34,7 +34,7 @@ MATCH s32 func_801FC1D0(s32 member_index) {
     g_Actors[actor_index].walk_dest_y = task->pos.y.fixed;
     g_Actors[actor_index].unk_88      = 0;
 
-    height                        = Area_SampleHeight(task->pos.x.fixed, task->pos.y.fixed);
+    height                        = Collision_SampleHeight(task->pos.x.fixed, task->pos.y.fixed);
     task2                         = g_Task;
     task2->header.mode            = 4;
     task2->pos.z.part.integer     = height;
@@ -329,7 +329,7 @@ MATCH void func_801FCE18(void) {
 }
 
 MATCH void func_801FCE6C(void) {
-    EMI_LoadPartyArchives(CHAR_ID_RYU_YOUNG, CHAR_ID_NINA_YOUNG, CHAR_ID_GARR, 0);
+    Party_LoadArchives(CHAR_ID_RYU_YOUNG, CHAR_ID_NINA_YOUNG, CHAR_ID_GARR, 0);
     g_PartyFieldOrder[0]  = 255;
     D_80144F5B            = 255;
     D_80144F5C            = 255;

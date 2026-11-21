@@ -1,7 +1,7 @@
 #include "boss025_13.h"
 
 MATCH void func_800C1CB0(void) {
-    Actor_RequestScript(0xF);
+    Script_Request(0xF);
     g_Task->unk_2A = 0;
     Actor_StepAnimOnce();
     Battle_DefeatEnemy();

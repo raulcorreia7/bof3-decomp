@@ -1015,10 +1015,10 @@ void        Battle_ShowMessage(void* message_slot);
 s32         func_801DEE4C();
 void        func_801E24F8(u32 enemy_index, u32 script_index);
 #if defined(MATCHING)
-/* A second name for Actor_SelectScript that also passes the payload the retail call leaves in $a1. */
+/* A second name for Script_Select that also passes the payload the retail call leaves in $a1. */
 void Actor_SelectScript_keep_a1(u32 selector, u32 payload);
 #else
-#define Actor_SelectScript_keep_a1(selector, payload) Actor_SelectScript(selector)
+#define Actor_SelectScript_keep_a1(selector, payload) Script_Select(selector)
 #endif
 /* func_80097574 */
 bool        Battle_IsAbilityLocked(void);

@@ -19,7 +19,7 @@ MATCH void func_801E7000(void) {
     if (g_Task->timer >= 10) {
         g_Task->timer  = 0;
         g_Task->unk_06 = (g_Task->unk_06 + 1) & 0x7;
-        Actor_SelectScript((g_Task->unk_06 + 8) & BYTE_MASK);
+        Script_Select((g_Task->unk_06 + 8) & BYTE_MASK);
     }
     Area_AddActor();
     Actor_StepAnimLoop();

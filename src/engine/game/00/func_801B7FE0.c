@@ -8,13 +8,13 @@ MATCH void func_801B7FE0(void) {
 
     work = g_Task;
     COORD_INT(work->pos.z) -= 16;
-    if ((s16)COORD_INT(work->pos.z) < Area_ReadHeight(work->pos.x.fixed, work->pos.y.fixed)) {
-        value                   = Area_ReadHeight(g_Task->pos.x.fixed, g_Task->pos.y.fixed);
+    if ((s16)COORD_INT(work->pos.z) < Collision_ReadHeight(work->pos.x.fixed, work->pos.y.fixed)) {
+        value                   = Collision_ReadHeight(g_Task->pos.x.fixed, g_Task->pos.y.fixed);
         store                   = g_Task;
         store->timer            = 2;
         COORD_INT(store->pos.z) = value;
         g_Task->unk_0A          = 0;
-        Actor_RequestScript((g_Task->direction == FACING_RIGHT) ? 7 : 1);
+        Script_Request((g_Task->direction == FACING_RIGHT) ? 7 : 1);
         g_Task->unk_04 = 9;
     }
     Actor_StepAnimLoop();

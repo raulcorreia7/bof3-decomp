@@ -37,7 +37,7 @@ MATCH void Actor_SpawnFromRecord(u8* script) {
 
     g_Actors[*counter].unk_88 = 0;
 
-    COORD_INT(g_Task->pos.z) = Area_SampleHeight(work->pos.x.fixed, work->pos.y.fixed);
+    COORD_INT(g_Task->pos.z) = Collision_SampleHeight(work->pos.x.fixed, work->pos.y.fixed);
     g_Task->header.mode      = script[0xA];
     g_Task->header.step      = script[0xC];
     g_Task->direction        = script[0] & 0xF;

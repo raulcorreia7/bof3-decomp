@@ -10,7 +10,7 @@ MATCH s32 func_801F49A0(void) {
     /* FAKE: retail reserves 16 bytes no local here uses. */
     FAKE_STACK_PADS(u8, 16);
 
-    Area_SetCameraMatrix(&matrix);
+    Camera_SetMatrix(&matrix);
     found = 0;
     work  = (AreaQuadSprite*)AREA_WORK;
     i     = 0;
@@ -48,7 +48,7 @@ MATCH s32 func_801F49A0(void) {
         work->origin.x += work->unk_18;
         work->half_size += 8;
         work->origin.y += work->unk_1C;
-        work->unk_10 = Area_SampleHeight(work->origin.x, work->origin.y) << 16;
+        work->unk_10 = Collision_SampleHeight(work->origin.x, work->origin.y) << 16;
         func_801F46EC(work);
     next:
         work++;

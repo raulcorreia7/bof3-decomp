@@ -69,7 +69,7 @@ MATCH void func_801FD60C(Actor* actor) {
     actor->unk_7B      = 0;
     actor->unk_77      = 10;
     g_Task->direction  = g_Game.members[0].facing ^ 4;
-    Actor_DispatchSelectorScript(g_Task->direction);
+    Script_DispatchSelector(g_Task->direction);
     g_Task->option_flags |= ACTOR_OPT_ROUTE_LOCKED;
     g_ScenarioState.step_05  = 10;
     g_ScenarioState.state_04 = 13;
@@ -81,7 +81,7 @@ MATCH void func_801FD6CC(Actor* actor) {
     actor->unk_7B      = 0;
     actor->unk_77      = 0xA;
     g_Task->direction  = g_Game.members[0].facing ^ 0x4;
-    Actor_DispatchSelectorScript(g_Task->direction);
+    Script_DispatchSelector(g_Task->direction);
     g_Task->option_flags |= ACTOR_OPT_ROUTE_LOCKED;
     SCRIPT_VARS_CLEAR_ALL();
     g_ScenarioState.step_05  = 13;
@@ -95,7 +95,7 @@ MATCH void func_801FD788(Actor* actor) {
     actor->unk_7B      = 0;
     actor->unk_77      = 11;
     g_Task->direction  = g_Game.members[0].facing ^ 4;
-    Actor_DispatchSelectorScript(g_Task->direction);
+    Script_DispatchSelector(g_Task->direction);
     g_Task->option_flags |= ACTOR_OPT_ROUTE_LOCKED;
     g_ScenarioState.step_05 = 16;
     SCRIPT_VARS_CLEAR_ALL();
@@ -109,7 +109,7 @@ MATCH void func_801FD84C(Actor* actor) {
     actor->unk_7B      = 0;
     actor->unk_77      = 0xB;
     g_Task->direction  = g_Game.members[0].facing ^ 0x4;
-    Actor_DispatchSelectorScript(g_Task->direction);
+    Script_DispatchSelector(g_Task->direction);
     g_Task->option_flags |= ACTOR_OPT_ROUTE_LOCKED;
     g_ScenarioState.step_05  = 16;
     g_ScriptVars[3]          = 0;
@@ -292,7 +292,7 @@ MATCH s32 func_801FE0A4(void) {
 /* func_801FE10C */
 MATCH void Scene_InitOpeningParty(void) {
     g_Characters[g_CharSlot[10]].party_flags &= ~PARTY_FLAG_JOINED;
-    EMI_LoadPartyArchives(CHAR_ID_RYU_PAJAMAS, CHAR_ID_TEEPO, CHAR_ID_REI, 0);
+    Party_LoadArchives(CHAR_ID_RYU_PAJAMAS, CHAR_ID_TEEPO, CHAR_ID_REI, 0);
     g_Game.party_size                        = 0;
     g_Characters[g_CharSlot[9]].character_id = CHAR_ID_RYU_PAJAMAS;
     Party_JoinMember(CHAR_ID_RYU_PAJAMAS);
@@ -301,7 +301,7 @@ MATCH void Scene_InitOpeningParty(void) {
 /* func_801FE1B0 */
 MATCH void Scene_SetPartyRyuTeepoRei(void) {
     g_Characters[g_CharSlot[0]].character_id = CHAR_ID_RYU_YOUNG;
-    EMI_LoadPartyArchives(CHAR_ID_RYU_YOUNG, CHAR_ID_TEEPO, CHAR_ID_REI, 0);
+    Party_LoadArchives(CHAR_ID_RYU_YOUNG, CHAR_ID_TEEPO, CHAR_ID_REI, 0);
     g_Game.party_size = 0;
     Party_JoinMember(CHAR_ID_RYU_YOUNG);
     Party_JoinMember(CHAR_ID_TEEPO);

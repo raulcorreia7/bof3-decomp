@@ -31,7 +31,7 @@ MATCH void func_801EED98(void) {
     SND_QueueSelectionSE(0x102);
     work   = g_Task;
     g_Task = D_801EC2E0->target.party;
-    Actor_SelectScript(3U);
+    Script_Select(3U);
     g_Task                             = work;
     slot                               = Battle_AllocEffect(1, 65) & BYTE_MASK;
     g_BattleEffects[slot].header.mode  = 1;
@@ -147,7 +147,7 @@ NON_MATCHING void func_801EF134(void) {
     g_Task->unk_2A             = 0;
     g_Task->unk_29             = 4;
     g_Task->unk_2C.value       = 0;
-    Actor_SelectScript(0);
+    Script_Select(0);
     g_Task->unk_09 = 3;
     g_Task->header.step += 1;
 }
@@ -163,7 +163,7 @@ MATCH void func_801EF3C4(void) {
     g_Task->pos.z.part.integer = (u16)g_Task->pos.z.part.integer + g_Task->unk_14;
     g_Task->unk_14             = g_Task->unk_14 + g_Task->unk_20;
     Actor_StepAnimLoop();
-    if (g_Task->pos.z.part.integer < Area_SampleHeight(g_Task->pos.x.fixed, g_Task->pos.y.fixed)) {
+    if (g_Task->pos.z.part.integer < Collision_SampleHeight(g_Task->pos.x.fixed, g_Task->pos.y.fixed)) {
         offset_x                   = (RANDOM_MOD(6) << 16) + 0x20000;
         g_Task->pos.x.fixed        = g_BattleEffectBattler->pos.x.fixed + offset_x;
         offset_y                   = (RANDOM_MOD(6) << 16) - 0x30000;
@@ -282,7 +282,7 @@ MATCH void func_801EF900(void) {
     g_Task->pos.x.fixed    = g_BattleEffectBattler->pos.x.fixed - 1;
     g_Task->pos.y.fixed    = g_BattleEffectBattler->pos.y.fixed - 1;
     x                      = g_Task->pos.x.fixed;
-    height                 = Area_SampleHeight(x, x);
+    height                 = Collision_SampleHeight(x, x);
     work                   = g_Task;
     work->unk_25           = 0x1D;
     COORD_INT(work->pos.z) = height;
@@ -299,7 +299,7 @@ MATCH void func_801EF900(void) {
     g_Task->unk_2A         = 0;
     g_Task->unk_29         = 4;
     g_Task->unk_2C.value   = 0;
-    Actor_SelectScript(0U);
+    Script_Select(0U);
     g_Task->header.step += 1;
 }
 
@@ -309,7 +309,7 @@ MATCH void func_801EFA38(void) {
     g_Task->pos.x.fixed      = g_BattleEffectBattler->pos.x.fixed - 1;
     g_Task->pos.y.fixed      = g_BattleEffectBattler->pos.y.fixed - 1;
     x                        = g_Task->pos.x.fixed;
-    COORD_INT(g_Task->pos.z) = Area_SampleHeight(x, x);
+    COORD_INT(g_Task->pos.z) = Collision_SampleHeight(x, x);
     if (!(0x1 & g_BattleEffectBattler->header.flags)) {
         g_Task->header.step += 1;
     }

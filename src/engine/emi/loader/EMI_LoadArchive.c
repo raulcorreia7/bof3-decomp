@@ -53,7 +53,7 @@ MATCH void EMI_LoadArchive(u32 emi_id) {
 
     g_EmiBytesLeft   = EMI_SECTOR_SIZE;
     g_EmiStreamState = 0;
-    CdReadyCallback(EMI_CdOnReady);
-    CdSyncCallback((CdlCB)EMI_CdOnSync);
+    CdReadyCallback(CD_OnReady);
+    CdSyncCallback((CdlCB)CD_OnSync);
     EMI_StartArchive();
 }

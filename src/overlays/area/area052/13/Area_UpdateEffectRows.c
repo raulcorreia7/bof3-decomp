@@ -9,7 +9,7 @@ MATCH s32 Area_UpdateEffectRows(void) {
     u8             life;
 
     active = 0;
-    Area_SetCameraMatrix(&camera);
+    Camera_SetMatrix(&camera);
     row = MEM_PTR(AreaEffectRow, AREA_WORK);
     for (i = 0; i < 16; i++) {
         if (row->active != 0) {

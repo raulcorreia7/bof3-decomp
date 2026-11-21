@@ -11,7 +11,7 @@ MATCH void Game_ReturnFromMenu(void) {
     Menu_WaitWindowEffect(0u);
     SYS_ThreadWait(1u);
     if (D_80148661 != 0u) {
-        EMI_LoadPartyArchives(g_PartyFieldOrder[0], g_PartyFieldOrder[1], g_PartyFieldOrder[2], 0u);
+        Party_LoadArchives(g_PartyFieldOrder[0], g_PartyFieldOrder[1], g_PartyFieldOrder[2], 0u);
         while (EMI_IsReady() == 0) {
             SYS_ThreadWait(1u);
         }

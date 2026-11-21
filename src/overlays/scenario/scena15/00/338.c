@@ -76,14 +76,14 @@ MATCH void Scene_DrawLightPillar(u8 fade) {
     u32      color;
     u8       i;
 
-    Area_SetCameraMatrix(&matrix);
+    Camera_SetMatrix(&matrix);
     angle    = 0;
     point[0] = g_Task->pos.x.fixed + (((s16)g_Task->screen_x * rcos(0)) >> 4);
     point[1] = g_Task->pos.y.fixed + (((s16)g_Task->screen_x * rsin(0)) >> 4);
     point[2] = g_Task->pos.z.fixed;
-    Area_ProjectPoint(point, &inner);
+    Camera_ProjectPoint(point, &inner);
     point[2] = g_Task->pos.z.fixed + TO_COORD((s16)g_Task->screen_y);
-    Area_ProjectPoint(point, &outer);
+    Camera_ProjectPoint(point, &outer);
     shade = ((g_FrameCount & 1) << 2) | 0x40;
     for (i = 0; i < 32; i++) {
         last_inner = inner;
@@ -92,9 +92,9 @@ MATCH void Scene_DrawLightPillar(u8 fade) {
         point[0] = g_Task->pos.x.fixed + (((s16)g_Task->screen_x * rcos((u16)angle)) >> 4);
         point[1] = g_Task->pos.y.fixed + (((s16)g_Task->screen_x * rsin((u16)angle)) >> 4);
         point[2] = g_Task->pos.z.fixed;
-        Area_ProjectPoint(point, &inner);
+        Camera_ProjectPoint(point, &inner);
         point[2] = g_Task->pos.z.fixed + TO_COORD((s16)g_Task->screen_y);
-        Area_ProjectPoint(point, &outer);
+        Camera_ProjectPoint(point, &outer);
 
         SetDrawMode((DR_MODE*)g_GfxPrimCursor, 0, 1, GetTPage(TPAGE_DEPTH_4BIT, TPAGE_ABR_ADD, FONT_TPAGE_X, FONT_TPAGE_Y), 0);
         if ((u8)(i - 11) >= 17) {
@@ -124,7 +124,7 @@ MATCH void func_801F752C(AreaSpark* spark) {
     TILE_1* tile;
     u8      shade;
 
-    Area_ProjectPoint(&spark->pos.vx, &screen);
+    Camera_ProjectPoint(&spark->pos.vx, &screen);
     tile = (TILE_1*)g_GfxPrimCursor;
     SetTile1(tile);
     SetSemiTrans(tile, 0);
@@ -587,7 +587,7 @@ MATCH void func_801F8C78(void) {
     MATRIX matrix;
     Actor* work;
 
-    Area_SetCameraMatrix(&matrix);
+    Camera_SetMatrix(&matrix);
     func_801F9020(&g_Task->pos.x, &g_Task->vx);
     func_801F92F0(&g_Task->pos.x, &g_Task->vx);
     work         = g_Task;
@@ -608,7 +608,7 @@ MATCH void func_801F8D30(void) {
     if (*cell == g_Task->vz) {
         *cell = -*cell;
     }
-    Area_SetCameraMatrix(&camera);
+    Camera_SetMatrix(&camera);
     if (g_FrameCount & 1) {
         func_801F9A20(&g_Task->pos, &g_Task->vx);
         if (!(g_Task->unk_06 & 1)) {
@@ -635,7 +635,7 @@ MATCH void func_801F8EA8(void) {
     Actor* work;
     s32    cue;
 
-    Area_SetCameraMatrix(&matrix);
+    Camera_SetMatrix(&matrix);
     work = g_Task;
     func_801F92F0(&work->pos.x, &work->vx);
     g_Task->timer       = 8;
@@ -669,7 +669,7 @@ MATCH void func_801F9020(Coord* position, s32* step) {
     point[0] = position[0].fixed + step[0];
     point[1] = position[1].fixed + step[1];
     point[2] = position[2].fixed + step[2];
-    Area_ProjectPoint(point, &screen[0]);
+    Camera_ProjectPoint(point, &screen[0]);
 
     if (!(g_Task->unk_06 & 1)) {
         point[0] = position[0].fixed - step[0];
@@ -680,7 +680,7 @@ MATCH void func_801F9020(Coord* position, s32* step) {
     }
     point[2] = position[2].fixed + step[2];
     FAKE_BARRIER(); /* FAKE: keep the point stores before the call setup. */
-    Area_ProjectPoint(point, &screen[1]);
+    Camera_ProjectPoint(point, &screen[1]);
 
     if (!(g_Task->unk_06 & 1)) {
         point[0] = position[0].fixed + step[0];
@@ -691,12 +691,12 @@ MATCH void func_801F9020(Coord* position, s32* step) {
     }
     point[2] = position[2].fixed - step[2];
     FAKE_BARRIER(); /* FAKE: keep the point stores before the call setup. */
-    Area_ProjectPoint(point, &screen[2]);
+    Camera_ProjectPoint(point, &screen[2]);
 
     point[0] = position[0].fixed - step[0];
     point[1] = position[1].fixed - step[1];
     point[2] = position[2].fixed - step[2];
-    Area_ProjectPoint(point, &screen[3]);
+    Camera_ProjectPoint(point, &screen[3]);
 
     line4 = (LINE_F4*)g_GfxPrimCursor;
     SetLineF4(line4);
@@ -740,7 +740,7 @@ MATCH void func_801F92F0(Coord* position, s32* step) {
     point[0] = origin[0].fixed + delta[0];
     point[1] = origin[1].fixed + delta[1];
     point[2] = origin[2].fixed + delta[2];
-    Area_ProjectPoint(point, (DVECTOR*)&poly->x0);
+    Camera_ProjectPoint(point, (DVECTOR*)&poly->x0);
     if (!(g_Task->unk_06 & 1)) {
         point[0] = origin[0].fixed - delta[0];
         point[1] = origin[1].fixed + delta[1];
@@ -750,7 +750,7 @@ MATCH void func_801F92F0(Coord* position, s32* step) {
     }
     point[2] = origin[2].fixed + delta[2];
     FAKE_BARRIER(); /* FAKE: keep the second projected point stores before its call setup. */
-    Area_ProjectPoint(point, (DVECTOR*)&poly->x1);
+    Camera_ProjectPoint(point, (DVECTOR*)&poly->x1);
     if (!(g_Task->unk_06 & 1)) {
         point[0] = origin[0].fixed + delta[0];
         point[1] = origin[1].fixed - delta[1];
@@ -760,12 +760,12 @@ MATCH void func_801F92F0(Coord* position, s32* step) {
     }
     point[2] = origin[2].fixed - delta[2];
     FAKE_BARRIER(); /* FAKE: keep the third projected point stores before its call setup. */
-    Area_ProjectPoint(point, (DVECTOR*)&poly->x2);
+    Camera_ProjectPoint(point, (DVECTOR*)&poly->x2);
 
     point[0] = origin[0].fixed - delta[0];
     point[1] = origin[1].fixed - delta[1];
     point[2] = origin[2].fixed - delta[2];
-    Area_ProjectPoint(point, (DVECTOR*)&poly->x3);
+    Camera_ProjectPoint(point, (DVECTOR*)&poly->x3);
     setRGB0(poly, 255, 255, 255);
     Area_AddCellPrim(origin[0].fixed, origin[1].fixed, 0, sizeof(POLY_F4));
 }
@@ -794,17 +794,17 @@ MATCH void func_801F9500(WorldPos* pos, s32* vx) {
     }
     point[2] = pos->z.fixed + vx[2];
     FAKE_BARRIER(); /* FAKE: keep the point stores before the call setup. */
-    Area_ProjectPoint(point, (DVECTOR*)&prim->x0);
+    Camera_ProjectPoint(point, (DVECTOR*)&prim->x0);
 
     point[0] = pos->x.fixed + vx[0];
     point[1] = pos->y.fixed + vx[1];
     point[2] = pos->z.fixed + vx[2];
-    Area_ProjectPoint(point, (DVECTOR*)&prim->x1);
+    Camera_ProjectPoint(point, (DVECTOR*)&prim->x1);
 
     point[0] = pos->x.fixed - vx[0];
     point[1] = pos->y.fixed - vx[1];
     point[2] = pos->z.fixed - vx[2];
-    Area_ProjectPoint(point, (DVECTOR*)&prim->x2);
+    Camera_ProjectPoint(point, (DVECTOR*)&prim->x2);
 
     if (!(g_Task->unk_06 & 1)) {
         point[0] = pos->x.fixed + vx[0];
@@ -815,7 +815,7 @@ MATCH void func_801F9500(WorldPos* pos, s32* vx) {
     }
     point[2] = pos->z.fixed - vx[2];
     FAKE_BARRIER(); /* FAKE: keep the point stores before the call setup. */
-    Area_ProjectPoint(point, (DVECTOR*)&prim->x3);
+    Camera_ProjectPoint(point, (DVECTOR*)&prim->x3);
 
     setUV4(prim, cell->u, cell->v, cell->u + 0x18, cell->v, cell->u, cell->v + 0x10, cell->u + 0x18, cell->v + 0x10);
     prim->tpage = GetTPage(TPAGE_DEPTH_8BIT, TPAGE_ABR_ADD, cell->page_x, cell->page_y);
@@ -837,7 +837,7 @@ NON_MATCHING void func_801F97CC(WorldPos* pos, s32* arg) {
     point[0] = pos->x.fixed + arg[0];
     point[1] = pos->y.fixed + arg[1];
     point[2] = pos->z.fixed + arg[2];
-    Area_ProjectPoint(point, (DVECTOR*)&poly->x0);
+    Camera_ProjectPoint(point, (DVECTOR*)&poly->x0);
     if (!(g_Task->unk_06 & 1)) {
         point[0] = pos->x.fixed - arg[0];
         point[1] = pos->y.fixed + arg[1];
@@ -847,13 +847,13 @@ NON_MATCHING void func_801F97CC(WorldPos* pos, s32* arg) {
     }
     point[2] = pos->z.fixed + arg[2];
     FAKE_BARRIER(); /* FAKE: keep the point stores before the call setup. */
-    Area_ProjectPoint(point, (DVECTOR*)&poly->x1);
+    Camera_ProjectPoint(point, (DVECTOR*)&poly->x1);
 
     point[0] = pos->x.fixed + arg[0];
     point[1] = pos->y.fixed + arg[1];
     lift     = 0x100000;
     point[2] = pos->z.fixed + arg[2] + lift;
-    Area_ProjectPoint(point, (DVECTOR*)&poly->x2);
+    Camera_ProjectPoint(point, (DVECTOR*)&poly->x2);
     if (!(g_Task->unk_06 & 1)) {
         point[0] = pos->x.fixed - arg[0];
         point[1] = pos->y.fixed + arg[1];
@@ -863,7 +863,7 @@ NON_MATCHING void func_801F97CC(WorldPos* pos, s32* arg) {
     }
     point[2] = pos->z.fixed + arg[2] + lift;
     FAKE_BARRIER(); /* FAKE: keep the point stores before the call setup. */
-    Area_ProjectPoint(point, (DVECTOR*)&poly->x3);
+    Camera_ProjectPoint(point, (DVECTOR*)&poly->x3);
 
     poly->r0 = (g_Task->unk_06 & 2) != 0 ? 0x80 : 0;
     poly->b0 = 0;
@@ -889,7 +889,7 @@ MATCH void func_801F9A20(WorldPos* pos, s32* vx) {
     point[0] = pos->x.fixed + vx[0];
     point[1] = pos->y.fixed + vx[1];
     point[2] = pos->z.fixed + vx[2];
-    Area_ProjectPoint(point, (DVECTOR*)&poly->x0);
+    Camera_ProjectPoint(point, (DVECTOR*)&poly->x0);
 
     if (!(g_Task->unk_06 & 1)) {
         point[0] = pos->x.fixed - vx[0];
@@ -900,7 +900,7 @@ MATCH void func_801F9A20(WorldPos* pos, s32* vx) {
     }
     point[2] = pos->z.fixed + vx[2];
     FAKE_BARRIER(); /* FAKE: keep the point stores before the call setup. */
-    Area_ProjectPoint(point, (DVECTOR*)&poly->x1);
+    Camera_ProjectPoint(point, (DVECTOR*)&poly->x1);
 
     if (!(g_Task->unk_06 & 1)) {
         point[0] = pos->x.fixed + vx[0];
@@ -911,12 +911,12 @@ MATCH void func_801F9A20(WorldPos* pos, s32* vx) {
     }
     point[2] = pos->z.fixed - vx[2];
     FAKE_BARRIER(); /* FAKE: keep the point stores before the call setup. */
-    Area_ProjectPoint(point, (DVECTOR*)&poly->x2);
+    Camera_ProjectPoint(point, (DVECTOR*)&poly->x2);
 
     point[0] = pos->x.fixed - vx[0];
     point[1] = pos->y.fixed - vx[1];
     point[2] = pos->z.fixed - vx[2];
-    Area_ProjectPoint(point, (DVECTOR*)&poly->x3);
+    Camera_ProjectPoint(point, (DVECTOR*)&poly->x3);
 
     poly->r0 = (g_Task->unk_06 & 2) != 0 ? 0x80 : 0;
     poly->g0 = (g_Task->unk_06 & 2) == 0 ? 0x80 : 0;

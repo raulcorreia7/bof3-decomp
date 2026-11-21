@@ -24,7 +24,7 @@ NON_MATCHING void func_801F3560(AreaSpawnSlot* slot) {
     SetSemiTrans(primitive, 1);
 
     object = &slot->pos.x.fixed;
-    Area_ProjectPoint(object, &screen);
+    Camera_ProjectPoint(object, &screen);
     size[0] = FAKE_VOLATILE(u16, slot->radius);
     size[1] = FAKE_VOLATILE(u16, slot->radius);
     Game_ProjectWorldPoint(object, size, size);

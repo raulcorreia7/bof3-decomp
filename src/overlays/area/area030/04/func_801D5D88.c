@@ -19,7 +19,7 @@ MATCH void func_801D5D88(void) {
             FISHING_STATE->step_delta = 4;
             FISHING_STATE->cue_index  = 0;
         }
-        Actor_SelectScript(D_801E2008[FISHING_STATE->step_index * 3]);
+        Script_Select(D_801E2008[FISHING_STATE->step_index * 3]);
         FISHING_STATE->step_timer = D_801E2009[FISHING_STATE->step_index * 3];
         FISHING_STATE->step_index += 1;
     } else {

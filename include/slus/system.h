@@ -11,7 +11,7 @@
 
 /* The executable's system, archive, input and decompression functions, in address order. */
 /* func_8014E0A8 */
-extern s32 SYS_ReadCd(s32 size, void* buffer, s32 sectors);
+extern s32 CD_ReadWait(s32 size, void* buffer, s32 sectors);
 /* func_8014EA80 */
 void       SYS_StartFrontend(void);
 /* func_8014EC64 */

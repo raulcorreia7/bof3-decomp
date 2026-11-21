@@ -8,7 +8,7 @@ MATCH void FieldAction_RollFade(void) {
 
     choice = RANDOM_MASK(0xF);
     if ((g_Task->option_flags & ACTOR_OPT_ROUTE_LOCKED) == 0) {
-        Actor_DispatchSelectorScript(((g_Game.members[0].facing ^ 0x4) & 0x7));
+        Script_DispatchSelector(((g_Game.members[0].facing ^ 0x4) & 0x7));
     }
     g_GameFlags |= GAME_FLAG_SCRIPT_ACTIVE;
     if ((FIELD(u8, GAME_WORK_AREA_PTR, 0x94u) & 0x80) == 0) {

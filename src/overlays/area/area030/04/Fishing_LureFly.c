@@ -42,7 +42,7 @@ MATCH void Fishing_LureFly(void) {
             work_c->cursor_10     = 0;
             work_c->handler_index = (work_c->handler_index + 1);
         }
-        Actor_SelectScript(4U);
+        Script_Select(4U);
     } else {
         row = work_a->cue_index * 8;
         if (current_y == (target_y + *(s32*)((u8*)&D_801E1D58 + row))) {

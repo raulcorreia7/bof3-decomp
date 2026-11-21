@@ -54,7 +54,7 @@ NON_MATCHING void Battle_PlaceFieldMembers(void) {
             }
             value                                = SCRATCH[j];
             g_Game.members[i].pos.y.fixed        = value;
-            g_Game.members[i].pos.z.part.integer = Area_ReadHeight(g_Game.members[i].pos.x.fixed, value);
+            g_Game.members[i].pos.z.part.integer = Collision_ReadHeight(g_Game.members[i].pos.x.fixed, value);
             i++;
             party_size = &g_Game.party_size;
             size       = *party_size;
@@ -72,7 +72,7 @@ NON_MATCHING void Battle_PlaceFieldMembers(void) {
                 ((PartyMember*)g_Task)->pad_06 = ((PartyMember*)g_Task)->slot - 1;
             }
             func_801C3204();
-            Actor_SelectScript(g_Task->direction);
+            Script_Select(g_Task->direction);
         }
     } else {
         Scene_SetupParty(g_Game.battle_order);

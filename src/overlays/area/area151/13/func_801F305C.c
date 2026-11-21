@@ -71,7 +71,7 @@ arm:
     scratch                 = (u8*)g_Task;
     scratch[0x09]           = 8;
 tail:
-    Actor_SelectScript(mode);
+    Script_Select(mode);
 
     check       = (u8*)g_Task;
     check[0x01] = window;

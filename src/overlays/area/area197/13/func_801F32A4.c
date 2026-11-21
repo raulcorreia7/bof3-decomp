@@ -11,7 +11,7 @@ MATCH void func_801F32A4(Actor* actor) {
     tile = (TILE_1*)g_GfxPrimCursor;
     SetTile1(tile);
     SetSemiTrans(tile, 1);
-    Area_ProjectPoint(&actor->vz, (DVECTOR*)&tile->x0);
+    Camera_ProjectPoint(&actor->vz, (DVECTOR*)&tile->x0);
     setRGB0(tile, 0, actor->unk_03, actor->unk_03);
     Area_AddCellPrim(actor->vz, actor->unk_18, -2, sizeof(TILE_1));
 }

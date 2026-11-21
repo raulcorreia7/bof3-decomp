@@ -18,7 +18,7 @@ MATCH void func_801F2EC8(AreaEffectRow* row) {
     object.vz <<= 8;
 
     Game_ProjectWorldPoint(&object, &screen, size);
-    Area_ProjectPoint(&object.vx, &screen);
+    Camera_ProjectPoint(&object.vx, &screen);
 
     primitive->x0 = primitive->x2 = screen.vx - size[0];
     primitive->x1 = primitive->x3 = screen.vx + size[0];

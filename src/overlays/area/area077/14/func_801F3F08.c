@@ -10,7 +10,7 @@ MATCH void func_801F3F08(void) {
     SetDrawMode((DR_MODE*)g_GfxPrimCursor, 0, 0, GetTPage(TPAGE_DEPTH_4BIT, TPAGE_ABR_ADD, 0x380, 0x100), 0);
     GFX_AddPrim(GFX_LAYER_UI, sizeof(DR_MODE));
     PushMatrix();
-    Area_SetCameraMatrix(scratch);
+    Camera_SetMatrix(scratch);
     spin  = (SpinEffect*)(AREA_WORK + 0xD04);
     index = 0;
     do {

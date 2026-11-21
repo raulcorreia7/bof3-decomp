@@ -150,11 +150,11 @@ MATCH void func_801F7688(void) {
     MATRIX  camera;
     Actor*  work;
 
-    Area_SetCameraMatrix(&camera);
+    Camera_SetMatrix(&camera);
     pos[0] = g_Task->pos.x.fixed;
     pos[1] = g_Task->pos.y.fixed;
     pos[2] = g_Task->pos.z.fixed;
-    Area_ProjectPoint(pos, &screen);
+    Camera_ProjectPoint(pos, &screen);
     work           = g_Task;
     work->screen_x = screen.vx;
     work->screen_y = screen.vy;
@@ -185,7 +185,7 @@ MATCH void func_801F77B4(Scena08Billboard* sprite) {
     pos       = sprite->pos;
     pos.vz <<= 8;
     Game_ProjectWorldPoint(&pos, &screen, &scale);
-    Area_ProjectPoint((s32*)&pos, &screen);
+    Camera_ProjectPoint((s32*)&pos, &screen);
     prim->x0 = prim->x2 = screen.vx - scale.vx;
     prim->x1 = prim->x3 = screen.vx + scale.vx;
     prim->y0 = prim->y1 = screen.vy - scale.vx;
@@ -248,7 +248,7 @@ MATCH void func_801F7B2C(void) {
     D_800E4C1E    = 0xC0;
     g_Task->pos.x = 7012352;
     g_Task->pos.y = 4587520;
-    g_Task->pos.z = Area_SampleHeight(g_Task->pos.x.fixed, 4587520) << 16;
+    g_Task->pos.z = Collision_SampleHeight(g_Task->pos.x.fixed, 4587520) << 16;
     g_Task->timer = 32;
     g_Task->header.step += 1;
     SND_PlaySE(EMI_SE_ID(SND_BANK_AREA, 0x02));
@@ -272,7 +272,7 @@ MATCH void func_801F7C08(void) {
     if (--g_Task->timer == 0) {
         g_Task->pos.x = 6553600;
         g_Task->pos.y = 7733248;
-        g_Task->pos.z = Area_SampleHeight(g_Task->pos.x.fixed, 7733248) << 16;
+        g_Task->pos.z = Collision_SampleHeight(g_Task->pos.x.fixed, 7733248) << 16;
         g_Task->timer = 32;
         g_Task->header.step += 1;
         SND_PlaySE(EMI_SE_ID(SND_BANK_AREA, 0x02));
@@ -354,7 +354,7 @@ NON_MATCHING s32 func_801F7E14(void) {
 
     SetDrawMode((DR_MODE*)g_GfxPrimCursor, 0, 0, GetTPage(TPAGE_DEPTH_4BIT, TPAGE_ABR_ADD, 0x2C0, 0x100) & 0xFFFF, 0);
     GFX_AddPrim(GFX_LAYER_UI, sizeof(DR_MODE));
-    Area_SetCameraMatrix(&camera);
+    Camera_SetMatrix(&camera);
     drawn = 1;
     step  = 8;
     slot  = MEM_PTR(u8, AREA_WORK);
@@ -536,11 +536,11 @@ MATCH void func_801F8534(void) {
     u8      camera[0x20];
     u16     screen_y;
 
-    Area_SetCameraMatrix(camera);
+    Camera_SetMatrix(camera);
     point[0] = g_Task->pos.x.fixed;
     point[1] = g_Task->pos.y.fixed;
     point[2] = g_Task->pos.z.fixed;
-    Area_ProjectPoint(point, &sxy);
+    Camera_ProjectPoint(point, &sxy);
     g_Task->screen_x = sxy.vx;
     screen_y         = sxy.vy;
     g_Task->screen_y = screen_y;
@@ -656,7 +656,7 @@ MATCH u8 func_801F8BF8(void) {
 
     live = 0;
     GFX_AddDitheredDrawMode(GFX_LAYER_UI, GetTPage(TPAGE_DEPTH_4BIT, TPAGE_ABR_ADD, FONT_TPAGE_X, FONT_TPAGE_Y));
-    Area_SetCameraMatrix(buffer);
+    Camera_SetMatrix(buffer);
     spark = (FallingSpark*)AREA_WORK;
     for (i = 0; i < SCENA08_SPARK_COUNT; i += 1, spark += 1) {
         if (spark->header.active != 0) {
@@ -814,7 +814,7 @@ MATCH void func_801F9AC0(void) {
     if (--g_Task->timer == 0) {
         g_Task->pos.x = 4915200;
         g_Task->pos.y = 4915200;
-        g_Task->pos.z = Area_SampleHeight(g_Task->pos.x.fixed, 4915200) << 16;
+        g_Task->pos.z = Collision_SampleHeight(g_Task->pos.x.fixed, 4915200) << 16;
         setVector(g_Task, 0xFFFF4925, 0xFFFF0000, 4993220);
         g_Task->header.mode += 1;
         SND_PlaySE(EMI_SE_ID(SND_BANK_AREA, 0x02));
@@ -940,8 +940,8 @@ NON_MATCHING void func_801F9F8C(WorldPos* pos, s32 unused, s32 jitter, s32 layer
 
     SetDrawMode((DR_MODE*)g_GfxPrimCursor, 0, 0, GetTPage(TPAGE_DEPTH_4BIT, TPAGE_ABR_HALF, 0x3C0, 0x100) & 0xFFFF, 0);
     Area_AddCellPrim(pos->x.fixed, pos->y.fixed, (s8)layer, 12);
-    Area_SetCameraMatrix(&camera);
-    Area_ProjectPoint(&pos->x.fixed, &screen);
+    Camera_SetMatrix(&camera);
+    Camera_ProjectPoint(&pos->x.fixed, &screen);
     size.vx = size.vy = 0x50;
     Game_ProjectWorldPoint(pos, &size, &scale);
     angle = rand() & 0xFFF;
@@ -974,10 +974,10 @@ MATCH void func_801FA19C(WorldPos* pos, s32* vx) {
     prim = (LINE_G2*)g_GfxPrimCursor;
     SetLineG2(prim);
     SetSemiTrans(prim, 1);
-    Area_SetCameraMatrix(&camera);
-    Area_ProjectPoint(&pos->x.fixed, &xy);
+    Camera_SetMatrix(&camera);
+    Camera_ProjectPoint(&pos->x.fixed, &xy);
     setXY0(prim, xy.vx, xy.vy);
-    Area_ProjectPoint(vx, &xy);
+    Camera_ProjectPoint(vx, &xy);
     prim->x1 = xy.vx;
     prim->y1 = xy.vy;
     setRGB0(prim, 64, 64, 64);
@@ -1026,7 +1026,7 @@ NON_MATCHING void func_801FA3E4(void) {
             Game_SetScriptActive();
             Scene_SetupParty(3);
             /* FAKE: the volatile Y assignment forces the retail reload; plain split stores score 423 rows. */
-            Area_AdvanceScroll(Area_SampleHeight(g_AreaScrollTargetX = TO_COORD_HALF(81), FAKE_VOLATILE(s32, g_AreaScrollTargetY) = TO_COORD_HALF(30)));
+            Area_AdvanceScroll(Collision_SampleHeight(g_AreaScrollTargetX = TO_COORD_HALF(81), FAKE_VOLATILE(s32, g_AreaScrollTargetY) = TO_COORD_HALF(30)));
             Area_InitMapRenderer();
             D_801468FF               = 13;
             D_80146997               = 14;
@@ -1092,7 +1092,7 @@ NON_MATCHING void func_801FA3E4(void) {
                 }
                 Scene_SetupParty(0);
                 /* FAKE: the volatile Y assignment forces the retail reload; plain split stores score 423 rows. */
-                Area_AdvanceScroll(Area_SampleHeight(g_AreaScrollTargetX = TO_COORD_HALF(41), FAKE_VOLATILE(s32, g_AreaScrollTargetY) = TO_COORD(13)));
+                Area_AdvanceScroll(Collision_SampleHeight(g_AreaScrollTargetX = TO_COORD_HALF(41), FAKE_VOLATILE(s32, g_AreaScrollTargetY) = TO_COORD(13)));
                 Area_InitMapRenderer();
                 SYS_SetFlag(g_SceneFlags, 17);
             }
@@ -1100,7 +1100,7 @@ NON_MATCHING void func_801FA3E4(void) {
                 Game_SetScriptActive();
                 Scene_SetupParty(2);
                 /* FAKE: the volatile Y assignment forces the retail reload; plain split stores score 423 rows. */
-                Area_AdvanceScroll(Area_SampleHeight(g_AreaScrollTargetX = TO_COORD_HALF(10), FAKE_VOLATILE(s32, g_AreaScrollTargetY) = TO_COORD(20)));
+                Area_AdvanceScroll(Collision_SampleHeight(g_AreaScrollTargetX = TO_COORD_HALF(10), FAKE_VOLATILE(s32, g_AreaScrollTargetY) = TO_COORD(20)));
                 Area_InitMapRenderer();
                 SYS_SetFlag(g_SceneFlags, 20);
                 g_ScenarioState.state_04 = 10;

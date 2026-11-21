@@ -109,16 +109,16 @@ s32       offset;
 /* Tests software-card events in order and returns the first active event. */
 MATCH s32 func_801EEEC8(void) {
     for (;;) {
-        if (TestEvent(g_SysCardSoftwareIoEvent) != 0) {
+        if (TestEvent(g_SaveCardSoftwareIoEvent) != 0) {
             return CARD_EVENT_OK;
         }
-        if (TestEvent(g_SysCardSoftwareTimeoutEvent) != 0) {
+        if (TestEvent(g_SaveCardSoftwareTimeoutEvent) != 0) {
             return CARD_EVENT_TIMEOUT;
         }
-        if (TestEvent(g_SysCardSoftwareNewEvent) != 0) {
+        if (TestEvent(g_SaveCardSoftwareNewEvent) != 0) {
             return CARD_EVENT_NEW;
         }
-        if (TestEvent(g_SysCardSoftwareErrorEvent) != 0) {
+        if (TestEvent(g_SaveCardSoftwareErrorEvent) != 0) {
             return CARD_EVENT_ERROR;
         }
     }
@@ -128,13 +128,13 @@ MATCH s32 func_801EEEC8(void) {
 /* func_801EEF40 */
 MATCH s32 SAVE_TestHardwareEvents(void) { /* func_801EEF40 */
     for (;;) {
-        if (TestEvent(g_SysCardHardwareIoEvent) != 0) {
+        if (TestEvent(g_SaveCardHardwareIoEvent) != 0) {
             return CARD_EVENT_OK;
         }
-        if (TestEvent(g_SysCardHardwareTimeoutEvent) != 0) {
+        if (TestEvent(g_SaveCardHardwareTimeoutEvent) != 0) {
             return CARD_EVENT_TIMEOUT;
         }
-        if (TestEvent(g_SysCardHardwareErrorEvent) != 0) {
+        if (TestEvent(g_SaveCardHardwareErrorEvent) != 0) {
             return CARD_EVENT_ERROR;
         }
     }
@@ -143,18 +143,18 @@ MATCH s32 SAVE_TestHardwareEvents(void) { /* func_801EEF40 */
 /* Polls the four software-card event descriptors. */
 /* func_801EEFA0 */
 MATCH void SAVE_PollSoftwareEvents(void) { /* func_801EEFA0 */
-    TestEvent(g_SysCardSoftwareIoEvent);
-    TestEvent(g_SysCardSoftwareTimeoutEvent);
-    TestEvent(g_SysCardSoftwareNewEvent);
-    TestEvent(g_SysCardSoftwareErrorEvent);
+    TestEvent(g_SaveCardSoftwareIoEvent);
+    TestEvent(g_SaveCardSoftwareTimeoutEvent);
+    TestEvent(g_SaveCardSoftwareNewEvent);
+    TestEvent(g_SaveCardSoftwareErrorEvent);
 }
 
 /* Polls the three hardware-card event descriptors. */
 /* func_801EEFF8 */
 MATCH void SAVE_PollHardwareEvents(void) { /* func_801EEFF8 */
-    TestEvent(g_SysCardHardwareIoEvent);
-    TestEvent(g_SysCardHardwareTimeoutEvent);
-    TestEvent(g_SysCardHardwareErrorEvent);
+    TestEvent(g_SaveCardHardwareIoEvent);
+    TestEvent(g_SaveCardHardwareTimeoutEvent);
+    TestEvent(g_SaveCardHardwareErrorEvent);
 }
 
 /* Polls card info for up to 60 frames and stores its event result. */

@@ -8,7 +8,7 @@ MATCH s32 func_801F33B0(void) {
     u8              i;
     s32             y;
 
-    Area_SetCameraMatrix(scratch);
+    Camera_SetMatrix(scratch);
     handled = 0;
     sprite  = MEM_PTR(AreaQuadSprite, AREA_WORK);
     i       = 0;
@@ -35,7 +35,7 @@ MATCH s32 func_801F33B0(void) {
             sprite->half_size += 8;
             y                = sprite->origin.y + sprite->unk_1C;
             sprite->origin.y = y;
-            sprite->unk_10   = Area_SampleHeight(sprite->origin.x, y) << 16;
+            sprite->unk_10   = Collision_SampleHeight(sprite->origin.x, y) << 16;
             func_801F2FC4(sprite);
         }
         sprite++;

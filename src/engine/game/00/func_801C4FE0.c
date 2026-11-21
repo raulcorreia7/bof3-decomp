@@ -21,16 +21,16 @@ MATCH s32 func_801C4FE0(void) {
     counter = COORD_INT(work->pos.z);
     moved   = 0;
 
-    result = Area_ReadHeight(x, y);
+    result = Collision_ReadHeight(x, y);
     slot   = g_Game.current->chr.character_id;
     if (result - D_80181B70[slot] < counter) {
         COORD_INT(g_Task->pos.z) -= D_80181B88[slot];
     } else {
-        COORD_INT(g_Task->pos.z) = Area_ReadHeight(x, y) - D_80181B70[g_Game.current->chr.character_id];
+        COORD_INT(g_Task->pos.z) = Collision_ReadHeight(x, y) - D_80181B70[g_Game.current->chr.character_id];
         if (g_Task->direction == FACING_LEFT) {
-            Actor_RequestScript(0x3C);
+            Script_Request(0x3C);
         } else {
-            Actor_RequestScript(0x3D);
+            Script_Request(0x3D);
         }
         moved = 1;
     }

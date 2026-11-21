@@ -9,7 +9,7 @@ MATCH void func_801F2E74(SparkParticle* spark) {
     poly = (POLY_F3*)g_GfxPrimCursor;
     SetPolyF3(poly);
     SetSemiTrans(poly, 1);
-    Area_ProjectPoint(&spark->pos.vx, POLY_XY(poly, 0));
+    Camera_ProjectPoint(&spark->pos.vx, POLY_XY(poly, 0));
     poly->x1 = poly->x0 + D_801F4328[spark->frame].dx1;
     poly->y1 = poly->y0 + D_801F4328[spark->frame].dy1;
     poly->x2 = poly->x0 + D_801F4328[spark->frame].dx2;

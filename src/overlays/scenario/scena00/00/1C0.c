@@ -254,7 +254,7 @@ MATCH void func_801F7484(void) {
 
     SCN_EFFECT->pos.x              = TO_COORD(11);
     SCN_EFFECT->pos.y              = TO_COORD(15) + COORD_HALF;
-    distance                       = Area_SampleHeight(SCN_EFFECT->pos.x, TO_COORD(15) + COORD_HALF);
+    distance                       = Collision_SampleHeight(SCN_EFFECT->pos.x, TO_COORD(15) + COORD_HALF);
     SCN_EFFECT->pos.z.part.integer = distance;
     SCN_EFFECT->ot_index           = 5;
     SCN_EFFECT->step               = 1;
@@ -291,7 +291,7 @@ MATCH void func_801F74EC(void) {
             next.z = row_point.z;
             stop   = 0;
         } else {
-            next.z.part.integer = Area_SampleHeight(point.x, next.y);
+            next.z.part.integer = Collision_SampleHeight(point.x, next.y);
         }
         func_801F78EC(next, point, color);
         point = next;
@@ -333,7 +333,7 @@ MATCH void func_801F7670(void) {
             next.z = row_point.z;
             stop   = 0;
         } else {
-            next.z.part.integer = Area_SampleHeight(point.x, next.y);
+            next.z.part.integer = Collision_SampleHeight(point.x, next.y);
         }
         func_801F78EC(next, point, color);
         point = next;
@@ -341,7 +341,7 @@ MATCH void func_801F7670(void) {
 
     point.x              = TO_COORD(11);
     point.y              = TO_COORD(19) + COORD_HALF;
-    point.z.part.integer = Area_SampleHeight(TO_COORD(11), TO_COORD(19) + COORD_HALF);
+    point.z.part.integer = Collision_SampleHeight(TO_COORD(11), TO_COORD(19) + COORD_HALF);
     color.r              = 0x30;
     color.g              = 0x30;
     color.b              = 0x30;
@@ -354,7 +354,7 @@ MATCH void func_801F7670(void) {
             next.z = row_point.z;
             stop   = 0;
         } else {
-            next.z.part.integer = Area_SampleHeight(point.x, next.y);
+            next.z.part.integer = Collision_SampleHeight(point.x, next.y);
         }
         func_801F78EC(point, next, color);
         point = next;
@@ -643,7 +643,7 @@ MATCH void func_801F8360(void) {
         SetPolyG3(prim);
         PushMatrix();
         Actor_BuildTransformMatrix(&matrix);
-        Area_ApplyCameraMatrix(&matrix);
+        Camera_ApplyMatrix(&matrix);
         if (i & 0x1) {
             RotTransPers3(&v[0], &v[1], &v[2], (long*)&prim->x0, (long*)&prim->x1, (long*)&prim->x2, &depth, &flag);
         } else {
@@ -704,7 +704,7 @@ MATCH void Scene_DrawTriangle(s32 size, s32 angle_x, s32 angle_y, s32 angle_z) {
     SetPolyG3(prim);
     PushMatrix();
     Actor_BuildTransformMatrix(&matrix);
-    Area_ApplyCameraMatrix(&matrix);
+    Camera_ApplyMatrix(&matrix);
     RotTransPers3(&v[0], &v[1], &v[2], (long*)&prim->x0, (long*)&prim->x1, (long*)&prim->x2, &depth, &flag);
     setRGB0(prim, SCN_TRI_SHADE_V0, SCN_TRI_SHADE_V0, SCN_TRI_SHADE_V0);
     setRGB1(prim, SCN_TRI_SHADE_V1, SCN_TRI_SHADE_V1, SCN_TRI_SHADE_V1);
@@ -826,7 +826,7 @@ MATCH void func_801F8AB8(void) {
     point[0] = work->pos.x;
     point[1] = work->pos.y;
     point[2] = work->pos.z.fixed;
-    Area_ProjectPoint(point, screen);
+    Camera_ProjectPoint(point, screen);
 
     current                               = SCN_EFFECT;
     FAKE_VOLATILE(u16, current->origin.x) = (u16)screen->vx;
@@ -1605,7 +1605,7 @@ MATCH void func_801FA7D8(void) {
                 g_SpawnedActors[g_ScratchPad[0]].type         = 0x1Eu;
                 g_SpawnedActors[g_ScratchPad[0]].pos.x.fixed  = g_Game.members[0].pos.x.fixed;
                 g_SpawnedActors[g_ScratchPad[0]].pos.y.fixed  = g_Game.members[0].pos.y.fixed;
-                distance                                      = Area_SampleHeight(g_SpawnedActors[g_ScratchPad[0]].pos.x.fixed, g_SpawnedActors[g_ScratchPad[0]].pos.y.fixed) << 16;
+                distance                                      = Collision_SampleHeight(g_SpawnedActors[g_ScratchPad[0]].pos.x.fixed, g_SpawnedActors[g_ScratchPad[0]].pos.y.fixed) << 16;
                 g_SpawnedActors[g_ScratchPad[0]].pos.z.fixed  = distance;
                 g_SpawnedActors[g_ScratchPad[0]].unk_29       = 0;
             }
@@ -1971,7 +1971,7 @@ MATCH void func_801FB744(void) {
     state = &g_ScenarioState.step_05;
     switch (*state) {
         case 0:
-            if (Area_StepCameraAngle(0x2D, 0xA) == 0) {
+            if (Camera_StepAngle(0x2D, 0xA) == 0) {
                 g_ScenarioState.timer_06 = 50;
                 *state                   = 1;
             }
@@ -1997,7 +1997,7 @@ MATCH void func_801FB744(void) {
         }
 
         case 2:
-            if (Area_StepCameraAngle(0xF, 0xA) == 0) {
+            if (Camera_StepAngle(0xF, 0xA) == 0) {
                 *state          = 3;
                 g_ScriptVars[2] = 4;
             }
@@ -2106,7 +2106,7 @@ MATCH void func_801FB924(void) {
                 if (D_801FCA64[index * 2] != 0) {
                     TASK_SET((u8*)g_Actors);
                     D_80146890 = D_801FCA65[index * 2];
-                    Actor_RequestScript(D_80146890);
+                    Script_Request(D_80146890);
                 }
             } else {
                 g_ScriptVarsReq.byte++;
@@ -2145,7 +2145,7 @@ MATCH void func_801FB924(void) {
             if ((g_FrameCount & 0x3) == 0) {
                 TASK_SET((u8*)g_Actors);
                 D_80146890 = (D_80146890 + 1) & 0x3;
-                Actor_RequestScript(D_80146890);
+                Script_Request(D_80146890);
             }
             SND_PlaySE(EMI_SE_ID(SND_BANK_AREA, 4));
             if (g_ScriptVars[2] == 0x15) {
@@ -2348,7 +2348,7 @@ MATCH void Scene_DispatchActor(void* entity) {
 MATCH void func_801FC810(void) {
 }
 
-/* Step trigger: entry_08 of the scenario, called by Area_IsStepBlocked with its handler_x (x >> 16 is compared with the
+/* Step trigger: entry_08 of the scenario, called by Collision_IsStepBlocked with its handler_x (x >> 16 is compared with the
  * column). A hit starts a scripted scene and returns 1; a nonzero result blocks the step. */
 MATCH s32 Scene_TestStepTrigger(s32 x) { /* func_801FC818 */
     if ((g_GameAreaId == AREA_ID_DAUNA_MINE_WORKER) && ((x >> 16) == 43) && (SYS_TestFlag(g_SceneFlags, 6) != 0)) {

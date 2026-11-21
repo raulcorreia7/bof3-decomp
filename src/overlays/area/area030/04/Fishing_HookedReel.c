@@ -27,7 +27,7 @@ MATCH void Fishing_HookedReel(void) {
         SND_PlaySE(EMI_SE_ID(SND_BANK_AREA, 3));
         SND_StopSequence(0, 1);
         SND_PlayBGM(0x2A, 0x64, 8);
-        Actor_RequestScript(0xA);
+        Script_Request(0xA);
         FISHING_STATE->sub_index = 3;
         return;
     }
@@ -36,7 +36,7 @@ MATCH void Fishing_HookedReel(void) {
             D_801E31F8                = 2;
             FISHING_STATE->step_timer = 8;
             D_8014421C                = g_FishingRodRow->cursor_left_speed;
-            Actor_RequestScript(8);
+            Script_Request(8);
             goto counted; /* the pad press counts as one state change */
         }
         work = FISHING_STATE;
@@ -48,11 +48,11 @@ MATCH void Fishing_HookedReel(void) {
         } else {
             D_8014421C = 0;
             D_801E31F8 = 0;
-            Actor_RequestScript(7);
+            Script_Request(7);
         }
         if (g_InputPressed & PADRdown) {
             D_801468A4[g_FishingHookedFish].state = (s8)(D_801468A4[g_FishingHookedFish].state - (g_FishingRodRow->reel_cursor_size + 2));
-            Actor_RequestScript(7);
+            Script_Request(7);
             func_801DB04C();
             goto counted_again;
         }
@@ -70,7 +70,7 @@ MATCH void Fishing_HookedReel(void) {
         D_801E31F8 = 0;
         D_8014421C = g_FishingRodRow->cursor_right_speed;
         *word      = 0;
-        Actor_RequestScript(0);
+        Script_Request(0);
         D_80144216 -= 1;
     } else if (g_InputHeld & PADRdown) {
         if (g_InputPressed & PADRdown) {
@@ -80,14 +80,14 @@ MATCH void Fishing_HookedReel(void) {
         }
         D_801E31F8 = 1;
         D_8014421C = g_FishingRodRow->cursor_return_speed;
-        Actor_RequestScript(7);
+        Script_Request(7);
         Actor_StepAnimLoop();
         D_80144216 += 1;
     } else {
         D_801E31F8                            = 0;
         D_8014421C                            = 0;
         D_801468A4[g_FishingHookedFish].state = 0;
-        Actor_RequestScript(7);
+        Script_Request(7);
     }
     func_801DDD4C();
 }

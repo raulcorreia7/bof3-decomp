@@ -2,11 +2,11 @@
 
 MATCH void func_801F3E10(void) {
     g_Task->header.flags &= ~ACTOR_FLAG_HIDDEN;
-    COORD_INT(g_Task->pos.z) = Area_ReadHeight(g_Task->pos.x.fixed, g_Task->pos.y.fixed) + 2000;
+    COORD_INT(g_Task->pos.z) = Collision_ReadHeight(g_Task->pos.x.fixed, g_Task->pos.y.fixed) + 2000;
     g_Task->gravity          = -8;
     setVector(g_Task, 0, 0, 0);
     g_Task->unk_04 = 1;
-    Actor_SelectScript(0x3B);
+    Script_Select(0x3B);
     g_ScriptState->flags |= 0x40;
     g_ScriptState->unk_01 = (D_80146250 - g_Game.members) * 20;
     g_ScriptState->cursor -= 2;

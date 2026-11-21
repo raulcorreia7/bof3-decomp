@@ -36,7 +36,7 @@ MATCH bool Battle_WalkMembersIn(void) {
                 g_Task->draw_layer       = g_AreaDrawMode;
                 g_Task->pos.x            = g_EncounterParty[order].x;
                 g_Task->pos.y            = g_EncounterParty[order].y;
-                COORD_INT(g_Task->pos.z) = Area_ReadHeight(g_Task->pos.x.fixed, g_Task->pos.y.fixed);
+                COORD_INT(g_Task->pos.z) = Collision_ReadHeight(g_Task->pos.x.fixed, g_Task->pos.y.fixed);
                 g_Task->unk_48           = 0;
                 g_Task->param.unk_0B     = 1;
             }

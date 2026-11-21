@@ -11,13 +11,13 @@ NON_MATCHING void func_801F5050(u8 shade) {
 
     SetDrawMode((DR_MODE*)g_GfxPrimCursor, 0, 1, GetTPage(TPAGE_DEPTH_4BIT, TPAGE_ABR_ADD, FONT_TPAGE_X, FONT_TPAGE_Y) & HALF_MASK, 0);
     GFX_AddPrim(GFX_LAYER_EFFECT_FRONT, sizeof(DR_MODE));
-    Area_SetCameraMatrix(scratch);
+    Camera_SetMatrix(scratch);
     point[0] = g_Task->pos.x.fixed - TO_COORD(2);
     point[1] = g_Task->pos.y.fixed;
     point[2] = TO_COORD(512);
-    Area_ProjectPoint(point, &screen0);
+    Camera_ProjectPoint(point, &screen0);
     point[2] = TO_COORD(1280);
-    Area_ProjectPoint(point, &screen1);
+    Camera_ProjectPoint(point, &screen1);
     for (i = 0; i < 4; i++) {
         point[0] += TO_COORD(1);
         SetDrawMode((DR_MODE*)g_GfxPrimCursor, 0, 0, GetTPage(TPAGE_DEPTH_4BIT, TPAGE_ABR_ADD, FONT_TPAGE_X, FONT_TPAGE_Y) & HALF_MASK, 0);
@@ -30,9 +30,9 @@ NON_MATCHING void func_801F5050(u8 shade) {
         packet->x1 = screen1.vx;
         packet->y1 = screen1.vy;
         point[2]   = TO_COORD(512);
-        Area_ProjectPoint(point, &screen0);
+        Camera_ProjectPoint(point, &screen0);
         point[2] = TO_COORD(1280);
-        Area_ProjectPoint(point, &screen1);
+        Camera_ProjectPoint(point, &screen1);
         packet->x2 = screen0.vx;
         packet->y2 = screen0.vy;
         packet->x3 = screen1.vx;

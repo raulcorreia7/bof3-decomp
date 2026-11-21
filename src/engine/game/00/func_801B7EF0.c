@@ -3,12 +3,12 @@
 MATCH void func_801B7EF0(void) {
     s32 value;
 
-    COORD_INT(g_Task->pos.z) = Area_ReadHeight(g_Task->pos.x.fixed, g_Task->pos.y.fixed) + 0x200;
+    COORD_INT(g_Task->pos.z) = Collision_ReadHeight(g_Task->pos.x.fixed, g_Task->pos.y.fixed) + 0x200;
     value                    = 0x3D;
     if (g_Task->direction == FACING_RIGHT) {
         value = 0x3C;
     }
-    Actor_RequestScript(value);
+    Script_Request(value);
     if (g_Task->unk_05 != 0) {
         Actor_SetSemiTransparent();
         g_Task->tint.steps.delta.r = -0x80;

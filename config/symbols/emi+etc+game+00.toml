@@ -34,7 +34,7 @@ Actor_FindFreeSpawned = { addr = 0x8019601C, type = "func", source = "Returns th
 Actor_Clear = { addr = 0x80196070, type = "func", source = "Frees the current g_Task actor: clears header.flags, header.mode (byte 0x01), the step (byte 0x02) and bytes 0x03 and 0x04." }
 Actor_Free = { addr = 0x801960C0, type = "func", source = "Frees g_SpawnedActors[record_index]: clears header.flags, header.mode (byte 0x01), the step (byte 0x02) and bytes 0x03 and 0x04." }
 Actor_ClearAll = { addr = 0x8019611C, type = "func", source = "Frees every one of the ACTOR_SLOT_COUNT g_SpawnedActors entries; Title_StartSelectedGame calls it before the next game." }
-Actor_Create = { addr = 0x8019615C, type = "func", source = "Claims a free g_SpawnedActors entry for a spawn request: sets header.flags to 1 and fills type, x and y (whole part and half cell), z from Area_SampleHeight and link from the request bytes 1 to 6; does nothing when no slot is free." }
+Actor_Create = { addr = 0x8019615C, type = "func", source = "Claims a free g_SpawnedActors entry for a spawn request: sets header.flags to 1 and fills type, x and y (whole part and half cell), z from Collision_SampleHeight and link from the request bytes 1 to 6; does nothing when no slot is free." }
 GFX_AllocPaletteFade = { addr = 0x8019651C, type = "func", source = "Claims the first free of the 32 g_PaletteFades entries for a target, fills its red, green and blue offsets and table index from the target, marks the palette cells it fades and returns its index, or 0xFF when all are active." }
 GFX_FreePaletteFade = { addr = 0x80196670, type = "func", source = "Releases one g_PaletteFades entry: frees its palette cells and restores the saved byte of its target." }
 GFX_FreePaletteFadeTarget = { addr = 0x80196718, type = "func", source = "Releases every g_PaletteFades entry whose target is the given target." }
@@ -91,9 +91,9 @@ WorldMap_FindRegion = { addr = 0x8019A194, type = "func", source = "Returns the 
 WorldMap_GetPoints = { addr = 0x8019A1D4, type = "func", source = "Returns map_points of the current world map region (g_WorldMapRegions indexed by WorldMap_FindRegion); func_801B690C searches those rows by actor cell." }
 Area_GetVx = { addr = 0x8019C344, type = "func", source = "the body returns g_Task->vx" }
 Game_RequestAreaChange = { addr = 0x8019FA28, type = "func", source = "Requests an area change: stores the area id and entry position in g_GameEntryAreaId, g_GameEntryPosX and g_GameEntryPosY and sets g_GameStateIndex to 5." }
-Area_FindEncounterZoneOf = { addr = 0x801A0490, type = "func", source = "Returns the encounter zone entry of the given area table index whose bounds contain the cell." }
+Encounter_FindZoneOf = { addr = 0x801A0490, type = "func", source = "Returns the encounter zone entry of the given area table index whose bounds contain the cell." }
 Actor_RunInteractions = { addr = 0x801A06D8, type = "func", source = "Runs every actor's pending interaction: turns it to face the leader, dispatches its selector script and records the facing it came from." }
-Area_IsCellBlocked = { addr = 0x801A20F8, type = "func", source = "Reports whether a map cell's terrain blocks movement." }
+Collision_IsCellBlocked = { addr = 0x801A20F8, type = "func", source = "Reports whether a map cell's terrain blocks movement." }
 Area_SetXFixed = { addr = 0x801A253C, type = "func", source = "the body stores into g_Task->pos.x.fixed" }
 Actor_TurnRandom = { addr = 0x801A2C10, type = "func", source = "Turns the current actor to a random diagonal or odd facing and flags the record." }
 Game_DispatchFadeWhite = { addr = 0x801A3594, type = "func", source = "calls the fade-to-white step selected by the step byte" }
@@ -122,7 +122,7 @@ Scene_LoadOverlay = { addr = 0x801A7804, type = "func", source = "Streams the ov
 Game_UpdateScenario = { addr = 0x801A782C, type = "func", source = "Calls entry_00 of the g_ScenarioHandlers handler table of the active scenario, then Game_UpdateScene." }
 Game_DispatchScenarioRecord = { addr = 0x801A7878, type = "func", source = "Passes an actor to entry_04 of the scenario, or to Scene_DispatchObject when bit 0x4000 of the actor is set." }
 Scene_RequestChapterAdvance = { addr = 0x801A78F8, type = "func", source = "Sets bit 0x80 of g_ScenarioState.flags_01 to request the next chapter." }
-Area_IsStepBlocked = { addr = 0x801A7914, type = "func", source = "Runs entry_08 of the scenario and calls func_801A8728 when it returns 0; returns whether the step is blocked." }
+Collision_IsStepBlocked = { addr = 0x801A7914, type = "func", source = "Runs entry_08 of the scenario and calls func_801A8728 when it returns 0; returns whether the step is blocked." }
 Game_CallScenario = { addr = 0x801A7A34, type = "func", source = "Calls entry_10 of the scenario when it exists, else Game_CallArea." }
 Game_UpdateScene = { addr = 0x801A7BF0, type = "func", source = "Runs the g_SceneSteps callback selected by the scene state byte D_801448EA." }
 Scene_ResetEventState = { addr = 0x801A7C2C, type = "func", source = "Resets the scene state bytes and copies the 16-byte D_801C84AC table to g_SceneEventFlags." }
@@ -132,18 +132,18 @@ Scene_RunInn = { addr = 0x801A802C, type = "func", source = "Scene event 10: cal
 Message_RunAreaMessage = { addr = 0x801A82F8, type = "func", source = "Starts area message 0xD8, waits until g_GameStateIndex leaves 2, then clears the script-active flag and the scene event byte D_801448EB." }
 Scene_DispatchObject = { addr = 0x801A86D4, type = "func", source = "Runs the g_SceneObjects callback selected by unk_7A of the actor, with the actor and g_SceneEventFlags." }
 Game_CallArea = { addr = 0x801A8CB4, type = "func", source = "Finds the entry of g_GameAreaId in the 28-entry area handler table g_AreaHooks and calls its handler with the two coordinates; returns 0 when the area has none. Called by Game_CallScenario." }
-Actor_RunScript = { addr = 0x801A8D38, type = "func", source = "Runs the actor script record at the cursor: flow ops first, then the group handler its high nibble selects; returns the facing selection." }
-Actor_RunFlowOps = { addr = 0x801A8F94, type = "func", source = "Runs the flow opcodes of an actor script: jumps, branches on flags, loops, script calls, facing offsets; hands 0xB0 sound opcodes on." }
-Actor_RunSoundOps = { addr = 0x801A96E4, type = "func", source = "Runs the sound opcodes 0xB0 to 0xBE of an actor script: sound effects, BGM, sequences and volume cues." }
-Actor_RunControlOps = { addr = 0x801A9944, type = "func", source = "Runs the script control opcodes 0xE0 to 0xEF: start another script, end it, toggle the hide, no-start, route-lock and wait-stream flags." }
-Actor_RunMotionOps = { addr = 0x801A9DE8, type = "func", source = "Runs the motion opcodes 0xF0 to 0xFF of an actor script: move, walk to a cell, vertical speed, waits, cell palette." }
-Actor_RunWaitOps = { addr = 0x801AA470, type = "func", source = "Runs the opcodes 0xD0 to 0xDF of an actor script: waits for a message, window effect or battle request, and camera and cell palette touches." }
-Actor_RunAppearanceOps = { addr = 0x801AAB00, type = "func", source = "Runs the opcodes 0xC0 to 0xCE of an actor script: palette fade, scale, tint, transparency and turning." }
-Actor_RunStageOps = { addr = 0x801AB458, type = "func", source = "Runs the opcodes 0x80 to 0x8C of an actor script: script-active flag, screen fades, camera scroll, tints, XA music." }
-Actor_RunSpawnOps = { addr = 0x801AB8B0, type = "func", source = "Runs the opcodes 0x90 to 0x9F of an actor script: spawn a helper actor into a slot and wait while it lives." }
-Actor_RunFaceOps = { addr = 0x801ABA24, type = "func", source = "Runs the opcodes 0x60 to 0x66 of an actor script: choose the facing animation script and lock the route." }
+Script_Run = { addr = 0x801A8D38, type = "func", source = "Runs the actor script record at the cursor: flow ops first, then the group handler its high nibble selects; returns the facing selection." }
+Script_RunFlowOps = { addr = 0x801A8F94, type = "func", source = "Runs the flow opcodes of an actor script: jumps, branches on flags, loops, script calls, facing offsets; hands 0xB0 sound opcodes on." }
+Script_RunSoundOps = { addr = 0x801A96E4, type = "func", source = "Runs the sound opcodes 0xB0 to 0xBE of an actor script: sound effects, BGM, sequences and volume cues." }
+Script_RunControlOps = { addr = 0x801A9944, type = "func", source = "Runs the script control opcodes 0xE0 to 0xEF: start another script, end it, toggle the hide, no-start, route-lock and wait-stream flags." }
+Script_RunMotionOps = { addr = 0x801A9DE8, type = "func", source = "Runs the motion opcodes 0xF0 to 0xFF of an actor script: move, walk to a cell, vertical speed, waits, cell palette." }
+Script_RunWaitOps = { addr = 0x801AA470, type = "func", source = "Runs the opcodes 0xD0 to 0xDF of an actor script: waits for a message, window effect or battle request, and camera and cell palette touches." }
+Script_RunAppearanceOps = { addr = 0x801AAB00, type = "func", source = "Runs the opcodes 0xC0 to 0xCE of an actor script: palette fade, scale, tint, transparency and turning." }
+Script_RunStageOps = { addr = 0x801AB458, type = "func", source = "Runs the opcodes 0x80 to 0x8C of an actor script: script-active flag, screen fades, camera scroll, tints, XA music." }
+Script_RunSpawnOps = { addr = 0x801AB8B0, type = "func", source = "Runs the opcodes 0x90 to 0x9F of an actor script: spawn a helper actor into a slot and wait while it lives." }
+Script_RunFaceOps = { addr = 0x801ABA24, type = "func", source = "Runs the opcodes 0x60 to 0x66 of an actor script: choose the facing animation script and lock the route." }
 Area_MoveActorRoute = { addr = 0x801ABBA8, type = "func", source = "samples the height along the route, paces it with g_RouteSpeedScale and moves the actor" }
-Actor_FindScriptLabel = { addr = 0x801AC8F0, type = "func", source = "Moves the cursor to the 0x0A label record with the wanted id when the cursor holds a label reference (bit 0x4000)." }
+Script_FindLabel = { addr = 0x801AC8F0, type = "func", source = "Moves the cursor to the 0x0A label record with the wanted id when the cursor holds a label reference (bit 0x4000)." }
 FieldAction_Run = { addr = 0x801ACE10, type = "func", source = "The party leader's field action: runs the area's action table entry, or the leader's own." }
 FieldAction_RunSteps = { addr = 0x801ACEBC, type = "func", source = "Runs the field action step table by the actor's step." }
 FieldAction_RollStep = { addr = 0x801ACF2C, type = "func", source = "Step 0 of the field action: rolls for a find, a miss ends the action." }
@@ -177,8 +177,8 @@ Item_PassesTest = { addr = 0x801AF494, type = "func", source = "Tells whether an
 UI_DrawItemRow = { addr = 0x801AF800, type = "func", source = "Draws an item row: icon, name from the item record, and a count when it is two or more." }
 UI_DrawAbilityRow = { addr = 0x801AF930, type = "func", source = "Draws one row of an ability list: the element icon, the ability name from its text command stream and the cost as a two-digit number at the right, in the given text shade." }
 UI_DrawScrollbar = { addr = 0x801AFA1C, type = "func", source = "Draws a list scrollbar: a red mark per flagged row on the track and the thumb; menu list windows call it." }
-Area_SetCameraMatrix = { addr = 0x801AFE18, type = "func", source = "Sets the GTE rotation and translation from the camera angle, height and offsets, and returns out_matrix unchanged." }
-Area_ProjectPoint = { addr = 0x801AFF04, type = "func", source = "Projects the 16.16 position pos through RotTransPers and writes the result to screen_xy." }
+Camera_SetMatrix = { addr = 0x801AFE18, type = "func", source = "Sets the GTE rotation and translation from the camera angle, height and offsets, and returns out_matrix unchanged." }
+Camera_ProjectPoint = { addr = 0x801AFF04, type = "func", source = "Projects the 16.16 position pos through RotTransPers and writes the result to screen_xy." }
 MATH_SetIdentity = { addr = 0x801AFF64, type = "func", source = "Writes 4096 to the three diagonal cells of a 3x3 s16 matrix and 0 to the other six." }
 Game_ProjectWorldPoint = { addr = 0x801AFFD8, type = "func", source = "projects a world position through RotTrans and stores the screen pair; existing bottom-up proposal" }
 Actor_UpdateMovement = { addr = 0x801B0DFC, type = "func", source = "moves and animates the current actor rows, called by every area and scene timer" }
@@ -192,9 +192,9 @@ Area_GrabLadder = { addr = 0x801B32A4, type = "func", source = "Step 0 of g_Area
 Area_ClimbMount = { addr = 0x801B32D0, type = "func", source = "runs g_AreaClimbMountSteps[unk_03], the approach to the ladder; its last step hands over to step 2 of g_AreaClimbSteps" }
 Area_ClimbLadder = { addr = 0x801B3488, type = "func", source = "Step 2 of g_AreaClimbSteps: the ladder climb itself: up and down move the actor through the climb helpers, Interact turns it around, and the scroll follows." }
 Area_ClimbDismount = { addr = 0x801B3540, type = "func", source = "runs g_AreaClimbDismountSteps[unk_03], the walk off the ladder; step 3 of g_AreaClimbSteps calls it" }
-Area_FindEncounterZone = { addr = 0x801B3C3C, type = "func", source = "Returns the encounter zone entry of the current area whose bounds contain the cell; Area_RollEncounterThreshold and Area_CanStartEncounter read it." }
-Area_RollEncounterThreshold = { addr = 0x801B3CCC, type = "func", source = "Rolls the steps until the next encounter: s_EncounterStepThresholds[entry[4] * 2] plus a random roll capped at D_801CD1B9, stored in D_80145FB8." }
-Area_CanStartEncounter = { addr = 0x801B3EB0, type = "func", source = "Returns 0 when D_80145FB8 is 0 or above the limit; otherwise starts an encounter with Area_BuildEncounter(4, 0)." }
+Encounter_FindZone = { addr = 0x801B3C3C, type = "func", source = "Returns the encounter zone entry of the current area whose bounds contain the cell; Encounter_RollThreshold and Encounter_CanStart read it." }
+Encounter_RollThreshold = { addr = 0x801B3CCC, type = "func", source = "Rolls the steps until the next encounter: s_EncounterStepThresholds[entry[4] * 2] plus a random roll capped at D_801CD1B9, stored in D_80145FB8." }
+Encounter_CanStart = { addr = 0x801B3EB0, type = "func", source = "Returns 0 when D_80145FB8 is 0 or above the limit; otherwise starts an encounter with Encounter_Build(4, 0)." }
 Party_CanSwitchLeader = { addr = 0x801B55C0, type = "func", source = "Reports whether the leader may be switched: false while a walk-busy flag is set or a party row of type 2 holds none of s_MenuBattlerTypes" }
 Game_RequestLeaderSwitch = { addr = 0x801B5684, type = "func", source = "Starts the leader switch when FIELD_INPUT_SWITCH_LEADER is pressed with two or more party members: sets FIELD_TASK_MODE_LEADER_SWITCH, whose last step scrolls to the new lead" }
 Game_RequestFieldMenu = { addr = 0x801B5758, type = "func", source = "Opens the field menu when the menu button is pressed and the menu is not locked; true when requested." }
@@ -207,7 +207,7 @@ Game_RewardZenny = { addr = 0x801B5E58, type = "func", source = "Plays common SE
 Game_RequestPersonalAction = { addr = 0x801B5EBC, type = "func", source = "Starts the lead character's personal action when FIELD_INPUT_PERSONAL_ACTION is pressed outside the world map, except for Garr, Rei, Ryu in pajamas and Whelp: sets FIELD_TASK_MODE_PERSONAL_ACTION, whose handler is picked from g_PersonalActions" }
 Game_RequestRockKick = { addr = 0x801B5F68, type = "func", source = "Starts the Teepo or Peco personal action when the leader runs (walk speed index 4) into a rock actor (a type 0x17 actor) on the facing cell: records its actor slot in the work byte +0x0B and sets FIELD_TASK_MODE_PERSONAL_ACTION at step 1 (Teepo Kick, Peco Bump)" }
 Game_RequestGarrPush = { addr = 0x801B6044, type = "func", source = "Starts Garr's personal action when the leader is Garr and has walked 16 frames against an object facing a cardinal direction: counts the frames in the work byte +0x0B, then sets FIELD_TASK_MODE_PERSONAL_ACTION at step 0 (Garr Push)" }
-Area_IsStepTooHigh = { addr = 0x801BB86C, type = "func", source = "probes the step height at the midpoint of two edges and returns true above 64 units, the blocking step its callers turn away from" }
+Collision_IsStepTooHigh = { addr = 0x801BB86C, type = "func", source = "probes the step height at the midpoint of two edges and returns true above 64 units, the blocking step its callers turn away from" }
 Actor_SnapFacing = { addr = 0x801BB8E8, type = "func", source = "Turns the actor to a cardinal facing, choosing the opposite when neither source facing matches." }
 Area_StepSceneTimer = { addr = 0x801BC3B8, type = "func", source = "Counts the scene timer down each frame and calls Area_UpdateIdleActor when it expires." }
 Area_UpdateIdleActor = { addr = 0x801BC400, type = "func", source = "Per-frame upkeep of the idle field actor, run when the scene timer expires: applies the regen and confusion upkeep and the cell-hit checks and, when none fires, stops the actor, sets byte 0x11C of the mode work area to 3, runs func_801BC000 and returns an actor at rest in mode 1 to step 0." }
@@ -229,7 +229,7 @@ Battle_ScrollToLeader = { addr = 0x801BF8E0, type = "func", source = "After the 
 Battle_RunPartyAnims = { addr = 0x801BFAC4, type = "func", source = "Runs each party member's walk anim loop for one frame." }
 Battle_PlaceFieldMembers = { addr = 0x801BFB34, type = "func", source = "Puts the rebuilt field members back on their encounter spots in field order and selects their scripts; Game_ReturnFromBattle runs it after Party_BuildBattlers." }
 Battle_StartEncounter = { addr = 0x801BFE34, type = "func", source = "Starts the encounter: records the origin the camera scrolls from, saves each member's position into g_EncounterParty, sets the scroll direction from the mode row and faces every member along the route. Twenty-one encounter triggers call it." }
-Party_LoadMemberSprite = { addr = 0x801C1254, type = "func", source = "Loads a party member's field sprite: finds the section of the character sprites at 0x8003B800 whose entry in the 3-byte row of the loaded character index equals the character id, points the work record's bank pointer (+0x4C) at it, sets its sprite page, sheet row, CLUT selector and palette type (+0x25..+0x28) from the party slot, and loads the slot's palette at GAME_PALETTE_STAGE. Called by Party_JoinMember, Party_BuildBattlers, the shop and Actor_BeginScript." }
+Party_LoadMemberSprite = { addr = 0x801C1254, type = "func", source = "Loads a party member's field sprite: finds the section of the character sprites at 0x8003B800 whose entry in the 3-byte row of the loaded character index equals the character id, points the work record's bank pointer (+0x4C) at it, sets its sprite page, sheet row, CLUT selector and palette type (+0x25..+0x28) from the party slot, and loads the slot's palette at GAME_PALETTE_STAGE. Called by Party_JoinMember, Party_BuildBattlers, the shop and Script_Begin." }
 Party_BuildBattlers = { addr = 0x801C1400, type = "func", source = "Fills the g_Game.members rows from the order bytes at D_80144F5A + mode * 3." }
 Party_LoadPalettes = { addr = 0x801C1630, type = "func", source = "Frees the fade target and stages the palette block of each of the g_Game.party_size party battlers; runs after every party join or removal." }
 Char_RebuildPartyStats = { addr = 0x801C16B8, type = "func", source = "reads g_CharSlot and the party order, writes g_Characters and calls Char_RebuildStats" }
@@ -250,13 +250,13 @@ Actor_ClearVelocity = { addr = 0x801C5798, type = "func", source = "Zeroes the v
 Actor_Move = { addr = 0x801C57B4, type = "func", source = "Adds the running task's velocity (vx, vy, vz) to its position; the field actor step bodies call it every frame." }
 Area_SetFacingOffsetX = { addr = 0x801C5DFC, type = "func", source = "the body stores into g_FacingOffsets[route_index].x" }
 Area_StartScrollRoute = { addr = 0x801C601C, type = "func", source = "writes the route record at D_80143FBC, copies the party position and scroll target and calls Area_AdvanceScroll" }
-Area_BuildEncounter = { addr = 0x801C60E0, type = "func", source = "Rolls an encounter formation, copies its enemies, places them around the party and returns 0 when none fits." }
-Area_PlaceEncounterParty = { addr = 0x801C63B0, type = "func", source = "Orders the battle party by row (slots 2 and 6 first), nudges the encounter origin when the order changed, and places each member on an open cell; returns 0 when one has none. Called by Area_BuildEncounter." }
-Area_PickEncounter = { addr = 0x801C6A7C, type = "func", source = "Rolls 1-16 against the weights of the 8 encounter records and returns the chosen record." }
-Area_RollEncounterEnemies = { addr = 0x801C6AEC, type = "func", source = "Copies the 8 enemy ids of the chosen encounter into the encounter list and keeps each by a random roll against its spawn chance in s_EncounterSpawnChances; returns how many stayed. Called by Area_BuildEncounter." }
-Area_PlaceEncounterEnemies = { addr = 0x801C6BB4, type = "func", source = "Finds a cell for each kept encounter enemy around the origin, rotated for the scroll direction; an enemy with no open cell is dropped. Returns whether any enemy remains. Called by Area_BuildEncounter." }
+Encounter_Build = { addr = 0x801C60E0, type = "func", source = "Rolls an encounter formation, copies its enemies, places them around the party and returns 0 when none fits." }
+Encounter_PlaceParty = { addr = 0x801C63B0, type = "func", source = "Orders the battle party by row (slots 2 and 6 first), nudges the encounter origin when the order changed, and places each member on an open cell; returns 0 when one has none. Called by Encounter_Build." }
+Encounter_Pick = { addr = 0x801C6A7C, type = "func", source = "Rolls 1-16 against the weights of the 8 encounter records and returns the chosen record." }
+Encounter_RollEnemies = { addr = 0x801C6AEC, type = "func", source = "Copies the 8 enemy ids of the chosen encounter into the encounter list and keeps each by a random roll against its spawn chance in s_EncounterSpawnChances; returns how many stayed. Called by Encounter_Build." }
+Encounter_PlaceEnemies = { addr = 0x801C6BB4, type = "func", source = "Finds a cell for each kept encounter enemy around the origin, rotated for the scroll direction; an enemy with no open cell is dropped. Returns whether any enemy remains. Called by Encounter_Build." }
 Area_GetWidth = { addr = 0x801C6FD4, type = "func", source = "the body returns g_AreaMapBundle.width" }
-Area_SetEncounterCamera = { addr = 0x801C7244, type = "func", source = "Averages the ground height under the kept enemies and the party and installs the battle camera matrix from the area camera angle. Called by Area_BuildEncounter." }
+Camera_SetEncounter = { addr = 0x801C7244, type = "func", source = "Averages the ground height under the kept enemies and the party and installs the battle camera matrix from the area camera angle. Called by Encounter_Build." }
 Battle_StartScripted = { addr = 0x801C7A54, type = "func", source = "Starts a scripted battle: stores mode_byte in g_BattleEncounter, sets D_80145E91 to 5 and copies the first byte of s_BattleModeRecords[mode_byte * 4] to g_BattleOptions." }
 s_PaletteFadeCounts = { addr = 0x801C7AC0, size = 0x8, source = "Colour count of a palette fade by palette table index; func_8019625C shifts the entry left by 4." }
 s_PaletteFadeDivisors = { addr = 0x801C7AC8, size = 0x8, source = "Divisor of each colour step of a palette fade by palette table index, read by func_8019625C." }
@@ -369,8 +369,8 @@ g_AreaClimbMountSteps = { addr = 0x801CD140, size = 0x14, source = "the five unk
 g_AreaClimbDismountSteps = { addr = 0x801CD154, size = 0x10, source = "the four unk_03 steps of Area_ClimbDismount, walking the actor off the ladder" }
 g_PersonalActions = { addr = 0x801CD164, size = 0x4C, source = "The personal action dispatcher of each party combination module (plchar/plp*), indexed by the loaded party row &0x7F; it picks the leader's member position in the row (work byte unk_2C). FIELD_TASK_MODE_PERSONAL_ACTION calls it; started by Game_RequestPersonalAction, Game_RequestGarrPush and Game_RequestRockKick" }
 D_801CD1B0 = { addr = 0x801CD1B0, size = 0x8, source = "The two step handlers func_801B371C runs by g_Task->header.step." }
-s_EncounterStepThresholds = { addr = 0x801CD1B8, size = 0x10, source = "Pairs of total steps and random cap per menu entry, read by Area_RollEncounterThreshold." }
-D_801CD1B9 = { addr = 0x801CD1B9, size = 0x1, alias = true, source = "The encounter caps Area_RollEncounterThreshold reads by the entry's fifth byte times two." }
+s_EncounterStepThresholds = { addr = 0x801CD1B8, size = 0x10, source = "Pairs of total steps and random cap per menu entry, read by Encounter_RollThreshold." }
+D_801CD1B9 = { addr = 0x801CD1B9, size = 0x1, alias = true, source = "The encounter caps Encounter_RollThreshold reads by the entry's fifth byte times two." }
 s_MenuBattlerTypes = { addr = 0x801CD1C8, size = 0x4, source = "The three battler types Party_CanSwitchLeader accepts; it rejects a party whose status byte is none of them." }
 s_RouteSlotAlternates = { addr = 0x801CD1CC, size = 0xC, source = "func_801B60DC selects the alternate route step for a slot with this flag" }
 D_801CD1D8 = { addr = 0x801CD1D8, size = 0x4C, source = "The 19 handlers func_801B2C38 and func_801BD394 run by the loaded EMIs character index." }
@@ -411,25 +411,25 @@ s_AreaProbeCellCodes = { addr = 0x801CD560, size = 0x8, source = "0xFF-terminate
 D_801CD568 = { addr = 0x801CD568, size = 0x8, source = "The two handlers func_801C57F4 dispatches by D_80143F49." }
 D_801CD570 = { addr = 0x801CD570, size = 0x14, source = "The five handlers func_801C5838 dispatches by D_80143F4A." }
 D_801CD584 = { addr = 0x801CD584, size = 0x38, source = "The 56-byte route step table at 0x801CD584; no matched code reads it." }
-s_EncounterSpawnOffsets = { addr = 0x801CD5BC, size = 0x64, source = "49 s8 x, y pairs around the party that Area_PlaceEncounterEnemies searches for a spawn position." }
+s_EncounterSpawnOffsets = { addr = 0x801CD5BC, size = 0x64, source = "49 s8 x, y pairs around the party that Encounter_PlaceEnemies searches for a spawn position." }
 D_801CD5BD = { addr = 0x801CD5BD, alias = true, source = "s_EncounterSpawnOffsets +0x1, the y half of the first GameDelta pair (#379)" }
-s_EncounterEnemyOffsets = { addr = 0x801CD620, source = "Area_PlaceEncounterEnemies places each encounter enemy at its slot offset from the formation origin, rotated by facing", size = 0x120 }
-s_EncounterOriginNudges = { addr = 0x801CD740, source = "Area_PlaceEncounterParty tries each one-cell nudge of the formation origin until the cell is walkable", size = 0x30 }
-s_EncounterSpawnChances = { addr = 0x801CD770, size = 0x8, source = "Chance per slot; Area_RollEncounterEnemies keeps an entity when its random roll is within the entry." }
-D_801CD778 = { addr = 0x801CD778, size = 0x14, source = "The five encounter camera offsets Area_SetEncounterCamera adds to the origin, one per scroll direction." }
+s_EncounterEnemyOffsets = { addr = 0x801CD620, source = "Encounter_PlaceEnemies places each encounter enemy at its slot offset from the formation origin, rotated by facing", size = 0x120 }
+s_EncounterOriginNudges = { addr = 0x801CD740, source = "Encounter_PlaceParty tries each one-cell nudge of the formation origin until the cell is walkable", size = 0x30 }
+s_EncounterSpawnChances = { addr = 0x801CD770, size = 0x8, source = "Chance per slot; Encounter_RollEnemies keeps an entity when its random roll is within the entry." }
+D_801CD778 = { addr = 0x801CD778, size = 0x14, source = "The five encounter camera offsets Camera_SetEncounter adds to the origin, one per scroll direction." }
 D_801CD77A = { addr = 0x801CD77A, size = 0x1, alias = true, source = "View of a record member; the row names the address the link reads, not a second object." }
 s_BattleModeRecords = { addr = 0x801CD78C, size = 0xE0, source = "Four bytes per battle mode: the first is the battle options byte, and the seed is read by Battle_StartScripted and func_801BFE34." }
 D_801CD78D = { addr = 0x801CD78D, size = 0x1, alias = true, source = "A column of s_BattleModeRecords: func_801BFE34 reads every fourth byte as the work mode." }
 D_801CD78F = { addr = 0x801CD78F, size = 0x1, alias = true, source = "A column of s_BattleModeRecords: Battle_LoadBattleArchive reads every fourth byte as a g_BossArchiveSlots index." }
 g_BossArchiveSlots = { addr = 0x801CD86C, size = 0x54, source = "The 42 archive slots Battle_LoadBattleArchive selects through g_Battle.encounter." }
-D_801CD8C0 = { addr = 0x801CD8C0, size = 0x4, source = "The number of enemies Area_BuildEncounter rolled for the current battle; Area_PlaceEncounterEnemies spaces that many." }
-D_801CD8C4 = { addr = 0x801CD8C4, size = 0x4, source = "The index of the next enemy slot Area_PlaceEncounterEnemies fills." }
-D_801CD8C8 = { addr = 0x801CD8C8, size = 0x4, source = "The scroll direction of the current battle, which Area_BuildEncounter stores in g_Battle.scroll_dir." }
-D_801CD8CC = { addr = 0x801CD8CC, size = 0x4, source = "The encounter table row Area_BuildEncounter rolled: ENCOUNTER_TABLE_BASE plus the pick times nine." }
-D_801CD8D0 = { addr = 0x801CD8D0, size = 0x74, source = "The task block Area_BuildEncounter passes to TASK_SET." }
-D_801CD944 = { addr = 0x801CD944, size = 0xC, source = "The three party slot records (key and active) Area_PlaceEncounterParty sorts and Area_PlaceEncounterEnemies fills." }
-s_PartySlotOrder = { addr = 0x801CD950, size = 0x4, source = "Order Area_PlaceEncounterParty uses to shuffle the three party slots." }
-D_801CD954 = { addr = 0x801CD954, size = 0x4, source = "The average height Area_SetEncounterCamera computes for the encounter camera." }
+D_801CD8C0 = { addr = 0x801CD8C0, size = 0x4, source = "The number of enemies Encounter_Build rolled for the current battle; Encounter_PlaceEnemies spaces that many." }
+D_801CD8C4 = { addr = 0x801CD8C4, size = 0x4, source = "The index of the next enemy slot Encounter_PlaceEnemies fills." }
+D_801CD8C8 = { addr = 0x801CD8C8, size = 0x4, source = "The scroll direction of the current battle, which Encounter_Build stores in g_Battle.scroll_dir." }
+D_801CD8CC = { addr = 0x801CD8CC, size = 0x4, source = "The encounter table row Encounter_Build rolled: ENCOUNTER_TABLE_BASE plus the pick times nine." }
+D_801CD8D0 = { addr = 0x801CD8D0, size = 0x74, source = "The task block Encounter_Build passes to TASK_SET." }
+D_801CD944 = { addr = 0x801CD944, size = 0xC, source = "The three party slot records (key and active) Encounter_PlaceParty sorts and Encounter_PlaceEnemies fills." }
+s_PartySlotOrder = { addr = 0x801CD950, size = 0x4, source = "Order Encounter_PlaceParty uses to shuffle the three party slots." }
+D_801CD954 = { addr = 0x801CD954, size = 0x4, source = "The average height Camera_SetEncounter computes for the encounter camera." }
 Shop_DispatchStep = { addr = 0x801D0EA0, type = "func", source = "Runs the shop step handler selected by the menu step byte g_MenuStep.step from D_801E5144." }
 Menu_DispatchStep = { addr = 0x801D1740, type = "func", source = "Runs the menu step handler selected by the menu step byte g_MenuStep.step from D_801EC35C." }
 Fishing_ActorRun = { addr = 0x801D2978, type = "func", source = "Runs the fishing actor's init and update states." }

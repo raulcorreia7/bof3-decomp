@@ -84,7 +84,7 @@ segments:
       - [0x1A8, .rodata, func_801A7E54]
       - [0x1D8, .rodata, ../../state/scene/Scene_RunInn]
       - [0x238, .rodata, func_801A8728]
-      - [0x4C0, .rodata, ../../actor/ops/Actor_RunFlowOps]
+      - [0x4C0, .rodata, ../../actor/ops/Script_RunFlowOps]
   # Placement: .data resumes after another section in the retail bytes; one segment would group both .data runs.
   - name: data_9
     type: code
@@ -94,7 +94,7 @@ segments:
     section_order: [.data, .rodata]
     subsegments:
       - [0x4FC, .data, D_80195CFC]
-      - [0x500, .rodata, ../../actor/ops/Actor_RunSoundOps]
+      - [0x500, .rodata, ../../actor/ops/Script_RunSoundOps]
   # Placement: .data resumes after another section in the retail bytes; one segment would group both .data runs.
   - name: data_10
     type: code
@@ -104,10 +104,10 @@ segments:
     section_order: [.data, .rodata]
     subsegments:
       - [0x53C, .data, D_80195D3C]
-      - [0x540, .rodata, ../../actor/ops/Actor_RunControlOps]
-      - [0x580, .rodata, ../../actor/ops/Actor_RunMotionOps]
-      - [0x5C0, .rodata, ../../actor/ops/Actor_RunWaitOps]
-      - [0x600, .rodata, ../../actor/ops/Actor_RunAppearanceOps]
+      - [0x540, .rodata, ../../actor/ops/Script_RunControlOps]
+      - [0x580, .rodata, ../../actor/ops/Script_RunMotionOps]
+      - [0x5C0, .rodata, ../../actor/ops/Script_RunWaitOps]
+      - [0x600, .rodata, ../../actor/ops/Script_RunAppearanceOps]
   # Placement: .data resumes after another section in the retail bytes; one segment would group both .data runs.
   - name: data_11
     type: code
@@ -117,7 +117,7 @@ segments:
     section_order: [.data, .rodata]
     subsegments:
       - [0x63C, .data, D_80195E3C]
-      - [0x640, .rodata, ../../actor/ops/Actor_RunStageOps]
+      - [0x640, .rodata, ../../actor/ops/Script_RunStageOps]
   # Placement: .data resumes after another section in the retail bytes; one segment would group both .data runs.
   - name: data_12
     type: code
@@ -127,8 +127,8 @@ segments:
     section_order: [.data, .rodata]
     subsegments:
       - [0x674, .data, D_80195E74]
-      - [0x678, .rodata, ../../actor/ops/Actor_RunSpawnOps]
-      - [0x6B8, .rodata, ../../actor/ops/Actor_RunFaceOps]
+      - [0x678, .rodata, ../../actor/ops/Script_RunSpawnOps]
+      - [0x6B8, .rodata, ../../actor/ops/Script_RunFaceOps]
   # Placement: .data resumes after another section in the retail bytes; one segment would group both .data runs.
   - name: data_13
     type: code
@@ -392,7 +392,7 @@ segments:
       - [0xAAE8, c, func_801A02E8]
       - [0xAB48, c, func_801A0348]
       - [0xAB80, c, func_801A0380]
-      - [0xAC90, c, ../../field/encounter/Area_FindEncounterZoneOf]
+      - [0xAC90, c, ../../field/encounter/Encounter_FindZoneOf]
       - [0xAD14, c, func_801A0514]
       - [0xAE1C, c, func_801A061C]
       - [0xAED8, c, ../../actor/task/Actor_RunInteractions]
@@ -409,7 +409,7 @@ segments:
       - [0xC3C0, c, func_801A1BC0]
       - [0xC45C, c, func_801A1C5C]
       - [0xC6D8, c, func_801A1ED8]
-      - [0xC8F8, c, ../../field/collision/Area_IsCellBlocked]
+      - [0xC8F8, c, ../../field/collision/Collision_IsCellBlocked]
       - [0xC9EC, c, func_801A21EC]
       - [0xCA3C, c, func_801A223C]
       - [0xCA5C, c, func_801A225C]
@@ -477,7 +477,7 @@ segments:
       - [0x1202C, c, ../../state/mode/Game_UpdateScenario]
       - [0x12078, c, ../../state/mode/Game_DispatchScenarioRecord]
       - [0x120F8, c, ../../state/scene/Scene_RequestChapterAdvance]
-      - [0x12114, c, ../../field/collision/Area_IsStepBlocked]
+      - [0x12114, c, ../../field/collision/Collision_IsStepBlocked]
       - [0x121A4, c, func_801A79A4]
       - [0x12234, c, ../../state/mode/Game_CallScenario]
       - [0x122D8, c, func_801A7AD8]
@@ -498,16 +498,16 @@ segments:
       - [0x13298, c, func_801A8A98]
       - [0x13384, c, func_801A8B84]
       - [0x134B4, c, ../../state/mode/Game_CallArea]
-      - [0x13538, c, ../../actor/script/Actor_RunScript]
-      - [0x13794, c, ../../actor/ops/Actor_RunFlowOps]
-      - [0x13EE4, c, ../../actor/ops/Actor_RunSoundOps]
-      - [0x14144, c, ../../actor/ops/Actor_RunControlOps]
-      - [0x145E8, c, ../../actor/ops/Actor_RunMotionOps]
-      - [0x14C70, c, ../../actor/ops/Actor_RunWaitOps]
-      - [0x15300, c, ../../actor/ops/Actor_RunAppearanceOps]
-      - [0x15C58, c, ../../actor/ops/Actor_RunStageOps]
-      - [0x160B0, c, ../../actor/ops/Actor_RunSpawnOps]
-      - [0x16224, c, ../../actor/ops/Actor_RunFaceOps]
+      - [0x13538, c, ../../actor/script/Script_Run]
+      - [0x13794, c, ../../actor/ops/Script_RunFlowOps]
+      - [0x13EE4, c, ../../actor/ops/Script_RunSoundOps]
+      - [0x14144, c, ../../actor/ops/Script_RunControlOps]
+      - [0x145E8, c, ../../actor/ops/Script_RunMotionOps]
+      - [0x14C70, c, ../../actor/ops/Script_RunWaitOps]
+      - [0x15300, c, ../../actor/ops/Script_RunAppearanceOps]
+      - [0x15C58, c, ../../actor/ops/Script_RunStageOps]
+      - [0x160B0, c, ../../actor/ops/Script_RunSpawnOps]
+      - [0x16224, c, ../../actor/ops/Script_RunFaceOps]
       - [0x163A8, c, ../../field/map/Area_MoveActorRoute]
       - [0x16568, c, func_801ABD68]
       - [0x166E0, c, func_801ABEE0]
@@ -516,7 +516,7 @@ segments:
       - [0x169DC, c, func_801AC1DC]
       - [0x16B3C, c, func_801AC33C]
       - [0x16F68, c, func_801AC768]
-      - [0x170F0, c, ../../actor/script/Actor_FindScriptLabel]
+      - [0x170F0, c, ../../actor/script/Script_FindLabel]
       - [0x171D0, c, func_801AC9D0]
       - [0x17214, c, func_801ACA14]
       - [0x172C0, c, func_801ACAC0]
@@ -564,8 +564,8 @@ segments:
       - [0x1A130, c, ../../ui/text/UI_DrawAbilityRow]
       - [0x1A21C, c, ../../ui/text/UI_DrawScrollbar]
       - [0x1A510, c, func_801AFD10]
-      - [0x1A618, c, ../../field/camera/Area_SetCameraMatrix]
-      - [0x1A704, c, ../../field/camera/Area_ProjectPoint]
+      - [0x1A618, c, ../../field/camera/Camera_SetMatrix]
+      - [0x1A704, c, ../../field/camera/Camera_ProjectPoint]
       - [0x1A764, c, ../../sys/math/MATH_SetIdentity]
       - [0x1A790, c, func_801AFF90]
       - [0x1A7D8, c, ../../state/mode/Game_ProjectWorldPoint]
@@ -621,9 +621,9 @@ segments:
       - [0x1DF68, c, func_801B3768]
       - [0x1E23C, c, func_801B3A3C]
       - [0x1E3FC, c, func_801B3BFC]
-      - [0x1E43C, c, ../../field/encounter/Area_FindEncounterZone]
-      - [0x1E4CC, c, ../../field/encounter/Area_RollEncounterThreshold]
-      - [0x1E6B0, c, ../../field/encounter/Area_CanStartEncounter]
+      - [0x1E43C, c, ../../field/encounter/Encounter_FindZone]
+      - [0x1E4CC, c, ../../field/encounter/Encounter_RollThreshold]
+      - [0x1E6B0, c, ../../field/encounter/Encounter_CanStart]
       - [0x1E950, c, func_801B4150]
       - [0x1EBD0, c, func_801B43D0]
       - [0x1EC94, c, func_801B4494]
@@ -720,7 +720,7 @@ segments:
       - [0x25F60, c, func_801BB760]
       - [0x25FB0, c, func_801BB7B0]
       - [0x2601C, c, func_801BB81C]
-      - [0x2606C, c, ../../field/map/Area_IsStepTooHigh]
+      - [0x2606C, c, ../../field/map/Collision_IsStepTooHigh]
       - [0x260E8, c, ../../actor/motion/Actor_SnapFacing]
       - [0x26134, c, func_801BB934]
       - [0x261B4, c, func_801BB9B4]
@@ -849,14 +849,14 @@ segments:
       - [0x30568, c, func_801C5D68]
       - [0x305FC, c, ../../field/map/Area_SetFacingOffsetX]
       - [0x3081C, c, ../../field/map/Area_StartScrollRoute]
-      - [0x308E0, c, ../../field/encounter/Area_BuildEncounter]
-      - [0x30BB0, c, ../../field/encounter/Area_PlaceEncounterParty]
+      - [0x308E0, c, ../../field/encounter/Encounter_Build]
+      - [0x30BB0, c, ../../field/encounter/Encounter_PlaceParty]
       - [0x30E58, c, func_801C6658]
       - [0x31088, c, func_801C6888]
       - [0x311C8, c, func_801C69C8]
-      - [0x3127C, c, ../../field/encounter/Area_PickEncounter]
-      - [0x312EC, c, ../../field/encounter/Area_RollEncounterEnemies]
-      - [0x313B4, c, ../../field/encounter/Area_PlaceEncounterEnemies]
+      - [0x3127C, c, ../../field/encounter/Encounter_Pick]
+      - [0x312EC, c, ../../field/encounter/Encounter_RollEnemies]
+      - [0x313B4, c, ../../field/encounter/Encounter_PlaceEnemies]
       - [0x315CC, c, func_801C6DCC]
       - [0x316E0, c, func_801C6EE0]
       - [0x317D4, c, ../../field/map/Area_GetWidth]
@@ -872,7 +872,7 @@ segments:
     section_order: [.text, .data, .rodata, .bss]
     subsegments:
       - [0x319C4, c, func_801C71C4]
-      - [0x31A44, c, ../../field/camera/Area_SetEncounterCamera]
+      - [0x31A44, c, ../../field/camera/Camera_SetEncounter]
       - [0x31C98, c, func_801C7498]
       - [0x31D18, c, func_801C7518]
       - [0x31E08, c, func_801C7608]

@@ -8,9 +8,9 @@ MATCH void Fishing_LureHooked(void) {
     FishingState* work;
 
     if (D_8014421C < 0) {
-        Actor_RequestScript(2);
+        Script_Request(2);
     } else {
-        Actor_RequestScript(3);
+        Script_Request(3);
     }
 
     work                  = FISHING_STATE;

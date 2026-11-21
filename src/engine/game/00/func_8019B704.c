@@ -54,7 +54,7 @@ NON_MATCHING void func_8019B704(void) {
         } else if (g_Task->vy < 0) {
             g_AreaTargetCellY = (s16)(g_AreaTargetCellY - 5);
         }
-        temp                   = Area_SampleHeight(g_AreaScrollTargetX, g_AreaScrollTargetY);
+        temp                   = Collision_SampleHeight(g_AreaScrollTargetX, g_AreaScrollTargetY);
         g_AreaCameraHeightStep = 0;
         if (temp < (s16)g_AreaCameraHeight) {
             g_AreaCameraHeightStep = (s16)((temp - (s16)g_AreaCameraHeight) / 20);
@@ -62,7 +62,7 @@ NON_MATCHING void func_8019B704(void) {
         g_AreaCameraStep = 0x40;
         g_Task->timer    = 20;
     }
-    dist = Area_SampleHeight(g_Task->pos.x.fixed, g_Task->pos.y.fixed);
+    dist = Collision_SampleHeight(g_Task->pos.x.fixed, g_Task->pos.y.fixed);
     if (dist < (s16)COORD_INT(g_Task->pos.z)) {
         g_Task->gravity = -8;
     } else {
@@ -84,7 +84,7 @@ NON_MATCHING void func_8019B704(void) {
                     if ((COORD_FRAC(g_Task->pos.x) == 0) && (COORD_FRAC(g_Task->pos.y) == 0)) {
                         g_Task->option_flags = 0;
                         g_Task->unk_0A       = 0;
-                        Actor_SelectScript(0);
+                        Script_Select(0);
                         g_Task->header.mode = 5;
                     } else {
                         func_8019C124(0);

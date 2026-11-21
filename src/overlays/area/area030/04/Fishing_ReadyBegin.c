@@ -23,9 +23,9 @@ MATCH void Fishing_ReadyBegin(void) {
     func_801DDE94(mode);
 
     if (g_Game.current->chr.character_id == CHAR_ID_RYU_YOUNG) {
-        Actor_BeginScript(0xA, 2);
+        Script_Begin(0xA, 2);
     } else {
-        Actor_SelectScript(0xB);
+        Script_Select(0xB);
     }
 
     record    = (u8*)g_Task;

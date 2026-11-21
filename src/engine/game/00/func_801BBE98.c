@@ -18,7 +18,7 @@ MATCH void func_801BBE98(void) {
     work2->option_flags = 0;
 
     work2 = g_Task;
-    ret   = Area_ReadHeight(work2->pos.x.fixed, work2->pos.y.fixed);
+    ret   = Collision_ReadHeight(work2->pos.x.fixed, work2->pos.y.fixed);
 
     work                     = g_Task;
     work->tint.bytes.rgb.r   = 0;
@@ -32,7 +32,7 @@ MATCH void func_801BBE98(void) {
     g_Game.current->u.field.mode.value    = 0;
     g_Game.current->u.field.step.value    = 0;
 
-    Actor_SelectScript(g_Task->direction);
+    Script_Select(g_Task->direction);
 
     work = g_Task;
     work->header.mode++;

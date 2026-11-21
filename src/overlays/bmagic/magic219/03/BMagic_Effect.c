@@ -137,7 +137,7 @@ MATCH void func_801EF118(void) {
         g_Task->unk_29       = 4;
         g_Task->unk_2C.value = 0;
         g_Task->unk_2B       = 0;
-        Actor_SelectScript(0);
+        Script_Select(0);
         g_Task->unk_18 = ratan2(g_Task->unk_0C - g_Task->pos.x.fixed, g_Task->unk_10 - g_Task->pos.y.fixed);
         g_Task->unk_09 = 3;
         g_Task->timer  = 4;
@@ -191,7 +191,7 @@ MATCH void func_801EF530(void) {
     g_Task->unk_26    = 0;
     g_Task->unk_27    = 0x1A;
     g_Task->unk_2B    = 1;
-    Actor_SelectScript(1);
+    Script_Select(1);
     g_Task->unk_09 = 0xE;
     g_Task->timer  = 12;
     g_Task->header.step += 1;

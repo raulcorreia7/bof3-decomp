@@ -6,7 +6,7 @@
 /* func_8014AEE0 */
 void        SYS_StartLogo(void);
 /* func_8014AFC0 */
-void        SYS_UpdateKeyState(void);
+void        INPUT_UpdateKeys(void);
 /* func_8014B020 */
 void        SYS_PrepareFrame(void);
 /* func_8014B0F0 */
@@ -14,7 +14,7 @@ void        SYS_LinkOt(void);
 /* func_8014B17C */
 void        SYS_CaptureDrawTime(void);
 /* func_8014B1A4 */
-extern void SYS_InitCard(void);
+extern void SAVE_InitCard(void);
 /* func_8014B33C */
 void        SYS_ThreadStopAll(void);
 /* func_8014B3C4 */

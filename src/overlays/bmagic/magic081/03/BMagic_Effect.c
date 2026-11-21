@@ -55,7 +55,7 @@ MATCH void func_801EED44(void) {
     saved                                                               = g_Task;
     MEM_PTR(u16, AREA_PALETTE_UPLOAD_ROW(AREA_PALETTE_BATL_OVR_ROW))[0] = MEM_PTR(u16, AREA_PALETTE_ARENA_ROW(AREA_PALETTE_BATL_OVR_ROW))[0];
     g_Task                                                              = BattleEffect_GetTarget(effect);
-    Actor_SelectScript(1);
+    Script_Select(1);
     g_Task = saved;
     saved->header.mode++;
 }

@@ -10,7 +10,7 @@ MATCH void FieldAction_End(void) {
         return;
     }
     if ((work->option_flags & ACTOR_OPT_ROUTE_LOCKED) == 0) {
-        Actor_DispatchSelectorScript(work->direction);
+        Script_DispatchSelector(work->direction);
     }
     area = GAME_WORK_AREA_PTR;
     area->interaction_flags &= ~ACTOR_INTERACTION_PENDING;

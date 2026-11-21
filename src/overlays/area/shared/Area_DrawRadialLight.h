@@ -17,8 +17,8 @@ static inline void Area_DrawRadialLight(void* position, s32 radius, s32 colors, 
     flags  = colors;
 
     GFX_AddDitheredDrawMode(2u, GetTPage(TPAGE_DEPTH_4BIT, TPAGE_ABR_ADD, 0x2C0, 0x100));
-    Area_SetCameraMatrix(&camera);
-    Area_ProjectPoint(pos, &screen);
+    Camera_SetMatrix(&camera);
+    Camera_ProjectPoint(pos, &screen);
     size.vx = size.vy = origin;
     func_801AFFD8(pos, &size, &scale);
     scale.vx += g_FrameCount & 1;

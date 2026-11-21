@@ -20,13 +20,13 @@ NON_MATCHING void Area_RunSceneEvent(void) {
                 *scroll += TO_COORD(20);
                 g_AreaTileOriginX += 20;
                 *party += TO_COORD(20);
-                height         = Area_SampleHeight(g_AreaScrollTargetX, g_AreaScrollTargetY);
+                height         = Collision_SampleHeight(g_AreaScrollTargetX, g_AreaScrollTargetY);
                 g_ScrollHeight = height;
                 Area_AdvanceScroll(height);
                 Area_RefreshCellGrid();
                 focus = &D_80147A8C;
                 *focus += TO_COORD(20);
-                D_80147A96 = Area_SampleHeight(*focus, g_AreaFocusY);
+                D_80147A96 = Collision_SampleHeight(*focus, g_AreaFocusY);
             }
             if (TIMER_EXPIRED(D_801448EE_U16)) {
                 *step = 2;
@@ -50,13 +50,13 @@ NON_MATCHING void Area_RunSceneEvent(void) {
                 *scroll -= TO_COORD(20);
                 g_AreaTileOriginX -= 20;
                 *party -= TO_COORD(20);
-                height         = Area_SampleHeight(g_AreaScrollTargetX, g_AreaScrollTargetY);
+                height         = Collision_SampleHeight(g_AreaScrollTargetX, g_AreaScrollTargetY);
                 g_ScrollHeight = height;
                 Area_AdvanceScroll(height);
                 Area_RefreshCellGrid();
                 focus = &D_80147A8C;
                 *focus -= TO_COORD(20);
-                D_80147A96 = Area_SampleHeight(*focus, g_AreaFocusY);
+                D_80147A96 = Collision_SampleHeight(*focus, g_AreaFocusY);
             }
             if (TIMER_EXPIRED(D_801448EE_U16)) {
                 *step = 12;

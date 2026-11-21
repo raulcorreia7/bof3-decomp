@@ -7,7 +7,7 @@ MATCH void func_801F3FAC(void) {
     s32    i;
 
     GFX_AddDitheredDrawMode(GFX_LAYER_UI, GetTPage(TPAGE_DEPTH_4BIT, TPAGE_ABR_ADD, 0x380, 0x100));
-    Area_SetCameraMatrix(&matrix);
+    Camera_SetMatrix(&matrix);
     spin  = 0x800E48C0;
     i     = 0;
     angle = 0x800E48E4;

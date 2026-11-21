@@ -86,9 +86,9 @@ MATCH void func_801B0568(void) {
                     if ((g_Task->unk_06 == 0) || (Area_GetCellCode((tmp2 >> 0x10), (tmp10 >> 0x10)) & BYTE_MASK)) {
                         g_EncounterSteps = 0;
                         g_AreaWalkFlags &= ~(AREA_WALK_TRANSITION | 0x2000);
-                        Area_RollEncounterThreshold(0U);
+                        Encounter_RollThreshold(0U);
                     }
-                } else if (Area_CanStartEncounter() & BYTE_MASK) {
+                } else if (Encounter_CanStart() & BYTE_MASK) {
                     func_801B6418();
                     g_GameEntryPosX   = TO_COORD(25);
                     g_GameEntryPosY   = TO_COORD(25);
@@ -119,7 +119,7 @@ MATCH void func_801B0568(void) {
             return;
         case_2:
             g_Game.current->u.field.counter.unsigned_value = 3U;
-            Actor_RequestScript(g_Task->direction);
+            Script_Request(g_Task->direction);
             g_Task->header.mode = 2;
             g_Task->header.step = 4;
             tmp7                = g_Task;
@@ -136,7 +136,7 @@ MATCH void func_801B0568(void) {
         case_3:
             val0                                           = 2;
             g_Game.current->u.field.counter.unsigned_value = 2U;
-            Actor_RequestScript(g_Task->direction);
+            Script_Request(g_Task->direction);
             g_Task->header.mode                               = 2;
             g_Task->header.step                               = 5;
             g_Game.current->u.field.mode.value                = 2;
@@ -146,7 +146,7 @@ MATCH void func_801B0568(void) {
         case_5:
             val0                                           = 3;
             g_Game.current->u.field.counter.unsigned_value = 3U;
-            Actor_RequestScript(g_Task->direction);
+            Script_Request(g_Task->direction);
             g_Game.current->u.field.mode.value = 4;
             g_Task->header.mode                = 2;
             g_Task->header.step                = 3;
@@ -154,7 +154,7 @@ MATCH void func_801B0568(void) {
         case_6:
             val0                                           = 3;
             g_Game.current->u.field.counter.unsigned_value = 3U;
-            Actor_RequestScript(g_Task->direction);
+            Script_Request(g_Task->direction);
             g_Game.current->u.field.mode.value = 3;
             g_Task->header.mode                = FIELD_TASK_MODE_CLIMB;
             tmp8                               = g_Task;

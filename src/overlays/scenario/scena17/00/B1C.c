@@ -35,7 +35,7 @@ MATCH void func_801F77B4(void) {
         g_AreaCameraAngle.vx = -0x2E4;
         g_AreaCameraAngle.vz = 0x12C;
         Area_AdvanceScroll(0x300);
-        Area_UpdateCamera();
+        Camera_Update();
         func_801A0514();
         Area_DrawScene();
         rect.x = 0;
@@ -167,7 +167,7 @@ MATCH void func_801F7C6C(void) {
     s8* step;
 
     if (g_AreaCameraMoving == 0) {
-        Area_AdvanceScroll(Area_SampleHeight(g_AreaScrollTargetX, g_AreaScrollTargetY));
+        Area_AdvanceScroll(Collision_SampleHeight(g_AreaScrollTargetX, g_AreaScrollTargetY));
         step                = &g_ScenarioState.state_04;
         g_AreaScrollTargetX = TO_COORD(46);
         *step += 1;
@@ -183,9 +183,9 @@ MATCH void func_801F7D08(void) {
     s8* step;
 
     if (g_AreaCameraMoving == 0) {
-        Area_AdvanceScroll(Area_SampleHeight(g_AreaScrollTargetX, g_AreaScrollTargetY));
+        Area_AdvanceScroll(Collision_SampleHeight(g_AreaScrollTargetX, g_AreaScrollTargetY));
         g_AreaScrollTargetX    = TO_COORD(38);
-        g_AreaCameraHeightStep = ((Area_SampleHeight(g_AreaScrollTargetX, g_AreaScrollTargetY) - g_AreaCameraHeight) / 128);
+        g_AreaCameraHeightStep = ((Collision_SampleHeight(g_AreaScrollTargetX, g_AreaScrollTargetY) - g_AreaCameraHeight) / 128);
         step                   = &g_ScenarioState.state_04;
         g_AreaSceneMode        = 1;
         *step                  = *step + 1;
@@ -202,7 +202,7 @@ MATCH void func_801F7DF4(void) {
     s8* state;
 
     if (g_AreaCameraMoving == 0) {
-        Area_AdvanceScroll(Area_SampleHeight(g_AreaScrollTargetX, g_AreaScrollTargetY));
+        Area_AdvanceScroll(Collision_SampleHeight(g_AreaScrollTargetX, g_AreaScrollTargetY));
         state                  = &g_ScenarioState.state_04;
         g_AreaCameraStep       = 0x10;
         g_AreaScrollTargetX    = TO_COORD(25);
@@ -593,7 +593,7 @@ NON_MATCHING void func_801F8B10(s32 scale, s32 shade) {
     col    = shade;
     PushMatrix();
     setVector(&axis, 0, 0, 0);
-    rot.vz = -Area_SampleHeight(g_AreaScrollTargetX, g_AreaScrollTargetY) / 2;
+    rot.vz = -Collision_SampleHeight(g_AreaScrollTargetX, g_AreaScrollTargetY) / 2;
     rot.vx = (g_AreaScrollTargetX >> 9) - 0x4000;
     rot.vy = (g_AreaScrollTargetY >> 9) - 0x4000;
     RotTransMatrix(&rot, mtx, &flag);

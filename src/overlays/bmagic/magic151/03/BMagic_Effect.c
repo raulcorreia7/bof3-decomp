@@ -45,7 +45,7 @@ MATCH void func_801EEEA8(void) {
     saved_work = g_Task;
     battler    = &g_Game.members[g_Battle.active_battler];
     g_Task     = battler;
-    Actor_RequestScript((battler->facing + 0x3C) & BYTE_MASK);
+    Script_Request((battler->facing + 0x3C) & BYTE_MASK);
     g_Task = saved_work;
     saved_work->unk_03 += 1;
 }
@@ -116,7 +116,7 @@ MATCH void func_801EF138(void) {
         GFX_LoadPalette((g_Task->slot << 6) + BATTLE_ACTION_BLOCK_TABLE, g_Battle.unk_D0[9]);
         func_801DDAB4(g_Game.members[g_Battle.active_battler].chr.status);
         GFX_UploadPaletteRows();
-        Actor_RequestScript((g_Task->facing + 4) & BYTE_MASK);
+        Script_Request((g_Task->facing + 4) & BYTE_MASK);
         g_Task = saved;
         saved->unk_03 += 1;
     }
@@ -197,7 +197,7 @@ MATCH void func_801EFAAC(void) {
     g_Task->pos.x.fixed      = g_EncounterOriginX;
     y                        = g_EncounterOriginY;
     g_Task->pos.y.fixed      = y;
-    COORD_INT(g_Task->pos.z) = Area_SampleHeight(g_Task->pos.x.fixed, y);
+    COORD_INT(g_Task->pos.z) = Collision_SampleHeight(g_Task->pos.x.fixed, y);
     g_Task->param.unk_0B     = 0;
     g_Task->unk_09           = 4;
     g_Task->header.step += 1;

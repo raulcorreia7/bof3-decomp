@@ -54,7 +54,7 @@ MATCH void Battle_RebuildFormBattler(void) {
     g_Game.members[g_Task->slot].u.turn.damage_flags.value |= BATTLER_DAMAGE_FORM_EFFECT_PLAYING;
     g_BattleEffects[g_Task->slot].pos.x.fixed = g_EncounterParty[g_Task->slot].x.fixed;
     g_BattleEffects[g_Task->slot].pos.y.fixed = g_EncounterParty[g_Task->slot].y.fixed;
-    g_BattleEffects[g_Task->slot].pos.z.fixed = Area_SampleHeight(g_BattleEffects[g_Task->slot].pos.x.fixed, g_BattleEffects[g_Task->slot].pos.y.fixed) << 16;
+    g_BattleEffects[g_Task->slot].pos.z.fixed = Collision_SampleHeight(g_BattleEffects[g_Task->slot].pos.x.fixed, g_BattleEffects[g_Task->slot].pos.y.fixed) << 16;
     if (g_Game.members[g_Task->slot].chr.character_id == CHAR_ID_RYU_ADULT || g_Game.members[g_Task->slot].chr.character_id == CHAR_ID_RYU_YOUNG) {
         g_Game.members[g_Task->slot].chr.ap                    = D_801EB4C8;
         g_Game.members[g_Task->slot].chr.status                = D_801EB4CC;
@@ -72,7 +72,7 @@ MATCH void Battle_RebuildFormBattler(void) {
     g_MenuPanelTasks[g_Task->slot + 13].u.battle.ap = g_Game.members[g_Task->slot].chr.ap;
     g_MenuPanelTasks[g_Task->slot + 13].unk_0B      = g_Game.members[g_Task->slot].chr.hp * 55 / g_Game.members[g_Task->slot].chr.stats.max_hp;
     g_MenuPanelTasks[g_Task->slot + 13].unk_0C      = g_Game.members[g_Task->slot].chr.ap * 55 / g_Game.members[g_Task->slot].chr.stats.max_ap;
-    Actor_SelectScript(g_Task->facing + 4);
+    Script_Select(g_Task->facing + 4);
     GFX_LoadPalette((u8*)(BATTLE_ACTION_BLOCK_TABLE + (g_Task->slot << 6)), 0);
     func_801DDAB4(g_Game.members[g_Task->slot].chr.status);
     GFX_UploadPaletteRows();

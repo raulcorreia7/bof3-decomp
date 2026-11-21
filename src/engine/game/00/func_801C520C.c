@@ -19,16 +19,16 @@ MATCH s32 func_801C520C(void) {
     targetX = sumX;
     sumY    = FIELD(s32, route, 0x38u) + (g_FacingStepY[index] * step);
     targetY = sumY;
-    if (FIELD(s16, route, 0x3Eu) < Area_ReadHeight(sumX, sumY)) {
+    if (FIELD(s16, route, 0x3Eu) < Collision_ReadHeight(sumX, sumY)) {
         COORD_INT(g_Task->pos.z) = (s16)((u16)COORD_INT(g_Task->pos.z) + D_80181B88[g_Game.current->chr.character_id]);
     } else {
-        COORD_INT(g_Task->pos.z) = Area_ReadHeight(targetX, targetY);
+        COORD_INT(g_Task->pos.z) = Collision_ReadHeight(targetX, targetY);
         transitionId             = 0x3F;
         if (g_Task->direction == FACING_LEFT) {
             transitionId = 0x3E;
         }
         done = 1;
-        Actor_RequestScript(transitionId);
+        Script_Request(transitionId);
     }
     if ((g_Task->unk_05 == 0) && !((g_Game.flags | g_Game.walk_flags) & (GAME_FLAG_SCROLL_LOCK | AREA_WALK_ENTRY_ACTIVE))) {
         Area_AdvanceScroll(COORD_INT(g_Task->pos.z));

@@ -9,5 +9,5 @@ MATCH void func_800C1848(void) {
     ACTOR_SET_MODE(1);
     Area_SelectSceneRecord(0x153);
     g_Task->mirror = 0;
-    Actor_SelectScript(0);
+    Script_Select(0);
 }

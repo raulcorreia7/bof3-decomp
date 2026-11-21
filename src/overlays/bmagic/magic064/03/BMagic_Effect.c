@@ -25,7 +25,7 @@ MATCH void func_801EED7C(void) {
     saved   = g_Task;
     battler = &g_Game.members[g_Battle.active_battler];
     g_Task  = battler;
-    Actor_RequestScript((battler->facing + 0x38) & BYTE_MASK);
+    Script_Request((battler->facing + 0x38) & BYTE_MASK);
     g_Task = saved;
     SND_PlaySE(EMI_SE_ID(SND_BANK_COMMON, 0x00));
     g_Task->param.unk_0B = 0;
@@ -63,7 +63,7 @@ MATCH void func_801EEEA8(void) {
     g_Task->pos.z.part.integer = g_AreaCameraHeight;
     *scroll_x                  = g_Game.members[g_Battle.active_battler].pos.x.fixed;
     *scroll_y                  = g_Game.members[g_Battle.active_battler].pos.y.fixed;
-    g_AreaCameraHeight         = Area_SampleHeight(g_AreaScrollTargetX, g_AreaScrollTargetY);
+    g_AreaCameraHeight         = Collision_SampleHeight(g_AreaScrollTargetX, g_AreaScrollTargetY);
     func_801F103C();
     index                               = Battle_AllocEffect(1, 0x3A) & BYTE_MASK;
     target                              = g_Task;
@@ -184,7 +184,7 @@ MATCH void func_801EF3C8(void) {
     if (battler->unk_09 != 0x80) {
         battler->unk_09 += 2;
     } else if (EMI_IsReady()) {
-        Actor_RequestScript(g_Task->facing);
+        Script_Request(g_Task->facing);
         GFX_FreePaletteFadeTarget(&g_Game.members[g_Battle.active_battler]);
         GFX_LoadPalette((g_Task->slot << 6) + BATTLE_ACTION_BLOCK_TABLE, 0);
         func_801DDAB4(g_Game.members[g_Battle.active_battler].chr.status);
@@ -448,7 +448,7 @@ MATCH void func_801F0C38(void) {
 }
 
 MATCH void func_801F0CBC(void) {
-    Actor_RequestScript(g_Task->param.unk_0B);
+    Script_Request(g_Task->param.unk_0B);
     do {
     } while (!(Actor_StepAnimOnce() & BYTE_MASK));
     g_Task->header.step += 1;

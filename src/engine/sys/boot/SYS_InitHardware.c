@@ -24,6 +24,6 @@ MATCH void SYS_InitHardware(void) {
     SetGeomScreen(1000);
     SetGeomOffset(160, 120);
     PadInit(0);
-    SYS_InitCard();
+    SAVE_InitCard();
     ChangeClearPAD(0);
 }

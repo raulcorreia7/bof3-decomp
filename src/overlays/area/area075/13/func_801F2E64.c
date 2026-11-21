@@ -16,12 +16,12 @@ NON_MATCHING void func_801F2E64(s32 phase, s32 semi_trans) {
     Area_AddCellPrim(g_Task->pos.x.fixed, g_Task->pos.y.fixed, 1, 0xC);
 
     origin = (u16)phase << 15;
-    Area_SampleHeight(g_Task->pos.x.fixed - origin, g_Task->pos.y.fixed);
+    Collision_SampleHeight(g_Task->pos.x.fixed - origin, g_Task->pos.y.fixed);
 
     SetPolyFT4(prim);
-    Area_ProjectPoint((s32*)g_Task, (DVECTOR*)&prim->x0);
-    Area_ProjectPoint((s32*)g_Task, (DVECTOR*)((u8*)prim + 0x10));
-    Area_ProjectPoint((s32*)g_Task, (DVECTOR*)((u8*)prim + 0x18));
+    Camera_ProjectPoint((s32*)g_Task, (DVECTOR*)&prim->x0);
+    Camera_ProjectPoint((s32*)g_Task, (DVECTOR*)((u8*)prim + 0x10));
+    Camera_ProjectPoint((s32*)g_Task, (DVECTOR*)((u8*)prim + 0x18));
 
     prim->clut  = GetClut(0xD0, 0x1E3);
     prim->tpage = GetTPage(0, 1, 0, 0x2C0);

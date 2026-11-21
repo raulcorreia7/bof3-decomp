@@ -756,7 +756,7 @@ void    func_801A02E8(void);
 u8      func_801A0348(s16 map_x, s16 map_y);
 void    func_801A0380(s16 x, s16 y, u16 type);
 /* func_801A0490 */
-u8*     Area_FindEncounterZoneOf(s32 map_x, s32 map_y, s32 table_index);
+u8*     Encounter_FindZoneOf(s32 map_x, s32 map_y, s32 table_index);
 /* func_801A06D8 */
 u32     Actor_RunInteractions(void);
 void    func_801A0AE4(Actor* record);
@@ -845,7 +845,7 @@ void    func_801A6F58(u8* script);
 void    Area_SetupScrollRoute(void* packed_selector);
 /* func_801A72E8 */
 void    Area_SetEntityCallback(void* selector);
-s8      Area_IsStepBlocked(s32 handler_x, s32 handler_y);
+s8      Collision_IsStepBlocked(s32 handler_x, s32 handler_y);
 s8      func_801A79A4(s32 handler_x, s32 handler_y);
 void    func_801A7CE8(void);
 void    Menu_OpenMaster(void);
@@ -861,32 +861,32 @@ s8      func_801A8B84(s32 handler_x, s32 handler_y);
 /* func_801A8CB4 */
 s8      Game_CallArea(s32 handler_x, s32 handler_y);
 /* func_801A8D38 */
-u8      Actor_RunScript(void* sub, s32 target);
+u8      Script_Run(void* sub, s32 target);
 /* func_801A8F94 */
-u8      Actor_RunFlowOps(ScriptState* state, u8* base, s32 seed);
+u8      Script_RunFlowOps(ScriptState* state, u8* base, s32 seed);
 /* func_801A96E4 */
-void    Actor_RunSoundOps(ScriptState* state, u8* base);
+void    Script_RunSoundOps(ScriptState* state, u8* base);
 /* func_801A9944 */
-u8      Actor_RunControlOps(void* sub, s32 target, u8 value);
+u8      Script_RunControlOps(void* sub, s32 target, u8 value);
 /* func_801A9DE8 */
-u8      Actor_RunMotionOps(ScriptState* state, const u8* table, u8 value);
+u8      Script_RunMotionOps(ScriptState* state, const u8* table, u8 value);
 /* func_801AA470 */
-u8      Actor_RunWaitOps(void* sub, s32 target, u8 value);
+u8      Script_RunWaitOps(void* sub, s32 target, u8 value);
 /* func_801AAB00 */
-u8      Actor_RunAppearanceOps(void* sub, s32 target, u8 value);
+u8      Script_RunAppearanceOps(void* sub, s32 target, u8 value);
 /* func_801AB458 */
-u8      Actor_RunStageOps(ScriptState* state, const u8* table, u8 value);
+u8      Script_RunStageOps(ScriptState* state, const u8* table, u8 value);
 /* func_801AB8B0 */
-s32     Actor_RunSpawnOps(ScriptState* state, u8* table, s32 value);
+s32     Script_RunSpawnOps(ScriptState* state, u8* table, s32 value);
 /* func_801ABA24 */
-u8      Actor_RunFaceOps(void* sub, s32 target, u8 value);
+u8      Script_RunFaceOps(void* sub, s32 target, u8 value);
 void    func_801ABEE0(void);
 VECTOR* func_801ABF30(VECTOR* out, s32 sel, s32 selector_type);
 void    func_801AC0A0(s8 tuning_delta);
 bool    func_801AC33C(s32 ease_in, s32 distance);
 void    func_801AC768(ScriptState* cursor_state, s32 mode_byte, s32 value_18, s32 value_1C, s32 extra_value);
 /* func_801AC8F0 */
-u16     Actor_FindScriptLabel(ScriptState* state, u8 wanted_id, u8* base);
+u16     Script_FindLabel(ScriptState* state, u8 wanted_id, u8* base);
 void    func_801AC9D0(void);
 void    func_801ACA14(void);
 void    func_801ACAC0(void);
@@ -992,9 +992,9 @@ void  func_801B3768(void);
 void  func_801B3A3C(void);
 void  func_801B3BFC(void);
 /* func_801B3C3C */
-u8*   Area_FindEncounterZone(s32 bounds_x, s32 bounds_y);
-void  Area_RollEncounterThreshold(u32 keep_armed);
-s32   Area_CanStartEncounter(void);
+u8*   Encounter_FindZone(s32 bounds_x, s32 bounds_y);
+void  Encounter_RollThreshold(u32 keep_armed);
+s32   Encounter_CanStart(void);
 s32   func_801B4150(void);
 s32   func_801B43D0(s32 x, s32 y, s32 dir);
 u8    func_801B4494(u8 wanted_code);
@@ -1095,7 +1095,7 @@ s32   func_801BB2B8(s32 x0, s32 y0, s32 x1, s32 y1);
 bool  func_801BB6F0(s32 command);
 s32   func_801BB760(s32 x, s32 y);
 s32   func_801BB7B0(s32 selector);
-s32   Area_IsStepTooHigh(s16 from_x0, s16 from_x1, s16 from_y0, s16 from_y1, u8 probe_mode);
+s32   Collision_IsStepTooHigh(s16 from_x0, s16 from_x1, s16 from_y0, s16 from_y1, u8 probe_mode);
 /* func_801BB8E8 */
 void  Actor_SnapFacing(u8 arg_a, u8 arg_b, u8 arg_c);
 bool  func_801BB934(s32 first_index, s32 second_index, s8 route_value, s32 expected_value);
@@ -1210,16 +1210,16 @@ void  func_801C5C7C(void);
 void  func_801C5CB4(void);
 void  func_801C5D68(void);
 /* func_801C63B0 */
-bool  Area_PlaceEncounterParty(void);
+bool  Encounter_PlaceParty(void);
 bool  func_801C6658(s32 table_index, s32 table_slot, s32 entry_index, s32 selection);
 s32   func_801C6888(s32 entity_index);
 s32   func_801C69C8(s32 record_index);
 /* func_801C6A7C */
-s32   Area_PickEncounter(void);
+s32   Encounter_Pick(void);
 /* func_801C6AEC */
-s32   Area_RollEncounterEnemies(s32 candidate_id);
+s32   Encounter_RollEnemies(s32 candidate_id);
 /* func_801C6BB4 */
-bool  Area_PlaceEncounterEnemies(void);
+bool  Encounter_PlaceEnemies(void);
 bool  func_801C6DCC(void);
 bool  func_801C6EE0(s32 entry_count, s32 pos_x, s32 pos_y, s32 reach);
 /* func_801C6FD4 */
@@ -1229,7 +1229,7 @@ s16   func_801C7188(s16 value);
 s32   func_801C71AC(s32 delta);
 u16*  func_801C71C4(u16* out, s32 pos_x, s32 pos_y, s32 view_height);
 /* func_801C7244 */
-void  Area_SetEncounterCamera(s32 mode);
+void  Camera_SetEncounter(s32 mode);
 bool  func_801C7498(s32 from_x, s32 from_y, s32 to_x, s32 to_y, u8 reach, u8 other_reach);
 s32   func_801C7518(s32 pos_x, s32 pos_y, s32 reach);
 bool  func_801C7608(s16 x0, s16 y0, s16 x1, s16 y1);
@@ -1661,7 +1661,7 @@ static inline void FieldAction_Roll(s32 actor_slot) {
 
     choice = (u32)RANDOM_MASK(0xF);
     if ((g_Task->option_flags & ACTOR_OPT_ROUTE_LOCKED) == 0) {
-        Actor_DispatchSelectorScript((u8)((g_Game.members[0].facing ^ 4) & 7));
+        Script_DispatchSelector((u8)((g_Game.members[0].facing ^ 4) & 7));
     }
     g_Game.flags |= GAME_FLAG_SCRIPT_ACTIVE;
     if ((g_CurrentActor->unk_94 & 0x80) == 0) {
@@ -1704,7 +1704,7 @@ static inline void FieldAction_Roll(s32 actor_slot) {
 }
 
 /* func_801A20F8 */
-s32 Area_IsCellBlocked(s16 cell_x, s16 cell_y);
+s32 Collision_IsCellBlocked(s16 cell_x, s16 cell_y);
 
 s32 func_801B1B2C(s32 x, s32 y, s32 probe_type, s32 flags);
 
@@ -1720,6 +1720,6 @@ void func_801BB9B4(s16 probe_x, s16 probe_y);
 
 void func_801BBCCC(s16 from_x, s16 from_y, s16 to_x, s16 to_y);
 
-s32 Area_BuildEncounter(u8 work_mode, s32 work_index);
+s32 Encounter_Build(u8 work_mode, s32 work_index);
 
 #endif

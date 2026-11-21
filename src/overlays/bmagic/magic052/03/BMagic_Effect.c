@@ -94,7 +94,7 @@ MATCH void func_801EEF84(void) {
         cue = 0x102;
     }
     SND_QueueSelectionSE(cue);
-    Actor_SelectScript(5U);
+    Script_Select(5U);
     g_Task->header.step += 1;
 }
 

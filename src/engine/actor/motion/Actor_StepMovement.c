@@ -21,7 +21,7 @@ MATCH s8 Actor_StepMovement(s32 entry, s8 dir_x, s8 dir_y, s16 vz_start, s16 vz_
     COORD_INT(work->pos.z) += work->vz >> 8;
     work->unk_0A = count;
     work->vz     = speed + vz_delta;
-    height       = Area_SampleHeight(g_Task->pos.x.fixed, g_Task->pos.y.fixed);
+    height       = Collision_SampleHeight(g_Task->pos.x.fixed, g_Task->pos.y.fixed);
     if (g_Task->vz < 0 && height > COORD_INT(g_Task->pos.z)) {
         COORD_INT(g_Task->pos.z) = height;
         if (flags & 0x2) {
@@ -33,7 +33,7 @@ MATCH s8 Actor_StepMovement(s32 entry, s8 dir_x, s8 dir_y, s16 vz_start, s16 vz_
         if (g_Task->unk_06 != 6) {
             g_Task->mirror = flags & 0x1;
         }
-        Actor_RequestScript(landing_script);
+        Script_Request(landing_script);
     }
     if (g_Task->unk_0A == 0) {
         if (g_Task->param.unk_0B != 0) {

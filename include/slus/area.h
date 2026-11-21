@@ -27,7 +27,7 @@ extern void Area_AddActor(void);
 /* func_8014DD3C */
 bool        Area_SelectSceneRecord(s32 wanted_id);
 /* func_801527E4 */
-extern void Area_UpdateCamera(void);
+extern void Camera_Update(void);
 void        Area_LoadCellRowsPrev(void);
 void        Area_LoadCellRowsNext(void);
 /* func_80153DE8 */
@@ -35,20 +35,20 @@ void        Area_InitMapRenderer(void);
 /* func_80154698 */
 extern void Area_RefreshCellGrid(void);
 /* func_8015477C */
-s16         Area_SampleHeight(s32 x, s32 y);
-/* Area_GetHeight */
+s16         Collision_SampleHeight(s32 x, s32 y);
+/* Collision_GetHeight */
 /* func_80154ABC */
-s32         Area_GetHeight(s32 x, s32 y, u8 mode);
+s32         Collision_GetHeight(s32 x, s32 y, u8 mode);
 /* func_80154ED0 */
-extern void Area_EnableHeightOffset(void);
+extern void Collision_EnableHeightOffset(void);
 /* func_80154F28 */
-s16         Area_ReadHeight(s32 x, s32 y);
+s16         Collision_ReadHeight(s32 x, s32 y);
 /* func_80154F78 */
-s16         Area_ReadStepHeight(s32 x, s32 y, u8 mode);
+s16         Collision_ReadStepHeight(s32 x, s32 y, u8 mode);
 /* func_80154FD8 */
 void        Area_AdvanceScroll(s16 height);
 /* func_80155038 */
-void        Area_StoreHeight(s32 x, s32 y, u8 value);
+void        Collision_WriteHeight(s32 x, s32 y, u8 value);
 /* func_8015507C */
 s32         Area_SetCellPalette(s32 x, s32 y);
 /* func_80155218 */
@@ -97,13 +97,13 @@ void        Area_IndexCells(void);
 /* func_8015A758 */
 void        Area_UpdateParty(void);
 /* func_8015BC14 */
-u8          Area_StepCameraX(s16 target, s8 step);
+u8          Camera_StepX(s16 target, s8 step);
 /* func_8015BD14 */
-u8          Area_StepCameraY(s16 target, s8 step);
+u8          Camera_StepY(s16 target, s8 step);
 /* func_8015BE10 */
-u8          Area_StepCameraZ(s16 target, s8 step);
+u8          Camera_StepZ(s16 target, s8 step);
 /* func_8015BEA0 */
-bool        Area_StepCameraAngle(s16 degrees, s8 duration);
+bool        Camera_StepAngle(s16 degrees, s8 duration);
 /* func_80166CB0 */
 s32         Area_GetCellCode(s32 x, s32 y);
 /* func_80167344 */
@@ -111,7 +111,7 @@ void        Area_DispatchScene(void);
 /* func_801673AC */
 void        Area_InitScene(void);
 /* func_80167848 */
-void        Area_SyncScrollHeight(void);
+void        Collision_SyncScrollHeight(void);
 /* func_800C3254 (boss055), func_8014CE48 (slus), func_801F3DCC (area198) */
 extern s32  Area_RoundSpriteCoordinate(s32 pair, s32 step);
 /* func_80167800 (slus), func_801BC3B8 (game) */

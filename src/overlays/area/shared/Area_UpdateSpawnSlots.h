@@ -8,7 +8,7 @@ MATCH s32 Area_UpdateSpawnSlots(void) {
     u8             life;
 
     active = 0;
-    Area_SetCameraMatrix(&camera);
+    Camera_SetMatrix(&camera);
     slot = MEM_PTR(AreaSpawnSlot, AREA_WORK);
     for (i = 0; i < AREA_SPAWN_SLOT_COUNT; i++) {
         if (slot->active != 0) {

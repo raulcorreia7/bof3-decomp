@@ -6,7 +6,7 @@ MATCH void func_801B26E0(void) {
 
     g_Task->timer -= 1;
     g_Task->direction = (g_Task->direction + 1) & 0x7;
-    Actor_SelectScript(g_Task->direction);
+    Script_Select(g_Task->direction);
     i     = 1;
     level = g_Task->timer;
     if (i < g_PartySize) {

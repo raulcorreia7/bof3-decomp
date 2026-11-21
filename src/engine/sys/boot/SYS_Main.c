@@ -21,7 +21,7 @@ MATCH void SYS_Main(void) {
         GFX_UploadPalette();
         GFX_UpdateTransferQueue();
         DrawOTag((u_long*)(g_GfxCurrentBuffer + 0x8C));
-        SYS_UpdateKeyState();
+        INPUT_UpdateKeys();
         SND_UpdateVoiceStatus();
 
         g_GfxBufferIndex ^= 1;

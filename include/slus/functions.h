@@ -30,7 +30,7 @@ void         Actor_ProjectForDraw(void);
 /* func_8015B410 */
 void         Actor_BuildTransformMatrix(void* matrix);
 /* func_8015B4B0 */
-void         Area_ApplyCameraMatrix(void* matrix);
+void         Camera_ApplyMatrix(void* matrix);
 /* func_8015C058 */
 void         Game_ClearScriptActive(void);
 /* func_8015C088; int with no value returned (see its definition) */
