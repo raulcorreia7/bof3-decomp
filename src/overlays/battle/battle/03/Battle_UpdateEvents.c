@@ -12,7 +12,7 @@ MATCH void Battle_UpdateEvents(void) {
     g_Battle.outcome.event_flags = 0u;
     for (group = 0u; group < 2u; group++) {
         for (event_slot = 0; event_slot < 8; event_slot++) {
-            slot       = (BattleEventSlot*)&g_BattleEventSlots[event_slot * 12];
+            slot       = &g_BattleEventSlots[event_slot];
             D_801EB4DC = slot;
             if ((slot->active != 0u) && (slot->group == group) && ((slot->event_type & g_Battle.outcome.event_flags) == 0u)) {
                 sp                 = SPAD(0u);

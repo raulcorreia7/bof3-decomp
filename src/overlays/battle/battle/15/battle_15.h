@@ -516,7 +516,7 @@ extern u8                        D_80148656;
 /* Proven game-RAM base for battle state (0x80140000). func_800A4458 already
  * references it through a local extern of this exact type. */
 /* Handle ring slot array: one u32 per 8-byte record (func_800A60DC writes
- * D_801EB5B4 + ((D_801EC328 - 1) & 0xF) * 8). */
+ * g_BattleMessages[(D_801EC328 - 1) & 0xF].text). */
 extern volatile u8               D_80150000[];
 extern u8*                       D_801C893C[];
 extern u8*                       D_801C8950[];

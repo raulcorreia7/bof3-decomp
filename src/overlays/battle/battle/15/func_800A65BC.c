@@ -12,10 +12,10 @@ MATCH void func_800A65BC(void) {
     u16* pad_state;
     u8*  state;
 
-    D_801EB5B4[((D_801EC328 - 1) & 0xF) * 2] = Message_GetText(0x60);
-    pad_state                                = &g_PadStates[0].pressed;
-    input                                    = INPUT_REPEATED(*pad_state, (PADLup | PADLdown | PADL1 | PADR1));
-    pad                                      = *pad_state;
+    g_BattleMessages[((D_801EC328 - 1) & 0xF)].text = Message_GetText(0x60);
+    pad_state                                       = &g_PadStates[0].pressed;
+    input                                           = INPUT_REPEATED(*pad_state, (PADLup | PADLdown | PADL1 | PADR1));
+    pad                                             = *pad_state;
     if (pad & g_InputMasks[BATTLE_INPUT_CANCEL]) {
         SND_PlaySE(EMI_SE_ID(SND_BANK_COMMON, 6));
         state = (u8*)&g_Battle.ui_mode;

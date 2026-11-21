@@ -30,11 +30,11 @@ NON_MATCHING void Battle_SelectEquipItem(void) {
     if (D_8014862E == 0) {
         resource = 0x30;
     }
-    resource_id                                                = Message_GetText(resource);
-    D_801EB5B4[((D_801EC328 - 1) & BATTLE_RING_SLOT_MASK) * 2] = resource_id;
-    pad_state                                                  = &g_PadStates[0].pressed;
-    pad                                                        = INPUT_REPEATED(*pad_state, (PADLup | PADLdown));
-    keys                                                       = *pad_state;
+    resource_id                                                       = Message_GetText(resource);
+    g_BattleMessages[((D_801EC328 - 1) & BATTLE_RING_SLOT_MASK)].text = resource_id;
+    pad_state                                                         = &g_PadStates[0].pressed;
+    pad                                                               = INPUT_REPEATED(*pad_state, (PADLup | PADLdown));
+    keys                                                              = *pad_state;
     if (keys & g_InputMasks[BATTLE_INPUT_CANCEL]) {
         SND_PlaySE(EMI_SE_ID(SND_BANK_COMMON, 6));
         g_BattlePanelMode   = 1;

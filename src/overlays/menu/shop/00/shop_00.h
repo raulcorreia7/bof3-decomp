@@ -105,8 +105,6 @@ enum {
 extern u8          g_SaveBuffer[];
 extern u8          D_80143BB4;
 extern u16         D_80144948;
-extern u8          D_80148331;
-extern u8          D_80148332;
 extern s16         D_80148340;
 extern u8          D_80148355;
 extern u8          D_8014835F;
