@@ -14,7 +14,6 @@
 
 extern u8  D_80144ED0[];
 /* The per-cell byte-code table the map bundle publishes. */
-extern u8* g_AreaCellCodes;
 /* The area camera position words the route tests. */
 extern s32 D_80145EC4;
 extern s32 D_80145EC8;

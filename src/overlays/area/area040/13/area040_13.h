@@ -15,8 +15,6 @@
 
 /* The game-overlay state bytes the cancel path resets. */
 
-/* D_80143F06 */
-extern u8 g_GameLastCellType;
 extern u8 D_80144EA8[];
 extern u8 D_80144EA9;
 extern s8 D_80181B00[];
