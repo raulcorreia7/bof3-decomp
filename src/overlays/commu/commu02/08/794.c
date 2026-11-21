@@ -160,13 +160,12 @@ MATCH void func_801D1938(void) {
     }
 }
 
-#ifdef NON_MATCHING
-NON_MATCHING void func_801D1A50(void) {
+/* Edits the four-slot casino bet row: moves, confirms and cancels. */
+MATCH void func_801D1A50(void) {
     u16* input;
     u16  repeated;
     s32  slot;
-
-    FAKE_STACK_PADS(u8, 1); /* FAKE: retail reserves 8 unused stack bytes. */
+    s8   scnt;
 
     input    = &g_PadStates[0].pressed;
     repeated = INPUT_GetRepeatedButtons(*input & 0xA000);
@@ -204,18 +203,20 @@ NON_MATCHING void func_801D1A50(void) {
             }
         }
     } else if (*input & g_InputMasks[MENU_INPUT_CANCEL]) {
-        if (LOB(D_801DB0B4) != 0) {
+        if (LOB(D_801DB0B4) == 0) {
+        } else {
             SND_PlaySE(0x106);
-            D_801DB0B4--;
-            if ((s8)D_801DB0B4 == 0 && D_801DB0B8 == 2) {
+            scnt       = LOBU(D_801DB0B4) - 1;
+            D_801DB0B4 = scnt;
+            if (scnt == 0 && D_801DB0B8 == 2) {
                 D_801DB0B8 = 0;
             }
         }
     }
 
-    if ((s8)D_801DB0B4 <= 0) {
+    if (LOB(D_801DB0B4) <= 0) {
         func_801D2908(0x58, 0x44, 2);
-    } else if ((s8)D_801DB0B4 >= 8) {
+    } else if (LOB(D_801DB0B4) >= 8) {
         func_801D2908(0x58, 0x44, 3);
     } else {
         func_801D2908(0x58, 0x44, 0xFF);
@@ -228,12 +229,9 @@ NON_MATCHING void func_801D1A50(void) {
     }
     Menu_DrawCursorSprite(((D_801DB0B8 * 3) << 4) + 0x5E & 0xFFFE, 0x4A, 0);
 }
-#else
-INCLUDE_ASM(func_801D1A50);
-#endif
 
-#ifdef NON_MATCHING
-NON_MATCHING void func_801D1D68(void) {
+/* Slides the casino card row up and flips the step after four frames. */
+MATCH void func_801D1D68(void) {
     s32 i;
     u8  cnt;
 
@@ -244,7 +242,7 @@ NON_MATCHING void func_801D1D68(void) {
     i          = (s8)D_801DB0B4 + 1;
     D_801DB0C4 = cnt;
     for (; i < 9; i++) {
-        func_801D2CF8((i * 0x200000 + 0x100000) >> 16, D_801DB0C4 * 40 + 0x6C, 0xFF);
+        func_801D2CF8(((i * 2 + 1) << 20) >> 16, D_801DB0C4 * 40 + 0x6C, 0xFF);
     }
     func_801D2908(0x58, 0x44 - D_801DB0C4 * 40, 2);
     if (D_801DB0C4 == 4) {
@@ -253,9 +251,6 @@ NON_MATCHING void func_801D1D68(void) {
         D_801F294D += 1;
     }
 }
-#else
-INCLUDE_ASM(func_801D1D68);
-#endif
 
 MATCH void func_801D1E98(void) {
     s32 idx;
