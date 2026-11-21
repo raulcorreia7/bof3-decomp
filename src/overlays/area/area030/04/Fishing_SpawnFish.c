@@ -2,7 +2,7 @@
 
 /* The type tables read through a non-const view so the base is rebuilt at
  * every access, the way retail materializes it. */
-#define TYPE_TABLE            MEM_PTR(s8, 0x801E2AD6u)
+#define FISH_TYPES            MEM_PTR(s8, 0x801E2AD6u)
 #define LIMIT_TABLE           MEM_PTR(s8, 0x801E2AD7u)
 #define COUNT_TABLE           MEM_PTR(u8, 0x801E2DF4u)
 
@@ -71,7 +71,7 @@ NON_MATCHING void Fishing_SpawnFish(void) {
                 ROW_ROLL    = clamped;
                 cur         = g_Task;
                 type_offset = FIELD(u8, cur, 0x6u) * FISHING_TYPE_STRIDE;
-                hit_value   = (TYPE_TABLE[type_offset] * ((s32)(ROW_ROLL * 0xA) / (s32)LIMIT_TABLE[type_offset])) / 10;
+                hit_value   = (FISH_TYPES[type_offset] * ((s32)(ROW_ROLL * 0xA) / (s32)LIMIT_TABLE[type_offset])) / 10;
                 ROW_VALUE   = hit_value;
                 ROW_VALUE2  = hit_value;
                 type        = FIELD(u8, cur, 0x6u);

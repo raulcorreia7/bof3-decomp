@@ -1,11 +1,11 @@
 #include "battle_03.h"
 
-MATCH u8 func_801DDF50(u16 entry_id, u32 table_type) {
+MATCH u8 func_801DDF50(u16 entry_id, u32 table_index) {
     u32* table;
     u32* entry;
     u32  id;
 
-    table = *(u32**)((char*)D_800B6178 + ((table_type & BYTE_MASK) << 2));
+    table = *(u32**)((char*)D_800B6178 + ((table_index & BYTE_MASK) << 2));
     if (table == (u32*)0) {
         /* no table for this type */
         goto no_match;
