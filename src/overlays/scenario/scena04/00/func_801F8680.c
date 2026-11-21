@@ -1,12 +1,8 @@
 #include "scena04_00.h"
 #include "area/map.h"
 
-#if BOF3_USE_ASM
-__asm__(".include \"include/match/macro.inc\"\n");
-#endif
-
-#ifdef NON_MATCHING
-NON_MATCHING void func_801F8680(void) {
+/* Runs one step of the scena04 scenario script, picked by g_ScenarioState.step_05. */
+MATCH void func_801F8680(void) {
     u8 slot;
 
     switch (g_ScenarioState.step_05) {
@@ -98,7 +94,7 @@ NON_MATCHING void func_801F8680(void) {
             if (*timer != 0x80) {
                 g_AreaCameraOffsetZ      = *timer * 9;
                 g_AreaCameraRefreshCount = 2;
-                *timer                   = *timer + 1;
+                (*timer)++;
                 break;
             }
             SND_StopSequence(0, 1);
@@ -308,6 +304,3 @@ NON_MATCHING void func_801F8680(void) {
             break;
     }
 }
-#else
-INCLUDE_ASM(func_801F8680);
-#endif
