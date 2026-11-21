@@ -48,28 +48,31 @@ INCLUDE_ASM(func_801FA844);
 #endif
 
 #ifdef NON_MATCHING
-NON_MATCHING void func_801FAFA0(s32 message, s32 frames) {
+NON_MATCHING void func_801FAFA0(s32 message, u8 frames) {
     u16  elapsed;
-    u16  limit;
+    u16   limit;
     s32  total;
+    s32  t;
     u16* cell;
 
-    cell                                     = (u16*)g_ScratchPad.cells.bytes + 1;
-    total                                    = frames * 0x1E - 1;
-    limit                                    = total;
-    elapsed                                  = (u16)(total - g_ScenarioState.timer_06);
-    *cell                                    = total;
-    g_MessageRequest                         = message;
-    *(volatile u16*)g_ScratchPad.cells.bytes = elapsed;
+    cell = (u16*)g_ScratchPad.cells.bytes + 1;
+    total = frames * 0x1E - 1;
+    *cell = total;
+    g_MessageRequest = message;
+    *(volatile u16*)g_ScratchPad.cells.bytes = total - g_ScenarioState.timer_06;
+    elapsed = total - g_ScenarioState.timer_06;
+    limit = total;
     if (elapsed < limit) {
         UI_DrawText(0x50, 0x3C, 0, TEXT_LENGTH_MAX, (MESSAGE_TABLE_TEXT(AREA_MESSAGE_TABLE, (u16)message) + 2));
-        elapsed = *(volatile u16*)g_ScratchPad.cells.bytes;
+        limit = *(volatile u16*)g_ScratchPad.cells.bytes;
+        elapsed = limit;
         if (elapsed < 0x20) {
-            GFX_CopyPaletteCapped(elapsed & 0xFF);
+            GFX_CopyPaletteCapped(limit & 0xFF);
         } else if (elapsed == 0x20) {
             Scene_RestorePalette();
         } else if (*cell - 0x20 < elapsed) {
-            GFX_CopyPaletteCapped((0x20 - (elapsed - (*cell - 0x20))) & 0xFF);
+            t = limit - (*cell - 0x20);
+            GFX_CopyPaletteCapped((0x20 - t) & 0xFF);
         }
     } else if (elapsed == limit) {
         Scene_RestorePalette();
