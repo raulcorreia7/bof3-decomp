@@ -1,8 +1,7 @@
 #include "area149_13.h"
 
-/* func_801F3460 */
-#ifdef NON_MATCHING
-NON_MATCHING void Area_RunSceneEvent(void) {
+/* Runs the lift scene: shifts the area by 20 units, then changes area. */
+MATCH void Area_RunSceneEvent(void) {
     s8* step;
     u16 height;
 
@@ -70,6 +69,3 @@ NON_MATCHING void Area_RunSceneEvent(void) {
             break;
     }
 }
-#else
-INCLUDE_ASM(Area_RunSceneEvent);
-#endif
