@@ -32,18 +32,16 @@ extern void (*D_801F5FBC[])(void* slot);
 
 /* One of the slots at AREA_WORK, 0x38 bytes each: a streak drawn between two points. */
 typedef struct AreaStreakSlot {
-    u8   active;     /* 0x00 - 0 marks a free slot */
-    u8   kind;       /* 0x01 */
-    u8   life;       /* 0x02 */
-    u8   head_shade; /* 0x03 - shade at the first point */
-    u8   tail_shade; /* 0x04 - shade at the second point */
-    u8   unk_05[3];
-    Pos3 head; /* 0x08 */
-    s32  unk_14;
-    Pos3 tail; /* 0x18 */
-    s32  unk_24;
-    s32  vel[3]; /* 0x28 */
-    s32  unk_34;
+    u8     active;     /* 0x00 - 0 marks a free slot */
+    u8     kind;       /* 0x01 */
+    u8     life;       /* 0x02 */
+    u8     head_shade; /* 0x03 - shade at the first point */
+    u8     tail_shade; /* 0x04 - shade at the second point */
+    u8     unk_05[3];
+    VECTOR head;   /* 0x08 */
+    VECTOR tail;   /* 0x18 */
+    s32    vel[3]; /* 0x28 */
+    s32    unk_34;
 } AreaStreakSlot;
 
 ASSERT_SIZE(AreaStreakSlot, 0x38);

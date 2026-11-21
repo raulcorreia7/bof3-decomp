@@ -189,12 +189,12 @@ MATCH void func_801F7638(void) {
 
     g_Task->pos.z.fixed = TO_COORD(Area_SampleHeight(g_Task->pos.x.fixed, g_Task->pos.y.fixed));
     burst               = SCENA07_BURST_RECORD;
-    burst->x            = g_Task->pos.x.fixed;
+    burst->pos.vx       = g_Task->pos.x.fixed;
     y                   = g_Task->pos.y.fixed;
     D_801FDFBC          = burst;
     /* FAKE: the order lock keeps the y store after the pointer store; 33 of 38 instructions otherwise. */
-    FAKE_ORDER_LOCK(burst->y = y);
-    burst->z      = g_Task->pos.z.fixed;
+    FAKE_ORDER_LOCK(burst->pos.vy = y);
+    burst->pos.vz = g_Task->pos.z.fixed;
     burst->unk_10 = 0;
     g_Task->timer = 0;
     g_Task->vx    = 95;
@@ -224,9 +224,9 @@ MATCH void func_801F77AC(void) {
 }
 
 MATCH void func_801F7810(void) {
-    D_801FDFBC->z += 0x1000000;
+    D_801FDFBC->pos.vz += 0x1000000;
     func_801F97E0(D_801FDFBC);
-    if (D_801FDFBC->z > 0xFFFFFFF) {
+    if (D_801FDFBC->pos.vz > 0xFFFFFFF) {
         func_80196070();
     }
 }
@@ -592,9 +592,9 @@ MATCH void func_801F90F4(Scena07BurstBuffer* buffer) {
             }
             buffer->shade[0][i] = ((light & 0xF00) >> 5) + 7;
         }
-        pos[0] = buffer->x + (dir[0] << 5);
-        pos[1] = buffer->y + (dir[1] << 5);
-        pos[2] = buffer->z + (dir[2] << 13);
+        pos[0] = buffer->pos.vx + (dir[0] << 5);
+        pos[1] = buffer->pos.vy + (dir[1] << 5);
+        pos[2] = buffer->pos.vz + (dir[2] << 13);
         Area_ProjectPoint(pos, &buffer->points[0][i]);
         for (row = 1; row < 8; row++) {
             buffer->points[row][i] = buffer->points[0][i];

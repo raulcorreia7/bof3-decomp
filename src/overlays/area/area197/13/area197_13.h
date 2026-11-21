@@ -49,18 +49,15 @@ void func_801F2E74(SparkParticle* spark);
 
 /* One dropped spark: it falls and bounces like an SparkParticle. */
 typedef struct AreaDropParticle {
-    u8   active; /* 0x00 - 0 marks a free row */
-    u8   unk_01; /* 0x01 */
-    u8   life;   /* 0x02 - frames left */
-    u8   shade;  /* 0x03 */
-    s32  vx;     /* 0x04 */
-    s32  vy;     /* 0x08 */
-    s32  vz;     /* 0x0C */
-    u8   pad_10[4];
-    Pos3 pos; /* 0x14 */
-    u8   pad_20[4];
+    u8     active;   /* 0x00 - 0 marks a free row */
+    u8     unk_01;   /* 0x01 */
+    u8     life;     /* 0x02 - frames left */
+    u8     shade;    /* 0x03 */
+    VECTOR velocity; /* 0x04 */
+    VECTOR pos;      /* 0x14 */
 } AreaDropParticle;
 
+ASSERT_OFFSET(AreaDropParticle, velocity, 0x04);
 ASSERT_OFFSET(AreaDropParticle, pos, 0x14);
 ASSERT_SIZE(AreaDropParticle, 0x24);
 

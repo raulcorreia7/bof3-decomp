@@ -14,13 +14,13 @@ MATCH void func_801F6D44(void) {
     work              = g_Task;
     box               = (SceneBox*)&work->vx;
     work->vz          = TO_COORD(256);
-    box->far.z        = TO_COORD(256);
+    box->far.pos.vz   = TO_COORD(256);
     work->vx          = 5668864;
     work->vy          = 1212416;
     work->unk_1C      = 0;
     work->gravity     = TO_COORD(544);
-    box->far.x        = 5668864;
-    box->far.y        = 1212416;
+    box->far.pos.vx   = 5668864;
+    box->far.pos.vy   = 1212416;
     work->pos.x.fixed = 0x4000;
     work->pos.y.fixed = TO_COORD(544);
     func_801F747C();
@@ -36,7 +36,7 @@ MATCH void func_801F6DD4(void) {
     work     = g_Task;
     box      = (SceneBox*)&work->vx;
     fraction = (0x10 - work->timer * 2) & 0xFE;
-    box->far.x += 0x10000;
+    box->far.pos.vx += 0x10000;
     work->pos.x.fixed += 0x2000;
     work->pos.y.fixed += 0x220000;
     func_801F75BC(fraction, 0xFF);
@@ -110,38 +110,38 @@ MATCH void func_801F7084(SceneBox* box) {
     tpage = GetTPage(TPAGE_DEPTH_4BIT, TPAGE_ABR_ADD, FONT_TPAGE_X, FONT_TPAGE_Y);
     GFX_AddDitheredDrawMode(GFX_LAYER_UI, tpage);
     vertex     = D_801FA240;
-    vertex->vx = box->near.x;
-    vertex->vy = box->near.y + box->near.half_y;
-    vertex->vz = box->near.z + box->near.half_z;
+    vertex->vx = box->near.pos.vx;
+    vertex->vy = box->near.pos.vy + box->near.half_y;
+    vertex->vz = box->near.pos.vz + box->near.half_z;
     vertex++;
-    vertex->vx = box->near.x;
-    vertex->vy = box->near.y - box->near.half_y;
-    vertex->vz = box->near.z + box->near.half_z;
+    vertex->vx = box->near.pos.vx;
+    vertex->vy = box->near.pos.vy - box->near.half_y;
+    vertex->vz = box->near.pos.vz + box->near.half_z;
     vertex++;
-    vertex->vx = box->near.x;
-    vertex->vy = box->near.y + box->near.half_y;
-    vertex->vz = box->near.z;
+    vertex->vx = box->near.pos.vx;
+    vertex->vy = box->near.pos.vy + box->near.half_y;
+    vertex->vz = box->near.pos.vz;
     vertex++;
-    vertex->vx = box->near.x;
-    vertex->vy = box->near.y - box->near.half_y;
-    vertex->vz = box->near.z;
+    vertex->vx = box->near.pos.vx;
+    vertex->vy = box->near.pos.vy - box->near.half_y;
+    vertex->vz = box->near.pos.vz;
     vertex++;
-    vertex->vx = box->far.x;
-    vertex->vy = box->far.y + box->far.half_y;
-    vertex->vz = box->far.z + box->far.half_z;
+    vertex->vx = box->far.pos.vx;
+    vertex->vy = box->far.pos.vy + box->far.half_y;
+    vertex->vz = box->far.pos.vz + box->far.half_z;
     vertex++;
-    vertex->vx = box->far.x;
-    vertex->vy = box->far.y - box->far.half_y;
-    vertex->vz = box->far.z + box->far.half_z;
+    vertex->vx = box->far.pos.vx;
+    vertex->vy = box->far.pos.vy - box->far.half_y;
+    vertex->vz = box->far.pos.vz + box->far.half_z;
     vertex++;
-    vertex->vx = box->far.x;
-    vertex->vy = box->far.y + box->far.half_y;
-    vertex->vz = box->far.z;
+    vertex->vx = box->far.pos.vx;
+    vertex->vy = box->far.pos.vy + box->far.half_y;
+    vertex->vz = box->far.pos.vz;
     scratch    = &vertex->vx;
     vertex++;
-    vertex->vx = box->far.x;
-    vertex->vy = box->far.y - box->far.half_y;
-    vertex->vz = box->far.z;
+    vertex->vx = box->far.pos.vx;
+    vertex->vy = box->far.pos.vy - box->far.half_y;
+    vertex->vz = box->far.pos.vz;
     Area_SetCameraMatrix(scratch);
     func_801F732C(0, 1, 2, 3, 1, 1);
     func_801F732C(0, 1, 4, 5, 1, 0);
@@ -256,14 +256,14 @@ MATCH void func_801F77EC(void) {
     /* FAKE: retail reserves 16 bytes of unused stack. */
     FAKE_STACK_PADS(u8, 16);
 
-    work    = MEM_PTR(ScenePath, AREA_WORK + 0x1400);
-    work->x = D_80147A8C;
-    work->y = g_AreaFocusY;
-    work->z = D_80147A94 >> 8;
-    i       = 0;
+    work           = MEM_PTR(ScenePath, AREA_WORK + 0x1400);
+    work->focus.vx = D_80147A8C;
+    work->focus.vy = g_AreaFocusY;
+    work->focus.vz = D_80147A94 >> 8;
+    i              = 0;
     do {
-        work->points[i].vx = work->x + D_801FA1A4[i];
-        work->points[i].vy = work->y + D_801FA1C4[i];
+        work->points[i].vx = work->focus.vx + D_801FA1A4[i];
+        work->points[i].vy = work->focus.vy + D_801FA1C4[i];
         work->points[i].vz = (s16)Area_SampleHeight(work->points[i].vx, work->points[i].vy) << 8;
         i++;
     } while (i < ARRAY_COUNT(work->points));
@@ -287,10 +287,10 @@ MATCH void func_801F78F4(void) {
             row = (SceneParticle*)func_801F7FF8();
             if (row != NULL) {
                 *(ScenePathPoint*)row = *(ScenePathPoint*)work;
-                row->vx               = (work->points[i].vx - work->x) >> 4;
-                row->vy               = (work->points[i].vy - work->y) >> 4;
-                row->vz               = (work->points[i].vz - work->z) >> 4;
-                VectorNormal(&row->vx, &row->vx);
+                row->velocity.vx      = (work->points[i].vx - work->focus.vx) >> 4;
+                row->velocity.vy      = (work->points[i].vy - work->focus.vy) >> 4;
+                row->velocity.vz      = (work->points[i].vz - work->focus.vz) >> 4;
+                VectorNormal(&row->velocity.vx, &row->velocity.vx);
                 row->unk_24 = 0x80;
                 row->unk_20 = 0x1000;
                 row->life   = 0x80;
@@ -298,9 +298,9 @@ MATCH void func_801F78F4(void) {
             i++;
         } while (i < 8);
     }
-    work->x = D_80147A8C;
-    work->y = g_AreaFocusY;
-    work->z = D_80147A94 >> 8;
+    work->focus.vx = D_80147A8C;
+    work->focus.vy = g_AreaFocusY;
+    work->focus.vz = D_80147A94 >> 8;
     func_801F7EC0();
     if (--g_Task->vx == 0) {
         g_Task->header.mode++;
@@ -429,14 +429,14 @@ MATCH void func_801F7EC0() {
     for (i = 0; i < 128; row++, i++) {
         if (row->life != 0) {
             func_801F7CF0(row);
-            row->pos.vx += row->vx;
-            row->pos.vy += row->vy;
-            row->pos.vz += row->vz;
+            row->pos.vx += row->velocity.vx;
+            row->pos.vy += row->velocity.vy;
+            row->pos.vz += row->velocity.vz;
             height = Area_SampleHeight(row->pos.vx, row->pos.vy);
             if (row->pos.vz < height) {
-                row->pos.vz = height;
-                row->vz     = 0;
-                VectorNormal(&row->vx, &row->vx);
+                row->pos.vz      = height;
+                row->velocity.vz = 0;
+                VectorNormal(&row->velocity.vx, &row->velocity.vx);
             }
             row->unk_24--;
             row->unk_20 += 4;

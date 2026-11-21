@@ -124,7 +124,7 @@ MATCH void func_801F752C(AreaSpark* spark) {
     TILE_1* tile;
     u8      shade;
 
-    Area_ProjectPoint(&spark->pos.x, &screen);
+    Area_ProjectPoint(&spark->pos.vx, &screen);
     tile = (TILE_1*)g_GfxPrimCursor;
     SetTile1(tile);
     SetSemiTrans(tile, 0);
@@ -151,9 +151,9 @@ MATCH bool Scene_DrawSparks(void) {
     i     = 0;
     do {
         if (spark->active != 0) {
-            spark->pos.z -= spark->fall_speed << 8;
+            spark->pos.vz -= spark->fall_speed << 8;
             func_801F752C(spark);
-            if (spark->pos.z < g_Task->pos.z.fixed) {
+            if (spark->pos.vz < g_Task->pos.z.fixed) {
                 spark->active = 0;
             }
             alive = true;

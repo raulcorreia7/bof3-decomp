@@ -71,11 +71,8 @@ extern u8              D_801FDFC4;
 
 /* The record D_801FDFBC points at: a world position the burst draws around and its size. */
 typedef struct Scena07Burst {
-    s32 x;
-    s32 y;
-    s32 z;
-    s32 unk_0C;
-    u16 unk_10;
+    VECTOR pos;
+    u16    unk_10;
 } Scena07Burst;
 
 /* The burst position record the start step fills. */
@@ -88,10 +85,7 @@ void                 func_801F97E0(Scena07Burst* burst);
  * the projected screen points of eight rows, their shades, its rotation angle and the scale triple its
  * draw function reads. */
 typedef struct Scena07BurstBuffer {
-    s32     x; /* 0x000 */
-    s32     y; /* 0x004 */
-    s32     z; /* 0x008 */
-    u8      pad_00C[4];
+    VECTOR  pos;           /* 0x000 */
     DVECTOR points[8][32]; /* 0x010 */
     u8      shade[8][32];  /* 0x410 */
     u16     angle;         /* 0x510 */

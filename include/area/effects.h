@@ -10,11 +10,10 @@
 /* One of the 128 falling sparks at AREA_WORK: the walkers fall it by its speed
  * each frame and clear it below the actor's ground height. */
 typedef struct AreaSpark {
-    u8   active;     /* 0x00 - 0 marks a free spark */
-    u8   unk_01;     /* 0x01 */
-    s16  fall_speed; /* 0x02 - 16.8 fall per frame */
-    Pos3 pos;        /* 0x04 */
-    s32  unk_10;     /* 0x10 */
+    u8     active;     /* 0x00 - 0 marks a free spark */
+    u8     unk_01;     /* 0x01 */
+    s16    fall_speed; /* 0x02 - 16.8 fall per frame */
+    VECTOR pos;        /* 0x04 */
 } AreaSpark;
 
 #define AREA_SPARK_COUNT 128
@@ -51,7 +50,6 @@ ASSERT_OFFSET(AreaSpark, active, 0x00);
 ASSERT_OFFSET(AreaSpark, unk_01, 0x01);
 ASSERT_OFFSET(AreaSpark, fall_speed, 0x02);
 ASSERT_OFFSET(AreaSpark, pos, 0x04);
-ASSERT_OFFSET(AreaSpark, unk_10, 0x10);
 ASSERT_SIZE(AreaSpark, 0x14);
 
 /* One 0x14-byte emitter of the table at AREA_WORK + 0x1800: it spawns two sparks each time its timer runs out. */
@@ -141,9 +139,8 @@ typedef struct SparkParticle {
     u8     shade;  /* 0x03 - fades to black as the spark dies */
     u8     frame;  /* 0x04 - indexes the draw routine's corner table */
     u8     pad_05[3];
-    VECTOR velocity;  /* 0x08 */
-    Pos3   pos;       /* 0x18 */
-    u8     pad_24[4]; /* 0x24 */
+    VECTOR velocity; /* 0x08 */
+    VECTOR pos;      /* 0x18 */
 } SparkParticle;
 
 ASSERT_OFFSET(SparkParticle, velocity, 0x08);
