@@ -1,10 +1,11 @@
 #include "area135_14.h"
 
-#ifdef NON_MATCHING
-NON_MATCHING void func_801F49EC(void) {
+/* Steps the actor up or down toward the row from func_801F5D1C and repeats the script step until it arrives. */
+MATCH void func_801F49EC(void) {
     Actor* work;
     u8     count;
     s32    delta;
+    u32    magnitude;
     s32    y_offset;
 
     count    = func_801F5D1C();
@@ -15,7 +16,8 @@ NON_MATCHING void func_801F49EC(void) {
     delta                = g_Task->pos.y.fixed + y_offset;
     g_ScriptState->steps = ((s32)((count << 17) - delta) >> 0xF);
     if ((s8)g_ScriptState->steps < 0) {
-        g_ScriptState->steps = -g_ScriptState->steps;
+        magnitude            = (u8)g_ScriptState->steps;
+        g_ScriptState->steps = -magnitude;
         g_Task->direction ^= 4;
     }
     if (g_ScriptState->steps != 0) {
@@ -26,6 +28,3 @@ NON_MATCHING void func_801F49EC(void) {
     work->unk_04 += 1;
     g_ScriptState->cursor -= 2;
 }
-#else
-INCLUDE_ASM(func_801F49EC);
-#endif
