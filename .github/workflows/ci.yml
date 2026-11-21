@@ -102,26 +102,22 @@ jobs:
       # The compiler and tracked headers only: no SDK object is downloaded or built.
       - if: steps.changes.outputs.code == 'true'
         run: tools/setup.sh --dev --no-payloads --no-sdk
+      # clang-format, meson, ninja, ruff, pyright and shellcheck come pinned from uv.lock.
       - if: steps.changes.outputs.code == 'true'
-        run: uv tool install clang-format==23.1.5
-      - if: steps.changes.outputs.code == 'true'
-        run: uv tool install meson==1.12.1
-      - if: steps.changes.outputs.code == 'true'
-        run: uv tool install ninja==1.13.2
-      - run: uv tool install shellcheck-py==0.11.0.1
+        run: echo "$PWD/.venv/bin" >> "$GITHUB_PATH"
       - name: Compare with main
         if: steps.changes.outputs.code == 'true'
         run: |
           git fetch --no-tags origin +main:refs/remotes/origin/main
           git update-ref refs/heads/main refs/remotes/origin/main
       - name: Shell syntax
+        if: steps.changes.outputs.code == 'true'
         run: git ls-files 'tools/*.sh' 'bin/*' | xargs -n 1 sh -n
       # Warnings and errors fail; the info notes flag intended word splitting and A && B || C chains.
       - name: Shell lint
+        if: steps.changes.outputs.code == 'true'
         run: git ls-files 'tools/*.sh' | xargs shellcheck --severity=warning
-      # dprint/check above covers Markdown, TOML and JSON; DPRINT=true makes format-check skip the second run.
-      # format.sh --check also runs `ruff check` and `pyright` (tools/bof3) on tools/ (both are pinned in pyproject.toml).
-      # check-headers, check-tree, include-asm, format-check (ruff included), meson test, typeloss.
+      # dprint/check above covers Markdown, TOML and JSON; DPRINT=true makes the gate skip its second run.
       - if: steps.changes.outputs.code == 'true'
         run: meson setup build/meson
       - if: steps.changes.outputs.code == 'true'
