@@ -3,6 +3,7 @@
 
   disc.py manifest   write the manifest from a disc dump and its extracted files
   disc.py verify     check the dump, the extracted files and the code images against it
+  disc.py rebuild    build every archive from the built images, patch the disc, check it
 
 The manifest lists the version, the CUE sheet, both tracks and every ISO 9660 file with its
 size and hashes. ``tools/setup.py`` runs the same checks and names each file that differs.
@@ -12,7 +13,9 @@ from __future__ import annotations
 
 import argparse
 import json
+import os
 import re
+import shutil
 import subprocess
 import sys
 import tempfile
@@ -122,6 +125,85 @@ def verify(args: argparse.Namespace) -> int:
     return 0
 
 
+def _cli() -> str:
+    """Return the ``bof3`` command: ``BOF3_CLI``, the setup build, or the tools checkout."""
+    for found in (
+        os.environ.get("BOF3_CLI"),
+        ROOT / "build/rust/release/bof3",
+        ROOT / "tools/bof3-tools/bin/bof3",
+    ):
+        if found and shutil.which(found):
+            return str(found)
+    sys.exit("disc: no bof3 command; run tools/setup.sh or set BOF3_CLI")
+
+
+def rebuild(args: argparse.Namespace) -> int:
+    """Rebuild the disc from the built images and compare it with the manifest."""
+    from bof3.resolve import load_target_manifests
+
+    data = disc.load_manifest(ROOT)
+    found = disc.disc_set(ROOT / disc.MEDIA)
+    if found is None:
+        sys.exit("disc: no cue/bin set; the rebuild patches a copy of your disc")
+    cli = _cli()
+    out = ROOT / args.output
+    shutil.rmtree(out, ignore_errors=True)
+    built: dict[
+        str, Path
+    ] = {}  # disc id -> the built image (a copy row shares its target's)
+    for target, manifest in load_target_manifests(ROOT).items():
+        image = ROOT / "build/meson" / (target.replace("/", "+") + ".bin")
+        if not image.is_file():
+            sys.exit(f"disc: {image.relative_to(ROOT)} is missing; run meson compile")
+        built[manifest.disc_id] = image
+        built.update({copy.disc_id: image for copy in manifest.copies})
+    files = []
+    for entry in data["iso"]["files"]:
+        path = entry["path"]
+        if not path.endswith(".EMI"):
+            if path in built:
+                files.append(f"{path}={built[path]}")
+            continue
+        folder = ROOT / disc.EXTRACTED / path.removesuffix(".EMI")
+        stage = out / "stage"
+        stage.mkdir(parents=True, exist_ok=True)
+        for item in json.loads((folder / "emi.json").read_text())["entries"]:
+            source = built.get(f"{path}#{item['index']}", folder / item["name"])
+            shutil.copyfile(source, stage / item["name"])
+        shutil.copyfile(folder / "emi.json", stage / "emi.json")
+        archive = out / "emi" / path
+        archive.parent.mkdir(parents=True, exist_ok=True)
+        subprocess.run(
+            [cli, "emi", "pack", "-q", "-J", stage / "emi.json", "-o", archive, stage],
+            check=True,
+        )  # fmt: skip
+        files.append(f"{path}={archive}")
+    shutil.rmtree(out / "stage")
+    patched = out / "disc"
+    subprocess.run(
+        [cli, "assets", "import", "disc", found[0], "-o", patched]
+        + [arg for file in files for arg in ("--file", file)],
+        check=True,
+    )  # fmt: skip
+    cue = data["disc"]["cue"]
+    problems = disc.verify_tracks(data, sorted(patched.glob("*.bin")))
+    if disc.file_digest(patched / cue["name"], "sha1") != cue["sha1"]:
+        problems.append(f"{cue['name']}: SHA-1 differs")
+    extracted = out / "files"
+    subprocess.run(
+        [cli, "disc", "extract", "-i", patched / cue["name"], "-o", extracted],
+        check=True,
+    )  # fmt: skip
+    problems += disc.verify_files(data, extracted)
+    for line in problems:
+        print(f"disc: {line}")
+    if problems:
+        print(f"disc: {len(problems)} mismatch(es)")
+        return 1
+    print(f"disc: all {len(data['iso']['files'])} files and both tracks match")
+    return 0
+
+
 def main(argv: list[str] | None = None) -> int:
     """Run the verb."""
     parser = argparse.ArgumentParser(
@@ -140,6 +222,9 @@ def main(argv: list[str] | None = None) -> int:
     )
     check.add_argument("--no-images", action="store_true", help="skip the code images")
     check.set_defaults(run=verify)
+    again = sub.add_parser("rebuild", help="rebuild the disc from the built images")
+    again.add_argument("--output", default="build/disc-rebuild", help="repo-relative")
+    again.set_defaults(run=rebuild)
     args = parser.parse_args(argv)
     return args.run(args)
 
