@@ -14,7 +14,7 @@ NON_MATCHING void func_801E0BAC(void) {
 
     D_80148624 = 1;
     D_80148628 = (s16)D_801483C4;
-    D_80148340 = *(s16*)(D_801CA71E + (D_8014546C[D_801483CB] * 0x14));
+    D_80148340 = *(s16*)&g_Abilities[D_8014546C[D_801483CB]].description;
     D_8014862A = D_801483C6 + (((D_801483CB - D_801483CA) * 0xD) + 0x1A);
     pad        = INPUT_REPEATED(g_InputPressed, (PADLup | PADLdown | PADL1 | PADR1));
     old        = D_801483CB;

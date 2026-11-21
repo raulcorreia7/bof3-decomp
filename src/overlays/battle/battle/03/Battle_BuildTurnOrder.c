@@ -36,7 +36,7 @@ NON_MATCHING void Battle_BuildTurnOrder(void) {
                 D_801EB550[count].index = index;
                 D_801EB550[count].value = 0;
                 if (g_Game.members[index].u.turn.command.type == BATTLE_COMMAND_ABILITY) {
-                    ability_mode = (u8*)&D_801CA718[g_Game.members[index].u.turn.command.id][1];
+                    ability_mode = (u8*)&g_Abilities[g_Game.members[index].u.turn.command.id].type;
                     mode         = *ability_mode;
                     switch (mode) {
                         case 0:

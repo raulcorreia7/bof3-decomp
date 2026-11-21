@@ -63,7 +63,7 @@ MATCH void func_801DFCB4(void) {
                 }
                 break;
             case BATTLE_ACTION_ABILITY:
-                if (!(D_801CA718[g_Battle.action_id][0] & ABILITY_TARGET_FLAG_NO_HIT_REACT)) {
+                if (!(g_Abilities[g_Battle.action_id].targeting_flags & ABILITY_TARGET_FLAG_NO_HIT_REACT)) {
                     func_801DF34C();
                 }
                 break;

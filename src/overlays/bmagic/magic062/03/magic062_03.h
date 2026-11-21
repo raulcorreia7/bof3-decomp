@@ -18,7 +18,6 @@ void               func_801EF934(void);
 
 void      func_801F026C(void);
 /* The modifier byte of each action record (0x14-byte stride). */
-extern u8 D_801CA71B[];
 /* The disc colours by effect kind and ring: red, green and blue. */
 extern u8 D_801F0BA4[][4][3];
 extern u8 D_801F0BD4[][4][3];

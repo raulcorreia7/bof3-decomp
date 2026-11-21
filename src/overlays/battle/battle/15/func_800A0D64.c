@@ -6,7 +6,6 @@
  */
 /* FAKE: _nv weak views avoid the andi and hoist the loads out of the prologue. */
 /* FAKE: a second symbol forces the separate %hi/%lo load retail has. */
-extern u8 D_801CA71B[];
 
 MATCH void func_800A0D64(void) {
     s32         index;
@@ -15,7 +14,8 @@ MATCH void func_800A0D64(void) {
     BattleTurn* record;
 
     index                             = g_Battle.action_id;
-    base_value                        = D_801CA71B[4 * (5 * index)];
+    /* kept: the volatile table read changes the retail register schedule. */
+    base_value                        = ((Ability*)g_Abilities)[index].power;
     g_Battle.target_record->hp_change = Battle_GetActionId(g_BattleActiveBattler_nv, g_BattleTarget_nv, base_value, 0);
     /* FAKE: keeps the record store ahead of the selector read. */
     FAKE_BARRIER();

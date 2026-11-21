@@ -18,9 +18,9 @@ MATCH bool func_800AA5F4(s32 slot) {
         return 0;
     }
     if (g_CharSlot[g_Game.members[slot].chr.character_id] != 6) {
-        slot = D_800B50DC[D_801CA719[g_Battle.action->unk_02 * 0x14] >> 4];
+        slot = D_800B50DC[g_Abilities[g_Battle.action->unk_02].type >> 4];
     } else {
-        slot = D_800B50E4[D_801CA719[g_Battle.action->unk_02 * 0x14] >> 4];
+        slot = D_800B50E4[g_Abilities[g_Battle.action->unk_02].type >> 4];
     }
     return ((RANDOM_MOD(slot)) & BYTE_MASK) == 0;
 }
