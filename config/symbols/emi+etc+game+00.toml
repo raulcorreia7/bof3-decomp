@@ -93,11 +93,13 @@ Game_DispatchFadeWhite = { addr = 0x801A3594, type = "func", source = "calls the
 Game_StartFadeWhite = { addr = 0x801A35D8, type = "func", source = "Step 0 of the D_801C8434 table, followed by func_801A3648: starts a white palette fade (GFX_AllocPaletteFade 0x1F, 0x1F, 0x1F) on the running task and clears ACTOR_FLAG_HIDDEN." }
 Game_DispatchFadeBlack = { addr = 0x801A37D4, type = "func", source = "calls the fade-to-black step selected by the step byte" }
 Game_StartFadeBlack = { addr = 0x801A3818, type = "func", source = "Step 0 of the D_801C843C table, followed by func_801A386C: starts a black palette fade (GFX_AllocPaletteFade 0, 0, 0) on the running task." }
-Area_RunSetupStream = { addr = 0x801A3E50, type = "func", source = "Runs the area setup stream of an AreaLoad handler: clears the four D_80147A58 rows, runs Area_SetScenarioId over the stream and clears the unused g_Actors entries." }
+Area_RunSetupStream = { addr = 0x801A3E50, type = "func", source = "Runs the area setup stream of an AreaLoad handler: clears the four g_PartyActors rows, runs Area_SetScenarioId over the stream and clears the unused g_Actors entries." }
 Area_SetScenarioId = { addr = 0x801A3F3C, type = "func", source = "the body stores into g_ScenarioState.scenario_id" }
 Actor_SetOptionFlags = { addr = 0x801A4990, type = "func", source = "the body stores into g_Task->option_flags" }
 Actor_ResetMotion = { addr = 0x801A4AA8, type = "func", source = "Clears a spawned actor's scale, roll and animation callback state." }
 Area_SetCellCode = { addr = 0x801A4BC0, type = "func", source = "Writes the g_AreaCellCodes byte of the cell at (column, row); Area_GetCellCode reads the same index." }
+Actor_SpawnFromRecord = { addr = 0x801A4D54, type = "func", source = "Spawns an actor in the next free slot from a 17-byte scene script record (scene record, position, mode, step)." }
+Actor_SpawnPartyFromRecord = { addr = 0x801A65A0, type = "func", source = "Spawns a party member actor from a 16-byte scene script record; loads the member sprite." }
 Scene_Start = { addr = 0x801A7704, type = "func", source = "Scenario start: loads the overlay of g_ScenarioState.scenario_id, waits for its SCENA payload, then dispatches the scenario entry." }
 Scene_LoadOverlay = { addr = 0x801A7804, type = "func", source = "Streams the overlay slot 661 + scenario id and waits for the loader; Scene_Start calls it before the scenario handler runs." }
 Game_UpdateScenario = { addr = 0x801A782C, type = "func", source = "Calls entry_00 of the g_ScenarioHandlers handler table of the active scenario, then Game_UpdateScene." }
@@ -146,6 +148,8 @@ FieldAction_Fade = { addr = 0x801AD9F0, type = "func", source = "Brightens the a
 Actor_SpawnSceneActor = { addr = 0x801ADAC0, type = "func", source = "spawns the type-0x19 scene actor at the task position with its selection from func_801ADC98 and links it to the task" }
 Char_ApplyLevelUps = { addr = 0x801ADDD4, type = "func", source = "Raises the character to the level its exp reaches: adds each gained level's growth to the base stats (capped at 999), grants its abilities and rebuilds the stats." }
 UI_DrawWindow = { addr = 0x801AE3F0, type = "func", source = "Draws a window from x with a left cap and a body stretched to width, height rows tall, with the palette column of the style argument; flags 0x80 and 0x20 trim the top and the bottom." }
+UI_DrawIcon = { addr = 0x801AEA80, type = "func", source = "Draws one 8x8 icon sprite; callers pass item icon ids and ability element ids." }
+UI_DrawWindowFrame = { addr = 0x801AEBA0, type = "func", source = "Draws the four border lines of a window frame in the window style color; the header bar draws callers pass the inner rectangle." }
 UI_DrawWindowOutline = { addr = 0x801AED54, type = "func", source = "Draws the four edges and the cut corners of a rectangle through GFX_DrawLine in the colour row of g_WindowStyle; the high nibble of the flag byte picks the cut corners." }
 GFX_DrawLine = { addr = 0x801AF0F4, type = "func", source = "Queues a draw mode and one semi-transparent LINE_F2 between two points." }
 Game_ReadCommand = { addr = 0x801AF20C, type = "func", source = "comment: read the next command; every menu and battle draw reads its command stream through it" }
@@ -153,7 +157,9 @@ UI_GetSpriteRect = { addr = 0x801AF270, type = "func", source = "Returns the rec
 UI_DrawSprite = { addr = 0x801AF2A0, type = "func", source = "Appends one SPRT at x, y with the rectangle of sprite_id; bit 2 of flags picks the CLUT." }
 UI_DrawSpriteRun = { addr = 0x801AF390, type = "func", source = "Draws the (x offset, y offset, sprite id) triples of record_table from base_x, base_y through UI_DrawSprite until the id 0xFF; bit 0 of flags picks the sprite page." }
 Item_PassesTest = { addr = 0x801AF494, type = "func", source = "Tells whether an item passes the list's filter test: test 0 passes every item, 1 an item the field can use, 2 and 3 the item record flag bits, 4 an item the character can equip; the menu lists draw a failing item dimmed." }
+UI_DrawItemRow = { addr = 0x801AF800, type = "func", source = "Draws an item row: icon, name from the item record, and a count when it is two or more." }
 UI_DrawAbilityRow = { addr = 0x801AF930, type = "func", source = "Draws one row of an ability list: the element icon, the ability name from its text command stream and the cost as a two-digit number at the right, in the given text shade." }
+UI_DrawScrollbar = { addr = 0x801AFA1C, type = "func", source = "Draws a list scrollbar: a red mark per flagged row on the track and the thumb; menu list windows call it." }
 Area_SetCameraMatrix = { addr = 0x801AFE18, type = "func", source = "Sets the GTE rotation and translation from the camera angle, height and offsets, and returns out_matrix unchanged." }
 Area_ProjectPoint = { addr = 0x801AFF04, type = "func", source = "Projects the 16.16 position pos through RotTransPers and writes the result to screen_xy." }
 MATH_SetIdentity = { addr = 0x801AFF64, type = "func", source = "Writes 4096 to the three diagonal cells of a 3x3 s16 matrix and 0 to the other six." }
@@ -185,6 +191,7 @@ Actor_SnapFacing = { addr = 0x801BB8E8, type = "func", source = "Turns the actor
 Area_StepSceneTimer = { addr = 0x801BC3B8, type = "func", source = "Counts the scene timer down each frame and calls Area_UpdateIdleActor when it expires." }
 Area_UpdateIdleActor = { addr = 0x801BC400, type = "func", source = "Per-frame upkeep of the idle field actor, run when the scene timer expires: applies the regen and confusion upkeep and the cell-hit checks and, when none fires, stops the actor, sets byte 0x11C of the mode work area to 3, runs func_801BC000 and returns an actor at rest in mode 1 to step 0." }
 Party_CountOrder = { addr = 0x801BDB7C, type = "func", source = "Returns the number of leading entries of the field order (mode 0) or battle order (mode 1), three bytes each at D_80144F5A, that are not 0xFF." }
+Actor_IsInRange = { addr = 0x801BDD58, type = "func", source = "True when the point lies within reach of the actor record; Actor_FindInRange loops it over the actors." }
 Actor_FindInRange = { addr = 0x801BDE14, type = "func", source = "walks the g_Actors rows and returns the first actor the range test accepts, else -1" }
 Area_GetActorFacingStepX = { addr = 0x801BDF08, type = "func", source = "the body returns g_FacingSteps[work->direction].x" }
 Game_GetPartySize = { addr = 0x801BE0C0, type = "func", source = "the body returns g_Game.party_size" }
@@ -209,6 +216,7 @@ Party_JoinMember = { addr = 0x801C187C, type = "func", source = "Appends char_id
 Party_RemoveMember = { addr = 0x801C1ABC, type = "func", source = "Scene_RemoveGarr/Peco/Nina/Rei and scena08 pass a CHAR_ID_* to it; the body clears the id from the walking and battle orders, compacts the battler rows and shrinks g_Game.party_size" }
 Scene_RunScenario = { addr = 0x801C1DF0, type = "func", source = "indexes D_801CD4C0 by g_ScenarioState.scenario_id and calls the handler at the requested index" }
 Game_DispatchScenario = { addr = 0x801C1E3C, type = "func", source = "calls the scenario handler selected by scenario id and index" }
+Actor_SetSemiTransparent = { addr = 0x801C2438, type = "func", source = "Sets the actor semi-transparent flag and raises the semi-transparency bit of its palette; the last palette color is cleared." }
 Area_RunWalk = { addr = 0x801C24D0, type = "func", source = "Runs one frame of the field walk: the walk velocity and, unless the walk is held, the scroll update." }
 Area_SetWalkVelocity = { addr = 0x801C2538, type = "func", source = "Sets the task's walk timer and velocity from the route kind and the shared speed scale, with the step heights along the way." }
 Area_UpdateWalkScroll = { addr = 0x801C2710, type = "func", source = "Moves the area scroll with the walking actor: the camera step from the walk mode and speed scale, the scroll target from the actor's position and velocity." }
@@ -322,8 +330,8 @@ g_Abilities = { addr = 0x801CA70C, size = 0x11D0, source = "The 228 Ability reco
 g_LevelGrowth = { addr = 0x801CB8DC, size = 0x15A8, source = "The LevelGrowth records of GAME.EMI: 0x318 bytes per character, with the experience of each level at 8-byte stride." }
 D_801CCE84 = { addr = 0x801CCE84, size = 0xF8, source = "The 62 sprite UV rectangles UI_GetSpriteRect returns by sprite id, one per menu sprite." }
 D_801CCF7C = { addr = 0x801CCF7C, size = 0xD4, source = "The 53 sprite UV rectangles UI_GetSpriteRect returns by sprite id, one per battle sprite." }
-s_ItemSpriteIds = { addr = 0x801CD050, size = 0x10, source = "Sprite id indexed by the item icon; func_801AF800 passes the entry to func_801AEA80." }
-s_ItemIconIds = { addr = 0x801CD060, size = 0xC, source = "Icon id by icon index; UI_DrawAbilityRow passes the entry to func_801AEA80." }
+s_ItemSpriteIds = { addr = 0x801CD050, size = 0x10, source = "Sprite id indexed by the item icon; UI_DrawItemRow passes the entry to UI_DrawIcon." }
+s_ItemIconIds = { addr = 0x801CD060, size = 0xC, source = "Icon id by icon index; UI_DrawAbilityRow passes the entry to UI_DrawIcon." }
 s_RouteStepScratch = { addr = 0x801CD06C, size = 0x20, source = "Actor_RequestRoute splits each two-byte entry into a route step and the scratch byte at unk_2A" }
 s_EntityPlacementOffsets = { addr = 0x801CD08C, size = 0x20, source = "s8 x, y pairs that func_801B1E24 and func_801B21E8 search for an entity position." }
 D_801CD08D = { addr = 0x801CD08D, size = 0x1, alias = true, source = "The first byte of s_EntityPlacementOffsets, which func_801B1E24 and func_801B21E8 read as an array by entity index." }

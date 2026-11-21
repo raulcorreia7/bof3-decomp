@@ -16,7 +16,7 @@ typedef enum ActorScriptWait {
     ACTOR_SCRIPT_WAIT_MOVE_AND_SET_CELL_PALETTE = 0xDB, /* apply the velocity, follow the height, then set the cell palette */
     ACTOR_SCRIPT_WAIT_SET_CELL_PALETTE          = 0xDC, /* set the palette of the actor cell */
     ACTOR_SCRIPT_WAIT_CLEAR_CELL_PALETTE        = 0xDD, /* clear the palette of the actor cell */
-    ACTOR_SCRIPT_WAIT_CALL_AREA_HANDLER         = 0xDE, /* args: [index]; call the area handler */
+    ACTOR_SCRIPT_WAIT_CALL_AREA_SCRIPT          = 0xDE, /* args: [index]; call the area handler */
     ACTOR_SCRIPT_WAIT_WAIT_BATTLE               = 0xDF, /* hold while a battle request runs */
 } ActorScriptWait;
 
@@ -68,7 +68,7 @@ NON_MATCHING u8 Actor_RunWaitOps(void* sub, s32 target, u8 value) {
             return value;
         case ACTOR_SCRIPT_WAIT_SET_PARTY_SLOT_MOVE:
             index  = &D_1F800001;
-            tmp    = -(g_CurrentActor - D_80147A58) >> 3;
+            tmp    = -(g_CurrentActor - g_PartyActors) >> 3;
             *index = tmp;
             if ((u8)tmp >= 5U) {
                 *index = 4;
@@ -104,7 +104,7 @@ NON_MATCHING u8 Actor_RunWaitOps(void* sub, s32 target, u8 value) {
             return value;
         case ACTOR_SCRIPT_WAIT_TOGGLE_PARTY_SLOT:
             index  = &D_1F800001;
-            tmp    = -(g_CurrentActor - D_80147A58) >> 3;
+            tmp    = -(g_CurrentActor - g_PartyActors) >> 3;
             *index = tmp;
             if (tmp & 0x80) {
                 *index = 4;
@@ -140,7 +140,7 @@ NON_MATCHING u8 Actor_RunWaitOps(void* sub, s32 target, u8 value) {
         case ACTOR_SCRIPT_WAIT_CLEAR_CELL_PALETTE:
             Area_ClearCellPalette(COORD_INT(g_Task->pos.x), COORD_INT(g_Task->pos.y));
             return value;
-        case ACTOR_SCRIPT_WAIT_CALL_AREA_HANDLER: {
+        case ACTOR_SCRIPT_WAIT_CALL_AREA_SCRIPT: {
             void* obj = g_AreaLoads[g_GameAreaId];
             (*(void (**)())((code[FIELD(u16, sub, 0xAu) + 1] * 4) + FIELD(s32, obj, 0x3Cu)))(obj);
             value = g_Task->direction;

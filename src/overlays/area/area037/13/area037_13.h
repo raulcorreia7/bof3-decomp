@@ -9,7 +9,6 @@
 
 /* The owner is src/engine/game/00/game_00.h; that header is not visible to this
  * overlay, so keep the local declaration with the owner's volatile qualifier. */
-extern volatile u8 g_GameRequestKind;
 
 /* The cell tables the actor placement reads: the x and y byte cells and the z
  * value, indexed by the actor param byte. */

@@ -45,7 +45,8 @@ extern u8        D_80144EF0[];
 extern PartyMember* D_80146250;
 
 /* The actor row table and the per-actor 16-byte turn records. */
-extern Actor D_80147A58[];
+/* D_80147A58 */
+extern Actor g_PartyActors[];
 
 /* The work word the stage route reads. */
 extern s32          D_80147AC4;

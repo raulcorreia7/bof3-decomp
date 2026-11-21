@@ -114,7 +114,7 @@ NON_MATCHING void func_800B2C90(MenuPanelTask* task) {
         UI_DrawSprite((s16)(task->pos.x + 8), (s16)task->pos.y, 0x32, UI_SPRITE_ALT_PAGE);
         UI_DrawSprite((s16)(task->pos.x + 144), (s16)task->pos.y, 0x33, UI_SPRITE_ALT_PAGE);
     }
-    func_801AFA1C(Party_GetAbilities((u32)task->unk_0A, (u32)task->unk_0B, 1U), (u8)task->u.battle.cursor, (s16)(task->pos.x + 0x90), (s16)(task->pos.y + 0x18), 7, 0xA, 0x5C);
+    UI_DrawScrollbar(Party_GetAbilities((u32)task->unk_0A, (u32)task->unk_0B, 1U), (u8)task->u.battle.cursor, (s16)(task->pos.x + 0x90), (s16)(task->pos.y + 0x18), 7, 0xA, 0x5C);
 }
 #else
 INCLUDE_ASM(func_800B2C90);

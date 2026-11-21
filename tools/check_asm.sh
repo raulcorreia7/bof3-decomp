@@ -24,20 +24,20 @@ if [ -z "$ref" ]; then
 	ref=$(newest_base_ref)
 fi
 if [ -z "$ref" ] || ! git rev-parse --verify --quiet "$ref^{commit}" >/dev/null; then
-	echo "include-asm: cannot compare with ${1:-main}: no such ref (INCLUDE_ASM now: $now)" >&2
-	echo "include-asm: run: git fetch origin main   or pass a ref: tools/check_asm.sh <ref>" >&2
+	echo "check-asm: cannot compare with ${1:-main}: no such ref (INCLUDE_ASM now: $now)" >&2
+	echo "check-asm: run: git fetch origin main   or pass a ref: tools/check_asm.sh <ref>" >&2
 	exit 2
 fi
 base=$(git merge-base HEAD "$ref") || {
-	echo "include-asm: HEAD and $ref share no history (a shallow clone?)" >&2
-	echo "include-asm: run: git fetch --unshallow origin main" >&2
+	echo "check-asm: HEAD and $ref share no history (a shallow clone?)" >&2
+	echo "check-asm: run: git fetch --unshallow origin main" >&2
 	exit 2
 }
 previous_lines=$(git grep -F INCLUDE_ASM "$base" -- src | cut -d: -f2)
 previous=$(printf '%s\n' "$previous_lines" | grep -c .) || previous=0
 echo "INCLUDE_ASM: $now now, $previous at $(git rev-parse --short "$base") (merge base with $ref)"
 if [ "$now" -gt "$previous" ]; then
-	echo "include-asm: $((now - previous)) more than $ref; a match removes a line, never adds one" >&2
+	echo "check-asm: $((now - previous)) more than $ref; a match removes a line, never adds one" >&2
 	status=1
 fi
 # A lost match hidden by a new one elsewhere keeps the total level, so compare every image too.
@@ -57,7 +57,7 @@ over=$({
 	END {
 		for (key in seen)
 			if (count["N", key] > count["B", key]) {
-				printf "include-asm: image %s has %d INCLUDE_ASM, %d at the merge base\n", key, count["N", key], count["B", key]
+				printf "check-asm: image %s has %d INCLUDE_ASM, %d at the merge base\n", key, count["N", key], count["B", key]
 			}
 	}' | sort)
 if [ -n "$over" ]; then

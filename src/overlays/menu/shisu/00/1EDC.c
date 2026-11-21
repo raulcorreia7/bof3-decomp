@@ -247,12 +247,12 @@ MATCH void func_801D3320(MenuPanelTask* task) {
             flag  = 1;
         }
         if (i != task->unk_0A) {
-            func_801AF800((s16)(task->pos.x + 7), (s16)((u32)task->pos.y + (i * 13 + 0x1A)), shade, 0, D_801D9798[i], MEM_PTR(u8, task->item_table)[i], flag);
+            UI_DrawItemRow((s16)(task->pos.x + 7), (s16)((u32)task->pos.y + (i * 13 + 0x1A)), shade, 0, D_801D9798[i], MEM_PTR(u8, task->item_table)[i], flag);
         } else {
             if (MEM_PTR(u8, task->item_table)[i] != 0) {
-                func_801AF800((s16)(task->pos.x + 7), (s16)((u32)task->pos.y + (i * 13 + 0x1A)), 7, 0, D_801D9798[i], MEM_PTR(u8, task->item_table)[i], 1);
+                UI_DrawItemRow((s16)(task->pos.x + 7), (s16)((u32)task->pos.y + (i * 13 + 0x1A)), 7, 0, D_801D9798[i], MEM_PTR(u8, task->item_table)[i], 1);
             }
-            func_801AF800((s16)(task->pos.x + 7), (s16)(task->pos.y + i * 13 + 0x18), shade, 0, D_801D9798[i], MEM_PTR(u8, task->item_table)[i], flag);
+            UI_DrawItemRow((s16)(task->pos.x + 7), (s16)(task->pos.y + i * 13 + 0x18), shade, 0, D_801D9798[i], MEM_PTR(u8, task->item_table)[i], flag);
         }
         i++;
     } while (i < 4);
@@ -572,7 +572,7 @@ NON_MATCHING void Menu_DrawHeaderBar(s32 x, s32 y, s32 width, s32 height, u8 win
     setWH(window, 256, 256);
     SetDrawMode((DR_MODE*)g_GfxPrimCursor, 0, 1, getTPage(TPAGE_DEPTH_4BIT, TPAGE_ABR_HALF, FONT_TPAGE_X, FONT_TPAGE_Y), window);
     GFX_AddPrim(GFX_LAYER_UI, sizeof(DR_MODE));
-    func_801AEBA0(inner, y + 2, width - 4, height - 4, 0);
+    UI_DrawWindowFrame(inner, y + 2, width - 4, height - 4, 0);
 }
 #else
 INCLUDE_ASM(Menu_DrawHeaderBar);

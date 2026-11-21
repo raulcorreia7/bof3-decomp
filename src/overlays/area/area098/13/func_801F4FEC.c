@@ -1,6 +1,6 @@
 #include "area098_13.h"
 
-MATCH void func_801F4FEC(AreaBurstSlot* slot) {
+MATCH void func_801F4FEC(FallingSpark* slot) {
     u8 life;
 
     if (D_801F6514 == 0) {
@@ -9,7 +9,7 @@ MATCH void func_801F4FEC(AreaBurstSlot* slot) {
     life       = slot->life - 1;
     slot->life = life;
     slot->speed += 0x400;
-    slot->distance += slot->speed;
+    slot->y += slot->speed;
     slot->fade -= 8;
     if (life == 0) {
         slot->active = 0;

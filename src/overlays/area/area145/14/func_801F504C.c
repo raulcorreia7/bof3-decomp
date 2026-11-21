@@ -17,7 +17,7 @@ NON_MATCHING u8 func_801F504C(u32 frame, u8 index) {
     u8* base;
     u8* step;
 
-    off     = ((s32)D_80147A58[index].unk_6C >> 9) & 3;
+    off     = ((s32)g_PartyActors[index].unk_6C >> 9) & 3;
     elapsed = (s32)frame;
     if (index != 1) {
         base = D_801F5D1C;
@@ -26,7 +26,7 @@ NON_MATCHING u8 func_801F504C(u32 frame, u8 index) {
         off4 = off * 4;
         base = D_801F5D0C;
     }
-    base_x = D_80147A58[index].pos.x.fixed;
+    base_x = g_PartyActors[index].pos.x.fixed;
     step   = base + off4;
     elapsed -= 10;
     t     = elapsed;
@@ -42,8 +42,8 @@ NON_MATCHING u8 func_801F504C(u32 frame, u8 index) {
     if (limit < t) {
         my = limit;
     }
-    y = D_80147A58[index].pos.y.fixed + dy * (u16)my;
-    func_801F5190(base_x, D_80147A58[index].pos.y.fixed, x, y);
+    y = g_PartyActors[index].pos.y.fixed + dy * (u16)my;
+    func_801F5190(base_x, g_PartyActors[index].pos.y.fixed, x, y);
     if (t < step[1]) {
         return 1;
     }

@@ -15,7 +15,7 @@ NON_MATCHING u8 func_801F4EDC(u16 t, u32 stage) {
     u32 direction;
 
     elapsed   = t;
-    direction = (D_80147A58[(u8)stage].unk_6C >> 9) & 3;
+    direction = (g_PartyActors[(u8)stage].unk_6C >> 9) & 3;
     if ((u8)stage == 1) {
         step = D_801F5CEC + direction * 4;
     } else {
@@ -29,14 +29,14 @@ NON_MATCHING u8 func_801F4EDC(u16 t, u32 stage) {
     if (limit < time) {
         mx = limit;
     }
-    x  = D_80147A58[(u8)stage].pos.x.fixed + dx * (u16)mx;
+    x  = g_PartyActors[(u8)stage].pos.x.fixed + dx * (u16)mx;
     dy = D_80181B01[step[0] * 2] << 16;
     my = elapsed;
     if (limit < time) {
         my = limit;
     }
-    y = D_80147A58[(u8)stage].pos.y.fixed + dy * (u16)my;
-    func_801F5190(D_80147A58[(u8)stage].pos.x.fixed, D_80147A58[(u8)stage].pos.y.fixed, x, y);
+    y = g_PartyActors[(u8)stage].pos.y.fixed + dy * (u16)my;
+    func_801F5190(g_PartyActors[(u8)stage].pos.x.fixed, g_PartyActors[(u8)stage].pos.y.fixed, x, y);
     if (time < step[1]) {
         return 1;
     }

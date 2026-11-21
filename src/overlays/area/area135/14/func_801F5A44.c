@@ -10,7 +10,7 @@ MATCH void func_801F5A44(void) {
         D_80147CB8[3 * 0x10] |= 1;
     }
     if (g_GameCellType == 4 || (u8)(g_GameCellType - 6) < 2) {
-        D_80147A58[3].header.flags = 1;
+        g_PartyActors[3].header.flags = 1;
     }
     if (g_GameCellType == 0) {
         g_ScriptVars[3] = Actor_FindFreeSpawned();

@@ -23,7 +23,6 @@ extern u8       D_801F6800[]; /* one four-byte sprite cell per id: w, h, u0, v0 
 #define AREA_HUD_SPRITE_CELLS D_801F6800
 extern WorldMapMarker D_801F6858[6];
 #define AREA_HUD_MASK_TABLE D_801F6858
-extern s8 g_GameRequestKind;
 
 /* The two 2-byte cells of the torch gauge bar texture. */
 extern TorchGaugeCells D_801F2C04;

@@ -2,21 +2,21 @@
 
 /* Opcodes 0x00 to 0x0F of the actor script: flow control. */
 typedef enum ActorScriptFlow {
-    ACTOR_SCRIPT_FLOW_JUMP              = 1,  /* jump to the target; a labelled target seeks its label record */
-    ACTOR_SCRIPT_FLOW_LOOP              = 2,  /* args: [offset] [times]; jump back a counted number of times */
-    ACTOR_SCRIPT_FLOW_CALL_AREA_HANDLER = 3,  /* args: [index]; call the area handler and take the task facing */
-    ACTOR_SCRIPT_FLOW_IF_VAR_EQUALS     = 4,  /* args: [value] [var] [then_lo] [then_hi] [else_lo] [else_hi]; branch on a script variable equal to the value */
-    ACTOR_SCRIPT_FLOW_IF_VARS_EQUAL     = 5,  /* args: [var] [var] ...; branch when two script variables are equal */
-    ACTOR_SCRIPT_FLOW_IF_VAR_LESS       = 6,  /* args: [value] [var] ...; branch when the variable is below the value */
-    ACTOR_SCRIPT_FLOW_IF_VARS_LESS      = 7,  /* args: [var] [var] ...; branch when the first variable is below the second */
-    ACTOR_SCRIPT_FLOW_IF_VAR_MASK       = 8,  /* args: [mask] [var] ...; branch when the variable has any mask bit */
-    ACTOR_SCRIPT_FLOW_IF_VARS_MASK      = 9,  /* args: [var] [var] ...; branch when the first variable has any bit of the second */
-    ACTOR_SCRIPT_FLOW_SKIP              = 10, /* skip the two-byte label record */
-    ACTOR_SCRIPT_FLOW_END               = 11, /* end the script: cursor to the start */
-    ACTOR_SCRIPT_FLOW_SHOW_BATTLERS     = 12, /* args: [show]; show or hide the party battlers */
-    ACTOR_SCRIPT_FLOW_SET_POSITION      = 13, /* args: [x] [x_half] [y] [y_half]; place the actor or the party */
-    ACTOR_SCRIPT_FLOW_RUN_SCRIPT        = 14, /* args: [script] [flags] [route] ...; start an actor script */
-    ACTOR_SCRIPT_FLOW_RUN_TALK_SCRIPT   = 15, /* args: [talk] [flags] [route] ...; start the script of the talk for the leading character */
+    ACTOR_SCRIPT_FLOW_JUMP             = 1,  /* jump to the target; a labelled target seeks its label record */
+    ACTOR_SCRIPT_FLOW_LOOP             = 2,  /* args: [offset] [times]; jump back a counted number of times */
+    ACTOR_SCRIPT_FLOW_CALL_AREA_SCRIPT = 3,  /* args: [index]; call the area handler and take the task facing */
+    ACTOR_SCRIPT_FLOW_IF_VAR_EQUALS    = 4,  /* args: [value] [var] [then_lo] [then_hi] [else_lo] [else_hi]; branch on a script variable equal to the value */
+    ACTOR_SCRIPT_FLOW_IF_VARS_EQUAL    = 5,  /* args: [var] [var] ...; branch when two script variables are equal */
+    ACTOR_SCRIPT_FLOW_IF_VAR_LESS      = 6,  /* args: [value] [var] ...; branch when the variable is below the value */
+    ACTOR_SCRIPT_FLOW_IF_VARS_LESS     = 7,  /* args: [var] [var] ...; branch when the first variable is below the second */
+    ACTOR_SCRIPT_FLOW_IF_VAR_MASK      = 8,  /* args: [mask] [var] ...; branch when the variable has any mask bit */
+    ACTOR_SCRIPT_FLOW_IF_VARS_MASK     = 9,  /* args: [var] [var] ...; branch when the first variable has any bit of the second */
+    ACTOR_SCRIPT_FLOW_SKIP             = 10, /* skip the two-byte label record */
+    ACTOR_SCRIPT_FLOW_END              = 11, /* end the script: cursor to the start */
+    ACTOR_SCRIPT_FLOW_SHOW_BATTLERS    = 12, /* args: [show]; show or hide the party battlers */
+    ACTOR_SCRIPT_FLOW_SET_POSITION     = 13, /* args: [x] [x_half] [y] [y_half]; place the actor or the party */
+    ACTOR_SCRIPT_FLOW_RUN_SCRIPT       = 14, /* args: [script] [flags] [route] ...; start an actor script */
+    ACTOR_SCRIPT_FLOW_RUN_TALK_SCRIPT  = 15, /* args: [talk] [flags] [route] ...; start the script of the talk for the leading character */
 } ActorScriptFlow;
 
 /* func_801A8F94 */
@@ -55,7 +55,7 @@ NON_MATCHING u8 Actor_RunFlowOps(ScriptState* state, u8* base, s32 seed) {
                                 state->cursor += 3;
                         }
                         break;
-                    case ACTOR_SCRIPT_FLOW_CALL_AREA_HANDLER:
+                    case ACTOR_SCRIPT_FLOW_CALL_AREA_SCRIPT:
                         obj   = g_AreaLoads[g_GameAreaId];
                         table = FIELD(AreaScriptCallback*, obj, 0x3Cu);
                         table[base[state->cursor + 1]](obj);
@@ -64,15 +64,15 @@ NON_MATCHING u8 Actor_RunFlowOps(ScriptState* state, u8* base, s32 seed) {
                         break;
                     case ACTOR_SCRIPT_FLOW_IF_VAR_EQUALS:
                         left = base[state->cursor + 1];
-                        if (func_8015B870(base[state->cursor + 2]) == left)
+                        if (Script_ReadValue(base[state->cursor + 2]) == left)
                             state->cursor = (u16)(base[state->cursor + 3] | (base[state->cursor + 4] << 8));
                         else
                             state->cursor = (u16)(base[state->cursor + 5] | (base[state->cursor + 6] << 8));
                         state->cursor = Actor_FindScriptLabel(state, (u8)state->cursor, base);
                         break;
                     case ACTOR_SCRIPT_FLOW_IF_VARS_EQUAL:
-                        left = func_8015B870(base[state->cursor + 1]);
-                        if (func_8015B870(base[state->cursor + 2]) == left)
+                        left = Script_ReadValue(base[state->cursor + 1]);
+                        if (Script_ReadValue(base[state->cursor + 2]) == left)
                             state->cursor = (u16)(base[state->cursor + 3] | (base[state->cursor + 4] << 8));
                         else
                             state->cursor = (u16)(base[state->cursor + 5] | (base[state->cursor + 6] << 8));
@@ -80,15 +80,15 @@ NON_MATCHING u8 Actor_RunFlowOps(ScriptState* state, u8* base, s32 seed) {
                         break;
                     case ACTOR_SCRIPT_FLOW_IF_VAR_LESS:
                         left = base[state->cursor + 1];
-                        if (func_8015B870(base[state->cursor + 2]) < left)
+                        if (Script_ReadValue(base[state->cursor + 2]) < left)
                             state->cursor = (u16)(base[state->cursor + 3] | (base[state->cursor + 4] << 8));
                         else
                             state->cursor = (u16)(base[state->cursor + 5] | (base[state->cursor + 6] << 8));
                         state->cursor = Actor_FindScriptLabel(state, (u8)state->cursor, base);
                         break;
                     case ACTOR_SCRIPT_FLOW_IF_VARS_LESS:
-                        left = func_8015B870(base[state->cursor + 1]);
-                        if (func_8015B870(base[state->cursor + 2]) < left)
+                        left = Script_ReadValue(base[state->cursor + 1]);
+                        if (Script_ReadValue(base[state->cursor + 2]) < left)
                             state->cursor = (u16)(base[state->cursor + 3] | (base[state->cursor + 4] << 8));
                         else
                             state->cursor = (u16)(base[state->cursor + 5] | (base[state->cursor + 6] << 8));
@@ -96,15 +96,15 @@ NON_MATCHING u8 Actor_RunFlowOps(ScriptState* state, u8* base, s32 seed) {
                         break;
                     case ACTOR_SCRIPT_FLOW_IF_VAR_MASK:
                         left = base[state->cursor + 1];
-                        if ((func_8015B870(base[state->cursor + 2]) & left) != 0)
+                        if ((Script_ReadValue(base[state->cursor + 2]) & left) != 0)
                             state->cursor = (u16)(base[state->cursor + 3] | (base[state->cursor + 4] << 8));
                         else
                             state->cursor = (u16)(base[state->cursor + 5] | (base[state->cursor + 6] << 8));
                         state->cursor = Actor_FindScriptLabel(state, (u8)state->cursor, base);
                         break;
                     case ACTOR_SCRIPT_FLOW_IF_VARS_MASK:
-                        left = func_8015B870(base[state->cursor + 1]);
-                        if ((func_8015B870(base[state->cursor + 2]) & left) != 0)
+                        left = Script_ReadValue(base[state->cursor + 1]);
+                        if ((Script_ReadValue(base[state->cursor + 2]) & left) != 0)
                             state->cursor = (u16)(base[state->cursor + 3] | (base[state->cursor + 4] << 8));
                         else
                             state->cursor = (u16)(base[state->cursor + 5] | (base[state->cursor + 6] << 8));

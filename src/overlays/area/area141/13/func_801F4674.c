@@ -18,8 +18,8 @@ MATCH void func_801F4674(void) {
         }
         g_Actors[second_index].header.flags = 1;
         g_ScratchPad.cells.halves[0]        = (u8)first;
-        func_801A4D54(D_801F4E2C);
+        Actor_SpawnFromRecord(D_801F4E2C);
         g_ScratchPad.cells.halves[0] = (u8)second;
-        func_801A4D54(D_801F4E2C + 0x11);
+        Actor_SpawnFromRecord(D_801F4E2C + 0x11);
     }
 }
