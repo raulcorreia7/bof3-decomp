@@ -726,7 +726,7 @@ void        func_801EA030(void);
 void        Menu_CommandsPanel(void);
 void        func_801EA118(void);
 /* func_801EA158 */
-void        Menu_SetPosY(void);
+void        Menu_AdvancePanelY(void);
 void        func_801EA1C8(void);
 /* func_801EA50C */
 void        Menu_EquipComparePanel(void);

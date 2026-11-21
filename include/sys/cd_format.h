@@ -50,11 +50,30 @@ typedef enum EMISlotId {
     /* numbered series */
     EMI_SLOT_ENEMY    = EMI_DIR_BENEMY,
     EMI_SLOT_BGM      = EMI_DIR_BGM,
-    EMI_SLOT_MAGIC    = EMI_DIR_BMAGIC,
+    EMI_SLOT_KAIZAR_D = EMI_DIR_BMAGIC,     /* KAIZAR_D: the Kaizar dragon form archive, D set */
+    EMI_SLOT_KAIZAR_F = EMI_DIR_BMAGIC + 1, /* KAIZAR_F */
+    EMI_SLOT_KAIZAR_N = EMI_DIR_BMAGIC + 2, /* KAIZAR_N */
+    EMI_SLOT_MAGIC    = EMI_DIR_BMAGIC + 2, /* MAGIC series base: MAGICnnn is base + nnn up to MAGIC006, then the numbers skip */
     EMI_SLOT_MAGIC_XA = EMI_DIR_BMAG_XA,
     EMI_SLOT_BOSS     = EMI_DIR_BOSS,
     EMI_SLOT_BPLD     = EMI_DIR_BPLCHAR,
     EMI_SLOT_BPLU     = EMI_DIR_BPLCHAR + 19,
+    EMI_SLOT_BRTD247  = EMI_DIR_BPLCHAR + 38, /* BRTD247, BRTD457, BRTD467, BRTD478: the dragon form's D set, chosen by scroll direction */
+    EMI_SLOT_BRTD457  = EMI_DIR_BPLCHAR + 39,
+    EMI_SLOT_BRTD467  = EMI_DIR_BPLCHAR + 40,
+    EMI_SLOT_BRTD478  = EMI_DIR_BPLCHAR + 41,
+    EMI_SLOT_BRTU247  = EMI_DIR_BPLCHAR + 42, /* BRTU247, BRTU457, BRTU467, BRTU478: the U set */
+    EMI_SLOT_BRTU457  = EMI_DIR_BPLCHAR + 43,
+    EMI_SLOT_BRTU467  = EMI_DIR_BPLCHAR + 44,
+    EMI_SLOT_BRTU478  = EMI_DIR_BPLCHAR + 45,
+    EMI_SLOT_REID00   = EMI_DIR_BPLCHAR + 97, /* REID00, REID01, REIU00, REIU01: the Rei character archives, D and U sets */
+    EMI_SLOT_REID01   = EMI_DIR_BPLCHAR + 98,
+    EMI_SLOT_REIU00   = EMI_DIR_BPLCHAR + 99,
+    EMI_SLOT_REIU01   = EMI_DIR_BPLCHAR + 100,
+    EMI_SLOT_RTD00    = EMI_DIR_BPLCHAR + 101, /* RTD00, RTD01, RTU00, RTU01: the RT character archives, D and U sets */
+    EMI_SLOT_RTD01    = EMI_DIR_BPLCHAR + 102,
+    EMI_SLOT_RTU00    = EMI_DIR_BPLCHAR + 103,
+    EMI_SLOT_RTU01    = EMI_DIR_BPLCHAR + 104,
     /* ETC */
     EMI_SLOT_A085SE2  = EMI_DIR_ETC,
     EMI_SLOT_A108SE2  = EMI_DIR_ETC + 1,
@@ -81,6 +100,7 @@ typedef enum EMISlotId {
     /* numbered series */
     EMI_SLOT_PL       = EMI_DIR_PLCHAR,
     EMI_SLOT_PLP      = EMI_DIR_PLCHAR + 19,
+    EMI_SLOT_SCE15EF0 = EMI_DIR_SCENARIO + 1,
     EMI_SLOT_SCENA    = EMI_DIR_SCENARIO + 5,
     EMI_SLOT_S_XA00   = EMI_DIR_SCE_XA,
     EMI_SLOT_VOICE    = EMI_DIR_SCE_XA + 1,

@@ -1,7 +1,7 @@
 #include "game_01.h"
 
 /* The eight frontend state handlers are indexed by the state byte in
- * Game_RunFrontend. The table ends where the glyph geometry records begin. */
+ * Game_RunTitle. The table ends where the glyph geometry records begin. */
 static Callback s_TitleSteps[8] = {
     Game_BeginTitle, Game_WaitTitleFade, Game_AdvanceTitleFade, Game_StartTitleFade, Game_StartSelectedGame, UI_WaitTitleInput, UI_UpdateChoicePrompt, Game_LeaveTitle,
 };

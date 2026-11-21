@@ -142,7 +142,7 @@ enum {
 #define MENU_LIST_FRAME_STEP 0x10
 
 /* The list panel record, handed to the panel drawers as a pointer: the
- * shop's ability and item lists (Shop_DrawAbilities, Shop_DrawItems) and the
+ * shop's ability and item lists (Menu_DrawAbilityList, Shop_DrawItems) and the
  * ability list of the bate overlay read the same cells. The record's extent
  * is unknown; 0x24, the names pointer, is the last known cell. */
 typedef struct MenuListPanel {

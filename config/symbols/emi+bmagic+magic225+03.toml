@@ -13,7 +13,7 @@ g_BattleEffects = { addr = 0x801EC330, alias = true }
 Effect_MarkDamagedOnZeroTick = { addr = 0x801EF278, type = "func", source = "When the effect ticker (byte 0x0B) is zero marks the battlers of the target selector damaged, raises BATTLE_STATE_EFFECT_PLAYING and resets the effect in magic225 (Temptation)." }
 BMagic_DispatchEffectMode = { addr = 0x801EF2D8, type = "func", source = "Runs the handler that header.mode (byte 0x01) selects from the effect handlers of magic225." }
 Effect_CountUpAndStep = { addr = 0x801EF5D8, type = "func", source = "Counts the effect timer (byte 0x09) up and advances header.step (byte 0x02) at 16 in magic225 (Temptation)." }
-BMagic_GetScaleX = { addr = 0x801F0140, type = "func", source = "the body returns g_Task->scale.x" }
+BMagic_StepEffect = { addr = 0x801F0140, type = "func", source = "the body returns g_Task->scale.x" }
 BMagic_SetScaleX = { addr = 0x801F021C, type = "func", source = "the body stores into g_Task->scale.x" }
 BMagic_AllocEffect = { addr = 0x801F02D4, type = "func", source = "Claims the first free slot of the effect table (bit 0 of header.flags) and returns its index, or 0xFF when all 32 slots are in use in magic225 (Temptation)." }
 Actor_Clear = { addr = 0x801F0338, type = "func", source = "Clears the effect work record: header flags, mode (byte 0x01), step (byte 0x02) and bytes 0x03 and 0x04." }

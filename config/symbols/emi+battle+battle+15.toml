@@ -136,12 +136,12 @@ Battle_GrantReprisal = { addr = 0x800A1414, type = "func", source = "sets the re
 Battle_GrantAlwaysHits = { addr = 0x800A1704, type = "func", source = "sets the always-hits action flag on the active battler" }
 Battle_GrantDamageImmunity = { addr = 0x800A1A30, type = "func", source = "sets the damage-immune damage flag on the active battler" }
 Battle_CastDeath = { addr = 0x800A2404, type = "func", source = "The Belladonna effect: sets the battle action to the Death ability and applies its damage; the retail description reads Destroy one target." }
-Battle_GetActionId = { addr = 0x800A2880, type = "func", source = "the body returns g_Battle.action_id" }
+Battle_RollActionDamage = { addr = 0x800A2880, type = "func", source = "the body returns g_Battle.action_id" }
 Battle_GetFireResistance = { addr = 0x800A2AE0, type = "func", source = "the body returns g_Game.members[battler_index].chr.stats.resistances[0]" }
 Battle_CalcHeal = { addr = 0x800A30E8, type = "func", source = "Computes the heal an action gives: the ability's power row scaled by the rate byte and the target's holy resistance, returned as a negative hp change." }
 Battle_AddStatus = { addr = 0x800A31E0, type = "func", source = "Adds the status bits of the mask to one battler (players below 3, enemies from 3): each bit goes into g_Battle.pending_status unless the battler already has it or a blocking status, then the merged word is stored back and published." }
 Battle_CureStatus = { addr = 0x800A36F0, type = "func", source = "Cures the status bits of the mask on one battler: clears them from its status word, restores a confused battler's position and publishes the new status through the work cell." }
-Battle_SetTarget = { addr = 0x800A39B4, type = "func", source = "the body stores into g_Battle.target_record" }
+Battle_AddStatClamped = { addr = 0x800A39B4, type = "func", source = "the body stores into g_Battle.target_record" }
 Battle_PickAbility = { addr = 0x800A3A10, type = "func", source = "picks an ability for the battler and selection kind, using g_Abilities and rand" }
 Battle_MarkDamageApplied = { addr = 0x800A3F28, type = "func", source = "existing bottom-up proposal: ORs BATTLE_STATE_DAMAGE_APPLIED into g_Battle.state and marks the damage row" }
 Battle_InflictStatus = { addr = 0x800A41D8, type = "func", source = "Marks the battle damage applied, then adds the given status mask to the action target through Battle_AddStatus unless the ability picker still holds the action." }

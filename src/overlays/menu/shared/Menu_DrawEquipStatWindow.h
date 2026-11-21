@@ -1,4 +1,4 @@
-/* The stat window of the equip screen: the power, defense and agility a party member would have with item_id, an item of item_kind (the shop and equip lists pass Item_GetKind), coloured by Char_PreviewEquip as higher or lower, beside the portrait. When the member cannot equip the item the window is shaded and shows the current stats. */
+/* The stat window of the equip screen: the power, defense and agility a party member would have with item_id, an item of item_kind (the shop and equip lists pass the item's type), coloured by Char_PreviewEquip as higher or lower, beside the portrait. When the member cannot equip the item the window is shaded and shows the current stats. */
 /* func_801DEEE8 (start), func_801DB9F0 (shop), func_801D5F48 (bate), func_801D6EF0 (shisu) */
 MATCH void Menu_DrawEquipStatWindow(u16 x, u16 y, u8 character_index, u8 item_kind, u8 item_id) {
     Character* character;

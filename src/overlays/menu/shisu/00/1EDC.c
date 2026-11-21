@@ -191,7 +191,7 @@ MATCH void func_801D31CC(void) {
 }
 
 /* func_801D320C */
-MATCH void Menu_SetPosY(void) {
+MATCH void Menu_AdvancePanelY(void) {
     u16 next_pos;
 
     next_pos                  = g_MenuCurrentPanel->pos.y + 0x10;

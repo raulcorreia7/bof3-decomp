@@ -11,7 +11,7 @@ MATCH u8 func_800A403C(u8 battler_index) {
     }
     index = g_BattleActionId;
     /* kept: the volatile table read changes the retail register schedule. */
-    Battle_SetTarget((s8)((Ability*)g_Abilities)[index].power, saved);
+    Battle_AddStatClamped((s8)((Ability*)g_Abilities)[index].power, saved);
     Battle_RescaleStats(g_Battle.target);
     return 0;
 }

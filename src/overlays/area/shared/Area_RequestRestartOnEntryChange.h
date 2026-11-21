@@ -14,10 +14,10 @@ MATCH void Area_RequestRestartOnEntryChange(void) {
         step = work->param.unk_0B;
         if (step == work->option_flags && g_GameStateIndex != GAME_REQUEST_AREA_CHANGE) {
             if (step != 1) {
-                goto tail;
+                goto tail; /* skips the arming stores: run the step only */
             }
             if (work->unk_18 == g_GameEntryAreaId) {
-                goto tail;
+                goto tail; /* skips the arming stores: run the step only */
             }
         }
         g_Task->unk_48      = 2;

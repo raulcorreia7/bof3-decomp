@@ -9,7 +9,7 @@ MATCH void UI_UpdateStartButton(void) {
      *   D_80143B40       (0x80143B40) = lhu -0xF3(s0)
      *   g_UiTitleState (0x80143C10) = lhu/sh -0x23(s0)
      *   g_UiTitleTimer (0x80143C20) = sh -0x13(s0)
-     * EFFECT_BUSY, INPUT_State and POPUP_WORD are genuine standalone globals (each
+     * g_UiWindowEffectBusy, INPUT_State and g_UiPopupRequest are genuine standalone globals (each
      * its own `lui`) and stay declared as such. */
     u8*  front_gate = &g_UiTitleInputGate;
     u16* busy       = (u16*)(front_gate - 0xF3);

@@ -12,5 +12,5 @@ MATCH void Battle_ApplyAbilityDamage(void) {
     selection_kind                    = *(u8*)(void*)&g_Battle.target;
     /* kept: the volatile table read changes the retail register schedule. */
     base_value                        = ((Ability*)g_Abilities)[index].power;
-    g_Battle.target_record->hp_change = Battle_GetActionId(battler_index, selection_kind, base_value, 0);
+    g_Battle.target_record->hp_change = Battle_RollActionDamage(battler_index, selection_kind, base_value, 0);
 }

@@ -832,7 +832,7 @@ void        func_800A2560(void);
 void        func_800A2598(void);
 void        func_800A2668(void);
 void        func_800A26F0(void);
-s16         Battle_GetActionId(u8 unused, u8 battler_index, u16 base_value, u8 element_flag);
+s16         Battle_RollActionDamage(u8 unused, u8 battler_index, u16 base_value, u8 element_flag);
 s16         Battle_GetFireResistance(u8 battler_index, u16 element_mask);
 s16         func_800A2EF0(u8 battler_index, u16 element_mask);
 /* func_800A30E8 */
@@ -843,7 +843,7 @@ bool        func_800A3638(s32 battler_index, s32 compare_value);
 u8          func_800A36BC(s32 battler_index, s32 compare_value);
 /* func_800A36F0 */
 u16         Battle_CureStatus(u8 battler_index, u16 status_mask);
-extern void Battle_SetTarget(s16 delta, u8 battler_index);
+extern void Battle_AddStatClamped(s16 delta, u8 battler_index);
 u8          Battle_PickAbility(u8 battler_index, u8 selection_kind);
 u8          func_800A3C9C(u8 battler_index, u8 selection_kind);
 void        Battle_MarkDamageApplied(void);

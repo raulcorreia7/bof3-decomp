@@ -6,7 +6,7 @@
 #include "battle_15.h"
 
 /* func_800A2880 */
-MATCH s16 Battle_GetActionId(u8 unused, u8 battler_index, u16 base_value, u8 element_flag) {
+MATCH s16 Battle_RollActionDamage(u8 unused, u8 battler_index, u16 base_value, u8 element_flag) {
     u32 rate_scale;
     u32 rate_variance;
     s32 scale;

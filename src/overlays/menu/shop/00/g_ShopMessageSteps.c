@@ -31,7 +31,7 @@ Callback g_ShopEquipStatSteps[SHOP_PANEL5_STATE_COUNT] = {
 
 Callback g_ShopEquipmentSteps[SHOP_PANEL6_STATE_COUNT] = {
     Menu_IdleStep,
-    Battle_PickFormationTarget,
+    Menu_RetreatPanelX,
     func_801E2E70,
 };
 

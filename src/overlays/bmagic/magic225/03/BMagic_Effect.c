@@ -351,7 +351,7 @@ MATCH void func_801EFEE8(void) {
 }
 
 /* func_801F0140 */
-MATCH void BMagic_GetScaleX(void) {
+MATCH void BMagic_StepEffect(void) {
     s32 value;
 
     Actor_StepAnimLoop();

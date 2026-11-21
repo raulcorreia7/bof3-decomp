@@ -4,14 +4,14 @@ MATCH void func_801E75B0(void) {
     u32 slot;
 
     if (g_BattleEffectBattler->unk_2C.value == 0) {
-        slot = 574;
+        slot = EMI_SLOT_REIU00;
         if (((u8*)g_BattleEffectBattler)[8] < 2u) {
-            slot = 572;
+            slot = EMI_SLOT_REID00;
         }
     } else {
-        slot = 575;
+        slot = EMI_SLOT_REIU01;
         if (((u8*)g_BattleEffectBattler)[8] < 2u) {
-            slot = 573;
+            slot = EMI_SLOT_REID01;
         }
     }
     EMI_LoadArchive(slot);
