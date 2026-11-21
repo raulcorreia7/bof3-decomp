@@ -5,7 +5,6 @@
 #ifdef NON_MATCHING
 NON_MATCHING void func_801F35D4(void) {
     Actor* work;
-    s32    state;
 
     work        = g_Task;
     g_Task      = g_Actors;
@@ -19,17 +18,19 @@ NON_MATCHING void func_801F35D4(void) {
     if (D_80146866 == 0x80) {
         g_Task->header.mode = 0x17;
     }
-    state = D_80146865;
-    if (state == 4) {
-        g_Task->header.mode = 4;
-    } else if (state < 5) {
-        if (state == 3) {
+    switch (D_80146865) {
+        case 0xFF:
+            func_80196070();
+            break;
+        case 5:
+            g_Task->header.mode = 2;
+            break;
+        case 4:
+            g_Task->header.mode = 4;
+            break;
+        case 3:
             g_Task->header.mode = 6;
-        }
-    } else if (state == 5) {
-        g_Task->header.mode = 2;
-    } else if (state == 0xFF) {
-        func_80196070();
+            break;
     }
 }
 #else

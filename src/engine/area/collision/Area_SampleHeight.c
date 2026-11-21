@@ -60,7 +60,7 @@ NON_MATCHING s16 Area_SampleHeight(s32 x, s32 y) {
             v[0] = ((u32) * (u32*)(tmp14) >> 8) + (*(s8*)(tmp13)*g_AreaHeightOffsetEnabled);
             v[1] = FIELD(u8, tmp14, 0x3u) + (*(s8*)(tmp13)*g_AreaHeightOffsetEnabled);
             v[2] = FIELD(s32, tmp14, 0x4u) + (FIELD(s8, tmp13, 0x1u) * g_AreaHeightOffsetEnabled);
-            v[3] = FIELD(u16, tmp14, 0x6u) + (FIELD(s8, tmp13, 0x1u) * g_AreaHeightOffsetEnabled);
+            v[3] = (FIELD(u32, tmp14, 0x4u) >> 16) + (FIELD(s8, tmp13, 0x1u) * g_AreaHeightOffsetEnabled);
         } else {
             v[0] = FIELD(u16, tmp14, 0x2u) + (*(s8*)(tmp13)*g_AreaHeightOffsetEnabled);
             v[1] = FIELD(u8, tmp14, 0x3u) + (*(s8*)(tmp13)*g_AreaHeightOffsetEnabled);
@@ -75,7 +75,7 @@ NON_MATCHING s16 Area_SampleHeight(s32 x, s32 y) {
         return tmp0 * 0x10;
     }
     v[0] = FIELD(u8, tmp14, 0x3u) + (*(s8*)(tmp13)*g_AreaHeightOffsetEnabled);
-    v[1] = FIELD(u16, tmp14, 0x6u) + (FIELD(s8, tmp13, 0x1u) * g_AreaHeightOffsetEnabled);
+    v[1] = (FIELD(u32, tmp14, 0x4u) >> 16) + (FIELD(s8, tmp13, 0x1u) * g_AreaHeightOffsetEnabled);
     v[2] = FIELD(s32, (tmp7 + tmp14), 0x4u) + (FIELD(s8, (mw + tmp13), 0x1u) * g_AreaHeightOffsetEnabled);
     v[3] = ((u32)*tmp11 >> 8) + (*tmp10 * g_AreaHeightOffsetEnabled);
     if ((v[0] >= v[1]) & (v[0] >= v[2]) & (v[0] >= v[3])) {

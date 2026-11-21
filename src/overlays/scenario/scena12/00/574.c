@@ -101,7 +101,7 @@ MATCH void func_801F75EC(void) {
 }
 
 #ifdef NON_MATCHING
-NON_MATCHING void Menu_DrawHeaderBar(s32 x_arg, s32 y_arg, s32 width, s32 height, u8 style_arg) {
+NON_MATCHING void Menu_DrawHeaderBar(s32 x, s32 y, s32 width, s32 height, u8 window_style) {
     RECT*     window;
     POLY_FT4* prim;
     u16       left;
@@ -111,12 +111,12 @@ NON_MATCHING void Menu_DrawHeaderBar(s32 x_arg, s32 y_arg, s32 width, s32 height
     u8        bottom_v;
     s32       bottom_row;
     s32       bottom_y;
+    u16       odd_u;
     s32       width1;
     u16       width1_u;
     s32       half;
     u16       half_u;
     s32       odd;
-    u16       odd_u;
     s32       mid_x;
     s32       uv_end;
 
@@ -125,38 +125,39 @@ NON_MATCHING void Menu_DrawHeaderBar(s32 x_arg, s32 y_arg, s32 width, s32 height
     window->y       = 240;
     window->x       = 0;
     setWH(window, 16, 16);
-    left = x_arg;
-    top  = y_arg;
+    left = x;
+    top  = y;
     SetDrawMode((DR_MODE*)g_GfxPrimCursor, 0, 1, getTPage(TPAGE_DEPTH_4BIT, TPAGE_ABR_HALF, FONT_TPAGE_X, FONT_TPAGE_Y), window);
     GFX_AddPrim(GFX_LAYER_UI, sizeof(DR_MODE));
 
     prim = (POLY_FT4*)g_GfxPrimCursor;
     SetPolyFT4(prim);
     PSX_SET_SEMI_TRANSPARENT(prim);
-    clut_x   = (style_arg << 5) + 0x10;
-    inner    = x_arg + 2;
+    clut_x   = (window_style << 5) + 0x10;
+    inner    = x + 2;
     prim->x0 = left;
     prim->y0 = top;
     prim->y1 = top;
     prim->x2 = left;
     prim->x1 = inner;
     prim->x3 = inner;
-    setUV0(prim, 0u, 0u);
-    prim->v1 = 0u;
-    prim->u2 = 0u;
+    prim->u0 = 0;
+    prim->v0 = 0;
+    prim->u2 = 0;
+    prim->v1 = 0;
     setRGB0(prim, 172, 172, 172);
     bottom_row = height + 1;
     bottom_v   = bottom_row;
-    bottom_y   = y_arg + bottom_row;
+    bottom_y   = y + bottom_row;
     prim->y2   = bottom_y;
     prim->y3   = bottom_y;
-    prim->u1   = 2u;
+    prim->u1   = 2;
     prim->v2   = bottom_v;
-    prim->u3   = 2u;
+    prim->u3   = 2;
     prim->v3   = bottom_v;
     prim->y0 += 2;
-    prim->y2 -= 3;
     prim->v0 += 2;
+    prim->y2 -= 3;
     prim->v2 -= 3;
     prim->clut  = GetClut(clut_x, STAGE_PALETTE_Y + 1);
     width1      = width + 1;
@@ -181,10 +182,10 @@ NON_MATCHING void Menu_DrawHeaderBar(s32 x_arg, s32 y_arg, s32 width, s32 height
     prim = (POLY_FT4*)g_GfxPrimCursor;
     SetPolyFT4(prim);
     PSX_SET_SEMI_TRANSPARENT(prim);
-    prim->y0 = top;
-    mid_x    = x_arg + half;
+    mid_x    = x + half;
     uv_end   = half + odd + 2;
     prim->x0 = mid_x + 2;
+    prim->y0 = top;
     prim->x1 = mid_x + uv_end;
     prim->y1 = top;
     prim->x2 = mid_x + 2;
@@ -202,12 +203,12 @@ NON_MATCHING void Menu_DrawHeaderBar(s32 x_arg, s32 y_arg, s32 width, s32 height
     PSX_SET_SEMI_TRANSPARENT(prim);
     prim->y2 = bottom_y;
     prim->v2 = bottom_v;
-    prim->x1 = x_arg + width1;
+    prim->x1 = x + width1;
     prim->y1 = top;
-    prim->x3 = x_arg + width1;
-    prim->x0 = x_arg + width1 - 2;
+    prim->x3 = x + width1;
+    prim->x0 = x + width1 - 2;
     prim->y0 = top;
-    prim->x2 = x_arg + width1 - 2;
+    prim->x2 = x + width1 - 2;
     prim->y3 = bottom_y;
     setUV0(prim, 0u, 0u);
     prim->u1 = 2u;
@@ -233,7 +234,7 @@ NON_MATCHING void Menu_DrawHeaderBar(s32 x_arg, s32 y_arg, s32 width, s32 height
     setWH(window, 256, 256);
     SetDrawMode((DR_MODE*)g_GfxPrimCursor, 0, 1, getTPage(TPAGE_DEPTH_4BIT, TPAGE_ABR_HALF, FONT_TPAGE_X, FONT_TPAGE_Y), window);
     GFX_AddPrim(GFX_LAYER_UI, sizeof(DR_MODE));
-    UI_DrawWindowFrame(inner, y_arg + 2, width - 4, height - 4, 0);
+    UI_DrawWindowFrame(inner, y + 2, width - 4, height - 4, 0);
 }
 #else
 INCLUDE_ASM(Menu_DrawHeaderBar);

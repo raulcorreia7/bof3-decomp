@@ -342,73 +342,62 @@ MATCH void func_801F7DE8(void) {
     } while ((index & BYTE_MASK) < 0x40U);
 }
 
-#ifdef NON_MATCHING
-NON_MATCHING s32 func_801F7E14(void) {
-    u8*          slot;
-    u8*          data;
-    volatile s32 snapshot[4];
-    MATRIX       camera;
-    s32          drawn;
-    s32          step;
-    u8           i;
+/* steps the fade phase of each active billboard, draws it and moves it; returns 1 when none is active */
+MATCH s32 func_801F7E14(void) {
+    Scena08Billboard* billboard;
+    VECTOR            pos;
+    MATRIX            camera;
+    s32               drawn;
+    u8                i;
 
     SetDrawMode((DR_MODE*)g_GfxPrimCursor, 0, 0, GetTPage(TPAGE_DEPTH_4BIT, TPAGE_ABR_ADD, 0x2C0, 0x100) & 0xFFFF, 0);
     GFX_AddPrim(GFX_LAYER_UI, sizeof(DR_MODE));
     Camera_SetMatrix(&camera);
-    drawn = 1;
-    step  = 8;
-    slot  = MEM_PTR(u8, AREA_WORK);
-    data  = MEM_PTR(u8, AREA_WORK + 1);
-    i     = 0;
-    do {
-        if (slot[0] != 0) {
+    drawn     = 1;
+    billboard = MEM_PTR(Scena08Billboard, AREA_WORK);
+    for (i = 0; i < 0x40; billboard++, i++) {
+        if (billboard->unk_00[0] != 0) {
             drawn = 0;
-            if (data[1] == 1) {
-                data[2] += step;
-                if (data[0] == 0) {
-                    data[0] = 0x10;
-                    data[1]++;
-                }
-            } else if (data[1] < 2) {
-                if (data[1] == 0) {
-                    data[0]                       = step;
-                    data[2]                       = 0;
-                    *(volatile s32*)(data + 0x23) = 0;
-                    data[1]++;
-                }
-            } else if (data[1] == 2) {
-                if (data[0] == 0) {
-                    data[0] = step;
-                    data[1]++;
-                }
-            } else if (data[1] == 3) {
-                data[2] -= step;
-                if (data[0] == 0) {
-                    slot[0] = 0;
-                }
+            switch (billboard->unk_00[2]) {
+                case 0:
+                    billboard->unk_00[1] = 8;
+                    billboard->shade     = 0;
+                    billboard->size      = 0;
+                    billboard->unk_00[2]++;
+                    break;
+                case 1:
+                    billboard->shade += 8;
+                    if (billboard->unk_00[1] == 0) {
+                        billboard->unk_00[1] = 0x10;
+                        billboard->unk_00[2]++;
+                    }
+                    break;
+                case 2:
+                    if (billboard->unk_00[1] == 0) {
+                        billboard->unk_00[1] = 8;
+                        billboard->unk_00[2]++;
+                    }
+                    break;
+                case 3:
+                    billboard->shade -= 8;
+                    if (billboard->unk_00[1] == 0) {
+                        billboard->unk_00[0] = 0;
+                    }
+                    break;
             }
-            snapshot[0] = *(volatile s32*)(data + 0x03);
-            snapshot[1] = *(volatile s32*)(data + 0x07);
-            snapshot[2] = *(volatile s32*)(data + 0x0B);
-            snapshot[3] = *(volatile s32*)(data + 0x0F);
-            snapshot[2] <<= 8;
-            func_801F77B4((Scena08Billboard*)slot);
-            *(volatile s32*)(data + 0x03) += *(volatile s32*)(data + 0x13);
-            *(volatile s32*)(data + 0x07) += *(volatile s32*)(data + 0x17);
-            data[0]--;
-            *(volatile s32*)(data + 0x0B) += *(volatile s32*)(data + 0x1B);
-            *(volatile s32*)(data + 0x1B) += 0x200;
-            *(volatile s32*)(data + 0x23) += 0x200;
+            pos = billboard->pos;
+            pos.vz <<= 8;
+            func_801F77B4(billboard);
+            billboard->pos.vx += ((VECTOR*)billboard->unk_14)->vx;
+            billboard->pos.vy += ((VECTOR*)billboard->unk_14)->vy;
+            billboard->pos.vz += ((VECTOR*)billboard->unk_14)->vz;
+            ((VECTOR*)billboard->unk_14)->vz += 0x200;
+            billboard->size += 0x200;
+            billboard->unk_00[1]--;
         }
-        data += 0x28;
-        slot += 0x28;
-        i++;
-    } while (i < 0x40);
+    }
     return drawn;
 }
-#else
-INCLUDE_ASM(func_801F7E14);
-#endif
 
 MATCH void func_801F802C(void) {
     AreaSprite* work;
