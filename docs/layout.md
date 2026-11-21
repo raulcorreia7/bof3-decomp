@@ -136,6 +136,19 @@ or the module-id word ends it. A function source that also feeds another row's s
 body with its own `.rodata`, as in `area175/13`) is not a clean run: the link fails with a section
 discarded from the shared object. Leave that image per function until the sources split.
 
+### Engine modules
+
+A designed engine module is one translation unit and one header, as a PsyQ library is one object and one
+header. `<module>.c` includes the module's function files in link order, with the unnamed functions
+between them (`src/engine/gfx/fade/fade.c`); one `c` row at the first offset names it, and the unit
+may include files of other module folders by their path from `src/`. `<module>.h` holds the public
+prototypes, the types the module owns and its globals as `extern`; the image header and the `include/slus`
+headers include it. A module whose functions are not contiguous in link order stays one unit per function
+file, or joins its neighbour where the bytes need it (`emi/loader/emi.c` holds the CD drive states of
+`cd/drive`, which interleave with the loader). A function with `INCLUDE_ASM` stays out of a unit: the
+split assembly is named for the row. `game/00` is never one unit: `"%d"` is pooled twice in its
+`.rodata`, so `func_8019F5B8` and `FieldAction_FindSmall` lie in different objects.
+
 ### Definitions
 
 Each variable is defined exactly once, with its initializer, never in a header. A file lists

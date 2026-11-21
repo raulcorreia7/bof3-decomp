@@ -27,6 +27,10 @@
 #include <stdio.h>
 #include "common/util.h"
 #include <memory.h>
+#include "engine/gfx/fade/fade.h"
+#include "engine/emi/loader/emi.h"
+#include "engine/sound/sound.h"
+#include "engine/sys/boot/boot.h"
 
 /* Constants. */
 
@@ -992,46 +996,6 @@ extern void                       Actor_StageAnimStep(void);
 s8                                func_8014DE78(void);
 extern void                       GFX_ExpandRgb555(u32* pixels, RECT rect);
 extern void                       GFX_DecodeLzss(u32* packed, RECT rect);
-/* func_8014EDF0 */
-void                              GFX_FadeToBlack(void);
-/* func_8014EE18 */
-void                              GFX_FadeFromBlack(void);
-/* func_8014EE40 */
-void                              GFX_FadeToBlackFast(void);
-/* func_8014EE68 */
-void                              GFX_FadeFromBlackFast(void);
-/* func_8014EE90 */
-void                              GFX_FadeToBlackSlow(void);
-/* func_8014EEB8 */
-void                              GFX_FadeFromBlackSlow(void);
-/* func_8014EEE0 */
-void                              GFX_FadeToBlackFront(void);
-/* func_8014EF08 */
-void                              GFX_FadeFromBlackFront(void);
-/* func_8014EF30 */
-void                              GFX_FadeToWhite(void);
-/* func_8014EF58 */
-void                              GFX_FadeFromWhite(void);
-/* func_8014EF80 */
-void                              GFX_ZoomToBlackSlow(void);
-/* func_8014F024 */
-void                              GFX_ZoomFromBlackSlow(void);
-void                              func_8014F16C(void);
-/* func_8014F1AC */
-void                              GFX_FadeToBlackSlower(void);
-/* func_8014F1D4 */
-void                              GFX_FadeFromBlackSlower(void);
-/* func_8014F1FC */
-void                              GFX_FadeToWhiteSlower(void);
-/* func_8014F224 */
-void                              GFX_FadeFromWhiteSlower(void);
-/* func_8014F24C */
-void                              GFX_ZoomToBlackSlower(void);
-void                              func_8014F2F0(void);
-/* func_8014F438 */
-void                              GFX_FadeToBlackSlowest(void);
-/* func_8014F460 */
-void                              GFX_SpinToBlack(void);
 extern void                       func_8014FB80(s16 x, s16 y, u16 clut, u8 shade);
 /* func_801507BC */
 extern void                       Message_DispatchState(void);
@@ -1195,22 +1159,6 @@ s32                               Game_IsScriptVarEqual(u8* operand);
 s32                               Game_IncScriptVar(u8* operand);
 /* func_8015BABC */
 s32                               Game_TestNever(void);
-/* func_8015E994 */
-void                              SND_ReadSeBank0(void);
-/* func_8015EFAC */
-void                              SND_ReadSeBank1(void);
-/* func_8015F5C8 */
-void                              SND_ReadSeBank2(void);
-/* func_8015FBE4 */
-void                              SND_ReadSeBank3(void);
-/* func_80160200 */
-void                              SND_ReadSeBank4(void);
-/* func_8016081C */
-void                              SND_ReadSeBank5(void);
-/* func_80160E38 */
-void                              SND_ReadSeBank6(void);
-extern void                       func_80161454(u32 index);
-void                              func_80163230(void);
 void                              func_80163698(void);
 u8*                               func_801642F4(u8* dst, const u8* src, u32 count);
 void                              Char_ApplyMaster(Character* character);
@@ -1218,9 +1166,6 @@ void                              Char_ApplyMaster(Character* character);
 void                              Char_ApplyWeapon(Character* character);
 void                              Char_ApplyArmor(Character* character);
 void                              Char_ApplyAccessories(Character* character);
-void                              EMI_LoadPartyCode(u8 member_a, u8 member_b, u8 member_c);
-void                              EMI_LoadParty(u8 member_a, u8 member_b, u8 member_c, u8 family);
-u8                                EMI_FindPartyArchive(u8 member_a, u8 member_b, u8 member_c);
 extern void                       func_80167428(void);
 /* func_8016BA04 */
 void                              SND_QuitSpu(void);
@@ -1245,16 +1190,6 @@ static inline void Slus_DrawPanelBox(void) {
     UI_DrawPanelBox((s16)panel->pos.x >> 4, (s16)panel->pos.y >> 4, (u8)(panel->u.grow.w >> 4), (u8)(panel->u.grow.h >> 4));
 }
 
-void SYS_Main(void);
-
-void SYS_InitRuntime(void);
-
-void SYS_InitHardware(void);
-
-void SYS_InitDisplay(void);
-
-void SYS_ResetDisplayFrame(u8* work);
-
 void Actor_ReadValue(void);
 
 s32 SYS_LoadExe(const char* path);
@@ -1263,33 +1198,7 @@ void GFX_UploadPalette(void);
 
 void UI_DispatchLocalMode(void);
 
-void GFX_RunBlackFade(s32 delta, s32 semi_trans, s32 order);
-
-void GFX_RunWhiteFade(s32 delta, s32 semi_trans, s32 order);
-
-void SND_UpdateVoiceStatus(void);
-
-void EMI_ReadToc(void);
-
-void EMI_LoadToRam(void);
-
-void EMI_LoadCompressed(void);
-
-void EMI_LoadToVram(void);
-
-void EMI_LoadVabHeader(void);
-
-void EMI_LoadVabBody(void);
-
-void EMI_LoadSE(void);
-
-void EMI_LoadSequence(void);
-
-s32 EMI_NextEntry(u8 slot);
-
 extern u32 g_SndSeReaders[SND_BANK_COUNT];
-
-void EMI_Update(void);
 
 s32 Char_AddResistance(u8* counter, s32 delta);
 

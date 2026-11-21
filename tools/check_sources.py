@@ -48,18 +48,36 @@ def layout_names(document: dict) -> set[str]:
     return names
 
 
-#: A function source that a translation unit pulls in as ``#include "Name.c"``.
-INCLUDED_SOURCE = re.compile(r'^\s*#\s*include\s+"([^"/]+)\.c"', re.MULTILINE)
+#: A function source that a translation unit pulls in as ``#include "Name.c"`` (its own folder) or
+#: ``#include "engine/<module>/Name.c"`` (a path from ``src/``).
+INCLUDED_SOURCE = re.compile(
+    r'^\s*#\s*include\s+"(?:([^"]+)/)?([^"/]+)\.c"', re.MULTILINE
+)
 
 
-def included(root: Path, folder: str, names: set[str]) -> set[str]:
-    """Return the source stems that the rows' own sources include as ``.c`` files."""
-    stems: set[str] = set()
+def included(root: Path, folder: str, names: set[str]) -> set[tuple[str, str]]:
+    """Return the (folder, stem) of the sources that the rows' own sources include as ``.c`` files."""
+    found: set[tuple[str, str]] = set()
     for name in names:
         source = root / "src" / folder / f"{name}.c"
         if source.is_file():
-            stems.update(INCLUDED_SOURCE.findall(source.read_text(encoding="utf-8")))
-    return stems
+            for where, stem in INCLUDED_SOURCE.findall(
+                source.read_text(encoding="utf-8")
+            ):
+                found.add((where or folder, stem))
+    return found
+
+
+def add_included(
+    root: Path,
+    found: dict[str, tuple[str, set[str]]],
+    layout: str,
+    folder: str,
+    names: set[str],
+) -> None:
+    """Count the sources that a unit of ``folder`` includes as named in their own folder."""
+    for where, stem in included(root, folder, names):
+        found.setdefault(where, (layout, set()))[1].add(stem)
 
 
 def images(root: Path) -> dict[str, tuple[str, set[str]]]:
@@ -80,9 +98,10 @@ def images(root: Path) -> dict[str, tuple[str, set[str]]]:
                 continue
             other, stem = os.path.split(os.path.normpath(os.path.join(folder, name)))
             found.setdefault(other, (layout, set()))[1].add(stem)
-            found[other][1].update(included(root, other, {stem}))
+            add_included(root, found, layout, other, {stem})
         names = home | found.get(folder, (layout, set()))[1]
-        found[folder] = (layout, names | included(root, folder, home))
+        found[folder] = (layout, names)
+        add_included(root, found, layout, folder, home)
     return found
 
 

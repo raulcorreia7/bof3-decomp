@@ -121,8 +121,6 @@ extern u8           g_Scenario2Flags[];
 extern u16          D_80145048;
 extern u8           D_801454F2;
 extern u8*          D_801459F4;
-/* D_80145AA8 */
-extern u16          g_InputPressed;
 /* Event descriptors opened by the executable's card setup. */
 /* The palette cell map: 4 rows of 16 cells, 0xFF where a cell is free. */
 #define PALETTE_MAP_ROWS    4
