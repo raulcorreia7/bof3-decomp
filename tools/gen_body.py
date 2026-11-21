@@ -161,136 +161,236 @@ def halve(op: str, src: tuple, n: int) -> tuple:
     return ("bin", ALU_IMM[op], src, n)
 
 
-def lift(lines: list[str]) -> Lift:
-    """Run the instructions through a symbolic register file."""
-    out, regs, pending, v0_at = Lift(), {}, None, -1
-    stack: dict[int, tuple] = {}
-    for line in lines:
+def _is_number(text: str) -> bool:
+    """Whether ``text`` is a decimal or hexadecimal literal."""
+    return bool(re.fullmatch(r"-?(0x[0-9A-Fa-f]+|\d+)", text))
+
+
+class _Lifter:
+    """A symbolic register file that reads the instructions of one function in order."""
+
+    def __init__(self) -> None:
+        self.out = Lift()
+        self.regs: dict[str, tuple] = {}
+        self.pending: str | None = None
+        self.v0_at = -1
+        self.stack: dict[int, tuple] = {}
+
+    def kind(self, reg: str, default: str = "unk") -> str:
+        """The expression kind a register holds."""
+        return self.regs.get(reg, (default,))[0]
+
+    def operand(self, reg: str) -> tuple:
+        """The value of a source register; ``zero`` is 0 and an unset one is an argument."""
+        return ("c", 0) if reg == "zero" else self.regs.get(reg, ("arg", reg))
+
+    def unsupported(self, line: str) -> None:
+        """Record an instruction the lift cannot express."""
+        self.out.flags.add("other")
+        self.out.why.append(line)
+
+    def step(self, line: str) -> None:
+        """Apply one line: a label, or an instruction with its call bookkeeping."""
         if line.endswith(":"):
-            out.flags.add("branch")
-            continue
+            self.out.flags.add("branch")
+            return
         op, _, rest = line.partition(" ")
         o = [x.strip().lstrip("$") for x in rest.split(",")] if rest else []
-        if op in ("nop", ".word"):
-            pass
-        elif op in BRANCH or op == "jr" and o != ["ra"]:
-            out.flags.add("branch")
-        elif op == "jalr":
-            out.flags.add("jalr")
+        if op == "jal":
+            self.pending = o[0]
+            return
+        for handler in self.HANDLERS:
+            if handler(self, op, o, line):
+                break
+        else:
+            self.unsupported(line)
+            if o:
+                self.regs[o[0]] = ("unk",)
+        if o and o[0] == "v0" and op not in STORE and op != "jr":
+            self.v0_at = len(self.out.events)
+        if self.pending:
+            self.emit_call()
+
+    def emit_call(self) -> None:
+        """The delay slot ran before the call, so the arguments are final now."""
+        out = self.out
+        args = tuple(self.regs.get(r, ("arg", r)) for r in ARGS)
+        if self.stack:
+            if sorted(self.stack) != list(range(0x10, 0x10 + 4 * len(self.stack), 4)):
+                self.unsupported("sw: stack arguments with a gap")
+            args += tuple(self.stack[k] for k in sorted(self.stack))
+            self.stack = {}
+        calls = sum(e[0] == "call" for e in out.events)
+        out.events.append(("call", self.pending, args, calls))
+        for r in CLOBBER:
+            self.regs.pop(r, None)
+        self.regs["v0"] = ("ret", calls)
+        self.pending = None
+
+    def skip(self, op: str, o: list[str], line: str) -> bool:
+        return op in ("nop", ".word")
+
+    def branch(self, op: str, o: list[str], line: str) -> bool:
+        if op in BRANCH or op == "jr" and o != ["ra"]:
+            self.out.flags.add("branch")
+            return True
+        return False
+
+    def jump_register(self, op: str, o: list[str], line: str) -> bool:
+        if op == "jalr":
+            self.out.flags.add("jalr")
         elif op == "jr":
-            if "v0" in regs and v0_at == len(out.events) and regs["v0"][0] == "c":
-                out.ret = regs["v0"]
-        elif op == "jal":
-            pending = o[0]
-            continue
-        elif op == "lui" and symbol(o[1], HI):
-            regs[o[0]] = ("hi", symbol(o[1], HI))
-        elif op in ("addiu", "ori") and symbol(o[2], LO):
-            sym = symbol(o[2], LO)
-            if regs.get(o[1]) == ("hi", sym):
-                regs[o[0]] = (
-                    ("c", int(sym, 0)) if sym.startswith("0x") else ("sym", sym)
-                )
-            else:
-                out.flags.add("other")
-                out.why.append(line)
-                regs[o[0]] = ("unk",)
-        elif op in ("addiu", "ori") and o[1] == "zero":
-            regs[o[0]] = ("c", int(o[2], 0))
-        elif op == "addiu" and o[0] == o[1] == "sp":
-            pass
-        elif (
-            op == "addiu"
-            and o[1] != "sp"
-            and regs.get(o[1], ("unk",))[0] in ("c", "g", "m")
-        ):
-            regs[o[0]] = ("add", regs[o[1]], int(o[2], 0))
-        elif (
-            op in ALU_IMM
-            and regs.get(o[1], ("unk",))[0] in VALUE
-            and re.fullmatch(r"-?(0x[0-9A-Fa-f]+|\d+)", o[2])
-        ):
-            regs[o[0]] = halve(op, regs[o[1]], int(o[2], 0))
-        elif (
+            if "v0" in self.regs and self.v0_at == len(self.out.events):
+                if self.regs["v0"][0] == "c":
+                    self.out.ret = self.regs["v0"]
+        else:
+            return False
+        return True
+
+    def load_upper(self, op: str, o: list[str], line: str) -> bool:
+        if op == "lui" and symbol(o[1], HI):
+            self.regs[o[0]] = ("hi", symbol(o[1], HI))
+            return True
+        return False
+
+    def low_symbol(self, op: str, o: list[str], line: str) -> bool:
+        if op not in ("addiu", "ori") or not symbol(o[2], LO):
+            return False
+        sym = symbol(o[2], LO)
+        if self.regs.get(o[1]) == ("hi", sym):
+            self.regs[o[0]] = (
+                ("c", int(sym, 0)) if sym.startswith("0x") else ("sym", sym)
+            )
+        else:
+            self.unsupported(line)
+            self.regs[o[0]] = ("unk",)
+        return True
+
+    def load_constant(self, op: str, o: list[str], line: str) -> bool:
+        if op in ("addiu", "ori") and o[1] == "zero":
+            self.regs[o[0]] = ("c", int(o[2], 0))
+            return True
+        return False
+
+    def stack_pointer(self, op: str, o: list[str], line: str) -> bool:
+        return op == "addiu" and o[0] == o[1] == "sp"
+
+    def add_constant(self, op: str, o: list[str], line: str) -> bool:
+        if op == "addiu" and o[1] != "sp" and self.kind(o[1]) in ("c", "g", "m"):
+            self.regs[o[0]] = ("add", self.regs[o[1]], int(o[2], 0))
+            return True
+        return False
+
+    def alu_immediate(self, op: str, o: list[str], line: str) -> bool:
+        if op in ALU_IMM and self.kind(o[1]) in VALUE and _is_number(o[2]):
+            self.regs[o[0]] = halve(op, self.regs[o[1]], int(o[2], 0))
+            return True
+        return False
+
+    def table_index(self, op: str, o: list[str], line: str) -> bool:
+        if (
             op == "addu"
-            and regs.get(o[1], ("",))[0] == "hi"
+            and self.kind(o[1], "") == "hi"
             and o[0] == o[1]
-            and regs.get(o[2], ("unk",))[0] in VALUE
+            and self.kind(o[2]) in VALUE
         ):
-            regs[o[0]] = ("hiidx", regs[o[1]][1], regs[o[2]])
-        elif (
-            op in ALU_REG
-            and regs.get(o[1], ("unk",))[0] in VALUE
-            and regs.get(o[2], ("unk",))[0] in VALUE
-        ):
-            regs[o[0]] = ("bin", ALU_REG[op], regs[o[1]], regs[o[2]])
-        elif op == "addu" and o[1] == "zero" and o[2] == "zero":
-            regs[o[0]] = ("c", 0)
-        elif op == "addu" and o[2] == "zero":
-            regs[o[0]] = regs.get(o[1], ("arg", o[1]))
-        elif (
+            self.regs[o[0]] = ("hiidx", self.regs[o[1]][1], self.regs[o[2]])
+            return True
+        return False
+
+    def alu_register(self, op: str, o: list[str], line: str) -> bool:
+        if op in ALU_REG and self.kind(o[1]) in VALUE and self.kind(o[2]) in VALUE:
+            self.regs[o[0]] = ("bin", ALU_REG[op], self.regs[o[1]], self.regs[o[2]])
+            return True
+        return False
+
+    def move(self, op: str, o: list[str], line: str) -> bool:
+        if op != "addu" or o[2] != "zero":
+            return False
+        if o[1] == "zero":
+            self.regs[o[0]] = ("c", 0)
+        else:
+            self.regs[o[0]] = self.regs.get(o[1], ("arg", o[1]))
+        return True
+
+    def save_register(self, op: str, o: list[str], line: str) -> bool:
+        return (
             op in ("sw", "lw")
             and o[1].endswith("($sp)")
             and (o[0] == "ra" or o[0][0] == "s")
-        ):
-            pass
-        elif op == "sw" and (m := re.fullmatch(r"(0x[0-9A-Fa-f]+|\d+)\(\$sp\)", o[1])):
-            # An argument beyond the fourth, stored for the next call.
-            val = ("c", 0) if o[0] == "zero" else regs.get(o[0], ("arg", o[0]))
-            if val[0] == "unk" or int(m.group(1), 0) < 0x10:
-                out.flags.add("other")
-                out.why.append(line)
-            else:
-                stack[int(m.group(1), 0)] = val
-        elif op in STORE:
-            target = address(regs, o[1])
-            val = ("c", 0) if o[0] == "zero" else regs.get(o[0], ("arg", o[0]))
-            if target and target[0] in ("g", "m", "gi") and val[0] != "unk":
-                out.events.append(("store", STORE[op], target, val))
-                if target[0] == "m":
-                    out.flags.add("spad")
-            else:
-                out.flags.add("other")
-                out.why.append(line)
-        elif op in LOAD:
-            width, signed = LOAD[op]
-            target = address(regs, o[1])
-            out.flags.add("load")
-            if target and target[0] == "spadcell":
-                regs[o[0]] = ("spad",)
-            elif target and target[0] == "gi":
-                regs[o[0]] = ("gi", target[1], target[2], width, signed)
-            elif target and target[0] in ("g", "m"):
-                regs[o[0]] = (target[0], target[1], width, signed)
-                if target[0] == "m":
-                    out.flags.add("spad")
-            else:
-                out.flags.add("other")
-                out.why.append(line)
-                regs[o[0]] = ("unk",)
+        )
+
+    def stack_argument(self, op: str, o: list[str], line: str) -> bool:
+        """An argument beyond the fourth, stored for the next call."""
+        m = re.fullmatch(r"(0x[0-9A-Fa-f]+|\d+)\(\$sp\)", o[1]) if op == "sw" else None
+        if not m:
+            return False
+        val = self.operand(o[0])
+        if val[0] == "unk" or int(m.group(1), 0) < 0x10:
+            self.unsupported(line)
         else:
-            out.flags.add("other")
-            out.why.append(line)
-            if o:
-                regs[o[0]] = ("unk",)
-        if o and o[0] == "v0" and op not in STORE and op != "jr":
-            v0_at = len(out.events)
-        if pending and op != "jal":
-            # The delay slot ran before the call, so the arguments are final now.
-            args = tuple(regs.get(r, ("arg", r)) for r in ARGS)
-            if stack:
-                if sorted(stack) != list(range(0x10, 0x10 + 4 * len(stack), 4)):
-                    out.flags.add("other")
-                    out.why.append("sw: stack arguments with a gap")
-                args += tuple(stack[k] for k in sorted(stack))
-                stack = {}
-            calls = sum(e[0] == "call" for e in out.events)
-            out.events.append(("call", pending, args, calls))
-            for r in CLOBBER:
-                regs.pop(r, None)
-            regs["v0"] = ("ret", calls)
-            pending = None
-    return out
+            self.stack[int(m.group(1), 0)] = val
+        return True
+
+    def store(self, op: str, o: list[str], line: str) -> bool:
+        if op not in STORE:
+            return False
+        target = address(self.regs, o[1])
+        val = self.operand(o[0])
+        if target and target[0] in ("g", "m", "gi") and val[0] != "unk":
+            self.out.events.append(("store", STORE[op], target, val))
+            if target[0] == "m":
+                self.out.flags.add("spad")
+        else:
+            self.unsupported(line)
+        return True
+
+    def load(self, op: str, o: list[str], line: str) -> bool:
+        if op not in LOAD:
+            return False
+        width, signed = LOAD[op]
+        target = address(self.regs, o[1])
+        self.out.flags.add("load")
+        if target and target[0] == "spadcell":
+            self.regs[o[0]] = ("spad",)
+        elif target and target[0] == "gi":
+            self.regs[o[0]] = ("gi", target[1], target[2], width, signed)
+        elif target and target[0] in ("g", "m"):
+            self.regs[o[0]] = (target[0], target[1], width, signed)
+            if target[0] == "m":
+                self.out.flags.add("spad")
+        else:
+            self.unsupported(line)
+            self.regs[o[0]] = ("unk",)
+        return True
+
+    # Tried in order; the first to take the instruction wins.
+    HANDLERS = (
+        skip,
+        branch,
+        jump_register,
+        load_upper,
+        low_symbol,
+        load_constant,
+        stack_pointer,
+        add_constant,
+        alu_immediate,
+        table_index,
+        alu_register,
+        move,
+        save_register,
+        stack_argument,
+        store,
+        load,
+    )
+
+
+def lift(lines: list[str]) -> Lift:
+    """Run the instructions through a symbolic register file."""
+    lifter = _Lifter()
+    for line in lines:
+        lifter.step(line)
+    return lifter.out
 
 
 def classify(lifted: Lift) -> str:
