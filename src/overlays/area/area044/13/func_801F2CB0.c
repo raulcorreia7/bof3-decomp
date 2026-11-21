@@ -18,19 +18,19 @@ MATCH void func_801F2CB0(void) {
         index = (g_ScriptVars[3] & 3) * 2;
         row   = (g_ScriptVars[3] & 0x30) >> 3;
 
-        D_80147A58[0].pos.x.part.integer  = D_801F3FB4[index];
-        D_80147A58[0].pos.x.part.fraction = COORD_HALF;
-        D_80147A58[0].pos.y.part.integer  = D_801F3FB4[index + 1];
-        D_80147A58[0].pos.y.part.fraction = COORD_HALF;
-        D_80147A58[0].pos.z.part.integer  = 0x80;
-        D_80147A58[0].interaction_flags |= 0x80;
+        g_PartyActors[0].pos.x.part.integer  = D_801F3FB4[index];
+        g_PartyActors[0].pos.x.part.fraction = COORD_HALF;
+        g_PartyActors[0].pos.y.part.integer  = D_801F3FB4[index + 1];
+        g_PartyActors[0].pos.y.part.fraction = COORD_HALF;
+        g_PartyActors[0].pos.z.part.integer  = 0x80;
+        g_PartyActors[0].interaction_flags |= 0x80;
 
-        D_80147A58[1].pos.x.part.integer  = D_801F3FBC[row];
-        D_80147A58[1].pos.x.part.fraction = COORD_HALF;
-        D_80147A58[1].pos.y.part.integer  = D_801F3FBC[row + 1];
-        D_80147A58[1].pos.y.part.fraction = COORD_HALF;
-        D_80147A58[1].pos.z.part.integer  = 0x80;
-        D_80147A58[1].interaction_flags |= 0x80;
+        g_PartyActors[1].pos.x.part.integer  = D_801F3FBC[row];
+        g_PartyActors[1].pos.x.part.fraction = COORD_HALF;
+        g_PartyActors[1].pos.y.part.integer  = D_801F3FBC[row + 1];
+        g_PartyActors[1].pos.y.part.fraction = COORD_HALF;
+        g_PartyActors[1].pos.z.part.integer  = 0x80;
+        g_PartyActors[1].interaction_flags |= 0x80;
         func_801F2DF4();
     }
 }

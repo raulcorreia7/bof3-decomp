@@ -26,7 +26,7 @@ MATCH void func_8019A3FC(void) {
     total              = *(u16*)&work->screen_y;
     other              = g_Task;
     work->screen_y     = (total - delta);
-    other->unk_2A      = 0;
+    other->mirror      = 0;
 
     work             = g_Task;
     work->draw_layer = 2;

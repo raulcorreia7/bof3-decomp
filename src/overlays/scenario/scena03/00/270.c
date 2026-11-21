@@ -32,10 +32,10 @@ MATCH void func_801F6EB4(void) {
     g_Actors[g_Task->unk_04].header.flags = 1;
     work                                  = (u8*)g_Task;
     *scratch                              = work[3];
-    func_801A65A0(data);
+    Actor_SpawnPartyFromRecord(data);
     Actor_BeginScript(0x61, 0xC);
     *scratch = work[4];
-    func_801A65A0(data);
+    Actor_SpawnPartyFromRecord(data);
     Actor_BeginScript(0x61, 0xC);
     TASK_SET(work);
 
@@ -182,7 +182,7 @@ MATCH void func_801F7CE0(void) {
     pos  = &work->vx;
     func_801F7FFC((Scena03Quad*)pos);
     func_801F8170(pos);
-    work->unk_5A -= 8;
+    work->frame_cells -= 8;
     work->tint.halves.unk_5C -= 0x40;
     remaining     = g_Task->timer - 1;
     g_Task->timer = remaining;
@@ -243,7 +243,7 @@ MATCH void func_801F7E6C(void) {
             spawned->unk_14            = actor->pos.z.fixed;
             record                     = (Actor*)spawned;
             record->script_pc          = 6;
-            record->unk_5A             = 0;
+            record->frame_cells        = 0;
             record->tint.halves.unk_5C = i * 819;
             record->tint.halves.unk_5E = 0;
         }

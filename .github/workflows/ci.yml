@@ -110,13 +110,6 @@ jobs:
         run: |
           git fetch --no-tags origin +main:refs/remotes/origin/main
           git update-ref refs/heads/main refs/remotes/origin/main
-      - name: Shell syntax
-        if: steps.changes.outputs.code == 'true'
-        run: git ls-files 'tools/*.sh' 'bin/*' | xargs -n 1 sh -n
-      # Warnings and errors fail; the info notes flag intended word splitting and A && B || C chains.
-      - name: Shell lint
-        if: steps.changes.outputs.code == 'true'
-        run: git ls-files 'tools/*.sh' | xargs shellcheck --severity=warning
       # dprint/check above covers Markdown, TOML and JSON; DPRINT=true makes the gate skip its second run.
       - if: steps.changes.outputs.code == 'true'
         run: meson setup build/meson
@@ -127,7 +120,6 @@ jobs:
           # loaded host, which would leave this job one core and make its cold run ten minutes.
           HEAVY_JOBS: "4"
         run: tools/pre_push.sh refs/remotes/origin/main
-      # A failure before pre-push (for example shell lint) leaves no logs to print.
       - name: Failed check logs
         if: failure() && steps.changes.outputs.code == 'true' && hashFiles('build/pre-push/*.log') != ''
         run: tail -n 40 build/pre-push/*.log

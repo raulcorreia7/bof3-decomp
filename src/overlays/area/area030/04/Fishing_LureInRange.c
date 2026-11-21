@@ -3,7 +3,7 @@
 /* Reports whether the first AREA030 entry is available to the work
  * slot: an entry in state 4 with a blank character index and area state 3
  * returns true when the work page byte is 0x16 and the row matches the entry
- * state, otherwise probes func_801BDD58 at the work position with the entry's
+ * state, otherwise probes Actor_IsInRange at the work position with the entry's
  * range byte and the entry base; a closed probe steps the work slot and
  * returns false. */
 /* func_801E0680 */
@@ -25,8 +25,8 @@ MATCH bool Fishing_LureInRange(void) {
             FAKE_BARRIER();
             work  = FISHING_STATE;
             range = (entry_byte - row->unk_0F + 3) & BYTE_MASK;
-            /* FAKE: func_801BDD58 reads the slot through the field actor layout. */
-            if (func_801BDD58(work->motion.unk_34, work->y_38.pos_y, work->bounce.half.key, range, (Actor*)g_SpawnedActors) & BYTE_MASK) {
+            /* FAKE: Actor_IsInRange reads the slot through the field actor layout. */
+            if (Actor_IsInRange(work->motion.unk_34, work->y_38.pos_y, work->bounce.half.key, range, (Actor*)g_SpawnedActors) & BYTE_MASK) {
                 return true;
             }
         }

@@ -472,8 +472,8 @@ MATCH void func_801D21B4(void) {
         actor->screen_x     = D_801D393C[D_801D40AC].x;
         actor->screen_y     = D_801D393C[D_801D40AC].y;
         if (actor->active_flags & 1) {
-            actor->unk_25 = GetTPage(TPAGE_DEPTH_4BIT, TPAGE_ABR_HALF, 0x340, 0x100);
-            actor->unk_26 = 0x80;
+            actor->sheet_page = GetTPage(TPAGE_DEPTH_4BIT, TPAGE_ABR_HALF, 0x340, 0x100);
+            actor->sheet_row  = 0x80;
         }
         actor->active_flags |= 0x88;
         parent = g_Task;
@@ -481,7 +481,7 @@ MATCH void func_801D21B4(void) {
         if (actor->active_flags & 1) {
             if (actor->unk_2C == 0) {
                 Actor_BeginScript(0x4D, 0x1C);
-                g_Task->unk_2A = 0;
+                g_Task->mirror = 0;
             } else {
                 Actor_BeginScript(0x50, 0x24);
             }
@@ -768,8 +768,8 @@ MATCH void func_801D2E30(void) {
             actor->unk_05       = 0x3A;
             actor->screen_x     = D_801D393C[D_801D40AC].x;
             actor->screen_y     = D_801D393C[D_801D40AC].y;
-            actor->unk_25       = GetTPage(TPAGE_DEPTH_4BIT, TPAGE_ABR_HALF, 0x340, 0x100);
-            actor->unk_26       = 0x80;
+            actor->sheet_page   = GetTPage(TPAGE_DEPTH_4BIT, TPAGE_ABR_HALF, 0x340, 0x100);
+            actor->sheet_row    = 0x80;
             actor->active_flags |= 0x88;
             parent = g_Task;
             g_Task = actor;

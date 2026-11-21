@@ -6,17 +6,17 @@ MATCH void func_8019EE10(void) {
 
     g_Task->active_flags      = 1;
     FIELD(u16, g_Task, 0x2Cu) = D_80145EBC;
-    g_Task->unk_28            = PALETTE_TYPE_CELLS_2;
+    g_Task->palette_8bit      = PALETTE_TYPE_CELLS_2;
     FIELD(u32, g_Task, 0x4Cu) = D_80145EDC;
     g_Task->unk_2B            = 1;
     g_Task->draw_layer        = g_Game.members[0].unk_29;
     /* The work pointer cell is re-read once per store; the second read is kept in
      * its own local so both reads stay in the original load-then-store order. */
     work                      = g_Task;
-    work->unk_25              = 0x1D;
+    work->sheet_page          = 0x1D;
     next                      = g_Task;
     work->voice_flags.raw     = 0;
-    next->unk_26              = 0;
+    next->sheet_row           = 0;
     ACTOR_CLEAR_TINT();
     g_Task->tint.bytes.flags = 0;
     g_Task->unk_48           = 0;

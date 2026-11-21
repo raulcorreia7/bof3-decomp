@@ -32,7 +32,7 @@ MATCH void func_801F3444(void) {
         slot                         = Actor_FindFreeField();
         g_ScratchPad.cells.halves[0] = slot;
         if (slot != GAME_NONE) {
-            func_801A4D54(D_801F3A08[mode] + i * 17);
+            Actor_SpawnFromRecord(D_801F3A08[mode] + i * 17);
         }
     }
 }

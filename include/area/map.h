@@ -250,7 +250,7 @@ ASSERT_OFFSET(AreaLoad, callback, 0x40);
 ASSERT_SIZE(AreaLoad, GAME_TABLE_ENTRY_SIZE);
 
 /* A tile rectangle of a map and what the field code reads once the party stands in it.
- * func_801A0490 and func_801B3C3C compare the four corners as unsigned bytes against (x, y);
+ * Area_FindEncounterZoneOf and Area_FindEncounterZone compare the four corners as unsigned bytes against (x, y);
  * `rate` indexes the D_801CD1B8 pair table (Area_RollEncounterThreshold), `kind` is returned by func_801A0348, and
  * func_801A0380 uses `seed` directly when `pick` is 0, else `seed` indexes the D_80181E40 picker. */
 typedef struct {

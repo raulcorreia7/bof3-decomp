@@ -545,7 +545,9 @@ extern u8                    D_80146856;
 extern volatile u32          D_80146858;
 extern volatile u32          D_8014685C;
 /* Retail data D_80147000-D_8014FFFF (one declaration each). */
-extern u8                    D_80147A58[];
+/* D_80147A58 */
+/* The four party actor rows after g_Actors. */
+extern u8                    g_PartyActors[];
 extern u8                    D_80147ACC[];
 extern PanelSortItem         D_80147CFC[];
 extern PanelSortItem         D_80147D08[]; /* == &D_80147CFC[1] */
@@ -1183,15 +1185,19 @@ void                              func_8015B2AC(s16* out, s32* in);
 s32                               Game_IsScenarioEqual(u8** cursor);
 s32                               Game_IsAreaEqual(u8** cursor);
 s32                               Game_TestSceneFlag(u8** cursor);
-s32                               func_8015B6A8(u8** cursor);
-s32                               func_8015B6D0(u8** cursor);
-s32                               func_8015B6F8(u8** cursor);
+/* func_8015B6A8 */
+s32                               Game_IsScenarioStateEqual(u8** cursor);
+/* func_8015B6D0 */
+s32                               Game_IsCellTypeEqual(u8** cursor);
+/* func_8015B6F8 */
+s32                               Game_TestScenarioFlag(u8** cursor);
 /* func_8015B73C */
 s32                               Game_IsLeaderEqual(u8** cursor);
 s32                               Game_TestEventFlag(u8** cursor);
 s32                               Game_HasVitalItem(u8** cursor);
 s32                               Game_IsScenarioAtMost(u8** cursor);
-s32                               func_8015B7F0(u8** cursor);
+/* func_8015B7F0 */
+s32                               Game_HasPartyFlag(u8** cursor);
 s32                               func_8015B83C(u8** cursor);
 s32                               Game_IsScriptVar0Equal(u8** cursor);
 s32                               Game_IsScriptVar1Equal(u8** cursor);
@@ -1200,7 +1206,8 @@ s32                               Game_IsScriptVar3Equal(u8** cursor);
 s32                               Game_SetScriptVar(u8* operand);
 s32                               Game_IsScriptVarEqual(u8* operand);
 s32                               Game_IncScriptVar(u8* operand);
-s32                               func_8015BABC(void);
+/* func_8015BABC */
+s32                               Game_TestNever(void);
 /* func_8015E994 */
 void                              SND_ReadSeBank0(void);
 /* func_8015EFAC */

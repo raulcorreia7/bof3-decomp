@@ -18,6 +18,7 @@ typedef enum ActorScriptSound {
 } ActorScriptSound;
 
 /* func_801A96E4 */
+/* Runs one sound opcode. */
 MATCH void Actor_RunSoundOps(ScriptState* state, u8* base) {
     switch (*(base + state->cursor)) {
         case ACTOR_SCRIPT_SOUND_PLAY_SE:
@@ -65,7 +66,7 @@ MATCH void Actor_RunSoundOps(ScriptState* state, u8* base) {
             state->cursor += 4;
             break;
         case ACTOR_SCRIPT_SOUND_PLAY_CUE:
-            func_8015D820(*(base + state->cursor + 2) | (*(base + state->cursor + 1) << 8), *(base + state->cursor + 3));
+            Actor_PlayCueByDistance(*(base + state->cursor + 2) | (*(base + state->cursor + 1) << 8), *(base + state->cursor + 3));
             state->cursor += 3;
             break;
         case ACTOR_SCRIPT_SOUND_START_BGM:

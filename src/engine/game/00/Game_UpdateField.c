@@ -11,7 +11,7 @@ MATCH void Game_UpdateField(void) {
             break;
         case GAME_REQUEST_MENU:
             UI_SetMode(2);
-            func_80198BC4(0);
+            Area_WaitWindowEffect(0);
             g_GameEntryState    = GAME_MODE_MENU;
             g_GameEntrySubstate = 0;
             break;
@@ -43,7 +43,7 @@ MATCH void Game_UpdateField(void) {
             }
             if (g_GameEntryMode != GAME_NONE) {
                 UI_SetMode(g_GameEntryMode);
-                func_80198BC4(0);
+                Area_WaitWindowEffect(0);
             }
             selection = g_SndBGMId;
             if (selection != GAME_NONE && g_GamePrevSelection != selection) {

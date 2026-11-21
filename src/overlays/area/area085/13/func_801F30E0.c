@@ -24,7 +24,7 @@ NON_MATCHING void func_801F30E0(void) {
     if (work->param.unk_0B != 0) {
         selector = g_Game.members[0].unk_4B;
     } else {
-        selector = g_Actors[2].unk_4B;
+        selector = g_Actors[2].script_record;
     }
     for (index = 0; index < 5; index++) {
         if (D_801F3D70[index * 3] == selector) {
@@ -34,10 +34,10 @@ NON_MATCHING void func_801F30E0(void) {
 
     scratch  = SP_PTR(s16, 0u);
     *scratch = work->unk_03;
-    func_801A4D54(D_801F3D4C + work->param.unk_0B * 17);
+    Actor_SpawnFromRecord(D_801F3D4C + work->param.unk_0B * 17);
     Actor_BeginScript(D_801F3D70[index * 3 + 1], D_801F3D70[index * 3 + 2]);
     *scratch = work->unk_04;
-    func_801A4D54(D_801F3D4C + work->param.unk_0B * 17);
+    Actor_SpawnFromRecord(D_801F3D4C + work->param.unk_0B * 17);
     Actor_BeginScript(D_801F3D70[index * 3 + 1], D_801F3D70[index * 3 + 2]);
     TASK_SET(work);
 

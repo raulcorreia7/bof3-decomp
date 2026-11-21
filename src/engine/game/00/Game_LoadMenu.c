@@ -15,7 +15,7 @@ MATCH void Game_LoadMenu(void) {
     D_80148654          = 3;
     /* FAKE: keep the mode argument in the call delay slot. */
     FAKE_ORDER_LOCK(UI_SetMode(3));
-    func_80198C38(1u);
+    Menu_WaitWindowEffect(1u);
     if ((D_80143F20 == 0x6Eu) && !(SND_TestEffectVoicesBusy(&sep_index, &seq_index) & BYTE_MASK)) {
         SND_StartDecrescendo(sep_index, seq_index, 0x14, 0x10);
     }

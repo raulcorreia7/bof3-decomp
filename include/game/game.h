@@ -242,7 +242,7 @@ extern SceneActorCallback g_SceneObjects[66];
 /* D_801C87D8 */
 extern u8                 s_TalkMessageIds[36];
 /* D_801C87FC */
-extern u8                 s_ScriptOpcodeOffsets[256];
+extern u8                 s_ActorScriptLengths[256];
 extern Callback           D_801C88FC[2];
 extern Callback           D_801C8904[2];
 /* D_801C8938 */

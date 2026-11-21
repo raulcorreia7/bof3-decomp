@@ -25,6 +25,7 @@ typedef enum ActorScriptStage {
 } ActorScriptStage;
 
 /* func_801AB458 */
+/* Runs one scene stage opcode. */
 #ifdef NON_MATCHING
 NON_MATCHING u8 Actor_RunStageOps(GameCursorState* state, const u8* table, u8 value) {
     u8    byte;

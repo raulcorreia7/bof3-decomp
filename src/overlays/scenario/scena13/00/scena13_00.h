@@ -56,9 +56,9 @@ extern u8                 D_801FBFEC;
             }                                                           \
             g_Actors[second_index].header.flags = 1;                    \
             g_ScratchPad.cells.halves[0]        = (u8)first;            \
-            func_801A65A0(script);                                      \
+            Actor_SpawnPartyFromRecord(script);                         \
             g_ScratchPad.cells.halves[0] = (u8)second;                  \
-            func_801A65A0((script) + 0x10);                             \
+            Actor_SpawnPartyFromRecord((script) + 0x10);                \
         }                                                               \
     } while (0)
 

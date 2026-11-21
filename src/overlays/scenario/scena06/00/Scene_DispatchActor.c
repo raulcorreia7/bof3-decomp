@@ -221,7 +221,7 @@ MATCH s8 func_801FD568(s32 entry, s8 dir_x, s8 dir_y, s16 vz_start, s16 vz_delta
         COORD_INT(g_Task->pos.z) = height + 576;
     }
     if (g_Task->vz <= 0 && speed >= 0 && landing_script != GAME_NONE) {
-        g_Task->unk_2A = flags != 0;
+        g_Task->mirror = flags != 0;
         Actor_RequestScript(landing_script);
     }
     if (g_Task->unk_0A == 0) {

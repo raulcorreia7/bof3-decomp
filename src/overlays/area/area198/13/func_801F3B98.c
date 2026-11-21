@@ -11,7 +11,7 @@ MATCH void func_801F3B98(void) {
     g_Task->tint.bytes.rgb.r = row->tint.bytes.rgb.r;
     g_Task->tint.bytes.rgb.g = row->tint.bytes.rgb.g;
     g_Task->tint.bytes.rgb.b = row->tint.bytes.rgb.b;
-    g_Task->unk_27           = row->unk_27;
+    g_Task->clut_select      = row->clut_select;
     g_Task->unk_48           = row->unk_48;
     g_Task->scale.x          = row->scale.x;
     g_Task->scale.y          = row->scale.y;

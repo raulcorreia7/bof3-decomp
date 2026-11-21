@@ -14,7 +14,7 @@ MATCH u8* func_801A46E8(u8* cursor) {
                 case 0x4:
                 case 0x9:
                 case 0xA:
-                    cursor = func_801A44A4(cursor);
+                    cursor = Area_SkipSetupBranch(cursor);
                     break;
                 case 0x6:
                     return cursor;

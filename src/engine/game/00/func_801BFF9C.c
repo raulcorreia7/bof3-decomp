@@ -67,7 +67,7 @@ MATCH void func_801BFF9C(u32 work_kind, u32 work_index, u32 work_mode) {
                 id = 0x47;
             }
             Area_SelectSceneRecord(id);
-            g_Task->unk_2A       = 0;
+            g_Task->mirror       = 0;
             g_Task->active_flags = 0;
         } else if (LOBU(g_GameRequestFlags) & 0x40) {
             Party_LoadMemberSprite(g_Game.members[0].chr.character_id, 0);
@@ -110,7 +110,7 @@ MATCH void func_801BFF9C(u32 work_kind, u32 work_index, u32 work_mode) {
                         Party_LoadMemberSprite(*order, i & BYTE_MASK);
                         order++;
                         GFX_FreePaletteFadeTarget(g_Task);
-                        g_Task->unk_27 = (g_Task->unk_05 + 0x78);
+                        g_Task->clut_select = (g_Task->unk_05 + 0x78);
                         GFX_LoadPalette((g_Task->unk_05 << 6) + GAME_PALETTE_STAGE, 0);
                     }
                     mask += BATTLE_PARTY_STRIDE;

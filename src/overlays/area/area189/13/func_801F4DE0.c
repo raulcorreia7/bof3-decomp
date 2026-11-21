@@ -25,9 +25,9 @@ NON_MATCHING void func_801F4DE0(void) {
     match                    = 0;
     g_Task->pos.z.fixed      = func_801F4A04(work->pos.x.fixed, work->pos.y.fixed) << 16;
     Actor_ClearVelocity_801F5F20();
-    g_Task->active_flags = 0;
-    g_Task->unk_4B       = 0;
-    g_EncounterSteps     = 0;
+    g_Task->active_flags  = 0;
+    g_Task->script_record = 0;
+    g_EncounterSteps      = 0;
 
     value = (rand() & 0x1F) + 0x96;
     count = Party_CountOrder(PARTY_ORDER_FIELD) & BYTE_MASK;

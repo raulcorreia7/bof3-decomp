@@ -4,7 +4,7 @@ MATCH void Area_UpdateIdleActor(void) {
     Actor* work;
 
     func_801C3828();
-    func_801C3598();
+    Party_TickConfusion();
     func_801C329C();
     func_801C2BEC();
     if (!(func_801C3790(0) & BYTE_MASK) && !(func_801C37DC(0) & BYTE_MASK) && !(func_801C2AAC() & BYTE_MASK)) {

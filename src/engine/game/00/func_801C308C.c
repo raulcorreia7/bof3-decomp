@@ -19,7 +19,7 @@ MATCH void func_801C308C(s32 arg) {
     base_dst = AREA_PALETTE_WORK;
     do {
         off = index << 1;
-        sel = work->unk_27;
+        sel = work->clut_select;
         index += 1;
         page                            = (sel >> 3) << 9;
         addr_dst                        = page + base_dst;

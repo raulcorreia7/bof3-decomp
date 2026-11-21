@@ -97,31 +97,31 @@ void func_801F8108(s32 x, s32 y);
     func_801F85F0((s16)g_Task->screen_x, (s16)g_Task->screen_y, (s16)g_Task->unk_32); \
     (work) = g_Task;                                                                  \
     (work)->unk_32 += (step);                                                         \
-    if (--(work)->unk_5A == 0) {                                                      \
+    if (--(work)->frame_cells == 0) {                                                 \
         func_80196070();                                                              \
     }
 
 /* The two sparkle steps of 348.c: stir the seed, advance the frame counters and move to the next mode after `reset` frames. They differ only in `reset`. */
-#define SCENA08_SPARKLE_STEP(count, timer, reset) \
-    func_801F8534();                              \
-    g_Task->script_pc += RANDOM_MASK(BYTE_MASK);  \
-    if ((g_Task->unk_5A & 3) == 0) {              \
-        g_Task->unk_2C += 1;                      \
-    }                                             \
-    (count)        = g_Task->unk_32 + 1;          \
-    (timer)        = g_Task->unk_5A - 1;          \
-    g_Task->unk_5A = (timer);                     \
-    g_Task->unk_32 = (count);                     \
-    if ((timer) == 0) {                           \
-        g_Task->unk_5A = (reset);                 \
-        g_Task->header.mode += 1;                 \
+#define SCENA08_SPARKLE_STEP(count, timer, reset)  \
+    func_801F8534();                               \
+    g_Task->script_pc += RANDOM_MASK(BYTE_MASK);   \
+    if ((g_Task->frame_cells & 3) == 0) {          \
+        g_Task->unk_2C += 1;                       \
+    }                                              \
+    (count)             = g_Task->unk_32 + 1;      \
+    (timer)             = g_Task->frame_cells - 1; \
+    g_Task->frame_cells = (timer);                 \
+    g_Task->unk_32      = (count);                 \
+    if ((timer) == 0) {                            \
+        g_Task->frame_cells = (reset);             \
+        g_Task->header.mode += 1;                  \
     }
 
 /* The two sparkle starts of 348.c: seed the frame counters, stir the seed 0x40 times and play `cue`. They differ only in `cue`. */
 #define SCENA08_SPARKLE_START(i, cue)                \
-    g_Task->unk_5A    = 0x20;                        \
-    g_Task->unk_32    = 0;                           \
-    g_Task->script_pc = 0;                           \
+    g_Task->frame_cells = 0x20;                      \
+    g_Task->unk_32      = 0;                         \
+    g_Task->script_pc   = 0;                         \
     for ((i) = 0; (i) < 0x40; (i)++) {               \
         g_Task->script_pc += RANDOM_MASK(BYTE_MASK); \
         func_801F81F4(g_Task->script_pc);            \

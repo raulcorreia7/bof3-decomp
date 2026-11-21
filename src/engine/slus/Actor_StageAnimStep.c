@@ -13,15 +13,15 @@ MATCH void Actor_StageAnimStep(void) {
     u8*    table;
     u8     selected;
 
-    first_work              = g_Task;
-    first_work->unk_4A      = *(u8*)(first_work->script + first_work->script_pc);
-    current_work            = g_Task;
-    index                   = current_work->script_pc;
-    entries                 = current_work->script;
-    next_index              = index + 1;
-    current_work->script_pc = next_index;
-    selected                = *(entries + (next_index & HALF_MASK));
-    table                   = current_work->range_54.table;
-    current_work->script_pc = index + 2;
-    current_work->unk_5A    = *(u16*)(table + selected * 2);
+    first_work                = g_Task;
+    first_work->unk_4A        = *(u8*)(first_work->script + first_work->script_pc);
+    current_work              = g_Task;
+    index                     = current_work->script_pc;
+    entries                   = current_work->script;
+    next_index                = index + 1;
+    current_work->script_pc   = next_index;
+    selected                  = *(entries + (next_index & HALF_MASK));
+    table                     = current_work->range_54.table;
+    current_work->script_pc   = index + 2;
+    current_work->frame_cells = *(u16*)(table + selected * 2);
 }
