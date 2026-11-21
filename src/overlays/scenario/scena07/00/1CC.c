@@ -639,9 +639,9 @@ NON_MATCHING void func_801F9330(Scena07BurstBuffer* buffer) {
             }
             buffer->shade[0][i] = ((light & 0xF00) >> 5) + 7;
         }
-        pos[0] = buffer->x + (dir[0] << 5);
-        pos[1] = buffer->y + (dir[1] << 5);
-        pos[2] = buffer->z + (dir[2] << 13);
+        pos[0] = buffer->pos.vx + (dir[0] << 5);
+        pos[1] = buffer->pos.vy + (dir[1] << 5);
+        pos[2] = buffer->pos.vz + (dir[2] << 13);
         Camera_ProjectPoint(pos, &buffer->points[0][i]);
         phase += 0x80;
     }
