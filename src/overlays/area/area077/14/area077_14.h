@@ -20,7 +20,6 @@
 
 /* The four corner vectors RotTransPers4 projects; g_ScratchPadVectors forwards. */
 /* g_ScratchPadVectors */
-extern SVECTOR  g_ScratchPadVectors[];
 extern s16      D_800E4800;
 extern u16      D_800E5500;
 extern u8       D_800E5502;
