@@ -38,10 +38,10 @@ MATCH void SND_QueueProximitySE(s32 se_id) {
     s32 marked_id;
 
     marked_id = se_id | 0x8000;
-    SND_PROXIMITY_BAND(0x16, D_80182308[0])
-    SND_PROXIMITY_BAND(0x12, D_80182308[0])
-    SND_PROXIMITY_BAND(0xc, D_801822EA)
-    SND_PROXIMITY_BAND(8, D_801822CA)
-    SND_PROXIMITY_BAND(6, D_801822AA)
-    SND_PROXIMITY_BAND(2, D_80182290[0])
+    SND_PROXIMITY_BAND(0x16, g_SndVolumeLevels[64])
+    SND_PROXIMITY_BAND(0x12, g_SndVolumeLevels[64])
+    SND_PROXIMITY_BAND(0xc, g_SndVolumeLevels[49])
+    SND_PROXIMITY_BAND(8, g_SndVolumeLevels[33])
+    SND_PROXIMITY_BAND(6, g_SndVolumeLevels[17])
+    SND_PROXIMITY_BAND(2, g_SndVolumeLevels[4])
 }
