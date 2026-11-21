@@ -49,6 +49,49 @@ CACHE_DIR = os.environ.get("BOF3_CC_CACHE_DIR") or os.path.expanduser(
 )
 
 
+def _read_literal(text: str, i: int, joined: list[str]) -> tuple[int, bool]:
+    """Append the characters of a string literal; return where it ends and whether it closed."""
+    while i < len(text):
+        char = text[i]
+        if char == "\\" and i + 1 < len(text):
+            joined.append(text[i + 1])
+            i += 2
+        elif char == '"':
+            return i + 1, True
+        else:
+            joined.append(char)
+            i += 1
+    return i, False
+
+
+def _skip_to_literal(text: str, i: int) -> int | None:
+    """Return the index past the next adjacent literal's opening quote, or None."""
+    while i < len(text) and text[i] in " \t\r\n":
+        i += 1
+    if i >= len(text) or text[i] != '"':
+        return None
+    return i + 1
+
+
+def _include_name(text: str, i: int) -> str | None:
+    """Join the adjacent string literals from ``i`` into one quoted path, or None."""
+    joined: list[str] = []
+    first = True
+    while i < len(text):
+        if not first:
+            i = _skip_to_literal(text, i)
+            if i is None:
+                return None
+        first = False
+        i, closed = _read_literal(text, i, joined)
+        value = "".join(joined)
+        if len(value) >= 2 and value[0] == '"' and '"' in value[1:]:
+            return value[1 : value.index('"', 1)]
+        if not closed:
+            return None
+    return None
+
+
 def inline_includes(text: str) -> list[str]:
     """Return the file names of the assembler includes in preprocessed C text.
 
@@ -56,39 +99,8 @@ def inline_includes(text: str) -> list[str]:
     literal; ``INCLUDE_ASM`` concatenates the assembly folder, the function name and ``.s``
     into adjacent literals. Both spellings join back into one quoted path here.
     """
-    names = []
-    for match in INLINE_INCLUDE.finditer(text):
-        i = match.end()
-        joined: list[str] = []
-        first = True
-        while i < len(text):
-            if not first:
-                while i < len(text) and text[i] in " \t\r\n":
-                    i += 1
-                if i >= len(text) or text[i] != '"':
-                    break
-                i += 1
-            first = False
-            closed = False
-            while i < len(text):
-                char = text[i]
-                if char == "\\" and i + 1 < len(text):
-                    joined.append(text[i + 1])
-                    i += 2
-                elif char == '"':
-                    i += 1
-                    closed = True
-                    break
-                else:
-                    joined.append(char)
-                    i += 1
-            value = "".join(joined)
-            if len(value) >= 2 and value[0] == '"' and '"' in value[1:]:
-                names.append(value[1 : value.index('"', 1)])
-                break
-            if not closed:
-                break
-    return names
+    names = (_include_name(text, m.end()) for m in INLINE_INCLUDE.finditer(text))
+    return [name for name in names if name is not None]
 
 
 def parse(argv):
