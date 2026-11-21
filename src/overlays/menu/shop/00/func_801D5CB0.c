@@ -8,9 +8,9 @@ MATCH void func_801D5CB0(void) {
     if (g_SaveCardStatus == CARD_EVENT_OK || g_SaveCardStatus == CARD_EVENT_NEW) {
         if (func_801EF200() != 0) {
             SND_PlaySE(EMI_SE_ID(SND_BANK_COMMON, 7));
-            g_SaveCardStatus = SAVE_STATUS_FORMAT_FAILED;
+            g_SaveCardStatus = SAVE_WRITE_STATUS_FORMAT_FAILED;
         } else {
-            g_SaveCardStatus = SAVE_STATUS_FORMATTED;
+            g_SaveCardStatus = SAVE_WRITE_STATUS_FORMATTED;
         }
     }
     g_MenuStep.state = 0xC;

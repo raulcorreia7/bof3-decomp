@@ -21,18 +21,18 @@ MATCH void func_801E5C68(void) {
         case CARD_EVENT_CAPACITY:
             D_801ED7FC = 0xF;
             break;
-        case SAVE_STATUS_LOADED:
+        case SAVE_LOAD_STATUS_LOADED:
             SAVE_DrawSlots(SAVE_SLOTS_X, SAVE_SLOTS_Y, 0U);
             D_801ED7FC            = 0xB;
             g_MenuStartReturnStep = 0xF;
             break;
-        case SAVE_STATUS_NO_FILE:
+        case SAVE_LOAD_STATUS_NO_FILE:
             D_801ED7FC = 0x11;
             break;
-        case SAVE_STATUS_BAD_CHECKSUM:
+        case SAVE_LOAD_STATUS_BAD_CHECKSUM:
             D_801ED7FC = 0x12;
             break;
-        case SAVE_STATUS_NO_CARD:
+        case SAVE_LOAD_STATUS_NO_CARD:
             D_801ED7FC            = 0xC;
             g_MenuStartReturnStep = 0;
             step                  = 1;

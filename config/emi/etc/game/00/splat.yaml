@@ -82,7 +82,7 @@ segments:
       - [0x154, .rodata, Area_RunSetupRecord]
       - [0x190, .rodata, Menu_OpenMaster]
       - [0x1A8, .rodata, func_801A7E54]
-      - [0x1D8, .rodata, Scene_StartShopSave]
+      - [0x1D8, .rodata, Scene_RunInn]
       - [0x238, .rodata, func_801A8728]
       - [0x4C0, .rodata, Actor_RunFlowOps]
   # Placement: .data resumes after another section in the retail bytes; one segment would group both .data runs.
@@ -487,7 +487,7 @@ segments:
       - [0x124E8, c, func_801A7CE8]
       - [0x124F0, c, Menu_OpenMaster]
       - [0x12654, c, func_801A7E54]
-      - [0x1282C, c, Scene_StartShopSave]
+      - [0x1282C, c, Scene_RunInn]
       - [0x12AF8, c, Message_RunAreaMessage]
       - [0x12B9C, c, func_801A839C]
       - [0x12BDC, c, func_801A83DC]

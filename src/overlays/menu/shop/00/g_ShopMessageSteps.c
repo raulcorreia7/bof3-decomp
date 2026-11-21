@@ -2,19 +2,19 @@
 
 // clang-format off
 void (*g_ShopMessageSteps[SHOP_PANEL0_STATE_COUNT])() = {
-    Shop_IdleStep,
+    Menu_IdleStep,
     func_801E2948,
     func_801E2988,
 };
 
 Callback g_ShopCommandsSteps[SHOP_PANEL2_STATE_COUNT] = {
-    Shop_IdleStep,
+    Menu_IdleStep,
     func_801E2A30,
     func_801E2A70,
 };
 
 Callback g_ShopZennySteps[SHOP_PANEL1_STATE_COUNT] = {
-    Shop_IdleStep,
+    Menu_IdleStep,
     func_801E2B14,
     func_801E2B54,
 };
@@ -22,7 +22,7 @@ Callback g_ShopZennySteps[SHOP_PANEL1_STATE_COUNT] = {
 u16 D_801E5DD8[2] = { 0x0070, 0x0000 };
 
 Callback g_ShopEquipStatSteps[SHOP_PANEL5_STATE_COUNT] = {
-    Shop_IdleStep,
+    Menu_IdleStep,
     func_801E2C9C,
     func_801E2CDC,
     func_801E2D1C,
@@ -30,13 +30,13 @@ Callback g_ShopEquipStatSteps[SHOP_PANEL5_STATE_COUNT] = {
 };
 
 Callback g_ShopEquipmentSteps[SHOP_PANEL6_STATE_COUNT] = {
-    Shop_IdleStep,
+    Menu_IdleStep,
     Battle_PickFormationTarget,
     func_801E2E70,
 };
 
 Callback g_ShopItemsSteps[SHOP_PANEL7_STATE_COUNT] = {
-    Shop_IdleStep,
+    Menu_IdleStep,
     func_801E31C4,
     func_801E3204,
     func_801E3244,
@@ -53,7 +53,7 @@ u8 D_801E5E1C[0x10] = {
 };
 
 Callback g_ShopInventorySteps[SHOP_PANEL9_STATE_COUNT] = {
-    Shop_IdleStep,
+    Menu_IdleStep,
     func_801E3774,
     func_801E37B4,
 };
@@ -64,7 +64,7 @@ u8 D_801E5E38[0x10] = {
 };
 
 Callback g_ShopPanel11Steps[SHOP_PANEL11_STATE_COUNT] = {
-    Shop_IdleStep,
+    Menu_IdleStep,
     func_801E3BF8,
     func_801E3C38,
     func_801E3C78,
@@ -72,7 +72,7 @@ Callback g_ShopPanel11Steps[SHOP_PANEL11_STATE_COUNT] = {
 };
 
 Callback g_ShopPanel12Steps[SHOP_PANEL12_STATE_COUNT] = {
-    Shop_IdleStep,
+    Menu_IdleStep,
     func_801E3D4C,
     func_801E3D8C,
     func_801E3DCC,
@@ -80,7 +80,7 @@ Callback g_ShopPanel12Steps[SHOP_PANEL12_STATE_COUNT] = {
 };
 
 Callback g_ShopCharacterSteps[SHOP_PANEL13_STATE_COUNT] = {
-    Shop_IdleStep,
+    Menu_IdleStep,
     func_801E3EB4,
     func_801E3EF4,
 };
@@ -126,26 +126,26 @@ static struct {
 };
 
 Callback g_ShopPanel15Steps[SHOP_PANEL15_STATE_COUNT] = {
-    Shop_IdleStep,
+    Menu_IdleStep,
     func_801E4278,
     func_801E42B8,
     func_801E42F8,
 };
 
 Callback g_ShopPanel16Steps[SHOP_PANEL16_STATE_COUNT] = {
-    Shop_IdleStep,
+    Menu_IdleStep,
     func_801E438C,
     func_801E43CC,
 };
 
 Callback g_ShopPanel17Steps[SHOP_PANEL17_STATE_COUNT] = {
-    Shop_IdleStep,
+    Menu_IdleStep,
     func_801E4460,
     func_801E44A0,
 };
 
 Callback g_ShopPanel18Steps[SHOP_PANEL18_STATE_COUNT] = {
-    Shop_IdleStep,
+    Menu_IdleStep,
     func_801E4540,
     func_801E4580,
 };

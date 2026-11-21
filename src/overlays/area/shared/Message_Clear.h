@@ -6,7 +6,7 @@
 MATCH void Message_Clear(void) {
     MESSAGE_REQUEST_CLEAR();
     if (MENU_SELECTION_IDLE()) {
-        g_SceneEventState.mode      = SCENE_EVENT_SHOP_SAVE;
+        g_SceneEventState.mode      = SCENE_EVENT_INN;
         g_SceneEventState.step      = 5;
         g_SceneEventState.selection = 0xFF;
     }

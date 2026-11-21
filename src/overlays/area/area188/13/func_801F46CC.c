@@ -4,7 +4,7 @@ MATCH void func_801F46CC(void) {
     MESSAGE_REQUEST_CLEAR();
     if (g_ScenarioState.scenario_id >= 0xD) {
         if (g_MessageChoice == 0) {
-            g_SceneEventState.mode      = SCENE_EVENT_SHOP_SAVE;
+            g_SceneEventState.mode      = SCENE_EVENT_INN;
             g_SceneEventState.step      = 0;
             g_SceneEventState.selection = 0xFF;
         }

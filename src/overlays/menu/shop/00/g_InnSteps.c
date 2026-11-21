@@ -1,14 +1,14 @@
 #include "shop_00.h"
 
-Callback g_ShopStep3Steps[SHOP_STEP3_COUNT] = {
-    func_801D39F8, func_801D3AA8, func_801D41B0, SAVE_DispatchState, func_801D60B0,
+Callback g_InnSteps[INN_STEP_COUNT] = {
+    func_801D39F8, Menu_RunInnMenu, Menu_RunInnRest, SAVE_DispatchState, func_801D60B0,
 };
 
-Callback g_ShopStep3Sub1Steps[SHOP_STEP3_SUB1_COUNT] = {
+Callback g_InnMenuSteps[INN_MENU_STATE_COUNT] = {
     func_801D3AE4, func_801D3B98, func_801D3C9C, func_801D3D84, func_801D3FD4, func_801D408C,
 };
 
-Callback g_ShopStep3Sub2Steps[SHOP_STEP3_SUB2_COUNT] = {
+Callback g_InnRestSteps[INN_REST_STATE_COUNT] = {
     func_801D41EC, func_801D430C, func_801D43A4, func_801D43F0, func_801D446C, func_801D456C, func_801D4614,
 };
 

@@ -16,7 +16,7 @@
 #define MENU_EQUIPMENT_ROW_COUNT    6
 
 /* 0x801D2F64 (bate), 0x801D3F0C (shisu), 0x801D8A0C (shop), 0x801DBF04 (start) */
-MATCH void Shop_DrawEquipment(s16 x, s16 y, u8 record_index) {
+MATCH void Menu_DrawEquipmentPanel(s16 x, s16 y, u8 record_index) {
     const volatile void* items[MENU_EQUIPMENT_ROW_COUNT];
     Character*           record;
     u16                  row_y;

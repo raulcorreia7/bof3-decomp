@@ -93,16 +93,6 @@ typedef struct ShopSelection {
 
 ASSERT_OFFSET(ShopSelection, unk_34, 0x34);
 
-/* The save menu results g_SaveCardStatus holds beyond the CardEvent codes 0 to 4. */
-enum {
-    SAVE_STATUS_NO_FILE       = 5,  /* GAME_TEXT_NO_SAVE_FILE */
-    SAVE_STATUS_WRITE_FAILED  = 6,  /* the write ended in a card error */
-    SAVE_STATUS_FORMAT_FAILED = 7,  /* the card format failed */
-    SAVE_STATUS_SAVED         = 8,  /* GAME_TEXT_SAVE_COMPLETE */
-    SAVE_STATUS_FORMATTED     = 9,  /* GAME_TEXT_INIT_COMPLETE */
-    SAVE_STATUS_CREATED       = 10, /* a new file was saved */
-};
-
 /* D_801E60EC: the save message shown during the timed wait, named for the step it precedes. */
 enum {
     SAVE_WAIT_OVERWRITE = 20,
@@ -204,22 +194,22 @@ extern char        D_801D0E88[];
 extern char        D_801D0E90[];
 extern char        D_801D0E98[];
 /* Entries of the step handler tables. */
-#define SHOP_STEP_COUNT          11
+#define MENU_SCREEN_COUNT        11
 #define SHOP_STEP2_COUNT         5
 #define SHOP_STEP2_SUB0_COUNT    2
 #define SHOP_STEP2_SUB1_COUNT    1
 #define SHOP_STEP2_SUB2_COUNT    8
 #define SHOP_STEP2_SUB3_COUNT    5
-#define SHOP_STEP3_COUNT         5
-#define SHOP_STEP3_SUB1_COUNT    6
-#define SHOP_STEP3_SUB2_COUNT    7
-#define SHOP_STEP5_COUNT         8
-#define SHOP_STEP6_COUNT         4
-#define SHOP_STEP6_SUB0_COUNT    3
-#define SHOP_STEP6_SUB3_COUNT    4
-#define SHOP_STEP7_COUNT         5
-#define SHOP_STEP7_SUB2_COUNT    5
-#define SHOP_STEP7_SUB3_COUNT    3
+#define INN_STEP_COUNT           5
+#define INN_MENU_STATE_COUNT     6
+#define INN_REST_STATE_COUNT     7
+#define INOCULATION_STEP_COUNT   8
+#define PARTY_SWAP_STEP_COUNT    4
+#define PARTY_SWAP_SUB0_COUNT    3
+#define PARTY_SWAP_SUB3_COUNT    4
+#define SKILL_INK_STEP_COUNT     5
+#define SKILL_INK_SUB2_COUNT     5
+#define SKILL_INK_SUB3_COUNT     3
 #define SHOP_STEP8_COUNT         4
 #define SHOP_STEP8_SUB2_COUNT    5
 #define SHOP_STEP9_COUNT         3
@@ -247,7 +237,7 @@ extern char        D_801D0E98[];
 #define SHOP_PANEL18_STATE_COUNT 3
 
 /* D_801E5144 */
-extern Callback    g_ShopSteps[SHOP_STEP_COUNT];
+extern Callback    g_MenuScreenSteps[MENU_SCREEN_COUNT];
 /* D_801E5170 */
 extern Callback    g_ShopStep2Steps[SHOP_STEP2_COUNT];
 /* D_801E5184 */
@@ -264,11 +254,11 @@ extern Callback    g_ShopStep8Steps[SHOP_STEP8_COUNT];
 extern Callback    g_ShopStep8Sub2Steps[SHOP_STEP8_SUB2_COUNT];
 extern u8          D_801E51E8[0xDC];
 /* D_801E52C4 */
-extern Callback    g_ShopStep3Steps[SHOP_STEP3_COUNT];
+extern Callback    g_InnSteps[INN_STEP_COUNT];
 /* D_801E52D8 */
-extern Callback    g_ShopStep3Sub1Steps[SHOP_STEP3_SUB1_COUNT];
+extern Callback    g_InnMenuSteps[INN_MENU_STATE_COUNT];
 /* D_801E52F0 */
-extern Callback    g_ShopStep3Sub2Steps[SHOP_STEP3_SUB2_COUNT];
+extern Callback    g_InnRestSteps[INN_REST_STATE_COUNT];
 /* D_801E530C */
 extern Callback    g_SaveSteps[SAVE_STATE_COUNT];
 /* D_801E5360 */
@@ -278,7 +268,7 @@ extern s32         D_801E5380[];
 extern s32         D_801E5384[];
 extern const char* D_801E5434[];
 /* D_801E545C */
-extern Callback    g_ShopStep5Steps[SHOP_STEP5_COUNT];
+extern Callback    g_InoculationSteps[INOCULATION_STEP_COUNT];
 extern u8          D_801E547C[];
 extern u8          g_MenuCaptionRight[];
 extern u8          g_MenuClockCaption[];
@@ -313,11 +303,11 @@ extern u8          g_MenuCommandRows[][5];
 extern u8*         g_MenuAbilityListNames[4];
 extern u8          D_801E5BC8[];
 /* D_801E5BEC */
-extern Callback    g_ShopStep6Steps[SHOP_STEP6_COUNT];
+extern Callback    g_PartySwapSteps[PARTY_SWAP_STEP_COUNT];
 /* D_801E5BFC */
-extern Callback    g_ShopStep6Sub0Steps[SHOP_STEP6_SUB0_COUNT];
+extern Callback    g_PartySwapSub0Steps[PARTY_SWAP_SUB0_COUNT];
 /* D_801E5C08 */
-extern Callback    g_ShopStep6Sub3Steps[SHOP_STEP6_SUB3_COUNT];
+extern Callback    g_PartySwapSub3Steps[PARTY_SWAP_SUB3_COUNT];
 
 typedef VECTOR BoatPartyPos;
 
@@ -334,11 +324,11 @@ extern u8           D_801E5CC0[];
 extern u8           D_801E5CCC[];
 extern u8           D_801E5CD8[];
 /* D_801E5CE8 */
-extern Callback     g_ShopStep7Steps[SHOP_STEP7_COUNT];
+extern Callback     g_SkillInkSteps[SKILL_INK_STEP_COUNT];
 /* D_801E5CFC */
-extern Callback     g_ShopStep7Sub2Steps[SHOP_STEP7_SUB2_COUNT];
+extern Callback     g_SkillInkSub2Steps[SKILL_INK_SUB2_COUNT];
 /* D_801E5D10 */
-extern Callback     g_ShopStep7Sub3Steps[SHOP_STEP7_SUB3_COUNT];
+extern Callback     g_SkillInkSub3Steps[SKILL_INK_SUB3_COUNT];
 extern u8           D_801E5D1C[];
 /* D_801E5D2C */
 extern Callback     g_AbilityStockCommands[];
@@ -445,8 +435,9 @@ void Menu_DrawFormationPreview(u16 x, u16 y, u8 index, u8 blink, s32 angle);
 /* func_801AF494 */
 /* func_801AF930; sig-kept: the retail callers narrow x and y to s16 and pass the ability record. */
 void UI_DrawAbilityRow(s16 x, s16 y, u8 shade, u8 element, volatile Ability* ability, u8 cost, u8 flags);
-void Shop_DispatchStep(void);
-void func_801D0EDC(void);
+void Menu_DispatchScreen(void);
+/* func_801D0EDC */
+void Menu_SelectScreen(void);
 void func_801D1000(void);
 void func_801D10E4(void);
 void func_801D1120(void);
@@ -479,16 +470,19 @@ u32  Shop_GetSellPrice(ItemCategory category, s32 item_id, s32 antique_shop);
 void func_801D3710(void);
 /* func_801D3828 */
 void Shop_Equip(u8 character_id, u8 slot, u8 item_id);
-void func_801D39BC(void);
+/* func_801D39BC */
+void Menu_RunInn(void);
 void func_801D39F8(void);
-void func_801D3AA8(void);
+/* func_801D3AA8 */
+void Menu_RunInnMenu(void);
 void func_801D3AE4(void);
 void func_801D3B98(void);
 void func_801D3C9C(void);
 void func_801D3D84(void);
 void func_801D3FD4(void);
 void func_801D408C(void);
-void func_801D41B0(void);
+/* func_801D41B0 */
+void Menu_RunInnRest(void);
 void func_801D41EC(void);
 void func_801D430C(void);
 void func_801D43A4(void);
@@ -537,7 +531,8 @@ void func_801D6F00(void);
 /* func_801D7080 */
 void SAVE_FormatSlot(void);
 void func_801D7208(void);
-void func_801D7344(void);
+/* func_801D7344 */
+void Menu_RunInoculation(void);
 void func_801D7380(void);
 void func_801D7444(void);
 void func_801D76B8(void);
@@ -547,12 +542,13 @@ void func_801D7B74(void);
 void func_801D7CC8(void);
 void func_801D7D48(void);
 void Menu_SwapBytes(u8* first, u8* second);
-void func_801D7E1C(u8 slot, s32 x, s32 y, s32 style, u8 cursor);
+/* func_801D7E1C */
+void Menu_DrawInoculationWindow(u8 slot, s32 x, s32 y, s32 style, u8 cursor);
 void func_801D8050(s32 panel_x);
 u8   func_801D81B4(u8* cursor_byte, s32 palette_index);
 void Menu_DrawCharacterWindow(s32 px, s32 py, u8 character_index, s32 shaded, s32 unused);
 void Menu_DrawStatPanel(u16 panel_x, u16 panel_y, u8 palette_index);
-void Shop_DrawEquipment(s16 x, s16 y, u8 record_index);
+void Menu_DrawEquipmentPanel(s16 x, s16 y, u8 record_index);
 void func_801D8C58(s16 x, s16 y, u8 index, u8 flag);
 void Menu_DrawPortrait(s32 sprite_x, s32 sprite_y, s32 atlas_index, s32 shade_mode);
 void Menu_DrawCharacterPortrait(u16 sprite_x, u16 sprite_y, u8 atlas_index, u8 shade_mode);
@@ -572,14 +568,15 @@ void Menu_DrawWindowFrame(s16 x, s16 y, u8 width, u8 height);
 void Menu_DrawInventoryWindow(MenuPanelTask* task);
 void SAVE_DrawSlot(u8 index, s32 left, s32 top, SaveSlotRow* row);
 void SAVE_DrawPortTabs(s16 x, s16 y, u32 tab_flags, u8 port, u8 variant);
-void func_801DE188(void);
+/* func_801DE188 */
+void Menu_RunPartySwap(void);
 void func_801DE1C4(void);
 void func_801DE200(void);
-void Shop_StartFadeIn(void);
+void Menu_StartFadeIn(void);
 void func_801DE40C(void);
 void func_801DE45C(void);
 /* func_801DE4C8 */
-void Shop_PickMember(void);
+void Menu_PickPartyMember(void);
 void func_801DE850(void);
 void func_801DE88C(void);
 void func_801DE8E8(void);
@@ -591,7 +588,8 @@ void Menu_SwapBytes5(u8* first, u8* second);
 s32  func_801DF478(void);
 void func_801DF6A8(void);
 void func_801DF90C(void);
-void func_801DF978(void);
+/* func_801DF978 */
+void Menu_RunSkillInk(void);
 void func_801DF9B4(void);
 void func_801DF9EC(void);
 void func_801DFDB8(void);
@@ -633,7 +631,7 @@ void func_801E262C(void);
 void func_801E2650(void);
 void func_801E2724(void);
 void func_801E27BC(void);
-void Shop_IdleStep(void);
+void Menu_IdleStep(void);
 /* func_801E2808 */
 void Menu_MessagePanel(void);
 void func_801E2948(void);
@@ -706,7 +704,7 @@ void func_801E45C0(MenuPanelTask* task);
 s32  func_801E4C2C(s32 item_class);
 bool Party_HasSkill(s32 item_id);
 /* func_801E4DF4 */
-void Shop_DrawCuePanel(MenuPanelTask* panel_task);
+void Menu_DrawCuePanel(MenuPanelTask* panel_task);
 void func_801E4E9C(MenuPanelTask* panel_task);
 void func_801E4FC8(s32 sprite_x, s32 sprite_y, u8 atlas_index, s32 shade_mode);
 /* Returns the save probe's signed byte result; its caller tests it against -1. */

@@ -25,7 +25,7 @@ MATCH void func_801D5894(void) {
                 D_801E610C += 1;
             }
             if (((SaveAccessCallback)SAVE_AccessFile)(1, date_label, 2, SAVE_FILE_SIZE, 0) != -1) {
-                g_SaveCardStatus = SAVE_STATUS_CREATED;
+                g_SaveCardStatus = SAVE_WRITE_STATUS_CREATED;
                 g_MenuStep.state = 0xC;
                 D_80148654       = 0x3C;
                 D_801E60F0       = 2;
@@ -33,7 +33,7 @@ MATCH void func_801D5894(void) {
             }
         }
         if (g_SaveCardStatus == CARD_EVENT_ERROR) {
-            g_SaveCardStatus = SAVE_STATUS_WRITE_FAILED;
+            g_SaveCardStatus = SAVE_WRITE_STATUS_WRITE_FAILED;
         }
         SND_PlaySE(EMI_SE_ID(SND_BANK_COMMON, 7));
     }

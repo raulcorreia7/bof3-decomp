@@ -142,14 +142,6 @@ typedef union CampMenuStepCounter {
 ASSERT_OFFSET(CampMenuStepCounter, rows, 0);
 ASSERT_SIZE(CampMenuStepCounter, 2);
 
-/* The save menu results g_SaveCardStatus holds beyond the CardEvent codes 0 to 4. */
-enum {
-    SAVE_STATUS_LOADED       = 5, /* the load verified; the slots show */
-    SAVE_STATUS_NO_FILE      = 6, /* the card directory has no save file */
-    SAVE_STATUS_BAD_CHECKSUM = 7, /* the loaded file failed its checksum */
-    SAVE_STATUS_NO_CARD      = 8, /* neither port holds a usable card */
-};
-
 typedef struct {
     s32 unk_00;
     s32 unk_04;
@@ -394,8 +386,8 @@ extern u8       g_MenuListTab1OffSprites[];
 extern u8       g_MenuListTab1OnSprites[];
 extern u8       g_MenuExperienceSprites[];
 extern u8       g_MenuLabelAgility[4];
-extern u8       g_MenuEquipRowIcons[8]; /* equipment-row sprites. @source: read:Shop_DrawEquipment */
-extern u8       g_MenuLabelEquip[8];    /* the equipment panel caption. @source: read:Shop_DrawEquipment */
+extern u8       g_MenuEquipRowIcons[8]; /* equipment-row sprites. @source: read:Menu_DrawEquipmentPanel */
+extern u8       g_MenuLabelEquip[8];    /* the equipment panel caption. @source: read:Menu_DrawEquipmentPanel */
 extern u8       g_MenuPortraitAtlas[96];
 extern u8       g_MenuCaptionIcon[792];
 extern s32      D_801ECC98[];
@@ -600,7 +592,7 @@ extern void func_801DB510(void);
 void        func_801DB550(void);
 void        func_801DB5AC(void);
 /* func_801DBF04 */
-extern void Shop_DrawEquipment(s16 x, s16 y, u8 record_index);
+extern void Menu_DrawEquipmentPanel(s16 x, s16 y, u8 record_index);
 extern void func_801DC150(s16 x, s16 y, u8 index, u8 flag);
 /* func_801DCDB8 */
 void        Menu_DrawFormationPreview(u16 x, u16 y, u8 index, u8 blink, s32 angle);

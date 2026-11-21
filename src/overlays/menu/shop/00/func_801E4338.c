@@ -2,5 +2,5 @@
 
 MATCH void func_801E4338(void) {
     g_ShopPanel16Steps[g_MenuCurrentPanel->state]();
-    Shop_DrawCuePanel(g_MenuCurrentPanel);
+    Menu_DrawCuePanel(g_MenuCurrentPanel);
 }

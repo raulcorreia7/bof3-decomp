@@ -1,7 +1,7 @@
 #include "shop_00.h"
 
 /* func_801DE4C8 */
-MATCH void Shop_PickMember(void) {
+MATCH void Menu_PickPartyMember(void) {
     u8  prev_index;
     u8  prev_side;
     u8* side;

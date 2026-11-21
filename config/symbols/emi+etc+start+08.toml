@@ -49,7 +49,7 @@ Menu_OpenPartyChange = { addr = 0x801DAE14, type = "func", source = "lists the c
 Menu_SwapPartyMembers = { addr = 0x801DB04C, type = "func", source = "swaps a field member with another or a reserve member, with their skill order rows" }
 Menu_DrawCharacterWindow = { addr = 0x801DB764, type = "func", source = "Draws the window of one party member of the Bate menu from g_Characters: portrait, name, level, poison and confusion labels, HP and AP values and the experience bar." }
 Menu_DrawStatPanel = { addr = 0x801DBBCC, type = "func", source = "Draws the stat panel of party member palette_index at panel_x, panel_y: the power, defense, intelligence and agility labels with their u16 values from the character record, the status text when the status byte is not GAME_NONE, and the panel border sprite runs." }
-Shop_DrawEquipment = { addr = 0x801DBF04, type = "func", source = "Draws the equipment panel of character record_index: the filled panel, the EQUIP caption, the emblem and six rows with the weapon, shield, helmet, armor and two accessories, each with its row icon." }
+Menu_DrawEquipmentPanel = { addr = 0x801DBF04, type = "func", source = "Draws the equipment panel of character record_index: the filled panel, the EQUIP caption, the emblem and six rows with the weapon, shield, helmet, armor and two accessories, each with its row icon." }
 Menu_DrawCursorFrame = { addr = 0x801DC324, type = "func", source = "Draws the cursor frame of a menu cell at x, y as one LINE_F3 and one LINE_F4. The colour is white, or blinks with g_FrameCount bit 3 when color is nonzero, and each party slot bit set in frame_mode lights one colour channel." }
 Menu_DrawPortrait = { addr = 0x801DC4B8, type = "func", source = "Draws a 40x48 character portrait from g_MenuPortraitAtlas record atlas_index at sprite_x, sprite_y, shaded dark when shade_mode is nonzero." }
 Menu_DrawCharacterPortrait = { addr = 0x801DC604, type = "func", source = "Draws the portrait of a character id with Menu_DrawPortrait; Rei (CHAR_ID_REI) shows portrait 0xB once g_ScenarioState.scenario_id reaches 8." }
@@ -158,8 +158,8 @@ g_MenuLabelPower = { addr = 0x801EC940, source = "Text of the power label, drawn
 g_MenuLabelDefense = { addr = 0x801EC944, source = "Text of the defense label, drawn by Menu_DrawStatPanel at the left of the second stat row." }
 g_MenuLabelIntelligence = { addr = 0x801EC948, source = "Text of the intelligence label, drawn by Menu_DrawStatPanel at the second column of the first stat row." }
 g_MenuLabelAgility = { addr = 0x801EC94C, source = "Text of the agility label, drawn by Menu_DrawStatPanel at the second column of the second stat row." }
-g_MenuEquipRowIcons = { addr = 0x801EC950, source = "Icon index of each of the six equipment rows (weapon, shield, helmet, armor, two accessories) drawn by Shop_DrawEquipment." }
-g_MenuLabelEquip = { addr = 0x801EC958, source = "Text of the EQUIP caption of the equipment panel, drawn by Shop_DrawEquipment." }
+g_MenuEquipRowIcons = { addr = 0x801EC950, source = "Icon index of each of the six equipment rows (weapon, shield, helmet, armor, two accessories) drawn by Menu_DrawEquipmentPanel." }
+g_MenuLabelEquip = { addr = 0x801EC958, source = "Text of the EQUIP caption of the equipment panel, drawn by Menu_DrawEquipmentPanel." }
 g_MenuPortraitAtlas = { addr = 0x801EC96C, source = "4-byte portrait atlas records read by Menu_DrawPortrait by atlas index; Menu_DrawItemRow also draws its HP and AP label texts from offsets 0x30, 0x36, 0x3C and 0x42." }
 g_MenuFormationArrow = { addr = 0x801EC9B4, source = "The three corners of the formation preview's ground arrow, x and y." }
 g_MenuCaptionIcon = { addr = 0x801EC9CC, source = "Icon and label record drawn at the right of the zenny caption by Menu_DrawZennyWindow." }
