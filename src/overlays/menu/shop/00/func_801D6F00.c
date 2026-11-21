@@ -1,11 +1,18 @@
 #include "shop_00.h"
 
-/* The memory-card directory rows the save-name pattern filters: each is a
- * SaveFile, its 0x10-byte name prefix the match key. */
+/* One 0x18-byte shop filter record: the 0x10-byte key and the packed count word. */
+typedef struct ShopFilter {
+    u32 unk_00;
+    u32 unk_04;
+    u32 unk_08;
+    u32 unk_0C;
+    u32 unk_10;
+    u32 count;
+} ShopFilter;
 
 MATCH void func_801D6F00(void) {
-    SaveFile* record;
-    s32       count;
+    ShopFilter* record;
+    s32         count;
     u8          i;
     u32         value;
     s32         masked;
@@ -31,9 +38,9 @@ MATCH void func_801D6F00(void) {
             } else {
                 count = masked + shift;
             }
-            record = (SaveFile*)g_SaveCardDirectory + i;
+            record = (ShopFilter*)g_SaveCardDirectory + i;
             if (strncmp((char*)record, (char*)D_801D0C20, 0x10) == 0) {
-                ((SaveFile*)g_SaveCardDirectory)[D_801E610C] = *record;
+                ((ShopFilter*)g_SaveCardDirectory)[D_801E610C] = *record;
                 D_801E610C += 1;
             }
             i += 1;

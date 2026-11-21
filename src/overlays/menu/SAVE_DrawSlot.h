@@ -13,23 +13,23 @@ MATCH void SAVE_DrawSlot(u8 index, s32 left, s32 top, SaveSlotRow* row) {
         GFX_AddDrawMode(getTPage(TPAGE_DEPTH_4BIT, TPAGE_ABR_HALF, FONT_TPAGE_X, FONT_TPAGE_Y));
         Menu_DrawPanelIcon((left + 9), (top + 5), (u8)(index + 3), 0x1E, GetClut(16, STAGE_PALETTE_Y), GFX_COLOR_NEUTRAL);
         for (i = 0; i < BATTLE_PARTY_CHARACTERS_COUNT; i++) {
-            icon = row->party_icons[i];
+            icon = *(row->unk_00 + i + 5);
             if (icon != GAME_NONE) {
                 Menu_DrawPortrait((u16)(left + 0x56 + i * 0x29), (u16)(y + 2), icon, 0);
             }
         }
-        UI_DrawText((x + 21), (y + 3), 0, CHARACTER_NAME_LENGTH, row->name);
-        TEXT_Format(g_UiFormatBuffer, g_SaveSlotLevelFormat, row->level);
+        UI_DrawText((x + 21), (y + 3), 0, CHARACTER_NAME_LENGTH, (u8*)row);
+        TEXT_Format(g_UiFormatBuffer, g_SaveSlotLevelFormat, row->unk_00[8]);
         UI_DrawGlyphString((x + 31), (y + 24), 0, g_UiFormatBuffer);
-        TEXT_Format(g_UiFormatBuffer, g_SaveSlotTimeFormat, row->play_hours, row->play_minutes);
+        TEXT_Format(g_UiFormatBuffer, g_SaveSlotTimeFormat, row->unk_00[0xC], row->unk_00[0xD]);
         label_x = x + 0x27;
         UI_DrawGlyphString(label_x, (y + 37), 0, g_UiFormatBuffer);
         UI_DrawGlyphString(label_x, (y + 36), 0, (u8*)&g_SaveSlotTimeColon);
         UI_DrawGlyphString(label_x, (y + 39), 0, (u8*)&g_SaveSlotTimeColon);
-        Menu_DrawExperienceLine((x + 0x14), (y + 0x12), 0, row->level, ((SaveSlotRowCopy*)row)->experience);
+        Menu_DrawExperienceLine((x + 0x14), (y + 0x12), 0, row->unk_00[8], *(s32*)(row->unk_00 + 0x10));
     }
-    UI_DrawSpriteRun(x, y, g_SaveSlotFrameSprites, row->has_data && row ? UI_SPRITE_ALT_CLUT : 0);
-    if (row != NULL && row->has_data != 0) {
+    UI_DrawSpriteRun(x, y, g_SaveSlotFrameSprites, row->unk_00[0x14] && row ? UI_SPRITE_ALT_CLUT : 0);
+    if (row != NULL && row->unk_00[0x14] != 0) {
         UI_DrawSprite((x + 50), (y + 22), 0x3D, 0);
     }
 }
