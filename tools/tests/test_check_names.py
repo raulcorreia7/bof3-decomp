@@ -227,3 +227,25 @@ def test_an_unstaged_rename_reads_the_file_that_holds_the_name(
     (tmp_path / "src/a/A.c").rename(tmp_path / "src/a/B.c")
     monkeypatch.chdir(tmp_path)
     assert check_names.main([]) == 0
+
+
+def test_offset_macro_moved_to_a_sibling_file_is_not_new(
+    tmp_path: Path, monkeypatch: pytest.MonkeyPatch, capsys: pytest.CaptureFixture[str]
+) -> None:
+    def git(*args: str) -> None:
+        subprocess.run(["git", *args], cwd=tmp_path, check=True, capture_output=True)
+
+    git("init", "-q")
+    git("config", "user.email", "t@t")
+    git("config", "user.name", "t")
+    (tmp_path / "src").mkdir()
+    use = "void f(void) { SP_REF(u8, 0x0u) = 1; }\n"
+    (tmp_path / "src/a.c").write_text("void g(void);\n" + use)
+    git("add", ".")
+    git("commit", "-qm", "base")
+    (tmp_path / "src/a.c").write_text("void g(void);\n")
+    (tmp_path / "src/b.c").write_text(use)
+    git("add", ".")
+    git("commit", "-qm", "move")
+    monkeypatch.chdir(tmp_path)
+    assert check_names.main(["--diff", "HEAD~1"]) == 0, capsys.readouterr().err

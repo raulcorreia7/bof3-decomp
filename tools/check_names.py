@@ -425,12 +425,31 @@ def _report_new_offsets(ref: str) -> bool:
     """Print each file that gained offset-macro accesses; True when any did."""
     bad = False
     moved = renamed_from(ref)
+    grown: dict[str, dict[str, int]] = {}
+    texts: dict[str, str] = {}
     for path in changed_paths(ref):
         before = macro_counts(base_text(ref, moved.get(path, path)))
-        after_text = without_drafts(worktree_text(path))
-        after = macro_counts(after_text)
-        grown = {name: after[name] - before.get(name, 0) for name in after}
-        for name, extra in sorted(grown.items()):
+        texts[path] = without_drafts(worktree_text(path))
+        after = macro_counts(texts[path])
+        grown[path] = {
+            name: after.get(name, 0) - before.get(name, 0)
+            for name in set(after) | set(before)
+        }
+    # An access a file lost to a sibling of its folder moved with its code: it is not new.
+    freed: dict[tuple[str, str], int] = {}
+    for path, counts in grown.items():
+        for name, delta in counts.items():
+            if delta < 0:
+                key = (path.rsplit("/", 1)[0], name)
+                freed[key] = freed.get(key, 0) - delta
+    for path, counts in grown.items():
+        after_text = texts[path]
+        for name, extra in sorted(counts.items()):
+            if extra > 0:
+                key = (path.rsplit("/", 1)[0], name)
+                used = min(extra, freed.get(key, 0))
+                freed[key] = freed.get(key, 0) - used
+                extra -= used
             if extra <= 0:
                 continue
             where = [
