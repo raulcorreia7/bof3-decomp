@@ -466,6 +466,9 @@ imported function with:
 .venv/bin/python third_party/decomp-permuter/permuter.py work/permute/nonmatchings/<func> -j 8
 ```
 
+`tools/near_miss.sh <target>@0x<ADDR> <source.c> [SECONDS]` runs the opcode diff, imports, searches for
+SECONDS (default 300) and appends the best score to `config/attempts.jsonl`.
+
 The permuter directory is scratch and never enters `src/`. When to use it:
 [matching](matching.md#permuter).
 

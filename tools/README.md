@@ -19,6 +19,7 @@ as `+`. Run each Python tool with `.venv/bin/python tools/<name>.py` or directly
 | Preprocess the context for m2c or a scratch | `tools/m2ctx.py include/common.h -o ctx.c`                            | [m2c](../docs/toolchain.md#m2c)                           |
 | Draft and upload                         | m2c draft, then a decomp.me scratch with the project flags               | [m2c](../docs/toolchain.md#m2c), [decomp.me](../docs/toolchain.md#decompme) |
 | Permute a near match                     | `tools/permuter_import.py src/<path>/<Name>.c`                           | [permuter](../docs/toolchain.md#permuter)                 |
+| Run the near-miss loop                   | `tools/near_miss.sh <target>@0x<ADDR> src/<path>/<Name>.c [SECONDS]`     | [permuter](../docs/toolchain.md#permuter)                 |
 | Find a template for an assembly function | `tools/template_diff.py <target>@<func>`                                 | [template diff](#templates)                               |
 | Try the closest template for one function | `tools/template_try.py <target>@<func>`                                 | [template diff](#templates)                               |
 | Try templates in batch                   | `tools/template_try.py rows.jsonl`                                       | same                                                      |

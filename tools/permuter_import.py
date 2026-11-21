@@ -25,6 +25,9 @@ from bof3.status.claims import source_text
 
 # The permuter's MIPS flags (its MIPS_SETTINGS). A set objdump_command replaces its default arguments.
 OBJDUMP_ARGUMENTS = ["-drz", "-m", "mips:4300"]
+# C23 (the host cpp default) hides the types.h bool typedef from the permuter's parser; _ASM_H skips
+# the psyq register names (v0 -> $2), which the parser rejects in a member name.
+PERMUTER_FLAGS = "-O2 -DNON_MATCHING -DBOF3_ASM_MATCH=0 -U__STDC_VERSION__ -D_ASM_H"
 _DRAFT = re.compile(r"^NON_MATCHING\s+.*?\b([A-Za-z_]\w*)\s*\(", re.M)
 _DEFINITION = re.compile(
     r"^(?:MATCH|NON_MATCHING)\s+(?:INCLUDE_ASM\(\s*(\w+)\s*\)|.*?\b([A-Za-z_]\w*)\s*\()",
@@ -91,8 +94,9 @@ def main() -> int:
     prelude = work / "prelude.inc"
     target_asm = work / "target.s"
     write_atomic(prelude, '.include "macro.inc"\n.set noat\n.set noreorder\n')
-    # A host cpp defaults to C23, which hides the types.h bool typedef from the permuter's parser.
-    compiler = f"{sys.executable} {ROOT}/tools/cc.py {compiler_flags} -O2 -DNON_MATCHING -DBOF3_ASM_MATCH=0 -U__STDC_VERSION__ -c"
+    compiler = (
+        f"{sys.executable} {ROOT}/tools/cc.py {compiler_flags} {PERMUTER_FLAGS} -c"
+    )
     write_atomic(
         settings,
         settings_toml(
