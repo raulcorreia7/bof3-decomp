@@ -8,6 +8,6 @@ segments:
     section_order: [.data, .text, .rodata, .bss]
     subsegments:
       - [0x0, .data, g_AreaModuleId]
-      - [0x4, c, area000_13]
+      - [0x4, c, field]
       - {start: 0x118, type: bin, name: D_801F2D18, linker_section_order: .text}
   - [0x143C]
