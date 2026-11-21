@@ -13,7 +13,7 @@ MATCH void PlChar_StartTurnTeepo(void) {
     CHAR_START_TURN(CHARACTER_FACING_BACK, CHARACTER_FACING_AWAY);
 }
 
-#include "overlays/plchar/PlChar_RunStepScriptTeepo.h"
+#include "overlays/plchar/shared/PlChar_RunStepScriptTeepo.h"
 
 MATCH void func_801CE610(void) {
     SYS_DISPATCH_TASK(D_801CF5F8, 2, g_Task);
@@ -45,20 +45,20 @@ MATCH void func_801CE698(void) {
     g_Task->unk_03       = 1;
 }
 
-#include "overlays/plchar/PlChar_RunPersonalAction.h"
+#include "overlays/plchar/shared/PlChar_RunPersonalAction.h"
 
-#include "overlays/plchar/PlChar_AdvancePaletteScript.h"
+#include "overlays/plchar/shared/PlChar_AdvancePaletteScript.h"
 
-#include "overlays/plchar/PlChar_StartFacingScript.h"
+#include "overlays/plchar/shared/PlChar_StartFacingScript.h"
 
-#include "overlays/plchar/PlChar_ClearSlotRefIfUnused.h"
+#include "overlays/plchar/shared/PlChar_ClearSlotRefIfUnused.h"
 
 MATCH s32 func_801CEC18(s16 x, s16 y) {
     CHAR_PROBE_CELL_CODE(PlChar_SpawnLinkedActor);
 }
 
 /* func_801CEE24 */
-#include "overlays/plchar/PlChar_SpawnLinkedActor.h"
+#include "overlays/plchar/shared/PlChar_SpawnLinkedActor.h"
 
 MATCH void func_801CEF10(void) {
     SYS_DISPATCH_TASK(D_801CF614, 3, g_Task);
@@ -72,20 +72,20 @@ MATCH void func_801CEF54(void) {
     g_Task->unk_03 = 1;
 }
 
-#include "overlays/plchar/PlChar_UpdateLinkedFacing.h"
+#include "overlays/plchar/shared/PlChar_UpdateLinkedFacing.h"
 
-#include "overlays/plchar/PlChar_ClearPanelModeIfUnused.h"
+#include "overlays/plchar/shared/PlChar_ClearPanelModeIfUnused.h"
 
-#include "overlays/plchar/Char_ProbeFacingBlocked.h"
+#include "overlays/plchar/shared/Char_ProbeFacingBlocked.h"
 CHAR_DEFINE_PROBE_FACING_BLOCKED(func_801CF184);
 
 MATCH void func_801CF328(void) {
     SYS_DISPATCH_TASK(D_801CF620, 2, g_Task);
 }
 
-#include "overlays/plchar/PlChar_StartTurn.h"
+#include "overlays/plchar/shared/PlChar_StartTurn.h"
 
-#include "overlays/plchar/PlChar_RunStepScript.h"
+#include "overlays/plchar/shared/PlChar_RunStepScript.h"
 
 MATCH void func_801CF534(void) {
     g_Game.current->u.field.mode.value = 0;

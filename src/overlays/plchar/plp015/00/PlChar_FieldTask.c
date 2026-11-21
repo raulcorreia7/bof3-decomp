@@ -8,56 +8,56 @@ MATCH void func_801CE404(void) {
     D_801CFB84[g_Task->header.step]();
 }
 
-#include "overlays/plchar/func_801CE448.h"
+#include "overlays/plchar/shared/func_801CE448.h"
 
-#include "overlays/plchar/func_801CE628.h"
+#include "overlays/plchar/shared/func_801CE628.h"
 
 MATCH void func_801CE72C(void) {
     SYS_DISPATCH_TASK(D_801CFB90, 2, g_Task);
 }
 
-#include "overlays/plchar/func_801CE770.h"
+#include "overlays/plchar/shared/func_801CE770.h"
 
-#include "overlays/plchar/Char_RunFacingProbe.h"
+#include "overlays/plchar/shared/Char_RunFacingProbe.h"
 
 MATCH void func_801CEA94(void){CHAR_RUN_FACING_PROBE()}
-#include "overlays/plchar/PlChar_AdvanceScript.h"
+#include "overlays/plchar/shared/PlChar_AdvanceScript.h"
 
-#include "overlays/plchar/PlChar_ProbeCellSpawn.h"
+#include "overlays/plchar/shared/PlChar_ProbeCellSpawn.h"
 
-#include "overlays/plchar/PlChar_SpawnActor.h"
+#include "overlays/plchar/shared/PlChar_SpawnActor.h"
 
-#include "overlays/plchar/PlChar_ProbeFacingCell.h"
+#include "overlays/plchar/shared/PlChar_ProbeFacingCell.h"
 
 MATCH void func_801CF12C(void) {
     SYS_DISPATCH_TASK(D_801CFB9C, 2, g_Task);
 }
 
-#include "overlays/plchar/PlChar_StartTurn.h"
+#include "overlays/plchar/shared/PlChar_StartTurn.h"
 
-#include "overlays/plchar/PlChar_RunStepScript.h"
+#include "overlays/plchar/shared/PlChar_RunStepScript.h"
 
 MATCH void func_801CF338(void) {
     SYS_DISPATCH_TASK(D_801CFBA8, 2, g_Task);
 }
 
-#include "overlays/plchar/PlChar_ClaimHelperSlotStep.h"
+#include "overlays/plchar/shared/PlChar_ClaimHelperSlotStep.h"
 
 MATCH void func_801CF37C(void) {
     PlChar_ClaimHelperSlotStep();
 }
 
-#include "overlays/plchar/PlChar_ClearModeIfSlotFree.h"
+#include "overlays/plchar/shared/PlChar_ClearModeIfSlotFree.h"
 
 MATCH void func_801CF500(void) {
     SYS_DISPATCH_TASK(D_801CFBB0, 2, g_Task);
 }
 
-#include "overlays/plchar/PlChar_StartTurnMomo.h"
+#include "overlays/plchar/shared/PlChar_StartTurnMomo.h"
 
 /* Runs one route step script: facing 5 requests script 0x41 and facing 3 requests 0x40,
  * the reverse of the script ids in CHAR_RUN_STEP_SCRIPT (plchar.h). */
-#include "overlays/plchar/PlChar_AdvanceFacingTurn.h"
+#include "overlays/plchar/shared/PlChar_AdvanceFacingTurn.h"
 
 MATCH void func_801CF70C(void) {
     SYS_DISPATCH_TASK(D_801CFBBC, 2, g_Task);
@@ -67,9 +67,9 @@ MATCH void func_801CF750(void) {
     CHAR_START_FREE_FACING;
 }
 
-#include "overlays/plchar/PlChar_ClaimLinkSlot.h"
+#include "overlays/plchar/shared/PlChar_ClaimLinkSlot.h"
 
-#include "overlays/plchar/PlChar_PollScriptRequest.h"
+#include "overlays/plchar/shared/PlChar_PollScriptRequest.h"
 
 MATCH void func_801CFAFC(void) {
     D_801CFBC8[g_Task->unk_2C]();
