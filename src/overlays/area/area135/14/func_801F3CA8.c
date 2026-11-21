@@ -9,9 +9,9 @@ NON_MATCHING void func_801F3CA8(void) {
     s32       y_bottom;
     s32       i;
 
-    i        = 0;
-    y_bottom = -0x2840;
     y_top    = -0x2740;
+    y_bottom = -0x2840;
+    i        = 0;
     do {
         prim = (POLY_FT4*)g_GfxPrimCursor;
         SetPolyFT4(prim);
@@ -35,8 +35,8 @@ NON_MATCHING void func_801F3CA8(void) {
                       &depth, &flag);
         Area_ApplyTileToQuad(AREA135_WALL_PART_WORD, prim, 1);
         Area_AddCellPrim(TO_COORD(44), TO_COORD(48 + i * 2), 0, sizeof(POLY_FT4));
-        y_top += 0x100;
         y_bottom += 0x100;
+        y_top += 0x100;
         i++;
     } while (i < 4);
 }

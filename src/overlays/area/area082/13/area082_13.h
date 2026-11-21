@@ -44,7 +44,7 @@ extern Callback D_801F57D0[];
 
 /* func_801F393C */
 void Area_AddSpark(void);
-void func_801F2F50(Pos3* pos, s16 a, s16 b, u16 c, s32 d, s32 e);
+void func_801F2F50(Pos3* pos, s16 a, s16 b, u16 c, u8 d, u8 e);
 void func_801F46C8(s32 turn, s32 count, s32 angle, s32 height);
 
 #endif

@@ -1,22 +1,22 @@
 #include "area098_13.h"
 
-#ifdef NON_MATCHING
-NON_MATCHING void func_801F2C48(void) {
+/* Spawns the capture probe actor from the party member the task points at. */
+MATCH void func_801F2C48(void) {
     u8            slot;
     u8            option_flags;
     SpawnedActor* row;
     Actor*        actor;
     Actor*        parent;
+    SpawnedActor* src;
 
     slot = Actor_FindFreeSpawned();
     if (slot != GAME_NONE) {
         D_801F6520 = g_Game.members[g_Task->option_flags].character_index != 0;
         row        = &g_SpawnedActors[slot];
         GFX_ClearRect(0x340, 0x100, 0x80, 0x100);
-        option_flags = g_Task->option_flags;
-        /* FAKE: retail leaves the task load's delay slot empty. */
-        FAKE_BARRIER();
-        *row                = *(SpawnedActor*)&g_Game.members[option_flags];
+        option_flags        = g_Task->option_flags;
+        src                 = (SpawnedActor*)&g_Game.members[option_flags];
+        *row                = *src;
         actor               = (Actor*)row;
         actor->header.flags = 1;
         actor->header.mode  = 2;
@@ -40,6 +40,3 @@ NON_MATCHING void func_801F2C48(void) {
     }
     g_Task->header.mode += 1;
 }
-#else
-INCLUDE_ASM(func_801F2C48);
-#endif
