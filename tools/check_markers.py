@@ -27,14 +27,16 @@ Usage: python3 tools/check_markers.py [FILE...]    (default: every tracked src/*
 
 from __future__ import annotations
 
-import json
 import re
 import subprocess
 import sys
 from dataclasses import dataclass
 from pathlib import Path
 
+from bof3.adapters.attempts import PATH as ROW_PATH
+from bof3.adapters.attempts import read_lines, read_text
 from bof3.adapters.config import read_symbols
+from bof3.attempts import function_of, validate
 from bof3.resolve.ids import asm_dir
 from check_names import added_lines
 
@@ -42,8 +44,6 @@ ROOT = Path(__file__).resolve().parent.parent
 
 MARKERS = ("MATCH", "NON_MATCHING", "HAND_ASM")
 DRAFT_MARKERS = ("NON_MATCHING", "HAND_ASM")
-#: The keys of a `config/attempts.jsonl` row, in order.
-ATTEMPT_KEYS = ("function", "tried", "first_diff", "score")
 TOKEN = re.compile(
     r"""
       (?P<comment>/\*.*?\*/|//[^\n]*)
@@ -312,41 +312,13 @@ def draft_ref(path: str, text: str, root: Path | None = None) -> str | None:
 
 def attempted(root: Path | None = None) -> set[str]:
     """The functions that `config/attempts.jsonl` holds an object for."""
-    path = (root or ROOT) / "config/attempts.jsonl"
-    rows = path.read_text(encoding="utf-8").splitlines() if path.exists() else []
-    return {json.loads(row)["function"] for row in rows if row.strip()}
+    return {function_of(row) for row in read_lines((root or ROOT) / ROW_PATH)}
 
 
 def attempt_problems(root: Path | None = None) -> list[str]:
     """Each attempts row outside the schema or the order, as `path:line: problem`."""
-    path = (root or ROOT) / "config/attempts.jsonl"
-    if not path.exists():
-        return []
-    found: list[str] = []
-    previous = ""
-    ordered = True
-    for number, line in enumerate(path.read_text(encoding="utf-8").splitlines(), 1):
-        if not line.strip():
-            continue
-        try:
-            row = json.loads(line)
-        except json.JSONDecodeError as error:
-            found.append(f"{path}:{number}: not JSON: {error.msg}")
-            continue
-        if not isinstance(row, dict) or tuple(row) != ATTEMPT_KEYS:
-            keys = tuple(row) if isinstance(row, dict) else (type(row).__name__,)
-            found.append(
-                f"{path}:{number}: keys {list(keys)} instead of {list(ATTEMPT_KEYS)}"
-            )
-            continue
-        if ordered and row["function"] < previous:
-            found.append(
-                f"{path}:{number}: {row['function']} sorts before {previous}; "
-                "keep the rows in function order with tools/attempts.py sort"
-            )
-            ordered = False
-        previous = row["function"]
-    return found
+    path = (root or ROOT) / ROW_PATH
+    return validate(read_text(path), str(path)) if path.exists() else []
 
 
 def report_attempts(problems: list[str]) -> bool:
