@@ -10,7 +10,7 @@ constants and enums several records share; one block per record in table order (
 follow their struct: `ASSERT_OFFSET` in offset order, then `ASSERT_SIZE`.
 
 Every header that carries a guard names it from its target: `include/common/util.h` is
-`COMMON_UTIL_H`, a group header `src/overlays/plchar/Char_Foo.h` is `PLCHAR_CHAR_FOO_H`, and an image
+`COMMON_UTIL_H`, a group-wide header `src/overlays/plchar/shared/Char_Foo.h` is `PLCHAR_CHAR_FOO_H`, and an image
 header is `OVERLAY_<GROUP>_<ARCHIVE>_<SLOT>_H` from its target id, so `emi/world02/area104/14` is
 `OVERLAY_WORLD02_AREA104_14_H`. A shared body header has no guard.
 
@@ -39,16 +39,17 @@ byte-identical image, so a path answers which binary and which function a source
 
 ### Tree
 
-| Path                                                 | Holds                                                                                          |
-| ---------------------------------------------------- | ---------------------------------------------------------------------------------------------- |
-| `src/engine/<name>/`, `src/engine/<archive>/<slot>/` | code every overlay calls: the executable (`slus`) and `game/00`, which holds the record tables |
-| `src/logo/`                                          | the logo player, a separate executable with its own address space                              |
-| `src/overlays/<group>/<archive>/<slot>/`             | one overlay image: its disc archive and slot, in the group that loads it                       |
-| `src/overlays/<group>/<Name>.h`                      | a body or header shared by images of one group                                                 |
-| `src/shared/<Name>.h`                                | a body or header shared by images of several groups                                            |
+| Path                                                 | Holds                                                                                           |
+| ---------------------------------------------------- | ----------------------------------------------------------------------------------------------- |
+| `src/engine/<name>/`, `src/engine/<archive>/<slot>/` | code every overlay calls: the executable (`slus`) and `game/00`, which holds the record tables  |
+| `src/logo/`                                          | the logo player, a separate executable with its own address space                               |
+| `src/overlays/<group>/<archive>/<slot>/`             | one overlay image: its disc archive and slot, in the group that loads it                        |
+| `src/overlays/<group>/<group>.h`                     | the group header                                                                                |
+| `src/overlays/<group>/shared/<Name>.h`               | a body or header shared by images of one group; `area/worlds/world0N.h` holds the world headers |
+| `src/shared/<Name>.h`                                | a body or header shared by images of several groups                                             |
 
 A shared body sits at the lowest folder that holds every image that includes it: the image folder, then
-`overlays/<group>/Name.h`, then `shared/Name.h`.
+`overlays/<group>/shared/Name.h`, then `shared/Name.h`.
 
 Groups: `area`, `battle`, `bmagic`, `boss`, `commu`, `menu`, `plchar`, `scenario`, `title`.
 Disc words in folders: `COMMU00` to `COMMU05` are `overlays/commu/commu00` to `commu05`; `BATE` and
