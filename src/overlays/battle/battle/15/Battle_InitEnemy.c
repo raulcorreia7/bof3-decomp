@@ -45,8 +45,8 @@ NON_MATCHING void Battle_InitEnemy(s32 enemy_slot, u16 enemy_index, s32 x, s32 y
     enemy->unk_2E                        = 0;
     ((EnemyBattler*)g_Task)->unk_5C      = 0;
     ((EnemyBattler*)g_Task)->unk_06      = 0;
-    ((EnemyBattler*)g_Task)->steps       = 0;
-    ((EnemyBattler*)g_Task)->message_id  = g_Battle.scroll_dir ^ 2;
+    ((EnemyBattler*)g_Task)->unk_07      = 0;
+    ((EnemyBattler*)g_Task)->unk_08      = g_Battle.scroll_dir ^ 2;
     ((EnemyBattler*)g_Task)->unk_48      = 0;
     ((EnemyBattler*)g_Task)->unk_4B      = 0xFF;
     enemy                                = (EnemyBattler*)g_Task;

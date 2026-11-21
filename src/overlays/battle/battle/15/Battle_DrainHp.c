@@ -29,17 +29,17 @@ NON_MATCHING void Battle_DrainHp(void) {
         g_Battle.action->unk_08           = 1;
         if (g_Battle.active_battler < 3) {
             if (g_Game.members[g_Battle.active_battler].chr.stats.max_hp < g_Game.members[g_Battle.active_battler].chr.hp + hp_bar) {
-                g_Battle.action->message_id |= 4;
+                g_Battle.action->unk_08 |= 4;
             }
             Battle_QueueAction((s16)-Char_AddPoints(&g_Game.members[g_Battle.active_battler].chr.hp, g_Game.members[g_Battle.active_battler].chr.stats.max_hp, hp_bar), g_Battle.active_battler);
         } else {
             enemy = g_Battle.active_battler - 3;
             if (g_BattleEnemyBattlers[enemy].stats.max_hp < g_BattleEnemyBattlers[enemy].hp + hp_bar) {
-                g_Battle.action->message_id |= 4;
+                g_Battle.action->unk_08 |= 4;
             }
             Battle_QueueAction((s16)-Char_AddPoints(&g_BattleEnemyBattlers[enemy].hp, g_BattleEnemyBattlers[enemy].stats.max_hp, hp_bar), g_Battle.active_battler);
         }
-        g_Battle.action->message_id = 0;
+        g_Battle.action->unk_08 = 0;
         return;
     }
     g_Battle.target_record->target_flags = 1;

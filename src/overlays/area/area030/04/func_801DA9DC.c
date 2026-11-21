@@ -66,19 +66,19 @@ box_16:
                 g_SpawnedActors[0].scene_step = ONE;
                 g_SpawnedActors[0].selection  = ONE;
                 D_801E31F8                    = 1;
-                g_SpawnedActors[0].unk_14     = g_FishingLureRow->message_id;
+                g_SpawnedActors[0].unk_14     = g_FishingLureRow->unk_08;
             } else if (g_InputHeld & PADRdown) {
                 g_SpawnedActors[0].scene_step = 0;
                 if (SP_REF(u8, 0x0) != 0) {
                     limit                        = 4;
                     g_SpawnedActors[0].selection = 0x2000;
                     D_801E31F8                   = 2;
-                    g_SpawnedActors[0].unk_14    = g_FishingLureRow->message_id;
+                    g_SpawnedActors[0].unk_14    = g_FishingLureRow->unk_08;
                 } else {
                     limit                        = 3;
                     g_SpawnedActors[0].selection = ONE;
                     D_801E31F8                   = 1;
-                    g_SpawnedActors[0].unk_14    = g_FishingLureRow->move_mode;
+                    g_SpawnedActors[0].unk_14    = g_FishingLureRow->unk_04;
                 }
             } else {
                 limit = 4;
@@ -86,7 +86,7 @@ box_16:
                     g_SpawnedActors[0].scene_step = 0;
                     g_SpawnedActors[0].selection  = ONE;
                     D_801E31F8                    = 2;
-                    g_SpawnedActors[0].unk_14     = g_FishingLureRow->message_id;
+                    g_SpawnedActors[0].unk_14     = g_FishingLureRow->unk_08;
                 } else {
                     g_SpawnedActors[0].scene_step = 0;
                     g_SpawnedActors[0].selection  = 0;

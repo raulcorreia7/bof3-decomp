@@ -43,7 +43,7 @@ NON_MATCHING void Menu_UpdateFormation(void) {
     g_MenuPanelTasks[20].pos.y      = D_801EC4D0[tmp3].unk_02;
     val8                            = 0;
     g_MenuPanelTasks[20].unk_0B     = 1;
-    g_MenuPanelTasks[20].unk_0A     = D_801EC4D0[tmp3].move_mode + 1;
+    g_MenuPanelTasks[20].unk_0A     = D_801EC4D0[tmp3].unk_04 + 1;
     val5                            = 0 << 0x18;
     do {
         g_MenuPanelTasks[(val5 >> 0x18) + 0xC].unk_0C = 0;

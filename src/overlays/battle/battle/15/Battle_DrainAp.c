@@ -32,10 +32,10 @@ NON_MATCHING void Battle_DrainAp(void) {
             limit = &g_BattleEnemyBattlers[row].stats.max_ap;
         }
         if (*limit < *value + g_Battle.target_record->ap_change) {
-            g_Battle.action->message_id |= 8;
+            g_Battle.action->unk_08 |= 8;
         }
         func_800AAEBC(-Char_AddPoints(value, *limit, g_Battle.target_record->ap_change), g_Battle.active_battler);
-        g_Battle.action->message_id = 0;
+        g_Battle.action->unk_08 = 0;
     } else {
         g_Battle.target_record->target_flags = 2;
     }
