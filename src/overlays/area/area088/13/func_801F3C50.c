@@ -71,7 +71,7 @@ arm:
     scratch          = g_Task;
     scratch->timer   = 8;
 tail:
-    Actor_SelectScript(mode);
+    Script_Select(mode);
 
     check              = g_Task;
     check->header.mode = window;

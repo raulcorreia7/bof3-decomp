@@ -2,5 +2,5 @@
 Battle_MarkDamaged = { addr = 0x800A9820, type = "func", source = "Marks the selected battlers as damaged." }
 Effect_Reset = { addr = 0x801E5988, type = "func", source = "Clears every timer, state and flag byte of the shared BattleEffect work record; every effect countdown calls it first. battle/03 owns the body.", alias = true }
 Effect_StartPlaying = { addr = 0x801EF00C, type = "func", source = "Raises BATTLE_STATE_EFFECT_PLAYING and clears the effect work record in magic150 (Eye Beam)." }
-BMagic_ProjectSpan = { addr = 0x801EF2C0, type = "func", source = "Projects the span position and the points half a unit left and right of it to the screen with Area_ProjectPoint, into screen[1], screen[0] and screen[2]." }
+BMagic_ProjectSpan = { addr = 0x801EF2C0, type = "func", source = "Projects the span position and the points half a unit left and right of it to the screen with Camera_ProjectPoint, into screen[1], screen[0] and screen[2]." }
 D_801EFAF8 = { addr = 0x801EFAF8, type = "Magic150SpanPair", size = 0x38, source = "The previous and current projected spans of the beam segment that func_801EF4E0 fills and passes to func_801EF324; retail names only +0x1C (D_801EFB14)." }

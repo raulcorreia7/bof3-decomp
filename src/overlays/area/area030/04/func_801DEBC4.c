@@ -21,7 +21,7 @@ MATCH void func_801DEBC4(void) {
         panel->state_2A           = D_801E2331[panel->counter_08 * 2];
         FISHING_STATE->counter_48 = 2;
 
-        Actor_SelectScript(D_801E2330[FISHING_STATE->counter_08 * 2]);
+        Script_Select(D_801E2330[FISHING_STATE->counter_08 * 2]);
 
         state                        = FISHING_STATE;
         state->step_14               = -2;

@@ -388,7 +388,7 @@ MATCH void func_801EFB8C(void) {
         } else {
             g_Task->unk_2A = 0;
         }
-        Actor_SelectScript(g_Task->param.unk_0B);
+        Script_Select(g_Task->param.unk_0B);
         g_Task->header.step += 1;
     }
 }

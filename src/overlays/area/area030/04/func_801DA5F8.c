@@ -8,6 +8,6 @@ MATCH void func_801DA5F8(void) {
     u8* state_byte = &D_801440B1;
 
     (*state_byte)++;
-    Actor_RequestScript(1);
+    Script_Request(1);
     g_Task->unk_03 = 1;
 }

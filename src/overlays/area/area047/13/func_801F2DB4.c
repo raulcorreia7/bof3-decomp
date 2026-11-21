@@ -11,8 +11,8 @@ MATCH void func_801F2DB4(s32* pos, s16 radius, u8 center_shade, u8 rim_shade) {
     u16      other;
     s16      screen_radius;
 
-    Area_SetCameraMatrix(&matrix);
-    Area_ProjectPoint(pos, &screen);
+    Camera_SetMatrix(&matrix);
+    Camera_ProjectPoint(pos, &screen);
     size.vx = radius;
     Game_ProjectWorldPoint(pos, &size, &projected);
 

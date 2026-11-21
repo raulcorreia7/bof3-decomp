@@ -8,9 +8,9 @@ MATCH void func_801B6AB0(void) {
         g_Task->pos.x.fixed      = (x + 0x4800) & ~0x7FFF;
         g_Task->pos.y.fixed      = (g_Task->pos.y.fixed + 0x4800) & ~0x7FFF;
         COORD_INT(g_Task->pos.z) = Area_ReadStepHeight(g_Task->pos.x.fixed, g_Task->pos.y.fixed, g_Task->direction);
-        Actor_RequestScript((g_Task->direction + 8) & BYTE_MASK);
+        Script_Request((g_Task->direction + 8) & BYTE_MASK);
         if (((g_Task->pos.x.fixed & 0x7FFF) == 0) && ((g_Task->pos.y.fixed & 0x7FFF) == 0)) {
-            Actor_RequestScript(g_Task->direction);
+            Script_Request(g_Task->direction);
         }
     } else {
         Actor_ClearVelocity();

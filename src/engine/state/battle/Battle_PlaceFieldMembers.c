@@ -72,7 +72,7 @@ NON_MATCHING void Battle_PlaceFieldMembers(void) {
                 ((PartyMember*)g_Task)->pad_06 = ((PartyMember*)g_Task)->slot - 1;
             }
             func_801C3204();
-            Actor_SelectScript(g_Task->direction);
+            Script_Select(g_Task->direction);
         }
     } else {
         Scene_SetupParty(g_Game.battle_order);

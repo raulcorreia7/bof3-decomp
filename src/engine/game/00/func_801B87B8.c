@@ -10,7 +10,7 @@ MATCH void func_801B87B8(void) {
         }
         func_801B8A9C();
         if (func_801B8D18() & BYTE_MASK) {
-            Actor_RequestScript(g_Task->direction);
+            Script_Request(g_Task->direction);
             g_Task->header.step = 3;
             g_Task->unk_03      = 0;
             return;
@@ -46,7 +46,7 @@ MATCH void func_801B87B8(void) {
                 g_Task->param.unk_0B = 7;
                 break;
         }
-        Actor_RequestScript((g_Task->param.unk_0B + 8) & BYTE_MASK);
+        Script_Request((g_Task->param.unk_0B + 8) & BYTE_MASK);
         Area_RunWalk();
     }
     g_Task->timer -= 1;

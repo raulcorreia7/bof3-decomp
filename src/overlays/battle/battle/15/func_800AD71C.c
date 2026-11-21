@@ -28,6 +28,6 @@ MATCH void func_800AD71C(void) {
     label                  = D_8014862A;
     record->header.mode    = count + 1;
     record->screen_y.value = label + 0x12;
-    Actor_SelectScript(0x13);
+    Script_Select(0x13);
     Area_AddActor();
 }

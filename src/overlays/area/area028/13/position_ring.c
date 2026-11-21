@@ -221,7 +221,7 @@ MATCH void func_801F3060(void) {
     u8  i;
     s16 scale;
 
-    Area_SetCameraMatrix(scratch);
+    Camera_SetMatrix(scratch);
     GFX_AddDitheredDrawMode(3u, GetTPage(TPAGE_DEPTH_4BIT, TPAGE_ABR_ADD, FONT_TPAGE_X, FONT_TPAGE_Y));
 
     D_801F3E00 = MEM_PTR(AreaSlotWork, AREA_WORK);
@@ -262,19 +262,19 @@ MATCH void func_801F318C(s16 radius) {
     s8       i     = 0;
 
     GFX_AddDitheredDrawMode(3u, GetTPage(TPAGE_DEPTH_4BIT, TPAGE_ABR_SUB, FONT_TPAGE_X, FONT_TPAGE_Y) & HALF_MASK);
-    Area_SetCameraMatrix(scratch);
+    Camera_SetMatrix(scratch);
 
     pos[0] = g_Task->pos.x.fixed;
     pos[1] = g_Task->pos.y.fixed;
     pos[2] = g_Task->pos.z.fixed;
-    Area_ProjectPoint(pos, &center);
+    Camera_ProjectPoint(pos, &center);
     D_800E4A00 = center;
 
     ring   = MEM_PTR(DVECTOR, 0x800E4A00u);
     pos[0] = g_Task->pos.x.fixed + ((radius * rcos(65408)) >> 4);
     pos[1] = g_Task->pos.y.fixed + ((radius * rsin(65408)) >> 4);
     pos[2] = g_Task->pos.z.fixed;
-    Area_ProjectPoint(pos, &point);
+    Camera_ProjectPoint(pos, &point);
 
     do {
         primitive = GFX_BeginPolyG3(1);
@@ -284,7 +284,7 @@ MATCH void func_801F318C(s16 radius) {
         pos[0] = g_Task->pos.x.fixed + ((radius * rcos((u16)angle)) >> 4);
         pos[1] = g_Task->pos.y.fixed + ((radius * rsin((u16)angle)) >> 4);
         pos[2] = g_Task->pos.z.fixed;
-        Area_ProjectPoint(pos, &point);
+        Camera_ProjectPoint(pos, &point);
 
         primitive->x2 = (u16)point.vx;
         primitive->y2 = (u16)point.vy;

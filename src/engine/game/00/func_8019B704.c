@@ -84,7 +84,7 @@ NON_MATCHING void func_8019B704(void) {
                     if ((COORD_FRAC(g_Task->pos.x) == 0) && (COORD_FRAC(g_Task->pos.y) == 0)) {
                         g_Task->option_flags = 0;
                         g_Task->unk_0A       = 0;
-                        Actor_SelectScript(0);
+                        Script_Select(0);
                         g_Task->header.mode = 5;
                     } else {
                         func_8019C124(0);

@@ -19,7 +19,7 @@ MATCH void func_8019E2A8(void) {
     state->gravity             = -8;
     other->tint.steps.delta.g  = 0;
     g_Task->tint.steps.delta.b = 0;
-    Actor_SelectScript(8);
+    Script_Select(8);
     flags              = g_Task;
     flags->header.step = (flags->header.step + 1);
 }

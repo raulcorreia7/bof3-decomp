@@ -8,7 +8,7 @@ MATCH void func_800C24DC(void) {
     g_BattleEnemyBattlers[index].header.flags = g_BattleEnemyBattlers[index].header.flags & 0xBF;
     saved                                     = ((PartyMember*)g_Task);
     ((PartyMember*)g_Task)                    = g_BattleEffectBattler;
-    Actor_SelectScript(0U);
+    Script_Select(0U);
     ((PartyMember*)g_Task) = saved;
     Effect_Reset();
 }

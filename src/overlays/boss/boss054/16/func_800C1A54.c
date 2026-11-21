@@ -5,7 +5,7 @@ MATCH void func_800C1A54(void) {
 
     saved  = g_Task;
     g_Task = D_801EC2E0->target.party;
-    Actor_SelectScript(2);
+    Script_Select(2);
     g_Task        = saved;
     saved->unk_0C = 8;
     saved->header.mode++;

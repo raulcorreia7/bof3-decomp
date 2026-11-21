@@ -84,7 +84,7 @@ segments:
       - [0x1A8, .rodata, func_801A7E54]
       - [0x1D8, .rodata, ../../state/scene/Scene_RunInn]
       - [0x238, .rodata, func_801A8728]
-      - [0x4C0, .rodata, ../../actor/ops/Actor_RunFlowOps]
+      - [0x4C0, .rodata, ../../actor/ops/Script_RunFlowOps]
   # Placement: .data resumes after another section in the retail bytes; one segment would group both .data runs.
   - name: data_9
     type: code
@@ -94,7 +94,7 @@ segments:
     section_order: [.data, .rodata]
     subsegments:
       - [0x4FC, .data, D_80195CFC]
-      - [0x500, .rodata, ../../actor/ops/Actor_RunSoundOps]
+      - [0x500, .rodata, ../../actor/ops/Script_RunSoundOps]
   # Placement: .data resumes after another section in the retail bytes; one segment would group both .data runs.
   - name: data_10
     type: code
@@ -104,10 +104,10 @@ segments:
     section_order: [.data, .rodata]
     subsegments:
       - [0x53C, .data, D_80195D3C]
-      - [0x540, .rodata, ../../actor/ops/Actor_RunControlOps]
-      - [0x580, .rodata, ../../actor/ops/Actor_RunMotionOps]
-      - [0x5C0, .rodata, ../../actor/ops/Actor_RunWaitOps]
-      - [0x600, .rodata, ../../actor/ops/Actor_RunAppearanceOps]
+      - [0x540, .rodata, ../../actor/ops/Script_RunControlOps]
+      - [0x580, .rodata, ../../actor/ops/Script_RunMotionOps]
+      - [0x5C0, .rodata, ../../actor/ops/Script_RunWaitOps]
+      - [0x600, .rodata, ../../actor/ops/Script_RunAppearanceOps]
   # Placement: .data resumes after another section in the retail bytes; one segment would group both .data runs.
   - name: data_11
     type: code
@@ -117,7 +117,7 @@ segments:
     section_order: [.data, .rodata]
     subsegments:
       - [0x63C, .data, D_80195E3C]
-      - [0x640, .rodata, ../../actor/ops/Actor_RunStageOps]
+      - [0x640, .rodata, ../../actor/ops/Script_RunStageOps]
   # Placement: .data resumes after another section in the retail bytes; one segment would group both .data runs.
   - name: data_12
     type: code
@@ -127,8 +127,8 @@ segments:
     section_order: [.data, .rodata]
     subsegments:
       - [0x674, .data, D_80195E74]
-      - [0x678, .rodata, ../../actor/ops/Actor_RunSpawnOps]
-      - [0x6B8, .rodata, ../../actor/ops/Actor_RunFaceOps]
+      - [0x678, .rodata, ../../actor/ops/Script_RunSpawnOps]
+      - [0x6B8, .rodata, ../../actor/ops/Script_RunFaceOps]
   # Placement: .data resumes after another section in the retail bytes; one segment would group both .data runs.
   - name: data_13
     type: code
@@ -137,8 +137,8 @@ segments:
     align: 4
     section_order: [.data, .rodata]
     subsegments:
-      - [0x6D4, .data, g_FieldActionSteps]
-      - [0x6EC, .rodata, ../../area/action/FieldAction_RollStep]
+      - [0x6D4, .data, g_AreaActionSteps]
+      - [0x6EC, .rodata, ../../area/action/AreaAction_RollStep]
   # Placement: .data resumes after another section in the retail bytes; one segment would group both .data runs.
   - name: data_14
     type: code
@@ -148,7 +148,7 @@ segments:
     section_order: [.data, .rodata]
     subsegments:
       - [0x70C, .data, D_80195F0C]
-      - [0x724, .rodata, ../../area/action/FieldAction_RollAltStep]
+      - [0x724, .rodata, ../../area/action/AreaAction_RollAltStep]
   # Placement: .data resumes after another section in the retail bytes; one segment would group both .data runs.
   - name: data_15
     type: code
@@ -157,8 +157,8 @@ segments:
     align: 4
     section_order: [.data, .rodata]
     subsegments:
-      - [0x744, .data, g_FieldActionFadeSteps]
-      - [0x75C, .rodata, ../../area/action/FieldAction_RollFade]
+      - [0x744, .data, g_AreaActionFadeSteps]
+      - [0x75C, .rodata, ../../area/action/AreaAction_RollFade]
       - [0x77C, .rodata, ../../party/item/Item_PassesTest]
   # Placement: .data resumes after another section in the retail bytes; one segment would group both .data runs.
   - name: data_16
@@ -497,16 +497,16 @@ segments:
       - [0x13298, c, func_801A8A98]
       - [0x13384, c, func_801A8B84]
       - [0x134B4, c, ../../state/mode/Game_CallArea]
-      - [0x13538, c, ../../actor/script/Actor_RunScript]
-      - [0x13794, c, ../../actor/ops/Actor_RunFlowOps]
-      - [0x13EE4, c, ../../actor/ops/Actor_RunSoundOps]
-      - [0x14144, c, ../../actor/ops/Actor_RunControlOps]
-      - [0x145E8, c, ../../actor/ops/Actor_RunMotionOps]
-      - [0x14C70, c, ../../actor/ops/Actor_RunWaitOps]
-      - [0x15300, c, ../../actor/ops/Actor_RunAppearanceOps]
-      - [0x15C58, c, ../../actor/ops/Actor_RunStageOps]
-      - [0x160B0, c, ../../actor/ops/Actor_RunSpawnOps]
-      - [0x16224, c, ../../actor/ops/Actor_RunFaceOps]
+      - [0x13538, c, ../../actor/script/Script_Run]
+      - [0x13794, c, ../../actor/ops/Script_RunFlowOps]
+      - [0x13EE4, c, ../../actor/ops/Script_RunSoundOps]
+      - [0x14144, c, ../../actor/ops/Script_RunControlOps]
+      - [0x145E8, c, ../../actor/ops/Script_RunMotionOps]
+      - [0x14C70, c, ../../actor/ops/Script_RunWaitOps]
+      - [0x15300, c, ../../actor/ops/Script_RunAppearanceOps]
+      - [0x15C58, c, ../../actor/ops/Script_RunStageOps]
+      - [0x160B0, c, ../../actor/ops/Script_RunSpawnOps]
+      - [0x16224, c, ../../actor/ops/Script_RunFaceOps]
       - [0x163A8, c, ../../area/map/Area_MoveActorRoute]
       - [0x16568, c, func_801ABD68]
       - [0x166E0, c, func_801ABEE0]
@@ -515,32 +515,32 @@ segments:
       - [0x169DC, c, func_801AC1DC]
       - [0x16B3C, c, func_801AC33C]
       - [0x16F68, c, func_801AC768]
-      - [0x170F0, c, ../../actor/script/Actor_FindScriptLabel]
+      - [0x170F0, c, ../../actor/script/Script_FindLabel]
       - [0x171D0, c, func_801AC9D0]
       - [0x17214, c, func_801ACA14]
       - [0x172C0, c, func_801ACAC0]
       - [0x173C4, c, func_801ACBC4]
       - [0x17408, c, func_801ACC08]
       - [0x174D8, c, func_801ACCD8]
-      - [0x17610, c, ../../area/action/FieldAction_Run]
+      - [0x17610, c, ../../area/action/AreaAction_Run]
       - [0x1769C, c, func_801ACE9C]
-      - [0x176BC, c, ../../area/action/FieldAction_RunSteps]
-      - [0x1772C, c, ../../area/action/FieldAction_RollStep]
-      - [0x178EC, c, ../../area/action/FieldAction_FindSmall]
-      - [0x17984, c, ../../area/action/FieldAction_FindLarge]
-      - [0x17A18, c, ../../area/action/FieldAction_End]
-      - [0x17ACC, c, ../../area/action/FieldAction_WaitMessage]
-      - [0x17B5C, c, ../../area/action/FieldAction_RunReact]
-      - [0x17BB4, c, ../../area/action/FieldAction_React]
-      - [0x17C4C, c, ../../area/action/FieldAction_None]
-      - [0x17C6C, c, ../../area/action/FieldAction_RunAltSteps]
-      - [0x17CDC, c, ../../area/action/FieldAction_RollAltStep]
-      - [0x17E9C, c, ../../area/action/FieldAction_NoneAlt]
-      - [0x17EBC, c, ../../area/action/FieldAction_RunFadeSteps]
-      - [0x17F34, c, ../../area/action/FieldAction_RollFade]
-      - [0x1810C, c, ../../area/action/FieldAction_ShowFind]
-      - [0x181C4, c, ../../area/action/FieldAction_WaitMessageFade]
-      - [0x181F0, c, ../../area/action/FieldAction_Fade]
+      - [0x176BC, c, ../../area/action/AreaAction_RunSteps]
+      - [0x1772C, c, ../../area/action/AreaAction_RollStep]
+      - [0x178EC, c, ../../area/action/AreaAction_FindSmall]
+      - [0x17984, c, ../../area/action/AreaAction_FindLarge]
+      - [0x17A18, c, ../../area/action/AreaAction_End]
+      - [0x17ACC, c, ../../area/action/AreaAction_WaitMessage]
+      - [0x17B5C, c, ../../area/action/AreaAction_RunReact]
+      - [0x17BB4, c, ../../area/action/AreaAction_React]
+      - [0x17C4C, c, ../../area/action/AreaAction_None]
+      - [0x17C6C, c, ../../area/action/AreaAction_RunAltSteps]
+      - [0x17CDC, c, ../../area/action/AreaAction_RollAltStep]
+      - [0x17E9C, c, ../../area/action/AreaAction_NoneAlt]
+      - [0x17EBC, c, ../../area/action/AreaAction_RunFadeSteps]
+      - [0x17F34, c, ../../area/action/AreaAction_RollFade]
+      - [0x1810C, c, ../../area/action/AreaAction_ShowFind]
+      - [0x181C4, c, ../../area/action/AreaAction_WaitMessageFade]
+      - [0x181F0, c, ../../area/action/AreaAction_Fade]
       - [0x182C0, c, ../../actor/task/Actor_SpawnSceneActor]
       - [0x18498, c, func_801ADC98]
       - [0x184F4, c, func_801ADCF4]
@@ -563,8 +563,8 @@ segments:
       - [0x1A130, c, ../../ui/text/UI_DrawAbilityRow]
       - [0x1A21C, c, ../../ui/text/UI_DrawScrollbar]
       - [0x1A510, c, func_801AFD10]
-      - [0x1A618, c, ../../camera/Area_SetCameraMatrix]
-      - [0x1A704, c, ../../camera/Area_ProjectPoint]
+      - [0x1A618, c, ../../camera/Camera_SetMatrix]
+      - [0x1A704, c, ../../camera/Camera_ProjectPoint]
       - [0x1A764, c, ../../sys/math/MATH_SetIdentity]
       - [0x1A790, c, func_801AFF90]
       - [0x1A7D8, c, ../../state/mode/Game_ProjectWorldPoint]
@@ -871,7 +871,7 @@ segments:
     section_order: [.text, .data, .rodata, .bss]
     subsegments:
       - [0x319C4, c, func_801C71C4]
-      - [0x31A44, c, ../../camera/Area_SetEncounterCamera]
+      - [0x31A44, c, ../../camera/Camera_SetEncounter]
       - [0x31C98, c, func_801C7498]
       - [0x31D18, c, func_801C7518]
       - [0x31E08, c, func_801C7608]

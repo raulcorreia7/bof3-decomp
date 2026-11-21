@@ -5,6 +5,6 @@ MATCH void func_801F44E0(void) {
 
     if (slot != 0) {
         g_Task->direction = g_Game.members[0].facing;
-        Actor_SelectScript(g_Task->direction);
+        Script_Select(g_Task->direction);
     }
 }

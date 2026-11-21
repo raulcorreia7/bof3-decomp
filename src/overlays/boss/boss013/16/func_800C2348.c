@@ -11,7 +11,7 @@ MATCH void func_800C2348(void) {
             Area_SelectSceneRecord(0xF9);
             g_Task->unk_24 &= 0xFE;
             g_Task->unk_2A = 1;
-            Actor_SelectScript(1U);
+            Script_Select(1U);
         }
         *g_ScriptVars = 0x50;
         Battle_EndToArea();

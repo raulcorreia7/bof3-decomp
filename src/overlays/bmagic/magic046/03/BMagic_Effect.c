@@ -116,7 +116,7 @@ MATCH void func_801EF250(void) {
     g_Task                           = g_BattleEffectBattler;
     BATTLE_ACTIVE_WORK->param.unk_0B = 0;
     g_Task->unk_09                   = 0;
-    Actor_SelectScript(2U);
+    Script_Select(2U);
     g_Task->header.mode = 1;
     g_Task->header.step = 1;
 }

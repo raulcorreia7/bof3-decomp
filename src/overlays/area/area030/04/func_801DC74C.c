@@ -12,9 +12,9 @@ MATCH void func_801DC74C(void) {
         func_801E0A30();
         UI_SetMode(3);
         if (g_Game.current->chr.character_id == CHAR_ID_RYU_YOUNG) {
-            Actor_BeginScript(0xA, 2);
+            Script_Begin(0xA, 2);
         } else {
-            Actor_SelectScript(0xB);
+            Script_Select(0xB);
         }
         FISHING_STATE->sub_index = 1;
     }

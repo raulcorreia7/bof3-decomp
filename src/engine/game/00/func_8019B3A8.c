@@ -19,6 +19,6 @@ MATCH void func_8019B3A8(void) {
     work->unk_1C       = 0;
     work->gravity      = 0;
     g_Task->unk_0A     = 0;
-    Actor_SelectScript(0);
+    Script_Select(0);
     g_Task->header.mode++;
 }

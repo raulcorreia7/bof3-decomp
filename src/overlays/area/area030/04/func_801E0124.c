@@ -16,7 +16,7 @@ MATCH void func_801E0124(void) {
     FISHING_STATE->state_2A = 0;
 
     FISHING_STATE->counter_48 = 0;
-    Actor_SelectScript(0);
+    Script_Select(0);
 
     record             = FISHING_STATE;
     record->mode_index = (record->mode_index + 1);

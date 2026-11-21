@@ -79,7 +79,7 @@ MATCH void func_801FD734(void) {
     do {
         if (D_801FE894[i].x == COORD_INT(g_Task->pos.x) && D_801FE894[i].y == COORD_INT(g_Task->pos.y)) {
             if (SYS_TestFlag(g_SceneFlags, SCENE_TRIGGER_FLAG_BASE + D_801FE894[i].flag) == 0) {
-                Actor_SelectScript(D_801FE894[i].script);
+                Script_Select(D_801FE894[i].script);
                 g_Task->mirror = 0;
             } else {
                 g_Task->header.flags = 0;

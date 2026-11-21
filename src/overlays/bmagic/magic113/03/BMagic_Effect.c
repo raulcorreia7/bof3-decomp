@@ -466,7 +466,7 @@ MATCH void func_801F08B4(void) {
     if (g_Task->param.unk_0B == 0) {
         SND_PlaySE(EMI_SE_ID(SND_BANK_COMMON, 0x00));
     }
-    Actor_SelectScript(g_Task->param.unk_0B);
+    Script_Select(g_Task->param.unk_0B);
 }
 
 MATCH void func_801F0A80(void) {
@@ -481,7 +481,7 @@ MATCH void func_801F0A80(void) {
             return;
         }
         g_Task->unk_2A = (g_Task->unk_2A + 0x1) & 1;
-        Actor_SelectScript(g_Task->param.unk_0B);
+        Script_Select(g_Task->param.unk_0B);
         Area_AddGridActor();
         if (g_Task->param.unk_0B == 0) {
             if (g_Task->unk_09 == 1) {

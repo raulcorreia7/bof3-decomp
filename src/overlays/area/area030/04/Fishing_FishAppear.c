@@ -40,7 +40,7 @@ NON_MATCHING void Fishing_FishAppear(void) {
     }
     FISHING_STATE->counter_08 = 4;
     FISHING_STATE->step_14    = 0;
-    Actor_SelectScript(0);
+    Script_Select(0);
     FISHING_STATE->handler_index += 1;
 }
 #else

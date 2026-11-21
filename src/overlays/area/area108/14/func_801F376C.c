@@ -6,7 +6,7 @@ MATCH void func_801F376C(void) {
     u16    screen_y;
 
     screen = (u16*)D_1F800034;
-    Area_ProjectPoint((s32*)&g_Task->pos, (DVECTOR*)screen);
+    Camera_ProjectPoint((s32*)&g_Task->pos, (DVECTOR*)screen);
     g_Task->screen_x = screen[0];
     screen_y         = screen[1];
     g_Task->screen_y = screen_y;

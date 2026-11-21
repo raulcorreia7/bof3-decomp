@@ -14,7 +14,7 @@ s32 PlChar_FollowerInReach(u8 index);
             g_SpawnedActors[actor_slot].link = 1;                                                                  \
             /* FAKE: retail reads SND_PlaySE as void(s32). */                                                      \
             ((void (*)(s32))SND_PlaySE)(g_Task->unk_2C + 0x100);                                                   \
-            Actor_RequestScript(g_Task->direction + 8);                                                            \
+            Script_Request(g_Task->direction + 8);                                                                 \
             g_GameState->u.field.counter.unsigned_value = 2;                                                       \
             g_GameFlags |= 0x1000;                                                                                 \
             Area_RunWalk();                                                                                        \

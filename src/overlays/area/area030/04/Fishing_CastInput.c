@@ -17,7 +17,7 @@ MATCH void Fishing_CastInput(void) {
         SND_PlaySE(EMI_SE_ID(SND_BANK_AREA, 0));
         D_801E31FC = 0xFF;
         D_801E31F8 = 0xFF;
-        Actor_RequestScript(2);
+        Script_Request(2);
 
         work             = FISHING_STATE;
         work->y_38.pos_y = TO_COORD(65);

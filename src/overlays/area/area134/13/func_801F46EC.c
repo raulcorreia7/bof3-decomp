@@ -15,7 +15,7 @@ MATCH void func_801F46EC(const void* sprite) {
     SetPolyFT4(primitive);
     PSX_SET_SEMI_TRANSPARENT(primitive);
 
-    Area_ProjectPoint(object, &screen);
+    Camera_ProjectPoint(object, &screen);
     size[0] = FAKE_VOLATILE(u16, work->half_size);
     size[1] = FAKE_VOLATILE(u16, work->half_size);
     Game_ProjectWorldPoint(object, size, size);

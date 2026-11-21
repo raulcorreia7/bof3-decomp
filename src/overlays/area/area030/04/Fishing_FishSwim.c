@@ -28,7 +28,7 @@ MATCH void Fishing_FishSwim(void) {
                     FISHING_STATE->flags &= ~ACTOR_FLAG_SEMI_TRANSPARENT;
                     FISHING_STATE->state_2A   = 0;
                     FISHING_STATE->counter_48 = 0;
-                    Actor_SelectScript(0);
+                    Script_Select(0);
                     FISHING_STATE->handler_index++;
                     return;
                 }
@@ -42,7 +42,7 @@ MATCH void Fishing_FishSwim(void) {
             }
             func_801E03F8();
             FISHING_STATE->state_2A = D_801E2331[FISHING_STATE->counter_08 * 2];
-            Actor_RequestScript(D_801E2330[FISHING_STATE->counter_08 * 2]);
+            Script_Request(D_801E2330[FISHING_STATE->counter_08 * 2]);
             turn = Area_SampleHeight(FISHING_STATE->motion.unk_34 + FISHING_STATE->pos_x * 0x10, FISHING_STATE->y_38.pos_y + FISHING_STATE->cursor_10 * 0x10);
             work = FISHING_STATE;
             if (work->bounce.half.key < turn) {

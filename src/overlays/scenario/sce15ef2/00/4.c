@@ -179,8 +179,8 @@ MATCH void func_801D1218(WorldPos* pos, s16 y, s32 mode) {
     s32      i;
 
     GFX_AddDitheredDrawMode(GFX_LAYER_BACKDROP, GetTPage(TPAGE_DEPTH_4BIT, TPAGE_ABR_ADD, 0x2C0, 0x100));
-    Area_SetCameraMatrix(&camera);
-    Area_ProjectPoint((s32*)pos, &screen);
+    Camera_SetMatrix(&camera);
+    Camera_ProjectPoint((s32*)pos, &screen);
     size.vx = size.vy = y;
     Game_ProjectWorldPoint((s32*)pos, &size, &scale);
     scale.vx += g_FrameCount & 1;

@@ -17,7 +17,7 @@ MATCH void func_801B3A3C(void) {
         if (!(FIELD(u8, D_80146893, off) & 0x1u)) {
             saved = g_Task;
             TASK_SET(((u8*)g_Actors + off));
-            Actor_SelectScript(0u);
+            Script_Select(0u);
             g_Task = saved;
         }
     } else {
@@ -32,7 +32,7 @@ MATCH void func_801B3A3C(void) {
         work              = g_Task;
         work->header.mode = 0x0Cu;
     } else {
-        Actor_RequestScript(g_Task->direction);
+        Script_Request(g_Task->direction);
         g_Task->header.mode = 1u;
     }
     ACTOR_CLEAR_STEP();

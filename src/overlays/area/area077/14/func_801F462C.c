@@ -12,7 +12,7 @@ MATCH void func_801F462C(s32* pos, s16 radius, u8 center_shade, u8 rim_shade) {
     s16      screen_radius;
     s32      scale;
 
-    Area_ProjectPoint(pos, &screen);
+    Camera_ProjectPoint(pos, &screen);
     size.vx = radius;
     Game_ProjectWorldPoint(pos, &size, &projected);
 

@@ -35,7 +35,7 @@ MATCH void func_801F77B4(void) {
         g_AreaCameraAngle.vx = -0x2E4;
         g_AreaCameraAngle.vz = 0x12C;
         Area_AdvanceScroll(0x300);
-        Area_UpdateCamera();
+        Camera_Update();
         func_801A0514();
         Area_DrawScene();
         rect.x = 0;
