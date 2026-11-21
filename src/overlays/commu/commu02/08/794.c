@@ -160,13 +160,12 @@ MATCH void func_801D1938(void) {
     }
 }
 
-#ifdef NON_MATCHING
-NON_MATCHING void func_801D1A50(void) {
+/* Edits the four-slot casino bet row: moves, confirms and cancels. */
+MATCH void func_801D1A50(void) {
     u16* input;
     u16  repeated;
     s32  slot;
-
-    FAKE_STACK_PADS(u8, 1); /* FAKE: retail reserves 8 unused stack bytes. */
+    s8   scnt;
 
     input    = &g_PadStates[0].pressed;
     repeated = INPUT_GetRepeatedButtons(*input & 0xA000);
@@ -204,18 +203,20 @@ NON_MATCHING void func_801D1A50(void) {
             }
         }
     } else if (*input & g_InputMasks[MENU_INPUT_CANCEL]) {
-        if (LOB(D_801DB0B4) != 0) {
+        if (LOB(D_801DB0B4) == 0) {
+        } else {
             SND_PlaySE(0x106);
-            D_801DB0B4--;
-            if ((s8)D_801DB0B4 == 0 && D_801DB0B8 == 2) {
+            scnt       = LOBU(D_801DB0B4) - 1;
+            D_801DB0B4 = scnt;
+            if (scnt == 0 && D_801DB0B8 == 2) {
                 D_801DB0B8 = 0;
             }
         }
     }
 
-    if ((s8)D_801DB0B4 <= 0) {
+    if (LOB(D_801DB0B4) <= 0) {
         func_801D2908(0x58, 0x44, 2);
-    } else if ((s8)D_801DB0B4 >= 8) {
+    } else if (LOB(D_801DB0B4) >= 8) {
         func_801D2908(0x58, 0x44, 3);
     } else {
         func_801D2908(0x58, 0x44, 0xFF);
@@ -228,12 +229,9 @@ NON_MATCHING void func_801D1A50(void) {
     }
     Menu_DrawCursorSprite(((D_801DB0B8 * 3) << 4) + 0x5E & 0xFFFE, 0x4A, 0);
 }
-#else
-INCLUDE_ASM(func_801D1A50);
-#endif
 
-#ifdef NON_MATCHING
-NON_MATCHING void func_801D1D68(void) {
+/* Slides the casino card row up and flips the step after four frames. */
+MATCH void func_801D1D68(void) {
     s32 i;
     u8  cnt;
 
@@ -244,7 +242,7 @@ NON_MATCHING void func_801D1D68(void) {
     i          = (s8)D_801DB0B4 + 1;
     D_801DB0C4 = cnt;
     for (; i < 9; i++) {
-        func_801D2CF8((i * 0x200000 + 0x100000) >> 16, D_801DB0C4 * 40 + 0x6C, 0xFF);
+        func_801D2CF8(((i * 2 + 1) << 20) >> 16, D_801DB0C4 * 40 + 0x6C, 0xFF);
     }
     func_801D2908(0x58, 0x44 - D_801DB0C4 * 40, 2);
     if (D_801DB0C4 == 4) {
@@ -253,9 +251,6 @@ NON_MATCHING void func_801D1D68(void) {
         D_801F294D += 1;
     }
 }
-#else
-INCLUDE_ASM(func_801D1D68);
-#endif
 
 MATCH void func_801D1E98(void) {
     s32 idx;
@@ -879,68 +874,51 @@ MATCH void func_801D3C30(void) {
     func_801D32A0(0xCC, 0x3C, 0);
 }
 
-#ifdef NON_MATCHING
-NON_MATCHING void func_801D3E44(void) {
-    s8  selected;
-    u8  same_count;
-    u8  pair_count;
+/* Scores the hits and blows guess, then shows the result or the won prize. */
+MATCH void func_801D3E44(void) {
+    u8  hits;
+    u8  blows;
     s32 i;
     s32 j;
     s32 idx;
     u8* record;
 
-    selected   = (s8)D_801DB0B4;
-    same_count = 0;
-    i          = 0;
-    do {
-        if (D_801DB080[(s32)selected * 5 + 3 + i] == D_801DB080[i]) {
-            same_count++;
+    hits  = 0;
+    blows = 0;
+    for (i = 0; i < 3; i++) {
+        if (D_801DB080[i] == D_801DB080[(s8)D_801DB0B4 * 5 + 3 + i]) {
+            hits++;
         }
-        i++;
-    } while (i < 3);
-
-    pair_count = 0;
-    i          = 0;
-    do {
-        j = 0;
-        do {
-            if (D_801DB080[(s32)selected * 5 + 3 + i] == D_801DB080[j]) {
-                pair_count++;
+    }
+    for (i = 0; i < 3; i++) {
+        for (j = 0; j < 3; j++) {
+            if (i != j && D_801DB080[(s8)D_801DB0B4 * 5 + 3 + i] == D_801DB080[j]) {
+                blows++;
             }
-            j++;
-        } while (j < 3);
-        i++;
-    } while (i < 3);
-
-    D_801DB080[(s32)selected * 5 + 6] = same_count;
-    D_801DB080[(s32)selected * 5 + 7] = pair_count;
-    if (same_count == 3) {
-        sprintf((char*)g_TextVariables[0], D_801D0C20, selected + 1);
-        sprintf((char*)&g_TextVariables[0][0x20], D_801D0C20, pair_count);
+        }
+    }
+    D_801DB080[(s8)D_801DB0B4 * 5 + 6] = hits;
+    D_801DB080[(s8)D_801DB0B4 * 5 + 7] = blows;
+    if (hits != 3) {
+        sprintf((char*)g_TextVariables[0], D_801D0C20, hits);
+        sprintf((char*)&g_TextVariables[0][0x20], D_801D0C20, blows);
         Message_StartAreaMessage(MSG_AREA175_SHOW_HITS_BLOWS);
         D_801F294D++;
     } else {
-        sprintf((char*)g_TextVariables[0], D_801D0C20, selected + 1);
-        D_801DB0B8 = rand() & 3;
-        if (D_801DB0B8 < 3) {
+        sprintf((char*)g_TextVariables[0], D_801D0C20, (s8)D_801DB0B4 + 1);
+        if ((D_801DB0B8 = rand() & 3) >= 3) {
             D_801DB0B8 -= rand() & 3;
-            if (D_801DB0B8 < 0) {
-                D_801DB0B8 = 0;
-            } else if (D_801DB0B8 >= 3) {
-                D_801DB0B8 = 2;
-            }
+            D_801DB0B8 = (D_801DB0B8 < 0) ? 0 : ((D_801DB0B8 < 3) ? D_801DB0B8 : 2);
         }
-        idx    = ((s8)D_801DB0B4 * 3 + (s8)D_801DB0B8) * 2 + D_801448F2 * 48;
+        idx    = ((s8)D_801DB0B4 * 3 + D_801DB0B8) * 2 + D_801448F2 * 48;
         record = Item_GetRecord(D_801DAD00[0][idx + 1], D_801DAD00[0][idx]);
-        i      = 0;
-        do {
+        for (i = 0; i < 12; i++) {
             g_TextVariables[0][0x20 + i] = record[i];
-            i++;
-        } while (i < 12);
+        }
         g_TextVariables[0][0x2C] = 0;
         Message_StartAreaMessage(MSG_AREA175_NUMBERS_WON_PRIZE);
+        D_801F294D = 7;
     }
-    D_801F294D       = 7;
     g_GameStateIndex = GAME_REQUEST_MESSAGE;
     func_801D4AE0(16, 24, 0);
     func_801D4F88(104, 64, 0);
@@ -948,9 +926,6 @@ NON_MATCHING void func_801D3E44(void) {
     func_801D3184(204, 16);
     func_801D32A0(204, 60, 0);
 }
-#else
-INCLUDE_ASM(func_801D3E44);
-#endif
 
 MATCH void func_801D4158(void) {
     u8* state;
@@ -1125,10 +1100,9 @@ MATCH void func_801D4840(void) {
     }
 }
 
-#ifdef NON_MATCHING
-NON_MATCHING void func_801D4910(s32 x, s32 y) {
+/* Draws the fairy casino board frame from its corner, edge and side pieces. */
+MATCH void func_801D4910(s32 x, s32 y) {
     s32 i;
-    s32 off;
     s32 tpage;
     s16 y2;
 
@@ -1140,31 +1114,22 @@ NON_MATCHING void func_801D4910(s32 x, s32 y) {
     SetDrawMode((DR_MODE*)g_GfxPrimCursor, 0, 0, tpage, 0);
     GFX_AddPrim(GFX_LAYER_UI, 0xC);
     FairyCasino_DrawFramePiece((s16)x, (s16)y, 0xB);
-    off = 8;
     for (i = 0; i < 9; i++) {
-        FairyCasino_DrawFramePiece((s16)(x + off), (s16)(y - 1), 0xD);
-        off += 8;
+        FairyCasino_DrawFramePiece((s16)(x + 8 + i * 8), (s16)(y - 1), 0xD);
     }
     FairyCasino_DrawFramePiece((s16)(x + 0x4F), (s16)y, 0xC);
-    off = 8;
     for (i = 0; i < 14; i++) {
-        y2 = (s16)(y + off);
+        y2 = (s16)(y + 8 + i * 8);
         FairyCasino_DrawFramePiece((s16)x, y2, 0xE);
         FairyCasino_DrawFramePiece((s16)(x + 0x50), y2, 0xF);
-        off += 8;
     }
     y2 = (s16)(y + 0x78);
     FairyCasino_DrawFramePiece((s16)x, (s16)y2, 0x10);
-    off = 8;
     for (i = 0; i < 9; i++) {
-        FairyCasino_DrawFramePiece((s16)(x + off), (s16)y2, 0xD);
-        off += 8;
+        FairyCasino_DrawFramePiece((s16)(x + 8 + i * 8), (s16)y2, 0xD);
     }
     FairyCasino_DrawFramePiece((s16)(x + 0x50), (s16)(y + 0x78), 0x11);
 }
-#else
-INCLUDE_ASM(func_801D4910);
-#endif
 #ifdef NON_MATCHING
 NON_MATCHING void func_801D4AE0(s16 x, s16 y, u8 flag) {
     s32 left_x;
