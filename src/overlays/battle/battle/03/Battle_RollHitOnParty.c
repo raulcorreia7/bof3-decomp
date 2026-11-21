@@ -43,7 +43,7 @@ enemy:
     goto have_flags;
 
 after_enemy:
-    threshold = D_801EC303;
+    threshold = g_BattleCalcStats[0].evasion;
     if (threshold >= RANDOM_PERCENT()) {
         /* threshold passed: clear the status instead */
         goto clear;

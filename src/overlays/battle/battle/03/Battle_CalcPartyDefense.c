@@ -17,5 +17,5 @@ MATCH u32 Battle_CalcPartyDefense(void) {
     }
     half = total;
     sum  = half / g_Battle.party_count;
-    return (sum + D_801EC2EE) >> 1u;
+    return (sum + g_BattleCalcStats[0].defense) >> 1u;
 }
