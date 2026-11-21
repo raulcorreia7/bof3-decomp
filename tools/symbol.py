@@ -979,6 +979,21 @@ class Row:
     table: str
 
 
+def _sized_member(member: Member, later: list[Member], size: int) -> Member:
+    """Return ``member`` with its length: up to the next member outside it, capped by its type."""
+    depth = member.path.count(".")
+    end = size
+    for after in later:
+        if after.path.count(".") <= depth and after.offset > member.offset:
+            end = after.offset
+            break
+    length = end - member.offset
+    width = _known_width(member.ctype)
+    if width is not None:
+        length = min(length, width)
+    return Member(member.offset, member.path, member.ctype, length)
+
+
 def parse_probe(text: str) -> Layout | None:
     """Read the layout from the ``struct __probe`` block of a clang record dump."""
     for block in text.split("*** Dumping AST Record Layout")[1:]:
@@ -1012,17 +1027,7 @@ def parse_probe(text: str) -> Layout | None:
                 member = Member(member.offset, member.path[2:], member.ctype, 0)
             inner.append(member)
         for index, member in enumerate(inner):
-            depth = member.path.count(".")
-            end = size
-            for later in inner[index + 1 :]:
-                if later.path.count(".") <= depth and later.offset > member.offset:
-                    end = later.offset
-                    break
-            length = end - member.offset
-            width = _known_width(member.ctype)
-            if width is not None:
-                length = min(length, width)
-            inner[index] = Member(member.offset, member.path, member.ctype, length)
+            inner[index] = _sized_member(member, inner[index + 1 :], size)
         return Layout(size, tuple(inner), bool(inner))
     return None
 
@@ -2230,49 +2235,8 @@ def _header_values(
     headers: list[str],
 ) -> tuple[list, list, dict[str, int]]:
     """Return each header's enums, macros and the resolved value of every name."""
-    enums = []
-    defines = []
-    for header in headers:
-        try:
-            text = (ROOT / header).read_text(encoding="utf-8", errors="replace")
-        except OSError:
-            continue
-        enums.extend(
-            (header, family, members) for family, members in _enum_values(text)
-        )
-        defines.extend(
-            (header, name, body, line) for name, body, line in _define_values(text)
-        )
-    values: dict[str, int] = {}
-    for _ in range(5):
-        changed = False
-        for _, name, body, _ in defines:
-            if name in values:
-                continue
-            value = _c_expression(body, values)
-            if value is not None:
-                values[name] = value
-                changed = True
-        for _, _, members in enums:
-            previous: int | None = -1
-            for name, body, _ in members:
-                if name in values:
-                    previous = values[name]
-                    continue
-                value = (
-                    _c_expression(body, values)
-                    if body is not None
-                    else (previous + 1 if previous is not None else None)
-                )
-                if value is not None:
-                    values[name] = value
-                    previous = value
-                    changed = True
-                else:
-                    previous = None
-        if not changed:
-            break
-    return enums, defines, values
+    enums, defines = _read_header_values(headers)
+    return enums, defines, _resolve_values(enums, defines)
 
 
 def _value_families(headers: list[str]) -> tuple[dict[str, ValueFamily], set[str]]:
