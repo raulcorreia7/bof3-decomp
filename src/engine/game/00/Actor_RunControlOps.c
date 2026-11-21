@@ -1,6 +1,7 @@
 #include "game_00.h"
 
-MATCH u8 func_801A9944(void* sub, s32 target, u8 value) {
+/* func_801A9944 */
+MATCH u8 Actor_RunControlOps(void* sub, s32 target, u8 value) {
     u8*    target_bytes;
     u16    next_cursor_e7;
     u16    next_cursor_e8;

@@ -1,13 +1,14 @@
 #include "game_00.h"
 
-MATCH u8 func_801A8D38(void* sub, s32 target) {
+/* func_801A8D38 */
+MATCH u8 Actor_RunScript(void* sub, s32 target) {
     u8 script;
     u8 value;
     u8 sel;
 
     sel           = g_Task->direction;
     g_ScriptState = (void*)sub;
-    sel           = func_801A8F94(sub, (u8*)target, sel);
+    sel           = Actor_RunFlowOps(sub, (u8*)target, sel);
     script        = ((u8*)target)[((ScriptState*)sub)->cursor];
     switch (script & 0xF0) {
         case 0x10:
@@ -30,28 +31,28 @@ MATCH u8 func_801A8D38(void* sub, s32 target) {
             ((ScriptState*)sub)->unk_01 = script & 0xF;
             break;
         case 0x60:
-            sel = func_801ABA24(sub, target, sel);
+            sel = Actor_RunFaceOps(sub, target, sel);
             break;
         case 0x80:
-            sel = func_801AB458(sub, (const u8*)target, sel);
+            sel = Actor_RunStageOps(sub, (const u8*)target, sel);
             break;
         case 0x90:
-            sel = func_801AB8B0(sub, (u8*)target, sel);
+            sel = Actor_RunSpawnOps(sub, (u8*)target, sel);
             break;
         case 0xA0:
             ((ScriptState*)sub)->cursor--;
             break;
         case 0xC0:
-            sel = func_801AAB00(sub, target, sel);
+            sel = Actor_RunAppearanceOps(sub, target, sel);
             break;
         case 0xD0:
-            sel = func_801AA470(sub, target, sel);
+            sel = Actor_RunWaitOps(sub, target, sel);
             break;
         case 0xE0:
-            sel = func_801A9944(sub, target, sel);
+            sel = Actor_RunControlOps(sub, target, sel);
             break;
         case 0xF0:
-            sel = func_801A9DE8(sub, (const u8*)target, sel);
+            sel = Actor_RunMotionOps(sub, (const u8*)target, sel);
             break;
     }
     ((ScriptState*)sub)->cursor++;

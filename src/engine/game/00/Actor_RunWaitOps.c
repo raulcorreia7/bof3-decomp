@@ -1,7 +1,8 @@
 #include "game_00.h"
 
+/* func_801AA470 */
 #ifdef NON_MATCHING
-NON_MATCHING u8 func_801AA470(void* sub, s32 target, u8 value) {
+NON_MATCHING u8 Actor_RunWaitOps(void* sub, s32 target, u8 value) {
     u8* code;
     u8* cmd;
     u8  slot;
@@ -138,5 +139,5 @@ back:
     goto set_cursor;
 }
 #else
-INCLUDE_ASM(func_801AA470);
+INCLUDE_ASM(Actor_RunWaitOps);
 #endif

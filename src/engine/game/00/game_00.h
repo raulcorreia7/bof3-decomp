@@ -852,22 +852,33 @@ bool    func_801A8A98(s32 candidate_x, s32 candidate_y);
 s8      func_801A8B84(s32 handler_x, s32 handler_y);
 /* func_801A8CB4 */
 s8      Game_CallArea(s32 handler_x, s32 handler_y);
-u8      func_801A8D38(void* sub, s32 target);
-u8      func_801A8F94(ScriptState* state, u8* base, s32 seed);
-void    func_801A96E4(ScriptState* state, u8* base);
-u8      func_801A9944(void* sub, s32 target, u8 value);
-u8      func_801A9DE8(GameCursorState* state, const u8* table, u8 value);
-u8      func_801AA470(void* sub, s32 target, u8 value);
-u8      func_801AAB00(void* sub, s32 target, u8 value);
-u8      func_801AB458(GameCursorState* state, const u8* table, u8 value);
-s32     func_801AB8B0(GameCursorState* state, u8* table, s32 value);
-u8      func_801ABA24(void* sub, s32 target, u8 value);
+/* func_801A8D38 */
+u8      Actor_RunScript(void* sub, s32 target);
+/* func_801A8F94 */
+u8      Actor_RunFlowOps(ScriptState* state, u8* base, s32 seed);
+/* func_801A96E4 */
+void    Actor_RunSoundOps(ScriptState* state, u8* base);
+/* func_801A9944 */
+u8      Actor_RunControlOps(void* sub, s32 target, u8 value);
+/* func_801A9DE8 */
+u8      Actor_RunMotionOps(GameCursorState* state, const u8* table, u8 value);
+/* func_801AA470 */
+u8      Actor_RunWaitOps(void* sub, s32 target, u8 value);
+/* func_801AAB00 */
+u8      Actor_RunAppearanceOps(void* sub, s32 target, u8 value);
+/* func_801AB458 */
+u8      Actor_RunStageOps(GameCursorState* state, const u8* table, u8 value);
+/* func_801AB8B0 */
+s32     Actor_RunSpawnOps(GameCursorState* state, u8* table, s32 value);
+/* func_801ABA24 */
+u8      Actor_RunFaceOps(void* sub, s32 target, u8 value);
 void    func_801ABEE0(void);
 VECTOR* func_801ABF30(VECTOR* out, s32 sel, s32 selector_kind);
 void    func_801AC0A0(s8 tuning_delta);
 bool    func_801AC33C(s32 ease_in, s32 distance);
 void    func_801AC768(GameCursorState* cursor_state, s32 mode_byte, s32 value_18, s32 value_1C, s32 extra_value);
-u16     func_801AC8F0(ScriptState* state, u8 wanted_id, u8* base);
+/* func_801AC8F0 */
+u16     Actor_FindScriptLabel(ScriptState* state, u8 wanted_id, u8* base);
 void    func_801AC9D0(void);
 void    func_801ACA14(void);
 void    func_801ACAC0(void);

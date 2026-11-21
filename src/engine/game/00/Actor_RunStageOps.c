@@ -24,8 +24,9 @@ typedef enum ActorScriptStage {
     ACTOR_SCRIPT_STAGE_SPAWN_HELPER        = 0x8C, /* args: [flag]; Actor_SpawnHelper claims a slot at the actor */
 } ActorScriptStage;
 
+/* func_801AB458 */
 #ifdef NON_MATCHING
-NON_MATCHING u8 func_801AB458(GameCursorState* state, const u8* table, u8 value) {
+NON_MATCHING u8 Actor_RunStageOps(GameCursorState* state, const u8* table, u8 value) {
     u8    byte;
     u8    flag;
     u8    slot;
@@ -149,5 +150,5 @@ NON_MATCHING u8 func_801AB458(GameCursorState* state, const u8* table, u8 value)
     return value;
 }
 #else
-INCLUDE_ASM(func_801AB458);
+INCLUDE_ASM(Actor_RunStageOps);
 #endif

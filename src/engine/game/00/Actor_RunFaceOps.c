@@ -18,7 +18,8 @@ typedef enum ActorScriptFace {
     ACTOR_SCRIPT_FACE_AXIS_BASE_10   = 0x66, /* straighten to the axis facing, script base 0x10 + axis */
 } ActorScriptFace;
 
-MATCH u8 func_801ABA24(void* sub, s32 target, u8 value) {
+/* func_801ABA24 */
+MATCH u8 Actor_RunFaceOps(void* sub, s32 target, u8 value) {
     u8  action;
     u8  result;
     u32 mode;

@@ -113,7 +113,18 @@ Scene_StartShopSave = { addr = 0x801A802C, type = "func", source = "Scene event 
 Message_RunAreaMessage = { addr = 0x801A82F8, type = "func", source = "Starts area message 0xD8, waits until g_GameStateIndex leaves 2, then clears the script-active flag and the scene event byte D_801448EB." }
 Scene_DispatchObject = { addr = 0x801A86D4, type = "func", source = "Runs the g_SceneObjects callback selected by unk_7A of the actor, with the actor and g_SceneEventFlags." }
 Game_CallArea = { addr = 0x801A8CB4, type = "func", source = "Finds the entry of g_GameAreaId in the 28-entry area handler table g_AreaHooks and calls its handler with the two coordinates; returns 0 when the area has none. Called by Game_CallScenario." }
+Actor_RunScript = { addr = 0x801A8D38, type = "func", source = "Runs the actor script record at the cursor: flow ops first, then the group handler its high nibble selects; returns the facing selection." }
+Actor_RunFlowOps = { addr = 0x801A8F94, type = "func", source = "Runs the flow opcodes of an actor script: jumps, branches on flags, loops, script calls, facing offsets; hands 0xB0 sound opcodes on." }
+Actor_RunSoundOps = { addr = 0x801A96E4, type = "func", source = "Runs the sound opcodes 0xB0 to 0xBE of an actor script: sound effects, BGM, sequences and volume cues." }
+Actor_RunControlOps = { addr = 0x801A9944, type = "func", source = "Runs the script control opcodes 0xE0 to 0xEF: start another script, end it, toggle the hide, no-start, route-lock and wait-stream flags." }
+Actor_RunMotionOps = { addr = 0x801A9DE8, type = "func", source = "Runs the motion opcodes 0xF0 to 0xFF of an actor script: move, walk to a cell, vertical speed, waits, cell palette." }
+Actor_RunWaitOps = { addr = 0x801AA470, type = "func", source = "Runs the opcodes 0xD0 to 0xDF of an actor script: waits for a message, window effect or battle request, and camera and cell palette touches." }
+Actor_RunAppearanceOps = { addr = 0x801AAB00, type = "func", source = "Runs the opcodes 0xC0 to 0xCE of an actor script: palette fade, scale, tint, transparency and turning." }
+Actor_RunStageOps = { addr = 0x801AB458, type = "func", source = "Runs the opcodes 0x80 to 0x8C of an actor script: script-active flag, screen fades, camera scroll, tints, XA music." }
+Actor_RunSpawnOps = { addr = 0x801AB8B0, type = "func", source = "Runs the opcodes 0x90 to 0x9F of an actor script: spawn a helper actor into a slot and wait while it lives." }
+Actor_RunFaceOps = { addr = 0x801ABA24, type = "func", source = "Runs the opcodes 0x60 to 0x66 of an actor script: choose the facing animation script and lock the route." }
 Area_MoveActorRoute = { addr = 0x801ABBA8, type = "func", source = "samples the height along the route, paces it with g_RouteSpeedScale and moves the actor" }
+Actor_FindScriptLabel = { addr = 0x801AC8F0, type = "func", source = "Moves the cursor to the 0x0A label record with the wanted id when the cursor holds a label reference (bit 0x4000)." }
 FieldAction_Run = { addr = 0x801ACE10, type = "func", source = "The party leader's field action: runs the area's action table entry, or the leader's own." }
 FieldAction_RunSteps = { addr = 0x801ACEBC, type = "func", source = "Runs the field action step table by the actor's step." }
 FieldAction_RollStep = { addr = 0x801ACF2C, type = "func", source = "Step 0 of the field action: rolls for a find, a miss ends the action." }

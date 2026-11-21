@@ -1,6 +1,7 @@
 #include "game_00.h"
 
-MATCH u16 func_801AC8F0(ScriptState* state, u8 wanted_id, u8* base) {
+/* func_801AC8F0 */
+MATCH u16 Actor_FindScriptLabel(ScriptState* state, u8 wanted_id, u8* base) {
     s32 offset = 0;
     u16 cursor;
     u8* record;

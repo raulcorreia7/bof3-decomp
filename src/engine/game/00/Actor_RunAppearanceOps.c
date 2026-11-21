@@ -3,8 +3,9 @@
 #define CUR(s)       FIELD(u16, (s), 0xAu)
 #define PACK24(c, o) (((s32)(s8)(c)[o] << 0x10) | ((c)[(o) + 1] << 8))
 
+/* func_801AAB00 */
 #ifdef NON_MATCHING
-NON_MATCHING u8 func_801AAB00(void* sub, s32 target, u8 value) {
+NON_MATCHING u8 Actor_RunAppearanceOps(void* sub, s32 target, u8 value) {
     u8* code;
     u8* cmd;
     u8  slot;
@@ -159,5 +160,5 @@ NON_MATCHING u8 func_801AAB00(void* sub, s32 target, u8 value) {
     return value;
 }
 #else
-INCLUDE_ASM(func_801AAB00);
+INCLUDE_ASM(Actor_RunAppearanceOps);
 #endif

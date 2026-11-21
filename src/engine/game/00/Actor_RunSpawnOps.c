@@ -3,9 +3,17 @@
 /* The retail caller loads the fifth argument with lh, so the declaration keeps
  * s16 although the definition names it u16; the low halfword is identical. */
 
-MATCH s32 func_801AB8B0(GameCursorState* state, u8* table, s32 value) {
+/* func_801AB8B0 */
+/* Opcodes 0x90 to 0x9F of the actor script: spawn a helper actor. */
+typedef enum ActorScriptSpawn {
+    ACTOR_SCRIPT_SPAWN_CLAIM_AT_SCREEN_FIRST = 0x90, /* args: [dx] [dy]; Actor_ClaimSlot at the screen position; 0x91 to 0x95 pick the next kinds */
+    ACTOR_SCRIPT_SPAWN_AT_ACTOR_FIRST        = 0x98, /* args: [dx] [dy]; Actor_SpawnHelper at the actor; 0x99 to 0x9D pick the next kinds */
+    ACTOR_SCRIPT_SPAWN_WAIT_ALIVE            = 0x9F, /* hold the cursor while the spawned actor is in use */
+} ActorScriptSpawn;
+
+MATCH s32 Actor_RunSpawnOps(GameCursorState* state, u8* table, s32 value) {
     switch (table[state->index]) {
-        case 0x90:
+        case ACTOR_SCRIPT_SPAWN_CLAIM_AT_SCREEN_FIRST:
         case 0x91:
         case 0x92:
         case 0x93:
@@ -14,7 +22,7 @@ MATCH s32 func_801AB8B0(GameCursorState* state, u8* table, s32 value) {
             g_Task->param.unk_0B = Actor_ClaimSlot(table[state->index] - 0x90, (s8)table[state->index + 1], (s8)table[state->index + 2], (s16)g_Task->screen_x, (s16)g_Task->screen_y);
             state->index += 2;
             break;
-        case 0x98:
+        case ACTOR_SCRIPT_SPAWN_AT_ACTOR_FIRST:
         case 0x99:
         case 0x9A:
         case 0x9B:
@@ -24,7 +32,7 @@ MATCH s32 func_801AB8B0(GameCursorState* state, u8* table, s32 value) {
                 Actor_SpawnHelper(table[state->index] - 0x98, (s8)table[state->index + 1], (s8)table[state->index + 2], g_Task->pos.x.fixed, g_Task->pos.y.fixed, g_Task->pos.z.fixed);
             state->index += 2;
             break;
-        case 0x9F:
+        case ACTOR_SCRIPT_SPAWN_WAIT_ALIVE:
             if (ACTOR_IN_USE(g_SpawnedActors[g_Task->param.actor_slot])) {
                 state->index -= 1;
             }

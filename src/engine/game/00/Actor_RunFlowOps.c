@@ -1,7 +1,8 @@
 #include "game_00.h"
 
+/* func_801A8F94 */
 #ifdef NON_MATCHING
-NON_MATCHING u8 func_801A8F94(ScriptState* state, u8* base, s32 seed) {
+NON_MATCHING u8 Actor_RunFlowOps(ScriptState* state, u8* base, s32 seed) {
     s32                 left;
     s32                 sel;
     s32                 dist;
@@ -17,7 +18,7 @@ NON_MATCHING u8 func_801A8F94(ScriptState* state, u8* base, s32 seed) {
                     case 1:
                         if ((base[state->cursor + 1] & 0xC0) == 0x40) {
                             state->cursor = (u16)(base[state->cursor + 2] | (base[state->cursor + 1] << 8));
-                            state->cursor = func_801AC8F0(state, (u8)state->cursor, base);
+                            state->cursor = Actor_FindScriptLabel(state, (u8)state->cursor, base);
                         } else {
                             state->cursor = (u16)(state->cursor + base[state->cursor + 2] + (base[state->cursor + 1] << 8));
                         }
@@ -47,7 +48,7 @@ NON_MATCHING u8 func_801A8F94(ScriptState* state, u8* base, s32 seed) {
                             state->cursor = (u16)(base[state->cursor + 3] | (base[state->cursor + 4] << 8));
                         else
                             state->cursor = (u16)(base[state->cursor + 5] | (base[state->cursor + 6] << 8));
-                        state->cursor = func_801AC8F0(state, (u8)state->cursor, base);
+                        state->cursor = Actor_FindScriptLabel(state, (u8)state->cursor, base);
                         break;
                     case 5:
                         left = func_8015B870(base[state->cursor + 1]);
@@ -55,7 +56,7 @@ NON_MATCHING u8 func_801A8F94(ScriptState* state, u8* base, s32 seed) {
                             state->cursor = (u16)(base[state->cursor + 3] | (base[state->cursor + 4] << 8));
                         else
                             state->cursor = (u16)(base[state->cursor + 5] | (base[state->cursor + 6] << 8));
-                        state->cursor = func_801AC8F0(state, (u8)state->cursor, base);
+                        state->cursor = Actor_FindScriptLabel(state, (u8)state->cursor, base);
                         break;
                     case 6:
                         left = base[state->cursor + 1];
@@ -63,7 +64,7 @@ NON_MATCHING u8 func_801A8F94(ScriptState* state, u8* base, s32 seed) {
                             state->cursor = (u16)(base[state->cursor + 3] | (base[state->cursor + 4] << 8));
                         else
                             state->cursor = (u16)(base[state->cursor + 5] | (base[state->cursor + 6] << 8));
-                        state->cursor = func_801AC8F0(state, (u8)state->cursor, base);
+                        state->cursor = Actor_FindScriptLabel(state, (u8)state->cursor, base);
                         break;
                     case 7:
                         left = func_8015B870(base[state->cursor + 1]);
@@ -71,7 +72,7 @@ NON_MATCHING u8 func_801A8F94(ScriptState* state, u8* base, s32 seed) {
                             state->cursor = (u16)(base[state->cursor + 3] | (base[state->cursor + 4] << 8));
                         else
                             state->cursor = (u16)(base[state->cursor + 5] | (base[state->cursor + 6] << 8));
-                        state->cursor = func_801AC8F0(state, (u8)state->cursor, base);
+                        state->cursor = Actor_FindScriptLabel(state, (u8)state->cursor, base);
                         break;
                     case 8:
                         left = base[state->cursor + 1];
@@ -79,7 +80,7 @@ NON_MATCHING u8 func_801A8F94(ScriptState* state, u8* base, s32 seed) {
                             state->cursor = (u16)(base[state->cursor + 3] | (base[state->cursor + 4] << 8));
                         else
                             state->cursor = (u16)(base[state->cursor + 5] | (base[state->cursor + 6] << 8));
-                        state->cursor = func_801AC8F0(state, (u8)state->cursor, base);
+                        state->cursor = Actor_FindScriptLabel(state, (u8)state->cursor, base);
                         break;
                     case 9:
                         left = func_8015B870(base[state->cursor + 1]);
@@ -87,7 +88,7 @@ NON_MATCHING u8 func_801A8F94(ScriptState* state, u8* base, s32 seed) {
                             state->cursor = (u16)(base[state->cursor + 3] | (base[state->cursor + 4] << 8));
                         else
                             state->cursor = (u16)(base[state->cursor + 5] | (base[state->cursor + 6] << 8));
-                        state->cursor = func_801AC8F0(state, (u8)state->cursor, base);
+                        state->cursor = Actor_FindScriptLabel(state, (u8)state->cursor, base);
                         break;
                     case 10:
                         state->cursor += 2;
@@ -159,7 +160,7 @@ NON_MATCHING u8 func_801A8F94(ScriptState* state, u8* base, s32 seed) {
                 state->cursor = (u16)(state->cursor + step + 1);
                 break;
             case 0xB0:
-                func_801A96E4(state, base);
+                Actor_RunSoundOps(state, base);
                 state->cursor += 1;
                 break;
             default:
@@ -168,5 +169,5 @@ NON_MATCHING u8 func_801A8F94(ScriptState* state, u8* base, s32 seed) {
     }
 }
 #else
-INCLUDE_ASM(func_801A8F94);
+INCLUDE_ASM(Actor_RunFlowOps);
 #endif
