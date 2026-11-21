@@ -135,7 +135,7 @@ MATCH void func_801D1628(void) {
     }
 }
 
-#include "overlays/commu/Fairy_EndCommuScene.h"
+#include "overlays/commu/shared/Fairy_EndCommuScene.h"
 
 MATCH void func_801D16A4(void) {
     g_MenuPanelTasks[0].panel      = 2;

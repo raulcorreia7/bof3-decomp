@@ -1,5 +1,5 @@
 #include "commu02_08.h"
-#include "overlays/commu/Commu_CursorTriangle.h"
+#include "overlays/commu/shared/Commu_CursorTriangle.h"
 #include "common/util.h"
 
 #if BOF3_USE_ASM
@@ -1424,7 +1424,7 @@ MATCH void func_801D5A48(void) {
     }
 }
 
-#include "overlays/commu/Fairy_EndCommuScene.h"
+#include "overlays/commu/shared/Fairy_EndCommuScene.h"
 
 MATCH s32 func_801D5AD0(s32 limit) {
     s32 roll;
@@ -2113,7 +2113,7 @@ MATCH void Fairy_EndCommuSceneEvent3(void) {
     COMMU_ADVANCE_STEP();
 }
 
-#include "overlays/commu/Fairy_CountFairies.h"
+#include "overlays/commu/shared/Fairy_CountFairies.h"
 
 /* func_801D7EA0 */
 MATCH u8 Fairy_FindActiveJob(u8 arg) {
@@ -2132,7 +2132,7 @@ MATCH u8 Fairy_FindActiveJob(u8 arg) {
     return 0xFF;
 }
 
-#include "overlays/commu/Commu_CellGrid.h"
+#include "overlays/commu/shared/Commu_CellGrid.h"
 
 MATCH void func_801D7EF0(s16 x, s16 y) {
     s32 i;
