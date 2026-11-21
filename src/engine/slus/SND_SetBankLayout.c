@@ -21,7 +21,7 @@ MATCH void SND_SetBankLayout(u32 layout) {
     FAKE_REG(s32, last, "a3");
 
     s32 fixed             = 0x8011A000;
-    off                   = (layout & BYTE_MASK) * 0x1C;
+    off                   = (layout & BYTE_MASK) * (SND_BANK_COUNT * sizeof(u32));
     D_8014678C            = 0;
     v                     = FIELD(s32, g_SndBankHeaderSize, off);
     layer2                = D_8014871C;

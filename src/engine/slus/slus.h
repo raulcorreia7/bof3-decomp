@@ -37,6 +37,9 @@
 #define RESOURCE_ID_INDEX(id)      ((id) & 0x3FFF)      /* index into the group's u16 offset table */
 #define SLUS_LOAD_ADDRESS          0x80010000u          /* the main executable's link address */
 #define AREA_CODE_BASE             0x800F5000u          /* the area code base (AreaHandlerRecord.code_base) */
+#define SND_BANK_COUNT             7                    /* sound banks per layout row */
+#define SND_LAYOUT_COUNT           3                    /* layout rows of the bank tables */
+#define XA_STREAM_COUNT            3                    /* XA streams, each with a slot and a cue table */
 #define WORD_SIGN_BIT              0x80000000u          /* the sign bit of a word */
 #define COPY_KERNEL_ENTRY          ((u32) & D_8016432C) /* resume entry of the stream copy kernel */
 #define MAP_ZONE_COUNT             666                  /* records in g_AreaEncounterZones */
@@ -455,7 +458,7 @@ extern u8                    D_80146498[];
 extern volatile u8           g_EmiRingStates[];
 extern s32                   D_80146518[];
 extern u32                   g_EmiSlotSectors[];
-extern EMIBank               g_EmiBanks[7];
+extern EMIBank               g_EmiBanks[SND_BANK_COUNT];
 extern volatile EMIAudioLink D_80146780[];
 /* FAKE: SND_SetBankLayout stores the bank records, headers and SE tables through their own symbols;
  * the g_EmiBanks, g_SndBankHeaders and g_SndBankSe views share one base register and shrink it. */
@@ -563,13 +566,13 @@ extern s32                   g_AreaGridActors[];
 extern u8                    D_80148331[];
 extern u8                    D_80148332[];
 extern u8                    D_8014865B;
-extern u8                    g_SndBankSe[7][124];
+extern u8                    g_SndBankSe[SND_BANK_COUNT][124];
 extern u16                   D_80148A04;
 extern u16                   D_80148A06;
 extern u16                   D_80148A0C;
 extern u16                   D_80148A0E;
-extern s32                   g_SndBankHeaders[7];
-extern s32                   g_SndBankSequences[7];
+extern s32                   g_SndBankHeaders[SND_BANK_COUNT];
+extern s32                   g_SndBankSequences[SND_BANK_COUNT];
 extern u16                   D_80149010[];
 extern u16                   D_80149040[];
 extern u16                   D_80149070[];
@@ -689,16 +692,16 @@ extern u16                         g_VabToneOffsets[80];
 extern u16                         g_SndVolumeLevels[80];
 extern s8                          D_8018232A;
 /* D_80182348 */
-extern u32                         g_SndBankSpuAddress[3][7];
+extern u32                         g_SndBankSpuAddress[SND_LAYOUT_COUNT][SND_BANK_COUNT];
 /* D_8018239C */
-extern u32                         g_SndBankHeaderSize[3][7];
+extern u32                         g_SndBankHeaderSize[SND_LAYOUT_COUNT][SND_BANK_COUNT];
 /* D_801823F0 */
-extern u32                         g_SndBankSequenceSize[3][7];
+extern u32                         g_SndBankSequenceSize[SND_LAYOUT_COUNT][SND_BANK_COUNT];
 extern DiscLba                     g_EmiSlotLbas[EMI_SLOT_COUNT + 1];
 /* D_80183230 */
-extern u32                         g_XAStreamSlots[3];
+extern u32                         g_XAStreamSlots[XA_STREAM_COUNT];
 /* D_8018323C */
-extern u32                         g_XACues[3];
+extern u32                         g_XACues[XA_STREAM_COUNT];
 extern u32                         g_EmiEntryTypes[11];
 extern void (*g_XAStates[SND_XA_STATE_COUNT])(void);
 extern u16          g_XACueStream2[22];
@@ -1296,7 +1299,7 @@ void EMI_LoadSequence(void);
 
 s32 EMI_NextEntry(u8 slot);
 
-extern u32 g_SndSeReaders[7];
+extern u32 g_SndSeReaders[SND_BANK_COUNT];
 
 void EMI_Update(void);
 
