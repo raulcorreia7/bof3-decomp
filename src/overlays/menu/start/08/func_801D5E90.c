@@ -17,7 +17,7 @@ NON_MATCHING void func_801D5E90(void) {
     D_80148624                                                  = 1;
     D_80148628                                                  = panel->pos.x + 7;
     D_8014862A                                                  = panel->pos.y + ((panel->unk_0B - panel->unk_0A) * 13 + 0x1A);
-    g_MenuPanelTasks[MENU_START_PANEL_DESCRIPTION].u.message.id = Item_GetDescription(panel->message_id, panel->flags);
+    g_MenuPanelTasks[MENU_START_PANEL_DESCRIPTION].u.message.id = Item_GetDescription(panel->unk_08, panel->flags);
     buttons                                                     = INPUT_REPEATED(g_InputPressed, (INPUT_DIRECTIONAL | PADL1 | PADR1));
     func_801D6FBC();
     old = panel->unk_0B;

@@ -13,7 +13,7 @@ NON_MATCHING void func_801F30E0(void) {
     }
 
     g_Actors[g_Task->unk_03].header.flags = 1;
-    g_Task->move_mode                     = Actor_FindFreeField();
+    g_Task->unk_04                        = Actor_FindFreeField();
     if (g_Task->move_mode == GAME_NONE) {
         g_Actors[g_Task->unk_03].header.flags = 0;
         return;

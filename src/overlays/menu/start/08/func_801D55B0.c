@@ -64,7 +64,7 @@ NON_MATCHING void func_801D55B0(void) {
             g_MenuPanelTasks[14].pos.y                      = 62;
             g_MenuPanelTasks[14].unk_0B                     = 0xFF;
             g_MenuPanelTasks[14].unk_0C                     = *sel;
-            g_MenuPanelTasks[14].message_id                 = 0;
+            g_MenuPanelTasks[14].unk_08                     = 0;
             g_MenuPanelTasks[14].flags                      = 0;
             g_MenuPanelTasks[14].unk_09                     = 0;
             g_MenuPanelTasks[14].u.addr.unk_10              = 0;

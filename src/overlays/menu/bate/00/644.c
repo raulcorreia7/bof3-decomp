@@ -202,7 +202,7 @@ NON_MATCHING void func_801D1C90(void) {
     g_MenuPanelTasks[0].unk_09        = 0;
     g_MenuPanelTasks[0].unk_0B        = 0;
     g_MenuPanelTasks[0].unk_0A        = 0;
-    g_MenuPanelTasks[0].message_id    = 0;
+    g_MenuPanelTasks[0].unk_08        = 0;
     g_MenuPanelTasks[0].flags         = 0;
     g_MenuPanelTasks[0].u.addr.unk_10 = 0;
     g_MenuPanelTasks[1].panel         = 2;

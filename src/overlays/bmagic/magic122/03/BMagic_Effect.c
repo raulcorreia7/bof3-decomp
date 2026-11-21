@@ -280,7 +280,7 @@ NON_MATCHING void func_801EFBA8(void) {
             setXY0(prim, g_ScratchPad.cells.halves[6], g_ScratchPad.cells.halves[7]);
             prim->x2                     = g_ScratchPad.cells.halves[4];
             prim->y2                     = g_ScratchPad.cells.halves[5];
-            g_ScratchPad.cells.halves[3] = g_Task->move_mode * 4;
+            g_ScratchPad.cells.halves[3] = g_Task->unk_04 * 4;
             setRGB0(prim, g_Task->move_mode * 8, g_ScratchPad.cells.halves[3], g_ScratchPad.cells.halves[3]);
             setRGB1(prim, white, white, white);
             setRGB2(prim, g_Task->move_mode * 8, g_ScratchPad.cells.halves[3], g_ScratchPad.cells.halves[3]);

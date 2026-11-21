@@ -26,7 +26,7 @@ NON_MATCHING void Battle_DrainHp(void) {
         }
         hp_bar                            = hp / 5;
         g_Battle.target_record->hp_change = hp_bar;
-        g_Battle.action->message_id       = 1;
+        g_Battle.action->unk_08           = 1;
         if (g_Battle.active_battler < 3) {
             if (g_Game.members[g_Battle.active_battler].chr.stats.max_hp < g_Game.members[g_Battle.active_battler].chr.hp + hp_bar) {
                 g_Battle.action->message_id |= 4;

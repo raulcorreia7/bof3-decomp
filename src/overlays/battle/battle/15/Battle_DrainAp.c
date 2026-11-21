@@ -20,7 +20,7 @@ NON_MATCHING void Battle_DrainAp(void) {
         } else {
             g_Battle.target_record->ap_change = ENEMY_COMBATANT(g_Battle.target).ap / 5;
         }
-        g_Battle.action->message_id          = 2;
+        g_Battle.action->unk_08              = 2;
         g_Battle.target_record->target_flags = 2;
         row                                  = g_Battle.active_battler;
         if (row < 3) {

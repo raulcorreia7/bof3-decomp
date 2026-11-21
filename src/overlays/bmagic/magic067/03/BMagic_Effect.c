@@ -28,7 +28,7 @@ NON_MATCHING void func_801EEC94(void) {
     slot                               = Battle_AllocEffect(1, 0x13) & BYTE_MASK;
     g_BattleEffects[slot].target.party = (PartyMember*)g_Task;
     g_BattleEffects[slot].header.mode  = 0;
-    g_BattleEffects[slot].message_id   = g_BattleEffectBattler->facing;
+    g_BattleEffects[slot].unk_08       = g_BattleEffectBattler->facing;
     g_Task->param.unk_0B += 1;
     slot                               = Battle_AllocEffect(1, 0x13) & BYTE_MASK;
     work                               = g_Task;

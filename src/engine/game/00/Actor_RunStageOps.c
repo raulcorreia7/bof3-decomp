@@ -110,7 +110,7 @@ NON_MATCHING u8 Actor_RunStageOps(ScriptState* state, const u8* table, u8 value)
                 list                          = *(u32**)((u8*)entry + 0x18);
                 g_Game.current->u.field.index = list[byte];
             } else {
-                state->unk_03 = table[state->cursor + 1];
+                state->script_index = table[state->cursor + 1];
             }
             state->cursor = 0xFFFF;
             break;

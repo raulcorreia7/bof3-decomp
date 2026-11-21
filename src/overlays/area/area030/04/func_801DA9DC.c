@@ -58,7 +58,7 @@ box_16:
         if (g_InputHeld & PADLleft) {
             g_SpawnedActors[0].scene_step = -ONE;
             g_SpawnedActors[0].selection  = ONE;
-            g_SpawnedActors[0].unk_14     = g_FishingLureRow->message_id;
+            g_SpawnedActors[0].unk_14     = g_FishingLureRow->unk_08;
             D_801E31F8                    = 1;
         } else {
             limit = 5;
