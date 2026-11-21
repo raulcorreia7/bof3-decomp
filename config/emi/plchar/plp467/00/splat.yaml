@@ -12,8 +12,6 @@ segments:
       - [0x264, c, plchar_start_turn_peco]
       - [0x42C, c, plchar_face_free_direction]
       - [0x5D4, c, plchar_run_personal_action]
-      - [0x950, c, plchar_start_facing_script]
-      - [0xA44, c, plchar_801cee44]
       - [0xC50, c, plchar_spawn_linked_actor]
       - [0xDEC, c, plchar_release_spawned_actor]
       - [0xF24, c, plchar_clear_mode_if_unused]

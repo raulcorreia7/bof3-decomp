@@ -11,7 +11,6 @@ segments:
       - [0x4, c, plchar_turn_script]
       - [0x1730, c, plchar_claim_link_slot]
       - [0x1A4C, c, plchar_poll_script_request]
-      - [0x1B20, c, plchar_801cff20]
   # Placement: .data resumes after another section in the retail bytes; one segment would group both .data runs.
   - name: data
     type: code

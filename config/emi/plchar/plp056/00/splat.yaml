@@ -13,8 +13,6 @@ segments:
       - [0x1254, c, plchar_poll_script_request]
       - [0x1534, c, plchar_face_free_direction]
       - [0x16DC, c, plchar_run_personal_action]
-      - [0x1A58, c, plchar_start_facing_script]
-      - [0x1B4C, c, plchar_801cff4c]
       - [0x1D58, c, plchar_spawn_linked_actor]
       - [0x1EF4, c, plchar_release_spawned_actor]
       - [0x202C, c, plchar_clear_mode_if_unused]

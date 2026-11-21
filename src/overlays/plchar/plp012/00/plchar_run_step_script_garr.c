@@ -27,3 +27,11 @@ MATCH void PlChar_RunGarrFieldTask(void) {
 #include "overlays/plchar/shared/PlChar_FollowerInReach.h"
 
 #include "overlays/plchar/shared/PlChar_ProbeFacingFollower.h"
+
+MATCH void func_801CFCF8(void) {
+    D_801CFDC0[g_Task->unk_2C]();
+}
+
+MATCH void func_801CFD3C(void) {
+    D_801CFDCC[g_Task->unk_2C]();
+}

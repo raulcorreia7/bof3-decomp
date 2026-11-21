@@ -12,8 +12,6 @@ segments:
       - [0x1210, c, plchar_run_step_script_peco]
       - [0x130C, c, plchar_face_free_direction]
       - [0x14B4, c, plchar_run_personal_action]
-      - [0x1830, c, plchar_start_facing_script]
-      - [0x1924, c, plchar_801cfd24]
       - [0x1B30, c, plchar_spawn_linked_actor]
       - [0x1CCC, c, plchar_release_spawned_actor]
       - [0x1E04, c, plchar_clear_mode_if_unused]

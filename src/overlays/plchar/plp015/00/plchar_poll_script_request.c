@@ -5,3 +5,11 @@ __asm__(".include \"include/match/macro.inc\"\n");
 #endif
 
 #include "overlays/plchar/shared/PlChar_PollScriptRequest.h"
+
+MATCH void func_801CFAFC(void) {
+    D_801CFBC8[g_Task->unk_2C]();
+}
+
+MATCH void func_801CFB40(void) {
+    D_801CFBD4[g_Task->unk_2C]();
+}
