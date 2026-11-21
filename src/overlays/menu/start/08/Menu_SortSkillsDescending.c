@@ -1,6 +1,6 @@
 #include "start_08.h"
 
-/* Item table: 0x14-byte records, byte 0 is the sort key. Indexed at each use
+/* The ability cost is the sort key. Indexed at each use
  * so the symbol address rematerializes per access (no held base pointer);
  * the record type is what keeps the 0x14 scale in the index. */
 
@@ -33,7 +33,7 @@ MATCH void Menu_SortSkillsDescending(void) {
                 cur = list[0];
                 if (cur != 0) {
                     nxt = next[0];
-                    if ((nxt != 0) && (D_801CA71A[cur].unk_00 < D_801CA71A[nxt].unk_00)) {
+                    if ((nxt != 0) && (g_Abilities[cur].cost < g_Abilities[nxt].cost)) {
                         Menu_SwapBytes3(list, next);
                     }
                 }

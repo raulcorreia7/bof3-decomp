@@ -16,7 +16,7 @@ MATCH void Battle_ToggleAbilityTargetSide(void) {
          * makes the scheduler fill the branch delay slot and shifts the call. */
         message = (u8*)&D_80148656;
         entry   = Party_GetAbilities(message[0], g_MenuPanelTasks[16].unk_0B, 1);
-        if ((D_801CA718[entry[g_MenuPanelTasks[16].unk_0C] * 0x14] & ABILITY_TARGET_FLAG_BOTH_SIDES) != 0u) {
+        if ((g_Abilities[entry[g_MenuPanelTasks[16].unk_0C]].targeting_flags & ABILITY_TARGET_FLAG_BOTH_SIDES) != 0u) {
             g_BattleActorTurn->command.target ^= BATTLE_TARGET_BOTH_SIDES;
             SND_PlaySE(EMI_SE_ID(SND_BANK_COMMON, 1));
         }

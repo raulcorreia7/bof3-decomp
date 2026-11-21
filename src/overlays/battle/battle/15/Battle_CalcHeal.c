@@ -4,7 +4,6 @@
  * battler's heal-resistance byte at record offset 0. */
 
 /* Selection-kind flag table: the power byte at +0 of each 0x14-byte record. */
-extern u8 D_801CA71B[];
 
 /* func_800A30E8 */
 MATCH s32 Battle_CalcHeal(u8 unused, u8 battler_index) {
@@ -15,7 +14,7 @@ MATCH s32 Battle_CalcHeal(u8 unused, u8 battler_index) {
     s32 damage;
 
     rate   = D_801EC312 + 100;
-    power  = D_801CA71B[g_Battle.action_id * 0x14];
+    power  = g_Abilities[g_Battle.action_id].power;
     scale  = rate * 100;
     damage = (power * scale) / 100u;
 

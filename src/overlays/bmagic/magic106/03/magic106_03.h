@@ -16,7 +16,8 @@ extern u8  D_801EF9F4[];
 /* The effect work rows the module runner walks (stride 0x20). */
 extern u8  D_801EF9F8[];
 
-void func_801EF52C(void);
+/* func_801EF52C */
+void Effect_SetOrbitModelMatrix(void);
 void func_801EF5F4(void);
 
 /* The battler column of the D_801EF9F8 rows, eight words to a row. */

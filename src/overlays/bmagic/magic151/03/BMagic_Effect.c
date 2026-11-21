@@ -717,19 +717,8 @@ MATCH void func_801F1D28(void) {
 }
 
 /* Best 7 differences: lui a0 at 0x801F1D60; adjust register allocation. */
-MATCH void func_801F1D60(void) {
-    PartyMember* work = g_Task;
-    u8           timer;
-
-    work->unk_14 += 0x20;
-
-    timer        = work->unk_09 - 1;
-    work->unk_09 = timer;
-    if (timer == 0) {
-        g_BattleEffectBattler->param.unk_0B -= 1;
-        Effect_Reset();
-    }
-}
+/* func_801F1D60 */
+#include "overlays/bmagic/shared/Effect_RiseUntilTimerZero.h"
 
 MATCH void Effect_SetActorMatrix5(void) {
     SVECTOR pos;

@@ -1,9 +1,7 @@
 #include "engine/slus/slus.h"
 
-/* returns byte 6 of the category-1 record and byte 4 of the category-2 record
- * selected by `item`, using the 24-byte D_801C90E8 and 22-byte D_801C98B0
- * tables the paired accessors Item_GetEquipability/Item_GetIcon/Item_GetFlags read.
- * Every other category returns 0.
+/* returns the power of the weapon or armor row `item` selects; the paired accessors Item_GetEquipability,
+ * Item_GetIcon and Item_GetFlags read the other members. Every other category returns 0.
  */
 MATCH u8 Item_GetPower(u8 category, u8 item) {
     switch (category) {
@@ -11,8 +9,8 @@ MATCH u8 Item_GetPower(u8 category, u8 item) {
         default:
             return 0;
         case ITEM_CATEGORY_WEAPON:
-            return D_801C90E8[(item & BYTE_MASK) * 0x18 + 6];
+            return g_Weapons[item & BYTE_MASK].power;
         case ITEM_CATEGORY_ARMOR:
-            return D_801C98B0[(item & BYTE_MASK) * 0x16 + 4];
+            return g_Armors[item & BYTE_MASK].power;
     }
 }

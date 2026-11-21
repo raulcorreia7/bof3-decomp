@@ -45,7 +45,7 @@ MATCH u8 func_800A9304(u8 slot) {
     if (g_BattleEnemyBattlers[index].stats.intelligence < 2 || (g_BattleEnemyBattlers[index].status & STATUS_CONFUSED) ||
         (g_BattleEnemyBattlers[index].turn.action_flags.value & BATTLER_ACTION_CHARGING)) {
         if ((*(u8*)&g_Battle.action_type) == BATTLE_ACTION_ABILITY) {
-            action = D_801CA718[ENEMY_COMBATANT(slot).turn.command.id * BATTLE_TYPE_STRIDE];
+            action = g_Abilities[ENEMY_COMBATANT(slot).turn.command.id].targeting_flags;
             if (action & ABILITY_TARGET_FLAG_ALL) {
                 if (!(action & ABILITY_TARGET_FLAG_BOTH_SIDES)) {
                     if (D_801463CB >= BATTLE_PARTY_CHARACTERS_COUNT) {

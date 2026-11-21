@@ -227,56 +227,11 @@ MATCH void func_801EFA60(void) {
     }
 }
 
-MATCH void func_801EFC30(void) {
-    s32  phase;
-    s32  b;
-    s16* angle_cell;
-    u8   count;
+/* func_801EFC30 */
+#include "overlays/bmagic/shared/Effect_SpreadAlongAngleAndStep.h"
 
-    angle_cell = &D_1F800004;
-    phase      = g_Task->param.unk_0B & 0xF;
-    g_Task->unk_0C += 2;
-    *angle_cell         = phase << 8;
-    g_Task->pos.x.fixed = g_BattleEffectBattler->pos.x.fixed + rsin(*angle_cell) * g_Task->unk_0C;
-    g_Task->pos.y.fixed = g_BattleEffectBattler->pos.y.fixed + rcos(*angle_cell) * g_Task->unk_0C;
-    if (g_Task->unk_20 < g_Task->unk_14) {
-        b              = g_Task->unk_14 - g_Task->unk_20;
-        g_Task->unk_14 = b;
-        g_Task->pos.z.fixed += b;
-    }
-    count          = g_Task->unk_09 + 2;
-    g_Task->unk_09 = count;
-    if (count == 16) {
-        g_Task->header.step++;
-    }
-}
-
-MATCH void func_801EFD60(void) {
-    s32  phase;
-    s32  b;
-    s16* angle_cell;
-    u8   count;
-
-    angle_cell = &D_1F800004;
-    phase      = g_Task->param.unk_0B & 0xF;
-    g_Task->unk_0C += 1;
-    *angle_cell         = phase << 8;
-    g_Task->pos.x.fixed = g_BattleEffectBattler->pos.x.fixed + rsin(*angle_cell) * g_Task->unk_0C;
-    g_Task->pos.y.fixed = g_BattleEffectBattler->pos.y.fixed + rcos(*angle_cell) * g_Task->unk_0C;
-    if (g_Task->unk_20 < g_Task->unk_14) {
-        b              = g_Task->unk_14 - g_Task->unk_20;
-        g_Task->unk_14 = b;
-        g_Task->pos.z.fixed += b;
-    }
-    if (g_FrameCount & 0x1) {
-        count          = g_Task->unk_09 - 1;
-        g_Task->unk_09 = count;
-        if (count == 0) {
-            g_BattleEffectBattler->param.unk_0B -= 1;
-            Actor_Clear();
-        }
-    }
-}
+/* func_801EFD60 */
+#include "overlays/bmagic/shared/Effect_SpreadAlongAngleAndClear.h"
 
 #include "overlays/bmagic/shared/BMagic_DrawRingTriangles.h"
 

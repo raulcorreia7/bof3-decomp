@@ -5,7 +5,7 @@ MATCH void Battle_SetAbilityTargetSide(void) {
     u16 kind;
 
     kind = g_BattleActorTurn->command.id;
-    if ((D_801CA718[kind * 0x14] & ABILITY_TARGET_FLAG_OPPONENT) != 0) {
+    if ((g_Abilities[kind].targeting_flags & ABILITY_TARGET_FLAG_OPPONENT) != 0) {
         g_BattleActorTurn->command.target = BATTLE_TARGET_ENEMY_SIDE;
     } else {
         g_BattleActorTurn->command.target = BATTLE_TARGET_PARTY_SIDE;

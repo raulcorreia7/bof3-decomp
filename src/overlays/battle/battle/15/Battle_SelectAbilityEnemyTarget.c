@@ -21,7 +21,7 @@ MATCH void Battle_SelectAbilityEnemyTarget(void) {
     message = (u8*)&D_80148656;
     trigger = INPUT_REPEATED(held, INPUT_DIRECTIONAL);
     entry   = Party_GetAbilities(message[0], g_MenuPanelTasks[16].unk_0B, 1);
-    if ((D_801CA718[entry[g_MenuPanelTasks[16].unk_0C] * 0x14] & ABILITY_TARGET_FLAG_BOTH_SIDES) != 0u && (trigger & (PADLup | PADLdown)) != 0) {
+    if ((g_Abilities[entry[g_MenuPanelTasks[16].unk_0C]].targeting_flags & ABILITY_TARGET_FLAG_BOTH_SIDES) != 0u && (trigger & (PADLup | PADLdown)) != 0) {
         g_BattleActorTurn->command.target = Battle_TargetNext(0);
         *(u8*)&g_Battle.ui_mode += 1u;
         SND_PlaySE(EMI_SE_ID(SND_BANK_COMMON, 1));
