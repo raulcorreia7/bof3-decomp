@@ -35,6 +35,8 @@
 #include "psx/mem.h"
 #include "sys/scratchpad.h"
 #include "psx/psyq.h"
+#include "engine/actor/motion/motion.h"
+#include "engine/ui/message/message.h"
 
 /* The world overlays' own records. Every area program keeps its scratch in
  * the `0x800E4800` window (@source: wiki:formats/area#neighboring-buffers):
@@ -481,9 +483,6 @@ ASSERT_SIZE(PartyMemberMessages, PARTY_MEMBER_MESSAGE_SIZE);
 /* Finds the scene-table record for a wanted scene id and fills its palette and
  * tile fields (exe/slus_004_22@0x8014DD3C). */
 
-/* The area functions the resident tables and the area images call. */
-void Message_RunAreaMessage(void);
-void Actor_ClearVelocity(void);
 void func_801CF564(void);
 void func_801CFB40(void);
 void func_801CFF20(void);

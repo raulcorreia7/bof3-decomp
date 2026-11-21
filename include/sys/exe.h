@@ -2,6 +2,7 @@
 #define SYSTEM_EXE_H
 
 #include "types.h"
+#include "engine/actor/task/task.h"
 
 extern u8 g_PartyFieldOrder[];
 
@@ -24,8 +25,6 @@ extern u8 g_PartyFieldOrder[];
 /* Claims a free field record and fills its header; returns the slot, or 0xFF when none is free.
  * Retail callers pass whole words, while the callee narrows its own arguments, so the declaration
  * stays unprototyped and each caller keeps its argument widths. */
-/* func_8015CB18 */
-s32 Actor_ClaimSlot();
 /* Draws a four-strip textured panel fill.
  *
  * The retail callee takes six words and uses the first four as full 32-bit

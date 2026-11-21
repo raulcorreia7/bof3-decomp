@@ -1,5 +1,6 @@
 #ifndef OVERLAY_ETC_GAME_00_H
 #define OVERLAY_ETC_GAME_00_H
+#define ENGINE_LOCAL_DECLS
 
 /* The etc/game/00 overlay's local declarations: the frontend state, the resource,
  * area and handler tables, and the prototypes its units share. Only this image
@@ -18,6 +19,25 @@
 
 #include "data.h"
 #include <stdio.h>
+#include "engine/state/battle/battle.h"
+#include "engine/state/mode/mode.h"
+#include "engine/state/scene/scene.h"
+#include "engine/state/progress/progress.h"
+#include "engine/field/collision/collision.h"
+#include "engine/field/encounter/encounter.h"
+#include "engine/field/world/world.h"
+#include "engine/field/action/action.h"
+#include "engine/actor/motion/motion.h"
+#include "engine/actor/script/script.h"
+#include "engine/actor/task/task.h"
+#include "engine/actor/ops/ops.h"
+#include "engine/party/party/party.h"
+#include "engine/party/character/character.h"
+#include "engine/ui/menu/menu.h"
+#include "engine/field/map/map.h"
+#include "engine/field/camera/camera.h"
+#include "engine/gfx/palette/palette.h"
+#include "engine/gfx/prim/prim.h"
 
 #define TILE_RUN_SIZE          0x8
 
@@ -548,86 +568,17 @@ void func_80117610(void);
 void func_80117A30(void);
 void func_80117BF4(void);
 void func_8015A7E8(void);
-/* func_8015B870 */
-s32  Script_ReadValue(u32 type);
-void Party_ShowBattlers(void);
-s8   Actor_Run(s32 entry, s8 dir_x, s8 dir_y, s16 vz_start, s16 vz_delta, u8 landing_script, u8 landing_flags);
 /* The retail callers pass the id unnarrowed; the shared prototype narrows it. */
 #define Actor_SpawnHelper ((s32 (*)())Actor_SpawnHelper)
-/* func_8015D820 */
-void Actor_PlayCueByDistance(u16 cue_id, u16 index);
 void func_80164020();
-void Party_ResetBattlers(void);
-void Party_ClearActiveBattlers(void);
 void func_80167910(void);
 
 void    func_80167E00(void);
-void    GFX_CopyPaletteAnimationColors(GraphicsPaletteAnimation* slot);
-void    Game_UpdateAreaLoad(void);
-void    Game_UpdateField(void);
-void    Game_UpdateMenu(void);
-void    Game_LoadMenu(void);
-void    Game_ReturnFromMenu(void);
 void    func_801979D4(void);
-void    Game_UpdateBattle(void);
-/* func_80197A60 */
-void    Battle_TurnToEncounter(void);
-void    Battle_LoadPartySprites(void);
-/* func_80197C1C */
-void    Battle_WalkToEncounter(void);
-void    Battle_LoadBattleArchive(void);
-/* func_80197E54 */
-void    Battle_BeginEntrance(void);
-/* func_80197EFC */
-void    Game_ScrollToParty(void);
-/* func_80197F48 */
-void    Game_ReturnFromBattle(void);
-void    Game_UpdateCameraLook(void);
 void    func_801981B4(void);
-/* func_801981D4 */
-void    Game_EndCameraLook(void);
-void    Game_UpdateShop(void);
-void    Game_LoadShopOverlay(void);
-void    Game_ReturnFromShop(void);
-void    Game_UpdateFishing(void);
-/* func_801984E8 */
-void    Game_EndFishing(void);
-/* func_801985C8 */
-void    Game_ReturnFromFishing(void);
-void    Game_UpdateAbilityMenu(void);
-void    Game_LoadAbilityMenu(void);
-void    Game_ReturnFromAbilityMenu(void);
-void    Game_UpdateShisu(void);
-void    Game_LoadShisu(void);
-void    Game_ReturnFromShisu(void);
-void    Game_UpdateSceneCamera(void);
-/* func_80198B00 */
-void    Game_RunScene(void);
-/* func_80198B44 */
-void    Game_OrbitSceneCamera(void);
-/* func_80198B6C */
-void    Game_EndSceneCamera(void);
-/* func_80198BC4 */
-void    Area_WaitWindowEffect(u32 wait_steps);
-/* func_80198C38 */
-void    Menu_WaitWindowEffect(u8 wait_steps);
-/* func_80198CAC */
-void    Game_UpdateClock(void);
 void    func_80198F1C(void);
-/* func_801990D0 */
-void    Game_EaseCameraToRest(void);
-void    Area_RunFrame(void);
 void    func_80199230(void);
-void    Area_RunLoadingFrame(void);
-/* func_80199308 */
-void    Game_RunSceneFrame(void);
-/* func_80199368 */
-void    Game_UpdateMenuFrame(void);
 void    func_80199398(void);
-/* func_801993F0 */
-void    Game_UpdateAbilityMenuFrame(void);
-/* func_80199418 */
-void    Game_UpdateShisuFrame(void);
 void    func_8019959C(void);
 void    func_801995A4(void);
 void    func_801995F8(void);
@@ -636,15 +587,11 @@ void    func_801996A8(void);
 void    func_801996FC(void);
 void    func_8019977C(void);
 void    func_801997EC(void);
-/* func_8019982C */
-void    Menu_SetPosX(void);
 void    func_8019986C(void);
 void    func_80199938(void);
 void    func_80199978(void);
 void    func_801999B8(void);
 void    func_801999F8(MenuPanelTask* task);
-/* func_8019A1D4 */
-u8*     WorldMap_GetPoints(void);
 void    WorldMap_StepWalk(void);
 void    WorldMap_StepEntry(void);
 void    WorldMap_StepFlock(void);
@@ -690,8 +637,6 @@ void    func_8019BFD4(void);
 bool    func_8019C028(void);
 void    func_8019C124(s32 step_byte);
 s32     func_8019C1E4(void);
-/* func_8019C344 */
-s32     Area_GetVx(s32 x, s32 y);
 s32     func_8019C4F0();
 void    func_8019C620(void);
 void    func_8019C664(void);
@@ -755,10 +700,6 @@ void    func_8019FF88(s32 entry_mode, s32 entry_index, s32 entry_flags);
 void    func_801A02E8(void);
 u8      func_801A0348(s16 map_x, s16 map_y);
 void    func_801A0380(s16 x, s16 y, u16 type);
-/* func_801A0490 */
-u8*     Area_FindEncounterZoneOf(s32 map_x, s32 map_y, s32 table_index);
-/* func_801A06D8 */
-u32     Actor_RunInteractions(void);
 void    func_801A0AE4(Actor* record);
 void    func_801A0CFC(Actor* entity);
 void    func_801A0F24(Actor* record);
@@ -776,8 +717,6 @@ s32     func_801A225C(s32 unused, s32 divisor, s32 flag_bits);
 s32     func_801A22CC(Actor* value_a, s32 value_b, u8 flag_bits);
 s32     func_801A239C(Actor* value_a, s32 value_b, u8 flag_bits);
 s32     func_801A246C(s32 value_a, s32 value_b, s32 flag_bits);
-/* func_801A253C */
-void    Area_SetXFixed(Actor* entity);
 void    func_801A271C(void* record);
 /* Kept (): retail callers load $a0 in the jal delay slot (`addiu a0,s0,116`) and the callee never reads it; with (void)
  * that instruction is dropped (Area_SetXFixed) or the frame shrinks by 8 bytes (func_801A1384). */
@@ -786,53 +725,21 @@ void    func_801A2788(s32 step_index);
 void    func_801A27C4(Actor* entity);
 u8      func_801A2A04(Actor* entity);
 void    func_801A2AE4(Actor* entity, u8 route_flag);
-/* func_801A2C10 */
-u8      Actor_TurnRandom(void* record);
 u8      func_801A2C94(Actor* actor);
 u8      func_801A2DB4(Actor* entity);
 u8      func_801A2ED4(Actor* entity, u8 route_step);
 void    func_801A3080(Actor* actor, s32 facing);
 void    func_801A3410(void* work_index);
-/* func_801A3594 */
-void    Game_DispatchFadeWhite(void);
-/* func_801A35D8 */
-void    Game_StartFadeWhite(void);
 void    func_801A3648(void);
-/* func_801A37D4 */
-void    Game_DispatchFadeBlack(void);
-/* func_801A3818 */
-void    Game_StartFadeBlack(void);
 void    func_801A386C(void);
 bool    func_801A3AC8(Actor* record);
 void    func_801A3B7C(Actor* entity);
-/* func_801A3F3C */
-void    Area_RunSetupRecords(u8* script);
-/* func_801A3FC0 */
-void    Area_RunSetupIf(u8* cursor);
-/* func_801A4158 */
-void    Area_RunSetupIfNot(u8* cursor);
 u8*     func_801A42F0(u8* cursor, s8* flag, u8* counter);
 u8*     func_801A4374(u8* cursor, s8* flag, u8* counter);
-/* func_801A4400 */
-u8*     Area_RunSetupBranch(u8* script);
-/* func_801A44A4 */
-u8*     Area_SkipSetupBranch(u8* script);
-/* func_801A4518 */
-u8*     Area_RunSetupIfChain(u8* script);
 u8*     func_801A4640(u8* cursor);
 u8*     func_801A46E8(u8* cursor);
-/* func_801A4798 */
-u8*     Area_SkipSetupIf(u8* script);
-/* func_801A4844 */
-u8*     Area_SkipSetupIfChain(u8* script);
 void    func_801A4914(void);
-/* func_801A4990 */
-void    Actor_SetOptionFlags(u8* script);
-/* func_801A4AA8 */
-void    Actor_ResetMotion(void);
 void    func_801A4B80(s32 index);
-/* func_801A4BF8 */
-u8*     Area_RunSetupRecord(u8* script);
 void    func_801A50C0(u8* script);
 void    func_801A5400(u8* script);
 void    func_801A57F0(u8* script);
@@ -841,16 +748,9 @@ void    func_801A5EFC(u8* script);
 void    func_801A623C(u8* script);
 void    func_801A68C0(u8* script);
 void    func_801A6F58(u8* script);
-/* func_801A72B0 */
-void    Area_SetupScrollRoute(void* packed_selector);
-/* func_801A72E8 */
-void    Area_SetEntityCallback(void* selector);
-s8      Area_IsStepBlocked(s32 handler_x, s32 handler_y);
 s8      func_801A79A4(s32 handler_x, s32 handler_y);
 void    func_801A7CE8(void);
-void    Menu_OpenMaster(void);
 void    func_801A7E54(void);
-void    Scene_RunInn(void);
 void    func_801A839C(void);
 void    func_801A83DC(void);
 void    func_801A852C(void);
@@ -858,81 +758,19 @@ s32     func_801A8714(void);
 s8      func_801A8728(s32 entry_x, s32 entry_y);
 bool    func_801A8A98(s32 candidate_x, s32 candidate_y);
 s8      func_801A8B84(s32 handler_x, s32 handler_y);
-/* func_801A8CB4 */
-s8      Game_CallArea(s32 handler_x, s32 handler_y);
-/* func_801A8D38 */
-u8      Actor_RunScript(void* sub, s32 target);
-/* func_801A8F94 */
-u8      Actor_RunFlowOps(ScriptState* state, u8* base, s32 seed);
-/* func_801A96E4 */
-void    Actor_RunSoundOps(ScriptState* state, u8* base);
-/* func_801A9944 */
-u8      Actor_RunControlOps(void* sub, s32 target, u8 value);
-/* func_801A9DE8 */
-u8      Actor_RunMotionOps(ScriptState* state, const u8* table, u8 value);
-/* func_801AA470 */
-u8      Actor_RunWaitOps(void* sub, s32 target, u8 value);
-/* func_801AAB00 */
-u8      Actor_RunAppearanceOps(void* sub, s32 target, u8 value);
-/* func_801AB458 */
-u8      Actor_RunStageOps(ScriptState* state, const u8* table, u8 value);
-/* func_801AB8B0 */
-s32     Actor_RunSpawnOps(ScriptState* state, u8* table, s32 value);
-/* func_801ABA24 */
-u8      Actor_RunFaceOps(void* sub, s32 target, u8 value);
 void    func_801ABEE0(void);
 VECTOR* func_801ABF30(VECTOR* out, s32 sel, s32 selector_type);
 void    func_801AC0A0(s8 tuning_delta);
 bool    func_801AC33C(s32 ease_in, s32 distance);
 void    func_801AC768(ScriptState* cursor_state, s32 mode_byte, s32 value_18, s32 value_1C, s32 extra_value);
-/* func_801AC8F0 */
-u16     Actor_FindScriptLabel(ScriptState* state, u8 wanted_id, u8* base);
 void    func_801AC9D0(void);
 void    func_801ACA14(void);
 void    func_801ACAC0(void);
 void    func_801ACBC4(void);
 void    func_801ACC08(void);
 void    func_801ACCD8(void);
-/* func_801ACE10 */
-void    FieldAction_Run(s32 step_index);
-/* func_801ACEBC */
-void    FieldAction_RunSteps(void);
-/* func_801ACF2C */
-void    FieldAction_RollStep(void);
-/* func_801AD0EC */
-void    FieldAction_FindSmall(void);
-/* func_801AD184 */
-void    FieldAction_FindLarge(void);
-/* func_801AD218 */
-void    FieldAction_End(void);
-/* func_801AD2CC */
-void    FieldAction_WaitMessage(void);
-/* func_801AD35C */
-void    FieldAction_RunReact(void);
-/* func_801AD3B4 */
-void    FieldAction_React(void);
-/* func_801AD44C */
-void    FieldAction_None(void);
-/* func_801AD46C */
-void    FieldAction_RunAltSteps(void);
-/* func_801AD4DC */
-void    FieldAction_RollAltStep(void);
-/* func_801AD69C */
-void    FieldAction_NoneAlt(void);
-/* func_801AD6BC */
-void    FieldAction_RunFadeSteps(void);
-/* func_801AD734 */
-void    FieldAction_RollFade(void);
-/* func_801AD90C */
-void    FieldAction_ShowFind(void);
-/* func_801AD9C4 */
-void    FieldAction_WaitMessageFade(void);
-/* func_801AD9F0 */
-void    FieldAction_Fade(void);
-void    Actor_SpawnSceneActor(s8 actor_slot);
 s8      func_801ADC98(void);
 void    func_801ADCF4(u8 actor_slot);
-void    GFX_DrawLine(s16 x0, s16 y0, s16 x1, s16 y1, u8 r, u8 g, u8 b, s32 blend);
 /* func_801AF270 */
 /* func_801AF494 */
 
@@ -945,19 +783,11 @@ void  func_801B0C88(void);
 void  func_801B0DA0(void);
 void  func_801B13BC(void);
 void  func_801B146C(void);
-/* func_801B1AE8 */
-void  Game_RunLeaderSwitch(void);
 void  func_801B1E24(void);
 void  func_801B207C(void);
 void  func_801B21E8(void);
 void  func_801B26E0(void);
-/* func_801B2950 */
-void  Game_EndLeaderSwitch(void);
 void  func_801B29BC(void);
-/* func_801B2A00 */
-void  Game_RequestMenu(void);
-/* func_801B2A20 */
-void  Game_WaitMenuClose(void);
 void  func_801B2A70(void);
 void  func_801B2AB4(void);
 void  func_801B2B6C(void);
@@ -967,21 +797,11 @@ void  func_801B2DDC(void);
 void  func_801B2FC8(void);
 void  func_801B315C(void);
 void  func_801B31F0(void);
-/* func_801B3260 */
-void  Area_Climb(void);
-/* func_801B32A4 */
-void  Area_GrabLadder(void);
-/* func_801B32D0 */
-void  Area_ClimbMount(void);
 void  func_801B3314(void);
 void  func_801B3388(void);
 void  func_801B33C4(void);
 void  func_801B3400(void);
 void  func_801B343C(void);
-/* func_801B3488 */
-void  Area_ClimbLadder(void);
-/* func_801B3540 */
-void  Area_ClimbDismount(void);
 void  func_801B3584(void);
 void  func_801B35B0(void);
 void  func_801B35EC(void);
@@ -991,37 +811,13 @@ void  func_801B371C(void);
 void  func_801B3768(void);
 void  func_801B3A3C(void);
 void  func_801B3BFC(void);
-/* func_801B3C3C */
-u8*   Area_FindEncounterZone(s32 bounds_x, s32 bounds_y);
-void  Area_RollEncounterThreshold(u32 keep_armed);
-s32   Area_CanStartEncounter(void);
 s32   func_801B4150(void);
 s32   func_801B43D0(s32 x, s32 y, s32 dir);
 u8    func_801B4494(u8 wanted_code);
 u8    func_801B44DC(u8 wanted_code);
 u8    func_801B4D7C(u8 wanted_code);
 bool  func_801B544C(void);
-/* func_801B55C0 */
-bool  Party_CanSwitchLeader(void);
-/* func_801B5684 */
-bool  Game_RequestLeaderSwitch(void);
-/* func_801B5758 */
-bool  Game_RequestFieldMenu(void);
-/* func_801B5884 */
-bool  Game_RequestCameraLook(void);
-/* func_801B5910 */
-bool  Game_RequestSceneCamera(void);
-/* func_801B5AE4 */
-s8    Game_FindRockAhead(s32 route_index, s32 route_flags);
-/* func_801B5BDC */
-void  Actor_RequestRoute(u8 route_index);
 void* func_801B5C54(void);
-/* func_801B5EBC */
-bool  Game_RequestPersonalAction(void);
-/* func_801B5F68 */
-bool  Game_RequestRockKick(s32 walk_speed);
-/* func_801B6044 */
-bool  Game_RequestGarrPush(void);
 void  func_801B60DC(s32 actor_index);
 bool  func_801B6258(void);
 void  func_801B6418(void);
@@ -1095,9 +891,6 @@ s32   func_801BB2B8(s32 x0, s32 y0, s32 x1, s32 y1);
 bool  func_801BB6F0(s32 command);
 s32   func_801BB760(s32 x, s32 y);
 s32   func_801BB7B0(s32 selector);
-s32   Area_IsStepTooHigh(s16 from_x0, s16 from_x1, s16 from_y0, s16 from_y1, u8 probe_mode);
-/* func_801BB8E8 */
-void  Actor_SnapFacing(u8 arg_a, u8 arg_b, u8 arg_c);
 bool  func_801BB934(s32 first_index, s32 second_index, s8 route_value, s32 expected_value);
 void  func_801BBBC8(s16 from_x, s16 from_y);
 void  func_801BBE48(void);
@@ -1118,31 +911,9 @@ void  func_801BD83C(void);
 bool  func_801BD938(void);
 void  func_801BDBC4(void);
 s16   func_801BDCF8(s32 x, s32 y);
-/* func_801BDF08 */
-s32   Area_GetActorFacingStepX(void);
 void  func_801BE574(s32 count, u8* ids);
 void  func_801BE710(GameReset* record);
-void  Party_SwapMembers(u32 slot_a, u32 slot_b, u32 skip_state);
-void  Party_SwapBattlerRows(s32 slot_a, s32 slot_b, s32 skip_state);
 void  func_801BEBB0(void);
-/* func_801BEDD0 */
-void  Battle_QueueEncounterTurns(void);
-/* func_801BEE5C */
-bool  Battle_LoadPartyScripts(void);
-/* func_801BF11C */
-bool  Battle_WalkMembersIn(void);
-/* func_801BF448 */
-void  Battle_PlaceMembers(void);
-/* func_801BF5A8 */
-void  Battle_SetEncounterSpot(s32 x, s32 y, s32 party_slot);
-/* func_801BF78C */
-bool  Battle_IsPartyInPlace(void);
-/* func_801BF8E0 */
-void  Battle_ScrollToLeader(void);
-/* func_801BFAC4 */
-void  Battle_RunPartyAnims(void);
-/* func_801BFB34 */
-void  Battle_PlaceFieldMembers(void);
 void  func_801BFF9C(u32 work_type, u32 work_index, u32 work_mode);
 void  func_801C05AC(void);
 void  func_801C0758(s32 x, s32 y, u8 type);
@@ -1164,8 +935,6 @@ bool  func_801C27E0(s8 tuning_delta);
 bool  func_801C2894(s8 tuning_delta);
 s32   func_801C2AAC(void);
 s32   func_801C2B4C(void);
-/* func_801C2E34 */
-void  Char_SetCharacterId(u8 index);
 void  func_801C308C(s32 arg);
 void  func_801C3154(void);
 void  func_801C3204(void);
@@ -1174,16 +943,11 @@ bool  func_801C3790(s32 mode_byte);
 bool  func_801C37DC(s32 mode_byte);
 void  func_801C3828(void);
 s32   func_801C38F4(s32 record_index, s32 field_mode, s32 wanted_id);
-/* func_801C39D8 */
-u8    Game_TestMapCells(s32 pos_x, s32 pos_y, s32 flag, s32 wanted_code, u8 mask_cells);
 u8    func_801C3A18(s32 pos_x, s32 pos_y, u8 wanted_code, u8 mask_cells);
 s32   func_801C3B78(s32 pos_x, s32 pos_y, s32 wanted_code, s32 mask_cells);
-/* func_801C3E40 */
-s32   Game_TestPlacement(s32 pos_x, s32 pos_y, s32 probe_flag, s16 probe_range);
 bool  func_801C3E80(s32 pos_x, s32 pos_y, s32 probe_flag);
 s32   func_801C4040(s32 pos_x, s32 pos_y, s16 probe_range);
 s32   func_801C41D0(s32 pos_x, s32 pos_y, s16 probe_range);
-u8    Area_TestCellCorners(s32 pos_x, s32 pos_y, s32 flag, s32 wanted_code, u8 mask_cells);
 u8    func_801C476C(s32 pos_x, s32 pos_y, u8 wanted_code, u8 mask_cells);
 u8    func_801C48FC(s32 pos_x, s32 pos_y, u8 wanted_code, u8 mask_cells);
 void  func_801C4D1C(void);
@@ -1199,8 +963,6 @@ s32   func_801C5474(void);
 void  func_801C5558(void);
 void  func_801C5620(void);
 void  func_801C56E4(void);
-/* func_801C57B4 */
-void  Actor_Move(void);
 void  func_801C57F4(void);
 void  func_801C5830(void);
 void  func_801C5838(void);
@@ -1209,27 +971,15 @@ void  func_801C5BB8(void);
 void  func_801C5C7C(void);
 void  func_801C5CB4(void);
 void  func_801C5D68(void);
-/* func_801C63B0 */
-bool  Area_PlaceEncounterParty(void);
 bool  func_801C6658(s32 table_index, s32 table_slot, s32 entry_index, s32 selection);
 s32   func_801C6888(s32 entity_index);
 s32   func_801C69C8(s32 record_index);
-/* func_801C6A7C */
-s32   Area_PickEncounter(void);
-/* func_801C6AEC */
-s32   Area_RollEncounterEnemies(s32 candidate_id);
-/* func_801C6BB4 */
-bool  Area_PlaceEncounterEnemies(void);
 bool  func_801C6DCC(void);
 bool  func_801C6EE0(s32 entry_count, s32 pos_x, s32 pos_y, s32 reach);
-/* func_801C6FD4 */
-u32   Area_GetWidth(s32 map_column, s32 map_row);
 bool  func_801C7064(s32 x, s32 y, s32 reach, s32 height);
 s16   func_801C7188(s16 value);
 s32   func_801C71AC(s32 delta);
 u16*  func_801C71C4(u16* out, s32 pos_x, s32 pos_y, s32 view_height);
-/* func_801C7244 */
-void  Area_SetEncounterCamera(s32 mode);
 bool  func_801C7498(s32 from_x, s32 from_y, s32 to_x, s32 to_y, u8 reach, u8 other_reach);
 s32   func_801C7518(s32 pos_x, s32 pos_y, s32 reach);
 bool  func_801C7608(s16 x0, s16 y0, s16 x1, s16 y1);
@@ -1703,9 +1453,6 @@ static inline void FieldAction_Roll(s32 actor_slot) {
     }
 }
 
-/* func_801A20F8 */
-s32 Area_IsCellBlocked(s16 cell_x, s16 cell_y);
-
 s32 func_801B1B2C(s32 x, s32 y, s32 probe_type, s32 flags);
 
 s32 func_801B1C18(s32 x, s32 y, s32 mode);
@@ -1719,7 +1466,5 @@ s32 func_801BA278(u8 cell0, u8 cell1, u8 cell2, u8 cell3, u8 cell4);
 void func_801BB9B4(s16 probe_x, s16 probe_y);
 
 void func_801BBCCC(s16 from_x, s16 from_y, s16 to_x, s16 to_y);
-
-s32 Area_BuildEncounter(u8 work_mode, s32 work_index);
 
 #endif

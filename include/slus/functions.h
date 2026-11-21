@@ -19,25 +19,14 @@
 #include "slus/system.h"
 #include "slus/ui.h"
 #include "engine/sys/boot/boot.h"
+#include "engine/state/mode/mode.h"
+#include "engine/actor/task/task.h"
+#include "engine/ui/text/text.h"
+#include "engine/field/map/map.h"
+#include "engine/field/camera/camera.h"
 
 volatile u8* func_800AC754(u8 entry_id);
-/* func_8014FC00 */
-void         UI_AddTextDrawMode(s32 mode);
-/* func_80154438 */
-void         Area_ApplyMapBundleObjects(void);
-/* func_8015A944 */
-void         Actor_ProjectForDraw(void);
-/* func_8015B410 */
-void         Actor_BuildTransformMatrix(void* matrix);
-/* func_8015B4B0 */
-void         Area_ApplyCameraMatrix(void* matrix);
-/* func_8015C058 */
-void         Game_ClearScriptActive(void);
-/* func_8015C088; int with no value returned (see its definition) */
-extern s32   Game_SetScriptActive(void);
 void         func_8015C214(s32 slot, u8 value);
-/* func_8015CC00 */
-s32          Actor_SpawnHelper(u8 id, s32 step, s32 selection, s32 x, s32 y, s32 z);
 /* formats a game-text buffer; PsyQ declares sprintf on char, the game keeps its text as u8 */
 #define TEXT_Format(dst, fmt, args...) sprintf((char*)(dst), (char*)(fmt), ##args)
 #define TEXT_FormatLiteral(dst, fmt)   sprintf((char*)(dst), (char*)(fmt))

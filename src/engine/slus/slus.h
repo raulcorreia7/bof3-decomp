@@ -1,5 +1,6 @@
 #ifndef SLUS_004_22_H
 #define SLUS_004_22_H
+#define ENGINE_LOCAL_DECLS
 
 /* The main executable's local declarations: the EMI loader, its CD and SPU
  * state, the window state and the data symbols its units share. The shared
@@ -31,6 +32,18 @@
 #include "engine/emi/loader/emi.h"
 #include "engine/sound/sound.h"
 #include "engine/sys/boot/boot.h"
+#include "engine/state/mode/mode.h"
+#include "engine/state/progress/progress.h"
+#include "engine/sys/math/math.h"
+#include "engine/actor/script/script.h"
+#include "engine/actor/task/task.h"
+#include "engine/party/character/character.h"
+#include "engine/ui/text/text.h"
+#include "engine/ui/message/message.h"
+#include "engine/ui/menu/menu.h"
+#include "engine/field/map/map.h"
+#include "engine/gfx/palette/palette.h"
+#include "engine/gfx/prim/prim.h"
 
 /* Constants. */
 
@@ -219,28 +232,6 @@ typedef struct EMIDecodeContext {
 
 ASSERT_OFFSET(EMIDecodeContext, spill, 0x20);
 ASSERT_SIZE(EMIDecodeContext, 0x40);
-
-/* One status sprite cell: the size index selects a width and height row from D_8017F53C. */
-typedef struct SpriteCell {
-    u8 size; /* 0x00 low nibble indexes D_8017F53C */
-    u8 x;    /* 0x01 signed offset; retail reads it as (s8) */
-    u8 y;    /* 0x02 signed offset; retail reads it as (s8) */
-    u8 u;    /* 0x03 */
-    u8 v;    /* 0x04 */
-} SpriteCell;
-
-/* The 0xC-byte panel sort rows at 0x80147CFC: func_8015AD00 fills one row per
- * quad, Area_DrawGridActors walks the list, and MATH_SwapVectors swaps two rows. The
- * list's second row starts at 0x80147D08 and the depth word at 0x80147D0C, so
- * those addresses are interior views of the same rows. */
-typedef struct PanelSortItem {
-    u8* primitive; /* 0x00 */
-    u16 z;         /* 0x04 - largest projected z of the quad; `lh` reads */
-    u16 tagged_z;  /* 0x06 - copy of z; bit 15 is the live-row tag */
-    u8* work;      /* 0x08 */
-} PanelSortItem;
-
-ASSERT_SIZE(PanelSortItem, 0xC);
 
 typedef struct PanelSortDepth {
     s32 depth;        /* 0x00 - z and z0 as one word; bit 31 tags a live row */
@@ -638,8 +629,6 @@ extern const EmiRingSteps          g_EmiRingSteps;
 extern const char                  D_80149F9C[];
 extern const char                  D_80149FAC[];
 extern const u32                   D_8014AAB8[4];
-/* func_8014BC70 */
-extern void                        Area_DrawGridActors(void);
 extern u8                          D_8016432C;
 /* D_8017F44C */
 extern const char                  D_8017F44C[];
@@ -987,20 +976,9 @@ extern u8                   D_801F6A68;
 extern u8                   D_801F6AD0;
 extern const MenuPanelFuncs g_MenuPanels;
 
-/* func_8014C47C */
-void                              MATH_SwapVectors(Pos3* a, Pos3* b);
-extern void                       Area_DrawSpriteCell(s32 mirror, SpriteCell* cell, u16 clut);
-/* func_8014DB98 */
-extern void                       Actor_StageAnimStep(void);
 /* Retail function prototypes (one declaration each). */
 s8                                func_8014DE78(void);
-extern void                       GFX_ExpandRgb555(u32* pixels, RECT rect);
-extern void                       GFX_DecodeLzss(u32* packed, RECT rect);
 extern void                       func_8014FB80(s16 x, s16 y, u16 clut, u8 shade);
-/* func_801507BC */
-extern void                       Message_DispatchState(void);
-/* func_8015083C */
-void                              Message_RunScript(void);
 void                              func_80150E48(void);
 void                              func_80150E98(void);
 void                              func_80150F08(void);
@@ -1011,11 +989,7 @@ void                              func_801510DC(void);
 void                              func_8015115C(void);
 void                              func_801511C8(void);
 void                              func_80151334(void);
-void                              Message_DispatchAnswerStep(void);
-/* func_8015142C */
-void                              Message_RestartRequest(void);
 void                              func_80151480(void);
-void                              Message_StartRequest(void);
 void                              func_80151538(void);
 void                              func_801515F4(void);
 void                              func_80151710(void);
@@ -1023,21 +997,13 @@ void                              func_801517AC(void);
 void                              func_80151820(void);
 void                              func_80151844(void);
 void                              func_80151894(void);
-/* func_801518F4 */
-void                              Message_DispatchChoiceMode(void);
 void                              func_80151964(void);
-/* func_801519F8 */
-void                              UI_NextChoice(void);
-/* func_80151A48 */
-void                              UI_PrevChoice(void);
 void                              func_80151A98(void);
 extern void                       func_80151B08(void);
 extern void                       func_80151B50(void);
 void                              func_80151D3C(void);
 void                              func_80151D8C(void);
 void                              func_80151DCC(void);
-void                              UI_DrawGlyph(s32 color, u8* text);
-void                              Message_DispatchStep(void);
 void                              func_80152370(void);
 void                              func_801523D0(void);
 void                              func_80152420(void);
@@ -1054,118 +1020,25 @@ void                              Message_SetAnswerMessage12(void);
 void                              Message_SetAnswerMessage13(void);
 void                              Message_SetAnswerMessage14(void);
 void                              Message_SetAnswerMessage15(void);
-/* func_80152C9C */
-void                              Area_LoadCellColumnPrev(void);
-/* func_80152D9C */
-void                              Area_LoadCellColumnNext(void);
 /* The cell record the tile-ring draw is working on. */
 extern s8*                        D_1F800010;
-/* func_80152E94 */
-/* func_80152FB0 */
-/* func_801530D0 */
-extern s32                        Area_DrawCellRing(void);
-/* func_80153CC4 */
-extern void                       Area_ResetCellPacketLists(void);
-/* func_80153D34 */
-extern void                       Area_SortCellPackets(void);
-extern void                       Area_GetCell(s32 px, s32 py, AreaCell* out);
-extern s32                        Area_UploadCell(s32 column, s32 row, POLY_FT4* context, s32 slot);
-extern u16                        Area_AllocCellPrimRow(void);
-extern void                       Area_RequestCellRows(AreaCell* entry);
-extern void                       Area_FreeCellPrimRow(u16 row_id);
-void                              Area_DrawPartQuads(ScenePart* parts, s32 shift_x, s32 shift_y);
 void                              func_8015642C(u8* obj, s32 x, s32 y);
 void                              func_8015684C(u32* record, s32 cell_x, s32 cell_y);
 void                              func_801569B8(u8* record, s32 cell_x, s32 cell_y);
-void                              Area_DrawPartAnimation(ScenePart* parts, s32 origin_x, s32 origin_y);
-void                              Area_DrawCellAtPoint(u8* unit, s32 x, s32 y);
-void                              Area_DrawGouraudQuads(ScenePart* parts, s32 shift_x, s32 shift_y);
 void                              func_8015763C(void);
 void                              func_80157644(u32* record);
 void                              func_801576A0(u32* record);
 void                              func_801576FC(u8* record);
-void                              Area_DrawCellSides(u8* record, s32 cell_x, s32 cell_y);
 void                              func_801583BC(void* obj);
 void                              func_80158830(void* obj);
 void                              func_80158940(void* obj);
-/* func_80158F80 */
-void                              Menu_UpdateMessagePanel(void);
-/* func_80158FE0 */
-void                              Menu_UpdateMessageWindow(void);
-/* func_80159050 */
-void                              Menu_OpenMessagePanel(void);
-/* func_8015920C */
-void                              Menu_GrowMessagePanel(void);
-/* func_80159510 */
-void                              Menu_DrawMessagePanel(void);
-/* func_80159580 */
-void                              Menu_ShrinkMessagePanel(void);
-void                              Menu_ClosePanel(void);
-/* func_801598F4 */
-void                              Menu_UpdateMessageChoice(void);
-/* func_80159964 */
-void                              Menu_OpenMessageChoice(void);
-/* func_8015999C */
-void                              Menu_DrawMessageChoice(void);
-/* func_80159A00 */
-void                              Menu_ReleaseMessagePanel(void);
-/* func_80159A20 */
-void                              Menu_UpdateMessagePreset(void);
-/* func_80159A90 */
-void                              Menu_OpenMessagePreset(void);
-/* func_80159B38 */
-void                              Menu_DrawMessagePreset(void);
-/* func_80159B9C */
-extern void                       UI_DrawPanelBox(s16 x, s16 y, u8 w, u8 h);
-/* func_80159FA0 */
-/* func_8015A098 */
-extern void                       Menu_DrawMessagePresetRows(void);
 extern void                       func_8015A170(void);
-/* func_8015A1D8 */
-extern void                       Menu_DrawMessagePresetCursor(void);
-/* func_8015A264 */
-extern void                       Menu_DrawMessageChoiceCursor(void);
-/* func_8015A2B0 */
-void                              UI_DrawLine(s16 start_x, s16 start_y, s16 end_x, s16 end_y, u8 gray);
-extern u8*                        UI_DrawTextAt(s32 x, s32 y, u8* text);
-/* func_8015A554 */
-void                              Menu_LayoutMessageChoice(void);
 extern void                       func_8015A9A4(void);
 s8                                func_8015AD00(PanelSortItem* sort_list);
 void                              func_8015B2AC(s16* out, s32* in);
-s32                               Game_IsScenarioEqual(u8** cursor);
-s32                               Game_IsAreaEqual(u8** cursor);
-s32                               Game_TestSceneFlag(u8** cursor);
-/* func_8015B6A8 */
-s32                               Game_IsScenarioStateEqual(u8** cursor);
-/* func_8015B6D0 */
-s32                               Game_IsCellTypeEqual(u8** cursor);
-/* func_8015B6F8 */
-s32                               Game_TestScenarioFlag(u8** cursor);
-/* func_8015B73C */
-s32                               Game_IsLeaderEqual(u8** cursor);
-s32                               Game_TestEventFlag(u8** cursor);
-s32                               Game_HasVitalItem(u8** cursor);
-s32                               Game_IsScenarioAtMost(u8** cursor);
-/* func_8015B7F0 */
-s32                               Game_HasPartyFlag(u8** cursor);
 s32                               func_8015B83C(u8** cursor);
-s32                               Game_IsScriptVar0Equal(u8** cursor);
-s32                               Game_IsScriptVar1Equal(u8** cursor);
-s32                               Game_IsScriptVar2Equal(u8** cursor);
-s32                               Game_IsScriptVar3Equal(u8** cursor);
-s32                               Game_SetScriptVar(u8* operand);
-s32                               Game_IsScriptVarEqual(u8* operand);
-s32                               Game_IncScriptVar(u8* operand);
-/* func_8015BABC */
-s32                               Game_TestNever(void);
 void                              func_80163698(void);
 u8*                               func_801642F4(u8* dst, const u8* src, u32 count);
-void                              Char_ApplyMaster(Character* character);
-/* Retail calls this executable makes into its own units and the overlays. */
-void                              Char_ApplyWeapon(Character* character);
-void                              Char_ApplyArmor(Character* character);
-void                              Char_ApplyAccessories(Character* character);
 extern void                       func_80167428(void);
 /* func_8016BA04 */
 void                              SND_QuitSpu(void);
@@ -1190,17 +1063,9 @@ static inline void Slus_DrawPanelBox(void) {
     UI_DrawPanelBox((s16)panel->pos.x >> 4, (s16)panel->pos.y >> 4, (u8)(panel->u.grow.w >> 4), (u8)(panel->u.grow.h >> 4));
 }
 
-void Actor_ReadValue(void);
-
 s32 SYS_LoadExe(const char* path);
 
-void GFX_UploadPalette(void);
-
-void UI_DispatchLocalMode(void);
-
 extern u32 g_SndSeReaders[SND_BANK_COUNT];
-
-s32 Char_AddResistance(u8* counter, s32 delta);
 
 void SYS_ShowFileNotFound(void);
 

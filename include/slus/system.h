@@ -8,6 +8,7 @@
 #include "engine/input/pad/pad.h"
 #include "engine/emi/loader/emi.h"
 #include "engine/sys/boot/boot.h"
+#include "engine/cd/lz77/lz77.h"
 
 /* The executable's system, archive, input and decompression functions, in address order. */
 /* func_8014E0A8 */
@@ -21,9 +22,5 @@ void       SYS_CopyString(u8* dst, u8* src, s32 limit);
 /* SYS_InitScratchpad */
 /* func_8015AC8C */
 void       SYS_InitScratchpad(u8* panel);
-/* func_80164028 */
-void       LZ77_DecodeBegin(u8* dst);
-/* func_80164064 */
-s32        LZ77_DecodeStep(void);
 
 #endif
