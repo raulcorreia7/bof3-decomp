@@ -67,9 +67,6 @@ def entry_for(root: Path, identifier: str) -> dict[str, Any]:
     payload = folder / str(raw.get("name") or f"{slot}.bin")
     if not payload.is_file():
         raise ValueError(f"missing extracted EMI payload for {identifier}: {payload}")
-    kind = raw.get("kind")
-    if not isinstance(kind, str):
-        raise ValueError(f"{manifest} has no entry kind; extract the disc again")
     entry_type = int(raw.get("type") or 0)
     load_address = int(raw.get("ram_ptr") or 0)
     size = payload.stat().st_size
@@ -77,7 +74,7 @@ def entry_for(root: Path, identifier: str) -> dict[str, Any]:
         "payload_path": payload,
         "load_address": load_address,
         "size": size,
-        "payload_kind": _payload_kind(entry_type, kind),
+        "payload_kind": _payload_kind(entry_type, raw["kind"]),
     }
 
 
