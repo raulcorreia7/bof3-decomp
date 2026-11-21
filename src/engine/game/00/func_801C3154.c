@@ -22,7 +22,7 @@ MATCH void func_801C3154(void) {
         base_src = CLUT_BLOCK_SRC;
         do {
             off = index << 1;
-            sel = work->unk_27;
+            sel = work->clut_select;
             index += 1;
             page                            = (sel >> 3) << 9;
             addr_dst                        = page + base_dst;

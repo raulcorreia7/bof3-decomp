@@ -19,7 +19,7 @@ MATCH void func_801F3228(void) {
         g_Task->unk_04++;
         i = 0;
         do {
-            cell      = g_Task->unk_27;
+            cell      = g_Task->clut_select;
             row       = (cell >> 3) * AREA_PALETTE_ROW;
             palette   = AREA_PALETTE_WORK + row;
             col       = (cell & 7) * AREA_PALETTE_UNIT;

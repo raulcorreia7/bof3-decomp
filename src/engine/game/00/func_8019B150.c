@@ -12,7 +12,7 @@ MATCH void func_8019B150(void) {
     g_Task->active_flags = 0;
 
     work         = g_Task;
-    work->unk_2A = (work->unk_06 >> 7);
+    work->mirror = (work->unk_06 >> 7);
 
     Actor_SelectScript((g_Task->unk_06 & 0x7F));
     g_Task->header.mode = flag;

@@ -17,7 +17,7 @@ MATCH void func_8019ADE8(void) {
     Area_SelectSceneRecord(0x18);
     g_Task->unk_48       = 0;
     g_Task->active_flags = 0;
-    g_Task->unk_2A       = 0;
+    g_Task->mirror       = 0;
     Actor_SelectScript(8);
     work                    = g_Task;
     work->pos.x.fixed       = g_Actors[work->unk_06].pos.x.fixed;

@@ -12,9 +12,9 @@ NON_MATCHING void func_801F3514(void) {
     u8*      script;
 
     script = &D_80145EDB;
-    if (g_Task->unk_4B != *script) {
+    if (g_Task->script_record != *script) {
         Actor_RequestScript(*script);
-        g_Task->unk_4B = *script;
+        g_Task->script_record = *script;
     }
     if (D_80145E92[0] == 3) {
         Actor_StepAnimLoop();

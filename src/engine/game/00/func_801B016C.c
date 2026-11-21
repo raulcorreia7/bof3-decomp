@@ -24,7 +24,7 @@ MATCH void func_801B016C(void) {
     g_Game.current->u.field.step.value       = 0;
     g_Game.current->u.field.mode.value       = 0;
     g_Game.current->status.field.flags.value = 0;
-    g_Task->unk_4B                           = 0xFF;
+    g_Task->script_record                    = 0xFF;
     if (g_GameRequestFlags & AREA_LOAD_FLAG_NO_ACTOR_SCRIPT) {
         g_Task->header.flags |= ACTOR_FLAG_HIDDEN;
         g_Task->header.mode = 0xC;

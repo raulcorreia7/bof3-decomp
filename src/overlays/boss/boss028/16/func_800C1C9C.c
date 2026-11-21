@@ -10,7 +10,7 @@ NON_MATCHING void func_800C1C9C(void) {
     u32 slot;
 
     BOSS028_PARTY->unk_24 = 0;
-    BOSS028_PARTY->unk_2A = 0;
+    BOSS028_PARTY->mirror = 0;
     BOSS028_PARTY->unk_48 = 0;
     BOSS028_PARTY->unk_29 = 2;
     Area_SelectSceneRecord(0x15C);

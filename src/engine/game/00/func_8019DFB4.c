@@ -42,7 +42,7 @@ loop_1: /* scan the world-id table down from index 8 */
     work_b                    = g_Task;
     COORD_FRAC(work_a->pos.z) = 0;
     COORD_INT(work_a->pos.z)  = (u16)(counter + (jitter & 0x7F));
-    work_b->unk_2A            = 0;
+    work_b->mirror            = 0;
     work_c                    = g_Task;
     work_c->unk_2B            = (u8)(work_c->unk_2B + 1);
     g_Task->unk_48            = 0;
@@ -60,7 +60,7 @@ loop_1: /* scan the world-id table down from index 8 */
     if (work_f->vx >= 2049) {
         active = 1;
     } else if (value >= 0x801) {
-        work_f->unk_2A = 1;
+        work_f->mirror = 1;
         active         = 1;
     } else {
         active = 0;

@@ -14,7 +14,7 @@ MATCH void func_801F4544(void) {
 
     g_Task->unk_48       = 0;
     g_Task->active_flags = 0;
-    g_Task->unk_2A       = 0;
+    g_Task->mirror       = 0;
     ACTOR_CLEAR_TINT();
 
     scratch                                                         = (u8*)g_Task;

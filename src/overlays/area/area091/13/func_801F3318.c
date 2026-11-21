@@ -12,17 +12,17 @@ NON_MATCHING void func_801F3318(void) {
     g_Task->unk_0A--;
     if (g_Task->unk_0A != 0) {
         index   = g_Task->param.unk_0B;
-        src     = MEM_PTR(u16, AREA_PALETTE_ARENA + (g_Task->unk_27 >> 3) * AREA_PALETTE_ROW + (g_Task->unk_27 & 7) * AREA_PALETTE_UNIT);
+        src     = MEM_PTR(u16, AREA_PALETTE_ARENA + (g_Task->clut_select >> 3) * AREA_PALETTE_ROW + (g_Task->clut_select & 7) * AREA_PALETTE_UNIT);
         color_a = (src[index] & 0x7BDE) >> 1;
         color_b = (src[31 - index] & 0x7BDE) >> 1;
     } else {
         index   = g_Task->param.unk_0B;
-        src     = MEM_PTR(u16, AREA_PALETTE_ARENA + (g_Task->unk_27 >> 3) * AREA_PALETTE_ROW + (g_Task->unk_27 & 7) * AREA_PALETTE_UNIT);
+        src     = MEM_PTR(u16, AREA_PALETTE_ARENA + (g_Task->clut_select >> 3) * AREA_PALETTE_ROW + (g_Task->clut_select & 7) * AREA_PALETTE_UNIT);
         color_a = src[index];
         color_b = src[31 - index];
     }
-    MEM_PTR(u16, work + (g_Task->unk_27 >> 3) * AREA_PALETTE_ROW + (g_Task->unk_27 & 7) * AREA_PALETTE_UNIT)[index]      = color_a;
-    MEM_PTR(u16, work + (g_Task->unk_27 >> 3) * AREA_PALETTE_ROW + (g_Task->unk_27 & 7) * AREA_PALETTE_UNIT)[31 - index] = color_b;
+    MEM_PTR(u16, work + (g_Task->clut_select >> 3) * AREA_PALETTE_ROW + (g_Task->clut_select & 7) * AREA_PALETTE_UNIT)[index]      = color_a;
+    MEM_PTR(u16, work + (g_Task->clut_select >> 3) * AREA_PALETTE_ROW + (g_Task->clut_select & 7) * AREA_PALETTE_UNIT)[31 - index] = color_b;
     if (g_Task->unk_0A == 0) {
         g_Task->unk_0A = 2;
         if (++g_Task->param.unk_0B == 0x10) {

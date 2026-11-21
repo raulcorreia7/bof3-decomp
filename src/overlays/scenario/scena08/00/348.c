@@ -55,7 +55,7 @@ MATCH void func_801F7200(void) {
     func_801F8534();
     g_Task->script_pc += RANDOM_MASK(BYTE_MASK);
     if (g_ScriptVars[0] == 0xB) {
-        g_Task->unk_5A = 0x20;
+        g_Task->frame_cells = 0x20;
         g_Task->header.mode += 1;
     }
 }
@@ -65,16 +65,16 @@ MATCH void func_801F7268(void) {
 
     func_801F8534();
     g_Task->script_pc += RANDOM_MASK(BYTE_MASK);
-    if ((g_Task->unk_5A & 0x3) == 0) {
+    if ((g_Task->frame_cells & 0x3) == 0) {
         g_Task->unk_2C -= 1;
     }
-    if (g_Task->unk_5A == 2) {
+    if (g_Task->frame_cells == 2) {
         SND_PlaySE(EMI_SE_ID(SND_BANK_AREA, 0x0C));
     }
-    timer          = g_Task->unk_5A - 1;
-    g_Task->unk_5A = timer;
+    timer               = g_Task->frame_cells - 1;
+    g_Task->frame_cells = timer;
     if (timer == 0) {
-        g_Task->unk_5A = 0x40;
+        g_Task->frame_cells = 0x40;
         g_Task->header.mode += 1;
     }
 }
@@ -84,14 +84,14 @@ MATCH void func_801F7320(void) {
     u16 timer;
 
     func_801F85F0((s16)g_Task->screen_x, (s16)g_Task->screen_y, (s16)g_Task->unk_32);
-    if ((g_Task->unk_5A & 3) == 0) {
+    if ((g_Task->frame_cells & 3) == 0) {
         g_Task->unk_32--;
     }
-    timer          = g_Task->unk_5A - 1;
-    g_Task->unk_5A = timer;
+    timer               = g_Task->frame_cells - 1;
+    g_Task->frame_cells = timer;
     if (timer == 0) {
         SND_PlaySE(EMI_SE_ID(SND_BANK_AREA, 9));
-        g_Task->unk_5A = 20;
+        g_Task->frame_cells = 20;
         g_Task->header.mode++;
     }
 }
@@ -119,7 +119,7 @@ MATCH void func_801F757C(void) {
     func_801F8534();
     g_Task->script_pc += RANDOM_MASK(BYTE_MASK);
     if (g_ScriptVars[0] == 0xB) {
-        g_Task->unk_5A = 0x20;
+        g_Task->frame_cells = 0x20;
         g_Task->header.mode += 1;
     }
 }
@@ -132,13 +132,13 @@ MATCH void func_801F75E4(void) {
 
     func_801F85F0((s16)g_Task->screen_x, (s16)g_Task->screen_y, (s16)g_Task->unk_32);
     g_Task->script_pc += RANDOM_MASK(BYTE_MASK);
-    if ((g_Task->unk_5A & 0x3) == 0) {
+    if ((g_Task->frame_cells & 0x3) == 0) {
         g_Task->unk_2C -= 1;
     }
-    count          = g_Task->unk_32 - 1;
-    timer          = g_Task->unk_5A - 1;
-    g_Task->unk_32 = count;
-    g_Task->unk_5A = timer;
+    count               = g_Task->unk_32 - 1;
+    timer               = g_Task->frame_cells - 1;
+    g_Task->unk_32      = count;
+    g_Task->frame_cells = timer;
     if (timer == 0) {
         func_80196070();
     }
@@ -160,7 +160,7 @@ MATCH void func_801F7688(void) {
     work->screen_y = screen.vy;
     work->unk_32   = 0x140;
     work->header.mode += 1;
-    work->unk_5A = 0x14;
+    work->frame_cells = 0x14;
     func_801F8108((s16)g_Task->screen_x, (s16)g_Task->screen_y);
     func_801F85F0((s16)g_Task->screen_x, (s16)g_Task->screen_y, (s16)g_Task->unk_32);
 }
@@ -210,24 +210,24 @@ MATCH void func_801F79B0(void) {
 
     func_801F8AE8();
     work              = g_Task;
-    work->unk_5A      = 0x40;
+    work->frame_cells = 0x40;
     work->header.step = work->header.step + 1;
 }
 
 MATCH void func_801F79EC(void) {
     FallingSpark* spark;
 
-    if (g_Task->unk_5A == 4) {
+    if (g_Task->frame_cells == 4) {
         SND_PlaySE(EMI_SE_ID(SND_BANK_AREA, 0x01));
     }
-    if ((g_Task->unk_5A & 0x7) == 0) {
+    if ((g_Task->frame_cells & 0x7) == 0) {
         spark = func_801F8B14();
         if (spark != NULL) {
             Scene_InitSpark(spark);
         }
     }
     func_801F8BF8();
-    if (--g_Task->unk_5A == 0) {
+    if (--g_Task->frame_cells == 0) {
         g_Task->header.step += 1;
     }
 }

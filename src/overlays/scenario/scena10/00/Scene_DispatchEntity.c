@@ -14,7 +14,7 @@ MATCH void func_801F6FAC(void) {
     work->unk_48             = 0;
     work->pos.z.part.integer = 0x64;
     g_Task->active_flags     = 0;
-    g_Task->unk_2A           = 0;
+    g_Task->mirror           = 0;
     g_Task->timer            = 0;
     g_Task->unk_0A           = 0x1E;
     g_Task->draw_layer       = 1;

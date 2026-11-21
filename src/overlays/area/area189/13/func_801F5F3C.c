@@ -5,17 +5,17 @@
  * step the facing and set the turn parameter. */
 MATCH s32 func_801F5F3C(void) {
     if (g_InputHeld & PADLup) {
-        g_Task->unk_4B = 1;
+        g_Task->script_record = 1;
         return 2;
     }
     if (g_InputHeld & PADLright) {
-        g_Task->unk_4B       = 2;
-        g_Task->direction    = g_Task->direction + 1;
-        g_Task->param.unk_0B = 0xF0;
+        g_Task->script_record = 2;
+        g_Task->direction     = g_Task->direction + 1;
+        g_Task->param.unk_0B  = 0xF0;
     } else if (g_InputHeld & PADLleft) {
-        g_Task->unk_4B       = 3;
-        g_Task->direction    = g_Task->direction - 1;
-        g_Task->param.unk_0B = 0x10;
+        g_Task->script_record = 3;
+        g_Task->direction     = g_Task->direction - 1;
+        g_Task->param.unk_0B  = 0x10;
     } else {
         return 0;
     }
