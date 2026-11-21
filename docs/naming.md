@@ -43,69 +43,75 @@ static s16 s_BattleDamageScale;
 void Item_Add(u16 item_id, u8 item_count);
 ```
 
-**Don't**
-
-```c
-#define PartySlots 3                         /* a constant in PascalCase */
-
-extern u8  g_PARTY_Count;                    /* the tag in capitals inside a global */
-static s16 sDamageScale;                     /* no s_, no tag */
-
-void PartyAddItem(u16 itemId, u8 nCount);    /* no tag, camelCase, Hungarian */
-```
-
 ## Tags
 
-Every function, global, static, constant and macro carries the tag of the system that owns it.
-System tags are capitals, as SDL writes them; game tags are words.
+The tag is the owner: the engine module or the game part that holds the code. System tags are
+capitals, as SDL writes them; game tags are words. Every symbol carries one.
 
-| Kind   | Tags                                                                                                                                                                                                                                                                       | Global word                                                                         |
-| ------ | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------- |
-| System | `SYS_ GFX_ SND_ DISC_ EMI_ SAVE_ STRING_ UI_ INPUT_ MATH_ LZ77_`: engine, platform and I/O                                                                                                                                                                                 | `g_Sys`, `g_Gfx`, `g_Snd`, `g_Disc`, `g_Emi`, `g_Save`, `g_Text`, `g_Ui`, `g_Input` |
-| Game   | `Battle_ BMagic_ Boss_ Enemy_ Party_ Char_ PlChar_ Area_ WorldMap_ Actor_ Scene_ Menu_ Shop_ Master_ Fairy_ FairyCasino_ FairyNickname_ FairyCopyShop_ FairyMusician_ FairyFortuneTeller_ FairySinger_ Well_ Fishing_ Game_ Title_ Message_ Effect_ Item_ Logo_ Resource_` | the tag without `_`: `g_Battle`, `g_WorldMap`                                       |
+**Caller test.** A tag names a layer (`SYS_ GFX_ SND_ EMI_ CD_ INPUT_ Actor_ Script_ Menu_ Message_
+UI_`) only when several parts call the code. Code one part calls takes that part's tag, wherever its
+file sits. A compound tag (`FairyCasino_`) names a part inside a part.
 
-A constant or macro takes the tag in capitals: `BATTLE_`, `BMAGIC_`, `PLCHAR_`, `WORLDMAP_`,
-`SCENE_`, `FISHING_`. `MATH_` names only the game's own math routines (`MATH_TBL`, the EMI archive magic, is a container tag and not a math word); `LZ77_` names the decoder.
+Engine modules (`src/engine/<module>`):
 
-`Field`, `World` and `Etc` are not tags. The disc has `BIN/WORLD##/AREA###` and no other map word:
-one resident map engine runs every area, and the world map is 11 AREA images whose map-load entry
-sets bit 0 of `flag_32`.
+| Module                     | Tag                  | Folders                            |
+| -------------------------- | -------------------- | ---------------------------------- |
+| boot, threads, frame, bits | `SYS_`               | `sys/boot`, `sys/flags`            |
+| the game's own math        | `MATH_`              | `sys/math`                         |
+| pad                        | `INPUT_`             | `input/pad`                        |
+| disc drive                 | `CD_`                | `cd/drive`                         |
+| LZ77 decoder               | `LZ77_`              | `cd/lz77`                          |
+| EMI archive loader         | `EMI_`               | `emi/loader`                       |
+| graphics, fades, palettes  | `GFX_`               | `gfx/*`                            |
+| sound, music, SE, XA       | `SND_`               | `sound/*`                          |
+| actor records and motion   | `Actor_`             | `actor/task`, `actor/motion`       |
+| actor script machine       | `Script_`            | `actor/script`, `actor/ops`        |
+| map renderer               | `Map_`               | `field/map`                        |
+| camera                     | `Camera_`            | `field/camera`                     |
+| cell heights and blocking  | `Collision_`         | `field/collision`                  |
+| random encounters          | `Encounter_`         | `field/encounter`                  |
+| field actions              | `FieldAction_`       | `field/action`                     |
+| world-map actors           | `WorldMap_`          | `field/world`                      |
+| party, characters, items   | `Party_ Char_ Item_` | `party/*`                          |
+| game loop and modes        | `Game_`              | `state/mode`, `state/progress`     |
+| scene host                 | `Scene_`             | `state/scene`                      |
+| text, fonts, windows       | `UI_`                | `ui/text`                          |
+| message window and answers | `Message_`           | `ui/message`, `ui/message_answers` |
+| menu panels and kit        | `Menu_`              | `ui/menu`                          |
+| memory card, save slots    | `SAVE_`              | menu overlay `shared`              |
+| unnamed files              | none                 | `slus`, `game/00`                  |
 
-| Tag                   | Code                                                                      |
-| --------------------- | ------------------------------------------------------------------------- |
-| `Area_`               | The map engine and the area maps: towns, dungeons and the world map alike |
-| `WorldMap_`           | Code and data only the world-map areas use                                |
-| `Char_`               | Character records, stats and ids                                          |
-| `PlChar_`             | The player-character overlay; the disc label is `PLCHAR`                  |
-| `Fishing_`            | The fishing pond and its shop                                             |
-| `FairyCasino_`        | The casino scene in the fairy village                                     |
-| `FairyNickname_`      | The nickname scene in the fairy village                                   |
-| `FairyCopyShop_`      | The copy shop scene in the fairy village                                  |
-| `FairyMusician_`      | The musician's scene in the fairy village                                 |
-| `FairyFortuneTeller_` | The fortune teller's scene in the fairy village                           |
-| `FairySinger_`        | The singer's scene in the fairy village                                   |
-| `Well_`               | The well minigame                                                         |
+Game parts (`src/overlays`, `src/logo`):
 
-`World_`, `PAD_`, `Mem_`, `Matrix_`, `Data`, `Info` and `Work` are not tags. The world-map code is
-`WorldMap_`, the pad wrapper is `INPUT_`, the memory helper is `SYS_` and the matrix helpers are
-`MATH_`. `World01_` and `WORLD00_` are disc and area labels, not tags.
+| Part                    | Tag                                                                                                 | Folder                                   |
+| ----------------------- | --------------------------------------------------------------------------------------------------- | ---------------------------------------- |
+| area load, scene, setup | `Area_`                                                                                             | `overlays/area`                          |
+| battle                  | `Battle_`                                                                                           | `overlays/battle`                        |
+| battle magic            | `BMagic_ Effect_`                                                                                   | `overlays/bmagic`                        |
+| boss                    | `Boss_`                                                                                             | `overlays/boss`                          |
+| player character        | `PlChar_`                                                                                           | `overlays/plchar`                        |
+| scenario                | `Scene_ Party_`                                                                                     | `overlays/scenario`                      |
+| menu screens            | `Menu_ Shop_ Master_ Shisu_`                                                                        | `overlays/menu`                          |
+| title                   | `Title_`                                                                                            | `overlays/title`                         |
+| logo                    | `Logo_`                                                                                             | `logo`                                   |
+| fishing pond            | `Fishing_`                                                                                          | `overlays/area`                          |
+| fairy village           | `Fairy_ FairyCasino_ FairyNickname_ FairyCopyShop_ FairyMusician_ FairyFortuneTeller_ FairySinger_` | `overlays/commu`, `area175` to `area185` |
+| well minigame           | `Well_`                                                                                             | `overlays/area`                          |
 
-A disc folder number is a tag only until the area's game term is proven.
+A constant or macro takes the tag in capitals (`BATTLE_`, `CAMERA_`). `MATH_TBL`, the EMI archive
+magic, is a container tag.
 
-A subject with its own family of functions is a tag: messages, effects, items. A subject that an
-existing tag covers takes that tag: a window or panel is `UI_` or `Menu_`, an ability is `Char_`.
-A new tag goes into the table above in the same change.
+`Field`, `World` and `Etc` are not tags: the disc has `BIN/WORLD##/AREA###` and no other map word. `World_`, `PAD_`, `Mem_`, `Matrix_`, `Data`, `Info` and
+`Work` are not tags: use `WorldMap_`, `INPUT_`, `SYS_` and `MATH_`. A disc folder number is a tag only until the area's game term is proven.
 
-UI parts:
+A subject with its own family of functions is a tag; a new tag goes into the tables above in the same
+change.
 
-| Part                                                                 | Tag                                                                                                       |
-| -------------------------------------------------------------------- | --------------------------------------------------------------------------------------------------------- |
-| Shared text, fonts, glyphs, windows, frontend state and choice lists | `UI_` (`g_Ui`)                                                                                            |
-| Message window, area messages and answer menus                       | `Message_`                                                                                                |
-| Menu panels, cursors, portraits, icons, stat and caption windows     | `Menu_`                                                                                                   |
-| Battle panels, command menu, target cursor and battle numbers        | `Battle_`                                                                                                 |
-| A screen's own UI                                                    | The screen tag: `Shop_`, `Master_`, `Fairy_`, `SAVE_`, `Menu_` for the start menu, `Title_` for the title |
-| Numbers, gauges and list rows                                        | The tag of the screen that draws them                                                                     |
+UI parts: shared text, fonts, glyphs and windows are `UI_`; the message window, its panels, answer
+lists and area messages are `Message_`; panels, cursors, portraits and icons are `Menu_`, and a widget
+copied into another overlay keeps its name; battle panels and numbers are `Battle_`; a screen's own UI
+and the numbers, gauges and rows it draws take the screen tag (`Shop_`, `Master_`, `Fairy_`, `SAVE_`,
+`Menu_` for the start menu, `Title_` for the title).
 
 ## Vocabulary
 
@@ -413,17 +419,13 @@ The generic helpers in `include/common/util.h` stay untagged capitals
 
 ## Game terms
 
-| Thing                 | Name                                                                                                                                                    |
-| --------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| Character id          | `character_id` (`CHAR_ID_*`, 11 values with forms)                                                                                                      |
-| Character data        | `Character`, `g_Characters[CHAR_INDEX_COUNT]`, `g_CharSlot[id]`                                                                                         |
-| Party order           | `Party_` owns order: `g_PartyFieldOrder`, `g_PartyBattleOrder`, `g_PartyCount`                                                                          |
-| Battle participants   | `Battler`; `PartyMember`, `EnemyBattler`                                                                                                                |
-| Enemy definition      | `Enemy` (the BENEMY definition)                                                                                                                         |
-| Script-driven object  | `Actor`, `ACTOR_*`                                                                                                                                      |
-| Field programs        | `PlChar_`                                                                                                                                               |
-| Battle character bank | `BattlePlayerCharBank`                                                                                                                                  |
-| Item category 3       | `Accessory` (`g_Accessories`, `AccessoryId`, `ACCESSORY_*`, `ITEM_CATEGORY_ACCESSORY`): the worn accessories, the fishing lures and the rods, one table |
+| Thing               | Name                                                                                                                                                    |
+| ------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| Character id        | `character_id` (`CHAR_ID_*`, 11 values with forms)                                                                                                      |
+| Character data      | `Character`, `g_Characters[CHAR_INDEX_COUNT]`, `g_CharSlot[id]`                                                                                         |
+| Battle participants | `Battler`; `PartyMember`, `EnemyBattler`                                                                                                                |
+| Enemy definition    | `Enemy` (the BENEMY definition)                                                                                                                         |
+| Item category 3     | `Accessory` (`g_Accessories`, `AccessoryId`, `ACCESSORY_*`, `ITEM_CATEGORY_ACCESSORY`): the worn accessories, the fishing lures and the rods, one table |
 
 A game object keeps the short noun the disc, the retail text or the reference notes use, without a
 system prefix, when the noun means one thing across the game. A system prefix is added only where
