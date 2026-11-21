@@ -1,8 +1,7 @@
 #include "area082_13.h"
 
 /* Draws one shaded ring of 16 triangles around pos, rotated by angle_b. */
-#ifdef NON_MATCHING
-NON_MATCHING void func_801F2F50(Pos3* pos, s16 radius_a, s16 radius_b, u16 angle_b, s32 shade_a, s32 shade_b) {
+MATCH void func_801F2F50(Pos3* pos, s16 radius_a, s16 radius_b, u16 angle_b, u8 shade_a, u8 shade_b) {
     DVECTOR  screen;
     DVECTOR  size;
     DVECTOR  scale;
@@ -45,6 +44,3 @@ NON_MATCHING void func_801F2F50(Pos3* pos, s16 radius_a, s16 radius_b, u16 angle
         i++;
     } while (i < 16);
 }
-#else
-INCLUDE_ASM(func_801F2F50);
-#endif
