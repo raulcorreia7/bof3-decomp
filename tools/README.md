@@ -12,7 +12,8 @@ as `+`. Run each Python tool with `.venv/bin/python tools/<name>.py` or directly
 | Check the disc, extracted files, images  | `tools/disc.py verify`                                                   | [toolchain: disc](../docs/toolchain.md#disc-manifest)     |
 | Build and check every image              | `meson compile -C build/meson check`                                     | [toolchain: commands](../docs/toolchain.md#commands)      |
 | Check one image                          | `meson compile -C build/meson check-<image>`                             | same                                                      |
-| Rank the open functions, cheapest route first | `tools/worklist.py -n 10 [--image <name>]`                          | `--help`                                                  |
+| Rank the open functions, cheapest route first | `tools/worklist.py -n 10 [--image <glob>]`                          | `--help`                                                  |
+| List one lane's open functions in match order | `tools/worklist.py --image <glob> [--except <name>] --order strategy [--measure]` | `--help`                                                  |
 | Write rows for another program           | `<tool> --jsonl` (worklist, dups, sigs, quality `--queue`, symbol refs, template_diff, m2c_sweep) | `--help`                                                  |
 | Run every check before a push            | `meson compile -C build/meson pre-push`                                  | [pre-push](#pre-push)                                     |
 | Compare one function with retail         | `tools/match.sh <target>@0x<ADDR>`                                       | [match.sh](../docs/toolchain.md#matchsh)                  |

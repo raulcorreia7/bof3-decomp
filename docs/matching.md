@@ -6,7 +6,7 @@ verdict; a score, a marker or a disassembler opinion is a lead.
 ## Route
 
 Take the cheapest route first and move on after one real attempt. `tools/worklist.py` ranks the open
-functions by route, in the tool's order below ([find work](../CONTRIBUTING.md#your-first-match)).
+functions by route, in the tool's order below ([find work](../CONTRIBUTING.md#your-first-match)); `--order strategy --image <glob>` lists one lane's functions by payoff: promote, twins, near misses, medium shapes, undrafted, hard.
 
 | # | Row         | Route                                                                                          | Move on when                                      |
 | - | ----------- | ---------------------------------------------------------------------------------------------- | ------------------------------------------------- |
