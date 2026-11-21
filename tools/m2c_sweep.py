@@ -73,7 +73,7 @@ SPAD_TYPES = (  # image prefix -> work record, for a context that never casts th
 
 def asm_path(root: Path, func: Func) -> Path | None:
     """Return the assembly file of an INCLUDE_ASM function, or None."""
-    path = root / "asm" / func.image / f"{func.name}.s"
+    path = root / "build/asm" / func.image / f"{func.name}.s"
     return path if path.is_file() else None
 
 

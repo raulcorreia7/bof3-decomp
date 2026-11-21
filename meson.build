@@ -21,7 +21,7 @@ bld = meson.project_build_root()
 tools = root / 'tools'
 # The generated text files the tools read back: headers.txt, hand.txt, plain-flags.txt,
 # images.sha1, compile_commands.json, cflags.txt and asflags.txt.
-emit_dir = bld / 'emit'
+emit_dir = bld / 'tools/build/emit'
 
 sh = find_program('sh')
 env = find_program('env')
@@ -82,7 +82,7 @@ if have_game
 
   # The hand-written assembly present now; the checks notice one added since.
   hand_files = run_command('find', 'asm', '-path', '*/hand/*.s', check: true).stdout().strip()
-  configure_file(input: 'emit/text.in', output: 'hand.txt',
+  configure_file(input: 'tools/build/emit/text.in', output: 'hand.txt',
     configuration: configuration_data({'TEXT': hand_files}))
 
   foreach block : split.stdout().split('\ntarget\t')
@@ -147,7 +147,7 @@ if have_compiler
   cc_target = ['-G0', '-funsigned-char', '-msoft-float', '-gcoff']
   as_maspsx = ['-Wa,--aspsx-version=2.56', '-Wa,--expand-div']
   as_target = ['-Wa,-G0,-EL,-mips1']
-  as_includes = ['-Wa,-I' + root / 'src', '-Wa,-I' + root / 'asm', '-Wa,-I' + root / 'include/match']
+  as_includes = ['-Wa,-I' + root / 'src', '-Wa,-I' + root / 'build/asm', '-Wa,-I' + root / 'include/match']
   cflags = cpp_defines + cpp_includes + cc_target + as_maspsx + as_target + as_includes
   asflags = ['-G0', '-EL', '-mips1', '-Iinclude/match']
 
@@ -162,7 +162,7 @@ if have_compiler
   # assembler ones, which carry the source root.
   plain_flags = configuration_data()
   plain_flags.set('TEXT', ' '.join(cpp_includes + cc_target + cc_opt))
-  configure_file(input: 'emit/text.in', output: 'plain-flags.txt', configuration: plain_flags)
+  configure_file(input: 'tools/build/emit/text.in', output: 'plain-flags.txt', configuration: plain_flags)
 
   # Header probes: every public header compiles on its own. The probe includes the header
   # into an empty translation unit. The set is the include tree, the group headers
@@ -194,15 +194,15 @@ if have_compiler
   foreach h : probe_headers
     name = 'header-probe+' + h.replace('/', '+') + '.o'
     probes += custom_target(name,
-      input: 'emit/empty.c',
+      input: 'tools/build/emit/empty.c',
       output: name,
       depfile: name + '.d',
       depend_files: cc_deps,
-      command: [cc, cflags, '-I.', '-DASM_DIR="asm/exe/slus_004_22"', cc_opt, dep_flags,
-                '-include', h, '-c', 'emit/empty.c', '-o', '@OUTPUT@'])
+      command: [cc, cflags, '-I.', '-DASM_DIR="build/asm/exe/slus_004_22"', cc_opt, dep_flags,
+                '-include', h, '-c', 'tools/build/emit/empty.c', '-o', '@OUTPUT@'])
   endforeach
   # The list of headers at configure time; the script notices a header added since.
-  configure_file(input: 'emit/text.in', output: 'headers.txt',
+  configure_file(input: 'tools/build/emit/text.in', output: 'headers.txt',
     configuration: configuration_data({'TEXT': '\n'.join(headers)}))
 
   cdb_root = root.replace('\\', '\\\\').replace('"', '\\"')
@@ -400,7 +400,7 @@ if have_game
   flag_files = configuration_data()
   flag_files.set('CFLAGS', ' '.join(cflags))
   flag_files.set('ASFLAGS', ' '.join(asflags))
-  subdir('emit')
+  subdir('tools/build/emit')
 
   objdiff_json = custom_target('objdiff.json',
     output: ['objdiff.json', 'sdk.json'],

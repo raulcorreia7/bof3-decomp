@@ -8,7 +8,7 @@ from bof3.toolchain.splat import (
 
 
 def test_a_nested_copy_of_an_extracted_function_is_dropped(tmp_path: Path) -> None:
-    base = tmp_path / "asm" / "emi" / "test" / "00"
+    base = tmp_path / "build/asm" / "emi" / "test" / "00"
     nested = base / "764"
     nested.mkdir(parents=True)
     body = (
@@ -29,13 +29,10 @@ def test_a_nested_copy_of_an_extracted_function_is_dropped(tmp_path: Path) -> No
     assert not nested.exists()
 
 
-def test_split_tree_is_flattened_and_keeps_hand_and_data(tmp_path: Path) -> None:
-    base = tmp_path / "asm" / "emi" / "test" / "00"
-    hand = base / "hand"
-    hand.mkdir(parents=True)
-    (hand / "func_80000000.s").write_text("glabel func_80000000\n")
+def test_split_tree_is_flattened_and_keeps_data(tmp_path: Path) -> None:
+    base = tmp_path / "build/asm" / "emi" / "test" / "00"
     data = base / "data"
-    data.mkdir()
+    data.mkdir(parents=True)
     (data / "D_80000010.data.s").write_text(".word 1\n")
     nested = base / "764"
     nested.mkdir()
@@ -68,11 +65,9 @@ def test_split_tree_is_flattened_and_keeps_hand_and_data(tmp_path: Path) -> None
     assert (base / "func_80000030.s").is_file()
     assert (base / "func_80000038.s").is_file()
     assert (base / "764.s").is_file()
-    assert (hand / "func_80000000.s").is_file()
     assert (data / "D_80000010.data.s").is_file()
 
     _clean_asm_tree(base)
 
-    assert (hand / "func_80000000.s").is_file()
     assert not (base / "func_80000020.s").exists()
     assert not (base / "data").exists()

@@ -36,9 +36,9 @@ def make_repo(tmp_path: Path) -> Path:
     repo = tmp_path / "repo"
     (repo / "tools").mkdir(parents=True)
     shutil.copy(SCRIPT, repo / "tools" / "match_context.sh")
-    (repo / "asm" / TARGET).mkdir(parents=True)
-    (repo / "asm" / TARGET / "Battle_Foo.s").write_text(NAMED_ASM)
-    (repo / "asm" / TARGET / "func_80000100.s").write_text(ADDRESS_ASM)
+    (repo / "build/asm" / TARGET).mkdir(parents=True)
+    (repo / "build/asm" / TARGET / "Battle_Foo.s").write_text(NAMED_ASM)
+    (repo / "build/asm" / TARGET / "func_80000100.s").write_text(ADDRESS_ASM)
     (repo / "src" / "emi" / "test").mkdir(parents=True)
     (repo / "src" / "emi" / "test" / "Battle_Foo.c").write_text(
         "#ifdef NON_MATCHING\nNON_MATCHING void Battle_Foo(void) {\n}\n"
@@ -65,7 +65,7 @@ def test_a_split_file_named_after_its_symbol_prints_its_assembly(
 ) -> None:
     result = run(make_repo(tmp_path), f"{TARGET}@0x80000000")
     lines = result.stdout.splitlines()
-    assert lines[0] == "== asm asm/emi/test/00/Battle_Foo.s"
+    assert lines[0] == "== asm build/asm/emi/test/00/Battle_Foo.s"
     assert lines[1] == "80000000  addiu      $sp, $sp, -0x8"
     assert "can't read" not in result.stderr
     assert lines[lines.index("== file") + 1] == "src/emi/test/Battle_Foo.c"
@@ -76,7 +76,7 @@ def test_a_split_file_named_after_the_address_still_prints_its_assembly(
 ) -> None:
     result = run(make_repo(tmp_path), f"{TARGET}@0x80000100")
     lines = result.stdout.splitlines()
-    assert lines[0] == "== asm asm/emi/test/00/func_80000100.s"
+    assert lines[0] == "== asm build/asm/emi/test/00/func_80000100.s"
     assert lines[1] == "80000100  nop"
     assert lines[lines.index("== file") + 1] == "src/emi/test/func_80000100.c"
 

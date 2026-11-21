@@ -26,7 +26,7 @@ from dataclasses import dataclass
 from pathlib import Path
 
 from bof3.core.io import repo_layout
-from bof3.core.paths import BUILD, CONFIG
+from bof3.core.paths import BUILD, CONFIG, SPLIT_ASM
 from bof3.link import graph, symbols
 from bof3.link.inputs import write_if_changed
 from bof3.link.script import prepare_link
@@ -89,7 +89,7 @@ def split_one(job: tuple[str, str]) -> Done:
         root / CONFIG / target / "target.toml", root=root, target=target
     )
     ensure_payload(root, manifest)
-    linker = root / BUILD / "asm" / target / "linker.ld"
+    linker = root / SPLIT_ASM / target / "linker.ld"
     re_split = 0
     if not splat_output_current(root, target) or not linker.is_file():
         result = split_target(root, manifest.splat)

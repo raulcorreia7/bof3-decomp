@@ -3,7 +3,7 @@
 #
 #   tools/match_context.sh <target>@0x<ADDR>     tools/match_context.sh exe/slus_004_22@0x801530D0
 #
-# The assembly is the function's split file under asm/<target>/ with the offsets trimmed; the
+# The assembly is the function's split file under build/asm/<target>/ with the offsets trimmed; the
 # attempts are the last three rows of config/attempts.jsonl for the function; the file is the
 # C file that holds its INCLUDE_ASM line. A split file named after its symbol is found by the
 # address its first instruction comment carries, as `match.sh` does.
@@ -15,8 +15,8 @@ cd "$(dirname "$0")/.."
 fn=$1
 img=${fn%@*}
 addr=$(printf '%s' "${fn#*@0x}" | tr '[:lower:]' '[:upper:]')
-a=$(find "asm/$img" -maxdepth 2 -name "*${addr}*.s" | head -1)
-[ -n "$a" ] || a=$(grep -rlE --include='*.s' "^ +/\* [0-9A-F]+ $addr " "asm/$img" 2>/dev/null | head -1)
+a=$(find "build/asm/$img" -maxdepth 2 -name "*${addr}*.s" | head -1)
+[ -n "$a" ] || a=$(grep -rlE --include='*.s' "^ +/\* [0-9A-F]+ $addr " "build/asm/$img" 2>/dev/null | head -1)
 name=$(sed -n 's/^[[:space:]]*glabel[[:space:]]*//p' "$a" 2>/dev/null | head -1)
 echo "== asm ${a:-(none)}"
 [ -z "$a" ] || sed -E 's#/\* [0-9A-F]+ ([0-9A-F]+) [0-9A-F]+ \*/#\1#' "$a" | grep -vE '^\s*$|glabel|\.size|nonmatching|endlabel|^\.|Generated' | cut -c5-74

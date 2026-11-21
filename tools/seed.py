@@ -14,7 +14,7 @@ The bundle is `work/<image>/<ADDR>/`:
     hints.md     the facts in the assembly, each with the tactic row it maps to
                  (bof3/source/hints.py)
     callees.txt  the prototype of each function the assembly calls
-    callers.txt  the lines of src/ and asm/ that call the function (`--callers`, 30 by default)
+    callers.txt  the lines of src/ and the split assembly that call the function (`--callers`, 30 by default)
 
 The trial runs `tools/try_body.py` on each m2c draft (tools/m2c_sweep.py); an exact draft stays
 in the tree, so polish it and run `meson compile -C build/meson check-<image>`. The bundle is
@@ -66,7 +66,7 @@ def callers(root: Path, func: Func, limit: int = CALLERS) -> list[str]:
         text=True,
         check=False,
     ).stdout.splitlines()
-    own = {func.src, f"asm/{func.image}/{func.name}.s"}
+    own = {func.src, f"build/asm/{func.image}/{func.name}.s"}
     lines = [ln for ln in out if ln.split(":", 1)[0] not in own]
     return [
         ln

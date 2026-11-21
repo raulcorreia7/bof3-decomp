@@ -45,7 +45,7 @@ def render(root: Path, only: list[str]) -> str:
                 f"      map: {root}/build/meson/{flat}.map",
                 f"      compiled_target: {root}/build/meson/{flat}.bin",
                 f"      elf: {root}/build/meson/{flat}.elf",
-                f"      asm: {root}/asm/{target}",
+                f"      asm: {root}/build/asm/{target}",
             ]
         )
     return "\n".join(lines) + "\n"

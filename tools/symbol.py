@@ -774,7 +774,7 @@ def ref_rows(dirs: list[str]) -> list[dict]:
             units[path.stem] = path.relative_to(ROOT).as_posix()
     counts: collections.Counter[str] = collections.Counter()
     word = re.compile(r"func_[0-9A-F]{8}")
-    for folder in ("asm", "src", "include"):
+    for folder in ("build/asm", "asm", "src", "include"):
         for path in (ROOT / folder).rglob("*"):
             if path.suffix in (".s", ".c", ".h") and path.is_file():
                 counts.update(
@@ -3253,7 +3253,7 @@ def _body_range(tree, by_file: dict[str, list], definition) -> tuple[int, int]:
 
 
 def _asm_path(image: str, name: str) -> Path | None:
-    for folder in (ROOT / "asm" / image, ROOT / "asm" / image / "hand"):
+    for folder in (ROOT / "build/asm" / image, ROOT / "asm" / image / "hand"):
         path = folder / f"{name}.s"
         if path.is_file():
             return path
@@ -4727,7 +4727,7 @@ def records(args: argparse.Namespace) -> int:
 
 # --- Signatures, extents and homes from the split assembly -----------------------------------
 
-ASM_ROOT = ROOT / "asm"
+ASM_ROOT = ROOT / "build/asm"
 SYSTEM_FOLDERS = {
     "engine/slus": "Executable",
     "engine/game": "Game",
@@ -4852,17 +4852,17 @@ def _asm_functions(image: str) -> list:
         return _ASM_FUNCTIONS[image]
     found: list = []
     folder = ASM_ROOT / image
-    if folder.is_dir():
-        for path in sorted(folder.rglob("*.s")):
-            if "data" in path.relative_to(folder).parts:
-                continue
-            try:
-                text = path.read_text(encoding="utf-8", errors="replace")
-            except OSError:
-                continue
-            found.extend(
-                asmtext.functions(text, image, path.relative_to(ROOT).as_posix())
-            )
+    split = [
+        p
+        for p in sorted(folder.rglob("*.s"))
+        if "data" not in p.relative_to(folder).parts
+    ]
+    for path in [*split, *sorted((ROOT / "asm" / image / "hand").glob("*.s"))]:
+        try:
+            text = path.read_text(encoding="utf-8", errors="replace")
+        except OSError:
+            continue
+        found.extend(asmtext.functions(text, image, path.relative_to(ROOT).as_posix()))
     _ASM_FUNCTIONS[image] = found
     return found
 
@@ -5982,7 +5982,7 @@ def _unit_of(tree, visible: set[str], function) -> str:
 
 def _is_split_unit(unit: str) -> bool:
     """Whether a unit is a split assembly file rather than a C file."""
-    return unit.startswith("asm/")
+    return unit.startswith(("asm/", "build/asm/"))
 
 
 def _file_rows(
@@ -6059,7 +6059,7 @@ def _file_rows(
                     "confidence": _confidence(counter, found_home),
                 }
             )
-    return [row for row in rows if not row["name"].startswith("asm/")]
+    return [row for row in rows if not row["name"].startswith(("asm/", "build/asm/"))]
 
 
 def signatures(args: argparse.Namespace) -> int:

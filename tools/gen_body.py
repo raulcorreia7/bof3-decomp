@@ -418,8 +418,8 @@ def asm_functions(root: Path = ROOT) -> list[Func]:
 
 
 def lifted_function(f: Func, root: Path = ROOT) -> Lift:
-    """Lift one assembly function from its ``asm/`` file."""
-    path = root / "asm" / f.image / f"{f.name}.s"
+    """Lift one assembly function from its ``build/asm/`` file."""
+    path = root / "build/asm" / f.image / f"{f.name}.s"
     return lift(instructions(path.read_text(encoding="utf-8")))
 
 

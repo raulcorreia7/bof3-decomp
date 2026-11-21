@@ -157,7 +157,7 @@ def asm_dir(source: str | Path, root: str | Path) -> str | None:
         return None
     stem = os.path.splitext(parts[-1])[0]
     hand = f"asm/{target}/hand"
-    return hand if os.path.isfile(f"{root}/{hand}/{stem}.s") else f"asm/{target}"
+    return hand if os.path.isfile(f"{root}/{hand}/{stem}.s") else f"build/asm/{target}"
 
 
 def image_header(target: str) -> str:

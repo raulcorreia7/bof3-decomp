@@ -72,7 +72,7 @@ addr=$(printf %08X "0x$hex")
 # --- The unit: the C object whose asm file holds that address --------------------------
 
 unit="" asmfile=""
-for f in $(grep -lE "^ +/\* [0-9A-F]+ $addr " "asm/$target"/*.s 2>/dev/null || :); do
+for f in $(grep -lE "^ +/\* [0-9A-F]+ $addr " "build/asm/$target"/*.s 2>/dev/null || :); do
 	u=${f##*/}
 	u=${u%.s}
 	if grep -qE "^ +src\+.*\+$u\.c\.o\(\.text\);" "$ldscript"; then
@@ -207,7 +207,7 @@ fi
 	awk '
 		/^(glabel|dlabel|jlabel) / { g = $2; next }
 		g != "" && $1 == "/*" && $5 == "*/" { printf "PROVIDE(%s = 0x%s);\n", g, $3; g = "" }' \
-		"asm/$target"/*.s $(ls "asm/$target"/hand/*.s 2>/dev/null || :)
+		"build/asm/$target"/*.s $(ls "asm/$target"/hand/*.s 2>/dev/null || :)
 } >"$tmp/link.ld"
 link() { LC_ALL=C "$BIN/ld" -EL -e 0 -T "$tmp/link.ld" -o "$tmp/cand.elf" "$co" >"$tmp/ld.log" 2>&1; }
 if ! link; then
@@ -254,9 +254,9 @@ if ! link; then
 		sed -n '1,6p' "$tmp/ld.log" >&2
 		missing=$(sed -n "s/.*undefined reference to \`\(.*\)'\$/\1/p" "$tmp/ld.log" | sort -u | tr '\n' ' ')
 		if [ -f "$map" ]; then
-			die "link failed for $fname: ${missing}is in no map of [$target] in config/symbols.toml, asm/$target or $map. Add a row to [$target] of config/symbols.toml, then retry."
+			die "link failed for $fname: ${missing}is in no map of [$target] in config/symbols.toml, build/asm/$target or $map. Add a row to [$target] of config/symbols.toml, then retry."
 		fi
-		die "link failed for $fname: ${missing}is in no map of [$target] in config/symbols.toml or asm/$target. If a C file of the image defines it, build the image once so its map exists (meson compile -C $B $flat.bin), then retry; otherwise add a row to [$target] of config/symbols.toml."
+		die "link failed for $fname: ${missing}is in no map of [$target] in config/symbols.toml or build/asm/$target. If a C file of the image defines it, build the image once so its map exists (meson compile -C $B $flat.bin), then retry; otherwise add a row to [$target] of config/symbols.toml."
 	}
 fi
 "$BIN/objcopy" -O binary -j .text "$tmp/cand.elf" "$tmp/text.bin"

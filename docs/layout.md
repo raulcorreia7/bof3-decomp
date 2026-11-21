@@ -57,7 +57,7 @@ The glosses are in [naming: disc words](naming.md#disc-words).
 Id to path: `emi/<family>/<archive>/<slot>` lives in `src/<root>/<archive>/<slot>`, where `<root>` is
 `overlays/<family>` unless the `source_folder` table in `tools/bof3/resolve/ids.py` names another;
 `exe/slus_004_22` is `src/engine/slus` and `exe/logo` is `src/logo`.
-`config/` and `asm/` follow the id, which is the disc path; `src/` follows what the code does.
+`config/` and `build/asm/` follow the id, which is the disc path; `src/` follows what the code does.
 
 The path tells the build which image a source belongs to; the build needs no source list.
 

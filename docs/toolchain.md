@@ -45,7 +45,7 @@ script is safe to run again; each step checks its result first. It runs:
 `--no-payloads` skips step 4. `--no-sdk` skips `tools/psyq.sh`: no SDK object is downloaded or
 staged, and the tracked `include/psyq/` headers still work. The build reads the shared `CARGO_TARGET_DIR` when it is set and uses
 `build/rust/` otherwise. Editors with clangd work after `meson setup`; `.clangd` reads the compile
-database in `build/meson/emit/`.
+database in `build/meson/tools/build/emit/`.
 
 `inputs/` and `toolchains/` change only through setup. Never commit `inputs/` media, or a game,
 BIOS or SDK payload.
@@ -181,7 +181,7 @@ the SDK unit list) does not.
 ### decomp.me
 
 For a scratch on [decomp.me](https://decomp.me/), choose PlayStation and `gcc2.7.2-psx`. The project
-flags are in `build/meson/emit/cflags.txt`; the base set is
+flags are in `build/meson/tools/build/emit/cflags.txt`; the base set is
 `-O2 -G0 -funsigned-char -msoft-float -gcoff -Wa,--aspsx-version=2.56,--expand-div`, and the
 scenario `sce10eff/00` adds `-fno-cse-follow-jumps -fno-cse-skip-blocks`. Define `MATCHING` and
 supply the required declarations in the scratch context. A scratch is a comparison tool;
@@ -197,7 +197,7 @@ how each is made. `meson.build` turns that into one Ninja edge per object, link 
   No tracked path contains `+`; the split rejects one that does.
 - `tools/cc.py` is the compile wrapper. It runs from the repository root and writes the depfile
   that Ninja reads.
-- `meson.build` defines the compile flags once and writes them to `build/meson/emit/cflags.txt`.
+- `meson.build` defines the compile flags once and writes them to `build/meson/tools/build/emit/cflags.txt`.
 
 ## Data files
 
@@ -235,10 +235,10 @@ Known compiler residuals:
 `tools/cc.py` is the one compiler driver. It runs GCC 2.7.2 PSX, translates the assembly through
 `third_party/maspsx`, rewrites the DMPSX placeholders (`tools/psxdecomp/dmpsx.py`) and assembles
 with `bin/internal/binutils/as`. Unknown arguments pass through. `meson setup` writes the project
-flags to `build/meson/emit/cflags.txt`, so a one-off compile is:
+flags to `build/meson/tools/build/emit/cflags.txt`, so a one-off compile is:
 
 ```sh
-.venv/bin/python tools/cc.py $(cat build/meson/emit/cflags.txt) -O2 \
+.venv/bin/python tools/cc.py $(cat build/meson/tools/build/emit/cflags.txt) -O2 \
   -c src/<path>.c -o work/<image>/<ADDR>/out.o
 ```
 
@@ -324,8 +324,8 @@ retail bytes, when a source shared with an earlier segment must keep its section
 the VRAM base changes; each states its reason in one comment. A raw `bin` row whose span starts or
 ends off a four-byte boundary stays a top-level row.
 
-One folder per image holds every generated assembly file: `asm/<target>/<unit>.s` for a function,
-`asm/<target>/data/` for a data row, `asm/<target>/hand/` for authored assembly. `INCLUDE_ASM(func_<ADDR>)`
+One folder per image holds every generated assembly file: `build/asm/<target>/<unit>.s` for a function,
+`build/asm/<target>/data/` for a data row. Authored assembly is tracked in `asm/<target>/hand/`. `INCLUDE_ASM(func_<ADDR>)`
 and `INCLUDE_RODATA(D_<ADDR>)` resolve through the image's `-DASM_DIR`.
 
 ### Build model
@@ -411,9 +411,9 @@ on failed commands, so read the output. A FLIRT signature:
 
 A resident global appears by name in every split image; one rizin project shows only its own image.
 
-1. `rg -n '\bSYM\b' src asm` lists users in source and in the split assembly (`rg` skips `asm/`
-   unless given `-uu`). For an address name, search `D_<ADDR>` and `0xADDR` too.
-2. `rg -uu 'jal\s+FN' asm/` finds cross-image callers; `rg -uu '%hi\(SYM\)|%lo\(SYM\)' asm/` finds raw
+1. `rg -uu -n '\bSYM\b' src build/asm` lists users in source and in the split assembly (`build/` is
+   git-ignored, so `rg` needs `-uu`). For an address name, search `D_<ADDR>` and `0xADDR` too.
+2. `rg -uu 'jal\s+FN' build/asm/` finds cross-image callers; `rg -uu '%hi\(SYM\)|%lo\(SYM\)' build/asm/` finds raw
    users.
 3. For each using image: `bin/rz <target> 'axt @ SYM' 'pdf @ FN'`.
 4. Record each user as `target@address: read/write, width, what it does`.
@@ -455,7 +455,7 @@ A twin is a candidate until `check-<image>` passes for every member. Sharing rul
 
 ```sh
 .venv/bin/python tools/m2ctx.py <source dir>/<image>.h -o work/<image>/<ADDR>/ctx.c
-.venv/bin/python third_party/m2c/m2c.py -t mips-gcc-c --context work/<image>/<ADDR>/ctx.c asm/<target>/func_<ADDR>.s
+.venv/bin/python third_party/m2c/m2c.py -t mips-gcc-c --context work/<image>/<ADDR>/ctx.c build/asm/<target>/func_<ADDR>.s
 ```
 
 Use `include/common.h` when the image has no header yet. `m2ctx.py` preprocesses with the build's
@@ -466,7 +466,7 @@ is a starting point; only `check-<image>` accepts it.
 
 `.venv/bin/python tools/permuter_import.py <source.c>` imports the unit's first `NON_MATCHING`
 definition, else its first `MATCH` definition, into `third_party/decomp-permuter`
-(`tools/setup.sh --matching`), with the flags in `build/meson/emit/cflags.txt`. A unit that links
+(`tools/setup.sh --matching`), with the flags in `build/meson/tools/build/emit/cflags.txt`. A unit that links
 the split assembly (`MATCH INCLUDE_ASM(name)`) imports its C model. The settings call the repo's
 `bin/internal/binutils/objdump` and `as`, so the permuter needs no MIPS binutils on `PATH`. Search the
 imported function with:

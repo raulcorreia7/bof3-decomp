@@ -5,7 +5,7 @@ Usage: tools/permuter_import.py FUNC   (after `meson setup build/meson`)
 
 FUNC is a source under ``src/``; its first NON_MATCHING definition is imported,
 else its first MATCH definition. The split assembly name is the function name,
-and the settings use the flags the Meson build compiles with (build/meson/emit).
+and the settings use the flags the Meson build compiles with (build/meson/tools/build/emit).
 """
 
 from __future__ import annotations
@@ -69,7 +69,7 @@ def main() -> int:
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument("func", type=Path, help="C source with the function")
     args = parser.parse_args()
-    emit = ROOT / "build/meson/emit"
+    emit = ROOT / "build/meson/tools/build/emit"
     try:
         compiler_flags = (emit / "cflags.txt").read_text().strip()
         assembler_flags = (emit / "asflags.txt").read_text().strip()

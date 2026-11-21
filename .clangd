@@ -1,6 +1,6 @@
-# The build writes the compile database to build/meson/emit (meson setup with a disc).
+# The build writes the compile database to build/meson/tools/build/emit (meson setup with a disc).
 # GCC 2.7.2 builds the game; clang only reads it, so drop the flags clang rejects.
 CompileFlags:
-  CompilationDatabase: build/meson/emit
+  CompilationDatabase: build/meson/tools/build/emit
   Remove: [-G*, -Wa*, -gcoff]
   Add: [--target=mipsel-none-elf, -std=gnu89]

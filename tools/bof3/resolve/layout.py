@@ -86,7 +86,7 @@ def derived_options(target: str) -> dict[str, Any]:
         "basename": "_".join(rest),
         "base_path": "../" * (len(parts) + 1),
         "target_path": f"build/bin/{target}.bin",
-        "asm_path": f"asm/{target}",
+        "asm_path": f"build/asm/{target}",
         "nonmatchings_path": ".",
         "data_path": "data",
         "src_path": "src/" + source_folder(target),

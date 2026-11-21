@@ -361,7 +361,7 @@ _SIZE_DIRECTIVE = re.compile(r"^\s*\.size\s+\S+,\s*(0x[0-9A-Fa-f]+)", re.M)
 def function_size(root: Path, targets: tuple[str, ...], name: str) -> int | None:
     """Return a function's split-assembly size, or None when no file names it."""
     for target in targets:
-        for directory in (root / "asm" / target, root / "asm" / target / "hand"):
+        for directory in (root / "build/asm" / target, root / "asm" / target / "hand"):
             path = directory / f"{name}.s"
             if not path.is_file():
                 continue

@@ -72,8 +72,8 @@ def make_repo(tmp_path: Path) -> Path:
     (repo / "build" / "ld" / "emi+test+00.ld").write_text(
         "  src+overlays+test+00+C.c.o(.text);\n"
     )
-    (repo / "asm" / TARGET).mkdir(parents=True)
-    (repo / "asm" / TARGET / "C.s").write_text(ASM)
+    (repo / "build/asm" / TARGET).mkdir(parents=True)
+    (repo / "build/asm" / TARGET / "C.s").write_text(ASM)
     (repo / "src" / "overlays" / "test" / "00").mkdir(parents=True)
     (repo / "src" / "overlays" / "test" / "00" / "C.c").write_text(SOURCE)
     binutils = repo / "bin" / "internal" / "binutils"

@@ -11,7 +11,7 @@ ROOT = Path(__file__).resolve().parents[2]
 def test_every_image_folder_follows_from_its_source_folder() -> None:
     for target, manifest in load_target_manifests(ROOT).items():
         source = ROOT / manifest.source_dir / "func_80000000.c"
-        assert asm_dir(source, ROOT) == f"asm/{target}"
+        assert asm_dir(source, ROOT) == f"build/asm/{target}"
 
 
 def test_a_source_outside_src_has_no_asm_dir() -> None:
@@ -26,4 +26,7 @@ def test_authored_assembly_selects_the_hand_folder(tmp_path: Path) -> None:
         asm_dir(tmp_path / "src/engine/slus/a.c", tmp_path)
         == "asm/exe/slus_004_22/hand"
     )
-    assert asm_dir(tmp_path / "src/engine/slus/b.c", tmp_path) == "asm/exe/slus_004_22"
+    assert (
+        asm_dir(tmp_path / "src/engine/slus/b.c", tmp_path)
+        == "build/asm/exe/slus_004_22"
+    )

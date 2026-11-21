@@ -300,7 +300,7 @@ def draft_ref(path: str, text: str, root: Path | None = None) -> str | None:
     folder = asm_dir(root / path, root)
     if not found or not folder:
         return None
-    name, image = found.group(1), folder.removeprefix("asm/")
+    name, image = found.group(1), folder.removeprefix("build/").removeprefix("asm/")
     if m := re.fullmatch(r"func_([0-9A-Fa-f]{8})", name):
         return f"{image}@0x{m.group(1).upper()}"
     symbols = read_symbols(root)

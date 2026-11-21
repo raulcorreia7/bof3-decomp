@@ -6,7 +6,7 @@
 A check, never linked: the unit includes each `.c` of the image (but not a file of raw `u8` payload bytes), in the order the compile database
 lists them, and the compiler only parses it (`-S`, the assembly is discarded). It fails on a type, a prototype or a
 macro that two files declare differently, and on a static or a function defined twice. IMAGE is the
-`ASM_DIR` of the image (`asm/emi/title/game/01`) or the part after `asm/`.
+`ASM_DIR` of the image (`build/asm/emi/title/game/01`) or the part after `build/asm/`.
 """
 
 from __future__ import annotations
@@ -151,7 +151,7 @@ def main() -> int:
     build_dir = (ROOT / args.build_dir).resolve()
     out = ROOT / args.out
     out.mkdir(parents=True, exist_ok=True)
-    wanted = {i if i.startswith("asm/") else f"asm/{i}" for i in args.image}
+    wanted = {i if i.startswith("build/asm/") else f"build/asm/{i}" for i in args.image}
     todo = [
         (image, group)
         for image, group in images(build_dir).items()

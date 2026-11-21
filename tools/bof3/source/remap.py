@@ -290,8 +290,11 @@ def read_listing(root: Path, image: str) -> dict[int, str]:
 @functools.lru_cache(maxsize=2)
 def _listing(root: str, image: str) -> dict[int, str]:
     lines: dict[int, str] = {}
-    base = Path(root) / "asm" / image
-    for path in [*sorted(base.glob("*.s")), *sorted((base / "hand").glob("*.s"))]:
+    base = Path(root) / "build/asm" / image
+    for path in [
+        *sorted(base.glob("*.s")),
+        *sorted((Path(root) / "asm" / image / "hand").glob("*.s")),
+    ]:
         for line in path.read_text(encoding="utf-8", errors="replace").splitlines():
             m = _ASM_LINE.match(line)
             if m:

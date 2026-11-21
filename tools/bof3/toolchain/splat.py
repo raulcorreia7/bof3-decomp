@@ -12,7 +12,7 @@ from pathlib import Path
 import yaml
 
 from bof3.core.io import write_atomic
-from bof3.core.paths import ASM, BUILD, CONFIG
+from bof3.core.paths import BUILD, CONFIG, SPLIT_ASM
 from bof3.link.inputs import write_if_changed
 from bof3.link.symbols import imported_map, splat_map
 from bof3.link.symbols import load as load_symbols
@@ -23,10 +23,10 @@ def split_target(root: Path, manifest_splat: str) -> subprocess.CompletedProcess
     """Run one target's Splat split; the caller decides what a failure means.
 
     A successful split records the digest of the files it read in
-    ``asm/<target>/.splat.stamp``, so a later reader can identify stale output
+    ``build/asm/<target>/.splat.stamp``, so a later reader can identify stale output
     without trusting file timestamps. The split starts from an empty generated
-    tree and leaves one folder per image: functions in ``asm/<target>/``, data
-    in ``asm/<target>/data/``, and authored assembly in ``asm/<target>/hand/``.
+    tree and leaves one folder per image: functions in ``build/asm/<target>/``, data
+    in ``build/asm/<target>/data/``.
     """
     executable = root / ".venv/bin/splat"
     if not executable.is_file():
@@ -38,7 +38,7 @@ def split_target(root: Path, manifest_splat: str) -> subprocess.CompletedProcess
     before = set(srcdir.rglob("*.c")) if srcdir.is_dir() else set()
     # Splat only adds files: a unit the map no longer splits would leave
     # its old split assembly behind for the link to pick up.
-    _clean_asm_tree(root / ASM / target)
+    _clean_asm_tree(root / SPLIT_ASM / target)
     result = subprocess.run(
         [
             str(executable),
@@ -53,26 +53,25 @@ def split_target(root: Path, manifest_splat: str) -> subprocess.CompletedProcess
     )
     if result.returncode == 0:
         _normalize_stubs(srcdir, before)
-        _extract_functions(root / ASM / target)
-        _close_functions(root / ASM / target)
-        _flatten_asm_tree(root / ASM / target)
+        _extract_functions(root / SPLIT_ASM / target)
+        _close_functions(root / SPLIT_ASM / target)
+        _flatten_asm_tree(root / SPLIT_ASM / target)
         record_splat_stamp(root, target)
         normalize_linker_script(root, target)
     return result
 
 
-_HAND_DIR = "hand"
 _DATA_DIR = "data"
 
 
 def _clean_asm_tree(base: Path) -> None:
-    """Remove one target's generated assembly, keeping authored ``hand/`` files."""
+    """Remove one target's generated assembly."""
     if not base.is_dir():
         return
     for name in ("nonmatchings", "matchings", _DATA_DIR):
         shutil.rmtree(base / name, ignore_errors=True)
     for child in base.iterdir():
-        if child.name in (_HAND_DIR, ".splat.stamp"):
+        if child.name == ".splat.stamp":
             continue
         if child.is_dir():
             shutil.rmtree(child, ignore_errors=True)
@@ -125,7 +124,7 @@ def _close_functions(base: Path) -> None:
     and the assembler warns about the missing ``.end``.
     """
     for path in base.rglob("*.s"):
-        if path.relative_to(base).parts[0] in (_HAND_DIR, _DATA_DIR):
+        if path.relative_to(base).parts[0] == _DATA_DIR:
             continue
         text = path.read_text(encoding="utf-8", errors="replace")
         open_name = None
@@ -185,7 +184,7 @@ def _flatten_asm_tree(base: Path) -> None:
     """
     for path in sorted(base.rglob("*.s")):
         relative = path.relative_to(base)
-        if len(relative.parts) == 1 or relative.parts[0] in (_HAND_DIR, _DATA_DIR):
+        if len(relative.parts) == 1 or relative.parts[0] == _DATA_DIR:
             continue
         destination = base / path.name
         if destination.exists():
@@ -199,7 +198,7 @@ def _flatten_asm_tree(base: Path) -> None:
     for directory in sorted(
         (path for path in base.rglob("*") if path.is_dir()), reverse=True
     ):
-        if directory.parent == base and directory.name in (_HAND_DIR, _DATA_DIR):
+        if directory.parent == base and directory.name == _DATA_DIR:
             continue
         with contextlib.suppress(OSError):
             directory.rmdir()
@@ -295,13 +294,15 @@ def normalize_linker_script(root: Path, target: str) -> bool:
     ``toolchains/psyq``, which an ``o`` row names as ``toolchains/psyq/...``. PsyQ objects name their read-only
     section ``.rdata``; Splat selects ``.rodata``.
     """
-    path = root / BUILD / ASM / target / "linker.ld"
+    path = root / SPLIT_ASM / target / "linker.ld"
     try:
         original = path.read_text(encoding="utf-8")
     except FileNotFoundError:
         return False
-    updated = original.replace("build/build/assets", "build/assets").replace(
-        "build/build/toolchains/psyq/", "toolchains/psyq/"
+    updated = (
+        original.replace("build/build/assets", "build/assets")
+        .replace("build/build/asm/", "build/asm/")
+        .replace("build/build/toolchains/psyq/", "toolchains/psyq/")
     )
     updated = re.sub(r"(toolchains/psyq/\S+\.o)\(\.rodata\)", r"\1(.rdata)", updated)
     if updated == original:
@@ -310,7 +311,7 @@ def normalize_linker_script(root: Path, target: str) -> bool:
     return True
 
 
-#: Digest of the files that decide one target's generated ``asm/`` tree.
+#: Digest of the files that decide one target's generated ``build/asm/`` tree.
 SPLAT_STAMP = ".splat.stamp"
 
 
@@ -376,12 +377,12 @@ def splat_input_digest(root: Path, target: str) -> str:
 
 
 def splat_output_current(root: Path, target: str) -> bool:
-    """Return True when ``asm/<target>`` was split from the current Splat inputs.
+    """Return True when ``build/asm/<target>`` was split from the current Splat inputs.
 
     A symbol-map or payload edit changes ``splat_input_digest``, so the
     generated tree is stale even though its files still exist.
     """
-    recorded = root / ASM / target / SPLAT_STAMP
+    recorded = root / SPLIT_ASM / target / SPLAT_STAMP
     try:
         saved = recorded.read_text(encoding="utf-8").strip()
     except OSError:
@@ -390,7 +391,7 @@ def splat_output_current(root: Path, target: str) -> bool:
 
 
 def record_splat_stamp(root: Path, target: str) -> None:
-    """Record the digest of the inputs used to produce ``asm/<target>``."""
+    """Record the digest of the inputs used to produce ``build/asm/<target>``."""
     write_atomic(
-        root / ASM / target / SPLAT_STAMP, splat_input_digest(root, target) + "\n"
+        root / SPLIT_ASM / target / SPLAT_STAMP, splat_input_digest(root, target) + "\n"
     )

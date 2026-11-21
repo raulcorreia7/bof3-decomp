@@ -41,6 +41,7 @@ from bof3.status.claims import DRAFT_RE, source_text
 #: The source and split-assembly folders, and the report the status site reads.
 SRC = "src"
 ASM = "asm"
+SPLIT = "build/asm"
 REPORT = "build/report.json"
 LIBRARY_UNITS = "config/sdk/library-units.jsonl"
 #: The pinned binutils wrappers and the flags the images assemble with.
@@ -197,7 +198,7 @@ class Project:
         hand = self.root / ASM / target / HAND_DIR / f"{stem}.s"
         if hand.is_file():
             return [hand], HAND_CATEGORY
-        directory = self.root / ASM / target
+        directory = self.root / SPLIT / target
         found = [directory / f"{stem}.s"] if (directory / f"{stem}.s").is_file() else []
         data = directory / DATA_DIR
         if data.is_dir():
@@ -406,7 +407,7 @@ def _game_units(
     source_dir = project.root / str(target["source_dir"])
     sources = sorted(source_dir.glob("*.c"))
     readable = _readable_data(project.root, target_id)
-    asm_dir = project.root / ASM / target_id
+    asm_dir = project.root / SPLIT / target_id
     if not asm_dir.is_dir() and any(
         project.func_address.match(source.stem) for source in sources
     ):
@@ -443,7 +444,7 @@ def _unlifted_units(
 ) -> list[dict[str, Any]]:
     """Return reviewed code with no C source: target-only and never complete."""
     target_id = str(target["id"])
-    directory = project.root / ASM / target_id
+    directory = project.root / SPLIT / target_id
     units: list[dict[str, Any]] = []
     if not directory.is_dir():
         return units

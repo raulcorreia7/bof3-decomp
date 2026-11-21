@@ -42,7 +42,7 @@ Fix causes before functions.
 
 ## The loop
 
-1. Read `asm/<target>/func_<ADDR>.s`, its callers and its prototypes.
+1. Read `build/asm/<target>/func_<ADDR>.s`, its callers and its prototypes.
 2. Draft the C in the ignored scratch folder `work/<image>/<ADDR>/`, then move it into the unit's
    `.c` as a `NON_MATCHING` draft ([markers](#markers-and-unmatched-bodies)).
 3. Compile it with the `cc` wrapper and diff it against the target object assembled from the split
@@ -110,7 +110,7 @@ take no `FAKE:` note ([helpers](conventions.md#helpers)).
 it nowhere else. A `HAND_ASM` body has the same inputs, outputs and effects as the assembly and
 keeps a short note with the reason C89 cannot express it.
 
-The build passes the image's asm folder as `-DASM_DIR="asm/<target>"` (its `hand` subfolder for
+The build passes the image's asm folder as `-DASM_DIR="build/asm/<target>"` (`asm/<target>/hand` for
 authored assembly), so the macro takes only the unit name. A match removes one `INCLUDE_ASM` line;
 `include-asm` fails when the tree has more than the merge base with `origin/main` had. It prints
 the ref it used and exits 2 when no such ref exists (`git fetch origin main`).
