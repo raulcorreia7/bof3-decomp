@@ -23,7 +23,7 @@
 NON_MATCHING void Fishing_SpawnFish(void) {
     s16 hit_value;
     s32 kind_offset;
-    s32 unk_07;
+    s32 steps;
     s32 walk;
     s32 walk_limit;
     s32 row_offset;
@@ -47,13 +47,13 @@ NON_MATCHING void Fishing_SpawnFish(void) {
         if ((s32)count > 0) {
             row_offset = row_index * FISHING_ROW_STRIDE;
             do {
-                row               = &g_Actors[row_offset];
-                g_Task            = row;
-                g_CurrentActor    = row;
-                *row              = 0x21;
-                g_Task->direction = row_index;
-                g_Task->unk_06    = column;
-                roll              = RANDOM_MASK(0xFF);
+                row            = &g_Actors[row_offset];
+                g_Task         = row;
+                g_CurrentActor = row;
+                *row           = 0x21;
+                g_Task->unk_05 = row_index;
+                g_Task->unk_06 = column;
+                roll           = RANDOM_MASK(0xFF);
             loop_4:
                 ROW_ROLL    = roll;
                 roll        = ROW_ROLL;
@@ -78,10 +78,10 @@ NON_MATCHING void Fishing_SpawnFish(void) {
                 if (kind != 0x15) {
                     limits = MEM_PTR(u8, D_801E2AD7) + (kind * FISHING_TYPE_STRIDE);
                     if (ROW_ROLL == *limits) {
-                        unk_07 = (*limits / 10) & BYTE_MASK;
-                        walk   = 0;
-                        if (unk_07 >= 0) {
-                            walk_limit = unk_07;
+                        steps = (*limits / 10) & BYTE_MASK;
+                        walk  = 0;
+                        if (steps >= 0) {
+                            walk_limit = steps;
                         loop_12:
                             if RANDOM_MASK (1) {
                                 walk += 1;

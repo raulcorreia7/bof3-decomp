@@ -8,7 +8,7 @@ MATCH void func_801EEC24(void) {
     Magic067Steps handlers;
 
     handlers = D_801EEC04;
-    SYS_DISPATCH_TASK(handlers.unk_07, 1, g_Task);
+    SYS_DISPATCH_TASK(handlers.steps, 1, g_Task);
 }
 
 #ifdef NON_MATCHING
@@ -304,7 +304,7 @@ MATCH void func_801F038C(void) {
     Magic067SecondSteps handlers;
 
     handlers = D_801EEC18;
-    SYS_DISPATCH_TASK(handlers.unk_07, 2, g_Task);
+    SYS_DISPATCH_TASK(handlers.steps, 2, g_Task);
 }
 
 MATCH void func_801F03EC(void) {
