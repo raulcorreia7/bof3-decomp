@@ -78,7 +78,7 @@ Engine modules (`src/engine/<module>`):
 | text, fonts, windows       | `UI_`                | `ui/text`                          |
 | message window and answers | `Message_`           | `ui/message`, `ui/message_answers` |
 | menu panels and kit        | `Menu_`              | `ui/menu`                          |
-| memory card, save slots    | `SAVE_`              | menu overlay `shared`              |
+| memory card, save slots    | `SAVE_`              | `overlays/menu/shared`             |
 | unnamed files              | none                 | `slus`, `game/00`                  |
 
 Game parts (`src/overlays`, `src/logo`):

@@ -24,7 +24,14 @@ defines no C body under the row name and ``config/symbols/<image>.toml`` names i
 checks the images whose layout or symbol table the change touches; without it, every image.
 ``tools/symbol.py rename`` moves the row and the unit file.
 
-Usage: python3 tools/check_names.py [--write]    (--write rewrites the baseline from the tree)
+A function takes the tag of the module it is linked in. ``docs/naming.md`` lists each folder's tags
+in its two tag tables; a function defined in a folder under those tables whose prefix is not one of
+that folder's tags fails (``Camera_Update`` in ``field/camera`` passes, ``Party_Load`` in
+``emi/loader`` does not). ``config/tag_mismatches.txt`` lists the mismatches that exist today as
+``<file><TAB><name>``; the list only shrinks, like the address list. A moved file keeps its entry
+through the rename.
+
+Usage: python3 tools/check_names.py [--write]    (--write rewrites both baselines from the tree)
 """
 
 from __future__ import annotations
@@ -40,6 +47,8 @@ from bof3.diff import renames
 from bof3.resolve.layout import target_of
 
 BASELINE = Path("config/address_names.txt")
+TAG_BASELINE = Path("config/tag_mismatches.txt")
+NAMING = Path("docs/naming.md")
 ROOTS = ("include", "src")
 SUFFIXES = (".c", ".h", ".inc")
 
@@ -125,6 +134,122 @@ PREFIXES = (
     (re.compile(r"^Matrix_"), "MATH_"),
     (re.compile(r"^Fish_"), "Fishing_"),
 )
+
+
+TAG_ROW = re.compile(r"^\|([^|]*)\|([^|]*)\|([^|]*)\|\s*$")
+TICKED = re.compile(r"`([^`]+)`")
+AREA_RANGE = re.compile(r"`(area)(\d+)`\s+to\s+`area(\d+)`")
+DEFINITION = re.compile(
+    r"^(?:[A-Za-z_]\w*[ \t*]+)+\**([A-Z][A-Za-z0-9]*)_[A-Za-z0-9]\w*[ \t]*\([^;]*$",
+    re.MULTILINE,
+)
+DEFINITION_NAME = re.compile(r"([A-Z][A-Za-z0-9]*_[A-Za-z0-9]\w*)[ \t]*\(")
+
+
+def folder_tags(text: str) -> dict[str, set[str]]:
+    """Map each source folder to the tags its row in the two tag tables of ``naming.md`` allows."""
+    folders: dict[str, set[str]] = {}
+    ranged: dict[str, set[str]] = {}
+    root = ""
+    for line in text.splitlines():
+        if line.startswith("Engine modules"):
+            root = "src/engine/"
+        elif line.startswith("Game parts"):
+            root = "src/"
+        elif line.startswith("#"):
+            root = ""
+        match = TAG_ROW.match(line) if root else None
+        if not match:
+            continue
+        tags = {
+            t.rstrip("_")
+            for cell in TICKED.findall(match.group(2))
+            for t in cell.split()
+        }
+        names = TICKED.findall(match.group(3))
+        for _, low, high in AREA_RANGE.findall(match.group(3)):
+            for number in range(int(low), int(high) + 1):
+                ranged[f"src/overlays/area/area{number:03d}"] = tags
+        for name in names:
+            if "/" in name or name == "logo":
+                base = "src/" if name.startswith(("overlays/", "logo")) else root
+                folders.setdefault(base + name.rstrip("*").rstrip("/"), set()).update(
+                    tags
+                )
+    for folder, tags in ranged.items():  # an area folder keeps the area tags too
+        folders[folder] = tags | folders.get("src/overlays/area", set())
+    return folders
+
+
+def tag_mismatches(text: str, path: str, folders: dict[str, set[str]]) -> set[str]:
+    """Names ``text`` defines whose tag the folder of ``path`` does not allow."""
+    folder = path.rsplit("/", 1)[0]
+    while folder and folder not in folders:
+        folder = folder.rsplit("/", 1)[0] if "/" in folder else ""
+    if not folder:
+        return set()
+    allowed = folders[folder]
+    found = set()
+    for line in without_comments(text).splitlines():
+        if not DEFINITION.match(line):
+            continue
+        name = DEFINITION_NAME.search(line)
+        if name and name.group(1).split("_", 1)[0] not in allowed:
+            found.add(name.group(1))
+    return found
+
+
+def without_comments(text: str) -> str:
+    return re.sub(
+        r"/\*.*?\*/|//[^\n]*",
+        lambda m: "\n" * m.group().count("\n"),
+        text,
+        flags=re.DOTALL,
+    )
+
+
+def tag_entries() -> set[str]:
+    """Every ``<file><TAB><name>`` of a function whose prefix its folder's table row does not allow."""
+    if not NAMING.is_file():
+        return set()
+    folders = folder_tags(NAMING.read_text(encoding="utf-8"))
+    entries = set()
+    for path in ls_files("src"):
+        if path.endswith((".c", ".h")):
+            entries |= {
+                f"{path}\t{name}"
+                for name in tag_mismatches(worktree_text(path), path, folders)
+            }
+    return entries
+
+
+def tag_baseline() -> set[str]:
+    if not TAG_BASELINE.is_file():
+        return set()
+    return {
+        line
+        for line in TAG_BASELINE.read_text().splitlines()
+        if line and not line.startswith("#")
+    }
+
+
+def check_tags() -> bool:
+    """Print each new tag mismatch and each stale entry; True when any was found."""
+    base = tag_baseline()
+    new, gone = fold_moves(tag_entries() - base, base - tag_entries())
+    for entry in sorted(new):
+        path, name = entry.split("\t", 1)
+        print(
+            f"{path}: {name}: the prefix is not a tag of this folder "
+            f"({NAMING} tag tables); rename it or move the file",
+            file=sys.stderr,
+        )
+    for entry in sorted(gone):
+        print(
+            f"{TAG_BASELINE}: {entry.replace(chr(9), ': ')} no longer a mismatch; delete the line",
+            file=sys.stderr,
+        )
+    return bool(new or gone)
 
 
 LAYOUT_ROW = re.compile(r"(?:func|D|data)_([0-9A-F]{8})$")
@@ -469,6 +594,7 @@ def check_diff(ref: str) -> int:
     """Check the names a change adds against ``ref``."""
     bad = _report_new_names(ref)
     bad = _report_new_offsets(ref) or bad
+    bad = check_tags() or bad
     for message in stale_rows(layout_images(ref)):
         print(message, file=sys.stderr)
         bad = True
@@ -483,7 +609,11 @@ def check_diff(ref: str) -> int:
 
 
 def write_baseline(now: set[str]) -> int:
-    """Rewrite the baseline file with the current entries."""
+    """Rewrite the baseline files with the current entries."""
+    TAG_BASELINE.write_text(
+        "# Functions whose prefix is not a tag of their folder (file, name). check_names.py only lets this shrink.\n"
+        + "".join(f"{e}\n" for e in sorted(tag_entries()))
+    )
     BASELINE.write_text(
         "# Identifiers that still carry an address (file, name). check_names.py only lets this shrink.\n"
         + "".join(f"{e}\n" for e in sorted(now))
@@ -510,6 +640,8 @@ def check_baseline(now: set[str]) -> int:
     rows = stale_rows(layout_images(None))
     for message in rows:
         print(message, file=sys.stderr)
+    if check_tags():
+        return 1
     if new or gone or rows:
         print(
             f"check-names: {len(new)} new, {len(gone)} stale, "

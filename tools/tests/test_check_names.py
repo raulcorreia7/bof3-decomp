@@ -249,3 +249,82 @@ def test_offset_macro_moved_to_a_sibling_file_is_not_new(
     git("commit", "-qm", "move")
     monkeypatch.chdir(tmp_path)
     assert check_names.main(["--diff", "HEAD~1"]) == 0, capsys.readouterr().err
+
+
+NAMING = """\
+Engine modules (`src/engine/<module>`):
+
+| Module | Tag | Folders |
+| --- | --- | --- |
+| camera | `Camera_` | `field/camera` |
+| archives | `EMI_` | `emi/loader` |
+
+Game parts (`src/overlays`, `src/logo`):
+
+| Part | Tag | Folder |
+| --- | --- | --- |
+| area | `Area_` | `overlays/area` |
+| fairy village | `Fairy_` | `overlays/commu`, `area175` to `area176` |
+"""
+
+
+def test_a_folder_allows_the_tags_of_its_table_row() -> None:
+    folders = check_names.folder_tags(NAMING)
+    assert folders["src/engine/field/camera"] == {"Camera"}
+    assert folders["src/overlays/commu"] == {"Fairy"}
+    assert folders["src/overlays/area/area176"] == {"Fairy", "Area"}
+
+
+def test_a_function_with_another_modules_tag_is_a_mismatch() -> None:
+    folders = check_names.folder_tags(NAMING)
+    text = "void Party_Load(s32 id)\n{\n}\n\ns32 Camera_Get(void)\n{\n}\n"
+    path = "src/engine/emi/loader/EMI_Load.c"
+    assert check_names.tag_mismatches(text, path, folders) == {
+        "Party_Load",
+        "Camera_Get",
+    }
+
+
+def test_a_comment_or_a_call_is_not_a_definition() -> None:
+    folders = check_names.folder_tags(NAMING)
+    text = (
+        "/* void Party_Load(s32 id) */\nvoid EMI_Load(void)\n{\n    Party_Load(1);\n}\n"
+    )
+    assert (
+        check_names.tag_mismatches(text, "src/engine/emi/loader/a.c", folders) == set()
+    )
+
+
+def test_a_folder_outside_the_tables_is_not_checked() -> None:
+    folders = check_names.folder_tags(NAMING)
+    assert (
+        check_names.tag_mismatches(
+            "void X_Y(void)\n{\n}\n", "src/engine/slus/a.c", folders
+        )
+        == set()
+    )
+
+
+def test_a_new_mismatch_fails_and_a_listed_one_passes(
+    tmp_path: Path, monkeypatch: pytest.MonkeyPatch, capsys: pytest.CaptureFixture[str]
+) -> None:
+    (tmp_path / "docs").mkdir()
+    (tmp_path / "docs/naming.md").write_text(NAMING)
+    folder = tmp_path / "src/engine/emi/loader"
+    folder.mkdir(parents=True)
+    (folder / "a.c").write_text("void Party_Load(void)\n{\n}\n")
+    subprocess.run(["git", "init", "-q"], cwd=tmp_path, check=True)
+    subprocess.run(["git", "add", "."], cwd=tmp_path, check=True)
+    monkeypatch.chdir(tmp_path)
+    assert check_names.check_tags() is True
+    assert (
+        "Party_Load: the prefix is not a tag of this folder" in capsys.readouterr().err
+    )
+    (tmp_path / "config").mkdir()
+    (tmp_path / "config/tag_mismatches.txt").write_text(
+        "src/engine/emi/loader/a.c\tParty_Load\n"
+    )
+    assert check_names.check_tags() is False
+    (folder / "a.c").write_text("void EMI_Load(void)\n{\n}\n")
+    assert check_names.check_tags() is True
+    assert "no longer a mismatch" in capsys.readouterr().err
