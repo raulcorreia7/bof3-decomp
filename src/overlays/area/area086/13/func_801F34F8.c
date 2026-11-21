@@ -6,6 +6,8 @@ NON_MATCHING s8 func_801F34F8(s32 x, s32 y) {
     s32 count;
     s32 dx;
     s32 dy;
+    s32 sx;
+    s32 sy;
     s32 height;
 
     i     = 0;
@@ -14,12 +16,14 @@ NON_MATCHING s8 func_801F34F8(s32 x, s32 y) {
         do {
             if (g_Game.members[i].header.flags != 0) {
                 height = (g_Game.members[i].speed + 2) << 15;
-                dx     = g_Game.members[i].pos.x.fixed + g_Game.members[i].unk_0C * g_Game.members[i].unk_09 - (x << 16);
+                sx     = g_Game.members[i].unk_0C * g_Game.members[i].unk_09;
+                sy     = g_Game.members[i].unk_10 * g_Game.members[i].unk_09;
+                dx     = g_Game.members[i].pos.x.fixed + sx - (x << 16);
                 if (dx < 0) {
                     dx = -dx;
                 }
                 if (dx < height) {
-                    dy = g_Game.members[i].pos.y.fixed + g_Game.members[i].unk_10 * g_Game.members[i].unk_09 - (y << 16);
+                    dy = g_Game.members[i].pos.y.fixed + sy - (y << 16);
                     if (dy < 0) {
                         dy = -dy;
                     }
