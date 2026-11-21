@@ -73,6 +73,34 @@ def has_splat(root: Path, target: str) -> bool:
     return (root / CONFIG / target / "splat.yaml").is_file()
 
 
+def image_layout(root: Path, image: str):
+    """The reviewed layout of an image's ``splat.yaml``, or None when it cannot be read."""
+    from bof3.resolve.layout import parse_splat_layout, splat_facts
+
+    path = root / CONFIG / image / "splat.yaml"
+    if not path.is_file():
+        return None
+    try:
+        return parse_splat_layout(path, splat_facts(path).load_address)
+    except (OSError, ValueError, ImportError):
+        return None
+
+
+def manifest_layout(root: Path, manifest):
+    """The reviewed layout of an image manifest."""
+    from bof3.resolve.layout import parse_splat_layout
+
+    return parse_splat_layout(root / manifest.splat, manifest.load_address)
+
+
+def splat_owners(root: Path, target: str) -> list[str]:
+    """The targets whose rows Splat reads for ``target``, in order."""
+    from bof3.resolve.layout import read_splat
+
+    _, document = read_splat(root / CONFIG / target / "splat.yaml")
+    return list(document["symbol_owners"])
+
+
 def splat_targets(root: Path) -> list[str]:
     """The targets that have a ``splat.yaml``, sorted by path."""
     folder = root / CONFIG

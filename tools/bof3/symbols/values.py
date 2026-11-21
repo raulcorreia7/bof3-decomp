@@ -8,13 +8,14 @@ from dataclasses import dataclass
 from pathlib import Path
 
 from bof3.source import ctext
-from bof3.symbols.accesses import RECORD_HEAD, _task_types
+from bof3.symbols.accesses import _task_types
 from bof3.symbols.context import Context
 from bof3.symbols.headers import (
-    _match_brace,
     _read_header_values,
     _resolve_values,
     _value_headers,
+    record_blocks,
+    source_files,
 )
 from bof3.symbols.layers import _layer_manifests
 
@@ -253,21 +254,11 @@ def _value_records(
     """Return each record's members and each typedef alias's type, from every header."""
     records: dict[str, dict[str, tuple[str, str]]] = {}
     typedefs: dict[str, str] = {}
-    for path in ctext.tracked_c(ctx.root):
-        if not path.endswith(".h") or path.startswith("include/psyq/"):
-            continue
-        text = ctext.read(ctx.root, path)
+    for _, text in source_files(ctx):
         masked = ctext.mask(text)
-        for match in RECORD_HEAD.finditer(masked):
-            opening = match.end() - 1
-            closing = _match_brace(masked, opening)
-            if closing < 0:
-                continue
-            tag = match.group(1) or ""
-            tail = re.match(r"\s*(\w+)\s*;", masked[closing + 1 :])
-            alias = tail.group(1) if tail else ""
+        for opening, closing, found in record_blocks(masked):
             members = _value_members(text[opening + 1 : closing], records)
-            for name in {part for part in (tag, alias) if part}:
+            for name in found:
                 if name not in records or len(members) > len(records[name]):
                     records[name] = members
         for match in VALUE_TYPEDEF_LINE.finditer(masked):
@@ -281,10 +272,7 @@ def _value_records(
 def _value_globals(ctx: Context) -> dict[str, str]:
     """Return each ``extern`` global's declared type."""
     found: dict[str, str] = {}
-    for path in ctext.tracked_c(ctx.root):
-        if not path.endswith(".h") or path.startswith("include/psyq/"):
-            continue
-        text = ctext.read(ctx.root, path)
+    for _, text in source_files(ctx):
         for match in VALUE_GLOBAL_LINE.finditer(ctext.mask(text)):
             found.setdefault(match.group(2), (match.group(1) + match.group(3)).strip())
     return found
@@ -298,10 +286,7 @@ def _value_prototypes(
 
     params: dict[str, list[tuple[str, str]]] = {}
     returns: dict[str, str] = {}
-    for path in ctext.tracked_c(ctx.root):
-        if not path.endswith(".h") or path.startswith("include/psyq/"):
-            continue
-        text = ctext.read(ctx.root, path)
+    for _, text in source_files(ctx):
         for match in VALUE_PROTO.finditer(ctext.mask(text)):
             name = match.group(2)
             if name in ("if", "while", "for", "switch", "sizeof", "return"):
@@ -317,10 +302,7 @@ def _value_prototypes(
 def _value_views(ctx: Context) -> list[tuple[str, str, str]]:
     """Return ``(folder, macro, type)`` for each macro that views a global as a record."""
     found = []
-    for path in ctext.tracked_c(ctx.root):
-        if not path.endswith(".h") or path.startswith("include/psyq/"):
-            continue
-        text = ctext.read(ctx.root, path)
+    for path, text in source_files(ctx):
         for match in VALUE_VIEW_ANY.finditer(text):
             found.append((str(Path(path).parent), match.group(1), match.group(2)))
     return found

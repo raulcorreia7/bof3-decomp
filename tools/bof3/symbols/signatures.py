@@ -30,12 +30,10 @@ from bof3.symbols.context import RESIDENT, Context, Table
 from bof3.symbols.layers import (
     _layer_layouts,
     _layer_manifests,
-    _layer_tables,
     _layer_tree,
-    _looks_like_table,
-    _retail_table_entries,
-    _table_entries,
     assign_layers,
+    table_inputs,
+    table_resolver,
 )
 from bof3.symbols.mips import _reg_name
 from bof3.symbols.probe import Row, locate, type_layout
@@ -174,12 +172,7 @@ def _table_callees(
         for functions in assembly.functions.values()
         for function in functions
     }
-    tables, names = _layer_tables(tree, known, manifests)
-    symbols = read_symbols(ctx.root)
-    for rows in symbols.values():
-        for name, row in rows.items():
-            if isinstance(row, dict) and _looks_like_table(row):
-                names.add(name)
+    tables, names, symbols = table_inputs(ctx, tree, known, manifests)
     referenced: dict[str, set[str]] = collections.defaultdict(set)
     for (image, _name), facts in assembly.facts.items():
         if facts.indirect:
@@ -192,16 +185,8 @@ def _table_callees(
     for functions in assembly.functions.values():
         for function in functions:
             by_address[function.address].append(function)
+    resolve_table = table_resolver(tables, symbols, layouts, payloads, by_address)
     found: dict[tuple[str, str], list[str]] = {}
-
-    def resolve_table(image: str, name: str) -> list[str]:
-        entries = _table_entries(tables, image, name)
-        if not entries:
-            entries = _retail_table_entries(
-                image, name, symbols, layouts, payloads, by_address
-            )
-        return entries
-
     for image, names_here in sorted(referenced.items()):
         for name in sorted(names_here & wanted):
             found[(image, name)] = resolve_table(image, name)

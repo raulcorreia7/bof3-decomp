@@ -13,11 +13,12 @@ from bof3.adapters.config import (
     read_lines,
     read_link,
     read_symbols,
+    splat_owners,
     splat_targets,
     symbol_files,
 )
 from bof3.core.cache import file_memo
-from bof3.core.paths import BUILD, CONFIG
+from bof3.core.paths import BUILD
 from bof3.symbols import SPLIT, Entry, LinkError, overlaps, table_entries
 
 __all__ = [
@@ -65,14 +66,6 @@ def splat_map(target: str) -> str:
 
 def link_map(target: str) -> str:
     return f"{OUT}/{_flat(target)}.link"
-
-
-def splat_owners(root: Path, target: str) -> list[str]:
-    """Return the targets whose rows Splat reads for ``target``, in order."""
-    from bof3.resolve.layout import read_splat
-
-    _, document = read_splat(root / CONFIG / target / "splat.yaml")
-    return list(document["symbol_owners"])
 
 
 def link_owners(root: Path, target: str) -> list[str]:
