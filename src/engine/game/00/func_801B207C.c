@@ -9,7 +9,7 @@ MATCH void func_801B207C(void) {
 
     g_Task->timer += 1;
     g_Task->direction = (g_Task->direction + 1) & 0x7;
-    Actor_SelectScript(g_Task->direction);
+    Script_Select(g_Task->direction);
     frames = g_Task->timer;
     for (i = 1; i < g_PartySize; i++) {
         work   = (Actor*)((u8*)g_Game.members + i * BATTLE_PARTY_STRIDE);

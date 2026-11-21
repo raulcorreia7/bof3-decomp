@@ -41,7 +41,7 @@ void func_800C236C(u8 phase);
     Area_SelectSceneRecord(0x83)
 
 #define BOSS008_END_BATTLE_FINISH()                   \
-    Actor_SelectScript(0);                            \
+    Script_Select(0);                                 \
     g_Task->unk_58 = g_BattleEnemyBattlers[0].unk_58; \
     g_Task->unk_5A = g_BattleEnemyBattlers[0].unk_5A
 

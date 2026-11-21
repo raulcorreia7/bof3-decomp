@@ -7,5 +7,5 @@ MATCH void Boss_EndBattle(void) {
     entry          = func_800AC754(0);
     g_CurrentActor = entry;
     TASK_SET(entry);
-    Actor_SelectScript(0);
+    Script_Select(0);
 }

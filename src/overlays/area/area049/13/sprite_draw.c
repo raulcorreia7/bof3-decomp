@@ -43,7 +43,7 @@ MATCH void func_801170D8(AreaSprite* sprite) {
     SetPolyFT4(primitive);
     SetSemiTrans(primitive, 1);
 
-    Area_ProjectPoint(object, &screen);
+    Camera_ProjectPoint(object, &screen);
     size[0] = sprite->half_size;
     size[1] = sprite->half_size;
     Game_ProjectWorldPoint(object, size, size);
@@ -109,7 +109,7 @@ MATCH u8 func_80117410(void) {
     u8  i;
     s32 result;
 
-    Area_SetCameraMatrix(scratch);
+    Camera_SetMatrix(scratch);
     GFX_SET_DRAW_MODE(GetTPage(TPAGE_DEPTH_4BIT, TPAGE_ABR_ADD, FONT_TPAGE_X, FONT_TPAGE_Y));
     GFX_AddPrim(GFX_LAYER_EFFECT_FRONT, 12);
 
@@ -257,7 +257,7 @@ MATCH u8 func_80117900(void) {
     s32         result;
     AreaSprite* work;
 
-    Area_SetCameraMatrix(scratch);
+    Camera_SetMatrix(scratch);
     GFX_SET_DRAW_MODE(GetTPage(TPAGE_DEPTH_4BIT, TPAGE_ABR_ADD, FONT_TPAGE_X, FONT_TPAGE_Y));
     GFX_AddPrim(GFX_LAYER_EFFECT_FRONT, 12);
 

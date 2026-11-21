@@ -142,7 +142,7 @@ MATCH void func_801F7084(SceneBox* box) {
     vertex->vx = box->far.pos.vx;
     vertex->vy = box->far.pos.vy - box->far.half_y;
     vertex->vz = box->far.pos.vz;
-    Area_SetCameraMatrix(scratch);
+    Camera_SetMatrix(scratch);
     func_801F732C(0, 1, 2, 3, 1, 1);
     func_801F732C(0, 1, 4, 5, 1, 0);
     func_801F732C(2, 0, 6, 4, 1, 0);
@@ -157,10 +157,10 @@ MATCH void func_801F732C(u8 v0, u8 v1, u8 v2, u8 v3, s32 shade0, s32 shade1) {
     u8       color1;
 
     primitive = GFX_BeginPolyG4(1);
-    Area_ProjectPoint((s32*)&D_801FA240[v0], (DVECTOR*)&primitive->x0);
-    Area_ProjectPoint((s32*)&D_801FA240[v1], (DVECTOR*)&primitive->x1);
-    Area_ProjectPoint((s32*)&D_801FA240[v2], (DVECTOR*)&primitive->x2);
-    Area_ProjectPoint((s32*)&D_801FA240[v3], (DVECTOR*)&primitive->x3);
+    Camera_ProjectPoint((s32*)&D_801FA240[v0], (DVECTOR*)&primitive->x0);
+    Camera_ProjectPoint((s32*)&D_801FA240[v1], (DVECTOR*)&primitive->x1);
+    Camera_ProjectPoint((s32*)&D_801FA240[v2], (DVECTOR*)&primitive->x2);
+    Camera_ProjectPoint((s32*)&D_801FA240[v3], (DVECTOR*)&primitive->x3);
     color0 = (shade0 << 7) | ((g_FrameCount & 1) << 2);
     color1 = (shade1 << 7) | ((g_FrameCount & 1) << 2);
     setRGB0(primitive, color0, color0, color0 >> 1);
@@ -223,7 +223,7 @@ MATCH void func_801F75BC(u8 weight, u8 shade) {
 
     SetDrawMode((DR_MODE*)g_GfxPrimCursor, 0, 1, GetTPage(TPAGE_DEPTH_4BIT, TPAGE_ABR_ADD, FONT_TPAGE_X, FONT_TPAGE_Y), 0);
     GFX_AddPrim(GFX_LAYER_UI, sizeof(DR_MODE));
-    ((void (*)(void))Area_SetCameraMatrix)();
+    ((void (*)(void))Camera_SetMatrix)();
     for (i = 0; i < 5; i++) {
         line = (LINE_G2*)g_GfxPrimCursor;
         SetLineG2(line);
@@ -232,8 +232,8 @@ MATCH void func_801F75BC(u8 weight, u8 shade) {
         point[0] = (((KEY_WORD(off, 4) - KEY_WORD(off, 0)) * weight) >> 4) + KEY_WORD(off, 0);
         point[1] = (((KEY_WORD(off, 5) - KEY_WORD(off, 1)) * weight) >> 4) + KEY_WORD(off, 1);
         point[2] = (((KEY_WORD(off, 6) - KEY_WORD(off, 2)) * weight) >> 4) + KEY_WORD(off, 2);
-        Area_ProjectPoint((s32*)((u8*)D_801FA2C0 + off), (DVECTOR*)&line->x0);
-        Area_ProjectPoint(point, (DVECTOR*)&line->x1);
+        Camera_ProjectPoint((s32*)((u8*)D_801FA2C0 + off), (DVECTOR*)&line->x0);
+        Camera_ProjectPoint(point, (DVECTOR*)&line->x1);
         flicker    = (g_FrameCount & 1) << 2;
         first_tint = (u8)(((flicker + 0x80) * shade) >> 8);
         line->r0   = ((flicker + 0x80) * shade) >> 8;
@@ -406,7 +406,7 @@ MATCH void func_801F7CF0(SceneParticle* row) {
     pos       = row->pos;
     pos.vz <<= 8;
     Game_ProjectWorldPoint(&pos, &screen, &scale);
-    Area_ProjectPoint((s32*)&pos, &screen);
+    Camera_ProjectPoint((s32*)&pos, &screen);
     prim->x0 = prim->x2 = screen.vx - scale.vx;
     prim->x1 = prim->x3 = screen.vx + scale.vx;
     prim->y0 = prim->y1 = screen.vy - scale.vx;
@@ -424,7 +424,7 @@ MATCH void func_801F7EC0() {
     u8             i;
     s32            height;
 
-    Area_SetCameraMatrix(camera);
+    Camera_SetMatrix(camera);
     row = MEM_PTR(SceneParticle, AREA_WORK);
     for (i = 0; i < 128; row++, i++) {
         if (row->life != 0) {

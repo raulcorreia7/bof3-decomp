@@ -11,7 +11,7 @@ MATCH void func_801C56E4(void) {
     if (g_Task->direction == FACING_RIGHT) {
         index = 58;
     }
-    Actor_RequestScript(index);
+    Script_Request(index);
     GFX_LoadPalette((g_Task->unk_05 << 6) + GAME_PALETTE_STAGE, 0);
     Actor_ClearVelocity();
     state               = g_Task;

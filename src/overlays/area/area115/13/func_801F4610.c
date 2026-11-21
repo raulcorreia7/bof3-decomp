@@ -21,6 +21,6 @@ MATCH void func_801F4610(void) {
     row_offset                                                 = g_Task->param.unk_0B;
     map_offset                                                 = D_801F4D90[row_offset].y * g_AreaMapBundle.width;
     *(g_AreaCellCodes + map_offset + D_801F4D90[row_offset].x) = 0xA0;
-    Actor_SelectScript(0);
+    Script_Select(0);
     g_Task->header.mode = 1;
 }

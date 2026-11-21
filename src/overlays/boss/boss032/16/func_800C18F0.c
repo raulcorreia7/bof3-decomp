@@ -1,7 +1,7 @@
 #include "boss032_16.h"
 
 MATCH void func_800C18F0(void) {
-    Actor_RequestScript(0);
+    Script_Request(0);
     Actor_StepAnimOnce();
     Battle_DefeatEnemy();
     g_BattleCurrentEnemy->turn.damage_flags.value |= BATTLER_DAMAGE_SKIP_ACTION_STEP;

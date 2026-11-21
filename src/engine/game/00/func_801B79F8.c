@@ -5,9 +5,9 @@ MATCH void func_801B79F8(void) {
     g_Task->pos.x.fixed -= g_FacingOffsets[g_Task->direction].x * ((g_Task->voice_flags.scene_flag + 1) << 5);
     g_Task->pos.y.fixed -= g_FacingOffsets[g_Task->direction].y * ((g_Task->voice_flags.scene_flag + 1) << 5);
     if (g_Task->direction == FACING_LEFT) {
-        Actor_RequestScript(0x3C);
+        Script_Request(0x3C);
     } else {
-        Actor_RequestScript(0x3D);
+        Script_Request(0x3D);
     }
     if (g_Task->unk_05 != 0) {
         Actor_SetSemiTransparent();

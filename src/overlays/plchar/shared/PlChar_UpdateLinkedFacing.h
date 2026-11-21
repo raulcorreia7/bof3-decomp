@@ -3,7 +3,7 @@ MATCH void PlChar_UpdateLinkedFacing(void) {
     u8 timer;
 
     if (Actor_StepAnimOnce() & BYTE_MASK) {
-        Actor_RequestScript(g_Task->direction);
+        Script_Request(g_Task->direction);
         g_Task->unk_03 = 2;
         return;
     }

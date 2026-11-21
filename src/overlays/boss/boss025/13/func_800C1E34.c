@@ -8,7 +8,7 @@ MATCH void func_800C1E34(void) {
             Battle_RequestEnemyScript(0);
         }
     } else {
-        Actor_RequestScript(0xC);
+        Script_Request(0xC);
     }
     func_801E30F8();
     g_Task->header.mode++;

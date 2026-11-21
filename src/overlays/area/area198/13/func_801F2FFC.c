@@ -11,7 +11,7 @@ MATCH void func_801F2FFC(void) {
     COORD_INT(work->pos.z) -= 0x10;
     count = g_ScriptState->count;
     if (count < 0x80 && (count & 3) == 0) {
-        Actor_BeginScript(D_801F43AC[(count >> 2) & 3], (u16)(work->script_pc - 2));
+        Script_Begin(D_801F43AC[(count >> 2) & 3], (u16)(work->script_pc - 2));
     }
     g_ScriptState->count++;
     work = g_Task;

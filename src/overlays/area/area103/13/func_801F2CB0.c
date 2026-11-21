@@ -11,7 +11,7 @@ MATCH void func_801F2CB0(void) {
     pos.y = g_Task->pos.y.fixed;
     pos.z = g_Task->pos.z.fixed;
     func_801F352C(&pos, g_Task->unk_0A << 2, 0x80, 0);
-    Area_SetCameraMatrix(&matrix);
+    Camera_SetMatrix(&matrix);
     row = (AreaSpinEffect*)AREA_WORK;
     for (i = 0; i < 3; i++) {
         func_801F2FB8(row);

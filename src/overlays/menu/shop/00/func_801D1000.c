@@ -18,7 +18,7 @@ MATCH void func_801D1000(void) {
         TASK_SET(slot);
         if ((slot[7] & 0x8) == 0) {
             slot[8] = slot[0x79];
-            Actor_DispatchSelectorScript(g_Task->direction);
+            Script_DispatchSelector(g_Task->direction);
             slot[0x74] |= 8;
         }
         slot[0x74] &= 0xDF;

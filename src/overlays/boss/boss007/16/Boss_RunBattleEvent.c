@@ -28,7 +28,7 @@ MATCH u8 Boss_RunBattleEvent(u32 mode) {
             message_state               = (u8*)&g_BattleMessageState;
             *message_state              = 1;
             SP_REF(PartyMember*, 0x44u) = &g_Game.members[0];
-            Actor_SelectScript(0x2C);
+            Script_Select(0x2C);
             g_BattleRowCursor   = 0x3C;
             g_Battle.phase.mode = BATTLE_MODE_ROUND_END;
             g_Battle.phase.step = 2;

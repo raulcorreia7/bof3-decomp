@@ -11,12 +11,12 @@ MATCH void Area_DrawYellowLine(s32* from, s32* to, u8 intensity) {
     prim = (POLY_G4*)g_GfxPrimCursor;
     SetPolyG4(prim);
     SetSemiTrans(prim, 1);
-    Area_ProjectPoint(from, &projected);
+    Camera_ProjectPoint(from, &projected);
     prim->x0 = projected.vx + 1;
     prim->y0 = projected.vy - 1;
     prim->x1 = projected.vx;
     prim->y1 = projected.vy;
-    Area_ProjectPoint(to, &projected);
+    Camera_ProjectPoint(to, &projected);
     prim->x2 = projected.vx + 1;
     prim->y2 = projected.vy - 1;
     prim->x3 = projected.vx;
@@ -30,12 +30,12 @@ MATCH void Area_DrawYellowLine(s32* from, s32* to, u8 intensity) {
     prim = (POLY_G4*)g_GfxPrimCursor;
     SetPolyG4(prim);
     SetSemiTrans(prim, 1);
-    Area_ProjectPoint(from, &projected);
+    Camera_ProjectPoint(from, &projected);
     prim->x0 = projected.vx;
     prim->y0 = projected.vy;
     prim->x1 = projected.vx - 1;
     prim->y1 = projected.vy + 1;
-    Area_ProjectPoint(to, &projected);
+    Camera_ProjectPoint(to, &projected);
     prim->x2 = projected.vx;
     prim->y2 = projected.vy;
     prim->x3 = projected.vx - 1;
@@ -56,7 +56,7 @@ MATCH void Area_DrawYellowLine(s32* from, s32* to, u8 intensity) {
         if (current.x < from[0]) {
             break;
         }
-        Area_ProjectPoint(&current.x, &projected);
+        Camera_ProjectPoint(&current.x, &projected);
         segment = (TILE*)g_GfxPrimCursor;
         SetTile1(segment);
         SetSemiTrans(segment, 1);

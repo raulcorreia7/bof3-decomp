@@ -10,7 +10,7 @@ MATCH void func_800C1A08(void) {
         Area_SelectSceneRecord(0x5F);
         g_BattleCurrentEnemy->script = &D_800C2188;
         g_Task->unk_2A               = 0;
-        Actor_SelectScript(1U);
+        Script_Select(1U);
         g_BattleResult |= 4;
         Area_SetCellPalette(100, 20);
         g_Task->header.step += 1;

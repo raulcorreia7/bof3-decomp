@@ -83,7 +83,7 @@ MATCH void func_801EEF80(void) {
     g_Task->unk_29           = 4;
     g_Task->unk_2C.value     = 0;
     g_Task->unk_2B           = 1;
-    Actor_SelectScript(0);
+    Script_Select(0);
     g_Task->unk_09 = 0;
     g_Task->header.step += 1;
 }
@@ -175,7 +175,7 @@ MATCH void func_801EF4A4(void) {
     g_Task->unk_29       = 4;
     g_Task->unk_2C.value = 0;
     g_Task->unk_2B       = 0;
-    Actor_SelectScript(0U);
+    Script_Select(0U);
     g_Task->unk_09 = 0;
     g_Task->header.step += 1;
 }

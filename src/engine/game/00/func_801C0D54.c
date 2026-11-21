@@ -7,7 +7,7 @@ MATCH void func_801C0D54(void) {
         arg = 0x3B;
         if (g_Task->direction == FACING_RIGHT)
             arg = 0x3A;
-        Actor_RequestScript(arg);
+        Script_Request(arg);
         g_Task->header.flags &= ~ACTOR_FLAG_HIDDEN;
         COORD_INT(g_Task->pos.z) = Area_ReadHeight(g_Task->pos.x.fixed, g_Task->pos.y.fixed) + 0x7D0;
         Actor_ClearVelocity();

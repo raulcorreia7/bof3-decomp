@@ -9,8 +9,8 @@ MATCH void func_801A4914(void) {
     flags                 = work->option_flags;
     if (flags & ACTOR_OPT_ROUTE_LOCKED) {
         work->mirror = (flags >> 4) & 0x1;
-        Actor_SelectScript(g_Task->direction);
+        Script_Select(g_Task->direction);
         return;
     }
-    Actor_DispatchSelectorScript(work->direction);
+    Script_DispatchSelector(work->direction);
 }

@@ -14,9 +14,9 @@ MATCH void func_801B60DC(s32 actor_index) {
     if ((*(u8*)&g_GameRequestFlags & (AREA_LOAD_FLAG_NO_ACTOR_SCRIPT | AREA_LOAD_FLAG_WORLD_MAP)) != 1) {
         if (!(g_GameRequestFlags & AREA_LOAD_FLAG_NO_ACTOR_SCRIPT)) {
             if (s_RouteSlotAlternates[g_Game.current->chr.character_id] != 0) {
-                Actor_RequestScript((g_Task->direction >> 1) + 0x34);
+                Script_Request((g_Task->direction >> 1) + 0x34);
             } else {
-                Actor_RequestScript(g_Task->direction);
+                Script_Request(g_Task->direction);
             }
         }
         g_Game.current->status.field.slot = actor_index;

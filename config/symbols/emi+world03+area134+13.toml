@@ -1,7 +1,7 @@
 ["emi/world03/area134/13"]
 g_AreaModuleId = { addr = 0x801F2C00, source = "Module id of the area: the first payload word of its overlay, 52 + the area number." }
 Area_ClearWorkColumn = { addr = 0x801F4974, type = "func", source = "Zeroes byte 0 of each of the 0x80 work rows, 0x14 bytes apart." }
-Area_AddCameraOffsetX2 = { addr = 0x801F5194, type = "func", source = "Adds 2 to g_AreaCameraOffsetX, the X shift Area_SetCameraMatrix adds to the projected camera translation, and sets g_AreaCameraRefreshCount to 2 so the camera refreshes for two frames." }
-Area_SubCameraOffsetX2 = { addr = 0x801F51BC, type = "func", source = "Subtracts 2 from g_AreaCameraOffsetX, the X shift Area_SetCameraMatrix adds to the projected camera translation, and sets g_AreaCameraRefreshCount to 2 so the camera refreshes for two frames." }
-Area_ResetCameraOffsetX = { addr = 0x801F51E4, type = "func", source = "Zeroes g_AreaCameraOffsetX, the X shift Area_SetCameraMatrix adds to the projected camera translation, and sets g_AreaCameraRefreshCount to 2 so the camera refreshes for two frames." }
+Area_AddCameraOffsetX2 = { addr = 0x801F5194, type = "func", source = "Adds 2 to g_AreaCameraOffsetX, the X shift Camera_SetMatrix adds to the projected camera translation, and sets g_AreaCameraRefreshCount to 2 so the camera refreshes for two frames." }
+Area_SubCameraOffsetX2 = { addr = 0x801F51BC, type = "func", source = "Subtracts 2 from g_AreaCameraOffsetX, the X shift Camera_SetMatrix adds to the projected camera translation, and sets g_AreaCameraRefreshCount to 2 so the camera refreshes for two frames." }
+Area_ResetCameraOffsetX = { addr = 0x801F51E4, type = "func", source = "Zeroes g_AreaCameraOffsetX, the X shift Camera_SetMatrix adds to the projected camera translation, and sets g_AreaCameraRefreshCount to 2 so the camera refreshes for two frames." }
 Area_ResetCameraOffsetY = { addr = 0x801F53D0, type = "func", source = "Zeroes g_AreaCameraOffsetY, the Y shift of the camera, and sets g_AreaCameraRefreshCount to 2 so the camera refreshes for two frames." }

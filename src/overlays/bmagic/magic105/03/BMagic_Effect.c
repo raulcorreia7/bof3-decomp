@@ -236,7 +236,7 @@ MATCH void func_801EF930(void) {
     g_Task->unk_24       = 4;
     g_Task->unk_2C.value = 0;
     g_Task->unk_2B       = 0;
-    Actor_SelectScript((RANDOM_MASK(1)) + 1);
+    Script_Select((RANDOM_MASK(1)) + 1);
     g_Task->timer = RANDOM_MASK(0x3F);
     g_Task->header.step += 1;
 }

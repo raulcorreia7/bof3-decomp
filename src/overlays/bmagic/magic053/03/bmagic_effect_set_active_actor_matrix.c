@@ -66,7 +66,7 @@ MATCH void func_801EF174(void) {
         sprite->unk_2B       = 1;
         sprite->unk_2C.value = 0;
         g_Task->unk_24       = 0;
-        Actor_SelectScript(0);
+        Script_Select(0);
         g_Task->param.unk_0B = 0;
         g_Task->unk_09       = 16;
         g_Task->timer        = 16;
@@ -106,7 +106,7 @@ MATCH void func_801EF420(void) {
                 g_Task->unk_04++;
             }
         }
-        Actor_SelectScript(1);
+        Script_Select(1);
         g_AreaCameraAngle.vx += 0x14;
         g_Task->unk_09 = 4;
         g_Task->header.step += 1;

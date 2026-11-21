@@ -31,7 +31,7 @@ MATCH void func_800ADA4C(void) {
     row                       = base + ((*pair + slotp->unk_09) * 4);
     slot                      = row[slotp->timer];
     if (slot != GAME_NONE) {
-        Actor_SelectScript(slot);
+        Script_Select(slot);
     }
     D_801485D6        = *pair;
     work              = (PartyMember*)g_Task;

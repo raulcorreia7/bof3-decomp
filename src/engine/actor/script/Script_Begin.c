@@ -1,0 +1,49 @@
+#include "engine/slus/slus.h"
+
+/* Selects the stream entry for `selector`: a selector with bit 7 set picks the
+ * entry from the current hint's mode row, otherwise it is kept as the entry
+ * index; then points unk_50 at that entry's script unless bit 0 of unk_24
+ * hands it to func_8014DC08. */
+MATCH void Script_Begin(s32 script_index, s32 position) {
+    u8(*modes)[3];
+    u8* table;
+    s32 entry;
+    u8  flags;
+    u8  selector;
+    u16 code;
+    u8  hint;
+
+    selector = script_index;
+    code     = position;
+    if (script_index & 0x80) {
+        if (!(g_Task->active_flags & 0x2)) {
+            modes          = (u8(*)[3])D_80181B34;
+            hint           = g_EmiLoadedCharacterIndex & EMI_LOADED_INDEX_MASK;
+            g_Task->unk_64 = modes[hint][g_Task->unk_2C];
+            g_Task->unk_68 = g_Task->sheet_row;
+            g_Task->active_flags ^= 3;
+        }
+        entry = ((s32*)&D_80181C7C)[g_Task->unk_64];
+        entry += (script_index & 0x7F) * 4;
+        Area_SelectSceneRecord(*(u16*)entry);
+        g_Task->script_record = *(u8*)(entry + 2);
+        g_Task->mirror        = *(u8*)(entry + 3);
+    } else {
+        flags = g_Task->active_flags;
+        if (flags & 0x2) {
+            flags &= 0xFC;
+            /* FAKE: the retail call passes script_index as a third argument the real prototype lacks. */
+            ((void (*)(s32, s32, s32))Party_LoadMemberSprite)((u8)g_Task->unk_64, (g_Task->unk_68 / 80) & BYTE_MASK, script_index);
+            g_Task->active_flags = g_Task->active_flags | flags;
+        }
+        g_Task->script_record = selector;
+    }
+    if (g_Task->active_flags & 0x1) {
+        Actor_SelectSprite(g_Task->script_record);
+    } else {
+        table = (u8*)g_Scripts;
+        table += ((s32*)table)[g_Task->unk_2C];
+        g_Task->script = table + ((u16*)table)[g_Task->script_record];
+    }
+    Script_Seek(code);
+}

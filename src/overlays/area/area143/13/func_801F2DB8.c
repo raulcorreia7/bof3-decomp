@@ -9,7 +9,7 @@ MATCH void func_801F2DB8(SpriteSpark* spark) {
     if (spark->blink != 0) {
         tile1 = (TILE_1*)g_GfxPrimCursor;
         SetTile1(tile1);
-        Area_ProjectPoint(&spark->pos.vx, (DVECTOR*)&tile1->x0);
+        Camera_ProjectPoint(&spark->pos.vx, (DVECTOR*)&tile1->x0);
         tile1->b0 = 0;
         tile1->g0 = 0;
         tile1->r0 = 0;
@@ -21,7 +21,7 @@ MATCH void func_801F2DB8(SpriteSpark* spark) {
         tile = (TILE*)g_GfxPrimCursor;
         SetTile(tile);
         SetSemiTrans(tile, 1);
-        Area_ProjectPoint(&spark->pos.vx, (DVECTOR*)&tile->x0);
+        Camera_ProjectPoint(&spark->pos.vx, (DVECTOR*)&tile->x0);
         tile->w  = 3;
         tile->h  = 3;
         tile->b0 = 8;

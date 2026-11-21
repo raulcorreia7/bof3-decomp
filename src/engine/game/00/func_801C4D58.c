@@ -14,7 +14,7 @@ MATCH void func_801C4D58(void) {
     state         = g_Task;
     work->vz      = 0;
     state->unk_0A = (state->timer >> 1);
-    Actor_RequestScript((g_Task->direction + 8) & BYTE_MASK);
+    Script_Request((g_Task->direction + 8) & BYTE_MASK);
     Actor_Move();
     reload        = g_Task;
     reload->timer = (reload->timer - 1);

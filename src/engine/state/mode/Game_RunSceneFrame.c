@@ -3,7 +3,7 @@
 /* func_80199308 */
 MATCH void Game_RunSceneFrame(void) {
     Party_RunFrame();
-    Area_UpdateCamera();
+    Camera_Update();
     func_80167910();
     Area_UpdateParty();
     func_801BDAB8();

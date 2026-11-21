@@ -12,12 +12,12 @@ MATCH void func_801F302C(s32* first, s32* second, Actor* task) {
     s16      radius2;
 
     GFX_AddDitheredDrawMode(3, GetTPage(TPAGE_DEPTH_4BIT, TPAGE_ABR_ADD, FONT_TPAGE_X, FONT_TPAGE_Y));
-    Area_SetCameraMatrix(&camera);
+    Camera_SetMatrix(&camera);
     line = (LINE_F2*)g_GfxPrimCursor;
     SetLineF2(line);
     SetSemiTrans(line, 0);
-    Area_ProjectPoint(first, (DVECTOR*)&line->x0);
-    Area_ProjectPoint(second, (DVECTOR*)&line->x1);
+    Camera_ProjectPoint(first, (DVECTOR*)&line->x0);
+    Camera_ProjectPoint(second, (DVECTOR*)&line->x1);
     setRGB0(line, D_801F4D5C[g_Task->unk_06 * 3], D_801F4D5D[g_Task->unk_06 * 3], D_801F4D5E[g_Task->unk_06 * 3]);
     GFX_AddPrim(GFX_LAYER_EFFECT, sizeof(LINE_F2));
     angle   = ratan2(line->y1 - line->y0, line->x1 - line->x0);

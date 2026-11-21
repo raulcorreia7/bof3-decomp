@@ -9,15 +9,15 @@ MATCH void Area_DrawSpark(AreaSparkSlot* spark) {
     s8       i;
 
     GFX_AddDitheredDrawMode(GFX_LAYER_UI, GetTPage(TPAGE_DEPTH_4BIT, TPAGE_ABR_ADD, FONT_TPAGE_X, FONT_TPAGE_Y));
-    Area_SetCameraMatrix(&camera);
+    Camera_SetMatrix(&camera);
     i = 2;
     do {
         spark->origin_trail[i + 1] = spark->origin_trail[i];
         spark->pos_trail[i + 1]    = spark->pos_trail[i];
         i--;
     } while (i >= 0);
-    Area_ProjectPoint(&spark->origin.x.fixed, &spark->origin_trail[0]);
-    Area_ProjectPoint(&spark->pos.x.fixed, &spark->pos_trail[0]);
+    Camera_ProjectPoint(&spark->origin.x.fixed, &spark->origin_trail[0]);
+    Camera_ProjectPoint(&spark->pos.x.fixed, &spark->pos_trail[0]);
 
     delta = spark->color;
     color = delta;

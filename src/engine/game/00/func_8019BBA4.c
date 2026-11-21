@@ -68,7 +68,7 @@ MATCH void func_8019BBA4(void) {
                     g_Task->option_flags = 0;
                     g_Task->unk_0A       = 0;
                     func_8019BF78();
-                    Actor_SelectScript(0);
+                    Script_Select(0);
                     g_Task->header.mode = 5;
                 }
             }

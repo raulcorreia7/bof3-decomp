@@ -85,9 +85,9 @@ MATCH void func_801A7330(const volatile u8* data) {
         if (COORD_FRAC(g_Task->pos.x) == 0 && COORD_FRAC(g_Task->pos.y) == 0) {
             Area_SetCellCode(COORD_INT(g_Task->pos.x), COORD_INT(g_Task->pos.y), 0x10);
         }
-        Actor_SelectScript(1);
+        Script_Select(1);
     } else {
-        Actor_SelectScript(0);
+        Script_Select(0);
     }
 
     (FAKE_VOLATILE(u16, g_ScratchPad)) = (FAKE_VOLATILE(u16, g_ScratchPad)) + 1;

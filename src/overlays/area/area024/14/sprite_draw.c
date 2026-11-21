@@ -273,7 +273,7 @@ MATCH void func_801F2DF8(const AreaSprite* sprite) {
     SetPolyFT4(primitive);
     PSX_SET_SEMI_TRANSPARENT(primitive);
 
-    Area_ProjectPoint(object, &screen);
+    Camera_ProjectPoint(object, &screen);
     size[0] = FAKE_VOLATILE(u16, work->half_size);
     size[1] = FAKE_VOLATILE(u16, work->half_size);
     Game_ProjectWorldPoint(object, size, size);
@@ -325,7 +325,7 @@ MATCH s32 func_801F30EC(void) {
     u8  i;
     s32 result;
 
-    Area_SetCameraMatrix(scratch);
+    Camera_SetMatrix(scratch);
 
     result     = 0;
     D_801F5B00 = WORLD00_AREA024_WORK_BASE;
@@ -512,7 +512,7 @@ MATCH void func_801F3944(const SpinEffect* spin) {
 
     SetPolyG3(primitive);
     PSX_SET_SEMI_TRANSPARENT(primitive);
-    Area_ProjectPoint(&work->origin.x, POLY_XY(primitive, 0));
+    Camera_ProjectPoint(&work->origin.x, POLY_XY(primitive, 0));
 
     point[0] = ((rcos(work->spin_angle) * work->vertex_a.vx - rsin(work->spin_angle) * work->vertex_a.vy) >> 8) * work->scale;
     point[1] = ((rsin(work->spin_angle) * work->vertex_a.vx + rcos(work->spin_angle) * work->vertex_a.vy) >> 8) * work->scale;
@@ -520,7 +520,7 @@ MATCH void func_801F3944(const SpinEffect* spin) {
     point[0] += work->origin.x;
     point[1] += work->origin.y;
     point[2] += work->origin.z;
-    Area_ProjectPoint(point, POLY_XY(primitive, 1));
+    Camera_ProjectPoint(point, POLY_XY(primitive, 1));
 
     point[0] = ((rcos(work->spin_angle) * work->vertex_b.vx - rsin(work->spin_angle) * work->vertex_b.vy) >> 8) * work->scale;
     point[1] = ((rsin(work->spin_angle) * work->vertex_b.vx + rcos(work->spin_angle) * work->vertex_b.vy) >> 8) * work->scale;
@@ -528,7 +528,7 @@ MATCH void func_801F3944(const SpinEffect* spin) {
     point[0] += work->origin.x;
     point[1] += work->origin.y;
     point[2] += work->origin.z;
-    Area_ProjectPoint(point, POLY_XY(primitive, 2));
+    Camera_ProjectPoint(point, POLY_XY(primitive, 2));
 
     fade = work->fade;
     tmp  = fade;
@@ -604,7 +604,7 @@ MATCH void func_801F3D5C(void) {
     u8          i;
 
     GFX_AddDrawMode(GetTPage(TPAGE_DEPTH_4BIT, TPAGE_ABR_ADD, 896, 256));
-    Area_SetCameraMatrix(scratch);
+    Camera_SetMatrix(scratch);
 
     work = (SpinEffect*)WORLD00_AREA024_SPIN_WORK_BASE;
     i    = 0u;
@@ -652,7 +652,7 @@ MATCH s32 func_801F3E48(u8 shade) {
     SetRotMatrix(mtxp);
     SetTransMatrix(mtxp);
     matrix2 = matrix;
-    Area_ApplyCameraMatrix(&matrix2);
+    Camera_ApplyMatrix(&matrix2);
 
     GFX_AddDrawMode(GetTPage(TPAGE_DEPTH_4BIT, TPAGE_ABR_ADD, 896, 256));
 

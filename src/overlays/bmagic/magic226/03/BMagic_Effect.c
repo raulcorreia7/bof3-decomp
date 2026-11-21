@@ -105,7 +105,7 @@ MATCH void func_801EF10C(void) {
     g_Task->unk_2C.value = 0;
     g_Task->unk_2B       = 0;
     g_Task->unk_24       = 0;
-    Actor_SelectScript(0);
+    Script_Select(0);
     g_Task->unk_04       = 0;
     g_Task->param.unk_0B = 0;
     g_Task->unk_09       = 32;

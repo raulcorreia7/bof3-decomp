@@ -8,7 +8,7 @@ MATCH s32 func_801F4E7C(void) {
 
     live = 0;
     GFX_AddDitheredDrawMode(2, GetTPage(TPAGE_DEPTH_4BIT, TPAGE_ABR_ADD, FONT_TPAGE_X, FONT_TPAGE_Y));
-    Area_SetCameraMatrix(buffer);
+    Camera_SetMatrix(buffer);
     slot = MEM_PTR(FallingSpark, AREA_WORK);
     for (i = 0; i < 16; i += 1, slot++) {
         if (slot->header.active != 0) {

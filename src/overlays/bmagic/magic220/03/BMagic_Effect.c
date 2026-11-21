@@ -80,7 +80,7 @@ MATCH void func_801EF078(void) {
     g_Task->unk_2C.value = 0;
     g_Task->unk_2B       = 0;
     g_Task->unk_24       = 0;
-    Actor_SelectScript(0U);
+    Script_Select(0U);
     g_Task->unk_5D       = 0x10;
     g_Task->param.unk_0B = 0;
     g_Task->unk_09       = 10;

@@ -30,7 +30,7 @@ MATCH void func_801DA92C(void) {
 
     work              = FISHING_STATE;
     work->saved_index = 0;
-    Actor_RequestScript(3);
+    Script_Request(3);
 
     tail            = FISHING_STATE;
     tail->sub_index = (tail->sub_index + 1);
