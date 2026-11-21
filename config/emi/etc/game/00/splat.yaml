@@ -84,7 +84,7 @@ segments:
       - [0x1A8, .rodata, func_801A7E54]
       - [0x1D8, .rodata, Scene_StartShopSave]
       - [0x238, .rodata, func_801A8728]
-      - [0x4C0, .rodata, func_801A8F94]
+      - [0x4C0, .rodata, Actor_RunFlowOps]
   # Placement: .data resumes after another section in the retail bytes; one segment would group both .data runs.
   - name: data_9
     type: code
@@ -94,7 +94,7 @@ segments:
     section_order: [.data, .rodata]
     subsegments:
       - [0x4FC, .data, D_80195CFC]
-      - [0x500, .rodata, func_801A96E4]
+      - [0x500, .rodata, Actor_RunSoundOps]
   # Placement: .data resumes after another section in the retail bytes; one segment would group both .data runs.
   - name: data_10
     type: code
@@ -104,10 +104,10 @@ segments:
     section_order: [.data, .rodata]
     subsegments:
       - [0x53C, .data, D_80195D3C]
-      - [0x540, .rodata, func_801A9944]
-      - [0x580, .rodata, func_801A9DE8]
-      - [0x5C0, .rodata, func_801AA470]
-      - [0x600, .rodata, func_801AAB00]
+      - [0x540, .rodata, Actor_RunControlOps]
+      - [0x580, .rodata, Actor_RunMotionOps]
+      - [0x5C0, .rodata, Actor_RunWaitOps]
+      - [0x600, .rodata, Actor_RunAppearanceOps]
   # Placement: .data resumes after another section in the retail bytes; one segment would group both .data runs.
   - name: data_11
     type: code
@@ -117,7 +117,7 @@ segments:
     section_order: [.data, .rodata]
     subsegments:
       - [0x63C, .data, D_80195E3C]
-      - [0x640, .rodata, func_801AB458]
+      - [0x640, .rodata, Actor_RunStageOps]
   # Placement: .data resumes after another section in the retail bytes; one segment would group both .data runs.
   - name: data_12
     type: code
@@ -127,8 +127,8 @@ segments:
     section_order: [.data, .rodata]
     subsegments:
       - [0x674, .data, D_80195E74]
-      - [0x678, .rodata, func_801AB8B0]
-      - [0x6B8, .rodata, func_801ABA24]
+      - [0x678, .rodata, Actor_RunSpawnOps]
+      - [0x6B8, .rodata, Actor_RunFaceOps]
   # Placement: .data resumes after another section in the retail bytes; one segment would group both .data runs.
   - name: data_13
     type: code
@@ -498,16 +498,16 @@ segments:
       - [0x13298, c, func_801A8A98]
       - [0x13384, c, func_801A8B84]
       - [0x134B4, c, Game_CallArea]
-      - [0x13538, c, func_801A8D38]
-      - [0x13794, c, func_801A8F94]
-      - [0x13EE4, c, func_801A96E4]
-      - [0x14144, c, func_801A9944]
-      - [0x145E8, c, func_801A9DE8]
-      - [0x14C70, c, func_801AA470]
-      - [0x15300, c, func_801AAB00]
-      - [0x15C58, c, func_801AB458]
-      - [0x160B0, c, func_801AB8B0]
-      - [0x16224, c, func_801ABA24]
+      - [0x13538, c, Actor_RunScript]
+      - [0x13794, c, Actor_RunFlowOps]
+      - [0x13EE4, c, Actor_RunSoundOps]
+      - [0x14144, c, Actor_RunControlOps]
+      - [0x145E8, c, Actor_RunMotionOps]
+      - [0x14C70, c, Actor_RunWaitOps]
+      - [0x15300, c, Actor_RunAppearanceOps]
+      - [0x15C58, c, Actor_RunStageOps]
+      - [0x160B0, c, Actor_RunSpawnOps]
+      - [0x16224, c, Actor_RunFaceOps]
       - [0x163A8, c, Area_MoveActorRoute]
       - [0x16568, c, func_801ABD68]
       - [0x166E0, c, func_801ABEE0]
@@ -516,7 +516,7 @@ segments:
       - [0x169DC, c, func_801AC1DC]
       - [0x16B3C, c, func_801AC33C]
       - [0x16F68, c, func_801AC768]
-      - [0x170F0, c, func_801AC8F0]
+      - [0x170F0, c, Actor_FindScriptLabel]
       - [0x171D0, c, func_801AC9D0]
       - [0x17214, c, func_801ACA14]
       - [0x172C0, c, func_801ACAC0]

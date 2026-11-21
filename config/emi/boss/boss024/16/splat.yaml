@@ -12,26 +12,7 @@ segments:
     section_order: [.data, .text, .rodata, .bss]
     subsegments:
       - [0x0, bin, D_800C1800]
-      - [0x4, c, func_800C1804]
-      - [0x48, c, func_800C1848]
-      - [0xA0, c, func_800C18A0]
-      - [0xD8, c, func_800C18D8]
-      - [0xE0, c, func_800C18E0]
-      - [0xE8, c, func_800C18E8]
-      - [0xF0, c, func_800C18F0]
-      - [0x134, c, func_800C1934]
-      - [0x198, c, func_800C1998]
-      - [0x1D0, c, func_800C19D0]
-      - [0x1D8, c, func_800C19D8]
-      - [0x1E0, c, func_800C19E0]
-      - [0x1E8, c, Boss_InstallBattleHooks]
-      - [0x220, c, Boss_RunBattleEvent]
-      - [0x228, c, Boss_ChooseBattleEnding]
-      - [0x290, c, Boss_EndBattle]
-      - [0x2B0, c, Boss_InstallBattleHooks2]
-      - [0x2E8, c, Boss_RunBattleEvent2]
-      - [0x2F0, c, Boss_ChooseBattleEnding2]
-      - [0x33C, c, Boss_EndBattle2]
+      - [0x4, c, boss024_16]
   # Placement: .data resumes after another section in the retail bytes; one segment would group both .data runs.
   - name: data
     type: code
