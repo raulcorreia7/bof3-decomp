@@ -163,7 +163,6 @@ game's own records owns keeps its meaning (`Callback`, `Bank`, `Slot`, `Cell`); 
 | World map                     | `WorldMap`                                  | Code and data only the world-map areas use                                              | `World` in a code name                                                                                                                 |
 | Position and geometry         | `Pos`, `Point`, `Coord`, `Vector`, `Offset` | A position value; a point type; a fixed-point coordinate; a math vector; a displacement | —                                                                                                                                      |
 | Color, tint, RGB              | `Color`, `Tint`, `RGB`                      | A colour value; a colour delta; the packed pixel format                                 | `Colour`                                                                                                                               |
-| Abbreviations                 | the full word                               | A name says the thing, not a saved keystroke                                            | `Ptr`, `Buf`, `Tmp`, `Cur`, `Num`, `Idx`, `Cnt`, `Obj`, `Ctrl`, `Mgr`, `Spr`                                                           |
 
 ## Functions
 
@@ -179,29 +178,7 @@ A function name takes one of two orders:
 Count the family across the whole tree. Two functions are not a family. When a third member gets a
 name, rename the other two in the same change. A qualifier goes last when two functions differ
 (`Battle_TargetNext`, `Battle_TargetPrev`). The subject is the tag, never a word glued to the verb
-(`Message_SelectAnswer`). One verb per concept:
-
-| Verb                            | Meaning                                                  |
-| ------------------------------- | -------------------------------------------------------- |
-| `Update` / `Draw`               | per-frame logic and rendering                            |
-| `Tick`                          | advance a countdown timer                                |
-| `Run`                           | execute one named action or task                         |
-| `Dispatch`                      | call one entry of a table                                |
-| `NextStep` / `SetState`         | advance a step counter; set a state                      |
-| `Init` / `Reset` / `Exit`       | lifecycle of a system                                    |
-| `Start` / `End`                 | begin and finish an ongoing operation                    |
-| `Begin` / `End`                 | enter and finish a discrete script or record             |
-| `Open` / `Close`                | open and close a player-visible window                   |
-| `Load` / `Read`                 | bring a resource into memory; read bytes from disc or CD |
-| `Alloc` / `Free`                | take and release a slot                                  |
-| `Release`                       | give up a claimed target or actor                        |
-| `Get` / `Set`                   | read and write one value by a known key                  |
-| `Write` / `Save`                | write a record back; write the memory card               |
-| `Find`                          | search; returns `GAME_NONE` when nothing matches         |
-| `Is` / `Has` / `Can` / `Test`   | yes/no questions; test a flag                            |
-| `Add`, `Remove`, `Count`        | edit a collection; count its members                     |
-| `Create` / `Spawn`              | construct an object; place it in the world               |
-| `Play`, `Stop`, `Wait`, `Apply` | as the word says                                         |
+(`Message_SelectAnswer`). One verb per concept: the [vocabulary](#vocabulary) fixes each verb's meaning. `NextStep` advances a step counter and `SetState` sets a state; `Play`, `Stop`, `Wait` and `Apply` mean what they say.
 
 A function the game calls through a table or a hook takes a plain name for what it does, never a
 `Cb`, `Callback` or `Handler` suffix: in PsyQ, `Callback` names the function that registers one. One
@@ -376,16 +353,16 @@ A name says what a thing is, never how it is stored or found. Drop the storage w
 usually the name. The same holds for `Ref`, `View`, `Window`, `Row`, `Scratch`, `_ADDRESS` and
 `_OFFSET` in a new name.
 
-| The word leaks | Words                                                    | Write instead                                                                                              |
-| -------------- | -------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------- |
-| width          | `Byte`, `Half`, `Word`, `Bytes`, `Words`                 | the role; `unk_<OFF>` until it is known                                                                    |
-| shape          | `Record`, `Rec`, `Entry`, `Row`, `Block`, `Chunk`, `Raw` | the thing itself: `BattlePanel`, not `BattlePanelRow`                                                      |
-| a second view  | `View`, `As<Type>`                                       | a union member named by role; a byte or half of one value is `LOBU(x)`, `LOH(x)` (`include/common/util.h`) |
-| nothing        | `Data`, `Info`, `Obj`, `Object`, `Work`, `Misc`          | what it holds: `FishingState`, not `Area030Work`                                                           |
-| a number       | `Table6`, `Area016`, `Callback3`                         | what the index selects (`g_BattleCommands`); the place or system once proven (`Fishing`, `Town`)           |
-| a category     | `Kind`, `Class`                                          | `Type`: `BattleOwnerType`, not `BattleOwnerKind`                                                           |
-| a saved key    | `Ptr`, `Buf`, `Tmp`, `Cur`, `Num`, `Idx`, `Cnt`, `Obj`   | the word: `index`, `count`, `buffer`, `current`, the thing a pointer names                                 |
-| a callable     | `Handler`, `Proc`, `Routine`, `Cb`                       | the action the function runs; `<Role>Callback` for a pointer type, `Callback` for `void (*)(void)`         |
+| The word leaks | Words                                                                        | Write instead                                                                                              |
+| -------------- | ---------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------- |
+| width          | `Byte`, `Half`, `Word`, `Bytes`, `Words`                                     | the role; `unk_<OFF>` until it is known                                                                    |
+| shape          | `Record`, `Rec`, `Entry`, `Row`, `Block`, `Chunk`, `Raw`                     | the thing itself: `BattlePanel`, not `BattlePanelRow`                                                      |
+| a second view  | `View`, `As<Type>`                                                           | a union member named by role; a byte or half of one value is `LOBU(x)`, `LOH(x)` (`include/common/util.h`) |
+| nothing        | `Data`, `Info`, `Obj`, `Object`, `Work`, `Misc`                              | what it holds: `FishingState`, not `Area030Work`                                                           |
+| a number       | `Table6`, `Area016`, `Callback3`                                             | what the index selects (`g_BattleCommands`); the place or system once proven (`Fishing`, `Town`)           |
+| a category     | `Kind`, `Class`                                                              | `Type`: `BattleOwnerType`, not `BattleOwnerKind`                                                           |
+| a saved key    | `Ptr`, `Buf`, `Tmp`, `Cur`, `Num`, `Idx`, `Cnt`, `Obj`, `Ctrl`, `Mgr`, `Spr` | the word: `index`, `count`, `buffer`, `current`, the thing a pointer names                                 |
+| a callable     | `Handler`, `Proc`, `Routine`, `Cb`                                           | the action the function runs; `<Role>Callback` for a pointer type, `Callback` for `void (*)(void)`         |
 
 One exception: a record that exists only to make a struct assignment give the retail block move
 is a copy unit from `include/common/copy.h` (`Cpy16`, `Cpy16u`), named for its size and
@@ -402,9 +379,8 @@ the player sees, the PlayStation `Scratchpad`, an SDK name.
 - A table of the functions a step byte selects is `g_<Owner>Steps`; one a mode byte selects is
   `g_<Owner>Modes`. A step table that must stay a record to match is the record `<Owner>Steps`
   with the member `steps`.
-- No `Table`, `Array`, `Set`, `Pool`, `Funcs`, `States`, `Handlers` or `Callback` word for a data
-  table, and no other wrapper type. A player-visible menu list keeps `List`; a map's grid data keeps
-  `Map` (`MapCell`, `AreaMapBundle`).
+- No wrapper type and none of the [rejected words](#vocabulary) for a data table. A player-visible menu
+  list keeps `List`; a map's grid data keeps `Map` (`MapCell`, `AreaMapBundle`).
 - The element type carries the mechanism: `<Thing>Func`, one type per signature. The no-argument
   entry `void (*)(void)` is `Callback` (`include/common/callback.h`).
 - Until the index is known, a table keeps its address name. Per-image tables of different tasks
@@ -432,8 +408,8 @@ A value gets a name only when a header, the SDK, a string or a table gives it on
 number may carry two names when two consumers use it differently. A power of two alone does not
 prove a flag. Which form a value takes: [values](conventions.md#values).
 
-Constants, enum values and macros are `TAG_UPPER_SNAKE`. The generic helpers in
-`include/common/util.h` stay untagged capitals ([helpers](conventions.md#game-helpers)).
+The generic helpers in `include/common/util.h` stay untagged capitals
+([helpers](conventions.md#game-helpers)).
 
 ## Game terms
 
@@ -550,9 +526,9 @@ tools/symbol.py rename func_<ADDR> <Name> --image <target> --local --source "<de
 tools/symbol.py params <Name> old=new ...     # parameter names: definition and prototypes
 ```
 
-A named symbol is one name in every image: without `--image`, `rename` changes its row in every
-table that has it. An address name is unique only per image: `--image <target>` once per image that
-holds the twin at that address, `--local` limits the rename to those images' `src/` and `config/`
-folders, and `--scope PATH...` names the folders. A twin at another address is another call. The
-resident images (`exe/slus_004_22`, `emi/etc/game/00`) rename with no scope. `tools/symbol.py add`
-writes a row without a rename, and `tools/symbol.py refs` ranks the units to name first.
+A named symbol is one name in every image, so `rename` changes its row in every table that has it. An
+address name is unique only per image: give `--image <target>` once per image that holds the twin at
+that address; a twin at another address is another call. `--local` or `--scope PATH...` limits the
+files; the resident images (`exe/slus_004_22`, `emi/etc/game/00`) rename with no scope.
+`tools/symbol.py add` writes a row without a rename, and `tools/symbol.py refs` ranks the units to
+name first.

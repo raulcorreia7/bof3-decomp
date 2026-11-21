@@ -50,38 +50,6 @@ statements. A workaround stays only when the retail bytes need it, and its comme
 
 ## Base layer
 
-### Header
-
-| Rule                                                   | Where              |
-| ------------------------------------------------------ | ------------------ |
-| One umbrella header every unit starts from             | `include/common.h` |
-| Fixed-width types and the type asserts                 | `include/types.h`  |
-| No second umbrella and no shared type in `include/psx` | `include/common.h` |
-
-### Utility macros
-
-| Rule                                                               | Where                   |
-| ------------------------------------------------------------------ | ----------------------- |
-| `ABS` has one definition, the vendored PsyQ form                   | `include/psyq/abs.h`    |
-| `ARRAY_COUNT`, `MIN`, `MAX`, `BIT` and the byte and halfword masks | `include/common/util.h` |
-| A macro earns its place by a use; no generic helper without one    | `include/common/util.h` |
-
-### Matching helpers
-
-| Rule                                                                               | Where                   |
-| ---------------------------------------------------------------------------------- | ----------------------- |
-| The 14 `FAKE_*` helpers are the only matching constraints; one form per constraint | `include/match/match.h` |
-| Every use carries `/* FAKE: reason. */`                                            | `include/match/match.h` |
-| No raw `__asm__`, `register ... asm` or `.word` outside this header                | `include/match/match.h` |
-
-### SDK names
-
-| Rule                                                            | Where                          |
-| --------------------------------------------------------------- | ------------------------------ |
-| Vendored PsyQ headers stay unmodified                           | `include/psyq`                 |
-| Use the SDK function, value and macro name; no second name      | `include/psx/psyq.h`           |
-| Use `setXY0` and the `gte_*` macros where the SDK provides them | `include/match/gte_macros.inc` |
-
 ### Records
 
 | Rule                                                                           | Where               |
@@ -97,14 +65,6 @@ statements. A workaround stays only when the retail bytes need it, and its comme
 | One body in a header included by a thin `MATCH` `.c` per image                     | `src/shared`, `src/overlays` |
 | A value that differs is a statement macro; a structural difference stays per image | the group header             |
 | Never `#include` a `.c` file                                                       | `src`                        |
-
-### Files and names
-
-| Rule                                                                                         | Where               |
-| -------------------------------------------------------------------------------------------- | ------------------- |
-| Functions `Tag_VerbObject`; `g_` globals; `s_` statics; PascalCase types; snake_case members | [naming](naming.md) |
-| Constants `SCREAMING_SNAKE`; files lower snake by role                                       | [naming](naming.md) |
-| No evidence: `func_<ADDR>`, `D_<ADDR>` or `unk_<OFF>`                                        | [naming](naming.md) |
 
 ## Write it as the original programmer did
 
@@ -293,16 +253,18 @@ assert macros and `true`/`false`. `include/sys/math.h` owns the fixed-point unit
 `ASSERT_OFFSET(Type, member, offset)` for each proven member. An assert is a compile-time check,
 not a comment.
 
-| Concern                                   | Owner                                                                          |
-| ----------------------------------------- | ------------------------------------------------------------------------------ |
-| widths and assert macros                  | `include/types.h`                                                              |
-| packed vectors; fixed-point `Coord`       | `include/common/vector.h`, `include/common/fixed.h`                            |
-| generic helpers and masks                 | `include/common/util.h`                                                        |
-| fake-match helpers and markers            | `include/match/match.h`                                                        |
-| PsyQ declarations and records             | the PsyQ headers (`include/psyq`); game-only additions in `include/psx/psyq.h` |
-| game records                              | `include/<subsystem>/`                                                         |
-| image-local declarations                  | the image header ([lowest scope wins](layout.md#lowest-scope-wins))            |
-| declarations shared by one group's images | the group header                                                               |
+| Concern                                                                                                                                                                    | Owner                                                                          |
+| -------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------ |
+| the umbrella header every unit starts from; no second umbrella and no shared type in `include/psx`                                                                         | `include/common.h`                                                             |
+| widths and assert macros                                                                                                                                                   | `include/types.h`                                                              |
+| packed vectors; fixed-point `Coord`                                                                                                                                        | `include/common/vector.h`, `include/common/fixed.h`                            |
+| generic helpers and masks                                                                                                                                                  | `include/common/util.h`                                                        |
+| the 14 `FAKE_*` helpers, the only matching constraints (one form each; every use carries `/* FAKE: reason. */`; no raw `__asm__`, `register ... asm` or `.word` elsewhere) | `include/match/match.h`                                                        |
+| `ABS`, the vendored PsyQ form                                                                                                                                              | `include/psyq/abs.h`                                                           |
+| PsyQ declarations and records                                                                                                                                              | the PsyQ headers (`include/psyq`); game-only additions in `include/psx/psyq.h` |
+| game records                                                                                                                                                               | `include/<subsystem>/`                                                         |
+| image-local declarations                                                                                                                                                   | the image header ([lowest scope wins](layout.md#lowest-scope-wins))            |
+| declarations shared by one group's images                                                                                                                                  | the group header                                                               |
 
 ### Values
 
@@ -563,13 +525,13 @@ game name is tagged or starts with `g_` or `s_`. The only untagged names are the
 `util.h` helpers that guard a PsyQ spelling (`#ifndef ABS`). Never define `CHAR_BIT`, `CHAR_MAX` or
 `CHAR_MIN`.
 
-Game code says what it means through PsyQ's names for SDK calls and values, symbols for RAM and
-named registers for hardware. The game was written against the SDK's names, with its own macros for
-what it does with them. System tags build on PsyQ names and never copy,
-rename or forward them one-to-one.
+The game was written against the SDK's names, with its own macros for what it does with them. System
+tags build on PsyQ names and never copy, rename or forward them one-to-one.
 
 - Call the SDK and use its names directly: `CdControl(CdlSetloc, ...)`, `SpuSetKey(SPU_ON, ...)`,
-  `PADLup`. No layer renames or copies an SDK value.
+  `PADLup`. No layer renames or copies an SDK value. The vendored headers in `include/psyq` stay
+  unmodified; `include/psx/psyq.h` holds the SDK names, and `setXY0` and the `gte_*` macros of
+  `include/match/gte_macros.inc` are used where the SDK provides them.
 - Never a raw SDK number: `0xF000` is `PADLup | PADLright | PADLdown | PADLleft`.
 - Convenience macros sit on top of the SDK names where the game repeats something: a merged set
   (`INPUT_DIRECTIONAL`), a check (`INPUT_REPEATED`), a role the code proves (confirm, cancel). Each is at
@@ -652,7 +614,7 @@ Battle_AllocEffect();
 
 ### Game helpers
 
-`include/common/util.h` holds the generic helpers. Use them instead of writing the expression out.
+`include/common/util.h` holds the generic helpers. Use them instead of writing the expression out; a helper needs a use before it is added.
 
 | Helper                                               | Use                                                               |
 | ---------------------------------------------------- | ----------------------------------------------------------------- |
