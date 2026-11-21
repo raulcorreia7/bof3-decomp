@@ -1,14 +1,5 @@
 #!/usr/bin/env python3
-"""Fail when a prototype is not the signature of the function it declares.
-
-A prototype is fine when it has the owner's return type and parameter types, or is the
-non-prototype form with the owner's return type (`void name();`, for a retail unit that had no
-prototype), or has a `sig-kept:` comment on the line above that says why the retail bytes need the
-difference. The owner is the definition that the declaring unit sees, the one in the same image,
-or the engine's.
-
-Usage: python3 tools/check_signatures.py
-"""
+"""Fail when a prototype is not the signature of the function it declares."""
 
 from __future__ import annotations
 

@@ -20,14 +20,7 @@ from bof3.resolve.layout import read_splat
 
 
 def split_target(root: Path, manifest_splat: str) -> subprocess.CompletedProcess[str]:
-    """Run one target's Splat split; the caller decides what a failure means.
-
-    A successful split records the digest of the files it read in
-    ``build/asm/<target>/.splat.stamp``, so a later reader can identify stale output
-    without trusting file timestamps. The split starts from an empty generated
-    tree and leaves one folder per image: functions in ``build/asm/<target>/``, data
-    in ``build/asm/<target>/data/``.
-    """
+    """Run one target's Splat split; the caller decides what a failure means."""
     executable = root / ".venv/bin/splat"
     if not executable.is_file():
         raise FileNotFoundError(
@@ -117,12 +110,7 @@ def _extract_functions(base: Path) -> None:
 
 
 def _close_functions(base: Path) -> None:
-    """Close every function that Splat leaves open.
-
-    Splat writes ``endlabel`` only when a function ends at its declared symbol
-    size. A function that a segment boundary cuts short keeps its ``.ent`` open
-    and the assembler warns about the missing ``.end``.
-    """
+    """Close every function that Splat leaves open."""
     for path in base.rglob("*.s"):
         if path.relative_to(base).parts[0] == _DATA_DIR:
             continue
@@ -148,14 +136,7 @@ _IDENTIFIER = re.compile(r"^[A-Za-z_]\w*$")
 
 
 def _normalize_stubs(srcdir: Path, before: set[Path]) -> None:
-    """Write a Splat-generated C stub in the source convention.
-
-    A code row links one object, so its C file includes the row's whole split
-    assembly once, by the row's name; the per-TU file holds every function in
-    order with its inter-function padding. Splat writes one
-    ``INCLUDE_ASM("<asm folder>", name)`` per function instead; the build passes
-    the folder as ``ASM_DIR``, so the source names only the unit.
-    """
+    """Write a Splat-generated C stub in the source convention."""
     for path in sorted(set(srcdir.rglob("*.c")) - before):
         text = path.read_text(encoding="utf-8", errors="replace")
         if "INCLUDE_ASM(" not in text:
@@ -173,15 +154,7 @@ def _normalize_stubs(srcdir: Path, before: set[Path]) -> None:
 
 
 def _flatten_asm_tree(base: Path) -> None:
-    """Move Splat's per-TU function files up into the image's one asm folder.
-
-    A TU whose stem is also a function name writes both the full disassembly
-    ``<stem>.s`` and the per-function ``<stem>/<stem>.s``. The full file is the
-    one a C stub includes, so it wins; the matching per-function copy is
-    dropped. A copy of a function that the TU's full disassembly already gave a
-    file, with the same text, is dropped too; a differing duplicate is a layout
-    error.
-    """
+    """Move Splat's per-TU function files up into the image's one asm folder."""
     for path in sorted(base.rglob("*.s")):
         relative = path.relative_to(base)
         if len(relative.parts) == 1 or relative.parts[0] == _DATA_DIR:
@@ -205,16 +178,7 @@ def _flatten_asm_tree(base: Path) -> None:
 
 
 def _build_manifest(root: Path, target: str) -> Path:
-    """Write ``build/splat/<target>/splat.yaml``: the full manifest Splat reads.
-
-    ``config/<target>/splat.yaml`` holds the checksum, the segments and the options
-    that differ for the image; the copy under ``build/`` adds every derived option,
-    so a build never rewrites ``config/`` and ``base_path`` is absolute. The copy lists
-    the generated symbol maps of the target's owners, then a generated map that types
-    every text row's start as a function: with one code segment per region, a forward
-    reference from an earlier row would otherwise name a later function's start as a
-    local ``.L`` label and the split assembly would not link.
-    """
+    """Write ``build/splat/<target>/splat.yaml``: the full manifest Splat reads."""
     manifest = root / CONFIG / target / "splat.yaml"
     text, document = read_splat(manifest)
     start = text.find("\nsegments:")
@@ -288,12 +252,7 @@ def _integer(value: str | int) -> int:
 
 
 def normalize_linker_script(root: Path, target: str) -> bool:
-    """Correct Splat's build prefix in generated asset and PsyQ object selectors.
-
-    Splat roots every object under ``build/``, and twice for a path outside it. Staged PsyQ members live in
-    ``toolchains/psyq``, which an ``o`` row names as ``toolchains/psyq/...``. PsyQ objects name their read-only
-    section ``.rdata``; Splat selects ``.rodata``.
-    """
+    """Correct Splat's build prefix in generated asset and PsyQ object selectors."""
     path = root / SPLIT_ASM / target / "linker.ld"
     try:
         original = path.read_text(encoding="utf-8")
@@ -327,12 +286,7 @@ def _target_of(root: Path, manifest_splat: str) -> str:
 
 
 def splat_inputs(root: Path, target: str) -> list[Path]:
-    """Return the files that decide one target's Splat output.
-
-    ``splat.yaml``, its owners' generated symbol maps, and the target bytes named by
-    ``options.target_path`` all affect the generated assembly and linker script. The
-    target's own ``config/symbols/<image>.toml`` rows count too (see :func:`splat_input_digest`).
-    """
+    """Return the files that decide one target's Splat output."""
     manifest = root / CONFIG / target / "splat.yaml"
     paths = [manifest]
     try:
@@ -353,16 +307,13 @@ def splat_input_digest(root: Path, target: str) -> str:
     layout = root / CONFIG / target / "splat.yaml"
     try:
         _text, document = read_splat(layout)
-        # The parsed layout, not its bytes: a comment or blank-line edit changes no output. It
-        # holds the options the id derives (src_path, asm_path, ...) as well.
+        # The parsed layout, not its bytes: a comment edit changes no output.
         digest.update(repr(document).encode())
     except yaml.YAMLError:
         digest.update(layout.read_bytes())
     except OSError:
         pass
-    # The target's own rows decide the names of its split functions only when its
-    # ``symbol_owners`` list it; hashing them here means an edit to one target's rows
-    # re-splits that target and no other, whatever ``symbol_owners`` says.
+    # An edit to one target's rows re-splits that target and no other.
     for entry in load_symbols(root).get(target, ()):
         if not entry.alias:
             digest.update(
@@ -377,11 +328,7 @@ def splat_input_digest(root: Path, target: str) -> str:
 
 
 def splat_output_current(root: Path, target: str) -> bool:
-    """Return True when ``build/asm/<target>`` was split from the current Splat inputs.
-
-    A symbol-map or payload edit changes ``splat_input_digest``, so the
-    generated tree is stale even though its files still exist.
-    """
+    """Return True when ``build/asm/<target>`` was split from the current Splat inputs."""
     recorded = root / SPLIT_ASM / target / SPLAT_STAMP
     try:
         saved = recorded.read_text(encoding="utf-8").strip()

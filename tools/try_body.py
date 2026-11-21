@@ -52,10 +52,7 @@ def resolve(root: Path, src: str, include: str, anywhere: bool = False) -> str |
 
 
 def closure(root: Path, src: str, depth: int = 3, anywhere: bool = False) -> list[str]:
-    """Return ``src`` and the headers it includes, as repo paths, nearest first.
-
-    ``anywhere`` follows includes into ``include/`` too.
-    """
+    """Return ``src`` and the headers it includes, as repo paths, nearest first."""
     seen: list[str] = []
 
     def walk(path: str, left: int) -> None:
@@ -193,10 +190,7 @@ class Trial(NamedTuple):
 
 
 def trial(root: Path, func: Func, text: str) -> Trial:
-    """Try the body; return (status, detail, differing instructions or None).
-
-    A failed body is recorded per function; the same body again returns ``REPEAT``.
-    """
+    """Try the body; return (status, detail, differing instructions or None)."""
     key, ref = body_key(text), func.ref
     seen = load_seen(root)
     old = seen.get(ref, {}).get(key)

@@ -93,12 +93,7 @@ def _include_name(text: str, i: int) -> str | None:
 
 
 def inline_includes(text: str) -> list[str]:
-    """Return the file names of the assembler includes in preprocessed C text.
-
-    A plain ``__asm__(".include \\"x.s\\"")`` reaches the preprocessed text as one string
-    literal; ``INCLUDE_ASM`` concatenates the assembly folder, the function name and ``.s``
-    into adjacent literals. Both spellings join back into one quoted path here.
-    """
+    """Return the file names of the assembler includes in preprocessed C text."""
     names = (_include_name(text, m.end()) for m in INLINE_INCLUDE.finditer(text))
     return [name for name in names if name is not None]
 
@@ -149,10 +144,7 @@ def run(argv, **kw):
 
 
 def maspsx(args, text):
-    """Run maspsx's command line in this process; return its output, or None when it fails.
-
-    A second interpreter start costs more than maspsx's own work on a small source.
-    """
+    """Run maspsx's command line in this process; return its output, or None when it fails."""
     import importlib.util
     import io
 
@@ -275,11 +267,7 @@ def tool_hashes():
 
 
 def cache_key(plan, gcc_args, env):
-    """Return the cache key of a compile, or None when the cache cannot vouch for it.
-
-    The key covers the preprocessed source, the split assembly it includes, every argument but the
-    output (the repository root written as `<root>`, so worktrees agree) and the tool hashes.
-    """
+    """Return the cache key of a compile, or None when the cache cannot vouch for it."""
     pre = run([GCC, *gcc_args, "-E", plan["source"]], env=env, stdout=subprocess.PIPE)
     if pre.returncode:
         return None
@@ -330,12 +318,7 @@ def store_cached(stored, plan, deps):
 
 
 def cached_compile(plan, gcc_args, env, tmp, build_dir):
-    """Compile through the shared object cache; return the exit status.
-
-    A header change asks every worktree for the same keys at once. The first compiler of a key
-    holds its lock file, writes the object and releases it; the others wait and take that object
-    instead of compiling it again.
-    """
+    """Compile through the shared object cache; return the exit status."""
     key = None
     if os.environ.get("BOF3_CC_CACHE") != "0":
         key = cache_key(plan, gcc_args, env)

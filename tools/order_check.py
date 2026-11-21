@@ -251,11 +251,7 @@ def _anchor(lines: list[str], dupes, span: tuple[int, int]) -> bool:
 
 
 def check_prototypes(path: str, lines: list[str], dupes=frozenset()) -> list[Finding]:
-    """Prototype runs are in address order.
-
-    A prototype with an unnamed parameter, or one declared in another header, is left where it is:
-    moving it would make check-names or check-tree read a pre-existing debt as a new line.
-    """
+    """Prototype runs are in address order."""
     regions = item_regions(lines, lambda i: bool(PROTOTYPE.match(lines[i])))
     return check_sorted_items(
         path,

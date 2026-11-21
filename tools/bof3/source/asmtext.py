@@ -1,12 +1,4 @@
-"""Read the split assembly of a target: functions, instructions and their dataflow.
-
-The split under ``asm/<image>/`` holds every function, matched or not. Each instruction line
-carries its file offset, its address and its word, then the spimdisasm mnemonic with symbol names
-in place of raw addresses. ``functions`` reads that text into an instruction list; ``decode``
-interprets the register dataflow the evidence verbs need: the registers an instruction writes and
-reads, the arguments a function uses and how, the globals and tables it touches, and what it
-returns.
-"""
+"""Read the split assembly of a target: functions, instructions and their dataflow."""
 
 from __future__ import annotations
 
@@ -359,11 +351,7 @@ def decode(
     symbols: dict[str, tuple[str, int]],
     owner,
 ) -> Facts:
-    """Interpret one function's register dataflow into its signature and data evidence.
-
-    ``symbols`` maps a name the image can see to its ``(table, address)``; ``owner`` maps an
-    address to ``(table, name, offset)`` so arithmetic on a constant base resolves to a symbol.
-    """
+    """Interpret one function's register dataflow into its signature and data evidence."""
     facts = Facts()
     values: dict[int | None, Value] = {}
     known: set[int] = set()
@@ -729,13 +717,7 @@ def _call_registers(insns: list[Insn], index: int) -> list[int]:
 
 
 def return_writes(function: Function) -> list[tuple[str, str]]:
-    """Return the writes of v0 that reach a ``jr ra``: the function's returned values.
-
-    A write whose value is read later (a store, a branch or an argument move) is scratch, and a
-    write in the delay slot of a branch that does not return is not a return value either; a
-    delay slot of a branch whose target block starts the epilogue writes the value that path
-    returns. The nearest write that survives each rule is the return value.
-    """
+    """Return the writes of v0 that reach a ``jr ra``: the function's returned values."""
     insns = function.insns
     found: list[tuple[str, str]] = []
     for index, insn in enumerate(insns):
@@ -764,11 +746,7 @@ def return_writes(function: Function) -> list[tuple[str, str]]:
 
 
 def ambiguous_return(function: Function) -> bool:
-    """Whether a v0 write in a branch delay slot could be read as a return value.
-
-    The value a branch's delay slot leaves in v0 on the fall-through path is either that path's
-    return value or a loop temporary; the bytes cannot say which, so the row is not proven.
-    """
+    """Whether a v0 write in a branch delay slot could be read as a return value."""
     for position, insn in enumerate(function.insns):
         control = _control_at(function.insns, position)
         if control is None:

@@ -1,19 +1,4 @@
-"""Rewrite PsyQ DMPSX placeholder words into real GTE cop2 instructions.
-
-PsyQ's ``inline_c.h`` emits each Type 2 GTE command as an invalid SPECIAL word
-with funct ``0x3f``; Sony's ``DMPSX.EXE`` replaced those placeholders in the
-object after the assembler. This pass does the same rewrite on the assembly
-text between cc1/maspsx and GNU as, so the C sources keep the stock SDK macros.
-
-The command table is the cross-checked table in
-``tasks/psx-idioms-1020/catalog.md`` section 1.2: 65 command macros, plus the
-arg-taking MVMVA/SQR/OP/GPF/GPL bases of ``inline_a.h``. A placeholder's
-command index is ``(word >> 6) & 0xFFF``; DMPSX moves the argument bits from
-25..18 to their real fields at 19..10.
-
-An unknown placeholder is an error: emitting an untranslated fake command would hide it.
-``tools/cc.py`` calls :func:`rewrite_text` on every compile.
-"""
+"""Rewrite PsyQ DMPSX placeholder words into real GTE cop2 instructions."""
 
 from __future__ import annotations
 

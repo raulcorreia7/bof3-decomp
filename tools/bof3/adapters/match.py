@@ -12,10 +12,7 @@ from bof3.match import MatchResult
 def run_match(
     root: Path, *args: str, cand_out: Path | None = None, merged: bool = False
 ) -> MatchResult:
-    """Run ``match.sh`` with ``args``; ``cand_out`` also receives the candidate's bytes.
-
-    ``merged`` interleaves stderr with stdout; otherwise stderr follows stdout.
-    """
+    """Run ``match.sh`` with ``args``; ``cand_out`` also receives the candidate's bytes."""
     env = {**os.environ, "MATCH_CAND_OUT": str(cand_out)} if cand_out else None
     result = subprocess.run(
         ["sh", "tools/match.sh", *args],

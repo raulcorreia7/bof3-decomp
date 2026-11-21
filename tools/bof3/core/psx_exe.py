@@ -1,11 +1,4 @@
-"""The PS-X EXE header: one reader for every tool that maps a retail image.
-
-Field offsets are the format's own (``@source: wiki:formats/exe#ps-x-exe-header``): ``pc0`` at
-``0x10``, ``t_addr`` at ``0x18`` and ``t_size`` at ``0x1C``, after the
-``0x800``-byte header the loader skips. Reading the address at ``0x18`` and
-treating the image as starting at ``load address - 0x800`` is the handbook rule,
-so the bytes after the header scan exactly like an EMI payload at its own base.
-"""
+"""The PS-X EXE header: one reader for every tool that maps a retail image."""
 
 from __future__ import annotations
 

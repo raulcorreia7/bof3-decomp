@@ -78,12 +78,7 @@ def asm_path(root: Path, func: Func) -> Path | None:
 
 
 def to_body(draft: str, name: str) -> str | None:
-    """Return the m2c output as a try_body body, or None when it holds no ``name`` definition.
-
-    A declaration before the definition becomes an `@decl` line, unless it has an unknown type
-    (`?`); the definition gets the `MATCH` prefix. A draft that still names an unknown type fails
-    to compile, so it is dropped here.
-    """
+    """Return the m2c output as a try_body body, or None when it holds no ``name`` definition."""
     lines = draft.rstrip().splitlines()
     start = next(
         (
@@ -108,11 +103,7 @@ def to_body(draft: str, name: str) -> str | None:
 
 
 def spad_type(text: str, image: str) -> str | None:
-    """Return the work record type of the scratchpad cell for a context, or None.
-
-    The type is the one the context itself casts the cell to most often, else the image family's
-    record; a type the context does not define as a complete struct gives None.
-    """
+    """Return the work record type of the scratchpad cell for a context, or None."""
     views = SPAD_CAST.findall(text)
     name = max(set(views), key=views.count) if views else None
     name = name or next((t for p, t in SPAD_TYPES if image.startswith(p)), None)
@@ -122,10 +113,7 @@ def spad_type(text: str, image: str) -> str | None:
 
 
 def typed_cell(text: str, image: str) -> str:
-    """Return the context with ``g_SpadView``, a pointer to the work record, declared last.
-
-    The cell itself stays `u8 *g_Task`: the record may be defined after that declaration.
-    """
+    """Return the context with ``g_SpadView``, a pointer to the work record, declared last."""
     name = spad_type(text, image)
     if name is None:
         return text

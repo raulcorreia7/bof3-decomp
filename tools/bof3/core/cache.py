@@ -21,11 +21,7 @@ def file_stamp(path: Path) -> tuple[int, int] | None:
 def file_memo[T](
     kind: str, paths: Iterable[Path], extra: Hashable, compute: Callable[[], T]
 ) -> T:
-    """Process-local memo of ``compute()`` keyed on ``kind``, ``extra`` and the stamp of ``paths``.
-
-    Parsing a Splat layout or symbol map once per process instead of once per
-    function; any change to a listed file changes its stamp and recomputes.
-    """
+    """Process-local memo of ``compute()`` keyed on ``kind``, ``extra`` and the stamp of ``paths``."""
     paths = tuple(paths)
     key = (kind, extra, tuple((str(p), file_stamp(p)) for p in paths))
     try:

@@ -21,10 +21,7 @@ from pathlib import Path
 
 from bof3.core.paths import ROOT
 
-# Same order as the build: src/ is searched before include/.
-# The context must read like the build's: the PSX compiler's preprocessor predefines
-# LANGUAGE_C, which hides the register names in <asm.h> (`fp` is `$30` otherwise, and
-# `CdSearchFile(CdlFILE *fp, ...)` stops compiling), and it sets the 32-bit types.
+# Reads like the build: src/ before include/, LANGUAGE_C defined (hides <asm.h> register names), 32-bit types.
 PSX_GCC = os.environ.get("PSX_GCC") or str(ROOT / "toolchains/gcc-2.7.2-psx/gcc")
 INCLUDES = ("-Isrc", "-Iinclude", "-Iinclude/psyq")
 DEFINES = ("-D__attribute__(x)=", "-D__asm__(x)=", "-D__extension__=")

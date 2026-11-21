@@ -1,7 +1,4 @@
-"""The rows of ``config/symbols/``: parse the document, validate each row, reject overlaps.
-
-Pure: the caller reads the file. A bad document or row is a :class:`LinkError`.
-"""
+"""The rows of ``config/symbols/``: parse the document, validate each row, reject overlaps."""
 
 from __future__ import annotations
 
@@ -11,7 +8,6 @@ from typing import Any, NamedTuple
 
 from bof3.core.paths import CONFIG
 
-TABLE = f"{CONFIG}/symbols.toml"  # the single file before the split into SPLIT
 SPLIT = f"{CONFIG}/symbols"
 
 _NAME = re.compile(r"^[A-Za-z_]\w*$")

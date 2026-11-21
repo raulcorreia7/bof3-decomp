@@ -185,10 +185,7 @@ HISTORY = (
 
 
 def grep_files(word: str, scope: list[str]) -> list[str]:
-    """Return the tracked files under ``scope`` that hold ``word`` as a whole word.
-
-    The attempts history is never listed: a rename does not edit it.
-    """
+    """Return the tracked files under ``scope`` that hold ``word`` as a whole word."""
     names = git(
         "grep",
         "-l",
@@ -324,12 +321,7 @@ def link_owners(image: str) -> list[str]:
 
 
 def address_clash(name: str, images: list[str]) -> str | None:
-    """Why an address name cannot be used again, or None when its address is free.
-
-    An address name spells its own address, so another image may hold it for its own symbol
-    there, and a reference to it names the same symbol. Only a use in the image itself or a
-    visible table row with another address collides; comments and strings name nothing.
-    """
+    """Why an address name cannot be used again, or None when its address is free."""
     pattern = re.compile(r"\b" + re.escape(name) + r"\b")
     address = symbols.address_of(name)
     for image in images:
@@ -866,11 +858,7 @@ def _check_table(
 
 
 def check(args: argparse.Namespace) -> int:
-    """Report the table's problems; a name at two addresses or an out-of-order table exits 1.
-
-    The other findings are the owner's list: a row repeated in several images (a candidate for a
-    group table), an alias no source mentions, and a row with no ``source``.
-    """
+    """Report the table's problems; a name at two addresses or an out-of-order table exits 1."""
     try:
         tables = symbols.load(ROOT)
     except symbols.LinkError as error:
@@ -901,8 +889,6 @@ def check(args: argparse.Namespace) -> int:
     )
     return status
 
-
-# --- Lookup ---------------------------------------------------------------------------------
 
 CLANG = os.environ.get("SYMBOL_CLANG", "clang")
 CLANG_FLAGS = [
@@ -1374,11 +1360,7 @@ def foreign_visible(table: str, image: str | None, addr: int) -> bool:
 
 
 def row_span(row: Row, following: dict[int, int]) -> int:
-    """Return a row's extent: its size, its layout subsegment, its type, or a guess.
-
-    A row outside its table's payload (a resident symbol copied into an overlay table) has no
-    meaningful next row there, so it keeps the 0x100-byte guess the former lookup used.
-    """
+    """Return a row's extent: its size, its layout subsegment, its type, or a guess."""
     if row.size is not None:
         return row.size
     span = splat_spans(row.table).get(row.addr)
@@ -1615,11 +1597,7 @@ def _write_xrefs(image: str, data: dict) -> None:
 
 
 def _rizin_xrefs(queries: list[tuple[str, int]]) -> list[tuple[str, int, str]]:
-    """Return each image's Rizin cross-references to the queried addresses.
-
-    The first query in an image analyses it, saves the analysis in the project and caches
-    every cross-reference in build/symbol-xrefs; a later address only reads that cache.
-    """
+    """Return each image's Rizin cross-references to the queried addresses."""
     by_image: dict[str, set[int]] = collections.defaultdict(set)
     for image, addr in queries:
         by_image[image].add(addr)
@@ -1735,8 +1713,6 @@ def uses(args: argparse.Namespace) -> int:
         print(f"rizin\t{image}\t0x{source:08X}\t{kind}")
     return 0
 
-
-# --- Value lookup ---------------------------------------------------------------------------
 
 VALUE_INCLUDE = re.compile(r'^\s*#\s*include\s*([<"])([^>"]+)[>"]', re.M)
 COMMENT = re.compile(r"/\*.*?\*/|//[^\n]*", re.S)
@@ -2109,8 +2085,6 @@ def value(args: argparse.Namespace) -> int:
         print(f"{item.name}\t{item.header}:{item.line}\t{item.family}")
     return 0
 
-
-# --- Values: what each numeric literal means ------------------------------------------------
 
 VALUE_LITERAL = re.compile(r"(?<![\w.])(0[xX][0-9A-Fa-f]+|\d+)([uUlL]*)(?![\w.])")
 VALUE_BODY = re.compile(
@@ -3094,12 +3068,9 @@ def _value_subsystem(path: str) -> str:
     return parts[0]
 
 
-# --- Call-graph layers ----------------------------------------------------------------------
-
 LAYER_RESIDENT = RESIDENT
 FUNC_ADDRESS_NAME = re.compile(r"func_[0-9A-F]{8}$")
 NON_MATCHING_DEF = re.compile(r"\bNON_MATCHING\b")
-HAND_ASM_DEF = re.compile(r"\bHAND_ASM\s*\(\s*(\w+)\s*\)")
 JAL = re.compile(r"\bjal\s+([A-Za-z_]\w*)")
 JALR = re.compile(r"\bjalr\b")
 DISPATCH_CALL = re.compile(r"SYS_DISPATCH_(?:BYTE|TASK)\(\s*\(*\s*([A-Za-z_]\w*)")
@@ -3537,10 +3508,7 @@ def _retail_table_entries(
 
 
 def assign_layers(count: int, edges: list[set[int]]) -> list[int]:
-    """Return each node's layer: 0 when it calls no game function, else 1 + its deepest callee.
-
-    A cycle is one strongly connected component and shares one layer.
-    """
+    """Return each node's layer: 0 when it calls no game function, else 1 + its deepest callee."""
     adjacency = [list(targets) for targets in edges]
     reverse: list[set[int]] = [set() for _ in range(count)]
     for source, targets in enumerate(edges):
@@ -3730,8 +3698,6 @@ def layers(args: argparse.Namespace) -> int:
     return 0
 
 
-# --- Record accesses ------------------------------------------------------------------------
-
 MIPS_READ = {
     "lb": (1, True),
     "lbu": (1, False),
@@ -3740,7 +3706,6 @@ MIPS_READ = {
     "lw": (4, None),
 }
 MIPS_WRITE = {"sb": 1, "sh": 2, "sw": 4}
-MIPS_READ_OPS = {0x20, 0x21, 0x23, 0x24, 0x25}
 MIPS_WRITE_OPS = {0x28, 0x29, 0x2B}
 MIPS_OPCODES = {
     0x08: "addi",
@@ -3868,11 +3833,7 @@ def decode_accesses(
     pointer_cells: dict[int, str],
     function_names: dict[int, str],
 ) -> tuple[list[MipsAccess], int, int]:
-    """Decode one function: the accesses it makes into ranges or traced pointer types.
-
-    Returns the accesses, the number of traced memory operations, and the number of
-    base-register operations whose base could not be followed.
-    """
+    """Decode one function: the accesses it makes into ranges or traced pointer types."""
     starts = [item.start for item in ranges]
     registers: dict[int, object] = {}
     loaded: dict[int, int] = {}
@@ -4076,11 +4037,7 @@ def _pointer_target(value: str) -> str | None:
 
 
 def _task_types() -> dict[str, str]:
-    """Return image -> the record type its g_Task macro reads the scratchpad cell as.
-
-    A family header (``src/overlays/battle/battle.h``) casts the cell for every image under
-    its folder; an image header is more specific and wins.
-    """
+    """Return image -> the record type its g_Task macro reads the scratchpad cell as."""
     pattern = re.compile(
         r"#\s*define\s+g_Task\s+\(\(\s*(?:volatile\s+)?(\w+)\s*\*\s*\)\s*g_Task\s*\)"
     )
@@ -4702,8 +4659,6 @@ def records(args: argparse.Namespace) -> int:
         print("\t".join(str(row[key]) for key in keys))
     return 0
 
-
-# --- Signatures, extents and homes from the split assembly -----------------------------------
 
 ASM_ROOT = ROOT / "build/asm"
 SYSTEM_FOLDERS = {

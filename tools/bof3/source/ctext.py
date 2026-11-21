@@ -58,11 +58,7 @@ def mask(text: str) -> str:
 
 
 def find_definition(text: str, name: str) -> tuple[int, int] | None:
-    """Return the ``(start, end)`` offsets of the top-level definition of ``name``.
-
-    ``start`` is the beginning of the line that holds the name; ``end`` follows the closing
-    brace. Prototypes, calls and uses inside a body do not count.
-    """
+    """Return the ``(start, end)`` offsets of the top-level definition of ``name``."""
     masked = mask(text)
     depth = 0
     levels = []

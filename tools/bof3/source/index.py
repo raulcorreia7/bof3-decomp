@@ -1,8 +1,4 @@
-"""The function index: one record per function of every linked image.
-
-It reads ``build/meson/<image>.elf`` and ``.map`` (after ``meson compile``) and caches the
-records in ``build/func_index.json.gz``. The cache is rebuilt when an ELF is newer.
-"""
+"""The function index: one record per function of every linked image."""
 
 from __future__ import annotations
 
