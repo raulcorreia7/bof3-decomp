@@ -14,6 +14,6 @@ MATCH void func_801F2E74(SparkParticle* spark) {
     poly->y1 = poly->y0 + D_801F4328[spark->frame].dy1;
     poly->x2 = poly->x0 + D_801F4328[spark->frame].dx2;
     poly->y2 = poly->y0 + D_801F4328[spark->frame].dy2;
-    setRGB0(poly, 0, spark->shade, spark->shade);
+    setRGB0(poly, 0, spark->header.shade, spark->header.shade);
     Area_AddCellPrim(spark->pos.vx, spark->pos.vy, -2, sizeof(POLY_F3));
 }

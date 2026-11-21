@@ -11,8 +11,8 @@ MATCH s32 func_801F4E7C(void) {
     Area_SetCameraMatrix(buffer);
     slot = MEM_PTR(FallingSpark, AREA_WORK);
     for (i = 0; i < 16; i += 1, slot++) {
-        if (slot->active != 0) {
-            D_801F5FBC[slot->kind](slot);
+        if (slot->header.active != 0) {
+            D_801F5FBC[slot->header.type](slot);
             live = 1;
             func_801F4BC0(slot);
         }

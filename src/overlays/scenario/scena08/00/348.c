@@ -616,7 +616,7 @@ INCLUDE_ASM(func_801F85F0);
 #include "shared/GFX_DrawProjectedDisc.h"
 
 MATCH void func_801F8964(FallingSpark* spark) {
-    GFX_DRAW_PROJECTED_DISC(&spark->x, spark->fade, 0x20, 1);
+    GFX_DRAW_PROJECTED_DISC(&spark->pos.vx, spark->header.shade, 0x20, 1);
 }
 
 MATCH void func_801F8AE8(void) {
@@ -626,7 +626,7 @@ MATCH void func_801F8AE8(void) {
     spark = (FallingSpark*)AREA_WORK;
     index = 0;
     do {
-        spark->active = 0;
+        spark->header.active = 0;
         index += 1;
         spark += 1;
     } while ((index & BYTE_MASK) < SCENA08_SPARK_COUNT);
@@ -638,7 +638,7 @@ MATCH FallingSpark* func_801F8B14(void) {
 
     spark = (FallingSpark*)AREA_WORK;
     for (i = 0; i < SCENA08_SPARK_COUNT; i++) {
-        if (spark->active == 0) {
+        if (spark->header.active == 0) {
             return spark;
         }
         spark += 1;
@@ -659,8 +659,8 @@ MATCH u8 func_801F8BF8(void) {
     Area_SetCameraMatrix(buffer);
     spark = (FallingSpark*)AREA_WORK;
     for (i = 0; i < SCENA08_SPARK_COUNT; i += 1, spark += 1) {
-        if (spark->active != 0) {
-            D_801FE8FC[spark->kind](spark);
+        if (spark->header.active != 0) {
+            D_801FE8FC[spark->header.type](spark);
             live = 1;
             func_801F8964(spark);
         }
@@ -671,12 +671,12 @@ MATCH u8 func_801F8BF8(void) {
 MATCH void func_801F8CDC(FallingSpark* spark) {
     u8 life;
 
-    life = spark->life - 1;
-    spark->fade += 6;
-    spark->life = life;
+    life = spark->header.life - 1;
+    spark->header.shade += 6;
+    spark->header.life = life;
     if (life == 0) {
-        spark->life = spark->life_reload;
-        spark->kind += 1;
+        spark->header.life = spark->life_reload;
+        spark->header.type += 1;
     }
 }
 
@@ -686,14 +686,14 @@ MATCH void func_801F8D4C(FallingSpark* spark) {
     u8  life;
     s32 speed;
 
-    life         = spark->life - 1;
-    speed        = spark->speed + TO_COORD(4);
-    spark->life  = life;
-    spark->speed = speed;
-    spark->z += speed;
-    spark->fade += 6;
+    life               = spark->header.life - 1;
+    speed              = spark->speed + TO_COORD(4);
+    spark->header.life = life;
+    spark->speed       = speed;
+    spark->pos.vz += speed;
+    spark->header.shade += 6;
     if (life == 0) {
-        spark->active = 0;
+        spark->header.active = 0;
     }
 }
 
