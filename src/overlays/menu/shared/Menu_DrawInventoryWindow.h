@@ -53,11 +53,11 @@ MATCH void Menu_DrawInventoryWindow(MenuPanelTask* task) {
             }
             if (row == task->flags + scroll_shift || row == task->unk_0C + scroll_shift) {
                 if (row_shade != UI_TEXT_DIM) {
-                    func_801AF800(task->pos.x + 7, (s16)(y + 26), UI_TEXT_DIM, task->unk_0A, *ids, held, true);
+                    UI_DrawItemRow(task->pos.x + 7, (s16)(y + 26), UI_TEXT_DIM, task->unk_0A, *ids, held, true);
                 }
-                func_801AF800(task->pos.x + 7, (s16)(y + 24), row_shade, task->unk_0A, *ids, held, dim);
+                UI_DrawItemRow(task->pos.x + 7, (s16)(y + 24), row_shade, task->unk_0A, *ids, held, dim);
             } else {
-                func_801AF800(task->pos.x + 7, (s16)(y + 26), row_shade, task->unk_0A, *ids, held, dim);
+                UI_DrawItemRow(task->pos.x + 7, (s16)(y + 26), row_shade, task->unk_0A, *ids, held, dim);
             }
         }
         ids++;
@@ -108,5 +108,5 @@ MATCH void Menu_DrawInventoryWindow(MenuPanelTask* task) {
         UI_DrawSprite(task->pos.x + 144, task->pos.y, 0x33, UI_SPRITE_ALT_PAGE);
     }
 
-    func_801AFA1C(D_801C893C[task->unk_0A], task->unk_0B, task->pos.x + 144, task->pos.y + 24, 9, task->unk_0A != ITEM_CATEGORY_VITAL ? INV_SLOTS_PER_CATEGORY : INV_VITAL_ITEM_SLOTS, 116);
+    UI_DrawScrollbar(D_801C893C[task->unk_0A], task->unk_0B, task->pos.x + 144, task->pos.y + 24, 9, task->unk_0A != ITEM_CATEGORY_VITAL ? INV_SLOTS_PER_CATEGORY : INV_VITAL_ITEM_SLOTS, 116);
 }

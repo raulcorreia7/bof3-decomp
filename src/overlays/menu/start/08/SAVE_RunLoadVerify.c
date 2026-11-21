@@ -1,7 +1,5 @@
 #include "start_08.h"
 
-extern u8 g_SndMono;
-
 MATCH void SAVE_RunLoadVerify(void) {
     u32* clear;
     u8*  src;
@@ -39,7 +37,7 @@ MATCH void SAVE_RunLoadVerify(void) {
                 SND_PlaySE(EMI_SE_ID(SND_BANK_COMMON, 7));
                 g_SaveCardStatus = SAVE_STATUS_BAD_CHECKSUM;
             } else {
-                if (g_SndMono == 0) {
+                if (g_SndMono_nv == 0) {
                     SsSetStereo();
                 } else {
                     SsSetMono();

@@ -508,7 +508,6 @@ extern u8              s_ChoiceMenuCursors[12];
 /* The g_SndMono byte under a plain view of its own (an alias row); the
  * settings step reads and writes it through one pointer. */
 extern u8              g_SndMono_nv;
-extern volatile u8     g_SndMono;
 extern u8              s_SkillOrderCursors[4][4];
 extern u8              s_SkillOrderGroups[4][6];
 extern u8              s_SkillOrderKinds[3][6];

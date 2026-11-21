@@ -19,19 +19,13 @@ case "${1:-}" in
 	;;
 esac
 
-# A tool on PATH counts only when it runs: a version-manager shim with no version set does not.
+# The pinned copy in .venv wins; a tool on PATH counts only when it runs: a version-manager shim with no version set does not.
 pick() { # <name> <override>
-	if [ -n "$2" ]; then printf '%s\n' "$2"; else bin/internal/find-tool "$1" 2>/dev/null || printf '\n'; fi
+	if [ -n "$2" ]; then printf '%s\n' "$2"; elif [ -x ".venv/bin/$1" ]; then printf '%s\n' ".venv/bin/$1"; else bin/internal/find-tool "$1" 2>/dev/null || printf '\n'; fi
 }
 clang_format=$(pick clang-format "${CLANG_FORMAT:-}")
 dprint=$(pick dprint "${DPRINT:-}")
-if [ -n "${RUFF:-}" ]; then
-	ruff=$RUFF
-elif [ -x .venv/bin/ruff ]; then
-	ruff=.venv/bin/ruff
-else
-	ruff=$(pick ruff "")
-fi
+ruff=$(pick ruff "${RUFF:-}")
 for entry in "clang-format:$clang_format" "ruff:$ruff" "dprint:$dprint"; do
 	tool=${entry%%:*}
 	path=${entry#*:}

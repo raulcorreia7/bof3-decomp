@@ -9,8 +9,6 @@
 /* FAKE: the call passes the count as s32, the width the real prototype (u8) lacks. */
 #define Item_Add ((bool (*)(s32, s32, s32, s32))Item_Add)
 
-/* D_80143F1D */
-extern u8  g_GameRequestKind;
 /* The selection pairs at the payload start. */
 extern u8  D_801F2C04[];
 /* The selection record and the request tables it selects from. */

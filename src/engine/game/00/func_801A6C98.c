@@ -32,8 +32,8 @@ MATCH void func_801A6C98(u8* record) {
 
     script            = record;
     off               = script[9] * 8;
-    g_Task            = &D_80147A58[script[0xB]];
-    g_CurrentActor    = &D_80147A58[script[0xB]];
+    g_Task            = &g_PartyActors[script[0xB]];
+    g_CurrentActor    = &g_PartyActors[script[0xB]];
     src               = *(u8**)((u8*)g_AreaLoads[g_GameAreaId] + 8) + off;
     g_Task->direction = script[0] & 0xF;
 
@@ -67,15 +67,15 @@ MATCH void func_801A6C98(u8* record) {
     tail->unk_18          = 0;
     tail->voice_flags.raw = *(u8*)((u8*)shared + 2);
 
-    index                          = data->index;
-    entry                          = &D_80147A58[index];
-    entry->unk_88                  = 0;
-    entry->walk_dest_y             = 0;
-    D_80147A58[index].walk_dest_x  = 0;
-    D_80147A58[data->index].unk_77 = data->unk_0A;
-    D_80147A58[data->index].unk_78 = data->unk_06;
-    D_80147A58[data->index].unk_7C = (data->unk_0D | (data->unk_0C << 8));
-    D_80147A58[data->index].unk_94 = 0x7F;
+    index                             = data->index;
+    entry                             = &g_PartyActors[index];
+    entry->unk_88                     = 0;
+    entry->walk_dest_y                = 0;
+    g_PartyActors[index].walk_dest_x  = 0;
+    g_PartyActors[data->index].unk_77 = data->unk_0A;
+    g_PartyActors[data->index].unk_78 = data->unk_06;
+    g_PartyActors[data->index].unk_7C = (data->unk_0D | (data->unk_0C << 8));
+    g_PartyActors[data->index].unk_94 = 0x7F;
 
     Actor_SetOptionFlags((u8*)data + 8);
     g_Task->tint.steps.delta.r = -0x80;

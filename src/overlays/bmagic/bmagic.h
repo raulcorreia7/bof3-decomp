@@ -475,7 +475,7 @@ void func_801F006C(void);
 
 /* Defined in BMagic_AllocEffect.h, which a member includes after its first call. */
 u32  BMagic_AllocEffect(void);
-/* Defined in Effect_DrawBolt.h, which a member includes after its first call. */
+/* Defined in shared/Effect_DrawBolt.h, which a member includes after its first call. */
 void Effect_DrawBolt(void);
 /* Defined in Effect_DrawSparkleRays.h, which a member includes after its first call. */
 void Effect_DrawSparkleRays(u16 angle, u16 radius);

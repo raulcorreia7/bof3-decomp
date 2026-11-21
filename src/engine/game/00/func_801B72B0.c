@@ -1,7 +1,7 @@
 #include "game_00.h"
 
 MATCH void func_801B72B0(void) {
-    func_801C2438();
+    Actor_SetSemiTransparent();
     g_Task->tint.steps.delta.r                  = -0x80;
     g_Task->tint.steps.delta.g                  = -0x80;
     g_Task->tint.steps.delta.b                  = -0x80;

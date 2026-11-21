@@ -104,7 +104,8 @@ ASSERT_OFFSET(SceneSampleTrack, weight, 0x1A);
 ASSERT_SIZE(SceneSampleTrack, 0x28);
 
 /* The staged actor rows: the event scrolls to row 1 and tints row 0. */
-extern Actor D_80147A58[];
+/* D_80147A58 */
+extern Actor g_PartyActors[];
 
 /* The track's row count, the event flag byte beside it and the track the samples walk. */
 extern s8                D_801F6298;

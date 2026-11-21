@@ -27,11 +27,11 @@ MATCH void Menu_DrawEquipment(s32 origin_x, s32 origin_y, s32 index, s32 selecti
     UI_DrawText(icon_x, (s16)(y + 129), palette, MENU_EQUIPMENT_NAME_LENGTH, (u8*)(&g_Accessories[record->equip.accessories[0]]));
     UI_DrawText(icon_x, (s16)(y + 142), palette, MENU_EQUIPMENT_NAME_LENGTH, (u8*)(&g_Accessories[record->equip.accessories[1]]));
     x = (x + 5) & HALF_MASK;
-    func_801AEA80(x, (y + 0x49) & HALF_MASK, 8, selected);
-    func_801AEA80(x, (y + 0x56) & HALF_MASK, 0xA, selected);
-    func_801AEA80(x, (y + 0x63) & HALF_MASK, 9, selected);
-    func_801AEA80(x, (y + 0x70) & HALF_MASK, 0xB, selected);
-    func_801AEA80(x, (y + 0x84) & HALF_MASK, 0xC, selected);
+    UI_DrawIcon(x, (y + 0x49) & HALF_MASK, 8, selected);
+    UI_DrawIcon(x, (y + 0x56) & HALF_MASK, 0xA, selected);
+    UI_DrawIcon(x, (y + 0x63) & HALF_MASK, 9, selected);
+    UI_DrawIcon(x, (y + 0x70) & HALF_MASK, 0xB, selected);
+    UI_DrawIcon(x, (y + 0x84) & HALF_MASK, 0xC, selected);
     y += 0x91;
-    func_801AEA80(x, y & HALF_MASK, 0xC, selected);
+    UI_DrawIcon(x, y & HALF_MASK, 0xC, selected);
 }

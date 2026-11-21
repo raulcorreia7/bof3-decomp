@@ -59,11 +59,11 @@ A new header, `hand/` file or `NON_MATCHING` marker changes the build graph
 
 ## Gates
 
-| Check             | Command                                                   | Pass                                                                                                                                                                             |
-| ----------------- | --------------------------------------------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| One image's bytes | `check-<image>`                                           | `sha1sum -c` accepts the linked payload                                                                                                                                          |
-| Every image       | `check`                                                   | every image matches                                                                                                                                                              |
-| Hygiene           | `format-check`, `include-asm`, `markers`, `addrs`, `kept` | format passes; `INCLUDE_ASM` not above merge base; every definition marked; no recorded address lost; no named helper, define, global, type, member or function lost or degraded |
+| Check             | Command                                                 | Pass                                                                                                                                                                             |
+| ----------------- | ------------------------------------------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| One image's bytes | `check-<image>`                                         | `sha1sum -c` accepts the linked payload                                                                                                                                          |
+| Every image       | `check`                                                 | every image matches                                                                                                                                                              |
+| Hygiene           | `format-check`, `check-asm`, `markers`, `addrs`, `kept` | format passes; `INCLUDE_ASM` not above merge base; every definition marked; no recorded address lost; no named helper, define, global, type, member or function lost or degraded |
 
 A failed build or an unsupported flag is a failure, never a match. A percentage only ranks work.
 The full push list, with what fails each check: [tools: pre-push](../tools/README.md#pre-push).
@@ -110,7 +110,7 @@ keeps a short note with the reason C89 cannot express it.
 
 The build passes the image's asm folder as `-DASM_DIR="build/asm/<target>"` (`asm/<target>/hand` for
 authored assembly), so the macro takes only the unit name. A match removes one `INCLUDE_ASM` line;
-`include-asm` fails when the tree has more than the merge base with `origin/main` had. It prints
+`check-asm` fails when the tree has more than the merge base with `origin/main` had. It prints
 the ref it used and exits 2 when no such ref exists (`git fetch origin main`).
 
 ## Jump tables

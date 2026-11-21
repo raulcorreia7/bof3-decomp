@@ -26,9 +26,9 @@ MATCH void func_801FD07C(void) {
     /* kept: one base register for both writes; writing the view member directly adds four bytes. */
     counter                       = &g_ScratchPad.cells.halves[0];
     *counter                      = D_801FEA74;
-    func_801A65A0(D_801FE9A0);
+    Actor_SpawnPartyFromRecord(D_801FE9A0);
     Actor_BeginScript(0x4C, 0);
     *counter = D_801FEA78;
-    func_801A65A0(D_801FE9A0 + 0x10);
+    Actor_SpawnPartyFromRecord(D_801FE9A0 + 0x10);
     Actor_BeginScript(0x36, 0);
 }

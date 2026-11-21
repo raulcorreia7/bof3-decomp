@@ -59,10 +59,10 @@ MATCH void Menu_DrawEquipChoiceWindow(MenuPanelTask* task) {
     for (i = 0; i < scroll_rows + 9; i++) {
         if (*ids != 0) {
             if (task->unk_0A + i == task->unk_0B) {
-                func_801AF800(task->pos.x + 7, (s16)(y + 26), UI_TEXT_DIM, task->unk_08, *ids, *counts, true);
-                func_801AF800(task->pos.x + 7, (s16)(y + 24), UI_TEXT_NORMAL, task->unk_08, *ids, *counts, false);
+                UI_DrawItemRow(task->pos.x + 7, (s16)(y + 26), UI_TEXT_DIM, task->unk_08, *ids, *counts, true);
+                UI_DrawItemRow(task->pos.x + 7, (s16)(y + 24), UI_TEXT_NORMAL, task->unk_08, *ids, *counts, false);
             } else {
-                func_801AF800(task->pos.x + 7, (s16)(y + 26), UI_TEXT_NORMAL, task->unk_08, *ids, *counts, false);
+                UI_DrawItemRow(task->pos.x + 7, (s16)(y + 26), UI_TEXT_NORMAL, task->unk_08, *ids, *counts, false);
             }
         }
         ids++;
@@ -105,5 +105,5 @@ MATCH void Menu_DrawEquipChoiceWindow(MenuPanelTask* task) {
     UI_DrawSprite(task->pos.x + 8, task->pos.y, 0x32, UI_SPRITE_ALT_PAGE);
     UI_DrawSprite(task->pos.x + 144, task->pos.y, 0x33, UI_SPRITE_ALT_PAGE);
 
-    func_801AFA1C(g_MenuEquipChoiceIds, task->unk_0A, task->pos.x + 144, task->pos.y + 24, 9, INV_SLOTS_PER_CATEGORY, 116);
+    UI_DrawScrollbar(g_MenuEquipChoiceIds, task->unk_0A, task->pos.x + 144, task->pos.y + 24, 9, INV_SLOTS_PER_CATEGORY, 116);
 }

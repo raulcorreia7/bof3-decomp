@@ -23,7 +23,7 @@ MATCH void func_801F35F4(void) {
         cursor = g_ScriptState->cursor;
         func_801AC768(g_ScriptState, 7, actor_index, slot, 16);
         g_ScriptState->cursor = cursor;
-        cell                  = D_80147A58[actor_index].direction & 7;
+        cell                  = g_PartyActors[actor_index].direction & 7;
         g_Task->direction     = cell;
         D_80143F50            = cell;
     }

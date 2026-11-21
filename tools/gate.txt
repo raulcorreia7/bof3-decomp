@@ -9,7 +9,7 @@ check-headers|compiler|chain||meson compile -C $bld check-headers
 check-plain|compiler|par|check-plain|tools/check_plain.sh $bld/plain-flags.txt
 check-tree|none|par|check-tree|tools/check_tree.sh $ref
 externs|none|par||tools/check_externs.sh $ref
-include-asm|none|par|include-asm|tools/check_asm.sh $ref
+check-asm|none|par|check-asm|tools/check_asm.sh $ref
 format-check|none|par|format-check|tools/format.sh --check
 test|none|par||meson test -C $bld --no-rebuild --print-errorlogs
 typeloss|none|par||python3 tools/typeloss.py $base HEAD
