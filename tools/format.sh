@@ -45,5 +45,11 @@ done
 find src include -name '*.[ch]' ! -path 'include/psyq/*' ! -name 'D_*.c' ! -name 'data*.c' ! -name '*_Data.c' -print0 |
 	xargs -0 -P "$(nproc)" -n 200 "$clang_format" $mode
 "$ruff" format -q ${check:+--check} tools
-[ -z "$check" ] || "$ruff" check -q tools
+if [ -n "$check" ]; then
+	"$ruff" check -q tools
+	pyright=.venv/bin/pyright
+	[ -x "$pyright" ] || pyright=$(command -v pyright || true)
+	[ -n "$pyright" ] || { echo "format: no pyright; Pyright comes with tools/setup.sh --dev" >&2; exit 1; }
+	"$pyright" -p pyproject.toml >/dev/null || { "$pyright" -p pyproject.toml; exit 1; }
+fi
 if [ -n "$check" ]; then "$dprint" check; else "$dprint" fmt; fi

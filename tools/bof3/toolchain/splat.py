@@ -284,8 +284,8 @@ def _declared_addresses(maps: list[Path]) -> set[int]:
     return found
 
 
-def _integer(value: object) -> int:
-    return int(value, 0) if isinstance(value, str) else int(value)
+def _integer(value: str | int) -> int:
+    return int(value, 0) if isinstance(value, str) else value
 
 
 def normalize_linker_script(root: Path, target: str) -> bool:

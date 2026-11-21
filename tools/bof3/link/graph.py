@@ -21,7 +21,7 @@ __all__ = ["Row", "flat", "link_script", "object_name", "rows", "source_object"]
 _RESERVED = re.compile(r"[+@\s]")
 
 #: One graph row: kind, output name, source, ASM_DIR (compile rows only).
-Row = tuple[str, ...]
+Row = tuple[str | None, ...]
 
 
 def flat(path: str) -> str:
