@@ -123,6 +123,12 @@ To convert an image:
 3. Run `meson setup --reconfigure build/meson`, then `ninja -C build/meson check-<image>` and the
    full `pre-push`.
 
+A run that holds a proven object edge is several units, one `c` row each (`plchar_turn_script`,
+`plchar_ryu_walk`, ...): the edge is a function run that recurs in the same order in three or more
+images, so each such run, and each stretch between two runs, is one unit named for its role and
+what it holds. A stretch without such evidence stays one unit. Each unit's `.rodata` and `.data`
+owner rows take the unit's name.
+
 The boundary is the text run: a `.data`, `.rodata` or `.bss` run, a draft or `INCLUDE_ASM` function,
 or the module-id word ends it. A function source that also feeds another row's section (a shared
 body with its own `.rodata`, as in `area175/13`) is not a clean run: the link fails with a section

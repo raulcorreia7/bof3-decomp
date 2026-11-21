@@ -8,7 +8,11 @@ segments:
     section_order: [.data, .text, .rodata, .bss]
     subsegments:
       - [0x0, .data, D_801CE400]
-      - [0x4, c, plchar]
+      - [0x4, c, plchar_turn_script]
+      - [0x264, c, plchar_ryu_walk]
+      - [0xC64, c, plchar_spawn_actor]
+      - [0xEC0, c, plchar_nina_turn]
+      - [0x1088, c, plchar_helper_slots]
   # Placement: .data resumes after another section in the retail bytes; one segment would group both .data runs.
   - name: data
     type: code

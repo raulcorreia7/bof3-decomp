@@ -19,6 +19,7 @@ drafts|compiler|par||python3 tools/check_drafts.py $ref
 names|none|par||python3 tools/check_names.py --diff $ref
 addrs|none|par||python3 tools/check_addrs.py $ref HEAD
 kept|none|par||python3 tools/check_kept.py $ref HEAD
+matches|none|par||python3 tools/check_matches.py $ref HEAD
 quality|none|par||python3 tools/quality.py --diff $ref
 order|none|par||python3 tools/order_check.py --diff $ref
 message-ids|none|par||python3 tools/message_ids.py --check

@@ -192,6 +192,7 @@ a tree with uncommitted changes fails before any check runs. `BASE_REF` defaults
 | `names`         | a new name carries an 8-digit address, a listed legacy one is gone, an added line names a parameter `argN`, or a changed image keeps an address-named layout row for a named symbol | none |
 | `addrs`         | a symbol address that `config/symbols/<image>.toml` records on `main` is gone                   | none       |
 | `kept`          | a named helper, define, global, type, member or function is lost or degraded            | none       |
+| `matches`       | a function that is `MATCH` C at the base is not at an address of its image, without `Match-Removed:` | none       |
 | `quality`       | a touched file gains casts, fake helpers, `func_`/`D_` names or pasted bodies           | none       |
 | `order`         | declarations or symbols in a changed file are out of their recorded order               | none       |
 | `message-ids`   | `include/menu/message_ids.h` is stale, or a message id has no line in `include/msg/messages.def` | none       |
@@ -218,7 +219,7 @@ Meson, setup or another tool calls these. A contributor does not run them.
 | `split.py`, `link_symbols.py`                | Split an image and write its link script                                |
 | `cc.py`, `psxdecomp/dmpsx.py`                | The compiler wrapper (it caches objects in `~/.cache/bof3-cc`; `BOF3_CC_CACHE=0` turns that off) and the DMPSX rewrite |
 | `objdiff_config.py`, `rzproject.py`          | Build the objdiff project and the Rizin projects                        |
-| `unity_check.py`, `check_addrs.py`, `check_kept.py`, `check_markers.py`, `check_names.py`, `check_asm.sh`, `check_externs.sh`, `check_configured.sh`, `check_plain.sh`, `check_tree.sh`, `check_enum_members.py`, `check_signatures.py` | The bodies of the `addrs`, `kept`, `markers`, `names`, `check-asm`, `externs`, `check-headers`, `check-plain` and `check-tree` gates |
+| `unity_check.py`, `check_addrs.py`, `check_kept.py`, `check_matches.py`, `check_markers.py`, `check_names.py`, `check_asm.sh`, `check_externs.sh`, `check_configured.sh`, `check_plain.sh`, `check_tree.sh`, `check_enum_members.py`, `check_signatures.py` | The bodies of the `addrs`, `kept`, `matches`, `markers`, `names`, `check-asm`, `externs`, `check-headers`, `check-plain` and `check-tree` gates |
 | `format.sh`                                  | The body of `format` and `format-check`                                 |
 
 `decomp_yaml.py` writes coddog's manifest and is called by `bin/coddog`, not by the build.
