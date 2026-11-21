@@ -40,7 +40,7 @@ src/overlays/battle/battle/03/func_801D9DBC.c	func_801D9DBC_decl_guard
 src/overlays/battle/battle/03/func_801DA078.c	func_801DA078_decl_guard
 src/overlays/battle/battle/15/battle_15.h	D_801462F0_state
 src/overlays/battle/battle/15/func_800A1CB4.c	D_801462F0_state
-src/overlays/bmagic/Effect_DrawBolt.h	g_ScratchPadVectorHalves
+src/overlays/bmagic/shared/Effect_DrawBolt.h	g_ScratchPadVectorHalves
 src/overlays/bmagic/magic058/03/magic058_03.h	g_ScratchPadHalves
 src/overlays/bmagic/magic097/03/BMagic_Effect.c	g_ScratchPadHalves
 src/overlays/bmagic/magic097/03/BMagic_Effect.c	g_ScratchPadVectorHalves

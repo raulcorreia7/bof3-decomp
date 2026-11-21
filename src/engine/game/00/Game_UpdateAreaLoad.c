@@ -26,7 +26,7 @@ MATCH void Game_UpdateAreaLoad(void) {
     ui_mode = g_GameRequestKind;
     if ((u8)(ui_mode + 2u) >= 2u) {
         UI_SetMode(ui_mode);
-        func_80198BC4(1u);
+        Area_WaitWindowEffect(1u);
         if (LOBU(g_GameRequestFlags) & 0x1u) {
             func_801A0048(g_AreaTargetCellX, g_AreaTargetCellY);
         }

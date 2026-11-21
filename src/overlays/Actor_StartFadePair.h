@@ -1,4 +1,4 @@
-/* Takes two free actors, passes each to func_801A4D54 with DATA, moves them one unit apart diagonally, makes both semi-transparent and starts palette fades (15, 0, 0) on the first and (0, 0, 15) on the second; sets the timer to 4 and mode 1. Returns if no actor is free. */
+/* Takes two free actors, passes each to Actor_SpawnFromRecord with DATA, moves them one unit apart diagonally, makes both semi-transparent and starts palette fades (15, 0, 0) on the first and (0, 0, 15) on the second; sets the timer to 4 and mode 1. Returns if no actor is free. */
 /* ACTOR_START_FADE_PAIR (area032 0x801F30EC, scena03 0x801F754C) */
 #define ACTOR_START_FADE_PAIR(DATA)                                       \
     Actor* work;                                                          \
@@ -22,9 +22,9 @@
     g_Actors[g_Task->unk_04].header.flags = 1;                            \
     work                                  = g_Task;                       \
     *scratch                              = work->unk_03;                 \
-    func_801A4D54(data);                                                  \
+    Actor_SpawnFromRecord(data);                                          \
     *scratch = work->unk_04;                                              \
-    func_801A4D54(data);                                                  \
+    Actor_SpawnFromRecord(data);                                          \
     SP_REF(Actor*, 0x44) = work;                                          \
     g_Actors[work->unk_03].pos.x.fixed -= ONE;                            \
     g_Actors[work->unk_03].pos.y.fixed += ONE;                            \

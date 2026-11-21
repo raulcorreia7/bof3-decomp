@@ -7,7 +7,8 @@
 #include "overlays/area/worlds/world02.h"
 #include "area/spad.h"
 
-extern Actor D_80147A58[];
+/* D_80147A58 */
+extern Actor g_PartyActors[];
 /* The facing step bytes the cell walk advances by: x and y, one byte per facing. */
 extern s8    D_80181B00[];
 extern s8    D_80181B01[];

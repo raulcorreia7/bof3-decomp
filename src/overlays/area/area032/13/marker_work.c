@@ -185,7 +185,7 @@ MATCH void func_801F3728(void) {
      * g_Task load lands in $v1; allocator picks $v0 without it). */
     FAKE_REG(u8*, work, "$3");
 
-    func_801C2438();
+    Actor_SetSemiTransparent();
     flag                     = 1;
     g_Task->tint.bytes.flags = flag;
     work                     = (u8*)g_Task;

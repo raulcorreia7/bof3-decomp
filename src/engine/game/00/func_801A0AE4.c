@@ -21,7 +21,7 @@ MATCH void func_801A0AE4(Actor* record) {
         param = g_RouteSpeedScale[mode];
         if (record->unk_7B == 0) {
             if ((mode != 0) && (D_801C83BC[spad_b->header.step](record, param, 2) & BYTE_MASK)) {
-                func_801A2C10(record);
+                Actor_TurnRandom(record);
                 if (g_Task->timer != 0) {
                     timer = RANDOM_MASK(3) + 3;
                     goto block_7;

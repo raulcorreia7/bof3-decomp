@@ -7,7 +7,7 @@ MATCH void func_801F4270(void) {
     s32    x;
     s32    y;
 
-    work = &D_80147A58[3];
+    work = &g_PartyActors[3];
     for (index = 0; index < 16; index++) {
         if (COORD_INT(work->pos.x) == D_801F6ABC[index].x && COORD_INT(work->pos.y) == D_801F6ABC[index].y) {
             if (D_801F6ABC[index].target_x != GAME_NONE && D_801F6ABC[index].target_y != GAME_NONE) {

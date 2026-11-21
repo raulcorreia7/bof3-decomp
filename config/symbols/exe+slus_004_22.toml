@@ -216,6 +216,7 @@ D_80146904 = { addr = 0x80146904, size = 0x11D0, alias = true, source = "The Act
 g_ActorWalkDestX = { addr = 0x80146908, size = 0x4, alias = true, source = "x of the destination func_801AC33C walks the actor to; the Actor.walk_dest_x word (byte 0x80) seen as a column of g_Actors" }
 g_ActorWalkDestY = { addr = 0x8014690C, size = 0x4, alias = true, source = "y of the destination func_801AC33C walks the actor to; the Actor.walk_dest_y word (byte 0x84) seen as a column of g_Actors" }
 D_80146910 = { addr = 0x80146910, size = 0x4, alias = true, source = "The Actor.unk_88 word (byte 0x88) seen as a column of g_Actors" }
+g_PartyActors = { addr = 0x80147A58, source = "The four party actor rows after g_Actors; Area_UpdateParty steps them and the walk and adopt scripts index them by party slot." }
 g_AreaFocusY = { addr = 0x80147A90, source = "Y focus of the area." }
 g_ScriptWorkRecord = { addr = 0x80148208, type = "Actor", source = "The script work record." }
 g_ScriptState = { addr = 0x80148210, type = "ScriptState", source = "The script state." }
@@ -300,7 +301,7 @@ g_MessageWindowSteps = { addr = 0x80149B3C, source = "Steps of the plain message
 g_MessageChoiceSteps = { addr = 0x80149B50, source = "Steps of the answer list panel: open, grow, draw, shrink, release." }
 g_MessagePresetSteps = { addr = 0x80149B64, source = "Steps of the preset answer list panel: open, grow, draw, shrink, release." }
 jtbl_80149B78 = { addr = 0x80149B78, type = "Callback", source = "The switch table of UI_DrawTextAt: the jump targets of its jr dispatch." }
-jtbl_80149C00 = { addr = 0x80149C00, type = "Callback", source = "The switch table of func_8015B870: the jump targets of its jr dispatch." }
+jtbl_80149C00 = { addr = 0x80149C00, type = "Callback", source = "The switch table of Script_ReadValue: the jump targets of its jr dispatch." }
 g_EmiCdSteps = { addr = 0x80149C3C, alias = true, source = "CD step handlers of the EMI loader." }
 g_EmiRingSteps = { addr = 0x80149C60, alias = true, source = "EMI_UpdateStream copies it" }
 jtbl_80149C90 = { addr = 0x80149C90, type = "Callback", source = "The switch table of Char_ApplyMaster: the jump targets of its jr dispatch." }
@@ -546,11 +547,16 @@ SYS_ToggleFlag = { addr = 0x8015B5F4, type = "func", source = "Toggles a flag bi
 Game_IsScenarioEqual = { addr = 0x8015B61C, type = "func", source = "Tests whether the scenario equals a value." }
 Game_IsAreaEqual = { addr = 0x8015B644, type = "func", source = "Tests whether the area equals a value." }
 Game_TestSceneFlag = { addr = 0x8015B66C, type = "func", source = "Tests a scene flag." }
+Game_IsScenarioStateEqual = { addr = 0x8015B6A8, type = "func", source = "Script condition (table g_AreaScriptTests): the record byte equals the scenario state byte g_ScenarioState.state_04." }
+Game_IsCellTypeEqual = { addr = 0x8015B6D0, type = "func", source = "Script condition (table g_AreaScriptTests): the record byte equals g_GameCellType." }
+Game_TestScenarioFlag = { addr = 0x8015B6F8, type = "func", source = "Script condition (table g_AreaScriptTests): bit 0 of g_ScenarioState.flags_01, inverted when the record byte is not 1." }
 Game_IsLeaderEqual = { addr = 0x8015B73C, type = "func", source = "script test: the record byte equals the party leader's character id" }
 Game_TestEventFlag = { addr = 0x8015B764, type = "func", source = "Tests a scene event flag." }
 Game_HasVitalItem = { addr = 0x8015B798, type = "func", source = "Tests whether a vital item is held." }
 Game_IsScenarioAtMost = { addr = 0x8015B7C4, type = "func", source = "Tests whether the scenario is at least a value." }
+Game_HasPartyFlag = { addr = 0x8015B7F0, type = "func", source = "Script condition (table g_AreaScriptTests): bit 0 of party_flags of the character the record byte names." }
 func_8015B83C = { addr = 0x8015B83C, type = "func", source = "Entry of the script condition table data_8018214C: tests bit **cursor of the D_80145548 mask, whose owner is not proven." }
+Script_ReadValue = { addr = 0x8015B870, type = "func", source = "Reads the state value a script condition names by kind id; func_801A8F94 compares two of them or one against a byte." }
 Game_IsScriptVar0Equal = { addr = 0x8015B98C, type = "func", source = "Tests whether a script variable equals a value." }
 Game_IsScriptVar1Equal = { addr = 0x8015B9B4, type = "func", source = "Tests whether a script variable equals a value." }
 Game_IsScriptVar2Equal = { addr = 0x8015B9DC, type = "func", source = "Tests whether a script variable equals a value." }
@@ -558,6 +564,7 @@ Game_IsScriptVar3Equal = { addr = 0x8015BA04, type = "func", source = "Tests whe
 Game_SetScriptVar = { addr = 0x8015BA2C, type = "func", source = "Sets a script variable." }
 Game_IsScriptVarEqual = { addr = 0x8015BA50, type = "func", source = "Compares a script variable with a value." }
 Game_IncScriptVar = { addr = 0x8015BA84, type = "func", source = "Increments a script variable." }
+Game_TestNever = { addr = 0x8015BABC, type = "func", source = "Script condition (table g_AreaScriptTests): always false; the last table entry." }
 Actor_DispatchSelectorScript = { addr = 0x8015BAC4, type = "func", source = "Dispatches the actor script selected by the selector, task mode, and current actor context." }
 Area_TurnCameraX = { addr = 0x8015BBA4, type = "func", source = "Turns the camera around the x axis." }
 Area_StepCameraX = { addr = 0x8015BC14, type = "func", source = "Steps the camera x angle." }
@@ -600,6 +607,7 @@ SND_StopAllSequences = { addr = 0x8015D5D8, type = "func", source = "Stops all f
 SND_TestEffectVoicesBusy = { addr = 0x8015D660, type = "func", source = "Returns 1 when no effect voice is free; otherwise returns 0 and writes the entry index and seq of the first voice of the sep table whose seq slot reports end-of-sequence." }
 SND_QueueSelectionSE = { addr = 0x8015D71C, type = "func", source = "Marks the four effect voice slots free and queues the SE through SND_PlaySE." }
 SND_QueueSeVolume = { addr = 0x8015D7C8, type = "func", source = "Queues a sound SE with its volume." }
+Actor_PlayCueByDistance = { addr = 0x8015D820, type = "func", source = "Plays the cue and sets the sound level when the point D_80145EC6/D_80145ECA lies within a range band of the actor; script op caller passes the cue and actor index." }
 SND_QueueProximitySE = { addr = 0x8015DC08, type = "func", source = "Plays the proximity SE of the area." }
 SND_PlaySE = { addr = 0x8015DF18, type = "func", source = "Dispatches a SE's bank and record, updates the interpolated channel values and keys the requested voices." }
 SND_ReadSeBank0 = { addr = 0x8015E994, type = "func", source = "Reads a SE of sound bank 0 into voice slots (entry 0 of g_SndSeReaders)." }

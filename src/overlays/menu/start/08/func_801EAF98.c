@@ -50,13 +50,13 @@ loop_6:
         if (D_801ED878[val5] != 0) {
             val2 = val1 + 2;
             if (val0->unk_0B == val5) {
-                func_801AEA80((val0->pos.x + 7) & HALF_MASK, (val1 + 2) & HALF_MASK, 6, 1);
+                UI_DrawIcon((val0->pos.x + 7) & HALF_MASK, (val1 + 2) & HALF_MASK, 6, 1);
                 tmp0 = val1;
                 val1 -= 2;
                 UI_DrawText((s16)(val0->pos.x + 17), tmp0, UI_TEXT_DIM, TEXT_LENGTH_MAX, Message_GetText(D_801ED878[val5] + 0x4171));
                 val2 = val1 + 2;
             }
-            func_801AEA80((val0->pos.x + 7) & HALF_MASK, val2 & HALF_MASK, 6, 0);
+            UI_DrawIcon((val0->pos.x + 7) & HALF_MASK, val2 & HALF_MASK, 6, 0);
             UI_DrawText((s16)(val0->pos.x + 17), val1, 0, TEXT_LENGTH_MAX, Message_GetText(D_801ED878[val5] + 0x4171));
             if (val0->unk_0B == val5) {
                 val1 = val2;
@@ -107,7 +107,7 @@ loop_6:
     } while ((u32)(val4 & BYTE_MASK) < 0x11U);
     UI_DrawSprite((s16)(val0->pos.x + 8), (s16)val0->pos.y, 0x32, UI_SPRITE_ALT_PAGE);
     UI_DrawSprite((s16)(val0->pos.x + 144), (s16)val0->pos.y, 0x33, UI_SPRITE_ALT_PAGE);
-    func_801AFA1C(D_801ED878, val0->unk_0A, (s16)(val0->pos.x + 0x90), (s16)(val0->pos.y + 0x18), 9, 0x12, 0x74);
+    UI_DrawScrollbar(D_801ED878, val0->unk_0A, (s16)(val0->pos.x + 0x90), (s16)(val0->pos.y + 0x18), 9, 0x12, 0x74);
 }
 #else
 INCLUDE_ASM(func_801EAF98);

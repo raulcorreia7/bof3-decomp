@@ -186,9 +186,9 @@ MATCH void func_801F763C(void) {
     g_Actors[g_Task->unk_04].header.flags = 1;
     work                                  = (u8*)g_Task;
     *scratch                              = work[3];
-    func_801A4D54(data);
+    Actor_SpawnFromRecord(data);
     *scratch = work[4];
-    func_801A4D54(data);
+    Actor_SpawnFromRecord(data);
     SP_REF(u8*, 0x44) = work;
 
     g_Actors[work[3]].pos.y.fixed -= TO_COORD(1);

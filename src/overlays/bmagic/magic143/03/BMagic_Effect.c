@@ -219,7 +219,7 @@ NON_MATCHING void func_801EF23C(s32 band_height, u16 radius, u16 jitter_mask) {
 INCLUDE_ASM(func_801EF23C);
 #endif
 
-#include "overlays/bmagic/Effect_DrawBolt.h"
+#include "overlays/bmagic/shared/Effect_DrawBolt.h"
 
 MATCH void func_801EFC74(void) {
     POLY_G3* prim;

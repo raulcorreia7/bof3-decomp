@@ -1,0 +1,18 @@
+/* area059's code in link order: one translation unit for the whole .text run. */
+#include "area059_13.h"
+
+#include "Message_OpenAnswerMenu.c"
+#include "func_801F2C48.c"
+#include "func_801F2C78.c"
+#include "func_801F2CA8.c"
+#include "func_801F2CEC.c"
+#include "func_801F2D30.c"
+#include "overlays/area/shared/Actor_RunAreaStep.h"
+#include "func_801F2D90.c"
+#include "func_801F2E08.c"
+#include "Area_TestStepTrigger.c"
+#include "func_801F2F34.c"
+#include "func_801F2FD0.c"
+#include "overlays/area/shared/Actor_SnapToGround.h"
+#include "overlays/area/shared/Area_DrawLinkedLightPillar.h"
+#include "overlays/area/shared/Area_DrawLightPillar.h"

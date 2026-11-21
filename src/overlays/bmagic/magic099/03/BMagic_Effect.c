@@ -301,7 +301,7 @@ MATCH void func_801F0314(void) {
     }
 }
 
-#include "overlays/bmagic/Effect_DrawBolt.h"
+#include "overlays/bmagic/shared/Effect_DrawBolt.h"
 
 MATCH void func_801F070C(void) {
     POLY_G3* primitive;

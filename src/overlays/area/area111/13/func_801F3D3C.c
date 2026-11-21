@@ -11,8 +11,8 @@ MATCH void func_801F3D3C(void) {
     s32   frames;
     u8    facing;
 
-    target_x.fixed = D_80147A58[g_Task->unk_18].pos.x.fixed;
-    target_y.fixed = D_80147A58[g_Task->unk_18].pos.y.fixed;
+    target_x.fixed = g_PartyActors[g_Task->unk_18].pos.x.fixed;
+    target_y.fixed = g_PartyActors[g_Task->unk_18].pos.y.fixed;
     facing         = g_Task->direction & 7;
     /* The facing step bytes count half cells. */
     target_x.part.integer += D_80181B00[facing * 2] << 1;

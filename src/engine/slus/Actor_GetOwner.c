@@ -12,5 +12,5 @@ MATCH s32 Actor_GetOwner(void) {
     if ((work == (u8*)g_Game.members) || (work == (u8*)&g_Game.members[1]) || (work == (u8*)&g_Game.members[2])) {
         return 1;
     }
-    return (work < (u8*)D_80147A58) ? 0 : 3;
+    return (work < (u8*)g_PartyActors) ? 0 : 3;
 }

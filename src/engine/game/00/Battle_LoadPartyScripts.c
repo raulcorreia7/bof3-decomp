@@ -93,7 +93,7 @@ phase2:
             index++;
         } while (index < 32);
         off += BATTLE_PARTY_STRIDE;
-        func_801C2438();
+        Actor_SetSemiTransparent();
         g_Task->param.unk_0B     = 0;
         g_Task->tint.bytes.rgb.r = neg;
         g_Task->tint.bytes.rgb.g = neg;

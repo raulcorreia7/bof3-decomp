@@ -8,7 +8,7 @@ NON_MATCHING void func_801F3808(void) {
     u8  row;
     u8  col;
 
-    index = (g_CurrentActor - D_80147A58) + 1;
+    index = (g_CurrentActor - g_PartyActors) + 1;
     x     = (g_Task->pos.x.part.integer - 11) / 2;
     y     = (g_Task->pos.y.part.integer - 177) / 2;
     func_801F4604(x, y, 0);

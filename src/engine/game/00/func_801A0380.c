@@ -16,7 +16,7 @@ MATCH void func_801A0380(s16 x, s16 y, u16 kind) {
     if (g_Game.flags & 0x80) {
         result = g_SndBGMId;
     } else {
-        record = func_801A0490(x, y, kind);
+        record = Area_FindEncounterZoneOf(x, y, kind);
         if (record[7] == 0) {
             result = record[6];
         } else {

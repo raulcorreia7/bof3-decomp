@@ -30,23 +30,6 @@ extern Callback D_801F5F88[];
 extern Callback D_801F5FAC[];
 extern void (*D_801F5FBC[])(void* slot);
 
-/* One of the 16 slots at AREA_WORK, 0x1C bytes each. */
-typedef struct AreaBurstSlot {
-    u8  active; /* 0x00 - 0 marks a free slot */
-    u8  kind;   /* 0x01 - selects the per-frame handler */
-    u8  life;   /* 0x02 - frames left */
-    u8  fade;   /* 0x03 */
-    u8  unk_04; /* 0x04 */
-    u8  unk_05[3];
-    s32 speed;    /* 0x08 */
-    s32 unk_0C;   /* 0x0C */
-    s32 distance; /* 0x10 */
-    s32 unk_14;   /* 0x14 */
-    s32 unk_18;   /* 0x18 */
-} AreaBurstSlot;
-
-ASSERT_SIZE(AreaBurstSlot, 0x1C);
-
 /* One of the slots at AREA_WORK, 0x38 bytes each: a streak drawn between two points. */
 typedef struct AreaStreakSlot {
     u8   active;     /* 0x00 - 0 marks a free slot */
@@ -97,9 +80,9 @@ s32  func_801F4E7C(void);
 
 /* func_801F48E8 */
 void Area_DrawYellowLine(s32* from, s32* to, u8 intensity);
-void func_801F4BC0(AreaBurstSlot* slot);
-void func_801F4FEC(AreaBurstSlot* slot);
-void func_801F4DBC(AreaBurstSlot* slot);
+void func_801F4BC0(FallingSpark* slot);
+void func_801F4FEC(FallingSpark* slot);
+void func_801F4DBC(FallingSpark* slot);
 void func_801F5580(s32 arg0);
 
 /* One row of the screen-capture table: the region the trail dots copy from. */

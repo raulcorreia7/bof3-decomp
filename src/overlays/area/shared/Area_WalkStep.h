@@ -4,7 +4,7 @@
     s32 value;                                                                                                              \
     u16 value2;                                                                                                             \
     u8  value3;                                                                                                             \
-    func_801C3598();                                                                                                        \
+    Party_TickConfusion();                                                                                                  \
     func_801C2BEC();                                                                                                        \
     if (g_GameRequestFlags & AREA_LOAD_FLAG_WORLD_MAP) {                                                                    \
         if ((Area_GetCellCode((s32)COORD_INT(g_Task->pos.x), (s32)COORD_INT(g_Task->pos.y)) & 0xFF) == 0xAF) {              \
