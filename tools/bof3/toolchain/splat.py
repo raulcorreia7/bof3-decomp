@@ -4,6 +4,7 @@ from __future__ import annotations
 
 import contextlib
 import hashlib
+import os
 import re
 import shutil
 import subprocess
@@ -16,7 +17,7 @@ from bof3.core.paths import BUILD, CONFIG, SPLIT_ASM
 from bof3.link.inputs import write_if_changed
 from bof3.link.symbols import imported_map, splat_map
 from bof3.link.symbols import load as load_symbols
-from bof3.resolve.layout import read_splat
+from bof3.resolve.layout import outside_sources, read_splat
 
 
 def split_target(root: Path, manifest_splat: str) -> subprocess.CompletedProcess[str]:
@@ -195,14 +196,48 @@ def _build_manifest(root: Path, target: str) -> Path:
         "base_path": f"{root}/",
         "symbol_addrs_path": [*maps, str(auto)],
     }
+    rows = _from_common_folder(root, document, text[start + 1 :], options)
     head = yaml.safe_dump(
         {"name": document["name"], "sha1": document["sha1"], "options": options},
         sort_keys=False,
         width=1 << 30,
     )
     path = directory / "splat.yaml"
-    write_atomic(path, head + text[start + 1 :])
+    write_atomic(path, head + rows)
     return path
+
+
+_ROW_NAME = re.compile(r"^(\s+- \[0x[0-9A-Fa-f]+, [.\w]+, )([./\w]+)\]", re.M)
+_C_ROW = re.compile(r"^\s+- \[0x[0-9A-Fa-f]+, c, ([./\w]+)\]", re.M)
+
+
+def _from_common_folder(root: Path, document: dict, rows: str, options: dict) -> str:
+    """Name each row of an image that takes files from other folders from their common folder.
+
+    Splat writes a row's assembly beside the source it names, so a row named ``../sound/SND_Init``
+    would leave the image's asm folder. The returned rows name ``sound/SND_Init`` and
+    ``slus/func_8014AA04`` from ``src/engine``, which ``options["src_path"]`` becomes.
+    """
+    outside = outside_sources(document)
+    if not outside:
+        return rows
+    home = document["options"]["src_path"]
+    common = os.path.commonpath([home, *map(os.path.dirname, outside)])
+    prefix = os.path.relpath(home, common)
+    stems = {name for name in _C_ROW.findall(rows) if not name.startswith("../")}
+
+    def rename(match: re.Match[str]) -> str:
+        name = match[2]
+        if (
+            name.startswith("../")
+            or name in stems
+            or (root / home / f"{name}.c").is_file()
+        ):
+            name = os.path.normpath(f"{prefix}/{name}")
+        return f"{match[1]}{name}]"
+
+    options["src_path"] = common
+    return _ROW_NAME.sub(rename, rows)
 
 
 def _function_symbols(document: dict, root: Path, maps: list[Path]) -> str:

@@ -22,6 +22,7 @@ import sys
 from pathlib import Path
 
 from bof3.core.paths import ROOT
+from quality import SUBSYSTEMS
 
 GCC = os.environ.get("PSX_GCC") or str(ROOT / "toolchains/gcc-2.7.2-psx/gcc")
 GCC_DIR = os.path.dirname(os.path.realpath(GCC))
@@ -35,7 +36,7 @@ def subsystem(source: str) -> str:
     if parts[0] != "src":
         return "Other"
     if parts[1] == "engine":
-        return {"slus": "Executable", "game": "Game"}.get(parts[2], "Other")
+        return next((n for n, p in SUBSYSTEMS if source.startswith(p + "/")), "Other")
     if parts[1] == "logo":
         return "Logo"
     if parts[1] == "shared":

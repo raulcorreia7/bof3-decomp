@@ -62,7 +62,10 @@ Id to path: `emi/<family>/<archive>/<slot>` lives in `src/<root>/<archive>/<slot
 An engine image takes its files from several folders: a `c` row names a file outside the image folder
 by its path from that folder (`[0xC6D00, c, ../sound/SND_Init]`; `../../sound/SND_Init` in `game/00`).
 A system folder holds the files of both engine images, and the row says which image links a file.
-A file moves into its system folder when its name has a system prefix; the build reads the row.
+A named file lives in the folder of its system prefix: `engine/sys` (`SYS_`, `MATH_`, `INPUT_`), `cd`
+(`EMI_`, `LZ77_`), `gfx`, `sound`, `sdk` (PsyQ library members), `actor` (`Actor_`, `Script_`), `field`
+(`Area_`, `WorldMap_`, `FieldAction_`), `ui` (`UI_`, `Message_`, `Menu_`), `party` (`Party_`, `Char_`,
+`Item_`) and `state` (`Game_`, `Scene_`, `Battle_`). A file keeps its image folder until it is named.
 `config/` and `build/asm/` follow the id, which is the disc path; `src/` follows what the code does.
 
 The path tells the build which image a source belongs to, except in an engine system folder, where the

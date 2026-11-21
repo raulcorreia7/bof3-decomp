@@ -58,9 +58,17 @@ GATED = ("casts", "harmful", "pasted", "addr", "names")
 PER_FUNCTION = ("addr", "names")
 TOTALS = ("casts", "harmful", "pasted")
 SUBSYSTEMS = (
+    ("System", "src/engine/sys"),
+    ("Disc", "src/engine/cd"),
+    ("Graphics", "src/engine/gfx"),
     ("Sound", "src/engine/sound"),
-    ("Executable", "src/engine/slus"),
-    ("Game", "src/engine/game"),
+    ("SDK", "src/engine/sdk"),
+    ("Actor", "src/engine/actor"),
+    ("Field", "src/engine/field"),
+    ("UI", "src/engine/ui"),
+    ("Party", "src/engine/party"),
+    ("Game state", "src/engine/state"),
+    ("Engine images", "src/engine"),
     ("Logo", "src/logo"),
     ("Shared bodies", "src/shared"),
     ("Area", "src/overlays/area"),

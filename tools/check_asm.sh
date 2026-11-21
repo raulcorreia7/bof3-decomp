@@ -1,8 +1,7 @@
 #!/bin/sh
 # Reject an increase in INCLUDE_ASM placeholders since this branch left main, in total or in any one
 # image. A per-image key is the last two directories of the source folder below src/
-# (<archive>/<slot>, for example game/00 for src/engine/game/00); src/engine/slus and src/logo are
-# their own keys, slus and logo.
+# (<archive>/<slot>); the engine folders (src/engine/*) are one key, engine, and src/logo is logo.
 #
 #   tools/check_asm.sh [BASE_REF]
 #
@@ -50,7 +49,7 @@ over=$({
 		n = split($2, part, "/")
 		key = part[n - 1]
 		if (n > 3) key = part[n - 2] "/" key
-		if (key == "engine/slus") key = "slus"
+		if (part[2] == "engine") key = "engine"
 		count[$1, key]++
 		seen[key]
 	}
