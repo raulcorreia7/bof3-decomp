@@ -941,24 +941,19 @@ def names_used(event: tuple):
         e = stack.pop()
         if not isinstance(e, tuple) or not e:
             continue
-        if e[0] == "g":
-            yield e[1], e[2]
-        elif e[0] == "gi":
-            yield e[1] + "[]", e[3]
-            stack.append(e[2])
-        elif e[0] == "store":
-            if e[2][0] == "g":
-                yield e[2][1], WIDTH[e[1]]
-            elif e[2][0] == "gi":
-                yield e[2][1] + "[]", WIDTH[e[1]]
-                stack.append(e[2][2])
-            stack.append(e[3])
-        elif e[0] == "call":
+        kind = e[0]
+        target, width = (e[2], WIDTH[e[1]]) if kind == "store" else (e, None)
+        if target[0] == "g":
+            yield target[1], target[2] if width is None else width
+        elif target[0] == "gi":
+            yield target[1] + "[]", target[3] if width is None else width
+            stack.append(target[2])
+        elif kind == "call":
             stack.extend(e[2])
-        elif e[0] == "add":
-            stack.append(e[1])
-        elif e[0] == "bin":
-            stack.append(e[2])
+        elif kind in ("add", "bin"):
+            stack.append(e[1] if kind == "add" else e[2])
+        if kind == "store":
+            stack.append(e[3])
 
 
 def body_for(f: Func, tree: Tree, names: Names) -> tuple[str, list[tuple[str, int]]]:

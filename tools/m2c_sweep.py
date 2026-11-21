@@ -289,8 +289,7 @@ def stream(
         )
 
 
-def main(argv: list[str] | None = None) -> int:
-    """Run the sweep."""
+def _parser() -> argparse.ArgumentParser:
     parser = argparse.ArgumentParser(
         description=__doc__, formatter_class=argparse.RawDescriptionHelpFormatter
     )
@@ -312,7 +311,23 @@ def main(argv: list[str] | None = None) -> int:
     parser.add_argument(
         "--jsonl", action="store_true", help="one JSON object per printed line"
     )
-    args = parser.parse_args(argv)
+    return parser  # fmt: skip
+
+
+def _line(func: Func, status: str, diff: int | None, variant: str, jsonl: bool) -> str:
+    """The printed line of one result."""
+    if jsonl:
+        row = {"status": status, "target": func.ref, "name": func.name}
+        return json.dumps(
+            row | {"differing": diff, "variant": variant or None}, ensure_ascii=False
+        )
+    best = f" {diff} differ ({variant})" if status == "BEST" else ""
+    return f"{status} {func.ref} {func.name}{best}"
+
+
+def main(argv: list[str] | None = None) -> int:
+    """Run the sweep."""
+    args = _parser().parse_args(argv)
     funcs = select(args, load_index(ROOT))
     print(f"sweeping {len(funcs)} functions", file=sys.stderr, flush=True)
     path = ROOT / RESULTS
@@ -323,39 +338,15 @@ def main(argv: list[str] | None = None) -> int:
             save_drafts(ROOT, func, found)
             status, diff, variant = sweep_one(ROOT, func, found)
             hits += status == "EXACT"
-            log.write(
-                json.dumps(
-                    {
-                        "target": func.ref,
-                        "status": status,
-                        "differing": diff,
-                        "variant": variant or None,
-                    },
-                    ensure_ascii=False,
-                )
-                + "\n"
-            )
+            entry = {
+                "target": func.ref,
+                "status": status,
+                "differing": diff,
+                "variant": variant or None,
+            }
+            log.write(json.dumps(entry, ensure_ascii=False) + "\n")
             log.flush()
-            if args.jsonl:
-                print(
-                    json.dumps(
-                        {
-                            "status": status,
-                            "target": func.ref,
-                            "name": func.name,
-                            "differing": diff,
-                            "variant": variant or None,
-                        },
-                        ensure_ascii=False,
-                    ),
-                    flush=True,
-                )
-                continue
-            print(
-                f"{status} {func.ref} {func.name}"
-                + (f" {diff} differ ({variant})" if status == "BEST" else ""),
-                flush=True,
-            )
+            print(_line(func, status, diff, variant, args.jsonl), flush=True)
     print(f"{hits} exact of {len(funcs)}", file=sys.stderr)
     return 0
 

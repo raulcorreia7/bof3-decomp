@@ -2,6 +2,7 @@
 
 from __future__ import annotations
 
+from collections.abc import Callable
 from dataclasses import dataclass, field
 from pathlib import Path
 from typing import TYPE_CHECKING
@@ -48,6 +49,17 @@ class Context:
     @property
     def asm_root(self) -> Path:
         return self.root / "build/asm"
+
+
+@dataclass(frozen=True)
+class Table:
+    """Rows a verb found: ``keys`` (space-separated) name the JSON fields, ``heads`` and ``cells`` the text view."""
+
+    keys: str
+    rows: list[dict]
+    notes: tuple[str, ...] = ()
+    heads: str | None = None
+    cells: Callable[[dict], list[str]] | None = None
 
 
 RESIDENT = ("exe/slus_004_22", "emi/etc/game/00")

@@ -2,9 +2,7 @@
 
 from __future__ import annotations
 
-import argparse
 import collections
-import json
 import re
 from dataclasses import dataclass
 from pathlib import Path
@@ -990,7 +988,13 @@ def _value_sites(ctx: Context) -> list[ValueSite]:
     return sites
 
 
-def values(ctx: Context, args: argparse.Namespace) -> int:
+@dataclass(frozen=True)
+class ValuesResult:
+    sites: list[ValueSite]
+    counts: dict[str, collections.Counter[str]]
+
+
+def values(ctx: Context) -> ValuesResult:
     """Scan the matched bodies for numeric literals whose role is declared."""
     if not ctx.value_shared:
         records, typedefs = _value_records(ctx)
@@ -1006,39 +1010,13 @@ def values(ctx: Context, args: argparse.Namespace) -> int:
         ctx.value_views = _value_views(ctx)
     sites = _value_sites(ctx)
     sites.sort(key=lambda site: (site.file, site.line, site.literal))
-    if args.jsonl:
-        for site in sites:
-            print(
-                json.dumps(
-                    {
-                        "file": site.file,
-                        "line": site.line,
-                        "literal": site.literal,
-                        "role": site.role,
-                        "family": site.family,
-                        "constant": site.constant,
-                        "form": site.form,
-                        "confidence": site.confidence,
-                    },
-                    ensure_ascii=False,
-                )
-            )
-        return 0
-    by_role = collections.Counter(site.role for site in sites)
-    by_family = collections.Counter(site.family for site in sites if site.family)
-    by_confidence = collections.Counter(site.confidence for site in sites)
-    by_subsystem = collections.Counter(_value_subsystem(site.file) for site in sites)
-    print(f"{len(sites)} sites")
-    for title, counter in (
-        ("role", by_role),
-        ("family", by_family),
-        ("confidence", by_confidence),
-        ("subsystem", by_subsystem),
-    ):
-        print(f"\n{title}")
-        for key, count in counter.most_common():
-            print(f"{count}\t{key}")
-    return 0
+    counts = {
+        "role": collections.Counter(site.role for site in sites),
+        "family": collections.Counter(site.family for site in sites if site.family),
+        "confidence": collections.Counter(site.confidence for site in sites),
+        "subsystem": collections.Counter(_value_subsystem(site.file) for site in sites),
+    }
+    return ValuesResult(sites, counts)
 
 
 def _value_subsystem(path: str) -> str:

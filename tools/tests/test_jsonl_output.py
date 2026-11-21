@@ -10,7 +10,7 @@ import symbol
 import template_diff
 import template_try
 import worklist
-from bof3.symbols import check
+from bof3.symbols.context import Table
 
 
 def test_worklist_jsonl_names_the_columns(monkeypatch, capsys):
@@ -70,12 +70,9 @@ def test_sigs_jsonl_keeps_the_line_number_a_number(monkeypatch, capsys):
 
 
 def test_symbol_refs_jsonl_names_the_columns(monkeypatch, capsys):
+    row = {"count": 7, "name": "func_80100000", "unit": "src/a/func_80100000.c"}
     monkeypatch.setattr(
-        check,
-        "ref_rows",
-        lambda _ctx, dirs: [
-            {"count": 7, "name": "func_80100000", "unit": "src/a/func_80100000.c"}
-        ],
+        symbol, "refs", lambda _ctx, dirs: Table("count name unit", [row])
     )
     assert symbol.main(["refs", "--jsonl"]) == 0
     assert json.loads(capsys.readouterr().out) == {

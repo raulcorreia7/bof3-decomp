@@ -232,27 +232,33 @@ class Project:
         return HAND_MARKER in text
 
 
-def _unlifted_ranges(data: bytes, suffix: str, path: Path) -> list[tuple[int, int]]:
-    """Return the file offset and size of every body the object marks with ``suffix``."""
+def _elf_sections(data: bytes, path: Path) -> list[tuple]:
+    """Return the section headers of an ELF32 little-endian object."""
     if data[:5] != b"\x7fELF\x01" or data[5] != 1:
         raise SystemExit(f"{path} is not an ELF32 little-endian object")
     fields = ELF_HEADER.unpack_from(data)
-    section_offset, section_size, section_count = fields[5], fields[10], fields[11]
-    sections = [
-        ELF_SECTION.unpack_from(data, section_offset + index * section_size)
-        for index in range(section_count)
+    return [
+        ELF_SECTION.unpack_from(data, fields[5] + index * fields[10])
+        for index in range(fields[11])
     ]
+
+
+def _unlifted_ranges(data: bytes, suffix: str, path: Path) -> list[tuple[int, int]]:
+    """Return the file offset and size of every body the object marks with ``suffix``."""
+    sections = _elf_sections(data, path)
+    tag = suffix.encode("ascii")
     ranges: list[tuple[int, int]] = []
-    for _, kind, _, _, offset, size, link, _, _, _ in sections:
-        if kind != SHT_SYMTAB:
-            continue
+    for _, kind, _, _, offset, size, link, *_ in sections:
         strings = sections[link][4]
-        for position in range(offset, offset + size, ELF_SYMBOL.size):
+        for position in (
+            range(offset, offset + size, ELF_SYMBOL.size) if kind == SHT_SYMTAB else ()
+        ):
             name, value, length, _, _, index = ELF_SYMBOL.unpack_from(data, position)
-            if not 0 < index < section_count:
+            if not 0 < index < len(sections):
                 continue
-            end = data.index(b"\0", strings + name)
-            if not data[strings + name : end].endswith(suffix.encode("ascii")):
+            if not data[strings + name : data.index(b"\0", strings + name)].endswith(
+                tag
+            ):
                 continue
             if not length:
                 raise SystemExit(f"{path}: a {suffix} marker has no size")

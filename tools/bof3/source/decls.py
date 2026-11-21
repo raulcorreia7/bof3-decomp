@@ -446,27 +446,31 @@ def _call_rows(add, tree: Tree, call: Call, views, defs, protos) -> None:
     name = call.name
     if name in tree.macros or name in tree.variables:
         return
-    if name in tree.decls:
-        sees = [
-            [q for q in tree.decls[name] if q.file in view or q.file == call.file]
-            for view in views[call.file]
-        ]
-        if not all(sees):
-            add("implicit_decl", name, call.file, call.line, "no proto or def in scope")
-            return
-        view = views[call.file][0]
-        scope = [q for q in protos[name] if q.file in view] or [
-            q for q in defs[name] if q.file == call.file
-        ]
-        for p in scope[:1]:
-            variadic = any(a[0] == "..." for a in p.params)
-            if not p.unspecified and not variadic and len(p.params) != call.argc:
-                add(
-                    "call_argc",
-                    name,
-                    call.file,
-                    call.line,
-                    f"call {call.argc} proto {len(p.params)}",
-                )
-    elif name != "INCLUDE_ASM" and not name.isupper() and name not in _TYPES:
-        add("implicit_decl", name, call.file, call.line, "no declaration anywhere")
+    if name not in tree.decls:
+        if name != "INCLUDE_ASM" and not name.isupper() and name not in _TYPES:
+            add("implicit_decl", name, call.file, call.line, "no declaration anywhere")
+        return
+    if not all(
+        any(q.file in view or q.file == call.file for q in tree.decls[name])
+        for view in views[call.file]
+    ):
+        add("implicit_decl", name, call.file, call.line, "no proto or def in scope")
+        return
+    view = views[call.file][0]
+    scope = [q for q in protos[name] if q.file in view] or [
+        q for q in defs[name] if q.file == call.file
+    ]
+    proto = scope[0] if scope else None
+    if (
+        proto
+        and not proto.unspecified
+        and not any(a[0] == "..." for a in proto.params)
+        and len(proto.params) != call.argc
+    ):
+        add(
+            "call_argc",
+            name,
+            call.file,
+            call.line,
+            f"call {call.argc} proto {len(proto.params)}",
+        )

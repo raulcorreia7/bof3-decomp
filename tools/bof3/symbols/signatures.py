@@ -2,12 +2,12 @@
 
 from __future__ import annotations
 
-import argparse
 import collections
 import json
 from collections.abc import Sequence
 
 from bof3.adapters.config import read_symbols
+from bof3.errors import SymbolError
 from bof3.source import asmtext
 from bof3.symbols.accesses import _normalized_type
 from bof3.symbols.assembly import (
@@ -17,14 +17,16 @@ from bof3.symbols.assembly import (
     _declared_kind,
     _declared_prototype,
     _declared_return_kind,
+    _extent_rows,
     _folder_system,
     _name_system,
     _render_declared,
     _symbol_system,
+    _symbol_uses,
     _unique_data_rows,
     _visible_sources,
 )
-from bof3.symbols.context import RESIDENT, Context
+from bof3.symbols.context import RESIDENT, Context, Table
 from bof3.symbols.layers import (
     _layer_layouts,
     _layer_manifests,
@@ -930,7 +932,19 @@ def _file_rows(
     return [row for row in rows if not row["name"].startswith(("asm/", "build/asm/"))]
 
 
-def signatures(ctx: Context, args: argparse.Namespace) -> int:
+def _cells(row: dict, keys: str, blank: str) -> list[str]:
+    """The text cells of a row: lists and dicts as JSON, None as ``blank``."""
+    return [
+        json.dumps(row[key])
+        if isinstance(row[key], (list, dict))
+        else blank
+        if row[key] is None
+        else str(row[key])
+        for key in keys.split()
+    ]
+
+
+def signatures(ctx: Context, name: str | None) -> Table:
     """Print the signature the bytes prove for each function, beside its declaration."""
     assembly = _assembly(ctx)
     index = SymbolIndex(ctx, read_symbols(ctx.root))
@@ -944,7 +958,7 @@ def signatures(ctx: Context, args: argparse.Namespace) -> int:
     rows = []
     for image, functions in sorted(assembly.functions.items()):
         for function in functions:
-            if args.function and function.name != args.function:
+            if name and function.name != name:
                 continue
             rows.append(
                 _function_signature(
@@ -958,53 +972,80 @@ def signatures(ctx: Context, args: argparse.Namespace) -> int:
                     table_callers.get((image, function.name), ()),
                 )
             )
-    keys = [
-        "function",
-        "image",
-        "address",
-        "declared",
-        "found",
-        "callee_args",
-        "stack_args",
-        "caller_args_min",
-        "caller_args_max",
-        "disagree",
-        "differs",
-        "args",
-        "return",
-        "callers",
-        "evidence",
-        "confidence",
-    ]
-    if args.jsonl:
-        for row in rows:
-            print(json.dumps({key: row[key] for key in keys}, ensure_ascii=False))
-        return 0
-    print(
-        "\t".join(
-            [
-                "function",
-                "image",
-                "address",
-                "declared",
-                "found",
-                "callers",
-                "confidence",
-            ]
-        )
+    keys = (
+        "function image address declared found callee_args stack_args caller_args_min "
+        "caller_args_max disagree differs args return callers evidence confidence"
     )
-    for row in rows:
-        print(
-            "\t".join(
-                [
-                    row["function"],
-                    row["image"],
-                    row["address"],
-                    row["declared"] or "",
-                    row["found"],
-                    str(row["callers"]),
-                    row["confidence"],
-                ]
-            )
-        )
-    return 0
+    heads = "function image address declared found callers confidence"
+    return Table(
+        keys,
+        rows,
+        heads=heads,
+        cells=lambda row: [
+            row["declared"] or "" if h == "declared" else str(row[h])
+            for h in heads.split()
+        ],
+    )
+
+
+def extents(ctx: Context, image: str | None) -> Table:
+    """Print each global's extent and the accesses beyond it the bytes prove."""
+    assembly = _assembly(ctx)
+    index = SymbolIndex(ctx, read_symbols(ctx.root))
+    manifests = _layer_manifests(ctx)
+    if image and image not in manifests:
+        raise SymbolError(f"extents: no target {image}")
+    rows = _extent_rows(ctx, assembly, index, manifests)
+    if image:
+        rows = [row for row in rows if row["image"] == image]
+    keys = "symbol image address gap declared_size stride beyond beyond_count absorbs section type evidence"
+    return Table(keys, rows, cells=lambda row: _cells(row, keys, ""))
+
+
+def homes(ctx: Context) -> Table:
+    """Print each function's, global's and file's home from the call and data graph."""
+    assembly = _assembly(ctx)
+    index = SymbolIndex(ctx, read_symbols(ctx.root))
+    manifests = _layer_manifests(ctx)
+    tree = _layer_tree(ctx)
+    visible = _visible_sources(tree, manifests)
+    callers = _caller_map(assembly)
+    table_callees = _table_callees(ctx, assembly, manifests, tree)
+    layers = _layers(assembly, table_callees)
+    uses = _symbol_uses(assembly, index)
+    writers: dict[tuple[str, int], set] = collections.defaultdict(set)
+    readers: dict[tuple[str, int], set] = collections.defaultdict(set)
+    for key, found in uses.items():
+        for use_image, function_name, access in found:
+            target = writers if access.write else readers
+            target[key].add((use_image, function_name))
+    function_list = _function_rows(
+        assembly,
+        manifests,
+        index,
+        layers,
+        callers,
+        table_callees,
+        writers,
+        readers,
+    )
+    extent_list = _extent_rows(ctx, assembly, index, manifests)
+    global_list = _global_rows(
+        assembly,
+        manifests,
+        index,
+        layers,
+        {(row["image"], row["name"]): row for row in function_list},
+        extent_list,
+        uses,
+        writers,
+        readers,
+    )
+    file_list = _file_rows(assembly, manifests, tree, visible, function_list)
+    rows = sorted(
+        function_list, key=lambda row: (row["layer"], row["image"], row["name"])
+    )
+    rows.extend(sorted(global_list, key=lambda row: (row["name"], row["image"])))
+    rows.extend(sorted(file_list, key=lambda row: (row["name"], row["image"])))
+    keys = "kind name image declared_home found_home counts evidence confidence"
+    return Table(keys, rows, cells=lambda row: _cells(row, keys, "None"))

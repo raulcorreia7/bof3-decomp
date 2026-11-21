@@ -2,12 +2,9 @@
 
 from __future__ import annotations
 
-import argparse
 import collections
 import hashlib
-import json
 import re
-import sys
 from dataclasses import dataclass
 from pathlib import Path
 
@@ -15,7 +12,7 @@ from bof3.adapters.config import read_symbols
 from bof3.errors import SymbolError
 from bof3.source import ctext
 from bof3.source.decls import Decl
-from bof3.symbols.context import RESIDENT, Context
+from bof3.symbols.context import RESIDENT, Context, Table
 from bof3.symbols.headers import IDENT, _match_brace
 
 LAYER_RESIDENT = RESIDENT
@@ -536,14 +533,14 @@ def assign_layers(count: int, edges: list[set[int]]) -> list[int]:
     return [layers[component[node]] for node in range(count)]
 
 
-def layers(ctx: Context, args: argparse.Namespace) -> int:
+def layers(ctx: Context) -> Table:
     """Print the call-graph layer of every function of every image."""
     manifests = _layer_manifests(ctx)
     index_nodes = _index_nodes(ctx, manifests)
+    notes = ()
     if index_nodes is None:
-        print(
+        notes = (
             "symbol: no complete built image index; reading the split layouts by unit",
-            file=sys.stderr,
         )
         nodes = _splat_nodes(ctx, manifests)
     else:
@@ -634,28 +631,12 @@ def layers(ctx: Context, args: argparse.Namespace) -> int:
             }
         )
     rows.sort(key=lambda row: (row["layer"], row["image"], row["name"]))
-    keys = [
-        "image",
-        "name",
-        "address",
-        "layer",
-        "callers",
-        "callees",
-        "status",
-        "named",
-        "copies",
-        "shared",
-    ]
-    if args.jsonl:
-        for row in rows:
-            print(json.dumps({key: row[key] for key in keys}, ensure_ascii=False))
-        return 0
-    print("\t".join(keys))
-    for row in rows:
-        print(
-            "\t".join(
-                str(row[key]) if key != "callees" else ",".join(row[key])
-                for key in keys
-            )
-        )
-    return 0
+    keys = "image name address layer callers callees status named copies shared"
+    return Table(
+        keys,
+        rows,
+        notes,
+        cells=lambda row: [
+            ",".join(v) if k == "callees" else str(v) for k, v in row.items()
+        ],
+    )

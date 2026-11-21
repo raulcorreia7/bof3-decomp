@@ -2,7 +2,6 @@
 
 from __future__ import annotations
 
-import argparse
 import os
 import re
 import shutil
@@ -26,6 +25,26 @@ from bof3.symbols.context import (
     local_scope,
     tables_with,
 )
+
+
+@dataclass(frozen=True)
+class RenameRequest:
+    old: str
+    new: str
+    image: list[str] | None = None
+    local: bool = False
+    scope: list[str] | None = None
+    source: str | None = None
+    type: str | None = None
+    size: str | None = None
+    dry_run: bool = False
+
+
+@dataclass(frozen=True)
+class RenameResult:
+    files: list[str]
+    applied: bool
+
 
 UNIT_KINDS = ("c", "asm")
 
@@ -277,19 +296,18 @@ def apply_rename(
 
 def _rename_scope(
     ctx: Context,
-    args: argparse.Namespace,
-    old: str,
+    req: RenameRequest,
     address: re.Match | None,
     images: list[str],
 ) -> list[str]:
     """The paths a rename may touch."""
-    if args.local:
+    if req.local:
         return local_scope(ctx, images)
-    if args.scope:
-        return args.scope
+    if req.scope:
+        return req.scope
     if address and any(i not in RESIDENT for i in images):
         raise RenameError(
-            f"symbol: {old} is unique only inside its image. Add --local, or --scope PATH..."
+            f"symbol: {req.old} is unique only inside its image. Add --local, or --scope PATH..."
         )
     return list(DEFAULT_SCOPE)
 
@@ -365,20 +383,20 @@ def _name_address(
     new: str,
     images: list[str],
     address: re.Match,
-    args: argparse.Namespace,
+    req: RenameRequest,
 ) -> str:
     """The symbol table with the address name replaced by ``new`` in every image."""
     addr = int(address["addr"], 16)
-    kind = args.type or ("func" if old.startswith("func_") else None)
+    kind = req.type or ("func" if old.startswith("func_") else None)
     row = (
         symtab.format_row(
             new,
             addr,
             type=kind,
-            size=int(args.size, 0) if args.size else None,
-            source=args.source,
+            size=int(req.size, 0) if req.size else None,
+            source=req.source,
         )
-        if args.source
+        if req.source
         else None
     )
     document = parse(text)
@@ -494,9 +512,9 @@ def _rename_moves(
     return moves
 
 
-def rename(ctx: Context, args: argparse.Namespace) -> int:
+def rename(ctx: Context, req: RenameRequest) -> RenameResult:
     """Rename one symbol across the scope, its layout rows and the symbol table."""
-    old, new = args.old, args.new
+    old, new = req.old, req.new
     offset_rename = bool(OFFSET_NAME.fullmatch(old))
     if not re.fullmatch(r"[A-Za-z_]\w*", new) and not (
         offset_rename and OFFSET_NAME.fullmatch(new)
@@ -504,12 +522,12 @@ def rename(ctx: Context, args: argparse.Namespace) -> int:
         raise RenameError(f"symbol: {new} is not an identifier")
     address = LAYOUT_ADDRESS.match(old)
     text = symbols_text(ctx.root)
-    images = args.image or ([] if address else tables_with(text, old))
+    images = req.image or ([] if address else tables_with(text, old))
     if not images:
         raise RenameError(
             f"symbol: give --image for {old}; no table has a row of that name"
         )
-    scope = _rename_scope(ctx, args, old, address, images)
+    scope = _rename_scope(ctx, req, address, images)
     rows = [row for image in images for row in layout_rows(ctx, image, old)]
     files = grep_files(ctx, old, scope)
     if not files and not rows:
@@ -521,13 +539,12 @@ def rename(ctx: Context, args: argparse.Namespace) -> int:
     repair = bool(rows) and not _old_name_is_live(old, rows, units)
     if not repair:
         _reject_clash(ctx, text, old, new, images, scope, address)
-    if args.dry_run:
+    if req.dry_run:
         planned = set(files)
         planned.update(row.splat.relative_to(ctx.root).as_posix() for row in rows)
-        print("\n".join(sorted(planned)))
-        return 0
+        return RenameResult(sorted(planned), applied=False)
     if address:
-        text = _name_address(text, old, new, images, address, args)
+        text = _name_address(text, old, new, images, address, req)
     elif not repair:
         for image in images:
             text = symtab.rename_row(text, image, old, new) or text
@@ -539,5 +556,4 @@ def rename(ctx: Context, args: argparse.Namespace) -> int:
     if not repair:
         check_rename(ctx, old, edits, scope, bool(address))
     apply_rename(ctx, edits, moves, old, scope, bool(address), verify=not repair)
-    print(f"renamed {old} -> {new} in {len(edits)} files")
-    return 0
+    return RenameResult([str(path) for path in edits], applied=True)

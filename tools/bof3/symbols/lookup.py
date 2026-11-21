@@ -2,7 +2,6 @@
 
 from __future__ import annotations
 
-import argparse
 import collections
 import json
 import os
@@ -10,6 +9,7 @@ import re
 import subprocess
 import sys
 import tempfile
+from dataclasses import dataclass
 from pathlib import Path
 
 from bof3.adapters.config import read_symbols
@@ -220,61 +220,83 @@ def find_hits(
     return hits
 
 
-def at(ctx: Context, args: argparse.Namespace) -> int:
-    """Print the owner of each address, or the D_ addresses the branch adds."""
-    if args.diff is not None:
-        if args.addresses:
+@dataclass(frozen=True)
+class Owner:
+    path: str
+    delta: int
+    size: str
+    table: str
+
+
+@dataclass(frozen=True)
+class AtRow:
+    addr: int
+    owners: list[Owner]
+
+
+@dataclass(frozen=True)
+class AtResult:
+    rows: list[AtRow]
+    base: str | None = None
+
+
+def _owners(ctx: Context, hits: list[tuple[Row, int]], addr: int) -> list[Owner]:
+    owners = []
+    for row, span in hits:
+        path, start, _ = owner(ctx, row, addr)
+        size = (
+            "(size unknown: check the record's members)"
+            if row.size is None and not row.type
+            else f"({row.type or 'untyped'}, {span:#x})"
+        )
+        owners.append(Owner(path, addr - (row.addr + start), size, row.table))
+    return owners
+
+
+def at(
+    ctx: Context, image: str | None, addresses: list[str], diff: str | None
+) -> AtResult:
+    """Return the owners of each address, or of the D_ addresses the branch adds."""
+    if diff is not None:
+        if addresses:
             raise SymbolError("symbol: at takes addresses or --diff, not both")
-        addresses = _diff_addresses(ctx, args.diff, args.image)
-        if not addresses:
-            print(f"no added D_ address in {args.diff}...HEAD")
-            return 0
-    elif not args.image or not args.addresses:
+        found = _diff_addresses(ctx, diff, image)
+        if not found:
+            return AtResult([], diff)
+    elif not image or not addresses:
         raise SymbolError("symbol: at needs IMAGE 0xADDR..., or --diff [BASE]")
     else:
-        addresses = [_address(text) for text in args.addresses]
+        found = [_address(text) for text in addresses]
     data = read_symbols(ctx.root)
-    tables = _visible_tables(data, args.image)
+    tables = _visible_tables(data, image)
     rows = {table: table_rows(data, table) for table in tables}
     following = {table: next_addresses(rows[table]) for table in tables}
-    for addr in addresses:
-        hits = find_hits(ctx, rows, following, args.image, addr)
-        if not hits:
-            print(f"{addr:#010x}  no named owner")
-            continue
-        printed = 0
-        for row, span in hits:
-            path, start, _ = owner(ctx, row, addr)
-            delta = addr - (row.addr + start)
-            size = (
-                "(size unknown: check the record's members)"
-                if row.size is None and not row.type
-                else f"({row.type or 'untyped'}, {span:#x})"
+    return AtResult(
+        [
+            AtRow(
+                addr,
+                _owners(ctx, find_hits(ctx, rows, following, image, addr)[:3], addr),
             )
-            print(f"{addr:#010x}  {path}+{delta:#x}  {size}  [{row.table}]")
-            printed += 1
-            if printed == 3:
-                break
-    return 0
+            for addr in found
+        ]
+    )
 
 
-def member(ctx: Context, args: argparse.Namespace) -> int:
-    """Print the member path and type at one byte offset of a record."""
-    name = " ".join(args.type.split())
+def member(ctx: Context, type_name: str, offset_text: str) -> list[tuple[str, str]]:
+    """Return the member path and type at one byte offset of a record."""
+    name = " ".join(type_name.split())
     layout = type_layout(ctx, name)
     if layout is None or not layout.members:
         raise SymbolError(f"symbol: {name} has no named members")
-    offset = _address(args.offset)
+    offset = _address(offset_text)
     if offset < 0 or offset >= layout.size:
         raise SymbolError(
-            f"symbol: {name} is {layout.size:#x} bytes; {args.offset} is outside"
+            f"symbol: {name} is {layout.size:#x} bytes; {offset_text} is outside"
         )
     found = locate(ctx, layout, offset)
     if not found:
         raise SymbolError(f"symbol: no named member at {name}+{offset:#x}")
-    for path, _, ctype in found:
-        print(f"{path}\t{ctype}")
-    return 0
+    return [(path, ctype) for path, _, ctype in found]
 
 
 def _c_references(ctx: Context, name: str) -> list[tuple[str, int]]:
@@ -414,12 +436,21 @@ def _rizin_xrefs(
     return out
 
 
-def uses(ctx: Context, args: argparse.Namespace) -> int:
-    """Print every C, assembly and Rizin reference to a symbol or address."""
+@dataclass(frozen=True)
+class UsesResult:
+    image: str | None
+    at: AtRow | None
+    c: list[tuple[str, int]]
+    asm: list[tuple[str, int, str, str]]
+    rizin: list[tuple[str, int, str]]
+
+
+def uses(ctx: Context, spec: str) -> UsesResult:
+    """Return every C, assembly and Rizin reference to a symbol or address."""
     data = read_symbols(ctx.root)
     name = None
     queries: list[tuple[str, int]] = []
-    spec = args.symbol
+    image = at_row = None
     if "@" in spec:
         image, _, address = spec.rpartition("@")
         if not image or "/" not in image:
@@ -431,18 +462,8 @@ def uses(ctx: Context, args: argparse.Namespace) -> int:
         following = {table: next_addresses(rows[table]) for table in rows}
         hits = find_hits(ctx, rows, following, image, addr)
         if hits:
-            row, span = hits[0]
-            name = row.name
-            path, start, _ = owner(ctx, row, addr)
-            delta = addr - (row.addr + start)
-            size = (
-                "(size unknown: check the record's members)"
-                if row.size is None and not row.type
-                else f"({row.type or 'untyped'}, {span:#x})"
-            )
-            print(f"{image}@0x{addr:08X}  {path}+{delta:#x}  {size}  [{row.table}]")
-        else:
-            print(f"{image}@0x{addr:08X}  no named owner")
+            name = hits[0][0].name
+        at_row = AtRow(addr, _owners(ctx, hits[:1], addr))
         queries.append((image, addr))
     else:
         name = spec
@@ -450,11 +471,10 @@ def uses(ctx: Context, args: argparse.Namespace) -> int:
             row = rows.get(name)
             if isinstance(row, dict) and "addr" in row and not row.get("alias"):
                 queries.append((table, int(row["addr"])))
-    if name is not None:
-        for path, number in _c_references(ctx, name):
-            print(f"c\t{path}:{number}")
-        for path, number, function, instruction in _asm_references(ctx, name):
-            print(f"asm\t{path}:{number}\t{function}\t{instruction}")
-    for image, source, kind in _rizin_xrefs(ctx, queries):
-        print(f"rizin\t{image}\t0x{source:08X}\t{kind}")
-    return 0
+    return UsesResult(
+        image,
+        at_row,
+        _c_references(ctx, name) if name is not None else [],
+        _asm_references(ctx, name) if name is not None else [],
+        _rizin_xrefs(ctx, queries),
+    )

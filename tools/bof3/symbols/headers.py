@@ -2,7 +2,6 @@
 
 from __future__ import annotations
 
-import argparse
 import ast
 import re
 from dataclasses import dataclass
@@ -381,24 +380,23 @@ def _value_rank(header: str, image: str | None, folder: str | None) -> int:
     return 2
 
 
-def value(ctx: Context, args: argparse.Namespace) -> int:
-    """List the enum members and numeric macros with one value."""
-    wanted = _address(args.number)
+def value(
+    ctx: Context, number: str, image: str | None, family: str | None
+) -> list[NamedValue]:
+    """Return the enum members and numeric macros with one value, nearest scope first."""
     folder = None
-    if args.image is not None:
+    if image is not None:
         try:
-            folder = f"src/{source_folder(args.image)}"
+            folder = f"src/{source_folder(image)}"
         except (IndexError, ValueError):
-            raise SymbolError(f"symbol: {args.image} is not a target") from None
-    found = _named_values(ctx, _value_headers(ctx, args.image), wanted, args.type)
+            raise SymbolError(f"symbol: {image} is not a target") from None
+    found = _named_values(ctx, _value_headers(ctx, image), _address(number), family)
     found.sort(
         key=lambda item: (
-            _value_rank(item.header, args.image, folder),
+            _value_rank(item.header, image, folder),
             item.header,
             item.line,
             item.name,
         )
     )
-    for item in found:
-        print(f"{item.name}\t{item.header}:{item.line}\t{item.family}")
-    return 0
+    return found
