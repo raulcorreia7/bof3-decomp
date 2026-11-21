@@ -37,7 +37,7 @@ from bof3.core.paths import ROOT
 from bof3.link import symbols
 from bof3.link.graph import source_object
 from bof3.resolve import load_target_manifests
-from bof3.status.claims import DRAFT_RE, source_text
+from bof3.status.claims import DRAFT_RE, QUOTE_INCLUDE_RE, source_text
 
 #: The source and split-assembly folders, and the report the status site reads.
 SRC = "src"
@@ -328,9 +328,16 @@ def _unit(
 
 
 def _base_object(project: Project, source: Path, relative: Path) -> Path:
-    """Return the object objdiff compares against: the draft build's for a draft source."""
+    """Return the object objdiff compares against: the draft build's for a draft source.
+
+    A draft that does not compile leaves an empty object; the matching build's object
+    then keeps the source's matched functions in the report.
+    """
     draft = project.draft.search(source.read_text(encoding="utf-8", errors="replace"))
-    return project.build_dir / source_object(relative, draft=bool(draft))
+    base = project.build_dir / source_object(relative, draft=bool(draft))
+    if draft and base.is_file() and base.stat().st_size == 0:
+        return project.build_dir / source_object(relative)
+    return base
 
 
 def _game_unit(
@@ -375,6 +382,18 @@ def _game_unit(
     )
 
 
+def _included_sources(sources: list[Path]) -> set[Path]:
+    """Return the C sources another source includes: they build inside that unit's object."""
+    return {
+        (source.parent / name).resolve()
+        for source in sources
+        for name in QUOTE_INCLUDE_RE.findall(
+            source.read_text(encoding="utf-8", errors="replace")
+        )
+        if name.endswith(".c")
+    }
+
+
 def _claimed_functions(sources: list[Path]) -> set[str]:
     return {
         f"func_{match}"
@@ -409,7 +428,10 @@ def _game_units(
         raise SystemExit(f"missing {asm_dir}; run `meson setup build/meson`")
     units: list[dict[str, Any]] = []
     skipped = 0
+    included = _included_sources(sources)
     for source in sources:
+        if source.resolve() in included:
+            continue
         match = project.func_address.match(source.stem)
         if match and f"{target_id}@0x{int(match.group(1), 16):08X}" in library_ids:
             continue
