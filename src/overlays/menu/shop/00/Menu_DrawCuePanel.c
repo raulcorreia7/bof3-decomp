@@ -1,7 +1,7 @@
 #include "shop_00.h"
 
 /* func_801E4DF4 */
-MATCH void Shop_DrawCuePanel(MenuPanelTask* panel_task) {
+MATCH void Menu_DrawCuePanel(MenuPanelTask* panel_task) {
     u8* bytes;
 
     bytes = (u8*)panel_task;

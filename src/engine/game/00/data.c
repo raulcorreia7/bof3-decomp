@@ -380,7 +380,7 @@ u8 s_EventFlagsReset[16] = {0x08, 0x00, 0x00, 0x0A, 0x00, 0x00, 0x00, 0x00,
                             0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00};
 
 Callback g_SceneEvents[64] = {func_801A7CE8, func_801F37E4, func_801F394C,       func_801F4B60,           Menu_OpenMaster, func_801A7E54,           Message_RunAreaMessage, func_801F4378,
-                              func_801F34A0, func_801F3740, Scene_StartShopSave, (Callback)func_801F2C04, func_801F50F0,   (Callback)func_801F2C04, Fairy_RunCommu01Scene,          func_801F3F34,
+                              func_801F34A0, func_801F3740, Scene_RunInn, (Callback)func_801F2C04, func_801F50F0,   (Callback)func_801F2C04, Fairy_RunCommu01Scene,          func_801F3F34,
                               func_801F3254, func_801F3EE8, func_801F529C,       func_801F3198,           func_801F45EC,   Fairy_RunGiftScene,           Fairy_RunExploreReward,          Fairy_RunCommu02Scene,
                               Fairy_RunCommu03Scene, Fairy_RunCommu04Scene, Fairy_RunCommu05Scene,       func_801A839C,           func_801F38D8,   func_801F2CDC,           func_801F37EC,          func_801F3C24,
                               func_801F4494, func_801F3460, func_801F2F54,       func_801F4BC0,           func_801F3B4C,   func_801F4B58,           func_801F4C84,          (Callback)func_801F2C04,

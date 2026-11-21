@@ -21,7 +21,7 @@ MATCH u8 func_801F3A14(u8 x, u8 y) {
         return 0;
     }
     if ((func_801F3CF0() & BYTE_MASK) != 0) {
-        Scene_StartEvent(SCENE_EVENT_SHOP_SAVE, 10);
+        Scene_StartEvent(SCENE_EVENT_INN, 10);
         g_SceneEventState.selection = 0x15;
         return 0;
     }

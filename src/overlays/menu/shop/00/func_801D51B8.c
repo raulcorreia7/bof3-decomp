@@ -19,7 +19,7 @@ MATCH void func_801D51B8(void) {
             TEXT_Format(g_UiFormatBuffer, D_801D0C20, g_SaveSlotFirst);
             if (((SaveAccessCallback)SAVE_AccessFile)(1, g_UiFormatBuffer, 2, SAVE_FILE_SIZE, 0) != -1) {
                 func_801D6CE4(g_SaveSlotFirst, name - 0x7A);
-                g_SaveCardStatus = SAVE_STATUS_SAVED;
+                g_SaveCardStatus = SAVE_WRITE_STATUS_SAVED;
                 g_MenuStep.state = 0xC;
                 D_80148654       = 0x3C;
                 D_801E60F0       = 2;

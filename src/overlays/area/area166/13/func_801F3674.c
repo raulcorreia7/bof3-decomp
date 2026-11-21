@@ -5,7 +5,7 @@ MATCH void func_801F3674(void) {
 
     MESSAGE_REQUEST_CLEAR();
     if (g_MessageChoice == 3) {
-        Scene_StartEvent(SCENE_EVENT_SHOP_SAVE, 0x5);
+        Scene_StartEvent(SCENE_EVENT_INN, 0x5);
         g_SceneEventState.selection = 0xFF;
     }
     record         = (u8*)g_ScriptWorkRecord;

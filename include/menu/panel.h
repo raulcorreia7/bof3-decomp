@@ -254,6 +254,11 @@ ASSERT_SIZE(MenuPanelTask, MENU_PANEL_TASK_SIZE);
  * in the battle overlays (equal addresses in different targets are
  * unrelated); the shop overlay casts it to this record. */
 
+/* First slot of a group of per-member panels in g_MenuPanelTasks. */
+#define MENU_PANEL_BATTLER_FIRST    0xD /* battle: slot 0xD plus the battler holds the battler's panel */
+#define MENU_PANEL_CARD_FIRST       0xC /* start menu: one card per party member; its state follows the cursor */
+#define MENU_PANEL_MEMBER_ROW_FIRST 0xD /* start menu: the second per-member group, set to state 9 on cancel */
+
 /* D_80148330 */
 extern MenuPanelTask  g_MenuPanelTasks[MENU_PANEL_COUNT];
 extern s16            D_801485FA;

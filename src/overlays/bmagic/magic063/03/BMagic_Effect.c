@@ -168,7 +168,7 @@ MATCH void func_801EF340(void) {
 MATCH void func_801EF384(void) {
     SYS_DISPATCH_BYTE(D_801F040C, g_BMagicOrbit->header.step);
     if (g_BMagicOrbit->header.flags != 0 && g_BMagicOrbit->header.step != 0) {
-        func_801EF994();
+        Effect_SetOrbitModelMatrix();
         func_801EFA5C();
         PopMatrix();
     }
@@ -203,22 +203,8 @@ MATCH void func_801EF880(void) {
     BMAGIC_ORBIT_BATTLER_AND_CLEAR(func_801F03B0);
 }
 
-MATCH void func_801EF994(void) {
-    SVECTOR pos;
-    SVECTOR rot;
-    MATRIX  matrix;
-    long    flags;
-    s32     off;
-
-    PushMatrix();
-    rot.vx = 0;
-    rot.vy = 0;
-    off    = g_BMagicOrbit->angle + 0x800;
-    rot.vz = ((g_BMagicOrbit->unk_03 << 7) - off) & ANGLE_MASK;
-    setVector(&pos, (g_BMagicOrbit->pos.x.fixed >> 9) - AREA_CELL_ORIGIN, (g_BMagicOrbit->pos.y.fixed >> 9) - AREA_CELL_ORIGIN, -COORD_INT(g_BMagicOrbit->pos.z) / 2);
-    RotTransMatrix(&pos, matrix, &flags);
-    Camera_SetModelMatrix(&rot, &matrix);
-}
+/* func_801EF994 */
+#include "overlays/bmagic/shared/Effect_SetOrbitModelMatrix.h"
 
 /* Draws the four sparkle wedges round the orbiting effect: each a shaded triangle from
  * the centre to two corners from the wedge tables, lifted by a sine of the effect tick. */
@@ -261,7 +247,7 @@ MATCH void func_801EFA5C(void) {
 MATCH void func_801EFD7C(void) {
     SYS_DISPATCH_BYTE(D_801F0440, g_BMagicOrbit->header.step);
     if (g_BMagicOrbit->header.flags != 0 && g_BMagicOrbit->header.step != 0) {
-        func_801EF994();
+        Effect_SetOrbitModelMatrix();
         func_801EFA5C();
         PopMatrix();
     }

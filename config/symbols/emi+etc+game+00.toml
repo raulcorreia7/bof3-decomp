@@ -7,7 +7,7 @@ jtbl_80195954 = { addr = 0x80195954, type = "Callback", source = "The switch tab
 jtbl_80195990 = { addr = 0x80195990, type = "Callback", source = "The switch table of Menu_OpenMaster: the jump targets of its jr dispatch." }
 jtbl_801959A8 = { addr = 0x801959A8, type = "Callback", source = "The switch table of func_801A7E54: the jump targets of its jr dispatch." }
 jtbl_801959C0 = { addr = 0x801959C0, type = "Callback", source = "The switch table of func_801A7E54: the jump targets of its jr dispatch." }
-jtbl_801959D8 = { addr = 0x801959D8, type = "Callback", source = "The switch table of Scene_StartShopSave: the jump targets of its jr dispatch." }
+jtbl_801959D8 = { addr = 0x801959D8, type = "Callback", source = "The switch table of Scene_RunInn: the jump targets of its jr dispatch." }
 jtbl_80195A38 = { addr = 0x80195A38, type = "Callback", source = "The switch table of func_801A8728: the jump targets of its jr dispatch." }
 jtbl_80195CC0 = { addr = 0x80195CC0, type = "Callback", source = "The switch table of func_801A8F94: the jump targets of its jr dispatch." }
 jtbl_80195D00 = { addr = 0x80195D00, type = "Callback", source = "The switch table of func_801A96E4: the jump targets of its jr dispatch." }
@@ -128,7 +128,7 @@ Game_UpdateScene = { addr = 0x801A7BF0, type = "func", source = "Runs the g_Scen
 Scene_ResetEventState = { addr = 0x801A7C2C, type = "func", source = "Resets the scene state bytes and copies the 16-byte D_801C84AC table to g_SceneEventFlags." }
 Scene_UpdateEvent = { addr = 0x801A7CAC, type = "func", source = "Runs the g_SceneEvents callback selected by the scene event byte D_801448EB." }
 Menu_OpenMaster = { addr = 0x801A7CF0, type = "func", source = "Scene event 4: loads SISYOU with EMI_LoadArchive(EMI_SLOT_SISYOU) and runs the master menu through func_801D25D8." }
-Scene_StartShopSave = { addr = 0x801A802C, type = "func", source = "Scene event 10: calls UI_SetMode, plays an XA stream and sets g_GameEntryState to 7, the shop entry state." }
+Scene_RunInn = { addr = 0x801A802C, type = "func", source = "Scene event 10: calls UI_SetMode, plays an XA stream and sets g_GameEntryState to 7, the shop entry state." }
 Message_RunAreaMessage = { addr = 0x801A82F8, type = "func", source = "Starts area message 0xD8, waits until g_GameStateIndex leaves 2, then clears the script-active flag and the scene event byte D_801448EB." }
 Scene_DispatchObject = { addr = 0x801A86D4, type = "func", source = "Runs the g_SceneObjects callback selected by unk_7A of the actor, with the actor and g_SceneEventFlags." }
 Game_CallArea = { addr = 0x801A8CB4, type = "func", source = "Finds the entry of g_GameAreaId in the 28-entry area handler table g_AreaHooks and calls its handler with the two coordinates; returns 0 when the area has none. Called by Game_CallScenario." }

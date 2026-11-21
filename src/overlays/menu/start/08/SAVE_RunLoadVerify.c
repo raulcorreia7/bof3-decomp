@@ -35,7 +35,7 @@ MATCH void SAVE_RunLoadVerify(void) {
             g_Game.flags = D_80145025;
             if ((sum & SAVE_CHECKSUM_MASK) != stored) {
                 SND_PlaySE(EMI_SE_ID(SND_BANK_COMMON, 7));
-                g_SaveCardStatus = SAVE_STATUS_BAD_CHECKSUM;
+                g_SaveCardStatus = SAVE_LOAD_STATUS_BAD_CHECKSUM;
             } else {
                 if (g_SndMono_nv == 0) {
                     SsSetStereo();
@@ -43,7 +43,7 @@ MATCH void SAVE_RunLoadVerify(void) {
                     SsSetMono();
                 }
                 D_80148654       = 0x3C;
-                g_SaveCardStatus = SAVE_STATUS_LOADED;
+                g_SaveCardStatus = SAVE_LOAD_STATUS_LOADED;
             }
         }
     }

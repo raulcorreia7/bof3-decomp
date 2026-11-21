@@ -93,6 +93,25 @@ ASSERT_OFFSET(SaveData, bonebreak_timer, 0xC80);
 ASSERT_OFFSET(SaveData, fairy_jobs, 0xCF0);
 ASSERT_SIZE(SaveData, SAVE_BLOCK_SIZE);
 
+/* g_SaveCardStatus holds a CardEvent (0 to 4) from the card driver. The two card screens add their own results
+ * above it: the save screen of the shop overlay and the load screen of the start overlay.
+ * The values overlap, so each screen has its own set. */
+enum {
+    SAVE_WRITE_STATUS_NO_FILE       = 5,  /* GAME_TEXT_NO_SAVE_FILE */
+    SAVE_WRITE_STATUS_WRITE_FAILED  = 6,  /* the write ended in a card error */
+    SAVE_WRITE_STATUS_FORMAT_FAILED = 7,  /* the card format failed */
+    SAVE_WRITE_STATUS_SAVED         = 8,  /* GAME_TEXT_SAVE_COMPLETE */
+    SAVE_WRITE_STATUS_FORMATTED     = 9,  /* GAME_TEXT_INIT_COMPLETE */
+    SAVE_WRITE_STATUS_CREATED       = 10, /* a new file was saved */
+};
+
+enum {
+    SAVE_LOAD_STATUS_LOADED       = 5, /* the load verified; the slots show */
+    SAVE_LOAD_STATUS_NO_FILE      = 6, /* the card directory has no save file */
+    SAVE_LOAD_STATUS_BAD_CHECKSUM = 7, /* the loaded file failed its checksum */
+    SAVE_LOAD_STATUS_NO_CARD      = 8, /* neither port holds a usable card */
+};
+
 /* D_801448D8 */
 extern SaveData g_SaveData;
 

@@ -16,27 +16,27 @@ MATCH u8 GFX_MarkPaletteCells(u8 mode, u8 value, u8 search) {
     column = ((u8*)&g_ScratchPad)[1];
     switch (mode) {
         case PALETTE_TYPE_ROW:
-            g_PaletteCells[row][column + 0xF] = value;
-            g_PaletteCells[row][column + 0xE] = value;
-            g_PaletteCells[row][column + 0xD] = value;
-            g_PaletteCells[row][column + 0xC] = value;
-            g_PaletteCells[row][column + 0xB] = value;
-            g_PaletteCells[row][column + 0xA] = value;
-            g_PaletteCells[row][column + 0x9] = value;
-            g_PaletteCells[row][column + 0x8] = value;
+            g_PaletteCells[row][column + 15] = value;
+            g_PaletteCells[row][column + 14] = value;
+            g_PaletteCells[row][column + 13] = value;
+            g_PaletteCells[row][column + 12] = value;
+            g_PaletteCells[row][column + 11] = value;
+            g_PaletteCells[row][column + 10] = value;
+            g_PaletteCells[row][column + 9]  = value;
+            g_PaletteCells[row][column + 8]  = value;
             /* fallthrough */
         case PALETTE_TYPE_CELLS_8:
-            g_PaletteCells[row][column + 0x7] = value;
-            g_PaletteCells[row][column + 0x6] = value;
-            g_PaletteCells[row][column + 0x5] = value;
-            g_PaletteCells[row][column + 0x4] = value;
+            g_PaletteCells[row][column + 7] = value;
+            g_PaletteCells[row][column + 6] = value;
+            g_PaletteCells[row][column + 5] = value;
+            g_PaletteCells[row][column + 4] = value;
             /* fallthrough */
         case PALETTE_TYPE_CELLS_4:
-            g_PaletteCells[row][column + 0x3] = value;
-            g_PaletteCells[row][column + 0x2] = value;
+            g_PaletteCells[row][column + 3] = value;
+            g_PaletteCells[row][column + 2] = value;
             /* fallthrough */
         case PALETTE_TYPE_CELLS_2:
-            g_PaletteCells[row][column + 0x1] = value;
+            g_PaletteCells[row][column + 1] = value;
             /* fallthrough */
         case PALETTE_TYPE_CELL:
             g_PaletteCells[row][column] = value;

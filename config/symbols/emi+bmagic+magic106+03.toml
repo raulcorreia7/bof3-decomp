@@ -6,4 +6,5 @@ g_BattleEffectBattler = { addr = 0x801EB4E0, source = "the battler the running e
 Effect_MarkDamagedOnZeroTick = { addr = 0x801EEE80, type = "func", source = "When the effect ticker (byte 0x0B) is zero marks the battlers of the target selector damaged, raises BATTLE_STATE_EFFECT_PLAYING and resets the effect in magic106 (Death)." }
 Effect_StartOrbit = { addr = 0x801EEFAC, type = "func", source = "Starts the next cycle of the orbiting effect of magic106: picks its angle, radius and random timers." }
 Effect_StepOrbit = { addr = 0x801EF29C, type = "func", source = "Turns the orbiting effect of magic106 one step around its battler and ages its timers." }
+Effect_SetOrbitModelMatrix = { addr = 0x801EF52C, type = "func", source = "Sets the model matrix from the orbit effect's angle and position." }
 g_BMagicOrbit = { addr = 0x801F05F8, type = "BMagicOrbit*", source = "Work record of the orbiting sub-effect of magic106 whose handlers run by header.step (byte 0x02)." }

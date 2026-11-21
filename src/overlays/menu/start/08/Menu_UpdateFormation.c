@@ -46,10 +46,10 @@ NON_MATCHING void Menu_UpdateFormation(void) {
     g_MenuPanelTasks[20].unk_0A     = D_801EC4D0[tmp3].unk_04 + 1;
     val5                            = 0 << 0x18;
     do {
-        g_MenuPanelTasks[(val5 >> 0x18) + 0xC].unk_0C = 0;
-        tmp4                                          = val8 + 1;
-        val8                                          = tmp4;
-        val5                                          = val8 << 0x18;
+        g_MenuPanelTasks[(val5 >> 0x18) + MENU_PANEL_CARD_FIRST].unk_0C = 0;
+        tmp4                                                            = val8 + 1;
+        val8                                                            = tmp4;
+        val5                                                            = val8 << 0x18;
     } while (tmp4 < 6);
     if (g_FormationCursorColumn == 0) {
         val9 = 1 << (s8)g_FormationCursorRow;

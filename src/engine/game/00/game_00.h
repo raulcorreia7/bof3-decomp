@@ -850,7 +850,7 @@ s8      func_801A79A4(s32 handler_x, s32 handler_y);
 void    func_801A7CE8(void);
 void    Menu_OpenMaster(void);
 void    func_801A7E54(void);
-void    Scene_StartShopSave(void);
+void    Scene_RunInn(void);
 void    func_801A839C(void);
 void    func_801A83DC(void);
 void    func_801A852C(void);

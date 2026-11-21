@@ -60,25 +60,8 @@ MATCH void func_801EF058(void) {
 /* func_801EF4D0 */
 #include "overlays/bmagic/shared/Effect_NextStepUnderTickLimit.h"
 
-MATCH void func_801EF518(void) {
-    u8           unk04;
-    PartyMember* battler;
-
-    unk04 = g_Task->unk_04;
-    if (unk04 < 3) {
-        battler = &g_Game.members[unk04];
-    } else {
-        battler = (PartyMember*)((EnemyBattler*)g_BattleEnemies + unk04);
-    }
-    g_PaletteFades[g_Task->timer].offset.r--;
-    g_PaletteFades[g_Task->timer].offset.g--;
-    g_PaletteFades[g_Task->timer].offset.b--;
-    if (--g_Task->unk_09 == 0) {
-        func_80196718(battler);
-        Battle_FadePoisonedBattler(g_Task->unk_04);
-        g_Task->header.step++;
-    }
-}
+/* func_801EF518 */
+#include "overlays/bmagic/shared/Effect_FadePoisonedBattlerPalette.h"
 
 /* func_801EF6A4 */
 #include "overlays/bmagic/shared/Effect_EndRecovery.h"

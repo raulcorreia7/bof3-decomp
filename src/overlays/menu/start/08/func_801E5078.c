@@ -37,7 +37,7 @@ MATCH void func_801E5078(void) {
         D_801ED870     = 2;
     } else {
         SND_PlaySE(EMI_SE_ID(SND_BANK_COMMON, 7));
-        g_SaveCardStatus = SAVE_STATUS_NO_CARD;
+        g_SaveCardStatus = SAVE_LOAD_STATUS_NO_CARD;
         g_MenuStartStep  = 0xD;
         D_801ED870       = 0;
         return;

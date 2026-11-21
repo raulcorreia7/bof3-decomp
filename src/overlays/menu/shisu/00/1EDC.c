@@ -372,7 +372,7 @@ MATCH void Menu_DrawCharacterWindow(s32 px, s32 py, u8 character_index, s32 shad
 
 #include "overlays/menu/shared/Menu_DrawStatPanel.h"
 
-#include "overlays/menu/shared/Shop_DrawEquipment.h"
+#include "overlays/menu/shared/Menu_DrawEquipmentPanel.h"
 
 MATCH void func_801D4158(s16 x, s16 y, u8 index, u8 flag) {
     Character* character;

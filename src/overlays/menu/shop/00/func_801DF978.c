@@ -1,5 +1,0 @@
-#include "shop_00.h"
-
-MATCH void func_801DF978(void) {
-    SYS_DISPATCH_BYTE(g_ShopStep7Steps, g_MenuStep.sub_step);
-}

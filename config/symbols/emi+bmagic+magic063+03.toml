@@ -12,5 +12,6 @@ BMagic_DispatchEffectMode = { addr = 0x801EEF30, type = "func", source = "Runs t
 Effect_EndOnZeroTick = { addr = 0x801EF2E4, type = "func", source = "When the effect ticker (byte 0x0B) is zero marks the targets of the side mask in byte 0x04, lowers the active battler's ticker and clears the effect in magic063 (SuddenDeath)." }
 Effect_StartOrbit = { addr = 0x801EF40C, type = "func", source = "Starts the next cycle of the orbiting effect of magic063: picks its angle, radius and random timers." }
 Effect_StepOrbit = { addr = 0x801EF704, type = "func", source = "Turns the orbiting effect of magic063 one step around its battler and ages its timers." }
+Effect_SetOrbitModelMatrix = { addr = 0x801EF994, type = "func", source = "Sets the model matrix from the orbit effect's angle and position." }
 g_BMagicEffectModes = { addr = 0x801F0400, source = "Handlers of magic063 (SuddenDeath), run by header.mode (byte 0x01)." }
 g_BMagicOrbit = { addr = 0x801F1054, type = "BMagicOrbit*", source = "Work record of the orbiting sub-effect of magic063 whose handlers run by header.step (byte 0x02)." }

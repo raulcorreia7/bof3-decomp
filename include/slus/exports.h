@@ -27,10 +27,10 @@ ASSERT_SIZE(MenuStep, 3);
 
 /* The g_SceneEvents handlers with a known role; the other handlers stay numeric. */
 typedef enum SceneEventMode {
-    SCENE_EVENT_NONE      = 0,
-    SCENE_EVENT_MASTER    = 4,
-    SCENE_EVENT_MESSAGE   = 6,
-    SCENE_EVENT_SHOP_SAVE = 10,
+    SCENE_EVENT_NONE    = 0,
+    SCENE_EVENT_MASTER  = 4,
+    SCENE_EVENT_MESSAGE = 6,
+    SCENE_EVENT_INN     = 10,
 } SceneEventMode;
 
 /* The rows of g_XAStates, the steps of one XA stream: seek, read, pause. */

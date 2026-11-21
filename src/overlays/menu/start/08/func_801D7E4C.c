@@ -67,8 +67,8 @@ MATCH void func_801D7E4C(void) {
         SND_PlaySE(EMI_SE_ID(SND_BANK_COMMON, 2));
         D_801485DC = 0;
         for (i = 0; i < Party_CountOrder(PARTY_ORDER_FIELD); i++) {
-            g_MenuPanelTasks[i + 0xD].state = 9;
-            g_MenuPanelTasks[i + 4].state   = 8;
+            g_MenuPanelTasks[i + MENU_PANEL_MEMBER_ROW_FIRST].state = 9;
+            g_MenuPanelTasks[i + 4].state                           = 8;
         }
         g_BattleChoicePhase        = 3;
         g_MenuPanelTasks[16].flags = 0xFF;

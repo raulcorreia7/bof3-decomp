@@ -1,6 +1,6 @@
 #include "game_00.h"
 
-MATCH void Scene_StartShopSave(void) {
+MATCH void Scene_RunInn(void) {
     u16 id;
 
     switch (g_SceneEventState.step) {

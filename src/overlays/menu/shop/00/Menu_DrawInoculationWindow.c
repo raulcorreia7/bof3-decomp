@@ -3,7 +3,8 @@
 /* The per-slot shop byte arrays (stride 0x140), the item records addressed by
  * byte offset (stride 0xA4), the shop caption buffer and the panel helpers are
  * declared by shop_00.h; func_8014F800 is declared by gfx/prim.h. */
-MATCH void func_801D7E1C(u8 slot, s32 x, s32 y, s32 style, u8 cursor) {
+/* func_801D7E1C */
+MATCH void Menu_DrawInoculationWindow(u8 slot, s32 x, s32 y, s32 style, u8 cursor) {
     u8  item;
     s32 rec;
     /* FAKE: the retail build homes the x copy in s4 and reuses x's s2 for gx;

@@ -523,7 +523,7 @@ INCLUDE_ASM(Menu_DrawCharacterWindow);
 
 #include "overlays/menu/shared/Menu_DrawStatPanel.h"
 
-#include "overlays/menu/shared/Shop_DrawEquipment.h"
+#include "overlays/menu/shared/Menu_DrawEquipmentPanel.h"
 
 #include "overlays/menu/shared/Menu_DrawExperienceWindow.h"
 

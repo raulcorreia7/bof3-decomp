@@ -24,7 +24,7 @@ MATCH void func_801D543C(void) {
         case CARD_EVENT_CAPACITY:
             resource = 6;
             break;
-        case SAVE_STATUS_NO_FILE:
+        case SAVE_WRITE_STATUS_NO_FILE:
             MENU_DRAW_HEADER();
             panel_timer = 8;
             UI_DrawText(28, 22, 0, TEXT_LENGTH_MAX, Message_GetText(GAME_TEXT_NO_SAVE_FILE));
@@ -37,13 +37,13 @@ MATCH void func_801D543C(void) {
             g_SaveSlots[1].card_index = GAME_NONE;
             g_SaveSlots[0].card_index = GAME_NONE;
             break;
-        case SAVE_STATUS_WRITE_FAILED:
+        case SAVE_WRITE_STATUS_WRITE_FAILED:
             resource = 7;
             break;
-        case SAVE_STATUS_FORMAT_FAILED:
+        case SAVE_WRITE_STATUS_FORMAT_FAILED:
             resource = 8;
             break;
-        case SAVE_STATUS_SAVED:
+        case SAVE_WRITE_STATUS_SAVED:
             MENU_DRAW_HEADER();
             panel_timer = 11;
             UI_DrawText(28, 22, 0, TEXT_LENGTH_MAX, Message_GetText(GAME_TEXT_SAVE_COMPLETE));
@@ -51,7 +51,7 @@ MATCH void func_801D543C(void) {
             D_801E6080 = 1;
             D_801E6110 = 1;
             break;
-        case SAVE_STATUS_FORMATTED:
+        case SAVE_WRITE_STATUS_FORMATTED:
             MENU_DRAW_HEADER();
             panel_timer = 8;
             UI_DrawText(28, 22, 0, TEXT_LENGTH_MAX, Message_GetText(GAME_TEXT_INIT_COMPLETE));
@@ -64,7 +64,7 @@ MATCH void func_801D543C(void) {
             g_SaveSlots[1].card_index = GAME_NONE;
             g_SaveSlots[0].card_index = GAME_NONE;
             break;
-        case SAVE_STATUS_CREATED:
+        case SAVE_WRITE_STATUS_CREATED:
             MENU_DRAW_HEADER();
             panel_timer = 11;
             UI_DrawText(28, 22, 0, TEXT_LENGTH_MAX, Message_GetText(0x96));
@@ -86,10 +86,10 @@ MATCH void func_801D543C(void) {
         MENU_DRAW_HEADER();
         UI_DrawText(28, 22, 0, TEXT_LENGTH_MAX, Message_GetText(resource + 0x85));
     }
-    if ((g_InputPressed != 0) ||
-        (((g_SaveCardStatus == SAVE_STATUS_CREATED) || (g_SaveCardStatus == SAVE_STATUS_SAVED)) && (timer_p = &D_80148654, next = *timer_p - 1, *timer_p = next, ((next & BYTE_MASK) == 0)))) {
+    if ((g_InputPressed != 0) || (((g_SaveCardStatus == SAVE_WRITE_STATUS_CREATED) || (g_SaveCardStatus == SAVE_WRITE_STATUS_SAVED)) &&
+                                  (timer_p = &D_80148654, next = *timer_p - 1, *timer_p = next, ((next & BYTE_MASK) == 0)))) {
         D_80148654 = 0;
-        if ((g_SaveCardStatus != SAVE_STATUS_SAVED) && (g_SaveCardStatus != SAVE_STATUS_CREATED)) {
+        if ((g_SaveCardStatus != SAVE_WRITE_STATUS_SAVED) && (g_SaveCardStatus != SAVE_WRITE_STATUS_CREATED)) {
             SND_PlaySE(EMI_SE_ID(SND_BANK_COMMON, 4));
         }
         g_MenuStep.state = panel_timer;

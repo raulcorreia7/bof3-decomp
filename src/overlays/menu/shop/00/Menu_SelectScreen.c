@@ -3,7 +3,8 @@
 /* Globals the shop target's include chain does not reach; the etc/game/00 overlay
  * owns them (src/engine/game/00/game_00.h). */
 
-MATCH void func_801D0EDC(void) {
+/* func_801D0EDC */
+MATCH void Menu_SelectScreen(void) {
     s32        index;
     u8*        pond;
     Character* row;
