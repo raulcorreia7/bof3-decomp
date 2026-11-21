@@ -8,6 +8,6 @@ segments:
     section_order: [.rodata, .text, .data, .bss]
     subsegments:
       - [0x0, .rodata, card_names]
-      - [0x30, c, save_card]
+      - [0x30, c, start_09]
       - [0x1254, bin, asset_save_icons]
   - [0x1494]

@@ -1,0 +1,16 @@
+/* area116's code in link order: one translation unit for the whole .text run. */
+#include "area116_13.h"
+
+#include "func_801F2C04.c"
+#include "func_801F2C6C.c"
+#include "func_801F2C9C.c"
+#include "func_801F2CCC.c"
+#include "func_801F2D10.c"
+#include "Area_EnterWyndiaTeleporter.c"
+#include "overlays/area/shared/Actor_RunAreaStep.h"
+#include "Area_TestStepTrigger.c"
+#include "func_801F2E68.c"
+#include "func_801F2EA0.c"
+#include "overlays/area/shared/Actor_SnapToGround.h"
+#include "overlays/area/shared/Area_DrawActorLightPillar.h"
+#include "overlays/area/shared/Area_DrawLightPillar.h"
