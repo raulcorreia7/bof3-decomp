@@ -252,26 +252,8 @@ class Tree:
         return seen
 
 
-def problems(tree: Tree) -> list[Problem]:
-    """Compare every definition with the prototypes it sees, and every call with its callee."""
-    rows: list[Problem] = []
-
-    def add(kind: str, name: str, file: str, line: int, detail: str) -> None:
-        rows.append(Problem(kind, name, file, line, detail))
-
-    visible = {name: tree.closure(name) for name in tree.texts}
-    views = tree.views()
-    defs = {n: tree.kind(n, "def") for n in tree.decls}
-    protos = {n: tree.kind(n, "proto") for n in tree.decls}
-    for name, definitions in defs.items():
-        for d in definitions:
-            for p in (q for q in protos[name] if q.file in visible[d.file]):
-                _prototype_rows(add, name, d, p)
-    callers: dict[str, list[Call]] = collections.defaultdict(list)
-    for call in tree.calls:
-        callers[call.name].append(call)
-    for call in tree.calls:
-        _call_rows(add, tree, call, views, defs, protos)
+def _cast_rows(add, tree: Tree) -> None:
+    """Add a row for each call through a cast and each cast of a call's result."""
     for file, text in tree.stripped.items():
         for m in _CALL_CAST.finditer(text):
             if m.group(3) in tree.decls:
@@ -292,6 +274,12 @@ def problems(tree: Tree) -> list[Problem]:
                     text.count("\n", 0, m.start()) + 1,
                     normalize(m.group(1)),
                 )
+
+
+def _result_rows(
+    add, rows: list[Problem], defs: dict[str, list], callers: dict[str, list[Call]]
+) -> None:
+    """Add a row for each result read from a void function and each wide return every caller casts."""
     for name, definitions in defs.items():
         for d in definitions:
             if d.ret == "void":
@@ -309,6 +297,30 @@ def problems(tree: Tree) -> list[Problem]:
                         d.line,
                         f"{d.ret} -> {kinds.pop()}",
                     )
+
+
+def problems(tree: Tree) -> list[Problem]:
+    """Compare every definition with the prototypes it sees, and every call with its callee."""
+    rows: list[Problem] = []
+
+    def add(kind: str, name: str, file: str, line: int, detail: str) -> None:
+        rows.append(Problem(kind, name, file, line, detail))
+
+    visible = {name: tree.closure(name) for name in tree.texts}
+    views = tree.views()
+    defs = {n: tree.kind(n, "def") for n in tree.decls}
+    protos = {n: tree.kind(n, "proto") for n in tree.decls}
+    for name, definitions in defs.items():
+        for d in definitions:
+            for p in (q for q in protos[name] if q.file in visible[d.file]):
+                _prototype_rows(add, name, d, p)
+    callers: dict[str, list[Call]] = collections.defaultdict(list)
+    for call in tree.calls:
+        callers[call.name].append(call)
+    for call in tree.calls:
+        _call_rows(add, tree, call, views, defs, protos)
+    _cast_rows(add, tree)
+    _result_rows(add, rows, defs, callers)
     return sorted(rows, key=lambda r: (r.kind, r.name, r.file, r.line, r.detail))
 
 
