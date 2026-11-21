@@ -219,7 +219,7 @@ def _render_declared(name: str, decl) -> str | None:
     return f"{decl.ret} {name}({params or 'void'})"
 
 
-def _declared_kind(ctype: str) -> str:
+def _declared_type(ctype: str) -> str:
     """Return the kind a declared C parameter states."""
     text = _normalized_type(re.sub(r"\bHAND_ASM\b", "", ctype))
     if text.endswith(" *"):
@@ -240,7 +240,7 @@ def _declared_kind(ctype: str) -> str:
     }.get(text, "s32")
 
 
-def _declared_return_kind(ret: str) -> str:
+def _declared_return_type(ret: str) -> str:
     """Return the kind a declared return type states."""
     text = _normalized_type(re.sub(r"\bHAND_ASM\b", "", ret))
     if text == "void":

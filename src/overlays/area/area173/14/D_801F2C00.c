@@ -1,7 +1,7 @@
 #include "common.h"
 
 /* Loader-verified payload id: 52 + area. */
-u32 D_801F2C00 = 0xE1;
+u32 D_801F2C00 = 225;
 
 /* Header strings and their alignment bytes. */
 u8 D_801F2C04[16] = {

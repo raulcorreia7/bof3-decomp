@@ -77,7 +77,9 @@ def main(argv: list[str] | None = None) -> int:
     if (
         extracted.is_dir()
         and all((ROOT / manifest.binary).is_file() for manifest in manifests.values())
-        and all('"kind"' in path.read_text() for path in extracted.rglob("emi.json"))
+        and all(
+            "asset_type" in path.read_text() for path in extracted.rglob("emi.json")
+        )
     ):
         print("payloads: current")
         return 0
@@ -97,7 +99,7 @@ def main(argv: list[str] | None = None) -> int:
     for archive in sorted(extracted.rglob("*.EMI")):
         out = extracted / archive.relative_to(extracted).with_suffix("")
         manifest = out / "emi.json"
-        if manifest.is_file() and '"kind"' in manifest.read_text():
+        if manifest.is_file() and "asset_type" in manifest.read_text():
             continue
         out.parent.mkdir(parents=True, exist_ok=True)
         client = client or extractor()

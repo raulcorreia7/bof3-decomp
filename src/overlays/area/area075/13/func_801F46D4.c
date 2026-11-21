@@ -4,7 +4,7 @@ MATCH void func_801F46D4(void) {
     u16* timer;
     u8*  counter;
 
-    if (g_InputPressed & 0x40) {
+    if (g_InputPressed & PADRdown) {
         SND_PlaySE(EMI_SE_ID(SND_BANK_AREA, 2));
         timer = &D_801F58CA;
         *timer -= rand() % 2 + 4;

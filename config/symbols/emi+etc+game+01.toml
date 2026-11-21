@@ -1,22 +1,22 @@
 ["emi/etc/game/01"]
-func_80196F78 = { addr = 0x80196F78, type = "func", source = "The title-select callback at 0x80196F78 that Game_LeaveTitle passes to its task; the function stays unmatched in game/01." }
-Game_RunTitle = { addr = 0x801D0C04, type = "func", source = "GAME.EMI entry, clears the window state and runs the eight-handler loop" }
-Game_BeginTitle = { addr = 0x801D0C90, type = "func", source = "Title state 0: selects layout bank 2, requests DEMO.EMI, waits for the loader and arms the title fade." }
-Game_WaitTitleFade = { addr = 0x801D0D5C, type = "func", source = "Title state: waits for fade phase 2, then arms the 360-tick title timer." }
-Game_AdvanceTitleFade = { addr = 0x801D0D94, type = "func", source = "Title state: counts the title timer to zero, then selects fade phase 3 and rearms the timer at 900 ticks." }
-Game_StartTitleFade = { addr = 0x801D0DF0, type = "func", source = "Title state: counts the title timer to zero, then enters local mode 0 and opens the selection effect." }
-Game_StartSelectedGame = { addr = 0x801D0E54, type = "func", source = "Title state: waits for the selection effect to close, resets the title phases and requests scenario 16." }
-UI_WaitTitleInput = { addr = 0x801D0F00, type = "func", source = "Title prompt state: reads the pad input and starts the SE of the selected entry." }
-UI_UpdateChoicePrompt = { addr = 0x801D0FB8, type = "func", source = "Updates the title prompt while the EXE gate is open, else returns to title state 0." }
-Game_LeaveTitle = { addr = 0x801D1000, type = "func", source = "Closes the selection effect, restores layout bank 0 and exits the scheduler thread." }
-UI_UpdateStartButton = { addr = 0x801D104C, type = "func", source = "Intercepts the Start button on the title: redirects to state 2 early, or to the popup close and state 7." }
+func_80196F78 = { addr = 0x80196F78, type = "func", source = "The title-select callback at 0x80196F78 that Title_Leave passes to its task; the function stays unmatched in game/01." }
+Title_Run = { addr = 0x801D0C04, type = "func", source = "GAME.EMI entry, clears the window state and runs the eight-handler loop" }
+Title_Begin = { addr = 0x801D0C90, type = "func", source = "Title state 0: selects layout bank 2, requests DEMO.EMI, waits for the loader and arms the title fade." }
+Title_WaitFade = { addr = 0x801D0D5C, type = "func", source = "Title state: waits for fade phase 2, then arms the 360-tick title timer." }
+Title_AdvanceFade = { addr = 0x801D0D94, type = "func", source = "Title state: counts the title timer to zero, then selects fade phase 3 and rearms the timer at 900 ticks." }
+Title_StartFade = { addr = 0x801D0DF0, type = "func", source = "Title state: counts the title timer to zero, then enters local mode 0 and opens the selection effect." }
+Title_StartSelectedGame = { addr = 0x801D0E54, type = "func", source = "Title state: waits for the selection effect to close, resets the title phases and requests scenario 16." }
+Title_WaitInput = { addr = 0x801D0F00, type = "func", source = "Title prompt state: reads the pad input and starts the SE of the selected entry." }
+Title_UpdateChoicePrompt = { addr = 0x801D0FB8, type = "func", source = "Updates the title prompt while the EXE gate is open, else returns to title state 0." }
+Title_Leave = { addr = 0x801D1000, type = "func", source = "Closes the selection effect, restores layout bank 0 and exits the scheduler thread." }
+Title_UpdateStartButton = { addr = 0x801D104C, type = "func", source = "Intercepts the Start button on the title: redirects to state 2 early, or to the popup close and state 7." }
 SND_StartSelectionEffect = { addr = 0x801D1134, type = "func", source = "Starts the g_SndBGMId decrescendo through SND_StartDecrescendo with g_SelectionSepSlots[selection]." }
 SND_StopSelectionEffect = { addr = 0x801D1184, type = "func", source = "Stops the g_SndBGMId effect and clears the selection byte." }
-UI_DrawChoicePrompt = { addr = 0x801D11E4, type = "func", source = "Clears g_UiPopupRequest once the EXE selection reaches idle, then draws the title prompt sprite." }
-UI_DrawChoicePanels = { addr = 0x801D12CC, type = "func", source = "Draws the New Game and Load panels with their labels and the pulsing selection marker." }
-UI_DrawLabelPair = { addr = 0x801D150C, type = "func", source = "Draws the pair of labels 4 and 5 at x, y, or 15 and 16 when selected." }
-UI_DrawIconPair = { addr = 0x801D16DC, type = "func", source = "Draws the icon pair 2 and 3 at x, y and x + 240, y + 112." }
+Title_DrawChoicePrompt = { addr = 0x801D11E4, type = "func", source = "Clears g_UiPopupRequest once the EXE selection reaches idle, then draws the title prompt sprite." }
+Title_DrawChoicePanels = { addr = 0x801D12CC, type = "func", source = "Draws the New Game and Load panels with their labels and the pulsing selection marker." }
+Title_DrawLabelPair = { addr = 0x801D150C, type = "func", source = "Draws the pair of labels 4 and 5 at x, y, or 15 and 16 when selected." }
+Title_DrawIconPair = { addr = 0x801D16DC, type = "func", source = "Draws the icon pair 2 and 3 at x, y and x + 240, y + 112." }
 GFX_BuildGlyphPrimitive = { addr = 0x801D17D8, type = "func", source = "Builds one SPRT from the 20-record WinGlyphGeometry table and appends it to the primitive list." }
 GFX_SetPrimitiveAlpha = { addr = 0x801D18E8, type = "func", source = "Writes one alpha value into the r0, g0 and b0 bytes of a primitive." }
-UI_UpdateBannerFade = { addr = 0x801D18F8, type = "func", source = "Advances the fade of the four banner panels and draws each visible panel." }
-UI_UpdateWindowFade = { addr = 0x801D1B00, type = "func", source = "Advances the two window alpha channels and draws the visible prompt layers." }
+Title_UpdateBannerFade = { addr = 0x801D18F8, type = "func", source = "Advances the fade of the four banner panels and draws each visible panel." }
+Title_UpdateWindowFade = { addr = 0x801D1B00, type = "func", source = "Advances the two window alpha channels and draws the visible prompt layers." }

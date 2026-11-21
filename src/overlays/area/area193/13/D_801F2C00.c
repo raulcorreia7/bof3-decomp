@@ -1,7 +1,7 @@
 #include "area193_13.h"
 
 /* Loader-verified payload id: 52 + area. */
-u32 D_801F2C00 = 0xF5;
+u32 D_801F2C00 = 245;
 
 /* Header strings and their alignment bytes. */
 u8 D_801F2C04[16] = {

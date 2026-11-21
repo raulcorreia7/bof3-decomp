@@ -1,7 +1,7 @@
 #include "area104_14.h"
 
 /* Loader-verified payload id: 52 + area. */
-u32 D_801F2C00 = 0x9C;
+u32 D_801F2C00 = 156;
 
 /* The torch gauge arrow cells, one per gauge state. */
 TorchGaugeCells D_801F2C04 = {{{0xB0, 0x98}, {0xE0, 0x90}}};

@@ -59,10 +59,10 @@ void PartyAddItem(u16 itemId, u8 nCount);    /* no tag, camelCase, Hungarian */
 Every function, global, static, constant and macro carries the tag of the system that owns it.
 System tags are capitals, as SDL writes them; game tags are words.
 
-| Kind   | Tags                                                                                                                                                                                                                                                                | Global word                                                                         |
-| ------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------- |
-| System | `SYS_ GFX_ SND_ DISC_ EMI_ SAVE_ STRING_ UI_ INPUT_ MATH_ LZ77_`: engine, platform and I/O                                                                                                                                                                          | `g_Sys`, `g_Gfx`, `g_Snd`, `g_Disc`, `g_Emi`, `g_Save`, `g_Text`, `g_Ui`, `g_Input` |
-| Game   | `Battle_ BMagic_ Boss_ Enemy_ Party_ Char_ PlChar_ Area_ WorldMap_ Actor_ Scene_ Menu_ Shop_ Master_ Fairy_ FairyCasino_ FairyNickname_ FairyCopyShop_ FairyMusician_ FairyFortuneTeller_ FairySinger_ Well_ Fishing_ Game_ Message_ Effect_ Item_ Logo_ Resource_` | the tag without `_`: `g_Battle`, `g_WorldMap`                                       |
+| Kind   | Tags                                                                                                                                                                                                                                                                       | Global word                                                                         |
+| ------ | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------- |
+| System | `SYS_ GFX_ SND_ DISC_ EMI_ SAVE_ STRING_ UI_ INPUT_ MATH_ LZ77_`: engine, platform and I/O                                                                                                                                                                                 | `g_Sys`, `g_Gfx`, `g_Snd`, `g_Disc`, `g_Emi`, `g_Save`, `g_Text`, `g_Ui`, `g_Input` |
+| Game   | `Battle_ BMagic_ Boss_ Enemy_ Party_ Char_ PlChar_ Area_ WorldMap_ Actor_ Scene_ Menu_ Shop_ Master_ Fairy_ FairyCasino_ FairyNickname_ FairyCopyShop_ FairyMusician_ FairyFortuneTeller_ FairySinger_ Well_ Fishing_ Game_ Title_ Message_ Effect_ Item_ Logo_ Resource_` | the tag without `_`: `g_Battle`, `g_WorldMap`                                       |
 
 A constant or macro takes the tag in capitals: `BATTLE_`, `BMAGIC_`, `PLCHAR_`, `WORLDMAP_`,
 `SCENE_`, `FISHING_`. `MATH_` names only the game's own math routines (`MATH_TBL`, the EMI archive magic, is a container tag and not a math word); `LZ77_` names the decoder.
@@ -98,14 +98,14 @@ A new tag goes into the table above in the same change.
 
 UI parts:
 
-| Part                                                                 | Tag                                                                                   |
-| -------------------------------------------------------------------- | ------------------------------------------------------------------------------------- |
-| Shared text, fonts, glyphs, windows, frontend state and choice lists | `UI_` (`g_Ui`)                                                                        |
-| Message window, area messages and answer menus                       | `Message_`                                                                            |
-| Menu panels, cursors, portraits, icons, stat and caption windows     | `Menu_`                                                                               |
-| Battle panels, command menu, target cursor and battle numbers        | `Battle_`                                                                             |
-| A screen's own UI                                                    | The screen tag: `Shop_`, `Master_`, `Fairy_`, `SAVE_`, or `Menu_` for title and start |
-| Numbers, gauges and list rows                                        | The tag of the screen that draws them                                                 |
+| Part                                                                 | Tag                                                                                                       |
+| -------------------------------------------------------------------- | --------------------------------------------------------------------------------------------------------- |
+| Shared text, fonts, glyphs, windows, frontend state and choice lists | `UI_` (`g_Ui`)                                                                                            |
+| Message window, area messages and answer menus                       | `Message_`                                                                                                |
+| Menu panels, cursors, portraits, icons, stat and caption windows     | `Menu_`                                                                                                   |
+| Battle panels, command menu, target cursor and battle numbers        | `Battle_`                                                                                                 |
+| A screen's own UI                                                    | The screen tag: `Shop_`, `Master_`, `Fairy_`, `SAVE_`, `Menu_` for the start menu, `Title_` for the title |
+| Numbers, gauges and list rows                                        | The tag of the screen that draws them                                                                     |
 
 ## Vocabulary
 

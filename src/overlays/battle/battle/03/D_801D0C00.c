@@ -5,7 +5,7 @@
 
 /* In-overlay dispatch targets (split assembly units). */
 
-u32 D_801D0C00 = 0x10;
+u32 D_801D0C00 = 16;
 
 /* 0x801D0C04 */
 /* D_801D0C04 */

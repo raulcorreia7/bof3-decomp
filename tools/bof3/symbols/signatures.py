@@ -14,9 +14,9 @@ from bof3.symbols.assembly import (
     Assembly,
     SymbolIndex,
     _assembly,
-    _declared_kind,
     _declared_prototype,
-    _declared_return_kind,
+    _declared_return_type,
+    _declared_type,
     _extent_rows,
     _folder_system,
     _name_system,
@@ -311,7 +311,7 @@ def _previous_call(insns, index: int, skip: int | None) -> str | None:
     return None
 
 
-def _caller_argument_kind(caller, call, position: int, tree, visible: set[str]) -> str:
+def _caller_argument_type(caller, call, position: int, tree, visible: set[str]) -> str:
     """Return the type a caller's argument register holds before one call."""
     narrow = {"lb": "s8", "lbu": "u8", "lh": "s16", "lhu": "u16"}
     start = next(
@@ -332,7 +332,7 @@ def _caller_argument_kind(caller, call, position: int, tree, visible: set[str]) 
             callee = _previous_call(caller.insns, index, start)
             if callee:
                 decl = _declared_prototype(tree, callee, visible)
-                if decl is not None and _declared_return_kind(decl.ret) == "pointer":
+                if decl is not None and _declared_return_type(decl.ret) == "pointer":
                     return "pointer"
         if insn.mnemonic in narrow:
             return narrow[insn.mnemonic]
@@ -433,8 +433,8 @@ def _function_signature(
             record = _pointer_record(ctx, use, index, callers, position, declared)
         else:
             forwarded = _forwarded_pointer(function, facts, position, tree, visible)
-            caller_kinds = [
-                _caller_argument_kind(caller, call, position, tree, visible)
+            caller_types = [
+                _caller_argument_type(caller, call, position, tree, visible)
                 for caller, call in callers
             ]
             if forwarded is not None:
@@ -442,7 +442,7 @@ def _function_signature(
                 proof = "forwarded"
                 layout = type_layout(ctx, forwarded) if forwarded != "void" else None
                 record = forwarded if layout is not None and layout.record else None
-            elif callers and all(value == "pointer" for value in caller_kinds):
+            elif callers and all(value == "pointer" for value in caller_types):
                 kind = "pointer"
                 proof = "callers"
                 forwarded = "void"
@@ -514,13 +514,13 @@ def _function_signature(
         for position, (ctype, _param) in enumerate(declared_params):
             if position >= len(arguments):
                 break
-            kind = _declared_kind(ctype)
+            kind = _declared_type(ctype)
             if kind != arguments[position]["kind"]:
                 differs.append(
                     f"arg{position} {kind} declared, "
                     f"{arguments[position]['kind']} found"
                 )
-        declared_return = _declared_return_kind(declared.ret)
+        declared_return = _declared_return_type(declared.ret)
         if declared_return != returned["kind"]:
             differs.append(
                 f"return {declared_return} declared, {returned['kind']} found"
@@ -543,21 +543,21 @@ def _function_signature(
     if not returns and facts.ambiguous_return:
         confidence = "likely" if confidence == "proven" else confidence
     for position, argument in enumerate(arguments):
-        declared_kind = (
-            _declared_kind(declared_params[position][0])
+        declared_type = (
+            _declared_type(declared_params[position][0])
             if declared_params and position < len(declared_params)
             else None
         )
         if argument["kind"] in narrow:
-            caller_kinds = [
-                _caller_argument_kind(caller, call, position, tree, visible)
+            caller_types = [
+                _caller_argument_type(caller, call, position, tree, visible)
                 for caller, call in callers
             ]
-            if not all(kind in narrow for kind in caller_kinds):
+            if not all(kind in narrow for kind in caller_types):
                 confidence = "likely" if confidence == "proven" else confidence
-        elif declared_kind in narrow and argument["kind"] == "s32":
+        elif declared_type in narrow and argument["kind"] == "s32":
             confidence = "likely" if confidence == "proven" else confidence
-        elif declared_kind == "pointer" and argument["kind"] != "pointer":
+        elif declared_type == "pointer" and argument["kind"] != "pointer":
             confidence = "likely" if confidence == "proven" else confidence
     evidence = [
         f"{caller.image}@0x{call.address:08X} {caller.name} "

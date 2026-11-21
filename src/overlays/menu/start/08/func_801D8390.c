@@ -26,7 +26,7 @@ NON_MATCHING void func_801D8390(void) {
     D_80148628  = D_80148574 + 0x2A;
     D_8014862A  = D_80148576 + 7;
     slot        = (u8*)base + 0xA4;
-    pad         = INPUT_GetRepeatedButtons(g_InputPressed & 0xF000);
+    pad         = INPUT_GetRepeatedButtons(g_InputPressed & INPUT_DIRECTIONAL);
     D_8014857D  = 0xFF;
     count       = Party_CountOrder(PARTY_ORDER_FIELD);
     if (pad & PADLup) {

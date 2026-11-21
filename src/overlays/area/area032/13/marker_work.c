@@ -1,7 +1,7 @@
 #include "area032_13.h"
 
 /* The loader-verified payload id. */
-u32 D_801F2C00 = 0x54;
+u32 D_801F2C00 = 84;
 
 /* Work-state handlers; func_801F30A8 enters the same table at its sixth entry (D_801F3F80). */
 static const Callback s_MarkerModes[8] = {

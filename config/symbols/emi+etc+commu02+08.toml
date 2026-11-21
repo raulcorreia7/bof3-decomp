@@ -5,10 +5,10 @@ FairyCasino_DrawFramePiece = { addr = 0x801D2EDC, type = "func", source = "draws
 FairyCasino_DrawFrame = { addr = 0x801D2FA4, type = "func", source = "draws the casino window frame: the grey background draw mode, then the nine frame pieces of the zenny window at (x, y)" }
 FairyCasino_DrawNumbers = { addr = 0x801D448C, type = "func", source = "draws the Numbers game display by phase: the base windows, the picked row of D_801DB080 sliding in over them, then the windows retracting" }
 Fairy_EndCommuScene = { addr = 0x801D5A9C, type = "func", source = "Last slot of g_Commu02Event2Steps; adds 1 to g_SceneEventStep unless g_GameStateIndex is GAME_REQUEST_MESSAGE, which hands the village on to its next step." }
-Menu_StartFairyEventMessage = { addr = 0x801D5D98, type = "func", source = "starts area message 0xEE and advances the event step once" }
-Menu_ConfirmFairy = { addr = 0x801D5E30, type = "func", source = "confirm and cancel cues set the list offset and the selected job row" }
-Menu_SelectMember = { addr = 0x801D6E70, type = "func", source = "the party-member pick step: confirm stores the 0xF1 handshake byte and advances, cancel returns to step 8, the pad moves the cursor over the joined characters and the display redraws" }
-Menu_StartFairyEndMessage = { addr = 0x801D7DD4, type = "func", source = "starts area message 0xF6 when the sub-step is zero" }
+Fairy_StartEventMessage = { addr = 0x801D5D98, type = "func", source = "starts area message 0xEE and advances the event step once" }
+Fairy_Confirm = { addr = 0x801D5E30, type = "func", source = "confirm and cancel cues set the list offset and the selected job row" }
+Fairy_SelectMember = { addr = 0x801D6E70, type = "func", source = "the party-member pick step: confirm stores the 0xF1 handshake byte and advances, cancel returns to step 8, the pad moves the cursor over the joined characters and the display redraws" }
+Fairy_StartEndMessage = { addr = 0x801D7DD4, type = "func", source = "starts area message 0xF6 when the sub-step is zero" }
 Fairy_EndCommuSceneEvent3 = { addr = 0x801D7E30, type = "func", source = "Last slot of g_Commu02Event3Steps; adds 1 to g_SceneEventStep unless g_GameStateIndex is GAME_REQUEST_MESSAGE; same bytes as Fairy_EndCommuScene." }
 Fairy_CountFairies = { addr = 0x801D7E64, type = "func", source = "Returns the number of fairy rows of g_FairyJobs whose active byte is nonzero, out of 60." }
 Fairy_FindActiveJob = { addr = 0x801D7EA0, type = "func", source = "walks the 0x3C g_FairyJobs rows and returns the index of the Nth active job, or 0xFF" }
