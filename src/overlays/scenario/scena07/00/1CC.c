@@ -690,10 +690,7 @@ MATCH s32 func_801F9A80(SceneEffectRow* row) {
     point[1] = row->y;
     point[2] = row->unk_C + (row->unk_14 << 8);
     Camera_ProjectPoint(point, &screen);
-    poly->x0 = screen.vx - 1;
-    poly->y0 = screen.vy;
-    poly->x1 = screen.vx + 1;
-    poly->y1 = screen.vy;
+    setXY2(poly, screen.vx - 1, screen.vy, screen.vx + 1, screen.vy);
     point[0] = row->x;
     point[1] = row->y;
     point[2] = row->unk_C - (row->unk_14 << 8);
@@ -735,8 +732,7 @@ MATCH void func_801F9BDC(SceneEffectRow* row) {
         prim = (POLY_G3*)g_GfxPrimCursor;
         SetPolyG3(prim);
         SetSemiTrans(prim, 1);
-        prim->x0 = center.vx;
-        prim->y0 = center.vy;
+        setXY0(prim, center.vx, center.vy);
         angle += 256;
         prim->x1 = edge.vx;
         prim->y1 = edge.vy;
@@ -984,14 +980,7 @@ MATCH void func_801FA38C(void) {
         poly = (POLY_G4*)g_GfxPrimCursor;
         SetPolyG4(poly);
         SetSemiTrans(poly, 1);
-        poly->x0 = screen[quad[0]].vx;
-        poly->y0 = screen[quad[0]].vy;
-        poly->x1 = screen[quad[1]].vx;
-        poly->y1 = screen[quad[1]].vy;
-        poly->x2 = screen[quad[2]].vx;
-        poly->y2 = screen[quad[2]].vy;
-        poly->x3 = screen[quad[3]].vx;
-        poly->y3 = screen[quad[3]].vy;
+        setXY4(poly, screen[quad[0]].vx, screen[quad[0]].vy, screen[quad[1]].vx, screen[quad[1]].vy, screen[quad[2]].vx, screen[quad[2]].vy, screen[quad[3]].vx, screen[quad[3]].vy);
         tone     = shade[quad[0]];
         poly->r0 = poly->g0 = poly->b0 = tone;
         tone                           = shade[quad[1]];

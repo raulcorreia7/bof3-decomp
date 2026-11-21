@@ -68,9 +68,7 @@ MATCH void func_801170D8(AreaSprite* sprite) {
     if (flags & 1) {
         blue = sprite->tick;
     }
-    primitive->r0 = red;
-    primitive->g0 = green;
-    primitive->b0 = blue;
+    setRGB0(primitive, red, green, blue);
     GFX_AddPrim(GFX_LAYER_EFFECT_FRONT, sizeof(POLY_FT4));
 }
 
@@ -400,14 +398,8 @@ NON_MATCHING void func_80117E78(s32 brightness, s32 unused) {
                 primitive = (POLY_FT4*)g_GfxPrimCursor;
                 SetPolyFT4(primitive);
                 SetShadeTex(primitive, 0);
-                primitive->x0 = D_1F800034_U16[0] - half;
-                primitive->y0 = D_1F800034_U16[1] - half;
-                primitive->x1 = D_1F800034_U16[0] + half;
-                primitive->y1 = D_1F800034_U16[1] - half;
-                primitive->x2 = D_1F800034_U16[0] - half;
-                primitive->y2 = D_1F800034_U16[1] + half;
-                primitive->x3 = D_1F800034_U16[0] + half;
-                primitive->y3 = D_1F800034_U16[1] + half;
+                setXY4(primitive, D_1F800034_U16[0] - half, D_1F800034_U16[1] - half, D_1F800034_U16[0] + half, D_1F800034_U16[1] - half, D_1F800034_U16[0] - half, D_1F800034_U16[1] + half,
+                       D_1F800034_U16[0] + half, D_1F800034_U16[1] + half);
                 SetSemiTrans(primitive, 1);
                 setUV4(primitive, 224, 48, 255, 48, 224, 79, 255, 79);
                 primitive->clut  = getClut(80, STAGE_PALETTE_Y + 3);

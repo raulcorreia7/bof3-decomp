@@ -26,11 +26,8 @@ MATCH void func_801F4490(WorldPos* pos, s32 orange_radius, s32 black_radius) {
     turn = 0;
     i    = 0;
     do {
-        prim     = GFX_BeginPolyG4(1);
-        prim->x0 = inner.vx;
-        prim->y0 = inner.vy;
-        prim->x1 = outer.vx;
-        prim->y1 = outer.vy;
+        prim = GFX_BeginPolyG4(1);
+        setXY2(prim, inner.vx, inner.vy, outer.vx, outer.vy);
         turn += 0x80;
         angle     = turn;
         vertex.vx = pos->x.fixed + ((orange_radius * rcos(angle)) >> 8);

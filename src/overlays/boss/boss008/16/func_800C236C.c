@@ -21,25 +21,18 @@ NON_MATCHING void func_800C236C(u8 phase) {
     do {
         prim = (POLY_G3*)g_GfxPrimCursor;
         SetPolyG3(prim);
-        prim->r0 = 0xFF;
-        prim->g0 = 0xFF;
-        prim->b0 = 0xFF;
+        setRGB0(prim, 0xFF, 0xFF, 0xFF);
 
         prim->r1 = *(volatile u8*)(D_800C2640 + ((*(EnemyBattler* volatile*)&g_BattleCurrentEnemy)->unk_F0 - 8) * 3);
         next     = (i + 1) & 0x1F;
         prim->g1 = *(volatile u8*)(D_800C2641 + ((*(EnemyBattler* volatile*)&g_BattleCurrentEnemy)->unk_F0 - 8) * 3);
         prim->b1 = *(volatile u8*)(D_800C2642 + ((*(EnemyBattler* volatile*)&g_BattleCurrentEnemy)->unk_F0 - 8) * 3);
-        prim->r2 = *(volatile u8*)(D_800C2640 + ((*(EnemyBattler* volatile*)&g_BattleCurrentEnemy)->unk_F0 - 8) * 3);
-        prim->g2 = *(volatile u8*)(D_800C2641 + ((*(EnemyBattler* volatile*)&g_BattleCurrentEnemy)->unk_F0 - 8) * 3);
-        prim->b2 = *(volatile u8*)(D_800C2642 + ((*(EnemyBattler* volatile*)&g_BattleCurrentEnemy)->unk_F0 - 8) * 3);
+        setRGB2(prim, *(volatile u8*)(D_800C2640 + ((*(EnemyBattler* volatile*)&g_BattleCurrentEnemy)->unk_F0 - 8) * 3),
+                *(volatile u8*)(D_800C2641 + ((*(EnemyBattler* volatile*)&g_BattleCurrentEnemy)->unk_F0 - 8) * 3),
+                *(volatile u8*)(D_800C2642 + ((*(EnemyBattler* volatile*)&g_BattleCurrentEnemy)->unk_F0 - 8) * 3));
 
-        enemy    = (EnemyBattler*)g_Task;
-        prim->x0 = enemy->screen_x;
-        prim->y0 = enemy->screen_y;
-        prim->x1 = enemy->screen_x + ring[i][0];
-        prim->y1 = enemy->screen_y + ring[i][1];
-        prim->x2 = enemy->screen_x + ring[next][0];
-        prim->y2 = enemy->screen_y + ring[next][1];
+        enemy = (EnemyBattler*)g_Task;
+        setXY3(prim, enemy->screen_x, enemy->screen_y, enemy->screen_x + ring[i][0], enemy->screen_y + ring[i][1], enemy->screen_x + ring[next][0], enemy->screen_y + ring[next][1]);
         SetSemiTrans(prim, 1);
         GFX_AddPrim(3, sizeof(POLY_G3));
         i++;

@@ -23,9 +23,8 @@ MATCH void func_801F2F30(s32* first, s32* second) {
         prim = GFX_CURSOR(LINE_F2);
         SetLineF2(prim);
         SetSemiTrans(prim, 1);
-        prim->x0 = screen.vx;
-        prim->y0 = screen.vy;
-        delta    = second[0] - first[0];
+        setXY0(prim, screen.vx, screen.vy);
+        delta = second[0] - first[0];
         if (delta < 0) {
             delta += 15;
         }

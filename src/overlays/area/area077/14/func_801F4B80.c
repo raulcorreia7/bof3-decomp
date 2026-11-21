@@ -31,8 +31,7 @@ NON_MATCHING void func_801F4B80(void) {
     SetLineF2(line);
     SetSemiTrans(line, 0);
     Camera_ProjectPoint(&first.vx, &screen);
-    line->x0 = screen.vx;
-    line->y0 = screen.vy;
+    setXY0(line, screen.vx, screen.vy);
     Camera_ProjectPoint(&second.vx, &screen);
     line->x1 = screen.vx;
     line->y1 = screen.vy;

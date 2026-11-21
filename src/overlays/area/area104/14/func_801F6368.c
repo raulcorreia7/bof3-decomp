@@ -33,10 +33,7 @@ NON_MATCHING void func_801F6368(void) {
         prim = (POLY_G3*)g_GfxPrimCursor;
         SetPolyG3(prim);
         SetSemiTrans(prim, 1);
-        prim->x0 = centre_x;
-        prim->y0 = centre_y;
-        prim->x1 = centre_x + ((radius * rcos(i * 0xAA)) >> 12);
-        prim->y1 = centre_y + ((radius * rsin(i * 0xAA)) >> 12);
+        setXY2(prim, centre_x, centre_y, centre_x + ((radius * rcos(i * 0xAA)) >> 12), centre_y + ((radius * rsin(i * 0xAA)) >> 12));
         i++;
         prim->x2 = centre_x + ((radius * rcos(i * 0xAA)) >> 12);
         prim->y2 = centre_y + ((radius * rsin(i * 0xAA)) >> 12);

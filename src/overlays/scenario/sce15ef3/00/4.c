@@ -366,10 +366,7 @@ MATCH void func_801D1D20(WorldPos* pos, s32* step, u8 red, u8 green) {
         prim = (POLY_G4*)g_GfxPrimCursor;
         SetPolyG4(prim);
         SetSemiTrans(prim, 1);
-        prim->x0 = screen[0].vx;
-        prim->y0 = screen[0].vy;
-        prim->x1 = screen[1].vx;
-        prim->y1 = screen[1].vy;
+        setXY2(prim, screen[0].vx, screen[0].vy, screen[1].vx, screen[1].vy);
 
         angle += 128;
         angle16  = (u16)angle;

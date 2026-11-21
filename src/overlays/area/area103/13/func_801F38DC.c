@@ -29,10 +29,7 @@ MATCH void func_801F38DC(void) {
         prim = (POLY_FT4*)g_GfxPrimCursor;
         SetPolyFT4(prim);
         SetSemiTrans(prim, 0);
-        prim->x0 = a.vx;
-        prim->y0 = a.vy;
-        prim->x1 = b.vx;
-        prim->y1 = b.vy;
+        setXY2(prim, a.vx, a.vy, b.vx, b.vy);
         angle += ONE / 16;
         org.vz += TO_COORD(16);
         pt[0] = org.vx + (rcos(angle) << 5);
@@ -51,14 +48,7 @@ MATCH void func_801F38DC(void) {
         prim->y2 = a.vy;
         prim->x3 = b.vx;
         prim->y3 = b.vy;
-        prim->u0 = 0x7F;
-        prim->v0 = 0xBF;
-        prim->u1 = 0x7F;
-        prim->v1 = 0xA0;
-        prim->u2 = 0x60;
-        prim->v2 = 0xBF;
-        prim->u3 = 0x60;
-        prim->v3 = 0xA0;
+        setUV4(prim, 0x7F, 0xBF, 0x7F, 0xA0, 0x60, 0xBF, 0x60, 0xA0);
         setRGB0(prim, 128, 128, 128);
         prim->tpage = GetTPage(TPAGE_DEPTH_8BIT, TPAGE_ABR_HALF, 320, 256);
         prim->clut  = GetClut(0, 487);
