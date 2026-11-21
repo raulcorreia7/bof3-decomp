@@ -598,8 +598,8 @@ MATCH void func_801F90F4(Scena07BurstBuffer* buffer) {
     }
 }
 
-#ifdef NON_MATCHING
-NON_MATCHING void func_801F9330(Scena07BurstBuffer* buffer) {
+/* Shifts the burst rings back one row, relights and reprojects the front ring, and draws the rings as a mesh that fades by row. */
+MATCH void func_801F9330(Scena07BurstBuffer* buffer) {
     s32      dir[3];
     s32      pos[3];
     MATRIX   camera;
@@ -619,24 +619,24 @@ NON_MATCHING void func_801F9330(Scena07BurstBuffer* buffer) {
 
     Camera_SetMatrix(&camera);
     phase = 0;
-    for (i = 0; i < 32; i++) {
+    for (row = 0; row < 32; row++) {
         dir[0] = (rsin(buffer->angle) * rcos(phase)) >> 12;
         dir[1] = (rsin(buffer->angle) * rsin(phase)) >> 12;
         dir[2] = rcos(buffer->angle);
         light  = buffer->unk_514 * dir[0] + buffer->unk_518 * dir[1] + buffer->unk_51C * dir[2];
         if (light <= 0) {
-            buffer->shade[0][i] = 7;
+            buffer->shade[0][row] = 7;
         } else {
             light = SquareRoot0(light);
             if (light >= 0x1000) {
                 light = 0xFFF;
             }
-            buffer->shade[0][i] = ((light & 0xF00) >> 5) + 7;
+            buffer->shade[0][row] = ((light & 0xF00) >> 5) + 7;
         }
         pos[0] = buffer->pos.vx + (dir[0] << 5);
         pos[1] = buffer->pos.vy + (dir[1] << 5);
         pos[2] = buffer->pos.vz + (dir[2] << 13);
-        Camera_ProjectPoint(pos, &buffer->points[0][i]);
+        Camera_ProjectPoint(pos, &buffer->points[0][row]);
         phase += 0x80;
     }
 
@@ -644,19 +644,19 @@ NON_MATCHING void func_801F9330(Scena07BurstBuffer* buffer) {
 
     for (row = 0; row < 7; row++) {
         for (i = 0; i < 32; i++) {
-            next = i + 1;
+            next = (i + 1) & 0x1F;
             prim = GFX_BeginPolyG4(1);
             setXY0(prim, buffer->points[row][i].vx, buffer->points[row][i].vy);
-            prim->x1 = buffer->points[row][next & 0x1F].vx;
-            prim->y1 = buffer->points[row][next & 0x1F].vy;
+            prim->x1 = buffer->points[row][next].vx;
+            prim->y1 = buffer->points[row][next].vy;
             shade    = (buffer->shade[row][i] * (7 - row)) / 7;
             setRGB0(prim, shade, shade, shade);
-            shade = (buffer->shade[row][next & 0x1F] * (7 - row)) / 7;
+            shade = (buffer->shade[row][next] * (7 - row)) / 7;
             setRGB1(prim, shade, shade, shade);
             prim->x2 = buffer->points[row + 1][i].vx;
             prim->y2 = buffer->points[row + 1][i].vy;
-            prim->x3 = buffer->points[row + 1][next & 0x1F].vx;
-            prim->y3 = buffer->points[row + 1][next & 0x1F].vy;
+            prim->x3 = buffer->points[row + 1][next].vx;
+            prim->y3 = buffer->points[row + 1][next].vy;
             shade    = (buffer->shade[row + 1][i] * (6 - row)) / 7;
             setRGB2(prim, shade, shade, shade);
             shade = (buffer->shade[row + 1][i] * (6 - row)) / 7;
@@ -665,9 +665,6 @@ NON_MATCHING void func_801F9330(Scena07BurstBuffer* buffer) {
         }
     }
 }
-#else
-INCLUDE_ASM(func_801F9330);
-#endif
 
 INCLUDE_ASM(func_801F97E0);
 
