@@ -15,7 +15,7 @@ Rules: [names](../../../../docs/naming.md#names).
    [verb](../../../../docs/naming.md#functions), [selector](../../../../docs/naming.md#variables-parameters-and-members),
    [table](../../../../docs/naming.md#tables). Adjacent symbols read through one base are one record:
    name the record once, then its members by role.
-5. Record the evidence in the commit body. Describe a symbol in its `config/symbols.toml` row's
+5. Record the evidence in the commit body. Describe a symbol in its `config/symbols/<image>.toml` row's
    `source`. Rename every tracked user in one commit with
    `tools/symbol.py rename` ([recipe](../../../../docs/naming.md#rename-steps)); it writes the row. A function name goes to every copy with
    equal bytes ([shared bodies](refactor.md#shared-bodies)); a parameter name goes to

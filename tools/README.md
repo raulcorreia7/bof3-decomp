@@ -64,62 +64,54 @@ as `+`. Run each Python tool with `.venv/bin/python tools/<name>.py` or directly
 
 ## Templates
 
-A template is a matched C function with the same shape as an assembly function. `template_diff.py`
-lists the closest by opcode sequence and prints only the instructions that differ: `~` same opcode,
-other operands; `-` only in the template; `+` only in the target.
+A template is a matched C function with the same shape as an assembly function.
+`template_diff.py` lists the closest by opcode sequence and prints only the instructions that differ:
+`~` same opcode, other operands; `-` only in the template; `+` only in the target.
 
 ```sh
 tools/template_diff.py emi/plchar/plp016/00@func_801CF610
 tools/template_diff.py <target>@<func> <template target>@<template func>
 ```
 
-`template_try.py` takes one function ref, `tools/template_try.py <target>@<func>`, and tries its
-closest template; or rows of `TARGET@NAME<TAB>TEMPLATE@NAME` (`dups.py near --full --jsonl` writes
-them as objects with the keys `target` and `template`, cheapest first). It lines up the template's
-instructions with the target's. Where only a
-relocation symbol differs, it names the target's symbol in the template's C; where only an
-immediate differs and that literal (or the numeric macro that holds it) occurs once, it writes the
-target's value. It declares what the body now uses in the image header, then calls `try_body.py`.
-Each row prints `EXACT`, `REMAP-EXACT` (after a rename or literal), `FAIL` with the number of
-differing instructions and the first difference, or `SKIP`. A kept body is a lead: run
-`check-<image>`, then name it from evidence and share it
-([shared bodies](../.agents/skills/decomp/references/refactor.md#shared-bodies)). Both tools read the function index
-`build/func_index.json.gz`, built from the images on first use; add `--rebuild` after a build.
-They need `rapidfuzz` for the search (`tools/setup.sh --matching`).
+`template_try.py` takes one function ref, or rows of `TARGET@NAME<TAB>TEMPLATE@NAME`
+(`dups.py near --full --jsonl` writes them, cheapest first). It aligns the template's instructions
+with the target's, names the target's symbol where only a relocation differs, writes the target's
+literal where only an immediate differs, declares what the body now uses in the image header, then
+calls `try_body.py`. Each row prints `EXACT`, `REMAP-EXACT` (after a rename or literal), `FAIL` with
+the number of differing instructions and the first difference, or `SKIP`. A kept body is a lead: run
+`check-<image>`, name it from evidence and share it
+([shared bodies](../.agents/skills/decomp/references/refactor.md#shared-bodies)). Both tools read
+`build/func_index.json.gz` (built on first use; `--rebuild` after a build) and need `rapidfuzz`
+(`tools/setup.sh --matching`).
 
 ### Try body
 
-`try_body.py` puts a C body in place of one `INCLUDE_ASM(<func>);` line, runs `tools/match.sh`, and
-keeps every edit only on `match`; any other result restores each touched file.
+`try_body.py` puts a C body in place of one `INCLUDE_ASM(<func>);` line, runs `tools/match.sh` and
+keeps the edits only on `match`; otherwise it restores each touched file.
 
 ```sh
 tools/try_body.py <target>@<func> body.c        # or `-` for stdin
 tools/try_body.py --batch rows.tsv              # rows: <target>@<func> <TAB> body.c
 ```
 
-A line `@decl <declaration>` in the body file (an `extern`, a prototype or a `#define`) is removed from
-the body and added to the image header, the first include of the C file, unless an include of that
-file already declares the name. Output: `EXACT`, `FAIL` with the first difference, or `SKIP`.
-
-
+A line `@decl <declaration>` in the body file (an `extern`, a prototype or a `#define`) moves to the
+image header, the first include of the C file, unless an include already declares the name. Output:
+`EXACT`, `FAIL` with the first difference, or `SKIP`.
 
 ## Match tools
 
 Helpers for one function against the retail bytes; each prints its usage with `--help`.
 
-- `opcode_diff.py` runs `match.sh --diff` and aligns the two sides on opcodes only, so a hunk is a
-  structural difference; the last line is `hunks N retail R cand C`.
-- `rtl_dump.sh` compiles one C file with `-DNON_MATCHING` (a draft body builds) and GCC's `-d`
-  letters, and prints the function's part of each dump. Its flags copy the image build's and need
-  updating with it.
-- `alloc_priority.py` reads the `lg` dumps and lists each value that lives across a call with its
-  allocator priority (`floor(log2(uses)) * uses * 10000 / live length`), its register or `STACK`,
-  and the insn that first sets it.
-- `try_variants.py` builds each full body of a `variants.py` (`NAME` and a dict `V` of tag to
-  function text) in place of the function, stops at the first `match:` and otherwise restores the file.
-- `match_context.sh` prints the assembly, the last three rows of `config/attempts.jsonl` and the C file
-  that holds the function's `INCLUDE_ASM`. It finds a split file by its name (`func_<ADDR>.s`) or, for
-  a file named after a symbol, by the address its first instruction comment carries.
+- `opcode_diff.py` aligns the two sides of `match.sh --diff` on opcodes only; the last line is
+  `hunks N retail R cand C`.
+- `rtl_dump.sh` compiles one C file with `-DNON_MATCHING` and GCC's `-d` letters and prints the
+  function's part of each dump. Its flags copy the image build's.
+- `alloc_priority.py` lists each value that lives across a call with its allocator priority
+  (`floor(log2(uses)) * uses * 10000 / live length`), its register or `STACK` and the insn that sets it.
+- `try_variants.py` builds each body of a `variants.py` (`NAME` and a dict `V` of tag to function
+  text) in place of the function, stops at the first `match:` and otherwise restores the file.
+- `match_context.sh` prints the assembly, the last three rows of `config/attempts.jsonl` and the C
+  file that holds the function's `INCLUDE_ASM`.
 
 ```sh
 tools/opcode_diff.py exe/slus_004_22@0x801530D0 2
@@ -128,75 +120,53 @@ tools/alloc_priority.py src/engine/slus/Area_DrawCellRing.c Area_DrawCellRing
 
 ## m2c sweep
 
-`tools/m2c_sweep.py` drafts open functions with m2c (`--jobs` runs at a time, 8 by default; `--seed` picks the `--sample`, 1 by default), runs each draft through `tools/try_body.py` and keeps the exact ones, writing `build/m2c_sweep/results.jsonl` (target, status, differing, variant) and, with `--jsonl`, one object per printed line; `tools/seed.py <target>@<func>` writes the same drafts, the twins, callers and callees into `work/<image>/<ADDR>/` for one function. Both give m2c a typed work cell: the context declares `g_SpadView`, a pointer to the mode's work record (the type the unit casts `g_Task` to, else the image family's record), and the assembly reads `0x1F800044` through it, so drafts name members instead of `->unkN`. The draft spells the cell `g_Task`, or `((T *)g_Task)` where the unit defines no view macro. A context without a complete record keeps the raw cell. The `--help` text lists the options.
+`tools/m2c_sweep.py` drafts open functions with m2c, runs each through `tools/try_body.py` and keeps
+the exact ones in `build/m2c_sweep/results.jsonl`. `tools/seed.py <target>@<func>` writes the drafts,
+twins, callers and callees of one function into `work/<image>/<ADDR>/`. Both give m2c a typed work
+cell: the context declares `g_SpadView`, a pointer to the mode's work record, so drafts name members
+instead of `->unkN`; a context without a complete record keeps the raw cell.
 
 ## Body generators
 
-`gen_body.py` lifts the assembly of a branch-free function into calls and stores and writes C from
-it with the repo's names (`config/symbols/<image>.toml` by address, `g_Task` members by offset).
-`shapes` counts every `INCLUDE_ASM` function by shape (`call-seq`, `store-seq`, `spad`, `dispatch`,
-`straight`, `branch`); `tools/gen_body.py <shape> [rows.tsv] [--dry-run]` writes a body per member
-(`MATCH`, one statement per call or store), declares missing globals in the image header and keeps
-the body only when `tools/match.sh` reports an exact result. Twins with one body at one address
-share `<func>.h`; twins at several addresses print `TWIN` and stay for a naming pass. A
-body is a lead: run `check-<image>`, then name it from evidence.
+`gen_body.py` lifts a branch-free function into calls and stores and writes C from it with the
+repo's names. `shapes` counts every `INCLUDE_ASM` function by shape (`call-seq`, `store-seq`, `spad`,
+`dispatch`, `straight`, `branch`); `tools/gen_body.py <shape> [rows.tsv] [--dry-run]` writes a
+`MATCH` body per member, declares missing globals in the image header and keeps the body only when
+`tools/match.sh` reports an exact result. Twins with one body at one address share `<func>.h`; twins
+at several addresses print `TWIN` and stay for a naming pass. A body is a lead: run `check-<image>`,
+then name it from evidence.
 
-The tool names a work-cell member through the nested structs and unions of the record (`header.step`,
-`pos.x.fixed`) and a word inside a record such as `g_Game` as its member. It writes no branch, `jalr`
-or load through an argument pointer, so a function with one prints `SKIP` and its first unlifted
-instruction. `worklist.py` lists a function on the `generator` route only when the tool can write its
-body; a `SKIP` function moves on to the template or plain route.
+It writes no branch, `jalr` or load through an argument pointer: such a function prints `SKIP` and
+its first unlifted instruction. `worklist.py` lists a function on the `generator` route only when
+the tool can write its body.
 
 ## Duplicates and names
 
-`dups.py near` groups functions with alike opcodes across all images and names the matched template of
-each assembly function (`--threshold` is the least opcode similarity, 0.9 by default; `--min-words` the shortest function, 6 instructions by default); `near --full` writes one row per assembly function with its cheapest template
-and `diff_count`, the instructions that differ (jump targets ignored), cheapest first. `shared-names`
-lists one name that several bodies use, worst first. `split-names` lists byte-equal bodies that carry
-several names. All print tab-separated rows, or one JSON object per line with `--jsonl`.
-`ripwire src --clones` lists token-normalized duplicate C bodies.
+`dups.py near` groups functions with alike opcodes across all images and names the matched template
+of each assembly function (`--threshold` default 0.9, `--min-words` default 6); `near --full` writes
+one row per assembly function with its cheapest template and `diff_count`. `shared-names` lists one
+name that several bodies use, worst first. `split-names` lists byte-equal bodies that carry several
+names. Rows are tab-separated, or JSON lines with `--jsonl`. `ripwire src --clones` lists
+token-normalized duplicate C bodies.
 
 ## Lookup
 
-`symbol.py at` prints the named owner of each address in one image: `NAME+0xOFF (type, size) [table]`,
-the member path when the owner is a record (`g_Game.members[2].pos.x`), or `no named owner`. It reads
-the image's table and the resident ones; `--diff [BASE]` reads the `D_` addresses the branch adds.
-`symbol.py member` prints the member path and type at a record offset from clang's own layout, and
-`symbol.py uses` lists the C uses, the open functions' assembly uses and the Rizin cross-references in
-one table; the first query in an image analyses its Rizin project and caches the references under
-`build/symbol-xrefs`. `symbol.py value` lists every enum member and numeric macro with one value
-among the headers the image sees, nearest scope first, so a bare `0x3A` becomes `ABILITY_SANCTUARY`.
-`symbol.py layers` builds the game call graph over every image, including table dispatch, and prints
-each function's layer, callers, callees, status, copies and shared flag. `--jsonl` writes one object
-per line. `symbol.py accesses` decodes every image and reports a record's or global's byte offsets,
-widths, members, examples, constants and call slots with their width, signedness and straddle
-problems; `symbol.py records` ranks every record by accesses times unknown members.
-`symbol.py values --scan` decides what each numeric literal of a matched body means from the
-declaration it is assigned to or compared with, and prints the family, the existing constant and the
-form the conventions prescribe; `--jsonl` writes one object per site.
-`symbol.py signatures` reads every split function and interprets its register dataflow as the
-signature GCC 2.7.2 would compile from it: the argument registers read before they are written, the
-stack arguments, each argument's kind and record, and the returned value or void, cross-checked
-against the argument registers and the returned `v0` of every caller. Each row carries the declared
-prototype, the found signature and a confidence; `proven` needs every caller to agree and every
-pointer and narrowing claim proved on both sides. `symbol.py extents` gives each data and bss
-symbol its distance to the next symbol, the size its declaration states, the accesses past that
-size, its index stride and the neighbours only reached as `base + constant` from it. `symbol.py
-homes` reads the call and data graph: a function moves to a system only by a caller majority, by
-being the single writer of a global its readers share, or by sitting between two of its functions
-in address order; a global belongs to the system all its writers are in; file rows cover
-`src/**/*.c` units. `--jsonl` writes one object per line for each of the three.
+`symbol.py` answers questions about the symbols; `symbol.py --help` documents each verb:
+`at`, `member`, `uses`, `value`, `layers`, `accesses`, `records`, `values --scan`, `signatures`,
+`extents` and `homes`. `--jsonl` writes one object per line. The first `uses` query in an image
+analyses its Rizin project and caches the references under `build/symbol-xrefs`.
 
 ## Quality
 
-`quality.py` counts, per directory and in total: matched functions still named `func_<ADDR>`, `D_` and
-`unk_` tokens, raw width casts, harmful fake helpers, `FAKE:` notes, bodies pasted into several images
-under one name (`pasted`, one `Name.h` is the rule) and under several names (`twins`). `--queue` lists
-files worst first. `--diff BASE` compares BASE with `--to` (default `HEAD`) and exits 1 when `casts`,
-`harmful` or `pasted` rose over the files the change touched (a moved body nets to zero), when a function
-present before and after holds more `D_`/`unk_` tokens (`names`), or when a body named before is now `func_<ADDR>`
-(`addr`); a new `MATCH` body is exempt from both. `BASE` is compared at its merge-base with `--to`. `--gate` picks
-other metrics. `--queue --jsonl` writes the same rows as objects. A commit message line `Quality-Allowed: <path> <metric>` accepts one rise in one file. Old debt in an untouched file never fails. `report` stores the totals under `quality` in `report.json`.
+`quality.py` counts, per directory and in total: matched functions still named `func_<ADDR>`, `D_`
+and `unk_` tokens, raw width casts, harmful fake helpers, `FAKE:` notes, and bodies pasted into
+several images under one name (`pasted`, one `Name.h` is the rule) or several names (`twins`).
+`--queue` lists files worst first. `--diff BASE` compares BASE (at its merge-base with `--to`,
+default `HEAD`) with `--to` and exits 1 when `casts`, `harmful` or `pasted` rose over the touched
+files, when a function holds more `D_`/`unk_` tokens (`names`), or when a named body is now
+`func_<ADDR>` (`addr`); a new `MATCH` body is exempt. `--gate` picks other metrics. A commit message
+line `Quality-Allowed: <path> <metric>` accepts one rise in one file. Old debt in an untouched file
+never fails. `report` stores the totals under `quality` in `report.json`.
 
 ## Pre-push
 

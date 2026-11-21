@@ -26,8 +26,7 @@ checkout, and `tools/setup.sh` checks the SHA-256 of every compiler download.
 ## Setup
 
 Install the host tools above, then run the [README commands](../README.md#commands). Add
-`--matching` to `tools/setup.sh` for the permuter, the
-differ and m2c.
+`--matching` to `tools/setup.sh` for the permuter, the differ and m2c.
 
 Put your disc in `inputs/external/` before `tools/setup.sh` ([inputs](../inputs/README.md)). The
 script is safe to run again; each step checks its result first. It runs:
@@ -43,25 +42,21 @@ script is safe to run again; each step checks its result first. It runs:
    under `build/` and checks every code image ([disc manifest](#disc-manifest)).
 
 `--no-payloads` skips step 4. `--no-sdk` skips `tools/psyq.sh`: no SDK object is downloaded or
-staged, and the tracked `include/psyq/` headers still work. The build reads the shared `CARGO_TARGET_DIR` when it is set and uses
-`build/rust/` otherwise. Editors with clangd work after `meson setup`; `.clangd` reads the compile
-database in `build/meson/tools/build/emit/`.
-
-`inputs/` and `toolchains/` change only through setup. Never commit `inputs/` media, or a game,
-BIOS or SDK payload.
+staged, and the tracked `include/psyq/` headers still work. The build uses `CARGO_TARGET_DIR` when set, else `build/rust/`. clangd reads the
+compile database in `build/meson/tools/build/emit/` after `meson setup`.
 
 ### Without a disc
 
 The game is not in this repository. Dump your own US disc (a Redump-verified CUE sheet and two BIN
-tracks); setup checks each track against [`config/disc.toml`](#disc-manifest) and never uploads it.
+tracks); setup checks each track against [`config/disc.toml`](#disc-manifest).
 
-Without a disc (`tools/setup.sh --dev --no-payloads --no-sdk`) you can edit code and docs, and run `format` and
-every [pre-push](../tools/README.md#pre-push) check whose Needs is not `disc`. You cannot build an
-image, check bytes, read the split assembly, write the report or use `bin/rz` and `bin/coddog`:
-all of them need the extracted retail data. Matching a function needs the disc.
+Without a disc (`tools/setup.sh --dev --no-payloads --no-sdk`) you can edit code and docs, and run
+`format` and every [pre-push](../tools/README.md#pre-push) check whose Needs is not `disc`. Building
+an image, checking bytes, reading the split assembly, the report, `bin/rz`, `bin/coddog` and matching
+need the extracted retail data.
 
-`meson setup` states what it is missing and offers only the targets that can run. After you add
-the missing piece, run `meson setup --reconfigure build/meson`.
+`meson setup` states what it is missing and offers only the targets that can run; after you add it,
+run `meson setup --reconfigure build/meson`.
 
 ### Disc manifest
 
@@ -70,8 +65,8 @@ the missing piece, run `meson setup --reconfigure build/meson`.
 ISO 9660 file (path, LBA, size, SHA-1). It holds paths, sizes and hashes only. The retail SHA-1 of
 each code image stays in its `config/<target>/splat.yaml` (`sha1`), the value `check` reads.
 
-`tools/setup.py` stops with one line per mismatch, named by path, when a track, an extracted file or a
-code image differs from the manifest. To run the same checks at any time:
+`tools/setup.py` stops with one line per mismatch when a track, an extracted file or a code image
+differs from the manifest. The same checks run any time:
 
 ```sh
 tools/disc.py verify                 # tracks, build/disc files and code images
@@ -103,27 +98,27 @@ curl -fL https://github.com/rizinorg/rizin/releases/download/v0.9.1/rizin-v0.9.1
 ## Commands
 
 Run each as `meson compile -C build/meson <name>`. `<image>` is a target id with `/` written as `+`.
-A check that compares with a base ref uses the newest of `public/main`, `origin/main` and `main`,
-the rule in `tools/lib/baseref.sh`, and compares its merge base with HEAD, so a branch that is
-behind does not look as if it dropped what the newer commits added. CI has no disc and runs no byte
-check: the local `check` on every touched image is the proof.
+A check that compares with a base ref uses the newest of `public/main`, `origin/main` and `main`
+(`tools/lib/baseref.sh`) and compares its merge base with HEAD, so a branch that is behind does not
+look as if it dropped what newer commits added. CI has no disc and runs no byte check: the local
+`check` on every touched image is the proof.
 
-| Name              | Does                                                                                                                                                                                                                                                                                                         |
-| ----------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
-| (none)            | Build every image to `build/meson/<image>.bin`.                                                                                                                                                                                                                                                              |
-| `check`           | Build, then compare every image with its retail SHA-1. Passes when 428 images match.                                                                                                                                                                                                                         |
-| `check-<image>`   | The same for one image, for example `check-exe+slus_004_22`.                                                                                                                                                                                                                                                 |
-| `check-headers`   | Compile every public header on its own.                                                                                                                                                                                                                                                                      |
-| `check-unity`     | Parse every image's sources as one unit, to find a type, prototype or macro that two files declare differently. A check, never linked.                                                                                                                                                                       |
-| `check-plain`     | Compile every C source as plain C, without `MATCHING`, so no source depends on a matching helper.                                                                                                                                                                                                            |
-| `check-tree`      | Reject what [pre-push](../tools/README.md#pre-push) lists for it.                                                                                                                                                                                                                                            |
-| `include-asm`     | Reject more `INCLUDE_ASM` lines than at the [base ref](#commands), in total or in any one image. An image is keyed by the last two folders of its source directory (`game/00`; `slus` and `logo` stand alone), so a lost match hidden by a new one elsewhere still fails and the key survives a folder move. |
-| `format`          | Format C, Python, TOML and Markdown.                                                                                                                                                                                                                                                                         |
-| `format-check`    | The same steps in check mode; no file changes.                                                                                                                                                                                                                                                               |
-| `report`          | Write `build/report.json`, the input of the status site. Needs `objdiff-cli`.                                                                                                                                                                                                                                |
-| `rz+<image>.rzdb` | The Rizin project that `bin/rz` opens.                                                                                                                                                                                                                                                                       |
+| Name              | Does                                                                                                                                                                                                           |
+| ----------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| (none)            | Build every image to `build/meson/<image>.bin`.                                                                                                                                                                |
+| `check`           | Build, then compare every image with its retail SHA-1.                                                                                                                                                         |
+| `check-<image>`   | The same for one image, for example `check-exe+slus_004_22`.                                                                                                                                                   |
+| `check-headers`   | Compile every public header on its own.                                                                                                                                                                        |
+| `check-unity`     | Parse every image's sources as one unit, to find a type, prototype or macro that two files declare differently. A check, never linked.                                                                         |
+| `check-plain`     | Compile every C source as plain C, without `MATCHING`, so no source depends on a matching helper.                                                                                                              |
+| `check-tree`      | Reject what [pre-push](../tools/README.md#pre-push) lists for it.                                                                                                                                              |
+| `include-asm`     | Reject more `INCLUDE_ASM` lines than at the [base ref](#commands), in total or in any one image. An image is keyed by the last two folders of its source directory (`game/00`; `slus` and `logo` stand alone). |
+| `format`          | Format C, Python, TOML and Markdown.                                                                                                                                                                           |
+| `format-check`    | The same steps in check mode; no file changes.                                                                                                                                                                 |
+| `report`          | Write `build/report.json`, the input of the status site. Needs `objdiff-cli`.                                                                                                                                  |
+| `rz+<image>.rzdb` | The Rizin project that `bin/rz` opens.                                                                                                                                                                         |
 
-`meson test -C build/meson` runs the Python tool tests (`tools` and `tools-slow`, side by side) (`tools/setup.sh --dev`). To start over,
+`meson test -C build/meson` runs the Python tool tests (needs `tools/setup.sh --dev`). To start over,
 delete `build/meson` and run `meson setup build/meson`; the extracted disc stays in `build/disc`.
 
 | Tool                                | Does                                                                                 |
@@ -148,8 +143,8 @@ says why.
 
 `tools/match.sh --diff <target>@<address>` also prints the whole function as plain text, one row per
 instruction: retail on the left, candidate on the right, `!` in the first column where the two rows
-differ (an empty diff has no `!`). Rows pair by position, so one inserted instruction marks every row
-after it; read the first `!` rows, then use `objdiff` for alignment.
+differ. Rows pair by position, so one inserted instruction marks every row after it; read the first
+`!` rows, then use `objdiff` for alignment.
 
 It compares `.text` only. A function that reads its unit's own `.rodata` (jump table, string,
 constant) is measured: the partial link places that section at the address of the unit's
@@ -169,14 +164,11 @@ you add:
 - a `NON_MATCHING` marker (`report` says so);
 - an `asm/<target>/hand/<unit>.s` file (`check` and `check-<image>` say so).
 
-WARNING: until Meson is configured again, a new `hand/` file does not enter the build graph. Without
-the check the image would not change and no error would appear.
+Until Meson is configured again, a new `hand/` file does not enter the build graph and no error appears.
 
 Meson regenerates the graph by itself when you edit a config file that decides it (`splat.yaml`,
-`target.toml`, `link.toml`, `symbols.toml`), a Python module that `tools/split.py` imports, or a
-source whose match marker decides a placed section. Regeneration takes seconds; a build with no
-change does not regenerate, and the rest of `config/` (attempts, address names, the disc manifest,
-the SDK unit list) does not.
+`target.toml`, `link.toml`, `symbols/*.toml`), a Python module that `tools/split.py` imports, or a
+source whose match marker decides a placed section. The rest of `config/` (attempts, address names, the disc manifest, the SDK unit list) does not.
 
 ### decomp.me
 
@@ -207,9 +199,8 @@ quoting. `config/attempts.jsonl` holds the failed attempts and `config/sdk/libra
 SDK units. An attempts row carries exactly `function`, `tried`, `first_diff`, `score`, in that
 order: `tools/worklist.py` reads those keys directly, and `tools/check_markers.py` fails on another
 key set or another order. The file is append-only: `tools/attempts.py add` appends a row and
-nothing edits a row. The
-build graph that `tools/split.py` prints for `meson.build` is the
-exception: it stays tab-separated, because Meson has no JSON parser and it is a pipe, not a file.
+nothing edits a row. The build graph that `tools/split.py` prints for `meson.build` stays
+tab-separated, because Meson has no JSON parser.
 
 ## Compiler chain
 
@@ -228,7 +219,7 @@ Known compiler residuals:
 | Unit                                                                                    | State                                                                                                                                                                                                         |
 | --------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
 | `exe/slus_004_22@0x80162B08`                                                            | The zero-slot arm loads `v0 = 1`, and GCC's delay-slot reorganization moves the common return into the jump delay slot. The pinned GCC's raw assembly contains the `li`, so maspsx and ASPSX do not cause it. |
-| SLUS stream decoder: `func_80164028`, `func_80164064`, `func_801642CC`, `func_801642F4` | No exact C match in 56 candidate profiles each for GCC 2.8.0, 2.8.1 and 2.95.2. The `.c` files link the split assembly and keep the C89 model behind `HAND_ASM`.                                              |
+| SLUS stream decoder: `func_80164028`, `func_80164064`, `func_801642CC`, `func_801642F4` | No exact C match under GCC 2.8.0, 2.8.1 or 2.95.2 profiles. The `.c` files link the split assembly and keep the C89 model behind `HAND_ASM`.                                                                  |
 
 ### Compiler wrapper
 
