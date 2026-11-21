@@ -879,68 +879,51 @@ MATCH void func_801D3C30(void) {
     func_801D32A0(0xCC, 0x3C, 0);
 }
 
-#ifdef NON_MATCHING
-NON_MATCHING void func_801D3E44(void) {
-    s8  selected;
-    u8  same_count;
-    u8  pair_count;
+/* Scores the hits and blows guess, then shows the result or the won prize. */
+MATCH void func_801D3E44(void) {
+    u8  hits;
+    u8  blows;
     s32 i;
     s32 j;
     s32 idx;
     u8* record;
 
-    selected   = (s8)D_801DB0B4;
-    same_count = 0;
-    i          = 0;
-    do {
-        if (D_801DB080[(s32)selected * 5 + 3 + i] == D_801DB080[i]) {
-            same_count++;
+    hits  = 0;
+    blows = 0;
+    for (i = 0; i < 3; i++) {
+        if (D_801DB080[i] == D_801DB080[(s8)D_801DB0B4 * 5 + 3 + i]) {
+            hits++;
         }
-        i++;
-    } while (i < 3);
-
-    pair_count = 0;
-    i          = 0;
-    do {
-        j = 0;
-        do {
-            if (D_801DB080[(s32)selected * 5 + 3 + i] == D_801DB080[j]) {
-                pair_count++;
+    }
+    for (i = 0; i < 3; i++) {
+        for (j = 0; j < 3; j++) {
+            if (i != j && D_801DB080[(s8)D_801DB0B4 * 5 + 3 + i] == D_801DB080[j]) {
+                blows++;
             }
-            j++;
-        } while (j < 3);
-        i++;
-    } while (i < 3);
-
-    D_801DB080[(s32)selected * 5 + 6] = same_count;
-    D_801DB080[(s32)selected * 5 + 7] = pair_count;
-    if (same_count == 3) {
-        sprintf((char*)g_TextVariables[0], D_801D0C20, selected + 1);
-        sprintf((char*)&g_TextVariables[0][0x20], D_801D0C20, pair_count);
+        }
+    }
+    D_801DB080[(s8)D_801DB0B4 * 5 + 6] = hits;
+    D_801DB080[(s8)D_801DB0B4 * 5 + 7] = blows;
+    if (hits != 3) {
+        sprintf((char*)g_TextVariables[0], D_801D0C20, hits);
+        sprintf((char*)&g_TextVariables[0][0x20], D_801D0C20, blows);
         Message_StartAreaMessage(MSG_AREA175_SHOW_HITS_BLOWS);
         D_801F294D++;
     } else {
-        sprintf((char*)g_TextVariables[0], D_801D0C20, selected + 1);
-        D_801DB0B8 = rand() & 3;
-        if (D_801DB0B8 < 3) {
+        sprintf((char*)g_TextVariables[0], D_801D0C20, (s8)D_801DB0B4 + 1);
+        if ((D_801DB0B8 = rand() & 3) >= 3) {
             D_801DB0B8 -= rand() & 3;
-            if (D_801DB0B8 < 0) {
-                D_801DB0B8 = 0;
-            } else if (D_801DB0B8 >= 3) {
-                D_801DB0B8 = 2;
-            }
+            D_801DB0B8 = (D_801DB0B8 < 0) ? 0 : ((D_801DB0B8 < 3) ? D_801DB0B8 : 2);
         }
-        idx    = ((s8)D_801DB0B4 * 3 + (s8)D_801DB0B8) * 2 + D_801448F2 * 48;
+        idx    = ((s8)D_801DB0B4 * 3 + D_801DB0B8) * 2 + D_801448F2 * 48;
         record = Item_GetRecord(D_801DAD00[0][idx + 1], D_801DAD00[0][idx]);
-        i      = 0;
-        do {
+        for (i = 0; i < 12; i++) {
             g_TextVariables[0][0x20 + i] = record[i];
-            i++;
-        } while (i < 12);
+        }
         g_TextVariables[0][0x2C] = 0;
         Message_StartAreaMessage(MSG_AREA175_NUMBERS_WON_PRIZE);
+        D_801F294D = 7;
     }
-    D_801F294D       = 7;
     g_GameStateIndex = GAME_REQUEST_MESSAGE;
     func_801D4AE0(16, 24, 0);
     func_801D4F88(104, 64, 0);
@@ -948,9 +931,6 @@ NON_MATCHING void func_801D3E44(void) {
     func_801D3184(204, 16);
     func_801D32A0(204, 60, 0);
 }
-#else
-INCLUDE_ASM(func_801D3E44);
-#endif
 
 MATCH void func_801D4158(void) {
     u8* state;
