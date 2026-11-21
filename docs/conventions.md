@@ -12,8 +12,7 @@ statements. A workaround stays only when the retail bytes need it, and its comme
   unnamed than named wrongly.
 - One name per thing in every image, one definition per name, at the lowest scope that covers its
   users.
-- Names in the tree that do not follow this page are renamed over time. An old name is not a pattern
-  to copy.
+- An old name in the tree that breaks this page is not a pattern to copy.
 
 ## Quick reference
 
@@ -50,14 +49,6 @@ statements. A workaround stays only when the retail bytes need it, and its comme
 | Adjacent globals as one struct, array or union, members by role                                                  | Loose globals at one base or stride                           |
 
 ## Base layer
-
-The header, macros, records and shared bodies follow the forms common to
-[sotn-decomp](https://github.com/Xeeynamo/sotn-decomp),
-[silent-hill-decomp](https://github.com/shdecompilations/silent-hill-decomp),
-[parasite-eve-decomp](https://github.com/khasinski/parasite-eve-decomp),
-[rood-reverse](https://github.com/ser-pounce/rood-reverse),
-[parasite-eve-2-decomp](https://github.com/GabeRealB/parasite-eve-2-decomp) and
-[psx_tomba](https://github.com/hansbonini/psx_tomba).
 
 ### Header
 
@@ -215,9 +206,8 @@ section per archive with the same lines repeated, so a name always says which ar
 Message text never enters the repo. To rename an id, edit its tag in `messages.def`, then run
 `tools/message_ids.py --rewrite`; `--check` fails on a use with no line, and `--seed` adds untagged lines.
 
-Modding the text: `bof3 assets extract --only text -o build` writes `build/text/BIN/<module>/<ARCHIVE>/11.json`
-and `11.txt` from your disc. Edit the JSON and run `bof3 assets import message 11.json -o 11.bin` to rebuild
-the table; export then import gives the original bytes for all 162 text tables of the disc.
+To edit the text, `bof3 assets extract --only text -o build` writes `build/text/BIN/<module>/<ARCHIVE>/11.json`
+from your disc; `bof3 assets import message 11.json -o 11.bin` rebuilds the table.
 Ids not yet converted keep flat `MSG_nnn` names in `include/menu/message_ids.h`.
 
 ## Evidence

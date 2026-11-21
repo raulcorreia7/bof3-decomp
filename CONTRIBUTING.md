@@ -6,15 +6,15 @@ before a large change, such as a new header layout or a rename across images.
 
 ## Set up
 
-[Requirements, set up, build and check](README.md#requirements). One command:
+[Requirements, set up, build and check](README.md#requirements):
 
 ```sh
 tools/setup.sh --dev --matching
 ```
 
 `--matching` adds the twin search, the differ and m2c. Without a disc, add `--no-payloads --no-sdk`.
-Keep the disc, the extracted data and the toolchain objects local: Git ignores them and they never
-belong in a commit. [`tools/README.md`](tools/README.md) lists every routine task as one command.
+Keep the disc, the extracted data and the toolchain objects local: Git ignores them.
+[`tools/README.md`](tools/README.md) lists every routine task as one command.
 
 ## Your first match
 
@@ -53,8 +53,8 @@ is `exe+slus_004_22`). This walkthrough needs a built checkout ([check](README.m
    in [AGENTS: standing rules](AGENTS.md#standing-rules); fill the
    [pull request template](.github/PULL_REQUEST_TEMPLATE.md).
 
-Of the open functions, 2,192 of 2,209 are `plain` route; a `template0` or `template` row starts with
-`tools/template_try.py`, a `generator` row with `tools/gen_body.py` ([route](docs/matching.md#route)).
+A `template0` or `template` row starts with `tools/template_try.py`, a `generator` row with
+`tools/gen_body.py` ([route](docs/matching.md#route)).
 
 ## Before you open a pull request
 
