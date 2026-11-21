@@ -450,7 +450,9 @@ MATCH void func_801F87A4(void) {
     }
 }
 
-MATCH void func_801F885C(void) {
+/* Shrinks the disc effect. */
+/* func_801F885C */
+MATCH void Area_ShrinkDisc(void) {
     GFX_DrawShadedDisc((s16)g_Task->screen_x, (s16)g_Task->screen_y, g_Task->timer, 0x80, 0);
     g_Task->timer -= 1;
     if ((s8)g_Task->timer < 0) {

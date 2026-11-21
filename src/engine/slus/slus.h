@@ -686,12 +686,7 @@ extern s32                         D_801821D0;
  * the record's meaning. */
 extern u16                         g_VabProgramOffsets[4];
 extern u16                         g_VabToneOffsets[80];
-extern u16                         D_80182288[4];
-extern u16                         D_80182290[12];
-extern u16                         D_801822AA;
-extern u16                         D_801822CA;
-extern u16                         D_801822EA;
-extern u16                         D_80182308[16];
+extern u16                         g_SndVolumeLevels[80];
 extern s8                          D_8018232A;
 /* D_80182348 */
 extern u32                         g_SndBankSpuAddress[3][7];

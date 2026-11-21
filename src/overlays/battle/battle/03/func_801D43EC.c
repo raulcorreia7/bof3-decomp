@@ -34,12 +34,12 @@ MATCH void func_801D43EC(void) {
             g_Battle.action_type               = BATTLE_ACTION_ATTACK;
             index                              = g_Battle.active_battler;
             if (index < 3) {
-                flags                = g_Game.members[index].u.turn.damage_flags.value;
-                *(Cpy32u*)D_801EC308 = *(Cpy32u*)&g_Game.members[index].chr.stats;
+                flags                           = g_Game.members[index].u.turn.damage_flags.value;
+                *(Cpy32u*)&g_BattleCalcStats[1] = *(Cpy32u*)&g_Game.members[index].chr.stats;
             } else {
-                slot                 = index - 3;
-                flags                = g_BattleEnemyBattlers[slot].turn.damage_flags.value;
-                *(Cpy32u*)D_801EC308 = *(Cpy32u*)&g_BattleEnemyBattlers[slot].stats;
+                slot                            = index - 3;
+                flags                           = g_BattleEnemyBattlers[slot].turn.damage_flags.value;
+                *(Cpy32u*)&g_BattleCalcStats[1] = *(Cpy32u*)&g_BattleEnemyBattlers[slot].stats;
             }
             Battle_QueueEvent(1, 0, 0, 0xF, (flags & BATTLER_DAMAGE_REPRISAL) ? (u8*)&D_801EB08F : (u8*)&D_801EB04E);
             g_BattleMessageState    = 1;

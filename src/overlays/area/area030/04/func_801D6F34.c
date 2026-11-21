@@ -25,8 +25,8 @@ MATCH void func_801D6F34(void) {
                 g_SpawnedActors[slot].header.mode  = 0x10;
                 g_SpawnedActors[slot].header.step  = 2;
                 g_SpawnedActors[slot].unk_03       = 2;
-                g_SpawnedActors[slot].unk_2E       = 0xF2;
-                g_SpawnedActors[slot].unk_30       = 0x9E;
+                g_SpawnedActors[slot].screen_x     = 0xF2;
+                g_SpawnedActors[slot].screen_y     = 0x9E;
             }
         }
         FISHING_STATE->step_timer = D_801E20CC[FISHING_STATE->step_index].next_step;

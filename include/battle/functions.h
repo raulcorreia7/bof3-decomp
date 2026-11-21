@@ -28,13 +28,13 @@ void        Battle_ApplyFormationStats(void);
 /* func_800AAC88 */
 void        Battle_QueueAction(s16 amount, u8 battler_index);
 void        func_800AAEBC(s16 target_index, u8 battler_index);
-/* func_801E29B4 */
-/* func_800AC218 */
-void        Battle_LoadEnemyBattler(u8 slot, u8 enemy_index);
 s32         func_800AC704(s32 entry_id);
 /* func_800AC870 */
 void        Battle_CopyActorEntry(s32 entry_id, PartyMember* source_record, s32 mode);
+extern void func_800ACF80(void);
 s32         func_800AEEC8(s32 arg0, u8 arg1);
+void        func_800AD26C(void);
+void        func_800AE014(void);
 /* func_800AEF98 */
 void        Battle_SelectActiveBattlerScript(s32 step, s32 payload);
 void        func_800AF2B4(BattleRange* target, s32 step);
@@ -48,26 +48,27 @@ void        Battle_FadePoisonedBattler(u32 battler_index);
 void        Battle_SetCellPaletteStp(BattleSpriteCell* record);
 /* func_800AFC98 */
 void        Battle_PlayActiveBattlerSE(s32 effect_0, s32 effect_1);
+u8          Battle_SlotIsBlocked(u32 slot);
 /* func_800AFD9C */
 void        Battle_CenterCamera(void);
 u8          func_800AFF98(void);
-u8          Battle_SlotIsBlocked(u32 slot);
+void        func_800B2218(void);
+void        func_800B22AC(void);
+u8          Battle_PickRandomTarget(u8 excluded_slot);
+void        func_800B23B8(void);
+/* func_800B23F8 */
+void        Menu_SetPosX_800B23F8(void);
+extern void func_801D8270(s32 x, s32 y);
+void        func_801D9484(void);
+void        func_801DAAE4(void);
 /* func_801DD350 */
 void        Effect_RotatePosition(void* work);
 s32         func_801DD59C(s32 amount);
 u8          func_801DD7AC(s32 selector);
 void        func_801E257C(u32 enemy_index, u32 script_index);
-u8          Battle_PickRandomTarget(u8 excluded_slot);
-extern void func_800ACF80(void);
-void        func_800AD26C(void);
-void        func_800AE014(void);
-void        func_800B2218(void);
-void        func_800B22AC(void);
-void        func_800B23B8(void);
-void        func_800B23F8(void);
-extern void func_801D8270(s32 x, s32 y);
-void        func_801D9484(void);
-void        func_801DAAE4(void);
+/* func_801E29B4 */
+/* func_800AC218 */
+void        Battle_LoadEnemyBattler(u8 slot, u8 enemy_index);
 /* The element argument that takes the attacker's weapon element. */
 #define BATTLE_ELEMENT_FROM_WEAPON 0xFFFF
 

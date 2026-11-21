@@ -20,4 +20,5 @@ Effect_StepWhileTickUnderThree = { addr = 0x801EF680, type = "func", source = "A
 Effect_TickOnTimerZero = { addr = 0x801EF6C4, type = "func", source = "Counts the effect timer (byte 0x09) down by 1 per frame; at zero lowers the ticker (byte 0x0B) of g_BattleEffectBattler and clears the effect in magic082 (Steroids, Magic Belt, Protect…)." }
 Effect_CountDownAndStep = { addr = 0x801EFD74, type = "func", source = "Counts the effect counter (byte 0x0A) down and advances header.step (byte 0x02) at zero in magic082 (Steroids, Magic Belt, Protect…)." }
 Effect_LaunchFromRing = { addr = 0x801EFDC0, type = "func", source = "Counts the effect down, then places it on a ring of 22 units around its battler at the angle stored in the work byte 0x0B and launches it upward (rise 0x40, gravity -4, 12-frame timer) in magic082." }
+BMagic_SetXFixed = { addr = 0x801F0A84, type = "func", source = "same body as emi/bmagic/magic083/03@0x801F0BA8 BMagic_SetXFixed" }
 g_BMagicEffectModes = { addr = 0x801F0D14, source = "Handlers of magic082 (Steroids, Magic Belt, Protect…), run by header.mode (byte 0x01) and by header.step (byte 0x02) in its sub-effects." }

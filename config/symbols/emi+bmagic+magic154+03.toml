@@ -13,4 +13,5 @@ D_801EEC14 = { addr = 0x801EEC14, type = "Magic154Steps", source = "Step handler
 Effect_MarkDamagedOnZeroTick = { addr = 0x801EF060, type = "func", source = "When the effect ticker (byte 0x0B) is zero marks the battlers of the target selector damaged, raises BATTLE_STATE_EFFECT_PLAYING and resets the effect in magic154 (Mighty Chop)." }
 BMagic_DispatchEffectMode = { addr = 0x801EF0C0, type = "func", source = "Runs the handler that header.mode (byte 0x01) selects from the effect handlers of magic154." }
 Effect_SetDuration = { addr = 0x801EF544, type = "func", source = "Reloads the effect timer (byte 0x09) with the value func_800AFF98 returns and advances header.step (byte 0x02) in magic154 (Mighty Chop)." }
+Effect_LowerTickerStepOnReady = { addr = 0x801EF648, type = "func", source = "same body as emi/bmagic/magic004/03@0x801EFA70 Effect_LowerTickerStepOnReady" }
 g_BMagicEffectModes = { addr = 0x801EF6CC, source = "Handlers of magic154 (Mighty Chop), run by header.mode (byte 0x01)." }

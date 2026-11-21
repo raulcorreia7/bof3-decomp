@@ -29,13 +29,12 @@ extern u8  D_801F6B18[];
 /* The three x then three y corners of each of the four triangles the torch flame draws. */
 extern u16 D_801F6B2C[][6];
 
-void func_801F5418(s32 value, s32 flag);
-void func_801F555C(s16 x, s16 y, u8 row);
-
 /* func_801F367C */
 void Area_Update(void);
 /* func_801F3BC4 */
 void func_801F4E3C(void);
+void func_801F5418(s32 value, s32 flag);
+void func_801F555C(s16 x, s16 y, u8 row);
 void func_801F564C(void);
 void func_801F5738(void);
 
@@ -59,11 +58,11 @@ extern u16 D_80145A54[];
 /* The area overlay code base (AreaHandlerRecord.code_base), the engine's AREA_CODE_BASE. */
 #define AREA_CODE_BASE ((0x800Fu << 16) | 0x5000u)
 
-s32  func_801F66D0(s16 cell_x, s16 cell_y);
-void func_801F656C(void);
-
 void func_801F4608(s32 input);
-void func_801F5BB0(s32 arg0);
+void func_801F5BB0(s32 actor);
+
+void func_801F656C(void);
+s32  func_801F66D0(s16 cell_x, s16 cell_y);
 
 extern const BGMTrack g_BGMTracks[BGM_TRACK_COUNT];
 

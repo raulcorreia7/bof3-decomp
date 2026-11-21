@@ -17,7 +17,9 @@ MATCH void func_801EEC90(void) {
     g_Task->header.mode += 1;
 }
 
-MATCH void func_801EED2C(void) {
+/* Brightens the effect palette. */
+/* func_801EED2C */
+MATCH void Effect_BrightenPalette(void) {
     /* kept: a helper taking the step shares func_801EF0F8's body but drops retail's 16-byte frame here, 4 bytes
      * short; the channels need ++ and --. */
     g_PaletteFades[g_Task->param.unk_0B].offset.r++;

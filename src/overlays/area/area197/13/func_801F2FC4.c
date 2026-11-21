@@ -10,7 +10,7 @@ MATCH s32 func_801F2FC4(void) {
     spark = MEM_PTR(SparkParticle, AREA_WORK);
     i     = 0;
     do {
-        if (spark->active != 0) {
+        if (spark->header.active != 0) {
             spark->pos.vx += spark->velocity.vx;
             spark->pos.vy += spark->velocity.vy;
             spark->pos.vz += spark->velocity.vz;
@@ -19,12 +19,12 @@ MATCH s32 func_801F2FC4(void) {
                 spark->pos.vz      = -TO_COORD(512);
                 spark->velocity.vz = -spark->velocity.vz;
             }
-            spark->shade -= 2;
-            spark->frame = rand() & 7;
-            life         = spark->life - 1;
-            spark->life  = life;
+            spark->header.shade -= 2;
+            spark->frame       = rand() & 7;
+            life               = spark->header.life - 1;
+            spark->header.life = life;
             if (life == 0) {
-                spark->active = 0;
+                spark->header.active = 0;
             }
             func_801F2E74(spark);
             alive = 1;

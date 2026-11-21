@@ -496,7 +496,11 @@ extern u8               D_801EBF04;
 extern s32              D_801EBFA0;
 extern BattleEffect* volatile D_801EC2E0;
 extern u8    D_801EC2E4;
-extern Stats D_801EC2E8;
+/* Stats of the two battlers a damage calculation reads. */
+extern Stats g_BattleCalcStats[2];
+/* kept: func_801DFCB4 writes the defense and evasion of g_BattleCalcStats[0] through these; the typed member moves its code. */
+extern u16   D_801EC2EE;
+extern u8    D_801EC303;
 
 /* func_8009BBE8 */
 /* func_8009BFC4 */
@@ -1041,10 +1045,6 @@ u8                 Battle_AdvanceMessage(void);
 extern void        func_801EAB64(void);
 /* func_801EAB6C */
 u8                 Battle_CountMessageChars(u8* message);
-extern u16         D_801EC2EE;
-extern u8          D_801EC303;
-extern u8          D_801EC308[];
-extern u16         D_801EC30C;
 extern volatile u8 D_801F0000[];
 /* The effect entry points this overlay calls by their fixed address. */
 void               func_801EEEC8(void);

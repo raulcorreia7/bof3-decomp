@@ -15,6 +15,7 @@ extern s8 D_801EF078[];
 
 /* Battle_AddMessage */
 void func_801DE8C0(s32 index, s32 record_kind, u8* text);
-void func_801EEF98(s32 index, s32 category);
+/* func_801EEF98 */
+void BMagic_SetTextItemName(s32 index, s32 category);
 
 #endif

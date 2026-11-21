@@ -66,7 +66,7 @@ MATCH void func_801EECDC(void) {
         if (value != 0) {
             category = value >> 8;
             if (Item_Add(category, value & 0xFF, 1, 0)) {
-                func_801EEF98(value & 0xFF, category & 0xFF);
+                BMagic_SetTextItemName(value & 0xFF, category & 0xFF);
                 func_801DE8C0(1, 0xFF, Message_GetText(0x38));
                 g_BattleEnemyBattlers[g_BattleTargetSelector - 3].drops[0].rate = 0;
                 g_BattleEnemyBattlers[g_BattleTargetSelector - 3].drops[0].item = 0;
@@ -93,7 +93,9 @@ MATCH void func_801EEF58(void) {
     }
 }
 
-MATCH void func_801EEF98(s32 index, s32 category) {
+/* Sets the battle magic text to the item name. */
+/* func_801EEF98 */
+MATCH void BMagic_SetTextItemName(s32 index, s32 category) {
     switch (category & BYTE_MASK) {
         case ITEM_CATEGORY_ITEM:
         default:

@@ -386,7 +386,7 @@ segments:
       - [0x19470, c, Menu_SlidePanelLeft]
       - [0x194B0, c, Menu_CommandsPanel]
       - [0x19518, c, func_801EA118]
-      - [0x19558, c, func_801EA158]
+      - [0x19558, c, Menu_SetPosY]
       - [0x19598, c, Menu_DrawPanelCursor]
       - [0x195C8, c, func_801EA1C8]
       - [0x195F0, c, func_801EA1F0]

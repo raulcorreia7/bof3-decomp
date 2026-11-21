@@ -632,7 +632,8 @@ void    func_801996A8(void);
 void    func_801996FC(void);
 void    func_8019977C(void);
 void    func_801997EC(void);
-void    func_8019982C(void);
+/* func_8019982C */
+void    Menu_SetPosX(void);
 void    func_8019986C(void);
 void    func_80199938(void);
 void    func_80199978(void);

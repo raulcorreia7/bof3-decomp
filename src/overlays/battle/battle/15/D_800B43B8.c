@@ -660,7 +660,7 @@ static u8 s_gap_800B6E06_1 = 0x00;
 Callback D_800B6E08[6] = {Menu_DrawPanelCursor, Battle_DrawInventoryPanel, func_800B2258, func_800B232C, func_800B2478, func_800B258C};
 Callback D_800B6E20[5] = {func_800B20CC, func_800B2158, func_800B2198, func_800B21D8, func_800B2218};
 Callback D_800B6E34[3] = {func_800B20CC, func_800B22AC, func_800B22EC};
-Callback D_800B6E40[4] = {func_800B20CC, func_800B23B8, func_800B23F8, func_800B2438};
+Callback D_800B6E40[4] = {func_800B20CC, func_800B23B8, Menu_SetPosX_800B23F8, func_800B2438};
 static u8 s_gap_800B6E50[236] = {
     0xCC, 0x20, 0x0B, 0x80, 0xCC, 0x24, 0x0B, 0x80, 0x0C, 0x25, 0x0B, 0x80, 0x4C, 0x25, 0x0B, 0x80,
     0x49, 0x54, 0x45, 0x4D, 0x00, 0x00, 0x00, 0x00, 0x57, 0x45, 0x41, 0x50, 0x4F, 0x4E, 0x00, 0x00,

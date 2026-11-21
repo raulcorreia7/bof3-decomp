@@ -1,12 +1,14 @@
 ["emi/world01/area045/13"]
 g_AreaModuleId = { addr = 0x801F2C00, source = "Module id of the area: the first payload word of its overlay, 52 + the area number." }
 Message_ClearOnCancel = { addr = 0x801F2C04, type = "func", source = "Sets g_SceneEventStep to 2 when the menu selection is idle, and clears the message request." }
+Area_RequestRestartOnEntryChange = { addr = 0x801F32A0, type = "func", source = "same body as emi/world00/area033/13@0x801F31D4 Area_RequestRestartOnEntryChange" }
 Actor_ZoomOut = { addr = 0x801F3360, type = "func", source = "Centres the actor on the screen and shrinks the scale at +0x40 by 0x2000 each frame; when the timer at byte 0x09 reaches 0 it frees the actor if g_GameStateIndex is GAME_REQUEST_AREA_CHANGE, otherwise it clears byte 0x48 and sets header.mode (byte 0x01) to 1." }
 Actor_SetScreenOrigin = { addr = 0x801F3400, type = "func", source = "Sets the actor screen_x to 0xA0 and screen_y to 0x50." }
 Actor_NextStep = { addr = 0x801F3460, type = "func", source = "Zeroes the work bytes 0x09 and 0x0B and adds 1 to header.mode (byte 0x01)." }
 Actor_SlideScreenLeft = { addr = 0x801F350C, type = "func", source = "Sets the actor screen_x to -0x30 and adds 1 to header.step (byte 0x02), when D_801454F2 is not 2 and no script is active." }
 Actor_SlideScreenX = { addr = 0x801F355C, type = "func", source = "Adds ACTOR_SCREEN_X_STEP to the screen origin of the work record and, once it reaches ACTOR_SCREEN_X_THRESHOLD, adds 1 to the step (byte 0x02); runs Area_Update." }
 Area_Update = { addr = 0x801F35B8, type = "func", source = "Sets header.step (byte 0x02) to 3 when D_801454F2 is 2, then draws the area HUD at the actor screen_x with Area_DrawHud." }
+Area_SlideHudBannerLeft = { addr = 0x801F3608, type = "func", source = "same body as emi/world00/area033/13@0x801F353C Area_SlideHudBannerLeft" }
 Actor_SetScreenBottom = { addr = 0x801F36D0, type = "func", source = "Sets the actor screen_y to 0xF0 and adds 1 to byte 0x03, when D_801454F2 is 0 or byte 0x0B is 0, no message is requested and no script is active." }
 Area_DrawHudSprite = { addr = 0x801F39D8, type = "func", source = "Draws one sprite at (x, y) from the four-byte (w, h, u0, v0) cell selected by sprite_id, clut WORLD_SPRITE_CLUT; Area_DrawHud calls it with ids 0 to 3 and the WorldMapMarker step." }
 Area_DrawHud = { addr = 0x801F3B00, type = "func", source = "Draws the area HUD at (x, y) when a g_AreaDrawFlags draw bit is set: sprite 0, then the button sprite of the WorldMapMarker matching g_InputMasks[FIELD_INPUT_INTERACT] at y + 8 and the one matching g_InputMasks[FIELD_INPUT_PERSONAL_ACTION] at y + 0x10, sprite 3 when the target cell or walk flags block, and Area_DrawGradientDiamond at (x + 0x18, y + 0x18)." }

@@ -1,6 +1,8 @@
 #include "area151_13.h"
 
-MATCH void func_801F3798(void) {
+/* Counts down how long the HUD banner is held. */
+/* func_801F3798 */
+MATCH void Area_CountHudBannerHold(void) {
     Actor* scratch;
 
     scratch = g_Task;

@@ -117,6 +117,7 @@ Menu_CursorFramePanel = { addr = 0x801E9D98, type = "func", source = "panel mode
 Menu_InventoryPanel = { addr = 0x801E9F5C, type = "func", source = "panel mode 12 of the start menu: the inventory window" }
 Menu_SlidePanelLeft = { addr = 0x801EA070, type = "func", source = "Moves the master panel 0x20 pixels left and clamps its x at 0x98." }
 Menu_CommandsPanel = { addr = 0x801EA0B0, type = "func", source = "panel mode 13 of the start menu: the command row" }
+Menu_SetPosY = { addr = 0x801EA158, type = "func", source = "same body as emi/etc/shisu/00@0x801D320C Menu_SetPosY" }
 Menu_DrawPanelCursor = { addr = 0x801EA198, type = "func", source = "Draws the menu panel cursor at the x and y of the current task root through Menu_DrawCursorSprite." }
 Menu_EquipComparePanel = { addr = 0x801EA50C, type = "func", source = "panel mode 16 of the start menu: the equipment compare window" }
 Menu_AbilitiesPanel = { addr = 0x801EA698, type = "func", source = "panel mode 17 of the start menu: the ten-row ability list" }

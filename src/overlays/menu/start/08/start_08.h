@@ -733,7 +733,8 @@ void        func_801EA030(void);
 /* func_801EA0B0 */
 void        Menu_CommandsPanel(void);
 void        func_801EA118(void);
-void        func_801EA158(void);
+/* func_801EA158 */
+void        Menu_SetPosY(void);
 void        func_801EA1C8(void);
 /* func_801EA50C */
 void        Menu_EquipComparePanel(void);
@@ -754,9 +755,9 @@ void        func_801EA880(void);
 void        func_801EA8C0(void);
 void        func_801EA900(void);
 void        func_801EA940(void);
-extern void func_801EAA14(MenuPanelTask* task);
 void        func_801EA994(void);
 void        func_801EA9D4(void);
+extern void func_801EAA14(MenuPanelTask* task);
 void        func_801EAEC4(void);
 extern void func_801EAF98(MenuPanelTask* task);
 extern s8   SAVE_AccessFile(s32 port, s32 name, s32 mode, s32 size, s32 offset);
@@ -913,27 +914,27 @@ void Menu_DrawCharacterPortrait(u16 sprite_x, u16 sprite_y, u8 atlas_index, u8 s
 /* func_801AF930 */
 void UI_DrawAbilityRow(s32 x, s32 y, u8 shade, u8 element, u8* name, u8 cost, u8 flags);
 
-void func_801E2C00(u16 x, s32 y, s32 group, s32 selected, s32 mode);
-
-void func_801E2D84(s16 x, s32 y);
-
-/* func_801E3E34 */
-void Menu_SetGlyphPage(u16 line_index);
-void Menu_DrawHeaderBar(s32 x, s32 y, s32 width, s32 height, u8 window_style);
 void func_801D49F8(s32 step_index);
-void func_801E2E90(s32 x, s32 y, s32 row_index);
-/* func_801E7608 */
-void Menu_DrawBackdrop(void);
-void func_801E7720(s16 tile_x, s8 tile_kind);
+
+void func_801D9304(s32 step_index);
 /* No prototype: the retail callers pass a byte the callee ignores. */
 /* func_801DAC1C */
 void Menu_OpenFormation();
+void Menu_DrawHeaderBar(s32 x, s32 y, s32 width, s32 height, u8 window_style);
+/* func_801DB04C */
+u8   Menu_SwapPartyMembers(void);
+void func_801E2C00(u16 x, s32 y, s32 group, s32 selected, s32 mode);
+void func_801E2D84(s16 x, s32 y);
+void func_801E2E90(s32 x, s32 y, s32 row_index);
+
+/* func_801E3E34 */
+void Menu_SetGlyphPage(u16 line_index);
 void Menu_DrawPortrait(s32 sprite_x, s32 sprite_y, s32 atlas_index, s32 shade_mode);
 void Menu_DrawIcon(u16 sprite_x, u16 sprite_y, u8 icon_column, u8 shade_mode);
 
-void func_801D9304(s32 step_index);
-/* func_801DB04C */
-u8   Menu_SwapPartyMembers(void);
+/* func_801E7608 */
+void Menu_DrawBackdrop(void);
+void func_801E7720(s16 tile_x, s8 tile_kind);
 
 /* Step the master panel up 16 pixels and stop it at y 62. The member declares task. */
 #define MENU_STEP_PANEL_UP()          \

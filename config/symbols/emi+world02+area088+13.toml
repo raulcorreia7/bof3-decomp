@@ -7,6 +7,7 @@ GFX_DrawFan = { addr = 0x801F3600, type = "func", source = "Draws a fan of eight
 Message_ClearOnCancel = { addr = 0x801F3764, type = "func", source = "Sets g_SceneEventStep to 2 when the menu selection is idle, and clears the message request." }
 Fishing_ShowLocation = { addr = 0x801F3798, type = "func", source = "Prints the fish listed for the player position from g_FishingBestCatch with Message_StartAreaMessage, steps D_801448EC from 0 to 1, and clears it when the message closes." }
 Actor_ZoomIn = { addr = 0x801F3D88, type = "func", source = "Grows the actor scale at offset 0x40 by 0x2000 each frame and sets header.mode (byte 0x01) to 3 when the timer at byte 0x09 expires." }
+Area_RequestRestartOnEntryChange = { addr = 0x801F3E04, type = "func", source = "same body as emi/world00/area033/13@0x801F31D4 Area_RequestRestartOnEntryChange" }
 Actor_ZoomOut = { addr = 0x801F3EC4, type = "func", source = "Centres the actor on the screen and shrinks the scale at +0x40 by 0x2000 each frame; when the timer at byte 0x09 reaches 0 it frees the actor if g_GameStateIndex is GAME_REQUEST_AREA_CHANGE, otherwise it clears byte 0x48 and sets header.mode (byte 0x01) to 1." }
 Actor_SetScreenOrigin = { addr = 0x801F3F64, type = "func", source = "Sets the actor screen_x to 0xA0 and screen_y to 0x50." }
 Actor_NextStep = { addr = 0x801F3FC4, type = "func", source = "Zeroes the work bytes 0x09 and 0x0B and adds 1 to header.mode (byte 0x01)." }

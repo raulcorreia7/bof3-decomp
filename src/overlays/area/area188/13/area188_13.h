@@ -50,7 +50,8 @@ void func_801F44B4(void);
 /* The per-image spawn step Area_UpdateSpawn runs between the slot claim and the slot pass. */
 #define AREA_SPAWN_TICK func_801F44B4
 
-void func_801F38E0(void* position, s32 radius, s32 colors);
+/* func_801F38E0 */
+void GFX_DrawColorFan(void* position, s32 radius, s32 colors);
 /* func_801F3ADC */
 void Area_DrawYellowLine(s32* from, s32* to, u8 intensity);
 void func_801F40F4(s32 arg0);

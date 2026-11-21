@@ -244,5 +244,6 @@ g_BattleEnemyBattlers = { addr = 0x801EB630, type = "EnemyBattler", size = 0x8C0
 g_BattleMessageSlot = { addr = 0x801EBF08, size = 0x4, source = "Pointer to the battler row that the battle messages name; Battle_NextCommandMember sets it to the acting party battler." }
 s_BattleBattlerTemplates = { addr = 0x801EBF20, type = "PartyMember", size = 0x3C0, source = "Work row templates of the party battlers: Battle_StartFormRestore copies row n into g_Game.members[n], and bit 0 of a row's first byte marks it active for func_801E7B34." }
 s_BattleBattlerTemplateTails = { addr = 0x801EC048, alias = true, source = "row 0 turn.action_flags of s_BattleBattlerTemplates (+0x128); the tail global folded into the PartyMember rows in #503" }
+g_BattleCalcStats = { addr = 0x801EC2E8, type = "Stats", size = 0x40, source = "Stats of the two battlers a damage calculation reads: Battle_CalcDamage and its roll helpers read both records." }
 g_BattleEffects = { addr = 0x801EC330, source = "Battle effect work records (stride 0x78); Battle_AllocEffect claims a free one by setting bit 0 of header.flags." }
 Effect_StartPlaying = { addr = 0x801EF00C, alias = true, source = "Raises BATTLE_STATE_EFFECT_PLAYING and clears the effect work record in magic150 (Eye Beam)." }

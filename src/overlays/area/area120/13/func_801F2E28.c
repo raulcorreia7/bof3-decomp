@@ -15,8 +15,8 @@ MATCH void func_801F2E28(void) {
         slot->pos.x.fixed  = g_Actors[2].pos.x.fixed;
         slot->pos.y.fixed  = g_Actors[2].pos.y.fixed;
         slot->pos.z.fixed  = g_Actors[2].pos.z.fixed;
-        slot->unk_2E       = ((RECT*)D_801F43B8)->x;
-        slot->unk_30       = ((RECT*)D_801F43B8)->y;
+        slot->screen_x     = ((RECT*)D_801F43B8)->x;
+        slot->screen_y     = ((RECT*)D_801F43B8)->y;
         slot->unk_24 |= 0x88;
         previous = g_Task;
         TASK_SET(slot);

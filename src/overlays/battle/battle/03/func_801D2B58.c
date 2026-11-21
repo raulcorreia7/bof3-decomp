@@ -67,7 +67,7 @@ NON_MATCHING void func_801D2B58(void) {
             ACTIVE_DEPTH  = actor->depth;
             stats         = (Stats*)&g_BattleEnemyBattlers[enemy].stats;
         }
-        *(Stats*)D_801EC308 = *stats;
+        g_BattleCalcStats[1] = *stats;
 
         id = LOBU(g_Battle.target_selector);
         if (id < 3) {

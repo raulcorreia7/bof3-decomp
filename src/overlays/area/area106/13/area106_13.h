@@ -14,7 +14,7 @@ extern u8 D_801F3EAC[];
 extern u8 D_801F4850[];
 extern u8 D_801F4851[];
 
-void      func_801F2F38(s32 arg0, s32 arg1);
+void      func_801F2F38(s32 index, s32 height);
 extern u8 D_801F3E90[];
 
 /* The four corner vectors RotTransPers4 projects; g_ScratchPadVectors forwards. */

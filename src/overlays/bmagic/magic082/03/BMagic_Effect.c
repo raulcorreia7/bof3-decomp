@@ -275,7 +275,7 @@ MATCH void func_801EFEF4(void) {
     PartyMember* reset;
 
     Battle_ProjectRange();
-    func_801F0A84((RANDOM_MASK(3)) | 0x18);
+    BMagic_SetXFixed((RANDOM_MASK(3)) | 0x18);
     BMAGIC_DRAW_IN_ACTOR_MATRIX(func_801F03E0);
     if (g_FrameCount & 0x1) {
         g_Task->unk_09 += 1;
@@ -301,7 +301,7 @@ MATCH void func_801EFFE8(void) {
     PartyMember* task;
 
     Battle_ProjectRange();
-    func_801F0A84((RANDOM_MASK(3)) | 0x18);
+    BMagic_SetXFixed((RANDOM_MASK(3)) | 0x18);
     BMAGIC_DRAW_IN_ACTOR_MATRIX(func_801F03E0);
     if (g_FrameCount & 0x1) {
         g_Task->unk_09 += 1;
@@ -329,7 +329,7 @@ MATCH void func_801F00DC(void) {
     } else {
         value2 = RANDOM_MASK(3) | 0x18;
     }
-    func_801F0A84(value2);
+    BMagic_SetXFixed(value2);
     BMAGIC_DRAW_IN_ACTOR_MATRIX(func_801F03E0);
     if (g_Task->unk_0C < 4) {
         value          = g_Task->unk_10 + 1;
@@ -360,7 +360,7 @@ MATCH void func_801F0260(void) {
     u8   count;
 
     Battle_ProjectRange();
-    func_801F0A84(RANDOM_MASK(3) | 0x20);
+    BMagic_SetXFixed(RANDOM_MASK(3) | 0x20);
     BMAGIC_DRAW_IN_ACTOR_MATRIX(func_801F03E0);
     g_Task->unk_10 += 4;
     g_Task->unk_09 += g_Task->unk_0C;
@@ -460,7 +460,9 @@ MATCH void func_801F03E0(void) {
 
 /* Draws a semi-transparent disc of the given radius round the effect's screen point as eight
  * shaded triangles, bright at the centre and dark at the rim. */
-MATCH void func_801F0A84(s32 radius) {
+/* Sets the battle magic x position in fixed point. */
+/* func_801F0A84 */
+MATCH void BMagic_SetXFixed(s32 radius) {
     POLY_G3* prim;
     s32      tpage;
     s32      i;

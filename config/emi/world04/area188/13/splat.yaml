@@ -28,7 +28,7 @@ segments:
       - [0xAC4, c, func_801F36C4]
       - [0xBCC, c, func_801F37CC]
       - [0xCC0, c, func_801F38C0]
-      - [0xCE0, c, func_801F38E0]
+      - [0xCE0, c, GFX_DrawColorFan]
       - [0xEDC, c, Area_DrawYellowLine]
       - [0x11B4, c, Area_ClearWorkColumn]
       - [0x11E0, c, Area_ClaimSpawnSlot]

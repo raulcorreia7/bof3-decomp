@@ -7,9 +7,9 @@ MATCH void func_801F4BB0(void) {
     if (actor_index != GAME_NONE) {
         g_SpawnedActors[actor_index].header.flags = ACTOR_FLAG_IN_USE;
         g_SpawnedActors[actor_index].type         = 0x9D;
-        g_SpawnedActors[actor_index].unk_2E       = 0xC;
+        g_SpawnedActors[actor_index].screen_x     = 0xC;
         g_SpawnedActors[actor_index].unk_06       = 1;
-        g_SpawnedActors[actor_index].unk_30       = 0xA5;
+        g_SpawnedActors[actor_index].screen_y     = 0xA5;
         g_SpawnedActors[actor_index].link         = g_CurrentActor - g_Actors;
     }
 }

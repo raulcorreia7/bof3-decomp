@@ -34,8 +34,8 @@ MATCH void func_801D6128(void) {
             g_SpawnedActors[entry].header.mode  = 0x10;
             g_SpawnedActors[entry].header.step  = 2;
             g_SpawnedActors[entry].unk_03       = 2;
-            g_SpawnedActors[entry].unk_2E       = 0xF0;
-            g_SpawnedActors[entry].unk_30       = 0xA6;
+            g_SpawnedActors[entry].screen_x     = 0xF0;
+            g_SpawnedActors[entry].screen_y     = 0xA6;
         }
         BANNER_INDEX += 1;
     } else {
