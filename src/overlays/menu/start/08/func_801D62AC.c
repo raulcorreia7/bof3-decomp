@@ -18,8 +18,8 @@ MATCH void func_801D62AC(void) {
         off = 0x90;
         while (i < (Party_CountOrder(PARTY_ORDER_FIELD) & BYTE_MASK)) {
             i++;
-            temp             = off;
-            D_80148333[temp] = 4;
+            temp                               = off;
+            (&g_MenuPanelTasks[0].state)[temp] = 4;
             off += 0x24;
         }
         g_MenuPanelTasks[7].state  = 2;

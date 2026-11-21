@@ -109,7 +109,7 @@ def main(argv: list[str] | None = None) -> int:
         )
     materialize_reviewed_targets(root=ROOT)
     for manifest in manifests.values():
-        if manifest.kind == "executable" and not (ROOT / manifest.binary).is_file():
+        if manifest.type == "executable" and not (ROOT / manifest.binary).is_file():
             (ROOT / manifest.binary).parent.mkdir(parents=True, exist_ok=True)
             shutil.copy2(extracted / manifest.disc_id, ROOT / manifest.binary)
     refuse(disc.verify_images(ROOT), "the code images")

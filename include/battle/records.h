@@ -745,7 +745,6 @@ extern u16          g_GameFlags;
 extern u8           D_80145E98;
 extern u16          g_AreaWalkFlags;
 /* The mode byte of each 0x24-byte owner record; the type byte sits at +0x07. */
-extern u8           D_80148333[];
 extern BattleOwner  D_8014833A[];
 
 typedef struct BattleRange {

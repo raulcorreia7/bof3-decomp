@@ -97,7 +97,7 @@ NON_MATCHING void func_800A5330(void) {
             text_id = BLANK_TEXT;
         }
     }
-    D_801EB5B4[((D_801EC328 - 1) & 0xF) * 2] = Message_GetText(text_id);
+    g_BattleMessages[((D_801EC328 - 1) & 0xF)].text = Message_GetText(text_id);
 
     buttons = INPUT_REPEATED(g_PadStates[0].pressed, INPUT_DIRECTIONAL);
     if ((buttons & PADLup) && g_Battle.cursor.gene.row >= 0) {

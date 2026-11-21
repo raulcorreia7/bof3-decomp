@@ -41,16 +41,53 @@ typedef Step2 BattleScrollDelta;
 
 ASSERT_SIZE(BattleScrollDelta, 0x02);
 
-extern BattleScrollDelta            g_BattleScrollDeltas[4];
+extern BattleScrollDelta g_BattleScrollDeltas[4];
 /* D_800B6510 */
-extern u8                           g_BattleActionSelection[232];
-extern u8*                          D_800B6AB0[];
+extern u8                g_BattleActionSelection[232];
+extern u8*               D_800B6AB0[];
 /* One-field views of the same rows: the local rows (stride 0x140) and the
  * enemy rows (stride 0x118), each anchored at the field the retail symbol
  * names. */
-extern u8                           D_801454F5[];
-extern u8                           D_801454F6[];
-extern u8                           D_80145FA8[];
+extern u8                D_801454F5[];
+extern u8                D_801454F6[];
+extern u8                D_80145FA8[];
+
+/* One 8-byte row of the 16-row message ring at g_BattleMessages; D_801EC328 is the next row to fill. */
+typedef struct BattleMessageSlot {
+    u8  flags;       /* 0x00 bit 0 waits for a button, bit 1 counts record_type down */
+    u8  record_type; /* 0x01 the record type, or the wait countdown while bit 1 of flags is set */
+    u8  pad_02[2];   /* 0x02 */
+    u8* text;        /* 0x04 the message text */
+} BattleMessageSlot;
+
+ASSERT_OFFSET(BattleMessageSlot, flags, 0x00);
+ASSERT_OFFSET(BattleMessageSlot, record_type, 0x01);
+ASSERT_OFFSET(BattleMessageSlot, text, 0x04);
+ASSERT_SIZE(BattleMessageSlot, 0x08);
+
+extern BattleMessageSlot g_BattleMessages[16];
+
+/* One 0xC-byte row of the event slot table at g_BattleEventSlots; D_801EB4DC points at the running row. */
+typedef struct BattleEventSlot {
+    u8  active;     /* 0x00 set while the event runs */
+    u8  event_type; /* 0x01 indexes g_BattleEvents.steps and its flag bit */
+    u8  value;      /* 0x02 the event's value byte */
+    u8  group;      /* 0x03 event pass: group 0 before group 1 */
+    u8* payload;    /* 0x04 the event's data pointer */
+    u16 timer;      /* 0x08 counts down; 0xFF means no countdown */
+    u8  text_style; /* 0x0A text style argument UI_DrawText draws the payload with */
+    u8  pad_0B;     /* 0x0B */
+} BattleEventSlot;
+
+ASSERT_OFFSET(BattleEventSlot, active, 0x00);
+ASSERT_OFFSET(BattleEventSlot, event_type, 0x01);
+ASSERT_OFFSET(BattleEventSlot, value, 0x02);
+ASSERT_OFFSET(BattleEventSlot, group, 0x03);
+ASSERT_OFFSET(BattleEventSlot, payload, 0x04);
+ASSERT_OFFSET(BattleEventSlot, timer, 0x08);
+ASSERT_OFFSET(BattleEventSlot, text_style, 0x0A);
+ASSERT_SIZE(BattleEventSlot, 0xC);
+
 /* FAKE: g_Battle.ui_mode as a global of its own; the sites that use it match only with a separate symbol. */
 extern volatile u8                  g_BattleUIState;
 /* Main-executable battle-selection cell consumed by the countdown arm. */
@@ -61,10 +98,10 @@ extern volatile BattleSelectionType D_801CA71C[];
 /* D_801EB0B0 */
 extern s8                           g_BattlePanelOffsets[];
 extern BattleTurn*                  g_BattleActorTurn;
-extern u8                           g_BattleEventSlots[];
+extern BattleEventSlot              g_BattleEventSlots[8];
+/* A byte view of g_BattleEventSlots: func_801DE60C reaches every field by byte offset. */
+extern u8                           g_BattleEventSlotBytes[];
 extern u8                           D_801EB5A8;
-extern u8                           D_801EB5B1[];
-extern u8*                          D_801EB5B4[];
 /* D_801EBF08 */
 extern u8*                          g_BattleMessageSlot;
 extern u8                           D_801EC324;

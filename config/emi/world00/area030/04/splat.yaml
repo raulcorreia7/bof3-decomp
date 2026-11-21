@@ -75,7 +75,7 @@ segments:
       - [0x2AF8, c, func_801D36F8]
       - [0x2C24, c, func_801D3824]
       - [0x2C98, c, func_801D3898]
-      - [0x2D08, c, func_801D3908]
+      - [0x2D08, c, Fishing_DrawPanelHeader]
       - [0x2D38, c, Fishing_PromptSlideOut]
       - [0x2DB8, c, func_801D39B8]
       - [0x2E54, c, func_801D3A54]

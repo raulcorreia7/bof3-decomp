@@ -5,8 +5,8 @@ MATCH void func_801D334C(void) {
     u8* counter;
 
     p                         = (u8*)g_MenuPanelTasks;
-    D_80148331                = 7;
-    D_80148332                = 0;
+    g_MenuPanelTasks[0].panel = 7;
+    g_MenuPanelTasks[0].mode  = 0;
     g_MenuPanelTasks[0].state = 2;
     *p                        = 1;
     p += 0x24;

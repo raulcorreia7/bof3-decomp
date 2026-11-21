@@ -67,14 +67,14 @@ def source_text(path: Path) -> str:
     return "\n".join(_own(current)[0] for current in _closure(path))
 
 
-KIND_OF_CLAIM = {MATCH: "matching", NON_MATCHING: "non_matching"}
+TYPE_OF_CLAIM = {MATCH: "matching", NON_MATCHING: "non_matching"}
 
 
 @dataclass(frozen=True, slots=True)
 class Marker:
     """One source marker, resolved against the requested function address."""
 
-    kind: str | None
+    claim_type: str | None
     foreign: int | None
     claim: str | None
     path: Path
@@ -103,17 +103,19 @@ def read(path: Path, unit_address: int, names: Mapping[str, int] = NO_NAMES) -> 
         (claim, _named_address(line, names)) for claim, line in _marker_lines(path)
     ]
     if not found:
-        return Marker(kind=None, foreign=None, claim=None, path=path)
+        return Marker(claim_type=None, foreign=None, claim=None, path=path)
     for claim, named in found:
         if named == unit_address:
             return Marker(
-                kind=KIND_OF_CLAIM[claim], foreign=None, claim=claim, path=path
+                claim_type=TYPE_OF_CLAIM[claim], foreign=None, claim=claim, path=path
             )
     if len(found) == 1 and found[0][1] is None:
         claim, _ = found[0]
-        return Marker(kind=KIND_OF_CLAIM[claim], foreign=None, claim=claim, path=path)
+        return Marker(
+            claim_type=TYPE_OF_CLAIM[claim], foreign=None, claim=claim, path=path
+        )
     claim, foreign = found[0]
-    return Marker(kind=None, foreign=foreign, claim=claim, path=path)
+    return Marker(claim_type=None, foreign=foreign, claim=claim, path=path)
 
 
 def _named_address(line: str, names: Mapping[str, int] = NO_NAMES) -> int | None:
@@ -134,7 +136,7 @@ def function_claims(
         line = text[marker.start() : end if end >= 0 else len(text)]
         address = _named_address(line, names)
         if address is not None:
-            found.setdefault(address, KIND_OF_CLAIM[marker.group(1)])
+            found.setdefault(address, TYPE_OF_CLAIM[marker.group(1)])
     for include in INCLUDE_ASM_RE.finditer(text):
         address = int(include["address"], 16)
         found.setdefault(address, None)

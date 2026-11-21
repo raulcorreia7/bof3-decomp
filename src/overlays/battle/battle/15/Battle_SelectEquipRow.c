@@ -26,10 +26,10 @@ MATCH void Battle_SelectEquipRow(void) {
     } else {
         D_801485DC = 0;
     }
-    D_801EB5B4[((D_801EC328 - 1) & 0xF) * 2] = Message_GetText(D_8014862E == 0 ? 0x30 : 0x32);
-    input                                    = &g_PadStates[0].pressed;
-    trigger                                  = INPUT_REPEATED(*input, (PADLup | PADLdown));
-    held                                     = *input;
+    g_BattleMessages[((D_801EC328 - 1) & 0xF)].text = Message_GetText(D_8014862E == 0 ? 0x30 : 0x32);
+    input                                           = &g_PadStates[0].pressed;
+    trigger                                         = INPUT_REPEATED(*input, (PADLup | PADLdown));
+    held                                            = *input;
     if ((held & g_InputMasks[BATTLE_INPUT_CANCEL]) != 0u) {
         SND_PlaySE(EMI_SE_ID(SND_BANK_COMMON, 6));
         g_BattlePanelMode          = 1;

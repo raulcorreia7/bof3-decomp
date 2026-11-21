@@ -93,7 +93,7 @@ def mapped_targets(
     """Return the target and resident images visible to it."""
     link = read_link(root)
     visible = manifest.id.value
-    if manifest.kind == "emi":
+    if manifest.type == "emi":
         visible = "emi"
     targets = [manifest.id.value]
     for entry in link.get("resident", ()):
@@ -141,7 +141,7 @@ def image_spans(
     for target in targets:
         manifest = manifests[target]
         path = root / manifest.binary
-        if manifest.kind == "executable":
+        if manifest.type == "executable":
             info = read_exe(path)
             if info is not None:
                 spans.append((info.load_address, info.load_address + info.text_size))
@@ -160,7 +160,7 @@ def write_image(
 ) -> None:
     """Write the Rizin image with every resident image and the target overlay."""
     exe_target = next(
-        target for target in targets if manifests[target].kind == "executable"
+        target for target in targets if manifests[target].type == "executable"
     )
     exe_path = root / manifests[exe_target].binary
     info = read_exe(exe_path)
@@ -174,7 +174,7 @@ def write_image(
             (root / manifests[target].binary).read_bytes(),
         )
         for target in targets
-        if manifests[target].kind != "executable"
+        if manifests[target].type != "executable"
     ]
     regions.sort(key=lambda region: region[0] == targets[0])
     low = min([info.load_address, *(address for _, address, _ in regions)])

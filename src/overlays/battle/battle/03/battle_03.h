@@ -69,23 +69,6 @@ typedef struct DamageSpread {
     u8 percent[8];
 } DamageSpread;
 
-/* One 0xC-byte row of the event slot table at g_BattleEventSlots; D_801EB4DC points at the running row. */
-typedef struct BattleEventSlot {
-    u8  active;     /* 0x00 set while the event runs */
-    u8  event_type; /* 0x01 indexes g_BattleEvents.steps and its flag bit */
-    u8  pad_02;
-    u8  group;   /* 0x03 event pass: group 0 before group 1 */
-    u8* payload; /* 0x04 the event's data pointer */
-    u16 timer;   /* 0x08 counts down; 0xFF means no countdown */
-    u8  pad_0A[2];
-} BattleEventSlot;
-
-ASSERT_OFFSET(BattleEventSlot, event_type, 0x01);
-ASSERT_OFFSET(BattleEventSlot, group, 0x03);
-ASSERT_OFFSET(BattleEventSlot, payload, 0x04);
-ASSERT_OFFSET(BattleEventSlot, timer, 0x08);
-ASSERT_SIZE(BattleEventSlot, 0xC);
-
 /* The battle sub-step byte 0x801462E2 selects one of these four entrance
  * handlers, copied to the stack from 0x801D0C1C. */
 typedef struct {
@@ -479,15 +462,7 @@ extern u16              D_801EB4CC;
 extern s32              D_801EB4D0;
 extern u32              D_801EB4D4;
 extern BattleEventSlot* D_801EB4DC;
-extern volatile u8      D_801EB4F0[][12];
-extern volatile u8      D_801EB4F1[][12];
-extern s8               D_801EB4F2;
-extern volatile u8      D_801EB4F3[][12];
-extern u32              D_801EB4F4[][3];
-extern volatile u16     D_801EB4F8[][6];
-extern u8               D_801EB4FA[][12];
 extern BattleRank       D_801EB550[];
-extern u8               D_801EB5B0[];
 /* D_801EBF20 */
 extern PartyMember      s_BattleBattlerTemplates[BATTLE_PARTY_CHARACTERS_COUNT]; /* Alternate local work entries. */
 extern u8               D_801EB6D0[];

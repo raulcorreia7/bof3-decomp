@@ -8,7 +8,7 @@
 # list is the BoF3 memory map.
 #
 # `visible_to` names the targets that link against the resident image: a target
-# kind (`emi`, `executable`) or one target id (`exe/slus_004_22`). A standalone
+# type (`emi`, `executable`) or one target id (`exe/slus_004_22`). A standalone
 # binary links only its own table.
 schema = "bof3.link/v1"
 

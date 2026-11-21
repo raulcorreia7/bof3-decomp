@@ -550,7 +550,6 @@ extern u8                    D_8014820C;
 extern Actor*                D_80148214[];
 /* D_8014828C */
 extern s32                   g_AreaGridActors[];
-extern u8                    D_80148331[];
 extern u8                    D_80148332[];
 extern u8                    D_8014865B;
 extern u8                    g_SndBankSe[SND_BANK_COUNT][124];

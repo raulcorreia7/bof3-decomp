@@ -23,7 +23,7 @@ _LOAD_ADDRESS_MIN = 0x80000000
 _LOAD_ADDRESS_MAX = 0x80200000
 #: Target identity is the folder id plus the layout; a manifest may not restate it.
 _DERIVED_KEYS = frozenset(
-    {"schema", "id", "disc_id", "kind", "binary", "splat", "load_address"}
+    {"schema", "id", "disc_id", "type", "binary", "splat", "load_address"}
 )
 
 
@@ -79,7 +79,7 @@ class CopyOverlay:
 class TargetManifest:
     id: TargetId
     disc_id: str
-    kind: str
+    type: str
     source_dir: str
     binary: str
     splat: str
@@ -93,11 +93,11 @@ class TargetManifest:
     outside_sources: tuple[str, ...] = ()
 
     def __post_init__(self) -> None:
-        if self.kind not in {"executable", "emi"}:
-            raise ValueError(f"unsupported target kind: {self.kind}")
-        if self.companions and self.kind != "emi":
+        if self.type not in {"executable", "emi"}:
+            raise ValueError(f"unsupported target type: {self.type}")
+        if self.companions and self.type != "emi":
             raise ValueError("only EMI targets may declare companion overlays")
-        if self.copies and self.kind != "emi":
+        if self.copies and self.type != "emi":
             raise ValueError("only EMI targets may declare copy payloads")
 
 
@@ -250,7 +250,7 @@ def _parse_companions(
             raise ValueError("companion overlay must be a table")
         target = normalize_target_id(str(value["target"]))
         disc_id = str(value["disc_id"])
-        if target.kind != "emi" or normalize_target_id(disc_id).value != target.value:
+        if target.type != "emi" or normalize_target_id(disc_id).value != target.value:
             raise ValueError(f"invalid companion overlay identity: {disc_id}")
         if target.value == caller.value:
             raise ValueError(
@@ -330,7 +330,7 @@ def _validate_companions(manifests: dict[str, TargetManifest]) -> None:
             if target is None:
                 raise ValueError(f"unknown companion overlay: {companion.target.value}")
             if (
-                target.kind != "emi"
+                target.type != "emi"
                 or target.disc_id != companion.disc_id
                 or target.load_address != companion.load_address
             ):
@@ -353,7 +353,7 @@ def _parse_copies(
             raise ValueError("copy must be a table")
         disc_id = str(value["disc_id"])
         target = normalize_target_id(disc_id)
-        if target.kind != "emi":
+        if target.type != "emi":
             raise ValueError(f"invalid copy target: {disc_id}")
         if target.value == caller.value:
             raise ValueError(f"copy cannot reference its own entry: {target.value}")
@@ -465,7 +465,7 @@ def _parse_target_manifest(path: Path, target_id: TargetId) -> TargetManifest:
         manifest = TargetManifest(
             id=target_id,
             disc_id=shipped_disc_id(target_id),
-            kind=target_id.kind,
+            type=target_id.type,
             source_dir=_manifest_path(facts.source_dir, "source_dir", path),
             binary=_manifest_path(facts.binary, "binary", path),
             splat=f"config/{target_id.value}/splat.yaml",
