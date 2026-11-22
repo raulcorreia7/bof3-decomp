@@ -95,18 +95,18 @@ static inline void Area_EnterMode1(void) {
 
 /* Takes mode 0xD once the party leader's x has reached `bound`, else the given mode; `actor` is the task the
  * dispatch visits. A statement macro: the member declares Actor* work. */
-#define AREA_SET_MODE_OR_FINISH(actor, bound, next_mode) \
-    work        = g_Task;                                \
-    g_Task      = (actor);                               \
-    g_GameState = g_Game.members;                        \
-    g_Task      = work;                                  \
-    TASK_SET(g_Game.members);                            \
-    g_Task = work;                                       \
-    if ((bound) >= g_Game.members[0].pos.x.fixed) {      \
-        work->header.mode = 0xD;                         \
-        g_Task->timer     = 0;                           \
-        return;                                          \
-    }                                                    \
+#define AREA_SET_MODE_OR_END(actor, bound, next_mode) \
+    work        = g_Task;                             \
+    g_Task      = (actor);                            \
+    g_GameState = g_Game.members;                     \
+    g_Task      = work;                               \
+    TASK_SET(g_Game.members);                         \
+    g_Task = work;                                    \
+    if ((bound) >= g_Game.members[0].pos.x.fixed) {   \
+        work->header.mode = 0xD;                      \
+        g_Task->timer     = 0;                        \
+        return;                                       \
+    }                                                 \
     work->header.mode = (next_mode)
 
 /* Claims an actor slot of the given kind for party member `member`, at its screen position, and stores the

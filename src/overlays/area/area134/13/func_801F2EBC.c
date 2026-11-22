@@ -5,5 +5,5 @@
 MATCH void func_801F2EBC(void) {
     Actor* work;
 
-    AREA_SET_MODE_OR_FINISH(g_Actors, FIELD(s32, D_801468BC, 0x0), 6);
+    AREA_SET_MODE_OR_END(g_Actors, FIELD(s32, D_801468BC, 0x0), 6);
 }

@@ -5,5 +5,5 @@
 MATCH void func_801F3A94(void) {
     Actor* work;
 
-    AREA_SET_MODE_OR_FINISH(&D_80146920, D_80146954, 0xC);
+    AREA_SET_MODE_OR_END(&D_80146920, D_80146954, 0xC);
 }
