@@ -8,7 +8,7 @@ MATCH void func_801F2D4C(void) {
     ACTOR_COUNT_DOWN(TASK(Actor), timer, timer);
     if (!(timer & BYTE_MASK)) {
         UI_MessageStartArea(MSG_AREA107_TIDE_LEVEL_CHANGED);
-        work              = g_Task;
+        work              = TASK(Actor);
         g_GameStateIndex  = GAME_REQUEST_MESSAGE;
         work->header.mode = 4;
     } else {

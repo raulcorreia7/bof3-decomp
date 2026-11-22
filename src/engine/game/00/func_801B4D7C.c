@@ -100,7 +100,7 @@ NON_MATCHING u8 func_801B4D7C(u8 wanted_code) {
                     val0                         = &g_ScratchPad;
                     g_ScratchPad.cells.halves[0] = val5;
                     val8                         = &g_ScratchPad + 2;
-                    SP_REF(void*, 0x2)           = COORD_INT(g_Task->pos.y);
+                    SP_REF(void*, 0x2)           = COORD_INT(TASK(Actor)->pos.y);
                 loop_20:
                     if ((Area_CellGetCode(g_ScratchPad.cells.halves[0], g_ScratchPad.cells.halves[1]) & BYTE_MASK) == (val6 & BYTE_MASK)) {
                         tmp18 = g_Task;
@@ -129,9 +129,9 @@ NON_MATCHING u8 func_801B4D7C(u8 wanted_code) {
                     if (val1 >= 2) {
                         val1 = val6 & BYTE_MASK;
                         val7 = 1;
-                        if (!(func_801B4BE4((g_Task->direction + 2) & 7, (u8)val1) & BYTE_MASK)) {
+                        if (!(func_801B4BE4((TASK(Actor)->direction + 2) & 7, (u8)val1) & BYTE_MASK)) {
                             val7 = 0;
-                            if (func_801B4BE4((g_Task->direction - 2) & 7, (u8)val1) & BYTE_MASK) {
+                            if (func_801B4BE4((TASK(Actor)->direction - 2) & 7, (u8)val1) & BYTE_MASK) {
                                 goto block_32; /* retail branch */
                             }
                         }
@@ -202,12 +202,12 @@ NON_MATCHING u8 func_801B4D7C(u8 wanted_code) {
                                 }
                                 goto loop_74; /* retail branch */
                             }
-                            g_Task->direction = FACING_RIGHT;
+                            TASK(Actor)->direction = FACING_RIGHT;
                             return 1U;
                         }
                         goto loop_71; /* retail branch */
                     }
-                    g_Task->direction = FACING_LEFT;
+                    TASK(Actor)->direction = FACING_LEFT;
                     return 1U;
                 }
                 return val7;
@@ -274,12 +274,12 @@ NON_MATCHING u8 func_801B4D7C(u8 wanted_code) {
                             }
                             goto loop_50; /* retail branch */
                         }
-                        g_Task->direction = FACING_DOWN;
+                        TASK(Actor)->direction = FACING_DOWN;
                         return 1U;
                     }
                     goto loop_47; /* retail branch */
                 }
-                g_Task->direction = FACING_UP;
+                TASK(Actor)->direction = FACING_UP;
                 return 1U;
             }
             return val7;
