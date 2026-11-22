@@ -8,17 +8,17 @@ MATCH void func_801E10C8(void) {
     PartyMember* owner;
     PartyMember* work;
 
-    count          = g_Task->unk_09 - 1;
-    g_Task->unk_09 = count;
+    count                     = TASK(PartyMember)->unk_09 - 1;
+    TASK(PartyMember)->unk_09 = count;
     if (count == 0) {
-        if (g_Task->unk_03 == 3) {
+        if (TASK(PartyMember)->unk_03 == 3) {
             g_Game.current->chr.equip.accessories[0] = ACCESSORY_NOTHING;
         }
-        if (g_Task->unk_03 == 5) {
+        if (TASK(PartyMember)->unk_03 == 5) {
             g_Game.current->chr.equip.armor = ARMOR_NOTHING;
             func_801E0B64();
         }
-        if (g_Task->unk_03 == 6) {
+        if (TASK(PartyMember)->unk_03 == 6) {
             g_Game.current->chr.equip.accessories[1] = ACCESSORY_NOTHING;
         }
         current = g_Game.current;
@@ -36,12 +36,12 @@ MATCH void func_801E10C8(void) {
         if (g_Battle.outcome.event_flags == 0) {
             Battle_OpenPanel();
             cue = 0x3B;
-            if (g_Task->unk_03 == 5) {
+            if (TASK(PartyMember)->unk_03 == 5) {
                 cue = 0x2E;
             }
             Battle_QueueEvent(2, 0, 0, 45, UI_MessageGetText(cue));
         }
-        g_Task->unk_03 = 2;
+        TASK(PartyMember)->unk_03 = 2;
         func_801DEDE4();
     }
 }

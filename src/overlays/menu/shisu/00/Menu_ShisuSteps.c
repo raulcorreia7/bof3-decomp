@@ -244,51 +244,50 @@ NON_MATCHING void func_801D1964(void) {
 INCLUDE_ASM(func_801D1964);
 #endif
 
-#ifdef NON_MATCHING
 /* Fades the six tint channels up to the fade level. */
-NON_MATCHING void func_801D1A20(void) {
+MATCH void func_801D1A20(void) {
+    u8  base2;
+    u8  base1;
+    u8  base0;
+    u8  topping2;
+    u8  topping1;
+    u8  topping0;
+    u8  level;
     u8* fade;
-    s32 level;
-    u16 value0;
-    u16 value1;
-    u16 value2;
-    u16 value3;
-    u16 value4;
-    u16 value5;
 
-    fade   = &D_80148654;
-    level  = *fade;
-    value0 = D_801D9EF0[0];
-    if (value0 < (u8)level) {
-        value0 = level;
+    fade     = &D_80148654;
+    level    = *fade;
+    topping0 = D_801D9EF0[0];
+    if (topping0 < level) {
+        topping0 = level;
     }
-    g_ShisuTopping[0] = value0;
-    value1            = D_801D9EF0[1];
-    if (value1 < (u8)level) {
-        value1 = level;
+    g_ShisuTopping[0] = topping0;
+    topping1          = D_801D9EF0[1];
+    if (topping1 < level) {
+        topping1 = level;
     }
-    g_ShisuTopping[1] = value1;
-    value2            = D_801D9EF0[2];
-    if (value2 < (u8)level) {
-        value2 = level;
+    g_ShisuTopping[1] = topping1;
+    topping2          = D_801D9EF0[2];
+    if (topping2 < level) {
+        topping2 = level;
     }
-    g_ShisuTopping[2] = value2;
-    value3            = D_801D9EF4[0];
-    if (value3 < (u8)level) {
-        value3 = level;
+    g_ShisuTopping[2] = topping2;
+    base0             = D_801D9EF4[0];
+    if (base0 < level) {
+        base0 = level;
     }
-    g_ShisuBase[0] = value3;
-    value4         = D_801D9EF4[1];
-    if (value4 < (u8)level) {
-        value4 = level;
+    g_ShisuBase[0] = base0;
+    base1          = D_801D9EF4[1];
+    if (base1 < level) {
+        base1 = level;
     }
-    g_ShisuBase[1] = value4;
-    value5         = D_801D9EF4[2];
-    if (value5 < (u8)level) {
-        value5 = level;
+    g_ShisuBase[1] = base1;
+    base2          = D_801D9EF4[2];
+    if (base2 < level) {
+        base2 = level;
     }
-    g_ShisuBase[2] = value5;
-    if ((u8)level == 0x80) {
+    g_ShisuBase[2] = base2;
+    if (level == 0x80) {
         SND_SEPlay(0x200);
     }
     *fade = *fade + 8;
@@ -297,58 +296,22 @@ NON_MATCHING void func_801D1A20(void) {
         D_80148652 += 1;
     }
 }
-#else
-INCLUDE_ASM(func_801D1A20);
-#endif
 
-#ifdef NON_MATCHING
-NON_MATCHING void func_801D1B58(void) {
+/* Fades the topping and base tints down to their own colours, 8 levels a frame, then opens the next round. */
+MATCH void func_801D1B58(void) {
     u8* fade;
     u8  level;
-    u8  value0;
-    u8  value1;
-    u8  value2;
-    u8  value3;
-    u8  value4;
-    u8  value5;
 
-    fade  = &D_80148654;
-    level = *fade;
-
-    value0 = D_801D9EF0[0];
-    if (value0 < level) {
-        value0 = level;
-    }
-    g_ShisuTopping[0] = value0;
-    value1            = D_801D9EF0[1];
-    if (value1 < level) {
-        value1 = level;
-    }
-    g_ShisuTopping[1] = value1;
-    value2            = D_801D9EF0[2];
-    if (value2 < level) {
-        value2 = level;
-    }
-    g_ShisuTopping[2] = value2;
-    value3            = D_801D9EF4[0];
-    if (value3 < level) {
-        value3 = level;
-    }
-    g_ShisuBase[0] = value3;
-    value4         = D_801D9EF4[1];
-    if (value4 < level) {
-        value4 = level;
-    }
-    g_ShisuBase[1] = value4;
-    value5         = D_801D9EF4[2];
-    if (value5 < level) {
-        value5 = level;
-    }
-    g_ShisuBase[2] = value5;
-
-    level -= 8;
-    *fade = level;
-    if ((u8)level == 0) {
+    fade              = &D_80148654;
+    level             = *fade;
+    g_ShisuTopping[0] = (D_801D9EF0[0] < level) ? level : D_801D9EF0[0];
+    g_ShisuTopping[1] = (D_801D9EF0[1] < level) ? level : D_801D9EF0[1];
+    g_ShisuTopping[2] = (D_801D9EF0[2] < level) ? level : D_801D9EF0[2];
+    g_ShisuBase[0]    = (D_801D9EF4[0] < level) ? level : D_801D9EF4[0];
+    g_ShisuBase[1]    = (D_801D9EF4[1] < level) ? level : D_801D9EF4[1];
+    g_ShisuBase[2]    = (D_801D9EF4[2] < level) ? level : D_801D9EF4[2];
+    *fade             = level - 8;
+    if (*fade == 0) {
         D_801DA0C1        = 5;
         D_801DA049        = 1;
         D_80148652        = 0;
@@ -358,13 +321,10 @@ NON_MATCHING void func_801D1B58(void) {
         g_ShisuBase[0]    = D_801D9EF4[0];
         g_ShisuBase[1]    = D_801D9EF4[1];
         g_ShisuBase[2]    = D_801D9EF4[2];
-        g_ShisuIngredients.rounds += 1;
+        g_ShisuIngredients.rounds++;
         D_80148651 -= 2;
     }
 }
-#else
-INCLUDE_ASM(func_801D1B58);
-#endif
 
 MATCH void func_801D1CA4(void) {
     g_ShisuIngredients.held[0] = Item_Count(ITEM_CATEGORY_ITEM, ITEM_MACKEREL, 0);

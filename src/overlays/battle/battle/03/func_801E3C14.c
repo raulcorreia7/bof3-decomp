@@ -21,7 +21,7 @@ MATCH void func_801E3C14(void) {
 
     D_801463DA                               = 0;
     g_Battle.pending_status                  = 0;
-    slot                                     = g_Task->slot;
+    slot                                     = TASK(PartyMember)->slot;
     self                                     = g_BattleCurrentEnemy;
     D_8014639C                               = g_Task;
     g_Battle.target_record                   = &self->turn;
@@ -46,7 +46,7 @@ MATCH void func_801E3C14(void) {
     }
     lock_work = g_BattleCurrentEnemy;
     if ((lock_work->turn.target_flags & BATTLE_HIT_HP) && lock_work->turn.hp_change == 0) {
-        g_Task->header.step = 3;
+        TASK(PartyMember)->header.step = 3;
         return;
     }
     if (!(g_BattleCurrentEnemy->turn.damage_flags.value & BATTLER_DAMAGE_ROW_PRESENT)) {
@@ -62,11 +62,11 @@ MATCH void func_801E3C14(void) {
     }
     hit_work = g_BattleCurrentEnemy;
     if (hit_work->turn.target_flags & BATTLE_HIT_HP) {
-        Battle_QueueAction(hit_work->turn.hp_change, g_Task->slot);
+        Battle_QueueAction(hit_work->turn.hp_change, TASK(PartyMember)->slot);
         hit_work = g_BattleCurrentEnemy;
     }
     if (hit_work->turn.target_flags & BATTLE_HIT_AP) {
-        func_800AAEBC(hit_work->turn.ap_change, g_Task->slot);
+        func_800AAEBC(hit_work->turn.ap_change, TASK(PartyMember)->slot);
     }
     pending = &g_Battle.pending_status;
     g_BattleCurrentEnemy->status |= *pending;
@@ -75,7 +75,7 @@ MATCH void func_801E3C14(void) {
     tail_work = g_BattleCurrentEnemy;
     if (tail_work->turn.hp_change > 0) {
         if (tail_work->hp == 0) {
-            g_Task->unk_09 = 0;
+            TASK(PartyMember)->unk_09 = 0;
             if (g_Battle.flags & BATTLE_STATE_CRITICAL) {
                 GFX_PaletteAllocFade(g_Task, 16, 16, 16, 0);
             }
@@ -101,5 +101,5 @@ MATCH void func_801E3C14(void) {
     flags = &g_Battle.flags;
     *flags &= ~0x80;
     Battle_IsEnemyBlocked();
-    g_Task->unk_03 += 1;
+    TASK(PartyMember)->unk_03 += 1;
 }

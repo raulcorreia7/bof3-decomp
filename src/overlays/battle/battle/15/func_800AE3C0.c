@@ -8,7 +8,7 @@ MATCH void func_800AE3C0(void) {
     counter      = work->unk_09 - 1;
     work->unk_09 = counter;
     if (counter == -6) {
-        BATTLE_WORK->header.mode++;
+        TASK(PartyMember)->header.mode++;
     }
-    Area_PaletteUpdateTint((s8)BATTLE_WORK->unk_09);
+    Area_PaletteUpdateTint((s8)TASK(PartyMember)->unk_09);
 }

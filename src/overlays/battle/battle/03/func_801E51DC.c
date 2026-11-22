@@ -8,7 +8,7 @@ MATCH void func_801E51DC(void) {
     volatile u8* timer;
     u8           count;
 
-    Battle_CancelTurn(g_Task->slot);
+    Battle_CancelTurn(TASK(PartyMember)->slot);
     timer  = &g_Battle.living_enemy_count;
     count  = *timer - 1;
     *timer = count;
@@ -16,7 +16,7 @@ MATCH void func_801E51DC(void) {
         g_BattleResult |= BATTLE_RESULT_VICTORY;
     }
     GFX_PaletteFreeFadeTarget((void*)g_Task);
-    Battle_ClearSlotPending(g_Task->slot);
+    Battle_ClearSlotPending(TASK(PartyMember)->slot);
     g_BattleMessageState = 2;
     func_801DE804();
     func_800ACFF4();

@@ -4,6 +4,6 @@ MATCH void Effect_AddActor(void) {
     Script_AnimStepLoop();
     Area_AddActor();
     if (g_Battle.flags & BATTLE_STATE_EFFECT_PLAYING) {
-        g_Task->header.step++;
+        TASK(PartyMember)->header.step++;
     }
 }

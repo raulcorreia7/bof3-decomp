@@ -5,12 +5,12 @@ MATCH void func_800AD71C(void) {
     s16                   label;
     u8                    count;
 
-    BATTLE_WORK->unk_29 = 1;
-    BATTLE_WORK->unk_25 = 0x1E;
-    BATTLE_WORK->unk_26 = 0;
-    BATTLE_WORK->unk_24 = 0x80;
-    BATTLE_WORK->unk_27 = 0x1B;
-    BATTLE_WORK->unk_28 = 1;
+    TASK(PartyMember)->unk_29 = 1;
+    TASK(PartyMember)->unk_25 = 0x1E;
+    TASK(PartyMember)->unk_26 = 0;
+    TASK(PartyMember)->unk_24 = 0x80;
+    TASK(PartyMember)->unk_27 = 0x1B;
+    TASK(PartyMember)->unk_28 = 1;
     {
         PartyMember* record;
         PartyMember* other;

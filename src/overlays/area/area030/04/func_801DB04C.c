@@ -3,7 +3,7 @@
 /* Latches the rod row's +0x07 speed while the step timer counts down and its
  * cursor return speed otherwise. */
 MATCH void func_801DB04C(void) {
-    if (FISHING_STATE->step_timer != 0) {
+    if (TASK(FishingState)->step_timer != 0) {
         D_801E31F8 = 2;
         D_8014421C = g_FishingRodRow->unk_07;
     } else {

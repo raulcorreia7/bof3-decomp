@@ -9,10 +9,10 @@ __asm__(".include \"include/match/macro.inc\"\n");
 MATCH void func_801EEC7C(void) {
     PartyMember* work;
 
-    g_Task->unk_09    = 8;
-    g_Task->timer     = 4;
-    work              = g_Task;
-    work->header.mode = work->header.mode + 1;
+    TASK(PartyMember)->unk_09 = 8;
+    TASK(PartyMember)->timer  = 4;
+    work                      = g_Task;
+    work->header.mode         = work->header.mode + 1;
 }
 
 MATCH void func_801EECBC(void) {
@@ -20,7 +20,7 @@ MATCH void func_801EECBC(void) {
     u8           index;
     s32          x;
 
-    if (g_Task->timer-- != 0) {
+    if (TASK(PartyMember)->timer-- != 0) {
         return;
     }
 
@@ -34,17 +34,17 @@ MATCH void func_801EECBC(void) {
     g_BattleEffects[index].screen_x   = x;
     g_BattleEffects[index].screen_y   = g_Battle.selected_actor->screen_y.value - (rand() & 0x1F);
     g_BattleEffects[index].depth      = g_Battle.selected_actor->depth;
-    g_BattleEffects[index].arg.unk_09 = g_Task->unk_09;
-    if (g_Task->unk_09-- != 0) {
-        g_Task->timer = 8;
+    g_BattleEffects[index].arg.unk_09 = TASK(PartyMember)->unk_09;
+    if (TASK(PartyMember)->unk_09-- != 0) {
+        TASK(PartyMember)->timer = 8;
     } else {
-        g_Task->timer = 0x2D;
-        g_Task->header.mode++;
+        TASK(PartyMember)->timer = 0x2D;
+        TASK(PartyMember)->header.mode++;
     }
 }
 
 MATCH void func_801EEE30(void) {
-    if (g_Task->timer-- == 0) {
+    if (TASK(PartyMember)->timer-- == 0) {
         Battle_MarkDamaged(g_Battle.target_selector);
         g_Battle.flags |= BATTLE_STATE_EFFECT_PLAYING;
         Effect_Reset();
@@ -55,15 +55,15 @@ MATCH void func_801EEE94(void) {
     Callback handlers[2];
 
     handlers[0] = func_801EEEE0;
-    handlers[g_Task->header.mode]();
+    handlers[TASK(PartyMember)->header.mode]();
 }
 
 MATCH void func_801EEEE0(void) {
     Magic052Steps handlers = D_801EEC10;
 
     g_Scripts = BATTLE_SCRIPT_TABLE;
-    SYS_DISPATCH_BYTE(handlers.steps, g_Task->header.step);
-    if (g_Task->header.flags != 0) {
+    SYS_DISPATCH_BYTE(handlers.steps, TASK(PartyMember)->header.step);
+    if (TASK(PartyMember)->header.flags != 0) {
         Area_AddGridActor();
     }
     g_Scripts = AREA_SCRIPT_TABLE;
@@ -74,17 +74,17 @@ MATCH void func_801EEF84(void) {
     s32          cue;
     u8           timer;
 
-    g_Task->unk_29     = 0;
-    g_Task->unk_25     = 0x1D;
-    g_Task->unk_26     = 0;
-    g_Task->unk_24     = 0x84;
-    g_Task->unk_27     = 0xB4;
-    g_Task->unk_28     = 0;
-    work               = g_Task;
-    work->unk_2B       = 0;
-    work->unk_2C.value = 0;
-    g_Task->unk_2A     = 0;
-    timer              = g_Task->unk_09;
+    TASK(PartyMember)->unk_29 = 0;
+    TASK(PartyMember)->unk_25 = 0x1D;
+    TASK(PartyMember)->unk_26 = 0;
+    TASK(PartyMember)->unk_24 = 0x84;
+    TASK(PartyMember)->unk_27 = 0xB4;
+    TASK(PartyMember)->unk_28 = 0;
+    work                      = g_Task;
+    work->unk_2B              = 0;
+    work->unk_2C.value        = 0;
+    TASK(PartyMember)->unk_2A = 0;
+    timer                     = TASK(PartyMember)->unk_09;
     if (timer != 0) {
         cue = 0x100;
         if (timer & 0x1) {
@@ -95,7 +95,7 @@ MATCH void func_801EEF84(void) {
     }
     SND_SEQueueSelection(cue);
     Script_Select(5U);
-    g_Task->header.step += 1;
+    TASK(PartyMember)->header.step += 1;
 }
 
 MATCH void func_801EF070(void) {

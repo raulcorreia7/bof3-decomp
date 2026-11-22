@@ -43,10 +43,10 @@ MATCH void func_801EECE4(void) {
     work->pos.y.fixed = g_Battle.selected_actor->pos.y.fixed;
     /* FAKE: retail re-reads the selected actor for the next copy. */
     FAKE_BARRIER();
-    work->pos.z.fixed  = g_Battle.selected_actor->pos.z.fixed + TO_COORD(256);
-    work->param.unk_0B = 0;
-    g_Task->unk_09     = 0;
-    g_Task->header.mode += 1;
+    work->pos.z.fixed         = g_Battle.selected_actor->pos.z.fixed + TO_COORD(256);
+    work->param.unk_0B        = 0;
+    TASK(PartyMember)->unk_09 = 0;
+    TASK(PartyMember)->header.mode += 1;
     for (i = 0; i < 96; i++) {
         slot                  = func_801EF914();
         row                   = slot << 5;
@@ -56,7 +56,7 @@ MATCH void func_801EECE4(void) {
         growth                = ((i >> 1) & 0x70) + (rand() & 0xF) + 1;
         D_801EF9F8[row + 10]  = growth;
         D_801EF9F8[row + 8]   = 0x40 - growth;
-        g_Task->param.unk_0B += 1;
+        TASK(PartyMember)->param.unk_0B += 1;
     }
     SND_SEQueueSelection(0x100);
     SND_SEQueueSelection(0x101);

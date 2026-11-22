@@ -10,14 +10,14 @@ MATCH void func_801E38C0(void) {
     u8           sprite;
     u8           value;
 
-    offset                                     = g_Task->unk_07 * sizeof(PaletteFade);
+    offset                                     = TASK(PartyMember)->unk_07 * sizeof(PaletteFade);
     entry                                      = (PaletteFade*)((u8*)g_PaletteFades + offset);
     sprite                                     = D_80146308;
     entry->offset.b                            = sprite;
     entry->offset.g                            = sprite;
     *((u8*)&g_PaletteFades->offset.r + offset) = sprite;
-    if ((g_Battle.selection_latch == 0) || (((value = g_BattleActorTurn->command.target) != g_Task->slot) && ((value & BATTLE_TARGET_ENEMY_SIDE) == 0))) {
-        GFX_PaletteFreeFade(g_Task->unk_07);
-        g_Task->header.step = 0;
+    if ((g_Battle.selection_latch == 0) || (((value = g_BattleActorTurn->command.target) != TASK(PartyMember)->slot) && ((value & BATTLE_TARGET_ENEMY_SIDE) == 0))) {
+        GFX_PaletteFreeFade(TASK(PartyMember)->unk_07);
+        TASK(PartyMember)->header.step = 0;
     }
 }

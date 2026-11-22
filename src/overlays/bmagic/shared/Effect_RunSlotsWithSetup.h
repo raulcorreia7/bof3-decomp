@@ -7,7 +7,7 @@ MATCH void func_801EEC04(void) {
     PartyMember* saved_battler;
     u8           i;
 
-    SYS_DISPATCH_BYTE(handlers, g_Task->header.mode);
+    SYS_DISPATCH_BYTE(handlers, TASK(PartyMember)->header.mode);
 
     for (i = 0; i < BMAGIC_EFFECT_COUNT; i++) {
         if (BMAGIC_EFFECT_SLOTS[i].header.flags & BMAGIC_EFFECT_IN_USE) {

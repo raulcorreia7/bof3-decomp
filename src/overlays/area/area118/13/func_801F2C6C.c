@@ -1,7 +1,7 @@
 #include "area118_13.h"
 
-#ifdef NON_MATCHING
-NON_MATCHING void func_801F2C6C(void) {
+/* Runs the scene clock while the field is free: a tick every 30 frames (40 in phase 1); 15 ticks step the task. */
+MATCH void func_801F2C6C(void) {
     u16 clock;
     u8  phase;
     u8  frames;
@@ -25,25 +25,19 @@ NON_MATCHING void func_801F2C6C(void) {
         return;
     }
 
+    /* The packed word stays raw: bit-fields write each field back and grow the body. */
     clock  = D_801F59E4;
     phase  = clock >> 15;
     frames = (clock & 0x7F00) >> 8;
     tick   = clock;
     frames++;
-    if (phase == 0) {
-        if (frames >= 0x1E) {
-            frames = 0;
-            tick++;
-        }
-    } else if (frames >= 0x28) {
+    if ((phase == 0 && frames >= 30) || (phase != 0 && frames >= 40)) {
         frames = 0;
         tick++;
     }
-    D_801F59E4 = tick | (frames << 8) | (phase << 15);
-    if (tick >= 0xF) {
+    clock      = (phase << 15) | (frames << 8) | tick;
+    D_801F59E4 = clock;
+    if ((clock & 0xFF) >= 15) {
         g_Task->header.mode++;
     }
 }
-#else
-INCLUDE_ASM(func_801F2C6C);
-#endif

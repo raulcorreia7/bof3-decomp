@@ -2,8 +2,8 @@
 
 MATCH void func_801E1D1C(void) {
     if (EMI_IsReady() != 0) {
-        Script_Request(g_Task->facing + 0x24u);
+        Script_Request(TASK(PartyMember)->facing + 0x24u);
         Battle_IsPartyMemberBlocked();
-        g_Task->header.step += 1;
+        TASK(PartyMember)->header.step += 1;
     }
 }

@@ -10,7 +10,7 @@ MATCH void func_801EEC10(void) {
     PartyMember*  saved_battler;
     u8            i;
 
-    SYS_DISPATCH_BYTE(handlers.steps, g_Task->header.mode);
+    SYS_DISPATCH_BYTE(handlers.steps, TASK(PartyMember)->header.mode);
 
     BMAGIC_RUN_EFFECT_SLOTS(D_801EF9F4, func_801EF2FC);
 }
@@ -24,9 +24,9 @@ MATCH void func_801EED18(void) {
     u8           i;
 
     BMAGIC_CLEAR_EFFECTS(i);
-    g_Task->param.unk_0B = 0;
-    g_Task->unk_09       = 8;
-    g_Task->header.mode++;
+    TASK(PartyMember)->param.unk_0B = 0;
+    TASK(PartyMember)->unk_09       = 8;
+    TASK(PartyMember)->header.mode++;
     if (g_Battle.target_selector & BATTLE_TARGET_ENEMY_SIDE) {
         for (i = 0; i < 8; i++) {
             index = i + 3;
@@ -36,9 +36,9 @@ MATCH void func_801EED18(void) {
                 g_BattleEffects[slot].header.mode  = 0;
                 g_BattleEffects[slot].unk_04       = index;
                 g_BattleEffects[slot].target.party = owner;
-                g_BattleEffects[slot].unk_0B       = g_Task->param.unk_0B;
-                g_BattleEffects[slot].arg.unk_09   = (g_Task->param.unk_0B << 4) + 1;
-                g_Task->param.unk_0B++;
+                g_BattleEffects[slot].unk_0B       = TASK(PartyMember)->param.unk_0B;
+                g_BattleEffects[slot].arg.unk_09   = (TASK(PartyMember)->param.unk_0B << 4) + 1;
+                TASK(PartyMember)->param.unk_0B++;
             }
         }
     } else {
@@ -49,9 +49,9 @@ MATCH void func_801EED18(void) {
                 g_BattleEffects[slot].header.mode  = 0;
                 g_BattleEffects[slot].unk_04       = i;
                 g_BattleEffects[slot].target.party = owner;
-                g_BattleEffects[slot].unk_0B       = g_Task->param.unk_0B;
-                g_BattleEffects[slot].arg.unk_09   = (g_Task->param.unk_0B << 4) + 1;
-                g_Task->param.unk_0B++;
+                g_BattleEffects[slot].unk_0B       = TASK(PartyMember)->param.unk_0B;
+                g_BattleEffects[slot].arg.unk_09   = (TASK(PartyMember)->param.unk_0B << 4) + 1;
+                TASK(PartyMember)->param.unk_0B++;
             }
         }
     }
@@ -83,18 +83,18 @@ MATCH void func_801EF0D4(void) {
     u8           slot;
     u8           i;
 
-    if (--g_Task->unk_09 == 0) {
+    if (--TASK(PartyMember)->unk_09 == 0) {
         if (g_Battle.target_selector & BATTLE_TARGET_ENEMY_SIDE) {
-            battler = (PartyMember*)(g_BattleEnemies + g_Task->unk_04 * BATTLE_ENEMY_STRIDE);
+            battler = (PartyMember*)(g_BattleEnemies + TASK(PartyMember)->unk_04 * BATTLE_ENEMY_STRIDE);
         } else {
-            battler = &g_Game.members[g_Task->unk_04];
+            battler = &g_Game.members[TASK(PartyMember)->unk_04];
         }
         SND_SEQueueSelection(0x100);
-        g_Task->facing = battler->facing;
-        task           = g_Task;
+        TASK(PartyMember)->facing = battler->facing;
+        task                      = g_Task;
         WorldPos_Copy(&task->pos, &battler->pos);
         task->param.unk_0B = 0;
-        g_Task->header.step++;
+        TASK(PartyMember)->header.step++;
         for (i = 0; i < 3; i++) {
             slot = BMagic_AllocEffect();
             if (slot != 0xFF) {
@@ -103,10 +103,10 @@ MATCH void func_801EF0D4(void) {
                 BMAGIC_EFFECT_SLOTS[slot].unk_0B       = i;
                 BMAGIC_EFFECT_SLOTS[slot].arg.unk_09   = i * 2 + 1;
                 BMAGIC_EFFECT_SLOTS[slot].target.party = owner;
-                g_Task->param.unk_0B++;
+                TASK(PartyMember)->param.unk_0B++;
             }
         }
-        Battle_ApplyDamageFlags(g_Task->unk_04, 0x10);
+        Battle_ApplyDamageFlags(TASK(PartyMember)->unk_04, 0x10);
     }
 }
 
@@ -117,8 +117,8 @@ MATCH void func_801EF2FC(void) {
 }
 
 MATCH void func_801EF340(void) {
-    SYS_DISPATCH_BYTE(D_801EF9C4, g_Task->header.step);
-    if (g_Task->header.flags != 0 && g_Task->header.step != 0) {
+    SYS_DISPATCH_BYTE(D_801EF9C4, TASK(PartyMember)->header.step);
+    if (TASK(PartyMember)->header.flags != 0 && TASK(PartyMember)->header.step != 0) {
         Effect_DrawTexturedQuad();
     }
 }
@@ -127,21 +127,21 @@ MATCH void func_801EF3B8(void) {
     PartyMember* battler;
     PartyMember* work;
 
-    if (--g_Task->unk_09 == 0) {
-        g_Task->facing = g_BattleEffectBattler->facing;
-        battler        = g_BattleEffectBattler;
-        work           = g_Task;
+    if (--TASK(PartyMember)->unk_09 == 0) {
+        TASK(PartyMember)->facing = g_BattleEffectBattler->facing;
+        battler                   = g_BattleEffectBattler;
+        work                      = g_Task;
         WorldPos_Copy(&work->pos, &battler->pos);
         work->unk_0C = D_801EF9D0[work->param.unk_0B].x;
         work->unk_10 = D_801EF9D0[work->param.unk_0B].y;
         Effect_RotatePosition(work);
-        g_Task->pos.x.fixed += g_Task->unk_0C;
-        g_Task->pos.y.fixed += g_Task->unk_10;
-        g_Task->pos.z.fixed += D_801EF9D0[g_Task->param.unk_0B].z;
+        TASK(PartyMember)->pos.x.fixed += TASK(PartyMember)->unk_0C;
+        TASK(PartyMember)->pos.y.fixed += TASK(PartyMember)->unk_10;
+        TASK(PartyMember)->pos.z.fixed += D_801EF9D0[TASK(PartyMember)->param.unk_0B].z;
         Battle_ProjectRange();
-        g_Task->unk_09 = 0;
-        g_Task->timer  = 0;
-        g_Task->header.step++;
+        TASK(PartyMember)->unk_09 = 0;
+        TASK(PartyMember)->timer  = 0;
+        TASK(PartyMember)->header.step++;
     }
 }
 

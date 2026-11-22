@@ -20,5 +20,5 @@ MATCH void func_800AD5C8(void) {
             i++;
         } while (i < g_Battle.gene_count);
     }
-    BATTLE_WORK->header.step--;
+    TASK(PartyMember)->header.step--;
 }

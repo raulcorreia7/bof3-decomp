@@ -11,27 +11,27 @@ MATCH void func_801D29BC(void) {
 
     world = D_80140000;
 
-    FISHING_STATE->active_flags   = world[0x3FECu];
-    FISHING_STATE->saved_25       = world[0x3FEDu];
-    FISHING_STATE->saved_26       = world[0x3FEEu];
-    FISHING_STATE->saved_value_27 = world[0x3FEFu];
-    FISHING_STATE->saved_value_28 = world[0x3FF0u];
-    FISHING_STATE->state_29       = 5;
+    TASK(FishingState)->active_flags   = world[0x3FECu];
+    TASK(FishingState)->saved_25       = world[0x3FEDu];
+    TASK(FishingState)->saved_26       = world[0x3FEEu];
+    TASK(FishingState)->saved_value_27 = world[0x3FEFu];
+    TASK(FishingState)->saved_value_28 = world[0x3FF0u];
+    TASK(FishingState)->state_29       = 5;
 
-    work                     = TASK(volatile u8);
-    work[0x48u]              = 0;
-    ((u32*)work)[0x3Cu / 4u] = 0;
-    FISHING_STATE->unk_5C    = 0;
+    work                       = TASK(volatile u8);
+    work[0x48u]                = 0;
+    ((u32*)work)[0x3Cu / 4u]   = 0;
+    TASK(FishingState)->unk_5C = 0;
 
-    FISHING_STATE->tint_5D = -100;
-    FISHING_STATE->tint_5E = -100;
-    FISHING_STATE->tint_5F = -100;
-    FISHING_STATE->unk_60  = 0;
-    FISHING_STATE->unk_64  = 0;
-    FISHING_STATE->unk_68  = 0;
-    FISHING_STATE->unk_6C  = 0;
+    TASK(FishingState)->tint_5D = -100;
+    TASK(FishingState)->tint_5E = -100;
+    TASK(FishingState)->tint_5F = -100;
+    TASK(FishingState)->unk_60  = 0;
+    TASK(FishingState)->unk_64  = 0;
+    TASK(FishingState)->unk_68  = 0;
+    TASK(FishingState)->unk_6C  = 0;
 
     func_801D2AE0();
 
-    FISHING_STATE->handler_index += 1;
+    TASK(FishingState)->handler_index += 1;
 }

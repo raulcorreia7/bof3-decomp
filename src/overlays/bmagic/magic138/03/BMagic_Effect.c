@@ -22,10 +22,10 @@ MATCH void func_801EEC88(void) {
     for (; i < 16; i++) {
         dst[i] = src[i];
     }
-    g_GfxPalettePending  = 1;
-    g_Task->param.unk_0B = 0;
-    g_Task->unk_09       = 0;
-    saved_work           = g_Task;
+    g_GfxPalettePending             = 1;
+    TASK(PartyMember)->param.unk_0B = 0;
+    TASK(PartyMember)->unk_09       = 0;
+    saved_work                      = g_Task;
     TASK_SET(g_BattleEffectBattler);
     Script_AnimStepLoop();
     TASK_SET(saved_work);
@@ -43,16 +43,16 @@ MATCH void func_801EED60(void) {
             g_BattleEffects[slot].header.step = 0;
             g_BattleEffects[slot].screen_x    = 220;
             g_BattleEffects[slot].screen_y    = 250;
-            if (g_Task->unk_09 & 1) {
+            if (TASK(PartyMember)->unk_09 & 1) {
                 g_BattleEffects[slot].screen_x += 20;
             }
-            g_BattleEffects[slot].unk_0A       = g_Task->unk_09;
+            g_BattleEffects[slot].unk_0A       = TASK(PartyMember)->unk_09;
             g_BattleEffects[slot].target.party = g_Task;
-            g_Task->unk_09 += 1;
-            g_Task->param.unk_0B += 1;
+            TASK(PartyMember)->unk_09 += 1;
+            TASK(PartyMember)->param.unk_0B += 1;
         }
-        if (g_Task->unk_09 == 6) {
-            g_Task->header.mode += 1;
+        if (TASK(PartyMember)->unk_09 == 6) {
+            TASK(PartyMember)->header.mode += 1;
         }
         saved_work = g_Task;
         TASK_SET(g_BattleEffectBattler);
@@ -84,7 +84,7 @@ MATCH void func_801EEFA4(void) {
     handlers  = D_801EEC10;
     g_Scripts = BMAGIC_SCRIPT_TABLE;
     SYS_DISPATCH_TASK(handlers.steps, 2, g_Task);
-    if (g_Task->header.flags & 0x1) {
+    if (TASK(PartyMember)->header.flags & 0x1) {
         Area_AddActor();
     }
     g_Scripts = AREA_SCRIPT_TABLE;
@@ -95,74 +95,74 @@ MATCH void func_801EF04C(void) {
 
     if (g_Battle.active_battler < 3) {
         if (g_BattleEffectBattler->unk_09 & 1) {
-            left           = g_Task->screen_x.signed_value - 40;
-            g_Task->unk_0C = ((g_Game.members[g_Battle.active_battler].screen_x.signed_value - left) << 4) / 8;
-            g_Task->unk_10 = ((g_Game.members[g_Battle.active_battler].screen_y.signed_value - g_Task->screen_y.signed_value) << 4) / 8;
+            left                      = TASK(PartyMember)->screen_x.signed_value - 40;
+            TASK(PartyMember)->unk_0C = ((g_Game.members[g_Battle.active_battler].screen_x.signed_value - left) << 4) / 8;
+            TASK(PartyMember)->unk_10 = ((g_Game.members[g_Battle.active_battler].screen_y.signed_value - TASK(PartyMember)->screen_y.signed_value) << 4) / 8;
         } else {
-            left           = g_Task->screen_x.signed_value - 20;
-            g_Task->unk_0C = ((g_Game.members[g_Battle.active_battler].screen_x.signed_value - left) << 4) / 8;
-            g_Task->unk_10 = ((g_Game.members[g_Battle.active_battler].screen_y.signed_value - g_Task->screen_y.signed_value) << 4) / 8;
+            left                      = TASK(PartyMember)->screen_x.signed_value - 20;
+            TASK(PartyMember)->unk_0C = ((g_Game.members[g_Battle.active_battler].screen_x.signed_value - left) << 4) / 8;
+            TASK(PartyMember)->unk_10 = ((g_Game.members[g_Battle.active_battler].screen_y.signed_value - TASK(PartyMember)->screen_y.signed_value) << 4) / 8;
         }
     } else {
         if (g_BattleEffectBattler->unk_09 & 1) {
-            left           = g_Task->screen_x.signed_value - 40;
-            g_Task->unk_0C = ((g_BattleEnemyBattlers[g_Battle.active_battler - 3].screen_x - left) << 4) / 8;
-            g_Task->unk_10 = ((g_BattleEnemyBattlers[g_Battle.active_battler - 3].screen_y - g_Task->screen_y.signed_value) << 4) / 8;
+            left                      = TASK(PartyMember)->screen_x.signed_value - 40;
+            TASK(PartyMember)->unk_0C = ((g_BattleEnemyBattlers[g_Battle.active_battler - 3].screen_x - left) << 4) / 8;
+            TASK(PartyMember)->unk_10 = ((g_BattleEnemyBattlers[g_Battle.active_battler - 3].screen_y - TASK(PartyMember)->screen_y.signed_value) << 4) / 8;
         } else {
-            left           = g_Task->screen_x.signed_value - 20;
-            g_Task->unk_0C = ((g_BattleEnemyBattlers[g_Battle.active_battler - 3].screen_x - left) << 4) / 8;
-            g_Task->unk_10 = ((g_BattleEnemyBattlers[g_Battle.active_battler - 3].screen_y - g_Task->screen_y.signed_value) << 4) / 8;
+            left                      = TASK(PartyMember)->screen_x.signed_value - 20;
+            TASK(PartyMember)->unk_0C = ((g_BattleEnemyBattlers[g_Battle.active_battler - 3].screen_x - left) << 4) / 8;
+            TASK(PartyMember)->unk_10 = ((g_BattleEnemyBattlers[g_Battle.active_battler - 3].screen_y - TASK(PartyMember)->screen_y.signed_value) << 4) / 8;
         }
     }
-    g_Task->unk_18       = g_Task->screen_x.signed_value << 4;
-    g_Task->unk_1C       = g_Task->screen_y.signed_value << 4;
-    g_Task->unk_25       = 30;
-    g_Task->unk_26       = 0;
-    g_Task->unk_48       = 1;
-    g_Task->unk_27       = 0xA0;
-    g_Task->unk_28       = 0;
-    g_Task->unk_24       = 0x84;
-    g_Task->unk_5D       = 0;
-    g_Task->unk_5E       = 0;
-    g_Task->unk_5F       = 0;
-    g_Task->unk_5C       = 0;
-    g_Task->unk_2A       = 0;
-    g_Task->unk_29       = 3;
-    g_Task->unk_2C.value = 0;
-    g_Task->unk_2B       = 0;
+    TASK(PartyMember)->unk_18       = TASK(PartyMember)->screen_x.signed_value << 4;
+    TASK(PartyMember)->unk_1C       = TASK(PartyMember)->screen_y.signed_value << 4;
+    TASK(PartyMember)->unk_25       = 30;
+    TASK(PartyMember)->unk_26       = 0;
+    TASK(PartyMember)->unk_48       = 1;
+    TASK(PartyMember)->unk_27       = 0xA0;
+    TASK(PartyMember)->unk_28       = 0;
+    TASK(PartyMember)->unk_24       = 0x84;
+    TASK(PartyMember)->unk_5D       = 0;
+    TASK(PartyMember)->unk_5E       = 0;
+    TASK(PartyMember)->unk_5F       = 0;
+    TASK(PartyMember)->unk_5C       = 0;
+    TASK(PartyMember)->unk_2A       = 0;
+    TASK(PartyMember)->unk_29       = 3;
+    TASK(PartyMember)->unk_2C.value = 0;
+    TASK(PartyMember)->unk_2B       = 0;
     Script_Select((g_Battle.target_selector - 3) & 1);
-    g_Task->unk_09 = 3;
-    g_Task->header.step += 1;
+    TASK(PartyMember)->unk_09 = 3;
+    TASK(PartyMember)->header.step += 1;
 }
 
 MATCH void func_801EF3A0(void) {
     u8 slot;
 
-    g_Task->screen_x.value = g_Task->unk_18 >> 4;
-    g_Task->screen_y.value = g_Task->unk_1C >> 4;
-    g_Task->unk_18 += g_Task->unk_0C;
-    g_Task->unk_1C += g_Task->unk_10;
+    TASK(PartyMember)->screen_x.value = TASK(PartyMember)->unk_18 >> 4;
+    TASK(PartyMember)->screen_y.value = TASK(PartyMember)->unk_1C >> 4;
+    TASK(PartyMember)->unk_18 += TASK(PartyMember)->unk_0C;
+    TASK(PartyMember)->unk_1C += TASK(PartyMember)->unk_10;
     if (g_Battle.active_battler < 3) {
-        if (g_Task->screen_y.signed_value < g_Game.members[g_Battle.active_battler].screen_y.signed_value - 20) {
+        if (TASK(PartyMember)->screen_y.signed_value < g_Game.members[g_Battle.active_battler].screen_y.signed_value - 20) {
             slot                               = Battle_AllocEffect(1, 0x56);
             g_BattleEffects[slot].header.mode  = 1;
             g_BattleEffects[slot].header.step  = 0;
-            g_BattleEffects[slot].screen_x     = g_Task->screen_x.value;
-            g_BattleEffects[slot].screen_y     = g_Task->screen_y.value;
-            g_BattleEffects[slot].unk_0A       = g_Task->timer;
+            g_BattleEffects[slot].screen_x     = TASK(PartyMember)->screen_x.value;
+            g_BattleEffects[slot].screen_y     = TASK(PartyMember)->screen_y.value;
+            g_BattleEffects[slot].unk_0A       = TASK(PartyMember)->timer;
             g_BattleEffects[slot].target.party = g_BattleEffectBattler;
-            g_Task->header.step += 1;
+            TASK(PartyMember)->header.step += 1;
         }
     } else {
-        if (g_Task->screen_y.signed_value < g_BattleEnemyBattlers[g_Battle.active_battler - 3].screen_y - 40) {
+        if (TASK(PartyMember)->screen_y.signed_value < g_BattleEnemyBattlers[g_Battle.active_battler - 3].screen_y - 40) {
             slot                               = Battle_AllocEffect(1, 0x56);
             g_BattleEffects[slot].header.mode  = 1;
             g_BattleEffects[slot].header.step  = 0;
-            g_BattleEffects[slot].screen_x     = g_Task->screen_x.value;
-            g_BattleEffects[slot].screen_y     = g_Task->screen_y.value;
-            g_BattleEffects[slot].unk_0A       = g_Task->timer;
+            g_BattleEffects[slot].screen_x     = TASK(PartyMember)->screen_x.value;
+            g_BattleEffects[slot].screen_y     = TASK(PartyMember)->screen_y.value;
+            g_BattleEffects[slot].unk_0A       = TASK(PartyMember)->timer;
             g_BattleEffects[slot].target.party = g_BattleEffectBattler;
-            g_Task->header.step += 1;
+            TASK(PartyMember)->header.step += 1;
         }
     }
     Script_AnimStepLoop();
@@ -177,8 +177,8 @@ MATCH void func_801EF52C(void) {
 
     handlers  = D_801EEC1C;
     g_Scripts = BATTLE_SCRIPT_TABLE;
-    SYS_DISPATCH_BYTE(handlers.steps, g_Task->header.step);
-    if (g_Task->header.flags != 0) {
+    SYS_DISPATCH_BYTE(handlers.steps, TASK(PartyMember)->header.step);
+    if (TASK(PartyMember)->header.flags != 0) {
         Area_AddGridActor();
     }
     g_Scripts = AREA_SCRIPT_TABLE;
@@ -186,24 +186,24 @@ MATCH void func_801EF52C(void) {
 
 MATCH void func_801EF5D0(void) {
     PartyMember* work;
-    g_Task->unk_29     = 0;
-    g_Task->unk_25     = 0x1D;
-    g_Task->unk_26     = 0;
-    g_Task->unk_24     = 0x84;
-    g_Task->unk_27     = 0xB4;
-    g_Task->unk_28     = 0;
-    work               = g_Task;
-    work->unk_2B       = 0;
-    work->unk_2C.value = 0;
-    g_Task->unk_2A     = 0;
+    TASK(PartyMember)->unk_29 = 0;
+    TASK(PartyMember)->unk_25 = 0x1D;
+    TASK(PartyMember)->unk_26 = 0;
+    TASK(PartyMember)->unk_24 = 0x84;
+    TASK(PartyMember)->unk_27 = 0xB4;
+    TASK(PartyMember)->unk_28 = 0;
+    work                      = g_Task;
+    work->unk_2B              = 0;
+    work->unk_2C.value        = 0;
+    TASK(PartyMember)->unk_2A = 0;
     Script_Select(5);
-    SND_SEPlay((g_Task->timer & 0x1) | 0x100);
-    g_Task->header.step += 1;
+    SND_SEPlay((TASK(PartyMember)->timer & 0x1) | 0x100);
+    TASK(PartyMember)->header.step += 1;
 }
 
 MATCH void func_801EF6A4(void) {
     if (Script_AnimStepLoop() != 0u) {
-        g_Task->header.step = g_Task->header.step + 1;
+        TASK(PartyMember)->header.step = TASK(PartyMember)->header.step + 1;
     } else {
         Area_AddActor();
     }

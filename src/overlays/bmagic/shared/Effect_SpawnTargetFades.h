@@ -10,9 +10,9 @@
         BMAGIC_EFFECT_SLOTS[i].header.mode  = 0;                                                   \
         BMAGIC_EFFECT_SLOTS[i].header.step  = 0;                                                   \
     }                                                                                              \
-    g_Task->unk_04       = (task_04);                                                              \
-    g_Task->param.unk_0B = 0;                                                                      \
-    g_Task->header.mode += 1;                                                                      \
+    TASK(PartyMember)->unk_04       = (task_04);                                                   \
+    TASK(PartyMember)->param.unk_0B = 0;                                                           \
+    TASK(PartyMember)->header.mode += 1;                                                           \
     if (g_Battle.target_selector & 0x40) {                                                         \
         for (i = 0; i < 8; i++) {                                                                  \
             battler = i + BATTLE_PARTY_CHARACTERS_COUNT;                                           \
@@ -23,7 +23,7 @@
                 g_BattleEffects[slot].unk_04       = battler;                                      \
                 g_BattleEffects[slot].arg.unk_09   = count * 28 + 1;                               \
                 count++;                                                                           \
-                g_Task->param.unk_0B += 1;                                                         \
+                TASK(PartyMember)->param.unk_0B += 1;                                              \
             }                                                                                      \
         }                                                                                          \
     } else {                                                                                       \
@@ -35,7 +35,7 @@
                 g_BattleEffects[slot].unk_04       = i;                                            \
                 g_BattleEffects[slot].arg.unk_09   = count * 28 + 1;                               \
                 count++;                                                                           \
-                g_Task->param.unk_0B += 1;                                                         \
+                TASK(PartyMember)->param.unk_0B += 1;                                              \
             }                                                                                      \
         }                                                                                          \
     }                                                                                              \

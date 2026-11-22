@@ -32,7 +32,7 @@ MATCH void Fishing_UpdateFish(void) {
         g_CurrentActor = cur;
         table[cur[1]]();
 
-        record = FISHING_STATE;
+        record = TASK(FishingState);
         if ((record->flags & ACTOR_FLAG_SEMI_TRANSPARENT) != 0) {
             s16 value = record->bounce.half.key;
 
@@ -47,7 +47,7 @@ MATCH void Fishing_UpdateFish(void) {
             record->tint_5D = 0;
         }
 
-        FISHING_STATE->tint_5E = FISHING_STATE->tint_5D;
-        FISHING_STATE->tint_5F = FISHING_STATE->tint_5D;
+        TASK(FishingState)->tint_5E = TASK(FishingState)->tint_5D;
+        TASK(FishingState)->tint_5F = TASK(FishingState)->tint_5D;
     }
 }

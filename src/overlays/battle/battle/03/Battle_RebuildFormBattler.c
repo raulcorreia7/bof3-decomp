@@ -30,58 +30,58 @@ MATCH void Battle_RebuildFormBattler(void) {
 
     saved       = g_Task;
     g_Task      = g_BattleEffectBattler;
-    g_GameState = &g_Game.members[g_Task->slot];
-    if (g_Game.members[g_Task->slot].chr.character_id == CHAR_ID_RYU_ADULT || g_Game.members[g_Task->slot].chr.character_id == CHAR_ID_RYU_YOUNG) {
-        D_801EB4C8 = g_Game.members[g_Task->slot].chr.ap;
-        D_801EB4CC = g_Game.members[g_Task->slot].chr.status;
-        D_801EB4D0 = g_Game.members[g_Task->slot].u.turn.damage_flags.value;
-        D_801EB4D4 = g_Game.members[g_Task->slot].u.turn.action_flags.value;
+    g_GameState = &g_Game.members[TASK(PartyMember)->slot];
+    if (g_Game.members[TASK(PartyMember)->slot].chr.character_id == CHAR_ID_RYU_ADULT || g_Game.members[TASK(PartyMember)->slot].chr.character_id == CHAR_ID_RYU_YOUNG) {
+        D_801EB4C8 = g_Game.members[TASK(PartyMember)->slot].chr.ap;
+        D_801EB4CC = g_Game.members[TASK(PartyMember)->slot].chr.status;
+        D_801EB4D0 = g_Game.members[TASK(PartyMember)->slot].u.turn.damage_flags.value;
+        D_801EB4D4 = g_Game.members[TASK(PartyMember)->slot].u.turn.action_flags.value;
         D_801EB4CC &= ~0x4000;
         D_801EB4D0 &= 0xFFFE7FFF;
         D_801EB4D4 &= 0xFFF884FD;
     }
 
-    slot                                     = g_Task->slot;
-    facing                                   = g_Game.members[slot].facing;
-    g_Game.members[slot]                     = s_BattleBattlerTemplates[slot];
-    g_Game.members[g_Task->slot].header.mode = 6;
-    g_Game.members[g_Task->slot].header.step = 4;
-    g_Game.members[g_Task->slot].unk_03      = 4;
-    g_Game.members[g_Task->slot].unk_04      = 1;
-    g_Game.members[g_Task->slot].facing      = facing;
-    g_Game.members[g_Task->slot].unk_48      = 2;
-    g_Game.members[g_Task->slot].scale.x     = 0;
-    g_Game.members[g_Task->slot].u.turn.damage_flags.value |= BATTLER_DAMAGE_FORM_EFFECT_PLAYING;
-    g_BattleEffects[g_Task->slot].pos.x.fixed = g_EncounterParty[g_Task->slot].x.fixed;
-    g_BattleEffects[g_Task->slot].pos.y.fixed = g_EncounterParty[g_Task->slot].y.fixed;
-    g_BattleEffects[g_Task->slot].pos.z.fixed = Area_HeightSample(g_BattleEffects[g_Task->slot].pos.x.fixed, g_BattleEffects[g_Task->slot].pos.y.fixed) << 16;
-    if (g_Game.members[g_Task->slot].chr.character_id == CHAR_ID_RYU_ADULT || g_Game.members[g_Task->slot].chr.character_id == CHAR_ID_RYU_YOUNG) {
-        g_Game.members[g_Task->slot].chr.ap                    = D_801EB4C8;
-        g_Game.members[g_Task->slot].chr.status                = D_801EB4CC;
-        g_Game.members[g_Task->slot].chr.fatigue               = g_Characters[g_Game.members[g_Task->slot].character_index].fatigue;
-        g_Game.members[g_Task->slot].u.turn.damage_flags.value = D_801EB4D0;
-        g_Game.members[g_Task->slot].u.turn.action_flags.value = D_801EB4D4;
+    slot                                                = TASK(PartyMember)->slot;
+    facing                                              = g_Game.members[slot].facing;
+    g_Game.members[slot]                                = s_BattleBattlerTemplates[slot];
+    g_Game.members[TASK(PartyMember)->slot].header.mode = 6;
+    g_Game.members[TASK(PartyMember)->slot].header.step = 4;
+    g_Game.members[TASK(PartyMember)->slot].unk_03      = 4;
+    g_Game.members[TASK(PartyMember)->slot].unk_04      = 1;
+    g_Game.members[TASK(PartyMember)->slot].facing      = facing;
+    g_Game.members[TASK(PartyMember)->slot].unk_48      = 2;
+    g_Game.members[TASK(PartyMember)->slot].scale.x     = 0;
+    g_Game.members[TASK(PartyMember)->slot].u.turn.damage_flags.value |= BATTLER_DAMAGE_FORM_EFFECT_PLAYING;
+    g_BattleEffects[TASK(PartyMember)->slot].pos.x.fixed = g_EncounterParty[TASK(PartyMember)->slot].x.fixed;
+    g_BattleEffects[TASK(PartyMember)->slot].pos.y.fixed = g_EncounterParty[TASK(PartyMember)->slot].y.fixed;
+    g_BattleEffects[TASK(PartyMember)->slot].pos.z.fixed = Area_HeightSample(g_BattleEffects[TASK(PartyMember)->slot].pos.x.fixed, g_BattleEffects[TASK(PartyMember)->slot].pos.y.fixed) << 16;
+    if (g_Game.members[TASK(PartyMember)->slot].chr.character_id == CHAR_ID_RYU_ADULT || g_Game.members[TASK(PartyMember)->slot].chr.character_id == CHAR_ID_RYU_YOUNG) {
+        g_Game.members[TASK(PartyMember)->slot].chr.ap                    = D_801EB4C8;
+        g_Game.members[TASK(PartyMember)->slot].chr.status                = D_801EB4CC;
+        g_Game.members[TASK(PartyMember)->slot].chr.fatigue               = g_Characters[g_Game.members[TASK(PartyMember)->slot].character_index].fatigue;
+        g_Game.members[TASK(PartyMember)->slot].u.turn.damage_flags.value = D_801EB4D0;
+        g_Game.members[TASK(PartyMember)->slot].u.turn.action_flags.value = D_801EB4D4;
         for (i = 0; i < 8; i++) {
-            cells    = (u8*)&g_Game.members[g_Task->slot].status;
+            cells    = (u8*)&g_Game.members[TASK(PartyMember)->slot].status;
             cells[i] = 0;
         }
         func_801E0B64();
     }
-    Battle_RescaleStats(g_Task->slot);
-    g_UiPanelTasks[g_Task->slot + 13].u.battle.hp = g_Game.members[g_Task->slot].chr.hp;
-    g_UiPanelTasks[g_Task->slot + 13].u.battle.ap = g_Game.members[g_Task->slot].chr.ap;
-    g_UiPanelTasks[g_Task->slot + 13].unk_0B      = g_Game.members[g_Task->slot].chr.hp * 55 / g_Game.members[g_Task->slot].chr.stats.max_hp;
-    g_UiPanelTasks[g_Task->slot + 13].unk_0C      = g_Game.members[g_Task->slot].chr.ap * 55 / g_Game.members[g_Task->slot].chr.stats.max_ap;
-    Script_Select(g_Task->facing + 4);
-    GFX_PaletteLoad((u8*)(BATTLE_ACTION_BLOCK_TABLE + (g_Task->slot << 6)), 0);
-    func_801DDAB4(g_Game.members[g_Task->slot].chr.status);
+    Battle_RescaleStats(TASK(PartyMember)->slot);
+    g_UiPanelTasks[TASK(PartyMember)->slot + 13].u.battle.hp = g_Game.members[TASK(PartyMember)->slot].chr.hp;
+    g_UiPanelTasks[TASK(PartyMember)->slot + 13].u.battle.ap = g_Game.members[TASK(PartyMember)->slot].chr.ap;
+    g_UiPanelTasks[TASK(PartyMember)->slot + 13].unk_0B      = g_Game.members[TASK(PartyMember)->slot].chr.hp * 55 / g_Game.members[TASK(PartyMember)->slot].chr.stats.max_hp;
+    g_UiPanelTasks[TASK(PartyMember)->slot + 13].unk_0C      = g_Game.members[TASK(PartyMember)->slot].chr.ap * 55 / g_Game.members[TASK(PartyMember)->slot].chr.stats.max_ap;
+    Script_Select(TASK(PartyMember)->facing + 4);
+    GFX_PaletteLoad((u8*)(BATTLE_ACTION_BLOCK_TABLE + (TASK(PartyMember)->slot << 6)), 0);
+    func_801DDAB4(g_Game.members[TASK(PartyMember)->slot].chr.status);
     GFX_PaletteUploadRows();
     if (g_Battle.flags & BATTLE_STATE_RELOAD_PARTY) {
         D_801454F5[0] = D_801463D4;
         D_801454F6[0] = D_801463D5;
     } else {
-        D_801454F5[g_Task->slot * 3] = D_801463D4;
-        D_801454F6[g_Task->slot * 3] = D_801463D5;
+        D_801454F5[TASK(PartyMember)->slot * 3] = D_801463D4;
+        D_801454F6[TASK(PartyMember)->slot * 3] = D_801463D5;
     }
     g_Task = saved;
     g_Battle.flags &= ~BATTLE_STATE_RELOAD_PARTY;

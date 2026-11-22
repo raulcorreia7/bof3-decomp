@@ -12,20 +12,20 @@ MATCH void func_801EEC80(void) {
 
     if (g_Battle.target_selector & 0x40) {
         if (g_Battle.active_battler < 3) {
-            g_Task->facing = D_8014637C->facing ^ 2;
+            TASK(PartyMember)->facing = D_8014637C->facing ^ 2;
         } else {
-            g_Task->facing = D_8014637C->facing;
+            TASK(PartyMember)->facing = D_8014637C->facing;
         }
     } else {
         if (g_Battle.active_battler < 3) {
-            g_Task->facing = D_8014637C->facing;
+            TASK(PartyMember)->facing = D_8014637C->facing;
         } else {
-            g_Task->facing = D_8014637C->facing ^ 2;
+            TASK(PartyMember)->facing = D_8014637C->facing ^ 2;
         }
     }
     Battle_CenterCamera();
-    g_Task->param.unk_0B = 0;
-    g_Task->header.mode += 1;
+    TASK(PartyMember)->param.unk_0B = 0;
+    TASK(PartyMember)->header.mode += 1;
     for (i = 0; i < 8; i++) {
         slot                               = Battle_AllocEffect(1, 11);
         g_BattleEffects[slot].target.party = g_Task;
@@ -33,20 +33,20 @@ MATCH void func_801EEC80(void) {
         g_BattleEffects[slot].unk_0B       = i;
         g_BattleEffects[slot].arg.unk_09   = 0;
         g_BattleEffects[slot].unk_0A       = i * 2;
-        g_Task->unk_0C                     = D_801F08A8[i].x;
-        g_Task->unk_10                     = D_801F08A8[i].y;
+        TASK(PartyMember)->unk_0C          = D_801F08A8[i].x;
+        TASK(PartyMember)->unk_10          = D_801F08A8[i].y;
         Effect_RotatePosition(g_Task);
-        g_BattleEffects[slot].pos.x.fixed = g_AreaScrollTargetX + g_Task->unk_0C;
-        g_BattleEffects[slot].pos.y.fixed = g_AreaScrollTargetY + g_Task->unk_10;
-        g_BattleEffects[slot].pos.z.fixed = g_Task->pos.z.fixed;
+        g_BattleEffects[slot].pos.x.fixed = g_AreaScrollTargetX + TASK(PartyMember)->unk_0C;
+        g_BattleEffects[slot].pos.y.fixed = g_AreaScrollTargetY + TASK(PartyMember)->unk_10;
+        g_BattleEffects[slot].pos.z.fixed = TASK(PartyMember)->pos.z.fixed;
         SND_SEQueueSelection(0x102);
     }
 }
 
 MATCH void func_801EEE7C(void) {
-    if (g_Task->param.unk_0B == 7) {
-        g_Task->unk_09 = 8;
-        g_Task->header.mode += 1;
+    if (TASK(PartyMember)->param.unk_0B == 7) {
+        TASK(PartyMember)->unk_09 = 8;
+        TASK(PartyMember)->header.mode += 1;
     }
 }
 
@@ -55,11 +55,11 @@ MATCH void func_801EEEC0(void) {
     u8  slot;
     u32 i;
 
-    timer          = g_Task->unk_09 - 1;
-    g_Task->unk_09 = timer;
+    timer                     = TASK(PartyMember)->unk_09 - 1;
+    TASK(PartyMember)->unk_09 = timer;
     if (timer == 0) {
-        g_Task->param.unk_0B = 0;
-        g_Task->header.mode += 1;
+        TASK(PartyMember)->param.unk_0B = 0;
+        TASK(PartyMember)->header.mode += 1;
         for (i = 0; i < 8; i++) {
             slot                               = Battle_AllocEffect(1, 11);
             g_BattleEffects[slot].target.party = g_Task;
@@ -67,18 +67,18 @@ MATCH void func_801EEEC0(void) {
             g_BattleEffects[slot].unk_0B       = i;
             g_BattleEffects[slot].arg.unk_09   = 0;
             g_BattleEffects[slot].unk_0A       = i * 16 + 1;
-            g_Task->unk_0C                     = D_801F08A8[i].x;
-            g_Task->unk_10                     = D_801F08A8[i].y;
+            TASK(PartyMember)->unk_0C          = D_801F08A8[i].x;
+            TASK(PartyMember)->unk_10          = D_801F08A8[i].y;
             Effect_RotatePosition(g_Task);
-            g_BattleEffects[slot].pos.x.fixed = g_AreaScrollTargetX + g_Task->unk_0C;
-            g_BattleEffects[slot].pos.y.fixed = g_AreaScrollTargetY + g_Task->unk_10;
-            g_BattleEffects[slot].pos.z.fixed = g_Task->pos.z.fixed;
+            g_BattleEffects[slot].pos.x.fixed = g_AreaScrollTargetX + TASK(PartyMember)->unk_0C;
+            g_BattleEffects[slot].pos.y.fixed = g_AreaScrollTargetY + TASK(PartyMember)->unk_10;
+            g_BattleEffects[slot].pos.z.fixed = TASK(PartyMember)->pos.z.fixed;
         }
     }
 }
 
 MATCH void func_801EF03C(void) {
-    if (g_Task->param.unk_0B == 7) {
+    if (TASK(PartyMember)->param.unk_0B == 7) {
         Battle_MarkDamaged(g_Battle.target_selector);
         g_Battle.flags |= BATTLE_STATE_EFFECT_PLAYING;
         Effect_Reset();
@@ -89,8 +89,8 @@ MATCH void func_801EF03C(void) {
 #include "overlays/bmagic/shared/BMagic_DispatchEffectMode.h"
 
 MATCH void func_801EF0E0(void) {
-    SYS_DISPATCH_BYTE(D_801F08F0, g_Task->header.step);
-    if (g_Task->header.flags != 0 && g_Task->header.step != 0) {
+    SYS_DISPATCH_BYTE(D_801F08F0, TASK(PartyMember)->header.step);
+    if (TASK(PartyMember)->header.flags != 0 && TASK(PartyMember)->header.step != 0) {
         func_801EFA54();
         func_801EFE34();
         func_801EFB2C();
@@ -103,40 +103,40 @@ MATCH void func_801EF178(void) {
     s32 cue;
     u8  timer_next;
 
-    timer_next    = g_Task->timer - 1;
-    g_Task->timer = timer_next;
+    timer_next               = TASK(PartyMember)->timer - 1;
+    TASK(PartyMember)->timer = timer_next;
     if (!(timer_next & BYTE_MASK)) {
         cue = 0x100;
-        if (g_Task->param.unk_0B & 0x1) {
+        if (TASK(PartyMember)->param.unk_0B & 0x1) {
             cue = 0x101;
         }
         SND_SEQueueSelection(cue);
-        g_Task->unk_09 = 0;
-        g_Task->timer  = 0;
-        g_Task->header.step += 1;
+        TASK(PartyMember)->unk_09 = 0;
+        TASK(PartyMember)->timer  = 0;
+        TASK(PartyMember)->header.step += 1;
     }
 }
 
 MATCH void func_801EF21C(void) {
     u8 count;
 
-    count          = g_Task->unk_09 + 1;
-    g_Task->unk_09 = count;
+    count                     = TASK(PartyMember)->unk_09 + 1;
+    TASK(PartyMember)->unk_09 = count;
     if ((count & BYTE_MASK) == 8) {
-        g_Task->timer = 0;
-        g_Task->header.step += 1;
+        TASK(PartyMember)->timer = 0;
+        TASK(PartyMember)->header.step += 1;
     }
 }
 
 MATCH void func_801EF27C(void) {
     u8 count;
 
-    g_Task->timer += 1;
-    count          = g_Task->unk_09 + 1;
-    g_Task->unk_09 = count;
+    TASK(PartyMember)->timer += 1;
+    count                     = TASK(PartyMember)->unk_09 + 1;
+    TASK(PartyMember)->unk_09 = count;
     if ((count & BYTE_MASK) == 0x10) {
-        g_Task->timer = 0;
-        g_Task->header.step += 1;
+        TASK(PartyMember)->timer = 0;
+        TASK(PartyMember)->header.step += 1;
     }
 }
 
@@ -150,7 +150,7 @@ MATCH void func_801EF2F8(void) {
     work->unk_09 = work->unk_09 + 1;
     if (work->unk_09 == 0x18) {
         active               = BATTLE_ACTIVE_WORK;
-        active->param.unk_0B = g_Task->param.unk_0B;
+        active->param.unk_0B = TASK(PartyMember)->param.unk_0B;
         Effect_Reset();
     }
 }
@@ -165,13 +165,13 @@ MATCH void func_801EF370(void) {
     s32      x;
     s32      y;
 
-    g_ScratchPad.cells.halves[0] = g_Task->unk_09 * 30;
-    if (g_Task->header.step >= 2) {
-        g_ScratchPad.cells.halves[0] = (g_Task->unk_09 - 8) * 15 + 240;
+    g_ScratchPad.cells.halves[0] = TASK(PartyMember)->unk_09 * 30;
+    if (TASK(PartyMember)->header.step >= 2) {
+        g_ScratchPad.cells.halves[0] = (TASK(PartyMember)->unk_09 - 8) * 15 + 240;
     }
     g_ScratchPad.cells.halves[2] = 24;
-    if (g_Task->header.step >= 2) {
-        g_ScratchPad.cells.halves[2] -= (g_Task->unk_09 - 8) / 2;
+    if (TASK(PartyMember)->header.step >= 2) {
+        g_ScratchPad.cells.halves[2] -= (TASK(PartyMember)->unk_09 - 8) / 2;
     }
     for (k = g_ScratchPad.cells.halves[2]; k > 16; k--) {
         setVector(&g_ScratchPadVectors[1], FIXED_MUL(rsin(0), FIXED_MUL(rcos((k - 1) << 7), g_ScratchPad.cells.halves[0])),
@@ -187,8 +187,8 @@ MATCH void func_801EF370(void) {
             g_ScratchPadVectors[2].vy = g_ScratchPadVectors[3].vy;
             g_ScratchPadVectors[3].vx = FIXED_MUL(rsin(i << 8), FIXED_MUL(rcos(k << 7), g_ScratchPad.cells.halves[0]));
             g_ScratchPadVectors[3].vy = FIXED_MUL(rcos(i << 8), FIXED_MUL(rcos(k << 7), g_ScratchPad.cells.halves[0]));
-            x                         = (g_ScratchPadVectors[3].vx << 9) + g_Task->pos.x.fixed;
-            y                         = (g_ScratchPadVectors[3].vy << 9) + g_Task->pos.y.fixed;
+            x                         = (g_ScratchPadVectors[3].vx << 9) + TASK(PartyMember)->pos.x.fixed;
+            y                         = (g_ScratchPadVectors[3].vy << 9) + TASK(PartyMember)->pos.y.fixed;
             tpage                     = getTPage(TPAGE_DEPTH_8BIT, TPAGE_ABR_ADD, 320, 256);
             SetDrawMode((DR_MODE*)g_GfxPrimCursor, 0, 1, tpage, 0);
             Area_CellAddPrim(x, y, 0, sizeof(DR_MODE));
@@ -197,7 +197,7 @@ MATCH void func_801EF370(void) {
             SetSemiTrans(prim, 1);
             RotTransPers4(&g_ScratchPadVectors[0], &g_ScratchPadVectors[1], &g_ScratchPadVectors[2], &g_ScratchPadVectors[3], (long*)&prim->x0, (long*)&prim->x1, (long*)&prim->x2, (long*)&prim->x3,
                           &depth, &flag);
-            switch (g_Task->header.step) {
+            switch (TASK(PartyMember)->header.step) {
                 case 1:
                     if (i < 8) {
                         setRGB0(prim, i * 16 + 80, (k - 16) * 8 + 1, (k - 16) * 8 + 1);
@@ -212,7 +212,7 @@ MATCH void func_801EF370(void) {
                     }
                     break;
                 case 2:
-                    setRGB0(prim, 81 - g_Task->timer * 10, 17 - g_Task->timer * 2, 17 - g_Task->timer);
+                    setRGB0(prim, 81 - TASK(PartyMember)->timer * 10, 17 - TASK(PartyMember)->timer * 2, 17 - TASK(PartyMember)->timer);
                     setRGB1(prim, prim->r0, prim->g0, prim->b0);
                     setRGB2(prim, 80, 16, 16);
                     setRGB3(prim, 80, 16, 16);
@@ -220,7 +220,7 @@ MATCH void func_801EF370(void) {
                 case 3:
                     setRGB0(prim, 1, 1, 1);
                     setRGB1(prim, 1, 1, 1);
-                    setRGB2(prim, 81 - g_Task->timer * 10, 17 - g_Task->timer * 2, 17 - g_Task->timer * 2);
+                    setRGB2(prim, 81 - TASK(PartyMember)->timer * 10, 17 - TASK(PartyMember)->timer * 2, 17 - TASK(PartyMember)->timer * 2);
                     setRGB3(prim, prim->r2, prim->g2, prim->b2);
                     break;
             }
@@ -237,10 +237,10 @@ MATCH void func_801EFA54(void) {
 
     PushMatrix();
     setVector(&rot, 0, 0, 0);
-    if (g_Task->slot == 12) {
+    if (TASK(PartyMember)->slot == 12) {
         rot.vz = (g_FrameCount & 0xF) << 8;
     }
-    BMAGIC_PROJECT_ACTOR_MATRIX(g_Task);
+    BMAGIC_PROJECT_ACTOR_MATRIX(TASK(PartyMember));
 }
 
 MATCH void func_801EFB2C(void) {
@@ -254,7 +254,7 @@ MATCH void func_801EFB2C(void) {
     s32      radius;
 
     radius                       = rcos(0x800) * 30;
-    g_ScratchPad.cells.halves[0] = radius * g_Task->unk_09 >> 12;
+    g_ScratchPad.cells.halves[0] = radius * TASK(PartyMember)->unk_09 >> 12;
     g_ScratchPadVectors[2].vx    = FIXED_MUL(rsin(0), g_ScratchPad.cells.halves[0]);
     g_ScratchPadVectors[2].vy    = FIXED_MUL(rcos(0), g_ScratchPad.cells.halves[0]);
     for (i = 1; i <= 32; i++) {
@@ -267,16 +267,16 @@ MATCH void func_801EFB2C(void) {
         g_ScratchPadVectors[2].vx = FIXED_MUL(rsin(i << 8), g_ScratchPad.cells.halves[0]);
         g_ScratchPadVectors[2].vy = FIXED_MUL(rcos(i << 8), g_ScratchPad.cells.halves[0]);
         g_ScratchPadVectors[2].vz = 0;
-        x                         = (g_ScratchPadVectors[2].vx >> 9) + g_Task->pos.x.fixed;
-        y                         = (g_ScratchPadVectors[2].vy >> 9) + g_Task->pos.y.fixed;
+        x                         = (g_ScratchPadVectors[2].vx >> 9) + TASK(PartyMember)->pos.x.fixed;
+        y                         = (g_ScratchPadVectors[2].vy >> 9) + TASK(PartyMember)->pos.y.fixed;
         tpage                     = getTPage(TPAGE_DEPTH_4BIT, TPAGE_ABR_ADD, 320, 256);
         SetDrawMode((DR_MODE*)g_GfxPrimCursor, 0, 1, tpage, 0);
         Area_CellAddPrim(x, y, 2, sizeof(DR_MODE));
         prim = (POLY_G3*)g_GfxPrimCursor;
         SetPolyG3(prim);
         SetSemiTrans(prim, 1);
-        if (g_Task->header.step == 3) {
-            g_ScratchPad.cells.halves[3] = 65 - g_Task->timer * 8;
+        if (TASK(PartyMember)->header.step == 3) {
+            g_ScratchPad.cells.halves[3] = 65 - TASK(PartyMember)->timer * 8;
             setRGB0(prim, g_ScratchPad.cells.halves[3], g_ScratchPad.cells.halves[3], 1);
         } else {
             setRGB0(prim, 64, 64, 1);
@@ -299,9 +299,9 @@ MATCH void func_801EFE34(void) {
     s32      radius;
 
     radius                       = rcos(0x800) * 34;
-    g_ScratchPad.cells.halves[0] = radius * (g_Task->unk_09 + 1) >> 12;
+    g_ScratchPad.cells.halves[0] = radius * (TASK(PartyMember)->unk_09 + 1) >> 12;
     radius                       = rcos(0x800) * 34;
-    g_ScratchPad.cells.halves[1] = radius * g_Task->unk_09 >> 12;
+    g_ScratchPad.cells.halves[1] = radius * TASK(PartyMember)->unk_09 >> 12;
     g_ScratchPadVectors[1].vx    = FIXED_MUL(rsin(0), g_ScratchPad.cells.halves[0]);
     g_ScratchPadVectors[1].vy    = FIXED_MUL(rcos(0), g_ScratchPad.cells.halves[0]);
     g_ScratchPadVectors[3].vx    = FIXED_MUL(rsin(0), g_ScratchPad.cells.halves[1]);
@@ -324,8 +324,8 @@ MATCH void func_801EFE34(void) {
         g_ScratchPadVectors[3].vx = FIXED_MUL(rsin(i << 8), g_ScratchPad.cells.halves[1]);
         g_ScratchPadVectors[3].vy = FIXED_MUL(rcos(i << 8), g_ScratchPad.cells.halves[1]);
         g_ScratchPadVectors[3].vz = 0;
-        if (g_Task->unk_09 > 8) {
-            g_ScratchPad.cells.halves[3] = 33 - (g_Task->unk_09 - 8) * 2;
+        if (TASK(PartyMember)->unk_09 > 8) {
+            g_ScratchPad.cells.halves[3] = 33 - (TASK(PartyMember)->unk_09 - 8) * 2;
             setRGB0(prim, g_ScratchPad.cells.halves[3], g_ScratchPad.cells.halves[3], g_ScratchPad.cells.halves[3]);
             setRGB1(prim, g_ScratchPad.cells.halves[3], g_ScratchPad.cells.halves[3], g_ScratchPad.cells.halves[3]);
         } else {
@@ -344,7 +344,7 @@ MATCH void func_801EFE34(void) {
 
 MATCH void func_801F020C(void) {
     GFX_AddDitheredDrawMode(GFX_LAYER_BATTLE_SCENE, getTPage(TPAGE_DEPTH_4BIT, TPAGE_ABR_ADD, 320, 256));
-    SYS_DISPATCH_BYTE(D_801F0900, g_Task->header.step);
+    SYS_DISPATCH_BYTE(D_801F0900, TASK(PartyMember)->header.step);
     GFX_AddDitheredDrawMode(GFX_LAYER_BATTLE_SCENE, getTPage(TPAGE_DEPTH_4BIT, TPAGE_ABR_ADD, 320, 256));
 }
 
@@ -373,7 +373,7 @@ MATCH void func_801F034C(void) {
     COORD_INT(work->pos.z) -= 64;
     work->unk_09 = next;
     if (next == 0) {
-        g_BattleEffectBattler->param.unk_0B = g_Task->param.unk_0B;
+        g_BattleEffectBattler->param.unk_0B = TASK(PartyMember)->param.unk_0B;
         Effect_Reset();
     }
 }
@@ -388,7 +388,7 @@ MATCH void func_801F03C4(void) {
     s32      x;
     s32      y;
 
-    g_ScratchPad.cells.halves[0] = g_Task->unk_09 * 8;
+    g_ScratchPad.cells.halves[0] = TASK(PartyMember)->unk_09 * 8;
     for (band = 4; band < 12; band++) {
         g_ScratchPadVectors[1].vx = FIXED_MUL(rsin(0), FIXED_MUL(rcos(band << 8), g_ScratchPad.cells.halves[0]));
         g_ScratchPadVectors[1].vy = FIXED_MUL(rcos(0), FIXED_MUL(rcos(band << 8), g_ScratchPad.cells.halves[0]));
@@ -407,8 +407,8 @@ MATCH void func_801F03C4(void) {
             g_ScratchPadVectors[2].vz = g_ScratchPadVectors[3].vz;
             setVector(&g_ScratchPadVectors[3], FIXED_MUL(rsin(i << 9), FIXED_MUL(rcos((band + 1) << 8), g_ScratchPad.cells.halves[0])),
                       FIXED_MUL(rcos(i << 9), FIXED_MUL(rcos((band + 1) << 8), g_ScratchPad.cells.halves[0])), FIXED_MUL(rsin((band + 1) << 8), g_ScratchPad.cells.halves[0]));
-            x     = (g_ScratchPadVectors[3].vx << 9) + g_Task->pos.x.fixed;
-            y     = (g_ScratchPadVectors[3].vy << 9) + g_Task->pos.y.fixed;
+            x     = (g_ScratchPadVectors[3].vx << 9) + TASK(PartyMember)->pos.x.fixed;
+            y     = (g_ScratchPadVectors[3].vy << 9) + TASK(PartyMember)->pos.y.fixed;
             tpage = getTPage(TPAGE_DEPTH_8BIT, TPAGE_ABR_ADD, 320, 256);
             SetDrawMode((DR_MODE*)g_GfxPrimCursor, 0, 1, tpage, 0);
             Area_CellAddPrim(x, y, 0, sizeof(DR_MODE));
@@ -417,7 +417,7 @@ MATCH void func_801F03C4(void) {
             SetSemiTrans(prim, 1);
             RotTransPers4(&g_ScratchPadVectors[0], &g_ScratchPadVectors[1], &g_ScratchPadVectors[2], &g_ScratchPadVectors[3], (long*)&prim->x0, (long*)&prim->x1, (long*)&prim->x2, (long*)&prim->x3,
                           &depth, &flag);
-            setRGB0(prim, g_Task->unk_09 * 24 + 1, g_Task->unk_09 * 24 + 1, g_Task->unk_09 * 16 + 1);
+            setRGB0(prim, TASK(PartyMember)->unk_09 * 24 + 1, TASK(PartyMember)->unk_09 * 24 + 1, TASK(PartyMember)->unk_09 * 16 + 1);
             setRGB1(prim, prim->r0, prim->g0, prim->b0);
             setRGB2(prim, prim->r0, prim->g0, prim->b0);
             setRGB3(prim, prim->r0, prim->g0, prim->b0);

@@ -63,10 +63,10 @@ MATCH void Fishing_CastGaugeSweep(void) {
     }
     Fishing_SetDrawMode(0, 2);
     Fishing_DrawSprite(16, 2, 135, 180);
-    Fishing_DrawGaugeFill(136, 203, ((FISHING_STATE->pos_x * 96) / 255), 2);
+    Fishing_DrawGaugeFill(136, 203, ((TASK(FishingState)->pos_x * 96) / 255), 2);
     if (D_80145E92[0] == 3) {
-        FISHING_STATE->origin_x = 0xB8;
-        FISHING_STATE->origin_y = 0xD1;
-        FISHING_STATE->handler_index += 1;
+        TASK(FishingState)->origin_x = 0xB8;
+        TASK(FishingState)->origin_y = 0xD1;
+        TASK(FishingState)->handler_index += 1;
     }
 }
