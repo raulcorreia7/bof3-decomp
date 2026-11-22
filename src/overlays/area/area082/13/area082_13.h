@@ -24,6 +24,8 @@ ASSERT_OFFSET(RingOffset, y, 0x01);
 ASSERT_SIZE(RingOffset, 0x02);
 
 extern RingOffset D_801F5764[];
+/* The same table's byte base: the ring rows the spark effect reads as s8 pairs. */
+extern s8         D_801F578A[];
 extern Callback   D_801F576C[];
 
 void func_801F3500(void);

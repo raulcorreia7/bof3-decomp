@@ -1,7 +1,5 @@
 #include "area082_13.h"
 
-extern s8 D_801F578A[]; /* local: the ring table's byte base, indexed as s8 rows */
-
 MATCH void func_801F46C8(s32 turn, s32 count, s32 angle, s32 height) {
     MATRIX   matrix;
     POLY_G4* prim;
