@@ -231,12 +231,12 @@ MATCH void func_801EF324(void) {
 
 /* Draws the trail: for each step, two Gouraud quads either side of a path that swings on a sine, widening with the step. */
 MATCH void func_801EFBA8(void) {
-    POLY_G4*     prim;
-    s32          iteration;
-    s32          inner_angle;
-    s32          outer_angle;
-    s32          radius;
-    s32          previous_iteration;
+    POLY_G4* prim;
+    s32      iteration;
+    s32      inner_angle;
+    s32      outer_angle;
+    s32      radius;
+    s32      previous_iteration;
 
     GFX_ADD_DITHERED_DRAW_MODE(BMAGIC_LAYER_OVER_BATTLERS, getTPage(TPAGE_DEPTH_4BIT, TPAGE_ABR_ADD, 320, 256));
     g_ScratchPad.cells.halves[4] = TASK(PartyMember)->screen_x.value;
