@@ -227,11 +227,8 @@ MATCH void GFX_DrawColorFan(s32* pos, s16 origin, s32 flags) {
     angle    = 0;
     i        = 0;
     do {
-        primitive     = GFX_BeginPolyG3(1);
-        primitive->x0 = screen.vx;
-        primitive->y0 = screen.vy;
-        primitive->x1 = point.vx;
-        primitive->y1 = point.vy;
+        primitive = GFX_BeginPolyG3(1);
+        setXY2(primitive, screen.vx, screen.vy, point.vx, point.vy);
         angle += 128;
         point.vx      = screen.vx + (((s16)scale.vx * rcos((u16)angle)) >> 0xC);
         point.vy      = screen.vy + (((s16)scale.vx * rsin((u16)angle)) >> 0xC);
@@ -257,10 +254,7 @@ MATCH void func_801D1678(s32* from, s32* to, u8 intensity) {
     SetPolyG4(prim);
     SetSemiTrans(prim, 1);
     Camera_ProjectPoint(from, &projected);
-    prim->x0 = projected.vx + 1;
-    prim->y0 = projected.vy - 1;
-    prim->x1 = projected.vx;
-    prim->y1 = projected.vy;
+    setXY2(prim, projected.vx + 1, projected.vy - 1, projected.vx, projected.vy);
     Camera_ProjectPoint(to, &projected);
     prim->x2 = projected.vx + 1;
     prim->y2 = projected.vy - 1;
@@ -276,10 +270,7 @@ MATCH void func_801D1678(s32* from, s32* to, u8 intensity) {
     SetPolyG4(prim);
     SetSemiTrans(prim, 1);
     Camera_ProjectPoint(from, &projected);
-    prim->x0 = projected.vx;
-    prim->y0 = projected.vy;
-    prim->x1 = projected.vx - 1;
-    prim->y1 = projected.vy + 1;
+    setXY2(prim, projected.vx, projected.vy, projected.vx - 1, projected.vy + 1);
     Camera_ProjectPoint(to, &projected);
     prim->x2 = projected.vx;
     prim->y2 = projected.vy;
@@ -505,10 +496,7 @@ MATCH void func_801D23A0(void) {
     mode         = actor->timer - 1;
     actor->timer = mode;
     if (!(mode & BYTE_MASK)) {
-        rect.x = 832;
-        rect.y = 256;
-        rect.w = D_801D393C[D_801D40AC].w;
-        rect.h = D_801D393C[D_801D40AC].h;
+        setRECT(&rect, 832, 256, D_801D393C[D_801D40AC].w, D_801D393C[D_801D40AC].h);
         StoreImage(&rect, (u32*)AREA_WORK);
         D_801D40B0    = AREA_WORK;
         D_801D40B4    = AREA_WORK + 0x5A00;
@@ -640,11 +628,8 @@ MATCH void func_801D2934(void) {
             }
             tile = (TILE_1*)g_GfxPrimCursor;
             SetTile1(tile);
-            tile->x0 = dot->x;
-            tile->y0 = dot->y;
-            tile->r0 = (dot->color & 0x1F) << 3;
-            tile->g0 = (dot->color & 0x3E0) >> 2;
-            tile->b0 = (dot->color & 0x7C00) >> 7;
+            setXY0(tile, dot->x, dot->y);
+            setRGB0(tile, (dot->color & 0x1F) << 3, (dot->color & 0x3E0) >> 2, (dot->color & 0x7C00) >> 7);
             GFX_AddPrim(GFX_LAYER_EFFECT_FRONT, sizeof(TILE_1));
         }
         dot->active ^= 1;
@@ -794,10 +779,7 @@ MATCH void func_801D2FD8(void) {
     mode         = actor->timer - 1;
     actor->timer = mode;
     if (!(mode & BYTE_MASK)) {
-        rect.x = 832;
-        rect.y = 256;
-        rect.w = D_801D393C[D_801D40AC].w;
-        rect.h = D_801D393C[D_801D40AC].h;
+        setRECT(&rect, 832, 256, D_801D393C[D_801D40AC].w, D_801D393C[D_801D40AC].h);
         StoreImage(&rect, (u32*)AREA_WORK);
         D_801D40B0    = AREA_WORK;
         D_801D40B4    = AREA_WORK + 0x5A00;
@@ -909,11 +891,8 @@ MATCH void func_801D34F0(void) {
             }
             tile = (TILE_1*)g_GfxPrimCursor;
             SetTile1(tile);
-            tile->x0 = dot->x;
-            tile->y0 = dot->y;
-            tile->r0 = (dot->color & 0x1F) << 3;
-            tile->g0 = (dot->color & 0x3E0) >> 2;
-            tile->b0 = (dot->color & 0x7C00) >> 7;
+            setXY0(tile, dot->x, dot->y);
+            setRGB0(tile, (dot->color & 0x1F) << 3, (dot->color & 0x3E0) >> 2, (dot->color & 0x7C00) >> 7);
             GFX_AddPrim(GFX_LAYER_EFFECT_FRONT, sizeof(TILE_1));
         }
         dot->active ^= 1;
@@ -951,11 +930,8 @@ MATCH void func_801D36BC(s32* point, s32 orange_radius, s32 black_radius) {
     turn = 0;
     i    = 0;
     do {
-        prim     = GFX_BeginPolyG4(1);
-        prim->x0 = inner.vx;
-        prim->y0 = inner.vy;
-        prim->x1 = outer.vx;
-        prim->y1 = outer.vy;
+        prim = GFX_BeginPolyG4(1);
+        setXY2(prim, inner.vx, inner.vy, outer.vx, outer.vy);
         turn += 0x80;
         angle     = turn;
         vertex.vx = point[0] + ((orange_radius * rcos(angle)) >> 8);

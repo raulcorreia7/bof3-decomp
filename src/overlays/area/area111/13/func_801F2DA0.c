@@ -35,10 +35,7 @@ NON_MATCHING void func_801F2DA0(void* position, s32 radius1, s32 radius2) {
         prim = (POLY_G4*)g_GfxPrimCursor;
         SetPolyG4(prim);
         SetSemiTrans(prim, 1);
-        prim->x0 = inner.vx;
-        prim->y0 = inner.vy;
-        prim->x1 = outer.vx;
-        prim->y1 = outer.vy;
+        setXY2(prim, inner.vx, inner.vy, outer.vx, outer.vy);
         turn += 0x80;
         angle    = turn;
         point.vx = pos[0] + (((s16)radius1 * rcos(angle)) >> 4);

@@ -288,15 +288,9 @@ draw:
     prim->x2  = params[3] + FIXED_MUL(rsin(params[2]), params[7]);
     prim->y2  = params[4] + FIXED_MUL(rcos(params[2]), params[7]);
 
-    prim->r0 = shade;
-    prim->g0 = shade;
-    prim->b0 = 0xC0;
-    prim->r1 = 0xC0;
-    prim->g1 = 0xC0;
-    prim->b1 = 0xC0;
-    prim->r2 = shade;
-    prim->g2 = shade;
-    prim->b2 = 0xC0;
+    setRGB0(prim, shade, shade, 0xC0);
+    setRGB1(prim, 0xC0, 0xC0, 0xC0);
+    setRGB2(prim, shade, shade, 0xC0);
     GFX_AddPrim(BMAGIC_LAYER_OVER_BATTLERS, sizeof(POLY_G3));
     i++;
     if (i < 8) {

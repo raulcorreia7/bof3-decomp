@@ -40,14 +40,8 @@ MATCH void UI_TextDrawGlyph(s32 color, u8* text) {
         GLYPH->u3    = (s8)(width + GLYPH_U);
         GLYPH->v3    = (s8)((s8)GLYPH_V + (height - ROW_OFFSET));
         setRGB0(GLYPH, 0x80, 0x80, 0x80);
-        GLYPH->x0 = (u16)WINDOW->window.text.x;
-        GLYPH->y0 = (u16)WINDOW->window.text.y;
-        GLYPH->x1 = (s16)GLYPH_RIGHT;
-        GLYPH->y1 = (u16)WINDOW->window.text.y;
-        GLYPH->x2 = (u16)WINDOW->window.text.x;
-        GLYPH->y2 = (s16)GLYPH_BOTTOM;
-        GLYPH->x3 = (s16)GLYPH_RIGHT;
-        GLYPH->y3 = (s16)GLYPH_BOTTOM;
+        setXY4(GLYPH, (u16)WINDOW->window.text.x, (u16)WINDOW->window.text.y, (s16)GLYPH_RIGHT, (u16)WINDOW->window.text.y, (u16)WINDOW->window.text.x, (s16)GLYPH_BOTTOM, (s16)GLYPH_RIGHT,
+               (s16)GLYPH_BOTTOM);
         SetPolyFT4(GLYPH);
         PSX_SET_SEMI_TRANSPARENT(g_GfxPrimCursor);
         GFX_AddPrim(GFX_LAYER_UI, sizeof(POLY_FT4));

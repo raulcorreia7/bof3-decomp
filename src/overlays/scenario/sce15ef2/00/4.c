@@ -233,8 +233,7 @@ MATCH void func_801D17A0(s16 half_width, s16 half_height, u8 shade) {
         prim = (POLY_G3*)g_GfxPrimCursor;
         SetPolyG3(prim);
         SetSemiTrans(prim, 1);
-        prim->x0 = 0xA0;
-        prim->y0 = 0xF0;
+        setXY0(prim, 0xA0, 0xF0);
         phase += 0x40;
         prim->x1 = next[0];
         prim->y1 = next[1];

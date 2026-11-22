@@ -730,10 +730,7 @@ MATCH void func_801F9688(void) {
         prim = (POLY_G4*)g_GfxPrimCursor;
         SetPolyG4(prim);
         SetSemiTrans(prim, 1);
-        prim->x0 = inner.vx;
-        prim->y0 = inner.vy;
-        prim->x1 = outer.vx;
-        prim->y1 = outer.vy;
+        setXY2(prim, inner.vx, inner.vy, outer.vx, outer.vy);
         angle += 0x100;
         inner.vx = 160 + ((rcos((u16)angle) * 80) >> 12);
         inner.vy = 120 + ((rsin((u16)angle) * 60) >> 12);

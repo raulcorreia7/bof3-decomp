@@ -270,15 +270,12 @@ MATCH void func_801F7AEC(void) {
     {
         Actor* task;
 
-        task     = g_Task;
-        tile->x0 = task->screen_x + 0x334;
-        tile->y0 = (u16)(task->screen_y + (((g_GfxBufferIndex ^ 1) * 0xF0) - 0x15));
+        task = g_Task;
+        setXY0(tile, task->screen_x + 0x334, (u16)(task->screen_y + (((g_GfxBufferIndex ^ 1) * 0xF0) - 0x15)));
     }
-    tile->w  = 0x18;
-    tile->h  = 0x30;
-    tile->r0 = 0;
-    tile->g0 = 0;
-    tile->b0 = 0;
+    tile->w = 0x18;
+    tile->h = 0x30;
+    setRGB0(tile, 0, 0, 0);
     GFX_AddPrim(GFX_LAYER_BACKDROP, sizeof(TILE));
 
     cursor          = g_GfxPrimCursor;
@@ -701,24 +698,14 @@ MATCH void func_801F9020(Coord* position, s32* step) {
     line4 = (LINE_F4*)g_GfxPrimCursor;
     SetLineF4(line4);
     SetSemiTrans(line4, 0);
-    line4->x0 = screen[0].vx;
-    line4->y0 = screen[0].vy;
-    line4->x1 = screen[1].vx;
-    line4->y1 = screen[1].vy;
-    line4->x2 = screen[3].vx;
-    line4->y2 = screen[3].vy;
-    line4->x3 = screen[2].vx;
-    line4->y3 = screen[2].vy;
+    setXY4(line4, screen[0].vx, screen[0].vy, screen[1].vx, screen[1].vy, screen[3].vx, screen[3].vy, screen[2].vx, screen[2].vy);
     setRGB0(line4, 0xFF, 0xFF, 0xFF);
     Area_AddCellPrim(position[0].fixed, position[1].fixed, 0, sizeof(LINE_F4));
 
     line2 = (LINE_F2*)g_GfxPrimCursor;
     SetLineF2(line2);
     SetSemiTrans(line2, 0);
-    line2->x0 = screen[0].vx;
-    line2->y0 = screen[0].vy;
-    line2->x1 = screen[2].vx;
-    line2->y1 = screen[2].vy;
+    setXY2(line2, screen[0].vx, screen[0].vy, screen[2].vx, screen[2].vy);
     setRGB0(line2, 0xFF, 0xFF, 0xFF);
     Area_AddCellPrim(position[0].fixed, position[1].fixed, 0, sizeof(LINE_F2));
 }
@@ -918,9 +905,7 @@ MATCH void func_801F9A20(WorldPos* pos, s32* vx) {
     point[2] = pos->z.fixed - vx[2];
     Camera_ProjectPoint(point, (DVECTOR*)&poly->x3);
 
-    poly->r0 = (g_Task->unk_06 & 2) != 0 ? 0x80 : 0;
-    poly->g0 = (g_Task->unk_06 & 2) == 0 ? 0x80 : 0;
-    poly->b0 = 0;
+    setRGB0(poly, (g_Task->unk_06 & 2) != 0 ? 0x80 : 0, (g_Task->unk_06 & 2) == 0 ? 0x80 : 0, 0);
     Area_AddCellPrim(pos->x.fixed, pos->y.fixed, 0, sizeof(POLY_F4));
 }
 

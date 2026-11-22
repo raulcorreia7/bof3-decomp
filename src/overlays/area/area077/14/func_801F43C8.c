@@ -27,10 +27,7 @@ MATCH void func_801F43C8(void) {
         SetPolyG4(prim);
         SetSemiTrans(prim, 1);
         i++;
-        prim->x0 = first.vx;
-        prim->y0 = first.vy;
-        prim->x1 = second.vx;
-        prim->y1 = second.vy;
+        setXY2(prim, first.vx, first.vy, second.vx, second.vy);
         prim->r0 = prim->r1 = shade;
         prim->g0 = prim->b0 = prim->g1 = prim->b1 = shade / 2;
         Camera_ProjectPoint(&slot->edges[0].vx, &first);

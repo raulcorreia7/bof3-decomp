@@ -579,13 +579,10 @@ MATCH void func_801D28A4(s16 x, s16 y, u8 slot, s32 selected) {
     func_8014F800((s16)(x + 6), (s16)(y + 4), 0, 5, (u32)&names[offset]);
     prim = GFX_CURSOR(TILE);
     SetTile(prim);
-    prim->x0 = x + 6;
-    prim->y0 = y + 0x12;
-    prim->w  = 0x3C;
-    prim->h  = 0x10;
-    prim->r0 = 0;
-    prim->g0 = 0;
-    prim->b0 = 0;
+    setXY0(prim, x + 6, y + 0x12);
+    prim->w = 0x3C;
+    prim->h = 0x10;
+    setRGB0(prim, 0, 0, 0);
     GFX_AddPrim(GFX_LAYER_UI, sizeof(TILE));
     sel = selected;
     if (sel == 0) {

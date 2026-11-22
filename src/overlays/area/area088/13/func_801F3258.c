@@ -23,18 +23,13 @@ NON_MATCHING void func_801F3258(u8* window) {
         prim = (POLY_G4*)g_GfxPrimCursor;
         SetPolyG4(prim);
         SetSemiTrans(prim, 1);
-        prim->x0 = point[0].screen.vx;
-        prim->y0 = point[0].screen.vy;
-        prim->x1 = point[0].screen.vx + ((u16)point[0].width * rcos(((u16)point[0].angle) + 0x400) >> 12);
-        prim->y1 = point[0].screen.vy + ((u16)point[0].width * rsin((u16)point[0].angle + 0x400) >> 12);
-        prim->x2 = next[0].screen.vx;
-        prim->y2 = next[0].screen.vy;
-        prim->x3 = next[0].screen.vx + ((u16)next[0].width * rcos((u16)next[0].angle + 0x400) >> 12);
-        prim->y3 = next[0].screen.vy + ((u16)next[0].width * rsin((u16)next[0].angle + 0x400) >> 12);
-        prim->r0 = prim->g0 = prim->b0 = colour;
-        prim->r1 = prim->g1 = prim->b1 = 0;
-        prim->r2 = prim->g2 = prim->b2 = shade;
-        prim->r3 = prim->g3 = prim->b3 = 0;
+        setXY4(prim, point[0].screen.vx, point[0].screen.vy, point[0].screen.vx + ((u16)point[0].width * rcos(((u16)point[0].angle) + 0x400) >> 12),
+               point[0].screen.vy + ((u16)point[0].width * rsin((u16)point[0].angle + 0x400) >> 12), next[0].screen.vx, next[0].screen.vy,
+               next[0].screen.vx + ((u16)next[0].width * rcos((u16)next[0].angle + 0x400) >> 12), next[0].screen.vy + ((u16)next[0].width * rsin((u16)next[0].angle + 0x400) >> 12));
+        setRGB0(prim, colour, colour, colour);
+        setRGB1(prim, 0, 0, 0);
+        setRGB2(prim, shade, shade, shade);
+        setRGB3(prim, 0, 0, 0);
         GFX_AddPrim(1, sizeof(POLY_G4));
         copy     = (POLY_G4*)g_GfxPrimCursor;
         *copy    = *prim;

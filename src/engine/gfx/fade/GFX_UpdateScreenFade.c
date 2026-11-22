@@ -15,11 +15,10 @@ MATCH s32 GFX_UpdateScreenFade(u16* level, s32 delta, char semi_trans, u32 order
     GFX_ADD_LAYER_DRAW_MODE(order & BYTE_MASK, tpage);
     sprite = (TILE*)g_GfxPrimCursor;
     SetTile(sprite);
-    mask       = semi_trans & BYTE_MASK;
-    shade      = (*level >> 7);
-    sprite->w  = SCREEN_WIDTH;
-    sprite->x0 = 0;
-    sprite->y0 = 0;
+    mask      = semi_trans & BYTE_MASK;
+    shade     = (*level >> 7);
+    sprite->w = SCREEN_WIDTH;
+    setXY0(sprite, 0, 0);
     sprite->h  = SCREEN_HEIGHT;
     sprite->b0 = shade;
     sprite->g0 = shade;

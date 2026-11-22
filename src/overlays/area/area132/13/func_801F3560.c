@@ -47,9 +47,7 @@ NON_MATCHING void func_801F3560(AreaSpawnSlot* slot) {
     if ((flags & 1) != 0) {
         blue = FAKE_VOLATILE(u8, slot->unk_03);
     }
-    primitive->r0 = red;
-    primitive->g0 = green;
-    primitive->b0 = blue;
+    setRGB0(primitive, red, green, blue);
     Area_AddCellPrim(slot->pos.x.fixed, slot->pos.y.fixed, 3, sizeof(POLY_FT4));
 }
 #else

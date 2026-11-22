@@ -34,9 +34,7 @@ NON_MATCHING void func_801F53F0(s32 radius) {
         SetTile1(tile);
         SetSemiTrans(tile, 1);
         tile->x0 = ((rsin(i << 7) * scale) >> 14) + D_1F800034_U16[0];
-        tile->r0 = alternate;
-        tile->g0 = alternate * (g_FrameCount & 1);
-        tile->b0 = shade * (g_FrameCount & 1);
+        setRGB0(tile, alternate, alternate * (g_FrameCount & 1), shade * (g_FrameCount & 1));
         tile->y0 = ((rcos(i << 7) * scale) >> 15) + 8 + D_1F800034_U16[1];
         Area_AddCellPrim(g_Task->pos.x.fixed, g_Task->pos.y.fixed, 2, sizeof(DR_MODE));
     }

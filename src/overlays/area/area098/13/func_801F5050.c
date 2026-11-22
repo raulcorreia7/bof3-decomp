@@ -25,11 +25,8 @@ NON_MATCHING void func_801F5050(u8 shade) {
         packet = (POLY_F4*)g_GfxPrimCursor;
         SetPolyF4(packet);
         SetSemiTrans(packet, 1);
-        packet->x0 = screen0.vx;
-        packet->y0 = screen0.vy;
-        packet->x1 = screen1.vx;
-        packet->y1 = screen1.vy;
-        point[2]   = TO_COORD(512);
+        setXY2(packet, screen0.vx, screen0.vy, screen1.vx, screen1.vy);
+        point[2] = TO_COORD(512);
         Camera_ProjectPoint(point, &screen0);
         point[2] = TO_COORD(1280);
         Camera_ProjectPoint(point, &screen1);
@@ -37,9 +34,7 @@ NON_MATCHING void func_801F5050(u8 shade) {
         packet->y2 = screen0.vy;
         packet->x3 = screen1.vx;
         packet->y3 = screen1.vy;
-        packet->r0 = shade;
-        packet->g0 = shade;
-        packet->b0 = shade;
+        setRGB0(packet, shade, shade, shade);
         Area_AddCellPrim(point[0], point[1], 0, sizeof(POLY_F4));
     }
 }
