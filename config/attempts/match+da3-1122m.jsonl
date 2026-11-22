@@ -1,0 +1,1 @@
+{"function": "emi/world00/area030/04@0x801DE5EC", "tried": "Removed the count local so the species count is read at both sites as retail does, then homed limit in a register", "first_diff": "0x801DE5F4: the body is exact but the frame stays 0x20 against retail 0x18; the 8 bytes are unreferenced and neither count nor limit explains them", "score": "6 rows differ, 144 words each"}

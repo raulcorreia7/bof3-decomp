@@ -9,7 +9,6 @@
 #ifdef NON_MATCHING
 NON_MATCHING void Fishing_FishAppear(void) {
     s16 limit;
-    u8  count;
     s32 coord;
 
     Area_SceneSelectRecord(FISHING_ENTRY(TASK(FishingState)->cue_index)->scene_id);
@@ -19,9 +18,8 @@ NON_MATCHING void Fishing_FishAppear(void) {
     TASK(FishingState)->timer        = 0;
     TASK(FishingState)->saved_index  = 0;
     FISHING_ROW->fish_row            = (u8)RANDOM_MASK(3);
-    count                            = FISHING_ENTRY(TASK(FishingState)->cue_index)->count;
-    if ((u32)FISHING_ROW->fish_row < (u32)count) {
-        FISHING_ROW->fish_row = count;
+    if ((u32)FISHING_ROW->fish_row < (u32)FISHING_ENTRY(TASK(FishingState)->cue_index)->count) {
+        FISHING_ROW->fish_row = FISHING_ENTRY(TASK(FishingState)->cue_index)->count;
     }
     FISHING_ROW->fish_row &= 3;
     coord                             = TO_COORD(20);
