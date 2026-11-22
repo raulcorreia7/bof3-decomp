@@ -11,9 +11,9 @@ MATCH void func_8019B284(void) {
     work  = TASK(Actor);
     index = work->param.unk_0B;
     if ((work->header.flags & ACTOR_FLAG_HIDDEN) == 0) {
-        D_801468B6[index].value = D_801468B6[index].value + work->screen_x;
-        D_801468B8[index].value = D_801468B8[index].value + work->screen_y;
-        D_801468B1[index].value = work->draw_layer;
+        g_Actors[index].screen_x += work->screen_x;
+        g_Actors[index].screen_y += work->screen_y;
+        g_Actors[index].draw_layer = work->draw_layer;
     }
     if (!ACTOR_IN_USE(g_Actors[index])) {
         Actor_Clear();

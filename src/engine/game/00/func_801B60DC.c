@@ -4,7 +4,7 @@ MATCH void func_801B60DC(s32 actor_index) {
     s32 index;
 
     index = actor_index & BYTE_MASK;
-    if (D_8014688E[index * ACTOR_SIZE] != 9) {
+    if (g_Actors[index].unk_06 != 9) {
         g_Actors[index].interaction_flags |= ACTOR_INTERACTION_SCRIPT_PENDING;
         Actor_RequestRoute(TASK(Actor)->direction);
         ACTOR_CLEAR_STEP();

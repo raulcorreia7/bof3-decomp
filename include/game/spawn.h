@@ -19,7 +19,5 @@ extern s32 g_ScratchPad;
 /* g_ScratchPad */
 extern ScratchPad g_ScratchPad;
 #endif
-/* Id byte column of the 0x98-byte entity work rows. */
-extern u8 D_8014691A[];
 
 #endif

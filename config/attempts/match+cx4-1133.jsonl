@@ -1,0 +1,1 @@
+{"function": "emi/scenario/scena05/00@0x801F7660", "tried": "removed the height=z argument copy per the prim/type rule", "first_diff": "0x801F7664: retail keeps x/y in s7/s8; the candidate spills them and keeps z in s8", "score": "candidate 0x424 vs retail 0x418, unchanged"}
