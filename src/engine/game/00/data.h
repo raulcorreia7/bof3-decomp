@@ -94,14 +94,14 @@ ASSERT_SIZE(PartySlot, 0x4);
  * only reader of the member is WorldMap_GetPoints; the rows are written by the
  * data initialiser only. */
 typedef struct WorldMapRegion {
-    Callback walk;
-    Callback entry;
-    Callback flock;
-    Callback script;
-    Callback clouds;
-    u8*      map_points;
-    u8       area_id;
-    u8       pad_19[3];
+    Callback       walk;
+    Callback       entry;
+    Callback       flock;
+    Callback       script;
+    Callback       clouds;
+    WorldMapPoint* map_points;
+    u8             area_id;
+    u8             pad_19[3];
 } WorldMapRegion;
 
 /* g_WorldMapRegions[11] spans 0x134 bytes up to D_801C8090. */

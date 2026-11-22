@@ -24,7 +24,7 @@ MATCH void Fishing_DrawReelCursor(s16 panel_x, s16 panel_y, u8 panel_width, s8 u
     width   = panel_width;
 
     Fishing_SetDrawMode(0, layer);
-    sprite     = (SPRT*)Fishing_DrawSprite(28, layer, x, y);
+    sprite     = Fishing_DrawSprite(28, layer, x, y);
     w          = width & BYTE_MASK;
     sprite->w  = w;
     sprite->u0 = sprite->u0 + u_shift;

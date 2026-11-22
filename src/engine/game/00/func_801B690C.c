@@ -1,9 +1,9 @@
 #include "game_00.h"
 
 MATCH void func_801B690C(void) {
-    u8*    entry;
-    Actor* work;
-    u16    value;
+    WorldMapPoint* entry;
+    Actor*         work;
+    u16            value;
 
     if ((Area_CellGetCode(COORD_INT(TASK(Actor)->pos.x), COORD_INT(TASK(Actor)->pos.y)) & BYTE_MASK) != 0xA0) {
         return;
@@ -12,20 +12,20 @@ MATCH void func_801B690C(void) {
     entry = WorldMap_GetPoints();
     work  = TASK(Actor);
     for (;;) {
-        if (COORD_INT(work->pos.x) != entry[0]) {
-            entry += 4;
+        if (COORD_INT(work->pos.x) != entry->x) {
+            entry++;
             continue;
         }
-        if (COORD_INT(work->pos.y) != entry[1]) {
-            entry += 4;
+        if (COORD_INT(work->pos.y) != entry->y) {
+            entry++;
             continue;
         }
         break;
     }
 
-    value             = entry[2];
+    value             = entry->area_id;
     g_GameEntryPosX   = TO_COORD(14) + COORD_HALF;
     g_GameEntryPosY   = TO_COORD(65);
     g_GameEntryAreaId = value;
-    g_GameEntryFacing = entry[3];
+    g_GameEntryFacing = entry->type;
 }

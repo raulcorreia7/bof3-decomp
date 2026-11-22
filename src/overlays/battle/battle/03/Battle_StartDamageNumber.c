@@ -4,52 +4,60 @@
 #ifdef NON_MATCHING
 NON_MATCHING void Battle_StartDamageNumber(void) {
     BattleEffect* slot;
+    BattleEffect* work;
     PartyMember*  source;
-    u8            digits;
+    u32           type;
+    u32           index;
     s32           divisor;
-    u8            type;
+    u8            digits;
     s8            offset;
 
     slot   = D_801EC2E0;
     source = slot->target.party;
     type   = source->slot;
-    if (type < 3) {
-        COORD_INT(slot->pos.x) = source->screen_x.value + (s8)g_BattlePanelOffsets[(source->facing * 2) + (source->unk_2C.value * 8)];
+    if (type < BATTLE_PARTY_CHARACTERS_COUNT) {
+        index                  = (source->facing * 2) + (source->unk_2C.value * 8);
+        COORD_INT(slot->pos.x) = source->screen_x.value + g_BattlePanelOffsets[index];
         source                 = slot->target.party;
-        offset                 = (g_BattlePanelOffsets + 1)[(source->facing * 2) + (source->unk_2C.value * 8)];
+        index                  = (source->facing * 2) + (source->unk_2C.value * 8);
+        offset                 = (g_BattlePanelOffsets + 1)[index];
     } else {
-        type -= 3;
+        type -= BATTLE_PARTY_CHARACTERS_COUNT;
         COORD_INT(slot->pos.x) = source->screen_x.value + g_BattleEnemyBattlers[type].panel_offset_x;
         source                 = slot->target.party;
-        type                   = source->slot;
-        type -= 3;
-        offset = g_BattleEnemyBattlers[type].panel_offset_y;
+        type                   = source->slot - BATTLE_PARTY_CHARACTERS_COUNT;
+        offset                 = g_BattleEnemyBattlers[type].panel_offset_y;
     }
     COORD_INT(slot->pos.y) = source->screen_y.value + offset;
+    /* The running slot can change hands, so re-read it before each phase. */
+    slot                   = D_801EC2E0;
     divisor                = 0x64;
     if (slot->unk_0B == 1) {
         COORD_INT(slot->pos.y) -= 9;
     }
     digits = 2;
-    /* Shorter each pass: the ladder ends when the value still fits the divisor. */
+    /* Drop a decimal place per pass until the value still fits the divisor. */
+    slot   = D_801EC2E0;
 loop:
-    if ((slot->target_index.target_index / divisor) <= 0) {
+    if ((slot->target_index.target_index / (divisor & BYTE_MASK)) <= 0) {
         digits -= 1;
-        divisor = (divisor & BYTE_MASK) / 10;
+        divisor = (divisor & BYTE_MASK) / 10u;
         if (digits != 0) {
-            goto loop; /* back to the shorter divisor */
+            goto loop;
         }
     }
     type = slot->target.party->slot;
-    if (type < 3) {
+    if (type < BATTLE_PARTY_CHARACTERS_COUNT) {
         g_Game.members[type].u.turn.damage_flags.value |= BATTLER_DAMAGE_NUMBER;
     } else {
-        ENEMY_COMBATANT(type).turn.damage_flags.value |= 0x80;
+        ENEMY_COMBATANT(type).turn.damage_flags.value |= BATTLER_DAMAGE_NUMBER;
     }
-    slot->unk_0A     = digits;
-    slot->arg.unk_09 = 8;
-    slot->depth      = 0;
-    slot->header.mode += 1;
+    /* The slot pointer is live, so each write reads the running slot again. */
+    D_801EC2E0->unk_0A     = digits;
+    D_801EC2E0->arg.unk_09 = 8;
+    work                   = D_801EC2E0;
+    work->depth            = 0;
+    work->header.mode += 1;
 }
 #else
 INCLUDE_ASM(Battle_StartDamageNumber);

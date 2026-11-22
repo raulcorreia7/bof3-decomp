@@ -21,16 +21,16 @@ NON_MATCHING void func_801F3010(void) {
     point[2] = g_Actors[2].pos.z.fixed;
     Camera_ProjectPoint(point, &screen);
     D_801F4FD4 = 0;
-    for (row = 0; row < (s16)D_801F43BE; row++) {
-        for (col = 0; col < (s16)D_801F43BC; col++) {
+    for (row = 0; row < (s16)AREA120_IMAGE_RECT->box.h; row++) {
+        for (col = 0; col < (s16)AREA120_IMAGE_RECT->box.w; col++) {
             if (*pixels != 0) {
                 tile->color = *pixels;
-                tile->x     = (col + (screen.vx - ((RECT*)D_801F43B8)->x)) << 4;
-                tile->y     = (row + (screen.vy - ((RECT*)D_801F43B8)->y)) << 4;
+                tile->x     = (col + (screen.vx - AREA120_IMAGE_RECT->box.x)) << 4;
+                tile->y     = (row + (screen.vy - AREA120_IMAGE_RECT->box.y)) << 4;
                 if (D_801F4F34[col] < (s16)tile->y) {
                     D_801F4F34[col] = tile->y;
                 }
-                tile->timer = D_801F43BE - row + (rand() & 7);
+                tile->timer = AREA120_IMAGE_RECT->box.h - row + (rand() & 7);
                 tile->step  = rand() & 0x1F;
                 tile->limit = col;
                 tile++;
