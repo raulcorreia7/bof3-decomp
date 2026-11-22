@@ -11,17 +11,7 @@ MATCH void func_801EEC04(void) {
 
     BMagic_DispatchTaskPair(func_801EED04, Effect_StartOnZeroTick);
 
-    for (i = 0; i < BMAGIC_EFFECT_COUNT; i++) {
-        if (D_801F050C[i].header.flags & BMAGIC_EFFECT_IN_USE) {
-            saved_task            = g_Task;
-            saved_battler         = g_BattleEffectBattler;
-            g_Task                = (PartyMember*)&D_801F050C[i];
-            g_BattleEffectBattler = D_801F050C[i].target.party;
-            func_801EF510();
-            g_BattleEffectBattler = saved_battler;
-            g_Task                = saved_task;
-        }
-    }
+    BMAGIC_RUN_EFFECT_SLOTS(D_801F050C, func_801EF510);
 }
 
 MATCH void func_801EED04(void) {

@@ -242,6 +242,21 @@ static inline void BMagic_ResetLocalWork(void) {
         BMAGIC_EFFECT_SLOTS[i].header.step  = 0;      \
     }
 
+/* Run a handler for each effect slot in use, with the slot as the task and its target as the effect
+ * battler. A statement macro: the member declares u8 i, PartyMember* saved_task and saved_battler. */
+#define BMAGIC_RUN_EFFECT_SLOTS(slots, handler)                \
+    for (i = 0; i < BMAGIC_EFFECT_COUNT; i++) {                \
+        if ((slots)[i].header.flags & BMAGIC_EFFECT_IN_USE) {  \
+            saved_task            = g_Task;                    \
+            saved_battler         = g_BattleEffectBattler;     \
+            g_Task                = (PartyMember*)&(slots)[i]; \
+            g_BattleEffectBattler = (slots)[i].target.party;   \
+            handler();                                         \
+            g_BattleEffectBattler = saved_battler;             \
+            g_Task                = saved_task;                \
+        }                                                      \
+    }
+
 /* Run the task handler the spad task byte selects. */
 static inline void BMagic_DispatchTaskPair(Callback first, Callback second) {
     Callback handlers[2] = {first, second};
@@ -493,6 +508,15 @@ void Effect_DrawSparkleDisc(void);
 void Effect_DrawShadedDisc(void);
 /* Defined in Effect_DrawTexturedQuad.h, which a member includes after its first call. */
 void Effect_DrawTexturedQuad(void);
+
+/* Count the task timer up by `increment` and advance the step at `limit`. A statement macro: the member
+ * declares u8 timer; `field` is the task's timer member in the image's task type. */
+#define BMAGIC_STEP_TIMER(field, increment, limit)     \
+    timer         = g_Task->field + (increment);       \
+    g_Task->field = timer;                             \
+    if (timer == (limit)) {                            \
+        g_Task->header.step = g_Task->header.step + 1; \
+    }
 
 #define EFFECT_ADVANCE_AT_COUNT(increment, limit) \
     do {                                          \

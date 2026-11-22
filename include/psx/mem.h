@@ -4,22 +4,22 @@
 #include "types.h"
 
 /* PS1 scratchpad RAM: 0x1F800000-0x1F8003FF. Offsets are byte offsets. */
-#define SCRATCH_PAD                         0x1F800000u
-#define SCRATCH_PAD_SIZE                    0x400u
+#define SCRATCH_PAD                        0x1F800000u
+#define SCRATCH_PAD_SIZE                   0x400u
 
 /* Address conversion: no memory access occurs. Add const and volatile to the
  * type directly, e.g. MEM_PTR(const volatile u32, address). */
-#define MEM_PTR(type, address)              ((type*)(address))
+#define MEM_PTR(type, address)             ((type*)(address))
 
 /* Direct object access: an lvalue for an object stored at an address.
  *
  *     MEM(u32, address) = value;
  *     value = MEM(volatile u16, address);
  */
-#define MEM(type, address)                  (*MEM_PTR(type, address))
+#define MEM(type, address)                 (*MEM_PTR(type, address))
 
 /* BIOS kernel RAM starts at physical address 0x100; offsets are byte offsets from 0x100. */
-#define KERNEL_RAM(offset)                  MEM_PTR(u8, 0x00000100u + (u32)(offset))
+#define KERNEL_RAM(offset)                 MEM_PTR(u8, 0x00000100u + (u32)(offset))
 
 /* Byte-offset field access while a structure is incomplete or its fields are
  * not yet named. Replace with real struct members once the layout is known.
@@ -27,15 +27,8 @@
  *     FIELD_PTR(volatile u16, base, 0x80u)
  *     value = FIELD(u32, work, 0x18u)
  */
-#define FIELD_PTR(type, base, byte_offset)  MEM_PTR(type, (u8*)(base) + (u32)(byte_offset))
-#define FIELD(type, base, byte_offset)      (*FIELD_PTR(type, base, byte_offset))
-
-/* Fixed-address function pointer. function_type is a function-pointer typedef:
- *
- *     typedef void (*Callback)(void);
- *     FUNCTION_AT(Callback, 0x80123456u)();
- */
-#define FUNCTION_AT(function_type, address) ((function_type)(address))
+#define FIELD_PTR(type, base, byte_offset) MEM_PTR(type, (u8*)(base) + (u32)(byte_offset))
+#define FIELD(type, base, byte_offset)     (*FIELD_PTR(type, base, byte_offset))
 
 /* Scratchpad. SP(off) is the absolute address of a byte offset; SP_PTR is a
  * typed pointer to it (no read occurs); SP_REF is an lvalue.
@@ -55,15 +48,9 @@
  *
  *     SP_PTR(Entity *, 0u)[0x11]
  */
-#define SP(byte_offset)                     (SCRATCH_PAD + (u32)(byte_offset))
-#define SP_PTR(type, byte_offset)           MEM_PTR(type, SP(byte_offset))
-#define SP_REF(type, byte_offset)           MEM(type, SP(byte_offset))
-
-/* Volatile access to a RAM address by width (not hardware registers: those are
- * HW_REF in psx/hw_extra.h). */
-#define REG8(address)                       MEM(volatile u8, address)
-#define REG16(address)                      MEM(volatile u16, address)
-#define REG32(address)                      MEM(volatile u32, address)
+#define SP(byte_offset)                    (SCRATCH_PAD + (u32)(byte_offset))
+#define SP_PTR(type, byte_offset)          MEM_PTR(type, SP(byte_offset))
+#define SP_REF(type, byte_offset)          MEM(type, SP(byte_offset))
 
 /* retail addresses */
 /* Scratchpad work pointer at 0x1F800044. Each mode reads it through its own pointee type: a header defines a

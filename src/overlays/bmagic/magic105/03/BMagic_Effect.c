@@ -123,11 +123,7 @@ MATCH void func_801EF124(void) {
 MATCH void func_801EF250(void) {
     u8 timer;
 
-    timer         = g_Task->timer + 1;
-    g_Task->timer = timer;
-    if (timer == 64) {
-        g_Task->header.step = g_Task->header.step + 1;
-    }
+    BMAGIC_STEP_TIMER(timer, 1, 64);
 }
 
 #include "overlays/bmagic/shared/Effect_TickOnZeroTick.h"

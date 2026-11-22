@@ -172,11 +172,7 @@ MATCH void func_801EF7D4(void) {
 MATCH void func_801EF850(void) {
     u8 timer;
 
-    timer         = g_Task->timer + 1;
-    g_Task->timer = timer;
-    if (timer == 22) {
-        g_Task->header.step = g_Task->header.step + 1;
-    }
+    BMAGIC_STEP_TIMER(timer, 1, 22);
 }
 
 #include "overlays/bmagic/shared/Effect_CountDownTickerAndStep.h"

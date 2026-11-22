@@ -12,17 +12,7 @@ MATCH void func_801EEC14(void) {
 
     SYS_DISPATCH_BYTE(handlers.steps, g_Task->header.mode);
 
-    for (i = 0; i < BMAGIC_EFFECT_COUNT; i++) {
-        if (D_801EFA14[i].header.flags & BMAGIC_EFFECT_IN_USE) {
-            saved_task            = g_Task;
-            saved_battler         = g_BattleEffectBattler;
-            g_Task                = (PartyMember*)&D_801EFA14[i];
-            g_BattleEffectBattler = D_801EFA14[i].target.party;
-            BMagic_DispatchEffectMode();
-            g_BattleEffectBattler = saved_battler;
-            g_Task                = saved_task;
-        }
-    }
+    BMAGIC_RUN_EFFECT_SLOTS(D_801EFA14, BMagic_DispatchEffectMode);
 }
 
 /* Clears the effect slots, centers the camera and reloads palette rows 2 and 26 of the work copy with the STP bit
