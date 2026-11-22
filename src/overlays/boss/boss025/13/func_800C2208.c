@@ -27,7 +27,7 @@ MATCH u8 func_800C2208(u32 mode) {
             }
             if (!(g_Battle.boss_flags & 1)) {
                 g_UiPanelMode = 2;
-                UI_MessageStartArea(0x19);
+                UI_MessageStartArea(MSG_BOSS025_025);
                 g_Battle.boss_flags |= 1;
             } else if (!(g_Battle.boss_flags & 2)) {
                 SP_REF(EnemyBattler*, 0x44u) = g_BattleEnemyBattlers;
@@ -35,7 +35,7 @@ MATCH u8 func_800C2208(u32 mode) {
                 g_Battle.boss_flags |= 2;
             } else if ((D_801462EC & 0x600) == 0x200) {
                 g_UiPanelMode = 2;
-                UI_MessageStartArea(0x1A);
+                UI_MessageStartArea(MSG_BOSS025_026);
                 g_Battle.boss_flags |= 4;
             } else {
                 if (g_Battle.turn_cursor == 4) {
@@ -60,23 +60,23 @@ MATCH u8 func_800C2208(u32 mode) {
             D_801463D0 = (g_Battle.turn_cursor >> 1) + 1;
             if (g_Battle.turn_cursor == 1) {
                 g_UiPanelMode = 2;
-                UI_MessageStartArea(0x1B);
+                UI_MessageStartArea(MSG_BOSS025_027);
             } else if (g_Battle.turn_cursor == 2) {
                 g_UiPanelMode                         = 2;
                 g_Game.members[0].u.turn.command.type = BATTLE_COMMAND_ATTACK;
-                UI_MessageStartArea(0x1C);
+                UI_MessageStartArea(MSG_BOSS025_028);
             } else if (g_Battle.turn_cursor == 3) {
                 g_UiPanelMode = 2;
-                UI_MessageStartArea(0x1D);
+                UI_MessageStartArea(MSG_BOSS025_029);
             } else if (g_Battle.turn_cursor == 4 && !(g_Battle.flags & 0x40)) {
                 g_Game.members[0].u.turn.command.type = BATTLE_COMMAND_ABILITY;
                 g_Game.members[0].u.turn.command.id   = 0x46;
             } else if (g_Battle.turn_cursor == 5) {
                 g_UiPanelMode = 2;
-                UI_MessageStartArea(0x1E);
+                UI_MessageStartArea(MSG_BOSS025_030);
             } else if (g_Battle.turn_cursor == 6 && !(g_Battle.flags & 0x40)) {
                 g_UiPanelMode = 2;
-                UI_MessageStartArea(0x1F);
+                UI_MessageStartArea(MSG_BOSS025_031);
                 g_Game.members[0].u.turn.command.type       = BATTLE_COMMAND_ATTACK;
                 g_Game.members[0].chr.stats.critical_chance = 100;
                 D_801EB6C4                                  = 1;
