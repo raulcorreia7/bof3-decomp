@@ -115,7 +115,6 @@ extern u8          D_80148383;
 extern u8          D_8014839C;
 extern u8          D_801483A7;
 extern u8          D_801483CB;
-extern u8          D_801483E5;
 extern u8          D_801483E6;
 extern u16         D_801483E8;
 extern u16         D_801483EA;

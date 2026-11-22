@@ -14,7 +14,7 @@ NON_MATCHING void func_801D5E90(void) {
 
     panel = &g_UiPanelTasks[14];
     Menu_DrawClutStrip(g_WindowClut);
-    D_80148624                                                = 1;
+    g_UiPanelTasks[21].active                                 = 1;
     D_80148628                                                = panel->pos.x + 7;
     D_8014862A                                                = panel->pos.y + ((panel->unk_0B - panel->unk_0A) * 13 + 0x1A);
     g_UiPanelTasks[MENU_START_PANEL_DESCRIPTION].u.message.id = Item_GetDescription(panel->unk_08, panel->flags);
@@ -59,16 +59,16 @@ NON_MATCHING void func_801D5E90(void) {
             panel->unk_0A = last_row + 9;
         }
     }
-    group  = D_8014850E;
+    group  = g_UiPanelTasks[13].unk_0A;
     cursor = &panel->unk_0B;
     if (group < 4) {
-        s_SkillOrderGroups[D_80148510][group] = panel->unk_0A;
-        s_SkillOrderTypes[D_80148510][group]  = panel->unk_0B;
+        s_SkillOrderGroups[g_UiPanelTasks[13].unk_0C][group] = panel->unk_0A;
+        s_SkillOrderTypes[g_UiPanelTasks[13].unk_0C][group]  = panel->unk_0B;
     } else {
-        *(&D_801ED8BD + D_80148510 * 6) = panel->unk_0A;
-        *(&D_801ED8BC + D_80148510 * 6) = panel->unk_0A;
-        *(&D_801ED8D5 + D_80148510 * 6) = panel->unk_0B;
-        *(&D_801ED8D4 + D_80148510 * 6) = panel->unk_0B;
+        *(&D_801ED8BD + g_UiPanelTasks[13].unk_0C * 6) = panel->unk_0A;
+        *(&D_801ED8BC + g_UiPanelTasks[13].unk_0C * 6) = panel->unk_0A;
+        *(&D_801ED8D5 + g_UiPanelTasks[13].unk_0C * 6) = panel->unk_0B;
+        *(&D_801ED8D4 + g_UiPanelTasks[13].unk_0C * 6) = panel->unk_0B;
     }
     if (old != *cursor) {
         SND_SEPlay(EMI_SE_ID(SND_BANK_COMMON, 0));

@@ -32,7 +32,6 @@ extern char g_MenuZennyFormat[];
 extern u8   D_80144DF5;
 extern u8   D_80144DF6;
 extern u8   D_80144DF7;
-extern u8   D_80148338;
 extern s8   D_80148511;
 extern u8   D_80148656;
 extern s8   D_80148658;
