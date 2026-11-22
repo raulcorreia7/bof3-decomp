@@ -167,7 +167,7 @@ NON_MATCHING void func_801FAE0C(void) {
             if (g_GameStateIndex == GAME_REQUEST_MESSAGE) {
                 break;
             }
-            g_ScriptVars[0]      = 1;
+            g_ScriptVars[0] = 1;
             Scene_SetupParty(1);
             g_ScenarioState.step = 1;
             break;
@@ -208,7 +208,7 @@ NON_MATCHING void func_801FAE0C(void) {
                 break;
             }
             SYS_ClearFlag(g_Scenario2Flags + 0x20, 0x3E);
-            g_ScriptVars[0]      = 1;
+            g_ScriptVars[0] = 1;
             Scene_SetupParty(2);
             g_ScenarioState.step = 21;
             break;
@@ -234,7 +234,7 @@ NON_MATCHING void func_801FAE0C(void) {
             if (g_GameStateIndex == GAME_REQUEST_MESSAGE) {
                 break;
             }
-            g_ScriptVars[0]      = 1;
+            g_ScriptVars[0] = 1;
             Scene_SetupParty(9);
             g_ScenarioState.step = 41;
             break;
