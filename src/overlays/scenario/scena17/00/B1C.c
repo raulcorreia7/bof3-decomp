@@ -562,8 +562,7 @@ MATCH void func_801F88CC(s32 semi, s32 color) {
     setSprt(sprite);
     SetSemiTrans(sprite, (u8)semi);
     setXY0(sprite, 0x100, 0);
-    sprite->w = 0x40;
-    sprite->h = 0xF0;
+    setWH(sprite, 0x40, 0xF0);
     setUV0(sprite, 0, 0);
     setRGB0(sprite, color, color, color);
     GFX_AddPrim(GFX_LAYER_EFFECT_FRONT, sizeof(SPRT));
