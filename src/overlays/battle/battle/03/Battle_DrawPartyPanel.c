@@ -52,10 +52,10 @@ NON_MATCHING void Battle_DrawPartyPanel(s32 x, s32 y) {
             func_801D9DBC((s16)var_s2, var_s7, 9, 0, 0U);
             var_s0 = var_s5 & BYTE_MASK;
             var_s1 = (var_s0 + MENU_PANEL_BATTLER_FIRST) * 0x24;
-            func_801D9E9C((s16)var_s2, var_s7, (u16)((u8*)&D_8014833B)[var_s1], (u16)((u8*)&D_8014833D)[var_s1], 0);
+            func_801D9E9C((s16)var_s2, var_s7, (u16)((u8*)&g_UiPanelTasks[0].unk_0B)[var_s1], (u16)((u8*)&g_UiPanelTasks[0].flags)[var_s1], 0);
             if (*(u16*)((u8*)D_80145F22 + (var_s0 * BATTLE_PARTY_STRIDE)) != 0) {
                 Battle_DrawPanelLine((s16)var_s2, var_s7, (s16)(var_s4 + (g_UiPanelTasks[var_s0 + MENU_PANEL_BATTLER_FIRST].unk_0C + 0x14)), var_s7, 0x64U, 0U, 0xC8U);
-                temp_v0_153 = ((u8*)&D_8014833E)[var_s1];
+                temp_v0_153 = ((u8*)&g_UiPanelTasks[0].unk_0E)[var_s1];
                 if (temp_v0_153 != 0) {
                     temp_a2_160 = g_UiPanelTasks[var_s0 + MENU_PANEL_BATTLER_FIRST].unk_0C;
                     Battle_DrawPanelLine((s16)(var_s4 + (temp_a2_160 + 0x14)), var_s7, (s16)(temp_v0_153 + (temp_a2_160 + var_s3)), var_s7, 0xC8U, 0U, 0U);

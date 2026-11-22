@@ -13,19 +13,16 @@ __asm__(".include \"include/match/macro.inc\"\n");
 NON_MATCHING void func_801FCEC0(void) {
     switch (g_ScenarioState.step) {
         case 0: {
-            u8* vars;
+            u8* vars = g_ScriptVars;
 
-            vars = g_ScriptVars;
             if (vars[0] == 0x64) {
                 vars[0] = 0;
-                UI_ModeSet(UI_MODE_LONG_FADE_OUT);
+                UI_ModeSet(0xD);
                 g_ScenarioState.step = 0x14;
             }
             if (vars[0] == 0x65) {
-                vars[0]         = 0;
-                g_ScriptVars[1] = 0;
-                g_ScriptVars[2] = 0;
-                goto scene_return;
+                vars[0] = 0;
+                goto reset_vars;
             }
             break;
         }
@@ -43,79 +40,74 @@ NON_MATCHING void func_801FCEC0(void) {
             g_ScenarioState.step = 0x16;
             break;
         case 0x16:
-            if ((SND_XAIsIdle() & BYTE_MASK) == 0) {
-                break;
+            if ((SND_XAIsIdle() & BYTE_MASK) != 0) {
+                g_ScenarioState.step = 0x17;
             }
-            g_ScenarioState.step = 0x17;
             break;
         case 0x17:
             if (g_Game.party_size == 2) {
-                Game_RequestAreaChange(AREA_ID_CEDAR_WOODS_HOUSE_BEFORE_NUE, TO_COORD(0x50), TO_COORD(5), 0x88);
+                g_ScriptVars[2]      = 8;
+                g_ScenarioState.step = 0x18;
+                Game_RequestAreaChange(0xA, 0x500000, 0x50000, 0x88);
+                SND_BGMPlay(7, 0x64, 8);
             } else if (g_Game.party_size == 3) {
-                Game_RequestAreaChange(AREA_ID_CEDAR_WOODS_HOUSE_BEFORE_NUE, TO_COORD(0x51), TO_COORD(8), 0x89);
-            } else {
-                break;
+                g_ScriptVars[2]      = 8;
+                g_ScenarioState.step = 0x18;
+                Game_RequestAreaChange(0xA, 0x510000, 0x80000, 0x89);
+                SND_BGMPlay(7, 0x64, 8);
             }
-            g_ScriptVars[2]      = 8;
-            g_ScenarioState.step = 0x18;
-            SND_BGMPlay(7, BGM_CUE_LEVEL_DEFAULT, BGM_CUE_SHAPE_DEFAULT);
             break;
         case 0x18:
             if (g_ScriptVars[0] == 1) {
                 SCRIPT_VARS_CLEAR_EXCEPT_CHOICE();
-                goto scene_return;
+                goto clear_script;
             }
             break;
         case 2:
-            if (g_GameStateIndex == GAME_REQUEST_MESSAGE) {
-                break;
-            }
-            if (g_ScriptVars[0] == 0xC8) {
-                D_8014865C           = -2;
-                D_80148698           = 1;
-                g_GameEntryState     = GAME_MODE_SHOP;
-                g_MenuStep.step      = 0;
-                D_80148699           = 0;
-                g_ScenarioState.step = 3;
-            } else if (g_ScriptVars[0] == 0xC9) {
-                g_ScriptVars[0] = 0;
-                g_ScriptVars[1] = 0;
-                g_ScriptVars[2] = 0;
-                goto scene_return;
+            if (g_GameStateIndex != GAME_REQUEST_MESSAGE) {
+                if (g_ScriptVars[0] == 0xC8) {
+                    D_8014865C           = -2;
+                    D_80148698           = 1;
+                    g_GameEntryState     = GAME_MODE_SHOP;
+                    g_MenuStep.step      = 0;
+                    D_80148699           = 0;
+                    g_ScenarioState.step = 3;
+                } else if (g_ScriptVars[0] == 0xC9) {
+                    g_ScriptVars[0] = 0;
+                    goto reset_vars;
+                }
             }
             break;
         case 3:
             if (g_GameStateIndex == 0) {
-                SCRIPT_VARS_CLEAR_ALL();
-                goto scene_return;
+                g_ScriptVars[0] = 0;
+                SCRIPT_VARS_CLEAR_EXCEPT_CHOICE();
+                goto clear_script;
             }
             break;
-        case 5: {
-            u8* step;
-            u8* vars;
-
-            step = &g_ScenarioState.step;
-            vars = g_ScriptVars;
-            if (vars[0] == 0x64) {
-                *step           = 1;
-                vars[0]         = 0;
-                g_ScriptVars[2] = 2;
-                UI_ModeSet(UI_MODE_LONG_FADE_OUT);
-                *step = 0xA;
+        case 5:
+            if (g_ScriptVars[0] == 0x64) {
+                g_ScenarioState.step = 1;
+                g_ScriptVars[0]      = 0;
+                g_ScriptVars[2]      = 2;
+                UI_ModeSet(0xD);
+                g_ScenarioState.step = 0xA;
             }
-            if (vars[0] == 0x65) {
-                vars[0]         = 0;
-                g_ScriptVars[1] = 0;
-                g_ScriptVars[2] = 0;
-                goto scene_return;
+            if (g_ScriptVars[0] == 0x65) {
+                g_ScriptVars[0] = 0;
+                goto reset_vars;
             }
             break;
-        }
-        scene_return:
+        reset_vars:
+            g_ScriptVars[1] = 0;
+            g_ScriptVars[2] = 0;
+        clear_script:
             Game_ClearScriptActive();
-            SCENARIO_RETURN_TO_START();
+        step_zero:
+            g_ScenarioState.step     = 0;
+            g_ScenarioState.state_04 = 0;
             break;
-        case 0xA:
+        case 10:
             if (WINDOW_EFFECT_BUSY()) {
                 break;
             }
@@ -124,27 +116,27 @@ NON_MATCHING void func_801FCEC0(void) {
             g_ScenarioState.step = 0xB;
             SND_SeqFadeOut(0, 0, 4, 0x1E);
             break;
-        case 0xB:
+        case 11:
             SND_XAStartStream(0, 1);
             g_ScenarioState.step = 0xC;
             break;
-        case 0xC:
-            if ((SND_XAIsIdle() & BYTE_MASK) == 0) {
-                break;
+        case 12:
+            if ((SND_XAIsIdle() & BYTE_MASK) != 0) {
+                g_ScenarioState.step = 0xD;
             }
-            g_ScenarioState.step = 0xD;
             break;
-        case 0xD:
+        case 13:
             if (g_Game.party_size == 2) {
-                Game_RequestAreaChange(AREA_ID_CEDAR_WOODS_HOUSE_BEFORE_NUE, TO_COORD(0x50), TO_COORD(5), 0x88);
+                g_ScriptVars[2]      = 8;
+                g_ScenarioState.step = 0x18;
+                Game_RequestAreaChange(0xA, 0x500000, 0x50000, 0x88);
+                SND_BGMPlay(7, 0x64, 8);
             } else if (g_Game.party_size == 3) {
-                Game_RequestAreaChange(AREA_ID_CEDAR_WOODS_HOUSE_BEFORE_NUE, TO_COORD(0x51), TO_COORD(8), 0x89);
-            } else {
-                break;
+                g_ScriptVars[2]      = 8;
+                g_ScenarioState.step = 0x18;
+                Game_RequestAreaChange(0xA, 0x510000, 0x80000, 0x89);
+                SND_BGMPlay(7, 0x64, 8);
             }
-            g_ScriptVars[2]      = 8;
-            g_ScenarioState.step = 0x18;
-            SND_BGMPlay(7, BGM_CUE_LEVEL_DEFAULT, BGM_CUE_SHAPE_DEFAULT);
             break;
     }
 }

@@ -11,19 +11,19 @@ NON_MATCHING void func_801D20D0(void) {
 
     UI_MessageSetVariable(0, 0xC, Item_GetRecord(g_ShopItemCategory, g_ShopItemId));
     g_UiPanelTasks[0].u.addr.unk_10 = 0x4B;
-    D_80148624                      = 0;
+    g_UiPanelTasks[21].active       = 0;
     /* FAKE: block boundary keeps the panel-task stores base-relative off one la. */
     FAKE_ORDER_FENCE();
     cursor                    = &D_80148656;
     idx                       = (s8)*cursor + 3;
     g_UiPanelTasks[20].active = 1;
-    D_80148604                = g_UiPanelTasks[idx].pos.x;
+    g_UiPanelTasks[20].pos.x  = g_UiPanelTasks[idx].pos.x;
     /* FAKE: block boundary keeps each copy beside its own load. */
     FAKE_ORDER_FENCE();
-    D_80148606 = g_UiPanelTasks[idx].pos.y;
-    count      = Party_CountOrder(PARTY_ORDER_FIELD);
-    buttons    = INPUT_REPEATED(g_PadStates[0].pressed, (PADLup | PADLdown));
-    old        = *cursor;
+    g_UiPanelTasks[20].pos.y = g_UiPanelTasks[idx].pos.y;
+    count                    = Party_CountOrder(PARTY_ORDER_FIELD);
+    buttons                  = INPUT_REPEATED(g_PadStates[0].pressed, (PADLup | PADLdown));
+    old                      = *cursor;
     if (buttons & PADLup) {
         if ((s8)(*cursor = old - 1) < 0) {
             *cursor = count - 1;
@@ -46,13 +46,13 @@ NON_MATCHING void func_801D20D0(void) {
                     g_UiPanelTasks[i + 3].state = 1;
                 }
             }
-            D_80148408         = 1;
-            D_80148409         = 7;
-            D_8014840A         = 6;
-            D_8014840B         = 2;
-            *(s16*)&D_8014840C = -0x96;
-            D_8014840E         = 0x74;
-            D_80148412         = D_80148656;
+            g_UiPanelTasks[6].active        = 1;
+            g_UiPanelTasks[6].panel         = 7;
+            g_UiPanelTasks[6].mode          = 6;
+            g_UiPanelTasks[6].state         = 2;
+            *(s16*)&g_UiPanelTasks[6].pos.x = -0x96;
+            g_UiPanelTasks[6].pos.y         = 0x74;
+            g_UiPanelTasks[6].unk_0A        = D_80148656;
             SND_SEPlay(EMI_SE_ID(SND_BANK_COMMON, 3));
             D_80148600 = 0;
             D_801E6054 = 0;

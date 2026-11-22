@@ -22,10 +22,10 @@ NON_MATCHING void Battle_ChooseEquipAction(void) {
         D_8014862E ^= 1u;
     }
     if ((g_PadStates[0].pressed & g_InputMasks[BATTLE_INPUT_CANCEL]) != 0u) {
-        D_80148624              = 0u;
-        D_801483C0              = 1u;
-        g_Battle.phase.sub_step = 2u;
-        g_Battle.ui_step        = 1u;
+        g_UiPanelTasks[21].active = 0u;
+        g_UiPanelTasks[4].active  = 1u;
+        g_Battle.phase.sub_step   = 2u;
+        g_Battle.ui_step          = 1u;
     } else if ((g_PadStates[0].pressed & g_InputMasks[BATTLE_INPUT_CONFIRM]) != 0u) {
         SND_SEPlay(EMI_SE_ID(SND_BANK_COMMON, 3));
         *panel = D_8014862E;
@@ -34,16 +34,16 @@ NON_MATCHING void Battle_ChooseEquipAction(void) {
             g_Battle.ui_mode += 3u;
         } else {
             Battle_InitEquipChangePanel();
-            D_8014859D = g_BattleEquipSlot;
-            D_801485A0 = D_801485C4;
+            g_UiPanelTasks[17].unk_09 = g_BattleEquipSlot;
+            g_UiPanelTasks[17].unk_0C = g_UiPanelTasks[18].unk_0C;
             g_Battle.ui_mode += 1u;
         }
     } else if ((g_PadStates[0].pressed & PADLdown) != 0u) {
         SND_SEPlay(EMI_SE_ID(SND_BANK_COMMON, 0));
-        D_80148624              = 0u;
-        D_801483C0              = 1u;
-        g_Battle.phase.sub_step = 2u;
-        g_Battle.ui_step        = 1u;
+        g_UiPanelTasks[21].active = 0u;
+        g_UiPanelTasks[4].active  = 1u;
+        g_Battle.phase.sub_step   = 2u;
+        g_Battle.ui_step          = 1u;
     }
 }
 #else

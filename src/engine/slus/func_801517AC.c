@@ -8,7 +8,7 @@
  * g_UiMessageRequest is MESSAGE_NONE; otherwise it increments g_UiMessageStep.
  */
 MATCH void func_801517AC(void) {
-    if (D_80148357 == 4) {
+    if (g_UiPanelTasks[1].state == 4) {
         if (g_UiMessageRequest == MESSAGE_NONE) {
             g_UiMessageState.state = 2;
             g_UiMessageStep        = 0;

@@ -7,7 +7,7 @@ MATCH void func_8015115C(void) {
     UI_PanelOpenTask(1, 0);
     count                   = g_UiMessageStep;
     count                   = count + 1;
-    D_80148356              = 1;
+    g_UiPanelTasks[1].mode  = 1;
     g_UiPanelTasks[0].state = 3;
     g_UiWindowChannel |= FRONTEND_FLAG_SELECTION;
     g_UiMessageStep = count;
