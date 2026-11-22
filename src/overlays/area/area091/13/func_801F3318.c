@@ -23,7 +23,7 @@ NON_MATCHING void func_801F3318(void) {
         color_a = colors[index];
         color_b = colors[31 - index];
     }
-    work                                                                                                                                          = AREA_PALETTE_WORK;
+    work                                                                                                                                                         = AREA_PALETTE_WORK;
     MEM_PTR(u16, work + (TASK(Actor)->clut_select >> 3) * AREA_PALETTE_ROW + (TASK(Actor)->clut_select & 7) * AREA_PALETTE_UNIT)[TASK(Actor)->param.unk_0B]      = color_a;
     MEM_PTR(u16, work + (TASK(Actor)->clut_select >> 3) * AREA_PALETTE_ROW + (TASK(Actor)->clut_select & 7) * AREA_PALETTE_UNIT)[31 - TASK(Actor)->param.unk_0B] = color_b;
     if (TASK(Actor)->unk_0A == 0) {
