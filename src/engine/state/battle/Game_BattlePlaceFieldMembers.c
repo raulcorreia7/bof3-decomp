@@ -65,11 +65,11 @@ NON_MATCHING void Game_BattlePlaceFieldMembers(void) {
             member         = &g_Game.members[i];
             g_Game.current = member;
             TASK_SET(member);
-            g_Task->direction              = s_RouteIndexByMode[g_Battle.scroll_dir];
-            ((PartyMember*)g_Task)->unk_29 = 6;
+            g_Task->direction         = s_RouteIndexByMode[g_Battle.scroll_dir];
+            TASK(PartyMember)->unk_29 = 6;
             if (i != 0) {
-                ((PartyMember*)g_Task)->unk_07 = 0;
-                ((PartyMember*)g_Task)->pad_06 = ((PartyMember*)g_Task)->slot - 1;
+                TASK(PartyMember)->unk_07 = 0;
+                TASK(PartyMember)->pad_06 = TASK(PartyMember)->slot - 1;
             }
             func_801C3204();
             Script_Select(g_Task->direction);

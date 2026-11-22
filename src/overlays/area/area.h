@@ -176,7 +176,7 @@ static inline void Area_ProbeParty(s32 slot, const u8* table, s32 type) {
     selection = table[index];
     result    = Actor_ClaimSlot(type, 0, selection, x, y);
     if ((u8)result != GAME_NONE) {
-        battler               = (PartyMember*)g_Task;
+        battler               = TASK(PartyMember);
         battler->param.unk_0B = (u8)result;
     }
 }

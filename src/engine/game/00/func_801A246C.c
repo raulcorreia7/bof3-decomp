@@ -24,9 +24,9 @@ MATCH s32 func_801A246C(s32 value_a, s32 value_b, s32 flag_bits) {
     flags = saved & 0x2;
     if (flags != 0) {
         if (FIELD(u8, value_a, 0x7Bu) != 0u) {
-            work      = (u8*)g_Task;
+            work      = TASK(u8);
             work[9]   = (0x20 / (value_b & BYTE_MASK));
-            work      = (u8*)g_Task;
+            work      = TASK(u8);
             work[0xA] = (work[9] >> 1);
         }
     }

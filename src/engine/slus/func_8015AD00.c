@@ -124,7 +124,7 @@ MATCH s8 func_8015AD00(PanelSortItem* sort_list) {
                 sort_list->z = z;
             }
 
-            sort_list->work      = (u8*)g_Task;
+            sort_list->work      = TASK(u8);
             sort_list->primitive = p;
             setRGB0(&quad->ft4, g_Task->tint.bytes.rgb.r, g_Task->tint.bytes.rgb.g, g_Task->tint.bytes.rgb.b);
             if ((g_Task->range_54.table[3] & 0x80) != 0) {

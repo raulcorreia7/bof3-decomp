@@ -6,7 +6,7 @@ MATCH void func_801E383C(void) {
     if (g_Battle.selection_latch != 0) {
         value = g_BattleActorTurn->command.target;
         if ((value == g_Task->slot) || (value & BATTLE_TARGET_ENEMY_SIDE)) {
-            g_Task->unk_07      = GFX_PaletteAllocFade((u8*)g_Task, 0, 0, 0, 0);
+            g_Task->unk_07      = GFX_PaletteAllocFade(TASK(u8), 0, 0, 0, 0);
             g_Task->header.step = 1;
         }
     }

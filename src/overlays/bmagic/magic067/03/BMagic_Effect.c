@@ -26,7 +26,7 @@ NON_MATCHING void func_801EEC94(void) {
     g_Task->unk_09       = 0x18;
     g_Task->header.mode += 1;
     slot                               = Battle_AllocEffect(1, 0x13) & BYTE_MASK;
-    g_BattleEffects[slot].target.party = (PartyMember*)g_Task;
+    g_BattleEffects[slot].target.party = TASK(PartyMember);
     g_BattleEffects[slot].header.mode  = 0;
     g_BattleEffects[slot].unk_08       = g_BattleEffectBattler->facing;
     g_Task->param.unk_0B += 1;

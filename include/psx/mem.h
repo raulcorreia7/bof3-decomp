@@ -53,10 +53,9 @@
 #define SP_REF(type, byte_offset)          MEM(type, SP(byte_offset))
 
 /* retail addresses */
-/* Scratchpad work pointer at 0x1F800044. Each mode reads it through its own pointee type: a header defines a
- * `g_Task` view macro, `((T *)g_Task)`, for its type. A unit that must re-read the cell
- * after every store defines FAKE_DECL_TASK_VOLATILE before its first include. `struct Task` is incomplete: no
- * member is reachable without a view. TASK_BYTES is the byte view for a record with no type. */
+/* Scratchpad work pointer at 0x1F800044. `struct Task` is incomplete: a mode reads the task through
+ * TASK(Type), its own record type. A unit that must re-read the cell after every store defines
+ * FAKE_DECL_TASK_VOLATILE before its first include. */
 #ifdef FAKE_DECL_TASK_VOLATILE
 /* D_1F800044 */
 extern struct Task* volatile g_Task;
@@ -65,6 +64,10 @@ extern struct Task* volatile g_Task;
 extern struct Task* g_Task;
 #endif
 
+/* The current task viewed as a Type record. */
+#define TASK(type)       ((type*)g_Task)
+
+/* The current task as raw bytes, for a record with no type. */
 #define TASK_BYTES       ((u8*)g_Task)
 
 /* Point the cell at a record of any type: the cell holds the record as an untyped task pointer. */

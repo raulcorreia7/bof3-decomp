@@ -4,7 +4,7 @@ MATCH void func_800AE3C0(void) {
     PartyMember* work;
     s8           counter;
 
-    work         = (PartyMember*)g_Task;
+    work         = TASK(PartyMember);
     counter      = work->unk_09 - 1;
     work->unk_09 = counter;
     if (counter == -6) {

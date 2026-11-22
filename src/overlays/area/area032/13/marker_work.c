@@ -163,7 +163,7 @@ MATCH void func_801F363C(void) {
 
     MESSAGE_REQUEST_CLEAR();
     if (g_UiMessageChoice == 1) {
-        previous = (u8*)g_Task;
+        previous = TASK(u8);
         g_Task   = g_Game.members;
         Script_Select(0x80);
         g_Task = previous;
@@ -188,7 +188,7 @@ MATCH void func_801F3728(void) {
     Actor_SetSemiTransparent();
     flag                     = 1;
     g_Task->tint.bytes.flags = flag;
-    work                     = (u8*)g_Task;
+    work                     = TASK(u8);
     value                    = ((Actor*)work)->pos.x.fixed;
     work[4]                  = flag;
     next                     = work + 0xC;

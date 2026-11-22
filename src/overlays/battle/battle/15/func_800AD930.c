@@ -6,7 +6,7 @@ MATCH void func_800AD930(void) {
 
     flag = *MEM_PTR(u8, &g_Battle.cursor.panel_entry);
     if (flag != GAME_NONE) {
-        work = (PartyMember*)g_Task;
+        work = TASK(PartyMember);
         work->header.step--;
     }
     if (!(D_80148624 & 0x1)) {

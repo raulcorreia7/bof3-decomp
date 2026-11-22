@@ -38,7 +38,7 @@ found:
     first->unk_2C             = masked;
     value                     = MEM(s32, 0x8003B800u + masked * 4);
     first->active_flags       = 1;
-    next                      = (u8*)g_Task + 0x27u;
+    next                      = TASK(u8) + 0x27u;
     first->unk_4C             = value + (s32)MEM_PTR(s32, 0x8003B800u);
     next[0]                   = (party_slot + 0x78);
     slot                      = party_slot & BYTE_MASK;

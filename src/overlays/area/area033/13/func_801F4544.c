@@ -17,7 +17,7 @@ MATCH void func_801F4544(void) {
     g_Task->mirror       = 0;
     ACTOR_CLEAR_TINT();
 
-    scratch                                                         = (u8*)g_Task;
+    scratch                                                         = TASK(u8);
     row_offset                                                      = scratch[0x0B] * 4;
     map_offset                                                      = D_801F4CB0[0x19 + row_offset] * g_AreaMapBundle.width;
     *(g_AreaCellCodes + map_offset + D_801F4CB0[0x18 + row_offset]) = 0xA0;

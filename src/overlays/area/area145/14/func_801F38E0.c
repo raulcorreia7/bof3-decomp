@@ -9,7 +9,7 @@ MATCH void func_801F38E0(void) {
     work->pos.x.fixed              = TO_COORD(10);
     work->pos.y.fixed              = TO_COORD(99);
     result                         = Area_HeightSample(work->pos.x.fixed, TO_COORD(99));
-    depth_target                   = (u8*)g_Task;
+    depth_target                   = TASK(u8);
     FIELD(s32, depth_target, 0x3C) = result << 16;
     depth_target[1]++;
 }

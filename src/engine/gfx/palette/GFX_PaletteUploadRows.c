@@ -19,7 +19,7 @@ MATCH void GFX_PaletteUploadRows(void) {
     volatile u16* colors;
     u32           color_index;
 
-    work        = (u8*)g_Task;
+    work        = TASK(u8);
     table_index = work[0x28];
     value       = work[0x27];
     divisor     = s_PaletteFadeRowDivisors[table_index];

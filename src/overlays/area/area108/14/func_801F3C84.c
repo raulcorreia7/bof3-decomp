@@ -7,7 +7,7 @@ MATCH void func_801F3C84(void) {
     u8           i;
     u8           j;
 
-    saved = (PartyMember*)g_Task;
+    saved = TASK(PartyMember);
     for (i = 0; i < ACTOR_COUNT; i++) {
         actor = &g_Actors[i];
         TASK_SET(actor);

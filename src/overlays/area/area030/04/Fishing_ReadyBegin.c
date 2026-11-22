@@ -9,15 +9,15 @@ MATCH void Fishing_ReadyBegin(void) {
 
     Fishing_SelectGear();
 
-    g_FishingHookedFish         = 0xFF;
+    g_FishingHookedFish      = 0xFF;
     /* FAKE: typed word stores let the scheduler hoist the later byte store; retail keeps them in order. */
-    *(u32*)((u8*)g_Task + 0x0C) = 0;
-    *(u32*)((u8*)g_Task + 0x10) = 0;
-    *(u32*)((u8*)g_Task + 0x14) = 0;
-    *(u32*)((u8*)g_Task + 0x18) = 0;
-    *(u32*)((u8*)g_Task + 0x1C) = 0;
-    *(u32*)((u8*)g_Task + 0x20) = 0;
-    g_Task->timer               = 0;
+    *(u32*)(TASK(u8) + 0x0C) = 0;
+    *(u32*)(TASK(u8) + 0x10) = 0;
+    *(u32*)(TASK(u8) + 0x14) = 0;
+    *(u32*)(TASK(u8) + 0x18) = 0;
+    *(u32*)(TASK(u8) + 0x1C) = 0;
+    *(u32*)(TASK(u8) + 0x20) = 0;
+    g_Task->timer            = 0;
 
     mode = (g_FishingLure && g_FishingRod) ? 0 : 6;
     func_801DDE94(mode);
@@ -28,6 +28,6 @@ MATCH void Fishing_ReadyBegin(void) {
         Script_Select(0xB);
     }
 
-    record    = (u8*)g_Task;
+    record    = TASK(u8);
     record[3] = (record[3] + 1);
 }

@@ -9,7 +9,7 @@ MATCH void func_801F2FBC(void) {
     g_Task->mirror           = 0;
     g_Task->scale.x          = 57344;
     g_Task->scale.y          = 57344;
-    g_CurrentActor->unk_93   = func_8019651C((u8*)g_Task, 0, 0, 0, 1);
+    g_CurrentActor->unk_93   = func_8019651C(TASK(u8), 0, 0, 0, 1);
     g_Task->tint.bytes.flags = 1;
     work                     = g_Task;
     work->tint.steps.delta.b = 0x14;
