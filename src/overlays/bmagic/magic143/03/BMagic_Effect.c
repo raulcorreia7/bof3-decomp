@@ -136,17 +136,11 @@ NON_MATCHING void func_801EF23C(s32 band_height, u16 radius, u16 jitter_mask) {
             scratch->cells.halves[0] = (s16)radius - (jitter_mask & rand());
         }
 
-        vectors[2].vx = 0;
-        vectors[2].vy = vectors[0].vy;
-        vectors[2].vz = vectors[0].vz;
-        vectors[3].vx = 0;
-        vectors[3].vy = vectors[0].vy - band_height;
-        vectors[3].vz = vectors[0].vz;
+        setVector(&vectors[2], 0, vectors[0].vy, vectors[0].vz);
+        setVector(&vectors[3], 0, vectors[0].vy - band_height, vectors[0].vz);
         setVector(&vectors[0], 0, FIXED_MUL(rsin(cells[1]), scratch->cells.halves[0]), depth);
-        vectors[1].vx = 0;
-        vectors[1].vy = vectors[0].vy - band_height;
-        vectors[1].vz = depth;
-        prim          = (POLY_G4*)g_GfxPrimCursor;
+        setVector(&vectors[1], 0, vectors[0].vy - band_height, depth);
+        prim = (POLY_G4*)g_GfxPrimCursor;
         SetPolyG4(prim);
         SetSemiTrans(prim, 1);
         setRGB0(prim, cells[2], cells[2], cells[2]);

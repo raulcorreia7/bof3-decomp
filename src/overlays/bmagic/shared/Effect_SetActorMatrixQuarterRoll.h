@@ -7,9 +7,7 @@ MATCH void Effect_SetActorMatrixQuarterRoll(void) {
     long    flags;
 
     PushMatrix();
-    rot.vx = 0;
-    rot.vy = 0;
-    rot.vz = 0;
+    setVector(&rot, 0, 0, 0);
     if (g_Task->facing & 1) {
         rot.vz = ONE / 4;
     }
