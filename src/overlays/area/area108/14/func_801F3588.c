@@ -1,7 +1,7 @@
 #include "area108_14.h"
 
 /* Projects the four corners of one row through a random rotation around the row's state centre. */
-MATCH void func_801F3588(u8* dst, u8* src, u16* state) {
+MATCH void func_801F3588(u8* dst, u8* src, AreaTransform* state) {
     MATRIX  rot;
     SVECTOR in;
     VECTOR  vtx;
@@ -10,10 +10,10 @@ MATCH void func_801F3588(u8* dst, u8* src, u16* state) {
     s16*    result;
     s32     index;
 
-    state[8]  = RANDOM_MASK(0xFC0);
-    state[9]  = RANDOM_MASK(0xFC0);
-    state[10] = RANDOM_MASK(0xFC0);
-    RotMatrix((SVECTOR*)(state + 8), &rot);
+    state->rotation.vx = RANDOM_MASK(0xFC0);
+    state->rotation.vy = RANDOM_MASK(0xFC0);
+    state->rotation.vz = RANDOM_MASK(0xFC0);
+    RotMatrix(&state->rotation, &rot);
     rot.t[0] = 0;
     rot.t[1] = 0;
     rot.t[2] = 0;
@@ -26,9 +26,9 @@ MATCH void func_801F3588(u8* dst, u8* src, u16* state) {
     do {
         setVector(&in, *corner++, *corner++, *corner++);
         RotTrans(&in, &vtx, &flag);
-        *result++ = state[0] + vtx.vx;
-        *result++ = state[1] + vtx.vy;
-        *result++ = state[2] + vtx.vz;
+        *result++ = state->base_x + vtx.vx;
+        *result++ = state->base_y + vtx.vy;
+        *result++ = state->base_z + vtx.vz;
         index += 1;
     } while ((index & BYTE_MASK) < 4U);
 }

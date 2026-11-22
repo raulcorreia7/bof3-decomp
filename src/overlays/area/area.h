@@ -38,6 +38,49 @@ typedef struct AreaQuadCell {
 
 ASSERT_SIZE(AreaQuadCell, 3);
 
+/* One quad of an area part table: the packed cell word (bytes: depth row, shape, cell y,
+ * cell x) and the tile word Area_ApplyTileToQuad reads. */
+typedef struct AreaQuadPart {
+    union {
+        u32 packed;
+        u8  bytes[4];
+    } cell;
+
+    u32 tile;
+} AreaQuadPart;
+
+ASSERT_SIZE(AreaQuadPart, 8);
+
+/* A span of map cells: the first column and row, then the column and row it stops before. */
+typedef struct AreaCellSpan {
+    u8 x0;
+    u8 y0;
+    u8 x_end;
+    u8 y_end;
+} AreaCellSpan;
+
+ASSERT_SIZE(AreaCellSpan, 4);
+
+/* The per-sprite transform state at 0x800E4940 (0x18-byte stride): the halfword translation base,
+ * the normal and the rotation angles. */
+typedef struct AreaTransform {
+    /* 0x00 */ u16 base_x;
+    /* 0x02 */ u16 base_y;
+    /* 0x04 */ u16 base_z;
+    /* 0x06 */ u16 pad_06;
+    /* 0x08 */ union {
+        SVECTOR vec;
+        u16     word[4];
+    } normal;
+
+    /* 0x10 */ SVECTOR rotation;
+} AreaTransform;
+
+ASSERT_OFFSET(AreaTransform, base_x, 0x00);
+ASSERT_OFFSET(AreaTransform, normal, 0x08);
+ASSERT_OFFSET(AreaTransform, rotation, 0x10);
+ASSERT_SIZE(AreaTransform, 0x18);
+
 /* One panel marker row selected by a controller mask: the mask, the panel
  * step it selects and an unused byte. */
 typedef struct WorldMapMarker {

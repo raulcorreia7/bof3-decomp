@@ -98,22 +98,6 @@ typedef volatile struct BattleSelectionPlayer {
     u8           pad_04[0x13C];
 } BattleSelectionPlayer;
 
-typedef struct BattleWork {
-    u8  unk_00[0x08];
-    u8  unk_08;
-    u8  unk_09[0x03];
-    s32 unk_0C;
-    s32 unk_10;
-    u8  unk_14[0x1A];
-    u16 unk_2E;
-    u16 unk_30;
-    u16 unk_32;
-    u32 range_x;
-    u32 range_y;
-    u8  pad_3C[2]; /* +0x3C .. +0x3D */
-    u16 unk3E;     /* +0x3E vertical span; Battle_ProjectRange projects it negated */
-} BattleWork;
-
 typedef struct BattleStatDisplayTemplate {
     s16 max_hp;         /* 0x00 */
     s16 power;          /* 0x02 */

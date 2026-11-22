@@ -6,11 +6,11 @@
 #include "overlays/bmagic/bmagic.h"
 
 /* func_801F06D8 */
-extern Callback   D_801F0A1C[];
-extern Callback   D_801F0A2C[];
+extern Callback         D_801F0A1C[];
+extern Callback         D_801F0A2C[];
 /* D_801F0A38 */
-extern TrailPoint BMagic_Trail[][BMAGIC_TRAIL_LENGTH];
+extern BMagicTrailPoint BMagic_Trail[][BMAGIC_TRAIL_LENGTH];
 /* func_801F0390 */
-void              func_801F06D8(void);
+void                    func_801F06D8(void);
 
 #endif
