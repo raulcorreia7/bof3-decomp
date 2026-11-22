@@ -63,11 +63,11 @@ Callback g_MenuActionSteps[3] = {func_8019959C, func_801997EC, UI_PanelSetPosX};
 
 Callback g_UiPanelTaskSteps[4] = {func_8019959C, func_80199938, func_80199978, func_801999B8};
 
-char D_801C7C34[5][8] = {"ITEM" T_END T_END T_END T_END, "WEAPON" T_END T_END, "ARMOR" T_END T_END T_END,
+char g_ItemCategoryLabels[5][8] = {"ITEM" T_END T_END T_END T_END, "WEAPON" T_END T_END, "ARMOR" T_END T_END T_END,
                          "OPTION" T_END T_END, "VITAL" T_END T_END T_END};
 
-u8* D_801C7C5C[5] = {(u8*)&D_801C7C34[0][0], (u8*)&D_801C7C34[1][0], (u8*)&D_801C7C34[2][0], (u8*)&D_801C7C34[3][0],
-                     (u8*)&D_801C7C34[4][0]};
+u8* g_ItemCategoryLabelPointers[5] = {(u8*)&g_ItemCategoryLabels[0][0], (u8*)&g_ItemCategoryLabels[1][0], (u8*)&g_ItemCategoryLabels[2][0], (u8*)&g_ItemCategoryLabels[3][0],
+                     (u8*)&g_ItemCategoryLabels[4][0]};
 
 Callback g_ActorTypes[187] = {WorldMap_StepWalk,
                               func_801F6DC0,
