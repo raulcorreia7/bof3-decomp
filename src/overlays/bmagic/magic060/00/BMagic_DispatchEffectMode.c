@@ -30,10 +30,7 @@ MATCH void func_801F0030(void) {
 MATCH void func_801F0090(void) {
     PartyMember* work;
 
-    work = (PartyMember*)g_BattleEffectBattler;
-    if (work->param.unk_0B == 0x83) {
-        TASK(PartyMember)->header.step++;
-    }
+    MAGIC060_ADVANCE_AT_EFFECT_PARAM(0x83);
 }
 
 #include "overlays/bmagic/shared/Effect_TickOnTimerZero.h"
@@ -86,10 +83,7 @@ MATCH void func_801F031C(void) {
 MATCH void func_801F037C(void) {
     PartyMember* work;
 
-    work = (PartyMember*)g_BattleEffectBattler;
-    if (work->param.unk_0B == 0x83) {
-        TASK(PartyMember)->header.step++;
-    }
+    MAGIC060_ADVANCE_AT_EFFECT_PARAM(0x83);
 }
 
 MATCH void func_801F03BC(void) {

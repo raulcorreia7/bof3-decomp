@@ -111,4 +111,24 @@ extern BattleEffectTargetColumn D_801EC3A4[];
 /* Defined later in this image; the result lands in the effect work +0x04. */
 u32                             func_801F0230(void);
 
+/* Advance the effect animation, count the timer down and at zero play the given hit SE, mark the target
+ * damaged and step. A statement macro: the member declares u8 timer. */
+#define MAGIC008_COUNT_DOWN_MARK_DAMAGED(se_id)                \
+    Script_AnimStepOnce();                                     \
+    timer                     = TASK(PartyMember)->unk_09 - 1; \
+    TASK(PartyMember)->unk_09 = timer;                         \
+    if (!(timer & BYTE_MASK)) {                                \
+        Battle_PlayActiveBattlerSE((se_id), 0);                \
+        Battle_MarkDamaged(g_Battle.target_selector);          \
+        TASK(PartyMember)->header.step += 1;                   \
+    }
+
+/* Release the active battler and advance the effect mode once the effect target's byte 0x0B is 0xFF. */
+#define MAGIC008_RELEASE_ACTIVE_AT_END()                                     \
+    if (TASK(PartyMember)->param.unk_0B == 0xFF) {                           \
+        BATTLE_ACTIVE_WORK->header.flags &= ~PARTY_MEMBER_FLAG_HANDLER_BUSY; \
+        Battle_SelectActiveBattlerScript(4, 0);                              \
+        TASK(PartyMember)->header.mode += 1;                                 \
+    }
+
 #endif
