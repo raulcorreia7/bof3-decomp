@@ -38,10 +38,26 @@ void func_801F2EA8(void);
 void func_801F3274(void);
 void Area_DrawLightPillar(s32* pos);
 
+/* The per-cell words at the map bundle's +0x30: one replicated shade byte a cell. */
+extern u32 D_80104030[];
 /* The scene flag id of each cell the step handles, by cell column. */
 extern u8  D_801F420C[];
 /* The ground height of each cell, by cell column. */
 extern u16 D_801F4210[];
+
+/* The gate span of each cell column: first and end cell, the ends exclusive. */
+typedef struct AreaCellSpan {
+    u8 x0;
+    u8 y0;
+    u8 x_end;
+    u8 y_end;
+} AreaCellSpan;
+
+ASSERT_SIZE(AreaCellSpan, 4);
+
+extern AreaCellSpan D_801F4218[];
+/* The gate shade bytes, eleven a flag row, one a span cell. */
+extern u8           D_801F4228[];
 
 /* An answer cell: the cell x and y, the flag mask and the flag the answer toggles. */
 typedef struct AnswerCell {

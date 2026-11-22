@@ -438,7 +438,7 @@ extern volatile u8           D_80146486;
 extern s8                    D_80146488;
 extern s8                    g_EmiRingSlot;
 /* D_8014648A */
-extern s8                    g_CdStep;
+extern s8                    g_CdState;
 extern s8                    D_8014648B;
 /* D_8014648C */
 extern s32                   g_CdSyncStatus;
@@ -618,7 +618,7 @@ extern const struct MenuPanelSteps g_UiMessageChoiceSteps;
 /* D_80149B64 */
 extern const struct MenuPanelSteps g_UiMessagePresetSteps;
 extern const VECTOR                D_80149BF0;
-extern const u32                   g_CdSteps[];
+extern const Callback              g_CdStateHandlers[CD_STATE_COUNT];
 extern const EmiRingSteps          g_EmiRingSteps;
 extern const char                  D_80149F9C[];
 extern const char                  D_80149FAC[];

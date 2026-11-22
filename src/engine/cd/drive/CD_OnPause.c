@@ -4,12 +4,12 @@
  */
 MATCH void CD_OnPause(void) {
     if (g_CdSyncStatus < 0) {
-        g_CdStep = 6;
+        g_CdState = CD_STATE_PAUSE;
         return;
     }
-    g_CdStep = 8;
+    g_CdState = CD_STATE_IDLE_END;
     if (D_8014648B & 0x1) {
-        g_CdStep = 1;
+        g_CdState = CD_STATE_SET_SPEED;
         return;
     }
     if (D_8014648B & 0x2) {

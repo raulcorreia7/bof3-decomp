@@ -494,7 +494,7 @@ for "Faerie". Retail text keeps its spelling (`ITEM_FAERIE_TIARA`, "Faerie Tiara
 theirs (`CdlPause`, `SpuSetKey`).
 
 Acronyms follow the SDK library their value belongs to, and are capitals otherwise. The drive is
-`Cd` (libcd: `SYS_ReadCd`, `g_CdSteps`), the sound library is `Snd` in a type (`SndBank`,
+`Cd` (libcd: `SYS_ReadCd`, `g_CdStateHandlers`), the sound library is `Snd` in a type (`SndBank`,
 libsnd's `SndVolume`), and `XA`, `HP`, `AP`, `BGM` and `SE` are capitals (`SND_XAIsIdle`,
 `SND_XAStateIdle`). `SE` is the disc's word for a sound effect, as `BGM` is for music
 (`BIN/BATTLE/BATL_SE`, `COMN_SE`): `SND_SEPlay(u16 se_id)`.

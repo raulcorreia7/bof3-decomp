@@ -8,9 +8,9 @@ MATCH void CD_OnSeek(void) {
 
     state = g_CdSyncStatus;
     if (state < 0) {
-        state = 1;
+        state = CD_STATE_SET_SPEED;
     } else {
-        state = 4;
+        state = CD_STATE_READ;
     }
-    g_CdStep = state;
+    g_CdState = state;
 }

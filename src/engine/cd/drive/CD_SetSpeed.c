@@ -17,5 +17,5 @@ MATCH void CD_SetSpeed(void) {
     }
     D_80146492     = 2;
     g_CdSyncStatus = 0;
-    g_CdStep       = 2;
+    g_CdState      = CD_STATE_SEEK;
 }
