@@ -8,8 +8,7 @@ void Menu_DrawPanelIcon(u16 x, u16 y, s32 u, s32 v, u16 clut, u8 color);
 /* func_800B3324 */
 /* The equipped-item compare window: the member's name and four stats, the four stats the
  * equipped items would give (func_80164EF8), and the six equipment rows with their icons.
- * The labels, slot icons and slot categories it reads are unlabeled in this overlay's data
- * block at 0x800B6ED8, 0x800B6EF0 and 0x800B6EF8. */
+ * The labels, slot icons and slot categories come from the panel tables object. */
 #ifdef NON_MATCHING
 NON_MATCHING void func_800B3324(u8 index, u16 x, u16 y, s32 patch, s32 hide_changes, MenuPanelTask* task) {
     struct {
@@ -41,7 +40,7 @@ NON_MATCHING void func_800B3324(u8 index, u16 x, u16 y, s32 patch, s32 hide_chan
     }
     UI_TextDraw((s16)(x + 0x3E - name_length * 6), (s16)(y + 7), UI_TEXT_NORMAL, CHARACTER_NAME_LENGTH, (u8*)chr);
 
-    labels = MEM_PTR(u8, 0x800B6ED8u);
+    labels = (u8*)s_BattlePanelEquipTables.stat_labels;
     for (i = 0, label_y = y + 0x1A; i < 4; i++) {
         UI_TextDraw((s16)(x + 5), (s16)(label_y + i * 13), UI_TEXT_NORMAL, 4, labels + i * MENU_EQUIP_STAT_LABEL_SIZE);
     }
@@ -80,8 +79,8 @@ NON_MATCHING void func_800B3324(u8 index, u16 x, u16 y, s32 patch, s32 hide_chan
     items[EQUIP_SLOT_ARMOR]       = chr->equip.armor;
     items[EQUIP_SLOT_ACCESSORY_1] = chr->equip.accessories[0];
     items[EQUIP_SLOT_ACCESSORY_2] = chr->equip.accessories[1];
-    icons                         = MEM_PTR(u8, 0x800B6EF0u);
-    categories                    = MEM_PTR(u8, 0x800B6EF8u);
+    icons                         = s_BattlePanelEquipTables.slot_icons;
+    categories                    = s_BattlePanelEquipTables.slot_categories;
     draw_y                        = y + 0x55;
     task->u.addr.unk_10           = 0;
     for (i = 0; i < EQUIP_SLOT_COUNT; i++) {
