@@ -152,12 +152,71 @@ block_7:
     return 0;
 }
 
-#ifdef NON_MATCHING
-NON_MATCHING void func_801FE2A0(void) {
+MATCH s32 func_801FE2A0(s32 x, s32 y) {
+    s32 facing;
+
+    if (LOHU(g_GameAreaId) == AREA_ID_DAUNA_MINE_ADULT && SYS_TestFlag(g_SceneFlags, 5) == 0 && (u32)((x >> 16) - 28) < 2 && (u32)((y >> 16) - 43) < 2) {
+        g_ScenarioState.state_04 = 4;
+        g_ScenarioState.step_05  = 0;
+        Game_SetScriptActive();
+        return 1;
+    }
+    if (LOHU(g_GameAreaId) == AREA_ID_CEDAR_WOODS_HOUSE_AFTER_BALIO_SUNDER && SYS_TestFlag(g_SceneFlags, 11) && SYS_TestFlag(g_SceneFlags, 13) == 0) {
+        if (x == TO_COORD(47) && y <= TO_COORD(31) && g_ScenarioState.state_04 != 8) {
+            Game_SetScriptActive();
+            g_ScenarioState.state_04 = 8;
+            g_ScenarioState.step_05  = 10;
+            g_ScenarioState.timer_06 = 20;
+            return 1;
+        }
+        if (x == TO_COORD(27) && y == TO_COORD(17) && SYS_TestFlag(g_SceneFlags, 24) == 0) {
+            SYS_SetFlag(g_SceneFlags, 24);
+            SND_SEPlay(0x201);
+        }
+        if (x == TO_COORD(22) && y == TO_COORD(13) && SYS_TestFlag(g_SceneFlags, 25) == 0) {
+            SYS_SetFlag(g_SceneFlags, 25);
+            SND_SEPlay(0x202);
+        }
+        if (x == TO_COORD(17) && y == TO_COORD(19) && SYS_TestFlag(g_SceneFlags, 26) == 0) {
+            SYS_SetFlag(g_SceneFlags, 26);
+            SND_SEPlay(0x203);
+        }
+        if (x == TO_COORD(7) && y == TO_COORD(19)) {
+            SND_SEPlay(0x204);
+            Game_SetScriptActive();
+            g_ScenarioState.state_04 = 8;
+            g_ScenarioState.step_05  = 20;
+            return 1;
+        }
+    }
+    if (LOHU(g_GameAreaId) == AREA_ID_FARM && SYS_TestFlag(g_SceneFlags, 16) == 0 && SYS_TestFlag(g_SceneFlags, 15) && y <= TO_COORD(3) + COORD_HALF && (u32)((x >> 16) - 28) < 2) {
+        Game_SetScriptActive();
+        g_ScenarioState.state_04 = 9;
+        g_ScenarioState.step_05  = 5;
+        return 1;
+    }
+    if (LOHU(g_GameAreaId) == AREA_ID_OGRE_ROAD && SYS_TestFlag(g_SceneFlags, 8) == 0 && (u32)((x >> 16) - 69) < 3 && (u32)((y >> 16) - 55) < 3) {
+        facing                      = g_Game.members[0].facing;
+        g_ScratchPad.cells.bytes[0] = facing;
+        if ((u32)(facing - 6) >= 2 && facing != 0) {
+            g_ScenarioState.state_04 = 6;
+            g_ScenarioState.step_05  = 0;
+            Game_SetScriptActive();
+            return 1;
+        }
+    }
+    if (LOHU(g_GameAreaId) == AREA_ID_MIKBA_CHECKPOINT && SYS_TestFlag(g_SceneFlags, 20) && SYS_TestFlag(g_SceneFlags, 21) == 0) {
+        if (y > TO_COORD(15) - 1 && (u32)((x >> 16) - 32) < 6) {
+            Game_SetScriptActive();
+            g_ScenarioState.state_04 = 11;
+            g_ScenarioState.step_05  = 0;
+            g_ScriptVars[0]          = 0;
+            return 1;
+        }
+        return 0;
+    }
+    return 0;
 }
-#else
-INCLUDE_ASM(func_801FE2A0);
-#endif
 
 /* func_801FE698 */
 MATCH void Scene_SetPartyWhelp(void) {
