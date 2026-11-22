@@ -25,12 +25,12 @@ NON_MATCHING void Menu_UpdatePartyChange(void) {
     g_UiPanelTasks[MENU_START_PANEL_CURSOR_FRAME].unk_0B = 1;
     g_UiPanelTasks[MENU_START_PANEL_CURSOR_FRAME].unk_0A = FIELD(s32, &D_801EC54C, index);
     if ((s8)D_8014865D != 0x7F) {
-        index      = (s8)D_8014865A * 8 + (s8)D_8014865D * 0x10;
-        D_80148604 = FIELD(u16, &D_801EC548, index);
-        D_80148600 = 1;
-        D_80148606 = FIELD(u16, &D_801EC54A, index);
-        D_8014860B = 0;
-        D_8014860A = FIELD(s32, &D_801EC54C, index);
+        index                     = (s8)D_8014865A * 8 + (s8)D_8014865D * 0x10;
+        g_UiPanelTasks[20].pos.x  = FIELD(u16, &D_801EC548, index);
+        D_80148600                = 1;
+        g_UiPanelTasks[20].pos.y  = FIELD(u16, &D_801EC54A, index);
+        g_UiPanelTasks[20].unk_0B = 0;
+        g_UiPanelTasks[20].unk_0A = FIELD(s32, &D_801EC54C, index);
     }
     if (D_801ED69C == GAME_NONE) {
         id = 0x60;

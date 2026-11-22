@@ -477,6 +477,7 @@ NON_MATCHING void func_801F823C(s16 x, s16 y, s16 height, s16 width) {
         row -= 1;
         SetPolyGT4(prim);
         SetSemiTrans(prim, 0);
+        /* The grouped x0/x2 and y0/y1 stores are the retail order; setXYWH interleaves them. */
         prim->x0 = prim->x2 = x - half + skew;
         top                 = i + (y - height);
         prim->y0 = prim->y1 = top;

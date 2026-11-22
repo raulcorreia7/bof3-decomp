@@ -4,19 +4,19 @@ MATCH void func_801D2D64(void) {
     s32 input;
     u8  previous;
 
-    D_80148340 = 0x51;
-    D_80148435 = 1;
-    D_80148498 = 1;
-    D_80148499 = 7;
-    D_8014849A = 0xA;
-    D_8014849C = D_80148430;
-    D_8014849E = (D_80148432 + (g_ShopStockIndex - D_80148437) * 0xD) + 0x14;
-    D_801484A2 = g_ShopItemCategory;
-    D_801484A3 = g_ShopItemId;
-    D_801484A4 = g_ShopItemCount;
-    D_801484A5 = D_801E606C;
-    input      = INPUT_REPEATED(g_PadStates[0].pressed, INPUT_DIRECTIONAL);
-    previous   = g_ShopItemCount;
+    D_80148340                = 0x51;
+    g_UiPanelTasks[7].unk_09  = 1;
+    g_UiPanelTasks[10].active = 1;
+    D_80148499                = 7;
+    D_8014849A                = 0xA;
+    D_8014849C                = g_UiPanelTasks[7].pos.x;
+    D_8014849E                = (D_80148432 + (g_ShopStockIndex - g_UiPanelTasks[7].unk_0B) * 0xD) + 0x14;
+    g_UiPanelTasks[10].unk_0A = g_ShopItemCategory;
+    g_UiPanelTasks[10].unk_0B = g_ShopItemId;
+    g_UiPanelTasks[10].unk_0C = g_ShopItemCount;
+    g_UiPanelTasks[10].flags  = D_801E606C;
+    input                     = INPUT_REPEATED(g_PadStates[0].pressed, INPUT_DIRECTIONAL);
+    previous                  = g_ShopItemCount;
     if (input & PADLleft) {
         g_ShopItemCount -= 1;
     } else if (input & PADLright) {

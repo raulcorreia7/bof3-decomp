@@ -22,8 +22,8 @@ MATCH void func_801D8DC8(void) {
 
     Menu_DrawClutStrip(g_WindowClut);
     panel = &g_UiPanelTasks[17];
-    if (D_801485A0 != 0) {
-        g_UiPanelTasks[MENU_START_PANEL_DESCRIPTION].u.message.id = D_801485A0 + START_LIST_DESCRIPTION_ID;
+    if (g_UiPanelTasks[17].unk_0C != 0) {
+        g_UiPanelTasks[MENU_START_PANEL_DESCRIPTION].u.message.id = g_UiPanelTasks[17].unk_0C + START_LIST_DESCRIPTION_ID;
     } else {
         g_UiPanelTasks[MENU_START_PANEL_DESCRIPTION].u.message.id = 0;
     }

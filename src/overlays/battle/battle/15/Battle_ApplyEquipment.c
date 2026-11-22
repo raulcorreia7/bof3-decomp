@@ -17,7 +17,7 @@ NON_MATCHING void Battle_ApplyEquipment(void) {
     FAKE_REG(u8, i, "s1");
     u8 j;
 
-    party_position  = g_PartyBattleOrder[D_801485C4];
+    party_position  = g_PartyBattleOrder[g_UiPanelTasks[18].unk_0C];
     character_index = g_CharSlot[party_position];
     base            = &g_Characters[character_index];
     slots[0]        = &base->equip.weapon;

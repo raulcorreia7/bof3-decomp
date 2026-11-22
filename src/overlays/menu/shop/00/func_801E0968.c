@@ -6,14 +6,14 @@ MATCH void func_801E0968(void) {
 
     delay_ptr = &D_80148654;
     if (TIMER_EXPIRED(*delay_ptr)) {
-        D_801483E5 = 7;
-        D_801483E6 = 0xE;
-        D_801483E4 = 1;
-        D_801483EF = 0xFF;
-        D_801483E8 = 0xC8;
-        D_801483EE = 0;
-        D_801483EA = 0x3F;
-        count      = D_80148652;
-        D_80148652 = count + 1;
+        g_UiPanelTasks[5].panel  = 7;
+        g_UiPanelTasks[5].mode   = 0xE;
+        g_UiPanelTasks[5].active = 1;
+        g_UiPanelTasks[5].unk_0B = 0xFF;
+        g_UiPanelTasks[5].pos.x  = 0xC8;
+        g_UiPanelTasks[5].unk_0A = 0;
+        g_UiPanelTasks[5].pos.y  = 0x3F;
+        count                    = D_80148652;
+        D_80148652               = count + 1;
     }
 }
