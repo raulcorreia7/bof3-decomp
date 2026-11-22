@@ -1,9 +1,9 @@
 #include "shop_00.h"
 
-/* Source record block of the row copy. */
+/* Source record block of the slot copy. */
 
 MATCH void func_801D7208(void) {
-    SaveSlotRow* row;
+    SaveSlotRow* slot;
     u8*          first;
     u8           i;
     u8           j;
@@ -13,7 +13,7 @@ MATCH void func_801D7208(void) {
     g_SaveSlots[2].card_index = GAME_NONE;
     g_SaveSlots[1].card_index = GAME_NONE;
     *first                    = 0xFF;
-    row                       = g_SaveSlots;
+    slot                      = g_SaveSlots;
     for (j = 0; j < BATTLE_PARTY_CHARACTERS_COUNT; j++) {
         i = 0;
         if (g_SaveSlotCount != 0) {
@@ -21,12 +21,12 @@ MATCH void func_801D7208(void) {
                 offset = i * 24;
                 if ((&D_8018E9A1)[offset] - '0' == j) {
                     SAVE_AccessFile(1, &g_SaveCardDirectory[offset], 1, 0x1C, 0xEA0);
-                    *(SaveSlotRowCopy*)row = *(SaveSlotRowCopy*)0x800C26A0;
-                    row->card_index        = i;
+                    *(SaveSlotRowCopy*)slot = *(SaveSlotRowCopy*)0x800C26A0;
+                    slot->card_index        = i;
                 }
                 i++;
             } while (i < g_SaveSlotCount);
         }
-        row++;
+        slot++;
     }
 }
