@@ -8,11 +8,11 @@ __asm__(".include \"include/match/macro.inc\"\n");
 
 /* Starts the effect at the caster: clears the slots, spawns the driver and 48 particles and builds the two effect palette rows. */
 MATCH void func_801EED18(void) {
-    PartyMember*              target;
-    u32                       i;
-    u32                       slot;
-    u16*                      palette;
-    u16*                      arena;
+    PartyMember* target;
+    u32          i;
+    u32          slot;
+    u16*         palette;
+    u16*         arena;
 
     i = 0;
     do {
@@ -41,11 +41,11 @@ MATCH void func_801EED18(void) {
         if (slot != BYTE_MASK) {
             PartyMember* target;
 
-            target                                = g_Task;
-            BMAGIC_EFFECT_SLOTS[slot].header.mode = 0;
-            BMAGIC_EFFECT_SLOTS[slot].unk_0B      = i;
+            target                                 = g_Task;
+            BMAGIC_EFFECT_SLOTS[slot].header.mode  = 0;
+            BMAGIC_EFFECT_SLOTS[slot].unk_0B       = i;
             BMAGIC_EFFECT_SLOTS[slot].target.party = target;
-            BMAGIC_EFFECT_SLOTS[slot].arg.unk_09  = ((i >> 3) << 4) + (rand() & 0xF) + 1;
+            BMAGIC_EFFECT_SLOTS[slot].arg.unk_09   = ((i >> 3) << 4) + (rand() & 0xF) + 1;
             TASK(PartyMember)->param.unk_0B++;
         }
     }

@@ -2480,16 +2480,16 @@ INCLUDE_ASM(func_801D94D0);
 
 /* Draws the stat legend panel at (x, y): five labels, their dot leaders, the four stat icons and the two arrows. */
 MATCH void func_801D97C8(s32 unused, s32 x, s32 y) {
-    const u8*        dots;
-    u16              row;
-    u16              column;
-    u16              clut;
-    s32              tpage;
-    u16              left;
-    u16              top;
+    const u8* dots;
+    u16       row;
+    u16       column;
+    u16       clut;
+    s32       tpage;
+    u16       left;
+    u16       top;
 
-    left   = x;
-    top    = y;
+    left = x;
+    top  = y;
     UI_WindowDraw((u16)(x + 3), (u16)(y + 3), 0x4D, 0x2F, 0, g_WindowStyle);
     for (row = 0; row < 5; row++) {
         UI_TextDrawString((s16)(x + 0x2A), (s16)(top + (row * 8) + 6), 0, MENU_LABEL_LENGTH, D_801DB038[row]);

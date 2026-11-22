@@ -10,8 +10,8 @@ MATCH void func_801D7C10(s32 x, s32 y, s32 flags) {
     s16 left;
     s16 top;
 
-    left    = x;
-    top    = y;
+    left = x;
+    top  = y;
     i    = 0;
     mask = flags & BYTE_MASK;
     for (; i < 3; i++) {
