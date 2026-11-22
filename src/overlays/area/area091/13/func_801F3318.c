@@ -2,30 +2,34 @@
 
 #ifdef NON_MATCHING
 NON_MATCHING void func_801F3318(void) {
-    u16* src;
+    u16* colors;
     u16  color_a;
     u16  color_b;
     u8   index;
+    u32  arena;
     u32  work;
 
-    work = AREA_PALETTE_WORK;
     g_Task->unk_0A--;
     if (g_Task->unk_0A != 0) {
+        arena   = AREA_PALETTE_ARENA;
+        colors  = MEM_PTR(u16, arena + (g_Task->clut_select >> 3) * AREA_PALETTE_ROW + (g_Task->clut_select & 7) * AREA_PALETTE_UNIT);
         index   = g_Task->param.unk_0B;
-        src     = MEM_PTR(u16, AREA_PALETTE_ARENA + (g_Task->clut_select >> 3) * AREA_PALETTE_ROW + (g_Task->clut_select & 7) * AREA_PALETTE_UNIT);
-        color_a = (src[index] & 0x7BDE) >> 1;
-        color_b = (src[31 - index] & 0x7BDE) >> 1;
+        color_a = (colors[index] & 0x7BDE) >> 1;
+        color_b = (colors[31 - index] & 0x7BDE) >> 1;
     } else {
+        arena   = AREA_PALETTE_ARENA;
+        colors  = MEM_PTR(u16, arena + (g_Task->clut_select >> 3) * AREA_PALETTE_ROW + (g_Task->clut_select & 7) * AREA_PALETTE_UNIT);
         index   = g_Task->param.unk_0B;
-        src     = MEM_PTR(u16, AREA_PALETTE_ARENA + (g_Task->clut_select >> 3) * AREA_PALETTE_ROW + (g_Task->clut_select & 7) * AREA_PALETTE_UNIT);
-        color_a = src[index];
-        color_b = src[31 - index];
+        color_a = colors[index];
+        color_b = colors[31 - index];
     }
-    MEM_PTR(u16, work + (g_Task->clut_select >> 3) * AREA_PALETTE_ROW + (g_Task->clut_select & 7) * AREA_PALETTE_UNIT)[index]      = color_a;
-    MEM_PTR(u16, work + (g_Task->clut_select >> 3) * AREA_PALETTE_ROW + (g_Task->clut_select & 7) * AREA_PALETTE_UNIT)[31 - index] = color_b;
+    work                                                                                                                                          = AREA_PALETTE_WORK;
+    MEM_PTR(u16, work + (g_Task->clut_select >> 3) * AREA_PALETTE_ROW + (g_Task->clut_select & 7) * AREA_PALETTE_UNIT)[g_Task->param.unk_0B]      = color_a;
+    MEM_PTR(u16, work + (g_Task->clut_select >> 3) * AREA_PALETTE_ROW + (g_Task->clut_select & 7) * AREA_PALETTE_UNIT)[31 - g_Task->param.unk_0B] = color_b;
     if (g_Task->unk_0A == 0) {
         g_Task->unk_0A = 2;
-        if (++g_Task->param.unk_0B == 0x10) {
+        g_Task->param.unk_0B++;
+        if (g_Task->param.unk_0B == 0x10) {
             g_Task->unk_0A = 0x1E;
             g_Task->unk_04++;
         }
