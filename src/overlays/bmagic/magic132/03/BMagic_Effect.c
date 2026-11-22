@@ -17,7 +17,7 @@ MATCH void func_801EEC88(void) {
     TASK(PartyMember)->facing = g_BattleEffectBattler->facing;
     Battle_CenterCamera();
     slot                               = Battle_AllocEffect(1, 100);
-    work                               = g_Task;
+    work                               = TASK(PartyMember);
     g_BattleEffects[slot].header.mode  = 0;
     g_BattleEffects[slot].arg.unk_09   = 24;
     g_BattleEffects[slot].target.party = work;
@@ -114,7 +114,7 @@ MATCH void func_801EF324(void) {
     PartyMember* work;
     u8           count;
 
-    work         = g_Task;
+    work         = TASK(PartyMember);
     count        = work->unk_09 - 1;
     work->unk_09 = count;
     work->pos.x.fixed += work->unk_0C;

@@ -12,18 +12,18 @@ NON_MATCHING void func_801F5D98(void) {
         g_ScriptState->cursor -= 2;
         return;
     }
-    column          = FIX_INT(g_Task->pos.x.fixed - COORD_HALF);
-    g_Task->gravity = 0;
-    row             = FIX_INT(g_Task->pos.y.fixed - COORD_HALF);
-    column_next     = column + 1;
-    i               = 0;
+    column               = FIX_INT(TASK(Actor)->pos.x.fixed - COORD_HALF);
+    TASK(Actor)->gravity = 0;
+    row                  = FIX_INT(TASK(Actor)->pos.y.fixed - COORD_HALF);
+    column_next          = column + 1;
+    i                    = 0;
     do {
         cell = row + i;
         Area_HeightSet(column, cell, 0x10);
-        g_Task->gravity |= (u8)Area_CellGetCode(column, cell) << (i * 8);
+        TASK(Actor)->gravity |= (u8)Area_CellGetCode(column, cell) << (i * 8);
         Area_CellSetCode(column, row + i, 0x11);
         Area_HeightSet(column_next, cell, 0x10);
-        g_Task->gravity |= (u8)Area_CellGetCode(column_next, cell) << ((i + 2) * 8);
+        TASK(Actor)->gravity |= (u8)Area_CellGetCode(column_next, cell) << ((i + 2) * 8);
         Area_CellSetCode(column + 1, row + i, 0x11);
         i++;
     } while (i < 2);

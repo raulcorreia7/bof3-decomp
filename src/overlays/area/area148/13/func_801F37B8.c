@@ -19,7 +19,7 @@ NON_MATCHING void func_801F37B8(s32 mode, s32 value) {
         SetShadeTex(prim, 0);
         j = 0;
         do {
-            setVector(&g_ScratchPadVectors[j], LOHU(D_801F5038[i * 24 + j * 6]) + lift - g_Task->screen_y * (s8)D_801F5034[half], LOHU(D_801F5038[i * 24 + j * 6 + 2]),
+            setVector(&g_ScratchPadVectors[j], LOHU(D_801F5038[i * 24 + j * 6]) + lift - TASK(Actor)->screen_y * (s8)D_801F5034[half], LOHU(D_801F5038[i * 24 + j * 6 + 2]),
                       LOHU(D_801F5038[i * 24 + j * 6 + 4]));
             j++;
         } while (j < 4);
@@ -27,7 +27,7 @@ NON_MATCHING void func_801F37B8(s32 mode, s32 value) {
                       &depth, &flag);
         Area_ApplyTileToQuad(D_801F5080[mode * 3 + i], prim, 1);
         i++;
-        Area_CellAddPrim(g_Task->pos.x.fixed, g_Task->pos.y.fixed, (s8)value, sizeof(POLY_FT4));
+        Area_CellAddPrim(TASK(Actor)->pos.x.fixed, TASK(Actor)->pos.y.fixed, (s8)value, sizeof(POLY_FT4));
     } while (i < 3);
 }
 #else

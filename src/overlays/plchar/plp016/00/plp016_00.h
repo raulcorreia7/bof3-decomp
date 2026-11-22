@@ -9,7 +9,6 @@
 #define CHARACTER_FACING_BACK FACING_UP
 
 #include "overlays/plchar/plchar.h"
-#include "area/spad.h"
 
 /* The image's map-cell probe, and whether its personal action plays the character's cue. */
 #define CHAR_CELL_PROBE              func_801CFD24

@@ -30,7 +30,7 @@ NON_MATCHING void func_8015A9A4(void) {
     }
     sum = dx + dy;
     key = sum + 1;
-    if (COORD_FRAC(g_Task->pos.y) == 0) {
+    if (COORD_FRAC(TASK(Actor)->pos.y) == 0) {
         key = sum;
     }
     actor         = g_Task;
@@ -48,7 +48,7 @@ NON_MATCHING void func_8015A9A4(void) {
         low = (((u16)COORD_INT(actor->pos.z) >> 5) & BYTE_MASK) ^ 0x80;
     }
     actor->unk_32 = key | low;
-    if (!(((u8*)g_Task->range_54.table)[3] & 0x10)) {
+    if (!(((u8*)TASK(Actor)->range_54.table)[3] & 0x10)) {
         Actor_ReadValue();
     }
     actor = g_Task;
@@ -56,7 +56,7 @@ NON_MATCHING void func_8015A9A4(void) {
     gte_ldv0(&vec);
     gte_rtps();
     gte_stsxy(sxy);
-    gte_stszotz(&g_Task->unk_60);
+    gte_stszotz(&TASK(Actor)->unk_60);
     actor           = g_Task;
     actor->screen_x = sxy[0];
     sy              = sxy[1];
@@ -64,7 +64,7 @@ NON_MATCHING void func_8015A9A4(void) {
     pad             = (((u8*)actor->range_54.table)[3] >> 1) & 4;
     x               = (s16)actor->screen_x;
     if ((((&D_80182174)[pad] + 320) < x) || (x < -(s32)(&D_80182175)[pad]) || (((&D_80182176)[pad] + 240) < (s16)sy) || ((s16)sy < -(s32)(&D_80182177)[pad])) {
-        g_Task->header.flags |= 0x80;
+        TASK(Actor)->header.flags |= 0x80;
         return;
     }
     actor->header.flags &= 0x7F;

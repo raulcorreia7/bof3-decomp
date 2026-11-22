@@ -6,7 +6,6 @@
  * includes the file. */
 
 #include "overlays/area/worlds/world00.h"
-#include "area/spad.h"
 
 #define WORLD_POSITION_RING_ENTRY_COUNT 32u
 

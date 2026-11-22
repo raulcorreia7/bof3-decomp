@@ -5,7 +5,6 @@
  * and its data. Only this image includes the file. */
 
 #include "overlays/area/worlds/world02.h"
-#include "area/spad.h"
 
 #define g_CurrentActor ((void*)g_CurrentActor)
 

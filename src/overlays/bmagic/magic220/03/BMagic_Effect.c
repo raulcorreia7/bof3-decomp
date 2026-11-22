@@ -124,7 +124,7 @@ MATCH void func_801EF294(void) {
                 SND_SEQueueSelection(EMI_SE_ID(SND_BANK_COMMON, 1));
             }
             SND_SEQueueSelection(EMI_SE_ID(SND_BANK_COMMON, 2));
-            work         = g_Task;
+            work         = TASK(PartyMember);
             work->unk_09 = 4;
             work->unk_0C = 0x800;
             TASK(PartyMember)->header.step += 1;

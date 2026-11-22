@@ -6,26 +6,26 @@ MATCH void func_800C243C(void) {
             Battle_ShowActorEntry(2);
             TASK_SET(func_800AC754(2));
             Area_SceneSelectRecord(0xF9);
-            g_Task->unk_24 &= 0xFE;
+            TASK(PartyMember)->unk_24 &= 0xFE;
             if (g_Battle.boss_flags & 0x40) {
                 Script_Select(1);
             } else {
                 Script_Begin(5, 4);
             }
-            g_Task->unk_2A = 1;
+            TASK(PartyMember)->unk_2A = 1;
         }
         Battle_ShowActorEntry(1);
         TASK_SET(func_800AC754(1));
         Area_SceneSelectRecord(0xEF);
         Script_Select(0);
-        g_Task->unk_58 = g_BattleEnemyBattlers[1].unk_58;
-        g_Task->unk_5A = g_BattleEnemyBattlers[1].unk_5A;
+        TASK(PartyMember)->unk_58 = g_BattleEnemyBattlers[1].unk_58;
+        TASK(PartyMember)->unk_5A = g_BattleEnemyBattlers[1].unk_5A;
         Battle_ShowActorEntry(0);
         TASK_SET(func_800AC754(0));
         Area_SceneSelectRecord(0xEE);
         Script_Select(0);
-        g_Task->unk_58 = g_BattleEnemyBattlers[0].unk_58;
-        g_Task->unk_5A = g_BattleEnemyBattlers[0].unk_5A;
+        TASK(PartyMember)->unk_58 = g_BattleEnemyBattlers[0].unk_58;
+        TASK(PartyMember)->unk_5A = g_BattleEnemyBattlers[0].unk_5A;
     }
     Scene_RunScenario(1);
     g_Game.members[1].header.flags |= 0x40;

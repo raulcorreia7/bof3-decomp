@@ -29,21 +29,21 @@ MATCH void func_801EED98(void) {
 
     SND_SEQueueSelection(0x101);
     SND_SEQueueSelection(0x102);
-    work   = g_Task;
+    work   = TASK(PartyMember);
     g_Task = D_801EC2E0->target.party;
     Script_Select(3U);
     g_Task                             = work;
     slot                               = Battle_AllocEffect(1, 65) & BYTE_MASK;
     g_BattleEffects[slot].header.mode  = 1;
     g_BattleEffects[slot].header.step  = 0;
-    g_BattleEffects[slot].target.party = g_Task;
+    g_BattleEffects[slot].target.party = TASK(PartyMember);
     TASK(PartyMember)->header.step += 1;
 }
 
 MATCH void func_801EEE50(void) {
     PartyMember* work;
 
-    work   = g_Task;
+    work   = TASK(PartyMember);
     g_Task = D_801EC2E0->target.party;
     Script_AnimStepOnce();
     g_Task                   = work;
@@ -66,7 +66,7 @@ MATCH void func_801EEEB0(void) {
                 g_BattleEffects[slot].pos.x.fixed  = battler->pos.x.fixed;
                 g_BattleEffects[slot].pos.y.fixed  = battler->pos.y.fixed;
                 z                                  = battler->pos.z.fixed;
-                g_BattleEffects[slot].target.party = g_Task;
+                g_BattleEffects[slot].target.party = TASK(PartyMember);
                 g_BattleEffects[slot].pos.z.fixed  = z;
                 TASK(PartyMember)->unk_09 += 1;
             }
@@ -211,7 +211,7 @@ MATCH void func_801EF620(void) {
 
     handlers[TASK(PartyMember)->unk_03]();
     if (TASK(PartyMember)->timer != 0xFF && --TASK(PartyMember)->timer == 0) {
-        work         = g_Task;
+        work         = TASK(PartyMember);
         stage        = work->unk_09 + 1;
         work->unk_09 = stage;
         work->timer  = D_801EFADC[stage];
@@ -224,10 +224,10 @@ MATCH void func_801EF620(void) {
         }
     }
     if ((g_BattleEffectBattler->header.flags & 1) == 0) {
-        tail_record = g_Task;
+        tail_record = TASK(PartyMember);
         tail_record->header.step += 1;
         tail_record->unk_10  = 0;
-        phase_record         = g_Task;
+        phase_record         = TASK(PartyMember);
         phase_record->unk_03 = 0;
     }
     ramp                     = TASK(PartyMember)->unk_10;
@@ -238,7 +238,7 @@ MATCH void func_801EF620(void) {
 MATCH void func_801EF7A0(void) {
     PartyMember* work;
 
-    work = g_Task;
+    work = TASK(PartyMember);
     if (work->unk_10 >= -2) {
         work->unk_10--;
     } else {
@@ -249,7 +249,7 @@ MATCH void func_801EF7A0(void) {
 MATCH void func_801EF7E0(void) {
     PartyMember* work;
 
-    work = g_Task;
+    work = TASK(PartyMember);
     if (work->unk_10 < 0) {
         work->unk_10++;
     } else {
@@ -283,7 +283,7 @@ MATCH void func_801EF900(void) {
     TASK(PartyMember)->pos.y.fixed  = g_BattleEffectBattler->pos.y.fixed - 1;
     x                               = TASK(PartyMember)->pos.x.fixed;
     height                          = Area_HeightSample(x, x);
-    work                            = g_Task;
+    work                            = TASK(PartyMember);
     work->unk_25                    = 0x1D;
     COORD_INT(work->pos.z)          = height;
     TASK(PartyMember)->unk_26       = 0;

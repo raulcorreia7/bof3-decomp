@@ -1,6 +1,5 @@
 #include "scena02_00.h"
 #include "area/map.h"
-#include "area/spad.h"
 #include "shared/etc.h"
 #include "overlays/area/shared/Actor_SeedPartySlot.h"
 

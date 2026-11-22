@@ -1,8 +1,5 @@
 #include "area075_13.h"
 
-/* This function stores the cell; the typed view macro is not an assignable object. */
-#undef g_Task
-
 MATCH void func_801F32FC(void) {
     Actor* actor;
     Actor* saved;

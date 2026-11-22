@@ -5,7 +5,6 @@
  * includes the file. */
 
 #include "overlays/plchar/plchar.h"
-#include "area/spad.h"
 
 /* The SE id multiplier of this image's rare spawn cue. */
 #define CHAR_SPAWN_CUE_SCALE    10

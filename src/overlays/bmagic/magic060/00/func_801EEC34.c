@@ -17,11 +17,11 @@ MATCH void func_801EECA4(void) {
     u32          slot;
 
     slot                               = Battle_AllocEffect(1, 18) & BYTE_MASK;
-    work                               = g_Task;
+    work                               = TASK(PartyMember);
     g_BattleEffects[slot].header.mode  = 0;
     g_BattleEffects[slot].target.party = work;
     slot                               = Battle_AllocEffect(1, 18) & BYTE_MASK;
-    work2                              = g_Task;
+    work2                              = TASK(PartyMember);
     g_BattleEffects[slot].header.mode  = 1;
     g_BattleEffects[slot].target.party = work2;
     func_801EEF50();
@@ -35,7 +35,7 @@ MATCH void func_801EED68(void) {
 
     if (TASK(PartyMember)->param.unk_0B == 2) {
         slot                               = Battle_AllocEffect(1, 18) & BYTE_MASK;
-        work                               = g_Task;
+        work                               = TASK(PartyMember);
         g_BattleEffects[slot].header.mode  = 2;
         g_BattleEffects[slot].target.party = work;
         TASK(PartyMember)->unk_09          = 0x10;

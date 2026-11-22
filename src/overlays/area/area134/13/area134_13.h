@@ -6,7 +6,6 @@
 
 #include "common/vector.h"
 #include "overlays/area/worlds/world03.h"
-#include "area/spad.h"
 
 /* The row count this overlay clears. */
 #define SCRATCH_COLUMN_COUNT 32
@@ -64,7 +63,7 @@ static inline void World_SpawnActorAtFocus(void) {
         slot->header.flags = 1;
         slot->type         = 0x90;
         slot->header.mode  = 0;
-        work               = g_Task;
+        work               = TASK(Actor);
         WorldPos_Copy(&slot->pos, &work->pos);
     }
 }
@@ -88,8 +87,8 @@ void func_801F4B6C(void);
 
 /* Returns the area task to the first step of mode 1. */
 static inline void Area_EnterMode1(void) {
-    g_Task->timer       = 0;
-    g_Task->header.mode = 1;
+    TASK(Actor)->timer       = 0;
+    TASK(Actor)->header.mode = 1;
     ACTOR_CLEAR_STEP();
 }
 
@@ -103,8 +102,8 @@ static inline void Area_EnterMode1(void) {
     TASK_SET(g_Game.members);                         \
     g_Task = work;                                    \
     if ((bound) >= g_Game.members[0].pos.x.fixed) {   \
-        work->header.mode = 0xD;                      \
-        g_Task->timer     = 0;                        \
+        work->header.mode  = 0xD;                     \
+        TASK(Actor)->timer = 0;                       \
         return;                                       \
     }                                                 \
     work->header.mode = (next_mode)
@@ -126,12 +125,12 @@ static inline void Area_EnterMode1(void) {
 
 /* Counts the work byte 0x09 down and takes the given mode when it reaches zero.
  * The member declares work and timer. */
-#define AREA_TICK_MODE_CHANGE(next_mode)   \
-    work    = TASK(u8);                    \
-    timer   = work[9];                     \
-    work[9] = timer + 0xFF;                \
-    if (timer == 0) {                      \
-        g_Task->header.mode = (next_mode); \
+#define AREA_TICK_MODE_CHANGE(next_mode)        \
+    work    = TASK(u8);                         \
+    timer   = work[9];                          \
+    work[9] = timer + 0xFF;                     \
+    if (timer == 0) {                           \
+        TASK(Actor)->header.mode = (next_mode); \
     }
 
 #endif

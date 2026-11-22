@@ -26,7 +26,7 @@ MATCH void func_801EED28(void) {
     BMAGIC_CLEAR_EFFECTS(i);
     actor                     = g_BattleSelectedActor;
     TASK(PartyMember)->facing = actor->facing;
-    task                      = g_Task;
+    task                      = TASK(PartyMember);
     WorldPos_Copy(&task->pos, &actor->pos);
     BMAGIC_POINT_AT_PALETTE_ROW(dst, src, i);
     do {
@@ -36,7 +36,7 @@ MATCH void func_801EED28(void) {
     } while (i < 16);
     g_GfxPalettePending                = 1;
     slot                               = Battle_AllocEffect(1, 41) & BYTE_MASK;
-    g_BattleEffects[slot].target.party = g_Task;
+    g_BattleEffects[slot].target.party = TASK(PartyMember);
     TASK(PartyMember)->param.unk_0B    = 2;
     TASK(PartyMember)->header.mode += 1;
 }
@@ -51,7 +51,7 @@ MATCH void func_801EEEA0(void) {
     selector = (u8*)&g_Battle.target_selector;
     if (!(Battle_SlotIsBlocked(*selector) & BYTE_MASK) && (Battle_CanTarget(1, *selector) & BYTE_MASK)) {
         slot                               = Battle_AllocEffect(1, 72) & BYTE_MASK;
-        work                               = g_Task;
+        work                               = TASK(PartyMember);
         g_BattleEffects[slot].unk_04       = 4;
         g_BattleEffects[slot].arg.unk_09   = 0x18;
         g_BattleEffects[slot].unk_0A       = 4;
@@ -111,7 +111,7 @@ MATCH void func_801EF1F0(void) {
         for (i = 0; i < 32; i++) {
             slot = BMagic_AllocEffect();
             if (slot != 0xFF) {
-                BMAGIC_EFFECT_SLOTS[slot].target.party = g_Task;
+                BMAGIC_EFFECT_SLOTS[slot].target.party = TASK(PartyMember);
                 BMAGIC_EFFECT_SLOTS[slot].header.flags |= 0x41;
                 BMAGIC_EFFECT_SLOTS[slot].unk_0B     = i;
                 BMAGIC_EFFECT_SLOTS[slot].arg.unk_09 = (rand() & 7) + 1;
@@ -157,7 +157,7 @@ MATCH void func_801EF484(void) {
     PartyMember* work;
     PartyMember* active;
 
-    work = g_Task;
+    work = TASK(PartyMember);
     if (work->param.unk_0B == 0) {
         work->unk_04 = work->unk_04 - 1;
         if (work->unk_04 == 0) {

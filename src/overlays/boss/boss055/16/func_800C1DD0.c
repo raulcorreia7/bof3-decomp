@@ -9,14 +9,14 @@ MATCH u8 func_800C1DD0(void) {
             if (func_801DDF50((g_BattleCurrentEnemy->unk_F0 + 0x20) & BYTE_MASK, D_801463CD) != 0) {
                 g_Battle.unk_DE = 0;
             } else {
-                g_Task->unk_09 = 0x1E;
+                TASK(PartyMember)->unk_09 = 0x1E;
             }
         }
     } else {
-        g_Task->unk_09 = 0;
+        TASK(PartyMember)->unk_09 = 0;
     }
     if (!(D_801CA71C[g_Battle.action_id].mask & 0x800)) {
-        g_Task->unk_09 = ENCOUNTER_ENEMIES[g_BattleCurrentEnemy->type].unk_84[3];
+        TASK(PartyMember)->unk_09 = ENCOUNTER_ENEMIES[g_BattleCurrentEnemy->type].unk_84[3];
         switch (g_Battle.action_id) {
             case ABILITY_SANCTUARY:
                 func_800C2340(5, 4, 7);
@@ -35,9 +35,9 @@ MATCH u8 func_800C1DD0(void) {
                 Battle_RequestEnemyScript(10);
                 break;
         }
-        g_Task->header.step++;
+        TASK(PartyMember)->header.step++;
     } else {
-        g_Task->header.mode++;
+        TASK(PartyMember)->header.mode++;
     }
     func_801E3160();
 }

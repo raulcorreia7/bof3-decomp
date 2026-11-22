@@ -3,7 +3,7 @@
 MATCH void func_800C1A54(void) {
     PartyMember* saved;
 
-    saved  = g_Task;
+    saved  = TASK(PartyMember);
     g_Task = D_801EC2E0->target.party;
     Script_Select(2);
     g_Task        = saved;

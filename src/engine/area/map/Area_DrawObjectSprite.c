@@ -22,59 +22,59 @@ MATCH void Area_DrawObjectSprite(void) {
     s32         tint;
     u16         clut;
 
-    if (g_Task->header.flags & ACTOR_FLAG_HIDDEN) {
+    if (TASK(Actor)->header.flags & ACTOR_FLAG_HIDDEN) {
         return;
     }
-    if (!(g_Task->active_flags & 0x80) && g_Task->unk_48 == 1) {
-        if (g_Task->unk_60 == 0) {
-            g_Task->scale.x = 0;
-            g_Task->scale.y = 0;
+    if (!(TASK(Actor)->active_flags & 0x80) && TASK(Actor)->unk_48 == 1) {
+        if (TASK(Actor)->unk_60 == 0) {
+            TASK(Actor)->scale.x = 0;
+            TASK(Actor)->scale.y = 0;
             return;
         }
-        g_Task->scale.x = (0x4650000 / g_Task->unk_60) & ~0xFF;
-        g_Task->scale.y = (0x4650000 / g_Task->unk_60) & ~0xFF;
+        TASK(Actor)->scale.x = (0x4650000 / TASK(Actor)->unk_60) & ~0xFF;
+        TASK(Actor)->scale.y = (0x4650000 / TASK(Actor)->unk_60) & ~0xFF;
     }
-    if ((u16)(g_Task->screen_x + 0x40) > 0x1C0 || (u16)(g_Task->screen_y + 0x40) > 0x170) {
-        g_Task->header.flags |= ACTOR_FLAG_OFFSCREEN;
+    if ((u16)(TASK(Actor)->screen_x + 0x40) > 0x1C0 || (u16)(TASK(Actor)->screen_y + 0x40) > 0x170) {
+        TASK(Actor)->header.flags |= ACTOR_FLAG_OFFSCREEN;
         return;
     }
-    g_Task->header.flags &= ~ACTOR_FLAG_OFFSCREEN;
-    if (g_Task->active_flags & 0x8) {
+    TASK(Actor)->header.flags &= ~ACTOR_FLAG_OFFSCREEN;
+    if (TASK(Actor)->active_flags & 0x8) {
         RECT* rect = (RECT*)g_GfxPrimCursor;
         g_GfxPrimCursor += sizeof(RECT);
         rect->x = 832;
         rect->y = 256;
         setWH(rect, 192, 256);
         SetDrawArea((DR_AREA*)(rect + 1), rect);
-        GFX_AddPrim(g_Task->draw_layer, sizeof(DR_AREA));
-        g_Task->screen_x += 0x340;
-        y                = g_Task->screen_y + 0x10;
-        g_Task->screen_y = y + (g_GfxBufferIndex ^ 0x1) * 0xF0;
+        GFX_AddPrim(TASK(Actor)->draw_layer, sizeof(DR_AREA));
+        TASK(Actor)->screen_x += 0x340;
+        y                     = TASK(Actor)->screen_y + 0x10;
+        TASK(Actor)->screen_y = y + (g_GfxBufferIndex ^ 0x1) * 0xF0;
     }
-    list  = g_Task->range_54.table + g_Task->frame_cells;
+    list  = TASK(Actor)->range_54.table + TASK(Actor)->frame_cells;
     count = *list;
     cell  = (SpriteCell*)(list + 1);
     Area_BuildClut(&clut);
     for (; count != 0; cell++, count--) {
         mode = cell->size >> 7;
-        if (g_Task->mirror != 0) {
+        if (TASK(Actor)->mirror != 0) {
             mode |= 2;
         }
-        if (g_Task->unk_48 != 0) {
+        if (TASK(Actor)->unk_48 != 0) {
             mode |= 4;
         }
         if (mode == 0 || mode == 3) {
             Area_DrawSpriteCell(mode, cell, clut);
         } else {
-            if (g_Task->unk_48 != 0) {
-                clip_x = (u32)(g_Task->scale.x + 0x1E000) > 0x3C000;
-                clip_y = (u32)(g_Task->scale.y + 0x1E000) > 0x3C000;
+            if (TASK(Actor)->unk_48 != 0) {
+                clip_x = (u32)(TASK(Actor)->scale.x + 0x1E000) > 0x3C000;
+                clip_y = (u32)(TASK(Actor)->scale.y + 0x1E000) > 0x3C000;
             } else {
                 clip_x = 0;
                 clip_y = 0;
             }
             page_offset = 0;
-            if (g_Task->palette_8bit != PALETTE_TYPE_CELL) {
+            if (TASK(Actor)->palette_8bit != PALETTE_TYPE_CELL) {
                 page_offset = -1;
                 if (cell->u >= 0x28) {
                     page_offset = cell->u >= 0xA1;
@@ -85,35 +85,35 @@ MATCH void Area_DrawObjectSprite(void) {
             height = g_SpriteSizes[cell->size & GFX_SPRITE_SIZE_MASK][1];
             SetPolyFT4(prim);
             if (mode == 1) {
-                x        = g_Task->screen_x + (s8)cell->x;
+                x        = TASK(Actor)->screen_x + (s8)cell->x;
                 prim->x0 = x;
                 prim->x1 = width + x;
                 prim->u1 = cell->u - page_offset * 128 - 1;
                 prim->u0 = prim->u1 + width;
             } else if (mode == 2) {
-                x        = g_Task->screen_x - (s8)cell->x;
+                x        = TASK(Actor)->screen_x - (s8)cell->x;
                 prim->x0 = x;
                 prim->x1 = x - width;
                 prim->u0 = cell->u - page_offset * 128 - 1;
                 prim->u1 = prim->u0 + width;
             } else if (mode == 4) {
-                prim->x0 = g_Task->screen_x + Area_RoundSpriteCoordinate((s8)cell->x * g_Task->scale.x, g_Task->scale.x);
-                prim->x1 = prim->x0 + Area_RoundSpriteCoordinate(width * g_Task->scale.x, g_Task->scale.x);
+                prim->x0 = TASK(Actor)->screen_x + Area_RoundSpriteCoordinate((s8)cell->x * TASK(Actor)->scale.x, TASK(Actor)->scale.x);
+                prim->x1 = prim->x0 + Area_RoundSpriteCoordinate(width * TASK(Actor)->scale.x, TASK(Actor)->scale.x);
                 prim->u0 = cell->u - page_offset * 128;
                 prim->u1 = prim->u0 + width - clip_x;
             } else if (mode == 6) {
-                prim->x1 = g_Task->screen_x - Area_RoundSpriteCoordinate((s8)cell->x * g_Task->scale.x, g_Task->scale.x);
-                prim->x0 = prim->x1 - Area_RoundSpriteCoordinate(width * g_Task->scale.x, g_Task->scale.x);
+                prim->x1 = TASK(Actor)->screen_x - Area_RoundSpriteCoordinate((s8)cell->x * TASK(Actor)->scale.x, TASK(Actor)->scale.x);
+                prim->x0 = prim->x1 - Area_RoundSpriteCoordinate(width * TASK(Actor)->scale.x, TASK(Actor)->scale.x);
                 prim->u1 = clip_x + (cell->u - page_offset * 128 - 1);
                 prim->u0 = prim->u1 + width - clip_x;
             } else if (mode == 5) {
-                prim->x0 = g_Task->screen_x + Area_RoundSpriteCoordinate((s8)cell->x * g_Task->scale.x, g_Task->scale.x);
-                prim->x1 = prim->x0 + Area_RoundSpriteCoordinate(width * g_Task->scale.x, g_Task->scale.x);
+                prim->x0 = TASK(Actor)->screen_x + Area_RoundSpriteCoordinate((s8)cell->x * TASK(Actor)->scale.x, TASK(Actor)->scale.x);
+                prim->x1 = prim->x0 + Area_RoundSpriteCoordinate(width * TASK(Actor)->scale.x, TASK(Actor)->scale.x);
                 prim->u1 = clip_x + (cell->u - page_offset * 128 - 1);
                 prim->u0 = prim->u1 + width - clip_x;
             } else if (mode == 7) {
-                prim->x1 = g_Task->screen_x - Area_RoundSpriteCoordinate((s8)cell->x * g_Task->scale.x, g_Task->scale.x);
-                prim->x0 = prim->x1 - Area_RoundSpriteCoordinate(width * g_Task->scale.x, g_Task->scale.x);
+                prim->x1 = TASK(Actor)->screen_x - Area_RoundSpriteCoordinate((s8)cell->x * TASK(Actor)->scale.x, TASK(Actor)->scale.x);
+                prim->x0 = prim->x1 - Area_RoundSpriteCoordinate(width * TASK(Actor)->scale.x, TASK(Actor)->scale.x);
                 prim->u0 = cell->u - page_offset * 128;
                 prim->u1 = prim->u0 + width - clip_x;
             }
@@ -122,38 +122,38 @@ MATCH void Area_DrawObjectSprite(void) {
             prim->u2 = prim->u0;
             prim->u3 = prim->u1;
             if (mode & 0x4) {
-                prim->y0 = g_Task->screen_y + Area_RoundSpriteCoordinate((s8)cell->y * g_Task->scale.y, g_Task->scale.y);
-                prim->y2 = prim->y0 + Area_RoundSpriteCoordinate(height * g_Task->scale.y, g_Task->scale.y);
+                prim->y0 = TASK(Actor)->screen_y + Area_RoundSpriteCoordinate((s8)cell->y * TASK(Actor)->scale.y, TASK(Actor)->scale.y);
+                prim->y2 = prim->y0 + Area_RoundSpriteCoordinate(height * TASK(Actor)->scale.y, TASK(Actor)->scale.y);
             } else {
-                y        = g_Task->screen_y + (s8)cell->y;
+                y        = TASK(Actor)->screen_y + (s8)cell->y;
                 prim->y0 = y;
                 prim->y2 = height + y;
             }
             prim->y1    = prim->y0;
             prim->y3    = prim->y2;
-            prim->v0    = g_Task->sheet_row + cell->v;
+            prim->v0    = TASK(Actor)->sheet_row + cell->v;
             prim->v2    = prim->v0 + height - clip_y;
             prim->v1    = prim->v0;
             prim->v3    = prim->v2;
-            tint        = g_Task->tint.bytes.rgb.r - 0x80;
+            tint        = TASK(Actor)->tint.bytes.rgb.r - 0x80;
             prim->r0    = tint;
-            tint        = g_Task->tint.bytes.rgb.g - 0x80;
+            tint        = TASK(Actor)->tint.bytes.rgb.g - 0x80;
             prim->g0    = tint;
-            tint        = g_Task->tint.bytes.rgb.b - 0x80;
+            tint        = TASK(Actor)->tint.bytes.rgb.b - 0x80;
             prim->b0    = tint;
             /* The page is assigned inside the macro: retail computes it once in each branch. */
-            tpage       = getTPage(g_Task->palette_8bit ? 1 : 0, g_Task->tint.bytes.flags, (page % 16) << 6, ((page = g_Task->sheet_page + page_offset) / 16) << 8);
+            tpage       = getTPage(TASK(Actor)->palette_8bit ? 1 : 0, TASK(Actor)->tint.bytes.flags, (page % 16) << 6, ((page = TASK(Actor)->sheet_page + page_offset) / 16) << 8);
             prim->tpage = tpage;
             prim->clut  = clut;
-            SetSemiTrans(prim, (g_Task->header.flags & ACTOR_FLAG_SEMI_TRANSPARENT) != 0);
-            GFX_AddPrim(g_Task->draw_layer, sizeof(POLY_FT4));
+            SetSemiTrans(prim, (TASK(Actor)->header.flags & ACTOR_FLAG_SEMI_TRANSPARENT) != 0);
+            GFX_AddPrim(TASK(Actor)->draw_layer, sizeof(POLY_FT4));
         }
     }
-    if (g_Task->active_flags & 0x8) {
+    if (TASK(Actor)->active_flags & 0x8) {
         RECT* rect = (RECT*)g_GfxPrimCursor;
         g_GfxPrimCursor += sizeof(RECT);
         *rect = *(RECT*)(g_GfxCurrentBuffer + 0x14);
         SetDrawArea((DR_AREA*)g_GfxPrimCursor, rect);
-        GFX_AddPrim(g_Task->draw_layer, sizeof(DR_AREA));
+        GFX_AddPrim(TASK(Actor)->draw_layer, sizeof(DR_AREA));
     }
 }

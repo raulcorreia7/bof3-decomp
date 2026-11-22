@@ -5,7 +5,6 @@
  * and its data. Only this image includes the file. */
 
 #include "overlays/area/worlds/world02.h"
-#include "area/spad.h"
 
 /* The scenario flag byte the answer path tests. */
 extern u8 D_80144EF0[];

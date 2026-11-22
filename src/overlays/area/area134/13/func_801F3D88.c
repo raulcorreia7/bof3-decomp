@@ -8,7 +8,7 @@ MATCH void func_801F3D88(void) {
     s32*   edge_address;
     s32    edge;
 
-    work              = g_Task;
+    work              = TASK(Actor);
     address           = D_801468BC;
     edge_address      = address;
     edge              = edge_address[0];

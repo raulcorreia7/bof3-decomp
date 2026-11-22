@@ -4,7 +4,7 @@ MATCH void func_801F2E88(void) {
     u8* result;
     u8  count;
 
-    if (!(g_Task->timer & 0x3)) {
+    if (!(TASK(Actor)->timer & 0x3)) {
         result = func_801F3800();
         if (result != 0) {
             func_801F37A4(result);
@@ -13,6 +13,6 @@ MATCH void func_801F2E88(void) {
     func_801F38B0();
     ACTOR_COUNT_DOWN(TASK(Actor), count, timer);
     if (count == 0) {
-        g_Task->header.step += 1;
+        TASK(Actor)->header.step += 1;
     }
 }

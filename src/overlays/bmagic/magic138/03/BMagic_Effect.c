@@ -13,7 +13,7 @@ MATCH void func_801EEC88(void) {
     u16*         dst;
     u8           i;
 
-    work                 = g_Task;
+    work                 = TASK(PartyMember);
     work->screen_x.value = 240;
     work->screen_y.value = 250;
     i                    = 0;
@@ -25,7 +25,7 @@ MATCH void func_801EEC88(void) {
     g_GfxPalettePending             = 1;
     TASK(PartyMember)->param.unk_0B = 0;
     TASK(PartyMember)->unk_09       = 0;
-    saved_work                      = g_Task;
+    saved_work                      = TASK(PartyMember);
     TASK_SET(g_BattleEffectBattler);
     Script_AnimStepLoop();
     TASK_SET(saved_work);
@@ -47,14 +47,14 @@ MATCH void func_801EED60(void) {
                 g_BattleEffects[slot].screen_x += 20;
             }
             g_BattleEffects[slot].unk_0A       = TASK(PartyMember)->unk_09;
-            g_BattleEffects[slot].target.party = g_Task;
+            g_BattleEffects[slot].target.party = TASK(PartyMember);
             TASK(PartyMember)->unk_09 += 1;
             TASK(PartyMember)->param.unk_0B += 1;
         }
         if (TASK(PartyMember)->unk_09 == 6) {
             TASK(PartyMember)->header.mode += 1;
         }
-        saved_work = g_Task;
+        saved_work = TASK(PartyMember);
         TASK_SET(g_BattleEffectBattler);
         Script_AnimStepLoop();
         TASK_SET(saved_work);
@@ -64,7 +64,7 @@ MATCH void func_801EED60(void) {
 MATCH void func_801EEED8(void) {
     PartyMember* saved_work;
 
-    saved_work = g_Task;
+    saved_work = TASK(PartyMember);
     TASK_SET(g_BattleEffectBattler);
     Script_AnimStepLoop();
     TASK_SET(saved_work);
@@ -192,7 +192,7 @@ MATCH void func_801EF5D0(void) {
     TASK(PartyMember)->unk_24 = 0x84;
     TASK(PartyMember)->unk_27 = 0xB4;
     TASK(PartyMember)->unk_28 = 0;
-    work                      = g_Task;
+    work                      = TASK(PartyMember);
     work->unk_2B              = 0;
     work->unk_2C.value        = 0;
     TASK(PartyMember)->unk_2A = 0;

@@ -7,11 +7,11 @@ MATCH void func_801F3264(void) {
     u16  z;
 
     GFX_AddDitheredDrawMode(GFX_LAYER_UI, GetTPage(TPAGE_DEPTH_4BIT, TPAGE_ABR_ADD, 0x380, 0x100));
-    pos.x = g_Task->pos.x.fixed;
-    pos.y = g_Task->pos.y.fixed;
-    pos.z = g_Task->pos.z.fixed;
-    x     = g_Task->unk_64;
-    y     = g_Task->unk_68;
-    z     = g_Task->unk_6C;
+    pos.x = TASK(Actor)->pos.x.fixed;
+    pos.y = TASK(Actor)->pos.y.fixed;
+    pos.z = TASK(Actor)->pos.z.fixed;
+    x     = TASK(Actor)->unk_64;
+    y     = TASK(Actor)->unk_68;
+    z     = TASK(Actor)->unk_6C;
     func_801F2F50(&pos, x, y, z, 0xC0, 0);
 }

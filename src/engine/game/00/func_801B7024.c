@@ -7,5 +7,5 @@ MATCH void func_801B7024(void) {
         return;
     flags                         = g_Game.current->u.field.flags;
     g_Game.current->u.field.flags = (flags & 0xFD);
-    g_Task->unk_03                = 1;
+    TASK(Actor)->unk_03           = 1;
 }

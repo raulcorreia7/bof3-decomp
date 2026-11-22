@@ -9,7 +9,7 @@ MATCH void Area_SlideHudBannerLeft(void) {
     s16    origin_x;
     u8     mode;
 
-    work           = g_Task;
+    work           = TASK(Actor);
     origin_x       = work->screen_x - 0x10;
     work->screen_x = origin_x;
     if (origin_x < -47) {
@@ -18,9 +18,9 @@ MATCH void Area_SlideHudBannerLeft(void) {
 
     if (D_801454F2 != 2) {
         mode              = 1;
-        work              = g_Task;
+        work              = TASK(Actor);
         work->header.step = mode;
     }
 
-    Area_DrawHud(0x10, g_Task->screen_x);
+    Area_DrawHud(0x10, TASK(Actor)->screen_x);
 }

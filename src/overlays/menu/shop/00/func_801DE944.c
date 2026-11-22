@@ -1,5 +1,4 @@
 #include "shop_00.h"
-#include "area/spad.h"
 #include "area/map.h"
 
 /* Refreshes the status-panel rows and the field-camera scroll: fills the row
@@ -35,12 +34,12 @@ MATCH void func_801DE944(void) {
             do {
                 TASK_SET(((u8*)g_Game.members + row));
                 Party_MemberLoadSprite(((PartyMember*)((u8*)&g_Game.members[0] + row))->chr.character_id, (u8)i);
-                Script_Select(g_Task->direction);
+                Script_Select(TASK(Actor)->direction);
                 if (D_8014504A != 0) {
                     ACTOR_SET_MODE(0);
-                    g_Task->header.step = 0;
-                    g_Task->unk_03      = 0;
-                    g_Task->unk_04      = 0;
+                    TASK(Actor)->header.step = 0;
+                    TASK(Actor)->unk_03      = 0;
+                    TASK(Actor)->unk_04      = 0;
                 }
                 row += BATTLE_PARTY_STRIDE;
                 i++;
@@ -60,13 +59,13 @@ MATCH void func_801DE944(void) {
         g_Game.party_size        = 1;
         g_Game.members[0].slot   = 0;
         *(Character*)(actor - 5) = *(Character*)(party - 0x5F2);
-        g_Task->unk_48           = 0;
+        TASK(Actor)->unk_48      = 0;
         Party_MemberLoadSprite(g_Game.members[0].chr.character_id, 0);
-        Script_Select(g_Task->direction);
+        Script_Select(TASK(Actor)->direction);
         ACTOR_SET_MODE(0);
-        g_Task->header.step = 0;
-        g_Task->unk_03      = 0;
-        g_Task->unk_04      = 0;
+        TASK(Actor)->header.step = 0;
+        TASK(Actor)->unk_03      = 0;
+        TASK(Actor)->unk_04      = 0;
     }
     if (g_GameAreaId == AREA_ID_BOAT_AFTER_BLACK_SHIP) {
         i = 0;

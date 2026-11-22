@@ -5,7 +5,7 @@ MATCH void Well_StepSwish(void) {
     Actor* work;
 
     if (++g_WellSwishStep >= WELL_SWISH_STEPS) {
-        work        = g_Task;
+        work        = TASK(Actor);
         g_GameState = g_Game.members;
         TASK_SET(g_Game.members);
         g_Game.members[0].pos.y.fixed &= 0xFFFFF000;
@@ -18,7 +18,7 @@ MATCH void Well_StepSwish(void) {
         switch (g_WellSwishButtons) {
             case PADLup:
             case (PADLup | PADLright):
-                work        = g_Task;
+                work        = TASK(Actor);
                 g_GameState = g_Game.members;
                 TASK_SET(g_Game.members);
                 g_Game.members[0].pos.y.fixed += 0x800;
@@ -26,7 +26,7 @@ MATCH void Well_StepSwish(void) {
                 break;
             case PADLright:
             case (PADLdown | PADLright):
-                work        = g_Task;
+                work        = TASK(Actor);
                 g_GameState = g_Game.members;
                 TASK_SET(g_Game.members);
                 g_Game.members[0].pos.x.fixed -= 0x800;
@@ -34,7 +34,7 @@ MATCH void Well_StepSwish(void) {
                 break;
             case PADLdown:
             case (PADLleft | PADLdown):
-                work        = g_Task;
+                work        = TASK(Actor);
                 g_GameState = g_Game.members;
                 TASK_SET(g_Game.members);
                 g_Game.members[0].pos.y.fixed -= 0x800;
@@ -42,13 +42,13 @@ MATCH void Well_StepSwish(void) {
                 break;
             case PADLleft:
             case (PADLleft | PADLup):
-                work        = g_Task;
+                work        = TASK(Actor);
                 g_GameState = g_Game.members;
                 TASK_SET(g_Game.members);
                 g_Game.members[0].pos.x.fixed += 0x800;
                 g_Task = work;
                 break;
         }
-        g_Task->header.mode = WELL_MODE_SWISH_INPUT;
+        TASK(Actor)->header.mode = WELL_MODE_SWISH_INPUT;
     }
 }

@@ -6,7 +6,6 @@
 
 #include "game/spawn.h"
 #include "overlays/area/worlds/world01.h"
-#include "area/spad.h"
 
 /* The bundle record's command tag: the high byte of its first word. The
  * palette records the grid probe tests carry tags 0x23 to 0x25. */

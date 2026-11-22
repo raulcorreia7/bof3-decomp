@@ -5,7 +5,6 @@
  * includes the file. */
 
 #include "overlays/scenario/scenario.h"
-#include "area/spad.h"
 
 /* FAKE: the callers pass the arguments as s32, the width the real prototype (u8) lacks. */
 #define Item_Count ((s32 (*)(s32, s32, s32))Item_Count)

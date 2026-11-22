@@ -5,5 +5,5 @@ MATCH void func_801B6FDC(void) {
         return;
     }
     g_Game.current->u.field.flags &= 0xDFu;
-    g_Task->unk_03 = 0;
+    TASK(Actor)->unk_03 = 0;
 }

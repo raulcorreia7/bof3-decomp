@@ -3,7 +3,7 @@
 MATCH void func_801F2C6C(void) {
     Actor* task;
 
-    task = g_Task;
+    task = TASK(Actor);
     if (g_ScriptVars[1] != 0) {
         g_GameState = g_Game.members;
         TASK_SET(g_Game.members);

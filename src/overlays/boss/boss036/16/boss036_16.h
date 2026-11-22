@@ -8,7 +8,6 @@
 #include "overlays/battle/battle.h"
 
 /* The scratchpad work area is a PartyMember record in this image. */
-#define g_Task ((PartyMember*)g_Task)
 
 extern Callback D_800C1804[];
 extern u8       D_800C2020[];

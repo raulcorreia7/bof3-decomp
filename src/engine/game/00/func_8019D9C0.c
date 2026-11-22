@@ -12,7 +12,7 @@ MATCH void func_8019D9C0(void) {
     D_800E4D40 = 0x40;
     D_800E4D42 = 0;
 loop:
-    work        = g_Task;
+    work        = TASK(Actor);
     *dst        = work->pos.x.fixed;
     *(dst2 - 5) = work->pos.y.fixed;
     /* Third coord word follows y.fixed with no named field. */

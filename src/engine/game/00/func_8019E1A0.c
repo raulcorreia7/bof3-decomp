@@ -6,12 +6,12 @@ MATCH void func_8019E1A0(void) {
     Actor* work;
     Actor* record;
 
-    work = g_Task;
+    work = TASK(Actor);
     work->pos.x.fixed += work->vx;
     work->pos.y.fixed += work->vy;
     work->pos.z.fixed += work->vz;
     Script_AnimStepLoop();
-    record     = g_Task;
+    record     = TASK(Actor);
     sceneTimer = record->timer;
     if (sceneTimer != 0) {
         record->timer = (u8)(sceneTimer - 1);

@@ -26,20 +26,20 @@ MATCH void func_80167910(void) {
         return;
     }
     setVector(&pos, (s16)((D_801462A0 >> 9) - 0x4000), (s16)((D_801462A4 >> 9) - 0x4000), (s16)(-(D_801462AA + 0x80) / 2));
-    g_Task->unk_60   = RotTransPers(&pos, (long*)&sxy, &p, &flag);
-    g_Task->screen_x = sxy.vx;
-    g_Task->screen_y = sxy.vy;
-    poly             = (POLY_FT4*)g_GfxPrimCursor;
+    TASK(Actor)->unk_60   = RotTransPers(&pos, (long*)&sxy, &p, &flag);
+    TASK(Actor)->screen_x = sxy.vx;
+    TASK(Actor)->screen_y = sxy.vy;
+    poly                  = (POLY_FT4*)g_GfxPrimCursor;
     SetPolyFT4(poly);
-    sy       = g_Task->screen_x;
+    sy       = TASK(Actor)->screen_x;
     poly->x0 = sy - 6;
     poly->x1 = sy + 7;
     poly->x2 = poly->x0;
     poly->x3 = poly->x1;
     if (g_FrameCount & 0x8) {
-        poly->y0 = g_Task->screen_y - 27 + (((u32)g_FrameCount >> 1) & 0x3);
+        poly->y0 = TASK(Actor)->screen_y - 27 + (((u32)g_FrameCount >> 1) & 0x3);
     } else {
-        poly->y0 = g_Task->screen_y - 24 - (((u32)g_FrameCount >> 1) & 0x3);
+        poly->y0 = TASK(Actor)->screen_y - 24 - (((u32)g_FrameCount >> 1) & 0x3);
     }
     poly->u0 = 204;
     poly->u1 = 204;
@@ -55,20 +55,20 @@ MATCH void func_80167910(void) {
     poly->v3    = poly->v1;
     poly->tpage = getTPage(TPAGE_DEPTH_4BIT, TPAGE_ABR_HALF, FONT_TPAGE_X, FONT_TPAGE_Y);
     poly->clut  = getClut(32, 480);
-    if (!(g_Task->param.unk_0B & 0x1)) {
-        Area_CellAddPrim(g_Task->pos.x.fixed, g_Task->pos.y.fixed, 1, sizeof(POLY_FT4));
+    if (!(TASK(Actor)->param.unk_0B & 0x1)) {
+        Area_CellAddPrim(TASK(Actor)->pos.x.fixed, TASK(Actor)->pos.y.fixed, 1, sizeof(POLY_FT4));
     } else {
         GFX_AddPrim(GFX_LAYER_EFFECT, sizeof(POLY_FT4));
     }
     PushMatrix();
     setVector(&axis, 0, 0, 0);
-    setVector(&rot, (s16)((g_Task->pos.x.fixed >> 9) - 0x4000), (s16)((g_Task->pos.y.fixed >> 9) - 0x4000), (s16)(-COORD_INT(g_Task->pos.z) / 2));
+    setVector(&rot, (s16)((TASK(Actor)->pos.x.fixed >> 9) - 0x4000), (s16)((TASK(Actor)->pos.y.fixed >> 9) - 0x4000), (s16)(-COORD_INT(TASK(Actor)->pos.z) / 2));
     RotTransMatrix(&rot, mtx, &flag);
     Camera_SetModelMatrix(&axis, &mtx);
     mode = getTPage(TPAGE_DEPTH_4BIT, TPAGE_ABR_SUB, 896, 256);
     SetDrawMode((DR_MODE*)g_GfxPrimCursor, 0, 0, mode, NULL);
-    if (!(g_Task->param.unk_0B & 0x1)) {
-        Area_CellAddPrim(g_Task->pos.x.fixed, g_Task->pos.y.fixed, 1, sizeof(DR_MODE));
+    if (!(TASK(Actor)->param.unk_0B & 0x1)) {
+        Area_CellAddPrim(TASK(Actor)->pos.x.fixed, TASK(Actor)->pos.y.fixed, 1, sizeof(DR_MODE));
     } else {
         GFX_AddPrim(GFX_LAYER_EFFECT, sizeof(DR_MODE));
     }
@@ -95,8 +95,8 @@ MATCH void func_80167910(void) {
         setRGB0(prim, 0x80, 0x80, 0x80);
         setRGB1(prim, 0, 0, 0);
         setRGB2(prim, 0, 0, 0);
-        if (!(g_Task->param.unk_0B & 0x1)) {
-            Area_CellAddPrim(g_Task->pos.x.fixed, g_Task->pos.y.fixed, 1, sizeof(POLY_G3));
+        if (!(TASK(Actor)->param.unk_0B & 0x1)) {
+            Area_CellAddPrim(TASK(Actor)->pos.x.fixed, TASK(Actor)->pos.y.fixed, 1, sizeof(POLY_G3));
         } else {
             GFX_AddPrim(GFX_LAYER_EFFECT, sizeof(POLY_G3));
         }

@@ -13,41 +13,41 @@ MATCH void func_801F3514(void) {
     s16*     out;
 
     script = &D_80145EDB;
-    if (g_Task->script_record != *script) {
+    if (TASK(Actor)->script_record != *script) {
         Script_Request(*script);
-        g_Task->script_record = *script;
+        TASK(Actor)->script_record = *script;
     }
     if (D_80145E92[0] == 3) {
         Script_AnimStepLoop();
     }
 
     if (g_AreaSceneMode == 1) {
-        g_Task->tint.steps.delta.r = 0x7F;
-        g_Task->tint.steps.delta.g = -0x80;
-        g_Task->tint.steps.delta.b = -0x80;
-        g_AreaSceneMode            = 0;
+        TASK(Actor)->tint.steps.delta.r = 0x7F;
+        TASK(Actor)->tint.steps.delta.g = -0x80;
+        TASK(Actor)->tint.steps.delta.b = -0x80;
+        g_AreaSceneMode                 = 0;
     } else {
-        g_Task->tint.steps.delta.r = 0;
-        g_Task->tint.steps.delta.g = 0;
-        g_Task->tint.steps.delta.b = 0;
+        TASK(Actor)->tint.steps.delta.r = 0;
+        TASK(Actor)->tint.steps.delta.g = 0;
+        TASK(Actor)->tint.steps.delta.b = 0;
     }
 
     vertex     = g_ScratchPadVectors;
     screen     = D_1F800034;
     /* Stored through a pointer: a member store lets the scroll loads move above it. */
-    out        = &g_Task->unk_32;
+    out        = &TASK(Actor)->unk_32;
     *out       = 0x3200;
     vertex->vx = (s16)(((((g_AreaScrollTargetX - 1) & 0xFFFFFF) + 1) >> 9) - 0x4000);
     D_1F800016 = (s16)(((((g_AreaScrollTargetY - 1) & 0xFFFFFF) + 1) >> 9) - 0x4000);
     D_1F800018 = (s16)(-D_80145ECE / 2);
     RotTransPers(vertex, (long*)screen, &depth, &flag);
 
-    g_Task->screen_x = 0xA0;
+    TASK(Actor)->screen_x = 0xA0;
     if (g_Game.members[0].unk_14 != 0) {
-        g_Task->screen_y = D_1F800034[1];
-        D_80145EC0       = D_1F800034[1];
+        TASK(Actor)->screen_y = D_1F800034[1];
+        D_80145EC0            = D_1F800034[1];
     } else {
-        g_Task->screen_y = D_80145EC0;
+        TASK(Actor)->screen_y = D_80145EC0;
     }
 
     if (g_AreaGridActorCount < 0x28) {

@@ -9,13 +9,13 @@ __asm__(".include \"include/match/macro.inc\"\n");
 MATCH void func_801D0C48(void) {
     Actor* work;
 
-    work           = g_Task;
+    work           = TASK(Actor);
     work->unk_64   = g_Game.members[0].pos.x.fixed;
     work->unk_68   = g_Game.members[0].pos.y.fixed;
     work->unk_6C   = g_Game.members[0].pos.z.fixed + TO_COORD(128);
     work->timer    = 8;
     work->screen_x = 0;
-    g_Task->header.mode += 1;
+    TASK(Actor)->header.mode += 1;
     SND_SEPlay(EMI_SE_ID(SND_BANK_AREA, 11));
 }
 
@@ -23,26 +23,26 @@ MATCH void func_801D0CC0(void) {
     u16 screen_x;
     u8  mode;
 
-    screen_x         = g_Task->screen_x + 0x20;
-    g_Task->screen_x = screen_x;
-    GFX_DrawColorFan(&g_Task->unk_64, (s16)screen_x, 6);
-    mode          = g_Task->timer - 1;
-    g_Task->timer = mode;
+    screen_x              = TASK(Actor)->screen_x + 0x20;
+    TASK(Actor)->screen_x = screen_x;
+    GFX_DrawColorFan(&TASK(Actor)->unk_64, (s16)screen_x, 6);
+    mode               = TASK(Actor)->timer - 1;
+    TASK(Actor)->timer = mode;
     if (!(mode & BYTE_MASK)) {
-        g_Task->timer = 64;
-        g_Task->header.mode += 1;
+        TASK(Actor)->timer = 64;
+        TASK(Actor)->header.mode += 1;
     }
 }
 
 MATCH void func_801D0D54(void) {
     u8 mode;
 
-    GFX_DrawColorFan(&g_Task->unk_64, (s16)g_Task->screen_x, 6);
-    mode          = g_Task->timer - 1;
-    g_Task->timer = mode;
+    GFX_DrawColorFan(&TASK(Actor)->unk_64, (s16)TASK(Actor)->screen_x, 6);
+    mode               = TASK(Actor)->timer - 1;
+    TASK(Actor)->timer = mode;
     if (!(mode & BYTE_MASK)) {
-        g_Task->timer = 32;
-        g_Task->header.mode += 1;
+        TASK(Actor)->timer = 32;
+        TASK(Actor)->header.mode += 1;
     }
 }
 
@@ -51,21 +51,21 @@ MATCH void func_801D0DD8(void) {
     u8          timer;
     u8          i;
 
-    g_Task->unk_6C += TO_COORD(12);
-    g_Task->screen_x -= 6;
-    GFX_DrawColorFan(&g_Task->unk_64, (s16)g_Task->screen_x, 6);
-    timer         = g_Task->timer - 1;
-    g_Task->timer = timer;
+    TASK(Actor)->unk_6C += TO_COORD(12);
+    TASK(Actor)->screen_x -= 6;
+    GFX_DrawColorFan(&TASK(Actor)->unk_64, (s16)TASK(Actor)->screen_x, 6);
+    timer              = TASK(Actor)->timer - 1;
+    TASK(Actor)->timer = timer;
     if ((timer & BYTE_MASK) == 0) {
-        g_Task->timer  = 32;
-        g_Task->unk_06 = 0;
-        g_Task->header.mode++;
+        TASK(Actor)->timer  = 32;
+        TASK(Actor)->unk_06 = 0;
+        TASK(Actor)->header.mode++;
         func_801D199C();
-        g_Task->pos.x.fixed = g_Task->unk_64;
-        g_Task->pos.y.fixed = g_Task->unk_68;
-        g_Task->pos.z.fixed = g_Task->unk_6C;
-        spin                = g_WorldSpins;
-        i                   = 0;
+        TASK(Actor)->pos.x.fixed = TASK(Actor)->unk_64;
+        TASK(Actor)->pos.y.fixed = TASK(Actor)->unk_68;
+        TASK(Actor)->pos.z.fixed = TASK(Actor)->unk_6C;
+        spin                     = g_WorldSpins;
+        i                        = 0;
         do {
             Area_InitSpin(spin);
             i++;
@@ -86,35 +86,35 @@ MATCH void func_801D0F10(void) {
     s32 origin_z;
     u8  mode;
 
-    if ((g_Task->unk_06++ & 0x3) == 0) {
+    if ((TASK(Actor)->unk_06++ & 0x3) == 0) {
         func_801D19C8();
     }
     func_801D2088();
     func_801D1A60();
     if (g_ScriptVars[0] == 0x14) {
-        origin_x = g_Task->unk_64;
-        origin_y = g_Task->unk_68;
-        origin_z = g_Task->unk_6C;
-        mode     = g_Task->header.mode + 1;
-        setVector(g_Task, 0, 0, 0);
-        g_Task->unk_18      = origin_x;
-        g_Task->unk_1C      = origin_y;
-        g_Task->gravity     = origin_z;
-        g_Task->unk_64      = (0x2F8000 - g_Task->unk_64) >> 7;
-        g_Task->unk_68      = (0x278000 - g_Task->unk_68) >> 7;
-        g_Task->unk_6C      = (TO_COORD(3840) - g_Task->unk_6C) >> 7;
-        g_Task->header.mode = mode;
+        origin_x = TASK(Actor)->unk_64;
+        origin_y = TASK(Actor)->unk_68;
+        origin_z = TASK(Actor)->unk_6C;
+        mode     = TASK(Actor)->header.mode + 1;
+        setVector(TASK(Actor), 0, 0, 0);
+        TASK(Actor)->unk_18      = origin_x;
+        TASK(Actor)->unk_1C      = origin_y;
+        TASK(Actor)->gravity     = origin_z;
+        TASK(Actor)->unk_64      = (0x2F8000 - TASK(Actor)->unk_64) >> 7;
+        TASK(Actor)->unk_68      = (0x278000 - TASK(Actor)->unk_68) >> 7;
+        TASK(Actor)->unk_6C      = (TO_COORD(3840) - TASK(Actor)->unk_6C) >> 7;
+        TASK(Actor)->header.mode = mode;
     }
 }
 
 MATCH void func_801D0FEC(void) {
-    if ((g_Task->unk_06++ & 0x3) == 0) {
+    if ((TASK(Actor)->unk_06++ & 0x3) == 0) {
         func_801D19C8();
     }
     func_801D2088();
     func_801D1A60();
-    g_Task->timer = 32;
-    g_Task->header.mode += 1;
+    TASK(Actor)->timer = 32;
+    TASK(Actor)->header.mode += 1;
     SND_SEPlay(EMI_SE_ID(SND_BANK_AREA, 0x09));
 }
 
@@ -124,14 +124,14 @@ MATCH void func_801D106C(void) {
     u8          timer;
     u8          i;
 
-    if ((g_Task->unk_06++ & 0x3) == 0) {
+    if ((TASK(Actor)->unk_06++ & 0x3) == 0) {
         func_801D19C8();
     }
     func_801D1A60();
     func_801D2088();
-    func_801D1678(&g_Task->unk_18, &g_Task->pos.x, 0x40);
+    func_801D1678(&TASK(Actor)->unk_18, &TASK(Actor)->pos.x, 0x40);
 
-    work = g_Task;
+    work = TASK(Actor);
     work->vx += work->unk_64;
     work->vy += work->unk_68;
     work->vz += work->unk_6C;
@@ -144,13 +144,13 @@ MATCH void func_801D106C(void) {
         work->gravity = TO_COORD(3840);
     }
 
-    g_Task->unk_03 -= 4;
-    timer         = g_Task->timer - 1;
-    g_Task->timer = timer;
+    TASK(Actor)->unk_03 -= 4;
+    timer              = TASK(Actor)->timer - 1;
+    TASK(Actor)->timer = timer;
     if (timer == 0) {
-        func_801D2138(&g_Task->pos.x.fixed, &g_Task->unk_18);
-        func_801D2138(&g_Task->pos.y.fixed, &g_Task->unk_1C);
-        func_801D2138(&g_Task->pos.z.fixed, &g_Task->gravity);
+        func_801D2138(&TASK(Actor)->pos.x.fixed, &TASK(Actor)->unk_18);
+        func_801D2138(&TASK(Actor)->pos.y.fixed, &TASK(Actor)->unk_1C);
+        func_801D2138(&TASK(Actor)->pos.z.fixed, &TASK(Actor)->gravity);
         spin = &g_WorldSpins[16];
         i    = 16;
         do {
@@ -158,32 +158,32 @@ MATCH void func_801D106C(void) {
             i++;
             spin++;
         } while (i < 32);
-        func_801D2138(&g_Task->pos.x.fixed, &g_Task->unk_18);
-        func_801D2138(&g_Task->pos.y.fixed, &g_Task->unk_1C);
-        func_801D2138(&g_Task->pos.z.fixed, &g_Task->gravity);
-        g_Task->timer = 0x80;
-        g_Task->header.mode++;
+        func_801D2138(&TASK(Actor)->pos.x.fixed, &TASK(Actor)->unk_18);
+        func_801D2138(&TASK(Actor)->pos.y.fixed, &TASK(Actor)->unk_1C);
+        func_801D2138(&TASK(Actor)->pos.z.fixed, &TASK(Actor)->gravity);
+        TASK(Actor)->timer = 0x80;
+        TASK(Actor)->header.mode++;
     }
 }
 
 MATCH void func_801D12A0(void) {
-    if ((g_Task->unk_06++ & 0x3) == 0) {
+    if ((TASK(Actor)->unk_06++ & 0x3) == 0) {
         func_801D19C8();
-        func_801D2138(&g_Task->pos.x.fixed, &g_Task->unk_18);
-        func_801D2138(&g_Task->pos.y.fixed, &g_Task->unk_1C);
-        func_801D2138(&g_Task->pos.z.fixed, &g_Task->gravity);
+        func_801D2138(&TASK(Actor)->pos.x.fixed, &TASK(Actor)->unk_18);
+        func_801D2138(&TASK(Actor)->pos.y.fixed, &TASK(Actor)->unk_1C);
+        func_801D2138(&TASK(Actor)->pos.z.fixed, &TASK(Actor)->gravity);
         func_801D19C8();
-        func_801D2138(&g_Task->pos.x.fixed, &g_Task->unk_18);
-        func_801D2138(&g_Task->pos.y.fixed, &g_Task->unk_1C);
-        func_801D2138(&g_Task->pos.z.fixed, &g_Task->gravity);
+        func_801D2138(&TASK(Actor)->pos.x.fixed, &TASK(Actor)->unk_18);
+        func_801D2138(&TASK(Actor)->pos.y.fixed, &TASK(Actor)->unk_1C);
+        func_801D2138(&TASK(Actor)->pos.z.fixed, &TASK(Actor)->gravity);
     }
     func_801D1A60();
     func_801D2088();
-    func_801D1678(&g_Task->unk_18, &g_Task->pos.x, 0x40);
+    func_801D1678(&TASK(Actor)->unk_18, &TASK(Actor)->pos.x, 0x40);
     if (g_ScriptVars[0] == 0x17) {
-        g_Task->unk_03 = 0x80;
-        g_Task->timer  = 8;
-        g_Task->header.mode += 1;
+        TASK(Actor)->unk_03 = 0x80;
+        TASK(Actor)->timer  = 8;
+        TASK(Actor)->header.mode += 1;
         SND_SEPlay(EMI_SE_ID(SND_BANK_AREA, 0x0A));
     }
 }
@@ -191,12 +191,12 @@ MATCH void func_801D12A0(void) {
 MATCH void func_801D13F4(void) {
     u8 remaining;
 
-    g_Task->screen_x -= 0x10;
-    g_Task->unk_03 -= 8;
+    TASK(Actor)->screen_x -= 0x10;
+    TASK(Actor)->unk_03 -= 8;
     func_801D1A60();
-    func_801D1678(&g_Task->unk_18, &g_Task->pos.x, g_Task->unk_03);
-    remaining     = g_Task->timer - 1;
-    g_Task->timer = remaining;
+    func_801D1678(&TASK(Actor)->unk_18, &TASK(Actor)->pos.x, TASK(Actor)->unk_03);
+    remaining          = TASK(Actor)->timer - 1;
+    TASK(Actor)->timer = remaining;
     if (!(remaining & BYTE_MASK)) {
         Actor_Clear();
     }
@@ -280,7 +280,7 @@ MATCH void func_801D1678(s32* from, s32* to, u8 intensity) {
     setRGB3(prim, 0, 0, 0);
     GFX_AddPrim(GFX_LAYER_EFFECT_FRONT, sizeof(POLY_G4));
 
-    setVector(&step, g_Task->unk_64, g_Task->unk_68, g_Task->unk_6C);
+    setVector(&step, TASK(Actor)->unk_64, TASK(Actor)->unk_68, TASK(Actor)->unk_6C);
     phase = g_FrameCount & 0xF;
     setVector(&current, to[0] + step.vx * phase, to[1] + step.vy * phase, to[2] + step.vz * phase);
     while (from[0] < current.vx) {
@@ -291,9 +291,9 @@ MATCH void func_801D1678(s32* from, s32* to, u8 intensity) {
         setXY0(segment, projected.vx, projected.vy);
         setRGB0(segment, intensity, intensity, 0);
         GFX_AddPrim(GFX_LAYER_EFFECT_FRONT, 12);
-        current.vx += g_Task->unk_64 << 4;
-        current.vy += g_Task->unk_68 << 4;
-        current.vz += g_Task->unk_6C << 4;
+        current.vx += TASK(Actor)->unk_64 << 4;
+        current.vy += TASK(Actor)->unk_68 << 4;
+        current.vz += TASK(Actor)->unk_6C << 4;
     }
 }
 
@@ -318,7 +318,7 @@ MATCH void func_801D19C8(void) {
             slot->active = 1;
             slot->unk_01 = 0;
             slot->life   = 16;
-            actor        = g_Task;
+            actor        = TASK(Actor);
             WorldPos_Copy(&slot->pos, &actor->pos);
             slot->radius     = 256;
             slot->core_shade = 96;
@@ -450,7 +450,7 @@ MATCH void func_801D21B4(void) {
         D_801D40AC = 1;
         row        = &g_SpawnedActors[slot];
         GFX_ClearRect(0x340, 0x100, 0x80, 0x100);
-        *row                = *(SpawnedActor*)g_Task->unk_4C;
+        *row                = *(SpawnedActor*)TASK(Actor)->unk_4C;
         actor               = (Actor*)row;
         actor->header.flags = 1;
         actor->header.mode  = 2;
@@ -463,12 +463,12 @@ MATCH void func_801D21B4(void) {
             actor->sheet_row  = 0x80;
         }
         actor->active_flags |= 0x88;
-        parent = g_Task;
+        parent = TASK(Actor);
         g_Task = actor;
         if (actor->active_flags & 1) {
             if (actor->unk_2C == 0) {
                 Script_Begin(0x4D, 0x1C);
-                g_Task->mirror = 0;
+                TASK(Actor)->mirror = 0;
             } else {
                 Script_Begin(0x50, 0x24);
             }
@@ -478,7 +478,7 @@ MATCH void func_801D21B4(void) {
         g_Task        = parent;
         parent->timer = 2;
     }
-    g_Task->header.mode += 1;
+    TASK(Actor)->header.mode += 1;
 }
 
 MATCH void func_801D23A0(void) {
@@ -486,17 +486,17 @@ MATCH void func_801D23A0(void) {
     RECT   rect;
     Actor* actor;
 
-    actor        = g_Task;
+    actor        = TASK(Actor);
     mode         = actor->timer - 1;
     actor->timer = mode;
     if (!(mode & BYTE_MASK)) {
         setRECT(&rect, 832, 256, D_801D393C[D_801D40AC].w, D_801D393C[D_801D40AC].h);
         StoreImage(&rect, (u32*)AREA_WORK);
-        D_801D40B0    = AREA_WORK;
-        D_801D40B4    = AREA_WORK + 0x5A00;
-        D_801D40A8    = 0;
-        g_Task->timer = 0;
-        g_Task->header.mode++;
+        D_801D40B0         = AREA_WORK;
+        D_801D40B4         = AREA_WORK + 0x5A00;
+        D_801D40A8         = 0;
+        TASK(Actor)->timer = 0;
+        TASK(Actor)->header.mode++;
     }
 }
 
@@ -512,11 +512,11 @@ NON_MATCHING void func_801D2474(void) {
     u16       n;
 
     Camera_SetMatrix(&matrix);
-    pos[0] = ((Actor*)g_Task->unk_4C)->pos.x.fixed;
-    pos[1] = ((Actor*)g_Task->unk_4C)->pos.y.fixed;
-    pos[2] = ((Actor*)g_Task->unk_4C)->pos.z.fixed;
+    pos[0] = ((Actor*)TASK(Actor)->unk_4C)->pos.x.fixed;
+    pos[1] = ((Actor*)TASK(Actor)->unk_4C)->pos.y.fixed;
+    pos[2] = ((Actor*)TASK(Actor)->unk_4C)->pos.z.fixed;
     Camera_ProjectPoint(pos, &screen);
-    for (row = (D_801D393C[D_801D40AC].h >> 1) * g_Task->timer; row < (D_801D393C[D_801D40AC].h >> 1) * (g_Task->timer + 1); row++) {
+    for (row = (D_801D393C[D_801D40AC].h >> 1) * TASK(Actor)->timer; row < (D_801D393C[D_801D40AC].h >> 1) * (TASK(Actor)->timer + 1); row++) {
         for (col = 0; col < D_801D393C[D_801D40AC].w; col++) {
             if (*(u16*)D_801D40B0 != 0) {
                 dot        = (TrailDot*)D_801D40B4;
@@ -531,10 +531,10 @@ NON_MATCHING void func_801D2474(void) {
             D_801D40B0 += 2;
         }
     }
-    step          = g_Task->timer + 1;
-    g_Task->timer = step;
+    step               = TASK(Actor)->timer + 1;
+    TASK(Actor)->timer = step;
     if (step == 2) {
-        g_Task->header.mode += 1;
+        TASK(Actor)->header.mode += 1;
     }
 }
 #else
@@ -571,7 +571,7 @@ MATCH void func_801D26BC(void) {
         }
 
         dot->active = order[j++];
-        if (g_Task->param.unk_0B == 0) {
+        if (TASK(Actor)->param.unk_0B == 0) {
             dot->dx = (rand() & 0x1F) - 16;
             dot->dy = (rand() & 0x1F) - 16;
         } else {
@@ -584,7 +584,7 @@ MATCH void func_801D26BC(void) {
             }
             dot->dy = -dot->dy;
         }
-        if (g_Task->unk_06 == 0) {
+        if (TASK(Actor)->unk_06 == 0) {
             dot->life = (rand() & 0x1E) + 10;
             dot->x -= dot->dx * dot->life;
             dot->y -= dot->dy * dot->life;
@@ -594,8 +594,8 @@ MATCH void func_801D26BC(void) {
         dot++;
     }
 
-    g_Task->timer = 80;
-    g_Task->header.mode++;
+    TASK(Actor)->timer = 80;
+    TASK(Actor)->header.mode++;
     SND_SEPlay(0x20C);
 }
 
@@ -606,12 +606,12 @@ MATCH void func_801D2934(void) {
     u16       i;
     u8        timer;
 
-    actor = (Actor*)g_Task->unk_4C;
+    actor = (Actor*)TASK(Actor)->unk_4C;
     actor->header.flags |= ACTOR_FLAG_HIDDEN;
     dot = MEM_PTR(TrailDot, AREA_WORK + 0x5A00);
     for (i = 0; i < D_801D40A8; dot++, i++) {
         if (dot->active != 0) {
-            if (g_Task->unk_06 == 0) {
+            if (TASK(Actor)->unk_06 == 0) {
                 if (dot->life != 0) {
                     dot->x += dot->dx;
                     dot->y += dot->dy;
@@ -631,10 +631,10 @@ MATCH void func_801D2934(void) {
         }
         dot->active ^= 1;
     }
-    timer         = g_Task->timer - 1;
-    g_Task->timer = timer;
+    timer              = TASK(Actor)->timer - 1;
+    TASK(Actor)->timer = timer;
     if (timer == 0) {
-        g_Task->header.mode++;
+        TASK(Actor)->header.mode++;
     }
 }
 
@@ -649,13 +649,13 @@ MATCH void func_801D2B64(void) {
 MATCH void func_801D2BA8(void) {
     Actor* work;
 
-    work         = g_Task;
+    work         = TASK(Actor);
     work->timer  = 20;
     work->vx     = 0;
     work->vy     = 0;
     work->unk_18 = 0;
     work->unk_1C = 0;
-    g_Task->header.mode++;
+    TASK(Actor)->header.mode++;
     SND_SEPlay(EMI_SE_ID(SND_BANK_AREA, 8));
 }
 
@@ -663,14 +663,14 @@ MATCH void func_801D2C00(void) {
     Actor* work;
     u8     timer;
 
-    work = g_Task;
+    work = TASK(Actor);
     work->unk_18 += 0x200;
     work->unk_1C += 0x100;
     work->vx += work->unk_18;
     work->vy += work->unk_1C;
     func_801D36BC(&work->pos.x.fixed, work->vx, work->vy);
-    timer         = g_Task->timer - 1;
-    g_Task->timer = timer;
+    timer              = TASK(Actor)->timer - 1;
+    TASK(Actor)->timer = timer;
     if (timer == 0) {
         Actor_Clear();
     }
@@ -686,7 +686,7 @@ MATCH void func_801D2C94(void) {
     s32*   pairs;
     u8     i;
 
-    work         = g_Task;
+    work         = TASK(Actor);
     work->vx     = 0;
     work->vy     = 0;
     work->unk_18 = 0;
@@ -698,12 +698,12 @@ MATCH void func_801D2C94(void) {
         step->vx += step->unk_18;
         step->vy += step->unk_1C;
     }
-    arm        = g_Task;
+    arm        = TASK(Actor);
     arm->timer = 20;
     pairs      = &arm->vx;
     pairs[0]   = -pairs[0];
     pairs[1]   = -pairs[1];
-    state      = g_Task;
+    state      = TASK(Actor);
     state->header.mode++;
     SND_SEPlay(EMI_SE_ID(SND_BANK_AREA, 8));
 }
@@ -713,9 +713,9 @@ MATCH void func_801D2D5C(void) {
     Actor* work2;
     u8     timer;
 
-    work = g_Task;
+    work = TASK(Actor);
     func_801D36BC(&work->pos.x.fixed, work->vx, work->vy);
-    work2        = g_Task;
+    work2        = TASK(Actor);
     timer        = work2->timer - 1;
     work2->timer = timer;
     work2->vx += work2->unk_18;
@@ -744,7 +744,7 @@ MATCH void func_801D2E30(void) {
             D_801D40AC = 1;
             row        = &g_SpawnedActors[slot];
             GFX_ClearRect(0x340, 0x100, 0x80, 0x100);
-            *row                = *(SpawnedActor*)g_Task->unk_4C;
+            *row                = *(SpawnedActor*)TASK(Actor)->unk_4C;
             actor               = (Actor*)row;
             actor->header.flags = 1;
             actor->header.mode  = 2;
@@ -755,7 +755,7 @@ MATCH void func_801D2E30(void) {
             actor->sheet_page   = GetTPage(TPAGE_DEPTH_4BIT, TPAGE_ABR_HALF, 0x340, 0x100);
             actor->sheet_row    = 0x80;
             actor->active_flags |= 0x88;
-            parent = g_Task;
+            parent = TASK(Actor);
             g_Task = actor;
             Script_Select(7);
             Area_AddGridActor();
@@ -763,7 +763,7 @@ MATCH void func_801D2E30(void) {
             g_Task        = parent;
             parent->timer = 2;
         }
-        g_Task->header.mode += 1;
+        TASK(Actor)->header.mode += 1;
     }
 }
 
@@ -772,17 +772,17 @@ MATCH void func_801D2FD8(void) {
     RECT   rect;
     Actor* actor;
 
-    actor        = g_Task;
+    actor        = TASK(Actor);
     mode         = actor->timer - 1;
     actor->timer = mode;
     if (!(mode & BYTE_MASK)) {
         setRECT(&rect, 832, 256, D_801D393C[D_801D40AC].w, D_801D393C[D_801D40AC].h);
         StoreImage(&rect, (u32*)AREA_WORK);
-        D_801D40B0    = AREA_WORK;
-        D_801D40B4    = AREA_WORK + 0x5A00;
-        D_801D40A8    = 0;
-        g_Task->timer = 0;
-        g_Task->header.mode++;
+        D_801D40B0         = AREA_WORK;
+        D_801D40B4         = AREA_WORK + 0x5A00;
+        D_801D40A8         = 0;
+        TASK(Actor)->timer = 0;
+        TASK(Actor)->header.mode++;
     }
 }
 
@@ -796,11 +796,11 @@ NON_MATCHING void func_801D30AC(void) {
     u8        col;
 
     Camera_SetMatrix(&matrix);
-    pos[0] = ((Actor*)g_Task->unk_4C)->pos.x.fixed;
-    pos[1] = ((Actor*)g_Task->unk_4C)->pos.y.fixed;
-    pos[2] = ((Actor*)g_Task->unk_4C)->pos.z.fixed;
+    pos[0] = ((Actor*)TASK(Actor)->unk_4C)->pos.x.fixed;
+    pos[1] = ((Actor*)TASK(Actor)->unk_4C)->pos.y.fixed;
+    pos[2] = ((Actor*)TASK(Actor)->unk_4C)->pos.z.fixed;
     Camera_ProjectPoint(pos, &screen);
-    for (row = (D_801D393C[D_801D40AC].h >> 1) * g_Task->timer; row < (D_801D393C[D_801D40AC].h >> 1) * (g_Task->timer + 1); row++) {
+    for (row = (D_801D393C[D_801D40AC].h >> 1) * TASK(Actor)->timer; row < (D_801D393C[D_801D40AC].h >> 1) * (TASK(Actor)->timer + 1); row++) {
         for (col = 0; col < D_801D393C[D_801D40AC].w; col++) {
             if (*(u16*)D_801D40B0 != 0) {
                 dot        = (TrailDot*)D_801D40B4;
@@ -813,9 +813,9 @@ NON_MATCHING void func_801D30AC(void) {
             D_801D40B0 += 2;
         }
     }
-    g_Task->timer += 1;
-    if (g_Task->timer == 2) {
-        g_Task->header.mode += 1;
+    TASK(Actor)->timer += 1;
+    if (TASK(Actor)->timer == 2) {
+        TASK(Actor)->header.mode += 1;
     }
 }
 #else
@@ -866,8 +866,8 @@ MATCH void func_801D32F4(void) {
         dot++;
     }
 
-    g_Task->timer = 80;
-    g_Task->header.mode++;
+    TASK(Actor)->timer = 80;
+    TASK(Actor)->header.mode++;
     SND_SEPlay(0x20C);
 }
 
@@ -877,7 +877,7 @@ MATCH void func_801D34F0(void) {
     u16       i;
     TILE_1*   tile;
 
-    ((Actor*)g_Task->unk_4C)->header.flags |= ACTOR_FLAG_HIDDEN;
+    ((Actor*)TASK(Actor)->unk_4C)->header.flags |= ACTOR_FLAG_HIDDEN;
     dot = MEM_PTR(TrailDot, AREA_WORK + 0x5A00);
     for (i = 0; i < D_801D40A8; dot++, i++) {
         if (dot->active) {
@@ -894,9 +894,9 @@ MATCH void func_801D34F0(void) {
         }
         dot->active ^= 1;
     }
-    if (--g_Task->timer == 0) {
+    if (--TASK(Actor)->timer == 0) {
         g_ScriptVars[0] = 43;
-        g_Task->header.mode++;
+        TASK(Actor)->header.mode++;
     }
 }
 

@@ -4,7 +4,7 @@ MATCH void func_801E4C7C(void) {
     PartyMember* work;
     u8           count;
 
-    work  = g_Task;
+    work  = TASK(PartyMember);
     count = work->unk_09;
     if (count == 0) {
         if (BATTLE_IS_SCRIPTED()) {
@@ -12,7 +12,7 @@ MATCH void func_801E4C7C(void) {
         } else {
             SND_SEPlay((g_BattleCurrentEnemy->type * 2) | 0x601);
         }
-        work              = g_Task;
+        work              = TASK(PartyMember);
         work->header.step = work->header.step + 1;
     } else {
         work->unk_09 = count - 1;

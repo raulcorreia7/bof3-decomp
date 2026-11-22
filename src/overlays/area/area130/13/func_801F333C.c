@@ -6,9 +6,9 @@ MATCH void func_801F333C(void) {
 
     cell = &D_801469EA;
     *cell += 0xF00;
-    func_801F3400(g_Task->screen_x, g_Task->screen_y, g_Task->vx, g_Task->vy);
+    func_801F3400(TASK(Actor)->screen_x, TASK(Actor)->screen_y, TASK(Actor)->vx, TASK(Actor)->vy);
     ACTOR_COUNT_DOWN(TASK(Actor), timer, timer);
     if (timer == 0) {
-        g_Task->header.mode++;
+        TASK(Actor)->header.mode++;
     }
 }

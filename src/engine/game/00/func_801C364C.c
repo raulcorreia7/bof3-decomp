@@ -6,7 +6,7 @@ MATCH s32 func_801C364C(s32 wanted_code, s32 cell_code, s32 find_facing) {
     s32 result;
     s32 enabled;
 
-    if (Area_CellTestCorners(g_Task->pos.x.fixed, g_Task->pos.y.fixed, g_Task->voice_flags.scene_flag, wanted_code & BYTE_MASK, 0) & BYTE_MASK) {
+    if (Area_CellTestCorners(TASK(Actor)->pos.x.fixed, TASK(Actor)->pos.y.fixed, TASK(Actor)->voice_flags.scene_flag, wanted_code & BYTE_MASK, 0) & BYTE_MASK) {
         return 0;
     }
     enabled = find_facing & BYTE_MASK;
@@ -15,8 +15,8 @@ MATCH s32 func_801C364C(s32 wanted_code, s32 cell_code, s32 find_facing) {
     i = 0;
     if (enabled) {
         for (;;) {
-            route  = ((g_Task->direction ^ 0x4) + i) & 0x7;
-            result = Game_TestPlacement(g_Task->pos.x.fixed + g_FacingSteps[route].x * 2, g_Task->pos.y.fixed + g_FacingSteps[route].y * 2, 0, COORD_INT(g_Task->pos.z)) & BYTE_MASK;
+            route  = ((TASK(Actor)->direction ^ 0x4) + i) & 0x7;
+            result = Game_TestPlacement(TASK(Actor)->pos.x.fixed + g_FacingSteps[route].x * 2, TASK(Actor)->pos.y.fixed + g_FacingSteps[route].y * 2, 0, COORD_INT(TASK(Actor)->pos.z)) & BYTE_MASK;
             /* FAKE: holds the increment after the probe call. */
             FAKE_BARRIER();
             i++;
@@ -27,12 +27,12 @@ MATCH s32 func_801C364C(s32 wanted_code, s32 cell_code, s32 find_facing) {
                 break;
             }
         }
-        g_Task->direction = route ^ 0x4;
+        TASK(Actor)->direction = route ^ 0x4;
     }
-    g_Task->header.mode  = 2;
-    g_Task->header.step  = 8;
-    g_Task->unk_03       = 0;
-    g_Task->unk_04       = 0;
-    g_Task->param.unk_0B = cell_code;
+    TASK(Actor)->header.mode  = 2;
+    TASK(Actor)->header.step  = 8;
+    TASK(Actor)->unk_03       = 0;
+    TASK(Actor)->unk_04       = 0;
+    TASK(Actor)->param.unk_0B = cell_code;
     return 1;
 }

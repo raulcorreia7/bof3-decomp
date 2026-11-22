@@ -6,7 +6,6 @@
 
 #include "overlays/area/worlds/world03.h"
 #include "scenario/state.h"
-#include "area/spad.h"
 
 /* One point of the glow ring: its position and the grey level of the ring edge there. */
 typedef struct AreaGlowPoint {

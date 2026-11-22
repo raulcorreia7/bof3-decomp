@@ -2,6 +2,6 @@
 
 /* func_801B3260 */
 MATCH void Area_Climb(void) {
-    Callback handler = g_AreaClimbSteps[g_Task->header.step];
+    Callback handler = g_AreaClimbSteps[TASK(Actor)->header.step];
     handler();
 }

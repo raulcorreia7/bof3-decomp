@@ -35,12 +35,12 @@ static inline void BattleEffectTimerStep(void) {
     /* A store through the pointer may alias the cell, so each step reloads
      * it. */
     TASK(PartyMember)->param.unk_0B++;
-    work = g_Task;
+    work = TASK(PartyMember);
     if (work->timer < 16) {
         work->timer += 2;
     } else {
         work->unk_09 = 60;
-        work         = g_Task;
+        work         = TASK(PartyMember);
         work->header.step++;
     }
 }
@@ -60,7 +60,7 @@ static inline void MagicOrbitProjectionStep(s32 depth) {
 
     TASK(PartyMember)->param.unk_0B++;
 
-    work                             = g_Task;
+    work                             = TASK(PartyMember);
     counter                          = work->unk_0C + 1;
     FAKE_VOLATILE(s32, work->unk_0C) = counter;
     angle                            = (counter & 0x7F) << 5;
@@ -69,7 +69,7 @@ static inline void MagicOrbitProjectionStep(s32 depth) {
     g_ScratchPad                     = depth;
 
     velocity          = rcos(angle) * g_ScratchPad;
-    work              = g_Task;
+    work              = TASK(PartyMember);
     work->pos.x.fixed = BATTLE_ACTIVE_WORK->pos.x.fixed + velocity;
 
     velocity                       = rsin(*angle_cell) * g_ScratchPad;

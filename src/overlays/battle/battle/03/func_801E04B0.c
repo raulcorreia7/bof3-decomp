@@ -10,7 +10,7 @@ MATCH void func_801E04B0(void) {
         TASK(PartyMember)->timer  = 0;
         return;
     }
-    work                                = g_Task;
+    work                                = TASK(PartyMember);
     *(u16*)(((u32)enemy_work + 0x11Cu)) = 0;
     work->unk_0C                        = 0;
     work->unk_10                        = -0x2000;

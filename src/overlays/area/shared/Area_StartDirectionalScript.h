@@ -3,9 +3,9 @@ MATCH void Area_StartDirectionalScript(Actor* actor) {
     u8 direction;
 
     g_ScriptState->move_mode = 1;
-    direction                = g_Task->direction & 7;
+    direction                = TASK(Actor)->direction & 7;
     g_ScriptState->flags |= 0x40;
-    g_Task->option_flags |= ACTOR_OPT_ROUTE_LOCKED;
+    TASK(Actor)->option_flags |= ACTOR_OPT_ROUTE_LOCKED;
     Script_Select(direction | 8);
     g_ScriptState->steps = 2;
     if (direction == 7) {
@@ -15,5 +15,5 @@ MATCH void Area_StartDirectionalScript(Actor* actor) {
         direction = 7;
         Area_MoveActorRoute(g_ScriptState, 7);
     }
-    g_Task->direction = direction;
+    TASK(Actor)->direction = direction;
 }

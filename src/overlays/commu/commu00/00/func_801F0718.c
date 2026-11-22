@@ -17,26 +17,26 @@
 MATCH void func_801F0718(u8 source_index, u8 task_index) {
     s16 distance;
 
-    g_Task         = &g_Actors[task_index];
-    g_Task->unk_06 = 1;
+    g_Task              = &g_Actors[task_index];
+    TASK(Actor)->unk_06 = 1;
 
     if (D_801F2568[task_index][2] != 0) {
-        g_Task->header.mode         = 0;
+        TASK(Actor)->header.mode    = 0;
         g_Actors[task_index].unk_78 = 2;
-        g_Task->header.step         = 1;
+        TASK(Actor)->header.step    = 1;
     } else {
-        g_Task->header.mode         = 6;
+        TASK(Actor)->header.mode    = 6;
         g_Actors[task_index].unk_78 = 0;
         ACTOR_CLEAR_STEP();
     }
 
-    COORD_INT(g_Task->pos.x)  = D_801F2568[task_index][0];
-    COORD_FRAC(g_Task->pos.x) = 0;
-    COORD_INT(g_Task->pos.y)  = D_801F2568[task_index][1];
-    COORD_FRAC(g_Task->pos.y) = 0;
-    distance                  = Area_HeightSample(*((u32*)&D_801468BC[(task_index & BYTE_MASK) * ACTOR_SIZE]), *((u32*)&D_801468C0[(task_index & BYTE_MASK) * ACTOR_SIZE]));
-    COORD_INT(g_Task->pos.z)  = distance;
-    g_Task->unk_05            = source_index;
-    Area_SceneSelectRecord(D_801F24FC[g_Task->unk_05 % 6]);
-    Script_DispatchSelector(g_Task->direction);
+    COORD_INT(TASK(Actor)->pos.x)  = D_801F2568[task_index][0];
+    COORD_FRAC(TASK(Actor)->pos.x) = 0;
+    COORD_INT(TASK(Actor)->pos.y)  = D_801F2568[task_index][1];
+    COORD_FRAC(TASK(Actor)->pos.y) = 0;
+    distance                       = Area_HeightSample(*((u32*)&D_801468BC[(task_index & BYTE_MASK) * ACTOR_SIZE]), *((u32*)&D_801468C0[(task_index & BYTE_MASK) * ACTOR_SIZE]));
+    COORD_INT(TASK(Actor)->pos.z)  = distance;
+    TASK(Actor)->unk_05            = source_index;
+    Area_SceneSelectRecord(D_801F24FC[TASK(Actor)->unk_05 % 6]);
+    Script_DispatchSelector(TASK(Actor)->direction);
 }

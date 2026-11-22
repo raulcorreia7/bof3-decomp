@@ -10,20 +10,20 @@ MATCH void func_801F3124(void) {
     tpage = GetTPage(TPAGE_DEPTH_8BIT, TPAGE_ABR_ADD, 0x140, 0);
     GFX_AddDitheredDrawMode(3, tpage);
     func_801F32A0(0);
-    jitter                   = (g_FrameCount & 0xF) << 20;
-    g_Task->tint.bytes.rgb.r = 0;
-    height                   = g_Task->pos.z.fixed - jitter;
-    while (g_Task->vz < height) {
-        func_801F3308(g_Task->pos.x.fixed, g_Task->pos.y.fixed, height, 1);
-        g_Task->tint.bytes.rgb.r += 0x2A;
-        if (g_Task->tint.bytes.rgb.r > 0x80) {
-            g_Task->tint.steps.delta.r = -0x80;
+    jitter                        = (g_FrameCount & 0xF) << 20;
+    TASK(Actor)->tint.bytes.rgb.r = 0;
+    height                        = TASK(Actor)->pos.z.fixed - jitter;
+    while (TASK(Actor)->vz < height) {
+        func_801F3308(TASK(Actor)->pos.x.fixed, TASK(Actor)->pos.y.fixed, height, 1);
+        TASK(Actor)->tint.bytes.rgb.r += 0x2A;
+        if (TASK(Actor)->tint.bytes.rgb.r > 0x80) {
+            TASK(Actor)->tint.steps.delta.r = -0x80;
         }
         height -= TO_COORD(256);
     }
-    g_Task->tint.steps.delta.r = -1;
-    func_801F3308(g_Task->pos.x.fixed, g_Task->pos.y.fixed, g_Task->vz, 0);
+    TASK(Actor)->tint.steps.delta.r = -1;
+    func_801F3308(TASK(Actor)->pos.x.fixed, TASK(Actor)->pos.y.fixed, TASK(Actor)->vz, 0);
     if (g_ScriptVars[3] == 0xE) {
-        g_Task->header.mode = 1;
+        TASK(Actor)->header.mode = 1;
     }
 }

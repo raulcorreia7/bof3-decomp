@@ -13,7 +13,7 @@ MATCH void func_801EEC80(void) {
     TASK(PartyMember)->pos.y.fixed = D_801EC2E0->target.party->pos.y.fixed;
     TASK(PartyMember)->pos.z.fixed = D_801EC2E0->target.party->pos.z.fixed + 0x01000000;
     func_801EEFF4();
-    saved_work = g_Task;
+    saved_work = TASK(PartyMember);
     g_Task     = D_801EC2E0->target.party;
     Script_Select(1U);
     g_Task = saved_work;
@@ -23,7 +23,7 @@ MATCH void func_801EEC80(void) {
 MATCH void func_801EED2C(void) {
     PartyMember* saved;
 
-    saved  = g_Task;
+    saved  = TASK(PartyMember);
     g_Task = D_801EC2E0->target.party;
     if (Script_AnimStepOnce() & BYTE_MASK) {
         g_Task        = saved;

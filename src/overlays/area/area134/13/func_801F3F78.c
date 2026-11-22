@@ -11,7 +11,7 @@ MATCH void func_801F3F78(void) {
     if (*state == 0xFE) {
         func_80196070();
     }
-    actor          = g_Task;
+    actor          = TASK(Actor);
     g_Game.current = (PartyMember*)&D_80146110;
     TASK_SET(&D_80146110);
     if (g_Game.members[2].pos.x.fixed > 0x33FFFF) {
@@ -25,8 +25,8 @@ MATCH void func_801F3F78(void) {
     }
     TASK_SET(actor);
     if (*state == 0) {
-        g_Task->timer       = D_801F5724[0x10 + (RANDOM_MASK(0xF))];
-        g_Task->header.mode = 3;
+        TASK(Actor)->timer       = D_801F5724[0x10 + (RANDOM_MASK(0xF))];
+        TASK(Actor)->header.mode = 3;
         return;
     }
     if (g_PadStates[0].held == (PADLup | PADLright) || g_PadStates[0].held == (PADLright | PADLdown) || g_PadStates[0].held == PADLright) {

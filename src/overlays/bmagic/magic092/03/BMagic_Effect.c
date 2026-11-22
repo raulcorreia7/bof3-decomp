@@ -33,7 +33,7 @@ MATCH void func_801EED04(void) {
             battler = i + BATTLE_PARTY_CHARACTERS_COUNT;
             if (!Battle_SlotIsBlocked(battler)) {
                 slot                               = Battle_AllocEffect(1, 0x28) & BYTE_MASK;
-                g_BattleEffects[slot].target.party = g_Task;
+                g_BattleEffects[slot].target.party = TASK(PartyMember);
                 g_BattleEffects[slot].unk_03       = index;
                 g_BattleEffects[slot].pos.x.fixed  = g_BattleEnemyBattlers[i].pos.x.fixed;
                 g_BattleEffects[slot].pos.y.fixed  = g_BattleEnemyBattlers[i].pos.y.fixed;
@@ -47,7 +47,7 @@ MATCH void func_801EED04(void) {
         for (i = 0; i < BATTLE_PARTY_CHARACTERS_COUNT; i++) {
             if (!Battle_SlotIsBlocked(i & BYTE_MASK)) {
                 slot                               = Battle_AllocEffect(1, 0x28) & BYTE_MASK;
-                g_BattleEffects[slot].target.party = g_Task;
+                g_BattleEffects[slot].target.party = TASK(PartyMember);
                 g_BattleEffects[slot].unk_03       = i;
                 g_BattleEffects[slot].pos.x.fixed  = g_Game.members[i].pos.x.fixed;
                 g_BattleEffects[slot].pos.y.fixed  = g_Game.members[i].pos.y.fixed;
@@ -88,7 +88,7 @@ MATCH void func_801EF0CC(void) {
         for (i = 0; i < 3; i++) {
             slot = BMagic_AllocEffect();
             if (slot != GAME_NONE) {
-                work                                  = g_Task;
+                work                                  = TASK(PartyMember);
                 BMAGIC_EFFECT_SLOTS[slot].header.mode = i != 0;
                 BMAGIC_EFFECT_SLOTS[slot].header.step = 0;
                 BMAGIC_EFFECT_SLOTS[slot].unk_0B      = i;
@@ -221,7 +221,7 @@ MATCH void func_801F0260(void) {
     SYS_DISPATCH_BYTE(D_801F07E8, TASK(PartyMember)->header.step);
     if (TASK(PartyMember)->header.flags != 0 && TASK(PartyMember)->header.step != 0) {
         Battle_ProjectRange();
-        work = g_Task;
+        work = TASK(PartyMember);
         if (work->param.unk_0B == 1) {
             x = work->screen_x.value - MAGIC092_STEP_X;
             y = work->screen_y.value;

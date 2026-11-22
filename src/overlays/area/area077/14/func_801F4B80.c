@@ -7,11 +7,11 @@ MATCH void func_801F4B80(void) {
     MATRIX   camera;
     LINE_F2* line;
 
-    second.vx = g_Task->pos.x.fixed;
+    second.vx = TASK(Actor)->pos.x.fixed;
     first.vx  = second.vx;
-    second.vy = g_Task->pos.y.fixed;
+    second.vy = TASK(Actor)->pos.y.fixed;
     first.vy  = second.vy;
-    second.vz = g_Task->pos.z.fixed;
+    second.vz = TASK(Actor)->pos.z.fixed;
     first.vz  = second.vz;
 
     first.vx += ((rand() & 0xFF) << 8) - 0x8000;

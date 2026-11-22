@@ -7,14 +7,14 @@ MATCH void func_801F457C(void) {
     /* g_GameEntryState and the entry substate, read as one word. */
     state = (u32*)&g_GameEntryState;
     if (*state == 0x50005 && (D_801EB7CA & 0x4000) != 0) {
-        g_Task->header.step++;
+        TASK(Actor)->header.step++;
     }
-    if (g_Task->timer == 15) {
-        g_Task->timer = 0;
+    if (TASK(Actor)->timer == 15) {
+        TASK(Actor)->timer = 0;
     }
-    ticks = g_Task->timer;
+    ticks = TASK(Actor)->timer;
     if ((u8)(ticks % 5) == 0) {
         func_801F4E70((u8)(ticks / 5) + 7);
     }
-    g_Task->timer++;
+    TASK(Actor)->timer++;
 }

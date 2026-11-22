@@ -3,18 +3,18 @@
 MATCH void func_801F3CDC(void) {
     u8 value;
 
-    value          = g_Task->unk_06;
-    g_Task->unk_06 = value + 1;
+    value               = TASK(Actor)->unk_06;
+    TASK(Actor)->unk_06 = value + 1;
     if (!(value & 0x3)) {
         Area_ClaimSpawnSlot();
     }
     Area_UpdateSpawnSlots();
     func_801F5940();
-    Area_DrawYellowLine(&g_Task->unk_18, &g_Task->pos.x, 0x40);
+    Area_DrawYellowLine(&TASK(Actor)->unk_18, &TASK(Actor)->pos.x, 0x40);
     if (*g_ScriptVars == 0x18) {
-        g_Task->unk_03 = 0x80;
-        g_Task->timer  = 8;
-        g_Task->header.mode += 1;
+        TASK(Actor)->unk_03 = 0x80;
+        TASK(Actor)->timer  = 8;
+        TASK(Actor)->header.mode += 1;
         SND_SEPlay(EMI_SE_ID(SND_BANK_AREA, 0x08));
     }
 }

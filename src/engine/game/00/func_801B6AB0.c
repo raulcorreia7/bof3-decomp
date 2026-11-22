@@ -3,18 +3,18 @@
 MATCH void func_801B6AB0(void) {
     s32 x;
 
-    x = g_Task->pos.x.fixed;
-    if ((((x & 0x7FFF) != 0) || ((g_Task->pos.y.fixed & 0x7FFF) != 0)) && ((g_Task->active_flags & 0x20) == 0)) {
-        g_Task->pos.x.fixed      = (x + 0x4800) & ~0x7FFF;
-        g_Task->pos.y.fixed      = (g_Task->pos.y.fixed + 0x4800) & ~0x7FFF;
-        COORD_INT(g_Task->pos.z) = Area_HeightReadStep(g_Task->pos.x.fixed, g_Task->pos.y.fixed, g_Task->direction);
-        Script_Request((g_Task->direction + 8) & BYTE_MASK);
-        if (((g_Task->pos.x.fixed & 0x7FFF) == 0) && ((g_Task->pos.y.fixed & 0x7FFF) == 0)) {
-            Script_Request(g_Task->direction);
+    x = TASK(Actor)->pos.x.fixed;
+    if ((((x & 0x7FFF) != 0) || ((TASK(Actor)->pos.y.fixed & 0x7FFF) != 0)) && ((TASK(Actor)->active_flags & 0x20) == 0)) {
+        TASK(Actor)->pos.x.fixed      = (x + 0x4800) & ~0x7FFF;
+        TASK(Actor)->pos.y.fixed      = (TASK(Actor)->pos.y.fixed + 0x4800) & ~0x7FFF;
+        COORD_INT(TASK(Actor)->pos.z) = Area_HeightReadStep(TASK(Actor)->pos.x.fixed, TASK(Actor)->pos.y.fixed, TASK(Actor)->direction);
+        Script_Request((TASK(Actor)->direction + 8) & BYTE_MASK);
+        if (((TASK(Actor)->pos.x.fixed & 0x7FFF) == 0) && ((TASK(Actor)->pos.y.fixed & 0x7FFF) == 0)) {
+            Script_Request(TASK(Actor)->direction);
         }
     } else {
         Actor_ClearVelocity();
-        g_Task->unk_03++;
+        TASK(Actor)->unk_03++;
         func_801B6BC8();
     }
 }

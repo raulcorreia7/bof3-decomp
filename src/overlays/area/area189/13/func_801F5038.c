@@ -12,20 +12,20 @@ NON_MATCHING void func_801F5038(void) {
     screen            = D_1F800034;
     vertex->vx        = (s16)(((((g_AreaScrollTargetX - 1) & 0xFFFFFF) + 1) >> 9) - 0x4000);
     SP_REF(s16, 0x16) = (s16)(((((g_AreaScrollTargetY - 1) & 0xFFFFFF) + 1) >> 9) - 0x4000);
-    SP_REF(s16, 0x18) = (s16)(-COORD_INT(g_Task->pos.z) / 2);
+    SP_REF(s16, 0x18) = (s16)(-COORD_INT(TASK(Actor)->pos.z) / 2);
     RotTransPers(vertex, (long*)screen, &depth, &flag);
 
-    flags            = D_80144EF8;
-    g_Task->screen_y = SP_REF(u16, 0x36);
-    g_Task->vz       = 0;
+    flags                 = D_80144EF8;
+    TASK(Actor)->screen_y = SP_REF(u16, 0x36);
+    TASK(Actor)->vz       = 0;
     if (SYS_TestFlag(flags, 9) != 0 && SYS_TestFlag(flags, 10) == 0) {
         g_SpawnedActors[0].header.flags |= ACTOR_FLAG_HIDDEN;
-        g_Task->header.step      = 3;
-        g_Task->vy               = -0x2000;
-        g_Task->timer            = 0x78;
+        TASK(Actor)->header.step = 3;
+        TASK(Actor)->vy          = -0x2000;
+        TASK(Actor)->timer       = 0x78;
         g_ScenarioState.timer_06 = 0x3C;
     } else {
-        g_Task->header.step = 2;
+        TASK(Actor)->header.step = 2;
     }
 }
 #else

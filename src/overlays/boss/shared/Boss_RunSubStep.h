@@ -4,5 +4,5 @@ MATCH void Boss_RunSubStep(void) {
     Callback steps[3];
 
     memcpy(steps, D_800C1804, sizeof(steps));
-    steps[g_Task->header.step]();
+    steps[TASK(Actor)->header.step]();
 }

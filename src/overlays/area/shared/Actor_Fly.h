@@ -5,7 +5,7 @@ MATCH void Actor_Fly(void) {
     Actor* work;
     Actor* scratch;
 
-    scratch = g_Task;
+    scratch = TASK(Actor);
     if (scratch->param.unk_0B != 0) {
         if ((scratch->header.flags & 0x80) != 0) {
             Actor_Clear();
@@ -15,7 +15,7 @@ MATCH void Actor_Fly(void) {
         scratch->param.unk_0B = 1;
     }
 
-    work = g_Task;
+    work = TASK(Actor);
     work->pos.x.fixed += work->vx;
     work->pos.y.fixed += work->vy;
     Script_AnimStepLoop();

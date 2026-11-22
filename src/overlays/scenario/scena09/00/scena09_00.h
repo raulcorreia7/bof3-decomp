@@ -5,7 +5,6 @@
  * includes the file. */
 
 #include "overlays/scenario/scenario.h"
-#include "area/spad.h"
 #include "area/effects.h"
 
 extern u8  D_80144908[];

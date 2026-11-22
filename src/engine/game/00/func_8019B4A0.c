@@ -9,52 +9,52 @@ MATCH void func_8019B4A0(void) {
     /* Non-volatile view of the shared state word (see func_80196FFC). */
     state = (u16*)&g_GameEntryState;
     if (*state != 1) {
-        if (g_Task->unk_0A != 0) {
+        if (TASK(Actor)->unk_0A != 0) {
             if ((func_8019C1E4() & BYTE_MASK) == 0) {
-                Area_CellSetCode(COORD_INT(g_Task->pos.x), COORD_INT(g_Task->pos.y), g_Task->param.unk_0B);
-                g_Task->unk_0A = (u8)((g_Task->unk_0A + 1) >> 1);
-                vx             = g_FacingOffsets[g_Task->direction].x;
-                span           = (g_Task->unk_0A - 1) * 0xC00;
-                g_Task->vx     = vx * 4;
+                Area_CellSetCode(COORD_INT(TASK(Actor)->pos.x), COORD_INT(TASK(Actor)->pos.y), TASK(Actor)->param.unk_0B);
+                TASK(Actor)->unk_0A = (u8)((TASK(Actor)->unk_0A + 1) >> 1);
+                vx                  = g_FacingOffsets[TASK(Actor)->direction].x;
+                span                = (TASK(Actor)->unk_0A - 1) * 0xC00;
+                TASK(Actor)->vx     = vx * 4;
                 if ((vx * 4) > 0) {
-                    g_Task->vx = vx * 4 + span;
+                    TASK(Actor)->vx = vx * 4 + span;
                 } else if ((vx * 4) < 0) {
-                    g_Task->vx = vx * 4 - span;
+                    TASK(Actor)->vx = vx * 4 - span;
                 }
-                vy         = g_FacingOffsets[g_Task->direction].y;
-                g_Task->vy = vy * 4;
+                vy              = g_FacingOffsets[TASK(Actor)->direction].y;
+                TASK(Actor)->vy = vy * 4;
                 if ((vy * 4) > 0) {
-                    g_Task->vy = vy * 4 + span;
+                    TASK(Actor)->vy = vy * 4 + span;
                 } else if ((vy * 4) < 0) {
-                    g_Task->vy = vy * 4 - span;
+                    TASK(Actor)->vy = vy * 4 - span;
                 }
-                g_Task->gravity = 0;
-                g_Task->vz      = 0;
-                if (g_Task->vx > 0) {
-                    g_Task->unk_18 = -0x400;
-                } else if (g_Task->vx < 0) {
-                    g_Task->unk_18 = 0x400;
+                TASK(Actor)->gravity = 0;
+                TASK(Actor)->vz      = 0;
+                if (TASK(Actor)->vx > 0) {
+                    TASK(Actor)->unk_18 = -0x400;
+                } else if (TASK(Actor)->vx < 0) {
+                    TASK(Actor)->unk_18 = 0x400;
                 } else {
-                    g_Task->unk_18 = 0;
+                    TASK(Actor)->unk_18 = 0;
                 }
-                if (g_Task->vy > 0) {
-                    g_Task->unk_1C = -0x400;
-                } else if (g_Task->vy < 0) {
-                    g_Task->unk_1C = 0x400;
+                if (TASK(Actor)->vy > 0) {
+                    TASK(Actor)->unk_1C = -0x400;
+                } else if (TASK(Actor)->vy < 0) {
+                    TASK(Actor)->unk_1C = 0x400;
                 } else {
-                    g_Task->unk_1C = 0;
+                    TASK(Actor)->unk_1C = 0;
                 }
-                g_Task->gravity = 0;
+                TASK(Actor)->gravity = 0;
                 Script_Select(1);
-                g_Task->timer       = 0;
-                g_Task->header.mode = g_Task->header.mode + 1;
+                TASK(Actor)->timer       = 0;
+                TASK(Actor)->header.mode = TASK(Actor)->header.mode + 1;
             } else {
-                Area_CellSetCode(COORD_INT(g_Task->pos.x), COORD_INT(g_Task->pos.y), g_Task->param.unk_0B);
-                g_Task->timer       = 0;
-                g_Task->header.mode = 4;
+                Area_CellSetCode(COORD_INT(TASK(Actor)->pos.x), COORD_INT(TASK(Actor)->pos.y), TASK(Actor)->param.unk_0B);
+                TASK(Actor)->timer       = 0;
+                TASK(Actor)->header.mode = 4;
             }
         } else if (g_GameStateIndex == GAME_REQUEST_AREA_CHANGE) {
-            Area_CellSetCode(COORD_INT(g_Task->pos.x), COORD_INT(g_Task->pos.y), g_Task->param.unk_0B);
+            Area_CellSetCode(COORD_INT(TASK(Actor)->pos.x), COORD_INT(TASK(Actor)->pos.y), TASK(Actor)->param.unk_0B);
         }
     }
     Area_SetDrawMode();

@@ -18,7 +18,7 @@ MATCH void func_801BD394(void) {
     if (g_GameStateIndex != GAME_REQUEST_IDLE) {
         flag = 1;
     }
-    work  = g_Task;
+    work  = TASK(Actor);
     slot  = (Actor*)((u8*)g_Game.members + work->unk_06 * BATTLE_PARTY_STRIDE);
     count = slot->timer;
     x     = slot->pos.x.fixed + slot->vx * count;
@@ -44,11 +44,11 @@ MATCH void func_801BD394(void) {
         D_801CD1D8[g_EmiLoadedCharacterIndex & EMI_LOADED_INDEX_MASK]();
     }
     if (g_Game.current->u.field.mode.unsigned_value == 0) {
-        Script_Request(g_Task->direction);
-        g_Task->timer = 0;
-        Party_BattlersClearState(g_Task->unk_05);
-        g_Task->header.mode  = 1;
-        g_Task->param.unk_0B = 0;
+        Script_Request(TASK(Actor)->direction);
+        TASK(Actor)->timer = 0;
+        Party_BattlersClearState(TASK(Actor)->unk_05);
+        TASK(Actor)->header.mode  = 1;
+        TASK(Actor)->param.unk_0B = 0;
         func_801BC000();
     }
 }

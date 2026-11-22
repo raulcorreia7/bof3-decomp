@@ -16,7 +16,7 @@ MATCH void func_8019D648(void) {
 
     dst  = MEM_PTR(u16, AREA_WORK);
     row  = 0;
-    base = (u16*)g_Task->script;
+    base = (u16*)TASK(Actor)->script;
     aux  = MEM_PTR(u16, 0x800E4814u);
     src  = (s16*)(base + 12);
     do {

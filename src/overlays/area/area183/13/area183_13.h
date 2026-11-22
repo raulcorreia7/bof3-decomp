@@ -5,7 +5,6 @@
  * and its data. Only this image includes the file. */
 
 #include "overlays/area/worlds/world04.h"
-#include "area/spad.h"
 
 /* Game-overlay state bytes the area request handlers reset. */
 /* The scenario state byte the request writes. */

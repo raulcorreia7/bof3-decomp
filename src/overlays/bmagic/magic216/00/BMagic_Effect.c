@@ -12,7 +12,7 @@ MATCH void func_801EEC70(void) {
     s32          z;
 
     TASK(PartyMember)->facing = g_BattleEffectBattler->facing;
-    work                      = g_Task;
+    work                      = TASK(PartyMember);
     actor                     = g_BattleEffectBattler;
     work->pos.x.fixed         = actor->pos.x.fixed;
     work->pos.y.fixed         = actor->pos.y.fixed;

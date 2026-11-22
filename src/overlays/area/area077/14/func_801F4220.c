@@ -15,9 +15,9 @@ MATCH void func_801F4220(void) {
     } while (i < AREA_SLOT_COUNT - 1);
 
     slot        = (AreaSlot*)AREA_WORK;
-    slot->pos.x = g_Task->pos.x.fixed;
-    slot->pos.y = g_Task->pos.y.fixed;
-    slot->pos.z = g_Task->pos.z.fixed + (rsin((u16) ~(g_FrameCount << 7)) << 10);
+    slot->pos.x = TASK(Actor)->pos.x.fixed;
+    slot->pos.y = TASK(Actor)->pos.y.fixed;
+    slot->pos.z = TASK(Actor)->pos.z.fixed + (rsin((u16) ~(g_FrameCount << 7)) << 10);
     slot->angle = D_800E5500;
     if (D_800E5502 != 0) {
         D_800E5500 += 0x40;

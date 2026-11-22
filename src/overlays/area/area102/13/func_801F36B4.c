@@ -22,9 +22,9 @@ NON_MATCHING void func_801F36B4(s32 steps) {
 
     phase   = (g_FrameCount * 4) & 7;
     step    = phase * steps;
-    x       = (COORD_INT(g_Task->pos.x) - 0x80) << 7;
-    y       = (COORD_INT(g_Task->pos.y) - 0x80) << 7;
-    height  = (s16) - (COORD_INT(g_Task->pos.z) / 2);
+    x       = (COORD_INT(TASK(Actor)->pos.x) - 0x80) << 7;
+    y       = (COORD_INT(TASK(Actor)->pos.y) - 0x80) << 7;
+    height  = (s16) - (COORD_INT(TASK(Actor)->pos.z) / 2);
     corners = g_ScratchPadVectors;
     out     = D_1F800034;
     i       = 0;
@@ -34,9 +34,9 @@ loop:
     SetPolyFT4(prim);
     SetShadeTex(prim, 0);
     rise              = step + (order << 3);
-    corners->vx       = x + rise * g_Task->vx;
+    corners->vx       = x + rise * TASK(Actor)->vx;
     SP_REF(s16, 0x18) = height;
-    SP_REF(s16, 0x16) = y + rise * g_Task->vy;
+    SP_REF(s16, 0x16) = y + rise * TASK(Actor)->vy;
     RotTransPers(corners, (long*)&corners[4], &p, &flag);
     spread   = step / 16 + 4 + ((i < 4) ? order / 2 : steps * 2);
     shade    = (((7 - i) * 8 + 7 - phase) << 17) / (8 - steps);
@@ -47,7 +47,7 @@ loop:
     order += steps;
     Area_ApplyTileToQuad((shade & 0xF80000) | AREA_CELL_QUAD_CODE, prim, 1);
     prim->b0 = 0;
-    Area_CellAddPrim(g_Task->pos.x.fixed, g_Task->pos.y.fixed, 3, sizeof(POLY_FT4));
+    Area_CellAddPrim(TASK(Actor)->pos.x.fixed, TASK(Actor)->pos.y.fixed, 3, sizeof(POLY_FT4));
     i++;
     if (i < 8) {
         goto loop;

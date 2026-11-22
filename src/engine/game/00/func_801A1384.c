@@ -11,10 +11,10 @@ MATCH void func_801A1384(void* entity) {
     u8  mode;
 
     rec        = entity;
-    savedRoute = g_Task->direction;
+    savedRoute = TASK(Actor)->direction;
     savedState = LOHU(rec[0x7E]);
     savedFlag  = rec[0x76];
-    if (g_Task->timer != 0) {
+    if (TASK(Actor)->timer != 0) {
         goto only_update; /* the pending entity update runs alone */
     }
     mode = rec[0x78];
@@ -29,52 +29,52 @@ MATCH void func_801A1384(void* entity) {
             if (sel == GAME_NONE) {
                 return;
             }
-            if (g_Task->direction != sel) {
-                g_Task->direction = sel;
+            if (TASK(Actor)->direction != sel) {
+                TASK(Actor)->direction = sel;
                 rec[0x74] |= ACTOR_INTERACTION_MOVING;
             }
             if (rec[0x7B] != 0) {
                 Actor* spad;
-                g_Task->unk_0A = (0x10 / rate);
+                TASK(Actor)->unk_0A = (0x10 / rate);
                 rec[0x7B]--;
-                if (((g_Task->option_flags & ACTOR_OPT_NO_TARGET) == 0) && ((func_801A3AC8((Actor*)rec) << 0x18) != 0)) {
-                    g_Task->direction &= 7;
+                if (((TASK(Actor)->option_flags & ACTOR_OPT_NO_TARGET) == 0) && ((func_801A3AC8((Actor*)rec) << 0x18) != 0)) {
+                    TASK(Actor)->direction &= 7;
                     rec[0x76] = savedFlag;
                     rec[0x7B] = 0;
                     rec[0x74] |= ACTOR_INTERACTION_MOVING | ACTOR_INTERACTION_SCRIPT_REQUEST;
-                    spad            = g_Task;
+                    spad            = TASK(Actor);
                     LOHU(rec[0x7E]) = savedState;
                     spad->timer     = 0;
                     return;
                 }
-            } else if ((g_Task->unk_06 == 0x0A) && ((LOW(rec[0x74]) & 0x88) == 8)) {
-                g_Task->unk_0A = (0x10 / rate);
-                TASK(s32)[3]   = 0;
-                TASK(s32)[4]   = 0;
-                TASK(s32)[5]   = 0;
+            } else if ((TASK(Actor)->unk_06 == 0x0A) && ((LOW(rec[0x74]) & 0x88) == 8)) {
+                TASK(Actor)->unk_0A = (0x10 / rate);
+                TASK(s32)[3]        = 0;
+                TASK(s32)[4]        = 0;
+                TASK(s32)[5]        = 0;
             }
             if ((rec[0x74] & ACTOR_INTERACTION_FADE_WHITE) != 0) {
-                g_Task->unk_03      = g_Task->header.mode;
-                g_Task->header.mode = 8;
-                g_Task->unk_04      = 0;
+                TASK(Actor)->unk_03      = TASK(Actor)->header.mode;
+                TASK(Actor)->header.mode = 8;
+                TASK(Actor)->unk_04      = 0;
             }
             if ((rec[0x74] & ACTOR_INTERACTION_FADE_BLACK) != 0) {
-                g_Task->unk_03      = g_Task->header.mode;
-                g_Task->header.mode = 9;
-                g_Task->unk_04      = 0;
+                TASK(Actor)->unk_03      = TASK(Actor)->header.mode;
+                TASK(Actor)->header.mode = 9;
+                TASK(Actor)->unk_04      = 0;
             }
         }
     } else {
-        if (((g_Task->option_flags & ACTOR_OPT_NO_TARGET) == 0) && ((func_801A3AC8((Actor*)rec) << 0x18) != 0)) {
-            g_Task->direction &= 7;
-            rec[0x74]     = rec[0x74] | ACTOR_INTERACTION_MOVING | ACTOR_INTERACTION_SCRIPT_REQUEST;
-            g_Task->timer = 0;
+        if (((TASK(Actor)->option_flags & ACTOR_OPT_NO_TARGET) == 0) && ((func_801A3AC8((Actor*)rec) << 0x18) != 0)) {
+            TASK(Actor)->direction &= 7;
+            rec[0x74]          = rec[0x74] | ACTOR_INTERACTION_MOVING | ACTOR_INTERACTION_SCRIPT_REQUEST;
+            TASK(Actor)->timer = 0;
             return;
         }
-        g_Task->unk_0A = (0x10 / rate);
+        TASK(Actor)->unk_0A = (0x10 / rate);
         rec[0x7B]--;
-        Area_MoveActorRoute(rec + 0x74, g_Task->direction & 0x7);
-        g_Task->direction |= 8;
+        Area_MoveActorRoute(rec + 0x74, TASK(Actor)->direction & 0x7);
+        TASK(Actor)->direction |= 8;
         rec[0x74] |= ACTOR_INTERACTION_MOVING;
     }
     func_801A2AE4((Actor*)rec, savedRoute);

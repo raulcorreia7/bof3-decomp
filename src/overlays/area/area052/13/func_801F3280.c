@@ -12,19 +12,19 @@ NON_MATCHING void func_801F3280(void) {
         g_ScriptState->cursor -= 2;
         return;
     }
-    column         = FIX_INT(g_Task->pos.x.fixed - COORD_HALF);
-    row            = FIX_INT(g_Task->pos.y.fixed - COORD_HALF);
-    g_Task->unk_18 = 0;
-    g_Task->unk_1C = 0;
-    next_row       = row + 1;
-    i              = 0;
+    column              = FIX_INT(TASK(Actor)->pos.x.fixed - COORD_HALF);
+    row                 = FIX_INT(TASK(Actor)->pos.y.fixed - COORD_HALF);
+    TASK(Actor)->unk_18 = 0;
+    TASK(Actor)->unk_1C = 0;
+    next_row            = row + 1;
+    i                   = 0;
     do {
         cell = column + i;
         Area_HeightSet(column + i, row, 0x10);
-        g_Task->unk_18 |= (u8)Area_CellGetCode(cell, row) << (i * 8);
+        TASK(Actor)->unk_18 |= (u8)Area_CellGetCode(cell, row) << (i * 8);
         Area_CellSetCode(column + i, row, 0x11);
         Area_HeightSet(column + i, row + 1, 0x10);
-        g_Task->unk_1C |= (u8)Area_CellGetCode(cell, FIX_INT(TO_COORD(next_row))) << (i * 8);
+        TASK(Actor)->unk_1C |= (u8)Area_CellGetCode(cell, FIX_INT(TO_COORD(next_row))) << (i * 8);
         Area_CellSetCode(column + i, row + 1, 0x11);
         i++;
     } while (i < 2);

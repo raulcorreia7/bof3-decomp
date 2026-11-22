@@ -158,8 +158,8 @@ NON_MATCHING void Area_DrawGridActors(void) {
                         }
                     } else if (g_AreaDrawFlags & AREA_DRAW_APPEND_ACTOR_PRIMITIVES) {
                         TASK_SET(D_80147D08[row].work);
-                        CatPrim(D_801459D0[g_Task->draw_layer], D_80147D08[row].primitive);
-                        D_801459D0[g_Task->draw_layer] = (u32*)D_80147D08[row].primitive;
+                        CatPrim(D_801459D0[TASK(Actor)->draw_layer], D_80147D08[row].primitive);
+                        D_801459D0[TASK(Actor)->draw_layer] = (u32*)D_80147D08[row].primitive;
                     }
                     row++;
                 } while (row < limit);

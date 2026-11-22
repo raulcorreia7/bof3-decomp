@@ -15,7 +15,7 @@ MATCH void func_801F71FC(void) {
     Actor* actor;
 
     D_801FD288.half    = (RANDOM_MASK(1)) << 15;
-    actor              = g_Task;
+    actor              = TASK(Actor);
     actor->header.step = actor->header.step + 1;
 }
 
@@ -237,7 +237,7 @@ MATCH void func_801F7BA8(void) {
 MATCH void func_801F7BEC(void) {
     Actor* actor;
 
-    actor              = g_Task;
+    actor              = TASK(Actor);
     actor->screen_x    = 0;
     actor->header.mode = actor->header.mode + 1;
     SND_SEPlay(EMI_SE_ID(SND_BANK_AREA, 21));
@@ -250,20 +250,20 @@ MATCH void func_801F7C24(void) {
     s32    cos;
 
     setVector(&from, -0x6000, -0x12000, 1 << 24);
-    cos                 = rcos(g_Task->unk_6C);
-    to.vx               = (from.vx * cos - from.vy * rsin(g_Task->unk_6C)) >> 12;
-    cos                 = rsin(g_Task->unk_6C);
-    to.vy               = (from.vx * cos + from.vy * rcos(g_Task->unk_6C)) >> 12;
-    to.vz               = from.vz;
-    g_Task->pos.x.fixed = D_80147B24[0] + to.vx;
-    g_Task->pos.y.fixed = D_80147B24[1] + to.vy;
-    g_Task->pos.z.fixed = D_80147B24[2] + to.vz;
-    setVector(g_Task, D_80147B24[0] + to.vx - ((s16)g_Task->screen_x << 15), D_80147B24[1] + to.vy, D_80147B24[2] + to.vz);
-    func_801F7E34(&g_Task->pos.x.fixed, &g_Task->vx, 0x40);
-    g_Task->screen_x += 1;
-    if ((s16)g_Task->screen_x == 330) {
+    cos                      = rcos(TASK(Actor)->unk_6C);
+    to.vx                    = (from.vx * cos - from.vy * rsin(TASK(Actor)->unk_6C)) >> 12;
+    cos                      = rsin(TASK(Actor)->unk_6C);
+    to.vy                    = (from.vx * cos + from.vy * rcos(TASK(Actor)->unk_6C)) >> 12;
+    to.vz                    = from.vz;
+    TASK(Actor)->pos.x.fixed = D_80147B24[0] + to.vx;
+    TASK(Actor)->pos.y.fixed = D_80147B24[1] + to.vy;
+    TASK(Actor)->pos.z.fixed = D_80147B24[2] + to.vz;
+    setVector(TASK(Actor), D_80147B24[0] + to.vx - ((s16)TASK(Actor)->screen_x << 15), D_80147B24[1] + to.vy, D_80147B24[2] + to.vz);
+    func_801F7E34(&TASK(Actor)->pos.x.fixed, &TASK(Actor)->vx, 0x40);
+    TASK(Actor)->screen_x += 1;
+    if ((s16)TASK(Actor)->screen_x == 330) {
         SND_SEPlay(EMI_SE_ID(SND_BANK_AREA, 22));
-        g_Task->header.mode += 1;
+        TASK(Actor)->header.mode += 1;
     }
 }
 

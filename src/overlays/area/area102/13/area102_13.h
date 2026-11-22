@@ -5,7 +5,6 @@
  * and its data. Only this image includes the file. */
 
 #include "overlays/area/worlds/world02.h"
-#include "area/spad.h"
 #include "sys/scratchpad.h"
 
 extern u8 D_801F3930[];
@@ -27,9 +26,9 @@ void func_801F36B4(s32 steps);
  * and plays the area SE when the gate reports ready. */
 #define AREA_TICK_TASK_TIMER()                              \
     if (g_GameStateIndex == GAME_REQUEST_IDLE) {            \
-        (g_Task)->timer -= 1;                               \
-        if ((g_Task)->timer == 0) {                         \
-            (g_Task)->header.step += 1;                     \
+        TASK(Actor)->timer -= 1;                            \
+        if (TASK(Actor)->timer == 0) {                      \
+            TASK(Actor)->header.step += 1;                  \
             if (func_801F3194() != 0) {                     \
                 SND_SEPlay(EMI_SE_ID(SND_BANK_AREA, 0x00)); \
             }                                               \

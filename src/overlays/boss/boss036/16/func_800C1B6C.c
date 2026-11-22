@@ -12,7 +12,7 @@ MATCH void func_800C1B6C(void) {
     Cpy16*        end;
     u32*          record;
 
-    record = (u32*)g_Task;
+    record = TASK(u32);
     if ((record[0] & 0xFFFF00) == 0x10700) {
         effect_slot   = Battle_AllocEffect(3, 3);
         effect_index  = effect_slot & BYTE_MASK;

@@ -6,18 +6,18 @@ MATCH void func_8019F4F8(void) {
     s32 active;
     s32 routeOffset;
 
-    timer = g_Task->timer;
+    timer = TASK(Actor)->timer;
     if (timer != 0) {
         timer--;
-        g_Task->timer = timer;
-        step          = g_Task->vy + 0x14000;
-        active        = (s32)(g_FrameCount & 0x1u);
-        g_Task->pos.y.fixed += step;
-        g_Task->vy = step;
+        TASK(Actor)->timer = timer;
+        step               = TASK(Actor)->vy + 0x14000;
+        active             = (s32)(g_FrameCount & 0x1u);
+        TASK(Actor)->pos.y.fixed += step;
+        TASK(Actor)->vy = step;
         if (active != 0) {
-            routeOffset = (s32)g_Task->param.party_index * BATTLE_PARTY_STRIDE;
-            func_8019F5B8(*(s16*)(((u8*)&g_Game.members[0].screen_x) + routeOffset), (s16)(*(u16*)(((u8*)&g_Game.members[0].screen_y) + routeOffset) + (u16)COORD_INT(g_Task->pos.y)), g_Task->unk_06,
-                          g_Task->clut_select);
+            routeOffset = (s32)TASK(Actor)->param.party_index * BATTLE_PARTY_STRIDE;
+            func_8019F5B8(*(s16*)(((u8*)&g_Game.members[0].screen_x) + routeOffset), (s16)(*(u16*)(((u8*)&g_Game.members[0].screen_y) + routeOffset) + (u16)COORD_INT(TASK(Actor)->pos.y)),
+                          TASK(Actor)->unk_06, TASK(Actor)->clut_select);
         }
     } else {
         Actor_Clear();

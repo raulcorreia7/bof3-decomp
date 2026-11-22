@@ -4,7 +4,7 @@ MATCH void Area_SceneStepTimer(void) {
     Actor* work;
     u8     timer;
 
-    work  = g_Task;
+    work  = TASK(Actor);
     timer = work->timer;
     if (timer == 0) {
         AREA_SCENE_TIMER_EXPIRED();

@@ -4,22 +4,22 @@ MATCH void func_801F37CC(void) {
     u8 mode;
     u8 count;
 
-    count          = g_Task->unk_06;
-    g_Task->unk_06 = count + 1;
+    count               = TASK(Actor)->unk_06;
+    TASK(Actor)->unk_06 = count + 1;
     if (!(count & 0x3)) {
         Area_ClaimSpawnSlot();
     }
     Area_UpdateSpawnSlots();
     func_801F44B4();
-    Area_DrawYellowLine(&g_Task->unk_18, &g_Task->pos.x, 0x40);
+    Area_DrawYellowLine(&TASK(Actor)->unk_18, &TASK(Actor)->pos.x, 0x40);
     if (*g_ScriptVars == 3) {
-        if (g_Task->timer == 16) {
+        if (TASK(Actor)->timer == 16) {
             SND_SEPlay(EMI_SE_ID(SND_BANK_AREA, 0x16));
         }
         ACTOR_COUNT_DOWN(TASK(Actor), mode, timer);
         if (!(mode & BYTE_MASK)) {
-            g_Task->unk_03 = 0x80;
-            g_Task->header.mode += 1;
+            TASK(Actor)->unk_03 = 0x80;
+            TASK(Actor)->header.mode += 1;
         }
     }
 }

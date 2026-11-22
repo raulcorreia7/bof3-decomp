@@ -6,7 +6,7 @@ MATCH void func_801F32A0(s32 value) {
     /* FAKE: pin the focus z copy to a2. */
     FAKE_REG(s32, z, "a2");
 
-    work              = g_Task;
+    work              = TASK(Actor);
     work->pos.x.fixed = D_80147A8C;
     FAKE_BARRIER(); /* FAKE: keeps the focus y load after the x store. */
     work->pos.y.fixed = g_AreaFocusY;
@@ -15,5 +15,5 @@ MATCH void func_801F32A0(s32 value) {
     z                         = D_80147A94;
     work->pos.z.fixed         = z;
     g_AreaHeightOffsetEnabled = 1;
-    g_Task->vz                = Area_HeightRead(x, work->pos.y.fixed) << 16;
+    TASK(Actor)->vz           = Area_HeightRead(x, work->pos.y.fixed) << 16;
 }

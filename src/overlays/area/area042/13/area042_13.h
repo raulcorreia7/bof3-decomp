@@ -5,7 +5,6 @@
  * and its data. Only this image includes the file. */
 
 #include "overlays/area/worlds/world01.h"
-#include "area/spad.h"
 
 void func_801F37A8(s32 depth, s32 color);
 

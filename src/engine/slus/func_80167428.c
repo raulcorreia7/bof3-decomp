@@ -114,7 +114,7 @@ NON_MATCHING void func_80167428(void) {
         }
     } else {
         FIELD(s8, g_Game.current, 0x11Cu) = 3;
-        g_Task->timer                     = 0U;
+        TASK(Actor)->timer                = 0U;
         val4                              = 1;
     }
     FIELD(s8, (g_Task), 0x1u) = val4;

@@ -30,7 +30,7 @@ MATCH void func_80161454(u32 index) {
 
     val3 = 0;
     if (g_Game.walk_flags & AREA_WALK_TRANSITION) {
-        work = g_Task;
+        work = TASK(Actor);
         tmp0 = (s16)work->screen_y;
         val0 = (tmp0 + 0x40) * 0x2C;
         if (tmp0 < -0x40) {
@@ -53,8 +53,8 @@ MATCH void func_80161454(u32 index) {
             val0 = (val0 * (100 - pan)) / 100;
         }
     } else {
-        tmp2 = (s32)(g_Task->pos.x.fixed - g_AreaScrollTargetX) >> 0xC;
-        tmp3 = (s32)(g_Task->pos.y.fixed - g_AreaScrollTargetY) >> 0xC;
+        tmp2 = (s32)(TASK(Actor)->pos.x.fixed - g_AreaScrollTargetX) >> 0xC;
+        tmp3 = (s32)(TASK(Actor)->pos.y.fixed - g_AreaScrollTargetY) >> 0xC;
         tmp5 = ((u32)csqrt((tmp2 * tmp2) + (tmp3 * tmp3)) >> 4) * 0xA;
         if (tmp5 >= 0x37FFU) {
             val1 = 0;
@@ -64,7 +64,7 @@ MATCH void func_80161454(u32 index) {
             val0 = val1;
         }
         if (g_SndMono == 0) {
-            a1 = (s16)g_Task->screen_x - 0xA0;
+            a1 = (s16)TASK(Actor)->screen_x - 0xA0;
             if (a1 < 0) {
                 q = (a1 * (s16)val1) / 480;
                 q = ABS(q);
@@ -84,18 +84,18 @@ MATCH void func_80161454(u32 index) {
         }
     }
     val4 = 8;
-    if (((s32)g_Task->voice_flags.raw & 0x0FFFFF00) == 0x0FFFFF00) {
-        g_Task->header.flags &= 0xF7;
-        g_Task->voice_flags.raw &= 0xF00000FF;
+    if (((s32)TASK(Actor)->voice_flags.raw & 0x0FFFFF00) == 0x0FFFFF00) {
+        TASK(Actor)->header.flags &= 0xF7;
+        TASK(Actor)->voice_flags.raw &= 0xF00000FF;
         return;
     }
     do {
-        q    = ((s32)g_Task->voice_flags.raw >> val4) & 0x1F;
+        q    = ((s32)TASK(Actor)->voice_flags.raw >> val4) & 0x1F;
         tmp4 = q;
         if (q != 0x1F) {
             val8 = SPU_KEYCH(tmp4);
             if (SpuGetKeyStatus(val8) == SPU_OFF) {
-                g_Task->voice_flags.raw |= 0x1F << val4;
+                TASK(Actor)->voice_flags.raw |= 0x1F << val4;
             } else {
                 val3 |= val8;
             }

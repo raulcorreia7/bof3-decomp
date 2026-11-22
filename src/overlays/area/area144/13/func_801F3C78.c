@@ -4,7 +4,7 @@ MATCH void func_801F3C78(void) {
     Actor* work;
     u8     mode;
 
-    work     = g_Task;
+    work     = TASK(Actor);
     g_PartyX = work->pos.x.fixed;
     FAKE_BARRIER(); /* FAKE: keeps the x store before the y load. */
     g_PartyY = work->pos.y.fixed;

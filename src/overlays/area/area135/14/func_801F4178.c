@@ -5,7 +5,7 @@ MATCH void func_801F4178(void) {
     u16*   span;
 
     if (g_GameCellType != 4) {
-        work                     = g_Task;
+        work                     = TASK(Actor);
         span                     = (u16*)g_ScriptState;
         work->pos.z.part.integer = (work->pos.z.part.integer + work->vz);
         FIELD(u16, span, 0xA)    = (FIELD(u16, span, 0xA) - 2);

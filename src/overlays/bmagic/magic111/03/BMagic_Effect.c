@@ -20,7 +20,7 @@ MATCH void func_801EEC7C(void) {
     TASK(PartyMember)->header.mode += 1;
     index = Battle_AllocEffect(1, 87) & BYTE_MASK;
     Effect_CopyActiveBattlerToSlot(index);
-    work                                = g_Task;
+    work                                = TASK(PartyMember);
     g_BattleEffects[index].header.mode  = 0;
     g_BattleEffects[index].header.step  = 0;
     g_BattleEffects[index].unk_06       = 1;
@@ -28,12 +28,12 @@ MATCH void func_801EEC7C(void) {
     g_BattleEffects[index].target.party = work;
     TASK(PartyMember)->param.unk_0B++;
     index                               = Battle_AllocEffect(1, 87) & BYTE_MASK;
-    work                                = g_Task;
+    work                                = TASK(PartyMember);
     g_BattleEffects[index].header.mode  = 1;
     g_BattleEffects[index].target.party = work;
     TASK(PartyMember)->param.unk_0B++;
     index                               = Battle_AllocEffect(1, 87) & BYTE_MASK;
-    owner                               = g_Task;
+    owner                               = TASK(PartyMember);
     g_BattleEffects[index].header.mode  = 2;
     g_BattleEffects[index].target.party = owner;
     TASK(PartyMember)->param.unk_0B++;
@@ -69,9 +69,9 @@ MATCH void func_801EF03C(void) {
 MATCH void func_801EF0C0(void) {
     PartyMember* work;
 
-    work              = g_Task;
+    work              = TASK(PartyMember);
     work->unk_29      = 2;
-    work              = g_Task;
+    work              = TASK(PartyMember);
     work->header.step = (work->header.step + 1);
 }
 

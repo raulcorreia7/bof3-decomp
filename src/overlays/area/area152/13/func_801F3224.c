@@ -17,8 +17,8 @@ MATCH void func_801F3224(void) {
             Actor_Clear();
             return;
         }
-        check[0x48]         = 0;
-        g_Task->header.mode = 1;
+        check[0x48]              = 0;
+        TASK(Actor)->header.mode = 1;
         return;
     }
 

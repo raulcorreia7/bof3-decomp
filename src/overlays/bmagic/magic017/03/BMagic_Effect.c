@@ -22,7 +22,7 @@ MATCH void func_801EEC98(void) {
     for (i = 0; i < 6; i++) {
         index = Battle_AllocEffect(1, 33);
         Effect_CopyActiveBattlerToSlot(index);
-        work                                            = g_Task;
+        work                                            = TASK(PartyMember);
         g_BattleEffects[index & BYTE_MASK].unk_06       = 1;
         g_BattleEffects[index & BYTE_MASK].step_index   = 33;
         g_BattleEffects[index & BYTE_MASK].header.mode  = 0;
@@ -35,7 +35,7 @@ MATCH void func_801EEC98(void) {
     TASK(PartyMember)->unk_27 = Battle_CopyCellPalette(g_BattleEffectBattler);
     TASK(PartyMember)->unk_28 = g_BattleEffectBattler->unk_28;
     TASK(PartyMember)->unk_24 = g_BattleEffectBattler->unk_24;
-    Battle_SetCellPaletteStp(g_Task);
+    Battle_SetCellPaletteStp(TASK(PartyMember));
     g_BattleEffectBattler->header.flags |= PARTY_MEMBER_FLAG_HANDLER_BUSY;
     SND_SEQueueSelection(0x100);
 }
@@ -141,7 +141,7 @@ MATCH void func_801EF460(void) {
     PartyMember* task;
     u8           timer;
 
-    task = g_Task;
+    task = TASK(PartyMember);
     task->pos.x.fixed += task->unk_0C;
     task->unk_5D += 4;
     task->pos.y.fixed += task->unk_10;

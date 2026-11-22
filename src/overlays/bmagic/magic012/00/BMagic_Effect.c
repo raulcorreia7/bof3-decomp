@@ -146,7 +146,7 @@ MATCH void func_801EF3C4(void) {
     TASK(PartyMember)->timer += 1;
     TASK(PartyMember)->pos.x.fixed += (rsin(TASK(PartyMember)->unk_0C) << 13) >> 12;
     angle = (rcos(TASK(PartyMember)->unk_0C) << 13) >> 12;
-    task  = g_Task;
+    task  = TASK(PartyMember);
     task->pos.y.fixed += angle;
     count        = task->unk_09 - 1;
     task->unk_09 = count;

@@ -23,7 +23,7 @@ NON_MATCHING void func_801F2FD4(void) {
     scratch->pos.y.fixed = y + vy;
     COORD_INT(scratch->pos.z) += scratch->vz >> 8;
     scratch->vz = vz - 0x700;
-    if (vz > 0 && g_Task->vz < 0) {
+    if (vz > 0 && TASK(Actor)->vz < 0) {
         Script_Request(0x51);
     }
     check = g_Task;

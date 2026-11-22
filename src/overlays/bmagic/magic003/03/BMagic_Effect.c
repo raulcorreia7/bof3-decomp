@@ -368,7 +368,7 @@ MATCH void func_801EFB8C(void) {
         TASK(PartyMember)->unk_25 = 0x1D;
         TASK(PartyMember)->unk_26 = 0;
         TASK(PartyMember)->unk_24 = 0x84;
-        work                      = g_Task;
+        work                      = TASK(PartyMember);
         work->unk_2B              = 0;
         work->unk_2C.value        = 0;
         TASK(PartyMember)->unk_28 = 0;
@@ -402,7 +402,7 @@ MATCH void func_801EFD4C(void) {
 
     slot = Battle_AllocEffect(1, 1);
     Effect_CopyActiveBattlerToSlot(slot);
-    D_801EC3A4[slot & BYTE_MASK].target.party = g_Task;
+    D_801EC3A4[slot & BYTE_MASK].target.party = TASK(PartyMember);
     image                                     = &g_BattleEffects[slot & BYTE_MASK];
     image->unk_06                             = 1;
     image->step_index                         = 1;
@@ -420,7 +420,7 @@ MATCH void func_801EFEC8(void) {
     for (i = 0; i < 4; i++) {
         slot = Battle_AllocEffect(1, 1);
         Effect_CopyActiveBattlerToSlot(slot);
-        D_801EC3A4[slot & BYTE_MASK].target.party = g_Task;
+        D_801EC3A4[slot & BYTE_MASK].target.party = TASK(PartyMember);
         image                                     = &g_BattleEffects[slot & BYTE_MASK];
         image->unk_06                             = 1;
         image->step_index                         = 1;

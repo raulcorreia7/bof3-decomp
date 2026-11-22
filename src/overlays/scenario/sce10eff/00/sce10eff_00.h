@@ -13,14 +13,13 @@
 #define SCE10EFF_ORBIT_STEP_SHIFT     5
 #define SCN_EFFECT_STATE_STEP_COUNT   15
 #define SCE10EFF_ORBIT_ANGLE(counter) (((counter) & (SCE10EFF_ORBIT_STEPS - 1)) << SCE10EFF_ORBIT_STEP_SHIFT)
-#define g_Task                        ((SceneBandEffect*)g_Task)
 
 /* Project the orbit step into the scratchpad pair and advance the position. A
  * bare statement macro: the member declares `work`, `counter`, `angle`,
  * `angle_cell` and `velocity`. Kept: as an inline the frame shrinks 4 bytes
  * (ra at 16(sp), retail 20(sp)); the do/while form moves bytes. */
 #define SCENE_PROJECT_ORBIT_STEP(depth)                                      \
-    g_Task->ticker++;                                                        \
+    TASK(SceneBandEffect)->ticker++;                                         \
                                                                              \
     work                                    = g_Task;                        \
     counter                                 = work->orbit_counter + 1;       \
@@ -34,11 +33,11 @@
     work         = g_Task;                                                   \
     work->proj.x = D_801D2744->proj.x + velocity;                            \
                                                                              \
-    velocity       = rsin(*angle_cell) * g_ScratchPad;                       \
-    g_Task->proj.y = D_801D2744->proj.y + velocity;                          \
+    velocity                      = rsin(*angle_cell) * g_ScratchPad;        \
+    TASK(SceneBandEffect)->proj.y = D_801D2744->proj.y + velocity;           \
                                                                              \
-    if (TIMER_EXPIRED(g_Task->timer)) {                                      \
-        g_Task->step_index++;                                                \
+    if (TIMER_EXPIRED(TASK(SceneBandEffect)->timer)) {                       \
+        TASK(SceneBandEffect)->step_index++;                                 \
     }
 
 /* Projected scenario bands: func_801D0FAC draws at the source origin;
@@ -111,13 +110,13 @@ static inline void Scene_AdvanceBand(u32 band_limit) {
     /* A store through the pointer may alias the cell, so each step reloads it. */
     SceneBandEffect* work;
 
-    g_Task->ticker++;
-    work = g_Task;
+    TASK(SceneBandEffect)->ticker++;
+    work = TASK(SceneBandEffect);
     if (work->band < band_limit) {
         work->band += 2;
     } else {
         work->timer = 60;
-        work        = g_Task;
+        work        = TASK(SceneBandEffect);
         work->step_index++;
     }
 }

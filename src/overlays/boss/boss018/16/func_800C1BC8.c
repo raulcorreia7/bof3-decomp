@@ -7,9 +7,9 @@ MATCH void func_800C1BC8(void) {
     } else {
         SYS_SetFlag(g_SceneFlags, 55U);
     }
-    g_BattleCurrentEnemy->script        = &D_800C2C50;
-    g_BattleCurrentEnemy->unk_E4        = func_800C1C6C;
-    g_BattleCurrentEnemy->unk_E8        = &D_800C2C9C;
-    ((PartyMember*)g_Task)->header.mode = 2;
+    g_BattleCurrentEnemy->script   = &D_800C2C50;
+    g_BattleCurrentEnemy->unk_E4   = func_800C1C6C;
+    g_BattleCurrentEnemy->unk_E8   = &D_800C2C9C;
+    TASK(PartyMember)->header.mode = 2;
     Script_AnimStepLoop();
 }

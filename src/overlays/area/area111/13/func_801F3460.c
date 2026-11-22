@@ -8,10 +8,10 @@ NON_MATCHING void func_801F3460(void) {
     s32 facing;
     u8  value;
 
-    x = (g_Task->pos.x.part.integer - 11) >> 1;
-    y = (g_Task->pos.y.part.integer - 177) >> 1;
+    x = (TASK(Actor)->pos.x.part.integer - 11) >> 1;
+    y = (TASK(Actor)->pos.y.part.integer - 177) >> 1;
     func_801F4604(x, y, 0x10);
-    facing = g_Task->direction & 7;
+    facing = TASK(Actor)->direction & 7;
     offset = 0;
     for (;;) {
         x += D_80181B00[facing * 2];
@@ -35,7 +35,7 @@ NON_MATCHING void func_801F3460(void) {
     if (offset != 0) {
         g_ScriptState->steps = offset + 1;
     }
-    g_Task->vz = 0;
+    TASK(Actor)->vz = 0;
     func_801F4604(x, y, 0);
     SND_SEPlay(EMI_SE_ID(SND_BANK_AREA, 3));
 }

@@ -18,27 +18,27 @@ MATCH void func_801F4238(void) {
     s32       x_high;
     s32       y_high;
 
-    if (g_Task->header.step == 0) {
-        COORD_INT(g_Task->pos.y) += g_FrameCount & 0xF;
-        g_Task->header.step++;
+    if (TASK(Actor)->header.step == 0) {
+        COORD_INT(TASK(Actor)->pos.y) += g_FrameCount & 0xF;
+        TASK(Actor)->header.step++;
     }
     if ((g_AreaDrawFlags & AREA_DRAW_CELL_LAYERS) == 0) {
         return;
     }
 
-    width = g_Task->param.cloud_layer - 2;
-    g_Task->pos.y.fixed += 0x800 + (width << 10);
-    if (g_AreaMapBundle.height + 8 < COORD_INT(g_Task->pos.y)) {
-        COORD_INT(g_Task->pos.y) = -8;
+    width = TASK(Actor)->param.cloud_layer - 2;
+    TASK(Actor)->pos.y.fixed += 0x800 + (width << 10);
+    if (g_AreaMapBundle.height + 8 < COORD_INT(TASK(Actor)->pos.y)) {
+        COORD_INT(TASK(Actor)->pos.y) = -8;
     }
 
-    if (abs(g_AreaTargetCellX - COORD_INT(g_Task->pos.x)) >= WORLDMAP_CLOUD_DRAW_RANGE && abs(g_AreaTargetCellY - COORD_INT(g_Task->pos.y)) >= WORLDMAP_CLOUD_DRAW_RANGE) {
+    if (abs(g_AreaTargetCellX - COORD_INT(TASK(Actor)->pos.x)) >= WORLDMAP_CLOUD_DRAW_RANGE && abs(g_AreaTargetCellY - COORD_INT(TASK(Actor)->pos.y)) >= WORLDMAP_CLOUD_DRAW_RANGE) {
         return;
     }
 
     prim   = (POLY_FT4*)g_GfxPrimCursor;
-    x_high = (g_Task->pos.x.fixed >> 9) - (AREA_CELL_ORIGIN - AREA_CELL_HALF);
-    y_high = (g_Task->pos.y.fixed >> 9) - (AREA_CELL_ORIGIN - AREA_CELL_HALF);
+    x_high = (TASK(Actor)->pos.x.fixed >> 9) - (AREA_CELL_ORIGIN - AREA_CELL_HALF);
+    y_high = (TASK(Actor)->pos.y.fixed >> 9) - (AREA_CELL_ORIGIN - AREA_CELL_HALF);
     SetPolyFT4(prim);
     SetShadeTex(prim, 0);
     quad      = g_ScratchPadVectors;

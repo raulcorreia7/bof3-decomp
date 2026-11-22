@@ -117,7 +117,7 @@ MATCH void func_801EF218(void) {
     PartyMember* work;
     u8           tick;
 
-    work         = g_Task;
+    work         = TASK(PartyMember);
     tick         = work->unk_09 + EFFECT_TICK_INCREMENT;
     work->unk_09 = tick;
     if (tick >= EFFECT_TICK_LIMIT) {

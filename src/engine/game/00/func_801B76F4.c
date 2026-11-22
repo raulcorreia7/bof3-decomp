@@ -3,24 +3,24 @@
 MATCH void func_801B76F4(void) {
     s16 dist;
 
-    g_Task->vz += g_Task->gravity;
+    TASK(Actor)->vz += TASK(Actor)->gravity;
     Actor_MovementUpdate();
-    dist = Area_HeightRead(g_Task->pos.x.fixed, g_Task->pos.y.fixed);
-    if ((s16)COORD_INT(g_Task->pos.z) < dist) {
-        COORD_INT(g_Task->pos.z) = dist;
-        if (g_Task->vz < -0x80) {
-            Script_Request((g_Task->direction >> 1) + 0x34);
-        } else if (g_Task->direction == FACING_RIGHT) {
+    dist = Area_HeightRead(TASK(Actor)->pos.x.fixed, TASK(Actor)->pos.y.fixed);
+    if ((s16)COORD_INT(TASK(Actor)->pos.z) < dist) {
+        COORD_INT(TASK(Actor)->pos.z) = dist;
+        if (TASK(Actor)->vz < -0x80) {
+            Script_Request((TASK(Actor)->direction >> 1) + 0x34);
+        } else if (TASK(Actor)->direction == FACING_RIGHT) {
             Script_Request(0x38);
         } else {
             Script_Request(0x39);
         }
-        g_Task->vz      = 0;
-        g_Task->gravity = 0;
-        g_Task->unk_03  = 4;
+        TASK(Actor)->vz      = 0;
+        TASK(Actor)->gravity = 0;
+        TASK(Actor)->unk_03  = 4;
     }
-    if ((g_Task->unk_05 == 0) && (((g_Game.flags | g_Game.walk_flags) & (GAME_FLAG_SCROLL_LOCK | AREA_WALK_ENTRY_ACTIVE)) == 0)) {
-        Area_ScrollAdvance((s16)COORD_INT(g_Task->pos.z));
+    if ((TASK(Actor)->unk_05 == 0) && (((g_Game.flags | g_Game.walk_flags) & (GAME_FLAG_SCROLL_LOCK | AREA_WALK_ENTRY_ACTIVE)) == 0)) {
+        Area_ScrollAdvance((s16)COORD_INT(TASK(Actor)->pos.z));
     }
     Script_AnimStepLoop();
 }

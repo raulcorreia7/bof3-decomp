@@ -16,7 +16,7 @@ MATCH void Effect_LaunchFromRing(void) {
         TASK(PartyMember)->pos.x.fixed = g_BattleEffectBattler->pos.x.fixed + ((rsin(angle << 7) * 0xB0) >> 3);
         dy                             = (rcos(*angle_cell) * 0xB0) >> 3;
         battler                        = g_BattleEffectBattler;
-        work                           = g_Task;
+        work                           = TASK(PartyMember);
         work->pos.y.fixed              = battler->pos.y.fixed + dy;
         work->pos.z.fixed              = battler->pos.z.fixed;
         work->unk_14                   = 0x40;

@@ -7,17 +7,17 @@ MATCH void func_8019F430(void) {
     Actor* slot;
     Actor* work;
 
-    record = g_Task;
+    record = TASK(Actor);
     step   = record->vy + 0x14000;
     record->pos.y.fixed += step;
     record->vy = step;
     if (COORD_INT(record->pos.y) >= 0) {
         record->timer     = 6;
-        work              = g_Task;
+        work              = TASK(Actor);
         record->vy        = (s32)-record->vy;
         work->header.mode = (u8)(work->header.mode + 1);
     }
-    slot         = g_Task;
+    slot         = TASK(Actor);
     heightOffset = slot->param.party_index * BATTLE_PARTY_STRIDE;
     func_8019F5B8(*(s16*)((u8*)((u8*)&g_Game.members[0].screen_x) + heightOffset), (s16)(*(u16*)((u8*)((u8*)&g_Game.members[0].screen_y) + heightOffset) + (u16)COORD_INT(slot->pos.y)), slot->unk_06,
                   slot->clut_select);

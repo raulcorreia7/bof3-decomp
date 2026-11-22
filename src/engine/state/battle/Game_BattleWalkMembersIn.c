@@ -25,7 +25,7 @@ MATCH bool Game_BattleWalkMembersIn(void) {
         work           = &g_Game.members[i];
         g_Game.current = work;
         TASK_SET(work);
-        if (g_Task->param.unk_0B == 0) {
+        if (TASK(Actor)->param.unk_0B == 0) {
             if (func_801C29A0(8) & BYTE_MASK) {
                 for (order = 0; order < PARTY_SLOT_COUNT; order++) {
                     if (g_PartyBattleOrder[order] == g_Game.current->chr.character_id) {
@@ -33,16 +33,16 @@ MATCH bool Game_BattleWalkMembersIn(void) {
                     }
                 }
                 g_Game.current->status.field.flags.unsigned_value &= 0xFE;
-                g_Task->draw_layer       = g_AreaDrawMode;
-                g_Task->pos.x            = g_EncounterParty[order].x;
-                g_Task->pos.y            = g_EncounterParty[order].y;
-                COORD_INT(g_Task->pos.z) = Area_HeightRead(g_Task->pos.x.fixed, g_Task->pos.y.fixed);
-                g_Task->unk_48           = 0;
-                g_Task->param.unk_0B     = 1;
+                TASK(Actor)->draw_layer       = g_AreaDrawMode;
+                TASK(Actor)->pos.x            = g_EncounterParty[order].x;
+                TASK(Actor)->pos.y            = g_EncounterParty[order].y;
+                COORD_INT(TASK(Actor)->pos.z) = Area_HeightRead(TASK(Actor)->pos.x.fixed, TASK(Actor)->pos.y.fixed);
+                TASK(Actor)->unk_48           = 0;
+                TASK(Actor)->param.unk_0B     = 1;
             }
-        } else if (g_Task->param.unk_0B == 1) {
+        } else if (TASK(Actor)->param.unk_0B == 1) {
             if (func_801C2894(8) & BYTE_MASK) {
-                actor = g_Task;
+                actor = TASK(Actor);
                 for (j = 0; j < 32; j++) {
                     clut_offset    = actor->unk_05 << 6;
                     dst            = (u16*)(GAME_PALETTE_MIRROR + clut_offset);
@@ -53,11 +53,11 @@ MATCH bool Game_BattleWalkMembersIn(void) {
                     MEM(u16, palette_offset) = color;
                 }
                 g_GfxPalettePending = 1;
-                g_Task->header.flags &= ~ACTOR_FLAG_SEMI_TRANSPARENT;
-                g_Task->param.unk_0B = 0;
+                TASK(Actor)->header.flags &= ~ACTOR_FLAG_SEMI_TRANSPARENT;
+                TASK(Actor)->param.unk_0B = 0;
                 ACTOR_CLEAR_TINT();
-                g_Task->tint.bytes.flags = 0;
-                g_Task->param.unk_0B     = 2;
+                TASK(Actor)->tint.bytes.flags = 0;
+                TASK(Actor)->param.unk_0B     = 2;
             }
         }
         Script_AnimStepLoop();

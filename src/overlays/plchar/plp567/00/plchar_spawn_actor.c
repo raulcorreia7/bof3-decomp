@@ -10,9 +10,9 @@ __asm__(".include \"include/match/macro.inc\"\n");
 #include "overlays/plchar/shared/PlChar_ProbeFacingCell.h"
 
 MATCH void func_801D0704(void) {
-    D_801D07F0[g_Task->unk_2C]();
+    D_801D07F0[TASK(Actor)->unk_2C]();
 }
 
 MATCH void func_801D0748(void) {
-    D_801D07FC[g_Task->unk_2C]();
+    D_801D07FC[TASK(Actor)->unk_2C]();
 }

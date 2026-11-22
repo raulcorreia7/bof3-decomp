@@ -6,11 +6,11 @@ MATCH void Actor_Reveal(void) {
     work = TASK(u8);
     if (work[9] != 0) {
         g_Actors[work[11]].header.flags |= ACTOR_FLAG_HIDDEN;
-        g_Task->timer -= 1;
+        TASK(Actor)->timer -= 1;
     } else {
         g_Actors[work[11]].header.flags &= ~ACTOR_FLAG_HIDDEN;
-        g_Actors[g_Task->unk_03].header.flags = 0;
-        g_Actors[g_Task->unk_04].header.flags = 0;
-        g_Task->header.mode                   = 2;
+        g_Actors[TASK(Actor)->unk_03].header.flags = 0;
+        g_Actors[TASK(Actor)->unk_04].header.flags = 0;
+        TASK(Actor)->header.mode                   = 2;
     }
 }

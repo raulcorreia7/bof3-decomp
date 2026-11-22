@@ -6,16 +6,16 @@ MATCH void func_8019B024(void) {
     s16    counter;
     s32    diff;
 
-    dist    = Area_HeightSample(g_Task->pos.x.fixed, g_Task->pos.y.fixed);
-    counter = COORD_INT(g_Task->pos.z);
-    if ((counter >= dist + 0x80) || (counter < dist) || (g_Task->header.flags & ACTOR_FLAG_OFFSCREEN)) {
-        work = g_Task;
+    dist    = Area_HeightSample(TASK(Actor)->pos.x.fixed, TASK(Actor)->pos.y.fixed);
+    counter = COORD_INT(TASK(Actor)->pos.z);
+    if ((counter >= dist + 0x80) || (counter < dist) || (TASK(Actor)->header.flags & ACTOR_FLAG_OFFSCREEN)) {
+        work = TASK(Actor);
         work->header.mode++;
         SND_SEPlay(EMI_SE_ID(SND_BANK_COMMON, 6));
     }
-    g_Task->pos.z.fixed += g_Task->vz;
-    diff       = g_Task->vz - g_Task->gravity;
-    g_Task->vz = diff;
+    TASK(Actor)->pos.z.fixed += TASK(Actor)->vz;
+    diff            = TASK(Actor)->vz - TASK(Actor)->gravity;
+    TASK(Actor)->vz = diff;
     Script_AnimStepLoop();
     Area_SetDrawMode();
 }

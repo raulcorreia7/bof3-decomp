@@ -19,12 +19,12 @@ MATCH void func_801EEC70(void) {
     TASK(PartyMember)->unk_09       = 16;
     TASK(PartyMember)->header.mode += 1;
     slot                               = Battle_AllocEffect(1, 96) & BYTE_MASK;
-    g_BattleEffects[slot].target.party = g_Task;
+    g_BattleEffects[slot].target.party = TASK(PartyMember);
     g_BattleEffects[slot].header.mode  = 1;
     g_BattleEffects[slot].arg.unk_09   = 16;
     TASK(PartyMember)->param.unk_0B += 1;
     slot                               = Battle_AllocEffect(1, 96) & BYTE_MASK;
-    g_BattleEffects[slot].target.party = g_Task;
+    g_BattleEffects[slot].target.party = TASK(PartyMember);
     g_BattleEffects[slot].header.mode  = 0;
     g_BattleEffects[slot].arg.unk_09   = 16;
     TASK(PartyMember)->param.unk_0B += 1;
@@ -75,7 +75,7 @@ MATCH void func_801EEFC8(void) {
         TASK(PartyMember)->unk_26       = 0;
         TASK(PartyMember)->unk_27       = 0x1A;
         TASK(PartyMember)->unk_28       = 1;
-        work                            = g_Task;
+        work                            = TASK(PartyMember);
         work->unk_48                    = 2;
         work->scale.x                   = 0x10000;
         work->scale.y                   = 0x10000;
@@ -175,7 +175,7 @@ MATCH void func_801EF634(void) {
 
     if (--TASK(PartyMember)->unk_09 == 0) {
         src                      = g_BattleEffectBattler;
-        dst                      = g_Task;
+        dst                      = TASK(PartyMember);
         dst->pos.x.fixed         = src->pos.x.fixed;
         dst->pos.y.fixed         = src->pos.y.fixed;
         dst->pos.z               = src->pos.z;
@@ -264,7 +264,7 @@ MATCH void func_801EFF7C(void) {
     s32          direction;
     s32          velocity;
 
-    task       = g_Task;
+    task       = TASK(PartyMember);
     angle_cell = &D_1F800004;
     direction  = task->param.unk_0B;
     task->unk_0C += 1;
@@ -371,12 +371,12 @@ MATCH void func_801F066C(void) {
 MATCH void func_801F06C8(void) {
     PartyMember* work;
 
-    work = g_Task;
+    work = TASK(PartyMember);
     work->param.unk_0B += 4;
-    work = g_Task;
+    work = TASK(PartyMember);
     work->timer--;
     if (work->timer == 0) {
-        work = g_Task;
+        work = TASK(PartyMember);
         work->header.step++;
     }
 }
@@ -386,9 +386,9 @@ MATCH void func_801F0730(void) {
     PartyMember* active;
     u8           count;
 
-    work = g_Task;
+    work = TASK(PartyMember);
     work->param.unk_0B += 4;
-    work         = g_Task;
+    work         = TASK(PartyMember);
     count        = work->unk_09 - 1;
     work->unk_09 = count;
     if (count == 0) {
@@ -411,7 +411,7 @@ MATCH void func_801F07A8(void) {
 
     tpage = getTPage(TPAGE_DEPTH_4BIT, TPAGE_ABR_ADD, 320, 256);
     GFX_ADD_DITHERED_DRAW_MODE(BMAGIC_LAYER_FOREGROUND, tpage);
-    work                         = g_Task;
+    work                         = TASK(PartyMember);
     g_ScratchPad.cells.halves[0] = work->param.unk_0B;
     g_ScratchPad.cells.halves[1] = work->param.unk_0B * 2;
     g_ScratchPad.cells.halves[5] = work->unk_09 * 15;

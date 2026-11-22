@@ -13,14 +13,14 @@ MATCH void func_801F4610(void) {
     WorldMap_FindRegion();
     Area_SceneSelectRecord(0x205);
 
-    g_Task->unk_48       = 0;
-    g_Task->active_flags = 0;
-    g_Task->mirror       = 0;
+    TASK(Actor)->unk_48       = 0;
+    TASK(Actor)->active_flags = 0;
+    TASK(Actor)->mirror       = 0;
     ACTOR_CLEAR_TINT();
 
-    row_offset                                                      = g_Task->param.unk_0B * 4;
+    row_offset                                                      = TASK(Actor)->param.unk_0B * 4;
     map_offset                                                      = D_801F4D7C[0x29 + row_offset] * g_AreaMapBundle.width;
     *(g_AreaCellCodes + map_offset + D_801F4D7C[0x28 + row_offset]) = 0xA0;
     Script_Select(0);
-    g_Task->header.mode = 1;
+    TASK(Actor)->header.mode = 1;
 }

@@ -3,11 +3,11 @@
 MATCH void func_801F2D44(void) {
     s32 val;
 
-    val = g_Task->vx;
+    val = TASK(Actor)->vx;
     if (val > 0) {
-        g_Task->vx = val - 1;
+        TASK(Actor)->vx = val - 1;
     }
-    func_801F31F4((g_Task->vx << 19) >> 16);
+    func_801F31F4((TASK(Actor)->vx << 19) >> 16);
     if ((u8)func_801F330C() == 0) {
         Actor_Clear();
     }

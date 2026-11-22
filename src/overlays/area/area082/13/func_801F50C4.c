@@ -5,6 +5,6 @@ MATCH void func_801F50C4(void) {
     Area_DrawGradient(-1);
     SND_SEPlay(EMI_SE_ID(SND_BANK_AREA, 0x02));
     SND_SEPlay(EMI_SE_ID(SND_BANK_AREA, 0x00));
-    g_Task->timer = 0;
-    g_Task->header.step++;
+    TASK(Actor)->timer = 0;
+    TASK(Actor)->header.step++;
 }

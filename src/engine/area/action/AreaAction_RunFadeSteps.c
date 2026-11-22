@@ -5,7 +5,7 @@ MATCH void AreaAction_RunFadeSteps(void) {
     Actor*              work;
     AreaActionFadeSteps table;
 
-    work  = g_Task;
+    work  = TASK(Actor);
     table = g_AreaActionFadeSteps;
     table.steps[work->unk_04]();
 }

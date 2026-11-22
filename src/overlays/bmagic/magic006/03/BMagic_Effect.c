@@ -19,7 +19,7 @@ MATCH void func_801EEC90(void) {
     TASK(PartyMember)->header.mode += 1;
     for (i = 0; i < 4; i++) {
         slot                               = Battle_AllocEffect(1, 83) & BYTE_MASK;
-        g_BattleEffects[slot].target.party = g_Task;
+        g_BattleEffects[slot].target.party = TASK(PartyMember);
         g_BattleEffects[slot].header.mode  = 0;
         g_BattleEffects[slot].unk_0B       = i;
         g_BattleEffects[slot].arg.unk_09   = i + 1;
@@ -70,7 +70,7 @@ MATCH void func_801EEF28(void) {
 }
 
 MATCH void func_801EF04C(void) {
-    PartyMember* work = g_Task;
+    PartyMember* work = TASK(PartyMember);
     u8           timer;
 
     work->unk_14 += 0x80;
@@ -86,7 +86,7 @@ MATCH void func_801EF04C(void) {
 MATCH void func_801EF0B8(void) {
     PartyMember* work;
 
-    work         = g_Task;
+    work         = TASK(PartyMember);
     work->unk_09 = work->unk_09 - 1;
     if (work->unk_09 == 0) {
         SND_SEQueueSelection(0x101);
@@ -308,15 +308,15 @@ MATCH void func_801F0100(void) {
     count                     = TASK(PartyMember)->unk_09 - 1;
     TASK(PartyMember)->unk_09 = count;
     if (count == 0) {
-        phase                          = TASK(PartyMember)->param.unk_0B;
-        angle_cell                     = &D_1F800008;
-        *angle_cell                    = phase << 9;
-        actor                          = g_Battle.selected_actor;
-        TASK(PartyMember)->pos.x.fixed = actor->pos.x.fixed + ((rcos((s16)(phase << 9)) * 0xC000) >> 12);
-        (work = g_Task)->pos.y.fixed   = actor->pos.y.fixed + ((rsin(*angle_cell) * 0xC000) >> 12);
-        work->pos.z.fixed              = actor->pos.z.fixed;
-        work->unk_09                   = 0;
-        TASK(PartyMember)->timer       = 4;
+        phase                                   = TASK(PartyMember)->param.unk_0B;
+        angle_cell                              = &D_1F800008;
+        *angle_cell                             = phase << 9;
+        actor                                   = g_Battle.selected_actor;
+        TASK(PartyMember)->pos.x.fixed          = actor->pos.x.fixed + ((rcos((s16)(phase << 9)) * 0xC000) >> 12);
+        (work = TASK(PartyMember))->pos.y.fixed = actor->pos.y.fixed + ((rsin(*angle_cell) * 0xC000) >> 12);
+        work->pos.z.fixed                       = actor->pos.z.fixed;
+        work->unk_09                            = 0;
+        TASK(PartyMember)->timer                = 4;
         TASK(PartyMember)->header.step++;
     }
 }

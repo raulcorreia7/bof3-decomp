@@ -27,7 +27,7 @@ MATCH void func_801EECFC(void) {
      * pointer changes the bytes. */
     actor                               = g_Battle.selected_actor;
     first                               = Battle_AllocEffect(1, 0xD);
-    g_BattleEffects[first].target.party = g_Task;
+    g_BattleEffects[first].target.party = TASK(PartyMember);
     g_BattleEffects[first].header.mode  = 0;
     g_BattleEffects[first].arg.unk_09   = 0;
     battler                             = g_BattleEffectBattler;
@@ -36,7 +36,7 @@ MATCH void func_801EECFC(void) {
     g_BattleEffects[first].pos.z.fixed  = battler->pos.z.fixed + TO_COORD(512);
     slot                                = Battle_AllocEffect(1, 0xD);
     g_BattleEffects[slot].target.effect = &g_BattleEffects[first];
-    g_BattleEffects[slot].unk_4C        = g_Task;
+    g_BattleEffects[slot].unk_4C        = TASK(PartyMember);
     g_BattleEffects[slot].header.mode   = 1;
     g_BattleEffects[slot].arg.unk_09    = 0;
     g_BattleEffects[slot].pos.x.fixed   = actor->pos.x.fixed;
@@ -174,7 +174,7 @@ MATCH void func_801EFEB8(void) {
     long         flags;
 
     PushMatrix();
-    work = g_Task;
+    work = TASK(PartyMember);
     setVector(&rot, 0, 0, 0);
     if (work->slot == 13) {
         rot.vz = work->unk_0C;
@@ -233,7 +233,7 @@ MATCH void func_801F014C(void) {
 MATCH void Effect_PlayCueOnTimeout(void) {
     PartyMember* work;
 
-    work        = g_Task;
+    work        = TASK(PartyMember);
     work->timer = work->timer - 1;
     if (work->timer == 0) {
         SND_SEQueueSelection(0x102);

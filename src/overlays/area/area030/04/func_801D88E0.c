@@ -11,7 +11,7 @@ MATCH void func_801D88E0(s16 x, s16 y) {
     y0 = y;
     func_801D8D70(x, y);
     UI_TextDraw((s16)(x + 51), (s16)(y + 7), 0, 5U, D_801E21D4);
-    if (g_Task->option_flags & 0x80) {
+    if (TASK(Actor)->option_flags & 0x80) {
         u8* rod;
 
         rod = &g_FishingRod;
@@ -19,14 +19,14 @@ MATCH void func_801D88E0(s16 x, s16 y) {
         UI_TextDraw((s16)(x + 28), (s16)(y + 26), 0, ITEM_NAME_LENGTH, (u8*)&g_Accessories[*rod]);
         Fishing_ShopDrawItemIcon((s16)(x + 16), (s16)(y + 44), g_FishingLure, 3, 0);
         UI_TextDraw((s16)(x + 28), (s16)(y + 42), 0, ITEM_NAME_LENGTH, (u8*)&g_Accessories[g_FishingLure]);
-    } else if ((g_Task->option_flags & 1) == 0) {
+    } else if ((TASK(Actor)->option_flags & 1) == 0) {
         u8* rod;
 
         rod = &g_FishingRod;
         Fishing_ShopDrawItemIcon((s16)(x + 16), (s16)(y + 28), *rod, 3, 1);
         UI_TextDraw((s16)(x + 28), (s16)(y + 26), UI_TEXT_DIM, ITEM_NAME_LENGTH, (u8*)&g_Accessories[*rod]);
         Fishing_ShopDrawItemIcon((s16)(x + 16), (s16)(y + 26), *rod, 3, 0);
-        UI_TextDraw((s16)(x + 28), (s16)(y + 24), g_Task->option_flags, ITEM_NAME_LENGTH, (u8*)&g_Accessories[*rod]);
+        UI_TextDraw((s16)(x + 28), (s16)(y + 24), TASK(Actor)->option_flags, ITEM_NAME_LENGTH, (u8*)&g_Accessories[*rod]);
         Fishing_ShopDrawItemIcon((s16)(x + 16), (s16)(y + 44), g_FishingLure, 3, 0);
         UI_TextDraw((s16)(x + 28), (s16)(y + 42), 0, ITEM_NAME_LENGTH, (u8*)&g_Accessories[g_FishingLure]);
     } else {
@@ -38,10 +38,10 @@ MATCH void func_801D88E0(s16 x, s16 y) {
         Fishing_ShopDrawItemIcon((s16)(x + 16), (s16)(y + 44), g_FishingLure, 3, 1);
         UI_TextDraw((s16)(x + 28), (s16)(y + 42), UI_TEXT_DIM, ITEM_NAME_LENGTH, (u8*)&g_Accessories[g_FishingLure]);
         Fishing_ShopDrawItemIcon((s16)(x + 16), (s16)(y + 42), g_FishingLure, 3, 0);
-        UI_TextDraw((s16)(x + 28), (s16)(y + 40), g_Task->option_flags & ACTOR_OPT_KEEP_FACING, ITEM_NAME_LENGTH, (u8*)&g_Accessories[g_FishingLure]);
+        UI_TextDraw((s16)(x + 28), (s16)(y + 40), TASK(Actor)->option_flags & ACTOR_OPT_KEEP_FACING, ITEM_NAME_LENGTH, (u8*)&g_Accessories[g_FishingLure]);
     }
     UI_TextDraw((s16)(x0 + 51), (s16)(y0 + 71), 0, 5U, D_801E21D9);
-    guide = g_Task->unk_2C;
+    guide = TASK(Actor)->unk_2C;
     if (guide != 0xFFFF) {
         UI_TextDraw(25, 154, 0, TEXT_LENGTH_MAX, MESSAGE_TABLE_TEXT(AREA_MESSAGE_TABLE, guide));
     }

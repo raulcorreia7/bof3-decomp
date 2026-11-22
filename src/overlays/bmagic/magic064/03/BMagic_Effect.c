@@ -22,7 +22,7 @@ MATCH void func_801EED7C(void) {
     PartyMember* saved;
     PartyMember* battler;
 
-    saved   = g_Task;
+    saved   = TASK(PartyMember);
     battler = &g_Game.members[g_Battle.active_battler];
     g_Task  = battler;
     Script_Request((battler->facing + 0x38) & BYTE_MASK);
@@ -35,7 +35,7 @@ MATCH void func_801EED7C(void) {
 MATCH void func_801EEE1C(void) {
     PartyMember* battler;
 
-    battler = g_Task;
+    battler = TASK(PartyMember);
     g_Task  = &g_Game.members[g_Battle.active_battler];
     if (!(Script_AnimStepOnce() & BYTE_MASK)) {
         g_Task          = battler;
@@ -66,7 +66,7 @@ MATCH void func_801EEEA8(void) {
     g_AreaCameraHeight                    = Area_HeightSample(g_AreaScrollTargetX, g_AreaScrollTargetY);
     func_801F103C();
     index                               = Battle_AllocEffect(1, 0x3A) & BYTE_MASK;
-    target                              = g_Task;
+    target                              = TASK(PartyMember);
     g_BattleEffects[index].header.mode  = 3;
     g_BattleEffects[index].target.party = target;
     TASK(PartyMember)->unk_09           = 1;
@@ -91,7 +91,7 @@ MATCH void func_801EEFF8(void) {
     }
 
     effect_slot                               = Battle_AllocEffect(1, 58) & BYTE_MASK;
-    task                                      = g_Task;
+    task                                      = TASK(PartyMember);
     g_BattleEffects[effect_slot].header.mode  = 1;
     g_BattleEffects[effect_slot].target.party = task;
     TASK(PartyMember)->param.unk_0B &= 0xFE;
@@ -119,7 +119,7 @@ MATCH void func_801EF0E0(void) {
     } while (src != end);
     /* FAKE: hold tail store before tail. */
     FAKE_ORDER_LOCK(dst->w[0] = src->w[0]);
-    g_BattleEffects[effect_slot & BYTE_MASK].target.party = g_Task;
+    g_BattleEffects[effect_slot & BYTE_MASK].target.party = TASK(PartyMember);
     g_BattleEffects[effect_slot & BYTE_MASK].header.mode  = 0;
     g_BattleEffects[effect_slot & BYTE_MASK].header.step  = 0;
     g_BattleEffects[effect_slot & BYTE_MASK].unk_03       = 0;
@@ -150,7 +150,7 @@ MATCH void func_801EF2A4(void) {
     PartyMember* battler;
     u32          value;
 
-    battler = g_Task;
+    battler = TASK(PartyMember);
     g_Task  = &g_Game.members[g_Battle.active_battler];
     func_801F0EEC(1, 2, (0x80 - battler->unk_09) & BYTE_MASK);
     func_801F0EEC(0, 1, (0x80 - battler->unk_09) & BYTE_MASK);
@@ -175,7 +175,7 @@ MATCH void func_801EF2A4(void) {
 MATCH void func_801EF3C8(void) {
     PartyMember* battler;
 
-    battler = g_Task;
+    battler = TASK(PartyMember);
     g_Task  = &g_Game.members[g_Battle.active_battler];
     func_801F0EEC(1, 2, (0x80 - battler->unk_09) & BYTE_MASK);
     func_801F0EEC(0, 1, (0x80 - battler->unk_09) & BYTE_MASK);
@@ -199,7 +199,7 @@ MATCH void func_801EF3C8(void) {
 MATCH void func_801EF570(void) {
     PartyMember* battler;
 
-    battler = g_Task;
+    battler = TASK(PartyMember);
     g_Task  = &g_Game.members[g_Battle.active_battler];
     if (!(Script_AnimStepOnce() & BYTE_MASK)) {
         g_Task = battler;
@@ -212,7 +212,7 @@ MATCH void func_801EF570(void) {
 MATCH void func_801EF5FC(void) {
     PartyMember* work;
 
-    work = g_Task;
+    work = TASK(PartyMember);
     if (!(work->param.unk_0B & 0x1)) {
         g_AreaScrollTargetX = work->pos.x.fixed;
         FAKE_BARRIER(); /* FAKE: retail reads each field after storing the previous target */
@@ -473,7 +473,7 @@ MATCH void func_801F0DD8(void) {
     PartyMember* work;
     s8           counter;
 
-    work         = g_Task;
+    work         = TASK(PartyMember);
     counter      = work->unk_09 - 1;
     work->unk_09 = counter;
     if (counter == -6) {
@@ -488,7 +488,7 @@ MATCH void func_801F0E50(void) {
 
     active = BATTLE_ACTIVE_WORK;
     if (active->header.step == 10) {
-        work              = g_Task;
+        work              = TASK(PartyMember);
         work->header.step = work->header.step + 1;
     }
 }
@@ -496,7 +496,7 @@ MATCH void func_801F0E50(void) {
 MATCH void func_801F0E90(void) {
     PartyMember* work;
 
-    work = g_Task;
+    work = TASK(PartyMember);
     work->unk_09++;
     if (work->unk_09 == 0) {
         Effect_Reset();
@@ -517,10 +517,10 @@ MATCH void func_801F0EEC(u32 sprite, s32 blend, s32 color) {
     SetSprt(prim);
     setRGB0(prim, color, color, color);
     if ((sprite & BYTE_MASK) < 2) {
-        task     = g_Task;
+        task     = TASK(PartyMember);
         prim->x0 = task->screen_x.value - 32;
     } else {
-        task     = g_Task;
+        task     = TASK(PartyMember);
         prim->x0 = task->screen_x.value - 40;
     }
     prim->y0 = task->screen_y.value - 64;

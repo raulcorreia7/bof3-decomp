@@ -96,7 +96,7 @@ MATCH void func_801EF27C(void) {
 
     if (--TASK(PartyMember)->unk_09 == 0) {
         src                      = g_BattleEffectBattler;
-        dst                      = g_Task;
+        dst                      = TASK(PartyMember);
         dst->pos.x.fixed         = src->pos.x.fixed;
         dst->pos.y.fixed         = src->pos.y.fixed;
         dst->pos.z               = src->pos.z;
@@ -117,9 +117,9 @@ MATCH void func_801EF358(void) {
     PartyMember* active;
     u8           count;
 
-    work = g_Task;
+    work = TASK(PartyMember);
     work->unk_09 += 4;
-    work        = g_Task;
+    work        = TASK(PartyMember);
     count       = work->timer - 1;
     work->timer = count;
     if (count == 0) {

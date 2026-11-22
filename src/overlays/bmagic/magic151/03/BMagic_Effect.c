@@ -42,7 +42,7 @@ MATCH void func_801EEEA8(void) {
     PartyMember* saved_work;
     PartyMember* battler;
 
-    saved_work = g_Task;
+    saved_work = TASK(PartyMember);
     battler    = &g_Game.members[g_Battle.active_battler];
     g_Task     = battler;
     Script_Request((battler->facing + 0x3C) & BYTE_MASK);
@@ -66,7 +66,7 @@ MATCH void func_801EEF24(void) {
         }
         SND_SEQueueSelection(cue);
     }
-    saved  = g_Task;
+    saved  = TASK(PartyMember);
     g_Task = &g_Game.members[g_Battle.active_battler];
     if (!(Script_AnimStepOnce() & BYTE_MASK)) {
         g_Task = saved;
@@ -76,7 +76,7 @@ MATCH void func_801EEF24(void) {
     g_Task                             = saved;
     TASK(PartyMember)->param.unk_0B    = 0;
     slot                               = Battle_AllocEffect(1, 68) & BYTE_MASK;
-    work                               = g_Task;
+    work                               = TASK(PartyMember);
     g_BattleEffects[slot].header.mode  = 4;
     g_BattleEffects[slot].target.party = work;
     TASK(PartyMember)->unk_03 += 1;
@@ -109,7 +109,7 @@ MATCH void func_801EF138(void) {
                 g_Battle.flags &= ~BATTLE_STATE_OVER;
             }
         }
-        saved  = g_Task;
+        saved  = TASK(PartyMember);
         g_Task = &g_Game.members[g_Battle.active_battler];
         GFX_PaletteFreeFadeTarget(g_Task);
         s_BattleBattlerTemplates[g_Battle.active_battler].unk_27 = g_Game.members[g_Battle.active_battler].unk_27;
@@ -126,7 +126,7 @@ MATCH void func_801EF2A0(void) {
     PartyMember* saved_work;
     PartyMember* battler;
 
-    saved_work = g_Task;
+    saved_work = TASK(PartyMember);
     battler    = &g_Game.members[g_Battle.active_battler];
     g_Task     = battler;
     battler->header.flags &= ~PARTY_MEMBER_FLAG_HANDLER_BUSY;
@@ -202,7 +202,7 @@ MATCH void func_801EFAAC(void) {
     TASK(PartyMember)->unk_09           = 4;
     TASK(PartyMember)->header.step += 1;
     slot                               = Battle_AllocEffect(1, 68) & BYTE_MASK;
-    work                               = g_Task;
+    work                               = TASK(PartyMember);
     g_BattleEffects[slot].header.mode  = 2;
     g_BattleEffects[slot].arg.unk_09   = 1;
     g_BattleEffects[slot].target.party = work;
@@ -219,7 +219,7 @@ MATCH void func_801EFBAC(void) {
     TASK(PartyMember)->unk_09 = count;
     if (count == 0) {
         slot                               = Battle_AllocEffect(1, 68) & BYTE_MASK;
-        work                               = g_Task;
+        work                               = TASK(PartyMember);
         g_BattleEffects[slot].header.mode  = 3;
         g_BattleEffects[slot].target.party = work;
         TASK(PartyMember)->param.unk_0B += 1;
@@ -235,9 +235,9 @@ MATCH void func_801EFC68(void) {
 
     if (--TASK(PartyMember)->unk_09 == 0) {
         slot                               = Battle_AllocEffect(1, 68) & BYTE_MASK;
-        work                               = g_Task;
+        work                               = TASK(PartyMember);
         g_BattleEffects[slot].header.mode  = 0;
-        task                               = g_Task;
+        task                               = TASK(PartyMember);
         g_BattleEffects[slot].target.party = work;
         task->param.unk_0B += 1;
         SND_SEQueueSelection(0x103);
@@ -286,7 +286,7 @@ MATCH void func_801EFE00(void) {
 }
 
 MATCH void func_801EFE90(void) {
-    PartyMember* work  = g_Task;
+    PartyMember* work  = TASK(PartyMember);
     PartyMember* actor = g_BattleEffectBattler;
     s32          z;
 
@@ -316,7 +316,7 @@ MATCH void func_801EFF94(void) {
 
     if ((g_FrameCount & 0x3) == 0) {
         slot                               = Battle_AllocEffect(1, 68) & BYTE_MASK;
-        work                               = g_Task;
+        work                               = TASK(PartyMember);
         g_BattleEffects[slot].header.mode  = 1;
         g_BattleEffects[slot].target.party = work;
         g_BattleEffects[slot].unk_04       = TASK(PartyMember)->unk_04 & 0xF;
@@ -475,7 +475,7 @@ MATCH void func_801F0AC8(void) {
     SYS_DISPATCH_BYTE(D_801F24F0, TASK(PartyMember)->header.step);
     if (TASK(PartyMember)->header.flags != 0 && TASK(PartyMember)->header.step != 0) {
         Effect_SetActorMatrix();
-        work = g_Task;
+        work = TASK(PartyMember);
         work->unk_09 += 2;
         work->unk_0C += 1;
         func_801F0D0C(D_801F24D0[TASK(PartyMember)->unk_04][0] + TASK(PartyMember)->unk_09, D_801F24D0[TASK(PartyMember)->unk_04][1]);
@@ -491,7 +491,7 @@ MATCH void func_801F0BA8(void) {
     TASK(PartyMember)->pos.y.fixed  = g_BattleEffectBattler->pos.y.fixed;
     TASK(PartyMember)->pos.z.fixed  = g_BattleEffectBattler->pos.z.fixed;
     value                           = RANDOM_MASK(0x1F);
-    work                            = g_Task;
+    work                            = TASK(PartyMember);
     work->unk_5D                    = 0x10;
     work->unk_0C                    = value;
     TASK(PartyMember)->param.unk_0B = 0;
@@ -515,7 +515,7 @@ MATCH void func_801F0CB0(void) {
     PartyMember* work;
     s8           timer;
 
-    work         = g_Task;
+    work         = TASK(PartyMember);
     timer        = work->unk_5D - 2;
     work->unk_5D = timer;
     if (timer == 0) {
@@ -681,7 +681,7 @@ MATCH void func_801F1C3C(void) {
 }
 
 MATCH void func_801F1CCC(void) {
-    PartyMember* work  = g_Task;
+    PartyMember* work  = TASK(PartyMember);
     PartyMember* actor = g_BattleEffectBattler;
     s32          z;
 
@@ -698,7 +698,7 @@ MATCH void func_801F1D28(void) {
     PartyMember* work;
     s32          value;
 
-    work         = g_Task;
+    work         = TASK(PartyMember);
     value        = work->unk_14 + 0x80;
     work->unk_14 = value;
     if (value == 0x400) {

@@ -6,16 +6,16 @@
 MATCH void Actor_SpawnSceneActor(s8 actor_slot) {
     s8 value;
 
-    g_Task->param.unk_0B = Actor_FindFreeSpawned();
-    if (g_Task->param.unk_0B != GAME_NONE) {
-        g_SpawnedActors[g_Task->param.actor_slot].header.flags = 1;
-        g_SpawnedActors[g_Task->param.actor_slot].type         = 0x19;
-        g_SpawnedActors[g_Task->param.actor_slot].unk_06       = actor_slot;
-        g_SpawnedActors[g_Task->param.actor_slot].scene_step   = 0;
-        value                                                  = func_801ADC98();
-        g_SpawnedActors[g_Task->param.actor_slot].selection    = value + 0x28;
-        g_SpawnedActors[g_Task->param.actor_slot].pos.x.fixed  = g_Task->pos.x.fixed;
-        g_SpawnedActors[g_Task->param.actor_slot].pos.y.fixed  = g_Task->pos.y.fixed;
-        g_SpawnedActors[g_Task->param.actor_slot].pos.z.fixed  = g_Task->pos.z.fixed;
+    TASK(Actor)->param.unk_0B = Actor_FindFreeSpawned();
+    if (TASK(Actor)->param.unk_0B != GAME_NONE) {
+        g_SpawnedActors[TASK(Actor)->param.actor_slot].header.flags = 1;
+        g_SpawnedActors[TASK(Actor)->param.actor_slot].type         = 0x19;
+        g_SpawnedActors[TASK(Actor)->param.actor_slot].unk_06       = actor_slot;
+        g_SpawnedActors[TASK(Actor)->param.actor_slot].scene_step   = 0;
+        value                                                       = func_801ADC98();
+        g_SpawnedActors[TASK(Actor)->param.actor_slot].selection    = value + 0x28;
+        g_SpawnedActors[TASK(Actor)->param.actor_slot].pos.x.fixed  = TASK(Actor)->pos.x.fixed;
+        g_SpawnedActors[TASK(Actor)->param.actor_slot].pos.y.fixed  = TASK(Actor)->pos.y.fixed;
+        g_SpawnedActors[TASK(Actor)->param.actor_slot].pos.z.fixed  = TASK(Actor)->pos.z.fixed;
     }
 }

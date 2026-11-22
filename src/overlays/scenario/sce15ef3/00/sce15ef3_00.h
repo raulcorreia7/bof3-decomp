@@ -5,7 +5,6 @@
  * includes the file. */
 
 #include "overlays/scenario/scenario.h"
-#include "area/spad.h"
 
 #include "area/effects.h"
 

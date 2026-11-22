@@ -16,20 +16,20 @@ NON_MATCHING void func_801F3A14(s32 x, s32 y) {
     column >>= 16;
     row >>= 16;
     Area_HeightSet(column, row, 0);
-    Area_CellSetCode(column, row, (u8)g_Task->unk_18);
+    Area_CellSetCode(column, row, (u8)TASK(Actor)->unk_18);
     Area_HeightSet(column, row + 1, 0);
-    Area_CellSetCode(column, row + 1, (u8)g_Task->unk_1C);
+    Area_CellSetCode(column, row + 1, (u8)TASK(Actor)->unk_1C);
     column = (s16)(column + 2);
-    g_Task->unk_18 >>= 8;
-    g_Task->unk_1C >>= 8;
+    TASK(Actor)->unk_18 >>= 8;
+    TASK(Actor)->unk_1C >>= 8;
     Area_HeightSet(column, row, 0x10);
-    g_Task->unk_18 |= (u8)Area_CellGetCode(column, row) << 8;
+    TASK(Actor)->unk_18 |= (u8)Area_CellGetCode(column, row) << 8;
     Area_CellSetCode(column, row, 0x11);
     row = (s16)(row + 1);
     Area_HeightSet(column, row, 0x10);
-    g_Task->unk_1C |= (u8)Area_CellGetCode(column, row) << 8;
+    TASK(Actor)->unk_1C |= (u8)Area_CellGetCode(column, row) << 8;
     Area_CellSetCode(column, row, 0x11);
-    g_Task->direction = FACING_RIGHT;
+    TASK(Actor)->direction = FACING_RIGHT;
     Area_MoveActorRoute(g_ScriptState, 3);
     g_ScriptState->steps = 2;
 }

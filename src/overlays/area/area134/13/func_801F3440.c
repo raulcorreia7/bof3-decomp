@@ -4,7 +4,7 @@ MATCH void func_801F3440(void) {
     Actor* actor;
     u8     step;
 
-    actor      = g_Task;
+    actor      = TASK(Actor);
     D_80146250 = &D_80146110;
     TASK_SET(&D_80146110);
     if (D_80146144 > 0x33FFFF) {

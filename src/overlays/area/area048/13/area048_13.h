@@ -5,7 +5,6 @@
  * and its data. Only this image includes the file. */
 
 #include "overlays/area/worlds/world01.h"
-#include "area/spad.h"
 
 extern u8  D_8014686B;
 /* The disc's colour rows: one byte table per channel, indexed by the work record's byte 6. */
@@ -45,20 +44,20 @@ void func_801F4258(s32 mode);
  * route the event byte and the actor type pick. Every change must verify
  * func_801F48DC and func_801F49C8. */
 static inline void Area_StartScriptedMove(u8 facing) {
-    g_Task->direction    = facing;
-    g_ScriptState->steps = D_8014686B * 4;
+    TASK(Actor)->direction = facing;
+    g_ScriptState->steps   = D_8014686B * 4;
     if (g_ScriptState->steps != 0) {
         if (Actor_GetOwner() != 2) {
-            Area_MoveActorRoute(g_ScriptState, g_Task->direction);
+            Area_MoveActorRoute(g_ScriptState, TASK(Actor)->direction);
             g_ScriptState->flags |= 0x80;
         } else {
-            Area_SetFacingOffsetX(g_Task->direction);
+            Area_SetFacingOffsetX(TASK(Actor)->direction);
             g_AreaCameraHeightStep = 0;
             g_ScriptState->flags |= 0x40;
         }
     }
-    g_Task->vz               = 0;
-    COORD_INT(g_Task->pos.z) = 1152;
+    TASK(Actor)->vz               = 0;
+    COORD_INT(TASK(Actor)->pos.z) = 1152;
 }
 
 #endif

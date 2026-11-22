@@ -23,12 +23,12 @@ MATCH void func_801EED04(void) {
     TASK(PartyMember)->param.unk_0B = 0;
     TASK(PartyMember)->header.mode += 1;
     slot                               = Battle_AllocEffect(1, 92);
-    g_BattleEffects[slot].target.party = g_Task;
+    g_BattleEffects[slot].target.party = TASK(PartyMember);
     g_BattleEffects[slot].header.mode  = 0;
     g_BattleEffects[slot].arg.unk_09   = 1;
     TASK(PartyMember)->param.unk_0B += 1;
     slot                               = Battle_AllocEffect(1, 92);
-    g_BattleEffects[slot].target.party = g_Task;
+    g_BattleEffects[slot].target.party = TASK(PartyMember);
     g_BattleEffects[slot].header.mode  = 1;
     g_BattleEffects[slot].arg.unk_09   = 9;
     TASK(PartyMember)->param.unk_0B += 1;
@@ -76,7 +76,7 @@ MATCH void func_801EEFF8(void) {
 
 /* func_801EF0F8 */
 MATCH void Effect_Rise(void) {
-    PartyMember* work  = g_Task;
+    PartyMember* work  = TASK(PartyMember);
     u8           timer = work->timer - 1;
     work->timer        = timer;
     work->pos.z.fixed += TO_COORD(-128);

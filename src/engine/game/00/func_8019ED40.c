@@ -2,16 +2,16 @@
 
 MATCH void func_8019ED40(void) {
     if (g_GameStateIndex != GAME_REQUEST_IDLE) {
-        if (g_Task->param.unk_0B == 0u) {
+        if (TASK(Actor)->param.unk_0B == 0u) {
             return;
         }
         if (Script_AnimStepOnce() != 0u) {
-            g_Task->param.unk_0B = 1;
+            TASK(Actor)->param.unk_0B = 1;
         }
-        if (g_Task->param.unk_0B != 2u) {
+        if (TASK(Actor)->param.unk_0B != 2u) {
             return;
         }
-    } else if ((Script_AnimStepOnce() != 0u) || (g_Task->param.unk_0B != 0u)) {
+    } else if ((Script_AnimStepOnce() != 0u) || (TASK(Actor)->param.unk_0B != 0u)) {
         Actor_Clear();
         return;
     }

@@ -11,6 +11,6 @@ MATCH void func_801F2C60(void) {
         i += 1;
         work += 0x2C;
     } while ((i & BYTE_MASK) < 0x20U);
-    g_Task->timer = 0;
-    g_Task->header.mode += 1;
+    TASK(Actor)->timer = 0;
+    TASK(Actor)->header.mode += 1;
 }

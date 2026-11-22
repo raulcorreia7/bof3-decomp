@@ -23,7 +23,7 @@ MATCH void func_801EEC70(void) {
     i = 0;
     do {
         slot                               = Battle_AllocEffect(1, 37) & BYTE_MASK;
-        work                               = g_Task;
+        work                               = TASK(PartyMember);
         g_BattleEffects[slot].unk_0B       = i;
         g_BattleEffects[slot].arg.unk_09   = i * 5 + 1;
         g_BattleEffects[slot].header.mode  = 0;
@@ -101,7 +101,7 @@ MATCH void func_801EF0D0(void) {
         TASK(PartyMember)->unk_2A             = 0;
         TASK(PartyMember)->unk_29             = 4;
         TASK(PartyMember)->unk_24             = 4;
-        work                                  = g_Task;
+        work                                  = TASK(PartyMember);
         work->unk_2B                          = 1;
         work->unk_2C.value                    = 0;
         Script_Select((TASK(PartyMember)->param.unk_0B / 3) & BYTE_MASK);

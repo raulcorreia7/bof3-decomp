@@ -3,11 +3,11 @@
 MATCH void func_8019F384(void) {
     s32 offset;
 
-    g_Task->timer -= 1;
-    offset = g_Task->param.party_index * BATTLE_PARTY_STRIDE;
-    func_8019F5B8(*(s16*)(((u8*)&g_Game.members[0].screen_x) + offset), (s16)(*(u16*)(((u8*)&g_Game.members[0].screen_y) + offset) + (u16)COORD_INT(g_Task->pos.y)), g_Task->unk_06,
-                  g_Task->clut_select);
-    if (g_Task->timer == 0) {
-        g_Task->header.mode += 1;
+    TASK(Actor)->timer -= 1;
+    offset = TASK(Actor)->param.party_index * BATTLE_PARTY_STRIDE;
+    func_8019F5B8(*(s16*)(((u8*)&g_Game.members[0].screen_x) + offset), (s16)(*(u16*)(((u8*)&g_Game.members[0].screen_y) + offset) + (u16)COORD_INT(TASK(Actor)->pos.y)), TASK(Actor)->unk_06,
+                  TASK(Actor)->clut_select);
+    if (TASK(Actor)->timer == 0) {
+        TASK(Actor)->header.mode += 1;
     }
 }

@@ -6,7 +6,6 @@
 
 #include "overlays/area/worlds/world03.h"
 #include "scenario/party.h"
-#include "area/spad.h"
 
 /* The per-scene y limit bytes the walk step reads, in 16.16 units. */
 /* The field step bytes the palette path tests. */
