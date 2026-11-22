@@ -907,6 +907,7 @@ void        func_800A8B40(void);
 void        func_800A8BD0(void);
 void        func_800A8CC8(void);
 void        func_800A8D3C(void);
+u8          func_800A9304(u8 slot);
 extern u32  func_800AA874(u32 bit_index);
 bool        func_800AA8A4(s32 battler_index);
 bool        func_800AB470(u8 battler_index);
@@ -994,6 +995,8 @@ void        UI_ListDrawAbilityRow(s32 x, s32 y, u8 shade, u8 element, u8* name, 
 u8          Battle_TargetNext(s32 start_slot);
 /* func_801DB6F4 */
 s32         func_801DD7D8(s32 low_bound, s32 high_bound, s32 current);
+/* func_801DD978 */
+void        func_801DD978(void);
 /* The panel scale helper lives in battle/battle/03 (src/overlays/battle/battle/03/
  * func_801DE0AC.c). Its retail body multiplies $a0 by $a1 and reads no other
  * argument, and every call site in this target passes two words, so the

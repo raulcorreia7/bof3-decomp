@@ -11,7 +11,22 @@ void func_801D8058(s32 left, s32 top);
 void func_801D2908(s16 x, s16 y, u8 mode);
 void Menu_DrawPanelIcon(u16 x, u16 y, s32 u, s32 v, u16 clut, u8 color);
 
+#ifdef NON_MATCHING
+NON_MATCHING void func_801D1394(void) {
+    s8 value;
+
+    value      = D_801DB0C4 - 1;
+    D_801DB0C4 = value;
+    func_801D3184(0x26 - ((value & BYTE_MASK) * -0x12), 0x10 - ((value & BYTE_MASK) * -0xE));
+    func_801D32A0(0xA8 - ((u8)D_801DB0C4 * 0xE), 0x10 - ((u8)D_801DB0C4 * -0x19), 0);
+    if ((u8)D_801DB0C4 == 0) {
+        D_801F294E = 0;
+        D_801F294D += 1;
+    }
+}
+#else
 INCLUDE_ASM(func_801D1394);
+#endif
 
 MATCH void func_801D143C(void) {
     s8 value;

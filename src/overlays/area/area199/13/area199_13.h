@@ -17,6 +17,11 @@
 extern u8       D_801F44B4[];
 /* The step handler bank. */
 extern Callback D_801F44B8[];
+/* The two trail cell rows: a member's slots run six bytes apart (x, y, flag), two members
+ * three bytes apart, in D_801F54D0. The part words and row offsets follow the same rows. */
+extern u8       D_801F4544[];
+extern u8       D_801F4545[];
+extern u8       D_801F4548[];
 extern u8       D_801F54D0[];
 extern s8       D_801F54D2;
 extern s8       D_801F54D5;

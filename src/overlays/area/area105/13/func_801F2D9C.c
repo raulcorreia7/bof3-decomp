@@ -1,7 +1,80 @@
 #include "area105_13.h"
 
 #ifdef NON_MATCHING
+/* Draws the three cell-row quads: the texture window, a semi-transparent quad a row, and the
+ * final 0x100-wide window. The rows sit at D_801F3320 + 0x10: x, y, width, height in cells. */
 NON_MATCHING void func_801F2D9C(s32 phase) {
+    POLY_FT4* prim;
+    RECT*     tw;
+    SVECTOR*  quad;
+    long      depth;
+    long      flag;
+    s32       i;
+    s32       x;
+    s32       x2;
+    s32       y;
+    s32       y2;
+    s32       z;
+
+    tw = (RECT*)g_GfxPrimCursor;
+    g_GfxPrimCursor += sizeof(RECT);
+    tw->x = 0x60;
+    tw->y = 0x10;
+    tw->w = 0x10;
+    tw->h = 0x10;
+    SetDrawMode((DR_MODE*)g_GfxPrimCursor, 0, 0, getTPage(TPAGE_DEPTH_4BIT, TPAGE_ABR_HALF, 704, 256), tw);
+    GFX_AddPrim(GFX_LAYER_SCENE_BACK, sizeof(DR_MODE));
+
+    quad = g_ScratchPadVectors;
+    for (i = 0; i < 3; i++) {
+        prim = (POLY_FT4*)g_GfxPrimCursor;
+        SetPolyFT4(prim);
+        SetShadeTex(prim, 0);
+        SetSemiTrans(prim, 1);
+        prim->tpage = getTPage(TPAGE_DEPTH_4BIT, TPAGE_ABR_QUARTER, 704, 256);
+        prim->clut  = 0x78C6;
+        x           = (((D_801F3320[0x10 + i * 4] - 0x80) << 7) + phase * 4) - 0x40;
+        x2          = (((D_801F3320[0x10 + i * 4] + D_801F3320[0x12 + i * 4] - 0x81) << 7) + phase * 4) + 0x40;
+        y           = (((D_801F3320[0x11 + i * 4] - 0x80) << 7) + phase * 4) - 0x40;
+        y2          = (((D_801F3320[0x11 + i * 4] + D_801F3320[0x13 + i * 4] - 0x81) << 7) + phase * 4) + 0x40;
+        z           = phase * 6 - 0x380;
+        quad[0].vx  = x;
+        quad[2].vx  = x;
+        quad[1].vx  = x2;
+        quad[3].vx  = x2;
+        quad[0].vy  = y;
+        quad[1].vy  = y;
+        quad[2].vy  = y2;
+        quad[3].vy  = y2;
+        quad[0].vz  = z;
+        quad[1].vz  = z;
+        quad[2].vz  = z;
+        quad[3].vz  = z;
+        if (i == 2) {
+            quad[0].vx = x + (phase << 3);
+            quad[0].vy = y + (phase << 3);
+        }
+        prim->u0 = 0;
+        prim->v0 = 0;
+        prim->u1 = (D_801F3320[0x12 + i * 4] << 4) - 1;
+        prim->v1 = 0;
+        prim->u2 = 0;
+        prim->v2 = (D_801F3320[0x13 + i * 4] << 4) - 1;
+        prim->u3 = (D_801F3320[0x12 + i * 4] << 4) - 1;
+        prim->v3 = (D_801F3320[0x13 + i * 4] << 4) - 1;
+        setRGB0(prim, 0x80, 0x80, 0x80);
+        RotTransPers4(quad, &quad[1], &quad[2], &quad[3], (long*)&prim->x0, (long*)&prim->x1, (long*)&prim->x2, (long*)&prim->x3, &depth, &flag);
+        GFX_AddPrim(GFX_LAYER_SCENE_BACK, sizeof(POLY_FT4));
+    }
+
+    tw = (RECT*)g_GfxPrimCursor;
+    g_GfxPrimCursor += sizeof(RECT);
+    tw->x = 0;
+    tw->y = 0;
+    tw->w = 0x100;
+    tw->h = 0x100;
+    SetDrawMode((DR_MODE*)g_GfxPrimCursor, 0, 0, getTPage(TPAGE_DEPTH_4BIT, TPAGE_ABR_HALF, 704, 256), tw);
+    GFX_AddPrim(GFX_LAYER_SCENE_BACK, sizeof(DR_MODE));
 }
 #else
 INCLUDE_ASM(func_801F2D9C);
