@@ -22,12 +22,13 @@
 /* Char_ApplyLevelUps applies the six stat gains and learns both abilities. */
 #define LEVEL(exp, hp, ap, power, defense, agility, intelligence, ability, extra_ability) {(exp), (hp), (ap), ((power) << 4) | (defense), ((agility) << 4) | (intelligence), (ability), (extra_ability)}
 
-/* The character sprites container loaded at 0x8003B800 (PLxxx archives;
+/* The character sprites container at CHARACTER_SPRITES_BASE (PLxxx archives;
  * @source: wiki:formats/character): a table of section offsets relative to the container.
  * Party_MemberLoadSprite stores the selected section's address in the scratchpad work
  * record at +0x4C. A section starts with a count and the offset of its palette
  * table; the table is a list of offsets, each to CHARACTER_PALETTE_COLORS
  * 16-bit colors, which GFX_PaletteLoad copies to two VRAM staging rows. */
+#define CHARACTER_SPRITES_BASE                                                            0x8003B800u
 #define CHARACTER_SPRITES_SECTION_COUNT                                                   3
 #define CHARACTER_PALETTE_COLORS                                                          32
 

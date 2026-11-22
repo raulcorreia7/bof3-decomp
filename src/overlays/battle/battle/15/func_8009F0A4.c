@@ -12,10 +12,8 @@ MATCH void func_8009F0A4(void) {
     u8            selection_type;
     s16           result;
     volatile u16* counter;
-    /* FAKE: pin the counter sample to retail v0. */
-    FAKE_REG(u16, raw, "v0");
-    /* FAKE: pin the clamped level to retail v0. */
-    FAKE_REG(u8, level, "v0");
+    u16           raw;
+    u8            level;
 
     flags      = &g_Battle.flags;
     flag_value = *flags;

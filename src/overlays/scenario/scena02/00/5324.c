@@ -384,12 +384,209 @@ MATCH void func_801FD6FC(u8 character) {
     }
 }
 
-#ifdef NON_MATCHING
-NON_MATCHING void func_801FD780(void) {
+/* Starts the scene script for the trigger cell at (x, y) in the current area; returns 1 when one starts. */
+MATCH s32 func_801FD780(s32 x, s32 y) {
+    if (g_GameAreaId == AREA_ID_CEDAR_WOODS_BUNYAN && SYS_TestFlag(g_SceneFlags, 0x1F) && !SYS_TestFlag(g_SceneFlags, 0x20) && (u32)(x - TO_COORD_HALF(85)) <= TO_COORD(1) &&
+        (u32)(y - TO_COORD(28)) <= TO_COORD_HALF(1)) {
+        Game_SetScriptActive();
+        g_ScenarioState.step_05  = 5;
+        g_ScriptVars[0]          = 0;
+        g_ScriptVars[1]          = 0;
+        g_ScriptVars[2]          = 0;
+        g_ScriptVars[3]          = 0;
+        g_ScenarioState.state_04 = 0x15;
+        g_AreaDrawFlags          = 0;
+        func_8019FA28(3, TO_COORD(51), TO_COORD(20), 0x81);
+        return 1;
+    }
+    if (g_GameAreaId == AREA_ID_MCNEIL_MANOR_AREA) {
+        if (!SYS_TestFlag(g_SceneFlags, 0x19) && y > TO_COORD(81) && (u32)(x - TO_COORD(54)) <= TO_COORD_HALF(1)) {
+            Game_SetScriptActive();
+            g_ScenarioState.step_05  = 0;
+            g_ScenarioState.state_04 = 5;
+            return 1;
+        }
+    }
+    if (g_GameAreaId == AREA_ID_MCNEIL_MANOR_COURTYARD) {
+        if (SYS_TestFlag(g_SceneFlags, 0x32)) {
+            if (!SYS_TestFlag(g_SceneFlags, 7)) {
+                if (y == TO_COORD(8) && (u32)(x - TO_COORD(52)) <= TO_COORD_HALF(1)) {
+                    g_ScriptVars[2]          = 0;
+                    g_ScenarioState.step_05  = 0;
+                    g_ScenarioState.state_04 = 8;
+                    func_8019FA28(0x1A, TO_COORD(7), TO_COORD(13), 0x80);
+                }
+            } else if (SYS_TestFlag(g_SceneFlags, 0x34) && !SYS_TestFlag(g_SceneFlags, 0x35) && y == TO_COORD(8) && (u32)(x - TO_COORD(52)) <= TO_COORD_HALF(1)) {
+                g_ScenarioState.step_05  = 5;
+                g_ScriptVars[2]          = 0;
+                g_ScenarioState.state_04 = 8;
+                func_8019FA28(0x1A, TO_COORD(7), TO_COORD(13), 0x81);
+                g_GamePrevSelection = 0x1F;
+            }
+        }
+        if (g_GameCellType == 1 && SYS_TestFlag(g_SceneFlags, 0x34) && !SYS_TestFlag(g_SceneFlags, 0x35) && x >= TO_COORD(5)) {
+            if (x <= TO_COORD(9) && y > TO_COORD(15)) {
+                Game_SetScriptActive();
+                g_ScenarioState.step_05  = 6;
+                g_ScenarioState.state_04 = 8;
+                return 1;
+            }
+        }
+        if (SYS_TestFlag(g_SceneFlags, 7) && !SYS_TestFlag(g_SceneFlags, 0x34) && (y == TO_COORD(50) || y == TO_COORD_HALF(50)) && (u32)(x - TO_COORD(29)) <= TO_COORD(3)) {
+            Game_SetScriptActive();
+            g_ScriptVars[0]          = 0xA0;
+            g_ScenarioState.step_05  = 0;
+            g_ScenarioState.state_04 = 9;
+            return 1;
+        }
+        if ((x == TO_COORD(53) || x == TO_COORD_HALF(53)) && (u32)(y - TO_COORD(76)) <= TO_COORD_HALF(1)) {
+            Game_SetScriptActive();
+            g_ScenarioState.step_05  = 0;
+            g_ScenarioState.state_04 = 6;
+            return 1;
+        }
+        if ((y == TO_COORD(76) || y == TO_COORD_HALF(76)) && (u32)(x - TO_COORD(37)) <= TO_COORD_HALF(2)) {
+            Game_SetScriptActive();
+            g_ScenarioState.step_05  = 0xF;
+            g_ScriptVars[0]          = 0;
+            g_ScriptVars[1]          = 0;
+            g_ScriptVars[2]          = 0;
+            g_ScriptVars[3]          = 0;
+            g_ScenarioState.state_04 = 0x19;
+            return 1;
+        }
+        if (!SYS_TestFlag(g_SceneFlags, 0x2F) && (u32)(x - TO_COORD(48)) <= TO_COORD(2) && (y == TO_COORD(42) || y == TO_COORD_HALF(41))) {
+            Game_SetScriptActive();
+            g_ScenarioState.step_05  = 5;
+            g_ScenarioState.state_04 = 0x1A;
+            return 1;
+        }
+        if (!SYS_TestFlag(g_SceneFlags, 0x30)) {
+            if ((u32)(x - TO_COORD(49)) <= TO_COORD(1) && (y == TO_COORD(37) || y == TO_COORD_HALF(36))) {
+                Game_SetScriptActive();
+                g_ScenarioState.step_05  = 0xF;
+                g_ScenarioState.state_04 = 0x1A;
+                return 1;
+            }
+            if ((x == TO_COORD(59) || x == TO_COORD_HALF(59)) && (u32)(y - TO_COORD(38)) <= TO_COORD_HALF(3)) {
+                Game_SetScriptActive();
+                g_ScenarioState.step_05  = 0x14;
+                g_ScenarioState.state_04 = 0x1A;
+                return 1;
+            }
+        }
+        if (!SYS_TestFlag(g_SceneFlags, 0x24)) {
+            if (!SYS_TestFlag(g_SceneFlags, 0x25)) {
+                if ((x == TO_COORD_HALF(41) || x == TO_COORD_HALF(42)) && (u32)(y - TO_COORD(80)) <= TO_COORD(4)) {
+                    u8* phase = &g_ScriptVars[1];
+
+                    switch (*phase) {
+                        case 0:
+                            Game_SetScriptActive();
+                            g_ScriptVars[0]          = 0;
+                            *phase                   = 0;
+                            g_ScriptVars[2]          = 0;
+                            g_ScriptVars[3]          = 0;
+                            g_ScenarioState.step_05  = 0;
+                            g_ScenarioState.state_04 = 0x18;
+                            return 1;
+                        case 1:
+                            Game_SetScriptActive();
+                            g_ScriptVars[0]          = 1;
+                            *phase                   = 0;
+                            g_ScenarioState.step_05  = 0x14;
+                            g_ScriptVars[2]          = 0;
+                            g_ScriptVars[3]          = 0;
+                            g_ScenarioState.state_04 = 0x18;
+                            func_801BE1B0(0xD);
+                            return 1;
+                    }
+                }
+            } else if ((x == TO_COORD_HALF(41) || x == TO_COORD_HALF(42)) && (u32)(y - TO_COORD(80)) <= TO_COORD(4)) {
+                u8* phase = &g_ScriptVars[1];
+
+                switch (*phase) {
+                    case 0:
+                        Game_SetScriptActive();
+                        g_ScriptVars[0]          = 0;
+                        *phase                   = 0;
+                        g_ScenarioState.step_05  = 0xA;
+                        g_ScriptVars[2]          = 0;
+                        g_ScriptVars[3]          = 0;
+                        g_ScenarioState.state_04 = 0x18;
+                        func_801BE1B0(0xD);
+                        return 1;
+                    case 1:
+                        Game_SetScriptActive();
+                        g_ScriptVars[0]          = 1;
+                        *phase                   = 0;
+                        g_ScenarioState.step_05  = 0x14;
+                        g_ScriptVars[2]          = 0;
+                        g_ScriptVars[3]          = 0;
+                        g_ScenarioState.state_04 = 0x18;
+                        func_801BE1B0(0xD);
+                        return 1;
+                }
+            }
+        }
+    }
+    if (g_GameAreaId == AREA_ID_MCNEIL_MANOR) {
+        if ((x == TO_COORD_HALF(39) || x == TO_COORD_HALF(40)) && (u32)(y - TO_COORD(37)) <= TO_COORD_HALF(2)) {
+            Game_SetScriptActive();
+            g_ScenarioState.step_05  = 0;
+            g_ScenarioState.state_04 = 0x1B;
+            return 1;
+        }
+        if (g_Game.party_size == 2 && !SYS_TestFlag(g_SceneFlags, 0xF) && (u32)(x - TO_COORD(27)) <= TO_COORD_HALF(1) && y == TO_COORD_HALF(28)) {
+            g_ScenarioState.step_05  = 0;
+            g_ScenarioState.state_04 = 0xA;
+            return 1;
+        }
+        if (!SYS_TestFlag(g_SceneFlags, 0x10) && (u32)(x - TO_COORD_HALF(23)) <= TO_COORD(1) && (u32)(y - TO_COORD(37)) <= TO_COORD_HALF(2)) {
+            Game_SetScriptActive();
+            g_ScenarioState.step_05  = 5;
+            g_ScriptVars[0]          = 0;
+            g_ScenarioState.state_04 = 0xA;
+            return 1;
+        }
+        if (!SYS_TestFlag(g_SceneFlags, 0x11) && (u32)(x - TO_COORD(9)) <= TO_COORD_HALF(2) && (u32)(y - TO_COORD(64)) <= TO_COORD_HALF(1)) {
+            Game_SetScriptActive();
+            g_ScriptVars[0]          = 0x14;
+            g_ScenarioState.step_05  = 0;
+            g_ScenarioState.state_04 = 0xC;
+            return 1;
+        }
+        if (!SYS_TestFlag(g_SceneFlags, 0x13) && x == TO_COORD_HALF(13) && (u32)((y >> 16) - 3) < 2) {
+            g_ScriptVars[0]          = 0x25;
+            g_ScenarioState.step_05  = 0;
+            g_ScenarioState.state_04 = 0xD;
+            Game_SetScriptActive();
+            return 1;
+        }
+        if (!SYS_TestFlag(g_SceneFlags, 0x14) && (u32)(x - TO_COORD(57)) <= TO_COORD_HALF(2) && (u32)(y - TO_COORD(72)) <= TO_COORD(1)) {
+            Game_SetScriptActive();
+            g_ScriptVars[0]          = 0x31;
+            g_ScenarioState.step_05  = 0;
+            g_ScenarioState.state_04 = 0xE;
+            return 1;
+        }
+        if (!SYS_TestFlag(g_SceneFlags, 0x18) && (u32)(y - TO_COORD(52)) <= TO_COORD_HALF(1) && x == TO_COORD_HALF(32)) {
+            g_ScenarioState.step_05  = 0xA;
+            g_ScriptVars[0]          = 0;
+            g_ScenarioState.state_04 = 0xF;
+            return 1;
+        }
+    }
+    if (g_GameAreaId == AREA_ID_MCNEIL_MANOR_ROOF) {
+        if (!SYS_TestFlag(g_SceneFlags, 0x19) && (x == TO_COORD(35) || x == TO_COORD_HALF(35)) && (u32)(y - TO_COORD(95)) <= TO_COORD(1)) {
+            Game_SetScriptActive();
+            g_ScenarioState.step_05  = 0;
+            g_ScenarioState.state_04 = 0x11;
+            return 1;
+        }
+    }
+    return 0;
 }
-#else
-INCLUDE_ASM(func_801FD780);
-#endif
 
 /* func_801FE178 */
 MATCH void Party_JoinRei(void) {
