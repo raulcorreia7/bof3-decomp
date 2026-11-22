@@ -38,7 +38,8 @@ MATCH void Effect_DrawFlameColumn(void) {
         setRGB3(prim, 0x80, 0x80, 0x20);
         prim->clut  = GetClut(0, 506);
         prim->tpage = GetTPage(TPAGE_DEPTH_4BIT, TPAGE_ABR_ADD, 832, 256);
-        setUV4(prim, 0x80 - g_ScratchPad.cells.halves[4], (i - 3) * 6 + 0x20 + step, 0x80, (i - 3) * 6 + 0x20 + step, 0x80 - g_ScratchPad.cells.halves[5], (i - 4) * 6 + 0x20 + step, 0x80, (i - 4) * 6 + 0x20 + step);
+        setUV4(prim, 0x80 - g_ScratchPad.cells.halves[4], (i - 3) * 6 + 0x20 + step, 0x80, (i - 3) * 6 + 0x20 + step, 0x80 - g_ScratchPad.cells.halves[5], (i - 4) * 6 + 0x20 + step, 0x80,
+               (i - 4) * 6 + 0x20 + step);
         Area_CellAddPrim(g_Task->pos.x.fixed, g_Task->pos.y.fixed, 2, sizeof(POLY_GT4));
 
         prim = (POLY_GT4*)g_GfxPrimCursor;
@@ -56,7 +57,8 @@ MATCH void Effect_DrawFlameColumn(void) {
         setRGB3(prim, 0xA0, 0x20, 0x20);
         prim->clut  = GetClut(0, 506);
         prim->tpage = GetTPage(TPAGE_DEPTH_4BIT, TPAGE_ABR_ADD, 832, 256);
-        setUV4(prim, 0x80, (i - 3) * 6 + 0x20 + step, g_ScratchPad.cells.halves[4] + 0x80, (i - 3) * 6 + 0x20 + step, 0x80, (i - 4) * 6 + 0x20 + step, g_ScratchPad.cells.halves[5] + 0x80, (i - 4) * 6 + 0x20 + step);
+        setUV4(prim, 0x80, (i - 3) * 6 + 0x20 + step, g_ScratchPad.cells.halves[4] + 0x80, (i - 3) * 6 + 0x20 + step, 0x80, (i - 4) * 6 + 0x20 + step, g_ScratchPad.cells.halves[5] + 0x80,
+               (i - 4) * 6 + 0x20 + step);
         Area_CellAddPrim(g_Task->pos.x.fixed, g_Task->pos.y.fixed, 2, sizeof(POLY_GT4));
 
         prim = (POLY_GT4*)g_GfxPrimCursor;
@@ -74,7 +76,8 @@ MATCH void Effect_DrawFlameColumn(void) {
         setRGB3(prim, 0x80, 0x20, 0x20);
         prim->clut  = GetClut(0, 506);
         prim->tpage = GetTPage(TPAGE_DEPTH_4BIT, TPAGE_ABR_ADD, 832, 256);
-        setUV4(prim, 0x80 - g_ScratchPad.cells.halves[6], (i - 3) * 6 + 0x20 + step * 2, 0x80 - g_ScratchPad.cells.halves[4], (i - 3) * 6 + 0x20 + step * 2, 0x80 - g_ScratchPad.cells.halves[7], (i - 4) * 6 + 0x20 + step * 2, 0x80 - g_ScratchPad.cells.halves[5], (i - 4) * 6 + 0x20 + step * 2);
+        setUV4(prim, 0x80 - g_ScratchPad.cells.halves[6], (i - 3) * 6 + 0x20 + step * 2, 0x80 - g_ScratchPad.cells.halves[4], (i - 3) * 6 + 0x20 + step * 2, 0x80 - g_ScratchPad.cells.halves[7],
+               (i - 4) * 6 + 0x20 + step * 2, 0x80 - g_ScratchPad.cells.halves[5], (i - 4) * 6 + 0x20 + step * 2);
         Area_CellAddPrim(g_Task->pos.x.fixed, g_Task->pos.y.fixed, 2, sizeof(POLY_GT4));
 
         prim = (POLY_GT4*)g_GfxPrimCursor;
@@ -92,7 +95,8 @@ MATCH void Effect_DrawFlameColumn(void) {
         setRGB3(prim, 1, 1, 1);
         prim->clut  = GetClut(0, 506);
         prim->tpage = GetTPage(TPAGE_DEPTH_4BIT, TPAGE_ABR_ADD, 832, 256);
-        setUV4(prim, 0x80 - g_ScratchPad.cells.halves[4], (i - 3) * 6 + 0x20 + step * 2, 0x80 - g_ScratchPad.cells.halves[6], (i - 3) * 6 + 0x20 + step * 2, 0x80 - g_ScratchPad.cells.halves[5], (i - 4) * 6 + 0x20 + step * 2, 0x80 - g_ScratchPad.cells.halves[7], (i - 4) * 6 + 0x20 + step * 2);
+        setUV4(prim, 0x80 - g_ScratchPad.cells.halves[4], (i - 3) * 6 + 0x20 + step * 2, 0x80 - g_ScratchPad.cells.halves[6], (i - 3) * 6 + 0x20 + step * 2, 0x80 - g_ScratchPad.cells.halves[5],
+               (i - 4) * 6 + 0x20 + step * 2, 0x80 - g_ScratchPad.cells.halves[7], (i - 4) * 6 + 0x20 + step * 2);
         Area_CellAddPrim(g_Task->pos.x.fixed, g_Task->pos.y.fixed, 2, sizeof(POLY_GT4));
     }
 }

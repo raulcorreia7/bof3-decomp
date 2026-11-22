@@ -1,14 +1,14 @@
-#include "area075_13.h"
-
-#ifdef NON_MATCHING
-/* Draws a window panel in four quads (edges and two halves of the middle), then its frame. */
-NON_MATCHING void func_801F4A50(s16 x, s16 y, s16 width, s16 height, u8 mode) {
+/* Draws a window panel in four quads (the edges and two halves of the middle), then its frame. Every change must verify every member. */
+/* area042/13 (0x801F4B0C), area075/13 (0x801F4A50) */
+MATCH void UI_WindowDrawPanel(s16 x, s16 y, s16 width, s16 height, u8 mode) {
     RECT*     texture_window;
     POLY_FT4* primitive;
     s32       color;
     u8        abr;
     s16       half;
     u16       odd;
+    s16       bottom_y;
+    u8        bottom_v;
 
     color = 0xAC;
     if (mode != 0) {
@@ -66,27 +66,15 @@ NON_MATCHING void func_801F4A50(s16 x, s16 y, s16 width, s16 height, u8 mode) {
     primitive = (POLY_FT4*)g_GfxPrimCursor;
     SetPolyFT4(primitive);
     SetSemiTrans(primitive, 1);
-    primitive->x2 = x + width - 2;
+    setXY4(primitive, x + width - 2, y, x + width, y, x + width - 2, y + height, x + width, y + height);
+    setUV4(primitive, 0, 0, 2, 0, 0, height, 2, height);
     setRGB0(primitive, color, color, color);
-    primitive->x0 = x + width - 2;
-    primitive->y2 = y + height;
-    primitive->v2 = height;
-    primitive->x1 = x + width;
-    primitive->x3 = x + width;
-    primitive->y1 = y;
-    primitive->u1 = 2;
-    primitive->u3 = 2;
-    primitive->y3 = y + height;
-    primitive->u0 = 0;
-    primitive->v0 = 0;
-    primitive->y0 = y;
-    primitive->u2 = 0;
-    primitive->v3 = height;
-    primitive->v1 = 0;
-    primitive->y2 -= 1;
-    primitive->v2 -= 1;
+    bottom_y = primitive->y2 - 1;
+    bottom_v = primitive->v2 - 1;
     primitive->y1 += 2;
     primitive->y3 -= 3;
+    primitive->y2 = bottom_y;
+    primitive->v2 = bottom_v;
     primitive->v1 += 2;
     primitive->v3 -= 3;
     primitive->clut  = GetClut((mode << 5) | 0x10, 0x1E1);
@@ -103,6 +91,3 @@ NON_MATCHING void func_801F4A50(s16 x, s16 y, s16 width, s16 height, u8 mode) {
     GFX_AddPrim(GFX_LAYER_UI, sizeof(DR_MODE));
     UI_WindowDrawFrame(x + 2, y + 2, width - 5, height - 5, mode);
 }
-#else
-INCLUDE_ASM(func_801F4A50);
-#endif
