@@ -558,7 +558,7 @@ MATCH void func_801F86D8(void) {
                 actor->type         = 0x20;
                 actor->pos.x.fixed  = MEM_PTR(Coord3, D_801468BC)->x.fixed;
                 actor->pos.y.fixed  = MEM_PTR(Coord3, D_801468BC)->y.fixed;
-                actor->pos.z.fixed  = (Area_SampleHeight(actor->pos.x.fixed, actor->pos.y.fixed) << 16) + 0x800000;
+                actor->pos.z.fixed  = (Area_HeightSample(actor->pos.x.fixed, actor->pos.y.fixed) << 16) + 0x800000;
             }
             g_ScenarioState.step_05 = 12;
             break;
