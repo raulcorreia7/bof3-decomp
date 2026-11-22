@@ -28,6 +28,7 @@ src/overlays/area/area174/13/Scene_WaitEmi.c	Scene_WaitEmi
 src/overlays/area/area188/13/Actor_WalkWhileWithinLimit.c	Actor_WalkWhileWithinLimit
 src/overlays/area/area188/13/GFX_DrawColorFan.c	GFX_DrawColorFan
 src/overlays/area/area189/13/Char_AddFatigue.c	Char_AddFatigue
+src/overlays/area/area196/13/Game_SetCurrentActor.c	Game_SetCurrentActor
 src/overlays/area/shared/Actor_AdvanceOutsidePartyCell.h	Actor_AdvanceOutsidePartyCell
 src/overlays/area/shared/Actor_AdvanceTimer.h	Actor_AdvanceTimer
 src/overlays/area/shared/Actor_AdvanceWhenPartyAway.h	Actor_AdvanceWhenPartyAway
@@ -99,9 +100,9 @@ src/overlays/battle/battle/03/Effect_RotatePosition.c	Effect_RotatePosition
 src/overlays/battle/battle/15/Actor_Clear.c	Actor_Clear
 src/overlays/battle/battle/15/Menu_DrawEquipChoiceWindow.c	Menu_DrawEquipChoiceWindow
 src/overlays/battle/battle/15/Menu_DrawInventoryWindow.c	Menu_DrawInventoryWindow
-src/overlays/battle/battle/15/UI_CursorDrawPanel.c	UI_CursorDrawPanel
 src/overlays/battle/battle/15/Menu_DrawPanelIcon.c	Menu_DrawPanelIcon
 src/overlays/battle/battle/15/Menu_SetPosX_800B23F8.c	Menu_SetPosX_800B23F8
+src/overlays/battle/battle/15/UI_CursorDrawPanel.c	UI_CursorDrawPanel
 src/overlays/battle/battle/15/UI_PanelSlideLeft.c	UI_PanelSlideLeft
 src/overlays/bmagic/magic081/03/magic081_03.h	BattleEffect_GetTarget
 src/overlays/bmagic/magic102/03/BMagic_Effect.c	Area_SceneDrawGroundSprite

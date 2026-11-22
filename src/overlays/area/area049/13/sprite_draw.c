@@ -379,6 +379,8 @@ NON_MATCHING void func_80117E78(s32 brightness, s32 unused) {
     s32       sum;
     long      depth;
     long      flag;
+    /* FAKE: retail frame is 0x50; no statement explains the last 8 bytes. */
+    FAKE_STACK_PADS(u8, 8);
 
     corner = g_ScratchPadVectors;
     for (row = D_801181D4[COORD_INT(TASK(Actor)->pos.x)][1]; row < D_801181D4[COORD_INT(TASK(Actor)->pos.x)][3]; row++) {

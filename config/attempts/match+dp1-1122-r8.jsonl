@@ -1,0 +1,1 @@
+{"function": "emi/etc/shisu/00@0x801D2978", "tried": "three separate saved bytes (frame 0x20, 83 rows) and the v/saved declaration order: the initial g_ShisuBase[0..2] loads stay in a2/a0/a1 against retail a1/v1/a0", "first_diff": "0x801D29D0 lui a1 against lui a2 (the three saved loads rotate)", "score": "63 rows"}
