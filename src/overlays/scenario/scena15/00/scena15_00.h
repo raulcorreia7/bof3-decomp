@@ -52,11 +52,11 @@ void            Area_AddSpark(void);
 /* func_801F7748 */
 bool            Scene_DrawSparks(void);
 void            func_801F79C4(void);
+void            func_801F7FFC(s16 x, s16 y);
+void            func_801F81D8(s16 x, s16 y);
 void            func_801F9500(WorldPos* pos, s32* vx);
 void            func_801F97CC(WorldPos* pos, s32* arg);
 void            func_801F9A20(WorldPos* pos, s32* vx);
-void            func_801F7FFC(s16 x, s16 y);
-void            func_801F81D8(s16 x, s16 y);
 extern Callback D_801FE5CC[];
 extern Callback D_801FE66C[];
 extern Callback D_801FE678[];
@@ -79,9 +79,12 @@ void            func_801F8958(void);
 void            func_801F9020(Coord* position, s32* step);
 void            func_801F92F0(Coord* position, s32* step);
 
+extern s8       D_80147ACF;
+extern s16      D_80147AD6;
 extern Callback jtbl_801F6C6C[6];
 extern u8       D_801FE694[];
 extern u8       D_801FE6C8[];
 extern u8       D_801FE750;
+extern u8       D_801FE754;
 
 #endif

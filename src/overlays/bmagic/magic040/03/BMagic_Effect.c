@@ -203,8 +203,8 @@ MATCH void BMagic_DrawShrinkingRing(void) {
         SetLineF2(line);
         SetSemiTrans(line, 1);
         g_ScratchPad.cells.halves[4] = i << 7;
-        line->x0                     = g_ScratchPad.cells.halves[0] + ((rsin((s16)(i << 7)) * g_ScratchPad.cells.halves[2]) >> 12);
-        line->y0                     = g_ScratchPad.cells.halves[1] + ((rcos(g_ScratchPad.cells.halves[4]) * g_ScratchPad.cells.halves[2]) >> 12);
+        setXY0(line, g_ScratchPad.cells.halves[0] + ((rsin((s16)(i << 7)) * g_ScratchPad.cells.halves[2]) >> 12),
+               g_ScratchPad.cells.halves[1] + ((rcos(g_ScratchPad.cells.halves[4]) * g_ScratchPad.cells.halves[2]) >> 12));
         g_ScratchPad.cells.halves[4] = (i + 1) << 7;
         line->x1                     = g_ScratchPad.cells.halves[0] + ((rsin((s16)((i + 1) << 7)) * g_ScratchPad.cells.halves[2]) >> 12);
         line->y1                     = g_ScratchPad.cells.halves[1] + ((rcos(g_ScratchPad.cells.halves[4]) * g_ScratchPad.cells.halves[2]) >> 12);
