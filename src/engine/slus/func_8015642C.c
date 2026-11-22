@@ -26,14 +26,14 @@ NON_MATCHING void func_8015642C(u8* obj, s32 x, s32 y) {
     } else {
         order = g_AreaDrawMode;
     }
-    index                                 = (FIELD(u8, obj, 3u) & 0xF) - 1;
-    *(s32*)(g_ScratchPad.cells.bytes)     = (x - 0x81) << 7;
-    *(s32*)(g_ScratchPad.cells.bytes + 4) = (y - 0x80) << 7;
-    z                                     = (s16) - (Area_HeightSample((x - 1) << 0x10, y << 0x10) / 2);
-    screen                                = D_1F800034;
-    *(s32*)(g_ScratchPad.cells.bytes + 8) = z;
+    index                             = (FIELD(u8, obj, 3u) & 0xF) - 1;
+    *(s32*)(g_ScratchPad.cells.bytes) = (x - 0x81) << 7;
+    g_ScratchPad.cells.words[1]       = (y - 0x80) << 7;
+    z                                 = (s16) - (Area_HeightSample((x - 1) << 0x10, y << 0x10) / 2);
+    screen                            = D_1F800034;
+    g_ScratchPad.cells.words[2]       = z;
     g_ScratchPadVectors[2].vx = g_ScratchPadVectors[3].vx = *(s32*)(g_ScratchPad.cells.bytes);
-    g_ScratchPadVectors[2].vy = g_ScratchPadVectors[3].vy = *(s32*)(g_ScratchPad.cells.bytes + 4);
+    g_ScratchPadVectors[2].vy = g_ScratchPadVectors[3].vy = g_ScratchPad.cells.words[1];
     g_ScratchPadVectors[1].vz = g_ScratchPadVectors[3].vz = z;
     g_ScratchPadVectors[0].vz = g_ScratchPadVectors[2].vz = z - D_8017F880[index];
     RotTransPers3(&g_ScratchPadVectors[2], &g_ScratchPadVectors[3], &g_ScratchPadVectors[0], (s32*)screen, (s32*)(screen + 2), (s32*)(screen + 4), &depth, &flag);
@@ -69,7 +69,7 @@ NON_MATCHING void func_8015642C(u8* obj, s32 x, s32 y) {
             }
             for (j = 0; j < 4; j++) {
                 g_ScratchPadVectors[j].vx = ((u16(*)[6])D_8017F7A8)[index][part * 2 + (j >> 1)] + *(s32*)(g_ScratchPad.cells.bytes);
-                g_ScratchPadVectors[j].vy = ((u16(*)[6])D_8017F814)[index][part * 2 + (j >> 1)] + *(s32*)(g_ScratchPad.cells.bytes + 4);
+                g_ScratchPadVectors[j].vy = ((u16(*)[6])D_8017F814)[index][part * 2 + (j >> 1)] + g_ScratchPad.cells.words[1];
             }
             RotTransPers4(&g_ScratchPadVectors[0], &g_ScratchPadVectors[1], &g_ScratchPadVectors[2], &g_ScratchPadVectors[3], (s32*)&prim[0].x0, (s32*)&prim[0].x1, (s32*)&prim[1].x0,
                           (s32*)&prim[1].x1, &depth, &flag);

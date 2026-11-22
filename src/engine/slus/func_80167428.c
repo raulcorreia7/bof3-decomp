@@ -18,9 +18,9 @@ NON_MATCHING void func_80167428(void) {
     s8           val4;
     s8           val5;
     void*        tmp8;
-    void*        tmp9;
-    void*        tmp10;
-    void*        tmp11;
+    Actor*       tmp9;
+    Actor*       tmp10;
+    Actor*       tmp11;
     void*        tmp12;
     PartyMember* player;
     Actor*       actor;
@@ -58,10 +58,10 @@ NON_MATCHING void func_80167428(void) {
     if (!(Game_GetInput() & BYTE_MASK)) {
         FIELD(s8, g_Game.current, 0x11Cu) = 3;
         tmp9                              = g_Task;
-        FIELD(u8, tmp9, 0x9u)             = 0U;
-        FIELD(s32, tmp9, 0xCu)            = 0;
-        FIELD(s32, tmp9, 0x10u)           = 0;
-        FIELD(s32, tmp9, 0x14u)           = 0;
+        tmp9->timer                       = 0U;
+        tmp9->vx                          = 0;
+        tmp9->vy                          = 0;
+        tmp9->vz                          = 0;
         g_AreaCameraStep                  = 0;
         g_AreaCameraHeightStep            = 0;
         FIELD(s8, (g_Task), 0x1u)         = 1;
@@ -82,14 +82,14 @@ NON_MATCHING void func_80167428(void) {
             val0 = -val0;
         }
         if ((val2 > TO_COORD(6)) || (val0 > TO_COORD(6)) || (g_GameStateIndex == GAME_REQUEST_AREA_CHANGE)) {
-            tmp10                    = g_Task;
-            FIELD(u8, tmp10, 0x9u)   = 0U;
-            FIELD(s32, tmp10, 0xCu)  = 0;
-            FIELD(s32, tmp10, 0x10u) = 0;
-            FIELD(s32, tmp10, 0x14u) = 0;
-            g_AreaCameraStep         = 0;
-            g_AreaCameraHeightStep   = 0;
-            val4                     = 1;
+            tmp10                  = g_Task;
+            tmp10->timer           = 0U;
+            tmp10->vx              = 0;
+            tmp10->vy              = 0;
+            tmp10->vz              = 0;
+            g_AreaCameraStep       = 0;
+            g_AreaCameraHeightStep = 0;
+            val4                   = 1;
         } else {
             if (g_InputMasks[FIELD_INPUT_RUN] & D_8014625C) {
                 if ((g_AutoRun ^ 1) != 0) {
@@ -107,8 +107,8 @@ NON_MATCHING void func_80167428(void) {
             FIELD(s8, g_Game.current, 0x11Cu) = val5;
             Area_RunWalk();
             func_801C4C48();
-            tmp11                  = g_Task;
-            FIELD(u8, tmp11, 0x9u) = (u8)(FIELD(u8, tmp11, 0x9u) - 1);
+            tmp11        = g_Task;
+            tmp11->timer = (u8)(tmp11->timer - 1);
             Actor_MovementUpdate();
             val4 = 2;
         }
