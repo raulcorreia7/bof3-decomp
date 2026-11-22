@@ -6,7 +6,7 @@
 
 #include "overlays/area/worlds/world03.h"
 /* The scenario flag bytes the trigger tests. */
-extern u8       D_80144EF8[];
+extern u8 D_80144EF8[];
 
 /* The scratchpad work pointer; the dispatch entry bytes select a handler. */
 
