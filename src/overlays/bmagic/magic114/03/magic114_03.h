@@ -22,7 +22,6 @@ void func_801F0004(void);
 void func_801F093C(void);
 
 extern u16 D_80033C00[256];
-extern u16 D_80036C00[256];
 extern u16 D_80037C00[256];
 extern u16 g_BattleEffectPalette[256];
 

@@ -13,6 +13,5 @@ extern BattleEffect D_801EF8C0[];
 #define BMAGIC_EFFECT_COUNT         64
 #define BMAGIC_EFFECT_START_HANDLER Effect_StartOnZeroTick
 #define BMAGIC_EFFECT_SLOT_STEP     func_801EF4E0
-void func_801EED04(void);
 
 #endif

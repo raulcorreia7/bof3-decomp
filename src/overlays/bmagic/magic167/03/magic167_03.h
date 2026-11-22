@@ -12,6 +12,4 @@ extern s32               D_1F80000C;
 extern BMagicEffectSteps D_801EEC04;
 extern Callback          D_801F08B8[];
 
-extern Callback D_801F08C4[];
-
 #endif

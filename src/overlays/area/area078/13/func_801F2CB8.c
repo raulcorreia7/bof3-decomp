@@ -1,13 +1,5 @@
 #include "area078_13.h"
 
 MATCH void func_801F2CB8(void) {
-    MESSAGE_REQUEST_CLEAR();
-    switch (g_UiMessageChoice) {
-        case 0:
-            g_ScriptVars[0] = 0x2B;
-            break;
-        case 1:
-            g_ScriptVars[0] = 0x2C;
-            break;
-    }
+    AREA_SET_MESSAGE_CHOICE_RESULT(0x2B, 0x2C);
 }

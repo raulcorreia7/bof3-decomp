@@ -459,13 +459,17 @@ typedef struct BMagicTint {
 } BMagicTint;
 
 ASSERT_SIZE(BMagicTint, 0x2);
+extern u16 D_80036C00[256];
 
 /* The four scratch vectors the effect draws project their corners from; the flat name keeps the retail
  * bytes, the scratchpad view does not. */
 
 /* Pointers to character-indexed archive ids, one row of two per g_Battle.dragon_form; the caller picks
  * the row's column and g_EmiLoadedCharacterIndex picks the id. */
-extern u16* D_800B499C[][2];
+extern u16*     D_800B499C[][2];
+extern Callback D_801F048C[];
+extern u8       D_801F0548[];
+extern Callback D_801F08C4[];
 
 /* Per-image effect entry points whose name is a different symbol in another
  * overlay; battle/battle/03 keeps its own view. */
@@ -507,6 +511,8 @@ void Effect_DrawSparkleDisc(void);
 void Effect_DrawShadedDisc(void);
 /* Defined in Effect_DrawTexturedQuad.h, which a member includes after its first call. */
 void Effect_DrawTexturedQuad(void);
+/* Defined in shared/BMagic_DispatchEffectMode.h, which a member includes after its first call. */
+void BMagic_DispatchEffectMode(void);
 
 /* Count the task timer up by `increment` and advance the step at `limit`. A statement macro: the member
  * declares u8 timer; `field` is the task's timer member in the image's task type. */
@@ -527,6 +533,7 @@ void Effect_DrawTexturedQuad(void);
 
 /* Prototypes the images of this group share. */
 u32  func_800AF6B8(u32, u32, s32, u32);
+void func_801EED04(void);
 void func_801EED38();
 void func_801EF174();
 void func_801EF250();
@@ -537,6 +544,7 @@ void func_801EF678();
 void func_801EF688();
 void func_801EF724();
 void func_801EF72C();
+void func_801EF7FC(void);
 void func_801EF87C();
 void Effect_SetActorMatrixQuarterRoll();
 void BMagic_DrawDarkRing();

@@ -15,8 +15,5 @@ extern BattleEffect D_801EF724[];
 #define BMAGIC_EFFECT_SPAWN_COUNT 32
 void func_801EF284(void);
 void func_801EF380(void);
-void func_801EED04(void);
-/* func_801EEEF0 */
-void BMagic_DispatchEffectMode(void);
 
 #endif

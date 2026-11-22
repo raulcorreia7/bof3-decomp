@@ -189,7 +189,119 @@ MATCH void func_801D11F4(void) {
     func_801D2DA8();
 }
 
+#ifdef NON_MATCHING
+/* Reads the ingredient list and updates the selected amounts. */
+NON_MATCHING void func_801D14C0(void) {
+    volatile u16* input;
+    u16           buttons;
+    u16           pressed;
+
+    input   = &g_PadStates[0].pressed;
+    buttons = INPUT_REPEATED(*input, PADLup | PADLdown);
+    if (*input != 0) {
+        D_80148364 = 0x2A;
+    }
+    if (buttons & PADLup) {
+        SND_SEPlay(EMI_SE_ID(SND_BANK_COMMON, 0));
+        g_ShisuIngredients.cursor--;
+        if ((s8)g_ShisuIngredients.cursor < 0) {
+            g_ShisuIngredients.cursor = 0xFF;
+            g_MenuStep.sub_step--;
+            D_80148364 = g_ShisuIngredients.command + 0x2B;
+        }
+    } else if (buttons & PADLdown) {
+        SND_SEPlay(EMI_SE_ID(SND_BANK_COMMON, 0));
+        g_ShisuIngredients.cursor++;
+        if (g_ShisuIngredients.cursor >= 4) {
+            g_ShisuIngredients.cursor = 0xFF;
+            g_MenuStep.sub_step--;
+            D_80148364 = g_ShisuIngredients.command + 0x2B;
+        }
+    } else {
+        pressed = *input;
+        if ((pressed & g_InputMasks[MENU_INPUT_CANCEL]) || !(pressed & g_InputMasks[MENU_INPUT_CONFIRM])) {
+            goto update;
+        }
+        switch (g_ShisuIngredients.cursor) {
+            case 0:
+                if (g_ShisuIngredients.held[0] == 0) {
+                    goto empty;
+                }
+                if (g_ShisuIngredients.used[0] != 0) {
+                    goto full;
+                }
+                D_801DA0C1 = 1;
+                g_ShisuIngredients.used[0]++;
+                g_ShisuIngredients.held[0]--;
+                goto selected;
+            case 1:
+                if (g_ShisuIngredients.held[1] == 0) {
+                    goto empty;
+                }
+                if (g_ShisuIngredients.used[1] >= 20) {
+                    goto full;
+                }
+                if (g_ShisuIngredients.used[1] == 0) {
+                    D_801DA049 = 1;
+                }
+                g_ShisuIngredients.used[1]++;
+                g_ShisuIngredients.held[1]--;
+                goto selected;
+            case 2:
+                if (g_ShisuIngredients.used[1] == 0) {
+                    D_80148364 = 0x2F;
+                    goto rejected;
+                }
+                if (g_ShisuIngredients.held[2] == 0) {
+                    goto empty;
+                }
+                if (g_ShisuIngredients.used[2] >= 20) {
+                    goto full;
+                }
+                g_ShisuIngredients.used[2]++;
+                g_ShisuIngredients.held[2]--;
+                goto selected;
+            case 3:
+                if (g_ShisuIngredients.used[0] == 0) {
+                    D_80148364 = 0x30;
+                    goto rejected;
+                }
+                if (g_ShisuIngredients.held[3] == 0) {
+                    goto empty;
+                }
+                if (g_ShisuIngredients.used[3] >= 20) {
+                    goto full;
+                }
+                g_ShisuIngredients.used[3]++;
+                g_ShisuIngredients.held[3]--;
+            selected:
+                SND_SEPlay(EMI_SE_ID(SND_BANK_COMMON, 3));
+                break;
+            empty:
+                D_80148364 = 0x2E;
+                goto rejected;
+            full:
+                D_80148364 = 0x2D;
+            rejected:
+                SND_SEPlay(EMI_SE_ID(SND_BANK_COMMON, 7));
+                break;
+        }
+    }
+update:
+    g_UiPanelTasks[0].active = 1;
+    D_80148334               = D_801483A0 + 7;
+    D_80148336               = D_801483A2 + g_ShisuIngredients.cursor * 13 + 26;
+    g_UiPanelTasks[0].unk_0A = g_ShisuIngredients.cursor;
+    D_801483A6               = g_ShisuIngredients.cursor;
+    if (g_ShisuIngredients.rounds != 0) {
+        D_801DA0FC = D_801DA084 + g_ShisuBaseScale * 0xA00;
+    }
+    func_801D2C0C();
+    func_801D2DA8();
+}
+#else
 INCLUDE_ASM(func_801D14C0);
+#endif
 
 MATCH void func_801D1898(void) {
     Callback handler;

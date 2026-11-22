@@ -946,4 +946,13 @@ void func_801E7720(s16 tile_x, s8 tile_type);
         task->state = 0;              \
     }
 
+/* Return the master panel left to x 150. The member declares task. */
+#define MENU_STEP_PANEL_LEFT()        \
+    task = g_UiPanelCurrent;          \
+    task->pos.x -= MENU_PANEL_STEP_X; \
+    if ((s16)task->pos.x < 150) {     \
+        task->pos.x = 150;            \
+        task->state = 0;              \
+    }
+
 #endif
