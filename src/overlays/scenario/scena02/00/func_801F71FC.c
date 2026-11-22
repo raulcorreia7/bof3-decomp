@@ -26,7 +26,7 @@ MATCH void func_801F71FC(void) {
                 func_801FD6FC(4);
                 SCRIPT_VARS_CLEAR_ALL();
                 g_ScenarioState.state_04 = 0x15;
-                g_ScenarioState.step_05  = 0;
+                g_ScenarioState.step     = 0;
             }
             if (!SYS_TestFlag(g_SceneFlags, 0x20)) {
                 SND_BGMRequest(0xF);
@@ -52,7 +52,7 @@ MATCH void func_801F71FC(void) {
                 g_AreaDrawFlags = 0x1F;
                 break;
             case 4:
-                g_ScenarioState.step_05  = 3;
+                g_ScenarioState.step     = 3;
                 g_ScriptVars[0]          = 0;
                 g_ScenarioState.state_04 = 6;
                 break;
@@ -74,7 +74,7 @@ MATCH void func_801F71FC(void) {
             g_ScenarioState.state_04 = 0x13;
             g_AreaDrawFlags          = 0;
             g_ScriptVars[0]          = 0;
-            g_ScenarioState.step_05  = 0xA;
+            g_ScenarioState.step     = 0xA;
         }
     }
     if (g_GameAreaId == AREA_ID_FARM) {
@@ -88,7 +88,7 @@ MATCH void func_801F71FC(void) {
                     g_ScriptVars[0]          = 0;
                     g_ScriptVars[1]          = 0;
                     *script_phase            = 0;
-                    g_ScenarioState.step_05  = 5;
+                    g_ScenarioState.step     = 5;
                     g_ScriptVars[3]          = 0;
                     g_ScenarioState.state_04 = 0x12;
                 }
@@ -107,14 +107,14 @@ MATCH void func_801F71FC(void) {
             Game_SetScriptActive();
             g_GameFlags |= 0x30;
             SCRIPT_VARS_CLEAR_ALL();
-            g_ScenarioState.step_05  = 0;
+            g_ScenarioState.step     = 0;
             g_ScenarioState.state_04 = 2;
         }
     }
     area_id = g_GameAreaId;
     if (area_id == AREA_ID_YRAAL_ROAD || (area_id >= AREA_ID_NUE_CAVE && area_id <= AREA_ID_MOUNT_GLAUS) || area_id == AREA_ID_YRAAL_BATTLEFIELD_BEFORE_NUE || area_id == AREA_ID_WYNDIA_WORLD_MAP) {
         SCRIPT_VARS_CLEAR_ALL();
-        g_ScenarioState.step_05  = 0;
+        g_ScenarioState.step     = 0;
         g_ScenarioState.state_04 = 0;
         g_ScenarioState.timer_06 = 0;
     }
@@ -131,18 +131,18 @@ MATCH void func_801F71FC(void) {
                 break;
             case 1:
                 if (!SYS_TestFlag(g_SceneFlags, 7)) {
-                    g_ScriptVars[0]         = 0;
-                    g_ScriptVars[1]         = 0;
-                    g_ScriptVars[3]         = 0;
-                    g_ScenarioState.step_05 = 4;
+                    g_ScriptVars[0]      = 0;
+                    g_ScriptVars[1]      = 0;
+                    g_ScriptVars[3]      = 0;
+                    g_ScenarioState.step = 4;
                 }
                 break;
             case 3:
                 if (!SYS_TestFlag(g_SceneFlags, 0xC)) {
-                    g_ScriptVars[0]         = 0;
-                    g_ScriptVars[1]         = 0;
-                    g_ScriptVars[3]         = 0;
-                    g_ScenarioState.step_05 = 0xF;
+                    g_ScriptVars[0]      = 0;
+                    g_ScriptVars[1]      = 0;
+                    g_ScriptVars[3]      = 0;
+                    g_ScenarioState.step = 0xF;
                 }
                 break;
         }
@@ -178,7 +178,7 @@ MATCH void func_801F71FC(void) {
                     *script_phase            = 0;
                     g_ScriptVars[3]          = 0;
                     g_AreaDrawFlags          = 0;
-                    g_ScenarioState.step_05  = 0;
+                    g_ScenarioState.step     = 0;
                     g_ScenarioState.state_04 = 0x10;
                 }
                 break;
@@ -203,7 +203,7 @@ MATCH void func_801F71FC(void) {
     }
     if (g_GameAreaId == AREA_ID_YRAAL_WORLD_MAP) {
         SCRIPT_VARS_CLEAR_ALL();
-        g_ScenarioState.step_05  = 0;
+        g_ScenarioState.step     = 0;
         g_ScenarioState.state_04 = 0;
         g_ScenarioState.timer_06 = 0;
         if ((D_80146871 & 1) != 0 && g_GameLastAreaId == AREA_ID_CAMP_ANGEL_TOWER) {

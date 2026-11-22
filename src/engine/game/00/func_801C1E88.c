@@ -1,7 +1,7 @@
 #include "game_00.h"
 
 MATCH void func_801C1E88(s32 key, s32* counter) {
-    s32 step;
+    s32 room_index;
     s32 outer;
     s32 total;
     s32 inner;
@@ -12,9 +12,9 @@ MATCH void func_801C1E88(s32 key, s32* counter) {
     outer = 0;
     val   = 4;
     key &= BYTE_MASK;
-    step = 0;
+    room_index = 0;
     do {
-        if ((g_FairyRooms[step] == val) && (g_FairyRooms[1 + step] == key)) {
+        if ((g_FairyRooms[room_index] == val) && (g_FairyRooms[1 + room_index] == key)) {
             next  = outer + 1;
             inner = 0;
             do {
@@ -25,7 +25,7 @@ MATCH void func_801C1E88(s32 key, s32* counter) {
             } while (inner < FAIRY_JOB_COUNT * FAIRY_JOB_STRIDE);
         }
         outer += 1;
-        step += 8;
+        room_index += 8;
     } while (outer < 8);
     if (!(total & BYTE_MASK)) {
         *counter += 1;

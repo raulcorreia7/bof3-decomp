@@ -173,7 +173,7 @@ typedef union ActorRole {
     u8 scene_record_id; /* the scene record Area_SceneSelectRecord selects */
     u8 facing;
     u8 scene_event_flag;
-    u8 turn_step;
+    u8 turn_delta;
 } ActorRole;
 
 ASSERT_SIZE(ActorRole, 1);
@@ -287,12 +287,12 @@ typedef struct ActorTurnRamp {
     s8  frames_xy; /* 0x01 */
     s8  frames_z;  /* 0x02 */
     u8  unk_03;    /* 0x03 */
-    s32 step_x;    /* 0x04 */
-    s32 step_y;    /* 0x08 */
-    s32 step_z;    /* 0x0C */
+    s32 delta_x;   /* 0x04 */
+    s32 delta_y;   /* 0x08 */
+    s32 delta_z;   /* 0x0C */
 } ActorTurnRamp;
 
-ASSERT_OFFSET(ActorTurnRamp, step_z, 0x0C);
+ASSERT_OFFSET(ActorTurnRamp, delta_z, 0x0C);
 ASSERT_SIZE(ActorTurnRamp, 0x10);
 
 /* The four party slots and the entry a non-party actor uses. */

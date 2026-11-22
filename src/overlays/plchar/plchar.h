@@ -23,35 +23,35 @@
 
 /* The same step with the two switch cases written in the given order: a member whose
  * retail switch tests the 0x41 facing first passes the 0x41 case first. */
-#define CHAR_RUN_STEP_CASES(FIRST_FACING, FIRST_SCRIPT, SECOND_FACING, SECOND_SCRIPT)       \
-    if (TASK(Actor)->direction == TASK(Actor)->unk_03) {                                    \
-        switch (TASK(Actor)->direction) {                                                   \
-            case FIRST_FACING:                                                              \
-                Script_Request(FIRST_SCRIPT);                                               \
-                break;                                                                      \
-            case SECOND_FACING:                                                             \
-                Script_Request(SECOND_SCRIPT);                                              \
-                break;                                                                      \
-        }                                                                                   \
-        TASK(Actor)->header.step++;                                                         \
-    } else {                                                                                \
-        TASK(Actor)->timer--;                                                               \
-        if (TASK(Actor)->timer == 0) {                                                      \
-            TASK(Actor)->timer     = 2;                                                     \
-            TASK(Actor)->direction = TASK(Actor)->direction + TASK(Actor)->param.turn_step; \
-            TASK(Actor)->direction &= 7;                                                    \
-            Script_Request(TASK(Actor)->direction);                                         \
-        }                                                                                   \
+#define CHAR_RUN_STEP_CASES(FIRST_FACING, FIRST_SCRIPT, SECOND_FACING, SECOND_SCRIPT)        \
+    if (TASK(Actor)->direction == TASK(Actor)->unk_03) {                                     \
+        switch (TASK(Actor)->direction) {                                                    \
+            case FIRST_FACING:                                                               \
+                Script_Request(FIRST_SCRIPT);                                                \
+                break;                                                                       \
+            case SECOND_FACING:                                                              \
+                Script_Request(SECOND_SCRIPT);                                               \
+                break;                                                                       \
+        }                                                                                    \
+        TASK(Actor)->header.step++;                                                          \
+    } else {                                                                                 \
+        TASK(Actor)->timer--;                                                                \
+        if (TASK(Actor)->timer == 0) {                                                       \
+            TASK(Actor)->timer     = 2;                                                      \
+            TASK(Actor)->direction = TASK(Actor)->direction + TASK(Actor)->param.turn_delta; \
+            TASK(Actor)->direction &= 7;                                                     \
+            Script_Request(TASK(Actor)->direction);                                          \
+        }                                                                                    \
     }
 
 /* Starts the character's walk route: picks the direction away from the work record's current route index with the resident selector (Actor_GetTurnStep), stores it in the direction byte at +0x03, arms the step timer at +0x09 and advances the task state at +0x02. The body of every PlChar_StartTurn member; each passes the two facing values it turns between. */
 #define CHAR_START_TURN(FACING_BACK, FACING_AWAY)                                                \
     if (abs(TASK(Actor)->direction - FACING_BACK) > abs(TASK(Actor)->direction - FACING_AWAY)) { \
-        TASK(Actor)->param.turn_step = Actor_GetTurnStep(FACING_AWAY);                           \
-        TASK(Actor)->unk_03          = FACING_AWAY;                                              \
+        TASK(Actor)->param.turn_delta = Actor_GetTurnStep(FACING_AWAY);                          \
+        TASK(Actor)->unk_03           = FACING_AWAY;                                             \
     } else {                                                                                     \
-        TASK(Actor)->param.turn_step = Actor_GetTurnStep(FACING_BACK);                           \
-        TASK(Actor)->unk_03          = FACING_BACK;                                              \
+        TASK(Actor)->param.turn_delta = Actor_GetTurnStep(FACING_BACK);                          \
+        TASK(Actor)->unk_03           = FACING_BACK;                                             \
     }                                                                                            \
     TASK(Actor)->timer = 2;                                                                      \
     TASK(Actor)->header.step++
@@ -120,8 +120,8 @@
     Script_Request((TASK(Actor)->direction >> 1) + 0x42); \
     TASK(Actor)->header.step++
 
-void PlChar_SpawnActor(s32 spawn_type, s32 spawn_x, s32 spawn_y);
-void PlChar_SpawnLinkedActor(s32 spawn_type, s32 spawn_x, s32 spawn_y, s32 code);
+void PlChar_SpawnActor(s32 spawn_type, s32 vx, s32 spawn_y);
+void PlChar_SpawnLinkedActor(s32 spawn_type, s32 vx, s32 spawn_y, s32 code);
 
 #define CHAR_CELL_CODE_BLOCKS_CHARACTER(cell) ((u8)((cell) + 0x10) < 2 || ((cell) & BYTE_MASK) == 0xF4 || (u8)((cell) + 0xA) < 2)
 

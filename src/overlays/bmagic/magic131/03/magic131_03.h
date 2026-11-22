@@ -11,6 +11,8 @@ extern Callback D_801F1BF4[];
 void            func_801F10F4(void);
 
 extern Callback D_801F1C08[];
+/* The ring UV rows held in the table's first words, read by func_801F06B4. */
+extern u8       g_BMagicRingUvRows[];
 extern u8       D_801F1C38[];
 extern u8       D_801F1C54[];
 extern u8       D_801F1C74[];

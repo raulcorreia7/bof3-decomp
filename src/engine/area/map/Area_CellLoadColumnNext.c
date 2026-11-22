@@ -7,18 +7,18 @@
 MATCH void Area_CellLoadColumnNext(void) {
     s32       row;
     s32       rotCol;
-    s32       rotRow;
+    s32       grid_row;
     AreaCell* cell;
 
     rotCol = 0;
     if (g_AreaGridColCursor != AREA_CELL_GRID_COLS - 1) {
         rotCol = g_AreaGridColCursor + 1;
     }
-    rotRow = g_AreaGridRowCursor;
+    grid_row = g_AreaGridRowCursor;
     for (row = 0; row < AREA_CELL_GRID_ROWS; row++) {
-        rotRow = (rotRow == AREA_CELL_GRID_ROWS - 1) ? 0 : rotRow + 1;
-        cell   = &g_AreaCells[rotRow][rotCol];
-        Area_CellRequestRows(cell);
+        grid_row = (grid_row == AREA_CELL_GRID_ROWS - 1) ? 0 : grid_row + 1;
+        cell     = &g_AreaCells[grid_row][rotCol];
+        Area_CellReleasePrims(cell);
         Area_CellGet(row, AREA_CELL_GRID_COLS, cell);
     }
     g_AreaGridColCursor = rotCol;

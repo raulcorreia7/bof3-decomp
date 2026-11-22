@@ -8,34 +8,34 @@ __asm__(".include \"include/match/macro.inc\"\n");
 MATCH void func_801FA0A4(void) {
     u16 timer;
 
-    switch (g_ScenarioState.step_05) {
+    switch (g_ScenarioState.step) {
         case 0:
             Scene_SetupParty(0);
-            g_ScenarioState.step_05 = 1;
+            g_ScenarioState.step = 1;
             break;
 
         case 1:
             if (g_ScriptVars[0] == 4) {
                 UI_ModeSet(0);
                 g_ScenarioState.timer_06 = 60;
-                g_ScenarioState.step_05  = 2;
+                g_ScenarioState.step     = 2;
             }
             break;
 
         case 2:
             if (g_UiWindowEffectBusy == 0) {
                 UI_MessageStartArea(MSG_SCENA03_032);
-                g_GameStateIndex        = 2;
-                g_AreaDrawFlags         = 0;
-                g_ScenarioState.step_05 = 3;
+                g_GameStateIndex     = 2;
+                g_AreaDrawFlags      = 0;
+                g_ScenarioState.step = 3;
             }
             break;
 
         case 3:
             if (g_GameStateIndex != 2) {
                 Game_RequestAreaChange(AREA_ID_WYNDIA_LOWER, TO_COORD(45), TO_COORD(40), 0x81);
-                g_GameEntryMode         = 0xFF;
-                g_ScenarioState.step_05 = 4;
+                g_GameEntryMode      = 0xFF;
+                g_ScenarioState.step = 4;
             }
             break;
 
@@ -43,13 +43,13 @@ MATCH void func_801FA0A4(void) {
             if (g_UiWindowEffectBusy == 0) {
                 g_ScriptVars[0]++;
                 Game_ClearScriptActive();
-                g_ScenarioState.step_05 = 5;
+                g_ScenarioState.step = 5;
             }
             break;
 
         case 5:
             if (g_GameStateIndex == 2 && g_UiMessageRequest == 0x33) {
-                g_ScenarioState.step_05 = 10;
+                g_ScenarioState.step = 10;
             }
             break;
 
@@ -63,12 +63,12 @@ MATCH void func_801FA0A4(void) {
             SYS_SetFlag(g_SceneFlags, 0x15);
             g_ScriptVars[0] = 1;
             Game_RequestAreaChange(AREA_ID_WYNDIA_LOWER, TO_COORD(45), TO_COORD(40), 0x82);
-            g_ScenarioState.step_05 = 7;
+            g_ScenarioState.step = 7;
             break;
 
         case 7:
             if (g_UiWindowEffectBusy == 0) {
-                g_ScenarioState.step_05 = 8;
+                g_ScenarioState.step = 8;
                 g_ScriptVars[0]++;
             }
             break;
@@ -78,7 +78,7 @@ MATCH void func_801FA0A4(void) {
                 g_ScriptVars[0] = 0;
                 Game_ClearScriptActive();
                 g_ScenarioState.state_04 = 0;
-                g_ScenarioState.step_05  = 0;
+                g_ScenarioState.step     = 0;
             }
             break;
 
@@ -87,7 +87,7 @@ MATCH void func_801FA0A4(void) {
 
         case 10:
             if (g_GameStateIndex != 2) {
-                g_ScenarioState.step_05 = 5;
+                g_ScenarioState.step = 5;
                 D_80146258 &= ~0x100;
             }
             break;

@@ -7,7 +7,7 @@ NON_MATCHING void Fishing_ReelGaugeUpdate(void) {
     s16             line;
     s16             origin_y;
     s16             gap;
-    s16             row_limit;
+    s16             y_limit;
     s16             origin_y_now;
     s16             cursor_limit;
     s16             marker_top;
@@ -21,11 +21,11 @@ NON_MATCHING void Fishing_ReelGaugeUpdate(void) {
     s32             scroll;
     s8              limit;
     u8**            prim;
-    u8              row_flags;
+    u8              reel_size;
     u8              timer;
     register Actor* work;
     void*           work_now;
-    void*           work_row;
+    void*           task;
 
     Fishing_SetDrawMode(0, 2);
     Fishing_DrawSprite(0x11, 2, 135, 180);
@@ -51,21 +51,21 @@ NON_MATCHING void Fishing_ReelGaugeUpdate(void) {
             work->timer = 0U;
         }
     }
-    work_row                    = g_Task;
-    origin_y_now                = (u16)(FIELD(s16, work_row, 0x30u)) + FIELD(s32, work_row, 0x10u);
-    FIELD(s16, work_row, 0x30u) = origin_y_now;
-    step_bytes                  = g_FishingRodRow->reel_cursor_size * 4;
-    cursor_limit                = step_bytes - 36;
+    task                    = g_Task;
+    origin_y_now            = (u16)(FIELD(s16, task, 0x30u)) + FIELD(s32, task, 0x10u);
+    FIELD(s16, task, 0x30u) = origin_y_now;
+    step_bytes              = g_FishingRodRow->reel_cursor_size * 4;
+    cursor_limit            = step_bytes - 36;
     if (origin_y_now >= cursor_limit) {
         gap          = 36 - step_bytes;
         cursor_limit = gap;
         if (gap >= origin_y_now) {
-            cursor_limit = (s16)(u16)(FIELD(s16, work_row, 0x30u));
+            cursor_limit = (s16)(u16)(FIELD(s16, task, 0x30u));
         }
     }
-    prim                        = &g_GfxPrimCursor;
-    prim                        = (u8**)g_GfxPrimCursor;
-    FIELD(s16, work_row, 0x30u) = cursor_limit;
+    prim                    = &g_GfxPrimCursor;
+    prim                    = (u8**)g_GfxPrimCursor;
+    FIELD(s16, task, 0x30u) = cursor_limit;
     SetLineF2((LINE_F2*)prim);
     FIELD(s16, prim, 0x8u) = 185;
     FIELD(s16, prim, 0xCu) = 185;
@@ -76,16 +76,16 @@ NON_MATCHING void Fishing_ReelGaugeUpdate(void) {
     FIELD(s8, prim, 0x6u)  = 0x80;
     GFX_AddPrim(GFX_LAYER_EFFECT_FRONT, sizeof(LINE_F2));
     work_now     = g_Task;
-    row_flags    = g_FishingRodRow->reel_cursor_size;
-    span         = row_flags * 8;
+    reel_size    = g_FishingRodRow->reel_cursor_size;
+    span         = reel_size * 8;
     band         = span + 24;
-    line         = ((u16)(FIELD(s16, work_now, 0x30u)) - (row_flags * 4)) + 173;
+    line         = ((u16)(FIELD(s16, work_now, 0x30u)) - (reel_size * 4)) + 173;
     marker_y_now = line + span + 24;
     marker_y     = marker_y_now;
-    row_limit    = (s8) * (&D_80146892 + (g_FishingHookedFish * 0x98)) + 185;
-    marker_top   = row_limit;
+    y_limit      = (s8) * (&D_80146892 + (g_FishingHookedFish * 0x98)) + 185;
+    marker_top   = y_limit;
     line_y       = line;
-    if ((marker_y_now < row_limit) || (row_limit < line)) {
+    if ((marker_y_now < y_limit) || (y_limit < line)) {
         Fishing_DrawReelCursor(line, 203, band & 0xF8, (FIELD(u8, work_now, 0xAu) & 7) * 2, 2, 1);
     } else {
         Fishing_DrawReelCursor(line, 203, band & 0xF8, (FIELD(u8, work_now, 0xAu) & 7) * 2, 0, 0);

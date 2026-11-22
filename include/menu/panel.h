@@ -163,12 +163,12 @@ ASSERT_SIZE(MenuListPanel, 0x24);
 
 /* Views of MenuPanelTask cells 0x10..0x1F. */
 typedef struct MenuPanelGrow {
-    u16 w;        /* 0x10 current width, 12.4 fixed point */
-    u16 h;        /* 0x12 current height, 12.4 fixed point */
-    u16 step_x;   /* 0x14 width added per frame */
-    u16 step_y;   /* 0x16 height added per frame */
-    u16 target_x; /* 0x18 the x the panel settles at */
-    u16 target_y; /* 0x1A the y the panel settles at */
+    u16 w;            /* 0x10 current width, 12.4 fixed point */
+    u16 h;            /* 0x12 current height, 12.4 fixed point */
+    u16 width_delta;  /* 0x14 width added per frame */
+    u16 height_delta; /* 0x16 height added per frame */
+    u16 target_x;     /* 0x18 the x the panel settles at */
+    u16 target_y;     /* 0x1A the y the panel settles at */
 } MenuPanelGrow;
 
 typedef struct MenuPanelMessage {

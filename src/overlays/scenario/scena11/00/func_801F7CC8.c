@@ -6,14 +6,14 @@ __asm__(".include \"include/match/macro.inc\"\n");
 #endif
 
 MATCH void func_801F7CC8(void) {
-    switch (g_ScenarioState.step_05) {
+    switch (g_ScenarioState.step) {
         case 0:
             if (g_GameStateIndex == 2) {
                 break;
             }
             g_ScriptVars[0] = 1;
             Scene_SetupParty(4);
-            g_ScenarioState.step_05 = 1;
+            g_ScenarioState.step = 1;
             break;
         case 1:
             if (g_ScriptVars[0] != 6) {
@@ -24,7 +24,7 @@ MATCH void func_801F7CC8(void) {
             g_ScriptVars[1]          = 0;
             g_ScriptVars[2]          = 0;
             g_ScriptVars[3]          = 0;
-            g_ScenarioState.step_05  = 0;
+            g_ScenarioState.step     = 0;
             g_ScenarioState.state_04 = 0;
             break;
         case 10:
@@ -33,15 +33,15 @@ MATCH void func_801F7CC8(void) {
             }
             if ((u16)Item_Count(ITEM_CATEGORY_ITEM, ITEM_SHALY_SEED, 0) == 0 || (u16)Item_Count(ITEM_CATEGORY_ITEM, ITEM_VINEGAR, 0) == 0 ||
                 (u16)Item_Count(ITEM_CATEGORY_ITEM, ITEM_HORSERADISH, 0) == 0 || (u16)Item_Count(ITEM_CATEGORY_ITEM, ITEM_MACKEREL, 0) == 0) {
-                g_ScenarioState.step_05 = 0xB;
+                g_ScenarioState.step = 0xB;
             } else {
-                g_ScenarioState.step_05 = 0xF;
+                g_ScenarioState.step = 0xF;
             }
             break;
         case 11:
             UI_MessageStartArea(MSG_SCENA11_053);
-            g_GameStateIndex        = 2;
-            g_ScenarioState.step_05 = 0xC;
+            g_GameStateIndex     = 2;
+            g_ScenarioState.step = 0xC;
             break;
         case 12: {
             u8* progress;
@@ -58,14 +58,14 @@ MATCH void func_801F7CC8(void) {
             g_ScriptVars[1]          = 0;
             g_ScriptVars[2]          = 0;
             g_ScriptVars[3]          = 0;
-            g_ScenarioState.step_05  = 0;
+            g_ScenarioState.step     = 0;
             g_ScenarioState.state_04 = 0;
             break;
         }
         case 15:
             g_ScriptVars[0] = 1;
             Scene_SetupParty(5);
-            g_ScenarioState.step_05 = 0x10;
+            g_ScenarioState.step = 0x10;
             break;
         case 16:
             if (g_GameStateIndex == 2) {
@@ -79,7 +79,7 @@ MATCH void func_801F7CC8(void) {
             g_ScriptVars[1]          = 0;
             g_ScriptVars[2]          = 0;
             g_ScriptVars[3]          = 0;
-            g_ScenarioState.step_05  = 0;
+            g_ScenarioState.step     = 0;
             g_ScenarioState.state_04 = 0;
             break;
     }

@@ -13,7 +13,7 @@ MATCH void Area_CellLoadColumnPrev(void) {
     for (index = 0; index < AREA_CELL_GRID_ROWS; index++) {
         row  = (row == AREA_CELL_GRID_ROWS - 1) ? 0 : row + 1;
         cell = &g_AreaCells[row][g_AreaGridColCursor];
-        Area_CellRequestRows(cell);
+        Area_CellReleasePrims(cell);
         Area_CellGet(index, -1, cell);
     }
     g_AreaGridColCursor = (g_AreaGridColCursor != 0) ? g_AreaGridColCursor - 1 : AREA_CELL_GRID_COLS - 1;

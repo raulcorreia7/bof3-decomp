@@ -8,7 +8,7 @@ __asm__(".include \"include/match/macro.inc\"\n");
 MATCH void func_801F95B8(void) {
     s16 message;
 
-    switch (g_ScenarioState.step_05) {
+    switch (g_ScenarioState.step) {
         case 0:
             D_801FE9D8 = func_8019601C();
             if (D_801FE9D8 != 0xFF) {
@@ -20,7 +20,7 @@ MATCH void func_801F95B8(void) {
                 g_SpawnedActors[D_801FE9D8].layer          = 0x28;
             }
             func_801BE1B0(0);
-            g_ScenarioState.step_05 = 1;
+            g_ScenarioState.step = 1;
             break;
         case 1:
             if (g_ScriptVars[0] == 0xB) {
@@ -29,19 +29,19 @@ MATCH void func_801F95B8(void) {
                     SCENARIO_MESSAGE_WAIT(message, 2);
                 } else {
                     g_ScenarioState.timer_06 = 0xF;
-                    g_ScenarioState.step_05  = 3;
+                    g_ScenarioState.step     = 3;
                 }
             }
             break;
         case 2:
             if (g_GameStateIndex != GAME_REQUEST_MESSAGE) {
-                g_ScenarioState.step_05 = 4;
+                g_ScenarioState.step = 4;
                 g_ScriptVars[0]++;
             }
             break;
         case 3:
             if (--g_ScenarioState.timer_06 == 0) {
-                g_ScenarioState.step_05 = 4;
+                g_ScenarioState.step = 4;
                 g_ScriptVars[0]++;
             }
             break;
@@ -55,7 +55,7 @@ MATCH void func_801F95B8(void) {
                     g_SpawnedActors[D_801FE9D8].camera_angle.y = g_AreaCameraAngle.vy;
                     g_SpawnedActors[D_801FE9D8].camera_angle.z = 0x200;
                     g_SpawnedActors[D_801FE9D8].layer          = 0x14;
-                    g_ScenarioState.step_05                    = 5;
+                    g_ScenarioState.step                       = 5;
                 }
             }
             break;
@@ -64,24 +64,24 @@ MATCH void func_801F95B8(void) {
                 Game_ClearScriptActive();
                 SYS_SetFlag(g_SceneFlags, 0xA);
                 g_ScenarioState.state_04 = 0;
-                g_ScenarioState.step_05  = 0;
+                g_ScenarioState.step     = 0;
             }
             break;
         case 10:
             func_801BE1B0(1);
-            g_ScenarioState.step_05 = 11;
+            g_ScenarioState.step = 11;
             break;
         case 11:
             if (g_ScriptVars[0] == 0xE) {
                 g_ScenarioState.timer_06 = 0x1E;
-                g_ScenarioState.step_05  = 12;
+                g_ScenarioState.step     = 12;
             }
             break;
         case 12:
             if (--g_ScenarioState.timer_06 == 0) {
                 func_8019FA28(0x80, TO_COORD(81), TO_COORD(9), 0x82);
-                g_GamePrevSelection     = 0x3F;
-                g_ScenarioState.step_05 = 13;
+                g_GamePrevSelection  = 0x3F;
+                g_ScenarioState.step = 13;
             }
             break;
         case 13:
@@ -94,7 +94,7 @@ MATCH void func_801F95B8(void) {
                     g_SpawnedActors[D_801FE9D8].camera_angle.y = g_AreaCameraAngle.vy;
                     g_SpawnedActors[D_801FE9D8].camera_angle.z = 0xF8;
                     g_SpawnedActors[D_801FE9D8].layer          = 0x18;
-                    g_ScenarioState.step_05                    = 14;
+                    g_ScenarioState.step                       = 14;
                 }
             }
             break;
@@ -108,7 +108,7 @@ MATCH void func_801F95B8(void) {
                     g_SpawnedActors[D_801FE9D8].camera_angle.y = g_AreaCameraAngle.vy;
                     g_SpawnedActors[D_801FE9D8].camera_angle.z = 0x200;
                     g_SpawnedActors[D_801FE9D8].layer          = 0x18;
-                    g_ScenarioState.step_05                    = 15;
+                    g_ScenarioState.step                       = 15;
                 }
             }
             break;
@@ -122,7 +122,7 @@ MATCH void func_801F95B8(void) {
                     g_SpawnedActors[D_801FE9D8].camera_angle.y = g_AreaCameraAngle.vy;
                     g_SpawnedActors[D_801FE9D8].camera_angle.z = g_AreaCameraAngle.vz;
                     g_SpawnedActors[D_801FE9D8].layer          = 0x18;
-                    g_ScenarioState.step_05                    = 16;
+                    g_ScenarioState.step                       = 16;
                 }
             }
             break;
@@ -136,7 +136,7 @@ MATCH void func_801F95B8(void) {
                     g_SpawnedActors[D_801FE9D8].camera_angle.y = g_AreaCameraAngle.vy;
                     g_SpawnedActors[D_801FE9D8].camera_angle.z = g_AreaCameraAngle.vz;
                     g_SpawnedActors[D_801FE9D8].layer          = 0x18;
-                    g_ScenarioState.step_05                    = 17;
+                    g_ScenarioState.step                       = 17;
                 }
             }
             break;
@@ -145,9 +145,9 @@ MATCH void func_801F95B8(void) {
                 Item_VitalAdd(9);
                 SND_BGMPause(0x3F);
                 SND_XAStartStream(2, 1);
-                D_80144908[0]           = 0;
-                D_80144908[4]           = 0;
-                g_ScenarioState.step_05 = 18;
+                D_80144908[0]        = 0;
+                D_80144908[4]        = 0;
+                g_ScenarioState.step = 18;
             }
             break;
         case 18:
@@ -160,16 +160,16 @@ MATCH void func_801F95B8(void) {
                     g_SpawnedActors[D_801FE9D8].unk_06       = 0x4E;
                     g_SpawnedActors[D_801FE9D8].unk_07       = 3;
                 }
-                g_ScenarioState.step_05 = 19;
+                g_ScenarioState.step = 19;
             }
             break;
         case 19:
             if (g_SpawnedActors[D_801FE9D8].header.flags == 0) {
-                g_ScenarioState.step_05 = 20;
+                g_ScenarioState.step = 20;
             }
             break;
         case 20:
-            g_ScenarioState.step_05 = 21;
+            g_ScenarioState.step = 21;
             g_ScriptVars[0]++;
             break;
         case 21:
@@ -179,7 +179,7 @@ MATCH void func_801F95B8(void) {
                 func_801F9FC4();
                 SYS_SetFlag(g_SceneFlags, 0xB);
                 g_ScenarioState.state_04 = 0;
-                g_ScenarioState.step_05  = 0;
+                g_ScenarioState.step     = 0;
             }
             break;
     }

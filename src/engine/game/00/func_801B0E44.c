@@ -53,7 +53,7 @@ NON_MATCHING u8 func_801B0E44(void) {
                         }
                         g_GameStateIndex = GAME_REQUEST_AREA_CHANGE;
                     }
-                    g_AreaCameraStep = 0;
+                    g_AreaCameraSpeed = 0;
                     return 4;
                 }
                 x = ((s16*)pos2)[-2];
@@ -65,7 +65,7 @@ NON_MATCHING u8 func_801B0E44(void) {
                     if (!(func_801A0048(SP_REF(s16, 0x4), SP_REF(s16, 0x6)) & BYTE_MASK)) {
                         g_GameStateIndex = GAME_REQUEST_AREA_CHANGE;
                     }
-                    g_AreaCameraStep = 0;
+                    g_AreaCameraSpeed = 0;
                     return 1;
                 }
                 x = SP_REF(s16, 0x4);
@@ -82,7 +82,7 @@ NON_MATCHING u8 func_801B0E44(void) {
             result = Area_HeightReadStep(pos3[0], pos3[1], TASK(Actor)->direction);
             if (SP_REF(u8, 0x0) != 0) {
                 if (result >= 0x41) {
-                    g_AreaCameraStep       = 0;
+                    g_AreaCameraSpeed      = 0;
                     TASK(Actor)->direction = saved_dir;
                     return 1;
                 }

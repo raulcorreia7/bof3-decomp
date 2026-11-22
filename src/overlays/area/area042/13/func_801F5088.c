@@ -31,7 +31,7 @@ MATCH void func_801F5088(void) {
             g_SpawnedActors[slot].header.flags                      = ACTOR_FLAG_IN_USE;
             g_SpawnedActors[g_ScratchPad.cells.bytes[0]].type       = 0x28;
             g_SpawnedActors[g_ScratchPad.cells.bytes[0]].unk_06     = 2;
-            g_SpawnedActors[g_ScratchPad.cells.bytes[0]].scene_step = 0x418000;
+            g_SpawnedActors[g_ScratchPad.cells.bytes[0]].vx         = 0x418000;
             g_SpawnedActors[g_ScratchPad.cells.bytes[0]].selection  = 0x108000;
             g_SpawnedActors[g_ScratchPad.cells.bytes[0]].counter_18 = 0x4D8000;
             g_SpawnedActors[g_ScratchPad.cells.bytes[0]].counter_1C = 0x108000;

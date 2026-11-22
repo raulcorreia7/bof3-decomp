@@ -9,5 +9,5 @@ MATCH void func_800C1A34(void) {
     Battle_CenterCamera();
     g_AreaScrollTargetX = g_AreaEncounterPlacement.origin.x.fixed + (LOW(TASK(PartyMember)->pos.x) - g_AreaEncounterPlacement.origin.x.fixed) / 2;
     g_AreaScrollTargetY = g_AreaEncounterPlacement.origin.y.fixed + (LOW(TASK(PartyMember)->pos.y) - g_AreaEncounterPlacement.origin.y.fixed) / 2;
-    g_AreaCameraStep    = 0x20;
+    g_AreaCameraSpeed   = 0x20;
 }

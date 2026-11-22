@@ -43,6 +43,6 @@ MATCH void UI_MessageOpenPanel(void) {
     task->u.grow.w = 0;
     task->u.grow.h = 0;
     task->state += 1;
-    task->u.grow.step_x = ((task->unk_0A * 0x10) / 5);
-    task->u.grow.step_y = ((task->unk_0B * 0x10) / 5);
+    task->u.grow.width_delta  = ((task->unk_0A * 0x10) / 5);
+    task->u.grow.height_delta = ((task->unk_0B * 0x10) / 5);
 }

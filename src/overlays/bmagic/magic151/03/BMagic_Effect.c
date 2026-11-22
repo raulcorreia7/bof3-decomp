@@ -164,7 +164,79 @@ MATCH void func_801EF388(void) {
 }
 
 #ifdef NON_MATCHING
+/* Sets the battle up for the loaded party: frees and resets each active member's effect cells,
+ * rebuilds member zero at the encounter origin, and opens the member panels. */
 NON_MATCHING void func_801EF484(void) {
+    PartyMember* task;
+    s32          i;
+    s32          index;
+    u8           slot;
+    u8           party_count;
+    s16          panel_x;
+    s16          panel_y;
+
+    if (!EMI_IsReady()) {
+        return;
+    }
+    for (i = 0; i < BATTLE_PARTY_CHARACTERS_COUNT; i++) {
+        if (g_Game.members[i].header.flags & 1) {
+            GFX_PaletteFreeFadeTarget(&g_Game.members[i]);
+            D_801EC039[i * BATTLE_PARTY_STRIDE] = 0;
+            D_801EC044[i * BATTLE_PARTY_STRIDE] = 0;
+            D_801EBF47[i * BATTLE_PARTY_STRIDE] = g_Game.members[i].unk_27;
+            func_801DDFEC(i);
+            func_801DD14C(i);
+        }
+    }
+    func_801DE1B0(g_Battle.active_battler);
+    g_Game.members[0]                    = g_Game.members[g_Battle.active_battler];
+    party_count                          = g_Battle.party_count;
+    g_Game.members[0].slot               = 0;
+    g_Game.members[0].pos.x.fixed        = g_EncounterOriginX;
+    g_Game.members[0].pos.y.fixed        = g_EncounterOriginY;
+    g_Game.members[0].pos.z.part.integer = Area_HeightSample(g_EncounterOriginX, g_EncounterOriginY);
+    D_801EC364                           = g_EncounterOriginX;
+    D_801EC368                           = g_EncounterOriginY;
+    D_801EC36C                           = Area_HeightSample(g_Game.members[0].pos.x.fixed, g_Game.members[0].pos.y.fixed) << 16;
+    g_Game.members[1].header.flags       = 0;
+    g_Game.members[2].header.flags       = 0;
+    g_Battle.active_battler              = 0;
+    g_Battle.party_count                 = 1;
+    g_Battle.living_party_count          = 1;
+    g_Battle.flags |= BATTLE_STATE_RELOAD_PARTY;
+    g_Battle.unk_EF[0] = party_count;
+    for (i = 0; i < BATTLE_PARTY_CHARACTERS_COUNT; i++) {
+        if (g_Game.members[i].header.flags & 1) {
+            slot = (u8)(i + 0xD);
+            UI_PanelOpenTask(slot, 3);
+            D_80148332[slot].mode_00 = 5;
+            D_80148332[slot].unk_01  = 0;
+            index                    = g_Game.members[i].facing * CHAR_ID_GARR + g_Game.members[i].chr.character_id * 8;
+            panel_x                  = g_Game.members[i].screen_x.value + D_801EB0B0[index];
+            panel_x                  = D_801EAEA4[(g_Battle.scroll_dir & 0xFE) ^ 0x2] + panel_x;
+            D_80148332[slot].x_02    = panel_x;
+            index                    = g_Game.members[i].facing * CHAR_ID_GARR + g_Game.members[i].chr.character_id * 8;
+            panel_y                  = g_Game.members[i].screen_y.value + D_801EB0B1[index] + 0xC;
+            D_80148332[slot].y_04    = panel_y;
+            D_80148332[slot].battler = i;
+            D_80148332[slot].unk_06  = 0;
+            D_80148332[slot].unk_07  = 0;
+        }
+    }
+    D_80148332[1].x_02    = 0x70;
+    D_80148332[1].battler = g_Battle.party_count;
+    g_Battle.flags &= ~BATTLE_STATE_OVER;
+    task = TASK(PartyMember);
+    TASK_SET(&g_Game.members[g_Battle.active_battler]);
+    func_801DE190(TASK(PartyMember)->slot);
+    TASK(PartyMember)->header.flags &= ~PARTY_MEMBER_FLAG_HANDLER_BUSY;
+    Party_MemberLoadSprite(D_80181B34[g_EmiLoadedCharacterIndex][0], 0);
+    GFX_PaletteLoad(GAME_PALETTE_STAGE + TASK(PartyMember)->slot * 0x40, D_801463B9);
+    func_801DDAB4(g_Game.members[g_Battle.active_battler].chr.status);
+    GFX_PaletteUploadRows();
+    Script_Request((u8)(TASK(PartyMember)->facing + 4));
+    TASK_SET(task);
+    task->unk_03 += 1;
 }
 #else
 INCLUDE_ASM(func_801EF484);
@@ -615,59 +687,126 @@ MATCH void func_801F129C(void) {
 #include "overlays/bmagic/shared/Effect_SetActorMatrixQuarterRoll.h"
 
 #ifdef NON_MATCHING
+/* Draws seventeen bands of four quads each: the ring sways with the effect counter, its radius
+ * jitters by jitter_mask and its bands stack one band_height apart; the shades follow the effect
+ * counter and the first band fades to black. */
 NON_MATCHING void func_801F14D0(s32 band_height, s16 radius, u16 jitter_mask) {
     POLY_G4* prim;
     long     p;
     long     flag;
     s32      tpage;
+    s32      shade_a;
+    s32      shade_b;
     s32      i;
 
-    g_ScratchPad.cells.halves[0] = radius;
-    g_ScratchPad.cells.halves[1] = (TASK(PartyMember)->param.unk_0B & 0xF) << 8;
-    g_ScratchPad.cells.halves[2] = TASK(PartyMember)->timer * 15;
-    g_ScratchPad.cells.halves[3] = TASK(PartyMember)->timer * 2;
-    g_ScratchPad.cells.halves[6] = band_height - RANDOM_MASK(3);
-    g_ScratchPadVectors[0].vy    = FIXED_MUL(rsin(g_ScratchPad.cells.halves[1]), g_ScratchPad.cells.halves[0]);
+    g_ScratchPad.cells.halves[0] = radius / 2;
+    g_ScratchPad.cells.halves[7] = (TASK(PartyMember)->param.unk_0B & 0xF) << 8;
+    g_ScratchPad.cells.halves[5] = TASK(PartyMember)->timer * 15;
+    g_ScratchPad.cells.halves[6] = TASK(PartyMember)->timer * 13;
+    g_ScratchPadVectors[0].vy    = FIXED_MUL(rsin(g_ScratchPad.cells.halves[7]), g_ScratchPad.cells.halves[0]);
     g_ScratchPadVectors[0].vz    = 0;
     tpage                        = getTPage(TPAGE_DEPTH_4BIT, TPAGE_ABR_ADD, 320, 256);
     SetDrawMode((DR_MODE*)g_GfxPrimCursor, 0, 1, tpage, 0);
     Area_CellAddPrim(TASK(PartyMember)->pos.x.fixed, TASK(PartyMember)->pos.y.fixed, 2, sizeof(DR_MODE));
     for (i = 1; i < 18; i++) {
-        g_ScratchPad.cells.halves[1] = ((TASK(PartyMember)->param.unk_0B + i) & 0xF) << 8;
-        if RANDOM_MASK (1) {
+        g_ScratchPad.cells.halves[7] = ((TASK(PartyMember)->param.unk_0B + i) & 0xF) << 8;
+        if (rand() & 1) {
             g_ScratchPad.cells.halves[0] = radius + (jitter_mask & rand());
         } else {
             g_ScratchPad.cells.halves[0] = radius - (jitter_mask & rand());
         }
-        g_ScratchPad.cells.halves[5] = g_ScratchPad.cells.halves[6];
-        g_ScratchPad.cells.halves[6] = band_height - RANDOM_MASK(3);
-        setVector(&g_ScratchPadVectors[2], 0, g_ScratchPadVectors[0].vy, g_ScratchPadVectors[0].vz);
-        setVector(&g_ScratchPadVectors[3], 0, g_ScratchPadVectors[0].vy - g_ScratchPad.cells.halves[5], g_ScratchPadVectors[0].vz);
-        setVector(&g_ScratchPadVectors[0], 0, FIXED_MUL(rsin(g_ScratchPad.cells.halves[1]), g_ScratchPad.cells.halves[0]), -(i << 6));
-        setVector(&g_ScratchPadVectors[1], 0, g_ScratchPadVectors[0].vy - g_ScratchPad.cells.halves[6], -(i << 6));
-        prim = (POLY_G4*)g_GfxPrimCursor;
+        shade_a                   = g_ScratchPad.cells.halves[5];
+        shade_b                   = g_ScratchPad.cells.halves[6];
+        g_ScratchPadVectors[2].vx = 0;
+        g_ScratchPadVectors[3].vx = 0;
+        g_ScratchPadVectors[0].vx = 0;
+        g_ScratchPadVectors[2].vy = g_ScratchPadVectors[0].vy;
+        g_ScratchPadVectors[2].vz = g_ScratchPadVectors[0].vz;
+        g_ScratchPadVectors[3].vy = g_ScratchPadVectors[0].vy - band_height;
+        g_ScratchPadVectors[3].vz = g_ScratchPadVectors[0].vz;
+        g_ScratchPadVectors[0].vz = -(i << 6);
+        g_ScratchPadVectors[1].vx = 0;
+        g_ScratchPadVectors[1].vz = -(i << 6);
+        g_ScratchPadVectors[0].vy = FIXED_MUL(rsin(g_ScratchPad.cells.halves[7]), g_ScratchPad.cells.halves[0]);
+        g_ScratchPadVectors[1].vy = g_ScratchPadVectors[0].vy - band_height;
+        prim                      = (POLY_G4*)g_GfxPrimCursor;
         SetPolyG4(prim);
         SetSemiTrans(prim, 1);
-        setRGB0(prim, g_ScratchPad.cells.halves[2], g_ScratchPad.cells.halves[2], g_ScratchPad.cells.halves[2]);
-        setRGB1(prim, g_ScratchPad.cells.halves[3], g_ScratchPad.cells.halves[3], g_ScratchPad.cells.halves[2]);
-        setRGB2(prim, g_ScratchPad.cells.halves[2], g_ScratchPad.cells.halves[2], g_ScratchPad.cells.halves[2]);
-        setRGB3(prim, g_ScratchPad.cells.halves[3], g_ScratchPad.cells.halves[3], g_ScratchPad.cells.halves[2]);
+        setRGB0(prim, shade_a, shade_a, shade_a);
+        setRGB1(prim, shade_b, 1, shade_b);
         if (i == 1) {
             setRGB2(prim, 1, 1, 1);
             setRGB3(prim, 1, 1, 1);
+        } else {
+            setRGB2(prim, shade_a, shade_a, shade_a);
+            setRGB3(prim, shade_b, 1, shade_b);
         }
         RotTransPers4(&g_ScratchPadVectors[0], &g_ScratchPadVectors[1], &g_ScratchPadVectors[2], &g_ScratchPadVectors[3], (long*)&prim->x0, (long*)&prim->x1, (long*)&prim->x2, (long*)&prim->x3, &p,
                       &flag);
         Area_CellAddPrim(TASK(PartyMember)->pos.x.fixed, TASK(PartyMember)->pos.y.fixed, 2, sizeof(POLY_G4));
+
+        g_ScratchPadVectors[0].vy -= band_height;
+        g_ScratchPadVectors[1].vy -= band_height;
+        g_ScratchPadVectors[2].vy -= band_height;
+        g_ScratchPadVectors[3].vy -= band_height;
+        prim = (POLY_G4*)g_GfxPrimCursor;
+        SetPolyG4(prim);
+        SetSemiTrans(prim, 1);
+        setRGB0(prim, shade_b, 1, shade_b);
+        setRGB1(prim, 1, 1, 1);
+        if (i == 1) {
+            setRGB2(prim, 1, 1, 1);
+        } else {
+            setRGB2(prim, shade_b, 1, shade_b);
+        }
+        setRGB3(prim, 1, 1, 1);
+        RotTransPers4(&g_ScratchPadVectors[0], &g_ScratchPadVectors[1], &g_ScratchPadVectors[2], &g_ScratchPadVectors[3], (long*)&prim->x0, (long*)&prim->x1, (long*)&prim->x2, (long*)&prim->x3, &p,
+                      &flag);
+        Area_CellAddPrim(TASK(PartyMember)->pos.x.fixed, TASK(PartyMember)->pos.y.fixed, 2, sizeof(POLY_G4));
+
+        g_ScratchPadVectors[0].vy += band_height * 2;
+        g_ScratchPadVectors[1].vy += band_height * 2;
+        g_ScratchPadVectors[2].vy += band_height * 2;
+        g_ScratchPadVectors[3].vy += band_height * 2;
+        prim = (POLY_G4*)g_GfxPrimCursor;
+        SetPolyG4(prim);
+        SetSemiTrans(prim, 1);
+        setRGB0(prim, shade_b, 1, shade_b);
+        setRGB1(prim, shade_a, shade_a, shade_a);
+        if (i == 1) {
+            setRGB2(prim, 1, 1, 1);
+            setRGB3(prim, 1, 1, 1);
+        } else {
+            setRGB2(prim, shade_b, 1, shade_b);
+            setRGB3(prim, shade_a, shade_a, shade_a);
+        }
+        RotTransPers4(&g_ScratchPadVectors[0], &g_ScratchPadVectors[1], &g_ScratchPadVectors[2], &g_ScratchPadVectors[3], (long*)&prim->x0, (long*)&prim->x1, (long*)&prim->x2, (long*)&prim->x3, &p,
+                      &flag);
+        Area_CellAddPrim(TASK(PartyMember)->pos.x.fixed, TASK(PartyMember)->pos.y.fixed, 2, sizeof(POLY_G4));
+
+        g_ScratchPadVectors[0].vy += band_height;
+        g_ScratchPadVectors[1].vy += band_height;
+        g_ScratchPadVectors[2].vy += band_height;
+        g_ScratchPadVectors[3].vy += band_height;
+        prim = (POLY_G4*)g_GfxPrimCursor;
+        SetPolyG4(prim);
+        SetSemiTrans(prim, 1);
+        setRGB0(prim, 1, 1, 1);
+        setRGB1(prim, shade_b, 1, shade_b);
+        setRGB2(prim, 1, 1, 1);
+        if (i == 1) {
+            setRGB3(prim, 1, 1, 1);
+        } else {
+            setRGB3(prim, shade_b, 1, shade_b);
+        }
+        RotTransPers4(&g_ScratchPadVectors[0], &g_ScratchPadVectors[1], &g_ScratchPadVectors[2], &g_ScratchPadVectors[3], (long*)&prim->x0, (long*)&prim->x1, (long*)&prim->x2, (long*)&prim->x3, &p,
+                      &flag);
+        Area_CellAddPrim(TASK(PartyMember)->pos.x.fixed, TASK(PartyMember)->pos.y.fixed, 2, sizeof(POLY_G4));
+        g_ScratchPadVectors[0].vy -= band_height * 2;
     }
 }
 #else
-#ifdef NON_MATCHING
-NON_MATCHING void func_801F14D0(void) {
-}
-#else
 INCLUDE_ASM(func_801F14D0);
-#endif
 #endif
 
 MATCH void func_801F1C3C(void) {

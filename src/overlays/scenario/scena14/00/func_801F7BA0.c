@@ -6,12 +6,12 @@ __asm__(".include \"include/match/macro.inc\"\n");
 #endif
 
 MATCH void func_801F7BA0(void) {
-    switch (g_ScenarioState.step_05) {
+    switch (g_ScenarioState.step) {
         case 0:
             if (g_GameStateIndex != GAME_REQUEST_MESSAGE) {
                 g_ScriptVars[0] = 0;
                 Scene_SetupParty(1);
-                g_ScenarioState.step_05 = 1;
+                g_ScenarioState.step = 1;
             }
             break;
         case 1:
@@ -20,11 +20,11 @@ MATCH void func_801F7BA0(void) {
 
                 SYS_SetFlag(g_SceneFlags, 1);
                 Game_RequestAreaChange(AREA_ID_DESERT_OF_DEATH_MAP, TO_COORD(0x1000), TO_COORD(0x1400), FACING_UP_RIGHT);
-                flags                   = &g_ScenarioState.flags_01;
-                D_8014504B              = 2;
-                D_80144F54              = 0;
-                g_ScenarioState.step_05 = 2;
-                g_GamePrevSelection     = g_SndBGMId;
+                flags                = &g_ScenarioState.flags_01;
+                D_8014504B           = 2;
+                D_80144F54           = 0;
+                g_ScenarioState.step = 2;
+                g_GamePrevSelection  = g_SndBGMId;
                 *flags |= 1;
             }
             break;
@@ -36,7 +36,7 @@ MATCH void func_801F7BA0(void) {
         case 3:
             if (g_GameStateIndex != GAME_REQUEST_MESSAGE) {
                 Scene_SpawnActor(0x13, g_AreaCameraAngle.vx, g_AreaCameraAngle.vy, -0x200, 0x20, 0);
-                g_ScenarioState.step_05 = 4;
+                g_ScenarioState.step = 4;
             } else {
                 UI_CursorDraw(0x98, 0x28, 0);
             }
@@ -49,7 +49,7 @@ MATCH void func_801F7BA0(void) {
         case 5:
             if (g_GameStateIndex != GAME_REQUEST_MESSAGE) {
                 Scene_SpawnActor(0x13, g_AreaCameraAngle.vx, g_AreaCameraAngle.vy, 0x400, 0x20, 0);
-                g_ScenarioState.step_05 = 6;
+                g_ScenarioState.step = 6;
             } else {
                 UI_CursorDraw(0x98, 0x38, 0);
             }
@@ -68,7 +68,7 @@ MATCH void func_801F7BA0(void) {
                 Game_RequestAreaChange(AREA_ID_DESERT_ENTRANCE_CAMP, TO_COORD_HALF(26), TO_COORD(28), AREA_ENTRY_MAP_LOADING | FACING_UP_RIGHT);
                 flags                    = &g_ScenarioState.flags_01;
                 g_ScenarioState.state_04 = 0;
-                g_ScenarioState.step_05  = 0;
+                g_ScenarioState.step     = 0;
                 *flags &= ~1;
             } else {
                 UI_CursorDraw(0x98, 0x10, 0);
@@ -77,7 +77,7 @@ MATCH void func_801F7BA0(void) {
         case 20:
         case 25:
             if (g_GameStateIndex != GAME_REQUEST_MESSAGE) {
-                if (g_ScenarioState.step_05 == 20) {
+                if (g_ScenarioState.step == 20) {
                     SYS_ClearFlag(g_SceneEventFlags, 0x77);
                     D_8014504A = 0;
                     Game_RequestAreaChange(AREA_ID_DESERT_ENTRANCE_CAMP, TO_COORD_HALF(26), TO_COORD(28), AREA_ENTRY_MAP_LOADING | FACING_RIGHT);
@@ -91,7 +91,7 @@ MATCH void func_801F7BA0(void) {
                 g_GameRequestType        = GAME_NONE;
                 g_GamePrevSelection      = GAME_NONE;
                 g_ScenarioState.state_04 = 0;
-                g_ScenarioState.step_05  = 0;
+                g_ScenarioState.step     = 0;
                 g_ScenarioState.flags_01 &= ~1;
             }
             break;

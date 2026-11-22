@@ -15,12 +15,12 @@ MATCH void func_801E0044(void) {
 
     work                = TASK(FishingState);
     work->motion.unk_34 = work->motion.unk_34 + work->pos_x;
-    timer               = work->step_timer;
-    work->step_timer    = timer - 1;
+    timer               = work->timer;
+    work->timer         = timer - 1;
     checked             = TASK(FishingState);
     work->y_38.pos_y    = work->y_38.pos_y + work->cursor_10;
     state               = 1;
-    if (checked->step_timer == 0) {
+    if (checked->timer == 0) {
         checked->handler_index = state;
         ended                  = TASK(FishingState);
         value                  = checked->motion.half.unk_34;

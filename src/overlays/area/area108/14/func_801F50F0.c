@@ -12,7 +12,7 @@ NON_MATCHING void func_801F50F0(void) {
             if (--LOHU(D_801448EE) == 0) {
                 g_AreaScrollTargetX = g_PartyActors[1].pos.x.fixed;
                 g_AreaScrollTargetY = g_PartyActors[1].pos.y.fixed;
-                g_AreaCameraStep    = g_RouteSpeedScale[3] * 8;
+                g_AreaCameraSpeed   = g_RouteSpeedScale[3] * 8;
                 g_SceneEventState.step++;
             }
             break;
@@ -39,7 +39,7 @@ NON_MATCHING void func_801F50F0(void) {
                     step                = &g_SceneEventState.step;
                     g_AreaScrollTargetX = g_Game.members[0].pos.x.fixed;
                     g_AreaScrollTargetY = g_Game.members[0].pos.y.fixed;
-                    g_AreaCameraStep    = g_RouteSpeedScale[4] * 8;
+                    g_AreaCameraSpeed   = g_RouteSpeedScale[4] * 8;
                     *step               = (u8)*step + 1;
                 }
             }
@@ -115,7 +115,7 @@ NON_MATCHING void func_801F50F0(void) {
                 g_SceneEventState.step   = 0;
                 g_SceneEventState.mode   = SCENE_EVENT_NONE;
                 g_ScenarioState.state_04 = 3;
-                g_ScenarioState.step_05  = 0;
+                g_ScenarioState.step     = 0;
             }
             break;
     }

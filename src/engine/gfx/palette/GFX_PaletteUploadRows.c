@@ -1,8 +1,8 @@
 #include "engine/game/00/game_00.h"
 
 MATCH void GFX_PaletteUploadRows(void) {
-    u8* work;
-    u32 table_index;
+    Actor* work;
+    u32    table_index;
     /* FAKE: retail keeps the dividend in v1. */
     FAKE_REG(u32, value, "v1");
     /* FAKE: retail keeps the divisor in v0. */
@@ -14,18 +14,18 @@ MATCH void GFX_PaletteUploadRows(void) {
     u32           stride;
     u32           start;
     u32           cell_base;
-    u8*           loop_work;
+    Actor*        loop_work;
     u32           product;
     volatile u16* colors;
     u32           color_index;
 
-    work        = TASK(u8);
-    table_index = work[0x28];
-    value       = work[0x27];
+    work        = TASK(Actor);
+    table_index = work->palette_8bit;
+    value       = work->clut_select;
     divisor     = s_PaletteFadeRowDivisors[table_index];
     quotient    = value / divisor;
     remainder   = value % divisor;
-    flags       = work[0x24];
+    flags       = work->active_flags;
     stride      = s_PaletteFadeStrides[table_index];
     product     = stride * remainder;
     if ((flags & 0x4u) != 0u) {
@@ -41,7 +41,7 @@ MATCH void GFX_PaletteUploadRows(void) {
         do {
             colors[cell_base + color_index] |= PSX_COLOR_STP_BIT;
             color_index++;
-        } while (color_index < (s_PaletteFadeColorCounts[loop_work[0x28]] << 4));
+        } while (color_index < (s_PaletteFadeColorCounts[loop_work->palette_8bit] << 4));
     }
     g_GfxPalettePending = 1u;
 }

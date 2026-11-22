@@ -37,7 +37,7 @@ MATCH void func_801E5738(void) {
         if (*(&g_SaveSlots[0].card_index + (g_SaveSlotFirst * SHOP_ROW_STRIDE)) != GAME_NONE) {
             SND_SEPlay(EMI_SE_ID(SND_BANK_COMMON, 4));
             D_8014865B = 1;
-            g_MenuStartStep++;
+            g_MenuCampStep++;
             return;
         }
         SND_SEPlay(EMI_SE_ID(SND_BANK_COMMON, 7));
@@ -45,6 +45,6 @@ MATCH void func_801E5738(void) {
     }
     if (g_PadStates[0].pressed & g_InputMasks[MENU_INPUT_CANCEL]) {
         SND_SEPlay(EMI_SE_ID(SND_BANK_COMMON, 6));
-        g_MenuStartStep = 0xC;
+        g_MenuCampStep = 0xC;
     }
 }

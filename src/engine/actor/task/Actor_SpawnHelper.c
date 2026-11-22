@@ -5,7 +5,7 @@
  * three coordinate fields; a slot index of 0xFF is left untouched.
  */
 /* func_8015CC00 */
-MATCH s32 Actor_SpawnHelper(u8 id, s32 step, s32 selection, s32 x, s32 y, s32 z) {
+MATCH s32 Actor_SpawnHelper(u8 id, s32 vx, s32 selection, s32 x, s32 y, s32 z) {
     s32 actor_slot;
     u32 offset;
 
@@ -15,7 +15,7 @@ MATCH s32 Actor_SpawnHelper(u8 id, s32 step, s32 selection, s32 x, s32 y, s32 z)
         g_SpawnedActors[actor_slot].header.flags = 1;
         g_SpawnedActors[actor_slot].type         = 0x19;
         g_SpawnedActors[actor_slot].unk_06       = id;
-        g_SpawnedActors[actor_slot].scene_step   = (s8)step;
+        g_SpawnedActors[actor_slot].vx           = (s8)vx;
         g_SpawnedActors[actor_slot].selection    = (s8)selection;
         g_SpawnedActors[actor_slot].pos.x.fixed  = x;
         g_SpawnedActors[actor_slot].pos.y.fixed  = y;

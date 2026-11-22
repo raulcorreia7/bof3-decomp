@@ -104,7 +104,7 @@ typedef struct SpawnedActor {
     u8         layer;        /* 0x09 layer: 0x20/0x40/0x60/0x90/0xFF */
     u8         unk_0A;       /* 0x0A */
     u8         link;         /* 0x0B index of the linked slot */
-    s32        scene_step;   /* 0x0C scenario step */
+    s32        vx;           /* 0x0C x velocity the spawned record starts with */
     s32        selection;    /* 0x10 frontend selection */
     s32        unk_14;       /* 0x14 */
     s32        counter_18;   /* 0x18 */
@@ -131,7 +131,7 @@ typedef struct SpawnedActor {
 ASSERT_OFFSET(SpawnedActor, header, 0x00);
 ASSERT_OFFSET(SpawnedActor, type, 0x05);
 ASSERT_OFFSET(SpawnedActor, layer, 0x09);
-ASSERT_OFFSET(SpawnedActor, scene_step, 0x0C);
+ASSERT_OFFSET(SpawnedActor, vx, 0x0C);
 ASSERT_OFFSET(SpawnedActor, selection, 0x10);
 ASSERT_OFFSET(SpawnedActor, unk_20, 0x20);
 ASSERT_OFFSET(SpawnedActor, unk_2C, 0x2C);

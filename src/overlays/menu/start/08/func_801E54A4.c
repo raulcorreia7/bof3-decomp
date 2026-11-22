@@ -12,7 +12,7 @@ MATCH void func_801E54A4(void) {
             func_801E77F0();
             g_SaveSlotCount  = 3;
             g_MenuStartTimer = 0;
-            g_MenuStartStep += 1;
+            g_MenuCampStep += 1;
             return;
         }
         g_SaveCardStatus = SAVE_LOAD_STATUS_NO_FILE;
@@ -21,5 +21,5 @@ MATCH void func_801E54A4(void) {
     }
 queue_cue:
     SND_SEPlay(EMI_SE_ID(SND_BANK_COMMON, 7));
-    g_MenuStartStep = 0xD;
+    g_MenuCampStep = 0xD;
 }

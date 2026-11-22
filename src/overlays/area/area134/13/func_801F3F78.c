@@ -15,10 +15,10 @@ MATCH void func_801F3F78(void) {
     g_Game.current = (PartyMember*)&D_80146110;
     TASK_SET(&D_80146110);
     if (g_Game.members[2].pos.x.fixed > 0x33FFFF) {
-        *state                  = 0xFF;
-        g_ScriptVars[2]         = 0;
-        g_ScriptVars[3]         = 0;
-        g_ScenarioState.step_05 = 0x14;
+        *state               = 0xFF;
+        g_ScriptVars[2]      = 0;
+        g_ScriptVars[3]      = 0;
+        g_ScenarioState.step = 0x14;
         TASK_SET(actor);
         Actor_Clear();
         return;

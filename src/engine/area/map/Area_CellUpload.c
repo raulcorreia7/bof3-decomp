@@ -37,7 +37,7 @@ MATCH s32 Area_CellUpload(s32 column, s32 row, POLY_FT4* context, s32 slot) {
             Area_ApplyTileToQuad(value, &g_AreaCellPrims[size][slot], 1);
             result |= (*(s32*)entry & 0x40000000) >> 17;
         } else {
-            Area_CellFreePrimRow(size);
+            Area_CellFreePrimSlot(size);
             context[1].pad1 = 0;
         }
     }

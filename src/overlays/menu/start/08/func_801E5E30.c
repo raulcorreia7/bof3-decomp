@@ -16,6 +16,6 @@ MATCH void func_801E5E30(void) {
     UI_TextDraw(28, 21, 0, TEXT_LENGTH_MAX, UI_MessageGetText(D_801ED7FC + 0xA6));
     g_MenuStartTimer -= 1;
     if (g_MenuStartTimer == 0) {
-        g_MenuStartStep = g_MenuStartReturnStep;
+        g_MenuCampStep = g_MenuStartReturnStep;
     }
 }

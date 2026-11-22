@@ -18,7 +18,7 @@ MATCH void func_801F7AC8(void) {
     if (g_GameAreaId == AREA_ID_PLANT) {
         if (SYS_TestFlag(g_SceneFlags, 9) && !SYS_TestFlag(g_SceneFlags, 0xA)) {
             g_ScenarioState.state_04 = 6;
-            g_ScenarioState.step_05  = 0;
+            g_ScenarioState.step     = 0;
             SCRIPT_VARS_CLEAR_ALL();
             switch (g_EmiLoadedCharacterIndex & 0x7F) {
                 case 2:
@@ -66,11 +66,11 @@ MATCH void func_801F7AC8(void) {
     if (g_GameAreaId == AREA_ID_MOMO_TOWER_WORLD_MAP) {
         if (!SYS_TestFlag(g_SceneFlags, 0xC)) {
             g_ScenarioState.state_04 = 0;
-            g_ScenarioState.step_05  = 0;
+            g_ScenarioState.step     = 0;
             SCRIPT_VARS_CLEAR_ALL();
         } else if (!SYS_TestFlag(g_SceneFlags, 0xD)) {
             g_ScenarioState.state_04 = 9;
-            g_ScenarioState.step_05  = 0;
+            g_ScenarioState.step     = 0;
             SCRIPT_VARS_CLEAR_ALL();
         }
     }
@@ -81,7 +81,7 @@ MATCH void func_801F7AC8(void) {
             case 1:
                 if (!SYS_TestFlag(g_SceneFlags, 1)) {
                     g_ScenarioState.state_04 = 1;
-                    g_ScenarioState.step_05  = 2;
+                    g_ScenarioState.step     = 2;
                 }
                 break;
         }
@@ -95,7 +95,7 @@ MATCH void func_801F7AC8(void) {
                 }
                 SCRIPT_VARS_CLEAR_ALL();
                 g_ScenarioState.state_04 = 9;
-                g_ScenarioState.step_05  = 0;
+                g_ScenarioState.step     = 0;
             }
         }
     }
@@ -109,7 +109,7 @@ MATCH void func_801F7AC8(void) {
                     }
                     SND_BGMPlay(0x4B, 0x64, 8);
                     g_ScenarioState.state_04 = 0xA;
-                    g_ScenarioState.step_05  = 0;
+                    g_ScenarioState.step     = 0;
                     SCRIPT_VARS_CLEAR_ALL();
                     g_Characters[CHAR_ID_PECO].party_flags &= 0xFE;
                     g_Characters[CHAR_ID_MOMO].party_flags |= PARTY_FLAG_JOINED;
@@ -118,7 +118,7 @@ MATCH void func_801F7AC8(void) {
             case 1:
                 if (!SYS_TestFlag(g_SceneFlags, 0x14)) {
                     g_ScenarioState.state_04 = 0xA;
-                    g_ScenarioState.step_05  = 4;
+                    g_ScenarioState.step     = 4;
                     SCRIPT_VARS_CLEAR_ALL();
                     SND_SEPlay(EMI_SE_ID(SND_BANK_AREA, 0));
                 }
@@ -131,7 +131,7 @@ MATCH void func_801F7AC8(void) {
                     }
                     SND_BGMPlay(0x4B, 0x64, 8);
                     g_ScenarioState.state_04 = 0xA;
-                    g_ScenarioState.step_05  = 0;
+                    g_ScenarioState.step     = 0;
                     SCRIPT_VARS_CLEAR_ALL();
                     func_801C1DF0(5);
                     Scene_SetupParty(0);
@@ -145,7 +145,7 @@ MATCH void func_801F7AC8(void) {
                     }
                     SND_BGMPlay(0x4B, 0x64, 8);
                     g_ScenarioState.state_04 = 0xA;
-                    g_ScenarioState.step_05  = 0;
+                    g_ScenarioState.step     = 0;
                     SCRIPT_VARS_CLEAR_ALL();
                     func_801C1DF0(6);
                     Scene_SetupParty(0);
@@ -155,7 +155,7 @@ MATCH void func_801F7AC8(void) {
                 if (!SYS_TestFlag(g_SceneFlags, 0x14)) {
                     func_801C1E3C(2);
                     g_ScenarioState.state_04 = 0xA;
-                    g_ScenarioState.step_05  = 4;
+                    g_ScenarioState.step     = 4;
                     SCRIPT_VARS_CLEAR_ALL();
                     SND_SEPlay(EMI_SE_ID(SND_BANK_AREA, 0));
                     func_801C1DF0(7);
@@ -167,7 +167,7 @@ MATCH void func_801F7AC8(void) {
             case 5:
                 func_801C1E3C(2);
                 g_ScenarioState.state_04 = 0xD;
-                g_ScenarioState.step_05  = 6;
+                g_ScenarioState.step     = 6;
                 SCRIPT_VARS_CLEAR_ALL();
                 SND_SEPlay(EMI_SE_ID(SND_BANK_AREA, 0));
                 func_801C1DF0(7);
@@ -178,7 +178,7 @@ MATCH void func_801F7AC8(void) {
             case 6:
                 func_801C1E3C(3);
                 g_ScenarioState.state_04 = 0xD;
-                g_ScenarioState.step_05  = 6;
+                g_ScenarioState.step     = 6;
                 SCRIPT_VARS_CLEAR_ALL();
                 SND_SEPlay(EMI_SE_ID(SND_BANK_AREA, 0));
                 func_801C1DF0(5);

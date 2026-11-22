@@ -4,7 +4,7 @@
 MATCH void func_801F2C48(void) {
     Actor* work;
     Actor* cell;
-    Actor* row;
+    Actor* actor;
     s32    entry;
     s32    pair;
     s16    screen_y;

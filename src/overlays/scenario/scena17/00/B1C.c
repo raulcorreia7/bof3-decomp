@@ -78,7 +78,7 @@ MATCH void func_801F7924(void) {
 
 MATCH void func_801F79AC(void) {
     if ((g_UiWindowEffectBusy == 0) && (EMI_IsReady() != 0)) {
-        g_ScenarioState.step_05 = 0x5A;
+        g_ScenarioState.step = 0x5A;
         g_ScenarioState.state_04 += 1;
     }
     func_801F88CC(0, 0x80);
@@ -87,7 +87,7 @@ MATCH void func_801F79AC(void) {
 MATCH void func_801F7A08(void) {
     u8* timer;
 
-    timer = &g_ScenarioState.step_05;
+    timer = &g_ScenarioState.step;
     *timer -= 1;
     if (*timer == 0) {
         SND_BGMPlay(0x96, 0x64, 0x8);
@@ -101,12 +101,12 @@ MATCH void func_801F7A84(void) {
     u8* timer;
     u8  count;
 
-    timer  = &g_ScenarioState.step_05;
+    timer  = &g_ScenarioState.step;
     count  = *timer - 1;
     *timer = count;
     if (count == 0) {
         g_AreaScrollTargetX      = TO_COORD(148);
-        g_AreaCameraStep         = 0x20;
+        g_AreaCameraSpeed        = 0x20;
         *timer                   = 128;
         g_AreaCameraAngle.vx     = -0x16A;
         g_AreaCameraAngle.vz     = 512;
@@ -119,7 +119,7 @@ MATCH void func_801F7A84(void) {
 MATCH void func_801F7B20(void) {
     u8* timer;
 
-    timer = &g_ScenarioState.step_05;
+    timer = &g_ScenarioState.step;
     *timer -= 1;
     func_801F88CC(1, *timer);
     if (*timer == 0) {
@@ -154,7 +154,7 @@ MATCH void func_801F7C14(void) {
 
     if (g_AreaCameraMoving == 0 && g_ScriptVars[3] == 0x14) {
         step                = &g_ScenarioState.state_04;
-        g_AreaCameraStep    = 0x10;
+        g_AreaCameraSpeed   = 0x10;
         g_AreaScrollTargetX = TO_COORD(60);
         *step += 1;
     }
@@ -181,11 +181,11 @@ MATCH void func_801F7D08(void) {
 
     if (g_AreaCameraMoving == 0) {
         Area_ScrollAdvance(Area_HeightSample(g_AreaScrollTargetX, g_AreaScrollTargetY));
-        g_AreaScrollTargetX    = TO_COORD(38);
-        g_AreaCameraHeightStep = ((Area_HeightSample(g_AreaScrollTargetX, g_AreaScrollTargetY) - g_AreaCameraHeight) / 128);
-        step                   = &g_ScenarioState.state_04;
-        g_AreaSceneMode        = 1;
-        *step                  = *step + 1;
+        g_AreaScrollTargetX     = TO_COORD(38);
+        g_AreaCameraHeightDelta = ((Area_HeightSample(g_AreaScrollTargetX, g_AreaScrollTargetY) - g_AreaCameraHeight) / 128);
+        step                    = &g_ScenarioState.state_04;
+        g_AreaSceneMode         = 1;
+        *step                   = *step + 1;
         return;
     }
     height             = g_AreaCameraHeight;
@@ -200,10 +200,10 @@ MATCH void func_801F7DF4(void) {
 
     if (g_AreaCameraMoving == 0) {
         Area_ScrollAdvance(Area_HeightSample(g_AreaScrollTargetX, g_AreaScrollTargetY));
-        state                  = &g_ScenarioState.state_04;
-        g_AreaCameraStep       = 0x10;
-        g_AreaScrollTargetX    = TO_COORD(25);
-        g_AreaCameraHeightStep = 0;
+        state                   = &g_ScenarioState.state_04;
+        g_AreaCameraSpeed       = 0x10;
+        g_AreaScrollTargetX     = TO_COORD(25);
+        g_AreaCameraHeightDelta = 0;
         (*state)++;
     } else {
         g_AreaCameraAngle.vx--;
@@ -242,7 +242,7 @@ MATCH void func_801F7F3C(void) {
     height             = g_AreaCameraHeight + 0x10;
     g_AreaCameraHeight = height;
     if (height >= 3265U) {
-        g_ScenarioState.step_05 = 0xF;
+        g_ScenarioState.step = 0xF;
         g_ScenarioState.state_04 += 1;
     }
     g_AreaCameraRefreshCount = 2;
@@ -252,7 +252,7 @@ MATCH void func_801F7F94(void) {
     u8* timer;
     u8  count;
 
-    timer  = &g_ScenarioState.step_05;
+    timer  = &g_ScenarioState.step;
     count  = *timer - 1;
     *timer = count;
     if (count == 0) {
@@ -342,7 +342,7 @@ MATCH void func_801F81F8(void) {
 
 MATCH void func_801F8274(void) {
     if (g_UiWindowEffectBusy == 0) {
-        g_ScenarioState.step_05 = 0;
+        g_ScenarioState.step = 0;
         g_ScenarioState.state_04 += 1;
     }
     func_801F8B10(0, 0xFF);
@@ -352,7 +352,7 @@ MATCH void func_801F82C0(void) {
     u8* timer;
     u8  value;
 
-    timer  = &g_ScenarioState.step_05;
+    timer  = &g_ScenarioState.step;
     value  = *timer + 1;
     *timer = value;
     if (value == 50) {
@@ -367,7 +367,7 @@ MATCH void func_801F82C0(void) {
 MATCH void func_801F833C(void) {
     u8* timer;
 
-    timer = &g_ScenarioState.step_05;
+    timer = &g_ScenarioState.step;
     *timer -= 1;
     if (*timer == 0) {
         g_ScriptVars[3] = 0x6E;
@@ -381,7 +381,7 @@ MATCH void func_801F83A8(void) {
     u8* timer;
     u8  count;
 
-    timer  = &g_ScenarioState.step_05;
+    timer  = &g_ScenarioState.step;
     count  = *timer - 1;
     *timer = count;
     if (count == 0) {
@@ -394,7 +394,7 @@ MATCH void func_801F8404(void) {
     u8* timer;
     u8  value;
 
-    timer  = &g_ScenarioState.step_05;
+    timer  = &g_ScenarioState.step;
     value  = *timer + 2;
     *timer = value;
     if (value >= 0x46) {
@@ -410,7 +410,7 @@ MATCH void func_801F8480(void) {
     u8* timer;
     u32 value;
 
-    timer  = &g_ScenarioState.step_05;
+    timer  = &g_ScenarioState.step;
     value  = *timer + 2;
     *timer = value;
     if ((u8)value >= 127) {
@@ -426,7 +426,7 @@ MATCH void func_801F84F4(void) {
     u8* timer;
     u8  value;
 
-    timer  = &g_ScenarioState.step_05;
+    timer  = &g_ScenarioState.step;
     value  = *timer + 1;
     *timer = value;
     if (value >= 128) {
@@ -450,7 +450,7 @@ MATCH void func_801F8594(void) {
         D_801F9DD8 = 1;
     }
     if (EMI_IsReady() != 0) {
-        timer = &g_ScenarioState.step_05;
+        timer = &g_ScenarioState.step;
         *timer -= 1;
         if (*timer == 0) {
             count = &g_ScriptVars[3];
@@ -499,7 +499,7 @@ MATCH void func_801F8710(void) {
 
 MATCH void func_801F87D0(void) {
     if (g_GameStateIndex != GAME_REQUEST_MESSAGE) {
-        if (g_ScenarioState.step_05 == 0) {
+        if (g_ScenarioState.step == 0) {
             g_ScenarioState.state_04 += 1;
             return;
         }
@@ -806,7 +806,7 @@ MATCH void Scene_EnterSaveMenu(void) {
     g_Game.members[0].pos.y.fixed = TO_COORD_HALF(33);
     D_80146873                    = 0;
     g_ScenarioState.state_04      = 0;
-    g_ScenarioState.step_05       = 0;
+    g_ScenarioState.step          = 0;
     g_MenuStep.step               = 0;
     D_80148698                    = 1;
     D_80148699                    = 0;

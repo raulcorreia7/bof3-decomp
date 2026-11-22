@@ -7,6 +7,6 @@ MATCH void func_801F3C90(void) {
     } else {
         g_ScriptVars[0]          = 0xA;
         g_ScenarioState.state_04 = 3;
-        g_ScenarioState.step_05  = 0xA;
+        g_ScenarioState.step     = 0xA;
     }
 }

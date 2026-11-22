@@ -416,7 +416,7 @@ MATCH void func_801F8550(void) {
     }
     SND_BGMRequest(0x7A);
     g_ScenarioState.state_04 = 1;
-    g_ScenarioState.step_05  = 0;
+    g_ScenarioState.step     = 0;
 }
 
 MATCH void func_801F8694(void) {
@@ -426,7 +426,7 @@ MATCH void func_801F8694(void) {
 MATCH void func_801F86D0(void) {
 }
 
-/* Runs one step of a scena10 scene script, picked by g_ScenarioState.step_05: spawns its actors, greys the palette and moves the camera. */
+/* Runs one step of a scena10 scene script, picked by g_ScenarioState.step: spawns its actors, greys the palette and moves the camera. */
 MATCH void func_801F86D8(void) {
     u32           row;
     u32           col;
@@ -439,19 +439,19 @@ MATCH void func_801F86D8(void) {
     u32           packed;
     SpawnedActor* actor;
 
-    switch (g_ScenarioState.step_05) {
+    switch (g_ScenarioState.step) {
         case 0:
             if (g_SpawnedActors[D_801FE9D8].header.flags & 1) {
                 break;
             }
-            g_ScriptVars[0]         = 1;
-            g_ScenarioState.step_05 = 1;
+            g_ScriptVars[0]      = 1;
+            g_ScenarioState.step = 1;
             break;
         case 1:
             if (g_ScriptVars[0] != 5) {
                 break;
             }
-            g_ScenarioState.step_05 = 2;
+            g_ScenarioState.step = 2;
             break;
         case 2:
             if (g_ScriptVars[0] != 6) {
@@ -466,26 +466,26 @@ MATCH void func_801F86D8(void) {
                 g_SpawnedActors[D_801FE9D8].camera_angle.z = 0x200;
                 g_SpawnedActors[D_801FE9D8].layer          = 0x78;
             }
-            g_ScenarioState.step_05 = 3;
+            g_ScenarioState.step = 3;
             break;
         case 3:
             if (g_ScriptVars[0] != 7) {
                 break;
             }
-            g_ScenarioState.step_05 = 4;
+            g_ScenarioState.step = 4;
             break;
         case 4:
             if (g_ScriptVars[0] != 9 || !EMI_IsReady()) {
                 break;
             }
-            g_ScenarioState.step_05 = 5;
+            g_ScenarioState.step = 5;
             break;
         case 5:
             if (g_ScriptVars[0] != 0x19) {
                 break;
             }
             UI_ModeSet(0);
-            g_ScenarioState.step_05 = 6;
+            g_ScenarioState.step = 6;
             break;
         case 6:
             if (g_UiWindowEffectBusy) {
@@ -493,8 +493,8 @@ MATCH void func_801F86D8(void) {
             }
             g_AreaDrawFlags = 0;
             func_8019FA28(0x42, 0x190000, 0x120000, 0x80);
-            g_GamePrevSelection     = 0xFF;
-            g_ScenarioState.step_05 = 7;
+            g_GamePrevSelection  = 0xFF;
+            g_ScenarioState.step = 7;
             break;
         case 7:
             if (g_UiWindowEffectBusy) {
@@ -518,8 +518,8 @@ MATCH void func_801F86D8(void) {
                 } while ((col & 0xFFFF) < AREA_PALETTE_COLORS);
                 row++;
             } while ((row & 0xFF) < AREA_PALETTE_ROWS);
-            g_GfxPalettePending     = 1;
-            g_ScenarioState.step_05 = 8;
+            g_GfxPalettePending  = 1;
+            g_ScenarioState.step = 8;
             break;
         case 8:
             if (g_ScriptVars[0] != 1) {
@@ -527,16 +527,16 @@ MATCH void func_801F86D8(void) {
             }
             g_AreaDrawFlags = 0x1F;
             UI_ModeSet(1);
-            g_ScenarioState.step_05 = 9;
+            g_ScenarioState.step = 9;
             break;
         case 9:
             if (g_ScriptVars[0] != 9) {
                 break;
             }
-            g_AreaScrollTargetX     = 0x160000;
-            g_AreaScrollTargetY     = 0x150000;
-            g_AreaCameraStep        = 0x20;
-            g_ScenarioState.step_05 = 10;
+            g_AreaScrollTargetX  = 0x160000;
+            g_AreaScrollTargetY  = 0x150000;
+            g_AreaCameraSpeed    = 0x20;
+            g_ScenarioState.step = 10;
             break;
         case 10:
             if (g_ScriptVars[0] != 0xB) {
@@ -544,8 +544,8 @@ MATCH void func_801F86D8(void) {
             }
             SYS_SetFlag(g_SceneFlags, 5);
             func_8019FA28(0x52, 0x480000, 0x580000, 0x81);
-            g_GamePrevSelection     = 0xFF;
-            g_ScenarioState.step_05 = 11;
+            g_GamePrevSelection  = 0xFF;
+            g_ScenarioState.step = 11;
             break;
         case 11:
             if (g_ScriptVars[0] != 9) {
@@ -560,7 +560,7 @@ MATCH void func_801F86D8(void) {
                 actor->pos.y.fixed  = MEM_PTR(Coord3, D_801468BC)->y.fixed;
                 actor->pos.z.fixed  = (Area_HeightSample(actor->pos.x.fixed, actor->pos.y.fixed) << 16) + 0x800000;
             }
-            g_ScenarioState.step_05 = 12;
+            g_ScenarioState.step = 12;
             break;
         case 12:
             if (g_ScriptVars[0] != 0) {
@@ -569,7 +569,7 @@ MATCH void func_801F86D8(void) {
             Game_ClearScriptActive();
             SYS_SetFlag(g_SceneFlags, 6);
             g_ScenarioState.state_04 = 0;
-            g_ScenarioState.step_05  = 0;
+            g_ScenarioState.step     = 0;
             break;
     }
 }

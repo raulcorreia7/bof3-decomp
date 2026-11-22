@@ -10,11 +10,11 @@ __asm__(".include \"include/match/macro.inc\"\n");
 MATCH void func_801FBF30(void) {
     u8 v;
 
-    switch (g_ScenarioState.step_05) {
+    switch (g_ScenarioState.step) {
         case 0:
             g_ScriptVars[2] = 1;
             Game_SetScriptActive();
-            g_ScenarioState.step_05 = 1;
+            g_ScenarioState.step = 1;
             Game_RequestAreaChange(AREA_ID_MCNEIL, TO_COORD(0x15), TO_COORD(0x13), AREA_ENTRY_MAP_LOADING);
             g_GamePrevSelection = 1;
             break;
@@ -34,25 +34,25 @@ MATCH void func_801FBF30(void) {
             g_AreaCameraRefreshCount = 2;
             *step                    = 0;
             g_ScriptVars[1]          = 0;
-            g_ScenarioState.step_05  = 2;
+            g_ScenarioState.step     = 2;
             break;
         }
         case 2:
             if (g_ScriptVars[0] == 6) {
                 Area_ScrollStartRoute(0);
-                g_ScenarioState.step_05 = 3;
+                g_ScenarioState.step = 3;
             }
             break;
         case 3:
             if (g_ScriptVars[0] == 0x13) {
                 SND_SeqStop(0, 1);
-                g_ScenarioState.step_05 = 4;
+                g_ScenarioState.step = 4;
             }
             break;
         case 4:
             if (g_ScriptVars[0] == 0x1E) {
                 SND_BGMPlay(0, BGM_CUE_LEVEL_DEFAULT, BGM_CUE_SHAPE_DEFAULT);
-                g_ScenarioState.step_05 = 5;
+                g_ScenarioState.step = 5;
             }
             break;
         case 5: {
@@ -63,9 +63,9 @@ MATCH void func_801FBF30(void) {
                 break;
             }
             Game_SetScriptActive();
-            vars[0]                 = 0;
-            g_ScriptVars[2]         = 2;
-            g_ScenarioState.step_05 = 6;
+            vars[0]              = 0;
+            g_ScriptVars[2]      = 2;
+            g_ScenarioState.step = 6;
             SYS_SetFlag(g_SceneFlags, 0x3A);
             Game_RequestAreaChange(AREA_ID_MCNEIL, TO_COORD(0x15), TO_COORD(0x13), AREA_ENTRY_MAP_LOADING | FACING_UP);
             break;
@@ -86,15 +86,15 @@ MATCH void func_801FBF30(void) {
                 break;
             }
             func_801FD28C(0x92);
-            g_ScenarioState.step_05 = 0xB;
-            g_ScriptVars[0]         = 0xC;
+            g_ScenarioState.step = 0xB;
+            g_ScriptVars[0]      = 0xC;
             Scene_SetupParty(2);
             break;
         case 11:
             if (g_ScriptVars[0] == 0xD) {
                 func_801FD28C(0x93);
-                g_ScenarioState.step_05 = 0xC;
-                g_ScriptVars[0]         = 0xE;
+                g_ScenarioState.step = 0xC;
+                g_ScriptVars[0]      = 0xE;
             }
             break;
         case 12: {
@@ -126,13 +126,13 @@ MATCH void func_801FBF30(void) {
                 break;
             }
             UI_MessageStartArea(MSG_SCENA01_054);
-            *state                  = GAME_REQUEST_MESSAGE;
-            g_ScenarioState.step_05 = 0xE;
+            *state               = GAME_REQUEST_MESSAGE;
+            g_ScenarioState.step = 0xE;
             break;
         }
         case 14:
             if (g_GameStateIndex != GAME_REQUEST_MESSAGE) {
-                g_ScenarioState.step_05 = 0xF;
+                g_ScenarioState.step = 0xF;
             }
             break;
         case 15: {
@@ -169,13 +169,13 @@ MATCH void func_801FBF30(void) {
                 break;
             }
             UI_MessageStartArea(MSG_SCENA01_054);
-            *state                  = GAME_REQUEST_MESSAGE;
-            g_ScenarioState.step_05 = 0x11;
+            *state               = GAME_REQUEST_MESSAGE;
+            g_ScenarioState.step = 0x11;
             break;
         }
         case 17:
             if (g_GameStateIndex != GAME_REQUEST_MESSAGE) {
-                g_ScenarioState.step_05 = 0x12;
+                g_ScenarioState.step = 0x12;
             }
             break;
         case 18: {

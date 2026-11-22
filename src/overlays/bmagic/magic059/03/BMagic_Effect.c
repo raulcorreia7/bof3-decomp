@@ -202,7 +202,93 @@ MATCH void func_801EF638(void) {
 }
 
 #ifdef NON_MATCHING
+/* Draws eleven steps of two quads each: an inner, an outer and a trailing far point sweep a ring whose
+ * radii grow by thirteen and whose depth falls by 0x40 a step, the far point one step behind; the
+ * shades alternate between the effect ticker and the flat white. */
 NON_MATCHING void func_801EF70C(s32 phase, s32 radius) {
+    POLY_G4* prim;
+    SVECTOR  inner;
+    SVECTOR  outer;
+    SVECTOR  far;
+    long     p;
+    long     flag;
+    s32      tpage;
+    s32      shade;
+    s32      angle;
+    s32      i;
+
+    tpage = getTPage(TPAGE_DEPTH_4BIT, TPAGE_ABR_ADD, 320, 256);
+    SetDrawMode((DR_MODE*)g_GfxPrimCursor, 0, 1, tpage, 0);
+    Area_CellAddPrim(TASK(PartyMember)->pos.x.fixed, TASK(PartyMember)->pos.y.fixed, 2, sizeof(DR_MODE));
+
+    g_ScratchPad.cells.halves[7] = (phase & 0x3F) << 6;
+    g_ScratchPad.cells.halves[0] = radius + 0x32;
+    g_ScratchPad.cells.halves[1] = radius + 0x1A;
+    g_ScratchPad.cells.halves[2] = radius;
+    g_ScratchPad.cells.halves[3] = -0xC0;
+    g_ScratchPad.cells.halves[4] = -0x60;
+    g_ScratchPad.cells.halves[5] = 0;
+    g_ScratchPad.cells.halves[6] = TASK(PartyMember)->timer * 3;
+
+    angle    = g_ScratchPad.cells.halves[7];
+    inner.vx = FIXED_MUL(rsin(angle), g_ScratchPad.cells.halves[0]);
+    inner.vy = FIXED_MUL(rcos(((g_FrameCount + 4) & 0x3F) << 6), 0x80) + FIXED_MUL(rcos(angle), g_ScratchPad.cells.halves[0]);
+    inner.vz = g_ScratchPad.cells.halves[3];
+    outer.vx = FIXED_MUL(rsin(angle), g_ScratchPad.cells.halves[1]);
+    outer.vy = FIXED_MUL(rcos(((g_FrameCount + 2) & 0x3F) << 6), 0x80) + FIXED_MUL(rcos(angle), g_ScratchPad.cells.halves[1]);
+    outer.vz = g_ScratchPad.cells.halves[4];
+    far.vx   = FIXED_MUL(rsin(angle), g_ScratchPad.cells.halves[2]);
+    far.vy   = FIXED_MUL(rcos((g_FrameCount & 0x3F) << 6), 0x80) + FIXED_MUL(rcos(angle), g_ScratchPad.cells.halves[2]);
+    far.vz   = g_ScratchPad.cells.halves[5];
+
+    for (i = 1; i < 16; i++) {
+        g_ScratchPad.cells.halves[7] = ((phase + i) & 0x3F) << 6;
+        g_ScratchPad.cells.halves[0] += 13;
+        g_ScratchPad.cells.halves[1] += 13;
+        g_ScratchPad.cells.halves[2] += 13;
+        g_ScratchPad.cells.halves[3] -= 0x40;
+        g_ScratchPad.cells.halves[4] -= 0x40;
+        g_ScratchPad.cells.halves[5] -= 0x40;
+        shade = g_ScratchPad.cells.halves[6];
+        angle = g_ScratchPad.cells.halves[7];
+        setVector(&g_ScratchPadVectors[0], inner.vx, inner.vy, inner.vz);
+        setVector(&g_ScratchPadVectors[2], outer.vx, outer.vy, outer.vz);
+        g_ScratchPadVectors[1].vx = FIXED_MUL(rsin(angle), g_ScratchPad.cells.halves[0]);
+        g_ScratchPadVectors[1].vy = FIXED_MUL(rcos(((g_FrameCount + i + 4) & 0x3F) << 6), 0x80) + FIXED_MUL(rcos(angle), g_ScratchPad.cells.halves[0]);
+        g_ScratchPadVectors[1].vz = g_ScratchPad.cells.halves[3];
+        g_ScratchPadVectors[3].vx = FIXED_MUL(rsin(angle), g_ScratchPad.cells.halves[1]);
+        g_ScratchPadVectors[3].vy = FIXED_MUL(rcos(((g_FrameCount + i + 2) & 0x3F) << 6), 0x80) + FIXED_MUL(rcos(angle), g_ScratchPad.cells.halves[1]);
+        g_ScratchPadVectors[3].vz = g_ScratchPad.cells.halves[4];
+        setVector(&inner, g_ScratchPadVectors[1].vx, g_ScratchPadVectors[1].vy, g_ScratchPadVectors[1].vz);
+        setVector(&outer, g_ScratchPadVectors[3].vx, g_ScratchPadVectors[3].vy, g_ScratchPadVectors[3].vz);
+        prim = (POLY_G4*)g_GfxPrimCursor;
+        SetPolyG4(prim);
+        SetSemiTrans(prim, 1);
+        setRGB0(prim, 1, 1, 1);
+        setRGB1(prim, 1, 1, 1);
+        setRGB2(prim, shade, shade, shade);
+        setRGB3(prim, shade, shade, shade);
+        RotTransPers4(&g_ScratchPadVectors[0], &g_ScratchPadVectors[1], &g_ScratchPadVectors[2], &g_ScratchPadVectors[3], (long*)&prim->x0, (long*)&prim->x1, (long*)&prim->x2, (long*)&prim->x3, &p,
+                      &flag);
+        Area_CellAddPrim(TASK(PartyMember)->pos.x.fixed, TASK(PartyMember)->pos.y.fixed, 2, sizeof(POLY_G4));
+        setVector(&g_ScratchPadVectors[0], outer.vx, outer.vy, outer.vz);
+        setVector(&g_ScratchPadVectors[1], g_ScratchPadVectors[3].vx, g_ScratchPadVectors[3].vy, g_ScratchPadVectors[3].vz);
+        setVector(&g_ScratchPadVectors[2], far.vx, far.vy, far.vz);
+        g_ScratchPadVectors[3].vx = FIXED_MUL(rsin(angle), g_ScratchPad.cells.halves[2]);
+        g_ScratchPadVectors[3].vy = FIXED_MUL(rcos(((g_FrameCount + i) & 0x3F) << 6), 0x80) + FIXED_MUL(rcos(angle), g_ScratchPad.cells.halves[2]);
+        g_ScratchPadVectors[3].vz = g_ScratchPad.cells.halves[5];
+        setVector(&far, g_ScratchPadVectors[3].vx, g_ScratchPadVectors[3].vy, g_ScratchPadVectors[3].vz);
+        prim = (POLY_G4*)g_GfxPrimCursor;
+        SetPolyG4(prim);
+        SetSemiTrans(prim, 1);
+        setRGB0(prim, shade, shade, shade);
+        setRGB1(prim, shade, shade, shade);
+        setRGB2(prim, 1, 1, 1);
+        setRGB3(prim, 1, 1, 1);
+        RotTransPers4(&g_ScratchPadVectors[0], &g_ScratchPadVectors[1], &g_ScratchPadVectors[2], &g_ScratchPadVectors[3], (long*)&prim->x0, (long*)&prim->x1, (long*)&prim->x2, (long*)&prim->x3, &p,
+                      &flag);
+        Area_CellAddPrim(TASK(PartyMember)->pos.x.fixed, TASK(PartyMember)->pos.y.fixed, 2, sizeof(POLY_G4));
+    }
 }
 #else
 INCLUDE_ASM(func_801EF70C);

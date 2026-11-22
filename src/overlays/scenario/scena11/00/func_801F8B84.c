@@ -6,14 +6,14 @@ __asm__(".include \"include/match/macro.inc\"\n");
 #endif
 
 MATCH void func_801F8B84(void) {
-    switch (g_ScenarioState.step_05) {
+    switch (g_ScenarioState.step) {
         case 0:
             if (g_GameStateIndex == 2) {
                 break;
             }
             g_ScriptVars[0] = 1;
             Scene_SetupParty(1);
-            g_ScenarioState.step_05 = 1;
+            g_ScenarioState.step = 1;
             break;
         case 1: {
             u8* mode;
@@ -33,14 +33,14 @@ MATCH void func_801F8B84(void) {
             if (g_GameStateIndex != 0) {
                 break;
             }
-            g_ScenarioState.step_05 = 6;
-            g_ScriptVars[0]         = 0;
+            g_ScenarioState.step = 6;
+            g_ScriptVars[0]      = 0;
             SYS_SetFlag(g_SceneFlags, 0xA);
             Game_RequestAreaChange(0x82, 0x290000, 0x540000, 0x82);
             break;
         case 6:
-            g_AreaDrawFlags         = 0x1F;
-            g_ScenarioState.step_05 = 7;
+            g_AreaDrawFlags      = 0x1F;
+            g_ScenarioState.step = 7;
             break;
         case 7:
             if (g_ScriptVars[0] != 3) {
@@ -50,7 +50,7 @@ MATCH void func_801F8B84(void) {
             g_ScriptVars[1]          = 0;
             g_ScriptVars[2]          = 0;
             g_ScriptVars[3]          = 0;
-            g_ScenarioState.step_05  = 0;
+            g_ScenarioState.step     = 0;
             g_ScenarioState.state_04 = 0;
             break;
         case 10:
@@ -60,7 +60,7 @@ MATCH void func_801F8B84(void) {
             }
             UI_ModeSet(0xD);
             SND_SeqFadeOut(0, 0, 4, 0x1E);
-            g_ScenarioState.step_05 = 0xB;
+            g_ScenarioState.step = 0xB;
             break;
         case 11:
             if (g_UiWindowEffectBusy != 0) {
@@ -74,13 +74,13 @@ MATCH void func_801F8B84(void) {
             if (g_GameStateIndex != 0) {
                 break;
             }
-            g_ScenarioState.step_05 = 0xD;
-            g_ScriptVars[0]         = 0;
+            g_ScenarioState.step = 0xD;
+            g_ScriptVars[0]      = 0;
             Game_RequestAreaChange(0x82, 0x290000, 0x540000, 0x82);
             break;
         case 13:
-            g_AreaDrawFlags         = 0x1F;
-            g_ScenarioState.step_05 = 0xE;
+            g_AreaDrawFlags      = 0x1F;
+            g_ScenarioState.step = 0xE;
             break;
         case 14:
             if (g_ScriptVars[0] != 3) {
@@ -90,7 +90,7 @@ MATCH void func_801F8B84(void) {
             g_ScriptVars[1]          = 0;
             g_ScriptVars[2]          = 0;
             g_ScriptVars[3]          = 0;
-            g_ScenarioState.step_05  = 0;
+            g_ScenarioState.step     = 0;
             g_ScenarioState.state_04 = 0;
             break;
         case 20:
@@ -100,44 +100,44 @@ MATCH void func_801F8B84(void) {
             g_ScriptVars[0] = 0;
             SYS_SetFlag(g_SceneFlags, 0xA);
             if (g_ScriptVars[3] == 1) {
-                g_ScenarioState.step_05 = 0x1E;
+                g_ScenarioState.step = 0x1E;
                 Game_RequestAreaChange(0x82, 0x290000, 0x540000, 0x83);
                 g_GamePrevSelection = 0xFF;
             } else {
-                g_ScenarioState.step_05 = 0x28;
+                g_ScenarioState.step = 0x28;
                 Game_RequestAreaChange(0x82, 0x290000, 0x540000, 0x84);
             }
             break;
         case 30:
-            g_AreaDrawFlags         = 0x1F;
-            g_ScenarioState.step_05 = 0x1F;
+            g_AreaDrawFlags      = 0x1F;
+            g_ScenarioState.step = 0x1F;
             break;
         case 31:
             if (g_ScriptVars[0] != 1) {
                 break;
             }
             SND_XAStartStream(7, 1);
-            g_ScenarioState.step_05 = 0x20;
+            g_ScenarioState.step = 0x20;
             break;
         case 32:
             if ((SND_XAIsIdle() & 0xFF) == 0) {
                 break;
             }
-            g_ScenarioState.step_05 = 0x21;
+            g_ScenarioState.step = 0x21;
             break;
         case 33:
             if (g_ScriptVars[0] != 4) {
                 break;
             }
             SND_XAStartStream(6, 1);
-            g_ScenarioState.step_05 = 0x22;
+            g_ScenarioState.step = 0x22;
             break;
         case 34:
             if ((SND_XAIsIdle() & 0xFF) == 0) {
                 break;
             }
-            g_ScriptVars[0]         = 5;
-            g_ScenarioState.step_05 = 0x23;
+            g_ScriptVars[0]      = 5;
+            g_ScenarioState.step = 0x23;
             break;
         case 35:
             if (g_ScriptVars[0] != 6) {
@@ -148,19 +148,19 @@ MATCH void func_801F8B84(void) {
             g_ScriptVars[1]          = 0;
             g_ScriptVars[2]          = 0;
             g_ScriptVars[3]          = 0;
-            g_ScenarioState.step_05  = 0;
+            g_ScenarioState.step     = 0;
             g_ScenarioState.state_04 = 0;
             break;
         case 40:
-            g_AreaDrawFlags         = 0x1F;
-            g_ScenarioState.step_05 = 0x29;
+            g_AreaDrawFlags      = 0x1F;
+            g_ScenarioState.step = 0x29;
             break;
         case 41:
             if (g_ScriptVars[0] != 5) {
                 break;
             }
             SND_SeqPlay(0, 1, 0x64, 0x64);
-            g_ScenarioState.step_05 = 0x2A;
+            g_ScenarioState.step = 0x2A;
             break;
         case 42: {
             u8* progress = &g_ScriptVars[0];
@@ -169,8 +169,8 @@ MATCH void func_801F8B84(void) {
                 break;
             }
             SND_SeqFadeOut(0, 1, 4, 0x1E);
-            *progress               = 0;
-            g_ScenarioState.step_05 = 0x2B;
+            *progress            = 0;
+            g_ScenarioState.step = 0x2B;
             UI_ModeSet(0xD);
             break;
         }
@@ -178,20 +178,20 @@ MATCH void func_801F8B84(void) {
             if (g_UiWindowEffectBusy != 0) {
                 break;
             }
-            g_AreaDrawFlags         = 0;
-            g_ScenarioState.step_05 = 0x2C;
+            g_AreaDrawFlags      = 0;
+            g_ScenarioState.step = 0x2C;
             break;
         case 44:
             UI_MessageStartArea(MSG_SCENA11_064);
-            g_GameStateIndex        = 2;
-            g_ScenarioState.step_05 = 0x2D;
+            g_GameStateIndex     = 2;
+            g_ScenarioState.step = 0x2D;
             break;
         case 45:
             if (g_GameStateIndex == 2) {
                 break;
             }
-            g_ScenarioState.step_05 = 0x2E;
-            g_ScriptVars[2]         = 1;
+            g_ScenarioState.step = 0x2E;
+            g_ScriptVars[2]      = 1;
             SYS_SetFlag(g_SceneFlags, 0xB);
             Game_RequestAreaChange(0x82, 0x290000, 0x530000, 0x85);
             SND_BGMPlay(0x83, 0x64, 8);
@@ -202,14 +202,14 @@ MATCH void func_801F8B84(void) {
             }
             SND_BGMPause(0x83);
             SND_XAStartStream(2, 1);
-            g_ScenarioState.step_05 = 0x2F;
+            g_ScenarioState.step = 0x2F;
             break;
         case 47:
             if ((SND_XAIsIdle() & 0xFF) == 0) {
                 break;
             }
             SND_BGMResume(0x83);
-            g_ScenarioState.step_05 = 0x30;
+            g_ScenarioState.step = 0x30;
             break;
         case 48:
             if (g_ScriptVars[0] != 0xA) {
@@ -220,7 +220,7 @@ MATCH void func_801F8B84(void) {
             g_ScriptVars[1]          = 0;
             g_ScriptVars[2]          = 0;
             g_ScriptVars[3]          = 0;
-            g_ScenarioState.step_05  = 0;
+            g_ScenarioState.step     = 0;
             g_ScenarioState.state_04 = 0;
             break;
     }

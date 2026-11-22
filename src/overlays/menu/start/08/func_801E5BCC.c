@@ -6,6 +6,6 @@ MATCH void func_801E5BCC(void) {
     SAVE_DrawSlots((g_MenuStartTimer * 0x50) + SAVE_SLOTS_X, SAVE_SLOTS_Y, 0);
     g_MenuStartTimer += 1;
     if (g_MenuStartTimer == 4) {
-        g_MenuStartStep = 2;
+        g_MenuCampStep = 2;
     }
 }

@@ -157,12 +157,12 @@ ASSERT_SIZE(SceneEffectSlot, 0x30);
 
 /* The per-slot sample effect: func_801FC01C seeds it from the sample table at
  * D_80147BD8 and func_801FC3A0 steps it every frame. `accum` is the 16.16 sample,
- * `delta` its per-frame step and `life_step` the amount taken off the cell's
+ * `delta` its per-frame step and `life_delta` the amount taken off the cell's
  * lifetime. */
 typedef struct SceneSampleEffect {
     SceneEffectSlot delta[SCENE_EFFECT_SLOT_COUNT];
     SceneEffectSlot accum[SCENE_EFFECT_SLOT_COUNT];
-    SceneEffectSlot life_step[SCENE_EFFECT_SLOT_COUNT];
+    SceneEffectSlot life_delta[SCENE_EFFECT_SLOT_COUNT];
 } SceneSampleEffect;
 
 ASSERT_SIZE(SceneSampleEffect, 0x10E0);

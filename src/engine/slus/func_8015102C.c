@@ -23,14 +23,14 @@ MATCH void func_8015102C(void) {
         if ((g_UiMessageState.state == 4) || (g_UiMessageState.state == 5)) {
             UI_MessageStartRequest();
         } else {
-            g_UiMessageState.selection = 0;
-            g_UiMessageState.state     = one;
-            cursor                     = g_UiMessageState.cursor;
-            g_UiMessageState.count     = 8;
-            g_UiMessageState.scroll    = 0;
-            g_UiMessageState.index     = 0;
-            g_UiMessageState.phase     = 0;
-            g_UiMessageState.entry     = cursor;
+            g_UiMessageState.step   = 0;
+            g_UiMessageState.state  = one;
+            cursor                  = g_UiMessageState.cursor;
+            g_UiMessageState.count  = 8;
+            g_UiMessageState.scroll = 0;
+            g_UiMessageState.index  = 0;
+            g_UiMessageState.phase  = 0;
+            g_UiMessageState.entry  = cursor;
             g_UiMessageState.flags &= 0xFFF3;
         }
     }

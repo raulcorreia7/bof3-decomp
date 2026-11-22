@@ -5,6 +5,6 @@ MATCH void func_801F33F8(void) {
     if (MENU_SELECTION_IDLE()) {
         Game_SetScriptActive();
         g_ScenarioState.state_04 = 5;
-        g_ScenarioState.step_05  = 0;
+        g_ScenarioState.step     = 0;
     }
 }

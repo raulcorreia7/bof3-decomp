@@ -1,13 +1,11 @@
 #include "area052_13.h"
 
-#ifdef NON_MATCHING
-NON_MATCHING void func_801F35A0(void) {
+MATCH void func_801F35A0(void) {
     s32 column_fixed;
     s32 initial_column;
     s32 column;
     s32 cell_column;
-    s32 row;
-    s32 row_next;
+    s16 row;
     s32 i;
     u8  read_index;
 
@@ -36,7 +34,7 @@ NON_MATCHING void func_801F35A0(void) {
     column                   = FIX_INT(column_fixed);
     cell_column              = FIX_INT(column_fixed);
     row                      = 7;
-    row_next                 = TO_COORD(row + 1);
+
     do {
         Area_HeightSet(column + (i & BYTE_MASK), row, 0x10);
         read_index = i;
@@ -44,11 +42,8 @@ NON_MATCHING void func_801F35A0(void) {
         Area_CellSetCode(column + (i & BYTE_MASK), row, 0x11);
         Area_HeightSet(column + (i & BYTE_MASK), row + 1, 0x10);
         read_index = i;
-        TASK(Actor)->unk_1C |= (u8)Area_CellGetCode(read_index + cell_column, FIX_INT(row_next)) << ((i & BYTE_MASK) * 8);
+        TASK(Actor)->unk_1C |= (u8)Area_CellGetCode(read_index + cell_column, (s16)(row + 1)) << ((i & BYTE_MASK) * 8);
         Area_CellSetCode(column + (i & BYTE_MASK), row + 1, 0x11);
         i++;
     } while ((u32)(i & BYTE_MASK) < 2U);
 }
-#else
-INCLUDE_ASM(func_801F35A0);
-#endif

@@ -19,7 +19,7 @@
     g_ScriptVars[2] = 0;                                                            \
     g_ScriptVars[3] = 0;                                                            \
     SND_SEPlay(EMI_SE_ID(SND_BANK_AREA, 2));                                        \
-    g_ScenarioState.step_05  = timer;                                               \
+    g_ScenarioState.step     = timer;                                               \
     g_ScenarioState.timer_06 = 0;                                                   \
     return 1
 
@@ -46,7 +46,7 @@ void func_801F7660(s32 x, s32 y, s32 z, u16 angle);
     g_ScriptVars[1]          = 0;  \
     g_ScriptVars[2]          = 0;  \
     g_ScriptVars[3]          = 0;  \
-    g_ScenarioState.step_05  = 0;  \
+    g_ScenarioState.step     = 0;  \
     g_ScenarioState.state_04 = 13;
 
 #endif

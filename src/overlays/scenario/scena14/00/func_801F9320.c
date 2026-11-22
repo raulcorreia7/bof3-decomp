@@ -10,13 +10,13 @@ MATCH void func_801F9320(void) {
     u8            slot;
     SpawnedActor* actor;
 
-    switch (g_ScenarioState.step_05) {
+    switch (g_ScenarioState.step) {
         case 0:
             if (g_ScriptVars[0] != 1) {
                 break;
             }
             if ((u8)Scene_SpawnActor(0x13, -0x318, g_AreaCameraAngle.vy, 0x150, 0x70, 0)) {
-                g_ScenarioState.step_05 = 1;
+                g_ScenarioState.step = 1;
             }
             break;
         case 1:
@@ -24,7 +24,7 @@ MATCH void func_801F9320(void) {
                 break;
             }
             if ((u8)Scene_SpawnActor(0x13, -0x2AA, g_AreaCameraAngle.vy, 0x200, 0x40, 0)) {
-                g_ScenarioState.step_05 = 2;
+                g_ScenarioState.step = 2;
             }
             break;
         case 5:
@@ -32,7 +32,7 @@ MATCH void func_801F9320(void) {
                 break;
             }
             func_801C601C(1);
-            g_ScenarioState.step_05 = 6;
+            g_ScenarioState.step = 6;
             break;
         case 6:
             if (g_ScriptVars[0] != 1) {
@@ -40,22 +40,22 @@ MATCH void func_801F9320(void) {
             }
             SYS_SetFlag(g_SceneFlags, 0xE);
             g_ScenarioState.timer_06 = 0x78;
-            g_ScenarioState.step_05  = 7;
+            g_ScenarioState.step     = 7;
             break;
         case 7:
             g_ScenarioState.timer_06--;
             if (g_ScenarioState.timer_06 != 0) {
                 break;
             }
-            g_ScriptVars[0]         = 2;
-            g_ScenarioState.step_05 = 2;
+            g_ScriptVars[0]      = 2;
+            g_ScenarioState.step = 2;
             break;
         case 10:
             if (g_ScriptVars[0] != 0x1C) {
                 break;
             }
             func_801BFE34(0xB8000, 0x728000, 0x25);
-            g_ScenarioState.step_05 = 0xB;
+            g_ScenarioState.step = 0xB;
             break;
         case 11:
             if (g_ScriptVars[0] != 0x1E) {
@@ -65,7 +65,7 @@ MATCH void func_801F9320(void) {
             g_Game.members[1].unk_48 = 1;
             g_Game.members[0].unk_48 = 1;
             g_ScenarioState.timer_06 = 0x10;
-            g_ScenarioState.step_05  = 0xC;
+            g_ScenarioState.step     = 0xC;
             break;
         case 12:
             timer = &g_ScenarioState.timer_06;
@@ -80,8 +80,8 @@ MATCH void func_801F9320(void) {
                     actor->header.flags = 1;
                     actor->type         = 0x8E;
                 }
-                *timer                  = 0x64;
-                g_ScenarioState.step_05 = 0xD;
+                *timer               = 0x64;
+                g_ScenarioState.step = 0xD;
             }
             func_801F8800(4);
             break;
@@ -89,7 +89,7 @@ MATCH void func_801F9320(void) {
             g_ScenarioState.timer_06--;
             if (g_ScenarioState.timer_06 == 0) {
                 g_ScenarioState.timer_06 = 0x10;
-                g_ScenarioState.step_05  = 0xE;
+                g_ScenarioState.step     = 0xE;
                 g_ScriptVars[0]++;
             }
             func_801F8800(4);
@@ -101,7 +101,7 @@ MATCH void func_801F9320(void) {
                 g_AreaCameraOffsetZ -= 0x58;
             } else {
                 func_801C7A54(0x32);
-                g_ScenarioState.step_05 = 0xF;
+                g_ScenarioState.step = 0xF;
             }
             break;
         case 16:
@@ -121,7 +121,7 @@ MATCH void func_801F9320(void) {
         case 30:
             g_ScriptVars[0] = 0;
             Scene_SetupParty(3);
-            g_ScenarioState.step_05 = 0x1F;
+            g_ScenarioState.step = 0x1F;
             break;
         case 31:
             if (g_ScriptVars[0] != 1) {
@@ -140,7 +140,7 @@ MATCH void func_801F9320(void) {
                 break;
             }
             SND_BGMResume(g_SndBGMId);
-            g_ScenarioState.step_05 = 0x21;
+            g_ScenarioState.step = 0x21;
             g_ScriptVars[0]++;
             break;
         case 2:
@@ -152,7 +152,7 @@ MATCH void func_801F9320(void) {
             Game_ClearScriptActive();
         clear_step:
             g_ScenarioState.state_04 = 0;
-            g_ScenarioState.step_05  = 0;
+            g_ScenarioState.step     = 0;
             break;
     }
 }

@@ -8,11 +8,11 @@ __asm__(".include \"include/match/macro.inc\"\n");
 MATCH void func_801FB30C(void) {
     u8 i;
 
-    switch (g_ScenarioState.step_05) {
+    switch (g_ScenarioState.step) {
         case 0:
             Scene_SetupParty(3);
             Area_ScrollStartRoute(0);
-            g_ScenarioState.step_05 = 1;
+            g_ScenarioState.step = 1;
             break;
         case 1:
             if (g_ScriptVars[0] != 4) {
@@ -33,8 +33,8 @@ MATCH void func_801FB30C(void) {
                     UI_MessageStartArea(MSG_SCENA06_016);
                 }
             }
-            g_GameStateIndex        = GAME_REQUEST_MESSAGE;
-            g_ScenarioState.step_05 = 2;
+            g_GameStateIndex     = GAME_REQUEST_MESSAGE;
+            g_ScenarioState.step = 2;
             break;
         case 2:
             if (g_GameStateIndex == GAME_REQUEST_MESSAGE) {
@@ -47,7 +47,7 @@ MATCH void func_801FB30C(void) {
                     g_SpawnedActors[TASK(Actor)->param.actor_slot].header.flags = 1;
                     g_SpawnedActors[TASK(Actor)->param.actor_slot].type         = 6;
                     g_SpawnedActors[TASK(Actor)->param.actor_slot].unk_06       = 3;
-                    g_SpawnedActors[TASK(Actor)->param.actor_slot].scene_step   = 0;
+                    g_SpawnedActors[TASK(Actor)->param.actor_slot].vx           = 0;
                     g_SpawnedActors[TASK(Actor)->param.actor_slot].selection    = D_801FE3BC[g_PartyFieldOrder[0]];
                     g_SpawnedActors[TASK(Actor)->param.actor_slot].screen_x     = TASK(Actor)->screen_x;
                     g_SpawnedActors[TASK(Actor)->param.actor_slot].screen_y     = TASK(Actor)->screen_y;
@@ -60,7 +60,7 @@ MATCH void func_801FB30C(void) {
                     g_SpawnedActors[TASK(Actor)->param.actor_slot].header.flags = 1;
                     g_SpawnedActors[TASK(Actor)->param.actor_slot].type         = 6;
                     g_SpawnedActors[TASK(Actor)->param.actor_slot].unk_06       = 3;
-                    g_SpawnedActors[TASK(Actor)->param.actor_slot].scene_step   = 0;
+                    g_SpawnedActors[TASK(Actor)->param.actor_slot].vx           = 0;
                     g_SpawnedActors[TASK(Actor)->param.actor_slot].selection    = D_801FE3BC[g_PartyFieldOrder[1]];
                     g_SpawnedActors[TASK(Actor)->param.actor_slot].screen_x     = TASK(Actor)->screen_x;
                     g_SpawnedActors[TASK(Actor)->param.actor_slot].screen_y     = TASK(Actor)->screen_y;
@@ -73,14 +73,14 @@ MATCH void func_801FB30C(void) {
                     g_SpawnedActors[TASK(Actor)->param.actor_slot].header.flags = 1;
                     g_SpawnedActors[TASK(Actor)->param.actor_slot].type         = 6;
                     g_SpawnedActors[TASK(Actor)->param.actor_slot].unk_06       = 3;
-                    g_SpawnedActors[TASK(Actor)->param.actor_slot].scene_step   = 0;
+                    g_SpawnedActors[TASK(Actor)->param.actor_slot].vx           = 0;
                     g_SpawnedActors[TASK(Actor)->param.actor_slot].selection    = D_801FE3BC[g_PartyFieldOrder[2]];
                     g_SpawnedActors[TASK(Actor)->param.actor_slot].screen_x     = TASK(Actor)->screen_x;
                     g_SpawnedActors[TASK(Actor)->param.actor_slot].screen_y     = TASK(Actor)->screen_y;
                 }
             }
-            g_ScenarioState.step_05 = 5;
-            g_ScriptVars[0]         = 5;
+            g_ScenarioState.step = 5;
+            g_ScriptVars[0]      = 5;
             break;
         case 5:
             if (g_ScriptVars[0] != 10) {
@@ -91,7 +91,7 @@ MATCH void func_801FB30C(void) {
             g_ScriptVars[2] = 0;
             g_ScriptVars[3] = 0;
             Game_ClearScriptActive();
-            g_ScenarioState.step_05  = 0;
+            g_ScenarioState.step     = 0;
             g_ScenarioState.state_04 = 0;
             break;
         case 10:
@@ -99,7 +99,7 @@ MATCH void func_801FB30C(void) {
                 break;
             }
             func_801FCB80(0x93);
-            g_ScenarioState.step_05 = 11;
+            g_ScenarioState.step = 11;
             break;
         case 11:
             func_801FBC88();
@@ -109,7 +109,7 @@ MATCH void func_801FB30C(void) {
                 break;
             }
             Scene_SetupParty(4);
-            g_ScenarioState.step_05 = 13;
+            g_ScenarioState.step = 13;
             break;
         case 13:
             if (g_ScriptVars[0] != 15) {
@@ -120,28 +120,28 @@ MATCH void func_801FB30C(void) {
             g_ScriptVars[2] = 0;
             g_ScriptVars[3] = 0;
             Game_ClearScriptActive();
-            g_ScenarioState.step_05  = 0;
+            g_ScenarioState.step     = 0;
             g_ScenarioState.state_04 = 0;
             break;
         case 20:
             D_80146258 |= 8;
             SND_SeqStop(0, 0);
             Scene_SetupParty(5);
-            g_ScenarioState.step_05 = 21;
+            g_ScenarioState.step = 21;
             break;
         case 21:
             if (g_ScriptVars[0] != 0x15) {
                 break;
             }
             Area_ScrollStartRoute(1);
-            g_ScenarioState.step_05 = 22;
+            g_ScenarioState.step = 22;
             break;
         case 22:
             if (g_ScriptVars[0] != 0x1A) {
                 break;
             }
             func_801BFE34(0x2E0000, 0x60000, 0x1C);
-            g_ScenarioState.step_05 = 23;
+            g_ScenarioState.step = 23;
             break;
         case 23:
             if (g_ScriptVars[0] != 0x1C) {
@@ -162,15 +162,15 @@ MATCH void func_801FB30C(void) {
                     UI_MessageStartArea(MSG_SCENA06_023);
                 }
             }
-            g_GameStateIndex        = GAME_REQUEST_MESSAGE;
-            g_ScenarioState.step_05 = 30;
+            g_GameStateIndex     = GAME_REQUEST_MESSAGE;
+            g_ScenarioState.step = 30;
             break;
         case 30:
             if (g_GameStateIndex == GAME_REQUEST_MESSAGE) {
                 break;
             }
             Game_BattleStartScripted(0x1C);
-            g_ScenarioState.step_05 = 35;
+            g_ScenarioState.step = 35;
             break;
         case 35:
             if (g_ScriptVars[0] != 30) {
@@ -182,7 +182,7 @@ MATCH void func_801FB30C(void) {
             g_ScriptVars[2] = 0;
             g_ScriptVars[3] = 0;
             Game_ClearScriptActive();
-            g_ScenarioState.step_05  = 0;
+            g_ScenarioState.step     = 0;
             g_ScenarioState.state_04 = 0;
             break;
     }

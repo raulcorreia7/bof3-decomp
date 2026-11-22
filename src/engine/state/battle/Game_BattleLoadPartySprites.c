@@ -24,13 +24,13 @@ MATCH void Game_BattleLoadPartySprites(void) {
             *coord_a = *coord_a + s_BattleScrollCellSteps[index].dx;
             dy       = s_BattleScrollCellSteps[index].dy;
             FAKE_BARRIER(); /* FAKE: keeps the delta load before the span math. */
-            span                   = D_801CD954;
-            g_AreaCameraStep       = 0x40;
-            span                   = span - g_AreaCameraHeight;
-            g_AreaCameraHeightStep = span >> 4;
-            coord_b                = (volatile u16*)&g_AreaTargetCellY;
-            sum                    = *coord_b + dy;
-            *coord_b               = sum;
+            span                    = D_801CD954;
+            g_AreaCameraSpeed       = 0x40;
+            span                    = span - g_AreaCameraHeight;
+            g_AreaCameraHeightDelta = span >> 4;
+            coord_b                 = (volatile u16*)&g_AreaTargetCellY;
+            sum                     = *coord_b + dy;
+            *coord_b                = sum;
         }
         if ((*flags & 0x10) == 0) {
             if (g_Battle.scroll_dir & 0x2) {
