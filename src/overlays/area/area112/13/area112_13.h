@@ -15,17 +15,6 @@ extern u8                  D_801F41F8[];
 extern PartyMemberMessages g_PartyMemberMessages[1];
 extern u8                  D_801F493C[];
 
-/* One quad of the overlay's part table: the packed cell word (bytes: depth row, shape, cell y,
- * cell x) and the tile word Area_ApplyTileToQuad reads. */
-typedef struct AreaQuadPart {
-    union {
-        u32 packed;
-        u8  bytes[4];
-    } cell;
-
-    u32 tile;
-} AreaQuadPart;
-
 /* The two cell depths of each depth row: [1] while the task step is 2, else [0]. */
 extern s8           D_801F4240[][2];
 /* The first and end part of each part range func_801F3274 draws. */
@@ -46,15 +35,6 @@ extern u8  D_801F420C[];
 extern u16 D_801F4210[];
 
 /* The gate span of each cell column: first and end cell, the ends exclusive. */
-typedef struct AreaCellSpan {
-    u8 x0;
-    u8 y0;
-    u8 x_end;
-    u8 y_end;
-} AreaCellSpan;
-
-ASSERT_SIZE(AreaCellSpan, 4);
-
 extern AreaCellSpan D_801F4218[];
 /* The gate shade bytes, eleven a flag row, one a span cell. */
 extern u8           D_801F4228[];

@@ -8,14 +8,6 @@
 
 extern Callback D_801F3658[];
 
-/* A span of map cells: the first column and row, then the column and row it stops before. */
-typedef struct AreaCellSpan {
-    u8 x0;
-    u8 y0;
-    u8 x_end;
-    u8 y_end;
-} AreaCellSpan;
-
 /* The cell span of each gate position, indexed by the task's cell x. */
 extern AreaCellSpan D_801F364C[];
 
@@ -37,17 +29,6 @@ extern u8 D_801F3CF8[];
 extern u8 D_801F3CF9[];
 extern u8 D_801F3CFA[];
 extern u8 D_801F3CFB[];
-
-/* One quad of the overlay's part table: the packed cell word (bytes: depth row, shape, cell y,
- * cell x) and the tile word Area_ApplyTileToQuad reads. */
-typedef struct AreaQuadPart {
-    union {
-        u32 packed;
-        u8  bytes[4];
-    } cell;
-
-    u32 tile;
-} AreaQuadPart;
 
 /* The two cell depths of each depth row: [0] while pos.z is -0x200, else [1]. */
 extern s8           D_801F3674[][2];
