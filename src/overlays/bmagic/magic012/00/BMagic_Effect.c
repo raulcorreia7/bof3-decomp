@@ -8,12 +8,56 @@ MATCH void func_801EEC04(void) {
     BMagic_DispatchTaskPair(func_801EEC5C, func_801EEEAC);
 }
 
-#ifdef NON_MATCHING
-NON_MATCHING void func_801EEC5C(void) {
+/* Copies the battler's facing and position, spawns a type-0x37 effect at every selectable target of the selected side 8 ticks apart, then copies palette row 26 with the STP bit set. */
+MATCH void func_801EEC5C(void) {
+    PartyMember* battler;
+    PartyMember* work;
+    u16          i;
+    u8           side;
+    u8           slot;
+    u8           delay;
+
+    TASK(PartyMember)->facing = g_BattleEffectBattler->facing;
+    battler                   = g_BattleEffectBattler;
+    work                      = TASK(PartyMember);
+    work->pos.x               = battler->pos.x;
+    work->pos.y               = battler->pos.y;
+    work->pos.z               = battler->pos.z;
+    work->param.unk_0B        = 0;
+    delay                     = 1;
+    if (g_Battle.target_selector & BATTLE_TARGET_ENEMY_SIDE) {
+        for (i = 0; i < 8; i++) {
+            side = i + BATTLE_PARTY_CHARACTERS_COUNT;
+            if (!(Battle_SlotIsBlocked(side) & BYTE_MASK)) {
+                slot                               = Battle_AllocEffect(1, 0x37);
+                g_BattleEffects[slot].target.party = TASK(PartyMember);
+                g_BattleEffects[slot].unk_03       = side;
+                g_BattleEffects[slot].unk_04       = i;
+                g_BattleEffects[slot].arg.unk_09   = delay;
+                TASK(PartyMember)->param.unk_0B++;
+                delay += 8;
+            }
+        }
+    } else {
+        for (i = 0; i < BATTLE_PARTY_CHARACTERS_COUNT; i++) {
+            if (!(Battle_SlotIsBlocked((u8)i) & BYTE_MASK)) {
+                slot                               = Battle_AllocEffect(1, 0x37);
+                g_BattleEffects[slot].target.party = TASK(PartyMember);
+                g_BattleEffects[slot].unk_03       = i;
+                g_BattleEffects[slot].unk_04       = i;
+                g_BattleEffects[slot].arg.unk_09   = delay;
+                TASK(PartyMember)->param.unk_0B++;
+                delay += 8;
+            }
+        }
+    }
+    for (i = 0; i < AREA_PALETTE_ROW / sizeof(u16); i++) {
+        MEM_PTR(u16, AREA_PALETTE_UPLOAD_ROW(AREA_PALETTE_BATL_OVR_ROW))[i] = MEM_PTR(u16, AREA_PALETTE_ARENA_ROW(AREA_PALETTE_BATL_OVR_ROW))[i] | PSX_COLOR_STP_BIT;
+    }
+    g_GfxPalettePending                                          = 1;
+    g_AreaPaletteCopy->rows[AREA_PALETTE_BATL_OVR_ROW].colors[0] = g_AreaPaletteArena->rows[AREA_PALETTE_BATL_OVR_ROW].colors[0];
+    TASK(PartyMember)->header.mode++;
 }
-#else
-INCLUDE_ASM(func_801EEC5C);
-#endif
 
 MATCH void func_801EEEAC(void) {
     if (TASK(PartyMember)->param.unk_0B == 0) {

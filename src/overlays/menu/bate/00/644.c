@@ -307,23 +307,24 @@ MATCH void func_801D211C(void) {
     }
 }
 
+/* Counts each shown stat gain up to its target in turn; a press jumps to the target, the last press leaves. */
 MATCH void func_801D2190(void) {
-    s8*  selected;
-    s32* cell;
-    s32* gained;
+    s8*  stat;
+    s32* shown;
+    s32* counter;
 
     Menu_DrawClutStrip(D_80144953);
     func_801D2304(55, 55);
-    selected = &D_80148658;
-    if (*selected < 6) {
-        gained = &D_801D8F00[*selected];
-        *gained += D_801D8778[*selected];
-        cell = &D_801D8F00[*selected];
-        if ((u32)*cell < (u32)D_801D8EE8[*selected] && LOBU(g_PadStates[0].pressed) == 0) {
+    stat = &D_80148658;
+    if (*stat < 6) {
+        counter = &D_801D8F00[*stat];
+        *counter += D_801D8778[*stat];
+        shown = &D_801D8F00[*stat];
+        if ((u32)*shown < (u32)D_801D8EE8[*stat] && LOBU(g_PadStates[0].pressed) == 0) {
             return;
         }
-        *cell = D_801D8EE8[*selected];
-        (*selected)++;
+        *shown = D_801D8EE8[*stat];
+        (*stat)++;
     } else if (LOBU(g_PadStates[0].pressed) != 0) {
         UI_ModeSet(UI_MODE_FAST_FADE_OUT);
         D_80148651++;
@@ -656,13 +657,13 @@ NON_MATCHING void Menu_DrawHeaderBar(s32 x, s32 y, s32 width, s32 height, u8 win
     prim->x3 = x + width1;
     setXY0(prim, x + width1 - 2, top);
     prim->x2 = x + width1 - 2;
-    prim->y3 = bottom_y;
     setUV0(prim, 0u, 0u);
     prim->u1 = 2u;
     prim->v1 = 0u;
     prim->u2 = 0u;
     prim->u3 = 2u;
     prim->v3 = bottom_v;
+    prim->y3 = bottom_y;
     setRGB0(prim, 172, 172, 172);
     prim->y1 += 2;
     prim->y2 -= 1;

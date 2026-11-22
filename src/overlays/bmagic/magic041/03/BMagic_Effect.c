@@ -6,10 +6,9 @@ __asm__(".include \"include/match/macro.inc\"\n");
 
 #include "overlays/bmagic/shared/Effect_DispatchMode.h"
 
-#ifdef NON_MATCHING
-NON_MATCHING void func_801EECB0(void) {
+/* Places the effect on its battler and spawns its eight numbered parts and one mode-1 part, counting each. */
+MATCH void func_801EECB0(void) {
     PartyMember* battler;
-    PartyMember* task;
     u8           slot;
     u8           count;
 
@@ -22,29 +21,19 @@ NON_MATCHING void func_801EECB0(void) {
     TASK(PartyMember)->timer        = 0;
     TASK(PartyMember)->header.mode += 1;
 
-    count = 0;
-    do {
-        slot                               = Battle_AllocEffect(1, 0x3D) & BYTE_MASK;
-        task                               = g_Task;
+    for (count = 0; count < 8; count++) {
+        slot                               = Battle_AllocEffect(1, 0x3D);
+        g_BattleEffects[slot].target.party = TASK(PartyMember);
         g_BattleEffects[slot].header.mode  = 0;
-        g_BattleEffects[slot].arg.unk_09   = ((count & BYTE_MASK) << 3) + 1;
-        g_BattleEffects[slot].target.party = task;
-        FAKE_BARRIER(); /* FAKE: retail re-reads the g_Task cell for the ticker; plain C keeps the copy. */
+        g_BattleEffects[slot].arg.unk_09   = count * 8 + 1;
         TASK(PartyMember)->param.unk_0B++;
-        count++;
-    } while (count < 8);
-
-    slot                               = Battle_AllocEffect(1, 0x3D) & BYTE_MASK;
-    task                               = g_Task;
+    }
+    slot                               = Battle_AllocEffect(1, 0x3D);
+    g_BattleEffects[slot].target.party = TASK(PartyMember);
     g_BattleEffects[slot].header.mode  = 1;
-    g_BattleEffects[slot].target.party = task;
-    FAKE_BARRIER(); /* FAKE: retail re-reads the g_Task cell for the ticker; plain C keeps the copy. */
     TASK(PartyMember)->param.unk_0B++;
     SND_SEQueueSelection(0x100);
 }
-#else
-INCLUDE_ASM(func_801EECB0);
-#endif
 
 MATCH void func_801EEE14(void) {
     u8            timer;

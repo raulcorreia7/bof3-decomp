@@ -1,14 +1,17 @@
 #include "area106_13.h"
 
-#ifdef NON_MATCHING
-NON_MATCHING void func_801F3A60(void) {
+MATCH void func_801F3A60(void) {
     s32 index;
+    s16 odd;
+    s32 row;
 
-    index = SYS_TestFlag(g_SceneEventFlags, 0x52) != 0;
-    if (SYS_TestFlag(g_SceneEventFlags, 0x53) != 0) {
-        index |= 2;
+    odd = SYS_TestFlag(g_SceneEventFlags, 0x52) != 0;
+    if (SYS_TestFlag(g_SceneEventFlags, 0x53) == 0) {
+        row = odd;
+    } else {
+        row = odd | 2;
     }
-    index <<= 1;
+    index = row << 1;
 
     TASK(Actor)->pos.x.fixed = TO_COORD(D_801F4850[index]) | COORD_HALF;
     TASK(Actor)->pos.y.fixed = TO_COORD(D_801F4851[index]) | COORD_HALF;
@@ -20,6 +23,3 @@ NON_MATCHING void func_801F3A60(void) {
         g_ScriptState->cursor += index;
     }
 }
-#else
-INCLUDE_ASM(func_801F3A60);
-#endif

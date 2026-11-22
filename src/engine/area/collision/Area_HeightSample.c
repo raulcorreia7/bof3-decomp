@@ -5,6 +5,9 @@
  * larger diagonal sum * 16 or, with both half-cell bits, the largest corner * 32, as s16; outside the grid it returns
  * 0.
  */
+/* The height of corner `n` (0-3) of one map cell word: a byte each, read from the whole word. */
+#define AREA_CELL_CORNER(cell, n) ((cell) >> ((n) * 8))
+
 MATCH s16 Area_HeightSample(s32 x, s32 y) {
     s8   corner[4];
     s32  lower;
@@ -52,22 +55,22 @@ MATCH s16 Area_HeightSample(s32 x, s32 y) {
     if (!((x | y) & HALF_MASK)) {
         lift    = heights[0] * g_AreaHeightOffsetEnabled;
         corners = cell[0];
-        return (s16)(((s8)(corners >> 8) + lift + (s8)(corners >> 16) + lift) * 16);
+        return (s16)(((s8)AREA_CELL_CORNER(corners, 1) + lift + (s8)AREA_CELL_CORNER(corners, 2) + lift) * 16);
     }
     stride        = width * 4;
     cell_below    = (u32*)((u8*)cell + stride);
     heights_below = heights + width;
     if ((u16)x != (u16)y) {
         if ((u16)x != 0) {
-            corner[0] = (cell[0] >> 8) + heights[0] * g_AreaHeightOffsetEnabled;
-            corner[1] = (cell[0] >> 24) + heights[0] * g_AreaHeightOffsetEnabled;
-            corner[2] = cell[1] + heights[1] * g_AreaHeightOffsetEnabled;
-            corner[3] = (cell[1] >> 16) + heights[1] * g_AreaHeightOffsetEnabled;
+            corner[0] = AREA_CELL_CORNER(cell[0], 1) + heights[0] * g_AreaHeightOffsetEnabled;
+            corner[1] = AREA_CELL_CORNER(cell[0], 3) + heights[0] * g_AreaHeightOffsetEnabled;
+            corner[2] = AREA_CELL_CORNER(cell[1], 0) + heights[1] * g_AreaHeightOffsetEnabled;
+            corner[3] = AREA_CELL_CORNER(cell[1], 2) + heights[1] * g_AreaHeightOffsetEnabled;
         } else {
-            corner[0] = (cell[0] >> 16) + heights[0] * g_AreaHeightOffsetEnabled;
-            corner[1] = (cell[0] >> 24) + heights[0] * g_AreaHeightOffsetEnabled;
-            corner[2] = *cell_below + *heights_below * g_AreaHeightOffsetEnabled;
-            corner[3] = (u16)(*cell_below >> 8) + *heights_below * g_AreaHeightOffsetEnabled;
+            corner[0] = AREA_CELL_CORNER(cell[0], 2) + heights[0] * g_AreaHeightOffsetEnabled;
+            corner[1] = AREA_CELL_CORNER(cell[0], 3) + heights[0] * g_AreaHeightOffsetEnabled;
+            corner[2] = AREA_CELL_CORNER(*cell_below, 0) + *heights_below * g_AreaHeightOffsetEnabled;
+            corner[3] = (u16)AREA_CELL_CORNER(*cell_below, 1) + *heights_below * g_AreaHeightOffsetEnabled;
         }
         upper = corner[0] + corner[1];
         lower = corner[2] + corner[3];
@@ -76,13 +79,13 @@ MATCH s16 Area_HeightSample(s32 x, s32 y) {
         }
         return lower * 16;
     }
-    corner[0]   = (cell[0] >> 24) + heights[0] * g_AreaHeightOffsetEnabled;
-    corner[1]   = (cell[1] >> 16) + heights[1] * g_AreaHeightOffsetEnabled;
+    corner[0]   = AREA_CELL_CORNER(cell[0], 3) + heights[0] * g_AreaHeightOffsetEnabled;
+    corner[1]   = AREA_CELL_CORNER(cell[1], 2) + heights[1] * g_AreaHeightOffsetEnabled;
     next_offset = stride + 4;
     next        = width + 1;
     cell_next   = (u32*)((u8*)cell + next_offset);
-    corner[2]   = *cell_next + heights[next] * g_AreaHeightOffsetEnabled;
-    corner[3]   = (*cell_below >> 8) + *heights_below * g_AreaHeightOffsetEnabled;
+    corner[2]   = AREA_CELL_CORNER(*cell_next, 0) + heights[next] * g_AreaHeightOffsetEnabled;
+    corner[3]   = AREA_CELL_CORNER(*cell_below, 1) + *heights_below * g_AreaHeightOffsetEnabled;
     if ((corner[0] >= corner[1]) & (corner[0] >= corner[2]) & (corner[0] >= corner[3])) {
         return corner[0] << 5;
     }
