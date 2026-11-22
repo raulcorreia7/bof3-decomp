@@ -2,16 +2,16 @@
 
 /* func_801A4AA8 */
 MATCH void Actor_ResetMotion(void) {
-    Actor* step;
+    Actor* actor;
     Actor* motion;
     Actor* animation;
 
     TASK(Actor)->unk_04            = 0;
     TASK(Actor)->unk_03            = 0;
     TASK(Actor)->active_flags      = 0;
-    step                           = TASK(Actor);
-    step->unk_0A                   = 0;
-    step->timer                    = 0;
+    actor                          = TASK(Actor);
+    actor->unk_0A                  = 0;
+    actor->timer                   = 0;
     motion                         = TASK(Actor);
     animation                      = g_CurrentActor;
     motion->scale.y                = 0x10000;
