@@ -18,9 +18,7 @@ extern Callback     D_801EFA04[];
 extern BattleEffect D_801EFA14[];
 #define BMAGIC_EFFECT_SLOTS D_801EFA14
 #define BMAGIC_EFFECT_COUNT 32
-/* func_801EF024 */
-void BMagic_DispatchEffectMode(void);
-u32  func_800AF720(s32 start, s32 end, s32 value);
+u32 func_800AF720(s32 start, s32 end, s32 value);
 
 #define MAGIC219_STEP_COUNT 4
 

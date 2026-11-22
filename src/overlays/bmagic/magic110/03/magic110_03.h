@@ -10,8 +10,6 @@ extern s16               D_1F800004;
 extern BMagicEffectSteps D_801EEC04;
 
 extern Callback D_801F0478[];
-extern Callback D_801F048C[];
-
 extern Callback D_801F049C[];
 
 /* Six points. */

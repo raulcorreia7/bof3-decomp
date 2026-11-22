@@ -26,8 +26,6 @@ typedef struct Magic053Steps {
 
 extern Magic053Steps D_801EEC04;
 
-/* Per spark: the start byte; its high nibble picks the spark type. */
-extern u8       D_801F0548[];
 extern Callback D_801F0554[];
 
 #endif
