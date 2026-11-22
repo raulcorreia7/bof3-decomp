@@ -459,15 +459,14 @@ typedef struct BMagicTint {
 } BMagicTint;
 
 ASSERT_SIZE(BMagicTint, 0x2);
+extern u16 D_80036C00[256];
 
 /* The four scratch vectors the effect draws project their corners from; the flat name keeps the retail
  * bytes, the scratchpad view does not. */
 
 /* Pointers to character-indexed archive ids, one row of two per g_Battle.dragon_form; the caller picks
  * the row's column and g_EmiLoadedCharacterIndex picks the id. */
-extern u16* D_800B499C[][2];
-
-extern u16      D_80036C00[256];
+extern u16*     D_800B499C[][2];
 extern Callback D_801F048C[];
 extern u8       D_801F0548[];
 extern Callback D_801F08C4[];
