@@ -15,9 +15,24 @@
 /* Both callback initialization and cursor wrap use 24 slots (EMI_LdrStreamInitSlot, EMI_LdrServiceStream). */
 #define EMI_CALLBACK_SLOT_COUNT 24
 
+/* The CD loader state CD_Update dispatches on; g_CdStateHandlers holds the handler of each state. */
+typedef enum CdState {
+    CD_STATE_IDLE       = 0, /* CD_Idle */
+    CD_STATE_SET_SPEED  = 1, /* CD_SetSpeed */
+    CD_STATE_SEEK       = 2, /* CD_Seek */
+    CD_STATE_SEEK_WAIT  = 3, /* CD_OnSeek */
+    CD_STATE_READ       = 4, /* CD_Read */
+    CD_STATE_READ_WAIT  = 5, /* CD_OnRead */
+    CD_STATE_PAUSE      = 6, /* CD_Pause */
+    CD_STATE_PAUSE_WAIT = 7, /* CD_OnPause */
+    CD_STATE_IDLE_END   = 8, /* CD_Idle, the stream's last state */
+} CdState;
+
+#define CD_STATE_COUNT  9
+
 /* The loader's step counter, a word in the bank mapped at 0x80140000 (EMI_LdrLoadVabBody, EMI_LdrLoadVabCues,
  * EMI_LdrLoadSequence). */
-#define EMI_LOADER_STEP         (*(volatile u32*)(D_80140000 + 0x646C))
+#define EMI_LOADER_STEP (*(volatile u32*)(D_80140000 + 0x646C))
 
 /* The load in flight: the disc sector it reads from, then its TOC row with `size` counting down. */
 typedef struct EMIActiveLoad {

@@ -1,15 +1,15 @@
 #include "slus.h"
 
-const u32 g_CdSteps[9] = {
-    (u32)CD_Idle,
-    (u32)CD_SetSpeed,
-    (u32)CD_Seek,
-    (u32)CD_OnSeek,
-    (u32)CD_Read,
-    (u32)CD_OnRead,
-    (u32)CD_Pause,
-    (u32)CD_OnPause,
-    (u32)CD_Idle,
+const Callback g_CdStateHandlers[CD_STATE_COUNT] = {
+    CD_Idle,
+    CD_SetSpeed,
+    CD_Seek,
+    CD_OnSeek,
+    CD_Read,
+    CD_OnRead,
+    CD_Pause,
+    CD_OnPause,
+    CD_Idle,
 };
 
 const EmiRingSteps g_EmiRingSteps = {{

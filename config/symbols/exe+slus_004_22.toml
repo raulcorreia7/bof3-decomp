@@ -205,7 +205,7 @@ g_EmiNextSlot = { addr = 0x80146481, source = "EMI_ArchiveLoad clears it and CD_
 g_EmiUploadBank = { addr = 0x80146482, type = "u8", source = "The sound bank being uploaded: EMI_VabUploadBody takes the entry's bank here and EMI_VabLoadHeader closes that bank's selection effect voice." }
 g_EmiEntryBank = { addr = 0x80146483, type = "u8", source = "The sound bank the current EMI entry belongs to: EMI_VabLoadHeader stores the entry's bank index and the loaders reach vab_id, vab_header, se_records and sequence_buffer through it." }
 g_EmiRingSlot = { addr = 0x80146489, source = "Slot of the EMI sector ring." }
-g_CdStep = { addr = 0x8014648A, type = "u8", source = "The CD step handler CD_Update dispatches through g_CdSteps: the sync, read, seek and pause callbacks store the next step." }
+g_CdState = { addr = 0x8014648A, type = "u8", source = "The CD loader state: CD_Update calls g_CdStateHandlers[g_CdState], and the sync, read, seek and pause callbacks select the next state." }
 g_CdSyncStatus = { addr = 0x8014648C, type = "s32", source = "The last CdSync result latched by CD_OnSync (1 complete, -1 failed); the read, seek and pause callbacks branch on it." }
 g_EmiStreamIdleFrames = { addr = 0x80146490, source = "Frames since the EMI stream last made progress; EMI_ArchiveStart clears it and EMI_UpdateStream restarts the read at EMI_STREAM_TIMEOUT_FRAMES." }
 g_EmiStreamState = { addr = 0x80146494, source = "State of the EMI stream." }
@@ -316,7 +316,7 @@ g_UiMessageChoiceSteps = { addr = 0x80149B50, source = "Steps of the answer list
 g_UiMessagePresetSteps = { addr = 0x80149B64, source = "Steps of the preset answer list panel: open, grow, draw, shrink, release." }
 jtbl_80149B78 = { addr = 0x80149B78, type = "Callback", source = "The switch table of UI_TextDrawAt: the jump targets of its jr dispatch." }
 jtbl_80149C00 = { addr = 0x80149C00, type = "Callback", source = "The switch table of Script_ReadValue: the jump targets of its jr dispatch." }
-g_CdSteps = { addr = 0x80149C3C, alias = true, source = "CD step handlers of the EMI loader." }
+g_CdStateHandlers = { addr = 0x80149C3C, alias = true, source = "The nine CD loader state handlers, in CdState order: CD_Idle, CD_SetSpeed, CD_Seek, CD_OnSeek, CD_Read, CD_OnRead, CD_Pause, CD_OnPause and CD_Idle again." }
 g_EmiRingSteps = { addr = 0x80149C60, alias = true, source = "EMI_UpdateStream copies it" }
 jtbl_80149C90 = { addr = 0x80149C90, type = "Callback", source = "The switch table of Char_ApplyMaster: the jump targets of its jr dispatch." }
 jtbl_80149CC8 = { addr = 0x80149CC8, type = "Callback", source = "The switch table of Char_PreviewEquip: the jump targets of its jr dispatch." }
