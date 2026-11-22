@@ -62,7 +62,7 @@ MATCH void func_801F9AA0(void) {
             }
             break;
         case 15:
-            if (g_UiWindowEffectBusy == 0) {
+            if (g_SysThreads[2].state == 0) {
                 g_ScenarioState.step = 0x10;
                 g_ScriptVars[2]      = 4;
                 g_AreaDrawFlags      = 0;

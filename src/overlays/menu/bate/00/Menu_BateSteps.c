@@ -44,7 +44,7 @@ MATCH void Menu_StartFadeIn(void) {
 MATCH void func_801D0EE4(void) {
     u8* base = &g_WindowClut;
     Menu_DrawClutStrip(*base);
-    if (g_UiWindowEffectBusy != 0) {
+    if (g_SysThreads[2].state != 0) {
         return;
     }
     SND_SEPlay(EMI_SE_ID(SND_BANK_COMMON, 2));

@@ -117,7 +117,7 @@ MATCH void func_801FA24C(void) {
             }
             break;
         case 18:
-            if (g_UiWindowEffectBusy == 0) {
+            if (g_SysThreads[2].state == 0) {
                 g_ScriptVars[0]      = 6;
                 g_ScenarioState.step = 19;
                 func_801C16B8();

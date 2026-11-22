@@ -9,7 +9,7 @@ MATCH void func_801F37EC(void) {
             g_SceneEventStep = 1;
             break;
         case 1:
-            if (!g_UiWindowEffectBusy) {
+            if (!g_SysThreads[2].state) {
                 g_AreaDrawFlags  = 0;
                 g_SceneEventStep = 2;
             }
@@ -27,14 +27,14 @@ MATCH void func_801F37EC(void) {
             g_SceneEventStep = 3;
             break;
         case 3:
-            if (!g_UiWindowEffectBusy) {
+            if (!g_SysThreads[2].state) {
                 g_AreaDrawFlags = 0x1F;
                 UI_ModeSet(1);
                 g_SceneEventStep = 4;
             }
             break;
         case 4:
-            if (!g_UiWindowEffectBusy) {
+            if (!g_SysThreads[2].state) {
                 g_ScriptVars[0]  = 1;
                 g_SceneEventStep = 5;
             }
@@ -154,7 +154,7 @@ MATCH void func_801F37EC(void) {
             }
             break;
         case 32:
-            if (!g_UiWindowEffectBusy) {
+            if (!g_SysThreads[2].state) {
                 g_AreaDrawFlags = 0;
                 SND_SeqStop(g_SelectionSepSlots[g_SndBGMId * 4], g_SelectionSequences[g_SndBGMId * 4]);
                 SND_XAStartStream(6, 1);
@@ -174,7 +174,7 @@ MATCH void func_801F37EC(void) {
             g_SceneEventStep = 0x23;
             break;
         case 35:
-            if (!g_UiWindowEffectBusy) {
+            if (!g_SysThreads[2].state) {
                 g_AreaDrawFlags = 0x1F;
                 UI_ModeSet(1);
                 g_ScriptVars[0] = 1;
