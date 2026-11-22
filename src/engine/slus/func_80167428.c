@@ -17,7 +17,6 @@ NON_MATCHING void func_80167428(void) {
     s32          val3;
     s8           val4;
     s8           val5;
-    void*        tmp8;
     Actor*       tmp9;
     Actor*       tmp10;
     Actor*       tmp11;

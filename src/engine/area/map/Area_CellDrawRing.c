@@ -34,7 +34,6 @@ NON_MATCHING s32 Area_CellDrawRing(void) {
     s32       tmp;
     s32       row;
     s32       col;
-    s32       col_count;
     s32       fp;
     s32       s6;
     s32       s2;
