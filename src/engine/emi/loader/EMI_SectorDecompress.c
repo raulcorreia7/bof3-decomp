@@ -5,7 +5,7 @@
  * The subtract-of-negated-offset form is load-bearing: retail's
  * `addu v1,v1,v0` needs the pointer as the first operand after folding.
  */
-MATCH void EMI_DecompressSector(void) {
+MATCH void EMI_SectorDecompress(void) {
     s8* rec;
 
     rec = &D_80146488;
@@ -13,5 +13,5 @@ MATCH void EMI_DecompressSector(void) {
      * addu operand. */
     rec = rec - (rec[0] * -4);
     LZ77_DecodeBegin(*(u8**)(rec + 0x30));
-    EMI_CopySectorToScratchpad();
+    EMI_SectorCopyToScratchpad();
 }

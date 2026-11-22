@@ -11,6 +11,6 @@ MATCH void func_801EECD0(void) {
     }
     TEXT_Format(g_TextVariables, D_801EEC04, g_Battle.outcome.reward_exp);
     g_BattleEventSlots[0].payload = UI_MessageGetText(5);
-    EMI_LoadFamilyArchive(g_EmiLoadedCharacterIndex & 0x7F, 0);
+    EMI_ArchiveLoadFamily(g_EmiLoadedCharacterIndex & 0x7F, 0);
     g_Battle.ui_mode += 1;
 }

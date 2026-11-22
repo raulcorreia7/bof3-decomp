@@ -42,7 +42,7 @@ NON_MATCHING void func_801D0F2C(u8 start) {
         g_Characters[D_80181B18].character_id         = 8;
         g_Characters[D_80181B18].base.evasion         = 0xC;
     }
-    EMI_LoadPartyArchives(SP_REF(u8, 0), SP_REF(u8, 1), SP_REF(u8, 2), 0);
+    EMI_PartyLoadArchives(SP_REF(u8, 0), SP_REF(u8, 1), SP_REF(u8, 2), 0);
     g_PartySize = 0;
     src         = D_801EBA44[start].party;
     for (i = 0; i < 3; i++) {

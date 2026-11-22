@@ -12,7 +12,7 @@ MATCH void Battle_LoadRe2Archive(void) {
         Battle_ShowMessage(g_BattleMessageSlot);
         /* FAKE: statement boundary keeps the retail register order and schedule. */
         FAKE_ORDER_LOCK(g_BattleMessageState = 1);
-        EMI_LoadArchive(EMI_SLOT_BATL_RE2);
+        EMI_ArchiveLoad(EMI_SLOT_BATL_RE2);
         *(u8*)&g_Battle.ui_mode += 1;
     }
 }
