@@ -11,9 +11,13 @@
 #define COMMU05_STEP_COUNT 3
 
 /* The page counts of the three lists. */
-extern u8 D_801D19F0[3];
+typedef struct {
+    u8 pages[3];
+} Commu05State;
+
+extern Commu05State D_801D19F0;
 /* The page shown, counted across the three lists. */
-extern s8 D_801D19F4;
+extern s8           D_801D19F4;
 
 void      func_801D1048(s16 x, s16 y, u8 group);
 void      func_801D129C(s16 x, s16 y, u8 group);
