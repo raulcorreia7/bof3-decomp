@@ -9,9 +9,20 @@
 
 extern u8 D_801F43B8[];
 
-/* The width and height halves of the RECT at the start of D_801F43B8. */
-extern u16 D_801F43BC;
-extern u16 D_801F43BE;
+/* The image descriptor at the head of D_801F43B8: the rectangular area the
+ * overlay stores, its x/y signed and its size unsigned. */
+typedef union AreaScreenRect {
+    RECT rect;
+
+    struct {
+        s16 x;
+        s16 y;
+        u16 w;
+        u16 h;
+    } box;
+} AreaScreenRect;
+
+#define AREA120_IMAGE_RECT ((AreaScreenRect*)D_801F43B8)
 
 void func_801F35B8(void);
 u8   func_801F36B0(void);

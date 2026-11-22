@@ -11,7 +11,7 @@
 
 /* The vertex rows and the per-row transform state the stage animates. */
 #define AREA108_VERTEX_DST   MEM_PTR(u8, AREA_WORK + 0x7A8)
-#define AREA108_STATE_BASE   MEM_PTR(u16, AREA_WORK + 0x280)
+#define AREA108_STATE_BASE   MEM_PTR(AreaTransform, AREA_WORK + 0x280)
 #define AREA108_STATE_OFFSET MEM_PTR(u16, AREA_WORK + 0x284)
 
 /* The cell the party leader's choice commits and the bit the event sets. */
@@ -29,7 +29,7 @@ ASSERT_SIZE(AreaFacingCell, 0x03);
 
 extern AreaFacingCell D_801F636C[];
 
-void func_801F3588(u8* dst, u8* src, u16* state);
+void func_801F3588(u8* dst, u8* src, AreaTransform* state);
 
 /* The variant byte the cancel path stores in the game-overlay state. */
 #define AREA_RESET_VARIANT 0x04
@@ -99,7 +99,7 @@ typedef struct SceneSampleTrack {
 
 ASSERT_OFFSET(SceneSampleTrack, sample, 0x02);
 ASSERT_OFFSET(SceneSampleTrack, weight, 0x1A);
-ASSERT_SIZE(SceneSampleTrack, 0x28);
+ASSERT_SIZE(SceneSampleTrack, 0x28); /* the same 0x28 row as scena00's SceneSample, whose weights are s16 */
 
 /* The staged actor rows: the event scrolls to row 1 and tints row 0. */
 /* D_80147A58 */

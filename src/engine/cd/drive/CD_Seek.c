@@ -5,7 +5,7 @@
 MATCH void CD_Seek(void) {
     u16* counter;
 
-    counter = &D_80146492;
+    counter = &g_EmiStream.seek_retries;
     if (*counter != 0) {
         *counter -= 1;
         return;
@@ -13,6 +13,6 @@ MATCH void CD_Seek(void) {
     /* Param is D_80146778 (CdlLOC; see EMI_ArchiveStart.c); object form regresses
      * bytes. */
     if (CdSeekP((u_char*)counter + 0x2E6) != 0) {
-        g_CdState = CD_STATE_SEEK_WAIT;
+        g_EmiStream.cd_state = CD_STATE_SEEK_WAIT;
     }
 }

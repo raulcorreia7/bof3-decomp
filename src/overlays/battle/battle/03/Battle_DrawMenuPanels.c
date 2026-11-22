@@ -1,12 +1,12 @@
 #include "battle_03.h"
 
-/* Per-row (x, y) offsets of the five panel rows. */
+/* Per-panel (x, y) offsets of the five panels. */
 
-/* draws the five panel rows at the panel position plus the per-row offsets, then ages the row counters or
- * advances the panel state when the first row has run out.
+/* draws the five panels at the panel position plus the per-panel offsets, then ages the panel widths or
+ * advances the panel state when the first panel width has run out.
  */
 /* func_801E927C */
-MATCH void Battle_DrawMenuRows(void) {
+MATCH void Battle_DrawMenuPanels(void) {
     u8 i;
     u8 size;
     u8 xoff;

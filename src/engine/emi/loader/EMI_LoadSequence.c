@@ -7,8 +7,8 @@ MATCH void EMI_LoadSequence(void) {
     u32 entry_offset;
 
     if (EMI_LOADER_STEP == 0) {
-        entry_offset = g_EmiEntryBank * sizeof(EMIBank);
-        g_EmiLoadArg = *(u32*)((u8*)&g_EmiBanks[0].sequence_buffer + entry_offset);
+        entry_offset         = g_EmiStream.entry_bank * sizeof(EMIBank);
+        g_EmiStream.load_arg = *(u32*)((u8*)&g_EmiBanks[0].sequence_buffer + entry_offset);
         *(u16*)((u8*)&g_EmiBanks[0].flags + entry_offset) |= 2;
     }
 

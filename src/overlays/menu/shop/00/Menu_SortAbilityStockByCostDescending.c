@@ -6,7 +6,7 @@
 
 /* func_801E1C88 */
 MATCH void Menu_SortAbilityStockByCostDescending(void) {
-    u8* row;
+    u8* abilities;
     u8  i;
     u8  j;
     u8  cur;
@@ -14,16 +14,16 @@ MATCH void Menu_SortAbilityStockByCostDescending(void) {
 
     Menu_PackAbilityStock();
     for (i = 0; i < ABILITY_STOCK_SLOT_COUNT - 1; i++) {
-        row = D_8014546C;
+        abilities = D_8014546C;
         for (j = 0; j < ABILITY_STOCK_SLOT_COUNT - 1 - i; j++) {
-            cur = *row;
+            cur = *abilities;
             if (cur != 0) {
-                nxt = *(row + 1);
+                nxt = *(abilities + 1);
                 if ((nxt != 0) && (g_Abilities[cur].cost < g_Abilities[nxt].cost)) {
-                    Menu_SwapBytes6(row, row + 1);
+                    Menu_SwapBytes6(abilities, abilities + 1);
                 }
             }
-            row++;
+            abilities++;
         }
     }
 }

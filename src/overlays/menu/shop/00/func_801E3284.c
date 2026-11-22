@@ -29,7 +29,7 @@
 #define ITEM_COUNT_MODE_EQUIPPED     1
 
 MATCH void func_801E3284(MenuPanelTask* task) {
-    u8* row;
+    u8* entry;
     u8* icon;
     u8  group;
     u8  key;
@@ -37,9 +37,9 @@ MATCH void func_801E3284(MenuPanelTask* task) {
     s32 price;
     u8* text;
 
-    row   = (u8*)task->item_table + task->unk_0B * 2;
-    group = row[1];
-    key   = row[2];
+    entry = (u8*)task->item_table + task->unk_0B * 2;
+    group = entry[1];
+    key   = entry[2];
 
     price = Shop_ApplyPercent(Item_GetPrice(group, key) & HALF_MASK, task->unk_0A);
     icon  = Item_GetRecord(group, key);

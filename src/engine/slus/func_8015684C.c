@@ -6,7 +6,7 @@
 MATCH void func_8015684C(u32* record, s32 cell_x, s32 cell_y) {
     AreaCellCorners* cell;
     AreaCellCorners* row;
-    u8*              prim;
+    POLY_FT4*        prim;
     SVECTOR*         vert;
     SVECTOR          v[4];
     u16              flag;
@@ -26,7 +26,7 @@ MATCH void func_8015684C(u32* record, s32 cell_x, s32 cell_y) {
     cell    = (AreaCellCorners*)(cell_x * 4 + (u32)row);
     x       = (cell_x - 128) << 7;
     v[0].vx = v[2].vx = x - AREA_CELL_HALF;
-    prim              = g_GfxPrimCursor;
+    prim              = (POLY_FT4*)g_GfxPrimCursor;
     y                 = (cell_y - 128) << 7;
     y_edge            = y - AREA_CELL_HALF;
     v[0].vy = v[2].vy = y | AREA_CELL_HALF;
@@ -40,9 +40,9 @@ MATCH void func_8015684C(u32* record, s32 cell_x, s32 cell_y) {
     z                 = -((u8)cell->corner_height[1] << 4);
     v[3].vz           = z;
     v[1].vz           = z - 128;
-    SetPolyFT4((POLY_FT4*)prim);
+    SetPolyFT4(prim);
     SetShadeTex(prim, 0);
-    RotTransPers4(vert, &v[1], &v[2], &v[3], (s32*)(prim + 8), (s32*)(prim + 0x10), (s32*)(prim + 0x18), (s32*)(prim + 0x20), &p, &flag);
+    RotTransPers4(vert, &v[1], &v[2], &v[3], (s32*)&prim->x0, (s32*)&prim->x1, (s32*)&prim->x2, (s32*)&prim->x3, &p, &flag);
     Area_ApplyTileToQuad(0xB1800110u, prim, 1);
     GFX_AddPrim(state, sizeof(POLY_FT4));
 }

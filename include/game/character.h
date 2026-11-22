@@ -85,12 +85,13 @@ typedef enum EquipPreviewChange {
     EQUIP_PREVIEW_HIGHER = 3,
 } EquipPreviewChange;
 
-/* Which party-order array a call reads: the walking order g_PartyFieldOrder or the
- * battle order g_PartyBattleOrder, three character ids each, 0xFF for an empty
+/* Which party-order row a call reads: the walking order g_PartyOrders[PARTY_ORDER_FIELD] or the
+ * battle order g_PartyOrders[PARTY_ORDER_BATTLE], three character ids each, 0xFF for an empty
  * position. Party_CountOrder and Party_BattlersBuild take it as their mode. */
 typedef enum PartyOrder {
     PARTY_ORDER_FIELD  = 0,
     PARTY_ORDER_BATTLE = 1,
+    PARTY_ORDER_COUNT  = 2,
 } PartyOrder;
 
 /* Playable-character slot: the record's position in the 8-entry base-stat

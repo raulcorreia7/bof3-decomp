@@ -56,12 +56,12 @@
 /* Draws the name entry control window: the OK, Del, Next and Back labels beside the character grid and the button
  * icons that select them. */
 MATCH s32 Menu_DrawNameEntryControls(u8 page, s32 x, s32 y) {
-    SPRT* sprite;
-    u8*   rect;
-    u16   left;
-    u16   top;
-    u16   row;
-    u16   column;
+    SPRT*   sprite;
+    UvRect* rect;
+    u16     left;
+    u16     top;
+    u16     row;
+    u16     column;
 
     left = x;
     top  = y;
@@ -77,8 +77,8 @@ MATCH s32 Menu_DrawNameEntryControls(u8 page, s32 x, s32 y) {
     SetSprt(sprite);
     SetSemiTrans(sprite, 0);
     setXY0(sprite, x + CONTROLS_SPRITE_X, y + CONTROLS_SPRITE_Y);
-    setUV0(sprite, rect[0], rect[1]);
-    setWH(sprite, rect[2], rect[3]);
+    setUV0(sprite, rect->u, rect->v);
+    setWH(sprite, rect->w, rect->h);
     setClut(sprite, CONTROLS_SPRITE_CLUT_X, CONTROLS_SPRITE_CLUT_Y);
     setRGB0(sprite, CONTROLS_SPRITE_SHADE, CONTROLS_SPRITE_SHADE, CONTROLS_SPRITE_SHADE);
     GFX_AddPrim(GFX_LAYER_UI, sizeof(SPRT));

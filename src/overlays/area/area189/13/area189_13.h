@@ -49,20 +49,22 @@ extern u8 D_801F6389[];
 extern u8 D_801F638A[];
 
 /* The image's step passes. */
-void func_801F518C(void);
-void func_801F54B0(void);
-u8   func_801F5D6C(void);
-void func_801F5D20(void);
-bool func_801F5EA8(void);
-s32  func_801F5F3C(void);
 void func_801F2DE0(void);
 void func_801F3514(void);
-void func_801F4150(s32 shade, s32 x);
 void func_801F3800(void);
+void func_801F4150(s32 shade, s32 x);
+void func_801F497C(u8 size);
 s16  func_801F4A04(s32 x, s32 y);
+void func_801F4B64(TILE_1* source);
+void func_801F518C(void);
+void func_801F54B0(void);
 void func_801F559C(void);
 /* func_801F5F20 */
 void func_801F5600(void);
+void func_801F5D20(void);
+u8   func_801F5D6C(void);
+bool func_801F5EA8(void);
+s32  func_801F5F3C(void);
 
 extern Callback D_801F62F4[];
 

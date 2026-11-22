@@ -19,18 +19,6 @@
 #define WORLD00_AREA024_PTR_7AAC       MEM(volatile u8*, 0x80147AACu)
 #define WORLD00_AREA024_SCRATCH_PTR    SP_REF(volatile Actor*, 0x44u)
 
-/* Per-sprite transform state at 0x800E4940 (0x18-byte stride): the halfword
- * translation base at +0x00 and the rotation angles at +0x10. */
-typedef struct AreaTransform {
-    /* 0x00 */ u16     base_x;
-    /* 0x02 */ u16     base_y;
-    /* 0x04 */ u16     base_z;
-    u8                 pad_06[0x0A];
-    /* 0x10 */ SVECTOR rotation;
-} AreaTransform;
-
-ASSERT_SIZE(AreaTransform, 0x18);
-
 /* D_80147A58 */
 extern volatile u8 g_PartyActors;
 extern VECTOR      D_801F2C04;

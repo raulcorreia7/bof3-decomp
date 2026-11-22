@@ -9,6 +9,20 @@
 /* The projected cell, read unsigned: the primitives take it as a screen pixel. */
 extern u16 D_1F800034_U16[2];
 
+/* One light-pillar quad: the four corner depth scales, the texture-page bit and the two phase
+ * tiles. */
+typedef struct LightPillarQuad {
+    u8 shade[4];
+    u8 page;
+    u8 tile[2];
+    u8 pad;
+} LightPillarQuad;
+
+ASSERT_SIZE(LightPillarQuad, 8);
+
+/* The sixteen quad records func_801F49A0 draws around the actor. */
+extern LightPillarQuad D_801F5994[];
+
 u8   Area_FindTaggedPartySlot(void);
 void func_801F482C(void);
 void func_801F49A0(s32 phase);
@@ -41,6 +55,8 @@ typedef struct AreaSpinEffect {
 } AreaSpinEffect;
 
 ASSERT_SIZE(AreaSpinEffect, 0x4BC);
+
+void func_801F2FB8(AreaSpinEffect* effect);
 
 /* The shared frame tail of the scripted scene steps: every fifth frame it
  * advances the cell palette cycle, then draws both cell layers and the overlay. */

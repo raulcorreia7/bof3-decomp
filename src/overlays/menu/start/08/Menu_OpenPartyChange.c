@@ -1,35 +1,34 @@
-/* best score 90.14 */
 #include "start_08.h"
 
 /* func_801DAE14 */
 #ifdef NON_MATCHING
 NON_MATCHING void Menu_OpenPartyChange(u16 buttons) {
-    s32          count;
-    u8           n;
-    s32          offset;
-    s32          i;
-    s32          index;
-    s32          j;
-    volatile u8* flags;
-    volatile u8* total;
+    s32 count;
+    u8  n;
+    s32 offset;
+    s32 i;
+    s32 j;
+    u8* total; /* D_801484EA: the reserve list length */
+    u8* next;  /* the same byte, the index the scan advances */
 
-    count      = Party_CountOrder(PARTY_ORDER_FIELD);
-    n          = count;
-    D_801484EA = 0;
-    flags      = &D_801484EA;
-    offset     = 0;
+    count  = Party_CountOrder(PARTY_ORDER_FIELD);
+    n      = count;
+    total  = &D_801484EA;
+    *total = 0;
+    next   = &D_801484EA;
+    offset = 0;
     for (i = 0; i < CHAR_INDEX_COUNT; i++) {
-        if (((u8*)&g_Characters[0].party_flags)[offset] & 1) {
-            for (index = 0; index < n; index++) {
-                if (g_Characters[i].character_id == g_PartyFieldOrder[index]) {
+        if (((u8*)&g_Characters[0].party_flags)[offset] & PARTY_FLAG_JOINED) {
+            for (j = 0; j < n; j++) {
+                if (g_Characters[i].character_id == g_PartyFieldOrder[j]) {
                     break;
                 }
             }
-            if (index == n) {
-                D_801ED690[(*flags)++] = g_Characters[i].character_id;
+            if (j == n) {
+                D_801ED690[(*next)++] = g_Characters[i].character_id;
             }
         }
-        offset += 0xA4;
+        offset += PARTY_RECORD_STRIDE;
     }
 
     g_UiPanelTasks[MENU_START_PANEL_COMMANDS].active = 1;
@@ -51,6 +50,8 @@ NON_MATCHING void Menu_OpenPartyChange(u16 buttons) {
     for (i = 0; i < *total; i++) {
         D_801ED695[i][0] = 1;
     }
+    total = &D_801484EA;
+    /* Retail re-tests the same count, which the loop above has already reached. */
     for (; i < *total; i++) {
         D_801ED695[i][0] = 0;
     }

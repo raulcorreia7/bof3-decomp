@@ -6,11 +6,11 @@
 MATCH void CD_OnRead(void) {
     u8 mode;
 
-    if (g_CdSyncStatus < 0) {
-        g_EmiStreamState = 0;
-        mode             = CD_STATE_READ;
+    if (g_EmiStream.cd_sync_status < 0) {
+        g_EmiStream.state = 0;
+        mode              = CD_STATE_READ;
     } else {
         mode = CD_STATE_IDLE_END;
     }
-    g_CdState = mode;
+    g_EmiStream.cd_state = mode;
 }
