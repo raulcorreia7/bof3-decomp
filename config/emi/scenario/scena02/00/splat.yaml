@@ -16,7 +16,7 @@ segments:
       - [0xF4, .rodata, func_801F82F4]
       - [0x10C, .rodata, func_801F8538]
       - [0x120, .rodata, D_801F6D20]
-      - [0x124, .rodata, D_801F6D24]
+      - [0x124, .rodata, 1B40]
       - [0x154, .rodata, func_801F8C78]
       - [0x174, .rodata, func_801F9134]
       - [0x1A0, .rodata, D_801F6DA0]
