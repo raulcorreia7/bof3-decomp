@@ -280,23 +280,17 @@ NON_MATCHING void func_801F02FC(void) {
     lower_angle                 = 0x400;
     g_ScratchPad.cells.words[0] = g_Task->unk_09 << 2;
     do {
-        g_ScratchPadVectors[1].vx = FIXED_MUL(rsin(0), FIXED_MUL(rcos(lower_angle), g_ScratchPad.cells.words[0]));
-        g_ScratchPadVectors[1].vy = FIXED_MUL(rcos(0), FIXED_MUL(rcos(lower_angle), g_ScratchPad.cells.words[0]));
-        g_ScratchPadVectors[1].vz = FIXED_MUL(rsin(lower_angle), g_ScratchPad.cells.words[0]);
-        g_ScratchPadVectors[3].vx = FIXED_MUL(rsin(0), FIXED_MUL(rcos(upper_angle), g_ScratchPad.cells.words[0]));
-        g_ScratchPadVectors[3].vy = FIXED_MUL(rcos(0), FIXED_MUL(rcos(upper_angle), g_ScratchPad.cells.words[0]));
-        g_ScratchPadVectors[3].vz = FIXED_MUL(rsin(upper_angle), g_ScratchPad.cells.words[0]);
-        i                         = 1;
+        setVector(&g_ScratchPadVectors[1], FIXED_MUL(rsin(0), FIXED_MUL(rcos(lower_angle), g_ScratchPad.cells.words[0])), FIXED_MUL(rcos(0), FIXED_MUL(rcos(lower_angle), g_ScratchPad.cells.words[0])),
+                  FIXED_MUL(rsin(lower_angle), g_ScratchPad.cells.words[0]));
+        setVector(&g_ScratchPadVectors[3], FIXED_MUL(rsin(0), FIXED_MUL(rcos(upper_angle), g_ScratchPad.cells.words[0])), FIXED_MUL(rcos(0), FIXED_MUL(rcos(upper_angle), g_ScratchPad.cells.words[0])),
+                  FIXED_MUL(rsin(upper_angle), g_ScratchPad.cells.words[0]));
+        i = 1;
         do {
-            angle                     = i << 8;
-            g_ScratchPadVectors[0].vx = g_ScratchPadVectors[1].vx;
-            g_ScratchPadVectors[0].vy = g_ScratchPadVectors[1].vy;
-            g_ScratchPadVectors[0].vz = g_ScratchPadVectors[1].vz;
+            angle = i << 8;
+            setVector(&g_ScratchPadVectors[0], g_ScratchPadVectors[1].vx, g_ScratchPadVectors[1].vy, g_ScratchPadVectors[1].vz);
             setVector(&g_ScratchPadVectors[1], FIXED_MUL(rsin(angle), FIXED_MUL(rcos(lower_angle), g_ScratchPad.cells.words[0])),
                       FIXED_MUL(rcos(angle), FIXED_MUL(rcos(lower_angle), g_ScratchPad.cells.words[0])), FIXED_MUL(rsin(lower_angle), g_ScratchPad.cells.words[0]));
-            g_ScratchPadVectors[2].vx = g_ScratchPadVectors[3].vx;
-            g_ScratchPadVectors[2].vy = g_ScratchPadVectors[3].vy;
-            g_ScratchPadVectors[2].vz = g_ScratchPadVectors[3].vz;
+            setVector(&g_ScratchPadVectors[2], g_ScratchPadVectors[3].vx, g_ScratchPadVectors[3].vy, g_ScratchPadVectors[3].vz);
             setVector(&g_ScratchPadVectors[3], FIXED_MUL(rsin(angle), FIXED_MUL(rcos(upper_angle), g_ScratchPad.cells.words[0])),
                       FIXED_MUL(rcos(angle), FIXED_MUL(rcos(upper_angle), g_ScratchPad.cells.words[0])), FIXED_MUL(rsin(upper_angle), g_ScratchPad.cells.words[0]));
             x     = (g_ScratchPadVectors[3].vx << 9) + g_Task->pos.x.fixed;

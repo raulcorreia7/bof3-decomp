@@ -70,8 +70,8 @@ MATCH void func_801EEEF0(void) {
     value          = g_Task->unk_09 - 1;
     g_Task->unk_09 = value;
     if (!(value & BYTE_MASK)) {
-        GFX_FreePaletteFadeTarget(battler);
-        g_Task->timer  = GFX_AllocPaletteFade(battler, 0, 0, 0, 1);
+        GFX_PaletteFreeFadeTarget(battler);
+        g_Task->timer  = GFX_PaletteAllocFade(battler, 0, 0, 0, 1);
         g_Task->unk_09 = 4;
         g_Task->header.mode += 1;
     }
@@ -106,7 +106,7 @@ MATCH void func_801EF0B4(void) {
         return;
     }
     if (g_Task->param.unk_0B < 2) {
-        GFX_FreePaletteFade(g_Task->timer);
+        GFX_PaletteFreeFade(g_Task->timer);
         selector = (u8*)&g_Battle.target_selector;
         Battle_FadePoisonedBattler(*selector);
         if (g_Battle.action_id == ABILITY_WARDOFLIGHT) {

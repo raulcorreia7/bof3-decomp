@@ -17,8 +17,8 @@ MATCH void func_801EEC88(void) {
     g_Task->pos.x.fixed = actor->pos.x.fixed;
     g_Task->pos.y.fixed = actor->pos.y.fixed;
     g_Task->pos.z.fixed = actor->pos.z.fixed;
-    GFX_FreePaletteFadeTarget(actor);
-    g_Task->timer                      = GFX_AllocPaletteFade(actor, 0, 0, 0, 1);
+    GFX_PaletteFreeFadeTarget(actor);
+    g_Task->timer                      = GFX_PaletteAllocFade(actor, 0, 0, 0, 1);
     slot                               = Battle_AllocEffect(1, 12) & BYTE_MASK;
     g_BattleEffects[slot].target.party = g_Task;
     g_BattleEffects[slot].header.mode  = 0;
@@ -67,7 +67,7 @@ MATCH void func_801EEF98(void) {
 
 MATCH void func_801EF0EC(void) {
     if (g_Task->param.unk_0B == 9) {
-        GFX_FreePaletteFadeTarget(g_Battle.selected_actor);
+        GFX_PaletteFreeFadeTarget(g_Battle.selected_actor);
         Battle_FadePoisonedBattler(g_Battle.target_selector);
         Battle_MarkDamaged(g_Battle.target_selector);
         g_Battle.flags |= BATTLE_STATE_EFFECT_PLAYING;

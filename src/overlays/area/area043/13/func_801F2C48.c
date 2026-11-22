@@ -3,7 +3,7 @@
 MATCH void func_801F2C48(void) {
     Actor* tint;
 
-    g_CurrentActor->unk_93 = GFX_AllocPaletteFade(g_Task, 0, 0, 0, 1);
+    g_CurrentActor->unk_93 = GFX_PaletteAllocFade(g_Task, 0, 0, 0, 1);
     g_Task->header.flags |= ACTOR_FLAG_SEMI_TRANSPARENT;
     /* The ActorTint word: its flags byte and three signed fade steps; unk_48, unk_04 and
      * unk_7E have no names. */

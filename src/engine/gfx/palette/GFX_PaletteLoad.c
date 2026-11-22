@@ -5,7 +5,7 @@
  * GAME_PALETTE_STAGE + slot * 0x40 (arena row 15), so slot n's CLUT is VRAM
  * (32 n mod 256, 495 + 32 n / 256); the second copy is the working copy.
  */
-MATCH void GFX_LoadPalette(u8* dst, s32 field) {
+MATCH void GFX_PaletteLoad(u8* dst, s32 field) {
     u8* record;
     u8* table;
     u8* src;

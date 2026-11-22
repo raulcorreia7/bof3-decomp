@@ -54,13 +54,13 @@ MATCH void func_801EF1A4(void) {
     if (g_Task->timer == 0x10) {
         if (g_Battle.target_selector & BATTLE_TARGET_ENEMY_SIDE) {
             battler = &g_BattleEnemyBattlers[g_Task->unk_03];
-            GFX_FreePaletteFadeTarget(battler);
-            GFX_AllocPaletteFade(battler, -8, -8, -8, 1);
+            GFX_PaletteFreeFadeTarget(battler);
+            GFX_PaletteAllocFade(battler, -8, -8, -8, 1);
             Battle_ApplyDamageFlags((g_Task->unk_03 + 3) & BYTE_MASK, 0x10);
         } else {
             battler = &g_Game.members[g_Task->unk_03];
-            GFX_FreePaletteFadeTarget(battler);
-            GFX_AllocPaletteFade(battler, -8, -8, -8, 1);
+            GFX_PaletteFreeFadeTarget(battler);
+            GFX_PaletteAllocFade(battler, -8, -8, -8, 1);
             Battle_ApplyDamageFlags(g_Task->unk_03, 0x10);
         }
         g_Task->unk_09 = 8;

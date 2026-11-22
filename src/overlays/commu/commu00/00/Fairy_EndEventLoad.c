@@ -6,7 +6,7 @@
 /* func_801F17A4 */
 MATCH void Fairy_EndEventLoad(void) {
     if (EMI_IsReady()) {
-        GFX_ResetPalette();
+        GFX_PaletteReset();
         g_GfxPalettePending = 1;
         D_801F294C          = 0;
         D_801F294D          = 0;

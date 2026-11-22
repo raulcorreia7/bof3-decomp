@@ -1,6 +1,6 @@
 #include "engine/game/00/game_00.h"
 
-MATCH u8 GFX_StartPaletteAnimation(u8* owner, u8* source_table) {
+MATCH u8 GFX_PaletteStartAnimation(u8* owner, u8* source_table) {
     u8 palette_slot;
 
     for (palette_slot = 0u; palette_slot < 8u; palette_slot++) {

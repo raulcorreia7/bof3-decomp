@@ -95,8 +95,8 @@ MATCH void func_801EF048(void) {
             g_Task->param.unk_0B += 1;
         }
     }
-    GFX_FreePaletteFadeTarget(battler);
-    g_Task->timer = GFX_AllocPaletteFade(battler, 0, 0, 0, 1);
+    GFX_PaletteFreeFadeTarget(battler);
+    g_Task->timer = GFX_PaletteAllocFade(battler, 0, 0, 0, 1);
 }
 
 MATCH void func_801EF23C(void) {
@@ -113,7 +113,7 @@ MATCH void func_801EF348(void) {
     g_PaletteFades[g_Task->timer].offset.g -= 1;
     g_PaletteFades[g_Task->timer].offset.b -= 1;
     if (g_PaletteFades[g_Task->timer].offset.r == 0) {
-        GFX_FreePaletteFade(g_Task->timer);
+        GFX_PaletteFreeFade(g_Task->timer);
         Battle_MarkDamaged(g_Task->unk_04);
         g_Task->header.step++;
     }

@@ -3,7 +3,7 @@
 /* fades the full-screen tint in a loop, then exits the callback
  * thread.
  */
-MATCH void GFX_RunBlackFade(s32 delta, s32 semi_trans, s32 order) {
+MATCH void GFX_FadeRunBlack(s32 delta, s32 semi_trans, s32 order) {
     s16 delta16;
     s16 level;
     s32 step;
@@ -21,7 +21,7 @@ MATCH void GFX_RunBlackFade(s32 delta, s32 semi_trans, s32 order) {
     }
     step       = delta16;
     blend_mode = 2;
-    while ((GFX_UpdateScreenFade(&level, step, semi_trans_copy & BYTE_MASK, order_copy & BYTE_MASK, blend_mode) & BYTE_MASK) == 0) {
+    while ((GFX_FadeUpdateScreen(&level, step, semi_trans_copy & BYTE_MASK, order_copy & BYTE_MASK, blend_mode) & BYTE_MASK) == 0) {
         SYS_ThreadWait(1);
     }
     if (step > 0) {

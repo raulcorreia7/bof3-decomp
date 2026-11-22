@@ -8,7 +8,7 @@ with no fact keeps its address name (`func_<ADDR>`, `D_<ADDR>`, `unk_<OFF>`).
 
 | Thing                                    | Form                        | Example                                  |
 | ---------------------------------------- | --------------------------- | ---------------------------------------- |
-| system function                          | `TAG_PascalName`            | `SND_SEPlay`, `EMI_Init`                 |
+| system function                          | `TAG_PascalName`            | `SND_PlaySE`, `EMI_Init`                 |
 | game function                            | `Tag_PascalName`            | `Battle_ApplyDamage`, `Item_Add`         |
 | global                                   | `g_` + tag word + name      | `g_BattleActors`, `g_SndVolume`          |
 | file static                              | `s_` + tag word + name      | `s_BattleDamageScale`                    |
@@ -108,7 +108,7 @@ magic, is a container tag.
 A subject with its own family of functions is a tag; a new tag goes into the tables above in the same
 change.
 
-The first word after an engine tag is the subsystem (the folder under the module, or a family of three or more functions), and the function says its verb after it: `UI_TextDraw`, `UI_WindowDrawFrame`, `UI_SpriteDraw`, `UI_IconDraw`, `UI_CursorDraw`, `UI_MessageStartArea`, `UI_MessageAnswerSelect`, `UI_PanelOpenTask`, `UI_ListDrawItemRow`, `UI_ModeSet`; `SND_SeqPlay`, `SND_BGMFadeOut`, `SND_SEQueueSelection`, `SND_XAStartStream`, `SND_VoiceRaiseLevel`. A word the subsystem repeats is dropped.
+The first word after an engine tag is the subsystem (the folder under the module, or a family of three or more functions), and the function says its verb after it: `UI_TextDraw`, `UI_WindowDrawFrame`, `UI_SpriteDraw`, `UI_IconDraw`, `UI_CursorDraw`, `UI_MessageStartArea`, `UI_MessageAnswerSelect`, `UI_PanelOpenTask`, `UI_ListDrawItemRow`, `UI_ModeSet`; `GFX_PaletteLoad`, `GFX_FadeRunBlack`. A word the subsystem repeats is dropped.
 
 UI parts: shared text, fonts, glyphs and windows are `UI_`; the message window, its panels, answer
 lists and area messages are `UI_Message*` and `UI_MessageAnswer*`; panels, cursors, sprites and icons are `UI_Panel*`, `UI_Cursor*`, `UI_Sprite*` and `UI_Icon*`; `Menu_` is only the menu screens' own code, and a widget
@@ -495,9 +495,9 @@ theirs (`CdlPause`, `SpuSetKey`).
 
 Acronyms follow the SDK library their value belongs to, and are capitals otherwise. The drive is
 `Cd` (libcd: `SYS_ReadCd`, `g_CdSteps`), the sound library is `Snd` in a type (`SndBank`,
-libsnd's `SndVolume`), and `XA`, `HP`, `AP`, `BGM` and `SE` are capitals (`SND_XAIsIdle`,
+libsnd's `SndVolume`), and `XA`, `HP`, `AP`, `BGM` and `SE` are capitals (`SND_IsXAIdle`,
 `SND_XAStateIdle`). `SE` is the disc's word for a sound effect, as `BGM` is for music
-(`BIN/BATTLE/BATL_SE`, `COMN_SE`): `SND_SEPlay(u16 se_id)`.
+(`BIN/BATTLE/BATL_SE`, `COMN_SE`): `SND_PlaySE(u16 se_id)`.
 
 ## Renames
 

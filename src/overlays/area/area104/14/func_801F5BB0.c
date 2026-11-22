@@ -18,9 +18,7 @@ NON_MATCHING void func_801F5BB0(s32 actor) {
     if (g_AreaDrawFlags & 0x1B) {
         PushMatrix();
         setVector(&rotation, 0, 0, 0);
-        vertex.vx = (g_Task->pos.x.fixed >> 9) - 0x4000;
-        vertex.vy = (g_Task->pos.y.fixed >> 9) - 0x4000;
-        vertex.vz = -g_Task->pos.z.part.integer / 2;
+        setVector(&vertex, (g_Task->pos.x.fixed >> 9) - 0x4000, (g_Task->pos.y.fixed >> 9) - 0x4000, -g_Task->pos.z.part.integer / 2);
         RotTransMatrix(&vertex, matrix, &trans_flag);
         RotMatrix(&rotation, &matrix);
         MulMatrix2(&g_CameraMatrix, &matrix);

@@ -282,13 +282,11 @@ MATCH void func_801D1678(s32* from, s32* to, u8 intensity) {
     setRGB3(prim, 0, 0, 0);
     GFX_AddPrim(GFX_LAYER_EFFECT_FRONT, sizeof(POLY_G4));
 
-    step.vx    = g_Task->unk_64;
-    step.vy    = g_Task->unk_68;
-    step.vz    = g_Task->unk_6C;
-    phase      = g_FrameCount & 0xF;
-    current.vx = to[0] + step.vx * phase;
-    current.vy = to[1] + step.vy * phase;
-    current.vz = to[2] + step.vz * phase;
+    step.vx = g_Task->unk_64;
+    step.vy = g_Task->unk_68;
+    step.vz = g_Task->unk_6C;
+    phase   = g_FrameCount & 0xF;
+    setVector(&current, to[0] + step.vx * phase, to[1] + step.vy * phase, to[2] + step.vz * phase);
     while (from[0] < current.vx) {
         Camera_ProjectPoint(&current.vx, &projected);
         segment = (TILE*)g_GfxPrimCursor;
@@ -921,9 +919,7 @@ MATCH void func_801D36BC(s32* point, s32 orange_radius, s32 black_radius) {
     tpage = GetTPage(TPAGE_DEPTH_4BIT, TPAGE_ABR_ADD, 0x2C0, 0x100);
     GFX_ADD_LAYER_DRAW_MODE(GFX_LAYER_EFFECT_FRONT, tpage);
     Camera_SetMatrix(&camera);
-    vertex.vx = point[0] + (orange_radius << 4);
-    vertex.vy = point[1];
-    vertex.vz = point[2];
+    setVector(&vertex, point[0] + (orange_radius << 4), point[1], point[2]);
     Camera_ProjectPoint(&vertex.vx, &inner);
     vertex.vx = point[0] + (black_radius << 4);
     Camera_ProjectPoint(&vertex.vx, &outer);

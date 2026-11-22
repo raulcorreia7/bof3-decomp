@@ -21,7 +21,7 @@ MATCH void Battle_ReloadPartySprites(void) {
     if (g_BattlePartyCount != 0u) {
         do {
             Battle_CureStatus(i, g_Game.members[i].chr.status & STATUS_CURE_MASK);
-            GFX_FreePaletteFadeTarget(&g_Game.members[i]);
+            GFX_PaletteFreeFadeTarget(&g_Game.members[i]);
             i += 1u;
         } while (i < g_Battle.party_count);
     }

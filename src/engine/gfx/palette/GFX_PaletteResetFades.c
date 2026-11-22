@@ -4,7 +4,7 @@
  * 32 0x0C-byte palette work records, then fills the four 16-byte palette maps
  * with 0xFF.
  */
-MATCH void GFX_ResetPaletteFades(void) {
+MATCH void GFX_PaletteResetFades(void) {
     u8  entry;
     u8  row;
     u8  column;

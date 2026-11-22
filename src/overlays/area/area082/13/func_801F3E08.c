@@ -6,9 +6,7 @@ MATCH void func_801F3E08(void) {
     s32 x;
     s32 y;
 
-    g_ScratchPadVectors[0].vx = -0x1A40;
-    g_ScratchPadVectors[0].vy = -0x14C0;
-    g_ScratchPadVectors[0].vz = 0x160;
+    setVector(&g_ScratchPadVectors[0], -0x1A40, -0x14C0, 0x160);
     g_ScratchPadVectors[1].vx = 0x620;
     g_ScratchPadVectors[1].vy = 0;
 

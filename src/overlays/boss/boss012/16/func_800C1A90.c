@@ -4,7 +4,7 @@
 MATCH void func_800C1A90(void) {
     EnemyBattler* work;
 
-    GFX_FreePaletteSlotOwner(g_Task);
+    GFX_PaletteFreeSlotOwner(g_Task);
     Battle_DefeatEnemy();
     work = g_BattleCurrentEnemy;
     work->turn.damage_flags.value |= BATTLER_DAMAGE_SKIP_ACTION_STEP;

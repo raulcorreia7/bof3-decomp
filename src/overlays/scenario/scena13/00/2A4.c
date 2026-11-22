@@ -200,8 +200,8 @@ MATCH void func_801F763C(void) {
     cell3                                     = cell[3];
     FIELD(u8, D_801468E4, cell4 * ACTOR_SIZE) = 1;
     FIELD(u8, D_801468E4, cell3 * ACTOR_SIZE) = 1;
-    GFX_AllocPaletteFade(&g_Actors[work[3]], 15, 0, 0, 1);
-    GFX_AllocPaletteFade(&g_Actors[work[4]], 0, 0, 15, 1);
+    GFX_PaletteAllocFade(&g_Actors[work[3]], 15, 0, 0, 1);
+    GFX_PaletteAllocFade(&g_Actors[work[4]], 0, 0, 15, 1);
     g_Task->timer       = 32;
     g_Task->header.mode = 1;
 }
@@ -236,8 +236,8 @@ MATCH void func_801F7A1C(void) {
 MATCH void Scene_ReleaseActors(void) {
     g_Actors[g_Task->unk_03].header.flags = 0;
     g_Actors[g_Task->unk_04].header.flags = 0;
-    GFX_FreePaletteFadeTarget(&g_Actors[g_Task->unk_03]);
-    GFX_FreePaletteFadeTarget(&g_Actors[g_Task->unk_04]);
+    GFX_PaletteFreeFadeTarget(&g_Actors[g_Task->unk_03]);
+    GFX_PaletteFreeFadeTarget(&g_Actors[g_Task->unk_04]);
     Actor_Clear();
 }
 

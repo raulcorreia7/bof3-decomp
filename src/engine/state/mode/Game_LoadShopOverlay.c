@@ -26,8 +26,8 @@ MATCH void Game_LoadShopOverlay(void) {
         Area_RunLoadingFrame();
         SYS_ThreadWait(1u);
     }
-    GFX_CopyPalette(1u);
-    GFX_CopyPalette(2u);
+    GFX_PaletteCopy(1u);
+    GFX_PaletteCopy(2u);
     g_GfxPalettePending = 1u;
     Area_RunFrame();
     FAKE_VOLATILE(u16, g_GameEntrySubstate) += 1u;
