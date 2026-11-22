@@ -108,7 +108,6 @@ extern u8                           D_801EC324;
 extern u8                           D_801EC328;
 /* Queued-slot records at g_BattleEffects (stride 0x78). */
 #define BATTLE_EFFECT_COUNT 48
-extern u8 D_80145FC8;
 
 extern PanelOwner D_801ED9B0[];
 /* Prototypes the images of this group share. */

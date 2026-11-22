@@ -7,9 +7,9 @@ MATCH s32 func_801C0F9C(u8 source_row) {
     s32 i;
     s32 prev;
 
-    if (D_80146262 != 0) {
-        if (((g_Game.flags >> D_80146262) & 0x1) == 0) {
-            prev = D_80146262 - 1;
+    if (g_Game.unk_3CE[4] != 0) {
+        if (((g_Game.flags >> g_Game.unk_3CE[4]) & 0x1) == 0) {
+            prev = g_Game.unk_3CE[4] - 1;
             if (((g_Game.flags >> prev) & 0x1) != 0) {
                 goto select_slot;
             }
@@ -19,11 +19,11 @@ MATCH s32 func_801C0F9C(u8 source_row) {
         }
     }
 check_prev:
-    if (((g_Game.flags >> (D_80146262 - 0x1)) & 1) == 0) {
+    if (((g_Game.flags >> (g_Game.unk_3CE[4] - 0x1)) & 1) == 0) {
         goto reload_slot;
     }
 select_slot:
-    i = D_80146262;
+    i = g_Game.unk_3CE[4];
     if (i != 2) {
         goto scan_slot;
     }
@@ -31,7 +31,7 @@ select_slot:
         return 0;
     }
 reload_slot:
-    i = D_80146262;
+    i = g_Game.unk_3CE[4];
 scan_slot:
     if (i != 0) {
         if (((g_Game.flags >> i) & 0x1) == 0) {
@@ -44,10 +44,10 @@ scan_slot:
             }
         }
     clear_bit:
-        g_AreaWalkFlags &= ~BIT(D_80146262);
+        g_AreaWalkFlags &= ~BIT(g_Game.unk_3CE[4]);
     }
     {
-        u8* cursor = &D_80146262;
+        u8* cursor = &g_Game.unk_3CE[4];
 
         if (((g_Game.flags >> *cursor) & 0x1) == 0) {
             g_Game.members[*cursor].header.flags &= ~ACTOR_FLAG_HIDDEN;
@@ -61,7 +61,7 @@ scan_slot:
         if (*cursor != g_Game.party_size) {
             return 1;
         }
-        D_80146260 = 0;
+        g_Game.unk_3CE[2] = 0;
         g_Game.walk_flags &= ~AREA_WALK_ACCEPT_LOCK;
         return 2;
     }

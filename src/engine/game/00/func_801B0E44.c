@@ -45,7 +45,7 @@ NON_MATCHING u8 func_801B0E44(void) {
             if (((u8*)pos2)[-8] != 0) {
                 if (result >= 0x41) {
                     if (!(func_801A0048(SP_REF(s16, 0x4), SP_REF(s16, 0x6)) & BYTE_MASK) && (g_Task == (void*)g_Game.members)) {
-                        if (Area_CellSetPalette(D_80145EC6, D_80145ECA) & BYTE_MASK) {
+                        if (Area_CellSetPalette(g_Game.members[0].pos.x.part.integer, g_Game.members[0].pos.y.part.integer) & BYTE_MASK) {
                             SND_SEPlay(D_801CD0F4[((u8*)pos2)[-7]]);
                             Script_Request((TASK(Actor)->direction >> 1) + 0x10);
                         } else {

@@ -12,7 +12,7 @@ MATCH bool func_801B6470(void) {
 
     if ((g_Game.flags & 0x4000) == 0 && (g_EmiLoadedCharacterIndex & EMI_LOADED_INDEX_MASK) != 0xC) {
         if (LOHU(g_GameAreaId) != AREA_ID_DESERT_OF_DEATH_MAP) {
-            if ((func_801B6610(D_80145EC6, D_80145ECA) & BYTE_MASK) != 0) {
+            if ((func_801B6610(g_Game.members[0].pos.x.part.integer, g_Game.members[0].pos.y.part.integer) & BYTE_MASK) != 0) {
                 return 0;
             }
             if ((g_Game.walk_flags & AREA_WALK_TRANSITION) != 0) {

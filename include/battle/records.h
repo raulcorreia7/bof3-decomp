@@ -992,7 +992,6 @@ extern volatile u32 g_Scripts;
 /* D_80145A00 */
 extern u8           g_GfxTransferCount;
 extern s32          D_80145A04;
-extern u8           D_80146229;
 extern u16          D_8014622A;
 extern u8           D_80146232;
 extern s16          D_801462AA;

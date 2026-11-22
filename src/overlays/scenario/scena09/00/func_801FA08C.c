@@ -9,7 +9,7 @@ MATCH void func_801FA08C(void) {
 
     switch (*step) {
         case 0:
-            if (D_8014623B != 2) {
+            if (g_Game.members[2].u.field.mode.unsigned_value != 2) {
                 Scene_SetupParty(0);
                 *step = 1;
             }

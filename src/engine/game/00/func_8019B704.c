@@ -22,7 +22,7 @@ NON_MATCHING void func_8019B704(void) {
         }
         total                    = TASK(Actor)->pos.x.fixed + TASK(Actor)->vx;
         TASK(Actor)->pos.x.fixed = total;
-        delta                    = total - D_80145EC4;
+        delta                    = total - g_Game.members[0].pos.x.fixed;
     } else {
         saved               = TASK(Actor)->vy;
         acc                 = saved + TASK(Actor)->unk_1C;
@@ -34,7 +34,7 @@ NON_MATCHING void func_8019B704(void) {
         }
         total                    = TASK(Actor)->pos.y.fixed + TASK(Actor)->vy;
         TASK(Actor)->pos.y.fixed = total;
-        delta                    = total - D_80145EC8;
+        delta                    = total - g_Game.members[0].pos.y.fixed;
     }
     delta = ABS(delta);
     if ((TASK(Actor)->unk_18 == 0) && (TASK(Actor)->unk_1C == 0)) {
@@ -44,7 +44,7 @@ NON_MATCHING void func_8019B704(void) {
     acc             = TASK(Actor)->vz + TASK(Actor)->gravity;
     TASK(Actor)->vz = acc;
     COORD_INT(TASK(Actor)->pos.z) += acc;
-    if ((g_AreaCameraMoving == 0) && (delta > TO_COORD(4)) && (g_AreaScrollTargetX == D_80145EC4) && (g_AreaScrollTargetY == D_80145EC8)) {
+    if ((g_AreaCameraMoving == 0) && (delta > TO_COORD(4)) && (g_AreaScrollTargetX == g_Game.members[0].pos.x.fixed) && (g_AreaScrollTargetY == g_Game.members[0].pos.y.fixed)) {
         if (TASK(Actor)->vx > 0) {
             g_AreaTargetCellX = (s16)(g_AreaTargetCellX + 5);
         } else if (TASK(Actor)->vx < 0) {

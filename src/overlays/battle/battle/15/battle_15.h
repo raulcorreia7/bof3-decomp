@@ -458,7 +458,6 @@ extern s8                                D_80145FC0;
 extern s8                                D_80145FC1;
 extern s8                                D_80145FC2;
 extern s8                                D_80145FC3;
-extern u8                                D_801460E9;
 extern u16                               D_801460EA;
 extern u8                                D_801460F2;
 /* FAKE: g_Battle.ui_step as a global of its own; the sites that use it match only with a separate symbol. */

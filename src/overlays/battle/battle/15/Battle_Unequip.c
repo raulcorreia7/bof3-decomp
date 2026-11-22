@@ -34,8 +34,8 @@ MATCH bool Battle_Unequip(void) {
                 member_offset = party_slot << 2;
                 member_offset += party_slot;
                 member_offset <<= 6;
-                record                                     = (u8*)D_80145F04 + member_offset;
-                character_index                            = D_80145F04[member_offset + 0xC8];
+                record                                     = (u8*)g_Game.members[0].chr.name + member_offset;
+                character_index                            = g_Game.members[0].chr.name[member_offset + 0xC8];
                 cell                                       = (u8*)&g_Characters[character_index];
                 ((Character*)record)->equip.weapon         = ((Character*)cell)->equip.weapon;
                 ((Character*)record)->equip.shield         = ((Character*)cell)->equip.shield;

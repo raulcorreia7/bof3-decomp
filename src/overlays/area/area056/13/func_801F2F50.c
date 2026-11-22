@@ -8,7 +8,7 @@ MATCH void func_801F2F50(void) {
         D_80145E91[0] = 2;
         D_80145E92[0] = 7;
         D_80145E93[0] = 0;
-        Area_CellSetPalette(D_80145EC6, D_80145ECA);
+        Area_CellSetPalette(g_Game.members[0].pos.x.part.integer, g_Game.members[0].pos.y.part.integer);
     }
     if (g_UiMessageChoice == 0) {
         SYS_SetFlag(D_80144EA0, 13);

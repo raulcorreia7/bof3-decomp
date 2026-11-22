@@ -7,7 +7,6 @@
 #include "overlays/area/worlds/world01.h"
 
 extern s32 D_80145EC4;
-extern s32 D_80145ECC;
 extern u8  D_801F39C8[];
 
 /* The work window's sixteen ring effects, as the byte walks read them. */

@@ -5,7 +5,7 @@ MATCH void func_8019EE10(void) {
     Actor* next;
 
     TASK(Actor)->active_flags = 1;
-    FIELD(u16, g_Task, 0x2Cu) = D_80145EBC;
+    FIELD(u16, g_Task, 0x2Cu) = g_Game.members[0].unk_2C.value;
     TASK(Actor)->palette_8bit = PALETTE_TYPE_CELLS_2;
     FIELD(u32, g_Task, 0x4Cu) = D_80145EDC;
     TASK(Actor)->unk_2B       = 1;

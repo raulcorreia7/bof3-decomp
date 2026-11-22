@@ -1,7 +1,7 @@
 #include "area145_14.h"
 
 MATCH s32 func_801F43DC(s32 entry_x, s32 entry_y) {
-    if ((g_GameCellType == 0) && (entry_y == TO_COORD(9) + COORD_HALF) && (((entry_x >> 0x10) - 27) < 2U) && (((u16)D_80145EC6 - 0x1B) < 2U)) {
+    if ((g_GameCellType == 0) && (entry_y == TO_COORD(9) + COORD_HALF) && (((entry_x >> 0x10) - 27) < 2U) && (((u16)g_Game.members[0].pos.x.part.integer - 0x1B) < 2U)) {
         Scene_StartEvent(0x14, 0x19);
         return 1;
     }

@@ -137,7 +137,6 @@ extern void*           D_800B6178[];
 /* D_800B65F8 */
 extern BattleSelection g_BattleSelections[];
 /* D_80143F00 */
-extern s32             D_80145ED0;
 extern volatile u8     D_80145F18[];
 extern u8              D_80145F20[];
 extern u8              D_80145F22[];
