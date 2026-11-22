@@ -76,8 +76,8 @@ MATCH void func_801DF3F8(void) {
     } else if ((g_Battle.flags & BATTLE_STATE_RELOAD_PARTY) && (g_Game.current->u.turn.action_flags.value & BATTLER_ACTION_DRAGON_FORM)) {
         PartyMember* work = TASK(PartyMember);
 
-        s32 x = g_EncounterOriginX;
-        s32 y = g_EncounterOriginY;
+        s32 x = g_AreaEncounterPlacement.origin.x.fixed;
+        s32 y = g_AreaEncounterPlacement.origin.y.fixed;
 
         work->pos.x.fixed = x;
         work->pos.y.fixed = y;

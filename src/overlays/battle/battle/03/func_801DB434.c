@@ -1,16 +1,16 @@
 #include "battle_03.h"
 
-MATCH u32 func_801DB434(u8 compare_value, u32 row_index) {
+MATCH u32 func_801DB434(u8 compare_value, u32 side) {
     const volatile u8* base;
-    const volatile u8* row;
+    const volatile u8* thresholds;
     u8                 index;
 
     index = 0u;
-    row_index &= BYTE_MASK;
-    base = g_BattleLevelThresholds;
-    row  = base + row_index * BATTLE_LEVEL_THRESHOLD_COUNT;
+    side &= BYTE_MASK;
+    base       = g_BattleLevelThresholds;
+    thresholds = base + side * BATTLE_LEVEL_THRESHOLD_COUNT;
     while (index < BATTLE_LEVEL_THRESHOLD_COUNT) {
-        if (compare_value < row[index]) {
+        if (compare_value < thresholds[index]) {
             return index;
         }
         index += 1u;

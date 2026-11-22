@@ -6,7 +6,7 @@ MATCH bool Party_CanSwitchLeader(void) {
     u16 limit;
     s32 index;
     s32 j;
-    s32 offset;
+    s32 member_offset;
 
     s32 key_offset;
     index = 1;
@@ -17,12 +17,12 @@ MATCH bool Party_CanSwitchLeader(void) {
     if (index >= count) {
         return true;
     }
-    limit  = count;
-    offset = BATTLE_PARTY_STRIDE;
+    limit         = count;
+    member_offset = BATTLE_PARTY_STRIDE;
     do {
         j = 0;
-        if (D_80145E91[offset] == 2) {
-            key_offset = offset;
+        if (D_80145E91[member_offset] == 2) {
+            key_offset = member_offset;
             for (; j < 3; j++) {
                 if (D_80145E92[key_offset] == s_MenuBattlerTypes[j]) {
                     break;
@@ -33,7 +33,7 @@ MATCH bool Party_CanSwitchLeader(void) {
             }
         }
         index++;
-        offset += BATTLE_PARTY_STRIDE;
+        member_offset += BATTLE_PARTY_STRIDE;
     } while (index < limit);
     return true;
 }

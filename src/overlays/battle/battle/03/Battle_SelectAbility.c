@@ -5,8 +5,8 @@
  */
 /* func_801D3304 */
 MATCH void Battle_SelectAbility(void) {
-    u16 row;
-    u16 flag;
+    u16 ap;
+    u16 status;
     u16 action;
 
     {
@@ -31,13 +31,13 @@ MATCH void Battle_SelectAbility(void) {
         }
     }
     if (BATTLER_IS_PLAYER(g_Battle.active_battler)) {
-        row  = BATTLE_ACTIVE_PARTY.chr.ap;
-        flag = BATTLE_ACTIVE_PARTY.chr.status;
+        ap     = BATTLE_ACTIVE_PARTY.chr.ap;
+        status = BATTLE_ACTIVE_PARTY.chr.status;
     } else {
-        row  = ENEMY_COMBATANT(g_Battle.active_battler).ap;
-        flag = ENEMY_COMBATANT(g_Battle.active_battler).status;
+        ap     = ENEMY_COMBATANT(g_Battle.active_battler).ap;
+        status = ENEMY_COMBATANT(g_Battle.active_battler).status;
     }
-    if ((flag & STATUS_SILENCED) != 0 && (D_801CA71C[*(u16*)&g_Battle.action_id].mask & 0x400)) {
+    if ((status & STATUS_SILENCED) != 0 && (D_801CA71C[*(u16*)&g_Battle.action_id].mask & 0x400)) {
         Battle_OpenPanel();
         Battle_QueueEvent(2, 0, 0, 45, UI_MessageGetText(0x37));
         g_Battle.phase.step     = 0;
@@ -54,14 +54,14 @@ MATCH void Battle_SelectAbility(void) {
     } else {
         D_801463C8 = D_801463B8[0];
     }
-    if (row < D_801463C8) {
+    if (ap < D_801463C8) {
         Battle_OpenPanel();
         Battle_QueueEvent(2, 0, 0, 45, UI_MessageGetText(0x36));
         g_Battle.phase.step     = 0;
         g_Battle.phase.sub_step = 0;
         return;
     }
-    g_Battle.row_cursor = 0;
+    g_Battle.selection = 0;
     if (!(func_800AA368() & BYTE_MASK)) {
         g_Battle.flags |= 0x20;
     }

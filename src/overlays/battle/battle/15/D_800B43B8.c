@@ -9,7 +9,7 @@ Callback g_BattleExamineSteps[4] = {Battle_StartExamineTarget, Battle_SelectExam
 Callback D_800B4428[12] = {func_80098388, Battle_SelectItem, Battle_ResetItemSelection, Battle_RouteItemTarget, func_80098B08, func_80099178, func_80099328, Battle_RouteEquipItem, func_80099F90, func_8009A590, func_800983C4, Battle_StartItemCommand};
 Callback D_800B4458[5] = {Battle_StartItemTarget, Battle_SelectItemEnemyTarget, Battle_SelectItemPartyTarget, Battle_ConfirmItem, Battle_CancelItem};
 Callback D_800B446C[4] = {Battle_SetItemTargetSide, Battle_ToggleItemTargetSide, Battle_ConfirmItem, Battle_CancelItem};
-Callback D_800B447C[4] = {Battle_ChooseEquipAction, Battle_SelectEquipRow, Battle_SelectEquipChoice, Battle_SelectEquipItem};
+Callback D_800B447C[4] = {Battle_ChooseEquipAction, Battle_SelectEquipSlot, Battle_SelectEquipChoice, Battle_SelectEquipItem};
 Callback D_800B448C[5] = {Battle_SetEquipTarget, func_8009A0A4, func_8009A254, Battle_ConfirmEquipItem, Battle_CancelEquipItem};
 static u8 s_gap_800B44A0[32] = {
     0xCC, 0xA5, 0x09, 0x80, 0x64, 0xA6, 0x09, 0x80, 0x68, 0xA4, 0x09, 0x80, 0x18, 0xA5, 0x09, 0x80,

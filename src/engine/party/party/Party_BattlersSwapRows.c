@@ -2,53 +2,54 @@
 
 #ifdef NON_MATCHING
 NON_MATCHING void Party_BattlersSwapRows(s32 slot_a, s32 slot_b, s32 skip_state) {
-    s32 off_a;
-    s32 off_b;
-    u8  val_b;
-    s32 val_w;
+    PartyMember* a;
+    PartyMember* b;
+    u8           val_b;
+    s32          val_w;
 
-    off_a                                                          = (slot_a & BYTE_MASK) * BATTLE_PARTY_STRIDE;
-    off_b                                                          = (slot_b & BYTE_MASK) * BATTLE_PARTY_STRIDE;
-    val_b                                                          = FIELD(volatile u8, &g_Game.members[0].chr.character_id, off_a);
-    FIELD(volatile u8, &g_Game.members[0].chr.character_id, off_a) = FIELD(volatile u8, &g_Game.members[0].chr.character_id, off_b);
-    FIELD(volatile u8, &g_Game.members[0].chr.character_id, off_b) = val_b;
+    a = &g_Game.members[slot_a & BYTE_MASK];
+    b = &g_Game.members[slot_b & BYTE_MASK];
+
+    val_b               = a->chr.character_id;
+    a->chr.character_id = b->chr.character_id;
+    b->chr.character_id = val_b;
     if (!(skip_state & BYTE_MASK)) {
-        val_b                                                                           = FIELD(volatile u8, &g_Game.members[0].facing, off_a);
-        FIELD(volatile u8, &g_Game.members[0].facing, off_a)                            = FIELD(volatile u8, &g_Game.members[0].facing, off_b);
-        FIELD(volatile u8, &g_Game.members[0].facing, off_b)                            = val_b;
-        val_b                                                                           = FIELD(volatile u8, &g_Game.members[0].unk_29, off_a);
-        FIELD(volatile u8, &g_Game.members[0].unk_29, off_a)                            = FIELD(volatile u8, &g_Game.members[0].unk_29, off_b);
-        FIELD(volatile u8, &g_Game.members[0].unk_29, off_b)                            = val_b;
-        val_b                                                                           = FIELD(volatile u8, &g_Game.members[0].status.field.flags.unsigned_value, off_a);
-        FIELD(volatile u8, &g_Game.members[0].status.field.flags.unsigned_value, off_a) = FIELD(volatile u8, &g_Game.members[0].status.field.flags.unsigned_value, off_b);
-        FIELD(volatile u8, &g_Game.members[0].status.field.flags.unsigned_value, off_b) = val_b;
-        val_w                                                                           = FIELD(volatile s32, &g_Game.members[0].pos.x.fixed, off_a);
-        FIELD(volatile s32, &g_Game.members[0].pos.x.fixed, off_a)                      = FIELD(volatile s32, &g_Game.members[0].pos.x.fixed, off_b);
-        FIELD(volatile s32, &g_Game.members[0].pos.x.fixed, off_b)                      = val_w;
-        val_w                                                                           = FIELD(volatile s32, &g_Game.members[0].pos.y.fixed, off_a);
-        FIELD(volatile s32, &g_Game.members[0].pos.y.fixed, off_a)                      = FIELD(volatile s32, &g_Game.members[0].pos.y.fixed, off_b);
-        FIELD(volatile s32, &g_Game.members[0].pos.y.fixed, off_b)                      = val_w;
-        val_w                                                                           = FIELD(volatile s32, &g_Game.members[0].pos.z.fixed, off_a);
-        FIELD(volatile s32, &g_Game.members[0].pos.z.fixed, off_a)                      = FIELD(volatile s32, &g_Game.members[0].pos.z.fixed, off_b);
-        FIELD(volatile s32, &g_Game.members[0].pos.z.fixed, off_b)                      = val_w;
+        val_b                                = a->facing;
+        a->facing                            = b->facing;
+        b->facing                            = val_b;
+        val_b                                = a->unk_29;
+        a->unk_29                            = b->unk_29;
+        b->unk_29                            = val_b;
+        val_b                                = a->status.field.flags.unsigned_value;
+        a->status.field.flags.unsigned_value = b->status.field.flags.unsigned_value;
+        b->status.field.flags.unsigned_value = val_b;
+        val_w                                = a->pos.x.fixed;
+        a->pos.x.fixed                       = b->pos.x.fixed;
+        b->pos.x.fixed                       = val_w;
+        val_w                                = a->pos.y.fixed;
+        a->pos.y.fixed                       = b->pos.y.fixed;
+        b->pos.y.fixed                       = val_w;
+        val_w                                = a->pos.z.fixed;
+        a->pos.z.fixed                       = b->pos.z.fixed;
+        b->pos.z.fixed                       = val_w;
     }
-    val_w                                                               = FIELD(volatile s32, &g_Game.members[0].unk_0C, off_a);
-    FIELD(volatile s32, &g_Game.members[0].unk_0C, off_a)               = FIELD(volatile s32, &g_Game.members[0].unk_0C, off_b);
-    FIELD(volatile s32, &g_Game.members[0].unk_0C, off_b)               = val_w;
-    val_w                                                               = FIELD(volatile s32, &g_Game.members[0].unk_10, off_a);
-    FIELD(volatile s32, &g_Game.members[0].unk_10, off_a)               = FIELD(volatile s32, &g_Game.members[0].unk_10, off_b);
-    FIELD(volatile s32, &g_Game.members[0].unk_10, off_b)               = val_w;
-    val_w                                                               = FIELD(volatile s32, &g_Game.members[0].unk_14, off_a);
-    FIELD(volatile s32, &g_Game.members[0].unk_14, off_a)               = FIELD(volatile s32, &g_Game.members[0].unk_14, off_b);
-    FIELD(volatile s32, &g_Game.members[0].unk_14, off_b)               = val_w;
-    val_b                                                               = FIELD(volatile u8, &g_Game.members[0].u.turn.command.type, off_a);
-    FIELD(volatile u8, &g_Game.members[0].u.turn.command.type, off_a)   = FIELD(volatile u8, &g_Game.members[0].u.turn.command.type, off_b);
-    FIELD(volatile u8, &g_Game.members[0].u.turn.command.type, off_b)   = val_b;
-    val_b                                                               = FIELD(volatile u8, &g_Game.members[0].u.turn.command.target, off_a);
-    FIELD(volatile u8, &g_Game.members[0].u.turn.command.target, off_a) = FIELD(volatile u8, &g_Game.members[0].u.turn.command.target, off_b);
-    FIELD(volatile u8, &g_Game.members[0].u.turn.command.target, off_b) = val_b;
-    FIELD(volatile u8, &g_Game.members[0].unk_4B, off_a)                = 0xFF;
-    FIELD(volatile u8, &g_Game.members[0].unk_4B, off_b)                = 0xFF;
+    val_w                    = a->unk_0C;
+    a->unk_0C                = b->unk_0C;
+    b->unk_0C                = val_w;
+    val_w                    = a->unk_10;
+    a->unk_10                = b->unk_10;
+    b->unk_10                = val_w;
+    val_w                    = a->unk_14;
+    a->unk_14                = b->unk_14;
+    b->unk_14                = val_w;
+    val_b                    = a->u.turn.command.type;
+    a->u.turn.command.type   = b->u.turn.command.type;
+    b->u.turn.command.type   = val_b;
+    val_b                    = a->u.turn.command.target;
+    a->u.turn.command.target = b->u.turn.command.target;
+    b->u.turn.command.target = val_b;
+    a->unk_4B                = 0xFF;
+    b->unk_4B                = 0xFF;
 }
 #else
 INCLUDE_ASM(Party_BattlersSwapRows);

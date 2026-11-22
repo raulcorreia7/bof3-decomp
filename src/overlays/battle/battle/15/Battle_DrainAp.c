@@ -4,7 +4,7 @@
 /* func_8009E500 */
 #ifdef NON_MATCHING
 NON_MATCHING void Battle_DrainAp(void) {
-    u32  row;
+    u32  battler_slot;
     u16* value;
     u16* limit;
 
@@ -22,14 +22,14 @@ NON_MATCHING void Battle_DrainAp(void) {
         }
         g_Battle.action->unk_08              = 2;
         g_Battle.target_record->target_flags = 2;
-        row                                  = g_Battle.active_battler;
-        if (row < 3) {
-            value = &g_Game.members[row].chr.ap;
-            limit = &g_Game.members[row].chr.stats.max_ap;
+        battler_slot                         = g_Battle.active_battler;
+        if (battler_slot < 3) {
+            value = &g_Game.members[battler_slot].chr.ap;
+            limit = &g_Game.members[battler_slot].chr.stats.max_ap;
         } else {
-            row -= 3;
-            value = &g_BattleEnemyBattlers[row].ap;
-            limit = &g_BattleEnemyBattlers[row].stats.max_ap;
+            battler_slot -= 3;
+            value = &g_BattleEnemyBattlers[battler_slot].ap;
+            limit = &g_BattleEnemyBattlers[battler_slot].stats.max_ap;
         }
         if (*limit < *value + g_Battle.target_record->ap_change) {
             g_Battle.action->unk_08 |= 8;

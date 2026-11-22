@@ -20,7 +20,7 @@ MATCH void Fishing_ChooseAction(void) {
             break;
         case PADRdown:
             D_80144125 = 7;
-            if (g_FishingLure == 0 || g_FishingRod == 0) {
+            if (g_FishingEquipment.lure_id == 0 || g_FishingEquipment.rod_id == 0) {
                 D_8014403D                     = 4;
                 TASK(FishingState)->mode_index = 9;
                 TASK(FishingState)->sub_index  = 0;

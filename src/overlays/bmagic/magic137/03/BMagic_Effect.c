@@ -9,7 +9,7 @@ __asm__(".include \"include/match/macro.inc\"\n");
 #ifdef NON_MATCHING
 NON_MATCHING void func_801EEC7C(void) {
     BattleEffect*    slot;
-    BattleWorkImage* row;
+    BattleWorkImage* image;
     u16*             dst;
     u16*             src;
     u8               index;
@@ -38,8 +38,8 @@ NON_MATCHING void func_801EEC7C(void) {
         if (g_BattleEnemyBattlers[(u8)(g_Battle.active_battler - BATTLE_PARTY_CHARACTERS_COUNT)].unk_F0 == 0x29) {
             index                   = Battle_AllocEffect(1, 0x4B);
             slot                    = &g_BattleEffects[index];
-            row                     = (BattleWorkImage*)&g_BattleEnemyBattlers[(u8)(g_Battle.active_battler - BATTLE_PARTY_CHARACTERS_COUNT)];
-            *(BattleWorkImage*)slot = *row;
+            image                   = (BattleWorkImage*)&g_BattleEnemyBattlers[(u8)(g_Battle.active_battler - BATTLE_PARTY_CHARACTERS_COUNT)];
+            *(BattleWorkImage*)slot = *image;
             slot->header.mode       = 2;
             slot->unk_06            = 1;
             slot->step_index        = 0x4B;

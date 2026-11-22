@@ -54,12 +54,25 @@ typedef struct FormationOrder {
 
 ASSERT_SIZE(FormationOrder, 0x3);
 
+/* The party's formation, menu flags and its field and battle order rows, indexed by PartyOrder;
+ * each order row holds character ids or FORMATION_SLOT_EMPTY. The save block stores the same record at
+ * 0x680, and Party_CountOrder reads a row as base + order * PARTY_SLOT_COUNT. */
+typedef struct PartyOrders {
+    /* 0x00 */ u8 formation;  /* front-end formation index; battle/battle/15 reads it as a menu mode */
+    /* 0x01 */ u8 menu_flags; /* bits 3 to 5 mark the first special-master reward of Teepo, Rei and Momo */
+    /* 0x02 */ u8 order[2][PARTY_SLOT_COUNT];
+} PartyOrders;
+
+ASSERT_OFFSET(PartyOrders, menu_flags, 0x01);
+ASSERT_OFFSET(PartyOrders, order, 0x02);
+ASSERT_SIZE(PartyOrders, 0x08);
+
 /* D_80144F50 */
-extern u32 g_Zenny;
+extern u32         g_Zenny;
+/* D_80144F58 */
+extern PartyOrders g_PartyOrders;
 /* Stored character id -> character-record slot (Observed:
  * `sel = map[party_order[slot]]`). */
-
-#endif
 
 extern FormationLayout g_MenuFormations[FORMATION_COUNT];
 extern FormationOrder  g_MenuFormationOrder;
@@ -69,3 +82,5 @@ extern s32             g_MenuFormationSpots[PARTY_SLOT_COUNT][2];
 extern u8              g_MenuFormationFrameLeft[];
 extern u8              g_MenuFormationFrameMiddle[];
 extern u8              g_MenuFormationFrameRight[];
+
+#endif

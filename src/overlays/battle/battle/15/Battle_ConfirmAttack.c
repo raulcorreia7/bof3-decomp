@@ -8,11 +8,11 @@ MATCH void Battle_ConfirmAttack(void) {
     g_Battle.selection_latch        = 0;
     g_BattleActorTurn->command.type = BATTLE_COMMAND_ATTACK;
 
-    BATTLE_ACTIVE_ROW->header.mode = 2;
-    counter                        = g_Battle.command_count;
-    g_Battle.phase.step            = 1;
-    g_Battle.phase.sub_step        = 0;
-    g_Battle.ui_step               = 0;
-    g_Battle.ui_mode               = 0;
-    g_Battle.command_count         = counter + 1;
+    BATTLE_ACTIVE_MEMBER->header.mode = 2;
+    counter                           = g_Battle.command_count;
+    g_Battle.phase.step               = 1;
+    g_Battle.phase.sub_step           = 0;
+    g_Battle.ui_step                  = 0;
+    g_Battle.ui_mode                  = 0;
+    g_Battle.command_count            = counter + 1;
 }

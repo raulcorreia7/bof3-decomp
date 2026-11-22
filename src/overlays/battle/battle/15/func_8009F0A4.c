@@ -5,7 +5,7 @@ MATCH void func_8009F0A4(void) {
     u16           flag_value;
     u32           action;
     s32           slot;
-    s32           row;
+    s32           enemy_slot;
     /* FAKE: pin the delta counter to retail a1. */
     FAKE_REG(u16, delta_raw, "a1");
     u8            battler_index;
@@ -24,8 +24,8 @@ MATCH void func_8009F0A4(void) {
     if (slot < 3u) {
         action = g_Characters[g_CharSlot[g_Game.members[slot].chr.character_id]].base.power;
     } else {
-        row    = slot - 3;
-        action = g_BattleEnemyBattlers[row].base.power;
+        enemy_slot = slot - 3;
+        action     = g_BattleEnemyBattlers[enemy_slot].base.power;
     }
     raw = D_801EC310;
     if (((raw >> 1) + 0x1E) >= 0x65) {

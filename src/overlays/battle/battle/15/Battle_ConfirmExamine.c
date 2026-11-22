@@ -9,10 +9,10 @@ MATCH void Battle_ConfirmExamine(void) {
     g_BattleActorTurn->command.type = 0;
     g_BattleActorTurn->damage_flags.value |= BATTLER_DAMAGE_COMMAND_ENTERED;
 
-    BATTLE_ACTIVE_ROW->header.mode = 2;
-    counter                        = g_Battle.command_count;
-    g_Battle.phase.step            = 1;
-    g_Battle.phase.sub_step        = 0;
-    g_Battle.ui_step               = 0;
-    g_Battle.command_count         = counter + 1;
+    BATTLE_ACTIVE_MEMBER->header.mode = 2;
+    counter                           = g_Battle.command_count;
+    g_Battle.phase.step               = 1;
+    g_Battle.phase.sub_step           = 0;
+    g_Battle.ui_step                  = 0;
+    g_Battle.command_count            = counter + 1;
 }
