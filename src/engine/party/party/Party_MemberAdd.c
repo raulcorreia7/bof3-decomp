@@ -4,7 +4,7 @@
  * returns 1, otherwise it replaces the first field-order member with record flag bit 1 clear that is also in the
  * battle order (1), or returns 0. Each call sets flag bits 0 and 1 on character_id's record.
  */
-MATCH s32 Party_AddMember(u8 character_id) {
+MATCH s32 Party_MemberAdd(u8 character_id) {
     s32 char_rec;
     s32 field_rec;
     s32 field_slot;

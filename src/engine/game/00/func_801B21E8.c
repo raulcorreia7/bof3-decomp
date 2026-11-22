@@ -36,15 +36,15 @@ NON_MATCHING void func_801B21E8(void) {
     val3  = 3;
     val14 = g_Game.current->status.field.flags.unsigned_value;
     if (D_80145FD1 == 3) {
-        Party_SwapBattlerRows(0, 1, 1);
+        Party_BattlersSwapRows(0, 1, 1);
         if (g_Game.party_size == 3) {
             if (D_80146111 == 3) {
-                Party_SwapBattlerRows(1, 2, 1);
+                Party_BattlersSwapRows(1, 2, 1);
             }
         }
     } else if (g_Game.party_size == 3) {
         if (D_80146111 == g_Game.party_size) {
-            Party_SwapBattlerRows(0, 2, 1);
+            Party_BattlersSwapRows(0, 2, 1);
         }
     }
     val4 = 0;
@@ -61,7 +61,7 @@ NON_MATCHING void func_801B21E8(void) {
                 tmp5           = (u8*)g_Game.members + val5;
                 g_Task         = tmp5;
                 g_Game.current = tmp5;
-                Party_LoadMemberSprite(FIELD(u8, tmp5, 0x79u), val4 & BYTE_MASK);
+                Party_MemberLoadSprite(FIELD(u8, tmp5, 0x79u), val4 & BYTE_MASK);
                 g_Game.current->status.field.flags.unsigned_value = val14;
                 if (g_Game.current->status.field.flags.unsigned_value & 1) {
                     FIELD(s8, g_Task, 0x29u) = 4;

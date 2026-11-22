@@ -13,5 +13,5 @@ MATCH void Scene_ClearParty(void) {
     g_Game.party_size                = 0u;
     /* FAKE: statement boundary keeps a0=10 in the jal delay slot. */
     FAKE_ORDER_LOCK(PARTY_STATE_PTR->menu_flags = (u8)(flags | 7u));
-    Party_JoinMember(CHAR_ID_WHELP);
+    Party_MemberJoin(CHAR_ID_WHELP);
 }

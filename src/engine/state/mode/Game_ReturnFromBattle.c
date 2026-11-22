@@ -10,7 +10,7 @@ MATCH void Game_ReturnFromBattle(void) {
     changed = 0;
     if (g_AreaCameraMoving == 0 && EMI_IsReady() != 0) {
         g_AreaDrawMode = GFX_LAYER_FIELD_SCENE;
-        Party_BuildBattlers(PARTY_ORDER_FIELD);
+        Party_BattlersBuild(PARTY_ORDER_FIELD);
         Game_BattlePlaceFieldMembers();
         flags            = &g_Battle.outcome.options;
         g_EncounterSteps = 0;

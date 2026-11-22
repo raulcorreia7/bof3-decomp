@@ -609,9 +609,9 @@ MATCH void func_801D835C(MenuChoicePanel* panel) {
             if (n == panel->drawn_cursor) {
                 shade = UI_TEXT_HIGHLIGHT;
             }
-            level   = Char_GetAbilityElement(*list);
+            level   = Char_AbilityGetElement(*list);
             ability = (Ability*)&g_Abilities[*list];
-            count   = Char_GetAbilityCost(g_CharSlot[g_PartyFieldOrder[(s8)D_80148656]], *list, 0);
+            count   = Char_AbilityGetCost(g_CharSlot[g_PartyFieldOrder[(s8)D_80148656]], *list, 0);
             if (n == panel->drawn_cursor || n == panel->group_cursor) {
                 if (shade != UI_TEXT_DIM) {
                     UI_ListDrawAbilityRow((s16)(panel->pos.x + 7), (s16)(y + 0x1A), UI_TEXT_DIM, level, (u8*)ability, count, 1);

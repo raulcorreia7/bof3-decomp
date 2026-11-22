@@ -16,7 +16,7 @@ Scene_ClearActor = { addr = 0x801F9000, type = "func", source = "clears the curr
 Scene_SpawnActor = { addr = 0x801FA854, type = "func", source = "Claims a free actor slot and seeds its type, camera angles, scene step and layer; returns whether a slot was free; one role shared by scena14 and scena15." }
 Scene_DispatchActor = { addr = 0x801FDD80, type = "func", source = "dispatches a scenario actor to its callback handler" }
 Scene_ShowEntityMessage = { addr = 0x801FDDC0, type = "func", source = "starts the entity callback-indexed area message for the current desert camp area and enters the message state" }
-Scene_SetPartyRyuAdultNinaAdultGarr = { addr = 0x801FE4CC, type = "func", source = "Streams the EMI family for adult Ryu, adult Nina and Garr, empties g_Game.party_size, joins the three in that order with Party_JoinMember and restages the party palettes." }
-Scene_SetPartyRyuAdultNinaAdultRei = { addr = 0x801FE520, type = "func", source = "Streams the EMI family for adult Ryu, adult Nina and Rei, empties g_Game.party_size, joins the three with Party_JoinMember and restages the party palettes." }
+Scene_SetPartyRyuAdultNinaAdultGarr = { addr = 0x801FE4CC, type = "func", source = "Streams the EMI family for adult Ryu, adult Nina and Garr, empties g_Game.party_size, joins the three in that order with Party_MemberJoin and restages the party palettes." }
+Scene_SetPartyRyuAdultNinaAdultRei = { addr = 0x801FE520, type = "func", source = "Streams the EMI family for adult Ryu, adult Nina and Rei, empties g_Game.party_size, joins the three with Party_MemberJoin and restages the party palettes." }
 g_SceneEntityDispatch = { addr = 0x801FE57C, source = "scenario entity dispatch table" }
 g_SceneActorDispatch = { addr = 0x801FE6EC, source = "scenario actor dispatch table" }

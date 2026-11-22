@@ -295,7 +295,7 @@ MATCH void Scene_InitOpeningParty(void) {
     EMI_PartyLoadArchives(CHAR_ID_RYU_PAJAMAS, CHAR_ID_TEEPO, CHAR_ID_REI, 0);
     g_Game.party_size                        = 0;
     g_Characters[g_CharSlot[9]].character_id = CHAR_ID_RYU_PAJAMAS;
-    Party_JoinMember(CHAR_ID_RYU_PAJAMAS);
+    Party_MemberJoin(CHAR_ID_RYU_PAJAMAS);
 }
 
 /* func_801FE1B0 */
@@ -303,14 +303,14 @@ MATCH void Scene_SetPartyRyuTeepoRei(void) {
     g_Characters[g_CharSlot[0]].character_id = CHAR_ID_RYU_YOUNG;
     EMI_PartyLoadArchives(CHAR_ID_RYU_YOUNG, CHAR_ID_TEEPO, CHAR_ID_REI, 0);
     g_Game.party_size = 0;
-    Party_JoinMember(CHAR_ID_RYU_YOUNG);
-    Party_JoinMember(CHAR_ID_TEEPO);
-    Party_JoinMember(CHAR_ID_REI);
+    Party_MemberJoin(CHAR_ID_RYU_YOUNG);
+    Party_MemberJoin(CHAR_ID_TEEPO);
+    Party_MemberJoin(CHAR_ID_REI);
 }
 
 /* func_801FE224 */
 MATCH void Party_JoinRei(void) {
-    Party_JoinMember(CHAR_ID_REI);
+    Party_MemberJoin(CHAR_ID_REI);
 }
 
 #include "overlays/scenario/shared/Scene_RemoveRei.h"

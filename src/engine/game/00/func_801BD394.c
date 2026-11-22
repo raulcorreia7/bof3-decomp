@@ -46,7 +46,7 @@ MATCH void func_801BD394(void) {
     if (g_Game.current->u.field.mode.unsigned_value == 0) {
         Script_Request(g_Task->direction);
         g_Task->timer = 0;
-        Party_ClearBattlerState(g_Task->unk_05);
+        Party_BattlersClearState(g_Task->unk_05);
         g_Task->header.mode  = 1;
         g_Task->param.unk_0B = 0;
         func_801BC000();

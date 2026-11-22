@@ -118,9 +118,9 @@ NON_MATCHING u8 Script_OpsRunFlow(ScriptState* state, u8* base, s32 seed) {
                         break;
                     case ACTOR_SCRIPT_FLOW_SHOW_BATTLERS:
                         if (base[state->cursor + 1] == 0)
-                            Party_HideBattlers();
+                            Party_BattlersHide();
                         else
-                            Party_ShowBattlers();
+                            Party_BattlersShow();
                         state->cursor += 2;
                         break;
                     case ACTOR_SCRIPT_FLOW_SET_POSITION:

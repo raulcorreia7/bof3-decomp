@@ -1,7 +1,7 @@
 /* Adds Momo to the party with Garr. */
 MATCH void Scene_JoinMomoWithGarr(void) {
     EMI_PartyLoadArchives(CHAR_ID_RYU_ADULT, CHAR_ID_GARR, CHAR_ID_MOMO, 0U);
-    Party_BuildBattlers(PARTY_ORDER_FIELD);
-    Party_JoinMember(CHAR_ID_MOMO);
+    Party_BattlersBuild(PARTY_ORDER_FIELD);
+    Party_MemberJoin(CHAR_ID_MOMO);
     Party_LoadPalettes();
 }

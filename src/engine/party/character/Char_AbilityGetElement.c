@@ -3,7 +3,7 @@
 /* returns the 1-based index of the first set bit in the low nine bits of the
  * 0x14-stride D_801CA71C entry, or 0 when none is set.
  */
-MATCH s32 Char_GetAbilityElement(s32 ability_id) {
+MATCH s32 Char_AbilityGetElement(s32 ability_id) {
     s32 flags;
     u32 mask;
     u8  index;

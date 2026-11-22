@@ -15,8 +15,8 @@ MATH_AverageAngle = { addr = 0x801F8F40, type = "func", source = "Averages two 1
 GFX_DrawFan = { addr = 0x801F8F90, type = "func", source = "Draws a fan of eight semi-transparent POLY_G3 triangles from a screen point, the centre corner shaded by the colour byte; one body shared by scena07, scena08 and area088" }
 Scene_DispatchActor = { addr = 0x801FD3BC, type = "func", source = "dispatches a scenario actor to its callback handler" }
 Scene_DispatchByPosition = { addr = 0x801FDA98, type = "func", source = "dispatches a scene handler by position index" }
-Scene_SetPartyRyuYoungNinaYoungMomo = { addr = 0x801FDB34, type = "func", source = "Streams the EMI family for young Ryu, young Nina and Momo, empties g_Game.party_size and joins the three with Party_JoinMember." }
-Scene_SetPartyRyuYoungNinaYoungGarr = { addr = 0x801FDB80, type = "func", source = "Streams the EMI family for young Ryu, young Nina and Garr, empties g_Game.party_size and joins the three in that order with Party_JoinMember." }
+Scene_SetPartyRyuYoungNinaYoungMomo = { addr = 0x801FDB34, type = "func", source = "Streams the EMI family for young Ryu, young Nina and Momo, empties g_Game.party_size and joins the three with Party_MemberJoin." }
+Scene_SetPartyRyuYoungNinaYoungGarr = { addr = 0x801FDB80, type = "func", source = "Streams the EMI family for young Ryu, young Nina and Garr, empties g_Game.party_size and joins the three in that order with Party_MemberJoin." }
 g_SceneEntityDispatch = { addr = 0x801FDD14, source = "scenario entity dispatch table" }
 g_SceneActorDispatch = { addr = 0x801FDF8C, source = "scenario actor dispatch table" }
 g_ScenePositions = { addr = 0x801FDFA0, source = "scene position lookup table" }

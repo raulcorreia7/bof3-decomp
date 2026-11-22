@@ -1042,7 +1042,7 @@ MATCH void func_801F92DC(void) {
         }
         if (g_GameCellType == 2) {
             g_AreaDrawFlags = AREA_DRAW_ALL_FLAGS;
-            Party_HideBattlers();
+            Party_BattlersHide();
         }
     }
     func_801F9868();
@@ -1097,7 +1097,7 @@ MATCH void func_801F9644(void) {
                 g_SpawnedActors[g_ScratchPad[0]].camera_angle.z = g_AreaCameraAngle.vz;
                 g_SpawnedActors[g_ScratchPad[0]].layer          = 0x40;
             }
-            Party_HideBattlers();
+            Party_BattlersHide();
             g_Game.members[0].pos.x.fixed = TO_COORD(51);
             g_Game.members[0].pos.y.fixed = TO_COORD(64);
             SYS_SetFlag(g_SceneFlags, 2U);
@@ -1234,7 +1234,7 @@ MATCH void func_801F9BE4(void) {
             SsSetMVol(0x7F, 0x7F);
             g_AreaDrawFlags = AREA_DRAW_ALL_FLAGS;
             Game_SetScriptActive();
-            Party_HideBattlers();
+            Party_BattlersHide();
             UI_ModeSet(UI_MODE_FADE_IN);
             g_ScriptVars[3]         = 1;
             *counter                = 0;

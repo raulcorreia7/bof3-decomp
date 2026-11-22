@@ -272,22 +272,22 @@ MATCH void func_801FE360(void) {
     u8 i;
 
     for (i = 0; i < g_Game.party_size; i++) {
-        Party_RemoveMember(g_Game.members[i].chr.character_id);
+        Party_MemberRemove(g_Game.members[i].chr.character_id);
     }
     EMI_PartyLoadArchives(CHAR_ID_RYU_ADULT, CHAR_ID_MOMO, CHAR_ID_NINA_ADULT, 0);
     g_Game.party_size = 0;
-    Party_JoinMember(CHAR_ID_RYU_ADULT);
-    Party_JoinMember(CHAR_ID_MOMO);
+    Party_MemberJoin(CHAR_ID_RYU_ADULT);
+    Party_MemberJoin(CHAR_ID_MOMO);
 }
 
 /* func_801FE3F8 */
 MATCH void Party_JoinNinaAdult(void) {
-    Party_JoinMember(CHAR_ID_NINA_ADULT);
+    Party_MemberJoin(CHAR_ID_NINA_ADULT);
 }
 
 /* func_801FE418 */
 MATCH void Party_JoinMomo(void) {
-    Party_JoinMember(CHAR_ID_MOMO);
+    Party_MemberJoin(CHAR_ID_MOMO);
 }
 
 MATCH void func_801FE438(void) {
@@ -300,7 +300,7 @@ MATCH void func_801FE438(void) {
     EMI_PartyLoadArchives(ids[0], ids[1], ids[2], 0);
     for (slot = 0; slot < PARTY_SLOT_COUNT; slot++) {
         if (ids[slot] != CHAR_ID_RYU_ADULT) {
-            Party_JoinMember(ids[slot]);
+            Party_MemberJoin(ids[slot]);
         }
     }
 }
@@ -309,7 +309,7 @@ MATCH void func_801FE438(void) {
 
 MATCH void func_801FE5B0(void) {
     g_Characters[g_CharSlot[5]].party_flags &= 254;
-    Party_RemoveMember(CHAR_ID_MOMO);
+    Party_MemberRemove(CHAR_ID_MOMO);
     Party_LoadPalettes();
 }
 
@@ -324,7 +324,7 @@ MATCH void func_801FE63C(void) {
     }
     for (slot = 0; slot < PARTY_SLOT_COUNT; slot++) {
         if (ids[slot] != CHAR_ID_RYU_ADULT) {
-            Party_RemoveMember(ids[slot]);
+            Party_MemberRemove(ids[slot]);
         }
     }
     Party_LoadPalettes();

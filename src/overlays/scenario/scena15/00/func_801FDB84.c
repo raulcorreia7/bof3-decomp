@@ -194,17 +194,17 @@ MATCH void func_801FE3C8(void) {
         ids[slot] = g_Game.members[slot].chr.character_id;
     }
     for (slot = 0; slot < PARTY_SLOT_COUNT; slot++) {
-        Party_RemoveMember(ids[slot]);
+        Party_MemberRemove(ids[slot]);
     }
     EMI_PartyLoadArchives(CHAR_ID_RYU_ADULT, CHAR_ID_REI, CHAR_ID_GARR, 0);
     g_PartySize = 0;
-    Party_JoinMember(CHAR_ID_RYU_ADULT);
+    Party_MemberJoin(CHAR_ID_RYU_ADULT);
     Party_LoadPalettes();
 }
 
 MATCH void func_801FE49C(void) {
-    Party_JoinMember(CHAR_ID_REI);
-    Party_JoinMember(CHAR_ID_GARR);
+    Party_MemberJoin(CHAR_ID_REI);
+    Party_MemberJoin(CHAR_ID_GARR);
     Party_LoadPalettes();
 }
 

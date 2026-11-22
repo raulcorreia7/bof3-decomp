@@ -70,7 +70,7 @@ MATCH void func_801BFF9C(u32 work_type, u32 work_index, u32 work_mode) {
             g_Task->mirror       = 0;
             g_Task->active_flags = 0;
         } else if (LOBU(g_GameRequestFlags) & 0x40) {
-            Party_LoadMemberSprite(g_Game.members[0].chr.character_id, 0);
+            Party_MemberLoadSprite(g_Game.members[0].chr.character_id, 0);
         } else if (LOHU(g_GameAreaId) == AREA_ID_DESERT_OF_DEATH_MAP) {
             g_Game.members[0].unk_2B = 0;
             *(s32*)&D_80145F00       = 0;
@@ -78,7 +78,7 @@ MATCH void func_801BFF9C(u32 work_type, u32 work_index, u32 work_mode) {
     } else {
         g_Game.party_size = Party_CountOrder(PARTY_ORDER_FIELD);
         if (!(g_Game.walk_flags & AREA_WALK_MAP_LOADING)) {
-            Party_BuildBattlers(PARTY_ORDER_FIELD);
+            Party_BattlersBuild(PARTY_ORDER_FIELD);
         } else {
             i = 0;
             if (i < g_Game.party_size) {
@@ -103,11 +103,11 @@ MATCH void func_801BFF9C(u32 work_type, u32 work_index, u32 work_mode) {
                     (&g_Game.members[0].character_index)[off] = type;
                     *(Character*)dst                          = *rec;
                     if (!(g_Task->active_flags & 0x1)) {
-                        Party_LoadMemberSprite(*order, i & BYTE_MASK);
+                        Party_MemberLoadSprite(*order, i & BYTE_MASK);
                         FAKE_BARRIER(); /* FAKE: keeps order++ past the call. */
                         order++;
                     } else {
-                        Party_LoadMemberSprite(*order, i & BYTE_MASK);
+                        Party_MemberLoadSprite(*order, i & BYTE_MASK);
                         order++;
                         GFX_PaletteFreeFadeTarget(g_Task);
                         g_Task->clut_select = (g_Task->unk_05 + 0x78);

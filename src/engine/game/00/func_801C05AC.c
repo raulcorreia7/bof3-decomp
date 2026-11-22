@@ -5,7 +5,7 @@ MATCH void func_801C05AC(void) {
     s32          i;
 
     if (!(g_AreaWalkFlags & AREA_WALK_MAP_LOADING)) {
-        Party_ClearActiveBattlers();
+        Party_BattlersClearActive();
         if (g_GameRequestFlags & AREA_LOAD_FLAG_FISHING) {
             g_Game.members[0].header.mode = 9;
         } else {

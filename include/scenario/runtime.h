@@ -15,9 +15,9 @@
     {                                      \
         EMI_PartyLoadArchives(a, b, c, 0); \
         g_Game.party_size = 0;             \
-        Party_JoinMember(a);               \
-        Party_JoinMember(b);               \
-        Party_JoinMember(c);               \
+        Party_MemberJoin(a);               \
+        Party_MemberJoin(b);               \
+        Party_MemberJoin(c);               \
         Party_LoadPalettes();              \
     }
 
@@ -26,9 +26,9 @@
     {                                       \
         EMI_PartyLoadArchives(a, b, c, 0);  \
         g_Game.party_size = 0;              \
-        Party_JoinMember(a);                \
-        Party_JoinMember(b);                \
-        Party_JoinMember(c);                \
+        Party_MemberJoin(a);                \
+        Party_MemberJoin(b);                \
+        Party_MemberJoin(c);                \
     }
 
 #endif

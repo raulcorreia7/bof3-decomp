@@ -4,7 +4,7 @@
  * quarter units no longer covers the gauge, raises bit 0x2000 on the record's flags and the work area's +0x80;
  * returns the clamped amount as 16 bits.
  */
-MATCH u16 Char_LoseHP(s32 amount, s32 character_id) {
+MATCH u16 Char_HPLose(s32 amount, s32 character_id) {
     PartyMember* block;
     u16          count;
     s32          slot;

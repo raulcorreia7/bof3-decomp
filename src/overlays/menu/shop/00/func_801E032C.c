@@ -54,7 +54,7 @@ MATCH void func_801E032C(void) {
     if (g_PadStates[0].pressed & PADRleft) {
         if (*cell != 0) {
             SND_PlaySE(EMI_SE_ID(SND_BANK_COMMON, 3));
-            Char_AddAbility(*cell, 0, 1, 0);
+            Char_AbilityAdd(*cell, 0, 1, 0);
             *cell = 0;
             return;
         }
