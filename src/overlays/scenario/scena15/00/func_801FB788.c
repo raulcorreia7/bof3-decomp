@@ -25,10 +25,10 @@ MATCH void func_801FB788(void) {
                     actor->type         = 0x88;
                     actor->unk_06       = 1;
                     actor->pos.y.fixed  = 0x220000;
-                    actor->pos.z.fixed  = 0x08000000;
+                    actor->pos.z.fixed  = TO_COORD(0x800);
                     actor->scene_step   = 0x3F8000;
                     actor->selection    = 0x220000;
-                    actor->unk_14       = 0x06000000;
+                    actor->unk_14       = TO_COORD(0x600);
                 }
                 g_ScenarioState.timer_06 = 0x20;
                 g_ScenarioState.step_05  = 2;
