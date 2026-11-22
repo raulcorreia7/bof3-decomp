@@ -326,7 +326,7 @@ ASSERT_SIZE(AreaMapObjectHeader, AREA_MAP_OBJECT_HEADER_SIZE);
 
 /* `0x800D3800` - the area script table, a table of actor animation streams: a
  * `u32` directory, then per section a `u16` slot table followed by its
- * records. Each record is one stream (see `Actor_StageAnimStep`). `dir_size == 4 * L` is the
+ * records. Each record is one stream (see `Script_AnimStageStep`). `dir_size == 4 * L` is the
  * directory's own size, not an entry count: read as a count it overruns the
  * payload (`WORLD00/AREA016.EMI` slot 4: `u32[0] = 28`, `u32[29] = 0x240018` in
  * 2,708 bytes). The only reader is `exe/slus_004_22@0x8014D6DC`, which reaches

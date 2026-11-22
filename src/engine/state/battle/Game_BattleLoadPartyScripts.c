@@ -64,7 +64,7 @@ found:
                 rec[0x08] = (sel + rec[0x0B]) & 0x7;
                 Script_Stage(g_Task->direction, 0, MEM_PTR(u8, BATTLE_SCRIPT_TABLE), 0xA00);
             }
-            Actor_StepAnimLoop();
+            Script_AnimStepLoop();
         }
         off += BATTLE_PARTY_STRIDE;
     } while (++slot < g_Game.party_size);

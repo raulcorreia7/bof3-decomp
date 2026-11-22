@@ -84,7 +84,7 @@ segments:
       - [0x1A8, .rodata, func_801A7E54]
       - [0x1D8, .rodata, ../../state/scene/Scene_RunInn]
       - [0x238, .rodata, func_801A8728]
-      - [0x4C0, .rodata, ../../actor/ops/Script_RunFlowOps]
+      - [0x4C0, .rodata, ../../actor/ops/Script_OpsRunFlow]
   # Placement: .data resumes after another section in the retail bytes; one segment would group both .data runs.
   - name: data_9
     type: code
@@ -94,7 +94,7 @@ segments:
     section_order: [.data, .rodata]
     subsegments:
       - [0x4FC, .data, D_80195CFC]
-      - [0x500, .rodata, ../../actor/ops/Script_RunSoundOps]
+      - [0x500, .rodata, ../../actor/ops/Script_OpsRunSound]
   # Placement: .data resumes after another section in the retail bytes; one segment would group both .data runs.
   - name: data_10
     type: code
@@ -104,10 +104,10 @@ segments:
     section_order: [.data, .rodata]
     subsegments:
       - [0x53C, .data, D_80195D3C]
-      - [0x540, .rodata, ../../actor/ops/Script_RunControlOps]
-      - [0x580, .rodata, ../../actor/ops/Script_RunMotionOps]
-      - [0x5C0, .rodata, ../../actor/ops/Script_RunWaitOps]
-      - [0x600, .rodata, ../../actor/ops/Script_RunAppearanceOps]
+      - [0x540, .rodata, ../../actor/ops/Script_OpsRunControl]
+      - [0x580, .rodata, ../../actor/ops/Script_OpsRunMotion]
+      - [0x5C0, .rodata, ../../actor/ops/Script_OpsRunWait]
+      - [0x600, .rodata, ../../actor/ops/Script_OpsRunAppearance]
   # Placement: .data resumes after another section in the retail bytes; one segment would group both .data runs.
   - name: data_11
     type: code
@@ -117,7 +117,7 @@ segments:
     section_order: [.data, .rodata]
     subsegments:
       - [0x63C, .data, D_80195E3C]
-      - [0x640, .rodata, ../../actor/ops/Script_RunStageOps]
+      - [0x640, .rodata, ../../actor/ops/Script_OpsRunStage]
   # Placement: .data resumes after another section in the retail bytes; one segment would group both .data runs.
   - name: data_12
     type: code
@@ -127,8 +127,8 @@ segments:
     section_order: [.data, .rodata]
     subsegments:
       - [0x674, .data, D_80195E74]
-      - [0x678, .rodata, ../../actor/ops/Script_RunSpawnOps]
-      - [0x6B8, .rodata, ../../actor/ops/Script_RunFaceOps]
+      - [0x678, .rodata, ../../actor/ops/Script_OpsRunSpawn]
+      - [0x6B8, .rodata, ../../actor/ops/Script_OpsRunFace]
   # Placement: .data resumes after another section in the retail bytes; one segment would group both .data runs.
   - name: data_13
     type: code
@@ -498,15 +498,15 @@ segments:
       - [0x13384, c, func_801A8B84]
       - [0x134B4, c, ../../state/mode/Game_CallArea]
       - [0x13538, c, ../../actor/script/Script_Run]
-      - [0x13794, c, ../../actor/ops/Script_RunFlowOps]
-      - [0x13EE4, c, ../../actor/ops/Script_RunSoundOps]
-      - [0x14144, c, ../../actor/ops/Script_RunControlOps]
-      - [0x145E8, c, ../../actor/ops/Script_RunMotionOps]
-      - [0x14C70, c, ../../actor/ops/Script_RunWaitOps]
-      - [0x15300, c, ../../actor/ops/Script_RunAppearanceOps]
-      - [0x15C58, c, ../../actor/ops/Script_RunStageOps]
-      - [0x160B0, c, ../../actor/ops/Script_RunSpawnOps]
-      - [0x16224, c, ../../actor/ops/Script_RunFaceOps]
+      - [0x13794, c, ../../actor/ops/Script_OpsRunFlow]
+      - [0x13EE4, c, ../../actor/ops/Script_OpsRunSound]
+      - [0x14144, c, ../../actor/ops/Script_OpsRunControl]
+      - [0x145E8, c, ../../actor/ops/Script_OpsRunMotion]
+      - [0x14C70, c, ../../actor/ops/Script_OpsRunWait]
+      - [0x15300, c, ../../actor/ops/Script_OpsRunAppearance]
+      - [0x15C58, c, ../../actor/ops/Script_OpsRunStage]
+      - [0x160B0, c, ../../actor/ops/Script_OpsRunSpawn]
+      - [0x16224, c, ../../actor/ops/Script_OpsRunFace]
       - [0x163A8, c, ../../area/map/Area_MoveActorRoute]
       - [0x16568, c, func_801ABD68]
       - [0x166E0, c, func_801ABEE0]
@@ -575,7 +575,7 @@ segments:
       - [0x1AD68, c, func_801B0568]
       - [0x1B488, c, func_801B0C88]
       - [0x1B5A0, c, func_801B0DA0]
-      - [0x1B5FC, c, ../../actor/motion/Actor_UpdateMovement]
+      - [0x1B5FC, c, ../../actor/motion/Actor_MovementUpdate]
       - [0x1B644, c, func_801B0E44]
       - [0x1BBBC, c, func_801B13BC]
       - [0x1BC6C, c, func_801B146C]

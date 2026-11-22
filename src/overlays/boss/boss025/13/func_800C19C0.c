@@ -3,7 +3,7 @@
 MATCH void func_800C19C0(void) {
     Script_Request(0xFU);
     g_Task->unk_2A = 0;
-    Actor_StepAnimOnce();
+    Script_AnimStepOnce();
     Battle_DefeatEnemy();
     g_Task->header.flags &= ~ACTOR_FLAG_HIDDEN;
     g_Task->header.mode = 3;

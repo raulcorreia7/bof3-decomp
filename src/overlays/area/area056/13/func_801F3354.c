@@ -5,7 +5,7 @@ NON_MATCHING void func_801F3354(void) {
     s16 height;
 
     g_Task->vz += g_Task->gravity;
-    Actor_UpdateMovement();
+    Actor_MovementUpdate();
     height = Area_ReadHeight(g_Task->pos.x.fixed, g_Task->pos.y.fixed);
     if (COORD_INT(g_Task->pos.z) < height) {
         COORD_INT(g_Task->pos.z) = height;

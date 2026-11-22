@@ -19,9 +19,9 @@ u32         Script_Request(u8 script_index);
 /* func_8014D910 */
 void        Script_Seek(u16 position);
 /* func_8014D978 */
-u8          Actor_StepAnimLoop(void);
+u8          Script_AnimStepLoop(void);
 /* func_8014DAEC */
-u8          Actor_StepAnimOnce(void);
+u8          Script_AnimStepOnce(void);
 /* func_8015B4F4 */
 s8          Script_FindSlot(s32 code);
 /* func_8015BAC4 */
@@ -33,7 +33,7 @@ extern void Script_DispatchSelector(u8 selector);
 #if defined(ENGINE_LOCAL_DECLS) && !defined(OVERLAY_ACTOR_SCRIPT_H_LOCAL)
 #define OVERLAY_ACTOR_SCRIPT_H_LOCAL
 /* func_8014DB98 */
-extern void Actor_StageAnimStep(void);
+extern void Script_AnimStageStep(void);
 
 /* func_8015B870 */
 s32 Script_ReadValue(u32 type);

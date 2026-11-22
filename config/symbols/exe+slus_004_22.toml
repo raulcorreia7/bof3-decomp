@@ -370,10 +370,10 @@ Script_Select = { addr = 0x8014D6B8, type = "func", source = "Selects a script f
 Script_Begin = { addr = 0x8014D6DC, type = "func", source = "Selects the stream entry for a selector and re-arms the staged position." }
 Script_Request = { addr = 0x8014D8D4, type = "func", source = "Requests a script for the actor unless it is already selected." }
 Script_Seek = { addr = 0x8014D910, type = "func", source = "Seeks to the next script entry." }
-Actor_StepAnimLoop = { addr = 0x8014D978, type = "func", source = "Counts the step delay at +0x4A down and, at zero, moves the animation stream to its next step: wraps to step 0 at the end or follows a jump step (delay >= 0x80), returning 1 on a wrap or jump, then stages the step." }
-Actor_StepAnimReverse = { addr = 0x8014DA24, type = "func", source = "Plays the animation stream backwards: counts the delay at +0x4A down, at step 0 wraps to the end and returns 1, ignores jump steps, stages the step before the current position." }
-Actor_StepAnimOnce = { addr = 0x8014DAEC, type = "func", source = "As the looping step function, but at the end of the stream it sets +0x4A to 1 and returns 1 without staging, so the last frame holds; callers wait on it for a one-shot animation to end." }
-Actor_StageAnimStep = { addr = 0x8014DB98, type = "func", source = "Stages the next two-byte step of the animation stream at +0x50: the delay byte to +0x4A, the frame byte through the frame table at +0x54 to +0x5A, then +0x58 += 2. Called by the loop and one-shot step functions and Script_Seek." }
+Script_AnimStepLoop = { addr = 0x8014D978, type = "func", source = "Counts the step delay at +0x4A down and, at zero, moves the animation stream to its next step: wraps to step 0 at the end or follows a jump step (delay >= 0x80), returning 1 on a wrap or jump, then stages the step." }
+Script_AnimStepReverse = { addr = 0x8014DA24, type = "func", source = "Plays the animation stream backwards: counts the delay at +0x4A down, at step 0 wraps to the end and returns 1, ignores jump steps, stages the step before the current position." }
+Script_AnimStepOnce = { addr = 0x8014DAEC, type = "func", source = "As the looping step function, but at the end of the stream it sets +0x4A to 1 and returns 1 without staging, so the last frame holds; callers wait on it for a one-shot animation to end." }
+Script_AnimStageStep = { addr = 0x8014DB98, type = "func", source = "Stages the next two-byte step of the animation stream at +0x50: the delay byte to +0x4A, the frame byte through the frame table at +0x54 to +0x5A, then +0x58 += 2. Called by the loop and one-shot step functions and Script_Seek." }
 Actor_SelectSprite = { addr = 0x8014DC08, type = "func", source = "Selects a sprite record of the actor: its sheet, animation and mirror." }
 Area_SelectSceneRecord = { addr = 0x8014DD3C, type = "func", source = "Finds a scene record by id." }
 Actor_ReadValue = { addr = 0x8014DFE8, type = "func", source = "Reads a field record value for the actor." }
@@ -583,8 +583,8 @@ Party_ShowBattlers = { addr = 0x8015C0B8, type = "func", source = "Shows the par
 Party_HideBattlers = { addr = 0x8015C100, type = "func", source = "Hides the party battlers." }
 Actor_GetOwner = { addr = 0x8015C148, type = "func", source = "Returns the type of the current task." }
 Actor_Run = { addr = 0x8015C264, type = "func", source = "Runs the handler of the actor." }
-Actor_InitMovement = { addr = 0x8015C2D4, type = "func", source = "Seeds the hold counter and velocity dividers from the handler entry - or publishes the direction into the scroll globals." }
-Actor_StepMovement = { addr = 0x8015C540, type = "func", source = "Moves the actor and requests the next script at the end of the route." }
+Actor_MovementInit = { addr = 0x8015C2D4, type = "func", source = "Seeds the hold counter and velocity dividers from the handler entry - or publishes the direction into the scroll globals." }
+Actor_MovementStep = { addr = 0x8015C540, type = "func", source = "Moves the actor and requests the next script at the end of the route." }
 Actor_StepScroll = { addr = 0x8015C750, type = "func", source = "Steps the actor scroll." }
 Actor_RiseToGround = { addr = 0x8015C940, type = "func", source = "Advances the speed accumulator and raises the distance counter to the measured distance." }
 Actor_ApplyVelocity = { addr = 0x8015C9CC, type = "func", source = "Moves an actor by its velocity." }

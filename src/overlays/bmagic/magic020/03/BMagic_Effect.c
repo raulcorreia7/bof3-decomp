@@ -143,7 +143,7 @@ MATCH void func_801EF518(void) {
 MATCH void func_801EF5A4(void) {
     u8 timer;
 
-    Actor_StepAnimOnce();
+    Script_AnimStepOnce();
     timer          = g_Task->unk_09 - 1;
     g_Task->unk_09 = timer;
     if (timer == 0) {
@@ -152,7 +152,7 @@ MATCH void func_801EF5A4(void) {
 }
 
 MATCH void func_801EF608(void) {
-    if ((BATTLE_ACTIVE_WORK->param.unk_0B == 0) && (Actor_StepAnimOnce() & BYTE_MASK)) {
+    if ((BATTLE_ACTIVE_WORK->param.unk_0B == 0) && (Script_AnimStepOnce() & BYTE_MASK)) {
         g_Task->unk_09 = 0x10;
         g_Task->header.step += 1;
     }
@@ -291,7 +291,7 @@ MATCH void func_801EFBA0(void) {
 }
 
 MATCH void func_801EFD10(void) {
-    if (Actor_StepAnimLoop() & BYTE_MASK) {
+    if (Script_AnimStepLoop() & BYTE_MASK) {
         if (g_Task->param.unk_0B == 7) {
             Battle_MarkDamaged(g_Battle.target_selector);
         }

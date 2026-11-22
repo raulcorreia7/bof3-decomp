@@ -140,7 +140,7 @@ void func_801F8478(FallingSpark* spark);
 /* func_801F88B8 */
 void Trail_Update(Trail* trail);
 
-void      func_801F8BE8(void* table);
+void      Trail_Draw(Trail* trail);
 void      func_801FA38C(void);
 extern u8 D_801FDFC8;
 
@@ -153,7 +153,7 @@ extern u8 D_801FDFC8;
  * advance the actor when its countdown ends. Every change must keep both members matching. */
 #define SCENA07_PANEL_FADE_STEP() \
     Trail_Update(SCENA07_TRAIL);  \
-    func_801F8BE8(SCENA07_TRAIL); \
+    Trail_Draw(SCENA07_TRAIL);    \
     D_800E4C1E -= 0xC;            \
     if (--g_Task->timer == 0) {   \
         g_Task->header.step++;    \
@@ -163,7 +163,7 @@ extern u8 D_801FDFC8;
  * and re-arm the countdown to 0x20 when it ends. Every change must keep both members matching. */
 #define SCENA07_PANEL_BRIGHTEN_STEP() \
     Trail_Update(SCENA07_TRAIL);      \
-    func_801F8BE8(SCENA07_TRAIL);     \
+    Trail_Draw(SCENA07_TRAIL);        \
     D_800E4C1E += 6;                  \
     if (--g_Task->timer == 0) {       \
         g_Task->timer = 32;           \

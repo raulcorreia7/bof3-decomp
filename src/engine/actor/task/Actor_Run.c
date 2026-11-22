@@ -10,8 +10,8 @@
 /* The unit's reviewed .rodata placement: the four handler addresses that
  * D_801821D0 points at. The body reads them through the registered symbol. */
 static ActorMovementCallback const s_dispatch[] = {
-    Actor_InitMovement,
-    (ActorMovementCallback)Actor_StepMovement,
+    Actor_MovementInit,
+    (ActorMovementCallback)Actor_MovementStep,
     Actor_StepScroll,
     (ActorMovementCallback)Actor_RiseToGround,
 };

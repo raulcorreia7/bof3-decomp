@@ -118,7 +118,7 @@ MATCH void func_801EF5C0(void) {
     u16  angle;
     u8   timer;
 
-    Actor_StepAnimOnce();
+    Script_AnimStepOnce();
     if (g_Task->unk_09 & 0x1) {
         state = &g_AreaCameraAngle.vx;
         angle = *state + 0x14;
@@ -142,7 +142,7 @@ MATCH void func_801EF674(void) {
     if (timer != 0) {
         g_Task->timer = timer - 2;
     }
-    if (Actor_StepAnimOnce() & BYTE_MASK) {
+    if (Script_AnimStepOnce() & BYTE_MASK) {
         g_Task->header.step += 1;
     }
 }

@@ -6,5 +6,5 @@ MATCH void func_801B870C(void) {
      * a proven struct owner/layout from callers, strides, and field accesses. */
     g_Game.current->u.field.mode.unsigned_value = 5;
     D_801CD36C[g_Task->unk_03]();
-    Actor_StepAnimLoop();
+    Script_AnimStepLoop();
 }

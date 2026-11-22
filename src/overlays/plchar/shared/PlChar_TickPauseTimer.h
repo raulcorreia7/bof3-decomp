@@ -5,7 +5,7 @@ MATCH void PlChar_TickPauseTimer(void) {
         g_GameFlags &= ~0x1000;
     } else {
         g_Task->timer--;
-        Actor_UpdateMovement();
+        Actor_MovementUpdate();
     }
-    Actor_StepAnimLoop();
+    Script_AnimStepLoop();
 }

@@ -186,7 +186,7 @@ MATCH void func_801EFAE4(void) {
 }
 
 MATCH void func_801EFB90(void) {
-    if ((Actor_StepAnimOnce() & BYTE_MASK) != 0u) {
+    if ((Script_AnimStepOnce() & BYTE_MASK) != 0u) {
         g_Task->header.step += 1u;
     }
 }
@@ -314,7 +314,7 @@ MATCH void func_801EFFC0(void) {
 }
 
 MATCH void func_801F014C(void) {
-    if ((Actor_StepAnimOnce() & BYTE_MASK) != 0u) {
+    if ((Script_AnimStepOnce() & BYTE_MASK) != 0u) {
         g_Task->header.step += 1u;
     }
 }
@@ -501,7 +501,7 @@ MATCH void func_801F0864(void) {
     if (g_Task->unk_09 != 16) {
         g_Task->unk_09--;
     }
-    Actor_StepAnimOnce();
+    Script_AnimStepOnce();
     func_800AF4A0(D_8014637C, 0x2000, 0);
     speed                      = g_Task->unk_14 + g_Task->unk_20;
     g_Task->unk_14             = speed;
@@ -603,7 +603,7 @@ MATCH void func_801F0F2C(void) {
     s32 speed;
     u8  timer;
 
-    Actor_StepAnimOnce();
+    Script_AnimStepOnce();
     func_800AF4A0(D_8014637C, 0x2000, 0);
     speed                      = g_Task->unk_14 + g_Task->unk_20;
     g_Task->unk_14             = speed;

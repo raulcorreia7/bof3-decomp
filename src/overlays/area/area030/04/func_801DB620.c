@@ -23,6 +23,6 @@ MATCH void func_801DB620(void) {
         record                    = FISHING_STATE;
         record->sub_index         = (record->sub_index + 1);
     }
-    Actor_StepAnimLoop();
+    Script_AnimStepLoop();
     Fishing_DrawDimScreen();
 }
