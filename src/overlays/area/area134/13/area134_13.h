@@ -76,7 +76,6 @@ void func_801F4F0C(s32* center, s32 radius, u16 angle, s32 offset_x, s32 offset_
 extern s32   D_80145EC4;
 extern u8    D_80146110;
 extern s32   D_80146144;
-extern void* D_80146250;
 extern u8    D_80146865;
 extern u8    D_80146866;
 extern Actor D_80146920;

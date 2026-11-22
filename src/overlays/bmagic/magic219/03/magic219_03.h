@@ -3,8 +3,6 @@
 
 /* The bmagic/magic219/03 overlay. Only this image includes the file. */
 
-#define FAKE_DECL_BATTLE_PARTY_CELL_RECORD
-
 #include "overlays/bmagic/bmagic.h"
 
 /* The ring radius, a word at scratch 0x00: the effect view names only halfwords there, so the word goes through

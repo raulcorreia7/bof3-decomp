@@ -8,6 +8,6 @@ MATCH void func_801F3E10(void) {
     TASK(Actor)->unk_04 = 1;
     Script_Select(0x3B);
     g_ScriptState->flags |= 0x40;
-    g_ScriptState->unk_01 = (D_80146250 - g_Game.members) * 20;
+    g_ScriptState->unk_01 = (g_GameState - g_Game.members) * 20;
     g_ScriptState->cursor -= 2;
 }
