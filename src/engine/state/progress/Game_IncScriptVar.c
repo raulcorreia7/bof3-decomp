@@ -1,6 +1,0 @@
-#include "engine/slus/slus.h"
-
-MATCH s32 Game_IncScriptVar(u8* operand) {
-    g_ScriptVars[(operand[0] & SCRIPT_VAR_MASK) >> SCRIPT_VAR_SHIFT] += 1;
-    return 0;
-}

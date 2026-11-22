@@ -1,7 +1,7 @@
 #include "game_00.h"
 
 MATCH void func_80199230(void) {
-    Game_UpdateScenario();
+    Game_ScenarioUpdate();
     UI_PanelUpdateTasks();
     func_801C57F4();
     func_8015A7E8();

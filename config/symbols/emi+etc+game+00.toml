@@ -51,27 +51,27 @@ Game_LoadCampMenu = { addr = 0x80196FFC, type = "func", source = "Camp menu step
 Game_RunMain = { addr = 0x80197068, type = "func", source = "Thread body that never returns: runs the g_GameModes handler the game state index selects, updates the clock and waits a frame." }
 Game_NewGame = { addr = 0x801970EC, type = "func", source = "Game state loop step 0: clears the new-game flags, resets g_GameAreaId and builds the party battlers for a new game." }
 Game_UpdateAreaLoad = { addr = 0x801971E8, type = "func", source = "Game state 1: loads the requested area, then sets g_GameEntryState to 8 when g_GameRequestFlags bit 3 is set, else to 2." }
-Game_UpdateField = { addr = 0x80197378, type = "func", source = "Game state 2: runs Game_UpdateScenario and Area_RunFrame, then maps g_GameStateIndex to the next g_GameEntryState." }
-Game_UpdateMenu = { addr = 0x801975E4, type = "func", source = "Game state 3: runs the g_GameMenuSteps entry selected by g_GameEntrySubstate." }
+Game_UpdateField = { addr = 0x80197378, type = "func", source = "Game state 2: runs Game_ScenarioUpdate and Area_RunFrame, then maps g_GameStateIndex to the next g_GameEntryState." }
+Game_MenuUpdate = { addr = 0x801975E4, type = "func", source = "Game state 3: runs the g_GameMenuSteps entry selected by g_GameEntrySubstate." }
 Game_UpdateBattle = { addr = 0x80197A24, type = "func", source = "Game state 5: runs the g_GameBattleSteps entry selected by g_GameEntrySubstate." }
 Game_BattleTurnToEncounter = { addr = 0x80197A60, type = "func", source = "Step 0 of g_GameBattleSteps: runs the encounter turn, the loading frame, and advances the entry substate." }
 Game_BattleWalkToEncounter = { addr = 0x80197C1C, type = "func", source = "Step 2 of g_GameBattleSteps: runs the walk-in until every member is in place, the battle archive is streamed and the area camera is idle." }
 Game_BattleBeginEntrance = { addr = 0x80197E54, type = "func", source = "Step 4 of g_GameBattleSteps: once the party is in place, clears the camera and outcome state, sets the battle phase to BATTLE_MODE_ENTRANCE and counts the battle party order." }
 Game_ScrollToParty = { addr = 0x80197EFC, type = "func", source = "Step 6 of g_GameBattleSteps: after the battle, restores the members' positions, scrolls the camera back to the leader and steps their anims." }
-Game_ReturnFromBattle = { addr = 0x80197F48, type = "func", source = "Step 7 of g_GameBattleSteps: once the camera is idle and the stream ready, restores the field draw mode, rebuilds the field battlers, places the members, restarts the area BGM and returns the game to the field. Mirrors Game_ReturnFromMenu and Game_ReturnFromShop." }
-Game_UpdateCameraLook = { addr = 0x80198170, type = "func", source = "Game state 6: while the look button is held the D-pad orbits g_AreaCameraAngle; on release the angle eases back to the default and the game returns to state 2." }
-Game_EndCameraLook = { addr = 0x801981D4, type = "func", source = "Ends the camera look once the area camera angle reaches its resting pitch -682 and ANGLE_45 yaw: returns the game request to idle. Called by Game_UpdateCameraLook." }
-Game_UpdateShop = { addr = 0x80198234, type = "func", source = "Game state 7: runs the g_GameShopSteps entry selected by g_GameEntrySubstate, which stream SHOP and run the shop and save screens." }
-Game_LoadShopOverlay = { addr = 0x80198270, type = "func", source = "Shop substate 0: streams the SHOP overlay slot with EMI_LoadArchive and copies palettes 1 and 2." }
-Game_UpdateFishing = { addr = 0x801984AC, type = "func", source = "Game state 8: runs the g_GameFishingSteps entry selected by g_GameEntrySubstate." }
-Game_EndFishing = { addr = 0x801984E8, type = "func", source = "Step 0 of g_GameFishingSteps: slides the pond view away with a display move, sets the UI mode, clears the encounter counter and hands the return to the loader step." }
-Game_ReturnFromFishing = { addr = 0x801985C8, type = "func", source = "Step 2 of g_GameFishingSteps: waits the character archive, fades the pond BGM out and requests the area change back to the last field position." }
-Game_UpdateAbilityMenu = { addr = 0x80198744, type = "func", source = "Game state 9: runs the g_MenuAbilityOpen entry selected by g_GameEntrySubstate." }
-Game_UpdateShisu = { addr = 0x80198904, type = "func", source = "Game state 10: runs the g_GameShisuSteps entry selected by g_GameEntrySubstate." }
-Game_UpdateSceneCamera = { addr = 0x80198AC4, type = "func", source = "Game state 11: runs the g_GameSceneCameraSteps entry selected by g_GameEntrySubstate, which dispatch the scene, drive the camera angle and return to state 2." }
+Game_ReturnFromBattle = { addr = 0x80197F48, type = "func", source = "Step 7 of g_GameBattleSteps: once the camera is idle and the stream ready, restores the field draw mode, rebuilds the field battlers, places the members, restarts the area BGM and returns the game to the field. Mirrors Game_MenuReturn and Game_ShopReturn." }
+Game_CameraLookUpdate = { addr = 0x80198170, type = "func", source = "Game state 6: while the look button is held the D-pad orbits g_AreaCameraAngle; on release the angle eases back to the default and the game returns to state 2." }
+Game_CameraLookEnd = { addr = 0x801981D4, type = "func", source = "Ends the camera look once the area camera angle reaches its resting pitch -682 and ANGLE_45 yaw: returns the game request to idle. Called by Game_CameraLookUpdate." }
+Game_ShopUpdate = { addr = 0x80198234, type = "func", source = "Game state 7: runs the g_GameShopSteps entry selected by g_GameEntrySubstate, which stream SHOP and run the shop and save screens." }
+Game_ShopLoadOverlay = { addr = 0x80198270, type = "func", source = "Shop substate 0: streams the SHOP overlay slot with EMI_LoadArchive and copies palettes 1 and 2." }
+Game_FishingUpdate = { addr = 0x801984AC, type = "func", source = "Game state 8: runs the g_GameFishingSteps entry selected by g_GameEntrySubstate." }
+Game_FishingEnd = { addr = 0x801984E8, type = "func", source = "Step 0 of g_GameFishingSteps: slides the pond view away with a display move, sets the UI mode, clears the encounter counter and hands the return to the loader step." }
+Game_FishingReturn = { addr = 0x801985C8, type = "func", source = "Step 2 of g_GameFishingSteps: waits the character archive, fades the pond BGM out and requests the area change back to the last field position." }
+Game_AbilityMenuUpdate = { addr = 0x80198744, type = "func", source = "Game state 9: runs the g_MenuAbilityOpen entry selected by g_GameEntrySubstate." }
+Game_ShisuUpdate = { addr = 0x80198904, type = "func", source = "Game state 10: runs the g_GameShisuSteps entry selected by g_GameEntrySubstate." }
+Game_SceneCameraUpdate = { addr = 0x80198AC4, type = "func", source = "Game state 11: runs the g_GameSceneCameraSteps entry selected by g_GameEntrySubstate, which dispatch the scene, drive the camera angle and return to state 2." }
 Game_RunScene = { addr = 0x80198B00, type = "func", source = "Step 0 of g_GameSceneCameraSteps: dispatches the scene record and the frame, and returns the game to the field once the request goes idle." }
-Game_OrbitSceneCamera = { addr = 0x80198B44, type = "func", source = "Step 1 of g_GameSceneCameraSteps: runs the camera orbit driver while the view button is held." }
-Game_EndSceneCamera = { addr = 0x80198B6C, type = "func", source = "Step 2 of g_GameSceneCameraSteps: eases the camera back and, once the angle reaches its rest pitch and yaw, restarts the step sequence. Mirrors Game_EndCameraLook." }
+Game_SceneCameraOrbit = { addr = 0x80198B44, type = "func", source = "Step 1 of g_GameSceneCameraSteps: runs the camera orbit driver while the view button is held." }
+Game_SceneCameraEnd = { addr = 0x80198B6C, type = "func", source = "Step 2 of g_GameSceneCameraSteps: eases the camera back and, once the angle reaches its rest pitch and yaw, restarts the step sequence. Mirrors Game_CameraLookEnd." }
 Area_WaitWindowEffect = { addr = 0x80198BC4, type = "func", source = "Runs area frames until the window effect is idle." }
 UI_WindowWaitEffect = { addr = 0x80198C38, type = "func", source = "Runs menu frames until the window effect is idle; the menu twin of Area_WaitWindowEffect." }
 Game_UpdateClock = { addr = 0x80198CAC, type = "func", source = "Advances the play clock by frame, second, minute and hour." }
@@ -79,9 +79,9 @@ Game_EaseCameraToRest = { addr = 0x801990D0, type = "func", source = "Steps the 
 Area_RunFrame = { addr = 0x801991B8, type = "func", source = "Runs one field frame: Area_UpdateParty, Actor_DispatchAll and Area_DrawScene." }
 Area_RunLoadingFrame = { addr = 0x801992B8, type = "func", source = "runs one field update-and-draw frame (camera, party, actors, scene) in the overlay and archive wait loops" }
 Game_RunSceneFrame = { addr = 0x80199308, type = "func", source = "The scene-camera frame: the scenario update, the camera, the party, the actors and the scene draw, without the pad-driven walk." }
-Game_UpdateMenuFrame = { addr = 0x80199368, type = "func", source = "Middle entry of g_GameMenuSteps, between Game_LoadMenu and Game_ReturnFromMenu: each frame updates the scenario, dispatches the menu step and updates the panel tasks; UI_WindowWaitEffect also calls it while a window effect is busy." }
-Game_UpdateAbilityMenuFrame = { addr = 0x801993F0, type = "func", source = "Middle entry of g_MenuAbilityOpen, between Game_LoadAbilityMenu and Game_ReturnFromAbilityMenu: runs the Bate (ability menu) entry func_801D0D9C and updates the panel tasks each frame." }
-Game_UpdateShisuFrame = { addr = 0x80199418, type = "func", source = "Middle entry of g_GameShisuSteps, between Game_LoadShisu and Game_ReturnFromShisu: runs the shisu screen entry func_801D0D80 and updates the panel tasks each frame." }
+Game_MenuUpdateFrame = { addr = 0x80199368, type = "func", source = "Middle entry of g_GameMenuSteps, between Game_MenuLoad and Game_MenuReturn: each frame updates the scenario, dispatches the menu step and updates the panel tasks; UI_WindowWaitEffect also calls it while a window effect is busy." }
+Game_AbilityMenuUpdateFrame = { addr = 0x801993F0, type = "func", source = "Middle entry of g_MenuAbilityOpen, between Game_AbilityMenuLoad and Game_AbilityMenuReturn: runs the Bate (ability menu) entry func_801D0D9C and updates the panel tasks each frame." }
+Game_ShisuUpdateFrame = { addr = 0x80199418, type = "func", source = "Middle entry of g_GameShisuSteps, between Game_ShisuLoad and Game_ShisuReturn: runs the shisu screen entry func_801D0D80 and updates the panel tasks each frame." }
 Party_RunFrame = { addr = 0x80199440, type = "func", source = "Runs each party member's per-frame step: the leader's step handler, then the followers', skipping any member its hold bit pins." }
 UI_CursorDrawPanel = { addr = 0x80199678, type = "func", source = "Draws the menu panel cursor at the x and y of the current task root through UI_CursorDraw." }
 UI_PanelSlideLeft = { addr = 0x8019973C, type = "func", source = "Moves the master panel 0x20 pixels left and clamps its x at 0x98." }
@@ -96,10 +96,10 @@ Actor_RunInteractions = { addr = 0x801A06D8, type = "func", source = "Runs every
 Area_IsCellBlocked = { addr = 0x801A20F8, type = "func", source = "Reports whether a map cell's terrain blocks movement." }
 Area_SetXFixed = { addr = 0x801A253C, type = "func", source = "the body stores into g_Task->pos.x.fixed" }
 Actor_TurnRandom = { addr = 0x801A2C10, type = "func", source = "Turns the current actor to a random diagonal or odd facing and flags the record." }
-Game_DispatchFadeWhite = { addr = 0x801A3594, type = "func", source = "calls the fade-to-white step selected by the step byte" }
-Game_StartFadeWhite = { addr = 0x801A35D8, type = "func", source = "Step 0 of the D_801C8434 table, followed by func_801A3648: starts a white palette fade (GFX_PaletteAllocFade 0x1F, 0x1F, 0x1F) on the running task and clears ACTOR_FLAG_HIDDEN." }
-Game_DispatchFadeBlack = { addr = 0x801A37D4, type = "func", source = "calls the fade-to-black step selected by the step byte" }
-Game_StartFadeBlack = { addr = 0x801A3818, type = "func", source = "Step 0 of the D_801C843C table, followed by func_801A386C: starts a black palette fade (GFX_PaletteAllocFade 0, 0, 0) on the running task." }
+Game_FadeDispatchWhite = { addr = 0x801A3594, type = "func", source = "calls the fade-to-white step selected by the step byte" }
+Game_FadeStartWhite = { addr = 0x801A35D8, type = "func", source = "Step 0 of the D_801C8434 table, followed by func_801A3648: starts a white palette fade (GFX_PaletteAllocFade 0x1F, 0x1F, 0x1F) on the running task and clears ACTOR_FLAG_HIDDEN." }
+Game_FadeDispatchBlack = { addr = 0x801A37D4, type = "func", source = "calls the fade-to-black step selected by the step byte" }
+Game_FadeStartBlack = { addr = 0x801A3818, type = "func", source = "Step 0 of the D_801C843C table, followed by func_801A386C: starts a black palette fade (GFX_PaletteAllocFade 0, 0, 0) on the running task." }
 Area_RunSetupStream = { addr = 0x801A3E50, type = "func", source = "Runs the area setup stream of an AreaLoad handler: clears the four g_PartyActors rows, runs Area_RunSetupRecords over the stream and clears the unused g_Actors entries." }
 Area_RunSetupRecords = { addr = 0x801A3F3C, type = "func", source = "the body stores into g_ScenarioState.scenario_id" }
 Area_RunSetupIf = { addr = 0x801A3FC0, type = "func", source = "Setup stream 0xF0: runs the records up to 0xFE when the area test holds, else its other branch." }
@@ -119,11 +119,11 @@ Area_SetupScrollRoute = { addr = 0x801A72B0, type = "func", source = "Setup stre
 Area_SetEntityCallback = { addr = 0x801A72E8, type = "func", source = "Setup stream type 0xD: sets the current entity's callback index, or its word 0x7C when byte 1 is zero." }
 Scene_Start = { addr = 0x801A7704, type = "func", source = "Scenario start: loads the overlay of g_ScenarioState.scenario_id, waits for its SCENA payload, then dispatches the scenario entry." }
 Scene_LoadOverlay = { addr = 0x801A7804, type = "func", source = "Streams the overlay slot 661 + scenario id and waits for the loader; Scene_Start calls it before the scenario handler runs." }
-Game_UpdateScenario = { addr = 0x801A782C, type = "func", source = "Calls entry_00 of the g_ScenarioHandlers handler table of the active scenario, then Game_UpdateScene." }
-Game_DispatchScenarioRecord = { addr = 0x801A7878, type = "func", source = "Passes an actor to entry_04 of the scenario, or to Scene_DispatchObject when bit 0x4000 of the actor is set." }
+Game_ScenarioUpdate = { addr = 0x801A782C, type = "func", source = "Calls entry_00 of the g_ScenarioHandlers handler table of the active scenario, then Game_UpdateScene." }
+Game_ScenarioDispatchRecord = { addr = 0x801A7878, type = "func", source = "Passes an actor to entry_04 of the scenario, or to Scene_DispatchObject when bit 0x4000 of the actor is set." }
 Scene_RequestChapterAdvance = { addr = 0x801A78F8, type = "func", source = "Sets bit 0x80 of g_ScenarioState.flags_01 to request the next chapter." }
 Area_IsStepBlocked = { addr = 0x801A7914, type = "func", source = "Runs entry_08 of the scenario and calls func_801A8728 when it returns 0; returns whether the step is blocked." }
-Game_CallScenario = { addr = 0x801A7A34, type = "func", source = "Calls entry_10 of the scenario when it exists, else Game_CallArea." }
+Game_ScenarioCall = { addr = 0x801A7A34, type = "func", source = "Calls entry_10 of the scenario when it exists, else Game_CallArea." }
 Game_UpdateScene = { addr = 0x801A7BF0, type = "func", source = "Runs the g_SceneSteps callback selected by the scene state byte D_801448EA." }
 Scene_ResetEventState = { addr = 0x801A7C2C, type = "func", source = "Resets the scene state bytes and copies the 16-byte D_801C84AC table to g_SceneEventFlags." }
 Scene_UpdateEvent = { addr = 0x801A7CAC, type = "func", source = "Runs the g_SceneEvents callback selected by the scene event byte D_801448EB." }
@@ -131,7 +131,7 @@ UI_PanelOpenMaster = { addr = 0x801A7CF0, type = "func", source = "Scene event 4
 Scene_RunInn = { addr = 0x801A802C, type = "func", source = "Scene event 10: calls UI_ModeSet, plays an XA stream and sets g_GameEntryState to 7, the shop entry state." }
 UI_MessageRunArea = { addr = 0x801A82F8, type = "func", source = "Starts area message 0xD8, waits until g_GameStateIndex leaves 2, then clears the script-active flag and the scene event byte D_801448EB." }
 Scene_DispatchObject = { addr = 0x801A86D4, type = "func", source = "Runs the g_SceneObjects callback selected by unk_7A of the actor, with the actor and g_SceneEventFlags." }
-Game_CallArea = { addr = 0x801A8CB4, type = "func", source = "Finds the entry of g_GameAreaId in the 28-entry area handler table g_AreaHooks and calls its handler with the two coordinates; returns 0 when the area has none. Called by Game_CallScenario." }
+Game_CallArea = { addr = 0x801A8CB4, type = "func", source = "Finds the entry of g_GameAreaId in the 28-entry area handler table g_AreaHooks and calls its handler with the two coordinates; returns 0 when the area has none. Called by Game_ScenarioCall." }
 Script_Run = { addr = 0x801A8D38, type = "func", source = "Runs the actor script record at the cursor: flow ops first, then the group handler its high nibble selects; returns the facing selection." }
 Script_OpsRunFlow = { addr = 0x801A8F94, type = "func", source = "Runs the flow opcodes of an actor script: jumps, branches on flags, loops, script calls, facing offsets; hands 0xB0 sound opcodes on." }
 Script_OpsRunSound = { addr = 0x801A96E4, type = "func", source = "Runs the sound opcodes 0xB0 to 0xBE of an actor script: sound effects, BGM, sequences and volume cues." }
@@ -183,10 +183,10 @@ Camera_ProjectPoint = { addr = 0x801AFF04, type = "func", source = "Projects the
 MATH_SetIdentity = { addr = 0x801AFF64, type = "func", source = "Writes 4096 to the three diagonal cells of a 3x3 s16 matrix and 0 to the other six." }
 Game_ProjectWorldPoint = { addr = 0x801AFFD8, type = "func", source = "projects a world position through RotTrans and stores the screen pair; existing bottom-up proposal" }
 Actor_MovementUpdate = { addr = 0x801B0DFC, type = "func", source = "moves and animates the current actor rows, called by every area and scene timer" }
-Game_RunLeaderSwitch = { addr = 0x801B1AE8, type = "func", source = "Field task mode FIELD_TASK_MODE_LEADER_SWITCH (slot 3 of D_801CD0AC): runs the leader-switch step table D_801CD0FC, which Game_RequestLeaderSwitch starts" }
-Game_EndLeaderSwitch = { addr = 0x801B2950, type = "func", source = "Finishes the camera scroll when movement stops and returns to the default mode." }
-Game_RequestMenu = { addr = 0x801B2A00, type = "func", source = "asks the game state for the menu and advances the step" }
-Game_WaitMenuClose = { addr = 0x801B2A20, type = "func", source = "when the menu request ends, clears the menu-active walk flag and resumes the actor" }
+Game_LeaderSwitchRun = { addr = 0x801B1AE8, type = "func", source = "Field task mode FIELD_TASK_MODE_LEADER_SWITCH (slot 3 of D_801CD0AC): runs the leader-switch step table D_801CD0FC, which Game_LeaderSwitchRequest starts" }
+Game_LeaderSwitchEnd = { addr = 0x801B2950, type = "func", source = "Finishes the camera scroll when movement stops and returns to the default mode." }
+Game_MenuRequest = { addr = 0x801B2A00, type = "func", source = "asks the game state for the menu and advances the step" }
+Game_MenuWaitClose = { addr = 0x801B2A20, type = "func", source = "when the menu request ends, clears the menu-active walk flag and resumes the actor" }
 Actor_GetTurnStep = { addr = 0x801B2D00, type = "func", source = "Returns -1 when the target facing lies 1 to 4 steps past the current selector, else 1; the caller adds it to direction each step." }
 Area_Climb = { addr = 0x801B3260, type = "func", source = "runs g_AreaClimbSteps[header.step] in field task mode 8 (FIELD_TASK_MODE_CLIMB, entered from cell code 6 by func_801B0568 and func_801BC000); in that mode the up and down pad move the actor 16 units and Interact turns it round and drops it to mode 2, the field ladder" }
 Area_GrabLadder = { addr = 0x801B32A4, type = "func", source = "Step 0 of g_AreaClimbSteps: runs the grab move and hands the task straight to the climbing step." }
@@ -197,10 +197,10 @@ Area_FindEncounterZone = { addr = 0x801B3C3C, type = "func", source = "Returns t
 Area_RollEncounterThreshold = { addr = 0x801B3CCC, type = "func", source = "Rolls the steps until the next encounter: s_EncounterStepThresholds[entry[4] * 2] plus a random roll capped at D_801CD1B9, stored in D_80145FB8." }
 Area_CanStartEncounter = { addr = 0x801B3EB0, type = "func", source = "Returns 0 when D_80145FB8 is 0 or above the limit; otherwise starts an encounter with Area_BuildEncounter(4, 0)." }
 Party_CanSwitchLeader = { addr = 0x801B55C0, type = "func", source = "Reports whether the leader may be switched: false while a walk-busy flag is set or a party row of type 2 holds none of s_MenuBattlerTypes" }
-Game_RequestLeaderSwitch = { addr = 0x801B5684, type = "func", source = "Starts the leader switch when FIELD_INPUT_SWITCH_LEADER is pressed with two or more party members: sets FIELD_TASK_MODE_LEADER_SWITCH, whose last step scrolls to the new lead" }
-Game_RequestFieldMenu = { addr = 0x801B5758, type = "func", source = "Opens the field menu when the menu button is pressed and the menu is not locked; true when requested." }
-Game_RequestCameraLook = { addr = 0x801B5884, type = "func", source = "Starts the camera look state when the view button is held; true when requested." }
-Game_RequestSceneCamera = { addr = 0x801B5910, type = "func", source = "Starts the scene camera state unless the area load flags forbid it; true when requested." }
+Game_LeaderSwitchRequest = { addr = 0x801B5684, type = "func", source = "Starts the leader switch when FIELD_INPUT_SWITCH_LEADER is pressed with two or more party members: sets FIELD_TASK_MODE_LEADER_SWITCH, whose last step scrolls to the new lead" }
+Game_MenuRequestField = { addr = 0x801B5758, type = "func", source = "Opens the field menu when the menu button is pressed and the menu is not locked; true when requested." }
+Game_CameraLookRequest = { addr = 0x801B5884, type = "func", source = "Starts the camera look state when the view button is held; true when requested." }
+Game_SceneCameraRequest = { addr = 0x801B5910, type = "func", source = "Starts the scene camera state unless the area load flags forbid it; true when requested." }
 Game_GetInput = { addr = 0x801B59B4, type = "func", source = "the body returns g_Game.input" }
 Game_FindRockAhead = { addr = 0x801B5AE4, type = "func", source = "Returns the g_SpawnedActors index of the type 0x17 rock actor on the cell the leader faces, or -1" }
 Actor_RequestRoute = { addr = 0x801B5BDC, type = "func", source = "Requests the actor's script for a route, remapping it to a walking script on the world map." }
@@ -221,9 +221,9 @@ Scene_SetupParty = { addr = 0x801BE1B0, type = "func", source = "Sets up the par
 Party_SwapMembers = { addr = 0x801BE738, type = "func", source = "Swaps two party members: swaps their battler rows with Party_SwapBattlerRows, reloads both g_Game.members rows from g_Characters and restages their palettes." }
 Party_SwapBattlerRows = { addr = 0x801BE920, type = "func", source = "Swaps two g_Game.members rows: id (+0x79), words +0x0C to +0x14 and bytes +0x118 and +0x119, also +0x08, +0x29, +0x34, +0x38, +0x3C and +0x12C when skip_state is 0, then writes 0xFF to +0x4B of both." }
 Game_BattleQueueEncounterTurns = { addr = 0x801BEDD0, type = "func", source = "Queues each member's encounter turn: writes the route's turn step into every party task so the members face the direction the battle scrolls from." }
-Game_BattleLoadPartyScripts = { addr = 0x801BEE5C, type = "func", source = "Loads the script record of each party member (the knocked-out record for a KO member, the route record for the scroll direction otherwise) into the battle script window at 0x800F0800. Called by Battle_LoadPartySprites." }
+Game_BattleLoadPartyScripts = { addr = 0x801BEE5C, type = "func", source = "Loads the script record of each party member (the knocked-out record for a KO member, the route record for the scroll direction otherwise) into the battle script window at 0x800F0800. Called by Game_BattleLoadPartySprites." }
 Game_BattleWalkMembersIn = { addr = 0x801BF11C, type = "func", source = "Walks each member toward its encounter spot every frame and returns whether they all reached their positions and the archive stream is ready." }
-Game_BattlePlaceMembers = { addr = 0x801BF448, type = "func", source = "Puts each party member on its encounter position g_EncounterParty at the ground height and selects the idle script for the scroll direction, the knocked-out script for a KO member. Called by Battle_LoadBattleArchive." }
+Game_BattlePlaceMembers = { addr = 0x801BF448, type = "func", source = "Puts each party member on its encounter position g_EncounterParty at the ground height and selects the idle script for the scroll direction, the knocked-out script for a KO member. Called by Game_BattleLoadArchive." }
 Game_BattleSetEncounterSpot = { addr = 0x801BF5A8, type = "func", source = "Sets one member's encounter position from the origin, the party formation and the member's battle-order slot." }
 Game_BattleIsPartyInPlace = { addr = 0x801BF78C, type = "func", source = "Steps each member's final facing and tells whether every member finished its encounter walk-in." }
 Game_BattleScrollToLeader = { addr = 0x801BF8E0, type = "func", source = "After the battle: copies each member's encounter position back and scrolls the area camera to the leader's restored spot with its ground height." }
@@ -237,7 +237,7 @@ Char_RebuildPartyStats = { addr = 0x801C16B8, type = "func", source = "reads g_C
 Party_JoinMember = { addr = 0x801C187C, type = "func", source = "Appends char_id to the party order at D_80144F5A and D_80144F5D at index g_Game.party_size and fills its g_Game.members row; with a full party it sets g_GameStateIndex to 6 and returns 1." }
 Party_RemoveMember = { addr = 0x801C1ABC, type = "func", source = "Scene_RemoveGarr/Peco/Nina/Rei and scena08 pass a CHAR_ID_* to it; the body clears the id from the walking and battle orders, compacts the battler rows and shrinks g_Game.party_size" }
 Scene_RunScenario = { addr = 0x801C1DF0, type = "func", source = "indexes D_801CD4C0 by g_ScenarioState.scenario_id and calls the handler at the requested index" }
-Game_DispatchScenario = { addr = 0x801C1E3C, type = "func", source = "calls the scenario handler selected by scenario id and index" }
+Game_ScenarioDispatch = { addr = 0x801C1E3C, type = "func", source = "calls the scenario handler selected by scenario id and index" }
 Actor_SetSemiTransparent = { addr = 0x801C2438, type = "func", source = "Sets the actor semi-transparent flag and raises the semi-transparency bit of its palette; the last palette color is cleared." }
 Area_RunWalk = { addr = 0x801C24D0, type = "func", source = "Runs one frame of the field walk: the walk velocity and, unless the walk is held, the scroll update." }
 Area_SetWalkVelocity = { addr = 0x801C2538, type = "func", source = "Sets the task's walk timer and velocity from the route type and the shared speed scale, with the step heights along the way." }
@@ -269,15 +269,15 @@ s_PaletteSlotDivisors = { addr = 0x801C7AF8, size = 0x8, source = "Divisor per p
 s_PaletteSlotStrides = { addr = 0x801C7B00, size = 0x8, source = "Stride per palette slot that GFX_PaletteCopyAnimationColors steps the colour row by." }
 g_GameCampMenuLoad = { addr = 0x801C7B08, size = 0xC, source = "3 handlers of the camp menu load, called by Game_RunCampMenu in order." }
 g_GameModes = { addr = 0x801C7B14, size = 0x30, source = "12 game state handlers, called by Game_RunMain and indexed by the game state." }
-g_GameMenuSteps = { addr = 0x801C7B44, size = 0xC, source = "3 handlers of game state 3 (menu), indexed by g_GameEntrySubstate by Game_UpdateMenu." }
-s_DirectionJitters = { addr = 0x801C7B50, size = 0x4, source = "Random offsets Game_ReturnFromMenu adds to the palette index when it picks a direction." }
+g_GameMenuSteps = { addr = 0x801C7B44, size = 0xC, source = "3 handlers of game state 3 (menu), indexed by g_GameEntrySubstate by Game_MenuUpdate." }
+s_DirectionJitters = { addr = 0x801C7B50, size = 0x4, source = "Random offsets Game_MenuReturn adds to the palette index when it picks a direction." }
 g_GameBattleSteps = { addr = 0x801C7B54, size = 0x20, source = "8 handlers of game state 5 (battle), indexed by g_GameEntrySubstate by Game_UpdateBattle." }
-s_BattleScrollCellSteps = { addr = 0x801C7B74, source = "g_BattleScrollDir selects the cell step Battle_LoadPartySprites adds to the target cell", size = 0x8 }
-g_GameShopSteps = { addr = 0x801C7B7C, size = 0xC, source = "3 handlers of game state 7 (shop), indexed by g_GameEntrySubstate by Game_UpdateShop." }
-g_GameFishingSteps = { addr = 0x801C7B88, size = 0x10, source = "4 handlers of game state 8 (fishing), indexed by g_GameEntrySubstate by Game_UpdateFishing." }
-g_MenuAbilityOpen = { addr = 0x801C7B98, size = 0xC, source = "3 handlers of game state 9 (ability menu), indexed by g_GameEntrySubstate by Game_UpdateAbilityMenu." }
-g_GameShisuSteps = { addr = 0x801C7BA4, size = 0xC, source = "3 handlers of game state 10 (the scena11 shisu screen), indexed by g_GameEntrySubstate by Game_UpdateShisu." }
-g_GameSceneCameraSteps = { addr = 0x801C7BB0, size = 0xC, source = "3 handlers of game state 11 (scene camera), indexed by g_GameEntrySubstate by Game_UpdateSceneCamera." }
+s_BattleScrollCellSteps = { addr = 0x801C7B74, source = "g_BattleScrollDir selects the cell step Game_BattleLoadPartySprites adds to the target cell", size = 0x8 }
+g_GameShopSteps = { addr = 0x801C7B7C, size = 0xC, source = "3 handlers of game state 7 (shop), indexed by g_GameEntrySubstate by Game_ShopUpdate." }
+g_GameFishingSteps = { addr = 0x801C7B88, size = 0x10, source = "4 handlers of game state 8 (fishing), indexed by g_GameEntrySubstate by Game_FishingUpdate." }
+g_MenuAbilityOpen = { addr = 0x801C7B98, size = 0xC, source = "3 handlers of game state 9 (ability menu), indexed by g_GameEntrySubstate by Game_AbilityMenuUpdate." }
+g_GameShisuSteps = { addr = 0x801C7BA4, size = 0xC, source = "3 handlers of game state 10 (the scena11 shisu screen), indexed by g_GameEntrySubstate by Game_ShisuUpdate." }
+g_GameSceneCameraSteps = { addr = 0x801C7BB0, size = 0xC, source = "3 handlers of game state 11 (scene camera), indexed by g_GameEntrySubstate by Game_SceneCameraUpdate." }
 s_MenuLine1Run = { addr = 0x801C7BBC, size = 0xC, source = "Sprite run of the first menu line, drawn by func_801999F8." }
 s_MenuLine2Run = { addr = 0x801C7BC8, size = 0xC, source = "Sprite run of the second menu line, drawn by func_801999F8." }
 s_MenuLine1FlagRun = { addr = 0x801C7BD4, size = 0xC, source = "Sprite run of the first menu line that func_801999F8 draws when bit 2 of the task unk_10 is set." }
@@ -323,10 +323,10 @@ D_801C83D8 = { addr = 0x801C83D8, size = 0x2C, source = "The 11 object handlers 
 s_EntityRouteIndices = { addr = 0x801C8404, size = 0x20, source = "The four route indices of each direction that func_801A27C4 walks." }
 D_801C8424 = { addr = 0x801C8424, size = 0x10, source = "The eight facing angles func_801A3080 picks by route type: 0x600 to 0xE00 in 0x200 steps, wrapping at the fifth entry." }
 D_801C842A = { addr = 0x801C842A, size = 0x1, alias = true, source = "The second half of the facing-angle table D_801C8424 from its fourth u16, used as an array by func_801A3080." }
-D_801C8434 = { addr = 0x801C8434, size = 0x8, source = "The two fade handlers Game_StartFadeWhite and func_801A3648 that func_801A3594 runs by g_Task->unk_04." }
-D_801C843C = { addr = 0x801C843C, size = 0x8, source = "The two fade handlers Game_StartFadeBlack and func_801A386C that func_801A37D4 runs by g_Task->unk_04." }
+D_801C8434 = { addr = 0x801C8434, size = 0x8, source = "The two fade handlers Game_FadeStartWhite and func_801A3648 that func_801A3594 runs by g_Task->unk_04." }
+D_801C843C = { addr = 0x801C843C, size = 0x8, source = "The two fade handlers Game_FadeStartBlack and func_801A386C that func_801A37D4 runs by g_Task->unk_04." }
 s_ScriptOpcodeLengths = { addr = 0x801C8444, size = 0x10, source = "Length in bytes of each script opcode; the script walkers (func_801A4374, func_801A46E8, func_801A4798, func_801A4844, func_801A4BF8) advance the cursor by it." }
-g_ScenarioHandlers = { addr = 0x801C8454, size = 0x50, source = "Step tables of the scenarios, indexed by g_ScenarioState.scenario_id by Game_UpdateScenario." }
+g_ScenarioHandlers = { addr = 0x801C8454, size = 0x50, source = "Step tables of the scenarios, indexed by g_ScenarioState.scenario_id by Game_ScenarioUpdate." }
 g_SceneSteps = { addr = 0x801C84A4, size = 0x8, source = "Scene update callbacks, indexed by the scene state byte D_801448EA by Game_UpdateScene." }
 s_EventFlagsReset = { addr = 0x801C84AC, size = 0x10, source = "Scene_ResetEventState copies these 16 mode bytes to g_SceneEventFlags" }
 g_SceneEvents = { addr = 0x801C84BC, size = 0x100, source = "Scene event callbacks, indexed by the scene event byte D_801448EB by Scene_UpdateEvent." }
@@ -361,7 +361,7 @@ D_801CD08D = { addr = 0x801CD08D, size = 0x1, alias = true, source = "The first 
 D_801CD0AC = { addr = 0x801CD0AC, size = 0x3C, source = "The 15 mode handlers func_801B00F8 runs by g_Task->header.mode, starting with func_801B016C and func_801B0320." }
 D_801CD0E8 = { addr = 0x801CD0E8, size = 0xC, source = "The three step handlers func_801B0320 runs by g_Task->header.step." }
 D_801CD0F4 = { addr = 0x801CD0F4, size = 0x8, source = "The four sound SE func_801B0E44 plays by the route byte: 0x103, 0x109, 0x10A and the silent 0." }
-D_801CD0FC = { addr = 0x801CD0FC, size = 0x14, source = "The five step handlers Game_RunLeaderSwitch runs by g_Task->header.step." }
+D_801CD0FC = { addr = 0x801CD0FC, size = 0x14, source = "The five step handlers Game_LeaderSwitchRun runs by g_Task->header.step." }
 D_801CD110 = { addr = 0x801CD110, size = 0x8, source = "The two step handlers func_801B29BC runs by g_Task->header.step." }
 D_801CD118 = { addr = 0x801CD118, size = 0x8, source = "The two step handlers func_801B2A70 runs by g_Task->header.step." }
 D_801CD120 = { addr = 0x801CD120, size = 0x10, source = "The four step handlers func_801B2D90 runs by g_Task->header.step." }
@@ -421,8 +421,8 @@ D_801CD778 = { addr = 0x801CD778, size = 0x14, source = "The five encounter came
 D_801CD77A = { addr = 0x801CD77A, size = 0x1, alias = true, source = "View of a record member; the row names the address the link reads, not a second object." }
 s_BattleModeRecords = { addr = 0x801CD78C, size = 0xE0, source = "Four bytes per battle mode: the first is the battle options byte, and the seed is read by Game_BattleStartScripted and func_801BFE34." }
 D_801CD78D = { addr = 0x801CD78D, size = 0x1, alias = true, source = "A column of s_BattleModeRecords: func_801BFE34 reads every fourth byte as the work mode." }
-D_801CD78F = { addr = 0x801CD78F, size = 0x1, alias = true, source = "A column of s_BattleModeRecords: Battle_LoadBattleArchive reads every fourth byte as a g_BossArchiveSlots index." }
-g_BossArchiveSlots = { addr = 0x801CD86C, size = 0x54, source = "The 42 archive slots Battle_LoadBattleArchive selects through g_Battle.encounter." }
+D_801CD78F = { addr = 0x801CD78F, size = 0x1, alias = true, source = "A column of s_BattleModeRecords: Game_BattleLoadArchive reads every fourth byte as a g_BossArchiveSlots index." }
+g_BossArchiveSlots = { addr = 0x801CD86C, size = 0x54, source = "The 42 archive slots Game_BattleLoadArchive selects through g_Battle.encounter." }
 D_801CD8C0 = { addr = 0x801CD8C0, size = 0x4, source = "The number of enemies Area_BuildEncounter rolled for the current battle; Area_PlaceEncounterEnemies spaces that many." }
 D_801CD8C4 = { addr = 0x801CD8C4, size = 0x4, source = "The index of the next enemy slot Area_PlaceEncounterEnemies fills." }
 D_801CD8C8 = { addr = 0x801CD8C8, size = 0x4, source = "The scroll direction of the current battle, which Area_BuildEncounter stores in g_Battle.scroll_dir." }

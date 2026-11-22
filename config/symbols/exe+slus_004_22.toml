@@ -24,7 +24,7 @@ g_AreaCellPacketLists = { addr = 0x80142CC0, type = "AreaCellPacketList", alias 
 D_80142CC4 = { addr = 0x80142CC4, alias = true, source = "The last-packet word of the first cell ordering list (g_AreaCellPacketLists[0][0].tail), which the cell draws index by byte offset." }
 g_AreaCellPackets = { addr = 0x80143740, source = "Cell packet words: layer in the top byte, depth in the high halfword, primitive index in the low bits." }
 g_SysThreads = { addr = 0x80143B40, type = "Thread", source = "The scheduler's thread records, indexed by thread index." }
-g_GameEntryState = { addr = 0x80143B90, source = "Game state the main loop runs next: Game_NewGame sets it to 1, Game_LoadShopOverlay to 2 and Game_UpdateAreaLoad to 8." }
+g_GameEntryState = { addr = 0x80143B90, source = "Game state the main loop runs next: Game_NewGame sets it to 1, Game_ShopLoadOverlay to 2 and Game_UpdateAreaLoad to 8." }
 g_GameEntrySubstate = { addr = 0x80143B92, source = "Stage within the current game state; the state handlers read it to pick their stage and add 1 as they advance." }
 g_GameStateIndex = { addr = 0x80143BB0, source = "Game request code that picks the next game state." }
 g_UiTitleState = { addr = 0x80143C10, source = "Index into s_TitleSteps of the title screen state that runs each frame; each state adds 1 when it is done, and the start button sets it to 2 below state 3 or to 7." }
@@ -565,9 +565,9 @@ Game_IsScriptVar0Equal = { addr = 0x8015B98C, type = "func", source = "Tests whe
 Game_IsScriptVar1Equal = { addr = 0x8015B9B4, type = "func", source = "Tests whether a script variable equals a value." }
 Game_IsScriptVar2Equal = { addr = 0x8015B9DC, type = "func", source = "Tests whether a script variable equals a value." }
 Game_IsScriptVar3Equal = { addr = 0x8015BA04, type = "func", source = "Tests whether a script variable equals a value." }
-Game_SetScriptVar = { addr = 0x8015BA2C, type = "func", source = "Sets a script variable." }
-Game_IsScriptVarEqual = { addr = 0x8015BA50, type = "func", source = "Compares a script variable with a value." }
-Game_IncScriptVar = { addr = 0x8015BA84, type = "func", source = "Increments a script variable." }
+Game_ScriptVarSet = { addr = 0x8015BA2C, type = "func", source = "Sets a script variable." }
+Game_ScriptVarIsEqual = { addr = 0x8015BA50, type = "func", source = "Compares a script variable with a value." }
+Game_ScriptVarInc = { addr = 0x8015BA84, type = "func", source = "Increments a script variable." }
 Game_TestNever = { addr = 0x8015BABC, type = "func", source = "Script condition (table g_AreaScriptTests): always false; the last table entry." }
 Script_DispatchSelector = { addr = 0x8015BAC4, type = "func", source = "Dispatches the actor script selected by the selector, task mode, and current actor context." }
 Camera_TurnX = { addr = 0x8015BBA4, type = "func", source = "Turns the camera around the x axis." }

@@ -3,7 +3,7 @@
 MATCH void Game_UpdateField(void) {
     u32* counter;
 
-    Game_UpdateScenario();
+    Game_ScenarioUpdate();
     Area_RunFrame();
 
     switch (g_GameStateIndex) {
