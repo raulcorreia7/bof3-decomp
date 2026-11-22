@@ -1,0 +1,118 @@
+/* Draws a menu header bar at (x, y): a left cap, two middle halves and a right cap of font-page quads in the window style's palette, then the window frame inside it. */
+/* Menu_DrawHeaderBar in area008/13, bate, commu02/08, scena12, shisu, shop, sisyou and start/08. */
+MATCH void Menu_DrawHeaderBar(s32 x, s32 y, s32 width, s32 height, u8 window_style) {
+    RECT*     window;
+    POLY_FT4* prim;
+    u16       left;
+    u16       top;
+    s32       inner;
+    s32       clut_x;
+    u8        bottom_v;
+    s32       bottom_row;
+    s32       bottom_y;
+    u16       odd_w;
+    s32       outer;
+    u16       outer_w;
+    s32       half;
+    u16       half_w;
+    s32       odd;
+    s32       mid_x;
+    s32       uv_end;
+    s32       right;
+
+    window          = (RECT*)g_GfxPrimCursor;
+    g_GfxPrimCursor = (u8*)(window + 1);
+    window->y       = 240;
+    window->x       = 0;
+    setWH(window, 16, 16);
+    left = x;
+    top  = y;
+    SetDrawMode((DR_MODE*)g_GfxPrimCursor, 0, 1, getTPage(TPAGE_DEPTH_4BIT, TPAGE_ABR_HALF, FONT_TPAGE_X, FONT_TPAGE_Y), window);
+    GFX_AddPrim(GFX_LAYER_UI, sizeof(DR_MODE));
+
+    prim = (POLY_FT4*)g_GfxPrimCursor;
+    SetPolyFT4(prim);
+    PSX_SET_SEMI_TRANSPARENT(prim);
+    clut_x     = (window_style << 5) + 0x10;
+    inner      = x + 2;
+    bottom_row = height + 1;
+    bottom_v   = bottom_row;
+    bottom_y   = y + bottom_row;
+    setXY4(prim, left, top, inner, top, left, bottom_y, inner, bottom_y);
+    setUV4(prim, 0, 0, 2, 0, 0, bottom_v, 2, bottom_v);
+    setRGB0(prim, 172, 172, 172);
+    prim->y0 += 2;
+    prim->y2 -= 3;
+    prim->v0 += 2;
+    prim->v2 -= 3;
+    prim->clut  = GetClut(clut_x, STAGE_PALETTE_Y + 1);
+    outer       = width + 1;
+    outer_w     = outer;
+    prim->tpage = getTPage(TPAGE_DEPTH_4BIT, TPAGE_ABR_HALF, FONT_TPAGE_X, FONT_TPAGE_Y);
+    GFX_AddPrim(GFX_LAYER_UI, sizeof(POLY_FT4));
+
+    half = (outer_w - 4) >> 1;
+    odd  = (width - 3) & 1;
+    prim = (POLY_FT4*)g_GfxPrimCursor;
+    SetPolyFT4(prim);
+    PSX_SET_SEMI_TRANSPARENT(prim);
+    half_w = half;
+    setXY4(prim, inner, top, half + inner, top, inner, bottom_y, half + inner, bottom_y);
+    setUV4(prim, 0, 0, half_w, 0, 0, bottom_v, half_w, bottom_v);
+    setRGB0(prim, 172, 172, 172);
+    prim->clut  = GetClut(clut_x, STAGE_PALETTE_Y + 1);
+    odd_w       = odd;
+    prim->tpage = getTPage(TPAGE_DEPTH_4BIT, TPAGE_ABR_HALF, FONT_TPAGE_X, FONT_TPAGE_Y);
+    GFX_AddPrim(GFX_LAYER_UI, sizeof(POLY_FT4));
+
+    prim = (POLY_FT4*)g_GfxPrimCursor;
+    SetPolyFT4(prim);
+    PSX_SET_SEMI_TRANSPARENT(prim);
+    mid_x  = x + half;
+    uv_end = half + odd + 2;
+    setXY4(prim, mid_x + 2, top, mid_x + uv_end, top, mid_x + 2, bottom_y, mid_x + uv_end, bottom_y);
+    setUV4(prim, 0, 0, half_w + odd_w, 0, 0, bottom_v, half_w + odd_w, bottom_v);
+    setRGB0(prim, 172, 172, 172);
+    prim->clut  = GetClut(clut_x, STAGE_PALETTE_Y + 1);
+    prim->tpage = getTPage(TPAGE_DEPTH_4BIT, TPAGE_ABR_HALF, FONT_TPAGE_X, FONT_TPAGE_Y);
+    GFX_AddPrim(GFX_LAYER_UI, sizeof(POLY_FT4));
+
+    prim = (POLY_FT4*)g_GfxPrimCursor;
+    SetPolyFT4(prim);
+    PSX_SET_SEMI_TRANSPARENT(prim);
+    right    = x + outer;
+    prim->x0 = right - 2;
+    prim->y2 = bottom_y;
+    prim->v2 = bottom_v;
+    prim->x1 = right;
+    prim->y1 = top;
+    prim->x3 = right;
+    prim->x2 = right - 2;
+    prim->y3 = bottom_y;
+    prim->y0 = top;
+    setUV0(prim, 0, 0);
+    prim->u1 = 2;
+    prim->v1 = 0;
+    prim->u2 = 0;
+    prim->u3 = 2;
+    prim->v3 = bottom_v;
+    setRGB0(prim, 172, 172, 172);
+    prim->y1 += 2;
+    prim->y2--;
+    prim->y3 -= 3;
+    prim->v1 += 2;
+    prim->v2--;
+    prim->v3 -= 3;
+    prim->clut  = GetClut(clut_x, STAGE_PALETTE_Y + 1);
+    prim->tpage = getTPage(TPAGE_DEPTH_4BIT, TPAGE_ABR_HALF, FONT_TPAGE_X, FONT_TPAGE_Y);
+    GFX_AddPrim(GFX_LAYER_UI, sizeof(POLY_FT4));
+
+    window          = (RECT*)g_GfxPrimCursor;
+    g_GfxPrimCursor = (u8*)(window + 1);
+    window->x       = 0;
+    window->y       = 0;
+    setWH(window, 256, 256);
+    SetDrawMode((DR_MODE*)g_GfxPrimCursor, 0, 1, getTPage(TPAGE_DEPTH_4BIT, TPAGE_ABR_HALF, FONT_TPAGE_X, FONT_TPAGE_Y), window);
+    GFX_AddPrim(GFX_LAYER_UI, sizeof(DR_MODE));
+    UI_WindowDrawFrame(inner, y + 2, width - 4, height - 4, 0);
+}
