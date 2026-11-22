@@ -16,15 +16,15 @@ INCLUDE_ASM(func_801EEC90);
 MATCH void func_801EF08C(void) {
     u8 counter;
 
-    if (g_Task->param.unk_0B == 0) {
-        if (g_Task->unk_09 == 0x1E) {
+    if (BMAGIC_WORK->param.unk_0B == 0) {
+        if (BMAGIC_WORK->unk_09 == 0x1E) {
             Battle_SelectActiveBattlerScript(4, 0);
             BATTLE_ACTIVE_WORK->header.flags &= ~PARTY_MEMBER_FLAG_HANDLER_BUSY;
         }
-        counter        = g_Task->unk_09 - 1;
-        g_Task->unk_09 = counter;
+        counter             = BMAGIC_WORK->unk_09 - 1;
+        BMAGIC_WORK->unk_09 = counter;
         if (!(counter & BYTE_MASK)) {
-            g_Task->header.mode += 1;
+            BMAGIC_WORK->header.mode += 1;
         }
     }
 }
@@ -33,12 +33,12 @@ MATCH void func_801EF134(void) {
     u16 item;
 
     if (D_801EC2E4 == 0) {
-        if (g_Task->timer == 56) {
-            item = g_Task->unk_2C.value;
+        if (BMAGIC_WORK->timer == 56) {
+            item = BMAGIC_WORK->unk_2C.value;
             BMagic_SetTextItemName(item & BYTE_MASK, item >> 8);
         }
-        func_801DE8C0(1, 0x1E, UI_MessageGetText(g_Task->timer));
-        g_Task->header.mode += 1;
+        func_801DE8C0(1, 0x1E, UI_MessageGetText(BMAGIC_WORK->timer));
+        BMAGIC_WORK->header.mode += 1;
     }
 }
 
@@ -59,8 +59,8 @@ MATCH void func_801EF250(void) {
     Magic065TaskSteps handlers;
 
     handlers = D_801EEC14;
-    SYS_DISPATCH_BYTE(handlers.steps, g_Task->header.step);
-    if (g_Task->header.flags != 0) {
+    SYS_DISPATCH_BYTE(handlers.steps, BMAGIC_WORK->header.step);
+    if (BMAGIC_WORK->header.flags != 0) {
         Area_AddGridActor();
     }
 }
@@ -71,11 +71,11 @@ MATCH void func_801EF328(void) {
     u8 timer;
 
     Script_AnimStepOnce();
-    timer          = g_Task->unk_09 - 1;
-    g_Task->unk_09 = timer;
+    timer               = BMAGIC_WORK->unk_09 - 1;
+    BMAGIC_WORK->unk_09 = timer;
     if (timer == 0) {
         Battle_PlayActiveBattlerSE(0, 4);
-        g_Task->header.step = g_Task->header.step + 1;
+        BMAGIC_WORK->header.step = BMAGIC_WORK->header.step + 1;
     }
 }
 
@@ -83,7 +83,7 @@ MATCH void func_801EF394(void) {
     if (Script_AnimStepOnce() & BYTE_MASK) {
         Battle_MarkDamaged(g_Battle.target_selector);
         BATTLE_ACTIVE_WORK->param.unk_0B -= 1;
-        g_Task->header.step += 1;
+        BMAGIC_WORK->header.step += 1;
     }
 }
 

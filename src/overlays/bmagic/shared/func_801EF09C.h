@@ -3,11 +3,11 @@
 MATCH void func_801EF09C(void) {
     u8 counter;
 
-    g_Task->param.unk_0B += 1;
-    g_Task->timer += 2;
-    counter        = g_Task->unk_09 - 2;
-    g_Task->unk_09 = counter;
+    BMAGIC_WORK->param.unk_0B += 1;
+    BMAGIC_WORK->timer += 2;
+    counter             = BMAGIC_WORK->unk_09 - 2;
+    BMAGIC_WORK->unk_09 = counter;
     if ((counter & BYTE_MASK) == 0x10) {
-        g_Task->header.mode += 1;
+        BMAGIC_WORK->header.mode += 1;
     }
 }

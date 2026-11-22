@@ -5,16 +5,16 @@ MATCH void Effect_DrawRings(void) {
     BMagicSteps handlers = BMagic_EffectSteps;
     s32         tpage;
 
-    SYS_DISPATCH_BYTE(handlers.steps, g_Task->header.step);
+    SYS_DISPATCH_BYTE(handlers.steps, BMAGIC_WORK->header.step);
     tpage = getTPage(TPAGE_DEPTH_4BIT, TPAGE_ABR_ADD, 320, 256);
     SetDrawMode((DR_MODE*)g_GfxPrimCursor, 0, 1, tpage, 0);
-    Area_CellAddPrim(g_Task->pos.x.fixed, g_Task->pos.y.fixed, 2, sizeof(DR_MODE));
-    if (g_Task->header.flags != 0 && g_Task->header.step != 0) {
+    Area_CellAddPrim(BMAGIC_WORK->pos.x.fixed, BMAGIC_WORK->pos.y.fixed, 2, sizeof(DR_MODE));
+    if (BMAGIC_WORK->header.flags != 0 && BMAGIC_WORK->header.step != 0) {
         Battle_ProjectRange();
         BMagic_DrawRingTriangles();
         BMagic_DrawRingQuads();
     }
     tpage = getTPage(TPAGE_DEPTH_4BIT, TPAGE_ABR_HALF, 320, 256);
     SetDrawMode((DR_MODE*)g_GfxPrimCursor, 0, 1, tpage, 0);
-    Area_CellAddPrim(g_Task->pos.x.fixed, g_Task->pos.y.fixed, 2, sizeof(DR_MODE));
+    Area_CellAddPrim(BMAGIC_WORK->pos.x.fixed, BMAGIC_WORK->pos.y.fixed, 2, sizeof(DR_MODE));
 }

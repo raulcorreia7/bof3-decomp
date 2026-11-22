@@ -30,9 +30,9 @@ MATCH void func_801EEC90(void) {
     }
     g_GfxPalettePending = 1;
     g_BattleEffectBattler->header.flags |= 0x40;
-    g_Task->param.unk_0B = 1;
-    g_Task->unk_09       = 1;
-    g_Task->header.mode++;
+    BMAGIC_WORK->param.unk_0B = 1;
+    BMAGIC_WORK->unk_09       = 1;
+    BMAGIC_WORK->header.mode++;
 }
 
 MATCH void func_801EEE94(void) {
@@ -42,15 +42,15 @@ MATCH void func_801EEE94(void) {
     PartyMember* actor;
     PartyMember* work;
 
-    if (g_Task->param.unk_0B == 0) {
-        actor          = g_Battle.selected_actor;
-        g_Task->facing = actor->facing;
-        g_Task->unk_0C = 0;
-        g_Task->unk_10 = -TO_COORD_HALF(1);
+    if (BMAGIC_WORK->param.unk_0B == 0) {
+        actor               = g_Battle.selected_actor;
+        BMAGIC_WORK->facing = actor->facing;
+        BMAGIC_WORK->unk_0C = 0;
+        BMAGIC_WORK->unk_10 = -TO_COORD_HALF(1);
         Effect_RotatePosition(g_Task);
-        g_Task->pos.x.fixed = actor->pos.x.fixed + g_Task->unk_0C;
-        g_Task->pos.y.fixed = actor->pos.y.fixed + g_Task->unk_10;
-        g_Task->pos.z.fixed = actor->pos.z.fixed;
+        BMAGIC_WORK->pos.x.fixed = actor->pos.x.fixed + BMAGIC_WORK->unk_0C;
+        BMAGIC_WORK->pos.y.fixed = actor->pos.y.fixed + BMAGIC_WORK->unk_10;
+        BMAGIC_WORK->pos.z.fixed = actor->pos.z.fixed;
         SND_SEQueueSelection(EMI_SE_ID(SND_BANK_COMMON, 0x00));
         for (i = 0, anchor = 1; i < 6; i++) {
             slot                               = Battle_AllocEffect(1, 82) & BYTE_MASK;
@@ -59,19 +59,19 @@ MATCH void func_801EEE94(void) {
             g_BattleEffects[slot].unk_0B       = i;
             g_BattleEffects[slot].arg.unk_09   = anchor;
             g_BattleEffects[slot].target.party = work;
-            g_Task->param.unk_0B += 1;
+            BMAGIC_WORK->param.unk_0B += 1;
             anchor += 3;
         }
-        g_Task->header.mode += 1;
+        BMAGIC_WORK->header.mode += 1;
     }
 }
 
 MATCH void func_801EEFE0(void) {
-    if (g_Task->unk_09 == 0) {
+    if (BMAGIC_WORK->unk_09 == 0) {
         Battle_SelectActiveBattlerScript(4, 0);
         BATTLE_ACTIVE_WORK->header.flags &= ~PARTY_MEMBER_FLAG_HANDLER_BUSY;
         Battle_ApplyDamageFlags(g_Battle.target_selector, 0x10U);
-        g_Task->header.mode += 1;
+        BMAGIC_WORK->header.mode += 1;
     }
 }
 
@@ -83,8 +83,8 @@ MATCH void func_801EEFE0(void) {
 MATCH void func_801EF104(void) {
     GFX_AddDitheredDrawMode(BMAGIC_LAYER_OVER_BATTLERS, getTPage(TPAGE_DEPTH_4BIT, TPAGE_ABR_ADD, 320, 256));
     g_Scripts = BMAGIC_SCRIPT_TABLE;
-    SYS_DISPATCH_BYTE(g_BMagicEffectModes + 2, g_Task->header.step);
-    if (g_Task->header.flags != 0 && g_Task->header.step != 0) {
+    SYS_DISPATCH_BYTE(g_BMagicEffectModes + 2, BMAGIC_WORK->header.step);
+    if (BMAGIC_WORK->header.flags != 0 && BMAGIC_WORK->header.step != 0) {
         Area_AddGridActor();
     }
     g_Scripts = AREA_SCRIPT_TABLE;
@@ -93,32 +93,32 @@ MATCH void func_801EF104(void) {
 MATCH void func_801EF1EC(void) {
     u8 timer;
 
-    timer          = g_Task->unk_09 - 1;
-    g_Task->unk_09 = timer;
+    timer               = BMAGIC_WORK->unk_09 - 1;
+    BMAGIC_WORK->unk_09 = timer;
     if (!(timer & BYTE_MASK)) {
-        g_Task->facing = g_BattleEffectBattler->facing;
-        g_Task->unk_0C = 0;
-        g_Task->unk_10 = g_Task->param.unk_0B << 0xF;
+        BMAGIC_WORK->facing = g_BattleEffectBattler->facing;
+        BMAGIC_WORK->unk_0C = 0;
+        BMAGIC_WORK->unk_10 = BMAGIC_WORK->param.unk_0B << 0xF;
         Effect_RotatePosition(g_Task);
-        g_Task->pos.x.fixed  = g_BattleEffectBattler->pos.x.fixed + g_Task->unk_0C;
-        g_Task->pos.y.fixed  = g_BattleEffectBattler->pos.y.fixed + g_Task->unk_10;
-        g_Task->pos.z.fixed  = g_BattleEffectBattler->pos.z.fixed;
-        g_Task->scale.x      = 0x8000;
-        g_Task->scale.y      = 0x8000;
-        g_Task->unk_48       = 2;
-        g_Task->unk_25       = 0x1D;
-        g_Task->unk_26       = 0;
-        g_Task->unk_27       = 0xA0;
-        g_Task->unk_28       = 0;
-        g_Task->unk_2A       = g_Task->facing & 0x1;
-        g_Task->unk_29       = 3;
-        g_Task->unk_24       = 4;
-        g_Task->unk_2C.value = 0;
-        g_Task->unk_2B       = 0;
+        BMAGIC_WORK->pos.x.fixed  = g_BattleEffectBattler->pos.x.fixed + BMAGIC_WORK->unk_0C;
+        BMAGIC_WORK->pos.y.fixed  = g_BattleEffectBattler->pos.y.fixed + BMAGIC_WORK->unk_10;
+        BMAGIC_WORK->pos.z.fixed  = g_BattleEffectBattler->pos.z.fixed;
+        BMAGIC_WORK->scale.x      = 0x8000;
+        BMAGIC_WORK->scale.y      = 0x8000;
+        BMAGIC_WORK->unk_48       = 2;
+        BMAGIC_WORK->unk_25       = 0x1D;
+        BMAGIC_WORK->unk_26       = 0;
+        BMAGIC_WORK->unk_27       = 0xA0;
+        BMAGIC_WORK->unk_28       = 0;
+        BMAGIC_WORK->unk_2A       = BMAGIC_WORK->facing & 0x1;
+        BMAGIC_WORK->unk_29       = 3;
+        BMAGIC_WORK->unk_24       = 4;
+        BMAGIC_WORK->unk_2C.value = 0;
+        BMAGIC_WORK->unk_2B       = 0;
         Script_Select(0U);
         Script_AnimStepLoop();
-        g_Task->unk_09 = 0;
-        g_Task->header.step += 1;
+        BMAGIC_WORK->unk_09 = 0;
+        BMAGIC_WORK->header.step += 1;
     }
 }
 
@@ -132,7 +132,7 @@ MATCH void func_801EF380(void) {
     work->unk_09 = count;
     work->scale.y += 0x8000;
     if (count == 4) {
-        g_Task->header.step++;
+        BMAGIC_WORK->header.step++;
     }
 }
 
@@ -150,8 +150,8 @@ MATCH void func_801EF3E4(void) {
 }
 
 MATCH void func_801EF454(void) {
-    g_Task->scale.y -= 0x1000;
-    if ((s8)g_Task->unk_5F == -0x80) {
+    BMAGIC_WORK->scale.y -= 0x1000;
+    if ((s8)BMAGIC_WORK->unk_5F == -0x80) {
         g_BattleEffectBattler->param.unk_0B -= 1;
         Effect_Reset();
     }
@@ -160,8 +160,8 @@ MATCH void func_801EF454(void) {
 MATCH void func_801EF4B4(void) {
     Magic154Steps handlers = D_801EEC14;
 
-    SYS_DISPATCH_BYTE(handlers.steps, g_Task->header.step);
-    if (g_Task->header.flags != 0) {
+    SYS_DISPATCH_BYTE(handlers.steps, BMAGIC_WORK->header.step);
+    if (BMAGIC_WORK->header.flags != 0) {
         Area_AddGridActor();
     }
 }
@@ -171,18 +171,18 @@ MATCH void func_801EF4B4(void) {
 MATCH void func_801EF58C(void) {
     u8 timer;
 
-    timer          = g_Task->unk_09 - 1;
-    g_Task->unk_09 = timer;
+    timer               = BMAGIC_WORK->unk_09 - 1;
+    BMAGIC_WORK->unk_09 = timer;
     if (!(timer & BYTE_MASK)) {
         Script_AnimStepOnce();
         Battle_PlayActiveBattlerSE(2, 4);
         g_BattleEffectBattler->param.unk_0B -= 1;
-        g_Task->header.step += 1;
+        BMAGIC_WORK->header.step += 1;
     } else if (Script_AnimStepOnce() & BYTE_MASK) {
         Battle_PlayActiveBattlerSE(2, 4);
-        g_Task->unk_09 = 0;
+        BMAGIC_WORK->unk_09 = 0;
         g_BattleEffectBattler->param.unk_0B -= 1;
-        g_Task->header.step += 1;
+        BMAGIC_WORK->header.step += 1;
     }
 }
 
@@ -191,7 +191,7 @@ MATCH void func_801EF58C(void) {
 MATCH void Effect_LowerTickerStepOnReady(void) {
     if (Script_AnimStepOnce() & BYTE_MASK) {
         BATTLE_ACTIVE_WORK->unk_09--;
-        g_Task->header.step++;
+        BMAGIC_WORK->header.step++;
     }
 }
 

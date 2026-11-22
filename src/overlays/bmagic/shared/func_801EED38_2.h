@@ -11,20 +11,20 @@ MATCH void func_801EED38(void) {
         BMAGIC_EFFECT_SLOTS[i].header.mode  = 0;
         BMAGIC_EFFECT_SLOTS[i].header.step  = 0;
     }
-    g_Task->unk_04 = EFFECT_SPARKLE_TYPE;
-    battler        = g_Battle.selected_actor;
-    g_Task->facing = battler->facing;
-    g_Task->pos.x  = battler->pos.x;
-    g_Task->pos.y  = battler->pos.y;
-    g_Task->pos.z  = battler->pos.z;
+    BMAGIC_WORK->unk_04 = EFFECT_SPARKLE_TYPE;
+    battler             = g_Battle.selected_actor;
+    BMAGIC_WORK->facing = battler->facing;
+    BMAGIC_WORK->pos.x  = battler->pos.x;
+    BMAGIC_WORK->pos.y  = battler->pos.y;
+    BMAGIC_WORK->pos.z  = battler->pos.z;
     Battle_ProjectRange();
-    g_Task->param.unk_0B = 0;
-    g_Task->unk_09       = 8;
-    g_Task->timer        = 0;
-    g_Task->header.mode++;
+    BMAGIC_WORK->param.unk_0B = 0;
+    BMAGIC_WORK->unk_09       = 8;
+    BMAGIC_WORK->timer        = 0;
+    BMAGIC_WORK->header.mode++;
     SND_SEQueueSelection(EMI_SE_ID(SND_BANK_COMMON, 0));
 
-    for (i = 0; i < D_801F0194[g_Task->unk_04]; i++) {
+    for (i = 0; i < D_801F0194[BMAGIC_WORK->unk_04]; i++) {
         sparkle_index = BMagic_AllocEffect();
         if (sparkle_index != GAME_NONE) {
             owner                                          = g_Task;
@@ -32,10 +32,10 @@ MATCH void func_801EED38(void) {
             BMAGIC_EFFECT_SLOTS[sparkle_index].header.step = 0;
             BMAGIC_EFFECT_SLOTS[sparkle_index].battler     = owner;
             BMAGIC_EFFECT_SLOTS[sparkle_index].unk_03      = RANDOM_MASK(3);
-            BMAGIC_EFFECT_SLOTS[sparkle_index].unk_04      = g_Task->unk_04;
+            BMAGIC_EFFECT_SLOTS[sparkle_index].unk_04      = BMAGIC_WORK->unk_04;
             BMAGIC_EFFECT_SLOTS[sparkle_index].unk_07      = i;
-            BMAGIC_EFFECT_SLOTS[sparkle_index].timer_05    = D_801F019C[g_Task->unk_04] * (i >> 2) + 1;
-            g_Task->param.unk_0B++;
+            BMAGIC_EFFECT_SLOTS[sparkle_index].timer_05    = D_801F019C[BMAGIC_WORK->unk_04] * (i >> 2) + 1;
+            BMAGIC_WORK->param.unk_0B++;
         }
     }
 }

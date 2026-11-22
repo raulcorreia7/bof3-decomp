@@ -5,6 +5,6 @@ MATCH void Effect_StepOnTickFlag(void) {
 
     work = (PartyMember*)g_BattleEffectBattler;
     if ((work->param.unk_0B & 0x80) != 0) {
-        g_Task->header.step = g_Task->header.step + 1;
+        BMAGIC_WORK->header.step = BMAGIC_WORK->header.step + 1;
     }
 }

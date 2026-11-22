@@ -31,41 +31,41 @@ MATCH void func_801EF19C(void) {
     BMagicEffectSteps handlers;
 
     handlers = D_801EEC14;
-    SYS_DISPATCH_BYTE(handlers.steps, g_Task->header.step);
-    if (g_Task->header.flags != 0) {
+    SYS_DISPATCH_BYTE(handlers.steps, BMAGIC_WORK->header.step);
+    if (BMAGIC_WORK->header.flags != 0) {
         Area_AddGridActor();
     }
 }
 
 MATCH void func_801EF238(void) {
     if (g_Battle.target_selector & BATTLE_TARGET_ENEMY_SIDE) {
-        g_Task->pos.x.fixed = g_BattleEnemyBattlers[g_Task->param.unk_0B].pos.x.fixed;
-        g_Task->pos.y.fixed = g_BattleEnemyBattlers[g_Task->param.unk_0B].pos.y.fixed;
-        g_Task->pos.z.fixed = g_BattleEnemyBattlers[g_Task->param.unk_0B].pos.z.fixed;
+        BMAGIC_WORK->pos.x.fixed = g_BattleEnemyBattlers[BMAGIC_WORK->param.unk_0B].pos.x.fixed;
+        BMAGIC_WORK->pos.y.fixed = g_BattleEnemyBattlers[BMAGIC_WORK->param.unk_0B].pos.y.fixed;
+        BMAGIC_WORK->pos.z.fixed = g_BattleEnemyBattlers[BMAGIC_WORK->param.unk_0B].pos.z.fixed;
     } else {
-        g_Task->pos.x.fixed = g_Game.members[g_Task->param.unk_0B].pos.x.fixed;
-        g_Task->pos.y.fixed = g_Game.members[g_Task->param.unk_0B].pos.y.fixed;
-        g_Task->pos.z.fixed = g_Game.members[g_Task->param.unk_0B].pos.z.fixed;
+        BMAGIC_WORK->pos.x.fixed = g_Game.members[BMAGIC_WORK->param.unk_0B].pos.x.fixed;
+        BMAGIC_WORK->pos.y.fixed = g_Game.members[BMAGIC_WORK->param.unk_0B].pos.y.fixed;
+        BMAGIC_WORK->pos.z.fixed = g_Game.members[BMAGIC_WORK->param.unk_0B].pos.z.fixed;
     }
-    g_Task->scale.x = 0x10000;
-    g_Task->scale.y = 0x10000;
-    g_Task->unk_48  = 2;
-    g_Task->unk_0C  = -0xC60;
-    g_Task->unk_10  = 0x1080;
-    g_Task->unk_18  = 0x60;
-    g_Task->unk_1C  = -0x80;
-    g_Task->header.step++;
+    BMAGIC_WORK->scale.x = 0x10000;
+    BMAGIC_WORK->scale.y = 0x10000;
+    BMAGIC_WORK->unk_48  = 2;
+    BMAGIC_WORK->unk_0C  = -0xC60;
+    BMAGIC_WORK->unk_10  = 0x1080;
+    BMAGIC_WORK->unk_18  = 0x60;
+    BMAGIC_WORK->unk_1C  = -0x80;
+    BMAGIC_WORK->header.step++;
 }
 
 MATCH void func_801EF3A4(void) {
     Script_AnimStepLoop();
-    g_Task->unk_0C += g_Task->unk_18;
-    g_Task->unk_10 += g_Task->unk_1C;
-    g_Task->scale.x += g_Task->unk_0C;
-    g_Task->scale.y += g_Task->unk_10;
-    if (g_Task->unk_0C == 0) {
-        g_Task->unk_09 = 0x10;
-        g_Task->header.step += 1;
+    BMAGIC_WORK->unk_0C += BMAGIC_WORK->unk_18;
+    BMAGIC_WORK->unk_10 += BMAGIC_WORK->unk_1C;
+    BMAGIC_WORK->scale.x += BMAGIC_WORK->unk_0C;
+    BMAGIC_WORK->scale.y += BMAGIC_WORK->unk_10;
+    if (BMAGIC_WORK->unk_0C == 0) {
+        BMAGIC_WORK->unk_09 = 0x10;
+        BMAGIC_WORK->header.step += 1;
     }
 }
 
@@ -73,12 +73,12 @@ MATCH void func_801EF43C(void) {
     u8 timer;
 
     Script_AnimStepLoop();
-    timer          = g_Task->unk_09 - 1;
-    g_Task->unk_09 = timer;
+    timer               = BMAGIC_WORK->unk_09 - 1;
+    BMAGIC_WORK->unk_09 = timer;
     if (!(timer & BYTE_MASK)) {
-        g_Task->unk_18 = 0x60;
-        g_Task->unk_1C = -0x80;
-        g_Task->header.step += 1;
+        BMAGIC_WORK->unk_18 = 0x60;
+        BMAGIC_WORK->unk_1C = -0x80;
+        BMAGIC_WORK->header.step += 1;
     }
 }
 
@@ -102,13 +102,13 @@ MATCH void func_801EF534(void) {
 
     if (Script_AnimStepOnce() & BYTE_MASK) {
         if (g_Battle.target_selector & BATTLE_TARGET_ENEMY_SIDE) {
-            value2                                     = g_Task->param.unk_0B;
+            value2                                     = BMAGIC_WORK->param.unk_0B;
             g_BattleEnemyBattlers[value2].header.flags = g_BattleEnemyBattlers[value2].header.flags & 0xBF;
         } else {
-            value                              = g_Task->param.unk_0B;
+            value                              = BMAGIC_WORK->param.unk_0B;
             g_Game.members[value].header.flags = g_Game.members[value].header.flags & ~PARTY_MEMBER_FLAG_HANDLER_BUSY;
         }
-        g_Task->header.step += 1;
+        BMAGIC_WORK->header.step += 1;
     }
 }
 

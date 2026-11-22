@@ -6,6 +6,6 @@ MATCH void Effect_StepWhileTickUnderTwo(void) {
 
     work = (PartyMember*)g_BattleEffectBattler;
     if (work->param.unk_0B < 2) {
-        g_Task->header.step = g_Task->header.step + 1;
+        BMAGIC_WORK->header.step = BMAGIC_WORK->header.step + 1;
     }
 }

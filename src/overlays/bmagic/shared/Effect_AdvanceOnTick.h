@@ -1,6 +1,6 @@
 MATCH void Effect_AdvanceOnTick(void) {
-    g_Task->unk_09 += EFFECT_TICK_INCREMENT;
-    if (g_Task->unk_09 == EFFECT_TICK_LIMIT) {
-        g_Task->header.mode += 1;
+    BMAGIC_WORK->unk_09 += EFFECT_TICK_INCREMENT;
+    if (BMAGIC_WORK->unk_09 == EFFECT_TICK_LIMIT) {
+        BMAGIC_WORK->header.mode += 1;
     }
 }

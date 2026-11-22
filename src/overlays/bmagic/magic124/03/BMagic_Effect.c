@@ -12,7 +12,7 @@ MATCH void func_801EEC14(void) {
     u8            i;
 
     handlers = D_801EEC04;
-    SYS_DISPATCH_BYTE(handlers.steps, g_Task->header.mode);
+    SYS_DISPATCH_BYTE(handlers.steps, BMAGIC_WORK->header.mode);
     tpage = getTPage(TPAGE_DEPTH_4BIT, TPAGE_ABR_ADD, 320, 256);
     GFX_AddDitheredDrawMode(BMAGIC_LAYER_OVER_BATTLERS, tpage);
     BMAGIC_RUN_EFFECT_SLOTS(BMAGIC_EFFECT_SLOTS, BMagic_DispatchEffectMode);
@@ -27,16 +27,16 @@ MATCH void func_801EEDD8(void) {
     u32          i;
 
     BMAGIC_CLEAR_EFFECTS(i);
-    g_Task->facing = g_BattleEffectBattler->facing;
-    WorldPos_Copy(&g_Task->pos, &g_BattleEffectBattler->pos);
+    BMAGIC_WORK->facing = g_BattleEffectBattler->facing;
+    WorldPos_Copy(&BMAGIC_WORK->pos, &g_BattleEffectBattler->pos);
     Battle_ProjectRange();
     func_800B0118();
-    g_Task->screen_x.value += g_Task->unk_0C;
-    g_Task->screen_y.value += g_Task->unk_10;
-    g_Task->param.unk_0B = 0;
-    g_Task->unk_09       = 8;
-    g_Task->timer        = 16;
-    g_Task->header.mode++;
+    BMAGIC_WORK->screen_x.value += BMAGIC_WORK->unk_0C;
+    BMAGIC_WORK->screen_y.value += BMAGIC_WORK->unk_10;
+    BMAGIC_WORK->param.unk_0B = 0;
+    BMAGIC_WORK->unk_09       = 8;
+    BMAGIC_WORK->timer        = 16;
+    BMAGIC_WORK->header.mode++;
     for (i = 0; i < 32; i++) {
         slot                                   = BMagic_AllocEffect() & BYTE_MASK;
         task                                   = g_Task;
@@ -45,7 +45,7 @@ MATCH void func_801EEDD8(void) {
         BMAGIC_EFFECT_SLOTS[slot].unk_0B       = 0;
         BMAGIC_EFFECT_SLOTS[slot].arg.unk_09   = i * 4 + 1;
         BMAGIC_EFFECT_SLOTS[slot].target.party = task;
-        g_Task->param.unk_0B++;
+        BMAGIC_WORK->param.unk_0B++;
     }
     SND_SEQueueSelection(0x100);
 }
@@ -55,11 +55,11 @@ MATCH void func_801EEDD8(void) {
 MATCH void func_801EEFF0(void) {
     u8 timer_next;
 
-    if (g_Task->param.unk_0B < 3U) {
-        timer_next    = g_Task->timer - 1;
-        g_Task->timer = timer_next;
+    if (BMAGIC_WORK->param.unk_0B < 3U) {
+        timer_next         = BMAGIC_WORK->timer - 1;
+        BMAGIC_WORK->timer = timer_next;
         if (!(timer_next & BYTE_MASK)) {
-            g_Task->header.mode += 1;
+            BMAGIC_WORK->header.mode += 1;
         }
     }
 }
@@ -75,14 +75,15 @@ MATCH void func_801EF0B0(void) {
     u8       i;
 
     i    = 0;
-    blue = red = green = g_Task->timer * 15;
+    blue = red = green = BMAGIC_WORK->timer * 15;
     radius             = (rand() & 3) | 0x20;
     do {
         poly = (POLY_G3*)g_GfxPrimCursor;
         SetPolyG3(poly);
         SetSemiTrans(poly, 1);
-        setXY3(poly, g_Task->screen_x.value, g_Task->screen_y.value, g_Task->screen_x.value + ((rsin(i << 9) * radius) >> 12), g_Task->screen_y.value + ((rcos(i << 9) * radius) >> 12),
-               g_Task->screen_x.value + ((rsin((i + 1) << 9) * radius) >> 12), g_Task->screen_y.value + ((rcos((i + 1) << 9) * radius) >> 12));
+        setXY3(poly, BMAGIC_WORK->screen_x.value, BMAGIC_WORK->screen_y.value, BMAGIC_WORK->screen_x.value + ((rsin(i << 9) * radius) >> 12),
+               BMAGIC_WORK->screen_y.value + ((rcos(i << 9) * radius) >> 12), BMAGIC_WORK->screen_x.value + ((rsin((i + 1) << 9) * radius) >> 12),
+               BMAGIC_WORK->screen_y.value + ((rcos((i + 1) << 9) * radius) >> 12));
         setRGB0(poly, red, green, blue);
         setRGB1(poly, 1, 1, 1);
         setRGB2(poly, 1, 1, 1);
@@ -102,12 +103,12 @@ MATCH void func_801EF2B4(void) {
     PartyMember* battler;
 
     SYS_DISPATCH_TASK(g_BMagicEffectModes + 2, 2, g_Task);
-    if (g_Task->header.flags != 0 && g_Task->header.step != 0) {
-        g_Task->param.unk_0B++;
+    if (BMAGIC_WORK->header.flags != 0 && BMAGIC_WORK->header.step != 0) {
+        BMAGIC_WORK->param.unk_0B++;
         func_801EF6E8();
-        if ((g_Task->param.unk_0B & 3) == 0) {
-            if (g_Task->header.step == 1) {
-                if (g_Task->timer != 0) {
+        if ((BMAGIC_WORK->param.unk_0B & 3) == 0) {
+            if (BMAGIC_WORK->header.step == 1) {
+                if (BMAGIC_WORK->timer != 0) {
                     slot = BMagic_AllocEffect();
                     if (slot != 0xFF) {
                         battler                                = g_BattleEffectBattler;
@@ -126,25 +127,25 @@ MATCH void func_801EF2B4(void) {
 MATCH void func_801EF3FC(void) {
     PartyMember* battler;
 
-    if (--g_Task->unk_09 == 0) {
+    if (--BMAGIC_WORK->unk_09 == 0) {
         Battle_CenterCamera();
         Battle_ProjectRange();
         battler                      = g_BattleEffectBattler;
-        g_ScratchPad.cells.halves[6] = g_Task->screen_x.value;
-        g_ScratchPad.cells.halves[7] = g_Task->screen_y.value;
-        g_ScratchPad.cells.halves[4] = g_Task->screen_x.value = battler->screen_x.value;
-        g_ScratchPad.cells.halves[5] = g_Task->screen_y.value = battler->screen_y.value;
-        g_Task->unk_14                                        = ratan2(g_ScratchPad.cells.halves[6] - g_ScratchPad.cells.halves[4], g_ScratchPad.cells.halves[7] - g_ScratchPad.cells.halves[5]);
-        if (g_Task->unk_04 & 1) {
-            g_Task->unk_14 += (rand() & 7) << 6;
+        g_ScratchPad.cells.halves[6] = BMAGIC_WORK->screen_x.value;
+        g_ScratchPad.cells.halves[7] = BMAGIC_WORK->screen_y.value;
+        g_ScratchPad.cells.halves[4] = BMAGIC_WORK->screen_x.value = battler->screen_x.value;
+        g_ScratchPad.cells.halves[5] = BMAGIC_WORK->screen_y.value = battler->screen_y.value;
+        BMAGIC_WORK->unk_14                                        = ratan2(g_ScratchPad.cells.halves[6] - g_ScratchPad.cells.halves[4], g_ScratchPad.cells.halves[7] - g_ScratchPad.cells.halves[5]);
+        if (BMAGIC_WORK->unk_04 & 1) {
+            BMAGIC_WORK->unk_14 += (rand() & 7) << 6;
         } else {
-            g_Task->unk_14 -= (rand() & 7) << 6;
+            BMAGIC_WORK->unk_14 -= (rand() & 7) << 6;
         }
-        g_Task->unk_0C       = 0;
-        g_Task->param.unk_0B = rand() & 0x3F;
-        g_Task->unk_09       = 0x10;
-        g_Task->timer        = 0;
-        g_Task->header.step++;
+        BMAGIC_WORK->unk_0C       = 0;
+        BMAGIC_WORK->param.unk_0B = rand() & 0x3F;
+        BMAGIC_WORK->unk_09       = 0x10;
+        BMAGIC_WORK->timer        = 0;
+        BMAGIC_WORK->header.step++;
     }
 }
 
@@ -155,19 +156,19 @@ MATCH void func_801EF588(void) {
 }
 
 MATCH void func_801EF5D8(void) {
-    g_Task->timer = 16 + (rsin((g_Task->param.unk_0B & 0x3F) << 6) * 4 >> 12);
-    g_Task->unk_0C++;
-    if (g_Task->unk_0C == 0x10) {
-        g_Task->header.step++;
+    BMAGIC_WORK->timer = 16 + (rsin((BMAGIC_WORK->param.unk_0B & 0x3F) << 6) * 4 >> 12);
+    BMAGIC_WORK->unk_0C++;
+    if (BMAGIC_WORK->unk_0C == 0x10) {
+        BMAGIC_WORK->header.step++;
     }
 }
 
 MATCH void func_801EF654(void) {
     u8 timer;
 
-    g_Task->timer  = ((rsin((g_Task->param.unk_0B & 0x3F) << 6) * 4) >> 0xC) + 16;
-    timer          = g_Task->unk_09 - 2;
-    g_Task->unk_09 = timer;
+    BMAGIC_WORK->timer  = ((rsin((BMAGIC_WORK->param.unk_0B & 0x3F) << 6) * 4) >> 0xC) + 16;
+    timer               = BMAGIC_WORK->unk_09 - 2;
+    BMAGIC_WORK->unk_09 = timer;
     if (!(timer & BYTE_MASK)) {
         g_BattleEffectBattler->param.unk_0B -= 1;
         Actor_Clear();
@@ -182,20 +183,20 @@ INCLUDE_ASM(func_801EF6E8);
 #endif
 
 MATCH void func_801F020C(void) {
-    SYS_DISPATCH_BYTE(D_801F08F4, g_Task->header.step);
-    if (g_Task->header.flags != 0 && g_Task->header.step != 0) {
+    SYS_DISPATCH_BYTE(D_801F08F4, BMAGIC_WORK->header.step);
+    if (BMAGIC_WORK->header.flags != 0 && BMAGIC_WORK->header.step != 0) {
         func_801F03E0();
         func_801F05B4();
     }
 }
 
 MATCH void func_801F028C(void) {
-    g_Task->unk_5D = 8;
-    g_Task->unk_5E = 6;
-    g_Task->unk_5F = 15;
-    g_Task->unk_09 = 0;
-    g_Task->timer  = 2;
-    g_Task->header.step++;
+    BMAGIC_WORK->unk_5D = 8;
+    BMAGIC_WORK->unk_5E = 6;
+    BMAGIC_WORK->unk_5F = 15;
+    BMAGIC_WORK->unk_09 = 0;
+    BMAGIC_WORK->timer  = 2;
+    BMAGIC_WORK->header.step++;
 }
 
 MATCH void func_801F02FC(void) {
@@ -235,18 +236,19 @@ MATCH void func_801F03E0(void) {
     u8       centre;
     u8       i;
 
-    red    = g_Task->unk_09 * (s8)g_Task->unk_5D;
-    green  = g_Task->unk_09 * (s8)g_Task->unk_5E;
+    red    = BMAGIC_WORK->unk_09 * (s8)BMAGIC_WORK->unk_5D;
+    green  = BMAGIC_WORK->unk_09 * (s8)BMAGIC_WORK->unk_5E;
     i      = 0;
-    centre = g_Task->unk_09 * 15;
-    radius = g_Task->timer * 2;
-    blue   = g_Task->unk_09 * (s8)g_Task->unk_5F;
+    centre = BMAGIC_WORK->unk_09 * 15;
+    radius = BMAGIC_WORK->timer * 2;
+    blue   = BMAGIC_WORK->unk_09 * (s8)BMAGIC_WORK->unk_5F;
     do {
         poly = (POLY_G3*)g_GfxPrimCursor;
         SetPolyG3(poly);
         SetSemiTrans(poly, 1);
-        setXY3(poly, g_Task->screen_x.value, g_Task->screen_y.value, g_Task->screen_x.value + ((rsin(i << 9) * radius) >> 12), g_Task->screen_y.value + ((rcos(i << 9) * radius) >> 12),
-               g_Task->screen_x.value + ((rsin((i + 1) << 9) * radius) >> 12), g_Task->screen_y.value + ((rcos((i + 1) << 9) * radius) >> 12));
+        setXY3(poly, BMAGIC_WORK->screen_x.value, BMAGIC_WORK->screen_y.value, BMAGIC_WORK->screen_x.value + ((rsin(i << 9) * radius) >> 12),
+               BMAGIC_WORK->screen_y.value + ((rcos(i << 9) * radius) >> 12), BMAGIC_WORK->screen_x.value + ((rsin((i + 1) << 9) * radius) >> 12),
+               BMAGIC_WORK->screen_y.value + ((rcos((i + 1) << 9) * radius) >> 12));
         setRGB0(poly, centre, centre, centre);
         setRGB1(poly, red, green, blue);
         setRGB2(poly, red, green, blue);
@@ -264,19 +266,20 @@ MATCH void func_801F05B4(void) {
     u8       blue;
     u8       i;
 
-    red   = g_Task->unk_09 * (s8)g_Task->unk_5D;
-    green = g_Task->unk_09 * (s8)g_Task->unk_5E;
+    red   = BMAGIC_WORK->unk_09 * (s8)BMAGIC_WORK->unk_5D;
+    green = BMAGIC_WORK->unk_09 * (s8)BMAGIC_WORK->unk_5E;
     i     = 0;
-    outer = g_Task->timer * 3;
-    inner = g_Task->timer * 2;
-    blue  = g_Task->unk_09 * (s8)g_Task->unk_5F;
+    outer = BMAGIC_WORK->timer * 3;
+    inner = BMAGIC_WORK->timer * 2;
+    blue  = BMAGIC_WORK->unk_09 * (s8)BMAGIC_WORK->unk_5F;
     do {
         poly = (POLY_G4*)g_GfxPrimCursor;
         SetPolyG4(poly);
         SetSemiTrans(poly, 1);
-        setXY4(poly, g_Task->screen_x.value + ((rsin(i << 9) * outer) >> 12), g_Task->screen_y.value + ((rcos(i << 9) * outer) >> 12), g_Task->screen_x.value + ((rsin((i + 1) << 9) * outer) >> 12),
-               g_Task->screen_y.value + ((rcos((i + 1) << 9) * outer) >> 12), g_Task->screen_x.value + ((rsin(i << 9) * inner) >> 12), g_Task->screen_y.value + ((rcos(i << 9) * inner) >> 12),
-               g_Task->screen_x.value + ((rsin((i + 1) << 9) * inner) >> 12), g_Task->screen_y.value + ((rcos((i + 1) << 9) * inner) >> 12));
+        setXY4(poly, BMAGIC_WORK->screen_x.value + ((rsin(i << 9) * outer) >> 12), BMAGIC_WORK->screen_y.value + ((rcos(i << 9) * outer) >> 12),
+               BMAGIC_WORK->screen_x.value + ((rsin((i + 1) << 9) * outer) >> 12), BMAGIC_WORK->screen_y.value + ((rcos((i + 1) << 9) * outer) >> 12),
+               BMAGIC_WORK->screen_x.value + ((rsin(i << 9) * inner) >> 12), BMAGIC_WORK->screen_y.value + ((rcos(i << 9) * inner) >> 12),
+               BMAGIC_WORK->screen_x.value + ((rsin((i + 1) << 9) * inner) >> 12), BMAGIC_WORK->screen_y.value + ((rcos((i + 1) << 9) * inner) >> 12));
         setRGB0(poly, 1, 1, 1);
         setRGB1(poly, 1, 1, 1);
         setRGB2(poly, red, green, blue);

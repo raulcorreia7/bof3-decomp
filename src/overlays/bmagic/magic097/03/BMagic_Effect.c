@@ -24,21 +24,21 @@ MATCH void func_801EEC5C(void) {
 #include "overlays/bmagic/shared/BMagic_DispatchEffectMode.h"
 
 MATCH void func_801EEFC8(void) {
-    SYS_DISPATCH_BYTE((g_BMagicEffectModes + 1), g_Task->header.step);
+    SYS_DISPATCH_BYTE((g_BMagicEffectModes + 1), BMAGIC_WORK->header.step);
     func_800AF764();
-    if (g_Task->header.step != 0 && g_Task->header.flags != 0) {
+    if (BMAGIC_WORK->header.step != 0 && BMAGIC_WORK->header.flags != 0) {
         Effect_SetActorMatrixRolled();
         func_801EF5C4(MAGIC097_BAND_HEIGHT, 32, 0x7);
-        g_Task->param.unk_0B += 4;
+        BMAGIC_WORK->param.unk_0B += 4;
         func_801EF5C4(MAGIC097_BAND_HEIGHT, 64, 0xF);
         Effect_DrawBolt();
-        g_Task->param.unk_0B += 4;
+        BMAGIC_WORK->param.unk_0B += 4;
         func_801EF5C4(MAGIC097_BAND_HEIGHT, 96, 0x1F);
         Effect_DrawBolt();
-        g_Task->param.unk_0B -= 8;
-        g_Task->screen_x.value += 16;
+        BMAGIC_WORK->param.unk_0B -= 8;
+        BMAGIC_WORK->screen_x.value += 16;
         func_801F083C();
-        g_Task->screen_x.value -= 32;
+        BMAGIC_WORK->screen_x.value -= 32;
         func_801F083C();
         PopMatrix();
     }
@@ -49,22 +49,22 @@ MATCH void func_801EEFC8(void) {
 MATCH void func_801EF1A4(void) {
     void* battler;
 
-    g_Task->param.unk_0B += 1;
-    g_Task->timer += 4;
-    if (g_Task->timer == 0x10) {
+    BMAGIC_WORK->param.unk_0B += 1;
+    BMAGIC_WORK->timer += 4;
+    if (BMAGIC_WORK->timer == 0x10) {
         if (g_Battle.target_selector & BATTLE_TARGET_ENEMY_SIDE) {
-            battler = &g_BattleEnemyBattlers[g_Task->unk_03];
+            battler = &g_BattleEnemyBattlers[BMAGIC_WORK->unk_03];
             GFX_PaletteFreeFadeTarget(battler);
             GFX_PaletteAllocFade(battler, -8, -8, -8, 1);
-            Battle_ApplyDamageFlags((g_Task->unk_03 + 3) & BYTE_MASK, 0x10);
+            Battle_ApplyDamageFlags((BMAGIC_WORK->unk_03 + 3) & BYTE_MASK, 0x10);
         } else {
-            battler = &g_Game.members[g_Task->unk_03];
+            battler = &g_Game.members[BMAGIC_WORK->unk_03];
             GFX_PaletteFreeFadeTarget(battler);
             GFX_PaletteAllocFade(battler, -8, -8, -8, 1);
-            Battle_ApplyDamageFlags(g_Task->unk_03, 0x10);
+            Battle_ApplyDamageFlags(BMAGIC_WORK->unk_03, 0x10);
         }
-        g_Task->unk_09 = 8;
-        g_Task->header.step += 1;
+        BMAGIC_WORK->unk_09 = 8;
+        BMAGIC_WORK->header.step += 1;
     }
 }
 

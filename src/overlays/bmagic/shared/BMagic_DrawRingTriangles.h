@@ -6,13 +6,13 @@ MATCH void BMagic_DrawRingTriangles(void) {
     s16      x;
     s16      y;
 
-    x                            = g_Task->screen_x.value;
-    y                            = g_Task->screen_y.value;
+    x                            = BMAGIC_WORK->screen_x.value;
+    y                            = BMAGIC_WORK->screen_y.value;
     g_ScratchPad.cells.halves[0] = 8;
-    g_ScratchPad.cells.halves[3] = g_Task->unk_09 * 12;
-    g_ScratchPad.cells.halves[4] = (s8)g_Task->unk_5D * g_Task->unk_09;
-    g_ScratchPad.cells.halves[5] = (s8)g_Task->unk_5E * g_Task->unk_09;
-    g_ScratchPad.cells.halves[6] = (s8)g_Task->unk_5F * g_Task->unk_09;
+    g_ScratchPad.cells.halves[3] = BMAGIC_WORK->unk_09 * 12;
+    g_ScratchPad.cells.halves[4] = (s8)BMAGIC_WORK->unk_5D * BMAGIC_WORK->unk_09;
+    g_ScratchPad.cells.halves[5] = (s8)BMAGIC_WORK->unk_5E * BMAGIC_WORK->unk_09;
+    g_ScratchPad.cells.halves[6] = (s8)BMAGIC_WORK->unk_5F * BMAGIC_WORK->unk_09;
     for (i = 0; i < 8; i++) {
         prim = (POLY_G3*)g_GfxPrimCursor;
         SetPolyG3(prim);
@@ -22,6 +22,6 @@ MATCH void BMagic_DrawRingTriangles(void) {
         setRGB0(prim, g_ScratchPad.cells.halves[3], g_ScratchPad.cells.halves[3], g_ScratchPad.cells.halves[3]);
         setRGB1(prim, g_ScratchPad.cells.halves[4], g_ScratchPad.cells.halves[5], g_ScratchPad.cells.halves[6]);
         setRGB2(prim, g_ScratchPad.cells.halves[4], g_ScratchPad.cells.halves[5], g_ScratchPad.cells.halves[6]);
-        Area_CellAddPrim(g_Task->pos.x.fixed, g_Task->pos.y.fixed, 2, sizeof(POLY_G3));
+        Area_CellAddPrim(BMAGIC_WORK->pos.x.fixed, BMAGIC_WORK->pos.y.fixed, 2, sizeof(POLY_G3));
     }
 }

@@ -3,9 +3,9 @@
 MATCH void Effect_CountDownByTwoAndFinish(void) {
     PartyMember* active;
 
-    g_Task->param.unk_0B = g_Task->param.unk_0B + 1;
-    g_Task->timer        = g_Task->timer - 2;
-    if (g_Task->timer == 0) {
+    BMAGIC_WORK->param.unk_0B = BMAGIC_WORK->param.unk_0B + 1;
+    BMAGIC_WORK->timer        = BMAGIC_WORK->timer - 2;
+    if (BMAGIC_WORK->timer == 0) {
         active               = BATTLE_ACTIVE_WORK;
         active->param.unk_0B = active->param.unk_0B - 1;
         Effect_Reset();

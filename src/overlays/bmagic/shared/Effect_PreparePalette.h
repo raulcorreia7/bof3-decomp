@@ -6,11 +6,11 @@ enum {
 MATCH void Effect_PreparePalette(void) {
     PartyMember** selected;
 
-    if (--g_Task->unk_09 == 0) {
+    if (--BMAGIC_WORK->unk_09 == 0) {
         selected = &g_Battle.selected_actor;
         GFX_PaletteFreeFadeTarget(*selected);
-        g_Task->timer  = GFX_PaletteAllocFade(*selected, 0, 0, 0, 1);
-        g_Task->unk_09 = BMAGIC_PALETTE_BRIGHTEN_FRAMES;
-        g_Task->header.mode++;
+        BMAGIC_WORK->timer  = GFX_PaletteAllocFade(*selected, 0, 0, 0, 1);
+        BMAGIC_WORK->unk_09 = BMAGIC_PALETTE_BRIGHTEN_FRAMES;
+        BMAGIC_WORK->header.mode++;
     }
 }

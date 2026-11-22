@@ -10,7 +10,7 @@ MATCH void func_801E16B4(void) {
         if (state == 4) {
             if (!(work->u.turn.action_flags.value & BATTLER_ACTION_DRAGON_FORM)) {
                 if (!(func_801DDF50(work->chr.character_id, D_801463CD) & BYTE_MASK)) {
-                    g_Task->unk_09 = 0x1E;
+                    BATTLE_WORK->unk_09 = 0x1E;
                 } else {
                     goto block_8;
                 }
@@ -19,19 +19,19 @@ MATCH void func_801E16B4(void) {
             }
         } else {
         block_8:
-            g_Task->unk_09 = 0;
+            BATTLE_WORK->unk_09 = 0;
         }
         if (!(D_801CA71C[g_Battle.action_id].mask & 0x800)) {
             work = g_Game.current;
             if (work->u.turn.action_flags.value & BATTLER_ACTION_DRAGON_FORM) {
-                g_Task->unk_09 = D_801EB23C[g_Battle.dragon_form];
+                BATTLE_WORK->unk_09 = D_801EB23C[g_Battle.dragon_form];
             } else {
-                g_Task->unk_09 = g_BattleCharacterStepIds[work->chr.character_id];
+                BATTLE_WORK->unk_09 = g_BattleCharacterStepIds[work->chr.character_id];
             }
-            Script_Request((g_Task->facing + 0x2C) & BYTE_MASK);
-            g_Task->header.step = g_Task->header.step + 1;
+            Script_Request((BATTLE_WORK->facing + 0x2C) & BYTE_MASK);
+            BATTLE_WORK->header.step = BATTLE_WORK->header.step + 1;
         } else {
-            g_Task->header.mode = g_Task->header.mode + 1;
+            BATTLE_WORK->header.mode = BATTLE_WORK->header.mode + 1;
         }
         Battle_IsPartyMemberBlocked();
     }

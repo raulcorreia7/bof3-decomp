@@ -16,22 +16,22 @@ MATCH void func_801EEC94(void) {
     u8           i;
     u8           slot;
 
-    battler              = g_BattleSelectedActor;
-    g_Task->facing       = battler->facing;
-    g_Task->pos.x        = battler->pos.x;
-    g_Task->pos.y        = battler->pos.y;
-    g_Task->pos.z        = battler->pos.z;
-    g_Task->param.unk_0B = 0;
-    g_Task->unk_09       = 16;
-    g_Task->header.mode += 1;
+    battler                   = g_BattleSelectedActor;
+    BMAGIC_WORK->facing       = battler->facing;
+    BMAGIC_WORK->pos.x        = battler->pos.x;
+    BMAGIC_WORK->pos.y        = battler->pos.y;
+    BMAGIC_WORK->pos.z        = battler->pos.z;
+    BMAGIC_WORK->param.unk_0B = 0;
+    BMAGIC_WORK->unk_09       = 16;
+    BMAGIC_WORK->header.mode += 1;
     first_slot                                   = Battle_AllocEffect(1, 0x47) & BYTE_MASK;
     g_BattleEffects[first_slot].target.party     = g_Task;
     g_BattleEffects[first_slot].header.mode      = 0;
     g_BattleEffects[first_slot].arg.unk_09       = 0;
-    g_BattleEffects[first_slot].pos.x            = g_Task->pos.x;
-    g_BattleEffects[first_slot].pos.y            = g_Task->pos.y;
-    COORD_INT(g_BattleEffects[first_slot].pos.z) = COORD_INT(g_Task->pos.z);
-    g_Task->param.unk_0B += 1;
+    g_BattleEffects[first_slot].pos.x            = BMAGIC_WORK->pos.x;
+    g_BattleEffects[first_slot].pos.y            = BMAGIC_WORK->pos.y;
+    COORD_INT(g_BattleEffects[first_slot].pos.z) = COORD_INT(BMAGIC_WORK->pos.z);
+    BMAGIC_WORK->param.unk_0B += 1;
     i = 0;
     do {
         slot                               = Battle_AllocEffect(1, 0x47);
@@ -40,10 +40,10 @@ MATCH void func_801EEC94(void) {
         g_BattleEffects[slot].unk_0B       = (i & 0x3) * 8;
         g_BattleEffects[slot].arg.unk_09   = ((i >> 2) * 40) + 17;
         g_BattleEffects[slot].target.party = target;
-        g_BattleEffects[slot].pos.x        = g_Task->pos.x;
-        g_BattleEffects[slot].pos.y        = g_Task->pos.y;
-        g_BattleEffects[slot].pos.z        = g_Task->pos.z;
-        g_Task->param.unk_0B += 1;
+        g_BattleEffects[slot].pos.x        = BMAGIC_WORK->pos.x;
+        g_BattleEffects[slot].pos.y        = BMAGIC_WORK->pos.y;
+        g_BattleEffects[slot].pos.z        = BMAGIC_WORK->pos.z;
+        BMAGIC_WORK->param.unk_0B += 1;
         i++;
     } while (i < 8);
     SND_SEQueueSelection(EMI_SE_ID(SND_BANK_COMMON, 0));
@@ -62,13 +62,13 @@ MATCH void func_801EF080(void) {
     /* FAKE: retail frame reserves 0x10 bytes no statement uses. */
     FAKE_STACK_PADS(u8, 0x10);
 
-    g_PaletteFades[g_Task->timer].offset.r -= 1;
-    g_PaletteFades[g_Task->timer].offset.g -= 1;
-    g_PaletteFades[g_Task->timer].offset.b -= 1;
-    if (g_PaletteFades[g_Task->timer].offset.r == 0) {
+    g_PaletteFades[BMAGIC_WORK->timer].offset.r -= 1;
+    g_PaletteFades[BMAGIC_WORK->timer].offset.g -= 1;
+    g_PaletteFades[BMAGIC_WORK->timer].offset.b -= 1;
+    if (g_PaletteFades[BMAGIC_WORK->timer].offset.r == 0) {
         GFX_PaletteFreeFadeTarget(g_Battle.selected_actor);
         Battle_FadePoisonedBattler(g_Battle.target_selector);
-        g_Task->header.mode += 1;
+        BMAGIC_WORK->header.mode += 1;
     }
 }
 
@@ -80,10 +80,10 @@ MATCH void func_801EF080(void) {
 #include "overlays/bmagic/shared/BMagic_DispatchEffectMode.h"
 
 MATCH void func_801EF31C(void) {
-    SYS_DISPATCH_BYTE(D_801F08B8, g_Task->header.step);
-    if (g_Task->header.flags != 0) {
+    SYS_DISPATCH_BYTE(D_801F08B8, BMAGIC_WORK->header.step);
+    if (BMAGIC_WORK->header.flags != 0) {
         Effect_SetActorMatrix();
-        D_1F800004 = g_Task->unk_09 * 5;
+        D_1F800004 = BMAGIC_WORK->unk_09 * 5;
         func_801EF4B0();
         func_801EF708();
         PopMatrix();
@@ -172,10 +172,10 @@ MATCH void func_801EF708(void) {
 }
 
 MATCH void func_801EF9B8(void) {
-    SYS_DISPATCH_BYTE(D_801F08C4, g_Task->header.step);
-    if (g_Task->header.flags != 0 && g_Task->header.step != 0) {
+    SYS_DISPATCH_BYTE(D_801F08C4, BMAGIC_WORK->header.step);
+    if (BMAGIC_WORK->header.flags != 0 && BMAGIC_WORK->header.step != 0) {
         Effect_SetActorMatrix();
-        if (g_Task->header.step < 3) {
+        if (BMAGIC_WORK->header.step < 3) {
             func_801EFC44();
         }
         func_801F05C8(2);
@@ -187,34 +187,34 @@ MATCH void func_801EF9B8(void) {
 MATCH void func_801EFA70(void) {
     u8 timer;
 
-    timer          = g_Task->unk_09 - 1;
-    g_Task->unk_09 = timer;
+    timer               = BMAGIC_WORK->unk_09 - 1;
+    BMAGIC_WORK->unk_09 = timer;
     if (timer == 0) {
-        g_Task->timer       = 1;
-        g_Task->header.step = g_Task->header.step + 1;
+        BMAGIC_WORK->timer       = 1;
+        BMAGIC_WORK->header.step = BMAGIC_WORK->header.step + 1;
     }
 }
 
 MATCH void func_801EFACC(void) {
     u8 timer;
 
-    g_Task->param.unk_0B += 2;
-    g_Task->unk_09 += 1;
-    timer = g_Task->timer;
+    BMAGIC_WORK->param.unk_0B += 2;
+    BMAGIC_WORK->unk_09 += 1;
+    timer = BMAGIC_WORK->timer;
     if (timer < 16U) {
-        g_Task->timer = timer + 1;
+        BMAGIC_WORK->timer = timer + 1;
     }
-    if (g_Task->unk_09 == 0x18) {
-        g_Task->header.step += 1;
+    if (BMAGIC_WORK->unk_09 == 0x18) {
+        BMAGIC_WORK->header.step += 1;
     }
 }
 
 MATCH void func_801EFB5C(void) {
-    g_Task->param.unk_0B += 2;
-    g_Task->unk_09 += 1;
-    g_Task->timer -= 1;
-    if (g_Task->unk_09 == 0x28) {
-        g_Task->header.step += 1;
+    BMAGIC_WORK->param.unk_0B += 2;
+    BMAGIC_WORK->unk_09 += 1;
+    BMAGIC_WORK->timer -= 1;
+    if (BMAGIC_WORK->unk_09 == 0x28) {
+        BMAGIC_WORK->header.step += 1;
     }
 }
 
@@ -258,16 +258,16 @@ MATCH void func_801F05C8(s32 step) {
     i     = 1;
     angle = &D_1F80000C;
     for (; i < 24; i += step) {
-        if (i >= g_Task->unk_09) {
+        if (i >= BMAGIC_WORK->unk_09) {
             break;
         }
-        if (g_Task->header.step == 3) {
-            if (g_Task->timer + i >= 25) {
+        if (BMAGIC_WORK->header.step == 3) {
+            if (BMAGIC_WORK->timer + i >= 25) {
                 break;
             }
             jitter     = rand();
-            rise       = (g_Task->timer + i) * (step + 2);
-            D_1F800004 = 0x80 - (g_Task->timer + i) * 5;
+            rise       = (BMAGIC_WORK->timer + i) * (step + 2);
+            D_1F800004 = 0x80 - (BMAGIC_WORK->timer + i) * 5;
             height     = rise + (jitter & 3);
         } else {
             jitter     = rand();
@@ -286,8 +286,8 @@ MATCH void func_801F05C8(s32 step) {
         if (g_ScratchPadVectors[0].vz > 0) {
             g_ScratchPadVectors[0].vz = 0;
         }
-        x     = (g_ScratchPadVectors[0].vx << 9) + g_Task->pos.x.fixed;
-        y     = (g_ScratchPadVectors[0].vy << 9) + g_Task->pos.y.fixed;
+        x     = (g_ScratchPadVectors[0].vx << 9) + BMAGIC_WORK->pos.x.fixed;
+        y     = (g_ScratchPadVectors[0].vy << 9) + BMAGIC_WORK->pos.y.fixed;
         tpage = getTPage(TPAGE_DEPTH_4BIT, TPAGE_ABR_ADD, 320, 256);
         SetDrawMode((DR_MODE*)g_GfxPrimCursor, 0, 1, tpage, 0);
         Area_CellAddPrim(x, y, 0, sizeof(DR_MODE));

@@ -3,8 +3,8 @@
  */
 /* func_801EF0E8, func_801EF38C */
 MATCH void Effect_CountUpTimerByTwoAndStep(void) {
-    g_Task->timer += 2;
-    if (g_Task->timer == 16) {
-        g_Task->header.step += 1;
+    BMAGIC_WORK->timer += 2;
+    if (BMAGIC_WORK->timer == 16) {
+        BMAGIC_WORK->header.step += 1;
     }
 }

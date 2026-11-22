@@ -4,24 +4,24 @@
 /* func_801EF06C (magic073), func_801EF058 (magic074) */
 /* The statements of the burst; each member declares PartyMember* battler, u8 slot and u8 index, count and i. */
 #define EFFECT_LAUNCH_SPARKLE_BURST()                                                                                        \
-    count          = g_Task->unk_09 - 1;                                                                                     \
-    g_Task->unk_09 = count;                                                                                                  \
+    count               = BMAGIC_WORK->unk_09 - 1;                                                                           \
+    BMAGIC_WORK->unk_09 = count;                                                                                             \
     if (count == 0) {                                                                                                        \
-        index = g_Task->unk_04;                                                                                              \
+        index = BMAGIC_WORK->unk_04;                                                                                         \
         if (index < BATTLE_PARTY_CHARACTERS_COUNT) {                                                                         \
             battler = &g_Game.members[index];                                                                                \
         } else {                                                                                                             \
             battler = (PartyMember*)(g_BattleEnemies + index * BATTLE_ENEMY_STRIDE);                                         \
         }                                                                                                                    \
-        g_Task->facing      = battler->facing;                                                                               \
-        g_Task->pos.x.fixed = battler->pos.x.fixed;                                                                          \
-        g_Task->pos.y.fixed = battler->pos.y.fixed;                                                                          \
-        g_Task->pos.z.fixed = battler->pos.z.fixed;                                                                          \
+        BMAGIC_WORK->facing      = battler->facing;                                                                          \
+        BMAGIC_WORK->pos.x.fixed = battler->pos.x.fixed;                                                                     \
+        BMAGIC_WORK->pos.y.fixed = battler->pos.y.fixed;                                                                     \
+        BMAGIC_WORK->pos.z.fixed = battler->pos.z.fixed;                                                                     \
         Battle_ProjectRange();                                                                                               \
-        g_Task->param.unk_0B = 0;                                                                                            \
-        g_Task->unk_09       = 8;                                                                                            \
-        g_Task->timer        = 0;                                                                                            \
-        g_Task->header.step += 1;                                                                                            \
+        BMAGIC_WORK->param.unk_0B = 0;                                                                                       \
+        BMAGIC_WORK->unk_09       = 8;                                                                                       \
+        BMAGIC_WORK->timer        = 0;                                                                                       \
+        BMAGIC_WORK->header.step += 1;                                                                                       \
         for (i = 0; i < EFFECT_SPARKLE_COUNTS[g_BattleEffectBattler->unk_04]; i++) {                                         \
             slot = BMagic_AllocEffect();                                                                                     \
             if (slot != 0xFF) {                                                                                              \
@@ -32,7 +32,7 @@
                 BMAGIC_EFFECT_SLOTS[slot].unk_04      = g_BattleEffectBattler->unk_04;                                       \
                 BMAGIC_EFFECT_SLOTS[slot].unk_07      = i;                                                                   \
                 BMAGIC_EFFECT_SLOTS[slot].timer_05    = EFFECT_SPARKLE_DELAYS[g_BattleEffectBattler->unk_04] * (i >> 2) + 1; \
-                g_Task->param.unk_0B += 1;                                                                                   \
+                BMAGIC_WORK->param.unk_0B += 1;                                                                              \
             }                                                                                                                \
         }                                                                                                                    \
     }

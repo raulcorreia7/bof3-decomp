@@ -1,6 +1,6 @@
 #include "battle_03.h"
 
 MATCH void func_801E3BAC(void) {
-    g_Task->unk_04      = 0u;
-    g_Task->header.step = 1u;
+    BATTLE_WORK->unk_04      = 0u;
+    BATTLE_WORK->header.step = 1u;
 }

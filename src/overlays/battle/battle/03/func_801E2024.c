@@ -23,6 +23,6 @@ MATCH void func_801E2024(void) {
             Battle_PlayEffectSE(3);
         }
         Battle_PlayEffectSE(4);
-        g_Task->header.step = g_Task->header.step + 1;
+        BATTLE_WORK->header.step = BATTLE_WORK->header.step + 1;
     }
 }

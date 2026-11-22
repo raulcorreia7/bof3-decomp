@@ -3,9 +3,9 @@
 MATCH void Effect_CountUpAndStepAt32(void) {
     u8 timer;
 
-    timer          = g_Task->unk_09 + 1;
-    g_Task->unk_09 = timer;
+    timer               = BMAGIC_WORK->unk_09 + 1;
+    BMAGIC_WORK->unk_09 = timer;
     if (timer == 32) {
-        g_Task->header.step = g_Task->header.step + 1;
+        BMAGIC_WORK->header.step = BMAGIC_WORK->header.step + 1;
     }
 }

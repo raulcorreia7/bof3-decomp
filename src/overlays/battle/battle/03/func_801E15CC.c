@@ -3,12 +3,12 @@
 MATCH void func_801E15CC(void) {
     func_801DEDE4();
     if (HAS_STATUS(*g_Game.current, STATUS_KO)) {
-        g_Task->header.mode = 6;
-        g_Task->header.step = 4;
+        BATTLE_WORK->header.mode = 6;
+        BATTLE_WORK->header.step = 4;
     } else {
-        Battle_ClearSlotPending(g_Task->slot);
-        g_Task->header.mode = 3;
-        g_Task->header.step = 0;
+        Battle_ClearSlotPending(BATTLE_WORK->slot);
+        BATTLE_WORK->header.mode = 3;
+        BATTLE_WORK->header.step = 0;
     }
-    g_Task->unk_03 = 0;
+    BATTLE_WORK->unk_03 = 0;
 }

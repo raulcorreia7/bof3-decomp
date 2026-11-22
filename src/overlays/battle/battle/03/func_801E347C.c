@@ -8,24 +8,24 @@ MATCH void func_801E347C(void) {
     work = g_Task;
     work->header.flags &= ~ACTOR_FLAG_HIDDEN;
     Battle_RequestEnemyScript(0);
-    old34          = g_Task->pos.x.fixed;
-    old38          = g_Task->pos.y.fixed;
-    g_Task->unk_0C = 0x80000;
-    g_Task->unk_10 = 0;
-    g_Task->unk_18 = old34;
-    work           = g_Task;
-    work->unk_1C   = old38;
+    old34               = BATTLE_WORK->pos.x.fixed;
+    old38               = BATTLE_WORK->pos.y.fixed;
+    BATTLE_WORK->unk_0C = 0x80000;
+    BATTLE_WORK->unk_10 = 0;
+    BATTLE_WORK->unk_18 = old34;
+    work                = g_Task;
+    work->unk_1C        = old38;
     Effect_RotatePosition(work);
     {
         s32 dx;
         s32 dy;
         s32 depth;
 
-        depth          = g_Task->pos.x.fixed;
-        dx             = g_Task->unk_0C;
-        dy             = g_Task->unk_10;
-        g_Task->unk_0C = 0x8000;
-        g_Task->unk_10 = 0;
+        depth               = BATTLE_WORK->pos.x.fixed;
+        dx                  = BATTLE_WORK->unk_0C;
+        dy                  = BATTLE_WORK->unk_10;
+        BATTLE_WORK->unk_0C = 0x8000;
+        BATTLE_WORK->unk_10 = 0;
         depth -= dx;
         TASK(volatile PartyMember)->pos.x.fixed = depth;
         depth -= dy;

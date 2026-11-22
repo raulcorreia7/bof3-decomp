@@ -17,8 +17,8 @@ MATCH void func_801E020C(void) {
         u16* half;
         half = &g_Battle.flags;
         *half &= ~BATTLE_STATE_REPRISAL_PENDING;
-        g_Task->header.mode = 6;
-        g_Task->header.step = 4;
+        BATTLE_WORK->header.mode = 6;
+        BATTLE_WORK->header.step = 4;
     } else {
         /* FAKE: half pointer; the direct global scores 82.24%. */
         u16* half;
@@ -38,7 +38,7 @@ MATCH void func_801E020C(void) {
         } else {
             *half = (*half & ~BATTLE_STATE_REPRISAL_PENDING) | BATTLE_STATE_REPRISAL_DONE;
         }
-        Battle_ClearSlotPending(g_Task->slot);
+        Battle_ClearSlotPending(BATTLE_WORK->slot);
         g_Game.current->u.turn.damage_flags.value &= ~(BATTLER_DAMAGE_UNK_4 | BATTLER_DAMAGE_UNK_5 | BATTLER_DAMAGE_TAKEN);
         if ((func_801E0E0C() & BYTE_MASK) != 0) {
             /* FAKE: flag pointer; the direct store scores 97.37%. */
@@ -47,8 +47,8 @@ MATCH void func_801E020C(void) {
             *flag |= 1;
         }
         g_Game.current->u.turn.damage_flags.value &= ~BATTLER_DAMAGE_ROW_PRESENT;
-        g_Task->header.mode = 2;
-        g_Task->header.step = 0;
+        BATTLE_WORK->header.mode = 2;
+        BATTLE_WORK->header.step = 0;
     }
-    g_Task->unk_03 = 0;
+    BATTLE_WORK->unk_03 = 0;
 }
