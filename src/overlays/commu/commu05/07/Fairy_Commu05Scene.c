@@ -11,19 +11,19 @@ MATCH void func_801D0C10(void) {
 
 MATCH void func_801D0C4C(void) {
     if (D_80145E44 != 0) {
-        D_801D19F0.unk_00 = ((D_80145E44 - 1) / 7) + 1;
+        D_801D19F0[0] = ((D_80145E44 - 1) / 7) + 1;
     } else {
-        D_801D19F0.unk_00 = 0;
+        D_801D19F0[0] = 0;
     }
     if (g_FairyVillagePendingQueueCount != 0) {
-        D_801D19F0.unk_01 = ((g_FairyVillagePendingQueueCount - 1) / 20) + 1;
+        D_801D19F0[1] = ((g_FairyVillagePendingQueueCount - 1) / 20) + 1;
     } else {
-        D_801D19F0.unk_01 = 0;
+        D_801D19F0[1] = 0;
     }
     if (g_FairyVillageUpdateCount != 0) {
-        D_801D19F0.unk_02 = ((g_FairyVillageUpdateCount - 1) / 8) + 1;
+        D_801D19F0[2] = ((g_FairyVillageUpdateCount - 1) / 8) + 1;
     } else {
-        D_801D19F0.unk_02 = 0;
+        D_801D19F0[2] = 0;
     }
     D_801D19F4 = 0;
     D_801F294C += 1;
@@ -37,7 +37,7 @@ MATCH void func_801D0D4C(void) {
     remaining = D_801D19F4;
     page      = 0;
     while (1) {
-        count = ((u8*)&D_801D19F0)[page];
+        count = D_801D19F0[page];
         if (remaining < count) {
             break;
         }
@@ -57,7 +57,7 @@ MATCH void func_801D0D4C(void) {
             func_801D14C8(0x28, 0x28, remaining);
             break;
     }
-    remaining = (u8)D_801D19F0.unk_00 + (u8)D_801D19F0.unk_01 + (u8)D_801D19F0.unk_02;
+    remaining = D_801D19F0[0] + D_801D19F0[1] + D_801D19F0[2];
     if (g_PadStates[0].pressed & PADLright) {
         D_801D19F4++;
         if (D_801D19F4 >= remaining) {

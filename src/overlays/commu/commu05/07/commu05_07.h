@@ -10,17 +10,10 @@
  * by the commu step byte commu00 owns. */
 #define COMMU05_STEP_COUNT 3
 
-typedef struct {
-    s8 unk_00;
-    s8 unk_01;
-    s8 unk_02;
-    s8 unk_03;
-} Commu05State;
-
 /* The page counts of the three lists. */
-extern Commu05State D_801D19F0;
+extern u8 D_801D19F0[3];
 /* The page shown, counted across the three lists. */
-extern s8           D_801D19F4;
+extern s8 D_801D19F4;
 
 void      func_801D1048(s16 x, s16 y, u8 group);
 void      func_801D129C(s16 x, s16 y, u8 group);
