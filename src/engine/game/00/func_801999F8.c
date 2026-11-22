@@ -58,7 +58,7 @@ MATCH void func_801999F8(MenuPanelTask* task) {
     /* FAKE: retail reads g_WindowStyle as s8. */
     UI_WindowDraw((u16)(task->pos.x + 3), (u16)(task->pos.y + 3), 153, 20, task->unk_09, *(u8*)((s8*)&g_WindowStyle));
     UI_WindowDraw((u16)(task->pos.x + 3), (u16)(task->pos.y + 146), 153, 8, task->unk_09, *(u8*)((s8*)&g_WindowStyle));
-    slotp  = &D_801C7C5C[task->unk_0A];
+    slotp  = &g_ItemCategoryLabelPointers[task->unk_0A];
     value  = Game_ReadCommand(*slotp) & BYTE_MASK;
     offset = (value * 4) - 0x4E;
     UI_TextDraw((task->pos.x - offset), (task->pos.y + 0x7), -(task->unk_09 != 0) & 7, MENU_LABEL_LENGTH, *slotp);

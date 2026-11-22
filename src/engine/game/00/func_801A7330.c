@@ -2,9 +2,6 @@
 
 /* Entity spawn counter in scratchpad (signed 16-bit slot index). */
 
-/* Parallel per-slot shadow tables overlaying the 0x98-byte work-area slots;
- * each column stores one field of every record at a fixed address. */
-
 MATCH void func_801A7330(const volatile u8* data) {
     s16*   counter = (s16*)&g_ScratchPad;
     s16    dist;
@@ -52,8 +49,8 @@ MATCH void func_801A7330(const volatile u8* data) {
     TASK(Actor)->direction = data[0] & 0xF;
     TASK(Actor)->unk_06    = data[0] >> 4;
 
-    D_80146900[*counter][0] = 0;
-    D_8014691C[*counter][0] = 0x7F;
+    g_Actors[*counter].unk_78 = 0;
+    g_Actors[*counter].unk_94 = 0x7F;
 
     Actor_SetOptionFlags((u8*)(data + 0xB));
 

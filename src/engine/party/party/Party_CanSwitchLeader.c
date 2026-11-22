@@ -6,9 +6,7 @@ MATCH bool Party_CanSwitchLeader(void) {
     u16 limit;
     s32 index;
     s32 j;
-    s32 member_offset;
 
-    s32 key_offset;
     index = 1;
     if (((g_Game.flags | g_Game.walk_flags) & AREA_WALK_BUSY_ALL) != 0) {
         return false;
@@ -17,14 +15,12 @@ MATCH bool Party_CanSwitchLeader(void) {
     if (index >= count) {
         return true;
     }
-    limit         = count;
-    member_offset = BATTLE_PARTY_STRIDE;
+    limit = count;
     do {
         j = 0;
-        if (D_80145E91[member_offset] == 2) {
-            key_offset = member_offset;
+        if (g_Game.members[index].header.mode == 2) {
             for (; j < 3; j++) {
-                if (D_80145E92[key_offset] == s_MenuBattlerTypes[j]) {
+                if (g_Game.members[index].header.step == s_MenuBattlerTypes[j]) {
                     break;
                 }
             }
@@ -33,7 +29,6 @@ MATCH bool Party_CanSwitchLeader(void) {
             }
         }
         index++;
-        member_offset += BATTLE_PARTY_STRIDE;
     } while (index < limit);
     return true;
 }
