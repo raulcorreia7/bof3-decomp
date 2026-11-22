@@ -21,7 +21,7 @@ MATCH void Battle_DefeatEnemy(void) {
         if (new_var) {
             g_Battle.outcome.result |= BATTLE_RESULT_VICTORY;
         }
-        if (((g_Battle.flags & BATTLE_STATE_OVER) != 0) && (D_801463CA == TASK(PartyMember)->slot)) {
+        if (((g_Battle.flags & BATTLE_STATE_OVER) != 0) && (g_Battle.unk_EA[0] == TASK(PartyMember)->slot)) {
             g_Battle.flags &= ~BATTLE_STATE_OVER;
         }
         func_800AD074(g_BattleCurrentEnemy->enemy_id.byte.type);

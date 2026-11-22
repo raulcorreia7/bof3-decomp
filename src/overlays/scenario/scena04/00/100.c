@@ -313,8 +313,8 @@ MATCH void func_801F7B00(void) {
         shade    = 0x80;
         if (particle != NULL) {
             FIELD(s32, particle, 0x00) = D_80146954;
-            FIELD(s32, particle, 0x04) = D_80146958;
-            height                     = D_8014695C;
+            FIELD(s32, particle, 0x04) = g_Actors[1].pos.y.fixed;
+            height                     = g_Actors[1].pos.z.fixed;
             FIELD(s32, particle, 0x10) = 0;
             FIELD(s32, particle, 0x14) = 0;
             FIELD(s32, particle, 0x18) = 0;

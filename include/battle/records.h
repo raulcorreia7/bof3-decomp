@@ -1129,7 +1129,6 @@ extern PartyMember*  g_BattleSelectedActor;
 extern void*         D_80146390;
 extern s32           D_8014639C;
 extern u16           D_801463B2;
-extern u8            D_801463B9;
 /* FAKE: g_Battle.action_id as a global of its own; the sites that use it match only with a separate symbol. */
 extern volatile u16  g_BattleActionId;
 extern u16           D_801463C2;

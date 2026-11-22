@@ -93,7 +93,6 @@ extern volatile u8                  g_BattleUIState;
 /* Main-executable battle-selection cell consumed by the countdown arm. */
 extern u8                           g_BattleActionType_nv;
 extern u8                           D_801463B8[];
-extern u8                           D_801463CB;
 extern volatile BattleSelectionType D_801CA71C[];
 /* D_801EB0B0 */
 extern s8                           g_BattlePanelOffsets[];

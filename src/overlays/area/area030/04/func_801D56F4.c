@@ -5,7 +5,7 @@
 MATCH void func_801D56F4(void) {
     FishingState* record;
 
-    if ((D_80144288 != 0) || (D_80144281 != 0xE)) {
+    if ((g_SpawnedActors[6].unk_08 != 0) || (g_SpawnedActors[6].header.mode != 0xE)) {
         Actor_Clear();
         return;
     }

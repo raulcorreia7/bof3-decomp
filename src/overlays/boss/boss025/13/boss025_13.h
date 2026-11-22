@@ -45,7 +45,6 @@ void func_800C2680(void);
 
 extern u8  D_800C184C[];
 extern u8  D_800C32A8[];
-extern u8  D_80146329;
 extern u32 D_801463D0;
 extern u16 D_801EB6C4;
 extern u8  D_801EB724;

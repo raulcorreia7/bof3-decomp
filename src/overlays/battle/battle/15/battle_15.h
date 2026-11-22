@@ -474,7 +474,6 @@ extern u8                        g_BattleActiveBattler_nv;
 extern volatile u8               g_BattleTarget;
 extern u8                        g_BattleTarget_nv;
 extern u16                       D_801463B4;
-extern u8                        D_801463D6;
 /* D_801463D8 */
 /* D_80148570 */
 extern volatile u8               g_BattleChoicePanel[];

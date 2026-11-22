@@ -152,7 +152,6 @@ extern u8              D_80145FC7;
 extern u8              D_80145FC9;
 extern u8              D_80145FCC[];
 extern u8              D_801462F6[];
-extern u8              D_80146304; /* oscillation direction latch */
 extern u8              D_80146308; /* UI oscillator byte */
 extern u8              D_80146364[];
 extern u16             D_80146388;

@@ -31,10 +31,10 @@ MATCH u8 func_800A9304(u8 slot) {
     if (!(g_Battle.flags & BATTLE_STATE_OVER)) {
         return true;
     }
-    if (Battle_SlotIsBlocked(D_801463CB)) {
+    if (Battle_SlotIsBlocked(g_Battle.unk_EA[1])) {
         return true;
     }
-    if (D_801463CB == slot) {
+    if (g_Battle.unk_EA[1] == slot) {
         return true;
     }
     if (slot < BATTLE_PARTY_CHARACTERS_COUNT) {
@@ -48,7 +48,7 @@ MATCH u8 func_800A9304(u8 slot) {
             action = g_Abilities[ENEMY_COMBATANT(slot).turn.command.id].targeting_flags;
             if (action & ABILITY_TARGET_FLAG_ALL) {
                 if (!(action & ABILITY_TARGET_FLAG_BOTH_SIDES)) {
-                    if (D_801463CB >= BATTLE_PARTY_CHARACTERS_COUNT) {
+                    if (g_Battle.unk_EA[1] >= BATTLE_PARTY_CHARACTERS_COUNT) {
                         g_Battle.target_selector = 0x80;
                     } else {
                         g_Battle.target_selector = 0x40;
@@ -69,6 +69,6 @@ MATCH u8 func_800A9304(u8 slot) {
     return true;
 
 copy_selection:
-    g_Battle.target_selector = D_801463CB;
+    g_Battle.target_selector = g_Battle.unk_EA[1];
     return false;
 }

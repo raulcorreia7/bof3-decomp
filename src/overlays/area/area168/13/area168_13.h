@@ -19,7 +19,7 @@ enum {
 
 /* The shadow-quad renderer the step pairs call; func_801F4158 in the retail
  * symbol map. */
-void               func_801F4158_area168(s32 index, s8 code);
+void               func_801F4158_area168(s32 index, s32 row);
 /* The cell-code write, taking the three values as full words (this image passes the table words unnarrowed). */
 void               func_801A4BC0(s32 column, s32 row, s32 code);
 /* The scratchpad quad the shadow pass fills and the GTE reads. */

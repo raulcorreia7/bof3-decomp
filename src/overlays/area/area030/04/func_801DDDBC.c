@@ -6,9 +6,9 @@
 MATCH void func_801DDDBC(void) {
     Script_Request(9);
     SND_SEPlay(EMI_SE_ID(SND_BANK_AREA, 4));
-    D_80144125 = 7;
-    D_8014419E = 3;
-    D_80144199 += 1;
+    g_SpawnedActors[3].header.mode = 7;
+    g_SpawnedActors[4].unk_06      = 3;
+    g_SpawnedActors[4].header.mode += 1;
     TASK(FishingState)->sub_index += 1;
     Script_AnimStepLoop();
 }

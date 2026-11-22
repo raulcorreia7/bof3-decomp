@@ -43,6 +43,8 @@ extern u8   g_SaveSlotLevelFormat[];
 /* D_801D0D84 */
 extern u8   g_SaveSlotTimeFormat[];
 extern u8*  D_801D8744[4];
+/* The icon of each equipment slot. */
+extern u8   D_801D8754[];
 /* The item category of each equipment slot. */
 extern u8   D_801D875C[];
 extern u16  D_801D8ECC[];
@@ -153,11 +155,20 @@ void UI_ListDrawAbilityRow(s16 x, s16 y, u8 shade, u8 element, volatile Ability*
 /* func_801D73B4 */
 void Menu_DrawAbilityList(MenuListPanel* panel);
 
+/* func_801D165C */
+void func_801D165C(u16 panel_x, u16 panel_y, u8 category, u8 item_id);
+/* func_801D1AB8 */
+void func_801D1AB8(u16* base, u16* current, u16* trial, u8* change, u8* equipped, u8 swap, u8 slot);
+
 void func_801D2304(s32 x, s32 y);
 void func_801D259C(void);
 void func_801D31B0(s16 x, s16 y, u8 index, u8 flag);
 void func_801AE3F0(u16 x, u16 y, u16 width, u16 height, s32 frame_flags, u8 palette);
 
+/* The stat, empty and blank cell formats. */
+extern char D_801D0C04[];
+extern char D_801D0C0C[];
+extern char D_801D0C14[];
 extern char D_801D0C18[];
 extern char D_801D0C1C[];
 extern char D_801D0C24[];
