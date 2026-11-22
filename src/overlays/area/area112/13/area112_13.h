@@ -10,18 +10,18 @@
 extern u8 D_80144EF0[];
 
 /* The battle record rows whose first byte is the slot tag. */
-extern u8                  D_801F41F8[];
+extern u8 D_801F41F8[];
+
+/* The two cell depths of each depth row: [1] while the task step is 2, else [0]. */
+extern s8                  D_801F4240[][2];
+/* The first and end part of each part range func_801F3274 draws. */
+extern u8                  D_801F4250[][2];
+/* The four corner offsets (x, y, z) of each quad shape, in 128-unit steps. */
+extern s8                  D_801F4258[][4][3];
+extern AreaQuadPart        D_801F4294[];
 /* D_801F48FC */
 extern PartyMemberMessages g_PartyMemberMessages[1];
 extern u8                  D_801F493C[];
-
-/* The two cell depths of each depth row: [1] while the task step is 2, else [0]. */
-extern s8           D_801F4240[][2];
-/* The first and end part of each part range func_801F3274 draws. */
-extern u8           D_801F4250[][2];
-/* The four corner offsets (x, y, z) of each quad shape, in 128-unit steps. */
-extern s8           D_801F4258[][4][3];
-extern AreaQuadPart D_801F4294[];
 
 void func_801F2EA8(void);
 void func_801F3274(void);
