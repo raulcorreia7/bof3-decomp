@@ -74,6 +74,8 @@ extern u8       D_801FEA6C;
 extern u8       D_801FEA70;
 extern s32      D_801FEA74;
 extern s32      D_801FEA78;
+/* The party battle order the transition restores when it ends. */
+extern u8       D_801FEA7C[2];
 
 void func_801FE800(void);
 

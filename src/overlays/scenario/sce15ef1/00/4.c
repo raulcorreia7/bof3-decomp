@@ -492,8 +492,8 @@ MATCH void func_801D23A0(void) {
     if (!(mode & BYTE_MASK)) {
         setRECT(&rect, 832, 256, D_801D393C[D_801D40AC].w, D_801D393C[D_801D40AC].h);
         StoreImage(&rect, (u32*)AREA_WORK);
-        D_801D40B0         = AREA_WORK;
-        D_801D40B4         = AREA_WORK + 0x5A00;
+        D_801D40B0         = (u16*)AREA_WORK;
+        D_801D40B4         = (TrailDot*)(AREA_WORK + 0x5A00);
         D_801D40A8         = 0;
         TASK(Actor)->timer = 0;
         TASK(Actor)->header.mode++;
@@ -518,16 +518,16 @@ MATCH void func_801D2474(void) {
     Camera_ProjectPoint(pos, &screen);
     for (row = (D_801D393C[D_801D40AC].h >> 1) * TASK(Actor)->timer; row < (D_801D393C[D_801D40AC].h >> 1) * (TASK(Actor)->timer + 1); row++) {
         for (col = 0; col < D_801D393C[D_801D40AC].w; col++) {
-            if (*(u16*)D_801D40B0 != 0) {
-                dot        = (TrailDot*)D_801D40B4;
-                dot->color = *(u16*)D_801D40B0;
+            if (*D_801D40B0 != 0) {
+                dot        = D_801D40B4;
+                dot->color = *D_801D40B0;
                 dot->x     = screen.vx - D_801D393C[D_801D40AC].x + col;
-                D_801D40B4 = (u32)(dot + 1);
+                D_801D40B4 = dot + 1;
                 dot->y     = screen.vy - D_801D393C[D_801D40AC].y + row;
                 n          = D_801D40A8 + 1;
                 D_801D40A8 = n;
             }
-            D_801D40B0 += 2;
+            D_801D40B0++;
         }
     }
     step               = TASK(Actor)->timer + 1;
@@ -774,8 +774,8 @@ MATCH void func_801D2FD8(void) {
     if (!(mode & BYTE_MASK)) {
         setRECT(&rect, 832, 256, D_801D393C[D_801D40AC].w, D_801D393C[D_801D40AC].h);
         StoreImage(&rect, (u32*)AREA_WORK);
-        D_801D40B0         = AREA_WORK;
-        D_801D40B4         = AREA_WORK + 0x5A00;
+        D_801D40B0         = (u16*)AREA_WORK;
+        D_801D40B4         = (TrailDot*)(AREA_WORK + 0x5A00);
         D_801D40A8         = 0;
         TASK(Actor)->timer = 0;
         TASK(Actor)->header.mode++;
@@ -800,16 +800,16 @@ MATCH void func_801D30AC(void) {
     Camera_ProjectPoint(pos, &screen);
     for (row = (D_801D393C[D_801D40AC].h >> 1) * TASK(Actor)->timer; row < (D_801D393C[D_801D40AC].h >> 1) * (TASK(Actor)->timer + 1); row++) {
         for (col = 0; col < D_801D393C[D_801D40AC].w; col++) {
-            if (*(u16*)D_801D40B0 != 0) {
-                dot        = (TrailDot*)D_801D40B4;
-                dot->color = *(u16*)D_801D40B0;
+            if (*D_801D40B0 != 0) {
+                dot        = D_801D40B4;
+                dot->color = *D_801D40B0;
                 dot->x     = screen.vx - D_801D393C[D_801D40AC].x + col;
-                D_801D40B4 = (u32)(dot + 1);
+                D_801D40B4 = dot + 1;
                 dot->y     = screen.vy - D_801D393C[D_801D40AC].y + row;
                 n          = D_801D40A8 + 1;
                 D_801D40A8 = n;
             }
-            D_801D40B0 += 2;
+            D_801D40B0++;
         }
     }
     step               = TASK(Actor)->timer + 1;

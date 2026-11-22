@@ -7,8 +7,6 @@
 __asm__(".include \"include/match/macro.inc\"\n");
 #endif
 
-extern u8 D_801FEA7C[2];
-
 /* Scene 08 step script: the balcony scene, the party transition and the return to the world map. */
 MATCH void func_801FC45C(void) {
     u8 slot;
