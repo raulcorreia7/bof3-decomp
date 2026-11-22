@@ -20,7 +20,7 @@ MATCH void func_801FAE04(void) {
                         case CHAR_ID_PECO:
                         case CHAR_ID_RYU_ADULT:
                             UI_MessageStartArea(0x19);
-                            g_GameStateIndex        = 2;
+                            g_GameStateIndex     = 2;
                             g_ScenarioState.step = 1;
                             break;
                         case CHAR_ID_TEEPO:
@@ -28,7 +28,7 @@ MATCH void func_801FAE04(void) {
                         case CHAR_ID_MOMO:
                         case CHAR_ID_NINA_ADULT:
                             UI_MessageStartArea(0x1A);
-                            g_GameStateIndex        = 2;
+                            g_GameStateIndex     = 2;
                             g_ScenarioState.step = 0xA;
                             break;
                     }
@@ -40,7 +40,7 @@ MATCH void func_801FAE04(void) {
                         case CHAR_ID_PECO:
                         case CHAR_ID_RYU_ADULT:
                             UI_MessageStartArea(0x18);
-                            g_GameStateIndex        = 2;
+                            g_GameStateIndex     = 2;
                             g_ScenarioState.step = 0xA;
                             break;
                         case CHAR_ID_TEEPO:
@@ -48,7 +48,7 @@ MATCH void func_801FAE04(void) {
                         case CHAR_ID_MOMO:
                         case CHAR_ID_NINA_ADULT:
                             UI_MessageStartArea(0x19);
-                            g_GameStateIndex        = 2;
+                            g_GameStateIndex     = 2;
                             g_ScenarioState.step = 1;
                             break;
                     }
@@ -60,7 +60,7 @@ MATCH void func_801FAE04(void) {
                 break;
             }
             if (g_ScriptVars[0] == 0xA) {
-                g_ScriptVars[0]         = 0;
+                g_ScriptVars[0]      = 0;
                 g_ScenarioState.step = 2;
                 UI_ModeSet(0xD);
                 func_801C16B8();
@@ -72,7 +72,7 @@ MATCH void func_801FAE04(void) {
             }
             Game_ClearScriptActive();
             g_ScriptVars[0]          = 0;
-            g_ScenarioState.step  = 0;
+            g_ScenarioState.step     = 0;
             g_ScenarioState.state_04 = 0;
             break;
         case 2:
@@ -89,7 +89,7 @@ MATCH void func_801FAE04(void) {
             break;
         case 4:
             UI_ModeSet(0xE);
-            g_AreaDrawFlags         = 0x1F;
+            g_AreaDrawFlags      = 0x1F;
             g_ScenarioState.step = 5;
             break;
         case 5:
@@ -98,7 +98,7 @@ MATCH void func_801FAE04(void) {
             }
             SND_BGMPlay(0x8B, 100, 8);
             Game_ClearScriptActive();
-            g_ScenarioState.step  = 0;
+            g_ScenarioState.step     = 0;
             g_ScenarioState.state_04 = 0;
             break;
         case 10:
@@ -107,7 +107,7 @@ MATCH void func_801FAE04(void) {
             }
             Game_ClearScriptActive();
             g_ScriptVars[0]          = 0;
-            g_ScenarioState.step  = 0;
+            g_ScenarioState.step     = 0;
             g_ScenarioState.state_04 = 0;
             break;
         case 20:
@@ -253,7 +253,7 @@ MATCH void func_801FAE04(void) {
             g_ScriptVars[1]          = 0;
             g_ScriptVars[2]          = 0;
             g_ScriptVars[3]          = 0;
-            g_ScenarioState.step  = 0;
+            g_ScenarioState.step     = 0;
             g_ScenarioState.state_04 = 0;
             break;
         case 30: {
@@ -264,7 +264,7 @@ MATCH void func_801FAE04(void) {
             }
             g_ScriptVars[0] = 1;
             UI_MessageStartArea(0x20);
-            *state                  = 2;
+            *state               = 2;
             g_ScenarioState.step = 0x1F;
             break;
         }
@@ -272,7 +272,7 @@ MATCH void func_801FAE04(void) {
             if (g_GameStateIndex != 0) {
                 break;
             }
-            g_ScriptVars[0]         = 2;
+            g_ScriptVars[0]      = 2;
             g_ScenarioState.step = 0x20;
             break;
         case 32: {
@@ -286,7 +286,7 @@ MATCH void func_801FAE04(void) {
             g_ScriptVars[1]          = 0;
             g_ScriptVars[2]          = 0;
             g_ScriptVars[3]          = 0;
-            g_ScenarioState.step  = 0;
+            g_ScenarioState.step     = 0;
             g_ScenarioState.state_04 = 0;
             break;
         }
