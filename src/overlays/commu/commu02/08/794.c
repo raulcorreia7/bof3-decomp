@@ -2310,19 +2310,15 @@ NON_MATCHING void func_801D90D8(s32 x, s32 y, s32 character, s32 frame_mode) {
     s32 index;
     s32 x_copy;
     s32 y_copy;
-    u16 window_top;
     u8* window_style;
     u8* text;
 
     window_style = &g_WindowStyle;
-    window_top   = (u16)(y + 3);
-    UI_WindowDraw((u16)(x + 3), window_top, 0x7D, 0x2D, 0, *window_style);
-    character = (u8)character;
-    index     = ((((character << 2) + character) << 3) + character) << 2;
+    UI_WindowDraw((u16)(x + 3), (u16)(y + 3), 0x7D, 0x2D, 0, *window_style);
+    index = (((((u8)character << 2) + (u8)character) << 3) + (u8)character) << 2;
     Menu_DrawPortrait((u16)(x + 6), (u16)(y + 2), ((Character*)((u8*)g_Characters + index))->character_id, 0);
-    x_copy     = x;
-    y_copy     = y;
-    frame_mode = (u8)frame_mode;
+    x_copy = x;
+    y_copy = y;
     if ((u8)frame_mode == 0) {
         text = window_style + 0x16 + index;
     } else {

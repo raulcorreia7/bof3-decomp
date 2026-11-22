@@ -1,7 +1,6 @@
 #include "area041_13.h"
 
-#ifdef NON_MATCHING
-NON_MATCHING void func_801F34AC(void) {
+MATCH void func_801F34AC(void) {
     POLY_FT4* prim;
     SVECTOR*  quad;
     u16*      sxy;
@@ -25,9 +24,9 @@ NON_MATCHING void func_801F34AC(void) {
                   TASK(Actor)->pos.y.fixed + D_801F4344[i + 1] * 0x80 + (s8)D_801F4354[i + 1] * TASK(Actor)->timer * 8, COORD_INT(TASK(Actor)->pos.z));
         RotTransPers(quad, (long*)sxy, &p, &flag);
         prim->x0 = prim->x2 = sxy[0] - TASK(Actor)->timer;
-        prim->y0 = prim->y1 = SP_REF(u16, 0x36) - TASK(Actor)->timer;
+        prim->y0 = prim->y1 = SPAD(0)->unk_34[1] - TASK(Actor)->timer;
         prim->x1 = prim->x3 = sxy[0] + TASK(Actor)->timer;
-        prim->y2 = prim->y3 = SP_REF(u16, 0x36) + TASK(Actor)->timer;
+        prim->y2 = prim->y3 = SPAD(0)->unk_34[1] + TASK(Actor)->timer;
         Area_ApplyTileToQuad(((0xD - TASK(Actor)->timer) << 19) + ((0xBA00u << 16) | 0x9124u), prim, 1);
         Area_CellAddPrim((TASK(Actor)->pos.x.fixed + AREA_CELL_ORIGIN) << 9, (TASK(Actor)->pos.y.fixed + AREA_CELL_ORIGIN) << 9, 6, sizeof(POLY_FT4));
     }
@@ -37,6 +36,3 @@ NON_MATCHING void func_801F34AC(void) {
         TASK(Actor)->header.step += 1;
     }
 }
-#else
-INCLUDE_ASM(func_801F34AC);
-#endif
