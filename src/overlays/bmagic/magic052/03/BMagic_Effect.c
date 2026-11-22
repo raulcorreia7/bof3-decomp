@@ -93,7 +93,7 @@ MATCH void func_801EEF84(void) {
     } else {
         cue = 0x102;
     }
-    SND_QueueSelectionSE(cue);
+    SND_SEQueueSelection(cue);
     Script_Select(5U);
     g_Task->header.step += 1;
 }

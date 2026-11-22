@@ -13,7 +13,7 @@ MATCH void func_801F3600(void) {
             if (masked_step == 0) {
                 /* FAKE: the best unpinned form differs in two instructions; retail passes zero in a0. */
                 FAKE_REG(s32, sound_arg, "a0") = 0;
-                SND_PlaySE(sound_arg);
+                SND_SEPlay(sound_arg);
             }
             func_801F36B4();
             if (g_ScriptVars[0] >= 4) {

@@ -4,7 +4,7 @@ g_BattleEffectPalette = { addr = 0x8003AC00, type = "u16", size = 0x200, alias =
 Battle_MarkDamaged = { addr = 0x800A9820, type = "func", source = "Marks the selected battlers as damaged." }
 Battle_ProjectRange = { addr = 0x800AF764, type = "func", source = "Projects the battle range to the screen." }
 Battle_CenterCamera = { addr = 0x800AFD9C, type = "func", source = "Centres the battle camera on the living battlers." }
-SND_QueueSelectionSE = { addr = 0x8015D71C, alias = true, source = "Marks the four effect voice slots free and queues the SE through SND_PlaySE." }
+SND_SEQueueSelection = { addr = 0x8015D71C, alias = true, source = "Marks the four effect voice slots free and queues the SE through SND_SEPlay." }
 Battle_AllocEffect = { addr = 0x801E590C, alias = true, source = "Claims a free battle effect slot." }
 Effect_Reset = { addr = 0x801E5988, type = "func", source = "Clears every timer, state and flag byte of the shared BattleEffect work record; every effect countdown calls it first. battle/03 owns the body." }
 g_BattleEffectBattler = { addr = 0x801EB4E0, source = "the battler the running effect acts on; Battle_UpdateEffects stores it for each effect step (emi/battle/battle/03 owns the cell)" }

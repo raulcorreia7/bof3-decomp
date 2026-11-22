@@ -10,7 +10,7 @@ MATCH u8 Menu_ChooseYesNo(void) {
     UI_CursorDraw((u16)(((0x1F - (*flag * 4)) * 8) + 0x1B), 0x18, 0);
     pad = g_PadStates[0].pressed;
     if (pad & g_InputMasks[MENU_INPUT_CANCEL]) {
-        SND_PlaySE(EMI_SE_ID(SND_BANK_COMMON, 6));
+        SND_SEPlay(EMI_SE_ID(SND_BANK_COMMON, 6));
         *flag = 0;
         return true;
     }
@@ -19,11 +19,11 @@ MATCH u8 Menu_ChooseYesNo(void) {
         if (*flag != 0) {
             confirm = 0x104;
         }
-        SND_PlaySE(confirm);
+        SND_SEPlay(confirm);
         return true;
     }
     if (pad & (PADLright | PADLleft)) {
-        SND_PlaySE(EMI_SE_ID(SND_BANK_COMMON, 1));
+        SND_SEPlay(EMI_SE_ID(SND_BANK_COMMON, 1));
         *flag = (u8)*flag ^ 1;
     }
     return false;

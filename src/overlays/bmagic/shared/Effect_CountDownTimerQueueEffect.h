@@ -6,7 +6,7 @@ MATCH void Effect_CountDownTimerQueueEffect(void) {
     work         = g_Task;
     work->unk_09 = work->unk_09 - 1;
     if (work->unk_09 == 0) {
-        SND_QueueSelectionSE(0x100);
+        SND_SEQueueSelection(0x100);
         g_Task->header.mode = g_Task->header.mode + 1;
     }
 }

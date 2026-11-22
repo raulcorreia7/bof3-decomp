@@ -32,7 +32,7 @@ MATCH void func_801E10C8(void) {
         work                               = g_Task;
         g_BattleEffects[slot].target.party = owner;
         Script_Select((work->facing + 4) & BYTE_MASK);
-        SND_QueueSelectionSE(0x206);
+        SND_SEQueueSelection(0x206);
         if (g_Battle.outcome.event_flags == 0) {
             Battle_OpenPanel();
             cue = 0x3B;

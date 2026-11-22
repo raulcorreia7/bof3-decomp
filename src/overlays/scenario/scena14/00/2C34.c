@@ -144,7 +144,7 @@ NON_MATCHING void func_801F9834(void) {
             if (*progress != 2) {
                 break;
             }
-            SND_PlaySE(0x20C);
+            SND_SEPlay(0x20C);
             *progress               = 0;
             g_ScriptVars[2]         = 4;
             g_ScriptVars[1]         = 6;
@@ -235,7 +235,7 @@ NON_MATCHING void func_801F9834(void) {
             if (g_ScriptVars[0] != 4) {
                 break;
             }
-            SND_FadeOutSequence(0, 1, 4, 0x1E);
+            SND_SeqFadeOut(0, 1, 4, 0x1E);
             UI_ModeSet(0xD);
             g_ScenarioState.step_05 = 0x14;
             break;
@@ -443,8 +443,8 @@ MATCH s32 func_801FB84C(s32 x, s32 y) {
         }
         if (g_GameCellType == 3 && !SYS_TestFlag(g_SceneFlags, 31) && x < TO_COORD_HALF(44) && (u32)((y >> 16) - 0x26) < 4) {
             Game_SetScriptActive();
-            SND_StopSequence(0, 0);
-            SND_RequestBGM(0x9F);
+            SND_SeqStop(0, 0);
+            SND_BGMRequest(0x9F);
             g_ScenarioState.state_04 = 7;
             g_ScenarioState.step_05  = 10;
         }

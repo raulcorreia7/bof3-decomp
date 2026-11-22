@@ -54,18 +54,18 @@ MATCH void func_801FBC6C(void) {
                 g_AreaDrawFlags = 0;
                 func_801C16B8();
                 g_ScenarioState.step_05 = 21;
-                SND_PauseBGM(0x21);
+                SND_BGMPause(0x21);
             }
             break;
 
         case 21:
-            SND_StartXAStream(0, 1);
+            SND_XAStartStream(0, 1);
             g_ScenarioState.step_05 = 22;
             break;
 
         case 22:
-            if (SND_IsXAIdle()) {
-                SND_ResumeBGM(0x21);
+            if (SND_XAIsIdle()) {
+                SND_BGMResume(0x21);
                 g_ScenarioState.step_05 = 23;
             }
             break;

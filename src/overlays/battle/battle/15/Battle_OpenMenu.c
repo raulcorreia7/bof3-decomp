@@ -28,7 +28,7 @@ MATCH void Battle_OpenMenu(void) {
     UI_PanelOpenTask(menu_id, 5);
     D_80148596 = 1;
     D_80148597 = 0;
-    SND_PlaySE(EMI_SE_ID(SND_BANK_COMMON, 2));
+    SND_SEPlay(EMI_SE_ID(SND_BANK_COMMON, 2));
     row   = 0;
     flags = D_800B7070;
     mask  = &D_80145548;

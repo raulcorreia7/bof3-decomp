@@ -13,12 +13,12 @@ MATCH void func_800AB834(void) {
     row     = LOBU(g_Battle.flags) >> 7;
     battler = LOBU(g_Battle.active_battler);
     if (BATTLER_IS_PLAYER(battler)) {
-        SND_PlaySE(D_800B50EC[LOBU(g_Battle.flags) >> 7][D_801C90ED[g_Game.members[battler].chr.equip.weapon * 0x18]]);
+        SND_SEPlay(D_800B50EC[LOBU(g_Battle.flags) >> 7][D_801C90ED[g_Game.members[battler].chr.equip.weapon * 0x18]]);
     } else {
         /* FAKE: the out-of-range all-ones mask is an identity, but its overflow flag
          * stops fold from distributing (battler - 3) * 0x118, so the index is
          * subtracted before the multiply as in retail; found by trying rewrites; pure-C
          * best 94.55% (slot local), plain spelling 67.27%. */
-        SND_PlaySE(D_800B50EC[row][ENEMY_COMBATANT(battler).unk_F1]);
+        SND_SEPlay(D_800B50EC[row][ENEMY_COMBATANT(battler).unk_F1]);
     }
 }

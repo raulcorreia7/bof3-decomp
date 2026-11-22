@@ -29,7 +29,7 @@ MATCH void func_801FAA68(void) {
         case 5:
             g_ScenarioState.step_05 = 6;
             g_GameFlags |= GAME_FLAG_SCROLL_LOCK;
-            SND_StopSequence(0, 0);
+            SND_SeqStop(0, 0);
             g_ScriptVars[2] = 1;
             Game_RequestAreaChange(AREA_ID_FARM, TO_COORD(6), TO_COORD(84), AREA_ENTRY_MAP_LOADING | FACING_RIGHT);
             break;
@@ -48,7 +48,7 @@ MATCH void func_801FAA68(void) {
             break;
         case 7:
             if (g_GameCellType == 0) {
-                SND_PlayBGM(16, BGM_CUE_LEVEL_DEFAULT, BGM_CUE_SHAPE_DEFAULT);
+                SND_BGMPlay(16, BGM_CUE_LEVEL_DEFAULT, BGM_CUE_SHAPE_DEFAULT);
                 g_ScriptVars[0] = 0;
                 SCENARIO_RETURN_TO_START();
             }

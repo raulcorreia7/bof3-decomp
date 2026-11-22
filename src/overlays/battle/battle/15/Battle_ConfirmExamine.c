@@ -4,7 +4,7 @@
 MATCH void Battle_ConfirmExamine(void) {
     u8 counter;
 
-    SND_PlaySE(EMI_SE_ID(SND_BANK_COMMON, 4));
+    SND_SEPlay(EMI_SE_ID(SND_BANK_COMMON, 4));
     g_Battle.selection_latch        = 0;
     g_BattleActorTurn->command.type = 0;
     g_BattleActorTurn->damage_flags.value |= BATTLER_DAMAGE_COMMAND_ENTERED;

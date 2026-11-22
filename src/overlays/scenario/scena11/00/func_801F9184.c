@@ -176,7 +176,7 @@ MATCH void func_801F9184(void) {
         case 14: {
             u8 object_index;
 
-            SND_PlaySE(0x200);
+            SND_SEPlay(0x200);
             Area_StartScrollRoute(1);
             g_AreaCameraRefreshCount = 2;
             g_AreaCameraOffsetZHalf -= 0x780;
@@ -355,7 +355,7 @@ MATCH void func_801F9184(void) {
             g_AreaDrawFlags         = 0;
             g_ScenarioState.step_05 = 0x1D;
             SYS_SetFlag(g_SceneFlags, 0xF);
-            SND_PlaySE(0x201);
+            SND_SEPlay(0x201);
             Game_RequestAreaChange(0x84, 0x50000, 0x460000, 0x84);
             break;
         }

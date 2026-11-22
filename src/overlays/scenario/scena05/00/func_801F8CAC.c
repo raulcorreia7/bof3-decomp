@@ -19,22 +19,22 @@ MATCH void func_801F8CAC(void) {
                 g_AreaDrawFlags = 0;
                 func_801C16B8();
                 g_ScenarioState.step_05 = 2;
-                SND_FadeOutSequence(0, 0, 4, 0x1E);
+                SND_SeqFadeOut(0, 0, 4, 0x1E);
             }
             break;
         case 2:
-            SND_StartXAStream(0, 1);
+            SND_XAStartStream(0, 1);
             g_ScenarioState.step_05 = 3;
             break;
         case 3:
-            if (SND_IsXAIdle()) {
+            if (SND_XAIsIdle()) {
                 g_ScenarioState.step_05 = 4;
             }
             break;
         case 4:
             g_ScenarioState.step_05 = 5;
             Game_RequestAreaChange(AREA_ID_PLANT, TO_COORD(0x44), TO_COORD(0x21), 0x80);
-            SND_PlayBGM(0x10, 0x64, 8);
+            SND_BGMPlay(0x10, 0x64, 8);
             break;
         case 5:
             g_ScenarioState.step_05 = 6;

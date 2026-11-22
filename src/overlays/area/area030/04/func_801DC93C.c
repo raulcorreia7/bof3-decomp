@@ -17,14 +17,14 @@ NON_MATCHING void func_801DC93C(void) {
 
     pad = INPUT_REPEATED(g_PadStates[0].pressed, (PADLright | PADLleft));
     if (pad & PADLleft) {
-        SND_PlaySE(EMI_SE_ID(SND_BANK_COMMON, 0));
+        SND_SEPlay(EMI_SE_ID(SND_BANK_COMMON, 0));
         cursor     = D_80144286 - 1;
         D_80144286 = cursor;
         if (cursor & 0x80) {
             D_80144286 = 2;
         }
     } else if (pad & PADLright) {
-        SND_PlaySE(EMI_SE_ID(SND_BANK_COMMON, 0));
+        SND_SEPlay(EMI_SE_ID(SND_BANK_COMMON, 0));
         next       = D_80144286 + 1;
         D_80144286 = next;
         if ((u32)(next & BYTE_MASK) >= 3U) {
@@ -32,8 +32,8 @@ NON_MATCHING void func_801DC93C(void) {
         }
     } else {
         if (g_InputMasks[FISHING_INPUT_CANCEL] & g_PadStates[0].pressed) {
-            SND_FadeInSequence(0, 0, 0x14, 0x10);
-            SND_PlaySE(EMI_SE_ID(SND_BANK_COMMON, 6));
+            SND_SeqFadeIn(0, 0, 0x14, 0x10);
+            SND_SEPlay(EMI_SE_ID(SND_BANK_COMMON, 6));
             new_cmd = 5;
             if (((u32)(D_80144281 - 3) < 2U) || (cmd = D_80144281 & BYTE_MASK, new_cmd = 0xB, (cmd == 8)) || (new_cmd = 0xF, (cmd == 0xE))) {
                 D_80144281 = new_cmd;
@@ -43,11 +43,11 @@ NON_MATCHING void func_801DC93C(void) {
             goto block_28; /* shared selection join */
         }
         if (g_InputMasks[FISHING_INPUT_CAST] & g_PadStates[0].pressed) {
-            SND_PlaySE(EMI_SE_ID(SND_BANK_COMMON, 3));
+            SND_SEPlay(EMI_SE_ID(SND_BANK_COMMON, 3));
             if (D_80144286 == 0) {
                 if (D_80144281 != 8) {
                     if (D_80144281 == 0xE) {
-                        SND_PlaySE(EMI_SE_ID(SND_BANK_COMMON, 2));
+                        SND_SEPlay(EMI_SE_ID(SND_BANK_COMMON, 2));
                         target_cmd = 0xF;
                         goto block_26; /* shared selection join */
                     }
@@ -56,24 +56,24 @@ NON_MATCHING void func_801DC93C(void) {
                 }
             } else if (D_80144286 == 1) {
                 if ((u32)(D_80144281 - 3) < 2U) {
-                    SND_PlaySE(EMI_SE_ID(SND_BANK_COMMON, 2));
+                    SND_SEPlay(EMI_SE_ID(SND_BANK_COMMON, 2));
                     target_cmd = 5;
                     goto block_26; /* shared selection join */
                 }
                 if ((D_80144281 & BYTE_MASK) == 0xE) {
-                    SND_PlaySE(EMI_SE_ID(SND_BANK_COMMON, 2));
+                    SND_SEPlay(EMI_SE_ID(SND_BANK_COMMON, 2));
                     target_cmd = 0xF;
                     goto block_26; /* shared selection join */
                 }
             } else {
                 if ((u32)(D_80144281 - 3) < 2U) {
-                    SND_PlaySE(EMI_SE_ID(SND_BANK_COMMON, 2));
+                    SND_SEPlay(EMI_SE_ID(SND_BANK_COMMON, 2));
                     target_cmd = 5;
                     goto block_26; /* shared selection join */
                 }
                 if ((D_80144281 & BYTE_MASK) == 8) {
                 block_25:
-                    SND_PlaySE(EMI_SE_ID(SND_BANK_COMMON, 2));
+                    SND_SEPlay(EMI_SE_ID(SND_BANK_COMMON, 2));
                     target_cmd = 0xB;
                 block_26:
                     D_80144281 = target_cmd;

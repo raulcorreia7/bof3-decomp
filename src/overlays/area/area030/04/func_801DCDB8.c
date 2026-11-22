@@ -14,7 +14,7 @@ MATCH void func_801DCDB8(void) {
     pad       = *pad_state;
 
     if (pad & g_InputMasks[FISHING_INPUT_CANCEL]) {
-        SND_PlaySE(EMI_SE_ID(SND_BANK_COMMON, 6));
+        SND_SEPlay(EMI_SE_ID(SND_BANK_COMMON, 6));
         D_801442AC = 0xFFFF;
         /* FAKE: volatile access gives retail's register-address RMW; plain u8 pointer stayed at 76.5%. */
         *FAKE_VOLATILE_PTR(u8, &D_80144287) |= 0x80;
@@ -23,12 +23,12 @@ MATCH void func_801DCDB8(void) {
         return;
     }
     if (pad & g_InputMasks[FISHING_INPUT_CAST]) {
-        SND_PlaySE(EMI_SE_ID(SND_BANK_COMMON, 3));
+        SND_SEPlay(EMI_SE_ID(SND_BANK_COMMON, 3));
         /* FAKE: volatile access gives retail's register-address RMW; plain u8 pointer stayed at 76.5%. */
         *FAKE_VOLATILE_PTR(u8, &D_80144287) |= 2;
         FISHING_STATE->flag_04 += 1;
     } else if (input & (PADLup | PADLdown)) {
-        SND_PlaySE(EMI_SE_ID(SND_BANK_COMMON, 0));
+        SND_SEPlay(EMI_SE_ID(SND_BANK_COMMON, 0));
         /* FAKE: volatile access gives retail's register-address RMW; plain u8 pointer stayed at 76.5%. */
         *FAKE_VOLATILE_PTR(u8, &D_80144287) ^= 1;
         D_80144281 ^= 7;

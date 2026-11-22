@@ -17,7 +17,7 @@ MATCH void func_801F3C9C(void) {
     }
     SYS_ClearFlag(g_SceneEventFlags, g_Task->direction);
     if (g_GameStateIndex == GAME_REQUEST_IDLE) {
-        SND_PlaySE(EMI_SE_ID(SND_BANK_AREA, 0));
+        SND_SEPlay(EMI_SE_ID(SND_BANK_AREA, 0));
     }
     g_Task->header.step++;
     func_801F3FBC(0, 1);

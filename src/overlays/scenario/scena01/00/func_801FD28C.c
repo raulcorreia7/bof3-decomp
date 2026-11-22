@@ -204,7 +204,7 @@ MATCH s32 Scenario_TryStartPositionEvent(s32 x, s32 y) {
         if (SYS_TestFlag(g_SceneFlags, 6) == 0) {
             if (x == TO_COORD_HALF(84) && (u32)((y >> 16) - 28) < 2U) {
                 Game_SetScriptActive();
-                SND_PlaySE(0x202);
+                SND_SEPlay(0x202);
                 g_ScenarioState.state_04 = 21;
                 return 1;
             }

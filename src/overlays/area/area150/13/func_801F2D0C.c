@@ -43,14 +43,14 @@ MATCH void func_801F2D0C(void) {
         case 21:
             if (g_GameStateIndex != GAME_REQUEST_MESSAGE) {
                 Char_RebuildPartyStats();
-                SND_StartXAStream(0, 1);
+                SND_XAStartStream(0, 1);
                 g_SceneEventState.step = 22;
             }
             break;
         case 22:
-            if (SND_IsXAIdle() & BYTE_MASK) {
+            if (SND_XAIsIdle() & BYTE_MASK) {
                 g_ScriptVars[0] = 1;
-                SND_StartBGM(0x95, 100, 0x10);
+                SND_BGMStart(0x95, 100, 0x10);
                 UI_ModeSet(UI_MODE_FADE_IN);
                 g_AreaDrawFlags = AREA_DRAW_ALL_FLAGS;
                 SYS_ClearFlag(D_80144EF8, 3);

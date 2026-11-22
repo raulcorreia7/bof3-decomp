@@ -45,7 +45,7 @@ MATCH void func_801E5C68(void) {
     /* The retail code reaches the countdown byte through its address. */
     if ((g_PadStates[0].pressed & g_InputMasks[MENU_INPUT_CONFIRM]) != 0 || (g_MenuStartReturnStep == 0xF && --*(timer = &D_80148654) == 0)) {
         if (g_MenuStartReturnStep != 0xF) {
-            SND_PlaySE(EMI_SE_ID(SND_BANK_COMMON, 4));
+            SND_SEPlay(EMI_SE_ID(SND_BANK_COMMON, 4));
         }
         g_GameEntrySubstate = step;
         g_MenuStartStep     = g_MenuStartReturnStep;

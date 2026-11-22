@@ -14,7 +14,7 @@ MATCH void Fishing_CastInput(void) {
 
     if ((g_PadStates[0].pressed & g_InputMasks[FISHING_INPUT_CAST]) != 0) {
         D_801440C8 = 0;
-        SND_PlaySE(EMI_SE_ID(SND_BANK_AREA, 0));
+        SND_SEPlay(EMI_SE_ID(SND_BANK_AREA, 0));
         D_801E31FC = 0xFF;
         D_801E31F8 = 0xFF;
         Script_Request(2);

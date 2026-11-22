@@ -49,7 +49,7 @@ MATCH void func_801EED30(void) {
     g_BattleEffects[slot & BYTE_MASK].target.party = g_Task;
     g_BattleEffects[slot & BYTE_MASK].header.mode  = 0;
     g_Task->param.unk_0B += 1;
-    SND_QueueSelectionSE(0x100);
+    SND_SEQueueSelection(0x100);
 }
 
 MATCH void func_801EEE78(void) {

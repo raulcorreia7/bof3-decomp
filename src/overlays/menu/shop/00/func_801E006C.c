@@ -17,14 +17,14 @@ MATCH void func_801E006C(void) {
     }
     input = INPUT_REPEATED(g_PadStates[0].pressed, INPUT_DIRECTIONAL);
     if (input & PADLleft) {
-        SND_PlaySE(EMI_SE_ID(SND_BANK_COMMON, 1));
+        SND_SEPlay(EMI_SE_ID(SND_BANK_COMMON, 1));
         D_801483A9 = 0x32;
         D_801E625C = D_801E625C - 1;
         if (((s8)D_801E625C) < 0) {
             D_801E625C = D_801E6258 - 1;
         }
     } else if (input & PADLright) {
-        SND_PlaySE(EMI_SE_ID(SND_BANK_COMMON, 1));
+        SND_SEPlay(EMI_SE_ID(SND_BANK_COMMON, 1));
         D_801483A9 = 0x31;
         D_801E625C += 1;
         if ((D_801E625C) > (D_801E6258 - 1)) {
@@ -34,8 +34,8 @@ MATCH void func_801E006C(void) {
     D_80148382 = D_801E6264[D_801E625C];
     D_801483A6 = D_801E6264[D_801E625C];
     if (g_PadStates[0].pressed & g_InputMasks[MENU_INPUT_CONFIRM]) {
-        SND_PlaySE(EMI_SE_ID(SND_BANK_COMMON, 3));
-        SND_PlaySE(EMI_SE_ID(SND_BANK_COMMON, 2));
+        SND_SEPlay(EMI_SE_ID(SND_BANK_COMMON, 3));
+        SND_SEPlay(EMI_SE_ID(SND_BANK_COMMON, 2));
         input                = 1;
         D_8014839F           = 3;
         D_801483C1           = 7;
@@ -55,7 +55,7 @@ MATCH void func_801E006C(void) {
         return;
     }
     if (g_PadStates[0].pressed & g_InputMasks[MENU_INPUT_CANCEL]) {
-        SND_PlaySE(EMI_SE_ID(SND_BANK_COMMON, 6));
+        SND_SEPlay(EMI_SE_ID(SND_BANK_COMMON, 6));
         D_8014837B = 1;
         D_8014839F = 1;
         (*((s8*)(&g_MenuStep.sub_step)))--;

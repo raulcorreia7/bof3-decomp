@@ -85,7 +85,7 @@ MATCH void func_801E3C14(void) {
         }
     }
     if (g_BattleCurrentEnemy->turn.hp_change < 0 || g_BattleCurrentEnemy->turn.ap_change < 0) {
-        SND_PlaySE(EMI_SE_ID(SND_BANK_AREA, 6));
+        SND_SEPlay(EMI_SE_ID(SND_BANK_AREA, 6));
     }
     if (!(g_Battle.flags & BATTLE_STATE_DAMAGE_APPLIED)) {
         action_type = g_BattleActionType_nv;

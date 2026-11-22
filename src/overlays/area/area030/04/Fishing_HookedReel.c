@@ -24,9 +24,9 @@ MATCH void Fishing_HookedReel(void) {
         g_SpawnedActors[0].header.mode                                  = 0;
         D_8014420D                                                      = 0;
         D_80146889[g_FishingHookedFish * sizeof(FishingSelectionState)] = 6;
-        SND_PlaySE(EMI_SE_ID(SND_BANK_AREA, 3));
-        SND_StopSequence(0, 1);
-        SND_PlayBGM(0x2A, 0x64, 8);
+        SND_SEPlay(EMI_SE_ID(SND_BANK_AREA, 3));
+        SND_SeqStop(0, 1);
+        SND_BGMPlay(0x2A, 0x64, 8);
         Script_Request(0xA);
         FISHING_STATE->sub_index = 3;
         return;

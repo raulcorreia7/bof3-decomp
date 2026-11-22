@@ -60,11 +60,11 @@ MATCH void func_801D4564(void) {
     s_ChoiceMenuCursors[panel->group] = panel->group_cursor;
     s_ChoiceMenuValues[panel->group]  = panel->group_first;
     if (cursor != panel->group_cursor) {
-        SND_PlaySE(EMI_SE_ID(SND_BANK_COMMON, 0));
+        SND_SEPlay(EMI_SE_ID(SND_BANK_COMMON, 0));
     }
     if (panel->confirm_timer == 0) {
         if (g_PadStates[0].pressed & g_InputMasks[MENU_INPUT_CANCEL]) {
-            SND_PlaySE(EMI_SE_ID(SND_BANK_COMMON, 6));
+            SND_SEPlay(EMI_SE_ID(SND_BANK_COMMON, 6));
             state_counter       = &D_80148651;
             panel->group        = 0;
             panel->group_cursor = 0xFF;

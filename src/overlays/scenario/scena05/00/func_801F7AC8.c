@@ -89,7 +89,7 @@ MATCH void func_801F7AC8(void) {
     if (g_GameAreaId == AREA_ID_EYGNOCK_ROAD) {
         if (g_ScriptVars[2] == 0) {
             if (!SYS_TestFlag(g_SceneFlags, 0x10)) {
-                SND_RequestBGM(1);
+                SND_BGMRequest(1);
                 while (!EMI_IsReady()) {
                     SYS_ThreadWait(1);
                 }
@@ -103,11 +103,11 @@ MATCH void func_801F7AC8(void) {
         switch (g_ScriptVars[2]) {
             case 0:
                 if (!SYS_TestFlag(g_SceneFlags, 0x18)) {
-                    SND_RequestBGM(0x4A);
+                    SND_BGMRequest(0x4A);
                     while (!EMI_IsReady()) {
                         SYS_ThreadWait(1);
                     }
-                    SND_PlayBGM(0x4B, 0x64, 8);
+                    SND_BGMPlay(0x4B, 0x64, 8);
                     g_ScenarioState.state_04 = 0xA;
                     g_ScenarioState.step_05  = 0;
                     SCRIPT_VARS_CLEAR_ALL();
@@ -120,16 +120,16 @@ MATCH void func_801F7AC8(void) {
                     g_ScenarioState.state_04 = 0xA;
                     g_ScenarioState.step_05  = 4;
                     SCRIPT_VARS_CLEAR_ALL();
-                    SND_PlaySE(EMI_SE_ID(SND_BANK_AREA, 0));
+                    SND_SEPlay(EMI_SE_ID(SND_BANK_AREA, 0));
                 }
                 break;
             case 2:
                 if (!SYS_TestFlag(g_SceneFlags, 0x18)) {
-                    SND_RequestBGM(0x4A);
+                    SND_BGMRequest(0x4A);
                     while (!EMI_IsReady()) {
                         SYS_ThreadWait(1);
                     }
-                    SND_PlayBGM(0x4B, 0x64, 8);
+                    SND_BGMPlay(0x4B, 0x64, 8);
                     g_ScenarioState.state_04 = 0xA;
                     g_ScenarioState.step_05  = 0;
                     SCRIPT_VARS_CLEAR_ALL();
@@ -139,11 +139,11 @@ MATCH void func_801F7AC8(void) {
                 break;
             case 3:
                 if (!SYS_TestFlag(g_SceneFlags, 0x18)) {
-                    SND_RequestBGM(0x4A);
+                    SND_BGMRequest(0x4A);
                     while (!EMI_IsReady()) {
                         SYS_ThreadWait(1);
                     }
-                    SND_PlayBGM(0x4B, 0x64, 8);
+                    SND_BGMPlay(0x4B, 0x64, 8);
                     g_ScenarioState.state_04 = 0xA;
                     g_ScenarioState.step_05  = 0;
                     SCRIPT_VARS_CLEAR_ALL();
@@ -157,7 +157,7 @@ MATCH void func_801F7AC8(void) {
                     g_ScenarioState.state_04 = 0xA;
                     g_ScenarioState.step_05  = 4;
                     SCRIPT_VARS_CLEAR_ALL();
-                    SND_PlaySE(EMI_SE_ID(SND_BANK_AREA, 0));
+                    SND_SEPlay(EMI_SE_ID(SND_BANK_AREA, 0));
                     func_801C1DF0(7);
                     g_Characters[CHAR_ID_MOMO].party_flags &= 0xFE;
                     g_Characters[CHAR_ID_PECO].party_flags |= PARTY_FLAG_JOINED;
@@ -169,7 +169,7 @@ MATCH void func_801F7AC8(void) {
                 g_ScenarioState.state_04 = 0xD;
                 g_ScenarioState.step_05  = 6;
                 SCRIPT_VARS_CLEAR_ALL();
-                SND_PlaySE(EMI_SE_ID(SND_BANK_AREA, 0));
+                SND_SEPlay(EMI_SE_ID(SND_BANK_AREA, 0));
                 func_801C1DF0(7);
                 g_Characters[CHAR_ID_MOMO].party_flags &= 0xFE;
                 g_Characters[CHAR_ID_PECO].party_flags |= PARTY_FLAG_JOINED;
@@ -180,7 +180,7 @@ MATCH void func_801F7AC8(void) {
                 g_ScenarioState.state_04 = 0xD;
                 g_ScenarioState.step_05  = 6;
                 SCRIPT_VARS_CLEAR_ALL();
-                SND_PlaySE(EMI_SE_ID(SND_BANK_AREA, 0));
+                SND_SEPlay(EMI_SE_ID(SND_BANK_AREA, 0));
                 func_801C1DF0(5);
                 g_Characters[CHAR_ID_PECO].party_flags &= 0xFE;
                 g_Characters[CHAR_ID_MOMO].party_flags |= PARTY_FLAG_JOINED;
@@ -206,7 +206,7 @@ MATCH void func_801F7AC8(void) {
                 break;
             case 1:
                 if (!SYS_TestFlag(g_SceneFlags, 0x2F)) {
-                    SND_RequestBGM(0x66);
+                    SND_BGMRequest(0x66);
                     while (!EMI_IsReady()) {
                         SYS_ThreadWait(1);
                     }

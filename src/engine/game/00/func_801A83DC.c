@@ -19,18 +19,18 @@ MATCH void func_801A83DC(void) {
                 UI_MessageRequest(MSG_SYSTEM_FOUND_GENE);
                 *game_state = GAME_REQUEST_MESSAGE;
                 if (g_SndBGMId != GAME_NONE) {
-                    SND_PauseBGM(g_SndBGMId);
+                    SND_BGMPause(g_SndBGMId);
                 }
-                SND_StartXAStream(9, 1);
+                SND_XAStartStream(9, 1);
                 *state = 1;
                 return;
             }
             return;
         }
         case 1:
-            if ((SND_IsXAIdle() & BYTE_MASK) && (g_GameStateIndex != GAME_REQUEST_MESSAGE)) {
+            if ((SND_XAIsIdle() & BYTE_MASK) && (g_GameStateIndex != GAME_REQUEST_MESSAGE)) {
                 if (g_SndBGMId != GAME_NONE) {
-                    SND_ResumeBGM(g_SndBGMId);
+                    SND_BGMResume(g_SndBGMId);
                 }
                 g_ScriptWorkRecord->header.flags = 0;
                 Game_ClearScriptActive();

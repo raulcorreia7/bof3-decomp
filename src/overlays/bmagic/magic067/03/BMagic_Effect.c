@@ -145,7 +145,7 @@ MATCH void func_801EF38C(void) {
     /* FAKE: the cast store keeps the y read behind the x store. */
     LOW(g_Task->pos.x.fixed) = g_AreaScrollTargetX + g_Task->unk_0C;
     g_Task->pos.y.fixed      = g_AreaScrollTargetY + g_Task->unk_10;
-    SND_PlaySE(EMI_SE_ID(SND_BANK_COMMON, 0));
+    SND_SEPlay(EMI_SE_ID(SND_BANK_COMMON, 0));
     work               = g_Task;
     work->param.unk_0B = 0x34;
     work->unk_14       = 0x2FFF;

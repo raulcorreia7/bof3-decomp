@@ -11,7 +11,7 @@ MATCH void func_8019EC20(void) {
             func_8019EE10();
             g_Task->clut_select = g_Game.members[0].unk_27;
             Script_Select(0x4A);
-            SND_PlaySE(EMI_SE_ID(SND_BANK_COMMON, 14));
+            SND_SEPlay(EMI_SE_ID(SND_BANK_COMMON, 14));
             g_Task->header.mode++;
             return;
         }

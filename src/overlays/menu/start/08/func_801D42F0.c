@@ -37,24 +37,24 @@ MATCH void func_801D42F0(void) {
     }
     current = &D_80148656;
     if ((s8)old != *current) {
-        SND_PlaySE(EMI_SE_ID(SND_BANK_COMMON, 1));
+        SND_SEPlay(EMI_SE_ID(SND_BANK_COMMON, 1));
     }
 
     if (g_PadStates[0].pressed & g_InputMasks[MENU_INPUT_CONFIRM]) {
         result = func_801E8C9C(g_CharSlot[g_PartyFieldOrder[*current]], *items, 0) & BYTE_MASK;
         if ((result == 0) || (result == 4)) {
-            SND_PlaySE(EMI_SE_ID(SND_BANK_COMMON, 4));
+            SND_SEPlay(EMI_SE_ID(SND_BANK_COMMON, 4));
             *counts -= 1;
             if (*counts != 0) {
                 return;
             }
             *items = 0;
         } else {
-            SND_PlaySE(EMI_SE_ID(SND_BANK_COMMON, 7));
+            SND_SEPlay(EMI_SE_ID(SND_BANK_COMMON, 7));
             return;
         }
     } else if (g_PadStates[0].pressed & g_InputMasks[MENU_INPUT_CANCEL]) {
-        SND_PlaySE(EMI_SE_ID(SND_BANK_COMMON, 6));
+        SND_SEPlay(EMI_SE_ID(SND_BANK_COMMON, 6));
     } else {
         return;
     }

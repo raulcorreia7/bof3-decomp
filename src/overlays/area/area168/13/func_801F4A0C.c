@@ -18,7 +18,7 @@ MATCH void func_801F4A0C(void) {
             break;
         case 11:
             if (g_ScriptVars[0] == 1) {
-                SND_PlaySE(0x204);
+                SND_SEPlay(0x204);
                 SYS_SetFlag(g_SceneEventFlags, 145);
                 g_SceneEventState.step = 12;
             }

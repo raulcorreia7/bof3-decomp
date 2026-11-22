@@ -6,5 +6,5 @@ MATCH void func_801F3540(void) {
     g_Task->unk_0A = 0;
     g_Task->unk_06 = 16;
     g_Task->header.mode++;
-    SND_PlaySE(516);
+    SND_SEPlay(516);
 }

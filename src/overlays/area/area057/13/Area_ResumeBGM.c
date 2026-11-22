@@ -2,5 +2,5 @@
 
 /* func_801F2D58 */
 MATCH void Area_ResumeBGM(void) {
-    SND_ResumeBGM(g_SndBGMId);
+    SND_BGMResume(g_SndBGMId);
 }

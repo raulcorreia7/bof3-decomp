@@ -36,7 +36,7 @@ MATCH void func_801FBB1C(void) {
             if (WINDOW_EFFECT_BUSY()) {
                 break;
             }
-            SND_PlayBGM(8, BGM_CUE_LEVEL_DEFAULT, BGM_CUE_SHAPE_DEFAULT);
+            SND_BGMPlay(8, BGM_CUE_LEVEL_DEFAULT, BGM_CUE_SHAPE_DEFAULT);
             g_ScenarioState.step_05 = 4;
             break;
         case 4:

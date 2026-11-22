@@ -37,5 +37,5 @@ MATCH void func_801EED38(void) {
             g_Task->param.unk_0B++;
         }
     }
-    SND_PlaySE(EMI_SE_ID(SND_BANK_COMMON, 0));
+    SND_SEPlay(EMI_SE_ID(SND_BANK_COMMON, 0));
 }

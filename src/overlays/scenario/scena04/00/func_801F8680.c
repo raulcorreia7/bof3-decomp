@@ -35,7 +35,7 @@ NON_MATCHING void func_801F8680(void) {
                 break;
             }
             Area_SetCellPalette(0x57, 0x12);
-            SND_PlaySE(0x103);
+            SND_SEPlay(0x103);
             g_ScenarioState.step_05 = 3;
             break;
         case 3:
@@ -65,7 +65,7 @@ NON_MATCHING void func_801F8680(void) {
                 *timer = *timer - 1;
                 break;
             }
-            SND_PlaySE(0x200);
+            SND_SEPlay(0x200);
             *timer                  = 0x3C;
             g_ScenarioState.step_05 = 6;
             g_ScriptVars[0]++;
@@ -88,7 +88,7 @@ NON_MATCHING void func_801F8680(void) {
                 break;
             }
             SND_StartDecrescendo(0, 1, BGM_CUE_LEVEL_DEFAULT, 0x40);
-            SND_StartXAStream(4, 1);
+            SND_XAStartStream(4, 1);
             g_ScenarioState.step_05 = 8;
             break;
         case 8: {
@@ -101,7 +101,7 @@ NON_MATCHING void func_801F8680(void) {
                 *timer                   = *timer + 1;
                 break;
             }
-            SND_StopSequence(0, 1);
+            SND_SeqStop(0, 1);
             g_ScenarioState.step_05 = 9;
             *timer                  = *timer >> 1;
             break;
@@ -146,7 +146,7 @@ NON_MATCHING void func_801F8680(void) {
                 break;
             }
             g_ScriptVars[0]++;
-            SND_PlayBGM(0x3F, BGM_CUE_LEVEL_DEFAULT, BGM_CUE_SHAPE_DEFAULT);
+            SND_BGMPlay(0x3F, BGM_CUE_LEVEL_DEFAULT, BGM_CUE_SHAPE_DEFAULT);
             g_AreaDrawFlags          = 0x1F;
             g_AreaCameraOffsetZ      = 0;
             g_AreaCameraRefreshCount = 2;
@@ -165,7 +165,7 @@ NON_MATCHING void func_801F8680(void) {
             }
             func_801C16B8();
             SND_StartDecrescendo(0, 1, BGM_CUE_LEVEL_DEFAULT, 0x10);
-            SND_StartXAStream(0, 1);
+            SND_XAStartStream(0, 1);
             g_AreaScrollTargetX = TO_COORD(0xAC);
             g_AreaDrawFlags     = 0;
             g_AreaScrollTargetY = TO_COORD(0x21);
@@ -173,11 +173,11 @@ NON_MATCHING void func_801F8680(void) {
             g_ScenarioState.step_05 = 0x10;
             break;
         case 16:
-            if (SND_IsXAIdle() == 0) {
+            if (SND_XAIsIdle() == 0) {
                 break;
             }
-            SND_StopSequence(0, 1);
-            SND_PlayBGM(0x30, BGM_CUE_LEVEL_DEFAULT, BGM_CUE_SHAPE_DEFAULT);
+            SND_SeqStop(0, 1);
+            SND_BGMPlay(0x30, BGM_CUE_LEVEL_DEFAULT, BGM_CUE_SHAPE_DEFAULT);
             g_ScriptVars[0]++;
             g_AreaDrawFlags = 0x1F;
             UI_ModeSet(UI_MODE_FADE_IN);
@@ -267,11 +267,11 @@ NON_MATCHING void func_801F8680(void) {
                 break;
             }
             SND_StartDecrescendo(0, 3, BGM_CUE_LEVEL_DEFAULT, 0x10);
-            SND_StartXAStream(3, 1);
+            SND_XAStartStream(3, 1);
             g_ScenarioState.step_05 = 0x19;
             break;
         case 25:
-            if (SND_IsXAIdle() == 0) {
+            if (SND_XAIsIdle() == 0) {
                 break;
             }
             g_ScenarioState.step_05 = 0x1B;
@@ -300,7 +300,7 @@ NON_MATCHING void func_801F8680(void) {
                 break;
             }
         case 30:
-            SND_PlayBGM(g_SndBGMId, BGM_CUE_LEVEL_DEFAULT, BGM_CUE_SHAPE_DEFAULT);
+            SND_BGMPlay(g_SndBGMId, BGM_CUE_LEVEL_DEFAULT, BGM_CUE_SHAPE_DEFAULT);
             g_ScriptVars[0] = 0;
             Game_ClearScriptActive();
             g_ScenarioState.state_04 = 0;

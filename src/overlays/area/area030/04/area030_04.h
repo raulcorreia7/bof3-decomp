@@ -785,9 +785,9 @@ void func_801E1C7C(void);
  * sub-state, then run the shared world update. */
 static inline void WorldAdvanceFishingSubState(u8 subState) {
     if (D_80144199 == 3) {
-        SND_StopSequence(0, 1);
-        SND_PlayBGM(0x28, 0x64, 8);
-        SND_PlaySE(EMI_SE_ID(SND_BANK_AREA, 3));
+        SND_SeqStop(0, 1);
+        SND_BGMPlay(0x28, 0x64, 8);
+        SND_SEPlay(EMI_SE_ID(SND_BANK_AREA, 3));
         func_801DDE94(subState);
         FISHING_STATE->sub_index += 1;
     }

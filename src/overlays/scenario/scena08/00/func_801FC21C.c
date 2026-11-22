@@ -35,14 +35,14 @@ MATCH void func_801FC21C(void) {
             if (g_UiWindowEffectBusy == 0) {
                 g_AreaDrawFlags = 0;
                 Char_RebuildPartyStats();
-                SND_PauseBGM(g_SndBGMId);
-                SND_StartXAStream(0, 1);
+                SND_BGMPause(g_SndBGMId);
+                SND_XAStartStream(0, 1);
                 g_ScenarioState.step_05 = 13;
             }
             break;
         case 13:
-            if (SND_IsXAIdle() != 0) {
-                SND_ResumeBGM(g_SndBGMId);
+            if (SND_XAIsIdle() != 0) {
+                SND_BGMResume(g_SndBGMId);
                 g_AreaDrawFlags = 0x1F;
                 UI_ModeSet(UI_MODE_FADE_IN);
                 g_ScenarioState.step_05 = 14;

@@ -30,7 +30,7 @@ MATCH void func_801EEC80(void) {
     }
     *MEM_PTR(u16, AREA_PALETTE_UPLOAD_ROW(AREA_PALETTE_BATL_OVR_ROW)) = *MEM_PTR(u16, AREA_PALETTE_ARENA_ROW(AREA_PALETTE_BATL_OVR_ROW));
     g_GfxPalettePending                                               = 1;
-    SND_QueueSelectionSE(0x100);
+    SND_SEQueueSelection(0x100);
     g_Task->param.unk_0B = 1;
     g_Task->unk_09       = 0;
     g_Task->header.mode++;

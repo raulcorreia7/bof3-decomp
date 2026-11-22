@@ -17,7 +17,7 @@ MATCH void func_801E09F4(void) {
     if (buttons & PADLup) {
         u8 next;
 
-        SND_PlaySE(EMI_SE_ID(SND_BANK_COMMON, 1));
+        SND_SEPlay(EMI_SE_ID(SND_BANK_COMMON, 1));
         next       = D_801483EE - 1;
         D_801483EE = next;
         if ((s8)next < 0) {
@@ -26,7 +26,7 @@ MATCH void func_801E09F4(void) {
     } else if (buttons & PADLdown) {
         u8 next;
 
-        SND_PlaySE(EMI_SE_ID(SND_BANK_COMMON, 1));
+        SND_SEPlay(EMI_SE_ID(SND_BANK_COMMON, 1));
         next       = D_801483EE + 1;
         D_801483EE = next;
         if ((next & BYTE_MASK) >= 3U) {
@@ -34,7 +34,7 @@ MATCH void func_801E09F4(void) {
         }
     }
     if (g_PadStates[0].pressed & g_InputMasks[MENU_INPUT_CONFIRM]) {
-        SND_PlaySE(EMI_SE_ID(SND_BANK_COMMON, 3));
+        SND_SEPlay(EMI_SE_ID(SND_BANK_COMMON, 3));
         raw = D_801483EE & BYTE_MASK;
         if (raw == 0) {
             flag       = &g_MenuStep.state;
@@ -47,8 +47,8 @@ MATCH void func_801E09F4(void) {
         return;
     }
     if (g_PadStates[0].pressed & g_InputMasks[MENU_INPUT_CANCEL]) {
-        SND_PlaySE(EMI_SE_ID(SND_BANK_COMMON, 2));
-        SND_PlaySE(EMI_SE_ID(SND_BANK_COMMON, 6));
+        SND_SEPlay(EMI_SE_ID(SND_BANK_COMMON, 2));
+        SND_SEPlay(EMI_SE_ID(SND_BANK_COMMON, 6));
         flag2                = &g_MenuStep.sub_step;
         D_801483E4           = 0;
         count2               = *flag2;

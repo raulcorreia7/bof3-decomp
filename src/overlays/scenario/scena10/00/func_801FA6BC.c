@@ -15,7 +15,7 @@ MATCH void func_801FA6BC(void) {
         case 1:
             g_AreaCameraOffsetZ -= 5;
             if (g_AreaCameraOffsetZ == -0x280) {
-                SND_StopSequence(g_SelectionSepSlots[g_SndBGMId * 4], g_SelectionSequences[g_SndBGMId * 4]);
+                SND_SeqStop(g_SelectionSepSlots[g_SndBGMId * 4], g_SelectionSequences[g_SndBGMId * 4]);
                 g_AreaDrawMode           = GFX_LAYER_BATTLE_SCENE;
                 D_8014933F               = 0;
                 g_AreaCameraRefreshCount = 2;
@@ -48,7 +48,7 @@ MATCH void func_801FA6BC(void) {
             break;
         case 6:
             if (g_ScriptVars[0] == 0x24) {
-                SND_PlaySE(0x207);
+                SND_SEPlay(0x207);
                 Game_BattleStartScripted(0x24);
                 g_ScenarioState.step_05 = 7;
             }

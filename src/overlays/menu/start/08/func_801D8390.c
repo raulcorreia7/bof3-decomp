@@ -30,27 +30,27 @@ NON_MATCHING void func_801D8390(void) {
     D_8014857D  = 0xFF;
     count       = Party_CountOrder(PARTY_ORDER_FIELD);
     if (pad & PADLup) {
-        SND_PlaySE(EMI_SE_ID(SND_BANK_COMMON, 0));
+        SND_SEPlay(EMI_SE_ID(SND_BANK_COMMON, 0));
         D_8014857A--;
         if ((s8)D_8014857A < 0) {
             D_8014857A = count - 1;
         }
     } else if (pad & PADLdown) {
-        SND_PlaySE(EMI_SE_ID(SND_BANK_COMMON, 0));
+        SND_SEPlay(EMI_SE_ID(SND_BANK_COMMON, 0));
         D_8014857A++;
         if ((s32)(count & 0xFF) - 1 < (s32)(u8)D_8014857A) {
             D_8014857A = 0;
         }
     }
     if (pad & PADLleft) {
-        SND_PlaySE(EMI_SE_ID(SND_BANK_COMMON, 1));
+        SND_SEPlay(EMI_SE_ID(SND_BANK_COMMON, 1));
         slot[9] = 0x32;
         slot[0xB]--;
         if ((s8)slot[0xB] < 0) {
             slot[0xB] = 3;
         }
     } else if (pad & PADLright) {
-        SND_PlaySE(EMI_SE_ID(SND_BANK_COMMON, 1));
+        SND_SEPlay(EMI_SE_ID(SND_BANK_COMMON, 1));
         slot[9] = 0x31;
         slot[0xB]++;
         if ((u8)slot[0xB] >= 4) {
@@ -59,7 +59,7 @@ NON_MATCHING void func_801D8390(void) {
     }
     D_80148656 = slot[0xA];
     if (g_PadStates[0].pressed & g_InputMasks[MENU_INPUT_CONFIRM]) {
-        SND_PlaySE(EMI_SE_ID(SND_BANK_COMMON, 3));
+        SND_SEPlay(EMI_SE_ID(SND_BANK_COMMON, 3));
         D_801485DC      = 0;
         D_801485B9      = 6;
         D_801485BA      = 0xF;
@@ -70,7 +70,7 @@ NON_MATCHING void func_801D8390(void) {
         D_801485C3      = 0;
         D_80148652++;
     } else if (g_PadStates[0].pressed & g_InputMasks[MENU_INPUT_CANCEL]) {
-        SND_PlaySE(EMI_SE_ID(SND_BANK_COMMON, 6));
+        SND_SEPlay(EMI_SE_ID(SND_BANK_COMMON, 6));
         D_801485DC = 0;
         D_80148651 -= 5;
     }

@@ -16,7 +16,7 @@ MATCH void PlChar_UpdateLinkedFacing(void) {
                 g_Task->option_flags = ACTOR_OPT_HIDDEN_ON_SPAWN;
             }
             g_SpawnedActors[g_Task->param.actor_slot].unk_0A = g_Task->option_flags;
-            SND_PlaySE(EMI_SE_ID(SND_BANK_COMMON, 11));
+            SND_SEPlay(EMI_SE_ID(SND_BANK_COMMON, 11));
         }
     }
 }

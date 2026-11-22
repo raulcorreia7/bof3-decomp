@@ -12,7 +12,7 @@ MATCH void Battle_ReloadMusicBank(void) {
     if (EMI_IsReady() != 0) {
         g_Battle.end_hook();
         if ((g_Battle.outcome.options & BATTLE_OPT_KEEP_BGM) == 0u) {
-            SND_StopAllSequences();
+            SND_SeqStopAll();
             action = g_SndBGMId;
             if (action != 0xFFu) {
                 unk_02 = g_BGMTracks[action].sep_slot;

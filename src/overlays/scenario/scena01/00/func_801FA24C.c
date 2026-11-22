@@ -47,14 +47,14 @@ NON_MATCHING void func_801FA24C(void) {
                 g_ScriptVars[0]          = 5;
                 g_ScenarioState.timer_06 = 0;
                 g_ScenarioState.step_05  = 3;
-                SND_PlaySE(0x200);
+                SND_SEPlay(0x200);
                 g_AreaSceneMode = 2;
             }
             break;
         case 3:
             g_ScenarioState.timer_06++;
             if (g_ScenarioState.timer_06 >= 180) {
-                SND_PlaySE(0x207);
+                SND_SEPlay(0x207);
                 g_ScenarioState.timer_06 = 0;
                 g_ScriptVars[0]          = 8;
                 g_ScenarioState.step_05  = 4;
@@ -91,8 +91,8 @@ NON_MATCHING void func_801FA24C(void) {
             break;
         case 15:
             g_ScenarioState.timer_06 = 120;
-            SND_StopSequence(0, 0);
-            SND_StartXAStream(0, 1);
+            SND_SeqStop(0, 0);
+            SND_XAStartStream(0, 1);
             g_ScenarioState.step_05 = 16;
         case 16: {
             u16 timer;
@@ -100,7 +100,7 @@ NON_MATCHING void func_801FA24C(void) {
             timer                    = g_ScenarioState.timer_06;
             g_ScenarioState.timer_06 = timer - 1;
             if (timer == 0) {
-                SND_PlaySE(0x204);
+                SND_SEPlay(0x204);
                 UI_MessageStartArea(MSG_SCENA01_019);
                 g_GameStateIndex        = 2;
                 g_ScenarioState.step_05 = 17;
@@ -119,7 +119,7 @@ NON_MATCHING void func_801FA24C(void) {
                 g_ScriptVars[0]         = 6;
                 g_ScenarioState.step_05 = 19;
                 func_801C16B8();
-                SND_PlayBGM(0x1D, 0x64, 8);
+                SND_BGMPlay(0x1D, 0x64, 8);
                 g_Game.flags |= 0x80;
             }
             break;

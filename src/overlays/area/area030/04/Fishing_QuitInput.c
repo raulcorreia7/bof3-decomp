@@ -14,17 +14,17 @@ MATCH void Fishing_QuitInput(void) {
     Fishing_DrawPromptBox(108, 86);
 
     if ((*pad & (PADLup | PADLdown)) != 0) {
-        SND_PlaySE(EMI_SE_ID(SND_BANK_COMMON, 0));
+        SND_SEPlay(EMI_SE_ID(SND_BANK_COMMON, 0));
         work            = FISHING_STATE;
         work->cue_index = (work->cue_index ^ 0x1);
     }
 
     if ((*pad & (PADRup | PADRdown)) != 0) {
         if ((*pad & PADRup) != 0) {
-            SND_PlaySE(EMI_SE_ID(SND_BANK_COMMON, 6));
+            SND_SEPlay(EMI_SE_ID(SND_BANK_COMMON, 6));
             FISHING_STATE->cue_index = 1;
         } else {
-            SND_PlaySE(EMI_SE_ID(SND_BANK_COMMON, 3));
+            SND_SEPlay(EMI_SE_ID(SND_BANK_COMMON, 3));
         }
         work            = FISHING_STATE;
         work->sub_index = (work->sub_index + 1);

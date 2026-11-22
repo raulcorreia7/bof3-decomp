@@ -8,7 +8,7 @@ MATCH void SND_XAStatePauseResult(void) {
     flag = &D_8014682E;
     if (*flag < 0) {
         g_EmiServiceState = SND_XA_STATE_PAUSE;
-        if ((((s16)D_80146820++ < 6) == 0) || (SND_HasXACDError() != 0)) {
+        if ((((s16)D_80146820++ < 6) == 0) || (SND_XAHasCDError() != 0)) {
             g_EmiServiceState = SND_XA_STATE_WAIT_SYNC;
         }
     } else if (*flag != 0) {

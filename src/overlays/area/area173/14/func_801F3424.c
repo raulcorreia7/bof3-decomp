@@ -9,7 +9,7 @@ MATCH void func_801F3424(void) {
         func_801F3954(0);
         func_801F3954(1);
         func_801F3954(2);
-        SND_PlaySE(EMI_SE_ID(SND_BANK_AREA, 0x05));
+        SND_SEPlay(EMI_SE_ID(SND_BANK_AREA, 0x05));
         work = g_Task;
         work->header.step++;
     }

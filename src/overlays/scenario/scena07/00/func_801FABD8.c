@@ -26,7 +26,7 @@ MATCH void func_801FABD8(void) {
             if (g_GameStateIndex != GAME_REQUEST_MESSAGE) {
                 UI_ModeSet(0);
                 if (g_SndBGMId != 0xFF) {
-                    SND_FadeOutBGM(g_SndBGMId, 0x64, 8);
+                    SND_BGMFadeOut(g_SndBGMId, 0x64, 8);
                 }
                 g_ScenarioState.step_05 = 4;
             }
@@ -83,7 +83,7 @@ MATCH void func_801FABD8(void) {
             break;
         case 10:
             if (g_ScriptVars[0] == 4 && g_GameStateIndex != GAME_REQUEST_MESSAGE) {
-                SND_PlayBGM(0x60, 0x64, 8);
+                SND_BGMPlay(0x60, 0x64, 8);
                 g_ScenarioState.step_05 = 0xB;
             }
             break;
@@ -103,8 +103,8 @@ MATCH void func_801FABD8(void) {
             break;
         case 12:
             if (g_ScriptVars[0] == 0xA) {
-                SND_FadeOutBGM(0x60, 0x64, 8);
-                SND_PlayBGM(0x63, 0x64, 8);
+                SND_BGMFadeOut(0x60, 0x64, 8);
+                SND_BGMPlay(0x63, 0x64, 8);
                 g_ScenarioState.step_05 = 0xD;
             }
             break;
@@ -146,7 +146,7 @@ MATCH void func_801FABD8(void) {
             break;
         case 16:
             if (g_UiWindowEffectBusy == 0) {
-                SND_FadeOutBGM(0x63, 0x64, 8);
+                SND_BGMFadeOut(0x63, 0x64, 8);
                 g_AreaDrawFlags         = 0;
                 g_ScenarioState.step_05 = 0x11;
             }
@@ -192,7 +192,7 @@ MATCH void func_801FABD8(void) {
             break;
         case 25:
             if (g_ScriptVars[0] == 0x45) {
-                SND_PlaySE(0x20C);
+                SND_SEPlay(0x20C);
                 func_801BFE34(0x240000, 0x1C8000, 0x1D);
                 g_ScenarioState.step_05 = 0x1A;
             }
@@ -205,7 +205,7 @@ MATCH void func_801FABD8(void) {
             }
             break;
         case 28:
-            SND_PlaySE(0x201);
+            SND_SEPlay(0x201);
             Game_ClearScriptActive();
             g_ScriptVars[0]          = 0;
             g_ScenarioState.state_04 = 0;

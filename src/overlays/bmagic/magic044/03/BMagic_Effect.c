@@ -38,7 +38,7 @@ MATCH void func_801EEC5C(void) {
     *MEM_PTR(u16, AREA_PALETTE_UPLOAD_ROW(AREA_PALETTE_BATL_OVR_ROW) + AREA_PALETTE_UNIT) = 0;
 
     g_GfxPalettePending = 1;
-    SND_QueueSelectionSE(EMI_SE_ID(SND_BANK_COMMON, 0));
+    SND_SEQueueSelection(EMI_SE_ID(SND_BANK_COMMON, 0));
 }
 
 #include "overlays/bmagic/shared/Effect_MarkDamagedOnZeroTick.h"

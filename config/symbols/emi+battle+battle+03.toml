@@ -136,7 +136,7 @@ Battle_PickLowestHpTarget = { addr = 0x801E2CA4, type = "func", source = "Return
 Battle_PickFormationTarget = { addr = 0x801E2E30, type = "func", source = "Picks a random live target by formation weight." }
 Battle_IsEnemyBlocked = { addr = 0x801E30F8, type = "func", source = "returns 1 while the current enemy is paralyzed, sleeping or suppressed, else steps its animation loop" }
 Battle_IsEnemyBlockedOnce = { addr = 0x801E3160, type = "func", source = "the enemy form of func_801DEE4C: status and suppression checks, then one animation step" }
-Battle_PlayEnemySE = { addr = 0x801E52F0, type = "func", source = "Plays the SE id through SND_PlaySE unless it is the 0xFFFF none value; the callers pass the enemy SE words EnemyBattler.unk_E8 in scripted battles, where other battles play SE 0x600 + type * 2 instead." }
+Battle_PlayEnemySE = { addr = 0x801E52F0, type = "func", source = "Plays the SE id through SND_SEPlay unless it is the 0xFFFF none value; the callers pass the enemy SE words EnemyBattler.unk_E8 in scripted battles, where other battles play SE 0x600 + type * 2 instead." }
 Battle_RollEnemyDrops = { addr = 0x801E531C, type = "func", source = "Rolls and collects item drops from a defeated enemy." }
 Battle_DefeatEnemy = { addr = 0x801E54EC, type = "func", source = "Defeats an enemy and collects its rewards." }
 Battle_TriggerCritical = { addr = 0x801E5704, type = "func", source = "When the current enemy has ENEMY_EVENT_CRITICAL and a random bit is set, raises BATTLE_STATE_CRITICAL and allocates battle effect 2; called by func_801E3B04 and the boss028, boss033, boss051 and boss055 handlers." }

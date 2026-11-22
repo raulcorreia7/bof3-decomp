@@ -22,7 +22,7 @@ MATCH void SYS_Main(void) {
         GFX_UpdateTransferQueue();
         DrawOTag((u_long*)(g_GfxCurrentBuffer + 0x8C));
         SYS_UpdateKeyState();
-        SND_UpdateVoiceStatus();
+        SND_VoiceUpdateStatus();
 
         g_GfxBufferIndex ^= 1;
         work               = g_GfxBuffers + g_GfxBufferIndex * 0x90;

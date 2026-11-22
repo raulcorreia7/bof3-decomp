@@ -78,13 +78,13 @@ MATCH void func_801D0E28(void) {
         if ((held & PADRdown) != 0) {
             if (g_SndBGMId != BGM_NONE) {
                 bgm_offset = g_SndBGMId * 4;
-                SND_StopSequence(*(g_SelectionSepSlots + bgm_offset), *(g_SelectionSequences + bgm_offset));
+                SND_SeqStop(*(g_SelectionSepSlots + bgm_offset), *(g_SelectionSequences + bgm_offset));
             }
             cue = D_801D1918[D_801D1940];
             if (g_SndBGMId == cue) {
                 g_SndBGMId = BGM_NONE;
             } else {
-                SND_RequestBGM(cue);
+                SND_BGMRequest(cue);
                 D_801F294D += 1;
             }
         } else if ((held & PADRup) != 0) {
@@ -99,7 +99,7 @@ MATCH void func_801D1000(void) {
     if (EMI_IsReady()) {
         s16 idx = D_801D1940;
         u8  cue = D_801D1918[idx];
-        SND_PlayBGM(cue, BGM_CUE_LEVEL_DEFAULT, BGM_CUE_SHAPE_DEFAULT);
+        SND_BGMPlay(cue, BGM_CUE_LEVEL_DEFAULT, BGM_CUE_SHAPE_DEFAULT);
         D_801F294D = 0;
     }
     func_801D1250(0x32, 0x28);
@@ -115,17 +115,17 @@ MATCH void func_801D1094(void) {
     if (g_SndBGMId != BGM_NONE) {
         if (g_SndBGMId != D_801D1944) {
             bgm_offset = g_SndBGMId * 4;
-            SND_StopSequence(*(g_SelectionSepSlots + bgm_offset), *(g_SelectionSequences + bgm_offset));
+            SND_SeqStop(*(g_SelectionSepSlots + bgm_offset), *(g_SelectionSequences + bgm_offset));
         }
     }
-    SND_RequestBGM(D_801D1944);
+    SND_BGMRequest(D_801D1944);
     func_801D1250(0x32, 0x28);
     D_801F294D += 1;
 }
 
 MATCH void func_801D1124(void) {
     if (EMI_IsReady() != 0) {
-        SND_PlayBGM(D_801D1944, BGM_CUE_LEVEL_DEFAULT, BGM_CUE_SHAPE_DEFAULT);
+        SND_BGMPlay(D_801D1944, BGM_CUE_LEVEL_DEFAULT, BGM_CUE_SHAPE_DEFAULT);
         D_801D1948 = 0;
         D_801F294D += 1;
     }

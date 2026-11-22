@@ -10,6 +10,6 @@ MATCH void func_801F3398(void) {
         Area_ClearWorkColumn();
         g_Task->unk_32 = 300;
         g_Task->header.mode++;
-        SND_PlaySE(0x209);
+        SND_SEPlay(0x209);
     }
 }

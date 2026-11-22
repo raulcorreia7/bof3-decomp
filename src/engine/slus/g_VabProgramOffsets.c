@@ -39,8 +39,8 @@ u16 g_SndVolumeLevels[80] = {
 u32 D_80182328 = 0;
 
 u32 g_SndSeReaders[SND_BANK_COUNT] = {
-    (u32)SND_ReadSeBank0, (u32)SND_ReadSeBank1, (u32)SND_ReadSeBank2, (u32)SND_ReadSeBank3,
-    (u32)SND_ReadSeBank4, (u32)SND_ReadSeBank5, (u32)SND_ReadSeBank6,
+    (u32)SND_SEReadBank0, (u32)SND_SEReadBank1, (u32)SND_SEReadBank2, (u32)SND_SEReadBank3,
+    (u32)SND_SEReadBank4, (u32)SND_SEReadBank5, (u32)SND_SEReadBank6,
 };
 
 u32 g_SndBankSpuAddress[SND_LAYOUT_COUNT][SND_BANK_COUNT] = {

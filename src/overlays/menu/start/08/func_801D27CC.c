@@ -12,8 +12,8 @@ MATCH void func_801D27CC(void) {
     g_UiPanelTasks[MENU_START_PANEL_DESCRIPTION].u.message.id = 0x12;
     if (D_80148654 == 0) {
         if (g_PadStates[0].pressed & g_InputMasks[MENU_INPUT_CANCEL]) {
-            SND_PlaySE(EMI_SE_ID(SND_BANK_COMMON, 6));
-            SND_PlaySE(EMI_SE_ID(SND_BANK_COMMON, 2));
+            SND_SEPlay(EMI_SE_ID(SND_BANK_COMMON, 6));
+            SND_SEPlay(EMI_SE_ID(SND_BANK_COMMON, 2));
             func_801D2C7C();
             D_80148654 = 8;
             D_80148651 -= 2;

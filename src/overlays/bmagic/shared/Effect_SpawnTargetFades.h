@@ -39,4 +39,4 @@
             }                                                                                      \
         }                                                                                          \
     }                                                                                              \
-    SND_QueueSelectionSE(EMI_SE_ID(SND_BANK_COMMON, 0));
+    SND_SEQueueSelection(EMI_SE_ID(SND_BANK_COMMON, 0));

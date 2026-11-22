@@ -37,7 +37,7 @@ MATCH void func_801EEC98(void) {
     g_Task->unk_24 = g_BattleEffectBattler->unk_24;
     Battle_SetCellPaletteStp(g_Task);
     g_BattleEffectBattler->header.flags |= PARTY_MEMBER_FLAG_HANDLER_BUSY;
-    SND_QueueSelectionSE(0x100);
+    SND_SEQueueSelection(0x100);
 }
 
 #include "overlays/bmagic/shared/Effect_ReleaseActiveBattlerOnTickerZero.h"
@@ -131,7 +131,7 @@ MATCH void func_801EF300(void) {
     }
     Effect_RotatePosition(g_Task);
     if (g_Task->param.unk_0B == 0) {
-        SND_QueueSelectionSE(0x101);
+        SND_SEQueueSelection(0x101);
     }
     g_Task->unk_09 = 0x10;
     g_Task->header.step += 1;

@@ -65,7 +65,7 @@ MATCH void func_801E05E0(void) {
     }
     cursor_ptr = &D_801483CB;
     if (old != *cursor_ptr) {
-        SND_PlaySE(EMI_SE_ID(SND_BANK_COMMON, 0));
+        SND_SEPlay(EMI_SE_ID(SND_BANK_COMMON, 0));
     }
     if (D_801483CD == 0) {
         if (g_PadStates[0].pressed & g_InputMasks[MENU_INPUT_CONFIRM]) {
@@ -78,13 +78,13 @@ MATCH void func_801E05E0(void) {
                 cue                     = 0x103;
                 goto block_32; /* shared cue join */
             }
-            SND_PlaySE(EMI_SE_ID(SND_BANK_COMMON, 7));
+            SND_SEPlay(EMI_SE_ID(SND_BANK_COMMON, 7));
             return;
         }
         cue = 0x106;
         if (g_PadStates[0].pressed & g_InputMasks[MENU_INPUT_CANCEL]) {
         block_32:
-            SND_PlaySE(cue);
+            SND_SEPlay(cue);
             g_MenuStep.state -= 1;
         }
     }

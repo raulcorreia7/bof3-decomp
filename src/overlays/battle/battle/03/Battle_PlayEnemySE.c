@@ -6,6 +6,6 @@ MATCH void Battle_PlayEnemySE(u16 se_id) {
 
     masked_id = se_id & HALF_MASK;
     if (masked_id != 0xFFFFu) {
-        SND_PlaySE(masked_id);
+        SND_SEPlay(masked_id);
     }
 }

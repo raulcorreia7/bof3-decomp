@@ -19,7 +19,7 @@ MATCH void func_801D4A3C(void) {
             g_SaveCardPort = D_801E6088;
         }
         if (prev_byte != g_SaveCardPort) {
-            SND_PlaySE(EMI_SE_ID(SND_BANK_COMMON, 1));
+            SND_SEPlay(EMI_SE_ID(SND_BANK_COMMON, 1));
         }
     }
     pad = &g_PadStates[0].pressed;
@@ -30,10 +30,10 @@ MATCH void func_801D4A3C(void) {
         *mode      = 0x13;
         D_80148654 = 2;
         D_801E6094 = count + 1;
-        SND_PlaySE(EMI_SE_ID(SND_BANK_COMMON, 4));
+        SND_SEPlay(EMI_SE_ID(SND_BANK_COMMON, 4));
     }
     if ((*pad & g_InputMasks[MENU_INPUT_CANCEL]) != 0) {
-        SND_PlaySE(EMI_SE_ID(SND_BANK_COMMON, 6));
+        SND_SEPlay(EMI_SE_ID(SND_BANK_COMMON, 6));
         D_801E6080       = 1;
         g_MenuStep.state = 6;
     }

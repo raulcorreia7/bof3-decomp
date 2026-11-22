@@ -2,7 +2,7 @@
 
 /* func_80097CBC */
 MATCH void Battle_SetPhaseStep(void) {
-    SND_PlaySE(EMI_SE_ID(SND_BANK_COMMON, 6));
+    SND_SEPlay(EMI_SE_ID(SND_BANK_COMMON, 6));
     Battle_ShowMessage((void*)BATTLE_ACTIVE_MESSAGE_SLOT_PTR);
     g_Battle.phase.step      = 4u;
     g_Battle.selection_latch = 0u;

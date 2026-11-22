@@ -42,7 +42,7 @@ MATCH void func_801FB014(void) {
         case 4:
             Area_SetCellCode(93, 46, 81);
             SYS_SetFlag(g_SceneEventFlags, 47);
-            SND_PlaySE(EMI_SE_ID(SND_BANK_AREA, 1));
+            SND_SEPlay(EMI_SE_ID(SND_BANK_AREA, 1));
             Scene_SetupParty(1);
             g_ScenarioState.step_05 = 5;
             break;
@@ -51,8 +51,8 @@ MATCH void func_801FB014(void) {
                 break;
             }
             SYS_SetFlag(g_SceneFlags, 39);
-            SND_PlaySE(EMI_SE_ID(SND_BANK_AREA, 4));
-            SND_PlayBGM(91, BGM_CUE_LEVEL_DEFAULT, BGM_CUE_SHAPE_DEFAULT);
+            SND_SEPlay(EMI_SE_ID(SND_BANK_AREA, 4));
+            SND_BGMPlay(91, BGM_CUE_LEVEL_DEFAULT, BGM_CUE_SHAPE_DEFAULT);
             goto clear_script_state;
         case 6:
             Area_SetCellCode(93, 46, 81);
@@ -61,9 +61,9 @@ MATCH void func_801FB014(void) {
                 break;
             }
             SYS_SetFlag(g_SceneEventFlags, 47);
-            SND_PlaySE(EMI_SE_ID(SND_BANK_AREA, 1));
-            SND_PlaySE(EMI_SE_ID(SND_BANK_AREA, 4));
-            SND_PlayBGM(91, BGM_CUE_LEVEL_DEFAULT, BGM_CUE_SHAPE_DEFAULT);
+            SND_SEPlay(EMI_SE_ID(SND_BANK_AREA, 1));
+            SND_SEPlay(EMI_SE_ID(SND_BANK_AREA, 4));
+            SND_BGMPlay(91, BGM_CUE_LEVEL_DEFAULT, BGM_CUE_SHAPE_DEFAULT);
             Scene_SetupParty(2);
             SYS_ClearFlag(g_SceneFlags, 37);
             g_ScenarioState.step_05 = 8;

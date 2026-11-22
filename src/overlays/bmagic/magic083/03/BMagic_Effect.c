@@ -65,7 +65,7 @@ MATCH void func_801EED04(void) {
         dst[i + 16] = src[i + 16];
     }
     g_GfxPalettePending = 1;
-    SND_QueueSelectionSE(EMI_SE_ID(SND_BANK_COMMON, 0));
+    SND_SEQueueSelection(EMI_SE_ID(SND_BANK_COMMON, 0));
 }
 
 #include "overlays/bmagic/shared/Effect_StartOnZeroTick.h"
@@ -344,7 +344,7 @@ MATCH void func_801F01F8(void) {
                 if (value5 & 0x1) {
                     value3 = 0x101;
                 }
-                SND_QueueSelectionSE(value3);
+                SND_SEQueueSelection(value3);
             }
             g_Task->unk_10 = 8;
             g_Task->unk_14 = 8;

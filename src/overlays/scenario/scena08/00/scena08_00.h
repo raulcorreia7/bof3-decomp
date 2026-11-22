@@ -127,7 +127,7 @@ void func_801F8108(s32 x, s32 y);
         func_801F81F4(g_Task->script_pc);            \
     }                                                \
     g_Task->unk_2C = 0;                              \
-    SND_PlaySE(cue);                                 \
+    SND_SEPlay(cue);                                 \
     g_Task->header.mode += 1;
 
 #endif

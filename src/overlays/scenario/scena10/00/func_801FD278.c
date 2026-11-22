@@ -59,7 +59,7 @@ MATCH void func_801FD5C0(Actor* actor) {
                 /* FAKE: retail passes the bit index unmasked, as s32. */
                 ((void (*)(void*, s32))SYS_SetFlag)(g_SceneFlags, SCENE_TRIGGER_FLAG_BASE + D_801FE894[i].flag);
                 UI_MessageRequest(MSG_SYSTEM_FOUND_ITEM);
-                SND_PlaySE(EMI_SE_ID(SND_BANK_COMMON, 6));
+                SND_SEPlay(EMI_SE_ID(SND_BANK_COMMON, 6));
                 actor->unk_7E++;
                 Game_SetScriptActive();
             } else {
@@ -192,8 +192,8 @@ NON_MATCHING s32 func_801FDB14(s32 x, s32 y) {
         }
         if (g_GameCellType == 3 && !SYS_TestFlag(g_SceneFlags, 31) && x < TO_COORD_HALF(44) && (u32)((y >> 16) - 0x26) < 4) {
             Game_SetScriptActive();
-            SND_StopSequence(0, 0);
-            SND_RequestBGM(0x9F);
+            SND_SeqStop(0, 0);
+            SND_BGMRequest(0x9F);
             g_ScenarioState.state_04 = 7;
             g_ScenarioState.step_05  = 10;
         }

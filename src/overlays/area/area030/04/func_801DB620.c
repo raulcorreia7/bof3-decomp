@@ -18,7 +18,7 @@ MATCH void func_801DB620(void) {
         if (D_801E2AD5[slot * 0x24] >= 2) {
             cue = 0x20C;
         }
-        SND_PlaySE(cue);
+        SND_SEPlay(cue);
         FISHING_STATE->step_timer = 4;
         record                    = FISHING_STATE;
         record->sub_index         = (record->sub_index + 1);

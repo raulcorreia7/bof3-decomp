@@ -23,18 +23,18 @@ MATCH void Battle_SelectItemEnemyTarget(void) {
                 g_BattleActorTurn->command.target = Battle_TargetNext(0);
             }
             /* FAKE: byte pointer access keeps the address in a register so the
-             * store merges into the shared SND_PlaySE delay slot. */
+             * store merges into the shared SND_SEPlay delay slot. */
             *(u8*)&g_Battle.ui_mode += 1;
-            SND_PlaySE(EMI_SE_ID(SND_BANK_COMMON, 1));
+            SND_SEPlay(EMI_SE_ID(SND_BANK_COMMON, 1));
             return;
         }
     }
     if ((trigger & PADLright) != 0) {
         g_BattleActorTurn->command.target = Battle_TargetNext(func_801DD7D8(g_Battle.enemy_count + 2, 3, ACTOR_TARGET_STEP(+1)) & BYTE_MASK);
-        SND_PlaySE(EMI_SE_ID(SND_BANK_COMMON, 1));
+        SND_SEPlay(EMI_SE_ID(SND_BANK_COMMON, 1));
     }
     if ((trigger & PADLleft) != 0) {
         g_BattleActorTurn->command.target = Battle_TargetPrev(func_801DD7D8(g_Battle.enemy_count + 2, 3, ACTOR_TARGET_STEP(-1)) & BYTE_MASK);
-        SND_PlaySE(EMI_SE_ID(SND_BANK_COMMON, 1));
+        SND_SEPlay(EMI_SE_ID(SND_BANK_COMMON, 1));
     }
 }

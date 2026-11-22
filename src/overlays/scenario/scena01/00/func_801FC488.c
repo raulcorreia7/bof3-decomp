@@ -9,8 +9,8 @@ MATCH void func_801FC488(void) {
     switch (g_ScenarioState.step_05) {
         case 0:
             g_ScenarioState.step_05 = 3;
-            SND_StopSequence(0, 0);
-            SND_PlayBGM(0x11, 0x64, 8);
+            SND_SeqStop(0, 0);
+            SND_BGMPlay(0x11, 0x64, 8);
             g_AreaDrawFlags = 0;
             g_GameFlags |= 0x80;
             MESSAGE_START_WAIT(MSG_SCENA01_016);

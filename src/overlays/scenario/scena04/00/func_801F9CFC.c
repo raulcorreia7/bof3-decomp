@@ -38,7 +38,7 @@ MATCH s8 func_801F9DF4(s32 x, s32 y) {
             if ((u8)(g_ScratchPad.cells.bytes[0] - 5) >= 2U && g_ScratchPad.cells.bytes[0] != 4) {
                 Game_SetScriptActive();
                 SYS_SetFlag(g_SceneFlags, 2);
-                SND_PlaySE(EMI_SE_ID(SND_BANK_AREA, 4));
+                SND_SEPlay(EMI_SE_ID(SND_BANK_AREA, 4));
                 g_ScenarioState.timer_06 = 30;
                 g_ScenarioState.state_04 = 1;
                 g_ScenarioState.step_05  = 1;

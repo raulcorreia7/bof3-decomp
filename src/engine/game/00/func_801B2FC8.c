@@ -28,7 +28,7 @@ MATCH void func_801B2FC8(void) {
                 if (sel->index != GAME_NONE) {
                     SYS_SetFlag(marks, sel->index);
                 }
-                SND_PlaySE(EMI_SE_ID(SND_BANK_COMMON, 6));
+                SND_SEPlay(EMI_SE_ID(SND_BANK_COMMON, 6));
                 Game_RewardZenny((FIELD(u16, sel, 0x4u) >> 8) * 0x28);
                 /* the text row reports through its own resource; skip the dispatch */
                 goto state;
@@ -43,7 +43,7 @@ MATCH void func_801B2FC8(void) {
                     SYS_SetFlag(D_80145004, sel->index);
                     D_80145034 += 1;
                 }
-                SND_PlaySE(EMI_SE_ID(SND_BANK_COMMON, 6));
+                SND_SEPlay(EMI_SE_ID(SND_BANK_COMMON, 6));
                 resource = 2;
             } else {
                 resource = 3;

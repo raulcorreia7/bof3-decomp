@@ -21,7 +21,7 @@ MATCH void func_800A5E98(void) {
     } while ((i & BYTE_MASK) < 3U);
 
     Battle_SetGeneCount();
-    SND_PlaySE(EMI_SE_ID(SND_BANK_COMMON, 4));
+    SND_SEPlay(EMI_SE_ID(SND_BANK_COMMON, 4));
     D_801485DF = 2;
     BATTLE_ACTIVE_ROW->u.turn.action_flags.volatile_value |= BATTLER_ACTION_ABILITY_ALT_POSE;
     counter  = (u8*)&g_Battle.ui_mode;

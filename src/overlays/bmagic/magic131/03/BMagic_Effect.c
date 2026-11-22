@@ -53,7 +53,7 @@ MATCH void func_801EEDEC(void) {
     g_Task->param.unk_0B += 1;
     BMAGIC_BRIGHTEN_PALETTE_ROW(dst, src, i);
     g_GfxPalettePending = 1;
-    SND_QueueSelectionSE(EMI_SE_ID(SND_BANK_COMMON, 0x02));
+    SND_SEQueueSelection(EMI_SE_ID(SND_BANK_COMMON, 0x02));
 }
 
 /* Loads the archive of the current dragon form once the step timer runs out. */
@@ -273,7 +273,7 @@ MATCH void func_801EF7FC(void) {
     g_Task->unk_2C.value = 0;
     g_Task->unk_2B       = 0;
     Script_Select(0);
-    SND_QueueSelectionSE(EMI_SE_ID(SND_BANK_COMMON, 0x01));
+    SND_SEQueueSelection(EMI_SE_ID(SND_BANK_COMMON, 0x01));
     g_Task->unk_09 = 0x10;
     g_Task->header.step += 1;
 }
@@ -346,7 +346,7 @@ MATCH void func_801EFC74(void) {
     if (timer != 0) {
         return;
     }
-    SND_QueueSelectionSE(EMI_SE_ID(SND_BANK_COMMON, 0x00));
+    SND_SEQueueSelection(EMI_SE_ID(SND_BANK_COMMON, 0x00));
     func_800A9610(g_Battle.target_selector, 16);
     slot                               = Battle_AllocEffect(1, 0x69) & BYTE_MASK;
     battler                            = g_BattleEffectBattler;

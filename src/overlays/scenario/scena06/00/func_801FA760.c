@@ -15,14 +15,14 @@ MATCH void func_801FA760(void) {
             break;
         case 1:
             if (g_ScriptVars[0] == 0x08) {
-                SND_PauseBGM(0x42);
-                SND_StartXAStream(2, 1);
+                SND_BGMPause(0x42);
+                SND_XAStartStream(2, 1);
                 g_ScenarioState.step_05 = 2;
             }
             break;
         case 2:
-            if (SND_IsXAIdle() != 0) {
-                SND_ResumeBGM(0x42);
+            if (SND_XAIsIdle() != 0) {
+                SND_BGMResume(0x42);
                 g_ScriptVars[0]         = 9;
                 g_ScenarioState.step_05 = 3;
             }

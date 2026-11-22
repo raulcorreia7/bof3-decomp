@@ -15,15 +15,15 @@ MATCH void Scene_RunInn(void) {
             }
             g_AreaDrawFlags = 0;
             Char_RebuildPartyStats();
-            SND_PauseBGM(g_SndBGMId);
-            SND_StartXAStream(0, 1);
+            SND_BGMPause(g_SndBGMId);
+            SND_XAStartStream(0, 1);
             g_SceneEventState.step = 2;
             break;
         case 2:
-            if ((SND_IsXAIdle() & BYTE_MASK) == 0) {
+            if ((SND_XAIsIdle() & BYTE_MASK) == 0) {
                 break;
             }
-            SND_ResumeBGM(g_SndBGMId);
+            SND_BGMResume(g_SndBGMId);
             UI_ModeSet(1);
             g_AreaDrawFlags        = AREA_DRAW_ALL_FLAGS;
             g_SceneEventState.step = 3;
@@ -82,15 +82,15 @@ MATCH void Scene_RunInn(void) {
             }
             g_AreaDrawFlags = 0;
             Char_RebuildPartyStats();
-            SND_PauseBGM(g_SndBGMId);
-            SND_StartXAStream(0, 1);
+            SND_BGMPause(g_SndBGMId);
+            SND_XAStartStream(0, 1);
             g_SceneEventState.step = 22;
             break;
         case 22:
-            if ((SND_IsXAIdle() & BYTE_MASK) == 0) {
+            if ((SND_XAIsIdle() & BYTE_MASK) == 0) {
                 break;
             }
-            SND_ResumeBGM(g_SndBGMId);
+            SND_BGMResume(g_SndBGMId);
             UI_ModeSet(1);
             g_AreaDrawFlags        = AREA_DRAW_ALL_FLAGS;
             g_SceneEventState.step = 23;
