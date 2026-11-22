@@ -101,7 +101,7 @@ MATCH void func_801F4414(void) {
     /* FAKE: holds the actor's clear store before the scene-state byte's address load; without the
      * fence the address fills the store's load delay. */
     FAKE_ORDER_FENCE();
-    active = &D_80147CC8;
+    active = &g_ActorTurnRamps[1].flags;
     *active |= 1;
     Game_SetScriptActive();
     g_SceneEventState.mode = 0xC;
