@@ -25,7 +25,7 @@ MATCH void func_801E112C(MenuPanelTask* task) {
             mask    = ((u32)task->flags >> 4) ^ 0xF;
             mask    = (mask != 0) ? -1 : 0;
             offset  = count & mask;
-            level   = Char_GetAbilityElement(*types);
+            level   = Char_AbilityGetElement(*types);
             shade   = (task->unk_0A + i == task->unk_0C + offset) * 2;
             if (task->unk_0A + i == task->unk_0B + offset || task->unk_0A + i == task->unk_0C + offset) {
                 UI_ListDrawAbilityRow((s16)(task->pos.x + 7), (s16)(y + 0x1A), UI_TEXT_DIM, level, ability, ability->cost, 1);

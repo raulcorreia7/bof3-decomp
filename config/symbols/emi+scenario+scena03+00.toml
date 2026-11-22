@@ -17,6 +17,6 @@ GFX_DrawShadedDisc = { addr = 0x801F8C04, type = "func", source = "Fans 32 POLY_
 Scene_DispatchActor = { addr = 0x801FC46C, type = "func", source = "dispatches a scenario actor to its callback handler" }
 Scene_ShowMessage = { addr = 0x801FCC9C, type = "func", source = "Starts the area message of the given index, switches the game state to 2 and sets the script-active flag." }
 Party_JoinNinaYoung = { addr = 0x801FCEDC, type = "func", source = "Adds Nina Young to the party." }
-Scene_RemoveNina = { addr = 0x801FCEFC, type = "func", source = "Removes character 1 (CHAR_ID_NINA_YOUNG) from the party through Party_RemoveMember, which clears the id from the walking and battle orders and shrinks g_Game.party_size, then restages every party palette through Party_LoadPalettes." }
+Scene_RemoveNina = { addr = 0x801FCEFC, type = "func", source = "Removes character 1 (CHAR_ID_NINA_YOUNG) from the party through Party_MemberRemove, which clears the id from the walking and battle orders and shrinks g_Game.party_size, then restages every party palette through Party_LoadPalettes." }
 g_SceneEntityDispatch = { addr = 0x801FCF24, source = "scenario entity dispatch table" }
 g_SceneActorDispatch = { addr = 0x801FD00C, source = "scenario actor dispatch table" }

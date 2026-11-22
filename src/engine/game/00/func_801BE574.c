@@ -8,7 +8,7 @@ MATCH void func_801BE574(s32 count, u8* ids) {
         ((u8*)g_Game.members)[i * BATTLE_PARTY_STRIDE] &= 0xDF;
         ACTOR_CLEAR_TINT();
         g_Task->tint.bytes.flags = 2;
-        Party_ClearBattlerState(i & BYTE_MASK);
+        Party_BattlersClearState(i & BYTE_MASK);
         g_Task->header.mode           = 2;
         g_Task->option_flags          = 0;
         g_Task->timer                 = 0;

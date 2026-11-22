@@ -30,7 +30,7 @@ MATCH void SAVE_RunLoadRestore(void) {
         while (EMI_IsReady() == 0) {
             SYS_ThreadWait(1);
         }
-        Party_BuildBattlers(PARTY_ORDER_FIELD);
+        Party_BattlersBuild(PARTY_ORDER_FIELD);
         {
             u8* src;
             s8* dst;

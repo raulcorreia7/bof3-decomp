@@ -1,13 +1,13 @@
 #include "engine/game/00/game_00.h"
 
-MATCH void Party_BuildBattlers(u32 order) {
+MATCH void Party_BattlersBuild(u32 order) {
     s32          i;
     u8           type;
     u8*          entry_table;
     Character*   record_base;
     PartyMember* battler;
     if (g_GameStateIndex != GAME_REQUEST_SHOP) {
-        Party_ResetBattlers();
+        Party_BattlersReset();
     }
     for (i = 0; i < g_Game.party_size; i++) {
         battler        = &g_BattlePartyBattlers[i];
@@ -16,7 +16,7 @@ MATCH void Party_BuildBattlers(u32 order) {
         battler->header.flags = PARTY_MEMBER_FLAG_OCCUPIED;
         entry_table           = g_PartyFieldOrder;
         g_Task->unk_05        = i;
-        ((void (*)(u8, u8))Party_LoadMemberSprite)(*((entry_table + ((order & BYTE_MASK) * 3)) + i), i);
+        ((void (*)(u8, u8))Party_MemberLoadSprite)(*((entry_table + ((order & BYTE_MASK) * 3)) + i), i);
         g_Task->unk_48                    = 0;
         g_Task->scale.x                   = 65536;
         g_Task->scale.y                   = 65536;

@@ -1,7 +1,7 @@
 #include "engine/game/00/game_00.h"
 
 #ifdef NON_MATCHING
-NON_MATCHING void Party_SwapBattlerRows(s32 slot_a, s32 slot_b, s32 skip_state) {
+NON_MATCHING void Party_BattlersSwapRows(s32 slot_a, s32 slot_b, s32 skip_state) {
     s32 off_a;
     s32 off_b;
     u8  val_b;
@@ -51,5 +51,5 @@ NON_MATCHING void Party_SwapBattlerRows(s32 slot_a, s32 slot_b, s32 skip_state) 
     FIELD(volatile u8, &g_Game.members[0].unk_4B, off_b)                = 0xFF;
 }
 #else
-INCLUDE_ASM(Party_SwapBattlerRows);
+INCLUDE_ASM(Party_BattlersSwapRows);
 #endif

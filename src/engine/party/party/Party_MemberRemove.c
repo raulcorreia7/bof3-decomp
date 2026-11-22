@@ -2,7 +2,7 @@
 
 /* func_801C1ABC */
 #ifdef NON_MATCHING
-NON_MATCHING void Party_RemoveMember(s32 character_id) {
+NON_MATCHING void Party_MemberRemove(s32 character_id) {
     s32  slot;
     s32  limit;
     s32  size;
@@ -102,7 +102,7 @@ NON_MATCHING void Party_RemoveMember(s32 character_id) {
         } while (slot < (s32)g_Game.party_size - 1);
     }
     ((u8*)g_Game.members)[((s32)g_Game.party_size - 1) * BATTLE_PARTY_STRIDE] = 0;
-    Party_ClearBattlerState(((s32)g_Game.party_size - 1) & BYTE_MASK);
+    Party_BattlersClearState(((s32)g_Game.party_size - 1) & BYTE_MASK);
     if (g_Game.party_size == 3) {
         if (g_PartyFormation >= 3u)
             g_PartyFormation = 0;
@@ -116,5 +116,5 @@ NON_MATCHING void Party_RemoveMember(s32 character_id) {
     g_Game.party_size = (u8)((s32)g_Game.party_size - 1);
 }
 #else
-INCLUDE_ASM(Party_RemoveMember);
+INCLUDE_ASM(Party_MemberRemove);
 #endif

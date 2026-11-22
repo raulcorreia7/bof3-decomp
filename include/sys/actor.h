@@ -199,8 +199,8 @@ typedef struct Actor {
     s32             unk_1C;            /* 0x1C - commu00 calls it variant_arg_1 */
     s32             gravity;           /* 0x20 added to vz each step */
     u8              active_flags;      /* 0x24 - ActorActiveFlags; bit 0x40 marks a usable row */
-    u8              sheet_page;        /* 0x25 - sprite: texture page of the sheet (Party_LoadMemberSprite) */
-    u8              sheet_row;         /* 0x26 - sprite: sheet row in the page; Party_RemoveMember stores other values */
+    u8              sheet_page;        /* 0x25 - sprite: texture page of the sheet (Party_MemberLoadSprite) */
+    u8              sheet_row;         /* 0x26 - sprite: sheet row in the page; Party_MemberRemove stores other values */
     u8              clut_select;       /* 0x27 - sprite: CLUT selector (Area_BuildClut); battle number actors keep the
                                 *        value they draw here */
     u8              palette_8bit;      /* 0x28 - sprite: palette type, nonzero draws 8-bit (Area_BuildClut) */

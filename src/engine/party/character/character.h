@@ -11,11 +11,11 @@ void Char_RebuildStats(Character* record);
 /* func_80164D2C */
 void Char_PreviewEquip(u8 character_id, u8 slot, u8 item_id, u8* flags, u16* values);
 /* func_801651DC */
-s32  Char_AddAbility(s32 ability_id, s32 character_index, s32 to_stock, s32 mode);
+s32  Char_AbilityAdd(s32 ability_id, s32 character_index, s32 to_stock, s32 mode);
 /* func_80165280 */
-bool Char_RestoreHP(s32 character_index, s32 amount, s32 use_battle_copy);
+bool Char_HPRestore(s32 character_index, s32 amount, s32 use_battle_copy);
 /* func_8016534C */
-s32  Char_RestoreAP(s32 character_index, s32 amount, s32 use_battle_copy);
+s32  Char_APRestore(s32 character_index, s32 amount, s32 use_battle_copy);
 /* func_8016546C */
 s32  Char_AddCappedStat(u16* value, s32 delta);
 /* func_801654B0 */
@@ -29,17 +29,17 @@ u32  Char_AddPercent(u8* value, u8 delta);
 /* func_801656EC */
 u32  Char_ClearStatus(u8 index, u16 mask, u8 mode);
 /* func_801660DC */
-s32  Char_GetAbilityElement(s32 ability_id);
+s32  Char_AbilityGetElement(s32 ability_id);
 /* func_80166A10 */
-u8   Char_GetAbilityCost(u8 character_index, u8 ability_type, u8 mode);
+u8   Char_AbilityGetCost(u8 character_index, u8 ability_type, u8 mode);
 /* func_80166B94 */
 u8*  Char_GetAbilities(u8 character_index, u8 ability_id, u8 mode);
 /* func_80167FDC */
-void Char_AddHP(s32 amount, u8 char_id);
+void Char_HPAdd(s32 amount, u8 char_id);
 /* func_8016813C */
-u16  Char_LoseHP(s32 amount, s32 character_id);
+u16  Char_HPLose(s32 amount, s32 character_id);
 /* func_80168248 */
-s32  Char_SpendAP(s32 requested, s32 character_id);
+s32  Char_APSpend(s32 requested, s32 character_id);
 
 #endif
 
