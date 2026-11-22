@@ -6,6 +6,8 @@
 
 /* The string piece that writes each control code into a text record. */
 #define T_END                  "\x00"
+/* The terminator repeated three times: the zero fill a short label field needs. */
+#define T_END3                 T_END T_END T_END
 #define T_NEWLINE              "\x01"
 #define T_PAGE                 "\x02"
 #define T_GOTO                 "\x03"

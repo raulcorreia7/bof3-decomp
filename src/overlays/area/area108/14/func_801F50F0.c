@@ -22,7 +22,7 @@ NON_MATCHING void func_801F50F0(void) {
 
                 step = &g_SceneEventState.step;
                 /* Retail passes the masked byte, the owner declares the argument s8. */
-                ((void (*)(u8))Area_ScrollStartRoute)((u8)(D_80147B67 - 1));
+                ((void (*)(u8))Area_ScrollStartRoute)((u8)(g_PartyActors[1].unk_77 - 1));
                 D_80143FC0      = 4;
                 g_ScriptVars[3] = 1;
                 *step           = (u8)*step + 1;
@@ -33,7 +33,7 @@ NON_MATCHING void func_801F50F0(void) {
                 s8* step;
 
                 g_ScriptVars[3] = 0;
-                if (D_80147B67 == 9) {
+                if (g_PartyActors[1].unk_77 == 9) {
                     g_SceneEventState.step = 4;
                 } else {
                     step                = &g_SceneEventState.step;

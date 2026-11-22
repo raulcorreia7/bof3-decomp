@@ -23,7 +23,7 @@ MATCH void Area_SceneRunEvent(void) {
                 g_ScrollHeight = height;
                 Area_ScrollAdvance(height);
                 Area_CellRefreshGrid();
-                focus = &D_80147A8C;
+                focus = &g_PartyActors[0].pos.x.fixed;
                 *focus += TO_COORD(20);
                 D_80147A96 = Area_HeightSample(*focus, g_AreaFocusY);
             }
@@ -53,7 +53,7 @@ MATCH void Area_SceneRunEvent(void) {
                 g_ScrollHeight = height;
                 Area_ScrollAdvance(height);
                 Area_CellRefreshGrid();
-                focus = &D_80147A8C;
+                focus = &g_PartyActors[0].pos.x.fixed;
                 *focus -= TO_COORD(20);
                 D_80147A96 = Area_HeightSample(*focus, g_AreaFocusY);
             }

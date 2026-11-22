@@ -15,7 +15,7 @@ MATCH void func_801F34B8(void) {
     /* FAKE: volatile fixes the load order; the last store goes through base. */
     volatile u16*  work;
 
-    src   = D_80147B40;
+    src   = g_PartyActors[1].script;
     dst   = AREA108_VERTEX_DST;
     state = AREA108_STATE_BASE;
     count = 0;

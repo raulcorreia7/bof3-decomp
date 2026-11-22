@@ -27,7 +27,7 @@ extern u8 D_80146866;
 #define SCENE_EFFECT_CELL_COUNT   12
 #define SCENE_EFFECT_WEIGHT_COUNT 3
 
-/* One row of the sample table at D_80147BD8: twelve sample offsets and three
+/* One row of the sample table at g_PartyActors[2].script: twelve sample offsets and three
  * weights per 0x28-byte record. */
 
 /* The stride is a retail read: func_801FC01C walks the table as `(SceneSample *)(i * 0x28 + base)`. Twelve s16 samples sit at +0x02..+0x18 and the shifted weight halfwords at +0x1A..+0x1E; only the halfwords read here are named, the rest stays unresolved padding. */
@@ -156,7 +156,7 @@ ASSERT_SIZE(SceneEffectSlot, 0x30);
 #define SCENE_EFFECT_CELL(table, slot, k) (((SceneEffectSlot*)((u8*)(table) + (slot)))->cell[k])
 
 /* The per-slot sample effect: func_801FC01C seeds it from the sample table at
- * D_80147BD8 and func_801FC3A0 steps it every frame. `accum` is the 16.16 sample,
+ * g_PartyActors[2].script and func_801FC3A0 steps it every frame. `accum` is the 16.16 sample,
  * `delta` its per-frame step and `life_delta` the amount taken off the cell's
  * lifetime. */
 typedef struct SceneSampleEffect {
@@ -180,27 +180,12 @@ extern s32               D_801468A0;
 extern s32               D_801468A4;
 extern s32               D_801469EC;
 extern s32               D_801469F0;
-/* D_80147A58 */
-extern u8                g_PartyActors[];
-extern u16               D_80147A86;
-extern u16               D_80147A88;
 /* One s32; the array form is kept because the scalar form changes the bytes of 8.c. */
 extern s32               g_AreaFocusY[];
 extern u16               D_80147A96;
-extern s32               D_80147ABC;
-extern s32               D_80147AC0;
 extern u32               D_80147B28;
-extern s32               D_80147BA0;
-extern s32               D_80147BA4;
-extern u8*               D_80147BD8;
-extern s8*               D_80147BDC;
 extern s32               D_80147BEC[];
 extern s32               D_80147BF0[];
-extern u8                D_80147C21;
-extern s32               D_80147C38;
-extern s32               D_80147C3C;
-extern s32               D_80147C54;
-extern s32               D_80147C58;
 extern SceneLineColor    D_801F6C04;
 extern Callback          D_801FC980[];
 extern Callback          D_801FC988[];

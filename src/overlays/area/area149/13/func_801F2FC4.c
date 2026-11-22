@@ -6,7 +6,7 @@ MATCH void func_801F2FC4(void) {
         SND_SEPlay(0U);
         TASK(Actor)->unk_04 += 1;
     }
-    if (D_80147A8C < (g_AreaScrollTargetX + TO_COORD(2))) {
+    if (g_PartyActors[0].pos.x.fixed < (g_AreaScrollTargetX + TO_COORD(2))) {
         D_80147AD0 = 3;
     }
     func_801F3140(-3);

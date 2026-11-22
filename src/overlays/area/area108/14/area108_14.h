@@ -16,7 +16,6 @@
 
 /* The cell the party leader's choice commits and the bit the event sets. */
 extern s16 D_80147B26[];
-extern u8* D_80147B40;
 
 /* A map cell and a facing: the spots the leader stands on to pick a branch (func_801F4414). */
 typedef struct AreaFacingCell {
@@ -47,7 +46,7 @@ ASSERT_SIZE(AreaPosEntry, 0x04);
 /* Place the actor on the row of `table` that the current stage number selects. */
 #define AREA_PLACE_ACTOR(table)                                          \
     do {                                                                 \
-        u32 i = (u8)(D_80147B67 - 1);                                    \
+        u32 i = (u8)(g_PartyActors[1].unk_77 - 1);                       \
                                                                          \
         COORD_INT(TASK(Actor)->pos.x)  = (table)[i].x;                   \
         COORD_FRAC(TASK(Actor)->pos.x) = ((table)[i].x_half != 0) << 15; \
@@ -56,8 +55,6 @@ ASSERT_SIZE(AreaPosEntry, 0x04);
     } while (0)
 
 /* The game-overlay state bytes the cancel path resets. */
-extern u8       D_80147AF0;
-extern u8       D_80147B67;
 extern u8       D_801F56E8[];
 extern Callback D_801F56F4[];
 extern u8       D_801F56FC[];
@@ -102,8 +99,6 @@ ASSERT_OFFSET(SceneSampleTrack, weight, 0x1A);
 ASSERT_SIZE(SceneSampleTrack, 0x28); /* the same 0x28 row as scena00's SceneSample, whose weights are s16 */
 
 /* The staged actor rows: the event scrolls to row 1 and tints row 0. */
-/* D_80147A58 */
-extern Actor g_PartyActors[];
 
 /* The track's row count, the event flag byte beside it and the track the samples walk. */
 extern s8                D_801F6298;
