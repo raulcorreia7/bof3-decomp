@@ -246,11 +246,13 @@ typedef enum FieldTaskMode {
 #define FIELD_SPEED_RUN                 4
 
 /* One +0x24 cell record: four signed corner heights, loaded as s8 by
- * `@0x801530D0`, `@0x8015684C` and `@0x80157CE4`.
+ * `@0x801530D0`, `@0x8015684C` and `@0x80157CE4`, or whole by the cell side
+ * drawer.
  */
 typedef union AreaCellCorners {
     s8  corner_height[4];
     u16 corner_pair[2]; /* the heights in pairs, as halfwords */
+    s32 word;
 } AreaCellCorners;
 
 ASSERT_SIZE(AreaCellCorners, AREA_MAP_CELL_RECORD_SIZE);
@@ -280,11 +282,21 @@ extern s16      g_AreaGridColCursor;
 extern s16      g_AreaGridRowCursor;
 
 /* Four-byte tile table A rectangle. */
-typedef struct AreaTileRect {
-    u8 dv;
-    u8 du;
-    u8 v;
-    s8 u; /* signed: `lb a0,3(a1)` at 0x80155670; 0x80 reads as -128 */
+typedef union AreaTileRect {
+    struct {
+        u8 dv;
+        u8 du;
+        u8 v;
+        s8 u; /* signed: `lb a0,3(a1)` at 0x80155670; 0x80 reads as -128 */
+    } fields;
+
+    /* The size pair and the page corner read as one signed halfword, as
+     * Area_ApplyTileToQuad does before masking the low byte. */
+    struct {
+        u8  height;
+        u8  width;
+        s16 v;
+    } box;
 } AreaTileRect;
 
 ASSERT_SIZE(AreaTileRect, AREA_TILE_RECT_SIZE);
