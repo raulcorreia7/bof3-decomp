@@ -472,15 +472,14 @@ NON_MATCHING void Menu_DrawHeaderBar(s32 x, s32 y, s32 width, s32 height, u8 win
     prim = (POLY_FT4*)g_GfxPrimCursor;
     SetPolyFT4(prim);
     PSX_SET_SEMI_TRANSPARENT(prim);
-    clut_x = (window_style << 5) + 0x10;
-    inner  = x + 2;
-    setXY0(prim, left, top);
+    clut_x   = (window_style << 5) + 0x10;
     prim->y1 = top;
+    inner    = x + 2;
+    setXY0(prim, left, top);
     prim->x2 = left;
     prim->x1 = inner;
     prim->x3 = inner;
     setUV0(prim, 0, 0);
-    prim->u2 = 0;
     prim->v1 = 0;
     setRGB0(prim, 172, 172, 172);
     bottom_row = height + 1;
@@ -494,6 +493,7 @@ NON_MATCHING void Menu_DrawHeaderBar(s32 x, s32 y, s32 width, s32 height, u8 win
     prim->v3   = bottom_v;
     prim->y0 += 2;
     prim->y2 -= 3;
+    prim->u2 = 0;
     prim->v0 += 2;
     prim->v2 -= 3;
     prim->clut  = GetClut(clut_x, STAGE_PALETTE_Y + 1);
@@ -503,7 +503,8 @@ NON_MATCHING void Menu_DrawHeaderBar(s32 x, s32 y, s32 width, s32 height, u8 win
     GFX_AddPrim(GFX_LAYER_UI, sizeof(POLY_FT4));
 
     odd  = (width - 3) & 1;
-    half = ((s32)width1_u - 4) >> 1;
+    half = (s32)width1_u;
+    half = (half - 4) >> 1;
     prim = (POLY_FT4*)g_GfxPrimCursor;
     SetPolyFT4(prim);
     PSX_SET_SEMI_TRANSPARENT(prim);
@@ -532,12 +533,12 @@ NON_MATCHING void Menu_DrawHeaderBar(s32 x, s32 y, s32 width, s32 height, u8 win
     SetPolyFT4(prim);
     PSX_SET_SEMI_TRANSPARENT(prim);
     prim->y2 = bottom_y;
+    prim->x2 = x + width1 - 2;
     prim->v2 = bottom_v;
     prim->x1 = x + width1;
     prim->y1 = top;
     prim->x3 = x + width1;
     setXY0(prim, x + width1 - 2, top);
-    prim->x2 = x + width1 - 2;
     setUV0(prim, 0u, 0u);
     prim->u1 = 2u;
     prim->v1 = 0u;
@@ -549,8 +550,9 @@ NON_MATCHING void Menu_DrawHeaderBar(s32 x, s32 y, s32 width, s32 height, u8 win
     prim->y1 += 2;
     prim->y2 -= 1;
     prim->y3 -= 3;
-    prim->v2 -= 1;
     prim->v1 += 2;
+    /* The dead half_u store puts the v2 count in the retail register. */
+    prim->v2 = (half_u = prim->v2 - 1);
     prim->v3 -= 3;
     prim->clut  = GetClut(clut_x, STAGE_PALETTE_Y + 1);
     prim->tpage = getTPage(TPAGE_DEPTH_4BIT, TPAGE_ABR_HALF, FONT_TPAGE_X, FONT_TPAGE_Y);
