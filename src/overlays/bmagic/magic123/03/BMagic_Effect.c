@@ -188,13 +188,13 @@ MATCH void func_801EF584(void) {
 }
 
 #ifdef NON_MATCHING
+/* Draws the six-quad ring arc around the effect position, blue at the inner rim and fading outward. */
 NON_MATCHING void func_801EF750(void) {
     POLY_G4* prim;
     s16*     params;
     s32      i;
     s32      y3_cosine;
     s16      inner_radius;
-    u16      y_origin;
     u32      phase;
 
     params    = g_ScratchPad.cells.halves;
@@ -219,17 +219,12 @@ NON_MATCHING void func_801EF750(void) {
         prim->x3     = params[3] + FIXED_MUL(rsin(params[2]), params[0]);
         y3_cosine    = rcos(params[2]);
         inner_radius = params[0];
-        y_origin     = (u16)params[4];
 
         setRGB0(prim, 1, 1, 1);
         setRGB1(prim, 1, 1, 1);
-        prim->b2 = 0xC0;
-        prim->b3 = 0xC0;
-        prim->r2 = 0x20;
-        prim->g2 = 0x20;
-        prim->r3 = 0x20;
-        prim->g3 = 0x20;
-        prim->y3 = y_origin + FIXED_MUL(y3_cosine, inner_radius);
+        setRGB2(prim, 0x20, 0x20, 0xC0);
+        setRGB3(prim, 0x20, 0x20, 0xC0);
+        prim->y3 = params[4] + FIXED_MUL(y3_cosine, inner_radius);
 
         GFX_AddPrim(BMAGIC_LAYER_OVER_BATTLERS, sizeof(POLY_G4));
     }

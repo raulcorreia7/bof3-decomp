@@ -571,7 +571,7 @@ NON_MATCHING void func_801F85F0(s16 x, s16 y, s16 radius) {
         setRGB1(prim, 0x60, 0x60, 0x60);
         setRGB2(prim, 0x40, 0x40, 0x80);
         setRGB3(prim, 0x60, 0x60, 0x60);
-        prim->tpage = GetTPage(TPAGE_DEPTH_15BIT, TPAGE_ABR_HALF, 0x340, 0x100);
+        setTPage(prim, TPAGE_DEPTH_15BIT, TPAGE_ABR_HALF, 0x340, 0x100);
         GFX_AddPrim(GFX_LAYER_EFFECT_FRONT, sizeof(POLY_GT4));
 
         prim = (POLY_GT4*)g_GfxPrimCursor;
@@ -594,7 +594,7 @@ NON_MATCHING void func_801F85F0(s16 x, s16 y, s16 radius) {
         setRGB1(prim, 0x80, 0x40, 0x40);
         setRGB2(prim, 0x60, 0x60, 0x60);
         setRGB3(prim, 0x80, 0x40, 0x40);
-        prim->tpage = GetTPage(TPAGE_DEPTH_15BIT, TPAGE_ABR_HALF, 0x340, 0x100);
+        setTPage(prim, TPAGE_DEPTH_15BIT, TPAGE_ABR_HALF, 0x340, 0x100);
         GFX_AddPrim(GFX_LAYER_EFFECT_FRONT, sizeof(POLY_GT4));
     } while (count < 16);
 }
