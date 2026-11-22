@@ -4,8 +4,8 @@
 __asm__(".include \"include/match/macro.inc\"\n");
 #endif
 
-#ifdef NON_MATCHING
-NON_MATCHING void func_801FCBAC(void) {
+/* Scene 15's step script: the rooftop approach, the battle and the world-map return. */
+MATCH void func_801FCBAC(void) {
     u8 slot;
 
     switch (g_ScenarioState.step) {
@@ -371,8 +371,8 @@ NON_MATCHING void func_801FCBAC(void) {
             if (g_ScriptVars[0] != 3) {
                 break;
             }
+            g_ScriptVars[0] = 0;
             UI_ModeSet(0);
-            g_ScriptVars[0]      = 0;
             g_ScenarioState.step = 0x2C;
             break;
         case 44:
@@ -468,6 +468,3 @@ NON_MATCHING void func_801FCBAC(void) {
     }
     func_801FDC10(D_801FE754);
 }
-#else
-INCLUDE_ASM(func_801FCBAC);
-#endif
