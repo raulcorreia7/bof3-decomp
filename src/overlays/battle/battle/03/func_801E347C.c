@@ -27,7 +27,7 @@ MATCH void func_801E347C(void) {
         g_Task->unk_0C = 0x8000;
         g_Task->unk_10 = 0;
         depth -= dx;
-        ((volatile PartyMember*)g_Task)->pos.x.fixed = depth;
+        TASK(volatile PartyMember)->pos.x.fixed = depth;
         depth -= dy;
         work              = g_Task;
         work->pos.x.fixed = depth;

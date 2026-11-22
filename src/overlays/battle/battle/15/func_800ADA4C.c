@@ -17,14 +17,14 @@ MATCH void func_800ADA4C(void) {
     BATTLE_WORK->unk_24       = 0x80;
     BATTLE_WORK->unk_27       = 0x1B;
     BATTLE_WORK->unk_28       = 1;
-    work                      = (PartyMember*)g_Task;
+    work                      = TASK(PartyMember);
     work->unk_2B              = 0;
-    next                      = (PartyMember*)g_Task;
+    next                      = TASK(PartyMember);
     work->unk_2C.signed_value = 2;
     next->unk_2A              = 0;
-    work                      = (PartyMember*)g_Task;
+    work                      = TASK(PartyMember);
     work->unk_4B              = 0xFF;
-    slotp                     = (PartyMember*)g_Task;
+    slotp                     = TASK(PartyMember);
     work->pos.z.fixed         = 0;
     pair                      = &D_801485CA;
     base                      = (u8*)g_BattleTargetRows;
@@ -34,6 +34,6 @@ MATCH void func_800ADA4C(void) {
         Script_Select(slot);
     }
     D_801485D6        = *pair;
-    work              = (PartyMember*)g_Task;
+    work              = TASK(PartyMember);
     work->header.mode = work->header.mode + 1;
 }

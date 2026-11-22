@@ -30,10 +30,10 @@ NON_MATCHING void func_801B1E24(void) {
             if (!(rows->header.flags & 1) && prev != 0) {
                 index  = (prev - 1) * 2 + (value & BYTE_MASK) * 4;
                 result = func_801B1B2C(rows->pos.x.fixed + (s_EntityPlacementOffsets[index] << 15), rows->pos.y.fixed + (D_801CD08D[index] << 15), value & BYTE_MASK, row->speed);
-                if (((result & BYTE_MASK) != 0) && ((func_801B1C18(SP_REF(s32, 8), SP_REF(s32, 0xC), ((PartyMember*)g_Task)->speed) & 0xFF) != 0)) {
+                if (((result & BYTE_MASK) != 0) && ((func_801B1C18(SP_REF(s32, 8), SP_REF(s32, 0xC), TASK(PartyMember)->speed) & 0xFF) != 0)) {
                     goto found; /* first position test matched: run the row mark */
                 }
-                if (!(func_801B1B2C(D_80145EC4, D_80145EC8, value & BYTE_MASK, ((PartyMember*)g_Task)->speed) & 0xFF)) {
+                if (!(func_801B1B2C(D_80145EC4, D_80145EC8, value & BYTE_MASK, TASK(PartyMember)->speed) & 0xFF)) {
                     goto next; /* fallback position rejected: next row */
                 }
             } else if (!(func_801B1B2C(rows->pos.x.fixed, rows->pos.y.fixed, value & BYTE_MASK, row->speed) & BYTE_MASK)) {

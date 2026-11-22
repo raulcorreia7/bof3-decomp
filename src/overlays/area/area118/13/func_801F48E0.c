@@ -21,9 +21,9 @@ MATCH void func_801F48E0(void) {
     prim->g0 = shade;
     prim->r0 = shade;
     g_ScratchPadVectors[0].vz =
-        -Area_HeightSample((g_ScratchPadVectors[0].vx + 0x4000) << 9, (g_ScratchPadVectors[0].vy + 0x4000) << 9) / 2 - LOHU(((Actor*)g_Task)->pos.z.part.integer) - 60 + (g_FrameCount % 48) * 2;
+        -Area_HeightSample((g_ScratchPadVectors[0].vx + 0x4000) << 9, (g_ScratchPadVectors[0].vy + 0x4000) << 9) / 2 - LOHU(TASK(Actor)->pos.z.part.integer) - 60 + (g_FrameCount % 48) * 2;
     g_ScratchPadVectors[1].vz =
-        -Area_HeightSample((g_ScratchPadVectors[1].vx + 0x4000) << 9, (g_ScratchPadVectors[1].vy + 0x4000) << 9) / 2 - LOHU(((Actor*)g_Task)->pos.z.part.integer) - 60 + (g_FrameCount % 48) * 2;
+        -Area_HeightSample((g_ScratchPadVectors[1].vx + 0x4000) << 9, (g_ScratchPadVectors[1].vy + 0x4000) << 9) / 2 - LOHU(TASK(Actor)->pos.z.part.integer) - 60 + (g_FrameCount % 48) * 2;
     RotTransPers3(&g_ScratchPadVectors[0], &g_ScratchPadVectors[1], &g_ScratchPadVectors[2], (long*)&prim->x0, (long*)&prim->x1, (long*)D_1F800034, &depth, &flag);
     Area_CellAddPrim(g_Task->pos.x.fixed, g_Task->pos.y.fixed, 1, sizeof(LINE_F2));
 

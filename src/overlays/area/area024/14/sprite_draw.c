@@ -219,19 +219,19 @@ MATCH void func_801F2C58(void) {
     func_801F3D0C();
     func_801F3080();
     func_801F3314();
-    ((Actor*)g_Task)->timer = 0;
-    ((Actor*)g_Task)->header.mode++;
+    TASK(Actor)->timer = 0;
+    TASK(Actor)->header.mode++;
 }
 
 MATCH void func_801F2CB0(void) {
-    func_801F3E48(((Actor*)g_Task)->timer);
-    ((Actor*)g_Task)->timer = (((Actor*)g_Task)->timer + 2u);
-    if (((Actor*)g_Task)->timer >= 128u) {
+    func_801F3E48(TASK(Actor)->timer);
+    TASK(Actor)->timer = (TASK(Actor)->timer + 2u);
+    if (TASK(Actor)->timer >= 128u) {
         SND_SEPlay(EMI_SE_ID(SND_BANK_AREA, 6));
         SND_SEPlay(EMI_SE_ID(SND_BANK_AREA, 14));
         SND_SEPlay(EMI_SE_ID(SND_BANK_AREA, 3));
-        ((Actor*)g_Task)->timer = 0;
-        ((Actor*)g_Task)->header.mode++;
+        TASK(Actor)->timer = 0;
+        TASK(Actor)->header.mode++;
     }
 }
 
@@ -249,7 +249,7 @@ MATCH void func_801F2D5C(void) {
 MATCH void func_801F2DB4(void) {
     Actor* scratch;
 
-    scratch       = (Actor*)g_Task;
+    scratch       = TASK(Actor);
     g_PartyActors = 0;
     scratch->header.mode++;
 }
@@ -642,7 +642,7 @@ MATCH s32 func_801F3E48(u8 shade) {
     u16             i;
 
     vec   = D_801F2C04;
-    saved = (volatile Actor*)g_Task;
+    saved = TASK(volatile Actor);
     TASK_SET(&g_PartyActors);
     PushMatrix();
 

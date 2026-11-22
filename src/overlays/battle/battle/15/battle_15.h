@@ -22,7 +22,7 @@
  * battle/battle/03 overlay; the call sites in this target fix the parameter roles
  * named in the prototypes below. */
 /* Typed view of the scratchpad work area; each use reloads the cell. */
-#define BATTLE_WORK                    ((PartyMember*)g_Task)
+#define BATTLE_WORK                    TASK(PartyMember)
 
 /* The actor's target slot, signed, moved by one step before the wrap helper clamps it. */
 #define ACTOR_TARGET_STEP(delta)       ((s8)g_BattleActorTurn->command.target + (delta))
@@ -1098,7 +1098,7 @@ static inline void Battle_DispatchEffect(BattleEffectSteps* table) {
     PartyMember*      work;
 
     handlers  = *table;
-    work      = (PartyMember*)g_Task;
+    work      = TASK(PartyMember);
     g_Scripts = BATTLE_SCRIPT_TABLE;
     ((Callback*)&handlers)[work->header.mode]();
     g_Scripts = AREA_SCRIPT_TABLE;
@@ -1210,7 +1210,7 @@ static inline void BattleRunHandlerQuad(s32 offset) {
 
     handlers = *(BattleTaskModes*)((Callback*)&D_800969B8 + offset);
     handlers.modes[BATTLE_WORK->header.mode]();
-    work = (PartyMember*)g_Task;
+    work = TASK(PartyMember);
     if ((work->header.flags != 0u) && (work->header.mode != 0u)) {
         func_800AE9C4(work->unk_04);
     }

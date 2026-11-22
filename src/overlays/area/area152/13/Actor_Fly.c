@@ -16,7 +16,7 @@ MATCH void Actor_Fly(void) {
         scratch->param.unk_0B = 1;
     }
 
-    work = (u8*)g_Task;
+    work = TASK(u8);
     *(s32*)(work + 0x34) += *(s32*)(work + 0x0C);
     *(s32*)(work + 0x38) += *(s32*)(work + 0x10);
     Script_AnimStepLoop();

@@ -9,7 +9,7 @@ MATCH void func_801F4CD0(void) {
     u8           type;
 
     g_GameFlags &= 0xDFFF;
-    saved = (PartyMember*)g_Task;
+    saved = TASK(PartyMember);
     i     = 0;
     if (g_PartySize != 0) {
         do {
@@ -29,17 +29,17 @@ MATCH void func_801F4CD0(void) {
                     goto next_record;
                 }
                 g_GameState->u.field.counter.unsigned_value = 2;
-                ((PartyMember*)g_Task)->unk_09              = 0;
+                TASK(PartyMember)->unk_09                   = 0;
                 saved->param.unk_0B |= BIT(index);
                 g_AreaWalkFlags |= BIT(index);
-                ((PartyMember*)g_Task)->facing = D_801F5998[bounds * 6];
+                TASK(PartyMember)->facing = D_801F5998[bounds * 6];
                 if (SYS_TestFlag(g_SceneEventFlags, D_801F5999[bounds * 6]) != 0) {
-                    ((PartyMember*)g_Task)->facing ^= 4;
+                    TASK(PartyMember)->facing ^= 4;
                 }
-                Script_Request(((PartyMember*)g_Task)->facing);
+                Script_Request(TASK(PartyMember)->facing);
                 goto next_record;
             }
-            if (((PartyMember*)g_Task)->unk_09 == 0) {
+            if (TASK(PartyMember)->unk_09 == 0) {
                 func_801C2538();
                 if (index == 0) {
                     func_801C2710();
@@ -49,16 +49,16 @@ MATCH void func_801F4CD0(void) {
                 if (SYS_TestFlag(g_SceneEventFlags, D_801F5999[bounds * 6]) != 0) {
                     type ^= 4;
                 }
-                if (((PartyMember*)g_Task)->facing != type) {
-                    ((PartyMember*)g_Task)->facing = type;
-                    ((PartyMember*)g_Task)->unk_0C = -((PartyMember*)g_Task)->unk_0C;
-                    ((PartyMember*)g_Task)->unk_10 = -((PartyMember*)g_Task)->unk_10;
-                    ((PartyMember*)g_Task)->unk_14 = -((PartyMember*)g_Task)->unk_14;
-                    ((PartyMember*)g_Task)->unk_09 = 8 - ((PartyMember*)g_Task)->unk_09;
+                if (TASK(PartyMember)->facing != type) {
+                    TASK(PartyMember)->facing = type;
+                    TASK(PartyMember)->unk_0C = -TASK(PartyMember)->unk_0C;
+                    TASK(PartyMember)->unk_10 = -TASK(PartyMember)->unk_10;
+                    TASK(PartyMember)->unk_14 = -TASK(PartyMember)->unk_14;
+                    TASK(PartyMember)->unk_09 = 8 - TASK(PartyMember)->unk_09;
                 }
             }
             func_801B0DFC();
-            ((PartyMember*)g_Task)->unk_09--;
+            TASK(PartyMember)->unk_09--;
             Script_AnimStepLoop();
             g_GameFlags |= 0x2000;
         next_record:

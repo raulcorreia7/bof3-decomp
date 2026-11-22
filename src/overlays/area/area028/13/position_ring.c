@@ -98,7 +98,7 @@ MATCH void func_801F2C48(void) {
 
     func_801F2F5C();
 
-    work = (u8*)g_Task;
+    work = TASK(u8);
 
     work[1] += 1u;
     FIELD(u16, work, 0x2Eu) = 0;

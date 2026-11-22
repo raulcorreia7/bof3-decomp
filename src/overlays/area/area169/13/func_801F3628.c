@@ -9,7 +9,7 @@ MATCH void func_801F3628(void) {
     u8           type;
 
     g_GameFlags &= 0xDFFF;
-    saved = (PartyMember*)g_Task;
+    saved = TASK(PartyMember);
     i     = 0;
     if (g_PartySize != 0) {
         do {
@@ -31,28 +31,28 @@ MATCH void func_801F3628(void) {
                 saved->param.unk_0B |= BIT(index);
                 g_AreaWalkFlags |= BIT(index);
                 g_GameState->u.field.counter.unsigned_value = 2;
-                ((PartyMember*)g_Task)->unk_09              = 0;
-                ((PartyMember*)g_Task)->facing              = D_801F3B9C[bounds].unk_04;
-                Script_Request(((PartyMember*)g_Task)->facing);
+                TASK(PartyMember)->unk_09                   = 0;
+                TASK(PartyMember)->facing                   = D_801F3B9C[bounds].unk_04;
+                Script_Request(TASK(PartyMember)->facing);
                 goto next_record;
             }
-            if (((PartyMember*)g_Task)->unk_09 == 0) {
+            if (TASK(PartyMember)->unk_09 == 0) {
                 func_801C2538();
                 if (index == 0) {
                     func_801C2710();
                 }
             } else {
                 type = D_801F3B9C[bounds].unk_04;
-                if (((PartyMember*)g_Task)->facing != type) {
-                    ((PartyMember*)g_Task)->facing = type;
-                    ((PartyMember*)g_Task)->unk_0C = -((PartyMember*)g_Task)->unk_0C;
-                    ((PartyMember*)g_Task)->unk_10 = -((PartyMember*)g_Task)->unk_10;
-                    ((PartyMember*)g_Task)->unk_14 = -((PartyMember*)g_Task)->unk_14;
-                    ((PartyMember*)g_Task)->unk_09 = 8 - ((PartyMember*)g_Task)->unk_09;
+                if (TASK(PartyMember)->facing != type) {
+                    TASK(PartyMember)->facing = type;
+                    TASK(PartyMember)->unk_0C = -TASK(PartyMember)->unk_0C;
+                    TASK(PartyMember)->unk_10 = -TASK(PartyMember)->unk_10;
+                    TASK(PartyMember)->unk_14 = -TASK(PartyMember)->unk_14;
+                    TASK(PartyMember)->unk_09 = 8 - TASK(PartyMember)->unk_09;
                 }
             }
             func_801B0DFC();
-            ((PartyMember*)g_Task)->unk_09--;
+            TASK(PartyMember)->unk_09--;
             Script_AnimStepLoop();
             g_GameFlags |= 0x2000;
         next_record:

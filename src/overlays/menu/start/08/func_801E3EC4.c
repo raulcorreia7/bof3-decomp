@@ -25,7 +25,7 @@ MATCH void func_801E3EC4(void) {
     TASK_BYTES[0x24]                 = 0x81;
     TASK_BYTES[6]                    = 4;
     TASK_BYTES[9]                    = 0;
-    Script_Select((((Actor*)g_Task)->unk_06 + 8) & BYTE_MASK);
+    Script_Select((TASK(Actor)->unk_06 + 8) & BYTE_MASK);
     D_801ED7EC      = 1;
     *hint           = 0xFF;
     D_801ED864      = 0x80;

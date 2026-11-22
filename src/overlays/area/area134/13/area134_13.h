@@ -42,7 +42,7 @@ static inline u8* Area_AdvanceRow(s32 actor_index) {
     s32    i;
 
     i    = 0;
-    work = (u8*)g_Task;
+    work = TASK(u8);
     TASK_SET(&g_Actors[actor_index]);
     actor = &g_Actors[actor_index];
     do {
@@ -120,14 +120,14 @@ static inline void Area_EnterMode1(void) {
     selection = D_801F5724[0x144u + index];                   \
     result    = Actor_ClaimSlot(kind, 0, selection, x, y);    \
     if ((u8)result != 0xFF) {                                 \
-        work      = (u8*)g_Task;                              \
+        work      = TASK(u8);                                 \
         work[0xB] = result;                                   \
     }
 
 /* Counts the work byte 0x09 down and takes the given mode when it reaches zero.
  * The member declares work and timer. */
 #define AREA_TICK_MODE_CHANGE(next_mode)   \
-    work    = (u8*)g_Task;                 \
+    work    = TASK(u8);                    \
     timer   = work[9];                     \
     work[9] = timer + 0xFF;                \
     if (timer == 0) {                      \

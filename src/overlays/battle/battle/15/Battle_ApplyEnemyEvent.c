@@ -24,7 +24,7 @@ MATCH void Battle_ApplyEnemyEvent(EnemyBattler* work_arg, BattleEventPacket* eve
             saved = TASK_BYTES;
             TASK_SET(work);
             Battle_CureStatus(work->slot, 0xFFFF);
-            Battle_AddStatus(((EnemyBattler*)(void*)g_Task)->slot, *(u8*)&((EnemyBattler*)(void*)work)->status | event->selector);
+            Battle_AddStatus(TASK(EnemyBattler)->slot, *(u8*)&((EnemyBattler*)(void*)work)->status | event->selector);
             TASK_SET(saved);
             break;
         case 3:

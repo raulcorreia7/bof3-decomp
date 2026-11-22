@@ -12,14 +12,14 @@ MATCH void func_800AE574(void) {
     u16          height;
     u16          base;
 
-    first = (PartyMember*)g_Task;
+    first = TASK(PartyMember);
     first->unk_09--;
     if (first->unk_09 != 0) {
         return;
     }
 
     source = g_BattleEffectBattler;
-    second = (PartyMember*)g_Task;
+    second = TASK(PartyMember);
     WorldPos_Copy(&second->pos, &source->pos);
     Battle_ProjectRange();
 
@@ -35,11 +35,11 @@ MATCH void func_800AE574(void) {
     third[9] = 0;
     height -= 24;
     FIELD(u16, third, 0x2E) = height;
-    flag                    = (PartyMember*)g_Task;
+    flag                    = TASK(PartyMember);
     base -= next;
     FIELD(u16, third, 0x30) = base;
     flag->timer             = 1;
 
-    last              = (PartyMember*)g_Task;
+    last              = TASK(PartyMember);
     last->header.mode = (last->header.mode + 1);
 }

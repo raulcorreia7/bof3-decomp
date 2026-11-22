@@ -3,10 +3,10 @@
 MATCH void func_801F375C(void) {
     u8* scratch;
 
-    scratch = (u8*)g_Task;
+    scratch = TASK(u8);
     if (scratch[0x0B] == 0) {
         scratch[9]++;
-        scratch = (u8*)g_Task;
+        scratch = TASK(u8);
         if (scratch[9] >= 0x5A) {
             scratch[0x0B]++;
         }
