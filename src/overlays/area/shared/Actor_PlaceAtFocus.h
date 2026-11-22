@@ -4,7 +4,7 @@ MATCH void Actor_PlaceAtFocus(void) {
     u8* work;
 
     work                   = TASK(u8);
-    FIELD(s32, work, 0x34) = D_80147A8C;
-    FIELD(s32, work, 0x38) = g_AreaFocusY;
-    FIELD(s32, work, 0x3C) = D_80147A94;
+    FIELD(s32, work, 0x34) = g_AreaFocus.x.fixed;
+    FIELD(s32, work, 0x38) = g_AreaFocus.y.fixed;
+    FIELD(s32, work, 0x3C) = g_AreaFocus.z.fixed;
 }

@@ -1,11 +1,11 @@
 #include "battle_15.h"
 #include "menu/inventory.h"
 
-/* The battle copy of the menu inventory panel: seven visible rows and a shorter frame, without the vital-tab marks. */
+/* The battle copy of the menu inventory panel: seven visible lines and a shorter frame, without the vital-tab marks. */
 /* func_800B25C0 */
 MATCH void Menu_DrawInventoryWindow(MenuPanelTask* task) {
     u8   scroll_y;
-    u8   scroll_rows;
+    u8   line_count;
     u8   item;
     s32  dim;
     u8   i;
@@ -14,8 +14,8 @@ MATCH void Menu_DrawInventoryWindow(MenuPanelTask* task) {
     s16  y;
     u8   first;
     s32  shade;
-    u8   row_shade;
-    s32  row;
+    u8   line_shade;
+    s32  line;
     u8** title;
     u8*  ids;
     u8*  counts;
@@ -24,11 +24,11 @@ MATCH void Menu_DrawInventoryWindow(MenuPanelTask* task) {
     s32  title_x;
 
     UI_WindowDraw(task->pos.x + 3, task->pos.y + 3, 153, 130, task->unk_09, g_WindowStyle);
-    first  = func_801AFD10(&task->unk_0B, &scroll_y, &scroll_rows, (u8*)&task->u.list.scroll);
+    first  = func_801AFD10(&task->unk_0B, &scroll_y, &line_count, (u8*)&task->u.list.scroll);
     y      = task->pos.y + (s8)scroll_y;
     ids    = D_801C893C[task->unk_0A] + first;
     counts = D_801C8950[task->unk_0A] + first;
-    for (i = 0; i < scroll_rows + 7; i++) {
+    for (i = 0; i < line_count + 7; i++) {
         item = *ids;
         if (item != 0) {
             unusable = false;
@@ -37,22 +37,22 @@ MATCH void Menu_DrawInventoryWindow(MenuPanelTask* task) {
             }
             dim   = unusable;
             shade = -dim & UI_TEXT_DIM;
-            row   = task->unk_0B + i;
-            if (row == task->flags) {
+            line  = task->unk_0B + i;
+            if (line == task->flags) {
                 shade = UI_TEXT_HIGHLIGHT;
             }
-            row_shade = shade;
-            held      = 1;
+            line_shade = shade;
+            held       = 1;
             if (task->unk_0A != ITEM_CATEGORY_VITAL) {
                 held = *counts;
             }
-            if (row == task->flags || row == task->unk_0C) {
-                if (row_shade != UI_TEXT_DIM) {
+            if (line == task->flags || line == task->unk_0C) {
+                if (line_shade != UI_TEXT_DIM) {
                     UI_ListDrawItemRow(task->pos.x + 7, (s16)(y + 26), UI_TEXT_DIM, task->unk_0A, *ids, held, true);
                 }
-                UI_ListDrawItemRow(task->pos.x + 7, (s16)(y + 24), row_shade, task->unk_0A, *ids, held, dim);
+                UI_ListDrawItemRow(task->pos.x + 7, (s16)(y + 24), line_shade, task->unk_0A, *ids, held, dim);
             } else {
-                UI_ListDrawItemRow(task->pos.x + 7, (s16)(y + 26), row_shade, task->unk_0A, *ids, held, dim);
+                UI_ListDrawItemRow(task->pos.x + 7, (s16)(y + 26), line_shade, task->unk_0A, *ids, held, dim);
             }
         }
         ids++;

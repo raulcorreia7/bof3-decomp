@@ -7,7 +7,7 @@ MATCH void Party_LoadPalettes(void) {
     u8*    block;
 
     for (i = 0; i < g_PartySize; i++) {
-        work   = (Actor*)((u8*)g_Game.members + i * BATTLE_PARTY_STRIDE);
+        work   = (Actor*)&g_Game.members[i];
         block  = GAME_PALETTE_STAGE + i * 0x40;
         g_Task = work;
         GFX_PaletteFreeFadeTarget(work);

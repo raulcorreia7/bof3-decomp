@@ -20,14 +20,14 @@ MATCH void SND_SetBankLayout(u32 layout) {
     /* FAKE: pin keeps the last index in a3. */
     FAKE_REG(s32, last, "a3");
 
-    s32 fixed             = 0x8011A000;
+    s32 heap_base         = 0x8011A000;
     off                   = (layout & BYTE_MASK) * (SND_BANK_COUNT * sizeof(u32));
     D_8014678C            = 0;
     v                     = FIELD(s32, g_SndBankHeaderSize, off);
     layer2                = D_8014871C;
-    D_80148A18            = fixed;
-    ((u32*)D_80146780)[0] = fixed;
-    v += fixed;
+    D_80148A18            = heap_base;
+    ((u32*)D_80146780)[0] = heap_base;
+    v += heap_base;
     D_80146788[0]             = v;
     w                         = FIELD(s32, g_SndBankSpuAddress, off);
     D_80146784                = D_801486A0;

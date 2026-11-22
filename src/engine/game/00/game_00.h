@@ -304,7 +304,6 @@ extern volatile u32        g_GameLastX; /* 0x80143F08 */
 extern volatile u32        g_GameLastY; /* 0x80143F0C */
 extern s16                 D_80143F16;  /* 0x80143F16; signed high halfword of the context bundle */
 extern s16                 D_80143F1A;  /* 0x80143F1A */
-extern s16                 D_80143F26;  /* integer half of g_EncounterOriginX */
 extern s16                 D_80143F2A;  /* integer half of g_EncounterOriginY */
 /* Scene step byte, countdown halfword and the slot index cached in the
  * scratchpad byte at 0x1F800000. The read-modify-write sites go through a

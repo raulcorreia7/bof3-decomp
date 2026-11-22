@@ -17,8 +17,8 @@
  * entrance words at 0x801D0C1C. */
 /* The per-frame passes func_801D1014 runs, in its order. */
 /* The damage chain. */
-/* The queued battle panel slots, and the size a drawn panel gets: its row
- * width g_Battle.panel_widths plus this margin, or this margin alone for an empty row. */
+/* The queued battle panel slots, and the size a drawn panel gets: its panel
+ * width g_Battle.panel_widths plus this margin, or this margin alone for an empty panel. */
 #define BATTLE_PANEL_SLOT_COUNT  5
 #define BATTLE_PANEL_SIZE        0x10
 /* Current enemy-work pointer cell (fixed RAM, not scratchpad). */
@@ -85,24 +85,7 @@ typedef struct DropChances {
     u8 chance[8];
 } DropChances;
 
-/* The battle panel's own 0x24-stride entry table at 0x80148332: the base
- * symbol is the table's first byte, so its fields start at +0. */
-typedef struct BattlePanel {
-    u8  mode_00; /* +0x00 panel mode; Battle_OpenPanels writes 5 and 7 */
-    u8  unk_01;  /* +0x01 */
-    s16 x_02;    /* +0x02 panel x */
-    s16 y_04;    /* +0x04 panel y */
-    u8  unk_06;  /* +0x06 */
-    u8  unk_07;  /* +0x07 */
-    u8  battler; /* +0x08 the battler the entry belongs to */
-    u8  pad_09[0x1B];
-} BattlePanel;
-
-ASSERT_OFFSET(BattlePanel, x_02, 0x02);
-ASSERT_OFFSET(BattlePanel, y_04, 0x04);
-ASSERT_OFFSET(BattlePanel, battler, 0x08);
-ASSERT_SIZE(BattlePanel, 0x24);
-
+/* The battle panel entries; BattlePanel is in battle/records.h. */
 /* The battle mode byte 0x801462E0 selects one of these six handlers, copied to
  * the stack from 0x801D0C04. */
 typedef struct {
@@ -158,12 +141,12 @@ extern s32             D_80145ED0;
 extern volatile u8     D_80145F18[];
 extern u8              D_80145F20[];
 extern u8              D_80145F22[];
-/* One-field views of the same rows: the local rows (stride 0x140) and the
- * enemy rows (stride 0x118), each anchored at the field the retail symbol
+/* One-field views of the same records: the party records (stride 0x140) and the
+ * enemy records (stride 0x118), each anchored at the field the retail symbol
  * names. */
 extern u8              D_80145FB1;
 extern u8              D_80145FB2[];
-/* FAKE: func_801D4B38 and Battle_GetActionLock only match with the flags cell as its own volatile word row. */
+/* FAKE: func_801D4B38 and Battle_GetActionLock only match with the flags cell as its own volatile word. */
 extern volatile u32    D_80145FB8[][80];
 extern u8              D_80145FC6;
 extern u8              D_80145FC7;
@@ -395,7 +378,7 @@ extern u8                       D_801EB05B[];
 extern u8                       D_801EB068[];
 extern u8                       D_801EB075[];
 extern u8                       D_801EB082[];
-extern volatile u16             D_801EB09C[][10]; /* Event-script rows (10 halfwords each) in high RAM. */
+extern volatile u16             D_801EB09C[][10]; /* Event-script records (10 halfwords each) in high RAM. */
 /* D_801EB108 */
 extern u8                       s_BattlePanelYOffsets[];
 extern s32                      D_801EB08F;
@@ -683,7 +666,7 @@ u8                 func_801DB058(void);
 u8                 func_801DB2F8(u32 battler_index);
 u8                 func_801DB3A0(u32 battler_index, u32 average_threshold, u32 max_threshold);
 u8                 func_801DB3E4(u32 battler_index, u32 average_threshold, u32 max_threshold);
-u32                func_801DB434(u8 compare_value, u32 row_index);
+u32                func_801DB434(u8 compare_value, u32 side);
 void               func_801DB494(void);
 u8                 func_801DB844(u32 battler_index);
 u8                 func_801DB9E4(u32 battler_index);

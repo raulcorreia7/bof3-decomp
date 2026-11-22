@@ -7,20 +7,20 @@
 /* func_800A9FC4 */
 MATCH void Battle_RescalePanel(Character* rec, s32 slot) {
     s32 party_slot;
-    s32 row_offset;
-    s32 table_row;
+    s32 member_offset;
+    s32 member_slot;
 
-    party_slot = slot & BYTE_MASK;
-    row_offset = party_slot * BATTLE_PARTY_STRIDE;
+    party_slot    = slot & BYTE_MASK;
+    member_offset = party_slot * BATTLE_PARTY_STRIDE;
 
-    rec->stats.power           = func_801DE0AC(rec->base.power, (FIELD(s8, &D_80145FBC, row_offset) * 2) + 0x64);
-    rec->stats.defense         = func_801DE0AC(rec->base.defense, (FIELD(s8, &D_80145FBD, row_offset) * 2) + 0x64);
-    rec->stats.agility         = func_801DE0AC(rec->base.agility, (FIELD(s8, &D_80145FBE, row_offset) * 2) + 0x64);
-    rec->stats.intelligence    = func_801DE0AC(rec->base.intelligence, (FIELD(s8, &D_80145FBF, row_offset) * 2) + 0x64);
-    rec->stats.reprisal_chance = func_801DE144(rec->base.reprisal_chance, (FIELD(s8, &D_80145FC0, row_offset) * 2) + 0x64);
-    rec->stats.critical_chance = func_801DE144(rec->base.critical_chance, (FIELD(s8, &D_80145FC1, row_offset) * 2) + 0x64);
-    rec->stats.evasion         = func_801DE144(rec->base.evasion, (FIELD(s8, &D_80145FC2, row_offset) * 2) + 0x64);
-    rec->stats.accuracy        = func_801DE144(rec->base.accuracy, (FIELD(s8, &D_80145FC3, row_offset) * 2) + 0x64);
+    rec->stats.power           = func_801DE0AC(rec->base.power, (FIELD(s8, &D_80145FBC, member_offset) * 2) + 0x64);
+    rec->stats.defense         = func_801DE0AC(rec->base.defense, (FIELD(s8, &D_80145FBD, member_offset) * 2) + 0x64);
+    rec->stats.agility         = func_801DE0AC(rec->base.agility, (FIELD(s8, &D_80145FBE, member_offset) * 2) + 0x64);
+    rec->stats.intelligence    = func_801DE0AC(rec->base.intelligence, (FIELD(s8, &D_80145FBF, member_offset) * 2) + 0x64);
+    rec->stats.reprisal_chance = func_801DE144(rec->base.reprisal_chance, (FIELD(s8, &D_80145FC0, member_offset) * 2) + 0x64);
+    rec->stats.critical_chance = func_801DE144(rec->base.critical_chance, (FIELD(s8, &D_80145FC1, member_offset) * 2) + 0x64);
+    rec->stats.evasion         = func_801DE144(rec->base.evasion, (FIELD(s8, &D_80145FC2, member_offset) * 2) + 0x64);
+    rec->stats.accuracy        = func_801DE144(rec->base.accuracy, (FIELD(s8, &D_80145FC3, member_offset) * 2) + 0x64);
 
     rec->stats.resistances[0] = rec->base.resistances[0];
     rec->stats.resistances[1] = rec->base.resistances[1];
@@ -55,14 +55,14 @@ MATCH void Battle_RescalePanel(Character* rec, s32 slot) {
         }
     }
 
-    table_row = slot & BYTE_MASK;
+    member_slot = slot & BYTE_MASK;
 
-    if (g_Game.members[table_row].u.turn.action_flags.volatile_value & BATTLER_ACTION_HOLY_RESIST_ZERO) {
-        g_Game.members[table_row].chr.stats.resistances[RES_INDEX_HOLY] = 0;
+    if (g_Game.members[member_slot].u.turn.action_flags.volatile_value & BATTLER_ACTION_HOLY_RESIST_ZERO) {
+        g_Game.members[member_slot].chr.stats.resistances[RES_INDEX_HOLY] = 0;
     }
-    if (g_Game.members[table_row].u.turn.action_flags.volatile_value & BATTLER_ACTION_FIRE_RESIST_ZERO) {
-        g_Game.members[table_row].chr.stats.resistances[RES_INDEX_FIRE] = 0;
+    if (g_Game.members[member_slot].u.turn.action_flags.volatile_value & BATTLER_ACTION_FIRE_RESIST_ZERO) {
+        g_Game.members[member_slot].chr.stats.resistances[RES_INDEX_FIRE] = 0;
     }
-    g_Game.members[table_row].chr.stats.power   = func_801DE0AC(g_Game.members[table_row].chr.stats.power, 0x64);
-    g_Game.members[table_row].chr.stats.defense = func_801DE0AC(g_Game.members[table_row].chr.stats.defense, 0x64);
+    g_Game.members[member_slot].chr.stats.power   = func_801DE0AC(g_Game.members[member_slot].chr.stats.power, 0x64);
+    g_Game.members[member_slot].chr.stats.defense = func_801DE0AC(g_Game.members[member_slot].chr.stats.defense, 0x64);
 }

@@ -35,7 +35,7 @@ NON_MATCHING void Battle_ChooseEquipAction(void) {
             g_Battle.ui_mode += 3u;
         } else {
             Battle_InitEquipChangePanel();
-            D_8014859D = g_BattleItemRow;
+            D_8014859D = g_BattleEquipSlot;
             D_801485A0 = D_801485C4;
             g_Battle.ui_mode += 1u;
         }

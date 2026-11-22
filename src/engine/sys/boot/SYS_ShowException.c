@@ -1,29 +1,26 @@
 #include "engine/slus/slus.h"
-
-typedef struct {
-    u32 word[4];
-} ExceptionQuad;
+#include "common/copy.h"
 
 /* displays the boot exception register dump and loops forever
  * updating the double-buffered debug screen.
  */
 MATCH void SYS_ShowException(void) {
-    const u32*     exception_frame;
-    ExceptionQuad* src;
-    ExceptionQuad* dst;
-    ExceptionQuad* end;
-    u32            saved_context[48];
-    u32            exception_code;
-    const u32*     exception_pc;
-    unsigned int   i;
-    s16            y;
-    u8             x_value;
-    s16            x_label;
+    const u32*   exception_frame;
+    Cpy16*       src;
+    Cpy16*       dst;
+    Cpy16*       end;
+    u32          saved_context[48];
+    u32          exception_code;
+    const u32*   exception_pc;
+    unsigned int i;
+    s16          y;
+    u8           x_value;
+    s16          x_label;
 
     exception_frame = **(const u32***)0x108;
-    src             = (ExceptionQuad*)exception_frame;
-    dst             = (ExceptionQuad*)saved_context;
-    end             = (ExceptionQuad*)(exception_frame + 48);
+    src             = (Cpy16*)exception_frame;
+    dst             = (Cpy16*)saved_context;
+    end             = (Cpy16*)(exception_frame + 48);
     do {
         *dst++ = *src++;
     } while (src != end);

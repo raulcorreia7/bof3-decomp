@@ -3,8 +3,8 @@
 /* func_801E6FB0 */
 MATCH void Battle_RunAilmentActor(void) {
     u8 slot;
-    /* FAKE: row index pinned to v0 so the product takes v1; pure-C best 95.10%, a 20-minute search found nothing. */
-    FAKE_REG(s32, row, "v0");
+    /* FAKE: enemy slot pinned to v0 so the product takes v1; pure-C best 95.10%, a 20-minute search found nothing. */
+    FAKE_REG(s32, enemy_slot, "v0");
     u16 flags;
     u8  id;
 
@@ -33,8 +33,8 @@ MATCH void Battle_RunAilmentActor(void) {
     if (BATTLER_IS_PLAYER(slot)) {
         flags = g_Game.members[slot].chr.status;
     } else {
-        row   = slot - 3;
-        flags = g_BattleEnemyBattlers[row].status;
+        enemy_slot = slot - 3;
+        flags      = g_BattleEnemyBattlers[enemy_slot].status;
     }
     if ((flags & (STATUS_BLIND | STATUS_SILENCED | STATUS_SLEEPING)) == 0) {
         TASK(PartyMember)->header.mode = 0;

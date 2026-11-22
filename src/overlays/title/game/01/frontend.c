@@ -10,14 +10,14 @@ static Callback s_TitleSteps[8] = {
  * state-dispatch, and render/update loop. */
 /* func_801D0C04 */
 MATCH void Title_Run(void) { /* func_801D0C04 */
-    g_UiTitleState    = 0u;
-    g_UiTitleSubstate = 0u;
+    g_SysThreads[1].tail.title_screen.state    = 0u;
+    g_SysThreads[1].tail.title_screen.substate = 0u;
     SYS_ClearCurrentThread();
 
     for (;;) {
         SYS_ThreadWait(1);
         Title_UpdateStartButton();
-        s_TitleSteps[g_UiTitleState]();
+        s_TitleSteps[g_SysThreads[1].tail.title_screen.state]();
         Title_UpdateBannerFade();
         Title_UpdateWindowFade();
     }

@@ -8,6 +8,7 @@
  * 0x37 scenes merges the actor queue with the packet list g_AreaCellPackets by key and links each actor (sorted by depth
  * through the panel sort rows) or packet into the ordering table.
  */
+/* FAKE: retail reserves four stack words no local explains; the pad restores its 0x58 frame. */
 /* func_8014BC70 */
 #ifdef NON_MATCHING
 NON_MATCHING void Area_DrawGridActors(void) {
@@ -46,6 +47,7 @@ NON_MATCHING void Area_DrawGridActors(void) {
     u32  var_a0_187;
     u32  var_v1_169;
     u8*  entry;
+    FAKE_STACK_PADS(u8, 16);
 
     count  = g_AreaGridActorCount;
     var_s7 = 0;

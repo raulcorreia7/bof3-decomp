@@ -12,7 +12,7 @@ MATCH void func_801B3768(void) {
     u32    packed;
     u32    high;
     u8     selector;
-    u8*    row;
+    u8*    item;
     u8     type;
     u8     current_type;
     u8     actor_slot;
@@ -33,11 +33,11 @@ MATCH void func_801B3768(void) {
             }
             D_80145038 += 1;
         } else {
-            row   = Item_GetRecord(low, high & BYTE_MASK);
+            item  = Item_GetRecord(low, high & BYTE_MASK);
             index = 0;
             do {
                 byte_index                     = index & BYTE_MASK;
-                g_TextVariables[0][byte_index] = row[byte_index];
+                g_TextVariables[0][byte_index] = item[byte_index];
                 index += 1;
             } while ((index & BYTE_MASK) < 0xCU);
             D_801490E4[0] = 0;

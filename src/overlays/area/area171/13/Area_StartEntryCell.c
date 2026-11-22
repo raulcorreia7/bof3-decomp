@@ -4,7 +4,7 @@
 MATCH void Area_StartEntryCell(void) {
     Actor* work;
     Actor* cell;
-    Actor* row;
+    Actor* actor;
     u16*   point;
     s32    entry;
     s32    pair;
@@ -27,11 +27,11 @@ MATCH void Area_StartEntryCell(void) {
     cell->header.step += 1;
     cell->screen_y = 0;
 
-    row = TASK(Actor);
-    if (abs(g_Game.members[0].pos.x.fixed - (TO_COORD(COORD_INT(row->pos.x) + 1) | COORD_HALF)) <= COORD_HALF) {
-        if (abs(g_Game.members[0].pos.y.fixed - TO_COORD(COORD_INT(row->pos.y))) <= TO_COORD(1) || abs(g_Game.members[0].pos.y.fixed - TO_COORD(COORD_INT(row->pos.y) + 1)) <= TO_COORD(1)) {
-            row->screen_y    = 0xC0;
-            row->header.step = 3;
+    actor = TASK(Actor);
+    if (abs(g_Game.members[0].pos.x.fixed - (TO_COORD(COORD_INT(actor->pos.x) + 1) | COORD_HALF)) <= COORD_HALF) {
+        if (abs(g_Game.members[0].pos.y.fixed - TO_COORD(COORD_INT(actor->pos.y))) <= TO_COORD(1) || abs(g_Game.members[0].pos.y.fixed - TO_COORD(COORD_INT(actor->pos.y) + 1)) <= TO_COORD(1)) {
+            actor->screen_y    = 0xC0;
+            actor->header.step = 3;
         }
     }
 

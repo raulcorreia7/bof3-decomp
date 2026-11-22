@@ -12,10 +12,10 @@ MATCH void func_801EEC2C(void) {
 }
 
 #ifdef NON_MATCHING
-/* Spawns one effect slot per living battler on the selected side, marks each row busy, and
+/* Spawns one effect slot per living battler on the selected side, marks each slot busy, and
  * otherwise applies the encounter 0x37 damage flags and advances the local work. */
 NON_MATCHING void func_801EEC98(void) {
-    BattleWorkImage* row;
+    BattleWorkImage* image;
     BattleWorkImage* slot;
     PartyMember*     member;
     PartyMember*     saved;
@@ -37,9 +37,9 @@ NON_MATCHING void func_801EEC98(void) {
             }
             func_801E24F8((u8)(i + 3), 4);
             index = func_801E590C(1, 0x2C);
-            row   = (BattleWorkImage*)&g_BattleEnemyBattlers[i];
+            image = (BattleWorkImage*)&g_BattleEnemyBattlers[i];
             slot  = (BattleWorkImage*)&D_801EC330[index & BYTE_MASK];
-            *slot = *row;
+            *slot = *image;
 
             D_801EC330[index & BYTE_MASK].unk_06       = 1;
             D_801EC330[index & BYTE_MASK].header.mode  = 0;
@@ -62,9 +62,9 @@ NON_MATCHING void func_801EEC98(void) {
             TASK_SET(saved);
 
             index = func_801E590C(1, 0x2C);
-            row   = (BattleWorkImage*)member;
+            image = (BattleWorkImage*)member;
             slot  = (BattleWorkImage*)&D_801EC330[index & BYTE_MASK];
-            *slot = *row;
+            *slot = *image;
 
             D_801EC330[index & BYTE_MASK].unk_06       = 1;
             D_801EC330[index & BYTE_MASK].header.mode  = 0;

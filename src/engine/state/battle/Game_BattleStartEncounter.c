@@ -32,10 +32,10 @@ MATCH void Game_BattleStartEncounter(s32 origin_x, s32 origin_y, s32 scroll_mode
             type &= BYTE_MASK;
             Game_BattleSetEncounterSpot(g_EncounterOriginX, g_EncounterOriginY, type);
             type <<= 3;
-            *(s32*)((u8*)g_EncounterParty + type)       = TASK(Actor)->pos.x.fixed;
-            *(s32*)((u8*)&g_EncounterParty[0].y + type) = TASK(Actor)->pos.y.fixed;
-            TASK(Actor)->unk_48                         = 0;
-            TASK(Actor)->direction                      = s_RouteIndexByMode[g_Battle.scroll_dir];
+            *(s32*)((u8*)g_AreaEncounterPlacement.party + type)       = TASK(Actor)->pos.x.fixed;
+            *(s32*)((u8*)&g_AreaEncounterPlacement.party[0].y + type) = TASK(Actor)->pos.y.fixed;
+            TASK(Actor)->unk_48                                       = 0;
+            TASK(Actor)->direction                                    = s_RouteIndexByMode[g_Battle.scroll_dir];
             Script_Request(TASK(Actor)->direction);
             offset += BATTLE_PARTY_STRIDE;
             count += 1;
