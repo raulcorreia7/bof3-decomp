@@ -23,8 +23,11 @@ extern s8 D_801F42E8[][2];
 /* The scene position words the work step copies. */
 
 /* The state handler tables the dispatchers index. */
-extern Callback            D_801F4308[];
-extern Callback            D_801F4314[];
+extern Callback D_801F4308[];
+extern Callback D_801F4314[];
+
+/* The texture-coordinate base pair the beam's ring band picks by its flag. */
+extern u8                  D_801F4320[][2];
 /* D_801F52FC */
 extern PartyMemberMessages g_PartyMemberMessages[1];
 extern Callback            D_801F5308[];
