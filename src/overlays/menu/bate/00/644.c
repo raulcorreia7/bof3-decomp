@@ -121,7 +121,63 @@ MATCH void func_801D15E4(void) {
     Menu_DrawClutStrip(g_WindowClut);
 }
 
+#ifdef NON_MATCHING
+/* Draws the equip menu's four stat rows, the six slot icons and the two equipped item names. */
+NON_MATCHING void func_801D165C(u16 panel_x, u16 panel_y, u8 category, u8 item_id) {
+    Character* character;
+    u16        base[EQUIP_PREVIEW_STAT_COUNT];
+    u16        current[EQUIP_PREVIEW_STAT_COUNT];
+    u8         change[EQUIP_PREVIEW_STAT_COUNT];
+    u8         equipped[2];
+    s16        label_x;
+    s16        value_y;
+    s16        trial_y;
+    u8         i;
+
+    character = &g_Characters[MENU_BATE_CHARACTER_RECORD];
+    UI_WindowDraw(panel_x, panel_y, 0x8B, 0x9F, UI_WINDOW_OPEN_ALL, g_WindowStyle);
+    label_x = panel_x + 5;
+    UI_TextDraw(label_x, (s16)(panel_y + 2), UI_TEXT_NORMAL, CHARACTER_NAME_LENGTH, character->name);
+    UI_WindowDrawOutline((s16)(panel_x + 1), (s16)(panel_y + 0x11), 0x88, 0x37, UI_WINDOW_OUTLINE_OPEN_ALL | UI_WINDOW_OUTLINE_BLEND);
+    base[EQUIP_PREVIEW_POWER]           = character->base.power;
+    base[EQUIP_PREVIEW_DEFENSE]         = character->base.defense;
+    base[EQUIP_PREVIEW_INTELLIGENCE]    = character->base.intelligence;
+    base[EQUIP_PREVIEW_AGILITY]         = character->base.agility;
+    current[EQUIP_PREVIEW_POWER]        = character->stats.power;
+    current[EQUIP_PREVIEW_DEFENSE]      = character->stats.defense;
+    current[EQUIP_PREVIEW_INTELLIGENCE] = character->stats.intelligence;
+    current[EQUIP_PREVIEW_AGILITY]      = character->stats.agility;
+    equipped[0]                         = character->equip.weapon;
+    equipped[1]                         = character->equip.armor;
+    func_801D1AB8(base, current, D_801D8ECC, change, equipped, category, item_id);
+    for (i = 0; i < EQUIP_PREVIEW_STAT_COUNT; i++) {
+        value_y = panel_y + i * 13 + 0x13;
+        UI_TextDraw(label_x, value_y, UI_TEXT_NORMAL, TEXT_LENGTH_MAX, D_801D8744[i]);
+        sprintf(g_UiTextFormatBuffer, D_801D0C04, current[i]);
+        trial_y = value_y + 2;
+        UI_TextDrawGlyphString((s16)(label_x + 0x24), trial_y, UI_TEXT_NORMAL, g_UiTextFormatBuffer);
+        if (Item_CanEquip(0, (category == 1) ? EQUIP_SLOT_WEAPON : EQUIP_SLOT_ARMOR, category, item_id)) {
+            sprintf(g_UiTextFormatBuffer, D_801D0C04, D_801D8ECC[i]);
+            UI_TextDrawGlyphString((s16)(panel_x + 0x59), trial_y, change[i], g_UiTextFormatBuffer);
+        } else {
+            sprintf(g_UiTextFormatBuffer, D_801D0C0C);
+            UI_TextDrawGlyphString((s16)(panel_x + 0x59), trial_y, UI_TEXT_NORMAL, g_UiTextFormatBuffer);
+        }
+    }
+    UI_WindowDrawOutline((s16)(panel_x + 1), (s16)(panel_y + 0x49), 0x88, 0x52, UI_WINDOW_OUTLINE_OPEN_ALL | UI_WINDOW_OUTLINE_BLEND);
+    sprintf(g_UiTextFormatBuffer, D_801D0C14);
+    for (i = 0; i < EQUIP_SLOT_COUNT; i++) {
+        UI_IconDraw((u16)(panel_x + 6), (u16)(panel_y + 0x51 + i * 13), D_801D8754[i], 0);
+        if (i != EQUIP_SLOT_WEAPON && i != EQUIP_SLOT_ARMOR) {
+            UI_TextDrawAscii((s16)(panel_x + 0x11), (s16)(panel_y + i * 13 + 0x4F), UI_TEXT_NORMAL, g_UiTextFormatBuffer);
+        }
+    }
+    UI_TextDraw((s16)(panel_x + 0x11), (s16)(panel_y + 0x4F), UI_TEXT_NORMAL, Game_ReadCommand((u8*)&g_Weapons[equipped[0]]) & BYTE_MASK, (u8*)&g_Weapons[equipped[0]]);
+    UI_TextDraw((s16)(panel_x + 0x11), (s16)(panel_y + 0x76), UI_TEXT_NORMAL, Game_ReadCommand((u8*)&g_Armors[equipped[1]]) & BYTE_MASK, (u8*)&g_Armors[equipped[1]]);
+}
+#else
 INCLUDE_ASM(func_801D165C);
+#endif
 
 /* Totals the equipment menu's current and trial stat rows and marks each stat up (2), down (1) or equal (0). */
 MATCH void func_801D1AB8(u16* base, u16* current, u16* trial, u8* change, u8* equipped, u8 swap, u8 slot) {

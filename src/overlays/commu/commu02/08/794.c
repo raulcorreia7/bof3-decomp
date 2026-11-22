@@ -1283,7 +1283,134 @@ MATCH void func_801D5194(void) {
     SYS_DISPATCH_BYTE(g_Commu02Event2Step1Steps, D_801F294D);
 }
 
+/* Deals a numbers board round: fills four per-digit rows of the board with the
+ * message ids of the digits the round rolled, then picks the two digits the
+ * round shows. */
+#ifdef NON_MATCHING
+NON_MATCHING void func_801D51D0(void) {
+    u8  ch;
+    u8  digit;
+    u8* dst;
+    u8* src;
+    u8* p;
+    s32 i;
+    s32 row;
+    s32 value;
+
+    D_801DB0B4    = rand() & 0x7;
+    row           = 0;
+    dst           = g_TextVariables[0];
+    D_801DB0A8[0] = 0;
+    D_801DB0A8[1] = 0;
+    D_801DB0A8[2] = 0;
+    D_801DB0A8[3] = 0;
+    for (;;) {
+        digit = D_801DAD90[D_801DB0B4 * 9 + row];
+        if (digit == 9) {
+            break;
+        }
+        value = func_801D5AD0(D_801DADD8[digit * 2 + 1]);
+        for (;;) {
+            i = 0;
+            while (i < D_801DB0A8[digit] && D_801DB080[digit * 10 + i] == (u8)value) {
+                i++;
+            }
+            if (i < D_801DB0A8[digit] || D_801DB0A8[digit] == 0) {
+                break;
+            }
+            value++;
+            if ((u8)value >= D_801DADD8[digit * 2 + 1]) {
+                value = 0;
+            }
+        }
+        D_801DB080[digit * 10 + D_801DB0A8[digit]] = value;
+        D_801DB0A8[digit] += 1;
+
+        src = MESSAGE_TABLE_TEXT(AREA_MESSAGE_TABLE, D_801DADD8[digit * 2] + (u8)value);
+        p   = dst;
+        i   = 0;
+        for (;;) {
+            ch = *src;
+            *p = ch;
+            if (ch == STRING_END && (u8)(src[-1] - STRING_SKIP) >= 2) {
+                break;
+            }
+            src++;
+            i++;
+            if (i >= TEXT_VARIABLE_LENGTH) {
+                break;
+            }
+            p++;
+        }
+        row++;
+        if (row >= 9) {
+            break;
+        }
+        dst += TEXT_VARIABLE_LENGTH;
+    }
+
+    value = rand() & 0x7;
+    digit = 0;
+    while ((u32)value < D_801DADE0[digit][0]) {
+        digit++;
+        if (digit >= 3) {
+            break;
+        }
+    }
+    if (D_801DB0B4 == 6) {
+        if (digit == 2) {
+            digit = 3;
+        }
+    } else if (D_801DB0B4 == 7) {
+        if (digit == 3) {
+            digit = 2;
+        }
+    }
+
+    if (rand() & 1) {
+        i = 0;
+        if (D_801DB0A8[D_801DADE0[digit][1]] - 1 > 0) {
+            for (;;) {
+                if (rand() & 1) {
+                    break;
+                }
+                i++;
+                if (i >= D_801DB0A8[D_801DADE0[digit][1]] - 1) {
+                    break;
+                }
+            }
+        }
+        D_801DB0AD = D_801DADD8[D_801DADE0[digit][1] * 2] + D_801DB080[D_801DADE0[digit][1] * 10 + i];
+    } else {
+        D_801DB0AD = D_801DADD8[D_801DADE0[digit][1] * 2] + func_801D5AD0(D_801DADD8[D_801DADE0[digit][1] * 2 + 1]);
+    }
+
+    if (D_801DADE0[digit][2] == 0xFF) {
+        D_801DB0AE = 0xFF;
+    } else if (rand() & 1) {
+        i = 0;
+        if (D_801DB0A8[D_801DADE0[digit][2]] - 1 > 0) {
+            for (;;) {
+                if (rand() & 1) {
+                    break;
+                }
+                i++;
+                if (i >= D_801DB0A8[D_801DADE0[digit][2]] - 1) {
+                    break;
+                }
+            }
+        }
+        D_801DB0AE = D_801DADD8[D_801DADE0[digit][2] * 2] + D_801DB080[D_801DADE0[digit][2] * 10 + i];
+    } else {
+        D_801DB0AE = D_801DADD8[D_801DADE0[digit][2] * 2] + func_801D5AD0(D_801DADD8[D_801DADE0[digit][2] * 2 + 1]);
+    }
+
+    D_801DB0C4 = 0;
+    D_801F294D += 1;
+}
+#else
 INCLUDE_ASM(func_801D51D0);
+#endif
 
 MATCH void func_801D5788(void) {
     POLY_G4* g4;

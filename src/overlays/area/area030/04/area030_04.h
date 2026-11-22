@@ -341,6 +341,8 @@ extern u8                    D_8014419E;
 extern u8                    D_8014420D;
 extern u8                    D_80144216;
 extern s32                   D_8014421C;
+/* The bite window's screen centre, a whole and a byte view of the same halfword. */
+extern s16                   D_8014423C;
 extern u8                    D_80144281;
 extern u8                    D_80144286;
 extern u8                    D_80144287;
@@ -475,10 +477,16 @@ extern u8                    D_801E2AB8[];
 /* D_801E2AC8 */
 extern u8                    g_FishingSpecies[];
 extern u8                    D_801E2ACA[];
+/* D_801E2ACC */
+extern u8                    D_801E2ACC[];
 extern u8                    D_801E2AD2[];
 extern u8                    D_801E2AD3[];
+/* D_801E2AD4 */
+extern u8                    D_801E2AD4[];
 extern u8                    D_801E2AD5[];
 extern u8                    D_801E2AD7[];
+/* D_801E2AD8 */
+extern u8                    D_801E2AD8[];
 extern u8                    D_801E2ADA[];
 /* D_801E2DF4 */
 extern s8                    g_FishingSpawnCounts[];
