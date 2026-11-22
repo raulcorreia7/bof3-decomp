@@ -56,7 +56,7 @@ typedef struct FormationOrder {
 ASSERT_SIZE(FormationOrder, 0x3);
 
 /* The party record the save block stores at 0x680: the formation byte, the menu flags and the two
- * order rows. The runtime order rows are the g_PartyOrders table at 0x80144F5A. */
+ * order rows. The runtime order rows are the g_PartyOrders table. */
 typedef struct PartyOrders {
     /* 0x00 */ u8 formation;
     /* 0x01 */ u8 menu_flags;
