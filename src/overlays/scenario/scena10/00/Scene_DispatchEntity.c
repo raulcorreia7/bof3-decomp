@@ -426,126 +426,153 @@ MATCH void func_801F8694(void) {
 MATCH void func_801F86D0(void) {
 }
 
-#ifdef NON_MATCHING
-NON_MATCHING void func_801F86D8(void) {
-    u8 slot;
+/* Runs one step of a scena10 scene script, picked by g_ScenarioState.step_05: spawns its actors, greys the palette and moves the camera. */
+MATCH void func_801F86D8(void) {
+    u32           row;
+    u32           col;
+    u32           row_base;
+    u16*          cell;
+    u32           color;
+    u32           red;
+    u32           rgb;
+    u32           average;
+    u32           packed;
+    SpawnedActor* actor;
 
     switch (g_ScenarioState.step_05) {
         case 0:
-            if (FIELD(u8, &g_Game.flags, -0x1D) == 3) {
+            if (g_SpawnedActors[D_801FE9D8].header.flags & 1) {
                 break;
             }
-            g_Game.flags |= 8;
-            Scene_SetupParty(5);
-            func_801C601C(1);
+            g_ScriptVars[0]         = 1;
             g_ScenarioState.step_05 = 1;
             break;
         case 1:
-            if (*g_ScriptVars != 2) {
+            if (g_ScriptVars[0] != 5) {
                 break;
             }
-            Scene_SetupParty(6);
             g_ScenarioState.step_05 = 2;
             break;
         case 2:
-            if (*g_ScriptVars != 0x25) {
+            if (g_ScriptVars[0] != 6) {
                 break;
             }
-            slot                        = Actor_FindFreeSpawned();
-            g_ScratchPad.cells.bytes[0] = slot;
-            if (slot != GAME_NONE) {
-                g_SpawnedActors[g_ScratchPad.cells.bytes[0]].header.flags = 1;
-                g_SpawnedActors[g_ScratchPad.cells.bytes[0]].type         = 0x9A;
+            D_801FE9D8 = Actor_FindFreeSpawned();
+            if (D_801FE9D8 != GAME_NONE) {
+                g_SpawnedActors[D_801FE9D8].header.flags   = 1;
+                g_SpawnedActors[D_801FE9D8].type           = 0x13;
+                g_SpawnedActors[D_801FE9D8].camera_angle.x = -0x2AA;
+                g_SpawnedActors[D_801FE9D8].camera_angle.y = g_AreaCameraAngle.vy;
+                g_SpawnedActors[D_801FE9D8].camera_angle.z = 0x200;
+                g_SpawnedActors[D_801FE9D8].layer          = 0x78;
             }
             g_ScenarioState.step_05 = 3;
             break;
         case 3:
-            if (*g_ScriptVars != 0x28) {
+            if (g_ScriptVars[0] != 7) {
                 break;
             }
-            func_801BFE34(0xE8000, 0xE8000, 0x36);
-            func_801C7A54(0x36);
             g_ScenarioState.step_05 = 4;
             break;
         case 4:
-            if (*g_ScriptVars != 0x32) {
+            if (g_ScriptVars[0] != 9 || !EMI_IsReady()) {
                 break;
             }
-            *g_ScriptVars = 0;
-            Scene_SetupParty(9);
-            UI_ModeSet(4);
             g_ScenarioState.step_05 = 5;
             break;
         case 5:
+            if (g_ScriptVars[0] != 0x19) {
+                break;
+            }
+            UI_ModeSet(0);
+            g_ScenarioState.step_05 = 6;
+            break;
+        case 6:
             if (g_UiWindowEffectBusy) {
                 break;
             }
-            g_AreaDrawFlags         = 0;
-            g_ScenarioState.step_05 = 6;
-            SYS_SetFlag(g_SceneFlags, 0x1E);
-            func_8019FA28(0x77, 0xA8000, 0xB0000, 0x87);
-            g_GamePrevSelection = 0x61;
-            break;
-        case 6:
-            if (*g_ScriptVars != 1) {
-                break;
-            }
-            UI_ModeSet(5);
-            g_AreaDrawFlags = 0x1F;
-            SND_PlaySE(0x20C);
+            g_AreaDrawFlags = 0;
+            func_8019FA28(0x42, 0x190000, 0x120000, 0x80);
+            g_GamePrevSelection     = 0xFF;
             g_ScenarioState.step_05 = 7;
             break;
         case 7:
             if (g_UiWindowEffectBusy) {
                 break;
             }
-            *g_ScriptVars           = 2;
+            row = 0;
+            do {
+                col      = 0;
+                row_base = AREA_PALETTE_WORK + (row & 0xFF) * AREA_PALETTE_ROW;
+                do {
+                    cell    = MEM_PTR(u16, (col & 0xFFFF) * 2 + row_base);
+                    color   = *cell;
+                    red     = color & 0x1F;
+                    rgb     = color & 0xFFFF;
+                    average = (red + ((rgb >> 5) & 0x1F) + ((rgb >> 10) & 0x1F)) / 3;
+                    packed  = color & 0x8000;
+                    packed |= average << 10;
+                    packed |= average << 5;
+                    *cell = average | packed;
+                    col++;
+                } while ((col & 0xFFFF) < AREA_PALETTE_COLORS);
+                row++;
+            } while ((row & 0xFF) < AREA_PALETTE_ROWS);
+            g_GfxPalettePending     = 1;
             g_ScenarioState.step_05 = 8;
             break;
         case 8:
-            if (*g_ScriptVars != 0x0E) {
+            if (g_ScriptVars[0] != 1) {
                 break;
             }
-            g_Game.flags ^= 8;
-            goto clear_script_state;
-        case 20:
-            SCENARIO_MESSAGE_WAIT(MSG_SCENA10_075, 0x15);
+            g_AreaDrawFlags = 0x1F;
+            UI_ModeSet(1);
+            g_ScenarioState.step_05 = 9;
             break;
-        case 21:
-            if (g_GameStateIndex == GAME_REQUEST_MESSAGE) {
+        case 9:
+            if (g_ScriptVars[0] != 9) {
                 break;
             }
-            if (*g_ScriptVars != 0x0A) {
-                goto clear_script_state;
-            }
-            Scene_SetupParty(8);
-            g_ScenarioState.step_05 = 0x16;
+            g_AreaScrollTargetX     = 0x160000;
+            g_AreaScrollTargetY     = 0x150000;
+            g_AreaCameraStep        = 0x20;
+            g_ScenarioState.step_05 = 10;
             break;
-        case 22:
-            if (*g_ScriptVars != 0x19) {
+        case 10:
+            if (g_ScriptVars[0] != 0xB) {
                 break;
             }
-            SYS_SetFlag(g_SceneFlags, 0x2C);
-            goto clear_script_state;
-        case 30:
-            SCENARIO_MESSAGE_WAIT(MSG_SCENA10_076, 0x1F);
+            SYS_SetFlag(g_SceneFlags, 5);
+            func_8019FA28(0x52, 0x480000, 0x580000, 0x81);
+            g_GamePrevSelection     = 0xFF;
+            g_ScenarioState.step_05 = 11;
             break;
-        case 31:
-            if (g_GameStateIndex == GAME_REQUEST_MESSAGE) {
+        case 11:
+            if (g_ScriptVars[0] != 9) {
                 break;
             }
-            goto clear_script_state;
+            g_ScratchPad.cells.bytes[0] = Actor_FindFreeSpawned();
+            if (g_ScratchPad.cells.bytes[0] != GAME_NONE) {
+                actor               = &g_SpawnedActors[g_ScratchPad.cells.bytes[0]];
+                actor->header.flags = 1;
+                actor->type         = 0x20;
+                actor->pos.x.fixed  = MEM_PTR(Coord3, D_801468BC)->x.fixed;
+                actor->pos.y.fixed  = MEM_PTR(Coord3, D_801468BC)->y.fixed;
+                actor->pos.z.fixed  = (Area_SampleHeight(actor->pos.x.fixed, actor->pos.y.fixed) << 16) + 0x800000;
+            }
+            g_ScenarioState.step_05 = 12;
+            break;
+        case 12:
+            if (g_ScriptVars[0] != 0) {
+                break;
+            }
+            Game_ClearScriptActive();
+            SYS_SetFlag(g_SceneFlags, 6);
+            g_ScenarioState.state_04 = 0;
+            g_ScenarioState.step_05  = 0;
+            break;
     }
-    return;
-
-clear_script_state:
-    Game_ClearScriptActive();
-    g_ScenarioState.step_05  = 0;
-    g_ScenarioState.state_04 = 0;
 }
-#else
-INCLUDE_ASM(func_801F86D8);
-#endif
 
 #ifdef NON_MATCHING
 NON_MATCHING void func_801F8C00(void) {

@@ -9,7 +9,7 @@ segments:
     subsegments:
       - [0x0, .data, D_801F6C00]
       - [0x4, bin, D_801F6C04]
-      - [0x18, .rodata, D_801F6C18]
+      - [0x18, .rodata, Scene_DispatchEntity]
       - [0x4C, .rodata, D_801F6C4C]
       - [0x50, .rodata, D_801F6C50]
       - [0xB8, .rodata, D_801F6CB8]
