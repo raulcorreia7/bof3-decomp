@@ -739,11 +739,7 @@ NON_MATCHING void func_801F0FBC(void) {
         radius = ~g_Task->unk_09 & 0x1F;
         shade  = 0x80 - radius * 16;
         do {
-            if (GetGraphType() == 1 || GetGraphType() == 2) {
-                tpage = 0x2A5;
-            } else {
-                tpage = 0xB5;
-            }
+            tpage = getTPage(1, 1, 320, 256);
             SetDrawMode((DR_MODE*)g_GfxPrimCursor, 0, 1, tpage, 0);
             Area_CellAddPrim(x, y, z, sizeof(DR_MODE));
             prim = (LINE_F2*)g_GfxPrimCursor;

@@ -532,13 +532,7 @@ NON_MATCHING void func_801F06B4(void) {
     u8        i;
     s16       angle;
 
-    if (GetGraphType() == 1) {
-        tpage = 0xA5;
-    } else if (GetGraphType() == 2) {
-        tpage = 0xA5;
-    } else {
-        tpage = 0x35;
-    }
+    tpage = getTPage(0, 1, 320, 256);
     GFX_ADD_DITHERED_DRAW_MODE(GFX_LAYER_EFFECT, tpage);
 
     g_ScratchPad.cells.halves[4] = (s8)g_Task->unk_5D * 8;

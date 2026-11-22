@@ -13,11 +13,7 @@ MATCH void Area_Update(void) {
     s32       x1;
     s32       tpage;
 
-    if ((GetGraphType() == 1) || (GetGraphType() == 2)) {
-        tpage = 0x225;
-    } else {
-        tpage = 0x95;
-    }
+    tpage = getTPage(1, 0, 320, 256);
     SetDrawMode((DR_MODE*)g_GfxPrimCursor, 0, 0, tpage, NULL);
     Area_CellAddPrim(g_Task->pos.x.fixed, g_Task->pos.y.fixed, -2, sizeof(DR_MODE));
     prim = (POLY_FT4*)g_GfxPrimCursor;

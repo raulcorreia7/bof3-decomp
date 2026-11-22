@@ -600,11 +600,7 @@ MATCH void FairyCasino_DrawFrame(s16 x, s16 y) {
     s32 tpage;
     s16 y2;
 
-    if (GetGraphType() == 1 || GetGraphType() == 2) {
-        tpage = 0x2D;
-    } else {
-        tpage = 0x1D;
-    }
+    tpage = getTPage(0, 0, 832, 256);
     GFX_ADD_DRAW_MODE(tpage);
     FairyCasino_DrawFramePiece(x, y, 0);
     for (i = 0; i < 6; i++) {
@@ -1104,11 +1100,7 @@ MATCH void func_801D4910(s32 x, s32 y) {
     s32 tpage;
     s16 y2;
 
-    if (GetGraphType() == 1 || GetGraphType() == 2) {
-        tpage = 0x2D;
-    } else {
-        tpage = 0x1D;
-    }
+    tpage = getTPage(0, 0, 832, 256);
     GFX_ADD_DRAW_MODE(tpage);
     FairyCasino_DrawFramePiece((s16)x, (s16)y, 0xB);
     for (i = 0; i < 9; i++) {
@@ -2151,12 +2143,8 @@ MATCH void func_801D875C(s16 x, s16 y, s32 index) {
     SPRT* sprt;
     u8    slot;
 
-    slot = index;
-    if (GetGraphType() == 1 || GetGraphType() == 2) {
-        tpage = 0x2E;
-    } else {
-        tpage = 0x1E;
-    }
+    slot  = index;
+    tpage = getTPage(0, 0, 896, 256);
     GFX_ADD_DRAW_MODE(tpage);
     sprt = (SPRT*)g_GfxPrimCursor;
     SetSprt(sprt);
@@ -2576,11 +2564,7 @@ NON_MATCHING void func_801D97C8(s32 unused, s32 x, s32 y) {
         }
     }
 
-    if (GetGraphType() == 1 || GetGraphType() == 2) {
-        tpage = 0x8F;
-    } else {
-        tpage = 0x2F;
-    }
+    tpage = getTPage(0, 1, 960, 0);
     GFX_ADD_DRAW_MODE(tpage);
 
     clut = GetClut(0x30, 0x1E0);

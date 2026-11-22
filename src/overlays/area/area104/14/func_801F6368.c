@@ -18,11 +18,7 @@ MATCH void func_801F6368(void) {
     centre_x = (((x - y) * rcos(0x200)) >> 12) + 0xFA;
     centre_y = (((x + y) * rcos(0x200)) >> 12) + 0xAF;
 
-    if (GetGraphType() == 1 || GetGraphType() == 2) {
-        tpage = 0xAE;
-    } else {
-        tpage = 0x3E;
-    }
+    tpage = getTPage(0, 1, 896, 256);
     GFX_ADD_LAYER_DRAW_MODE(GFX_LAYER_EFFECT_FRONT, tpage);
 
     radius = 8 - ((g_FrameCount >> 1) & 7);

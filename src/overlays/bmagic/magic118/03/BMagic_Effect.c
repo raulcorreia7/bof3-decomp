@@ -167,11 +167,7 @@ MATCH void BMagic_DrawBurnSprites(void) {
         g_ScratchPadVectors[3].vz    = 0;
         x                            = (g_ScratchPadVectors[1].vx << 9) + g_Task->pos.x.fixed;
         y                            = (g_ScratchPadVectors[1].vx << 9) + g_Task->pos.y.fixed;
-        if (GetGraphType() == 1 || GetGraphType() == 2) {
-            tpage = 0xA5;
-        } else {
-            tpage = 0x35;
-        }
+        tpage                        = getTPage(0, 1, 320, 256);
         SetDrawMode((DR_MODE*)g_GfxPrimCursor, 0, 1, tpage, 0);
         Area_CellAddPrim(x, y, 2, sizeof(DR_MODE));
         prim = (POLY_GT4*)g_GfxPrimCursor;

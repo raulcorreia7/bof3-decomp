@@ -8,10 +8,7 @@ MATCH void func_801F595C(s32 width, s32 palette) {
     prim  = (POLY_FT4*)g_GfxPrimCursor;
     cells = D_801F2C04;
     SetPolyFT4(prim);
-    if (GetGraphType() != 1) {
-        GetGraphType();
-    }
-    prim->tpage = 0xF;
+    prim->tpage = getTPage(0, 0, 960, 0);
     prim->clut  = (cells.rows[(u8)palette].clut >> 4) | 0x7800;
     prim->x0    = 0xE4;
     prim->x1    = (u8)width + 0xE4;

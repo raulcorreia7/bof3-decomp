@@ -662,10 +662,7 @@ NON_MATCHING void func_801D3038(void) {
         UI_TextDraw(0x1D, 0x15, 0, 0xFF, MESSAGE_TABLE_TEXT(AREA_MESSAGE_TABLE, D_801D4E0C));
 
         if (D_801D4E0C == 0x3D) {
-            if (GetGraphType() != 1) {
-                GetGraphType();
-            }
-            GFX_ADD_DRAW_MODE(0);
+            GFX_ADD_DRAW_MODE(getTPage(0, 0, 0, 0));
             shade = ((g_FrameCount & 8) ? (g_FrameCount & 6) : (~g_FrameCount & 6)) << 5 | 0x3F;
             tile  = GFX_CURSOR(TILE);
             SetTile(tile);

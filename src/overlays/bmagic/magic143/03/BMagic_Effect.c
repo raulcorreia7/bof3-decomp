@@ -120,12 +120,7 @@ NON_MATCHING void func_801EF23C(s32 band_height, u16 radius, u16 jitter_mask) {
     vectors[0].vy = FIXED_MUL(rsin(cells[1]), scratch->cells.halves[0]);
     vectors[0].vz = 0;
     depth         = -0x30;
-    draw_mode     = 0xA5;
-    if (GetGraphType() != 1) {
-        if (GetGraphType() != 2) {
-            draw_mode = 0x35;
-        }
-    }
+    draw_mode     = getTPage(0, 1, 320, 256);
     SetDrawMode((DR_MODE*)g_GfxPrimCursor, 0, 1, draw_mode, 0);
     Area_CellAddPrim(g_Task->pos.x.fixed, g_Task->pos.y.fixed, 2, sizeof(DR_MODE));
     for (i = 1; i < 24; i++) {
