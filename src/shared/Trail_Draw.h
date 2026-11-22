@@ -1,7 +1,6 @@
 #include "area/effects.h"
 
-/* Trail_Draw (Trail_Draw in scena07, Trail_Draw in scena08): draws the trail as a ribbon, a fan at
- * each end and two shaded POLY_G4 quads between each pair of points that differ on screen. */
+/* Trail_Draw (func_801F8BE8 in scena07, func_801F90C8 in scena08, func_801F3258 in area088): draws the trail ribbon. */
 MATCH void Trail_Draw(Trail* trail) {
     TrailPoint* point;
     POLY_G4*    prim;

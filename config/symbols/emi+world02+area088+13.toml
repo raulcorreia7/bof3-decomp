@@ -2,6 +2,7 @@
 g_SceneEventStep_u8 = { addr = 0x801448EC, type = "u8", alias = true, source = "The scene event step byte (0x801448EC) as a u8 array; Fishing_ShowLocation and func_801F3EE8 read and step it." }
 g_AreaModuleId = { addr = 0x801F2C00, source = "Module id of the area: the first payload word of its overlay, 52 + the area number." }
 Trail_Update = { addr = 0x801F2F28, type = "func", source = "Pushes the task position onto a chain of 32 points, projects every point to the screen with its width, and sets each point's angle from the headings to its neighbours." }
+Trail_Draw = { addr = 0x801F3258, type = "func", source = "Draws the trail as a ribbon: a fan at each end and two shaded POLY_G4 quads between each pair of points that differ on screen; one body shared by scena07, scena08 and area088." }
 MATH_AverageAngle = { addr = 0x801F35B0, type = "func", source = "Averages two 12-bit angles along the shorter arc." }
 GFX_DrawFan = { addr = 0x801F3600, type = "func", source = "Draws a fan of eight semi-transparent POLY_G3 triangles from a screen point, the centre corner shaded by the colour byte; one body shared by scena07, scena08 and area088" }
 UI_MessageClearOnCancel = { addr = 0x801F3764, type = "func", source = "Sets g_SceneEventStep to 2 when the menu selection is idle, and clears the message request." }
