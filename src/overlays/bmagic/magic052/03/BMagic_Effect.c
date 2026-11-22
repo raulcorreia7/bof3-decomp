@@ -101,7 +101,7 @@ MATCH void func_801EEF84(void) {
 MATCH void func_801EF070(void) {
     PartyMember* work;
 
-    if (Actor_StepAnimLoop() != 0u) {
+    if (Script_AnimStepLoop() != 0u) {
         work              = g_Task;
         work->header.step = work->header.step + 1;
     } else {

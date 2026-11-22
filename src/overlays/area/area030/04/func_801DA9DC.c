@@ -118,7 +118,7 @@ box_16:
         g_SpawnedActors[0].scene_step = 0;
     }
     if (g_SpawnedActors[0].selection > 0) {
-        Actor_StepAnimLoop();
+        Script_AnimStepLoop();
     }
 }
 #else

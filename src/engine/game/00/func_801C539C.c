@@ -6,7 +6,7 @@ MATCH bool func_801C539C(void) {
     Actor* reload;
     s32    doubled;
 
-    if (!(Actor_StepAnimOnce() & BYTE_MASK)) {
+    if (!(Script_AnimStepOnce() & BYTE_MASK)) {
         return false;
     }
     g_Game.current->u.field.counter.value = (g_Task->voice_flags.raw + 2);

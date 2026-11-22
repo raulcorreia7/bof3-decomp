@@ -57,5 +57,5 @@ MATCH void PlChar_RunPersonalAction(void) {
             g_Task->unk_03++;
         }
     }
-    Actor_StepAnimOnce();
+    Script_AnimStepOnce();
 }

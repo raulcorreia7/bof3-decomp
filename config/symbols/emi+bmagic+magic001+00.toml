@@ -18,5 +18,5 @@ BMagic_DispatchMode = { addr = 0x801EEC64, type = "func", source = "Runs the han
 Effect_StartPlaying = { addr = 0x801EEFA4, type = "func", source = "Raises BATTLE_STATE_EFFECT_PLAYING and clears the effect work record in magic001 (Nue Stomp, Jump)." }
 BMagic_DispatchEffectMode = { addr = 0x801EEFD8, type = "func", source = "Runs the handler that header.mode (byte 0x01) selects from the effect handlers of magic001." }
 Effect_StartPlaying6 = { addr = 0x801EFA84, type = "func", source = "Raises BATTLE_STATE_EFFECT_PLAYING and clears the effect work record in magic001 (Nue Stomp, Jump)." }
-Effect_PrimeTintOnScriptReady = { addr = 0x801EFF28, type = "func", source = "Once the script stream reports ready (Actor_StepAnimOnce) makes the actor semi-transparent, starts its tint at zero and advances header.step (byte 0x02) in magic001 (Nue Stomp, Jump)." }
+Effect_PrimeTintOnScriptReady = { addr = 0x801EFF28, type = "func", source = "Once the script stream reports ready (Script_AnimStepOnce) makes the actor semi-transparent, starts its tint at zero and advances header.step (byte 0x02) in magic001 (Nue Stomp, Jump)." }
 g_BMagicEffectModes = { addr = 0x801F04B4, source = "Handlers of magic001 (Nue Stomp, Jump), run by header.mode (byte 0x01)." }

@@ -3,7 +3,7 @@
 MATCH void func_801B744C(void) {
     u8 rate; /* the g_RouteSpeedScale entry func_801BC4D0 calls the rate */
 
-    if (Actor_StepAnimOnce() & BYTE_MASK) {
+    if (Script_AnimStepOnce() & BYTE_MASK) {
         rate            = g_RouteSpeedScale[g_Game.current->u.field.counter.unsigned_value];
         g_Task->timer   = 32 / rate;
         g_Task->vx      = g_FacingOffsets[g_Task->direction].x * rate * (g_Task->voice_flags.scene_flag + 1);
@@ -24,7 +24,7 @@ MATCH void func_801B744C(void) {
         SND_PlaySE(EMI_SE_ID(SND_BANK_COMMON, 4));
         g_Task->timer -= 1;
         g_Task->vz += g_Task->gravity;
-        Actor_UpdateMovement();
+        Actor_MovementUpdate();
         g_Task->unk_03 = 2;
     }
 }

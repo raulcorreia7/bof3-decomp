@@ -36,6 +36,6 @@ MATCH void Fishing_CatchPage(void) {
         SND_PlaySE(EMI_SE_ID(SND_BANK_COMMON, 2));
         FISHING_STATE->sub_index++;
     }
-    Actor_StepAnimLoop();
+    Script_AnimStepLoop();
     Fishing_DrawDimScreen();
 }

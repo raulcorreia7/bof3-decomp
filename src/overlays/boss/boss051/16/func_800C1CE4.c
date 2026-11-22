@@ -5,7 +5,7 @@ MATCH void func_800C1CE4(void) {
 
     saved  = g_Task;
     g_Task = g_BattleEffectBattler;
-    if (Actor_StepAnimOnce() & BYTE_MASK) {
+    if (Script_AnimStepOnce() & BYTE_MASK) {
         Script_Select(0);
         ((Actor*)g_Task)->active_flags &= 0x7F;
         ((Actor*)g_Task)->draw_layer = 4;

@@ -7,5 +7,5 @@ MATCH void func_800C1934(void) {
     work->turn.action_flags.value |= BATTLER_ACTION_OWN_MODE;
     work->unk_E8 = BOSS_ENEMY_STEP_DATA;
     ACTOR_SET_MODE(2);
-    Actor_StepAnimLoop();
+    Script_AnimStepLoop();
 }

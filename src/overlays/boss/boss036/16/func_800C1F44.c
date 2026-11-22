@@ -5,7 +5,7 @@ MATCH void func_800C1F44(void) {
     g_Task->param.unk_0B = 0;
     g_Task->timer        = 0;
     Script_Select(1);
-    Actor_StepAnimLoop();
+    Script_AnimStepLoop();
     Area_AddActor();
     g_Task->header.step++;
 }

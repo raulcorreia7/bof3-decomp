@@ -75,7 +75,7 @@ MATCH void func_801F719C(void) {
     if ((g_Task->option_flags & 1) == 0) {
         g_Task->screen_x = (u16)D_801FE7CC[0].x + D_801FE804[0];
         g_Task->screen_y = (u16)D_801FE7CC[0].y + D_801FE804[1];
-        Actor_StepAnimLoop();
+        Script_AnimStepLoop();
         Area_AddActor();
     }
     if (((g_Task->option_flags >> 1) & 1) == 0) {
@@ -285,7 +285,7 @@ MATCH void func_801F7DDC(void) {
     g_Task->screen_x = D_801FE7CC[5].x + D_801FE804[0];
     g_Task->screen_y = D_801FE7CC[5].y + D_801FE804[1];
     UI_WindowDrawPanelBox(D_801FE7CC[5].x, D_801FE7CC[5].y, (u8)D_801FE7CC[5].w, (u8)D_801FE7CC[5].h);
-    Actor_StepAnimLoop();
+    Script_AnimStepLoop();
     Area_AddActor();
 }
 

@@ -5,7 +5,7 @@
 MATCH void func_801DA714(void) {
     FishingState* record;
 
-    Actor_StepAnimLoop();
+    Script_AnimStepLoop();
     record = FISHING_STATE;
     if (record->flags_58 == 6) {
         g_SpawnedActors[0].header.mode = (g_SpawnedActors[0].header.mode + 1);

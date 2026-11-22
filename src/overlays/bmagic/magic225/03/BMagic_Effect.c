@@ -354,7 +354,7 @@ MATCH void func_801EFEE8(void) {
 MATCH void BMagic_StepEffect(void) {
     s32 value;
 
-    Actor_StepAnimLoop();
+    Script_AnimStepLoop();
     g_Task->scale.x += 0x800;
     g_Task->scale.y += 0x800;
     g_Task->pos.x.fixed += rsin(g_Task->unk_14) * g_Task->unk_0C;
@@ -371,7 +371,7 @@ MATCH void BMagic_StepEffect(void) {
 
 /* func_801F021C */
 MATCH void BMagic_SetScaleX(void) {
-    Actor_StepAnimLoop();
+    Script_AnimStepLoop();
     g_Task->scale.x += 0x800;
     g_Task->scale.y += 0x800;
     g_Task->pos.x.fixed += rsin(g_Task->unk_14) << 2;

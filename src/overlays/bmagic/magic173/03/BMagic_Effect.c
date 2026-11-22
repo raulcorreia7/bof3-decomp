@@ -371,7 +371,7 @@ MATCH void func_801F0540(void) {
 MATCH void func_801F0648(void) {
     u8 timer;
 
-    Actor_StepAnimOnce();
+    Script_AnimStepOnce();
     timer          = g_Task->unk_09 + 4;
     g_Task->unk_09 = timer;
     if (timer == 16) {
@@ -380,8 +380,8 @@ MATCH void func_801F0648(void) {
 }
 
 MATCH void func_801F06B0(void) {
-    Actor_StepAnimOnce();
-    if (Actor_StepAnimOnce() != 0u) {
+    Script_AnimStepOnce();
+    if (Script_AnimStepOnce() != 0u) {
         g_Task->header.step = g_Task->header.step + 1;
     }
 }

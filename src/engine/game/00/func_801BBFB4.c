@@ -3,5 +3,5 @@
 MATCH void func_801BBFB4(void) {
     Callback handler = D_801CD440[g_Task->header.step];
     handler();
-    Actor_StepAnimLoop();
+    Script_AnimStepLoop();
 }

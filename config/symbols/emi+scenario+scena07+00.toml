@@ -7,9 +7,10 @@ jtbl_801F6CD4 = { addr = 0x801F6CD4, type = "Callback", source = "The switch tab
 jtbl_801F6D74 = { addr = 0x801F6D74, type = "Callback", source = "The switch table of func_801FD0DC: the jump targets of its jr dispatch." }
 Scene_DispatchEntity = { addr = 0x801F6DCC, type = "func", source = "dispatches a scene entity by its callback index" }
 func_801F6DD4 = { addr = 0x801F6DD4, alias = true, source = "Scene_DispatchEntity+0x8, after its g_Task load; the start the split used before the function was moved back to that load" }
-Scene_InitSpark = { addr = 0x801F83D0, type = "func", source = "Starts one spark at a random point near the actor position, falling from rest; one body shared by scena07 and scena08." }
+Scene_InitSpark = { addr = 0x801F83D0, type = "func", source = "Starts one spark at a random point near the actor position, falling from rest; one body shared by scena07, scena08 and area088." }
 Actor_Wait = { addr = 0x801F8730, type = "func", source = "Counts the actor wait byte down reloads it at zero and advances the handler index." }
 Trail_Update = { addr = 0x801F88B8, type = "func", source = "Pushes the task position onto a chain of 32 points, projects every point to the screen with its width, and sets each point's angle from the headings to its neighbours." }
+Trail_Draw = { addr = 0x801F8BE8, type = "func", source = "Draws the trail as a ribbon: a fan at each end and two shaded POLY_G4 quads between each pair of points that differ on screen; one body shared by scena07, scena08 and area088." }
 MATH_AverageAngle = { addr = 0x801F8F40, type = "func", source = "Averages two 12-bit angles along the shorter arc." }
 GFX_DrawFan = { addr = 0x801F8F90, type = "func", source = "Draws a fan of eight semi-transparent POLY_G3 triangles from a screen point, the centre corner shaded by the colour byte; one body shared by scena07, scena08 and area088" }
 Scene_DispatchActor = { addr = 0x801FD3BC, type = "func", source = "dispatches a scenario actor to its callback handler" }

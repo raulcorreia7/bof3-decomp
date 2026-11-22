@@ -60,7 +60,7 @@ MATCH bool Game_BattleWalkMembersIn(void) {
                 g_Task->param.unk_0B     = 2;
             }
         }
-        Actor_StepAnimLoop();
+        Script_AnimStepLoop();
     }
 
     for (i = 0; i < g_Game.party_size; i++) {

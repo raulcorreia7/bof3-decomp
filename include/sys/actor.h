@@ -220,7 +220,7 @@ typedef struct Actor {
     u8              script_record;     /* 0x4B - the script-table record index */
     s32             unk_4C;            /* 0x4C */
     u8*             script;            /* 0x50 - sprite animation: the step list, (delay, frame) byte pairs
-                                *        (Script_Seek, Actor_StageAnimStep); the fishing record keeps its item
+                                *        (Script_Seek, Script_AnimStageStep); the fishing record keeps its item
                                 *        pointer here */
     ActorRange      range_54;          /* 0x54 - range record; +2 range, +3 bit 0x10 */
     u16             script_pc;         /* 0x58 - sprite animation: byte position in the step list at script */

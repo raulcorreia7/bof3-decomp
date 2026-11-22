@@ -90,15 +90,11 @@ MATCH void func_801F76D0(void) {
     i     = 0;
     do {
         if (g_Task->unk_06 == 0) {
-            spark->pos.vx = ((rand() & 0x1FF) << 8) + 0x120000;
-            spark->pos.vy = ((rand() & 0x1FF) << 8) + 0x2E8000;
-            spark->pos.vz = TO_COORD(2112) - ((spark->pos.vx - 0x120000) << 7);
+            setVector(&spark->pos, ((rand() & 0x1FF) << 8) + 0x120000, ((rand() & 0x1FF) << 8) + 0x2E8000, TO_COORD(2112) - ((spark->pos.vx - 0x120000) << 7));
             setVector(&spark->velocity, (spark->pos.vx - 0x130000) >> 4, (spark->pos.vy - 0x2F8000) >> 4, (-(rand() & 0xFF)) << 5);
             spark->velocity.vx -= 0x800;
         } else {
-            spark->pos.vx = ((rand() & 0x1FF) << 8) + 0x78000;
-            spark->pos.vy = ((rand() & 0x1FF) << 8) + 0x318000;
-            spark->pos.vz = TO_COORD(2112) - ((spark->pos.vy - 0x318000) << 7);
+            setVector(&spark->pos, ((rand() & 0x1FF) << 8) + 0x78000, ((rand() & 0x1FF) << 8) + 0x318000, TO_COORD(2112) - ((spark->pos.vy - 0x318000) << 7));
             setVector(&spark->velocity, (spark->pos.vx - 0x88000) >> 4, (spark->pos.vy - 0x328000) >> 4, (-(rand() & 0xFF)) << 5);
             spark->velocity.vy = -0x800;
         }

@@ -40,7 +40,7 @@ MATCH void func_801D6128(void) {
         BANNER_INDEX += 1;
     } else {
         BANNER_TIMER = count - 1;
-        Actor_StepAnimLoop();
+        Script_AnimStepLoop();
     }
     Area_AddActor();
     prev = BANNER_INDEX;

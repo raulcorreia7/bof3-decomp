@@ -38,5 +38,5 @@ MATCH void func_801DA78C(void) {
             }
         }
     }
-    Actor_StepAnimLoop();
+    Script_AnimStepLoop();
 }
