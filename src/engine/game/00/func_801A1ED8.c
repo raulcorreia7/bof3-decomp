@@ -16,7 +16,7 @@ NON_MATCHING s32 func_801A1ED8(s32 x, s32 y, s32 route, s32 unused) {
             sum   = AREA_CELL_BLOCKED(xcell & HALF_MASK, ycell);
             if (x & HALF_MASK) {
                 sum += AREA_CELL_BLOCKED((xcell + 1) & HALF_MASK, ycell);
-                sum += func_801A223C(x & 0xFFFF0000, y);
+                sum += func_801A223C(x & ~HALF_MASK, y);
                 sum += func_801A223C(x + COORD_HALF, y);
             }
             break;
@@ -28,7 +28,7 @@ NON_MATCHING s32 func_801A1ED8(s32 x, s32 y, s32 route, s32 unused) {
                 sum   = AREA_CELL_BLOCKED(xcell & HALF_MASK, ycell);
                 if (x & HALF_MASK) {
                     sum += AREA_CELL_BLOCKED((xcell + 1) & HALF_MASK, ycell);
-                    sum += func_801A223C(x & 0xFFFF0000, y);
+                    sum += func_801A223C(x & ~HALF_MASK, y);
                     sum += func_801A223C(x + COORD_HALF, y);
                 }
             } else {
@@ -37,7 +37,7 @@ NON_MATCHING s32 func_801A1ED8(s32 x, s32 y, s32 route, s32 unused) {
                 sum   = AREA_CELL_BLOCKED(xcell & HALF_MASK, ycell);
                 if (x & HALF_MASK) {
                     sum += AREA_CELL_BLOCKED((xcell + 1) & HALF_MASK, ycell);
-                    sum += func_801A223C(x & 0xFFFF0000, y);
+                    sum += func_801A223C(x & ~HALF_MASK, y);
                     sum += func_801A223C(x + COORD_HALF, y);
                 }
             }
@@ -58,7 +58,7 @@ NON_MATCHING s32 func_801A1ED8(s32 x, s32 y, s32 route, s32 unused) {
             sum   = AREA_CELL_BLOCKED(xcell, ycell & HALF_MASK);
             if (y & HALF_MASK) {
                 sum += AREA_CELL_BLOCKED(xcell, (ycell + 1) & HALF_MASK);
-                sum += func_801A223C(x, y & 0xFFFF0000);
+                sum += func_801A223C(x, y & ~HALF_MASK);
                 sum += func_801A223C(x, y + COORD_HALF);
             }
             break;
