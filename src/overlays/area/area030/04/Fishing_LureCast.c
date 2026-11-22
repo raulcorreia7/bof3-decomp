@@ -5,50 +5,51 @@
 #ifdef NON_MATCHING
 NON_MATCHING void Fishing_LureCast(void) {
     FishingState* work;
+    s32           distance;
     s32           value;
     s32           index;
 
     work                = FISHING_STATE;
     work->motion.unk_34 = D_80145EC4;
+    /* FAKE: keeps the x store ahead of the y load; without it the loads are scheduled first. */
     FAKE_BARRIER();
     work->y_38.pos_y               = D_80145EC8 - COORD_HALF;
-    FISHING_STATE->bounce.half.key = (s16)(Area_HeightSample(work->motion.unk_34, work->y_38.pos_y) + 0x100);
+    FISHING_STATE->bounce.half.key = Area_HeightSample(work->motion.unk_34, work->y_38.pos_y) + 0x100;
 
-    value                    = g_FishingRodRow->max_distance * D_801440BC / 255 + 8;
-    FISHING_STATE->cursor_10 = value;
-    FISHING_STATE->cue_index = (u8)(value / 15);
+    distance                 = g_FishingRodRow->max_distance * D_801440BC / 255 + 8;
+    FISHING_STATE->cursor_10 = distance;
+    FISHING_STATE->cue_index = distance / 15;
     if (FISHING_STATE->cue_index >= 4) {
         FISHING_STATE->cue_index = 3;
     }
-    value = FISHING_STATE->y_38.pos_y;
-    value -= FISHING_STATE->cursor_10 << 15;
+    value                    = FISHING_STATE->y_38.pos_y - (FISHING_STATE->cursor_10 << 15);
     FISHING_STATE->cursor_10 = value;
     if (value >= FISHING_CAMERA_Y_MAX) {
         g_AreaScrollTargetY = FISHING_CAMERA_Y_MAX;
-    } else if (value >= FISHING_CAMERA_Y_MIN) {
-        g_AreaScrollTargetY = value;
-    } else {
+    } else if (value < FISHING_CAMERA_Y_MIN) {
         g_AreaScrollTargetY = FISHING_CAMERA_Y_MIN;
+    } else {
+        g_AreaScrollTargetY = value;
     }
 
     g_AreaCameraStep            = 0;
-    TASK_BYTES[0xC]             = 0;
+    FISHING_STATE->pos_x        = 0;
     FISHING_STATE->step_14      = *(u32*)(D_801E1D38 + FISHING_STATE->cue_index * 8);
     FISHING_STATE->step_limit   = *(u32*)(D_801E1D3C + FISHING_STATE->cue_index * 8);
     FISHING_STATE->active_flags = 0;
     FISHING_STATE->state_29     = 5;
     FISHING_STATE->counter_48   = 1;
-    FISHING_STATE->flags        = (u8)(FISHING_STATE->flags & ~ACTOR_FLAG_SEMI_TRANSPARENT);
-    FISHING_STATE->saved_index  = 0;
-    FISHING_STATE->tint_5D      = 0;
-    FISHING_STATE->tint_5E      = 0;
-    FISHING_STATE->tint_5F      = 0;
-    FISHING_STATE->state_2A     = 0;
-    FISHING_STATE->unk_60       = 0;
-    FISHING_STATE->unk_64       = 0;
-    FISHING_STATE->unk_68       = 0;
-    FISHING_STATE->unk_6C       = 0;
-    FISHING_STATE->counter_48   = 1;
+    FISHING_STATE->flags &= ~ACTOR_FLAG_SEMI_TRANSPARENT;
+    FISHING_STATE->saved_index = 0;
+    FISHING_STATE->tint_5D     = 0;
+    FISHING_STATE->tint_5E     = 0;
+    FISHING_STATE->tint_5F     = 0;
+    FISHING_STATE->unk_60      = 0;
+    FISHING_STATE->unk_64      = 0;
+    FISHING_STATE->unk_68      = 0;
+    FISHING_STATE->unk_6C      = 0;
+    FISHING_STATE->state_2A    = 0;
+    FISHING_STATE->counter_48  = 1;
 
     Area_SceneSelectRecord(g_FishingLureRow->unk_0C);
     Script_Select(1);
@@ -57,8 +58,8 @@ NON_MATCHING void Fishing_LureCast(void) {
         g_SpawnedActors[index].header.flags = 1;
         g_SpawnedActors[index].type         = 10;
     }
-    FISHING_STATE->counter_07    = g_FishingLureRow->unk_0F;
-    FISHING_STATE->handler_index = (u8)(FISHING_STATE->handler_index + 1);
+    FISHING_STATE->counter_07 = g_FishingLureRow->unk_0F;
+    FISHING_STATE->handler_index++;
 }
 #else
 INCLUDE_ASM(Fishing_LureCast);
