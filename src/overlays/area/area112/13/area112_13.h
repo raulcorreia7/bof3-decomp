@@ -16,6 +16,25 @@ extern u8                  D_801F41F8[];
 extern PartyMemberMessages g_PartyMemberMessages[1];
 extern u8                  D_801F493C[];
 
+/* One quad of the overlay's part table: the packed cell word (bytes: depth row, shape, cell y,
+ * cell x) and the tile word Area_ApplyTileToQuad reads. */
+typedef struct AreaQuadPart {
+    union {
+        u32 packed;
+        u8  bytes[4];
+    } cell;
+
+    u32 tile;
+} AreaQuadPart;
+
+/* The two cell depths of each depth row: [1] while the task step is 2, else [0]. */
+extern s8           D_801F4240[][2];
+/* The first and end part of each part range func_801F3274 draws. */
+extern u8           D_801F4250[][2];
+/* The four corner offsets (x, y, z) of each quad shape, in 128-unit steps. */
+extern s8           D_801F4258[][4][3];
+extern AreaQuadPart D_801F4294[];
+
 void func_801F2EA8(void);
 void func_801F3274(void);
 void Area_DrawLightPillar(s32* pos);

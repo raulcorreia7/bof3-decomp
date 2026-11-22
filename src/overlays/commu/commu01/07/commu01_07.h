@@ -97,7 +97,7 @@ extern u8             D_801F286D[];
 #define COMMU_REQUEST_ANCHOR(rec) (*(u32*)((rec) + 0x73F))
 
 void func_801D28A4(s16 x, s16 y, u8 slot, s32 selected);
-void func_801D2D98(s16 x, s16 y, s32 width, u8 channel, u8 blink);
+void func_801D2D98(s16 x, s16 y, s16 width, u8 channel, u8 blink);
 void func_801D3038(void);
 void func_801D36FC(s32 cell, s32 selected);
 void func_801D3984(s32 x, s32 y, s32 bright);
