@@ -44,3 +44,13 @@ def test_the_row_keeps_the_spelling_of_the_last_row(tmp_path) -> None:
     assert spaced.read_text(encoding="utf-8").splitlines()[1] == row(
         "a@0x00000001", "two"
     )
+
+
+def test_readers_take_the_main_table_and_the_branch_files(tmp_path) -> None:
+    main = file(tmp_path, row("a@0x00000001", "one"))
+    (tmp_path / "attempts").mkdir()
+    attempts.add(tmp_path / "attempts" / "lane.jsonl", "b@0x00000002", "two", "", None)
+    assert [json.loads(line)["function"] for line in attempts.read_lines(main)] == [
+        "a@0x00000001",
+        "b@0x00000002",
+    ]

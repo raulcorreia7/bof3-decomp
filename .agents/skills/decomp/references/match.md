@@ -104,7 +104,7 @@ match itself; [matching](../../../../docs/matching.md) is the full reference.
    assembly ([markers](../../../../docs/matching.md#markers-and-unmatched-bodies)), and name it
    from evidence or keep `func_<ADDR>` ([natural names](name.md#natural-names)). After three
    structurally different tries, keep the closest draft under `NON_MATCHING` (it must compile with
-   `-DNON_MATCHING`) and append a row to `config/attempts.jsonl` with the form reached and the
+   `-DNON_MATCHING`) and append a row with `tools/attempts.py add` (it writes `config/attempts/<branch>.jsonl`) with the form reached and the
    first differing instruction; `check-markers` refuses a new draft without one. Then `format` and `pre-push` decide
    ([gates](../SKILL.md#rules-for-every-job)).
 
@@ -112,7 +112,7 @@ match itself; [matching](../../../../docs/matching.md) is the full reference.
 
 - The gate ran on this exact head: `meson compile -C build/meson pre-push` after the last commit, on
   the current base ([gates](../../../../docs/matching.md#gates), [pre-push](../../../../tools/README.md#pre-push)).
-- `config/attempts.jsonl` keeps every row it had; a new try appends one (step 7).
+- The attempts files keep every row they had; a new try appends one with `tools/attempts.py add` (step 7).
 - No `config/**/splat.yaml`, header, target-map or compiler-config edit unless the task's `writes`
   list names it; otherwise a `needs: config` line ([rule 4](../../../../AGENTS.md#standing-rules)).
 - A report names a function only when it matched; a miss is an escalation, not a report.

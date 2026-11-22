@@ -33,7 +33,7 @@ from dataclasses import dataclass
 from pathlib import Path
 
 from bof3.adapters.attempts import PATH as ROW_PATH
-from bof3.adapters.attempts import read_lines, read_text
+from bof3.adapters.attempts import files, read_lines, read_text
 from bof3.adapters.config import read_symbols
 from bof3.attempts import function_of, validate
 from bof3.core.paths import ROOT
@@ -312,8 +312,12 @@ def attempted(root: Path | None = None) -> set[str]:
 
 def attempt_problems(root: Path | None = None) -> list[str]:
     """Each attempts row outside the schema or the order, as `path:line: problem`."""
-    path = (root or ROOT) / ROW_PATH
-    return validate(read_text(path), str(path)) if path.exists() else []
+    return [
+        problem
+        for path in files((root or ROOT) / ROW_PATH)
+        if path.exists()
+        for problem in validate(read_text(path), str(path))
+    ]
 
 
 def report_attempts(problems: list[str]) -> bool:
