@@ -1,8 +1,8 @@
 #include "engine/slus/slus.h"
 
-/* initializes the scratch work record for a new panel: marks it active, sets the mode (+0x24) and state
- * (+0x48) bytes, seeds the +0x40/+0x44 scroll pair with 0x1000, links the panel record at +0x54, clears the
- * +0x64/+0x68 angles and seeds +0x6C from D_801C8424 by the +8 route byte.
+/* arms the scratch task for a panel record: marks it in use and ready with its reset flag set and
+ * full scale, links the panel as its range record, takes its step list from the panel's +4 word,
+ * clears two angle words and seeds the third from D_801C8424 by the facing direction.
  */
 /* func_8015AC8C */
 MATCH void SYS_InitScratchpad(u8* panel) {

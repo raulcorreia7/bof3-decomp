@@ -10,7 +10,7 @@ MATCH void SYS_ThreadStopAll(void) {
 
     thread_index       = 0;
     g_SysCurrentThread = g_SysThreads;
-    thread_end         = g_SysThreads + 4;
+    thread_end         = g_SysThreads + SYS_THREAD_COUNT;
 
     do {
         if (g_SysCurrentThread->state != SYS_THREAD_EMPTY) {

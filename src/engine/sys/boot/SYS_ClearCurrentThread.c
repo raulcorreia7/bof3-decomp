@@ -9,7 +9,7 @@ MATCH void SYS_ClearCurrentThread(void) {
     u8* p;
     s32 i;
 
-    base = (u8*)(s32)g_SysCurrentThread;
+    base = (u8*)g_SysCurrentThread;
     p    = base + 0xE;
     i    = 7;
     do {
@@ -19,6 +19,6 @@ MATCH void SYS_ClearCurrentThread(void) {
     } while (i >= 0);
 
     for (i = 0; i < 16; i++) {
-        ((u8*)(s32)g_SysCurrentThread + i)[0x70] = 0;
+        g_SysCurrentThread->pad_70[i] = 0;
     }
 }

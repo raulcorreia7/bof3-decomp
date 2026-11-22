@@ -20,7 +20,7 @@ MATCH void func_801D8DC8(void) {
     u8             column;
     s32            next;
 
-    Menu_DrawClutStrip(D_80144953);
+    Menu_DrawClutStrip(g_WindowClut);
     panel = &g_UiPanelTasks[17];
     if (D_801485A0 != 0) {
         g_UiPanelTasks[MENU_START_PANEL_DESCRIPTION].u.message.id = D_801485A0 + START_LIST_DESCRIPTION_ID;

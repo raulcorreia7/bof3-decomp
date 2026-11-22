@@ -13,8 +13,7 @@
     u8        row;                                                                                                                              \
     u8        col;                                                                                                                              \
     u8        step;                                                                                                                             \
-    /* FAKE: retail keeps the dot count in a1. */                                                                                               \
-    FAKE_REG(u16, n, "a1");                                                                                                                     \
+    u16       n;                                                                                                                                \
                                                                                                                                                 \
     Camera_SetMatrix(&matrix);                                                                                                                  \
     pos[0] = ((Actor*)TASK(Actor)->unk_4C)->pos.x.fixed;                                                                                        \
@@ -23,20 +22,16 @@
     Camera_ProjectPoint(pos, &screen);                                                                                                          \
     for (row = (D_801D393C[D_801D40AC].h >> 1) * TASK(Actor)->timer; row < (D_801D393C[D_801D40AC].h >> 1) * (TASK(Actor)->timer + 1); row++) { \
         for (col = 0; col < D_801D393C[D_801D40AC].w; col++) {                                                                                  \
-            if (*(u16*)D_801D40B0 != 0) {                                                                                                       \
-                dot = (TrailDot*)D_801D40B4;                                                                                                    \
-                /* FAKE: the dot and count loads swap without the lock; best plain form is 4 rows off. */                                       \
-                FAKE_ORDER_LOCK_BEGIN                                                                                                           \
-                    n          = D_801D40A8;                                                                                                    \
-                    dot->color = *(u16*)D_801D40B0;                                                                                             \
-                    n++;                                                                                                                        \
-                    D_801D40A8 = n;                                                                                                             \
-                    dot->x     = screen.vx - D_801D393C[D_801D40AC].x + col;                                                                    \
-                    D_801D40B4 = (u32)(dot + 1);                                                                                                \
-                    dot->y     = screen.vy - D_801D393C[D_801D40AC].y + row;                                                                    \
-                FAKE_ORDER_LOCK_END;                                                                                                            \
+            if (*D_801D40B0 != 0) {                                                                                                             \
+                dot        = D_801D40B4;                                                                                                        \
+                dot->color = *D_801D40B0;                                                                                                       \
+                dot->x     = screen.vx - D_801D393C[D_801D40AC].x + col;                                                                        \
+                D_801D40B4 = dot + 1;                                                                                                           \
+                dot->y     = screen.vy - D_801D393C[D_801D40AC].y + row;                                                                        \
+                n          = D_801D40A8 + 1;                                                                                                    \
+                D_801D40A8 = n;                                                                                                                 \
             }                                                                                                                                   \
-            D_801D40B0 += 2;                                                                                                                    \
+            D_801D40B0++;                                                                                                                       \
         }                                                                                                                                       \
     }                                                                                                                                           \
     step               = TASK(Actor)->timer + 1;                                                                                                \

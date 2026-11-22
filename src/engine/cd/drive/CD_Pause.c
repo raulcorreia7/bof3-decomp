@@ -4,9 +4,9 @@
  */
 MATCH void CD_Pause(void) {
     if (CdSync(1, D_80146498) != CdlNoIntr) {
-        D_8014648C = 0;
+        g_CdSyncStatus = 0;
         if (CdPause() != 0) {
-            D_8014648A = 7;
+            g_CdStep = 7;
         }
     }
 }

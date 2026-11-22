@@ -14,7 +14,7 @@ NON_MATCHING void func_801D759C(void) {
     s8             previous;
     s32            limit;
 
-    Menu_DrawClutStrip(D_80144953);
+    Menu_DrawClutStrip(g_WindowClut);
     window = &D_80148578;
     if (D_801ED648 == 0) {
         window[0] = 1;

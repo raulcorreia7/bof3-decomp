@@ -6,7 +6,7 @@ MATCH void func_801D3A98(void) {
     u8             entry;
     u8*            rows;
 
-    Menu_DrawClutStrip(D_80144953);
+    Menu_DrawClutStrip(g_WindowClut);
     g_UiPanelTasks[MENU_START_PANEL_ITEMS].unk_0C             = 0xFF;
     g_UiPanelTasks[MENU_START_PANEL_DESCRIPTION].u.message.id = 0x18;
     g_UiPanelTasks[MENU_START_PANEL_CURSOR].active            = 1;

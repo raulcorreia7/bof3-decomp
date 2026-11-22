@@ -4,7 +4,7 @@ MATCH void func_801DB5E8(void) {
     u8 state;
     u8 pending;
 
-    Menu_DrawClutStrip(D_80144953);
+    Menu_DrawClutStrip(g_WindowClut);
     state      = D_80148651;
     pending    = D_80148655;
     D_80148654 = 5;

@@ -10,7 +10,7 @@ MATCH void SYS_LinkOt(void) {
     s32   work_offset;
 
     index          = 0;
-    ordering_table = D_801459D0;
+    ordering_table = g_GfxOtHeads;
     packet         = D_80145990;
     work_offset    = 0x70;
     do {

@@ -100,7 +100,7 @@ MATCH void func_801D1578(void) {
     u8* timer = &D_80148654;
     u8  count;
 
-    Menu_DrawClutStrip(D_80144953);
+    Menu_DrawClutStrip(g_WindowClut);
     count  = *timer - 1;
     *timer = count;
     if (count == 0) {
@@ -118,7 +118,7 @@ MATCH void func_801D15E4(void) {
         strncpy(&D_80144DE4, &D_801D86F0, 5);
         return;
     }
-    Menu_DrawClutStrip(D_80144953);
+    Menu_DrawClutStrip(g_WindowClut);
 }
 
 INCLUDE_ASM(func_801D165C);
@@ -297,7 +297,7 @@ MATCH void func_801D20E8(void) {
 }
 
 MATCH void func_801D211C(void) {
-    Menu_DrawClutStrip(D_80144953);
+    Menu_DrawClutStrip(g_WindowClut);
     func_801D2304(0x37, 0x37);
     if (g_UiWindowEffectBusy == 0) {
         func_801D259C();
@@ -313,7 +313,7 @@ MATCH void func_801D2190(void) {
     s32* shown;
     s32* counter;
 
-    Menu_DrawClutStrip(D_80144953);
+    Menu_DrawClutStrip(g_WindowClut);
     func_801D2304(55, 55);
     stat = &D_80148658;
     if (*stat < 6) {
@@ -339,7 +339,7 @@ MATCH void func_801D2298(void) {
         D_80148652 = 0;
         return;
     }
-    Menu_DrawClutStrip(D_80144953);
+    Menu_DrawClutStrip(g_WindowClut);
     func_801D2304(0x37, 0x37);
 }
 
@@ -621,9 +621,9 @@ NON_MATCHING void Menu_DrawHeaderBar(s32 x, s32 y, s32 width, s32 height, u8 win
     prim->tpage = getTPage(TPAGE_DEPTH_4BIT, TPAGE_ABR_HALF, FONT_TPAGE_X, FONT_TPAGE_Y);
     GFX_AddPrim(GFX_LAYER_UI, sizeof(POLY_FT4));
 
+    odd  = (width - 3) & 1;
     half = ((s32)width1_u - 4) >> 1;
     prim = (POLY_FT4*)g_GfxPrimCursor;
-    odd  = (width - 3) & 1;
     SetPolyFT4(prim);
     PSX_SET_SEMI_TRANSPARENT(prim);
     half_u = half;

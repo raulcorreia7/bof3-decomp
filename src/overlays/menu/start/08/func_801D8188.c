@@ -9,7 +9,7 @@ MATCH void func_801D8188(void) {
     s16  bar;
     s32  sel;
 
-    Menu_DrawClutStrip(D_80144953);
+    Menu_DrawClutStrip(g_WindowClut);
     /* FAKE: hides slot's constant so the bar read stays s1-relative; pure form 87.93%. */
     FAKE_OPAQUE(slot);
     bar                                                       = *(u16*)(slot - 0x164);

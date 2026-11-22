@@ -44,7 +44,7 @@ MATCH void Menu_OpenFormationScreen(void) {
         i++;
     }
 
-    Menu_DrawClutStrip(D_80144953);
+    Menu_DrawClutStrip(g_WindowClut);
     Menu_OpenFormation();
     g_MenuStep.sub_step = 2;
     g_MenuStep.state    = 0;

@@ -3,7 +3,7 @@
 MATCH void func_801E590C(void) {
     u8 count;
 
-    Menu_DrawClutStrip(D_80144953);
+    Menu_DrawClutStrip(g_WindowClut);
     MENU_DRAW_HEADER();
     WinDrawCueText(28, 21, 0xB9);
     SAVE_DrawSlots(SAVE_SLOTS_X, SAVE_SLOTS_Y, 0);

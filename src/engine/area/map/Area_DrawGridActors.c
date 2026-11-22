@@ -84,7 +84,7 @@ NON_MATCHING void Area_DrawGridActors(void) {
         if (g_AreaDrawFlags & AREA_DRAW_APPEND_AREA_PRIMITIVES) {
             word = (u32)g_AreaCellPacketLists[var_s7][g_GfxBufferIndex + 4].head;
             if (word != 0) {
-                u32** slot = &D_801459D0[g_AreaDrawMode];
+                u32** slot = &g_GfxOtHeads[g_AreaDrawMode];
                 u32*  head = *slot;
                 setaddr(head, word);
                 *slot = (u32*)g_AreaCellPacketLists[var_s7][g_GfxBufferIndex + 4].tail;
@@ -96,8 +96,8 @@ NON_MATCHING void Area_DrawGridActors(void) {
             if ((((word >> 0x18) == layer) && (var_fp < g_AreaCellPacketCount) && (OBJ_KEY(var_s4) >= (word >> 0x10))) || (var_s4 == g_AreaGridActorCount)) {
                 if (g_AreaDrawFlags & AREA_DRAW_CELL_LAYERS) {
                     packet = var_fp;
-                    CatPrim(D_801459D0[g_AreaDrawMode], &g_AreaCellPrims[g_AreaCellPackets[packet] & 0xFFF][g_GfxBufferIndex]);
-                    D_801459D0[g_AreaDrawMode] = (u32*)&g_AreaCellPrims[g_AreaCellPackets[packet] & 0xFFF][g_GfxBufferIndex];
+                    CatPrim(g_GfxOtHeads[g_AreaDrawMode], &g_AreaCellPrims[g_AreaCellPackets[packet] & 0xFFF][g_GfxBufferIndex]);
+                    g_GfxOtHeads[g_AreaDrawMode] = (u32*)&g_AreaCellPrims[g_AreaCellPackets[packet] & 0xFFF][g_GfxBufferIndex];
                 }
                 var_fp += 1;
             }
@@ -158,8 +158,8 @@ NON_MATCHING void Area_DrawGridActors(void) {
                         }
                     } else if (g_AreaDrawFlags & AREA_DRAW_APPEND_ACTOR_PRIMITIVES) {
                         TASK_SET(D_80147D08[row].work);
-                        CatPrim(D_801459D0[TASK(Actor)->draw_layer], D_80147D08[row].primitive);
-                        D_801459D0[TASK(Actor)->draw_layer] = (u32*)D_80147D08[row].primitive;
+                        CatPrim(g_GfxOtHeads[TASK(Actor)->draw_layer], D_80147D08[row].primitive);
+                        g_GfxOtHeads[TASK(Actor)->draw_layer] = (u32*)D_80147D08[row].primitive;
                     }
                     row++;
                 } while (row < limit);

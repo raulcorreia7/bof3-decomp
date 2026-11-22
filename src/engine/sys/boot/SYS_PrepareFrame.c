@@ -4,15 +4,15 @@
  * tables, then restores the two fixed packet arena bounds.
  */
 MATCH void SYS_PrepareFrame(void) {
-    u8*  packet;
-    u32* ordering;
-    u8   buffer_index;
-    u32  packet_offset;
-    u32  table_offset;
-    s32  index;
+    u8*   packet;
+    u32** ordering;
+    u8    buffer_index;
+    u32   packet_offset;
+    u32   table_offset;
+    s32   index;
 
     index           = 0;
-    ordering        = (u32*)D_801459D0;
+    ordering        = g_GfxOtHeads;
     buffer_index    = g_GfxBufferIndex;
     packet          = D_80145990;
     g_GfxPrimCursor = (u8*)(0x80020000u + ((buffer_index * 9) << 12));

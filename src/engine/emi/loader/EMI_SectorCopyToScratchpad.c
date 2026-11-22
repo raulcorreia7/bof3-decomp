@@ -15,10 +15,10 @@ MATCH void EMI_SectorCopyToScratchpad(void) {
         slot       = &D_80146488;
         D_8018B4B0 = 0;
         do {
-            i                             = D_8018B4B0;
-            base                          = g_EmiRingBase;
-            D_8018B4B0                    = i + 1;
-            *(u32*)((u32)scratch + i * 4) = *(u32*)((*slot << 11) + base + i * 4);
+            i          = D_8018B4B0;
+            base       = g_EmiRingBase;
+            D_8018B4B0 = i + 1;
+            scratch[i] = *(u32*)((*slot << 11) + base + i * 4);
         } while (i + 1 < 256U);
     }
     LZ77_DecodeStep();
@@ -33,10 +33,10 @@ MATCH void EMI_SectorCopyToScratchpad(void) {
             D_8018B4B0 = 0;
             slot       = guard;
             do {
-                i                             = D_8018B4B0;
-                base                          = g_EmiRingBase;
-                D_8018B4B0                    = i + 1;
-                *(u32*)((u32)scratch + i * 4) = *(u32*)((*slot << 11) + base + i * 4 + 0x400);
+                i          = D_8018B4B0;
+                base       = g_EmiRingBase;
+                D_8018B4B0 = i + 1;
+                scratch[i] = *(u32*)((*slot << 11) + base + i * 4 + 0x400);
             } while (i + 1 < 256U);
             LZ77_DecodeStep();
         }

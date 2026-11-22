@@ -4,7 +4,7 @@ MATCH void func_801E2444(void) {
     u8* level;
     u8  value;
 
-    Menu_DrawClutStrip(D_80144953);
+    Menu_DrawClutStrip(g_WindowClut);
     if (g_GameEntryState == 2) {
         Menu_DrawHeaderBar(MENU_HEADER_X, 16, MENU_HEADER_WIDTH, MENU_HEADER_HEIGHT, g_WindowStyle);
         func_801E26A8(0x1C, 0x40);

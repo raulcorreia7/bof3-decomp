@@ -3,7 +3,7 @@
 MATCH void func_801E7000(void) {
     s32 resource;
 
-    Menu_DrawClutStrip(D_80144953);
+    Menu_DrawClutStrip(g_WindowClut);
     MENU_DRAW_HEADER();
     resource = 0xBB;
     if (g_FrameCount & 0x40) {

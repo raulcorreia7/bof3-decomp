@@ -28,8 +28,10 @@ extern u8          g_SaveEntryFacing;
 extern u32         g_SaveEntryX;
 extern u32         g_SaveEntryY;
 extern u8          g_SceneFlagWords[]; /* 0x80144E88 */
-extern s8          D_80144950;
-extern u8          D_80144953;
+/* D_80144950 */
+extern s8          g_MessageSpeed;
+/* D_80144953 */
+extern u8          g_WindowClut;
 extern u8          D_80144954;
 /* D_80144956 */
 extern u8          g_AutoRun;

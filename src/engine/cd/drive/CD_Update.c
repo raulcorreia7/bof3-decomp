@@ -20,5 +20,5 @@ MATCH void CD_Update(void) {
     } while (src != end);
     *(u32*)(dst) = src->w[0];
 
-    ((Callback)callbacks[D_8014648A])();
+    ((Callback)callbacks[g_CdStep])();
 }

@@ -71,7 +71,7 @@ NON_MATCHING void func_801F7300(void) {
             }
         }
     }
-    if (g_GameAreaId == AREA_ID_MOUNT_MYRNEG) {
+    if (g_GameAreaId == AREA_ID_CAMP_BEFORE_ANGEL_TOWER) {
         if (!SYS_TestFlag(g_SceneFlags, 0xB)) {
             func_801C1DF0(0);
             SCRIPT_VARS_CLEAR_ALL();

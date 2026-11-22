@@ -13,6 +13,6 @@ MATCH void CD_Seek(void) {
     /* Param is D_80146778 (CdlLOC; see EMI_ArchiveStart.c); object form regresses
      * bytes. */
     if (CdSeekP((u_char*)counter + 0x2E6) != 0) {
-        D_8014648A = 3;
+        g_CdStep = 3;
     }
 }

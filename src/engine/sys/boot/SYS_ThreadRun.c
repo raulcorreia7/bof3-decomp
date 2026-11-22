@@ -33,6 +33,6 @@ MATCH void SYS_ThreadRun(void) {
             }
 
             g_SysCurrentThread++;
-        } while (g_SysCurrentThread < (Thread*)&g_SysCurrentThread);
+        } while (g_SysCurrentThread < g_SysThreads + SYS_THREAD_COUNT);
     }
 }

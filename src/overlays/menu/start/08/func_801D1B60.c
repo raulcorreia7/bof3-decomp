@@ -12,7 +12,7 @@ MATCH void func_801D1B60(void) {
     u16  total;
     u8   value;
 
-    Menu_DrawClutStrip(D_80144953);
+    Menu_DrawClutStrip(g_WindowClut);
     saved_work               = TASK_BYTES;
     g_UiPanelTasks[9].unk_0A = (s8)D_80148655;
     type                     = D_801EC38C[(s8)D_80148655];
