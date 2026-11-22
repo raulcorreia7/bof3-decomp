@@ -31,10 +31,10 @@ MATCH void Fishing_LureCast(void) {
         g_AreaScrollTargetY = value;
     }
 
-    g_AreaCameraStep                 = 0;
+    g_AreaCameraSpeed                = 0;
     TASK(FishingState)->pos_x        = 0;
-    TASK(FishingState)->step_14      = g_FishingLureCastSteps[TASK(FishingState)->cue_index].step;
-    TASK(FishingState)->step_limit   = g_FishingLureCastSteps[TASK(FishingState)->cue_index].limit;
+    TASK(FishingState)->bounce_speed = g_FishingLureCastSteps[TASK(FishingState)->cue_index].step;
+    TASK(FishingState)->bounce_accel = g_FishingLureCastSteps[TASK(FishingState)->cue_index].limit;
     TASK(FishingState)->active_flags = 0;
     TASK(FishingState)->state_29     = 5;
     TASK(FishingState)->counter_48   = 1;

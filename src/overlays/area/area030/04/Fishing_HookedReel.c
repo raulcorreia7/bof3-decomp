@@ -33,15 +33,15 @@ MATCH void Fishing_HookedReel(void) {
     }
     if (g_PadStates[0].held & (PADLleft | PADLdown)) {
         if (g_PadStates[0].pressed & (PADLleft | PADLdown)) {
-            D_801E31F8                     = 2;
-            TASK(FishingState)->step_timer = 8;
-            D_8014421C                     = g_FishingRodRow->cursor_left_speed;
+            D_801E31F8                = 2;
+            TASK(FishingState)->timer = 8;
+            D_8014421C                = g_FishingRodRow->cursor_left_speed;
             Script_Request(8);
             goto counted; /* the pad press counts as one state change */
         }
         work = TASK(FishingState);
-        if (work->step_timer != 0) {
-            work->step_timer -= 1;
+        if (work->timer != 0) {
+            work->timer -= 1;
             Script_AnimStepLoop();
         counted:
             D_80144216 += 1;

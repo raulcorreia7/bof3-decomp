@@ -31,7 +31,7 @@ ASSERT_SIZE(ScriptState, 0x0C);
  * phase, cursor and flag fields; the other units read only its first byte. */
 typedef struct MessageState {
     u8  state;        /* 0x00 */
-    u8  selection;    /* 0x01 */
+    u8  step;         /* 0x01 */
     u8  pad_02[2];    /* 0x02 */
     u16 flags;        /* 0x04 */
     u8  count;        /* 0x06 */

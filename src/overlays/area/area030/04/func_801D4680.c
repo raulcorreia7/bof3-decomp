@@ -10,12 +10,12 @@ MATCH void func_801D4680(void) {
     s32 t;
     s32 flags;
 
-    TASK(FishingState)->step_timer++;
+    TASK(FishingState)->timer++;
     if (TASK(FishingState)->saved_index == 0) {
-        Fishing_DrawWindowFrame(MENU_HEADER_X, (MENU_HEADER_Y - (TASK(FishingState)->step_timer * 16)) & 0xFFFE, MENU_HEADER_WIDTH, MENU_HEADER_HEIGHT, 0U);
+        Fishing_DrawWindowFrame(MENU_HEADER_X, (MENU_HEADER_Y - (TASK(FishingState)->timer * 16)) & 0xFFFE, MENU_HEADER_WIDTH, MENU_HEADER_HEIGHT, 0U);
         y     = FISHING_SHOP_COLUMNS_Y;
         flags = 0;
-        t     = TASK(FishingState)->step_timer * 3;
+        t     = TASK(FishingState)->timer * 3;
         x     = t << 4;
         x -= t;
         x += FISHING_SHOP_COLUMNS_X;
@@ -30,13 +30,13 @@ MATCH void func_801D4680(void) {
         y = FISHING_SHOP_COLUMNS_Y;
     }
     func_801D7C10(x, y, flags);
-    func_801D88E0((FISHING_EQUIP_PANEL_X - (TASK(FishingState)->step_timer * FISHING_SHOP_SLIDE_STEP)), FISHING_PANEL_CONTENT_Y);
+    func_801D88E0((FISHING_EQUIP_PANEL_X - (TASK(FishingState)->timer * FISHING_SHOP_SLIDE_STEP)), FISHING_PANEL_CONTENT_Y);
     if (!(TASK(FishingState)->counter_07 & 0x1)) {
-        func_801D7EB0((s16)((TASK(FishingState)->step_timer * FISHING_SHOP_SLIDE_STEP) + FISHING_ITEM_PANEL_X), FISHING_PANEL_CONTENT_Y);
+        func_801D7EB0((s16)((TASK(FishingState)->timer * FISHING_SHOP_SLIDE_STEP) + FISHING_ITEM_PANEL_X), FISHING_PANEL_CONTENT_Y);
     } else {
-        func_801D8364(((TASK(FishingState)->step_timer * FISHING_SHOP_SLIDE_STEP) + FISHING_ITEM_PANEL_X), FISHING_PANEL_CONTENT_Y);
+        func_801D8364(((TASK(FishingState)->timer * FISHING_SHOP_SLIDE_STEP) + FISHING_ITEM_PANEL_X), FISHING_PANEL_CONTENT_Y);
     }
-    if (TASK(FishingState)->step_timer == 4) {
+    if (TASK(FishingState)->timer == 4) {
         if (TASK(FishingState)->saved_index == 0) {
             TASK(FishingState)->handler_index = 0;
             return;

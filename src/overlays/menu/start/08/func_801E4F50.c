@@ -7,6 +7,6 @@ MATCH void func_801E4F50(void) {
         g_MenuStartTimer--;
     }
     if (WINDOW_EFFECT_IDLE()) {
-        g_MenuStartStep++;
+        g_MenuCampStep++;
     }
 }

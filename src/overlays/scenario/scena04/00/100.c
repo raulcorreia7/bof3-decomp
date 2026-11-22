@@ -520,7 +520,7 @@ MATCH void func_801F817C(void) {
                 SND_BGMPlay(0x3F, 0x64, 8);
                 Game_SetScriptActive();
                 g_ScenarioState.state_04 = 1;
-                g_ScenarioState.step_05  = 7;
+                g_ScenarioState.step     = 7;
                 Scene_RunScenario(1);
                 Scene_SetupParty(1);
             }

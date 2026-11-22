@@ -1070,7 +1070,7 @@ MATCH void func_801FA6B4(void) {
             g_ScriptVars[0] = 0;
             func_801BE1B0(0);
             g_ScenarioState.state_04 = 6;
-            g_ScenarioState.step_05  = 0;
+            g_ScenarioState.step     = 0;
         }
         if (!SYS_TestFlag(g_SceneFlags, 9)) {
             func_801A4BC0(0x25, 0x3D, 0x51);
@@ -1095,7 +1095,7 @@ MATCH void func_801FA6B4(void) {
             func_801BE1B0(0);
             g_AreaDrawFlags          = 0;
             g_ScenarioState.state_04 = 1;
-            g_ScenarioState.step_05  = 0;
+            g_ScenarioState.step     = 0;
         } else if (!SYS_TestFlag(g_SceneFlags, 2) && SYS_TestFlag(g_SceneFlags, 1)) {
             Game_SetScriptActive();
             g_AreaScrollTargetX = 0x2D8000;
@@ -1103,7 +1103,7 @@ MATCH void func_801FA6B4(void) {
             Area_InitMapRenderer();
             func_801BE1B0(2);
             g_ScenarioState.state_04 = 3;
-            g_ScenarioState.step_05  = 0;
+            g_ScenarioState.step     = 0;
             D_80146258 |= 8;
         }
     }
@@ -1118,7 +1118,7 @@ MATCH void func_801FAA68(void) {
 }
 
 MATCH void func_801FAA70(void) {
-    u8* step = &g_ScenarioState.step_05;
+    u8* step = &g_ScenarioState.step;
 
     switch (*step) {
         case 0:

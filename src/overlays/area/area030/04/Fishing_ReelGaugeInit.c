@@ -8,7 +8,7 @@ MATCH void Fishing_ReelGaugeInit(void) {
     FishingState* retired;
 
     record                          = TASK(FishingState);
-    record->step_timer              = 0;
+    record->timer                   = 0;
     retired                         = TASK(FishingState);
     record->origin_y                = 0;
     retired->step_index             = 0;

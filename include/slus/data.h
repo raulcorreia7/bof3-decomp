@@ -168,9 +168,9 @@ extern s16         g_AreaCameraOffsetY;
 /* D_8014932C */
 extern s16         g_AreaCameraOffsetZ;
 /* D_8014932E */
-extern s16         g_AreaCameraStep;
+extern s16         g_AreaCameraSpeed;
 /* D_80149330 */
-extern s16         g_AreaCameraHeightStep;
+extern s16         g_AreaCameraHeightDelta;
 /* D_80149332 */
 extern u8          g_AreaCameraMoving;
 /* D_80149333 */

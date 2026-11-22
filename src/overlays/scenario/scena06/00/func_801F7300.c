@@ -40,7 +40,7 @@ NON_MATCHING void func_801F7300(void) {
             g_AreaDrawFlags = 0;
             Game_SetScriptActive();
             SCRIPT_VARS_CLEAR_ALL();
-            g_ScenarioState.step_05  = 0;
+            g_ScenarioState.step     = 0;
             g_ScenarioState.state_04 = 0x11;
             SYS_SetFlag(g_SceneFlags, 0x3C);
             switch (g_EmiLoadedCharacterIndex & 0x7F) {
@@ -102,7 +102,7 @@ NON_MATCHING void func_801F7300(void) {
                     g_ScriptVars[1]          = 0;
                     *script_phase            = 0;
                     g_ScriptVars[3]          = 0;
-                    g_ScenarioState.step_05  = 0;
+                    g_ScenarioState.step     = 0;
                     g_ScenarioState.state_04 = 0;
                 }
                 break;
@@ -114,7 +114,7 @@ NON_MATCHING void func_801F7300(void) {
                     g_ScriptVars[1]          = 0;
                     *script_phase            = 0;
                     g_ScriptVars[3]          = 0;
-                    g_ScenarioState.step_05  = 0;
+                    g_ScenarioState.step     = 0;
                     g_ScenarioState.state_04 = 0;
                 }
                 break;
@@ -162,7 +162,7 @@ NON_MATCHING void func_801F7300(void) {
             SYS_SetFlag(g_SceneFlags, 0x3B);
             g_AreaDrawFlags = 0;
             func_801FCD38();
-            g_ScenarioState.step_05  = 0x1E;
+            g_ScenarioState.step     = 0x1E;
             g_ScenarioState.state_04 = 6;
         }
     }

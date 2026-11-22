@@ -18,7 +18,7 @@ MATCH void func_801F3D88(void) {
     work->pos.x.fixed = D_80145EC4 - edge;
     g_Task            = work;
     TASK_SET(address);
-    g_Task                  = work;
-    g_ScenarioState.step_05 = 0x1E;
+    g_Task               = work;
+    g_ScenarioState.step = 0x1E;
     Actor_Clear();
 }

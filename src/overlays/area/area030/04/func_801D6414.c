@@ -27,8 +27,8 @@ MATCH void func_801D6414(void) {
 
     TASK(FishingState)->tint_5F = 0;
 
-    tail             = TASK(FishingState);
-    tail->step_timer = 0x40;
+    tail        = TASK(FishingState);
+    tail->timer = 0x40;
 
     TASK(FishingState)->cue_index = 0;
     Script_Select(3);

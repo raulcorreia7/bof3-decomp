@@ -16,7 +16,7 @@ MATCH void func_801F88B0(void) {
     u8* state;
     u8* script;
 
-    state = &g_ScenarioState.step_05;
+    state = &g_ScenarioState.step;
     switch (*state) {
         case 0xA:
             if (g_GameStateIndex != GAME_REQUEST_MESSAGE) {
@@ -37,11 +37,11 @@ MATCH void func_801F88B0(void) {
 }
 
 MATCH void func_801F894C(void) {
-    switch (g_ScenarioState.step_05) {
+    switch (g_ScenarioState.step) {
         case 51:
             if (g_GameStateIndex != GAME_REQUEST_MESSAGE) {
                 Game_ClearScriptActive();
-                g_ScenarioState.step_05  = 0;
+                g_ScenarioState.step     = 0;
                 g_ScenarioState.state_04 = 0;
             }
             break;

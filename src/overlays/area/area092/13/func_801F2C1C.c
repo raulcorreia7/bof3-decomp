@@ -7,15 +7,15 @@ MATCH void func_801F2C1C(void) {
     switch (choice) {
         case 2:
             Game_SetScriptActive();
-            g_ScenarioState.step_05 = 10;
+            g_ScenarioState.step = 10;
             break;
         case 3:
             Game_SetScriptActive();
-            g_ScenarioState.step_05 = 30;
+            g_ScenarioState.step = 30;
             break;
         case 4:
             Game_SetScriptActive();
-            g_ScenarioState.step_05 = 20;
+            g_ScenarioState.step = 20;
             break;
         case 0:
         case 1:

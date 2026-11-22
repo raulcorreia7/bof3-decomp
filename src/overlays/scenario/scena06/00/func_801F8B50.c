@@ -5,34 +5,34 @@ __asm__(".include \"include/match/macro.inc\"\n");
 #endif
 
 MATCH void func_801F8B50(void) {
-    switch (g_ScenarioState.step_05) {
+    switch (g_ScenarioState.step) {
         case 0:
             SCENARIO_MESSAGE_WAIT(MSG_SCENA06_013, 1);
             break;
         case 1:
             if (g_GameStateIndex != GAME_REQUEST_MESSAGE) {
                 Scene_SetupParty(0);
-                g_ScenarioState.step_05 = 2;
+                g_ScenarioState.step = 2;
             }
             break;
         case 2:
             if (g_ScriptVars[0] == 1) {
-                g_AreaScrollTargetX     = TO_COORD(53);
-                g_AreaCameraStep        = 0x20;
-                g_ScenarioState.step_05 = 3;
-                g_AreaScrollTargetY     = g_Game.members[0].pos.y.fixed;
+                g_AreaScrollTargetX  = TO_COORD(53);
+                g_AreaCameraSpeed    = 0x20;
+                g_ScenarioState.step = 3;
+                g_AreaScrollTargetY  = g_Game.members[0].pos.y.fixed;
             }
             break;
         case 3:
             if (g_AreaCameraMoving == 0) {
-                g_ScriptVars[0]         = 2;
-                g_ScenarioState.step_05 = 4;
+                g_ScriptVars[0]      = 2;
+                g_ScenarioState.step = 4;
             }
             break;
         case 4:
             if (g_ScriptVars[0] == 0xA) {
                 UI_ModeSet(0xD);
-                g_ScenarioState.step_05 = 5;
+                g_ScenarioState.step = 5;
             }
             break;
         case 5:
@@ -44,8 +44,8 @@ MATCH void func_801F8B50(void) {
             break;
         case 6:
             if (g_GameStateIndex != GAME_REQUEST_MESSAGE) {
-                g_ScriptVars[2]         = 1;
-                g_ScenarioState.step_05 = 7;
+                g_ScriptVars[2]      = 1;
+                g_ScenarioState.step = 7;
                 SYS_SetFlag(g_SceneFlags, 13);
                 Game_RequestAreaChange(AREA_ID_RHAPALA_DOCK, TO_COORD(51), TO_COORD(33), AREA_ENTRY_MAP_LOADING | FACING_UP);
             }
@@ -54,7 +54,7 @@ MATCH void func_801F8B50(void) {
             if (g_ScriptVars[0] == 0xD) {
                 SYS_SetFlag(g_SceneFlags, 15);
                 Game_ClearScriptActive();
-                Scene_ClearScriptState(&g_ScenarioState.step_05);
+                Scene_ClearScriptState(&g_ScenarioState.step);
             }
             break;
         case 10:
@@ -63,14 +63,14 @@ MATCH void func_801F8B50(void) {
         case 11:
             if (g_GameStateIndex != GAME_REQUEST_MESSAGE) {
                 Scene_SetupParty(2);
-                g_ScenarioState.step_05 = 12;
+                g_ScenarioState.step = 12;
             }
             break;
         case 12:
             if (g_ScriptVars[0] == 0x15) {
                 SYS_SetFlag(g_SceneFlags, 14);
                 Game_ClearScriptActive();
-                Scene_ClearScriptState(&g_ScenarioState.step_05);
+                Scene_ClearScriptState(&g_ScenarioState.step);
             }
             break;
         case 20:
@@ -79,14 +79,14 @@ MATCH void func_801F8B50(void) {
         case 21:
             if (g_GameStateIndex != GAME_REQUEST_MESSAGE) {
                 Scene_SetupParty(0);
-                g_ScenarioState.step_05 = 22;
+                g_ScenarioState.step = 22;
             }
             break;
         case 22:
             if (g_ScriptVars[0] == 1) {
                 SYS_SetFlag(g_SceneFlags, 16);
                 Game_ClearScriptActive();
-                Scene_ClearScriptState(&g_ScenarioState.step_05);
+                Scene_ClearScriptState(&g_ScenarioState.step);
             }
             break;
         case 30:
@@ -95,7 +95,7 @@ MATCH void func_801F8B50(void) {
         case 31:
             if (g_GameStateIndex != GAME_REQUEST_MESSAGE) {
                 Game_ClearScriptActive();
-                g_ScenarioState.step_05  = 0;
+                g_ScenarioState.step     = 0;
                 g_ScenarioState.state_04 = 0;
             }
             break;

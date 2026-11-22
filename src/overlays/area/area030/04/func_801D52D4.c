@@ -20,8 +20,8 @@ MATCH void func_801D52D4(void) {
     work->step_index         = 0;
     stepped                  = TASK(FishingState);
     work->bounce.unk_3C      = 0;
-    work->step_14            = 0;
-    work->step_limit         = 0;
-    stepped->step_timer      = 4;
+    work->bounce_speed       = 0;
+    work->bounce_accel       = 0;
+    stepped->timer           = 4;
     TASK(Actor)->header.mode = (u8)(TASK(Actor)->header.mode + 1);
 }

@@ -39,6 +39,6 @@ loop:
         mask = (1 << TASK(FishingState)->cue_index) & BYTE_MASK;
     }
     func_801D7C10(FISHING_SHOP_COLUMNS_X, FISHING_SHOP_COLUMNS_Y, mask);
-    TASK(FishingState)->step_timer = 4;
+    TASK(FishingState)->timer = 4;
     TASK(FishingState)->handler_index += 1;
 }

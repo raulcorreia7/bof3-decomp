@@ -11,7 +11,7 @@ MATCH void Actor_SpawnSceneActor(s8 actor_slot) {
         g_SpawnedActors[TASK(Actor)->param.actor_slot].header.flags = 1;
         g_SpawnedActors[TASK(Actor)->param.actor_slot].type         = 0x19;
         g_SpawnedActors[TASK(Actor)->param.actor_slot].unk_06       = actor_slot;
-        g_SpawnedActors[TASK(Actor)->param.actor_slot].scene_step   = 0;
+        g_SpawnedActors[TASK(Actor)->param.actor_slot].vx           = 0;
         value                                                       = func_801ADC98();
         g_SpawnedActors[TASK(Actor)->param.actor_slot].selection    = value + 0x28;
         g_SpawnedActors[TASK(Actor)->param.actor_slot].pos.x.fixed  = TASK(Actor)->pos.x.fixed;

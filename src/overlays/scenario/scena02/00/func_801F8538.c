@@ -6,16 +6,16 @@ __asm__(".include \"include/match/macro.inc\"\n");
 #endif
 
 MATCH void func_801F8538(void) {
-    switch (g_ScenarioState.step_05) {
+    switch (g_ScenarioState.step) {
         case 0:
             g_ScriptVars[2] = 5;
             Scene_SetupParty(6);
-            g_ScenarioState.step_05 = 1;
+            g_ScenarioState.step = 1;
             break;
         case 1:
             if (g_ScriptVars[0] == 0x21) {
                 UI_ModeSet(UI_MODE_LONG_FADE_OUT);
-                g_ScenarioState.step_05 = 2;
+                g_ScenarioState.step = 2;
             }
             break;
         case 2:
@@ -26,9 +26,9 @@ MATCH void func_801F8538(void) {
             break;
         case 3:
             if (g_GameStateIndex != GAME_REQUEST_MESSAGE) {
-                g_ScriptVars[2]         = 0;
-                g_ScriptVars[0]         = 0;
-                g_ScenarioState.step_05 = 4;
+                g_ScriptVars[2]      = 0;
+                g_ScriptVars[0]      = 0;
+                g_ScenarioState.step = 4;
                 Game_RequestAreaChange(AREA_ID_MCNEIL_MANOR_AREA, TO_COORD(38), TO_COORD(25), AREA_ENTRY_MAP_LOADING | FACING_DOWN_LEFT);
                 g_GamePrevSelection = 0x11;
                 g_GameFlags |= 0x80;

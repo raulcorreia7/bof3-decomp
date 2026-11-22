@@ -8,7 +8,7 @@ MATCH u8 func_801F5190(s32 x1, s32 y1, s32 x2, s32 y2) {
     if (slot != GAME_NONE) {
         g_SpawnedActors[slot].header.flags                      = ACTOR_FLAG_IN_USE;
         g_SpawnedActors[g_ScratchPad.cells.bytes[0]].type       = 0x3F;
-        g_SpawnedActors[g_ScratchPad.cells.bytes[0]].scene_step = x1;
+        g_SpawnedActors[g_ScratchPad.cells.bytes[0]].vx         = x1;
         g_SpawnedActors[g_ScratchPad.cells.bytes[0]].selection  = y1;
         g_SpawnedActors[g_ScratchPad.cells.bytes[0]].counter_18 = x2;
         g_SpawnedActors[g_ScratchPad.cells.bytes[0]].counter_1C = y2;

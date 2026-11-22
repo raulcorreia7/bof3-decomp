@@ -26,7 +26,7 @@ NON_MATCHING u8 Script_OpsRunFlow(ScriptState* state, u8* base, s32 seed) {
     s32                 left;
     s32                 sel;
     s32                 dist;
-    s8                  step;
+    s8                  arg_size;
     void*               obj;
     AreaScriptCallback* table;
 
@@ -173,11 +173,11 @@ NON_MATCHING u8 Script_OpsRunFlow(ScriptState* state, u8* base, s32 seed) {
                 }
                 break;
             case 0xA0:
-                dist = D_801821C0[base[state->cursor] & 3](base + state->cursor);
-                step = (s8)dist;
-                if (step < 0)
+                dist     = D_801821C0[base[state->cursor] & 3](base + state->cursor);
+                arg_size = (s8)dist;
+                if (arg_size < 0)
                     return (u8)(sel & BYTE_MASK);
-                state->cursor = (u16)(state->cursor + step + 1);
+                state->cursor = (u16)(state->cursor + arg_size + 1);
                 break;
             case 0xB0:
                 Script_OpsRunSound(state, base);

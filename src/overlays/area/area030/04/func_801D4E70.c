@@ -11,7 +11,7 @@ MATCH void func_801D4E70(void) {
     s32           mask;
     u8            fish;
 
-    TASK(FishingState)->step_timer--;
+    TASK(FishingState)->timer--;
     Fishing_DrawCatchBar(0, FISHING_CATCH_BAR_Y);
     key   = TASK(FishingState)->bounce.half.key;
     fish  = g_FishingBestCatch[key];
@@ -25,16 +25,16 @@ MATCH void func_801D4E70(void) {
     if (work->counter_08 == 0) {
         key_a = work->bounce.half.key;
         if (g_FishingBestCatch[key_a] != 0) {
-            Fishing_DrawCatchIcon((work->step_timer * FISHING_CATCH_ICON_STEP) + FISHING_CATCH_ICON_X, FISHING_CATCH_ICON_Y, key_a & BYTE_MASK);
+            Fishing_DrawCatchIcon((work->timer * FISHING_CATCH_ICON_STEP) + FISHING_CATCH_ICON_X, FISHING_CATCH_ICON_Y, key_a & BYTE_MASK);
         } else {
-            Fishing_DrawCatchIcon((work->step_timer * FISHING_CATCH_ICON_STEP) + FISHING_CATCH_ICON_X, FISHING_CATCH_ICON_Y, GAME_NONE);
+            Fishing_DrawCatchIcon((work->timer * FISHING_CATCH_ICON_STEP) + FISHING_CATCH_ICON_X, FISHING_CATCH_ICON_Y, GAME_NONE);
         }
     } else {
         key_b = work->bounce.half.key;
         if (g_FishingBestCatch[key_b] != 0) {
-            Fishing_DrawCatchIcon(FISHING_CATCH_ICON_X - (work->step_timer * FISHING_CATCH_ICON_STEP), FISHING_CATCH_ICON_Y, key_b & BYTE_MASK);
+            Fishing_DrawCatchIcon(FISHING_CATCH_ICON_X - (work->timer * FISHING_CATCH_ICON_STEP), FISHING_CATCH_ICON_Y, key_b & BYTE_MASK);
         } else {
-            Fishing_DrawCatchIcon(FISHING_CATCH_ICON_X - (work->step_timer * FISHING_CATCH_ICON_STEP), FISHING_CATCH_ICON_Y, GAME_NONE);
+            Fishing_DrawCatchIcon(FISHING_CATCH_ICON_X - (work->timer * FISHING_CATCH_ICON_STEP), FISHING_CATCH_ICON_Y, GAME_NONE);
         }
     }
     Fishing_DrawRank(FISHING_CATCH_RANK_X, FISHING_CATCH_RANK_Y);
@@ -46,7 +46,7 @@ MATCH void func_801D4E70(void) {
         mask = (1 << TASK(FishingState)->cue_index) & BYTE_MASK;
     }
     func_801D7C10(FISHING_SHOP_COLUMNS_X, FISHING_SHOP_COLUMNS_Y, mask);
-    if (TASK(FishingState)->step_timer == 0) {
+    if (TASK(FishingState)->timer == 0) {
         TASK(FishingState)->handler_index = 8;
     }
 }

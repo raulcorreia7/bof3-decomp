@@ -23,13 +23,13 @@ MATCH void func_801FA9C8(void) {
     u8  slot;
     u8* state;
 
-    switch (g_ScenarioState.step_05) {
+    switch (g_ScenarioState.step) {
         case 0:
             Game_ClearScriptActive();
             SYS_SetFlag(g_SceneFlags, 0x15);
             Scene_SetupParty(1);
             g_ScenarioState.state_04 = 0;
-            g_ScenarioState.step_05  = 0;
+            g_ScenarioState.step     = 0;
             break;
         case 1:
             Game_ClearScriptActive();
@@ -37,7 +37,7 @@ MATCH void func_801FA9C8(void) {
             Scene_SetupParty(2);
             func_801F4400();
             g_ScenarioState.state_04 = 0;
-            g_ScenarioState.step_05  = 0;
+            g_ScenarioState.step     = 0;
             break;
         case 2:
             Game_ClearScriptActive();
@@ -45,7 +45,7 @@ MATCH void func_801FA9C8(void) {
             Scene_SetupParty(3);
             func_801F4508();
             g_ScenarioState.state_04 = 0;
-            g_ScenarioState.step_05  = 0;
+            g_ScenarioState.step     = 0;
             break;
         case 3:
             Game_ClearScriptActive();
@@ -53,7 +53,7 @@ MATCH void func_801FA9C8(void) {
             Scene_SetupParty(6);
             func_801F4674();
             g_ScenarioState.state_04 = 0;
-            g_ScenarioState.step_05  = 0;
+            g_ScenarioState.step     = 0;
             break;
         case 4:
             Game_ClearScriptActive();
@@ -61,14 +61,14 @@ MATCH void func_801FA9C8(void) {
             Scene_SetupParty(7);
             func_801F4764();
             g_ScenarioState.state_04 = 0;
-            g_ScenarioState.step_05  = 0;
+            g_ScenarioState.step     = 0;
             break;
         case 5:
             Game_ClearScriptActive();
             SYS_SetFlag(g_SceneFlags, 0x1C);
             Scene_SetupParty(0);
             g_ScenarioState.state_04 = 0;
-            g_ScenarioState.step_05  = 0;
+            g_ScenarioState.step     = 0;
             break;
         case 6:
             if (g_ScriptVars[0] != 7) {
@@ -77,7 +77,7 @@ MATCH void func_801FA9C8(void) {
             g_AreaDrawFlags = 0;
             SND_BGMFadeOut(g_SndBGMId, 100, 4);
             g_ScenarioState.timer_06 = 8;
-            g_ScenarioState.step_05  = 7;
+            g_ScenarioState.step     = 7;
             break;
         case 7:
             if (--g_ScenarioState.timer_06 != 0) {
@@ -85,7 +85,7 @@ MATCH void func_801FA9C8(void) {
             }
             g_AreaDrawFlags          = AREA_DRAW_ALL_FLAGS;
             g_ScenarioState.state_04 = 0;
-            g_ScenarioState.step_05  = 0;
+            g_ScenarioState.step     = 0;
             g_ScriptVars[0]++;
             break;
         case 10:
@@ -94,7 +94,7 @@ MATCH void func_801FA9C8(void) {
             }
             Scene_SetupParty(3);
             SND_BGMPlay(0x9F, 100, 8);
-            g_ScenarioState.step_05 = 11;
+            g_ScenarioState.step = 11;
             break;
         case 11:
             if (g_ScriptVars[0] != 0x19 || g_GameStateIndex == GAME_REQUEST_MESSAGE) {
@@ -102,14 +102,14 @@ MATCH void func_801FA9C8(void) {
             }
             g_ScenarioState.timer_06 = 10;
             g_AreaDrawFlags          = 0;
-            g_ScenarioState.step_05  = 12;
+            g_ScenarioState.step     = 12;
             break;
         case 12:
             if (--g_ScenarioState.timer_06 != 0) {
                 break;
             }
-            g_AreaDrawFlags         = AREA_DRAW_ALL_FLAGS;
-            g_ScenarioState.step_05 = 13;
+            g_AreaDrawFlags      = AREA_DRAW_ALL_FLAGS;
+            g_ScenarioState.step = 13;
             g_ScriptVars[0]++;
             break;
         case 13:
@@ -118,12 +118,12 @@ MATCH void func_801FA9C8(void) {
             }
             func_801BFE34(TO_COORD_HALF(44), TO_COORD_HALF(39), 0x25);
             func_801C7A54(0x33);
-            g_ScenarioState.step_05 = 14;
+            g_ScenarioState.step = 14;
             break;
         case 15:
             Game_RequestAreaChange(AREA_ID_EDEN_TEEPO_FIGHT, TO_COORD_HALF(32), TO_COORD_HALF(38), 0x89);
-            g_GamePrevSelection     = 0xFF;
-            g_ScenarioState.step_05 = 16;
+            g_GamePrevSelection  = 0xFF;
+            g_ScenarioState.step = 16;
             break;
         case 16:
             if (g_ScriptVars[0] != 1) {
@@ -131,21 +131,21 @@ MATCH void func_801FA9C8(void) {
             }
             Scene_SpawnActor(0x31, g_AreaCameraAngle.vx, g_AreaCameraAngle.vy, g_AreaCameraAngle.vz, 0x14, 0);
             SND_BGMRequest(0x9F);
-            g_ScenarioState.step_05 = 17;
+            g_ScenarioState.step = 17;
             break;
         case 17:
             if (g_ScriptVars[0] != 9) {
                 break;
             }
             SCENE_SPAWN_ON_GROUND(0x97);
-            g_ScenarioState.step_05 = 18;
+            g_ScenarioState.step = 18;
             break;
         case 18:
             if (g_ScriptVars[0] != 10) {
                 break;
             }
             g_ScenarioState.timer_06 = 0x78;
-            g_ScenarioState.step_05  = 19;
+            g_ScenarioState.step     = 19;
             break;
         case 20:
             if (WINDOW_EFFECT_BUSY()) {
@@ -162,8 +162,8 @@ MATCH void func_801FA9C8(void) {
             }
             func_801C1DF0(0xB);
             SYS_ThreadWait(1);
-            *state                  = 6;
-            g_ScenarioState.step_05 = 22;
+            *state               = 6;
+            g_ScenarioState.step = 22;
             break;
         case 22: {
             u8* index = &g_GameStateIndex;
@@ -171,9 +171,9 @@ MATCH void func_801FA9C8(void) {
             if (*index != 0) {
                 break;
             }
-            *index                  = 1;
-            D_80148660              = 1;
-            g_ScenarioState.step_05 = 23;
+            *index               = 1;
+            D_80148660           = 1;
+            g_ScenarioState.step = 23;
             break;
         }
         case 23:
@@ -199,7 +199,7 @@ MATCH void func_801FA9C8(void) {
             g_AreaDrawFlags = AREA_DRAW_ALL_FLAGS;
             UI_ModeSet(1);
             g_ScenarioState.timer_06 = 0x40;
-            g_ScenarioState.step_05  = 24;
+            g_ScenarioState.step     = 24;
             SCENE_SPAWN_ON_GROUND(0x98);
             break;
         case 24:
@@ -207,14 +207,14 @@ MATCH void func_801FA9C8(void) {
                 break;
             }
             func_801C7A54(0x34);
-            g_ScenarioState.step_05 = 25;
+            g_ScenarioState.step = 25;
             break;
         case 26:
             g_ScriptVars[0]++;
             SYS_SetFlag(g_SceneFlags, 0x1F);
             Game_RequestAreaChange(AREA_ID_EDEN_TEEPO_FIGHT, TO_COORD_HALF(32), TO_COORD_HALF(38), 3);
             g_ScenarioState.state_04 = 0;
-            g_ScenarioState.step_05  = 0;
+            g_ScenarioState.step     = 0;
             break;
         case 30:
             SND_BGMPause(g_SndBGMId);
@@ -227,7 +227,7 @@ MATCH void func_801FA9C8(void) {
                 break;
             }
             SND_BGMResume(g_SndBGMId);
-            g_ScenarioState.step_05 = 32;
+            g_ScenarioState.step = 32;
             g_ScriptVars[0]++;
             break;
         case 32:
@@ -238,7 +238,7 @@ MATCH void func_801FA9C8(void) {
             SYS_SetFlag(g_SceneFlags, 0x31);
             Game_ClearScriptActive();
             g_ScenarioState.state_04 = 0;
-            g_ScenarioState.step_05  = 0;
+            g_ScenarioState.step     = 0;
             break;
     }
 }

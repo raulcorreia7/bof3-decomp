@@ -47,7 +47,7 @@ typedef struct PaletteFade {
     u8            saved_byte; /* the target byte at +0x27, restored on free */
     ColorDelta8   offset;
     u8            table_index;
-    u8            step;
+    u8            cell_index; /* the free palette cell GFX_PaletteMarkCells assigned */
     u8            unk_07;
     PaletteOwner* target; /* the record whose palette fades */
 } PaletteFade;

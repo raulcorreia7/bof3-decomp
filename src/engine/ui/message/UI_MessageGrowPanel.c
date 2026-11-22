@@ -13,8 +13,8 @@ MATCH void UI_MessageGrowPanel(void) {
 
     panel = g_UiPanelCurrent;
 
-    panel->u.grow.w = panel->u.grow.w + panel->u.grow.step_x;
-    panel->pos.x -= (s16)panel->u.grow.step_x / 2;
+    panel->u.grow.w = panel->u.grow.w + panel->u.grow.width_delta;
+    panel->pos.x -= (s16)panel->u.grow.width_delta / 2;
 
     advanced = 0;
     if (panel->unk_0A < ((s16)panel->u.grow.w >> 4)) {
@@ -40,8 +40,8 @@ MATCH void UI_MessageGrowPanel(void) {
 
     panel = g_UiPanelCurrent;
 
-    panel->u.grow.h = panel->u.grow.h + panel->u.grow.step_y;
-    panel->pos.y -= (s16)panel->u.grow.step_y / 2;
+    panel->u.grow.h = panel->u.grow.h + panel->u.grow.height_delta;
+    panel->pos.y -= (s16)panel->u.grow.height_delta / 2;
 
     if (panel->unk_0B < ((s16)panel->u.grow.h >> 4)) {
         switch (panel->mode) {

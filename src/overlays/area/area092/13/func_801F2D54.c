@@ -7,7 +7,7 @@ MATCH void func_801F2D54(void) {
     g_UiMessageRequest = D_801F41C0[choice];
     if (choice == 0) {
         Game_SetScriptActive();
-        g_ScenarioState.step_05  = 0x28;
+        g_ScenarioState.step     = 0x28;
         g_ScriptVars[0]          = 0;
         g_ScriptVars[1]          = 0;
         g_ScriptVars[2]          = 0;

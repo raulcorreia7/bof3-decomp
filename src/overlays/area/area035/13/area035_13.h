@@ -16,7 +16,7 @@ static inline void Area_BeginChoiceScript(u8 choice) {
     g_ScriptVars[1]          = 0;
     g_ScriptVars[2]          = 0;
     g_ScriptVars[3]          = 0;
-    g_ScenarioState.step_05  = 20;
+    g_ScenarioState.step     = 20;
 }
 
 #endif

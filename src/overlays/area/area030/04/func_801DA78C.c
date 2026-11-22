@@ -26,15 +26,15 @@ MATCH void func_801DA78C(void) {
                 if (direction != 0) {
                     work->pos_x = direction;
                     if (direction == PADLleft) {
-                        record->scene_step = -0x800;
+                        record->vx = -0x800;
                     } else {
-                        record->scene_step = 0x800;
+                        record->vx = 0x800;
                     }
                     TASK(FishingState)->counter_07 = 1;
                 }
             } else if (!(g_PadStates[0].held & work->pos_x) || ((record->pos.x.fixed + 0xFFF9FFFF) > 0xEFFFEU)) {
-                record->scene_step = 0;
-                work->saved_index  = 1;
+                record->vx        = 0;
+                work->saved_index = 1;
             }
         }
     }

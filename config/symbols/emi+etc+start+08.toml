@@ -83,7 +83,7 @@ Menu_StartNewGame = { addr = 0x801E2584, type = "func", source = "Starts a new g
 Menu_DrawConfigRow = { addr = 0x801E2898, type = "func", source = "Draws one row of the config screen (rows 0 to 5): a window grown by the selection step, the option name centred at x + 58 (Msg Speed, Window Clr, Background, Sound, Autorun or Controller) and the divider line." }
 Menu_DrawGlyphAt = { addr = 0x801E33E8, type = "func", source = "Draws the glyph of one text code as a POLY_FT4 from the 21-per-row glyph atlas and returns the cursor past the code; bytes 0x12 and 0x13 select the second atlas page, 0x15 adds 0x64 and codes from 0x5B add 0x23." }
 Menu_SetGlyphPage = { addr = 0x801E3E34, type = "func", source = "Selects the texture page at VRAM x 960 and the given y for the glyph draw. Called by Menu_DrawGlyphAt." }
-Menu_UpdateCamp = { addr = 0x801E462C, type = "func", source = "Slot 2 of g_MenuCampSteps, before Menu_ExitCamp: runs the D_801ED138[g_MenuStartStep] handler and draws the area scene through Area_SceneDraw." }
+Menu_UpdateCamp = { addr = 0x801E462C, type = "func", source = "Slot 2 of g_MenuCampSteps, before Menu_ExitCamp: runs the D_801ED138[g_MenuCampStep] handler and draws the area scene through Area_SceneDraw." }
 SAVE_RunLoadVerify = { addr = 0x801E5A00, type = "func", source = "Reads the save file through SAVE_AccessFile, copies the image to D_801448D8 and compares the masked byte sum with the stored word D_800C1A70." }
 SAVE_RunLoadRestore = { addr = 0x801E5FD4, type = "func", source = "Restores the game from the loaded save: g_InputMasks from D_80145594, g_Game.party_size from Party_CountOrder(0), the PLP and PL archives of g_EmiLoadedCharacterIndex, then Party_BattlersBuild(0)." }
 Menu_ExitCamp = { addr = 0x801E62A8, type = "func", source = "Camp menu step 4: calls Char_RebuildStats on each of the eight g_Characters entries, then replaces the callback with Game_RunMain." }
@@ -220,7 +220,7 @@ g_MenuStartReturnStep = { addr = 0x801ED800, source = "Step the start menu retur
 g_SaveSlotFirst = { addr = 0x801ED804, source = "Index of the first visible row of the save file list." }
 g_SaveSlotCount = { addr = 0x801ED808, source = "Number of visible rows of the save file list." }
 g_SaveSlots = { addr = 0x801ED80C, size = 0x54, source = "The three visible rows of the save file list." }
-g_MenuStartStep = { addr = 0x801ED860, source = "Current step of the start menu; func_801E4024 and func_801E4ED4 dispatch the D_801ED11C and D_801ED148 step tables by it, and each step handler adds 1 to advance." }
+g_MenuCampStep = { addr = 0x801ED860, source = "Current step of the start menu; func_801E4024 and func_801E4ED4 dispatch the D_801ED11C and D_801ED148 step tables by it, and each step handler adds 1 to advance." }
 s_ChoiceMenuValues = { addr = 0x801ED894, source = "Value of the choice menu per party slot, saved by func_801D3174." }
 s_ChoiceMenuCursors = { addr = 0x801ED89C, source = "Cursor of the choice menu per party slot, saved by func_801D3174." }
 s_SkillOrderCursors = { addr = 0x801ED8A8, source = "Skill order cursor per party slot and column, saved by Menu_ReorderSkills; Menu_SwapPartyMembers swaps the rows." }

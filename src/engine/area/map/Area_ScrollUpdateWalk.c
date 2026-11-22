@@ -9,17 +9,17 @@ MATCH void Area_ScrollUpdateWalk(void) {
 
     work = TASK(u8);
     if ((work[0x08] == 2) || (work[0x08] == 6)) {
-        g_AreaCameraStep = 4;
+        g_AreaCameraSpeed = 4;
     } else {
-        g_AreaCameraStep = 8;
+        g_AreaCameraSpeed = 8;
     }
     index               = g_Game.current->u.field.counter.unsigned_value;
-    product             = g_AreaCameraStep * g_RouteSpeedScale[index];
+    product             = g_AreaCameraSpeed * g_RouteSpeedScale[index];
     state               = TASK(u8);
-    g_AreaCameraStep    = product;
+    g_AreaCameraSpeed   = product;
     g_AreaScrollTargetX = ((s32*)state)[13] + ((s32*)state)[3] * state[0x09];
     g_AreaScrollTargetY = ((s32*)state)[14] + ((s32*)state)[4] * state[0x09];
     /* FAKE: barrier pins load after store. */
     FAKE_BARRIER();
-    g_AreaCameraHeightStep = ((s32*)state)[5];
+    g_AreaCameraHeightDelta = ((s32*)state)[5];
 }

@@ -9,7 +9,7 @@ MATCH void func_801F4B3C(void) {
             g_SceneEventState.step = 5;
         } else {
             g_ScenarioState.state_04 = 6;
-            g_ScenarioState.step_05  = 0;
+            g_ScenarioState.step     = 0;
         }
     }
 }

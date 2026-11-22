@@ -12,7 +12,7 @@ NON_MATCHING void func_801FB268(void) {
     s8           staged;
     volatile u8* staged_slot;
 
-    switch (g_ScenarioState.step_05) {
+    switch (g_ScenarioState.step) {
         case 0:
             if (g_GameStateIndex == GAME_REQUEST_MESSAGE) {
                 break;
@@ -23,28 +23,28 @@ NON_MATCHING void func_801FB268(void) {
             }
             g_ScriptVars[0] = 0;
             Scene_SetupParty(4);
-            g_ScenarioState.step_05 = 1;
+            g_ScenarioState.step = 1;
             break;
         case 1:
             if (g_ScriptVars[0] == 2) {
-                g_AreaDrawFlags         = 0;
-                g_ScenarioState.step_05 = 2;
+                g_AreaDrawFlags      = 0;
+                g_ScenarioState.step = 2;
             }
             break;
         case 2:
             Game_RequestAreaChange(0x63, 0x68000, 0x230000, 1);
-            g_GameRequestType       = 0xFF;
-            g_GameEntryMode         = 0xFF;
-            g_ScenarioState.step_05 = 3;
+            g_GameRequestType    = 0xFF;
+            g_GameEntryMode      = 0xFF;
+            g_ScenarioState.step = 3;
             break;
         case 3:
-            g_AreaDrawFlags         = 0x1F;
-            g_ScenarioState.step_05 = 4;
+            g_AreaDrawFlags      = 0x1F;
+            g_ScenarioState.step = 4;
             break;
         case 4:
             if (g_ScriptVars[0] == 7) {
                 Game_RequestAreaChange(0x63, 0x230000, 0x510000, 0x85);
-                g_ScenarioState.step_05 = 5;
+                g_ScenarioState.step = 5;
             }
             break;
         case 5:
@@ -59,7 +59,7 @@ NON_MATCHING void func_801FB268(void) {
                     g_SpawnedActors[g_ScratchPad.cells.bytes[0]].camera_angle.z = g_AreaCameraAngle.vz;
                     g_SpawnedActors[g_ScratchPad.cells.bytes[0]].layer          = 0x38;
                 }
-                g_ScenarioState.step_05 = 6;
+                g_ScenarioState.step = 6;
             }
             break;
         case 6:
@@ -76,7 +76,7 @@ NON_MATCHING void func_801FB268(void) {
                     g_SpawnedActors[staged_index].pos.y.fixed = 0x4F0000;
                     g_SpawnedActors[staged_index].pos.z.fixed = TO_COORD(0x480);
                 }
-                g_ScenarioState.step_05 = 7;
+                g_ScenarioState.step = 7;
             }
             break;
         case 7:
@@ -91,18 +91,18 @@ NON_MATCHING void func_801FB268(void) {
                     g_SpawnedActors[g_ScratchPad.cells.bytes[0]].camera_angle.z = g_AreaCameraAngle.vz;
                     g_SpawnedActors[g_ScratchPad.cells.bytes[0]].layer          = 0x38;
                 }
-                g_ScenarioState.step_05 = 8;
+                g_ScenarioState.step = 8;
             }
             break;
         case 8:
             if (g_ScriptVars[0] == 0x27) {
-                g_AreaDrawFlags         = 0;
-                g_ScenarioState.step_05 = 9;
+                g_AreaDrawFlags      = 0;
+                g_ScenarioState.step = 9;
             }
             break;
         case 9:
             g_ScenarioState.timer_06 = 0xA;
-            g_ScenarioState.step_05  = 0xA;
+            g_ScenarioState.step     = 0xA;
             g_ScriptVars[0]++;
             break;
         case 10:
@@ -110,17 +110,17 @@ NON_MATCHING void func_801FB268(void) {
                 g_ScenarioState.timer_06--;
                 break;
             }
-            g_AreaDrawFlags         = 0x1F;
-            g_ScenarioState.step_05 = 0xB;
+            g_AreaDrawFlags      = 0x1F;
+            g_ScenarioState.step = 0xB;
             g_ScriptVars[0]++;
             break;
         case 11:
             if (g_ScriptVars[0] == 0x2F) {
-                g_ScenarioState.step_05 = 0xC;
+                g_ScenarioState.step = 0xC;
             }
             break;
         case 12:
-            g_ScenarioState.step_05 = 0xD;
+            g_ScenarioState.step = 0xD;
             break;
         case 13:
             if (g_ScriptVars[0] == 0x34) {
@@ -128,7 +128,7 @@ NON_MATCHING void func_801FB268(void) {
                 SYS_SetFlag(g_SceneFlags, 0x1D);
                 g_ScriptVars[0]          = 0;
                 g_ScenarioState.state_04 = 0;
-                g_ScenarioState.step_05  = 0;
+                g_ScenarioState.step     = 0;
                 D_80146258 &= ~0x80;
             }
             break;

@@ -55,7 +55,7 @@ NON_MATCHING void Battle_Reset(void) {
     D_801463D7                    = 0;
     g_Battle.selection_latch      = 0;
     g_Battle.dragon_form          = 0;
-    g_AreaCameraHeightStep        = 0;
+    g_AreaCameraHeightDelta       = 0;
     slot                          = 0;
     func_800ABBA4();
     func_801E5A38();

@@ -126,7 +126,7 @@ MATCH void func_801F8414(void) {
 }
 
 MATCH void func_801F841C(void) {
-    u8* step = &g_ScenarioState.step_05;
+    u8* step = &g_ScenarioState.step;
 
     switch (*step) {
         case 0:

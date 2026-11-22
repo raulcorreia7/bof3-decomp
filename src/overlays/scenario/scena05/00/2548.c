@@ -7,7 +7,7 @@ __asm__(".include \"include/match/macro.inc\"\n");
 #endif
 
 MATCH void func_801F9148(void) {
-    u8* step = &g_ScenarioState.step_05;
+    u8* step = &g_ScenarioState.step;
 
     switch (*step) {
         case 0:
@@ -50,7 +50,7 @@ MATCH void func_801F9148(void) {
 MATCH void func_801F92EC(void) {
     u8* state;
 
-    state = &g_ScenarioState.step_05;
+    state = &g_ScenarioState.step;
     switch (*state) {
         case 0:
             MESSAGE_START_WAIT(MSG_SCENA05_000);

@@ -7,7 +7,7 @@ __asm__(".include \"include/match/macro.inc\"\n");
 #endif
 
 MATCH void func_801FB36C(void) {
-    switch (g_ScenarioState.step_05) {
+    switch (g_ScenarioState.step) {
         case 0:
             SCENARIO_MESSAGE_WAIT(MSG_SCENA02_101, 1);
             break;
@@ -27,7 +27,7 @@ MATCH void func_801FB36C(void) {
                     Scene_SetupParty(0x1B);
                     break;
             }
-            g_ScenarioState.step_05 = 2;
+            g_ScenarioState.step = 2;
             break;
         case 2: {
             u8* vars;
@@ -56,8 +56,8 @@ MATCH void func_801FB36C(void) {
             break;
         }
         case 10:
-            g_ScriptVars[0]         = 1;
-            g_ScenarioState.step_05 = 0xC;
+            g_ScriptVars[0]      = 1;
+            g_ScenarioState.step = 0xC;
             break;
         case 12: {
             u8* vars;
@@ -122,14 +122,14 @@ MATCH void func_801FB36C(void) {
                         SND_SEPlay(EMI_SE_ID(SND_BANK_COMMON, 6));
                     } else {
                         UI_MessageStartArea(MSG_SCENA02_109);
-                        *state                  = GAME_REQUEST_MESSAGE;
-                        g_ScenarioState.step_05 = 0xD;
+                        *state               = GAME_REQUEST_MESSAGE;
+                        g_ScenarioState.step = 0xD;
                     }
                     break;
                 case 0xF:
                     UI_MessageStartArea(MSG_SCENA02_108);
-                    *state                  = GAME_REQUEST_MESSAGE;
-                    g_ScenarioState.step_05 = 4;
+                    *state               = GAME_REQUEST_MESSAGE;
+                    g_ScenarioState.step = 4;
                     break;
             }
             break;

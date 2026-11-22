@@ -11,16 +11,16 @@ MATCH void func_801F9A44(void) {
     u8*  progress;
     u16* countdown;
 
-    switch (g_ScenarioState.step_05) {
+    switch (g_ScenarioState.step) {
         case 0:
             SND_BGMFadeOut(g_SndBGMId, 0x64, 8);
             SND_SEPlay(0x208);
             SND_SEPlay(0x207);
-            g_ScenarioState.step_05 = 1;
+            g_ScenarioState.step = 1;
             break;
         case 1:
             func_801F9E70(D_80147B5C & 0xFFF);
-            g_ScenarioState.step_05 = 2;
+            g_ScenarioState.step = 2;
             break;
         case 2:
             angle_cell                    = &D_80147B5C;
@@ -36,7 +36,7 @@ MATCH void func_801F9A44(void) {
                 func_801F9E70(angle & 0xFFF);
             }
             if (g_PadStates[0].pressed & PADRdown) {
-                g_ScenarioState.step_05 = 3;
+                g_ScenarioState.step = 3;
             }
             break;
         case 3: {
@@ -44,9 +44,9 @@ MATCH void func_801F9A44(void) {
 
             LOH(g_ScratchPad.cells.bytes) = turn;
             if (turn - 0x4A0 < 0x41) {
-                g_ScenarioState.step_05 = 0xA;
+                g_ScenarioState.step = 0xA;
             } else {
-                g_ScenarioState.step_05 = 5;
+                g_ScenarioState.step = 5;
             }
             break;
         }
@@ -55,7 +55,7 @@ MATCH void func_801F9A44(void) {
             SND_SEPlay(0x209);
             SND_BGMPlay(g_SndBGMId, 0x6E, 0x20);
             g_ScenarioState.timer_06 = 0x30;
-            g_ScenarioState.step_05  = 6;
+            g_ScenarioState.step     = 6;
             break;
         case 6:
             countdown  = &g_ScenarioState.timer_06;
@@ -66,13 +66,13 @@ MATCH void func_801F9A44(void) {
             Game_ClearScriptActive();
             Scene_SetupParty(1);
             g_ScenarioState.state_04 = 0;
-            g_ScenarioState.step_05  = 0;
+            g_ScenarioState.step     = 0;
             break;
         case 10:
             SND_SEPlay(0x20A);
             SND_SEPlay(0x209);
             g_ScenarioState.timer_06 = 0x1E;
-            g_ScenarioState.step_05  = 0xB;
+            g_ScenarioState.step     = 0xB;
             break;
         case 11:
             countdown  = &g_ScenarioState.timer_06;
@@ -82,7 +82,7 @@ MATCH void func_801F9A44(void) {
             }
             Scene_SetupParty(2);
             Area_CellSetPalette(0xA, 8);
-            g_ScenarioState.step_05 = 0xC;
+            g_ScenarioState.step = 0xC;
             break;
         case 12:
             if (g_ScriptVars[0] != 1) {
@@ -97,7 +97,7 @@ MATCH void func_801F9A44(void) {
                 g_SpawnedActors[index].pos.z.fixed  = TO_COORD(3840);
             }
             g_ScenarioState.timer_06 = 0x28;
-            g_ScenarioState.step_05  = 0xD;
+            g_ScenarioState.step     = 0xD;
             break;
         case 13:
             countdown  = &g_ScenarioState.timer_06;
@@ -105,8 +105,8 @@ MATCH void func_801F9A44(void) {
             if (*countdown != 0) {
                 break;
             }
-            g_ScriptVars[0]         = 3;
-            g_ScenarioState.step_05 = 0xE;
+            g_ScriptVars[0]      = 3;
+            g_ScenarioState.step = 0xE;
             break;
         case 14:
             if (g_ScriptVars[0] != 4) {
@@ -114,8 +114,8 @@ MATCH void func_801F9A44(void) {
             }
             SND_XAStartStream(5, 1);
             UI_MessageStartArea(MSG_SCENA13_005);
-            g_GameStateIndex        = 2;
-            g_ScenarioState.step_05 = 0xF;
+            g_GameStateIndex     = 2;
+            g_ScenarioState.step = 0xF;
             break;
         case 15:
             if (SND_XAIsIdle() == 0) {
@@ -125,9 +125,9 @@ MATCH void func_801F9A44(void) {
                 break;
             }
             SND_BGMPlay(g_SndBGMId, 0x6E, 0x20);
-            progress                = &g_ScriptVars[0];
-            g_ScenarioState.step_05 = 0x10;
-            *progress               = *progress + 1;
+            progress             = &g_ScriptVars[0];
+            g_ScenarioState.step = 0x10;
+            *progress            = *progress + 1;
             break;
         case 16:
             if (g_ScriptVars[0] != 0) {
@@ -136,7 +136,7 @@ MATCH void func_801F9A44(void) {
             Game_ClearScriptActive();
             SYS_SetFlag(g_SceneFlags, 0x10);
             g_ScenarioState.state_04 = 0;
-            g_ScenarioState.step_05  = 0;
+            g_ScenarioState.step     = 0;
             break;
     }
 }

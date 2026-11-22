@@ -23,6 +23,6 @@ resume:
         Game_SetScriptActive();
         Scene_SetupParty(2);
         g_ScenarioState.state_04 = 2;
-        g_ScenarioState.step_05  = 0;
+        g_ScenarioState.step     = 0;
     }
 }

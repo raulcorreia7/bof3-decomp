@@ -8,7 +8,7 @@ __asm__(".include \"include/match/macro.inc\"\n");
 #endif
 
 MATCH void func_801FB218(void) {
-    switch (g_ScenarioState.step_05) {
+    switch (g_ScenarioState.step) {
         case 0:
             g_ScriptVars[0] = 0xA;
             SCENARIO_MESSAGE_WAIT(MSG_SCENA01_024, 1);
@@ -17,7 +17,7 @@ MATCH void func_801FB218(void) {
             if (g_GameStateIndex == GAME_REQUEST_MESSAGE) {
                 break;
             }
-            g_ScenarioState.step_05 = 2;
+            g_ScenarioState.step = 2;
             break;
         case 2: {
             u8* vars;
@@ -25,12 +25,12 @@ MATCH void func_801FB218(void) {
             vars = g_ScriptVars;
             if (vars[0] == 0x14) {
                 Game_ClearScriptActive();
-                g_ScenarioState.step_05  = 0x1B;
+                g_ScenarioState.step     = 0x1B;
                 g_ScriptVars[1]          = 0;
                 g_ScriptVars[2]          = 0;
                 g_ScenarioState.state_04 = 9;
             } else {
-                g_ScenarioState.step_05 = 3;
+                g_ScenarioState.step = 3;
                 SYS_ClearFlag(g_SceneFlags, 0x10);
                 vars[0] = 0xB;
             }
@@ -38,35 +38,35 @@ MATCH void func_801FB218(void) {
         }
         case 3:
             Scene_SetupParty(8);
-            g_ScenarioState.step_05 = 4;
+            g_ScenarioState.step = 4;
             break;
         case 4:
-            g_ScenarioState.step_05 = 0xB;
+            g_ScenarioState.step = 0xB;
             break;
         case 11:
             if (g_ScriptVars[0] == 0x14) {
-                g_ScenarioState.step_05 = 0xC;
+                g_ScenarioState.step = 0xC;
                 SND_SEPlay(0x205);
                 SND_SEPlay(0x206);
                 g_ScriptVars[2] = 5;
                 if (SYS_TestFlag(g_SceneFlags, 0x12) == 0) {
-                    g_ScenarioState.step_05 = 0xC;
-                    g_ScriptVars[2]         = 6;
+                    g_ScenarioState.step = 0xC;
+                    g_ScriptVars[2]      = 6;
                     Game_RequestAreaChange(AREA_ID_MOUNT_GLAUS, TO_COORD(0xF), TO_COORD(0x28), 0x84);
                 } else if (SYS_TestFlag(g_SceneFlags, 0x14) == 0) {
-                    g_ScriptVars[2]         = 6;
-                    g_ScenarioState.step_05 = 0x1E;
+                    g_ScriptVars[2]      = 6;
+                    g_ScenarioState.step = 0x1E;
                     Game_RequestAreaChange(AREA_ID_MOUNT_GLAUS, TO_COORD(0xF), TO_COORD(0x28), 0x84);
                 } else {
-                    g_ScriptVars[2]         = 6;
-                    g_ScenarioState.step_05 = 0x14;
+                    g_ScriptVars[2]      = 6;
+                    g_ScenarioState.step = 0x14;
                     Game_RequestAreaChange(AREA_ID_MOUNT_GLAUS, TO_COORD(0xF), TO_COORD(0x28), 0x85);
                 }
             }
             break;
         case 12:
             func_801C601C(3);
-            g_ScenarioState.step_05 = 0xD;
+            g_ScenarioState.step = 0xD;
             break;
         case 13:
             if (g_ScriptVars[0] == 0xA) {
@@ -78,12 +78,12 @@ MATCH void func_801FB218(void) {
             break;
         case 20:
             func_801C601C(6);
-            g_ScenarioState.step_05 = 0x15;
+            g_ScenarioState.step = 0x15;
             break;
         case 21:
             if (g_ScriptVars[0] == 8) {
                 func_801C601C(4);
-                g_ScenarioState.step_05 = 0x19;
+                g_ScenarioState.step = 0x19;
             }
             break;
         case 25:
@@ -98,7 +98,7 @@ MATCH void func_801FB218(void) {
             break;
         case 30:
             func_801C601C(3);
-            g_ScenarioState.step_05 = 0x1F;
+            g_ScenarioState.step = 0x1F;
             break;
         case 31:
             if (g_ScriptVars[0] == 0xA) {

@@ -18,7 +18,7 @@ MATCH s32 GFX_PaletteAllocFade(void* owner, s32 red, s32 green, s32 blue, s32 fa
                 g_PaletteFades[slot].flags = flagged;
             }
             result                           = slot & BYTE_MASK;
-            g_PaletteFades[slot].step        = GFX_PaletteMarkCells(PALETTE_OWNER(owner)->palette_type, result, 1);
+            g_PaletteFades[slot].cell_index  = GFX_PaletteMarkCells(PALETTE_OWNER(owner)->palette_type, result, 1);
             tmp_a                            = PALETTE_OWNER(owner)->saved_byte;
             g_PaletteFades[slot].saved_byte  = tmp_a;
             tmp_b                            = PALETTE_OWNER(owner)->palette_type;
