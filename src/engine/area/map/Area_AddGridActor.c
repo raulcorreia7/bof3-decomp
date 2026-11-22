@@ -5,12 +5,12 @@
  * otherwise writes the packed key, projects its 16.16 position through the GTE
  * and publishes the resulting screen pair.
  */
-/* Pinned or opaque work pointers change the prologue; a barrier and coordinate loads through work differ at +0x20. */
+/* FAKE: the key readers load unk_32 unsigned; the s16 member takes a (u16) cast at the two reads. */
 /* func_8014D290 */
 #ifdef NON_MATCHING
 NON_MATCHING void Area_AddGridActor(void) {
     SVECTOR   vec;
-    s32       sxy;
+    DVECTOR   sxy;
     s32       p;
     s32       flag;
     s32       zero;
@@ -27,11 +27,11 @@ NON_MATCHING void Area_AddGridActor(void) {
         Area_AddActor();
         return;
     }
-    work = g_Task;
+    work = TASK(Actor);
 
-    col = COORD_INT(TASK(Actor)->pos.y) - g_AreaTileOriginY;
-    row = COORD_INT(TASK(Actor)->pos.x) - g_AreaTileOriginX;
-    if (COORD_FRAC(TASK(Actor)->pos.x) != 0) {
+    row = COORD_INT(work->pos.x) - g_AreaTileOriginX;
+    col = COORD_INT(work->pos.y) - g_AreaTileOriginY;
+    if (COORD_FRAC(work->pos.x) != 0) {
         col++;
     }
     key = row + col;
@@ -45,17 +45,17 @@ NON_MATCHING void Area_AddGridActor(void) {
     }
     offset = *table;
     if (COORD_FRAC(TASK(Actor)->pos.y) != 0) {
-        key += (offset + 1);
+        key += offset + 1;
     } else {
         key += offset;
     }
     work->unk_32 = key;
 
-    if (TASK(Actor)->unk_32 >= 0x37) {
+    if ((u16)TASK(Actor)->unk_32 >= 0x37) {
         TASK(Actor)->header.flags |= ACTOR_FLAG_OFFSCREEN;
         return;
     }
-    sort                = TASK(Actor)->unk_32 << 8;
+    sort                = (u16)TASK(Actor)->unk_32 << 8;
     TASK(Actor)->unk_32 = sort;
     if (g_AreaDrawMode == GFX_LAYER_BATTLE_SCENE) {
         if (D_8014933F != 0) {
@@ -70,13 +70,13 @@ NON_MATCHING void Area_AddGridActor(void) {
     Actor_ReadValue();
 
     setVector(&vec, (TASK(Actor)->pos.x.fixed >> 9) - 0x4000, (TASK(Actor)->pos.y.fixed >> 9) - 0x4000, -COORD_INT(TASK(Actor)->pos.z) / 2);
-    rot = RotTransPers(&vec, &sxy, &p, &flag);
+    rot = RotTransPers(&vec, (s32*)&sxy, &p, &flag);
 
     FIELD(s32, g_Task, 0x60) = rot;
-    TASK(Actor)->screen_x    = (u16)sxy;
-    TASK(Actor)->screen_y    = (u16)(sxy >> 16);
-    if (g_AreaGridActorCount < 0x28) {
-        g_AreaGridActors[g_AreaGridActorCount] = (s32)g_Task;
+    TASK(Actor)->screen_x    = (u16)sxy.vx;
+    TASK(Actor)->screen_y    = (u16)sxy.vy;
+    if ((u8)g_AreaGridActorCount < 0x28) {
+        g_AreaGridActors[(u8)g_AreaGridActorCount] = (s32)g_Task;
         g_AreaGridActorCount++;
         if (TASK(Actor)->header.flags & ACTOR_FLAG_SELECTION_EFFECT) {
             func_80161454((u32)g_Task);
