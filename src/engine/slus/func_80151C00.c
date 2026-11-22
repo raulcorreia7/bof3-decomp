@@ -1,12 +1,11 @@
 #include "engine/slus/slus.h"
+#include "func_80151C00.h"
 
-/* The unit read the cue bytes as scalars; the header holds their base form for the units that
- * take their address. */
-extern s8 D_801490BA_byte __asm__("D_801490BA");
-extern u8 D_801490BB_byte __asm__("D_801490BB");
+#define BOB   (D_801490BA_byte)
+#define BLINK (D_801490BB_byte)
 
-/* Steps the menu cursor bob: the offset D_801490BA_byte walks between -3 and 3 (the direction is
- * g_UiMessageChoiceStep); at each end the D_801490BB_byte blink counter runs, reloading the
+/* Steps the menu cursor bob: the offset BOB walks between -3 and 3 (the direction is
+ * g_UiMessageChoiceStep); at each end the BLINK blink counter runs, reloading the
  * cue timer and, at zero, counting g_UiMessageChoiceTimer down.
  */
 /* func_80151C00 */
@@ -16,25 +15,25 @@ MATCH void func_80151C00(void) {
     u8* step = &g_UiMessageChoiceStep;
 
     if (*step != 0) {
-        if (D_801490BA_byte == 3) {
+        if (BOB == 3) {
             *step -= 1;
             return;
         }
-        pos = D_801490BA_byte + 1;
+        pos = BOB + 1;
     } else {
-        if (D_801490BA_byte == -3) {
+        if (BOB == -3) {
             *step += 1;
             return;
         }
-        pos = D_801490BA_byte - 1;
+        pos = BOB - 1;
     }
     /* FAKE: the loop keeps the retail pos register and store order. */
     do {
-        D_801490BA_byte = pos;
+        BOB = pos;
     } while (0);
     if (g_UiMessageWindow.cue_timer == 0) {
-        D_801490BB_byte += (u8)g_UiMessageWindow.cue_counter;
-        switch ((s8)D_801490BB_byte) {
+        BLINK += (u8)g_UiMessageWindow.cue_counter;
+        switch ((s8)BLINK) {
             case 0:
                 g_UiMessageWindow.cue_timer = 15;
                 /* FAKE: the barrier keeps the timer load below the cue_timer store. */
@@ -46,8 +45,8 @@ MATCH void func_80151C00(void) {
                     g_UiMessageChoiceTimer = timer + 0xFFFF;
                     if (timer == 0) {
                         g_UiMessageChoiceMode = 0;
-                        D_801490BB_byte       = 0;
-                        D_801490BA_byte       = 0;
+                        BLINK                 = 0;
+                        BOB                   = 0;
                     }
                 }
                 break;
