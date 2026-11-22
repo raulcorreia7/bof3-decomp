@@ -13,63 +13,51 @@ typedef union AreaTileCorner {
     RECT rect;
 } AreaTileCorner;
 
-/* The bytes of a tile table rectangle (include/area/area.h describes the record as AreaTileRect):
- * the size pair first, then the page corner as the low byte and a signed high byte. Retail reads
- * the halfword with `lh` before masking it, so v is a signed 16-bit view here. */
-typedef union AreaTileRectWord {
-    struct {
-        u8  height;
-        u8  width;
-        s16 v;
-    } box;
-
-    struct {
-        u8 pad_00[3];
-        s8 u;
-    } corner;
-} AreaTileRectWord;
+/* The tile table rectangle is AreaTileRect (include/area/area.h); its box view
+ * reads the size pair and the page corner as the signed halfword retail loads
+ * with `lh` before masking the low byte. */
 
 /* func_80155560 */
 #ifdef NON_MATCHING
 NON_MATCHING s32 Area_ApplyTileToQuad(u32 part_word, POLY_FT4* prim, s32 mode) {
-    AreaTileCorner    uv[5];
-    AreaTileRectWord* rect;
-    POLY_FT4*         poly;
-    s32               word = part_word;
-    s32               flag;
-    s32               sel;
-    s32               pal;
-    s32               clut;
-    s32               tpage;
-    s32               swap;
-    s32               i;
-    s32               u;
-    s32               v;
-    u8                lum;
+    AreaTileCorner uv[5];
+    AreaTileRect*  rect;
+    POLY_FT4*      poly;
+    s32            word = part_word;
+    s32            flag;
+    s32            sel;
+    s32            pal;
+    s32            clut;
+    s32            tpage;
+    s32            swap;
+    s32            i;
+    s32            u;
+    s32            v;
+    u8             lum;
 
     flag = !(word >> 31);
     sel  = (word >> 28) & 3;
     if (word & 0xF00) {
         if (word & 0x800) {
-            rect       = (AreaTileRectWord*)((word & 0x7FF) * 8 + MAP_BUNDLE_BASE);
-            rect       = (AreaTileRectWord*)(g_AreaMapBundle.tile_offsets[sel][1] * 4 + (u32)rect);
-            u          = rect->corner.u;
+            rect       = (AreaTileRect*)((word & 0x7FF) * 8 + MAP_BUNDLE_BASE);
+            rect       = (AreaTileRect*)(g_AreaMapBundle.tile_offsets[sel][1] * 4 + (u32)rect);
+            u          = rect->fields.u;
             v          = rect->box.v & 0xFF;
             uv[1].at.u = u;
             uv[1].at.v = v;
             uv[2].at.u = rect->box.width;
             uv[2].at.v = rect->box.height;
             rect++;
-            u          = rect->corner.u;
+            u          = rect->fields.u;
             v          = rect->box.v & 0xFF;
             uv[3].at.u = u;
             uv[3].at.v = v;
             uv[4].at.u = rect->box.width;
             uv[4].at.v = rect->box.height;
         } else {
-            rect       = (AreaTileRectWord*)((word & 0xFF) * 4 + MAP_BUNDLE_BASE);
-            rect       = (AreaTileRectWord*)(g_AreaMapBundle.tile_offsets[sel][0] * 4 + (u32)rect);
-            u          = rect->corner.u;
+            rect       = (AreaTileRect*)((word & 0xFF) * 4 + MAP_BUNDLE_BASE);
+            rect       = (AreaTileRect*)(g_AreaMapBundle.tile_offsets[sel][0] * 4 + (u32)rect);
+            u          = rect->fields.u;
             v          = rect->box.v & 0xFF;
             uv[1].at.u = u;
             uv[3].at.u = u;
