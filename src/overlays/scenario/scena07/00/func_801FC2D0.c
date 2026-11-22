@@ -154,13 +154,13 @@ MATCH void func_801FC2D0(void) {
                 actor->unk_06      = 0;
                 actor->pos.x.fixed = 0x170000;
                 actor->pos.y.fixed = 0x3F0000;
-                actor->pos.z.fixed = 0x5C00000;
+                actor->pos.z.fixed = TO_COORD(0x5C0);
                 actor->scene_step  = 0x10000;
                 actor->unk_14      = -0x200000;
                 actor->counter_18  = 0x2D0000;
                 actor->selection   = 0;
                 actor->counter_1C  = 0x3F0000;
-                actor->unk_20      = 0x3000000;
+                actor->unk_20      = TO_COORD(0x300);
                 SND_SEPlay(0x203);
                 SND_SEPlay(0x206);
                 g_ScenarioState.timer_06 = 0x78;
@@ -175,13 +175,13 @@ MATCH void func_801FC2D0(void) {
                 actor->unk_06            = 1;
                 actor->pos.x.fixed       = 0x2D0000;
                 actor->pos.y.fixed       = 0x410000;
-                actor->pos.z.fixed       = 0x3000000;
+                actor->pos.z.fixed       = TO_COORD(0x300);
                 actor->scene_step        = -0x10000;
                 actor->selection         = 0;
                 actor->unk_14            = 0;
                 actor->counter_18        = 0x270000;
                 actor->counter_1C        = 0x410000;
-                actor->unk_20            = 0x3000000;
+                actor->unk_20            = TO_COORD(0x300);
                 g_ScenarioState.timer_06 = 10;
                 g_ScenarioState.step_05  = 24;
             } else {
