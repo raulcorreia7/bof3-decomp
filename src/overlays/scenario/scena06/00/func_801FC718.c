@@ -18,7 +18,7 @@ MATCH void func_801FC718(void) {
             g_ScenarioState.step = 2;
             break;
         case 2:
-            if (g_UiWindowEffectBusy == 0) {
+            if (g_SysThreads[2].state == 0) {
                 g_ScriptVars[0]      = 3;
                 g_ScenarioState.step = 3;
             }
