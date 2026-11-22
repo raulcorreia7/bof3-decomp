@@ -1,38 +1,46 @@
 #include "engine/slus/slus.h"
+#include "func_80151C00.h"
 
-/* steps the menu cursor bob: the cursor offset D_801490BA walks between -3 and 3 (the direction is g_UiMessageChoiceStep), and at
- * each end the D_801490BB blink counter runs, reloading the D_801490CA timer and, at zero, counting g_UiMessageChoiceTimer down.
- */
-#define BOB   (D_801490B8[2])
-#define BLINK (D_801490B8[3])
+#define BOB   (D_801490BA_byte)
+#define BLINK (D_801490BB_byte)
 
-#ifdef NON_MATCHING
-NON_MATCHING void func_80151C00(void) {
+/* Steps the menu cursor bob and its blink timer. */
+/* func_80151C00 */
+MATCH void func_80151C00(void) {
     s8  pos;
+    u16 timer;
     u8* step = &g_UiMessageChoiceStep;
 
     if (*step != 0) {
-        if ((s8)BOB == 3) {
+        if (BOB == 3) {
             *step -= 1;
             return;
         }
-        pos = (s8)BOB + 1;
+        pos = BOB + 1;
     } else {
-        if ((s8)BOB == -3) {
+        if (BOB == -3) {
             *step += 1;
             return;
         }
-        pos = (s8)BOB - 1;
+        pos = BOB - 1;
     }
-    BOB = pos;
+    /* FAKE: the loop keeps the retail pos register and store order. */
+    do {
+        BOB = pos;
+    } while (0);
     if (g_UiMessageWindow.cue_timer == 0) {
         BLINK += (u8)g_UiMessageWindow.cue_counter;
         switch ((s8)BLINK) {
             case 0:
-                g_UiMessageWindow.cue_timer   = 15;
+                g_UiMessageWindow.cue_timer = 15;
+                /* FAKE: the barrier keeps the timer load below the cue_timer store. */
+                FAKE_BARRIER();
+                timer                         = g_UiMessageChoiceTimer;
                 g_UiMessageWindow.cue_counter = -1;
-                if (g_UiMessageChoiceTimer != 0xFFFF) {
-                    if (g_UiMessageChoiceTimer-- == 0) {
+                if (timer != 0xFFFF) {
+                    /* FAKE: 0xFFFF keeps retail's addu; the u16 store wraps it to timer - 1. */
+                    g_UiMessageChoiceTimer = timer + 0xFFFF;
+                    if (timer == 0) {
                         g_UiMessageChoiceMode = 0;
                         BLINK                 = 0;
                         BOB                   = 0;
@@ -51,6 +59,3 @@ NON_MATCHING void func_80151C00(void) {
         g_UiMessageWindow.cue_timer--;
     }
 }
-#else
-INCLUDE_ASM(func_80151C00);
-#endif
