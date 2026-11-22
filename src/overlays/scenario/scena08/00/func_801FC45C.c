@@ -7,8 +7,6 @@
 __asm__(".include \"include/match/macro.inc\"\n");
 #endif
 
-extern u8 D_801FEA7C[2];
-
 #ifdef NON_MATCHING
 NON_MATCHING void func_801FC45C(void) {
     u8 slot;
@@ -141,8 +139,8 @@ NON_MATCHING void func_801FC45C(void) {
             if (!(g_SpawnedActors[D_801FEA6C].header.flags & 1)) {
                 D_80146258 |= 0x20;
                 g_ScriptVars[0]++;
-                D_801FEA7C[0] = g_PartyBattleOrder[0];
-                D_801FEA7C[1] = g_PartyBattleOrder[1];
+                D_801FE9A0[0xDC] = g_PartyBattleOrder[0];
+                D_801FE9A0[0xDD] = g_PartyBattleOrder[1];
                 func_801C1E3C(0);
                 func_801FD07C();
                 g_ScenarioState.step_05 = 15;
@@ -229,8 +227,8 @@ NON_MATCHING void func_801FC45C(void) {
                 D_80146258 &= ~0x20;
                 g_Actors[D_801FEA70].header.flags = 0;
                 Scene_RunScenario(2);
-                g_PartyBattleOrder[0]                = D_801FEA7C[0];
-                g_PartyBattleOrder[1]                = D_801FEA7C[1];
+                g_PartyBattleOrder[0]                = D_801FE9A0[0xDC];
+                g_PartyBattleOrder[1]                = D_801FE9A0[0xDD];
                 g_Game.members[1].pos.x.fixed        = D_801FEA74;
                 g_Game.members[1].pos.y.fixed        = D_801FEA78;
                 g_Game.members[1].pos.z.part.integer = Area_HeightSample(D_801FEA74, D_801FEA78);
