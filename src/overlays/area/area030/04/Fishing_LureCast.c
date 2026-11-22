@@ -13,11 +13,11 @@ MATCH void Fishing_LureCast(void) {
     /* FAKE: keeps the x store ahead of the y load; without it the loads are scheduled first. */
     FAKE_BARRIER();
     work->y_38.pos_y               = D_80145EC8 - COORD_HALF;
-    FISHING_STATE->bounce.half.key = (s16)(Area_SampleHeight(work->motion.unk_34, work->y_38.pos_y) + 0x100);
+    FISHING_STATE->bounce.half.key = Area_SampleHeight(work->motion.unk_34, work->y_38.pos_y) + 0x100;
 
     distance                 = g_FishingRodRow->max_distance * D_801440BC / 255 + 8;
     FISHING_STATE->cursor_10 = distance;
-    FISHING_STATE->cue_index = (u8)(distance / 15);
+    FISHING_STATE->cue_index = distance / 15;
     if (FISHING_STATE->cue_index >= 4) {
         FISHING_STATE->cue_index = 3;
     }
@@ -38,17 +38,17 @@ MATCH void Fishing_LureCast(void) {
     FISHING_STATE->active_flags = 0;
     FISHING_STATE->state_29     = 5;
     FISHING_STATE->counter_48   = 1;
-    FISHING_STATE->flags        = (u8)(FISHING_STATE->flags & ~ACTOR_FLAG_SEMI_TRANSPARENT);
-    FISHING_STATE->saved_index  = 0;
-    FISHING_STATE->tint_5D      = 0;
-    FISHING_STATE->tint_5E      = 0;
-    FISHING_STATE->tint_5F      = 0;
-    FISHING_STATE->unk_60       = 0;
-    FISHING_STATE->unk_64       = 0;
-    FISHING_STATE->unk_68       = 0;
-    FISHING_STATE->unk_6C       = 0;
-    FISHING_STATE->state_2A     = 0;
-    FISHING_STATE->counter_48   = 1;
+    FISHING_STATE->flags &= ~ACTOR_FLAG_SEMI_TRANSPARENT;
+    FISHING_STATE->saved_index = 0;
+    FISHING_STATE->tint_5D     = 0;
+    FISHING_STATE->tint_5E     = 0;
+    FISHING_STATE->tint_5F     = 0;
+    FISHING_STATE->unk_60      = 0;
+    FISHING_STATE->unk_64      = 0;
+    FISHING_STATE->unk_68      = 0;
+    FISHING_STATE->unk_6C      = 0;
+    FISHING_STATE->state_2A    = 0;
+    FISHING_STATE->counter_48  = 1;
 
     Area_SelectSceneRecord(g_FishingLureRow->unk_0C);
     Script_Select(1);
@@ -57,6 +57,6 @@ MATCH void Fishing_LureCast(void) {
         g_SpawnedActors[index].header.flags = 1;
         g_SpawnedActors[index].type         = 10;
     }
-    FISHING_STATE->counter_07    = g_FishingLureRow->unk_0F;
-    FISHING_STATE->handler_index = (u8)(FISHING_STATE->handler_index + 1);
+    FISHING_STATE->counter_07 = g_FishingLureRow->unk_0F;
+    FISHING_STATE->handler_index++;
 }

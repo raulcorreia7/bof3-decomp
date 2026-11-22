@@ -10,6 +10,7 @@ MATCH void func_801F3514(void) {
     s32      tpage;
     u8       count;
     u8*      script;
+    s16*     out;
 
     script = &D_80145EDB;
     if (g_Task->script_record != *script) {
@@ -31,13 +32,14 @@ MATCH void func_801F3514(void) {
         g_Task->tint.steps.delta.b = 0;
     }
 
-    vertex                   = g_ScratchPadVectors;
-    screen                   = D_1F800034;
-    /* A raw store: the member store would let the scroll loads move above it. */
-    FIELD(s16, g_Task, 0x32) = 0x3200;
-    vertex->vx               = (s16)(((((g_AreaScrollTargetX - 1) & 0xFFFFFF) + 1) >> 9) - 0x4000);
-    D_1F800016               = (s16)(((((g_AreaScrollTargetY - 1) & 0xFFFFFF) + 1) >> 9) - 0x4000);
-    D_1F800018               = (s16)(-D_80145ECE / 2);
+    vertex     = g_ScratchPadVectors;
+    screen     = D_1F800034;
+    /* Stored through a pointer: a member store lets the scroll loads move above it. */
+    out        = &g_Task->unk_32;
+    *out       = 0x3200;
+    vertex->vx = (s16)(((((g_AreaScrollTargetX - 1) & 0xFFFFFF) + 1) >> 9) - 0x4000);
+    D_1F800016 = (s16)(((((g_AreaScrollTargetY - 1) & 0xFFFFFF) + 1) >> 9) - 0x4000);
+    D_1F800018 = (s16)(-D_80145ECE / 2);
     RotTransPers(vertex, (long*)screen, &depth, &flag);
 
     g_Task->screen_x = 0xA0;
