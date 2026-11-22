@@ -1,7 +1,7 @@
 #include "area189_13.h"
 
-#ifdef NON_MATCHING
-NON_MATCHING void func_801F3514(void) {
+/* Runs the task script, places the task at the scroll target on screen and flashes red in scene mode 2. */
+MATCH void func_801F3514(void) {
     SVECTOR* vertex;
     u16*     screen;
     TILE*    tile;
@@ -33,15 +33,15 @@ NON_MATCHING void func_801F3514(void) {
 
     vertex                             = g_ScratchPadVectors;
     screen                             = D_1F800034;
-    /* FAKE: plain C scores 0x2E0/0x2EC; the volatile store keeps scroll reads after the task update. */
-    FAKE_VOLATILE(s16, g_Task->unk_32) = 0x3200;
+    /* A raw store: the member store would let the scroll loads move above it. */
+    FIELD(s16, g_Task, 0x32) = 0x3200;
     vertex->vx                         = (s16)(((((g_AreaScrollTargetX - 1) & 0xFFFFFF) + 1) >> 9) - 0x4000);
     D_1F800016                         = (s16)(((((g_AreaScrollTargetY - 1) & 0xFFFFFF) + 1) >> 9) - 0x4000);
     D_1F800018                         = (s16)(-D_80145ECE / 2);
     RotTransPers(vertex, (long*)screen, &depth, &flag);
 
     g_Task->screen_x = 0xA0;
-    if (D_80145EA4 != 0) {
+    if (g_Game.members[0].unk_14 != 0) {
         g_Task->screen_y = D_1F800034[1];
         D_80145EC0       = D_1F800034[1];
     } else {
@@ -55,7 +55,7 @@ NON_MATCHING void func_801F3514(void) {
     }
 
     if (g_AreaSceneMode == 2) {
-        tpage = getTPage(TPAGE_DEPTH_8BIT, TPAGE_ABR_SUB, 448, 256);
+        tpage = getTPage(TPAGE_DEPTH_8BIT, TPAGE_ABR_ADD, 320, 256);
         GFX_ADD_LAYER_DRAW_MODE(GFX_LAYER_EFFECT, tpage);
         tile = (TILE*)g_GfxPrimCursor;
         SetTile(tile);
@@ -67,6 +67,3 @@ NON_MATCHING void func_801F3514(void) {
         g_AreaSceneMode = 0;
     }
 }
-#else
-INCLUDE_ASM(func_801F3514);
-#endif
