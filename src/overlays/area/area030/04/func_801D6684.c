@@ -4,28 +4,28 @@
  * and advances the page row when the timer expires. */
 #ifdef NON_MATCHING
 NON_MATCHING void func_801D6684(void) {
-    s32*  word_ptr;
-    s32   type;
-    s32   x;
-    s32   y;
-    s32   color;
-    s32   page;
-    s32   x_fixed;
-    s32   col;
-    s32   y_sel;
-    s32   row;
-    s32   y_other;
-    u8*   cell_ptr;
-    u8*   cell_table;
-    u8    cell;
-    u8    timer;
-    void* spad5;
-    void* spad6;
-    void* spad1;
-    void* spad0;
-    void* spad2;
-    void* spad3;
-    void* spad4;
+    s32*   word_ptr;
+    s32    type;
+    s32    x;
+    s32    y;
+    s32    color;
+    s32    page;
+    s32    x_fixed;
+    s32    col;
+    s32    y_sel;
+    s32    row;
+    s32    y_other;
+    u8*    cell_ptr;
+    u8*    cell_table;
+    u8     cell;
+    u8     timer;
+    void*  spad5;
+    Actor* spad6;
+    Actor* spad1;
+    void*  spad0;
+    void*  spad2;
+    void*  spad3;
+    Actor* spad4;
 
     spad0 = g_Task;
     if (FIELD(u8, spad0, 0xAu) != 0) {
@@ -58,8 +58,8 @@ NON_MATCHING void func_801D6684(void) {
         type = cell & BYTE_MASK;
         if (type != GAME_NONE) {
             spad1 = g_Task;
-            if (row == FIELD(u8, spad1, 0xBu)) {
-                if ((u32)((FIELD(u8, spad1, 0x9u) % 12) & BYTE_MASK) < 0xAU) {
+            if (row == spad1->param.cloud_layer) {
+                if ((u32)((spad1->timer % 12) & BYTE_MASK) < 0xAU) {
                     x = x_fixed >> 0x10;
                     if (col == (page & BYTE_MASK)) {
                         UI_TextDraw((s16)x, (s16)(y_other >> 0x10), type, 1U, ((type * 2) + &D_801E2070));
@@ -100,12 +100,12 @@ NON_MATCHING void func_801D6684(void) {
         FIELD(u8, spad2, 0xAu) = (u8)(timer - 1);
         spad3                  = g_Task;
         if (FIELD(u8, spad3, 0xAu) == 0) {
-            FIELD(u8, spad3, 0x9u) = 0U;
-            spad6                  = g_Task;
-            FIELD(u8, spad6, 0xBu) = (u8)(FIELD(u8, spad6, 0xBu) + 1);
-            spad4                  = g_Task;
-            if (FIELD(u8, spad4, 0xBu) >= 4U) {
-                FIELD(u8, spad4, 0xBu) = 0U;
+            FIELD(u8, spad3, 0x9u)   = 0U;
+            spad6                    = g_Task;
+            spad6->param.cloud_layer = (u8)(spad6->param.cloud_layer + 1);
+            spad4                    = g_Task;
+            if (spad4->param.cloud_layer >= 4U) {
+                spad4->param.cloud_layer = 0U;
             }
         }
     }

@@ -1,9 +1,9 @@
 #include "area103_13.h"
 
 MATCH void func_801F511C(void) {
-    u8* work = g_Task;
+    Actor* work = g_Task;
 
-    FIELD(u8, work, 0x9u)++;
+    work->timer++;
     if (g_Task->timer >= 0x1D) {
         Actor_Clear();
     }

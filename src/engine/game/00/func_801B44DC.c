@@ -2,53 +2,53 @@
 
 #ifdef NON_MATCHING
 NON_MATCHING u8 func_801B44DC(u8 wanted_code) {
-    s32*  val0;
-    s16   tmp0;
-    s16   tmp1;
-    s16   tmp2;
-    s16   val1;
-    s16   val2;
-    s16   val3;
-    s32   tmp3;
-    s32   tmp4;
-    s32   tmp5;
-    s32   tmp6;
-    s32   tmp7;
-    s32   tmp8;
-    s32   tmp9;
-    s32   tmp10;
-    s32   tmp11;
-    s32   tmp12;
-    s32   tmp13;
-    s32   val4;
-    s32   val5;
-    s8    val6;
-    u16   tmp14;
-    u16   tmp15;
-    u16   tmp16;
-    u8    tmp17;
-    u8    tmp18;
-    u8    tmp19;
-    u8    tmp20;
-    u8    tmp21;
-    u8    tmp22;
-    u8    val7;
-    void* tmp23;
-    void* tmp24;
-    void* tmp25;
-    void* tmp26;
-    void* tmp27;
-    void* tmp28;
-    void* tmp29;
-    void* tmp30;
-    void* tmp31;
-    void* tmp32;
-    void* tmp33;
-    void* tmp34;
+    s32*   val0;
+    s16    tmp0;
+    s16    tmp1;
+    s16    tmp2;
+    s16    val1;
+    s16    val2;
+    s16    val3;
+    s32    tmp3;
+    s32    tmp4;
+    s32    tmp5;
+    s32    tmp6;
+    s32    tmp7;
+    s32    tmp8;
+    s32    tmp9;
+    s32    tmp10;
+    s32    tmp11;
+    s32    tmp12;
+    s32    tmp13;
+    s32    val4;
+    s32    val5;
+    s8     val6;
+    u16    tmp14;
+    u16    tmp15;
+    u16    tmp16;
+    u8     tmp17;
+    u8     tmp18;
+    u8     tmp19;
+    u8     tmp20;
+    u8     tmp21;
+    u8     tmp22;
+    u8     val7;
+    void*  tmp23;
+    Actor* tmp24;
+    void*  tmp25;
+    void*  tmp26;
+    void*  tmp27;
+    Actor* tmp28;
+    void*  tmp29;
+    void*  tmp30;
+    void*  tmp31;
+    void*  tmp32;
+    Actor* tmp33;
+    void*  tmp34;
 
     tmp33 = g_Task;
     val7  = wanted_code;
-    if ((FIELD(u16, tmp33, 0x34u) == 0) || (FIELD(u16, tmp33, 0x38u) == 0)) {
+    if ((tmp33->pos.x.part.fraction == 0) || (tmp33->pos.y.part.fraction == 0)) {
         tmp27 = g_Task;
         tmp17 = FIELD(u8, tmp27, 0x8u);
         tmp16 = FIELD(u16, tmp27, 0x36u);
@@ -149,7 +149,7 @@ NON_MATCHING u8 func_801B44DC(u8 wanted_code) {
                 loop_52:
                     if ((Area_CellGetCode(g_ScratchPad.cells.halves[0], g_ScratchPad.cells.halves[1]) & BYTE_MASK) == (val7 & BYTE_MASK)) {
                         tmp28 = g_Task;
-                        tmp21 = FIELD(u8, tmp28, 0x8u);
+                        tmp21 = tmp28->direction;
                         tmp5  = tmp21 & BYTE_MASK;
                         if (tmp21 & 1) {
                             if (tmp5 != 7) {
@@ -162,9 +162,9 @@ NON_MATCHING u8 func_801B44DC(u8 wanted_code) {
                         }
                         tmp10 = tmp21 & BYTE_MASK;
                         if ((tmp10 == 0) || (tmp10 == 6)) {
-                            FIELD(u8, tmp28, 0x8u) = 7U;
+                            tmp28->direction = 7U;
                         } else {
-                            FIELD(u8, tmp28, 0x8u) = 3U;
+                            tmp28->direction = 3U;
                         }
                         goto block_23; /* retail branch */
                     }
@@ -223,7 +223,7 @@ NON_MATCHING u8 func_801B44DC(u8 wanted_code) {
             loop_31:
                 if ((Area_CellGetCode(g_ScratchPad.cells.halves[0], g_ScratchPad.cells.halves[1]) & BYTE_MASK) == (val7 & BYTE_MASK)) {
                     tmp24 = g_Task;
-                    tmp20 = FIELD(u8, tmp24, 0x8u);
+                    tmp20 = tmp24->direction;
                     tmp4  = tmp20 & BYTE_MASK;
                     if (tmp20 & 1) {
                         if (tmp4 != 1) {
@@ -236,9 +236,9 @@ NON_MATCHING u8 func_801B44DC(u8 wanted_code) {
                     }
                     tmp9 = tmp20 & BYTE_MASK;
                     if ((tmp9 == 0) || (tmp9 == 2)) {
-                        FIELD(u8, tmp24, 0x8u) = 1U;
+                        tmp24->direction = 1U;
                     } else {
-                        FIELD(u8, tmp24, 0x8u) = 5U;
+                        tmp24->direction = 5U;
                     }
                 block_23:
                     return 1U;

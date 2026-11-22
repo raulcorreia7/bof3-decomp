@@ -46,13 +46,13 @@ MATCH void func_801EEC94(void) {
     g_BattleEffects[index].step_index   = 0x55;
     g_BattleEffects[index].target.party = work;
     g_Task->param.unk_0B += 1;
-    dst = g_AreaPaletteCopy->rows[AREA_PALETTE_BATL_OVR_ROW].colors;
-    src = g_AreaPaletteArena->rows[AREA_PALETTE_BATL_OVR_ROW].colors;
+    dst = MEM_PTR(u16, AREA_PALETTE_UPLOAD_ROW(AREA_PALETTE_BATL_OVR_ROW));
+    src = MEM_PTR(u16, AREA_PALETTE_ARENA_ROW(AREA_PALETTE_BATL_OVR_ROW));
     for (i = 1; i < 16; i++) {
         dst[i]      = src[i] | PSX_COLOR_STP_BIT;
         dst[i + 16] = src[i + 16] | PSX_COLOR_STP_BIT;
     }
-    g_AreaPaletteCopy->rows[AREA_PALETTE_BATL_OVR_ROW].colors[0]             = 0;
+    *MEM_PTR(u16, AREA_PALETTE_UPLOAD_ROW(AREA_PALETTE_BATL_OVR_ROW))        = 0;
     *MEM_PTR(u16, AREA_PALETTE_UPLOAD_ROW(AREA_PALETTE_BATL_OVR_ROW) + 0x20) = 0;
     g_GfxPalettePending                                                      = 1;
     g_Task->unk_27                                                           = Battle_CopyCellPalette(g_BattleEffectBattler);

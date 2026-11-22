@@ -141,8 +141,8 @@ NON_MATCHING u8 Script_OpsRunWait(void* sub, s32 target, u8 value) {
             Area_CellClearPalette(COORD_INT(g_Task->pos.x), COORD_INT(g_Task->pos.y));
             return value;
         case ACTOR_SCRIPT_WAIT_CALL_AREA_SCRIPT: {
-            void* obj = g_AreaLoads[g_GameAreaId];
-            (*(void (**)())((code[FIELD(u16, sub, 0xAu) + 1] * 4) + FIELD(s32, obj, 0x3Cu)))(obj);
+            Actor* obj = g_AreaLoads[g_GameAreaId];
+            (*(void (**)())((code[FIELD(u16, sub, 0xAu) + 1] * 4) + obj->pos.z.fixed))(obj);
             value = g_Task->direction;
             next  = FIELD(u16, sub, 0xAu) + 1;
             goto set_cursor;
