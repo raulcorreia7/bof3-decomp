@@ -193,8 +193,8 @@ extern Callback g_MenuOptionSteps[3];
 extern Callback g_MenuActionSteps[3];
 /* D_801C7C24 */
 extern Callback g_UiPanelTaskSteps[4];
-extern char     D_801C7C34[5][8];
-extern u8*      D_801C7C5C[5];
+extern char     g_ItemCategoryLabels[5][8];
+extern u8*      g_ItemCategoryLabelPointers[5];
 /* D_801C7C70 */
 extern Callback g_ActorTypes[187];
 extern u8       D_801C7F74[];

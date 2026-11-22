@@ -41,8 +41,8 @@ MATCH void func_801A5400(u8* script) {
         g_Actors[*counter].unk_7C     = 0xFFFF;
         /* FAKE: forces the counter re-read before the next shadow store. */
         FAKE_BARRIER();
-        *D_80146900[*counter] = data[0x9];
-        *D_8014691C[*counter] = 0x7F;
+        g_Actors[*counter].unk_78 = data[0x9];
+        g_Actors[*counter].unk_94 = 0x7F;
         Actor_SetOptionFlags(data + 0xB);
         if (data[0x3] & 0x80) {
             flags_record = TASK(Actor);

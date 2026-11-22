@@ -77,7 +77,6 @@ NON_MATCHING void func_801F7660(s32 x, s32 y, s32 z, u16 angle) {
     u8       segment;
     u16      next_radial;
     u16      radial;
-    s32      height;
     s32      point[3];
     MATRIX   matrix;
     s16      correction;
@@ -92,7 +91,6 @@ NON_MATCHING void func_801F7660(s32 x, s32 y, s32 z, u16 angle) {
     u32      outer_color;
     POLY_G4* primitive;
 
-    height = z;
     GFX_ADD_DITHERED_DRAW_MODE(GFX_LAYER_UI, GetTPage(0, 1, 0x3C0, 0) & 0xFFFF);
     Camera_SetMatrix(&matrix);
 
@@ -127,19 +125,19 @@ NON_MATCHING void func_801F7660(s32 x, s32 y, s32 z, u16 angle) {
 
         point[0] = x + (((rsin(outer_angle) * (rcos(radial) * 3)) >> 12) * 16);
         point[1] = y + (((rsin(outer_angle) * (rsin(radial) * 3)) >> 12) * 16);
-        point[2] = height + (rcos(outer_angle) * 0x3000);
+        point[2] = z + (rcos(outer_angle) * 0x3000);
         Camera_ProjectPoint(point, (DVECTOR*)&primitive->x0);
         setRGB0(primitive, outer_color, outer_color, outer_color);
 
         point[0] = x + (((rsin(inner_angle) * (rcos(radial) * 3)) >> 12) * 16);
         point[1] = y + (((rsin(inner_angle) * (rsin(radial) * 3)) >> 12) * 16);
-        point[2] = height + (rcos(inner_angle) * 0x3000);
+        point[2] = z + (rcos(inner_angle) * 0x3000);
         Camera_ProjectPoint(point, (DVECTOR*)&primitive->x1);
         setRGB1(primitive, inner_color, inner_color, inner_color);
 
         point[0] = x + (((rsin(outer_angle) * (rcos(next_radial) * 3)) >> 12) * 16);
         point[1] = y + (((rsin(outer_angle) * (rsin(next_radial) * 3)) >> 12) * 16);
-        point[2] = height + (rcos(outer_angle) * 0x3000);
+        point[2] = z + (rcos(outer_angle) * 0x3000);
         Camera_ProjectPoint(point, (DVECTOR*)&primitive->x2);
         setRGB2(primitive, outer_color, outer_color, outer_color);
 
@@ -148,7 +146,7 @@ NON_MATCHING void func_801F7660(s32 x, s32 y, s32 z, u16 angle) {
         segment++;
         point[0] = x + (((rsin(inner_angle) * (rcos(next_radial) * 3)) >> 12) * 16);
         point[1] = y + (((rsin(inner_angle) * (rsin(next_radial) * 3)) >> 12) * 16);
-        point[2] = height + (rcos(inner_angle) * 0x3000);
+        point[2] = z + (rcos(inner_angle) * 0x3000);
         Camera_ProjectPoint(point, (DVECTOR*)&primitive->x3);
         setRGB3(primitive, inner_color, inner_color, inner_color);
         GFX_AddPrim(GFX_LAYER_UI, sizeof(POLY_G4));

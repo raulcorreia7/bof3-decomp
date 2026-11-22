@@ -5,9 +5,9 @@
 MATCH void func_8015C214(s32 slot, u8 value) {
     u32 index;
 
-    index             = (slot & BYTE_MASK) * BATTLE_PARTY_STRIDE;
-    D_80145E91[index] = 2;
-    D_80145E92[index] = 8;
-    D_80145E93[index] = 0;
-    D_80145E9B[index] = value;
+    index                              = slot & BYTE_MASK;
+    g_Game.members[index].header.mode  = 2;
+    g_Game.members[index].header.step  = 8;
+    g_Game.members[index].unk_03       = 0;
+    g_Game.members[index].param.unk_0B = value;
 }

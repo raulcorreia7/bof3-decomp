@@ -245,22 +245,6 @@ ASSERT_OFFSET(SpinQuad, rotation, 0x10);
 ASSERT_OFFSET(SpinQuad, corners, 0x18);
 ASSERT_SIZE(SpinQuad, 0x38);
 
-/* Per-slot column views over the 0x98-byte work records: the trailing padding
- * carries the record stride so each column keeps its own field base. */
-typedef struct GameSlotWordColumn {
-    u16 value;
-    u8  pad[0x96];
-} GameSlotWordColumn;
-
-ASSERT_SIZE(GameSlotWordColumn, ACTOR_SIZE);
-
-typedef struct GameSlotByteColumn {
-    u8 value;
-    u8 pad[0x97];
-} GameSlotByteColumn;
-
-ASSERT_SIZE(GameSlotByteColumn, ACTOR_SIZE);
-
 /* Route step handler: advances one script cursor and reports a byte result. */
 typedef s32 (*RouteStepCallback)(u8* cursor);
 
@@ -285,19 +269,23 @@ typedef struct PaletteColors {
     u16 colors[4];
 } PaletteColors;
 
-extern u16                 D_1F800002; /* 0x1F800002; packed spawn record staging halfword */
-extern u8                  D_1F800003;
-extern u16                 D_1F800004; /* 0x1F800004 */
-extern s16                 D_1F800008; /* 0x1F800008 */
-extern u16                 D_1F80000A; /* 0x1F80000A */
-extern s16                 D_1F80000C; /* 0x1F80000C */
-extern u16                 D_1F80000E; /* 0x1F80000E */
-extern s8                  D_800E4D40; /* 0x800E4D40 */
-extern s16                 D_800E4D42; /* 0x800E4D42 */
-extern u8                  D_80143BB1;
-extern volatile u16        g_GameAreaId;
+extern u16 D_1F800002; /* 0x1F800002; packed spawn record staging halfword */
+extern u8  D_1F800003;
+extern u16 D_1F800004; /* 0x1F800004 */
+extern s16 D_1F800008; /* 0x1F800008 */
+extern u16 D_1F80000A; /* 0x1F80000A */
+extern s16 D_1F80000C; /* 0x1F80000C */
+extern u16 D_1F80000E; /* 0x1F80000E */
+extern s8  D_800E4D40; /* 0x800E4D40 */
+extern s16 D_800E4D42; /* 0x800E4D42 */
+extern u8  D_80143BB1;
+/* A unit that must keep the read where it is written (func_801A68C0) defines
+ * FAKE_DECL_GAME_AREA_ID_VOLATILE before its first include. */
+#ifdef FAKE_DECL_GAME_AREA_ID_VOLATILE
+extern volatile u16 g_GameAreaId;
+#endif
 /* D_80143F06 */
-extern volatile u8         g_GameLastCellType; /* 0x80143F06 */
+extern u8                  g_GameLastCellType; /* 0x80143F06 */
 /* D_80143F08 */
 extern volatile u32        g_GameLastX; /* 0x80143F08 */
 /* D_80143F0C */
@@ -336,7 +324,6 @@ extern u8                  D_801457AB;
 extern u8                  D_80145E9B;
 extern u32                 D_80145EDC; /* 0x80145EDC */
 extern u8                  D_80145F00; /* 0x80145F00 */
-extern u8                  D_80145FB4[];
 extern u16                 D_80145FB8; /* 0x80145FB8 */
 extern u8                  D_80145FD1;
 extern u8                  D_80145FD6;
@@ -363,9 +350,6 @@ extern u8                  D_80146270;
 extern u8                  D_80146855;
 extern u8                  D_80146856;
 extern u8                  D_80146893[]; /* 0x80146893 */
-extern GameSlotByteColumn  D_801468B1[];
-extern GameSlotWordColumn  D_801468B6[];
-extern GameSlotWordColumn  D_801468B8[];
 extern u8                  D_801468BE[]; /* 0x801468BE */
 extern u8                  D_801468C2[]; /* 0x801468C2 */
 extern s32                 D_801468C4;

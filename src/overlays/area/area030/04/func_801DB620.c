@@ -13,7 +13,7 @@ MATCH void func_801DB620(void) {
     record->timer = (record->timer - 1);
     Fishing_DrawCatchBar((-(TASK(FishingState)->timer * TO_COORD(40)) >> 16), FISHING_CATCH_BAR_Y);
     if (TASK(FishingState)->timer == 0) {
-        slot = D_8014688E[g_FishingHookedFish * 0x98];
+        slot = g_Actors[g_FishingHookedFish].unk_06;
         cue  = 0x20B;
         if (D_801E2AD5[slot * 0x24] >= 2) {
             cue = 0x20C;
