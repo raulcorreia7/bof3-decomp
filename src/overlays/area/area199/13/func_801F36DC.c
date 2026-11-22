@@ -9,7 +9,7 @@ NON_MATCHING void func_801F36DC(void) {
     s32 x;
     u8  age;
 
-    GFX_ADD_DITHERED_DRAW_MODE(4, (GetGraphType() == 1 || GetGraphType() == 2) ? 0x2A5 : 0xB5);
+    GFX_ADD_DITHERED_DRAW_MODE(4, getTPage(1, 1, 320, 256));
 
     if (g_Task->timer < 0xFF) {
         g_Task->timer++;

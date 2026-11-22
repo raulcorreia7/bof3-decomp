@@ -8,11 +8,7 @@ MATCH void Effect_DrawSparkleWedges(u16 angle, u16 radius) {
     g_ScratchPad.cells.ray.x = LOHU(EFFECT_SPARKLE_TASK->unk_20);
     g_ScratchPad.cells.ray.y = EFFECT_SPARKLE_TASK->unk_22;
 
-    if (GetGraphType() == 1 || GetGraphType() == 2) {
-        tpage = 0xA5;
-    } else {
-        tpage = 0x35;
-    }
+    tpage = getTPage(0, 1, 320, 256);
     SetDrawMode((DR_MODE*)g_GfxPrimCursor, 0, 1, tpage, 0);
     Area_CellAddPrim(EFFECT_SPARKLE_TASK->pos.x.fixed, EFFECT_SPARKLE_TASK->pos.y.fixed, 2, sizeof(DR_MODE));
 
