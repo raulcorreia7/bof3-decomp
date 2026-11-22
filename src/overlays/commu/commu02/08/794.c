@@ -2182,14 +2182,7 @@ NON_MATCHING void func_801D851C(s16 x, s16 y, s32 width, u8 index) {
     memcpy(colors, D_801D0C30, sizeof(colors));
     prim = (POLY_G4*)g_GfxPrimCursor;
     SetPolyG4(prim);
-    prim->x0 = x;
-    prim->y0 = y;
-    prim->x1 = x + width;
-    prim->y1 = y;
-    prim->x2 = prim->x0;
-    prim->y2 = y + 2;
-    prim->x3 = prim->x1;
-    prim->y3 = y + 2;
+    setXYWH(prim, x, y, width, 2);
     color    = colors[index];
     prim->r2 = color[0] << 7;
     prim->g2 = color[1] << 7;
@@ -2206,14 +2199,7 @@ NON_MATCHING void func_801D851C(s16 x, s16 y, s32 width, u8 index) {
     GFX_AddPrim(GFX_LAYER_UI, sizeof(POLY_G4));
     prim = (POLY_G4*)g_GfxPrimCursor;
     SetPolyG4(prim);
-    prim->x0 = x;
-    prim->y0 = y + 2;
-    prim->x1 = x + width;
-    prim->y1 = y + 2;
-    prim->x2 = prim->x0;
-    prim->y2 = y + 4;
-    prim->x3 = prim->x1;
-    prim->y3 = y + 4;
+    setXYWH(prim, x, y + 2, width, 2);
     prim->r0 = color[0] << 7;
     prim->g0 = color[1] << 7;
     prim->b0 = color[2] << 7;
@@ -2310,19 +2296,15 @@ NON_MATCHING void func_801D90D8(s32 x, s32 y, s32 character, s32 frame_mode) {
     s32 index;
     s32 x_copy;
     s32 y_copy;
-    u16 window_top;
     u8* window_style;
     u8* text;
 
     window_style = &g_WindowStyle;
-    window_top   = (u16)(y + 3);
-    UI_WindowDraw((u16)(x + 3), window_top, 0x7D, 0x2D, 0, *window_style);
-    character = (u8)character;
-    index     = ((((character << 2) + character) << 3) + character) << 2;
+    UI_WindowDraw((u16)(x + 3), (u16)(y + 3), 0x7D, 0x2D, 0, *window_style);
+    index = (((((u8)character << 2) + (u8)character) << 3) + (u8)character) << 2;
     Menu_DrawPortrait((u16)(x + 6), (u16)(y + 2), ((Character*)((u8*)g_Characters + index))->character_id, 0);
-    x_copy     = x;
-    y_copy     = y;
-    frame_mode = (u8)frame_mode;
+    x_copy = x;
+    y_copy = y;
     if ((u8)frame_mode == 0) {
         text = window_style + 0x16 + index;
     } else {
