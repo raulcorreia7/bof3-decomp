@@ -8,7 +8,7 @@ MATCH void AreaAction_FindSmall(void) {
     if (!ACTOR_IN_USE(g_SpawnedActors[TASK(Actor)->param.actor_slot])) {
         TEXT_Format(&g_TextVariables[0], D_80195F0C, 2);
         UI_MessageRequest(MSG_SYSTEM_FOUND_ZENNY);
-        g_GameStateIndex    = ui_mode;
-        TASK(Actor)->unk_04 = 4;
+        g_SysThreads[0].tail.game_entry.request = ui_mode;
+        TASK(Actor)->unk_04                     = 4;
     }
 }

@@ -3,7 +3,7 @@
 MATCH void UI_ModeSetWait(u16 local_mode) {
     u16* busy;
 
-    busy = &g_UiWindowEffectBusy;
+    busy = &g_SysThreads[2].state;
     if (*busy != 0) {
         return;
     }
