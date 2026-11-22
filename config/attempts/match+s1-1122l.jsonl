@@ -1,0 +1,1 @@
+{"function": "emi/scenario/scena12/00@0x801FAE04", "tried": "read only: the function reads four jump tables (jtbl_801F6FBC, 7044, 7064, 7084) that share the D_801F6FBC data unit with a zero word after each of the first three", "first_diff": "not drafted: the zero words between the tables need an explanation before the unit's .rodata row can move to the function", "score": null}

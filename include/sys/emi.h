@@ -33,19 +33,18 @@ typedef enum EMISoundSlot {
     EMI_SOUND_SLOT_VAB_BODY   = 2, /* BGM: 3 when the archive also carries an SE table at 2 */
 } EMISoundSlot;
 
-#define EMI_BENEMY_BANK              6
-#define EMI_BGM_BANK                 0
+#define EMI_BENEMY_BANK            6
+#define EMI_BGM_BANK               0
 
 /* A whole bank holds three VAB triples around a zero filler and the LZ77 container;
  * a one-section bank holds the first triple and one section. */
-#define EMI_BPLCHAR_SLOT_SECTION     3                  /* one-section bank */
-#define EMI_BPLCHAR_SLOT_FILLER      3                  /* whole bank */
-#define EMI_BPLCHAR_SLOT_CONTAINER   7                  /* whole bank */
-#define EMI_BPLCHAR_BANK(party_slot) ((party_slot) + 3) /* the three banks follow the party slots 0-2 */
+#define EMI_BPLCHAR_SLOT_SECTION   3 /* one-section bank */
+#define EMI_BPLCHAR_SLOT_FILLER    3 /* whole bank */
+#define EMI_BPLCHAR_SLOT_CONTAINER 7 /* whole bank */
 
-#define EMI_PLCHAR_SLOT_CONTAINER    3 /* PLxxx: the character sprites, LZ77 */
-#define EMI_PLCHAR_SLOT_PROGRAM      0 /* PLPxxx: the character program */
-#define EMI_PLCHAR_BANK              1
+#define EMI_PLCHAR_SLOT_CONTAINER  3 /* PLxxx: the character sprites, LZ77 */
+#define EMI_PLCHAR_SLOT_PROGRAM    0 /* PLPxxx: the character program */
+#define EMI_PLCHAR_BANK            1
 
 /* Entry type ids (@source: wiki:formats/emi#entry-types): what the loader does with a payload.
  * EMILoaderState holds the two internal loader states. */
