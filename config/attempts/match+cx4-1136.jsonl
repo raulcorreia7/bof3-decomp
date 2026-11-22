@@ -1,0 +1,1 @@
+{"function": "emi/scenario/scena09/00@0x801F7920", "tried": "spelled 80146258 as the g_GameFlags scalar at its four sites, per the blockers report", "first_diff": "0x801F79F8: the remaining diff is the jump-table relocation; retail reads the table at 0x801F6C04 from the bin row, the draft's switch emits its own", "score": "candidate 0xAB4 vs retail 0xAB8"}

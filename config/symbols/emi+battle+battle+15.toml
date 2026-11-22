@@ -260,7 +260,7 @@ g_BattleTarget_nv = { addr = 0x80146394, alias = true, source = "The g_Battle.ta
 g_BattleSelectionHead = { addr = 0x80148570, alias = true, source = "The first byte of g_BattleChoicePanel (0x80148570) under a scalar symbol: the direct %lo store form the battle keeps for it." }
 D_801485DD = { addr = 0x801485DD, size = 0x1, source = "Set to 8 when a battle selection starts." }
 D_80148656 = { addr = 0x80148656, size = 0x1, source = "Party slot of the battler whose message the battle shows; the field menu line draw also uses it as an index into g_PartyFieldOrder." }
-D_801C893C = { addr = 0x801C893C, size = 0x14, source = "Pointers to the five item categories." }
+g_ItemCategoryIds = { addr = 0x801C893C, size = 0x14, source = "Pointers to the five item categories." }
 Battle_PlayEffectSE = { addr = 0x801DD858, source = "plays the SE of one battle effect for the current character from the effect SE table", alias = true }
 g_BattleEnemies = { addr = 0x801EB2E8, source = "The enemy battlers." }
 g_BattleActorTurn = { addr = 0x801EB4D8, source = "the acting party battler's BattleTurn; the emi/battle/battle/15 target-selection handlers read it for command.target and the action and damage flags (set by emi/battle/battle/03)" }

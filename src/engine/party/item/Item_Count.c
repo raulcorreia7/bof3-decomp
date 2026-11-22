@@ -12,8 +12,8 @@ MATCH s32 Item_Count(u8 category, u8 item_id, u8 mode) {
     u8         i;
 
     if (mode == 0) {
-        ids  = D_801C893C[category];
-        qtys = D_801C8950[category];
+        ids  = g_ItemCategoryIds[category];
+        qtys = g_ItemCategoryCounts[category];
         for (i = 0; i < INV_SLOTS_PER_CATEGORY; i++) {
             if (item_id == *ids)
                 return *qtys;

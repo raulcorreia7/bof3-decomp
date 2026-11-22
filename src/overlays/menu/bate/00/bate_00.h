@@ -92,8 +92,8 @@ extern u8       g_MenuCaptionIcon[];
 extern u8       g_MenuClockColon[];
 extern u8*      g_MenuCommandLabels[];
 extern u8       g_MenuCommandRows[][5];
-extern u8*      D_801C893C[];
-extern u8*      D_801C8950[];
+extern u8*      g_ItemCategoryIds[];
+extern u8*      g_ItemCategoryCounts[];
 /* D_801D870C */
 extern Callback g_MenuBateStep2Sub0Steps[MENU_BATE_STEP2_SUB0_COUNT];
 /* D_801D8718 */

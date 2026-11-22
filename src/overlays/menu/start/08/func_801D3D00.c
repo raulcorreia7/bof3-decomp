@@ -11,15 +11,16 @@ MATCH void func_801D3D00(void) {
     u32              span;
 
     Menu_DrawClutStrip(g_WindowClut);
-    g_UiPanelTasks[MENU_START_PANEL_DESCRIPTION].u.message.id = Item_GetDescription(g_UiPanelTasks[13].unk_0A, D_801C893C[g_UiPanelTasks[13].unk_0A][g_UiPanelTasks[MENU_START_PANEL_ITEMS].unk_0C]);
-    g_UiPanelTasks[MENU_START_PANEL_CURSOR].active            = 1;
-    g_UiPanelTasks[14].unk_0C                                 = 0;
-    g_UiPanelTasks[MENU_START_PANEL_CURSOR].pos.x             = (u16)g_UiPanelTasks[MENU_START_PANEL_ITEMS].pos.x + 7;
-    span                                                      = (g_UiPanelTasks[13].unk_0C - g_UiPanelTasks[MENU_START_PANEL_ITEMS].unk_0B) * 0xD + 0x1A;
-    g_UiPanelTasks[MENU_START_PANEL_CURSOR].pos.y             = (u16)g_UiPanelTasks[MENU_START_PANEL_ITEMS].pos.y + span;
-    panel                                                     = &D_80148504;
-    pressed                                                   = INPUT_GetRepeatedButtons(g_PadStates[0].pressed & (PADLup | PADLdown | PADL1 | PADR1));
-    cursor                                                    = g_UiPanelTasks[13].unk_0C;
+    g_UiPanelTasks[MENU_START_PANEL_DESCRIPTION].u.message.id =
+        Item_GetDescription(g_UiPanelTasks[13].unk_0A, g_ItemCategoryIds[g_UiPanelTasks[13].unk_0A][g_UiPanelTasks[MENU_START_PANEL_ITEMS].unk_0C]);
+    g_UiPanelTasks[MENU_START_PANEL_CURSOR].active = 1;
+    g_UiPanelTasks[14].unk_0C                      = 0;
+    g_UiPanelTasks[MENU_START_PANEL_CURSOR].pos.x  = (u16)g_UiPanelTasks[MENU_START_PANEL_ITEMS].pos.x + 7;
+    span                                           = (g_UiPanelTasks[13].unk_0C - g_UiPanelTasks[MENU_START_PANEL_ITEMS].unk_0B) * 0xD + 0x1A;
+    g_UiPanelTasks[MENU_START_PANEL_CURSOR].pos.y  = (u16)g_UiPanelTasks[MENU_START_PANEL_ITEMS].pos.y + span;
+    panel                                          = &D_80148504;
+    pressed                                        = INPUT_GetRepeatedButtons(g_PadStates[0].pressed & (PADLup | PADLdown | PADL1 | PADR1));
+    cursor                                         = g_UiPanelTasks[13].unk_0C;
     if (pressed & PADLup) {
         if (cursor != 0) {
             g_UiPanelTasks[13].unk_0C = cursor - 1;
@@ -67,7 +68,7 @@ MATCH void func_801D3D00(void) {
         if (g_PadStates[0].pressed & g_InputMasks[MENU_INPUT_CONFIRM]) {
             if (panel->drawn_cursor == GAME_NONE) {
                 SND_SEPlay(EMI_SE_ID(SND_BANK_COMMON, 3));
-                if (D_801C893C[panel->group][panel->group_cursor] != 0) {
+                if (g_ItemCategoryIds[panel->group][panel->group_cursor] != 0) {
                     panel->drawn_cursor = panel->group_cursor;
                     return;
                 }
@@ -75,8 +76,8 @@ MATCH void func_801D3D00(void) {
                 return;
             }
             SND_SEPlay(EMI_SE_ID(SND_BANK_COMMON, 3));
-            Menu_SwapBytes(&D_801C893C[panel->group][panel->drawn_cursor], &D_801C893C[panel->group][panel->group_cursor]);
-            Menu_SwapBytes(&D_801C8950[panel->group][panel->drawn_cursor], &D_801C8950[panel->group][panel->group_cursor]);
+            Menu_SwapBytes(&g_ItemCategoryIds[panel->group][panel->drawn_cursor], &g_ItemCategoryIds[panel->group][panel->group_cursor]);
+            Menu_SwapBytes(&g_ItemCategoryCounts[panel->group][panel->drawn_cursor], &g_ItemCategoryCounts[panel->group][panel->group_cursor]);
             panel->drawn_cursor = 0xFF;
         } else if (g_PadStates[0].pressed & g_InputMasks[MENU_INPUT_CANCEL]) {
             SND_SEPlay(EMI_SE_ID(SND_BANK_COMMON, 6));

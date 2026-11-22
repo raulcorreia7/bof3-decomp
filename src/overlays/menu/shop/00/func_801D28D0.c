@@ -19,7 +19,7 @@ MATCH void func_801D28D0(void) {
 
     panel                    = (MenuChoicePanel*)&g_UiPanelTasks[7].active;
     item_index               = panel->group & BYTE_MASK;
-    item_entry               = D_801C893C[item_index][panel->group_cursor];
+    item_entry               = g_ItemCategoryIds[item_index][panel->group_cursor];
     g_ShopItemCategory       = panel->group;
     g_ShopItemId             = item_entry;
     D_80148340               = Item_GetDescription(item_index, item_entry);
@@ -95,7 +95,7 @@ MATCH void func_801D28D0(void) {
     }
     if (panel->confirm_timer == 0) {
         if ((g_PadStates[0].pressed & g_InputMasks[MENU_INPUT_CONFIRM]) != 0) {
-            selected_item      = (g_ShopItemId = D_801C893C[panel->group][panel->group_cursor]);
+            selected_item      = (g_ShopItemId = g_ItemCategoryIds[panel->group][panel->group_cursor]);
             g_ShopItemCategory = panel->group;
             D_80148628         = panel->pos.x + 7;
             D_8014862A         = panel->pos.y + (((panel->group_cursor - panel->group_first) * ((unsigned long)0xD)) + 0x1B);
@@ -104,7 +104,7 @@ MATCH void func_801D28D0(void) {
                 SND_SEPlay(EMI_SE_ID(SND_BANK_COMMON, 3));
                 selected_cursor    = panel->group_cursor;
                 g_ShopStockIndex   = selected_cursor;
-                g_ShopItemCountMax = D_801C8950[g_ShopItemCategory][(s8)selected_cursor];
+                g_ShopItemCountMax = g_ItemCategoryCounts[g_ShopItemCategory][(s8)selected_cursor];
                 g_ShopItemCount    = 1;
                 g_ShopItemPrice    = Shop_GetSellPrice(g_ShopItemCategory, g_ShopItemId, D_801E606C);
                 counter            = &D_80148652;

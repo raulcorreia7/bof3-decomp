@@ -26,8 +26,8 @@ MATCH void Menu_DrawInventoryWindow(MenuPanelTask* task) {
     UI_WindowDraw(task->pos.x + 3, task->pos.y + 3, 153, 130, task->unk_09, g_WindowStyle);
     first  = func_801AFD10(&task->unk_0B, &scroll_y, &line_count, (u8*)&task->u.list.scroll);
     y      = task->pos.y + (s8)scroll_y;
-    ids    = D_801C893C[task->unk_0A] + first;
-    counts = D_801C8950[task->unk_0A] + first;
+    ids    = g_ItemCategoryIds[task->unk_0A] + first;
+    counts = g_ItemCategoryCounts[task->unk_0A] + first;
     for (i = 0; i < line_count + 7; i++) {
         item = *ids;
         if (item != 0) {
@@ -99,5 +99,5 @@ MATCH void Menu_DrawInventoryWindow(MenuPanelTask* task) {
     }
     UI_SpriteDraw(task->pos.x + 136, task->pos.y + 120, 0x1D, UI_SPRITE_ALT_PAGE);
 
-    UI_ListDrawScrollbar(D_801C893C[task->unk_0A], task->unk_0B, task->pos.x + 144, task->pos.y + 24, 7, INV_SLOTS_PER_CATEGORY, 92);
+    UI_ListDrawScrollbar(g_ItemCategoryIds[task->unk_0A], task->unk_0B, task->pos.x + 144, task->pos.y + 24, 7, INV_SLOTS_PER_CATEGORY, 92);
 }

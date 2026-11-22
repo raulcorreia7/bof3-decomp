@@ -22,7 +22,7 @@ NON_MATCHING void Party_MemberRemove(s32 character_id) {
 
     func_801C1840();
     slot = 0;
-    size = g_Game.party_size;
+    size = g_PartySize;
     if (size > 0) {
         key   = character_id & BYTE_MASK;
         limit = size;
@@ -35,7 +35,7 @@ NON_MATCHING void Party_MemberRemove(s32 character_id) {
     found1:;
     }
     g_PartyBattleOrder[slot] = FORMATION_SLOT_EMPTY;
-    if (slot < (s32)g_Game.party_size - 1) {
+    if (slot < (s32)g_PartySize - 1) {
         cur  = &D_80144F5E[slot];
         prev = cur - 1;
         do {
@@ -46,10 +46,10 @@ NON_MATCHING void Party_MemberRemove(s32 character_id) {
             cur++;
             slot++;
             prev++;
-        } while (slot < (s32)g_Game.party_size - 1);
+        } while (slot < (s32)g_PartySize - 1);
     }
     slot = 0;
-    size = g_Game.party_size;
+    size = g_PartySize;
     if (size > 0) {
         key   = character_id & BYTE_MASK;
         limit = size;
@@ -62,7 +62,7 @@ NON_MATCHING void Party_MemberRemove(s32 character_id) {
     found2:;
     }
     g_PartyFieldOrder[slot] = 0xFF;
-    if ((s32)g_Game.party_size - 1 > 0) {
+    if ((s32)g_PartySize - 1 > 0) {
         slot = 0;
         code = 0x78;
         frac = 0;
@@ -96,21 +96,21 @@ NON_MATCHING void Party_MemberRemove(s32 character_id) {
             src += 1;
             slot++;
             dst += 1;
-        } while (slot < (s32)g_Game.party_size - 1);
+        } while (slot < (s32)g_PartySize - 1);
     }
-    g_Game.members[g_Game.party_size - 1].header.flags = 0;
-    Party_BattlersClearState(((s32)g_Game.party_size - 1) & BYTE_MASK);
-    if (g_Game.party_size == 3) {
+    g_Game.members[g_PartySize - 1].header.flags = 0;
+    Party_BattlersClearState(((s32)g_PartySize - 1) & BYTE_MASK);
+    if (g_PartySize == 3) {
         if (g_PartyFormation >= 3u)
             g_PartyFormation = 0;
         else
             goto tail;
     } else {
     tail:
-        if (g_Game.party_size == 2)
+        if (g_PartySize == 2)
             g_PartyFormation = 0;
     }
-    g_Game.party_size = (u8)((s32)g_Game.party_size - 1);
+    g_PartySize = (u8)((s32)g_PartySize - 1);
 }
 #else
 INCLUDE_ASM(Party_MemberRemove);

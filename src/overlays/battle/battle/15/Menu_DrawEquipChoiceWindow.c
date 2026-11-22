@@ -36,8 +36,8 @@ MATCH void Menu_DrawEquipChoiceWindow(MenuPanelTask* task) {
 
     i       = 0;
     choices = 0;
-    ids     = D_801C893C[task->unk_08];
-    counts  = D_801C8950[task->unk_08];
+    ids     = g_ItemCategoryIds[task->unk_08];
+    counts  = g_ItemCategoryCounts[task->unk_08];
     for (slot = 0; slot < INV_SLOTS_PER_CATEGORY; slot++) {
         if ((Item_PassesTest(ITEM_TEST_EQUIPPABLE, g_CharSlot[g_PartyBattleOrder[task->unk_0C]], task->unk_08, *ids) & BYTE_MASK) &&
             (task->unk_08 != ITEM_CATEGORY_ARMOR || task->unk_09 - EQUIP_SLOT_SHIELD == (Item_GetIcon(ITEM_CATEGORY_ARMOR, *ids) & BYTE_MASK) - ITEM_TYPE_SHIELD)) {
