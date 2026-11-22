@@ -21,7 +21,7 @@ MATCH void func_801FD0DC(void) {
             if (*progress != 0x1F) {
                 break;
             }
-            stored = &D_80144DF2;
+            stored = &g_Characters[7].equip.weapon;
             if ((u8)Item_Add(ITEM_CATEGORY_WEAPON, *stored + 1, 1, 0) == 0) {
                 *progress       = 0x20;
                 g_ScriptVars[1] = 0;
@@ -51,7 +51,7 @@ MATCH void func_801FD0DC(void) {
             if (*progress != 0x24) {
                 break;
             }
-            stored = &D_80144DF5;
+            stored = &g_Characters[7].equip.armor;
             if ((u8)Item_Add(ITEM_CATEGORY_ARMOR, *stored + 1, 1, 0) == 0) {
                 *progress       = 0x25;
                 g_ScriptVars[1] = 0;

@@ -50,9 +50,9 @@ MATCH void func_801F97C0(void) {
             }
             break;
         case 6:
-            if (D_80144DF2 == 0) {
+            if (g_Characters[7].equip.weapon == 0) {
                 g_ScenarioState.step = 0xE;
-            } else if (D_80144DF5 != 0) {
+            } else if (g_Characters[7].equip.armor != 0) {
                 g_ScenarioState.step = 0xA;
             } else {
                 g_ScenarioState.step = 0xE;
@@ -138,9 +138,9 @@ MATCH void func_801F97C0(void) {
             }
             break;
         case 31:
-            if (D_80144DF2 == 0) {
+            if (g_Characters[7].equip.weapon == 0) {
                 g_ScenarioState.step = 0x20;
-            } else if (D_80144DF5 != 0) {
+            } else if (g_Characters[7].equip.armor != 0) {
                 g_ScenarioState.step = 0x28;
             } else {
                 g_ScenarioState.step = 0x20;
@@ -217,9 +217,9 @@ MATCH void func_801F97C0(void) {
             }
             break;
         case 62:
-            if (D_80144DF2 == 0) {
+            if (g_Characters[7].equip.weapon == 0) {
                 g_ScenarioState.step = 0x20;
-            } else if (D_80144DF5 != 0) {
+            } else if (g_Characters[7].equip.armor != 0) {
                 g_ScenarioState.step = 0x28;
             } else {
                 g_ScenarioState.step = 0x20;

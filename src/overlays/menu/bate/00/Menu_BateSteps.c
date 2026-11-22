@@ -92,10 +92,10 @@ MATCH void func_801D1044(void) {
     }
     D_80148339 = D_8014835E;
     if (D_8014835E == 0 || D_8014835E != 3) {
-        item     = &D_80144DF2;
+        item     = &g_Characters[7].equip.weapon;
         category = 1;
     } else {
-        item     = &D_80144DF5;
+        item     = &g_Characters[7].equip.armor;
         category = 2;
     }
     D_80148388 = Item_GetDescription(category, *item);
