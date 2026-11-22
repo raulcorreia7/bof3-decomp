@@ -276,9 +276,7 @@ MATCH void func_801EF89C(void) {
 }
 
 #ifdef NON_MATCHING
-/* Stages the effect's four sprite rows over the active battler's work image: a 2x2 grid of
- * 0x20/0x80 columns and 0x40/0x90 rows, rows one and three carrying the battler's palette, then
- * hands the dispatcher the next step. */
+/* Stages the effect's four sprite rows over the active battler's work image. */
 NON_MATCHING void func_801EF8F4(void) {
     BattleEffect*    slot;
     BattleWorkImage* image;
