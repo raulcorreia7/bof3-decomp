@@ -1,6 +1,7 @@
 /* Dropping the volatile cell changes the code: retail reloads it. */
 #define FAKE_DECL_TASK_VOLATILE
 #include "area065_13.h"
+#include "overlays/area/shared/WorldMap_SelectKeyScript.h"
 
 MATCH void func_801F3124(void) {
     Actor* scratch;
@@ -14,65 +15,5 @@ MATCH void func_801F3124(void) {
     u32 window;
     u32 window_span;
 
-    scratch               = g_Task;
-    scratch->option_flags = scratch->param.unk_0B;
-
-    check = g_Task;
-    if (check->param.unk_0B == 1) {
-        key = g_GameEntryAreaId;
-        i   = 0;
-    scan:
-        next = i;
-        if (key == MEM(WorldMapKey, D_801F4DB4 + next).key) {
-            goto found; /* the found step also stores the key */
-        }
-        i = next + 4;
-        goto scan; /* the key is always in the table */
-    } else {
-        scratch = g_Task;
-        state   = scratch->param.unk_0B;
-        if (state == 2) {
-            mode = 3;
-            goto arm; /* steps 2 and 3 share the re-arm block */
-        }
-        if (state == 3) {
-            mode = 0;
-            goto arm; /* steps 2 and 3 share the re-arm block */
-        }
-        goto check4;
-    }
-
-found:
-    window_span      = 0x10000;
-    scratch          = g_Task;
-    window           = 2;
-    scratch->unk_18  = key;
-    scratch->scale.x = 0;
-    scratch->scale.y = window_span;
-    scratch->unk_48  = window;
-    scratch          = g_Task;
-    scratch->timer   = 8;
-    mode             = MEM(WorldMapKey, D_801F4DB4 + i).mode;
-    goto tail;
-
-check4:
-    if (state == 4) {
-        mode = 1;
-    } else {
-        return;
-    }
-
-arm:
-    window_span      = 0x10000;
-    scratch->scale.x = 0;
-    scratch->scale.y = window_span;
-    window           = 2;
-    scratch->unk_48  = window;
-    scratch          = g_Task;
-    scratch->timer   = 8;
-tail:
-    Script_Select(mode);
-
-    check              = g_Task;
-    check->header.mode = window;
+    WORLD_MAP_SELECT_KEY_SCRIPT(D_801F4DB4);
 }

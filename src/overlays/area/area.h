@@ -70,8 +70,8 @@ typedef struct FishingLocationRow {
 ASSERT_SIZE(FishingLocationRow, 6);
 
 /* One world key row: the key matched against g_GameEntryAreaId and the mode it
- * selects. The area key tables are scanned at a 4-byte stride by func_801F30EC
- * and its per-area twins. */
+ * selects. The area key tables are scanned at a 4-byte stride by
+ * WORLD_MAP_SELECT_KEY_SCRIPT. */
 typedef struct WorldMapKey {
     u16 key;    /* 0x00 */
     u8  mode;   /* 0x02 */

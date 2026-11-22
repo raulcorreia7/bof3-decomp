@@ -48,7 +48,6 @@ MATCH s8 func_8015AD00(PanelSortItem* sort_list) {
     PanelPiece*    piece;
     PanelQuadPrim* quad;
     u16            otz;
-    u16            vv;
     s32            i;
 
     vec = D_80149BF0;
@@ -83,54 +82,10 @@ MATCH s8 func_8015AD00(PanelSortItem* sort_list) {
             quad = (PanelQuadPrim*)p;
             SetPolyFT4(&quad->ft4);
 
-            vv = piece->vertices[0][0];
-            FAKE_BARRIER(); /* FAKE: pin the vertex load into its retail store slot. */
-            g_ScratchPadVectors[0].vx = vv;
-            FAKE_BARRIER(); /* FAKE: pin the vertex load into its retail store slot. */
-            vv = piece->vertices[0][1];
-            FAKE_BARRIER(); /* FAKE: pin the vertex load into its retail store slot. */
-            SP_REF(u16, 0x16u) = vv;
-            FAKE_BARRIER(); /* FAKE: pin the vertex load into its retail store slot. */
-            vv = piece->vertices[0][2];
-            FAKE_BARRIER(); /* FAKE: pin the vertex load into its retail store slot. */
-            SP_REF(u16, 0x18u) = vv;
-            FAKE_BARRIER(); /* FAKE: pin the vertex load into its retail store slot. */
-            vv = piece->vertices[1][0];
-            FAKE_BARRIER(); /* FAKE: pin the vertex load into its retail store slot. */
-            g_ScratchPadVectors[1].vx = vv;
-            FAKE_BARRIER(); /* FAKE: pin the vertex load into its retail store slot. */
-            vv = piece->vertices[1][1];
-            FAKE_BARRIER(); /* FAKE: pin the vertex load into its retail store slot. */
-            SP_REF(u16, 0x1Eu) = vv;
-            FAKE_BARRIER(); /* FAKE: pin the vertex load into its retail store slot. */
-            vv = piece->vertices[1][2];
-            FAKE_BARRIER(); /* FAKE: pin the vertex load into its retail store slot. */
-            SP_REF(u16, 0x20u) = vv;
-            FAKE_BARRIER(); /* FAKE: pin the vertex load into its retail store slot. */
-            vv = piece->vertices[2][0];
-            FAKE_BARRIER(); /* FAKE: pin the vertex load into its retail store slot. */
-            g_ScratchPadVectors[2].vx = vv;
-            FAKE_BARRIER(); /* FAKE: pin the vertex load into its retail store slot. */
-            vv = piece->vertices[2][1];
-            FAKE_BARRIER(); /* FAKE: pin the vertex load into its retail store slot. */
-            SP_REF(u16, 0x26u) = vv;
-            FAKE_BARRIER(); /* FAKE: pin the vertex load into its retail store slot. */
-            vv = piece->vertices[2][2];
-            FAKE_BARRIER(); /* FAKE: pin the vertex load into its retail store slot. */
-            SP_REF(u16, 0x28u) = vv;
-            FAKE_BARRIER(); /* FAKE: pin the vertex load into its retail store slot. */
-            vv = piece->vertices[3][0];
-            FAKE_BARRIER(); /* FAKE: pin the vertex load into its retail store slot. */
-            g_ScratchPadVectors[3].vx = vv;
-            FAKE_BARRIER(); /* FAKE: pin the vertex load into its retail store slot. */
-            vv = piece->vertices[3][1];
-            FAKE_BARRIER(); /* FAKE: pin the vertex load into its retail store slot. */
-            SP_REF(u16, 0x2Eu) = vv;
-            FAKE_BARRIER(); /* FAKE: pin the vertex load into its retail store slot. */
-            vv = piece->vertices[3][2];
-            FAKE_BARRIER(); /* FAKE: pin the vertex load into its retail store slot. */
-            SP_REF(u16, 0x30u) = vv;
-            FAKE_BARRIER(); /* FAKE: pin the vertex load into its retail store slot. */
+            setVector(&g_ScratchPadVectors[0], piece->vertices[0][0], piece->vertices[0][1], piece->vertices[0][2]);
+            setVector(&g_ScratchPadVectors[1], piece->vertices[1][0], piece->vertices[1][1], piece->vertices[1][2]);
+            setVector(&g_ScratchPadVectors[2], piece->vertices[2][0], piece->vertices[2][1], piece->vertices[2][2]);
+            setVector(&g_ScratchPadVectors[3], piece->vertices[3][0], piece->vertices[3][1], piece->vertices[3][2]);
             setVector(&normal, piece->normal[0], piece->normal[1], piece->normal[2]);
             quad->halves.uv0 = piece->uv[0];
             quad->halves.uv1 = piece->uv[1];

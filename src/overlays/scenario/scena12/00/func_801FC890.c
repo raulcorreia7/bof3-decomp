@@ -5,114 +5,73 @@
 __asm__(".include \"include/match/macro.inc\"\n");
 #endif
 
-#ifdef NON_MATCHING
-NON_MATCHING s32 func_801FC890(s32 x, s32 y) {
-    if (g_GameAreaId == AREA_ID_PLANT) {
-        if (SYS_TestFlag(g_SceneFlags, 9) && SYS_TestFlag(g_SceneFlags, 11) == 0 && (x == TO_COORD(77) || x == TO_COORD_HALF(77)) && (u32)(y - TO_COORD(33)) <= TO_COORD_HALF(4)) {
-            {
+/* Starts the scene script for the trigger cell at (x, y) in the current area; returns 1 when one starts. */
+MATCH s32 func_801FC890(s32 x, s32 y) {
+    if (g_GameAreaId == AREA_ID_BLACK_SHIP_AMMONITE) {
+        if (!SYS_TestFlag(g_SceneFlags, 1)) {
+            if ((u32)(x - TO_COORD_HALF(31)) <= TO_COORD(1) && (u32)(y - TO_COORD_HALF(36)) <= TO_COORD_HALF(2)) {
                 Game_SetScriptActive();
+                g_ScenarioState.step_05  = 0xA;
                 g_ScriptVars[0]          = 0;
                 g_ScriptVars[1]          = 0;
                 g_ScriptVars[2]          = 0;
                 g_ScriptVars[3]          = 0;
-                g_ScenarioState.step_05  = 0;
-                g_ScenarioState.state_04 = 7;
-            }
-            return 1;
-        }
-    }
-    if (g_GameAreaId == AREA_ID_DUMP) {
-        if (SYS_TestFlag(g_SceneFlags, 5) == 0) {
-            if ((u32)(x - TO_COORD(147)) <= TO_COORD_HALF(1) && (y == TO_COORD(6) || y == TO_COORD_HALF(6))) {
-                {
-                    Game_SetScriptActive();
-                    g_ScriptVars[0]          = 0;
-                    g_ScriptVars[1]          = 0;
-                    g_ScriptVars[2]          = 0;
-                    g_ScriptVars[3]          = 0;
-                    g_ScenarioState.step_05  = 0;
-                    g_ScenarioState.state_04 = 4;
-                }
+                g_ScenarioState.state_04 = 9;
+                Area_CellSetCode(0x2D, 0x29, 0x70);
+                Area_CellSetCode(0x2D, 0x2A, 0x70);
+                Area_CellSetCode(0x2E, 0x29, 0x70);
+                Area_CellSetCode(0x2E, 0x2A, 0x70);
+                SYS_SetFlag(g_SceneFlags, 1);
                 return 1;
             }
-        } else if (SYS_TestFlag(g_SceneFlags, 9) == 0 && (u32)(x - TO_COORD(132)) <= TO_COORD_HALF(2) && (y == TO_COORD(12) || y == TO_COORD_HALF(12) || y == TO_COORD(24) || y == TO_COORD_HALF(24))) {
+        } else if (g_Game.members[0].pos.z.fixed <= TO_COORD(0x200) && (u32)(x - TO_COORD(46)) <= TO_COORD_HALF(1) && (u32)(y - TO_COORD(41)) <= TO_COORD(1)) {
             Game_SetScriptActive();
-            g_ScenarioState.step_05 = 20;
-            SCRIPT_VARS_CLEAR_ALL();
-            g_ScenarioState.state_04 = 4;
-            return 1;
-        }
-    }
-    if (g_GameAreaId == AREA_ID_MAEKYSS_GORGE && (y == TO_COORD(52) || y == TO_COORD_HALF(52)) && (u32)(x - TO_COORD(29)) <= TO_COORD_HALF(1)) {
-        {
-            Game_SetScriptActive();
+            g_ScenarioState.step_05  = 0x21;
             g_ScriptVars[0]          = 0;
             g_ScriptVars[1]          = 0;
             g_ScriptVars[2]          = 0;
             g_ScriptVars[3]          = 0;
-            g_ScenarioState.step_05  = 0;
-            g_ScenarioState.state_04 = 11;
-        }
-        return 1;
-    }
-    if (g_GameAreaId == AREA_ID_CAFE) {
-        if (SYS_TestFlag(g_SceneFlags, 0) == 0 && (y == TO_COORD(36) || y == TO_COORD_HALF(36)) && (u32)(x - TO_COORD(25)) <= TO_COORD_HALF(6)) {
-            {
-                Game_SetScriptActive();
-                g_ScriptVars[0]          = 0;
-                g_ScriptVars[1]          = 0;
-                g_ScriptVars[2]          = 0;
-                g_ScriptVars[3]          = 0;
-                g_ScenarioState.step_05  = 0;
-                g_ScenarioState.state_04 = 1;
-            }
+            g_ScenarioState.state_04 = 9;
             return 1;
         }
     }
-    if (g_GameAreaId == AREA_ID_CONTEST_OUTER && SYS_TestFlag(g_SceneFlags, 61)) {
-        if (SYS_TestFlag(g_SceneFlags, 50) == 0) {
-            if (x == TO_COORD_HALF(40) || x == TO_COORD(41)) {
-                if ((u32)(y - TO_COORD(126)) <= TO_COORD_HALF(3)) {
-                    {
-                        Game_SetScriptActive();
-                        g_ScriptVars[0]          = 0;
-                        g_ScriptVars[1]          = 0;
-                        g_ScriptVars[2]          = 0;
-                        g_ScriptVars[3]          = 0;
-                        g_ScenarioState.step_05  = 0;
-                        g_ScenarioState.state_04 = 19;
-                    }
-                    return 1;
-                }
-            } else if (x == TO_COORD(31) || x == TO_COORD_HALF(31)) {
-                if ((u32)(y - TO_COORD(113)) <= TO_COORD_HALF(1)) {
-                    {
-                        Game_SetScriptActive();
-                        g_ScriptVars[0]          = 0;
-                        g_ScriptVars[1]          = 0;
-                        g_ScriptVars[2]          = 0;
-                        g_ScriptVars[3]          = 0;
-                        g_ScenarioState.step_05  = 0;
-                        g_ScenarioState.state_04 = 20;
-                    }
-                    return 1;
-                }
-            }
-        } else if ((x == TO_COORD(31) || x == TO_COORD_HALF(31)) && (u32)(y - TO_COORD(113)) <= TO_COORD_HALF(1)) {
-            {
-                Game_SetScriptActive();
-                g_ScriptVars[0]          = 0;
-                g_ScriptVars[1]          = 0;
-                g_ScriptVars[2]          = 0;
-                g_ScriptVars[3]          = 0;
-                g_ScenarioState.step_05  = 0;
-                g_ScenarioState.state_04 = 22;
-            }
+    if (g_GameAreaId == AREA_ID_BOAT_AFTER_BLACK_SHIP) {
+        if (!SYS_TestFlag(g_SceneFlags, 0x19) && (u32)(x - TO_COORD(51)) <= TO_COORD_HALF(1) && (u32)(y - TO_COORD(41)) <= COORD_HALF) {
+            Game_SetScriptActive();
+            g_ScenarioState.step_05  = 0xA;
+            g_ScriptVars[0]          = 0;
+            g_ScenarioState.state_04 = 4;
+            return 1;
+        }
+    }
+    if (g_GameAreaId == AREA_ID_BLACK_SHIP_BOOST_COUNTER && SYS_TestFlag(g_SceneFlags, 0x25) && !SYS_TestFlag(g_SceneFlags, 0x26) && x > TO_COORD(27) && (u32)((y >> 16) - 7) < 5) {
+        Game_SetScriptActive();
+        g_ScenarioState.state_04 = 5;
+        g_ScenarioState.step_05  = 0x1B;
+        return 1;
+    }
+    if (g_GameAreaId == AREA_ID_BLACK_SHIP && !SYS_TestFlag(g_SceneFlags, 0x2B)) {
+        if ((u32)(x - TO_COORD(28)) <= TO_COORD_HALF(1) && (u32)(y - TO_COORD_HALF(3)) <= TO_COORD(1)) {
+            Game_SetScriptActive();
+            g_ScenarioState.step_05  = 5;
+            g_ScriptVars[0]          = 0;
+            g_ScenarioState.state_04 = 7;
+            return 1;
+        }
+        if ((u32)(x - TO_COORD(57)) <= TO_COORD_HALF(1) && (u32)(y - TO_COORD(71)) <= TO_COORD_HALF(1)) {
+            Game_SetScriptActive();
+            g_ScenarioState.step_05  = 5;
+            g_ScriptVars[0]          = 0;
+            g_ScenarioState.state_04 = 7;
+            return 1;
+        }
+        if ((u32)(x - TO_COORD_HALF(54)) <= COORD_HALF && (u32)(y - TO_COORD(63)) <= COORD_HALF) {
+            Game_SetScriptActive();
+            g_ScenarioState.step_05  = 0xA;
+            g_ScriptVars[0]          = 0;
+            g_ScenarioState.state_04 = 7;
             return 1;
         }
     }
     return 0;
 }
-#else
-INCLUDE_ASM(func_801FC890);
-#endif
