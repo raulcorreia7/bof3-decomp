@@ -79,7 +79,7 @@ MATCH void func_801FABA0(void) {
             g_AreaDrawFlags          = 0;
             g_ScenarioState.timer_06 = 0x40;
             /* FAKE: a writable table read keeps the slot load below the two stores, as retail has it. */
-            SND_StartDecrescendo(((u8*)g_SelectionSepSlots)[g_SndBGMId * 4], g_SelectionSequences[g_SndBGMId * 4], 0x64, 0x40);
+            SND_StartDecrescendo(g_SelectionSepSlots[g_SndBGMId * 4], g_SelectionSequences[g_SndBGMId * 4], 0x64, 0x40);
             g_ScenarioState.step_05 = 6;
             break;
         case 6:

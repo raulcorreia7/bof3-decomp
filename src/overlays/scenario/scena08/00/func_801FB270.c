@@ -58,7 +58,7 @@ MATCH void func_801FB270(void) {
             }
             g_ScenarioState.timer_06 = 0x20;
             g_ScenarioState.step_05  = 4;
-            SND_StartDecrescendo(((u8*)g_SelectionSepSlots)[g_SndBGMId * 4], ((u8*)g_SelectionSequences)[g_SndBGMId * 4], 0x64, 0x20);
+            SND_StartDecrescendo(g_SelectionSepSlots[g_SndBGMId * 4], ((u8*)g_SelectionSequences)[g_SndBGMId * 4], 0x64, 0x20);
             break;
         case 4:
             if (g_ScenarioState.timer_06-- != 0) {
