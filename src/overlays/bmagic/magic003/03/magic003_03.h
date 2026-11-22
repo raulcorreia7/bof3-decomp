@@ -44,14 +44,15 @@ void                            func_801F03F0(s32 dir);
 
 /* A palette fade colour per row: the signed red, green and blue steps. */
 extern ColorDelta8 D_801F0A78[];
-extern u8          D_801F0AD4[];
+
+/* The length of each label and its glyph codes, 0 at the end and 0xFF for a space. */
+extern u8 D_801F0A9C[];
+extern u8 D_801F0AA0[][13];
+extern u8 D_801F0AD4[];
 
 /* A screen rectangle: the corner and the size. */
 extern RectU16 D_801F0B10[];
 
-/* The length of each label and its glyph codes, 0 at the end and 0xFF for a space. */
-extern u8           D_801F0A9C[];
-extern u8           D_801F0AA0[][13];
 /* The effect slot table BMagic_AllocEffect scans, and its row count. */
 extern BattleEffect D_801F0B38[];
 #define BMAGIC_EFFECT_SLOTS D_801F0B38
