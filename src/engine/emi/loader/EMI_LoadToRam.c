@@ -6,7 +6,7 @@
 MATCH void EMI_LoadToRam(void) {
     s32* completed_entries;
 
-    EMI_CopySector();
+    EMI_SectorCopy();
     completed_entries  = &g_EmiStep;
     *completed_entries = *completed_entries + 1;
 }

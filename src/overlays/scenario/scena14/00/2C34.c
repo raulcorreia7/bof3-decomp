@@ -474,7 +474,7 @@ MATCH s32 func_801FB84C(s32 x, s32 y) {
 }
 
 MATCH void Scene_JoinPartyRyuAdultReiNinaAdult(void) {
-    EMI_LoadPartyArchives(CHAR_ID_RYU_ADULT, CHAR_ID_NINA_ADULT, CHAR_ID_REI, 0);
+    EMI_PartyLoadArchives(CHAR_ID_RYU_ADULT, CHAR_ID_NINA_ADULT, CHAR_ID_REI, 0);
     g_Game.party_size = 0;
     Party_JoinMember(CHAR_ID_RYU_ADULT);
     Party_JoinMember(CHAR_ID_REI);
@@ -502,7 +502,7 @@ MATCH void func_801FBE10(void) {
     for (slot = 0; slot < 3; slot++) {
         Party_RemoveMember(ids[slot]);
     }
-    EMI_LoadPartyArchives(CHAR_ID_WHELP, CHAR_ID_BLANK, CHAR_ID_BLANK, 0);
+    EMI_PartyLoadArchives(CHAR_ID_WHELP, CHAR_ID_BLANK, CHAR_ID_BLANK, 0);
     g_Game.party_size = 0;
     Party_JoinMember(CHAR_ID_WHELP);
     Party_LoadPalettes();
@@ -510,7 +510,7 @@ MATCH void func_801FBE10(void) {
 
 MATCH void func_801FBF18(void) {
     g_Characters[g_CharSlot[10]].party_flags &= 0xFE;
-    EMI_LoadPartyArchives(CHAR_ID_RYU_ADULT, CHAR_ID_REI, CHAR_ID_NINA_ADULT, 0);
+    EMI_PartyLoadArchives(CHAR_ID_RYU_ADULT, CHAR_ID_REI, CHAR_ID_NINA_ADULT, 0);
     g_Game.party_size = 0;
     Party_JoinMember(CHAR_ID_RYU_ADULT);
     Party_JoinMember(CHAR_ID_REI);
@@ -519,7 +519,7 @@ MATCH void func_801FBF18(void) {
 }
 
 MATCH void func_801FBFA8(void) {
-    EMI_LoadPartyArchives(CHAR_ID_RYU_YOUNG, CHAR_ID_NINA_YOUNG, CHAR_ID_MOMO, 0);
+    EMI_PartyLoadArchives(CHAR_ID_RYU_YOUNG, CHAR_ID_NINA_YOUNG, CHAR_ID_MOMO, 0);
     g_Game.party_size = 0;
     Party_JoinMember(CHAR_ID_RYU_YOUNG);
     Party_JoinMember(CHAR_ID_NINA_YOUNG);
@@ -537,7 +537,7 @@ MATCH void Scene_SetPartyRyuAdultGarrPeco(void) {
 #include "overlays/scenario/shared/Scene_SetPartyRyuAdultGarrNinaAdult.h"
 
 MATCH void func_801FC0C8(void) {
-    EMI_LoadPartyArchives(CHAR_ID_RYU_ADULT, CHAR_ID_REI, *D_80144908, 0U);
+    EMI_PartyLoadArchives(CHAR_ID_RYU_ADULT, CHAR_ID_REI, *D_80144908, 0U);
     g_Game.party_size = 0;
     Party_JoinMember(CHAR_ID_RYU_ADULT);
     Party_JoinMember(CHAR_ID_REI);
@@ -556,14 +556,14 @@ MATCH void func_801FC130(void) {
     for (slot = 0; slot < 3; slot++) {
         Party_RemoveMember(D_80144908[slot]);
     }
-    EMI_LoadPartyArchives(CHAR_ID_RYU_ADULT, CHAR_ID_NINA_ADULT, CHAR_ID_REI, 0);
+    EMI_PartyLoadArchives(CHAR_ID_RYU_ADULT, CHAR_ID_NINA_ADULT, CHAR_ID_REI, 0);
     g_Game.party_size = 0;
     Party_JoinMember(CHAR_ID_RYU_ADULT);
     Party_LoadPalettes();
 }
 
 MATCH void func_801FC1E8(void) {
-    EMI_LoadPartyArchives(CHAR_ID_RYU_ADULT, CHAR_ID_GARR, CHAR_ID_PECO, 0);
+    EMI_PartyLoadArchives(CHAR_ID_RYU_ADULT, CHAR_ID_GARR, CHAR_ID_PECO, 0);
     g_Game.party_size = 0;
     Party_JoinMember(CHAR_ID_RYU_ADULT);
     Party_LoadPalettes();
@@ -581,7 +581,7 @@ MATCH void func_801FC280(void) {
             break;
         }
     }
-    EMI_LoadPartyArchives(CHAR_ID_RYU_ADULT, CHAR_ID_REI, character, 0);
+    EMI_PartyLoadArchives(CHAR_ID_RYU_ADULT, CHAR_ID_REI, character, 0);
     g_Game.party_size = 0;
     Party_JoinMember(CHAR_ID_RYU_ADULT);
     Party_JoinMember(CHAR_ID_REI);

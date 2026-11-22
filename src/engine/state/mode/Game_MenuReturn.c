@@ -11,19 +11,19 @@ MATCH void Game_MenuReturn(void) {
     UI_WindowWaitEffect(0u);
     SYS_ThreadWait(1u);
     if (D_80148661 != 0u) {
-        EMI_LoadPartyArchives(g_PartyFieldOrder[0], g_PartyFieldOrder[1], g_PartyFieldOrder[2], 0u);
+        EMI_PartyLoadArchives(g_PartyFieldOrder[0], g_PartyFieldOrder[1], g_PartyFieldOrder[2], 0u);
         while (EMI_IsReady() == 0) {
             SYS_ThreadWait(1u);
         }
         D_80148661 = 0u;
     }
     g_EmiStreamFlags = 0x20;
-    EMI_LoadFamilyArchive(g_EmiLoadedCharacterIndex & EMI_LOADED_INDEX_MASK, EMI_FAMILY_PL);
+    EMI_ArchiveLoadFamily(g_EmiLoadedCharacterIndex & EMI_LOADED_INDEX_MASK, EMI_FAMILY_PL);
     while (EMI_IsReady() == 0) {
         SYS_ThreadWait(1u);
     }
     if (g_GameRequestFlags & AREA_LOAD_FLAG_FAIRY_VILLAGE) {
-        EMI_LoadArchive(EMI_SLOT_COMMU00);
+        EMI_ArchiveLoad(EMI_SLOT_COMMU00);
         while (EMI_IsReady() == 0) {
             SYS_ThreadWait(1u);
         }

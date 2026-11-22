@@ -127,7 +127,7 @@ NON_MATCHING void func_801FB270(void) {
             g_ScenarioState.step_05 = 13;
             break;
         case 13:
-            EMI_LoadArchive(EMI_SLOT_A108SE2);
+            EMI_ArchiveLoad(EMI_SLOT_A108SE2);
             while (EMI_IsReady() == 0) {
                 func_801992B8();
                 SYS_ThreadWait(1);

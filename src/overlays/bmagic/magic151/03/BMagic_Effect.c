@@ -93,7 +93,7 @@ MATCH void func_801EF070(void) {
         } else {
             archive_id = D_800B499C[g_Battle.dragon_form][1][g_EmiLoadedCharacterIndex];
         }
-        EMI_LoadArchive(archive_id);
+        EMI_ArchiveLoad(archive_id);
         g_Task->unk_03 += 1;
     }
 }
@@ -158,7 +158,7 @@ MATCH void func_801EF388(void) {
         } else {
             archive_id = D_800B499C[g_Battle.dragon_form][1][0];
         }
-        EMI_LoadArchive(archive_id);
+        EMI_ArchiveLoad(archive_id);
         g_Task->unk_03 += 1;
     }
 }

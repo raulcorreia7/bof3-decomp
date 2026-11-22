@@ -4,7 +4,7 @@
  * maps a BOF3 content family plus index into the slot id used by the
  * EXE loader path.
  */
-MATCH void EMI_LoadFamilyArchive(u8 index, u8 family) {
+MATCH void EMI_ArchiveLoadFamily(u8 index, u8 family) {
     /* FAKE: retail holds the switch index in a0. */
     FAKE_REG(u8, archive_index, "a0");
     u8* hint;
@@ -37,5 +37,5 @@ MATCH void EMI_LoadFamilyArchive(u8 index, u8 family) {
             return;
     }
 
-    EMI_LoadArchive(emi_id);
+    EMI_ArchiveLoad(emi_id);
 }

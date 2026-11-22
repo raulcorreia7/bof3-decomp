@@ -16,7 +16,7 @@ MATCH void EMI_UpdateStream(void) {
     callbacks = g_EmiRingSteps;
     if (*head != 0) {
         g_EmiStreamState = 0;
-        EMI_StartArchive();
+        EMI_ArchiveStart();
     }
     /* FAKE: the scheduler sinks the zeroing past the call; hold it in the
      * call's delay slot, where retail keeps the move. */
@@ -47,11 +47,11 @@ MATCH void EMI_UpdateStream(void) {
     frame_counter = &g_EmiStreamIdleFrames;
     if ((s16)(*frame_counter)++ >= EMI_STREAM_TIMEOUT_FRAMES) {
         if (g_EmiStreamState == 1) {
-            EMI_StartArchive();
+            EMI_ArchiveStart();
         }
     }
     if (g_EmiReadStatus != 0) {
         g_EmiStreamState = 0;
-        EMI_StartArchive();
+        EMI_ArchiveStart();
     }
 }

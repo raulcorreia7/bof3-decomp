@@ -2,7 +2,7 @@
 
 /* Sends the next chunk of the pending sound bank body to the SPU; when the body is in, opens the bank's sequence set
  * and plays the queued sequence. */
-MATCH void EMI_UploadVabBody(void) {
+MATCH void EMI_VabUploadBody(void) {
     s32*          state;
     s32*          sizes;
     s8*           slot;

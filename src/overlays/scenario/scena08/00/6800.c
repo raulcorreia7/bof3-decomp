@@ -161,7 +161,7 @@ INCLUDE_ASM(func_801FE2A0);
 
 /* func_801FE698 */
 MATCH void Scene_SetPartyWhelp(void) {
-    EMI_LoadPartyArchives(CHAR_ID_RYU_ADULT, CHAR_ID_GARR, CHAR_ID_WHELP, 0);
+    EMI_PartyLoadArchives(CHAR_ID_RYU_ADULT, CHAR_ID_GARR, CHAR_ID_WHELP, 0);
     g_Game.party_size = 0;
     Party_JoinMember(CHAR_ID_WHELP);
     Party_LoadPalettes();
@@ -180,7 +180,7 @@ MATCH void Party_JoinGarr(void) {
 }
 
 MATCH void func_801FE760(void) {
-    EMI_LoadPartyArchives(CHAR_ID_RYU_ADULT, CHAR_ID_GARR, CHAR_ID_REI, 0);
+    EMI_PartyLoadArchives(CHAR_ID_RYU_ADULT, CHAR_ID_GARR, CHAR_ID_REI, 0);
     g_Game.party_size = 0;
     Party_JoinMember(CHAR_ID_RYU_ADULT);
     Party_JoinMember(CHAR_ID_GARR);
@@ -198,7 +198,7 @@ MATCH void func_801FE800(void) {
 }
 
 MATCH void func_801FE840(void) {
-    EMI_LoadPartyArchives(CHAR_ID_RYU_ADULT, CHAR_ID_NINA_ADULT, CHAR_ID_REI, 0U);
+    EMI_PartyLoadArchives(CHAR_ID_RYU_ADULT, CHAR_ID_NINA_ADULT, CHAR_ID_REI, 0U);
     func_801FE800();
 }
 

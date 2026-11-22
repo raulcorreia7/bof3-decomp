@@ -34,9 +34,9 @@ MATCH void Game_BattleLoadPartySprites(void) {
         }
         if ((*flags & 0x10) == 0) {
             if (g_Battle.scroll_dir & 0x2) {
-                EMI_LoadFamilyArchive(g_EmiLoadedCharacterIndex & EMI_LOADED_INDEX_MASK, EMI_FAMILY_BPLU);
+                EMI_ArchiveLoadFamily(g_EmiLoadedCharacterIndex & EMI_LOADED_INDEX_MASK, EMI_FAMILY_BPLU);
             } else {
-                EMI_LoadFamilyArchive(g_EmiLoadedCharacterIndex & EMI_LOADED_INDEX_MASK, EMI_FAMILY_BPLD);
+                EMI_ArchiveLoadFamily(g_EmiLoadedCharacterIndex & EMI_LOADED_INDEX_MASK, EMI_FAMILY_BPLD);
             }
         }
         state                    = &g_GameEntrySubstate;

@@ -180,7 +180,7 @@ u32 g_XACues[XA_STREAM_COUNT] = {
 
 u32 g_EmiEntryTypes[11] = {
     (u32)EMI_LoadToRam, (u32)EMI_LoadCompressed, (u32)EMI_LoadCompressed,  (u32)EMI_LoadToVram,
-    (u32)EMI_ReadToc,     (u32)EMI_ReadToc,      (u32)EMI_LoadVabHeader, (u32)EMI_LoadVabBody,
+    (u32)EMI_ReadToc,     (u32)EMI_ReadToc,      (u32)EMI_VabLoadHeader, (u32)EMI_VabLoadBody,
     (u32)EMI_LoadSE, (u32)EMI_LoadSequence, (u32)EMI_LoadSequence,
 };
 
