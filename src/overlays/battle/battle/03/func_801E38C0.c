@@ -12,7 +12,7 @@ MATCH void func_801E38C0(void) {
 
     offset                                     = TASK(PartyMember)->unk_07 * sizeof(PaletteFade);
     entry                                      = (PaletteFade*)((u8*)g_PaletteFades + offset);
-    sprite                                     = D_80146308;
+    sprite                                     = g_Battle.unk_24[4];
     entry->offset.b                            = sprite;
     entry->offset.g                            = sprite;
     *((u8*)&g_PaletteFades->offset.r + offset) = sprite;

@@ -66,7 +66,7 @@ MATCH void Battle_ApplyEnemyEvent(EnemyBattler* work_arg, BattleEventPacket* eve
             }
             break;
         case 7:
-            D_801463D7 = event->selector;
+            g_Battle.unk_EF[8] = event->selector;
             break;
     }
     work->choice_ai = event->choice_ai;

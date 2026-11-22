@@ -27,8 +27,8 @@ MATCH void func_801D3624(void) {
     D_8014637C[1] = 7;
     D_8014637C[2] = 0;
     Battle_SetSlotPending(g_Battle.active_battler);
-    mode       = g_Battle.action_id;
-    D_801463CD = mode;
+    mode               = g_Battle.action_id;
+    g_Battle.unk_EA[3] = mode;
     if ((u16)(mode - 0x24) < 2 || mode == 0x8C) {
         type                     = Battle_PickTarget();
         type_index               = type;
