@@ -15,16 +15,16 @@ NON_MATCHING void func_801F656C(void) {
     /* FAKE: retail reserves 8 bytes of frame that no statement uses. */
     FAKE_STACK_PADS(u8, 8);
 
-    MEM(u16, AREA_CODE_BASE)     = 20;
-    MEM(u16, AREA_CODE_BASE + 2) = 68;
     base                         = MEM_PTR(u8, AREA_CODE_BASE + 4);
     row                          = 13;
+    MEM(u16, AREA_CODE_BASE)     = 20;
+    MEM(u16, AREA_CODE_BASE + 2) = 68;
     do {
         col = 5;
-        y   = row;
         x   = 0x60000;
+        y   = row;
         do {
-            v     = func_801F66D0(col, y);
+            v     = func_801F66D0((s16)col, y);
             *base = v | (func_801F66D0(x >> 16, y) << 4);
             x += 0x20000;
             col += 2;
