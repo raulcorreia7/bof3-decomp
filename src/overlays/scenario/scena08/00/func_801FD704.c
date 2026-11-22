@@ -25,9 +25,9 @@ MATCH void func_801FD704(void) {
                 break;
             }
             g_AreaScrollTargetX  = TO_COORD(23);
-            g_PartyX             = TO_COORD(23);
+            g_PartyPos.x.fixed   = TO_COORD(23);
             g_AreaScrollTargetY  = TO_COORD(15);
-            g_PartyY             = TO_COORD(15);
+            g_PartyPos.y.fixed   = TO_COORD(15);
             g_ScenarioState.step = 2;
             g_AreaCameraSpeed    = g_RouteSpeedScale[5] * 8;
             break;

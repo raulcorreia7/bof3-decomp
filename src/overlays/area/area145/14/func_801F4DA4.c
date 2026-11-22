@@ -27,7 +27,7 @@ MATCH u8 func_801F4DA4(u32 frame) {
     if (limit < t) {
         my = limit;
     }
-    y = g_AreaFocusY + dy * (u16)my;
+    y = g_AreaFocus.y.fixed + dy * (u16)my;
     func_801F5190(0x3D8000, 0x638000, x, y);
     if (t < D_801F5CDD[off]) {
         return 1;

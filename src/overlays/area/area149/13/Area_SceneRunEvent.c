@@ -15,17 +15,17 @@ MATCH void Area_SceneRunEvent(void) {
 
                 g_AreaCameraX = 0x63FF;
                 scroll        = &g_AreaScrollTargetX;
-                party         = &g_PartyX;
+                party         = &g_PartyPos.x.fixed;
                 *scroll += TO_COORD(20);
                 g_AreaTileOriginX += 20;
                 *party += TO_COORD(20);
-                height         = Area_HeightSample(g_AreaScrollTargetX, g_AreaScrollTargetY);
-                g_ScrollHeight = height;
+                height                    = Area_HeightSample(g_AreaScrollTargetX, g_AreaScrollTargetY);
+                g_PartyPos.z.part.integer = height;
                 Area_ScrollAdvance(height);
                 Area_CellRefreshGrid();
                 focus = &g_PartyActors[0].pos.x.fixed;
                 *focus += TO_COORD(20);
-                D_80147A96 = Area_HeightSample(*focus, g_AreaFocusY);
+                g_AreaFocus.z.part.integer = Area_HeightSample(*focus, g_AreaFocus.y.fixed);
             }
             if (TIMER_EXPIRED(D_801448EE_U16)) {
                 *step = 2;
@@ -45,17 +45,17 @@ MATCH void Area_SceneRunEvent(void) {
 
                 g_AreaCameraX = 0x77FF;
                 scroll        = &g_AreaScrollTargetX;
-                party         = &g_PartyX;
+                party         = &g_PartyPos.x.fixed;
                 *scroll -= TO_COORD(20);
                 g_AreaTileOriginX -= 20;
                 *party -= TO_COORD(20);
-                height         = Area_HeightSample(g_AreaScrollTargetX, g_AreaScrollTargetY);
-                g_ScrollHeight = height;
+                height                    = Area_HeightSample(g_AreaScrollTargetX, g_AreaScrollTargetY);
+                g_PartyPos.z.part.integer = height;
                 Area_ScrollAdvance(height);
                 Area_CellRefreshGrid();
                 focus = &g_PartyActors[0].pos.x.fixed;
                 *focus -= TO_COORD(20);
-                D_80147A96 = Area_HeightSample(*focus, g_AreaFocusY);
+                g_AreaFocus.z.part.integer = Area_HeightSample(*focus, g_AreaFocus.y.fixed);
             }
             if (TIMER_EXPIRED(D_801448EE_U16)) {
                 *step = 12;

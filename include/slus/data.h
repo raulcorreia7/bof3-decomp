@@ -102,7 +102,7 @@ extern u8                  D_8014688E[];
 extern u8                  D_801468BC[];
 extern u8                  D_801468C0[];
 extern s16                 D_80146916;
-/* The area's focus point, 16.16; g_AreaFocusY is y and the integer half of z is D_80147A96. */
+/* The area's focus point, 16.16. */
 /* D_80147A8C */
 extern Coord3              g_AreaFocus;
 extern s32                 D_80147A8C;

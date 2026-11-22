@@ -125,8 +125,6 @@ extern s16 D_801492DA;
 
 extern s16 D_801492DC;
 
-extern s32 g_AreaFocusY;
-
 extern u32      D_801F6C00;
 /* D_801FA180 */
 extern Callback D_801FA198[];

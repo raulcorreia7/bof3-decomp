@@ -9,5 +9,5 @@ MATCH void func_801F6168(s32 value) {
         g_AreaCameraSpeed = seed;
     }
     g_AreaScrollTargetX = g_PartyActors[0].pos.x.fixed;
-    g_AreaScrollTargetY = g_AreaFocusY;
+    g_AreaScrollTargetY = g_AreaFocus.y.fixed;
 }

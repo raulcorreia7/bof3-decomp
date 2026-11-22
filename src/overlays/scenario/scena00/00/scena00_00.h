@@ -13,8 +13,6 @@
 #define SCN_TRI_SHADE_V1   0x6E
 #define SCN_TRI_SHADE_V2   0x64
 
-#define g_PartyY           ((u32*)&g_PartyY)
-
 /* g_ScriptVars[2] in func_801FA7D8: retail loads every access through its own `lui $r, %hi(D_80146866)`; the array
  * member shares one %hi across the accesses and the function grows by 12 bytes (an absolute address and a local
  * pointer also move bytes). */
@@ -94,16 +92,6 @@ ASSERT_OFFSET(SceneEffect, color, 0x5D);
 ASSERT_OFFSET(SceneEffect, projected, 0x60);
 ASSERT_OFFSET(SceneEffect, angle, 0x64);
 
-/* Camera scroll word at 0x80143F84; the halfword at +2 is read signed. */
-typedef union AreaScroll {
-    u32 raw;
-    s16 half[2];
-} AreaScroll;
-
-ASSERT_OFFSET(AreaScroll, raw, 0x00);
-ASSERT_OFFSET(AreaScroll, half, 0x00);
-ASSERT_SIZE(AreaScroll, 4);
-
 /* The payload prologue at 0x801F6C00: the type-0 EMI loader compares the
  * first word with the archive TOC's cached first word
  * (@source: wiki:formats/emi); the second word holds the line colour:
@@ -170,7 +158,6 @@ ASSERT_SIZE(SceneSampleEffect, 0x10E0);
 /* One row of the per-slot effect arrays. */
 
 extern s16* volatile D_1F800010;
-extern AreaScroll        D_80143F84;
 /* D_801448FC */
 /* D_801448FF */
 /* D_80144900 */
@@ -180,9 +167,6 @@ extern s32               D_801468A0;
 extern s32               D_801468A4;
 extern s32               D_801469EC;
 extern s32               D_801469F0;
-/* One s32; the array form is kept because the scalar form changes the bytes of 8.c. */
-extern s32               g_AreaFocusY[];
-extern u16               D_80147A96;
 extern u32               D_80147B28;
 extern s32               D_80147BEC[];
 extern s32               D_80147BF0[];

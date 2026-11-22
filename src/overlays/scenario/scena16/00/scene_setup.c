@@ -485,7 +485,7 @@ MATCH void func_801F7790(void) {
         mode               = 0x6200u;
         SCENA16_D_80149314 = mode;
         pos                = &SCENA16_D_8014930C;
-        other              = &g_AreaFocusY;
+        other              = &g_AreaFocus.y.fixed;
         plane              = &SCENA16_D_80143F80;
         SCENA16_D_80149322 = (SCENA16_D_80149322 - 0x1Eu);
         *pos += -0x1E0000;
