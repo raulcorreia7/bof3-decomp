@@ -8,7 +8,7 @@ with no fact keeps its address name (`func_<ADDR>`, `D_<ADDR>`, `unk_<OFF>`).
 
 | Thing                                    | Form                        | Example                                  |
 | ---------------------------------------- | --------------------------- | ---------------------------------------- |
-| system function                          | `TAG_PascalName`            | `SND_PlaySE`, `EMI_Init`                 |
+| system function                          | `TAG_PascalName`            | `SND_SEPlay`, `EMI_Init`                 |
 | game function                            | `Tag_PascalName`            | `Battle_ApplyDamage`, `Item_Add`         |
 | global                                   | `g_` + tag word + name      | `g_BattleActors`, `g_SndVolume`          |
 | file static                              | `s_` + tag word + name      | `s_BattleDamageScale`                    |
@@ -495,9 +495,9 @@ theirs (`CdlPause`, `SpuSetKey`).
 
 Acronyms follow the SDK library their value belongs to, and are capitals otherwise. The drive is
 `Cd` (libcd: `SYS_ReadCd`, `g_CdSteps`), the sound library is `Snd` in a type (`SndBank`,
-libsnd's `SndVolume`), and `XA`, `HP`, `AP`, `BGM` and `SE` are capitals (`SND_IsXAIdle`,
+libsnd's `SndVolume`), and `XA`, `HP`, `AP`, `BGM` and `SE` are capitals (`SND_XAIsIdle`,
 `SND_XAStateIdle`). `SE` is the disc's word for a sound effect, as `BGM` is for music
-(`BIN/BATTLE/BATL_SE`, `COMN_SE`): `SND_PlaySE(u16 se_id)`.
+(`BIN/BATTLE/BATL_SE`, `COMN_SE`): `SND_SEPlay(u16 se_id)`.
 
 ## Renames
 
