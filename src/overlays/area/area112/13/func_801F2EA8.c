@@ -33,7 +33,7 @@ NON_MATCHING void func_801F2EA8(void) {
         for (y = D_801F4218[COORD_INT(TASK(Actor)->pos.x)].y0; y < D_801F4218[COORD_INT(TASK(Actor)->pos.x)].y_end; y++) {
             height                                                                                      = Area_HeightSample(x << 16, y << 16);
             value                                                                                       = (-(COORD_INT(TASK(Actor)->pos.z) * 2) - height) / 32;
-            *(u8*)(g_AreaMapBundle.height_offset * 4 + x + y * g_AreaMapBundle.width + MAP_BUNDLE_BASE) = value;
+            *(u8*)(g_AreaMapHeightOffset * 4 + x + y * g_AreaMapBundle.width + MAP_BUNDLE_BASE) = value;
         }
     }
 }
