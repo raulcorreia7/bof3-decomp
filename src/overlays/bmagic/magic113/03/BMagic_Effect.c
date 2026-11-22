@@ -24,8 +24,8 @@ MATCH void func_801EECE0(void) {
     } else {
         i = 0;
         WorldPos_Copy(&g_Task->pos, &g_Battle.selected_actor->pos);
-        dst = MEM_PTR(u16, AREA_PALETTE_UPLOAD_ROW(AREA_PALETTE_BATL_OVR_ROW));
-        src = MEM_PTR(u16, AREA_PALETTE_ARENA_ROW(AREA_PALETTE_BATL_OVR_ROW));
+        dst = g_AreaPaletteCopy->rows[AREA_PALETTE_BATL_OVR_ROW].colors;
+        src = g_AreaPaletteArena->rows[AREA_PALETTE_BATL_OVR_ROW].colors;
         for (; i < 16; i++) {
             dst[i] = src[i] | PSX_COLOR_STP_BIT;
         }

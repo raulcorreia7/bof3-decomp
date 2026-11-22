@@ -19,7 +19,7 @@ MATCH void func_8009F0A4(void) {
     flag_value = *flags;
     /* FAKE: non-volatile alias of g_Battle.active_battler; the volatile read emits an andi
      * after lbu that retail does not carry. */
-    slot       = (*(u8*)&g_Battle.active_battler);
+    slot       = g_Battle.active_battler;
     *flags     = flag_value | BATTLE_STATE_DAMAGE_APPLIED;
     if (slot < 3u) {
         action = g_Characters[g_CharSlot[g_Game.members[slot].chr.character_id]].base.power;

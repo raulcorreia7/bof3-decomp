@@ -17,7 +17,7 @@ MATCH void Battle_SelectAttackEnemyTarget(void) {
     trigger = INPUT_REPEATED(held, INPUT_DIRECTIONAL);
     if ((trigger & (PADLup | PADLdown)) != 0) {
         g_BattleActorTurn->command.target = Battle_TargetNext(0);
-        *(u8*)&g_Battle.ui_mode += 1u;
+        g_Battle.ui_mode += 1u;
         SND_SEPlay(EMI_SE_ID(SND_BANK_COMMON, 1));
         return;
     }

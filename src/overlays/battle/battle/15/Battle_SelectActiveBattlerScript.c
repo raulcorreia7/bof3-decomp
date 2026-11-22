@@ -23,7 +23,7 @@ MATCH void Battle_SelectActiveBattlerScript(s32 step, s32 payload) {
 
     work  = (u8*)g_BattleEffectBattler;
     saved = TASK_BYTES;
-    type  = *(u8*)&g_Battle.active_battler;
+    type  = g_Battle.active_battler;
     TASK_SET(work);
     if (type < 3u) {
         Actor_SelectScript_keep_a1((step + ((PartyMember*)work)->facing) & BYTE_MASK, payload);

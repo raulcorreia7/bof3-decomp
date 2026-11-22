@@ -30,8 +30,8 @@ MATCH void func_801EEC5C(void) {
         g_Task->param.unk_0B += 1;
     }
     i   = 1;
-    src = MEM_PTR(u16, AREA_PALETTE_ARENA_ROW(AREA_PALETTE_BATL_OVR_ROW));
-    dst = MEM_PTR(u16, AREA_PALETTE_UPLOAD_ROW(AREA_PALETTE_BATL_OVR_ROW));
+    src = g_AreaPaletteArena->rows[AREA_PALETTE_BATL_OVR_ROW].colors;
+    dst = g_AreaPaletteCopy->rows[AREA_PALETTE_BATL_OVR_ROW].colors;
     for (; i < 16; i++) {
         dst[i + AREA_PALETTE_UNIT / sizeof(u16)] = src[i + AREA_PALETTE_UNIT / sizeof(u16)] | PSX_COLOR_STP_BIT;
     }

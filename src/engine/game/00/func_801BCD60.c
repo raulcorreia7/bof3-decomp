@@ -88,7 +88,7 @@ NON_MATCHING void func_801BCD60(s32 target_x, s32 target_y) {
             tmp3                     = val2 + (*(g_FacingStepY + tmp0) * 2 * val6);
             FIELD(s32, tmp16, 0x38u) = tmp3;
             val0                     = Area_HeightReadStep(FIELD(s32, tmp16, 0x34u), tmp3, (u8)stack_10);
-            if (Game_TestPlacement(FIELD(s32, g_Task, 0x34u), FIELD(s32, g_Task, 0x38u), FIELD(u8, g_Task, 0x70u), val0) & 0xFF) {
+            if (Game_TestPlacement(g_Task->pos.x.fixed, g_Task->pos.y.fixed, g_Task->voice_flags.scene_flag, val0) & 0xFF) {
                 val0 = 1;
                 tmp1 = val7 - 1;
                 val5 = g_Task->pos.x.fixed;

@@ -12,7 +12,7 @@ MATCH void Battle_PlayActiveBattlerSE(s32 effect_0, s32 effect_1) {
     s32 test;
     u16 other;
 
-    type  = *(u8*)&g_Battle.active_battler;
+    type  = g_Battle.active_battler;
     sel   = effect_0;
     other = effect_1;
     if (type < 3u) {

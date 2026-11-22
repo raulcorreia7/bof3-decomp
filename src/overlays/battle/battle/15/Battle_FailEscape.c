@@ -29,6 +29,6 @@ MATCH void Battle_FailEscape(void) {
         g_BattleSubStep = 0;
         g_BattleUIStep  = 0;
         g_BattleUIState = 0;
-        LOHU(*(volatile u16*)&g_Battle.flags) |= 8;
+        LOHU(g_Battle.flags) |= 8;
     }
 }
