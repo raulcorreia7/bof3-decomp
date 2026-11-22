@@ -15,7 +15,7 @@ segments:
       - [0x2AC, .rodata, func_801F9F0C]
       - [0x308, .rodata, D_801F6F08]
       - [0x30C, .rodata, func_801FA7DC]
-      - [0x3BC, .rodata, D_801F6FBC]
+      - [0x3BC, .rodata, func_801FAE04]
       - [0x4B4, .rodata, D_801F70B4]
       - [0x574, c, 574]
       - [0x1378, c, func_801F7F78]
