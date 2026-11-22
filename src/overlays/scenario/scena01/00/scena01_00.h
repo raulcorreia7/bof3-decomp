@@ -9,7 +9,11 @@
 #include "area/spad.h"
 #include "area/effects.h"
 
-extern u8 D_80144E90[];
+extern u8  D_80144E90[];
+extern u8  D_80145004[];
+extern u8  D_80145FA8;
+extern u8  D_801460E8;
+extern u16 D_80146258;
 
 extern u8 D_80146871;
 
