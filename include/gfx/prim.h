@@ -21,6 +21,26 @@ typedef struct UvRect {
 
 ASSERT_SIZE(UvRect, 0x4);
 
+/* A screen rectangle: the corner and the size. The effect and scene drawers
+ * read the corner unsigned; the scena10 panel reads it signed. */
+typedef union RectU16 {
+    struct {
+        u16 x;
+        u16 y;
+        u16 w;
+        u16 h;
+    } box;
+
+    struct {
+        s16 x;
+        s16 y;
+        u16 w;
+        u16 h;
+    } signed_box;
+} RectU16;
+
+ASSERT_SIZE(RectU16, 0x08);
+
 /* The screen, in pixels. */
 #define SCREEN_WIDTH                320
 #define SCREEN_HEIGHT               240

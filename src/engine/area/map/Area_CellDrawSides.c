@@ -1,27 +1,20 @@
 #include "engine/slus/slus.h"
 
-/* One map cell: four height bytes, read as a word, as its upper half or by byte. */
-typedef union MapCellHeights {
-    s32 word;
-    u16 halves[2];
-    u8  bytes[4];
-} MapCellHeights;
-
 /* The signed height of corner 0 to 3 of a map cell word: one byte each, corner 0 lowest. */
 #define MAP_CELL_CORNER_HEIGHT(word, corner) (((word) << (3 - (corner)) * BYTE_WIDTH) >> 3 * BYTE_WIDTH)
 
 /* Draws the wall quads between a map cell and its left or upper neighbour; the record's byte 3 picks one side or both. */
 MATCH void Area_CellDrawSides(u8* record, s32 cell_x, s32 cell_y) {
-    SVECTOR         v[4];
-    s32             p;
-    s32             flag;
-    MapCellHeights* cell;
-    MapCellHeights* other;
-    MapCellHeights* row;
-    POLY_FT4*       prim;
-    s32             count;
-    s32             side;
-    s32             type;
+    SVECTOR          v[4];
+    s32              p;
+    s32              flag;
+    AreaCellCorners* cell;
+    AreaCellCorners* other;
+    AreaCellCorners* row;
+    POLY_FT4*        prim;
+    s32              count;
+    s32              side;
+    s32              type;
 
     type = (u32)(record[3] - 63) >> 1;
     if (type < 4) {
@@ -31,8 +24,8 @@ MATCH void Area_CellDrawSides(u8* record, s32 cell_x, s32 cell_y) {
         count = 2;
         side  = (type - 4) * 2;
     }
-    row     = (MapCellHeights*)(MAP_BUNDLE_BASE + 0x30) + cell_y * g_AreaMapBundle.width;
-    cell    = (MapCellHeights*)(cell_x * 4 + (u32)row);
+    row     = (AreaCellCorners*)(MAP_BUNDLE_BASE + 0x30) + cell_y * g_AreaMapBundle.width;
+    cell    = (AreaCellCorners*)(cell_x * 4 + (u32)row);
     cell_x  = ((cell_x - 128) << 7) - 64;
     v[0].vx = v[2].vx = cell_x;
     cell_y            = ((cell_y - 128) << 7) - 64;
@@ -49,13 +42,13 @@ MATCH void Area_CellDrawSides(u8* record, s32 cell_x, s32 cell_y) {
                 v[3].vz = -(MAP_CELL_CORNER_HEIGHT(cell[-1].word, 3) << 4);
             } else {
                 v[2].vz = -(MAP_CELL_CORNER_HEIGHT(cell[0].word, 0) << 4);
-                v[3].vz = -((s8)cell->halves[1] << 4);
+                v[3].vz = -((s8)cell->corner_pair[1] << 4);
             }
         } else {
             other = cell - g_AreaMapBundle.width;
             if ((MAP_CELL_CORNER_HEIGHT(cell[0].word, 0) < MAP_CELL_CORNER_HEIGHT(other[0].word, 2)) || (MAP_CELL_CORNER_HEIGHT(other[0].word, 3) > MAP_CELL_CORNER_HEIGHT(cell[0].word, 1))) {
                 v[2].vz = -(MAP_CELL_CORNER_HEIGHT(other[0].word, 2) << 4);
-                v[3].vz = -((s8)other->bytes[3] << 4);
+                v[3].vz = -(other->corner_height[3] << 4);
             } else {
                 v[2].vz = -(MAP_CELL_CORNER_HEIGHT(cell[0].word, 0) << 4);
                 v[3].vz = -(MAP_CELL_CORNER_HEIGHT(cell[0].word, 1) << 4);

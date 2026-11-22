@@ -28,7 +28,8 @@ typedef struct Magic126Mote {
     u8           unk_04; /* +0x04 spawn index; the angle is its low four bits */
     u8           unk_05;
     u8           unk_06;
-    u8           pad_07[5];
+    u8           pad_07;
+    s32          unk_08;
     u16          unk_0C;
     u16          unk_0E;
     s32          unk_10;
@@ -38,6 +39,7 @@ typedef struct Magic126Mote {
 } Magic126Mote;
 
 ASSERT_OFFSET(Magic126Mote, unk_04, 0x04);
+ASSERT_OFFSET(Magic126Mote, unk_08, 0x08);
 ASSERT_OFFSET(Magic126Mote, unk_0C, 0x0C);
 ASSERT_OFFSET(Magic126Mote, unk_0E, 0x0E);
 ASSERT_OFFSET(Magic126Mote, unk_10, 0x10);
