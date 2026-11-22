@@ -1,7 +1,7 @@
 #include "area140_13.h"
 
 MATCH void func_801F476C(void) {
-    u8* work;
+    Actor *work;
 
     work = TASK(u8);
     SYS_ClearFlag(g_SceneEventFlags, work[0xB]);

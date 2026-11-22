@@ -1,7 +1,7 @@
 #include "area119_13.h"
 
 MATCH void func_801F2D6C(void) {
-    u8* row;
+    Actor *row;
     u8* work;
     s32 i;
 

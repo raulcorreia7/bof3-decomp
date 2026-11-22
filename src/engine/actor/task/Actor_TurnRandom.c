@@ -2,7 +2,7 @@
 
 /* func_801A2C10 */
 /* Turns the current actor to a random odd facing. */
-MATCH u8 Actor_TurnRandom(void* record) {
+MATCH u8 Actor_TurnRandom(Actor *record) {
     u8  value;
     s16 next;
 

@@ -22,7 +22,7 @@ MATCH void func_801A6C98(u8* record) {
     SpawnScript* data;
     u8*          src;
     Actor*       work;
-    void*        shared;
+    Actor *shared;
     u32          x;
     u32          y;
     s32          off;

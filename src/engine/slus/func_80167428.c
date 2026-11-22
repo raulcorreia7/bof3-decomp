@@ -18,9 +18,9 @@ NON_MATCHING void func_80167428(void) {
     s8           val4;
     s8           val5;
     void*        tmp8;
-    void*        tmp9;
-    void*        tmp10;
-    void*        tmp11;
+    Actor *tmp9;
+    Actor *tmp10;
+    Actor *tmp11;
     void*        tmp12;
     PartyMember* player;
     Actor*       actor;

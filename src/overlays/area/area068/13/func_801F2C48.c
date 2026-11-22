@@ -2,7 +2,7 @@
 
 MATCH void func_801F2C48(void) {
     void** scratchpad;
-    void*  work;
+    Actor *work;
 
     scratchpad            = SP_PTR(void*, 0u);
     work                  = scratchpad[0x44u / sizeof(void*)];

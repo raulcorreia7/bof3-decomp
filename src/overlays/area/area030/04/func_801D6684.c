@@ -20,12 +20,12 @@ NON_MATCHING void func_801D6684(void) {
     u8    cell;
     u8    timer;
     void* spad5;
-    void* spad6;
-    void* spad1;
+    Actor *spad6;
+    Actor *spad1;
     void* spad0;
     void* spad2;
     void* spad3;
-    void* spad4;
+    Actor *spad4;
 
     spad0 = g_Task;
     if (FIELD(u8, spad0, 0xAu) != 0) {

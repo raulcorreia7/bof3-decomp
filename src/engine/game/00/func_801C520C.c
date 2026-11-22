@@ -1,7 +1,7 @@
 #include "game_00.h"
 
 MATCH s32 func_801C520C(void) {
-    s32* route;
+    Actor *route;
     s32  index;
     s32  step;
     s32  sumX;

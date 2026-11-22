@@ -1,6 +1,6 @@
 #include "game_00.h"
 
-MATCH void func_801A271C(void* record) {
+MATCH void func_801A271C(Actor *record) {
     u8 timer;
 
     timer = FIELD(u8, record, 0x75u);

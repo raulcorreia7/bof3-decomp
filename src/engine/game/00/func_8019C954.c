@@ -19,7 +19,7 @@ MATCH void func_8019C954(void) {
     g_Task->draw_layer   = record->draw_layer;
     g_Task->unk_48       = 0;
     {
-        u8* work;
+        Actor *work;
         u8* next;
 
         work                    = TASK(u8);

@@ -1,7 +1,7 @@
 #include "area143_13.h"
 
 MATCH void func_801F2C48(void) {
-    u8* work;
+    Actor *work;
 
     work                   = TASK(u8);
     FIELD(s32, work, 0x34) = g_Game.members[0].pos.x.fixed;

@@ -94,7 +94,7 @@ MATCH s32 func_801F2C04(void) {
 }
 
 MATCH void func_801F2C48(void) {
-    u8* work;
+    Actor *work;
 
     func_801F2F5C();
 

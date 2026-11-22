@@ -18,12 +18,12 @@ NON_MATCHING void func_801B21E8(void) {
     s32   val8;
     s32   val9;
     s32   val10;
-    u32*  tmp4;
+    Actor *tmp4;
     u32*  tmp5;
     u32*  tmp6;
-    u32*  tmp7;
-    u32*  tmp8;
-    u32*  tmp9;
+    Actor *tmp7;
+    Actor *tmp8;
+    Actor *tmp9;
     u8*   val11;
     u8*   val12;
     u8*   val13;

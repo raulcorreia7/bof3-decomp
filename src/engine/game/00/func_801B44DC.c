@@ -34,16 +34,16 @@ NON_MATCHING u8 func_801B44DC(u8 wanted_code) {
     u8    tmp22;
     u8    val7;
     void* tmp23;
-    void* tmp24;
+    Actor *tmp24;
     void* tmp25;
     void* tmp26;
     void* tmp27;
-    void* tmp28;
+    Actor *tmp28;
     void* tmp29;
     void* tmp30;
     void* tmp31;
     void* tmp32;
-    void* tmp33;
+    Actor *tmp33;
     void* tmp34;
 
     tmp33 = g_Task;
