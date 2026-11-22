@@ -104,16 +104,17 @@ MATCH void func_801FD704(void) {
             break;
         case 7: {
             u8* state = &g_GameStateIndex;
+            u8* slots = (u8*)g_CharSlot;
 
             if (*state == GAME_REQUEST_MESSAGE) {
                 break;
             }
             func_801FDF84();
             *state = 6;
-            g_Characters[((u8*)g_CharSlot)[CHAR_ID_RYU_ADULT]].party_flags |= 0x02;
-            g_Characters[((u8*)g_CharSlot)[CHAR_ID_REI]].party_flags |= 0x02;
-            g_Characters[((u8*)g_CharSlot)[CHAR_ID_REI]].hp = 0;
-            g_Characters[((u8*)g_CharSlot)[CHAR_ID_REI]].status |= 0x6000;
+            g_Characters[slots[CHAR_ID_RYU_ADULT]].party_flags |= 0x02;
+            g_Characters[slots[CHAR_ID_REI]].party_flags |= 0x02;
+            g_Characters[slots[CHAR_ID_REI]].hp = 0;
+            g_Characters[slots[CHAR_ID_REI]].status |= 0x6000;
             g_ScenarioState.step_05 = 8;
             break;
         }
@@ -203,13 +204,14 @@ MATCH void func_801FD704(void) {
             break;
         case 19: {
             u8* state = &g_GameStateIndex;
+            u8* slots = (u8*)g_CharSlot;
 
             if (*state == GAME_REQUEST_MESSAGE) {
                 break;
             }
             *state = 6;
-            g_Characters[((u8*)g_CharSlot)[CHAR_ID_RYU_ADULT]].party_flags |= 0x02;
-            g_Characters[((u8*)g_CharSlot)[CHAR_ID_REI]].party_flags &= ~0x02;
+            g_Characters[slots[CHAR_ID_RYU_ADULT]].party_flags |= 0x02;
+            g_Characters[slots[CHAR_ID_REI]].party_flags &= ~0x02;
             g_ScenarioState.step_05 = 20;
             break;
         }
