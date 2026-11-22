@@ -209,7 +209,7 @@ MATCH void func_801EF910(void) {
 MATCH void func_801EF9E8(void) {
     u8 counter;
 
-    Actor_StepAnimOnce();
+    Script_AnimStepOnce();
     counter        = g_Task->unk_09 - 1;
     g_Task->unk_09 = counter;
     if (!(counter & BYTE_MASK)) {
@@ -275,7 +275,7 @@ MATCH void func_801EFD84(void) {
             SND_QueueSelectionSE(0x101);
         }
     }
-    if (Actor_StepAnimOnce() & BYTE_MASK) {
+    if (Script_AnimStepOnce() & BYTE_MASK) {
         g_BattleEffectBattler->param.unk_0B -= 1;
         Effect_Reset();
         return;

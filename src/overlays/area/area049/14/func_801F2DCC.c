@@ -68,7 +68,7 @@ NON_MATCHING void func_801F2DCC(void) {
             }
             func_801B0DFC();
             ((PartyMember*)g_Task)->unk_09--;
-            Actor_StepAnimLoop();
+            Script_AnimStepLoop();
             g_GameFlags |= 0x2000;
         next_record:
             i++;

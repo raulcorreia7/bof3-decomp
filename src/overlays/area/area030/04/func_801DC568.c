@@ -4,5 +4,5 @@
 
 MATCH void func_801DC568(void) {
     func_801DDF7C(0x50);
-    Actor_StepAnimLoop();
+    Script_AnimStepLoop();
 }

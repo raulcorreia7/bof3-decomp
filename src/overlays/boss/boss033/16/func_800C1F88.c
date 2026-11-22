@@ -23,5 +23,5 @@ MATCH void func_800C1F88(void) {
         Script_Select(4);
         ((PartyMember*)g_Task)->header.step++;
     }
-    Actor_StepAnimOnce();
+    Script_AnimStepOnce();
 }

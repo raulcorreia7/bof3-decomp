@@ -11,17 +11,17 @@ MATCH void PlChar_AdvancePaletteScript(void) {
     state = g_Task->param.unk_0B;
     if (state != 0) {
         if (state == 2) {
-            if (Actor_StepAnimOnce() & 0xFF) {
+            if (Script_AnimStepOnce() & 0xFF) {
                 Script_Select(g_Task->direction);
                 g_Task->param.unk_0B = 3;
             }
         } else {
-            Actor_StepAnimLoop();
+            Script_AnimStepLoop();
         }
         if (g_GameStateIndex == GAME_REQUEST_IDLE) {
             done = 1;
         }
-    } else if (Actor_StepAnimOnce() & 0xFF) {
+    } else if (Script_AnimStepOnce() & 0xFF) {
         done = 1;
     }
     if (done & 0xFF) {

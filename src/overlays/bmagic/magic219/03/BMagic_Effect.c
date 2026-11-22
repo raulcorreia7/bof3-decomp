@@ -156,7 +156,7 @@ MATCH void func_801EF3CC(void) {
     count = g_Task->unk_09;
     if (count != 0) {
         g_Task->unk_09 = count - 1;
-        Actor_StepAnimLoop();
+        Script_AnimStepLoop();
     }
     x              = g_Task->unk_0C;
     y              = g_Task->unk_10;
@@ -201,7 +201,7 @@ MATCH void func_801EF5DC(void) {
     u8 timer_next;
     u8 count;
 
-    Actor_StepAnimOnce();
+    Script_AnimStepOnce();
     timer_next = g_Task->timer;
     if (timer_next != 0) {
         g_Task->timer = timer_next - 1;

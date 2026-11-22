@@ -9,7 +9,7 @@ MATCH void func_801B6F1C(void) {
     count = g_Task->timer;
     if (count != 0) {
         g_Task->timer = (count - 1);
-        Actor_UpdateMovement();
+        Actor_MovementUpdate();
         return;
     }
     wait = g_Game.current->u.field.wait;
@@ -26,5 +26,5 @@ MATCH void func_801B6F1C(void) {
     }
     count         = g_Task->timer;
     g_Task->timer = (count - 1);
-    Actor_UpdateMovement();
+    Actor_MovementUpdate();
 }

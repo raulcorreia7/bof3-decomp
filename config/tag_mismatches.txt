@@ -1,8 +1,4 @@
 # Functions whose prefix is not a tag of their folder (file, name). check_names.py only lets this shrink.
-src/engine/actor/script/Actor_StageAnimStep.c	Actor_StageAnimStep
-src/engine/actor/script/Actor_StepAnimLoop.c	Actor_StepAnimLoop
-src/engine/actor/script/Actor_StepAnimOnce.c	Actor_StepAnimOnce
-src/engine/actor/script/Actor_StepAnimReverse.c	Actor_StepAnimReverse
 src/engine/game/00/func_8019A210.c	WorldMap_StepWalk
 src/engine/game/00/func_8019A258.c	WorldMap_StepEntry
 src/engine/game/00/func_8019A2A0.c	WorldMap_StepFlock

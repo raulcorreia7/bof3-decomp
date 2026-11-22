@@ -12,7 +12,7 @@ typedef enum ActorScriptSpawn {
     ACTOR_SCRIPT_SPAWN_WAIT_ALIVE            = 0x9F, /* hold the cursor while the spawned actor is in use */
 } ActorScriptSpawn;
 
-MATCH s32 Script_RunSpawnOps(ScriptState* state, u8* table, s32 value) {
+MATCH s32 Script_OpsRunSpawn(ScriptState* state, u8* table, s32 value) {
     switch (table[state->cursor]) {
         case ACTOR_SCRIPT_SPAWN_CLAIM_AT_SCREEN_FIRST:
         case 0x91:

@@ -681,7 +681,7 @@ MATCH void func_801F0D6C(void) {
 }
 
 MATCH void func_801F0E4C(void) {
-    if (Actor_StepAnimOnce() & BYTE_MASK) {
+    if (Script_AnimStepOnce() & BYTE_MASK) {
         Effect_Reset();
         return;
     }

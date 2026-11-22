@@ -13,5 +13,5 @@ MATCH u8 Battle_IsEnemyBlocked(void) {
         return 1u;
     }
 
-    return Actor_StepAnimLoop();
+    return Script_AnimStepLoop();
 }

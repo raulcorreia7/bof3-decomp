@@ -16,7 +16,7 @@ NON_MATCHING void func_801F45A8(void) {
         actor = &g_Actors[D_801F58D0];
         TASK_SET(actor);
         actor->unk_4A = 1;
-        Actor_StepAnimLoop();
+        Script_AnimStepLoop();
     }
 }
 #else

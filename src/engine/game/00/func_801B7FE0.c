@@ -17,5 +17,5 @@ MATCH void func_801B7FE0(void) {
         Script_Request((g_Task->direction == FACING_RIGHT) ? 7 : 1);
         g_Task->unk_04 = 9;
     }
-    Actor_StepAnimLoop();
+    Script_AnimStepLoop();
 }

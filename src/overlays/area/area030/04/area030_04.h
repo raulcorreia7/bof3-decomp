@@ -791,7 +791,7 @@ static inline void WorldAdvanceFishingSubState(u8 subState) {
         func_801DDE94(subState);
         FISHING_STATE->sub_index += 1;
     }
-    Actor_StepAnimLoop();
+    Script_AnimStepLoop();
 }
 
 /* Draw the area030 cue row and its cell; the cell drawer is the overlay's

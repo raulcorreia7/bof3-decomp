@@ -94,7 +94,7 @@ MATCH void func_801EF118(void) {
     VECTOR        pos;
     u16*          flags;
 
-    Actor_StepAnimLoop();
+    Script_AnimStepLoop();
     selected = &g_Battle.selected_actor;
     setVector(&pos, ((*selected)->pos.x.fixed >> 9) - AREA_CELL_ORIGIN, ((*selected)->pos.y.fixed >> 9) - AREA_CELL_ORIGIN, (COORD_INT((*selected)->pos.z) + 0xC0) >> 1);
     Battle_StepRangeToward(pos, 0x30);
@@ -123,7 +123,7 @@ MATCH void func_801EF2B0(void) {
     PartyMember* task;
 
     if (g_FrameCount & 0x1) {
-        Actor_StepAnimLoop();
+        Script_AnimStepLoop();
     }
     g_Task->unk_5D -= 6;
     g_Task->unk_5E -= 6;
@@ -183,7 +183,7 @@ MATCH void func_801EF4A4(void) {
 MATCH void func_801EF608(void) {
     s32 y;
 
-    Actor_StepAnimLoop();
+    Script_AnimStepLoop();
     g_Task->pos.x.fixed        = g_BattleEffects[g_Task->param.unk_0B].pos.x.fixed;
     y                          = g_BattleEffects[g_Task->param.unk_0B].pos.y.fixed;
     g_Task->pos.y.fixed        = y;
@@ -200,7 +200,7 @@ MATCH void func_801EF724(void) {
     PartyMember* work;
 
     if (g_FrameCount & 1) {
-        Actor_StepAnimLoop();
+        Script_AnimStepLoop();
     }
     g_Task->unk_5D -= 3;
     g_Task->unk_5E -= 3;

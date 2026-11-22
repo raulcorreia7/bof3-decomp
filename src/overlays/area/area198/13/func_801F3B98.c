@@ -5,7 +5,7 @@ MATCH void func_801F3B98(void) {
 
     row                  = &g_Actors[g_Task->option_flags];
     g_Task->header.flags = row->header.flags;
-    Actor_StepAnimLoop();
+    Script_AnimStepLoop();
     Area_AddActor();
     g_Task->tint.bytes.flags = row->tint.bytes.flags;
     g_Task->tint.bytes.rgb.r = row->tint.bytes.rgb.r;

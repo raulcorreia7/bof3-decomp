@@ -4,7 +4,7 @@
  * position (+0x58); at position 0 it wraps to the end and returns 1. Jump steps are ignored.
  */
 /* func_8014DA24 */
-MATCH u8 Actor_StepAnimReverse(void) {
+MATCH u8 Script_AnimStepReverse(void) {
     u8  result;
     u8  count;
     u8  selected;
