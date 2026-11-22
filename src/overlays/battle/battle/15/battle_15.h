@@ -429,11 +429,11 @@ extern s8                                D_800B6F65;
 extern s8                                D_800B6F66;
 extern s8                                D_800B6F67;
 extern s8                                D_800B6F68;
-extern s8                                D_800B6F6A;
-extern s8                                D_800B6F6D;
 extern s8                                D_800B6F69;
+extern s8                                D_800B6F6A;
 extern s8                                D_800B6F6B;
 extern s8                                D_800B6F6C;
+extern s8                                D_800B6F6D;
 extern u8                                D_800B7070[][6]; /* Flag bytes read back by the panel: one u8 per table entry. */
 extern u8                                D_800B7088[][2]; /* Flag bytes cleared at a two-byte stride. */
 extern u8                                D_800B70B8[];
