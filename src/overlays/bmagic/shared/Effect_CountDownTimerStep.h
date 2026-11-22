@@ -2,15 +2,15 @@
 /* Effect_CountDownTimerStep (magic088, magic096, magic110, magic113, magic130), Effect_CountDownTimerStep2
    (magic130) */
 /* The statements of Effect_CountDownTimerStep. */
-#define BMAGIC_COUNT_DOWN_TIMER_STEP()                               \
-    do {                                                             \
-        u8 timer;                                                    \
-                                                                     \
-        timer               = BMAGIC_WORK->unk_09 - 1;               \
-        BMAGIC_WORK->unk_09 = timer;                                 \
-        if (timer == 0) {                                            \
-            BMAGIC_WORK->header.step = BMAGIC_WORK->header.step + 1; \
-        }                                                            \
+#define BMAGIC_COUNT_DOWN_TIMER_STEP()                                           \
+    do {                                                                         \
+        u8 timer;                                                                \
+                                                                                 \
+        timer                     = TASK(PartyMember)->unk_09 - 1;               \
+        TASK(PartyMember)->unk_09 = timer;                                       \
+        if (timer == 0) {                                                        \
+            TASK(PartyMember)->header.step = TASK(PartyMember)->header.step + 1; \
+        }                                                                        \
     } while (0)
 
 MATCH void Effect_CountDownTimerStep(void) {

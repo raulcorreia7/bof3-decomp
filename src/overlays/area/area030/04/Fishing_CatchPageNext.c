@@ -14,7 +14,7 @@ MATCH void Fishing_CatchPageNext(void) {
     s32           wrap_flag; /* the flag the work record gets when it wraps */
 
     wrap_key                   = 0;
-    record                     = FISHING_STATE;
+    record                     = TASK(FishingState);
     wrap_flag                  = 1;
     record->bounce.half.key    = 0;
     record->bounce.half.unk_3C = 0;
@@ -36,9 +36,9 @@ loop:
     Fishing_DrawWindowFrame(MENU_HEADER_X, MENU_HEADER_Y, MENU_HEADER_WIDTH, MENU_HEADER_HEIGHT, 0U);
     mask = 0;
     if (D_80145E93[0] >= 3) {
-        mask = (1 << FISHING_STATE->cue_index) & BYTE_MASK;
+        mask = (1 << TASK(FishingState)->cue_index) & BYTE_MASK;
     }
     func_801D7C10(FISHING_SHOP_COLUMNS_X, FISHING_SHOP_COLUMNS_Y, mask);
-    FISHING_STATE->step_timer = 4;
-    FISHING_STATE->handler_index += 1;
+    TASK(FishingState)->step_timer = 4;
+    TASK(FishingState)->handler_index += 1;
 }

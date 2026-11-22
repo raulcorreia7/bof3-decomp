@@ -12,10 +12,10 @@ MATCH void func_801EEC84(void) {
     u32           index;
     u8            active;
 
-    BMAGIC_WORK->facing = g_BattleEffectBattler->facing;
-    WorldPos_Copy(&BMAGIC_WORK->pos, &g_BattleEffectBattler->pos);
-    BMAGIC_WORK->param.unk_0B = 0;
-    BMAGIC_WORK->header.mode += 1;
+    TASK(PartyMember)->facing = g_BattleEffectBattler->facing;
+    WorldPos_Copy(&TASK(PartyMember)->pos, &g_BattleEffectBattler->pos);
+    TASK(PartyMember)->param.unk_0B = 0;
+    TASK(PartyMember)->header.mode += 1;
     Battle_SelectActiveBattlerScript(0xC, 2);
     index  = Battle_AllocEffect(1, 84);
     active = g_Battle.active_battler;
@@ -40,30 +40,30 @@ MATCH void func_801EEC84(void) {
     g_BattleEffects[index & BYTE_MASK].header.step  = 0;
     g_BattleEffects[index & BYTE_MASK].step_index   = 84;
     g_BattleEffects[index & BYTE_MASK].target.party = work;
-    BMAGIC_WORK->param.unk_0B += 1;
+    TASK(PartyMember)->param.unk_0B += 1;
     g_BattleEffectBattler->header.flags |= PARTY_MEMBER_FLAG_HANDLER_BUSY;
 }
 
 MATCH void func_801EEE9C(void) {
-    if (BMAGIC_WORK->param.unk_0B == 0) {
+    if (TASK(PartyMember)->param.unk_0B == 0) {
         g_BattleEffectBattler->header.flags &= ~PARTY_MEMBER_FLAG_HANDLER_BUSY;
         Battle_SelectActiveBattlerScript(0x18, 0);
-        BMAGIC_WORK->header.mode += 1;
+        TASK(PartyMember)->header.mode += 1;
     }
 }
 
 #include "shared/Effect_StartPlaying.h"
 
 MATCH s32 func_801EEF3C(void) {
-    SYS_DISPATCH_BYTE(g_BMagicEffectModes, BMAGIC_WORK->header.mode);
+    SYS_DISPATCH_BYTE(g_BMagicEffectModes, TASK(PartyMember)->header.mode);
 }
 
 MATCH void func_801EEF80(void) {
     Magic161Steps handlers;
 
     handlers = D_801EEC10;
-    SYS_DISPATCH_BYTE(handlers.steps, BMAGIC_WORK->header.step);
-    if (BMAGIC_WORK->header.flags != 0 && BMAGIC_WORK->header.step != 0) {
+    SYS_DISPATCH_BYTE(handlers.steps, TASK(PartyMember)->header.step);
+    if (TASK(PartyMember)->header.flags != 0 && TASK(PartyMember)->header.step != 0) {
         Area_AddGridActor();
     }
 }
@@ -74,24 +74,24 @@ MATCH void func_801EF06C(void) {
     u8 count;
 
     Script_AnimStepOnce();
-    count               = BMAGIC_WORK->unk_09 - 1;
-    BMAGIC_WORK->unk_09 = count;
+    count                     = TASK(PartyMember)->unk_09 - 1;
+    TASK(PartyMember)->unk_09 = count;
     if (!(count & BYTE_MASK)) {
         Battle_PlayActiveBattlerSE(2, 4);
         Battle_MarkDamaged(g_Battle.target_selector);
-        BMAGIC_WORK->header.step += 1;
+        TASK(PartyMember)->header.step += 1;
     }
 }
 
 MATCH void func_801EF0E8(void) {
     u8 count;
 
-    count = BMAGIC_WORK->unk_09;
+    count = TASK(PartyMember)->unk_09;
     if ((count & BYTE_MASK) == 0x10) {
         SND_SEQueueSelection(0x100);
-        BMAGIC_WORK->header.step += 1;
+        TASK(PartyMember)->header.step += 1;
     } else {
-        BMAGIC_WORK->unk_09 = count + 4;
+        TASK(PartyMember)->unk_09 = count + 4;
     }
     func_801EF1DC();
     Script_AnimStepOnce();
@@ -112,8 +112,8 @@ MATCH void func_801EF1DC(void) {
     tpage = getTPage(TPAGE_DEPTH_4BIT, TPAGE_ABR_ADD, 320, 256);
     GFX_ADD_DITHERED_DRAW_MODE(GFX_LAYER_UI, tpage);
     prim  = (POLY_G4*)g_GfxPrimCursor;
-    red   = BMAGIC_WORK->unk_09 * 12;
-    shade = BMAGIC_WORK->unk_09 * 6;
+    red   = TASK(PartyMember)->unk_09 * 12;
+    shade = TASK(PartyMember)->unk_09 * 6;
     SetPolyG4(prim);
     SetSemiTrans(prim, 1);
     setXYWH(prim, 0, 0, 319, 120);

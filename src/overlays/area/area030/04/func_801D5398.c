@@ -13,22 +13,22 @@ MATCH void func_801D5398(void) {
 
     mask = 0;
     if (D_80145E93[0] >= 3) {
-        mask = (1 << FISHING_STATE->cue_index) & BYTE_MASK;
+        mask = (1 << TASK(FishingState)->cue_index) & BYTE_MASK;
     }
     func_801D7C10(FISHING_SHOP_COLUMNS_X, FISHING_SHOP_COLUMNS_Y, mask);
 
-    work             = FISHING_STATE;
+    work             = TASK(FishingState);
     work->step_timer = (u8)(work->step_timer - 1);
-    func_801D72E4(39, (s16)(FISHING_STATE->step_timer * 60 + 64));
+    func_801D72E4(39, (s16)(TASK(FishingState)->step_timer * 60 + 64));
 
-    if (FISHING_STATE->step_timer == 0) {
+    if (TASK(FishingState)->step_timer == 0) {
         index                               = Actor_FindFreeSpawned() & BYTE_MASK;
         g_SpawnedActors[index].header.flags = 1;
         g_SpawnedActors[index].type         = 0x1A;
         g_SpawnedActors[index].header.mode  = 0x10;
         g_SpawnedActors[index].header.step  = (u8) * (u16*)&COORD_INT(g_Task->pos.z);
 
-        work                = FISHING_STATE;
+        work                = TASK(FishingState);
         work->handler_index = (u8)(work->handler_index + 1);
     }
 }

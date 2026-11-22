@@ -7,6 +7,6 @@ MATCH void Effect_CountDownTimerQueueEffect(void) {
     work->unk_09 = work->unk_09 - 1;
     if (work->unk_09 == 0) {
         SND_SEQueueSelection(0x100);
-        BMAGIC_WORK->header.mode = BMAGIC_WORK->header.mode + 1;
+        TASK(PartyMember)->header.mode = TASK(PartyMember)->header.mode + 1;
     }
 }

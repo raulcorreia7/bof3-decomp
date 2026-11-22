@@ -5,13 +5,13 @@ MATCH void Effect_Drift(void) {
     u8           timer;
     u8           ticks;
 
-    ticks                    = BMAGIC_WORK->param.phase + 1;
-    BMAGIC_WORK->param.phase = ticks + (BMAGIC_WORK->unk_09 >> 6);
+    ticks                          = TASK(PartyMember)->param.phase + 1;
+    TASK(PartyMember)->param.phase = ticks + (TASK(PartyMember)->unk_09 >> 6);
     if (g_FrameCount & 1) {
-        BMAGIC_WORK->timer -= 1;
+        TASK(PartyMember)->timer -= 1;
     }
-    BMAGIC_WORK->unk_0C = 0x2000;
-    BMAGIC_WORK->unk_10 = 0;
+    TASK(PartyMember)->unk_0C = 0x2000;
+    TASK(PartyMember)->unk_10 = 0;
     Effect_RotatePosition(g_Task);
     work         = g_Task;
     timer        = work->unk_09 - 2;

@@ -8,11 +8,11 @@ MATCH void func_800AE82C(void) {
     u8           count;
     s32          value;
 
-    work         = BATTLE_WORK;
+    work         = TASK(PartyMember);
     count        = work->unk_09 - 1;
     work->unk_09 = count;
     if (count == 0) {
-        row_work = BATTLE_WORK;
+        row_work = TASK(PartyMember);
         slot     = row_work->param.unk_0B;
         if (slot < BATTLE_PARTY_CHARACTERS_COUNT) {
             row_work->pos.x.fixed = g_Game.members[slot].pos.x.fixed;
@@ -25,12 +25,12 @@ MATCH void func_800AE82C(void) {
         }
         row_work->pos.z.fixed = value;
         Battle_ProjectRange();
-        tail_work         = BATTLE_WORK;
+        tail_work         = TASK(PartyMember);
         tail_work->unk_10 = -0xE;
         tail_work->unk_09 = 0;
         tail_work->screen_x.value -= 0x18;
         tail_work->screen_y.value -= tail_work->timer;
-        BATTLE_WORK->timer = 1;
-        BATTLE_WORK->header.mode += 1;
+        TASK(PartyMember)->timer = 1;
+        TASK(PartyMember)->header.mode += 1;
     }
 }

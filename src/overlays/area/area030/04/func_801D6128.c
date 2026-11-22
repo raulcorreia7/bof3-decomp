@@ -1,9 +1,9 @@
 #include "area030_04.h"
 
 /* Work-row fields behind the area-030 scratchpad pointer. */
-#define BANNER_TIMER (FISHING_STATE->step_timer)
-#define BANNER_INDEX (FISHING_STATE->step_index)
-#define BANNER_FRAME (FISHING_STATE->cue_index)
+#define BANNER_TIMER (TASK(FishingState)->step_timer)
+#define BANNER_INDEX (TASK(FishingState)->step_index)
+#define BANNER_FRAME (TASK(FishingState)->cue_index)
 
 /* Advances the area-030 title banner: walks the 3-byte frame table, queues the shop record when the frame
  * asks for it, clamps the scroll frame, and draws the banner panels. */
@@ -48,7 +48,7 @@ MATCH void func_801D6128(void) {
     delta = D_801E2026[prev * 3];
     if (delta != 0x50 && !(g_FrameCount & 0x3)) {
         BANNER_FRAME += delta;
-        work  = FISHING_STATE;
+        work  = TASK(FishingState);
         frame = work->cue_index;
         if (frame >= 0) {
             if (frame < 25) {

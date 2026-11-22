@@ -11,8 +11,8 @@ MATCH void func_801E44D4(void) {
     work->unk_0C                             = -0x2000;
     work->unk_10                             = 0;
     Effect_RotatePosition(work);
-    BATTLE_WORK->timer = 4;
+    TASK(PartyMember)->timer = 4;
     Battle_IsEnemyBlocked();
     SND_SEPlay(EMI_SE_ID(SND_BANK_AREA, 5));
-    BATTLE_WORK->unk_03 += 1;
+    TASK(PartyMember)->unk_03 += 1;
 }

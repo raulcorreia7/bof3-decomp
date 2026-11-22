@@ -16,9 +16,9 @@ MATCH void func_801D52D4(void) {
     func_801D7C10(FISHING_SHOP_COLUMNS_X, FISHING_SHOP_COLUMNS_Y, mask);
 
     g_Task->direction   = FACING_UP_LEFT;
-    work                = FISHING_STATE;
+    work                = TASK(FishingState);
     work->step_index    = 0;
-    stepped             = FISHING_STATE;
+    stepped             = TASK(FishingState);
     work->bounce.unk_3C = 0;
     work->step_14       = 0;
     work->step_limit    = 0;

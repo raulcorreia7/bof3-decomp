@@ -3,10 +3,10 @@
 MATCH void func_801EF124(void) {
     u8 count;
 
-    BMAGIC_WORK->param.unk_0B += 1;
-    BMAGIC_WORK->timer -= 3;
-    count               = BMAGIC_WORK->unk_09 - 2;
-    BMAGIC_WORK->unk_09 = count;
+    TASK(PartyMember)->param.unk_0B += 1;
+    TASK(PartyMember)->timer -= 3;
+    count                     = TASK(PartyMember)->unk_09 - 2;
+    TASK(PartyMember)->unk_09 = count;
     if (!(count & BYTE_MASK)) {
         g_BattleEffectBattler->param.unk_0B -= 1;
         Effect_Reset();

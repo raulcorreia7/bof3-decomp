@@ -5,9 +5,9 @@
 MATCH void Effect_CountUpWorkByteAndStep(void) {
     u8 timer;
 
-    timer               = BMAGIC_WORK->unk_04 + 2;
-    BMAGIC_WORK->unk_04 = timer;
+    timer                     = TASK(PartyMember)->unk_04 + 2;
+    TASK(PartyMember)->unk_04 = timer;
     if (timer == 16) {
-        BMAGIC_WORK->header.step = BMAGIC_WORK->header.step + 1;
+        TASK(PartyMember)->header.step = TASK(PartyMember)->header.step + 1;
     }
 }

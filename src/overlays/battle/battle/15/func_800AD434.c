@@ -9,8 +9,8 @@ MATCH void func_800AD434(void) {
     funcs[work->header.step]();
     two = 2u;
     if (!(D_80148624 & 0x1)) {
-        BATTLE_WORK->header.mode = two;
-        BATTLE_WORK->header.step = 0;
+        TASK(PartyMember)->header.mode = two;
+        TASK(PartyMember)->header.step = 0;
         return;
     }
     Script_AnimStepLoop();

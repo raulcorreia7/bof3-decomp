@@ -6,7 +6,7 @@
 MATCH void func_801E01DC(void) {
     FishingState* record;
 
-    record = FISHING_STATE;
+    record = TASK(FishingState);
     if (record->flags_58 == D_801E2354[record->cue_index]) {
         record->mode_index += 1;
     } else {

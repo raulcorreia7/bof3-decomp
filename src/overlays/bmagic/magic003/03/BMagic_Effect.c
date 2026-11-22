@@ -9,7 +9,7 @@ MATCH void func_801EEC28(void) {
     PartyMember* saved_battler;
     u8           i;
 
-    SYS_DISPATCH_BYTE(D_801F0AD8, BMAGIC_WORK->header.mode);
+    SYS_DISPATCH_BYTE(D_801F0AD8, TASK(PartyMember)->header.mode);
 
     BMAGIC_RUN_EFFECT_SLOTS(BMAGIC_EFFECT_SLOTS, BMagic_DispatchEffectMode);
 }
@@ -21,12 +21,12 @@ MATCH void func_801EED14(void) {
         BMAGIC_EFFECT_SLOTS[i].header.mode  = 0;
         BMAGIC_EFFECT_SLOTS[i].header.step  = 0;
     }
-    BMAGIC_WORK->screen_x.value = 160;
-    BMAGIC_WORK->screen_y.value = 112;
-    BMAGIC_WORK->param.unk_0B   = 0;
-    BMAGIC_WORK->unk_09         = 30;
-    BMAGIC_WORK->timer          = 0;
-    BMAGIC_WORK->header.mode += 1;
+    TASK(PartyMember)->screen_x.value = 160;
+    TASK(PartyMember)->screen_y.value = 112;
+    TASK(PartyMember)->param.unk_0B   = 0;
+    TASK(PartyMember)->unk_09         = 30;
+    TASK(PartyMember)->timer          = 0;
+    TASK(PartyMember)->header.mode += 1;
 }
 
 MATCH void func_801EEDAC(void) {
@@ -34,11 +34,11 @@ MATCH void func_801EEDAC(void) {
 
     func_801F07B0(1);
     func_801F0164(1);
-    timer               = BMAGIC_WORK->unk_09 - 1;
-    BMAGIC_WORK->unk_09 = timer;
+    timer                     = TASK(PartyMember)->unk_09 - 1;
+    TASK(PartyMember)->unk_09 = timer;
     if (!(timer & BYTE_MASK)) {
-        BMAGIC_WORK->unk_09 = 0x1E;
-        BMAGIC_WORK->header.mode += 1;
+        TASK(PartyMember)->unk_09 = 0x1E;
+        TASK(PartyMember)->header.mode += 1;
     }
 }
 
@@ -47,27 +47,27 @@ MATCH void func_801EEE28(void) {
 
     func_801F07B0(2);
     func_801F0164(2);
-    timer               = BMAGIC_WORK->unk_09 - 1;
-    BMAGIC_WORK->unk_09 = timer;
+    timer                     = TASK(PartyMember)->unk_09 - 1;
+    TASK(PartyMember)->unk_09 = timer;
     if (!(timer & BYTE_MASK)) {
-        BMAGIC_WORK->unk_09 = 0xA;
-        BMAGIC_WORK->header.mode += 1;
+        TASK(PartyMember)->unk_09 = 0xA;
+        TASK(PartyMember)->header.mode += 1;
     }
 }
 
 MATCH void func_801EEEA4(void) {
     u8 count;
 
-    count               = BMAGIC_WORK->unk_09 - 1;
-    BMAGIC_WORK->unk_09 = count;
+    count                     = TASK(PartyMember)->unk_09 - 1;
+    TASK(PartyMember)->unk_09 = count;
     if (count == 0) {
-        BMAGIC_WORK->param.unk_0B = RANDOM_MASK(3);
-        if (BMAGIC_WORK->timer < 16) {
-            BMAGIC_WORK->unk_09 = D_801F0A84[BMAGIC_WORK->timer];
+        TASK(PartyMember)->param.unk_0B = RANDOM_MASK(3);
+        if (TASK(PartyMember)->timer < 16) {
+            TASK(PartyMember)->unk_09 = D_801F0A84[TASK(PartyMember)->timer];
         } else {
-            BMAGIC_WORK->unk_09 = 3;
+            TASK(PartyMember)->unk_09 = 3;
         }
-        BMAGIC_WORK->header.mode += 1;
+        TASK(PartyMember)->header.mode += 1;
     }
 }
 
@@ -76,27 +76,27 @@ MATCH void func_801EEF4C(void) {
     u8 timer;
 
     func_801F07B0(4);
-    func_801F03F0(BMAGIC_WORK->param.unk_0B);
+    func_801F03F0(TASK(PartyMember)->param.unk_0B);
     if (g_PadStates[0].pressed & (PADRup | PADRdown | PADRleft | PADRright)) {
-        if (g_PadStates[0].pressed != D_801F0A98[BMAGIC_WORK->param.unk_0B]) {
-            BMAGIC_WORK->unk_09      = 6;
-            BMAGIC_WORK->header.mode = 5;
+        if (g_PadStates[0].pressed != D_801F0A98[TASK(PartyMember)->param.unk_0B]) {
+            TASK(PartyMember)->unk_09      = 6;
+            TASK(PartyMember)->header.mode = 5;
         } else {
-            BMAGIC_WORK->unk_09 = 6;
-            count               = BMAGIC_WORK->timer + 1;
-            BMAGIC_WORK->timer  = count;
+            TASK(PartyMember)->unk_09 = 6;
+            count                     = TASK(PartyMember)->timer + 1;
+            TASK(PartyMember)->timer  = count;
             if (count < 32) {
-                BMAGIC_WORK->header.mode = 3;
+                TASK(PartyMember)->header.mode = 3;
             } else {
-                BMAGIC_WORK->header.mode = 5;
+                TASK(PartyMember)->header.mode = 5;
             }
         }
     } else {
-        timer               = BMAGIC_WORK->unk_09 - 1;
-        BMAGIC_WORK->unk_09 = timer;
+        timer                     = TASK(PartyMember)->unk_09 - 1;
+        TASK(PartyMember)->unk_09 = timer;
         if (timer == 0) {
-            BMAGIC_WORK->unk_09      = 6;
-            BMAGIC_WORK->header.mode = 5;
+            TASK(PartyMember)->unk_09      = 6;
+            TASK(PartyMember)->header.mode = 5;
         }
     }
 }
@@ -104,11 +104,11 @@ MATCH void func_801EEF4C(void) {
 MATCH void func_801EF04C(void) {
     u8 timer;
 
-    timer               = BMAGIC_WORK->unk_09 - 1;
-    BMAGIC_WORK->unk_09 = timer;
+    timer                     = TASK(PartyMember)->unk_09 - 1;
+    TASK(PartyMember)->unk_09 = timer;
     if (timer == 0) {
-        BMAGIC_WORK->unk_09      = 0x1E;
-        BMAGIC_WORK->header.mode = BMAGIC_WORK->header.mode + 1;
+        TASK(PartyMember)->unk_09      = 0x1E;
+        TASK(PartyMember)->header.mode = TASK(PartyMember)->header.mode + 1;
     }
 }
 
@@ -116,41 +116,41 @@ MATCH void func_801EF0A8(void) {
     u8 timer;
 
     func_801F07B0(0);
-    func_801F0550(BMAGIC_WORK->timer);
+    func_801F0550(TASK(PartyMember)->timer);
     func_801F0164(0);
-    timer               = BMAGIC_WORK->unk_09 - 1;
-    BMAGIC_WORK->unk_09 = timer;
+    timer                     = TASK(PartyMember)->unk_09 - 1;
+    TASK(PartyMember)->unk_09 = timer;
     if (!(timer & BYTE_MASK)) {
-        BMAGIC_WORK->header.mode += 1;
+        TASK(PartyMember)->header.mode += 1;
     }
 }
 
 MATCH void func_801EF12C(void) {
-    BMAGIC_WORK->facing       = g_BattleEffectBattler->facing;
-    BMAGIC_WORK->pos.x.fixed  = g_BattleEffectBattler->pos.x.fixed;
-    BMAGIC_WORK->pos.y.fixed  = g_BattleEffectBattler->pos.y.fixed;
-    BMAGIC_WORK->pos.z.fixed  = g_BattleEffectBattler->pos.z.fixed;
-    BMAGIC_WORK->param.unk_0B = 0;
-    BMAGIC_WORK->header.mode += 1;
+    TASK(PartyMember)->facing       = g_BattleEffectBattler->facing;
+    TASK(PartyMember)->pos.x.fixed  = g_BattleEffectBattler->pos.x.fixed;
+    TASK(PartyMember)->pos.y.fixed  = g_BattleEffectBattler->pos.y.fixed;
+    TASK(PartyMember)->pos.z.fixed  = g_BattleEffectBattler->pos.z.fixed;
+    TASK(PartyMember)->param.unk_0B = 0;
+    TASK(PartyMember)->header.mode += 1;
     Battle_SelectActiveBattlerScript(0xC, 2);
     func_801EFD4C();
     func_801EFEC8();
-    BMAGIC_WORK->unk_04 = BMAGIC_WORK->param.unk_0B;
+    TASK(PartyMember)->unk_04 = TASK(PartyMember)->param.unk_0B;
     g_BattleEffectBattler->header.flags |= ACTOR_FLAG_HIDDEN;
     SND_SEQueueSelection(0x100);
 }
 
 MATCH void func_801EF1FC(void) {
-    if (BMAGIC_WORK->param.unk_0B == 0) {
+    if (TASK(PartyMember)->param.unk_0B == 0) {
         *D_8014637C &= 0xBF;
         Battle_SelectActiveBattlerScript(4, 0);
-        BMAGIC_WORK->header.mode += 1;
+        TASK(PartyMember)->header.mode += 1;
     }
 }
 
 MATCH void func_801EF268(void) {
     SND_SEQueueSelection(258);
-    D_801463D6 = BMAGIC_WORK->timer;
+    D_801463D6 = TASK(PartyMember)->timer;
     Battle_MarkDamaged(g_BattleTargetSelector);
     g_BattleState = g_Battle.flags | BATTLE_STATE_EFFECT_PLAYING;
     Effect_Reset();
@@ -166,8 +166,8 @@ MATCH void func_801EF324(void) {
     Magic003Steps handlers;
 
     handlers = D_801EEC04;
-    SYS_DISPATCH_BYTE(handlers.steps, BMAGIC_WORK->header.step);
-    if (BMAGIC_WORK->header.step != 0 && BMAGIC_WORK->header.flags != 0) {
+    SYS_DISPATCH_BYTE(handlers.steps, TASK(PartyMember)->header.step);
+    if (TASK(PartyMember)->header.step != 0 && TASK(PartyMember)->header.flags != 0) {
         Area_SetDrawMode();
     }
 }
@@ -178,22 +178,22 @@ MATCH void func_801EF3C8(void) {
     u32 z;
     u8  timer;
 
-    timer               = BMAGIC_WORK->unk_09 - 1;
-    BMAGIC_WORK->unk_09 = timer;
+    timer                     = TASK(PartyMember)->unk_09 - 1;
+    TASK(PartyMember)->unk_09 = timer;
     if (!(timer & BYTE_MASK)) {
-        x                    = BMAGIC_WORK->pos.x.fixed;
-        y                    = BMAGIC_WORK->pos.y.fixed;
-        z                    = BMAGIC_WORK->pos.z.fixed;
-        BMAGIC_WORK->unk_0C  = 0x2000;
-        BMAGIC_WORK->unk_14  = 0x300000;
-        BMAGIC_WORK->unk_10  = 0;
-        BMAGIC_WORK->unk_20  = -0x80000;
-        BMAGIC_WORK->unk_18  = x;
-        BMAGIC_WORK->unk_1C  = y;
-        BMAGIC_WORK->scale.y = z;
+        x                          = TASK(PartyMember)->pos.x.fixed;
+        y                          = TASK(PartyMember)->pos.y.fixed;
+        z                          = TASK(PartyMember)->pos.z.fixed;
+        TASK(PartyMember)->unk_0C  = 0x2000;
+        TASK(PartyMember)->unk_14  = 0x300000;
+        TASK(PartyMember)->unk_10  = 0;
+        TASK(PartyMember)->unk_20  = -0x80000;
+        TASK(PartyMember)->unk_18  = x;
+        TASK(PartyMember)->unk_1C  = y;
+        TASK(PartyMember)->scale.y = z;
         Effect_RotatePosition(g_Task);
-        BMAGIC_WORK->unk_09 = func_800AFF98();
-        BMAGIC_WORK->header.step += 1;
+        TASK(PartyMember)->unk_09 = func_800AFF98();
+        TASK(PartyMember)->header.step += 1;
     }
 }
 
@@ -201,26 +201,26 @@ MATCH void func_801EF478(void) {
     s32 value;
     u8  value2;
 
-    value2 = BMAGIC_WORK->unk_09;
+    value2 = TASK(PartyMember)->unk_09;
     value  = value2 & BYTE_MASK;
     if (value != 0) {
         if (value != 0xFF) {
-            BMAGIC_WORK->unk_09 = value2 - 1;
+            TASK(PartyMember)->unk_09 = value2 - 1;
         }
     } else {
         SND_SEQueueSelection(0x101);
         Battle_PlayActiveBattlerSE(2, 0);
         func_801F0078();
         Battle_ApplyDamageFlags(g_Battle.target_selector, 0x10U);
-        BMAGIC_WORK->unk_09 = 0xFF;
+        TASK(PartyMember)->unk_09 = 0xFF;
     }
-    BMAGIC_WORK->pos.x.fixed += BMAGIC_WORK->unk_0C;
-    BMAGIC_WORK->pos.y.fixed += BMAGIC_WORK->unk_10;
-    BMAGIC_WORK->pos.z.fixed += BMAGIC_WORK->unk_14;
-    BMAGIC_WORK->unk_14 += BMAGIC_WORK->unk_20;
+    TASK(PartyMember)->pos.x.fixed += TASK(PartyMember)->unk_0C;
+    TASK(PartyMember)->pos.y.fixed += TASK(PartyMember)->unk_10;
+    TASK(PartyMember)->pos.z.fixed += TASK(PartyMember)->unk_14;
+    TASK(PartyMember)->unk_14 += TASK(PartyMember)->unk_20;
     Script_AnimStepOnce();
-    if (BMAGIC_WORK->pos.z.fixed == BMAGIC_WORK->scale.y) {
-        BMAGIC_WORK->header.step += 1;
+    if (TASK(PartyMember)->pos.z.fixed == TASK(PartyMember)->scale.y) {
+        TASK(PartyMember)->header.step += 1;
     }
 }
 
@@ -228,34 +228,34 @@ MATCH void func_801EF578(void) {
     s32 value;
     u8  value2;
 
-    value2 = BMAGIC_WORK->unk_09;
+    value2 = TASK(PartyMember)->unk_09;
     value  = value2 & BYTE_MASK;
     if (value != 0) {
         if (value != 0xFF) {
-            BMAGIC_WORK->unk_09 = value2 - 1;
+            TASK(PartyMember)->unk_09 = value2 - 1;
         }
     } else {
         SND_SEQueueSelection(0x101);
         Battle_PlayActiveBattlerSE(2, 0);
         func_801F0078();
         Battle_ApplyDamageFlags(g_Battle.target_selector, 0x10U);
-        BMAGIC_WORK->unk_09 = 0xFF;
+        TASK(PartyMember)->unk_09 = 0xFF;
     }
     Script_AnimStepOnce();
-    if (BMAGIC_WORK->unk_09 == 0xFF) {
-        BMAGIC_WORK->unk_0C = -0x2000;
-        BMAGIC_WORK->unk_10 = 0;
+    if (TASK(PartyMember)->unk_09 == 0xFF) {
+        TASK(PartyMember)->unk_0C = -0x2000;
+        TASK(PartyMember)->unk_10 = 0;
         Effect_RotatePosition(g_Task);
-        BMAGIC_WORK->header.step += 1;
+        TASK(PartyMember)->header.step += 1;
     }
 }
 
 MATCH void func_801EF644(void) {
-    BMAGIC_WORK->pos.x.fixed += BMAGIC_WORK->unk_0C;
-    BMAGIC_WORK->pos.y.fixed += BMAGIC_WORK->unk_10;
+    TASK(PartyMember)->pos.x.fixed += TASK(PartyMember)->unk_0C;
+    TASK(PartyMember)->pos.y.fixed += TASK(PartyMember)->unk_10;
     Script_AnimStepOnce();
-    if (BMAGIC_WORK->pos.x.fixed == BMAGIC_WORK->unk_18 && BMAGIC_WORK->pos.y.fixed == BMAGIC_WORK->unk_1C) {
-        BMAGIC_WORK->header.step++;
+    if (TASK(PartyMember)->pos.x.fixed == TASK(PartyMember)->unk_18 && TASK(PartyMember)->pos.y.fixed == TASK(PartyMember)->unk_1C) {
+        TASK(PartyMember)->header.step++;
     }
 }
 
@@ -275,8 +275,8 @@ MATCH void func_801EF708(void) {
     Magic003SecondSteps handlers;
 
     handlers = D_801EEC18;
-    SYS_DISPATCH_BYTE(handlers.steps, BMAGIC_WORK->header.step);
-    if (BMAGIC_WORK->header.step != 0 && BMAGIC_WORK->header.flags != 0) {
+    SYS_DISPATCH_BYTE(handlers.steps, TASK(PartyMember)->header.step);
+    if (TASK(PartyMember)->header.step != 0 && TASK(PartyMember)->header.flags != 0) {
         Area_SetDrawMode();
     }
 }
@@ -287,54 +287,54 @@ MATCH void func_801EF7A8(void) {
     u32 z;
     u8  timer;
 
-    timer               = BMAGIC_WORK->unk_09 - 1;
-    BMAGIC_WORK->unk_09 = timer;
+    timer                     = TASK(PartyMember)->unk_09 - 1;
+    TASK(PartyMember)->unk_09 = timer;
     if (!(timer & BYTE_MASK)) {
-        x                    = BMAGIC_WORK->pos.x.fixed;
-        y                    = BMAGIC_WORK->pos.y.fixed;
-        z                    = BMAGIC_WORK->pos.z.fixed;
-        BMAGIC_WORK->unk_0C  = 0x2000;
-        BMAGIC_WORK->unk_14  = 0x300000;
-        BMAGIC_WORK->unk_10  = 0;
-        BMAGIC_WORK->unk_20  = -0x80000;
-        BMAGIC_WORK->unk_18  = x;
-        BMAGIC_WORK->unk_1C  = y;
-        BMAGIC_WORK->scale.y = z;
+        x                          = TASK(PartyMember)->pos.x.fixed;
+        y                          = TASK(PartyMember)->pos.y.fixed;
+        z                          = TASK(PartyMember)->pos.z.fixed;
+        TASK(PartyMember)->unk_0C  = 0x2000;
+        TASK(PartyMember)->unk_14  = 0x300000;
+        TASK(PartyMember)->unk_10  = 0;
+        TASK(PartyMember)->unk_20  = -0x80000;
+        TASK(PartyMember)->unk_18  = x;
+        TASK(PartyMember)->unk_1C  = y;
+        TASK(PartyMember)->scale.y = z;
         Effect_RotatePosition(g_Task);
-        BMAGIC_WORK->header.flags |= 0x20;
-        BMAGIC_WORK->unk_5C = 3;
-        BMAGIC_WORK->unk_5D = -(BMAGIC_WORK->param.unk_0B << 4);
-        BMAGIC_WORK->unk_5F = -(BMAGIC_WORK->param.unk_0B << 4);
-        BMAGIC_WORK->unk_5E = -(BMAGIC_WORK->param.unk_0B << 4);
-        GFX_PaletteAllocFade(g_Task, D_801F0A78[BMAGIC_WORK->param.unk_0B].r, D_801F0A78[BMAGIC_WORK->param.unk_0B].g, D_801F0A78[BMAGIC_WORK->param.unk_0B].b, 1);
-        BMAGIC_WORK->header.step += 1;
+        TASK(PartyMember)->header.flags |= 0x20;
+        TASK(PartyMember)->unk_5C = 3;
+        TASK(PartyMember)->unk_5D = -(TASK(PartyMember)->param.unk_0B << 4);
+        TASK(PartyMember)->unk_5F = -(TASK(PartyMember)->param.unk_0B << 4);
+        TASK(PartyMember)->unk_5E = -(TASK(PartyMember)->param.unk_0B << 4);
+        GFX_PaletteAllocFade(g_Task, D_801F0A78[TASK(PartyMember)->param.unk_0B].r, D_801F0A78[TASK(PartyMember)->param.unk_0B].g, D_801F0A78[TASK(PartyMember)->param.unk_0B].b, 1);
+        TASK(PartyMember)->header.step += 1;
     }
 }
 
 MATCH void func_801EF918(void) {
-    BMAGIC_WORK->pos.x.fixed += BMAGIC_WORK->unk_0C;
-    BMAGIC_WORK->pos.y.fixed += BMAGIC_WORK->unk_10;
-    BMAGIC_WORK->pos.z.fixed += BMAGIC_WORK->unk_14;
-    BMAGIC_WORK->unk_14 += BMAGIC_WORK->unk_20;
+    TASK(PartyMember)->pos.x.fixed += TASK(PartyMember)->unk_0C;
+    TASK(PartyMember)->pos.y.fixed += TASK(PartyMember)->unk_10;
+    TASK(PartyMember)->pos.z.fixed += TASK(PartyMember)->unk_14;
+    TASK(PartyMember)->unk_14 += TASK(PartyMember)->unk_20;
     Script_AnimStepOnce();
-    if (BMAGIC_WORK->pos.z.fixed == BMAGIC_WORK->scale.y) {
-        BMAGIC_WORK->header.step++;
+    if (TASK(PartyMember)->pos.z.fixed == TASK(PartyMember)->scale.y) {
+        TASK(PartyMember)->header.step++;
     }
 }
 
 MATCH void func_801EF9AC(void) {
-    BMAGIC_WORK->unk_0C = -0x2000;
-    BMAGIC_WORK->unk_10 = 0;
+    TASK(PartyMember)->unk_0C = -0x2000;
+    TASK(PartyMember)->unk_10 = 0;
     Effect_RotatePosition(g_Task);
     Script_AnimStepOnce();
-    BMAGIC_WORK->header.step += 1;
+    TASK(PartyMember)->header.step += 1;
 }
 
 MATCH void func_801EF9FC(void) {
-    BMAGIC_WORK->pos.x.fixed += BMAGIC_WORK->unk_0C;
-    BMAGIC_WORK->pos.y.fixed += BMAGIC_WORK->unk_10;
+    TASK(PartyMember)->pos.x.fixed += TASK(PartyMember)->unk_0C;
+    TASK(PartyMember)->pos.y.fixed += TASK(PartyMember)->unk_10;
     Script_AnimStepOnce();
-    if ((BMAGIC_WORK->pos.x.fixed == BMAGIC_WORK->unk_18) && (BMAGIC_WORK->pos.y.fixed == BMAGIC_WORK->unk_1C)) {
+    if ((TASK(PartyMember)->pos.x.fixed == TASK(PartyMember)->unk_18) && (TASK(PartyMember)->pos.y.fixed == TASK(PartyMember)->unk_1C)) {
         GFX_PaletteFreeFadeTarget(g_Task);
         g_BattleEffectBattler->param.unk_0B -= 1;
         Effect_Reset();
@@ -355,31 +355,31 @@ MATCH void func_801EFB8C(void) {
     PartyMember* work;
     u8           timer;
 
-    timer               = BMAGIC_WORK->unk_09 - 1;
-    BMAGIC_WORK->unk_09 = timer;
+    timer                     = TASK(PartyMember)->unk_09 - 1;
+    TASK(PartyMember)->unk_09 = timer;
     if (!(timer & BYTE_MASK)) {
-        actor                    = g_BattleSelectedActor;
-        BMAGIC_WORK->facing      = actor->facing;
-        BMAGIC_WORK->pos.x.fixed = actor->pos.x.fixed;
-        BMAGIC_WORK->pos.y.fixed = actor->pos.y.fixed;
-        BMAGIC_WORK->pos.z.fixed = actor->pos.z.fixed;
+        actor                          = g_BattleSelectedActor;
+        TASK(PartyMember)->facing      = actor->facing;
+        TASK(PartyMember)->pos.x.fixed = actor->pos.x.fixed;
+        TASK(PartyMember)->pos.y.fixed = actor->pos.y.fixed;
+        TASK(PartyMember)->pos.z.fixed = actor->pos.z.fixed;
         Battle_ProjectRange();
-        BMAGIC_WORK->unk_29 = 0;
-        BMAGIC_WORK->unk_25 = 0x1D;
-        BMAGIC_WORK->unk_26 = 0;
-        BMAGIC_WORK->unk_24 = 0x84;
-        work                = g_Task;
-        work->unk_2B        = 0;
-        work->unk_2C.value  = 0;
-        BMAGIC_WORK->unk_28 = 0;
-        BMAGIC_WORK->unk_27 = D_801F0B04[BMAGIC_WORK->param.unk_0B] + 0xB0;
-        if (BMAGIC_WORK->unk_04 & 1) {
-            BMAGIC_WORK->unk_2A = 1;
+        TASK(PartyMember)->unk_29 = 0;
+        TASK(PartyMember)->unk_25 = 0x1D;
+        TASK(PartyMember)->unk_26 = 0;
+        TASK(PartyMember)->unk_24 = 0x84;
+        work                      = g_Task;
+        work->unk_2B              = 0;
+        work->unk_2C.value        = 0;
+        TASK(PartyMember)->unk_28 = 0;
+        TASK(PartyMember)->unk_27 = D_801F0B04[TASK(PartyMember)->param.unk_0B] + 0xB0;
+        if (TASK(PartyMember)->unk_04 & 1) {
+            TASK(PartyMember)->unk_2A = 1;
         } else {
-            BMAGIC_WORK->unk_2A = 0;
+            TASK(PartyMember)->unk_2A = 0;
         }
-        Script_Select(BMAGIC_WORK->param.unk_0B);
-        BMAGIC_WORK->header.step += 1;
+        Script_Select(TASK(PartyMember)->param.unk_0B);
+        TASK(PartyMember)->header.step += 1;
     }
 }
 
@@ -409,7 +409,7 @@ MATCH void func_801EFD4C(void) {
     image->header.mode                        = 0;
     image->header.step                        = 0;
     image->arg.unk_09                         = 1;
-    BMAGIC_WORK->param.unk_0B += 1;
+    TASK(PartyMember)->param.unk_0B += 1;
 }
 
 MATCH void func_801EFEC8(void) {
@@ -428,7 +428,7 @@ MATCH void func_801EFEC8(void) {
         image->header.step                        = 0;
         image->unk_0B                             = i;
         image->arg.unk_09                         = (i + 1) * 4 + 1;
-        BMAGIC_WORK->param.unk_0B += 1;
+        TASK(PartyMember)->param.unk_0B += 1;
     }
 }
 
@@ -464,8 +464,8 @@ MATCH void func_801F0164(s32 index) {
     tpage = getTPage(TPAGE_DEPTH_4BIT, TPAGE_ABR_HALF, 320, 256);
     GFX_ADD_DITHERED_DRAW_MODE(BMAGIC_LAYER_FOREGROUND, tpage);
     length = D_801F0A9C[(u8)index];
-    x      = BMAGIC_WORK->screen_x.value - ((length >> 1) * 12 + (length & 1) * 6);
-    y      = BMAGIC_WORK->screen_y.value;
+    x      = TASK(PartyMember)->screen_x.value - ((length >> 1) * 12 + (length & 1) * 6);
+    y      = TASK(PartyMember)->screen_y.value;
     for (i = 0; D_801F0AA0[(u8)index][i] != 0; i++) {
         glyph = D_801F0AA0[(u8)index][i] - 0x3F;
         if (D_801F0AA0[(u8)index][i] != 0xFF) {
@@ -496,8 +496,8 @@ MATCH void func_801F03F0(s32 dir) {
     tpage = getTPage(TPAGE_DEPTH_4BIT, TPAGE_ABR_HALF, 320, 256);
     GFX_ADD_DITHERED_DRAW_MODE(BMAGIC_LAYER_FOREGROUND, tpage);
     prim = (POLY_FT4*)g_GfxPrimCursor;
-    x    = BMAGIC_WORK->screen_x.value;
-    y    = BMAGIC_WORK->screen_y.value;
+    x    = TASK(PartyMember)->screen_x.value;
+    y    = TASK(PartyMember)->screen_y.value;
     SetPolyFT4(prim);
     setXYWH(prim, x, y, 12, 12);
     prim->tpage = GetTPage(TPAGE_DEPTH_4BIT, TPAGE_ABR_HALF, FONT_TPAGE_X, FONT_TPAGE_Y);
@@ -523,8 +523,8 @@ MATCH void func_801F0550(s32 value) {
     tens = (u8)value / 10;
     ones = (u8)value % 10;
     prim = (POLY_FT4*)g_GfxPrimCursor;
-    x    = BMAGIC_WORK->screen_x.value;
-    y    = BMAGIC_WORK->screen_y.value;
+    x    = TASK(PartyMember)->screen_x.value;
+    y    = TASK(PartyMember)->screen_y.value;
     left = x - 66;
     SetPolyFT4(prim);
     setXY4(prim, left, y, x - 54, y, left, y + 12, x - 54, y + 12);
@@ -557,14 +557,14 @@ MATCH void func_801F07B0(s32 index) {
     tile = (TILE*)g_GfxPrimCursor;
     SetTile(tile);
     SetSemiTrans(tile, 1);
-    setXY0(tile, BMAGIC_WORK->screen_x.value - (D_801F0B10[(u8)index].x + 4), BMAGIC_WORK->screen_y.value - (D_801F0B10[(u8)index].y + 4));
+    setXY0(tile, TASK(PartyMember)->screen_x.value - (D_801F0B10[(u8)index].x + 4), TASK(PartyMember)->screen_y.value - (D_801F0B10[(u8)index].y + 4));
     setWH(tile, D_801F0B10[(u8)index].w + 8, D_801F0B10[(u8)index].h + 8);
     setRGB0(tile, 0x20, 0x20, 0x20);
     GFX_AddPrim(BMAGIC_LAYER_FOREGROUND, sizeof(TILE));
     tile = (TILE*)g_GfxPrimCursor;
     SetTile(tile);
     SetSemiTrans(tile, 1);
-    setXY0(tile, BMAGIC_WORK->screen_x.value - (D_801F0B10[(u8)index].x + 6), BMAGIC_WORK->screen_y.value - (D_801F0B10[(u8)index].y + 6));
+    setXY0(tile, TASK(PartyMember)->screen_x.value - (D_801F0B10[(u8)index].x + 6), TASK(PartyMember)->screen_y.value - (D_801F0B10[(u8)index].y + 6));
     setWH(tile, D_801F0B10[(u8)index].w + 12, D_801F0B10[(u8)index].h + 12);
     setRGB0(tile, 0x20, 0x20, 0x20);
     GFX_AddPrim(BMAGIC_LAYER_FOREGROUND, sizeof(TILE));

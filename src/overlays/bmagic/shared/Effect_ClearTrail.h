@@ -4,6 +4,6 @@ MATCH void Effect_ClearTrail(void) {
     s32 i;
 
     BMAGIC_SHIFT_TRAIL(BMagic_Trail)
-    BMagic_Trail[BMAGIC_WORK->unk_04][BMAGIC_WORK->param.unk_0B].vx = -1;
-    BMagic_Trail[BMAGIC_WORK->unk_04][BMAGIC_WORK->param.unk_0B].vy = -1;
+    BMagic_Trail[TASK(PartyMember)->unk_04][TASK(PartyMember)->param.unk_0B].vx = -1;
+    BMagic_Trail[TASK(PartyMember)->unk_04][TASK(PartyMember)->param.unk_0B].vy = -1;
 }

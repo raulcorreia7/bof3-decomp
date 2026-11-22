@@ -10,16 +10,16 @@ MATCH void func_801EEC88(void) {
     u32          slot;
     PartyMember* task;
 
-    BMAGIC_WORK->facing                = g_BattleEffectBattler->facing;
-    BMAGIC_WORK->pos.x.fixed           = g_BattleEffectBattler->pos.x.fixed;
-    BMAGIC_WORK->pos.y.fixed           = g_BattleEffectBattler->pos.y.fixed;
-    BMAGIC_WORK->pos.z.fixed           = g_BattleEffectBattler->pos.z.fixed;
+    TASK(PartyMember)->facing          = g_BattleEffectBattler->facing;
+    TASK(PartyMember)->pos.x.fixed     = g_BattleEffectBattler->pos.x.fixed;
+    TASK(PartyMember)->pos.y.fixed     = g_BattleEffectBattler->pos.y.fixed;
+    TASK(PartyMember)->pos.z.fixed     = g_BattleEffectBattler->pos.z.fixed;
     slot                               = Battle_AllocEffect(1, 28) & BYTE_MASK;
     task                               = g_Task;
     g_BattleEffects[slot].header.mode  = 0;
     g_BattleEffects[slot].target.party = task;
-    BMAGIC_WORK->param.unk_0B          = 1;
-    BMAGIC_WORK->header.mode += 1;
+    TASK(PartyMember)->param.unk_0B    = 1;
+    TASK(PartyMember)->header.mode += 1;
 }
 
 MATCH void func_801EED50(void) {
@@ -35,7 +35,7 @@ MATCH void func_801EED50(void) {
 
     adjust = 0;
     score  = 0;
-    if (BMAGIC_WORK->param.unk_0B == 0) {
+    if (TASK(PartyMember)->param.unk_0B == 0) {
         party_count  = 0;
         party_levels = 0;
         for (i = 0; i < 3; i++) {
@@ -185,46 +185,46 @@ MATCH void func_801EED50(void) {
         for (i = 0; i < 8; i++) {
             if (Battle_SlotIsBlocked((u8)(i + 3)) == 0) {
                 if (g_BattleEnemyBattlers[i].stats.resistances[RES_INDEX_FIRE] < 2) {
-                    BMAGIC_WORK->param.unk_0B |= 1;
+                    TASK(PartyMember)->param.unk_0B |= 1;
                 }
                 if (g_BattleEnemyBattlers[i].stats.resistances[RES_INDEX_FROST] < 2) {
-                    BMAGIC_WORK->param.unk_0B |= 2;
+                    TASK(PartyMember)->param.unk_0B |= 2;
                 }
                 if (g_BattleEnemyBattlers[i].stats.resistances[RES_INDEX_ELECTRIC] < 2) {
-                    BMAGIC_WORK->param.unk_0B |= 4;
+                    TASK(PartyMember)->param.unk_0B |= 4;
                 }
                 if (g_BattleEnemyBattlers[i].stats.resistances[RES_INDEX_WIND] < 2) {
-                    BMAGIC_WORK->param.unk_0B |= 8;
+                    TASK(PartyMember)->param.unk_0B |= 8;
                 }
                 if (g_BattleEnemyBattlers[i].stats.resistances[RES_INDEX_EARTH] < 2) {
-                    BMAGIC_WORK->param.unk_0B |= 0x10;
+                    TASK(PartyMember)->param.unk_0B |= 0x10;
                 }
                 if (g_BattleEnemyBattlers[i].stats.resistances[RES_INDEX_HOLY] < 4) {
-                    BMAGIC_WORK->param.unk_0B |= 0x20;
+                    TASK(PartyMember)->param.unk_0B |= 0x20;
                 }
             }
         }
-        BMAGIC_WORK->unk_09 = 22;
-        BMAGIC_WORK->timer  = 4;
-        BMAGIC_WORK->header.mode += 1;
+        TASK(PartyMember)->unk_09 = 22;
+        TASK(PartyMember)->timer  = 4;
+        TASK(PartyMember)->header.mode += 1;
     }
 }
 
 MATCH void func_801EF44C(void) {
     u8 timer;
 
-    timer              = BMAGIC_WORK->timer - 1;
-    BMAGIC_WORK->timer = timer;
+    timer                    = TASK(PartyMember)->timer - 1;
+    TASK(PartyMember)->timer = timer;
     if (timer == 0) {
-        BMAGIC_WORK->timer       = 62;
-        BMAGIC_WORK->header.mode = BMAGIC_WORK->header.mode + 1;
+        TASK(PartyMember)->timer       = 62;
+        TASK(PartyMember)->header.mode = TASK(PartyMember)->header.mode + 1;
     }
 }
 
 MATCH void func_801EF4A8(void) {
     func_801EF55C();
     if (g_PadStates[0].pressed != 0) {
-        BMAGIC_WORK->header.mode = 4;
+        TASK(PartyMember)->header.mode = 4;
     }
 }
 
@@ -236,9 +236,9 @@ MATCH void func_801EF4EC(void) {
         Effect_Reset();
         return;
     }
-    val = BMAGIC_WORK->unk_09;
+    val = TASK(PartyMember)->unk_09;
     if (val > 0) {
-        BMAGIC_WORK->unk_09 = val - 8;
+        TASK(PartyMember)->unk_09 = val - 8;
         func_801EF55C();
     }
 }
@@ -251,9 +251,9 @@ MATCH void func_801EF55C(void) {
     tpage = getTPage(TPAGE_DEPTH_4BIT, TPAGE_ABR_HALF, 320, 256);
     GFX_ADD_DITHERED_DRAW_MODE(GFX_LAYER_TOP, tpage);
     g_ScratchPad.cells.words[0] = 0xE8;
-    g_ScratchPad.cells.words[1] = BMAGIC_WORK->unk_09;
+    g_ScratchPad.cells.words[1] = TASK(PartyMember)->unk_09;
     for (i = 0; i < 6; i++) {
-        if ((BMAGIC_WORK->param.unk_0B >> i) & 1) {
+        if ((TASK(PartyMember)->param.unk_0B >> i) & 1) {
             prim = (TILE*)g_GfxPrimCursor;
             SetTile(prim);
             setXY0(prim, g_ScratchPad.cells.words[0], g_ScratchPad.cells.words[1]);
@@ -263,7 +263,7 @@ MATCH void func_801EF55C(void) {
             GFX_AddPrim(GFX_LAYER_TOP, sizeof(TILE));
         }
     }
-    if (BMAGIC_WORK->param.unk_0B == 0) {
+    if (TASK(PartyMember)->param.unk_0B == 0) {
         prim = (TILE*)g_GfxPrimCursor;
         SetTile(prim);
         setXY0(prim, g_ScratchPad.cells.words[0], g_ScratchPad.cells.words[1]);
@@ -281,40 +281,40 @@ MATCH void func_801EF780(void) {
 }
 
 MATCH void func_801EF7C4(void) {
-    BMAGIC_WORK->facing      = g_BattleEffectBattler->facing;
-    BMAGIC_WORK->pos.x.fixed = g_BattleEffectBattler->pos.x.fixed;
-    BMAGIC_WORK->pos.y.fixed = g_BattleEffectBattler->pos.y.fixed;
-    BMAGIC_WORK->pos.z.fixed = g_BattleEffectBattler->pos.z.fixed + 0x02000000;
+    TASK(PartyMember)->facing      = g_BattleEffectBattler->facing;
+    TASK(PartyMember)->pos.x.fixed = g_BattleEffectBattler->pos.x.fixed;
+    TASK(PartyMember)->pos.y.fixed = g_BattleEffectBattler->pos.y.fixed;
+    TASK(PartyMember)->pos.z.fixed = g_BattleEffectBattler->pos.z.fixed + 0x02000000;
     Battle_ProjectRange();
     SND_SEQueueSelection(0x100);
-    BMAGIC_WORK->param.unk_0B = 0;
-    BMAGIC_WORK->unk_09       = 0xF;
-    BMAGIC_WORK->timer        = 3;
-    BMAGIC_WORK->header.step += 1;
+    TASK(PartyMember)->param.unk_0B = 0;
+    TASK(PartyMember)->unk_09       = 0xF;
+    TASK(PartyMember)->timer        = 3;
+    TASK(PartyMember)->header.step += 1;
 }
 
 MATCH void func_801EF884(void) {
     u8 count;
 
     BMAGIC_DRAW_IN_ACTOR_MATRIX(func_801EFA48);
-    count               = BMAGIC_WORK->unk_09 - 1;
-    BMAGIC_WORK->unk_09 = count;
+    count                     = TASK(PartyMember)->unk_09 - 1;
+    TASK(PartyMember)->unk_09 = count;
     if (!(count & BYTE_MASK)) {
-        BMAGIC_WORK->unk_09 = 0xF;
-        BMAGIC_WORK->header.step += 1;
+        TASK(PartyMember)->unk_09 = 0xF;
+        TASK(PartyMember)->header.step += 1;
     }
 }
 
 MATCH void func_801EF908(void) {
-    if (--BMAGIC_WORK->unk_09 == 0) {
-        BMAGIC_WORK->unk_09 = 0xF;
-        if (--BMAGIC_WORK->timer != 0) {
+    if (--TASK(PartyMember)->unk_09 == 0) {
+        TASK(PartyMember)->unk_09 = 0xF;
+        if (--TASK(PartyMember)->timer != 0) {
             SND_SEQueueSelection(0x100);
-            BMAGIC_WORK->header.step -= 1;
+            TASK(PartyMember)->header.step -= 1;
         } else {
             SND_SEQueueSelection(0x101);
-            BMAGIC_WORK->param.unk_0B = 0xC;
-            BMAGIC_WORK->header.step += 1;
+            TASK(PartyMember)->param.unk_0B = 0xC;
+            TASK(PartyMember)->header.step += 1;
         }
     }
 }
@@ -323,8 +323,8 @@ MATCH void func_801EF9D0(void) {
     u8 timer;
 
     BMAGIC_DRAW_IN_ACTOR_MATRIX(func_801EFA48);
-    timer               = BMAGIC_WORK->unk_09 - 1;
-    BMAGIC_WORK->unk_09 = timer;
+    timer                     = TASK(PartyMember)->unk_09 - 1;
+    TASK(PartyMember)->unk_09 = timer;
     if (timer == 0) {
         BMAGIC_TICK_EFFECT_WORK();
         Effect_Reset();
@@ -339,12 +339,12 @@ MATCH void func_801EFA48(void) {
     GFX_ADD_DITHERED_DRAW_MODE(BMAGIC_LAYER_FOREGROUND, tpage);
     prim = (POLY_FT4*)g_GfxPrimCursor;
     SetPolyFT4(prim);
-    setXY4(prim, BMAGIC_WORK->screen_x.value - 12, BMAGIC_WORK->screen_y.value - 12, BMAGIC_WORK->screen_x.value + 12, BMAGIC_WORK->screen_y.value - 12, BMAGIC_WORK->screen_x.value - 12,
-           BMAGIC_WORK->screen_y.value + 12, BMAGIC_WORK->screen_x.value + 12, BMAGIC_WORK->screen_y.value + 12);
+    setXY4(prim, TASK(PartyMember)->screen_x.value - 12, TASK(PartyMember)->screen_y.value - 12, TASK(PartyMember)->screen_x.value + 12, TASK(PartyMember)->screen_y.value - 12,
+           TASK(PartyMember)->screen_x.value - 12, TASK(PartyMember)->screen_y.value + 12, TASK(PartyMember)->screen_x.value + 12, TASK(PartyMember)->screen_y.value + 12);
     setRGB0(prim, 128, 128, 128);
     prim->tpage = GetTPage(TPAGE_DEPTH_4BIT, TPAGE_ABR_HALF, FONT_TPAGE_X, FONT_TPAGE_Y);
     prim->clut  = GetClut(0, 480);
-    setUV4(prim, BMAGIC_WORK->param.unk_0B, 36, BMAGIC_WORK->param.unk_0B + 11, 36, BMAGIC_WORK->param.unk_0B, 46, BMAGIC_WORK->param.unk_0B + 11, 46);
+    setUV4(prim, TASK(PartyMember)->param.unk_0B, 36, TASK(PartyMember)->param.unk_0B + 11, 36, TASK(PartyMember)->param.unk_0B, 46, TASK(PartyMember)->param.unk_0B + 11, 46);
     GFX_AddPrim(BMAGIC_LAYER_FOREGROUND, sizeof(POLY_FT4));
 }
 

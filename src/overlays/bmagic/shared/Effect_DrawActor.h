@@ -6,10 +6,10 @@ void Effect_SetActorMatrix(void);
 MATCH void Effect_DrawActor(void) {
     BMagicActorSteps handlers = D_801EEC04;
 
-    SYS_DISPATCH_BYTE(handlers.steps, BMAGIC_WORK->header.mode);
-    if (BMAGIC_WORK->header.flags != 0) {
+    SYS_DISPATCH_BYTE(handlers.steps, TASK(PartyMember)->header.mode);
+    if (TASK(PartyMember)->header.flags != 0) {
         Battle_ProjectRange();
-        BMAGIC_WORK->screen_y.value -= 0x10;
+        TASK(PartyMember)->screen_y.value -= 0x10;
         func_801EF7B0();
         Effect_SetActorMatrix();
         func_801EF9E4();

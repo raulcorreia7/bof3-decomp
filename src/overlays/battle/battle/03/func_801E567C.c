@@ -1,9 +1,9 @@
 #include "battle_03.h"
 
 MATCH void func_801E567C(void) {
-    BATTLE_WORK->header.mode = 2u;
-    BATTLE_WORK->header.step = 0u;
-    Battle_ClearSlotPending(BATTLE_WORK->slot);
+    TASK(PartyMember)->header.mode = 2u;
+    TASK(PartyMember)->header.step = 0u;
+    Battle_ClearSlotPending(TASK(PartyMember)->slot);
 
     {
         volatile EnemyBattler* enemy = BATTLE_CURRENT_ENEMY_PTR;

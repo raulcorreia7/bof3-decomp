@@ -14,6 +14,6 @@ MATCH void func_801E3A44(void) {
         } else {
             SND_SEPlay((g_BattleCurrentEnemy->type * 2) | 0x600);
         }
-        BATTLE_WORK->header.step = BATTLE_WORK->header.step + 1;
+        TASK(PartyMember)->header.step = TASK(PartyMember)->header.step + 1;
     }
 }

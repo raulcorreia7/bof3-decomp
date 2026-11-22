@@ -12,8 +12,8 @@ MATCH void func_801E414C(void) {
         GFX_PaletteFreeFadeTarget((void*)g_Task);
         half = &g_Battle.flags;
         *half &= ~BATTLE_STATE_REPRISAL_PENDING;
-        BATTLE_WORK->header.mode = 6;
-        BATTLE_WORK->header.step = 4;
+        TASK(PartyMember)->header.mode = 6;
+        TASK(PartyMember)->header.step = 4;
     } else {
         half2 = &g_Battle.flags;
         if ((*half2 & BATTLE_STATE_REPRISAL_PENDING) != 0) {
@@ -31,12 +31,12 @@ MATCH void func_801E414C(void) {
                 g_Battle.flags |= BATTLE_STATE_REPRISAL_PENDING;
             }
         }
-        Battle_ClearSlotPending(BATTLE_WORK->slot);
+        Battle_ClearSlotPending(TASK(PartyMember)->slot);
         enemy                          = g_BattleCurrentEnemy;
         flags                          = enemy->turn.damage_flags.value & ~(BATTLER_DAMAGE_UNK_4 | BATTLER_DAMAGE_UNK_5 | BATTLER_DAMAGE_TAKEN);
         enemy->turn.damage_flags.value = flags & ~0x200;
-        BATTLE_WORK->header.mode       = 2;
-        BATTLE_WORK->header.step       = 0;
+        TASK(PartyMember)->header.mode = 2;
+        TASK(PartyMember)->header.step = 0;
     }
-    BATTLE_WORK->unk_03 = 0;
+    TASK(PartyMember)->unk_03 = 0;
 }

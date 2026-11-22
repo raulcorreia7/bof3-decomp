@@ -2,15 +2,15 @@
 /* Effect_CountUpAndStep (magic062, magic067, magic079, magic082, magic086, magic088, magic111, magic137, magic167,
    magic223, magic225), Effect_CountUpAndStep2 (magic079) */
 /* The statements of Effect_CountUpAndStep. */
-#define BMAGIC_COUNT_UP_AND_STEP()                                   \
-    do {                                                             \
-        u8 timer;                                                    \
-                                                                     \
-        timer               = BMAGIC_WORK->unk_09 + 1;               \
-        BMAGIC_WORK->unk_09 = timer;                                 \
-        if (timer == 16) {                                           \
-            BMAGIC_WORK->header.step = BMAGIC_WORK->header.step + 1; \
-        }                                                            \
+#define BMAGIC_COUNT_UP_AND_STEP()                                               \
+    do {                                                                         \
+        u8 timer;                                                                \
+                                                                                 \
+        timer                     = TASK(PartyMember)->unk_09 + 1;               \
+        TASK(PartyMember)->unk_09 = timer;                                       \
+        if (timer == 16) {                                                       \
+            TASK(PartyMember)->header.step = TASK(PartyMember)->header.step + 1; \
+        }                                                                        \
     } while (0)
 
 MATCH void Effect_CountUpAndStep(void) {

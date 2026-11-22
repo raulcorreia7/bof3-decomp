@@ -35,10 +35,10 @@ static inline void Effect_CountUpTimer(void) {
     g_BattleEffects[slot].arg.unk_09       = 0;                                    \
     g_BattleEffects[slot].unk_0A           = 0;                                    \
     g_BattleEffects[slot].unk_08           = (facing + 2) & 3;                     \
-    g_BattleEffects[slot].pos.x            = BMAGIC_WORK->pos.x;                   \
-    g_BattleEffects[slot].pos.y            = BMAGIC_WORK->pos.y;                   \
-    COORD_INT(g_BattleEffects[slot].pos.z) = COORD_INT(BMAGIC_WORK->pos.z);        \
-    BMAGIC_WORK->header.mode += 1
+    g_BattleEffects[slot].pos.x            = TASK(PartyMember)->pos.x;             \
+    g_BattleEffects[slot].pos.y            = TASK(PartyMember)->pos.y;             \
+    COORD_INT(g_BattleEffects[slot].pos.z) = COORD_INT(TASK(PartyMember)->pos.z);  \
+    TASK(PartyMember)->header.mode += 1
 
 #define MAGIC113_STEP_COUNT 8
 

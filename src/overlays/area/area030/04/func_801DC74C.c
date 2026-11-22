@@ -16,6 +16,6 @@ MATCH void func_801DC74C(void) {
         } else {
             Script_Select(0xB);
         }
-        FISHING_STATE->sub_index = 1;
+        TASK(FishingState)->sub_index = 1;
     }
 }

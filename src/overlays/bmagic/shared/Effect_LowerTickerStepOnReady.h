@@ -3,6 +3,6 @@
 MATCH void Effect_LowerTickerStepOnReady(void) {
     if (Script_AnimStepOnce() & BYTE_MASK) {
         BATTLE_ACTIVE_WORK->param.unk_0B--;
-        BMAGIC_WORK->header.step++;
+        TASK(PartyMember)->header.step++;
     }
 }

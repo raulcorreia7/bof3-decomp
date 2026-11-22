@@ -3,9 +3,9 @@
 MATCH void Effect_CountDownTimerNextStep(void) {
     u8 timer;
 
-    timer               = BMAGIC_WORK->unk_09 - 1;
-    BMAGIC_WORK->unk_09 = timer;
+    timer                     = TASK(PartyMember)->unk_09 - 1;
+    TASK(PartyMember)->unk_09 = timer;
     if (timer == 0) {
-        BMAGIC_WORK->header.mode = BMAGIC_WORK->header.mode + 1;
+        TASK(PartyMember)->header.mode = TASK(PartyMember)->header.mode + 1;
     }
 }

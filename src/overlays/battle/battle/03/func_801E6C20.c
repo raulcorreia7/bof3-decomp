@@ -6,8 +6,8 @@ MATCH void func_801E6C20(void) {
     u16           half;
 
     Script_AnimStepOnce();
-    count               = BATTLE_WORK->unk_09 - 1;
-    BATTLE_WORK->unk_09 = count;
+    count                     = TASK(PartyMember)->unk_09 - 1;
+    TASK(PartyMember)->unk_09 = count;
     if (count == 0u) {
         gate        = &g_Battle.flags;
         half        = (*gate | 0x20u);

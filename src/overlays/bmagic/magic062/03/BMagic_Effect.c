@@ -16,23 +16,23 @@ MATCH void func_801EEC94(void) {
     u8           i;
     u8           slot;
 
-    actor                     = g_Battle.selected_actor;
-    BMAGIC_WORK->facing       = actor->facing;
-    BMAGIC_WORK->pos.x.fixed  = actor->pos.x.fixed;
-    BMAGIC_WORK->pos.y.fixed  = actor->pos.y.fixed;
-    BMAGIC_WORK->pos.z.fixed  = actor->pos.z.fixed;
-    BMAGIC_WORK->param.unk_0B = 0;
-    BMAGIC_WORK->unk_09       = 16;
-    BMAGIC_WORK->header.mode += 1;
+    actor                           = g_Battle.selected_actor;
+    TASK(PartyMember)->facing       = actor->facing;
+    TASK(PartyMember)->pos.x.fixed  = actor->pos.x.fixed;
+    TASK(PartyMember)->pos.y.fixed  = actor->pos.y.fixed;
+    TASK(PartyMember)->pos.z.fixed  = actor->pos.z.fixed;
+    TASK(PartyMember)->param.unk_0B = 0;
+    TASK(PartyMember)->unk_09       = 16;
+    TASK(PartyMember)->header.mode += 1;
     slot                               = Battle_AllocEffect(1, 74);
     owner                              = g_Task;
     g_BattleEffects[slot].header.mode  = 0;
     g_BattleEffects[slot].arg.unk_09   = 0;
     g_BattleEffects[slot].target.party = owner;
-    g_BattleEffects[slot].pos.x.fixed  = BMAGIC_WORK->pos.x.fixed;
-    g_BattleEffects[slot].pos.y.fixed  = BMAGIC_WORK->pos.y.fixed;
-    g_BattleEffects[slot].pos.z.fixed  = BMAGIC_WORK->pos.z.fixed;
-    BMAGIC_WORK->param.unk_0B += 1;
+    g_BattleEffects[slot].pos.x.fixed  = TASK(PartyMember)->pos.x.fixed;
+    g_BattleEffects[slot].pos.y.fixed  = TASK(PartyMember)->pos.y.fixed;
+    g_BattleEffects[slot].pos.z.fixed  = TASK(PartyMember)->pos.z.fixed;
+    TASK(PartyMember)->param.unk_0B += 1;
     for (i = 0; i < 4; i++) {
         slot                               = Battle_AllocEffect(1, 74);
         spawner                            = g_Task;
@@ -41,8 +41,8 @@ MATCH void func_801EEC94(void) {
         g_BattleEffects[slot].unk_04       = i;
         g_BattleEffects[slot].arg.unk_09   = i * 8 + 1;
         g_BattleEffects[slot].target.party = spawner;
-        g_BattleEffects[slot].unk_0A       = BMAGIC_WORK->unk_09;
-        BMAGIC_WORK->param.unk_0B += 1;
+        g_BattleEffects[slot].unk_0A       = TASK(PartyMember)->unk_09;
+        TASK(PartyMember)->param.unk_0B += 1;
     }
     BMAGIC_POINT_AT_PALETTE_ROW(dst, src, i);
     for (; i < 16; i++) {
@@ -68,10 +68,10 @@ MATCH void func_801EF0C0(void) {
     PartyMember* owner;
     u8           slot;
 
-    g_PaletteFades[BMAGIC_WORK->timer].offset.r--;
-    g_PaletteFades[BMAGIC_WORK->timer].offset.g--;
-    g_PaletteFades[BMAGIC_WORK->timer].offset.b--;
-    if (--BMAGIC_WORK->unk_09 == 0) {
+    g_PaletteFades[TASK(PartyMember)->timer].offset.r--;
+    g_PaletteFades[TASK(PartyMember)->timer].offset.g--;
+    g_PaletteFades[TASK(PartyMember)->timer].offset.b--;
+    if (--TASK(PartyMember)->unk_09 == 0) {
         GFX_PaletteFreeFadeTarget(g_Battle.selected_actor);
         Battle_FadePoisonedBattler(g_Battle.target_selector);
         for (i = 0; i < 4; i++) {
@@ -82,16 +82,16 @@ MATCH void func_801EF0C0(void) {
             g_BattleEffects[slot].arg.unk_09   = i * 5 + 1;
             g_BattleEffects[slot].unk_0A       = i * 12 + 1;
             g_BattleEffects[slot].target.party = owner;
-            BMAGIC_WORK->param.unk_0B++;
+            TASK(PartyMember)->param.unk_0B++;
         }
-        BMAGIC_WORK->header.mode++;
+        TASK(PartyMember)->header.mode++;
     }
 }
 
 MATCH void func_801EF2A0(void) {
     u16* flags;
 
-    if (BMAGIC_WORK->param.unk_0B == 0) {
+    if (TASK(PartyMember)->param.unk_0B == 0) {
         flags                     = &g_Battle.flags;
         g_GameCelerityTimer.hours = 5;
         *flags |= BATTLE_STATE_EFFECT_PLAYING;
@@ -129,8 +129,8 @@ MATCH void func_801EF2F0(s32 stat) {
 #include "overlays/bmagic/shared/BMagic_DispatchEffectMode.h"
 
 MATCH void func_801EF508(void) {
-    SYS_DISPATCH_BYTE(D_801F0C18, BMAGIC_WORK->header.step);
-    if (BMAGIC_WORK->header.flags != 0) {
+    SYS_DISPATCH_BYTE(D_801F0C18, TASK(PartyMember)->header.step);
+    if (TASK(PartyMember)->header.flags != 0) {
         Effect_SetActorMatrix();
         func_801EF678();
         func_801EF934();
@@ -153,10 +153,10 @@ MATCH void func_801EF678(void) {
 
     tpage = getTPage(TPAGE_DEPTH_4BIT, TPAGE_ABR_ADD, 320, 256);
     GFX_ADD_DITHERED_DRAW_MODE(BMAGIC_LAYER_BEHIND_BATTLERS, tpage);
-    g_ScratchPad.cells.halves[3] = BMAGIC_WORK->unk_09 * 5;
-    g_ScratchPad.cells.halves[4] = ((rand() & 3) + 3) * BMAGIC_WORK->unk_09;
-    g_ScratchPad.cells.halves[5] = ((rand() & 3) + 3) * BMAGIC_WORK->unk_09;
-    g_ScratchPad.cells.halves[6] = ((rand() & 3) + 3) * BMAGIC_WORK->unk_09;
+    g_ScratchPad.cells.halves[3] = TASK(PartyMember)->unk_09 * 5;
+    g_ScratchPad.cells.halves[4] = ((rand() & 3) + 3) * TASK(PartyMember)->unk_09;
+    g_ScratchPad.cells.halves[5] = ((rand() & 3) + 3) * TASK(PartyMember)->unk_09;
+    g_ScratchPad.cells.halves[6] = ((rand() & 3) + 3) * TASK(PartyMember)->unk_09;
     g_ScratchPadVectors[2].vx    = FIXED_MUL(rsin(0), 128U);
     g_ScratchPadVectors[2].vy    = FIXED_MUL(rcos(0), 128U);
     for (i = 1; i <= 16; i++) {

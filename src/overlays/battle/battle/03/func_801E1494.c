@@ -33,12 +33,12 @@ MATCH void func_801E1494(void) {
     }
     work = g_GameState;
     if (work->u.turn.target_flags & BATTLE_HIT_HP) {
-        Battle_QueueAction(work->u.turn.hp_change, BATTLE_WORK->slot);
+        Battle_QueueAction(work->u.turn.hp_change, TASK(PartyMember)->slot);
         work = g_Game.current;
     }
     if (work->u.turn.target_flags & BATTLE_HIT_AP) {
-        func_800AAEBC(work->u.turn.ap_change, BATTLE_WORK->slot);
+        func_800AAEBC(work->u.turn.ap_change, TASK(PartyMember)->slot);
     }
     func_801DEDE4();
-    BATTLE_WORK->unk_03 = BATTLE_WORK->unk_03 + 1;
+    TASK(PartyMember)->unk_03 = TASK(PartyMember)->unk_03 + 1;
 }

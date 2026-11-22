@@ -3,19 +3,19 @@
 MATCH void Effect_ReleaseTarget(void) {
     u8 count;
 
-    BMAGIC_WORK->param.unk_0B += 1;
-    count               = BMAGIC_WORK->unk_09 - 1;
-    BMAGIC_WORK->unk_09 = count;
+    TASK(PartyMember)->param.unk_0B += 1;
+    count                     = TASK(PartyMember)->unk_09 - 1;
+    TASK(PartyMember)->unk_09 = count;
     if (!(count & BYTE_MASK)) {
         if (g_Battle.target_selector & BATTLE_TARGET_ENEMY_SIDE) {
-            Battle_MarkDamaged((BMAGIC_WORK->unk_03 + 3) & BYTE_MASK);
-            GFX_PaletteFreeFadeTarget(&g_BattleEnemyBattlers[BMAGIC_WORK->unk_03]);
-            Battle_FadePoisonedBattler((BMAGIC_WORK->unk_03 + 3) & BYTE_MASK);
+            Battle_MarkDamaged((TASK(PartyMember)->unk_03 + 3) & BYTE_MASK);
+            GFX_PaletteFreeFadeTarget(&g_BattleEnemyBattlers[TASK(PartyMember)->unk_03]);
+            Battle_FadePoisonedBattler((TASK(PartyMember)->unk_03 + 3) & BYTE_MASK);
         } else {
-            Battle_MarkDamaged(BMAGIC_WORK->unk_03);
-            GFX_PaletteFreeFadeTarget((EnemyBattler*)&g_Game.members[BMAGIC_WORK->unk_03]);
-            Battle_FadePoisonedBattler(BMAGIC_WORK->unk_03);
+            Battle_MarkDamaged(TASK(PartyMember)->unk_03);
+            GFX_PaletteFreeFadeTarget((EnemyBattler*)&g_Game.members[TASK(PartyMember)->unk_03]);
+            Battle_FadePoisonedBattler(TASK(PartyMember)->unk_03);
         }
-        BMAGIC_WORK->header.step += 1;
+        TASK(PartyMember)->header.step += 1;
     }
 }

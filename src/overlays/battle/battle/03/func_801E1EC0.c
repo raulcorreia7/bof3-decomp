@@ -26,9 +26,9 @@ MATCH void func_801E1EC0(void) {
     g_BattleEffects[effect_slot & BYTE_MASK].unk_04       = 0;
     g_BattleEffects[effect_slot & BYTE_MASK].unk_0B       = effect_slot;
     g_BattleEffects[effect_slot & BYTE_MASK].target.party = g_Task;
-    BATTLE_WORK->header.flags |= ACTOR_FLAG_HIDDEN;
-    BATTLE_WORK->unk_09               = 0x10;
-    BATTLE_WORK->timer                = 16;
+    TASK(PartyMember)->header.flags |= ACTOR_FLAG_HIDDEN;
+    TASK(PartyMember)->unk_09         = 0x10;
+    TASK(PartyMember)->timer          = 16;
     work                              = g_Task;
     ((PartyMember*)work)->header.step = (((PartyMember*)work)->header.step + 1);
 }

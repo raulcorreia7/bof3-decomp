@@ -9,5 +9,5 @@ MATCH void func_800AE474(void) {
         Effect_Reset();
     }
     /* Reload: work does not survive the cue call. */
-    Area_PaletteUpdateTint((s8)BATTLE_WORK->unk_09);
+    Area_PaletteUpdateTint((s8)TASK(PartyMember)->unk_09);
 }

@@ -5,12 +5,12 @@
 MATCH void Effect_CountDownAndPickRandom(void) {
     u8 counter;
 
-    counter             = BMAGIC_WORK->unk_09 - 1;
-    BMAGIC_WORK->unk_09 = counter;
+    counter                   = TASK(PartyMember)->unk_09 - 1;
+    TASK(PartyMember)->unk_09 = counter;
     if (!(counter & BYTE_MASK)) {
-        BMAGIC_WORK->param.unk_0B = RANDOM_MASK(0xF);
-        BMAGIC_WORK->unk_09       = 0;
-        BMAGIC_WORK->timer        = 0;
-        BMAGIC_WORK->header.step += 1;
+        TASK(PartyMember)->param.unk_0B = RANDOM_MASK(0xF);
+        TASK(PartyMember)->unk_09       = 0;
+        TASK(PartyMember)->timer        = 0;
+        TASK(PartyMember)->header.step += 1;
     }
 }

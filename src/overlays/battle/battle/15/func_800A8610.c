@@ -2,7 +2,7 @@
 
 MATCH void func_800A8610(void) {
     if (func_801DEE4C() & BYTE_MASK) {
-        Script_Select((BATTLE_WORK->facing + 0x3C) & BYTE_MASK);
-        BATTLE_WORK->header.mode++;
+        Script_Select((TASK(PartyMember)->facing + 0x3C) & BYTE_MASK);
+        TASK(PartyMember)->header.mode++;
     }
 }

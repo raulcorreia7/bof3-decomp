@@ -11,23 +11,23 @@ MATCH void Battle_RunAilmentActor(void) {
     if ((g_Battle.flags & BATTLE_STATE_EFFECT_LOADING) &&
         ((g_BattleEffectBattler->slot == g_Battle.active_battler) ||
          ((LOBU(g_Battle.action_type) == BATTLE_ACTION_ABILITY) && ((LOHU(g_Battle.action_id) == ABILITY_ACCESSION) || (LOHU(g_Battle.action_id) == ABILITY_TEMPTATION))))) {
-        BATTLE_WORK->header.mode += 1;
+        TASK(PartyMember)->header.mode += 1;
         return;
     }
-    if (BATTLE_WORK->timer == 0) {
+    if (TASK(PartyMember)->timer == 0) {
         id = func_801E8FA8();
         if (id == GAME_NONE) {
             Effect_Reset();
             return;
         }
-        BATTLE_WORK->unk_27 = 0xFF;
-        BATTLE_WORK->timer  = 60;
-        if (BATTLE_WORK->param.unk_0B != id) {
+        TASK(PartyMember)->unk_27 = 0xFF;
+        TASK(PartyMember)->timer  = 60;
+        if (TASK(PartyMember)->param.unk_0B != id) {
             Script_Select(s_BattleBattlerStepIds[id]);
-            BATTLE_WORK->param.unk_0B = id;
+            TASK(PartyMember)->param.unk_0B = id;
         }
     } else {
-        BATTLE_WORK->timer -= 1;
+        TASK(PartyMember)->timer -= 1;
     }
     slot = g_BattleEffectBattler->slot;
     if (BATTLER_IS_PLAYER(slot)) {
@@ -37,12 +37,12 @@ MATCH void Battle_RunAilmentActor(void) {
         flags = g_BattleEnemyBattlers[row].status;
     }
     if ((flags & (STATUS_BLIND | STATUS_SILENCED | STATUS_SLEEPING)) == 0) {
-        BATTLE_WORK->header.mode = 0;
+        TASK(PartyMember)->header.mode = 0;
     }
     func_801E8DD8();
     Script_AnimStepLoop();
     Area_AddActor();
     if ((Battle_SlotIsBlocked(g_BattleEffectBattler->slot) & BYTE_MASK) && !ACTOR_IN_USE(*g_BattleEffectBattler)) {
-        BATTLE_WORK->header.mode = 0;
+        TASK(PartyMember)->header.mode = 0;
     }
 }

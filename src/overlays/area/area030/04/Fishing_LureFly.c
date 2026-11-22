@@ -16,7 +16,7 @@ MATCH void Fishing_LureFly(void) {
     FishingState* work_a;
     FishingState* work_c;
 
-    height = FISHING_STATE->cursor_10;
+    height = TASK(FishingState)->cursor_10;
     if (height >= FISHING_CAMERA_Y_MAX) {
         g_AreaScrollTargetY = FISHING_CAMERA_Y_MAX;
     } else if (height < FISHING_CAMERA_Y_MIN) {

@@ -21,26 +21,26 @@ extern BattleEffect D_801F0710[];
  * every eighth frame queues the selection sound and spawns sixteen children
  * on the battler. A statement macro: the member declares PartyMember* battler,
  * u8 i and u8 slot. */
-#define MAGIC220_SWAY_AND_SPAWN()                                                            \
-    if (g_FrameCount & 0x1) {                                                                \
-        BMAGIC_WORK->pos.x.fixed = g_BattleEffectBattler->pos.x.fixed + BMAGIC_WORK->unk_0C; \
-        BMAGIC_WORK->pos.y.fixed = g_BattleEffectBattler->pos.y.fixed - BMAGIC_WORK->unk_0C; \
-    } else {                                                                                 \
-        BMAGIC_WORK->pos.x.fixed = g_BattleEffectBattler->pos.x.fixed - BMAGIC_WORK->unk_0C; \
-        BMAGIC_WORK->pos.y.fixed = g_BattleEffectBattler->pos.y.fixed + BMAGIC_WORK->unk_0C; \
-    }                                                                                        \
-    if ((g_FrameCount & 0x7) == 0) {                                                         \
-        SND_SEQueueSelection(EMI_SE_ID(SND_BANK_COMMON, 2));                                 \
-        for (i = 0; i < 16; i++) {                                                           \
-            slot = BMagic_AllocEffect();                                                     \
-            if (slot != GAME_NONE) {                                                         \
-                battler                                = g_BattleEffectBattler;              \
-                BMAGIC_EFFECT_SLOTS[slot].header.mode  = 0;                                  \
-                BMAGIC_EFFECT_SLOTS[slot].unk_0B       = i;                                  \
-                BMAGIC_EFFECT_SLOTS[slot].target.party = battler;                            \
-                g_BattleEffectBattler->param.unk_0B++;                                       \
-            }                                                                                \
-        }                                                                                    \
+#define MAGIC220_SWAY_AND_SPAWN()                                                                        \
+    if (g_FrameCount & 0x1) {                                                                            \
+        TASK(PartyMember)->pos.x.fixed = g_BattleEffectBattler->pos.x.fixed + TASK(PartyMember)->unk_0C; \
+        TASK(PartyMember)->pos.y.fixed = g_BattleEffectBattler->pos.y.fixed - TASK(PartyMember)->unk_0C; \
+    } else {                                                                                             \
+        TASK(PartyMember)->pos.x.fixed = g_BattleEffectBattler->pos.x.fixed - TASK(PartyMember)->unk_0C; \
+        TASK(PartyMember)->pos.y.fixed = g_BattleEffectBattler->pos.y.fixed + TASK(PartyMember)->unk_0C; \
+    }                                                                                                    \
+    if ((g_FrameCount & 0x7) == 0) {                                                                     \
+        SND_SEQueueSelection(EMI_SE_ID(SND_BANK_COMMON, 2));                                             \
+        for (i = 0; i < 16; i++) {                                                                       \
+            slot = BMagic_AllocEffect();                                                                 \
+            if (slot != GAME_NONE) {                                                                     \
+                battler                                = g_BattleEffectBattler;                          \
+                BMAGIC_EFFECT_SLOTS[slot].header.mode  = 0;                                              \
+                BMAGIC_EFFECT_SLOTS[slot].unk_0B       = i;                                              \
+                BMAGIC_EFFECT_SLOTS[slot].target.party = battler;                                        \
+                g_BattleEffectBattler->param.unk_0B++;                                                   \
+            }                                                                                            \
+        }                                                                                                \
     }
 extern Magic220Steps D_801EEC04;
 void                 func_801EFF60(void);

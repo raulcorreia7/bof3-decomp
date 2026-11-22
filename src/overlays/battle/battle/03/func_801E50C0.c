@@ -14,9 +14,9 @@ MATCH void func_801E50C0(void) {
             countdown   = work->timer - 1;
             work->timer = countdown;
             if (countdown != 0) {
-                BATTLE_WORK->unk_5D -= 0x10;
-                BATTLE_WORK->unk_5E -= 0x10;
-                BATTLE_WORK->unk_5F -= 0x10;
+                TASK(PartyMember)->unk_5D -= 0x10;
+                TASK(PartyMember)->unk_5E -= 0x10;
+                TASK(PartyMember)->unk_5F -= 0x10;
 
                 {
                     PartyMember* motion_work;
@@ -29,7 +29,7 @@ MATCH void func_801E50C0(void) {
                 }
                 Battle_IsEnemyBlocked();
             } else {
-                BATTLE_WORK->header.step += 1;
+                TASK(PartyMember)->header.step += 1;
             }
         }
     }

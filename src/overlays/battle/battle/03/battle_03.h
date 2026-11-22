@@ -36,8 +36,6 @@
 /* Party slot the entrance pass is on, and the entrance sub-step byte 0x801462E2. */
 #define BATTLE_PARTY_CURSOR      (((u8*)&D_80140000)[0x62E5])
 #define BATTLE_ENTRANCE_STEP     (((u8*)&D_80140000)[0x62E2])
-/* The current task as the battler record the battle step runs on. */
-#define BATTLE_WORK              TASK(PartyMember)
 
 /* The fixed panel-task argument table preserves the caller's whole argument
  * block for the selected entry; no lifted caller names those seven words yet,
@@ -1034,7 +1032,7 @@ static inline void BattleDrainWorkCounter(void) {
         work->scale.x -= 0x2000;
     } else {
         work->header.flags |= PARTY_MEMBER_FLAG_HANDLER_BUSY;
-        BATTLE_WORK->header.mode++;
+        TASK(PartyMember)->header.mode++;
     }
 }
 
@@ -1043,11 +1041,11 @@ static inline void BattleAdvanceCoords(u8 (*tail_update)(void)) {
     PartyMember* work;
     u8           timer;
 
-    timer              = BATTLE_WORK->timer - 1;
-    BATTLE_WORK->timer = timer;
+    timer                    = TASK(PartyMember)->timer - 1;
+    TASK(PartyMember)->timer = timer;
     if (timer == 0) {
-        BATTLE_WORK->timer = 4;
-        BATTLE_WORK->unk_03 += 1;
+        TASK(PartyMember)->timer = 4;
+        TASK(PartyMember)->unk_03 += 1;
     }
     work = g_Task;
     work->pos.x.fixed += work->unk_0C;

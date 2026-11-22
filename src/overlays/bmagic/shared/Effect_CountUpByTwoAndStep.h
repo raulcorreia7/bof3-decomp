@@ -4,9 +4,9 @@
 MATCH void Effect_CountUpByTwoAndStep(void) {
     u8 timer;
 
-    timer               = BMAGIC_WORK->unk_09 + 2;
-    BMAGIC_WORK->unk_09 = timer;
+    timer                     = TASK(PartyMember)->unk_09 + 2;
+    TASK(PartyMember)->unk_09 = timer;
     if (timer == 16) {
-        BMAGIC_WORK->header.step = BMAGIC_WORK->header.step + 1;
+        TASK(PartyMember)->header.step = TASK(PartyMember)->header.step + 1;
     }
 }

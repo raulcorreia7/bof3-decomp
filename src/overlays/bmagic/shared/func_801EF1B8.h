@@ -3,10 +3,10 @@
 MATCH void func_801EF1B8(void) {
     u8 timer;
 
-    BMAGIC_WORK->unk_09 -= 1;
-    BMAGIC_WORK->param.unk_0B += 2;
-    timer              = BMAGIC_WORK->timer + 1;
-    BMAGIC_WORK->timer = timer;
+    TASK(PartyMember)->unk_09 -= 1;
+    TASK(PartyMember)->param.unk_0B += 2;
+    timer                    = TASK(PartyMember)->timer + 1;
+    TASK(PartyMember)->timer = timer;
     if ((timer & BYTE_MASK) == 0x10) {
         BATTLE_ACTIVE_WORK->param.unk_0B = 0xFF;
         Effect_Reset();

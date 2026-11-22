@@ -9,6 +9,6 @@ MATCH void func_801D56F4(void) {
         Actor_Clear();
         return;
     }
-    record = FISHING_STATE;
+    record = TASK(FishingState);
     D_801E1FBC[record->mode_index]();
 }

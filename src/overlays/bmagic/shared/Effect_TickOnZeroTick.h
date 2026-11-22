@@ -4,7 +4,7 @@
 MATCH void Effect_TickOnZeroTick(void) {
     PartyMember* work;
 
-    if (BMAGIC_WORK->param.unk_0B == 0) {
+    if (TASK(PartyMember)->param.unk_0B == 0) {
         work               = (PartyMember*)g_BattleEffectBattler;
         work->param.unk_0B = work->param.unk_0B - 1;
         Effect_Reset();
