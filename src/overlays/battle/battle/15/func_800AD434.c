@@ -5,7 +5,7 @@ MATCH void func_800AD434(void) {
     Callback     funcs[2] = {func_800AD4D4, func_800AD5C8};
     u8           two;
 
-    work = (PartyMember*)g_Task;
+    work = TASK(PartyMember);
     funcs[work->header.step]();
     two = 2u;
     if (!(D_80148624 & 0x1)) {

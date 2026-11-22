@@ -18,14 +18,14 @@ MATCH void func_801F4270(void) {
                 func_801ABD68(x, y, 16, g_ScriptState);
                 g_ScriptState->steps = 1;
                 g_Task->direction    = D_801F6ABC[index].direction;
-                if ((u8*)g_Task == (u8*)&g_Game) {
+                if (TASK(u8) == (u8*)&g_Game) {
                     g_AreaScrollTargetX = x;
                     g_AreaScrollTargetY = y;
                     g_AreaCameraStep    = 0x20;
                 }
             } else {
                 g_ScriptState->cursor -= 4;
-                if ((u8*)g_Task == (u8*)&g_Game) {
+                if (TASK(u8) == (u8*)&g_Game) {
                     g_ScriptVars[3] = 8;
                 }
             }

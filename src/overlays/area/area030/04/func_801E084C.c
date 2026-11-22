@@ -26,11 +26,11 @@ MATCH void func_801E084C(void) {
     AreaWorkScale* work;
     s32            save;
 
-    saved        = (AreaWorkSaved*)g_Task;
+    saved        = TASK(AreaWorkSaved);
     save         = saved->saved;
     saved->saved = 0;
     Area_AddGridActor();
-    work                          = (AreaWorkScale*)g_Task;
+    work                          = TASK(AreaWorkScale);
     ((AreaWorkSaved*)work)->saved = save;
     if (work->distance < 0) {
         work->result_40 = (0x4650000 / (work->distance - work->scale * 2)) & ~0xFF;

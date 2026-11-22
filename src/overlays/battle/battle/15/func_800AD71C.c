@@ -15,13 +15,13 @@ MATCH void func_800AD71C(void) {
         PartyMember* record;
         PartyMember* other;
 
-        record                      = (PartyMember*)g_Task;
+        record                      = TASK(PartyMember);
         record->unk_2B              = 0;
-        other                       = (PartyMember*)g_Task;
+        other                       = TASK(PartyMember);
         record->unk_2C.signed_value = 2;
         other->unk_2A               = 0;
     }
-    record                 = (PartyMember*)g_Task;
+    record                 = TASK(PartyMember);
     record->pos.z.fixed    = 0;
     record->screen_x.value = D_80148628 + 0x14;
     count                  = record->header.mode;

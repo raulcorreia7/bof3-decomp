@@ -48,10 +48,10 @@ MATCH void func_801A1384(void* entity) {
                     return;
                 }
             } else if ((g_Task->unk_06 == 0x0A) && ((LOW(rec[0x74]) & 0x88) == 8)) {
-                g_Task->unk_0A    = (0x10 / rate);
-                ((s32*)g_Task)[3] = 0;
-                ((s32*)g_Task)[4] = 0;
-                ((s32*)g_Task)[5] = 0;
+                g_Task->unk_0A = (0x10 / rate);
+                TASK(s32)[3]   = 0;
+                TASK(s32)[4]   = 0;
+                TASK(s32)[5]   = 0;
             }
             if ((rec[0x74] & ACTOR_INTERACTION_FADE_WHITE) != 0) {
                 g_Task->unk_03      = g_Task->header.mode;

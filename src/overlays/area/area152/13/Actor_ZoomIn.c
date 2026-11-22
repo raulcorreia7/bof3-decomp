@@ -7,10 +7,10 @@ MATCH void Actor_ZoomIn(void) {
 
     Actor_SetScreenOrigin();
 
-    scratch = (u8*)g_Task;
+    scratch = TASK(u8);
     scratch[0x09] -= 1;
 
-    check = (u8*)g_Task;
+    check = TASK(u8);
     *(s32*)(scratch + 0x40) += 0x2000;
 
     if (check[0x09] == 0) {

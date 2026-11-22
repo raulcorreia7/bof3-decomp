@@ -14,11 +14,11 @@ MATCH void func_8011700C(void) {
 }
 
 MATCH void func_80117048(void) {
-    ((Actor*)g_Task)->pos.x.fixed = TO_COORD(11) + COORD_HALF;
-    ((Actor*)g_Task)->pos.y.fixed = TO_COORD(84) + COORD_HALF;
-    ((Actor*)g_Task)->pos.z.fixed = TO_COORD(256);
+    TASK(Actor)->pos.x.fixed = TO_COORD(11) + COORD_HALF;
+    TASK(Actor)->pos.y.fixed = TO_COORD(84) + COORD_HALF;
+    TASK(Actor)->pos.z.fixed = TO_COORD(256);
     func_801172D0();
-    ((Actor*)g_Task)->header.mode += 1;
+    TASK(Actor)->header.mode += 1;
 }
 
 MATCH void func_801170A4(void) {
@@ -164,8 +164,8 @@ MATCH void func_80117610(void) {
 MATCH void func_8011765C(void) {
     g_GameFlags |= GAME_FLAG_MENU_LOCK;
     func_801172D0();
-    ((Actor*)g_Task)->timer = 180;
-    ((Actor*)g_Task)->header.mode += 1;
+    TASK(Actor)->timer = 180;
+    TASK(Actor)->header.mode += 1;
 }
 
 MATCH void func_801176B8(void) {
@@ -179,13 +179,13 @@ MATCH void func_801176B8(void) {
             D_801181DC->normal.vz = TO_COORD(32);
         }
     }
-    timer                   = ((Actor*)g_Task)->timer - 1;
-    ((Actor*)g_Task)->timer = timer;
+    timer              = TASK(Actor)->timer - 1;
+    TASK(Actor)->timer = timer;
     if (timer == 0) {
-        task        = (Actor*)g_Task;
+        task        = TASK(Actor);
         task->timer = 0x40;
         task->vx    = TO_COORD(32);
-        ((Actor*)g_Task)->header.mode += 1;
+        TASK(Actor)->header.mode += 1;
     }
 }
 
@@ -196,14 +196,14 @@ MATCH void func_80117768(void) {
         D_801181DC = (AreaSprite*)Area_FindFreeWorkRow();
         if (D_801181DC != 0) {
             func_80117864(D_801181DC);
-            ((Actor*)g_Task)->vx -= TO_COORD(1);
-            D_801181DC->normal.vz = ((Actor*)g_Task)->vx;
+            TASK(Actor)->vx -= TO_COORD(1);
+            D_801181DC->normal.vz = TASK(Actor)->vx;
         }
     }
-    timer                   = ((Actor*)g_Task)->timer - 1;
-    ((Actor*)g_Task)->timer = timer;
+    timer              = TASK(Actor)->timer - 1;
+    TASK(Actor)->timer = timer;
     if (timer == 0) {
-        ((Actor*)g_Task)->header.mode += 1;
+        TASK(Actor)->header.mode += 1;
     }
 }
 
@@ -362,12 +362,12 @@ MATCH void func_80117C58(void) {
 
 MATCH void func_80117DF0(void) {
     if (!(g_FrameCount & 0x1)) {
-        ((Actor*)g_Task)->timer += 1;
+        TASK(Actor)->timer += 1;
     }
-    if (((Actor*)g_Task)->timer >= 128U) {
+    if (TASK(Actor)->timer >= 128U) {
         Actor_Clear();
     }
-    func_80117E78(128 - ((Actor*)g_Task)->timer, 0);
+    func_80117E78(128 - TASK(Actor)->timer, 0);
 }
 
 #ifdef NON_MATCHING

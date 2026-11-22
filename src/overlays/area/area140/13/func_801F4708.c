@@ -3,7 +3,7 @@
 MATCH void func_801F4708(void) {
     u8* work;
 
-    work = (u8*)g_Task;
+    work = TASK(u8);
     work[9]--;
     if (work[9] == 0) {
         g_Task->header.mode = 2;

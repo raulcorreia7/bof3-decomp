@@ -7,7 +7,7 @@ MATCH void Area_RequestRestartOnEntryChange(void) {
 
     Actor_SetScreenOrigin();
     if (g_GameEntryState != 1) {
-        scratch = (u8*)g_Task;
+        scratch = TASK(u8);
         step    = scratch[0x0B];
         if (step == scratch[0x07] && g_GameStateIndex != GAME_REQUEST_AREA_CHANGE) {
             if (step != 1) {

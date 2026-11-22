@@ -1396,9 +1396,9 @@ static inline s32 Game_AddStepByFlag(s32 step, Actor* actor, s32 value_b, u8 fla
     flags = flag_bits & 0x2;
     if (flags != 0) {
         if (actor->unk_7B != 0u) {
-            work      = (u8*)g_Task;
+            work      = TASK(u8);
             work[9]   = (u8)(0x20 / (s32)(value_b & BYTE_MASK));
-            work      = (u8*)g_Task;
+            work      = TASK(u8);
             work[0xA] = (u8)(work[9] >> 1);
         }
     }

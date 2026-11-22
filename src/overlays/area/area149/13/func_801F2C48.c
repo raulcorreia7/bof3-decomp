@@ -8,7 +8,7 @@ MATCH void func_801F2C48(void) {
     D_80145ED8               = 1;
     D_80146018               = 1;
     D_80146158               = 1;
-    work                     = (u8*)g_Task;
+    work                     = TASK(u8);
     work[0x5F]               = 0x7F;
     work[0x5E]               = 0x7F;
     work[0x5D]               = 0x7F;

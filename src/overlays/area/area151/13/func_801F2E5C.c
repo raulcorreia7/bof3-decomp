@@ -10,7 +10,7 @@ MATCH void func_801F2E5C(void) {
     x      = FIX_INT(g_Game.members[0].pos.x.fixed + scaled);
     y      = FIX_INT(g_Game.members[0].pos.y.fixed + g_Game.members[0].unk_10 * g_Game.members[0].unk_09);
 
-    scratch                 = (u8*)g_Task;
+    scratch                 = TASK(u8);
     *(s32*)(scratch + 0x0C) = x;
     *(s32*)(scratch + 0x10) = y;
 

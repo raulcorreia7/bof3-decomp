@@ -37,7 +37,7 @@ MATCH void func_801A0CFC(Actor* entity) {
         g_Task->header.mode = 0x0A;
         entity->unk_79      = (value & 0x7);
         g_Task->direction   = (saved & 0x7);
-        work                = (u8*)g_Task;
+        work                = TASK(u8);
         work[0x0A]          = 0;
         work[9]             = 0;
         func_801A3B7C(entity);

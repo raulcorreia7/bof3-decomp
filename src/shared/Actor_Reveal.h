@@ -3,7 +3,7 @@
 MATCH void Actor_Reveal(void) {
     u8* work;
 
-    work = (u8*)g_Task;
+    work = TASK(u8);
     if (work[9] != 0) {
         g_Actors[work[11]].header.flags |= ACTOR_FLAG_HIDDEN;
         g_Task->timer -= 1;
