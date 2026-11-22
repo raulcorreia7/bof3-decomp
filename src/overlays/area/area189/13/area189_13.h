@@ -51,6 +51,8 @@ extern u8 D_801F638A[];
 /* The image's step passes. */
 void func_801F518C(void);
 void func_801F54B0(void);
+void func_801F497C(u8 size);
+void func_801F4B64(TILE_1* source);
 u8   func_801F5D6C(void);
 void func_801F5D20(void);
 bool func_801F5EA8(void);
