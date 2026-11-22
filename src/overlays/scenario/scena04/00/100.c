@@ -219,10 +219,8 @@ MATCH void func_801F75BC(u8 weight, u8 shade) {
         Camera_ProjectPoint(point, (DVECTOR*)&line->x1);
         flicker    = (g_FrameCount & 1) << 2;
         first_tint = (u8)(((flicker + 0x80) * shade) >> 8);
-        line->r0   = ((flicker + 0x80) * shade) >> 8;
-        line->g0   = ((flicker + 0x80) * shade) >> 8;
-        line->b0   = first_tint >> 1;
-        tint       = (flicker * shade) >> 8;
+        setRGB0(line, ((flicker + 0x80) * shade) >> 8, ((flicker + 0x80) * shade) >> 8, first_tint >> 1);
+        tint = (flicker * shade) >> 8;
         setRGB1(line, tint, tint, (u8)tint >> 1);
         GFX_AddPrim(GFX_LAYER_UI, sizeof(LINE_G2));
     }

@@ -22,8 +22,7 @@ MATCH void Trail_Draw(Trail* trail) {
         prim = (POLY_G4*)g_GfxPrimCursor;
         SetPolyG4(prim);
         SetSemiTrans(prim, 1);
-        prim->x0 = point[0].screen.vx;
-        prim->y0 = point[0].screen.vy;
+        setXY0(prim, point[0].screen.vx, point[0].screen.vy);
         prim->x1 = point[0].screen.vx + ((u16)point[0].width * rcos((u16)point[0].angle + 0x400) >> 12);
         prim->y1 = point[0].screen.vy + ((u16)point[0].width * rsin((u16)point[0].angle + 0x400) >> 12);
         prim->x2 = next[0].screen.vx;

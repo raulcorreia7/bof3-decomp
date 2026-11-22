@@ -51,8 +51,7 @@ MATCH void func_801F31A0(AreaRing* ring) {
     SetTile(tile);
     SetSemiTrans(tile, 1);
     setXY0(tile, 0, 0);
-    tile->w  = 0x140;
-    tile->h  = bottom;
+    setWH(tile, 0x140, bottom);
     shade    = ring->unk_23;
     tile->b0 = shade;
     tile->g0 = shade;
@@ -63,8 +62,7 @@ MATCH void func_801F31A0(AreaRing* ring) {
     SetTile(tile);
     SetSemiTrans(tile, 1);
     setXY0(tile, 0, top);
-    tile->w  = 0x140;
-    tile->h  = 0xF0 - top;
+    setWH(tile, 0x140, 0xF0 - top);
     shade    = ring->unk_23;
     tile->b0 = shade;
     tile->g0 = shade;

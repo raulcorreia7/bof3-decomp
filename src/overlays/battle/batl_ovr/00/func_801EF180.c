@@ -31,8 +31,7 @@ MATCH void func_801EF180(s32 shade) {
     setRGB0(sprt, shade, shade, shade);
     sprt->x0 = x;
     sprt->v0 = 0;
-    sprt->w  = 32;
-    sprt->h  = 96;
+    setWH(sprt, 32, 96);
     SetSprt(sprt);
     GFX_AddPrim(GFX_LAYER_EFFECT_FRONT, sizeof(SPRT));
 
@@ -43,8 +42,7 @@ MATCH void func_801EF180(s32 shade) {
     setRGB0(sprt, shade, shade, shade);
     sprt->x0 = x;
     sprt->v0 = 0;
-    sprt->w  = 32;
-    sprt->h  = 64;
+    setWH(sprt, 32, 64);
     SetSprt(sprt);
     GFX_AddPrim(GFX_LAYER_EFFECT_FRONT, sizeof(SPRT));
 }

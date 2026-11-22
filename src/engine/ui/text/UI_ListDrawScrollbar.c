@@ -27,28 +27,19 @@ NON_MATCHING void UI_ListDrawScrollbar(u8* marks, u8 thumb_top, s16 x, s16 y, u8
     }
     poly = (POLY_FT4*)g_GfxPrimCursor;
     SetPolyFT4(poly);
-    top         = y + (u8)((track_size * thumb_top * 2 + total) / (total * 2)) + 3;
-    poly->x0    = x;
-    poly->x2    = x;
-    poly->x1    = x + 8;
-    poly->x3    = x + 8;
-    poly->y0    = top;
-    poly->y1    = top;
-    poly->y2    = top + thumb_size * track_size / total;
-    poly->y3    = poly->y2;
-    poly->u0    = 0x58;
-    poly->v0    = 0x98;
-    poly->u1    = 0x60;
-    poly->v1    = 0x98;
-    poly->u2    = 0x58;
-    poly->v2    = 0x9F;
-    poly->u3    = 0x60;
-    poly->v3    = 0x9F;
+    top      = y + (u8)((track_size * thumb_top * 2 + total) / (total * 2)) + 3;
+    poly->x0 = x;
+    poly->x2 = x;
+    poly->x1 = x + 8;
+    poly->x3 = x + 8;
+    poly->y0 = top;
+    poly->y1 = top;
+    poly->y2 = top + thumb_size * track_size / total;
+    poly->y3 = poly->y2;
+    setUV4(poly, 0x58, 0x98, 0x60, 0x98, 0x58, 0x9F, 0x60, 0x9F);
     poly->tpage = GetTPage(TPAGE_DEPTH_4BIT, TPAGE_ABR_HALF, 832, 256);
     poly->clut  = GetClut(176, STAGE_PALETTE_Y + 1);
-    poly->r0    = 0x80;
-    poly->g0    = 0x80;
-    poly->b0    = 0x80;
+    setRGB0(poly, 0x80, 0x80, 0x80);
     GFX_AddPrim(GFX_LAYER_UI, sizeof(POLY_FT4));
 }
 #else
