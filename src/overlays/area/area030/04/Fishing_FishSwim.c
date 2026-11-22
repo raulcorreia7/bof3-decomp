@@ -21,7 +21,7 @@ MATCH void Fishing_FishSwim(void) {
                 work = FISHING_STATE;
                 if (work->bounce.half.key == 0 && !(roll & 0x3) && D_80145E92[0] != 4 && work->cue_index != FISHING_IDLE_CUE) {
                     D_801E3200 = 1;
-                    Area_SelectSceneRecord(*(u16*)(D_801E2ACA + work->cue_index * sizeof(FishingSceneCue)));
+                    Area_SceneSelectRecord(*(u16*)(D_801E2ACA + work->cue_index * sizeof(FishingSceneCue)));
                     if (!(*(u8*)g_Task & ACTOR_FLAG_OFFSCREEN)) {
                         SND_PlaySE(EMI_SE_ID(SND_BANK_AREA, 6));
                     }
@@ -43,7 +43,7 @@ MATCH void Fishing_FishSwim(void) {
             func_801E03F8();
             FISHING_STATE->state_2A = D_801E2331[FISHING_STATE->counter_08 * 2];
             Script_Request(D_801E2330[FISHING_STATE->counter_08 * 2]);
-            turn = Area_SampleHeight(FISHING_STATE->motion.unk_34 + FISHING_STATE->pos_x * 0x10, FISHING_STATE->y_38.pos_y + FISHING_STATE->cursor_10 * 0x10);
+            turn = Area_HeightSample(FISHING_STATE->motion.unk_34 + FISHING_STATE->pos_x * 0x10, FISHING_STATE->y_38.pos_y + FISHING_STATE->cursor_10 * 0x10);
             work = FISHING_STATE;
             if (work->bounce.half.key < turn) {
                 work->step_14 = (turn - work->bounce.half.key) / 16;

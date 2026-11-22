@@ -19,7 +19,7 @@ MATCH bool func_801C7064(s32 x, s32 y, s32 reach, s32 height) {
 
         base_x = x + prev;
         base_y = y + step;
-        func_801C71C4(halves, base_x, base_y, Area_SampleHeight(base_x, base_y) << 0x10);
+        func_801C71C4(halves, base_x, base_y, Area_HeightSample(base_x, base_y) << 0x10);
         if (halves[0] >= SCREEN_WIDTH) {
             return 0;
         }
@@ -34,6 +34,6 @@ MATCH bool func_801C7064(s32 x, s32 y, s32 reach, s32 height) {
     } while ((count & BYTE_MASK) < 4);
     base_x = x + prev;
     base_y = y + step;
-    func_801C71C4(halves, base_x, base_y, Area_SampleHeight(base_x, base_y) << 0x10);
+    func_801C71C4(halves, base_x, base_y, Area_HeightSample(base_x, base_y) << 0x10);
     return ((s16)halves[1] - (height & BYTE_MASK)) >= 8;
 }

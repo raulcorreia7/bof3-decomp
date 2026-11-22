@@ -12,6 +12,6 @@ MATCH void func_801F3A64(void) {
         actor->pos.x.fixed  = TO_COORD(42);
         actor->header.mode  = 0;
         actor->pos.y.fixed  = TO_COORD(29);
-        actor->pos.z.fixed  = Area_SampleHeight(actor->pos.x.fixed, TO_COORD(29)) << 0x10;
+        actor->pos.z.fixed  = Area_HeightSample(actor->pos.x.fixed, TO_COORD(29)) << 0x10;
     }
 }

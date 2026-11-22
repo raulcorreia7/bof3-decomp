@@ -254,7 +254,7 @@ MATCH void func_801F7484(void) {
 
     SCN_EFFECT->pos.x              = TO_COORD(11);
     SCN_EFFECT->pos.y              = TO_COORD(15) + COORD_HALF;
-    distance                       = Area_SampleHeight(SCN_EFFECT->pos.x, TO_COORD(15) + COORD_HALF);
+    distance                       = Area_HeightSample(SCN_EFFECT->pos.x, TO_COORD(15) + COORD_HALF);
     SCN_EFFECT->pos.z.part.integer = distance;
     SCN_EFFECT->ot_index           = 5;
     SCN_EFFECT->step               = 1;
@@ -291,7 +291,7 @@ MATCH void func_801F74EC(void) {
             next.z = row_point.z;
             stop   = 0;
         } else {
-            next.z.part.integer = Area_SampleHeight(point.x, next.y);
+            next.z.part.integer = Area_HeightSample(point.x, next.y);
         }
         func_801F78EC(next, point, color);
         point = next;
@@ -333,7 +333,7 @@ MATCH void func_801F7670(void) {
             next.z = row_point.z;
             stop   = 0;
         } else {
-            next.z.part.integer = Area_SampleHeight(point.x, next.y);
+            next.z.part.integer = Area_HeightSample(point.x, next.y);
         }
         func_801F78EC(next, point, color);
         point = next;
@@ -341,7 +341,7 @@ MATCH void func_801F7670(void) {
 
     point.x              = TO_COORD(11);
     point.y              = TO_COORD(19) + COORD_HALF;
-    point.z.part.integer = Area_SampleHeight(TO_COORD(11), TO_COORD(19) + COORD_HALF);
+    point.z.part.integer = Area_HeightSample(TO_COORD(11), TO_COORD(19) + COORD_HALF);
     color.r              = 0x30;
     color.g              = 0x30;
     color.b              = 0x30;
@@ -354,7 +354,7 @@ MATCH void func_801F7670(void) {
             next.z = row_point.z;
             stop   = 0;
         } else {
-            next.z.part.integer = Area_SampleHeight(point.x, next.y);
+            next.z.part.integer = Area_HeightSample(point.x, next.y);
         }
         func_801F78EC(point, next, color);
         point = next;
@@ -1605,7 +1605,7 @@ MATCH void func_801FA7D8(void) {
                 g_SpawnedActors[g_ScratchPad[0]].type         = 0x1Eu;
                 g_SpawnedActors[g_ScratchPad[0]].pos.x.fixed  = g_Game.members[0].pos.x.fixed;
                 g_SpawnedActors[g_ScratchPad[0]].pos.y.fixed  = g_Game.members[0].pos.y.fixed;
-                distance                                      = Area_SampleHeight(g_SpawnedActors[g_ScratchPad[0]].pos.x.fixed, g_SpawnedActors[g_ScratchPad[0]].pos.y.fixed) << 16;
+                distance                                      = Area_HeightSample(g_SpawnedActors[g_ScratchPad[0]].pos.x.fixed, g_SpawnedActors[g_ScratchPad[0]].pos.y.fixed) << 16;
                 g_SpawnedActors[g_ScratchPad[0]].pos.z.fixed  = distance;
                 g_SpawnedActors[g_ScratchPad[0]].unk_29       = 0;
             }

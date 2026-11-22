@@ -30,7 +30,7 @@ MATCH void func_801C5558(void) {
     /* FAKE: non-const view of the step table on the first read keeps retail's store order. */
     offs_x = (*(Offset2(*)[8])g_FacingSteps)[route].x * step;
     offs_y = g_FacingSteps[route].y * step;
-    result = Area_ReadHeight(work->pos.x.fixed + offs_x, work->pos.y.fixed + offs_y);
+    result = Area_HeightRead(work->pos.x.fixed + offs_x, work->pos.y.fixed + offs_y);
 
     threshold = D_80181B70[g_Game.current->chr.character_id];
 

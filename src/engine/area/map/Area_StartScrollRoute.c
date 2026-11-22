@@ -12,7 +12,7 @@ MATCH void Area_StartScrollRoute(s8 route_index) {
     D_80143FC1 |= 0x80;
     g_PartyX       = MEM(s32, 0x80149308u);
     g_PartyY       = g_AreaScrollTargetY;
-    dist           = Area_SampleHeight(first, MEM(s32, 0x8014930Cu));
+    dist           = Area_HeightSample(first, MEM(s32, 0x8014930Cu));
     g_ScrollHeight = dist;
     Area_AdvanceScroll(dist);
     D_80143F49 = 1;

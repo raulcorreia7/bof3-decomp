@@ -17,7 +17,7 @@ MATCH void func_801569B8(u8* record, s32 cell_x, s32 cell_y) {
     s32       z;
     s32       wave;
 
-    height  = Area_SampleHeight((cell_x - 1) << 16, cell_y << 16) / 2;
+    height  = Area_HeightSample((cell_x - 1) << 16, cell_y << 16) / 2;
     height  = -height;
     cell_x  = (cell_x - 0x81) << 7;
     cell_y  = (cell_y - 0x80) << 7;

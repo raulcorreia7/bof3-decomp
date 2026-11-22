@@ -39,7 +39,7 @@ NON_MATCHING void func_801F2C14(void) {
         angle_0 += 0x180;
     }
 
-    COORD_INT(g_Game.members[0].pos.z) = Area_SampleHeight(g_Game.members[0].pos.x.fixed, g_Game.members[0].pos.y.fixed);
+    COORD_INT(g_Game.members[0].pos.z) = Area_HeightSample(g_Game.members[0].pos.x.fixed, g_Game.members[0].pos.y.fixed);
     g_AreaCameraRefreshCount           = 2;
 }
 #else

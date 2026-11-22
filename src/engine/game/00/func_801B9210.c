@@ -15,7 +15,7 @@ MATCH void func_801B9210(void) {
     if ((g_Task->pos.x.fixed & 0x7FFF) != 0 || (g_Task->pos.y.fixed & 0x7FFF) != 0) {
         g_Task->pos.x.fixed      = (g_Task->pos.x.fixed + 0x4800) & ~0x7FFF;
         g_Task->pos.y.fixed      = (g_Task->pos.y.fixed + 0x4800) & ~0x7FFF;
-        COORD_INT(g_Task->pos.z) = Area_ReadStepHeight(g_Task->pos.x.fixed, g_Task->pos.y.fixed, g_Task->direction);
+        COORD_INT(g_Task->pos.z) = Area_HeightReadStep(g_Task->pos.x.fixed, g_Task->pos.y.fixed, g_Task->direction);
         if (g_Task->unk_05 == 0) {
             v                   = g_Task->pos.x.fixed;
             g_AreaScrollTargetX = v;

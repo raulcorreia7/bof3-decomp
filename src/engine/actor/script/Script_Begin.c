@@ -25,7 +25,7 @@ MATCH void Script_Begin(s32 script_index, s32 position) {
         }
         entry = ((s32*)&D_80181C7C)[g_Task->unk_64];
         entry += (script_index & 0x7F) * 4;
-        Area_SelectSceneRecord(*(u16*)entry);
+        Area_SceneSelectRecord(*(u16*)entry);
         g_Task->script_record = *(u8*)(entry + 2);
         g_Task->mirror        = *(u8*)(entry + 3);
     } else {

@@ -24,7 +24,7 @@ NON_MATCHING void func_801F3140(s8 span) {
             y                                       = g_AreaScrollTargetY;
             g_SpawnedActors[(u8)slot].pos.y.fixed   = y + offset;
             slot2                                   = (u8)slot;
-            COORD_INT(g_SpawnedActors[slot2].pos.z) = Area_SampleHeight(g_SpawnedActors[slot2].pos.x.fixed, g_SpawnedActors[slot2].pos.y.fixed);
+            COORD_INT(g_SpawnedActors[slot2].pos.z) = Area_HeightSample(g_SpawnedActors[slot2].pos.x.fixed, g_SpawnedActors[slot2].pos.y.fixed);
             g_SpawnedActors[slot2].unk_2C           = 0x2C0;
             g_SpawnedActors[slot2].layer            = 1;
             g_SpawnedActors[slot2].unk_06           = 0;

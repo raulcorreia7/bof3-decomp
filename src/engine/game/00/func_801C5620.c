@@ -10,7 +10,7 @@ MATCH void func_801C5620(void) {
     count                    = COORD_INT(g_Task->pos.z);
     y                        = g_Task->pos.y.fixed;
     COORD_INT(g_Task->pos.z) = count - 16;
-    result                   = Area_ReadHeight(x, y);
+    result                   = Area_HeightRead(x, y);
 
     if ((s16)COORD_INT(g_Task->pos.z) < result) {
         COORD_INT(g_Task->pos.z) = (u16)result;

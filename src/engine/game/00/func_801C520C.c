@@ -19,10 +19,10 @@ MATCH s32 func_801C520C(void) {
     targetX = sumX;
     sumY    = FIELD(s32, route, 0x38u) + (g_FacingStepY[index] * step);
     targetY = sumY;
-    if (FIELD(s16, route, 0x3Eu) < Area_ReadHeight(sumX, sumY)) {
+    if (FIELD(s16, route, 0x3Eu) < Area_HeightRead(sumX, sumY)) {
         COORD_INT(g_Task->pos.z) = (s16)((u16)COORD_INT(g_Task->pos.z) + D_80181B88[g_Game.current->chr.character_id]);
     } else {
-        COORD_INT(g_Task->pos.z) = Area_ReadHeight(targetX, targetY);
+        COORD_INT(g_Task->pos.z) = Area_HeightRead(targetX, targetY);
         transitionId             = 0x3F;
         if (g_Task->direction == FACING_LEFT) {
             transitionId = 0x3E;

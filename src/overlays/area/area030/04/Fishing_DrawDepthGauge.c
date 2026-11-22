@@ -18,7 +18,7 @@ MATCH void Fishing_DrawDepthGauge(s16 panel_x, s16 panel_y) {
     if (g_SpawnedActors[0].header.mode == 0) {
         y = panel_y;
     } else {
-        y = panel_y - Area_SampleHeight(g_SpawnedActors[0].pos.x.fixed, g_SpawnedActors[0].pos.y.fixed) / 32;
+        y = panel_y - Area_HeightSample(g_SpawnedActors[0].pos.x.fixed, g_SpawnedActors[0].pos.y.fixed) / 32;
     }
     base = panel_y;
     CLAMP_MIN(y, base);

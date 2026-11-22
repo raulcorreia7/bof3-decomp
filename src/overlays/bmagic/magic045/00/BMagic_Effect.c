@@ -187,7 +187,7 @@ MATCH void func_801EF608(void) {
     g_Task->pos.x.fixed        = g_BattleEffects[g_Task->param.unk_0B].pos.x.fixed;
     y                          = g_BattleEffects[g_Task->param.unk_0B].pos.y.fixed;
     g_Task->pos.y.fixed        = y;
-    g_Task->pos.z.part.integer = Area_SampleHeight(g_Task->pos.x.fixed, y);
+    g_Task->pos.z.part.integer = Area_HeightSample(g_Task->pos.x.fixed, y);
     if (g_BattleEffects[g_Task->param.unk_0B].pos.z.part.integer < g_Task->pos.z.part.integer) {
         g_Task->pos.z.fixed = g_BattleEffects[g_Task->param.unk_0B].pos.z.fixed;
     }
@@ -208,7 +208,7 @@ MATCH void func_801EF724(void) {
     work                     = g_Task;
     work->pos.x.fixed        = g_BattleEffects[work->param.unk_0B].pos.x.fixed;
     work->pos.y.fixed        = g_BattleEffects[work->param.unk_0B].pos.y.fixed;
-    COORD_INT(g_Task->pos.z) = Area_SampleHeight(work->pos.x.fixed, work->pos.y.fixed);
+    COORD_INT(g_Task->pos.z) = Area_HeightSample(work->pos.x.fixed, work->pos.y.fixed);
     if (g_BattleEffects[g_Task->param.unk_0B].pos.z.part.integer < COORD_INT(g_Task->pos.z)) {
         g_Task->pos.z.fixed = g_BattleEffects[g_Task->param.unk_0B].pos.z.fixed;
     }

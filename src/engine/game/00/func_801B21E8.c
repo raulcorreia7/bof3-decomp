@@ -115,7 +115,7 @@ NON_MATCHING void func_801B21E8(void) {
                 FIELD(s32, tmp7, 0x34u) = (s32) * (s32*)(&D_1F800008);
                 FIELD(s32, tmp7, 0x38u) = FIELD(s32, val0, 0x4u);
                 tmp8                    = g_Task;
-                FIELD(s16, tmp8, 0x3Eu) = Area_ReadHeight(FIELD(s32, tmp7, 0x34u), FIELD(s32, val0, 0x4u));
+                FIELD(s16, tmp8, 0x3Eu) = Area_HeightRead(FIELD(s32, tmp7, 0x34u), FIELD(s32, val0, 0x4u));
                 Script_Select(FIELD(u8, tmp8, 0x8u));
             }
             val6 += 2;

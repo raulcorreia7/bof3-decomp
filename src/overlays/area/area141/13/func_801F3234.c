@@ -12,7 +12,7 @@ NON_MATCHING void func_801F3234(void) {
     s32     flag;
 
     if (g_Task->header.step == 0) {
-        g_Task->pos.z.fixed = Area_SampleHeight(g_Task->pos.x.fixed, g_Task->pos.y.fixed);
+        g_Task->pos.z.fixed = Area_HeightSample(g_Task->pos.x.fixed, g_Task->pos.y.fixed);
         g_Task->header.step++;
     }
 

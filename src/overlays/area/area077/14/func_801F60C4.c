@@ -23,7 +23,7 @@ MATCH void func_801F60C4(void) {
         value  = record->cursor - 2;
     } else {
         if (index == 4) {
-            distance                 = Area_SampleHeight(g_Task->pos.x.fixed, g_Task->pos.y.fixed);
+            distance                 = Area_HeightSample(g_Task->pos.x.fixed, g_Task->pos.y.fixed);
             COORD_INT(g_Task->pos.z) = distance;
             Script_Select(0);
         }

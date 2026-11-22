@@ -23,12 +23,12 @@ NON_MATCHING void func_801F4158_area168(s32 index, s8 code) {
     Area_AddCellPrim(g_Task->pos.x.fixed, g_Task->pos.y.fixed, code, sizeof(DR_MODE));
     x                         = (g_ScratchPadVectors[0].vx + 0x4000) << 9;
     y                         = (g_ScratchPadVectors[0].vy + 0x4000) << 9;
-    g_ScratchPadVectors[0].vz = -Area_SampleHeight(x, y) / 2 - LOHU(g_Task->pos.z.part.integer) - 0x180;
-    g_ScratchPadVectors[2].vz = -Area_SampleHeight(x, y) / 2 - LOHU(g_Task->pos.z.part.integer);
+    g_ScratchPadVectors[0].vz = -Area_HeightSample(x, y) / 2 - LOHU(g_Task->pos.z.part.integer) - 0x180;
+    g_ScratchPadVectors[2].vz = -Area_HeightSample(x, y) / 2 - LOHU(g_Task->pos.z.part.integer);
     x1                        = (g_ScratchPadVectors[1].vx + 0x4000) << 9;
     y1                        = (g_ScratchPadVectors[1].vy + 0x4000) << 9;
-    g_ScratchPadVectors[1].vz = -Area_SampleHeight(x1, y1) / 2 - LOHU(g_Task->pos.z.part.integer) - 0x180;
-    g_ScratchPadVectors[3].vz = -Area_SampleHeight(x1, y1) / 2 - LOHU(g_Task->pos.z.part.integer);
+    g_ScratchPadVectors[1].vz = -Area_HeightSample(x1, y1) / 2 - LOHU(g_Task->pos.z.part.integer) - 0x180;
+    g_ScratchPadVectors[3].vz = -Area_HeightSample(x1, y1) / 2 - LOHU(g_Task->pos.z.part.integer);
     prim                      = (POLY_FT4*)g_GfxPrimCursor;
     SetPolyFT4(prim);
     SetShadeTex(prim, 0);

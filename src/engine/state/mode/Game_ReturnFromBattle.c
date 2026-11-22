@@ -15,7 +15,7 @@ MATCH void Game_ReturnFromBattle(void) {
         flags            = &g_Battle.outcome.options;
         g_EncounterSteps = 0;
         if ((*flags & 0x2) == 0) {
-            Area_AdvanceScroll(Area_SampleHeight(g_AreaScrollTargetX, g_AreaScrollTargetY));
+            Area_AdvanceScroll(Area_HeightSample(g_AreaScrollTargetX, g_AreaScrollTargetY));
         }
         if ((*flags & 0x40) == 0 && (g_Battle.outcome.result & BATTLE_RESULT_NO_BGM) == 0 && g_SndBGMId != 0xFF) {
             for (i = 0; i < 1376; i++) {
@@ -28,7 +28,7 @@ MATCH void Game_ReturnFromBattle(void) {
         }
         g_Battle.outcome.options = 0;
         g_Battle.encounter       = 0;
-        Area_RollEncounterThreshold(0);
+        Area_EncounterRollThreshold(0);
         func_801C2018();
         changed = 1;
     }

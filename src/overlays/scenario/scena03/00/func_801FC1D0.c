@@ -24,7 +24,7 @@ MATCH s32 func_801FC1D0(s32 member_index) {
     SPAD(0u)->task = actor;
     g_CurrentActor = actor;
     Actor_ResetMotion();
-    Area_SelectSceneRecord(0x67);
+    Area_SceneSelectRecord(0x67);
     g_Task->header.flags = 1;
 
     task                              = g_Task;
@@ -34,7 +34,7 @@ MATCH s32 func_801FC1D0(s32 member_index) {
     g_Actors[actor_index].walk_dest_y = task->pos.y.fixed;
     g_Actors[actor_index].unk_88      = 0;
 
-    height                        = Area_SampleHeight(task->pos.x.fixed, task->pos.y.fixed);
+    height                        = Area_HeightSample(task->pos.x.fixed, task->pos.y.fixed);
     task2                         = g_Task;
     task2->header.mode            = 4;
     task2->pos.z.part.integer     = height;

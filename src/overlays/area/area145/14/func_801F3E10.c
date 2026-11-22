@@ -2,7 +2,7 @@
 
 MATCH void func_801F3E10(void) {
     g_Task->header.flags &= ~ACTOR_FLAG_HIDDEN;
-    COORD_INT(g_Task->pos.z) = Area_ReadHeight(g_Task->pos.x.fixed, g_Task->pos.y.fixed) + 2000;
+    COORD_INT(g_Task->pos.z) = Area_HeightRead(g_Task->pos.x.fixed, g_Task->pos.y.fixed) + 2000;
     g_Task->gravity          = -8;
     setVector(g_Task, 0, 0, 0);
     g_Task->unk_04 = 1;

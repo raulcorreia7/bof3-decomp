@@ -5,7 +5,7 @@ MATCH s16 func_801BDCF8(s32 x, s32 y) {
     s16 limit;
     s32 delta;
 
-    value = Area_SampleHeight(x, y);
+    value = Area_HeightSample(x, y);
     limit = COORD_INT(g_Task->pos.z);
     delta = limit;
     delta -= value;

@@ -38,7 +38,7 @@ void func_800C236C(u8 phase);
 #define BOSS008_END_BATTLE_BEGIN(slot)          \
     Battle_ShowActorEntry(slot);                \
     g_Task = (PartyMember*)func_800AC754(slot); \
-    Area_SelectSceneRecord(0x83)
+    Area_SceneSelectRecord(0x83)
 
 #define BOSS008_END_BATTLE_FINISH()                   \
     Script_Select(0);                                 \

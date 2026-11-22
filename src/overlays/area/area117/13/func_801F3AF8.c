@@ -22,8 +22,8 @@ MATCH void func_801F3AF8(void) {
     prim->b0                  = shade;
     prim->g0                  = shade;
     prim->r0                  = shade;
-    g_ScratchPadVectors[0].vz = -Area_SampleHeight((g_ScratchPadVectors[0].vx + 0x4000) << 9, (g_ScratchPadVectors[0].vy + 0x4000) << 9) / 2 + 4 + (g_FrameCount % 48) * 2;
-    g_ScratchPadVectors[1].vz = -Area_SampleHeight((g_ScratchPadVectors[1].vx + 0x4000) << 9, (g_ScratchPadVectors[1].vy + 0x4000) << 9) / 2 + 4 + (g_FrameCount % 48) * 2;
+    g_ScratchPadVectors[0].vz = -Area_HeightSample((g_ScratchPadVectors[0].vx + 0x4000) << 9, (g_ScratchPadVectors[0].vy + 0x4000) << 9) / 2 + 4 + (g_FrameCount % 48) * 2;
+    g_ScratchPadVectors[1].vz = -Area_HeightSample((g_ScratchPadVectors[1].vx + 0x4000) << 9, (g_ScratchPadVectors[1].vy + 0x4000) << 9) / 2 + 4 + (g_FrameCount % 48) * 2;
     RotTransPers3(&g_ScratchPadVectors[0], &g_ScratchPadVectors[1], &g_ScratchPadVectors[2], (long*)&prim->x0, (long*)&prim->x1, (long*)D_1F800034, &depth, &flag);
     Area_AddCellPrim(g_Task->pos.x.fixed, g_Task->pos.y.fixed, 1, sizeof(LINE_F2));
 

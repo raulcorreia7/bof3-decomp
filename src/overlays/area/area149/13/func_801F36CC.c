@@ -12,7 +12,7 @@ MATCH void func_801F36CC(void) {
         x               = D_80147A8C;
         D_80147ACF      = 1;
         D_80147AD6      = 0;
-        D_80147A96      = Area_SampleHeight(x, y);
+        D_80147A96      = Area_HeightSample(x, y);
         g_AreaSceneMode = 1;
         if (SYS_TestFlag(D_80144EF8, 0x11) != 0) {
             g_SceneEventMode = 0x21;

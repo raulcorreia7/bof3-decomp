@@ -12,7 +12,7 @@ MATCH s32 func_801B1B2C(s32 x, s32 y, s32 probe_type, s32 flags) {
     px          = x;
     py          = y;
     mode        = flags;
-    value       = Area_ReadHeight(x, y);
+    value       = Area_HeightRead(x, y);
     work        = g_Task;
     saved       = work->timer;
     work->timer = 0U;
@@ -26,7 +26,7 @@ MATCH s32 func_801B1B2C(s32 x, s32 y, s32 probe_type, s32 flags) {
     if (distance < 65) {
         SP_REF(s32, 0x8) = px;
         SP_REF(s32, 0xC) = py;
-        SP_REF(s16, 0x2) = Area_ReadHeight(px, py);
+        SP_REF(s16, 0x2) = Area_HeightRead(px, py);
         g_Task->timer    = saved;
         return 1;
     }

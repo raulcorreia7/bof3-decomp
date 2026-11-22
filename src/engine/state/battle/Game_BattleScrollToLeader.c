@@ -67,7 +67,7 @@ MATCH void Game_BattleScrollToLeader(void) {
         dy  = abs(*py - y);
         *py = *((s32*)((u8*)&g_Game.members[0].pos.y.fixed + row));
         adx = MAX(adx, dy);
-        ret = Area_SampleHeight(g_AreaScrollTargetX, g_AreaScrollTargetY) - g_AreaCameraHeight;
+        ret = Area_HeightSample(g_AreaScrollTargetX, g_AreaScrollTargetY) - g_AreaCameraHeight;
         adx = (u32)adx >> 13;
         adx &= BYTE_MASK;
         if (adx != 0) {

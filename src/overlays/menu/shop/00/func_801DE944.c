@@ -92,7 +92,7 @@ MATCH void func_801DE944(void) {
             do {
                 g_Game.members[i].pos.x.fixed = scroll_x;
                 g_Game.members[i].pos.y.fixed = scroll_y;
-                g_Game.members[i].pos.z.fixed = Area_SampleHeight(scroll[0], scroll[1]) << 16;
+                g_Game.members[i].pos.z.fixed = Area_HeightSample(scroll[0], scroll[1]) << 16;
                 i++;
             } while (i < g_Game.party_size);
         }

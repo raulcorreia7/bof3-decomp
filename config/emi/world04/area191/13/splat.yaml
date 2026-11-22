@@ -16,7 +16,7 @@ segments:
       - [0x214, c, func_801F2E14]
       - [0x234, c, Area_DrawScreenTint]
       - [0x318, c, func_801F2F18]
-      - [0x340, c, Area_ResumeSceneAfterMessage]
+      - [0x340, c, Area_SceneResumeAfterMessage]
       - [0x394, c, func_801F2F94]
       - [0x3EC, c, func_801F2FEC]
       - [0x414, c, func_801F3014]

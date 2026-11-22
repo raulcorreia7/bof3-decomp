@@ -555,7 +555,7 @@ NON_MATCHING void func_801D27BC(void) {
     g_ShisuBase[2]   = initial;
     D_801DA07C       = *scroll_x;
     D_801DA080       = y;
-    height           = Area_SampleHeight(x, y);
+    height           = Area_HeightSample(x, y);
     D_801DA084       = (height << 16) - SHISU_HEIGHT_BIAS;
 
     record              = *record_cell;
@@ -573,7 +573,7 @@ NON_MATCHING void func_801D27BC(void) {
     D_801DA0F4          = *scroll_x;
     D_801DA0F8          = *scroll_y;
     D_801DA110          = next_record[1];
-    height              = Area_SampleHeight(*scroll_x, *scroll_y);
+    height              = Area_HeightSample(*scroll_x, *scroll_y);
     D_801DA0FC          = (height << 16) + SHISU_HEIGHT_BIAS;
 }
 #else

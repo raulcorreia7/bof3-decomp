@@ -25,7 +25,7 @@ MATCH s32 Area_GetActorFacingStepX(void) {
         pos_x += step_x;
         pos_y += step_y;
     }
-    dist    = Area_ReadHeight(pos_x, pos_y);
+    dist    = Area_HeightRead(pos_x, pos_y);
     counter = COORD_INT(g_Task->pos.z);
     diff    = counter - dist;
     if (ABS(diff) > 0x100) {

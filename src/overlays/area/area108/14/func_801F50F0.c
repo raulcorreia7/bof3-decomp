@@ -46,7 +46,7 @@ NON_MATCHING void func_801F50F0(void) {
             break;
         case 3:
             if (!g_AreaCameraMoving) {
-                Area_AdvanceScroll(Area_SampleHeight(g_AreaScrollTargetX, g_AreaScrollTargetY));
+                Area_AdvanceScroll(Area_HeightSample(g_AreaScrollTargetX, g_AreaScrollTargetY));
                 g_SceneEventState.step = 0;
                 g_SceneEventState.mode = SCENE_EVENT_NONE;
                 Game_ClearScriptActive();
@@ -63,7 +63,7 @@ NON_MATCHING void func_801F50F0(void) {
                     slot->header.flags = ACTOR_FLAG_IN_USE;
                     slot->type         = 0x35;
                     slot->pos.y.fixed  = 0x2F8000;
-                    slot->pos.z.fixed  = Area_SampleHeight(slot->pos.x.fixed, slot->pos.y.fixed);
+                    slot->pos.z.fixed  = Area_HeightSample(slot->pos.x.fixed, slot->pos.y.fixed);
                 }
                 D_801448EE             = 0x1E;
                 g_SceneEventState.step = 5;

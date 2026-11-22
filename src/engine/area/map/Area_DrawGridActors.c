@@ -166,7 +166,7 @@ NON_MATCHING void Area_DrawGridActors(void) {
             }
         }
         if (g_AreaDrawFlags & AREA_DRAW_CELL_LAYERS) {
-            Area_AddScenePrim(var_s7);
+            Area_SceneAddPrim(var_s7);
         }
         var_s7 += 1;
     } while (var_s7 < 0x37U);

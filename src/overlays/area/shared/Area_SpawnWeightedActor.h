@@ -37,7 +37,7 @@ pick_weight:
         g_Actors[count].pos.x.fixed      = g_AreaSpawnPositions[pick & 7].x << 16;
         y                                = g_AreaSpawnPositions[pick & 7].y << 16;
         g_Actors[count].pos.y.fixed      = y;
-        COORD_INT(g_Actors[count].pos.z) = Area_SampleHeight(g_Actors[count].pos.x.fixed, y);
+        COORD_INT(g_Actors[count].pos.z) = Area_HeightSample(g_Actors[count].pos.x.fixed, y);
     }
     g_EncounterSteps = D_80145FB8 - 5;
 }

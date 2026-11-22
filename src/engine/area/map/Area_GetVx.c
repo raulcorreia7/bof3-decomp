@@ -23,9 +23,9 @@ MATCH s32 Area_GetVx(s32 x, s32 y) {
             goto fail;
         }
         pos = (xh << 16) | 0x8000;
-        Area_GetHeight(pos, y, g_Task->direction);
+        Area_HeightGet(pos, y, g_Task->direction);
         if (SP_REF(u8, 0x0u) != 0) {
-            if (COORD_INT(g_Task->pos.z) < Area_SampleHeight(pos, y)) {
+            if (COORD_INT(g_Task->pos.z) < Area_HeightSample(pos, y)) {
                 return 1;
             }
         }
@@ -39,9 +39,9 @@ MATCH s32 Area_GetVx(s32 x, s32 y) {
             goto fail;
         }
         pos = (yh << 16) | 0x8000;
-        Area_GetHeight(x, pos, g_Task->direction);
+        Area_HeightGet(x, pos, g_Task->direction);
         if (SP_REF(u8, 0x0u) != 0) {
-            if (COORD_INT(g_Task->pos.z) < Area_SampleHeight(x, pos)) {
+            if (COORD_INT(g_Task->pos.z) < Area_HeightSample(x, pos)) {
                 return 1;
             }
         }

@@ -3,7 +3,7 @@
 MATCH void func_801B7EF0(void) {
     s32 value;
 
-    COORD_INT(g_Task->pos.z) = Area_ReadHeight(g_Task->pos.x.fixed, g_Task->pos.y.fixed) + 0x200;
+    COORD_INT(g_Task->pos.z) = Area_HeightRead(g_Task->pos.x.fixed, g_Task->pos.y.fixed) + 0x200;
     value                    = 0x3D;
     if (g_Task->direction == FACING_RIGHT) {
         value = 0x3C;

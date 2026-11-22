@@ -33,7 +33,7 @@ MATCH void Actor_SpawnPartyFromRecord(u8* script) {
         /* FAKE: forces the counter re-read before the next shadow store. */
         FAKE_BARRIER();
         D_80146910[*counter][0]  = 0;
-        dist                     = Area_SampleHeight(work->pos.x.fixed, work->pos.y.fixed);
+        dist                     = Area_HeightSample(work->pos.x.fixed, work->pos.y.fixed);
         record                   = g_Task;
         COORD_INT(record->pos.z) = (u16)dist;
         record->header.mode      = script[8];

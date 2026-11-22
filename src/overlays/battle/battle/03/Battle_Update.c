@@ -25,5 +25,5 @@ MATCH void Battle_Update(void) {
     GFX_UpdatePaletteAnimations();
     func_8019625C();
     UI_PanelUpdateTasks();
-    Area_DrawScene();
+    Area_SceneDraw();
 }

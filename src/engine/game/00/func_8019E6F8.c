@@ -9,7 +9,7 @@ MATCH void func_8019E6F8(void) {
     value    = work->vz + work->gravity;
     work->vz = value;
     COORD_INT(work->pos.z) += value;
-    if (Area_SampleHeight(work->pos.x.fixed, work->pos.y.fixed) >= (s16)COORD_INT(work->pos.z)) {
+    if (Area_HeightSample(work->pos.x.fixed, work->pos.y.fixed) >= (s16)COORD_INT(work->pos.z)) {
         Actor_Clear();
         return;
     }

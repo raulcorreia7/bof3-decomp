@@ -9,7 +9,7 @@ __asm__(".include \"include/match/macro.inc\"\n");
 MATCH void func_801F6FAC(void) {
     Actor* work;
 
-    Area_SelectSceneRecord(0x1EA);
+    Area_SceneSelectRecord(0x1EA);
     work                     = g_Task;
     work->unk_48             = 0;
     work->pos.z.part.integer = 0x64;

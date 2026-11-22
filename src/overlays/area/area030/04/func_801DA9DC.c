@@ -31,7 +31,7 @@ NON_MATCHING void func_801DA9DC(void) {
         FISHING_STATE->sub_index       = 0U;
         return;
     }
-    if (Area_SampleHeight(g_SpawnedActors[0].pos.x.fixed, g_SpawnedActors[0].pos.y.fixed) >= COORD_INT(g_SpawnedActors[0].pos.z)) {
+    if (Area_HeightSample(g_SpawnedActors[0].pos.x.fixed, g_SpawnedActors[0].pos.y.fixed) >= COORD_INT(g_SpawnedActors[0].pos.z)) {
         chance = g_FishingLureRow->unk_11;
         if ((RANDOM_MASK(0xF) < chance) && !(g_FrameCount & 0xF)) {
             g_SpawnedActors[0].scene_step = 0;
@@ -46,7 +46,7 @@ NON_MATCHING void func_801DA9DC(void) {
             FISHING_STATE->sub_index  = 0U;
             return;
         }
-        COORD_INT(g_SpawnedActors[0].pos.z) = Area_SampleHeight(g_SpawnedActors[0].pos.x.fixed, g_SpawnedActors[0].pos.y.fixed);
+        COORD_INT(g_SpawnedActors[0].pos.z) = Area_HeightSample(g_SpawnedActors[0].pos.x.fixed, g_SpawnedActors[0].pos.y.fixed);
         goto box_16; /* joins the common update calls */
     }
 box_16:

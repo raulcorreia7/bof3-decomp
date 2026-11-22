@@ -4,7 +4,7 @@ MATCH void func_8019AF1C(void) {
     Actor* work;
     s16    dist;
 
-    dist = Area_SampleHeight(g_Task->pos.x.fixed, g_Task->pos.y.fixed);
+    dist = Area_HeightSample(g_Task->pos.x.fixed, g_Task->pos.y.fixed);
     work = g_Task;
     if (dist >= COORD_INT(work->pos.z) || (work->header.flags & ACTOR_FLAG_OFFSCREEN) || work->header.mode == 0) {
         work->vz      = s_ActorTossArcs[work->header.step].vz;
