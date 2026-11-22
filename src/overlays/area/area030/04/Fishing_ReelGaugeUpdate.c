@@ -95,7 +95,7 @@ NON_MATCHING void Fishing_ReelGaugeUpdate(void) {
         prim = (u8**)g_GfxPrimCursor;
         SetLineF2((LINE_F2*)prim);
         FIELD(s16, prim, 0x8u) = 136;
-        scroll                 = *(&D_80146916 + (g_FishingHookedFish * 0x98)) * 96;
+        scroll                 = *(&g_Actors[0].ext.bounds.half_height + (g_FishingHookedFish * 0x98)) * 96;
         if (scroll < 0) {
             scroll += 0xFF;
         }
@@ -115,8 +115,8 @@ NON_MATCHING void Fishing_ReelGaugeUpdate(void) {
             marker_clamp = 144;
         }
         prim = (u8**)marker_clamp;
-        Fishing_DrawFishArrow((s16)prim, 203, (s8)((u32) ~*(&D_80146898 + (g_FishingHookedFish * 0x98)) >> 0x1F), 2U);
-        if ((D_80145E92 == 4) && (*(&D_8014688C + (g_FishingHookedFish * 0x98)) != 3) && ((marker_y < (s32)prim) || ((s32)prim < line_y)) && !(g_FrameCount & 0xF)) {
+        Fishing_DrawFishArrow((s16)prim, 203, (s8)((u32) ~*(&g_Actors[0].vy + (g_FishingHookedFish * 0x98)) >> 0x1F), 2U);
+        if ((D_80145E92 == 4) && (*(&g_Actors[0].unk_04 + (g_FishingHookedFish * 0x98)) != 3) && ((marker_y < (s32)prim) || ((s32)prim < line_y)) && !(g_FrameCount & 0xF)) {
             SND_SEPlay(EMI_SE_ID(SND_BANK_AREA, 7));
         }
     }

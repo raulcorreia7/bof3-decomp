@@ -357,7 +357,6 @@ extern s32                   D_80145EE0;
 extern s32                   D_80145EE4;
 extern u16                   D_80145EE8;
 extern u16                   D_80145EEA;
-extern u8                    D_8014688C;
 extern s32                   D_80146892;
 extern s32                   D_80146898;
 extern FishingSelectionState D_801468A4[];

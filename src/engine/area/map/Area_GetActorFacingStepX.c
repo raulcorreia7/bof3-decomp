@@ -32,7 +32,7 @@ MATCH s32 Area_GetActorFacingStepX(void) {
         dist = counter;
     }
     for (i = 0, offset = 0; i < 34; i++, offset += ACTOR_SIZE) {
-        if (((u8*)g_Actors)[offset] != 0 && !((&D_8014688F)[offset] & 0x80)) {
+        if (((u8*)g_Actors)[offset] != 0 && !((&g_Actors[0].option_flags)[offset] & 0x80)) {
             rec = (Actor*)((u8*)g_Actors + offset);
             if (Actor_IsInRange(pos_x, pos_y, dist, TASK(Actor)->voice_flags.scene_flag, rec) & BYTE_MASK) {
                 found        = 1;

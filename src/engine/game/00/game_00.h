@@ -364,7 +364,6 @@ extern u8                  D_80146270;
 extern u8                  D_80146855;
 extern u8                  D_80146856;
 extern u16                 D_80146878;
-extern u8                  D_8014688F;
 extern u8                  D_80146893[]; /* 0x80146893 */
 extern GameSlotByteColumn  D_801468B1[];
 extern GameSlotWordColumn  D_801468B6[];
