@@ -115,6 +115,8 @@ ASSERT_OFFSET(FairyVillageOverlayHeader, explore_threshold, 0x04);
 ASSERT_OFFSET(FairyVillageOverlayHeader, label_cap, 0x08);
 ASSERT_SIZE(FairyVillageOverlayHeader, FAIRY_VILLAGE_OVERLAY_HEADER_SIZE);
 
+extern FairyVillageOverlayHeader g_FairyVillageOverlayHeader;
+
 /* One exploration reward row (Fairy_RollExploreReward): the roll the group starts at,
  * then the three group weights. */
 typedef struct FairyRewardRoll {

@@ -1,10 +1,10 @@
 #include "area107_13.h"
 
 MATCH void func_801F2C48(void) {
-    void* state;
+    Actor* state;
 
     if (g_GameStateIndex == GAME_REQUEST_BATTLE) {
-        state                  = g_Task;
-        FIELD(u8, state, 0x1u) = 1;
+        state              = g_Task;
+        state->header.mode = 1;
     }
 }

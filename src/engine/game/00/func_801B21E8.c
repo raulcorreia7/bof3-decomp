@@ -2,34 +2,34 @@
 
 #ifdef NON_MATCHING
 NON_MATCHING void func_801B21E8(void) {
-    s16*  val0;
-    s32   cnt;
-    s32   tmp0;
-    s32   tmp1;
-    s32   tmp2;
-    s32   tmp3;
-    s32   val1;
-    s32   val2;
-    s32   val3;
-    s32   val4;
-    s32   val5;
-    s32   val6;
-    s32   val7;
-    s32   val8;
-    s32   val9;
-    s32   val10;
-    u32*  tmp4;
-    u32*  tmp5;
-    u32*  tmp6;
-    u32*  tmp7;
-    u32*  tmp8;
-    u32*  tmp9;
-    u8*   val11;
-    u8*   val12;
-    u8*   val13;
-    u8    tmp10;
-    u8    val14;
-    void* tmp11;
+    s16*   val0;
+    s32    cnt;
+    s32    tmp0;
+    s32    tmp1;
+    s32    tmp2;
+    s32    tmp3;
+    s32    val1;
+    s32    val2;
+    s32    val3;
+    s32    val4;
+    s32    val5;
+    s32    val6;
+    s32    val7;
+    s32    val8;
+    s32    val9;
+    s32    val10;
+    Actor* tmp4;
+    u32*   tmp5;
+    u32*   tmp6;
+    Actor* tmp7;
+    Actor* tmp8;
+    Actor* tmp9;
+    u8*    val11;
+    u8*    val12;
+    u8*    val13;
+    u8     tmp10;
+    u8     val14;
+    void*  tmp11;
     /* FAKE: unused frame, 8 bytes. */
     FAKE_STACK_PADS(u8, 8);
 
@@ -90,10 +90,10 @@ NON_MATCHING void func_801B21E8(void) {
                 }
                 if (!(*val13 & 1) && (val4 != 0)) {
                     tmp4  = g_Task;
-                    tmp10 = FIELD(u8, tmp4, 0x8u);
+                    tmp10 = tmp4->direction;
                     tmp1  = val6 + (tmp10 * 4);
                     val3  = func_801B1B2C(FIELD(s32, val13, -0xF8) + (*(s32*)(s_EntityPlacementOffsets + tmp1 * 4) << 0xF), FIELD(s32, val13, -0xF4) + (*(s32*)(D_801CD08D + tmp1 * 4) << 0xF),
-                                          (s32)tmp10, FIELD(u8, tmp4, 0x70u));
+                                          (s32)tmp10, tmp4->voice_flags.scene_flag);
                     val8  = val3 & BYTE_MASK;
                     val9  = 0;
                     if (val8 != 0) {
@@ -111,12 +111,12 @@ NON_MATCHING void func_801B21E8(void) {
                 block_26:
                     func_801B1B2C(val1, val2, g_Task->direction, g_Task->voice_flags.scene_flag);
                 }
-                tmp7                    = g_Task;
-                FIELD(s32, tmp7, 0x34u) = (s32) * (s32*)(&D_1F800008);
-                FIELD(s32, tmp7, 0x38u) = FIELD(s32, val0, 0x4u);
-                tmp8                    = g_Task;
-                FIELD(s16, tmp8, 0x3Eu) = Area_HeightRead(FIELD(s32, tmp7, 0x34u), FIELD(s32, val0, 0x4u));
-                Script_Select(FIELD(u8, tmp8, 0x8u));
+                tmp7                     = g_Task;
+                tmp7->pos.x.fixed        = (s32) * (s32*)(&D_1F800008);
+                tmp7->pos.y.fixed        = FIELD(s32, val0, 0x4u);
+                tmp8                     = g_Task;
+                tmp8->pos.z.part.integer = Area_HeightRead(tmp7->pos.x.fixed, FIELD(s32, val0, 0x4u));
+                Script_Select(tmp8->direction);
             }
             val6 += 2;
             val4 += 1;
@@ -147,7 +147,7 @@ NON_MATCHING void func_801B21E8(void) {
     }
     FIELD(s8, g_Task, 0x9u) = 4;
     tmp9                    = g_Task;
-    FIELD(u8, tmp9, 0x2u)   = (u8)(FIELD(u8, tmp9, 0x2u) + 1);
+    tmp9->header.step       = (u8)(tmp9->header.step + 1);
 }
 #else
 INCLUDE_ASM(func_801B21E8);

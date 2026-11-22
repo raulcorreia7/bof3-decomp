@@ -27,7 +27,17 @@ extern Callback D_801F4AC4[];
 /* The overlay step the timer enters. */
 void func_801F3050(void);
 
-void func_801F3950(s32 pos_x, s32 pos_y);
+/* The four corner offsets (x, y, z) of each quad shape, biased by 0x80 in x and y. */
+extern s8  D_801F4800[][4][3];
+/* The six quads of each facing: cell x and y step, shape and tile column. */
+extern u8  D_801F4824[][6][4];
+/* The base height of each facing's quads. */
+extern u16 D_801F4854[];
+/* The tile row of each quad shape. */
+extern u8  D_801F4858[];
+
+/* Draws the six semi-transparent quads of a facing around the task, lowered by height. */
+void func_801F3950(s32 facing, s32 height);
 
 s32 func_801F3C44(s32 x, s32 y);
 

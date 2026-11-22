@@ -42,7 +42,6 @@ extern s32  D_80147C58;
 extern s32  D_80147C5C;
 extern u8   D_80147C90;
 extern u8   D_80147C97;
-extern u8   D_80147CB8[];
 extern char D_801F2C04[];
 /* D_80149340 */
 
