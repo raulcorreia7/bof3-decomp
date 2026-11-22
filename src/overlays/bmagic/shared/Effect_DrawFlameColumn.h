@@ -1,5 +1,5 @@
 /* Draws the flame column: rows 4 to 31, each four textured quads whose half widths follow a sine of the row; the outer pair fades to black. Every change must verify every member. */
-/* magic144 (0x801EF818), magic092 (0x801EFB04) */
+/* func_801EF818 (magic144), func_801EFB04 (magic092) */
 MATCH void Effect_DrawFlameColumn(void) {
     POLY_GT4* prim;
     s32       i;

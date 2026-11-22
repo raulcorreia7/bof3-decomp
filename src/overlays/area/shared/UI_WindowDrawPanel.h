@@ -1,5 +1,5 @@
 /* Draws a window panel in four quads (the edges and two halves of the middle), then its frame. Every change must verify every member. */
-/* area042/13 (0x801F4B0C), area075/13 (0x801F4A50) */
+/* func_801F4B0C (area042), func_801F4A50 (area075) */
 MATCH void UI_WindowDrawPanel(s16 x, s16 y, s16 width, s16 height, u8 mode) {
     RECT*     texture_window;
     POLY_FT4* primitive;
