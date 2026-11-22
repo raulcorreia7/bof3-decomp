@@ -12,7 +12,7 @@ MATCH void func_801F7FB8(void) {
     u8  bits;
     u8  slot;
 
-    switch (g_ScenarioState.step_05) {
+    switch (g_ScenarioState.step) {
         case 0:
             if (g_ScriptVars[0] != 2) {
                 break;
@@ -21,7 +21,7 @@ MATCH void func_801F7FB8(void) {
             g_Game.members[1].unk_48 = 1;
             g_Game.members[0].unk_48 = 1;
             g_ScenarioState.timer_06 = 0xF0;
-            g_ScenarioState.step_05  = 1;
+            g_ScenarioState.step     = 1;
             break;
         case 1:
             if (--g_ScenarioState.timer_06 != 0) {
@@ -32,7 +32,7 @@ MATCH void func_801F7FB8(void) {
                 g_Game.members[2].unk_48 = 1;
                 g_Game.members[1].unk_48 = 1;
                 g_Game.members[0].unk_48 = 1;
-                g_ScenarioState.step_05  = 2;
+                g_ScenarioState.step     = 2;
             }
             g_AreaCameraRefreshCount = 2;
             break;
@@ -43,11 +43,11 @@ MATCH void func_801F7FB8(void) {
             g_AreaSceneMode = 1;
             SND_SEPlay(EMI_SE_ID(SND_BANK_AREA, 2));
             g_ScenarioState.timer_06 = 0x1E;
-            g_ScenarioState.step_05  = 3;
+            g_ScenarioState.step     = 3;
             break;
         case 3:
             if (g_ScenarioState.timer_06 == 0) {
-                g_ScenarioState.step_05 = 4;
+                g_ScenarioState.step = 4;
                 g_ScriptVars[0]++;
             } else {
                 g_ScenarioState.timer_06--;
@@ -60,15 +60,15 @@ MATCH void func_801F7FB8(void) {
             }
             SND_SEPlay(EMI_SE_ID(SND_BANK_AREA, 2));
             g_ScenarioState.timer_06 = 0x3C;
-            g_ScenarioState.step_05  = 5;
+            g_ScenarioState.step     = 5;
             break;
         case 5:
             if (g_ScenarioState.timer_06 != 0) {
                 g_ScenarioState.timer_06--;
                 func_801F8800(4);
             } else {
-                g_AreaSceneMode         = 2;
-                g_ScenarioState.step_05 = 6;
+                g_AreaSceneMode      = 2;
+                g_ScenarioState.step = 6;
                 g_ScriptVars[0]++;
             }
             break;
@@ -79,7 +79,7 @@ MATCH void func_801F7FB8(void) {
             g_AreaSceneMode = 3;
             SND_SEPlay(EMI_SE_ID(SND_BANK_AREA, 0));
             g_ScenarioState.timer_06 = 0xD2;
-            g_ScenarioState.step_05  = 7;
+            g_ScenarioState.step     = 7;
             break;
         case 7:
             if (g_ScenarioState.timer_06 != 0) {
@@ -89,8 +89,8 @@ MATCH void func_801F7FB8(void) {
                     g_AreaCameraOffsetZ = g_ScenarioState.timer_06 * 0x76C / 0xB4;
                 }
             } else {
-                g_AreaCameraOffsetZ     = 0;
-                g_ScenarioState.step_05 = 8;
+                g_AreaCameraOffsetZ  = 0;
+                g_ScenarioState.step = 8;
                 g_ScriptVars[0]++;
             }
             g_AreaCameraRefreshCount = 2;
@@ -99,26 +99,26 @@ MATCH void func_801F7FB8(void) {
             SND_SEPlay(EMI_SE_ID(SND_BANK_AREA, 1));
             func_801BFE34(TO_COORD_HALF(24), TO_COORD_HALF(22), 0x31);
             Game_BattleStartScripted(0x31);
-            g_ScenarioState.step_05 = 9;
+            g_ScenarioState.step = 9;
             break;
         case 10:
             Game_RequestAreaChange(AREA_ID_DESERT_CAMP_FIRST, TO_COORD_HALF(30), TO_COORD_HALF(34), FACING_UP);
             SYS_SetFlag(g_SceneFlags, 4);
             SYS_SetFlag(g_SceneFlags, 5);
-            g_ScenarioState.step_05 = 11;
+            g_ScenarioState.step = 11;
             break;
         case 11:
             if (WINDOW_EFFECT_BUSY()) {
                 break;
             }
-            g_ScenarioState.step_05 = 12;
+            g_ScenarioState.step = 12;
             break;
         case 12:
             if (g_ScriptVars[0] != 1) {
                 break;
             }
             UI_ModeSet(0);
-            g_ScenarioState.step_05 = 13;
+            g_ScenarioState.step = 13;
             break;
         case 13:
             if (WINDOW_EFFECT_BUSY()) {
@@ -131,13 +131,13 @@ MATCH void func_801F7FB8(void) {
             if (g_GameStateIndex == GAME_REQUEST_MESSAGE) {
                 break;
             }
-            g_ScenarioState.step_05 = 15;
+            g_ScenarioState.step = 15;
             break;
         case 15:
             Game_RequestAreaChange(AREA_ID_DESERT_CAMP_FIRST, TO_COORD(73), TO_COORD(13), AREA_ENTRY_MAP_LOADING | FACING_UP);
-            g_GameEntryMode         = 0xFF;
-            g_GameRequestType       = 0xFF;
-            g_ScenarioState.step_05 = 16;
+            g_GameEntryMode      = 0xFF;
+            g_GameRequestType    = 0xFF;
+            g_ScenarioState.step = 16;
             break;
         case 16:
             if (WINDOW_EFFECT_BUSY()) {
@@ -145,7 +145,7 @@ MATCH void func_801F7FB8(void) {
             }
             g_AreaDrawFlags = AREA_DRAW_ALL_FLAGS;
             UI_ModeSet(1);
-            g_ScenarioState.step_05 = 17;
+            g_ScenarioState.step = 17;
             break;
         case 17:
             if (g_ScriptVars[0] != 0) {
@@ -158,7 +158,7 @@ MATCH void func_801F7FB8(void) {
             Game_ClearScriptActive();
             SYS_SetFlag(g_SceneFlags, 6);
             g_ScenarioState.state_04 = 0;
-            g_ScenarioState.step_05  = 0;
+            g_ScenarioState.step     = 0;
             break;
         case 20:
             SCENARIO_MESSAGE_WAIT(MSG_SCENA14_125, 21);
@@ -169,7 +169,7 @@ MATCH void func_801F7FB8(void) {
             }
             Game_ClearScriptActive();
             g_ScenarioState.state_04 = 0;
-            g_ScenarioState.step_05  = 0;
+            g_ScenarioState.step     = 0;
             break;
         case 25:
             if ((u8)g_Game.members[0].u.field.mode.value != 0) {
@@ -180,14 +180,14 @@ MATCH void func_801F7FB8(void) {
             SYS_SetFlag(g_SceneFlags, 8);
             Item_Add(0, 0x5A, 1, 0);
             g_ScenarioState.state_04 = 0;
-            g_ScenarioState.step_05  = 0;
+            g_ScenarioState.step     = 0;
             break;
         case 29:
             Game_ClearScriptActive();
             SYS_SetFlag(g_SceneFlags, 9);
             Scene_SetupParty(4);
             g_ScenarioState.state_04 = 0;
-            g_ScenarioState.step_05  = 0;
+            g_ScenarioState.step     = 0;
             break;
         case 30:
             if (g_ScriptVars[0] != 5) {
@@ -199,7 +199,7 @@ MATCH void func_801F7FB8(void) {
                 g_SpawnedActors[slot].header.flags = 1;
                 g_SpawnedActors[D_801FC4C0].type   = 0x91;
             }
-            g_ScenarioState.step_05 = 31;
+            g_ScenarioState.step = 31;
             break;
         case 32:
             Game_RequestAreaChange(AREA_ID_DESERT_OF_DEATH_MAP, TO_COORD(0x1800), TO_COORD(0xC00), FACING_UP_RIGHT);
@@ -207,13 +207,13 @@ MATCH void func_801F7FB8(void) {
             D_8014504B = 2;
             D_80144F54 = 0;
             *flags |= 1;
-            g_ScenarioState.step_05 = 33;
+            g_ScenarioState.step = 33;
             break;
         case 33:
             if (WINDOW_EFFECT_BUSY()) {
                 break;
             }
-            g_ScenarioState.step_05 = 34;
+            g_ScenarioState.step = 34;
             break;
         case 34:
             if (TIMER_EXPIRED(g_ScenarioState.timer_06)) {
@@ -223,7 +223,7 @@ MATCH void func_801F7FB8(void) {
             break;
         case 35:
             if (g_GameStateIndex != GAME_REQUEST_MESSAGE) {
-                g_ScenarioState.step_05 = 36;
+                g_ScenarioState.step = 36;
             }
             g_Game.members[0].unk_09++;
             break;
@@ -233,7 +233,7 @@ MATCH void func_801F7FB8(void) {
             g_GameEntryMode          = 0;
             bits                     = *exit_flags;
             g_ScenarioState.state_04 = 3;
-            g_ScenarioState.step_05  = 0;
+            g_ScenarioState.step     = 0;
             *exit_flags              = bits & ~1;
             break;
     }

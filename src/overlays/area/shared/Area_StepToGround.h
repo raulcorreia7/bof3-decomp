@@ -13,4 +13,4 @@
     floor_height                  = COORD_INT(work->pos.z) - 224;                       \
     work->vz                      = (ground - floor_height) / work->timer;              \
     g_ActorTurnRamps[0].frames_xy = work->timer;                                        \
-    g_ActorTurnRamps[0].step_x    = 64;
+    g_ActorTurnRamps[0].delta_x   = 64;

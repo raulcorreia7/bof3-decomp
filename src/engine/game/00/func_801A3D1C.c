@@ -19,14 +19,14 @@ MATCH void func_801A3D1C(void* unused) {
         if (old_a != 0) {
             g_ActorTurnRamps[index].frames_xy = old_a - 1;
             work                              = TASK(Actor);
-            work->unk_64 += g_ActorTurnRamps[index].step_x;
-            work->unk_68 += g_ActorTurnRamps[index].step_y;
+            work->unk_64 += g_ActorTurnRamps[index].delta_x;
+            work->unk_68 += g_ActorTurnRamps[index].delta_y;
         }
         old_b = g_ActorTurnRamps[index].frames_z;
         if (old_b != 0) {
             g_ActorTurnRamps[index].frames_z = old_b - 1;
             work                             = TASK(Actor);
-            work->unk_6C += g_ActorTurnRamps[index].step_z;
+            work->unk_6C += g_ActorTurnRamps[index].delta_z;
         }
     }
 }

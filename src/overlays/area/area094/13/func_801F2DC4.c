@@ -11,21 +11,21 @@ MATCH void func_801F2DC4(void) {
 
         case 1:
             Game_SetScriptActive();
-            g_ScenarioState.step_05 = 0x32;
-            state                   = 7;
+            g_ScenarioState.step = 0x32;
+            state                = 7;
             break;
 
         case 2:
             if (SYS_TestFlag(g_SceneFlags, 32)) {
                 Game_SetScriptActive();
-                g_ScenarioState.step_05 = 2;
-                state                   = 9;
+                g_ScenarioState.step = 2;
+                state                = 9;
                 break;
             }
             Game_SetScriptActive();
             SCRIPT_VARS_CLEAR_ALL();
-            g_ScenarioState.step_05 = 0;
-            state                   = 9;
+            g_ScenarioState.step = 0;
+            state                = 9;
             goto state_store;
     }
     SCRIPT_VARS_CLEAR_ALL();

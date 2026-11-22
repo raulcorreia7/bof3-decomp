@@ -7,16 +7,16 @@ __asm__(".include \"include/match/macro.inc\"\n");
 MATCH void func_801FAC54(void) {
     u8 slot;
 
-    switch (g_ScenarioState.step_05) {
+    switch (g_ScenarioState.step) {
         case 10:
-            g_ScenarioState.step_05 = 0xB;
+            g_ScenarioState.step = 0xB;
             SYS_SetFlag(g_SceneFlags, 0x1D);
             Game_RequestAreaChange(AREA_ID_CEDAR_WOODS_HOUSE_BALIO_SUNDER, TO_COORD(0x20), TO_COORD(0x11), AREA_ENTRY_MAP_LOADING);
             break;
         case 11:
             UI_ModeSet(5);
-            g_AreaDrawFlags         = 0x1F;
-            g_ScenarioState.step_05 = 0xC;
+            g_AreaDrawFlags      = 0x1F;
+            g_ScenarioState.step = 0xC;
             break;
         case 12:
             if (WINDOW_EFFECT_BUSY()) {
@@ -33,7 +33,7 @@ MATCH void func_801FAC54(void) {
                 g_SpawnedActors[g_ScratchPad.cells.bytes[0]].camera_angle.y = g_AreaCameraAngle.vy;
                 g_SpawnedActors[g_ScratchPad.cells.bytes[0]].camera_angle.z = 0x2B0;
                 g_SpawnedActors[g_ScratchPad.cells.bytes[0]].layer          = 0xB4;
-                g_ScenarioState.step_05                                     = 0xD;
+                g_ScenarioState.step                                        = 0xD;
             }
             break;
         case 13:
@@ -49,7 +49,7 @@ MATCH void func_801FAC54(void) {
                 g_SpawnedActors[g_ScratchPad.cells.bytes[0]].camera_angle.y = g_AreaCameraAngle.vy;
                 g_SpawnedActors[g_ScratchPad.cells.bytes[0]].camera_angle.z = 0x200;
                 g_SpawnedActors[g_ScratchPad.cells.bytes[0]].layer          = 0x40;
-                g_ScenarioState.step_05                                     = 0xE;
+                g_ScenarioState.step                                        = 0xE;
             }
             break;
         case 14:
@@ -58,7 +58,7 @@ MATCH void func_801FAC54(void) {
             }
             D_80146258 |= 8;
             Scene_SetupParty(1);
-            g_ScenarioState.step_05 = 0xF;
+            g_ScenarioState.step = 0xF;
             break;
         case 15:
             if (g_ScriptVars[0] != 1) {
@@ -66,8 +66,8 @@ MATCH void func_801FAC54(void) {
             }
             SND_SeqStop(0, 0);
             SND_BGMPlay(0xD, 0x64, 8);
-            g_ScenarioState.step_05 = 0x10;
-            g_ScriptVars[0]         = 0x1E;
+            g_ScenarioState.step = 0x10;
+            g_ScriptVars[0]      = 0x1E;
             Game_RequestAreaChange(AREA_ID_CEDAR_WOODS_HOUSE_BALIO_SUNDER, TO_COORD(0x22), TO_COORD(0x11), AREA_ENTRY_MAP_LOADING | FACING_UP_RIGHT);
             g_GamePrevSelection = 0xD;
             break;
@@ -77,7 +77,7 @@ MATCH void func_801FAC54(void) {
             }
             func_801BFE34(TO_COORD(0x1E), TO_COORD(0x11), 0xD);
             func_801C7A54(0xD);
-            g_ScenarioState.step_05 = 0x11;
+            g_ScenarioState.step = 0x11;
             break;
         case 17:
             if (g_ScriptVars[0] != 0x3C) {

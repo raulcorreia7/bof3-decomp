@@ -30,7 +30,7 @@ MATCH void Camera_Update(void) {
             if (dist > 0) {
                 dir = 1;
             }
-            step_x        = dir * g_AreaCameraStep;
+            step_x        = dir * g_AreaCameraSpeed;
             g_AreaCameraX = value + step_x;
             D_80149336 -= step_x;
             g_AreaTileRemainderY -= step_x;
@@ -43,15 +43,15 @@ MATCH void Camera_Update(void) {
         if (value > 0) {
             dir = 1;
         }
-        step_y = dir * g_AreaCameraStep;
+        step_y = dir * g_AreaCameraSpeed;
         g_AreaCameraY += step_y;
         D_80149336 += step_y;
         g_AreaTileRemainderY -= step_y;
     }
     if (g_AreaCameraMoving != 0) {
-        g_AreaCameraHeight += g_AreaCameraHeightStep;
+        g_AreaCameraHeight += g_AreaCameraHeightDelta;
         if (g_AreaMapBundle.scroll == 0) {
-            g_AreaTileRemainderY -= g_AreaCameraHeightStep * 2;
+            g_AreaTileRemainderY -= g_AreaCameraHeightDelta * 2;
         }
         g_AreaCameraRefreshCount = 2;
         dir                      = ((0x800000 - ((g_AreaCameraX + 1) << 8) - (g_AreaScrollTargetX & ~0x7FFF)) | (0x800000 - (g_AreaCameraY << 8) - (g_AreaScrollTargetY & ~0x7FFF)));

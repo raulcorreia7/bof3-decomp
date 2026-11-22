@@ -9,19 +9,19 @@ MATCH void func_801F8CE4(void) {
     u8* mode;
     u8  slot;
 
-    switch (g_ScenarioState.step_05) {
+    switch (g_ScenarioState.step) {
         case 0:
             g_ScriptVars[0] = 0;
             SYS_SetFlag(g_SceneFlags, 0x10);
             Game_RequestAreaChange(AREA_ID_CAER_XHAN_LIFT_AREA, TO_COORD(24), TO_COORD_HALF(38), AREA_ENTRY_MAP_LOADING | FACING_UP_RIGHT);
-            g_ScenarioState.step_05 = 1;
+            g_ScenarioState.step = 1;
             break;
         case 1:
             if (g_ScriptVars[0] != 1) {
                 break;
             }
             if ((u8)Scene_SpawnActor(0x13, -0x344, g_AreaCameraAngle.vy, 0x284, 0x98, 0)) {
-                g_ScenarioState.step_05 = 2;
+                g_ScenarioState.step = 2;
             }
             break;
         case 2:
@@ -34,14 +34,14 @@ MATCH void func_801F8CE4(void) {
             break;
         case 10:
             Scene_SetupParty(3);
-            g_ScenarioState.step_05 = 0xB;
+            g_ScenarioState.step = 0xB;
             break;
         case 11:
             if (g_ScriptVars[3] != 0x18) {
                 break;
             }
             UI_ModeSet(0);
-            g_ScenarioState.step_05 = 0xC;
+            g_ScenarioState.step = 0xC;
             break;
         case 12:
             if (g_UiWindowEffectBusy) {
@@ -54,15 +54,15 @@ MATCH void func_801F8CE4(void) {
             if (g_GameStateIndex == GAME_REQUEST_MESSAGE) {
                 break;
             }
-            g_ScenarioState.step_05 = 0xE;
+            g_ScenarioState.step = 0xE;
             break;
         case 14:
             SYS_SetFlag(g_SceneEventFlags, 0x46);
             Game_RequestAreaChange(AREA_ID_CAER_XHAN_LIFT_RIDE, TO_COORD(28), TO_COORD(12), AREA_ENTRY_MAP_LOADING | FACING_UP_LEFT);
-            g_GameEntryMode         = GAME_NONE;
-            g_GameRequestType       = GAME_NONE;
-            g_GamePrevSelection     = 0x27;
-            g_ScenarioState.step_05 = 0xF;
+            g_GameEntryMode      = GAME_NONE;
+            g_GameRequestType    = GAME_NONE;
+            g_GamePrevSelection  = 0x27;
+            g_ScenarioState.step = 0xF;
             break;
         case 15:
             if (g_UiWindowEffectBusy) {
@@ -76,7 +76,7 @@ MATCH void func_801F8CE4(void) {
             func_801F924C();
             g_AreaDrawFlags = 0x1F;
             UI_ModeSet(1);
-            g_ScenarioState.step_05 = 0x10;
+            g_ScenarioState.step = 0x10;
             break;
         case 16:
             if (g_UiWindowEffectBusy) {
@@ -85,7 +85,7 @@ MATCH void func_801F8CE4(void) {
             func_801F924C();
             MESSAGE_START_WAIT(MSG_SCENA14_001);
             g_SpawnedActors[D_801FC4C0].header.mode = 2;
-            g_ScenarioState.step_05                 = 0x11;
+            g_ScenarioState.step                    = 0x11;
             break;
         case 17:
             func_801F924C();
@@ -94,8 +94,8 @@ MATCH void func_801F8CE4(void) {
             if (g_GameStateIndex != GAME_REQUEST_MESSAGE) {
                 if ((u8)Scene_SpawnActor(0x13, -0x4BA, g_AreaCameraAngle.vy, 0x360, 0x78, 0)) {
                     g_ScenarioState.timer_06 = 0x50;
-                    g_ScenarioState.step_05  = 0x13;
-                    g_AreaCameraStep /= 2;
+                    g_ScenarioState.step     = 0x13;
+                    g_AreaCameraSpeed /= 2;
                 }
             }
             func_801F924C();
@@ -104,7 +104,7 @@ MATCH void func_801F8CE4(void) {
             g_ScenarioState.timer_06--;
             if (g_ScenarioState.timer_06 == 0) {
                 UI_ModeSet(0);
-                g_ScenarioState.step_05 = 0x14;
+                g_ScenarioState.step = 0x14;
             }
             func_801F924C();
             break;
@@ -119,15 +119,15 @@ MATCH void func_801F8CE4(void) {
             if (g_GameStateIndex == GAME_REQUEST_MESSAGE) {
                 break;
             }
-            g_ScenarioState.step_05 = 0x16;
+            g_ScenarioState.step = 0x16;
             break;
         case 22:
             g_ScriptVars[3] = 0x20;
             Game_RequestAreaChange(AREA_ID_MYRIA_STATION_WORKERS, TO_COORD(40), TO_COORD(99), 0x8A);
-            g_GameEntryMode         = GAME_NONE;
-            g_GameRequestType       = GAME_NONE;
-            g_GamePrevSelection     = GAME_NONE;
-            g_ScenarioState.step_05 = 0x17;
+            g_GameEntryMode      = GAME_NONE;
+            g_GameRequestType    = GAME_NONE;
+            g_GamePrevSelection  = GAME_NONE;
+            g_ScenarioState.step = 0x17;
             break;
         case 23:
             if (g_UiWindowEffectBusy) {
@@ -136,7 +136,7 @@ MATCH void func_801F8CE4(void) {
             UI_ModeSet(1);
             g_AreaDrawFlags = 0x1F;
             SND_BGMRequest(0x8C);
-            g_ScenarioState.step_05 = 0x18;
+            g_ScenarioState.step = 0x18;
             break;
         case 24:
             mode = &g_ScriptVars[3];
@@ -150,7 +150,7 @@ MATCH void func_801F8CE4(void) {
             SYS_SetFlag(g_SceneFlags, 0x11);
         clear_step:
             g_ScenarioState.state_04 = 0;
-            g_ScenarioState.step_05  = 0;
+            g_ScenarioState.step     = 0;
             break;
     }
 }

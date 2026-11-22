@@ -8,13 +8,13 @@ MATCH void func_801D41E4(void) {
     FishingState* state;
     s32           index;
 
-    work             = TASK(FishingState);
-    work->step_timer = (work->step_timer - 1);
+    work        = TASK(FishingState);
+    work->timer = (work->timer - 1);
 
     state = TASK(FishingState);
-    if (state->step_timer != 0) {
+    if (state->timer != 0) {
         index = D_801E1E80[state->row_4B * 0xC] * 3;
-        func_801D9740(D_801E1F16[index], D_801E1F14 + index, ((8 - (4 - state->step_timer) * 2) & 0xFE) | 0x80, 0x1D);
+        func_801D9740(D_801E1F16[index], D_801E1F14 + index, ((8 - (4 - state->timer) * 2) & 0xFE) | 0x80, 0x1D);
         return;
     }
     Actor_Clear();

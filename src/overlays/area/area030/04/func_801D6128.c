@@ -1,7 +1,7 @@
 #include "area030_04.h"
 
 /* Work-row fields behind the area-030 scratchpad pointer. */
-#define BANNER_TIMER (TASK(FishingState)->step_timer)
+#define BANNER_TIMER (TASK(FishingState)->timer)
 #define BANNER_INDEX (TASK(FishingState)->step_index)
 #define BANNER_FRAME (TASK(FishingState)->cue_index)
 

@@ -60,12 +60,12 @@ typedef struct SparkEmitter {
 
 /* One 0x18-byte row of the sprite work table at AREA_WORK. */
 typedef struct SpriteSpark {
-    u8     active; /* +0x00 */
-    u8     unk_01; /* +0x01 */
-    u8     life;   /* +0x02 */
-    u8     blink;  /* +0x03 - per-frame colour phase: the draw is grey when set, red otherwise */
-    VECTOR pos;    /* +0x04 */
-    s32    z_step; /* +0x14 - rises by 0x20000 per update and is added to z */
+    u8     active;  /* +0x00 */
+    u8     unk_01;  /* +0x01 */
+    u8     life;    /* +0x02 */
+    u8     blink;   /* +0x03 - per-frame colour phase: the draw is grey when set, red otherwise */
+    VECTOR pos;     /* +0x04 */
+    s32    z_delta; /* +0x14 - rises by 0x20000 per update and is added to z */
 } SpriteSpark;
 
 /* The sprite work table at AREA_WORK holds this many SpriteSpark rows. */
@@ -74,7 +74,7 @@ typedef struct SpriteSpark {
 ASSERT_SIZE(SparkEmitter, 0x14);
 ASSERT_SIZE(SpriteSpark, 0x18);
 ASSERT_OFFSET(SparkEmitter, timer, 0x03);
-ASSERT_OFFSET(SpriteSpark, z_step, 0x14);
+ASSERT_OFFSET(SpriteSpark, z_delta, 0x14);
 
 #define g_SparkEmitters ((SparkEmitter*)(AREA_WORK + 0x1800))
 

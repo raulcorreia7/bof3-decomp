@@ -5,17 +5,17 @@ __asm__(".include \"include/match/macro.inc\"\n");
 #endif
 
 MATCH void func_801FA3D0(void) {
-    switch (g_ScenarioState.step_05) {
+    switch (g_ScenarioState.step) {
         case 0:
             if (g_GameStateIndex != GAME_REQUEST_MESSAGE) {
-                g_ScriptVars[0]         = 1;
-                g_ScenarioState.step_05 = 1;
+                g_ScriptVars[0]      = 1;
+                g_ScenarioState.step = 1;
             }
             break;
         case 2:
             if (g_GameStateIndex != GAME_REQUEST_MESSAGE) {
-                g_ScriptVars[0]         = 1;
-                g_ScenarioState.step_05 = 3;
+                g_ScriptVars[0]      = 1;
+                g_ScenarioState.step = 3;
             }
             break;
         case 1:
@@ -23,7 +23,7 @@ MATCH void func_801FA3D0(void) {
             if (g_ScriptVars[0] != 0xA) {
                 break;
             }
-            g_ScenarioState.step_05 = 5;
+            g_ScenarioState.step = 5;
             SYS_SetFlag(g_SceneFlags, 29);
             g_ScriptVars[2] = 4;
             g_ScenarioState.flags_01 |= 0x01;
@@ -35,11 +35,11 @@ MATCH void func_801FA3D0(void) {
                 break;
             }
             Game_BattleStartScripted(27);
-            g_ScenarioState.step_05 = 6;
+            g_ScenarioState.step = 6;
             break;
         case 7:
             Scene_SetupParty(14);
-            g_ScenarioState.step_05 = 10;
+            g_ScenarioState.step = 10;
             SYS_SetFlag(g_SceneFlags, 31);
             Game_RequestAreaChange(AREA_ID_BEYD_TRAINING, TO_COORD(24), TO_COORD(60), AREA_ENTRY_MAP_LOADING | 0x08 | FACING_UP_RIGHT);
             g_GamePrevSelection = 0xFF;
@@ -49,14 +49,14 @@ MATCH void func_801FA3D0(void) {
                 break;
             }
             Char_RebuildPartyStats();
-            g_ScriptVars[2]         = 2;
-            g_ScenarioState.step_05 = 6;
+            g_ScriptVars[2]      = 2;
+            g_ScenarioState.step = 6;
             g_ScenarioState.flags_01 ^= 0x01;
             Game_RequestAreaChange(AREA_ID_RHAPALA_WORLD_MAP, TO_COORD(49), TO_COORD(45), FACING_DOWN_RIGHT);
             break;
         case 15:
             Scene_SetupParty(11);
-            g_ScenarioState.step_05 = 16;
+            g_ScenarioState.step = 16;
             break;
         case 16:
             if (g_ScriptVars[0] != 0x14) {
@@ -64,7 +64,7 @@ MATCH void func_801FA3D0(void) {
             }
             UI_ModeSet(0xD);
             SYS_SetFlag(g_SceneFlags, 32);
-            g_ScenarioState.step_05 = 17;
+            g_ScenarioState.step = 17;
             break;
         case 17:
             if (WINDOW_EFFECT_BUSY()) {
@@ -76,8 +76,8 @@ MATCH void func_801FA3D0(void) {
         case 18:
             if (g_GameStateIndex != GAME_REQUEST_MESSAGE) {
                 Char_RebuildPartyStats();
-                g_ScriptVars[2]         = 1;
-                g_ScenarioState.step_05 = 6;
+                g_ScriptVars[2]      = 1;
+                g_ScenarioState.step = 6;
                 SYS_ClearFlag(g_SceneFlags, 29);
                 g_ScenarioState.flags_01 ^= 0x01;
                 Game_RequestAreaChange(AREA_ID_RHAPALA_WORLD_MAP, TO_COORD(49), TO_COORD(45), FACING_DOWN_RIGHT);
@@ -85,7 +85,7 @@ MATCH void func_801FA3D0(void) {
             break;
         case 20:
             Scene_SetupParty(13);
-            g_ScenarioState.step_05 = 21;
+            g_ScenarioState.step = 21;
             break;
         case 21:
             if (g_ScriptVars[0] != 2) {
@@ -93,7 +93,7 @@ MATCH void func_801FA3D0(void) {
             }
             UI_ModeSet(0xD);
             SYS_SetFlag(g_SceneFlags, 32);
-            g_ScenarioState.step_05 = 22;
+            g_ScenarioState.step = 22;
             break;
         case 22:
             if (WINDOW_EFFECT_BUSY()) {
@@ -105,8 +105,8 @@ MATCH void func_801FA3D0(void) {
         case 23:
             if (g_GameStateIndex != GAME_REQUEST_MESSAGE) {
                 Char_RebuildPartyStats();
-                g_ScriptVars[2]         = 1;
-                g_ScenarioState.step_05 = 6;
+                g_ScriptVars[2]      = 1;
+                g_ScenarioState.step = 6;
                 SYS_ClearFlag(g_SceneFlags, 29);
                 g_ScenarioState.flags_01 ^= 0x01;
                 Game_RequestAreaChange(AREA_ID_RHAPALA_WORLD_MAP, TO_COORD(49), TO_COORD(45), FACING_DOWN_RIGHT);

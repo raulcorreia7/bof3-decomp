@@ -16,7 +16,7 @@ MATCH void Scene_Start(u8 scenario_index) {
     state->unk_03      = 0u;
     state->state_04    = 0u;
     state->timer_06    = 0u;
-    state->step_05     = 0u;
+    state->step        = 0u;
     state->flags_01    = 0u;
     state->unk_08      = 0u;
 

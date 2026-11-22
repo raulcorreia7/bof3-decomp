@@ -6,32 +6,32 @@
 __asm__(".include \"include/match/macro.inc\"\n");
 #endif
 
-/* Runs the scene script one step per frame, keyed on g_ScenarioState.step_05. */
+/* Runs the scene script one step per frame, keyed on g_ScenarioState.step. */
 MATCH void func_801F8740(void) {
-    switch (g_ScenarioState.step_05) {
+    switch (g_ScenarioState.step) {
         case 0:
             if (g_ScriptVars[0] == 3) {
                 func_801C601C(4);
-                g_ScenarioState.step_05 = 1;
+                g_ScenarioState.step = 1;
             }
             break;
         case 1:
             if (g_ScriptVars[0] == 8) {
                 func_801BFE34(TO_COORD(7), TO_COORD(0xE), 0xE);
-                g_ScenarioState.step_05 = 2;
+                g_ScenarioState.step = 2;
             }
             break;
         case 2:
             if (g_ScriptVars[0] == 0xB) {
                 func_801C7A54(0xE);
-                g_ScenarioState.step_05 = 3;
+                g_ScenarioState.step = 3;
             }
             break;
         case 3:
             if (g_ScriptVars[0] == 0xC) {
                 g_ScriptVars[2] = 1;
                 func_801BE1B0(0x12);
-                g_ScenarioState.step_05 = 4;
+                g_ScenarioState.step = 4;
                 SYS_SetFlag(g_SceneFlags, 7);
                 SYS_SetFlag(g_SceneFlags, 0x3E);
                 func_8019FA28(0x1A, TO_COORD(0x34), TO_COORD(8), 0x84);
@@ -56,7 +56,7 @@ MATCH void func_801F8740(void) {
                 g_ScriptVars[1]          = 0;
                 g_ScriptVars[2]          = 0;
                 g_ScriptVars[3]          = 0;
-                g_ScenarioState.step_05  = 8;
+                g_ScenarioState.step     = 8;
                 g_ScenarioState.state_04 = 8;
             }
             break;
@@ -66,7 +66,7 @@ MATCH void func_801F8740(void) {
         case 7:
             if (g_GameStateIndex != 2) {
                 Game_ClearScriptActive();
-                g_ScenarioState.step_05  = 8;
+                g_ScenarioState.step     = 8;
                 g_ScenarioState.state_04 = 8;
             }
             break;
@@ -77,21 +77,21 @@ MATCH void func_801F8740(void) {
                     Game_SetScriptActive();
                     g_ScriptVars[3] = 1;
                     SYS_SetFlag(g_SceneFlags, 9);
-                    g_ScenarioState.step_05 = 9;
+                    g_ScenarioState.step = 9;
                 }
                 if (!SYS_TestFlag(g_SceneFlags, 0xA) && (u32)((u16)g_Game.members[0].pos.x.part.integer - 8) < 2 && g_Game.members[0].pos.y.part.integer < 9 && g_Game.members[0].unk_4B == 0x42 &&
                     g_Game.members[0].facing == 1) {
                     Game_SetScriptActive();
                     g_ScriptVars[3] = 5;
                     SYS_SetFlag(g_SceneFlags, 0xA);
-                    g_ScenarioState.step_05 = 10;
+                    g_ScenarioState.step = 10;
                 }
                 if (!SYS_TestFlag(g_SceneFlags, 0xB) && (u32)((u16)g_Game.members[0].pos.x.part.integer - 0xC) < 2 && g_Game.members[0].pos.y.part.integer < 5 && g_Game.members[0].unk_4B == 0x42 &&
                     g_Game.members[0].facing == 1) {
                     Game_SetScriptActive();
                     g_ScriptVars[3] = 10;
                     SYS_SetFlag(g_SceneFlags, 0xB);
-                    g_ScenarioState.step_05 = 11;
+                    g_ScenarioState.step = 11;
                 }
             }
             if (g_ScriptVars[2] == 3) {

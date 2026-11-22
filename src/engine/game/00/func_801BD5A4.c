@@ -21,7 +21,7 @@ MATCH void func_801BD5A4(void) {
                 g_SpawnedActors[TASK(Actor)->param.actor_slot].unk_06       = 1;
                 tail                                                        = TASK(Actor);
                 ids                                                         = (u8*)g_Game.current;
-                g_SpawnedActors[tail->param.actor_slot].scene_step          = 0;
+                g_SpawnedActors[tail->param.actor_slot].vx                  = 0;
                 g_SpawnedActors[tail->param.actor_slot].selection           = D_80181B28[ids[0x79]];
                 g_SpawnedActors[tail->param.actor_slot].screen_x            = tail->screen_x;
                 g_SpawnedActors[tail->param.actor_slot].screen_y            = tail->screen_y;

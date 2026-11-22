@@ -7,5 +7,5 @@ MATCH void func_801E5F34(void) {
     WinDrawCueText(28, 21, 0xB1);
     UI_ModeSet(UI_MODE_FADE_OUT);
     g_MenuStartTimer = 0x1E;
-    g_MenuStartStep += 1;
+    g_MenuCampStep += 1;
 }

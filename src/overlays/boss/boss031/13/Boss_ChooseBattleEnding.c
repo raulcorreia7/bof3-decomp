@@ -2,7 +2,7 @@
 
 MATCH void Boss_ChooseBattleEnding(void) {
     if BATTLE_IS_VICTORY () {
-        g_ScenarioState.step_05 = 0x14;
+        g_ScenarioState.step = 0x14;
         Battle_EndVictory();
     } else {
         g_Battle.outcome.options &= 0xBF;

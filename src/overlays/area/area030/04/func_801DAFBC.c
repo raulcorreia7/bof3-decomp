@@ -8,7 +8,7 @@ MATCH void func_801DAFBC(void) {
         SND_BGMPlay(0x29, 0x64, 8);
         func_801DDE94(2);
         D_8014420D += 1;
-        TASK(FishingState)->step_timer = 0;
+        TASK(FishingState)->timer = 0;
         TASK(FishingState)->sub_index += 1;
     }
     Script_AnimStepLoop();

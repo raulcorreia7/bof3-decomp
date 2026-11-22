@@ -79,11 +79,11 @@ NON_MATCHING u8 Script_OpsRunWait(void* sub, s32 target, u8 value) {
                 g_ActorTurnRamps[*index].frames_xy = slot;
                 g_ActorTurnRamps[*index].frames_z  = slot;
                 cmd                                = code + FIELD(u16, sub, 0xAu);
-                g_ActorTurnRamps[*index].step_z    = (s16)(cmd[6] | (cmd[5] << 8)) / g_ActorTurnRamps[*index].frames_z;
+                g_ActorTurnRamps[*index].delta_z   = (s16)(cmd[6] | (cmd[5] << 8)) / g_ActorTurnRamps[*index].frames_z;
                 cmd                                = code + FIELD(u16, sub, 0xAu);
-                g_ActorTurnRamps[*index].step_y    = (s16)(cmd[4] | (cmd[3] << 8)) / g_ActorTurnRamps[*index].frames_z;
+                g_ActorTurnRamps[*index].delta_y   = (s16)(cmd[4] | (cmd[3] << 8)) / g_ActorTurnRamps[*index].frames_z;
                 cmd                                = code + FIELD(u16, sub, 0xAu);
-                g_ActorTurnRamps[*index].step_x    = (s16)(cmd[2] | (cmd[1] << 8)) / g_ActorTurnRamps[*index].frames_z;
+                g_ActorTurnRamps[*index].delta_x   = (s16)(cmd[2] | (cmd[1] << 8)) / g_ActorTurnRamps[*index].frames_z;
             } else {
                 TASK(Actor)->unk_6C = (s16)(cmd[6] | (cmd[5] << 8));
                 cmd                 = code + FIELD(u16, sub, 0xAu);

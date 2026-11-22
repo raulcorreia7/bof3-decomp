@@ -91,7 +91,7 @@ extern u8  D_80146871;
     g_ScriptVars[1]          = 0;    \
     g_ScriptVars[2]          = 0;    \
     g_ScriptVars[3]          = 0;    \
-    g_ScenarioState.step_05  = 0;    \
+    g_ScenarioState.step     = 0;    \
     g_ScenarioState.state_04 = 0x1A
 
 #endif

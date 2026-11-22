@@ -21,7 +21,7 @@ u16         Actor_ReadState(void);
 /* func_8015CB18 */
 s32         Actor_ClaimSlot();
 /* func_8015CC00 */
-s32         Actor_SpawnHelper(u8 id, s32 step, s32 selection, s32 x, s32 y, s32 z);
+s32         Actor_SpawnHelper(u8 id, s32 vx, s32 selection, s32 x, s32 y, s32 z);
 
 /* func_8019601C */
 u8   Actor_FindFreeSpawned(void);

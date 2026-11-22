@@ -16,7 +16,7 @@ MATCH void func_801F477C(void) {
     if (g_ScenarioState.scenario_id < 0xD && g_UiMessageChoice == 1) {
         D_8014865F = 0;
         Game_SetScriptActive();
-        g_ScenarioState.step_05  = 0x14;
+        g_ScenarioState.step     = 0x14;
         g_ScenarioState.state_04 = 0x8;
     }
 }

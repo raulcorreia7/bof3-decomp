@@ -8,7 +8,7 @@ MATCH void* func_801B5C54(void) {
     s32       index;
     s32       sub;
     s32       limit;
-    s32       step;
+    s32       i;
     s32       pos;
     s32       x;
     s32       y;
@@ -53,7 +53,7 @@ MATCH void* func_801B5C54(void) {
                 else
                     limit = (COORD_FRAC(work->pos.y) != 0);
             }
-            for (step = 0; step <= limit; step++) {
+            for (i = 0; i <= limit; i++) {
                 if (((run->flags & TILE_RUN_FLAG_VERTICAL) && (x & BYTE_MASK) == run->x && (y & BYTE_MASK) == run->y + sub) ||
                     (!(run->flags & TILE_RUN_FLAG_VERTICAL) && (x & BYTE_MASK) == run->x + sub && (y & BYTE_MASK) == run->y))
                     return run;

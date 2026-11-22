@@ -15,19 +15,19 @@ MATCH void func_801F8ADC(void) {
 }
 
 MATCH void func_801F8AE4(void) {
-    switch (g_ScenarioState.step_05) {
+    switch (g_ScenarioState.step) {
         case 0:
             if (g_ScriptVars[0] == 1) {
-                g_ScriptVars[1]         = 1;
-                g_ScriptVars[2]         = 1;
-                g_ScenarioState.step_05 = 1;
+                g_ScriptVars[1]      = 1;
+                g_ScriptVars[2]      = 1;
+                g_ScenarioState.step = 1;
                 func_8019FA28(0x9, 0x470000, 0x1D0000, 3);
             }
             break;
         case 1:
             g_AreaDrawFlags = AREA_DRAW_ALL_FLAGS;
             Area_ScrollStartRoute(0);
-            g_ScenarioState.step_05 = 2;
+            g_ScenarioState.step = 2;
             break;
         case 2:
             if (g_ScriptVars[0] == 0x1E) {

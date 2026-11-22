@@ -25,10 +25,10 @@ MATCH void Fishing_CatchPage(void) {
         /* FAKE: retail reads g_Actors as u8[]. */
         fish                            = ((u8*)g_Actors)[g_FishingHookedFish * 0x98 + 6];
         if ((u8)fish == 0x16) {
-            TASK(FishingState)->step_timer  = 4;
+            TASK(FishingState)->timer       = 4;
             TASK(FishingState)->saved_index = 1;
         } else if (!(Item_Add(ITEM_CATEGORY_ITEM, (fish + ITEM_JELLYFISH) & BYTE_MASK, 1, 0) & BYTE_MASK)) {
-            TASK(FishingState)->step_timer  = 4;
+            TASK(FishingState)->timer       = 4;
             TASK(FishingState)->saved_index = 2;
         } else {
             TASK(FishingState)->sub_index = 0xD;

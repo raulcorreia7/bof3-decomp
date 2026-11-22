@@ -7,7 +7,7 @@ __asm__(".include \"include/match/macro.inc\"\n");
 #endif
 
 MATCH void func_801F82F4(void) {
-    switch (g_ScenarioState.step_05) {
+    switch (g_ScenarioState.step) {
         case 0:
             Game_SetScriptActive();
             SCENARIO_MESSAGE_WAIT(MSG_SCENA02_048, 1);
@@ -15,16 +15,16 @@ MATCH void func_801F82F4(void) {
         case 1:
             if (g_GameStateIndex != GAME_REQUEST_MESSAGE) {
                 if (g_ScriptVars[0] == 0xBE) {
-                    g_ScenarioState.step_05 = 2;
+                    g_ScenarioState.step = 2;
                 }
                 if (g_ScriptVars[0] == 0xBF) {
-                    g_ScenarioState.step_05 = 5;
+                    g_ScenarioState.step = 5;
                 }
             }
             break;
         case 2:
-            g_ScriptVars[0]         = 0;
-            g_ScenarioState.step_05 = 3;
+            g_ScriptVars[0]      = 0;
+            g_ScenarioState.step = 3;
             Game_RequestAreaChange(0xF, 0x110000, 0x3E0000, 0x88);
             g_GamePrevSelection = 0x11;
             g_GameFlags |= 0x80;

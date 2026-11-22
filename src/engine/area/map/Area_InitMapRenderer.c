@@ -61,8 +61,8 @@ NON_MATCHING void Area_InitMapRenderer(void) {
     }
     g_AreaTileRemainderY      = height;
     D_80149336                = 0;
-    g_AreaCameraStep          = 0;
-    g_AreaCameraHeightStep    = 0;
+    g_AreaCameraSpeed         = 0;
+    g_AreaCameraHeightDelta   = 0;
     g_AreaHeightOffsetEnabled = 0;
     g_AreaSceneMode           = 0;
     g_AreaCameraRefreshCount  = 3;

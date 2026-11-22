@@ -34,7 +34,7 @@ MATCH void func_801D57B0(void) {
     other             = TASK(FishingState);
     panel->origin_x   = 0x5E;
     panel->origin_y   = 0xC2;
-    other->step_timer = 0;
+    other->timer      = 0;
 
     TASK(FishingState)->step_index = 0;
     TASK(FishingState)->tint_5D    = 0;

@@ -5,23 +5,23 @@
 __asm__(".include \"include/match/macro.inc\"\n");
 #endif
 
-/* Runs the scene script one step per frame, keyed on g_ScenarioState.step_05. */
+/* Runs the scene script one step per frame, keyed on g_ScenarioState.step. */
 MATCH void func_801FBCA4(void) {
     SpawnedActor* actor;
     u8            slot;
 
-    switch (g_ScenarioState.step_05) {
+    switch (g_ScenarioState.step) {
         case 0:
             SND_StartDecrescendo(g_SelectionSepSlots[g_SndBGMId * 4], g_SelectionSequences[g_SndBGMId * 4], 100, 0x20);
             g_ScenarioState.timer_06 = 0x20;
-            g_ScenarioState.step_05  = 1;
+            g_ScenarioState.step     = 1;
             break;
         case 1:
             if (g_ScenarioState.timer_06-- == 0) {
                 SND_BGMFadeOut(g_SndBGMId, 100, 0x20);
                 g_ScriptVars[0] = 0;
                 func_801BE1B0(0);
-                g_ScenarioState.step_05 = 2;
+                g_ScenarioState.step = 2;
             }
             break;
         case 2:
@@ -36,7 +36,7 @@ MATCH void func_801FBCA4(void) {
                     g_SpawnedActors[D_801FEA6C].camera_angle.z = g_AreaCameraAngle.vz;
                     g_SpawnedActors[D_801FEA6C].layer          = 0x1E;
                 }
-                g_ScenarioState.step_05 = 3;
+                g_ScenarioState.step = 3;
             }
             break;
         case 3:
@@ -59,7 +59,7 @@ MATCH void func_801FBCA4(void) {
                     g_SpawnedActors[D_801FEA6C].camera_angle.z = 0x1C;
                     g_SpawnedActors[D_801FEA6C].layer          = 0xB4;
                 }
-                g_ScenarioState.step_05 = 4;
+                g_ScenarioState.step = 4;
                 g_ScriptVars[0]++;
             }
             break;
@@ -78,19 +78,19 @@ MATCH void func_801FBCA4(void) {
                 g_ScriptVars[0]++;
                 func_801BFE34(TO_COORD(0x43), TO_COORD(0x38), 0x21);
                 func_801BE1B0(1);
-                g_ScenarioState.step_05 = 5;
+                g_ScenarioState.step = 5;
             }
             break;
         case 5:
             if (!(g_SpawnedActors[D_801FEA6C].header.flags & 1)) {
-                g_ScenarioState.step_05 = 6;
+                g_ScenarioState.step = 6;
                 g_ScriptVars[0]++;
             }
             break;
         case 6:
             if (g_ScriptVars[0] == 5) {
                 func_801C7A54(0x21);
-                g_ScenarioState.step_05 = 7;
+                g_ScenarioState.step = 7;
             }
             break;
         case 8:
@@ -98,7 +98,7 @@ MATCH void func_801FBCA4(void) {
             Game_ClearScriptActive();
             SYS_SetFlag(g_SceneFlags, 8);
             g_ScenarioState.state_04 = 0;
-            g_ScenarioState.step_05  = 0;
+            g_ScenarioState.step     = 0;
             D_80146258 &= ~GAME_FLAG_SCROLL_LOCK;
             break;
     }

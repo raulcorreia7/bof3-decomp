@@ -7,7 +7,7 @@ __asm__(".include \"include/match/macro.inc\"\n");
 #endif
 
 MATCH void func_801F8B94(void) {
-    if (g_ScenarioState.step_05 == 0) {
+    if (g_ScenarioState.step == 0) {
         if (g_ScriptVars[0] == 0x18) {
             SYS_SetFlag(g_SceneFlags, 10);
             Game_ClearScriptActive();
@@ -20,7 +20,7 @@ MATCH void func_801F8B94(void) {
 MATCH void func_801F8C1C(void) {
     u8* state;
 
-    state = &g_ScenarioState.step_05;
+    state = &g_ScenarioState.step;
     switch (*state) {
         case 0:
             MESSAGE_START_WAIT(MSG_SCENA05_038);

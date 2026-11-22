@@ -43,7 +43,7 @@ MATCH void func_801FB51C(void) {
 MATCH void func_801FB574(void) {
     Game_SetScriptActive();
     g_ScenarioState.state_04 = 5;
-    g_ScenarioState.step_05  = 5;
+    g_ScenarioState.step     = 5;
 }
 
 MATCH void func_801FB5A8(void* entity) {
@@ -52,7 +52,7 @@ MATCH void func_801FB5A8(void* entity) {
     actor = entity;
     Game_SetScriptActive();
     g_ScenarioState.state_04 = 5;
-    g_ScenarioState.step_05  = 30;
+    g_ScenarioState.step     = 30;
     /* FAKE: preserve the store order. */
     FAKE_BARRIER();
     actor->unk_7E = actor->unk_7E + 1;
@@ -64,7 +64,7 @@ MATCH void func_801FB5F8(void* entity) {
     actor = entity;
     Game_SetScriptActive();
     g_ScenarioState.state_04 = 7;
-    g_ScenarioState.step_05  = 30;
+    g_ScenarioState.step     = 30;
     /* FAKE: preserve the store order. */
     FAKE_BARRIER();
     actor->unk_7E = actor->unk_7E + 1;
@@ -80,7 +80,7 @@ MATCH s32 func_801FB648(s32 x, s32 y) {
     if (LOHU(g_GameAreaId) == 0x94 && g_GameCellType == 4 && !SYS_TestFlag(g_SceneFlags, 0x10) && x == 0x738000 && (u32)((y >> 16) - 0x36) < 2) {
         Game_SetScriptActive();
         g_ScenarioState.state_04 = 4;
-        g_ScenarioState.step_05  = 0;
+        g_ScenarioState.step     = 0;
         return 1;
     }
 
@@ -101,7 +101,7 @@ MATCH s32 func_801FB648(s32 x, s32 y) {
         if (cell_count != 0) {
             Game_SetScriptActive();
             g_ScenarioState.state_04 = 2;
-            g_ScenarioState.step_05  = 20;
+            g_ScenarioState.step     = 20;
             return 1;
         }
     }
@@ -115,19 +115,19 @@ MATCH s32 func_801FB84C(s32 x, s32 y) {
                 if (x < TO_COORD_HALF(79) && (u32)((y >> 16) - 7) < 8) {
                     Game_SetScriptActive();
                     g_ScenarioState.state_04 = 7;
-                    g_ScenarioState.step_05  = 0;
+                    g_ScenarioState.step     = 0;
                 }
             } else if (!SYS_TestFlag(g_SceneFlags, 22)) {
                 if (x < TO_COORD_HALF(73) && (u32)((y >> 16) - 9) < 4) {
                     Game_SetScriptActive();
                     g_ScenarioState.state_04 = 7;
-                    g_ScenarioState.step_05  = 1;
+                    g_ScenarioState.step     = 1;
                 }
             } else if (!SYS_TestFlag(g_SceneFlags, 23)) {
                 if (x < TO_COORD_HALF(64) && (u32)((y >> 16) - 9) < 4) {
                     Game_SetScriptActive();
                     g_ScenarioState.state_04 = 7;
-                    g_ScenarioState.step_05  = 2;
+                    g_ScenarioState.step     = 2;
                 }
             }
         }
@@ -136,13 +136,13 @@ MATCH s32 func_801FB84C(s32 x, s32 y) {
                 if (x < TO_COORD_HALF(57) && (u32)((y >> 16) - 0x31) < 4) {
                     Game_SetScriptActive();
                     g_ScenarioState.state_04 = 7;
-                    g_ScenarioState.step_05  = 3;
+                    g_ScenarioState.step     = 3;
                 }
             } else if (!SYS_TestFlag(g_SceneFlags, 26)) {
                 if (x < TO_COORD_HALF(45) && (u32)((y >> 16) - 0x31) < 4) {
                     Game_SetScriptActive();
                     g_ScenarioState.state_04 = 7;
-                    g_ScenarioState.step_05  = 4;
+                    g_ScenarioState.step     = 4;
                 }
             }
         }
@@ -152,7 +152,7 @@ MATCH s32 func_801FB84C(s32 x, s32 y) {
             if (!SYS_TestFlag(g_SceneFlags, 28) && y < TO_COORD_HALF(29) && (u32)((x >> 16) - 0x13) < 4) {
                 Game_SetScriptActive();
                 g_ScenarioState.state_04 = 7;
-                g_ScenarioState.step_05  = 5;
+                g_ScenarioState.step     = 5;
             }
         }
         if (g_GameCellType == 3 && !SYS_TestFlag(g_SceneFlags, 31) && x < TO_COORD_HALF(44) && (u32)((y >> 16) - 0x26) < 4) {
@@ -160,27 +160,27 @@ MATCH s32 func_801FB84C(s32 x, s32 y) {
             SND_SeqStop(0, 0);
             SND_BGMRequest(0x9F);
             g_ScenarioState.state_04 = 7;
-            g_ScenarioState.step_05  = 10;
+            g_ScenarioState.step     = 10;
         }
     }
     if (LOHU(g_GameAreaId) == AREA_ID_CAER_XHAN_LIFT_AREA && g_GameCellType == 0 && !SYS_TestFlag(g_SceneFlags, 17) && (y >> 16) == 0x1C && (u32)((x >> 16) - 0x12) < 3) {
         Game_SetScriptActive();
         g_ScenarioState.state_04 = 4;
-        g_ScenarioState.step_05  = 10;
+        g_ScenarioState.step     = 10;
         return 1;
     }
     if (LOHU(g_GameAreaId) == AREA_ID_EDEN_TEEPO_FIGHT && g_GameCellType == 0) {
         if (!SYS_TestFlag(g_SceneFlags, 19) && x < TO_COORD_HALF(11) && (u32)((y >> 16) - 0x3F) < 2) {
             Game_SetScriptActive();
             g_ScenarioState.state_04 = 6;
-            g_ScenarioState.step_05  = 10;
+            g_ScenarioState.step     = 10;
         }
     }
     if (LOHU(g_GameAreaId) == AREA_ID_DESERT_CAMP_FIRST && g_GameCellType == 0) {
         if ((u32)((x >> 16) - 0x1D) < 5 && (u32)((y >> 16) - 0x14) < 2 && SYS_TestFlag(g_SceneFlags, 8) && !SYS_TestFlag(g_SceneFlags, 9)) {
             Game_SetScriptActive();
             g_ScenarioState.state_04 = 2;
-            g_ScenarioState.step_05  = 0x1D;
+            g_ScenarioState.step     = 0x1D;
             return 1;
         }
     }

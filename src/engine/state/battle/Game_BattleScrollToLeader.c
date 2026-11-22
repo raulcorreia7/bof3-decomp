@@ -54,12 +54,12 @@ MATCH void Game_BattleScrollToLeader(void) {
         }
     }
     if (!(g_Battle.outcome.options & 0x2)) {
-        row              = index * BATTLE_PARTY_STRIDE;
-        px               = &g_AreaScrollTargetX;
-        dx               = *px;
-        x                = *((s32*)((u8*)&g_Game.members[0].pos.x.fixed + row));
-        y                = *((s32*)((u8*)&g_Game.members[0].pos.y.fixed + row));
-        g_AreaCameraStep = 0x20;
+        row               = index * BATTLE_PARTY_STRIDE;
+        px                = &g_AreaScrollTargetX;
+        dx                = *px;
+        x                 = *((s32*)((u8*)&g_Game.members[0].pos.x.fixed + row));
+        y                 = *((s32*)((u8*)&g_Game.members[0].pos.y.fixed + row));
+        g_AreaCameraSpeed = 0x20;
         dx -= x;
         *px = x;
         py  = &g_AreaScrollTargetY;
@@ -71,9 +71,9 @@ MATCH void Game_BattleScrollToLeader(void) {
         adx = (u32)adx >> 13;
         adx &= BYTE_MASK;
         if (adx != 0) {
-            g_AreaCameraHeightStep = ret / adx;
+            g_AreaCameraHeightDelta = ret / adx;
         } else {
-            g_AreaCameraHeightStep = 0;
+            g_AreaCameraHeightDelta = 0;
         }
     }
 }

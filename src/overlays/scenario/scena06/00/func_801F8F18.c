@@ -5,15 +5,15 @@ __asm__(".include \"include/match/macro.inc\"\n");
 #endif
 
 MATCH void func_801F8F18(void) {
-    switch (g_ScenarioState.step_05) {
+    switch (g_ScenarioState.step) {
         case 0:
             UI_ModeSet(UI_MODE_LONG_FADE_OUT);
-            g_ScenarioState.step_05 = 1;
+            g_ScenarioState.step = 1;
             break;
         case 1:
             if (WINDOW_EFFECT_IDLE()) {
-                g_AreaDrawFlags         = 0;
-                g_ScenarioState.step_05 = 2;
+                g_AreaDrawFlags      = 0;
+                g_ScenarioState.step = 2;
                 Game_RequestAreaChange(AREA_ID_CAMP_BEFORE_ANGEL_TOWER, TO_COORD(18), TO_COORD(24), AREA_ENTRY_MAP_LOADING | FACING_UP);
             }
             break;
@@ -21,7 +21,7 @@ MATCH void func_801F8F18(void) {
             if (g_ScriptVars[0] == 0x0C) {
                 UI_ModeSet(UI_MODE_LONG_FADE_OUT);
                 Char_RebuildPartyStats();
-                g_ScenarioState.step_05 = 3;
+                g_ScenarioState.step = 3;
                 SYS_SetFlag(g_SceneFlags, 0x11);
                 SND_SeqFadeOut(0, 0, 4, 0x1E);
             }
@@ -30,19 +30,19 @@ MATCH void func_801F8F18(void) {
             if (WINDOW_EFFECT_IDLE()) {
                 g_AreaDrawFlags = 0;
                 SND_XAStartStream(0, 1);
-                g_ScenarioState.step_05 = 4;
+                g_ScenarioState.step = 4;
             }
             break;
         case 4:
             if (SND_XAIsIdle() != 0) {
-                g_ScenarioState.step_05 = 5;
+                g_ScenarioState.step = 5;
                 Game_RequestAreaChange(AREA_ID_RHAPALA_WORLD_MAP, TO_COORD(49), TO_COORD(46), FACING_RIGHT);
             }
             break;
         case 5:
             g_AreaDrawFlags = AREA_DRAW_ALL_FLAGS;
             Game_ClearScriptActive();
-            Scene_ClearScriptState(&g_ScenarioState.step_05);
+            Scene_ClearScriptState(&g_ScenarioState.step);
             break;
     }
 }

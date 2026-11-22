@@ -91,7 +91,7 @@ NON_MATCHING void func_801E4744(void) {
                 break;
             case NAME_ENTRY_QUIT:
                 SND_SEPlay(EMI_SE_ID(SND_BANK_COMMON, 3));
-                g_MenuStartStep     = 0;
+                g_MenuCampStep      = 0;
                 g_GameEntrySubstate = 1;
                 break;
             case NAME_ENTRY_START:
@@ -163,7 +163,7 @@ NON_MATCHING void func_801E4744(void) {
                 g_Characters[0].name[slot] = s_CampMenuState[slot];
             }
             UI_ModeSet(UI_MODE_FADE_OUT);
-            g_MenuStartStep += 1;
+            g_MenuCampStep += 1;
         }
     }
 }

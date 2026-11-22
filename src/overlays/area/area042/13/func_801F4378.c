@@ -28,13 +28,13 @@ MATCH void func_801F4378(void) {
         case 1:
             g_AreaScrollTargetX    = TO_COORD(21);
             g_AreaScrollTargetY    = TO_COORD(25);
-            g_AreaCameraStep       = 0x40;
+            g_AreaCameraSpeed      = 0x40;
             g_SceneEventState.step = 2;
             break;
 
         case 2:
             if (g_AreaCameraMoving == 0) {
-                g_AreaCameraStep                 = 0;
+                g_AreaCameraSpeed                = 0;
                 g_SaveData.scene_event.selection = Actor_FindFreeSpawned();
                 if (g_SaveData.scene_event.selection != 0xFF) {
                     g_SpawnedActors[g_SaveData.scene_event.selection].header.flags   = ACTOR_FLAG_IN_USE;
@@ -70,7 +70,7 @@ MATCH void func_801F4378(void) {
 
         case 5:
             if ((g_SpawnedActors[g_SaveData.scene_event.selection].header.flags & ACTOR_FLAG_IN_USE) == 0) {
-                g_AreaCameraStep       = 0x40;
+                g_AreaCameraSpeed      = 0x40;
                 g_SceneEventState.step = 6;
                 g_AreaScrollTargetX    = g_Game.members[0].pos.x.fixed;
                 g_AreaScrollTargetY    = g_Game.members[0].pos.y.fixed;
@@ -81,7 +81,7 @@ MATCH void func_801F4378(void) {
             if (g_AreaCameraMoving == 0) {
                 SYS_ClearFlag(g_SaveData.scene_event_flags, 0x0B);
                 Game_ClearScriptActive();
-                g_AreaCameraStep             = 0;
+                g_AreaCameraSpeed            = 0;
                 g_SceneEventState.mode       = SCENE_EVENT_NONE;
                 g_SceneEventState.step       = 0;
                 g_SaveData.scene_event_timer = 0;

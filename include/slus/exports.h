@@ -213,7 +213,7 @@ extern u8             D_80148A50[];
 /* D_80148FC0 */
 extern s8             g_SelectionEffectVoices[SND_SLOT_COUNT];
 /* D_801490A1 */
-extern u8             g_UiWindowStep;
+extern u8             g_UiMessageStep;
 /* D_801490D8 */
 extern u8             g_TextVariables[16][0x20];
 extern u8             D_801490DD;

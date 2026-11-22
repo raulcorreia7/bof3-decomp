@@ -105,7 +105,7 @@ MATCH void func_801F4B58(void) {
             if (LOHU(D_801448EE) == 1) {
                 g_AreaScrollTargetX         = TO_COORD(26);
                 g_AreaScrollTargetY         = TO_COORD(145);
-                g_AreaCameraStep            = g_RouteSpeedScale[2] << 3;
+                g_AreaCameraSpeed           = g_RouteSpeedScale[2] << 3;
                 g_ScratchPad.cells.bytes[0] = Actor_FindFreeSpawned();
                 if (g_ScratchPad.cells.bytes[0] != GAME_NONE) {
                     g_SpawnedActors[g_ScratchPad.cells.bytes[0]].header.flags   = 1;
@@ -137,7 +137,7 @@ MATCH void func_801F4B58(void) {
         case 44:
             countdown = &LOHU(D_801448EE);
             if (--*countdown == 0) {
-                g_AreaCameraStep            = g_RouteSpeedScale[3] << 3;
+                g_AreaCameraSpeed           = g_RouteSpeedScale[3] << 3;
                 g_AreaScrollTargetX         = g_Game.members[0].pos.x.fixed;
                 g_AreaScrollTargetY         = g_Game.members[0].pos.y.fixed;
                 g_ScratchPad.cells.bytes[0] = Actor_FindFreeSpawned();

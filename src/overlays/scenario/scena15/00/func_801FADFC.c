@@ -5,17 +5,17 @@ __asm__(".include \"include/match/macro.inc\"\n");
 #endif
 
 MATCH void func_801FADFC(void) {
-    switch (g_ScenarioState.step_05) {
+    switch (g_ScenarioState.step) {
         case 0:
             if (g_PadStates[0].held != 0) {
-                g_ScriptVars[0]         = 2;
-                g_ScenarioState.step_05 = 1;
+                g_ScriptVars[0]      = 2;
+                g_ScenarioState.step = 1;
             }
             break;
         case 1:
             if (g_ScriptVars[0] == 3) {
                 g_SpawnedActors[D_801FE748].header.mode = 2;
-                g_ScenarioState.step_05                 = 2;
+                g_ScenarioState.step                    = 2;
             }
             break;
         case 2:
@@ -23,7 +23,7 @@ MATCH void func_801FADFC(void) {
         case 3:
             func_801C7A54(D_801FE608[g_SpawnedActors[D_801FE748].link * 10 + 9]);
             g_ScenarioState.timer_06 = 0x78;
-            g_ScenarioState.step_05  = 4;
+            g_ScenarioState.step     = 4;
             break;
         case 4:
             break;
@@ -32,7 +32,7 @@ MATCH void func_801FADFC(void) {
             SYS_SetFlag(g_SceneFlags, D_801FE608[g_SpawnedActors[D_801FE748].link * 10 + 8]);
             g_ScriptVars[0]          = 0;
             g_ScenarioState.state_04 = 0;
-            g_ScenarioState.step_05  = 0;
+            g_ScenarioState.step     = 0;
             break;
     }
 }

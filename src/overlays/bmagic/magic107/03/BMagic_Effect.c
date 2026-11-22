@@ -232,18 +232,18 @@ MATCH void func_801EFAE0(void) {
     long     flag;
     s32      tpage;
     u32      span;
-    u32      step;
+    u32      angle_index;
 
     g_ScratchPad.cells.words[3] = (TASK(PartyMember)->timer >> 1) * 4 + 1;
     g_ScratchPad.cells.words[0] = 384;
     g_ScratchPad.cells.words[1] = 480;
-    step                        = TASK(PartyMember)->unk_09 & 0x3F;
+    angle_index                 = TASK(PartyMember)->unk_09 & 0x3F;
     span                        = (TASK(PartyMember)->timer >> 1) + 1;
-    g_ScratchPad.cells.words[2] = FIXED_MUL(rsin(step << 6), 512) + 0x400;
+    g_ScratchPad.cells.words[2] = FIXED_MUL(rsin(angle_index << 6), 512) + 0x400;
     setVector(&g_ScratchPadVectors[1], 0, FIXED_MUL(rcos(g_ScratchPad.cells.words[2]), g_ScratchPad.cells.words[0]), FIXED_MUL(rsin(g_ScratchPad.cells.words[2]), g_ScratchPad.cells.words[0]));
     setVector(&g_ScratchPadVectors[3], 0, FIXED_MUL(rcos(g_ScratchPad.cells.words[2]), g_ScratchPad.cells.words[1]), FIXED_MUL(rsin(g_ScratchPad.cells.words[2]), g_ScratchPad.cells.words[1]));
-    for (step = (step - 1) & 0x3F; step != ((TASK(PartyMember)->unk_09 - span) & 0x3F); step = (step - 1) & 0x3F) {
-        g_ScratchPad.cells.words[2] = FIXED_MUL(rsin(step << 6), 512) + 0x400;
+    for (angle_index = (angle_index - 1) & 0x3F; angle_index != ((TASK(PartyMember)->unk_09 - span) & 0x3F); angle_index = (angle_index - 1) & 0x3F) {
+        g_ScratchPad.cells.words[2] = FIXED_MUL(rsin(angle_index << 6), 512) + 0x400;
         g_ScratchPadVectors[0].vx   = 0;
         g_ScratchPadVectors[0].vy   = g_ScratchPadVectors[1].vy;
         g_ScratchPadVectors[0].vz   = g_ScratchPadVectors[1].vz;
@@ -275,13 +275,13 @@ MATCH void func_801EFEA8(void) {
     s32      tpage;
     u32      count;
     u32      span;
-    u32      step;
+    u32      angle_index;
 
     count                       = TASK(PartyMember)->timer >> 2;
     g_ScratchPad.cells.words[3] = count * 12 + 1;
     span                        = count + 1;
-    for (step = TASK(PartyMember)->unk_09 & 0x3F; step != ((TASK(PartyMember)->unk_09 - span) & 0x3F); step = (step - 1) & 0x3F) {
-        g_ScratchPad.cells.words[2] = FIXED_MUL(rsin(step << 6), 512) + 0x400;
+    for (angle_index = TASK(PartyMember)->unk_09 & 0x3F; angle_index != ((TASK(PartyMember)->unk_09 - span) & 0x3F); angle_index = (angle_index - 1) & 0x3F) {
+        g_ScratchPad.cells.words[2] = FIXED_MUL(rsin(angle_index << 6), 512) + 0x400;
         g_ScratchPadVectors[0].vx   = 0;
         g_ScratchPadVectors[0].vy   = FIXED_MUL(rcos(g_ScratchPad.cells.words[2]), g_ScratchPad.cells.words[0]);
         g_ScratchPadVectors[0].vz   = FIXED_MUL(rsin(g_ScratchPad.cells.words[2]), g_ScratchPad.cells.words[0]);

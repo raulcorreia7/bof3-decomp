@@ -11,7 +11,7 @@ MATCH void func_801CE628(void) {
         TASK(Actor)->timer--;
         if (TASK(Actor)->timer == 0) {
             TASK(Actor)->timer     = 2;
-            TASK(Actor)->direction = TASK(Actor)->direction + TASK(Actor)->param.turn_step;
+            TASK(Actor)->direction = TASK(Actor)->direction + TASK(Actor)->param.turn_delta;
             TASK(Actor)->direction &= 7;
             Script_Request(TASK(Actor)->direction);
         }

@@ -2,7 +2,7 @@
 
 /* dispatches the selection byte g_UiMessageWindow.step_id through the handler table at 0x34 of the current g_AreaLoads bank
  * record (ids below 0x80) or UI_MessageDispatchStep, then sets owner mode 3: a pending area request latches mode 1
- * and advances g_UiWindowStep, a cleared one latches 7; clears D_801490B8. */
+ * and advances g_UiMessageStep, a cleared one latches 7; clears D_801490B8. */
 MATCH void UI_MessageDispatchAnswerStep(void) {
     u8 id;
 
@@ -16,9 +16,9 @@ MATCH void UI_MessageDispatchAnswerStep(void) {
     D_80148357 = 3;
     if (g_UiMessageRequest != MESSAGE_NONE) {
         g_UiPanelTasks[0].state = 1;
-        g_UiWindowStep          = g_UiWindowStep + 1;
+        g_UiMessageStep         = g_UiMessageStep + 1;
     } else {
-        g_UiWindowStep = 7;
+        g_UiMessageStep = 7;
     }
     D_801490B8[0] = 0;
 }

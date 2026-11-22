@@ -6,7 +6,7 @@ MATCH void Boss_ChooseBattleEnding(void) {
     if BATTLE_IS_VICTORY () {
         visit_count = &g_ScriptVars[0];
         (*visit_count)++;
-        g_ScenarioState.step_05 = 0xC;
+        g_ScenarioState.step = 0xC;
         Battle_EndVictory();
         g_SndBGMId = 0x5A;
     } else {

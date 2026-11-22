@@ -49,7 +49,7 @@ MATCH void SAVE_RunLoadRestore(void) {
             SYS_ThreadWait(1);
         }
         g_GameEntrySubstate = 4;
-        g_MenuStartStep     = 0;
+        g_MenuCampStep      = 0;
     }
     if (WINDOW_EFFECT_BUSY()) {
         if (g_PadStates[0].held & PADstart) {

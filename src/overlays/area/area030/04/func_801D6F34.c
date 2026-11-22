@@ -8,7 +8,7 @@ MATCH void func_801D6F34(void) {
     u8 slot;
     s8 direction;
 
-    steps = TASK(FishingState)->step_timer;
+    steps = TASK(FishingState)->timer;
     if (steps == 0) {
         if (D_801E20CC[TASK(FishingState)->step_index].animation_id == -1) {
             TASK(FishingState)->step_index  = D_801E20CC[TASK(FishingState)->step_index].next_step;
@@ -29,10 +29,10 @@ MATCH void func_801D6F34(void) {
                 g_SpawnedActors[slot].screen_y     = 0x9E;
             }
         }
-        TASK(FishingState)->step_timer = D_801E20CC[TASK(FishingState)->step_index].next_step;
+        TASK(FishingState)->timer      = D_801E20CC[TASK(FishingState)->step_index].next_step;
         TASK(FishingState)->step_index = TASK(FishingState)->step_index + 1;
     } else {
-        TASK(FishingState)->step_timer = steps - 1;
+        TASK(FishingState)->timer = steps - 1;
         if (!(D_801E20CC[TASK(FishingState)->step_index - 1].animation_id & 0x80)) {
             Script_AnimStepLoop();
         }
