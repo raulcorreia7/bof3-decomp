@@ -1,18 +1,14 @@
 #include "commu00_00.h"
 
-/* Cap byte of each table row lives in the module header, read signed. */
+MATCH void func_801F03D0(void) {
+    u8  caps[3];
+    s32 row;
+    s32 count;
+    s32 i;
+    s32 value;
+    s16 candidate;
 
-#ifdef NON_MATCHING
-NON_MATCHING void func_801F03D0(void) {
-    FairyVillageOverlayHeader* limits;
-    s32                        row;
-    s32                        count;
-    s32                        i;
-    s32                        value;
-    u16                        candidate;
-    u8*                        cap;
-
-    limits = (FairyVillageOverlayHeader*)D_801EEC08;
+    memcpy(caps, D_801EEC08, sizeof(caps));
 
     for (row = 0; row < 3; row++) {
         for (count = 2; count >= 0; count--) {
@@ -22,25 +18,21 @@ NON_MATCHING void func_801F03D0(void) {
 
     for (row = 0; row < 3; row++) {
         count = 0;
-        cap   = (u8*)&limits->label_cap[row];
         while (count < 3) {
             value = RANDOM_MASK(0x1F);
-            for (;;) {
-                if (*cap >= (u8)value) {
+            while (1) {
+                if (caps[row] >= (u8)value) {
                     break;
                 }
                 value -= RANDOM_MASK(0xF);
             }
-            candidate = (u8)value + 0x9B;
-            for (i = 0; i < BATTLE_PARTY_CHARACTERS_COUNT; i++) {
-                if (candidate == D_801F2930[row][i]) {
+            candidate = (value & 0xFF) + 0x9B;
+            for (i = 0; i < 3; i++) {
+                if ((u16)candidate == D_801F2930[row][i]) {
                     break;
                 }
             }
-            if ((u32)(candidate - 0x9F) < 2) {
-                continue;
-            }
-            if (i < 3) {
+            if ((u32)(candidate - 0x9F) < 2 || i < 3) {
                 continue;
             }
             D_801F2930[row][count] = candidate;
@@ -48,6 +40,3 @@ NON_MATCHING void func_801F03D0(void) {
         }
     }
 }
-#else
-INCLUDE_ASM(func_801F03D0);
-#endif
