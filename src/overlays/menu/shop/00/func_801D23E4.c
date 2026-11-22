@@ -9,14 +9,14 @@ MATCH void func_801D23E4(void) {
     u8* cursor;
     u8* step;
 
-    selection  = Item_GetIcon(g_ShopItemCategory, g_ShopItemId);
-    index      = selection;
-    D_80148624 = 1;
-    D_80148628 = D_8014840C + 6;
-    paged      = D_801E6054 - 1;
-    row_y      = (index + paged) * 0xD + 0x1A;
-    D_8014862A = D_8014840E + row_y;
-    input      = INPUT_REPEATED(g_PadStates[0].pressed, (PADLup | PADLdown));
+    selection                 = Item_GetIcon(g_ShopItemCategory, g_ShopItemId);
+    index                     = selection;
+    g_UiPanelTasks[21].active = 1;
+    D_80148628                = g_UiPanelTasks[6].pos.x + 6;
+    paged                     = D_801E6054 - 1;
+    row_y                     = (index + paged) * 0xD + 0x1A;
+    D_8014862A                = g_UiPanelTasks[6].pos.y + row_y;
+    input                     = INPUT_REPEATED(g_PadStates[0].pressed, (PADLup | PADLdown));
     if (index - 1 == 4) {
         D_80148340 = 0x4C;
         if (input & (PADLup | PADLdown)) {
@@ -42,8 +42,8 @@ MATCH void func_801D23E4(void) {
                 g_UiPanelTasks[index + 3].state = 2;
             }
         }
-        D_8014840B = 1;
-        step       = &D_80148652;
+        g_UiPanelTasks[6].state = 1;
+        step                    = &D_80148652;
         (*step)--;
     }
 }

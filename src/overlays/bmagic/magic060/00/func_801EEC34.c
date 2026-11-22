@@ -307,18 +307,16 @@ NON_MATCHING void func_801EFB00(u16 value, s32 x, s32 y) {
     s32       mode;
     s32       started;
     s16       u;
-    s32       y1;
 
     mode = getTPage(TPAGE_DEPTH_4BIT, TPAGE_ABR_HALF, 320, 256);
     GFX_ADD_DITHERED_DRAW_MODE(BMAGIC_LAYER_FOREGROUND, mode);
     started = 0;
     scale   = 10000;
     i       = 0;
-    y1      = y + 12;
     for (i = 0; i < 5; i++) {
         prim = GFX_CURSOR(POLY_FT4);
         SetPolyFT4(prim);
-        setXY4(prim, x, y, x + 12, y, x, y1, x + 12, y1);
+        setXYWH(prim, x, y, 12, 12);
         setRGB0(prim, 128, 128, 128);
         setTPage(prim, TPAGE_DEPTH_4BIT, TPAGE_ABR_ADD, FONT_TPAGE_X, FONT_TPAGE_Y);
         setClut(prim, 0, 0x1E0);
@@ -329,7 +327,7 @@ NON_MATCHING void func_801EFB00(u16 value, s32 x, s32 y) {
         value -= digit * scale;
         scale /= 10;
         u = (digit + 6) * 12;
-        setUV4(prim, u, 24, u + 12, 24, u, 36, u + 12, 36);
+        setUVWH(prim, u, 24, 12, 12);
         if (started != 0 || scale == 0) {
             GFX_AddPrim(BMAGIC_LAYER_FOREGROUND, sizeof(POLY_FT4));
         }

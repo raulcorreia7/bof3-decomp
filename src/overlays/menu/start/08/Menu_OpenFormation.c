@@ -45,7 +45,7 @@ NON_MATCHING void Menu_OpenFormation(void) {
             if (col != 0) {
                 if ((bit & g_PartyMenuFlags) != 0 && panel_index < limit) {
                     table[col]       = 1;
-                    panel            = &D_801484E0 + panel_index * 0x24;
+                    panel            = &g_UiPanelTasks[12].active + panel_index * 0x24;
                     panel[1]         = 6;
                     panel[2]         = 0xB;
                     panel[3]         = 2;

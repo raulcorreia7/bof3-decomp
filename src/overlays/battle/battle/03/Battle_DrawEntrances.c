@@ -13,10 +13,10 @@ MATCH void Battle_DrawEntrances(void) {
         /* FAKE: the address-held counter; `g_Battle.phase.sub_step += 1` scores 93.44%. */
         u8* count;
 
-        count      = &g_Battle.phase.sub_step;
-        D_8014837B = 1;
-        D_80148357 = 1;
-        D_8014839F = 1;
+        count                   = &g_Battle.phase.sub_step;
+        g_UiPanelTasks[2].state = 1;
+        g_UiPanelTasks[1].state = 1;
+        g_UiPanelTasks[3].state = 1;
         (*count)++;
     }
     Battle_DrawPartyPanel(D_80148358, D_8014835A);

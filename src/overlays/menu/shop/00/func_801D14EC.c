@@ -24,16 +24,16 @@ MATCH void func_801D14EC(void) {
             i++;
         }
     }
-    D_80148454       = BATTLE_PARTY_STRIDE;
-    D_80148456       = 0x3E;
-    D_80148450       = 1;
-    D_80148451       = 7;
-    D_80148452       = 7;
-    D_80148453       = D_801E6058 != 0 ? 2 : 3;
-    D_8014845A       = 0;
-    g_ShopStockIndex = 0;
-    D_8014845B       = g_ShopPricePercent;
-    D_80148470       = D_8018E7CC;
-    step             = &g_MenuStep.state;
+    D_80148454               = BATTLE_PARTY_STRIDE;
+    D_80148456               = 0x3E;
+    g_UiPanelTasks[8].active = 1;
+    D_80148451               = 7;
+    D_80148452               = 7;
+    g_UiPanelTasks[8].state  = D_801E6058 != 0 ? 2 : 3;
+    g_UiPanelTasks[8].unk_0A = 0;
+    g_ShopStockIndex         = 0;
+    g_UiPanelTasks[8].unk_0B = g_ShopPricePercent;
+    D_80148470               = D_8018E7CC;
+    step                     = &g_MenuStep.state;
     (*step)++;
 }
