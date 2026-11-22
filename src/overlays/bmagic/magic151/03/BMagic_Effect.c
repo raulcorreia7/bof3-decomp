@@ -164,7 +164,79 @@ MATCH void func_801EF388(void) {
 }
 
 #ifdef NON_MATCHING
+/* Sets the battle up for the loaded party: frees and resets each active member's effect cells,
+ * rebuilds member zero at the encounter origin, and opens the member panels. */
 NON_MATCHING void func_801EF484(void) {
+    PartyMember* task;
+    s32          i;
+    s32          index;
+    u8           slot;
+    u8           party_count;
+    s16          panel_x;
+    s16          panel_y;
+
+    if (!EMI_IsReady()) {
+        return;
+    }
+    for (i = 0; i < BATTLE_PARTY_CHARACTERS_COUNT; i++) {
+        if (g_Game.members[i].header.flags & 1) {
+            GFX_PaletteFreeFadeTarget(&g_Game.members[i]);
+            D_801EC039[i * BATTLE_PARTY_STRIDE] = 0;
+            D_801EC044[i * BATTLE_PARTY_STRIDE] = 0;
+            D_801EBF47[i * BATTLE_PARTY_STRIDE] = g_Game.members[i].unk_27;
+            func_801DDFEC(i);
+            func_801DD14C(i);
+        }
+    }
+    func_801DE1B0(g_Battle.active_battler);
+    g_Game.members[0]                    = g_Game.members[g_Battle.active_battler];
+    party_count                          = g_Battle.party_count;
+    g_Game.members[0].slot               = 0;
+    g_Game.members[0].pos.x.fixed        = g_EncounterOriginX;
+    g_Game.members[0].pos.y.fixed        = g_EncounterOriginY;
+    g_Game.members[0].pos.z.part.integer = Area_HeightSample(g_EncounterOriginX, g_EncounterOriginY);
+    D_801EC364                           = g_EncounterOriginX;
+    D_801EC368                           = g_EncounterOriginY;
+    D_801EC36C                           = Area_HeightSample(g_Game.members[0].pos.x.fixed, g_Game.members[0].pos.y.fixed) << 16;
+    g_Game.members[1].header.flags       = 0;
+    g_Game.members[2].header.flags       = 0;
+    g_Battle.active_battler              = 0;
+    g_Battle.party_count                 = 1;
+    g_Battle.living_party_count          = 1;
+    g_Battle.flags |= BATTLE_STATE_RELOAD_PARTY;
+    g_Battle.unk_EF[0] = party_count;
+    for (i = 0; i < BATTLE_PARTY_CHARACTERS_COUNT; i++) {
+        if (g_Game.members[i].header.flags & 1) {
+            slot = (u8)(i + 0xD);
+            UI_PanelOpenTask(slot, 3);
+            D_80148332[slot].mode_00 = 5;
+            D_80148332[slot].unk_01  = 0;
+            index                    = g_Game.members[i].facing * CHAR_ID_GARR + g_Game.members[i].chr.character_id * 8;
+            panel_x                  = g_Game.members[i].screen_x.value + D_801EB0B0[index];
+            panel_x                  = D_801EAEA4[(g_Battle.scroll_dir & 0xFE) ^ 0x2] + panel_x;
+            D_80148332[slot].x_02    = panel_x;
+            index                    = g_Game.members[i].facing * CHAR_ID_GARR + g_Game.members[i].chr.character_id * 8;
+            panel_y                  = g_Game.members[i].screen_y.value + D_801EB0B1[index] + 0xC;
+            D_80148332[slot].y_04    = panel_y;
+            D_80148332[slot].battler = i;
+            D_80148332[slot].unk_06  = 0;
+            D_80148332[slot].unk_07  = 0;
+        }
+    }
+    D_80148332[1].x_02    = 0x70;
+    D_80148332[1].battler = g_Battle.party_count;
+    g_Battle.flags &= ~BATTLE_STATE_OVER;
+    task = TASK(PartyMember);
+    TASK_SET(&g_Game.members[g_Battle.active_battler]);
+    func_801DE190(TASK(PartyMember)->slot);
+    TASK(PartyMember)->header.flags &= ~PARTY_MEMBER_FLAG_HANDLER_BUSY;
+    Party_MemberLoadSprite(D_80181B34[g_EmiLoadedCharacterIndex][0], 0);
+    GFX_PaletteLoad(GAME_PALETTE_STAGE + TASK(PartyMember)->slot * 0x40, D_801463B9);
+    func_801DDAB4(g_Game.members[g_Battle.active_battler].chr.status);
+    GFX_PaletteUploadRows();
+    Script_Request((u8)(TASK(PartyMember)->facing + 4));
+    TASK_SET(task);
+    task->unk_03 += 1;
 }
 #else
 INCLUDE_ASM(func_801EF484);

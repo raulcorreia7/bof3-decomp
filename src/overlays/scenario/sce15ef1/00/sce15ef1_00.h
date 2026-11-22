@@ -28,11 +28,11 @@ extern AreaSpawnSlot D_801D39A8[EFFECT_SLOT_COUNT];
 /* The dot trail: D_801D40A8 points of 10 bytes at AREA_WORK + 0x5A00. */
 #define SCENE_DOT_TRAIL MEM_PTR(TrailDot, AREA_WORK + 0x5A00)
 
-extern RECT D_801D393C[];
-extern u16  D_801D40A8;
-extern u8   D_801D40AC;
-extern u32  D_801D40B0;
-extern u32  D_801D40B4;
+extern RECT      D_801D393C[];
+extern u16       D_801D40A8;
+extern u8        D_801D40AC;
+extern u16*      D_801D40B0;
+extern TrailDot* D_801D40B4;
 
 extern SpinEffect g_WorldSpins[];
 

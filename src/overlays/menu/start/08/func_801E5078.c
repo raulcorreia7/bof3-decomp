@@ -8,7 +8,7 @@ MATCH void func_801E5078(void) {
     s32 first_status;
     s32 second_status;
 
-    Menu_DrawClutStrip(D_80144953);
+    Menu_DrawClutStrip(g_WindowClut);
     MENU_DRAW_HEADER();
     UI_TextDraw(28, 21, 0, TEXT_LENGTH_MAX, UI_MessageGetText(0xA8));
     g_SaveCardPort = 0;

@@ -149,7 +149,7 @@ NON_MATCHING void func_801F7678(s32 shade_arg) {
         } else {
             shade -= 8;
         }
-        color = ((u32)shade_arg & BYTE_MASK) * shade >> 8;
+        color = (shade & BYTE_MASK) * shade_arg >> 8;
         setRGB2(prim, color, color, color);
         setRGB3(prim, color, color, color);
         Area_CellAddPrim(point[0], point[1], 0, sizeof(POLY_G4));

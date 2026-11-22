@@ -12,8 +12,8 @@ MATCH void GFX_AddPrim(u32 ot_index, u32 primitive_size) {
     size      = primitive_size;
     if ((u8*)(g_GfxBufferIndex * 0x9000 + PRIM_ARENA_BASE) > (primitive + size)) {
         ot_index &= BYTE_MASK;
-        CatPrim(D_801459D0[ot_index], primitive);
-        D_801459D0[ot_index] = (u32*)g_GfxPrimCursor;
+        CatPrim(g_GfxOtHeads[ot_index], primitive);
+        g_GfxOtHeads[ot_index] = (u32*)g_GfxPrimCursor;
         g_GfxPrimCursor += size;
     }
 }

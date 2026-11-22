@@ -17,9 +17,9 @@ MATCH void EMI_VabLoadHeader(void) {
         word       = *table_word;
         D_80146484 = slot;
 
-        word       = D_80146780[word].index;
-        index      = word;
-        D_80146483 = index;
+        word           = D_80146780[word].index;
+        index          = word;
+        g_EmiEntryBank = index;
         /* FAKE: barrier pins index store before entry lookup. */
         /* FAKE: barrier reproduces store then reload ordering. */
         FAKE_BARRIER();
@@ -28,10 +28,10 @@ MATCH void EMI_VabLoadHeader(void) {
         /* FAKE: keeps the owner-byte reload below both table stores. */
         FAKE_BARRIER();
 
-        if (g_SelectionEffectVoices[D_80146483] != -1) {
+        if (g_SelectionEffectVoices[g_EmiEntryBank] != -1) {
             SsUtAllKeyOff(0);
-            SsSepClose(g_SelectionEffectVoices[D_80146482]);
-            g_SelectionEffectVoices[D_80146483] = -1;
+            SsSepClose(g_SelectionEffectVoices[g_EmiUploadBank]);
+            g_SelectionEffectVoices[g_EmiEntryBank] = -1;
         }
     }
 

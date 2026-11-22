@@ -841,8 +841,8 @@ MATCH void func_801F9E10(u8* row) {
     cell[3] = cell[7];
 }
 
-#ifdef NON_MATCHING
-NON_MATCHING u8 func_801F9EFC(void) {
+/* Advances the active effect rows: project, update and retire each. */
+MATCH u8 func_801F9EFC(void) {
     SceneEffectRow* row;
     MATRIX          matrix;
     s32             tpage;
@@ -858,11 +858,10 @@ NON_MATCHING u8 func_801F9EFC(void) {
             if (func_801F9A80(row) & BYTE_MASK) {
                 func_801F9BDC(row);
             }
-            row->unk_2 -= 1;
             row->unk_14 += 0x2000;
             row->unk_18 += 0x100000;
             row->unk_C += row->unk_18;
-            if ((u8)row->unk_2 == 0) {
+            if (--row->unk_2 == 0) {
                 row->active = 0;
             }
             ran = 1;
@@ -870,9 +869,6 @@ NON_MATCHING u8 func_801F9EFC(void) {
     }
     return ran;
 }
-#else
-INCLUDE_ASM(func_801F9EFC);
-#endif
 
 #ifdef NON_MATCHING
 NON_MATCHING void func_801FA01C(void) {

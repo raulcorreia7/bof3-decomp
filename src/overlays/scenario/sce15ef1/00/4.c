@@ -493,8 +493,8 @@ MATCH void func_801D23A0(void) {
     if (!(mode & BYTE_MASK)) {
         setRECT(&rect, 832, 256, D_801D393C[D_801D40AC].w, D_801D393C[D_801D40AC].h);
         StoreImage(&rect, (u32*)AREA_WORK);
-        D_801D40B0         = AREA_WORK;
-        D_801D40B4         = AREA_WORK + 0x5A00;
+        D_801D40B0         = (u16*)AREA_WORK;
+        D_801D40B4         = (TrailDot*)(AREA_WORK + 0x5A00);
         D_801D40A8         = 0;
         TASK(Actor)->timer = 0;
         TASK(Actor)->header.mode++;
@@ -740,8 +740,8 @@ MATCH void func_801D2FD8(void) {
     if (!(mode & BYTE_MASK)) {
         setRECT(&rect, 832, 256, D_801D393C[D_801D40AC].w, D_801D393C[D_801D40AC].h);
         StoreImage(&rect, (u32*)AREA_WORK);
-        D_801D40B0         = AREA_WORK;
-        D_801D40B4         = AREA_WORK + 0x5A00;
+        D_801D40B0         = (u16*)AREA_WORK;
+        D_801D40B4         = (TrailDot*)(AREA_WORK + 0x5A00);
         D_801D40A8         = 0;
         TASK(Actor)->timer = 0;
         TASK(Actor)->header.mode++;

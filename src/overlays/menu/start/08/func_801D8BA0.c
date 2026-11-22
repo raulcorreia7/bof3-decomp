@@ -8,7 +8,7 @@ MATCH void func_801D8BA0(void) {
     s32 temp;
     u8* cell;
 
-    Menu_DrawClutStrip(D_80144953);
+    Menu_DrawClutStrip(g_WindowClut);
     cell  = &D_80148654;
     temp  = *cell - 1;
     *cell = temp;

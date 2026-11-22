@@ -16,8 +16,8 @@ MATCH void CD_OnSync(s32 status, u8* result) {
     } while (i-- != 0);
 
     if (status == CdlComplete) {
-        D_8014648C = 1;
+        g_CdSyncStatus = 1;
     } else {
-        D_8014648C = -1;
+        g_CdSyncStatus = -1;
     }
 }

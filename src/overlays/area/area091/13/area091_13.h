@@ -8,6 +8,9 @@
 
 extern Callback D_801F3B44[];
 
+/* The spiral's signed rotation step of each of the three rings. */
+extern s8 D_801F3BA4[];
+
 void func_801F2ED4(u16 radius, u16 color);
 
 #endif

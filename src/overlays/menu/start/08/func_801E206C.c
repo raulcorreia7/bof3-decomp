@@ -7,7 +7,7 @@ NON_MATCHING void func_801E206C(void) {
     s32 i;
     s32 keys;
 
-    Menu_DrawClutStrip(D_80144953);
+    Menu_DrawClutStrip(g_WindowClut);
     Menu_DrawHeaderBar(MENU_HEADER_X, 0x10, MENU_HEADER_WIDTH, MENU_HEADER_HEIGHT, g_WindowStyle);
     func_801E26A8(0x1C, 0x40);
     cursor = &D_80148655;

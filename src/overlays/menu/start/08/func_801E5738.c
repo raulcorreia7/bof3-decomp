@@ -10,7 +10,7 @@ MATCH void func_801E5738(void) {
     u8  prev_row;
     u8  row;
 
-    Menu_DrawClutStrip(D_80144953);
+    Menu_DrawClutStrip(g_WindowClut);
     MENU_DRAW_HEADER();
     UI_TextDraw(28, 21, 0, TEXT_LENGTH_MAX, UI_MessageGetText(0xAC));
     SAVE_DrawSlots(SAVE_SLOTS_X, SAVE_SLOTS_Y, 1U);

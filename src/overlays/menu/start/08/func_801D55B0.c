@@ -12,7 +12,7 @@ NON_MATCHING void func_801D55B0(void) {
 
     party_cursor = &D_80148654 + 2;
     cursor_task  = &g_UiPanelTasks[MENU_START_PANEL_CURSOR_FRAME];
-    Menu_DrawClutStrip(D_80144953);
+    Menu_DrawClutStrip(g_WindowClut);
     cursor_task->active = 1;
     cursor_task->pos.x  = g_UiPanelTasks[4].pos.x;
     sel                 = &cursor_task[MENU_START_PANEL_ITEMS - MENU_START_PANEL_CURSOR_FRAME].unk_0C;
