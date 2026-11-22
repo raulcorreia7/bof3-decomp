@@ -13,7 +13,7 @@ MATCH void Fishing_CastInput(void) {
     FishingState* next;
 
     if ((g_PadStates[0].pressed & g_InputMasks[FISHING_INPUT_CAST]) != 0) {
-        D_801440C8 = 0;
+        g_SpawnedActors[2].counter_18 = 0;
         SND_SEPlay(EMI_SE_ID(SND_BANK_AREA, 0));
         D_801E31FC = 0xFF;
         D_801E31F8 = 0xFF;
@@ -25,10 +25,10 @@ MATCH void Fishing_CastInput(void) {
 
         tail            = TASK(FishingState);
         tail->sub_index = 2;
-    } else if ((g_PadStates[0].pressed & g_InputMasks[FISHING_INPUT_CANCEL]) != 0 && D_80144125 == 0) {
-        state             = TASK(FishingState);
-        D_801440B1        = 0;
-        state->mode_index = 1;
+    } else if ((g_PadStates[0].pressed & g_InputMasks[FISHING_INPUT_CANCEL]) != 0 && g_SpawnedActors[3].header.mode == 0) {
+        state                          = TASK(FishingState);
+        g_SpawnedActors[2].header.mode = 0;
+        state->mode_index              = 1;
 
         next            = TASK(FishingState);
         next->sub_index = 0;

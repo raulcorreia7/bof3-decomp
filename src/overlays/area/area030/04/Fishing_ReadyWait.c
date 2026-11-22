@@ -5,7 +5,7 @@
 MATCH void Fishing_ReadyWait(void) {
     u8* scratch;
 
-    if (D_80144125 == 6) {
+    if (g_SpawnedActors[3].header.mode == 6) {
         scratch = (u8*)SP_REF(volatile u8*, 0x44u);
         scratch[3]++;
     }
