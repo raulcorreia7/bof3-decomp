@@ -11,7 +11,7 @@ MATCH void Game_BattleScrollToLeader(void) {
     /* FAKE: dx pinned to a0, retail's register for the x delta; pure-C best 81.82%. */
     FAKE_REG(s32, dx, "a0");
     s32  dy;
-    s32  row;
+    s32  member_offset;
     s16  ret;
     s32  adx;
     s32* px;
@@ -54,18 +54,18 @@ MATCH void Game_BattleScrollToLeader(void) {
         }
     }
     if (!(g_Battle.outcome.options & 0x2)) {
-        row               = index * BATTLE_PARTY_STRIDE;
+        member_offset     = index * BATTLE_PARTY_STRIDE;
         px                = &g_AreaScrollTargetX;
         dx                = *px;
-        x                 = *((s32*)((u8*)&g_Game.members[0].pos.x.fixed + row));
-        y                 = *((s32*)((u8*)&g_Game.members[0].pos.y.fixed + row));
+        x                 = *((s32*)((u8*)&g_Game.members[0].pos.x.fixed + member_offset));
+        y                 = *((s32*)((u8*)&g_Game.members[0].pos.y.fixed + member_offset));
         g_AreaCameraSpeed = 0x20;
         dx -= x;
         *px = x;
         py  = &g_AreaScrollTargetY;
         adx = abs(dx);
         dy  = abs(*py - y);
-        *py = *((s32*)((u8*)&g_Game.members[0].pos.y.fixed + row));
+        *py = *((s32*)((u8*)&g_Game.members[0].pos.y.fixed + member_offset));
         adx = MAX(adx, dy);
         ret = Area_HeightSample(g_AreaScrollTargetX, g_AreaScrollTargetY) - g_AreaCameraHeight;
         adx = (u32)adx >> 13;

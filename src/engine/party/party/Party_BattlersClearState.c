@@ -1,6 +1,7 @@
 #include "engine/slus/slus.h"
 
-/* clears the four flag bytes of the 0x140-stride record selected by character_index.
+/* clears the four header bytes of the 0x140-stride record selected by character_index.
+ * kept: the four absolute-address stores; a typed PartyMember base merges the four lui pairs.
  */
 MATCH void Party_BattlersClearState(s32 character_index) {
     u32 index;

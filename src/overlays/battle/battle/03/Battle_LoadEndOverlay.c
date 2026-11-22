@@ -18,13 +18,13 @@ MATCH void Battle_LoadEndOverlay(void) {
             i += 1u;
         } while (i < g_BattlePartyCount);
     }
-    if (g_BattleRowCursor != g_Battle.party_count) {
+    if (g_BattleSelection != g_Battle.party_count) {
         g_BattleSubStep -= 1u;
         return;
     }
     if ((g_Battle.outcome.result & BATTLE_RESULT_DEFEAT) == 0u) {
         i = 0u;
-        if (i < g_BattleRowCursor) {
+        if (i < g_BattleSelection) {
             do {
                 PartyMember* work = &g_Game.members[i];
 

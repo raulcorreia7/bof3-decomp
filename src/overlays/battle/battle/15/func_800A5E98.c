@@ -2,17 +2,17 @@
 
 MATCH void func_800A5E98(void) {
     s32 i;
-    s32 row;
+    s32 entry_index;
     u8  value;
-    u8* slot;
+    u8* entry;
     u8* counter;
 
     g_Battle.gene_count = 0;
     i                   = 0;
     do {
-        row   = *(s16*)&D_801485EC + FIELD(s16, (&D_801485EC), 0x2u);
-        slot  = (u8*)&D_80145518[row];
-        value = slot[i & BYTE_MASK];
+        entry_index = *(s16*)&D_801485EC + FIELD(s16, (&D_801485EC), 0x2u);
+        entry       = (u8*)&D_80145518[entry_index];
+        value       = entry[i & BYTE_MASK];
         if (value != GAME_NONE) {
             g_Battle.genes[i & BYTE_MASK] = value;
             g_Battle.gene_count           = g_Battle.gene_count + 1;
@@ -23,7 +23,7 @@ MATCH void func_800A5E98(void) {
     Battle_SetGeneCount();
     SND_SEPlay(EMI_SE_ID(SND_BANK_COMMON, 4));
     D_801485DF = 2;
-    BATTLE_ACTIVE_ROW->u.turn.action_flags.volatile_value |= BATTLER_ACTION_ABILITY_ALT_POSE;
+    BATTLE_ACTIVE_MEMBER->u.turn.action_flags.volatile_value |= BATTLER_ACTION_ABILITY_ALT_POSE;
     counter  = (u8*)&g_Battle.ui_mode;
     *counter = *counter + 1;
 }

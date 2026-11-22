@@ -3,21 +3,20 @@
 /* func_801C1ABC */
 #ifdef NON_MATCHING
 NON_MATCHING void Party_MemberRemove(s32 character_id) {
-    s32  slot;
-    s32  limit;
-    s32  size;
-    s32  key;
-    s32  off;
-    s32  code;
-    s32  frac;
-    u8   value;
-    u8*  cur;
-    u8*  prev;
-    u8*  src;
-    u8*  dst;
-    u32* wsrc;
-    u32* wdst;
-    u32* wend;
+    s32          slot;
+    s32          limit;
+    s32          size;
+    s32          key;
+    s32          code;
+    s32          frac;
+    u8           value;
+    u8*          cur;
+    u8*          prev;
+    PartyMember* src;
+    PartyMember* dst;
+    u32*         wsrc;
+    u32*         wdst;
+    u32*         wend;
     /* FAKE: unused frame, 24 bytes. */
     FAKE_STACK_PADS(u8, 24);
 
@@ -65,11 +64,10 @@ NON_MATCHING void Party_MemberRemove(s32 character_id) {
     g_PartyFieldOrder[slot] = 0xFF;
     if ((s32)g_Game.party_size - 1 > 0) {
         slot = 0;
-        off  = 0;
         code = 0x78;
         frac = 0;
-        src  = &((u8*)g_Game.members)[BATTLE_PARTY_STRIDE];
-        dst  = (u8*)g_Game.members;
+        src  = &g_Game.members[1];
+        dst  = &g_Game.members[0];
         do {
             if ((&D_80144EE2)[code] == GAME_NONE) {
                 TASK_SET(dst);
@@ -78,7 +76,7 @@ NON_MATCHING void Party_MemberRemove(s32 character_id) {
                 (&D_80144EE2)[code]     = value;
                 wsrc                    = (u32*)src;
                 wdst                    = (u32*)dst;
-                wend                    = (u32*)(src + BATTLE_PARTY_STRIDE);
+                wend                    = (u32*)(src + 1);
                 do {
                     wdst[0] = wsrc[0];
                     wdst[1] = wsrc[1];
@@ -87,21 +85,20 @@ NON_MATCHING void Party_MemberRemove(s32 character_id) {
                     wsrc += 4;
                     wdst += 4;
                 } while (wsrc != wend);
-                TASK(Actor)->unk_05                       = (u8)slot;
-                TASK(Actor)->sheet_row                    = (u8)frac;
-                TASK(Actor)->clut_select                  = (u8)code;
-                TASK(Actor)->script_record                = 0xFF;
-                (&g_Game.members[0].character_index)[off] = g_CharSlot[FIELD(u8, &g_Game.members[0].chr.character_id, off)];
+                TASK(Actor)->unk_05                  = (u8)slot;
+                TASK(Actor)->sheet_row               = (u8)frac;
+                TASK(Actor)->clut_select             = (u8)code;
+                TASK(Actor)->script_record           = 0xFF;
+                g_Game.members[slot].character_index = g_CharSlot[g_Game.members[slot].chr.character_id];
             }
-            off += BATTLE_PARTY_STRIDE;
             code++;
             frac += 0x50;
-            src += BATTLE_PARTY_STRIDE;
+            src += 1;
             slot++;
-            dst += BATTLE_PARTY_STRIDE;
+            dst += 1;
         } while (slot < (s32)g_Game.party_size - 1);
     }
-    ((u8*)g_Game.members)[((s32)g_Game.party_size - 1) * BATTLE_PARTY_STRIDE] = 0;
+    g_Game.members[g_Game.party_size - 1].header.flags = 0;
     Party_BattlersClearState(((s32)g_Game.party_size - 1) & BYTE_MASK);
     if (g_Game.party_size == 3) {
         if (g_PartyFormation >= 3u)

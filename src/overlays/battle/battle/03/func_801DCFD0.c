@@ -5,17 +5,17 @@ MATCH void func_801DCFD0(void) {
     Cpy16* dst;
     Cpy16* end;
     u32    index;
-    s32    slot_offset;
-    u8     row;
+    s32    member_offset;
+    u8     party_slot;
 
     index = 0;
     if (g_Game.party_size != 0) {
         do {
-            row         = index & BYTE_MASK;
-            slot_offset = row * BATTLE_PARTY_STRIDE;
-            dst         = (Cpy16*)(&g_Characters[g_Game.members[row].character_index]);
-            src         = (Cpy16*)(D_80145F04 + slot_offset);
-            end         = (Cpy16*)(((u8*)src) + 0xA0u);
+            party_slot    = index & BYTE_MASK;
+            member_offset = party_slot * BATTLE_PARTY_STRIDE;
+            dst           = (Cpy16*)(&g_Characters[g_Game.members[party_slot].character_index]);
+            src           = (Cpy16*)(D_80145F04 + member_offset);
+            end           = (Cpy16*)(((u8*)src) + 0xA0u);
             do {
                 *dst = *src;
                 src += 1;

@@ -6,25 +6,26 @@
 NON_MATCHING void Battle_ApplyEquipment(void) {
     u8* slots[6];
     /* FAKE: the base record pointer and the slot counter take retail's s0 and s1 homes (pure-C best 46.40%). */
-    FAKE_REG(u8*, base, "s0");
-    u8* row;
-    u8* cell;
-    u8  value;
-    u8  party_position;
-    u8  character_index;
+    FAKE_REG(Character*, base, "s0");
+    Character* member_chr;
+    Character* character;
+    u8*        stats;
+    u8         value;
+    u8         party_position;
+    u8         character_index;
     /* FAKE: the slot counter takes retail's s1 home (pure-C best 46.40%). */
     FAKE_REG(u8, i, "s1");
     u8 j;
 
     party_position  = g_PartyBattleOrder[D_801485C4];
     character_index = g_CharSlot[party_position];
-    base            = (u8*)&g_Characters[character_index];
-    slots[0]        = base + 0xE;
-    slots[1]        = base + 0xF;
-    slots[2]        = base + 0x10;
-    slots[3]        = base + 0x11;
-    slots[4]        = base + 0x12;
-    slots[5]        = base + 0x13;
+    base            = &g_Characters[character_index];
+    slots[0]        = &base->equip.weapon;
+    slots[1]        = &base->equip.shield;
+    slots[2]        = &base->equip.helmet;
+    slots[3]        = &base->equip.armor;
+    slots[4]        = &base->equip.accessories[0];
+    slots[5]        = &base->equip.accessories[1];
     for (i = 0; i < 6; i++) {
         value = s_BattleEquipment[i];
         if (value != 0) {
@@ -39,25 +40,25 @@ NON_MATCHING void Battle_ApplyEquipment(void) {
     if (g_Battle.party_count != 0) {
         i = 0;
         do {
-            cell      = &g_Characters[g_Game.members[i].character_index];
-            row       = D_80145F04 + i * BATTLE_PARTY_STRIDE;
-            row[0x0E] = cell[0x0E];
-            row[0x0F] = cell[0x0F];
-            row[0x10] = cell[0x10];
-            row[0x11] = cell[0x11];
-            row[0x12] = cell[0x12];
-            row[0x13] = cell[0x13];
-            memcpy(&row[0x3C], &cell[0x1C], 0x10);
-            memcpy(&row[0x4C], &cell[0x2C], 0x10);
+            character                        = &g_Characters[g_Game.members[i].character_index];
+            member_chr                       = &g_Game.members[i].chr;
+            member_chr->equip.weapon         = character->equip.weapon;
+            member_chr->equip.shield         = character->equip.shield;
+            member_chr->equip.helmet         = character->equip.helmet;
+            member_chr->equip.armor          = character->equip.armor;
+            member_chr->equip.accessories[0] = character->equip.accessories[0];
+            member_chr->equip.accessories[1] = character->equip.accessories[1];
+            memcpy((u8*)&member_chr->base, (u8*)&character->stats, 0x10);
+            memcpy((u8*)&member_chr->base + 0x10, (u8*)&character->stats + 0x10, 0x10);
             i++;
         } while ((u8)i < g_Battle.party_count);
     }
     Battle_ApplyFormationStats();
     j = 0;
     do {
-        row = D_80145F20 + j * BATTLE_PARTY_STRIDE;
+        stats = (u8*)&g_Game.members[j].chr.stats;
         if (ACTOR_IN_USE(g_Game.members[j])) {
-            memcpy(&row[0x00], &row[0x20], 0x20);
+            memcpy(stats, stats + 0x20, 0x20);
         }
         j++;
     } while (j < 3);

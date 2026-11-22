@@ -21,7 +21,7 @@ MATCH void Battle_InitEquipUsePanel(void) {
     D_801485B8          = one;
     D_801485BA          = three;
     g_BattlePanelMode   = three;
-    g_BattleItemRow     = 0;
+    g_BattleEquipSlot   = 0;
     D_801485C3          = 0xFF;
     entry_index         = slot[5];
     D_801485D8          = &s_BattleEquipment[0];

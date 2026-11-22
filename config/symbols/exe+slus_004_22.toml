@@ -153,7 +153,7 @@ g_BattleStep = { addr = 0x801462E1, type = "u8", source = "Step within the battl
 g_BattleSubStep = { addr = 0x801462E2, type = "u8", source = "Sub-step within the battle step, set to 0 when a battle begins and when a step starts; the phase.sub_step member of g_Battle.", alias = true }
 g_BattleUIStep = { addr = 0x801462E3, type = "u8", source = "Step of the battle UI, set to 0 when a battle begins and advanced by 1 as each UI stage finishes; the ui_step member of g_Battle.", alias = true }
 g_BattleUIState = { addr = 0x801462E4, type = "u8", source = "Index of the battle UI state handler that runs each frame (D_801F0CA4[g_BattleUIState] in the battle end overlay); the ui_state member of g_Battle.", alias = true }
-g_BattleRowCursor = { addr = 0x801462E5, type = "u8", source = "Battle row cursor; the row_cursor member of g_Battle.", alias = true }
+g_BattleSelection = { addr = 0x801462E5, type = "u8", source = "The battle selection byte; the selection member of g_Battle.", alias = true }
 g_BattlePanelEntry = { addr = 0x801462E6, type = "u8", source = "Selected entry of the battle panel; the cursor.panel_entry member of g_Battle.", alias = true }
 g_GeneCursor = { addr = 0x801462E6, size = 2, alias = true, source = "Row and column of the Accession gene picker cursor over the gene grid; row is -1 on the confirm line; the cursor.gene member of g_Battle." }
 g_BattleState = { addr = 0x801462E8, type = "u16", source = "Battle state flags; the state member of g_Battle.", alias = true }
@@ -244,7 +244,7 @@ g_BattleChoicePanel = { addr = 0x80148570, source = "The battle choice panel." }
 g_BattleChoicePhase = { addr = 0x80148573, type = "u8", source = "Phase of the battle choice panel." }
 g_BattleListCursor = { addr = 0x8014859F, type = "u8", source = "Cursor row of the battle list." }
 g_BattlePanelMode = { addr = 0x801485BB, type = "u8", source = "Current battle panel mode." }
-g_BattleItemRow = { addr = 0x801485C2, type = "u8", source = "Selected row of the battle item panel." }
+g_BattleEquipSlot = { addr = 0x801485C2, type = "u8", source = "Selected equipment slot of the battle item panel, 0..5." }
 g_BattleTargetCursorCol = { addr = 0x801485C8, type = "s16", source = "Target cursor column of the battle." }
 g_UiPanelCurrent = { addr = 0x80148648, source = "The current menu panel." }
 g_UiPanelMode = { addr = 0x8014864C, type = "u8", source = "Mode of the menu panel tasks." }

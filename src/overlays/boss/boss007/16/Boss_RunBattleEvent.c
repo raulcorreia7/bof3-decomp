@@ -29,14 +29,14 @@ MATCH u8 Boss_RunBattleEvent(u32 mode) {
             *message_state              = 1;
             SP_REF(PartyMember*, 0x44u) = &g_Game.members[0];
             Script_Select(0x2C);
-            g_BattleRowCursor   = 0x3C;
+            g_BattleSelection   = 0x3C;
             g_Battle.phase.mode = BATTLE_MODE_ROUND_END;
             g_Battle.phase.step = 2;
             break;
         case BOSS_EVENT_TURN_END:
             if (g_BattleResult & 4) {
-                g_BattleRowCursor--;
-                if ((u8)g_BattleRowCursor != 0) {
+                g_BattleSelection--;
+                if ((u8)g_BattleSelection != 0) {
                     return BOSS_EVENT_PENDING;
                 }
             }

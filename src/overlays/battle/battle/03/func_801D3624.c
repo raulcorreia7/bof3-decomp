@@ -5,15 +5,15 @@
  * slot-selection call takes. */
 
 /* starts a battle: clears the 0x20 setup flag, records the battle
- * mode, resolves the battler row of the random type (local rows for types
- * 0-2, enemy rows for 3+) and copies its position words into the 0x80146386
+ * mode, resolves the battler record of the random type (party records for types
+ * 0-2, enemy records for 3+) and copies its position words into the 0x80146386
  * pair.
  */
 MATCH void func_801D3624(void) {
     u16* setup_flags;
-    /* FAKE: allocator tie, row pointer in a1. */
+    /* FAKE: allocator tie, record pointer in a1. */
     FAKE_REG(PartyMember*, work, "a1");
-    u32 row_offset;
+    u32 enemy_offset;
     u8  type_index;
     u16 mode;
     s32 type;
@@ -41,9 +41,9 @@ MATCH void func_801D3624(void) {
             D_80146386              = work->screen_x.value + g_BattlePanelOffsets[g_Game.members[type_index].chr.character_id * 8 + work->facing * 2];
             D_80146388              = work->screen_y.value + D_801EB0B1[g_Game.members[type_index].chr.character_id * 8 + work->facing * 2];
         } else {
-            row_offset              = type_index * 0x118;
-            work                    = (PartyMember*)(g_BattleEnemies + row_offset);
-            D_80146390              = g_BattleEnemies + 0xF4 + row_offset;
+            enemy_offset            = type_index * 0x118;
+            work                    = (PartyMember*)(g_BattleEnemies + enemy_offset);
+            D_80146390              = g_BattleEnemies + 0xF4 + enemy_offset;
             g_Battle.selected_actor = work;
             D_80146386              = work->screen_x.value + ENEMY_COMBATANT(type_index).panel_offset_x;
             D_80146388              = work->screen_y.value + ENEMY_COMBATANT(type_index).panel_offset_y;

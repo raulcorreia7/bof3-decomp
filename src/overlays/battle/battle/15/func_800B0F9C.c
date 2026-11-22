@@ -8,7 +8,7 @@
 MATCH void func_800B0F9C(void) {
     s32 entry;
     u16 line_y;
-    s32 row;
+    s32 line;
     s32 i;
     u8  clut;
     u8  slot_b;
@@ -25,8 +25,8 @@ MATCH void func_800B0F9C(void) {
     UI_ListDrawScrollbar(D_800B70AC, ((BattlePanelByteCells*)(void*)g_UiPanelCurrent)->scale, (g_UiPanelCurrent->pos.x + 0x80), (g_UiPanelCurrent->pos.y + 0x18), 3,
                          ((BattlePanelByteCells*)(void*)g_UiPanelCurrent)->rows, 0x5C);
     for (i = 0; (i & BYTE_MASK) < 3U; i++) {
-        row    = i & BYTE_MASK;
-        entry  = (s16)g_UiPanelCurrent->u.battle.row_base + row;
+        line   = i & BYTE_MASK;
+        entry  = (s16)g_UiPanelCurrent->u.battle.row_base + line;
         slot_b = g_BattleTargetRows[entry].slot_01;
         sum    = D_800B4C7C[g_BattleTargetRows[entry].slot_00];
         if (slot_b != GAME_NONE) {
@@ -37,18 +37,18 @@ MATCH void func_800B0F9C(void) {
             sum += D_800B4C7C[slot_c];
         }
         clut = 0;
-        if (g_Game.members[BATTLE_ACTIVE_ROW->slot].chr.ap < (sum & BYTE_MASK)) {
+        if (g_Game.members[BATTLE_ACTIVE_MEMBER->slot].chr.ap < (sum & BYTE_MASK)) {
             clut = 7;
         }
         TEXT_Format(g_UiTextFormatBuffer, D_80096A28, entry + 1);
-        line_y = row << 5;
+        line_y = line << 5;
         UI_TextDrawAscii((g_UiPanelCurrent->pos.x + 4), (g_UiPanelCurrent->pos.y + (line_y + 0x20)), clut, g_UiTextFormatBuffer);
-        slot_a = g_BattleTargetRows[(s16)g_UiPanelCurrent->u.battle.row_base + row].gate_03;
+        slot_a = g_BattleTargetRows[(s16)g_UiPanelCurrent->u.battle.row_base + line].gate_03;
         if (slot_a != GAME_NONE) {
             func_800B1DAC((g_UiPanelCurrent->pos.x + 0x10), (g_UiPanelCurrent->pos.y + (line_y + 0x18)), slot_a & 0x1F);
             line_y += 0x2D;
             UI_TextDrawString((g_UiPanelCurrent->pos.x + 16), (g_UiPanelCurrent->pos.y + line_y), clut, TEXT_LENGTH_MAX,
-                              UI_MessageGetText(D_800B4C90[g_BattleTargetRows[(s16)g_UiPanelCurrent->u.battle.row_base + row].gate_03 & 0x1F]));
+                              UI_MessageGetText(D_800B4C90[g_BattleTargetRows[(s16)g_UiPanelCurrent->u.battle.row_base + line].gate_03 & 0x1F]));
             TEXT_Format(g_UiTextFormatBuffer, D_80096A2C, sum & BYTE_MASK);
             UI_TextDrawGlyphString((g_UiPanelCurrent->pos.x + 88), (g_UiPanelCurrent->pos.y + line_y), clut, g_UiTextFormatBuffer);
         }

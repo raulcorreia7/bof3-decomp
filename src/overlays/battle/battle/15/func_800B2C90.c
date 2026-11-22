@@ -8,11 +8,11 @@ NON_MATCHING void func_800B2C90(MenuPanelTask* task) {
     FAKE_STACK_PADS(u8, 8);
     Ability* ability_obj;
     u8*      types;
-    u8       row_offset;
+    u8       scroll_y;
     u8       count;
     u8       ability_type;
     u8       ability_id;
-    u16      row_y;
+    s16      line_y;
     u16      selection;
     u16      icon;
     s16      icon_x;
@@ -23,10 +23,10 @@ NON_MATCHING void func_800B2C90(MenuPanelTask* task) {
     void*    name_table;
 
     UI_WindowDraw((task->pos.x + 3) & HALF_MASK, (task->pos.y + 3) & HALF_MASK, 153, 130, 0, (s32)g_WindowStyle);
-    selection = func_801AFD10(&task->u.battle.cursor, &row_offset, &count, &task->u.battle.row_base);
+    selection = func_801AFD10(&task->u.battle.cursor, &scroll_y, &count, &task->u.battle.row_base);
     selection &= BYTE_MASK;
-    types = Party_GetAbilities((u32)task->unk_0A, (u32)task->unk_0B, 1U) + selection;
-    row_y = task->pos.y + (s8)row_offset;
+    types  = Party_GetAbilities((u32)task->unk_0A, (u32)task->unk_0B, 1U) + selection;
+    line_y = task->pos.y + (s8)scroll_y;
     if ((count + 7) != 0) {
         index = 0;
         do {
@@ -43,17 +43,17 @@ NON_MATCHING void func_800B2C90(MenuPanelTask* task) {
                 if ((icon_x == task->flags) || (icon_x == task->unk_0C)) {
                     icon &= BYTE_MASK;
                     if (icon != 7) {
-                        UI_ListDrawAbilityRow((s16)(task->pos.x + 7), (s16)(row_y + 0x1A), UI_TEXT_DIM, ability_id & BYTE_MASK, ability_obj, ability_type & BYTE_MASK, 1);
+                        UI_ListDrawAbilityRow((s16)(task->pos.x + 7), (s16)(line_y + 0x1A), UI_TEXT_DIM, ability_id & BYTE_MASK, ability_obj, ability_type & BYTE_MASK, 1);
                     }
-                    icon_y = (s16)(row_y + 0x18);
+                    icon_y = (s16)(line_y + 0x18);
                 } else {
-                    icon_y = (s16)(row_y + 0x1A);
+                    icon_y = (s16)(line_y + 0x1A);
                 }
                 UI_ListDrawAbilityRow((s16)(task->pos.x + 7), icon_y, icon, ability_id & BYTE_MASK, ability_obj, ability_type & BYTE_MASK, 1);
             }
             index += 1;
             types += 1;
-            row_y += 0xD;
+            line_y += 0xD;
         } while (index < count + 7);
     }
     UI_WindowDraw((task->pos.x + 3) & HALF_MASK, (task->pos.y + 3) & HALF_MASK, 153, 20, 0, (s32)g_WindowStyle);

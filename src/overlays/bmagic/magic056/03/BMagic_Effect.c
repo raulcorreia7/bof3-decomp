@@ -18,7 +18,7 @@ MATCH void func_801EEC94(void) {
     u32              index;
     u8               active;
     BattleWorkImage* slot;
-    BattleWorkImage* row;
+    BattleWorkImage* image;
     u32              enemy;
     PartyMember*     member;
 
@@ -36,8 +36,8 @@ MATCH void func_801EEC94(void) {
     } else {
         slot  = (BattleWorkImage*)&g_BattleEffects[index];
         enemy = active - BATTLE_PARTY_CHARACTERS_COUNT;
-        row   = (BattleWorkImage*)&g_BattleEnemyBattlers[enemy];
-        *slot = *row;
+        image = (BattleWorkImage*)&g_BattleEnemyBattlers[enemy];
+        *slot = *image;
     }
     work                                = TASK(PartyMember);
     g_BattleEffects[index].header.mode  = 3;
