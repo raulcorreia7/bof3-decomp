@@ -2,6 +2,7 @@
 #define OVERLAY_UI_TEXT_H
 
 #include "types.h"
+#include "gfx/prim.h"
 
 /* The executable's window and menu text functions, in address order. */
 /* func_8014ECAC */
@@ -51,7 +52,7 @@ void        UI_WindowDrawFrame(s16 frame_x, s16 frame_y, s16 frame_width, s16 fr
 void        UI_WindowDrawOutline(s16 x, s16 y, s16 width, s32 height, s32 flags);
 /* UI_SpriteGetRect */
 /* func_801AF270 */
-u8*         UI_SpriteGetRect(u8 sprite_id, u8 flags);
+UvRect*     UI_SpriteGetRect(u8 sprite_id, u8 flags);
 /* func_801AF2A0 */
 void        UI_SpriteDraw(s16 x, s16 y, u8 sprite_id, u8 flags);
 /* func_801AF390 */

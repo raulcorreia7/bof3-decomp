@@ -6,7 +6,7 @@ MATCH void func_801F2F84(void) {
 
     actor->timer--;
     if (actor->timer == 0) {
-        setRECT(&rect, 832, 256, D_801F43BC, D_801F43BE);
+        setRECT(&rect, 832, 256, AREA120_IMAGE_RECT->box.w, AREA120_IMAGE_RECT->box.h);
         StoreImage(&rect, (u32*)AREA_WORK);
         TASK(Actor)->header.mode++;
     }

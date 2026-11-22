@@ -3,8 +3,8 @@
 /* Sets no draw mode: the sprite uses the page its caller set with UI_SpriteDrawRun
  * (832, 256 when flags bit 0 is set, else 896, 256). The CLUT is (176, 481) when flags bit 1 is clear. */
 MATCH void UI_SpriteDraw(s16 x, s16 y, u8 sprite_id, u8 flags) {
-    u8*   rect;
-    SPRT* sprt;
+    UvRect* rect;
+    SPRT*   sprt;
 
     rect = UI_SpriteGetRect(sprite_id, flags & 0x1);
     sprt = (SPRT*)g_GfxPrimCursor;
@@ -14,8 +14,8 @@ MATCH void UI_SpriteDraw(s16 x, s16 y, u8 sprite_id, u8 flags) {
 
     setXY0(sprt, x, y);
 
-    setUV0(sprt, rect[0], rect[1]);
-    setWH(sprt, rect[2], rect[3]);
+    setUV0(sprt, rect->u, rect->v);
+    setWH(sprt, rect->w, rect->h);
 
     if (!(flags & 0x2)) {
         setClut(sprt, 176, STAGE_PALETTE_Y + 1);

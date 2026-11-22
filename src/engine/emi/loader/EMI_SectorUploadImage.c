@@ -13,7 +13,7 @@ MATCH void EMI_SectorUploadImage(void) {
 
     g_EmiUploadRect.w = 0x20;
     g_EmiUploadRect.h = 0x20;
-    idxp              = &D_80146488;
+    idxp              = &g_EmiStream.ring_index;
     h                 = *idxp;
     index             = h;
     base              = (u8*)idxp + 0x30;
@@ -24,6 +24,6 @@ MATCH void EMI_SectorUploadImage(void) {
     h                 = (*(u16*)(entry + 2) & 0x3F);
     g_EmiUploadRect.y = (h << 5);
     if (((v << 5) < 0x3E9) && ((h << 5) < 0x1F5)) {
-        LoadImage(&g_EmiUploadRect, (u_long*)(g_EmiRingBase + (index << 11)));
+        LoadImage(&g_EmiUploadRect, (u_long*)(g_EmiStream.ring_base + (index << 11)));
     }
 }

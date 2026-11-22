@@ -18,7 +18,7 @@ MATCH void Area_CellDrawSides(u8* record, s32 cell_x, s32 cell_y) {
     MapCellHeights* cell;
     MapCellHeights* other;
     MapCellHeights* row;
-    u8*             prim;
+    POLY_FT4*       prim;
     s32             count;
     s32             side;
     s32             type;
@@ -38,8 +38,8 @@ MATCH void Area_CellDrawSides(u8* record, s32 cell_x, s32 cell_y) {
     cell_y            = ((cell_y - 128) << 7) - 64;
     v[0].vy = v[2].vy = cell_y;
     while (count > 0) {
-        prim = g_GfxPrimCursor;
-        SetPolyFT4((POLY_FT4*)prim);
+        prim = (POLY_FT4*)g_GfxPrimCursor;
+        SetPolyFT4(prim);
         SetShadeTex(prim, 0);
         v[1].vx = v[3].vx = (side & 1) ? cell_x : cell_x + 128;
         v[1].vy = v[3].vy = cell_y + ((side & 1) << 7);
@@ -63,7 +63,7 @@ MATCH void Area_CellDrawSides(u8* record, s32 cell_x, s32 cell_y) {
         }
         v[0].vz = v[2].vz - 128;
         v[1].vz = v[3].vz - 128;
-        RotTransPers4(&v[0], &v[1], &v[2], &v[3], (s32*)(prim + 8), (s32*)(prim + 0x10), (s32*)(prim + 0x18), (s32*)(prim + 0x20), &p, &flag);
+        RotTransPers4(&v[0], &v[1], &v[2], &v[3], (s32*)&prim->x0, (s32*)&prim->x1, (s32*)&prim->x2, (s32*)&prim->x3, &p, &flag);
         count--;
         Area_ApplyTileToQuad(D_8017F8E0[side], prim, 1);
         side++;
