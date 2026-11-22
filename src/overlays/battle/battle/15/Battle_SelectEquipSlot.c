@@ -6,7 +6,7 @@
 bool Battle_Unequip(void);
 
 /* func_80099568 */
-MATCH void Battle_SelectEquipRow(void) {
+MATCH void Battle_SelectEquipSlot(void) {
     /* FAKE: stack_scratch reserves the retail 0x28 frame; no instruction
      * references it — keep the slot so the frame layout matches. */
     u8            stack_scratch[40];
@@ -22,7 +22,7 @@ MATCH void Battle_SelectEquipRow(void) {
     if (g_BattlePanelMode == 0) {
         D_801485DC = 1;
         D_801485E0 = D_801485BC + 6;
-        D_801485E2 = D_801485BE + (g_BattleItemRow * 13 + 0x57);
+        D_801485E2 = D_801485BE + (g_BattleEquipSlot * 13 + 0x57);
     } else {
         D_801485DC = 0;
     }
@@ -61,7 +61,7 @@ MATCH void Battle_SelectEquipRow(void) {
         D_80148654         = 0;
         counter            = (u8*)&g_Battle.ui_mode;
         counter_value      = *counter + 1;
-        selection_value    = g_BattleItemRow;
+        selection_value    = g_BattleEquipSlot;
         g_BattleListCursor = cursor_value;
         D_801485C3         = selection_value;
         *counter           = counter_value;
@@ -69,17 +69,17 @@ MATCH void Battle_SelectEquipRow(void) {
     }
     if ((trigger & PADLup) != 0) {
         SND_SEPlay(EMI_SE_ID(SND_BANK_COMMON, 0));
-        g_BattleItemRow = g_BattleItemRow - 1;
-        if ((s8)g_BattleItemRow < 0) {
-            g_BattleItemRow = 5;
+        g_BattleEquipSlot = g_BattleEquipSlot - 1;
+        if ((s8)g_BattleEquipSlot < 0) {
+            g_BattleEquipSlot = 5;
         }
     }
     if ((trigger & PADLdown) != 0) {
         SND_SEPlay(EMI_SE_ID(SND_BANK_COMMON, 0));
-        MEM(u8, (u32)&g_BattleItemRow) += 1;
-        if ((s8)MEM(u8, (u32)&g_BattleItemRow) >= 6) {
-            MEM(u8, (u32)&g_BattleItemRow) = 0;
+        MEM(u8, (u32)&g_BattleEquipSlot) += 1;
+        if ((s8)MEM(u8, (u32)&g_BattleEquipSlot) >= 6) {
+            MEM(u8, (u32)&g_BattleEquipSlot) = 0;
         }
     }
-    D_8014859D = g_BattleItemRow;
+    D_8014859D = g_BattleEquipSlot;
 }

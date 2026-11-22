@@ -3,20 +3,20 @@
 /* func_800AF814 */
 MATCH void Battle_FadePoisonedBattler(u32 battler_index) {
     u8  index;
-    u32 offset;
+    u32 record_offset;
 
     index = battler_index & BYTE_MASK;
     if (Battle_SlotIsBlocked(index) & BYTE_MASK) {
         return;
     }
     if (index < 3) {
-        offset = index * BATTLE_PARTY_STRIDE;
+        record_offset = index * BATTLE_PARTY_STRIDE;
         if (!HAS_STATUS(g_Game.members[index], STATUS_POISONED)) {
             return;
         }
-        GFX_PaletteAllocFade((u8*)g_Game.members + offset, -6, -0xA, 0, 0);
+        GFX_PaletteAllocFade(&g_Game.members[index], -6, -0xA, 0, 0);
     } else {
-        offset = (index - 3) * BATTLE_ENEMY_STRIDE;
+        record_offset = (index - 3) * BATTLE_ENEMY_STRIDE;
         if ((ENEMY_COMBATANT(index).status & STATUS_POISONED) == 0) {
             return;
         }

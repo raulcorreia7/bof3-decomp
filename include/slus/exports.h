@@ -191,7 +191,7 @@ extern u8             D_801485A0;
 /* D_801485BB */
 extern volatile u8    g_BattlePanelMode;
 /* D_801485C2 */
-extern u8             g_BattleItemRow;
+extern u8             g_BattleEquipSlot;
 extern u8             D_801485C3;
 extern u8             D_801485C4;
 /* D_801485C8 */

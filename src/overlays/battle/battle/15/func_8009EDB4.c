@@ -5,7 +5,7 @@ MATCH void func_8009EDB4(void) {
     u16           flag_value;
     u32           action;
     s32           slot;
-    s32           row;
+    s32           enemy_slot;
     u8            battler_index;
     u8            selection_type;
     s16           result;
@@ -22,8 +22,8 @@ MATCH void func_8009EDB4(void) {
     if (slot < 3u) {
         action = g_Characters[g_CharSlot[g_Game.members[slot].chr.character_id]].base.power;
     } else {
-        row    = slot - 3;
-        action = g_BattleEnemyBattlers[row].base.power;
+        enemy_slot = slot - 3;
+        action     = g_BattleEnemyBattlers[enemy_slot].base.power;
     }
     raw = D_801EC310;
     if (((raw >> 1) + 0x1E) >= 0x65) {

@@ -12,7 +12,7 @@ NON_MATCHING void func_801EF140(void) {
     if (g_PadStates[0].pressed == 0) {
         return;
     }
-    func_801DE9A8((g_Battle.row_cursor - 1) & BYTE_MASK);
+    func_801DE9A8((g_Battle.selection - 1) & BYTE_MASK);
     D_801463B2 = g_Characters[g_Battle.cursor.gene.column].level;
     D_801463B4 = g_Characters[g_Battle.cursor.gene.column].level + func_801EF928(g_Battle.cursor.gene.column, 0);
     sprintf((char*)D_801490F8, D_801EEC04, D_801463B4);

@@ -14,7 +14,7 @@ MATCH void func_801EEC24(void) {
 #ifdef NON_MATCHING
 NON_MATCHING void func_801EEC94(void) {
     BattleEffect*    effect;
-    BattleWorkImage* row;
+    BattleWorkImage* image;
     PartyMember*     work;
     u32              slot;
     u32              enemy;
@@ -54,8 +54,8 @@ NON_MATCHING void func_801EEC94(void) {
             slot                              = Battle_AllocEffect(1, 0x13) & BYTE_MASK;
             enemy                             = g_Battle.active_battler - BATTLE_PARTY_CHARACTERS_COUNT;
             effect                            = &g_BattleEffects[slot];
-            row                               = (BattleWorkImage*)&g_BattleEnemyBattlers[enemy];
-            *(BattleWorkImage*)effect         = *row;
+            image                             = (BattleWorkImage*)&g_BattleEnemyBattlers[enemy];
+            *(BattleWorkImage*)effect         = *image;
             g_BattleEffects[slot].header.mode = 3;
             g_BattleEffects[slot].unk_06      = 1;
             g_BattleEffects[slot].header.step = 0;

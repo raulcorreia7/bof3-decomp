@@ -20,7 +20,7 @@ MATCH void func_800A5A18(void) {
         D_801485EE                                      = 0;
         g_BattleMessages[((D_801EC328 - 1) & 0xF)].text = UI_MessageGetText(0x63);
         count                                           = g_BattleUIState + 1;
-        state                                           = &g_Battle.row_cursor;
+        state                                           = &g_Battle.selection;
         *state |= 0x80;
         g_BattleUIState = count;
     }

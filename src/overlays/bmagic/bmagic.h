@@ -97,8 +97,8 @@ ASSERT_SIZE(BattleEffectTargetColumn, BATTLE_EFFECT_STRIDE);
     SYS_DISPATCH_BYTE(table, TASK(PartyMember)->header.step);           \
     BMAGIC_DRAW_IF_RUNNING_IN_OWN_MATRIX(set_matrix, draw)
 
-/* The battler the target selector names: a party row below
- * BATTLE_PARTY_CHARACTERS_COUNT, else an enemy row. A statement macro: the
+/* The battler the target selector names: a party member below
+ * BATTLE_PARTY_CHARACTERS_COUNT, else an enemy battler. A statement macro: the
  * member declares u8 selector and PartyMember* battler. */
 #define BMAGIC_SELECT_TARGET_BATTLER()                                              \
     selector = LOBU(g_Battle.target_selector);                                      \
@@ -108,8 +108,8 @@ ASSERT_SIZE(BattleEffectTargetColumn, BATTLE_EFFECT_STRIDE);
         battler = (PartyMember*)(g_BattleEnemies + selector * BATTLE_ENEMY_STRIDE); \
     }
 
-/* Free the palette fade of the battler the target selector names (a party row
- * below BATTLE_PARTY_CHARACTERS_COUNT, else an enemy row), tell the battle UI and
+/* Free the palette fade of the battler the target selector names (a party member
+ * below BATTLE_PARTY_CHARACTERS_COUNT, else an enemy battler), tell the battle UI and
  * the effect player about the selector, then raise the effect-playing state.
  * A statement macro: the member declares u32 slot, u8* selector and
  * PartyMember* battler. */
@@ -202,19 +202,19 @@ typedef Pos2 TrailPoint;
     index  = Battle_AllocEffect(1, 31);                                            \
     active = g_Battle.active_battler;                                              \
     if (BATTLER_IS_PLAYER(active)) {                                               \
-        BattleWorkImage* row;                                                      \
+        BattleWorkImage* image;                                                    \
                                                                                    \
-        row                     = (BattleWorkImage*)&g_Game.members[active];       \
+        image                   = (BattleWorkImage*)&g_Game.members[active];       \
         slot                    = &g_BattleEffects[index & BYTE_MASK];             \
-        *(BattleWorkImage*)slot = *row;                                            \
+        *(BattleWorkImage*)slot = *image;                                          \
     } else {                                                                       \
-        BattleWorkImage* row;                                                      \
+        BattleWorkImage* image;                                                    \
         u32              enemy;                                                    \
                                                                                    \
         slot                    = &g_BattleEffects[index & BYTE_MASK];             \
         enemy                   = active - BATTLE_PARTY_CHARACTERS_COUNT;          \
-        row                     = (BattleWorkImage*)&g_BattleEnemyBattlers[enemy]; \
-        *(BattleWorkImage*)slot = *row;                                            \
+        image                   = (BattleWorkImage*)&g_BattleEnemyBattlers[enemy]; \
+        *(BattleWorkImage*)slot = *image;                                          \
     }
 
 /* Go to the effect's next step. */
@@ -464,8 +464,8 @@ extern u16 D_80036C00[256];
 /* The four scratch vectors the effect draws project their corners from; the flat name keeps the retail
  * bytes, the scratchpad view does not. */
 
-/* Pointers to character-indexed archive ids, one row of two per g_Battle.dragon_form; the caller picks
- * the row's column and g_EmiLoadedCharacterIndex picks the id. */
+/* Pointers to character-indexed archive ids, one pair per g_Battle.dragon_form; the caller picks
+ * the pair's column and g_EmiLoadedCharacterIndex picks the id. */
 extern u16*     D_800B499C[][2];
 extern Callback D_801F048C[];
 extern u8       D_801F0548[];

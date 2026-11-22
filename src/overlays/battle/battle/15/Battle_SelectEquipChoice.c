@@ -5,7 +5,7 @@ void Battle_ApplyEquipment(void); /* extern */
 /* func_80099830 */
 #ifdef NON_MATCHING
 NON_MATCHING void Battle_SelectEquipChoice(void) {
-    u16* row_base;
+    u16* pad_state;
     s32  pad;
     u32  scroll_lo;
     u32  scroll_hi;
@@ -19,10 +19,10 @@ NON_MATCHING void Battle_SelectEquipChoice(void) {
     } else {
         D_801485DC = 0;
     }
-    row_base = &g_PadStates[0].pressed;
-    INPUT_REPEATED(*row_base, (INPUT_DIRECTIONAL | PADL1 | PADR1));
-    pad      = INPUT_REPEATED(*row_base, (PADLup | PADLdown | PADL1 | PADR1));
-    row_base = (u16*)&D_80148594;
+    pad_state = &g_PadStates[0].pressed;
+    INPUT_REPEATED(*pad_state, (INPUT_DIRECTIONAL | PADL1 | PADR1));
+    pad       = INPUT_REPEATED(*pad_state, (PADLup | PADLdown | PADL1 | PADR1));
+    pad_state = (u16*)&D_80148594;
     if (pad & PADLup) {
         if (g_BattleListCursor != 0) {
             g_BattleListCursor -= 1;
@@ -65,18 +65,18 @@ NON_MATCHING void Battle_SelectEquipChoice(void) {
             D_8014859E = new_scroll;
         }
     }
-    if (g_BattleListCursor != FIELD(u8, row_base, 0xBu)) {
+    if (g_BattleListCursor != FIELD(u8, pad_state, 0xBu)) {
         SND_SEPlay(EMI_SE_ID(SND_BANK_COMMON, 0));
     }
     choice                                          = D_801485A1;
     g_BattleMessages[((D_801EC328 - 1) & 0xF)].text = UI_MessageGetText(Item_GetDescription((s32)D_8014859C, (s32)choice) & HALF_MASK);
-    row_base                                        = &g_PadStates[0].pressed;
-    if (g_InputMasks[BATTLE_INPUT_CANCEL] & *row_base) {
+    pad_state                                       = &g_PadStates[0].pressed;
+    if (g_InputMasks[BATTLE_INPUT_CANCEL] & *pad_state) {
         SND_SEPlay(EMI_SE_ID(SND_BANK_COMMON, 6));
         goto block_33; /* shared scroll/confirm join */
     }
     Battle_PreviewEquipment();
-    if (g_InputMasks[BATTLE_INPUT_CONFIRM] & *row_base) {
+    if (g_InputMasks[BATTLE_INPUT_CONFIRM] & *pad_state) {
         if (choice != 0) {
             SND_SEPlay(EMI_SE_ID(SND_BANK_COMMON, 3));
             Battle_ApplyEquipment();

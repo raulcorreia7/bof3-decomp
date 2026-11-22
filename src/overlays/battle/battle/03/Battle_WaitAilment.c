@@ -3,7 +3,7 @@
 /* func_801E6D28 */
 MATCH void Battle_WaitAilment(void) {
     u8*  field;
-    u16* row_flags;
+    u16* status;
     u32  flags;
     u8   index;
     u32  slot;
@@ -17,19 +17,19 @@ MATCH void Battle_WaitAilment(void) {
         if ((Battle_SlotIsBlocked(index) & BYTE_MASK) != 0) {
             return;
         }
-        field     = &g_BattleEffectBattler->slot;
-        index     = *field;
-        row_flags = &g_Game.members[index].chr.status;
-        flags     = *row_flags & (STATUS_BLIND | STATUS_SILENCED | STATUS_SLEEPING);
+        field  = &g_BattleEffectBattler->slot;
+        index  = *field;
+        status = &g_Game.members[index].chr.status;
+        flags  = *status & (STATUS_BLIND | STATUS_SILENCED | STATUS_SLEEPING);
     } else {
         if ((Battle_SlotIsBlocked(index) & BYTE_MASK) != 0) {
             return;
         }
-        field     = &g_BattleEffectBattler->slot;
-        index     = *field;
-        slot      = index - 3;
-        row_flags = &g_BattleEnemyBattlers[slot].status;
-        flags     = *row_flags & (STATUS_BLIND | STATUS_SILENCED | STATUS_SLEEPING);
+        field  = &g_BattleEffectBattler->slot;
+        index  = *field;
+        slot   = index - 3;
+        status = &g_BattleEnemyBattlers[slot].status;
+        flags  = *status & (STATUS_BLIND | STATUS_SILENCED | STATUS_SLEEPING);
     }
     if (flags != 0) {
         TASK(PartyMember)->header.mode++;

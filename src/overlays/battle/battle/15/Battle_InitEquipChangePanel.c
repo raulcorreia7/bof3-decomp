@@ -29,7 +29,7 @@ MATCH void Battle_InitEquipChangePanel(void) {
     D_801485B9        = eight;
     D_801485BA        = 3;
     g_BattlePanelMode = 2;
-    g_BattleItemRow   = 0;
+    g_BattleEquipSlot = 0;
     D_801485C3        = 0xFF;
     D_801485C4        = slot[5];
     D_801485D8        = &s_BattleEquipment[0];

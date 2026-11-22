@@ -16,9 +16,9 @@ MATCH void func_800B0498(void) {
     s32  panel_count;
     s32  panel_home;
     s32* panel_sink = &panel_home;
-    s32  substate_row;
+    s32  entry_index;
     /* FAKE: pin shared fourth argument in a3. */
-    FAKE_REG(s32, row, "a3");
+    FAKE_REG(s32, selection, "a3");
     func_800B06F4(g_UiPanelCurrent->pos.x, g_UiPanelCurrent->pos.y, g_UiPanelCurrent->unk_08, g_UiPanelCurrent->unk_09);
 
     style = &g_WindowStyle;
@@ -28,7 +28,7 @@ MATCH void func_800B0498(void) {
 
     UI_WindowDraw((u16)(g_UiPanelCurrent->pos.x + 135u), (u16)(g_UiPanelCurrent->pos.y + 10u), 48, 16, 0, *style);
 
-    panel_count = -(BATTLE_ACTIVE_ROW->chr.ap < D_801463B8[0]) & 0x7;
+    panel_count = -(BATTLE_ACTIVE_MEMBER->chr.ap < D_801463B8[0]) & 0x7;
     UI_TextDrawAscii((u16)(g_UiPanelCurrent->pos.x + 136u), (u16)(g_UiPanelCurrent->pos.y + 12u), panel_count, (const void*)(D_800B6D1C));
 
     TEXT_Format(g_UiTextFormatBuffer, D_80096A04, D_801463B8[0]);
@@ -37,12 +37,12 @@ MATCH void func_800B0498(void) {
 
     if (SEL_MODE == 4) {
         sel_substate = SEL_SUBSTATE;
-        row          = sel_substate;
+        selection    = sel_substate;
         if (sel_substate == -1) {
-            ((void (*)(u16, u16, s32, s32))UI_CursorDraw)((g_UiPanelCurrent->pos.x + 14), (g_UiPanelCurrent->pos.y + 12), 0, row);
+            ((void (*)(u16, u16, s32, s32))UI_CursorDraw)((g_UiPanelCurrent->pos.x + 14), (g_UiPanelCurrent->pos.y + 12), 0, selection);
         } else {
-            ((void (*)(u16, u16, s32, s32))UI_CursorDraw)(((u16)(g_UiPanelCurrent->pos.x + 14) + SEL_SLOT * 30), ((u16)(g_UiPanelCurrent->pos.y + 44) + ((substate_row = row & BYTE_MASK) << 5)), 0,
-                                                          row);
+            ((void (*)(u16, u16, s32, s32))UI_CursorDraw)(((u16)(g_UiPanelCurrent->pos.x + 14) + SEL_SLOT * 30), ((u16)(g_UiPanelCurrent->pos.y + 44) + ((entry_index = selection & BYTE_MASK) << 5)),
+                                                          0, selection);
         }
     }
 }
