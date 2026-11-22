@@ -66,7 +66,7 @@ extern s8 D_801F0BB8[];
 #define MAGIC113_ADVANCE_AT_ACTIVE_PARAM(param_value) \
     active = BATTLE_ACTIVE_WORK;                      \
     if (active->param.unk_0B == (param_value)) {      \
-        work              = g_Task;                   \
+        work              = TASK(PartyMember);        \
         work->header.step = work->header.step + 1;    \
     }
 
