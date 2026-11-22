@@ -66,6 +66,7 @@ g_EncounterSteps = { addr = 0x80143F22, source = "Steps walked since the last en
 g_AreaEncounterPlacement = { addr = 0x80143F24, size = 0x20, source = "The field-battle formation origin and one start position per party order slot; Area_EncounterBuild and Game_BattleStartEncounter fill it and the placement, camera and battle start code read it." }
 g_EncounterOriginX = { addr = 0x80143F24, type = "s32", alias = true, source = "The formation origin x; a unit that keeps its own absolute address per access reads this view of g_AreaEncounterPlacement.origin.x." }
 g_EncounterOriginY = { addr = 0x80143F28, type = "s32", alias = true, source = "The formation origin y; a unit that keeps its own absolute address per access reads this view of g_AreaEncounterPlacement.origin.y." }
+g_EncounterParty = { addr = 0x80143F2C, type = "FormationPos", size = 0x18, alias = true, source = "g_AreaEncounterPlacement.party: one field-battle start position per party order slot." }
 g_SysResetHoldFrames = { addr = 0x80143F44, source = "SYS_Main counts held reset-key frames until EMI_IsReady" }
 g_PartyPos = { addr = 0x80143F7C, size = 0xC, alias = true, source = "The party's field position in 16.16; the area scroll code reads x, y and z and g_ScrollHeight is the integer half of z." }
 g_PartyX = { addr = 0x80143F7C, type = "s32", source = "X position of the party." }
@@ -103,6 +104,8 @@ g_PlayClock = { addr = 0x80144FC0, size = 0x4, source = "Play time." }
 g_FishingBestCatch = { addr = 0x80144FE4, size = 0x20, source = "Best catch of each fish." }
 g_EmiLoadedCharacterIndex = { addr = 0x80145024, source = "Index of the last loaded EMI character." }
 g_FishingEquipment = { addr = 0x80145026, size = 0x3, source = "The equipped lure, the lures held and the equipped rod; Item_Count counts them with the held accessories." }
+g_FishingLureQty = { addr = 0x80145027, alias = true, source = "g_FishingEquipment.lure_count: the lures held." }
+g_FishingRod = { addr = 0x80145028, alias = true, source = "g_FishingEquipment.rod_id: the equipped rod's accessory id." }
 g_SndBGMId = { addr = 0x80145029, source = "Id of the background music being played." }
 g_BattleCount = { addr = 0x8014502C, source = "Number of battles fought." }
 g_InventoryIds = { addr = 0x8014504C, size = 0x200, source = "Item ids of each inventory category." }

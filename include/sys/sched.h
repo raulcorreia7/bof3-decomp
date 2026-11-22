@@ -95,14 +95,14 @@ ASSERT_SIZE(ThreadScreenEffect, 0x38);
 
 /* The 0x38-byte work area each thread slot overlays with the record of the entry SYS_ThreadRegister
  * armed for it. */
-typedef union ThreadWork {
+typedef union ThreadTail {
     ThreadClear        clear;
     ThreadGameEntry    game_entry;
     ThreadTitleScreen  title_screen;
     ThreadScreenEffect screen_effect;
-} ThreadWork;
+} ThreadTail;
 
-ASSERT_SIZE(ThreadWork, 0x38);
+ASSERT_SIZE(ThreadTail, 0x38);
 
 typedef struct Thread {
     u16        state; /* ThreadState */
@@ -113,7 +113,7 @@ typedef struct Thread {
     u32        stack; /* thread stack top, OpenTh's sp argument */
     u8         pad_14[0x30];
     u32        gp;   /* OpenTh's gp argument */
-    ThreadWork tail; /* the armed entry's own state, cleared by SYS_ClearCurrentThread */
+    ThreadTail tail; /* the armed entry's own state, cleared by SYS_ClearCurrentThread */
 } Thread;
 
 ASSERT_OFFSET(Thread, state, 0x00);
