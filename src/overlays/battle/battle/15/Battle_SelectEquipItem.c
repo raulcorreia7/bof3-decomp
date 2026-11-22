@@ -37,13 +37,13 @@ NON_MATCHING void Battle_SelectEquipItem(void) {
     keys                                                              = *pad_state;
     if (keys & g_InputMasks[BATTLE_INPUT_CANCEL]) {
         SND_SEPlay(EMI_SE_ID(SND_BANK_COMMON, 6));
-        g_BattlePanelMode   = 1;
-        g_BattleChoicePhase = 3;
-        D_80148624          = 0;
-        D_801483C0          = 1;
-        D_801485DC          = 0;
-        g_Battle.ui_step    = 1;
-        g_Battle.ui_mode    = 0;
+        g_BattlePanelMode         = 1;
+        g_BattleChoicePhase       = 3;
+        g_UiPanelTasks[21].active = 0;
+        g_UiPanelTasks[4].active  = 1;
+        D_801485DC                = 0;
+        g_Battle.ui_step          = 1;
+        g_Battle.ui_mode          = 0;
         return;
     }
     if (keys & g_InputMasks[BATTLE_INPUT_CONFIRM]) {
@@ -59,8 +59,8 @@ NON_MATCHING void Battle_SelectEquipItem(void) {
             D_80148597                                                               = 2;
             g_BattlePanelMode                                                        = 1;
             D_801485DC                                                               = 0;
-            D_80148624                                                               = 0;
-            D_801483C0                                                               = 1;
+            g_UiPanelTasks[21].active                                                = 0;
+            g_UiPanelTasks[4].active                                                 = 1;
             g_Battle.ui_step                                                         = 7;
         } else {
             SND_SEPlay(EMI_SE_ID(SND_BANK_COMMON, 7));

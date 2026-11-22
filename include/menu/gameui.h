@@ -302,7 +302,6 @@ extern u8           D_8014832C;
 extern u8           g_AreaGridActorCount;
 /* D_8014832E */
 extern u8           g_AreaDrawFlags;
-extern u8           D_8014833B;
 extern u8           D_8014833D;
 extern u8           D_8014833E;
 extern u8           D_8014833F;

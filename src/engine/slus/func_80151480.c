@@ -5,7 +5,7 @@
 MATCH void func_80151480(void) {
     volatile u16* h;
 
-    if (D_80148357 == 4) {
+    if (g_UiPanelTasks[1].state == 4) {
         g_UiPanelTasks[0].state = 4;
         g_UiMessageState.state  = 2;
         g_UiMessageStep         = 1;

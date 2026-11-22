@@ -18,9 +18,9 @@ MATCH void func_801D1244(void) {
     u8  next;
     u8* cursor;
 
-    category                       = D_80148338;
+    category                       = g_UiPanelTasks[0].unk_08;
     cursor_x                       = (u16)D_80148334;
-    row                            = D_8014833B;
+    row                            = g_UiPanelTasks[0].unk_0B;
     first                          = LOBU(D_8014833A);
     g_UiPanelTasks[1].flags        = 0;
     g_UiPanelTasks[4].pos.x        = cursor_x + 7;
@@ -264,20 +264,20 @@ MATCH void Menu_ApplyEquipment(void) {
 MATCH void func_801D1FA0(void) {
     u8 slot;
 
-    slot = D_8014833D;
-    if (Item_GetEquipability(D_80148338, slot) & 0x1) {
+    slot = g_UiPanelTasks[0].flags;
+    if (Item_GetEquipability(g_UiPanelTasks[0].unk_08, slot) & 0x1) {
         D_80148511 = 0;
     } else {
         D_80148511 = 1;
     }
-    D_801D8ED4.equipped_items[0]          = D_80144DF2;
-    D_801D8ED4.equipped_items[1]          = D_80144DF3;
-    D_801D8ED4.equipped_items[2]          = D_80144DF4;
-    D_801D8ED4.equipped_items[3]          = D_80144DF5;
-    D_801D8ED4.equipped_items[4]          = D_80144DF6;
+    D_801D8ED4.equipped_items[0]                        = D_80144DF2;
+    D_801D8ED4.equipped_items[1]                        = D_80144DF3;
+    D_801D8ED4.equipped_items[2]                        = D_80144DF4;
+    D_801D8ED4.equipped_items[3]                        = D_80144DF5;
+    D_801D8ED4.equipped_items[4]                        = D_80144DF6;
     /* @bug The trial set stores both accessories to the first accessory slot, so the second keeps its old value. */
-    D_801D8ED4.equipped_items[4]          = D_80144DF7;
-    D_801D8ED4.equipped_items[D_8014835E] = slot;
+    D_801D8ED4.equipped_items[4]                        = D_80144DF7;
+    D_801D8ED4.equipped_items[g_UiPanelTasks[1].unk_0A] = slot;
 }
 
 MATCH void func_801D2070(void) {
@@ -558,137 +558,7 @@ MATCH void Menu_DrawPanelIcon(u16 x, u16 y, s32 u, s32 v, u16 clut, u8 color) {
 
 #include "overlays/menu/shared/Char_GetExpProgress.h"
 
-#ifdef NON_MATCHING
-NON_MATCHING void Menu_DrawHeaderBar(s32 x, s32 y, s32 width, s32 height, u8 window_style) {
-    RECT*     window;
-    POLY_FT4* prim;
-    u16       left;
-    u16       top;
-    s32       inner;
-    s32       clut_x;
-    u8        bottom_v;
-    s32       bottom_row;
-    s32       bottom_y;
-    u16       odd_u;
-    s32       width1;
-    u16       width1_u;
-    s32       half;
-    u16       half_u;
-    s32       odd;
-    s32       mid_x;
-    s32       uv_end;
-
-    window          = (RECT*)g_GfxPrimCursor;
-    g_GfxPrimCursor = (u8*)(window + 1);
-    window->y       = 240;
-    window->x       = 0;
-    setWH(window, 16, 16);
-    left = x;
-    top  = y;
-    SetDrawMode((DR_MODE*)g_GfxPrimCursor, 0, 1, getTPage(TPAGE_DEPTH_4BIT, TPAGE_ABR_HALF, FONT_TPAGE_X, FONT_TPAGE_Y), window);
-    GFX_AddPrim(GFX_LAYER_UI, sizeof(DR_MODE));
-
-    prim = (POLY_FT4*)g_GfxPrimCursor;
-    SetPolyFT4(prim);
-    PSX_SET_SEMI_TRANSPARENT(prim);
-    setXY0(prim, left, top);
-    clut_x   = (window_style << 5) + 0x10;
-    prim->y1 = top;
-    inner    = x + 2;
-    prim->x2 = left;
-    prim->x1 = inner;
-    prim->x3 = inner;
-    setUV0(prim, 0, 0);
-    prim->v1 = 0;
-    setRGB0(prim, 172, 172, 172);
-    bottom_row = height + 1;
-    bottom_v   = bottom_row;
-    bottom_y   = y + bottom_row;
-    prim->y2   = bottom_y;
-    prim->y3   = bottom_y;
-    prim->u1   = 2;
-    prim->v2   = bottom_v;
-    prim->u3   = 2;
-    prim->v3   = bottom_v;
-    prim->y0 += 2;
-    prim->y2 -= 3;
-    prim->u2 = 0;
-    prim->v0 += 2;
-    prim->v2 -= 3;
-    prim->clut  = GetClut(clut_x, STAGE_PALETTE_Y + 1);
-    width1      = width + 1;
-    width1_u    = width1;
-    prim->tpage = getTPage(TPAGE_DEPTH_4BIT, TPAGE_ABR_HALF, FONT_TPAGE_X, FONT_TPAGE_Y);
-    GFX_AddPrim(GFX_LAYER_UI, sizeof(POLY_FT4));
-
-    odd  = (width - 3) & 1;
-    half = (s32)width1_u;
-    half = (half - 4) >> 1;
-    prim = (POLY_FT4*)g_GfxPrimCursor;
-    SetPolyFT4(prim);
-    PSX_SET_SEMI_TRANSPARENT(prim);
-    half_u = half;
-    setXY4(prim, inner, top, half + inner, top, inner, bottom_y, half + inner, bottom_y);
-    setUV4(prim, 0u, 0u, (u8)half_u, 0u, 0u, bottom_v, (u8)half_u, bottom_v);
-    setRGB0(prim, 172, 172, 172);
-    prim->clut  = GetClut(clut_x, STAGE_PALETTE_Y + 1);
-    odd_u       = odd;
-    prim->tpage = getTPage(TPAGE_DEPTH_4BIT, TPAGE_ABR_HALF, FONT_TPAGE_X, FONT_TPAGE_Y);
-    GFX_AddPrim(GFX_LAYER_UI, sizeof(POLY_FT4));
-
-    prim = (POLY_FT4*)g_GfxPrimCursor;
-    SetPolyFT4(prim);
-    PSX_SET_SEMI_TRANSPARENT(prim);
-    mid_x  = x + half;
-    uv_end = half + odd + 2;
-    setXY4(prim, mid_x + 2, top, mid_x + uv_end, top, mid_x + 2, bottom_y, mid_x + uv_end, bottom_y);
-    setUV4(prim, 0u, 0u, (u8)(half_u + odd_u), 0u, 0u, bottom_v, (u8)(half_u + odd_u), bottom_v);
-    setRGB0(prim, 172, 172, 172);
-    prim->clut  = GetClut(clut_x, STAGE_PALETTE_Y + 1);
-    prim->tpage = getTPage(TPAGE_DEPTH_4BIT, TPAGE_ABR_HALF, FONT_TPAGE_X, FONT_TPAGE_Y);
-    GFX_AddPrim(GFX_LAYER_UI, sizeof(POLY_FT4));
-
-    prim = (POLY_FT4*)g_GfxPrimCursor;
-    SetPolyFT4(prim);
-    PSX_SET_SEMI_TRANSPARENT(prim);
-    prim->y2 = bottom_y;
-    prim->x2 = x + width1 - 2;
-    prim->v2 = bottom_v;
-    prim->x1 = x + width1;
-    prim->y1 = top;
-    prim->x3 = x + width1;
-    setXY0(prim, x + width1 - 2, top);
-    setUV0(prim, 0u, 0u);
-    prim->u1 = 2u;
-    prim->v1 = 0u;
-    prim->u2 = 0u;
-    prim->u3 = 2u;
-    prim->v3 = bottom_v;
-    prim->y3 = bottom_y;
-    setRGB0(prim, 172, 172, 172);
-    prim->y1 += 2;
-    prim->y2 -= 1;
-    prim->y3 -= 3;
-    prim->v1 += 2;
-    /* The dead half_u store puts the v2 count in the retail register. */
-    prim->v2 = (half_u = prim->v2 - 1);
-    prim->v3 -= 3;
-    prim->clut  = GetClut(clut_x, STAGE_PALETTE_Y + 1);
-    prim->tpage = getTPage(TPAGE_DEPTH_4BIT, TPAGE_ABR_HALF, FONT_TPAGE_X, FONT_TPAGE_Y);
-    GFX_AddPrim(GFX_LAYER_UI, sizeof(POLY_FT4));
-
-    window          = (RECT*)g_GfxPrimCursor;
-    g_GfxPrimCursor = (u8*)(window + 1);
-    window->x       = 0;
-    window->y       = 0;
-    setWH(window, 256, 256);
-    SetDrawMode((DR_MODE*)g_GfxPrimCursor, 0, 1, getTPage(TPAGE_DEPTH_4BIT, TPAGE_ABR_HALF, FONT_TPAGE_X, FONT_TPAGE_Y), window);
-    GFX_AddPrim(GFX_LAYER_UI, sizeof(DR_MODE));
-    UI_WindowDrawFrame(inner, y + 2, width - 4, height - 4, 0);
-}
-#else
-INCLUDE_ASM(Menu_DrawHeaderBar);
-#endif
+#include "shared/Menu_DrawHeaderBar.h"
 
 #include "overlays/menu/shared/Menu_DrawEquipCompareWindow.h"
 
