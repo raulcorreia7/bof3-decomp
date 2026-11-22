@@ -8,7 +8,7 @@ void SND_XAStartStream(s32 key, s32 unused);
 /* func_80163744 */
 void SND_XAResolveStream(s32 stream_id);
 /* func_80163858 */
-void SND_XAStoreSyncResult(s32 intr, u8* result);
+void SND_XASetSyncResult(s32 intr, u8* result);
 /* func_801638B0 */
 void SND_XAUpdate(void);
 /* func_801639B8 */

@@ -664,7 +664,7 @@ EMI_UploadSectorImage = { addr = 0x80163378, type = "func", source = "Uploads a 
 EMI_UploadVabBody = { addr = 0x80163418, type = "func", source = "Transfers the body of a sound bank to the SPU." }
 SND_XAStartStream = { addr = 0x801636A0, type = "func", source = "Starts loading an overlay." }
 SND_XAResolveStream = { addr = 0x80163744, type = "func", source = "Resolves one loader entry from its packed key and latches the base and scaled entry bounds." }
-SND_XAStoreSyncResult = { addr = 0x80163858, type = "func", source = "Callback that reads the result of an XA stream command." }
+SND_XASetSyncResult = { addr = 0x80163858, type = "func", source = "Callback that reads the result of an XA stream command." }
 SND_XAUpdate = { addr = 0x801638B0, type = "func", source = "Runs the current XA audio state." }
 SND_XAStateIdle = { addr = 0x801639B8, type = "func", source = "XA audio state: idle." }
 SND_XAStateSeek = { addr = 0x801639D0, type = "func", source = "XA audio state: seeking." }

@@ -1040,7 +1040,7 @@ void                              func_801D0C04(void);
 extern s32                        func_801F2C04(void);
 
 /* Pause or replay the sequence player for the selected sound entry. */
-static inline void SND_SeqTogglePlayer(void (*action)(short, short), s32 cue_id) {
+static inline void Snd_ToggleSequencePlayer(void (*action)(short, short), s32 cue_id) {
     if ((cue_id & BYTE_MASK) != 0xFF) {
         action(g_SelectionEffectVoices[g_SelectionSepSlots[(cue_id & BYTE_MASK) * 4]], g_SelectionSequences[(cue_id & BYTE_MASK) * 4]);
     }

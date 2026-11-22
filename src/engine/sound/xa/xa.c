@@ -2,7 +2,7 @@
 
 #include "SND_XAStartStream.c"
 #include "SND_XAResolveStream.c"
-#include "SND_XAStoreSyncResult.c"
+#include "SND_XASetSyncResult.c"
 #include "SND_XAUpdate.c"
 #include "SND_XAStateIdle.c"
 #include "SND_XAStateSeek.c"
