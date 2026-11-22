@@ -9,7 +9,7 @@ MATCH void func_801F384C(void) {
     y                = D_1F800034[1];
     g_Task->screen_y = y;
     GFX_DrawShadedDisc((s16)g_Task->screen_x, (s16)y, (s16)g_Task->unk_18, 0xFF, 0xFF);
-    ACTOR_COUNT_DOWN(timer, timer);
+    ACTOR_COUNT_DOWN(TASK(Actor), timer, timer);
     if ((timer & BYTE_MASK) == 0) {
         Actor* task;
 

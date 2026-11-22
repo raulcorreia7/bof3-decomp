@@ -6,7 +6,7 @@
 MATCH void func_801E3334(void) {
     PartyMember* work;
 
-    g_Task->header.flags &= ~ACTOR_FLAG_HIDDEN;
+    TASK(PartyMember)->header.flags &= ~ACTOR_FLAG_HIDDEN;
     Battle_RequestEnemyScript(0);
     work          = g_Task;
     work->unk_48  = 2u;

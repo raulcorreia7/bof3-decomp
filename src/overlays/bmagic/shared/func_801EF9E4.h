@@ -11,7 +11,7 @@ MATCH void func_801EF9E4(void) {
     tpage = getTPage(TPAGE_DEPTH_4BIT, TPAGE_ABR_SUB, 320, 256);
     GFX_ADD_DITHERED_DRAW_MODE(BMAGIC_LAYER_BEHIND_BATTLERS, tpage);
     g_ScratchPad.cells.halves[0] = 0x120;
-    g_ScratchPad.cells.halves[5] = g_Task->timer * 12;
+    g_ScratchPad.cells.halves[5] = TASK(PartyMember)->timer * 12;
     setVector(&g_ScratchPadVectors[2], FIXED_MUL(rsin(0), g_ScratchPad.cells.halves[0]), FIXED_MUL(rcos(0), g_ScratchPad.cells.halves[0]), 0);
     g_ScratchPadVectors[1].vz = 0;
     g_ScratchPadVectors[0].vz = 0;

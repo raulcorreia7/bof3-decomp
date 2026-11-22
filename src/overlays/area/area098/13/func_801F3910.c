@@ -4,7 +4,7 @@ MATCH void func_801F3910(void) {
     u8 remaining;
 
     GFX_DrawColorFan(&g_Task->unk_64, (s16)g_Task->screen_x, 6);
-    ACTOR_COUNT_DOWN(remaining, timer);
+    ACTOR_COUNT_DOWN(TASK(Actor), remaining, timer);
     if (!(remaining & BYTE_MASK)) {
         g_Task->timer = 32;
         g_Task->header.mode += 1;

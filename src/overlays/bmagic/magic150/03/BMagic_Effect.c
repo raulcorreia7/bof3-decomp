@@ -12,8 +12,8 @@ MATCH void func_801EECA4(void) {
     D_801EFA9C.offset = 0;
     D_801EFA9C.angle  = 0;
     func_801EF6B0();
-    g_Task->unk_09 = 0x3C;
-    g_Task->header.mode += 1;
+    TASK(PartyMember)->unk_09 = 0x3C;
+    TASK(PartyMember)->header.mode += 1;
     SND_SEPlay(0x100);
 }
 
@@ -22,17 +22,17 @@ MATCH void func_801EED60(void) {
 
     func_801EF6F8();
     func_801EF8EC();
-    timer          = g_Task->unk_09 - 1;
-    g_Task->unk_09 = timer;
+    timer                     = TASK(PartyMember)->unk_09 - 1;
+    TASK(PartyMember)->unk_09 = timer;
     if (timer == 0) {
-        g_Task->header.mode = g_Task->header.mode + 1;
+        TASK(PartyMember)->header.mode = TASK(PartyMember)->header.mode + 1;
     }
 }
 
 MATCH void func_801EEDCC(void) {
     if (func_801EF8EC() == 0) {
-        g_Task->unk_09      = 4;
-        g_Task->header.mode = g_Task->header.mode + 1;
+        TASK(PartyMember)->unk_09      = 4;
+        TASK(PartyMember)->header.mode = TASK(PartyMember)->header.mode + 1;
     }
 }
 
@@ -44,11 +44,11 @@ MATCH void func_801EEE24(void) {
     *radius += 0x40;
     D_801EFA9C.offset += 96;
     func_801EF254();
-    timer          = g_Task->unk_09 - 1;
-    g_Task->unk_09 = timer;
+    timer                     = TASK(PartyMember)->unk_09 - 1;
+    TASK(PartyMember)->unk_09 = timer;
     if (timer == 0) {
-        g_Task->unk_09 = 120;
-        g_Task->header.mode += 1;
+        TASK(PartyMember)->unk_09 = 120;
+        TASK(PartyMember)->header.mode += 1;
         SND_SEPlay(EMI_SE_ID(SND_BANK_COMMON, 1));
     }
 }
@@ -59,11 +59,11 @@ MATCH void func_801EEEC4(void) {
     D_801EFA9C.radius = ((g_FrameCount & 0x1) * 16) + 256;
     D_801EFA9C.angle -= ANGLE_45;
     func_801EF254();
-    count          = g_Task->unk_09 - 1;
-    g_Task->unk_09 = count;
+    count                     = TASK(PartyMember)->unk_09 - 1;
+    TASK(PartyMember)->unk_09 = count;
     if (!(count & BYTE_MASK)) {
-        g_Task->unk_09 = 4;
-        g_Task->header.mode += 1;
+        TASK(PartyMember)->unk_09 = 4;
+        TASK(PartyMember)->header.mode += 1;
         Battle_MarkDamaged(g_Battle.target_selector);
         SND_SEPlay(EMI_SE_ID(SND_BANK_COMMON, 0x02));
     }
@@ -77,10 +77,10 @@ MATCH void func_801EEF80(void) {
     *radius -= 0x40;
     D_801EFA9C.offset -= 96;
     func_801EF254();
-    timer          = g_Task->unk_09 - 1;
-    g_Task->unk_09 = timer;
+    timer                     = TASK(PartyMember)->unk_09 - 1;
+    TASK(PartyMember)->unk_09 = timer;
     if (timer == 0) {
-        g_Task->header.mode += 1;
+        TASK(PartyMember)->header.mode += 1;
     }
 }
 

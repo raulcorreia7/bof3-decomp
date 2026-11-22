@@ -10,7 +10,7 @@ MATCH void func_801EEC28(void) {
     PartyMember*  saved_battler;
     u8            i;
 
-    SYS_DISPATCH_BYTE(handlers.steps, g_Task->header.mode);
+    SYS_DISPATCH_BYTE(handlers.steps, TASK(PartyMember)->header.mode);
 
     BMAGIC_RUN_EFFECT_SLOTS(BMAGIC_EFFECT_SLOTS, func_801EF36C);
 }
@@ -26,26 +26,26 @@ MATCH void func_801EED30(void) {
     for (i = 0; i < 11; i++) {
         D_801F0FD4[i] = 0;
     }
-    g_Task->facing     = g_BattleEffectBattler->facing;
-    work               = g_Task;
-    actor              = g_BattleEffectBattler;
-    work->pos.x.fixed  = actor->pos.x.fixed;
-    work->pos.y.fixed  = actor->pos.y.fixed;
-    z                  = actor->pos.z.fixed;
-    work->param.unk_0B = 0;
-    work->pos.z.fixed  = z;
-    g_Task->header.mode += 1;
+    TASK(PartyMember)->facing = g_BattleEffectBattler->facing;
+    work                      = g_Task;
+    actor                     = g_BattleEffectBattler;
+    work->pos.x.fixed         = actor->pos.x.fixed;
+    work->pos.y.fixed         = actor->pos.y.fixed;
+    z                         = actor->pos.z.fixed;
+    work->param.unk_0B        = 0;
+    work->pos.z.fixed         = z;
+    TASK(PartyMember)->header.mode += 1;
     slot                                           = Battle_AllocEffect(1, 0x3F);
     g_BattleEffects[slot & BYTE_MASK].target.party = g_Task;
     g_BattleEffects[slot & BYTE_MASK].header.mode  = 0;
-    g_Task->param.unk_0B += 1;
+    TASK(PartyMember)->param.unk_0B += 1;
     SND_SEQueueSelection(0x100);
 }
 
 MATCH void func_801EEE78(void) {
-    if (g_Task->param.unk_0B == 0) {
+    if (TASK(PartyMember)->param.unk_0B == 0) {
         func_801DE8C0(1, 0x3C, UI_MessageGetText(0x14U));
-        g_Task->header.mode += 1;
+        TASK(PartyMember)->header.mode += 1;
     }
 }
 
@@ -64,7 +64,7 @@ MATCH void func_801EEF74(void) {
     Magic058Steps handlers;
 
     handlers = D_801EEC10;
-    SYS_DISPATCH_BYTE(handlers.steps, g_Task->header.step);
+    SYS_DISPATCH_BYTE(handlers.steps, TASK(PartyMember)->header.step);
     BMAGIC_DRAW_IF_ALIVE(func_801EF74C);
 }
 
@@ -73,16 +73,16 @@ MATCH void func_801EF008(void) {
     PartyMember* actor;
     s32          z;
 
-    g_Task->facing    = g_BattleEffectBattler->facing;
-    work              = g_Task;
-    actor             = g_BattleEffectBattler;
-    work->pos.x.fixed = actor->pos.x.fixed;
-    work->pos.y.fixed = actor->pos.y.fixed;
-    z                 = actor->pos.z.fixed;
-    work->timer       = 16;
-    work->unk_0C      = 8;
-    work->pos.z.fixed = z;
-    g_Task->header.step += 1;
+    TASK(PartyMember)->facing = g_BattleEffectBattler->facing;
+    work                      = g_Task;
+    actor                     = g_BattleEffectBattler;
+    work->pos.x.fixed         = actor->pos.x.fixed;
+    work->pos.y.fixed         = actor->pos.y.fixed;
+    z                         = actor->pos.z.fixed;
+    work->timer               = 16;
+    work->unk_0C              = 8;
+    work->pos.z.fixed         = z;
+    TASK(PartyMember)->header.step += 1;
 }
 
 MATCH void func_801EF080(void) {
@@ -90,8 +90,8 @@ MATCH void func_801EF080(void) {
     u8 j;
     u8 slot;
 
-    g_Task->unk_0C += 32;
-    g_ScratchPadHalves = g_Task->unk_0C;
+    TASK(PartyMember)->unk_0C += 32;
+    g_ScratchPadHalves = TASK(PartyMember)->unk_0C;
     for (i = 0; i < 8; i++) {
         if (D_801F0FD4[i + 3] == 0 && !(Battle_SlotIsBlocked((u8)(i + 3)) & BYTE_MASK) && func_801EFDD4(&g_BattleEnemyBattlers[i]) && g_Battle.active_battler != i + 3) {
             D_801F0FD4[i + 3] = -1;
@@ -118,8 +118,8 @@ MATCH void func_801EF080(void) {
             }
         }
     }
-    if (g_Task->unk_0C > 0x600) {
-        g_Task->header.step += 1;
+    if (TASK(PartyMember)->unk_0C > 0x600) {
+        TASK(PartyMember)->header.step += 1;
     }
 }
 
@@ -133,7 +133,7 @@ MATCH void func_801EF3B0(void) {
     Magic058Steps handlers;
 
     handlers = D_801EEC1C;
-    SYS_DISPATCH_BYTE(handlers.steps, g_Task->header.step);
+    SYS_DISPATCH_BYTE(handlers.steps, TASK(PartyMember)->header.step);
     BMAGIC_DRAW_IF_RUNNING(func_801EFA78);
 }
 
@@ -141,8 +141,8 @@ MATCH void func_801EF454(void) {
     PartyMember* work;
     u8           count;
 
-    count          = g_Task->unk_09 - 1;
-    g_Task->unk_09 = count;
+    count                     = TASK(PartyMember)->unk_09 - 1;
+    TASK(PartyMember)->unk_09 = count;
     if (count == 0) {
         work = g_Task;
         /* kept: retail reloads the battler row at each access; a PartyMember* local changes the bytes. */
@@ -155,11 +155,11 @@ MATCH void func_801EF454(void) {
             work->pos.y.fixed = ENEMY_COMBATANT(work->param.unk_0B).pos.y.fixed;
             work->pos.z.fixed = ENEMY_COMBATANT(work->param.unk_0B).pos.z.fixed;
         }
-        g_Task->unk_0C = 16;
-        g_Task->unk_18 = 16;
-        g_Task->timer  = 16;
-        g_Task->header.step += 1;
-        g_Task->header.step += 1;
+        TASK(PartyMember)->unk_0C = 16;
+        TASK(PartyMember)->unk_18 = 16;
+        TASK(PartyMember)->timer  = 16;
+        TASK(PartyMember)->header.step += 1;
+        TASK(PartyMember)->header.step += 1;
     }
 }
 
@@ -198,8 +198,8 @@ MATCH void func_801EF74C(void) {
     s32      i;
     s32      tpage;
 
-    g_ScratchPad.cells.halves[0] = g_Task->unk_0C + 0x80;
-    g_ScratchPad.cells.halves[1] = g_Task->unk_0C;
+    g_ScratchPad.cells.halves[0] = TASK(PartyMember)->unk_0C + 0x80;
+    g_ScratchPad.cells.halves[1] = TASK(PartyMember)->unk_0C;
     g_ScratchPadVectors[1].vx    = FIXED_MUL(rsin(0), g_ScratchPad.cells.halves[0]);
     g_ScratchPadVectors[1].vy    = FIXED_MUL(rcos(0), g_ScratchPad.cells.halves[0]);
     g_ScratchPadVectors[3].vx    = FIXED_MUL(rsin(0), g_ScratchPad.cells.halves[1]);
@@ -235,9 +235,9 @@ MATCH void func_801EFA78(void) {
     s32      i;
     s32      tpage;
 
-    g_ScratchPad.cells.halves[2] = g_Task->timer * 6;
-    g_ScratchPad.cells.halves[0] = g_Task->unk_0C + 0x40;
-    g_ScratchPad.cells.halves[1] = g_Task->unk_0C;
+    g_ScratchPad.cells.halves[2] = TASK(PartyMember)->timer * 6;
+    g_ScratchPad.cells.halves[0] = TASK(PartyMember)->unk_0C + 0x40;
+    g_ScratchPad.cells.halves[1] = TASK(PartyMember)->unk_0C;
     g_ScratchPadVectors[1].vx    = FIXED_MUL(rsin(0), g_ScratchPad.cells.halves[0]);
     g_ScratchPadVectors[1].vy    = FIXED_MUL(rcos(0), g_ScratchPad.cells.halves[0]);
     g_ScratchPadVectors[3].vx    = FIXED_MUL(rsin(0), g_ScratchPad.cells.halves[1]);
@@ -275,8 +275,8 @@ MATCH s32 func_801EFDD4(void* battler) {
     s32    record_y;
 
     actor      = battler;
-    dx         = (actor->pos.x.fixed >> 9) - (g_Task->pos.x.fixed >> 9);
-    record_y   = g_Task->pos.y.fixed >> 9;
+    dx         = (actor->pos.x.fixed >> 9) - (TASK(PartyMember)->pos.x.fixed >> 9);
+    record_y   = TASK(PartyMember)->pos.y.fixed >> 9;
     dz         = (actor->pos.y.fixed >> 9) - record_y;
     horizontal = dx * dx + dz * dz;
     radius     = g_ScratchPadHalves;

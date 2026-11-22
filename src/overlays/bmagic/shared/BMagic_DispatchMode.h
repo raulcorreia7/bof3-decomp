@@ -10,5 +10,5 @@ MATCH void BMagic_DispatchMode(void) {
     MagicModuleSteps handlers;
 
     handlers = D_801EEC00.steps;
-    handlers.steps[g_Task->header.mode]();
+    handlers.steps[TASK(PartyMember)->header.mode]();
 }

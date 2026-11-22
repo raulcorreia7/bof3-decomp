@@ -7,9 +7,9 @@
 #define EFFECT_TIMER_RELOAD func_800AFF98
 #endif
 /* The statements of Effect_SetDuration; each member has no locals. */
-#define BMAGIC_RELOAD_TIMER_AND_STEP()            \
-    g_Task->unk_09      = EFFECT_TIMER_RELOAD();  \
-    g_Task->header.step = g_Task->header.step + 1
+#define BMAGIC_RELOAD_TIMER_AND_STEP()                                  \
+    TASK(PartyMember)->unk_09      = EFFECT_TIMER_RELOAD();             \
+    TASK(PartyMember)->header.step = TASK(PartyMember)->header.step + 1
 
 MATCH void Effect_SetDuration(void) {
     BMAGIC_RELOAD_TIMER_AND_STEP();

@@ -9,9 +9,9 @@ __asm__(".include \"include/match/macro.inc\"\n");
 MATCH void func_801EEC80(void) {
     PartyMember* saved_work;
 
-    g_Task->pos.x.fixed = D_801EC2E0->target.party->pos.x.fixed;
-    g_Task->pos.y.fixed = D_801EC2E0->target.party->pos.y.fixed;
-    g_Task->pos.z.fixed = D_801EC2E0->target.party->pos.z.fixed + 0x01000000;
+    TASK(PartyMember)->pos.x.fixed = D_801EC2E0->target.party->pos.x.fixed;
+    TASK(PartyMember)->pos.y.fixed = D_801EC2E0->target.party->pos.y.fixed;
+    TASK(PartyMember)->pos.z.fixed = D_801EC2E0->target.party->pos.z.fixed + 0x01000000;
     func_801EEFF4();
     saved_work = g_Task;
     g_Task     = D_801EC2E0->target.party;
@@ -28,7 +28,7 @@ MATCH void func_801EED2C(void) {
     if (Script_AnimStepOnce() & BYTE_MASK) {
         g_Task        = saved;
         saved->unk_09 = 0x78;
-        g_Task->header.mode++;
+        TASK(PartyMember)->header.mode++;
         SND_SEPlay(EMI_SE_ID(SND_BANK_COMMON, 0x00));
     }
     g_Task = saved;
@@ -39,10 +39,10 @@ MATCH void func_801EEDB0(void) {
 
     func_801EF258();
     func_801EF118();
-    timer          = g_Task->unk_09 - 1;
-    g_Task->unk_09 = timer;
+    timer                     = TASK(PartyMember)->unk_09 - 1;
+    TASK(PartyMember)->unk_09 = timer;
     if (timer == 0) {
-        g_Task->header.mode = g_Task->header.mode + 1;
+        TASK(PartyMember)->header.mode = TASK(PartyMember)->header.mode + 1;
         func_800A9820(g_Battle.target_selector);
         SND_SEPlay(EMI_SE_ID(SND_BANK_COMMON, 0x01));
     }
@@ -116,8 +116,8 @@ MATCH void func_801EF020(BMagicStreakSegment* record) {
     record->unk_01 = 0;
     record->life   = 16;
     offset         = (RANDOM_MASK(0x1FF) - 0x100) << 8;
-    setVector(&record->head, g_Task->pos.x.fixed + offset + offset, g_Task->pos.y.fixed + 0x20000, g_Task->pos.z.fixed);
-    setVector(&record->tail, g_Task->pos.x.fixed + offset, g_Task->pos.y.fixed, g_Task->pos.z.fixed);
+    setVector(&record->head, TASK(PartyMember)->pos.x.fixed + offset + offset, TASK(PartyMember)->pos.y.fixed + 0x20000, TASK(PartyMember)->pos.z.fixed);
+    setVector(&record->tail, TASK(PartyMember)->pos.x.fixed + offset, TASK(PartyMember)->pos.y.fixed, TASK(PartyMember)->pos.z.fixed);
     record->head_color.r = RANDOM_MASK(1) << 7;
     record->head_color.g = RANDOM_MASK(1) << 7;
     record->head_color.b = RANDOM_MASK(1) << 7;

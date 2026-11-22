@@ -12,39 +12,39 @@ MATCH void Fishing_FishSwim(void) {
     s32           delta;
     s16           turn;
 
-    if (FISHING_STATE->step_timer == 0) {
+    if (TASK(FishingState)->step_timer == 0) {
         if (Fishing_LureInRange() & BYTE_MASK) {
-            FISHING_STATE->handler_index = 3;
+            TASK(FishingState)->handler_index = 3;
         } else {
             roll = rand();
             if (D_801E3200 == 0) {
-                work = FISHING_STATE;
+                work = TASK(FishingState);
                 if (work->bounce.half.key == 0 && !(roll & 0x3) && D_80145E92[0] != 4 && work->cue_index != FISHING_IDLE_CUE) {
                     D_801E3200 = 1;
                     Area_SceneSelectRecord(*(u16*)(D_801E2ACA + work->cue_index * sizeof(FishingSceneCue)));
                     if (!(*TASK(u8) & ACTOR_FLAG_OFFSCREEN)) {
                         SND_SEPlay(EMI_SE_ID(SND_BANK_AREA, 6));
                     }
-                    FISHING_STATE->flags &= ~ACTOR_FLAG_SEMI_TRANSPARENT;
-                    FISHING_STATE->state_2A   = 0;
-                    FISHING_STATE->counter_48 = 0;
+                    TASK(FishingState)->flags &= ~ACTOR_FLAG_SEMI_TRANSPARENT;
+                    TASK(FishingState)->state_2A   = 0;
+                    TASK(FishingState)->counter_48 = 0;
                     Script_Select(0);
-                    FISHING_STATE->handler_index++;
+                    TASK(FishingState)->handler_index++;
                     return;
                 }
             }
             if (roll & 0x4) {
                 if (roll & 0x8) {
-                    FISHING_STATE->counter_08 = (FISHING_STATE->counter_08 + 1) & 0x7;
+                    TASK(FishingState)->counter_08 = (TASK(FishingState)->counter_08 + 1) & 0x7;
                 } else {
-                    FISHING_STATE->counter_08 = (FISHING_STATE->counter_08 - 1) & 0x7;
+                    TASK(FishingState)->counter_08 = (TASK(FishingState)->counter_08 - 1) & 0x7;
                 }
             }
             func_801E03F8();
-            FISHING_STATE->state_2A = D_801E2331[FISHING_STATE->counter_08 * 2];
-            Script_Request(D_801E2330[FISHING_STATE->counter_08 * 2]);
-            turn = Area_HeightSample(FISHING_STATE->motion.unk_34 + FISHING_STATE->pos_x * 0x10, FISHING_STATE->y_38.pos_y + FISHING_STATE->cursor_10 * 0x10);
-            work = FISHING_STATE;
+            TASK(FishingState)->state_2A = D_801E2331[TASK(FishingState)->counter_08 * 2];
+            Script_Request(D_801E2330[TASK(FishingState)->counter_08 * 2]);
+            turn = Area_HeightSample(TASK(FishingState)->motion.unk_34 + TASK(FishingState)->pos_x * 0x10, TASK(FishingState)->y_38.pos_y + TASK(FishingState)->cursor_10 * 0x10);
+            work = TASK(FishingState);
             if (work->bounce.half.key < turn) {
                 work->step_14 = (turn - work->bounce.half.key) / 16;
             } else {
@@ -63,11 +63,11 @@ MATCH void Fishing_FishSwim(void) {
                 }
             }
             if (roll & 0x40) {
-                FISHING_STATE->pos_x     = 0;
-                FISHING_STATE->cursor_10 = 0;
-                FISHING_STATE->step_14   = 0;
+                TASK(FishingState)->pos_x     = 0;
+                TASK(FishingState)->cursor_10 = 0;
+                TASK(FishingState)->step_14   = 0;
             }
-            FISHING_STATE->step_timer = 0x10;
+            TASK(FishingState)->step_timer = 0x10;
         }
     }
     Fishing_MoveFish();

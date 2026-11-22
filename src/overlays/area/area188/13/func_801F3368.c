@@ -7,7 +7,7 @@ MATCH void func_801F3368(void) {
     screen_x         = g_Task->screen_x + 0x20;
     g_Task->screen_x = screen_x;
     GFX_DrawColorFan(&g_Task->unk_64, (s16)screen_x, 6);
-    ACTOR_COUNT_DOWN(mode, timer);
+    ACTOR_COUNT_DOWN(TASK(Actor), mode, timer);
     if (!(mode & BYTE_MASK)) {
         g_Task->timer = 128;
         g_Task->header.mode += 1;

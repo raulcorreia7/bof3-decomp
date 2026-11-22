@@ -7,15 +7,15 @@ MATCH void func_800ADE6C(void) {
     s32          slot;
 
     if ((g_UiPanelTasks[19].active & 0x1) == 0) {
-        BATTLE_WORK->header.mode = 2;
-        BATTLE_WORK->header.step = 0;
+        TASK(PartyMember)->header.mode = 2;
+        TASK(PartyMember)->header.step = 0;
         return;
     }
     if ((s16)g_UiPanelTasks[19].u.addr.unk_1E != (s16)g_UiPanelTasks[19].u.battle.row_base) {
-        BATTLE_WORK->header.mode = 0;
+        TASK(PartyMember)->header.mode = 0;
         return;
     }
-    work                 = BATTLE_WORK;
+    work                 = TASK(PartyMember);
     work->screen_x.value = g_UiPanelTasks[19].pos.x + (work->timer * 0x16 + 0x44);
     work->screen_y.value = g_UiPanelTasks[19].pos.y + (work->unk_09 * 0x20 + 0x22);
     rows                 = D_80145518;

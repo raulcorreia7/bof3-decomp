@@ -69,37 +69,37 @@ extern u16                D_80145A54[];
         if (g_Battle.target_selector < BATTLE_PARTY_CHARACTERS_COUNT) {                                             \
             if (g_Game.members[g_Battle.target_selector].header.mode != 6) {                                        \
                 if (g_Battle.active_battler < BATTLE_PARTY_CHARACTERS_COUNT) {                                      \
-                    Script_Select(g_Task->facing + 12);                                                             \
+                    Script_Select(TASK(PartyMember)->facing + 12);                                                  \
                     count                = --g_GfxTransferCount;                                                    \
                     (&D_80145A04)[count] = 0;                                                                       \
                     D_80145A54[count]    = 0;                                                                       \
                     (&D_80145A7C)[count] = 0;                                                                       \
                 } else {                                                                                            \
-                    g_Task->unk_4B = 0xFF;                                                                          \
+                    TASK(PartyMember)->unk_4B = 0xFF;                                                               \
                     func_801E257C(g_Battle.active_battler, 2);                                                      \
                 }                                                                                                   \
-                g_Task->unk_09 = func_800AFF98();                                                                   \
-                g_Task->header.step++;                                                                              \
+                TASK(PartyMember)->unk_09 = func_800AFF98();                                                        \
+                TASK(PartyMember)->header.step++;                                                                   \
             }                                                                                                       \
         } else {                                                                                                    \
             if (g_BattleEnemyBattlers[g_Battle.target_selector - BATTLE_PARTY_CHARACTERS_COUNT].header.mode != 6) { \
                 if (g_Battle.active_battler < BATTLE_PARTY_CHARACTERS_COUNT) {                                      \
-                    Script_Select(g_Task->facing + 12);                                                             \
+                    Script_Select(TASK(PartyMember)->facing + 12);                                                  \
                     count                = --g_GfxTransferCount;                                                    \
                     (&D_80145A04)[count] = 0;                                                                       \
                     D_80145A54[count]    = 0;                                                                       \
                     (&D_80145A7C)[count] = 0;                                                                       \
                 } else {                                                                                            \
-                    g_Task->unk_4B = 0xFF;                                                                          \
+                    TASK(PartyMember)->unk_4B = 0xFF;                                                               \
                     func_801E257C(g_Battle.active_battler, 2);                                                      \
                 }                                                                                                   \
-                g_Task->unk_09 = func_800AFF98();                                                                   \
-                g_Task->header.step++;                                                                              \
+                TASK(PartyMember)->unk_09 = func_800AFF98();                                                        \
+                TASK(PartyMember)->header.step++;                                                                   \
             }                                                                                                       \
         }                                                                                                           \
     } else {                                                                                                        \
         g_BattleEffectBattler->param.unk_0B = 0xFF;                                                                 \
-        g_Task->header.step                 = (ABORT_STEP);                                                         \
+        TASK(PartyMember)->header.step      = (ABORT_STEP);                                                         \
     }
 
 /* The columns of g_BattleEffects: the retail code forms one slot base per store. */

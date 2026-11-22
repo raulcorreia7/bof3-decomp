@@ -11,9 +11,9 @@ MATCH void func_801D4E70(void) {
     s32           mask;
     u8            fish;
 
-    FISHING_STATE->step_timer--;
+    TASK(FishingState)->step_timer--;
     Fishing_DrawCatchBar(0, FISHING_CATCH_BAR_Y);
-    key   = FISHING_STATE->bounce.half.key;
+    key   = TASK(FishingState)->bounce.half.key;
     fish  = g_FishingBestCatch[key];
     index = key & BYTE_MASK;
     if (fish == 0) {
@@ -21,7 +21,7 @@ MATCH void func_801D4E70(void) {
         fish  = 0;
     }
     Fishing_DrawCatchRow(index, fish, 0);
-    work = FISHING_STATE;
+    work = TASK(FishingState);
     if (work->counter_08 == 0) {
         key_a = work->bounce.half.key;
         if (g_FishingBestCatch[key_a] != 0) {
@@ -43,10 +43,10 @@ MATCH void func_801D4E70(void) {
     Fishing_DrawWindowFrame(MENU_HEADER_X, MENU_HEADER_Y, MENU_HEADER_WIDTH, MENU_HEADER_HEIGHT, 0);
     mask = 0;
     if (D_80145E93[0] >= 3) {
-        mask = (1 << FISHING_STATE->cue_index) & BYTE_MASK;
+        mask = (1 << TASK(FishingState)->cue_index) & BYTE_MASK;
     }
     func_801D7C10(FISHING_SHOP_COLUMNS_X, FISHING_SHOP_COLUMNS_Y, mask);
-    if (FISHING_STATE->step_timer == 0) {
-        FISHING_STATE->handler_index = 8;
+    if (TASK(FishingState)->step_timer == 0) {
+        TASK(FishingState)->handler_index = 8;
     }
 }

@@ -8,7 +8,7 @@ MATCH void func_801DDB74(void) {
     if (g_AreaCameraMoving == 0) {
         counter = &D_8014403D;
         *counter += 1;
-        FISHING_STATE->mode_index = 1;
-        FISHING_STATE->sub_index  = 0;
+        TASK(FishingState)->mode_index = 1;
+        TASK(FishingState)->sub_index  = 0;
     }
 }

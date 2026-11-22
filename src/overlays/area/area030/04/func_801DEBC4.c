@@ -12,22 +12,22 @@ MATCH void func_801DEBC4(void) {
 
     if ((Script_AnimStepLoop() & BYTE_MASK) != 0) {
         D_801E3200 = 0;
-        Area_SceneSelectRecord(*(u16*)(g_FishingSpecies + FISHING_STATE->cue_index * 0x24));
+        Area_SceneSelectRecord(*(u16*)(g_FishingSpecies + TASK(FishingState)->cue_index * 0x24));
 
-        work        = FISHING_STATE;
+        work        = TASK(FishingState);
         work->flags = (work->flags | ACTOR_FLAG_SEMI_TRANSPARENT);
 
-        panel                     = FISHING_STATE;
-        panel->state_2A           = D_801E2331[panel->counter_08 * 2];
-        FISHING_STATE->counter_48 = 2;
+        panel                          = TASK(FishingState);
+        panel->state_2A                = D_801E2331[panel->counter_08 * 2];
+        TASK(FishingState)->counter_48 = 2;
 
-        Script_Select(D_801E2330[FISHING_STATE->counter_08 * 2]);
+        Script_Select(D_801E2330[TASK(FishingState)->counter_08 * 2]);
 
-        state                        = FISHING_STATE;
-        state->step_14               = -2;
-        state->pos_x                 = 0;
-        state->cursor_10             = 0;
-        state->step_timer            = 0x10;
-        FISHING_STATE->handler_index = 1;
+        state                             = TASK(FishingState);
+        state->step_14                    = -2;
+        state->pos_x                      = 0;
+        state->cursor_10                  = 0;
+        state->step_timer                 = 0x10;
+        TASK(FishingState)->handler_index = 1;
     }
 }

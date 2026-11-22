@@ -21,12 +21,12 @@ MATCH void func_801EEC78(void) {
     g_BattleEffects[index].target_index.target_index = 0x100;
     D_801EC388[index].value                          = 0x100;
     D_801EC2E0->target.effect                        = &g_BattleEffects[index];
-    g_Task->header.mode += 1;
+    TASK(PartyMember)->header.mode += 1;
 }
 
 MATCH void func_801EEDE4(void) {
     if (D_801EC2E0->target.party->unk_09 >= 0x28) {
-        g_Task->header.mode++;
+        TASK(PartyMember)->header.mode++;
     }
 }
 
@@ -48,8 +48,8 @@ MATCH void func_801EEEBC(void) {
     work->unk_10 += work->unk_20;
     draw = g_Task;
     func_801EF1FC(draw->unk_0C >> 16, draw->unk_10 >> 16, (draw->unk_18 << 15) >> 16, draw->unk_14, draw->unk_60, draw->unk_58);
-    if (g_Task->unk_09 >= 0xB) {
-        g_Task->header.mode++;
+    if (TASK(PartyMember)->unk_09 >= 0xB) {
+        TASK(PartyMember)->header.mode++;
     }
 }
 
@@ -64,7 +64,7 @@ MATCH void func_801EEF84(void) {
     work->unk_14 += 0x20;
     draw = g_Task;
     func_801EF1FC(draw->unk_0C >> 16, draw->unk_10 >> 16, (draw->unk_18 << 15) >> 16, draw->unk_14, draw->unk_60, draw->unk_58);
-    if (g_Task->unk_09 >= 0x29) {
+    if (TASK(PartyMember)->unk_09 >= 0x29) {
         Effect_Reset();
     }
 }

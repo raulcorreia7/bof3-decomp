@@ -47,5 +47,5 @@ MATCH void Battle_StartCharacterLoad(void) {
     } else {
         EMI_ArchiveLoad(D_800B4A68[g_EmiLoadedCharacterIndex]);
     }
-    g_Task->header.mode++;
+    TASK(PartyMember)->header.mode++;
 }

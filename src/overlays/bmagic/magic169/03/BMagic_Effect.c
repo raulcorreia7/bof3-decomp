@@ -11,8 +11,8 @@ MATCH void func_801EEC38(void) {
     u8            i;
 
     handlers = D_801EEC04;
-    SYS_DISPATCH_BYTE(handlers.steps, g_Task->header.mode);
-    if (g_Task->header.flags != 0 && g_Task->header.mode != 0) {
+    SYS_DISPATCH_BYTE(handlers.steps, TASK(PartyMember)->header.mode);
+    if (TASK(PartyMember)->header.flags != 0 && TASK(PartyMember)->header.mode != 0) {
         func_800AF764();
         func_801EF070();
     }
@@ -26,14 +26,14 @@ MATCH void func_801EED8C(void) {
 
     BMAGIC_CLEAR_EFFECTS(i);
     func_800AFD9C();
-    g_Task->pos.z.fixed += TO_COORD(192);
+    TASK(PartyMember)->pos.z.fixed += TO_COORD(192);
     BMAGIC_BRIGHTEN_PALETTE_ROW(dst, src, i);
     MEM(u16, AREA_PALETTE_UPLOAD_ROW(AREA_PALETTE_BATL_OVR_ROW)) = MEM(u16, AREA_PALETTE_ARENA_ROW(AREA_PALETTE_BATL_OVR_ROW));
     g_GfxPalettePending                                          = 1;
     SND_SEQueueSelection(EMI_SE_ID(SND_BANK_COMMON, 0x00));
-    g_Task->unk_09       = 0;
-    g_Task->param.unk_0B = 0;
-    g_Task->header.mode += 1;
+    TASK(PartyMember)->unk_09       = 0;
+    TASK(PartyMember)->param.unk_0B = 0;
+    TASK(PartyMember)->header.mode += 1;
 }
 
 MATCH void func_801EEEB0(void) {
@@ -42,7 +42,7 @@ MATCH void func_801EEEB0(void) {
     u32          slot;
     PartyMember* work;
 
-    if (++g_Task->unk_09 == 16) {
+    if (++TASK(PartyMember)->unk_09 == 16) {
         if (g_Battle.target_selector & BATTLE_TARGET_PARTY_SIDE) {
             i = 0;
             if (g_Battle.party_count != 0) {
@@ -53,23 +53,23 @@ MATCH void func_801EEEB0(void) {
                     g_BattleEffects[slot].unk_04       = i;
                     g_BattleEffects[slot].arg.unk_09   = row * 0x28 + 1;
                     g_BattleEffects[slot].target.party = work;
-                    g_Task->param.unk_0B += 1;
+                    TASK(PartyMember)->param.unk_0B += 1;
                     row++, i++;
                 } while (i < g_Battle.party_count);
             }
         }
-        g_Task->header.mode += 1;
+        TASK(PartyMember)->header.mode += 1;
     }
 }
 
 MATCH void func_801EEFE0(void) {
     u8 timer;
 
-    if (g_Task->param.unk_0B == 0) {
-        timer          = g_Task->unk_09 - 1;
-        g_Task->unk_09 = timer;
+    if (TASK(PartyMember)->param.unk_0B == 0) {
+        timer                     = TASK(PartyMember)->unk_09 - 1;
+        TASK(PartyMember)->unk_09 = timer;
         if (!(timer & BYTE_MASK)) {
-            g_Task->header.mode += 1;
+            TASK(PartyMember)->header.mode += 1;
         }
     }
 }
@@ -85,12 +85,12 @@ MATCH void func_801EF070(void) {
 
     tpage = getTPage(TPAGE_DEPTH_8BIT, TPAGE_ABR_ADD, 320, 256);
     SetDrawMode((DR_MODE*)g_GfxPrimCursor, 0, 1, tpage, 0);
-    Area_CellAddPrim(g_Task->pos.x.fixed, g_Task->pos.y.fixed, 1, sizeof(DR_MODE));
+    Area_CellAddPrim(TASK(PartyMember)->pos.x.fixed, TASK(PartyMember)->pos.y.fixed, 1, sizeof(DR_MODE));
     shade  = &D_1F800006;
     prim   = (POLY_FT4*)g_GfxPrimCursor;
-    *shade = g_Task->unk_09 * 8;
-    x      = g_Task->screen_x.value;
-    y      = g_Task->screen_y.value;
+    *shade = TASK(PartyMember)->unk_09 * 8;
+    x      = TASK(PartyMember)->screen_x.value;
+    y      = TASK(PartyMember)->screen_y.value;
     SetPolyFT4(prim);
     SetSemiTrans(prim, 1);
     setXY4(prim, x - 0x38, y - 0x60, x + 0x38, y - 0x60, x - 0x38, y, x + 0x38, y);
@@ -98,7 +98,7 @@ MATCH void func_801EF070(void) {
     prim->clut  = GetClut(0, 506);
     setUVWH(prim, 8, 8, 112, 96);
     setRGB0(prim, *shade, *shade, *shade);
-    Area_CellAddPrim(g_Task->pos.x.fixed, g_Task->pos.y.fixed, 1, sizeof(POLY_FT4));
+    Area_CellAddPrim(TASK(PartyMember)->pos.x.fixed, TASK(PartyMember)->pos.y.fixed, 1, sizeof(POLY_FT4));
 }
 
 /* func_801EF210 */
@@ -117,16 +117,16 @@ MATCH void func_801EF2CC(void) {
     PartyMember* actor;
     PartyMember* work;
 
-    count          = g_Task->unk_09 - 1;
-    g_Task->unk_09 = count;
+    count                     = TASK(PartyMember)->unk_09 - 1;
+    TASK(PartyMember)->unk_09 = count;
     if (count == 0) {
-        actor          = &g_Game.members[g_Task->unk_04];
-        g_Task->facing = actor->facing;
-        WorldPos_Copy(&g_Task->pos, &actor->pos);
-        g_Task->param.unk_0B = 0;
-        g_Task->unk_09       = 8;
-        g_Task->timer        = 0;
-        g_Task->header.step += 1;
+        actor                     = &g_Game.members[TASK(PartyMember)->unk_04];
+        TASK(PartyMember)->facing = actor->facing;
+        WorldPos_Copy(&TASK(PartyMember)->pos, &actor->pos);
+        TASK(PartyMember)->param.unk_0B = 0;
+        TASK(PartyMember)->unk_09       = 8;
+        TASK(PartyMember)->timer        = 0;
+        TASK(PartyMember)->header.step += 1;
         i = 0;
         do {
             slot = BMagic_AllocEffect();
@@ -136,7 +136,7 @@ MATCH void func_801EF2CC(void) {
                 BMAGIC_EFFECT_SLOTS[slot].unk_0B       = i;
                 BMAGIC_EFFECT_SLOTS[slot].arg.unk_09   = ((i & BYTE_MASK) >> 2) + 0x10;
                 BMAGIC_EFFECT_SLOTS[slot].target.party = work;
-                g_Task->param.unk_0B += 1;
+                TASK(PartyMember)->param.unk_0B += 1;
             }
             i++;
         } while (i < 24);
@@ -154,25 +154,25 @@ MATCH void func_801EF444(void) {
     battler      = &g_Game.members[work->unk_04];
     if (!(timer & BYTE_MASK)) {
         GFX_PaletteFreeFadeTarget(battler);
-        g_Task->timer  = GFX_PaletteAllocFade(battler, 0, 0, 0, 1);
-        g_Task->unk_09 = 8;
-        g_Task->header.step += 1;
+        TASK(PartyMember)->timer  = GFX_PaletteAllocFade(battler, 0, 0, 0, 1);
+        TASK(PartyMember)->unk_09 = 8;
+        TASK(PartyMember)->header.step += 1;
     }
 }
 
 MATCH void func_801EF4FC(void) {
     s32 cue;
 
-    g_PaletteFades[g_Task->timer].offset.r++;
-    g_PaletteFades[g_Task->timer].offset.g++;
-    g_PaletteFades[g_Task->timer].offset.b++;
-    if (--g_Task->unk_09 == 0) {
+    g_PaletteFades[TASK(PartyMember)->timer].offset.r++;
+    g_PaletteFades[TASK(PartyMember)->timer].offset.g++;
+    g_PaletteFades[TASK(PartyMember)->timer].offset.b++;
+    if (--TASK(PartyMember)->unk_09 == 0) {
         cue = EMI_SE_ID(SND_BANK_COMMON, 0x02);
-        if (g_Task->unk_04 & 0x1) {
+        if (TASK(PartyMember)->unk_04 & 0x1) {
             cue = EMI_SE_ID(SND_BANK_COMMON, 0x01);
         }
         SND_SEQueueSelection(cue);
-        g_Task->header.step++;
+        TASK(PartyMember)->header.step++;
     }
 }
 
@@ -188,25 +188,25 @@ MATCH void func_801EF688(void) {
     /* FAKE: retail frame reserves 0x10 bytes no statement uses. */
     FAKE_STACK_PADS(u8, 0x10);
 
-    unk04 = g_Task->unk_04;
-    g_PaletteFades[g_Task->timer].offset.r -= 1;
-    g_PaletteFades[g_Task->timer].offset.g -= 1;
-    g_PaletteFades[g_Task->timer].offset.b -= 1;
-    count          = g_Task->unk_09 - 1;
-    g_Task->unk_09 = count;
-    battler        = &g_Game.members[unk04];
+    unk04 = TASK(PartyMember)->unk_04;
+    g_PaletteFades[TASK(PartyMember)->timer].offset.r -= 1;
+    g_PaletteFades[TASK(PartyMember)->timer].offset.g -= 1;
+    g_PaletteFades[TASK(PartyMember)->timer].offset.b -= 1;
+    count                     = TASK(PartyMember)->unk_09 - 1;
+    TASK(PartyMember)->unk_09 = count;
+    battler                   = &g_Game.members[unk04];
     if (!(count & BYTE_MASK)) {
         GFX_PaletteFreeFadeTarget(battler);
-        Battle_FadePoisonedBattler(g_Task->unk_04);
-        g_Task->header.step += 1;
+        Battle_FadePoisonedBattler(TASK(PartyMember)->unk_04);
+        TASK(PartyMember)->header.step += 1;
     }
 }
 
 MATCH void func_801EF7D0(void) {
-    if (g_Task->param.unk_0B == 0) {
+    if (TASK(PartyMember)->param.unk_0B == 0) {
         BATTLE_ACTIVE_WORK->param.unk_0B -= 1;
-        if (Battle_SlotIsBlocked(g_Task->unk_04) & BYTE_MASK) {
-            Battle_MarkDamaged(g_Task->unk_04);
+        if (Battle_SlotIsBlocked(TASK(PartyMember)->unk_04) & BYTE_MASK) {
+            Battle_MarkDamaged(TASK(PartyMember)->unk_04);
         }
         Effect_Reset();
     }
@@ -224,25 +224,25 @@ MATCH void func_801EFA18(void) {
     s16* angle_cell;
     u8   count;
 
-    count          = g_Task->unk_09 - 1;
-    g_Task->unk_09 = count;
+    count                     = TASK(PartyMember)->unk_09 - 1;
+    TASK(PartyMember)->unk_09 = count;
     if (count == 0) {
-        g_Task->unk_0C      = 8;
-        angle_cell          = &D_1F800004;
-        phase               = g_Task->param.unk_0B & 0xF;
-        *angle_cell         = phase << 8;
-        g_Task->pos.x.fixed = g_BattleEffectBattler->pos.x.fixed + rsin(*angle_cell) * g_Task->unk_0C;
-        g_Task->pos.y.fixed = g_BattleEffectBattler->pos.y.fixed + rcos(*angle_cell) * g_Task->unk_0C;
-        g_Task->pos.z.fixed = g_BattleEffectBattler->pos.z.fixed + 0x800000;
-        speed               = ((RANDOM_MASK(3)) << 20) + 0x200000;
-        g_Task->unk_14      = speed;
-        g_Task->unk_20      = speed / 16;
-        g_Task->unk_5D      = (RANDOM_MASK(7)) + 6;
-        g_Task->unk_5E      = (RANDOM_MASK(7)) + 6;
-        g_Task->unk_5F      = (RANDOM_MASK(7)) + 6;
-        g_Task->unk_09      = 0;
-        g_Task->timer       = 16;
-        g_Task->header.step++;
+        TASK(PartyMember)->unk_0C      = 8;
+        angle_cell                     = &D_1F800004;
+        phase                          = TASK(PartyMember)->param.unk_0B & 0xF;
+        *angle_cell                    = phase << 8;
+        TASK(PartyMember)->pos.x.fixed = g_BattleEffectBattler->pos.x.fixed + rsin(*angle_cell) * TASK(PartyMember)->unk_0C;
+        TASK(PartyMember)->pos.y.fixed = g_BattleEffectBattler->pos.y.fixed + rcos(*angle_cell) * TASK(PartyMember)->unk_0C;
+        TASK(PartyMember)->pos.z.fixed = g_BattleEffectBattler->pos.z.fixed + 0x800000;
+        speed                          = ((RANDOM_MASK(3)) << 20) + 0x200000;
+        TASK(PartyMember)->unk_14      = speed;
+        TASK(PartyMember)->unk_20      = speed / 16;
+        TASK(PartyMember)->unk_5D      = (RANDOM_MASK(7)) + 6;
+        TASK(PartyMember)->unk_5E      = (RANDOM_MASK(7)) + 6;
+        TASK(PartyMember)->unk_5F      = (RANDOM_MASK(7)) + 6;
+        TASK(PartyMember)->unk_09      = 0;
+        TASK(PartyMember)->timer       = 16;
+        TASK(PartyMember)->header.step++;
     }
 }
 

@@ -13,7 +13,7 @@ MATCH void func_801F2DA0(void) {
     }
     quad->height += 0x40;
     func_801F31C8(quad);
-    ACTOR_COUNT_DOWN(count, timer);
+    ACTOR_COUNT_DOWN(TASK(Actor), count, timer);
     if (count == 0) {
         g_Task->header.mode++;
     }

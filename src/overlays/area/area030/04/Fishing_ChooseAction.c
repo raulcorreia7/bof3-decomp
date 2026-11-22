@@ -10,43 +10,43 @@ MATCH void Fishing_ChooseAction(void) {
         case PADRup:
             D_80144125 = 7;
             D_8014403D = 4;
-            FISHING_STATE->sub_index++;
+            TASK(FishingState)->sub_index++;
             break;
         case PADRleft:
-            D_80144125                = 7;
-            D_8014403D                = 4;
-            FISHING_STATE->mode_index = 9;
-            FISHING_STATE->sub_index  = 0;
+            D_80144125                     = 7;
+            D_8014403D                     = 4;
+            TASK(FishingState)->mode_index = 9;
+            TASK(FishingState)->sub_index  = 0;
             break;
         case PADRdown:
             D_80144125 = 7;
             if (g_FishingLure == 0 || g_FishingRod == 0) {
-                D_8014403D                = 4;
-                FISHING_STATE->mode_index = 9;
-                FISHING_STATE->sub_index  = 0;
+                D_8014403D                     = 4;
+                TASK(FishingState)->mode_index = 9;
+                TASK(FishingState)->sub_index  = 0;
                 break;
             }
             if (Fishing_FishStacksFull() & BYTE_MASK) {
                 if (g_FishingFullNoticeShown == 0) {
-                    g_FishingFullNoticeShown = 1;
-                    D_8014403D               = 4;
-                    FISHING_STATE->sub_index = 7;
+                    g_FishingFullNoticeShown      = 1;
+                    D_8014403D                    = 4;
+                    TASK(FishingState)->sub_index = 7;
                     break;
                 }
             } else {
                 g_FishingFullNoticeShown = 0;
             }
-            FISHING_STATE->mode_index = 2;
+            TASK(FishingState)->mode_index = 2;
             /* FAKE: the order lock steers regalloc */
             FAKE_ORDER_LOCK_BEGIN
-                FISHING_STATE->sub_index = 0;
+                TASK(FishingState)->sub_index = 0;
             FAKE_ORDER_LOCK_END;
             break;
         case PADL1:
-            D_80144125                = 7;
-            D_8014403D                = 4;
-            FISHING_STATE->mode_index = 0xA;
-            FISHING_STATE->sub_index  = 0;
+            D_80144125                     = 7;
+            D_8014403D                     = 4;
+            TASK(FishingState)->mode_index = 0xA;
+            TASK(FishingState)->sub_index  = 0;
             break;
     }
 }

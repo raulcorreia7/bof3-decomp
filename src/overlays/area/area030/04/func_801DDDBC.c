@@ -9,6 +9,6 @@ MATCH void func_801DDDBC(void) {
     D_80144125 = 7;
     D_8014419E = 3;
     D_80144199 += 1;
-    FISHING_STATE->sub_index += 1;
+    TASK(FishingState)->sub_index += 1;
     Script_AnimStepLoop();
 }

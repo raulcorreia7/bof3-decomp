@@ -3,14 +3,14 @@
 MATCH void Effect_TickCounter(void) {
     u8 counter;
 
-    counter        = g_Task->unk_09 - 1;
-    g_Task->unk_09 = counter;
+    counter                   = TASK(PartyMember)->unk_09 - 1;
+    TASK(PartyMember)->unk_09 = counter;
     if (!(counter & BYTE_MASK)) {
         BATTLE_ACTIVE_WORK->param.unk_0B -= 1;
-        g_Task->header.flags = 0;
-        g_Task->header.mode  = 0;
-        g_Task->header.step  = 0;
-        g_Task->unk_03       = 0;
-        g_Task->unk_04       = 0;
+        TASK(PartyMember)->header.flags = 0;
+        TASK(PartyMember)->header.mode  = 0;
+        TASK(PartyMember)->header.step  = 0;
+        TASK(PartyMember)->unk_03       = 0;
+        TASK(PartyMember)->unk_04       = 0;
     }
 }

@@ -1,7 +1,6 @@
 #include "area118_13.h"
 
-#ifdef NON_MATCHING
-NON_MATCHING void func_801F2C6C(void) {
+MATCH void func_801F2C6C(void) {
     u16 clock;
     u8  phase;
     u8  frames;
@@ -30,20 +29,13 @@ NON_MATCHING void func_801F2C6C(void) {
     frames = (clock & 0x7F00) >> 8;
     tick   = clock;
     frames++;
-    if (phase == 0) {
-        if (frames >= 0x1E) {
-            frames = 0;
-            tick++;
-        }
-    } else if (frames >= 0x28) {
+    if ((phase == 0 && frames >= 0x1E) || (phase != 0 && frames >= 0x28)) {
         frames = 0;
         tick++;
     }
-    D_801F59E4 = tick | (frames << 8) | (phase << 15);
-    if (tick >= 0xF) {
+    clock      = (phase << 15) | (frames << 8) | tick;
+    D_801F59E4 = clock;
+    if ((clock & 0xFF) >= 0xF) {
         g_Task->header.mode++;
     }
 }
-#else
-INCLUDE_ASM(func_801F2C6C);
-#endif

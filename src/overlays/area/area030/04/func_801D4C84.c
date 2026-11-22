@@ -7,24 +7,24 @@
 MATCH void func_801D4C84(void) {
     s32 mask;
 
-    FISHING_STATE->step_timer++;
+    TASK(FishingState)->step_timer++;
     Fishing_DrawCatchBar(0, FISHING_CATCH_BAR_Y);
-    if (g_FishingBestCatch[FISHING_STATE->bounce.half.key] != 0) {
-        Fishing_DrawCatchRow(FISHING_STATE->bounce.half.key & BYTE_MASK, g_FishingBestCatch[FISHING_STATE->bounce.half.key], 0);
+    if (g_FishingBestCatch[TASK(FishingState)->bounce.half.key] != 0) {
+        Fishing_DrawCatchRow(TASK(FishingState)->bounce.half.key & BYTE_MASK, g_FishingBestCatch[TASK(FishingState)->bounce.half.key], 0);
     } else {
         Fishing_DrawCatchRow(0xFF, 0, 0);
     }
-    if (FISHING_STATE->counter_08 == 0) {
-        if (g_FishingBestCatch[FISHING_STATE->bounce.half.key] != 0) {
-            Fishing_DrawCatchIcon(FISHING_CATCH_ICON_X - FISHING_STATE->step_timer * FISHING_CATCH_ICON_STEP, FISHING_CATCH_ICON_Y, FISHING_STATE->bounce.half.key);
+    if (TASK(FishingState)->counter_08 == 0) {
+        if (g_FishingBestCatch[TASK(FishingState)->bounce.half.key] != 0) {
+            Fishing_DrawCatchIcon(FISHING_CATCH_ICON_X - TASK(FishingState)->step_timer * FISHING_CATCH_ICON_STEP, FISHING_CATCH_ICON_Y, TASK(FishingState)->bounce.half.key);
         } else {
-            Fishing_DrawCatchIcon(FISHING_CATCH_ICON_X - FISHING_STATE->step_timer * FISHING_CATCH_ICON_STEP, FISHING_CATCH_ICON_Y, GAME_NONE);
+            Fishing_DrawCatchIcon(FISHING_CATCH_ICON_X - TASK(FishingState)->step_timer * FISHING_CATCH_ICON_STEP, FISHING_CATCH_ICON_Y, GAME_NONE);
         }
     } else {
-        if (g_FishingBestCatch[FISHING_STATE->bounce.half.key] != 0) {
-            Fishing_DrawCatchIcon(FISHING_STATE->step_timer * FISHING_CATCH_ICON_STEP + FISHING_CATCH_ICON_X, FISHING_CATCH_ICON_Y, FISHING_STATE->bounce.half.key);
+        if (g_FishingBestCatch[TASK(FishingState)->bounce.half.key] != 0) {
+            Fishing_DrawCatchIcon(TASK(FishingState)->step_timer * FISHING_CATCH_ICON_STEP + FISHING_CATCH_ICON_X, FISHING_CATCH_ICON_Y, TASK(FishingState)->bounce.half.key);
         } else {
-            Fishing_DrawCatchIcon(FISHING_STATE->step_timer * FISHING_CATCH_ICON_STEP + FISHING_CATCH_ICON_X, FISHING_CATCH_ICON_Y, GAME_NONE);
+            Fishing_DrawCatchIcon(TASK(FishingState)->step_timer * FISHING_CATCH_ICON_STEP + FISHING_CATCH_ICON_X, FISHING_CATCH_ICON_Y, GAME_NONE);
         }
     }
     Fishing_DrawRank(FISHING_CATCH_RANK_X, FISHING_CATCH_RANK_Y);
@@ -33,11 +33,11 @@ MATCH void func_801D4C84(void) {
     Fishing_DrawWindowFrame(MENU_HEADER_X, MENU_HEADER_Y, MENU_HEADER_WIDTH, MENU_HEADER_HEIGHT, 0);
     mask = 0;
     if (D_80145E93[0] >= 3) {
-        mask = (1 << FISHING_STATE->cue_index) & BYTE_MASK;
+        mask = (1 << TASK(FishingState)->cue_index) & BYTE_MASK;
     }
     func_801D7C10(FISHING_SHOP_COLUMNS_X, FISHING_SHOP_COLUMNS_Y, mask);
-    if (FISHING_STATE->step_timer == 4) {
-        FISHING_STATE->bounce.half.key = FISHING_STATE->bounce.half.unk_3C;
-        FISHING_STATE->handler_index++;
+    if (TASK(FishingState)->step_timer == 4) {
+        TASK(FishingState)->bounce.half.key = TASK(FishingState)->bounce.half.unk_3C;
+        TASK(FishingState)->handler_index++;
     }
 }

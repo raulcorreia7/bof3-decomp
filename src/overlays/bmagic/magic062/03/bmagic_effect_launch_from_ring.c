@@ -17,7 +17,7 @@ MATCH void func_801EFD80(void) {
     func_801F0910((RANDOM_MASK(3)) | 0x18);
     BMAGIC_DRAW_IN_ACTOR_MATRIX(func_801F026C);
     if (g_FrameCount & 0x1) {
-        g_Task->unk_09 += 1;
+        TASK(PartyMember)->unk_09 += 1;
     }
     task         = g_Task;
     timer        = task->timer - 1;
@@ -30,7 +30,7 @@ MATCH void func_801EFD80(void) {
         reset->unk_14 = -0x10;
         reset->timer  = 8;
         reset->unk_20 = 4;
-        g_Task->header.step += 1;
+        TASK(PartyMember)->header.step += 1;
     }
 }
 
@@ -43,7 +43,7 @@ MATCH void func_801EFE74(void) {
     func_801F0910((RANDOM_MASK(3)) | 0x18);
     BMAGIC_DRAW_IN_ACTOR_MATRIX(func_801F026C);
     if (g_FrameCount & 0x1) {
-        g_Task->unk_09 += 1;
+        TASK(PartyMember)->unk_09 += 1;
     }
     task         = g_Task;
     timer        = task->timer - 1;
@@ -52,7 +52,7 @@ MATCH void func_801EFE74(void) {
     task->unk_14 = vel;
     task->pos.z.part.integer += vel;
     if ((timer & BYTE_MASK) == 0) {
-        g_Task->timer = 28 - g_Task->param.unk_0B;
-        g_Task->header.step += 1;
+        TASK(PartyMember)->timer = 28 - TASK(PartyMember)->param.unk_0B;
+        TASK(PartyMember)->header.step += 1;
     }
 }

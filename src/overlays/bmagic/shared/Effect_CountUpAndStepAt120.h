@@ -3,9 +3,9 @@
 MATCH void Effect_CountUpAndStepAt120(void) {
     u8 timer;
 
-    timer          = g_Task->unk_09 + 1;
-    g_Task->unk_09 = timer;
+    timer                     = TASK(PartyMember)->unk_09 + 1;
+    TASK(PartyMember)->unk_09 = timer;
     if (timer == 120) {
-        g_Task->header.step = g_Task->header.step + 1;
+        TASK(PartyMember)->header.step = TASK(PartyMember)->header.step + 1;
     }
 }

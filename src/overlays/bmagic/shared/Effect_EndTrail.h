@@ -4,8 +4,8 @@ MATCH void Effect_EndTrail(void) {
     u8 timer;
 
     Effect_ClearTrail();
-    timer          = g_Task->unk_09 - 1;
-    g_Task->unk_09 = timer;
+    timer                     = TASK(PartyMember)->unk_09 - 1;
+    TASK(PartyMember)->unk_09 = timer;
     if (timer == 0) {
         BMAGIC_TICK_EFFECT_WORK();
         Effect_Reset();

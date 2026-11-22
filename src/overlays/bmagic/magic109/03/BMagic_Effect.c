@@ -11,46 +11,46 @@ MATCH void func_801EEC80(void) {
     PartyMember* work;
 
     if (g_Battle.target_selector == 0x80 && g_Battle.active_battler < BATTLE_PARTY_CHARACTERS_COUNT) {
-        g_Task->header.mode = 1;
+        TASK(PartyMember)->header.mode = 1;
     }
     if (g_Battle.target_selector == 0x40 && !(g_Battle.active_battler < BATTLE_PARTY_CHARACTERS_COUNT)) {
-        g_Task->header.mode = 1;
+        TASK(PartyMember)->header.mode = 1;
     }
-    if (g_Task->header.mode != 0) {
+    if (TASK(PartyMember)->header.mode != 0) {
         Battle_MarkDamaged(g_Battle.target_selector);
         g_Battle.flags |= BATTLE_STATE_EFFECT_PLAYING;
         Effect_Reset();
         return;
     }
     SND_SEPlay(EMI_SE_ID(SND_BANK_COMMON, 0));
-    g_Task->unk_09 = 2;
-    work           = g_Task;
-    rect.x         = work->screen_x.value - work->unk_09;
-    rect.y         = work->screen_y.value - work->unk_09 + g_GfxBufferIndex * 240;
+    TASK(PartyMember)->unk_09 = 2;
+    work                      = g_Task;
+    rect.x                    = work->screen_x.value - work->unk_09;
+    rect.y                    = work->screen_y.value - work->unk_09 + g_GfxBufferIndex * 240;
     rect.h = rect.w = work->unk_09 * 2;
     SetDrawMove((DR_MOVE*)g_GfxPrimCursor, &rect, 0x340, 0x100);
     GFX_AddPrim(BMAGIC_LAYER_OVER_BATTLERS, sizeof(DR_MOVE));
     if (g_Battle.target_selector & 0x40) {
-        g_Task->screen_x.value = D_801EF9D8[g_Battle.scroll_dir].x;
-        g_Task->screen_y.value = D_801EF9D8[g_Battle.scroll_dir].y;
+        TASK(PartyMember)->screen_x.value = D_801EF9D8[g_Battle.scroll_dir].x;
+        TASK(PartyMember)->screen_y.value = D_801EF9D8[g_Battle.scroll_dir].y;
     } else {
-        g_Task->screen_x.value = D_801EF9D8[g_Battle.scroll_dir ^ 2].x;
-        g_Task->screen_y.value = D_801EF9D8[g_Battle.scroll_dir ^ 2].y;
+        TASK(PartyMember)->screen_x.value = D_801EF9D8[g_Battle.scroll_dir ^ 2].x;
+        TASK(PartyMember)->screen_y.value = D_801EF9D8[g_Battle.scroll_dir ^ 2].y;
     }
-    g_Task->unk_64 = 0;
-    g_Task->header.mode += 1;
+    TASK(PartyMember)->unk_64 = 0;
+    TASK(PartyMember)->header.mode += 1;
 }
 
 MATCH void func_801EEEAC(void) {
     u8 count;
 
-    count          = g_Task->unk_09 + 2;
-    g_Task->unk_09 = count;
+    count                     = TASK(PartyMember)->unk_09 + 2;
+    TASK(PartyMember)->unk_09 = count;
     if ((count & BYTE_MASK) == 0x54) {
-        g_Task->header.mode += 1;
-        g_Task->timer = 64;
+        TASK(PartyMember)->header.mode += 1;
+        TASK(PartyMember)->timer = 64;
     }
-    func_801EF0F8(g_Task->unk_64);
+    func_801EF0F8(TASK(PartyMember)->unk_64);
 }
 
 MATCH void func_801EEF30(void) {
@@ -58,24 +58,24 @@ MATCH void func_801EEF30(void) {
     s32 lowered_offset;
     u8  timer;
 
-    timer         = g_Task->timer;
-    g_Task->timer = timer + 0xFF;
+    timer                    = TASK(PartyMember)->timer;
+    TASK(PartyMember)->timer = timer + 0xFF;
     if (timer == 0) {
         Battle_ApplyDamageFlags(g_Battle.target_selector, 0x10U);
-        g_Task->header.mode += 1;
+        TASK(PartyMember)->header.mode += 1;
     }
-    func_801EF0F8(g_Task->unk_64);
-    if (g_Task->param.unk_0B == 0) {
-        raised_offset  = g_Task->unk_64 + 8;
-        g_Task->unk_64 = raised_offset;
+    func_801EF0F8(TASK(PartyMember)->unk_64);
+    if (TASK(PartyMember)->param.unk_0B == 0) {
+        raised_offset             = TASK(PartyMember)->unk_64 + 8;
+        TASK(PartyMember)->unk_64 = raised_offset;
         if (raised_offset >= 0x80) {
-            g_Task->param.unk_0B = 1;
+            TASK(PartyMember)->param.unk_0B = 1;
         }
     } else {
-        lowered_offset = g_Task->unk_64 - 8;
-        g_Task->unk_64 = lowered_offset;
+        lowered_offset            = TASK(PartyMember)->unk_64 - 8;
+        TASK(PartyMember)->unk_64 = lowered_offset;
         if (lowered_offset < -0x7F) {
-            g_Task->param.unk_0B = 0;
+            TASK(PartyMember)->param.unk_0B = 0;
         }
     }
 }
@@ -84,26 +84,26 @@ MATCH void func_801EF008(void) {
     u8  timer;
     s32 offset;
 
-    timer          = g_Task->unk_09 - 2;
-    g_Task->unk_09 = timer;
+    timer                     = TASK(PartyMember)->unk_09 - 2;
+    TASK(PartyMember)->unk_09 = timer;
     if (timer == 2) {
         Battle_MarkDamaged(g_Battle.target_selector);
         g_Battle.flags |= BATTLE_STATE_EFFECT_PLAYING;
         Effect_Reset();
         return;
     }
-    func_801EF0F8(g_Task->unk_64);
-    if (g_Task->param.unk_0B == 0) {
-        offset         = g_Task->unk_64 + 8;
-        g_Task->unk_64 = offset;
+    func_801EF0F8(TASK(PartyMember)->unk_64);
+    if (TASK(PartyMember)->param.unk_0B == 0) {
+        offset                    = TASK(PartyMember)->unk_64 + 8;
+        TASK(PartyMember)->unk_64 = offset;
         if (offset >= 0x80) {
-            g_Task->param.unk_0B = 1;
+            TASK(PartyMember)->param.unk_0B = 1;
         }
     } else {
-        offset         = g_Task->unk_64 - 8;
-        g_Task->unk_64 = offset;
+        offset                    = TASK(PartyMember)->unk_64 - 8;
+        TASK(PartyMember)->unk_64 = offset;
         if (offset < -0x7F) {
-            g_Task->param.unk_0B = 0;
+            TASK(PartyMember)->param.unk_0B = 0;
         }
     }
 }
@@ -154,8 +154,8 @@ NON_MATCHING void func_801EF0F8(s32 offset) {
         for (segment = 0; segment < 16; segment++) {
             mesh_angle           = segment << 8;
             vertex               = segment + (row << 4);
-            D_801EFAF8[vertex].x = FIXED_MUL(rsin(mesh_angle), row * (g_Task->unk_09 >> 3));
-            D_801EFAF8[vertex].y = FIXED_MUL(rcos(mesh_angle), row * (g_Task->unk_09 >> 3));
+            D_801EFAF8[vertex].x = FIXED_MUL(rsin(mesh_angle), row * (TASK(PartyMember)->unk_09 >> 3));
+            D_801EFAF8[vertex].y = FIXED_MUL(rcos(mesh_angle), row * (TASK(PartyMember)->unk_09 >> 3));
         }
     }
     mesh_task = g_Task;
@@ -170,15 +170,15 @@ NON_MATCHING void func_801EF0F8(s32 offset) {
     GFX_ADD_DITHERED_DRAW_MODE(BMAGIC_LAYER_OVER_BATTLERS, mesh_tpage);
     for (segment = 0; segment < 16; segment++) {
         rim_angle             = segment << 8;
-        D_801EF9F8[segment].x = FIXED_MUL(rsin(rim_angle), g_Task->unk_09);
-        D_801EF9F8[segment].y = FIXED_MUL(rcos(rim_angle), g_Task->unk_09);
+        D_801EF9F8[segment].x = FIXED_MUL(rsin(rim_angle), TASK(PartyMember)->unk_09);
+        D_801EF9F8[segment].y = FIXED_MUL(rcos(rim_angle), TASK(PartyMember)->unk_09);
     }
     for (ring = 7; ring >= 0; ring--) {
         ring_angle += offset * (8 - ring);
         for (segment = 0; segment < 16; segment++) {
             spiral_angle          = ring_angle + (segment << 8);
-            D_801EFA78[segment].x = FIXED_MUL(rsin(spiral_angle), ring * (g_Task->unk_09 >> 3));
-            D_801EFA78[segment].y = FIXED_MUL(rcos(spiral_angle), ring * (g_Task->unk_09 >> 3));
+            D_801EFA78[segment].x = FIXED_MUL(rsin(spiral_angle), ring * (TASK(PartyMember)->unk_09 >> 3));
+            D_801EFA78[segment].y = FIXED_MUL(rcos(spiral_angle), ring * (TASK(PartyMember)->unk_09 >> 3));
         }
         next_ring        = ring + 1;
         outer_ring       = next_ring;

@@ -16,9 +16,9 @@ MATCH void func_801EECCC(void) {
     u16*         src;
     u16*         dst;
 
-    actor          = g_Battle.selected_actor;
-    g_Task->facing = actor->facing;
-    task           = g_Task;
+    actor                     = g_Battle.selected_actor;
+    TASK(PartyMember)->facing = actor->facing;
+    task                      = g_Task;
     WorldPos_Copy(&task->pos, &actor->pos);
     task->param.unk_0B = 0;
     for (i = 0, anchor = 1; i < 6; i++) {
@@ -26,7 +26,7 @@ MATCH void func_801EECCC(void) {
         work                               = g_Task;
         g_BattleEffects[slot].arg.unk_09   = anchor;
         g_BattleEffects[slot].target.party = work;
-        g_Task->param.unk_0B += 1;
+        TASK(PartyMember)->param.unk_0B += 1;
         anchor += 6;
     }
     i   = 1;
@@ -39,9 +39,9 @@ MATCH void func_801EECCC(void) {
     g_GfxPalettePending      = 1;
     Battle_ApplyDamageFlags(g_Battle.target_selector, 0x10);
     SND_SEQueueSelection(0x100);
-    g_Task->unk_09 = 1;
-    g_Task->timer  = 1;
-    g_Task->header.mode += 1;
+    TASK(PartyMember)->unk_09 = 1;
+    TASK(PartyMember)->timer  = 1;
+    TASK(PartyMember)->header.mode += 1;
 }
 
 #include "overlays/bmagic/shared/func_801EEE3C.h"

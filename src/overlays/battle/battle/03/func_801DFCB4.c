@@ -23,7 +23,7 @@ MATCH void func_801DFCB4(void) {
 
     D_801463DA                               = 0;
     g_Battle.pending_status                  = 0;
-    slot                                     = g_Task->slot;
+    slot                                     = TASK(PartyMember)->slot;
     self                                     = g_GameState;
     D_8014639C                               = g_Task;
     g_Battle.target_record                   = &self->u.turn;
@@ -52,7 +52,7 @@ MATCH void func_801DFCB4(void) {
     }
     lock_work = g_Game.current;
     if ((lock_work->u.turn.target_flags & BATTLE_HIT_HP) && lock_work->u.turn.hp_change == 0) {
-        g_Task->header.step = 3;
+        TASK(PartyMember)->header.step = 3;
         return;
     }
     if (!(g_Game.current->u.turn.damage_flags.value & BATTLER_DAMAGE_ROW_PRESENT)) {
@@ -74,11 +74,11 @@ MATCH void func_801DFCB4(void) {
     }
     hit_work = g_GameState;
     if (hit_work->u.turn.target_flags & BATTLE_HIT_HP) {
-        Battle_QueueAction(hit_work->u.turn.hp_change, g_Task->slot);
+        Battle_QueueAction(hit_work->u.turn.hp_change, TASK(PartyMember)->slot);
         hit_work = g_Game.current;
     }
     if (hit_work->u.turn.target_flags & BATTLE_HIT_AP) {
-        func_800AAEBC(hit_work->u.turn.ap_change, g_Task->slot);
+        func_800AAEBC(hit_work->u.turn.ap_change, TASK(PartyMember)->slot);
     }
     pending   = &g_Battle.pending_status;
     tail_work = g_Game.current;
@@ -117,5 +117,5 @@ MATCH void func_801DFCB4(void) {
         *flags &= ~0x80;
     }
     func_801DEDE4();
-    g_Task->unk_03 += 1;
+    TASK(PartyMember)->unk_03 += 1;
 }

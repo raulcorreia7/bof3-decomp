@@ -7,13 +7,13 @@
 MATCH void Fishing_PromptSlideIn(void) {
     s32 val;
 
-    val                     = FISHING_STATE->origin_y + 8;
-    FISHING_STATE->origin_y = val;
+    val                          = TASK(FishingState)->origin_y + 8;
+    TASK(FishingState)->origin_y = val;
 
     if ((s16)val >= 0x13) {
-        FISHING_STATE->origin_y      = 0x12;
-        FISHING_STATE->handler_index = (FISHING_STATE->handler_index + 1);
+        TASK(FishingState)->origin_y      = 0x12;
+        TASK(FishingState)->handler_index = (TASK(FishingState)->handler_index + 1);
     }
 
-    Fishing_DrawWindowFrame(MENU_HEADER_X, FISHING_STATE->origin_y, MENU_HEADER_WIDTH, MENU_HEADER_HEIGHT, 0);
+    Fishing_DrawWindowFrame(MENU_HEADER_X, TASK(FishingState)->origin_y, MENU_HEADER_WIDTH, MENU_HEADER_HEIGHT, 0);
 }
