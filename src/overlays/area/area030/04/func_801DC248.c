@@ -36,7 +36,7 @@ MATCH void func_801DC248(void) {
             FISHING_PAGE_HANDLER = 0;
         } else {
             FISHING_SLOT_HANDLER = 1;
-            counter              = &D_8014403D;
+            counter              = &g_SpawnedActors[1].header.mode;
             FISHING_PAGE_HANDLER = 0;
             *counter += 1;
         }

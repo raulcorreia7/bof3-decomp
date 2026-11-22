@@ -176,7 +176,6 @@ extern AreaScroll        D_80143F84;
 /* D_80144900 */
 /* D_80144904 */
 extern u8                D_80145518[][4];
-extern u8                D_80146890;
 extern s32               D_801468A0;
 extern s32               D_801468A4;
 extern s32               D_801469EC;

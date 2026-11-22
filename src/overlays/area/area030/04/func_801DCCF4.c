@@ -6,16 +6,16 @@ MATCH void func_801DCCF4(void) {
     FishingState* record;
     s32           value;
 
-    if ((u8)(D_80144281 - 3) < 2) {
-        value      = D_80144287 & 0x7F;
-        D_80144287 = value;
+    if ((u8)(g_SpawnedActors[6].header.mode - 3) < 2) {
+        value                     = g_SpawnedActors[6].unk_07 & 0x7F;
+        g_SpawnedActors[6].unk_07 = value;
         UI_CursorDraw(28, ((value << 4) + 88), 0);
 
         record          = TASK(FishingState);
         record->flag_04 = (record->flag_04 + 1);
     }
 
-    if ((D_80144287 & 0x1) == 0) {
+    if ((g_SpawnedActors[6].unk_07 & 0x1) == 0) {
         UI_TextDraw(29, 20, 0, TEXT_LENGTH_MAX, (u8*)(MEM(u16, 0x800100A2u) + 0x80010000u));
     } else {
         UI_TextDraw(29, 20, 0, TEXT_LENGTH_MAX, (u8*)(MEM(u16, 0x800100A4u) + 0x80010000u));

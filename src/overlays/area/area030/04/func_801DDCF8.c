@@ -6,7 +6,7 @@ MATCH void func_801DDCF8(void) {
     u8* counter;
 
     if (WINDOW_EFFECT_IDLE()) {
-        counter = &D_8014403D;
+        counter = &g_SpawnedActors[1].header.mode;
         *counter += 1;
         TASK(FishingState)->mode_index = 1;
         TASK(FishingState)->sub_index  = 0;

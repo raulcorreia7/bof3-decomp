@@ -64,6 +64,8 @@ void func_801F5D20(void);
 u8   func_801F5D6C(void);
 bool func_801F5EA8(void);
 s32  func_801F5F3C(void);
+void Char_AddFatigue(void);
+void func_801F6088(void);
 
 extern Callback D_801F62F4[];
 

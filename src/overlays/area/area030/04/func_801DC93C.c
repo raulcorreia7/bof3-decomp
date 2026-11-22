@@ -18,35 +18,35 @@ NON_MATCHING void func_801DC93C(void) {
     pad = INPUT_REPEATED(g_PadStates[0].pressed, (PADLright | PADLleft));
     if (pad & PADLleft) {
         SND_SEPlay(EMI_SE_ID(SND_BANK_COMMON, 0));
-        cursor     = D_80144286 - 1;
-        D_80144286 = cursor;
+        cursor                    = g_SpawnedActors[6].unk_06 - 1;
+        g_SpawnedActors[6].unk_06 = cursor;
         if (cursor & 0x80) {
-            D_80144286 = 2;
+            g_SpawnedActors[6].unk_06 = 2;
         }
     } else if (pad & PADLright) {
         SND_SEPlay(EMI_SE_ID(SND_BANK_COMMON, 0));
-        next       = D_80144286 + 1;
-        D_80144286 = next;
+        next                      = g_SpawnedActors[6].unk_06 + 1;
+        g_SpawnedActors[6].unk_06 = next;
         if ((u32)(next & BYTE_MASK) >= 3U) {
-            D_80144286 = 0;
+            g_SpawnedActors[6].unk_06 = 0;
         }
     } else {
         if (g_InputMasks[FISHING_INPUT_CANCEL] & g_PadStates[0].pressed) {
             SND_SeqFadeIn(0, 0, 0x14, 0x10);
             SND_SEPlay(EMI_SE_ID(SND_BANK_COMMON, 6));
             new_cmd = 5;
-            if (((u32)(D_80144281 - 3) < 2U) || (cmd = D_80144281 & BYTE_MASK, new_cmd = 0xB, (cmd == 8)) || (new_cmd = 0xF, (cmd == 0xE))) {
-                D_80144281 = new_cmd;
+            if (((u32)(g_SpawnedActors[6].header.mode - 3) < 2U) || (cmd = g_SpawnedActors[6].header.mode & BYTE_MASK, new_cmd = 0xB, (cmd == 8)) || (new_cmd = 0xF, (cmd == 0xE))) {
+                g_SpawnedActors[6].header.mode = new_cmd;
             }
-            D_8014428B = 0;
-            frame      = 4;
+            g_SpawnedActors[6].link = 0;
+            frame                   = 4;
             goto block_28; /* shared selection join */
         }
         if (g_InputMasks[FISHING_INPUT_CAST] & g_PadStates[0].pressed) {
             SND_SEPlay(EMI_SE_ID(SND_BANK_COMMON, 3));
-            if (D_80144286 == 0) {
-                if (D_80144281 != 8) {
-                    if (D_80144281 == 0xE) {
+            if (g_SpawnedActors[6].unk_06 == 0) {
+                if (g_SpawnedActors[6].header.mode != 8) {
+                    if (g_SpawnedActors[6].header.mode == 0xE) {
                         SND_SEPlay(EMI_SE_ID(SND_BANK_COMMON, 2));
                         target_cmd = 0xF;
                         goto block_26; /* shared selection join */
@@ -54,29 +54,29 @@ NON_MATCHING void func_801DC93C(void) {
                 } else {
                     goto block_25; /* shared selection join */
                 }
-            } else if (D_80144286 == 1) {
-                if ((u32)(D_80144281 - 3) < 2U) {
+            } else if (g_SpawnedActors[6].unk_06 == 1) {
+                if ((u32)(g_SpawnedActors[6].header.mode - 3) < 2U) {
                     SND_SEPlay(EMI_SE_ID(SND_BANK_COMMON, 2));
                     target_cmd = 5;
                     goto block_26; /* shared selection join */
                 }
-                if ((D_80144281 & BYTE_MASK) == 0xE) {
+                if ((g_SpawnedActors[6].header.mode & BYTE_MASK) == 0xE) {
                     SND_SEPlay(EMI_SE_ID(SND_BANK_COMMON, 2));
                     target_cmd = 0xF;
                     goto block_26; /* shared selection join */
                 }
             } else {
-                if ((u32)(D_80144281 - 3) < 2U) {
+                if ((u32)(g_SpawnedActors[6].header.mode - 3) < 2U) {
                     SND_SEPlay(EMI_SE_ID(SND_BANK_COMMON, 2));
                     target_cmd = 5;
                     goto block_26; /* shared selection join */
                 }
-                if ((D_80144281 & BYTE_MASK) == 8) {
+                if ((g_SpawnedActors[6].header.mode & BYTE_MASK) == 8) {
                 block_25:
                     SND_SEPlay(EMI_SE_ID(SND_BANK_COMMON, 2));
                     target_cmd = 0xB;
                 block_26:
-                    D_80144281 = target_cmd;
+                    g_SpawnedActors[6].header.mode = target_cmd;
                 }
             }
             frame = TASK(Actor)->unk_03 + 1;
@@ -86,7 +86,7 @@ NON_MATCHING void func_801DC93C(void) {
     }
     frame_now = TASK(Actor)->unk_03;
     if (frame_now == 2) {
-        row_mod = D_80144286 & 3;
+        row_mod = g_SpawnedActors[6].unk_06 & 3;
         if (row_mod == 1) {
             message_id = FISHING_MSG_DATA_TITLE;
             goto block_39; /* shared selection join */
@@ -100,7 +100,7 @@ NON_MATCHING void func_801DC93C(void) {
         block_39:
             UI_TextDraw(29, 20, 0, TEXT_LENGTH_MAX, MESSAGE_TABLE_TEXT(AREA_MESSAGE_TABLE, message_id));
         }
-        UI_CursorDraw((D_80144286 * 48) + 88, 46U, 0);
+        UI_CursorDraw((g_SpawnedActors[6].unk_06 * 48) + 88, 46U, 0);
     }
 }
 #else
