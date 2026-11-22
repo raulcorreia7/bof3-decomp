@@ -43,6 +43,20 @@ extern u8  D_801F420C[];
 /* The ground height of each cell, by cell column. */
 extern u16 D_801F4210[];
 
+/* One gate zone: the cell span the edge pass paints, by cell column. */
+typedef struct GateZone {
+    u8 x0;
+    u8 y0;
+    u8 x_end;
+    u8 y_end;
+} GateZone;
+
+ASSERT_SIZE(GateZone, 4);
+
+extern GateZone D_801F4218[];
+/* The edge code of each gate-zone cell: eleven bytes per flag state. */
+extern u8 D_801F4228[];
+
 /* An answer cell: the cell x and y, the flag mask and the flag the answer toggles. */
 typedef struct AnswerCell {
     /* 0x0 */ u8 x;
