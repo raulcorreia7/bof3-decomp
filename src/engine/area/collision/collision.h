@@ -15,7 +15,7 @@ s16         Area_HeightRead(s32 x, s32 y);
 /* func_80154F78 */
 s16         Area_HeightReadStep(s32 x, s32 y, u8 mode);
 /* func_80155038 */
-void        Area_HeightStore(s32 x, s32 y, u8 value);
+void        Area_HeightSet(s32 x, s32 y, u8 value);
 /* func_80167848 */
 void        Area_HeightSyncScroll(void);
 

@@ -481,7 +481,7 @@ Area_HeightEnableOffset = { addr = 0x80154ED0, type = "func", source = "Enables 
 Area_HeightRead = { addr = 0x80154F28, type = "func", source = "Reads the height of a point with the mode height offset." }
 Area_HeightReadStep = { addr = 0x80154F78, type = "func", source = "Reads the height of a step." }
 Area_AdvanceScroll = { addr = 0x80154FD8, type = "func", source = "Records the sampled value and advances the vertical scroll accumulator." }
-Area_HeightStore = { addr = 0x80155038, type = "func", source = "Stores a value in the map bundle at the scaled index." }
+Area_HeightSet = { addr = 0x80155038, type = "func", source = "Stores a value in the map bundle at the scaled index." }
 Area_SetCellPalette = { addr = 0x8015507C, type = "func", source = "Sets the palette of an area cell." }
 Area_ClearCellPalette = { addr = 0x80155218, type = "func", source = "Clears the palette of an area cell." }
 Area_ClearCell = { addr = 0x801553B8, type = "func", source = "Clears an area cell." }

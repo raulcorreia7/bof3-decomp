@@ -223,7 +223,7 @@ segments:
       - [0xBEF28, c, ../area/collision/Area_HeightRead]
       - [0xBEF78, c, ../area/collision/Area_HeightReadStep]
       - [0xBEFD8, c, ../area/map/Area_AdvanceScroll]
-      - [0xBF038, c, ../area/collision/Area_HeightStore]
+      - [0xBF038, c, ../area/collision/Area_HeightSet]
       - [0xBF07C, c, ../area/map/Area_SetCellPalette]
       - [0xBF218, c, ../area/map/Area_ClearCellPalette]
       - [0xBF3B8, c, ../area/map/Area_ClearCell]

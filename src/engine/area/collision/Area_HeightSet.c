@@ -2,7 +2,7 @@
 
 /* stores value in the height-byte table of the map bundle at the scaled (s16) index.
  */
-MATCH void Area_HeightStore(s32 x, s32 y, u8 value) {
+MATCH void Area_HeightSet(s32 x, s32 y, u8 value) {
     u8* base;
 
     base                                                                                      = (u8*)MAP_BUNDLE_BASE;
