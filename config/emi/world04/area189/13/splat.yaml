@@ -10,7 +10,7 @@ segments:
       - [0x0, .data, g_AreaModuleId]
       - [0x4, c, func_801F2C04]
       - [0x1E0, c, func_801F2DE0]
-      - [0x778, c, Area_SetCellTexture]
+      - [0x778, c, Area_CellSetTexture]
       - [0x83C, c, func_801F343C]
       - [0x880, c, func_801F3480]
       - [0x8EC, c, func_801F34EC]

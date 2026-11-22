@@ -138,7 +138,7 @@ NON_MATCHING void func_801F7678(s32 shade_arg) {
         Camera_ProjectPoint(point, &outer);
 
         SetDrawMode((DR_MODE*)g_GfxPrimCursor, 0, 1, GetTPage(TPAGE_DEPTH_4BIT, TPAGE_ABR_ADD, FONT_TPAGE_X, FONT_TPAGE_Y), 0);
-        Area_AddCellPrim(point[0], point[1], 0, sizeof(DR_MODE));
+        Area_CellAddPrim(point[0], point[1], 0, sizeof(DR_MODE));
         prim = GFX_BeginPolyG4(1);
         setXY4(prim, last_inner.vx, last_inner.vy, last_outer.vx, last_outer.vy, inner.vx, inner.vy, outer.vx, outer.vy);
         color = ((u32)shade_arg & BYTE_MASK) * (shade & BYTE_MASK) >> 8;
@@ -152,9 +152,9 @@ NON_MATCHING void func_801F7678(s32 shade_arg) {
         color = ((u32)shade_arg & BYTE_MASK) * shade >> 8;
         setRGB2(prim, color, color, color);
         setRGB3(prim, color, color, color);
-        Area_AddCellPrim(point[0], point[1], 0, sizeof(POLY_G4));
+        Area_CellAddPrim(point[0], point[1], 0, sizeof(POLY_G4));
         SetDrawMode((DR_MODE*)g_GfxPrimCursor, 0, 0, GetTPage(TPAGE_DEPTH_4BIT, TPAGE_ABR_ADD, FONT_TPAGE_X, FONT_TPAGE_Y), 0);
-        Area_AddCellPrim(point[0], point[1], 0, sizeof(DR_MODE));
+        Area_CellAddPrim(point[0], point[1], 0, sizeof(DR_MODE));
     }
 }
 #else

@@ -19,7 +19,7 @@ MATCH void func_801F8188(void) {
                 break;
             }
             g_ScriptVars[0] = 1;
-            Area_StartScrollRoute(0);
+            Area_ScrollStartRoute(0);
             g_ScenarioState.step_05 = 3;
             break;
         case 3:
@@ -103,7 +103,7 @@ MATCH void func_801F8188(void) {
             Game_RequestAreaChange(AREA_ID_CAMP_BEFORE_ANGEL_TOWER, TO_COORD(35), TO_COORD(41), AREA_ENTRY_MAP_LOADING);
             break;
         case 11:
-            Area_StartScrollRoute(0);
+            Area_ScrollStartRoute(0);
             slot                        = Actor_FindFreeSpawned();
             g_ScratchPad.cells.bytes[0] = slot;
             if ((slot & BYTE_MASK) != GAME_NONE) {

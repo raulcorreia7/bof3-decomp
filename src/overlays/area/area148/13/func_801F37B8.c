@@ -28,7 +28,7 @@ NON_MATCHING void func_801F37B8(s32 mode, s32 value) {
                       &depth, &flag);
         Area_ApplyTileToQuad(D_801F5080[mode * 3 + i], prim, 1);
         i++;
-        Area_AddCellPrim(g_Task->pos.x.fixed, g_Task->pos.y.fixed, (s8)value, sizeof(POLY_FT4));
+        Area_CellAddPrim(g_Task->pos.x.fixed, g_Task->pos.y.fixed, (s8)value, sizeof(POLY_FT4));
     } while (i < 3);
 }
 #else

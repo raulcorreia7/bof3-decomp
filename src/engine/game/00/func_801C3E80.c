@@ -5,28 +5,28 @@ MATCH bool func_801C3E80(s32 pos_x, s32 pos_y, s32 probe_flag) {
 
     i = 0;
     while (s_AreaProbeCellCodes[i] != 0xFF) {
-        if ((Area_TestCellCorners(pos_x, pos_y, probe_flag, s_AreaProbeCellCodes[i], 1) & BYTE_MASK) == 0) {
+        if ((Area_CellTestCorners(pos_x, pos_y, probe_flag, s_AreaProbeCellCodes[i], 1) & BYTE_MASK) == 0) {
             return 1;
         }
         i++;
     }
-    if ((Area_TestCellCorners(pos_x, pos_y, probe_flag, 0x10, 0) & BYTE_MASK) == 0) {
+    if ((Area_CellTestCorners(pos_x, pos_y, probe_flag, 0x10, 0) & BYTE_MASK) == 0) {
         return 1;
     }
     if ((g_Game.current->status.field.flags.unsigned_value & 0x1) == 0) {
-        if ((Area_TestCellCorners(pos_x, pos_y, probe_flag, 0x11, 0) & BYTE_MASK) == 0) {
+        if ((Area_CellTestCorners(pos_x, pos_y, probe_flag, 0x11, 0) & BYTE_MASK) == 0) {
             return 1;
         }
     }
-    if ((Area_TestCellCorners(pos_x, pos_y, probe_flag, 0x20, 0) & BYTE_MASK) == 0) {
-        if ((Area_TestCellCorners(pos_x, pos_y, probe_flag, 0x21, 0) & BYTE_MASK) == 0) {
+    if ((Area_CellTestCorners(pos_x, pos_y, probe_flag, 0x20, 0) & BYTE_MASK) == 0) {
+        if ((Area_CellTestCorners(pos_x, pos_y, probe_flag, 0x21, 0) & BYTE_MASK) == 0) {
             return 1;
         }
     }
-    if ((Area_TestCellCorners(pos_x, pos_y, probe_flag, 0xC0, 0) & BYTE_MASK) == 0) {
-        if ((Area_TestCellCorners(pos_x, pos_y, probe_flag, 0xA0, 1) & BYTE_MASK) == 0) {
+    if ((Area_CellTestCorners(pos_x, pos_y, probe_flag, 0xC0, 0) & BYTE_MASK) == 0) {
+        if ((Area_CellTestCorners(pos_x, pos_y, probe_flag, 0xA0, 1) & BYTE_MASK) == 0) {
             return 1;
         }
     }
-    return (Area_TestCellCorners(pos_x, pos_y, probe_flag, 0xA2, 0) & BYTE_MASK) == 0;
+    return (Area_CellTestCorners(pos_x, pos_y, probe_flag, 0xA2, 0) & BYTE_MASK) == 0;
 }

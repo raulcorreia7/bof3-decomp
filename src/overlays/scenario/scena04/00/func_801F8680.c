@@ -34,7 +34,7 @@ NON_MATCHING void func_801F8680(void) {
             if (g_ScriptVars[0] != 1) {
                 break;
             }
-            Area_SetCellPalette(0x57, 0x12);
+            Area_CellSetPalette(0x57, 0x12);
             SND_PlaySE(0x103);
             g_ScenarioState.step_05 = 3;
             break;

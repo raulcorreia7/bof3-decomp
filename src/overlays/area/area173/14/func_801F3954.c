@@ -45,7 +45,7 @@ NON_MATCHING void func_801F3954(s32 frame) {
                       &depth, &flag);
         Area_ApplyTileToQuad(LOWU(D_801F4F24[row]), prim, 1);
         row += 20;
-        Area_AddCellPrim(((*cell_x) << 16) + (D_1F800038 << 9), (*cell_y) << 16, 0, sizeof(POLY_FT4));
+        Area_CellAddPrim(((*cell_x) << 16) + (D_1F800038 << 9), (*cell_y) << 16, 0, sizeof(POLY_FT4));
         cell_y += 20;
         cell_x += 20;
         start++;

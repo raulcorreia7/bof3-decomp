@@ -103,7 +103,7 @@ MATCH void func_801F6E48(void) {
     ((RECT*)prim)->y = 240;
     setWH(((RECT*)prim), 16, 16);
     SetTexWindow((DR_TWIN*)(prim + 8), (RECT*)prim);
-    Area_AddCellPrim(SPAD_ROW->pos.x.fixed, SPAD_ROW->pos.y.fixed, 0x11, 0x0C);
+    Area_CellAddPrim(SPAD_ROW->pos.x.fixed, SPAD_ROW->pos.y.fixed, 0x11, 0x0C);
 
     poly = (POLY_FT4*)g_GfxPrimCursor;
     SetPolyFT4(poly);
@@ -135,7 +135,7 @@ MATCH void func_801F6E48(void) {
 
     SetShadeTex(poly, 1);
 
-    Area_AddCellPrim(SPAD_ROW->pos.x.fixed, SPAD_ROW->pos.y.fixed, 0x11, sizeof(POLY_FT4));
+    Area_CellAddPrim(SPAD_ROW->pos.x.fixed, SPAD_ROW->pos.y.fixed, 0x11, sizeof(POLY_FT4));
 
     prim             = g_GfxPrimCursor;
     g_GfxPrimCursor  = prim + 8;
@@ -144,7 +144,7 @@ MATCH void func_801F6E48(void) {
     setWH(((RECT*)prim), 256, 256);
     SetTexWindow((DR_TWIN*)(prim + 8), (RECT*)prim);
 
-    Area_AddCellPrim(SPAD_ROW->pos.x.fixed, SPAD_ROW->pos.y.fixed, 0x11, 0x0C);
+    Area_CellAddPrim(SPAD_ROW->pos.x.fixed, SPAD_ROW->pos.y.fixed, 0x11, 0x0C);
 }
 
 MATCH void func_801F70F0(void) {
@@ -898,7 +898,7 @@ MATCH void func_801F8D90(void) {
     ((RECT*)prim)->y = 240;
     setWH(((RECT*)prim), 16, 16);
     SetTexWindow((DR_TWIN*)(prim + 8), (RECT*)prim);
-    Area_AddCellPrim(SPAD_ROW->pos.x.fixed, SPAD_ROW->pos.y.fixed, 0x11, 0x0C);
+    Area_CellAddPrim(SPAD_ROW->pos.x.fixed, SPAD_ROW->pos.y.fixed, 0x11, 0x0C);
 
     poly = (POLY_FT4*)g_GfxPrimCursor;
     SetPolyFT4(poly);
@@ -936,7 +936,7 @@ MATCH void func_801F8D90(void) {
 
     SetShadeTex(poly, 1);
 
-    Area_AddCellPrim(SPAD_ROW->pos.x.fixed, SPAD_ROW->pos.y.fixed, 0x11, sizeof(POLY_FT4));
+    Area_CellAddPrim(SPAD_ROW->pos.x.fixed, SPAD_ROW->pos.y.fixed, 0x11, sizeof(POLY_FT4));
 
     prim             = g_GfxPrimCursor;
     g_GfxPrimCursor  = prim + 8;
@@ -945,7 +945,7 @@ MATCH void func_801F8D90(void) {
     setWH(((RECT*)prim), 256, 256);
     SetTexWindow((DR_TWIN*)(prim + 8), (RECT*)prim);
 
-    Area_AddCellPrim(SPAD_ROW->pos.x.fixed, SPAD_ROW->pos.y.fixed, 0x11, 0x0C);
+    Area_CellAddPrim(SPAD_ROW->pos.x.fixed, SPAD_ROW->pos.y.fixed, 0x11, 0x0C);
 }
 
 MATCH void func_801F913C(void) {
@@ -1082,8 +1082,8 @@ MATCH void func_801F9644(void) {
     if (g_GameAreaId == AREA_ID_DAUNA_MINE_WORKER) {
         if (SYS_TestFlag(g_SceneFlags, 2) == 0) {
             g_ScriptVarsReq.word = 0;
-            Area_AdvanceScroll(768);
-            Area_StartScrollRoute(0);
+            Area_ScrollAdvance(768);
+            Area_ScrollStartRoute(0);
             timer         = &g_AreaCameraAngle.vx;
             *timer        = (*timer + 0xAA);
             id            = Actor_FindFreeSpawned();
@@ -1130,11 +1130,11 @@ MATCH void func_801F9868(void) {
                     g_AreaDrawFlags      = AREA_DRAW_ALL_FLAGS;
                     g_ScriptVarsReq.word = 0;
                     SYS_SetFlag(g_SceneFlags, 3U);
-                    Area_AdvanceScroll(1152);
+                    Area_ScrollAdvance(1152);
                     g_AreaCameraOffsetZ  = 0x480;
                     g_AreaCameraAngle.vz = 848;
                     Scene_SetupParty(0U);
-                    Area_StartScrollRoute(0);
+                    Area_ScrollStartRoute(0);
                     free_slot     = Actor_FindFreeSpawned();
                     slot          = free_slot & BYTE_MASK;
                     *g_ScratchPad = free_slot;
@@ -1335,7 +1335,7 @@ MATCH void func_801F9FB8(void) {
                 g_AreaScrollTargetY[0] += TO_COORD(-30);
                 g_AreaFocusY[0] += TO_COORD(-30);
                 g_PartyY[0] += TO_COORD(-30);
-                Area_RefreshCellGrid();
+                Area_CellRefreshGrid();
             }
             break;
 
@@ -1827,7 +1827,7 @@ MATCH void func_801FB204(void) {
         case 0:
             g_ScriptVarsReq.byte = 0xA;
             Scene_SetupParty(1);
-            Area_StartScrollRoute(1);
+            Area_ScrollStartRoute(1);
             g_ScenarioState.step_05 = 1;
             break;
 
@@ -1858,7 +1858,7 @@ MATCH void func_801FB204(void) {
                 g_AreaScrollTargetY[0] = TO_COORD(29);
                 Area_InitMapRenderer();
                 D_80143F84.raw = TO_COORD(1408);
-                Area_AdvanceScroll(1408);
+                Area_ScrollAdvance(1408);
                 g_AreaCameraAngle.vx     = -778;
                 g_AreaCameraAngle.vz     = 384;
                 g_AreaCameraOffsetZ      = 0x480;
@@ -1873,9 +1873,9 @@ MATCH void func_801FB204(void) {
             if (WINDOW_EFFECT_IDLE()) {
                 countdown = &g_ScenarioState.timer_06;
                 if (TIMER_EXPIRED(*countdown)) {
-                    Area_StartScrollRoute(2);
+                    Area_ScrollStartRoute(2);
                     D_80143F84.raw = TO_COORD(1408);
-                    Area_AdvanceScroll(D_80143F84.half[1]);
+                    Area_ScrollAdvance(D_80143F84.half[1]);
                     slot            = Actor_FindFreeSpawned();
                     g_ScratchPad[0] = slot;
                     if ((slot & BYTE_MASK) != GAME_NONE) {
@@ -2037,7 +2037,7 @@ MATCH void func_801FB924(void) {
         FAKE_BARRIER();
         D_80147B28 += TO_COORD(32);
         base[0] += TO_COORD(32);
-        Area_RefreshCellGrid();
+        Area_CellRefreshGrid();
     }
 
     switch (g_ScenarioState.step_05) {

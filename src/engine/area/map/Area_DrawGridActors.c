@@ -79,7 +79,7 @@ NON_MATCHING void Area_DrawGridActors(void) {
     GFX_ADD_LAYER_DRAW_MODE(GFX_LAYER_FIELD_SCENE, tpage);
     do {
         if (g_AreaDrawFlags & AREA_DRAW_CELL_LAYERS) {
-            Area_DrawCellLayer(var_s7);
+            Area_CellDrawLayer(var_s7);
         }
         if (g_AreaDrawFlags & AREA_DRAW_APPEND_AREA_PRIMITIVES) {
             word = (u32)g_AreaCellPacketLists[var_s7][g_GfxBufferIndex + 4].head;

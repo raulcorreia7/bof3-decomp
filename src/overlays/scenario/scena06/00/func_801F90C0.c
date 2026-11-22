@@ -74,7 +74,7 @@ MATCH void func_801F90C0(void) {
             if (g_ScriptVars[0] != 0x13) {
                 break;
             }
-            Area_StartScrollRoute(0);
+            Area_ScrollStartRoute(0);
             slot                        = Actor_FindFreeSpawned();
             g_ScratchPad.cells.bytes[0] = slot;
             if ((slot & BYTE_MASK) != GAME_NONE) {
@@ -113,7 +113,7 @@ MATCH void func_801F90C0(void) {
             break;
         case 20:
             Scene_SetupParty(6);
-            Area_StartScrollRoute(1);
+            Area_ScrollStartRoute(1);
             g_ScenarioState.step_05 = 21;
             break;
         case 21:

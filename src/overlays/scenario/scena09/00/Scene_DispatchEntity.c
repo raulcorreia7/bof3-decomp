@@ -24,7 +24,7 @@ MATCH void func_801F7424(Actor* actor) {
     FAKE_STACK_PADS(u8, 48); /* FAKE: retail frame reserves 48 bytes no statement uses. */
 
     SetDrawMode((DR_MODE*)g_GfxPrimCursor, 0, 0, GetTPage(TPAGE_DEPTH_4BIT, TPAGE_ABR_ADD, FONT_TPAGE_X, FONT_TPAGE_Y) & HALF_MASK, 0);
-    Area_AddCellPrim(actor->unk_18, actor->unk_1C, 0, sizeof(DR_MODE));
+    Area_CellAddPrim(actor->unk_18, actor->unk_1C, 0, sizeof(DR_MODE));
     poly = (POLY_F3*)g_GfxPrimCursor;
     SetPolyF3(poly);
     SetSemiTrans(poly, 1);
@@ -34,7 +34,7 @@ MATCH void func_801F7424(Actor* actor) {
     poly->x2 = poly->x0 + D_801FE38C[actor->unk_04].dx2;
     poly->y2 = poly->y0 + D_801FE38C[actor->unk_04].dy2;
     setRGB0(poly, 0, actor->unk_03, actor->unk_03);
-    Area_AddCellPrim(actor->unk_18, actor->unk_1C, -2, sizeof(POLY_F3));
+    Area_CellAddPrim(actor->unk_18, actor->unk_1C, -2, sizeof(POLY_F3));
 }
 
 /* func_801F7574 */

@@ -15,7 +15,7 @@ MATCH void func_801F3714(void) {
     g_Task->timer++;
     if (g_Task->timer >= 49) {
         SYS_SetFlag(g_SceneEventFlags, 129);
-        Area_SetCellPalette(48, 113);
+        Area_CellSetPalette(48, 113);
         Actor_Clear();
     }
 }

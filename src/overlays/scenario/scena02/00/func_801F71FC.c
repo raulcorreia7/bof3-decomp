@@ -187,7 +187,7 @@ MATCH void func_801F71FC(void) {
                 break;
             case 2:
                 SYS_SetFlag(g_SceneFlags, 0x16);
-                Area_SetCellPalette(0x27, 0x15);
+                Area_CellSetPalette(0x27, 0x15);
                 break;
         }
     }

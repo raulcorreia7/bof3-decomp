@@ -5,7 +5,7 @@ MATCH void func_801F33FC(void) {
 
     direction = g_Task->direction;
     if (direction != SYS_TestFlag(g_SceneEventFlags, (s32)g_Task->param.scene_event_flag) && (s8)func_801F3C44(g_Task->pos.x.fixed | 0x8000, g_Task->pos.y.fixed | 0x8000) < 0) {
-        Area_SetCellPalette((s32)(s16)((u16)COORD_INT(g_Task->pos.x) + 1), (s32)(s16)((u16)COORD_INT(g_Task->pos.y) + 1));
+        Area_CellSetPalette((s32)(s16)((u16)COORD_INT(g_Task->pos.x) + 1), (s32)(s16)((u16)COORD_INT(g_Task->pos.y) + 1));
         g_Task->header.step += 1;
         if (g_GameStateIndex == GAME_REQUEST_IDLE) {
             SND_PlaySE(EMI_SE_ID(SND_BANK_AREA, 0x05));

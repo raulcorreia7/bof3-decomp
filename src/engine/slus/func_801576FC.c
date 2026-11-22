@@ -73,7 +73,7 @@ MATCH void func_801576FC(u8* record) {
                 i++;
             case 1:
                 type = (entry->word >> 20) & 0xF;
-                id   = Area_GetCellId(column, row);
+                id   = Area_CellGetId(column, row);
                 if (id != 0) {
                     switch (type) {
                         case 0:

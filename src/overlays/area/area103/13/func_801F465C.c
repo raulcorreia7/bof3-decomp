@@ -16,5 +16,5 @@ MATCH void func_801F465C(void) {
         func_801F4E70(((g_Task->timer / 5) & BYTE_MASK) + 7);
     }
     g_Task->timer += 1;
-    Area_SetCellPalette(66, (s16)(((s16)g_Task->unk_32 / 6) + 0x18));
+    Area_CellSetPalette(66, (s16)(((s16)g_Task->unk_32 / 6) + 0x18));
 }

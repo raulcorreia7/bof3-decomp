@@ -73,7 +73,7 @@ NON_MATCHING void func_801F2D20(void) {
     }
     setRGB0(poly, shade, shade, shade);
     SetSemiTrans(poly, semi_trans);
-    Area_AddCellPrim(g_Task->pos.x.fixed, g_Task->pos.y.fixed, 0, sizeof(POLY_FT4));
+    Area_CellAddPrim(g_Task->pos.x.fixed, g_Task->pos.y.fixed, 0, sizeof(POLY_FT4));
 
 done:
     func_801F3004(0, 0, 256, 256);

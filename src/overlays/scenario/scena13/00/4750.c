@@ -144,7 +144,7 @@ MATCH s32 func_801FBA34(s32 x, s32 y) {
         return 0;
     }
     SYS_SetFlag(g_SceneFlags, 0xA);
-    Area_SetCellPalette(0x40, 0x6B);
+    Area_CellSetPalette(0x40, 0x6B);
     return 0;
 }
 

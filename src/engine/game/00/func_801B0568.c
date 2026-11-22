@@ -83,7 +83,7 @@ MATCH void func_801B0568(void) {
                     tmp2         = tmp5->pos.x.fixed + (tmp5->vx * tmp1);
                     tmp10        = tmp5->pos.y.fixed + (tmp5->vy * tmp1);
                     tmp5->unk_06 = (tmp5->unk_06 - 1);
-                    if ((g_Task->unk_06 == 0) || (Area_GetCellCode((tmp2 >> 0x10), (tmp10 >> 0x10)) & BYTE_MASK)) {
+                    if ((g_Task->unk_06 == 0) || (Area_CellGetCode((tmp2 >> 0x10), (tmp10 >> 0x10)) & BYTE_MASK)) {
                         g_EncounterSteps = 0;
                         g_AreaWalkFlags &= ~(AREA_WALK_TRANSITION | 0x2000);
                         Area_RollEncounterThreshold(0U);

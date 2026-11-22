@@ -7,7 +7,7 @@ MATCH void func_801F2DDC(void) {
     }
     if (g_Task->timer == 0x17) {
         SYS_SetFlag(g_SceneEventFlags, 0x50);
-        Area_SetCellPalette(0x13, 0x25);
+        Area_CellSetPalette(0x13, 0x25);
         g_Task->timer = 0;
     }
     if (SYS_TestFlag(g_SceneEventFlags, 0x4F) != 0) {

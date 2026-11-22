@@ -9,21 +9,21 @@ MATCH u8 func_801F3CF0(s32 x, s32 y) {
             g_ScratchPad.cells.bytes[0] = 0;
             cx                          = x >> 16;
             cy                          = y >> 16;
-            if ((Area_GetCellCode(cx, cy) & BYTE_MASK) == 0x89) {
+            if ((Area_CellGetCode(cx, cy) & BYTE_MASK) == 0x89) {
                 g_ScratchPad.cells.bytes[0] += 1;
             }
             if ((x & HALF_MASK) != 0) {
-                if ((Area_GetCellCode((s16)(cx + 1), cy) & BYTE_MASK) == 0x89) {
+                if ((Area_CellGetCode((s16)(cx + 1), cy) & BYTE_MASK) == 0x89) {
                     g_ScratchPad.cells.bytes[0] += 1;
                 }
             }
             if ((y & HALF_MASK) != 0) {
-                if ((Area_GetCellCode(x >> 16, (s16)((y >> 16) + 1)) & BYTE_MASK) == 0x89) {
+                if ((Area_CellGetCode(x >> 16, (s16)((y >> 16) + 1)) & BYTE_MASK) == 0x89) {
                     g_ScratchPad.cells.bytes[0] += 1;
                 }
             }
             if ((x & HALF_MASK) != 0 && (y & HALF_MASK) != 0) {
-                if ((Area_GetCellCode((s16)((x >> 16) + 1), (s16)((y >> 16) + 1)) & BYTE_MASK) == 0x89) {
+                if ((Area_CellGetCode((s16)((x >> 16) + 1), (s16)((y >> 16) + 1)) & BYTE_MASK) == 0x89) {
                     g_ScratchPad.cells.bytes[0] += 1;
                 }
             }

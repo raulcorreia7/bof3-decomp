@@ -16,7 +16,7 @@ MATCH void func_801FA548(void) {
             if (g_GameStateIndex == GAME_REQUEST_MESSAGE) {
                 break;
             }
-            Area_StartScrollRoute(2);
+            Area_ScrollStartRoute(2);
             g_ScenarioState.step_05 = 2;
             break;
         case 2:
@@ -115,7 +115,7 @@ MATCH void func_801FA548(void) {
             g_GamePrevSelection = 1;
             break;
         case 24:
-            Area_StartScrollRoute(1);
+            Area_ScrollStartRoute(1);
             g_ScenarioState.step_05 = 0x19;
             break;
         case 25:

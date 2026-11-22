@@ -26,7 +26,7 @@ MATCH void func_801F8AE4(void) {
             break;
         case 1:
             g_AreaDrawFlags = AREA_DRAW_ALL_FLAGS;
-            Area_StartScrollRoute(0);
+            Area_ScrollStartRoute(0);
             g_ScenarioState.step_05 = 2;
             break;
         case 2:

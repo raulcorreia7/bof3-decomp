@@ -520,8 +520,8 @@ NON_MATCHING void func_801F8E00(void) {
         g_AreaDrawFlags = 0x1F;
     }
     if (LOHU(g_GameAreaId) == AREA_ID_WYNDIA_UPPER) {
-        Area_SetCellCode(0xC, 0x1C, 0);
-        Area_SetCellCode(0xC, 0x1E, 0);
+        Area_CellSetCode(0xC, 0x1C, 0);
+        Area_CellSetCode(0xC, 0x1E, 0);
     }
     if (LOHU(g_GameAreaId) == AREA_ID_WYNDIA_CASTLE && !SYS_TestFlag(g_SceneFlags, 3)) {
         g_ScriptVarsWord = 0;
@@ -539,15 +539,15 @@ NON_MATCHING void func_801F8E00(void) {
         Game_SetScriptActive();
         Scene_RunScenario(0);
         g_ScriptVarsWord = 0;
-        Area_AdvanceScroll(448);
+        Area_ScrollAdvance(448);
         g_AreaCameraOffsetZ = 0x2BC;
-        Area_StartScrollRoute(1);
+        Area_ScrollStartRoute(1);
     }
     if (SYS_TestFlag(g_SceneFlags, 0x18) && !SYS_TestFlag(g_SceneFlags, 0x19)) {
         Game_SetScriptActive();
         g_AreaCameraAngle.vx = -0x2EC;
         g_AreaCameraAngle.vz = 0x376;
-        Area_StartScrollRoute(2);
+        Area_ScrollStartRoute(2);
         g_AreaDrawFlags = 0x1F;
     }
     if (LOHU(g_GameAreaId) == AREA_ID_GENMEL) {
@@ -580,9 +580,9 @@ NON_MATCHING void func_801F8E00(void) {
         SYS_SetFlag(g_SceneFlags, 0x17);
     }
     if (LOHU(g_GameAreaId) == AREA_ID_MOUNT_BOUMORE_SECOND && !SYS_TestFlag(g_SceneFlags, 0x1E)) {
-        Area_SetCellCode(0x19, 0x77, 0x50);
-        Area_SetCellCode(0x19, 0x78, 0x50);
-        Area_SetCellCode(0x19, 0x79, 0x50);
+        Area_CellSetCode(0x19, 0x77, 0x50);
+        Area_CellSetCode(0x19, 0x78, 0x50);
+        Area_CellSetCode(0x19, 0x79, 0x50);
     }
     if (LOHU(g_GameAreaId) == AREA_ID_MOUNT_BOUMORE_FIRST && !SYS_TestFlag(g_SceneFlags, 0x1B)) {
         if (g_GameCellType == 2) {

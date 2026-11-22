@@ -135,10 +135,10 @@ NON_MATCHING u8 Script_RunWaitOps(void* sub, s32 target, u8 value) {
             COORD_INT(g_Task->pos.z) = Area_SampleHeight(g_Task->pos.x.fixed, g_Task->pos.y.fixed);
             /* fallthrough */
         case ACTOR_SCRIPT_WAIT_SET_CELL_PALETTE:
-            Area_SetCellPalette(COORD_INT(g_Task->pos.x), COORD_INT(g_Task->pos.y));
+            Area_CellSetPalette(COORD_INT(g_Task->pos.x), COORD_INT(g_Task->pos.y));
             return value;
         case ACTOR_SCRIPT_WAIT_CLEAR_CELL_PALETTE:
-            Area_ClearCellPalette(COORD_INT(g_Task->pos.x), COORD_INT(g_Task->pos.y));
+            Area_CellClearPalette(COORD_INT(g_Task->pos.x), COORD_INT(g_Task->pos.y));
             return value;
         case ACTOR_SCRIPT_WAIT_CALL_AREA_SCRIPT: {
             void* obj = g_AreaLoads[g_GameAreaId];

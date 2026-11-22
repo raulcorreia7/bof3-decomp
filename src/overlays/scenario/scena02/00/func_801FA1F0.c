@@ -21,7 +21,7 @@ MATCH void func_801FA1F0(void) {
             break;
         case 2:
             if (g_ScriptVars[0] == 6) {
-                Area_StartScrollRoute(0);
+                Area_ScrollStartRoute(0);
                 g_ScenarioState.step_05 = 6;
             }
             break;
@@ -57,7 +57,7 @@ MATCH void func_801FA1F0(void) {
         case 17:
             if (g_ScriptVars[0] == 0x12) {
                 g_GameFlags |= 8;
-                Area_StartScrollRoute(1);
+                Area_ScrollStartRoute(1);
                 g_ScenarioState.step_05 = 0x12;
             }
             break;

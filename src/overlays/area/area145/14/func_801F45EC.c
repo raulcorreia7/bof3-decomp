@@ -88,9 +88,9 @@ NON_MATCHING void func_801F45EC(void) {
             SYS_ToggleFlag(g_SceneEventFlags, 106);
             SND_PlaySE(EMI_SE_ID(SND_BANK_AREA, 4));
             if (SYS_TestFlag(g_SceneEventFlags, 106)) {
-                Area_ApplyPaletteTint(0, 0x380, -6, -4, -4);
+                Area_PaletteApplyTint(0, 0x380, -6, -4, -4);
             } else {
-                Area_ApplyPaletteTint(0, 0x180, 0, 0, 0);
+                Area_PaletteApplyTint(0, 0x180, 0, 0, 0);
             }
             D_801448EE       = 15;
             g_AreaDrawFlags  = 0;

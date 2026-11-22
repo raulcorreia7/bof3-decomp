@@ -41,13 +41,13 @@ MATCH void func_801B146C(void) {
     if (!(func_801C3790(0) & BYTE_MASK) && !(func_801C37DC(0) & BYTE_MASK) && !(func_801C2AAC() & BYTE_MASK)) {
         if (func_801C2B4C() & BYTE_MASK) {
             work_b = g_Task;
-            Area_SetCellPalette(COORD_INT(work_b->pos.x), COORD_INT(work_b->pos.y));
+            Area_CellSetPalette(COORD_INT(work_b->pos.x), COORD_INT(work_b->pos.y));
             return;
         }
         state_flags = g_GameRequestFlags;
         if (state_flags & AREA_LOAD_FLAG_WORLD_MAP) {
             work_c = g_Task;
-            if ((Area_GetCellCode(COORD_INT(work_c->pos.x), COORD_INT(work_c->pos.y)) & BYTE_MASK) == 0xAF) {
+            if ((Area_CellGetCode(COORD_INT(work_c->pos.x), COORD_INT(work_c->pos.y)) & BYTE_MASK) == 0xAF) {
                 Actor_RequestRoute(g_Task->direction);
                 Game_RequestAreaChange(g_GameEntryAreaId, g_GameEntryPosX, g_GameEntryPosY, g_GameEntryFacing);
                 g_GameEntryMode   = 0;
@@ -60,7 +60,7 @@ MATCH void func_801B146C(void) {
                 goto block_46; /* re-arm the frame flags */
             }
             work_d = g_Task;
-            if ((Area_GetCellCode(COORD_INT(work_d->pos.x), COORD_INT(work_d->pos.y)) & BYTE_MASK) == 0xC0) {
+            if ((Area_CellGetCode(COORD_INT(work_d->pos.x), COORD_INT(work_d->pos.y)) & BYTE_MASK) == 0xC0) {
                 work_e = g_Task;
                 func_801A0048(COORD_INT(work_e->pos.x), COORD_INT(work_e->pos.y));
             }
@@ -83,7 +83,7 @@ MATCH void func_801B146C(void) {
             goto block_46; /* re-arm the frame flags */
         }
         work_i = g_Task;
-        if (!(Area_TestCellCorners(work_i->pos.x.fixed, work_i->pos.y.fixed, work_i->voice_flags.scene_flag, 0xA6, 0U) & BYTE_MASK)) {
+        if (!(Area_CellTestCorners(work_i->pos.x.fixed, work_i->pos.y.fixed, work_i->voice_flags.scene_flag, 0xA6, 0U) & BYTE_MASK)) {
             Script_Request(g_Task->direction);
             D_8014504A = 0;
             Game_RequestAreaChange(D_80145048, D_80145040, D_80145044, FACING_DOWN_RIGHT);

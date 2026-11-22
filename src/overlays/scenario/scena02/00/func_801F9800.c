@@ -13,7 +13,7 @@ MATCH void func_801F9800(void) {
     switch (g_ScenarioState.step_05) {
         case 0:
             Scene_SetupParty(6);
-            Area_StartScrollRoute(2);
+            Area_ScrollStartRoute(2);
             g_ScenarioState.step_05 = 1;
             break;
         case 1:

@@ -330,7 +330,7 @@ MATCH void func_801F0164(void) {
     long     flag;
 
     SetDrawMode((DR_MODE*)g_GfxPrimCursor, 0, 1, getTPage(TPAGE_DEPTH_4BIT, TPAGE_ABR_ADD, 320, 256), NULL);
-    Area_AddCellPrim(g_Task->pos.x.fixed, g_Task->pos.y.fixed, 2, sizeof(DR_MODE));
+    Area_CellAddPrim(g_Task->pos.x.fixed, g_Task->pos.y.fixed, 2, sizeof(DR_MODE));
     prim = (POLY_F3*)g_GfxPrimCursor;
     SetPolyF3(prim);
     PSX_SET_SEMI_TRANSPARENT(prim);
@@ -339,7 +339,7 @@ MATCH void func_801F0164(void) {
     setVector(&g_ScratchPadVectors[2], (u32)rsin(DEG(240)) >> 8, (u32)rcos(DEG(240)) >> 8, 0);
     RotTransPers3(&g_ScratchPadVectors[0], &g_ScratchPadVectors[1], &g_ScratchPadVectors[2], (long*)&prim->x0, (long*)&prim->x1, (long*)&prim->x2, &depth, &flag);
     setRGB0(prim, (rand() & 0xF) * g_Task->unk_09, (rand() & 0xF) * g_Task->unk_09, (rand() & 0xF) * g_Task->unk_09);
-    Area_AddCellPrim(g_Task->pos.x.fixed, g_Task->pos.y.fixed, 2, sizeof(POLY_F3));
+    Area_CellAddPrim(g_Task->pos.x.fixed, g_Task->pos.y.fixed, 2, sizeof(POLY_F3));
 }
 
 /* func_801F0358 */

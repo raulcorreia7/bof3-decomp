@@ -32,9 +32,9 @@ MATCH s32 func_801F3400(s32 x, s32 y) {
         cell_x = test_x;
         cell_y = test_y;
         if ((func_801F30B8(cell_x, cell_y) & BYTE_MASK) == 0) {
-            Area_SetCellPalette(cell_x, cell_y);
+            Area_CellSetPalette(cell_x, cell_y);
         } else {
-            Area_ClearCellPalette(cell_x, cell_y);
+            Area_CellClearPalette(cell_x, cell_y);
         }
         func_801F372C(x, y);
         SND_PlaySE(EMI_SE_ID(SND_BANK_AREA, 5));
@@ -45,7 +45,7 @@ MATCH s32 func_801F3400(s32 x, s32 y) {
     }
     for (i = 0; (i & BYTE_MASK) < 4U; i++) {
         for (j = 0; (j & BYTE_MASK) < 4U; j++) {
-            Area_ClearCellPalette((s16)((i & BYTE_MASK) + 0x94), (j & BYTE_MASK) + 0x20);
+            Area_CellClearPalette((s16)((i & BYTE_MASK) + 0x94), (j & BYTE_MASK) + 0x20);
         }
     }
     return 0;

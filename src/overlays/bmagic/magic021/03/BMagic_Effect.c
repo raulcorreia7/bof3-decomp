@@ -204,7 +204,7 @@ MATCH void func_801EF7FC(void) {
 
     tpage = getTPage(TPAGE_DEPTH_4BIT, TPAGE_ABR_ADD, 320, 256);
     SetDrawMode((DR_MODE*)g_GfxPrimCursor, 0, 1, tpage, 0);
-    Area_AddCellPrim(g_Task->pos.x.fixed, g_Task->pos.y.fixed, 2, sizeof(DR_MODE));
+    Area_CellAddPrim(g_Task->pos.x.fixed, g_Task->pos.y.fixed, 2, sizeof(DR_MODE));
     g_ScratchPad.cells.halves[2] = 0;
     red                          = g_Task->timer * 12;
     green                        = g_Task->timer * 11;
@@ -226,7 +226,7 @@ MATCH void func_801EF7FC(void) {
         setRGB0(prim, red, green, blue);
         setRGB1(prim, red, green_edge, blue);
         setRGB2(prim, red, green_edge, blue);
-        Area_AddCellPrim(g_Task->pos.x.fixed, g_Task->pos.y.fixed, 2, sizeof(POLY_G3));
+        Area_CellAddPrim(g_Task->pos.x.fixed, g_Task->pos.y.fixed, 2, sizeof(POLY_G3));
         i++;
     } while (i < 16);
 }
@@ -244,7 +244,7 @@ MATCH void func_801EFA48(void) {
     tpage = getTPage(TPAGE_DEPTH_4BIT, TPAGE_ABR_ADD, 320, 256);
     SetDrawMode((DR_MODE*)g_GfxPrimCursor, 0, 1, tpage, 0);
     i = 0;
-    Area_AddCellPrim(g_Task->pos.x.fixed, g_Task->pos.y.fixed, 2, sizeof(DR_MODE));
+    Area_CellAddPrim(g_Task->pos.x.fixed, g_Task->pos.y.fixed, 2, sizeof(DR_MODE));
     g_ScratchPad.cells.halves[2] = 0;
     red                          = g_Task->timer * 12;
     green                        = g_Task->timer * 6;
@@ -270,7 +270,7 @@ MATCH void func_801EFA48(void) {
         setRGB1(prim, red, green, blue);
         setRGB2(prim, 1, 1, 1);
         setRGB3(prim, 1, 1, 1);
-        Area_AddCellPrim(g_Task->pos.x.fixed, g_Task->pos.y.fixed, 2, sizeof(POLY_G4));
+        Area_CellAddPrim(g_Task->pos.x.fixed, g_Task->pos.y.fixed, 2, sizeof(POLY_G4));
         i++;
     } while (i < 16);
 }

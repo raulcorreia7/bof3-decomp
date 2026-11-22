@@ -30,7 +30,7 @@ MATCH u8* Area_RunSetupRecord(u8* script) {
             Area_SetEntityCallback(script);
             break;
         case AREA_SETUP_TYPE_SCROLL_ROUTE:
-            Area_SetupScrollRoute(script);
+            Area_ScrollInitRoute(script);
             break;
         case AREA_SETUP_TYPE_ENTITY_5:
             func_801A6F58(script);

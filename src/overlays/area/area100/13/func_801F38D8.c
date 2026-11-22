@@ -6,7 +6,7 @@ MATCH void func_801F38D8(void) {
 
     switch (g_SceneEventState.step) {
         case 0:
-            Area_StartScrollRoute(0);
+            Area_ScrollStartRoute(0);
             g_SceneEventState.step = 1;
             break;
         case 1:

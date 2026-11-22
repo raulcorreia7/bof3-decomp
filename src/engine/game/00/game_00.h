@@ -57,9 +57,9 @@
  * the signed readers view it as s8. */
 #define GAME_WINDOW_STYLE      (*(s8*)&g_WindowStyle)
 
-/* FAKE: the game images call Area_GetCellCode as s32(s16, s16) and truncate at the call; the area images pass
+/* FAKE: the game images call Area_CellGetCode as s32(s16, s16) and truncate at the call; the area images pass
  * s32 coordinates untruncated, so one prototype cannot serve both (an s16 prototype changes 11 area images). */
-#define AREA_CELL_CODE_S16     ((s32 (*)(s16, s16))Area_GetCellCode)
+#define AREA_CELL_CODE_S16     ((s32 (*)(s16, s16))Area_CellGetCode)
 #define GAME_TILE_RUN(index)   ((TileRuns*)g_AreaLoads[(index)])
 #define g_AreaLoads            ((void**)g_AreaLoads)
 #define g_RouteSpeedScale      ((u8*)g_RouteSpeedScale)

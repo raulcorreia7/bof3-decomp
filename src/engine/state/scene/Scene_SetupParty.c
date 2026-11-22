@@ -78,7 +78,7 @@ NON_MATCHING s32 Scene_SetupParty(u32 scene) {
     if (command & 0x20)
         g_Game.flags |= GAME_FLAG_SCROLL_LOCK;
     if (command == 0x30)
-        Area_StartScrollRoute(*ids);
+        Area_ScrollStartRoute(*ids);
     g_Game.flags |= GAME_FLAG_SCRIPT_ACTIVE;
     g_Game.walk_flags |= AREA_WALK_MAP_LOADING;
     return 0;

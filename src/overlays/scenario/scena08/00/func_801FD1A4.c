@@ -18,7 +18,7 @@ MATCH void func_801FD1A4(void) {
             if (g_ScriptVars[0] != 8) {
                 break;
             }
-            Area_StartScrollRoute(0);
+            Area_ScrollStartRoute(0);
             g_ScenarioState.step_05 = 1;
             g_GameFlags |= GAME_FLAG_SCROLL_LOCK;
             break;

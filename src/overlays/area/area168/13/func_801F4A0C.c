@@ -13,7 +13,7 @@ MATCH void func_801F4A0C(void) {
             g_SceneEventState.step = 0;
             break;
         case 10:
-            Area_StartScrollRoute(0);
+            Area_ScrollStartRoute(0);
             g_SceneEventState.step = 11;
             break;
         case 11:

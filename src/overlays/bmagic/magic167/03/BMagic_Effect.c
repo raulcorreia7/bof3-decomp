@@ -290,7 +290,7 @@ MATCH void func_801F05C8(s32 step) {
         y     = (g_ScratchPadVectors[0].vy << 9) + g_Task->pos.y.fixed;
         tpage = getTPage(TPAGE_DEPTH_4BIT, TPAGE_ABR_ADD, 320, 256);
         SetDrawMode((DR_MODE*)g_GfxPrimCursor, 0, 1, tpage, 0);
-        Area_AddCellPrim(x, y, 0, sizeof(DR_MODE));
+        Area_CellAddPrim(x, y, 0, sizeof(DR_MODE));
         primitive = (TILE_1*)g_GfxPrimCursor;
         SetTile1(primitive);
         SetSemiTrans(primitive, 1);
@@ -298,6 +298,6 @@ MATCH void func_801F05C8(s32 step) {
         shade = &D_1F800004;
         setRGB0(primitive, *shade, *shade, *shade);
         /* Retail advances the cell by 0x24 bytes here, more than the tile takes. */
-        Area_AddCellPrim(x, y, 0, 0x24);
+        Area_CellAddPrim(x, y, 0, 0x24);
     }
 }

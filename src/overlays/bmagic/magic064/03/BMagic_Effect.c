@@ -80,7 +80,7 @@ MATCH void func_801EEFF8(void) {
     PartyMember* task;
 
     if (g_Task->timer != 0) {
-        Area_IndexCells();
+        Area_CellIndex();
         g_Task->timer = 0;
     }
 
@@ -231,7 +231,7 @@ MATCH void func_801EF69C(void) {
     u8 timer;
 
     if (g_Task->timer != 0) {
-        Area_IndexCells();
+        Area_CellIndex();
         g_Task->timer = 0;
     }
 
@@ -479,7 +479,7 @@ MATCH void func_801F0DD8(void) {
     if (counter == -6) {
         g_Task->header.step++;
     }
-    Area_UpdatePaletteTint((s8)g_Task->unk_09);
+    Area_PaletteUpdateTint((s8)g_Task->unk_09);
 }
 
 MATCH void func_801F0E50(void) {
@@ -501,7 +501,7 @@ MATCH void func_801F0E90(void) {
     if (work->unk_09 == 0) {
         Effect_Reset();
     }
-    Area_UpdatePaletteTint((s8)g_Task->unk_09);
+    Area_PaletteUpdateTint((s8)g_Task->unk_09);
 }
 
 MATCH void func_801F0EEC(u32 sprite, s32 blend, s32 color) {
@@ -512,7 +512,7 @@ MATCH void func_801F0EEC(u32 sprite, s32 blend, s32 color) {
 
     tpage = GetTPage(TPAGE_DEPTH_15BIT, blend & BYTE_MASK, 832, 256);
     GFX_SET_DRAW_MODE(tpage);
-    Area_AddCellPrim(g_Task->pos.x.fixed, g_Task->pos.y.fixed, 0, sizeof(DR_MODE));
+    Area_CellAddPrim(g_Task->pos.x.fixed, g_Task->pos.y.fixed, 0, sizeof(DR_MODE));
     prim = (SPRT*)g_GfxPrimCursor;
     SetSprt(prim);
     setRGB0(prim, color, color, color);
@@ -529,7 +529,7 @@ MATCH void func_801F0EEC(u32 sprite, s32 blend, s32 color) {
     setUV0(prim, D_801F13A4[sprite & BYTE_MASK].x, D_801F13A4[sprite & BYTE_MASK].y);
     setWH(prim, 80, 72);
     SetSemiTrans(prim, 1);
-    Area_AddCellPrim(g_Task->pos.x.fixed, g_Task->pos.y.fixed, 0, sizeof(SPRT));
+    Area_CellAddPrim(g_Task->pos.x.fixed, g_Task->pos.y.fixed, 0, sizeof(SPRT));
 }
 
 /* Rebuild the field map view around the scroll target: clear the cell links, place the camera,
@@ -558,11 +558,11 @@ MATCH void func_801F103C(void) {
     }
     D_80149336 = 0;
     while ((s16)g_AreaTileRemainderY >= 0x200) {
-        Area_LoadCellRowsNext();
+        Area_CellLoadRowsNext();
         g_AreaTileRemainderY -= 0x200;
     }
     while ((s16)g_AreaTileRemainderY < -0x1FF) {
-        Area_LoadCellRowsPrev();
+        Area_CellLoadRowsPrev();
         g_AreaTileRemainderY += 0x200;
     }
     g_AreaCameraStep          = 0;
@@ -585,8 +585,8 @@ MATCH void func_801F103C(void) {
     g_AreaCellPrimFreeIndex = 1;
     g_AreaGridColCursor     = 0x1B;
     g_AreaGridRowCursor     = 0x37;
-    Area_ApplyMapBundleObjects();
-    Area_RunBundleOpcodes();
+    Area_BundleApplyObjects();
+    Area_BundleRunOpcodes();
 }
 
 /* Report the map cell the projected point lands on: out receives

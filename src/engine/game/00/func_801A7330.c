@@ -83,7 +83,7 @@ MATCH void func_801A7330(const volatile u8* data) {
         }
         /* The 16-bit halves of the two position words have no named members. */
         if (COORD_FRAC(g_Task->pos.x) == 0 && COORD_FRAC(g_Task->pos.y) == 0) {
-            Area_SetCellCode(COORD_INT(g_Task->pos.x), COORD_INT(g_Task->pos.y), 0x10);
+            Area_CellSetCode(COORD_INT(g_Task->pos.x), COORD_INT(g_Task->pos.y), 0x10);
         }
         Script_Select(1);
     } else {

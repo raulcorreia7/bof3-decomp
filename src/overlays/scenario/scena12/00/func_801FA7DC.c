@@ -78,7 +78,7 @@ MATCH void func_801FA7DC(void) {
             return;
         }
         case 14:
-            Area_StartScrollRoute(4);
+            Area_ScrollStartRoute(4);
             g_ScenarioState.step_05 = 0xF;
             return;
         case 15: {
@@ -177,16 +177,16 @@ MATCH void func_801FA7DC(void) {
             if (*progress != 1) {
                 return;
             }
-            Area_SetCellCode(0x38, 0x47, 0xC0);
-            Area_SetCellCode(0x38, 0x48, 0xC0);
-            Area_SetCellCode(0x39, 0x47, 0xA1);
-            Area_SetCellCode(0x39, 0x48, 0xA1);
-            Area_SetCellCode(0x37, 0x3F, 0xC0);
-            Area_SetCellCode(0x37, 0x40, 0xC0);
-            Area_SetCellCode(0x1F, 0x15, 0xA1);
-            Area_SetCellCode(0x1F, 0x16, 0xA1);
-            Area_SetCellCode(0x1C, 3, 0xC0);
-            Area_SetCellCode(0x1D, 3, 0xC0);
+            Area_CellSetCode(0x38, 0x47, 0xC0);
+            Area_CellSetCode(0x38, 0x48, 0xC0);
+            Area_CellSetCode(0x39, 0x47, 0xA1);
+            Area_CellSetCode(0x39, 0x48, 0xA1);
+            Area_CellSetCode(0x37, 0x3F, 0xC0);
+            Area_CellSetCode(0x37, 0x40, 0xC0);
+            Area_CellSetCode(0x1F, 0x15, 0xA1);
+            Area_CellSetCode(0x1F, 0x16, 0xA1);
+            Area_CellSetCode(0x1C, 3, 0xC0);
+            Area_CellSetCode(0x1D, 3, 0xC0);
             g_GameFlags ^= 0x28;
             Game_ClearScriptActive();
             *progress       = 0;

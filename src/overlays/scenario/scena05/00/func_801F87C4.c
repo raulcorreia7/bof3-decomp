@@ -84,7 +84,7 @@ MATCH void func_801F87C4(void) {
         case 26:
             if (g_GameStateIndex != GAME_REQUEST_MESSAGE) {
                 g_ScriptVars[0] = 0x28;
-                Area_StartScrollRoute(1);
+                Area_ScrollStartRoute(1);
                 g_ScenarioState.step_05 = 0x1B;
             }
             break;

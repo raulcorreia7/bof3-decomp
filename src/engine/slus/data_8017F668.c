@@ -2,7 +2,7 @@
 
 /*
  * callback table read by func_80155B40, handler table g_BundleOpcodes and
- * the small value tables read by Area_DrawCellSides and UI_MessageShrinkPanel.
+ * the small value tables read by Area_CellDrawSides and UI_MessageShrinkPanel.
  */
 
 const CellDrawCallback D_8017F668[77] = {
@@ -23,21 +23,21 @@ const CellDrawCallback D_8017F668[77] = {
     func_8015642C,
     func_801569B8,
     (CellDrawCallback)Area_DrawPartAnimation,
-    Area_DrawCellAtPoint,
-    Area_DrawCellAtPoint,
-    Area_DrawCellAtPoint,
-    Area_DrawCellAtPoint,
-    Area_DrawCellAtPoint,
-    Area_DrawCellAtPoint,
-    Area_DrawCellAtPoint,
+    Area_CellDrawAtPoint,
+    Area_CellDrawAtPoint,
+    Area_CellDrawAtPoint,
+    Area_CellDrawAtPoint,
+    Area_CellDrawAtPoint,
+    Area_CellDrawAtPoint,
+    Area_CellDrawAtPoint,
     (CellDrawCallback)func_8015763C,
-    Area_DrawCellAtPoint,
-    Area_DrawCellAtPoint,
-    Area_DrawCellAtPoint,
-    Area_DrawCellAtPoint,
-    Area_DrawCellAtPoint,
-    Area_DrawCellAtPoint,
-    Area_DrawCellAtPoint,
+    Area_CellDrawAtPoint,
+    Area_CellDrawAtPoint,
+    Area_CellDrawAtPoint,
+    Area_CellDrawAtPoint,
+    Area_CellDrawAtPoint,
+    Area_CellDrawAtPoint,
+    Area_CellDrawAtPoint,
     (CellDrawCallback)func_8015763C,
     (CellDrawCallback)Area_DrawGouraudQuads,
     Area_DrawParts,
@@ -69,20 +69,20 @@ const CellDrawCallback D_8017F668[77] = {
     func_8015642C,
     func_8015642C,
     func_8015642C,
-    Area_DrawCellSides,
-    Area_DrawCellSides,
-    Area_DrawCellSides,
-    Area_DrawCellSides,
-    Area_DrawCellSides,
-    Area_DrawCellSides,
-    Area_DrawCellSides,
-    Area_DrawCellSides,
-    Area_DrawCellSides,
-    Area_DrawCellSides,
-    Area_DrawCellSides,
-    Area_DrawCellSides,
-    Area_DrawCellSides,
-    Area_DrawCellSides,
+    Area_CellDrawSides,
+    Area_CellDrawSides,
+    Area_CellDrawSides,
+    Area_CellDrawSides,
+    Area_CellDrawSides,
+    Area_CellDrawSides,
+    Area_CellDrawSides,
+    Area_CellDrawSides,
+    Area_CellDrawSides,
+    Area_CellDrawSides,
+    Area_CellDrawSides,
+    Area_CellDrawSides,
+    Area_CellDrawSides,
+    Area_CellDrawSides,
 };
 
 const u8 g_SpriteCellPartCounts[12] = {
@@ -135,7 +135,7 @@ const u32 D_8017F8E0[4] = {
 };
 
 const BundleOpcodeCallback g_BundleOpcodes[7] = {
-    (BundleOpcodeCallback)Area_ReadTintRecord,  func_801583BC, (BundleOpcodeCallback)Area_WriteCellRecord, (BundleOpcodeCallback)Area_AnimateClut,
+    (BundleOpcodeCallback)Area_ReadTintRecord,  func_801583BC, (BundleOpcodeCallback)Area_CellWriteRecord, (BundleOpcodeCallback)Area_AnimateClut,
     (BundleOpcodeCallback)Area_DrawGouraudQuad, func_80158830, func_80158940,
 };
 

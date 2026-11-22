@@ -21,7 +21,7 @@ MATCH bool Item_PassesTest(u8 test, u8 character_id, u8 category, u8 item_id) {
             if (index != ITEM_FAERIE_TIARA) {
                 return true;
             }
-            if ((Area_GetCellCode(D_80145EC6, D_80145ECA) & BYTE_MASK) == 0xAE) {
+            if ((Area_CellGetCode(D_80145EC6, D_80145ECA) & BYTE_MASK) == 0xAE) {
                 /* probe matched: the predicate holds */
                 goto ret1;
             }

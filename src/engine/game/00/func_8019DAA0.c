@@ -24,5 +24,5 @@ MATCH s32 func_8019DAA0(s32* spawn_record, s16 spawn_offset, u8 spawn_count) {
     primitive->tpage = GetTPage(TPAGE_DEPTH_4BIT, TPAGE_ABR_ADD, 704, 256);
     setRGB0(primitive, spawn_count, spawn_count, spawn_count);
 
-    Area_AddCellPrim(spawn_record[0], spawn_record[1], 2, sizeof(POLY_FT4));
+    Area_CellAddPrim(spawn_record[0], spawn_record[1], 2, sizeof(POLY_FT4));
 }

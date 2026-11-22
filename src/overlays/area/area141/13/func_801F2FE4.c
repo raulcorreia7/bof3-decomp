@@ -22,7 +22,7 @@ MATCH void func_801F2FE4(void) {
             entry      = (u32*)(entry_base + MEM(u16, col * 2 + (row * map->width * 2 + MEM(u16, MAP_BUNDLE_BASE + 2) * 4) + (u32)base) * 4);
             value      = *entry;
             *entry     = (value & CELL_UPLOAD_MASK) | (fade << CELL_FADE_SHIFT);
-            id         = Area_GetCellId(col, row);
+            id         = Area_CellGetId(col, row);
             if (id != 0) {
                 Area_ApplyTileToQuad(*entry, &g_AreaCellPrims[id][g_GfxBufferIndex], 1);
             }

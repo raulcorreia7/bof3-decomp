@@ -10,5 +10,5 @@ MATCH void func_800AE3C0(void) {
     if (counter == -6) {
         BATTLE_WORK->header.mode++;
     }
-    Area_UpdatePaletteTint((s8)BATTLE_WORK->unk_09);
+    Area_PaletteUpdateTint((s8)BATTLE_WORK->unk_09);
 }

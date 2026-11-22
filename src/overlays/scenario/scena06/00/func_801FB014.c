@@ -16,7 +16,7 @@ MATCH void func_801FB014(void) {
             if (g_GameStateIndex == GAME_REQUEST_MESSAGE) {
                 break;
             }
-            Area_SetCellCode(93, 46, 0);
+            Area_CellSetCode(93, 46, 0);
             index = Actor_FindFreeSpawned() & BYTE_MASK;
             if (index != GAME_NONE) {
                 actor               = &g_SpawnedActors[index];
@@ -40,7 +40,7 @@ MATCH void func_801FB014(void) {
             }
             break;
         case 4:
-            Area_SetCellCode(93, 46, 81);
+            Area_CellSetCode(93, 46, 81);
             SYS_SetFlag(g_SceneEventFlags, 47);
             SND_PlaySE(EMI_SE_ID(SND_BANK_AREA, 1));
             Scene_SetupParty(1);
@@ -55,7 +55,7 @@ MATCH void func_801FB014(void) {
             SND_PlayBGM(91, BGM_CUE_LEVEL_DEFAULT, BGM_CUE_SHAPE_DEFAULT);
             goto clear_script_state;
         case 6:
-            Area_SetCellCode(93, 46, 81);
+            Area_CellSetCode(93, 46, 81);
             if (!SYS_TestFlag(g_SceneFlags, 37)) {
                 g_ScenarioState.step_05 = 7;
                 break;

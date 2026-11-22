@@ -273,7 +273,7 @@ MATCH void func_801F04BC(void) {
     g_ScratchPad.cells.halves[7] = g_Task->unk_09 * 10;
     do {
         SetDrawMode((DR_MODE*)g_GfxPrimCursor, 0, 1, getTPage(TPAGE_DEPTH_4BIT, TPAGE_ABR_ADD, 320, 256), 0);
-        Area_AddCellPrim(g_Task->pos.x.fixed, g_Task->pos.y.fixed, 2, sizeof(DR_MODE));
+        Area_CellAddPrim(g_Task->pos.x.fixed, g_Task->pos.y.fixed, 2, sizeof(DR_MODE));
         prim = GFX_BeginPolyG3(1);
         setXY0(prim, g_Task->screen_x.value, g_Task->screen_y.value);
         angle    = i << 9;
@@ -286,7 +286,7 @@ MATCH void func_801F04BC(void) {
         setRGB0(prim, g_ScratchPad.cells.halves[7], g_ScratchPad.cells.halves[7] / 5, g_ScratchPad.cells.halves[7] / 5);
         setRGB1(prim, 1, 1, 1);
         setRGB2(prim, 1, 1, 1);
-        Area_AddCellPrim(g_Task->pos.x.fixed, g_Task->pos.y.fixed, 2, sizeof(POLY_G3));
+        Area_CellAddPrim(g_Task->pos.x.fixed, g_Task->pos.y.fixed, 2, sizeof(POLY_G3));
     } while (i < 8);
 }
 

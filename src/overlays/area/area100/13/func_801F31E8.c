@@ -33,7 +33,7 @@ MATCH void func_801F31E8(Pos3* pos, s32 height) {
         Camera_ProjectPoint(point, &outer);
 
         SetDrawMode((DR_MODE*)g_GfxPrimCursor, 0, 1, GetTPage(TPAGE_DEPTH_4BIT, TPAGE_ABR_ADD, FONT_TPAGE_X, FONT_TPAGE_Y), 0);
-        Area_AddCellPrim(point[0], point[1], 0, sizeof(DR_MODE));
+        Area_CellAddPrim(point[0], point[1], 0, sizeof(DR_MODE));
         prim = GFX_BeginPolyG4(1);
         setXY4(prim, last_inner.vx, last_inner.vy, last_outer.vx, last_outer.vy, inner.vx, inner.vy, outer.vx, outer.vy);
         setRGB0(prim, shade, shade, shade);
@@ -45,8 +45,8 @@ MATCH void func_801F31E8(Pos3* pos, s32 height) {
         }
         setRGB2(prim, shade, shade, shade);
         setRGB3(prim, shade, shade, shade);
-        Area_AddCellPrim(point[0], point[1], 0, sizeof(POLY_G4));
+        Area_CellAddPrim(point[0], point[1], 0, sizeof(POLY_G4));
         SetDrawMode((DR_MODE*)g_GfxPrimCursor, 0, 0, GetTPage(TPAGE_DEPTH_4BIT, TPAGE_ABR_ADD, FONT_TPAGE_X, FONT_TPAGE_Y), 0);
-        Area_AddCellPrim(point[0], point[1], 0, sizeof(DR_MODE));
+        Area_CellAddPrim(point[0], point[1], 0, sizeof(DR_MODE));
     }
 }

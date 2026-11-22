@@ -30,7 +30,7 @@ MATCH void Effect_DrawBolt(void) {
             x = (point[0] >> 3) + g_Task->pos.x.fixed;
             y = (point[1] >> 3) + g_Task->pos.y.fixed;
             SetDrawMode((DR_MODE*)g_GfxPrimCursor, 0, 1, getTPage(TPAGE_DEPTH_8BIT, TPAGE_ABR_ADD, 320, 256), 0);
-            Area_AddCellPrim(x, y, 2, sizeof(DR_MODE));
+            Area_CellAddPrim(x, y, 2, sizeof(DR_MODE));
             primitive = (LINE_G2*)g_GfxPrimCursor;
             SetLineG2(primitive);
             SetSemiTrans(primitive, 1);
@@ -49,7 +49,7 @@ MATCH void Effect_DrawBolt(void) {
             setRGB0(primitive, cell[1], cell[1], 32);
             cell[1] = (rand() + 0x40) & 0x3F;
             setRGB1(primitive, cell[1], cell[1], 32);
-            Area_AddCellPrim(x, y, 2, sizeof(LINE_G2));
+            Area_CellAddPrim(x, y, 2, sizeof(LINE_G2));
             i++;
         } while (i < cell[2]);
     }

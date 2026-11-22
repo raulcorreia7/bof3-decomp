@@ -30,7 +30,7 @@ NON_MATCHING void func_801F34AC(void) {
         prim->x1 = prim->x3 = sxy[0] + g_Task->timer;
         prim->y2 = prim->y3 = SP_REF(u16, 0x36) + g_Task->timer;
         Area_ApplyTileToQuad(((0xD - g_Task->timer) << 19) + ((0xBA00u << 16) | 0x9124u), prim, 1);
-        Area_AddCellPrim((g_Task->pos.x.fixed + AREA_CELL_ORIGIN) << 9, (g_Task->pos.y.fixed + AREA_CELL_ORIGIN) << 9, 6, sizeof(POLY_FT4));
+        Area_CellAddPrim((g_Task->pos.x.fixed + AREA_CELL_ORIGIN) << 9, (g_Task->pos.y.fixed + AREA_CELL_ORIGIN) << 9, 6, sizeof(POLY_FT4));
     }
 
     g_Task->timer += 1;

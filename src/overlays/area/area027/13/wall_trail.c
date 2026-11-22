@@ -317,13 +317,13 @@ MATCH void func_801F31CC(void) {
     point[1] = 0xE3C0u;
     point[2] = 0;
     func_801F3480((const Pos3s*)point, 0, 0x13500126u);
-    Area_AddCellPrim(TO_COORD(70) + COORD_HALF, TO_COORD(71) + COORD_HALF, 0, 0x28);
+    Area_CellAddPrim(TO_COORD(70) + COORD_HALF, TO_COORD(71) + COORD_HALF, 0, 0x28);
 
     point[0] = 0xE340u;
     point[1] = 0xE4C0u;
     point[2] = 0;
     func_801F3480((const Pos3s*)point, ONE / 2, 0x13510125u);
-    Area_AddCellPrim(TO_COORD(70) + COORD_HALF, TO_COORD(73) + COORD_HALF, -1, 0x28);
+    Area_CellAddPrim(TO_COORD(70) + COORD_HALF, TO_COORD(73) + COORD_HALF, -1, 0x28);
 }
 
 /* FAKE: retail passes the low halfword of the angle word (lh). */
@@ -339,13 +339,13 @@ MATCH void func_801F32B0(void) {
     point[1] = 0xE3C0u;
     point[2] = 0;
     func_801F3480((const Pos3s*)point, *(s16*)&g_Task->vx, 0x13500126u);
-    Area_AddCellPrim(TO_COORD(70) + COORD_HALF, TO_COORD(71) + COORD_HALF, -1, 0x28);
+    Area_CellAddPrim(TO_COORD(70) + COORD_HALF, TO_COORD(71) + COORD_HALF, -1, 0x28);
 
     point[0] = 0xE340u;
     point[1] = 0xE4C0u;
     point[2] = 0;
     func_801F3480((const Pos3s*)point, (s16)(ONE / 2 - g_Task->vx), 0x13510125u);
-    Area_AddCellPrim(TO_COORD(70) + COORD_HALF, TO_COORD(73) + COORD_HALF, -1, 0x28);
+    Area_CellAddPrim(TO_COORD(70) + COORD_HALF, TO_COORD(73) + COORD_HALF, -1, 0x28);
 }
 
 MATCH void func_801F33A8(void) {
@@ -356,12 +356,12 @@ MATCH void func_801F33A8(void) {
     u = TO_COORD(70) + COORD_HALF;
     v = TO_COORD(71) + COORD_HALF;
     SetDrawMode((DR_MODE*)g_GfxPrimCursor, 0, 0, getTPage(TPAGE_DEPTH_8BIT, TPAGE_ABR_HALF, 320, 256), 0);
-    Area_AddCellPrim(u, v, -1, sizeof(DR_MODE));
+    Area_CellAddPrim(u, v, -1, sizeof(DR_MODE));
     point[0] = ((u >> 9) - 0x4000);
     point[1] = ((v >> 9) - 0x4000);
     point[2] = 0;
     func_801F3480((const Pos3s*)point, ONE / 4, 0x13500126u);
-    Area_AddCellPrim(u, v, -1, 0x28);
+    Area_CellAddPrim(u, v, -1, 0x28);
 }
 
 MATCH POLY_FT4* func_801F3480(const Pos3s* point, s32 angle, u32 texture) {
@@ -495,12 +495,12 @@ MATCH void func_801F3710(void) {
 }
 
 MATCH void func_801F376C(void) {
-    Area_SetCellCode(39, 37, 0);
-    Area_SetCellCode(39, 38, 0);
-    Area_SetCellCode(39, 39, 0);
-    Area_SetCellCode(40, 37, 0);
-    Area_SetCellCode(40, 38, 0);
-    Area_SetCellCode(40, 39, 0);
+    Area_CellSetCode(39, 37, 0);
+    Area_CellSetCode(39, 38, 0);
+    Area_CellSetCode(39, 39, 0);
+    Area_CellSetCode(40, 37, 0);
+    Area_CellSetCode(40, 38, 0);
+    Area_CellSetCode(40, 39, 0);
 }
 
 MATCH void func_801F37E4(void) {

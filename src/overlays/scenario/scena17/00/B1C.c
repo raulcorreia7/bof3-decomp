@@ -34,7 +34,7 @@ MATCH void func_801F77B4(void) {
         Party_HideBattlers();
         g_AreaCameraAngle.vx = -0x2E4;
         g_AreaCameraAngle.vz = 0x12C;
-        Area_AdvanceScroll(0x300);
+        Area_ScrollAdvance(0x300);
         Camera_Update();
         func_801A0514();
         Area_DrawScene();
@@ -164,7 +164,7 @@ MATCH void func_801F7C6C(void) {
     s8* step;
 
     if (g_AreaCameraMoving == 0) {
-        Area_AdvanceScroll(Area_SampleHeight(g_AreaScrollTargetX, g_AreaScrollTargetY));
+        Area_ScrollAdvance(Area_SampleHeight(g_AreaScrollTargetX, g_AreaScrollTargetY));
         step                = &g_ScenarioState.state_04;
         g_AreaScrollTargetX = TO_COORD(46);
         *step += 1;
@@ -180,7 +180,7 @@ MATCH void func_801F7D08(void) {
     s8* step;
 
     if (g_AreaCameraMoving == 0) {
-        Area_AdvanceScroll(Area_SampleHeight(g_AreaScrollTargetX, g_AreaScrollTargetY));
+        Area_ScrollAdvance(Area_SampleHeight(g_AreaScrollTargetX, g_AreaScrollTargetY));
         g_AreaScrollTargetX    = TO_COORD(38);
         g_AreaCameraHeightStep = ((Area_SampleHeight(g_AreaScrollTargetX, g_AreaScrollTargetY) - g_AreaCameraHeight) / 128);
         step                   = &g_ScenarioState.state_04;
@@ -199,7 +199,7 @@ MATCH void func_801F7DF4(void) {
     s8* state;
 
     if (g_AreaCameraMoving == 0) {
-        Area_AdvanceScroll(Area_SampleHeight(g_AreaScrollTargetX, g_AreaScrollTargetY));
+        Area_ScrollAdvance(Area_SampleHeight(g_AreaScrollTargetX, g_AreaScrollTargetY));
         state                  = &g_ScenarioState.state_04;
         g_AreaCameraStep       = 0x10;
         g_AreaScrollTargetX    = TO_COORD(25);

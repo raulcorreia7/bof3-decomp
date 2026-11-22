@@ -23,9 +23,9 @@ NON_MATCHING void func_801F35A0(void) {
     row            = 0x29;
     do {
         Area_StoreHeight(initial_column + (i & BYTE_MASK), row, 0);
-        Area_SetCellCode(initial_column + (i & BYTE_MASK), row, (g_Task->unk_18 >> ((i & BYTE_MASK) * 8)) & 0xFF);
+        Area_CellSetCode(initial_column + (i & BYTE_MASK), row, (g_Task->unk_18 >> ((i & BYTE_MASK) * 8)) & 0xFF);
         Area_StoreHeight(initial_column + (i & BYTE_MASK), row + 1, 0);
-        Area_SetCellCode(initial_column + (i & BYTE_MASK), row + 1, (g_Task->unk_1C >> ((i & BYTE_MASK) * 8)) & 0xFF);
+        Area_CellSetCode(initial_column + (i & BYTE_MASK), row + 1, (g_Task->unk_1C >> ((i & BYTE_MASK) * 8)) & 0xFF);
         i++;
     } while ((u32)(i & BYTE_MASK) < 2U);
 
@@ -40,12 +40,12 @@ NON_MATCHING void func_801F35A0(void) {
     do {
         Area_StoreHeight(column + (i & BYTE_MASK), row, 0x10);
         read_index = i;
-        g_Task->unk_18 |= (u8)Area_GetCellCode(read_index + cell_column, row) << ((i & BYTE_MASK) * 8);
-        Area_SetCellCode(column + (i & BYTE_MASK), row, 0x11);
+        g_Task->unk_18 |= (u8)Area_CellGetCode(read_index + cell_column, row) << ((i & BYTE_MASK) * 8);
+        Area_CellSetCode(column + (i & BYTE_MASK), row, 0x11);
         Area_StoreHeight(column + (i & BYTE_MASK), row + 1, 0x10);
         read_index = i;
-        g_Task->unk_1C |= (u8)Area_GetCellCode(read_index + cell_column, FIX_INT(row_next)) << ((i & BYTE_MASK) * 8);
-        Area_SetCellCode(column + (i & BYTE_MASK), row + 1, 0x11);
+        g_Task->unk_1C |= (u8)Area_CellGetCode(read_index + cell_column, FIX_INT(row_next)) << ((i & BYTE_MASK) * 8);
+        Area_CellSetCode(column + (i & BYTE_MASK), row + 1, 0x11);
         i++;
     } while ((u32)(i & BYTE_MASK) < 2U);
 }

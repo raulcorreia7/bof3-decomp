@@ -31,7 +31,7 @@ NON_MATCHING void func_801F4634(s32 tile_offset, s32 height) {
     RotTransPers4(&g_ScratchPadVectors[0], &g_ScratchPadVectors[1], &g_ScratchPadVectors[2], &g_ScratchPadVectors[3], (long*)&prim->x0, (long*)&prim->x1, (long*)&prim->x2, (long*)&prim->x3, &depth,
                   &flag);
     Area_ApplyTileToQuad(((0x2850 << 16) | 0xF3) + tile_offset, prim, 1);
-    Area_AddCellPrim(g_Task->pos.x.fixed, g_Task->pos.y.fixed, 1, sizeof(POLY_FT4));
+    Area_CellAddPrim(g_Task->pos.x.fixed, g_Task->pos.y.fixed, 1, sizeof(POLY_FT4));
 }
 #else
 INCLUDE_ASM(func_801F4634);

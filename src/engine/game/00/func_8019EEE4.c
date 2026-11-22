@@ -20,27 +20,27 @@ MATCH u8 func_8019EEE4(void) {
     if (distance - COORD_INT(g_Game.members[0].pos.z) >= 257) {
         return true;
     }
-    if ((Area_GetCellCode(COORD_INT(g_Task->pos.x), COORD_INT(g_Task->pos.y)) & BYTE_MASK) == 0x11) {
+    if ((Area_CellGetCode(COORD_INT(g_Task->pos.x), COORD_INT(g_Task->pos.y)) & BYTE_MASK) == 0x11) {
         return true;
     }
-    if ((Area_GetCellCode(COORD_INT(g_Task->pos.x), COORD_INT(g_Task->pos.y)) & BYTE_MASK) == 0xFD) {
+    if ((Area_CellGetCode(COORD_INT(g_Task->pos.x), COORD_INT(g_Task->pos.y)) & BYTE_MASK) == 0xFD) {
         found = 1;
-        Area_ClearCell(COORD_INT(g_Task->pos.x), COORD_INT(g_Task->pos.y));
+        Area_CellClear(COORD_INT(g_Task->pos.x), COORD_INT(g_Task->pos.y));
     }
     if ((COORD_FRAC(g_Task->pos.x) != 0) && !found) {
-        if ((Area_GetCellCode((s16)((u16)COORD_INT(g_Task->pos.x) + 1), COORD_INT(g_Task->pos.y)) & BYTE_MASK) == 0xFD) {
+        if ((Area_CellGetCode((s16)((u16)COORD_INT(g_Task->pos.x) + 1), COORD_INT(g_Task->pos.y)) & BYTE_MASK) == 0xFD) {
             found = 1;
-            Area_ClearCell((s16)((u16)COORD_INT(g_Task->pos.x) + 1), COORD_INT(g_Task->pos.y));
+            Area_CellClear((s16)((u16)COORD_INT(g_Task->pos.x) + 1), COORD_INT(g_Task->pos.y));
         }
     }
-    if ((COORD_FRAC(g_Task->pos.y) != 0) && !found && ((Area_GetCellCode(COORD_INT(g_Task->pos.x), (s16)((u16)COORD_INT(g_Task->pos.y) + 1)) & BYTE_MASK) == 0xFD)) {
+    if ((COORD_FRAC(g_Task->pos.y) != 0) && !found && ((Area_CellGetCode(COORD_INT(g_Task->pos.x), (s16)((u16)COORD_INT(g_Task->pos.y) + 1)) & BYTE_MASK) == 0xFD)) {
         found = 1;
-        Area_ClearCell(COORD_INT(g_Task->pos.x), (s16)((u16)COORD_INT(g_Task->pos.y) + 1));
+        Area_CellClear(COORD_INT(g_Task->pos.x), (s16)((u16)COORD_INT(g_Task->pos.y) + 1));
     }
     if ((COORD_FRAC(g_Task->pos.x) != 0) && (COORD_FRAC(g_Task->pos.y) != 0) && !found) {
-        if ((Area_GetCellCode((s16)((u16)COORD_INT(g_Task->pos.x) + 1), (s16)((u16)COORD_INT(g_Task->pos.y) + 1)) & BYTE_MASK) == 0xFD) {
+        if ((Area_CellGetCode((s16)((u16)COORD_INT(g_Task->pos.x) + 1), (s16)((u16)COORD_INT(g_Task->pos.y) + 1)) & BYTE_MASK) == 0xFD) {
             found = 1;
-            Area_ClearCell((s16)((u16)COORD_INT(g_Task->pos.x) + 1), (s16)((u16)COORD_INT(g_Task->pos.y) + 1));
+            Area_CellClear((s16)((u16)COORD_INT(g_Task->pos.x) + 1), (s16)((u16)COORD_INT(g_Task->pos.y) + 1));
         }
     }
     if (found) {

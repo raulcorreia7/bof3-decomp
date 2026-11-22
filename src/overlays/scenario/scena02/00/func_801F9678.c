@@ -12,7 +12,7 @@ MATCH void func_801F9678(void) {
         case 0:
             g_GameFlags |= GAME_FLAG_SCROLL_LOCK;
             Scene_SetupParty(26);
-            Area_StartScrollRoute(1);
+            Area_ScrollStartRoute(1);
             g_ScenarioState.step_05 = 1;
             break;
         case 1:

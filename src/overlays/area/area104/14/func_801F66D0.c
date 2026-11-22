@@ -1,7 +1,7 @@
 #include "area104_14.h"
 
 MATCH s32 func_801F66D0(s16 cell_x, s16 cell_y) {
-    switch (Area_GetCellCode(cell_x, cell_y) & BYTE_MASK) {
+    switch (Area_CellGetCode(cell_x, cell_y) & BYTE_MASK) {
         case 0x00:
         case 0xAF:
         case 0xC0:

@@ -36,7 +36,7 @@ NON_MATCHING void func_801F3884(s32 tile, s32 offset) {
     SetShadeTex(prim, 0);
     RotTransPers4(&vectors[0], &vectors[1], &vectors[2], &vectors[3], (long*)&prim->x0, (long*)&prim->x1, (long*)&prim->x2, (long*)&prim->x3, &depth, &flag);
     Area_ApplyTileToQuad(((0x2750 << 16) | 0xF3) + tile, prim, 1);
-    Area_AddCellPrim(g_Task->pos.x.fixed, g_Task->pos.y.fixed, 1, sizeof(POLY_FT4));
+    Area_CellAddPrim(g_Task->pos.x.fixed, g_Task->pos.y.fixed, 1, sizeof(POLY_FT4));
 }
 #else
 INCLUDE_ASM(func_801F3884);

@@ -5,7 +5,7 @@ MATCH void func_801F478C(void) {
 
     beat = g_Task->timer / 5;
     if (beat == 4) {
-        Area_ClearCellPalette(67, 26);
+        Area_CellClearPalette(67, 26);
         Actor_Clear();
         return;
     }

@@ -13,10 +13,10 @@ MATCH void func_801F2DB8(SpriteSpark* spark) {
         tile1->b0 = 0;
         tile1->g0 = 0;
         tile1->r0 = 0;
-        Area_AddCellPrim(spark->pos.vx, spark->pos.vy, 0, sizeof(TILE_1));
+        Area_CellAddPrim(spark->pos.vx, spark->pos.vy, 0, sizeof(TILE_1));
 
         SetDrawMode((DR_MODE*)g_GfxPrimCursor, 0, 0, GetTPage(TPAGE_DEPTH_4BIT, TPAGE_ABR_SUB, 0x3C0, 0), 0);
-        Area_AddCellPrim(spark->pos.vx, spark->pos.vy, 0, sizeof(DR_MODE));
+        Area_CellAddPrim(spark->pos.vx, spark->pos.vy, 0, sizeof(DR_MODE));
 
         tile = (TILE*)g_GfxPrimCursor;
         SetTile(tile);
@@ -29,6 +29,6 @@ MATCH void func_801F2DB8(SpriteSpark* spark) {
         tile->r0 = 8;
         tile->x0 -= 1;
         tile->y0 -= 1;
-        Area_AddCellPrim(spark->pos.vx, spark->pos.vy, 0, sizeof(TILE));
+        Area_CellAddPrim(spark->pos.vx, spark->pos.vy, 0, sizeof(TILE));
     }
 }

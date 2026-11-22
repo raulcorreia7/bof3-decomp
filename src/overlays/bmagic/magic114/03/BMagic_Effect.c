@@ -329,7 +329,7 @@ MATCH void func_801EFA80(void) {
     y     = g_AreaScrollTargetY + g_Task->unk_10;
     tpage = getTPage(TPAGE_DEPTH_8BIT, TPAGE_ABR_ADD, 320, 256);
     SetDrawMode((DR_MODE*)g_GfxPrimCursor, 0, 1, tpage, 0);
-    Area_AddCellPrim(x, y, 0, sizeof(DR_MODE));
+    Area_CellAddPrim(x, y, 0, sizeof(DR_MODE));
     prim = (POLY_G4*)g_GfxPrimCursor;
     SetPolyG4(prim);
     PSX_SET_SEMI_TRANSPARENT(prim);
@@ -354,7 +354,7 @@ MATCH void func_801EFA80(void) {
     setRGB1(prim, 16, 1, 1);
     setRGB2(prim, 224, 64, 64);
     setRGB3(prim, 1, 1, 1);
-    Area_AddCellPrim(x, y, 0, sizeof(POLY_G4));
+    Area_CellAddPrim(x, y, 0, sizeof(POLY_G4));
 }
 
 MATCH void func_801EFDD8(void) {
@@ -749,7 +749,7 @@ NON_MATCHING void func_801F0FBC(void) {
                 tpage = 0xB5;
             }
             SetDrawMode((DR_MODE*)g_GfxPrimCursor, 0, 1, tpage, 0);
-            Area_AddCellPrim(x, y, z, sizeof(DR_MODE));
+            Area_CellAddPrim(x, y, z, sizeof(DR_MODE));
             prim = (LINE_F2*)g_GfxPrimCursor;
             SetLineF2(prim);
             PSX_SET_SEMI_TRANSPARENT(prim);
@@ -764,7 +764,7 @@ NON_MATCHING void func_801F0FBC(void) {
             D_1F800018                = 0;
             RotTransPers(&g_ScratchPadVectors[0], (long*)&prim->x1, &depth, &flag);
             setRGB0(prim, shade, shade, shade);
-            Area_AddCellPrim(x, y, z, sizeof(LINE_F2));
+            Area_CellAddPrim(x, y, z, sizeof(LINE_F2));
         } while (i < 0x40);
         PopMatrix();
     }

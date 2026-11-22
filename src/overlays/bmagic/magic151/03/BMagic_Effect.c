@@ -405,14 +405,14 @@ MATCH void func_801F026C(void) {
             y                            = (g_ScratchPadVectors[3].vy << 9) + g_Task->pos.y.fixed;
             tpage                        = getTPage(TPAGE_DEPTH_4BIT, TPAGE_ABR_SUB, 320, 256);
             SetDrawMode((DR_MODE*)g_GfxPrimCursor, 0, 1, tpage, 0);
-            Area_AddCellPrim(x, y, 1, sizeof(DR_MODE));
+            Area_CellAddPrim(x, y, 1, sizeof(DR_MODE));
             prim = (POLY_F4*)g_GfxPrimCursor;
             SetPolyF4(prim);
             SetSemiTrans(prim, 1);
             RotTransPers4(&g_ScratchPadVectors[0], &g_ScratchPadVectors[1], &g_ScratchPadVectors[2], &g_ScratchPadVectors[3], (long*)&prim->x0, (long*)&prim->x1, (long*)&prim->x2, (long*)&prim->x3,
                           &depth, &flag);
             setRGB0(prim, g_ScratchPad.cells.halves[5], g_ScratchPad.cells.halves[5], g_ScratchPad.cells.halves[5]);
-            Area_AddCellPrim(x, y, 1, sizeof(POLY_F4));
+            Area_CellAddPrim(x, y, 1, sizeof(POLY_F4));
         }
     }
 }
@@ -457,7 +457,7 @@ MATCH void func_801F0648(void) {
         y                            = (g_ScratchPadVectors[3].vy << 9) + g_Task->pos.y.fixed;
         tpage                        = getTPage(TPAGE_DEPTH_4BIT, TPAGE_ABR_ADD, 320, 256);
         SetDrawMode((DR_MODE*)g_GfxPrimCursor, 0, 1, tpage, 0);
-        Area_AddCellPrim(x, y, 1, sizeof(DR_MODE));
+        Area_CellAddPrim(x, y, 1, sizeof(DR_MODE));
         prim = (POLY_G4*)g_GfxPrimCursor;
         SetPolyG4(prim);
         SetSemiTrans(prim, 1);
@@ -467,7 +467,7 @@ MATCH void func_801F0648(void) {
         setRGB1(prim, 1, 1, 1);
         setRGB2(prim, g_ScratchPad.cells.halves[5], g_ScratchPad.cells.halves[6], g_ScratchPad.cells.halves[5]);
         setRGB3(prim, g_ScratchPad.cells.halves[5], g_ScratchPad.cells.halves[6], g_ScratchPad.cells.halves[5]);
-        Area_AddCellPrim(x, y, 1, sizeof(POLY_G4));
+        Area_CellAddPrim(x, y, 1, sizeof(POLY_G4));
     }
 }
 
@@ -559,14 +559,14 @@ MATCH void func_801F0D0C(u8 angle0, u8 angle1) {
         y                         = (g_ScratchPadVectors[1].vy << 9) + g_Task->pos.y.fixed;
         tpage                     = getTPage(TPAGE_DEPTH_4BIT, g_Task->param.unk_0B, 320, 256);
         SetDrawMode((DR_MODE*)g_GfxPrimCursor, 0, 1, tpage, 0);
-        Area_AddCellPrim(x, y, 2, sizeof(DR_MODE));
+        Area_CellAddPrim(x, y, 2, sizeof(DR_MODE));
         prim = (LINE_F2*)g_GfxPrimCursor;
         SetLineF2(prim);
         SetSemiTrans(prim, g_Task->param.unk_0B);
         RotTransPers(&g_ScratchPadVectors[0], (long*)&prim->x0, &depth, &flag);
         RotTransPers(&g_ScratchPadVectors[1], (long*)&prim->x1, &depth, &flag);
         setRGB0(prim, g_ScratchPad.cells.halves[5], g_ScratchPad.cells.halves[5], g_ScratchPad.cells.halves[5]);
-        Area_AddCellPrim(x, y, 2, sizeof(LINE_F2));
+        Area_CellAddPrim(x, y, 2, sizeof(LINE_F2));
     }
 }
 
@@ -635,7 +635,7 @@ NON_MATCHING void func_801F14D0(s32 band_height, s16 radius, u16 jitter_mask) {
     g_ScratchPadVectors[0].vz    = 0;
     tpage                        = getTPage(TPAGE_DEPTH_4BIT, TPAGE_ABR_ADD, 320, 256);
     SetDrawMode((DR_MODE*)g_GfxPrimCursor, 0, 1, tpage, 0);
-    Area_AddCellPrim(g_Task->pos.x.fixed, g_Task->pos.y.fixed, 2, sizeof(DR_MODE));
+    Area_CellAddPrim(g_Task->pos.x.fixed, g_Task->pos.y.fixed, 2, sizeof(DR_MODE));
     for (i = 1; i < 18; i++) {
         g_ScratchPad.cells.halves[1] = ((g_Task->param.unk_0B + i) & 0xF) << 8;
         if RANDOM_MASK (1) {
@@ -668,7 +668,7 @@ NON_MATCHING void func_801F14D0(s32 band_height, s16 radius, u16 jitter_mask) {
         }
         RotTransPers4(&g_ScratchPadVectors[0], &g_ScratchPadVectors[1], &g_ScratchPadVectors[2], &g_ScratchPadVectors[3], (long*)&prim->x0, (long*)&prim->x1, (long*)&prim->x2, (long*)&prim->x3, &p,
                       &flag);
-        Area_AddCellPrim(g_Task->pos.x.fixed, g_Task->pos.y.fixed, 2, sizeof(POLY_G4));
+        Area_CellAddPrim(g_Task->pos.x.fixed, g_Task->pos.y.fixed, 2, sizeof(POLY_G4));
     }
 }
 #else

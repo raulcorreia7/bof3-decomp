@@ -236,7 +236,7 @@ MATCH void func_801EF6A0(void) {
 
     tpage = getTPage(TPAGE_DEPTH_4BIT, TPAGE_ABR_SUB, 320, 256);
     SetDrawMode((DR_MODE*)g_GfxPrimCursor, 0, 1, tpage, 0);
-    Area_AddCellPrim(g_Task->pos.x.fixed, g_Task->pos.y.fixed, 2, sizeof(DR_MODE));
+    Area_CellAddPrim(g_Task->pos.x.fixed, g_Task->pos.y.fixed, 2, sizeof(DR_MODE));
     prim = (POLY_GT4*)g_GfxPrimCursor;
     SetPolyGT4(prim);
     if (g_Task->unk_09 < 8) {
@@ -257,7 +257,7 @@ MATCH void func_801EF6A0(void) {
     setUVWH(prim, 1, 1, 30, 30);
     GFX_SET_RGB_ALL(prim, *shade, *shade, *shade);
     SetSemiTrans(prim, 1);
-    Area_AddCellPrim(g_Task->pos.x.fixed, g_Task->pos.y.fixed, 2, sizeof(POLY_GT4));
+    Area_CellAddPrim(g_Task->pos.x.fixed, g_Task->pos.y.fixed, 2, sizeof(POLY_GT4));
 }
 
 /* func_801EFA20 */

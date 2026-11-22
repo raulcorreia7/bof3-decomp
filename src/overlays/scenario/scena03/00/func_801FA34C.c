@@ -9,7 +9,7 @@ __asm__(".include \"include/match/macro.inc\"\n");
 NON_MATCHING void func_801FA34C(void) {
     switch (g_ScenarioState.step_05) {
         case 0:
-            Area_StartScrollRoute(0);
+            Area_ScrollStartRoute(0);
             Scene_SetupParty(0);
             g_ScenarioState.step_05 = 1;
             break;
@@ -63,7 +63,7 @@ NON_MATCHING void func_801FA34C(void) {
             break;
         case 10:
             Scene_SetupParty(1);
-            Area_StartScrollRoute(5);
+            Area_ScrollStartRoute(5);
             g_ScenarioState.step_05 = 0xB;
             break;
         case 11:

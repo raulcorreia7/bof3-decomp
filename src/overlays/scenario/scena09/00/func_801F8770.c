@@ -9,7 +9,7 @@ MATCH void func_801F8770(void) {
         case 0:
             if (!WINDOW_EFFECT_BUSY()) {
                 MESSAGE_START_WAIT(MSG_SCENA09_000);
-                Area_StartScrollRoute(0);
+                Area_ScrollStartRoute(0);
                 Scene_SetupParty(0);
                 g_ScenarioState.step_05 = 1;
             }

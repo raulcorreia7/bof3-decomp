@@ -12,7 +12,7 @@ MATCH void Area_DrawHud(s16 x, s16 y) {
     GFX_AddDrawMode(tpage);
     Area_DrawHudSprite((s16)x, (s16)y, 0);
 
-    type = Area_GetCellCode(g_AreaTargetCellX, g_AreaTargetCellY);
+    type = Area_CellGetCode(g_AreaTargetCellX, g_AreaTargetCellY);
     if ((u8)(type + 0x60) >= 2 && (u8)type != 0xAE && (g_Game.walk_flags & AREA_WALK_TRANSITION) == 0) {
         Area_DrawHudSprite((s16)(x + 0x30), (s16)y, 1);
         for (i = 0; i < 6; i++) {

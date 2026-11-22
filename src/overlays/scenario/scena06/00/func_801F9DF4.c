@@ -12,7 +12,7 @@ MATCH void func_801F9DF4(void) {
     switch (g_ScenarioState.step_05) {
         case 0:
             Char_RebuildPartyStats();
-            Area_StartScrollRoute(1);
+            Area_ScrollStartRoute(1);
             for (i = 0; i < PARTY_SLOT_COUNT - 1; i++) {
                 for (j = i + 1; j < PARTY_SLOT_COUNT; j++) {
                     if (g_Game.members[i].chr.character_id > g_Game.members[j].chr.character_id) {
@@ -58,7 +58,7 @@ MATCH void func_801F9DF4(void) {
                 break;
             }
             Scene_SetupParty(6);
-            Area_StartScrollRoute(2);
+            Area_ScrollStartRoute(2);
             g_ScenarioState.step_05 = 11;
             break;
         case 11:

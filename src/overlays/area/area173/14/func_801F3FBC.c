@@ -24,7 +24,7 @@ NON_MATCHING void func_801F3FBC(s32 mode, s32 value) {
             tpage = 0x95;
         }
         SetDrawMode((DR_MODE*)g_GfxPrimCursor, 0, 0, tpage, 0);
-        Area_AddCellPrim(g_Task->pos.x.fixed, g_Task->pos.y.fixed, (s8)value, sizeof(DR_MODE));
+        Area_CellAddPrim(g_Task->pos.x.fixed, g_Task->pos.y.fixed, (s8)value, sizeof(DR_MODE));
 
         prim = (POLY_FT4*)g_GfxPrimCursor;
         SetPolyFT4(prim);
@@ -38,7 +38,7 @@ NON_MATCHING void func_801F3FBC(s32 mode, s32 value) {
                       &flag);
         Area_ApplyTileToQuad(D_801F5358[g_Task->param.unk_0B * 6 + mode * 3 + i], prim, 1);
         i++;
-        Area_AddCellPrim(g_Task->pos.x.fixed, g_Task->pos.y.fixed, (s8)value, sizeof(POLY_FT4));
+        Area_CellAddPrim(g_Task->pos.x.fixed, g_Task->pos.y.fixed, (s8)value, sizeof(POLY_FT4));
     } while (i < 3);
 }
 #else

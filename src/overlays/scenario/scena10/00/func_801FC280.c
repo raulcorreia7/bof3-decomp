@@ -10,7 +10,7 @@ NON_MATCHING void func_801FC280(void) {
         case 0:
             if (!WINDOW_EFFECT_BUSY()) {
                 MESSAGE_START_WAIT(MSG_SCENA10_000);
-                Area_StartScrollRoute(0);
+                Area_ScrollStartRoute(0);
                 Scene_SetupParty(0);
                 g_ScenarioState.step_05 = 1;
             }

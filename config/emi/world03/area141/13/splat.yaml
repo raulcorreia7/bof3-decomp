@@ -29,7 +29,7 @@ segments:
       - [0x1128, c, func_801F3D28]
       - [0x1558, c, func_801F4158]
       - [0x1630, c, func_801F4230]
-      - [0x1700, c, Area_SetCellRun]
+      - [0x1700, c, Area_CellSetRun]
       - [0x1800, c, func_801F4400]
       - [0x1908, c, func_801F4508]
       - [0x1984, c, func_801F4584]

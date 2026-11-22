@@ -314,7 +314,7 @@ MATCH void func_801F070C(void) {
     SetDrawMode((DR_MODE*)g_GfxPrimCursor, 0, 1, getTPage(TPAGE_DEPTH_4BIT, TPAGE_ABR_ADD, 320, 256), 0);
     i      = 0;
     radius = &g_ScratchPad;
-    Area_AddCellPrim(g_Task->pos.x.fixed, g_Task->pos.y.fixed, 2, sizeof(DR_MODE));
+    Area_CellAddPrim(g_Task->pos.x.fixed, g_Task->pos.y.fixed, 2, sizeof(DR_MODE));
 
     do {
         primitive = GFX_BeginPolyG3(1);
@@ -330,6 +330,6 @@ MATCH void func_801F070C(void) {
         setRGB0(primitive, g_Task->timer * 14, g_Task->timer * 14, g_Task->timer * 12);
         setRGB1(primitive, 1, 1, 1);
         setRGB2(primitive, 1, 1, 1);
-        Area_AddCellPrim(g_Task->pos.x.fixed, g_Task->pos.y.fixed, 2, sizeof(POLY_G3));
+        Area_CellAddPrim(g_Task->pos.x.fixed, g_Task->pos.y.fixed, 2, sizeof(POLY_G3));
     } while (i < 8);
 }

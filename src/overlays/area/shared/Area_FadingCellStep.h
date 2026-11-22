@@ -10,7 +10,7 @@
         g_Task->header.step = 1;                                                                                                                                                           \
     }                                                                                                                                                                                      \
     SetDrawMode((DR_MODE*)g_GfxPrimCursor, 0, 0, getTPage(TPAGE_DEPTH_8BIT, TPAGE_ABR_ADD, 320, 256), NULL);                                                                               \
-    Area_AddCellPrim(g_Task->pos.x.fixed, g_Task->pos.y.fixed, 1, sizeof(DR_MODE));                                                                                                        \
+    Area_CellAddPrim(g_Task->pos.x.fixed, g_Task->pos.y.fixed, 1, sizeof(DR_MODE));                                                                                                        \
     SET_CORNERS(g_Task->param.unk_0B + SYS_TestFlag(D_80144ED0, FLAGS[g_Task->param.unk_0B]) * 4 + 1, AREA_CELL_HALF);                                                                     \
     primitive = (POLY_F4*)g_GfxPrimCursor;                                                                                                                                                 \
     SetPolyF4(primitive);                                                                                                                                                                  \
@@ -21,5 +21,5 @@
     primitive->r0 = shade;                                                                                                                                                                 \
     RotTransPers4(&g_ScratchPadVectors[0], &g_ScratchPadVectors[1], &g_ScratchPadVectors[2], &g_ScratchPadVectors[3], (long*)&primitive->x0, (long*)&primitive->x1, (long*)&primitive->x2, \
                   (long*)&primitive->x3, &depth, &flag);                                                                                                                                   \
-    Area_AddCellPrim(g_Task->pos.x.fixed, g_Task->pos.y.fixed, 1, sizeof(POLY_F4));                                                                                                        \
+    Area_CellAddPrim(g_Task->pos.x.fixed, g_Task->pos.y.fixed, 1, sizeof(POLY_F4));                                                                                                        \
     DRAW_OUTLINE();

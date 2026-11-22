@@ -397,7 +397,7 @@ MATCH void func_801F7CF0(SceneParticle* row) {
     FAKE_STACK_PADS(u8, 32);
 
     SetDrawMode((DR_MODE*)g_GfxPrimCursor, 0, 0, GetTPage(TPAGE_DEPTH_4BIT, TPAGE_ABR_ADD, 704, 256) & HALF_MASK, 0);
-    Area_AddCellPrim(row->pos.vx, row->pos.vy, 1, sizeof(DR_MODE));
+    Area_CellAddPrim(row->pos.vx, row->pos.vy, 1, sizeof(DR_MODE));
     prim = (POLY_FT4*)g_GfxPrimCursor;
     SetPolyFT4(prim);
     SetSemiTrans(prim, 1);
@@ -414,7 +414,7 @@ MATCH void func_801F7CF0(SceneParticle* row) {
     prim->tpage = GetTPage(TPAGE_DEPTH_4BIT, TPAGE_ABR_ADD, 704, 256);
     setUVWH(prim, 224, 48, 31, 31);
     setRGB0(prim, row->unk_24, row->unk_24, row->unk_24);
-    Area_AddCellPrim(row->pos.vx, row->pos.vy, 1, sizeof(POLY_FT4));
+    Area_CellAddPrim(row->pos.vx, row->pos.vy, 1, sizeof(POLY_FT4));
 }
 
 MATCH void func_801F7EC0() {
@@ -471,7 +471,7 @@ MATCH u8* func_801F7FF8(void) {
     return NULL;
 }
 
-/* Area_AddCellPrim with the caller's tag stored in the slot and an unmasked size. */
+/* Area_CellAddPrim with the caller's tag stored in the slot and an unmasked size. */
 MATCH void func_801F8034(s32 x, s32 y, s32 depth, s32 size, u32 tag) {
     u8*  cursor;
     u8*  next;
@@ -491,7 +491,7 @@ MATCH void func_801F8034(s32 x, s32 y, s32 depth, s32 size, u32 tag) {
     if (x & HALF_MASK) {
         value += 1;
     }
-    /* FAKE: keeps index in its own pseudo so the sum lands in a fresh register, as in Area_AddCellPrim. */
+    /* FAKE: keeps index in its own pseudo so the sum lands in a fresh register, as in Area_CellAddPrim. */
     index++;
     index--;
     cell = index;
@@ -554,7 +554,7 @@ MATCH void func_801F817C(void) {
                         g_AreaDrawFlags = 0x1F;
                         break;
                     case 1:
-                        Area_StartScrollRoute(1);
+                        Area_ScrollStartRoute(1);
                     case 2:
                     default:
                         Party_HideBattlers();
@@ -586,8 +586,8 @@ MATCH void func_801F817C(void) {
                 Scene_SetupParty(3);
             }
             if (SYS_TestFlag(g_SceneFlags, 7) == 0) {
-                Area_SetCellCode(0x83, 6, 0x51);
-                Area_SetCellCode(0x84, 6, 0x51);
+                Area_CellSetCode(0x83, 6, 0x51);
+                Area_CellSetCode(0x84, 6, 0x51);
             }
         }
     }
@@ -598,7 +598,7 @@ MATCH void func_801F817C(void) {
         if (SYS_TestFlag(g_SceneFlags, 7) != 0) {
             if (SYS_TestFlag(g_SceneFlags, 0xC) == 0) {
                 g_ScriptVarsWord = 0;
-                Area_StartScrollRoute(0);
+                Area_ScrollStartRoute(0);
                 pad_flag = &D_80145EB4;
                 *pad_flag &= 0xDF;
                 D_80145FF4 &= 0xDF;

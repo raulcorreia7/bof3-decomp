@@ -21,7 +21,7 @@ MATCH void func_801F7A44(void) {
             }
             break;
         case 2:
-            Area_StartScrollRoute(1);
+            Area_ScrollStartRoute(1);
             SYS_SetFlag(g_SceneFlags, 3);
             g_ScenarioState.step_05 = 3;
             break;

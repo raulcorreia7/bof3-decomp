@@ -173,7 +173,7 @@ MATCH void BMagic_DrawBurnSprites(void) {
             tpage = 0x35;
         }
         SetDrawMode((DR_MODE*)g_GfxPrimCursor, 0, 1, tpage, 0);
-        Area_AddCellPrim(x, y, 2, sizeof(DR_MODE));
+        Area_CellAddPrim(x, y, 2, sizeof(DR_MODE));
         prim = (POLY_GT4*)g_GfxPrimCursor;
         SetPolyGT4(prim);
         SetSemiTrans(prim, 1);
@@ -186,7 +186,7 @@ MATCH void BMagic_DrawBurnSprites(void) {
         setUV4(prim, i << 3, g_Task->timer * 4 + 0x20, (i << 3) + 8, g_Task->timer * 4 + 0x20, i << 3, g_Task->timer * 4 + 0x28, (i << 3) + 8, g_Task->timer * 4 + 0x28);
         RotTransPers4(&g_ScratchPadVectors[0], &g_ScratchPadVectors[1], &g_ScratchPadVectors[2], &g_ScratchPadVectors[3], (long*)&prim->x0, (long*)&prim->x1, (long*)&prim->x2, (long*)&prim->x3,
                       &depth, &flag);
-        Area_AddCellPrim(x, y, 2, sizeof(POLY_GT4));
+        Area_CellAddPrim(x, y, 2, sizeof(POLY_GT4));
     }
 }
 

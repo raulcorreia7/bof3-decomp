@@ -28,7 +28,7 @@ loop_top:
     offset = route * 2;
     pos_x  = work->pos.x.fixed + g_FacingSteps[route].x * (steps = (word & BYTE_MASK) + 1);
     pos_y  = work->pos.y.fixed + g_FacingStepY[offset] * steps;
-    if ((Game_TestPlacement(pos_x, pos_y, (u8)word, COORD_INT(g_Task->pos.z)) & BYTE_MASK) != 0u || (Area_TestCellCorners(pos_x, pos_y, g_Task->voice_flags.scene_flag, 0xD0, 0) & BYTE_MASK) == 0u) {
+    if ((Game_TestPlacement(pos_x, pos_y, (u8)word, COORD_INT(g_Task->pos.z)) & BYTE_MASK) != 0u || (Area_CellTestCorners(pos_x, pos_y, g_Task->voice_flags.scene_flag, 0xD0, 0) & BYTE_MASK) == 0u) {
         count++;
         if (count < 8) {
             /* Retry the probe from the next direction. */

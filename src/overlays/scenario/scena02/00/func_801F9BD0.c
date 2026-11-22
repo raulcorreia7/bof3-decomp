@@ -15,7 +15,7 @@ MATCH void func_801F9BD0(void) {
             break;
         case 1:
             if (g_ScriptVars[0] == 0x3E) {
-                Area_StartScrollRoute(3);
+                Area_ScrollStartRoute(3);
                 g_ScenarioState.step_05 = 2;
             }
             break;
@@ -57,7 +57,7 @@ MATCH void func_801F9BD0(void) {
             }
             break;
         case 7:
-            Area_StartScrollRoute(4);
+            Area_ScrollStartRoute(4);
             g_ScenarioState.step_05 = 8;
             break;
         case 8:

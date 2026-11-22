@@ -81,7 +81,7 @@ NON_MATCHING void func_801EF7F8(void) {
     s32      i;
 
     SetDrawMode((DR_MODE*)g_GfxPrimCursor, 0, 1, getTPage(TPAGE_DEPTH_4BIT, TPAGE_ABR_ADD, 320, 256), 0);
-    Area_AddCellPrim(g_Task->pos.x.fixed, g_Task->pos.y.fixed, 2, sizeof(DR_MODE));
+    Area_CellAddPrim(g_Task->pos.x.fixed, g_Task->pos.y.fixed, 2, sizeof(DR_MODE));
     SPAD(0u)->cells.halves[0] = g_Task->timer * 16 + 16;
     SPAD(0u)->cells.halves[1] = g_Task->timer * 16 + 0x80;
     SPAD(0u)->cells.halves[3] = g_Task->timer * 9;
@@ -109,7 +109,7 @@ NON_MATCHING void func_801EF7F8(void) {
         setRGB1(prim, 1, 1, 1);
         setRGB2(prim, SPAD(0u)->cells.halves[3], SPAD(0u)->cells.halves[4], SPAD(0u)->cells.halves[5]);
         setRGB3(prim, SPAD(0u)->cells.halves[3], SPAD(0u)->cells.halves[4], SPAD(0u)->cells.halves[5]);
-        Area_AddCellPrim(g_Task->pos.x.fixed, g_Task->pos.y.fixed, 2, sizeof(POLY_G4));
+        Area_CellAddPrim(g_Task->pos.x.fixed, g_Task->pos.y.fixed, 2, sizeof(POLY_G4));
     }
 }
 #else

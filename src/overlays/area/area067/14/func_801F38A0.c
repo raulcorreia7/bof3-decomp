@@ -22,7 +22,7 @@ NON_MATCHING void func_801F38A0(s16* row) {
     prim->x1 = prim->x3 = (u16)row[0] + 2;
     prim->x0 = prim->x2 = (u16)row[0];
     setRGB0(prim, 0x80, 0x80, 0x80);
-    Area_AddCellPrim(D_801F53A0, D_801F53A4, 4, sizeof(POLY_F4));
+    Area_CellAddPrim(D_801F53A0, D_801F53A4, 4, sizeof(POLY_F4));
 }
 #else
 INCLUDE_ASM(func_801F38A0);

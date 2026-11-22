@@ -17,8 +17,8 @@ MATCH void func_801F32D4(void) {
         *party_x -= TO_COORD(20);
         height         = Area_SampleHeight(g_AreaScrollTargetX, g_AreaScrollTargetY);
         g_ScrollHeight = height;
-        Area_AdvanceScroll(height);
-        Area_RefreshCellGrid();
+        Area_ScrollAdvance(height);
+        Area_CellRefreshGrid();
         /* The live type 0x37 actors move with the camera and stay on the ground. */
         for (; i < ACTOR_SLOT_COUNT; i++) {
             if (ACTOR_IN_USE(g_SpawnedActors[i]) && g_SpawnedActors[i].type == 0x37) {

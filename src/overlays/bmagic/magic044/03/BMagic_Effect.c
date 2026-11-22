@@ -400,7 +400,7 @@ MATCH void func_801F06D8(void) {
     POLY_FT4* prim;
 
     SetDrawMode((DR_MODE*)g_GfxPrimCursor, 0, 1, getTPage(TPAGE_DEPTH_4BIT, TPAGE_ABR_SUB, 320, 256), 0);
-    Area_AddCellPrim(g_Task->pos.x.fixed, g_Task->pos.y.fixed, 2, sizeof(DR_MODE));
+    Area_CellAddPrim(g_Task->pos.x.fixed, g_Task->pos.y.fixed, 2, sizeof(DR_MODE));
     prim        = (POLY_FT4*)g_GfxPrimCursor;
     QUAD_RADIUS = g_Task->unk_09 * 2;
     SetPolyFT4(prim);
@@ -415,5 +415,5 @@ MATCH void func_801F06D8(void) {
     QUAD_GREEN = g_Task->timer * (s8)g_Task->unk_5E;
     QUAD_BLUE  = g_Task->timer * (s8)g_Task->unk_5F;
     setRGB0(prim, QUAD_RED, QUAD_GREEN, QUAD_BLUE);
-    Area_AddCellPrim(g_Task->pos.x.fixed, g_Task->pos.y.fixed, 2, sizeof(POLY_FT4));
+    Area_CellAddPrim(g_Task->pos.x.fixed, g_Task->pos.y.fixed, 2, sizeof(POLY_FT4));
 }

@@ -180,7 +180,7 @@ MATCH void func_801EF2D4(void) {
     for (i = 1; g_ScratchPad.cells.words[0] < g_Task->unk_09; i++) {
         tpage = getTPage(TPAGE_DEPTH_4BIT, semi, 320, 256);
         SetDrawMode((DR_MODE*)g_GfxPrimCursor, 0, 1, tpage, 0);
-        Area_AddCellPrim(g_Task->pos.x.fixed, g_Task->pos.y.fixed, 0, sizeof(DR_MODE));
+        Area_CellAddPrim(g_Task->pos.x.fixed, g_Task->pos.y.fixed, 0, sizeof(DR_MODE));
         prim = (LINE_F2*)g_GfxPrimCursor;
         SetLineF2(prim);
         SetSemiTrans(prim, semi);
@@ -200,7 +200,7 @@ MATCH void func_801EF2D4(void) {
         } else {
             setRGB0(prim, 0x80, 0xC0, 0x80);
         }
-        Area_AddCellPrim(g_Task->pos.x.fixed, g_Task->pos.y.fixed, 0, sizeof(LINE_F2));
+        Area_CellAddPrim(g_Task->pos.x.fixed, g_Task->pos.y.fixed, 0, sizeof(LINE_F2));
         g_ScratchPad.cells.words[0]++;
     }
 }
@@ -235,7 +235,7 @@ MATCH void func_801EF6C0(void) {
 
     tpage = getTPage(TPAGE_DEPTH_4BIT, TPAGE_ABR_ADD, 320, 256);
     SetDrawMode((DR_MODE*)g_GfxPrimCursor, 0, 1, tpage, 0);
-    Area_AddCellPrim(g_Task->pos.x.fixed, g_Task->pos.y.fixed, 0, sizeof(DR_MODE));
+    Area_CellAddPrim(g_Task->pos.x.fixed, g_Task->pos.y.fixed, 0, sizeof(DR_MODE));
     prim = (POLY_G4*)g_GfxPrimCursor;
     SetPolyG4(prim);
     SetSemiTrans(prim, 1);
@@ -262,10 +262,10 @@ MATCH void func_801EF6C0(void) {
     setRGB1(prim, g_ScratchPad.cells.words[1], g_ScratchPad.cells.words[1], 1);
     setRGB2(prim, g_ScratchPad.cells.words[1], 1, g_ScratchPad.cells.words[1]);
     setRGB3(prim, g_ScratchPad.cells.words[1], 1, 1);
-    Area_AddCellPrim(g_Task->pos.x.fixed, g_Task->pos.y.fixed, 0, sizeof(POLY_G4));
+    Area_CellAddPrim(g_Task->pos.x.fixed, g_Task->pos.y.fixed, 0, sizeof(POLY_G4));
     tpage = getTPage(TPAGE_DEPTH_4BIT, TPAGE_ABR_ADD, 320, 256);
     SetDrawMode((DR_MODE*)g_GfxPrimCursor, 0, 1, tpage, 0);
-    Area_AddCellPrim(g_Task->pos.x.fixed, g_Task->pos.y.fixed, 0, sizeof(DR_MODE));
+    Area_CellAddPrim(g_Task->pos.x.fixed, g_Task->pos.y.fixed, 0, sizeof(DR_MODE));
     prim = (POLY_G4*)g_GfxPrimCursor;
     SetPolyG4(prim);
     SetSemiTrans(prim, 1);
@@ -279,5 +279,5 @@ MATCH void func_801EF6C0(void) {
     setRGB1(prim, g_ScratchPad.cells.words[1], g_ScratchPad.cells.words[1], 1);
     setRGB2(prim, g_ScratchPad.cells.words[1], 1, g_ScratchPad.cells.words[1]);
     setRGB3(prim, g_ScratchPad.cells.words[1], 1, 1);
-    Area_AddCellPrim(g_Task->pos.x.fixed, g_Task->pos.y.fixed, 0, sizeof(POLY_G4));
+    Area_CellAddPrim(g_Task->pos.x.fixed, g_Task->pos.y.fixed, 0, sizeof(POLY_G4));
 }

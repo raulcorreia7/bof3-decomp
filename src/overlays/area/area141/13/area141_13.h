@@ -27,7 +27,7 @@ extern u8       D_801F4E0C[];
 extern u8       D_801F4E2C[];
 
 /* func_801F4300 */
-void Area_SetCellRun(u8* table, u8 arg);
+void Area_CellSetRun(u8* table, u8 arg);
 
 /* The cells that start the scene events of func_801F4158. */
 extern SceneTrigger D_801F4DD4[];

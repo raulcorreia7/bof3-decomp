@@ -404,7 +404,7 @@ MATCH void func_801F02CC(void) {
             y                         = (g_ScratchPadVectors[3].vy << 9) + g_Task->pos.y.fixed;
             tpage                     = getTPage(TPAGE_DEPTH_4BIT, TPAGE_ABR_ADD, 320, 256);
             SetDrawMode((DR_MODE*)g_GfxPrimCursor, 0, 1, tpage, 0);
-            Area_AddCellPrim(x, y, 0, sizeof(DR_MODE));
+            Area_CellAddPrim(x, y, 0, sizeof(DR_MODE));
             prim = (POLY_G4*)g_GfxPrimCursor;
             SetPolyG4(prim);
             SetSemiTrans(prim, 1);
@@ -415,7 +415,7 @@ MATCH void func_801F02CC(void) {
             setRGB3(prim, 192 - g_Task->timer * 12, g_ScratchPad.cells.words[1], g_ScratchPad.cells.words[1]);
             RotTransPers4(&g_ScratchPadVectors[0], &g_ScratchPadVectors[1], &g_ScratchPadVectors[2], &g_ScratchPadVectors[3], (long*)&prim->x0, (long*)&prim->x1, (long*)&prim->x2, (long*)&prim->x3,
                           &depth, &flag);
-            Area_AddCellPrim(x, y, 0, sizeof(POLY_G4));
+            Area_CellAddPrim(x, y, 0, sizeof(POLY_G4));
         }
     }
     tpage = getTPage(TPAGE_DEPTH_4BIT, TPAGE_ABR_HALF, 320, 256);

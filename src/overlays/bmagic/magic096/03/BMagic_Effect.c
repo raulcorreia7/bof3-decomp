@@ -188,7 +188,7 @@ MATCH void func_801EF4FC(void) {
         y                         = (g_ScratchPadVectors[1].vy << 9) + g_Task->pos.y.fixed;
         tpage                     = getTPage(TPAGE_DEPTH_8BIT, TPAGE_ABR_HALF, 320, 256);
         SetDrawMode((DR_MODE*)g_GfxPrimCursor, 0, 1, tpage, 0);
-        Area_AddCellPrim(x, y, 0, sizeof(DR_MODE));
+        Area_CellAddPrim(x, y, 0, sizeof(DR_MODE));
         tri = (POLY_FT3*)g_GfxPrimCursor;
         SetPolyFT3(tri);
         setTPage(tri, TPAGE_DEPTH_8BIT, TPAGE_ABR_HALF, 832, 256);
@@ -197,7 +197,7 @@ MATCH void func_801EF4FC(void) {
         RotTransPers3(&g_ScratchPadVectors[0], &g_ScratchPadVectors[1], &g_ScratchPadVectors[2], (long*)&tri->x0, (long*)&tri->x1, (long*)&tri->x2, &depth, &flag);
         g_ScratchPad.cells.halves[7] = 128 - j * 16;
         setRGB0(tri, g_ScratchPad.cells.halves[7], g_ScratchPad.cells.halves[7], g_ScratchPad.cells.halves[7]);
-        Area_AddCellPrim(x, y, 0, sizeof(POLY_FT3));
+        Area_CellAddPrim(x, y, 0, sizeof(POLY_FT3));
         setVector(&g_ScratchPadVectors[0], g_ScratchPadVectors[1].vx, g_ScratchPadVectors[1].vy, g_ScratchPadVectors[1].vz);
         setVector(&g_ScratchPadVectors[1], g_ScratchPadVectors[2].vx, g_ScratchPadVectors[2].vy, g_ScratchPadVectors[2].vz);
         setVector(&g_ScratchPadVectors[2], FIXED_MUL(rsin(j << 10), g_ScratchPad.cells.halves[1]), FIXED_MUL(rcos(j << 10), g_ScratchPad.cells.halves[1]), 0);
@@ -206,7 +206,7 @@ MATCH void func_801EF4FC(void) {
         y     = (g_ScratchPadVectors[2].vy << 9) + g_Task->pos.y.fixed;
         tpage = getTPage(TPAGE_DEPTH_8BIT, TPAGE_ABR_HALF, 320, 256);
         SetDrawMode((DR_MODE*)g_GfxPrimCursor, 0, 1, tpage, 0);
-        Area_AddCellPrim(x, y, 0, sizeof(DR_MODE));
+        Area_CellAddPrim(x, y, 0, sizeof(DR_MODE));
         quad = (POLY_FT4*)g_GfxPrimCursor;
         SetPolyFT4(quad);
         setTPage(quad, TPAGE_DEPTH_8BIT, TPAGE_ABR_HALF, 832, 256);
@@ -215,7 +215,7 @@ MATCH void func_801EF4FC(void) {
         RotTransPers4(&g_ScratchPadVectors[0], &g_ScratchPadVectors[1], &g_ScratchPadVectors[2], &g_ScratchPadVectors[3], (long*)&quad->x0, (long*)&quad->x1, (long*)&quad->x2, (long*)&quad->x3,
                       &depth, &flag);
         setRGB0(quad, g_ScratchPad.cells.halves[7], g_ScratchPad.cells.halves[7], g_ScratchPad.cells.halves[7]);
-        Area_AddCellPrim(x, y, 0, sizeof(POLY_FT4));
+        Area_CellAddPrim(x, y, 0, sizeof(POLY_FT4));
     }
 }
 
@@ -230,7 +230,7 @@ MATCH void func_801EFB3C(void) {
 
     tpage = getTPage(TPAGE_DEPTH_4BIT, TPAGE_ABR_ADD, 320, 256);
     SetDrawMode((DR_MODE*)g_GfxPrimCursor, 0, 1, tpage, 0);
-    Area_AddCellPrim(g_Task->pos.x.fixed, g_Task->pos.y.fixed, 2, sizeof(DR_MODE));
+    Area_CellAddPrim(g_Task->pos.x.fixed, g_Task->pos.y.fixed, 2, sizeof(DR_MODE));
     g_ScratchPad.cells.halves[0] = g_Task->timer * 16 + 16;
     g_ScratchPad.cells.halves[5] = g_Task->timer * 8;
     g_ScratchPad.cells.halves[6] = g_Task->timer * 9;
@@ -247,7 +247,7 @@ MATCH void func_801EFB3C(void) {
         setRGB0(prim, g_ScratchPad.cells.halves[7], g_ScratchPad.cells.halves[7], g_ScratchPad.cells.halves[5]);
         setRGB1(prim, g_ScratchPad.cells.halves[6], g_ScratchPad.cells.halves[7], g_ScratchPad.cells.halves[6]);
         setRGB2(prim, g_ScratchPad.cells.halves[6], g_ScratchPad.cells.halves[7], g_ScratchPad.cells.halves[6]);
-        Area_AddCellPrim(g_Task->pos.x.fixed, g_Task->pos.y.fixed, 2, sizeof(POLY_G3));
+        Area_CellAddPrim(g_Task->pos.x.fixed, g_Task->pos.y.fixed, 2, sizeof(POLY_G3));
     }
 }
 
@@ -267,7 +267,7 @@ MATCH void BMagic_DrawGlowRing(void) {
     s32      i;
 
     SetDrawMode((DR_MODE*)g_GfxPrimCursor, 0, 1, getTPage(TPAGE_DEPTH_4BIT, TPAGE_ABR_ADD, 320, 256), 0);
-    Area_AddCellPrim(g_Task->pos.x.fixed, g_Task->pos.y.fixed, 2, sizeof(DR_MODE));
+    Area_CellAddPrim(g_Task->pos.x.fixed, g_Task->pos.y.fixed, 2, sizeof(DR_MODE));
     GLOW_RING_INNER           = g_Task->timer * 16 + 16;
     GLOW_RING_OUTER           = g_Task->timer * 16 + 0x80;
     GLOW_RING_RED             = g_Task->timer * 9;
@@ -295,7 +295,7 @@ MATCH void BMagic_DrawGlowRing(void) {
         setRGB1(prim, 1, 1, 1);
         setRGB2(prim, GLOW_RING_RED, GLOW_RING_GREEN, GLOW_RING_RED);
         setRGB3(prim, GLOW_RING_RED, GLOW_RING_GREEN, GLOW_RING_RED);
-        Area_AddCellPrim(g_Task->pos.x.fixed, g_Task->pos.y.fixed, 2, sizeof(POLY_G4));
+        Area_CellAddPrim(g_Task->pos.x.fixed, g_Task->pos.y.fixed, 2, sizeof(POLY_G4));
     }
 }
 

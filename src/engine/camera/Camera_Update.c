@@ -60,31 +60,31 @@ MATCH void Camera_Update(void) {
         }
     }
     if ((s16)D_80149336 >= 0x200) {
-        Area_LoadCellColumnNext();
+        Area_CellLoadColumnNext();
         refilled                 = 1;
         g_AreaCameraRefreshCount = 2;
         D_80149336 -= 0x200;
     }
     if ((s16)D_80149336 < -0x1FF) {
-        Area_LoadCellColumnPrev();
+        Area_CellLoadColumnPrev();
         refilled                 = 1;
         g_AreaCameraRefreshCount = 2;
         D_80149336 += 0x200;
     }
     if ((s16)g_AreaTileRemainderY >= 0x200) {
-        Area_LoadCellRowsNext();
+        Area_CellLoadRowsNext();
         refilled                 = 1;
         g_AreaCameraRefreshCount = 2;
         g_AreaTileRemainderY -= 0x200;
     }
     if ((s16)g_AreaTileRemainderY < -0x1FF) {
-        Area_LoadCellRowsPrev();
+        Area_CellLoadRowsPrev();
         refilled                 = 1;
         g_AreaCameraRefreshCount = 2;
         g_AreaTileRemainderY += 0x200;
     }
     if (refilled != 0) {
-        Area_IndexCells();
+        Area_CellIndex();
     }
     if (g_AreaCameraAngle.vx != g_AreaPreviousCameraAngle.vx || g_AreaCameraAngle.vy != g_AreaPreviousCameraAngle.vy || g_AreaCameraAngle.vz != g_AreaPreviousCameraAngle.vz) {
         g_AreaCameraRefreshCount  = 3;
@@ -99,7 +99,7 @@ MATCH void Camera_Update(void) {
     SetRotMatrix(&g_CameraMatrix);
     SetTransMatrix(&g_CameraMatrix);
     if (g_AreaCameraRefreshCount != 0) {
-        Area_DrawCellRing();
+        Area_CellDrawRing();
         g_AreaCameraRefreshCount -= 1;
     }
 }

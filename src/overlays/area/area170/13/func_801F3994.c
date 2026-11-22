@@ -43,7 +43,7 @@ NON_MATCHING void func_801F3994(void) {
             cell       = (u32*)(cell_base + cell_index * 4);
             *cell      = *cell & ~0xFF;
             *cell |= D_801F57CC[sum * 63 + (u8)row * 9 + (u8)col];
-            cell_id = Area_GetCellId((u8)col + 0x16, (u8)row + 0x8E);
+            cell_id = Area_CellGetId((u8)col + 0x16, (u8)row + 0x8E);
             if (cell_id != 0) {
                 Area_ApplyTileToQuad(*cell, &g_AreaCellPrims[cell_id * 80], 2);
             }

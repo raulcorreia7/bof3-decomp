@@ -4,8 +4,8 @@ MATCH void func_801F3A38(void) {
     SYS_SetFlag(g_SceneEventFlags, 125);
     if (g_UiMessageChoice == 0) {
         Game_SetScriptActive();
-        Area_StartScrollRoute(3);
-        Area_SetCellRun(D_801F4DBC, 0);
+        Area_ScrollStartRoute(3);
+        Area_CellSetRun(D_801F4DBC, 0);
         g_SceneEventState.mode = 0x34;
         g_SceneEventState.step = 0x32;
         g_UiMessageRequest     = MSG_AREA141_005;

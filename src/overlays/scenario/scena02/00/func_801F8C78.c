@@ -18,7 +18,7 @@ MATCH void func_801F8C78(void) {
             }
             SND_StopSequence(0, 0);
             Scene_SetupParty(0x18);
-            Area_StartScrollRoute(5);
+            Area_ScrollStartRoute(5);
             g_ScenarioState.step_05 = 1;
             break;
         case 1:
@@ -73,7 +73,7 @@ MATCH void func_801F8C78(void) {
             if (g_ScriptVars[0] != 0x71) {
                 break;
             }
-            Area_StartScrollRoute(1);
+            Area_ScrollStartRoute(1);
             g_ScenarioState.step_05 = 6;
             break;
         case 6:

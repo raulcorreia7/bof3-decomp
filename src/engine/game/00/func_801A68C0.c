@@ -64,15 +64,15 @@ MATCH void func_801A68C0(u8* script) {
     g_Task->tint.bytes.flags   = 2;
 
     if (D_80146900[*counter][0] == 0) {
-        Area_SetCellCode(COORD_INT(g_Task->pos.x), COORD_INT(g_Task->pos.y), 0x10);
+        Area_CellSetCode(COORD_INT(g_Task->pos.x), COORD_INT(g_Task->pos.y), 0x10);
         if (COORD_FRAC(g_Task->pos.x) != 0) {
-            Area_SetCellCode((s16)((u16)COORD_INT(g_Task->pos.x) + 1), COORD_INT(g_Task->pos.y), 0x10);
+            Area_CellSetCode((s16)((u16)COORD_INT(g_Task->pos.x) + 1), COORD_INT(g_Task->pos.y), 0x10);
         }
         if (COORD_FRAC(g_Task->pos.y) != 0) {
-            Area_SetCellCode(COORD_INT(g_Task->pos.x), (s16)((u16)COORD_INT(g_Task->pos.y) + 1), 0x10);
+            Area_CellSetCode(COORD_INT(g_Task->pos.x), (s16)((u16)COORD_INT(g_Task->pos.y) + 1), 0x10);
         }
         if ((COORD_FRAC(g_Task->pos.x) != 0) && (COORD_FRAC(g_Task->pos.y) != 0)) {
-            Area_SetCellCode((s16)((u16)COORD_INT(g_Task->pos.x) + 1), (s16)((u16)COORD_INT(g_Task->pos.y) + 1), 0x10);
+            Area_CellSetCode((s16)((u16)COORD_INT(g_Task->pos.x) + 1), (s16)((u16)COORD_INT(g_Task->pos.y) + 1), 0x10);
         }
     }
 

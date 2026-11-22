@@ -18,7 +18,7 @@ MATCH void func_801F2E58(s32 state) {
         g_AreaFocusY = TO_COORD(100);
         D_80147ACF   = 2;
     }
-    Area_StartScrollRoute(mode);
+    Area_ScrollStartRoute(mode);
     D_801448EE             = 0x96;
     g_SceneEventState.mode = 0x27;
     g_SceneEventState.step = state;

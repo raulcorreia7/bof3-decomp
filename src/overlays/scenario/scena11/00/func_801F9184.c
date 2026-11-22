@@ -16,7 +16,7 @@ MATCH void func_801F9184(void) {
         case 1: {
             u8 object_index;
 
-            Area_StartScrollRoute(0);
+            Area_ScrollStartRoute(0);
             g_AreaCameraRefreshCount = 2;
             g_AreaCameraOffsetZHalf -= 0x500;
 
@@ -177,7 +177,7 @@ MATCH void func_801F9184(void) {
             u8 object_index;
 
             SND_PlaySE(0x200);
-            Area_StartScrollRoute(1);
+            Area_ScrollStartRoute(1);
             g_AreaCameraRefreshCount = 2;
             g_AreaCameraOffsetZHalf -= 0x780;
 
@@ -195,7 +195,7 @@ MATCH void func_801F9184(void) {
                 g_ScriptVars[3]                                             = g_ScratchPad.cells.bytes[0];
             }
 
-            Area_SetCellPalette(0x53, 0x1B);
+            Area_CellSetPalette(0x53, 0x1B);
 
             object_index                = Actor_FindFreeSpawned();
             g_ScratchPad.cells.bytes[0] = object_index;
@@ -399,7 +399,7 @@ MATCH void func_801F9184(void) {
         }
 
         case 34:
-            Area_StartScrollRoute(1);
+            Area_ScrollStartRoute(1);
             g_ScenarioState.step_05 = 0x23;
             break;
 
@@ -431,7 +431,7 @@ MATCH void func_801F9184(void) {
             break;
 
         case 38:
-            Area_StartScrollRoute(2);
+            Area_ScrollStartRoute(2);
             g_ScenarioState.step_05 = 0x27;
             break;
 

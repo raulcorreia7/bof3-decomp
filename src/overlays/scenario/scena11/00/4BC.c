@@ -34,7 +34,7 @@ MATCH void func_801F7178(void) {
     angle                = (u16)g_AreaCameraAngle.vy;
     scroll               = angle + 244;
     g_AreaCameraAngle.vy = angle + 4;
-    Area_AdvanceScroll(scroll);
+    Area_ScrollAdvance(scroll);
     if (g_AreaCameraAngle.vy >= 241) {
         if (g_GameStateIndex == GAME_REQUEST_IDLE) {
             SND_PlaySE(EMI_SE_ID(SND_BANK_AREA, 3));
@@ -50,7 +50,7 @@ MATCH void func_801F7200(void) {
     angle                = (u16)g_AreaCameraAngle.vy;
     scroll               = angle + 236;
     g_AreaCameraAngle.vy = angle - 4;
-    Area_AdvanceScroll(scroll);
+    Area_ScrollAdvance(scroll);
     if (g_AreaCameraAngle.vy < -240) {
         if (g_GameStateIndex == GAME_REQUEST_IDLE) {
             SND_PlaySE(EMI_SE_ID(SND_BANK_AREA, 3));

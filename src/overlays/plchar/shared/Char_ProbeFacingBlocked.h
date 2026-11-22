@@ -40,18 +40,18 @@
             blocked = 1;                                            \
         }                                                           \
                                                                     \
-        cell = Area_GetCellCode(x >> 16, y >> 16);                  \
+        cell = Area_CellGetCode(x >> 16, y >> 16);                  \
         if (CHAR_CELL_CODE_BLOCKS_CHARACTER(cell)) {                \
             blocked = 1;                                            \
         }                                                           \
         if ((x & HALF_MASK) != 0) {                                 \
-            cell = Area_GetCellCode((s16)((x >> 16) + 1), y >> 16); \
+            cell = Area_CellGetCode((s16)((x >> 16) + 1), y >> 16); \
             if (CHAR_CELL_CODE_BLOCKS_CHARACTER(cell)) {            \
                 blocked = 1;                                        \
             }                                                       \
         }                                                           \
         if ((y & HALF_MASK) != 0) {                                 \
-            cell = Area_GetCellCode(x >> 16, (s16)((y >> 16) + 1)); \
+            cell = Area_CellGetCode(x >> 16, (s16)((y >> 16) + 1)); \
             if (CHAR_CELL_CODE_BLOCKS_CHARACTER(cell)) {            \
                 blocked = 1;                                        \
             }                                                       \

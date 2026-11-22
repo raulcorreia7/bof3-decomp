@@ -6,7 +6,7 @@ MATCH bool func_801B6610(s16 map_x, s16 map_y) {
     s32 sentinel;
     u8  entry;
 
-    value    = Area_GetCellCode(map_x, map_y);
+    value    = Area_CellGetCode(map_x, map_y);
     index    = 0;
     sentinel = 0xFF;
     value &= BYTE_MASK;

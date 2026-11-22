@@ -209,7 +209,7 @@ NON_MATCHING void func_801EF670(void) {
         y                         = (g_ScratchPadVectors[2].vy << 9) + g_Task->pos.y.fixed;
         tpage                     = getTPage(TPAGE_DEPTH_4BIT, TPAGE_ABR_ADD, 320, 256);
         SetDrawMode((DR_MODE*)g_GfxPrimCursor, 0, 1, tpage, 0);
-        Area_AddCellPrim(x, y, 0, sizeof(DR_MODE));
+        Area_CellAddPrim(x, y, 0, sizeof(DR_MODE));
         prim = (POLY_G4*)g_GfxPrimCursor;
         SetPolyG4(prim);
         SetSemiTrans(prim, 1);
@@ -220,7 +220,7 @@ NON_MATCHING void func_801EF670(void) {
         setRGB2(prim, g_ScratchPad.cells.halves[5], g_ScratchPad.cells.halves[6], g_ScratchPad.cells.halves[7]);
         setRGB3(prim, g_ScratchPad.cells.halves[5], g_ScratchPad.cells.halves[6], g_ScratchPad.cells.halves[7]);
         /* Retail advances the cursor 40 bytes, a POLY_FT4, past this 36-byte POLY_G4. */
-        Area_AddCellPrim(x, y, 0, sizeof(POLY_FT4));
+        Area_CellAddPrim(x, y, 0, sizeof(POLY_FT4));
     }
 }
 #else

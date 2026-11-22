@@ -25,11 +25,11 @@ MATCH void func_801F35B0(void) {
         row            = y + (g_Task->direction != 0 ? offset : offset + row_adjustment);
         map            = (AreaMapBundle*)MAP_BUNDLE_BASE;
         entry          = (u8*)(map->grid_offset * 4 + (((map->width * map->height + 1) / 2) * 4 + (u32)map) + *(u16*)(column * 2 + (row * map->width * 2 + map->grid_offset * 4) + (u32)map) * 4);
-        id             = Area_GetCellId(column, row);
+        id             = Area_CellGetId(column, row);
         if (g_Task->direction != 0) {
             prim = g_AreaCellPrims[id][1].pad1;
             if (prim == 0) {
-                prim                        = Area_AllocCellPrimRow();
+                prim                        = Area_CellAllocPrimRow();
                 g_AreaCellPrims[id][1].pad1 = prim;
                 row_id                      = prim & HALF_MASK;
                 Area_ApplyTileToQuad(*(u32*)(entry + 4), &g_AreaCellPrims[row_id][0], 2);
@@ -37,7 +37,7 @@ MATCH void func_801F35B0(void) {
         } else {
             prim = g_AreaCellPrims[id][1].pad2;
             if (prim == 0) {
-                prim                        = Area_AllocCellPrimRow();
+                prim                        = Area_CellAllocPrimRow();
                 g_AreaCellPrims[id][1].pad2 = prim;
                 row_id                      = prim & HALF_MASK;
                 Area_ApplyTileToQuad(*(u32*)(entry + 4), &g_AreaCellPrims[row_id][0], 2);

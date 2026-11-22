@@ -19,7 +19,7 @@
 #define SCENA15_SPRITE_END(prim)                                                    \
     (prim)->tpage = GetTPage(TPAGE_DEPTH_15BIT, TPAGE_ABR_ADD, 0x340, 0x100);       \
     SetSemiTrans(prim, 1);                                                          \
-    Area_AddCellPrim(g_Task->pos.x.fixed, g_Task->pos.y.fixed, 1, sizeof(POLY_GT4))
+    Area_CellAddPrim(g_Task->pos.x.fixed, g_Task->pos.y.fixed, 1, sizeof(POLY_GT4))
 
 extern u32      D_801F6C00;
 /* D_801FE57C */

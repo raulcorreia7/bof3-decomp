@@ -94,7 +94,7 @@ NON_MATCHING void func_8019FAA0(u16 area_id, u32 entry_x, u32 entry_y, u8 entry_
                 goto end;
             func_8019FF88(0, entry_x, entry_y);
             if (((g_Game.flags & 0x800u) == 0) && ((g_Game.walk_flags & AREA_WALK_MAP_LOADING) == 0))
-                Area_SetCellPalette(g_AreaTargetCellX, g_AreaTargetCellY);
+                Area_CellSetPalette(g_AreaTargetCellX, g_AreaTargetCellY);
             goto tail;
         }
         func_8019FF88(mode, entry_x, entry_y);

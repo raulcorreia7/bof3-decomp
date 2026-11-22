@@ -20,7 +20,7 @@ MATCH void func_801F2F3C(s32 depth, s32 height) {
         quad[0].vz = quad[1].vz = quad[2].vz = quad[3].vz = depth;
         RotTransPers4(&quad[0], &quad[1], &quad[2], &quad[3], (long*)(prim + 8), (long*)(prim + 0x10), (long*)(prim + 0x18), (long*)(prim + 0x20), &p, &flag);
         Area_ApplyTileToQuad(AREA095_QUAD_PART_WORD | (height << 16), prim, 1);
-        Area_AddCellPrim(D_801F3694[i].x << 16, D_801F3694[i].y << 16, D_801F3694[i].z, sizeof(POLY_FT4));
+        Area_CellAddPrim(D_801F3694[i].x << 16, D_801F3694[i].y << 16, D_801F3694[i].z, sizeof(POLY_FT4));
         i++;
     } while (i < AREA_PAYLOAD_QUAD_COUNT);
 }

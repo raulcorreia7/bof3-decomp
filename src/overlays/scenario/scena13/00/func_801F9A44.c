@@ -81,7 +81,7 @@ MATCH void func_801F9A44(void) {
                 break;
             }
             Scene_SetupParty(2);
-            Area_SetCellPalette(0xA, 8);
+            Area_CellSetPalette(0xA, 8);
             g_ScenarioState.step_05 = 0xC;
             break;
         case 12:

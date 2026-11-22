@@ -28,7 +28,7 @@ MATCH s32 func_801B4150(void) {
         s32 step = g_Task->voice_flags.scene_flag + 2;
         x        = g_Task->pos.x.fixed + g_FacingSteps[dir].x * step;
         y        = g_Task->pos.y.fixed + g_FacingSteps[dir].y * step;
-        if ((Area_GetCellCode((x >> 16), (y >> 16)) & BYTE_MASK) != 0x30) {
+        if ((Area_CellGetCode((x >> 16), (y >> 16)) & BYTE_MASK) != 0x30) {
             dir = g_Task->direction;
             x   = g_Task->pos.x.fixed + g_FacingSteps[dir].x;
             y   = g_Task->pos.y.fixed + g_FacingSteps[dir].y;

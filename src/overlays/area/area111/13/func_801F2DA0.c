@@ -30,7 +30,7 @@ NON_MATCHING void func_801F2DA0(void* position, s32 radius1, s32 radius2) {
     i    = 0;
     do {
         SetDrawMode((DR_MODE*)g_GfxPrimCursor, 0, 1, GetTPage(TPAGE_DEPTH_4BIT, TPAGE_ABR_ADD, 0x380, 0x100), 0);
-        Area_AddCellPrim(pos[0], pos[1], 0, sizeof(DR_MODE));
+        Area_CellAddPrim(pos[0], pos[1], 0, sizeof(DR_MODE));
         prim = (POLY_G4*)g_GfxPrimCursor;
         SetPolyG4(prim);
         SetSemiTrans(prim, 1);
@@ -55,7 +55,7 @@ NON_MATCHING void func_801F2DA0(void* position, s32 radius1, s32 radius2) {
         setRGB1(prim, 0, 0, 0);
         setRGB2(prim, 0x80, 0x80, 0x80);
         setRGB3(prim, 0, 0, 0);
-        Area_AddCellPrim(pos[0], pos[1], 0, sizeof(POLY_G4));
+        Area_CellAddPrim(pos[0], pos[1], 0, sizeof(POLY_G4));
         i++;
     } while (i < 32);
 }

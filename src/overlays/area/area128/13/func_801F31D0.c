@@ -7,9 +7,9 @@ MATCH void func_801F31D0(void) {
         Area_RunBundleObjects();
     }
     if (g_ScenarioState.scenario_id >= 11 && SYS_TestFlag(g_SceneEventFlags, 67)) {
-        Area_SetCellCode(31, 57, 0xC0);
-        Area_SetCellCode(32, 57, 0xC0);
-        Area_SetCellCode(31, 58, 0xA1);
-        Area_SetCellCode(32, 58, 0xA1);
+        Area_CellSetCode(31, 57, 0xC0);
+        Area_CellSetCode(32, 57, 0xC0);
+        Area_CellSetCode(31, 58, 0xA1);
+        Area_CellSetCode(32, 58, 0xA1);
     }
 }

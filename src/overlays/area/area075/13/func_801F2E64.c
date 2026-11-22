@@ -13,7 +13,7 @@ NON_MATCHING void func_801F2E64(s32 phase, s32 semi_trans) {
     setWH(&window, 0x10, 0x10);
     g_GfxPrimCursor = (u8*)prim + 8;
     SetTexWindow((DR_TWIN*)((u8*)prim + 8), &window);
-    Area_AddCellPrim(g_Task->pos.x.fixed, g_Task->pos.y.fixed, 1, 0xC);
+    Area_CellAddPrim(g_Task->pos.x.fixed, g_Task->pos.y.fixed, 1, 0xC);
 
     origin = (u16)phase << 15;
     Area_SampleHeight(g_Task->pos.x.fixed - origin, g_Task->pos.y.fixed);
@@ -37,7 +37,7 @@ NON_MATCHING void func_801F2E64(s32 phase, s32 semi_trans) {
     prim->b0    = g_Task->tint.bytes.rgb.b;
     SetSemiTrans(prim, semi_trans & 0xFF);
     SetShadeTex(prim, 0);
-    Area_AddCellPrim(g_Task->pos.x.fixed, g_Task->pos.y.fixed, 1, sizeof(POLY_FT4));
+    Area_CellAddPrim(g_Task->pos.x.fixed, g_Task->pos.y.fixed, 1, sizeof(POLY_FT4));
 
     prim            = (POLY_FT4*)g_GfxPrimCursor;
     g_GfxPrimCursor = (u8*)prim + 8;
@@ -45,7 +45,7 @@ NON_MATCHING void func_801F2E64(s32 phase, s32 semi_trans) {
     window.y        = 0;
     setWH(&window, 0x100, 0x100);
     SetTexWindow((DR_TWIN*)((u8*)prim + 8), &window);
-    Area_AddCellPrim(g_Task->pos.x.fixed, g_Task->pos.y.fixed, 1, 0xC);
+    Area_CellAddPrim(g_Task->pos.x.fixed, g_Task->pos.y.fixed, 1, 0xC);
 }
 #else
 INCLUDE_ASM(func_801F2E64);

@@ -8,7 +8,7 @@ MATCH void func_801F3AD8(AreaRippleQuad* quad) {
     u8       i;
 
     SetDrawMode((DR_MODE*)g_GfxPrimCursor, 0, 1, GetTPage(TPAGE_DEPTH_4BIT, TPAGE_ABR_ADD, 0x380, 0x100), NULL);
-    Area_AddCellPrim(D_801F53A0, D_801F53A4, 4, sizeof(DR_MODE));
+    Area_CellAddPrim(D_801F53A0, D_801F53A4, 4, sizeof(DR_MODE));
     shade = quad->angle;
     angle = 0;
     for (i = 0; i < 8; i++) {
@@ -45,8 +45,8 @@ MATCH void func_801F3AD8(AreaRippleQuad* quad) {
         }
         setRGB2(prim, color, color, color);
         setRGB3(prim, color, color, color);
-        Area_AddCellPrim(D_801F53A0, D_801F53A4, 4, sizeof(POLY_G4));
+        Area_CellAddPrim(D_801F53A0, D_801F53A4, 4, sizeof(POLY_G4));
     }
     SetDrawMode((DR_MODE*)g_GfxPrimCursor, 0, 0, GetTPage(TPAGE_DEPTH_4BIT, TPAGE_ABR_ADD, 0x380, 0x100), NULL);
-    Area_AddCellPrim(D_801F53A0, D_801F53A4, 4, sizeof(DR_MODE));
+    Area_CellAddPrim(D_801F53A0, D_801F53A4, 4, sizeof(DR_MODE));
 }

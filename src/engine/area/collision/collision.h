@@ -27,7 +27,7 @@ void        Area_SyncScrollHeight(void);
 
 s8   Area_IsStepBlocked(s32 handler_x, s32 handler_y);
 /* func_801A20F8 */
-s32  Area_IsCellBlocked(s16 cell_x, s16 cell_y);
+s32  Area_CellIsBlocked(s16 cell_x, s16 cell_y);
 /* func_801B3260 */
 void Area_Climb(void);
 /* func_801B32D0 */

@@ -6,7 +6,7 @@ MATCH s32 PlChar_ProbeCellSpawn(s16 x, s16 y) {
     s32 spawn_cue;
     u8* record;
 
-    cell = Area_GetCellCode(x, y) & BYTE_MASK;
+    cell = Area_CellGetCode(x, y) & BYTE_MASK;
     if (cell == 0xF2) {
         if ((Actor_FindFreeSpawned() & BYTE_MASK) != GAME_NONE) {
             PlChar_SpawnActor(0, x, y);
@@ -24,7 +24,7 @@ MATCH s32 PlChar_ProbeCellSpawn(s16 x, s16 y) {
             }
             g_Task->param.unk_0B = 1;
         }
-        Area_ClearCell(x, y);
+        Area_CellClear(x, y);
         return 1;
     }
     if (cell == 0xF8) {
@@ -42,7 +42,7 @@ MATCH s32 PlChar_ProbeCellSpawn(s16 x, s16 y) {
         }
         g_GameStateIndex     = GAME_REQUEST_MESSAGE;
         g_Task->param.unk_0B = 1;
-        Area_ClearCell(x, y);
+        Area_CellClear(x, y);
         return 1;
     }
     return 0;

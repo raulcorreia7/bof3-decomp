@@ -48,8 +48,8 @@ NON_MATCHING s32 func_801BB2B8(s32 x0, s32 y0, s32 x1, s32 y1) {
         hy0 = (hy0 + (ypack.w & -0x10000)) / 2;
     }
 
-    code1 = Area_GetCellCode(x0, y0);
-    code2 = Area_GetCellCode(x1, y1);
+    code1 = Area_CellGetCode(x0, y0);
+    code2 = Area_CellGetCode(x1, y1);
     key   = code1 & 0xF0;
 
     if (key == 0x70)

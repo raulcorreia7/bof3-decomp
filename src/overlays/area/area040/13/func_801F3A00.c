@@ -32,7 +32,7 @@ MATCH void func_801F3A00(void) {
         for (y = 0; y < 4; y++) {
             for (x = 0; x < 4; x++) {
                 if (D_801F4960[y][x] != 0) {
-                    Area_SetCellPalette((s16)(x + 0x94), (s16)(y + 0x20));
+                    Area_CellSetPalette((s16)(x + 0x94), (s16)(y + 0x20));
                 }
             }
         }

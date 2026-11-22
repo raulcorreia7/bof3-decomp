@@ -1,0 +1,25 @@
+#include "engine/slus/slus.h"
+
+/* queues and clears the low-12-bit prim_id of entry, then queues and
+ * clears the nonzero pad1 and pad2 links of its g_AreaCellPrims row.
+ */
+MATCH void Area_CellRequestRows(AreaCell* entry) {
+    u16 id;
+    u16 value;
+
+    id = entry->prim_id & AREA_CELL_PRIM_MASK;
+    if (id != 0) {
+        Area_CellFreePrimRow(id);
+        entry->prim_id = 0;
+        value          = g_AreaCellPrims[id][1].pad1;
+        if (value != 0) {
+            Area_CellFreePrimRow(value);
+            g_AreaCellPrims[id][1].pad1 = 0;
+        }
+        value = g_AreaCellPrims[id][1].pad2;
+        if (value != 0) {
+            Area_CellFreePrimRow(value);
+            g_AreaCellPrims[id][1].pad2 = 0;
+        }
+    }
+}

@@ -1,6 +1,6 @@
 #include "game_00.h"
 
-#define AREA_CELL_BLOCKED(x, y) ((s32 (*)(u16, u16))Area_IsCellBlocked)((u16)(x), (u16)(y))
+#define AREA_CELL_BLOCKED(x, y) ((s32 (*)(u16, u16))Area_CellIsBlocked)((u16)(x), (u16)(y))
 
 #ifdef NON_MATCHING
 NON_MATCHING s32 func_801A1C5C(s32 x, s32 y, s32 route, s32 unused) {

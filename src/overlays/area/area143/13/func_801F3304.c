@@ -107,7 +107,7 @@ MATCH void func_801F3304(void) {
     func_801F3584(point7, point8, 0);
 
     if (top >= 0x100 && g_Task->param.unk_0B == 0) {
-        Area_SetCellPalette(0xB, 0x22);
+        Area_CellSetPalette(0xB, 0x22);
         g_Task->param.unk_0B = 1;
     }
     if (point8 >= 0x100) {

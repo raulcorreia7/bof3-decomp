@@ -27,7 +27,7 @@ NON_MATCHING void func_801FB270(void) {
             g_PartyX       = g_AreaScrollTargetX;
             g_PartyY       = g_AreaScrollTargetY;
             g_ScrollHeight = Area_SampleHeight(g_AreaScrollTargetX, g_AreaScrollTargetY);
-            Area_AdvanceScroll(Area_SampleHeight(g_AreaScrollTargetX, g_AreaScrollTargetY));
+            Area_ScrollAdvance(Area_SampleHeight(g_AreaScrollTargetX, g_AreaScrollTargetY));
             g_ScriptVars[0]         = 1;
             g_ScenarioState.step_05 = 2;
             break;

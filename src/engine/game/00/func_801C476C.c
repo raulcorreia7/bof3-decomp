@@ -8,10 +8,10 @@ MATCH u8 func_801C476C(s32 pos_x, s32 pos_y, u8 wanted_code, u8 mask_cells) {
 
     x        = pos_x >> 16;
     y        = pos_y >> 16;
-    cells[0] = Area_GetCellCode(x, y);
-    cells[1] = Area_GetCellCode((s16)(x + 1), y);
-    cells[2] = Area_GetCellCode(x, (s16)(y + 1));
-    cells[3] = Area_GetCellCode((s16)(x + 1), (s16)(y + 1));
+    cells[0] = Area_CellGetCode(x, y);
+    cells[1] = Area_CellGetCode((s16)(x + 1), y);
+    cells[2] = Area_CellGetCode(x, (s16)(y + 1));
+    cells[3] = Area_CellGetCode((s16)(x + 1), (s16)(y + 1));
     for (i = 0; i < 4; i++) {
         if ((cells[i] & 0xF0) == 0x20) {
             cells[i] &= 0x21;

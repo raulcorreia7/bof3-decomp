@@ -95,7 +95,7 @@ MATCH void func_801EF070(void) {
 
     tpage = getTPage(TPAGE_DEPTH_8BIT, TPAGE_ABR_ADD, 320, 256);
     SetDrawMode((DR_MODE*)g_GfxPrimCursor, 0, 1, tpage, 0);
-    Area_AddCellPrim(g_Task->pos.x.fixed, g_Task->pos.y.fixed, 1, sizeof(DR_MODE));
+    Area_CellAddPrim(g_Task->pos.x.fixed, g_Task->pos.y.fixed, 1, sizeof(DR_MODE));
     shade  = &D_1F800006;
     prim   = (POLY_FT4*)g_GfxPrimCursor;
     *shade = g_Task->unk_09 * 8;
@@ -108,7 +108,7 @@ MATCH void func_801EF070(void) {
     prim->clut  = GetClut(0, 506);
     setUVWH(prim, 8, 8, 112, 96);
     setRGB0(prim, *shade, *shade, *shade);
-    Area_AddCellPrim(g_Task->pos.x.fixed, g_Task->pos.y.fixed, 1, sizeof(POLY_FT4));
+    Area_CellAddPrim(g_Task->pos.x.fixed, g_Task->pos.y.fixed, 1, sizeof(POLY_FT4));
 }
 
 /* func_801EF210 */

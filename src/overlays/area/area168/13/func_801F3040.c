@@ -13,12 +13,12 @@ MATCH void func_801F3040(s16 x0, s16 y0, s16 radius0, u16 angle0, s16 x1, s16 y1
     setRGB1(prim, D_801F4B2C[(s16)(g_Task->unk_06 * 3)], D_801F4B2D[(s16)(g_Task->unk_06 * 3)], D_801F4B2E[(s16)(g_Task->unk_06 * 3)]);
     setRGB2(prim, 0, 0, 0);
     setRGB3(prim, 0, 0, 0);
-    Area_AddCellPrim(g_Task->vx, g_Task->vy, 1, sizeof(POLY_G4));
+    Area_CellAddPrim(g_Task->vx, g_Task->vy, 1, sizeof(POLY_G4));
     prim++;
     memcpy(prim, prim - 1, sizeof(POLY_G4));
     prim->x2 = x0 + FIXED_MUL(radius0, rcos(angle0 + ANGLE_180));
     prim->y2 = y0 + FIXED_MUL(radius0, rsin(angle0 + ANGLE_180));
     prim->x3 = x1 + FIXED_MUL(radius1, rcos(angle1));
     prim->y3 = y1 + FIXED_MUL(radius1, rsin(angle1));
-    Area_AddCellPrim(g_Task->vx, g_Task->vy, 1, sizeof(POLY_G4));
+    Area_CellAddPrim(g_Task->vx, g_Task->vy, 1, sizeof(POLY_G4));
 }

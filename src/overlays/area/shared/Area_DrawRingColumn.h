@@ -70,5 +70,5 @@ ASSERT_SIZE(AreaRingDepthView, 0x28);
         setRGB0(prim, shade, shade, shade);                                 \
         prim->tpage = GetTPage(TPAGE_DEPTH_8BIT, TPAGE_ABR_HALF, 448, 256); \
         prim->clut  = GetClut(0, 485);                                      \
-        Area_AddCellPrim(pt[0], pt[1], 2, sizeof(POLY_FT4));                \
+        Area_CellAddPrim(pt[0], pt[1], 2, sizeof(POLY_FT4));                \
     }

@@ -179,7 +179,7 @@ MATCH void func_801EF79C(u8 unused, s32 semi) {
     trans = semi;
     tpage = getTPage(TPAGE_DEPTH_4BIT, semi, 320, 256);
     SetDrawMode((DR_MODE*)g_GfxPrimCursor, 0, 1, tpage, 0);
-    Area_AddCellPrim(g_Task->pos.x.fixed, g_Task->pos.y.fixed, 2, sizeof(DR_MODE));
+    Area_CellAddPrim(g_Task->pos.x.fixed, g_Task->pos.y.fixed, 2, sizeof(DR_MODE));
     g_ScratchPad.cells.words[0] = 36;
     g_ScratchPad.cells.words[1] = g_Task->unk_09 << 3;
     prim                        = (POLY_FT4*)g_GfxPrimCursor;
@@ -201,5 +201,5 @@ MATCH void func_801EF79C(u8 unused, s32 semi) {
     prim->clut                  = GetClut(0, 506);
     setUV4(prim, g_Task->param.unk_0B << 5, 0, (g_Task->param.unk_0B << 5) + 31, 0, g_Task->param.unk_0B << 5, 64, (g_Task->param.unk_0B << 5) + 31, 64);
     setRGB0(prim, g_ScratchPad.cells.words[1], g_ScratchPad.cells.words[1], g_ScratchPad.cells.words[1]);
-    Area_AddCellPrim(g_Task->pos.x.fixed, g_Task->pos.y.fixed, 2, sizeof(POLY_FT4));
+    Area_CellAddPrim(g_Task->pos.x.fixed, g_Task->pos.y.fixed, 2, sizeof(POLY_FT4));
 }

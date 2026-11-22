@@ -18,7 +18,7 @@ MATCH void func_801F9F0C(void) {
             break;
         case 1:
             g_AreaDrawFlags = 0x1F;
-            Area_StartScrollRoute(0);
+            Area_ScrollStartRoute(0);
             g_ScenarioState.step_05 = 2;
             break;
         case 2: {
@@ -88,7 +88,7 @@ MATCH void func_801F9F0C(void) {
             break;
         }
         case 7:
-            Area_StartScrollRoute(1);
+            Area_ScrollStartRoute(1);
             g_ScenarioState.step_05 = 8;
             break;
         case 8: {
@@ -106,7 +106,7 @@ MATCH void func_801F9F0C(void) {
             break;
         }
         case 9:
-            Area_StartScrollRoute(2);
+            Area_ScrollStartRoute(2);
             g_ScenarioState.step_05 = 0xA;
             break;
         case 10: {
@@ -156,7 +156,7 @@ MATCH void func_801F9F0C(void) {
             break;
         }
         case 13:
-            Area_StartScrollRoute(3);
+            Area_ScrollStartRoute(3);
             g_ScenarioState.step_05 = 0xE;
             break;
         case 14: {

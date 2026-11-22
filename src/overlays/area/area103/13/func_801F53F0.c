@@ -24,7 +24,7 @@ NON_MATCHING void func_801F53F0(s32 radius) {
 
     tpage = getTPage(TPAGE_DEPTH_8BIT, TPAGE_ABR_ADD, 320, 256);
     SetDrawMode((DR_MODE*)g_GfxPrimCursor, 0, 0, tpage, 0);
-    Area_AddCellPrim(g_Task->pos.x.fixed, g_Task->pos.y.fixed, 1, sizeof(DR_MODE));
+    Area_CellAddPrim(g_Task->pos.x.fixed, g_Task->pos.y.fixed, 1, sizeof(DR_MODE));
 
     scale     = radius << 2;
     shade     = scale ^ 0x3F;
@@ -36,7 +36,7 @@ NON_MATCHING void func_801F53F0(s32 radius) {
         tile->x0 = ((rsin(i << 7) * scale) >> 14) + D_1F800034_U16[0];
         setRGB0(tile, alternate, alternate * (g_FrameCount & 1), shade * (g_FrameCount & 1));
         tile->y0 = ((rcos(i << 7) * scale) >> 15) + 8 + D_1F800034_U16[1];
-        Area_AddCellPrim(g_Task->pos.x.fixed, g_Task->pos.y.fixed, 2, sizeof(DR_MODE));
+        Area_CellAddPrim(g_Task->pos.x.fixed, g_Task->pos.y.fixed, 2, sizeof(DR_MODE));
     }
 }
 #else

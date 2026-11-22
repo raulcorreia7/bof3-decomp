@@ -45,7 +45,7 @@ NON_MATCHING void func_801F36B4(s32 steps) {
         order += steps;
         Area_ApplyTileToQuad((shade & 0xF80000) | AREA_CELL_QUAD_CODE, prim, 1);
         prim->b0 = 0;
-        Area_AddCellPrim(g_Task->pos.x.fixed, g_Task->pos.y.fixed, 3, sizeof(POLY_FT4));
+        Area_CellAddPrim(g_Task->pos.x.fixed, g_Task->pos.y.fixed, 3, sizeof(POLY_FT4));
     }
 }
 #else

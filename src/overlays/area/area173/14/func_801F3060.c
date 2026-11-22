@@ -29,7 +29,7 @@ NON_MATCHING void func_801F3060(s32 index, s32 flag) {
     entry        = (u32*)(entry_base + *(u16*)(row_offset + 0x1A + (u32)map) * 4);
     entry[1] &= ~0xFFu;
     entry[1] |= first_codes[flag][index % 3];
-    id = Area_GetCellId(13, row);
+    id = Area_CellGetId(13, row);
     if (id != 0) {
         Area_ApplyTileToQuad(entry[1], &g_AreaCellPrims[g_AreaCellPrims[id][1].pad1 & AREA_CELL_PRIM_MASK][0], 2);
     }
@@ -44,7 +44,7 @@ NON_MATCHING void func_801F3060(s32 index, s32 flag) {
         entry        = (u32*)(entry_base + *(u16*)(row_offset + 0x1C + (u32)base) * 4);
         entry[0] &= ~0xFFu;
         entry[0] |= codes[flag * 3 + index % 3] | (i + 3);
-        id = Area_GetCellId(i + 14, row);
+        id = Area_CellGetId(i + 14, row);
         if (id != 0) {
             Area_ApplyTileToQuad(entry[0], &g_AreaCellPrims[id][0], 2);
         }

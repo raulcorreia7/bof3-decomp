@@ -122,8 +122,8 @@ MATCH void func_801F6F30(void) {
 
     if (SYS_TestFlag(g_SceneFlags, 2) == 0) {
         g_ScriptVarsReq.word = 0u;
-        Area_AdvanceScroll(768u);
-        Area_StartScrollRoute(0u);
+        Area_ScrollAdvance(768u);
+        Area_ScrollStartRoute(0u);
         /* The cell is advanced through an unsigned view and read back signed
          * for x: the two views of g_AreaCameraAngle.vx are not interchangeable. */
         base                        = (u16*)&g_AreaCameraAngle.vx;
@@ -491,7 +491,7 @@ MATCH void func_801F7790(void) {
         *pos += -0x1E0000;
         *other += -0x1E0000;
         *plane += -0x1E0000;
-        Area_RefreshCellGrid();
+        Area_CellRefreshGrid();
     }
 }
 

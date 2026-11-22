@@ -101,7 +101,7 @@ MATCH void func_801F72E4(void) {
             case 0:
                 break;
             case 1:
-                Area_AdvanceScroll(0x498);
+                Area_ScrollAdvance(0x498);
                 g_AreaCameraRefreshCount = 2;
                 break;
             case 2:
@@ -134,7 +134,7 @@ MATCH void func_801F72E4(void) {
                 func_801C1E3C(3);
                 break;
             case 2:
-                Area_AdvanceScroll(0x200);
+                Area_ScrollAdvance(0x200);
                 g_AreaCameraRefreshCount = 2;
                 break;
             case 3:

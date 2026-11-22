@@ -285,7 +285,7 @@ MATCH void func_801F2DF8(const AreaSprite* sprite) {
     primitive->tpage = GetTPage(TPAGE_DEPTH_4BIT, TPAGE_ABR_ADD, 704, 256);
     setRGB0(primitive, FAKE_VOLATILE(u8, work->tick), FAKE_VOLATILE(u8, work->tick), FAKE_VOLATILE(u8, work->tick));
 
-    Area_AddCellPrim(FAKE_VOLATILE(s32, work->origin.x), FAKE_VOLATILE(s32, work->origin.y), 2, sizeof(POLY_FT4));
+    Area_CellAddPrim(FAKE_VOLATILE(s32, work->origin.x), FAKE_VOLATILE(s32, work->origin.y), 2, sizeof(POLY_FT4));
 }
 
 MATCH void func_801F2FD4(AreaSprite* sprite) {

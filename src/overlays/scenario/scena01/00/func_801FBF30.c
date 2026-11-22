@@ -39,7 +39,7 @@ MATCH void func_801FBF30(void) {
         }
         case 2:
             if (g_ScriptVars[0] == 6) {
-                Area_StartScrollRoute(0);
+                Area_ScrollStartRoute(0);
                 g_ScenarioState.step_05 = 3;
             }
             break;

@@ -16,7 +16,7 @@ MATCH void func_801F2C04(void) {
                 *target -= 0x1E0000;
                 *focus -= 0x1E0000;
                 *party -= 0x1E0000;
-                Area_RefreshCellGrid();
+                Area_CellRefreshGrid();
             }
             count = D_801448EE;
             count--;
@@ -48,7 +48,7 @@ MATCH void func_801F2C04(void) {
                 *target += 0x1E0000;
                 *focus += 0x1E0000;
                 *party += 0x1E0000;
-                Area_RefreshCellGrid();
+                Area_CellRefreshGrid();
             }
             count = D_801448EE;
             count--;

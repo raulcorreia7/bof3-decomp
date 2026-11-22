@@ -17,7 +17,7 @@ NON_MATCHING void func_801F3560(AreaSpawnSlot* slot) {
     FAKE_STACK_PADS(u8, 0x20);
 
     GFX_SET_DRAW_MODE(GetTPage(TPAGE_DEPTH_4BIT, TPAGE_ABR_SUB, FONT_TPAGE_X, FONT_TPAGE_Y));
-    Area_AddCellPrim(slot->pos.x.fixed, slot->pos.y.fixed, 3, sizeof(DR_MODE));
+    Area_CellAddPrim(slot->pos.x.fixed, slot->pos.y.fixed, 3, sizeof(DR_MODE));
 
     primitive = (POLY_FT4*)g_GfxPrimCursor;
     SetPolyFT4(primitive);
@@ -48,7 +48,7 @@ NON_MATCHING void func_801F3560(AreaSpawnSlot* slot) {
         blue = FAKE_VOLATILE(u8, slot->unk_03);
     }
     setRGB0(primitive, red, green, blue);
-    Area_AddCellPrim(slot->pos.x.fixed, slot->pos.y.fixed, 3, sizeof(POLY_FT4));
+    Area_CellAddPrim(slot->pos.x.fixed, slot->pos.y.fixed, 3, sizeof(POLY_FT4));
 }
 #else
 INCLUDE_ASM(func_801F3560);

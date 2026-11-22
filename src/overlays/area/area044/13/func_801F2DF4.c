@@ -15,13 +15,13 @@ NON_MATCHING void func_801F2DF4(void) {
         do {
             x      = i;
             column = x + 0x3C;
-            Area_SetCellCode(column, 0xA, 0);
-            Area_SetCellCode(column, 0xB, 0);
+            Area_CellSetCode(column, 0xA, 0);
+            Area_CellSetCode(column, 0xB, 0);
             x += 0x40;
-            Area_SetCellCode(x, 0xA, 0x10);
-            Area_SetCellCode(x, 0xB, 0x10);
-            Area_SetCellCode(column, 0xE, 0x10);
-            Area_SetCellCode(column, 0xF, 0x10);
+            Area_CellSetCode(x, 0xA, 0x10);
+            Area_CellSetCode(x, 0xB, 0x10);
+            Area_CellSetCode(column, 0xE, 0x10);
+            Area_CellSetCode(column, 0xF, 0x10);
             i++;
         } while (i < 2);
     } else if ((state & 3) == 1) {
@@ -29,13 +29,13 @@ NON_MATCHING void func_801F2DF4(void) {
         do {
             x      = i;
             column = x + 0x40;
-            Area_SetCellCode(column, 0xA, 0);
-            Area_SetCellCode(column, 0xB, 0);
+            Area_CellSetCode(column, 0xA, 0);
+            Area_CellSetCode(column, 0xB, 0);
             x += 0x3C;
-            Area_SetCellCode(x, 0xA, 0x10);
-            Area_SetCellCode(x, 0xB, 0x10);
-            Area_SetCellCode(x, 0xE, 0x10);
-            Area_SetCellCode(x, 0xF, 0x10);
+            Area_CellSetCode(x, 0xA, 0x10);
+            Area_CellSetCode(x, 0xB, 0x10);
+            Area_CellSetCode(x, 0xE, 0x10);
+            Area_CellSetCode(x, 0xF, 0x10);
             i++;
         } while (i < 2);
     } else {
@@ -43,13 +43,13 @@ NON_MATCHING void func_801F2DF4(void) {
         do {
             x      = i;
             column = x + 0x3C;
-            Area_SetCellCode(column, 0xE, 0);
-            Area_SetCellCode(column, 0xF, 0);
+            Area_CellSetCode(column, 0xE, 0);
+            Area_CellSetCode(column, 0xF, 0);
             x += 0x40;
-            Area_SetCellCode(x, 0xA, 0x10);
-            Area_SetCellCode(x, 0xB, 0x10);
-            Area_SetCellCode(column, 0xA, 0x10);
-            Area_SetCellCode(column, 0xB, 0x10);
+            Area_CellSetCode(x, 0xA, 0x10);
+            Area_CellSetCode(x, 0xB, 0x10);
+            Area_CellSetCode(column, 0xA, 0x10);
+            Area_CellSetCode(column, 0xB, 0x10);
             i++;
         } while (i < 2);
     }
@@ -58,13 +58,13 @@ NON_MATCHING void func_801F2DF4(void) {
         do {
             x      = i;
             column = x + 0x3E;
-            Area_SetCellCode(column, 0xC, 0);
-            Area_SetCellCode(column, 0xD, 0);
-            Area_SetCellCode(column, 0x8, 0x10);
-            Area_SetCellCode(column, 0x9, 0x10);
+            Area_CellSetCode(column, 0xC, 0);
+            Area_CellSetCode(column, 0xD, 0);
+            Area_CellSetCode(column, 0x8, 0x10);
+            Area_CellSetCode(column, 0x9, 0x10);
             x += 0x3A;
-            Area_SetCellCode(x, 0xC, 0x10);
-            Area_SetCellCode(x, 0xD, 0x10);
+            Area_CellSetCode(x, 0xC, 0x10);
+            Area_CellSetCode(x, 0xD, 0x10);
             i++;
         } while (i < 2);
     } else if (variant == 1) {
@@ -72,13 +72,13 @@ NON_MATCHING void func_801F2DF4(void) {
         do {
             x      = i;
             column = x + 0x3E;
-            Area_SetCellCode(column, 0x8, 0);
-            Area_SetCellCode(column, 0x9, 0);
-            Area_SetCellCode(column, 0xC, 0x10);
-            Area_SetCellCode(column, 0xD, 0x10);
+            Area_CellSetCode(column, 0x8, 0);
+            Area_CellSetCode(column, 0x9, 0);
+            Area_CellSetCode(column, 0xC, 0x10);
+            Area_CellSetCode(column, 0xD, 0x10);
             x += 0x3A;
-            Area_SetCellCode(x, 0xC, 0x10);
-            Area_SetCellCode(x, 0xD, 0x10);
+            Area_CellSetCode(x, 0xC, 0x10);
+            Area_CellSetCode(x, 0xD, 0x10);
             i++;
         } while (i < 2);
     } else {
@@ -86,13 +86,13 @@ NON_MATCHING void func_801F2DF4(void) {
         do {
             x      = i;
             column = x + 0x3A;
-            Area_SetCellCode(column, 0xC, 0);
-            Area_SetCellCode(column, 0xD, 0);
+            Area_CellSetCode(column, 0xC, 0);
+            Area_CellSetCode(column, 0xD, 0);
             x += 0x3E;
-            Area_SetCellCode(x, 0xC, 0x10);
-            Area_SetCellCode(x, 0xD, 0x10);
-            Area_SetCellCode(x, 0x8, 0x10);
-            Area_SetCellCode(x, 0x9, 0x10);
+            Area_CellSetCode(x, 0xC, 0x10);
+            Area_CellSetCode(x, 0xD, 0x10);
+            Area_CellSetCode(x, 0x8, 0x10);
+            Area_CellSetCode(x, 0x9, 0x10);
             i++;
         } while (i < 2);
     }

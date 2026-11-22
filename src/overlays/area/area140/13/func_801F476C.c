@@ -6,6 +6,6 @@ MATCH void func_801F476C(void) {
     work = (u8*)g_Task;
     SYS_ClearFlag(g_SceneEventFlags, work[0xB]);
     work = (u8*)g_Task;
-    Area_SetCellPalette(FIELD(s16, work, 0x36), FIELD(s16, work, 0x3A));
+    Area_CellSetPalette(FIELD(s16, work, 0x36), FIELD(s16, work, 0x3A));
     Actor_Clear();
 }

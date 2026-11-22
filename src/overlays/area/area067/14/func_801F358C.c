@@ -11,7 +11,7 @@ NON_MATCHING void func_801F358C(AreaRippleQuad* quad) {
     u8       j;
 
     SetDrawMode((DR_MODE*)g_GfxPrimCursor, 0, 0, GetTPage(TPAGE_DEPTH_4BIT, TPAGE_ABR_SUB, 0x380, 0x100), NULL);
-    Area_AddCellPrim(D_801F53A0, D_801F53A4, 4, sizeof(DR_MODE));
+    Area_CellAddPrim(D_801F53A0, D_801F53A4, 4, sizeof(DR_MODE));
     i = 0;
     do {
         ring       = (quad->radius * i) / 8;
@@ -34,13 +34,13 @@ NON_MATCHING void func_801F358C(AreaRippleQuad* quad) {
             setRGB1(prim, 0, 0, 0);
             setRGB2(prim, 0x40, 0x40, 0x40);
             setRGB3(prim, 0x40, 0x40, 0x40);
-            Area_AddCellPrim(D_801F53A0, D_801F53A4, 4, sizeof(POLY_G4));
+            Area_CellAddPrim(D_801F53A0, D_801F53A4, 4, sizeof(POLY_G4));
             j++;
         } while (j < 16);
         i++;
     } while (i < 8);
     SetDrawMode((DR_MODE*)g_GfxPrimCursor, 0, 0, GetTPage(TPAGE_DEPTH_4BIT, TPAGE_ABR_ADD, 0x380, 0x100), NULL);
-    Area_AddCellPrim(D_801F53A0, D_801F53A4, 4, sizeof(DR_MODE));
+    Area_CellAddPrim(D_801F53A0, D_801F53A4, 4, sizeof(DR_MODE));
 }
 #else
 INCLUDE_ASM(func_801F358C);

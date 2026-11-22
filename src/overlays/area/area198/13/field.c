@@ -14,7 +14,7 @@
 #include "func_801F319C.c"
 #include "func_801F3388.c"
 #include "func_801F3528.c"
-#include "Area_FreePaletteOnChange.c"
+#include "Area_PaletteFreeOnChange.c"
 #include "func_801F3600.c"
 #include "func_801F36B4.c"
 #include "func_801F3854.c"

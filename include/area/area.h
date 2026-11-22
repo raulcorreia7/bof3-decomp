@@ -46,7 +46,7 @@
 #define AREA_MAP_BUNDLE_SIZE             0x30
 
 /* The opcode mask of each record list's first byte: the +0x20 list keeps six
- * bits, the +0x22 list seven (Area_RunBundleOpcodes/Area_RunBundleRecords). */
+ * bits, the +0x22 list seven (Area_BundleRunOpcodes/Area_BundleRunRecords). */
 #define WORLD_BUNDLE_OPCODE_MASK         0x3F
 #define WORLD_BUNDLE_RECORD_OPCODE_MASK  0x7F
 
@@ -210,7 +210,7 @@ ASSERT_OFFSET(AreaMapBundle, height_offset, 0x2A);
 extern AreaMapBundle g_AreaMapBundle;
 
 /* Word bits of D_80146258, the world input/scheduler lock word. Bit 3 skips
- * Area_AdvanceScroll; bit 6 blocks the menu request; bit 8 is set while a
+ * Area_ScrollAdvance; bit 6 blocks the menu request; bit 8 is set while a
  * scenario script owns the field. */
 typedef enum GameFlags {
     GAME_FLAG_SCROLL_LOCK   = 1 << 3,
@@ -261,7 +261,7 @@ ASSERT_SIZE(AreaCellCorners, AREA_MAP_CELL_RECORD_SIZE);
 #define AREA_CELL_PRIM_MASK 0xFFF
 
 /* One cell of the 56 x 28 screen grid: the tile it shows (the grid-wrapped panel position that
- * Area_GetCell stores) and its row in g_AreaCellPrims (0 = none). */
+ * Area_CellGet stores) and its row in g_AreaCellPrims (0 = none). */
 typedef struct AreaCell {
     u8  tile_x;
     u8  tile_y;

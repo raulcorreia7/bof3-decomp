@@ -98,8 +98,8 @@ MATCH void func_801F778C(void) {
             break;
         }
         case 10:
-            Area_StartScrollRoute(0);
-            Area_AdvanceScroll(0x498);
+            Area_ScrollStartRoute(0);
+            Area_ScrollAdvance(0x498);
             g_AreaCameraRefreshCount = 2;
             g_ScenarioState.step_05  = 0xB;
             break;

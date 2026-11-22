@@ -64,7 +64,7 @@ MATCH void func_801F4768(void) {
 
     for (row = 0; row < (2 - width) * 4 + 1; row++) {
         for (col = 0; col < (2 - width) * 4; col++) {
-            cell = Area_FindCellQuad(COORD_INT(g_Task->pos.x) - (2 - width) + col, COORD_INT(g_Task->pos.y) - (2 - width) + row);
+            cell = Area_CellFindQuad(COORD_INT(g_Task->pos.x) - (2 - width) + col, COORD_INT(g_Task->pos.y) - (2 - width) + row);
             if (cell == NULL) {
                 continue;
             }
@@ -84,7 +84,7 @@ MATCH void func_801F4768(void) {
                    D_801F51D8[width] + col * D_801F51E0[width], D_801F51E0[width] + (u8)(D_801F51DC[width] + row * D_801F51E0[width] - D_801F51E0[width] * COORD_FRAC(g_Task->pos.y) / 0x10000),
                    D_801F51E0[width] + (D_801F51D8[width] + D_801F51E0[width] * col),
                    D_801F51E0[width] + (u8)(D_801F51DC[width] + row * D_801F51E0[width] - D_801F51E0[width] * COORD_FRAC(g_Task->pos.y) / 0x10000));
-            Area_AddCellPrim((COORD_INT(g_Task->pos.x) - (2 - width) + col) << 16, (COORD_INT(g_Task->pos.y) - (2 - width) + row) << 16, 1, 0x28);
+            Area_CellAddPrim((COORD_INT(g_Task->pos.x) - (2 - width) + col) << 16, (COORD_INT(g_Task->pos.y) - (2 - width) + row) << 16, 1, 0x28);
         }
     }
 }

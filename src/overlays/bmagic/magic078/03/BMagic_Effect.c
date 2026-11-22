@@ -303,7 +303,7 @@ NON_MATCHING void func_801F02FC(void) {
             y     = (g_ScratchPadVectors[3].vy << 9) + g_Task->pos.y.fixed;
             tpage = getTPage(TPAGE_DEPTH_8BIT, TPAGE_ABR_ADD, 320, 256);
             SetDrawMode((DR_MODE*)g_GfxPrimCursor, 0, 1, tpage, 0);
-            Area_AddCellPrim(x, y, 2, sizeof(DR_MODE));
+            Area_CellAddPrim(x, y, 2, sizeof(DR_MODE));
             prim = (POLY_F4*)g_GfxPrimCursor;
             SetPolyF4(prim);
             PSX_SET_SEMI_TRANSPARENT(prim);
@@ -314,7 +314,7 @@ NON_MATCHING void func_801F02FC(void) {
             } else {
                 setRGB0(prim, -127 - (g_Task->timer << 4), 17 - (g_Task->timer << 1), 17 - (g_Task->timer << 1));
             }
-            Area_AddCellPrim(x, y, 2, sizeof(POLY_F4));
+            Area_CellAddPrim(x, y, 2, sizeof(POLY_F4));
             i++;
         } while (i < 17);
         upper_angle += 0x100;

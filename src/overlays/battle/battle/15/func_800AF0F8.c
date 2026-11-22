@@ -29,7 +29,7 @@ NON_MATCHING void func_800AF0F8(s32 pos_x, s32 pos_y, s32* values, u8* base, u8 
     if (pos_x & HALF_MASK) {
         tile_y += 1;
     }
-    /* FAKE: keeps tile_x in its own pseudo so the sum lands in a fresh register, as Area_AddCellPrim. */
+    /* FAKE: keeps tile_x in its own pseudo so the sum lands in a fresh register, as Area_CellAddPrim. */
     tile_x++;
     tile_x--;
     cell = tile_x;

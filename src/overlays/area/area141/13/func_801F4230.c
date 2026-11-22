@@ -3,8 +3,8 @@
 MATCH void func_801F4230(Actor* actor) {
     switch (actor->unk_7C) {
         case 0xC000:
-            Area_SetCellRun(&D_801F4D94, 0);
-            Area_SetCellRun(&D_801F4D94 + 5, 0);
+            Area_CellSetRun(&D_801F4D94, 0);
+            Area_CellSetRun(&D_801F4D94 + 5, 0);
             break;
         case 0xC001:
             Game_SetScriptActive();

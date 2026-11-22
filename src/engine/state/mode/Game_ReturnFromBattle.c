@@ -15,7 +15,7 @@ MATCH void Game_ReturnFromBattle(void) {
         flags            = &g_Battle.outcome.options;
         g_EncounterSteps = 0;
         if ((*flags & 0x2) == 0) {
-            Area_AdvanceScroll(Area_SampleHeight(g_AreaScrollTargetX, g_AreaScrollTargetY));
+            Area_ScrollAdvance(Area_SampleHeight(g_AreaScrollTargetX, g_AreaScrollTargetY));
         }
         if ((*flags & 0x40) == 0 && (g_Battle.outcome.result & BATTLE_RESULT_NO_BGM) == 0 && g_SndBGMId != 0xFF) {
             for (i = 0; i < 1376; i++) {

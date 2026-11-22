@@ -176,7 +176,7 @@ MATCH void func_801EF580(s32 phase) {
 
     tpage = getTPage(TPAGE_DEPTH_4BIT, TPAGE_ABR_ADD, 320, 256);
     SetDrawMode((DR_MODE*)g_GfxPrimCursor, 0, 1, tpage, 0);
-    Area_AddCellPrim(g_Task->pos.x.fixed, g_Task->pos.y.fixed, 2, sizeof(DR_MODE));
+    Area_CellAddPrim(g_Task->pos.x.fixed, g_Task->pos.y.fixed, 2, sizeof(DR_MODE));
     g_ScratchPad.cells.words[2] = 1;
     start                       = 0;
     count                       = 8;
@@ -211,7 +211,7 @@ MATCH void func_801EF580(s32 phase) {
         prim->tpage = GetTPage(TPAGE_DEPTH_4BIT, TPAGE_ABR_ADD, 0x3C0, 0x100);
         prim->clut  = GetClut(0, 0x1FA);
         setUV4(prim, 0, (i * 8 + g_Task->unk_04 * 2) & 0x1F, 8, (i * 8 + g_Task->unk_04 * 2) & 0x1F, 0, ((i * 8 + g_Task->unk_04 * 2) & 0x1F) + 8, 8, ((i * 8 + g_Task->unk_04 * 2) & 0x1F) + 8);
-        Area_AddCellPrim(g_Task->pos.x.fixed, g_Task->pos.y.fixed, 2, sizeof(POLY_GT4));
+        Area_CellAddPrim(g_Task->pos.x.fixed, g_Task->pos.y.fixed, 2, sizeof(POLY_GT4));
     }
 }
 
@@ -369,7 +369,7 @@ MATCH void func_801F0014(void) {
 
     tpage = getTPage(TPAGE_DEPTH_4BIT, TPAGE_ABR_ADD, 320, 256);
     SetDrawMode((DR_MODE*)g_GfxPrimCursor, 0, 1, tpage, 0);
-    Area_AddCellPrim(g_Task->pos.x.fixed, g_Task->pos.y.fixed, 2, sizeof(DR_MODE));
+    Area_CellAddPrim(g_Task->pos.x.fixed, g_Task->pos.y.fixed, 2, sizeof(DR_MODE));
 
     prim = GFX_CURSOR(LINE_G3);
     SetLineG3(prim);
@@ -387,7 +387,7 @@ MATCH void func_801F0014(void) {
     setRGB0(prim, g_ScratchPad.cells.words[2], 1, g_ScratchPad.cells.words[2]);
     setRGB1(prim, g_ScratchPad.cells.words[2], g_ScratchPad.cells.words[2], 1);
     setRGB2(prim, g_ScratchPad.cells.words[2], 1, g_ScratchPad.cells.words[2]);
-    Area_AddCellPrim(g_Task->pos.x.fixed, g_Task->pos.y.fixed, 2, sizeof(LINE_G3));
+    Area_CellAddPrim(g_Task->pos.x.fixed, g_Task->pos.y.fixed, 2, sizeof(LINE_G3));
 
     prim = GFX_CURSOR(LINE_G3);
     SetLineG3(prim);
@@ -399,7 +399,7 @@ MATCH void func_801F0014(void) {
     setRGB0(prim, g_ScratchPad.cells.words[2], 1, g_ScratchPad.cells.words[2]);
     setRGB1(prim, g_ScratchPad.cells.words[2], g_ScratchPad.cells.words[2], 1);
     setRGB2(prim, g_ScratchPad.cells.words[2], 1, g_ScratchPad.cells.words[2]);
-    Area_AddCellPrim(g_Task->pos.x.fixed, g_Task->pos.y.fixed, 2, sizeof(LINE_G3));
+    Area_CellAddPrim(g_Task->pos.x.fixed, g_Task->pos.y.fixed, 2, sizeof(LINE_G3));
 }
 
 /* func_801F04A4 */

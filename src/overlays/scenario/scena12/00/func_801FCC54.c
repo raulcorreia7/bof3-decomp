@@ -38,7 +38,7 @@ MATCH s32 func_801FCD58(void) {
         g_ScriptVars[3]          = 0;
         g_ScenarioState.step_05  = 0;
         g_ScenarioState.state_04 = 7;
-        Area_SetCellPalette(COORD_INT(g_Task->pos.x), COORD_INT(g_Task->pos.y));
+        Area_CellSetPalette(COORD_INT(g_Task->pos.x), COORD_INT(g_Task->pos.y));
         SND_PlaySE(EMI_SE_ID(SND_BANK_COMMON, 3));
         return 1;
     }

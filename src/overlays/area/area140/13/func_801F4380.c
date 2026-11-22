@@ -53,7 +53,7 @@ NON_MATCHING u8 func_801F4380(s32 x, s32 y) {
         }
     }
     SYS_SetFlag(g_SceneEventFlags, flag);
-    Area_SetCellPalette(D_801F4A84[base], D_801F4A85[base]);
+    Area_CellSetPalette(D_801F4A84[base], D_801F4A85[base]);
     if (D_801F4A88[base] != 0) {
         actor_slot = Actor_FindFreeSpawned();
         if (actor_slot != 0xFF) {

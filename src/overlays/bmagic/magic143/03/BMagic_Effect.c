@@ -127,7 +127,7 @@ NON_MATCHING void func_801EF23C(s32 band_height, u16 radius, u16 jitter_mask) {
         }
     }
     SetDrawMode((DR_MODE*)g_GfxPrimCursor, 0, 1, draw_mode, 0);
-    Area_AddCellPrim(g_Task->pos.x.fixed, g_Task->pos.y.fixed, 2, sizeof(DR_MODE));
+    Area_CellAddPrim(g_Task->pos.x.fixed, g_Task->pos.y.fixed, 2, sizeof(DR_MODE));
     for (i = 1; i < 24; i++) {
         cells[1] = ((g_Task->param.unk_0B + i) & 0xF) << 8;
         if RANDOM_MASK (1) {
@@ -158,7 +158,7 @@ NON_MATCHING void func_801EF23C(s32 band_height, u16 radius, u16 jitter_mask) {
             setRGB3(prim, 1, 1, 1);
         }
         RotTransPers4(&vectors[0], &vectors[1], &vectors[2], &vectors[3], (long*)&prim->x0, (long*)&prim->x1, (long*)&prim->x2, (long*)&prim->x3, &p, &flag);
-        Area_AddCellPrim(g_Task->pos.x.fixed, g_Task->pos.y.fixed, 2, sizeof(POLY_G4));
+        Area_CellAddPrim(g_Task->pos.x.fixed, g_Task->pos.y.fixed, 2, sizeof(POLY_G4));
         prim = (POLY_G4*)g_GfxPrimCursor;
         vectors[0].vy -= band_height;
         vectors[1].vy -= band_height;
@@ -175,7 +175,7 @@ NON_MATCHING void func_801EF23C(s32 band_height, u16 radius, u16 jitter_mask) {
             setRGB3(prim, 1, 1, 1);
         }
         RotTransPers4(&vectors[0], &vectors[1], &vectors[2], &vectors[3], (long*)&prim->x0, (long*)&prim->x1, (long*)&prim->x2, (long*)&prim->x3, &p, &flag);
-        Area_AddCellPrim(g_Task->pos.x.fixed, g_Task->pos.y.fixed, 2, sizeof(POLY_G4));
+        Area_CellAddPrim(g_Task->pos.x.fixed, g_Task->pos.y.fixed, 2, sizeof(POLY_G4));
         prim = (POLY_G4*)g_GfxPrimCursor;
         vectors[0].vy += band_height;
         vectors[1].vy += band_height;
@@ -192,7 +192,7 @@ NON_MATCHING void func_801EF23C(s32 band_height, u16 radius, u16 jitter_mask) {
             setRGB3(prim, 1, 1, 1);
         }
         RotTransPers4(&vectors[0], &vectors[1], &vectors[2], &vectors[3], (long*)&prim->x0, (long*)&prim->x1, (long*)&prim->x2, (long*)&prim->x3, &p, &flag);
-        Area_AddCellPrim(g_Task->pos.x.fixed, g_Task->pos.y.fixed, 2, sizeof(POLY_G4));
+        Area_CellAddPrim(g_Task->pos.x.fixed, g_Task->pos.y.fixed, 2, sizeof(POLY_G4));
         prim = (POLY_G4*)g_GfxPrimCursor;
         vectors[0].vy += band_height;
         vectors[1].vy += band_height;
@@ -209,7 +209,7 @@ NON_MATCHING void func_801EF23C(s32 band_height, u16 radius, u16 jitter_mask) {
             setRGB3(prim, 1, 1, 1);
         }
         RotTransPers4(&vectors[0], &vectors[1], &vectors[2], &vectors[3], (long*)&prim->x0, (long*)&prim->x1, (long*)&prim->x2, (long*)&prim->x3, &p, &flag);
-        Area_AddCellPrim(g_Task->pos.x.fixed, g_Task->pos.y.fixed, 2, sizeof(POLY_G4));
+        Area_CellAddPrim(g_Task->pos.x.fixed, g_Task->pos.y.fixed, 2, sizeof(POLY_G4));
         depth -= 0x30;
         vectors[0].vy -= band_height * 2;
     }
@@ -228,7 +228,7 @@ MATCH void func_801EFC74(void) {
 
     g_ScratchPad.cells.words[0] = (rand() & 7) + g_Task->timer * 4;
     SetDrawMode((DR_MODE*)g_GfxPrimCursor, 0, 1, getTPage(TPAGE_DEPTH_4BIT, TPAGE_ABR_ADD, 320, 256), 0);
-    Area_AddCellPrim(g_Task->pos.x.fixed, g_Task->pos.y.fixed, 2, sizeof(DR_MODE));
+    Area_CellAddPrim(g_Task->pos.x.fixed, g_Task->pos.y.fixed, 2, sizeof(DR_MODE));
     i      = 0;
     radius = &g_ScratchPad.cells.words[0];
     for (; i < 8; i++) {
@@ -240,6 +240,6 @@ MATCH void func_801EFC74(void) {
         setRGB0(prim, g_Task->timer * 8, g_Task->timer * 8, g_Task->timer * 6);
         setRGB1(prim, 1, 1, 1);
         setRGB2(prim, 1, 1, 1);
-        Area_AddCellPrim(g_Task->pos.x.fixed, g_Task->pos.y.fixed, 2, sizeof(POLY_G3));
+        Area_CellAddPrim(g_Task->pos.x.fixed, g_Task->pos.y.fixed, 2, sizeof(POLY_G3));
     }
 }

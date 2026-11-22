@@ -18,7 +18,7 @@ NON_MATCHING void func_801F9834(void) {
             break;
         case 1:
             g_AreaDrawFlags = 0x1F;
-            Area_StartScrollRoute(0);
+            Area_ScrollStartRoute(0);
             g_ScenarioState.step_05 = 2;
             break;
         case 2: {
@@ -88,7 +88,7 @@ NON_MATCHING void func_801F9834(void) {
             break;
         }
         case 7:
-            Area_StartScrollRoute(1);
+            Area_ScrollStartRoute(1);
             g_ScenarioState.step_05 = 8;
             break;
         case 8: {
@@ -106,7 +106,7 @@ NON_MATCHING void func_801F9834(void) {
             break;
         }
         case 9:
-            Area_StartScrollRoute(2);
+            Area_ScrollStartRoute(2);
             g_ScenarioState.step_05 = 0xA;
             break;
         case 10: {
@@ -156,7 +156,7 @@ NON_MATCHING void func_801F9834(void) {
             break;
         }
         case 13:
-            Area_StartScrollRoute(3);
+            Area_ScrollStartRoute(3);
             g_ScenarioState.step_05 = 0xE;
             break;
         case 14: {
@@ -373,15 +373,15 @@ MATCH s32 func_801FB648(s32 x, s32 y) {
     if (LOHU(g_GameAreaId) == 0xBF && SYS_TestFlag(g_SceneFlags, 5)) {
         map_x      = x >> 16;
         map_y      = y >> 16;
-        cell_count = origin_hit = (u8)Area_GetCellCode(map_x, map_y) == 0xA6;
+        cell_count = origin_hit = (u8)Area_CellGetCode(map_x, map_y) == 0xA6;
         cell_code               = 0xA6;
-        if ((u16)x != 0 && (u8)Area_GetCellCode((s16)(map_x + 1), map_y) == cell_code) {
+        if ((u16)x != 0 && (u8)Area_CellGetCode((s16)(map_x + 1), map_y) == cell_code) {
             cell_count++;
         }
-        if ((u16)y != 0 && (u8)Area_GetCellCode(x >> 16, (s16)((y >> 16) + 1)) == 0xA6) {
+        if ((u16)y != 0 && (u8)Area_CellGetCode(x >> 16, (s16)((y >> 16) + 1)) == 0xA6) {
             cell_count++;
         }
-        if ((u16)x != 0 && (u16)y != 0 && (u8)Area_GetCellCode((s16)((x >> 16) + 1), (s16)((y >> 16) + 1)) == 0xA6) {
+        if ((u16)x != 0 && (u16)y != 0 && (u8)Area_CellGetCode((s16)((x >> 16) + 1), (s16)((y >> 16) + 1)) == 0xA6) {
             cell_count++;
         }
         if (cell_count != 0) {

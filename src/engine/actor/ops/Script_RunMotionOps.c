@@ -18,8 +18,8 @@ typedef enum ActorScriptMotion {
     ACTOR_SCRIPT_MOTION_SET_ACTOR_MODE      = 0xF8, /* args: [mode]; func_801AC768 stores mode and walk fields */
     ACTOR_SCRIPT_MOTION_WAIT_WALK_ROUTE     = 0xF9, /* args: [a] [b]; step the walk, wait while it runs */
     ACTOR_SCRIPT_MOTION_SET_Z_POSITION      = 0xFA, /* args: [id] [keep] [z]; set z, stop the z move */
-    ACTOR_SCRIPT_MOTION_SET_CELL_PALETTE    = 0xFB, /* Area_SetCellPalette at the cell; cue 1.3 when set */
-    ACTOR_SCRIPT_MOTION_CLEAR_CELL_PALETTE  = 0xFC, /* Area_ClearCellPalette at the cell; cue 1.3, cleared */
+    ACTOR_SCRIPT_MOTION_SET_CELL_PALETTE    = 0xFB, /* Area_CellSetPalette at the cell; cue 1.3 when set */
+    ACTOR_SCRIPT_MOTION_CLEAR_CELL_PALETTE  = 0xFC, /* Area_CellClearPalette at the cell; cue 1.3, cleared */
     ACTOR_SCRIPT_MOTION_WAIT_SCRIPT_READY   = 0xFD, /* wait while the script stream reports not ready */
     ACTOR_SCRIPT_MOTION_PLAY_CUE_ON_SCRIPT  = 0xFE, /* args: [cue] [pc]; play 0x200|cue when record changed */
     ACTOR_SCRIPT_MOTION_WAIT                = 0xFF, /* hold the cursor at this record */
@@ -188,7 +188,7 @@ MATCH u8 Script_RunMotionOps(ScriptState* state, const u8* table, u8 value) {
             Actor* work;
 
             work   = g_Task;
-            result = Area_SetCellPalette(COORD_INT(work->pos.x), COORD_INT(work->pos.y));
+            result = Area_CellSetPalette(COORD_INT(work->pos.x), COORD_INT(work->pos.y));
             /* Retail shares the cue check with case 0xFC. */
             goto queue_cue;
         }
@@ -196,7 +196,7 @@ MATCH u8 Script_RunMotionOps(ScriptState* state, const u8* table, u8 value) {
             Actor* work;
 
             work   = g_Task;
-            result = Area_ClearCellPalette(COORD_INT(work->pos.x), COORD_INT(work->pos.y));
+            result = Area_CellClearPalette(COORD_INT(work->pos.x), COORD_INT(work->pos.y));
         }
         queue_cue:
             if (result != 0)

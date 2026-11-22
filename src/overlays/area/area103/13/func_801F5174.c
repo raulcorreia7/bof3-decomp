@@ -43,7 +43,7 @@ NON_MATCHING void func_801F5174(s32 steps, s32 radius) {
         part   = (7 - i) * 8 + 7 - phase;
         radius = part * (radius << 18) / 128 & (0xF8 << 16);
         Area_ApplyTileToQuad((part / 4 << 19) | (0xBA00 << 16) | 0x9124, prim, 1);
-        Area_AddCellPrim(g_Task->pos.x.fixed, g_Task->pos.y.fixed, 2, sizeof(POLY_FT4));
+        Area_CellAddPrim(g_Task->pos.x.fixed, g_Task->pos.y.fixed, 2, sizeof(POLY_FT4));
         j += steps;
     }
 }

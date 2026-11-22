@@ -8,7 +8,7 @@ MATCH void func_801C5D68(void) {
     if (*counter != 0) {
         value          = g_ScrollHeight + D_80143F5C;
         g_ScrollHeight = value;
-        Area_AdvanceScroll(value);
+        Area_ScrollAdvance(value);
         (*counter)--;
         return;
     }

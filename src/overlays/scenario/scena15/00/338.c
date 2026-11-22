@@ -700,14 +700,14 @@ MATCH void func_801F9020(Coord* position, s32* step) {
     SetSemiTrans(line4, 0);
     setXY4(line4, screen[0].vx, screen[0].vy, screen[1].vx, screen[1].vy, screen[3].vx, screen[3].vy, screen[2].vx, screen[2].vy);
     setRGB0(line4, 0xFF, 0xFF, 0xFF);
-    Area_AddCellPrim(position[0].fixed, position[1].fixed, 0, sizeof(LINE_F4));
+    Area_CellAddPrim(position[0].fixed, position[1].fixed, 0, sizeof(LINE_F4));
 
     line2 = (LINE_F2*)g_GfxPrimCursor;
     SetLineF2(line2);
     SetSemiTrans(line2, 0);
     setXY2(line2, screen[0].vx, screen[0].vy, screen[2].vx, screen[2].vy);
     setRGB0(line2, 0xFF, 0xFF, 0xFF);
-    Area_AddCellPrim(position[0].fixed, position[1].fixed, 0, sizeof(LINE_F2));
+    Area_CellAddPrim(position[0].fixed, position[1].fixed, 0, sizeof(LINE_F2));
 }
 
 MATCH void func_801F92F0(Coord* position, s32* step) {
@@ -754,7 +754,7 @@ MATCH void func_801F92F0(Coord* position, s32* step) {
     point[2] = origin[2].fixed - delta[2];
     Camera_ProjectPoint(point, (DVECTOR*)&poly->x3);
     setRGB0(poly, 255, 255, 255);
-    Area_AddCellPrim(origin[0].fixed, origin[1].fixed, 0, sizeof(POLY_F4));
+    Area_CellAddPrim(origin[0].fixed, origin[1].fixed, 0, sizeof(POLY_F4));
 }
 
 MATCH void func_801F9500(WorldPos* pos, s32* vx) {
@@ -808,7 +808,7 @@ MATCH void func_801F9500(WorldPos* pos, s32* vx) {
     prim->tpage = GetTPage(TPAGE_DEPTH_8BIT, TPAGE_ABR_ADD, cell->page_x, cell->page_y);
     setClut(prim, 0xA0, 0x1F0);
     setRGB0(prim, 0x20, 0x20, 0x20);
-    Area_AddCellPrim(pos->x.fixed, pos->y.fixed, 0, sizeof(POLY_FT4));
+    Area_CellAddPrim(pos->x.fixed, pos->y.fixed, 0, sizeof(POLY_FT4));
 }
 
 #ifdef NON_MATCHING
@@ -855,7 +855,7 @@ NON_MATCHING void func_801F97CC(WorldPos* pos, s32* arg) {
     poly->r0 = (g_Task->unk_06 & 2) != 0 ? 0x80 : 0;
     poly->b0 = 0;
     poly->g0 = (g_Task->unk_06 & 2) == 0 ? 0x80 : 0;
-    Area_AddCellPrim(pos->x.fixed, pos->y.fixed, 0, sizeof(POLY_F4));
+    Area_CellAddPrim(pos->x.fixed, pos->y.fixed, 0, sizeof(POLY_F4));
 }
 #else
 INCLUDE_ASM(func_801F97CC);
@@ -868,7 +868,7 @@ MATCH void func_801F9A20(WorldPos* pos, s32* vx) {
     FAKE_STACK_PADS(u8, 0x20); /* FAKE: retail keeps the point row in an 88-byte frame. */
 
     SetDrawMode((DR_MODE*)g_GfxPrimCursor, 0, 1, GetTPage(TPAGE_DEPTH_4BIT, TPAGE_ABR_HALF, FONT_TPAGE_X, FONT_TPAGE_Y) & 0xFFFF, 0);
-    Area_AddCellPrim(pos->x.fixed, pos->y.fixed, 0, sizeof(DR_MODE));
+    Area_CellAddPrim(pos->x.fixed, pos->y.fixed, 0, sizeof(DR_MODE));
     poly = (POLY_F4*)g_GfxPrimCursor;
     SetPolyF4(poly);
     SetSemiTrans(poly, 1);
@@ -906,7 +906,7 @@ MATCH void func_801F9A20(WorldPos* pos, s32* vx) {
     Camera_ProjectPoint(point, (DVECTOR*)&poly->x3);
 
     setRGB0(poly, (g_Task->unk_06 & 2) != 0 ? 0x80 : 0, (g_Task->unk_06 & 2) == 0 ? 0x80 : 0, 0);
-    Area_AddCellPrim(pos->x.fixed, pos->y.fixed, 0, sizeof(POLY_F4));
+    Area_CellAddPrim(pos->x.fixed, pos->y.fixed, 0, sizeof(POLY_F4));
 }
 
 MATCH void func_801F9CAC(void) {

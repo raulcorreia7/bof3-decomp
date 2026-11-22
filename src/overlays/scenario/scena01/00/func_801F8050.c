@@ -239,8 +239,8 @@ MATCH void func_801F8050(void) {
                 if (!SYS_TestFlag(g_SceneFlags, 0x39)) {
                     flags_byte = &D_80146871;
                     *flags_byte &= 0xFE;
-                    Area_RunBundleOpcodes();
-                    Area_SetCellPalette(0x49, 0xC);
+                    Area_BundleRunOpcodes();
+                    Area_CellSetPalette(0x49, 0xC);
                     g_AreaDrawFlags = 0;
                     SYS_SetFlag(g_SceneFlags, 0x39);
                     SYS_SetFlag(g_SceneFlags, 0x3F);

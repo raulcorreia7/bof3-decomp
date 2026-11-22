@@ -14,11 +14,11 @@
     work     = g_Task;                                                                                       \
     work->vx = x;                                                                                            \
     work->vy = y;                                                                                            \
-    if ((Area_GetCellCode(x, y) & BYTE_MASK) == 0xA1) {                                                      \
+    if ((Area_CellGetCode(x, y) & BYTE_MASK) == 0xA1) {                                                      \
         g_Task->param.unk_0B = 1;                                                                            \
-    } else if ((Area_GetCellCode(x, y) & BYTE_MASK) == 0xA0) {                                               \
+    } else if ((Area_CellGetCode(x, y) & BYTE_MASK) == 0xA0) {                                               \
         g_Task->param.unk_0B = 2;                                                                            \
-    } else if ((Area_GetCellCode(x, y) & BYTE_MASK) == 0xAE) {                                               \
+    } else if ((Area_CellGetCode(x, y) & BYTE_MASK) == 0xAE) {                                               \
         g_Task->param.unk_0B = 3;                                                                            \
     } else if (g_Game.walk_flags & AREA_WALK_TRANSITION) {                                                   \
         g_Task->param.unk_0B = 4;                                                                            \

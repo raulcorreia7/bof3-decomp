@@ -35,5 +35,5 @@ MATCH void Area_ReadTintRecord(u8* record) {
         green = 0;
         red   = 0;
     }
-    Area_ApplyPaletteTint(lo, hi, red, green, blue);
+    Area_PaletteApplyTint(lo, hi, red, green, blue);
 }

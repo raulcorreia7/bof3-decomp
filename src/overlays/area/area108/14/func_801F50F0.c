@@ -22,7 +22,7 @@ NON_MATCHING void func_801F50F0(void) {
 
                 step = &g_SceneEventState.step;
                 /* Retail passes the masked byte, the owner declares the argument s8. */
-                ((void (*)(u8))Area_StartScrollRoute)((u8)(D_80147B67 - 1));
+                ((void (*)(u8))Area_ScrollStartRoute)((u8)(D_80147B67 - 1));
                 D_80143FC0      = 4;
                 g_ScriptVars[3] = 1;
                 *step           = (u8)*step + 1;
@@ -46,7 +46,7 @@ NON_MATCHING void func_801F50F0(void) {
             break;
         case 3:
             if (!g_AreaCameraMoving) {
-                Area_AdvanceScroll(Area_SampleHeight(g_AreaScrollTargetX, g_AreaScrollTargetY));
+                Area_ScrollAdvance(Area_SampleHeight(g_AreaScrollTargetX, g_AreaScrollTargetY));
                 g_SceneEventState.step = 0;
                 g_SceneEventState.mode = SCENE_EVENT_NONE;
                 Game_ClearScriptActive();
@@ -104,7 +104,7 @@ NON_MATCHING void func_801F50F0(void) {
                 g_PartyActors[0].tint.bytes.rgb.b -= 4;
             } else {
                 SYS_SetFlag(g_SceneEventFlags, 0x1D);
-                Area_SetCellPalette(0x20, 0x2F);
+                Area_CellSetPalette(0x20, 0x2F);
                 g_PartyActors[0].header.flags = 0;
                 *timer                        = 0x1E;
                 g_SceneEventState.step        = 9;

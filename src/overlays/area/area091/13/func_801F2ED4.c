@@ -25,7 +25,7 @@ MATCH void func_801F2ED4(u16 radius, u16 color) {
     cell_x = TO_COORD(31) + COORD_HALF;
     cell_y = TO_COORD(26);
     SetDrawMode((DR_MODE*)g_GfxPrimCursor, 0, 0, getTPage(TPAGE_DEPTH_4BIT, TPAGE_ABR_ADD, 896, 256), 0);
-    Area_AddCellPrim(cell_x, cell_y, 2, sizeof(DR_MODE));
+    Area_CellAddPrim(cell_x, cell_y, 2, sizeof(DR_MODE));
 
     i = 0;
     do {
@@ -52,7 +52,7 @@ MATCH void func_801F2ED4(u16 radius, u16 color) {
         setRGB0(prim, color, color, 0);
         setRGB1(prim, 0, 0, 0);
         setRGB2(prim, 0, 0, 0);
-        Area_AddCellPrim(cell_x, cell_y, 2, sizeof(POLY_G3));
+        Area_CellAddPrim(cell_x, cell_y, 2, sizeof(POLY_G3));
     } while (i < 32);
     PopMatrix();
 }

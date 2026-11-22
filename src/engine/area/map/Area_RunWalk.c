@@ -6,6 +6,6 @@
 MATCH void Area_RunWalk(void) {
     Area_SetWalkVelocity();
     if ((g_Task->unk_05 == 0) && !((g_Game.flags | g_Game.walk_flags) & (GAME_FLAG_SCROLL_LOCK | AREA_WALK_ENTRY_ACTIVE))) {
-        Area_UpdateWalkScroll();
+        Area_ScrollUpdateWalk();
     }
 }

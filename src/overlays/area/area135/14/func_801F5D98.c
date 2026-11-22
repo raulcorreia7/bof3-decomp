@@ -20,11 +20,11 @@ NON_MATCHING void func_801F5D98(void) {
     do {
         cell = row + i;
         Area_StoreHeight(column, cell, 0x10);
-        g_Task->gravity |= (u8)Area_GetCellCode(column, cell) << (i * 8);
-        Area_SetCellCode(column, row + i, 0x11);
+        g_Task->gravity |= (u8)Area_CellGetCode(column, cell) << (i * 8);
+        Area_CellSetCode(column, row + i, 0x11);
         Area_StoreHeight(column_next, cell, 0x10);
-        g_Task->gravity |= (u8)Area_GetCellCode(column_next, cell) << ((i + 2) * 8);
-        Area_SetCellCode(column + 1, row + i, 0x11);
+        g_Task->gravity |= (u8)Area_CellGetCode(column_next, cell) << ((i + 2) * 8);
+        Area_CellSetCode(column + 1, row + i, 0x11);
         i++;
     } while (i < 2);
 }

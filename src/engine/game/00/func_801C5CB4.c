@@ -5,7 +5,7 @@ MATCH void func_801C5CB4(void) {
     u8  val;
 
     if (g_AreaCameraMoving == 0) {
-        Area_AdvanceScroll(Area_SampleHeight(g_AreaScrollTargetX, g_AreaScrollTargetY));
+        Area_ScrollAdvance(Area_SampleHeight(g_AreaScrollTargetX, g_AreaScrollTargetY));
         addr       = &D_80143FBC;
         val        = *addr;
         D_80143F5C = 0;
@@ -18,6 +18,6 @@ MATCH void func_801C5CB4(void) {
         D_80143F84 += D_80143F5C;
         /* Overlap view: upper half of s32 D_80143F84; sibling TU uses both views.
          */
-        Area_AdvanceScroll(HIH(D_80143F84));
+        Area_ScrollAdvance(HIH(D_80143F84));
     }
 }

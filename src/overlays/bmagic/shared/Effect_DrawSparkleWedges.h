@@ -14,7 +14,7 @@ MATCH void Effect_DrawSparkleWedges(u16 angle, u16 radius) {
         tpage = 0x35;
     }
     SetDrawMode((DR_MODE*)g_GfxPrimCursor, 0, 1, tpage, 0);
-    Area_AddCellPrim(EFFECT_SPARKLE_TASK->pos.x.fixed, EFFECT_SPARKLE_TASK->pos.y.fixed, 2, sizeof(DR_MODE));
+    Area_CellAddPrim(EFFECT_SPARKLE_TASK->pos.x.fixed, EFFECT_SPARKLE_TASK->pos.y.fixed, 2, sizeof(DR_MODE));
 
     g_ScratchPad.cells.ray.shade.r = EFFECT_SPARKLE_TASK->timer_05 * 6;
     g_ScratchPad.cells.ray.shade.g = EFFECT_SPARKLE_TASK->timer_05 * 6;
@@ -34,6 +34,6 @@ MATCH void Effect_DrawSparkleWedges(u16 angle, u16 radius) {
         setRGB0(prim, 1, 1, 1);
         setRGB1(prim, LOHU(g_ScratchPad.cells.ray.shade.r), LOHU(g_ScratchPad.cells.ray.shade.g), LOHU(g_ScratchPad.cells.ray.shade.b));
         setRGB2(prim, 1, 1, 1);
-        Area_AddCellPrim(EFFECT_SPARKLE_TASK->pos.x.fixed, EFFECT_SPARKLE_TASK->pos.y.fixed, 2, BMAGIC_RAY_CELL_SIZE);
+        Area_CellAddPrim(EFFECT_SPARKLE_TASK->pos.x.fixed, EFFECT_SPARKLE_TASK->pos.y.fixed, 2, BMAGIC_RAY_CELL_SIZE);
     }
 }

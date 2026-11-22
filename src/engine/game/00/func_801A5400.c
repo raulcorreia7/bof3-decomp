@@ -56,17 +56,17 @@ MATCH void func_801A5400(u8* script) {
         bits_record->mirror      = (bits_record->option_flags >> ACTOR_OPT_NO_SCRIPT_START) & 0x1;
         Script_Select(g_Task->direction);
         cell_record_a = g_Task;
-        Area_SetCellCode(COORD_INT(cell_record_a->pos.x), COORD_INT(cell_record_a->pos.y), 0x10);
+        Area_CellSetCode(COORD_INT(cell_record_a->pos.x), COORD_INT(cell_record_a->pos.y), 0x10);
         cell_record_b = g_Task;
         if (COORD_FRAC(cell_record_b->pos.x) != 0) {
-            Area_SetCellCode((s16)((u16)COORD_INT(cell_record_b->pos.x) + 1), COORD_INT(cell_record_b->pos.y), 0x10);
+            Area_CellSetCode((s16)((u16)COORD_INT(cell_record_b->pos.x) + 1), COORD_INT(cell_record_b->pos.y), 0x10);
         }
         if (COORD_FRAC(g_Task->pos.y) != 0) {
-            Area_SetCellCode(COORD_INT(g_Task->pos.x), (s16)(COORD_INT(g_Task->pos.y) + 1), 0x10);
+            Area_CellSetCode(COORD_INT(g_Task->pos.x), (s16)(COORD_INT(g_Task->pos.y) + 1), 0x10);
         }
         cell_record_c = g_Task;
         if ((COORD_FRAC(cell_record_c->pos.x) != 0) && (COORD_FRAC(cell_record_c->pos.y) != 0)) {
-            Area_SetCellCode((s16)((u16)COORD_INT(cell_record_c->pos.x) + 1), (s16)((u16)COORD_INT(cell_record_c->pos.y) + 1), 0x10);
+            Area_CellSetCode((s16)((u16)COORD_INT(cell_record_c->pos.x) + 1), (s16)((u16)COORD_INT(cell_record_c->pos.y) + 1), 0x10);
         }
         FAKE_VOLATILE(u16, g_ScratchPad) += 1;
     }

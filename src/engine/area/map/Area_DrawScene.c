@@ -9,7 +9,7 @@ MATCH void Area_DrawScene(void) {
 
     stack = GetSp();
     SetSp(SCRATCH_PAD + SCRATCH_PAD_SIZE);
-    Area_RunBundleRecords();
+    Area_BundleRunRecords();
     Area_DrawActors();
     Area_DrawGridActors();
     D_8014832C           = 0;

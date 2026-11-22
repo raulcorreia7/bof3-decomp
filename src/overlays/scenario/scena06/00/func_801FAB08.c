@@ -89,7 +89,7 @@ NON_MATCHING void func_801FAB08(void) {
             if (g_ScriptVars[0] != 1) {
                 break;
             }
-            Area_StartScrollRoute(0);
+            Area_ScrollStartRoute(0);
             g_ScenarioState.step_05 = 9;
             break;
         case 9:

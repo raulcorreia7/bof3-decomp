@@ -131,7 +131,7 @@ void PlChar_SpawnLinkedActor(s32 spawn_type, s32 spawn_x, s32 spawn_y, s32 code)
     u32 roll;                                                                   \
     u8* record;                                                                 \
                                                                                 \
-    cell = Area_GetCellCode(x, y);                                              \
+    cell = Area_CellGetCode(x, y);                                              \
     if ((u8)(cell + 0x10) < 2 || (cell & BYTE_MASK) == 0xF4) {                  \
         CALLEE(0, x, y, cell & BYTE_MASK);                                      \
         if ((RANDOM_MASK(7)) >= 6) {                                            \

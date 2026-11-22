@@ -37,7 +37,7 @@ MATCH void func_801F9134(void) {
             break;
         case 6:
             if (g_ScriptVars[0] == 1) {
-                Area_StartScrollRoute(0);
+                Area_ScrollStartRoute(0);
                 g_ScenarioState.step_05 = 7;
             }
             break;

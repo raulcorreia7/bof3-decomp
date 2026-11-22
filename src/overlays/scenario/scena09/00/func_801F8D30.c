@@ -58,7 +58,7 @@ MATCH void func_801F8D30(void) {
             }
             break;
         case 12:
-            Area_StartScrollRoute(3);
+            Area_ScrollStartRoute(3);
             slot                        = Actor_FindFreeSpawned();
             g_ScratchPad.cells.bytes[0] = slot;
             if (slot != GAME_NONE) {
@@ -124,7 +124,7 @@ MATCH void func_801F8D30(void) {
             g_ScenarioState.state_04 = 0;
             break;
         case 30:
-            Area_SetCellPalette(0xB, 0x54);
+            Area_CellSetPalette(0xB, 0x54);
             Scene_SetupParty(0xD);
             g_ScenarioState.step_05 = 31;
             break;
@@ -143,7 +143,7 @@ MATCH void func_801F8D30(void) {
             }
             break;
         case 33:
-            Area_StartScrollRoute(0);
+            Area_ScrollStartRoute(0);
             g_ScenarioState.step_05 = 34;
             break;
         case 34:

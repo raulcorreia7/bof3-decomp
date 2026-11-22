@@ -16,5 +16,5 @@ MATCH void Area_DrawSparkCell(AreaSpark* spark) {
     tile->b0 = shade;
     tile->g0 = shade;
     tile->r0 = shade;
-    Area_AddCellPrim(spark->pos.vx, spark->pos.vy, 0, sizeof(TILE_1));
+    Area_CellAddPrim(spark->pos.vx, spark->pos.vy, 0, sizeof(TILE_1));
 }

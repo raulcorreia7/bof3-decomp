@@ -20,7 +20,7 @@ NON_MATCHING void func_801F4158_area168(s32 index, s8 code) {
     g_ScratchPadVectors[0].vy = g_ScratchPadVectors[1].vy = g_ScratchPadVectors[2].vy = g_ScratchPadVectors[3].vy = (FIX_INT(g_Task->pos.y.fixed) - 0x80) << 7;
 
     SetDrawMode((DR_MODE*)g_GfxPrimCursor, 0, 0, getTPage(TPAGE_DEPTH_8BIT, TPAGE_ABR_HALF, 320, 256), 0);
-    Area_AddCellPrim(g_Task->pos.x.fixed, g_Task->pos.y.fixed, code, sizeof(DR_MODE));
+    Area_CellAddPrim(g_Task->pos.x.fixed, g_Task->pos.y.fixed, code, sizeof(DR_MODE));
     x                         = (g_ScratchPadVectors[0].vx + 0x4000) << 9;
     y                         = (g_ScratchPadVectors[0].vy + 0x4000) << 9;
     g_ScratchPadVectors[0].vz = -Area_SampleHeight(x, y) / 2 - LOHU(g_Task->pos.z.part.integer) - 0x180;
@@ -35,7 +35,7 @@ NON_MATCHING void func_801F4158_area168(s32 index, s8 code) {
     RotTransPers4(&g_ScratchPadVectors[0], &g_ScratchPadVectors[1], &g_ScratchPadVectors[2], &g_ScratchPadVectors[3], (long*)&prim->x0, (long*)&prim->x1, (long*)&prim->x2, (long*)&prim->x3, &depth,
                   &flag);
     Area_ApplyTileToQuad(g_Task->gravity + index, prim, 1);
-    Area_AddCellPrim(g_Task->pos.x.fixed, g_Task->pos.y.fixed, code, sizeof(POLY_FT4));
+    Area_CellAddPrim(g_Task->pos.x.fixed, g_Task->pos.y.fixed, code, sizeof(POLY_FT4));
 }
 #else
 INCLUDE_ASM(func_801F4158_area168);

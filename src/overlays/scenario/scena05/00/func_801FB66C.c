@@ -208,7 +208,7 @@ MATCH void func_801FB66C(void) {
             if (g_ScriptVars[0] != 1) {
                 break;
             }
-            Area_StartScrollRoute(0);
+            Area_ScrollStartRoute(0);
             g_ScenarioState.step_05 = 29;
             SYS_SetFlag(g_SceneFlags, 0x2C);
             break;

@@ -21,7 +21,7 @@ MATCH u8 func_801B4BE4(u8 mode, u8 code) {
         cells = (s16*)g_ScratchPad.cells.bytes;
         want  = code;
         do {
-            if ((Area_GetCellCode(cells[0], cells[1]) & BYTE_MASK) == want) {
+            if ((Area_CellGetCode(cells[0], cells[1]) & BYTE_MASK) == want) {
                 g_Task->direction = mode;
                 return true;
             }
@@ -35,7 +35,7 @@ MATCH u8 func_801B4BE4(u8 mode, u8 code) {
         cells = (s16*)g_ScratchPad.cells.bytes;
         want  = code;
         do {
-            if ((Area_GetCellCode(cells[0], cells[1]) & BYTE_MASK) == want) {
+            if ((Area_CellGetCode(cells[0], cells[1]) & BYTE_MASK) == want) {
                 g_Task->direction = mode;
                 return true;
             }

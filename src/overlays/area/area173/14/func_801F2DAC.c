@@ -27,7 +27,7 @@ MATCH void func_801F2DAC(void) {
         entry  = (u32*)(entry_base + MEM(u16, row_offset + 0x22 + (u32)base) * 4);
         value  = *entry;
         *entry = (value & ~0xFFu) | (i + 0xE6);
-        id     = Area_GetCellId(i + 0x11, 0x61);
+        id     = Area_CellGetId(i + 0x11, 0x61);
         if (id != 0) {
             Area_ApplyTileToQuad(*entry, &g_AreaCellPrims[id][0], 2);
         }

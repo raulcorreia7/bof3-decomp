@@ -27,6 +27,6 @@ MATCH void func_801F3400(s16 x, s16 y, s16 radius_x, s16 radius_y) {
             setRGB0(prim, 255, 255, 255);
         }
         i += 1;
-        Area_AddCellPrim(g_Actors[2].pos.x.fixed, g_Actors[2].pos.y.fixed, 12, sizeof(POLY_F3));
+        Area_CellAddPrim(g_Actors[2].pos.x.fixed, g_Actors[2].pos.y.fixed, 12, sizeof(POLY_F3));
     } while (i < 32);
 }

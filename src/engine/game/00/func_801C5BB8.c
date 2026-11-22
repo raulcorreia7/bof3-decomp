@@ -8,7 +8,7 @@ MATCH void func_801C5BB8(void) {
     if (g_AreaCameraMoving == 0) {
         flags = &D_80143FBC;
         if ((*flags & 0x40) == 0) {
-            Area_AdvanceScroll(Area_SampleHeight(g_AreaScrollTargetX, g_AreaScrollTargetY));
+            Area_ScrollAdvance(Area_SampleHeight(g_AreaScrollTargetX, g_AreaScrollTargetY));
         }
         D_80143FC3 = 0;
         D_80143F4A = 0;
@@ -17,6 +17,6 @@ MATCH void func_801C5BB8(void) {
     } else {
         value = &D_80143F84;
         *value += D_80143F5C;
-        Area_AdvanceScroll(g_ScrollHeight);
+        Area_ScrollAdvance(g_ScrollHeight);
     }
 }

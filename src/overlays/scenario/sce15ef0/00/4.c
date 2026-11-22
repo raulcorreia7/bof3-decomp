@@ -129,7 +129,7 @@ NON_MATCHING void func_801D1220(s32 value) {
     do {
         tpage = GetTPage(TPAGE_DEPTH_4BIT, TPAGE_ABR_ADD, FONT_TPAGE_X, FONT_TPAGE_Y);
         SetDrawMode((DR_MODE*)g_GfxPrimCursor, 0, 1, tpage, 0);
-        Area_AddCellPrim(front[0], front[1], 0, 0xC);
+        Area_CellAddPrim(front[0], front[1], 0, 0xC);
         prim = (POLY_F4*)g_GfxPrimCursor;
         SetPolyF4(prim);
         SetSemiTrans(prim, 1);

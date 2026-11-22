@@ -309,7 +309,7 @@ MATCH void func_801F2E04(s32* center, s32 radius, u16 angle, s32 offset_x, s32 o
     i = 0;
     do {
         SetDrawMode((DR_MODE*)g_GfxPrimCursor, 0, 0, GetTPage(TPAGE_DEPTH_4BIT, TPAGE_ABR_SUB, 896, 256) & HALF_MASK, 0);
-        Area_AddCellPrim(center[0] + offset_x, center[1] + offset_y, 0, 0x18);
+        Area_CellAddPrim(center[0] + offset_x, center[1] + offset_y, 0, 0x18);
         packet = (POLY_F3*)g_GfxPrimCursor;
         SetPolyF3(packet);
         PSX_SET_SEMI_TRANSPARENT(packet);
@@ -322,7 +322,7 @@ MATCH void func_801F2E04(s32* center, s32 radius, u16 angle, s32 offset_x, s32 o
         packet->x2 = (u16)screen1.vx;
         packet->y2 = (u16)screen1.vy;
         PSX_SET_NEUTRAL_RGB(packet);
-        Area_AddCellPrim(center[0] + offset_x, center[1] + offset_y, 0, 0x18);
+        Area_CellAddPrim(center[0] + offset_x, center[1] + offset_y, 0, 0x18);
     } while (((i & BYTE_MASK)) < 4u);
 }
 

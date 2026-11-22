@@ -32,5 +32,5 @@ MATCH void func_801F44C4(void) {
         g_Task->tint.bytes.rgb.b += 4;
     }
     D_80143F84.fixed = g_Task->pos.z.fixed;
-    Area_AdvanceScroll(COORD_INT(g_Task->pos.z));
+    Area_ScrollAdvance(COORD_INT(g_Task->pos.z));
 }

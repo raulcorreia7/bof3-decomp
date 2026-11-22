@@ -407,7 +407,7 @@ NON_MATCHING void func_80117E78(s32 brightness, s32 unused) {
                 primitive->r0    = brightness / 2;
                 primitive->g0    = brightness;
                 primitive->b0    = brightness / 2;
-                Area_AddCellPrim(col << 16, row << 16, 1, sizeof(POLY_FT4));
+                Area_CellAddPrim(col << 16, row << 16, 1, sizeof(POLY_FT4));
             }
         }
     }

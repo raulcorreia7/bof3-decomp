@@ -6,7 +6,7 @@ MATCH s32 func_801D2190(void) {
     /* FAKE: result pinned to v0; retail keeps the return value live. */
     FAKE_REG(s32, result, "v0");
 
-    value  = Area_GetCellCode(D_80145EC6, D_80145ECA);
+    value  = Area_CellGetCode(D_80145EC6, D_80145ECA);
     code   = value & 0xF0;
     result = 0;
     /* Code 0xA0 and code 0xAF are walkable. */

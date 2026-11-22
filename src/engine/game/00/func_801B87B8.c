@@ -4,7 +4,7 @@ MATCH void func_801B87B8(void) {
     Actor* work;
 
     if (g_Task->timer == 0) {
-        if (Area_TestCellCorners(g_Task->pos.x.fixed, g_Task->pos.y.fixed, g_Task->voice_flags.scene_flag, 0xD0, 0) & BYTE_MASK) {
+        if (Area_CellTestCorners(g_Task->pos.x.fixed, g_Task->pos.y.fixed, g_Task->voice_flags.scene_flag, 0xD0, 0) & BYTE_MASK) {
             func_801B8A0C();
             return;
         }

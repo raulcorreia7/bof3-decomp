@@ -11,20 +11,20 @@
     s32 code;                                                                           \
     cell_x = x >> 16;                                                                   \
     cell_y = y >> 16;                                                                   \
-    count = hit = (u8)Area_GetCellCode(cell_x, cell_y) == 0xA6;                         \
+    count = hit = (u8)Area_CellGetCode(cell_x, cell_y) == 0xA6;                         \
     code        = 0xA6;                                                                 \
     if ((x & HALF_MASK) != 0) {                                                         \
-        if ((u8)Area_GetCellCode((s16)(cell_x + 1), cell_y) == code) {                  \
+        if ((u8)Area_CellGetCode((s16)(cell_x + 1), cell_y) == code) {                  \
             count++;                                                                    \
         }                                                                               \
     }                                                                                   \
     if ((y & HALF_MASK) != 0) {                                                         \
-        if ((u8)Area_GetCellCode(x >> 16, (s16)((y >> 16) + 1)) == 0xA6) {              \
+        if ((u8)Area_CellGetCode(x >> 16, (s16)((y >> 16) + 1)) == 0xA6) {              \
             count++;                                                                    \
         }                                                                               \
     }                                                                                   \
     if ((x & HALF_MASK) != 0 && (y & HALF_MASK) != 0) {                                 \
-        if ((u8)Area_GetCellCode((s16)((x >> 16) + 1), (s16)((y >> 16) + 1)) == 0xA6) { \
+        if ((u8)Area_CellGetCode((s16)((x >> 16) + 1), (s16)((y >> 16) + 1)) == 0xA6) { \
             count++;                                                                    \
         }                                                                               \
     }                                                                                   \

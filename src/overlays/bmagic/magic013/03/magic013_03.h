@@ -34,7 +34,7 @@ void func_801F0164(void);
 #define MAGIC013_DRAW_WAVE_BAND(lift)                                                                                                                                                             \
     tpage = getTPage(TPAGE_DEPTH_4BIT, TPAGE_ABR_ADD, 320, 256);                                                                                                                                  \
     SetDrawMode((DR_MODE*)g_GfxPrimCursor, 0, 1, tpage, 0);                                                                                                                                       \
-    Area_AddCellPrim(g_Task->pos.x.fixed, g_Task->pos.y.fixed, 2, sizeof(DR_MODE));                                                                                                               \
+    Area_CellAddPrim(g_Task->pos.x.fixed, g_Task->pos.y.fixed, 2, sizeof(DR_MODE));                                                                                                               \
     WAVE_SHADE                = g_Task->unk_04 * 12;                                                                                                                                              \
     WAVE_HEIGHT               = FIXED_MUL(rsin(0), 64);                                                                                                                                           \
     WAVE_ANGLE                = D_801F03D4[g_Task->facing] << 7;                                                                                                                                  \
@@ -65,7 +65,7 @@ void func_801F0164(void);
         setRGB1(prim, 1, 1, 1);                                                                                                                                                                   \
         setRGB2(prim, WAVE_SHADE, WAVE_SHADE, WAVE_SHADE);                                                                                                                                        \
         setRGB3(prim, WAVE_SHADE, WAVE_SHADE, WAVE_SHADE);                                                                                                                                        \
-        Area_AddCellPrim(g_Task->pos.x.fixed, g_Task->pos.y.fixed, 2, sizeof(POLY_G4));                                                                                                           \
+        Area_CellAddPrim(g_Task->pos.x.fixed, g_Task->pos.y.fixed, 2, sizeof(POLY_G4));                                                                                                           \
     }
 
 #endif

@@ -13,9 +13,9 @@ extern u8 D_801F302C[];
 
 /* Set three map cells in one column to the same byte. */
 static inline void World01_SetMapCells(s32 column, s32 row0, s32 row1, s32 row2, s32 value) {
-    Area_SetCellCode(column, row0, value);
-    Area_SetCellCode(column, row1, value);
-    Area_SetCellCode(column, row2, value);
+    Area_CellSetCode(column, row0, value);
+    Area_CellSetCode(column, row1, value);
+    Area_CellSetCode(column, row2, value);
 }
 
 #endif

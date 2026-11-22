@@ -10,7 +10,7 @@ NON_MATCHING bool func_801B6674(void) {
     s32 entry_pos_y;
     u8  entry_facing;
 
-    cell_code = Area_GetCellCode(COORD_INT(g_Task->pos.x), COORD_INT(g_Task->pos.y));
+    cell_code = Area_CellGetCode(COORD_INT(g_Task->pos.x), COORD_INT(g_Task->pos.y));
     status    = g_GameRequestFlags;
     if (!(status & AREA_LOAD_FLAG_WORLD_MAP)) {
         return 0;

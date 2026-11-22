@@ -23,7 +23,7 @@ MATCH void Fishing_ShowLocation(void) {
         case 0:
             Game_SetScriptActive();
             pos = &D_80145EC6;
-            if ((Area_GetCellCode(pos[0], D_80145ECA) & BYTE_MASK) == 0xA1) {
+            if ((Area_CellGetCode(pos[0], D_80145ECA) & BYTE_MASK) == 0xA1) {
                 for (index = 0; index < 7; index++) {
                     if (g_GameEntryAreaId == D_801F6090[index][0]) {
                         break;

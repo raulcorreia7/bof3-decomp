@@ -24,7 +24,7 @@ MATCH void func_801F3EE8(void) {
             }
         } break;
         case 19:
-            Area_SetCellPalette(0x11, 0xB7);
+            Area_CellSetPalette(0x11, 0xB7);
             D_801448EE             = 0x1E;
             g_SceneEventState.step = 0x15;
             break;
@@ -41,7 +41,7 @@ MATCH void func_801F3EE8(void) {
         } break;
         case 21:
             if (g_AreaCameraMoving == 0) {
-                Area_SetCellPalette(0x11, 0xAD);
+                Area_CellSetPalette(0x11, 0xAD);
                 func_801A4BC0(0x11, 0xAD, 0xA1);
                 func_801A4BC0(0x12, 0xAD, 0xA1);
                 func_801A4BC0(0x11, 0xAE, 0xC0);
