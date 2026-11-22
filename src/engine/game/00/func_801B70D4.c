@@ -9,7 +9,7 @@ MATCH void func_801B70D4(void) {
         work              = TASK(Actor);
         work->pos.x.fixed = g_PartyActors[work->unk_18].pos.x.fixed;
         work->pos.y.fixed = g_PartyActors[work->unk_18].pos.y.fixed;
-        work->pos.z.fixed = FIELD(s32, &D_80147A94, work->unk_18 * ACTOR_SIZE);
+        work->pos.z.fixed = FIELD(s32, &g_PartyActors[0].pos.z.fixed, work->unk_18 * ACTOR_SIZE);
         work->unk_64      = g_PartyActors[work->unk_18].unk_64;
         work->unk_68      = g_PartyActors[work->unk_18].unk_68;
         work->unk_6C      = g_PartyActors[work->unk_18].unk_6C;

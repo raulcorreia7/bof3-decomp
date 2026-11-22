@@ -1,3 +1,5 @@
+/* FAKE: the area id read stays below the actor address; a plain read moves above it. */
+#define FAKE_DECL_GAME_AREA_ID_VOLATILE
 #include "game_00.h"
 
 MATCH void func_801A68C0(u8* script) {

@@ -26,7 +26,7 @@ MATCH void func_801F32D4(void) {
                 COORD_INT(g_SpawnedActors[i].pos.z) = Area_HeightSample(g_SpawnedActors[i].pos.x.fixed, g_SpawnedActors[i].pos.y.fixed);
             }
         }
-        focus_x = &D_80147A8C;
+        focus_x = &g_PartyActors[0].pos.x.fixed;
         *focus_x -= TO_COORD(20);
         D_80147A96 = Area_HeightSample(*focus_x, g_AreaFocusY);
     }

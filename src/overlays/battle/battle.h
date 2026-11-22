@@ -103,7 +103,6 @@ extern u8                           g_BattleEventSlotBytes[];
 extern u8                           D_801EB5A8;
 /* D_801EBF08 */
 extern u8*                          g_BattleMessageSlot;
-extern u8                           D_801EC324;
 extern u8                           D_801EC328;
 /* Queued-slot records at g_BattleEffects (stride 0x78). */
 #define BATTLE_EFFECT_COUNT 48

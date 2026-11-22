@@ -69,7 +69,7 @@ MATCH void func_801F6E04(void) {
 
     work  = TASK(SceneEffect);
     index = work->channel_18;
-    value = ((Actor*)g_PartyActors)[index].range_54.raw;
+    value = g_PartyActors[index].range_54.raw;
 
     work->step   = 1;
     work->unk_54 = value;
@@ -92,7 +92,7 @@ MATCH void func_801F6E48(void) {
     work      = TASK(u8);
     prim      = g_GfxPrimCursor;
     work_cell = (SceneEffect*)work;
-    adopted   = (Actor*)(g_PartyActors + work_cell->channel_18 * 0x98);
+    adopted   = &g_PartyActors[work_cell->channel_18];
 
     work_cell->pos.x       = adopted->pos.x.fixed;
     work_cell->pos.y       = adopted->pos.y.fixed;
@@ -726,8 +726,8 @@ MATCH void func_801F878C(void) {
     SceneEffect* late;
 
     work                          = TASK(SceneEffect);
-    FIELD(s16, work, 0x2Eu)       = (D_80147A86 + D_801FC9E8);
-    work->origin.y                = (D_80147A88 + D_801FC9E9);
+    FIELD(s16, work, 0x2Eu)       = (g_PartyActors[0].screen_x + D_801FC9E8);
+    work->origin.y                = (g_PartyActors[0].screen_y + D_801FC9E9);
     work->counter_09              = 0;
     TASK(SceneEffect)->channel_06 = 0x20;
     tail                          = TASK(SceneEffect);
@@ -798,12 +798,12 @@ MATCH void func_801F89F0(void) {
     SceneEffect* setup_work;
 
     setup_work                              = TASK(SceneEffect);
-    FAKE_VOLATILE(s32, setup_work->pos.x)   = D_80147A8C;
+    FAKE_VOLATILE(s32, setup_work->pos.x)   = g_PartyActors[0].pos.x.fixed;
     FAKE_VOLATILE(s32, setup_work->pos.y)   = g_AreaFocusY[0];
-    FIELD(s32, setup_work, 0x3Cu)           = D_80147A94;
-    FAKE_VOLATILE(s32, setup_work->angle.x) = D_80147ABC;
-    FAKE_VOLATILE(s32, setup_work->angle.y) = D_80147AC0;
-    setup_work->angle.z                     = D_80147AC4;
+    FIELD(s32, setup_work, 0x3Cu)           = g_PartyActors[0].pos.z.fixed;
+    FAKE_VOLATILE(s32, setup_work->angle.x) = g_PartyActors[0].unk_64;
+    FAKE_VOLATILE(s32, setup_work->angle.y) = g_PartyActors[0].unk_68;
+    setup_work->angle.z                     = g_PartyActors[0].unk_6C;
     func_801AC1DC(deltas, FIELD(u8, setup_work, 0x1Cu));
     update_work                     = TASK(SceneEffect);
     update_work->pos.x              = (update_work->pos.x + deltas[0]);
@@ -887,7 +887,7 @@ MATCH void func_801F8D90(void) {
     work      = TASK(u8);
     prim      = g_GfxPrimCursor;
     work_cell = (SceneEffect*)work;
-    first     = (Actor*)(g_PartyActors + work_cell->counter_0C * 0x98);
+    first     = &g_PartyActors[work_cell->counter_0C];
 
     work_cell->pos.x       = first->pos.x.fixed;
     work_cell->pos.y       = first->pos.y.fixed;
@@ -913,7 +913,7 @@ MATCH void func_801F8D90(void) {
     poly->x0 = poly->x0 - 8;
     poly->y1 = poly->y0;
 
-    second = (Actor*)(g_PartyActors + work_cell->channel_18 * 0x98);
+    second = &g_PartyActors[work_cell->channel_18];
     TASK_SET(second);
     func_801AC1DC(origin, work[0x1C]);
 
@@ -1016,11 +1016,11 @@ MATCH void func_801F92DC(void) {
             goto block_7;
         }
         if (g_ScriptVars[2] == 3) {
-            D_80147C38 = selection;
-            D_80147C3C = 4;
-            D_80147C21 = 7;
-            state3     = &g_AreaCameraAngle.vz;
-            *state3    = *state3 + 0x155;
+            g_PartyActors[3].unk_18      = selection;
+            g_PartyActors[3].unk_1C      = 4;
+            g_PartyActors[3].header.mode = 7;
+            state3                       = &g_AreaCameraAngle.vz;
+            *state3                      = *state3 + 0x155;
         block_7:
             if (g_ScriptVars[2] != 3) {
                 goto block_8;
@@ -1047,10 +1047,10 @@ MATCH void func_801F92DC(void) {
     }
     func_801F9868();
     if (g_GameAreaId == AREA_ID_NO_TEXT_25) {
-        g_Actors[0].unk_18 = 2;
-        D_801468A4         = 2;
-        D_80147BA0         = 1;
-        D_80147BA4         = 3;
+        g_Actors[0].unk_18      = 2;
+        D_801468A4              = 2;
+        g_PartyActors[2].unk_18 = 1;
+        g_PartyActors[2].unk_1C = 3;
         SND_SEPlay(EMI_SE_ID(SND_BANK_AREA, 0));
         g_ScenarioState.state_04 = 0xB;
         g_ScenarioState.timer_06 = 20;
@@ -1982,8 +1982,8 @@ MATCH void func_801FB744(void) {
 
             request = &g_ScriptVars[2];
             if (*request & 0x1) {
-                D_80147C54 = ((RANDOM_MASK(7) - 3) << 0xA) + (TO_COORD(26) + COORD_HALF);
-                D_80147C58 = ((RANDOM_MASK(7) - 3) << 0xA) + (TO_COORD(21) + COORD_HALF);
+                g_PartyActors[3].pos.x.fixed = ((RANDOM_MASK(7) - 3) << 0xA) + (TO_COORD(26) + COORD_HALF);
+                g_PartyActors[3].pos.y.fixed = ((RANDOM_MASK(7) - 3) << 0xA) + (TO_COORD(21) + COORD_HALF);
             }
             if (*request == 3) {
                 if (g_ScenarioState.timer_06 != 0) {
@@ -2219,9 +2219,9 @@ MATCH void func_801FC01C(void) {
     s32          lifetime;
     s32          slot;
 
-    base = D_80147BD8;
+    base = g_PartyActors[2].script;
     i    = 0;
-    if (*D_80147BDC > 0) {
+    if (*g_PartyActors[2].range_54.table > 0) {
         do {
             shift                                            = 0xB - RANDOM_MASK(3);
             slot                                             = i * sizeof(SceneEffectSlot);
@@ -2265,7 +2265,7 @@ MATCH void func_801FC01C(void) {
             SCENE_EFFECT_CELL(g_SceneEffect.life_delta, slot, 10) = lifetime;
             SCENE_EFFECT_CELL(g_SceneEffect.life_delta, slot, 11) = lifetime;
             i++;
-        } while (i < *D_80147BDC);
+        } while (i < *g_PartyActors[2].range_54.table);
     }
 }
 
@@ -2282,10 +2282,10 @@ MATCH void func_801FC3A0(void) {
     u8*          dst_base;
     s8           i;
 
-    src_base = D_80147BD8;
-    dst_base = D_80147AA8;
+    src_base = g_PartyActors[2].script;
+    dst_base = g_PartyActors[0].script;
     i        = 0;
-    if ((*D_80147BDC) > 0) {
+    if ((*g_PartyActors[2].range_54.table) > 0) {
         do {
             rec = (SceneSample*)(i * sizeof(SceneSample) + ((s32)src_base));
             dst = (SceneLife*)(i * sizeof(SceneLife) + ((s32)dst_base));
@@ -2328,7 +2328,7 @@ MATCH void func_801FC3A0(void) {
             dst->lifetime[10] -= g_SceneEffect.life_delta[i].cell[10];
             dst->lifetime[11] -= g_SceneEffect.life_delta[i].cell[11];
             i++;
-        } while (i < (*D_80147BDC));
+        } while (i < (*g_PartyActors[2].range_54.table));
     }
 }
 

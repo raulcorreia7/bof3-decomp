@@ -9,7 +9,7 @@ MATCH void func_801F36CC(void) {
         y = g_AreaFocusY;
         /* FAKE: keeps the focus x load after the integer-half store; pure C differs in 11 rows. */
         FAKE_BARRIER();
-        x               = D_80147A8C;
+        x               = g_PartyActors[0].pos.x.fixed;
         D_80147ACF      = 1;
         D_80147AD6      = 0;
         D_80147A96      = Area_HeightSample(x, y);

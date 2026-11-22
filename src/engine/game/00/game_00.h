@@ -269,19 +269,23 @@ typedef struct PaletteColors {
     u16 colors[4];
 } PaletteColors;
 
-extern u16                 D_1F800002; /* 0x1F800002; packed spawn record staging halfword */
-extern u8                  D_1F800003;
-extern u16                 D_1F800004; /* 0x1F800004 */
-extern s16                 D_1F800008; /* 0x1F800008 */
-extern u16                 D_1F80000A; /* 0x1F80000A */
-extern s16                 D_1F80000C; /* 0x1F80000C */
-extern u16                 D_1F80000E; /* 0x1F80000E */
-extern s8                  D_800E4D40; /* 0x800E4D40 */
-extern s16                 D_800E4D42; /* 0x800E4D42 */
-extern u8                  D_80143BB1;
-extern volatile u16        g_GameAreaId;
+extern u16 D_1F800002; /* 0x1F800002; packed spawn record staging halfword */
+extern u8  D_1F800003;
+extern u16 D_1F800004; /* 0x1F800004 */
+extern s16 D_1F800008; /* 0x1F800008 */
+extern u16 D_1F80000A; /* 0x1F80000A */
+extern s16 D_1F80000C; /* 0x1F80000C */
+extern u16 D_1F80000E; /* 0x1F80000E */
+extern s8  D_800E4D40; /* 0x800E4D40 */
+extern s16 D_800E4D42; /* 0x800E4D42 */
+extern u8  D_80143BB1;
+/* A unit that must keep the read where it is written (func_801A68C0) defines
+ * FAKE_DECL_GAME_AREA_ID_VOLATILE before its first include. */
+#ifdef FAKE_DECL_GAME_AREA_ID_VOLATILE
+extern volatile u16 g_GameAreaId;
+#endif
 /* D_80143F06 */
-extern volatile u8         g_GameLastCellType; /* 0x80143F06 */
+extern u8                  g_GameLastCellType; /* 0x80143F06 */
 /* D_80143F08 */
 extern volatile u32        g_GameLastX; /* 0x80143F08 */
 /* D_80143F0C */
@@ -362,7 +366,6 @@ extern u16                 D_80146914;
 extern u16                 D_80146918[][ACTOR_SIZE / 2];
 extern u8                  D_8014691C[ENTITY_MAX][ACTOR_SIZE]; /* 0x8014691C */
 /* D_80147A58 */
-extern Actor               g_PartyActors[];
 extern u16                 D_801481D8;
 extern Pos3                D_801481E8;         /* scene angle, 16.16 fixed point */
 extern Pos3                D_801481F8;         /* per-frame step of D_801481E8 */

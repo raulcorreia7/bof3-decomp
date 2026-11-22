@@ -1,0 +1,2 @@
+{"function": "emi/world03/area148/13@0x801F4DF0", "tried": "moved i += 1 before the x2/y2 stores: the compiler still leaves the two delay-slot nops that retail fills with the increment and the a2 zero", "first_diff": "0x801F4F30 addiu s4,s4,1 against nop", "score": "32 rows"}
+{"function": "emi/etc/start/08@0x801D53AC", "tried": "re-read: retail materializes li a2,1 before the global loads; the draft loads D_801ED620/g_InputPressed first, no source form applied", "first_diff": "0x801D53C4 li a2,1 against lui v0,0x801f", "score": "31 rows"}

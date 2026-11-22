@@ -40,15 +40,9 @@ extern Callback  D_801F544C[];
 void             func_801F2F30(s32* first, s32* second);
 extern u8        D_80144EF0[];
 
-/* g_Game.current */
-extern PartyMember* D_80146250;
-
 /* The actor row table and the per-actor 16-byte turn records. */
-/* D_80147A58 */
-extern Actor g_PartyActors[];
 
 /* The work word the stage route reads. */
-extern s32          D_80147AC4;
 /* The shared route steps the stage table indexes. */
 extern s8           D_80181B00[];
 extern s8           D_80181B01[];

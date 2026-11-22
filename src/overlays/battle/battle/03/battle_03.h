@@ -449,12 +449,10 @@ extern u8               D_801EB6D0[];
 extern u8               D_801EBF04;
 extern s32              D_801EBFA0;
 extern BattleEffect* volatile D_801EC2E0;
-extern u8    D_801EC2E4;
-/* Stats of the two battlers a damage calculation reads. */
-extern Stats g_BattleCalcStats[2];
-/* kept: func_801DFCB4 writes the defense and evasion of g_BattleCalcStats[0] through these; the typed member moves its code. */
-extern u16   D_801EC2EE;
-extern u8    D_801EC303;
+extern u8  D_801EC2E4;
+/* kept: the overlays disagree on the sign of the defense word here, and func_801DFCB4's evasion update moves its code through the typed member. */
+extern u16 D_801EC2EE;
+extern u8  D_801EC303;
 
 /* func_8009BBE8 */
 /* func_8009BFC4 */

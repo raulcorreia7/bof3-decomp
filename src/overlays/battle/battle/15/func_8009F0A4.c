@@ -33,7 +33,7 @@ MATCH void func_8009F0A4(void) {
     } else {
         level = ((raw >> 1) + 0x1E);
     }
-    D_801EC324 = level;
+    g_BattleCalcStats[1].accuracy = level;
     /* FAKE: keep the level store ahead of the counter store. */
     FAKE_BARRIER();
     delta_raw = D_801EC310;

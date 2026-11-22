@@ -38,7 +38,7 @@ MATCH void WorldMap_WaveCells(void) {
         angle_0 += 0x180;
     }
 
-    D_80147A96               = Area_HeightSample(D_80147A8C, g_AreaFocusY);
-    D_80147A6C               = 0;
+    D_80147A96               = Area_HeightSample(g_PartyActors[0].pos.x.fixed, g_AreaFocusY);
+    g_PartyActors[0].vz      = 0;
     g_AreaCameraRefreshCount = 2;
 }

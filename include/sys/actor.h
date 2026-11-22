@@ -302,6 +302,10 @@ ASSERT_SIZE(ActorTurnRamp, 0x10);
 extern Actor* g_CurrentActor; /* 0x80146884 */
 extern Actor  g_Actors[ACTOR_COUNT];
 
+/* The four party rows that follow the actor table; scripts and overlays index them by party slot. */
+#define PARTY_ACTOR_COUNT 4
+extern Actor g_PartyActors[PARTY_ACTOR_COUNT];
+
 /* D_80147CB8 */
 extern ActorTurnRamp g_ActorTurnRamps[ACTOR_TURN_RAMP_COUNT];
 
