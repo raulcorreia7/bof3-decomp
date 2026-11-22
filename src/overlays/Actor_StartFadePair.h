@@ -37,7 +37,7 @@
     cell3                                    = cell->unk_03;              \
     FIELD(u8, D_801468E4, cell4* ACTOR_SIZE) = 0;                         \
     FIELD(u8, D_801468E4, cell3* ACTOR_SIZE) = 0;                         \
-    GFX_AllocPaletteFade(&g_Actors[work->unk_03], 15, 0, 0, 1);           \
-    GFX_AllocPaletteFade(&g_Actors[work->unk_04], 0, 0, 15, 1);           \
+    GFX_PaletteAllocFade(&g_Actors[work->unk_03], 15, 0, 0, 1);           \
+    GFX_PaletteAllocFade(&g_Actors[work->unk_04], 0, 0, 15, 1);           \
     g_Task->timer       = 4;                                              \
     g_Task->header.mode = 1;

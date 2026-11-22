@@ -15,10 +15,10 @@ MATCH void GFX_SpinToBlack(void) {
     value = 0;
 
 loop:
-    if ((GFX_UpdateScreenFade(&value, 0x800, 1, GFX_LAYER_TOP, flag) & BYTE_MASK) == 0) {
+    if ((GFX_FadeUpdateScreen(&value, 0x800, 1, GFX_LAYER_TOP, flag) & BYTE_MASK) == 0) {
         *level = (*level + 0x20) & ANGLE_MASK;
         SYS_ThreadWait(1);
-        /* Retail keeps this spin as a goto loop (as in GFX_RunWhiteFade). */
+        /* Retail keeps this spin as a goto loop (as in GFX_FadeRunWhite). */
         goto loop;
     }
 

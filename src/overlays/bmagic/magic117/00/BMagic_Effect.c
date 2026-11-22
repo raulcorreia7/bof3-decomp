@@ -10,8 +10,8 @@ MATCH void func_801EEC90(void) {
     PartyMember** actor;
 
     actor = &g_Battle.selected_actor;
-    GFX_FreePaletteFadeTarget(*actor);
-    g_Task->param.unk_0B = GFX_AllocPaletteFade(*actor, 0, 0, 0, 1);
+    GFX_PaletteFreeFadeTarget(*actor);
+    g_Task->param.unk_0B = GFX_PaletteAllocFade(*actor, 0, 0, 0, 1);
     g_Task->unk_09       = 0;
     g_Task->timer        = 2;
     g_Task->header.mode += 1;
@@ -38,7 +38,7 @@ MATCH void func_801EEE40(void) {
         if (--g_Task->timer != 0) {
             g_Task->header.mode--;
         } else {
-            GFX_FreePaletteFadeTarget(g_Battle.selected_actor);
+            GFX_PaletteFreeFadeTarget(g_Battle.selected_actor);
             Battle_FadePoisonedBattler(g_Battle.target_selector);
             g_Task->header.mode++;
         }
@@ -70,7 +70,7 @@ MATCH void func_801EF20C(void) {
     g_PaletteFades[g_Task->param.unk_0B].offset.g++;
     g_PaletteFades[g_Task->param.unk_0B].offset.b++;
     if (--g_Task->unk_09 == 0) {
-        GFX_FreePaletteFadeTarget(g_Battle.selected_actor);
+        GFX_PaletteFreeFadeTarget(g_Battle.selected_actor);
         Battle_FadePoisonedBattler(g_Battle.target_selector);
         g_Task->header.mode++;
     }

@@ -8,7 +8,7 @@ segments:
     section_order: [.data, .rodata]
     subsegments:
       - [0x0, .data, D_80195800]
-      - [0x4, .rodata, ../../gfx/palette/GFX_MarkPaletteCells]
+      - [0x4, .rodata, ../../gfx/palette/GFX_PaletteMarkCells]
   # Placement: .data resumes after another section in the retail bytes; one segment would group both .data runs.
   - name: data_2
     type: code
@@ -18,7 +18,7 @@ segments:
     section_order: [.data, .rodata]
     subsegments:
       - [0x18, .data, D_80195818]
-      - [0x1C, .rodata, ../../gfx/palette/GFX_FindFreePaletteCell]
+      - [0x1C, .rodata, ../../gfx/palette/GFX_PaletteFindFreeCell]
       - [0x30, .rodata, ../../state/mode/Game_UpdateField]
   # Placement: .data resumes after another section in the retail bytes; one segment would group both .data runs.
   - name: data_3
@@ -195,17 +195,17 @@ segments:
       - [0x91C, c, ../../actor/task/Actor_ClearAll]
       - [0x95C, c, ../../actor/task/Actor_Create]
       - [0xA5C, c, func_8019625C]
-      - [0xD1C, c, ../../gfx/palette/GFX_AllocPaletteFade]
-      - [0xE70, c, ../../gfx/palette/GFX_FreePaletteFade]
-      - [0xF18, c, ../../gfx/palette/GFX_FreePaletteFadeTarget]
-      - [0xF84, c, ../../gfx/palette/GFX_MarkPaletteCells]
-      - [0x10BC, c, ../../gfx/palette/GFX_FindFreePaletteCell]
-      - [0x1320, c, ../../gfx/palette/GFX_FindPaletteCell]
-      - [0x139C, c, ../../gfx/palette/GFX_UploadPaletteRows]
-      - [0x148C, c, ../../gfx/palette/GFX_UpdatePaletteAnimations]
-      - [0x14F0, c, ../../gfx/palette/GFX_StartPaletteAnimation]
-      - [0x1584, c, ../../gfx/palette/GFX_StepPaletteAnimation]
-      - [0x1674, c, ../../gfx/palette/GFX_CopyPaletteAnimationColors]
+      - [0xD1C, c, ../../gfx/palette/GFX_PaletteAllocFade]
+      - [0xE70, c, ../../gfx/palette/GFX_PaletteFreeFade]
+      - [0xF18, c, ../../gfx/palette/GFX_PaletteFreeFadeTarget]
+      - [0xF84, c, ../../gfx/palette/GFX_PaletteMarkCells]
+      - [0x10BC, c, ../../gfx/palette/GFX_PaletteFindFreeCell]
+      - [0x1320, c, ../../gfx/palette/GFX_PaletteFindCell]
+      - [0x139C, c, ../../gfx/palette/GFX_PaletteUploadRows]
+      - [0x148C, c, ../../gfx/palette/GFX_PaletteUpdateAnimations]
+      - [0x14F0, c, ../../gfx/palette/GFX_PaletteStartAnimation]
+      - [0x1584, c, ../../gfx/palette/GFX_PaletteStepAnimation]
+      - [0x1674, c, ../../gfx/palette/GFX_PaletteCopyAnimationColors]
       - [0x1778, c, ../../state/mode/Game_RunCampMenu]
       - [0x17FC, c, ../../state/mode/Game_LoadCampMenu]
       - [0x1868, c, ../../state/mode/Game_RunMain]

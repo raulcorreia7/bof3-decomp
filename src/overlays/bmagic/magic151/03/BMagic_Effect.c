@@ -111,11 +111,11 @@ MATCH void func_801EF138(void) {
         }
         saved  = g_Task;
         g_Task = &g_Game.members[g_Battle.active_battler];
-        GFX_FreePaletteFadeTarget(g_Task);
+        GFX_PaletteFreeFadeTarget(g_Task);
         s_BattleBattlerTemplates[g_Battle.active_battler].unk_27 = g_Game.members[g_Battle.active_battler].unk_27;
-        GFX_LoadPalette((g_Task->slot << 6) + BATTLE_ACTION_BLOCK_TABLE, g_Battle.unk_D0[9]);
+        GFX_PaletteLoad((g_Task->slot << 6) + BATTLE_ACTION_BLOCK_TABLE, g_Battle.unk_D0[9]);
         func_801DDAB4(g_Game.members[g_Battle.active_battler].chr.status);
-        GFX_UploadPaletteRows();
+        GFX_PaletteUploadRows();
         Script_Request((g_Task->facing + 4) & BYTE_MASK);
         g_Task = saved;
         saved->unk_03 += 1;

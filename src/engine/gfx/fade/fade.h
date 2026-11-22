@@ -43,9 +43,9 @@ void func_8014F2F0(void);
 void GFX_FadeToBlackSlowest(void);
 /* func_8014F460 */
 void GFX_SpinToBlack(void);
-void GFX_RunBlackFade(s32 delta, s32 semi_trans, s32 order);
-void GFX_RunWhiteFade(s32 delta, s32 semi_trans, s32 order);
+void GFX_FadeRunBlack(s32 delta, s32 semi_trans, s32 order);
+void GFX_FadeRunWhite(s32 delta, s32 semi_trans, s32 order);
 /* func_8014F704 */
-s32  GFX_UpdateScreenFade(u16* level, s32 delta, char semi_trans, u32 order, u8 blend_mode);
+s32  GFX_FadeUpdateScreen(u16* level, s32 delta, char semi_trans, u32 order, u8 blend_mode);
 
 #endif

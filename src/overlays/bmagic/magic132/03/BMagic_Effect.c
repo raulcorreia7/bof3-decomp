@@ -26,8 +26,8 @@ MATCH void func_801EEC88(void) {
     }
     selected            = &D_8014637C;
     g_GfxPalettePending = 1;
-    GFX_FreePaletteFadeTarget(*selected);
-    g_Task->timer = GFX_AllocPaletteFade(*selected, 0, 0, 0, 1);
+    GFX_PaletteFreeFadeTarget(*selected);
+    g_Task->timer = GFX_PaletteAllocFade(*selected, 0, 0, 0, 1);
     SND_QueueSelectionSE(EMI_SE_ID(SND_BANK_COMMON, 0));
     g_Task->param.unk_0B = 0;
     g_Task->unk_09       = 0;
@@ -49,7 +49,7 @@ MATCH void func_801EEEF4(void) {
     g_PaletteFades[g_Task->timer].offset.g--;
     g_PaletteFades[g_Task->timer].offset.b--;
     if (--g_Task->unk_09 == 0) {
-        GFX_FreePaletteFadeTarget(D_8014637C);
+        GFX_PaletteFreeFadeTarget(D_8014637C);
         Battle_FadePoisonedBattler(g_Battle.active_battler);
         g_Task->unk_09 = 16;
         g_Task->header.mode++;

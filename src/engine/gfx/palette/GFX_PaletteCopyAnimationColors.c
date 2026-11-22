@@ -1,6 +1,6 @@
 #include "engine/game/00/game_00.h"
 
-MATCH void GFX_CopyPaletteAnimationColors(GraphicsPaletteAnimation* slot) {
+MATCH void GFX_PaletteCopyAnimationColors(GraphicsPaletteAnimation* slot) {
     GraphicsPaletteAnimation* slot_copy;
     u8*                       owner;
     u8*                       entry;

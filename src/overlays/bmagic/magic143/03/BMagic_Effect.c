@@ -68,8 +68,8 @@ MATCH void func_801EEF78(void) {
     g_Task->param.unk_0B += 1;
     timer = g_Task->timer;
     if (timer == 16) {
-        GFX_FreePaletteFadeTarget(g_Battle.selected_actor);
-        GFX_AllocPaletteFade(g_Battle.selected_actor, -8, -8, -8, 1);
+        GFX_PaletteFreeFadeTarget(g_Battle.selected_actor);
+        GFX_PaletteAllocFade(g_Battle.selected_actor, -8, -8, -8, 1);
         Battle_ApplyDamageFlags(g_Battle.target_selector, 16);
         g_Task->unk_09 = 32;
         g_Task->header.step += 1;

@@ -223,7 +223,7 @@ MATCH void func_801F3844(void) {
     s32    value;
     Actor* base;
 
-    g_CurrentActor->unk_93 = GFX_AllocPaletteFade(g_Task, 0, 0, 0, 1);
+    g_CurrentActor->unk_93 = GFX_PaletteAllocFade(g_Task, 0, 0, 0, 1);
     work                   = g_Task;
     work->header.flags |= 0x20;
     work = g_Task;
@@ -258,7 +258,7 @@ MATCH void func_801F3920(void) {
     }
     work = g_Task;
     if ((work->tint.raw & ~0xFF) == 0xC0C0C000) {
-        GFX_FreePaletteFade(g_CurrentActor->unk_93);
+        GFX_PaletteFreeFade(g_CurrentActor->unk_93);
         g_Task->header.flags     = (g_Task->header.flags & 0xDF);
         g_Task->tint.bytes.flags = 0;
         slot                     = g_Task;

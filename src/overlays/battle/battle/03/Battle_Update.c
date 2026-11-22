@@ -22,7 +22,7 @@ MATCH void Battle_Update(void) {
     }
     Area_UpdateParty();
     Actor_DispatchAll();
-    GFX_UpdatePaletteAnimations();
+    GFX_PaletteUpdateAnimations();
     func_8019625C();
     UI_PanelUpdateTasks();
     Area_DrawScene();

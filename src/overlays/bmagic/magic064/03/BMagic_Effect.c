@@ -137,7 +137,7 @@ MATCH void func_801EF20C(void) {
         g_Task->unk_09 = timer - 1;
         return;
     }
-    GFX_FreePaletteFadeTarget(g_BattleEffectBattler);
+    GFX_PaletteFreeFadeTarget(g_BattleEffectBattler);
     g_BattleEffectBattler->header.flags |= PARTY_MEMBER_FLAG_HANDLER_BUSY;
     g_Task->unk_09 = 0;
     g_Task->header.step += 1;
@@ -185,10 +185,10 @@ MATCH void func_801EF3C8(void) {
         battler->unk_09 += 2;
     } else if (EMI_IsReady()) {
         Script_Request(g_Task->facing);
-        GFX_FreePaletteFadeTarget(&g_Game.members[g_Battle.active_battler]);
-        GFX_LoadPalette((g_Task->slot << 6) + BATTLE_ACTION_BLOCK_TABLE, 0);
+        GFX_PaletteFreeFadeTarget(&g_Game.members[g_Battle.active_battler]);
+        GFX_PaletteLoad((g_Task->slot << 6) + BATTLE_ACTION_BLOCK_TABLE, 0);
         func_801DDAB4(g_Game.members[g_Battle.active_battler].chr.status);
-        GFX_UploadPaletteRows();
+        GFX_PaletteUploadRows();
         g_Task->header.flags &= ~PARTY_MEMBER_FLAG_HANDLER_BUSY;
         SND_PlaySE(0x102);
         battler->header.step += 1;
@@ -459,7 +459,7 @@ MATCH void func_801F0D14(void) {
 }
 
 MATCH void func_801F0D34(void) {
-    GFX_FreePaletteFadeTarget(g_Task);
+    GFX_PaletteFreeFadeTarget(g_Task);
     Effect_Reset();
 }
 

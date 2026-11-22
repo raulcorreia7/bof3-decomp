@@ -14,12 +14,12 @@ MATCH void Battle_FadePoisonedBattler(u32 battler_index) {
         if (!HAS_STATUS(g_Game.members[index], STATUS_POISONED)) {
             return;
         }
-        GFX_AllocPaletteFade((u8*)g_Game.members + offset, -6, -0xA, 0, 0);
+        GFX_PaletteAllocFade((u8*)g_Game.members + offset, -6, -0xA, 0, 0);
     } else {
         offset = (index - 3) * BATTLE_ENEMY_STRIDE;
         if ((ENEMY_COMBATANT(index).status & STATUS_POISONED) == 0) {
             return;
         }
-        GFX_AllocPaletteFade(g_BattleEnemies + index * BATTLE_ENEMY_STRIDE, -6, -0xA, 0, 0);
+        GFX_PaletteAllocFade(g_BattleEnemies + index * BATTLE_ENEMY_STRIDE, -6, -0xA, 0, 0);
     }
 }

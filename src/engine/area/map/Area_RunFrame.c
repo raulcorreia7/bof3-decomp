@@ -10,7 +10,7 @@ MATCH void Area_RunFrame(void) {
     func_801BDAB8();
     func_801A0514();
     Actor_DispatchAll();
-    GFX_UpdatePaletteAnimations();
+    GFX_PaletteUpdateAnimations();
     func_8019625C();
     Area_DrawScene();
 }

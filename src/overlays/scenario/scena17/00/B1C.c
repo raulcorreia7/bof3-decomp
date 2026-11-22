@@ -18,7 +18,7 @@ MATCH void func_801F771C(void) {
 
 /* func_801F7750 */
 MATCH void Scene_EnterSaveArea(void) {
-    GFX_ResetPalette();
+    GFX_PaletteReset();
     g_GfxPalettePending = 1;
     g_AreaDrawFlags     = 0x1F;
     Game_RequestAreaChange(AREA_ID_END_GAME_SAVE, TO_COORD(182), TO_COORD(18) + COORD_HALF, FACING_LEFT);
@@ -831,8 +831,8 @@ MATCH void Scene_EnterSaveMenu(void) {
     while (EMI_IsReady() == 0) {
         SYS_ThreadWait(1);
     }
-    GFX_CopyPalette(1);
-    GFX_CopyPalette(2);
+    GFX_PaletteCopy(1);
+    GFX_PaletteCopy(2);
     g_GfxPalettePending = 1;
     FAKE_VOLATILE(u16, g_GameEntrySubstate) += 1;
 }

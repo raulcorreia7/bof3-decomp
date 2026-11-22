@@ -8,8 +8,8 @@ MATCH void Game_LoadMenu(void) {
     while (EMI_IsReady() == 0) {
         SYS_ThreadWait(1u);
     }
-    GFX_CopyPalette(1u);
-    GFX_CopyPalette(2u);
+    GFX_PaletteCopy(1u);
+    GFX_PaletteCopy(2u);
     g_GfxPalettePending = 1u;
     g_MenuStep.step     = 0u;
     D_80148654          = 3;

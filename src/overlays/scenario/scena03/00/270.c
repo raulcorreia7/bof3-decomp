@@ -50,8 +50,8 @@ MATCH void func_801F6EB4(void) {
     cell3                          = cell[3];
     D_801468E4[cell4 * ACTOR_SIZE] = 0;
     D_801468E4[cell3 * ACTOR_SIZE] = 0;
-    GFX_AllocPaletteFade(&g_Actors[work[3]], 15, 0, 0, 1);
-    GFX_AllocPaletteFade(&g_Actors[work[4]], 0, 0, 15, 1);
+    GFX_PaletteAllocFade(&g_Actors[work[3]], 15, 0, 0, 1);
+    GFX_PaletteAllocFade(&g_Actors[work[4]], 0, 0, 15, 1);
     g_Task->timer       = 4;
     g_Task->header.mode = 1;
 }

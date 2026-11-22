@@ -30,7 +30,7 @@ void         func_8015C214(s32 slot, u8 value);
 /* formats a game-text buffer; PsyQ declares sprintf on char, the game keeps its text as u8 */
 #define TEXT_Format(dst, fmt, args...) sprintf((char*)(dst), (char*)(fmt), ##args)
 #define TEXT_FormatLiteral(dst, fmt)   sprintf((char*)(dst), (char*)(fmt))
-/* 0x40-byte palette staging entries; GFX_LoadPalette copies them out, the second copy lands 0x4000 above. */
+/* 0x40-byte palette staging entries; GFX_PaletteLoad copies them out, the second copy lands 0x4000 above. */
 #define GAME_PALETTE_STAGE             MEM_PTR(u8, 0x80035600u)
 #define GAME_PALETTE_MIRROR            MEM_PTR(u8, 0x80039600u)
 #define GAME_PALETTE_MIRROR_U16        ((u16*)GAME_PALETTE_MIRROR)

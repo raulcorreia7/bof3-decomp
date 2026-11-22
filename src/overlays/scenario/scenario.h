@@ -129,7 +129,7 @@ void      func_801F845C();
 void      func_801F8530();
 void      func_801F9BD4();
 void      func_801F9BDC();
-void      GFX_CopyPaletteCapped(u32);
+void      GFX_PaletteCopyCapped(u32);
 void      func_801FC810();
 s32       func_801FC8F4();
 
