@@ -343,20 +343,20 @@ NON_MATCHING void func_801F7920(void) {
                 g_SpawnedActors[g_ScratchPad.cells.bytes[0]].header.flags = 1;
                 g_SpawnedActors[g_ScratchPad.cells.bytes[0]].type         = 0x96;
             }
-            if (*fraction <= 0x2000000) {
+            if (*fraction <= TO_COORD(0x200)) {
                 g_ScratchPad.cells.bytes[0] = Actor_FindFreeSpawned();
                 if (g_ScratchPad.cells.bytes[0] != GAME_NONE) {
                     g_SpawnedActors[g_ScratchPad.cells.bytes[0]].header.flags = 1;
                     g_SpawnedActors[g_ScratchPad.cells.bytes[0]].type         = 0x95;
                 }
             }
-        } else if (*fraction <= 0x2000000) {
+        } else if (*fraction <= TO_COORD(0x200)) {
             g_ScratchPad.cells.bytes[0] = Actor_FindFreeSpawned();
             if (g_ScratchPad.cells.bytes[0] != GAME_NONE) {
                 g_SpawnedActors[g_ScratchPad.cells.bytes[0]].header.flags = 1;
                 g_SpawnedActors[g_ScratchPad.cells.bytes[0]].type         = 0x96;
             }
-            if (*fraction <= 0x2000000) {
+            if (*fraction <= TO_COORD(0x200)) {
                 g_ScratchPad.cells.bytes[0] = Actor_FindFreeSpawned();
                 if (g_ScratchPad.cells.bytes[0] != GAME_NONE) {
                     g_SpawnedActors[g_ScratchPad.cells.bytes[0]].header.flags = 1;
