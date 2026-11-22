@@ -12,12 +12,12 @@ MATCH void CD_OnSync(s32 status, u8* result) {
         /* The folded pair preserves the original GCC setup scheduling. */
         i++;
         i--;
-        D_80146498[i] = *result--;
+        g_EmiStream.sync_result[i] = *result--;
     } while (i-- != 0);
 
     if (status == CdlComplete) {
-        g_CdSyncStatus = 1;
+        g_EmiStream.cd_sync_status = 1;
     } else {
-        g_CdSyncStatus = -1;
+        g_EmiStream.cd_sync_status = -1;
     }
 }

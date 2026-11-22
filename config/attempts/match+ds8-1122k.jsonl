@@ -1,0 +1,9 @@
+{"function": "emi/world03/area135/14@0x801F3CA8", "tried": "local-alloc: i declared u8 and s16", "first_diff": "137-141 diffs: the frame and the whole loop change", "score": 137}
+{"function": "emi/world03/area135/14@0x801F3CA8", "tried": "local-alloc: y_top/y_bottom declared s16", "first_diff": "115 diffs: the frame grows by 8", "score": 115}
+{"function": "emi/world03/area135/14@0x801F3CA8", "tried": "local-alloc/sched2: vy stores moved to the loop top; i declared first; alloc_priority ranks i 1359, y_bottom 1346, y_top 1333 -> s3/s4/s5 where retail maps i->s5, y_top->s3, y_bottom->s4", "first_diff": "20-135 diffs: moving the stores reorders the body; the declaration order leaves s3/s4/s5 unchanged", "score": 20}
+{"function": "emi/world01/area052/13@0x801F3A14", "tried": "local-alloc: FAKE_OPAQUE pairs removed", "first_diff": "94 diffs: the parameter copies collapse onto the parameter registers", "score": 94}
+{"function": "emi/world01/area052/13@0x801F3A14", "tried": "local-alloc: column = x >> 16 and row = y >> 16 directly, no copy then shift", "first_diff": "93 diffs: same collapse", "score": 93}
+{"function": "emi/world01/area052/13@0x801F3A14", "tried": "local-alloc: plain s32 locals with no FAKE_REG pins", "first_diff": "97 diffs: the copies take a0/a1 and the body moves", "score": 97}
+{"function": "emi/etc/start/08@0x801D53AC", "tried": "sched2: g_UiPanelTasks[CURSOR].active = 1 written before the id and x loads", "first_diff": "32 diffs: retail hoists li a2,1 above the D_801ED620 load, the draft always loads the index first", "score": 32}
+{"function": "emi/etc/start/08@0x801D53AC", "tried": "sched2: the active store between the id and x loads; x after the active store", "first_diff": "31 diffs, unchanged", "score": 31}
+{"function": "emi/etc/start/08@0x801D53AC", "tried": "sched2: x load before the id load", "first_diff": "31 diffs, unchanged", "score": 31}

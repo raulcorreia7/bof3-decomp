@@ -19,7 +19,7 @@ MATCH void SAVE_DrawSlots(s16 panel_x, s16 panel_y, u8 slot_cursor) {
         do {
             index = i;
             y     = (s16)(panel_y + SAVE_SLOT_INSET_Y + index * SAVE_SLOT_PITCH);
-            if (g_SaveSlots[index].card_index != GAME_NONE) {
+            if (g_SaveSlots[index].bytes.card_index != GAME_NONE) {
                 slot = &g_SaveSlots[index];
             } else {
                 slot = NULL;

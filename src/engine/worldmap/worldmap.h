@@ -2,6 +2,7 @@
 #define OVERLAY_WORLDMAP_H
 
 #include "types.h"
+#include "area/map.h"
 
 /* func_8019A194 */
 u8 WorldMap_FindRegion(void);
@@ -13,6 +14,6 @@ u8 WorldMap_FindRegion(void);
 #define OVERLAY_WORLDMAP_H_LOCAL
 
 /* func_8019A1D4 */
-u8* WorldMap_GetPoints(void);
+WorldMapPoint* WorldMap_GetPoints(void);
 
 #endif

@@ -1,12 +1,12 @@
 #include "battle_15.h"
 
 MATCH void func_800AE6C8(void) {
-    s32         value;
-    u8          counter;
-    u16         total;
-    BattleWork* work;
+    s32          value;
+    u8           counter;
+    u16          total;
+    BattleRange* work;
 
-    work            = TASK(BattleWork);
+    work            = TASK(BattleRange);
     counter         = work->unk_09[0] + 1;
     value           = work->unk_10 + 2;
     total           = work->unk_30 + value;

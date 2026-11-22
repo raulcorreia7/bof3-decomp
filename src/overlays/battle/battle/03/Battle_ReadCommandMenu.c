@@ -64,7 +64,7 @@ NON_MATCHING void Battle_ReadCommandMenu(void) {
         *(u8*)(&D_8014837B) = 2;
         D_80148357          = 2;
         D_8014839F          = 2;
-        Battle_DrawPanelRows(D_8014837C, D_8014837E);
+        Battle_DrawPanels(D_8014837C, D_8014837E);
         func_801D8450((u32)g_Battle.panel_slot);
         Battle_DrawPartyPanel((s32)D_80148358, (s32)D_8014835A);
         g_Battle.phase.step += 1;

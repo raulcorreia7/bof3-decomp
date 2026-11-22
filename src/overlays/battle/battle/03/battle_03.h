@@ -85,24 +85,7 @@ typedef struct DropChances {
     u8 chance[8];
 } DropChances;
 
-/* The battle panel's own 0x24-stride entry table at 0x80148332: the base
- * symbol is the table's first byte, so its fields start at +0. */
-typedef struct BattlePanel {
-    u8  mode_00; /* +0x00 panel mode; Battle_OpenPanels writes 5 and 7 */
-    u8  unk_01;  /* +0x01 */
-    s16 x_02;    /* +0x02 panel x */
-    s16 y_04;    /* +0x04 panel y */
-    u8  unk_06;  /* +0x06 */
-    u8  unk_07;  /* +0x07 */
-    u8  battler; /* +0x08 the battler the entry belongs to */
-    u8  pad_09[0x1B];
-} BattlePanel;
-
-ASSERT_OFFSET(BattlePanel, x_02, 0x02);
-ASSERT_OFFSET(BattlePanel, y_04, 0x04);
-ASSERT_OFFSET(BattlePanel, battler, 0x08);
-ASSERT_SIZE(BattlePanel, 0x24);
-
+/* The battle panel entries; BattlePanel is in battle/records.h. */
 /* The battle mode byte 0x801462E0 selects one of these six handlers, copied to
  * the stack from 0x801D0C04. */
 typedef struct {
@@ -646,7 +629,7 @@ extern void        Battle_WriteBackParty(void);
 extern void        func_801D74D4(void);
 void               Battle_DrawPartyPanel(s32 x, s32 y);
 /* func_801D7A40 */
-void               Battle_DrawPanelRows(s16 x, s16 y);
+void               Battle_DrawPanels(s16 x, s16 y);
 void               func_801D7D10(u8 clut_index, u16 x, u16 y, u16 width, u8 height, u8 shade);
 void               func_801D7EB0(s32 x, s32 y);
 void               func_801D8450(u32 panel_index);
@@ -965,9 +948,9 @@ void               Battle_HoldPartyPanel(void);
 /* func_801E91FC */
 extern void        Battle_UpdateMenuRowsPanel(void);
 /* func_801E927C */
-extern void        Battle_DrawMenuRows(void);
+extern void        Battle_DrawMenuPanels(void);
 /* func_801E9390 */
-extern void        Battle_AnimateMenuRows(void);
+extern void        Battle_AnimatePanels(void);
 extern void        func_801E943C(void);
 void               func_801E949C(void);
 extern void        func_801E94D0(void);

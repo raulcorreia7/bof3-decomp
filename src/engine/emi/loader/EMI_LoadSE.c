@@ -5,7 +5,7 @@
  */
 MATCH void EMI_LoadSE(void) {
     if (EMI_LOADER_STEP == 0) {
-        g_EmiLoadArg = g_EmiBanks[g_EmiEntryBank].se_records;
+        g_EmiStream.load_arg = g_EmiBanks[g_EmiStream.entry_bank].se_records;
     }
 
     EMI_SectorCopy();

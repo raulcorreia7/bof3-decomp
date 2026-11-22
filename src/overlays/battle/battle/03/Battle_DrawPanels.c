@@ -1,14 +1,14 @@
 #include "battle_03.h"
 
-/* The battle panel rows. Each row has an (x, y) offset pair in D_801EAE94 and a
- * row width in g_Battle.panel_widths; rows 0-4 are the queued battle panels and rows 5-6
+/* The battle panels. Each panel has an (x, y) offset pair in D_801EAE94 and a
+ * width in g_Battle.panel_widths; panels 0-4 are the queued battle panels and panels 5-6
  * the two entrance origins. g_Battle.panel_slot names the selected panel slot. */
 
 /* draws the queued battle panels and the two entrance origins around (x, y), each quad sized by the
  * width of its own panel.
  */
 /* func_801D7A40 */
-MATCH void Battle_DrawPanelRows(s16 x, s16 y) {
+MATCH void Battle_DrawPanels(s16 x, s16 y) {
     u8  panel_index;
     u8  panel_width;
     u8  shade;

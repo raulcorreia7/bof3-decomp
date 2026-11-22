@@ -7,7 +7,7 @@ MATCH void CD_SetSpeed(void) {
     u8  param[8];
     u8* result;
 
-    result   = D_80146498;
+    result   = g_EmiStream.sync_result;
     param[0] = CdlModeSpeed | CdlModeSize1;
     if (CdSync(1, result) == CdlNoIntr) {
         return;
@@ -15,7 +15,7 @@ MATCH void CD_SetSpeed(void) {
     if (CdControl(CdlSetmode, param, result) == 0) {
         return;
     }
-    D_80146492     = 2;
-    g_CdSyncStatus = 0;
-    g_CdState      = CD_STATE_SEEK;
+    g_EmiStream.seek_retries   = 2;
+    g_EmiStream.cd_sync_status = 0;
+    g_EmiStream.cd_state       = CD_STATE_SEEK;
 }
