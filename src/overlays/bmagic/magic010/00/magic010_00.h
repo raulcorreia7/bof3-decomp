@@ -14,6 +14,8 @@ typedef struct Magic010Task {
     u8         timer;
 } Magic010Task;
 
+#define MAGIC010_TASK TASK(Magic010Task)
+
 /* Battle flag and the request hand-off these overlays toggle. */
 extern Magic010Steps D_801EEC04;
 #endif

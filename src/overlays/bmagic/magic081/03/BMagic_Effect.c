@@ -41,10 +41,10 @@ MATCH void func_801EED44(void) {
         MEM_PTR(u16, AREA_PALETTE_UPLOAD_ROW(AREA_PALETTE_BATL_OVR_ROW))[index] = MEM_PTR(u16, AREA_PALETTE_ARENA_ROW(AREA_PALETTE_BATL_OVR_ROW))[index] | PSX_COLOR_STP_BIT;
     }
 
-    effect                                                              = D_801EC2E0;
-    saved                                                               = g_Task;
-    MEM_PTR(u16, AREA_PALETTE_UPLOAD_ROW(AREA_PALETTE_BATL_OVR_ROW))[0] = MEM_PTR(u16, AREA_PALETTE_ARENA_ROW(AREA_PALETTE_BATL_OVR_ROW))[0];
-    g_Task                                                              = BattleEffect_GetTarget(effect);
+    effect                                                       = D_801EC2E0;
+    saved                                                        = g_Task;
+    g_AreaPaletteCopy->rows[AREA_PALETTE_BATL_OVR_ROW].colors[0] = g_AreaPaletteArena->rows[AREA_PALETTE_BATL_OVR_ROW].colors[0];
+    g_Task                                                       = BattleEffect_GetTarget(effect);
     Script_Select(1);
     g_Task = saved;
     saved->header.mode++;
