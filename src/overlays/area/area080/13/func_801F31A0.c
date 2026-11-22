@@ -50,8 +50,7 @@ MATCH void func_801F31A0(AreaRing* ring) {
     tile = (TILE*)g_GfxPrimCursor;
     SetTile(tile);
     SetSemiTrans(tile, 1);
-    tile->x0 = 0;
-    tile->y0 = 0;
+    setXY0(tile, 0, 0);
     tile->w  = 0x140;
     tile->h  = bottom;
     shade    = ring->unk_23;
@@ -63,8 +62,7 @@ MATCH void func_801F31A0(AreaRing* ring) {
     tile = (TILE*)g_GfxPrimCursor;
     SetTile(tile);
     SetSemiTrans(tile, 1);
-    tile->x0 = 0;
-    tile->y0 = top;
+    setXY0(tile, 0, top);
     tile->w  = 0x140;
     tile->h  = 0xF0 - top;
     shade    = ring->unk_23;

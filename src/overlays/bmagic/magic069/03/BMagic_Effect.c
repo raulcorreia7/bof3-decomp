@@ -63,8 +63,7 @@ MATCH void func_801EEED4(void) {
 
     SYS_DISPATCH_BYTE(D_801F0504, g_Task->header.step);
     tpage = getTPage(TPAGE_DEPTH_4BIT, TPAGE_ABR_ADD, 320, 256);
-    SetDrawMode((DR_MODE*)g_GfxPrimCursor, 0, 1, tpage, 0);
-    GFX_AddPrim(BMAGIC_LAYER_OVER_BATTLERS, 0xC);
+    GFX_ADD_DITHERED_DRAW_MODE(BMAGIC_LAYER_OVER_BATTLERS, tpage);
     if (g_Task->header.flags & 0x1) {
         if (g_Task->header.step != 0) {
             func_801EFF14();
@@ -77,8 +76,7 @@ MATCH void func_801EEED4(void) {
         }
     }
     tpage = getTPage(TPAGE_DEPTH_4BIT, TPAGE_ABR_HALF, 320, 256);
-    SetDrawMode((DR_MODE*)g_GfxPrimCursor, 0, 1, tpage, 0);
-    GFX_AddPrim(BMAGIC_LAYER_OVER_BATTLERS, 0xC);
+    GFX_ADD_DITHERED_DRAW_MODE(BMAGIC_LAYER_OVER_BATTLERS, tpage);
 }
 
 MATCH void func_801EF034(void) {

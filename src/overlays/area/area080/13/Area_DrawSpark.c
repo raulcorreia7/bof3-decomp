@@ -28,10 +28,7 @@ MATCH void Area_DrawSpark(AreaSparkSlot* spark) {
     line = (LINE_F2*)g_GfxPrimCursor;
     SetLineF2(line);
     SetSemiTrans(line, 1);
-    line->x0 = spark->origin_trail[0].vx;
-    line->y0 = spark->origin_trail[0].vy;
-    line->x1 = spark->pos_trail[0].vx;
-    line->y1 = spark->pos_trail[0].vy;
+    setXY2(line, spark->origin_trail[0].vx, spark->origin_trail[0].vy, spark->pos_trail[0].vx, spark->pos_trail[0].vy);
     setRGB0(line, color.r, color.g, color.b);
     GFX_AddPrim(GFX_LAYER_UI, sizeof(LINE_F2));
 
@@ -39,10 +36,7 @@ MATCH void Area_DrawSpark(AreaSparkSlot* spark) {
         poly = (POLY_G4*)g_GfxPrimCursor;
         SetPolyG4(poly);
         SetSemiTrans(poly, 1);
-        poly->x0 = spark->origin_trail[i].vx;
-        poly->y0 = spark->origin_trail[i].vy;
-        poly->x1 = spark->pos_trail[i].vx;
-        poly->y1 = spark->pos_trail[i].vy;
+        setXY2(poly, spark->origin_trail[i].vx, spark->origin_trail[i].vy, spark->pos_trail[i].vx, spark->pos_trail[i].vy);
         setRGB0(poly, color.r, color.g, color.b);
         setRGB1(poly, color.r, color.g, color.b);
         color.r -= delta.r;

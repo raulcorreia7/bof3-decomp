@@ -76,7 +76,7 @@ MATCH void func_801F4768(void) {
             *(u32*)&prim->x1 = *(u32*)&cell->x1;
             *(u32*)&prim->x2 = *(u32*)&cell->x2;
             *(u32*)&prim->x3 = *(u32*)&cell->x3;
-            prim->clut       = 0x78CB;
+            prim->clut       = getClut(176, 483);
             prim->tpage      = getTPage(TPAGE_DEPTH_4BIT, TPAGE_ABR_SUB, 704, 256);
             setRGB0(prim, 40, 40, 40);
             setUV4(prim, D_801F51D8[width] + col * D_801F51E0[width], D_801F51DC[width] + row * D_801F51E0[width] - D_801F51E0[width] * COORD_FRAC(g_Task->pos.y) / 0x10000,

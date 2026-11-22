@@ -266,10 +266,7 @@ MATCH void func_801D1C1C(s32* from, s32* to, u8 level) {
     SetPolyG4(prim);
     SetSemiTrans(prim, 1);
     Camera_ProjectPoint(from, &projected);
-    prim->x0 = projected.vx + 1;
-    prim->y0 = projected.vy + 2;
-    prim->x1 = projected.vx;
-    prim->y1 = projected.vy;
+    setXY2(prim, projected.vx + 1, projected.vy + 2, projected.vx, projected.vy);
     Camera_ProjectPoint(to, &projected);
     prim->x2 = projected.vx - 1;
     prim->y2 = projected.vy - 2;
@@ -285,10 +282,7 @@ MATCH void func_801D1C1C(s32* from, s32* to, u8 level) {
     SetPolyG4(prim);
     SetSemiTrans(prim, 1);
     Camera_ProjectPoint(from, &projected);
-    prim->x0 = projected.vx;
-    prim->y0 = projected.vy;
-    prim->x1 = projected.vx + 1;
-    prim->y1 = projected.vy + 2;
+    setXY2(prim, projected.vx, projected.vy, projected.vx + 1, projected.vy + 2);
     Camera_ProjectPoint(to, &projected);
     prim->x2 = projected.vx;
     prim->y2 = projected.vy;

@@ -222,8 +222,7 @@ MATCH void func_801D17A0(s16 half_width, s16 half_height, u8 shade) {
     s16      next[2];
 
     tpage = GetTPage(TPAGE_DEPTH_4BIT, TPAGE_ABR_ADD, 0x380, 0x100);
-    SetDrawMode((DR_MODE*)g_GfxPrimCursor, 0, 1, tpage, 0);
-    GFX_AddPrim(GFX_LAYER_BACKDROP, 0xC);
+    GFX_ADD_DITHERED_DRAW_MODE(GFX_LAYER_BACKDROP, tpage);
     parity  = (g_FrameCount & 1) << 2;
     phase   = 0x800;
     next[0] = ((half_width * rcos(phase)) >> 12) + 0xA0 + parity;
@@ -233,8 +232,7 @@ MATCH void func_801D17A0(s16 half_width, s16 half_height, u8 shade) {
         prim = (POLY_G3*)g_GfxPrimCursor;
         SetPolyG3(prim);
         SetSemiTrans(prim, 1);
-        prim->x0 = 0xA0;
-        prim->y0 = 0xF0;
+        setXY0(prim, 0xA0, 0xF0);
         phase += 0x40;
         prim->x1 = next[0];
         prim->y1 = next[1];

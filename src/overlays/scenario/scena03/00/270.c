@@ -75,11 +75,8 @@ MATCH void func_801F73BC(void) {
     DR_MOVE* prim;
 
     if (g_Task->timer == 0) {
-        prim   = (DR_MOVE*)g_GfxPrimCursor;
-        rect.x = *(&D_801FCF40 + g_Task->header.mode * 2) / 4 + 0x2C0;
-        rect.y = *(&D_801FCF42 + g_Task->header.mode * 2) + 0x100;
-        rect.w = 0x10;
-        rect.h = 0x28;
+        prim = (DR_MOVE*)g_GfxPrimCursor;
+        setRECT(&rect, *(&D_801FCF40 + g_Task->header.mode * 2) / 4 + 0x2C0, *(&D_801FCF42 + g_Task->header.mode * 2) + 0x100, 0x10, 0x28);
         SetDrawMove(prim, &rect, D_801FCF40 / 4 + 0x2C0, D_801FCF42 + 0x100);
         g_Task->header.mode++;
         g_Task->draw_layer = 0;

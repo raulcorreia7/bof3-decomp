@@ -18,7 +18,7 @@ HAND_ASM void UI_IconDrawCell(s32 index, s32 x, s32 y, s32 width, s32 height, s3
     SetPolyFT4(prim);
     prim->y2 = prim->y3 = y + (u8)height;
     prim->x1 = prim->x3 = x + (u8)width;
-    prim->r0 = prim->g0 = prim->b0 = shade;
+    setRGB0(prim, shade, shade, shade);
     prim->x0 = prim->x2 = x;
     prim->y0 = prim->y1 = y;
     if (slot < 12) {

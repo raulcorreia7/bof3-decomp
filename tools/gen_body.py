@@ -99,7 +99,9 @@ def instructions(text: str) -> list[str]:
     for line in text.splitlines():
         m = INSN.match(line)
         if m:
-            out.append(re.sub(r"\s+", " ", m.group(1).strip()))
+            out.append(
+                re.sub(r"\s+", " ", re.sub(r"\s*/\*.*?\*/\s*$", "", m.group(1)).strip())
+            )
         elif re.match(r"^\s*\.L\w+:", line):
             out.append(line.strip())
     return out

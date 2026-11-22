@@ -28,10 +28,7 @@ NON_MATCHING void func_801EFCE8(s32 x, s32 y) {
         SetPolyFT4(prim);
         prim->y2 = y + 12;
         prim->y3 = y + 12;
-        prim->x0 = x;
-        prim->y0 = y;
-        prim->x1 = x + 12;
-        prim->y1 = y;
+        setXY2(prim, x, y, x + 12, y);
         prim->x2 = x;
         prim->x3 = x + 12;
 

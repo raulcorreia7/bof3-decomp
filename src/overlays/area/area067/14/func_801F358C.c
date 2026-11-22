@@ -23,10 +23,7 @@ NON_MATCHING void func_801F358C(AreaRippleQuad* quad) {
             prim = (POLY_G4*)g_GfxPrimCursor;
             SetPolyG4(prim);
             SetSemiTrans(prim, 1);
-            prim->x0 = quad->x + ((ring * rcos(angle)) >> 12);
-            prim->y0 = quad->y + ((ring * rsin(angle)) >> 13);
-            prim->x1 = quad->x + ((next * rcos(next_angle)) >> 12);
-            prim->y1 = quad->y + ((next * rsin(next_angle)) >> 13);
+            setXY2(prim, quad->x + ((ring * rcos(angle)) >> 12), quad->y + ((ring * rsin(angle)) >> 13), quad->x + ((next * rcos(next_angle)) >> 12), quad->y + ((next * rsin(next_angle)) >> 13));
             angle += 0x100;
             prim->x2 = quad->x + ((ring * rcos(angle)) >> 12);
             prim->y2 = quad->y + ((ring * rsin(angle)) >> 13);

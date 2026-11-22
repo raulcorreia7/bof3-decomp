@@ -17,14 +17,7 @@ MATCH void func_801F3CB0(void) {
     prim = (POLY_G4*)g_GfxPrimCursor;
     SetPolyG4(prim);
     SetSemiTrans(prim, 0);
-    prim->x0 = 0;
-    prim->y0 = 0;
-    prim->x1 = SCREEN_WIDTH;
-    prim->y1 = 0;
-    prim->x2 = 0;
-    prim->y2 = 200;
-    prim->x3 = SCREEN_WIDTH;
-    prim->y3 = 200;
+    setXY4(prim, 0, 0, SCREEN_WIDTH, 0, 0, 200, SCREEN_WIDTH, 200);
     prim->r0 = prim->r1 = 0;
     prim->g0 = prim->g1 = 200;
     prim->b0 = prim->b1 = 255;

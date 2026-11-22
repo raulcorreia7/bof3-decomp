@@ -14,6 +14,6 @@ MATCH void UI_CursorDraw(u16 x, u16 y, s32 unused) {
     setUV0(sprite, 204, 156);
     setWH(sprite, 24, 12);
     setRGB0(sprite, GFX_COLOR_NEUTRAL, GFX_COLOR_NEUTRAL, GFX_COLOR_NEUTRAL);
-    sprite->clut = 0x7802;
+    sprite->clut = getClut(32, 480);
     GFX_AddPrim(GFX_LAYER_TOP, sizeof(SPRT));
 }

@@ -58,7 +58,7 @@ NON_MATCHING void func_8015642C(u8* obj, s32 x, s32 y) {
                 p->v0 = p->v1 = value;
                 shade         = *bottom;
                 value         = GFX_COLOR_NEUTRAL;
-                p->r0 = p->g0 = p->b0 = value;
+                setRGB0(p, value, value, value);
                 p->v2 = p->v3 = shade;
                 p->clut       = (((u8*)g_SpriteCellCluts)[index] >> 4) | 0x78C0;
                 tpage         = getTPage(TPAGE_DEPTH_4BIT, TPAGE_ABR_HALF, 704, 256);

@@ -3,10 +3,7 @@
 MATCH void func_801F3850(void) {
     RECT rect;
 
-    rect.x = 424;
-    rect.y = 320 - (g_Task->unk_0A >> 1);
-    rect.w = 16;
-    rect.h = 32;
+    setRECT(&rect, 424, 320 - (g_Task->unk_0A >> 1), 16, 32);
     SetDrawMove((DR_MOVE*)g_GfxPrimCursor, &rect, 0x198, 0x120);
     GFX_AddPrim(GFX_LAYER_EFFECT_FRONT, sizeof(DR_MOVE));
 }
