@@ -18,6 +18,6 @@ MATCH void Fishing_LureHooked(void) {
     work->y_38.pos_y      = g_Actors[g_FishingHookedFish].pos.y.fixed;
     work->bounce.half.key = COORD_INT(g_Actors[g_FishingHookedFish].pos.z);
 
-    Actor_StepAnimLoop();
+    Script_AnimStepLoop();
     func_801E084C();
 }

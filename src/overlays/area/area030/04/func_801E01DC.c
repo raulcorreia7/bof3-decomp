@@ -10,6 +10,6 @@ MATCH void func_801E01DC(void) {
     if (record->flags_58 == D_801E2354[record->cue_index]) {
         record->mode_index += 1;
     } else {
-        Actor_StepAnimLoop();
+        Script_AnimStepLoop();
     }
 }

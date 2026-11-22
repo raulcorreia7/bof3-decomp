@@ -143,7 +143,7 @@ MATCH void func_801EF1AC(void) {
 MATCH void func_801EF3BC(void) {
     PartyMember* work;
 
-    Actor_StepAnimLoop();
+    Script_AnimStepLoop();
     g_Task->unk_5D += 4;
     g_Task->unk_5E += 4;
     g_Task->unk_5F += 4;
@@ -171,7 +171,7 @@ MATCH void func_801EF590(void) {
     PartyMember* work;
     s8           tint;
 
-    Actor_StepAnimLoop();
+    Script_AnimStepLoop();
     work                        = g_Task;
     g_ScratchPad.cells.words[0] = (++work->unk_0C & 0x7F) << 5;
     g_Task->pos.x.fixed         = g_BattleEffectBattler->pos.x.fixed + FIXED_MUL(rsin(g_ScratchPad.cells.words[0]), 0x20000);
@@ -198,7 +198,7 @@ MATCH void func_801EF710(void) {
     g_Task->unk_5D -= 4;
     g_Task->unk_5E -= 4;
     g_Task->unk_5F -= 4;
-    Actor_StepAnimLoop();
+    Script_AnimStepLoop();
     work                        = g_Task;
     g_ScratchPad.cells.words[0] = (++work->unk_0C & 0x7F) << 5;
     g_Task->pos.x.fixed         = g_BattleEffectBattler->pos.x.fixed + FIXED_MUL(rsin(g_ScratchPad.cells.words[0]), 0x20000);

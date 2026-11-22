@@ -3,5 +3,5 @@ MATCH void PlChar_ClearPanelModeIfUnused(void) {
     if ((g_SpawnedActors[g_Task->param.actor_slot].header.flags == 0 || g_SpawnedActors[g_Task->param.actor_slot].header.mode == 1) && g_AreaCameraMoving == 0) {
         g_Game.current->u.field.mode.value = 0;
     }
-    Actor_StepAnimLoop();
+    Script_AnimStepLoop();
 }

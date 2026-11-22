@@ -30,7 +30,7 @@ static inline void Boss_StartEnemyScript(u8* script, EnemyScriptCallback handler
     work = g_BattleCurrentEnemy;
     EnemyBattler_SetScript(work, script, handler, steps);
     ACTOR_SET_MODE(2);
-    Actor_StepAnimLoop();
+    Script_AnimStepLoop();
 }
 
 /* Boss_StartEnemyScript for a boss whose handler also runs the combatant's action. */
@@ -43,7 +43,7 @@ static inline void Boss_StartEnemyScriptAction(u8* script, EnemyScriptCallback h
     work->turn.action_flags.value |= BATTLER_ACTION_OWN_MODE;
     work->unk_E8 = steps;
     ACTOR_SET_MODE(2);
-    Actor_StepAnimLoop();
+    Script_AnimStepLoop();
 }
 
 void func_800C1978(s32 mode);
@@ -114,7 +114,7 @@ void Boss_EndBattle3(void);
     do {                                                                  \
         EnemyBattler* work;                                               \
                                                                           \
-        Actor_StepAnimOnce();                                             \
+        Script_AnimStepOnce();                                            \
         Battle_DefeatEnemy();                                             \
         work = g_BattleCurrentEnemy;                                      \
         work->turn.damage_flags.value |= BATTLER_DAMAGE_SKIP_ACTION_STEP; \

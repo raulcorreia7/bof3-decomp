@@ -2,7 +2,7 @@
 
 /* func_801E68EC */
 MATCH void Battle_PlayPoseActor(void) {
-    if (Actor_StepAnimLoop() & BYTE_MASK) {
+    if (Script_AnimStepLoop() & BYTE_MASK) {
         Effect_Reset();
         return;
     }

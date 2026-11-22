@@ -10,5 +10,5 @@ g_BattleEffects = { addr = 0x801EC330, alias = true }
 BMagic_DispatchMode = { addr = 0x801EEC24, type = "func", source = "Runs the handler that header.mode (byte 0x01) selects from the module head's three callbacks in magic161 (Timed Blow)." }
 Effect_StartPlaying = { addr = 0x801EEF08, type = "func", source = "Raises BATTLE_STATE_EFFECT_PLAYING and clears the effect work record in magic161 (Timed Blow)." }
 Effect_SetDuration = { addr = 0x801EF024, type = "func", source = "Reloads the effect timer (byte 0x09) with the value func_800AFF98 returns and advances header.step (byte 0x02) in magic161 (Timed Blow)." }
-Effect_LowerTickerStepOnReady = { addr = 0x801EF158, type = "func", source = "Lowers the active battler's ticker (byte 0x0B) and advances header.step (byte 0x02) once the script stream reports ready (Actor_StepAnimOnce) in magic161 (Timed Blow)." }
+Effect_LowerTickerStepOnReady = { addr = 0x801EF158, type = "func", source = "Lowers the active battler's ticker (byte 0x0B) and advances header.step (byte 0x02) once the script stream reports ready (Script_AnimStepOnce) in magic161 (Timed Blow)." }
 g_BMagicEffectModes = { addr = 0x801EF3E8, source = "Handlers of magic161 (Timed Blow), run by header.mode (byte 0x01)." }

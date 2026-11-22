@@ -4,7 +4,7 @@ MATCH void func_8019A630(void) {
     Actor* work;
     Actor* next;
 
-    if (Actor_StepAnimOnce() != 0u) {
+    if (Script_AnimStepOnce() != 0u) {
         work = g_Task;
         work->header.mode++;
     }

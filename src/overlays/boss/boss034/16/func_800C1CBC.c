@@ -1,7 +1,7 @@
 #include "boss034_16.h"
 
 MATCH void func_800C1CBC(void) {
-    Actor_StepAnimLoop();
+    Script_AnimStepLoop();
     if (EMI_IsReady() != 0) {
         Battle_DefeatEnemy();
         ((PartyMember*)g_Task)->header.flags &= ~PARTY_MEMBER_FLAG_HANDLER_BUSY;

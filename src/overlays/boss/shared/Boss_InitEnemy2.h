@@ -8,5 +8,5 @@ MATCH void Boss_InitEnemy2(void) {
     work->turn.action_flags.value |= BATTLER_ACTION_OWN_MODE;
     work->unk_E8 = D_800C1B28;
     ACTOR_SET_MODE(2);
-    Actor_StepAnimLoop();
+    Script_AnimStepLoop();
 }

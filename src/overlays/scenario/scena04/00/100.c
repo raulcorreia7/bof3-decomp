@@ -109,39 +109,23 @@ MATCH void func_801F7084(SceneBox* box) {
 
     tpage = GetTPage(TPAGE_DEPTH_4BIT, TPAGE_ABR_ADD, FONT_TPAGE_X, FONT_TPAGE_Y);
     GFX_AddDitheredDrawMode(GFX_LAYER_UI, tpage);
-    vertex     = D_801FA240;
-    vertex->vx = box->near.pos.vx;
-    vertex->vy = box->near.pos.vy + box->near.half_y;
-    vertex->vz = box->near.pos.vz + box->near.half_z;
+    vertex = D_801FA240;
+    setVector(vertex, box->near.pos.vx, box->near.pos.vy + box->near.half_y, box->near.pos.vz + box->near.half_z);
     vertex++;
-    vertex->vx = box->near.pos.vx;
-    vertex->vy = box->near.pos.vy - box->near.half_y;
-    vertex->vz = box->near.pos.vz + box->near.half_z;
+    setVector(vertex, box->near.pos.vx, box->near.pos.vy - box->near.half_y, box->near.pos.vz + box->near.half_z);
     vertex++;
-    vertex->vx = box->near.pos.vx;
-    vertex->vy = box->near.pos.vy + box->near.half_y;
-    vertex->vz = box->near.pos.vz;
+    setVector(vertex, box->near.pos.vx, box->near.pos.vy + box->near.half_y, box->near.pos.vz);
     vertex++;
-    vertex->vx = box->near.pos.vx;
-    vertex->vy = box->near.pos.vy - box->near.half_y;
-    vertex->vz = box->near.pos.vz;
+    setVector(vertex, box->near.pos.vx, box->near.pos.vy - box->near.half_y, box->near.pos.vz);
     vertex++;
-    vertex->vx = box->far.pos.vx;
-    vertex->vy = box->far.pos.vy + box->far.half_y;
-    vertex->vz = box->far.pos.vz + box->far.half_z;
+    setVector(vertex, box->far.pos.vx, box->far.pos.vy + box->far.half_y, box->far.pos.vz + box->far.half_z);
     vertex++;
-    vertex->vx = box->far.pos.vx;
-    vertex->vy = box->far.pos.vy - box->far.half_y;
-    vertex->vz = box->far.pos.vz + box->far.half_z;
+    setVector(vertex, box->far.pos.vx, box->far.pos.vy - box->far.half_y, box->far.pos.vz + box->far.half_z);
     vertex++;
-    vertex->vx = box->far.pos.vx;
-    vertex->vy = box->far.pos.vy + box->far.half_y;
-    vertex->vz = box->far.pos.vz;
-    scratch    = &vertex->vx;
+    setVector(vertex, box->far.pos.vx, box->far.pos.vy + box->far.half_y, box->far.pos.vz);
+    scratch = &vertex->vx;
     vertex++;
-    vertex->vx = box->far.pos.vx;
-    vertex->vy = box->far.pos.vy - box->far.half_y;
-    vertex->vz = box->far.pos.vz;
+    setVector(vertex, box->far.pos.vx, box->far.pos.vy - box->far.half_y, box->far.pos.vz);
     Camera_SetMatrix(scratch);
     func_801F732C(0, 1, 2, 3, 1, 1);
     func_801F732C(0, 1, 4, 5, 1, 0);
@@ -255,11 +239,9 @@ MATCH void func_801F77EC(void) {
     /* FAKE: retail reserves 16 bytes of unused stack. */
     FAKE_STACK_PADS(u8, 16);
 
-    work           = MEM_PTR(ScenePath, AREA_WORK + 0x1400);
-    work->focus.vx = D_80147A8C;
-    work->focus.vy = g_AreaFocusY;
-    work->focus.vz = D_80147A94 >> 8;
-    i              = 0;
+    work = MEM_PTR(ScenePath, AREA_WORK + 0x1400);
+    setVector(&work->focus, D_80147A8C, g_AreaFocusY, D_80147A94 >> 8);
+    i = 0;
     do {
         work->points[i].vx = work->focus.vx + D_801FA1A4[i];
         work->points[i].vy = work->focus.vy + D_801FA1C4[i];
@@ -297,9 +279,7 @@ MATCH void func_801F78F4(void) {
             i++;
         } while (i < 8);
     }
-    work->focus.vx = D_80147A8C;
-    work->focus.vy = g_AreaFocusY;
-    work->focus.vz = D_80147A94 >> 8;
+    setVector(&work->focus, D_80147A8C, g_AreaFocusY, D_80147A94 >> 8);
     func_801F7EC0();
     if (--g_Task->vx == 0) {
         g_Task->header.mode++;

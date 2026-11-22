@@ -282,10 +282,8 @@ MATCH void func_801D1678(s32* from, s32* to, u8 intensity) {
     setRGB3(prim, 0, 0, 0);
     GFX_AddPrim(GFX_LAYER_EFFECT_FRONT, sizeof(POLY_G4));
 
-    step.vx = g_Task->unk_64;
-    step.vy = g_Task->unk_68;
-    step.vz = g_Task->unk_6C;
-    phase   = g_FrameCount & 0xF;
+    setVector(&step, g_Task->unk_64, g_Task->unk_68, g_Task->unk_6C);
+    phase = g_FrameCount & 0xF;
     setVector(&current, to[0] + step.vx * phase, to[1] + step.vy * phase, to[2] + step.vz * phase);
     while (from[0] < current.vx) {
         Camera_ProjectPoint(&current.vx, &projected);

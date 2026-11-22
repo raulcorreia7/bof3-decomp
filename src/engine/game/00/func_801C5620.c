@@ -21,5 +21,5 @@ MATCH void func_801C5620(void) {
         ACTOR_CLEAR_STEP();
     }
 
-    Actor_StepAnimLoop();
+    Script_AnimStepLoop();
 }

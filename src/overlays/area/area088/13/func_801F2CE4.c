@@ -10,7 +10,7 @@ MATCH s32 func_801F2CE4(void) {
         SND_PlaySE(EMI_SE_ID(SND_BANK_AREA, 0x00));
     }
     Trail_Update((Trail*)AREA_WORK);
-    func_801F3258((u8*)AREA_WORK);
+    Trail_Draw(MEM_PTR(Trail, AREA_WORK));
     x                   = g_Task->pos.x.fixed + TO_COORD(1);
     g_Task->pos.x.fixed = x;
     if (x == TO_COORD(23)) {

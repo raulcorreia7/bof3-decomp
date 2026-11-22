@@ -19,6 +19,6 @@ MATCH void Actor_Fly(void) {
     work = (u8*)g_Task;
     *(s32*)(work + 0x34) += *(s32*)(work + 0x0C);
     *(s32*)(work + 0x38) += *(s32*)(work + 0x10);
-    Actor_StepAnimLoop();
+    Script_AnimStepLoop();
     Area_AddGridActor();
 }

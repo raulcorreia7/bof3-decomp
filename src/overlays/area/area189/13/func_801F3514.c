@@ -17,7 +17,7 @@ NON_MATCHING void func_801F3514(void) {
         g_Task->script_record = *script;
     }
     if (D_80145E92[0] == 3) {
-        Actor_StepAnimLoop();
+        Script_AnimStepLoop();
     }
 
     if (g_AreaSceneMode == 1) {
