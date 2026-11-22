@@ -1,0 +1,1 @@
+{"function": "emi/world04/area197/13@0x801F3768", "tried": "Moved the long depth/flag declarations after the s32 locals to change stack-slot order", "first_diff": "0x801F3768: the frame stays 0x10 larger than retail and every local sits 0x10 deeper; declaration order does not move the slots (9 rows of 158)", "score": "9 rows differ, 158 words each"}
