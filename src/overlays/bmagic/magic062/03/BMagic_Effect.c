@@ -99,13 +99,9 @@ MATCH void func_801EF2A0(void) {
     }
 }
 
-#ifdef NON_MATCHING
-NON_MATCHING void func_801EF2F0(s32 stat) {
-    u8  change;
+MATCH void func_801EF2F0(s32 stat) {
+    s16 change;
     s32 delta;
-    s32 value;
-    /* FAKE: retail frame reserves 8 bytes no statement uses. */
-    FAKE_STACK_PADS(u8, 8);
 
     if (g_Battle.target_selector < BATTLE_PARTY_CHARACTERS_COUNT) {
         g_Battle.target_record = &g_Game.members[g_Battle.target_selector].u.turn;
@@ -115,21 +111,17 @@ NON_MATCHING void func_801EF2F0(s32 stat) {
     g_Battle.target_record->hp_change    = 0;
     g_Battle.target_record->ap_change    = 0;
     g_Battle.target_record->target_flags = 0;
-    change                               = g_Abilities[g_Battle.action_id].power;
-    value                                = ((s8*)g_Battle.target_record)[0x14 + (u8)stat];
-    delta                                = value + (s8)change;
+    change                               = (s8)g_Abilities[g_Battle.action_id].power;
+    delta                                = ((s8*)g_Battle.target_record + (u8)stat)[0x14] + change;
     if (delta > 100) {
-        ((s8*)g_Battle.target_record)[0x14 + (u8)stat] = 100;
+        ((s8*)g_Battle.target_record + (u8)stat)[0x14] = 100;
     } else if (delta < -100) {
-        ((s8*)g_Battle.target_record)[0x14 + (u8)stat] = -100;
+        ((s8*)g_Battle.target_record + (u8)stat)[0x14] = -100;
     } else {
-        ((s8*)g_Battle.target_record)[0x14 + (u8)stat] = value + (s8)change;
+        ((s8*)g_Battle.target_record + (u8)stat)[0x14] += change;
         Battle_RescaleStats(g_Battle.target_selector);
     }
 }
-#else
-INCLUDE_ASM(func_801EF2F0);
-#endif
 
 #include "overlays/bmagic/shared/Effect_SetActorMatrix.h"
 
