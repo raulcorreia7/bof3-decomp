@@ -33,10 +33,10 @@ NON_MATCHING void Menu_DrawHeaderBar(s32 x, s32 y, s32 width, s32 height, u8 win
     prim = (POLY_FT4*)g_GfxPrimCursor;
     SetPolyFT4(prim);
     PSX_SET_SEMI_TRANSPARENT(prim);
+    setXY0(prim, left, top);
     clut_x   = (window_style << 5) + 0x10;
     prim->y1 = top;
     inner    = x + 2;
-    setXY0(prim, left, top);
     prim->x2 = left;
     prim->x1 = inner;
     prim->x3 = inner;
