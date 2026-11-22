@@ -184,6 +184,8 @@ extern u8       g_ScenePositions;
 /* D_801FDFA8 */
 extern Callback g_ScenePositionDispatch[];
 extern void (*D_801FDDF0[])(FallingSpark* spark);
-void func_801F81D4(FallingSpark* spark);
+extern s16 g_ScrollHeight; /* the exe declares it as an array; the scalar keeps these bytes */
+extern u16 D_80146258;
+void       func_801F81D4(FallingSpark* spark);
 
 #endif
