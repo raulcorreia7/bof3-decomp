@@ -7,7 +7,7 @@
 MATCH void Fishing_LureHooked(void) {
     FishingState* work;
 
-    if (D_8014421C < 0) {
+    if (g_SpawnedActors[5].selection < 0) {
         Script_Request(2);
     } else {
         Script_Request(3);

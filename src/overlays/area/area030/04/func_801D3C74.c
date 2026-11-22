@@ -51,7 +51,7 @@ MATCH void func_801D3C74(void) {
             if ((queue_pos >= FISHING_QUEUE_COLUMN_COUNT) || (g_FishingPromptSets[queue->cue_index][queue_pos] == GAME_NONE)) {
                 queue->column = 0U;
             }
-            if (D_80144125 != 7) {
+            if (g_SpawnedActors[3].header.mode != 7) {
                 entry = Actor_FindFreeSpawned();
                 if (entry != -1) {
                     g_SpawnedActors[entry].header.flags = 1;

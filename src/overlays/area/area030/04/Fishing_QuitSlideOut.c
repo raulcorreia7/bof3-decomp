@@ -20,7 +20,7 @@ MATCH void Fishing_QuitSlideOut(void) {
             word_counter = &g_GameEntrySubstate;
             *word_counter += 1;
         } else {
-            byte_counter = &D_8014403D;
+            byte_counter = &g_SpawnedActors[1].header.mode;
             *byte_counter += 1;
             work[3] = 0;
         }

@@ -5,7 +5,7 @@
  * right/left step the selected index with wraparound. */
 MATCH void func_801DD7CC(void) {
     UI_TextDraw(29, 20, 0, TEXT_LENGTH_MAX, MESSAGE_TABLE_TEXT(AREA_MESSAGE_TABLE, FISHING_MESSAGE_HOW_TO_PAGE_HINT));
-    if ((D_80144281 == 0xE) && (D_80144288 == 0)) {
+    if ((g_SpawnedActors[6].header.mode == 0xE) && (g_SpawnedActors[6].unk_08 == 0)) {
         if (g_PadStates[0].pressed & g_InputMasks[FISHING_INPUT_CANCEL]) {
             SND_SEPlay(EMI_SE_ID(SND_BANK_COMMON, 6));
             TASK(FishingState)->flag_04   = 0;
@@ -13,16 +13,16 @@ MATCH void func_801DD7CC(void) {
             return;
         }
         if (g_PadStates[0].pressed & PADLdown) {
-            D_80144288 = 0xFF;
-            D_801442BC = D_801442BC + 1;
-            if ((D_801442BC & HALF_MASK) >= 6U) {
-                D_801442BC = 0;
+            g_SpawnedActors[6].unk_08              = 0xFF;
+            g_SpawnedActors[6].pos.z.part.fraction = g_SpawnedActors[6].pos.z.part.fraction + 1;
+            if ((g_SpawnedActors[6].pos.z.part.fraction & HALF_MASK) >= 6U) {
+                g_SpawnedActors[6].pos.z.part.fraction = 0;
             }
         } else if (g_PadStates[0].pressed & PADLup) {
-            D_80144288 = 1;
-            D_801442BC = D_801442BC - 1;
-            if ((s16)D_801442BC < 0) {
-                D_801442BC = 5;
+            g_SpawnedActors[6].unk_08              = 1;
+            g_SpawnedActors[6].pos.z.part.fraction = g_SpawnedActors[6].pos.z.part.fraction - 1;
+            if ((s16)g_SpawnedActors[6].pos.z.part.fraction < 0) {
+                g_SpawnedActors[6].pos.z.part.fraction = 5;
             }
         }
     }

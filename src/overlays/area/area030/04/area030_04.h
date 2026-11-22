@@ -327,7 +327,6 @@ extern u8                    D_800F724D;
 extern u8                    D_800F724E;
 extern u8                    D_800F724F;
 extern u8                    D_8014403D;
-extern u8                    D_8014403E;
 extern u8                    D_801440B1;
 extern s32                   D_801440BC;
 extern s32                   D_801440C8;
@@ -358,7 +357,6 @@ extern s32                   D_80145EE0;
 extern s32                   D_80145EE4;
 extern u16                   D_80145EE8;
 extern u16                   D_80145EEA;
-extern u8                    D_8014688C;
 extern s32                   D_80146892;
 extern s32                   D_80146898;
 extern FishingSelectionState D_801468A4[];
@@ -797,7 +795,7 @@ void func_801E1C7C(void);
 /* When the AREA030 state byte is 3, arm the selection cue and advance the
  * sub-state, then run the shared world update. */
 static inline void WorldAdvanceFishingSubState(u8 subState) {
-    if (D_80144199 == 3) {
+    if (g_SpawnedActors[4].header.mode == 3) {
         SND_SeqStop(0, 1);
         SND_BGMPlay(0x28, 0x64, 8);
         SND_SEPlay(EMI_SE_ID(SND_BANK_AREA, 3));

@@ -13,7 +13,7 @@ MATCH void func_801A3410(void* work_index) {
         work              = TASK(Actor);
         work->pos.x.fixed = g_Actors[index].pos.x.fixed;
         work->pos.y.fixed = g_Actors[index].pos.y.fixed;
-        work->pos.z.fixed = FIELD(s32, &D_801468C4, index * ACTOR_SIZE);
+        work->pos.z.fixed = FIELD(s32, &g_Actors[0].pos.z.fixed, index * ACTOR_SIZE);
         if (work->unk_06 != 0xA) {
             work->unk_64 = g_Actors[index].unk_64;
             work->unk_68 = g_Actors[index].unk_68;

@@ -3,8 +3,8 @@
 /* When flag `D_80144281` is clear, increments byte `D_8014403D`,
  * writes 1 to byte 0x02 and 0 to byte 0x03 of the scratchpad work object. */
 MATCH void func_801DD90C(void) {
-    if (D_80144281 == 0) {
-        D_8014403D += 1;
+    if (g_SpawnedActors[6].header.mode == 0) {
+        g_SpawnedActors[1].header.mode += 1;
         TASK(FishingState)->mode_index = 1;
         TASK(FishingState)->sub_index  = 0;
     }
