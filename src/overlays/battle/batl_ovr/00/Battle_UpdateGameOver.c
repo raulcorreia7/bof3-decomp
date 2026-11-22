@@ -7,11 +7,11 @@ MATCH void Battle_UpdateGameOver(void) {
     func_801EF3B4(0x80);
 
     if (WINDOW_EFFECT_IDLE()) {
-        u8* row = (u8*)g_Game.members;
+        PartyMember* members = g_Game.members;
 
-        GFX_PaletteFreeFadeTarget(row);
-        GFX_PaletteFreeFadeTarget(row + BATTLE_PARTY_STRIDE);
-        GFX_PaletteFreeFadeTarget(row + 0x280);
+        GFX_PaletteFreeFadeTarget(&members[0]);
+        GFX_PaletteFreeFadeTarget(&members[1]);
+        GFX_PaletteFreeFadeTarget(&members[2]);
         UI_PanelResetTasks();
         g_Battle.outcome.event_flags = 0;
         g_Battle.outcome.options     = 0;

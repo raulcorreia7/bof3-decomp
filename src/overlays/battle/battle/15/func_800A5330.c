@@ -48,7 +48,7 @@ NON_MATCHING void func_800A5330(void) {
             g_BattleMessageState = 2;
             g_Battle.ui_step     = 2;
             g_Battle.ui_mode     = 0;
-            g_Battle.row_cursor &= 0x7F;
+            g_Battle.selection &= 0x7F;
         }
         SND_SEPlay(EMI_SE_ID(SND_BANK_COMMON, 6));
         return;
@@ -73,7 +73,7 @@ NON_MATCHING void func_800A5330(void) {
             } else {
                 SND_SEPlay(EMI_SE_ID(SND_BANK_COMMON, 6));
             }
-        } else if (g_Battle.gene_count != 0 && BATTLE_ACTIVE_ROW->chr.ap >= D_801463B8[0]) {
+        } else if (g_Battle.gene_count != 0 && BATTLE_ACTIVE_MEMBER->chr.ap >= D_801463B8[0]) {
             g_Battle.ui_mode += 1;
             return;
         } else {

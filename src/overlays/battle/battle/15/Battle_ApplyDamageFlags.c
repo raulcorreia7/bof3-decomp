@@ -4,7 +4,7 @@
 MATCH void Battle_ApplyDamageFlags(u8 target_mask, u16 damage_flags) {
     s32 i;
     u8  slot;
-    s32 battler;
+    s32 battler_slot;
     s32 player_flags;
     s32 enemy_flags;
 
@@ -15,10 +15,10 @@ MATCH void Battle_ApplyDamageFlags(u8 target_mask, u16 damage_flags) {
             do {
                 slot = i & BYTE_MASK;
                 if (!Battle_SlotIsBlocked(slot)) {
-                    s32 offset;
+                    s32 member_offset;
 
-                    offset             = slot * BATTLE_PARTY_STRIDE;
-                    D_80145E91[offset] = 0xB;
+                    member_offset             = slot * BATTLE_PARTY_STRIDE;
+                    D_80145E91[member_offset] = 0xB;
                     g_Game.members[slot].u.turn.damage_flags.volatile_value |= player_flags;
                     Battle_SetSlotPending(slot);
                 }
@@ -42,18 +42,18 @@ MATCH void Battle_ApplyDamageFlags(u8 target_mask, u16 damage_flags) {
         slot = target_mask & BYTE_MASK;
         if (!Battle_SlotIsBlocked(slot)) {
             if (slot < BATTLE_PARTY_CHARACTERS_COUNT) {
-                s32 offset;
+                s32 member_offset;
 
-                battler            = slot;
-                offset             = battler * BATTLE_PARTY_STRIDE;
-                D_80145E91[offset] = 0xB;
-                g_Game.members[battler].u.turn.damage_flags.volatile_value |= damage_flags;
-                Battle_SetSlotPending(battler);
+                battler_slot              = slot;
+                member_offset             = battler_slot * BATTLE_PARTY_STRIDE;
+                D_80145E91[member_offset] = 0xB;
+                g_Game.members[battler_slot].u.turn.damage_flags.volatile_value |= damage_flags;
+                Battle_SetSlotPending(battler_slot);
             } else {
-                battler                              = slot;
-                ENEMY_COMBATANT(battler).header.mode = 0xB;
-                ENEMY_COMBATANT(battler).turn.damage_flags.value |= damage_flags;
-                Battle_SetSlotPending(battler);
+                battler_slot                              = slot;
+                ENEMY_COMBATANT(battler_slot).header.mode = 0xB;
+                ENEMY_COMBATANT(battler_slot).turn.damage_flags.value |= damage_flags;
+                Battle_SetSlotPending(battler_slot);
             }
         }
     }

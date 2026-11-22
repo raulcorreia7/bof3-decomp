@@ -134,7 +134,7 @@ void        Menu_DrawFilledPanel(s16 x, s16 y, s16 width, s32 height);
 /* func_801D1CC0 (sisyou), func_801D3384 (bate), func_801D432C (shisu), func_801D8E2C (shop), func_801DC324 (start) */
 void        Menu_DrawCursorFrame(u16 x, u16 y, s32 width, s32 height, u8 color, s32 mask);
 /* func_801D67B0 */
-void        SAVE_DrawSlots(s16 panel_x, s16 panel_y, u8 row_cursor);
+void        SAVE_DrawSlots(s16 panel_x, s16 panel_y, u8 slot_cursor);
 /* func_801D78A8 (bate), func_801D8850 (shisu), func_801DD350 (shop) */
 void        Menu_DrawPanelFrame(s16 x, s16 y, s32 width, s32 height);
 /* func_801DBD24 */

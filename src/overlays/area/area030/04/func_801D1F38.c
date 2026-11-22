@@ -9,10 +9,10 @@ MATCH void func_801D1F38(void) {
     s8 elapsed;
 
     if (g_FrameCount & 0x40) {
-        label = g_FishingRod;
+        label = g_FishingEquipment.rod_id;
         UI_TextDraw(138, 200, 0, ITEM_NAME_LENGTH, (u8*)((label * ACCESSORY_STRIDE) + (u32)g_Accessories));
     } else {
-        label = g_FishingLure;
+        label = g_FishingEquipment.lure_id;
         UI_TextDraw(138, 200, 0, ITEM_NAME_LENGTH, (u8*)((label * ACCESSORY_STRIDE) + (u32)g_Accessories));
     }
 

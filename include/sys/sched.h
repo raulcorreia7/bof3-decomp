@@ -30,18 +30,90 @@ typedef enum ThreadState {
     SYS_THREAD_IDLE   = 0x7f,
 } ThreadState;
 
+/* The bytes SYS_ClearCurrentThread clears before a registered entry runs: eight halfwords ending at
+ * 0x18 + 0xE and the 16-byte run at 0x28 of the work area. */
+typedef struct ThreadClear {
+    u8             pad_00[0x18];
+    /* 0x18 */ u16 halfword[8];
+    /* 0x28 */ u8  byte[0x10];
+} ThreadClear;
+
+ASSERT_OFFSET(ThreadClear, halfword, 0x18);
+ASSERT_OFFSET(ThreadClear, byte, 0x28);
+ASSERT_SIZE(ThreadClear, 0x38);
+
+/* Thread slot 0: the game entry state machine the field update leaves for the next frame. */
+typedef struct ThreadGameEntry {
+    u8             pad_00[0x08];
+    /* 0x08 */ u16 state; /* GameMode */
+    /* 0x0A */ u16 substate;
+    u8             pad_0C[0x1C];
+    /* 0x28 */ u8  request; /* GameRequest */
+    u8             pad_29[0x0F];
+} ThreadGameEntry;
+
+ASSERT_OFFSET(ThreadGameEntry, state, 0x08);
+ASSERT_OFFSET(ThreadGameEntry, substate, 0x0A);
+ASSERT_OFFSET(ThreadGameEntry, request, 0x28);
+ASSERT_SIZE(ThreadGameEntry, 0x38);
+
+/* Thread slot 1: the title screen's fade, banner and choice state. */
+typedef struct ThreadTitleScreen {
+    u8             pad_00[0x08];
+    /* 0x08 */ u16 state;
+    /* 0x0A */ u16 substate;
+    u8             pad_0C[0x0C];
+    /* 0x18 */ s16 timer;
+    /* 0x1A */ s16 banner_scroll;
+    /* 0x1C */ s16 banner_alpha;
+    /* 0x1E */ s16 primary_alpha;
+    /* 0x20 */ s16 secondary_alpha;
+    /* 0x22 */ u16 pulse;
+    u8             pad_24[0x04];
+    /* 0x28 */ u32 popup_request; /* WIN_POPUP_* flags */
+    /* 0x2C */ u8  fade_phase;
+    /* 0x2D */ u8  choice_phase;
+    /* 0x2E */ u8  input_gate;
+    u8             pad_2F[0x09];
+} ThreadTitleScreen;
+
+ASSERT_OFFSET(ThreadTitleScreen, timer, 0x18);
+ASSERT_OFFSET(ThreadTitleScreen, pulse, 0x22);
+ASSERT_OFFSET(ThreadTitleScreen, popup_request, 0x28);
+ASSERT_OFFSET(ThreadTitleScreen, input_gate, 0x2E);
+ASSERT_SIZE(ThreadTitleScreen, 0x38);
+
+/* Thread slot 2: the window effect's local mode; Thread.state is its busy flag. */
+typedef struct ThreadScreenEffect {
+    u8             pad_00[0x08];
+    /* 0x08 */ u16 mode; /* UiMode */
+    u8             pad_0A[0x2E];
+} ThreadScreenEffect;
+
+ASSERT_OFFSET(ThreadScreenEffect, mode, 0x08);
+ASSERT_SIZE(ThreadScreenEffect, 0x38);
+
+/* The 0x38-byte work area each thread slot overlays with the record of the entry SYS_ThreadRegister
+ * armed for it. */
+typedef union ThreadTail {
+    ThreadClear        clear;
+    ThreadGameEntry    game_entry;
+    ThreadTitleScreen  title_screen;
+    ThreadScreenEffect screen_effect;
+} ThreadTail;
+
+ASSERT_SIZE(ThreadTail, 0x38);
+
 typedef struct Thread {
-    u16      state; /* ThreadState */
-    u16      countdown;
-    Callback entry;
-    s32      thread_id;
-    u8*      work;  /* 0x0C - the kernel work block whose +0x94 word this thread's context keeps */
-    u32      stack; /* thread stack top, OpenTh's sp argument */
-    u8       pad_14[0x30];
-    u32      gp;           /* OpenTh's gp argument */
-    u8       pad_48[0x18]; /* 0x48 */
-    u16      pad_60[0x08]; /* 0x60 - the halfword run SYS_ClearCurrentThread clears */
-    u8       pad_70[0x10]; /* 0x70 - the byte run SYS_ClearCurrentThread clears */
+    u16        state; /* ThreadState */
+    u16        countdown;
+    Callback   entry;
+    s32        thread_id;
+    u8*        work;  /* 0x0C - the kernel work block whose +0x94 word this thread's context keeps */
+    u32        stack; /* thread stack top, OpenTh's sp argument */
+    u8         pad_14[0x30];
+    u32        gp;   /* OpenTh's gp argument */
+    ThreadTail tail; /* the armed entry's own state, cleared by SYS_ClearCurrentThread */
 } Thread;
 
 ASSERT_OFFSET(Thread, state, 0x00);
@@ -49,6 +121,10 @@ ASSERT_OFFSET(Thread, entry, 0x04);
 ASSERT_OFFSET(Thread, work, 0x0C);
 ASSERT_OFFSET(Thread, stack, 0x10);
 ASSERT_OFFSET(Thread, gp, 0x44);
+ASSERT_OFFSET(Thread, tail, 0x48);
 ASSERT_SIZE(Thread, SYS_THREAD_SIZE);
+
+/* D_80143B40 */
+extern Thread g_SysThreads[]; /* four threads, 0x80 bytes each */
 
 #endif

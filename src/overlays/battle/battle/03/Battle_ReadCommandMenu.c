@@ -21,7 +21,7 @@ NON_MATCHING void Battle_ReadCommandMenu(void) {
     u8*          var_s6;
     u8           var_v0_215;
 
-    state = &g_Battle.row_cursor;
+    state = &g_Battle.selection;
     pad   = &g_PadStates[0].pressed;
     if (*state != 0) {
         --*state;

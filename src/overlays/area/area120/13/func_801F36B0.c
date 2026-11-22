@@ -1,68 +1,68 @@
 #include "area120_13.h"
 
 MATCH u8 func_801F36B0(void) {
-    AreaRow* row;
-    u8       scratch[32];
-    u16      i;
-    u8       handled;
+    AreaEffect* effect;
+    u8          scratch[32];
+    u16         i;
+    u8          handled;
 
     Camera_SetMatrix(scratch);
 
     handled = 0;
-    row     = MEM_PTR(AreaRow, AREA_WORK);
+    effect  = MEM_PTR(AreaEffect, AREA_WORK);
     i       = 0;
     do {
-        if (row->active != 0) {
-            switch (row->state) {
+        if (effect->active != 0) {
+            switch (effect->state) {
                 case 0:
-                    row->timer = 0x20;
-                    row->x     = TASK(Actor)->pos.x.fixed;
-                    row->z     = TASK(Actor)->pos.y.fixed + (row->side != 0 ? TO_COORD_HALF(2) : -TO_COORD_HALF(2));
-                    row->y     = TASK(Actor)->pos.z.fixed + TO_COORD(384);
-                    row->speed = (((rand() & 0x1FF) - 0x180) << 16) / 32;
-                    row->state += 1;
+                    effect->timer = 0x20;
+                    effect->x     = TASK(Actor)->pos.x.fixed;
+                    effect->z     = TASK(Actor)->pos.y.fixed + (effect->side != 0 ? TO_COORD_HALF(2) : -TO_COORD_HALF(2));
+                    effect->y     = TASK(Actor)->pos.z.fixed + TO_COORD(384);
+                    effect->speed = (((rand() & 0x1FF) - 0x180) << 16) / 32;
+                    effect->state += 1;
                     break;
                 case 1:
-                    row->x -= 0x2C00;
-                    row->z += row->side != 0 ? -0xC00 : 0xC00;
-                    row->y += row->speed;
-                    if (--row->timer == 0) {
-                        row->angle = (rand() & 0x1F) | (row->side != 0 ? ANGLE_90 : -ANGLE_90);
-                        row->state += TASK(Actor)->unk_06 + 1;
-                        row->timer = 0x20;
+                    effect->x -= 0x2C00;
+                    effect->z += effect->side != 0 ? -0xC00 : 0xC00;
+                    effect->y += effect->speed;
+                    if (--effect->timer == 0) {
+                        effect->angle = (rand() & 0x1F) | (effect->side != 0 ? ANGLE_90 : -ANGLE_90);
+                        effect->state += TASK(Actor)->unk_06 + 1;
+                        effect->timer = 0x20;
                     }
                     break;
                 case 2:
-                    row->x     = (rcos(row->angle) << 4) + TASK(Actor)->pos.x.fixed - TO_COORD_HALF(5);
-                    row->z     = (rsin(row->angle) << 4) + TASK(Actor)->pos.y.fixed;
-                    row->angle = (row->angle + (row->side != 0 ? 128 : -128)) & ANGLE_MASK;
-                    if (--row->timer == 0) {
-                        row->active = 0;
+                    effect->x     = (rcos(effect->angle) << 4) + TASK(Actor)->pos.x.fixed - TO_COORD_HALF(5);
+                    effect->z     = (rsin(effect->angle) << 4) + TASK(Actor)->pos.y.fixed;
+                    effect->angle = (effect->angle + (effect->side != 0 ? 128 : -128)) & ANGLE_MASK;
+                    if (--effect->timer == 0) {
+                        effect->active = 0;
                     }
                     break;
                 case 3:
-                    row->x     = (rcos(row->angle) << 4) + TASK(Actor)->pos.x.fixed - TO_COORD_HALF(5);
-                    row->z     = (rsin(row->angle) << 4) + TASK(Actor)->pos.y.fixed;
-                    row->angle = (row->angle + (row->side != 0 ? 128 : -128)) & ANGLE_MASK;
+                    effect->x     = (rcos(effect->angle) << 4) + TASK(Actor)->pos.x.fixed - TO_COORD_HALF(5);
+                    effect->z     = (rsin(effect->angle) << 4) + TASK(Actor)->pos.y.fixed;
+                    effect->angle = (effect->angle + (effect->side != 0 ? 128 : -128)) & ANGLE_MASK;
                     if (TASK(Actor)->unk_06 == 2) {
-                        row->speed = (rand() & 0x7F) + 128;
-                        row->timer = 16;
-                        row->state += 1;
+                        effect->speed = (rand() & 0x7F) + 128;
+                        effect->timer = 16;
+                        effect->state += 1;
                     }
                     break;
                 case 4:
-                    row->x += (row->speed * rcos(row->angle)) >> 4;
-                    row->z += (row->speed * rsin(row->angle)) >> 4;
-                    if (--row->timer == 0) {
-                        row->active = 0;
+                    effect->x += (effect->speed * rcos(effect->angle)) >> 4;
+                    effect->z += (effect->speed * rsin(effect->angle)) >> 4;
+                    if (--effect->timer == 0) {
+                        effect->active = 0;
                     }
                     break;
             }
-            func_801F3468(row);
+            func_801F3468(effect);
             handled = 1;
         }
-        row++;
+        effect++;
         i++;
-    } while (i < AREA_ROW_COUNT);
+    } while (i < AREA_EFFECT_COUNT);
     return handled;
 }

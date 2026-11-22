@@ -2,8 +2,8 @@
 
 MATCH void func_800ADE6C(void) {
     PartyMember* work;
-    BattleSlot*  rows;
-    BattleSlot*  row;
+    BattleSlot*  entries;
+    BattleSlot*  entry;
     s32          slot;
 
     if ((g_UiPanelTasks[19].active & 0x1) == 0) {
@@ -18,9 +18,9 @@ MATCH void func_800ADE6C(void) {
     work                 = TASK(PartyMember);
     work->screen_x.value = g_UiPanelTasks[19].pos.x + (work->timer * 0x16 + 0x44);
     work->screen_y.value = g_UiPanelTasks[19].pos.y + (work->unk_09 * 0x20 + 0x22);
-    rows                 = D_80145518;
-    row                  = &rows[(s16)g_UiPanelTasks[19].u.battle.row_base + work->unk_09];
-    slot                 = (&row->slot_00)[work->timer];
+    entries              = D_80145518;
+    entry                = &entries[(s16)g_UiPanelTasks[19].u.battle.row_base + work->unk_09];
+    slot                 = (&entry->slot_00)[work->timer];
     if (slot != GAME_NONE) {
         Script_Request(slot);
         /* FAKE: opaque slot so CSE cannot fold the second test. */

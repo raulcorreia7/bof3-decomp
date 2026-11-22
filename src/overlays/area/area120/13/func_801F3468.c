@@ -1,14 +1,14 @@
 #include "area120_13.h"
 
-MATCH void func_801F3468(AreaRow* row) {
+MATCH void func_801F3468(AreaEffect* effect) {
     SVECTOR screen[7];
     TILE_1* dot;
     TILE*   tile;
     u8      blue;
 
     GFX_SET_DRAW_MODE(GetTPage(TPAGE_DEPTH_4BIT, TPAGE_ABR_ADD, 0x380, 0x100));
-    Area_CellAddPrim(row->x, row->z, 0, 0xC);
-    Camera_ProjectPoint(&row->x, (DVECTOR*)&screen[0]);
+    Area_CellAddPrim(effect->x, effect->z, 0, 0xC);
+    Camera_ProjectPoint(&effect->x, (DVECTOR*)&screen[0]);
 
     dot = (TILE_1*)g_GfxPrimCursor;
     SetTile1(dot);
@@ -18,7 +18,7 @@ MATCH void func_801F3468(AreaRow* row) {
     dot->r0 = 0x80;
     blue    = (rand() & 1) << 7;
     dot->b0 = blue;
-    Area_CellAddPrim(row->x, row->z, 0, 0xC);
+    Area_CellAddPrim(effect->x, effect->z, 0, 0xC);
 
     tile = (TILE*)g_GfxPrimCursor;
     SetTile(tile);
@@ -29,5 +29,5 @@ MATCH void func_801F3468(AreaRow* row) {
     tile->r0 = 0x20;
     blue     = (rand() & 1) << 5;
     tile->b0 = blue;
-    Area_CellAddPrim(row->x, row->z, 0, 0x10);
+    Area_CellAddPrim(effect->x, effect->z, 0, 0x10);
 }

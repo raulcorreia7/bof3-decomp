@@ -6,10 +6,9 @@
 #ifdef NON_MATCHING
 NON_MATCHING void func_800A0EC4(void) {
     Character* character;
-    Character* row;
-    s32        cell_offset;
+    Character* battler_chr;
     s32        record_index;
-    s32        row_offset;
+    s32        member_offset;
     s32        timer;
     s32        index;
     s32        member;
@@ -24,32 +23,31 @@ NON_MATCHING void func_800A0EC4(void) {
         timer        = g_Characters[record_index].fatigue;
         if (timer < 5U) {
             g_Characters[record_index].fatigue = timer + 1;
-            row_offset                         = *state * BATTLE_PARTY_STRIDE;
-            D_80145F1E[row_offset]             = D_80145F1E[row_offset] + 1;
+            member_offset                      = *state * BATTLE_PARTY_STRIDE;
+            D_80145F1E[member_offset]          = D_80145F1E[member_offset] + 1;
         }
         Char_RebuildStats(&g_Characters[g_Game.members[*state].character_index]);
         index = 0;
         if (g_Battle.party_count != 0) {
             do {
-                row_offset                = index * BATTLE_PARTY_STRIDE;
-                character                 = &g_Characters[g_Game.members[index].character_index];
-                row                       = &g_Game.members[index].chr;
-                row->equip.weapon         = character->equip.weapon;
-                row->equip.shield         = character->equip.shield;
-                row->equip.helmet         = character->equip.helmet;
-                row->equip.armor          = character->equip.armor;
-                row->equip.accessories[0] = character->equip.accessories[0];
-                row->equip.accessories[1] = character->equip.accessories[1];
+                character                         = &g_Characters[g_Game.members[index].character_index];
+                battler_chr                       = &g_Game.members[index].chr;
+                battler_chr->equip.weapon         = character->equip.weapon;
+                battler_chr->equip.shield         = character->equip.shield;
+                battler_chr->equip.helmet         = character->equip.helmet;
+                battler_chr->equip.armor          = character->equip.armor;
+                battler_chr->equip.accessories[0] = character->equip.accessories[0];
+                battler_chr->equip.accessories[1] = character->equip.accessories[1];
                 index++;
-                __builtin_memcpy(&row->base, &character->stats, sizeof(Stats));
+                __builtin_memcpy(&battler_chr->base, &character->stats, sizeof(Stats));
             } while ((u32)(index & BYTE_MASK) < (u8)g_Battle.party_count);
         }
         index = 0;
         Battle_ApplyFormationStats();
         if (g_Battle.party_count != 0) {
             do {
-                row_offset = index * BATTLE_PARTY_STRIDE;
-                dest       = (u8*)D_80145F20 + row_offset;
+                member_offset = index * BATTLE_PARTY_STRIDE;
+                dest          = (u8*)D_80145F20 + member_offset;
                 __builtin_memcpy(dest, dest + 0x20, sizeof(Cpy16u));
                 __builtin_memcpy(dest + 0x10, dest + 0x30, sizeof(Cpy16u));
                 index++;

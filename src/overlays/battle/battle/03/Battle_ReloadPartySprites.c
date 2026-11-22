@@ -12,7 +12,7 @@ MATCH void Battle_ReloadPartySprites(void) {
             i += 1u;
         } while (i < g_BattlePartyCount);
     }
-    if (g_Battle.row_cursor != g_Battle.party_count) {
+    if (g_Battle.selection != g_Battle.party_count) {
         g_BattleSubStep -= 1u;
         return;
     }

@@ -34,7 +34,7 @@ MATCH void Battle_NextCommandMember(void) {
                 }
             }
         }
-        state = &g_Battle.row_cursor;
+        state = &g_Battle.selection;
         FAKE_OPAQUE(state);
         state[0]                 = 0;
         g_Battle.cursor.gene.row = 0;

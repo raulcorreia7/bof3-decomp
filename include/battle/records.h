@@ -967,8 +967,8 @@ extern u8           D_80146229;
 extern u16          D_8014622A;
 extern u8           D_80146232;
 extern s16          D_801462AA;
-/* FAKE: g_Battle.row_cursor as a global of its own; the sites that use it match only with a separate symbol. */
-extern u8           g_BattleRowCursor;
+/* FAKE: g_Battle.selection as a global of its own; the sites that use it match only with a separate symbol. */
+extern u8           g_BattleSelection;
 extern u8           D_801462EE;
 /* FAKE: g_Battle.boss_flags as a global of its own; the sites that set a bit in it match only with a separate symbol. */
 extern u8           g_BattleBossFlags;
@@ -988,9 +988,9 @@ ASSERT_SIZE(GeneCursor, 2);
 /* The battle's state at 0x801462E0, from the phase tuple to the pending status. */
 typedef struct BattleState {
     /* 0x00 */ BattlePhase phase;
-    /* 0x03 */ u8          ui_step; /* step of the battle UI */
-    /* 0x04 */ u8          ui_mode; /* index of the battle UI state handler */
-    /* 0x05 */ u8          row_cursor;
+    /* 0x03 */ u8          ui_step;   /* step of the battle UI */
+    /* 0x04 */ u8          ui_mode;   /* index of the battle UI state handler */
+    /* 0x05 */ u8          selection; /* the party member the command menu is on, or the battler the panel shows; bit 7 marks an active selection */
     /* 0x06 */ union {
         u8         panel_entry; /* the selected entry of the battle panel */
         GeneCursor gene;        /* the gene picker's cursor in Accession */

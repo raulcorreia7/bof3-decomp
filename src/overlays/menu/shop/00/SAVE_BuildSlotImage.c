@@ -30,7 +30,7 @@ NON_MATCHING void SAVE_BuildSlotImage(void) {
     u8*              src;
     u16*             masks;
     SaveData*        work;
-    SaveSlotSummary* row;
+    SaveSlotSummary* summary;
 
     SAVE_FormatSlot();
     func_801EF27C(1, 0x13, g_UiTextFormatBuffer);
@@ -52,8 +52,8 @@ NON_MATCHING void SAVE_BuildSlotImage(void) {
         masks[j] = g_InputMasks[j];
         n        = n + 1;
     } while ((u32)n < 9U);
-    row = (SaveSlotSummary*)&work->unk_C84[0x1C];
-    strncpy((s8*)row->name, (s8*)work->characters[0].name, CHARACTER_NAME_LENGTH);
+    summary = (SaveSlotSummary*)&work->unk_C84[0x1C];
+    strncpy((s8*)summary->name, (s8*)work->characters[0].name, CHARACTER_NAME_LENGTH);
     slot = 0;
     col  = 0 & HALF_MASK;
     do {
@@ -61,28 +61,28 @@ NON_MATCHING void SAVE_BuildSlotImage(void) {
         if (g_PartyFieldOrder[col] == 4) {
             mode = work->emi_loaded_character_index & 0x7F;
             if ((mode != 5) && (mode != 0xC)) {
-                row->party_order[col] = 0xB;
+                summary->party_order[col] = 0xB;
             } else {
                 name_index = slot & HALF_MASK;
                 goto store_row; /* the type-4 arm reaches the same store with its own index */
             }
         } else {
         store_row:
-            row->party_order[name_index] = (u8)g_PartyFieldOrder[name_index];
+            summary->party_order[name_index] = (u8)g_PartyFieldOrder[name_index];
         }
         slot += 1;
         col = slot & HALF_MASK;
     } while ((u32)(slot & HALF_MASK) < 3U);
-    row->level        = work->characters[0].level;
-    row->play_clock   = work->play_clock;
-    row->window_style = work->window_style;
-    row->unk_0A       = work->unk_7B[0];
-    sum               = 0;
-    dst               = g_SaveBuffer;
-    src               = (u8*)work;
-    i                 = 0;
-    row->event_flag   = SYS_TestFlag(g_SceneEventFlags, 0x92U);
-    D_80145025        = (u8)g_Game.flags;
+    summary->level        = work->characters[0].level;
+    summary->play_clock   = work->play_clock;
+    summary->window_style = work->window_style;
+    summary->unk_0A       = work->unk_7B[0];
+    sum                   = 0;
+    dst                   = g_SaveBuffer;
+    src                   = (u8*)work;
+    i                     = 0;
+    summary->event_flag   = SYS_TestFlag(g_SceneEventFlags, 0x92U);
+    D_80145025            = (u8)g_Game.flags;
     do {
         i += 1;
         count = i & HALF_MASK;

@@ -39,7 +39,7 @@ MATCH void Battle_OpenMenu(void) {
         }
     }
     g_InputRepeatButtons        = 0;
-    g_Battle.row_cursor         = 1;
+    g_Battle.selection          = 1;
     g_Battle.cursor.panel_entry = 0;
     D_801462E7                  = 0;
     D_801463B2                  = 0;

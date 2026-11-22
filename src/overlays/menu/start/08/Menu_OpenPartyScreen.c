@@ -25,7 +25,7 @@ NON_MATCHING void Menu_OpenPartyScreen(void) {
     g_UiPanelTasks[18].mode                        = MENU_START_MODE_COMMANDS;
     g_BattlePanelMode                              = 2;
     D_801485B8                                     = 1;
-    g_BattleItemRow                                = 7;
+    g_BattleEquipSlot                              = 7;
     g_UiPanelTasks[18].unk_0B                      = 0xFF;
     g_UiPanelTasks[18].pos.x                       = 0x70;
     LOH(g_UiPanelTasks[18].pos.y)                  = -0x14;

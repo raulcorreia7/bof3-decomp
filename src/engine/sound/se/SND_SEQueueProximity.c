@@ -16,8 +16,8 @@
             if (edge >= target) {                      \
                 edge = y - (radius);                   \
                 if (target >= edge) {                  \
-                    D_8018B3D8 = (table);              \
-                    D_8018B3DC = (table);              \
+                    g_SndSeVolumeL = (table);          \
+                    g_SndSeVolumeR = (table);          \
                     SND_SEPlay(marked_id & HALF_MASK); \
                 }                                      \
             }                                          \
