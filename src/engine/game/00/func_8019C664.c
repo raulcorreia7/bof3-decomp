@@ -9,7 +9,7 @@ MATCH void func_8019C664(void) {
     func_8019EE10();
     g_Task->clut_select = 0x7B;
     Script_Select(((u8)g_Task->direction >> 1) + 0x4A);
-    GFX_LoadPalette(GAME_PALETTE_STAGE + 0xC0, 1);
+    GFX_PaletteLoad(GAME_PALETTE_STAGE + 0xC0, 1);
     work                   = g_Task;
     work->pos.x.fixed      = g_Game.members[0].pos.x.fixed;
     work->pos.y.fixed      = g_Game.members[0].pos.y.fixed;

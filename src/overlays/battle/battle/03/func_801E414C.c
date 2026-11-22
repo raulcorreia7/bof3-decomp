@@ -9,7 +9,7 @@ MATCH void func_801E414C(void) {
 
     Actor_StepAnimOnce();
     if ((g_BattleCurrentEnemy->status & STATUS_KO) != 0) {
-        GFX_FreePaletteFadeTarget((void*)g_Task);
+        GFX_PaletteFreeFadeTarget((void*)g_Task);
         half = &g_Battle.flags;
         *half &= ~BATTLE_STATE_REPRISAL_PENDING;
         g_Task->header.mode = 6;

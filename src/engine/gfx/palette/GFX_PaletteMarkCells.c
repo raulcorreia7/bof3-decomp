@@ -1,14 +1,14 @@
 #include "engine/game/00/game_00.h"
 
-MATCH u8 GFX_MarkPaletteCells(u8 mode, u8 value, u8 search) {
+MATCH u8 GFX_PaletteMarkCells(u8 mode, u8 value, u8 search) {
     u8 result;
     u8 row;
     u8 column;
 
     if (search != 0) {
-        result = GFX_FindFreePaletteCell(mode);
+        result = GFX_PaletteFindFreeCell(mode);
     } else {
-        result = GFX_FindPaletteCell(value);
+        result = GFX_PaletteFindCell(value);
         value  = 0xFF;
     }
 

@@ -1,6 +1,6 @@
 #include "engine/game/00/game_00.h"
 
-MATCH void GFX_UploadPaletteRows(void) {
+MATCH void GFX_PaletteUploadRows(void) {
     u8* work;
     u32 table_index;
     /* FAKE: retail keeps the dividend in v1. */

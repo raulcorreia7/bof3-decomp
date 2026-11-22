@@ -44,8 +44,8 @@ MATCH void func_801EEE44(void) {
 
     battler = g_Battle.selected_actor;
     if (g_Task->param.unk_0B == 1) {
-        GFX_FreePaletteFadeTarget(battler);
-        g_Task->timer  = GFX_AllocPaletteFade(battler, 1, 1, 1, 0);
+        GFX_PaletteFreeFadeTarget(battler);
+        g_Task->timer  = GFX_PaletteAllocFade(battler, 1, 1, 1, 0);
         g_Task->unk_09 = 0x10;
         g_Task->header.mode += 1;
     }

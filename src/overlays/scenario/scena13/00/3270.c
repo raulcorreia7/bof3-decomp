@@ -65,11 +65,11 @@ NON_MATCHING void func_801FAFA0(s32 message, s32 frames) {
         UI_TextDraw(0x50, 0x3C, 0, TEXT_LENGTH_MAX, (MESSAGE_TABLE_TEXT(AREA_MESSAGE_TABLE, (u16)message) + 2));
         elapsed = *(volatile u16*)g_ScratchPad.cells.bytes;
         if (elapsed < 0x20) {
-            GFX_CopyPaletteCapped(elapsed & 0xFF);
+            GFX_PaletteCopyCapped(elapsed & 0xFF);
         } else if (elapsed == 0x20) {
             Scene_RestorePalette();
         } else if (*cell - 0x20 < elapsed) {
-            GFX_CopyPaletteCapped((0x20 - (elapsed - (*cell - 0x20))) & 0xFF);
+            GFX_PaletteCopyCapped((0x20 - (elapsed - (*cell - 0x20))) & 0xFF);
         }
     } else if (elapsed == limit) {
         Scene_RestorePalette();
@@ -79,7 +79,7 @@ NON_MATCHING void func_801FAFA0(s32 message, s32 frames) {
 INCLUDE_ASM(func_801FAFA0);
 #endif
 
-#include "overlays/scenario/shared/GFX_CopyPaletteCapped.h"
+#include "overlays/scenario/shared/GFX_PaletteCopyCapped.h"
 
 /* func_801FB164 */
 MATCH void Scene_RestorePalette(void) {

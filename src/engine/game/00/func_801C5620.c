@@ -15,7 +15,7 @@ MATCH void func_801C5620(void) {
     if ((s16)COORD_INT(g_Task->pos.z) < result) {
         COORD_INT(g_Task->pos.z) = (u16)result;
         Script_Select(g_Task->direction);
-        GFX_LoadPalette(GAME_PALETTE_STAGE + g_Task->unk_05 * 0x40u, 0);
+        GFX_PaletteLoad(GAME_PALETTE_STAGE + g_Task->unk_05 * 0x40u, 0);
         g_Game.current->u.field.mode.unsigned_value = 0;
         g_Task->header.mode                         = 1;
         ACTOR_CLEAR_STEP();

@@ -31,10 +31,9 @@ NON_MATCHING void func_801F3234(void) {
             value = (0x17F - ((i << 3) + (g_FrameCount & 0x7))) >> 1;
             setRGB0(tile, value / 4, value / 4, value);
 
-            angle                     = 256 + j * ANGLE_45;
-            g_ScratchPadVectors[0].vx = D_1F800034[0] + (((rsin(angle) * ((i << 4) + (g_FrameCount & 0xF)) * 5)) >> 16);
-            g_ScratchPadVectors[0].vy = D_1F800034[1] + (((rcos(angle) * ((i << 4) + (g_FrameCount & 0xF)) * 5)) >> 16);
-            g_ScratchPadVectors[0].vz = -0x340 - (rsin(((i << 4) + (g_FrameCount & 0xF)) * 5) >> 5);
+            angle = 256 + j * ANGLE_45;
+            setVector(&g_ScratchPadVectors[0], D_1F800034[0] + (((rsin(angle) * ((i << 4) + (g_FrameCount & 0xF)) * 5)) >> 16),
+                      D_1F800034[1] + (((rcos(angle) * ((i << 4) + (g_FrameCount & 0xF)) * 5)) >> 16), -0x340 - (rsin(((i << 4) + (g_FrameCount & 0xF)) * 5) >> 5));
             RotTransPers(g_ScratchPadVectors, (long*)&tile->x0, (long*)&p, (long*)&flag);
 
             Area_AddCellPrim(g_Task->pos.x.fixed, g_Task->pos.y.fixed, 1, sizeof(TILE_1));

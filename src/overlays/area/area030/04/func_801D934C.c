@@ -35,8 +35,7 @@ MATCH void func_801D934C(u16 x, u16 y, u16 width, u16 height) {
     tile = GFX_CURSOR(TILE);
     SetTile(tile);
     setXY0(tile, x, y + 2);
-    tile->w = width;
-    tile->h = height - 4;
+    setWH(tile, width, height - 4);
     setRGB0(tile, red, green, blue);
     PSX_SET_SEMI_TRANSPARENT(tile);
     GFX_AddPrim(GFX_LAYER_EFFECT_FRONT, sizeof(TILE));

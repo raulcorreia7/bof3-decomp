@@ -94,13 +94,13 @@ MATCH void func_801EF108(void) {
     if (count == 0) {
         if (g_Battle.target_selector & BATTLE_TARGET_ENEMY_SIDE) {
             battler = &g_BattleEnemyBattlers[g_Task->unk_03];
-            GFX_FreePaletteFadeTarget(battler);
-            GFX_AllocPaletteFade(battler, -8, -8, -8, 1);
+            GFX_PaletteFreeFadeTarget(battler);
+            GFX_PaletteAllocFade(battler, -8, -8, -8, 1);
             Battle_ApplyDamageFlags((g_Task->unk_03 + 3) & BYTE_MASK, 0x10);
         } else {
             battler = &g_Game.members[g_Task->unk_03];
-            GFX_FreePaletteFadeTarget(battler);
-            GFX_AllocPaletteFade(battler, -8, -8, -8, 1);
+            GFX_PaletteFreeFadeTarget(battler);
+            GFX_PaletteAllocFade(battler, -8, -8, -8, 1);
             Battle_ApplyDamageFlags(g_Task->unk_03, 0x10);
         }
         g_Task->header.step += 1;
@@ -111,11 +111,11 @@ MATCH void func_801EF264(void) {
     if (g_BattleEffectBattler->param.unk_0B < 8U) {
         if (g_Battle.target_selector & BATTLE_TARGET_ENEMY_SIDE) {
             Battle_MarkDamaged((g_Task->unk_03 + 3) & BYTE_MASK);
-            GFX_FreePaletteFadeTarget(&g_BattleEnemyBattlers[g_Task->unk_03]);
+            GFX_PaletteFreeFadeTarget(&g_BattleEnemyBattlers[g_Task->unk_03]);
             Battle_FadePoisonedBattler((g_Task->unk_03 + 3) & BYTE_MASK);
         } else {
             Battle_MarkDamaged(g_Task->unk_03);
-            GFX_FreePaletteFadeTarget((EnemyBattler*)&g_Game.members[g_Task->unk_03]);
+            GFX_PaletteFreeFadeTarget((EnemyBattler*)&g_Game.members[g_Task->unk_03]);
             Battle_FadePoisonedBattler(g_Task->unk_03);
         }
         g_Task->header.step += 1;

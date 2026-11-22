@@ -811,7 +811,7 @@ NON_MATCHING u8 func_801F9EFC(void) {
     GFX_ADD_DITHERED_DRAW_MODE(GFX_LAYER_UI, tpage & HALF_MASK);
     Camera_SetMatrix(&matrix);
     row = (SceneEffectRow*)(AREA_WORK + 0x95C);
-    for (i = 0; i < 64; i++, row++) {
+    for (i = 0; i < 64; row++, i++) {
         if (row->active != 0) {
             if (func_801F9A80(row) & BYTE_MASK) {
                 func_801F9BDC(row);

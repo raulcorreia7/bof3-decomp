@@ -9,9 +9,9 @@ MATCH void Battle_UpdateGameOver(void) {
     if (WINDOW_EFFECT_IDLE()) {
         u8* row = (u8*)g_Game.members;
 
-        GFX_FreePaletteFadeTarget(row);
-        GFX_FreePaletteFadeTarget(row + BATTLE_PARTY_STRIDE);
-        GFX_FreePaletteFadeTarget(row + 0x280);
+        GFX_PaletteFreeFadeTarget(row);
+        GFX_PaletteFreeFadeTarget(row + BATTLE_PARTY_STRIDE);
+        GFX_PaletteFreeFadeTarget(row + 0x280);
         UI_PanelResetTasks();
         g_Battle.outcome.event_flags = 0;
         g_Battle.outcome.options     = 0;

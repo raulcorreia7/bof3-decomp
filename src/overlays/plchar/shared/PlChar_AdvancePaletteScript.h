@@ -5,7 +5,7 @@ MATCH void PlChar_AdvancePaletteScript(void) {
 
     done = 0;
     if (g_Task->param.unk_0B == 1) {
-        GFX_LoadPalette((g_Task->unk_05 << 6) + GAME_PALETTE_STAGE, 0);
+        GFX_PaletteLoad((g_Task->unk_05 << 6) + GAME_PALETTE_STAGE, 0);
         g_Task->param.unk_0B = 2;
     }
     state = g_Task->param.unk_0B;

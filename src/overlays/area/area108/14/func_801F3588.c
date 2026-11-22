@@ -24,9 +24,7 @@ MATCH void func_801F3588(u8* dst, u8* src, u16* state) {
     result = FIELD_PTR(s16, src, 2);
     index  = 0;
     do {
-        in.vx = *corner++;
-        in.vy = *corner++;
-        in.vz = *corner++;
+        setVector(&in, *corner++, *corner++, *corner++);
         RotTrans(&in, &vtx, &flag);
         *result++ = state[0] + vtx.vx;
         *result++ = state[1] + vtx.vy;

@@ -14,7 +14,7 @@ NON_MATCHING void func_8019FAA0(u16 area_id, u32 entry_x, u32 entry_y, u8 entry_
     else
         g_Game.walk_flags &= 0x7FFFu;
     Actor_ClearAll();
-    GFX_ResetPaletteFades();
+    GFX_PaletteResetFades();
 
     g_GameLastX        = g_AreaScrollTargetX;
     g_GameLastAreaId   = g_GameAreaId;
@@ -37,7 +37,7 @@ NON_MATCHING void func_8019FAA0(u16 area_id, u32 entry_x, u32 entry_y, u8 entry_
 
     entry              = (AreaLoad*)g_AreaLoads[g_GameAreaId];
     g_GameRequestFlags = entry->flags;
-    GFX_ResetPalette();
+    GFX_PaletteReset();
     g_GfxPalettePending = 1u;
 
     func_801BFF9C(entry_x, entry_y, (u32)entry_facing);

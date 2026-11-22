@@ -15,9 +15,7 @@ NON_MATCHING void func_801F4430(void) {
     s32       y;
     u32       tile;
 
-    pos.vx = g_Task->pos.x.fixed;
-    pos.vy = g_Task->pos.y.fixed;
-    pos.vz = g_Task->pos.z.fixed;
+    setVector(&pos, g_Task->pos.x.fixed, g_Task->pos.y.fixed, g_Task->pos.z.fixed);
     rot.vy = 0;
     rot.vx = 0;
     rot.vz = g_Task->unk_32;

@@ -168,17 +168,17 @@ MATCH void func_801D1A50(void) {
     s8   scnt;
 
     input    = &g_PadStates[0].pressed;
-    repeated = INPUT_GetRepeatedButtons(*input & 0xA000);
+    repeated = INPUT_GetRepeatedButtons(*input & (PADLleft | PADLright));
     if (repeated != 0) {
         if ((s8)D_801DB0B4 < 8) {
             SND_PlaySE(0x100);
             if (LOB(D_801DB0B4) != 0) {
-                if (repeated & 0x8000) {
+                if (repeated & PADLleft) {
                     D_801DB0B8 = (u8)D_801DB0B8 - 1;
                     if (D_801DB0B8 < 0) {
                         D_801DB0B8 = 2;
                     }
-                } else if (repeated & 0x2000) {
+                } else if (repeated & PADLright) {
                     D_801DB0B8 = (u8)D_801DB0B8 + 1;
                     if (D_801DB0B8 >= 3) {
                         D_801DB0B8 = 0;
@@ -833,7 +833,7 @@ MATCH void func_801D3C30(void) {
     u16* pad;
 
     pad     = &g_PadStates[0].pressed;
-    buttons = INPUT_GetRepeatedButtons(*pad & 0xF000);
+    buttons = INPUT_GetRepeatedButtons(*pad & (PADLup | PADLright | PADLdown | PADLleft));
     if (buttons != 0) {
         SND_PlaySE(0x100);
         k = (s8)D_801DB0B4 * 5 + 3;
@@ -2705,7 +2705,7 @@ NON_MATCHING s8 func_801DA114(void) {
 
     pressed = INPUT_GetRepeatedButtons(g_PadStates[0].pressed & (INPUT_DIRECTIONAL | PADL1 | PADL2 | PADR1 | PADR2));
     cell    = D_801DAAAC + D_801DAAA8 * 96 + (s8)D_801DB0D8 * 12 + (s8)D_801DB0D4;
-    if (pressed & 0x1000) {
+    if (pressed & PADLup) {
         SND_PlaySE(0x100);
         page = D_801DAAAC + D_801DAAA8 * 96;
         col  = (s8)D_801DB0D4;
@@ -2715,7 +2715,7 @@ NON_MATCHING s8 func_801DA114(void) {
                 D_801DB0D8 = 7;
             }
         } while (page[(s8)D_801DB0D8 * 12 + col] == 0);
-    } else if (pressed & 0x4000) {
+    } else if (pressed & PADLdown) {
         SND_PlaySE(0x100);
         page = D_801DAAAC + D_801DAAA8 * 96;
         col  = (s8)D_801DB0D4;
@@ -2725,7 +2725,7 @@ NON_MATCHING s8 func_801DA114(void) {
                 D_801DB0D8 = 0;
             }
         } while (page[(s8)D_801DB0D8 * 12 + col] == 0);
-    } else if (pressed & 0x8000) {
+    } else if (pressed & PADLleft) {
         SND_PlaySE(0x100);
         if (*cell != 0 && *cell < 6) {
             D_801DB0D4 = 9;
@@ -2738,7 +2738,7 @@ NON_MATCHING s8 func_801DA114(void) {
                 }
             } while (row[(s8)D_801DB0D4] == 0);
         }
-    } else if (pressed & 0x2000) {
+    } else if (pressed & PADLright) {
         SND_PlaySE(0x100);
         if (*cell != 0 && *cell < 6) {
             D_801DB0D4 = 0;
@@ -2754,7 +2754,7 @@ NON_MATCHING s8 func_801DA114(void) {
     }
 
     pad = g_PadStates[0].pressed;
-    if (pad & 0x40) {
+    if (pad & PADRdown) {
         cell = D_801DAAAC + D_801DAAA8 * 96 + (s8)D_801DB0D8 * 12 + (s8)D_801DB0D4;
         switch (*cell) {
             case 1:
@@ -2777,7 +2777,7 @@ NON_MATCHING s8 func_801DA114(void) {
                 D_801F294E += 1;
                 return 0;
             case 4:
-                g_PadStates[0].pressed = pad | 0x800;
+                g_PadStates[0].pressed = pad | PADstart;
                 break;
             default:
                 SND_PlaySE(0x103);

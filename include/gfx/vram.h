@@ -18,7 +18,7 @@
 #define GRAPHICS_CHUNK_W_16BPP    32
 #define GRAPHICS_CHUNK_H          32
 
-/* The stage palette: 32 CLUT rows of 256 words at VRAM (0, 480), uploaded by GFX_UploadPalette
+/* The stage palette: 32 CLUT rows of 256 words at VRAM (0, 480), uploaded by GFX_PaletteUpload
  * (@source: wiki:systems/rendering). Text CLUT words are 0x7800 | column, the first row. */
 #define STAGE_PALETTE_Y           480
 #define STAGE_PALETTE_CLUT        0x7800
@@ -27,7 +27,7 @@
 #define WORLD_SPRITE_CLUT         0x7B80
 
 /* How many palette cells a sprite owns (work byte 0x28): one 16-color cell, a whole 256-color row, or runs of 2, 4
- * and 8 cells. Area_BuildClut builds its CLUT word from it and GFX_FindFreePaletteCell finds a free run of that size. */
+ * and 8 cells. Area_BuildClut builds its CLUT word from it and GFX_PaletteFindFreeCell finds a free run of that size. */
 typedef enum PaletteType {
     PALETTE_TYPE_CELL    = 0,
     PALETTE_TYPE_ROW     = 1,

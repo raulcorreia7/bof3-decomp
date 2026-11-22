@@ -9,6 +9,6 @@ MATCH void Battle_EndEffectLoad(void) {
         g_Battle.phase.step     = 3;
         g_Battle.phase.sub_step = 0;
         g_Battle.flags &= ~BATTLE_STATE_EFFECT_LOADING;
-        GFX_CopyPalette(26);
+        GFX_PaletteCopy(26);
     }
 }

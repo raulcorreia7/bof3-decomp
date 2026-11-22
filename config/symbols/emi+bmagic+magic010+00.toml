@@ -1,7 +1,7 @@
 ["emi/bmagic/magic010/00"]
 Battle_MarkDamaged = { addr = 0x800A9820, alias = true, source = "Marks the selected battlers as damaged." }
 Battle_FadePoisonedBattler = { addr = 0x800AF814, type = "func", source = "Starts the palette fade of the battler at battler_index when it is poisoned: party members 0 to 2 from g_Game.members, enemies from g_BattleEnemies; does nothing for a blocked slot.", alias = true }
-g_PaletteFades = { addr = 0x80145BD4, alias = true, source = "Palette fade table: one PaletteFade row per fading target, claimed by GFX_AllocPaletteFade and released by GFX_FreePaletteFade." }
+g_PaletteFades = { addr = 0x80145BD4, alias = true, source = "Palette fade table: one PaletteFade row per fading target, claimed by GFX_PaletteAllocFade and released by GFX_PaletteFreeFade." }
 Effect_Reset = { addr = 0x801E5988, type = "func", source = "Clears every timer, state and flag byte of the shared BattleEffect work record; every effect countdown calls it first. battle/03 owns the body.", alias = true }
 Effect_StartPaletteFade = { addr = 0x801EEC80, type = "func", source = "Frees the selected actor's palette fade, allocates a new one into the effect ticker (byte 0x0B), clears the effect timer (byte 0x09) and advances header.mode (byte 0x01) in magic010 (Unmotivate, Bad back, Watch Enemy…)." }
 Effect_BrightenPalette = { addr = 0x801EED0C, type = "func", source = "Raises the red, green and blue offsets of the palette fade row the effect ticker (byte 0x0B) names by one per frame and advances header.mode (byte 0x01) at sixteen in magic010 (Unmotivate, Bad back, Watch Enemy…)." }

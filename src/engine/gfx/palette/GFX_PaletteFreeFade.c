@@ -1,6 +1,6 @@
 #include "engine/game/00/game_00.h"
 
-MATCH void GFX_FreePaletteFade(u8 index) {
+MATCH void GFX_PaletteFreeFade(u8 index) {
     PaletteOwner* target;
     u8            saved;
 
@@ -14,5 +14,5 @@ MATCH void GFX_FreePaletteFade(u8 index) {
     saved                       = g_PaletteFades[index].saved_byte;
     g_PaletteFades[index].flags = 0u;
     target->saved_byte          = saved;
-    GFX_MarkPaletteCells(g_PaletteFades[index].table_index, index, 0u);
+    GFX_PaletteMarkCells(g_PaletteFades[index].table_index, index, 0u);
 }

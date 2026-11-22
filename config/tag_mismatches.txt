@@ -186,7 +186,7 @@ src/overlays/scenario/scena03/00/270.c	Area_ShrinkDisc
 src/overlays/scenario/scena12/00/574.c	Menu_DrawHeaderBar
 src/overlays/scenario/scena13/00/2A4.c	Area_DrawScreenTint
 src/overlays/scenario/shared/Actor_Wait.h	Actor_Wait
-src/overlays/scenario/shared/GFX_CopyPaletteCapped.h	GFX_CopyPaletteCapped
+src/overlays/scenario/shared/GFX_PaletteCopyCapped.h	GFX_PaletteCopyCapped
 src/overlays/title/game/01/title_draw.c	GFX_BuildGlyphPrimitive
 src/overlays/title/game/01/title_draw.c	GFX_SetPrimitiveAlpha
 src/overlays/title/game/01/title_draw.c	SND_StartSelectionEffect

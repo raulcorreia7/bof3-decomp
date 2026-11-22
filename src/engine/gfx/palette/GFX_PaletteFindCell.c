@@ -1,6 +1,6 @@
 #include "engine/game/00/game_00.h"
 
-MATCH u8 GFX_FindPaletteCell(u8 value) {
+MATCH u8 GFX_PaletteFindCell(u8 value) {
     u8        row;
     u8        column;
     const u8* entry;
