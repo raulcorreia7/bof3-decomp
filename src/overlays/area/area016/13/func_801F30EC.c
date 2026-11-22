@@ -1,19 +1,5 @@
 /* Every step re-reads the scratchpad cell. */
 #define FAKE_DECL_TASK_VOLATILE
 #include "area016_13.h"
-#include "overlays/area/shared/WorldMap_SelectKeyScript.h"
 
-MATCH void func_801F30EC(void) {
-    Actor* scratch;
-    Actor* check;
-    s32    key;
-    /* FAKE: retail keeps the table offset in a1. */
-    FAKE_REG(u32, i, "a1");
-    u32 next;
-    u32 mode;
-    u8  state;
-    u32 window;
-    u32 window_span;
-
-    WORLD_MAP_SELECT_KEY_SCRIPT(D_801F4D7C);
-}
+#include "overlays/area/shared/func_801F30EC.h"
