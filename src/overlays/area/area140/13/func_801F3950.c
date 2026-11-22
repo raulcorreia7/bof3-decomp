@@ -25,7 +25,7 @@ NON_MATCHING void func_801F3950(s32 facing, s32 height) {
         }
         RotTransPers4(&g_ScratchPadVectors[0], &g_ScratchPadVectors[1], &g_ScratchPadVectors[2], &g_ScratchPadVectors[3], (long*)&prim->x0, (long*)&prim->x1, (long*)&prim->x2, (long*)&prim->x3,
                       &depth, &flag);
-        Area_ApplyTileToQuad(0x12000000 + (D_801F4858[D_801F4824[facing][quad][2]] << 16) + D_801F4824[facing][quad][3], prim, 1);
+        Area_ApplyTileToQuad((0x12 << 24) + (D_801F4858[D_801F4824[facing][quad][2]] << 16) + D_801F4824[facing][quad][3], prim, 1);
         Area_CellAddPrim(cell_x, cell_y, 1, sizeof(POLY_FT4));
     }
 }
