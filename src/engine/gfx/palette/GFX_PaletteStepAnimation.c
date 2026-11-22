@@ -1,6 +1,6 @@
 #include "engine/game/00/game_00.h"
 
-MATCH void GFX_StepPaletteAnimation(u8 palette_slot) {
+MATCH void GFX_PaletteStepAnimation(u8 palette_slot) {
     GraphicsPaletteAnimation* slot;
     u8*                       entry;
     u8                        id;
@@ -23,6 +23,6 @@ MATCH void GFX_StepPaletteAnimation(u8 palette_slot) {
         }
         slot->unk_01 = slot->current_entry[3];
     }
-    GFX_CopyPaletteAnimationColors(slot);
+    GFX_PaletteCopyAnimationColors(slot);
     slot->unk_01--;
 }

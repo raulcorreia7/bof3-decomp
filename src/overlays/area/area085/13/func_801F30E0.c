@@ -51,8 +51,8 @@ NON_MATCHING void func_801F30E0(void) {
     g_Actors[work->unk_04].header.flags |= ACTOR_FLAG_SEMI_TRANSPARENT;
     g_Actors[work->unk_04].tint.bytes.flags = 0;
     g_Actors[work->unk_03].tint.bytes.flags = 0;
-    GFX_AllocPaletteFade(&g_Actors[work->unk_03], 15, 0, 0, 1);
-    GFX_AllocPaletteFade(&g_Actors[work->unk_04], 0, 0, 15, 1);
+    GFX_PaletteAllocFade(&g_Actors[work->unk_03], 15, 0, 0, 1);
+    GFX_PaletteAllocFade(&g_Actors[work->unk_04], 0, 0, 15, 1);
     g_Task->timer       = 4;
     g_Task->header.mode = 1;
 }

@@ -109,9 +109,9 @@ MATCH void func_801BFF9C(u32 work_type, u32 work_index, u32 work_mode) {
                     } else {
                         Party_LoadMemberSprite(*order, i & BYTE_MASK);
                         order++;
-                        GFX_FreePaletteFadeTarget(g_Task);
+                        GFX_PaletteFreeFadeTarget(g_Task);
                         g_Task->clut_select = (g_Task->unk_05 + 0x78);
-                        GFX_LoadPalette((g_Task->unk_05 << 6) + GAME_PALETTE_STAGE, 0);
+                        GFX_PaletteLoad((g_Task->unk_05 << 6) + GAME_PALETTE_STAGE, 0);
                     }
                     mask += BATTLE_PARTY_STRIDE;
                     work += BATTLE_PARTY_STRIDE;

@@ -7,12 +7,10 @@ __asm__(".include \"include/match/macro.inc\"\n");
 #include "overlays/bmagic/shared/func_801EEC20.h"
 
 MATCH void func_801EECA4(void) {
-    D_801EFA9C.origin.vx = D_801EC2E0->target.party->pos.x.fixed + 0x14000;
-    D_801EFA9C.origin.vy = D_801EC2E0->target.party->pos.y.fixed;
-    D_801EFA9C.origin.vz = D_801EC2E0->target.party->pos.z.fixed + (0x2C0 << 16);
-    D_801EFA9C.radius    = 0;
-    D_801EFA9C.offset    = 0;
-    D_801EFA9C.angle     = 0;
+    setVector(&D_801EFA9C.origin, D_801EC2E0->target.party->pos.x.fixed + 0x14000, D_801EC2E0->target.party->pos.y.fixed, D_801EC2E0->target.party->pos.z.fixed + (0x2C0 << 16));
+    D_801EFA9C.radius = 0;
+    D_801EFA9C.offset = 0;
+    D_801EFA9C.angle  = 0;
     func_801EF6B0();
     g_Task->unk_09 = 0x3C;
     g_Task->header.mode += 1;
@@ -185,11 +183,9 @@ MATCH void func_801EF4E0(void) {
     u16 i;
 
     func_801AFE18();
-    angle                     = D_801EFA9C.angle;
-    x                         = D_801EFA9C.origin.vx;
-    D_801EFAF8.current.pos.vx = x;
-    D_801EFAF8.current.pos.vy = D_801EFA9C.origin.vy + ((D_801EFA9C.offset * rcos(angle)) >> 4);
-    D_801EFAF8.current.pos.vz = D_801EFA9C.origin.vz + ((D_801EFA9C.offset * rsin(angle)) << 4);
+    angle = D_801EFA9C.angle;
+    x     = D_801EFA9C.origin.vx;
+    setVector(&D_801EFAF8.current.pos, x, D_801EFA9C.origin.vy + ((D_801EFA9C.offset * rcos(angle)) >> 4), D_801EFA9C.origin.vz + ((D_801EFA9C.offset * rsin(angle)) << 4));
     BMagic_ProjectSpan(&D_801EFAF8.current);
     step = 0x1000;
     i    = 0;
@@ -197,9 +193,8 @@ MATCH void func_801EF4E0(void) {
         D_801EFAF8.previous = D_801EFAF8.current;
         angle += 0x80;
         x += step;
-        D_801EFAF8.current.pos.vx = x + (rand() & 0xFFF) * 16 - 0x8000;
-        D_801EFAF8.current.pos.vy = D_801EFA9C.origin.vy + ((D_801EFA9C.offset * rcos(angle)) >> 4);
-        D_801EFAF8.current.pos.vz = D_801EFA9C.origin.vz + ((D_801EFA9C.offset * rsin(angle)) << 4);
+        setVector(&D_801EFAF8.current.pos, x + (rand() & 0xFFF) * 16 - 0x8000, D_801EFA9C.origin.vy + ((D_801EFA9C.offset * rcos(angle)) >> 4),
+                  D_801EFA9C.origin.vz + ((D_801EFA9C.offset * rsin(angle)) << 4));
         step += 0x40;
         i++;
         BMagic_ProjectSpan(&D_801EFAF8.current);

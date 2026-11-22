@@ -57,8 +57,8 @@ MATCH void func_801EEEF4(void) {
     g_Task->unk_09 = value;
     if (!(value & BYTE_MASK)) {
         battler->unk_5C = 1;
-        GFX_FreePaletteFadeTarget(battler);
-        g_Task->timer  = GFX_AllocPaletteFade(battler, 0, 0, 0, 1);
+        GFX_PaletteFreeFadeTarget(battler);
+        g_Task->timer  = GFX_PaletteAllocFade(battler, 0, 0, 0, 1);
         g_Task->unk_09 = 8;
         g_Task->header.mode += 1;
     }

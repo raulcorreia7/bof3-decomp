@@ -23,7 +23,7 @@ MATCH void func_801ACAC0(void) {
         g_Task->tint.steps.delta.b = (tint_5F - 4);
     }
     if ((g_Task->tint.raw & ~0xFF) == 0x80808000) {
-        GFX_FreePaletteFade(g_CurrentActor->unk_93);
+        GFX_PaletteFreeFade(g_CurrentActor->unk_93);
         work_flags         = g_Task;
         *(u8*)(work_flags) = (*(u8*)(work_flags) | 0x40);
         g_Task->unk_04     = 0;

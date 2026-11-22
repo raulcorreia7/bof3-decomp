@@ -160,7 +160,7 @@ MATCH u8 Script_RunControlOps(void* sub, s32 target, u8 value) {
             spad_work_ea = g_Task;
             if (spad_work_ea->unk_06 != 0xA) {
                 target_entry_ea = target_bytes + state->cursor;
-                GFX_AllocPaletteFade((u8*)spad_work_ea, target_entry_ea[1], target_entry_ea[2], target_entry_ea[3], target_entry_ea[4]);
+                GFX_PaletteAllocFade((u8*)spad_work_ea, target_entry_ea[1], target_entry_ea[2], target_entry_ea[3], target_entry_ea[4]);
             } else {
                 spad_work_ea->tint.bytes.rgb.r = (target_bytes + state->cursor)[1];
                 g_Task->tint.bytes.rgb.g       = (target_bytes + state->cursor)[2];

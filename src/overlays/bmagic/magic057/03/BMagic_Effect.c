@@ -11,7 +11,7 @@ MATCH void func_801EECB0(void) {
     g_Task->pos.x.fixed = BATTLE_ACTIVE_WORK->pos.x.fixed;
     g_Task->pos.y.fixed = BATTLE_ACTIVE_WORK->pos.y.fixed;
     g_Task->pos.z.fixed = BATTLE_ACTIVE_WORK->pos.z.fixed;
-    GFX_CopyPalette(26);
+    GFX_PaletteCopy(26);
     g_GfxPalettePending += 1;
     g_Task->header.mode += 1;
 }

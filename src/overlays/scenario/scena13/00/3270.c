@@ -67,12 +67,12 @@ NON_MATCHING void func_801FAFA0(s32 message, u8 frames) {
         limit   = *(volatile u16*)g_ScratchPad.cells.bytes;
         elapsed = limit;
         if (elapsed < 0x20) {
-            GFX_CopyPaletteCapped(limit & 0xFF);
+            GFX_PaletteCopyCapped(limit & 0xFF);
         } else if (elapsed == 0x20) {
             Scene_RestorePalette();
         } else if (*cell - 0x20 < elapsed) {
             t = limit - (*cell - 0x20);
-            GFX_CopyPaletteCapped((0x20 - t) & 0xFF);
+            GFX_PaletteCopyCapped((0x20 - t) & 0xFF);
         }
     } else if (elapsed == limit) {
         Scene_RestorePalette();
@@ -82,7 +82,7 @@ NON_MATCHING void func_801FAFA0(s32 message, u8 frames) {
 INCLUDE_ASM(func_801FAFA0);
 #endif
 
-#include "overlays/scenario/shared/GFX_CopyPaletteCapped.h"
+#include "overlays/scenario/shared/GFX_PaletteCopyCapped.h"
 
 /* func_801FB164 */
 MATCH void Scene_RestorePalette(void) {

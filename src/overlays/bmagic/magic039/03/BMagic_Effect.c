@@ -109,8 +109,8 @@ MATCH void func_801EF134(void) {
     g_Task->timer = timer_next;
     if ((timer_next & BYTE_MASK) == 0x18) {
         selected = &g_Battle.selected_actor;
-        GFX_FreePaletteFadeTarget(*selected);
-        g_Task->param.unk_0B = GFX_AllocPaletteFade(*selected, 0, 0, 0, 1);
+        GFX_PaletteFreeFadeTarget(*selected);
+        g_Task->param.unk_0B = GFX_PaletteAllocFade(*selected, 0, 0, 0, 1);
         g_Task->header.step += 1;
     }
 }
@@ -143,7 +143,7 @@ MATCH void func_801EF44C(void) {
     timer_next    = g_Task->timer - 2;
     g_Task->timer = timer_next;
     if (!(timer_next & BYTE_MASK)) {
-        GFX_FreePaletteFadeTarget(g_Battle.selected_actor);
+        GFX_PaletteFreeFadeTarget(g_Battle.selected_actor);
         Battle_FadePoisonedBattler(g_Battle.target_selector);
         g_BattleEffectBattler->param.unk_0B -= 1;
         Effect_Reset();

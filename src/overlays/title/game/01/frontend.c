@@ -36,7 +36,7 @@ MATCH void Title_Begin(void) { /* func_801D0C90 */
         SYS_ThreadWait(1u);
     }
 
-    GFX_ResetPalette();
+    GFX_PaletteReset();
     g_GfxPalettePending += 1u;
     SND_PlayBGM(BGM_TITLE, BGM_CUE_LEVEL_DEFAULT, BGM_CUE_SHAPE_DEFAULT);
 

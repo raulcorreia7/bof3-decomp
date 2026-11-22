@@ -5,7 +5,7 @@ MATCH void Effect_FadePaletteOut(void) {
     g_PaletteFades[g_Task->timer].offset.g--;
     g_PaletteFades[g_Task->timer].offset.b--;
     if (--g_Task->unk_09 == 0) {
-        GFX_FreePaletteFadeTarget(g_Battle.selected_actor);
+        GFX_PaletteFreeFadeTarget(g_Battle.selected_actor);
         Battle_FadePoisonedBattler(g_Battle.target_selector);
         g_Task->header.mode++;
     }

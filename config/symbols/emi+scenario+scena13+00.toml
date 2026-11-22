@@ -12,7 +12,7 @@ func_801F6EAC = { addr = 0x801F6EAC, alias = true, source = "Scene_DispatchEntit
 Area_DrawScreenTint = { addr = 0x801F6FF8, type = "func", source = "Draws a semi-transparent tile over the whole screen in the colour of the task tint." }
 Scene_DrawScreenTint = { addr = 0x801F7484, type = "func", source = "draws the scene screen tint layer through Screen_DrawTintLayer" }
 Scene_ReleaseActors = { addr = 0x801F7C24, type = "func", source = "clears two task-linked actor slots, frees their palette fade targets and clears the actor" }
-GFX_CopyPaletteCapped = { addr = 0x801FB0B8, type = "func", source = "Copies 16 colours from 0x80033800, replaces each 5-bit component above the argument limit with the argument, stores them at 0x80037800 with bit 15 set on non-zero colours and raises g_GfxPalettePending." }
+GFX_PaletteCopyCapped = { addr = 0x801FB0B8, type = "func", source = "Copies 16 colours from 0x80033800, replaces each 5-bit component above the argument limit with the argument, stores them at 0x80037800 with bit 15 set on non-zero colours and raises g_GfxPalettePending." }
 Scene_RestorePalette = { addr = 0x801FB164, type = "func", source = "copies 16 palette words from 0x80033800 to the graphics palette destination and marks the palette pending" }
 Scene_DispatchActor = { addr = 0x801FB350, type = "func", source = "dispatches a scenario actor to its callback handler" }
 Scene_JoinPartyRyuAdultPecoMomo = { addr = 0x801FBB78, type = "func", source = "Streams the EMI family for adult Ryu, Momo and Peco, empties g_Game.party_size and joins adult Ryu, Peco then Momo with Party_JoinMember; the join order differs from the stream order." }
