@@ -11,7 +11,7 @@ MATCH bool Battle_Unequip(void) {
     u32 i;
     u32 member_offset;
     u32 party_slot;
-    record   = (u8*)&g_Characters[g_CharSlot[g_PartyBattleOrder[D_801485C4]]];
+    record   = (u8*)&g_Characters[g_CharSlot[g_PartyBattleOrder[g_UiPanelTasks[18].unk_0C]]];
     slots[0] = record + 0xE;
     slots[1] = record + 0xF;
     slots[2] = record + 0x10;
@@ -34,8 +34,8 @@ MATCH bool Battle_Unequip(void) {
                 member_offset = party_slot << 2;
                 member_offset += party_slot;
                 member_offset <<= 6;
-                record                                     = (u8*)D_80145F04 + member_offset;
-                character_index                            = D_80145F04[member_offset + 0xC8];
+                record                                     = (u8*)g_Game.members[0].chr.name + member_offset;
+                character_index                            = g_Game.members[0].chr.name[member_offset + 0xC8];
                 cell                                       = (u8*)&g_Characters[character_index];
                 ((Character*)record)->equip.weapon         = ((Character*)cell)->equip.weapon;
                 ((Character*)record)->equip.shield         = ((Character*)cell)->equip.shield;

@@ -28,7 +28,7 @@ NON_MATCHING u8 func_801F4380(s32 x, s32 y) {
     }
     type = D_801F4A89[base];
     if (type != 0) {
-        count = D_80146254;
+        count = g_Game.party_size;
         if (count > 0) {
             limit_y = D_801F4AB6[type * 2];
             limit_x = D_801F4AB4[type * 2];

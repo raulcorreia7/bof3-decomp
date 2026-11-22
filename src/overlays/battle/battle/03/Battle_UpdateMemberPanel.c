@@ -13,10 +13,10 @@ MATCH void Battle_UpdateMemberPanel(void) {
 
     handlers = g_BattleMemberPanelSteps;
     handlers.steps[BATTLE_PANEL_TASK->state]();
-    cell = D_80145F04 + BATTLE_PANEL_TASK->selection.slot * BATTLE_PARTY_STRIDE;
+    cell = g_Game.members[0].chr.name + BATTLE_PANEL_TASK->selection.slot * BATTLE_PARTY_STRIDE;
     func_801EA1E0((((u8*)g_UiPanelCurrent) + 0xB), (cell + 0x1C), (((u8*)g_UiPanelCurrent) + 0x1C), (((u8*)g_UiPanelCurrent) + 0x14), (cell + 0x14), (((u8*)g_UiPanelCurrent) + 0xD),
                   (((u8*)g_UiPanelCurrent) + 0x18), ((u8*)g_UiPanelCurrent) + 0x8);
-    cell = D_80145F04 + BATTLE_PANEL_TASK->selection.slot * BATTLE_PARTY_STRIDE;
+    cell = g_Game.members[0].chr.name + BATTLE_PANEL_TASK->selection.slot * BATTLE_PARTY_STRIDE;
     func_801EA1E0((((u8*)g_UiPanelCurrent) + 0xC), (cell + 0x1E), (((u8*)g_UiPanelCurrent) + 0x1E), (((u8*)g_UiPanelCurrent) + 0x16), (cell + 0x16), (((u8*)g_UiPanelCurrent) + 0xE),
                   (((u8*)g_UiPanelCurrent) + 0x1A), ((u8*)g_UiPanelCurrent) + 0x9);
     /* The chr.status view changes the schedule and size, so the flags keep the D_80145F10 address view. */

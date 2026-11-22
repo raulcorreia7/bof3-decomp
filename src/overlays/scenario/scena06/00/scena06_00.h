@@ -8,7 +8,6 @@
 #include "overlays/scenario/scenario.h"
 #include "sys/exe.h"
 
-extern u8  D_80144DF2;
 extern u8  D_80144DF5;
 extern u16 D_80144DF8;
 extern u16 D_80144E00;

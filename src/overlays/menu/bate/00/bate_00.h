@@ -22,7 +22,6 @@ extern u8  D_80148654;
 #define g_ScenarioState (*(struct ScenarioState*)&g_ScenarioState)
 
 extern s8   D_80144DE4;
-extern u8   D_80144DF2;
 extern u8   D_80144DF3;
 extern u8   D_80144DF4;
 extern char g_MenuStatFormat[];
@@ -32,7 +31,6 @@ extern char g_MenuZennyFormat[];
 extern u8   D_80144DF5;
 extern u8   D_80144DF6;
 extern u8   D_80144DF7;
-extern u8   D_80148338;
 extern s8   D_80148511;
 extern u8   D_80148656;
 extern s8   D_80148658;

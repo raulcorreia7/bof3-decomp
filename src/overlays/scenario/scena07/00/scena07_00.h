@@ -175,7 +175,6 @@ u8   func_801F9EFC(void);
 
 /* D_801FDD14 */
 
-extern u8       D_80144DF2;
 extern u8       D_80144DF5;
 extern u8       D_80144EB8[];
 /* D_801FDFA0 */

@@ -24,8 +24,8 @@ MATCH void func_801D163C(void) {
         panel->unk_0C = g_ShopItemId;
     }
     g_UiPanelTasks[0].u.message.id = Item_GetDescription(g_ShopItemCategory, g_ShopItemId);
-    D_80148474                     = 0;
-    if (D_80148453 == 0) {
+    g_UiPanelTasks[9].active       = 0;
+    if (g_UiPanelTasks[8].state == 0) {
         /* FAKE: block boundary keeps the panel-task stores base-relative off one la. */
         FAKE_ORDER_FENCE();
         g_UiPanelTasks[21].active = 1;
@@ -47,7 +47,7 @@ MATCH void func_801D163C(void) {
     if ((s8)old != g_ShopStockIndex) {
         SND_SEPlay(EMI_SE_ID(SND_BANK_COMMON, 0));
     }
-    D_8014845C = g_ShopStockIndex;
+    g_UiPanelTasks[8].unk_0C = g_ShopStockIndex;
     if (g_PadStates[0].pressed & g_InputMasks[MENU_INPUT_CONFIRM]) {
         pick               = D_8018E7CC + g_ShopStockIndex * 2;
         g_ShopItemCategory = pick[1];
@@ -79,8 +79,8 @@ MATCH void func_801D163C(void) {
         for (i = 0; i < (u8)Party_CountOrder(PARTY_ORDER_FIELD); i++) {
             g_UiPanelTasks[i + 3].state = 1;
         }
-        D_80148453 = 1;
-        D_80148651 = 1;
-        D_80148652 = 0;
+        g_UiPanelTasks[8].state = 1;
+        D_80148651              = 1;
+        D_80148652              = 0;
     }
 }

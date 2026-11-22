@@ -10,8 +10,8 @@ MATCH void func_801C22D8(void) {
         return;
     }
     work = TASK(Actor);
-    dx   = D_801462A0 - work->pos.x.fixed;
-    dy   = D_801462A4 - work->pos.y.fixed;
+    dx   = g_Game.base_x.fixed - work->pos.x.fixed;
+    dy   = g_Game.base_y.fixed - work->pos.y.fixed;
     if (dx < 0 && dy < 0) {
         work->direction = FACING_UP_LEFT;
     } else if (dx > 0 && dy > 0) {

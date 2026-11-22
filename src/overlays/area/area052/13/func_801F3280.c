@@ -1,11 +1,10 @@
 #include "area052_13.h"
 
-#ifdef NON_MATCHING
-NON_MATCHING void func_801F3280(void) {
-    s16 column;
-    s16 row;
-    s16 cell;
-    s32 next_row;
+/* Saves the cell codes of the two-by-two block under the actor in its two words, a byte per cell, and blocks the four cells. */
+MATCH void func_801F3280(void) {
+    s32 column;
+    s32 row;
+    s32 cell;
     u8  i;
 
     if (g_GameStateIndex == 5) {
@@ -16,19 +15,15 @@ NON_MATCHING void func_801F3280(void) {
     row                 = FIX_INT(TASK(Actor)->pos.y.fixed - COORD_HALF);
     TASK(Actor)->unk_18 = 0;
     TASK(Actor)->unk_1C = 0;
-    next_row            = row + 1;
     i                   = 0;
     do {
-        cell = column + i;
-        Area_HeightSet(column + i, row, 0x10);
-        TASK(Actor)->unk_18 |= (u8)Area_CellGetCode(cell, row) << (i * 8);
-        Area_CellSetCode(column + i, row, 0x11);
-        Area_HeightSet(column + i, row + 1, 0x10);
-        TASK(Actor)->unk_1C |= (u8)Area_CellGetCode(cell, FIX_INT(TO_COORD(next_row))) << (i * 8);
-        Area_CellSetCode(column + i, row + 1, 0x11);
+        Area_HeightSet((s16)column + i, (s16)row, 0x10);
+        cell = (s16)(i + column);
+        TASK(Actor)->unk_18 |= (u8)Area_CellGetCode(cell, (s16)row) << (i * 8);
+        Area_CellSetCode((s16)column + i, (s16)row, 0x11);
+        Area_HeightSet((s16)column + i, (s16)row + 1, 0x10);
+        TASK(Actor)->unk_1C |= (u8)Area_CellGetCode(cell, (s16)((s16)row + 1)) << (i * 8);
+        Area_CellSetCode((s16)column + i, (s16)row + 1, 0x11);
         i++;
     } while (i < 2);
 }
-#else
-INCLUDE_ASM(func_801F3280);
-#endif

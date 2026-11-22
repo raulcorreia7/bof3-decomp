@@ -17,7 +17,7 @@ MATCH void Area_EncounterRollThreshold(u32 keep_armed) {
         D_80145FB8 = 0;
         return;
     }
-    entry = Area_EncounterFindZone(D_80145EC6, D_80145ECA);
+    entry = Area_EncounterFindZone(g_Game.members[0].pos.x.part.integer, g_Game.members[0].pos.y.part.integer);
     total = s_EncounterStepThresholds[entry[4] * 2];
     if (total == 0) {
         D_80145FB8 = 0;

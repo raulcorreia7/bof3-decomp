@@ -13,7 +13,7 @@ MATCH void UI_MessageDispatchAnswerStep(void) {
         UI_MessageDispatchStep();
     }
 
-    D_80148357 = 3;
+    g_UiPanelTasks[1].state = 3;
     if (g_UiMessageRequest != MESSAGE_NONE) {
         g_UiPanelTasks[0].state = 1;
         g_UiMessageStep         = g_UiMessageStep + 1;

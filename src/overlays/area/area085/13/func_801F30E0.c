@@ -45,8 +45,8 @@ NON_MATCHING void func_801F30E0(void) {
     g_Actors[work->unk_03].pos.y.fixed += ONE;
     g_Actors[work->unk_04].pos.x.fixed += ONE;
     g_Actors[work->unk_04].pos.y.fixed -= ONE;
-    g_Actors[work->unk_03].pos.z.fixed = D_80145ECC;
-    g_Actors[work->unk_04].pos.z.fixed = D_80145ECC;
+    g_Actors[work->unk_03].pos.z.fixed = g_Game.members[0].pos.z.fixed;
+    g_Actors[work->unk_04].pos.z.fixed = g_Game.members[0].pos.z.fixed;
     g_Actors[work->unk_03].header.flags |= ACTOR_FLAG_SEMI_TRANSPARENT;
     g_Actors[work->unk_04].header.flags |= ACTOR_FLAG_SEMI_TRANSPARENT;
     g_Actors[work->unk_04].tint.bytes.flags = 0;

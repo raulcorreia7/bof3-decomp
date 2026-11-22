@@ -158,7 +158,7 @@ NON_MATCHING void UI_MessageRunScript(void) {
                     }
                     loop = 0;
                 }
-                D_801490B9 += 1;
+                g_UiMessageState.index += 1;
                 break;
         }
         if (g_UiWindowChannel & FRONTEND_FLAG_NO_INPUT_WAIT) {

@@ -16,8 +16,8 @@ MATCH void func_801F2EDC(void) {
         TASK(Actor)->header.step               = 5;
     } else {
         TASK(Actor)->header.step += 1;
-        dx = D_80145EC4 - 0x428000;
-        if (ABS(dx) <= 0x8000 && (Area119_Distance(D_80145EC8, -0x3E0000) <= 0x10000 || Area119_Distance(D_80145EC8, -0x3F0000) <= 0x10000)) {
+        dx = g_Game.members[0].pos.x.fixed - 0x428000;
+        if (ABS(dx) <= 0x8000 && (Area119_Distance(g_Game.members[0].pos.y.fixed, -0x3E0000) <= 0x10000 || Area119_Distance(g_Game.members[0].pos.y.fixed, -0x3F0000) <= 0x10000)) {
             span                     = -0x100;
             TASK(Actor)->screen_y    = span;
             TASK(Actor)->header.step = 3;

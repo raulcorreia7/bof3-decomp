@@ -176,7 +176,7 @@ MATCH void Scene_SetPartyRyuYoungNinaYoungGarr(void) {
 }
 
 MATCH void func_801FDBCC(void) {
-    Party_MemberRemove(D_80146189);
+    Party_MemberRemove(g_Game.members[2].chr.character_id);
 }
 
 MATCH void func_801FDBF4(void) {

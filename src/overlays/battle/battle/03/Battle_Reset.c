@@ -49,10 +49,10 @@ NON_MATCHING void Battle_Reset(void) {
     g_Battle.pending_status       = 0;
     g_Battle.outcome.drop_count   = 0;
     D_801463C2                    = 0;
-    D_801463CB                    = 0;
-    D_801463CA                    = 0;
+    g_Battle.unk_EA[1]            = 0;
+    g_Battle.unk_EA[0]            = 0;
     g_Battle.action_lock          = 0;
-    D_801463D7                    = 0;
+    g_Battle.unk_EF[8]            = 0;
     g_Battle.selection_latch      = 0;
     g_Battle.dragon_form          = 0;
     g_AreaCameraHeightDelta       = 0;
@@ -137,7 +137,7 @@ NON_MATCHING void Battle_Reset(void) {
     }
     index = slot & BYTE_MASK;
     do {
-        *(s32*)(D_80146364 + index) = 0;
+        *(s32*)(g_Battle.unk_84 + index) = 0;
         slot += 1;
         index = slot & BYTE_MASK;
     } while ((u32)(slot & BYTE_MASK) < 0x10U);

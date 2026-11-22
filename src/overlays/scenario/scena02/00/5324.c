@@ -85,15 +85,15 @@ MATCH void func_801FC734(u8 actor_id) {
 
 MATCH void func_801FC7E4(void) {
     if ((g_PartyFieldOrder[0] == 0) || (g_PartyFieldOrder[0] == 3)) {
-        if (((u16)(D_80145EC6 - 0x44) < 2) && (D_80145ECA == 0x3F) && (D_80145EDB == 0x42) && (D_80145E98 == 1)) {
+        if (((u16)(g_Game.members[0].pos.x.part.integer - 0x44) < 2) && (g_Game.members[0].pos.y.part.integer == 0x3F) && (g_Game.members[0].unk_4B == 0x42) && (g_Game.members[0].facing == 1)) {
             SCENA02_START_SCRIPT_1A();
         }
-        if (D_80145EC6 == 0x46) {
-            if ((D_80145ECA == 0x3E) && (D_80145EDB == 0x45) && (D_80145E98 == 7)) {
+        if (g_Game.members[0].pos.x.part.integer == 0x46) {
+            if ((g_Game.members[0].pos.y.part.integer == 0x3E) && (g_Game.members[0].unk_4B == 0x45) && (g_Game.members[0].facing == 7)) {
                 SCENA02_START_SCRIPT_1A();
             }
         }
-        if ((D_80145EC6 == 0x44) && (D_80145ECA == 0x3E) && (D_80145EDB == 0x43) && (D_80145E98 == 3)) {
+        if ((g_Game.members[0].pos.x.part.integer == 0x44) && (g_Game.members[0].pos.y.part.integer == 0x3E) && (g_Game.members[0].unk_4B == 0x43) && (g_Game.members[0].facing == 3)) {
             SCENA02_START_SCRIPT_1A();
         }
     }
@@ -101,19 +101,19 @@ MATCH void func_801FC7E4(void) {
 
 MATCH void func_801FC9CC(void) {
     if (g_PartyFieldOrder[0] == 0 || g_PartyFieldOrder[0] == 3) {
-        if ((u32)((u16)D_80145EC6 - 0x44) < 2 && D_80145ECA == 0x3F && D_80145EDB == 0x42 && D_80145E98 == 1) {
+        if ((u32)((u16)g_Game.members[0].pos.x.part.integer - 0x44) < 2 && g_Game.members[0].pos.y.part.integer == 0x3F && g_Game.members[0].unk_4B == 0x42 && g_Game.members[0].facing == 1) {
             SND_SEPlay(EMI_SE_ID(SND_BANK_AREA, 0x0B));
             g_ScenarioState.step     = 0x1E;
             g_ScenarioState.state_04 = 0x1A;
         }
-        if (D_80145EC6 == 0x46) {
-            if (D_80145ECA == 0x3E && D_80145EDB == 0x45 && D_80145E98 == 7) {
+        if (g_Game.members[0].pos.x.part.integer == 0x46) {
+            if (g_Game.members[0].pos.y.part.integer == 0x3E && g_Game.members[0].unk_4B == 0x45 && g_Game.members[0].facing == 7) {
                 SND_SEPlay(EMI_SE_ID(SND_BANK_AREA, 0x0B));
                 g_ScenarioState.step     = 0x1E;
                 g_ScenarioState.state_04 = 0x1A;
             }
         }
-        if (D_80145EC6 == 0x44 && D_80145ECA == 0x3E && D_80145EDB == 0x43 && D_80145E98 == 3) {
+        if (g_Game.members[0].pos.x.part.integer == 0x44 && g_Game.members[0].pos.y.part.integer == 0x3E && g_Game.members[0].unk_4B == 0x43 && g_Game.members[0].facing == 3) {
             SND_SEPlay(EMI_SE_ID(SND_BANK_AREA, 0x0B));
             g_ScenarioState.step     = 0x1E;
             g_ScenarioState.state_04 = 0x1A;

@@ -239,7 +239,6 @@ extern u8              D_8014850F; /* the panel's group first entry */
 extern u8              D_80148510; /* the panel's group cursor */
 extern s8              D_80148511; /* signed scalar view of the panel's drawn cursor */
 extern u8*             D_80148524;
-extern u8              D_8014852B;
 extern u8              D_80148531;
 extern u8              D_80148532;
 extern u8              D_80148533;

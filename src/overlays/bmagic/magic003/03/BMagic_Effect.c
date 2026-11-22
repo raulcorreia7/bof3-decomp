@@ -150,7 +150,7 @@ MATCH void func_801EF1FC(void) {
 
 MATCH void func_801EF268(void) {
     SND_SEQueueSelection(258);
-    D_801463D6 = TASK(PartyMember)->timer;
+    g_Battle.unk_EF[7] = TASK(PartyMember)->timer;
     Battle_MarkDamaged(g_BattleTargetSelector);
     g_BattleState = g_Battle.flags | BATTLE_STATE_EFFECT_PLAYING;
     Effect_Reset();

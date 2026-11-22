@@ -32,7 +32,7 @@ MATCH void UI_MessageReset(void) {
         D_801490CE = 0;
     }
     g_UiMessageStateTimer[0] = 0;
-    D_801490B9               = 0;
+    g_UiMessageState.index   = 0;
     D_801490C8               = 0;
     D_801490B8[0]            = 0;
     UI_PanelOpenTask(0U, 0U);

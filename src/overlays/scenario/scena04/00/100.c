@@ -577,10 +577,10 @@ MATCH void func_801F817C(void) {
             if (SYS_TestFlag(g_SceneFlags, 0xC) == 0) {
                 g_ScriptVarsWord = 0;
                 Area_ScrollStartRoute(0);
-                pad_flag = &D_80145EB4;
+                pad_flag = &g_Game.members[0].unk_24;
                 *pad_flag &= 0xDF;
-                D_80145FF4 &= 0xDF;
-                D_80146134 &= 0xDF;
+                g_Game.members[1].unk_24 &= 0xDF;
+                g_Game.members[2].unk_24 &= 0xDF;
                 /* kept: the slot index round-trips through the scratch word so
                  * each row address re-reads it; a local index drops 0xA8 bytes
                  * (0x418 vs 0x4C0) and typed g_SpawnedActors rows drop 0xC0. */

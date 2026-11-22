@@ -17,7 +17,7 @@ MATCH void func_801E0788(void) {
         TASK(PartyMember)->unk_04 = 0;
     } else if (w->u.turn.action_flags.value & BATTLER_ACTION_DRAGON_FORM) {
         half = &g_Battle.flags;
-        if ((*half & 0x4000) && (D_801463CA == TASK(PartyMember)->slot)) {
+        if ((*half & 0x4000) && (g_Battle.unk_EA[0] == TASK(PartyMember)->slot)) {
             *half &= 0xBFFF;
         }
         TASK(PartyMember)->unk_03 = 4;
@@ -51,7 +51,7 @@ MATCH void func_801E0788(void) {
             FAKE_VOLATILE(u8, g_Battle.outcome.result) |= BATTLE_RESULT_DEFEAT;
         }
         half2 = &g_Battle.flags;
-        if ((*half2 & 0x4000) && (D_801463CA == TASK(PartyMember)->slot)) {
+        if ((*half2 & 0x4000) && (g_Battle.unk_EA[0] == TASK(PartyMember)->slot)) {
             *half2 &= 0xBFFF;
         }
         if (g_Game.current->u.turn.action_flags.value & BATTLER_ACTION_DRAGON_FORM_QUEUED) {
