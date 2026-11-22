@@ -10,9 +10,13 @@
 #define g_CurrentActor ((u8*)g_CurrentActor)
 extern u8 D_801F3EAC[];
 
-/* The X and Y cell columns the scene-flag pair selects. */
-extern u8 D_801F4850[];
-extern u8 D_801F4851[];
+/* The cell the scene-flag pair selects. */
+typedef struct {
+    u8 x;
+    u8 y;
+} Area106Cell;
+
+extern Area106Cell D_801F4850[];
 
 void      func_801F2F38(s32 index, s32 height);
 extern u8 D_801F3E90[];

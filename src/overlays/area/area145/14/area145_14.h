@@ -58,14 +58,23 @@ extern SceneTrigger D_801F5CC0[];
 extern u8           D_801F5CDC[];
 extern u8           D_801F5CDD[];
 extern u8           D_801F5CDE[];
+
 /* The per-direction stage steps of a full stage and of a half stage: the route
  * index, the stage length and the next stage code in each four-byte record. */
-extern u8           D_801F5CEC[];
-extern u8           D_801F5CFC[];
-extern u8           D_801F5D0C[];
-extern u8           D_801F5D1C[];
+/* One walk step per facing: the heading into D_80181B00 and the frames it lasts. */
+typedef struct {
+    u8 heading;
+    u8 duration;
+    u8 unk_2;
+    u8 unk_3;
+} Area145Step;
+
+extern Area145Step D_801F5CEC[];
+extern Area145Step D_801F5CFC[];
+extern u8          D_801F5D0C[];
+extern u8          D_801F5D1C[];
 
 u8 func_801F4DA4(u32 frame);
-u8 func_801F4EDC(u16 t, u32 stage);
+u8 func_801F4EDC(s32 t, u32 stage);
 
 #endif
