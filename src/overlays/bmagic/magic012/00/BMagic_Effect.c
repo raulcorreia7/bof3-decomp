@@ -17,24 +17,24 @@ MATCH void func_801EEC5C(void) {
     u8           slot;
     u8           delay;
 
-    g_Task->facing     = g_BattleEffectBattler->facing;
-    battler            = g_BattleEffectBattler;
-    work               = g_Task;
-    work->pos.x        = battler->pos.x;
-    work->pos.y        = battler->pos.y;
-    work->pos.z        = battler->pos.z;
-    work->param.unk_0B = 0;
-    delay              = 1;
+    TASK(PartyMember)->facing = g_BattleEffectBattler->facing;
+    battler                   = g_BattleEffectBattler;
+    work                      = TASK(PartyMember);
+    work->pos.x               = battler->pos.x;
+    work->pos.y               = battler->pos.y;
+    work->pos.z               = battler->pos.z;
+    work->param.unk_0B        = 0;
+    delay                     = 1;
     if (g_Battle.target_selector & BATTLE_TARGET_ENEMY_SIDE) {
         for (i = 0; i < 8; i++) {
             side = i + BATTLE_PARTY_CHARACTERS_COUNT;
             if (!(Battle_SlotIsBlocked(side) & BYTE_MASK)) {
                 slot                               = Battle_AllocEffect(1, 0x37);
-                g_BattleEffects[slot].target.party = g_Task;
+                g_BattleEffects[slot].target.party = TASK(PartyMember);
                 g_BattleEffects[slot].unk_03       = side;
                 g_BattleEffects[slot].unk_04       = i;
                 g_BattleEffects[slot].arg.unk_09   = delay;
-                g_Task->param.unk_0B++;
+                TASK(PartyMember)->param.unk_0B++;
                 delay += 8;
             }
         }
@@ -42,11 +42,11 @@ MATCH void func_801EEC5C(void) {
         for (i = 0; i < BATTLE_PARTY_CHARACTERS_COUNT; i++) {
             if (!(Battle_SlotIsBlocked((u8)i) & BYTE_MASK)) {
                 slot                               = Battle_AllocEffect(1, 0x37);
-                g_BattleEffects[slot].target.party = g_Task;
+                g_BattleEffects[slot].target.party = TASK(PartyMember);
                 g_BattleEffects[slot].unk_03       = i;
                 g_BattleEffects[slot].unk_04       = i;
                 g_BattleEffects[slot].arg.unk_09   = delay;
-                g_Task->param.unk_0B++;
+                TASK(PartyMember)->param.unk_0B++;
                 delay += 8;
             }
         }
@@ -56,7 +56,7 @@ MATCH void func_801EEC5C(void) {
     }
     g_GfxPalettePending                                          = 1;
     g_AreaPaletteCopy->rows[AREA_PALETTE_BATL_OVR_ROW].colors[0] = g_AreaPaletteArena->rows[AREA_PALETTE_BATL_OVR_ROW].colors[0];
-    g_Task->header.mode++;
+    TASK(PartyMember)->header.mode++;
 }
 
 MATCH void func_801EEEAC(void) {
