@@ -15,7 +15,7 @@ MATCH void func_801FABA8(void) {
             }
             break;
         case 1:
-            if (g_UiWindowEffectBusy == 0) {
+            if (g_SysThreads[2].state == 0) {
                 g_ScenarioState.timer_06 = 60;
                 g_AreaDrawFlags          = 0;
                 g_ScenarioState.step     = 2;
@@ -67,7 +67,7 @@ MATCH void func_801FABA8(void) {
             }
             break;
         case 8:
-            if (g_UiWindowEffectBusy == 0) {
+            if (g_SysThreads[2].state == 0) {
                 g_ScenarioState.timer_06 = 60;
                 g_AreaDrawFlags          = 0;
                 g_ScenarioState.step     = 9;
@@ -93,7 +93,7 @@ MATCH void func_801FABA8(void) {
             }
             break;
         case 11:
-            if (g_UiWindowEffectBusy == 0) {
+            if (g_SysThreads[2].state == 0) {
                 g_ScriptVars[0]      = 6;
                 g_ScenarioState.step = 12;
             }

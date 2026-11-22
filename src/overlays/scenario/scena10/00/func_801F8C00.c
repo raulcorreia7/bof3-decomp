@@ -61,7 +61,7 @@ MATCH void func_801F8C00(void) {
             }
             break;
         case 6:
-            if (g_UiWindowEffectBusy == 0) {
+            if (g_SysThreads[2].state == 0) {
                 u8 slot;
 
                 slot                        = Actor_FindFreeSpawned();
@@ -162,7 +162,7 @@ MATCH void func_801F8C00(void) {
             }
             break;
         case 14:
-            if (g_UiWindowEffectBusy == 0) {
+            if (g_SysThreads[2].state == 0) {
                 g_ScenarioState.timer_06 = 0x3C;
                 g_AreaDrawFlags          = 0;
                 g_ScenarioState.step     = 15;
@@ -175,7 +175,7 @@ MATCH void func_801F8C00(void) {
             }
             break;
         case 16:
-            if (g_UiWindowEffectBusy == 0) {
+            if (g_SysThreads[2].state == 0) {
                 SCENARIO_MESSAGE_WAIT(MSG_SCENA10_019, 17);
             }
             break;
@@ -187,7 +187,7 @@ MATCH void func_801F8C00(void) {
             }
             break;
         case 18:
-            if (g_UiWindowEffectBusy == 0) {
+            if (g_SysThreads[2].state == 0) {
                 g_ScenarioState.step = 19;
                 g_ScriptVars[0]++;
             }

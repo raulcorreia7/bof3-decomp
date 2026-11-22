@@ -61,7 +61,7 @@ MATCH void func_801FBDBC(void) {
             g_ScenarioState.step = 5;
             break;
         case 5:
-            if (g_UiWindowEffectBusy != 0) {
+            if (g_SysThreads[2].state != 0) {
                 break;
             }
             g_AreaDrawFlags      = 0;
@@ -126,7 +126,7 @@ MATCH void func_801FBDBC(void) {
             UI_ModeSet(0xD);
             break;
         case 13:
-            if (g_UiWindowEffectBusy != 0) {
+            if (g_SysThreads[2].state != 0) {
                 break;
             }
             g_AreaDrawFlags      = 0;
