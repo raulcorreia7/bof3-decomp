@@ -2,13 +2,7 @@
  * ordering-table slot LAYER. A statement macro: the member declares POLY_F4* prim, s32 shade and s32 tpage. */
 /* func_801F030C (magic131), func_801EF970 (magic111) */
 #define EFFECT_DRAW_FULL_SCREEN_QUAD(LAYER)                 \
-    if (GetGraphType() == 1) {                              \
-        tpage = 0xA5;                                       \
-    } else if (GetGraphType() == 2) {                       \
-        tpage = 0xA5;                                       \
-    } else {                                                \
-        tpage = 0x35;                                       \
-    }                                                       \
+    tpage = getTPage(0, 1, 320, 256);                       \
     SetDrawMode((DR_MODE*)g_GfxPrimCursor, 0, 1, tpage, 0); \
     GFX_AddPrim(LAYER, sizeof(DR_MODE));                    \
     prim = (POLY_F4*)g_GfxPrimCursor;                       \
@@ -18,12 +12,6 @@
     shade = g_Task->unk_09 * 15;                            \
     setRGB0(prim, shade, shade, shade);                     \
     GFX_AddPrim(LAYER, sizeof(POLY_F4));                    \
-    if (GetGraphType() == 1) {                              \
-        tpage = 0x25;                                       \
-    } else if (GetGraphType() == 2) {                       \
-        tpage = 0x25;                                       \
-    } else {                                                \
-        tpage = 0x15;                                       \
-    }                                                       \
+    tpage = getTPage(0, 0, 320, 256);                       \
     SetDrawMode((DR_MODE*)g_GfxPrimCursor, 0, 1, tpage, 0); \
     GFX_AddPrim(LAYER, sizeof(DR_MODE))

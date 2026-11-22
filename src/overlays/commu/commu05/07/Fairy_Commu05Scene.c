@@ -218,11 +218,7 @@ MATCH void func_801D1724(u16 x, u16 y) {
     s32 tpage;
     s16 row_y;
 
-    if (GetGraphType() == 1 || GetGraphType() == 2) {
-        tpage = 0x2D;
-    } else {
-        tpage = 0x1D;
-    }
+    tpage = getTPage(0, 0, 832, 256);
     GFX_SET_DRAW_MODE(tpage);
     GFX_AddPrim(GFX_LAYER_UI, sizeof(DR_MODE));
     for (i = 0; i < 16; i++) {

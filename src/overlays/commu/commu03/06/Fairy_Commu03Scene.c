@@ -219,12 +219,8 @@ NON_MATCHING void func_801D1250(s32 scene, s32 mode) {
         setXYWH(prim, left + 0x49, top + 0x3F + i * 4, yoff, 4);
         setUVWH(prim, 0x98, 0xD8, 4, 8);
         setRGB0(prim, 0x80, 0x80, 0x80);
-        prim->clut = getClut(176, 480);
-        if (GetGraphType() == 1) {
-            tpage = 0xF;
-        } else {
-            tpage = 0xF;
-        }
+        prim->clut  = getClut(176, 480);
+        tpage       = getTPage(0, 0, 960, 0);
         prim->tpage = tpage;
         GFX_AddPrim(GFX_LAYER_UI, sizeof(POLY_FT4));
     }

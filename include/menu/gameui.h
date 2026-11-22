@@ -366,7 +366,7 @@ extern u8       D_80181D99;
 /* 0x80181EBA / 0x80181EBB: byte tables the selection paths read with a 4-byte
  * row stride. */
 /* D_80181EBA */
-extern const u8 g_SelectionSepSlots[];
+extern u8       g_SelectionSepSlots[];
 /* D_80181EBB */
 extern const u8 g_SelectionSequences[];
 

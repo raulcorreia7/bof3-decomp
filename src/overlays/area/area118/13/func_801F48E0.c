@@ -10,11 +10,7 @@ MATCH void func_801F48E0(void) {
     s32      shade;
     s32      tpage;
 
-    if (GetGraphType() == 1 || GetGraphType() == 2) {
-        tpage = 0x225;
-    } else {
-        tpage = 0x95;
-    }
+    tpage = getTPage(1, 0, 320, 256);
     SetDrawMode((DR_MODE*)g_GfxPrimCursor, 0, 1, tpage, 0);
     Area_CellAddPrim(g_Task->pos.x.fixed, g_Task->pos.y.fixed, 1, sizeof(DR_MODE));
     prim = (LINE_F2*)g_GfxPrimCursor;
@@ -31,11 +27,7 @@ MATCH void func_801F48E0(void) {
     RotTransPers3(&g_ScratchPadVectors[0], &g_ScratchPadVectors[1], &g_ScratchPadVectors[2], (long*)&prim->x0, (long*)&prim->x1, (long*)D_1F800034, &depth, &flag);
     Area_CellAddPrim(g_Task->pos.x.fixed, g_Task->pos.y.fixed, 1, sizeof(LINE_F2));
 
-    if (GetGraphType() == 1 || GetGraphType() == 2) {
-        tpage = 0x225;
-    } else {
-        tpage = 0x95;
-    }
+    tpage = getTPage(1, 0, 320, 256);
     SetDrawMode((DR_MODE*)g_GfxPrimCursor, 0, 0, tpage, 0);
     Area_CellAddPrim(g_Task->pos.x.fixed, g_Task->pos.y.fixed, 1, sizeof(DR_MODE));
 }

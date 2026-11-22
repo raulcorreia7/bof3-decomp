@@ -16,13 +16,7 @@ NON_MATCHING void func_801F3FBC(s32 mode, s32 value) {
 
     i = 0;
     do {
-        if (GetGraphType() == 1) {
-            tpage = 0x225;
-        } else if (GetGraphType() == 2) {
-            tpage = 0x225;
-        } else {
-            tpage = 0x95;
-        }
+        tpage = getTPage(1, 0, 320, 256);
         SetDrawMode((DR_MODE*)g_GfxPrimCursor, 0, 0, tpage, 0);
         Area_CellAddPrim(g_Task->pos.x.fixed, g_Task->pos.y.fixed, (s8)value, sizeof(DR_MODE));
 

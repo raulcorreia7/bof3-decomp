@@ -20,6 +20,9 @@ match itself; [matching](../../../../docs/matching.md) is the full reference.
    line, its neighbours and the prototypes in the image header. An unknown address or offset:
    `tools/symbol.py at <target> 0x<ADDR>`, `member <Type> 0x<OFF>`, `uses <Name>`. A bare number:
    `tools/symbol.py value 0x<NN> --image <target>` names the enum member or macro that holds it.
+   **Check the draft is this function** before tuning it: its size, callees and globals against
+   `asm.s`. A draft far off (size outside 0.7-1.4, or most rows differ) often holds a twin's or a
+   neighbour's body; write it again from the assembly. Check every constant against the assembly.
 
 4. **Draft.** Write the body in the unit's `.c`, always under `NON_MATCHING`:
 
@@ -33,6 +36,13 @@ match itself; [matching](../../../../docs/matching.md) is the full reference.
    #endif
    ```
 
+   Write the SDK's own macros, never their expansion ([SDK names](../../../../docs/conventions.md)):
+   `setRGB0`..`setRGB3`, `setXY*`, `setUV*`, `setWH`, `setPolyFT4`/`setSprt`/`setTile`,
+   `setSemiTrans`, `addPrim`, `setRECT`, `setVector`, `getClut`, the `gte_*` macros, and
+   `getTPage(tp, abr, x, y)` for an `if (GetGraphType() == 1 || GetGraphType() == 2)` pair of
+   page constants (decode both constants into one argument set). Write it open only when the macro
+   changes the bytes, and say so in the attempts row.
+
 5. **Measure.** `tools/match.sh <target> <func>` compiles the unit and compares the function's
    `.text` with retail: `match` or the first differing instruction, in about 0.1 s. Exit 0 is a
    match, 1 a difference, 2 when nothing was compared (the message names the next step).
@@ -40,7 +50,10 @@ match itself; [matching](../../../../docs/matching.md) is the full reference.
    the rows are positional, so an inserted instruction marks everything after it. After a new
    `hand/` file, a header or a marker, run `meson setup --reconfigure build/meson` once
    ([reconfigure](../../../../docs/toolchain.md#reconfigure)). A function that reads
-   its unit's own `.rodata` (a jump table or a string) is measured too. One that reads the unit's
+   its unit's own `.rodata` (a jump table or a string) is measured too, but `match.sh` does not
+   compare a jump table's contents and passes a switch whose table has no `splat.yaml` row: only
+   `BOF3_CC_CACHE=0 meson compile -C build/meson check-<image>` proves a match. Give each
+   jump-table function its own unit and `.rodata` row. One that reads the unit's
    own `.data` or `.bss`, or the gp, needs the `cc` wrapper
    ([compiler wrapper](../../../../docs/toolchain.md#compiler-wrapper)).
 
@@ -49,7 +62,8 @@ match itself; [matching](../../../../docs/matching.md) is the full reference.
    ([diagnose](../../../../docs/matching.md#diagnose)) and fix it by label. Helpers come after pure C
    fails, benign before harmful, each with its `FAKE:` note
    ([helpers](../../../../docs/matching.md#fake-match-helpers)); a near match goes to the
-   [permuter](../../../../docs/matching.md#permuter). `__builtin_memcpy` is not 1997 source: write a
+   [permuter](../../../../docs/matching.md#permuter), which rarely closes a register or order
+   difference; name the compiler pass first (below). `__builtin_memcpy` is not 1997 source: write a
    constant copy into a local as `memcpy(dst, src, size)`. A `FAKE_REG` is not source either:
    measure the plain, `register`, width, declaration-order and inlined forms before keeping one.
 

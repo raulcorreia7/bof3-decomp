@@ -32,5 +32,6 @@ void func_801F76D0(void);
 
 extern u8 D_801FE474;
 extern s8 (*D_801FE4BC[])(void);
+extern u8 D_801FE554;
 
 #endif

@@ -17,7 +17,7 @@ segments:
       - [0x178, .rodata, D_801F6D78]
       - [0x17C, .rodata, D_801F6D7C]
       - [0x1F8, .rodata, D_801F6DF8]
-      - [0x1FC, .rodata, D_801F6DFC]
+      - [0x1FC, .rodata, func_801FA844]
       - [0x274, .rodata, func_801FB1B4]
       - [0x2A4, c, 2A4]
       - [0x18B8, c, func_801F84B8]
@@ -27,6 +27,8 @@ segments:
       - [0x2970, c, func_801F9570]
       - [0x2E44, c, func_801F9A44]
       - [0x3270, c, 3270]
+      - [0x3C44, c, func_801FA844]
+      - [0x43A0, c, 43A0]
       - [0x45B4, c, func_801FB1B4]
       - [0x4750, c, 4750]
   # Placement: .data resumes after another section in the retail bytes; one segment would group both .data runs.
