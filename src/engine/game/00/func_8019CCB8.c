@@ -11,8 +11,8 @@ MATCH void func_8019CCB8(void) {
     u8* copy_dst;
     u8  step;
 
-    if (g_GameEntryState != GAME_MODE_AREA_LOAD) {
-        if (g_GameStateIndex == GAME_REQUEST_AREA_CHANGE) {
+    if (g_SysThreads[0].tail.game_entry.state != GAME_MODE_AREA_LOAD) {
+        if (g_SysThreads[0].tail.game_entry.request == GAME_REQUEST_AREA_CHANGE) {
             func_8019D4BC();
             goto block_9;
         }

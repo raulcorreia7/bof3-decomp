@@ -7,7 +7,7 @@ MATCH void func_8019B4A0(void) {
     s32  span;
 
     /* Non-volatile view of the shared state word (see func_80196FFC). */
-    state = (u16*)&g_GameEntryState;
+    state = (u16*)&g_SysThreads[0].tail.game_entry.state;
     if (*state != 1) {
         if (TASK(Actor)->unk_0A != 0) {
             if ((func_8019C1E4() & BYTE_MASK) == 0) {
@@ -53,7 +53,7 @@ MATCH void func_8019B4A0(void) {
                 TASK(Actor)->timer       = 0;
                 TASK(Actor)->header.mode = 4;
             }
-        } else if (g_GameStateIndex == GAME_REQUEST_AREA_CHANGE) {
+        } else if (g_SysThreads[0].tail.game_entry.request == GAME_REQUEST_AREA_CHANGE) {
             Area_CellSetCode(COORD_INT(TASK(Actor)->pos.x), COORD_INT(TASK(Actor)->pos.y), TASK(Actor)->param.unk_0B);
         }
     }

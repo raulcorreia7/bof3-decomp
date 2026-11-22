@@ -3,7 +3,7 @@
 #define AREA199_TRAIL_PART_WORD ((0x2580u << 16) | 0x8000u)
 
 #ifdef NON_MATCHING
-/* Stages each member's walked cells and draws the trail quad at every live one. */
+/* Stages each member's walked cells and draws both trail rows at every live cell. */
 NON_MATCHING void func_801F3398(void) {
     POLY_FT4* prim;
     POLY_FT4* quad;
@@ -13,7 +13,6 @@ NON_MATCHING void func_801F3398(void) {
     s32       cell;
     s32       i;
     s32       x;
-    s32       y;
 
     for (member = 0; member < 2; member++) {
         slot = D_801F44B4[member];
@@ -29,9 +28,7 @@ NON_MATCHING void func_801F3398(void) {
 
         for (i = 0; i < 0x20; i++) {
             cell = member * 3 + i * 6;
-            x    = D_801F54D0[cell];
-            y    = D_801F54D0[cell + 1];
-            quad = Area_CellFindQuad(x, y);
+            quad = Area_CellFindQuad(D_801F54D0[cell], D_801F54D0[cell + 1]);
             if (quad == NULL) {
                 continue;
             }
@@ -42,10 +39,10 @@ NON_MATCHING void func_801F3398(void) {
             *(u32*)&prim->x1 = *(u32*)&quad->x1;
             *(u32*)&prim->x2 = *(u32*)&quad->x2;
             *(u32*)&prim->x3 = *(u32*)&quad->x3;
-            Area_ApplyTileToQuad(D_801F4544[member * 2] + D_801F54D0[cell + 2] + AREA199_TRAIL_PART_WORD, prim, 1);
-            Area_CellAddPrim(x << 16, y << 16, 0, sizeof(POLY_FT4));
+            Area_ApplyTileToQuad(AREA199_TRAIL_PART_WORD + D_801F54D0[cell + 2] + D_801F4544[member * 2], prim, 1);
+            Area_CellAddPrim(D_801F54D0[cell] << 16, D_801F54D0[cell + 1] << 16, 0, sizeof(POLY_FT4));
 
-            below = Area_CellFindQuad(x, y + (s8)D_801F4548[member]);
+            below = Area_CellFindQuad(D_801F54D0[cell], D_801F54D0[cell + 1] + (s8)D_801F4548[member]);
             if (below == NULL) {
                 continue;
             }
@@ -56,8 +53,8 @@ NON_MATCHING void func_801F3398(void) {
             *(u32*)&prim->x1 = *(u32*)&below->x1;
             *(u32*)&prim->x2 = *(u32*)&below->x2;
             *(u32*)&prim->x3 = *(u32*)&below->x3;
-            Area_ApplyTileToQuad(D_801F4545[member * 2] + D_801F54D0[cell + 2] + AREA199_TRAIL_PART_WORD, prim, 1);
-            Area_CellAddPrim(x << 16, (y + (s8)D_801F4548[member]) << 16, 0, sizeof(POLY_FT4));
+            Area_ApplyTileToQuad(AREA199_TRAIL_PART_WORD + D_801F54D0[cell + 2] + D_801F4545[member * 2], prim, 1);
+            Area_CellAddPrim(D_801F54D0[cell] << 16, (D_801F54D0[cell + 1] + (s8)D_801F4548[member]) << 16, 0, sizeof(POLY_FT4));
         }
     }
 }
