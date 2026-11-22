@@ -15,7 +15,7 @@ segments:
       - [0x1E8, c, func_801F2DE8]
       - [0x470, c, func_801F3070]
       - [0x750, c, func_801F3350]
-      - [0x8F8, c, func_801F34F8]
+      - [0x8F8, c, Area_FindMemberAt]
       - [0xA04, c, func_801F3604]
   # Placement: .data resumes after another section in the retail bytes; one segment would group both .data runs.
   - name: data

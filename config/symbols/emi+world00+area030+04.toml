@@ -80,6 +80,7 @@ Fishing_DrawCautionBox = { addr = 0x801E19CC, type = "func", source = "Draws the
 Fishing_FishStacksFull = { addr = 0x801E1C10, type = "func", source = "reports whether every fish species (ITEM_JELLYFISH through ITEM_MACKEREL) is held at the 99-item stack limit; Fishing_ChooseAction diverts to sub step 7 once before the cast while it is true" }
 g_FishingCastGaugeSteps = { addr = 0x801E1D10, source = "cast power gauge steps: idle, start, sweep, label" }
 g_FishingLureSteps = { addr = 0x801E1D20, source = "lure actor steps: idle, cast, fly, settle, float, hooked" }
+g_FishingLureCastSteps = { addr = 0x801E1D38, source = "Four cue rows of lure step and limit read by Fishing_LureCast." }
 g_FishingLureFlyCueSteps = { addr = 0x801E1D58, source = "Four cue rows of height offset and step speed for the lure fly." }
 g_FishingActorRunHandlers = { addr = 0x801E1D78, source = "Two handlers the fishing actor run dispatches through handler_index." }
 g_FishingReelGaugeSteps = { addr = 0x801E1D80, source = "reel gauge steps: idle, start, update" }

@@ -2,8 +2,7 @@
 
 /* Starts the lure cast and positions the camera over its travel height. */
 /* func_801D210C */
-#ifdef NON_MATCHING
-NON_MATCHING void Fishing_LureCast(void) {
+MATCH void Fishing_LureCast(void) {
     FishingState* work;
     s32           distance;
     s32           value;
@@ -34,8 +33,8 @@ NON_MATCHING void Fishing_LureCast(void) {
 
     g_AreaCameraStep            = 0;
     FISHING_STATE->pos_x        = 0;
-    FISHING_STATE->step_14      = *(u32*)(D_801E1D38 + FISHING_STATE->cue_index * 8);
-    FISHING_STATE->step_limit   = *(u32*)(D_801E1D3C + FISHING_STATE->cue_index * 8);
+    FISHING_STATE->step_14      = g_FishingLureCastSteps[FISHING_STATE->cue_index].step;
+    FISHING_STATE->step_limit   = g_FishingLureCastSteps[FISHING_STATE->cue_index].limit;
     FISHING_STATE->active_flags = 0;
     FISHING_STATE->state_29     = 5;
     FISHING_STATE->counter_48   = 1;
@@ -61,6 +60,3 @@ NON_MATCHING void Fishing_LureCast(void) {
     FISHING_STATE->counter_07 = g_FishingLureRow->unk_0F;
     FISHING_STATE->handler_index++;
 }
-#else
-INCLUDE_ASM(Fishing_LureCast);
-#endif

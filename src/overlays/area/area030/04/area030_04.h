@@ -119,6 +119,14 @@ typedef struct FishingCueStep {
 
 ASSERT_SIZE(FishingCueStep, 0x08);
 
+/* One row of g_FishingLureCastSteps: the 16.16 lure step and its limit, indexed by cue_index. */
+typedef struct FishingCastStep {
+    s32 step;
+    s32 limit;
+} FishingCastStep;
+
+ASSERT_SIZE(FishingCastStep, 0x08);
+
 /* The item pointer at 0x50 and the message text pointer at 0x54 are stored as
  * words and dereferenced as bytes. */
 typedef union FishingItemPointer {
@@ -379,8 +387,8 @@ extern u8                    D_801E1D0C[];
 extern Callback              g_FishingCastGaugeSteps[];
 /* D_801E1D20 */
 extern Callback              g_FishingLureSteps[];
-extern u8                    D_801E1D38[];
-extern u8                    D_801E1D3C[];
+/* D_801E1D38 */
+extern FishingCastStep       g_FishingLureCastSteps[];
 /* D_801E1D58 */
 extern FishingCueStep        g_FishingLureFlyCueSteps[];
 extern s32                   D_801E1D5C;
