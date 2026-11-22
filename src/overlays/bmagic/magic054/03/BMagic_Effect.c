@@ -15,10 +15,9 @@ MATCH void func_801EEC2C(void) {
 /* Spawns one effect slot per living battler on the selected side, marks each slot busy, and
  * otherwise applies the encounter 0x37 damage flags and advances the local work. */
 NON_MATCHING void func_801EEC98(void) {
-    BattleWorkImage* image;
-    BattleWorkImage* slot;
     PartyMember*     member;
     PartyMember*     saved;
+    PartyMember*     work;
     u32              index;
     u8               i;
 
@@ -32,6 +31,9 @@ NON_MATCHING void func_801EEC98(void) {
     TASK(PartyMember)->header.mode += 1;
     if (g_Battle.target_selector & BATTLE_TARGET_ENEMY_SIDE) {
         for (i = 0; i < 8; i++) {
+            BattleWorkImage* image;
+            BattleWorkImage* slot;
+
             if (func_801DB524((u8)(i + 3)) != 0) {
                 continue;
             }
@@ -40,18 +42,21 @@ NON_MATCHING void func_801EEC98(void) {
             image = (BattleWorkImage*)&g_BattleEnemyBattlers[i];
             slot  = (BattleWorkImage*)&D_801EC330[index & BYTE_MASK];
             *slot = *image;
-
+            work  = TASK(PartyMember);
             D_801EC330[index & BYTE_MASK].unk_06       = 1;
             D_801EC330[index & BYTE_MASK].header.mode  = 0;
             D_801EC330[index & BYTE_MASK].header.step  = 0;
             D_801EC330[index & BYTE_MASK].step_index   = 0x2C;
             D_801EC330[index & BYTE_MASK].unk_0B       = i;
-            D_801EC330[index & BYTE_MASK].target.party = TASK(PartyMember);
+            D_801EC330[index & BYTE_MASK].target.party = work;
             TASK(PartyMember)->param.unk_0B++;
             g_BattleEnemyBattlers[i].header.flags |= PARTY_MEMBER_FLAG_HANDLER_BUSY;
         }
     } else {
         for (i = 0; i < 3; i++) {
+            BattleWorkImage* image;
+            BattleWorkImage* slot;
+
             if (func_801DB524(i) != 0) {
                 continue;
             }
@@ -65,13 +70,13 @@ NON_MATCHING void func_801EEC98(void) {
             image = (BattleWorkImage*)member;
             slot  = (BattleWorkImage*)&D_801EC330[index & BYTE_MASK];
             *slot = *image;
-
+            work  = TASK(PartyMember);
             D_801EC330[index & BYTE_MASK].unk_06       = 1;
             D_801EC330[index & BYTE_MASK].header.mode  = 0;
             D_801EC330[index & BYTE_MASK].header.step  = 0;
             D_801EC330[index & BYTE_MASK].step_index   = 0x2C;
             D_801EC330[index & BYTE_MASK].unk_0B       = i;
-            D_801EC330[index & BYTE_MASK].target.party = TASK(PartyMember);
+            D_801EC330[index & BYTE_MASK].target.party = work;
             TASK(PartyMember)->param.unk_0B++;
             g_Game.members[i].header.flags |= PARTY_MEMBER_FLAG_HANDLER_BUSY;
         }
