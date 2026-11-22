@@ -1,0 +1,1 @@
+{"function": "emi/world02/area091/13@0x801F3318", "tried": "index before the color address, and a FAKE_BARRIER after the arena constant (122 rows): the retail ori a0,0x3800 stays above the clut_select/param loads, the draft loads 0x27 first", "first_diff": "0x801F3354 ori a0,a0,0x3800 against lbu v1,39(a1)", "score": "51 rows"}
