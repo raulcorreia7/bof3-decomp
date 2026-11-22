@@ -15,7 +15,7 @@ MATCH void EMI_LoadToVram(void) {
     if (*loader_step == 0) {
         g_EmiVramStep       = 0;
         packed              = g_EmiLoadArg;
-        g_EmiVramKind       = (packed >> 24) & 0x3F;
+        g_EmiVramType       = (packed >> 24) & 0x3F;
         g_EmiVramRow        = (packed >> 16) & 0x1F;
         g_EmiVramEntryCount = (packed >> 8) & 0x3F;
     }
@@ -25,7 +25,7 @@ MATCH void EMI_LoadToVram(void) {
     next_index                     = g_EmiVramStep + 1;
     g_EmiVramStep                  = next_index;
     dispatches                     = loader_step + 19;
-    dispatches[g_EmiRingSlot]      = ((dispatch + g_EmiVramKind) << 24) + (g_EmiVramRow << 16);
+    dispatches[g_EmiRingSlot]      = ((dispatch + g_EmiVramType) << 24) + (g_EmiVramRow << 16);
 
     if (next_index >= g_EmiVramEntryCount) {
         g_EmiVramStep = 0;

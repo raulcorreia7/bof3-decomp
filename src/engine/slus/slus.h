@@ -762,7 +762,7 @@ extern u16          D_8018B458;
 extern u16          D_8018B45A;
 extern CdlLOC       D_8018B490;
 /* D_8018B4A0 */
-extern u8           g_EmiVramKind;
+extern u8           g_EmiVramType;
 /* D_8018B4A4 */
 extern u8           g_EmiVramRow;
 /* D_8018B4A8 */

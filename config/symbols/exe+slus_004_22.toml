@@ -1360,7 +1360,7 @@ jtbl_8018B2EC = { addr = 0x8018B2EC, type = "Callback", source = "The switch tab
 jtbl_8018B2F4 = { addr = 0x8018B2F4, type = "Callback", source = "The switch table of EnablePAD: the jump targets of its jr dispatch." }
 jtbl_8018B2F8 = { addr = 0x8018B2F8, type = "Callback", source = "The switch table of DesablePAD: the jump targets of its jr dispatch." }
 g_SysHardwareInitialized = { addr = 0x8018B300, source = "SYS_Main clears it and SYS_InitHardware sets it after initialization" }
-g_EmiVramKind = { addr = 0x8018B4A0, type = "u8", source = "The base kind of the graphics strip EMI_LoadToVram unpacks from g_EmiLoadArg: added to the step in the top byte of each ring slot's entry." }
+g_EmiVramType = { addr = 0x8018B4A0, type = "u8", source = "The base kind of the graphics strip EMI_LoadToVram unpacks from g_EmiLoadArg: added to the step in the top byte of each ring slot's entry." }
 g_EmiVramRow = { addr = 0x8018B4A4, type = "u8", source = "The row of the graphics strip EMI_LoadToVram unpacks from g_EmiLoadArg; it advances when the step wraps at g_EmiVramEntryCount." }
 g_EmiVramEntryCount = { addr = 0x8018B4A8, type = "u8", source = "The number of entries in one row of the graphics strip EMI_LoadToVram unpacks from g_EmiLoadArg." }
 g_EmiVramStep = { addr = 0x8018B4AC, type = "u8", source = "The current entry of the graphics strip EMI_LoadToVram dispatches; it wraps to 0 at g_EmiVramEntryCount." }
