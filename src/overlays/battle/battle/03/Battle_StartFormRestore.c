@@ -7,7 +7,7 @@ MATCH void Battle_StartFormRestore(void) {
     u8*          cells;
     u8           i;
 
-    saved                                               = g_Task;
+    saved                                               = TASK(PartyMember);
     g_Task                                              = g_BattleEffectBattler;
     g_GameState                                         = &g_Game.members[TASK(PartyMember)->slot];
     TASK(PartyMember)->scale.x                          = 0;

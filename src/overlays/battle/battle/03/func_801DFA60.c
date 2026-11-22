@@ -7,7 +7,7 @@ MATCH void func_801DFA60(void) {
     u8           chance;
 
     Battle_IsPartyMemberBlocked();
-    work         = g_Task;
+    work         = TASK(PartyMember);
     count        = work->unk_09 - 1;
     work->unk_09 = count;
     if (count == 0) {

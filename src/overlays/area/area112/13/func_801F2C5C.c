@@ -7,12 +7,12 @@ MATCH void func_801F2C5C(void) {
     flag_id                        = D_801F420C[COORD_INT(TASK(Actor)->pos.x)];
     COORD_FRAC(TASK(Actor)->pos.x) = flag_id;
     if (SYS_TestFlag(g_SceneEventFlags, flag_id) != 0) {
-        Actor* task = g_Task;
+        Actor* task = TASK(Actor);
 
         COORD_INT(task->pos.z) = D_801F4210[COORD_INT(task->pos.x)] - 0x80;
         task->header.step      = 2;
     } else {
-        Actor* task = g_Task;
+        Actor* task = TASK(Actor);
 
         COORD_INT(task->pos.z) = D_801F4210[COORD_INT(task->pos.x)];
         task->header.step      = 4;

@@ -14,7 +14,7 @@ MATCH void func_801C308C(s32 arg) {
 
     seed     = D_80196014;
     index    = 1;
-    work     = g_Task;
+    work     = TASK(Actor);
     /* CLUT block base as a literal keeps the lui+ori codegen. */
     base_dst = AREA_PALETTE_WORK;
     do {

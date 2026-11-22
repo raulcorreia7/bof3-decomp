@@ -30,7 +30,7 @@ MATCH void Game_BattlePlaceMembers(void) {
             }
             TASK(Actor)->pos.x.fixed = *(s32*)((u8*)g_EncounterParty + tab);
             val                      = Area_HeightRead(TASK(Actor)->pos.x.fixed, TASK(Actor)->pos.y.fixed = *(s32*)((u8*)&g_EncounterParty[0].y + tab));
-            work                     = g_Task;
+            work                     = TASK(Actor);
             work->param.unk_0B       = 0;
             COORD_INT(work->pos.z)   = val;
             if ((g_Characters[g_GameState->character_index].status & STATUS_KO) != 0)

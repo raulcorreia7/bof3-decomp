@@ -4,7 +4,7 @@ MATCH void func_801F3960(void) {
     Actor* scratch;
     s32    armed;
 
-    scratch = g_Task;
+    scratch = TASK(Actor);
     scratch->screen_y += 0xA;
     if ((s16)scratch->screen_y >= 0xF0) {
         scratch->unk_03 = 0;

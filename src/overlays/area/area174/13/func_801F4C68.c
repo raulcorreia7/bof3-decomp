@@ -4,7 +4,7 @@ MATCH void func_801F4C68(void) {
     Actor* work;
     s8     shade;
 
-    work = g_Task;
+    work = TASK(Actor);
     work->pos.z.part.integer += 8;
     shade = work->tint.steps.delta.r;
     if (shade != -0x80) {

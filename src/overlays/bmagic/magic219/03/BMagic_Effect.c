@@ -172,7 +172,7 @@ MATCH void func_801EF3CC(void) {
 }
 
 MATCH void func_801EF530(void) {
-    PartyMember* work = g_Task;
+    PartyMember* work = TASK(PartyMember);
 
     work->unk_25              = 0x1D;
     work->pos.x.fixed         = work->unk_0C;

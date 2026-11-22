@@ -5,6 +5,6 @@ MATCH void Battle_StartScreenFade(void) {
     PartyMember* work;
 
     TASK(PartyMember)->unk_09 = 0;
-    work                      = g_Task;
+    work                      = TASK(PartyMember);
     work->header.mode++;
 }

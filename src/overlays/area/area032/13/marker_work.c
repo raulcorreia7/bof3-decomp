@@ -224,16 +224,16 @@ MATCH void func_801F3844(void) {
     Actor* base;
 
     g_CurrentActor->unk_93 = GFX_PaletteAllocFade(g_Task, 0, 0, 0, 1);
-    work                   = g_Task;
+    work                   = TASK(Actor);
     work->header.flags |= 0x20;
-    work = g_Task;
+    work = TASK(Actor);
     work->header.flags &= 0xBF;
     TASK(Actor)->tint.bytes.flags = 1;
-    slot                          = g_Task;
+    slot                          = TASK(Actor);
     slot->tint.steps.delta.b      = -0x80;
     slot->tint.steps.delta.g      = -0x80;
     slot->tint.steps.delta.r      = -0x80;
-    work                          = g_Task;
+    work                          = TASK(Actor);
     value                         = 0x2000;
     work->vx                      = value;
     value                         = work->pos.x.fixed;
@@ -256,12 +256,12 @@ MATCH void func_801F3920(void) {
     if (TASK(Actor)->tint.steps.delta.b < -0x40) {
         TASK(Actor)->tint.steps.delta.b += 4;
     }
-    work = g_Task;
+    work = TASK(Actor);
     if ((work->tint.raw & ~0xFF) == 0xC0C0C000) {
         GFX_PaletteFreeFade(g_CurrentActor->unk_93);
         TASK(Actor)->header.flags     = (TASK(Actor)->header.flags & 0xDF);
         TASK(Actor)->tint.bytes.flags = 0;
-        slot                          = g_Task;
+        slot                          = TASK(Actor);
         slot->tint.steps.delta.b      = 0;
         slot->tint.steps.delta.g      = 0;
         slot->tint.steps.delta.r      = 0;

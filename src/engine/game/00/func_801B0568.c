@@ -16,7 +16,7 @@ MATCH void func_801B0568(void) {
 
     if (!GAME_SCRIPT_ACTIVE() && !(g_AreaWalkFlags & AREA_WALK_ENTRY_PENDING) && !(func_801B6258() & BYTE_MASK) && !(Game_LeaderSwitchRequest() & BYTE_MASK) &&
         !(Game_MenuRequestField() & BYTE_MASK) && !(Game_RequestPersonalAction() & BYTE_MASK) && !(Game_CameraLookRequest() & BYTE_MASK) && !(Game_SceneCameraRequest() & BYTE_MASK)) {
-        tmp9 = g_Task;
+        tmp9 = TASK(Actor);
         tmp4 = tmp9->unk_0A;
         if (tmp4 != 0) {
             tmp9->unk_0A = (tmp4 - 1);
@@ -78,7 +78,7 @@ MATCH void func_801B0568(void) {
             TASK(Actor)->param.unk_0B = 0;
             if (g_GameRequestFlags & AREA_LOAD_FLAG_WORLD_MAP) {
                 if (g_Game.walk_flags & (AREA_WALK_TRANSITION | 0x2000)) {
-                    tmp5         = g_Task;
+                    tmp5         = TASK(Actor);
                     tmp1         = tmp5->timer;
                     tmp2         = tmp5->pos.x.fixed + (tmp5->vx * tmp1);
                     tmp10        = tmp5->pos.y.fixed + (tmp5->vy * tmp1);
@@ -98,7 +98,7 @@ MATCH void func_801B0568(void) {
                 }
             }
             Actor_RequestRoute((TASK(Actor)->direction + 8) & BYTE_MASK);
-            tmp6        = g_Task;
+            tmp6        = TASK(Actor);
             tmp6->timer = (tmp6->timer - 1);
             Actor_MovementUpdate();
             g_Game.current->u.field.mode.value = 1;
@@ -122,7 +122,7 @@ MATCH void func_801B0568(void) {
             Script_Request(TASK(Actor)->direction);
             TASK(Actor)->header.mode = 2;
             TASK(Actor)->header.step = 4;
-            tmp7                     = g_Task;
+            tmp7                     = TASK(Actor);
             tmp2                     = tmp7->direction;
             if ((tmp2 == FACING_UP) || (tmp2 == FACING_LEFT)) {
                 tmp7->unk_03 = 0;
@@ -157,7 +157,7 @@ MATCH void func_801B0568(void) {
             Script_Request(TASK(Actor)->direction);
             g_Game.current->u.field.mode.value = 3;
             TASK(Actor)->header.mode           = FIELD_TASK_MODE_CLIMB;
-            tmp8                               = g_Task;
+            tmp8                               = TASK(Actor);
             tmp3                               = tmp8->direction;
             if ((tmp3 == FACING_UP) || (tmp3 == FACING_LEFT)) {
                 tmp8->header.step = 0;

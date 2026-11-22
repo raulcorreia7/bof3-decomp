@@ -24,7 +24,7 @@ MATCH void func_801EEC5C(void) {
         PartyMember* work;
 
         slot                               = Battle_AllocEffect(1, 57);
-        work                               = g_Task;
+        work                               = TASK(PartyMember);
         g_BattleEffects[slot].header.mode  = 0;
         g_BattleEffects[slot].unk_0B       = i;
         g_BattleEffects[slot].arg.unk_09   = i + 1;
@@ -35,7 +35,7 @@ MATCH void func_801EEC5C(void) {
         PartyMember* work;
 
         slot                               = Battle_AllocEffect(1, 57);
-        work                               = g_Task;
+        work                               = TASK(PartyMember);
         g_BattleEffects[slot].header.mode  = 1;
         g_BattleEffects[slot].unk_0B       = i;
         g_BattleEffects[slot].arg.unk_09   = i + 1;
@@ -84,7 +84,7 @@ MATCH void func_801EF034(void) {
     PartyMember* dst;
 
     if (--TASK(PartyMember)->unk_09 == 0) {
-        dst                      = g_Task;
+        dst                      = TASK(PartyMember);
         src                      = g_BattleEffectBattler;
         dst->unk_0C              = 0xB;
         dst->screen_x.value      = src->screen_x.value + 0x37;
@@ -152,7 +152,7 @@ MATCH void func_801EF2AC(void) {
     PartyMember* work;
     u8           next;
 
-    work        = g_Task;
+    work        = TASK(PartyMember);
     next        = work->timer - 2;
     work->timer = next;
     if (next == 8) {
@@ -176,7 +176,7 @@ MATCH void func_801EF430(void) {
     PartyMember* dst;
 
     if (--TASK(PartyMember)->unk_09 == 0) {
-        dst                      = g_Task;
+        dst                      = TASK(PartyMember);
         src                      = g_BattleEffectBattler;
         dst->unk_0C              = 0xB;
         dst->screen_x.value      = src->screen_x.value - 0x37;

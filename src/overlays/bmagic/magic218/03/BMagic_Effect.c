@@ -22,12 +22,12 @@ MATCH void func_801EEC5C(void) {
         D_801EF790[i] = 0;
     }
     TASK(PartyMember)->facing = g_BattleEffectBattler->facing;
-    task                      = g_Task;
+    task                      = TASK(PartyMember);
     WorldPos_Copy(&task->pos, &g_BattleEffectBattler->pos);
     task->param.unk_0B = 0;
     TASK(PartyMember)->header.mode += 1;
     slot                               = Battle_AllocEffect(1, 103) & BYTE_MASK;
-    target                             = g_Task;
+    target                             = TASK(PartyMember);
     g_BattleEffects[slot].header.mode  = 0;
     g_BattleEffects[slot].arg.unk_09   = 1;
     g_BattleEffects[slot].target.party = target;

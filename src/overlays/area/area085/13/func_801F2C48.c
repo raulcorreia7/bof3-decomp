@@ -6,7 +6,7 @@ MATCH void func_801F2C48(void) {
     TASK(Actor)->timer       = 12;
     TASK(Actor)->header.mode = 1;
     TASK(Actor)->header.step = 0;
-    work                     = g_Task;
+    work                     = TASK(Actor);
     work->tint.bytes.rgb.b   = 0;
     work->tint.bytes.rgb.g   = 0;
     work->tint.bytes.rgb.r   = 0;

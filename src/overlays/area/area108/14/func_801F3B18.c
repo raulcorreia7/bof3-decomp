@@ -1,7 +1,7 @@
 #include "area108_14.h"
 
 MATCH void func_801F3B18(void) {
-    Actor* saved = g_Task;
+    Actor* saved = TASK(Actor);
     u8     i;
 
     for (i = 0; i < g_PartySize; i++) {

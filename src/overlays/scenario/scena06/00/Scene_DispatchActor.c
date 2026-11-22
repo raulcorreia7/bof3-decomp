@@ -206,7 +206,7 @@ MATCH s8 func_801FD568(s32 entry, s8 dir_x, s8 dir_y, s16 vz_start, s16 vz_delta
     u8     count;
     s32    sum;
 
-    work              = g_Task;
+    work              = TASK(Actor);
     speed             = work->vz;
     sum               = work->pos.x.fixed;
     count             = work->unk_0A - 1;

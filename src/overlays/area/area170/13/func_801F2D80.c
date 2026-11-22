@@ -23,7 +23,7 @@ MATCH void func_801F2D80(void) {
 
     if ((g_PadStates[0].pressed & g_InputMasks[MENU_INPUT_CONFIRM]) != 0) {
         SND_SEPlay(0x205);
-        work                     = g_Task;
+        work                     = TASK(Actor);
         D_801F5990[work->unk_06] = MEM_PTR(u8, work->unk_4C)[0];
         D_801448EE               = 1;
         TASK(Actor)->header.mode += 1;

@@ -7,7 +7,7 @@ MATCH void func_801F435C(void) {
         func_801F4798(&TASK(Actor)->pos, &TASK(Actor)->unk_18);
         return;
     }
-    actor = g_Task;
+    actor = TASK(Actor);
     actor->unk_18 += actor->vx;
     actor->timer -= 1;
     actor->unk_1C += actor->vy;

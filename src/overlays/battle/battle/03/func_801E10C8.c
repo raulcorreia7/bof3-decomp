@@ -26,10 +26,10 @@ MATCH void func_801E10C8(void) {
         current->chr.hp                    = current->chr.stats.max_hp;
         current->chr.willpower             = current->chr.stats.willpower;
         slot                               = Battle_AllocEffect(0, 1) & BYTE_MASK;
-        owner                              = g_Task;
+        owner                              = TASK(PartyMember);
         g_BattleEffects[slot].unk_07       = 2;
         g_BattleEffects[slot].unk_27       = 6;
-        work                               = g_Task;
+        work                               = TASK(PartyMember);
         g_BattleEffects[slot].target.party = owner;
         Script_Select((work->facing + 4) & BYTE_MASK);
         SND_SEQueueSelection(0x206);

@@ -1,7 +1,7 @@
 #include "area013_13.h"
 
 MATCH void func_801F2CEC(void) {
-    Actor* work = g_Task;
+    Actor* work = TASK(Actor);
     s32    diff = TO_COORD(28) + COORD_HALF - work->pos.x.fixed;
 
     work->direction      = diff >= 0 ? 3 : 7;

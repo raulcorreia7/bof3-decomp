@@ -4,7 +4,7 @@ MATCH void func_801F2ED8(void) {
     Actor* saved;
     u8     i;
 
-    saved = g_Task;
+    saved = TASK(Actor);
     for (i = 0; i < 6; i++) {
         g_Task                  = &g_Actors[i];
         TASK(Actor)->draw_layer = 2;

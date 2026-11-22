@@ -12,7 +12,7 @@ MATCH void func_801E8DD8(void) {
     if (slot[5] < 3u) {
         PartyMember* dst;
 
-        dst                 = g_Task;
+        dst                 = TASK(PartyMember);
         offset_x            = g_BattlePanelOffsets[g_Game.members[slot[5]].chr.character_id * 8u + slot[8] * 2u];
         dst->screen_x.value = *(u16*)((slot + 0x2Eu)) + offset_x;
         if (slot[8] < 2u) {

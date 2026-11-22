@@ -89,7 +89,7 @@ static inline void FieldActivateActor(void) {
     }
     s = &g_Actors[TASK(Actor)->param.unk_0B];
     s->header.flags |= 0x40;
-    s               = g_Task;
+    s               = TASK(Actor);
     index           = s->param.unk_0B;
     g_ScriptVars[2] = 3;
     e               = &g_Actors[index];

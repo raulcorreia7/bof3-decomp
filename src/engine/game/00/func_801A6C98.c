@@ -42,7 +42,7 @@ MATCH void func_801A6C98(u8* record) {
     SYS_InitScratchpad(src);
 
     x    = script[2] << 16;
-    work = g_Task;
+    work = TASK(Actor);
     if (script[1] != 0) {
         x |= 32768;
     }
@@ -56,11 +56,11 @@ MATCH void func_801A6C98(u8* record) {
     COORD_INT(TASK(Actor)->pos.z) = Area_HeightSample(work->pos.x.fixed, y);
     data                          = (SpawnScript*)script;
 
-    work                     = g_Task;
+    work                     = TASK(Actor);
     work->header.mode        = data->mode;
     TASK(Actor)->header.step = data->step;
     TASK(Actor)->unk_06      = (data->unk_00 >> 4) - 1;
-    tail                     = g_Task;
+    tail                     = TASK(Actor);
     shared                   = tail->range_54.table;
     tail->gravity            = 0;
     tail->unk_1C             = 0;

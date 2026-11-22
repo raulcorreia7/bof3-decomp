@@ -69,7 +69,7 @@ MATCH void func_801C329C(void) {
                 g_SpawnedActors[slot].unk_27           = 0;
                 g_SpawnedActors[slot].unk_06           = 1;
                 record                                 = g_SpawnedActors;
-                work                                   = g_Task;
+                work                                   = TASK(Actor);
                 COORD_INT(record[slot].pos.y)          = value30;
                 g_SpawnedActors[slot].link             = work->unk_05;
             }

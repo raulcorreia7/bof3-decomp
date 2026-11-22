@@ -2,7 +2,7 @@
 
 MATCH void func_801F338C(void) {
     if (SYS_TestFlag(D_80144EA0, 6)) {
-        Actor* a = g_Task;
+        Actor* a = TASK(Actor);
         s32    x = a->pos.x.fixed;
 
         a->timer       = 0;

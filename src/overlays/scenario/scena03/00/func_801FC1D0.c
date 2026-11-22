@@ -27,7 +27,7 @@ MATCH s32 func_801FC1D0(s32 member_index) {
     Area_SceneSelectRecord(0x67);
     TASK(Actor)->header.flags = 1;
 
-    task                              = g_Task;
+    task                              = TASK(Actor);
     task->pos.x.fixed                 = COORD_HALF + g_Game.members[(u8)member_index].pos.x.fixed;
     g_Actors[actor_index].walk_dest_x = task->pos.x.fixed;
     task->pos.y.fixed                 = g_Game.members[(u8)member_index].pos.y.fixed;
@@ -35,7 +35,7 @@ MATCH s32 func_801FC1D0(s32 member_index) {
     g_Actors[actor_index].unk_88      = 0;
 
     height                        = Area_HeightSample(task->pos.x.fixed, task->pos.y.fixed);
-    task2                         = g_Task;
+    task2                         = TASK(Actor);
     task2->header.mode            = 4;
     task2->pos.z.part.integer     = height;
     TASK(Actor)->header.step      = 0;
@@ -50,11 +50,11 @@ MATCH s32 func_801FC1D0(s32 member_index) {
     option_flags                                = 0x88;
     Actor_SetOptionFlags(&option_flags);
     TASK(Actor)->header.flags |= ACTOR_FLAG_SEMI_TRANSPARENT;
-    task3                   = g_Task;
+    task3                   = TASK(Actor);
     task3->tint.bytes.rgb.b = 0;
     task3->tint.bytes.rgb.g = 0;
     task3->tint.bytes.rgb.r = 0;
-    task4                   = g_Task;
+    task4                   = TASK(Actor);
     task4->tint.bytes.flags = 1;
     func_801A4914();
     return 1;

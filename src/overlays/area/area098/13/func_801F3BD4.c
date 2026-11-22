@@ -13,7 +13,7 @@ MATCH void func_801F3BD4(void) {
     Area_UpdateSpawnSlots();
     func_801F5940();
     Area_DrawYellowLine(&TASK(Actor)->unk_18, &TASK(Actor)->pos.x, 0x40);
-    task = g_Task;
+    task = TASK(Actor);
     task->vx -= 0x800;
     task->vy -= 0x200;
     task->unk_18 += task->vx;

@@ -2,7 +2,7 @@ MATCH void Area_UpdateTurn(void) {
     Actor* actor;
     s32    heading;
 
-    actor   = g_Task;
+    actor   = TASK(Actor);
     heading = actor->unk_6C;
     actor->timer--;
     actor->unk_6C = (heading + actor->vz) & 0xFFF;

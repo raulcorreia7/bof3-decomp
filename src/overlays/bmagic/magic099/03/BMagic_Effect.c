@@ -20,11 +20,11 @@ MATCH void func_801EEC88(void) {
     GFX_PaletteFreeFadeTarget(actor);
     TASK(PartyMember)->timer           = GFX_PaletteAllocFade(actor, 0, 0, 0, 1);
     slot                               = Battle_AllocEffect(1, 12) & BYTE_MASK;
-    g_BattleEffects[slot].target.party = g_Task;
+    g_BattleEffects[slot].target.party = TASK(PartyMember);
     g_BattleEffects[slot].header.mode  = 0;
     for (i = 0; i < 4; i++) {
         slot                               = Battle_AllocEffect(1, 12) & BYTE_MASK;
-        work                               = g_Task;
+        work                               = TASK(PartyMember);
         g_BattleEffects[slot].unk_03       = i;
         g_BattleEffects[slot].header.mode  = 1;
         g_BattleEffects[slot].unk_0B       = i * 4;
@@ -32,7 +32,7 @@ MATCH void func_801EEC88(void) {
     }
     for (i = 0; i < 4; i++) {
         slot                               = Battle_AllocEffect(1, 12) & BYTE_MASK;
-        g_BattleEffects[slot].target.party = g_Task;
+        g_BattleEffects[slot].target.party = TASK(PartyMember);
         g_BattleEffects[slot].unk_03       = i;
         g_BattleEffects[slot].header.mode  = 2;
     }
@@ -55,10 +55,10 @@ MATCH void func_801EEE70(void) {
 MATCH void func_801EEF98(void) {
     PartyMember* work;
 
-    work = g_Task;
+    work = TASK(PartyMember);
     if (work->param.unk_0B != 0) {
         work->unk_09      = 8;
-        work              = g_Task;
+        work              = TASK(PartyMember);
         work->header.mode = work->header.mode + 1;
     }
 }
@@ -111,9 +111,9 @@ MATCH void func_801EF44C(void) {
     PartyMember* active;
     u8           count;
 
-    work = g_Task;
+    work = TASK(PartyMember);
     work->param.unk_0B++;
-    work        = g_Task;
+    work        = TASK(PartyMember);
     count       = work->timer - 1;
     work->timer = count;
     if (count == 0) {
@@ -126,7 +126,7 @@ MATCH void func_801EF44C(void) {
 MATCH void func_801EF4C4(void) {
     PartyMember* work;
 
-    work = g_Task;
+    work = TASK(PartyMember);
     D_801F09B0[work->header.step]();
     Battle_ProjectRange();
     if (TASK(PartyMember)->header.flags != 0) {
@@ -147,7 +147,7 @@ MATCH void func_801EF554(void) {
     TASK(PartyMember)->unk_09 = 0;
     TASK(PartyMember)->timer  = 0;
 
-    work                             = g_Task;
+    work                             = TASK(PartyMember);
     temp                             = work->unk_03 << 5;
     angle_cell                       = &D_1F800004;
     angle                            = (temp & 0x7F) << 5;
@@ -156,7 +156,7 @@ MATCH void func_801EF554(void) {
     g_ScratchPad                     = 0x28;
 
     velocity          = rcos(angle) * g_ScratchPad;
-    work              = g_Task;
+    work              = TASK(PartyMember);
     work->pos.x.fixed = BATTLE_ACTIVE_WORK->pos.x.fixed + velocity;
 
     velocity                       = rsin(*angle_cell) * g_ScratchPad;
@@ -183,7 +183,7 @@ MATCH void func_801EF7D8(void) {
 
     TASK(PartyMember)->param.unk_0B++;
 
-    work                             = g_Task;
+    work                             = TASK(PartyMember);
     counter                          = work->unk_0C + 1;
     FAKE_VOLATILE(s32, work->unk_0C) = counter;
     angle                            = (counter & 0x7F) << 5;
@@ -192,7 +192,7 @@ MATCH void func_801EF7D8(void) {
     g_ScratchPad                     = 0x28;
 
     velocity          = rcos(angle) * g_ScratchPad;
-    work              = g_Task;
+    work              = TASK(PartyMember);
     work->pos.x.fixed = BATTLE_ACTIVE_WORK->pos.x.fixed + velocity;
 
     velocity                       = rsin(*angle_cell) * g_ScratchPad;
@@ -233,7 +233,7 @@ MATCH void func_801F0090(void) {
     TASK(PartyMember)->unk_09       = 0;
     TASK(PartyMember)->timer        = 0;
 
-    work                             = g_Task;
+    work                             = TASK(PartyMember);
     counter                          = (work->unk_03 << 5) + 0x10;
     angle                            = (counter & 0x7F) << 5;
     FAKE_VOLATILE(s32, work->unk_0C) = counter;
@@ -254,12 +254,12 @@ MATCH void func_801F0090(void) {
 MATCH void func_801F01AC(void) {
     PartyMember* work;
 
-    work = g_Task;
+    work = TASK(PartyMember);
     if (work->timer < 16) {
         work->timer += 2;
     } else {
         work->unk_09 = 60;
-        work         = g_Task;
+        work         = TASK(PartyMember);
         work->header.step++;
     }
 }
@@ -278,7 +278,7 @@ MATCH void func_801F0314(void) {
 
     TASK(PartyMember)->param.unk_0B++;
 
-    work                             = g_Task;
+    work                             = TASK(PartyMember);
     counter                          = work->unk_0C + 1;
     FAKE_VOLATILE(s32, work->unk_0C) = counter;
     angle                            = (counter & 0x7F) << 5;
@@ -287,11 +287,11 @@ MATCH void func_801F0314(void) {
     g_ScratchPad                     = 0x18;
 
     velocity          = rcos(angle) * g_ScratchPad;
-    work              = g_Task;
+    work              = TASK(PartyMember);
     work->pos.x.fixed = BATTLE_ACTIVE_WORK->pos.x.fixed + velocity;
 
     velocity             = rsin(*angle_cell) * g_ScratchPad;
-    scratch              = g_Task;
+    scratch              = TASK(PartyMember);
     scratch->pos.y.fixed = BATTLE_ACTIVE_WORK->pos.y.fixed + velocity;
     scratch->timer -= 2;
 

@@ -4,7 +4,7 @@ MATCH void func_801B8A0C(void) {
     Actor* work;
 
     g_Game.current->u.field.counter.value = 3;
-    work                                  = g_Task;
+    work                                  = TASK(Actor);
     work->direction                       = work->param.unk_0B;
     Script_Request(TASK(Actor)->direction);
     g_Game.current->u.field.mode.value = 0;

@@ -72,7 +72,7 @@ MATCH void func_801F7050(void) {
     u8     i;
 
     /* FAKE: the second pointer reproduces retail's copy of the scratch pointer (move into a2). */
-    work       = g_Task;
+    work       = TASK(Actor);
     D_800E4C1E = 0xC0;
     actor      = work;
     actor->vz  = 0;
@@ -273,7 +273,7 @@ MATCH void func_801F7A30(void) {
 
     Scene_PlaceAtLead();
     func_801F8358();
-    work         = g_Task;
+    work         = TASK(Actor);
     work->unk_06 = 1;
     work->vx     = 40;
     TASK(Actor)->header.step += 1;

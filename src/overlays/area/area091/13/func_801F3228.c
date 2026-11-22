@@ -10,7 +10,7 @@ MATCH void func_801F3228(void) {
     u16*   colors;
 
     if (g_AreaCameraMoving == 0) {
-        task                     = g_Task;
+        task                     = TASK(Actor);
         task->pos.x.fixed        = TO_COORD_HALF(31);
         task->voice_flags.raw    = 0;
         task->pos.y.fixed        = TO_COORD(26);

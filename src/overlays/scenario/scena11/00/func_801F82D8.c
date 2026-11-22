@@ -17,9 +17,9 @@ MATCH void func_801F82D8(s32 slot) {
     TASK(Actor)->unk_2B       = (TASK(Actor)->unk_2B + 1);
     TASK(Actor)->unk_48       = 0;
 
-    work                    = g_Task;
+    work                    = TASK(Actor);
     work->tint.bytes.rgb.r  = 0;
-    other                   = g_Task;
+    other                   = TASK(Actor);
     work->vz                = 0;
     work->gravity           = -8;
     other->tint.bytes.rgb.g = 0;

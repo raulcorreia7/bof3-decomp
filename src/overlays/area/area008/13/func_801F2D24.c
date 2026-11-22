@@ -13,7 +13,7 @@ MATCH void func_801F2D24(void) {
         TASK(Actor)->header.mode = 6;
         return;
     }
-    previous                  = g_Task;
+    previous                  = TASK(Actor);
     WORLD00_AREA008_STATE_PTR = (volatile Actor*)&g_BattlePartyBattlers[1];
     TASK_SET(&g_BattlePartyBattlers[1]);
     if (D_80146028 == 4 && D_8014601A == 1) {

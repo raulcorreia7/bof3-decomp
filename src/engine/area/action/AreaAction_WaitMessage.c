@@ -5,7 +5,7 @@ MATCH void AreaAction_WaitMessage(void) {
     Actor* work;
 
     if (g_GameStateIndex != GAME_REQUEST_MESSAGE) {
-        work = g_Task;
+        work = TASK(Actor);
         if (!(work->option_flags & ACTOR_OPT_ROUTE_LOCKED)) {
             Script_DispatchSelector(work->direction);
         }

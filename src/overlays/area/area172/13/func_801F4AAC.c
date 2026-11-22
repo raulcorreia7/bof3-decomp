@@ -4,7 +4,7 @@ MATCH void func_801F4AAC(void) {
     Actor* work;
     TASK(Actor)->header.flags |= ACTOR_FLAG_SEMI_TRANSPARENT;
     TASK(Actor)->tint.bytes.flags = 1;
-    work                          = g_Task;
+    work                          = TASK(Actor);
     work->tint.steps.delta.b      = -0x40;
     work->tint.steps.delta.g      = -0x40;
     work->tint.steps.delta.r      = -0x40;

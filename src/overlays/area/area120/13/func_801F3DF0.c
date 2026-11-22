@@ -7,7 +7,7 @@ MATCH void func_801F3DF0(void) {
     s32 v;
 
     TASK(Actor)->timer++;
-    t     = g_Task;
+    t     = TASK(Actor);
     timer = t->timer;
     a     = 8;
     v     = a - timer;

@@ -39,7 +39,7 @@ MATCH void func_801EECCC(void) {
     counter = 0;
     do {
         slot                               = Battle_AllocEffect(1, 0x1B) & BYTE_MASK;
-        g_BattleEffects[slot].target.party = g_Task;
+        g_BattleEffects[slot].target.party = TASK(PartyMember);
         g_BattleEffects[slot].header.mode  = 0;
         g_BattleEffects[slot].unk_04       = counter;
         g_BattleEffects[slot].arg.unk_09   = (((counter >> 2) * 3) << 2) + 1;
@@ -130,7 +130,7 @@ MATCH void func_801EF3DC(void) {
         TASK(PartyMember)->pos.y.fixed  = g_BattleEffectBattler->pos.y.fixed;
         TASK(PartyMember)->pos.z.fixed  = g_BattleEffectBattler->pos.z.fixed + 0x01800000;
         TASK(PartyMember)->param.unk_0B = TASK(PartyMember)->unk_04 * 0x4 & 0x3F;
-        work                            = g_Task;
+        work                            = TASK(PartyMember);
         value                           = D_801EFCC0[work->unk_04];
         work->unk_10                    = 0x60;
         work->unk_14                    = 0x20;
@@ -148,7 +148,7 @@ MATCH void func_801EF4DC(void) {
 
     TASK(PartyMember)->param.unk_0B += 8;
     wave                       = ((rsin((g_FrameCount & 0x1F) << 7) << 5) >> 12) + 384;
-    effect                     = g_Task;
+    effect                     = TASK(PartyMember);
     effect->pos.z.part.integer = (u16)g_BattleEffectBattler->pos.z.part.integer + wave;
     timer                      = effect->timer + 2;
     effect->timer              = timer;
@@ -166,7 +166,7 @@ MATCH void func_801EF580(void) {
 
     TASK(PartyMember)->param.unk_0B += 8;
     wave                       = ((rsin((g_FrameCount & 0x1F) << 7) << 5) >> 12) + 384;
-    effect                     = g_Task;
+    effect                     = TASK(PartyMember);
     effect->pos.z.part.integer = (u16)g_BattleEffectBattler->pos.z.part.integer + wave;
     ticksRemaining             = effect->unk_09 - 1;
     effect->unk_09             = ticksRemaining;
@@ -176,9 +176,9 @@ MATCH void func_801EF580(void) {
     if (TASK(PartyMember)->unk_04 == 0) {
         SND_SEQueueSelection(EMI_SE_ID(SND_BANK_COMMON, 1));
     }
-    effectForFacing               = g_Task;
+    effectForFacing               = TASK(PartyMember);
     effectForFacing->param.unk_0B = D_801EFCE0[effectForFacing->facing];
-    effectForSetup                = g_Task;
+    effectForSetup                = TASK(PartyMember);
     effectForSetup->unk_10        = 128;
     effectForSetup->unk_14        = 128;
     effectForSetup->unk_09        = 16;
@@ -191,7 +191,7 @@ MATCH void func_801EF690(void) {
     PartyMember* work;
 
     TASK(PartyMember)->param.unk_0B += 4;
-    work = g_Task;
+    work = TASK(PartyMember);
     work->unk_10 += work->unk_1C;
     counter      = work->unk_09 - 1;
     work->unk_09 = counter;
@@ -206,7 +206,7 @@ MATCH void func_801EF700(void) {
     PartyMember* work;
 
     TASK(PartyMember)->param.unk_0B += TASK(PartyMember)->timer >> 1;
-    work         = g_Task;
+    work         = TASK(PartyMember);
     counter      = work->timer - 1;
     value        = work->unk_1C - 2;
     work->timer  = counter;

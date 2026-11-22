@@ -5,7 +5,7 @@ MATCH void func_801A4914(void) {
     u8     flags;
 
     TASK(Actor)->script_record = 0xFF;
-    work                       = g_Task;
+    work                       = TASK(Actor);
     flags                      = work->option_flags;
     if (flags & ACTOR_OPT_ROUTE_LOCKED) {
         work->mirror = (flags >> 4) & 0x1;

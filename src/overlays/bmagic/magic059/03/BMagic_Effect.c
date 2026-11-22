@@ -112,7 +112,7 @@ MATCH void func_801EF118(void) {
     s16*         cell;
     PartyMember* work;
 
-    work                           = g_Task;
+    work                           = TASK(PartyMember);
     cell                           = (s16*)&D_1F80000E;
     angle                          = work->unk_09 + 1;
     work->unk_09                   = angle;
@@ -162,12 +162,12 @@ MATCH void func_801EF4C4(void) {
 MATCH void func_801EF504(void) {
     PartyMember* work;
 
-    work = g_Task;
+    work = TASK(PartyMember);
     work->unk_09++;
-    work = g_Task;
+    work = TASK(PartyMember);
     work->timer += 2;
     if (work->timer == 32) {
-        work = g_Task;
+        work = TASK(PartyMember);
         work->header.step++;
     }
 }
@@ -239,12 +239,12 @@ MATCH void func_801F0018(void) {
 MATCH void func_801F0070(void) {
     PartyMember* work;
 
-    work = g_Task;
+    work = TASK(PartyMember);
     work->unk_09++;
-    work = g_Task;
+    work = TASK(PartyMember);
     work->timer++;
     if (work->timer == 32) {
-        work = g_Task;
+        work = TASK(PartyMember);
         work->header.step++;
     }
 }
@@ -259,9 +259,9 @@ MATCH void func_801F012C(void) {
     PartyMember* work;
     u8           count;
 
-    work = g_Task;
+    work = TASK(PartyMember);
     work->unk_09++;
-    work        = g_Task;
+    work        = TASK(PartyMember);
     count       = work->timer - 1;
     work->timer = count;
     if (count == 0) {

@@ -8,7 +8,7 @@ MATCH void Area_RaiseHudBanner(void) {
     Actor* work;
     s16    origin_y;
 
-    work           = g_Task;
+    work           = TASK(Actor);
     origin_y       = work->screen_y - 0xA;
     work->screen_y = origin_y;
     if (origin_y < 201) {

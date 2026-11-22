@@ -4,7 +4,7 @@ MATCH void func_801F3DC0(void) {
     Actor* work;
     u16    screen_y;
 
-    work           = g_Task;
+    work           = TASK(Actor);
     screen_y       = work->screen_y + 0x10;
     work->screen_y = screen_y;
     if ((s16)screen_y >= 0xC0) {

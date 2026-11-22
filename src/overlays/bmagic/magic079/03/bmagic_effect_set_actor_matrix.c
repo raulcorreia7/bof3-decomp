@@ -15,7 +15,7 @@ MATCH void func_801EEE64(void) {
 }
 
 MATCH void func_801EEEE4(void) {
-    PartyMember* work = g_Task;
+    PartyMember* work = TASK(PartyMember);
     u8           timer;
 
     work->pos.z.part.integer -= 0x40;
@@ -62,9 +62,9 @@ MATCH void func_801EEFB8(void) {
 MATCH void func_801EF048(void) {
     PartyMember* work;
 
-    work               = g_Task;
+    work               = TASK(PartyMember);
     work->timer        = work->timer - 1;
-    work               = g_Task;
+    work               = TASK(PartyMember);
     work->param.unk_0B = work->param.unk_0B - 1;
     if (work->param.unk_0B == 0) {
         Effect_Reset();
@@ -95,7 +95,7 @@ MATCH void func_801EF1DC(void) {
     PartyMember* work;
     u8           timer;
 
-    work  = g_Task;
+    work  = TASK(PartyMember);
     timer = work->unk_09 - 1;
     COORD_INT(work->pos.z) -= 64;
     work->unk_09 = timer;
@@ -140,9 +140,9 @@ MATCH void func_801EF2BC(void) {
 MATCH void func_801EF348(void) {
     PartyMember* work;
 
-    work               = g_Task;
+    work               = TASK(PartyMember);
     work->timer        = work->timer + 1;
-    work               = g_Task;
+    work               = TASK(PartyMember);
     work->param.unk_0B = work->param.unk_0B - 1;
     if (work->param.unk_0B == 0) {
         Effect_Reset();
@@ -187,9 +187,9 @@ MATCH void func_801EFD84(void) {
     PartyMember* work;
     PartyMember* active;
 
-    work         = g_Task;
+    work         = TASK(PartyMember);
     work->timer  = work->timer - 1;
-    work         = g_Task;
+    work         = TASK(PartyMember);
     work->unk_09 = work->unk_09 - 1;
     if (work->unk_09 == 4) {
         active               = BATTLE_ACTIVE_WORK;
@@ -233,9 +233,9 @@ MATCH void func_801EFFB0(void) {
     PartyMember* work;
     PartyMember* active;
 
-    work         = g_Task;
+    work         = TASK(PartyMember);
     work->timer  = work->timer + 1;
-    work         = g_Task;
+    work         = TASK(PartyMember);
     work->unk_09 = work->unk_09 - 1;
     if (work->unk_09 == 4) {
         active               = BATTLE_ACTIVE_WORK;

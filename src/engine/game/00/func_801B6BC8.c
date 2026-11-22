@@ -60,7 +60,7 @@ MATCH void func_801B6BC8(void) {
             TASK(Actor)->unk_03 = 5;
             return;
         }
-        work = g_Task;
+        work = TASK(Actor);
         if (work->timer != 0) {
             delay = g_GameState->u.field.wait;
             if (delay != 0) {

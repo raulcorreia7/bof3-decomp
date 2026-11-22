@@ -29,7 +29,7 @@ MATCH void func_801D2064(void) {
 
     TASK(SceneBandEffect)->ticker++;
 
-    work                                    = g_Task;
+    work                                    = TASK(SceneBandEffect);
     counter                                 = work->orbit_counter + 1;
     FAKE_VOLATILE(s32, work->orbit_counter) = counter;
     angle                                   = SCE10EFF_ORBIT_ANGLE(counter);
@@ -38,11 +38,11 @@ MATCH void func_801D2064(void) {
     g_ScratchPad                            = 0x18;
 
     velocity     = rcos(angle) * g_ScratchPad;
-    work         = g_Task;
+    work         = TASK(SceneBandEffect);
     work->proj.x = D_801D2744->proj.x + velocity;
 
     velocity        = rsin(*angle_cell) * g_ScratchPad;
-    scratch         = g_Task;
+    scratch         = TASK(SceneBandEffect);
     scratch->proj.y = D_801D2744->proj.y + velocity;
     scratch->band -= 2;
 

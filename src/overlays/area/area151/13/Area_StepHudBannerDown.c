@@ -6,7 +6,7 @@ MATCH void Area_StepHudBannerDown(void) {
     /* FAKE: value pinned to v0. */
     s32    armed;
 
-    scratch = g_Task;
+    scratch = TASK(Actor);
     scratch->screen_y += 0xA;
     if ((s16)scratch->screen_y >= 0xF0) {
         scratch->unk_03 = 0;

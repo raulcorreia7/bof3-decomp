@@ -4,7 +4,7 @@ MATCH s32 func_801C5474(void) {
     Actor* work;
     Actor* state;
     u8     countdown;
-    work      = g_Task;
+    work      = TASK(Actor);
     countdown = work->timer;
     if (countdown == 0) {
         Script_Request(work->direction);
@@ -18,7 +18,7 @@ MATCH s32 func_801C5474(void) {
     }
     work->timer = (countdown - 1);
     Actor_Move();
-    state = g_Task;
+    state = TASK(Actor);
     if (state->timer == state->unk_0A) {
         GFX_PaletteLoad(((state->unk_05 << 6) + GAME_PALETTE_STAGE), 0);
     }

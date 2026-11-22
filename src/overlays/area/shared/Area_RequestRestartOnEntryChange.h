@@ -10,7 +10,7 @@ MATCH void Area_RequestRestartOnEntryChange(void) {
 
     Actor_SetScreenOrigin();
     if (g_GameEntryState != 1) {
-        work = g_Task;
+        work = TASK(Actor);
         step = work->param.unk_0B;
         if (step == work->option_flags && g_GameStateIndex != GAME_REQUEST_AREA_CHANGE) {
             if (step != 1) {

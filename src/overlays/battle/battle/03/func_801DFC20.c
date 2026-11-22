@@ -5,7 +5,7 @@ MATCH void func_801DFC20(void) {
     PartyMember*          scratch_work;
 
     g_Game.current->u.turn.unk_0B  = TASK(PartyMember)->unk_4B;
-    scratch_work                   = g_Task;
+    scratch_work                   = TASK(PartyMember);
     work                           = g_Game.current;
     work->unk_134                  = scratch_work->unk_58;
     scratch_work->unk_04           = 0;

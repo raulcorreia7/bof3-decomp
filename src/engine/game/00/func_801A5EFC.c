@@ -24,7 +24,7 @@ MATCH void func_801A5EFC(u8* script) {
 
     /* The outer shadow assignment forms the slot offset before the position
      * flag test, as retail schedules it. */
-    work                           = g_Task;
+    work                           = TASK(Actor);
     g_Actors[*counter].walk_dest_x = work->pos.x.fixed = (script[7] << 16) | (script[6] != 0 ? 0x8000 : 0);
     /* FAKE: forces the counter re-read before the next shadow store. */
     FAKE_BARRIER();

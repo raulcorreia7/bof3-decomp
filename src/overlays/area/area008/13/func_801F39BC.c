@@ -7,7 +7,7 @@ MATCH void func_801F39BC(void) {
 
     s = &g_Actors[TASK(Actor)->param.unk_0B];
     s->header.flags |= ACTOR_FLAG_HIDDEN;
-    s     = g_Task;
+    s     = TASK(Actor);
     index = s->param.unk_0B;
     e     = &g_Actors[index];
     TASK_SET(e);

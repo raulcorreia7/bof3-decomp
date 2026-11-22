@@ -8,6 +8,6 @@ MATCH void Area_Update(void) {
         TASK(Actor)->header.step = 3;
     }
 
-    scratch = g_Task;
+    scratch = TASK(Actor);
     Area_DrawHud(0x10, scratch->screen_x);
 }

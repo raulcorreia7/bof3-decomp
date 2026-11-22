@@ -20,7 +20,7 @@ MATCH void func_801EEC98(void) {
 
     TASK(PartyMember)->facing = g_BattleEffectBattler->facing;
     battler                   = g_BattleEffectBattler;
-    task                      = g_Task;
+    task                      = TASK(PartyMember);
     WorldPos_Copy(&task->pos, &battler->pos);
     task->param.unk_0B        = 0;
     TASK(PartyMember)->unk_09 = 0;
@@ -29,7 +29,7 @@ MATCH void func_801EEC98(void) {
     func_801EF490();
     slot = Battle_AllocEffect(1, 70) & BYTE_MASK;
     Effect_CopyActiveBattlerToSlot(slot);
-    owner                              = g_Task;
+    owner                              = TASK(PartyMember);
     g_BattleEffects[slot].header.mode  = 0;
     g_BattleEffects[slot].header.step  = 0;
     g_BattleEffects[slot].unk_06       = 1;
@@ -37,7 +37,7 @@ MATCH void func_801EEC98(void) {
     g_BattleEffects[slot].target.party = owner;
     TASK(PartyMember)->param.unk_0B++;
     slot                               = Battle_AllocEffect(1, 70) & BYTE_MASK;
-    parent                             = g_Task;
+    parent                             = TASK(PartyMember);
     g_BattleEffects[slot].header.mode  = 1;
     g_BattleEffects[slot].target.party = parent;
     g_BattleEffects[slot].unk_03       = TASK(PartyMember)->unk_03;
@@ -236,7 +236,7 @@ MATCH void func_801EFAD4(void) {
 MATCH void func_801EFBEC(void) {
     PartyMember* work;
 
-    work                      = g_Task;
+    work                      = TASK(PartyMember);
     work->pos.x.fixed         = g_Battle.selected_actor->pos.x.fixed;
     work->pos.y.fixed         = g_Battle.selected_actor->pos.y.fixed;
     work->pos.z.fixed         = g_Battle.selected_actor->pos.z.fixed + 0x800000;

@@ -10,7 +10,7 @@ MATCH void func_801F6FAC(void) {
     Actor* work;
 
     Area_SceneSelectRecord(0x1EA);
-    work                      = g_Task;
+    work                      = TASK(Actor);
     work->unk_48              = 0;
     work->pos.z.part.integer  = 0x64;
     TASK(Actor)->active_flags = 0;

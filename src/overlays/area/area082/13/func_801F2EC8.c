@@ -1,7 +1,7 @@
 #include "area082_13.h"
 
 MATCH void func_801F2EC8(void) {
-    Actor* work = g_Task;
+    Actor* work = TASK(Actor);
 
     work->vy += 8192;
     work->pos.y.fixed += work->vy;

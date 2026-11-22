@@ -1,7 +1,7 @@
 #include "area120_13.h"
 
 MATCH void func_801F2F84(void) {
-    Actor* actor = g_Task;
+    Actor* actor = TASK(Actor);
     RECT   rect;
 
     actor->timer--;

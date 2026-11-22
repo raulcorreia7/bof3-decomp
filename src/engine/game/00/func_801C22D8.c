@@ -9,7 +9,7 @@ MATCH void func_801C22D8(void) {
         TASK(Actor)->header.mode = 1;
         return;
     }
-    work = g_Task;
+    work = TASK(Actor);
     dx   = D_801462A0 - work->pos.x.fixed;
     dy   = D_801462A4 - work->pos.y.fixed;
     if (dx < 0 && dy < 0) {

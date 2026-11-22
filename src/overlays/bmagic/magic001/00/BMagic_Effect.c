@@ -32,7 +32,7 @@ MATCH void func_801EECC4(void) {
         row                     = (BattleWorkImage*)&g_BattleEnemyBattlers[enemy];
         *(BattleWorkImage*)slot = *row;
     }
-    work                                            = g_Task;
+    work                                            = TASK(PartyMember);
     g_BattleEffects[index & BYTE_MASK].unk_06       = 1;
     g_BattleEffects[index & BYTE_MASK].header.mode  = 0;
     g_BattleEffects[index & BYTE_MASK].header.step  = 0;
@@ -42,7 +42,7 @@ MATCH void func_801EECC4(void) {
     TASK(PartyMember)->unk_27                       = Battle_CopyCellPalette(g_BattleEffectBattler);
     TASK(PartyMember)->unk_28                       = g_BattleEffectBattler->unk_28;
     TASK(PartyMember)->unk_24                       = g_BattleEffectBattler->unk_24;
-    Battle_SetCellPaletteStp(g_Task);
+    Battle_SetCellPaletteStp(TASK(PartyMember));
     g_BattleEffectBattler->header.flags |= PARTY_MEMBER_FLAG_HANDLER_BUSY;
     TASK(PartyMember)->header.mode += 1;
 }
@@ -100,7 +100,7 @@ MATCH void func_801EF280(void) {
     PartyMember* work;
     u8           timer;
 
-    work         = g_Task;
+    work         = TASK(PartyMember);
     timer        = work->unk_09 - 1;
     work->unk_09 = timer;
     work->unk_14 += work->unk_20;
@@ -129,7 +129,7 @@ MATCH void func_801EF37C(void) {
     if (Script_AnimStepOnce() & BYTE_MASK) {
         Battle_PlayActiveBattlerSE(2, 0);
         func_801E257C(g_Battle.active_battler, 11);
-        work         = g_Task;
+        work         = TASK(PartyMember);
         work->unk_14 = 0x140;
         work->timer  = 9;
         work->unk_20 = -0x40;
@@ -138,7 +138,7 @@ MATCH void func_801EF37C(void) {
 }
 
 MATCH void func_801EF408(void) {
-    PartyMember* work  = g_Task;
+    PartyMember* work  = TASK(PartyMember);
     u8           timer = work->timer - 1;
     s32          value = work->unk_14 + work->unk_20;
     work->timer        = timer;
@@ -191,7 +191,7 @@ MATCH void func_801EF5CC(void) {
         TASK(PartyMember)->unk_5F -= 16;
     }
     if ((s8)TASK(PartyMember)->unk_5D == -128) {
-        work   = g_Task;
+        work   = TASK(PartyMember);
         source = BATTLE_ACTIVE_WORK;
         WorldPos_Copy(&work->pos, &source->pos);
         work->header.step += 1;
@@ -240,7 +240,7 @@ MATCH void func_801EF78C(void) {
         row                     = (BattleWorkImage*)&g_BattleEnemyBattlers[enemy];
         *(BattleWorkImage*)slot = *row;
     }
-    work                                            = g_Task;
+    work                                            = TASK(PartyMember);
     g_BattleEffects[index & BYTE_MASK].unk_06       = 1;
     g_BattleEffects[index & BYTE_MASK].header.mode  = 0;
     g_BattleEffects[index & BYTE_MASK].header.step  = 0;
@@ -250,7 +250,7 @@ MATCH void func_801EF78C(void) {
     TASK(PartyMember)->unk_27                       = Battle_CopyCellPalette(g_BattleEffectBattler);
     TASK(PartyMember)->unk_28                       = g_BattleEffectBattler->unk_28;
     TASK(PartyMember)->unk_24                       = g_BattleEffectBattler->unk_24;
-    Battle_SetCellPaletteStp(g_Task);
+    Battle_SetCellPaletteStp(TASK(PartyMember));
     Battle_ClearCellPaletteEntry(g_Task);
     g_BattleEffectBattler->header.flags |= PARTY_MEMBER_FLAG_HANDLER_BUSY;
     TASK(PartyMember)->header.mode += 1;
@@ -377,7 +377,7 @@ MATCH void func_801EFFCC(void) {
         TASK(PartyMember)->timer = timer - 2;
     }
     if ((s8)TASK(PartyMember)->unk_5D == -128) {
-        work   = g_Task;
+        work   = TASK(PartyMember);
         source = BATTLE_ACTIVE_WORK;
         WorldPos_Copy(&work->pos, &source->pos);
         work->header.step += 1;

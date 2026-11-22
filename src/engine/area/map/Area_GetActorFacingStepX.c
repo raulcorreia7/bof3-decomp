@@ -15,7 +15,7 @@ MATCH s32 Area_GetActorFacingStepX(void) {
     s32    offset;
     s8     found;
 
-    work   = g_Task;
+    work   = TASK(Actor);
     found  = 0;
     step_x = g_FacingSteps[work->direction].x;
     step_y = g_FacingStepY[work->direction * 2];

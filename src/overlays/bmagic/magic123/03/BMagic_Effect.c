@@ -65,7 +65,7 @@ MATCH void func_801EEDAC(void) {
     TASK(PartyMember)->param.unk_0B = 0;
     for (i = 0; i < BMAGIC_EFFECT_COUNT; i++) {
         slot                                   = BMagic_AllocEffect();
-        owner                                  = g_Task;
+        owner                                  = TASK(PartyMember);
         BMAGIC_EFFECT_SLOTS[slot].header.mode  = i & 1;
         BMAGIC_EFFECT_SLOTS[slot].arg.unk_09   = (i >> 2) * 3 + 1;
         BMAGIC_EFFECT_SLOTS[slot].target.party = owner;

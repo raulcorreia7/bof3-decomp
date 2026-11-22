@@ -17,14 +17,14 @@ MATCH void func_801EEC70(void) {
     u16*         row_src;
 
     Battle_CenterCamera();
-    task               = g_Task;
+    task               = TASK(PartyMember);
     task->param.unk_0B = 0;
     task->pos.z.fixed += TO_COORD(0x200);
     TASK(PartyMember)->unk_09 = 0;
     TASK(PartyMember)->header.mode += 1;
     for (i = 0; i < 16; i++) {
         slot                               = Battle_AllocEffect(1, 89);
-        work                               = g_Task;
+        work                               = TASK(PartyMember);
         g_BattleEffects[slot].header.mode  = 0;
         g_BattleEffects[slot].unk_0B       = i;
         g_BattleEffects[slot].arg.unk_09   = i * 8 + 1;
@@ -59,7 +59,7 @@ MATCH void func_801EEE14(void) {
             for (i = 0; i < 8; i++) {
                 if (!Battle_SlotIsBlocked((u8)(i + BATTLE_PARTY_CHARACTERS_COUNT))) {
                     slot                               = Battle_AllocEffect(1, 89);
-                    work                               = g_Task;
+                    work                               = TASK(PartyMember);
                     g_BattleEffects[slot].header.mode  = 1;
                     g_BattleEffects[slot].unk_03       = i;
                     g_BattleEffects[slot].unk_04       = 2;
@@ -74,7 +74,7 @@ MATCH void func_801EEE14(void) {
             for (i = 0; i < BATTLE_PARTY_CHARACTERS_COUNT; i++) {
                 if (!Battle_SlotIsBlocked(i)) {
                     slot                               = Battle_AllocEffect(1, 89);
-                    work                               = g_Task;
+                    work                               = TASK(PartyMember);
                     g_BattleEffects[slot].header.mode  = 1;
                     g_BattleEffects[slot].unk_04       = 2;
                     g_BattleEffects[slot].unk_03       = i;
@@ -132,7 +132,7 @@ MATCH void func_801EF1AC(void) {
         TASK(PartyMember)->unk_5F = tint;
         TASK(PartyMember)->unk_2A = 0;
         TASK(PartyMember)->unk_29 = 4;
-        work                      = g_Task;
+        work                      = TASK(PartyMember);
         work->unk_2B              = 0;
         work->unk_2C.value        = 0;
         Script_Select(D_801EF9C0[TASK(PartyMember)->param.unk_0B]);
@@ -147,11 +147,11 @@ MATCH void func_801EF3BC(void) {
     TASK(PartyMember)->unk_5D += 4;
     TASK(PartyMember)->unk_5E += 4;
     TASK(PartyMember)->unk_5F += 4;
-    work                           = g_Task;
+    work                           = TASK(PartyMember);
     g_ScratchPad.cells.words[0]    = (++work->unk_0C & 0x7F) << 5;
     TASK(PartyMember)->pos.x.fixed = g_BattleEffectBattler->pos.x.fixed + FIXED_MUL(rsin(g_ScratchPad.cells.words[0]), 0x20000);
     TASK(PartyMember)->pos.y.fixed = g_BattleEffectBattler->pos.y.fixed + FIXED_MUL(rcos(g_ScratchPad.cells.words[0]), 0x20000);
-    work                           = g_Task;
+    work                           = TASK(PartyMember);
     g_ScratchPad.cells.words[0]    = (++work->unk_14 & 0x3F) << 6;
     g_ScratchPad.cells.words[1]    = 0x800;
     TASK(PartyMember)->pos.z.fixed = g_BattleEffectBattler->pos.z.fixed + rsin(g_ScratchPad.cells.words[0]) * g_ScratchPad.cells.words[1];
@@ -172,11 +172,11 @@ MATCH void func_801EF590(void) {
     s8           tint;
 
     Script_AnimStepLoop();
-    work                           = g_Task;
+    work                           = TASK(PartyMember);
     g_ScratchPad.cells.words[0]    = (++work->unk_0C & 0x7F) << 5;
     TASK(PartyMember)->pos.x.fixed = g_BattleEffectBattler->pos.x.fixed + FIXED_MUL(rsin(g_ScratchPad.cells.words[0]), 0x20000);
     TASK(PartyMember)->pos.y.fixed = g_BattleEffectBattler->pos.y.fixed + FIXED_MUL(rcos(g_ScratchPad.cells.words[0]), 0x20000);
-    work                           = g_Task;
+    work                           = TASK(PartyMember);
     g_ScratchPad.cells.words[0]    = (++work->unk_14 & 0x3F) << 6;
     g_ScratchPad.cells.words[1]    = 0x800;
     TASK(PartyMember)->pos.z.fixed = g_BattleEffectBattler->pos.z.fixed + rsin(g_ScratchPad.cells.words[0]) * g_ScratchPad.cells.words[1];
@@ -199,11 +199,11 @@ MATCH void func_801EF710(void) {
     TASK(PartyMember)->unk_5E -= 4;
     TASK(PartyMember)->unk_5F -= 4;
     Script_AnimStepLoop();
-    work                           = g_Task;
+    work                           = TASK(PartyMember);
     g_ScratchPad.cells.words[0]    = (++work->unk_0C & 0x7F) << 5;
     TASK(PartyMember)->pos.x.fixed = g_BattleEffectBattler->pos.x.fixed + FIXED_MUL(rsin(g_ScratchPad.cells.words[0]), 0x20000);
     TASK(PartyMember)->pos.y.fixed = g_BattleEffectBattler->pos.y.fixed + FIXED_MUL(rcos(g_ScratchPad.cells.words[0]), 0x20000);
-    work                           = g_Task;
+    work                           = TASK(PartyMember);
     g_ScratchPad.cells.words[0]    = (++work->unk_14 & 0x3F) << 6;
     g_ScratchPad.cells.words[1]    = 0x800;
     TASK(PartyMember)->pos.z.fixed = g_BattleEffectBattler->pos.z.fixed + rsin(g_ScratchPad.cells.words[0]) * g_ScratchPad.cells.words[1];

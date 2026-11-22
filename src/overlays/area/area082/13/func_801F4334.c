@@ -5,7 +5,7 @@ MATCH void func_801F4334(void) {
     u16    x;
     s16    y;
 
-    task         = g_Task;
+    task         = TASK(Actor);
     task->unk_32 = (task->unk_32 - (task->vz / 10000)) & 0xFFD;
 
     TASK(Actor)->vx = rand() & 0x2000;

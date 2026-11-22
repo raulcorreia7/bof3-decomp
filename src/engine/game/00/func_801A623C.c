@@ -20,7 +20,7 @@ MATCH void func_801A623C(u8* script) {
 
     TASK(Actor)->header.flags = ACTOR_FLAG_IN_USE;
 
-    work                           = g_Task;
+    work                           = TASK(Actor);
     g_Actors[*counter].walk_dest_x = work->pos.x.fixed = (script[6] << 16) | (script[5] != 0 ? 0x8000 : 0);
     /* FAKE: forces the counter re-read before the next shadow store. */
     FAKE_BARRIER();

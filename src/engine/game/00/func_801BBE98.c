@@ -9,20 +9,20 @@ MATCH void func_801BBE98(void) {
 
     Actor_ClearVelocity();
 
-    work                = g_Task;
+    work                = TASK(Actor);
     work->unk_06        = work->unk_05 - 1;
-    work2               = g_Task;
+    work2               = TASK(Actor);
     work->unk_18        = 0;
     work->unk_1C        = 0;
     work->gravity       = 0;
     work2->option_flags = 0;
 
-    work2 = g_Task;
+    work2 = TASK(Actor);
     ret   = Area_HeightRead(work2->pos.x.fixed, work2->pos.y.fixed);
 
-    work                          = g_Task;
+    work                          = TASK(Actor);
     work->tint.bytes.rgb.r        = 0;
-    ptr                           = g_Task;
+    ptr                           = TASK(Actor);
     COORD_INT(work->pos.z)        = ret;
     ptr->tint.bytes.rgb.g         = 0;
     TASK(Actor)->tint.bytes.rgb.b = 0;
@@ -34,7 +34,7 @@ MATCH void func_801BBE98(void) {
 
     Script_Select(TASK(Actor)->direction);
 
-    work = g_Task;
+    work = TASK(Actor);
     work->header.mode++;
     ACTOR_CLEAR_STEP();
 }

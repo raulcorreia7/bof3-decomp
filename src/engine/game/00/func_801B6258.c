@@ -32,7 +32,7 @@ MATCH bool func_801B6258(void) {
         return 0;
     }
     sel  = FIELD(u8, func_801B5C54(), 0x2u) & 0xF;
-    work = g_Task;
+    work = TASK(Actor);
     if ((work->direction == sel) || (sel == 8)) {
         work->header.mode = 7;
         ACTOR_CLEAR_STEP();

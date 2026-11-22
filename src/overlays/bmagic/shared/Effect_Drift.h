@@ -13,7 +13,7 @@ MATCH void Effect_Drift(void) {
     TASK(PartyMember)->unk_0C = 0x2000;
     TASK(PartyMember)->unk_10 = 0;
     Effect_RotatePosition(g_Task);
-    work         = g_Task;
+    work         = TASK(PartyMember);
     timer        = work->unk_09 - 2;
     work->unk_09 = timer;
     work->pos.x.fixed += work->unk_0C;

@@ -8,9 +8,9 @@ MATCH void func_801E3334(void) {
 
     TASK(PartyMember)->header.flags &= ~ACTOR_FLAG_HIDDEN;
     Battle_RequestEnemyScript(0);
-    work          = g_Task;
+    work          = TASK(PartyMember);
     work->unk_48  = 2u;
-    work          = g_Task;
+    work          = TASK(PartyMember);
     work->unk_18  = 0x666u;
     work->scale.y = 0u;
     work->scale.x = 0u;

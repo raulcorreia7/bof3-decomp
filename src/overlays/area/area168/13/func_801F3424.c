@@ -10,11 +10,11 @@ MATCH void func_801F3424(void) {
     s32    pair;
     s16    screen_y;
     s32    height;
-    work                            = g_Task;
+    work                            = TASK(Actor);
     entry                           = work->pos.x.part.integer;
     pair                            = entry * 2;
     work->direction                 = work->pos.y.part.integer == 0;
-    cell                            = g_Task;
+    cell                            = TASK(Actor);
     cell->pos.x.part.integer        = AREA168_ENTRY_TABLE(u8, 0x50, pair);
     cell->pos.y.part.integer        = AREA168_ENTRY_TABLE(u8, 0x51, pair);
     height                          = Area_HeightSample(cell->pos.x.fixed, cell->pos.y.fixed);

@@ -6,7 +6,7 @@ MATCH void func_801F36B4(void) {
     u8     x;
     u8     y;
 
-    work = g_Task;
+    work = TASK(Actor);
     slot = g_ScratchPad.cells.halves[0] = Actor_FindFreeField();
     if (slot != GAME_NONE) {
         Actor_SpawnFromRecord(D_801F43C0);

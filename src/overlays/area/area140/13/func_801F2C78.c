@@ -10,7 +10,7 @@ MATCH void func_801F2C78(void) {
     if (!SYS_TestFlag(g_SceneEventFlags, 84)) {
         TASK(Actor)->header.step = 5;
     } else {
-        work = g_Task;
+        work = TASK(Actor);
         if (abs(g_Game.members[0].pos.x.fixed - (TO_COORD(COORD_INT(work->pos.x) + 1) | COORD_HALF)) > COORD_HALF) {
             goto call;
         }

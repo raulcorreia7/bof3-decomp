@@ -18,7 +18,7 @@ MATCH void func_801F2E1C(void) {
     D_801F53F4 = tmp;
     if ((tmp & BYTE_MASK) < 2) {
         g_ScriptVars[2]           = 2;
-        previous                  = g_Task;
+        previous                  = TASK(Actor);
         WORLD00_AREA008_STATE_PTR = (volatile Actor*)&g_BattlePartyBattlers[1];
         TASK_SET(&g_BattlePartyBattlers[1]);
         Script_Select(1);

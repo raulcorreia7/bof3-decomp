@@ -124,7 +124,7 @@ MATCH void func_801F7B10(void) {
     s32*   ptr;
     u8     value;
 
-    actor = g_Task;
+    actor = TASK(Actor);
     ptr   = &actor->vx;
     func_801F7FFC((Scena03Quad*)ptr);
     func_801F8170(ptr);
@@ -142,7 +142,7 @@ MATCH void func_801F7BB0(void) {
     s32*   ptr;
     u8     value;
 
-    actor = g_Task;
+    actor = TASK(Actor);
     ptr   = &actor->vx;
     func_801F7FFC((Scena03Quad*)ptr);
     func_801F8170(ptr);
@@ -175,7 +175,7 @@ MATCH void func_801F7CE0(void) {
     s32*   pos;
     u8     remaining;
 
-    work = g_Task;
+    work = TASK(Actor);
     pos  = &work->vx;
     func_801F7FFC((Scena03Quad*)pos);
     func_801F8170(pos);
@@ -193,7 +193,7 @@ MATCH void func_801F7D80(void) {
     s32*   pos;
     s16    step;
 
-    work = g_Task;
+    work = TASK(Actor);
     pos  = &work->vx;
     func_801F7FFC((Scena03Quad*)pos);
     func_801F8170(pos);
@@ -234,7 +234,7 @@ MATCH void func_801F7E6C(void) {
             spawned->header.flags      = 1;
             spawned->unk_06            = 0;
             spawned->type              = 0x21;
-            actor                      = g_Task;
+            actor                      = TASK(Actor);
             spawned->scene_step        = actor->pos.x.fixed;
             spawned->selection         = actor->pos.y.fixed;
             spawned->unk_14            = actor->pos.z.fixed;

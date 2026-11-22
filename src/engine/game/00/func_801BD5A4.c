@@ -5,7 +5,7 @@ MATCH void func_801BD5A4(void) {
     Actor* tail;
     u8*    ids;
 
-    work = g_Task;
+    work = TASK(Actor);
     switch (work->header.step) {
         case 0:
             if (g_Game.members[0].u.field.mode.unsigned_value != 8) {
@@ -19,7 +19,7 @@ MATCH void func_801BD5A4(void) {
                 g_SpawnedActors[TASK(Actor)->param.actor_slot].header.flags = 1;
                 g_SpawnedActors[TASK(Actor)->param.actor_slot].type         = 6;
                 g_SpawnedActors[TASK(Actor)->param.actor_slot].unk_06       = 1;
-                tail                                                        = g_Task;
+                tail                                                        = TASK(Actor);
                 ids                                                         = (u8*)g_Game.current;
                 g_SpawnedActors[tail->param.actor_slot].scene_step          = 0;
                 g_SpawnedActors[tail->param.actor_slot].selection           = D_80181B28[ids[0x79]];

@@ -10,7 +10,7 @@ MATCH void func_8019C664(void) {
     TASK(Actor)->clut_select = 0x7B;
     Script_Select(((u8)TASK(Actor)->direction >> 1) + 0x4A);
     GFX_PaletteLoad(GAME_PALETTE_STAGE + 0xC0, 1);
-    work                   = g_Task;
+    work                   = TASK(Actor);
     work->pos.x.fixed      = g_Game.members[0].pos.x.fixed;
     work->pos.y.fixed      = g_Game.members[0].pos.y.fixed;
     COORD_INT(work->pos.z) = (s16)((u16)COORD_INT(g_Game.members[0].pos.z) + 0xC0);
@@ -23,6 +23,6 @@ MATCH void func_8019C664(void) {
     }
     flags              = g_Task;
     *(u8*)(flags)      = (u8)(*(u8*)(flags) | ACTOR_FLAG_SKIP_PALETTE_STAGE);
-    state              = g_Task;
+    state              = TASK(Actor);
     state->header.mode = (u8)(state->header.mode + 1);
 }

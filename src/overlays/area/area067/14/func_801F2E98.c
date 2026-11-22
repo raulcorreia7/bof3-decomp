@@ -5,7 +5,7 @@ MATCH void func_801F2E98(void) {
     u16*   rect;
     u16    value;
 
-    actor   = g_Task;
+    actor   = TASK(Actor);
     /* The quad a mode draws lives in the task's velocity words. */
     rect    = (u16*)&actor->vx;
     value   = rect[2] + 1;

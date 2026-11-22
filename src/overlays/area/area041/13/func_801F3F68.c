@@ -4,7 +4,7 @@ MATCH s32 func_801F3F68(void) {
     Actor* actor;
     s32    speed;
 
-    actor = g_Task;
+    actor = TASK(Actor);
     speed = actor->vx;
     actor->unk_0A -= 1;
     actor->pos.x.fixed += speed;

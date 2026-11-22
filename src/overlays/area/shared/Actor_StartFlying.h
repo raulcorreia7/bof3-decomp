@@ -10,7 +10,7 @@ MATCH void Actor_StartFlying(void) {
     TASK(Actor)->active_flags = 0;
     TASK(Actor)->draw_layer   = 5;
 
-    scratch              = g_Task;
+    scratch              = TASK(Actor);
     scratch->vx          = (s16)g_FlockVelocity[scratch->direction].x;
     scratch->vy          = (s16)g_FlockVelocity[scratch->direction].y;
     scratch->pos.x.fixed = g_Game.members[0].pos.x.fixed;
@@ -35,7 +35,7 @@ MATCH void Actor_StartFlying(void) {
         }
     }
 
-    scratch = g_Task;
+    scratch = TASK(Actor);
     COORD_INT(scratch->pos.x) -= (s32)(g_FlockVelocity[scratch->direction].x << 16) >> 25;
     y                         = COORD_INT(scratch->pos.y) - ((s32)(g_FlockVelocity[scratch->direction].y << 16) >> 25);
     scratch->param.unk_0B     = 0;

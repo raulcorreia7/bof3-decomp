@@ -36,7 +36,7 @@ MATCH void func_801EEC9C(void) {
     } while (jitter < &D_801F065C[56]);
     for (i = 0; i < 12; i++) {
         slot                               = Battle_AllocEffect(1, 23);
-        g_BattleEffects[slot].target.party = g_Task;
+        g_BattleEffects[slot].target.party = TASK(PartyMember);
         g_BattleEffects[slot].unk_08       = actor->facing;
         g_BattleEffects[slot].pos.x.fixed  = TASK(PartyMember)->pos.x.fixed;
         g_BattleEffects[slot].pos.y.fixed  = TASK(PartyMember)->pos.y.fixed;

@@ -4,7 +4,7 @@ MATCH void func_801F31D0(void) {
     volatile Actor* previous;
     u8*             table;
 
-    previous                  = g_Task;
+    previous                  = TASK(Actor);
     WORLD00_AREA008_STATE_PTR = (volatile Actor*)&g_BattlePartyBattlers[1];
     TASK_SET(&g_BattlePartyBattlers[1]);
     Script_Select(1);

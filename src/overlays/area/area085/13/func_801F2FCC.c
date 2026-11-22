@@ -5,7 +5,7 @@ MATCH void func_801F2FCC(void) {
     Actor* record;
     s32    i;
 
-    actor = g_Task;
+    actor = TASK(Actor);
     i     = 0;
     do {
         record = &g_Actors[i & BYTE_MASK];

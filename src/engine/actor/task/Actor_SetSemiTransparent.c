@@ -12,7 +12,7 @@ MATCH void Actor_SetSemiTransparent(void) {
 
     i    = 0;
     base = GAME_PALETTE_MIRROR;
-    work = g_Task;
+    work = TASK(Actor);
     do {
         table = (u16*)(i * 2 + ((work->unk_05 << 6) + base));
         value = *table;

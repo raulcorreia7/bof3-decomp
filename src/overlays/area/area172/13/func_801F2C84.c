@@ -6,7 +6,7 @@ MATCH void func_801F2C84(void) {
     u8     step;
 
     TASK(Actor)->timer -= 1;
-    work = g_Task;
+    work = TASK(Actor);
     step = work->timer;
     if (step != 0) {
         shade                  = ~(step * 255 / 90);

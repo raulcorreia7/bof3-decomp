@@ -9,7 +9,7 @@ MATCH void func_801F36E8(void) {
     TASK(Actor)->unk_18           = 0;
     TASK(Actor)->tint.bytes.flags = 0x3D;
     TASK(Actor)->header.mode      = 1;
-    work                          = g_Task;
+    work                          = TASK(Actor);
     work->tint.bytes.rgb.b        = 0;
     work->tint.bytes.rgb.g        = 0;
     work->tint.bytes.rgb.r        = 0;

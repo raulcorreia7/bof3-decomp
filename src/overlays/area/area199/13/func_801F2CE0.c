@@ -1,7 +1,7 @@
 #include "area199_13.h"
 
 MATCH void func_801F2CE0(void) {
-    Actor* actor = g_Task;
+    Actor* actor = TASK(Actor);
     s32    y     = actor->pos.y.fixed;
 
     if (y > 256) {

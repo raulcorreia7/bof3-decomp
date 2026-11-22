@@ -15,7 +15,7 @@ MATCH void Actor_SelectSprite(u32 record_index) {
     u8*    base0;
     u8     level;
 
-    work   = g_Task;
+    work   = TASK(Actor);
     header = (u8*)work->unk_4C;
     base0  = header + ((s32*)header)[0];
     base8  = header + ((s32*)header)[2];

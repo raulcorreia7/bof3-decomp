@@ -81,7 +81,7 @@ MATCH void func_801172D0(void) {
     D_801181DC = MEM_PTR(AreaSprite, AREA_WORK);
     i          = 0;
     do {
-        actor                 = g_Task;
+        actor                 = TASK(Actor);
         work                  = D_801181DC;
         work->origin.x        = actor->pos.x.fixed;
         work->origin.y        = actor->pos.y.fixed;
@@ -229,7 +229,7 @@ MATCH void func_80117864(void* arg0) {
         u8  unk_26;
     }* p = arg0;
 
-    Actor* a = g_Task;
+    Actor* a = TASK(Actor);
     s32    v;
 
     p->unk_04 = a->pos.x.fixed;

@@ -11,7 +11,7 @@ MATCH void func_8019B1E8(void) {
             TASK(Actor)->header.mode = 2;
         }
     }
-    work = g_Task;
+    work = TASK(Actor);
     flag = work->option_flags;
     if ((flag != 0) && (flag == FIELD(u8, work, 0x58u))) {
         work->header.mode = 2;

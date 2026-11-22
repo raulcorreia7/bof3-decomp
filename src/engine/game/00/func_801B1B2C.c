@@ -13,7 +13,7 @@ MATCH s32 func_801B1B2C(s32 x, s32 y, s32 probe_type, s32 flags) {
     py          = y;
     mode        = flags;
     value       = Area_HeightRead(x, y);
-    work        = g_Task;
+    work        = TASK(Actor);
     saved       = work->timer;
     work->timer = 0U;
     if (Game_TestPlacement(px, py, mode & BYTE_MASK, value) & BYTE_MASK) {

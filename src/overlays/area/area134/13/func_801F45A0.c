@@ -6,7 +6,7 @@ MATCH void func_801F45A0(void) {
     Actor* work;
     s32    sample_y;
 
-    work               = g_Task;
+    work               = TASK(Actor);
     work->vx           = work->pos.x.fixed + TO_COORD(-1);
     sample_y           = work->pos.y.fixed + TO_COORD(-1);
     work->vy           = sample_y;

@@ -52,7 +52,7 @@ MATCH void func_801F70DC(void) {
     Actor* actor2;
     s32    i;
 
-    actor = g_Task;
+    actor = TASK(Actor);
     i     = 0;
     do {
         actor2 = &g_Actors[i & BYTE_MASK];
@@ -73,7 +73,7 @@ MATCH void func_801F7198(void) {
 MATCH void func_801F71DC(void) {
     Actor* work;
 
-    work                      = g_Task;
+    work                      = TASK(Actor);
     work->tint.bytes.rgb.b    = 0;
     work->tint.bytes.rgb.g    = 0;
     work->tint.bytes.rgb.r    = 0;
@@ -112,7 +112,7 @@ MATCH void func_801F735C(void) {
     TASK(Actor)->timer -= 1;
     if (TASK(Actor)->timer == 0) {
         TASK(Actor)->param.unk_0B += 1;
-        work       = g_Task;
+        work       = TASK(Actor);
         message_id = work->param.unk_0B;
         if ((u8)message_id == 0x37) {
             work->tint.steps.delta.b = -1;
@@ -146,7 +146,7 @@ MATCH void func_801F7568(void) {
     Actor* work;
     Actor* actor;
 
-    work              = g_Task;
+    work              = TASK(Actor);
     actor             = &g_Actors[work->unk_06];
     g_Task            = actor;
     actor->draw_layer = 2;

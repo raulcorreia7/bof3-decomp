@@ -11,10 +11,10 @@ MATCH void func_801A0F24(Actor* record) {
     Actor* spad_a;
     Actor* spad_b;
 
-    spad_a = g_Task;
+    spad_a = TASK(Actor);
     saved  = spad_a->direction;
     D_801C83BC[spad_a->header.step](record, 0, 1);
-    spad_b = g_Task;
+    spad_b = TASK(Actor);
     if (spad_b->timer == 0) {
         mode  = record->unk_78;
         param = g_RouteSpeedScale[mode];
@@ -36,16 +36,16 @@ MATCH void func_801A0F24(Actor* record) {
             result = func_801A2ED4(record, 0U);
             record->unk_7B -= 1;
         block_8:
-            if (((result & BYTE_MASK) != GAME_NONE) && (spad_c = g_Task, (spad_c->timer != 0))) {
+            if (((result & BYTE_MASK) != GAME_NONE) && (spad_c = TASK(Actor), (spad_c->timer != 0))) {
                 spad_c->unk_03           = spad_c->header.mode;
                 TASK(Actor)->header.mode = 0xAU;
                 record->unk_79           = result & 0x7;
                 TASK(Actor)->direction   = (saved & 0x7);
-                spad_d                   = g_Task;
+                spad_d                   = TASK(Actor);
                 spad_d->unk_0A           = 0;
                 spad_d->timer            = 0U;
                 func_801A3B7C(record);
-                spad_e = g_Task;
+                spad_e = TASK(Actor);
                 if (spad_e->header.mode != 0xA) {
                     spad_e->direction = saved;
                     /* Shared tail: restore the route and run the step. */

@@ -18,7 +18,7 @@ MATCH void func_801BD394(void) {
     if (g_GameStateIndex != GAME_REQUEST_IDLE) {
         flag = 1;
     }
-    work  = g_Task;
+    work  = TASK(Actor);
     slot  = (Actor*)((u8*)g_Game.members + work->unk_06 * BATTLE_PARTY_STRIDE);
     count = slot->timer;
     x     = slot->pos.x.fixed + slot->vx * count;

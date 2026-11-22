@@ -8,7 +8,7 @@ MATCH u8 func_801A2DB4(Actor* entity) {
     u8     route;
     Actor* work;
 
-    work  = g_Task;
+    work  = TASK(Actor);
     route = work->direction;
     delta = g_Game.members[0].pos.x.fixed;
     dx    = work->pos.x.fixed - delta;

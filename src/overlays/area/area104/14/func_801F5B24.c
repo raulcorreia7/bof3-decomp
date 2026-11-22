@@ -4,7 +4,7 @@ MATCH void func_801F5B24(void) {
     Actor* work;
     u8     count;
 
-    work  = g_Task;
+    work  = TASK(Actor);
     count = work->unk_0A;
     if (count == 0) {
         work->pos.x.fixed = g_Game.members[0].pos.x.fixed;

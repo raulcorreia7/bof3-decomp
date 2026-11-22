@@ -11,7 +11,7 @@ MATCH void func_801F4B0C(void) {
     } else {
         TASK(Actor)->header.flags |= 0x20;
         TASK(Actor)->tint.bytes.flags = 1;
-        work                          = g_Task;
+        work                          = TASK(Actor);
         work->tint.steps.delta.r = work->tint.steps.delta.g = work->tint.steps.delta.b = -0x40;
         TASK(Actor)->unk_04                                                            = 1;
     }

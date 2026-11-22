@@ -6,7 +6,7 @@ MATCH void func_801F3030(void) {
     Actor*       work;
     PartyMember* member;
 
-    work              = g_Task;
+    work              = TASK(Actor);
     member            = g_Game.current;
     work->pos.x.fixed = TO_COORD_HALF(78);
     work->pos.z.fixed = 0;

@@ -1,7 +1,7 @@
 #include "area112_13.h"
 
 MATCH void func_801F2DA0(void) {
-    Actor* work  = g_Task;
+    Actor* work  = TASK(Actor);
     u8     timer = work->timer + 1;
     u16    y     = COORD_INT(work->pos.y);
 

@@ -6,7 +6,7 @@ MATCH void func_800C1BF0(void) {
     u8           value2;
     u8           value3;
 
-    battler = g_Task;
+    battler = TASK(PartyMember);
     g_Task  = g_BattleEffectBattler;
     Script_AnimStepOnce();
     g_Task = battler;

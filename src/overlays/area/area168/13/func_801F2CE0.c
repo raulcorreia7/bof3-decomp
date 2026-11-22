@@ -6,12 +6,12 @@ MATCH void func_801F2CE0(void) {
     s32    z;
 
     TASK(Actor)->unk_06 = 0;
-    actor               = g_Task;
+    actor               = TASK(Actor);
     actor->unk_18       = TO_COORD(16);
     actor->vx           = TO_COORD(16);
     actor->pos.z.fixed  = 0;
     for (i = 0; i < 3; i++) {
-        Actor* work   = g_Task;
+        Actor* work   = TASK(Actor);
         work->vy      = D_801F4B44[i].from;
         work->unk_1C  = D_801F4B44[i].to;
         z             = TO_COORD(COORD_INT(work->pos.z) + 128);

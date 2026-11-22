@@ -8,7 +8,7 @@ MATCH s32 Area_RequestRestartOnEntryChange(void) {
 
     Actor_SetScreenOrigin();
     if (g_GameEntryState != 1) {
-        scratch = g_Task;
+        scratch = TASK(Actor);
         step    = scratch->param.unk_0B;
         if (step == scratch->option_flags && g_GameStateIndex != GAME_REQUEST_AREA_CHANGE) {
             if (step != 1) {

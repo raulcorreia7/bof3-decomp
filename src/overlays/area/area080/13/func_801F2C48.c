@@ -4,7 +4,7 @@ MATCH void func_801F2C48(void) {
     Actor*    work;
     AreaRing* ring;
 
-    work = g_Task;
+    work = TASK(Actor);
     WorldPos_Copy(&work->pos, &D_80146954);
 
     ring       = (AreaRing*)AREA_WORK;

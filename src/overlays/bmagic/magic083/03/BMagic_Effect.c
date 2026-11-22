@@ -26,7 +26,7 @@ MATCH void func_801EED04(void) {
             index = i + 3;
             if (!(Battle_SlotIsBlocked(index) & BYTE_MASK)) {
                 slot                               = Battle_AllocEffect(1, 34) & BYTE_MASK;
-                owner                              = g_Task;
+                owner                              = TASK(PartyMember);
                 g_BattleEffects[slot].header.mode  = 0;
                 g_BattleEffects[slot].unk_03       = i;
                 g_BattleEffects[slot].target.party = owner;
@@ -44,7 +44,7 @@ MATCH void func_801EED04(void) {
         for (i = 0; i < 3; i++) {
             if (!(Battle_SlotIsBlocked(i) & BYTE_MASK)) {
                 slot                               = Battle_AllocEffect(1, 34) & BYTE_MASK;
-                owner                              = g_Task;
+                owner                              = TASK(PartyMember);
                 g_BattleEffects[slot].header.mode  = 0;
                 g_BattleEffects[slot].unk_03       = i;
                 g_BattleEffects[slot].target.party = owner;
@@ -126,7 +126,7 @@ MATCH void func_801EF2F8(void) {
         for (i = 0; i < 3; i++) {
             slot = BMagic_AllocEffect();
             if (slot != 0xFF) {
-                owner                                  = g_Task;
+                owner                                  = TASK(PartyMember);
                 BMAGIC_EFFECT_SLOTS[slot].header.mode  = 0;
                 BMAGIC_EFFECT_SLOTS[slot].header.step  = 0;
                 BMAGIC_EFFECT_SLOTS[slot].unk_03       = base + (i << 4);
@@ -273,14 +273,14 @@ MATCH void func_801F0010(void) {
     if (g_FrameCount & 0x1) {
         TASK(PartyMember)->unk_09 += 1;
     }
-    task         = g_Task;
+    task         = TASK(PartyMember);
     timer        = task->timer - 1;
     vel          = task->unk_14 + task->unk_20;
     task->timer  = timer;
     task->unk_14 = vel;
     task->pos.z.part.integer += vel;
     if ((timer & BYTE_MASK) == 0) {
-        reset         = g_Task;
+        reset         = TASK(PartyMember);
         reset->unk_14 = -0x10;
         reset->timer  = 8;
         reset->unk_20 = 4;
@@ -299,7 +299,7 @@ MATCH void func_801F0104(void) {
     if (g_FrameCount & 0x1) {
         TASK(PartyMember)->unk_09 += 1;
     }
-    task         = g_Task;
+    task         = TASK(PartyMember);
     timer        = task->timer - 1;
     vel          = task->unk_14 + task->unk_20;
     task->timer  = timer;

@@ -3,7 +3,7 @@
 MATCH void func_800C1CE4(void) {
     PartyMember* saved;
 
-    saved  = g_Task;
+    saved  = TASK(PartyMember);
     g_Task = g_BattleEffectBattler;
     if (Script_AnimStepOnce() & BYTE_MASK) {
         Script_Select(0);

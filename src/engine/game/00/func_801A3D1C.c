@@ -18,14 +18,14 @@ MATCH void func_801A3D1C(void* unused) {
         old_a = g_ActorTurnRamps[index].frames_xy;
         if (old_a != 0) {
             g_ActorTurnRamps[index].frames_xy = old_a - 1;
-            work                              = g_Task;
+            work                              = TASK(Actor);
             work->unk_64 += g_ActorTurnRamps[index].step_x;
             work->unk_68 += g_ActorTurnRamps[index].step_y;
         }
         old_b = g_ActorTurnRamps[index].frames_z;
         if (old_b != 0) {
             g_ActorTurnRamps[index].frames_z = old_b - 1;
-            work                             = g_Task;
+            work                             = TASK(Actor);
             work->unk_6C += g_ActorTurnRamps[index].step_z;
         }
     }

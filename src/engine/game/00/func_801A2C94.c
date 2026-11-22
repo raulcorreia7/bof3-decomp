@@ -10,7 +10,7 @@ MATCH u8 func_801A2C94(Actor* actor) {
     Actor* work;
 
     entity = actor;
-    work   = g_Task;
+    work   = TASK(Actor);
     route  = work->direction;
     delta  = work->pos.x.fixed;
     dx     = g_Game.members[0].pos.x.fixed - delta;

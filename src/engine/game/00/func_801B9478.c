@@ -7,17 +7,17 @@ MATCH void func_801B9478(void) {
 
     if (TASK(Actor)->timer != 0) {
         Actor_Move();
-        work        = g_Task;
+        work        = TASK(Actor);
         work->timer = (work->timer - 1);
         if (TASK(Actor)->timer == 0) {
             Actor_ClearVelocity();
         }
     }
-    work      = g_Task;
+    work      = TASK(Actor);
     countdown = work->unk_0A;
     if (countdown != 0) {
         work->unk_0A = (countdown - 1);
-        flag_work    = g_Task;
+        flag_work    = TASK(Actor);
         if (flag_work->unk_0A & 0x1) {
             flag_work->header.flags = (flag_work->header.flags & ~ACTOR_FLAG_HIDDEN);
             return;

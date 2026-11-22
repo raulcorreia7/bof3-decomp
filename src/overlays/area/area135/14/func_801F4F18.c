@@ -12,9 +12,9 @@ MATCH void func_801F4F18(void) {
         return;
     }
     func_801F5F28();
-    work = g_Task;
+    work = TASK(Actor);
     func_801A7330(D_801F6B74[g_SceneEventState.selection]);
-    next              = g_Task;
+    next              = TASK(Actor);
     next->pos.x.fixed = work->pos.x.fixed;
     next->pos.y.fixed = work->pos.y.fixed;
     next->pos.z.fixed = work->pos.z.fixed;

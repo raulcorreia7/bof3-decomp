@@ -9,7 +9,7 @@ MATCH void func_801F3E8C(void) {
     if (*state == 0xFE) {
         func_80196070();
     }
-    actor          = g_Task;
+    actor          = TASK(Actor);
     g_Game.current = (PartyMember*)&D_80146110;
     TASK_SET(&D_80146110);
     if (g_Game.members[2].pos.x.fixed > 0x33FFFF) {

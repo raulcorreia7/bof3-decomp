@@ -63,7 +63,7 @@ static inline void World_SpawnActorAtFocus(void) {
         slot->header.flags = 1;
         slot->type         = 0x90;
         slot->header.mode  = 0;
-        work               = g_Task;
+        work               = TASK(Actor);
         WorldPos_Copy(&slot->pos, &work->pos);
     }
 }

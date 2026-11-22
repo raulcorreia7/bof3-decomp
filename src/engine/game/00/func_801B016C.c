@@ -6,9 +6,9 @@ MATCH void func_801B016C(void) {
     Actor* pos;
 
     Actor_ClearVelocity();
-    work          = g_Task;
+    work          = TASK(Actor);
     work->timer   = 0;
-    work2         = g_Task;
+    work2         = TASK(Actor);
     work->unk_18  = 0;
     work->unk_1C  = 0;
     work->gravity = 0;
@@ -18,7 +18,7 @@ MATCH void func_801B016C(void) {
     TASK(Actor)->option_flags = 0;
     TASK(Actor)->param.unk_0B = 0;
 
-    pos                                      = g_Task;
+    pos                                      = TASK(Actor);
     COORD_INT(TASK(Actor)->pos.z)            = Area_HeightRead(pos->pos.x.fixed, pos->pos.y.fixed);
     g_Game.current->u.field.counter.value    = 3;
     g_Game.current->u.field.step.value       = 0;

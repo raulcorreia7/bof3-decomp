@@ -21,7 +21,7 @@ MATCH void func_801B8A9C(void) {
 
     count = 0;
 loop_top:
-    work   = g_Task;
+    work   = TASK(Actor);
     route  = count;
     route  = (work->direction + route) & 0x7;
     word   = FAKE_VOLATILE(u32, FIELD(u32, work, 0x70u));

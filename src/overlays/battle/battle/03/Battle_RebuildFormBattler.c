@@ -28,7 +28,7 @@ MATCH void Battle_RebuildFormBattler(void) {
         }
     }
 
-    saved       = g_Task;
+    saved       = TASK(PartyMember);
     g_Task      = g_BattleEffectBattler;
     g_GameState = &g_Game.members[TASK(PartyMember)->slot];
     if (g_Game.members[TASK(PartyMember)->slot].chr.character_id == CHAR_ID_RYU_ADULT || g_Game.members[TASK(PartyMember)->slot].chr.character_id == CHAR_ID_RYU_YOUNG) {

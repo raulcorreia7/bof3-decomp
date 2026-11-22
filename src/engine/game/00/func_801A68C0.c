@@ -27,7 +27,7 @@ MATCH void func_801A68C0(u8* script) {
     SYS_InitScratchpad((u8*)tile);
     func_801A4B80(4);
 
-    work = g_Task;
+    work = TASK(Actor);
     x    = script[2] << 16;
     if (script[1] != 0) {
         x |= 32768;

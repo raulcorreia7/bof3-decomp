@@ -7,13 +7,13 @@ MATCH s32 func_801C4E14(void) {
     u8     region;
     s32    inactive;
 
-    work      = g_Task;
+    work      = TASK(Actor);
     countdown = work->timer;
     inactive  = 0;
     if (countdown != 0) {
         work->timer = (countdown - 1);
         Actor_Move();
-        state = g_Task;
+        state = TASK(Actor);
         if (state->timer == state->unk_0A) {
             region                                            = state->unk_05;
             g_GfxPalettePending                               = 1;

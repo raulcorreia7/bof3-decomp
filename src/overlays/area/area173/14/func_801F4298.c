@@ -6,7 +6,7 @@ MATCH void func_801F4298(void) {
     COORD_INT(TASK(Actor)->pos.z) = -128;
     TASK(Actor)->screen_y         = 0;
     TASK(Actor)->header.step++;
-    work = g_Task;
+    work = TASK(Actor);
     if (abs(g_Game.members[0].pos.y.fixed - (TO_COORD(COORD_INT(work->pos.y) + 1) | COORD_HALF)) > COORD_HALF) {
         goto call;
     }

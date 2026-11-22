@@ -33,7 +33,7 @@ MATCH void Party_MemberLoadSprite(s32 character_id, s32 party_slot) {
 found:
     GFX_PaletteFreeFadeTarget(g_Task);
 
-    first                         = g_Task;
+    first                         = TASK(Actor);
     masked                        = index & BYTE_MASK;
     first->unk_2C                 = masked;
     value                         = MEM(s32, 0x8003B800u + masked * 4);
@@ -46,11 +46,11 @@ found:
     TASK(Actor)->sheet_page       = 5;
     TASK(Actor)->sheet_row        = (slot * 0x50);
     TASK(Actor)->unk_2B           = D_80181B1C[key];
-    work                          = g_Task;
+    work                          = TASK(Actor);
     work->draw_layer              = g_AreaDrawMode;
     value                         = FIELD(s32, work, 0x70u) & ~0xFF;
     FIELD(s32, work, 0x70u)       = value;
-    next_5d                       = g_Task;
+    next_5d                       = TASK(Actor);
     FIELD(s32, work, 0x70u)       = value | (work->unk_2B != 0);
     next_5d->tint.bytes.rgb.r     = 0;
     TASK(Actor)->tint.bytes.rgb.g = 0;

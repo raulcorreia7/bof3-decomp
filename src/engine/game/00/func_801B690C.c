@@ -10,7 +10,7 @@ MATCH void func_801B690C(void) {
     }
 
     entry = WorldMap_GetPoints();
-    work  = g_Task;
+    work  = TASK(Actor);
     for (;;) {
         if (COORD_INT(work->pos.x) != entry[0]) {
             entry += 4;

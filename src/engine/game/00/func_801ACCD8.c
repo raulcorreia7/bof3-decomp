@@ -9,12 +9,12 @@ MATCH void func_801ACCD8(void) {
     Actor* spad3;
     Actor* spad4;
 
-    spad  = g_Task;
+    spad  = TASK(Actor);
     tuneA = spad->tint.steps.delta.r;
     if (tuneA < -0x40) {
         spad->tint.steps.delta.r = (tuneA + 4);
     }
-    spad2 = g_Task;
+    spad2 = TASK(Actor);
     tuneB = spad2->tint.steps.delta.g;
     if (tuneB < -0x40) {
         spad2->tint.steps.delta.g = (tuneB + 4);
@@ -25,10 +25,10 @@ MATCH void func_801ACCD8(void) {
     }
     if ((TASK(Actor)->tint.raw & ~0xFF) == 0xC0C0C000) {
         GFX_PaletteFreeFade(g_CurrentActor->unk_93);
-        spad3                         = g_Task;
+        spad3                         = TASK(Actor);
         spad3->header.flags           = (spad3->header.flags & 0xDF);
         TASK(Actor)->tint.bytes.flags = 0;
-        spad4                         = g_Task;
+        spad4                         = TASK(Actor);
         spad4->tint.steps.delta.b     = 0;
         spad4->tint.steps.delta.g     = 0;
         spad4->tint.steps.delta.r     = 0;

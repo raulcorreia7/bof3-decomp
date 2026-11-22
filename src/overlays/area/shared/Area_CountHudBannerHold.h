@@ -8,10 +8,10 @@
 MATCH void Area_CountHudBannerHold(void) {
     Actor* work;
 
-    work = g_Task;
+    work = TASK(Actor);
     if (work->param.unk_0B == 0) {
         work->timer++;
-        work = g_Task;
+        work = TASK(Actor);
         if (work->timer >= 90) {
             work->param.unk_0B++;
         }

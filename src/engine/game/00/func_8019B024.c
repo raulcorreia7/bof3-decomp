@@ -9,7 +9,7 @@ MATCH void func_8019B024(void) {
     dist    = Area_HeightSample(TASK(Actor)->pos.x.fixed, TASK(Actor)->pos.y.fixed);
     counter = COORD_INT(TASK(Actor)->pos.z);
     if ((counter >= dist + 0x80) || (counter < dist) || (TASK(Actor)->header.flags & ACTOR_FLAG_OFFSCREEN)) {
-        work = g_Task;
+        work = TASK(Actor);
         work->header.mode++;
         SND_SEPlay(EMI_SE_ID(SND_BANK_COMMON, 6));
     }

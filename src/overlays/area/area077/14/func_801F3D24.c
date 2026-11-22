@@ -4,7 +4,7 @@ MATCH void func_801F3D24(void) {
     Actor* task;
 
     PushMatrix();
-    task = g_Task;
+    task = TASK(Actor);
     if (task->vx == 0xA5) {
         D_800E5502 = 1;
     }

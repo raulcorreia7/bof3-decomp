@@ -42,13 +42,13 @@ MATCH u8 Script_OpsRunFace(void* sub, s32 target, u8 value) {
             result = (TASK(Actor)->direction & 0x7) + 0x2C;
             break;
         case ACTOR_SCRIPT_FACE_AXIS_BASE_34:
-            work   = g_Task;
+            work   = TASK(Actor);
             mode   = work->direction;
             result = ((mode >> 1) & 0x3) | 0x34;
             /* 0x65 and 0x66 share the route update at set_route. */
             goto set_route;
         case ACTOR_SCRIPT_FACE_AXIS_BASE_10:
-            work   = g_Task;
+            work   = TASK(Actor);
             mode   = work->direction;
             result = ((mode >> 1) & 0x3) | 0x10;
         set_route:

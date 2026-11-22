@@ -15,7 +15,7 @@ MATCH s32 func_801A1BC0(Actor* record) {
     s32    next_x;
     s32    next_y;
 
-    work   = g_Task;
+    work   = TASK(Actor);
     route  = work->direction & 0x7;
     xstep  = g_FacingSteps[route].x;
     ystep  = g_FacingSteps[route].y;

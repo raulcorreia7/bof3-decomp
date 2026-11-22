@@ -5,7 +5,7 @@ MATCH void func_801F34FC(void) {
     Actor* e;
     u8     index;
 
-    s     = g_Task;
+    s     = TASK(Actor);
     index = s->param.unk_0B;
     e     = &g_Actors[index];
     TASK_SET(e);

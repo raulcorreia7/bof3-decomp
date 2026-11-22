@@ -11,7 +11,7 @@ MATCH void func_801F2FBC(void) {
     TASK(Actor)->scale.y          = 57344;
     g_CurrentActor->unk_93        = func_8019651C(TASK(u8), 0, 0, 0, 1);
     TASK(Actor)->tint.bytes.flags = 1;
-    work                          = g_Task;
+    work                          = TASK(Actor);
     work->tint.steps.delta.b      = 0x14;
     work->tint.steps.delta.g      = 0x14;
     work->tint.steps.delta.r      = 0x14;

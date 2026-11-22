@@ -10,7 +10,7 @@ MATCH void func_8019B3A8(void) {
     TASK(Actor)->active_flags = 0;
     TASK(Actor)->mirror       = 0;
     ACTOR_CLEAR_TINT();
-    work               = g_Task;
+    work               = TASK(Actor);
     work->option_flags = 0;
     setVector(work, 0, 0, 0);
     work->unk_18        = 0;

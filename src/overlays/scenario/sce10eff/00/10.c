@@ -28,7 +28,7 @@ MATCH void Scene_EffectBegin(void) { /* func_801D0C70 */
     u8 i;
     u8 slot;
 
-    D_801D2744 = g_Task;
+    D_801D2744 = TASK(SceneBandEffect);
 
     slot                               = Actor_FindFreeSpawned();
     g_SpawnedActors[slot].header.flags = 1;
@@ -88,7 +88,7 @@ MATCH void Scene_EffectSetMatrix(void) { /* func_801D0EE0 */
 
     PushMatrix();
 
-    scratch = g_Task;
+    scratch = TASK(SceneBandEffect);
 
     setVector(&rotation, 0, 0, ONE / 4);
     if ((scratch->flags & 0x1u) != 0u) {
@@ -123,13 +123,13 @@ MATCH void func_801D1034(void) {
     TASK(SceneBandEffect)->band   = 0;
 
     source       = D_801D2744;
-    work         = g_Task;
+    work         = TASK(SceneBandEffect);
     work->proj.x = source->proj.x;
     coord_y      = source->proj.y;
     work->proj.y = coord_y;
     distance     = Area_HeightSample(work->proj.x, coord_y);
 
-    scratch = g_Task;
+    scratch = TASK(SceneBandEffect);
     scratch->step_index++;
     scratch->proj_z = distance;
 }
@@ -143,12 +143,12 @@ MATCH void func_801D1138(void) {
 
     /* A store through the pointer may alias the cell, so each step reloads
      * it. */
-    work = g_Task;
+    work = TASK(SceneBandEffect);
     work->ticker++;
-    work = g_Task;
+    work = TASK(SceneBandEffect);
     work->timer--;
     if (work->timer == 0) {
-        work = g_Task;
+        work = TASK(SceneBandEffect);
         work->step_index++;
     }
 }
@@ -159,9 +159,9 @@ MATCH void func_801D11A0(void) {
 
     /* A store through the pointer may alias the cell, so each step reloads
      * it. */
-    work = g_Task;
+    work = TASK(SceneBandEffect);
     work->ticker++;
-    work       = g_Task;
+    work       = TASK(SceneBandEffect);
     count      = work->band - 1;
     work->band = count;
     if (count == 0) {
@@ -173,7 +173,7 @@ MATCH void func_801D11A0(void) {
 MATCH void func_801D1218(void) {
     SceneBandEffect* work;
 
-    work = g_Task;
+    work = TASK(SceneBandEffect);
     D_801D2724[work->step_index]();
     func_801D2658();
     if (TASK(SceneBandEffect)->step_index != 0) {
@@ -197,7 +197,7 @@ MATCH void func_801D12A8(void) {
     TASK(SceneBandEffect)->timer  = 0;
     TASK(SceneBandEffect)->band   = 0;
 
-    work                                    = g_Task;
+    work                                    = TASK(SceneBandEffect);
     counter                                 = work->orbit_seed << 5;
     FAKE_VOLATILE(s32, work->orbit_counter) = counter;
     angle                                   = SCE10EFF_ORBIT_ANGLE(counter);
@@ -206,12 +206,12 @@ MATCH void func_801D12A8(void) {
     g_ScratchPad                            = 0x20;
 
     velocity     = rcos(angle) * g_ScratchPad;
-    work         = g_Task;
+    work         = TASK(SceneBandEffect);
     work->proj.x = D_801D2744->proj.x + velocity;
 
     velocity        = rsin(*angle_cell) * g_ScratchPad;
     source          = D_801D2744;
-    scratch         = g_Task;
+    scratch         = TASK(SceneBandEffect);
     scratch->proj.y = source->proj.y + velocity;
     scratch->proj_z = source->proj_z;
     scratch->step_index++;
@@ -240,7 +240,7 @@ MATCH void func_801D1544(void) {
 
     TASK(SceneBandEffect)->ticker++;
 
-    work                                    = g_Task;
+    work                                    = TASK(SceneBandEffect);
     counter                                 = work->orbit_counter + 1;
     FAKE_VOLATILE(s32, work->orbit_counter) = counter;
     angle                                   = SCE10EFF_ORBIT_ANGLE(counter);
@@ -249,7 +249,7 @@ MATCH void func_801D1544(void) {
     g_ScratchPad                            = 0x20;
 
     velocity     = rcos(angle) * g_ScratchPad;
-    work         = g_Task;
+    work         = TASK(SceneBandEffect);
     work->proj.x = D_801D2744->proj.x + velocity;
 
     velocity                      = rsin(*angle_cell) * g_ScratchPad;
@@ -406,7 +406,7 @@ MATCH void func_801D1DE0(void) {
     TASK(SceneBandEffect)->timer  = 0;
     TASK(SceneBandEffect)->band   = 0;
 
-    work                                    = g_Task;
+    work                                    = TASK(SceneBandEffect);
     counter                                 = (work->orbit_seed << 5) + 0x10;
     angle                                   = SCE10EFF_ORBIT_ANGLE(counter);
     FAKE_VOLATILE(s32, work->orbit_counter) = counter;

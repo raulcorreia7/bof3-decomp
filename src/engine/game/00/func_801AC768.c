@@ -10,7 +10,7 @@ MATCH void func_801AC768(ScriptState* cursor_state, s32 mode_byte, s32 value_18,
             func_801ABEE0();
         }
         TASK(Actor)->header.mode = mode_byte;
-        slot                     = g_Task;
+        slot                     = TASK(Actor);
         if (slot->header.mode == 7) {
             slot->unk_18 = value_18 & BYTE_MASK;
             slot->unk_1C = value_1C & BYTE_MASK;
@@ -25,7 +25,7 @@ MATCH void func_801AC768(ScriptState* cursor_state, s32 mode_byte, s32 value_18,
         }
         if ((mode_byte & BYTE_MASK) == 7) {
             TASK(Actor)->header.step = 1;
-            slot                     = g_Task;
+            slot                     = TASK(Actor);
             slot->unk_18             = value_18 & BYTE_MASK;
             slot->unk_1C             = value_1C & BYTE_MASK;
             if (cursor_state->move_mode != 0) {

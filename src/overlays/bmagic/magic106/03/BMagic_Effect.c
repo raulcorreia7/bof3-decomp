@@ -36,7 +36,7 @@ MATCH void func_801EECE4(void) {
         D_801EF9F8[(i << 5) + 1] = 0;
         D_801EF9F8[(i << 5) + 2] = 0;
     }
-    work              = g_Task;
+    work              = TASK(PartyMember);
     work->pos.x.fixed = g_Battle.selected_actor->pos.x.fixed;
     /* FAKE: retail re-reads the selected actor for the next copy. */
     FAKE_BARRIER();
@@ -50,7 +50,7 @@ MATCH void func_801EECE4(void) {
     for (i = 0; i < 96; i++) {
         slot                  = func_801EF914();
         row                   = slot << 5;
-        D_801EFA14[slot << 3] = g_Task;
+        D_801EFA14[slot << 3] = TASK(PartyMember);
         D_801EF9F8[row + 1]   = 0;
         D_801EF9F8[row + 4]   = i;
         growth                = ((i >> 1) & 0x70) + (rand() & 0xF) + 1;

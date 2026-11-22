@@ -7,7 +7,7 @@ MATCH void Actor_SetScreenBottom(void) {
 
     if (D_801454F2 == 0 || TASK(Actor)->param.unk_0B == 0) {
         if (g_GameStateIndex != GAME_REQUEST_MESSAGE && GAME_SCRIPT_ACTIVE() == 0) {
-            work           = g_Task;
+            work           = TASK(Actor);
             work->screen_y = 240;
             work->unk_03++;
         }

@@ -11,7 +11,7 @@ MATCH void func_801EEC7C(void) {
 
     TASK(PartyMember)->unk_09 = 8;
     TASK(PartyMember)->timer  = 4;
-    work                      = g_Task;
+    work                      = TASK(PartyMember);
     work->header.mode         = work->header.mode + 1;
 }
 
@@ -25,7 +25,7 @@ MATCH void func_801EECBC(void) {
     }
 
     index                               = Battle_AllocEffect(1, 0x50) & BYTE_MASK;
-    target                              = g_Task;
+    target                              = TASK(PartyMember);
     g_BattleEffects[index].header.mode  = 0;
     g_BattleEffects[index].header.step  = 0;
     g_BattleEffects[index].target.party = target;
@@ -80,7 +80,7 @@ MATCH void func_801EEF84(void) {
     TASK(PartyMember)->unk_24 = 0x84;
     TASK(PartyMember)->unk_27 = 0xB4;
     TASK(PartyMember)->unk_28 = 0;
-    work                      = g_Task;
+    work                      = TASK(PartyMember);
     work->unk_2B              = 0;
     work->unk_2C.value        = 0;
     TASK(PartyMember)->unk_2A = 0;
@@ -102,7 +102,7 @@ MATCH void func_801EF070(void) {
     PartyMember* work;
 
     if (Script_AnimStepLoop() != 0u) {
-        work              = g_Task;
+        work              = TASK(PartyMember);
         work->header.step = work->header.step + 1;
     } else {
         Area_AddActor();

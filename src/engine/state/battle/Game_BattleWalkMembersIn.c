@@ -42,7 +42,7 @@ MATCH bool Game_BattleWalkMembersIn(void) {
             }
         } else if (TASK(Actor)->param.unk_0B == 1) {
             if (func_801C2894(8) & BYTE_MASK) {
-                actor = g_Task;
+                actor = TASK(Actor);
                 for (j = 0; j < 32; j++) {
                     clut_offset    = actor->unk_05 << 6;
                     dst            = (u16*)(GAME_PALETTE_MIRROR + clut_offset);

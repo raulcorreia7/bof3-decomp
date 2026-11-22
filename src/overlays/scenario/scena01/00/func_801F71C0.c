@@ -45,12 +45,12 @@ MATCH void func_801F73FC(void) {
     Actor* work;
     s32    height;
 
-    work              = g_Task;
+    work              = TASK(Actor);
     work->pos.x.fixed = TO_COORD(96);
     work->pos.y.fixed = TO_COORD(17);
     height            = Area_HeightSample(work->pos.x.fixed, work->pos.y.fixed);
 
-    work              = g_Task;
+    work              = TASK(Actor);
     work->pos.z.fixed = height << 16;
     work->screen_x    = 0x180;
     work->screen_y    = 0x500;

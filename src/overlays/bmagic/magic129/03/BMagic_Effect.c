@@ -34,7 +34,7 @@ MATCH void func_801EED18(void) {
         member = i;
         if (g_Game.members[member].header.flags & PARTY_MEMBER_FLAG_OCCUPIED) {
             slot                               = Battle_AllocEffect(1, 106);
-            work                               = g_Task;
+            work                               = TASK(PartyMember);
             g_BattleEffects[slot].unk_0B       = member << 4;
             g_BattleEffects[slot].header.mode  = 0;
             g_BattleEffects[slot].unk_04       = i;

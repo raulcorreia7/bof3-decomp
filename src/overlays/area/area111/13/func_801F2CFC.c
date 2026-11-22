@@ -5,7 +5,7 @@ MATCH void func_801F2CFC(void) {
     Actor* actor;
 
     func_801F2DA0(&TASK(Actor)->pos.x, (s16)TASK(Actor)->screen_x, (s16)TASK(Actor)->screen_y);
-    actor     = g_Task;
+    actor     = TASK(Actor);
     remaining = --actor->timer;
     actor->screen_x += 0x40;
     actor->screen_y += 0x40;

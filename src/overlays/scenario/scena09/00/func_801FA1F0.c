@@ -107,7 +107,7 @@ MATCH void func_801FA1F0(void) {
                 g_SpawnedActors[TASK(Actor)->param.actor_slot].header.flags = ACTOR_FLAG_IN_USE;
                 g_SpawnedActors[TASK(Actor)->param.actor_slot].type         = 6;
                 g_SpawnedActors[TASK(Actor)->param.actor_slot].unk_06       = 2;
-                work                                                        = g_Task;
+                work                                                        = TASK(Actor);
                 g_SpawnedActors[work->param.actor_slot].scene_step          = 0;
                 g_SpawnedActors[work->param.actor_slot].selection           = 0x24;
                 g_SpawnedActors[work->param.actor_slot].screen_x            = work->screen_x;

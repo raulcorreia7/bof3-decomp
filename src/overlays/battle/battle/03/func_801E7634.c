@@ -10,7 +10,7 @@ MATCH void func_801E7634(void) {
     PartyMember* saved;
 
     if (EMI_IsReady() != 0) {
-        saved       = g_Task;
+        saved       = TASK(PartyMember);
         g_Task      = g_BattleEffectBattler;
         g_GameState = &g_Game.members[g_BattleEffectBattler->slot];
         Script_Select((g_BattleEffectBattler->facing + 4) & BYTE_MASK);

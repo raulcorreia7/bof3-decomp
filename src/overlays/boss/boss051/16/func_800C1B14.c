@@ -12,11 +12,11 @@ MATCH void func_800C1B14(void) {
     TASK(PartyMember)->timer  = 45;
 
     battler = g_BattleEffectBattler;
-    saved   = g_Task;
+    saved   = TASK(PartyMember);
     TASK_SET(battler);
     battler->unk_24 |= 0x80;
 
-    work         = g_Task;
+    work         = TASK(PartyMember);
     work->unk_29 = 2;
     work->screen_x.value += 0x30;
     work->screen_y.value -= 0x10;

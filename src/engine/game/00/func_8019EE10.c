@@ -12,9 +12,9 @@ MATCH void func_8019EE10(void) {
     TASK(Actor)->draw_layer   = g_Game.members[0].unk_29;
     /* The work pointer cell is re-read once per store; the second read is kept in
      * its own local so both reads stay in the original load-then-store order. */
-    work                      = g_Task;
+    work                      = TASK(Actor);
     work->sheet_page          = 0x1D;
-    next                      = g_Task;
+    next                      = TASK(Actor);
     work->voice_flags.raw     = 0;
     next->sheet_row           = 0;
     ACTOR_CLEAR_TINT();

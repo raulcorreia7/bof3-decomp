@@ -3,10 +3,10 @@
 MATCH void func_801F3860(void) {
     Actor* scratch;
 
-    scratch = g_Task;
+    scratch = TASK(Actor);
     if (scratch->param.unk_0B == 0) {
         scratch->timer++;
-        scratch = g_Task;
+        scratch = TASK(Actor);
         if (scratch->timer >= 90) {
             scratch->param.unk_0B++;
         }

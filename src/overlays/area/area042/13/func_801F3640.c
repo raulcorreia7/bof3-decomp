@@ -5,7 +5,7 @@ MATCH void func_801F3640(void) {
 
     if (SYS_TestFlag(g_SceneEventFlags, 17)) {
         SND_SEPlay(EMI_SE_ID(SND_BANK_AREA, 0x02));
-        actor               = g_Task;
+        actor               = TASK(Actor);
         actor->param.unk_0B = 0x80;
         actor->pos.z.fixed  = -0x180;
         TASK(Actor)->timer  = 0;

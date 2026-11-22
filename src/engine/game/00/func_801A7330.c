@@ -29,7 +29,7 @@ MATCH void func_801A7330(const volatile u8* data) {
 
     TASK(Actor)->header.flags = ACTOR_FLAG_IN_USE;
 
-    work                           = g_Task;
+    work                           = TASK(Actor);
     g_Actors[*counter].walk_dest_x = (work->pos.x.fixed = (data[5] << 16) | ((data[4] != 0) ? 0x8000 : 0));
     /* FAKE: barrier pins the counter re-read before the shadow store. */
     FAKE_BARRIER();
@@ -42,7 +42,7 @@ MATCH void func_801A7330(const volatile u8* data) {
 
     dist = Area_HeightSample(work->pos.x.fixed, work->pos.y.fixed);
 
-    w2                   = g_Task;
+    w2                   = TASK(Actor);
     w2->header.mode      = 6;
     COORD_INT(w2->pos.z) = (u16)dist;
     ACTOR_CLEAR_STEP();
@@ -67,7 +67,7 @@ MATCH void func_801A7330(const volatile u8* data) {
     TASK(Actor)->tint.bytes.flags = data[3] & 0xF;
     TASK(Actor)->draw_layer       = 6;
 
-    rec                       = g_Task;
+    rec                       = TASK(Actor);
     g_Actors[*counter].unk_7C = 0;
     /* FAKE: lock keeps the packed store ahead of the record stores. */
     FAKE_ORDER_LOCK(rec->unk_18 = (data[9] << 8) | ((const u8*)data)[0xA]);

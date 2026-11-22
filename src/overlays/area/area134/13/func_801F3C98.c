@@ -11,7 +11,7 @@ MATCH void func_801F3C98(void) {
         if (g_ScriptVars[1] == GAME_NONE || g_ScriptVars[2] == 0x80) {
             /* FAKE: pin the scratchpad base to v0 for the mode store. */
             FAKE_REG(Actor*, work, "v0");
-            work              = g_Task;
+            work              = TASK(Actor);
             work->header.mode = 0x17;
         } else {
             g_ScriptVars[1] = 0;

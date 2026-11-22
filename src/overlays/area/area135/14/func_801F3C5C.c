@@ -4,7 +4,7 @@ MATCH void func_801F3C5C(void) {
     Actor* work;
     s32    value;
 
-    work            = g_Task;
+    work            = TASK(Actor);
     value           = work->pos.z.fixed;
     g_AreaSceneMode = 0;
     value += 8;

@@ -42,7 +42,7 @@ MATCH void func_801A1384(void* entity) {
                     rec[0x76] = savedFlag;
                     rec[0x7B] = 0;
                     rec[0x74] |= ACTOR_INTERACTION_MOVING | ACTOR_INTERACTION_SCRIPT_REQUEST;
-                    spad            = g_Task;
+                    spad            = TASK(Actor);
                     LOHU(rec[0x7E]) = savedState;
                     spad->timer     = 0;
                     return;

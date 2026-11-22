@@ -11,7 +11,7 @@ MATCH void func_801F3920(void) {
     GFX_DrawShadedDisc((s16)TASK(Actor)->screen_x, (s16)y, (s16)TASK(Actor)->unk_18, 0xFF, TASK(Actor)->tint.bytes.flags);
     Area_DrawScreenTint();
     func_801F3C84();
-    task = g_Task;
+    task = TASK(Actor);
     task->tint.bytes.flags -= 2;
     task->unk_18 -= 0xA;
     if (TASK(Actor)->unk_18 <= 0) {

@@ -8,7 +8,7 @@ MATCH void func_801F2C88(void) {
         return;
     }
 
-    previous                  = g_Task;
+    previous                  = TASK(Actor);
     WORLD00_AREA008_STATE_PTR = (volatile Actor*)&g_BattlePartyBattlers[1];
     TASK_SET(&g_BattlePartyBattlers[1]);
     D_801460E8 |= 0x40;

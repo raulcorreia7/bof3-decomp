@@ -26,7 +26,7 @@ MATCH void func_801EED38(void) {
     for (i = 0; i < D_801F0198[TASK(PartyMember)->unk_04]; i++) {
         sparkle_index = func_801F0000();
         if (sparkle_index != GAME_NONE) {
-            owner                                 = g_Task;
+            owner                                 = TASK(PartyMember);
             D_801F01B4[sparkle_index].header.mode = 0;
             D_801F01B4[sparkle_index].header.step = 0;
             D_801F01B4[sparkle_index].battler     = owner;

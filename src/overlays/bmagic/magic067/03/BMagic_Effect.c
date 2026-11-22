@@ -92,7 +92,7 @@ MATCH void func_801EF010(void) {
                 battler = i + BATTLE_PARTY_CHARACTERS_COUNT;
                 if (!Battle_SlotIsBlocked(battler)) {
                     slot                               = Battle_AllocEffect(1, 0x13);
-                    g_BattleEffects[slot].target.party = g_Task;
+                    g_BattleEffects[slot].target.party = TASK(PartyMember);
                     g_BattleEffects[slot].header.mode  = 2;
                     g_BattleEffects[slot].unk_03       = i;
                     g_BattleEffects[slot].unk_04       = 5;
@@ -106,7 +106,7 @@ MATCH void func_801EF010(void) {
             for (i = 0; i < BATTLE_PARTY_CHARACTERS_COUNT; i++) {
                 if (!Battle_SlotIsBlocked(i)) {
                     slot                               = Battle_AllocEffect(1, 0x13);
-                    g_BattleEffects[slot].target.party = g_Task;
+                    g_BattleEffects[slot].target.party = TASK(PartyMember);
                     g_BattleEffects[slot].header.mode  = 2;
                     g_BattleEffects[slot].unk_04       = 5;
                     g_BattleEffects[slot].unk_03       = i;
@@ -146,7 +146,7 @@ MATCH void func_801EF38C(void) {
     LOW(TASK(PartyMember)->pos.x.fixed) = g_AreaScrollTargetX + TASK(PartyMember)->unk_0C;
     TASK(PartyMember)->pos.y.fixed      = g_AreaScrollTargetY + TASK(PartyMember)->unk_10;
     SND_SEPlay(EMI_SE_ID(SND_BANK_COMMON, 0));
-    work                      = g_Task;
+    work                      = TASK(PartyMember);
     work->param.unk_0B        = 0x34;
     work->unk_14              = 0x2FFF;
     TASK(PartyMember)->unk_09 = 0;

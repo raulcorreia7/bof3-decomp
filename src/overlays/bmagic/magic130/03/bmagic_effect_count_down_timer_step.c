@@ -21,10 +21,10 @@ MATCH void func_801EEFB4(void) {
 
     flag                      = 1;
     shade                     = -0x80;
-    work                      = g_Task;
+    work                      = TASK(PartyMember);
     work->screen_x.value      = 0xDC;
     work->unk_25              = 0x1D;
-    next                      = g_Task;
+    next                      = TASK(PartyMember);
     work->screen_y.value      = 0x6E;
     next->unk_26              = 0;
     TASK(PartyMember)->unk_27 = 0x1A;
@@ -33,7 +33,7 @@ MATCH void func_801EEFB4(void) {
     {
         PartyMember* task;
 
-        task          = g_Task;
+        task          = TASK(PartyMember);
         task->unk_48  = 0;
         task->scale.x = 0x10000;
         task->scale.y = 0x10000;
@@ -87,7 +87,7 @@ MATCH void func_801EF354(void) {
     PartyMember* task;
     u16          value;
 
-    task                     = g_Task;
+    task                     = TASK(PartyMember);
     task->screen_x.value     = task->param.unk_0B * 26 + 0x98;
     value                    = D_801EFA6C[task->param.unk_0B];
     task->unk_14             = 0x20;

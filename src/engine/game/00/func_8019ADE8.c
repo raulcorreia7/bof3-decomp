@@ -19,12 +19,12 @@ MATCH void func_8019ADE8(void) {
     TASK(Actor)->active_flags = 0;
     TASK(Actor)->mirror       = 0;
     Script_Select(8);
-    work                    = g_Task;
+    work                    = TASK(Actor);
     work->pos.x.fixed       = g_Actors[work->unk_06].pos.x.fixed;
     work->pos.y.fixed       = g_Actors[work->unk_06].pos.y.fixed;
     z                       = FIELD(s32, &g_Actors[work->unk_06], 0x3Cu);
     work->tint.bytes.flags  = 0;
-    work2                   = g_Task;
+    work2                   = TASK(Actor);
     work->pos.z.fixed       = z;
     work2->tint.bytes.rgb.b = 0;
     work2->tint.bytes.rgb.g = 0;

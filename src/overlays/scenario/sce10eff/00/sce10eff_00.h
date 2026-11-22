@@ -111,12 +111,12 @@ static inline void Scene_AdvanceBand(u32 band_limit) {
     SceneBandEffect* work;
 
     TASK(SceneBandEffect)->ticker++;
-    work = g_Task;
+    work = TASK(SceneBandEffect);
     if (work->band < band_limit) {
         work->band += 2;
     } else {
         work->timer = 60;
-        work        = g_Task;
+        work        = TASK(SceneBandEffect);
         work->step_index++;
     }
 }

@@ -6,7 +6,7 @@ MATCH void func_801E50C0(void) {
     {
         PartyMember* work;
 
-        work      = g_Task;
+        work      = TASK(PartyMember);
         countdown = work->unk_09;
         if (countdown != 0) {
             work->unk_09 = countdown - 1;
@@ -21,7 +21,7 @@ MATCH void func_801E50C0(void) {
                 {
                     PartyMember* motion_work;
 
-                    motion_work = g_Task;
+                    motion_work = TASK(PartyMember);
                     motion_work->unk_0C += motion_work->unk_18;
                     motion_work->unk_10 += motion_work->unk_1C;
                     motion_work->pos.x.fixed += motion_work->unk_0C;

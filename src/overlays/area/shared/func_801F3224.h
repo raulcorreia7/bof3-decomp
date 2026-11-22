@@ -7,10 +7,10 @@ MATCH void func_801F3224(void) {
 
     Actor_SetScreenOrigin();
 
-    scratch                    = g_Task;
+    scratch                    = TASK(Actor);
     timer                      = *(u8*)(((u8*)scratch + 9));
     *(u8*)(((u8*)scratch + 9)) = timer - 1;
-    scratch2                   = g_Task;
+    scratch2                   = TASK(Actor);
     scratch->scale.x += 0x2000;
 
     if (((u8*)scratch2)[9] == 0) {

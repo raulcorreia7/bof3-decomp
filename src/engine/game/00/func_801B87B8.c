@@ -16,7 +16,7 @@ MATCH void func_801B87B8(void) {
             return;
         }
         if ((func_801B9598() & BYTE_MASK) == 0) {
-            work            = g_Task;
+            work            = TASK(Actor);
             work->direction = (work->direction + 1);
             func_801B9598();
         }

@@ -18,12 +18,12 @@ MATCH void func_801EECCC(void) {
 
     actor                     = g_Battle.selected_actor;
     TASK(PartyMember)->facing = actor->facing;
-    task                      = g_Task;
+    task                      = TASK(PartyMember);
     WorldPos_Copy(&task->pos, &actor->pos);
     task->param.unk_0B = 0;
     for (i = 0, anchor = 1; i < 6; i++) {
         slot                               = Battle_AllocEffect(1, 22);
-        work                               = g_Task;
+        work                               = TASK(PartyMember);
         g_BattleEffects[slot].arg.unk_09   = anchor;
         g_BattleEffects[slot].target.party = work;
         TASK(PartyMember)->param.unk_0B += 1;

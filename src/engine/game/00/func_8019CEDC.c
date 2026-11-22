@@ -5,7 +5,7 @@ MATCH void func_8019CEDC(void) {
     s32    moved;
 
     TASK(Actor)->timer = (TASK(Actor)->timer - 1);
-    work               = g_Task;
+    work               = TASK(Actor);
     work->pos.x.fixed += work->vx;
     moved             = work->pos.y.fixed + work->vy;
     work->pos.y.fixed = moved;

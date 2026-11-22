@@ -48,7 +48,7 @@ MATCH void Area_UpdateRunGauge(void) {
             }
         }
 
-        w       = g_Task;
+        w       = TASK(Actor);
         clamped = (s8)w->param.unk_0B;
         if (clamped >= 0) {
             stored = 0x40;

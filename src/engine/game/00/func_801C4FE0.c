@@ -12,7 +12,7 @@ MATCH s32 func_801C4FE0(void) {
     u8     slot;
     s32    moved;
 
-    work    = g_Task;
+    work    = TASK(Actor);
     step    = work->voice_flags.scene_flag + 2;
     next_x  = work->pos.x.fixed + g_FacingSteps[work->direction].x * step;
     x       = next_x;

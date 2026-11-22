@@ -1,7 +1,7 @@
 #include "area172_13.h"
 
 MATCH void func_801F2D48(void) {
-    Actor* work              = g_Task;
+    Actor* work              = TASK(Actor);
     work->tint.steps.delta.b = -1;
     work->tint.steps.delta.g = -1;
     work->tint.steps.delta.r = -1;

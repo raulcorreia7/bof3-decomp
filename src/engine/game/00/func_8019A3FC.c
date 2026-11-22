@@ -14,40 +14,40 @@ MATCH void func_8019A3FC(void) {
 
     Area_SceneSelectRecord(0x18);
 
-    ptr         = g_Task;
+    ptr         = TASK(Actor);
     ptr->unk_48 = 0;
 
-    work               = g_Task;
+    work               = TASK(Actor);
     delta              = work->vx;
     total              = work->screen_x + delta;
     delta              = work->vy;
     work->active_flags = 0;
     work->screen_x     = total;
     total              = work->screen_y;
-    other              = g_Task;
+    other              = TASK(Actor);
     work->screen_y     = (total - delta);
     other->mirror      = 0;
 
-    work             = g_Task;
+    work             = TASK(Actor);
     work->draw_layer = 2;
 
     if (TASK(Actor)->unk_06 == 3) {
         TASK(Actor)->header.flags |= ACTOR_FLAG_SEMI_TRANSPARENT;
-        work                     = g_Task;
+        work                     = TASK(Actor);
         work->tint.bytes.flags   = 1;
-        work                     = g_Task;
+        work                     = TASK(Actor);
         work->tint.steps.delta.b = -8;
         work->tint.steps.delta.g = -8;
         work->tint.steps.delta.r = -8;
-        work                     = g_Task;
+        work                     = TASK(Actor);
         work->timer              = 20;
     } else {
         TASK(Actor)->tint.bytes.flags = 0;
-        ptr                           = g_Task;
+        ptr                           = TASK(Actor);
         ptr->tint.bytes.rgb.b         = 0;
         ptr->tint.bytes.rgb.g         = 0;
         ptr->tint.bytes.rgb.r         = 0;
-        work                          = g_Task;
+        work                          = TASK(Actor);
         work->timer                   = 16;
     }
 

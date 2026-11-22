@@ -6,7 +6,7 @@ MATCH void func_801F33F0(void) {
     u8*    flag;
     u8     step;
 
-    s    = g_Task;
+    s    = TASK(Actor);
     flag = &g_ScriptVars[3];
     step = *flag;
     e    = &g_Actors[s->param.unk_0B];

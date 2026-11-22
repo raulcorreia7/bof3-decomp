@@ -18,7 +18,7 @@ MATCH void Area_SetXFixed(Actor* entity) {
             if (!(entity->interaction_flags & 0x80)) {
                 COORD_INT(TASK(Actor)->pos.z) = Area_HeightSample(TASK(Actor)->pos.x.fixed, TASK(Actor)->pos.y.fixed);
             }
-            work            = g_Task;
+            work            = TASK(Actor);
             entity->roll_90 = 0;
             mode            = work->header.step;
             if (mode - 1 < 3) {

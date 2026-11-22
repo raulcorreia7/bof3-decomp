@@ -3,7 +3,7 @@
 MATCH void func_801F3000(void) {
     Actor* work;
 
-    work = g_Task;
+    work = TASK(Actor);
     work->screen_y -= 0x10;
     if ((s16)work->screen_y <= 0) {
         if (g_GameStateIndex == GAME_REQUEST_IDLE) {

@@ -5,7 +5,7 @@ MATCH void func_801F2CB4(void) {
 
     if (g_AreaSceneMode == 1) {
         TASK(Actor)->timer = 0;
-        work               = g_Task;
+        work               = TASK(Actor);
         work->header.step++;
         func_801F2F38(0, 0);
     }

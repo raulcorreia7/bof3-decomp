@@ -11,7 +11,7 @@ MATCH void func_8019B150(void) {
 
     TASK(Actor)->active_flags = 0;
 
-    work         = g_Task;
+    work         = TASK(Actor);
     work->mirror = (work->unk_06 >> 7);
 
     Script_Select((TASK(Actor)->unk_06 & 0x7F));

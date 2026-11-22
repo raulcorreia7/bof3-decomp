@@ -5,7 +5,7 @@ MATCH void func_801F4DE0(void) {
     u16    screen_x;
     u8*    counter;
 
-    work           = g_Task;
+    work           = TASK(Actor);
     screen_x       = work->screen_x + 0xA;
     work->screen_x = screen_x;
     if ((s16)screen_x >= 0x191) {

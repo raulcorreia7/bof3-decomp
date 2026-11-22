@@ -12,7 +12,7 @@ MATCH void func_8019A6AC(void) {
     TASK(Actor)->tint.bytes.rgb.g -= 6;
     TASK(Actor)->tint.bytes.rgb.b -= 6;
     Script_AnimStepLoop();
-    work = g_Task;
+    work = TASK(Actor);
     if (work->unk_05 == 6) {
         if ((work->timer & 0x1) != 0) {
             work->screen_y++;

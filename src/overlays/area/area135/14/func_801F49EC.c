@@ -24,7 +24,7 @@ MATCH void func_801F49EC(void) {
         Area_MoveActorRoute(g_ScriptState, TASK(Actor)->direction);
         TASK(Actor)->vz = 0;
     }
-    work = g_Task;
+    work = TASK(Actor);
     work->unk_04 += 1;
     g_ScriptState->cursor -= 2;
 }

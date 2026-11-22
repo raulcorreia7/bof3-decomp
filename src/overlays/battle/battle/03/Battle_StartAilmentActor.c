@@ -19,12 +19,12 @@ MATCH void Battle_StartAilmentActor(void) {
         TASK(PartyMember)->unk_24       = 0x80;
         TASK(PartyMember)->unk_27       = 0xFF;
         TASK(PartyMember)->unk_28       = 0;
-        work                            = g_Task;
+        work                            = TASK(PartyMember);
         work->unk_2B                    = 0;
-        next                            = g_Task;
+        next                            = TASK(PartyMember);
         work->unk_2C.value              = 1;
         next->unk_48                    = 0;
-        work                            = g_Task;
+        work                            = TASK(PartyMember);
         work->scale.y                   = 0x10000;
         work->scale.x                   = 0x10000;
         work->unk_18                    = 0x666;
@@ -32,7 +32,7 @@ MATCH void Battle_StartAilmentActor(void) {
         work->timer                     = 60;
         func_801E8DD8();
         Script_Select(s_BattleBattlerStepIds[index]);
-        work              = g_Task;
+        work              = TASK(PartyMember);
         work->header.mode = (work->header.mode) + 2;
     }
 }

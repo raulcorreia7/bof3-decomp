@@ -5,7 +5,7 @@ MATCH void AreaAction_ShowFind(void) {
     u8     msgId;
     Actor* spad;
 
-    spad = g_Task;
+    spad = TASK(Actor);
     if (!ACTOR_IN_USE(g_SpawnedActors[spad->param.actor_slot])) {
         msgId = g_FindZenny[spad->unk_04];
         if (msgId != 0) {

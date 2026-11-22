@@ -8,7 +8,7 @@ MATCH void Area_SceneReset(void) {
     Actor*       work;
     PartyMember* mode_work;
 
-    work                   = g_Task;
+    work                   = TASK(Actor);
     mode_work              = g_Game.current;
     g_AreaCameraStep       = 0;
     g_AreaCameraHeightStep = 0;

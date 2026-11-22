@@ -1,7 +1,7 @@
 #include "area103_13.h"
 
 MATCH void func_801F3C14(void) {
-    Actor* work = g_Task;
+    Actor* work = TASK(Actor);
 
     work->timer               = 0;
     work->pos.x.fixed         = TO_COORD(87);

@@ -4,7 +4,7 @@ MATCH void func_801F2C5C(void) {
     Actor* actor;
 
     func_801F35B8();
-    actor         = g_Task;
+    actor         = TASK(Actor);
     actor->unk_06 = 0;
     actor->unk_32 = 0x78;
     TASK(Actor)->header.mode++;

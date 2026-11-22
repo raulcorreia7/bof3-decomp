@@ -6,7 +6,7 @@ MATCH void func_801F312C(void) {
 
     TASK(Actor)->unk_0A += 1;
     if (TASK(Actor)->unk_0A == 0x1E) {
-        actor = g_Task;
+        actor = TASK(Actor);
         if (SYS_TestFlag(g_SceneEventFlags, 107) == 0) {
             SYS_SetFlag(g_SceneEventFlags, 107U);
             value = 0;

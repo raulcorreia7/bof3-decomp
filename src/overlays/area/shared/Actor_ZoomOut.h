@@ -7,10 +7,10 @@ MATCH void Actor_ZoomOut(void) {
 
     Actor_SetScreenOrigin();
 
-    scratch = g_Task;
+    scratch = TASK(Actor);
     scratch->timer -= 1;
 
-    check = g_Task;
+    check = TASK(Actor);
     scratch->scale.x -= 0x2000;
 
     if (check->timer == 0) {

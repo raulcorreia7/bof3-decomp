@@ -5,10 +5,10 @@ MATCH void func_800C1AB4(void) {
     PartyMember* spad;
 
     func_800C236C(TASK(PartyMember)->unk_09);
-    work = g_Task;
+    work = TASK(PartyMember);
     if (work->unk_09 == 0x30) {
         work->unk_48  = 2;
-        spad          = g_Task;
+        spad          = TASK(PartyMember);
         spad->scale.x = 0x10000;
         spad->scale.y = 0x10000;
         SND_SEPlay(EMI_SE_ID(SND_BANK_ENEMY, 2));

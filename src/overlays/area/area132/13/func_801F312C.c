@@ -5,7 +5,7 @@ MATCH void func_801F312C(void) {
     s32    limit;
     u8     timer;
 
-    work = g_Task;
+    work = TASK(Actor);
     work->unk_1C += 0x1000000;
     limit = work->vz + 0x8000000;
     if (limit < work->unk_1C) {

@@ -10,7 +10,7 @@ MATCH void func_801F36A0(void) {
         TASK(Actor)->timer += 1;
     }
     func_801F4490(&TASK(Actor)->pos, TASK(Actor)->vx, TASK(Actor)->vy);
-    work = g_Task;
+    work = TASK(Actor);
     work->unk_18 += 128;
     work->unk_1C += 140;
     work->vx -= work->unk_18;

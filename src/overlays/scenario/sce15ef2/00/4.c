@@ -26,7 +26,7 @@ MATCH void func_801D0CA0(void) {
     Actor* work;
     u8     timer;
 
-    work        = g_Task;
+    work        = TASK(Actor);
     timer       = work->timer - 1;
     work->vx    = work->vx + 0x10;
     work->timer = timer;
@@ -51,7 +51,7 @@ MATCH void func_801D0D5C(void) {
     Actor* work;
     u8     timer;
 
-    work        = g_Task;
+    work        = TASK(Actor);
     timer       = work->timer - 1;
     work->vx    = work->vx - 0x10;
     work->timer = timer;
@@ -98,7 +98,7 @@ MATCH void func_801D0EF8(void) {
 MATCH void func_801D0F68(void) {
     Actor* work;
 
-    work                     = g_Task;
+    work                     = TASK(Actor);
     work->timer              = 10;
     work->screen_x           = 0;
     work->screen_y           = 0;
@@ -109,7 +109,7 @@ MATCH void func_801D0F9C(void) {
     Actor* work;
     u8     timer;
 
-    work           = g_Task;
+    work           = TASK(Actor);
     timer          = work->timer - 1;
     work->timer    = timer;
     work->screen_x = work->screen_x + 0x15;
@@ -131,7 +131,7 @@ MATCH void func_801D1050(void) {
     Actor* work;
     u8     timer;
 
-    work           = g_Task;
+    work           = TASK(Actor);
     timer          = work->timer - 1;
     work->timer    = timer;
     work->screen_x = work->screen_x - 7;

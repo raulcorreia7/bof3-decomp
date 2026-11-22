@@ -41,7 +41,7 @@ MATCH void func_801EECF8(void) {
         battler = i + BATTLE_PARTY_CHARACTERS_COUNT;
         if (!Battle_SlotIsBlocked(battler) && g_Battle.active_battler != i + BATTLE_PARTY_CHARACTERS_COUNT) {
             slot                               = Battle_AllocEffect(1, 0x68);
-            g_BattleEffects[slot].target.party = g_Task;
+            g_BattleEffects[slot].target.party = TASK(PartyMember);
             g_BattleEffects[slot].header.mode  = 0;
             g_BattleEffects[slot].unk_04       = battler;
             TASK(PartyMember)->param.unk_0B += 1;
@@ -51,7 +51,7 @@ MATCH void func_801EECF8(void) {
         battler = i;
         if (!Battle_SlotIsBlocked(battler) && g_Battle.active_battler != battler) {
             slot                               = Battle_AllocEffect(1, 0x68);
-            g_BattleEffects[slot].target.party = g_Task;
+            g_BattleEffects[slot].target.party = TASK(PartyMember);
             g_BattleEffects[slot].header.mode  = 0;
             g_BattleEffects[slot].unk_04       = i;
             TASK(PartyMember)->param.unk_0B += 1;
@@ -88,7 +88,7 @@ MATCH void func_801EEFE4(void) {
     } else {
         record = (PartyMember*)&g_BattleEnemies[index * BATTLE_ENEMY_STRIDE];
     }
-    target                          = g_Task;
+    target                          = TASK(PartyMember);
     target->pos.x.fixed             = record->pos.x.fixed;
     target->pos.y.fixed             = record->pos.y.fixed;
     target->pos.z.fixed             = record->pos.z.fixed + TO_COORD(512);
@@ -99,9 +99,9 @@ MATCH void func_801EEFE4(void) {
     claimed = func_801F0354();
     if (claimed != GAME_NONE) {
         offset                                  = claimed << 5;
-        claims                                  = g_Task;
+        claims                                  = TASK(PartyMember);
         D_801F0454[offset + 1]                  = 1;
-        count                                   = g_Task;
+        count                                   = TASK(PartyMember);
         FIELD(PartyMember*, D_801F0470, offset) = claims;
         count->param.unk_0B++;
     }
@@ -143,7 +143,7 @@ MATCH void func_801EF1C8(void) {
         slot = func_801F0354();
         if (slot != GAME_NONE) {
             off                                  = slot << 5;
-            task                                 = g_Task;
+            task                                 = TASK(PartyMember);
             D_801F0454[off + 1]                  = 0;
             D_801F0454[off + 4]                  = i;
             FIELD(PartyMember*, D_801F0470, off) = task;

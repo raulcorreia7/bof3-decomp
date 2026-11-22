@@ -10,7 +10,7 @@ MATCH void func_801F4C18(void) {
         g_ScriptState->steps = -g_ScriptState->steps;
     }
     Area_MoveActorRoute(g_ScriptState, TASK(Actor)->direction);
-    work = g_Task;
+    work = TASK(Actor);
     work->unk_04 += 1;
     work->vz = 0;
     g_ScriptState->cursor -= 2;

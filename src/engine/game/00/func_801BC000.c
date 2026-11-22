@@ -19,7 +19,7 @@ MATCH void func_801BC000(void) {
     Actor* tmp11;
     Actor* tmp12;
 
-    tmp5 = g_Task;
+    tmp5 = TASK(Actor);
     if (g_GameStateIndex == GAME_REQUEST_SCENE_CAMERA) {
         tmp5->header.mode = 0xE;
         goto block_26;
@@ -27,7 +27,7 @@ MATCH void func_801BC000(void) {
     if (g_Game.walk_flags & AREA_WALK_TRANSITION) {
         tmp5->header.mode        = 5;
         TASK(Actor)->header.step = 0;
-        tmp9                     = g_Task;
+        tmp9                     = TASK(Actor);
         tmp9->param.unk_0B       = 0;
         return;
     }
@@ -79,15 +79,15 @@ MATCH void func_801BC000(void) {
                     func_801C4C48();
                     Script_Request((TASK(Actor)->direction + 8) & BYTE_MASK);
                     if (g_Game.current->chr.character_id == CHAR_ID_GARR) {
-                        tmp10 = g_Task;
+                        tmp10 = TASK(Actor);
                         tmp3  = tmp10->timer;
                         Area_HeightRead(tmp10->pos.x.fixed + (tmp10->vx * tmp3), tmp10->pos.y.fixed + (tmp10->vy * tmp3));
                     }
-                    tmp11        = g_Task;
+                    tmp11        = TASK(Actor);
                     tmp11->timer = (tmp11->timer - 1);
                     Actor_MovementUpdate();
                     g_Game.current->u.field.mode.value = 1;
-                    tmp6                               = g_Task;
+                    tmp6                               = TASK(Actor);
                     tmp6->header.step                  = 1;
                     return;
                 case_b:
@@ -95,7 +95,7 @@ MATCH void func_801BC000(void) {
                     Script_Request(TASK(Actor)->direction);
                     g_Game.current->u.field.mode.value = 0;
                 block_26:
-                    tmp7              = g_Task;
+                    tmp7              = TASK(Actor);
                     tmp7->header.step = 0;
                     return;
                 case_5:
@@ -103,7 +103,7 @@ MATCH void func_801BC000(void) {
                     Script_Request(TASK(Actor)->direction);
                     g_Game.current->u.field.mode.value = 4;
                     TASK(Actor)->header.mode           = 2;
-                    tmp8                               = g_Task;
+                    tmp8                               = TASK(Actor);
                     tmp8->header.step                  = 3;
                     return;
                 case_6:
@@ -111,7 +111,7 @@ MATCH void func_801BC000(void) {
                     Script_Request(TASK(Actor)->direction);
                     g_Game.current->u.field.mode.value = 3;
                     TASK(Actor)->header.mode           = FIELD_TASK_MODE_CLIMB;
-                    tmp12                              = g_Task;
+                    tmp12                              = TASK(Actor);
                     tmp4                               = tmp12->direction;
                     if ((tmp4 == FACING_UP) || (tmp4 == FACING_LEFT)) {
                         tmp12->header.step = 0;

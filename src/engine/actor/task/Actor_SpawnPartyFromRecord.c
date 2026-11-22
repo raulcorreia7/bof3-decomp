@@ -21,7 +21,7 @@ MATCH void Actor_SpawnPartyFromRecord(u8* script) {
         TASK(Actor)->header.flags = ACTOR_FLAG_IN_USE;
         coord_x                   = script[5] << 16;
         slot_off                  = *counter * ACTOR_SIZE;
-        work                      = g_Task;
+        work                      = TASK(Actor);
         if (script[4] != 0) {
             coord_x |= 0x8000;
         }
@@ -34,7 +34,7 @@ MATCH void Actor_SpawnPartyFromRecord(u8* script) {
         FAKE_BARRIER();
         D_80146910[*counter][0]  = 0;
         dist                     = Area_HeightSample(work->pos.x.fixed, work->pos.y.fixed);
-        record                   = g_Task;
+        record                   = TASK(Actor);
         COORD_INT(record->pos.z) = (u16)dist;
         record->header.mode      = script[8];
 

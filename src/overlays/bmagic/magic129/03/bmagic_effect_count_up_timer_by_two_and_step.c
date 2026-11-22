@@ -79,7 +79,7 @@ MATCH void func_801EF4F0(void) {
     PartyMember* work;
     s8           timer;
 
-    work         = g_Task;
+    work         = TASK(PartyMember);
     timer        = work->unk_5D - 1;
     work->unk_5D = timer;
     if (timer == 0) {
@@ -278,7 +278,7 @@ MATCH void func_801F00D4(void) {
 }
 
 MATCH void func_801F023C(void) {
-    PartyMember* work  = g_Task;
+    PartyMember* work  = TASK(PartyMember);
     u8           timer = work->unk_09 - 1;
     s32          value = work->unk_14 + work->unk_20;
     work->unk_09       = timer;
@@ -290,7 +290,7 @@ MATCH void func_801F023C(void) {
 }
 
 MATCH void func_801F029C(void) {
-    PartyMember* work  = g_Task;
+    PartyMember* work  = TASK(PartyMember);
     u8           timer = work->timer - 1;
     s32          value = work->unk_14 + work->unk_20;
     work->timer        = timer;

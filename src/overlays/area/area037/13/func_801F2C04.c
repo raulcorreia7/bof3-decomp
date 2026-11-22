@@ -8,7 +8,7 @@ MATCH void func_801F2C04(void) {
 
     if (TASK(Actor)->header.step == 0) {
         TASK(Actor)->param.unk_0B = COORD_INT(TASK(Actor)->pos.x);
-        work                      = g_Task;
+        work                      = TASK(Actor);
         work->pos.x.fixed         = ((D_801F3B34[work->param.unk_0B] - 0x80) << 7) + 0x38;
         work->pos.y.fixed         = (D_801F3B38[work->param.unk_0B] - 0x80) << 7;
         work->pos.z.fixed         = D_801F3B3C[work->param.unk_0B];

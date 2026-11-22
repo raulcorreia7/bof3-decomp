@@ -30,7 +30,7 @@ MATCH void func_801F2C48(void) {
         actor->sheet_page   = GetTPage(TPAGE_DEPTH_4BIT, TPAGE_ABR_HALF, 0x340, 0x100);
         actor->sheet_row    = 0x80;
         actor->active_flags |= 0x88;
-        parent = g_Task;
+        parent = TASK(Actor);
         g_Task = actor;
         Script_Select(actor->direction);
         Area_AddGridActor();

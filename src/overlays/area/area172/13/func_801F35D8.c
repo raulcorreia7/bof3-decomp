@@ -14,7 +14,7 @@ MATCH void func_801F35D8(void) {
     pos[2] = TASK(Actor)->pos.z.fixed;
     Camera_ProjectPoint(pos, &screen);
     PopMatrix();
-    work           = g_Task;
+    work           = TASK(Actor);
     work->screen_x = screen.vx;
     work->screen_y = screen.vy;
     work->vx -= 16;

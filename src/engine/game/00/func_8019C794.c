@@ -6,7 +6,7 @@ MATCH void func_8019C794(void) {
     u8             code;
     u8             index;
 
-    work = g_Task;
+    work = TASK(Actor);
     work->pos.x.fixed += work->vx;
     work->unk_0A -= 1;
     work->pos.y.fixed += work->vy;

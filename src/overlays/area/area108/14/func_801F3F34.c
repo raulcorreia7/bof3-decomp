@@ -4,11 +4,11 @@ MATCH void func_801F3F34(void) {
     Actor* actor;
 
     TASK(Actor)->timer++;
-    actor = g_Task;
+    actor = TASK(Actor);
     if (actor->timer == 1) {
         Area_CellSetPalette((s16)(COORD_INT(actor->pos.x) + 1), COORD_INT(actor->pos.y));
     }
-    actor = g_Task;
+    actor = TASK(Actor);
     if (actor->timer == 5) {
         Area_CellSetPalette(COORD_INT(actor->pos.x), COORD_INT(actor->pos.y));
     }

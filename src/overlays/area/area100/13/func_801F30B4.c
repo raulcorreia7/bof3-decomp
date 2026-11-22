@@ -5,7 +5,7 @@ MATCH void func_801F30B4(void) {
     s32    value;
 
     value             = Area_HeightSample(TASK(Actor)->pos.x.fixed, TASK(Actor)->pos.y.fixed) << 16;
-    work              = g_Task;
+    work              = TASK(Actor);
     work->pos.z.fixed = value;
     work->vz          = 0;
     work->gravity     = 0;

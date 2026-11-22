@@ -5,7 +5,7 @@ MATCH void func_800C1F88(void) {
     u32    offset;
     u32    value;
 
-    work = g_Task;
+    work = TASK(PartyMember);
     if (work->pos.z.fixed < work->gravity) {
         work->pos.z.fixed = work->pos.z.fixed + 0x01000000;
     } else {
@@ -15,7 +15,7 @@ MATCH void func_800C1F88(void) {
         } else {
             work->direction ^= 2u;
             value             = g_AreaScrollTargetX + ((s8*)g_BattleScrollDeltas)[(g_Battle.scroll_dir ^ 0x2) * 2];
-            work              = g_Task;
+            work              = TASK(PartyMember);
             work->pos.x.fixed = value;
             offset            = (g_Battle.scroll_dir ^ 0x2) * 2;
         }

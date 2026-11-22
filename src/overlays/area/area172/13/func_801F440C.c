@@ -9,7 +9,7 @@ MATCH void func_801F440C(void) {
     TASK(Actor)->tint.steps.delta.r = -0x80;
     TASK(Actor)->tint.steps.delta.g = -0x80;
     TASK(Actor)->tint.steps.delta.b = -0x80;
-    work                            = g_Task;
+    work                            = TASK(Actor);
     work->unk_04                    = 1;
     setVector(work, 0, 0, 0);
     work->gravity = -8;

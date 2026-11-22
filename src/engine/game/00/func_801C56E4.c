@@ -5,7 +5,7 @@ MATCH void func_801C56E4(void) {
     Actor* work;
     Actor* state;
 
-    work            = g_Task;
+    work            = TASK(Actor);
     work->direction = (work->direction ^ 0x4);
     index           = 59;
     if (TASK(Actor)->direction == FACING_RIGHT) {
@@ -14,7 +14,7 @@ MATCH void func_801C56E4(void) {
     Script_Request(index);
     GFX_PaletteLoad((TASK(Actor)->unk_05 << 6) + GAME_PALETTE_STAGE, 0);
     Actor_ClearVelocity();
-    state                    = g_Task;
+    state                    = TASK(Actor);
     state->gravity           = -8;
     state->header.mode       = 2;
     TASK(Actor)->header.step = 3;

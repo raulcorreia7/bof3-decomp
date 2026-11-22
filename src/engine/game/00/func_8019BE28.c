@@ -4,7 +4,7 @@ MATCH void func_8019BE28(void) {
     Actor* work;
 
     TASK(Actor)->unk_48 = 2;
-    work                = g_Task;
+    work                = TASK(Actor);
     work->scale.x += 0x4000;
     work->scale.y += 0x4000;
     if (work->timer != 0) {

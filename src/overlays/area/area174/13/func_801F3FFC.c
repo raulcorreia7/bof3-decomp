@@ -7,17 +7,17 @@ MATCH void func_801F3FFC(void) {
     Actor* work;
     Actor* scratch;
 
-    work = g_Task;
+    work = TASK(Actor);
     COORD_INT(work->pos.z) -= 0x14;
     tint_a = work->tint.steps.delta.r;
     if (tint_a < -0x40) {
         work->tint.steps.delta.r = tint_a + 2;
     }
-    scratch = g_Task;
+    scratch = TASK(Actor);
     tint_b  = scratch->tint.steps.delta.g;
     if (tint_b < -0x40) {
         scratch->tint.steps.delta.g = tint_b + 2;
-        scratch                     = g_Task;
+        scratch                     = TASK(Actor);
     }
     tint_c = scratch->tint.steps.delta.b;
     if (tint_c < -0x40) {
@@ -27,7 +27,7 @@ MATCH void func_801F3FFC(void) {
         TASK(Actor)->header.flags &= ~0x20;
         TASK(Actor)->tint.bytes.flags = 0;
         {
-            Actor* task            = g_Task;
+            Actor* task            = TASK(Actor);
             task->tint.bytes.rgb.b = 0;
             task->tint.bytes.rgb.g = 0;
             task->tint.bytes.rgb.r = 0;

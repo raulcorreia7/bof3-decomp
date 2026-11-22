@@ -49,7 +49,7 @@ MATCH void AreaAction_RollFade(void) {
         TASK(Actor)->unk_04 = 1;
     }
     value                  = -0x50;
-    work                   = g_Task;
+    work                   = TASK(Actor);
     work->tint.bytes.rgb.g = value;
     work->tint.bytes.rgb.b = value;
     work->tint.bytes.rgb.r = value;

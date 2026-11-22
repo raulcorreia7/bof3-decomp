@@ -8,14 +8,14 @@ MATCH void func_801C4D58(void) {
 
     g_Game.current->u.field.counter.value = (TASK(Actor)->voice_flags.raw + 2);
     Area_SetWalkVelocity();
-    work          = g_Task;
+    work          = TASK(Actor);
     doubled       = work->timer * 2;
     work->timer   = (doubled * (work->voice_flags.raw + 1));
-    state         = g_Task;
+    state         = TASK(Actor);
     work->vz      = 0;
     state->unk_0A = (state->timer >> 1);
     Script_Request((TASK(Actor)->direction + 8) & BYTE_MASK);
     Actor_Move();
-    reload        = g_Task;
+    reload        = TASK(Actor);
     reload->timer = (reload->timer - 1);
 }
