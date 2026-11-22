@@ -22,7 +22,7 @@ MATCH void func_801F2E5C(void) {
         FIELD(u16, row, 0x14) -= 8;
         row++;
     }
-    ACTOR_COUNT_DOWN(timer, timer);
+    ACTOR_COUNT_DOWN(TASK(Actor), timer, timer);
     if (!(timer & 0xFF)) {
         g_Task->header.mode += 1;
     }

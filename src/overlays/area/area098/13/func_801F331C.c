@@ -29,7 +29,7 @@ MATCH void func_801F331C(void) {
         }
         dot->active ^= 1;
     }
-    ACTOR_COUNT_DOWN(timer, timer);
+    ACTOR_COUNT_DOWN(TASK(Actor), timer, timer);
     if (timer == 0) {
         Actor_Clear();
     }

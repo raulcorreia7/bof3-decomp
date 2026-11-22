@@ -7,7 +7,7 @@ MATCH void func_801F3048(void) {
     quad = (AreaRippleQuad*)&g_Task->vx;
     func_801F3AD8(quad);
     quad->radius -= 8;
-    ACTOR_COUNT_DOWN(timer, timer);
+    ACTOR_COUNT_DOWN(TASK(Actor), timer, timer);
     if (timer == 0) {
         g_ScriptVars[0] = 0x31;
         quad->radius    = 2;
