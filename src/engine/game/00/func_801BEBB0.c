@@ -8,7 +8,7 @@
 
 MATCH void func_801BEBB0(void) {
     u8* base;
-    u8* row;
+    u8* cell;
     s32 slot;
     s32 one;
     s32 offset;
@@ -22,7 +22,7 @@ MATCH void func_801BEBB0(void) {
     slot  = 0;
     /* FAKE: a local holding 1 places li s4,1 after the slot init; pure-C best 96.32%. */
     FAKE_HOLD(one, 1);
-    row    = base + 0x6E;
+    cell   = base + 0x6E;
     offset = 0;
     do {
         while ((random = RANDOM_MASK(0x7F)) >= 101) {
@@ -36,9 +36,9 @@ MATCH void func_801BEBB0(void) {
                     g_SpawnedActors[id].unk_06       = one;
                     g_SpawnedActors[id].screen_x     = *(u16*)(((u8*)&g_Game.members[0].screen_x) + offset);
                     g_SpawnedActors[id].screen_y     = *(u16*)(((u8*)&g_Game.members[0].screen_x) + offset + 2);
-                    g_SpawnedActors[id].vx           = s_BattleStartOffsets[row[0]][0];
-                    g_SpawnedActors[id].selection    = s_BattleStartOffsets[row[0]][1];
-                    /* FAKE: keeps the selection store ahead of the work-row id store (retail order). */
+                    g_SpawnedActors[id].vx           = s_BattleStartOffsets[cell[0]][0];
+                    g_SpawnedActors[id].selection    = s_BattleStartOffsets[cell[0]][1];
+                    /* FAKE: keeps the selection store ahead of the work record's id store (retail order). */
                     FAKE_BARRIER();
                     D_80145E9B = id;
                 }
@@ -47,7 +47,7 @@ MATCH void func_801BEBB0(void) {
         } else if (random < 51) {
             count++;
         }
-        row += BATTLE_PARTY_STRIDE;
+        cell += BATTLE_PARTY_STRIDE;
         slot++;
         offset += BATTLE_PARTY_STRIDE;
     } while (slot < 5);
