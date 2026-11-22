@@ -1,0 +1,1 @@
+{"function": "emi/bmagic/magic008/00@0x801F05FC", "tried": "pinned the tint s8 to v1 (draft now 5 rows): literal -0x80 stores and the (s8) cast materialize 128 in v0, a battler local and the x/y/z store order move more rows", "first_diff": "0x801F068C lw a0,60(a0) hoisted one slot above the scroll-target load", "score": "5 of 69 instructions"}
