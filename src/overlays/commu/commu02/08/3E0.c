@@ -6,7 +6,7 @@ __asm__(".include \"include/match/macro.inc\"\n");
 
 #ifdef NON_MATCHING
 /* The price row: the three digit cells, the row cursor, and the confirm and cancel steps.
- * The split row starts at 0x801D0FE0; the function's head is the bin before it. */
+ * The split row starts after the bin that holds the function's head. */
 NON_MATCHING void func_801D0FE0(void) {
     u16 input;
     s32 price;

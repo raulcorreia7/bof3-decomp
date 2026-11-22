@@ -22,14 +22,14 @@ NON_MATCHING void func_800AB0B8(s32 battler) {
                     g_Battle.target_selector = func_800AB68C(slot);
                 }
             } else {
-                goto check_action;
+                goto after_retarget;
             }
         }
         member->u.turn.command.type = BATTLE_COMMAND_ATTACK;
         g_Battle.action_type        = BATTLE_COMMAND_ATTACK;
         return;
     }
-check_action:
+after_retarget:
     if (member->u.turn.action_flags.value & BATTLER_ACTION_DRAGON_FORM_QUEUED) {
         func_800AB570(slot);
         return;

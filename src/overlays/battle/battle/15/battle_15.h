@@ -907,7 +907,6 @@ void        func_800A8B40(void);
 void        func_800A8BD0(void);
 void        func_800A8CC8(void);
 void        func_800A8D3C(void);
-u8          func_800A9304(u8 slot);
 extern u32  func_800AA874(u32 bit_index);
 bool        func_800AA8A4(s32 battler_index);
 bool        func_800AB470(u8 battler_index);

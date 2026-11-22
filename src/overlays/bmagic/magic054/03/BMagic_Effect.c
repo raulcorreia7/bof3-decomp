@@ -18,7 +18,7 @@ NON_MATCHING void func_801EEC98(void) {
     BattleWorkImage* row;
     BattleWorkImage* slot;
     PartyMember*     member;
-    u8*              saved;
+    PartyMember*     saved;
     u32              index;
     u8               i;
 
@@ -56,7 +56,7 @@ NON_MATCHING void func_801EEC98(void) {
                 continue;
             }
             member = &g_Game.members[i];
-            saved  = TASK_BYTES;
+            saved  = TASK(PartyMember);
             TASK_SET(member);
             Script_Select((u8)(member->facing + 0x10));
             TASK_SET(saved);

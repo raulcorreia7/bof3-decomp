@@ -1,7 +1,6 @@
 #include "area167_13.h"
 
-extern u8 D_801F4AC4[];
-extern u8 D_801F4AC5[];
+#define AREA167_EFFECT_PART_WORD ((0xBB50u << 16) | 0x9100u)
 
 #ifdef NON_MATCHING
 /* Draws the falling effect as three widening quads, one per layer step. */
@@ -64,7 +63,7 @@ NON_MATCHING void func_801F39BC(void) {
         quad[2].vy = y + size + y_high;
         quad[3].vy = y + size + y_high;
         RotTransPers4(&quad[0], &quad[1], &quad[2], &quad[3], (long*)&prim->x0, (long*)&prim->x1, (long*)&prim->x2, (long*)&prim->x3, &depth, &flag);
-        Area_ApplyTileToQuad(layer | 0xBB509100, prim, 1);
+        Area_ApplyTileToQuad(layer | AREA167_EFFECT_PART_WORD, prim, 1);
         GFX_AddPrim(GFX_LAYER_FIELD_SCENE, sizeof(POLY_FT4));
         y += 0x180;
         y_high += 0x180;

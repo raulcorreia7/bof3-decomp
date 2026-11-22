@@ -1,5 +1,7 @@
 #include "area199_13.h"
 
+#define AREA199_TRAIL_PART_WORD ((0x2580u << 16) | 0x8000u)
+
 #ifdef NON_MATCHING
 /* Stages each member's walked cells and draws the trail quad at every live one. */
 NON_MATCHING void func_801F3398(void) {
@@ -40,7 +42,7 @@ NON_MATCHING void func_801F3398(void) {
             *(u32*)&prim->x1 = *(u32*)&quad->x1;
             *(u32*)&prim->x2 = *(u32*)&quad->x2;
             *(u32*)&prim->x3 = *(u32*)&quad->x3;
-            Area_ApplyTileToQuad(D_801F4544[member * 2] + D_801F54D0[cell + 2] + 0x25808000, prim, 1);
+            Area_ApplyTileToQuad(D_801F4544[member * 2] + D_801F54D0[cell + 2] + AREA199_TRAIL_PART_WORD, prim, 1);
             Area_CellAddPrim(x << 16, y << 16, 0, sizeof(POLY_FT4));
 
             below = Area_CellFindQuad(x, y + (s8)D_801F4548[member]);
@@ -54,7 +56,7 @@ NON_MATCHING void func_801F3398(void) {
             *(u32*)&prim->x1 = *(u32*)&below->x1;
             *(u32*)&prim->x2 = *(u32*)&below->x2;
             *(u32*)&prim->x3 = *(u32*)&below->x3;
-            Area_ApplyTileToQuad(D_801F4545[member * 2] + D_801F54D0[cell + 2] + 0x25808000, prim, 1);
+            Area_ApplyTileToQuad(D_801F4545[member * 2] + D_801F54D0[cell + 2] + AREA199_TRAIL_PART_WORD, prim, 1);
             Area_CellAddPrim(x << 16, (y + (s8)D_801F4548[member]) << 16, 0, sizeof(POLY_FT4));
         }
     }
