@@ -1,8 +1,155 @@
 #include "area196_13.h"
 
-#ifdef NON_MATCHING
-NON_MATCHING void func_801F38C0(void) {
+/* Draws the band of light the step sweeps: four full-texture quads per column, two columns, under
+ * a draw mode whose texture window grows with the sweep. */
+MATCH void func_801F38C0(void) {
+    RECT*     window;
+    POLY_FT4* prim;
+    s32       shade[2];
+    s32       size[2];
+    s32       i;
+
+    if (g_AreaSceneMode == 0) {
+        return;
+    }
+    shade[0] = (0x80 - abs(0x80 - TASK(Actor)->timer)) >> 1;
+    if (abs(0x80 - TASK(Actor)->timer) >= 0x41) {
+        shade[1] = 0x80 - abs(0x80 - TASK(Actor)->timer);
+    } else {
+        shade[1] = ((rcos((TASK(Actor)->timer - 0x40) << 5) >> 7) + 0x60) >> 1;
+    }
+    size[0] = -(TASK(Actor)->timer & 0x3F);
+    size[1] = -((TASK(Actor)->timer << 1) & 0x3F);
+
+    for (i = 0; i < 2; i++) {
+        window          = (RECT*)g_GfxPrimCursor;
+        g_GfxPrimCursor = (u8*)(window + 1);
+        window->x       = 0;
+        window->y       = 0;
+        window->h       = 0x40;
+        window->w       = 0x40;
+        SetDrawMode((DR_MODE*)g_GfxPrimCursor, 0, 1, getTPage(TPAGE_DEPTH_8BIT, TPAGE_ABR_HALF, 448, 256), window);
+        GFX_AddPrim(GFX_LAYER_BATTLE_SCENE, sizeof(DR_MODE));
+
+        prim = (POLY_FT4*)g_GfxPrimCursor;
+        SetPolyFT4(prim);
+        SetShadeTex(prim, 0);
+        SetSemiTrans(prim, 1);
+        prim->x0    = -0x80 - size[i];
+        prim->y0    = size[i] - 0x80;
+        prim->x1    = 0x80 - size[i];
+        prim->y1    = size[i] - 0x80;
+        prim->x2    = -0x80 - size[i];
+        prim->y2    = size[i] + 0x80;
+        prim->x3    = 0x80 - size[i];
+        prim->y3    = size[i] + 0x80;
+        prim->u0    = 0;
+        prim->v0    = 0;
+        prim->u1    = 0xFF;
+        prim->v1    = 0;
+        prim->u2    = 0;
+        prim->v2    = 0xFF;
+        prim->u3    = 0xFF;
+        prim->v3    = 0xFF;
+        prim->r0    = shade[i];
+        prim->g0    = shade[i];
+        prim->b0    = shade[i];
+        prim->tpage = getTPage(TPAGE_DEPTH_4BIT, TPAGE_ABR_QUARTER, 704, 256);
+        prim->clut  = getClut(0, 483);
+        GFX_AddPrim(GFX_LAYER_BATTLE_SCENE, sizeof(POLY_FT4));
+
+        prim = (POLY_FT4*)g_GfxPrimCursor;
+        SetPolyFT4(prim);
+        SetShadeTex(prim, 0);
+        SetSemiTrans(prim, 1);
+        prim->x0    = 0x80 - size[i];
+        prim->y0    = size[i] - 0x80;
+        prim->x1    = 0x180 - size[i];
+        prim->y1    = size[i] - 0x80;
+        prim->x2    = 0x80 - size[i];
+        prim->y2    = size[i] + 0x80;
+        prim->x3    = 0x180 - size[i];
+        prim->y3    = size[i] + 0x80;
+        prim->u0    = 0;
+        prim->v0    = 0;
+        prim->u1    = 0xFF;
+        prim->v1    = 0;
+        prim->u2    = 0;
+        prim->v2    = 0xFF;
+        prim->u3    = 0xFF;
+        prim->v3    = 0xFF;
+        prim->r0    = shade[i];
+        prim->g0    = shade[i];
+        prim->b0    = shade[i];
+        prim->tpage = getTPage(TPAGE_DEPTH_4BIT, TPAGE_ABR_QUARTER, 704, 256);
+        prim->clut  = getClut(0, 483);
+        GFX_AddPrim(GFX_LAYER_BATTLE_SCENE, sizeof(POLY_FT4));
+
+        prim = (POLY_FT4*)g_GfxPrimCursor;
+        SetPolyFT4(prim);
+        SetShadeTex(prim, 0);
+        SetSemiTrans(prim, 1);
+        prim->x0    = -0x80 - size[i];
+        prim->y0    = size[i] + 0x80;
+        prim->x1    = 0x80 - size[i];
+        prim->y1    = size[i] + 0x80;
+        prim->x2    = -0x80 - size[i];
+        prim->y2    = size[i] + 0x180;
+        prim->x3    = 0x80 - size[i];
+        prim->y3    = size[i] + 0x180;
+        prim->u0    = 0;
+        prim->v0    = 0;
+        prim->u1    = 0xFF;
+        prim->v1    = 0;
+        prim->u2    = 0;
+        prim->v2    = 0xFF;
+        prim->u3    = 0xFF;
+        prim->v3    = 0xFF;
+        prim->r0    = shade[i];
+        prim->g0    = shade[i];
+        prim->b0    = shade[i];
+        prim->tpage = getTPage(TPAGE_DEPTH_4BIT, TPAGE_ABR_QUARTER, 704, 256);
+        prim->clut  = getClut(0, 483);
+        GFX_AddPrim(GFX_LAYER_BATTLE_SCENE, sizeof(POLY_FT4));
+
+        prim = (POLY_FT4*)g_GfxPrimCursor;
+        SetPolyFT4(prim);
+        SetShadeTex(prim, 0);
+        SetSemiTrans(prim, 1);
+        prim->x0    = 0x80 - size[i];
+        prim->y0    = size[i] + 0x80;
+        prim->x1    = 0x180 - size[i];
+        prim->y1    = size[i] + 0x80;
+        prim->x2    = 0x80 - size[i];
+        prim->y2    = size[i] + 0x180;
+        prim->x3    = 0x180 - size[i];
+        prim->y3    = size[i] + 0x180;
+        prim->u0    = 0;
+        prim->v0    = 0;
+        prim->u1    = 0xFF;
+        prim->v1    = 0;
+        prim->u2    = 0;
+        prim->v2    = 0xFF;
+        prim->u3    = 0xFF;
+        prim->v3    = 0xFF;
+        prim->r0    = shade[i];
+        prim->g0    = shade[i];
+        prim->b0    = shade[i];
+        prim->tpage = getTPage(TPAGE_DEPTH_4BIT, TPAGE_ABR_QUARTER, 704, 256);
+        prim->clut  = getClut(0, 483);
+        GFX_AddPrim(GFX_LAYER_BATTLE_SCENE, sizeof(POLY_FT4));
+
+        window          = (RECT*)g_GfxPrimCursor;
+        g_GfxPrimCursor = (u8*)(window + 1);
+        window->x       = 0;
+        window->y       = 0;
+        window->h       = 0x100;
+        window->w       = 0x100;
+        SetDrawMode((DR_MODE*)g_GfxPrimCursor, 0, 0, getTPage(TPAGE_DEPTH_8BIT, TPAGE_ABR_HALF, 448, 256), window);
+        GFX_AddPrim(GFX_LAYER_BATTLE_SCENE, sizeof(DR_MODE));
+    }
+    TASK(Actor)->timer += 4;
+    if (TASK(Actor)->timer == 0) {
+        Actor_Clear();
+    }
 }
-#else
-INCLUDE_ASM(func_801F38C0);
-#endif

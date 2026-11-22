@@ -11,26 +11,26 @@ NON_MATCHING void func_801F2E18(void) {
     u8  one;
     u8  shade;
     u8  three;
-    u8* row;
+    u8* entry;
     s32 i;
 
     i = 0;
-    /* FAKE: the held constants keep their loads ahead of the row base. */
+    /* FAKE: the held constants keep their loads ahead of the entry base. */
     FAKE_HOLD(one, 1);
     FAKE_HOLD(shade, 0xF0);
     FAKE_HOLD(three, 3);
     for (; (u16)i < 6; i++) {
-        row    = (u8*)(AREA_WORK + 0x14) + i * 0x1C;
-        row[4] = one;
-        row[5] = (u16)i * 15;
-        row[3] = 0;
-        row[0] = shade;
-        row[1] = shade;
-        row[2] = shade;
+        entry    = (u8*)(AREA_WORK + 0x14) + i * 0x1C;
+        entry[4] = one;
+        entry[5] = (u16)i * 15;
+        entry[3] = 0;
+        entry[0] = shade;
+        entry[1] = shade;
+        entry[2] = shade;
         if ((i & 1) == 0) {
-            row[7] = three;
+            entry[7] = three;
         } else {
-            row[7] = one;
+            entry[7] = one;
         }
     }
 

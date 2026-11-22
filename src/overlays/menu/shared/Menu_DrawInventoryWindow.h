@@ -12,8 +12,8 @@ MATCH void Menu_DrawInventoryWindow(MenuPanelTask* task) {
     u8   unusable;
     s16  y;
     u8   first;
-    s32  shade;
-    u8   row_shade;
+    s32  shade_value;
+    u8   shade;
     s32  row;
     u8** title;
     u8*  ids;
@@ -35,8 +35,8 @@ MATCH void Menu_DrawInventoryWindow(MenuPanelTask* task) {
             if (task->unk_09 != 0 || (Item_PassesTest(task->unk_08, g_CharSlot[g_PartyFieldOrder[(s8)D_80148656]], task->unk_0A, item) & BYTE_MASK) == 0) {
                 unusable = true;
             }
-            dim   = unusable;
-            shade = -dim & UI_TEXT_DIM;
+            dim         = unusable;
+            shade_value = -dim & UI_TEXT_DIM;
             if (((s16)task->u.list.scroll >> 4) != 0xF) {
                 scroll_shift = scroll_rows;
             } else {
@@ -44,20 +44,20 @@ MATCH void Menu_DrawInventoryWindow(MenuPanelTask* task) {
             }
             row = task->unk_0B + i;
             if (row == task->flags + scroll_shift) {
-                shade = UI_TEXT_HIGHLIGHT;
+                shade_value = UI_TEXT_HIGHLIGHT;
             }
-            row_shade = shade;
-            held      = 1;
+            shade = shade_value;
+            held  = 1;
             if (task->unk_0A != ITEM_CATEGORY_VITAL) {
                 held = *counts;
             }
             if (row == task->flags + scroll_shift || row == task->unk_0C + scroll_shift) {
-                if (row_shade != UI_TEXT_DIM) {
+                if (shade != UI_TEXT_DIM) {
                     UI_ListDrawItemRow(task->pos.x + 7, (s16)(y + 26), UI_TEXT_DIM, task->unk_0A, *ids, held, true);
                 }
-                UI_ListDrawItemRow(task->pos.x + 7, (s16)(y + 24), row_shade, task->unk_0A, *ids, held, dim);
+                UI_ListDrawItemRow(task->pos.x + 7, (s16)(y + 24), shade, task->unk_0A, *ids, held, dim);
             } else {
-                UI_ListDrawItemRow(task->pos.x + 7, (s16)(y + 26), row_shade, task->unk_0A, *ids, held, dim);
+                UI_ListDrawItemRow(task->pos.x + 7, (s16)(y + 26), shade, task->unk_0A, *ids, held, dim);
             }
         }
         ids++;

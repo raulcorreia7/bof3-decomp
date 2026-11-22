@@ -1,17 +1,17 @@
 #include "start_08.h"
 
 MATCH void func_801E77F0(void) {
-    SaveSlotRow* row;
+    SaveSlotRow* slot;
     u8*          first;
     u8           i;
     u8           j;
     s32          offset;
 
-    first                           = &g_SaveSlots[0].bytes.card_index;
+    first                     = &g_SaveSlots[0].bytes.card_index;
     g_SaveSlots[2].bytes.card_index = GAME_NONE;
     g_SaveSlots[1].bytes.card_index = GAME_NONE;
-    *first                          = 0xFF;
-    row                             = (SaveSlotRow*)((u8*)&g_SaveSlots[0].bytes.card_index - 0x15);
+    *first                    = 0xFF;
+    slot                      = (SaveSlotRow*)((u8*)&g_SaveSlots[0].bytes.card_index - 0x15);
     for (j = 0; j < BATTLE_PARTY_CHARACTERS_COUNT; j++) {
         i = 0;
         if (g_SaveSlotCount != 0) {
@@ -19,12 +19,12 @@ MATCH void func_801E77F0(void) {
                 offset = i * 24;
                 if ((&D_8018E9A1)[offset] - '0' == j) {
                     SAVE_AccessFile(1, &g_SaveCardDirectory[offset], 1, 0x1C, 0xEA0);
-                    *row                  = *(SaveSlotRow*)0x800C26A0;
-                    row->bytes.card_index = i;
+                    *slot = *(SaveSlotRow*)0x800C26A0;
+                    slot->bytes.card_index = i;
                 }
                 i++;
             } while (i < g_SaveSlotCount);
         }
-        row++;
+        slot++;
     }
 }

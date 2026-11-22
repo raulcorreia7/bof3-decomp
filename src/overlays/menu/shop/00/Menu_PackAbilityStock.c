@@ -2,17 +2,17 @@
 
 /* func_801E1BCC */
 MATCH void Menu_PackAbilityStock(void) {
-    u8* row;
+    u8* abilities;
     u8  i;
     u8  j;
 
     for (i = 0; i < ABILITY_STOCK_SLOT_COUNT - 1; i++) {
-        row = D_8014546C;
+        abilities = D_8014546C;
         for (j = 0; j < ABILITY_STOCK_SLOT_COUNT - 1 - i; j++) {
-            if (*row == 0 && *(row + 1) != 0) {
-                Menu_SwapBytes6(row, row + 1);
+            if (*abilities == 0 && *(abilities + 1) != 0) {
+                Menu_SwapBytes6(abilities, abilities + 1);
             }
-            row++;
+            abilities++;
         }
     }
 }

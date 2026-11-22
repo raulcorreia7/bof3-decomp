@@ -6,6 +6,8 @@
 
 #include "overlays/area/worlds/world01.h"
 
+/* The per-cell words at the map bundle's +0x30: one replicated shade byte a cell. */
+extern u32  D_80104030[];
 extern u32* D_80142F94[][2];
 extern u8   D_801F3330[];
 
