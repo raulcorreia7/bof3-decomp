@@ -89,7 +89,7 @@ NON_MATCHING void func_801EED0C(void) {
     g_BattleEffectPalette[0] = D_80036C00[0];
     g_GfxPalettePending      = 1;
 
-    TASK(PartyMember)->facing = ((PartyMember*)D_8014637C)->facing;
+    TASK(PartyMember)->facing = D_8014637C->facing;
     TASK(PartyMember)->unk_0C = 0x40000;
     TASK(PartyMember)->unk_10 = 0;
     Effect_RotatePosition(g_Task);

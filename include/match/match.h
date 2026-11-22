@@ -154,7 +154,6 @@
  *
  *   FAKE_DECL_TASK_VOLATILE                     psx/mem.h        g_Task read after every store
  *   FAKE_DECL_GAME_SCRATCH_BASE_SCALAR / _WORD  game/spawn.h     g_ScratchPad as a byte array or a word
- *   FAKE_DECL_BATTLE_PARTY_CELL_RECORD          slus/data.h      D_8014637C as a PartyMember pointer
  *   FAKE_DECL_GRAPHICS_PALETTE_PENDING_VOLATILE slus/data.h      the pending palette flag read as volatile
  *   FAKE_DECL_AREA_SCROLL_TARGET_VOLATILE       slus/data.h      the scroll target read as volatile
  *   FAKE_DECL_GAME_REQUEST_FLAGS_VOLATILE       menu/gameui.h    the request flags read as volatile

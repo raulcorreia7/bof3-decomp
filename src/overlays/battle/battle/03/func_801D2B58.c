@@ -46,7 +46,7 @@ NON_MATCHING void func_801D2B58(void) {
         if (id < 3) {
             ACTIVE_ACTION = &g_Game.members[id].u.turn.command.target;
             ACTIVE_STATE  = &g_Game.members[id];
-            actor         = (PartyMember*)D_8014637C;
+            actor         = D_8014637C;
             index         = g_Game.members[id].chr.character_id * 8 + actor->facing * 2;
             dx            = g_BattlePanelOffsets[index];
             ACTIVE_X      = actor->screen_x.value + dx;
@@ -60,7 +60,7 @@ NON_MATCHING void func_801D2B58(void) {
             ACTIVE_STATE  = &ENEMY_COMBATANT(id);
             enemy         = id - 3;
             dx            = g_BattleEnemyBattlers[enemy].panel_offset_x;
-            actor         = (PartyMember*)D_8014637C;
+            actor         = D_8014637C;
             ACTIVE_X      = actor->screen_x.value + dx;
             dy            = g_BattleEnemyBattlers[enemy].panel_offset_y;
             ACTIVE_Y      = actor->screen_y.value + dy;

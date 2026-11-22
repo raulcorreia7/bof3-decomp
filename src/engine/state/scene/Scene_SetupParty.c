@@ -24,14 +24,14 @@ NON_MATCHING s32 Scene_SetupParty(u32 scene) {
     type    = command & 0xC0;
     count   = cmds & 0xF;
     if (type == 0) {
-        size = g_Game.party_size;
+        size = g_PartySize;
         if (size != count)
             return 1;
         for (i = 0; i < size; i++)
             SP_TAKEN[i] = g_PartyFieldOrder[i];
         for (i = 0; i < count; i++) {
             if (ids[i] != 0x80) {
-                size = g_Game.party_size;
+                size = g_PartySize;
                 for (j = 0; j < size; j++) {
                     if (g_Game.members[j].chr.character_id == ids[i]) {
                         SP_VALUES[i] = (u8)g_Game.members[j].unk_2C.value;
@@ -40,10 +40,10 @@ NON_MATCHING s32 Scene_SetupParty(u32 scene) {
                         break;
                     }
                 }
-                if (j == g_Game.party_size)
+                if (j == g_PartySize)
                     return 1;
             } else {
-                size = g_Game.party_size;
+                size = g_PartySize;
                 for (j = 0; j < size; j++) {
                     if (SP_TAKEN[j] != GAME_NONE) {
                         SP_VALUES[i] = (u8)g_Game.members[j].unk_2C.value;
@@ -69,10 +69,10 @@ NON_MATCHING s32 Scene_SetupParty(u32 scene) {
         }
         ids += count;
     } else if (type == 0x80) {
-        if (g_Game.party_size < (u32)count)
+        if (g_PartySize < (u32)count)
             return 1;
     }
-    func_801BE574(g_Game.party_size, ids);
+    func_801BE574(g_PartySize, ids);
     ids += count;
     command &= 0x30;
     if (command & 0x20)

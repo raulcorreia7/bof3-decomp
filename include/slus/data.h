@@ -68,69 +68,64 @@ extern volatile u8 g_GfxPalettePending; /* 0x80145988 */
 /* D_80145988 */
 extern u8 g_GfxPalettePending; /* 0x80145988 */
 #endif
-extern u8  D_80145E91[];
-extern u8  D_80145E92[];
-extern u8  D_80145E93[];
-extern s16 D_80145EC6;
-extern s32 D_80145EC8;
-extern s16 D_80145ECA;
-extern s16 D_80145ECE;
-extern u8  D_80145ED8;
-extern u8  D_80145EDB;
+extern u8                  D_80145E91[];
+extern u8                  D_80145E92[];
+extern u8                  D_80145E93[];
+extern s16                 D_80145EC6;
+extern s32                 D_80145EC8;
+extern s16                 D_80145ECA;
+extern s16                 D_80145ECE;
+extern u8                  D_80145ED8;
+extern u8                  D_80145EDB;
 /* Player battle-record copies (stride 0x140), selected by g_Battle.active_battler. */
-extern u8  D_80145F04[];
-extern u8  D_80145F10[];
-extern u16 D_80145F1A[];
-extern s8  D_80145FBC;
+extern u8                  D_80145F04[];
+extern u8                  D_80145F10[];
+extern u16                 D_80145F1A[];
+extern s8                  D_80145FBC;
 /* FAKE: g_Battle.phase.mode as a global of its own; the sites that use it match only with a separate symbol. */
-extern u8  g_BattleMode;
+extern u8                  g_BattleMode;
 /* FAKE: g_Battle.phase.step as a global of its own; the sites that use it match only with a separate symbol. */
-extern u8  g_BattleStep;
+extern u8                  g_BattleStep;
 /* FAKE: g_Battle.phase.sub_step as a global of its own; the sites that use it match only with a separate symbol. */
-extern u8  g_BattleSubStep;
+extern u8                  g_BattleSubStep;
 /* FAKE: g_Battle.flags as a global of its own; the sites that use it match only with a separate symbol. */
-extern u16 g_BattleState;
-/* The bytes the battle code index; the bmagic images that copy its record
- * define FAKE_DECL_BATTLE_PARTY_CELL_RECORD before their first include. */
-#ifdef FAKE_DECL_BATTLE_PARTY_CELL_RECORD
+extern u16                 g_BattleState;
+/* The party member the battle selected: the record its per-turn cells belong to. */
 extern struct PartyMember* D_8014637C;
-#else
-extern u8* D_8014637C;
-#endif
 /* FAKE: g_Battle.target_selector as a global of its own; the sites that use it match only with a separate symbol. */
-extern volatile u8   g_BattleTargetSelector;
+extern volatile u8         g_BattleTargetSelector;
 /* D_80146854 */
-extern u8            g_EmiStreamFlags;
+extern u8                  g_EmiStreamFlags;
 /* D_8014686C */
-extern u32*          g_SceneFlags; /* 0x8014686C */
-extern u8            D_8014688E[];
-extern u8            D_801468BC[];
-extern u8            D_801468C0[];
-extern s16           D_80146916;
+extern u32*                g_SceneFlags; /* 0x8014686C */
+extern u8                  D_8014688E[];
+extern u8                  D_801468BC[];
+extern u8                  D_801468C0[];
+extern s16                 D_80146916;
 /* The area's focus point, 16.16; g_AreaFocusY is y and the integer half of z is D_80147A96. */
 /* D_80147A8C */
-extern Coord3        g_AreaFocus;
-extern s32           D_80147A8C;
+extern Coord3              g_AreaFocus;
+extern s32                 D_80147A8C;
 /* Per-slot effect work arrays at a 0x30-byte stride: the accumulators at
  * D_801FD030, the seeded deltas at D_801FCA90 and the per-cell lifetimes at
  * D_801FD5D0.
  */
 /* D_80148208 */
-extern struct Actor* g_ScriptWorkRecord;
-extern s16           D_80148334;
-extern u16           D_80148336;
-extern u8            D_8014837B;
-extern u8            D_8014839F;
-extern s8            D_801484EA;
+extern struct Actor*       g_ScriptWorkRecord;
+extern s16                 D_80148334;
+extern u16                 D_80148336;
+extern u8                  D_8014837B;
+extern u8                  D_8014839F;
+extern s8                  D_801484EA;
 /* D_80148573 */
-extern u8            g_BattleChoicePhase;
-extern volatile u8   D_80148597;
-extern u8            D_80148624;
-extern u8            D_80148625;
-extern u8            D_80148626;
-extern volatile u8   D_80148627;
+extern u8                  g_BattleChoicePhase;
+extern volatile u8         D_80148597;
+extern u8                  D_80148624;
+extern u8                  D_80148625;
+extern u8                  D_80148626;
+extern volatile u8         D_80148627;
 /* D_801492E8 */
-extern MATRIX        g_CameraMatrix;
+extern MATRIX              g_CameraMatrix;
 
 /* Load the GTE with `matrix`, rotated by `rot` and viewed through the camera:
  * the model matrix a 3D effect or scene part draws with. */
