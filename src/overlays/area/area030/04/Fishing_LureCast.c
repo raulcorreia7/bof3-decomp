@@ -2,7 +2,8 @@
 
 /* Starts the lure cast and positions the camera over its travel height. */
 /* func_801D210C */
-MATCH void Fishing_LureCast(void) {
+#ifdef NON_MATCHING
+NON_MATCHING void Fishing_LureCast(void) {
     FishingState* work;
     s32           distance;
     s32           value;
@@ -13,7 +14,7 @@ MATCH void Fishing_LureCast(void) {
     /* FAKE: keeps the x store ahead of the y load; without it the loads are scheduled first. */
     FAKE_BARRIER();
     work->y_38.pos_y               = D_80145EC8 - COORD_HALF;
-    FISHING_STATE->bounce.half.key = Area_SampleHeight(work->motion.unk_34, work->y_38.pos_y) + 0x100;
+    FISHING_STATE->bounce.half.key = Area_HeightSample(work->motion.unk_34, work->y_38.pos_y) + 0x100;
 
     distance                 = g_FishingRodRow->max_distance * D_801440BC / 255 + 8;
     FISHING_STATE->cursor_10 = distance;
@@ -60,3 +61,6 @@ MATCH void Fishing_LureCast(void) {
     FISHING_STATE->counter_07 = g_FishingLureRow->unk_0F;
     FISHING_STATE->handler_index++;
 }
+#else
+INCLUDE_ASM(Fishing_LureCast);
+#endif
