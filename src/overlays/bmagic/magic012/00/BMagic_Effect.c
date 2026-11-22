@@ -25,7 +25,7 @@ MATCH void func_801EEC5C(void) {
     work->pos.z        = battler->pos.z;
     work->param.unk_0B = 0;
     delay              = 1;
-    if (g_Battle.target_selector & 0x40) {
+    if (g_Battle.target_selector & BATTLE_TARGET_ENEMY_SIDE) {
         for (i = 0; i < 8; i++) {
             side = i + BATTLE_PARTY_CHARACTERS_COUNT;
             if (!(Battle_SlotIsBlocked(side) & BYTE_MASK)) {
@@ -51,7 +51,7 @@ MATCH void func_801EEC5C(void) {
             }
         }
     }
-    for (i = 0; i < 0x100; i++) {
+    for (i = 0; i < AREA_PALETTE_ROW / sizeof(u16); i++) {
         MEM_PTR(u16, AREA_PALETTE_UPLOAD_ROW(AREA_PALETTE_BATL_OVR_ROW))[i] = MEM_PTR(u16, AREA_PALETTE_ARENA_ROW(AREA_PALETTE_BATL_OVR_ROW))[i] | PSX_COLOR_STP_BIT;
     }
     g_GfxPalettePending                                          = 1;
