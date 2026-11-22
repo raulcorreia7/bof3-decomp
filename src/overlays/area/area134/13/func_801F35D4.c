@@ -2,7 +2,7 @@
 #define FAKE_DECL_TASK_VOLATILE
 #include "area134_13.h"
 
-#include "shared/Area_StepSceneModes.h"
+#include "Area_StepSceneModes.h"
 
 MATCH void func_801F35D4(void) {
     Actor* work;
