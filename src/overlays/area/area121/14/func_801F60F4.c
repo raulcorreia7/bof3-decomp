@@ -42,7 +42,7 @@ NON_MATCHING void func_801F60F4(void* actor) {
         prim->u2    = prim->u0;
         prim->v0    = 48;
         prim->v1    = 48;
-        prim->clut  = 0x78CA;
+        prim->clut  = getClut(160, 483);
         prim->v3 = prim->v2 = prim->v0 + 30;
         prim->u3            = prim->u1;
         RotTransPers4(&g_ScratchPadVectors[0], &g_ScratchPadVectors[1], &g_ScratchPadVectors[2], &g_ScratchPadVectors[3], (long*)&prim->x0, (long*)&prim->x1, (long*)&prim->x2, (long*)&prim->x3,

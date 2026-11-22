@@ -94,7 +94,7 @@ MATCH void func_801D0F50(s16 x, s16 y, u8 row) {
     setXY0(sprite, x, y);
     setUV0(sprite, row * 12 - 0x38, 0xF0);
     setWH(sprite, 0xC, 0xC);
-    sprite->clut = 0x7849;
+    sprite->clut = getClut(144, 481);
     setRGB0(sprite, 0x80, 0x80, 0x80);
     GFX_AddPrim(GFX_LAYER_UI, sizeof(SPRT));
 }
@@ -203,7 +203,7 @@ MATCH void func_801D1670(s16 x, s16 y, u16 u, u16 v, u8 width) {
     setXY0(sprite, x, y);
     setUV0(sprite, u, v);
     setWH(sprite, (width << 4) + 0x10, 0x10);
-    sprite->clut = 0x7883;
+    sprite->clut = getClut(48, 482);
     setRGB0(sprite, 0x80, 0x80, 0x80);
     GFX_AddPrim(GFX_LAYER_UI, sizeof(SPRT));
 }

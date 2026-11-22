@@ -12,8 +12,7 @@ MATCH void func_801F314C(void) {
     if ((g_AreaDrawFlags & 0x4) == 0) {
         return;
     }
-    SetDrawMode((DR_MODE*)g_GfxPrimCursor, 0, 0, getTPage(TPAGE_DEPTH_8BIT, TPAGE_ABR_HALF, 320, 256), NULL);
-    GFX_AddPrim(GFX_LAYER_FIELD_SCENE, sizeof(DR_MODE));
+    GFX_ADD_LAYER_DRAW_MODE(GFX_LAYER_FIELD_SCENE, getTPage(TPAGE_DEPTH_8BIT, TPAGE_ABR_HALF, 320, 256));
     prim = (POLY_FT4*)g_GfxPrimCursor;
     SetPolyFT4(prim);
     SetShadeTex(prim, 0);

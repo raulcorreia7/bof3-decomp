@@ -54,7 +54,7 @@ MATCH void func_80167910(void) {
     poly->u3    = poly->u2;
     poly->v3    = poly->v1;
     poly->tpage = getTPage(TPAGE_DEPTH_4BIT, TPAGE_ABR_HALF, FONT_TPAGE_X, FONT_TPAGE_Y);
-    poly->clut  = 0x7802;
+    poly->clut  = getClut(32, 480);
     if (!(g_Task->param.unk_0B & 0x1)) {
         Area_AddCellPrim(g_Task->pos.x.fixed, g_Task->pos.y.fixed, 1, sizeof(POLY_FT4));
     } else {

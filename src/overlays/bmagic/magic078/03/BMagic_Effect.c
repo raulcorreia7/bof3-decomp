@@ -9,14 +9,12 @@ MATCH void func_801EEC04(void) {
     s32      tpage;
 
     tpage = getTPage(TPAGE_DEPTH_4BIT, TPAGE_ABR_ADD, 320, 256);
-    SetDrawMode((DR_MODE*)g_GfxPrimCursor, 0, 1, tpage, 0);
-    GFX_AddPrim(GFX_LAYER_BATTLE_SCENE, 0xC);
+    GFX_ADD_DITHERED_DRAW_MODE(GFX_LAYER_BATTLE_SCENE, tpage);
 
     SYS_DISPATCH_BYTE(handlers, g_Task->header.mode);
 
     tpage = getTPage(TPAGE_DEPTH_4BIT, TPAGE_ABR_ADD, 320, 256);
-    SetDrawMode((DR_MODE*)g_GfxPrimCursor, 0, 1, tpage, 0);
-    GFX_AddPrim(GFX_LAYER_BATTLE_SCENE, 0xC);
+    GFX_ADD_DITHERED_DRAW_MODE(GFX_LAYER_BATTLE_SCENE, tpage);
 }
 
 MATCH void func_801EECFC(void) {
@@ -58,8 +56,7 @@ MATCH void func_801EEF28(void) {
     s32 tpage;
 
     tpage = getTPage(TPAGE_DEPTH_4BIT, TPAGE_ABR_ADD, 320, 256);
-    SetDrawMode((DR_MODE*)g_GfxPrimCursor, 0, 1, tpage, 0);
-    GFX_AddPrim(GFX_LAYER_BATTLE_SCENE, 0xC);
+    GFX_ADD_DITHERED_DRAW_MODE(GFX_LAYER_BATTLE_SCENE, tpage);
 
     if (g_Task->header.step < 3) {
         if ((g_FrameCount & BYTE_MASK) == 0x40) {
@@ -78,8 +75,7 @@ MATCH void func_801EEF28(void) {
     }
 
     tpage = getTPage(TPAGE_DEPTH_4BIT, TPAGE_ABR_ADD, 320, 256);
-    SetDrawMode((DR_MODE*)g_GfxPrimCursor, 0, 1, tpage, 0);
-    GFX_AddPrim(GFX_LAYER_BATTLE_SCENE, 0xC);
+    GFX_ADD_DITHERED_DRAW_MODE(GFX_LAYER_BATTLE_SCENE, tpage);
 }
 
 MATCH void func_801EF08C(void) {
@@ -192,8 +188,7 @@ MATCH void func_801EFF84(void) {
     s32 tpage;
 
     tpage = getTPage(TPAGE_DEPTH_4BIT, TPAGE_ABR_ADD, 320, 256);
-    SetDrawMode((DR_MODE*)g_GfxPrimCursor, 0, 1, tpage, 0);
-    GFX_AddPrim(GFX_LAYER_BATTLE_SCENE, 0xC);
+    GFX_ADD_DITHERED_DRAW_MODE(GFX_LAYER_BATTLE_SCENE, tpage);
 
     if (g_Task->header.step != 0) {
         BMAGIC_DRAW_IN_ACTOR_MATRIX(func_801F02FC);
@@ -202,8 +197,7 @@ MATCH void func_801EFF84(void) {
     SYS_DISPATCH_BYTE(D_801F08C4, g_Task->header.step);
 
     tpage = getTPage(TPAGE_DEPTH_4BIT, TPAGE_ABR_ADD, 320, 256);
-    SetDrawMode((DR_MODE*)g_GfxPrimCursor, 0, 1, tpage, 0);
-    GFX_AddPrim(GFX_LAYER_BATTLE_SCENE, 0xC);
+    GFX_ADD_DITHERED_DRAW_MODE(GFX_LAYER_BATTLE_SCENE, tpage);
 }
 
 MATCH void func_801F00A0(void) {

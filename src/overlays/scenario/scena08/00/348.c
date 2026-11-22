@@ -350,8 +350,7 @@ MATCH s32 func_801F7E14(void) {
     s32               drawn;
     u8                i;
 
-    SetDrawMode((DR_MODE*)g_GfxPrimCursor, 0, 0, GetTPage(TPAGE_DEPTH_4BIT, TPAGE_ABR_ADD, 0x2C0, 0x100) & 0xFFFF, 0);
-    GFX_AddPrim(GFX_LAYER_UI, sizeof(DR_MODE));
+    GFX_ADD_DRAW_MODE(GetTPage(TPAGE_DEPTH_4BIT, TPAGE_ABR_ADD, 0x2C0, 0x100) & 0xFFFF);
     Camera_SetMatrix(&camera);
     drawn     = 1;
     billboard = MEM_PTR(Scena08Billboard, AREA_WORK);
@@ -718,8 +717,7 @@ MATCH void func_801F9688(void) {
     s32      angle;
     u8       i;
 
-    SetDrawMode((DR_MODE*)g_GfxPrimCursor, 0, 1, GetTPage(TPAGE_DEPTH_4BIT, TPAGE_ABR_SUB, 960, 256) & HALF_MASK, 0);
-    GFX_AddPrim(GFX_LAYER_UI, sizeof(DR_MODE));
+    GFX_ADD_DITHERED_DRAW_MODE(GFX_LAYER_UI, GetTPage(TPAGE_DEPTH_4BIT, TPAGE_ABR_SUB, 960, 256) & HALF_MASK);
     inner.vx = 240;
     inner.vy = 120;
     outer.vx = 400;
