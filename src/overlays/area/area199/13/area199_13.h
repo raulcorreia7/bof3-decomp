@@ -32,9 +32,9 @@ typedef struct Area199CellSprite {
 
 ASSERT_SIZE(Area199CellSprite, 0xE);
 
-extern Area199CellSprite D_801F44D4[];
 /* The step handler bank. */
 extern Callback D_801F44B8[];
+extern Area199CellSprite D_801F44D4[];
 /* The two trail cell rows: a member's slots run six bytes apart (x, y, flag), two members
  * three bytes apart, in D_801F54D0. The part words and row offsets follow the same rows. */
 extern u8       D_801F4544[];
