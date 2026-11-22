@@ -2,44 +2,28 @@
 
 /* func_801BDD58 */
 /* Returns whether a point lies within reach of an actor record. */
-#ifdef NON_MATCHING
-NON_MATCHING u8 Actor_IsInRange(s32 pos_x, s32 pos_y, s16 z, s32 reach, Actor* record) {
-    /* FAKE: plain C gives the record t0 and pos_x a0; 46 rows measured without the pins. */
-    FAKE_REG(s32, px, "t0");
-    FAKE_REG(Actor*, rec, "a0");
+MATCH u8 Actor_IsInRange(s32 pos_x, s32 pos_y, s16 z, s32 reach, Actor* record) {
+    s32 step_x;
+    s32 step_y;
     s32 x;
     s32 y;
-    s32 dist;
+    s32 height;
     s32 bound;
 
-    /* FAKE: the entry copy sinks to its reader without this use. */
-    px = pos_x;
-    FAKE_USE(px);
-    rec  = record;
-    dist = rec->pos.z.part.integer - z;
-    if (dist < 0) {
-        dist = -dist;
-    }
-    reach += rec->voice_flags.scene_flag;
-    if (dist > (reach << 7) + 0x100) {
+    height = abs(record->pos.z.part.integer - z);
+    reach += record->voice_flags.scene_flag;
+    if (height > (reach << 7) + 0x100) {
         return 0;
     }
-    x     = rec->pos.x.fixed + rec->vx * rec->timer;
-    y     = rec->pos.y.fixed + rec->vy * rec->timer;
-    bound = (reach + 2) << 15;
-    dist  = px - x;
-    if (dist < 0) {
-        dist = -dist;
-    }
-    if (dist < bound) {
-        dist = pos_y - y;
-        if (dist < 0) {
-            dist = -dist;
+    step_x = record->vx * record->timer;
+    step_y = record->vy * record->timer;
+    x      = record->pos.x.fixed + step_x;
+    y      = record->pos.y.fixed + step_y;
+    bound  = (reach + 2) << 15;
+    if (abs(pos_x - x) < bound) {
+        if (abs(pos_y - y) < bound) {
+            return 1;
         }
-        return dist < bound;
     }
     return 0;
 }
-#else
-INCLUDE_ASM(Actor_IsInRange);
-#endif
