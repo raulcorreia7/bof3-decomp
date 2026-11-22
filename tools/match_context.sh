@@ -21,7 +21,7 @@ name=$(sed -n 's/^[[:space:]]*glabel[[:space:]]*//p' "$a" 2>/dev/null | head -1)
 echo "== asm ${a:-(none)}"
 [ -z "$a" ] || sed -E 's#/\* [0-9A-F]+ ([0-9A-F]+) [0-9A-F]+ \*/#\1#' "$a" | grep -vE '^\s*$|glabel|\.size|nonmatching|endlabel|^\.|Generated' | cut -c5-74
 echo "== attempts"
-grep -h "\"$fn\"" config/attempts.jsonl 2>/dev/null | jq -r '"- \(.tried|.[0:330]) || \(.first_diff|tostring|.[0:160])"' | tail -3
+cat config/attempts.jsonl config/attempts/*.jsonl 2>/dev/null | grep -h "\"$fn\"" | jq -r '"- \(.tried|.[0:330]) || \(.first_diff|tostring|.[0:160])"' | tail -3
 echo "== file"
 if [ -n "$name" ]; then
 	grep -rln "INCLUDE_ASM($name)" src | head -2

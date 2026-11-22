@@ -88,7 +88,8 @@ INCLUDE_ASM(func_<ADDR>);
 ```
 
 Every unmatched function keeps its closest draft under `NON_MATCHING`; it must compile with
-`-DNON_MATCHING`. Record attempts in the append-only `config/attempts.jsonl`, never in source, with
+`-DNON_MATCHING`. Record attempts with `tools/attempts.py add` (append-only: `config/attempts.jsonl` and one file per
+branch in `config/attempts/`), never in source, with
 `tools/attempts.py add --function <target>@0x<ADDR> --tried ... --first-diff ... --score ...`: the
 row states the form reached and the first differing instruction, and `check-markers` refuses a new
 draft without one. A later pass replaces the draft only with a closer one.

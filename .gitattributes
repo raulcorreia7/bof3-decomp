@@ -1,2 +1,3 @@
 config/attempts.jsonl merge=union
+config/attempts/*.jsonl merge=union
 config/symbols/*.toml merge=symbols

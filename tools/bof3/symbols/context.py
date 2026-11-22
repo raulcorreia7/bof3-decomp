@@ -68,9 +68,7 @@ RESIDENT = ("exe/slus_004_22", "emi/etc/game/00")
 DEFAULT_SCOPE = ("src", "include", "config", "docs", "asm")
 
 
-HISTORY = (
-    "config/attempts.jsonl"  # failed-attempt rows keep the names they were written with
-)
+HISTORY = "config/attempts"  # failed-attempt rows keep the names they were written with
 
 
 def grep_files(ctx: Context, word: str, scope: list[str]) -> list[str]:
@@ -84,7 +82,8 @@ def grep_files(ctx: Context, word: str, scope: list[str]) -> list[str]:
         word,
         "--",
         *scope,
-        f":(exclude){HISTORY}",
+        f":(exclude){HISTORY}.jsonl",
+        f":(exclude){HISTORY}/",
         check=False,
     )
     return [name for name in names.split("\0") if name]
