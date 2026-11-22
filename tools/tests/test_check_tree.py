@@ -181,3 +181,32 @@ def test_new_literal_in_another_file_fails(tmp_path: Path) -> None:
         removed=("src/overlays/test/arc/00/a.c",),
     )
     assert result.returncode == 1 and "raw address" in result.stdout + result.stderr
+
+
+RENAMED_CALL = (
+    "MATCH void func_801D9C80(void) {\n    g_Actor->slot = %s(TASK_BYTES, 0U);\n}\n"
+)
+
+
+def test_renamed_call_with_a_known_task_use_passes(tmp_path: Path) -> None:
+    result = run_tree(
+        tmp_path,
+        {"src/overlays/test/arc/00/a.c": RENAMED_CALL % "GFX_AllocPaletteFade"},
+        {"src/overlays/test/arc/00/a.c": RENAMED_CALL % "GFX_PaletteAllocFade"},
+    )
+    assert result.returncode == 0, result.stdout + result.stderr
+
+
+def test_new_task_use_fails(tmp_path: Path) -> None:
+    result = run_tree(
+        tmp_path,
+        {"src/overlays/test/arc/00/a.c": RENAMED_CALL % "GFX_AllocPaletteFade"},
+        {
+            "src/overlays/test/arc/00/a.c": RENAMED_CALL % "GFX_AllocPaletteFade"
+            + "void f(void) {\n    g_Actor->slot = GFX_PaletteAllocFade(TASK_BYTES, 1U);\n}\n"
+        },
+    )
+    assert (
+        result.returncode == 1
+        and "task read by offset" in result.stdout + result.stderr
+    )
