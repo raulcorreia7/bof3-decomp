@@ -509,6 +509,7 @@ NON_MATCHING void func_801D2474(void) {
     u8        row;
     u8        col;
     u8        step;
+    u16       n;
 
     Camera_SetMatrix(&matrix);
     pos[0] = ((Actor*)g_Task->unk_4C)->pos.x.fixed;
@@ -519,11 +520,13 @@ NON_MATCHING void func_801D2474(void) {
         for (col = 0; col < D_801D393C[D_801D40AC].w; col++) {
             if (*(u16*)D_801D40B0 != 0) {
                 dot        = (TrailDot*)D_801D40B4;
+                n          = D_801D40A8;
                 dot->color = *(u16*)D_801D40B0;
-                D_801D40A8 += 1;
+                n++;
+                D_801D40A8 = n;
+                dot->x     = screen.vx - D_801D393C[D_801D40AC].x + col;
                 D_801D40B4 = (u32)(dot + 1);
                 dot->y     = screen.vy - D_801D393C[D_801D40AC].y + row;
-                dot->x     = screen.vx - D_801D393C[D_801D40AC].x + col;
             }
             D_801D40B0 += 2;
         }
