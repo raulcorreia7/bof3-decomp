@@ -37,7 +37,7 @@ NON_MATCHING void func_80167E00(void) {
             Actor_ProjectForDraw();
             continue;
         }
-        for (slot = 0; slot < D_800E3800; slot++) {
+        for (slot = 0; slot < FAKE_VOLATILE(u8, D_800E3800); slot++) {
             if (SCENE_SLOTS[slot].scene == TASK(Actor)->unk_2C) {
                 break;
             }

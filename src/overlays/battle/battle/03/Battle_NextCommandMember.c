@@ -9,6 +9,8 @@ NON_MATCHING void Battle_NextCommandMember(void) {
     s8*          cursor;
     s8*          slot;
     volatile u8* flag;
+    u8*          state;
+    u8           mode;
     u8           id;
     u32          index;
     if (EMI_IsReady() != 0) {
@@ -37,11 +39,14 @@ NON_MATCHING void Battle_NextCommandMember(void) {
                 }
             }
         }
-        g_Battle.row_cursor         = 0;
-        g_Battle.cursor.panel_entry = 0;
-        D_801463B0                  = 0xE;
-        g_Battle.phase.step         = 0;
-        g_Battle.phase.mode += 1;
+        state = &g_Battle.row_cursor;
+        FAKE_OPAQUE(state);
+        state[0]                 = 0;
+        g_Battle.cursor.gene.row = 0;
+        mode                     = state[-5];
+        D_801463B0               = 0xE;
+        state[-4]                = 0;
+        state[-5]                = mode + 1;
     }
 }
 #else
