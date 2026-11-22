@@ -387,13 +387,6 @@ extern u16                 D_80146918[][ACTOR_SIZE / 2];
 extern u8                  D_8014691C[ENTITY_MAX][ACTOR_SIZE]; /* 0x8014691C */
 /* D_80147A58 */
 extern Actor               g_PartyActors[];
-extern u8                  D_80147CB8[]; /* 0x80147CB8 */
-extern s8                  D_80147CB9[]; /* 0x80147CB9 */
-extern s8                  D_80147CBA[]; /* 0x80147CBA */
-extern u8                  D_80147CBB[]; /* 0x80147CBB */
-extern s32                 D_80147CBC[];
-extern s32                 D_80147CC0[];
-extern s32                 D_80147CC4[];
 extern u16                 D_801481D8;
 extern Pos3                D_801481E8;         /* scene angle, 16.16 fixed point */
 extern Pos3                D_801481F8;         /* per-frame step of D_801481E8 */

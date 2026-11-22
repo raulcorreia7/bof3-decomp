@@ -7,7 +7,7 @@ MATCH void func_801F5A44(void) {
             SYS_ClearFlag(g_SceneEventFlags, 0xC);
             g_SceneEventState.selection = 0;
         }
-        D_80147CB8[3 * 0x10] |= 1;
+        g_ActorTurnRamps[3].flags |= 1;
     }
     if (g_GameCellType == 4 || (u8)(g_GameCellType - 6) < 2) {
         g_PartyActors[3].header.flags = 1;

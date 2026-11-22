@@ -18,7 +18,6 @@
 /* The cell the party leader's choice commits and the bit the event sets. */
 extern s16 D_80147B26[];
 extern u8* D_80147B40;
-extern u8  D_80147CC8;
 
 /* A map cell and a facing: the spots the leader stands on to pick a branch (func_801F4414). */
 typedef struct AreaFacingCell {

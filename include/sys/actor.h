@@ -281,8 +281,28 @@ ASSERT_OFFSET(Actor, ext, 0x8C);
 ASSERT_OFFSET(Actor, fish_row, 0x92);
 ASSERT_SIZE(Actor, ACTOR_SIZE);
 
+/* A party slot's turn ramp: each frame func_801A3D1C and func_801AC33C add the steps to Actor words 0x64..0x6C until the counts run out. */
+typedef struct ActorTurnRamp {
+    u8  flags;     /* 0x00 - bit 0 set: func_801A3080 leaves the ramp alone */
+    s8  frames_xy; /* 0x01 */
+    s8  frames_z;  /* 0x02 */
+    u8  unk_03;    /* 0x03 */
+    s32 step_x;    /* 0x04 */
+    s32 step_y;    /* 0x08 */
+    s32 step_z;    /* 0x0C */
+} ActorTurnRamp;
+
+ASSERT_OFFSET(ActorTurnRamp, step_z, 0x0C);
+ASSERT_SIZE(ActorTurnRamp, 0x10);
+
+/* The four party slots and the entry a non-party actor uses. */
+#define ACTOR_TURN_RAMP_COUNT 5
+
 /* D_80146884 */
 extern Actor* g_CurrentActor; /* 0x80146884 */
 extern Actor  g_Actors[ACTOR_COUNT];
+
+/* D_80147CB8 */
+extern ActorTurnRamp g_ActorTurnRamps[ACTOR_TURN_RAMP_COUNT];
 
 #endif

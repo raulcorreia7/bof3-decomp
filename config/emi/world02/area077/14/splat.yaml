@@ -19,7 +19,7 @@ segments:
       - [0x9E0, c, func_801F35E0]
       - [0xAE8, c, func_801F36E8]
       - [0xB78, c, func_801F3778]
-      - [0xC98, c, func_801F3898]
+      - [0xC98, c, Area_DrawLine]
       - [0xF48, c, func_801F3B48]
       - [0xFC4, c, func_801F3BC4]
       - [0x1074, c, func_801F3C74]

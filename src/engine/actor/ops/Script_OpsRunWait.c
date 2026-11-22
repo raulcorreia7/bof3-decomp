@@ -75,15 +75,15 @@ NON_MATCHING u8 Script_OpsRunWait(void* sub, s32 target, u8 value) {
             }
             cmd = code + FIELD(u16, sub, 0xAu);
             if (cmd[7] != 0) {
-                slot                                  = cmd[7];
-                D_80147CB9[*index * 0x10]             = slot;
-                D_80147CBA[*index * 0x10]             = slot;
-                cmd                                   = code + FIELD(u16, sub, 0xAu);
-                FIELD(s32, D_80147CC4, *index * 0x10) = (s16)(cmd[6] | (cmd[5] << 8)) / D_80147CBA[*index * 0x10];
-                cmd                                   = code + FIELD(u16, sub, 0xAu);
-                FIELD(s32, D_80147CC0, *index * 0x10) = (s16)(cmd[4] | (cmd[3] << 8)) / D_80147CBA[*index * 0x10];
-                cmd                                   = code + FIELD(u16, sub, 0xAu);
-                FIELD(s32, D_80147CBC, *index * 0x10) = (s16)(cmd[2] | (cmd[1] << 8)) / D_80147CBA[*index * 0x10];
+                slot                               = cmd[7];
+                g_ActorTurnRamps[*index].frames_xy = slot;
+                g_ActorTurnRamps[*index].frames_z  = slot;
+                cmd                                = code + FIELD(u16, sub, 0xAu);
+                g_ActorTurnRamps[*index].step_z    = (s16)(cmd[6] | (cmd[5] << 8)) / g_ActorTurnRamps[*index].frames_z;
+                cmd                                = code + FIELD(u16, sub, 0xAu);
+                g_ActorTurnRamps[*index].step_y    = (s16)(cmd[4] | (cmd[3] << 8)) / g_ActorTurnRamps[*index].frames_z;
+                cmd                                = code + FIELD(u16, sub, 0xAu);
+                g_ActorTurnRamps[*index].step_x    = (s16)(cmd[2] | (cmd[1] << 8)) / g_ActorTurnRamps[*index].frames_z;
             } else {
                 g_Task->unk_6C = (s16)(cmd[6] | (cmd[5] << 8));
                 cmd            = code + FIELD(u16, sub, 0xAu);
@@ -98,7 +98,7 @@ NON_MATCHING u8 Script_OpsRunWait(void* sub, s32 target, u8 value) {
             tmp             = -(g_CurrentActor - g_PartyActors) >> 3;
             SP_REF(s8, 0x1) = tmp;
             tmp &= BYTE_MASK;
-            if ((u32)tmp < 4U && (D_80147CBA[tmp * 0x10] + D_80147CB9[tmp * 0x10]) != 0) {
+            if ((u32)tmp < 4U && (g_ActorTurnRamps[tmp].frames_z + g_ActorTurnRamps[tmp].frames_xy) != 0) {
                 goto back;
             }
             return value;
@@ -109,7 +109,7 @@ NON_MATCHING u8 Script_OpsRunWait(void* sub, s32 target, u8 value) {
             if (tmp & 0x80) {
                 *index = 4;
             }
-            D_80147CB8[(s8)*index * 0x10] ^= 1;
+            g_ActorTurnRamps[(s8)*index].flags ^= 1;
             return value;
         case ACTOR_SCRIPT_WAIT_SET_UNK_06:
             slot = code[FIELD(u16, sub, 0xAu) + 1];

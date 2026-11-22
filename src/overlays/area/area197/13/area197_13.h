@@ -29,7 +29,7 @@ s32                        func_801F3368(void);
 void func_801F3474(void);
 
 /* The image's step passes. */
-void func_801F3768(s32 x, s32 y);
+void func_801F3768(s32 shade, s32 rise);
 
 /* The seeded sparks' launch speed, lifetime and shade; the dropped rows fall
  * twice as fast. */
