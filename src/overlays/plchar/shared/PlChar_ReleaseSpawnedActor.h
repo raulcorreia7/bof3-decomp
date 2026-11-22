@@ -1,6 +1,6 @@
 /* Counts the character's spawn down and releases its actor slot; every change must verify every plchar image that includes it. */
 MATCH void PlChar_ReleaseSpawnedActor(void) {
-    if (Actor_StepAnimOnce() & BYTE_MASK) {
+    if (Script_AnimStepOnce() & BYTE_MASK) {
         Script_Request(g_Task->direction);
         g_Task->unk_03 = FACING_UP_RIGHT;
         return;

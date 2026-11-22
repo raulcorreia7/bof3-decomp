@@ -17,7 +17,7 @@ MATCH void func_801B31F0(void) {
         record.type  = type;
         record.value = g_Game.current->u.field.value;
         if (type != GAME_NONE) {
-            Game_DispatchScenarioRecord(&record);
+            Game_ScenarioDispatchRecord(&record);
         }
         g_Task->header.step = 2;
     }

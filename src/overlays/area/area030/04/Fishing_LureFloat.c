@@ -62,7 +62,7 @@ MATCH void Fishing_LureFloat(void) {
     } else {
         Script_Request(3);
     }
-    Actor_StepAnimLoop();
+    Script_AnimStepLoop();
     FISHING_STATE->counter_48 = 2;
     func_801E084C();
 }

@@ -3,7 +3,7 @@
 
 /* func_800C1FA4 */
 MATCH void Effect_AddActor(void) {
-    Actor_StepAnimLoop();
+    Script_AnimStepLoop();
     Area_AddActor();
     if (g_Battle.flags & BATTLE_STATE_EFFECT_PLAYING) {
         g_Task->header.step++;

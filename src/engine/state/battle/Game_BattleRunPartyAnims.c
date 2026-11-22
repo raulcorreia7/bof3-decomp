@@ -10,7 +10,7 @@ MATCH void Game_BattleRunPartyAnims(void) {
         work        = (u8*)g_Game.members + i * BATTLE_PARTY_STRIDE;
         g_GameState = work;
         TASK_SET(work);
-        Actor_StepAnimLoop();
+        Script_AnimStepLoop();
         i++;
     }
 }

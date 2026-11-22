@@ -5,18 +5,18 @@ MATCH void PlChar_AdvanceScript(void) {
     done = 0;
     if (g_Task->param.unk_0B != 0) {
         if (g_Task->param.unk_0B == 1) {
-            if (Actor_StepAnimOnce() & BYTE_MASK) {
+            if (Script_AnimStepOnce() & BYTE_MASK) {
                 Script_Select(g_Task->direction);
                 g_Task->param.unk_0B = 2;
             }
         } else {
-            Actor_StepAnimLoop();
+            Script_AnimStepLoop();
             if (g_GameStateIndex == 0) {
                 done = 1;
             }
         }
     } else {
-        if (Actor_StepAnimOnce() & BYTE_MASK) {
+        if (Script_AnimStepOnce() & BYTE_MASK) {
             done = 1;
         }
     }

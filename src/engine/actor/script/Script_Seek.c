@@ -15,5 +15,5 @@ MATCH void Script_Seek(u16 position) {
     current_work->script         = current_work->script + 2;
     current_work->script_pc      = position;
     current_work->range_54.table = (u8*)((u16*)current_work->script + current_work->unk_49);
-    Actor_StageAnimStep();
+    Script_AnimStageStep();
 }

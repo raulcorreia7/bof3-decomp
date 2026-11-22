@@ -322,7 +322,7 @@ MATCH void func_801EFB64(void) {
 MATCH void func_801EFBF8(void) {
     u8 count;
 
-    Actor_StepAnimLoop();
+    Script_AnimStepLoop();
     count          = g_Task->unk_09 - 1;
     g_Task->unk_09 = count;
     if (!(count & BYTE_MASK)) {
@@ -340,7 +340,7 @@ MATCH void func_801EFC74(void) {
     u8           slot;
     u8           timer;
 
-    Actor_StepAnimOnce();
+    Script_AnimStepOnce();
     timer          = g_Task->unk_09 - 1;
     g_Task->unk_09 = timer;
     if (timer != 0) {
@@ -387,7 +387,7 @@ MATCH void func_801EFC74(void) {
 }
 
 MATCH void func_801EFEF0(void) {
-    if (Actor_StepAnimOnce() != 0u) {
+    if (Script_AnimStepOnce() != 0u) {
         g_Task->unk_09      = 0xF;
         g_Task->header.step = g_Task->header.step + 1;
     }

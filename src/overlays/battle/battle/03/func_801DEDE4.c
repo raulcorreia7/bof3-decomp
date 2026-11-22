@@ -15,5 +15,5 @@ MATCH u8 func_801DEDE4(void) {
         return 1u;
     }
 
-    return Actor_StepAnimLoop();
+    return Script_AnimStepLoop();
 }

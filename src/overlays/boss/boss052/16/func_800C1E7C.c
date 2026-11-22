@@ -14,7 +14,7 @@ MATCH void func_800C1E7C(void) {
             work->timer = delay - 1;
         }
     }
-    Actor_StepAnimLoop();
+    Script_AnimStepLoop();
     Area_AddActor();
     if (g_Battle.flags & BATTLE_STATE_EFFECT_PLAYING) {
         ((Actor*)g_Task)->header.step++;

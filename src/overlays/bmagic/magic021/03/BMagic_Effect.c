@@ -88,7 +88,7 @@ MATCH void func_801EF104(void) {
     u8           i;
     u8           timer;
 
-    Actor_StepAnimOnce();
+    Script_AnimStepOnce();
     timer          = g_Task->unk_09 - 1;
     g_Task->unk_09 = timer;
     if (timer != 0) {
@@ -108,7 +108,7 @@ MATCH void func_801EF104(void) {
 }
 
 MATCH void func_801EF208(void) {
-    if (Actor_StepAnimOnce() != 0u) {
+    if (Script_AnimStepOnce() != 0u) {
         Battle_MarkDamaged(g_Battle.target_selector);
         g_Task->header.step = g_Task->header.step + 1;
     }

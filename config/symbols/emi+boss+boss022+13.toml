@@ -1,6 +1,6 @@
 ["emi/boss/boss022/13"]
 Battle_ShowActorEntry = { addr = 0x800AC844, type = "func", source = "Clears the hidden flag of the actor entry entry_id, which draws the battler again.", alias = true }
-Boss_EndEntrance = { addr = 0x800C18B8, type = "func", source = "Ends the entrance of boss022: once Actor_StepAnimOnce reports the actor script ready, sets header.mode (byte 0x01) to 2." }
+Boss_EndEntrance = { addr = 0x800C18B8, type = "func", source = "Ends the entrance of boss022: once Script_AnimStepOnce reports the actor script ready, sets header.mode (byte 0x01) to 2." }
 Boss_EndDefeat = { addr = 0x800C1938, type = "func", source = "Defeats the boss with Battle_DefeatEnemy (banks its EXP and Zenny, counts it off and sets BATTLE_RESULT_VICTORY for the last enemy), flags the enemy to skip its action step, unhides the actor and sets header.mode (byte 0x01) to 3 with the step cleared in boss022." }
 Boss_InstallBattleHooks = { addr = 0x800C1A08, type = "func", source = "Installs the boss battle hooks of boss022: Boss_ChooseBattleEnding into g_BattleChooseEndingHook, Boss_EndBattle into g_BattleEndHook and Boss_RunBattleEvent into g_BossBattleEventHook." }
 Boss_RunBattleEvent = { addr = 0x800C1A40, type = "func", source = "Handles the boss battle events of boss022: ignores every event mode and returns 0." }

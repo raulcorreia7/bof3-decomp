@@ -6,7 +6,7 @@ __asm__(".include \"include/match/macro.inc\"\n");
 #endif
 
 MATCH void func_801CF934(void) {
-    Actor_StepAnimLoop();
+    Script_AnimStepLoop();
 }
 
 MATCH void func_801CF954(void) {

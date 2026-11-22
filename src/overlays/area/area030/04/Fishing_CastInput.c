@@ -33,5 +33,5 @@ MATCH void Fishing_CastInput(void) {
         next            = FISHING_STATE;
         next->sub_index = 0;
     }
-    Actor_StepAnimLoop();
+    Script_AnimStepLoop();
 }

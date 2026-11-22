@@ -89,7 +89,7 @@ MATCH void func_801F7050(void) {
 
 MATCH void func_801F70F8(void) {
     Trail_Update(SCENA07_TRAIL);
-    func_801F8BE8(SCENA07_TRAIL);
+    Trail_Draw(SCENA07_TRAIL);
     g_Task->pos.x.fixed -= TO_COORD(1);
     g_Task->pos.y.fixed += 0; /* FAKE: retail reloads and stores y with no change. */
     g_Task->pos.z.fixed += g_Task->vz;
@@ -104,7 +104,7 @@ MATCH void func_801F70F8(void) {
 
 MATCH void func_801F71C0(void) {
     Trail_Update(SCENA07_TRAIL);
-    func_801F8BE8(SCENA07_TRAIL);
+    Trail_Draw(SCENA07_TRAIL);
     if (--g_Task->timer == 0) {
         SND_PlaySE(EMI_SE_ID(SND_BANK_AREA, 3));
         g_Task->timer = 32;
@@ -374,7 +374,7 @@ MATCH void func_801F7E68(void) {
 
 MATCH void func_801F7EF8(void) {
     Trail_Update(SCENA07_TRAIL);
-    func_801F8BE8(SCENA07_TRAIL);
+    Trail_Draw(SCENA07_TRAIL);
     g_Task->pos.x.fixed += g_Task->vx;
     g_Task->pos.y.fixed += g_Task->vy;
     g_Task->pos.z.fixed += g_Task->vz;
@@ -386,7 +386,7 @@ MATCH void func_801F7EF8(void) {
 
 MATCH void func_801F7FA4(void) {
     Trail_Update(SCENA07_TRAIL);
-    func_801F8BE8(SCENA07_TRAIL);
+    Trail_Draw(SCENA07_TRAIL);
     if (--g_Task->timer == 0) {
         if (g_Task->unk_06 == 0) {
             Actor_Clear();
@@ -551,13 +551,7 @@ MATCH void func_801F8804(u8 shade) {
 
 #include "shared/Trail_Update.h"
 
-#ifdef NON_MATCHING
-NON_MATCHING void func_801F8BE8(void* table) {
-    (void)table;
-}
-#else
-INCLUDE_ASM(func_801F8BE8);
-#endif
+#include "shared/Trail_Draw.h"
 
 #include "shared/MATH_AverageAngle.h"
 
@@ -604,8 +598,8 @@ MATCH void func_801F90F4(Scena07BurstBuffer* buffer) {
     }
 }
 
-#ifdef NON_MATCHING
-NON_MATCHING void func_801F9330(Scena07BurstBuffer* buffer) {
+/* Shifts the burst rings back one row, relights and reprojects the front ring, and draws the rings as a mesh that fades by row. */
+MATCH void func_801F9330(Scena07BurstBuffer* buffer) {
     s32      dir[3];
     s32      pos[3];
     MATRIX   camera;
@@ -625,24 +619,24 @@ NON_MATCHING void func_801F9330(Scena07BurstBuffer* buffer) {
 
     Camera_SetMatrix(&camera);
     phase = 0;
-    for (i = 0; i < 32; i++) {
+    for (row = 0; row < 32; row++) {
         dir[0] = (rsin(buffer->angle) * rcos(phase)) >> 12;
         dir[1] = (rsin(buffer->angle) * rsin(phase)) >> 12;
         dir[2] = rcos(buffer->angle);
         light  = buffer->unk_514 * dir[0] + buffer->unk_518 * dir[1] + buffer->unk_51C * dir[2];
         if (light <= 0) {
-            buffer->shade[0][i] = 7;
+            buffer->shade[0][row] = 7;
         } else {
             light = SquareRoot0(light);
             if (light >= 0x1000) {
                 light = 0xFFF;
             }
-            buffer->shade[0][i] = ((light & 0xF00) >> 5) + 7;
+            buffer->shade[0][row] = ((light & 0xF00) >> 5) + 7;
         }
         pos[0] = buffer->pos.vx + (dir[0] << 5);
         pos[1] = buffer->pos.vy + (dir[1] << 5);
         pos[2] = buffer->pos.vz + (dir[2] << 13);
-        Camera_ProjectPoint(pos, &buffer->points[0][i]);
+        Camera_ProjectPoint(pos, &buffer->points[0][row]);
         phase += 0x80;
     }
 
@@ -650,19 +644,19 @@ NON_MATCHING void func_801F9330(Scena07BurstBuffer* buffer) {
 
     for (row = 0; row < 7; row++) {
         for (i = 0; i < 32; i++) {
-            next = i + 1;
+            next = (i + 1) & 0x1F;
             prim = GFX_BeginPolyG4(1);
             setXY0(prim, buffer->points[row][i].vx, buffer->points[row][i].vy);
-            prim->x1 = buffer->points[row][next & 0x1F].vx;
-            prim->y1 = buffer->points[row][next & 0x1F].vy;
+            prim->x1 = buffer->points[row][next].vx;
+            prim->y1 = buffer->points[row][next].vy;
             shade    = (buffer->shade[row][i] * (7 - row)) / 7;
             setRGB0(prim, shade, shade, shade);
-            shade = (buffer->shade[row][next & 0x1F] * (7 - row)) / 7;
+            shade = (buffer->shade[row][next] * (7 - row)) / 7;
             setRGB1(prim, shade, shade, shade);
             prim->x2 = buffer->points[row + 1][i].vx;
             prim->y2 = buffer->points[row + 1][i].vy;
-            prim->x3 = buffer->points[row + 1][next & 0x1F].vx;
-            prim->y3 = buffer->points[row + 1][next & 0x1F].vy;
+            prim->x3 = buffer->points[row + 1][next].vx;
+            prim->y3 = buffer->points[row + 1][next].vy;
             shade    = (buffer->shade[row + 1][i] * (6 - row)) / 7;
             setRGB2(prim, shade, shade, shade);
             shade = (buffer->shade[row + 1][i] * (6 - row)) / 7;
@@ -671,9 +665,6 @@ NON_MATCHING void func_801F9330(Scena07BurstBuffer* buffer) {
         }
     }
 }
-#else
-INCLUDE_ASM(func_801F9330);
-#endif
 
 INCLUDE_ASM(func_801F97E0);
 
@@ -1001,107 +992,76 @@ MATCH void func_801FA698(void) {
     D_80146872 = 1;
 }
 
-#ifdef NON_MATCHING
-NON_MATCHING void func_801FA6B4(void) {
-    switch (g_ScenarioState.step_05) {
-        case 0:
-            SCENARIO_MESSAGE_WAIT(MSG_SCENA07_013, 1);
-            break;
-        case 1:
-            if (g_GameStateIndex != GAME_REQUEST_MESSAGE) {
-                Scene_SetupParty(0);
-                g_ScenarioState.step_05 = 2;
-            }
-            break;
-        case 2:
-            if (g_ScriptVars[0] == 1) {
-                g_AreaScrollTargetX     = TO_COORD(53);
-                g_AreaCameraStep        = 0x20;
-                g_ScenarioState.step_05 = 3;
-                g_AreaScrollTargetY     = g_Game.members[0].pos.y.fixed;
-            }
-            break;
-        case 3:
-            if (g_AreaCameraMoving == 0) {
-                g_ScriptVars[0]         = 2;
-                g_ScenarioState.step_05 = 4;
-            }
-            break;
-        case 4:
-            if (g_ScriptVars[0] == 0xA) {
-                UI_ModeSet(0xD);
-                g_ScenarioState.step_05 = 5;
-            }
-            break;
-        case 5:
-            if (WINDOW_EFFECT_BUSY()) {
-                break;
-            }
-            g_AreaDrawFlags = 0;
-            SCENARIO_MESSAGE_WAIT(MSG_SCENA07_026, 6);
-            break;
-        case 6:
-            if (g_GameStateIndex != GAME_REQUEST_MESSAGE) {
-                g_ScriptVars[2]         = 1;
-                g_ScenarioState.step_05 = 7;
-                SYS_SetFlag(g_SceneFlags, 13);
-                Game_RequestAreaChange(AREA_ID_RHAPALA_DOCK, TO_COORD(51), TO_COORD(33), AREA_ENTRY_MAP_LOADING | FACING_UP);
-            }
-            break;
-        case 7:
-            if (g_ScriptVars[0] == 0xD) {
-                SYS_SetFlag(g_SceneFlags, 15);
-                Game_ClearScriptActive();
-                Scene_ClearScriptState(&g_ScenarioState.step_05);
-            }
-            break;
-        case 10:
-            SCENARIO_MESSAGE_WAIT(MSG_SCENA07_041, 11);
-            break;
-        case 11:
-            if (g_GameStateIndex != GAME_REQUEST_MESSAGE) {
-                Scene_SetupParty(2);
-                g_ScenarioState.step_05 = 12;
-            }
-            break;
-        case 12:
-            if (g_ScriptVars[0] == 0x15) {
-                SYS_SetFlag(g_SceneFlags, 14);
-                Game_ClearScriptActive();
-                Scene_ClearScriptState(&g_ScenarioState.step_05);
-            }
-            break;
-        case 20:
-            SCENARIO_MESSAGE_WAIT(MSG_SCENA07_041, 21);
-            break;
-        case 21:
-            if (g_GameStateIndex != GAME_REQUEST_MESSAGE) {
-                Scene_SetupParty(0);
-                g_ScenarioState.step_05 = 22;
-            }
-            break;
-        case 22:
-            if (g_ScriptVars[0] == 1) {
-                SYS_SetFlag(g_SceneFlags, 16);
-                Game_ClearScriptActive();
-                Scene_ClearScriptState(&g_ScenarioState.step_05);
-            }
-            break;
-        case 30:
-            SCENARIO_MESSAGE_WAIT(MSG_SCENA07_019, 31);
-            break;
-        case 31:
-            if (g_GameStateIndex != GAME_REQUEST_MESSAGE) {
-                Game_ClearScriptActive();
-                g_ScenarioState.step_05  = 0;
-                g_ScenarioState.state_04 = 0;
-            }
-            break;
+/* Sets up the scena07 areas on entry: scroll, tiles and the scene script each area starts with. */
+MATCH void func_801FA6B4(void) {
+    u8* bgm;
+
+    if (LOHU(g_GameAreaId) == AREA_ID_CAMP_BEFORE_ANGEL_TOWER && !SYS_TestFlag(g_SceneFlags, 7)) {
+        func_801C1DF0(1);
+        func_801BE1B0(2);
+        g_ScrollHeight = 0xD80;
+        Area_AdvanceScroll(0xD80);
     }
+    if (LOHU(g_GameAreaId) == AREA_ID_URKAN_TAPA) {
+        if (g_GameCellType == 1 && !SYS_TestFlag(g_SceneFlags, 4)) {
+            SYS_SetFlag(g_SceneFlags, 4);
+            g_AreaScrollTargetX = 0x5B8000;
+            g_AreaScrollTargetY = 0x98000;
+            Area_InitMapRenderer();
+            func_801BE1B0(0);
+            bgm = &g_SndBGMId;
+            SND_StartDecrescendo(g_SelectionSepSlots[*bgm * 4], g_SelectionSequences[*bgm * 4], 100, 0x20);
+            *bgm = 1;
+        }
+    } else if (!SYS_TestFlag(g_SceneFlags, 4)) {
+        SYS_ClearFlag(g_SceneFlags, 5);
+        SYS_ClearFlag(g_SceneFlags, 6);
+    }
+    if (LOHU(g_GameAreaId) == AREA_ID_ANGEL_TOWER_GARR_FIGHT) {
+        if (!SYS_TestFlag(g_SceneFlags, 8)) {
+            Game_SetScriptActive();
+            g_ScriptVars[0] = 0;
+            func_801BE1B0(0);
+            g_ScenarioState.state_04 = 6;
+            g_ScenarioState.step_05  = 0;
+        }
+        if (!SYS_TestFlag(g_SceneFlags, 9)) {
+            func_801A4BC0(0x25, 0x3D, 0x51);
+            func_801A4BC0(0x26, 0x3D, 0x51);
+        } else {
+            EMI_ArchiveLoad(0x254);
+            while (!EMI_IsReady()) {
+                SYS_ThreadWait(1);
+            }
+            func_801A4BC0(0x25, 0x3D, 0x50);
+            func_801A4BC0(0x26, 0x3D, 0x50);
+        }
+    }
+    if (LOHU(g_GameAreaId) == AREA_ID_TIDAL_CAVES_OUTSIDE) {
+        SYS_SetFlag(g_SceneEventFlags, 0x4F);
+    }
+    if (LOHU(g_GameAreaId) == AREA_ID_FAIRY_VILLAGE_DOLPHIN && g_GameCellType == 1) {
+        if (!SYS_TestFlag(g_SceneFlags, 0)) {
+            Game_SetScriptActive();
+            g_ScriptVars[0] = 0;
+            func_801C1DF0(0);
+            func_801BE1B0(0);
+            g_AreaDrawFlags          = 0;
+            g_ScenarioState.state_04 = 1;
+            g_ScenarioState.step_05  = 0;
+        } else if (!SYS_TestFlag(g_SceneFlags, 2) && SYS_TestFlag(g_SceneFlags, 1)) {
+            Game_SetScriptActive();
+            g_AreaScrollTargetX = 0x2D8000;
+            g_AreaScrollTargetY = 0x5D0000;
+            Area_InitMapRenderer();
+            func_801BE1B0(2);
+            g_ScenarioState.state_04 = 3;
+            g_ScenarioState.step_05  = 0;
+            D_80146258 |= 8;
+        }
+    }
+    D_80146872 = 2;
 }
-#else
-INCLUDE_ASM(func_801FA6B4);
-#endif
 
 MATCH void func_801FAA2C(void) {
     SYS_DISPATCH_BYTE(D_801FDE1C, g_ScenarioState.state_04);

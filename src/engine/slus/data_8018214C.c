@@ -33,8 +33,8 @@ const ScriptOpCallback g_AreaScriptTests[21] = {
     (ScriptOpCallback)Game_IsScenarioAtMost,
     (ScriptOpCallback)Game_HasPartyFlag,
     (ScriptOpCallback)func_8015B83C,
-    (ScriptOpCallback)Game_SetScriptVar,
-    (ScriptOpCallback)Game_IsScriptVarEqual,
-    (ScriptOpCallback)Game_IncScriptVar,
+    (ScriptOpCallback)Game_ScriptVarSet,
+    (ScriptOpCallback)Game_ScriptVarIsEqual,
+    (ScriptOpCallback)Game_ScriptVarInc,
     (ScriptOpCallback)Game_TestNever,
 };

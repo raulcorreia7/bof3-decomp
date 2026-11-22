@@ -11,5 +11,5 @@ MATCH void Area_StepSceneTimer(void) {
         return;
     }
     work->timer = timer - 1;
-    Actor_UpdateMovement();
+    Actor_MovementUpdate();
 }

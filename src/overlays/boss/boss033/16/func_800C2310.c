@@ -8,7 +8,7 @@ MATCH void func_800C2310(void) {
     s32          delta_y;
     s32          delta_z;
 
-    if ((Actor_StepAnimOnce() & BYTE_MASK) != 0) {
+    if ((Script_AnimStepOnce() & BYTE_MASK) != 0) {
         battler = &g_Battle.active_battler;
         index   = *battler;
         work    = (PartyMember*)g_Task;
@@ -30,6 +30,6 @@ MATCH void func_800C2310(void) {
         }
         work->unk_18 = delta_z >> 4;
         work->header.step++;
-        Actor_StepAnimOnce();
+        Script_AnimStepOnce();
     }
 }

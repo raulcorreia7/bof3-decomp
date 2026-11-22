@@ -5,7 +5,7 @@ MATCH void func_8019B1E8(void) {
     s32    count;
     u8     flag;
 
-    if (Actor_StepAnimOnce() & BYTE_MASK) {
+    if (Script_AnimStepOnce() & BYTE_MASK) {
         ACTOR_COUNT_DOWN(count, timer);
         if ((count & BYTE_MASK) == 0) {
             g_Task->header.mode = 2;
