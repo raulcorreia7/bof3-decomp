@@ -5,6 +5,8 @@
  * and its data. Only this image includes the file. */
 
 #include "overlays/area/worlds/world03.h"
+/* The scenario flag bytes the trigger tests. */
+extern u8       D_80144EF8[];
 
 /* The scratchpad work pointer; the dispatch entry bytes select a handler. */
 
@@ -12,8 +14,6 @@
 extern u8       D_80146158;
 /* The integer half of the focus x, stepped by the scene trigger. */
 extern u16      D_80147A8E;
-/* The scenario flag bytes the trigger tests. */
-extern u8       D_80144EF8[];
 extern s8       D_80147AD0;
 extern s16      D_80147AD6;
 /* The event countdown D_801448EE, stepped and tested unsigned. */

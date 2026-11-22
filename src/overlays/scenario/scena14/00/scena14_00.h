@@ -16,14 +16,14 @@ extern u8 D_80146134;
 
 /* kept: written as g_ScenarioState.flags_01, func_801F8850 changes size and the image symbols move. */
 extern u8 D_80146871;
-extern u8 D_801FC4C0;
-
 extern u8       D_80148660;
+
 extern u32      D_801F6C00;
 extern Callback D_801FC418[];
-
 extern Callback D_801FC424[];
+
 extern s8       D_801FC44C[];
+extern u8 D_801FC4C0;
 
 void func_801C7A54(s32 arg);
 void func_801F4400(void);
