@@ -11,7 +11,7 @@ MATCH void func_800C2310(void) {
     if ((Script_AnimStepOnce() & BYTE_MASK) != 0) {
         battler = &g_Battle.active_battler;
         index   = *battler;
-        work    = (PartyMember*)g_Task;
+        work    = TASK(PartyMember);
         delta_x = g_BattleEnemyBattlers[index - 3].pos.x.fixed - work->pos.x.fixed;
         if (delta_x < 0) {
             delta_x += 0xF;

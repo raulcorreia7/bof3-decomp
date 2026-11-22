@@ -10,7 +10,7 @@ MATCH void func_800C3088(void) {
     UI_TextDraw(128, 18, 0, 10, D_800C32A8);
 
     if (D_80148603 != 0 || (D_80146329 & 0x2) != 0) {
-        g_Task->header.mode -= 1;
+        TASK(PartyMember)->header.mode -= 1;
     }
     if (g_Battle.phase.mode == BATTLE_MODE_RESULT) {
         Effect_Reset();

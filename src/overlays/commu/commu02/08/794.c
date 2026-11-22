@@ -7,7 +7,6 @@ __asm__(".include \"include/match/macro.inc\"\n");
 #endif
 
 void func_801D4910(s32 x, s32 y);
-void func_801D4EA4(s32 left, s32 top, s32 icon_row, s32 raised);
 void func_801D8058(s32 left, s32 top);
 void func_801D2908(s16 x, s16 y, u8 mode);
 void Menu_DrawPanelIcon(u16 x, u16 y, s32 u, s32 v, u16 clut, u8 color);
@@ -525,7 +524,33 @@ MATCH void func_801D2908(s16 x, s16 y, u8 mode) {
     }
 }
 
+#ifdef NON_MATCHING
+NON_MATCHING void func_801D2AC4(s16 x, s16 y, u8 column, u8 style) {
+    s32 left;
+
+    UI_WindowDraw(x, y, 0x2A, 0x14, 0, g_WindowStyle);
+    GFX_ADD_DRAW_MODE((GetGraphType() == 1 || GetGraphType() == 2) ? 0x2D : 0x1D);
+    switch (style) {
+        case 0:
+            left = x;
+            FairyCasino_DrawFramePiece(left, y, 0xA);
+            UI_TextDraw(column ? (s16)(left + 10) : (s16)(left + 6), y + 3, 0, 4, D_801DAC54[column]);
+            break;
+        case 1:
+            left = x;
+            FairyCasino_DrawFramePiece(left, y, 9);
+            UI_TextDraw(column ? (s16)(left + 10) : (s16)(left + 6), y + 3, 0, 3, D_801DAC54[column]);
+            break;
+        case 2:
+            left = x;
+            FairyCasino_DrawFramePiece(left, y, 0xA);
+            UI_TextDraw(column ? (s16)(left + 10) : (s16)(left + 6), y + 3, 7, 3, D_801DAC54[column]);
+            break;
+    }
+}
+#else
 INCLUDE_ASM(func_801D2AC4);
+#endif
 
 MATCH void func_801D2CF8(s32 x, s32 y, s32 icon) {
     SPRT* sprite;
@@ -1162,33 +1187,19 @@ NON_MATCHING void func_801D4AE0(s16 x, s16 y, u8 flag) {
 INCLUDE_ASM(func_801D4AE0);
 #endif
 
-#ifdef NON_MATCHING
-NON_MATCHING void func_801D4EA4(s32 left, s32 top, s32 icon_row, s32 raised) {
+MATCH void func_801D4EA4(s16 left, s16 top, u8 icon_row, u8 raised) {
     s32 i;
-    s32 x;
-    s32 draw_y;
-    s32 up_y;
     u8  icon;
-    u8* icons;
 
-    icon  = (u8)icon_row * 5 + 3;
-    up_y  = (top - 8) << 16;
-    icons = D_801DB080;
-    x     = left;
+    icon = icon_row * 5 + 3;
     for (i = 0; i < 3; i++) {
-        if (D_801DB0B8 == i && (u8)raised != 0) {
-            draw_y = up_y >> 16;
+        if (D_801DB0B8 == i && raised != 0) {
+            func_801D2CF8((s16)(left + i * 32), (s16)(top - 8), D_801DB080[icon + i]);
         } else {
-            draw_y = top;
+            func_801D2CF8((s16)(left + i * 32), (s16)top, D_801DB080[icon + i]);
         }
-        func_801D2CF8((s16)x, (s16)draw_y, icons[icon]);
-        icon++;
-        x += 32;
     }
 }
-#else
-INCLUDE_ASM(func_801D4EA4);
-#endif
 
 MATCH void func_801D4F88(s32 x, s32 y, s32 show_values) {
     s32 i;
@@ -2113,7 +2124,7 @@ MATCH void func_801D81A4(s16 x, s16 y) {
 }
 
 #ifdef NON_MATCHING
-void func_801D851C(s16 x, s16 y, s32 width, s32 index);
+void func_801D851C(s16 x, s16 y, s32 width, u8 index);
 
 NON_MATCHING void func_801D830C(s32 arg_x, s32 arg_y, s32 kind, s32 mode) {
     TILE* tile;
@@ -2146,7 +2157,65 @@ NON_MATCHING void func_801D830C(s32 arg_x, s32 arg_y, s32 kind, s32 mode) {
 #else
 INCLUDE_ASM(func_801D830C);
 #endif
+
+#ifdef NON_MATCHING
+NON_MATCHING void func_801D851C(s16 x, s16 y, s32 width, u8 index) {
+    u8       colors[4][3];
+    POLY_G4* prim;
+    u8*      color;
+
+    memcpy(colors, D_801D0C30, sizeof(colors));
+    prim = (POLY_G4*)g_GfxPrimCursor;
+    SetPolyG4(prim);
+    prim->x0 = x;
+    prim->y0 = y;
+    prim->x1 = x + width;
+    prim->y1 = y;
+    prim->x2 = prim->x0;
+    prim->y2 = y + 2;
+    prim->x3 = prim->x1;
+    prim->y3 = y + 2;
+    color    = colors[index];
+    prim->r2 = color[0] << 7;
+    prim->g2 = color[1] << 7;
+    prim->b2 = color[2] << 7;
+    prim->r0 = prim->r2 >> 2;
+    prim->g0 = prim->g2 >> 2;
+    prim->b0 = prim->b2 >> 2;
+    prim->r3 = prim->r2;
+    prim->g3 = prim->g2;
+    prim->b3 = prim->b2;
+    prim->r1 = prim->r0;
+    prim->g1 = prim->g0;
+    prim->b1 = prim->b0;
+    GFX_AddPrim(GFX_LAYER_UI, sizeof(POLY_G4));
+    prim = (POLY_G4*)g_GfxPrimCursor;
+    SetPolyG4(prim);
+    prim->x0 = x;
+    prim->y0 = y + 2;
+    prim->x1 = x + width;
+    prim->y1 = y + 2;
+    prim->x2 = prim->x0;
+    prim->y2 = y + 4;
+    prim->x3 = prim->x1;
+    prim->y3 = y + 4;
+    prim->r0 = color[0] << 7;
+    prim->g0 = color[1] << 7;
+    prim->b0 = color[2] << 7;
+    prim->r2 = prim->r0 >> 2;
+    prim->g2 = prim->g0 >> 2;
+    prim->b2 = prim->b0 >> 2;
+    prim->r1 = prim->r0;
+    prim->g1 = prim->g0;
+    prim->b1 = prim->b0;
+    prim->r3 = prim->r2;
+    prim->g3 = prim->g2;
+    prim->b3 = prim->b2;
+    GFX_AddPrim(GFX_LAYER_UI, sizeof(POLY_G4));
+}
+#else
 INCLUDE_ASM(func_801D851C);
+#endif
 
 MATCH void func_801D875C(s16 x, s16 y, s32 index) {
     s32   tpage;
@@ -2316,13 +2385,13 @@ NON_MATCHING void Menu_DrawHeaderBar(s32 x, s32 y, s32 width, s32 height, u8 win
     prim->x3 = x + width1;
     setXY0(prim, x + width1 - 2, top);
     prim->x2 = x + width1 - 2;
-    prim->y3 = bottom_y;
     setUV0(prim, 0u, 0u);
     prim->u1 = 2u;
     prim->v1 = 0u;
     prim->u2 = 0u;
     prim->u3 = 2u;
     prim->v3 = bottom_v;
+    prim->y3 = bottom_y;
     setRGB0(prim, 172, 172, 172);
     prim->y1 += 2;
     prim->y2 -= 1;

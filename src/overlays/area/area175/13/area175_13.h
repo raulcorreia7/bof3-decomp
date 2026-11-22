@@ -5,7 +5,6 @@
  * and its data. Only this image includes the file. */
 
 #include "overlays/area/worlds/world04.h"
-#include "area/spad.h"
 #include "area/effects.h"
 
 #define AREA_SPIN_RADIUS     32

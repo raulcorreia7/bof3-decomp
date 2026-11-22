@@ -86,7 +86,7 @@ MATCH void func_801EF4A8(void) {
     PartyMember* work;
 
     Script_AnimStepLoop();
-    work = g_Task;
+    work = TASK(PartyMember);
     work->unk_0C += work->unk_18;
     work->unk_10 += work->unk_1C;
     work->scale.x += work->unk_0C;

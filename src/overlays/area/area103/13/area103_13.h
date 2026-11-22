@@ -5,7 +5,6 @@
  * and its data. Only this image includes the file. */
 
 #include "overlays/area/worlds/world02.h"
-#include "area/spad.h"
 
 /* The projected cell, read unsigned: the primitives take it as a screen pixel. */
 extern u16 D_1F800034_U16[2];

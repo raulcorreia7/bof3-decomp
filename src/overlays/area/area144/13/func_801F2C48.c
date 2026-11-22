@@ -8,5 +8,5 @@ MATCH void func_801F2C48(void) {
     g_AreaDrawFlags = AREA_DRAW_SORTED_RECORDS | 0x2 | AREA_DRAW_APPEND_ACTOR_PRIMITIVES | AREA_DRAW_APPEND_AREA_PRIMITIVES;
     func_801F2E18();
     D_801F4960 = 0;
-    g_Task->header.mode++;
+    TASK(Actor)->header.mode++;
 }

@@ -14,7 +14,7 @@ NON_MATCHING void Area_Update(void) {
     s32       product;
     s32       offset;
 
-    g_ScratchPadVectors[0].vy = g_ScratchPadVectors[1].vy = g_ScratchPadVectors[2].vy = g_ScratchPadVectors[3].vy = ((FIX_INT(g_Task->pos.y.fixed) - 0x80) << 7) | 0x40;
+    g_ScratchPadVectors[0].vy = g_ScratchPadVectors[1].vy = g_ScratchPadVectors[2].vy = g_ScratchPadVectors[3].vy = ((FIX_INT(TASK(Actor)->pos.y.fixed) - 0x80) << 7) | 0x40;
     GFX_ADD_LAYER_DRAW_MODE(GFX_LAYER_FIELD_SCENE, getTPage(TPAGE_DEPTH_8BIT, TPAGE_ABR_HALF, 320, 256));
 
     for (i = 0; i < 2; i++) {
@@ -22,13 +22,13 @@ NON_MATCHING void Area_Update(void) {
         SetPolyFT4(prim);
         SetShadeTex(prim, 0);
         bias    = FAKE_VOLATILE(u8, D_801F4ED4[AREA_ROW_SCALE_OFFSET + i]); /* FAKE: retail loads the scale unsigned and sign-extends it apart; the volatile read keeps the two steps. */
-        product = g_Task->screen_y * bias;
+        product = TASK(Actor)->screen_y * bias;
         offset  = product + 0x40;
-        g_ScratchPadVectors[0].vx = g_ScratchPadVectors[2].vx = ((FIX_INT(g_Task->pos.x.fixed) - 0x7F) << 7) + offset;
+        g_ScratchPadVectors[0].vx = g_ScratchPadVectors[2].vx = ((FIX_INT(TASK(Actor)->pos.x.fixed) - 0x7F) << 7) + offset;
         bias    = FAKE_VOLATILE(u8, D_801F4ED4[AREA_ROW_SCALE_OFFSET + i]); /* FAKE: retail loads the scale unsigned and sign-extends it apart; the volatile read keeps the two steps. */
-        product = g_Task->screen_y * bias;
+        product = TASK(Actor)->screen_y * bias;
         offset  = product - 0x40;
-        g_ScratchPadVectors[1].vx = g_ScratchPadVectors[3].vx = ((FIX_INT(g_Task->pos.x.fixed) - 0x80) << 7) + offset;
+        g_ScratchPadVectors[1].vx = g_ScratchPadVectors[3].vx = ((FIX_INT(TASK(Actor)->pos.x.fixed) - 0x80) << 7) + offset;
         x                                                     = (g_ScratchPadVectors[0].vx + 0x4000) << 9;
         y                                                     = (g_ScratchPadVectors[0].vy + 0x4000) << 9;
         g_ScratchPadVectors[0].vz                             = -Area_HeightSample(x, y) / 2;

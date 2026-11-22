@@ -5,8 +5,8 @@ MATCH s32 PlChar_ProbeFacingCell(void) {
     s32 cx;
     s32 cy;
 
-    cx    = g_Task->pos.x.fixed + g_FacingSteps[g_Task->direction].x * 2;
-    cy    = g_Task->pos.y.fixed + g_FacingSteps[g_Task->direction].y * 2;
+    cx    = TASK(Actor)->pos.x.fixed + g_FacingSteps[TASK(Actor)->direction].x * 2;
+    cy    = TASK(Actor)->pos.y.fixed + g_FacingSteps[TASK(Actor)->direction].y * 2;
     found = Actor_FindInRange(cx, cy, 0) != -1;
     hit   = found;
     /* FAKE: retail writes the flag to $v0 and copies it to $s1; keeping the

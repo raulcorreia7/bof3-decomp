@@ -59,7 +59,7 @@ NON_MATCHING u8 Script_OpsRunFlow(ScriptState* state, u8* base, s32 seed) {
                         obj   = g_AreaLoads[g_GameAreaId];
                         table = FIELD(AreaScriptCallback*, obj, 0x3Cu);
                         table[base[state->cursor + 1]](obj);
-                        sel = g_Task->direction;
+                        sel = TASK(Actor)->direction;
                         state->cursor += 2;
                         break;
                     case ACTOR_SCRIPT_FLOW_IF_VAR_EQUALS:
@@ -130,21 +130,21 @@ NON_MATCHING u8 Script_OpsRunFlow(ScriptState* state, u8* base, s32 seed) {
                             g_ScrollHeight = Area_HeightSample(g_PartyX, g_PartyY);
                             sel            = 0xFF;
                         } else {
-                            g_Task->pos.x.fixed      = (s32)((base[state->cursor + 1] << 16) | ((base[state->cursor + 2] != 0) << 15));
-                            g_Task->pos.y.fixed      = (s32)((base[state->cursor + 3] << 16) | ((base[state->cursor + 4] != 0) << 15));
-                            COORD_INT(g_Task->pos.z) = Area_HeightSample(g_Task->pos.x.fixed, g_Task->pos.y.fixed);
+                            TASK(Actor)->pos.x.fixed      = (s32)((base[state->cursor + 1] << 16) | ((base[state->cursor + 2] != 0) << 15));
+                            TASK(Actor)->pos.y.fixed      = (s32)((base[state->cursor + 3] << 16) | ((base[state->cursor + 4] != 0) << 15));
+                            COORD_INT(TASK(Actor)->pos.z) = Area_HeightSample(TASK(Actor)->pos.x.fixed, TASK(Actor)->pos.y.fixed);
                         }
                         state->cursor += 5;
                         break;
                     case ACTOR_SCRIPT_FLOW_RUN_SCRIPT:
                         left = base[state->cursor + 1];
                         state->flags |= 0x40;
-                        g_Task->option_flags |= ACTOR_OPT_ROUTE_LOCKED;
+                        TASK(Actor)->option_flags |= ACTOR_OPT_ROUTE_LOCKED;
                         if ((base[state->cursor + 3] & 1) != 0)
-                            g_Task->header.flags |= ACTOR_FLAG_STEP_MOVE;
+                            TASK(Actor)->header.flags |= ACTOR_FLAG_STEP_MOVE;
                         else
-                            g_Task->header.flags &= ~ACTOR_FLAG_STEP_MOVE;
-                        g_Task->mirror = base[state->cursor + 2];
+                            TASK(Actor)->header.flags &= ~ACTOR_FLAG_STEP_MOVE;
+                        TASK(Actor)->mirror = base[state->cursor + 2];
                         if ((base[state->cursor + 3] & 2) != 0) {
                             Script_Begin((u8)(left & BYTE_MASK), base[state->cursor + 4]);
                             state->cursor += 1;
@@ -156,12 +156,12 @@ NON_MATCHING u8 Script_OpsRunFlow(ScriptState* state, u8* base, s32 seed) {
                     case ACTOR_SCRIPT_FLOW_RUN_TALK_SCRIPT:
                         left = s_TalkMessageIds[base[state->cursor + 1] * 11 + g_Game.current->chr.character_id];
                         state->flags |= 0x40;
-                        g_Task->option_flags |= ACTOR_OPT_ROUTE_LOCKED;
+                        TASK(Actor)->option_flags |= ACTOR_OPT_ROUTE_LOCKED;
                         if ((base[state->cursor + 3] & 1) != 0)
-                            g_Task->header.flags |= ACTOR_FLAG_STEP_MOVE;
+                            TASK(Actor)->header.flags |= ACTOR_FLAG_STEP_MOVE;
                         else
-                            g_Task->header.flags &= ~ACTOR_FLAG_STEP_MOVE;
-                        g_Task->mirror = base[state->cursor + 2];
+                            TASK(Actor)->header.flags &= ~ACTOR_FLAG_STEP_MOVE;
+                        TASK(Actor)->mirror = base[state->cursor + 2];
                         if ((base[state->cursor + 3] & 2) != 0) {
                             Script_Begin((u8)(left & BYTE_MASK), base[state->cursor + 4]);
                             state->cursor += 1;

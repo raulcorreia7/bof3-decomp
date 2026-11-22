@@ -2,9 +2,9 @@
 
 MATCH void func_800C2A40(void) {
     Area_SceneSelectRecord(0x30C);
-    ((Actor*)g_Task)->unk_48       = 0;
-    ((Actor*)g_Task)->active_flags = 0;
-    ((Actor*)g_Task)->pos.z.fixed  = 0;
+    TASK(Actor)->unk_48       = 0;
+    TASK(Actor)->active_flags = 0;
+    TASK(Actor)->pos.z.fixed  = 0;
     func_800C2AA8();
-    g_Task->header.step++;
+    TASK(PartyMember)->header.step++;
 }

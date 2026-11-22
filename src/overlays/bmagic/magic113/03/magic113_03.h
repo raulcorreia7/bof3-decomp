@@ -14,7 +14,7 @@ static inline void Effect_CountUpTimer(void) {
     PartyMember* work;
     u8           next;
 
-    work        = g_Task;
+    work        = TASK(PartyMember);
     next        = work->timer + 1;
     work->timer = next;
     if (next == 0xC) {

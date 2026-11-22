@@ -1,10 +1,9 @@
 #include "area086_13.h"
-#include "area/spad.h"
 
 MATCH void func_801F2C48(void) {
-    COORD_FRAC(g_Task->pos.x) = D_801F3664[COORD_INT(g_Task->pos.x)];
-    COORD_INT(g_Task->pos.z)  = D_801F3668[COORD_INT(g_Task->pos.y)];
-    g_Task->header.step++;
+    COORD_FRAC(TASK(Actor)->pos.x) = D_801F3664[COORD_INT(TASK(Actor)->pos.x)];
+    COORD_INT(TASK(Actor)->pos.z)  = D_801F3668[COORD_INT(TASK(Actor)->pos.y)];
+    TASK(Actor)->header.step++;
     func_801F2DE8();
     func_801F3070();
 }

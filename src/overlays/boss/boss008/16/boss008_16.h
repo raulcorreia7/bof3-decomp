@@ -7,7 +7,6 @@
 #include "overlays/boss/boss.h"
 
 /* The scratchpad work area is a PartyMember record in this image. */
-#define g_Task ((PartyMember*)g_Task)
 
 extern u8       D_800C264C[];
 extern u16      D_800C2658[];
@@ -40,10 +39,10 @@ void func_800C236C(u8 phase);
     g_Task = (PartyMember*)func_800AC754(slot); \
     Area_SceneSelectRecord(0x83)
 
-#define BOSS008_END_BATTLE_FINISH()                   \
-    Script_Select(0);                                 \
-    g_Task->unk_58 = g_BattleEnemyBattlers[0].unk_58; \
-    g_Task->unk_5A = g_BattleEnemyBattlers[0].unk_5A
+#define BOSS008_END_BATTLE_FINISH()                              \
+    Script_Select(0);                                            \
+    TASK(PartyMember)->unk_58 = g_BattleEnemyBattlers[0].unk_58; \
+    TASK(PartyMember)->unk_5A = g_BattleEnemyBattlers[0].unk_5A
 
 extern u8 D_800C2640[];
 extern u8 D_800C2641[];

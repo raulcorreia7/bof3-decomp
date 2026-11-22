@@ -30,7 +30,7 @@ NON_MATCHING void func_800C236C(u8 phase) {
                 *(volatile u8*)(D_800C2641 + ((*(EnemyBattler* volatile*)&g_BattleCurrentEnemy)->unk_F0 - 8) * 3),
                 *(volatile u8*)(D_800C2642 + ((*(EnemyBattler* volatile*)&g_BattleCurrentEnemy)->unk_F0 - 8) * 3));
 
-        enemy = (EnemyBattler*)g_Task;
+        enemy = TASK(EnemyBattler);
         setXY3(prim, enemy->screen_x, enemy->screen_y, enemy->screen_x + ring[i][0], enemy->screen_y + ring[i][1], enemy->screen_x + ring[next][0], enemy->screen_y + ring[next][1]);
         SetSemiTrans(prim, 1);
         GFX_AddPrim(3, sizeof(POLY_G3));

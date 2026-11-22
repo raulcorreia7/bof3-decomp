@@ -25,7 +25,7 @@ MATCH void func_801EEC94(void) {
     TASK(PartyMember)->unk_09       = 16;
     TASK(PartyMember)->header.mode += 1;
     first_slot                                   = Battle_AllocEffect(1, 0x47) & BYTE_MASK;
-    g_BattleEffects[first_slot].target.party     = g_Task;
+    g_BattleEffects[first_slot].target.party     = TASK(PartyMember);
     g_BattleEffects[first_slot].header.mode      = 0;
     g_BattleEffects[first_slot].arg.unk_09       = 0;
     g_BattleEffects[first_slot].pos.x            = TASK(PartyMember)->pos.x;
@@ -35,7 +35,7 @@ MATCH void func_801EEC94(void) {
     i = 0;
     do {
         slot                               = Battle_AllocEffect(1, 0x47);
-        target                             = g_Task;
+        target                             = TASK(PartyMember);
         g_BattleEffects[slot].header.mode  = 1;
         g_BattleEffects[slot].unk_0B       = (i & 0x3) * 8;
         g_BattleEffects[slot].arg.unk_09   = ((i >> 2) * 40) + 17;
@@ -222,7 +222,7 @@ MATCH void func_801EFBE4(void) {
     PartyMember* work;
     u8           next;
 
-    work        = g_Task;
+    work        = TASK(PartyMember);
     next        = work->timer + 1;
     work->timer = next;
     if (next == 0x18) {
@@ -275,7 +275,7 @@ MATCH void func_801F05C8(s32 step) {
             D_1F800004 = 0x80 - i * 5;
             height     = rise + (jitter & 3);
         }
-        work                      = g_Task;
+        work                      = TASK(PartyMember);
         turn                      = ((work->param.unk_0B - i) & 0x1F) << 7;
         angle[0]                  = turn;
         angle[-3]                 = 0xC0 - (work->unk_09 - i) * 2;

@@ -6,7 +6,7 @@ MATCH void Effect_NextStepOnLastTick(void) {
 
     active = BATTLE_ACTIVE_WORK;
     if (active->param.unk_0B == 1) {
-        work              = g_Task;
+        work              = TASK(PartyMember);
         work->header.step = work->header.step + 1;
     }
 }

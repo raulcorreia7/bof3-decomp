@@ -4,9 +4,9 @@ MATCH void func_801F32C8(void) {
     Actor* actor;
     s16    height;
 
-    g_Task->header.flags &= ~ACTOR_FLAG_HIDDEN;
-    height                  = Area_HeightRead(g_Task->pos.x.fixed, g_Task->pos.y.fixed);
-    actor                   = g_Task;
+    TASK(Actor)->header.flags &= ~ACTOR_FLAG_HIDDEN;
+    height                  = Area_HeightRead(TASK(Actor)->pos.x.fixed, TASK(Actor)->pos.y.fixed);
+    actor                   = TASK(Actor);
     COORD_INT(actor->pos.z) = height + 0x7D0;
     actor->unk_04           = 1;
     setVector(actor, 0, 0, 0);

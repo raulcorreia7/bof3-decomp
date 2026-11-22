@@ -40,7 +40,7 @@ MATCH void func_801EECE4(void) {
     TASK(PartyMember)->header.mode += 1;
     for (i = 0; i < 8; i++) {
         slot                               = Battle_AllocEffect(1, 78);
-        g_BattleEffects[slot].target.party = g_Task;
+        g_BattleEffects[slot].target.party = TASK(PartyMember);
         g_BattleEffects[slot].header.mode  = 2;
         g_BattleEffects[slot].unk_0B       = i;
         g_BattleEffects[slot].arg.unk_09   = i + 1;
@@ -217,7 +217,7 @@ MATCH void func_801EFB74(void) {
     TASK(PartyMember)->unk_09 = timer;
     if (timer == 0) {
         SND_SEQueueSelection(0x100);
-        work                      = g_Task;
+        work                      = TASK(PartyMember);
         actor                     = g_BattleEffectBattler;
         work->pos.x.fixed         = actor->pos.x.fixed;
         work->pos.y.fixed         = actor->pos.y.fixed;
@@ -299,7 +299,7 @@ MATCH void func_801F0240(void) {
     TASK(PartyMember)->unk_09 = timer;
     if (timer == 0) {
         TASK(PartyMember)->facing = D_8014637C->facing;
-        work                      = g_Task;
+        work                      = TASK(PartyMember);
         work->pos.x.fixed         = D_8014637C->pos.x.fixed;
         /* FAKE: retail re-reads the party cell for the next copy. */
         FAKE_BARRIER();

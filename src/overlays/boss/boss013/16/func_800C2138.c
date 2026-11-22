@@ -29,8 +29,8 @@ MATCH u8 func_800C2138(u32 mode) {
             g_BattleCurrentEnemy = (EnemyBattler*)&D_801EB860;
             Party_MemberLoadSprite(1, 1);
             g_BattleCurrentEnemy->script = &D_800C25FC;
-            g_Task->unk_29               = 4;
-            Script_Select((g_Task->facing + 4) & BYTE_MASK);
+            TASK(PartyMember)->unk_29    = 4;
+            Script_Select((TASK(PartyMember)->facing + 4) & BYTE_MASK);
             *flags |= 0x40;
             break;
         case BOSS_EVENT_TICK:

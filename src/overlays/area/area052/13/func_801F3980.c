@@ -1,7 +1,7 @@
 #include "area052_13.h"
 
 MATCH s32 func_801F3980(s32* x, s32* y) {
-    Actor* actor = g_Task;
+    Actor* actor = TASK(Actor);
     s32    y_half;
 
     *x     = actor->pos.x.fixed - COORD_HALF;

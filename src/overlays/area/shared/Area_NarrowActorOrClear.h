@@ -9,9 +9,9 @@ MATCH void Area_NarrowActorOrClear(void) {
 
     Actor_SetScreenOrigin();
 
-    work = g_Task;
+    work = TASK(Actor);
     work->timer -= 1;
-    check = g_Task;
+    check = TASK(Actor);
     work->scale.x -= 8192;
 
     if (check->timer == 0) {
@@ -19,8 +19,8 @@ MATCH void Area_NarrowActorOrClear(void) {
             Actor_Clear();
             return;
         }
-        check->unk_48       = 0;
-        g_Task->header.mode = 1;
+        check->unk_48            = 0;
+        TASK(Actor)->header.mode = 1;
         return;
     }
 

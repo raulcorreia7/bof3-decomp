@@ -86,7 +86,7 @@ MATCH void func_801EF090(void) {
     TASK(PartyMember)->pos.y.fixed        = FAKE_VOLATILE(s32, g_AreaScrollTargetY) + TASK(PartyMember)->unk_10;
     TASK(PartyMember)->pos.z.part.integer = Area_HeightSample(FAKE_VOLATILE(s32, g_AreaScrollTargetX), FAKE_VOLATILE(s32, g_AreaScrollTargetY)) + 0x200;
     SND_SEPlay(EMI_SE_ID(SND_BANK_COMMON, 0));
-    work                      = g_Task;
+    work                      = TASK(PartyMember);
     work->param.unk_0B        = 0x34;
     work->unk_14              = 0x2FFF;
     TASK(PartyMember)->unk_09 = 0;
@@ -95,7 +95,7 @@ MATCH void func_801EF090(void) {
 }
 
 MATCH void func_801EF174(void) {
-    PartyMember* work = g_Task;
+    PartyMember* work = TASK(PartyMember);
     u8           count;
     u8           phase = work->param.phase;
     u8           timer;
@@ -113,7 +113,7 @@ MATCH void func_801EF174(void) {
 }
 
 MATCH void func_801EF21C(void) {
-    PartyMember* work = g_Task;
+    PartyMember* work = TASK(PartyMember);
     u8           count;
     u8           phase = work->param.phase;
     u8           timer;

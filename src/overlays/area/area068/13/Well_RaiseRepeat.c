@@ -7,13 +7,13 @@ MATCH void Well_RaiseRepeat(void) {
     timer            = g_WellRaiseTimer - 1;
     g_WellRaiseTimer = timer;
     if (timer == 0) {
-        g_WellRaiseTimer    = 0;
-        g_Task->header.mode = WELL_MODE_RAISE_CHECK;
+        g_WellRaiseTimer         = 0;
+        TASK(Actor)->header.mode = WELL_MODE_RAISE_CHECK;
     } else if (g_PadStates[0].pressed == PADRdown) {
         g_WellIdleFrames = 0;
         g_WellPressCount++;
-        g_Task->header.mode = WELL_MODE_RAISE_READY;
+        TASK(Actor)->header.mode = WELL_MODE_RAISE_READY;
     } else {
-        g_Task->header.mode = WELL_MODE_RAISE_COUNT;
+        TASK(Actor)->header.mode = WELL_MODE_RAISE_COUNT;
     }
 }

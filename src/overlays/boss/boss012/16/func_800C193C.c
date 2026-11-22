@@ -1,8 +1,7 @@
 #include "boss012_16.h"
-#include "area/spad.h"
 
 MATCH void func_800C193C(void) {
     if (Script_AnimStepLoop() != 0) {
-        g_Task->unk_03 = 1;
+        TASK(Actor)->unk_03 = 1;
     }
 }

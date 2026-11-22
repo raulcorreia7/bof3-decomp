@@ -30,19 +30,19 @@ MATCH void func_801A6C98(u8* record) {
     Actor*       tail;
     Actor*       entry;
 
-    script            = record;
-    off               = script[9] * 8;
-    g_Task            = &g_PartyActors[script[0xB]];
-    g_CurrentActor    = &g_PartyActors[script[0xB]];
-    src               = *(u8**)((u8*)g_AreaLoads[g_GameAreaId] + 8) + off;
-    g_Task->direction = script[0] & 0xF;
+    script                 = record;
+    off                    = script[9] * 8;
+    g_Task                 = &g_PartyActors[script[0xB]];
+    g_CurrentActor         = &g_PartyActors[script[0xB]];
+    src                    = *(u8**)((u8*)g_AreaLoads[g_GameAreaId] + 8) + off;
+    TASK(Actor)->direction = script[0] & 0xF;
 
     Actor_ResetMotion();
     func_801A4B80(script[0xB]);
     SYS_InitScratchpad(src);
 
     x    = script[2] << 16;
-    work = g_Task;
+    work = TASK(Actor);
     if (script[1] != 0) {
         x |= 32768;
     }
@@ -52,20 +52,20 @@ MATCH void func_801A6C98(u8* record) {
     if (script[3] != 0) {
         y |= 32768;
     }
-    work->pos.y.fixed        = y;
-    COORD_INT(g_Task->pos.z) = Area_HeightSample(work->pos.x.fixed, y);
-    data                     = (SpawnScript*)script;
+    work->pos.y.fixed             = y;
+    COORD_INT(TASK(Actor)->pos.z) = Area_HeightSample(work->pos.x.fixed, y);
+    data                          = (SpawnScript*)script;
 
-    work                  = g_Task;
-    work->header.mode     = data->mode;
-    g_Task->header.step   = data->step;
-    g_Task->unk_06        = (data->unk_00 >> 4) - 1;
-    tail                  = g_Task;
-    shared                = tail->range_54.table;
-    tail->gravity         = 0;
-    tail->unk_1C          = 0;
-    tail->unk_18          = 0;
-    tail->voice_flags.raw = *(u8*)((u8*)shared + 2);
+    work                     = TASK(Actor);
+    work->header.mode        = data->mode;
+    TASK(Actor)->header.step = data->step;
+    TASK(Actor)->unk_06      = (data->unk_00 >> 4) - 1;
+    tail                     = TASK(Actor);
+    shared                   = tail->range_54.table;
+    tail->gravity            = 0;
+    tail->unk_1C             = 0;
+    tail->unk_18             = 0;
+    tail->voice_flags.raw    = *(u8*)((u8*)shared + 2);
 
     index                             = data->index;
     entry                             = &g_PartyActors[index];
@@ -78,8 +78,8 @@ MATCH void func_801A6C98(u8* record) {
     g_PartyActors[data->index].unk_94 = 0x7F;
 
     Actor_SetOptionFlags((u8*)data + 8);
-    g_Task->tint.steps.delta.r = -0x80;
-    g_Task->tint.steps.delta.b = -0x80;
-    g_Task->tint.steps.delta.g = -0x80;
-    g_Task->tint.bytes.flags   = 2;
+    TASK(Actor)->tint.steps.delta.r = -0x80;
+    TASK(Actor)->tint.steps.delta.b = -0x80;
+    TASK(Actor)->tint.steps.delta.g = -0x80;
+    TASK(Actor)->tint.bytes.flags   = 2;
 }

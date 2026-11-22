@@ -8,13 +8,13 @@
 MATCH void Actor_ReadValue(void) {
     s8 index;
 
-    if ((g_Task->active_flags & 0x20) != 0) {
-        index          = Script_FindSlot(*(u8*)&g_Task->unk_18);
-        g_Task->unk_32 = g_Actors[index].unk_32;
+    if ((TASK(Actor)->active_flags & 0x20) != 0) {
+        index               = Script_FindSlot(*(u8*)&TASK(Actor)->unk_18);
+        TASK(Actor)->unk_32 = g_Actors[index].unk_32;
     } else {
         index = func_8014DE78();
         if (index != -1) {
-            g_Task->unk_32 = g_Actors[index].unk_32;
+            TASK(Actor)->unk_32 = g_Actors[index].unk_32;
         }
     }
 }

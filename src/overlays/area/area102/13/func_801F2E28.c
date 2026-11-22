@@ -2,10 +2,10 @@
 
 MATCH void func_801F2E28(void) {
     func_801F2F44(7);
-    (g_Task)->timer += 1;
-    if ((u8)(g_Task)->timer >= 31U) {
-        Area_CellSetCode(COORD_INT((g_Task)->pos.x), COORD_INT((g_Task)->pos.y), 0);
-        (g_Task)->timer = 31;
-        (g_Task)->header.step += 1;
+    TASK(Actor)->timer += 1;
+    if ((u8)TASK(Actor)->timer >= 31U) {
+        Area_CellSetCode(COORD_INT(TASK(Actor)->pos.x), COORD_INT(TASK(Actor)->pos.y), 0);
+        TASK(Actor)->timer = 31;
+        TASK(Actor)->header.step += 1;
     }
 }

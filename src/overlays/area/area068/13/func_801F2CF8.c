@@ -6,7 +6,7 @@
 MATCH void func_801F2CF8(void) {
     Actor* actor;
 
-    actor       = g_Task;
+    actor       = TASK(Actor);
     g_GameState = g_Game.members;
     TASK_SET(g_Game.members);
     if (D_80145EE8 == 0xC && D_80145EDA == 1) {

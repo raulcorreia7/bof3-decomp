@@ -219,7 +219,7 @@ typedef Pos2 TrailPoint;
 
 /* Go to the effect's next step. */
 static inline void BMagic_NextStep(void) {
-    PartyMember* work = g_Task;
+    PartyMember* work = TASK(PartyMember);
 
     work->header.step = (u8)(work->header.step + 1);
 }
@@ -270,9 +270,9 @@ static inline void BMagic_CountDownEffectTimer(u8 step) {
     PartyMember* active;
     u8           count;
 
-    work = g_Task;
+    work = TASK(PartyMember);
     work->unk_09 += step;
-    work        = g_Task;
+    work        = TASK(PartyMember);
     count       = work->timer - 1;
     work->timer = count;
     if (count == 0) {
@@ -287,10 +287,10 @@ static inline void BMagic_CountDownEffectTimer(u8 step) {
 static inline void BMagic_AdvanceEffectStep(u8 limit) {
     PartyMember* work;
 
-    work = g_Task;
+    work = TASK(PartyMember);
     if (work->param.unk_0B < limit) {
         work->unk_09      = 8;
-        work              = g_Task;
+        work              = TASK(PartyMember);
         work->header.mode = work->header.mode + 1;
     }
 }

@@ -16,10 +16,10 @@ NON_MATCHING void func_801F4DF0(s32 x, s32 y, s16 radius, u16 angle) {
         prim->x2 = x + FIXED_MUL(radius, rcos(angle));
         i += 1;
         prim->y2 = y + FIXED_MUL(radius, rsin(angle));
-        setRGB0(prim, D_801F6138[g_Task->unk_06 * 3], D_801F6139[g_Task->unk_06 * 3], D_801F613A[g_Task->unk_06 * 3]);
+        setRGB0(prim, D_801F6138[TASK(Actor)->unk_06 * 3], D_801F6139[TASK(Actor)->unk_06 * 3], D_801F613A[TASK(Actor)->unk_06 * 3]);
         setRGB1(prim, 0, 0, 0);
         setRGB2(prim, 0, 0, 0);
-        Area_CellAddPrim(g_Task->unk_18, g_Task->unk_1C, 0, sizeof(POLY_G3));
+        Area_CellAddPrim(TASK(Actor)->unk_18, TASK(Actor)->unk_1C, 0, sizeof(POLY_G3));
     } while (i < 8);
 }
 #else

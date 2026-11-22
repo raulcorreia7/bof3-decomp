@@ -19,14 +19,14 @@ MATCH void func_801EFD80(void) {
     if (g_FrameCount & 0x1) {
         TASK(PartyMember)->unk_09 += 1;
     }
-    task         = g_Task;
+    task         = TASK(PartyMember);
     timer        = task->timer - 1;
     vel          = task->unk_14 + task->unk_20;
     task->timer  = timer;
     task->unk_14 = vel;
     task->pos.z.part.integer += vel;
     if ((timer & BYTE_MASK) == 0) {
-        reset         = g_Task;
+        reset         = TASK(PartyMember);
         reset->unk_14 = -0x10;
         reset->timer  = 8;
         reset->unk_20 = 4;
@@ -45,7 +45,7 @@ MATCH void func_801EFE74(void) {
     if (g_FrameCount & 0x1) {
         TASK(PartyMember)->unk_09 += 1;
     }
-    task         = g_Task;
+    task         = TASK(PartyMember);
     timer        = task->timer - 1;
     vel          = task->unk_14 + task->unk_20;
     task->timer  = timer;

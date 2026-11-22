@@ -4,7 +4,6 @@
 /* The scenario/sce15ef0/00 overlay's local declarations. Only this image
  * includes the file. */
 
-#include "area/spad.h"
 #include "common/vector.h"
 #include "menu/gameui.h"
 #include "overlays/scenario/scenario.h"

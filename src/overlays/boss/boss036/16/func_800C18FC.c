@@ -3,11 +3,11 @@
 MATCH void func_800C18FC(void) {
     u8 type;
 
-    type           = g_BattleCurrentEnemy->type;
-    g_Task->unk_09 = MEM_PTR(u8, 0x800E40CEu)[type * 0x88u];
+    type                      = g_BattleCurrentEnemy->type;
+    TASK(PartyMember)->unk_09 = MEM_PTR(u8, 0x800E40CEu)[type * 0x88u];
     Battle_RequestEnemyScript(2);
     func_801E30F8();
-    g_Task->unk_0C = 0x4000;
-    g_Task->unk_18 = g_Task->pos.x.fixed + 0x30000;
-    g_Task->header.step++;
+    TASK(PartyMember)->unk_0C = 0x4000;
+    TASK(PartyMember)->unk_18 = TASK(PartyMember)->pos.x.fixed + 0x30000;
+    TASK(PartyMember)->header.step++;
 }

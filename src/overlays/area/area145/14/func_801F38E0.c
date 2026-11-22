@@ -5,7 +5,7 @@ MATCH void func_801F38E0(void) {
     u8*    depth_target;
     s32    result;
 
-    work                           = g_Task;
+    work                           = TASK(Actor);
     work->pos.x.fixed              = TO_COORD(10);
     work->pos.y.fixed              = TO_COORD(99);
     result                         = Area_HeightSample(work->pos.x.fixed, TO_COORD(99));

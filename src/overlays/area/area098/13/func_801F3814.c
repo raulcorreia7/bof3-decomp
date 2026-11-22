@@ -5,7 +5,7 @@ MATCH void func_801F3814(void) {
     WorldPos* pos;
     s32       z;
 
-    work           = g_Task;
+    work           = TASK(Actor);
     pos            = &g_Game.members[0].pos;
     work->unk_64   = pos->x.fixed;
     work->unk_68   = pos->y.fixed;
@@ -13,5 +13,5 @@ MATCH void func_801F3814(void) {
     work->timer    = 8;
     work->screen_x = 0;
     work->unk_6C   = z;
-    g_Task->header.mode++;
+    TASK(Actor)->header.mode++;
 }

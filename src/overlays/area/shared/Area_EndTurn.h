@@ -4,14 +4,14 @@ MATCH void Area_EndTurn(void) {
     u8* heading;
 
     heading = &g_Game.members[0].facing;
-    if (g_Task->direction != *heading) {
-        if ((u8)Area_StartTurn(g_Task->direction, *heading) != 0) {
+    if (TASK(Actor)->direction != *heading) {
+        if ((u8)Area_StartTurn(TASK(Actor)->direction, *heading) != 0) {
             return;
         }
-        if ((u8)Area_StartTurn(g_Task->direction ^ 4, *heading) != 0) {
+        if ((u8)Area_StartTurn(TASK(Actor)->direction ^ 4, *heading) != 0) {
             return;
         }
-        *heading = g_Task->direction;
+        *heading = TASK(Actor)->direction;
     }
     AREA_TURN_SYNC();
 }

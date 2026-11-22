@@ -1,14 +1,14 @@
 #include "area103_13.h"
 
 MATCH void func_801F4030(void) {
-    if (g_Task->timer % 5 == 0) {
-        func_801F4E70(g_Task->timer / 5 + 4);
+    if (TASK(Actor)->timer % 5 == 0) {
+        func_801F4E70(TASK(Actor)->timer / 5 + 4);
     }
-    g_Task->timer++;
+    TASK(Actor)->timer++;
     func_801F49A0(1);
-    if (g_Task->timer / 5 == 3) {
-        g_AreaSceneMode = 0;
-        g_Task->timer   = 1;
-        g_Task->header.step++;
+    if (TASK(Actor)->timer / 5 == 3) {
+        g_AreaSceneMode    = 0;
+        TASK(Actor)->timer = 1;
+        TASK(Actor)->header.step++;
     }
 }

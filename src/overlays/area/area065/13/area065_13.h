@@ -5,7 +5,6 @@
  * and its data. Only this image includes the file. */
 
 #include "overlays/area/worlds/world01.h"
-#include "area/spad.h"
 
 extern u8 D_801F4DB4[];
 #define AREA_HUD_SPRITE_CELLS ((u8*)D_801F4DB4 + 0x4FC)

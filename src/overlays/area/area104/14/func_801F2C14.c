@@ -17,6 +17,7 @@ NON_MATCHING void func_801F2C14(void) {
         return;
     }
 
+    offset_y  = 0;
     map_width = MEM_PTR(u8, MAP_BUNDLE_BASE);
     angle_1   = 0x180;
     angle_0   = 0;

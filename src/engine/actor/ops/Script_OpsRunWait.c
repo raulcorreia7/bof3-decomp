@@ -43,7 +43,7 @@ NON_MATCHING u8 Script_OpsRunWait(void* sub, s32 target, u8 value) {
             if (g_GameStateIndex != GAME_REQUEST_BATTLE) {
                 hit              = Actor_ReadState();
                 SP_REF(u16, 0x0) = hit;
-                if (g_Task->script_pc != hit) {
+                if (TASK(Actor)->script_pc != hit) {
                     cmd = code + FIELD(u16, sub, 0xAu);
                     if (hit == cmd[3]) {
                         Actor_PlayCueByDistance(cmd[2] | (cmd[1] << 8), cmd[4]);
@@ -56,15 +56,15 @@ NON_MATCHING u8 Script_OpsRunWait(void* sub, s32 target, u8 value) {
         done:
             return value;
         case ACTOR_SCRIPT_WAIT_TOGGLE_ROUTE_STEP:
-            g_Task->option_flags ^= 0x40;
-            if (g_Task->option_flags & 0x40) {
+            TASK(Actor)->option_flags ^= 0x40;
+            if (TASK(Actor)->option_flags & 0x40) {
                 FIELD(s8, g_Task, 0x48u) = 0;
             } else {
                 FIELD(s8, g_Task, 0x48u) = 1;
             }
             return value;
         case ACTOR_SCRIPT_WAIT_TOGGLE_NO_TARGET:
-            g_Task->option_flags ^= ACTOR_OPT_NO_TARGET;
+            TASK(Actor)->option_flags ^= ACTOR_OPT_NO_TARGET;
             return value;
         case ACTOR_SCRIPT_WAIT_SET_PARTY_SLOT_MOVE:
             index  = &D_1F800001;
@@ -85,11 +85,11 @@ NON_MATCHING u8 Script_OpsRunWait(void* sub, s32 target, u8 value) {
                 cmd                                = code + FIELD(u16, sub, 0xAu);
                 g_ActorTurnRamps[*index].step_x    = (s16)(cmd[2] | (cmd[1] << 8)) / g_ActorTurnRamps[*index].frames_z;
             } else {
-                g_Task->unk_6C = (s16)(cmd[6] | (cmd[5] << 8));
-                cmd            = code + FIELD(u16, sub, 0xAu);
-                g_Task->unk_68 = (s16)(cmd[4] | (cmd[3] << 8));
-                cmd            = code + FIELD(u16, sub, 0xAu);
-                g_Task->unk_64 = (s16)(cmd[2] | (cmd[1] << 8));
+                TASK(Actor)->unk_6C = (s16)(cmd[6] | (cmd[5] << 8));
+                cmd                 = code + FIELD(u16, sub, 0xAu);
+                TASK(Actor)->unk_68 = (s16)(cmd[4] | (cmd[3] << 8));
+                cmd                 = code + FIELD(u16, sub, 0xAu);
+                TASK(Actor)->unk_64 = (s16)(cmd[2] | (cmd[1] << 8));
             }
             *(u8*)sub |= 8;
             FIELD(u16, sub, 0xAu) += 7;
@@ -132,18 +132,18 @@ NON_MATCHING u8 Script_OpsRunWait(void* sub, s32 target, u8 value) {
             return value;
         case ACTOR_SCRIPT_WAIT_MOVE_AND_SET_CELL_PALETTE:
             Actor_ApplyVelocity();
-            COORD_INT(g_Task->pos.z) = Area_HeightSample(g_Task->pos.x.fixed, g_Task->pos.y.fixed);
+            COORD_INT(TASK(Actor)->pos.z) = Area_HeightSample(TASK(Actor)->pos.x.fixed, TASK(Actor)->pos.y.fixed);
             /* fallthrough */
         case ACTOR_SCRIPT_WAIT_SET_CELL_PALETTE:
-            Area_CellSetPalette(COORD_INT(g_Task->pos.x), COORD_INT(g_Task->pos.y));
+            Area_CellSetPalette(COORD_INT(TASK(Actor)->pos.x), COORD_INT(TASK(Actor)->pos.y));
             return value;
         case ACTOR_SCRIPT_WAIT_CLEAR_CELL_PALETTE:
-            Area_CellClearPalette(COORD_INT(g_Task->pos.x), COORD_INT(g_Task->pos.y));
+            Area_CellClearPalette(COORD_INT(TASK(Actor)->pos.x), COORD_INT(TASK(Actor)->pos.y));
             return value;
         case ACTOR_SCRIPT_WAIT_CALL_AREA_SCRIPT: {
             Actor* obj = g_AreaLoads[g_GameAreaId];
             (*(void (**)())((code[FIELD(u16, sub, 0xAu) + 1] * 4) + obj->pos.z.fixed))(obj);
-            value = g_Task->direction;
+            value = TASK(Actor)->direction;
             next  = FIELD(u16, sub, 0xAu) + 1;
             goto set_cursor;
         }

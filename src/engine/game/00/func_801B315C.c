@@ -3,11 +3,11 @@
 MATCH void func_801B315C(void) {
     if (g_GameStateIndex == GAME_REQUEST_IDLE) {
         if (g_GameRequestFlags & AREA_LOAD_FLAG_WORLD_MAP) {
-            Actor_RequestRoute(g_Task->direction);
+            Actor_RequestRoute(TASK(Actor)->direction);
         } else {
-            Script_Request(g_Task->direction);
+            Script_Request(TASK(Actor)->direction);
         }
-        g_Task->header.mode = 1;
+        TASK(Actor)->header.mode = 1;
         ACTOR_CLEAR_STEP();
     }
 }

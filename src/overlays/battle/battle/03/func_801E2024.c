@@ -6,7 +6,7 @@ MATCH void func_801E2024(void) {
     u8           count;
     u8           chance;
 
-    work         = g_Task;
+    work         = TASK(PartyMember);
     count        = work->unk_09 - 1;
     work->unk_09 = count;
     if (count == 0) {

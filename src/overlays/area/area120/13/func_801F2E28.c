@@ -18,12 +18,12 @@ MATCH void func_801F2E28(void) {
         slot->screen_x     = ((RECT*)D_801F43B8)->x;
         slot->screen_y     = ((RECT*)D_801F43B8)->y;
         slot->unk_24 |= 0x88;
-        previous = g_Task;
+        previous = TASK(Actor);
         TASK_SET(slot);
         Area_AddGridActor();
         Actor_Clear();
         TASK_SET(previous);
         previous->timer = 2;
     }
-    g_Task->header.mode += 1;
+    TASK(Actor)->header.mode += 1;
 }

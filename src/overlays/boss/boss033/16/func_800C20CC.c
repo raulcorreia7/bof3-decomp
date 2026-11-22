@@ -10,7 +10,7 @@ MATCH void func_800C20CC(void) {
     index = Battle_AllocEffect(3, 6);
     if ((index & BYTE_MASK) != GAME_NONE) {
         slot                                            = (BattleWorkImage*)&g_BattleEffects[index & BYTE_MASK];
-        *slot                                           = *(BattleWorkImage*)g_Task;
+        *slot                                           = *TASK(BattleWorkImage);
         g_BattleEffects[index & BYTE_MASK].unk_06       = 3;
         g_BattleEffects[index & BYTE_MASK].step_index   = 6;
         g_BattleEffects[index & BYTE_MASK].header.mode  = 1;
@@ -32,14 +32,14 @@ MATCH void func_800C20CC(void) {
         if (func_800AF5FC(&g_Game.members[*type], 0x10000) != 0) {
             Script_Select(5);
             Battle_MarkDamaged(*type);
-            ((PartyMember*)g_Task)->header.step++;
+            TASK(PartyMember)->header.step++;
         }
     } else {
         func_800AF2B4(&g_BattleEnemies[*type * 0x118], 0x50);
         if (func_800AF5FC(&g_BattleEnemies[*type * 0x118], 0x10000) != 0) {
             Script_Select(5);
             Battle_MarkDamaged(*type);
-            ((PartyMember*)g_Task)->header.step++;
+            TASK(PartyMember)->header.step++;
         }
     }
     Script_AnimStepOnce();

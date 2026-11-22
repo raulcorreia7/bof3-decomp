@@ -5,12 +5,12 @@ MATCH void func_801B690C(void) {
     Actor* work;
     u16    value;
 
-    if ((Area_CellGetCode(COORD_INT(g_Task->pos.x), COORD_INT(g_Task->pos.y)) & BYTE_MASK) != 0xA0) {
+    if ((Area_CellGetCode(COORD_INT(TASK(Actor)->pos.x), COORD_INT(TASK(Actor)->pos.y)) & BYTE_MASK) != 0xA0) {
         return;
     }
 
     entry = WorldMap_GetPoints();
-    work  = g_Task;
+    work  = TASK(Actor);
     for (;;) {
         if (COORD_INT(work->pos.x) != entry[0]) {
             entry += 4;

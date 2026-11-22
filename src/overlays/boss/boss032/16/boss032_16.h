@@ -7,7 +7,6 @@
 #include "overlays/boss/boss.h"
 
 /* The scratchpad work area is a PartyMember record in this image. */
-#define g_Task         ((PartyMember*)g_Task)
 
 #define g_CurrentActor ((void*)g_CurrentActor)
 

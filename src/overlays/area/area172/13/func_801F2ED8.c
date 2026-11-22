@@ -4,16 +4,16 @@ MATCH void func_801F2ED8(void) {
     Actor* saved;
     u8     i;
 
-    saved = g_Task;
+    saved = TASK(Actor);
     for (i = 0; i < 6; i++) {
-        g_Task             = &g_Actors[i];
-        g_Task->draw_layer = 2;
+        g_Task                  = &g_Actors[i];
+        TASK(Actor)->draw_layer = 2;
         Area_AddGridActor();
     }
     for (i = 0; i < g_PartySize; i++) {
         if (g_Game.members[i].chr.character_id == CHAR_ID_RYU_ADULT) {
             TASK_SET(&g_Game.members[i]);
-            g_Task->draw_layer = 2;
+            TASK(Actor)->draw_layer = 2;
             Area_AddGridActor();
         }
     }

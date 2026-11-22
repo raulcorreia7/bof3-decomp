@@ -2,6 +2,6 @@
 
 MATCH void func_801F35D0(void) {
     if (g_AreaSceneMode != 0) {
-        g_Task->header.step += 1;
+        TASK(Actor)->header.step += 1;
     }
 }

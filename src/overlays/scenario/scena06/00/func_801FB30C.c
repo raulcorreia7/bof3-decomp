@@ -1,5 +1,4 @@
 #include "scena06_00.h"
-#include "area/spad.h"
 
 #if BOF3_USE_ASM
 __asm__(".include \"include/match/macro.inc\"\n");
@@ -43,41 +42,41 @@ MATCH void func_801FB30C(void) {
             }
             if (g_PartyFieldOrder[0] == 0) {
                 TASK_SET(&g_Game.members[0]);
-                g_Task->param.actor_slot = Actor_FindFreeSpawned();
-                if (g_Task->param.actor_slot != GAME_NONE) {
-                    g_SpawnedActors[g_Task->param.actor_slot].header.flags = 1;
-                    g_SpawnedActors[g_Task->param.actor_slot].type         = 6;
-                    g_SpawnedActors[g_Task->param.actor_slot].unk_06       = 3;
-                    g_SpawnedActors[g_Task->param.actor_slot].scene_step   = 0;
-                    g_SpawnedActors[g_Task->param.actor_slot].selection    = D_801FE3BC[g_PartyFieldOrder[0]];
-                    g_SpawnedActors[g_Task->param.actor_slot].screen_x     = g_Task->screen_x;
-                    g_SpawnedActors[g_Task->param.actor_slot].screen_y     = g_Task->screen_y;
+                TASK(Actor)->param.actor_slot = Actor_FindFreeSpawned();
+                if (TASK(Actor)->param.actor_slot != GAME_NONE) {
+                    g_SpawnedActors[TASK(Actor)->param.actor_slot].header.flags = 1;
+                    g_SpawnedActors[TASK(Actor)->param.actor_slot].type         = 6;
+                    g_SpawnedActors[TASK(Actor)->param.actor_slot].unk_06       = 3;
+                    g_SpawnedActors[TASK(Actor)->param.actor_slot].scene_step   = 0;
+                    g_SpawnedActors[TASK(Actor)->param.actor_slot].selection    = D_801FE3BC[g_PartyFieldOrder[0]];
+                    g_SpawnedActors[TASK(Actor)->param.actor_slot].screen_x     = TASK(Actor)->screen_x;
+                    g_SpawnedActors[TASK(Actor)->param.actor_slot].screen_y     = TASK(Actor)->screen_y;
                 }
             }
             if (g_PartyFieldOrder[1] == 0) {
                 TASK_SET(&g_Game.members[1]);
-                g_Task->param.actor_slot = Actor_FindFreeSpawned();
-                if (g_Task->param.actor_slot != GAME_NONE) {
-                    g_SpawnedActors[g_Task->param.actor_slot].header.flags = 1;
-                    g_SpawnedActors[g_Task->param.actor_slot].type         = 6;
-                    g_SpawnedActors[g_Task->param.actor_slot].unk_06       = 3;
-                    g_SpawnedActors[g_Task->param.actor_slot].scene_step   = 0;
-                    g_SpawnedActors[g_Task->param.actor_slot].selection    = D_801FE3BC[g_PartyFieldOrder[1]];
-                    g_SpawnedActors[g_Task->param.actor_slot].screen_x     = g_Task->screen_x;
-                    g_SpawnedActors[g_Task->param.actor_slot].screen_y     = g_Task->screen_y;
+                TASK(Actor)->param.actor_slot = Actor_FindFreeSpawned();
+                if (TASK(Actor)->param.actor_slot != GAME_NONE) {
+                    g_SpawnedActors[TASK(Actor)->param.actor_slot].header.flags = 1;
+                    g_SpawnedActors[TASK(Actor)->param.actor_slot].type         = 6;
+                    g_SpawnedActors[TASK(Actor)->param.actor_slot].unk_06       = 3;
+                    g_SpawnedActors[TASK(Actor)->param.actor_slot].scene_step   = 0;
+                    g_SpawnedActors[TASK(Actor)->param.actor_slot].selection    = D_801FE3BC[g_PartyFieldOrder[1]];
+                    g_SpawnedActors[TASK(Actor)->param.actor_slot].screen_x     = TASK(Actor)->screen_x;
+                    g_SpawnedActors[TASK(Actor)->param.actor_slot].screen_y     = TASK(Actor)->screen_y;
                 }
             }
             if (g_PartyFieldOrder[2] == 0) {
                 TASK_SET(&g_Game.members[2]);
-                g_Task->param.actor_slot = Actor_FindFreeSpawned();
-                if (g_Task->param.actor_slot != GAME_NONE) {
-                    g_SpawnedActors[g_Task->param.actor_slot].header.flags = 1;
-                    g_SpawnedActors[g_Task->param.actor_slot].type         = 6;
-                    g_SpawnedActors[g_Task->param.actor_slot].unk_06       = 3;
-                    g_SpawnedActors[g_Task->param.actor_slot].scene_step   = 0;
-                    g_SpawnedActors[g_Task->param.actor_slot].selection    = D_801FE3BC[g_PartyFieldOrder[2]];
-                    g_SpawnedActors[g_Task->param.actor_slot].screen_x     = g_Task->screen_x;
-                    g_SpawnedActors[g_Task->param.actor_slot].screen_y     = g_Task->screen_y;
+                TASK(Actor)->param.actor_slot = Actor_FindFreeSpawned();
+                if (TASK(Actor)->param.actor_slot != GAME_NONE) {
+                    g_SpawnedActors[TASK(Actor)->param.actor_slot].header.flags = 1;
+                    g_SpawnedActors[TASK(Actor)->param.actor_slot].type         = 6;
+                    g_SpawnedActors[TASK(Actor)->param.actor_slot].unk_06       = 3;
+                    g_SpawnedActors[TASK(Actor)->param.actor_slot].scene_step   = 0;
+                    g_SpawnedActors[TASK(Actor)->param.actor_slot].selection    = D_801FE3BC[g_PartyFieldOrder[2]];
+                    g_SpawnedActors[TASK(Actor)->param.actor_slot].screen_x     = TASK(Actor)->screen_x;
+                    g_SpawnedActors[TASK(Actor)->param.actor_slot].screen_y     = TASK(Actor)->screen_y;
                 }
             }
             g_ScenarioState.step_05 = 5;

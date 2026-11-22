@@ -23,16 +23,16 @@ MATCH void func_801EED28(void) {
     BMAGIC_CLEAR_EFFECTS(i);
     TASK(PartyMember)->facing          = g_BattleEffectBattler->facing;
     battler                            = g_BattleEffectBattler;
-    task                               = g_Task;
+    task                               = TASK(PartyMember);
     task->pos.x.fixed                  = battler->pos.x.fixed;
     task->pos.y.fixed                  = battler->pos.y.fixed;
     task->pos.z.fixed                  = battler->pos.z.fixed;
     slot                               = Battle_AllocEffect(1, 50);
-    g_BattleEffects[slot].target.party = g_Task;
+    g_BattleEffects[slot].target.party = TASK(PartyMember);
     g_BattleEffects[slot].header.mode  = 0;
     if (g_Battle.encounter != 0 && g_BattleCurrentEnemy->unk_F0 == 0x29) {
         slot                               = Battle_AllocEffect(1, 50);
-        g_BattleEffects[slot].target.party = g_Task;
+        g_BattleEffects[slot].target.party = TASK(PartyMember);
         g_BattleEffects[slot].header.mode  = 1;
     }
     g_GfxPalettePending = 1;
@@ -64,7 +64,7 @@ MATCH void func_801EF014(void) {
     s32          z;
 
     TASK(PartyMember)->facing = g_BattleEffectBattler->facing;
-    work                      = g_Task;
+    work                      = TASK(PartyMember);
     actor                     = g_BattleEffectBattler;
     work->pos.x.fixed         = actor->pos.x.fixed;
     work->pos.y.fixed         = actor->pos.y.fixed;
@@ -81,7 +81,7 @@ MATCH void func_801EF090(void) {
 
     if (g_FrameCount & 0x1) {
         slot                                   = BMagic_AllocEffect();
-        BMAGIC_EFFECT_SLOTS[slot].target.party = g_Task;
+        BMAGIC_EFFECT_SLOTS[slot].target.party = TASK(PartyMember);
         BMAGIC_EFFECT_SLOTS[slot].unk_0B       = TASK(PartyMember)->unk_09;
         tick                                   = TASK(PartyMember)->unk_09;
         if (tick < 100) {
@@ -158,7 +158,7 @@ MATCH void func_801EF3B8(void) {
             break;
     }
     Effect_RotatePosition(g_Task);
-    work              = g_Task;
+    work              = TASK(PartyMember);
     actor             = g_BattleEffectBattler;
     work->pos.x.fixed = actor->pos.x.fixed + work->unk_0C;
     work->pos.y.fixed = actor->pos.y.fixed + work->unk_10;

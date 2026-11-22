@@ -5,5 +5,5 @@ MATCH void func_801F1638(void) {
 
     TASK_SET(record);
     record[8] = record[0x79];
-    Script_DispatchSelector(g_Task->direction);
+    Script_DispatchSelector(TASK(Actor)->direction);
 }

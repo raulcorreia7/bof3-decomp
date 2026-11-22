@@ -3,18 +3,18 @@
 MATCH void func_801B7658(void) {
     u8 count;
 
-    count = g_Task->timer;
+    count = TASK(Actor)->timer;
     if (count == 0) {
-        g_Task->vx     = 0;
-        g_Task->vy     = 0;
-        g_Task->unk_03 = 3;
+        TASK(Actor)->vx     = 0;
+        TASK(Actor)->vy     = 0;
+        TASK(Actor)->unk_03 = 3;
     } else {
-        g_Task->timer = (count - 1);
+        TASK(Actor)->timer = (count - 1);
     }
-    g_Task->vz += g_Task->gravity;
+    TASK(Actor)->vz += TASK(Actor)->gravity;
     Actor_MovementUpdate();
-    if (g_Task->unk_05 == 0) {
-        Area_ScrollAdvance(COORD_INT(g_Task->pos.z));
+    if (TASK(Actor)->unk_05 == 0) {
+        Area_ScrollAdvance(COORD_INT(TASK(Actor)->pos.z));
     }
     Script_AnimStepLoop();
 }

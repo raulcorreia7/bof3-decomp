@@ -22,8 +22,8 @@ MATCH void func_801A5400(u8* script) {
         FIELD(u16, counter, 0x2u) = data[0x2] | (data[0x1] << 8);
         Actor_ResetMotion();
         Area_SceneSelectRecord(FIELD(u16, counter, 0x2u));
-        g_Task->header.flags           = ACTOR_FLAG_IN_USE;
-        coord_record                   = g_Task;
+        TASK(Actor)->header.flags      = ACTOR_FLAG_IN_USE;
+        coord_record                   = TASK(Actor);
         g_Actors[*counter].walk_dest_x = coord_record->pos.x.fixed = (data[0x5] << 0x10) | (data[0x4] != 0 ? 0x8000 : 0);
         /* FAKE: forces the counter re-read before the next shadow store. */
         FAKE_BARRIER();
@@ -32,12 +32,12 @@ MATCH void func_801A5400(u8* script) {
         FAKE_BARRIER();
         g_Actors[*counter].unk_88     = 0;
         dist                          = Area_HeightSample(coord_record->pos.x.fixed, coord_record->pos.y.fixed);
-        dist_record                   = g_Task;
+        dist_record                   = TASK(Actor);
         COORD_INT(dist_record->pos.z) = dist;
         dist_record->header.mode      = data[0x8];
-        g_Task->header.step           = data[0xA];
-        g_Task->direction             = data[0] & 0xF;
-        g_Task->unk_06                = data[0] >> 4;
+        TASK(Actor)->header.step      = data[0xA];
+        TASK(Actor)->direction        = data[0] & 0xF;
+        TASK(Actor)->unk_06           = data[0] >> 4;
         g_Actors[*counter].unk_7C     = 0xFFFF;
         /* FAKE: forces the counter re-read before the next shadow store. */
         FAKE_BARRIER();
@@ -45,26 +45,26 @@ MATCH void func_801A5400(u8* script) {
         *D_8014691C[*counter] = 0x7F;
         Actor_SetOptionFlags(data + 0xB);
         if (data[0x3] & 0x80) {
-            flags_record = g_Task;
+            flags_record = TASK(Actor);
             flags_record->header.flags |= ACTOR_FLAG_SEMI_TRANSPARENT;
         }
-        g_Task->tint.bytes.rgb.r = 0;
-        g_Task->tint.bytes.rgb.b = 0;
-        g_Task->tint.bytes.rgb.g = 0;
-        g_Task->tint.bytes.flags = data[0x3] & 0xF;
-        bits_record              = g_Task;
-        bits_record->mirror      = (bits_record->option_flags >> ACTOR_OPT_NO_SCRIPT_START) & 0x1;
-        Script_Select(g_Task->direction);
-        cell_record_a = g_Task;
+        TASK(Actor)->tint.bytes.rgb.r = 0;
+        TASK(Actor)->tint.bytes.rgb.b = 0;
+        TASK(Actor)->tint.bytes.rgb.g = 0;
+        TASK(Actor)->tint.bytes.flags = data[0x3] & 0xF;
+        bits_record                   = TASK(Actor);
+        bits_record->mirror           = (bits_record->option_flags >> ACTOR_OPT_NO_SCRIPT_START) & 0x1;
+        Script_Select(TASK(Actor)->direction);
+        cell_record_a = TASK(Actor);
         Area_CellSetCode(COORD_INT(cell_record_a->pos.x), COORD_INT(cell_record_a->pos.y), 0x10);
-        cell_record_b = g_Task;
+        cell_record_b = TASK(Actor);
         if (COORD_FRAC(cell_record_b->pos.x) != 0) {
             Area_CellSetCode((s16)((u16)COORD_INT(cell_record_b->pos.x) + 1), COORD_INT(cell_record_b->pos.y), 0x10);
         }
-        if (COORD_FRAC(g_Task->pos.y) != 0) {
-            Area_CellSetCode(COORD_INT(g_Task->pos.x), (s16)(COORD_INT(g_Task->pos.y) + 1), 0x10);
+        if (COORD_FRAC(TASK(Actor)->pos.y) != 0) {
+            Area_CellSetCode(COORD_INT(TASK(Actor)->pos.x), (s16)(COORD_INT(TASK(Actor)->pos.y) + 1), 0x10);
         }
-        cell_record_c = g_Task;
+        cell_record_c = TASK(Actor);
         if ((COORD_FRAC(cell_record_c->pos.x) != 0) && (COORD_FRAC(cell_record_c->pos.y) != 0)) {
             Area_CellSetCode((s16)((u16)COORD_INT(cell_record_c->pos.x) + 1), (s16)((u16)COORD_INT(cell_record_c->pos.y) + 1), 0x10);
         }

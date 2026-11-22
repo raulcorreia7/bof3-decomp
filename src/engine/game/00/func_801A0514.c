@@ -31,7 +31,7 @@ MATCH void func_801A0514(void) {
                 {
                     Actor* scratch;
                     s32    type;
-                    scratch = g_Task;
+                    scratch = TASK(Actor);
                     type    = scratch->unk_06;
                     if (type == 10) {
                         index += 1;

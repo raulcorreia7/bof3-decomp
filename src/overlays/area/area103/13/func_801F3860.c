@@ -1,7 +1,7 @@
 #include "area103_13.h"
 
 MATCH void func_801F3860(void) {
-    if (--g_Task->timer == 0) {
+    if (--TASK(Actor)->timer == 0) {
         func_80196070();
     } else {
         /* FAKE: gravity is s32 but asm accesses offset 0x20 as u16; active_flags is u8 but asm accesses 0x24 as s32 */

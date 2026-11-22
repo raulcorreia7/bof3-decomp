@@ -18,7 +18,7 @@ MATCH void func_801EEC70(void) {
     TASK(PartyMember)->param.unk_0B = 0;
     TASK(PartyMember)->header.mode += 1;
     slot                               = Battle_AllocEffect(1, 62) & BYTE_MASK;
-    g_BattleEffects[slot].target.party = g_Task;
+    g_BattleEffects[slot].target.party = TASK(PartyMember);
     g_BattleEffects[slot].header.mode  = 0;
     TASK(PartyMember)->param.unk_0B += 1;
     SND_SEQueueSelection(0x100);
@@ -58,12 +58,12 @@ MATCH void func_801EEF08(void) {
 MATCH void func_801EEFB8(void) {
     PartyMember* work;
 
-    work = g_Task;
+    work = TASK(PartyMember);
     work->param.unk_0B++;
-    work = g_Task;
+    work = TASK(PartyMember);
     work->timer++;
     if (work->timer == 4) {
-        work = g_Task;
+        work = TASK(PartyMember);
         work->header.step++;
     }
 }
@@ -71,12 +71,12 @@ MATCH void func_801EEFB8(void) {
 MATCH void func_801EF024(void) {
     PartyMember* work;
 
-    work = g_Task;
+    work = TASK(PartyMember);
     work->param.unk_0B++;
-    work = g_Task;
+    work = TASK(PartyMember);
     work->unk_09 += 8;
     if (work->unk_09 == 80) {
-        work = g_Task;
+        work = TASK(PartyMember);
         work->header.step++;
     }
 }

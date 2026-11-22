@@ -23,7 +23,7 @@ MATCH void func_801EEC70(void) {
     i = 0;
     do {
         slot                               = Battle_AllocEffect(1, 4) & BYTE_MASK;
-        work                               = g_Task;
+        work                               = TASK(PartyMember);
         g_BattleEffects[slot].header.mode  = 0;
         g_BattleEffects[slot].unk_0B       = i;
         g_BattleEffects[slot].target.party = work;
@@ -93,11 +93,11 @@ MATCH void func_801EEFDC(void) {
     timer                     = TASK(PartyMember)->unk_09 - 1;
     TASK(PartyMember)->unk_09 = timer;
     if (timer == 0) {
-        next         = g_Task;
+        next         = TASK(PartyMember);
         next->unk_0C = D_801EFAA0[next->param.unk_0B].x;
         next->unk_10 = D_801EFAA0[next->param.unk_0B].y;
         Effect_RotatePosition(next);
-        work              = g_Task;
+        work              = TASK(PartyMember);
         work->pos.x.fixed = g_AreaScrollTargetX + work->unk_0C;
         work->pos.y.fixed = g_AreaScrollTargetY + work->unk_10;
         if (work->param.unk_0B == 0) {
@@ -115,9 +115,9 @@ MATCH void func_801EF138(void) {
     PartyMember* work;
     u8           count;
 
-    work = g_Task;
+    work = TASK(PartyMember);
     work->timer++;
-    work         = g_Task;
+    work         = TASK(PartyMember);
     count        = work->unk_09 - 1;
     work->unk_09 = count;
     if (count == 0) {
@@ -126,21 +126,30 @@ MATCH void func_801EF138(void) {
     }
 }
 
-#ifdef NON_MATCHING
-NON_MATCHING void func_801EF1B0(void) {
-    POLY_G3*    prim;
-    ScratchPad* spad;
-    s32         i;
-    s32         tpage;
+/* Draws the ring of sixteen glowing triangles around the caster, sized by the timer. */
+MATCH void func_801EF1B0(void) {
+    POLY_G3*     prim;
+    s32          i;
+    s32          tpage;
+    PartyMember* member;
+    s32          shade;
+    u8           level;
 
-    g_ScratchPad.cells.words[0] = TASK(PartyMember)->timer;
+    member                      = TASK(PartyMember);
+    g_ScratchPad.cells.words[0] = member->timer;
     if (g_Battle.action_id == 50) {
-        g_ScratchPad.cells.words[2] = TASK(PartyMember)->unk_09 * 3;
+        level = member->unk_09;
+        shade = level * 2;
+        shade += level;
+        g_ScratchPad.cells.words[2] = shade;
     } else {
-        g_ScratchPad.cells.words[2] = TASK(PartyMember)->unk_09 * 5;
+        level = member->unk_09;
+        shade = level * 4;
+        shade += level;
+        g_ScratchPad.cells.words[2] = shade;
     }
-    g_ScratchPad.cells.words[3] = TASK(PartyMember)->unk_09;
-    spad                        = &g_ScratchPad;
+    D_1F80000C = member->unk_09;
+    FAKE_ORDER_FENCE(); /* FAKE: the order fence keeps the loop setup after the scratch stores. */
     for (i = 0; i < 16; i++) {
         tpage = getTPage(TPAGE_DEPTH_4BIT, TPAGE_ABR_ADD, 320, 256);
         SetDrawMode((DR_MODE*)g_GfxPrimCursor, 0, 1, tpage, 0);
@@ -148,24 +157,21 @@ NON_MATCHING void func_801EF1B0(void) {
         prim = (POLY_G3*)g_GfxPrimCursor;
         SetPolyG3(prim);
         SetSemiTrans(prim, 1);
-        setXY3(prim, TASK(PartyMember)->screen_x.value, TASK(PartyMember)->screen_y.value, TASK(PartyMember)->screen_x.value + FIXED_MUL(rsin(i << 8), spad->cells.words[0]),
-               TASK(PartyMember)->screen_y.value + FIXED_MUL(rcos(i << 8), spad->cells.words[0]), TASK(PartyMember)->screen_x.value + FIXED_MUL(rsin((i + 1) << 8), spad->cells.words[0]),
-               TASK(PartyMember)->screen_y.value + FIXED_MUL(rcos((i + 1) << 8), spad->cells.words[0]));
+        setXY3(prim, TASK(PartyMember)->screen_x.value, TASK(PartyMember)->screen_y.value, TASK(PartyMember)->screen_x.value + FIXED_MUL(rsin(i << 8), g_ScratchPad.cells.words[0]),
+               TASK(PartyMember)->screen_y.value + FIXED_MUL(rcos(i << 8), g_ScratchPad.cells.words[0]), TASK(PartyMember)->screen_x.value + FIXED_MUL(rsin((i + 1) << 8), g_ScratchPad.cells.words[0]),
+               TASK(PartyMember)->screen_y.value + FIXED_MUL(rcos((i + 1) << 8), g_ScratchPad.cells.words[0]));
         if (g_Battle.action_id == 50) {
-            setRGB0(prim, spad->cells.words[3], spad->cells.words[2], spad->cells.words[2]);
-            setRGB1(prim, spad->cells.words[2], spad->cells.words[2], 1);
-            setRGB2(prim, spad->cells.words[2], spad->cells.words[2], 1);
+            setRGB0(prim, g_ScratchPad.cells.words[3], g_ScratchPad.cells.words[2], g_ScratchPad.cells.words[2]);
+            setRGB1(prim, g_ScratchPad.cells.words[2], g_ScratchPad.cells.words[2], 1);
+            setRGB2(prim, g_ScratchPad.cells.words[2], g_ScratchPad.cells.words[2], 1);
         } else {
-            setRGB0(prim, spad->cells.words[3], 1, spad->cells.words[2]);
-            setRGB1(prim, spad->cells.words[2], spad->cells.words[3], spad->cells.words[2]);
-            setRGB2(prim, spad->cells.words[2], spad->cells.words[3], spad->cells.words[2]);
+            setRGB0(prim, g_ScratchPad.cells.words[3], 1, g_ScratchPad.cells.words[2]);
+            setRGB1(prim, g_ScratchPad.cells.words[2], g_ScratchPad.cells.words[3], g_ScratchPad.cells.words[2]);
+            setRGB2(prim, g_ScratchPad.cells.words[2], g_ScratchPad.cells.words[3], g_ScratchPad.cells.words[2]);
         }
         Area_CellAddPrim(TASK(PartyMember)->pos.x.fixed, TASK(PartyMember)->pos.y.fixed, 2, sizeof(POLY_G3));
     }
 }
-#else
-INCLUDE_ASM(func_801EF1B0);
-#endif
 
 #ifdef NON_MATCHING
 NON_MATCHING void func_801EF4C4(void) {

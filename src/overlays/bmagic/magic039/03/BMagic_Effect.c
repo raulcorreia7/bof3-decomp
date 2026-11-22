@@ -20,7 +20,7 @@ MATCH void func_801EEC94(void) {
     {
         PartyMember* work;
 
-        work                               = g_Task;
+        work                               = TASK(PartyMember);
         g_BattleEffects[slot].header.mode  = 0;
         g_BattleEffects[slot].target.party = work;
         g_BattleEffects[slot].unk_04       = TASK(PartyMember)->unk_04 - 2;
@@ -30,7 +30,7 @@ MATCH void func_801EEC94(void) {
         PartyMember* work;
 
         slot                               = Battle_AllocEffect(1, 59);
-        work                               = g_Task;
+        work                               = TASK(PartyMember);
         g_BattleEffects[slot].header.mode  = 1;
         g_BattleEffects[slot].target.party = work;
         g_BattleEffects[slot].unk_04       = TASK(PartyMember)->unk_04 - 2;
@@ -170,14 +170,14 @@ MATCH void func_801EF584(void) {
     count                     = TASK(PartyMember)->unk_09 - 1;
     TASK(PartyMember)->unk_09 = count;
     if (count == 0) {
-        phase                          = TASK(PartyMember)->param.unk_0B;
-        angle_cell                     = &g_ScratchPad.cells.halves[5];
-        *angle_cell                    = phase << 9;
-        TASK(PartyMember)->pos.x.fixed = g_BattleEffectBattler->pos.x.fixed + ((rcos((s16)(phase << 9)) * 0xC000) >> 12);
-        (work = g_Task)->pos.y.fixed   = g_BattleEffectBattler->pos.y.fixed + ((rsin(*angle_cell) * 0xC000) >> 12);
-        work->pos.z.fixed              = g_BattleEffectBattler->pos.z.fixed;
-        work->unk_09                   = 0;
-        TASK(PartyMember)->timer       = 4;
+        phase                                   = TASK(PartyMember)->param.unk_0B;
+        angle_cell                              = &g_ScratchPad.cells.halves[5];
+        *angle_cell                             = phase << 9;
+        TASK(PartyMember)->pos.x.fixed          = g_BattleEffectBattler->pos.x.fixed + ((rcos((s16)(phase << 9)) * 0xC000) >> 12);
+        (work = TASK(PartyMember))->pos.y.fixed = g_BattleEffectBattler->pos.y.fixed + ((rsin(*angle_cell) * 0xC000) >> 12);
+        work->pos.z.fixed                       = g_BattleEffectBattler->pos.z.fixed;
+        work->unk_09                            = 0;
+        TASK(PartyMember)->timer                = 4;
         TASK(PartyMember)->header.step++;
     }
 }

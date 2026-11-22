@@ -5,16 +5,16 @@ MATCH void func_801C0D54(void) {
 
     if (func_801C0E48() & BYTE_MASK) {
         arg = 0x3B;
-        if (g_Task->direction == FACING_RIGHT)
+        if (TASK(Actor)->direction == FACING_RIGHT)
             arg = 0x3A;
         Script_Request(arg);
-        g_Task->header.flags &= ~ACTOR_FLAG_HIDDEN;
-        COORD_INT(g_Task->pos.z) = Area_HeightRead(g_Task->pos.x.fixed, g_Task->pos.y.fixed) + 0x7D0;
+        TASK(Actor)->header.flags &= ~ACTOR_FLAG_HIDDEN;
+        COORD_INT(TASK(Actor)->pos.z) = Area_HeightRead(TASK(Actor)->pos.x.fixed, TASK(Actor)->pos.y.fixed) + 0x7D0;
         Actor_ClearVelocity();
-        g_Task->gravity     = -8;
-        g_Task->header.mode = 2;
-        g_Task->header.step = 3;
-        g_Task->unk_03      = 3;
+        TASK(Actor)->gravity     = -8;
+        TASK(Actor)->header.mode = 2;
+        TASK(Actor)->header.step = 3;
+        TASK(Actor)->unk_03      = 3;
         g_Game.current->status.field.flags.unsigned_value &= 0xFD;
     }
 }

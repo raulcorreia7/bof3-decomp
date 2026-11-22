@@ -41,7 +41,7 @@ MATCH void func_801EF5E0(void) {
     PartyMember* work;
     u8           count;
 
-    work         = g_Task;
+    work         = TASK(PartyMember);
     count        = work->unk_09 + 1;
     work->unk_09 = count;
     work->pos.x.fixed += work->unk_0C;

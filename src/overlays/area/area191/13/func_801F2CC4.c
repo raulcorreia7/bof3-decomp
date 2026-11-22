@@ -3,10 +3,10 @@
 MATCH void func_801F2CC4(void) {
     Actor* work;
 
-    work                   = g_Task;
-    work->tint.bytes.rgb.b = 0;
-    work->tint.bytes.rgb.g = 0;
-    work->tint.bytes.rgb.r = 0;
-    g_Task->timer          = 60;
-    g_Task->header.mode    = 1;
+    work                     = TASK(Actor);
+    work->tint.bytes.rgb.b   = 0;
+    work->tint.bytes.rgb.g   = 0;
+    work->tint.bytes.rgb.r   = 0;
+    TASK(Actor)->timer       = 60;
+    TASK(Actor)->header.mode = 1;
 }

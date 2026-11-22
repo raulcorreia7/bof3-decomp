@@ -10,7 +10,7 @@ MATCH void func_801EEEE4(void) {
 
     if (--TASK(PartyMember)->unk_09 == 0) {
         src                       = BATTLE_ACTIVE_WORK;
-        dst                       = g_Task;
+        dst                       = TASK(PartyMember);
         dst->pos.x.fixed          = src->pos.x.fixed;
         dst->pos.y.fixed          = src->pos.y.fixed;
         dst->pos.z                = src->pos.z;

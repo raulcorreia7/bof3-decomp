@@ -2,7 +2,7 @@
 
 MATCH void func_801F2CB4(void) {
     if (g_ScriptVars[0] == 0xC) {
-        g_Task->header.mode++;
+        TASK(Actor)->header.mode++;
     }
     Area_StepSparkEmitters();
     func_801F2EF0();

@@ -6,7 +6,6 @@
 
 #include "common/vector.h"
 #include "overlays/area/worlds/world03.h"
-#include "area/spad.h"
 
 /* The work-window byte offset and row stride this overlay scans. */
 #define SCRATCH_ROW_OFFSET   0x00

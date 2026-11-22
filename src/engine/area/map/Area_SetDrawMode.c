@@ -6,7 +6,7 @@
 MATCH void Area_SetDrawMode(void) {
     Actor* work;
 
-    work             = g_Task;
+    work             = TASK(Actor);
     work->draw_layer = g_AreaDrawMode;
     Area_AddGridActor();
 }

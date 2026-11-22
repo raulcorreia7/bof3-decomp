@@ -5,13 +5,13 @@ MATCH void func_801F2C48(void) {
     u8     step;
 
     if (g_GameCellType == 2 && !SYS_TestFlag(g_SceneEventFlags, 92)) {
-        work = g_Task;
+        work = TASK(Actor);
         step = 1;
     } else if (g_GameCellType == 3 && SYS_TestFlag(g_SceneEventFlags, 93)) {
-        work = g_Task;
+        work = TASK(Actor);
         step = 2;
     } else {
-        work = g_Task;
+        work = TASK(Actor);
         step = 3;
     }
     work->header.mode = step;

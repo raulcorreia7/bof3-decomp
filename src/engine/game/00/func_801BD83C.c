@@ -10,11 +10,11 @@ MATCH void func_801BD83C(void) {
     s32 offset;
     s32 value;
 
-    offset   = g_Task->unk_06 * BATTLE_PARTY_STRIDE;
+    offset   = TASK(Actor)->unk_06 * BATTLE_PARTY_STRIDE;
     mode     = (&g_Game.members[0].u.field.mode.unsigned_value)[offset];
     screen_y = FIELD(u16, &D_80145ECE, offset);
     if (mode == 3) {
-        value = COORD_INT(g_Task->pos.z);
+        value = COORD_INT(TASK(Actor)->pos.z);
         diff  = value - (s16)screen_y;
         diff  = ABS(diff);
         if (diff >= 0x81) {
@@ -23,7 +23,7 @@ MATCH void func_801BD83C(void) {
             result = 3;
         }
     } else {
-        alt    = COORD_INT(g_Task->pos.z);
+        alt    = COORD_INT(TASK(Actor)->pos.z);
         result = ((s16)screen_y < alt) * 2;
     }
     type = result & BYTE_MASK;

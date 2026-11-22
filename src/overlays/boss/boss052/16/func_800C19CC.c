@@ -11,7 +11,7 @@ MATCH void func_800C19CC(void) {
     s32              offset;
     s32              enemy;
 
-    task = g_Task;
+    task = TASK(PartyMember);
     if (task->header.mode != 7 || task->header.step != 1 || task->unk_09 != 0) {
         return;
     }

@@ -2,7 +2,7 @@
 
 MATCH void func_800C1D9C(void) {
     Area_SceneSelectRecord(0xF9);
-    g_Task->unk_24 &= 0xFE;
+    TASK(PartyMember)->unk_24 &= 0xFE;
     Script_Select(2);
-    g_Task->header.step++;
+    TASK(PartyMember)->header.step++;
 }

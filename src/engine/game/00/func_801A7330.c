@@ -27,9 +27,9 @@ MATCH void func_801A7330(const volatile u8* data) {
     Actor_ResetMotion();
     Area_SceneSelectRecord(D_1F800002);
 
-    g_Task->header.flags = ACTOR_FLAG_IN_USE;
+    TASK(Actor)->header.flags = ACTOR_FLAG_IN_USE;
 
-    work                           = g_Task;
+    work                           = TASK(Actor);
     g_Actors[*counter].walk_dest_x = (work->pos.x.fixed = (data[5] << 16) | ((data[4] != 0) ? 0x8000 : 0));
     /* FAKE: barrier pins the counter re-read before the shadow store. */
     FAKE_BARRIER();
@@ -42,15 +42,15 @@ MATCH void func_801A7330(const volatile u8* data) {
 
     dist = Area_HeightSample(work->pos.x.fixed, work->pos.y.fixed);
 
-    w2                   = g_Task;
+    w2                   = TASK(Actor);
     w2->header.mode      = 6;
     COORD_INT(w2->pos.z) = (u16)dist;
     ACTOR_CLEAR_STEP();
     /* FAKE: barrier pins the flags store before the route-index load. */
     FAKE_BARRIER();
 
-    g_Task->direction = data[0] & 0xF;
-    g_Task->unk_06    = data[0] >> 4;
+    TASK(Actor)->direction = data[0] & 0xF;
+    TASK(Actor)->unk_06    = data[0] >> 4;
 
     D_80146900[*counter][0] = 0;
     D_8014691C[*counter][0] = 0x7F;
@@ -58,32 +58,32 @@ MATCH void func_801A7330(const volatile u8* data) {
     Actor_SetOptionFlags((u8*)(data + 0xB));
 
     if (data[3] & 0x80) {
-        g_Task->header.flags |= ACTOR_FLAG_SEMI_TRANSPARENT;
+        TASK(Actor)->header.flags |= ACTOR_FLAG_SEMI_TRANSPARENT;
     }
 
-    g_Task->tint.bytes.rgb.r = 0;
-    g_Task->tint.bytes.rgb.b = 0;
-    g_Task->tint.bytes.rgb.g = 0;
-    g_Task->tint.bytes.flags = data[3] & 0xF;
-    g_Task->draw_layer       = 6;
+    TASK(Actor)->tint.bytes.rgb.r = 0;
+    TASK(Actor)->tint.bytes.rgb.b = 0;
+    TASK(Actor)->tint.bytes.rgb.g = 0;
+    TASK(Actor)->tint.bytes.flags = data[3] & 0xF;
+    TASK(Actor)->draw_layer       = 6;
 
-    rec                       = g_Task;
+    rec                       = TASK(Actor);
     g_Actors[*counter].unk_7C = 0;
     /* FAKE: lock keeps the packed store ahead of the record stores. */
     FAKE_ORDER_LOCK(rec->unk_18 = (data[9] << 8) | ((const u8*)data)[0xA]);
-    g_Task->unk_05       = data[8];
-    g_Task->param.unk_0B = data[0xC];
-    g_Task->mirror       = (g_Task->option_flags >> ACTOR_OPT_NO_SCRIPT_START) & 0x1;
+    TASK(Actor)->unk_05       = data[8];
+    TASK(Actor)->param.unk_0B = data[0xC];
+    TASK(Actor)->mirror       = (TASK(Actor)->option_flags >> ACTOR_OPT_NO_SCRIPT_START) & 0x1;
 
-    mode = g_Task->unk_05;
+    mode = TASK(Actor)->unk_05;
     if ((D_80144FC4[mode >> 3] >> (mode & 0x7)) & 0x1) {
         if (data[0xC] & 0x1) {
-            g_Task->header.flags = 0;
+            TASK(Actor)->header.flags = 0;
             return;
         }
         /* The 16-bit halves of the two position words have no named members. */
-        if (COORD_FRAC(g_Task->pos.x) == 0 && COORD_FRAC(g_Task->pos.y) == 0) {
-            Area_CellSetCode(COORD_INT(g_Task->pos.x), COORD_INT(g_Task->pos.y), 0x10);
+        if (COORD_FRAC(TASK(Actor)->pos.x) == 0 && COORD_FRAC(TASK(Actor)->pos.y) == 0) {
+            Area_CellSetCode(COORD_INT(TASK(Actor)->pos.x), COORD_INT(TASK(Actor)->pos.y), 0x10);
         }
         Script_Select(1);
     } else {

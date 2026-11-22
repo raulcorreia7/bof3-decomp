@@ -3,10 +3,10 @@
  */
 /* func_801F3124 (area104), func_801F3078 (area121) */
 MATCH void Area_SceneInitActor(void) {
-    g_Task->active_flags = 0x80;
+    TASK(Actor)->active_flags = 0x80;
     Area_SceneSelectRecord(0x158);
-    g_Task->draw_layer = 5;
-    g_Task->mirror     = 0;
+    TASK(Actor)->draw_layer = 5;
+    TASK(Actor)->mirror     = 0;
     ACTOR_CLEAR_TINT();
-    g_Task->header.mode = 1;
+    TASK(Actor)->header.mode = 1;
 }

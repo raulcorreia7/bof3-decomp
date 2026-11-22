@@ -7,7 +7,6 @@
 #include "sys/actor.h"
 #include "area/area.h"
 #include "overlays/area/worlds/world03.h"
-#include "area/spad.h"
 #include <rand.h>
 
 #define g_SceneFlags ((void*)g_SceneFlags)

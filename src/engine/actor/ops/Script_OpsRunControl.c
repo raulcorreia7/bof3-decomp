@@ -55,7 +55,7 @@ MATCH u8 Script_OpsRunControl(void* sub, s32 target, u8 value) {
     selection    = value;
     switch (opcode) {
         case ACTOR_SCRIPT_CONTROL_START_SELECTED:
-            state->direction = g_Task->direction;
+            state->direction = TASK(Actor)->direction;
             Script_DispatchSelector((target_bytes + state->cursor)[1]);
             state->message_id = (target_bytes + state->cursor)[2];
             func_801A17A0((u8*)state);
@@ -63,13 +63,13 @@ MATCH u8 Script_OpsRunControl(void* sub, s32 target, u8 value) {
             state->cursor = (state->cursor + 2);
             return 0xFFU;
         case ACTOR_SCRIPT_CONTROL_START_FACING_PARTY:
-            state->direction = g_Task->direction;
+            state->direction = TASK(Actor)->direction;
             state->flags     = (state->flags | ACTOR_INTERACTION_MOVING);
             selection        = g_Game.members[0].facing ^ 0x4;
             Script_DispatchSelector(selection);
             goto block_5; /* E0 and E3 share the operand-read tail */
         case ACTOR_SCRIPT_CONTROL_START_DIRECTION:
-            state->direction = (g_Task->direction & 0x7);
+            state->direction = (TASK(Actor)->direction & 0x7);
         block_5:
             next_cursor_e0e3  = state->cursor + 1;
             state->cursor     = next_cursor_e0e3;
@@ -78,7 +78,7 @@ MATCH u8 Script_OpsRunControl(void* sub, s32 target, u8 value) {
             state_flags   = state->flags;
             updated_flags = state_flags & ~ACTOR_INTERACTION_SCRIPT_REQUEST;
             state->flags  = updated_flags;
-            if (g_Task->option_flags & ACTOR_OPT_NO_SCRIPT_START) {
+            if (TASK(Actor)->option_flags & ACTOR_OPT_NO_SCRIPT_START) {
                 state->flags = (state_flags & ~(ACTOR_INTERACTION_SCRIPT_REQUEST | ACTOR_INTERACTION_SCRIPT_PENDING));
             } else {
                 state->flags = (updated_flags | ACTOR_INTERACTION_SCRIPT_PENDING);
@@ -95,10 +95,10 @@ MATCH u8 Script_OpsRunControl(void* sub, s32 target, u8 value) {
             state->message_id = (low_byte | (high_byte << 8));
             goto block_29; /* every command that keeps the selection shares the return */
         case ACTOR_SCRIPT_CONTROL_CLEAR_ACTOR:
-            g_Task->header.flags = 0;
+            TASK(Actor)->header.flags = 0;
             goto block_29; /* every command that keeps the selection shares the return */
         case ACTOR_SCRIPT_CONTROL_END_SCRIPT:
-            spad_work_e5 = g_Task;
+            spad_work_e5 = TASK(Actor);
             g_GameFlags &= ~GAME_FLAG_SCRIPT_ACTIVE;
             spad_work_e5->header.mode = spad_work_e5->unk_03;
             goto block_29; /* every command that keeps the selection shares the return */
@@ -116,26 +116,26 @@ MATCH u8 Script_OpsRunControl(void* sub, s32 target, u8 value) {
                 state->cursor = (state->cursor - 1);
                 result        = 0xFF;
                 if (Actor_GetOwner() == 2) {
-                    return g_Task->direction;
+                    return TASK(Actor)->direction;
                 }
                 return result;
             }
             next_cursor = state->cursor + 8;
             goto block_28; /* E9 and EA share the cursor store */
         case ACTOR_SCRIPT_CONTROL_TOGGLE_HIDDEN:
-            spad_work_eb = g_Task;
+            spad_work_eb = TASK(Actor);
             spad_work_eb->header.flags ^= ACTOR_FLAG_HIDDEN;
             goto block_29; /* every command that keeps the selection shares the return */
         case ACTOR_SCRIPT_CONTROL_TOGGLE_NO_SCRIPT_START:
-            spad_work_ec               = g_Task;
+            spad_work_ec               = TASK(Actor);
             spad_work_ec->option_flags = (spad_work_ec->option_flags ^ ACTOR_OPT_NO_SCRIPT_START);
             goto block_29; /* every command that keeps the selection shares the return */
         case ACTOR_SCRIPT_CONTROL_TOGGLE_ROUTE_LOCK:
-            spad_work_ed               = g_Task;
+            spad_work_ed               = TASK(Actor);
             spad_work_ed->option_flags = (spad_work_ed->option_flags ^ ACTOR_OPT_ROUTE_LOCKED);
             goto block_29; /* every command that keeps the selection shares the return */
         case ACTOR_SCRIPT_CONTROL_TOGGLE_WAIT_STREAM:
-            spad_work_ee               = g_Task;
+            spad_work_ee               = TASK(Actor);
             spad_work_ee->option_flags = (spad_work_ee->option_flags ^ ACTOR_OPT_WAIT_STREAM);
             goto block_29; /* every command that keeps the selection shares the return */
         case ACTOR_SCRIPT_CONTROL_SET_UNK_04:
@@ -151,20 +151,20 @@ MATCH u8 Script_OpsRunControl(void* sub, s32 target, u8 value) {
             state->flags = (state->flags | ACTOR_INTERACTION_MOVING);
             goto block_29; /* every command that keeps the selection shares the return */
         case ACTOR_SCRIPT_CONTROL_RELEASE_ROUTE:
-            spad_work_e4               = g_Task;
+            spad_work_e4               = TASK(Actor);
             SP_REF(u8, 0x3)            = 0xFF;
             spad_work_e4->option_flags = (spad_work_e4->option_flags & ~(ACTOR_OPT_ROUTE_LOCKED | ACTOR_OPT_WAIT_STREAM));
             state->flags               = (state->flags & 0xBF);
             goto block_29; /* every command that keeps the selection shares the return */
         case ACTOR_SCRIPT_CONTROL_SET_TINT:
-            spad_work_ea = g_Task;
+            spad_work_ea = TASK(Actor);
             if (spad_work_ea->unk_06 != 0xA) {
                 target_entry_ea = target_bytes + state->cursor;
                 GFX_PaletteAllocFade((u8*)spad_work_ea, target_entry_ea[1], target_entry_ea[2], target_entry_ea[3], target_entry_ea[4]);
             } else {
                 spad_work_ea->tint.bytes.rgb.r = (target_bytes + state->cursor)[1];
-                g_Task->tint.bytes.rgb.g       = (target_bytes + state->cursor)[2];
-                g_Task->tint.bytes.rgb.b       = (target_bytes + state->cursor)[3];
+                TASK(Actor)->tint.bytes.rgb.g  = (target_bytes + state->cursor)[2];
+                TASK(Actor)->tint.bytes.rgb.b  = (target_bytes + state->cursor)[3];
             }
             next_cursor = state->cursor + 4;
         block_28:

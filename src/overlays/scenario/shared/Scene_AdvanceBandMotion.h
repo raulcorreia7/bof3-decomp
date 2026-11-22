@@ -20,10 +20,10 @@
     actor = g_Task;                                                                                    \
     PROJECT(&actor->pos.x, &actor->vx);                                                                \
                                                                                                        \
-    timer         = g_Task->timer - 1;                                                                 \
-    g_Task->timer = timer;                                                                             \
+    timer              = TASK(Actor)->timer - 1;                                                       \
+    TASK(Actor)->timer = timer;                                                                        \
     if (timer == 0) {                                                                                  \
-        g_Task->header.mode++;                                                                         \
+        TASK(Actor)->header.mode++;                                                                    \
     }
 
 #endif

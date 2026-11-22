@@ -28,11 +28,11 @@ MATCH void Game_BattlePlaceMembers(void) {
                 if ((i & BYTE_MASK) >= 3U)
                     break;
             }
-            g_Task->pos.x.fixed    = *(s32*)((u8*)g_EncounterParty + tab);
-            val                    = Area_HeightRead(g_Task->pos.x.fixed, g_Task->pos.y.fixed = *(s32*)((u8*)&g_EncounterParty[0].y + tab));
-            work                   = g_Task;
-            work->param.unk_0B     = 0;
-            COORD_INT(work->pos.z) = val;
+            TASK(Actor)->pos.x.fixed = *(s32*)((u8*)g_EncounterParty + tab);
+            val                      = Area_HeightRead(TASK(Actor)->pos.x.fixed, TASK(Actor)->pos.y.fixed = *(s32*)((u8*)&g_EncounterParty[0].y + tab));
+            work                     = TASK(Actor);
+            work->param.unk_0B       = 0;
+            COORD_INT(work->pos.z)   = val;
             if ((g_Characters[g_GameState->character_index].status & STATUS_KO) != 0)
                 Script_Select((g_Battle.scroll_dir + 0x1C));
             else

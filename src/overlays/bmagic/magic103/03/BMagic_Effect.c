@@ -13,19 +13,19 @@ MATCH void func_801EEC70(void) {
     u16* src;
 
     slot                               = Battle_AllocEffect(1, 45) & BYTE_MASK;
-    g_BattleEffects[slot].target.party = g_Task;
+    g_BattleEffects[slot].target.party = TASK(PartyMember);
     g_BattleEffects[slot].header.mode  = 2;
     TASK(PartyMember)->param.unk_0B    = 1;
     for (i = 0; i < 2; i++) {
         slot                               = Battle_AllocEffect(1, 45) & BYTE_MASK;
-        g_BattleEffects[slot].target.party = g_Task;
+        g_BattleEffects[slot].target.party = TASK(PartyMember);
         g_BattleEffects[slot].header.mode  = 1;
         g_BattleEffects[slot].unk_0B       = i;
         g_BattleEffects[slot].arg.unk_09   = i + 1;
         TASK(PartyMember)->param.unk_0B += 1;
     }
     slot                               = Battle_AllocEffect(1, 45) & BYTE_MASK;
-    g_BattleEffects[slot].target.party = g_Task;
+    g_BattleEffects[slot].target.party = TASK(PartyMember);
     g_BattleEffects[slot].header.mode  = 0;
     TASK(PartyMember)->param.unk_0B += 1;
     /* Copies the first two colour rows of arena palette 26 into the work copy with STP set, then clears colour 0 of each. */
@@ -219,7 +219,7 @@ MATCH void func_801EFB88(void) {
     timer                     = TASK(PartyMember)->unk_09 - 1;
     TASK(PartyMember)->unk_09 = timer;
     if (timer == 0) {
-        work                     = g_Task;
+        work                     = TASK(PartyMember);
         work->pos.x.fixed        = g_BattleSelectedActor->pos.x.fixed + D_801F07AC[work->param.unk_0B].x;
         work->pos.y.fixed        = g_BattleSelectedActor->pos.y.fixed + D_801F07AC[work->param.unk_0B].y;
         work->pos.z.fixed        = g_BattleSelectedActor->pos.z.fixed + D_801F07AC[work->param.unk_0B].z;
@@ -247,7 +247,7 @@ MATCH void func_801EFCF4(void) {
     s32          drop;
 
     Battle_ProjectRange();
-    work         = g_Task;
+    work         = TASK(PartyMember);
     counter      = work->unk_09 + 1;
     drop         = (FAKE_VOLATILE(u8, work->unk_09) - 8) / 2;
     work->unk_09 = counter;
@@ -329,12 +329,12 @@ MATCH void func_801F0344(void) {
 MATCH void func_801F03A4(void) {
     PartyMember* work;
 
-    work = g_Task;
+    work = TASK(PartyMember);
     work->timer += 2;
-    work = g_Task;
+    work = TASK(PartyMember);
     work->unk_09++;
     if (work->unk_09 == 8) {
-        work = g_Task;
+        work = TASK(PartyMember);
         work->header.step++;
     }
 }

@@ -19,13 +19,13 @@ MATCH void func_801EEC70(void) {
     TASK(PartyMember)->unk_09       = 30;
     TASK(PartyMember)->header.mode += 1;
     slot                               = Battle_AllocEffect(1, 102) & BYTE_MASK;
-    work                               = g_Task;
+    work                               = TASK(PartyMember);
     g_BattleEffects[slot].header.mode  = 0;
     g_BattleEffects[slot].target.party = work;
     TASK(PartyMember)->param.unk_0B += 1;
     for (i = 0; i < 6; i++) {
         slot                               = Battle_AllocEffect(1, 102) & BYTE_MASK;
-        work                               = g_Task;
+        work                               = TASK(PartyMember);
         g_BattleEffects[slot].header.mode  = 1;
         g_BattleEffects[slot].unk_0B       = i;
         g_BattleEffects[slot].target.party = work;

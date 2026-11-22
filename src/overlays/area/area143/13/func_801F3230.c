@@ -4,7 +4,7 @@ MATCH void func_801F3230(void) {
     if (g_AreaSceneMode != 1) {
         return;
     }
-    g_Task->param.unk_0B = 0;
-    g_Task->pos.z.fixed  = 0;
-    g_Task->header.step += 1;
+    TASK(Actor)->param.unk_0B = 0;
+    TASK(Actor)->pos.z.fixed  = 0;
+    TASK(Actor)->header.step += 1;
 }

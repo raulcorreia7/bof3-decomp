@@ -29,7 +29,7 @@ MATCH void func_801EED04(void) {
     i                                  = 1;
     dst                                = BATTLE_EFFECT_PALETTE_COLORS;
     src                                = BATTLE_PALETTE_SOURCE_COLORS;
-    task                               = g_Task;
+    task                               = TASK(PartyMember);
     g_BattleEffects[slot].header.mode  = 0;
     g_BattleEffects[slot].target.party = task;
     g_BattleEffects[slot].pos.x.fixed  = actor->pos.x.fixed;
@@ -63,7 +63,7 @@ MATCH void func_801EEF68(void) {
     for (i = 0; i < 3; i++) {
         slot = BMagic_AllocEffect();
         if (slot != GAME_NONE) {
-            work                                  = g_Task;
+            work                                  = TASK(PartyMember);
             BMAGIC_EFFECT_SLOTS[slot].header.mode = i != 0;
             BMAGIC_EFFECT_SLOTS[slot].header.step = 0;
             BMAGIC_EFFECT_SLOTS[slot].unk_0B      = i;
@@ -155,7 +155,7 @@ MATCH void func_801EF554(void) {
     SYS_DISPATCH_BYTE(D_801F04EC, TASK(PartyMember)->header.step);
     if (TASK(PartyMember)->header.flags != 0 && TASK(PartyMember)->header.step != 0) {
         Battle_ProjectRange();
-        func_801EF818();
+        Effect_DrawFlameColumn();
     }
 }
 
@@ -169,12 +169,8 @@ MATCH void func_801EF654(void) {
 
 #include "overlays/bmagic/shared/Effect_CountDownByTwoFinishAtOne.h"
 
-#ifdef NON_MATCHING
-NON_MATCHING void func_801EF818(void) {
-}
-#else
-INCLUDE_ASM(func_801EF818);
-#endif
+/* func_801EF818 */
+#include "overlays/bmagic/shared/Effect_DrawFlameColumn.h"
 
 MATCH void func_801EFF74(void) {
     PartyMember* work;
@@ -184,7 +180,7 @@ MATCH void func_801EFF74(void) {
     SYS_DISPATCH_BYTE(D_801F04FC, TASK(PartyMember)->header.step);
     if (TASK(PartyMember)->header.flags != 0 && TASK(PartyMember)->header.step != 0) {
         Battle_ProjectRange();
-        work = g_Task;
+        work = TASK(PartyMember);
         if (work->param.unk_0B == 1) {
             x = work->screen_x.value - MAGIC092_STEP_X;
             y = work->screen_y.value;

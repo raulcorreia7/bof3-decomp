@@ -1,5 +1,4 @@
 #include "start_08.h"
-#include "area/spad.h"
 
 MATCH void func_801E7000(void) {
     s32 resource;
@@ -15,11 +14,11 @@ MATCH void func_801E7000(void) {
     Menu_DrawNameEntryControls(D_801ED7E8, 0xA8, 0x2B);
     Menu_DrawWindowFrame(18, 97, 36, 17);
     Menu_DrawNameEntryGrid(D_801ED7E8, 0x18, 0x67);
-    g_Task->timer = g_Task->timer + 1;
-    if (g_Task->timer >= 10) {
-        g_Task->timer  = 0;
-        g_Task->unk_06 = (g_Task->unk_06 + 1) & 0x7;
-        Script_Select((g_Task->unk_06 + 8) & BYTE_MASK);
+    TASK(Actor)->timer = TASK(Actor)->timer + 1;
+    if (TASK(Actor)->timer >= 10) {
+        TASK(Actor)->timer  = 0;
+        TASK(Actor)->unk_06 = (TASK(Actor)->unk_06 + 1) & 0x7;
+        Script_Select((TASK(Actor)->unk_06 + 8) & BYTE_MASK);
     }
     Area_AddActor();
     Script_AnimStepLoop();

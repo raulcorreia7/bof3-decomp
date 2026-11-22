@@ -6,7 +6,6 @@
  * the file. */
 
 #include "overlays/area/worlds/world00.h"
-#include "area/spad.h"
 
 /* Reset sentinel stored to g_UiMessageRequest by the request handlers. */
 #define RESET_SENTINEL 0xFFFF

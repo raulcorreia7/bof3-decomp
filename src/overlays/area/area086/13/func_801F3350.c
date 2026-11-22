@@ -1,42 +1,44 @@
 #include "area086_13.h"
 
-#ifdef NON_MATCHING
-NON_MATCHING s32 func_801F3350(s32 x, s32 y) {
+MATCH s32 func_801F3350(s32 x, s32 y) {
     s32 i;
-    s32 off;
-    s32 row;
-    s32 x0;
-    s32 y0;
+    s32 entry;
+    s32 rect;
+    s32 scan;
+    s32 cell_x;
+    s32 cell_y;
     u8* facing;
 
     i = 0;
     x &= BYTE_MASK;
     y &= BYTE_MASK;
     facing = &g_Game.members[0].facing;
-    off    = 0;
-    for (; i < 3; i++, off += 4) {
-        if (x == D_801F3CEC[off] && y == D_801F3CED[off] && D_801F3CEE[off] == *facing) {
+    entry  = 0;
+    for (; i < 3; i++, entry += 4) {
+        if (x == D_801F3CEC[entry] && y == D_801F3CED[entry] && D_801F3CEE[entry] == *facing) {
             break;
         }
     }
     if (i == 3) {
         return 0;
     }
-    row = i * 4;
-    x0  = D_801F3CF8[row];
-    if (x0 < D_801F3CFA[row]) {
+    rect   = i * 4;
+    cell_x = D_801F3CF8[rect];
+    if (cell_x < D_801F3CFA[rect]) {
         do {
-            y0 = D_801F3CF9[row];
-            if (y0 < D_801F3CFB[row]) {
+            cell_y = D_801F3CF9[rect];
+            if (cell_y < D_801F3CFB[rect]) {
+                scan = rect;
                 do {
-                    if ((s8)Area_FindMemberAt(x0, y0) >= 0) {
+                    if ((s8)Area_FindMemberAt(cell_x, cell_y) >= 0) {
                         return 0;
                     }
-                    y0++;
-                } while (y0 < D_801F3CFB[row]);
+                    cell_y++;
+                } while (cell_y < D_801F3CFB[scan]);
             }
-            x0++;
-        } while (x0 < D_801F3CFA[row]);
+            cell_x++;
+            rect = i * 4;
+        } while (cell_x < D_801F3CFA[rect]);
     }
     if (SYS_TestFlag(g_SceneEventFlags, 0x1C) != 0) {
         return 0;
@@ -46,6 +48,3 @@ NON_MATCHING s32 func_801F3350(s32 x, s32 y) {
     func_8019ABB0(0xF);
     return 1;
 }
-#else
-INCLUDE_ASM(func_801F3350);
-#endif

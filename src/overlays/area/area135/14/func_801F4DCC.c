@@ -3,6 +3,6 @@
 MATCH void func_801F4DCC(void) {
     g_AreaCameraRefreshCount = 2;
     g_AreaCameraHeight += 4;
-    g_Task->unk_04++;
+    TASK(Actor)->unk_04++;
     g_ScriptState->cursor = (g_ScriptState->cursor - 2);
 }

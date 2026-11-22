@@ -3,16 +3,16 @@
 MATCH void func_8019A6AC(void) {
     Actor* work;
 
-    g_Task->timer--;
-    if (g_Task->timer == 0) {
-        g_Task->header.mode++;
+    TASK(Actor)->timer--;
+    if (TASK(Actor)->timer == 0) {
+        TASK(Actor)->header.mode++;
         return;
     }
-    g_Task->tint.bytes.rgb.r -= 6;
-    g_Task->tint.bytes.rgb.g -= 6;
-    g_Task->tint.bytes.rgb.b -= 6;
+    TASK(Actor)->tint.bytes.rgb.r -= 6;
+    TASK(Actor)->tint.bytes.rgb.g -= 6;
+    TASK(Actor)->tint.bytes.rgb.b -= 6;
     Script_AnimStepLoop();
-    work = g_Task;
+    work = TASK(Actor);
     if (work->unk_05 == 6) {
         if ((work->timer & 0x1) != 0) {
             work->screen_y++;

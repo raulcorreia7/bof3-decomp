@@ -38,7 +38,7 @@ MATCH s32 Area_EncounterCanStart(void) {
         }
     }
     if (!(g_GameRequestFlags & AREA_LOAD_FLAG_WORLD_MAP)) {
-        work   = g_Task;
+        work   = TASK(Actor);
         ok     = Area_EncounterBuild(4, 0);
         g_Task = work;
         if (ok != 0) {
@@ -51,7 +51,7 @@ MATCH s32 Area_EncounterCanStart(void) {
         }
         return ok;
     }
-    rec   = g_Task;
+    rec   = TASK(Actor);
     value = rec->pos.y.fixed;
     /* x holds the step count, then the x sum */
     x     = rec->timer;

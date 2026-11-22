@@ -18,10 +18,10 @@ MATCH void Actor_SpawnPartyFromRecord(u8* script) {
         g_CurrentActor = &g_Actors[slot];
         Actor_ResetMotion();
         Party_MemberLoadSprite(script[1], script[0xF]);
-        g_Task->header.flags = ACTOR_FLAG_IN_USE;
-        coord_x              = script[5] << 16;
-        slot_off             = *counter * ACTOR_SIZE;
-        work                 = g_Task;
+        TASK(Actor)->header.flags = ACTOR_FLAG_IN_USE;
+        coord_x                   = script[5] << 16;
+        slot_off                  = *counter * ACTOR_SIZE;
+        work                      = TASK(Actor);
         if (script[4] != 0) {
             coord_x |= 0x8000;
         }
@@ -34,13 +34,13 @@ MATCH void Actor_SpawnPartyFromRecord(u8* script) {
         FAKE_BARRIER();
         D_80146910[*counter][0]  = 0;
         dist                     = Area_HeightSample(work->pos.x.fixed, work->pos.y.fixed);
-        record                   = g_Task;
+        record                   = TASK(Actor);
         COORD_INT(record->pos.z) = (u16)dist;
         record->header.mode      = script[8];
 
-        g_Task->header.step                            = script[0xA];
-        g_Task->direction                              = script[0] & 0xF;
-        g_Task->unk_06                                 = script[0] >> 4;
+        TASK(Actor)->header.step                       = script[0xA];
+        TASK(Actor)->direction                         = script[0] & 0xF;
+        TASK(Actor)->unk_06                            = script[0] >> 4;
         FIELD(u16, &D_80146914, *counter * ACTOR_SIZE) = script[2];
         FIELD(s16, &D_80146916, *counter * ACTOR_SIZE) = script[3];
         FIELD(u16, D_80146904, *counter * ACTOR_SIZE)  = (u16)(script[0xD] | (script[0xC] << 8));
@@ -48,10 +48,10 @@ MATCH void Actor_SpawnPartyFromRecord(u8* script) {
         FIELD(u8, D_80146900, *counter * ACTOR_SIZE)   = script[9];
         FIELD(u8, D_8014691C, *counter * ACTOR_SIZE)   = 0x7F;
         Actor_SetOptionFlags((u8*)script + 0xB);
-        g_Task->tint.bytes.rgb.r = 0;
-        g_Task->tint.bytes.rgb.b = 0;
-        g_Task->tint.bytes.rgb.g = 0;
-        g_Task->tint.bytes.flags = 2;
+        TASK(Actor)->tint.bytes.rgb.r = 0;
+        TASK(Actor)->tint.bytes.rgb.b = 0;
+        TASK(Actor)->tint.bytes.rgb.g = 0;
+        TASK(Actor)->tint.bytes.flags = 2;
         func_801A4914();
         *counter = (u16)(*counter + 1);
     }

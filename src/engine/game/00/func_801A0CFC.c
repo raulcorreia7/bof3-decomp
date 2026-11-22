@@ -7,9 +7,9 @@ MATCH void func_801A0CFC(Actor* entity) {
     u8  mode;
     u8  param;
 
-    saved = g_Task->direction;
-    D_801C83BC[g_Task->header.step](entity, 0, 1);
-    if (g_Task->timer != 0) {
+    saved = TASK(Actor)->direction;
+    D_801C83BC[TASK(Actor)->header.step](entity, 0, 1);
+    if (TASK(Actor)->timer != 0) {
         Area_SetXFixed(entity);
         return;
     }
@@ -19,35 +19,35 @@ MATCH void func_801A0CFC(Actor* entity) {
         if (mode == 0) {
             return;
         }
-        if (D_801C83BC[g_Task->header.step](entity, param, 2) != 0) {
+        if (D_801C83BC[TASK(Actor)->header.step](entity, param, 2) != 0) {
             value = ((s32 (*)(Actor*))func_801A2C94)(entity);
-            if (g_Task->timer != 0) {
+            if (TASK(Actor)->timer != 0) {
                 entity->unk_7B = (RANDOM_MASK(3) + 3);
             }
         } else {
             value = 0xFF;
         }
     } else {
-        D_801C83BC[g_Task->header.step](entity, param, 2);
+        D_801C83BC[TASK(Actor)->header.step](entity, param, 2);
         value = ((s32 (*)(Actor*, s32))func_801A2ED4)(entity, 1);
         entity->unk_7B -= 1;
     }
-    if (((value & BYTE_MASK) != GAME_NONE) && (g_Task->timer != 0)) {
-        g_Task->unk_03      = g_Task->header.mode;
-        g_Task->header.mode = 0x0A;
-        entity->unk_79      = (value & 0x7);
-        g_Task->direction   = (saved & 0x7);
-        work                = TASK(u8);
-        work[0x0A]          = 0;
-        work[9]             = 0;
+    if (((value & BYTE_MASK) != GAME_NONE) && (TASK(Actor)->timer != 0)) {
+        TASK(Actor)->unk_03      = TASK(Actor)->header.mode;
+        TASK(Actor)->header.mode = 0x0A;
+        entity->unk_79           = (value & 0x7);
+        TASK(Actor)->direction   = (saved & 0x7);
+        work                     = TASK(u8);
+        work[0x0A]               = 0;
+        work[9]                  = 0;
         func_801A3B7C(entity);
-        if (g_Task->header.mode == 0x0A) {
+        if (TASK(Actor)->header.mode == 0x0A) {
             return;
         }
-        g_Task->direction = saved;
+        TASK(Actor)->direction = saved;
     } else {
-        g_Task->timer     = 0;
-        g_Task->direction = saved;
+        TASK(Actor)->timer     = 0;
+        TASK(Actor)->direction = saved;
     }
     func_801A2AE4(entity, saved);
     Area_SetXFixed(entity);

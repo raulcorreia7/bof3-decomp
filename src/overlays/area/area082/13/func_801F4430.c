@@ -15,10 +15,10 @@ NON_MATCHING void func_801F4430(void) {
     s32       y;
     u32       tile;
 
-    setVector(&pos, g_Task->pos.x.fixed, g_Task->pos.y.fixed, g_Task->pos.z.fixed);
+    setVector(&pos, TASK(Actor)->pos.x.fixed, TASK(Actor)->pos.y.fixed, TASK(Actor)->pos.z.fixed);
     rot.vy = 0;
     rot.vx = 0;
-    rot.vz = g_Task->unk_32;
+    rot.vz = TASK(Actor)->unk_32;
 
     PushMatrix();
     RotTransMatrix(&pos, matrix, &flag);
@@ -28,9 +28,9 @@ NON_MATCHING void func_801F4430(void) {
     SetTransMatrix(&matrix);
 
     tile = (1U << 28) | (3U << 24) | (1U << 15) | (TPAGE_ABR_ADD << 12);
-    if (g_Task->param.unk_0B != 0) {
-        SND_SEPlay(g_Task->param.unk_0B + 0x201);
-        g_Task->param.unk_0B = 0;
+    if (TASK(Actor)->param.unk_0B != 0) {
+        SND_SEPlay(TASK(Actor)->param.unk_0B + 0x201);
+        TASK(Actor)->param.unk_0B = 0;
         tile |= 0x0F;
     } else {
         tile |= (1U << 11) | 0x0C;
@@ -59,9 +59,9 @@ NON_MATCHING void func_801F4430(void) {
 
         RotTransPers4(&quad[0], &quad[1], &quad[2], &quad[3], (long*)&prim->x0, (long*)&prim->x1, (long*)&prim->x2, (long*)&prim->x3, &depth, &flag);
 
-        screen_y = g_Task->screen_y;
+        screen_y = TASK(Actor)->screen_y;
         if (screen_y >= 0x41) {
-            y = g_Task->screen_y - ((rcos(g_Task->unk_32 + (i << 10)) >> 7) + 0x20);
+            y = TASK(Actor)->screen_y - ((rcos(TASK(Actor)->unk_32 + (i << 10)) >> 7) + 0x20);
         } else {
             y = screen_y;
         }

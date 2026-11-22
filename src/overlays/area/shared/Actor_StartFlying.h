@@ -6,11 +6,11 @@ MATCH void Actor_StartFlying(void) {
 
     Area_SceneSelectRecord(0x46);
 
-    g_Task->unk_48       = 0;
-    g_Task->active_flags = 0;
-    g_Task->draw_layer   = 5;
+    TASK(Actor)->unk_48       = 0;
+    TASK(Actor)->active_flags = 0;
+    TASK(Actor)->draw_layer   = 5;
 
-    scratch              = g_Task;
+    scratch              = TASK(Actor);
     scratch->vx          = (s16)g_FlockVelocity[scratch->direction].x;
     scratch->vy          = (s16)g_FlockVelocity[scratch->direction].y;
     scratch->pos.x.fixed = g_Game.members[0].pos.x.fixed;
@@ -35,15 +35,15 @@ MATCH void Actor_StartFlying(void) {
         }
     }
 
-    scratch = g_Task;
+    scratch = TASK(Actor);
     COORD_INT(scratch->pos.x) -= (s32)(g_FlockVelocity[scratch->direction].x << 16) >> 25;
     y                         = COORD_INT(scratch->pos.y) - ((s32)(g_FlockVelocity[scratch->direction].y << 16) >> 25);
     scratch->param.unk_0B     = 0;
     COORD_INT(scratch->pos.y) = y;
-    g_Task->header.mode++;
+    TASK(Actor)->header.mode++;
 
-    Script_Select(g_FlockScript[g_Task->direction][0]);
+    Script_Select(g_FlockScript[TASK(Actor)->direction][0]);
 
-    g_Task->mirror = g_FlockScript[g_Task->direction][1];
+    TASK(Actor)->mirror = g_FlockScript[TASK(Actor)->direction][1];
     Area_AddGridActor();
 }

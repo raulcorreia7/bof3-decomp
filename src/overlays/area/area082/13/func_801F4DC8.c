@@ -13,24 +13,24 @@ MATCH void func_801F4DC8(void) {
     s32    offset;
     u32    color;
 
-    colorCell  = g_Task;
+    colorCell  = TASK(Actor);
     level      = colorCell->timer;
     color      = (u32)1 << 28 | ((u32)(0x1F - level * 27 / 100) << 10) | ((u32)(0x19 - level * 27 / 100) << 5) | (u32)(u8)((u32)level / 17);
     D_8014933A = 0;
     Area_DrawGradient((s32)color);
-    shadeCell = g_Task;
+    shadeCell = TASK(Actor);
     func_801F5388(0x80 - (u8)((u32)shadeCell->timer / 3));
-    offsetCell               = g_Task;
+    offsetCell               = TASK(Actor);
     offset                   = -(s32)offsetCell->timer / 3;
     g_Game.members[0].unk_5F = offset;
     g_Game.members[0].unk_5E = offset;
     g_Game.members[0].unk_5D = offset;
-    incCell                  = g_Task;
+    incCell                  = TASK(Actor);
     incCell->timer++;
-    gateCell = g_Task;
+    gateCell = TASK(Actor);
     if (gateCell->timer >= 0x5B) {
         gateCell->timer = 0;
-        resetCell       = g_Task;
+        resetCell       = TASK(Actor);
         resetCell->header.step++;
     }
 }

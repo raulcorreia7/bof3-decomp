@@ -4,11 +4,11 @@ MATCH void func_801F3DB0(void) {
     Actor* scratch;
     Actor* work;
 
-    scratch            = g_Task;
+    scratch            = TASK(Actor);
     scratch->direction = FACING_UP;
     /* FAKE: retail splits the re-read across the copy so the row stays in
      * one register. */
-    work               = g_Task;
+    work               = TASK(Actor);
     scratch            = work;
     scratch->header.step++;
     COORD_INT(scratch->pos.z) = 0;

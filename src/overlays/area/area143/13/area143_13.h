@@ -5,7 +5,6 @@
  * and its data. Only this image includes the file. */
 
 #include "overlays/area/worlds/world03.h"
-#include "area/spad.h"
 
 /* The shop panel step the request sets. */
 

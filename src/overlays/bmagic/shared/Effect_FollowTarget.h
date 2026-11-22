@@ -9,7 +9,7 @@ MATCH void Effect_FollowTarget(void) {
     TASK(PartyMember)->unk_09 = timer;
     if (timer == 0) {
         src                             = BATTLE_ACTIVE_WORK;
-        work                            = g_Task;
+        work                            = TASK(PartyMember);
         work->pos.x                     = src->pos.x;
         work->pos.y                     = src->pos.y;
         work->pos.z                     = src->pos.z;

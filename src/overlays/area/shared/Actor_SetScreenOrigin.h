@@ -5,7 +5,7 @@
 MATCH void Actor_SetScreenOrigin(void) {
     Actor* actor;
 
-    actor           = g_Task;
+    actor           = TASK(Actor);
     actor->screen_x = 160;
     actor->screen_y = 80;
 }

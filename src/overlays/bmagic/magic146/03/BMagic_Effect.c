@@ -32,7 +32,7 @@ MATCH void func_801EED18(void) {
             index = i + 3;
             if (!(Battle_SlotIsBlocked(index) & BYTE_MASK)) {
                 slot                               = Battle_AllocEffect(1, 109) & BYTE_MASK;
-                owner                              = g_Task;
+                owner                              = TASK(PartyMember);
                 g_BattleEffects[slot].header.mode  = 0;
                 g_BattleEffects[slot].unk_04       = index;
                 g_BattleEffects[slot].target.party = owner;
@@ -45,7 +45,7 @@ MATCH void func_801EED18(void) {
         for (i = 0; i < 3; i++) {
             if (!(Battle_SlotIsBlocked(i) & BYTE_MASK)) {
                 slot                               = Battle_AllocEffect(1, 109) & BYTE_MASK;
-                owner                              = g_Task;
+                owner                              = TASK(PartyMember);
                 g_BattleEffects[slot].header.mode  = 0;
                 g_BattleEffects[slot].unk_04       = i;
                 g_BattleEffects[slot].target.party = owner;
@@ -91,14 +91,14 @@ MATCH void func_801EF0D4(void) {
         }
         SND_SEQueueSelection(0x100);
         TASK(PartyMember)->facing = battler->facing;
-        task                      = g_Task;
+        task                      = TASK(PartyMember);
         WorldPos_Copy(&task->pos, &battler->pos);
         task->param.unk_0B = 0;
         TASK(PartyMember)->header.step++;
         for (i = 0; i < 3; i++) {
             slot = BMagic_AllocEffect();
             if (slot != 0xFF) {
-                owner                                  = g_Task;
+                owner                                  = TASK(PartyMember);
                 BMAGIC_EFFECT_SLOTS[slot].header.mode  = 0;
                 BMAGIC_EFFECT_SLOTS[slot].unk_0B       = i;
                 BMAGIC_EFFECT_SLOTS[slot].arg.unk_09   = i * 2 + 1;
@@ -130,7 +130,7 @@ MATCH void func_801EF3B8(void) {
     if (--TASK(PartyMember)->unk_09 == 0) {
         TASK(PartyMember)->facing = g_BattleEffectBattler->facing;
         battler                   = g_BattleEffectBattler;
-        work                      = g_Task;
+        work                      = TASK(PartyMember);
         WorldPos_Copy(&work->pos, &battler->pos);
         work->unk_0C = D_801EF9D0[work->param.unk_0B].x;
         work->unk_10 = D_801EF9D0[work->param.unk_0B].y;
@@ -152,9 +152,9 @@ MATCH void func_801EF58C(void) {
     PartyMember* active;
     u8           count;
 
-    work = g_Task;
+    work = TASK(PartyMember);
     work->unk_09++;
-    work        = g_Task;
+    work        = TASK(PartyMember);
     count       = work->timer - 1;
     work->timer = count;
     if (count == 0) {

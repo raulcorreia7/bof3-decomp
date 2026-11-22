@@ -28,12 +28,12 @@ MATCH void BMagic_SpawnBurnFlames(void) {
     u16*         dst;
 
     actor = g_Battle.selected_actor;
-    task  = g_Task;
+    task  = TASK(PartyMember);
     WorldPos_Copy(&task->pos, &actor->pos);
     task->param.unk_0B = 0;
     for (i = 0; i < 8; i++) {
         slot                               = Battle_AllocEffect(1, 0x2F);
-        work                               = g_Task;
+        work                               = TASK(PartyMember);
         g_BattleEffects[slot].arg.unk_09   = (i + 1) * 4;
         g_BattleEffects[slot].target.party = work;
         TASK(PartyMember)->param.unk_0B++;
@@ -87,7 +87,7 @@ MATCH void func_801EEFF4(void) {
 
     if (--TASK(PartyMember)->unk_09 == 0) {
         src                             = BATTLE_ACTIVE_WORK;
-        dst                             = g_Task;
+        dst                             = TASK(PartyMember);
         dst->pos.x.fixed                = src->pos.x.fixed;
         dst->pos.y.fixed                = src->pos.y.fixed;
         z                               = src->pos.z.fixed;
@@ -105,7 +105,7 @@ MATCH void func_801EF0A4(void) {
     PartyMember* work;
     s32          sum;
 
-    work         = g_Task;
+    work         = TASK(PartyMember);
     sum          = work->unk_20 + work->timer;
     work->unk_20 = sum;
     work->unk_14 += sum;
@@ -120,7 +120,7 @@ MATCH void func_801EF108(void) {
     u8           timer;
 
     TASK(PartyMember)->param.unk_0B--;
-    work         = g_Task;
+    work         = TASK(PartyMember);
     timer        = work->unk_09 - 1;
     work->unk_09 = timer;
     work->unk_20 += work->timer;

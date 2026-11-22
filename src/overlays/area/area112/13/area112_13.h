@@ -5,7 +5,6 @@
  * and its data. Only this image includes the file. */
 
 #include "overlays/area/worlds/world02.h"
-#include "area/spad.h"
 
 /* The scenario flag byte the answer path tests. */
 extern u8 D_80144EF0[];
@@ -15,6 +14,25 @@ extern u8                  D_801F41F8[];
 /* D_801F48FC */
 extern PartyMemberMessages g_PartyMemberMessages[1];
 extern u8                  D_801F493C[];
+
+/* One quad of the overlay's part table: the packed cell word (bytes: depth row, shape, cell y,
+ * cell x) and the tile word Area_ApplyTileToQuad reads. */
+typedef struct AreaQuadPart {
+    union {
+        u32 packed;
+        u8  bytes[4];
+    } cell;
+
+    u32 tile;
+} AreaQuadPart;
+
+/* The two cell depths of each depth row: [1] while the task step is 2, else [0]. */
+extern s8           D_801F4240[][2];
+/* The first and end part of each part range func_801F3274 draws. */
+extern u8           D_801F4250[][2];
+/* The four corner offsets (x, y, z) of each quad shape, in 128-unit steps. */
+extern s8           D_801F4258[][4][3];
+extern AreaQuadPart D_801F4294[];
 
 void func_801F2EA8(void);
 void func_801F3274(void);
@@ -39,10 +57,18 @@ ASSERT_SIZE(AnswerCell, 4);
 extern AnswerCell D_801F4908[4];
 /* The first four answer flags, cleared by the low four mask bits and set by the high four. */
 extern u8         D_801F4928[4];
-extern u8         D_801F492C[];
-extern u8         D_801F492D[];
-extern u8         D_801F492E[];
-extern u8         D_801F492F[];
+
+/* A cell and the reach around it on each axis. */
+typedef struct CellZone {
+    /* 0x00 */ u8 x;
+    /* 0x01 */ u8 y;
+    /* 0x02 */ u8 reach_x;
+    /* 0x03 */ u8 reach_y;
+} CellZone;
+
+ASSERT_SIZE(CellZone, 0x04);
+/* The four zones func_801F3CF0 tests the party against. */
+extern CellZone D_801F492C[4];
 
 s8   Area_FindMemberAt(s32 x, s32 y);
 bool func_801F3CF0(void);

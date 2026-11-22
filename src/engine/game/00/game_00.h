@@ -102,16 +102,16 @@
 /* Run the gated cell test and arm the work record on a hit. Kept: it returns
  * from the member and takes the flag value after a branch; tested as an inline,
  * the bytes move. */
-#define GAME_ARM_WORK_ON_CELL_HIT(code, new_step)                                                                                      \
-    if ((g_Game.flags & 0x400) == 0) {                                                                                                 \
-        if ((Game_TestMapCells(g_Task->pos.x.fixed, g_Task->pos.y.fixed, g_Task->voice_flags.scene_flag, code, 0) & BYTE_MASK) != 0) { \
-            g_Task->header.mode = 2;                                                                                                   \
-            g_Task->header.step = new_step;                                                                                            \
-            g_Task->unk_03      = 0;                                                                                                   \
-            g_Task->unk_04      = 0;                                                                                                   \
-            return 1;                                                                                                                  \
-        }                                                                                                                              \
-    }                                                                                                                                  \
+#define GAME_ARM_WORK_ON_CELL_HIT(code, new_step)                                                                                                     \
+    if ((g_Game.flags & 0x400) == 0) {                                                                                                                \
+        if ((Game_TestMapCells(TASK(Actor)->pos.x.fixed, TASK(Actor)->pos.y.fixed, TASK(Actor)->voice_flags.scene_flag, code, 0) & BYTE_MASK) != 0) { \
+            TASK(Actor)->header.mode = 2;                                                                                                             \
+            TASK(Actor)->header.step = new_step;                                                                                                      \
+            TASK(Actor)->unk_03      = 0;                                                                                                             \
+            TASK(Actor)->unk_04      = 0;                                                                                                             \
+            return 1;                                                                                                                                 \
+        }                                                                                                                                             \
+    }                                                                                                                                                 \
     return 0;
 
 /* Test the map cells around a 16.16 point for the wanted code. Kept: the two
@@ -1403,7 +1403,7 @@ static inline void AreaAction_Roll(s32 actor_slot) {
     u32 choice;
 
     choice = (u32)RANDOM_MASK(0xF);
-    if ((g_Task->option_flags & ACTOR_OPT_ROUTE_LOCKED) == 0) {
+    if ((TASK(Actor)->option_flags & ACTOR_OPT_ROUTE_LOCKED) == 0) {
         Script_DispatchSelector((u8)((g_Game.members[0].facing ^ 4) & 7));
     }
     g_Game.flags |= GAME_FLAG_SCRIPT_ACTIVE;
@@ -1415,7 +1415,7 @@ static inline void AreaAction_Roll(s32 actor_slot) {
             case 2:
             case 3:
                 Actor_SpawnSceneActor(1);
-                g_Task->unk_04 = 3;
+                TASK(Actor)->unk_04 = 3;
                 break;
             case 4:
             case 5:
@@ -1423,17 +1423,17 @@ static inline void AreaAction_Roll(s32 actor_slot) {
                 Actor_SpawnSceneActor(1);
                 Party_AddZenny(2, 0);
                 func_801ADCF4((u8)((s32)(-(((s32)GAME_WORK_AREA_PTR - (s32)g_Actors) * 0xD79435E5)) >> 3));
-                g_Task->unk_04 = 1;
+                TASK(Actor)->unk_04 = 1;
                 break;
             case 7:
                 Actor_SpawnSceneActor(1);
                 Party_AddZenny(5, 0);
                 func_801ADCF4((u8)((s32)(-(((s32)GAME_WORK_AREA_PTR - (s32)g_Actors) * 0xD79435E5)) >> 3));
-                g_Task->unk_04 = 2;
+                TASK(Actor)->unk_04 = 2;
                 break;
             default:
                 Actor_SpawnSceneActor(actor_slot);
-                g_Task->unk_04 = 3;
+                TASK(Actor)->unk_04 = 3;
                 break;
         }
     } else {
@@ -1442,7 +1442,7 @@ static inline void AreaAction_Roll(s32 actor_slot) {
         } else {
             Actor_SpawnSceneActor(actor_slot);
         }
-        g_Task->unk_04 = 3;
+        TASK(Actor)->unk_04 = 3;
     }
 }
 

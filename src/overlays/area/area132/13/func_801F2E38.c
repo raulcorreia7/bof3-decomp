@@ -2,7 +2,7 @@
 
 MATCH void func_801F2E38(void) {
     func_801F385C();
-    g_Task->timer = 64;
-    g_Task->header.step += 1;
+    TASK(Actor)->timer = 64;
+    TASK(Actor)->header.step += 1;
     SND_SEPlay(EMI_SE_ID(SND_BANK_AREA, 12));
 }

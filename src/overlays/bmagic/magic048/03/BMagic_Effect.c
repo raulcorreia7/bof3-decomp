@@ -19,7 +19,7 @@ MATCH void func_801EEC70(void) {
     i = 0;
     do {
         slot                               = Battle_AllocEffect(1, 30) & BYTE_MASK;
-        work                               = g_Task;
+        work                               = TASK(PartyMember);
         g_BattleEffects[slot].header.mode  = 0;
         g_BattleEffects[slot].unk_0B       = i;
         g_BattleEffects[slot].arg.unk_09   = ((i ^ 0xF) - 3) * 8;
@@ -63,7 +63,7 @@ MATCH s32 func_801EEF3C(void) {
         TASK(PartyMember)->unk_0C      = 0x80000;
         TASK(PartyMember)->unk_10      = 0;
         Effect_RotatePosition(g_Task);
-        work = g_Task;
+        work = TASK(PartyMember);
         work->unk_0C += g_AreaScrollTargetX;
         FAKE_BARRIER(); /* FAKE: keeps the height read below the velocity store. */
         work->unk_14 = COORD_INT(work->pos.z) + 0x100;

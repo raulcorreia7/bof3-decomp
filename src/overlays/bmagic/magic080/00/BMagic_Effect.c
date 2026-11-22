@@ -13,7 +13,7 @@ MATCH void func_801EEC5C(void) {
     s32*         channel;
     s32          y;
 
-    work                                  = g_Task;
+    work                                  = TASK(PartyMember);
     channel                               = &g_AreaScrollTargetX;
     work->pos.x.fixed                     = channel[0];
     y                                     = channel[1];

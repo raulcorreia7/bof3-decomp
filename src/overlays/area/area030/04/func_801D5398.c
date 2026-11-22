@@ -26,7 +26,7 @@ MATCH void func_801D5398(void) {
         g_SpawnedActors[index].header.flags = 1;
         g_SpawnedActors[index].type         = 0x1A;
         g_SpawnedActors[index].header.mode  = 0x10;
-        g_SpawnedActors[index].header.step  = (u8) * (u16*)&COORD_INT(g_Task->pos.z);
+        g_SpawnedActors[index].header.step  = (u8) * (u16*)&COORD_INT(TASK(Actor)->pos.z);
 
         work                = TASK(FishingState);
         work->handler_index = (u8)(work->handler_index + 1);

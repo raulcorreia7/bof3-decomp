@@ -16,38 +16,38 @@ MATCH void func_8019CCB8(void) {
             func_8019D4BC();
             goto block_9;
         }
-        if (g_Task->param.unk_0B != 0) {
-            g_Task->direction = g_Game.members[0].facing;
-            g_Task->vx        = g_FacingOffsets[g_Task->direction].x * 2;
-            g_Task->vy        = g_FacingOffsets[g_Task->direction].y * 2;
-            g_Task->timer     = 16;
-            step              = g_Task->timer;
-            move_x            = g_Task->pos.x.fixed;
-            move_y            = g_Task->pos.y.fixed;
-            move_x += g_Task->vx * step;
-            move_y += g_Task->vy * step;
+        if (TASK(Actor)->param.unk_0B != 0) {
+            TASK(Actor)->direction = g_Game.members[0].facing;
+            TASK(Actor)->vx        = g_FacingOffsets[TASK(Actor)->direction].x * 2;
+            TASK(Actor)->vy        = g_FacingOffsets[TASK(Actor)->direction].y * 2;
+            TASK(Actor)->timer     = 16;
+            step                   = TASK(Actor)->timer;
+            move_x                 = TASK(Actor)->pos.x.fixed;
+            move_y                 = TASK(Actor)->pos.y.fixed;
+            move_x += TASK(Actor)->vx * step;
+            move_y += TASK(Actor)->vy * step;
             func_8019D4BC();
             if (func_8019D054(move_x, move_y) & BYTE_MASK) {
                 copy_dst   = (u8*)BATTLE_SCRIPT_TABLE;
-                copy_count = *g_Task->range_54.table * 0x28;
+                copy_count = *TASK(Actor)->range_54.table * 0x28;
                 copy_index = 0;
                 if (copy_count > 0) {
                     do {
-                        *copy_dst = *g_Task->script;
+                        *copy_dst = *TASK(Actor)->script;
                         copy_index += 1;
-                        g_Task->script = (u8*)g_Task->script + 1;
+                        TASK(Actor)->script = (u8*)TASK(Actor)->script + 1;
                         copy_dst += 1;
                     } while (copy_index < copy_count);
                 }
-                g_Task->script = (u8*)BATTLE_SCRIPT_TABLE; /* the same buffer */
+                TASK(Actor)->script = (u8*)BATTLE_SCRIPT_TABLE; /* the same buffer */
                 func_8019D648();
                 func_8019D9C0();
                 SND_SEPlay(EMI_SE_ID(SND_BANK_COMMON, 14));
-                g_Task->header.mode = 3;
+                TASK(Actor)->header.mode = 3;
                 goto block_9;
             }
             func_8019CEDC();
-            g_Task->header.mode += 1;
+            TASK(Actor)->header.mode += 1;
             return;
         }
         goto block_9;

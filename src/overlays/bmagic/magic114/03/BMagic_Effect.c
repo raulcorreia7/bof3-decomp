@@ -42,7 +42,7 @@ MATCH void func_801EEDA0(void) {
     g_GfxPalettePending = 1;
     SND_SEQueueSelection(EMI_SE_ID(SND_BANK_COMMON, 0));
     TASK(PartyMember)->facing = g_BattleEffectBattler->facing;
-    work                      = g_Task;
+    work                      = TASK(PartyMember);
     battler                   = g_BattleEffectBattler;
     work->pos.x.fixed         = battler->pos.x.fixed;
     work->pos.y.fixed         = battler->pos.y.fixed;
@@ -275,7 +275,7 @@ MATCH void func_801EF7FC(void) {
     Effect_RotatePosition(g_Task);
     TASK(PartyMember)->pos.x.fixed = g_BattleEffectBattler->pos.x.fixed + TASK(PartyMember)->unk_0C;
     TASK(PartyMember)->pos.y.fixed = g_BattleEffectBattler->pos.y.fixed + TASK(PartyMember)->unk_10;
-    work                           = g_Task;
+    work                           = TASK(PartyMember);
     work->pos.z.part.integer       = g_BattleEffectBattler->pos.z.part.integer + 0x200;
     work->timer                    = 0;
     work->unk_09                   = 0;
@@ -375,12 +375,12 @@ MATCH void func_801EFE70(void) {
     s32          y;
     s32          y_offset;
 
-    timer_task         = g_Task;
+    timer_task         = TASK(PartyMember);
     timer              = timer_task->unk_09 - 1;
     timer_task->unk_09 = timer;
     if (timer == 0) {
         SND_SEQueueSelection(EMI_SE_ID(SND_BANK_COMMON, 2));
-        position_task              = g_Task;
+        position_task              = TASK(PartyMember);
         x                          = g_AreaScrollTargetX;
         x_offset                   = position_task->unk_0C;
         position_task->pos.x.fixed = x + x_offset;
@@ -393,7 +393,7 @@ MATCH void func_801EFE70(void) {
         position_task->param.unk_0B = 0;
         position_task->pos.y.fixed  = y + y_offset;
         TASK(PartyMember)->unk_09   = 16;
-        clear_task                  = g_Task;
+        clear_task                  = TASK(PartyMember);
         clear_task->unk_14          = 0;
         clear_task->unk_20          = 0;
         clear_task->header.step     = clear_task->header.step + 1;
@@ -417,7 +417,7 @@ MATCH void BMagic_ApplyDamageFlags(void) {
 }
 
 MATCH void func_801EFFB0(void) {
-    PartyMember* work  = g_Task;
+    PartyMember* work  = TASK(PartyMember);
     u8           timer = work->unk_09 - 1;
     work->unk_09       = timer;
     work->unk_20 -= 5;
@@ -670,7 +670,7 @@ MATCH void func_801F0D6C(void) {
     TASK(PartyMember)->unk_2A = (TASK(PartyMember)->facing - 0x1) & 1;
     TASK(PartyMember)->unk_29 = 4;
     TASK(PartyMember)->unk_24 = 0;
-    work                      = g_Task;
+    work                      = TASK(PartyMember);
     work->unk_2B              = 0;
     work->unk_2C.value        = 0;
     TASK(PartyMember)->unk_09 = 0;
@@ -708,7 +708,7 @@ MATCH void func_801F0E90(void) {
     TASK(PartyMember)->unk_10 = 0;
     Effect_RotatePosition(g_Task);
     battler                = g_BattleEffectBattler;
-    work                   = g_Task;
+    work                   = TASK(PartyMember);
     work->pos.x.fixed      = battler->pos.x.fixed + work->unk_0C;
     work->pos.y.fixed      = battler->pos.y.fixed + work->unk_10;
     COORD_INT(work->pos.z) = COORD_INT(battler->pos.z) + 0x200;

@@ -3,7 +3,7 @@
  * area146 0x801F2E20) */
 MATCH void Area_DrawActorLightPillar(void) {
     s32    pos[3];
-    Actor* work = g_Task;
+    Actor* work = TASK(Actor);
 
     pos[0] = work->pos.x.fixed;
     pos[1] = work->pos.y.fixed;

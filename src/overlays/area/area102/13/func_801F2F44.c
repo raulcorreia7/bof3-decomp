@@ -19,9 +19,9 @@ NON_MATCHING void func_801F2F44(s32 steps) {
 
     phase   = (g_FrameCount * 4) & 7;
     step    = phase * steps;
-    x       = (COORD_INT(g_Task->pos.x) - 0x80) << 7;
-    y       = (COORD_INT(g_Task->pos.y) - 0x80) << 7;
-    height  = -(COORD_INT(g_Task->pos.z) / 2);
+    x       = (COORD_INT(TASK(Actor)->pos.x) - 0x80) << 7;
+    y       = (COORD_INT(TASK(Actor)->pos.y) - 0x80) << 7;
+    height  = -(COORD_INT(TASK(Actor)->pos.z) / 2);
     corners = g_ScratchPadVectors;
     i       = 0;
     order   = 0;
@@ -42,7 +42,7 @@ NON_MATCHING void func_801F2F44(s32 steps) {
         prim->y2 = prim->y3 = D_1F800034[1] + spread;
         order += steps;
         Area_ApplyTileToQuad((shade & 0xF80000) | AREA_CELL_QUAD_CODE, prim, 1);
-        Area_CellAddPrim(g_Task->pos.x.fixed, g_Task->pos.y.fixed, 1, sizeof(POLY_FT4));
+        Area_CellAddPrim(TASK(Actor)->pos.x.fixed, TASK(Actor)->pos.y.fixed, 1, sizeof(POLY_FT4));
     }
 }
 #else

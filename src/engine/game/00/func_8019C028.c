@@ -4,11 +4,11 @@ MATCH bool func_8019C028(void) {
     s8 slot;
     s8 other;
 
-    slot = Actor_FindInRange(g_Task->pos.x.fixed, g_Task->pos.y.fixed, 0);
+    slot = Actor_FindInRange(TASK(Actor)->pos.x.fixed, TASK(Actor)->pos.y.fixed, 0);
     if (slot != -1) {
         g_Actors[slot].interaction_flags |= ACTOR_INTERACTION_PENDING;
     } else {
-        other = Game_GetPartySize(g_Task->pos.x.fixed, g_Task->pos.y.fixed, 0);
+        other = Game_GetPartySize(TASK(Actor)->pos.x.fixed, TASK(Actor)->pos.y.fixed, 0);
         if (other == slot) {
             goto fail; /* the other slot is the same slot */
         }
@@ -16,7 +16,7 @@ MATCH bool func_8019C028(void) {
             g_Game.members[other].header.step = 1;
         }
     }
-    g_Task->header.mode = 4;
+    TASK(Actor)->header.mode = 4;
     Script_AnimStepLoop();
     Area_SetDrawMode();
     return 1;

@@ -3,19 +3,19 @@
 MATCH void func_8019EC20(void) {
     Actor* work;
 
-    work = g_Task;
+    work = TASK(Actor);
     work->pos.x.fixed += work->vx;
     work->pos.y.fixed += work->vy;
     if (FIELD(u16, MAP_BUNDLE_BASE, (COORD_INT(work->pos.y) * MEM(u8, MAP_BUNDLE_BASE) * 2 + g_AreaMapBundle.grid_offset * 4 + COORD_INT(work->pos.x) * 2)) != 0) {
         if (func_8019EEE4()) {
             func_8019EE10();
-            g_Task->clut_select = g_Game.members[0].unk_27;
+            TASK(Actor)->clut_select = g_Game.members[0].unk_27;
             Script_Select(0x4A);
             SND_SEPlay(EMI_SE_ID(SND_BANK_COMMON, 14));
-            g_Task->header.mode++;
+            TASK(Actor)->header.mode++;
             return;
         }
-        if (--g_Task->unk_0A != 0) {
+        if (--TASK(Actor)->unk_0A != 0) {
             return;
         }
     }

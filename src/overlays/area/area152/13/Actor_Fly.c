@@ -6,7 +6,7 @@ MATCH void Actor_Fly(void) {
     Actor* scratch;
     u8*    work;
 
-    scratch = g_Task;
+    scratch = TASK(Actor);
     if (scratch->param.unk_0B != 0) {
         if ((scratch->header.flags & ACTOR_FLAG_OFFSCREEN) != 0) {
             Actor_Clear();

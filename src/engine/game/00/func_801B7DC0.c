@@ -2,6 +2,6 @@
 
 MATCH void func_801B7DC0(void) {
     if (func_801C4EC4() & BYTE_MASK) {
-        g_Task->unk_04 = 3;
+        TASK(Actor)->unk_04 = 3;
     }
 }

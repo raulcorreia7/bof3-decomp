@@ -1,8 +1,8 @@
 #include "game_00.h"
 
 MATCH void func_801B876C(void) {
-    g_Task->timer                                  = 0;
-    g_Task->param.unk_0B                           = g_Task->direction;
+    TASK(Actor)->timer                             = 0;
+    TASK(Actor)->param.unk_0B                      = TASK(Actor)->direction;
     g_Game.current->u.field.counter.unsigned_value = 4;
-    g_Task->unk_03                                 = 1;
+    TASK(Actor)->unk_03                            = 1;
 }

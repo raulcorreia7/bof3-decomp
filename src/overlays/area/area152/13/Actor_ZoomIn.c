@@ -14,8 +14,8 @@ MATCH void Actor_ZoomIn(void) {
     *(s32*)(scratch + 0x40) += 0x2000;
 
     if (check[0x09] == 0) {
-        check[0x48]         = 0;
-        g_Task->header.mode = 3;
+        check[0x48]              = 0;
+        TASK(Actor)->header.mode = 3;
     }
 
     Area_AddActor();
