@@ -45,12 +45,12 @@ NON_MATCHING void func_801FCEC0(void) {
             }
             break;
         case 0x17:
-            if (g_Game.party_size == 2) {
+            if (g_PartySize == 2) {
                 g_ScriptVars[2]      = 8;
                 g_ScenarioState.step = 0x18;
                 Game_RequestAreaChange(0xA, 0x500000, 0x50000, 0x88);
                 SND_BGMPlay(7, 0x64, 8);
-            } else if (g_Game.party_size == 3) {
+            } else if (g_PartySize == 3) {
                 g_ScriptVars[2]      = 8;
                 g_ScenarioState.step = 0x18;
                 Game_RequestAreaChange(0xA, 0x510000, 0x80000, 0x89);
@@ -126,12 +126,12 @@ NON_MATCHING void func_801FCEC0(void) {
             }
             break;
         case 13:
-            if (g_Game.party_size == 2) {
+            if (g_PartySize == 2) {
                 g_ScriptVars[2]      = 8;
                 g_ScenarioState.step = 0x18;
                 Game_RequestAreaChange(0xA, 0x500000, 0x50000, 0x88);
                 SND_BGMPlay(7, 0x64, 8);
-            } else if (g_Game.party_size == 3) {
+            } else if (g_PartySize == 3) {
                 g_ScriptVars[2]      = 8;
                 g_ScenarioState.step = 0x18;
                 Game_RequestAreaChange(0xA, 0x510000, 0x80000, 0x89);
