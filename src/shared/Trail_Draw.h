@@ -17,7 +17,7 @@ MATCH void Trail_Draw(Trail* trail) {
     shade  = 0x7C;
     point  = trail->point;
     for (i = 0, next = point + 1; i < TRAIL_LENGTH - 1; point++, next++, i++) {
-        if (*(u32*)&point->screen == *(u32*)&next->screen) {
+        if (LOWU(point->screen) == LOWU(next->screen)) {
             continue;
         }
         prim = (POLY_G4*)g_GfxPrimCursor;
@@ -35,9 +35,9 @@ MATCH void Trail_Draw(Trail* trail) {
         prim->g0 = colour;
         prim->r0 = colour;
         prim->r1 = prim->g1 = prim->b1 = 0;
-        prim->b2 = shade;
-        prim->g2 = shade;
-        prim->r2 = shade;
+        prim->b2                       = shade;
+        prim->g2                       = shade;
+        prim->r2                       = shade;
         prim->r3 = prim->g3 = prim->b3 = 0;
         GFX_AddPrim(1, sizeof(POLY_G4));
         prim     = (POLY_G4*)g_GfxPrimCursor;
