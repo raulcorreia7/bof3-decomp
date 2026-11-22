@@ -36,7 +36,7 @@ MATCH void Battle_LoadEndOverlay(void) {
                     Battle_CureStatus(i, g_Game.members[i].chr.status & ~STATUS_KO);
                 }
                 Battle_CureStatus(i, g_Game.members[i].chr.status & STATUS_CURE_MASK);
-                GFX_FreePaletteFadeTarget(work);
+                GFX_PaletteFreeFadeTarget(work);
                 Battle_GetTurnCursor(i);
                 i += 1u;
             } while (i < g_Battle.party_count);

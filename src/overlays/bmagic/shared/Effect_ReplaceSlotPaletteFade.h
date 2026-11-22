@@ -15,8 +15,8 @@ MATCH void Effect_ReplaceSlotPaletteFade(void) {
     count          = g_Task->unk_09 - 1;
     g_Task->unk_09 = count;
     if (count == 0) {
-        GFX_FreePaletteFadeTarget(battler);
-        g_Task->timer  = GFX_AllocPaletteFade(battler, 0, 0, 0, 1);
+        GFX_PaletteFreeFadeTarget(battler);
+        g_Task->timer  = GFX_PaletteAllocFade(battler, 0, 0, 0, 1);
         g_Task->unk_09 = 8;
         g_Task->header.step += 1;
     }

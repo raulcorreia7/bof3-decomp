@@ -580,8 +580,7 @@ MATCH void func_801D28A4(s16 x, s16 y, u8 slot, s32 selected) {
     prim = GFX_CURSOR(TILE);
     SetTile(prim);
     setXY0(prim, x + 6, y + 0x12);
-    prim->w = 0x3C;
-    prim->h = 0x10;
+    setWH(prim, 0x3C, 0x10);
     setRGB0(prim, 0, 0, 0);
     GFX_AddPrim(GFX_LAYER_UI, sizeof(TILE));
     sel = selected;

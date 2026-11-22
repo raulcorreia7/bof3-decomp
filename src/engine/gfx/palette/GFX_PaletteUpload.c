@@ -3,7 +3,7 @@
 /* refreshes the stage palette to VRAM when the stage serial is set,
  * then clears the serial.
  */
-MATCH void GFX_UploadPalette(void) {
+MATCH void GFX_PaletteUpload(void) {
     RECT rect;
 
     setRECT(&rect, 0, STAGE_PALETTE_Y, AREA_PALETTE_COLORS, AREA_PALETTE_ROWS);

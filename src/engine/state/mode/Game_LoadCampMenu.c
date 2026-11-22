@@ -11,7 +11,7 @@ MATCH void Game_LoadCampMenu(void) {
         SYS_ThreadWait(1u);
     }
 
-    GFX_ResetPalette();
+    GFX_PaletteReset();
 
     ent = (u16*)&g_GameEntryState;
     ev  = g_GfxPalettePending;

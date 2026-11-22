@@ -14,12 +14,10 @@ NON_MATCHING void func_801F53F0(s32 radius) {
     long    depth;
     long    flag;
 
-    x                         = (g_Task->pos.x.part.integer - 0x80) << 7;
-    y                         = (g_Task->pos.y.part.integer - 0x80) << 7;
-    z                         = -((s16)Area_SampleHeight(g_Task->pos.x.fixed, g_Task->pos.y.fixed) / 2);
-    g_ScratchPadVectors[0].vx = x;
-    g_ScratchPadVectors[0].vy = y;
-    g_ScratchPadVectors[0].vz = z;
+    x = (g_Task->pos.x.part.integer - 0x80) << 7;
+    y = (g_Task->pos.y.part.integer - 0x80) << 7;
+    z = -((s16)Area_SampleHeight(g_Task->pos.x.fixed, g_Task->pos.y.fixed) / 2);
+    setVector(&g_ScratchPadVectors[0], x, y, z);
     RotTransPers(g_ScratchPadVectors, (long*)D_1F800034_U16, &depth, &flag);
 
     tpage = getTPage(TPAGE_DEPTH_8BIT, TPAGE_ABR_ADD, 320, 256);

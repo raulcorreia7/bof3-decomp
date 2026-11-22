@@ -28,7 +28,7 @@ MATCH void Party_BuildBattlers(u32 order) {
         g_BattlePartyBattlers[i].status.field.flags.unsigned_value &= 0xFE;
         if ((order & BYTE_MASK) != 0) {
             if ((g_Characters[g_Game.members[i].character_index].status & STATUS_POISONED) != 0) {
-                GFX_AllocPaletteFade((void*)g_Task, -4, -8, 0, 0);
+                GFX_PaletteAllocFade((void*)g_Task, -4, -8, 0, 0);
             }
         } else {
             func_801C3204();

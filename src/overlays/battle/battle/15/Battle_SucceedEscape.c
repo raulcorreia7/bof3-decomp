@@ -11,7 +11,7 @@ MATCH void Battle_SucceedEscape(void) {
         Area_AdvanceScroll(Area_SampleHeight(g_AreaScrollTargetX, g_AreaScrollTargetY));
         do {
             index = (count & BYTE_MASK);
-            GFX_FreePaletteFadeTarget(&g_BattleEnemyBattlers[index]);
+            GFX_PaletteFreeFadeTarget(&g_BattleEnemyBattlers[index]);
             count++;
         } while ((count & BYTE_MASK) < 8U);
         func_800ACF80();

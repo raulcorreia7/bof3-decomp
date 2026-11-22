@@ -530,8 +530,10 @@ tags build on PsyQ names and never copy, rename or forward them one-to-one.
 
 - Call the SDK and use its names directly: `CdControl(CdlSetloc, ...)`, `SpuSetKey(SPU_ON, ...)`,
   `PADLup`. No layer renames or copies an SDK value. The vendored headers in `include/psyq` stay
-  unmodified; `include/psx/psyq.h` holds the SDK names, and `setXY0` and the `gte_*` macros of
-  `include/match/gte_macros.inc` are used where the SDK provides them.
+  unmodified; `include/psx/psyq.h` holds the SDK names. Use the SDK macro wherever one exists
+  (`setXY0`, `setRGB0`, `setUV0`, `setRECT`, `setWH`, `setVector`, `getClut`, `PADstart`, the `gte_*`
+  macros of `include/match/gte_macros.inc`), never an open-coded equivalent; keep the open form only
+  where the macro changes the bytes.
 - Never a raw SDK number: `0xF000` is `PADLup | PADLright | PADLdown | PADLleft`.
 - Convenience macros sit on top of the SDK names where the game repeats something: a merged set
   (`INPUT_DIRECTIONAL`), a check (`INPUT_REPEATED`), a role the code proves (confirm, cancel). Each is at

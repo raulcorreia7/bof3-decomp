@@ -13,7 +13,7 @@ MATCH void UI_PanelOpenMaster(void) {
             return;
         case 1:
             if (EMI_IsReady() != 0) {
-                GFX_CopyPalette(2U);
+                GFX_PaletteCopy(2U);
                 func_801D0C18();
                 {
                     s8* state = &g_SceneEventStep;

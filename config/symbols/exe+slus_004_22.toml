@@ -122,9 +122,9 @@ g_InputMasks = { addr = 0x80145AB4, type = "u16", source = "Button masks of the 
 g_InputRepeatDelay = { addr = 0x80145AC6, source = "INPUT_GetRepeatedButtons reloads and decrements the repeat countdown" }
 g_InputRepeatButtons = { addr = 0x80145AC8, source = "INPUT_GetRepeatedButtons snapshots held buttons and tests them on repeat" }
 g_UiTextFormatBuffer = { addr = 0x80145AD4, source = "Buffer for formatted UI text." }
-g_PaletteFades = { addr = 0x80145BD4, type = "PaletteFade", size = 0x180, source = "Palette fade table: one PaletteFade row per fading target, claimed by GFX_AllocPaletteFade and released by GFX_FreePaletteFade." }
-g_PaletteCells = { addr = 0x80145D54, source = "The palette cell map read by GFX_FindPaletteCell and GFX_MarkPaletteCells (wiki formats/graphics.md)." }
-g_PaletteAnimations = { addr = 0x80145D94, source = "The palette animation slots GFX_StartPaletteAnimation and GFX_StepPaletteAnimation read (wiki formats/graphics.md)." }
+g_PaletteFades = { addr = 0x80145BD4, type = "PaletteFade", size = 0x180, source = "Palette fade table: one PaletteFade row per fading target, claimed by GFX_PaletteAllocFade and released by GFX_PaletteFreeFade." }
+g_PaletteCells = { addr = 0x80145D54, source = "The palette cell map read by GFX_PaletteFindCell and GFX_PaletteMarkCells (wiki formats/graphics.md)." }
+g_PaletteAnimations = { addr = 0x80145D94, source = "The palette animation slots GFX_PaletteStartAnimation and GFX_PaletteStepAnimation read (wiki formats/graphics.md)." }
 g_SysCardSoftwareIoEvent = { addr = 0x80145E14, source = "SYS_InitCard opens SwCARD EvSpIOE and save_card.c tests it" }
 g_SysCardSoftwareTimeoutEvent = { addr = 0x80145E18, source = "SYS_InitCard opens SwCARD EvSpTIMOUT and save_card.c tests it" }
 g_SysCardSoftwareNewEvent = { addr = 0x80145E1C, source = "SYS_InitCard opens SwCARD EvSpNEW and save_card.c tests it" }
@@ -379,13 +379,13 @@ Area_SelectSceneRecord = { addr = 0x8014DD3C, type = "func", source = "Finds a s
 Actor_ReadValue = { addr = 0x8014DFE8, type = "func", source = "Reads a field record value for the actor." }
 SYS_ReadCd = { addr = 0x8014E0A8, type = "func", source = "Reads sectors from the CD." }
 SYS_LoadExe = { addr = 0x8014E0FC, type = "func", source = "Loads the logo executable from the CD." }
-GFX_UploadPalette = { addr = 0x8014E22C, type = "func", source = "Uploads the palette to video memory when it changed." }
-GFX_ResetPalette = { addr = 0x8014E284, type = "func", source = "Resets the palette." }
-GFX_CopyPalette = { addr = 0x8014E3A0, type = "func", source = "Copies a palette slot." }
-GFX_ResetPaletteFades = { addr = 0x8014E3F4, type = "func", source = "Resets the palette fades." }
-GFX_FreePaletteSlot = { addr = 0x8014E484, type = "func", source = "Frees a palette slot." }
-GFX_FreePaletteSlotOwner = { addr = 0x8014E4BC, type = "func", source = "Frees the palette slots of an owner." }
-GFX_FreeAllPaletteSlots = { addr = 0x8014E528, type = "func", source = "Frees all palette slots." }
+GFX_PaletteUpload = { addr = 0x8014E22C, type = "func", source = "Uploads the palette to video memory when it changed." }
+GFX_PaletteReset = { addr = 0x8014E284, type = "func", source = "Resets the palette." }
+GFX_PaletteCopy = { addr = 0x8014E3A0, type = "func", source = "Copies a palette slot." }
+GFX_PaletteResetFades = { addr = 0x8014E3F4, type = "func", source = "Resets the palette fades." }
+GFX_PaletteFreeSlot = { addr = 0x8014E484, type = "func", source = "Frees a palette slot." }
+GFX_PaletteFreeSlotOwner = { addr = 0x8014E4BC, type = "func", source = "Frees the palette slots of an owner." }
+GFX_PaletteFreeAllSlots = { addr = 0x8014E528, type = "func", source = "Frees all palette slots." }
 GFX_ClearRect = { addr = 0x8014E564, type = "func", source = "ClearImage of one rectangle - SYS_InitRuntime - SYS_StartLogo and SYS_StartFrontend call it" }
 GFX_AddPrim = { addr = 0x8014E5A0, type = "func", source = "Adds a primitive to the ordering table." }
 INPUT_GetRepeatedButtons = { addr = 0x8014E640, type = "func", source = "Input repeat decoder." }
@@ -416,9 +416,9 @@ GFX_FadeFromWhiteSlower = { addr = 0x8014F224, type = "func", source = "Fades th
 GFX_ZoomToBlackSlower = { addr = 0x8014F24C, type = "func", source = "Screen effect 17: fades to black at the slower rate while the camera spins and pulls in." }
 GFX_FadeToBlackSlowest = { addr = 0x8014F438, type = "func", source = "Fades the screen to black at the slowest speed (scheduler thread)." }
 GFX_SpinToBlack = { addr = 0x8014F460, type = "func", source = "Screen effect 20: fades to black while the camera rolls, then clears the tint bytes." }
-GFX_RunBlackFade = { addr = 0x8014F514, type = "func", source = "Fades the screen to black." }
-GFX_RunWhiteFade = { addr = 0x8014F5F0, type = "func", source = "Fades the screen to white." }
-GFX_UpdateScreenFade = { addr = 0x8014F704, type = "func", source = "Draws one step of a screen fade." }
+GFX_FadeRunBlack = { addr = 0x8014F514, type = "func", source = "Fades the screen to black." }
+GFX_FadeRunWhite = { addr = 0x8014F5F0, type = "func", source = "Fades the screen to white." }
+GFX_FadeUpdateScreen = { addr = 0x8014F704, type = "func", source = "Draws one step of a screen fade." }
 UI_TextDraw = { addr = 0x8014F800, type = "func", source = "Draws a text record." }
 UI_TextDrawGlyphs = { addr = 0x8014F84C, type = "func", source = "Draws a text record's control bytes and glyphs through the shared sprite cursor." }
 UI_TextAddDrawMode = { addr = 0x8014FC00, type = "func", source = "Adds the draw mode used by the text and glyph renderers." }
@@ -725,7 +725,7 @@ Item_CanEquip = { addr = 0x80166904, type = "func", source = "Returns whether th
 Char_GetAbilityCost = { addr = 0x80166A10, type = "func", source = "Returns the AP cost of an ability." }
 Party_GetAbilities = { addr = 0x80166AE4, type = "func", source = "Resolves the party record a slot type points at and returns its ability panel." }
 Char_GetAbilities = { addr = 0x80166B94, type = "func", source = "Resolves the character record and returns the panel its ability-type record selects." }
-GFX_LoadPalette = { addr = 0x80166C48, type = "func", source = "Stages a palette." }
+GFX_PaletteLoad = { addr = 0x80166C48, type = "func", source = "Stages a palette." }
 Area_GetCellCode = { addr = 0x80166CB0, type = "func", source = "Returns the code of an area cell." }
 Party_ClearBattlerState = { addr = 0x80166CEC, type = "func", source = "Clears the state of a party battler." }
 Party_ResetBattlers = { addr = 0x80166D34, type = "func", source = "Resets the party battlers." }
