@@ -6,7 +6,7 @@ MATCH void func_801F3DF0(void) {
     FAKE_REG(s32, a, "a0");
     s32 v;
 
-    g_Task->timer++;
+    TASK(Actor)->timer++;
     t     = g_Task;
     timer = t->timer;
     a     = 8;
@@ -16,8 +16,8 @@ MATCH void func_801F3DF0(void) {
     }
     a = a - v;
     if (timer >= 0x10) {
-        t->timer            = 0;
-        g_Task->header.step = 2;
+        t->timer                 = 0;
+        TASK(Actor)->header.step = 2;
     }
     func_801F3F5C(0x80, 0x40, 1, -a << 4);
 }

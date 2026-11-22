@@ -5,7 +5,6 @@
  * and its data. Only this image includes the file. */
 
 #include "overlays/area/worlds/world03.h"
-#include "area/spad.h"
 
 #define D_801F4D04            (D_801F4CE8 + 0x1Cu)
 #define D_801F4D05            (D_801F4CE8 + 0x1Du)

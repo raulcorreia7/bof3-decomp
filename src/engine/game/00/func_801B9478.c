@@ -5,11 +5,11 @@ MATCH void func_801B9478(void) {
     Actor* flag_work;
     u8     countdown;
 
-    if (g_Task->timer != 0) {
+    if (TASK(Actor)->timer != 0) {
         Actor_Move();
         work        = g_Task;
         work->timer = (work->timer - 1);
-        if (g_Task->timer == 0) {
+        if (TASK(Actor)->timer == 0) {
             Actor_ClearVelocity();
         }
     }
@@ -25,8 +25,8 @@ MATCH void func_801B9478(void) {
         flag_work->header.flags = (flag_work->header.flags | ACTOR_FLAG_HIDDEN);
         return;
     }
-    work->header.flags  = (work->header.flags & ~ACTOR_FLAG_HIDDEN);
-    g_Task->header.mode = 1;
-    g_Task->header.step = 0;
-    g_Task->unk_03      = 0;
+    work->header.flags       = (work->header.flags & ~ACTOR_FLAG_HIDDEN);
+    TASK(Actor)->header.mode = 1;
+    TASK(Actor)->header.step = 0;
+    TASK(Actor)->unk_03      = 0;
 }

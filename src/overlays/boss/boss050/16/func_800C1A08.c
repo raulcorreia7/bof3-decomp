@@ -3,10 +3,10 @@
 MATCH void func_800C1A08(void) {
     PartyMember* saved;
 
-    saved                  = ((PartyMember*)g_Task);
-    ((PartyMember*)g_Task) = D_801EC2E0->target.party;
+    saved               = (TASK(PartyMember));
+    (TASK(PartyMember)) = D_801EC2E0->target.party;
     Battle_PlayEnemySE((*g_BattleCurrentEnemy->unk_E8 + 4) & HALF_MASK);
     Script_Select(2U);
-    ((PartyMember*)g_Task) = saved;
+    (TASK(PartyMember)) = saved;
     saved->header.mode += 1;
 }

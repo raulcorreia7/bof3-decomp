@@ -29,9 +29,9 @@ NON_MATCHING void func_801A3080(Actor* actor, s32 facing) {
 
     dir = type & BYTE_MASK;
     if ((work->vx + work->vy) != 0) {
-        value = (s16)(Area_HeightSample(work->pos.x.fixed + g_FacingSteps[dir].x, work->pos.y.fixed + g_FacingStepY[dir * 2]) - COORD_INT(g_Task->pos.z));
+        value = (s16)(Area_HeightSample(work->pos.x.fixed + g_FacingSteps[dir].x, work->pos.y.fixed + g_FacingStepY[dir * 2]) - COORD_INT(TASK(Actor)->pos.z));
         if (facing & 2) {
-            g_Task->unk_64 = 0;
+            TASK(Actor)->unk_64 = 0;
             if (dir != 3) {
                 value = -value;
             }
@@ -40,15 +40,15 @@ NON_MATCHING void func_801A3080(Actor* actor, s32 facing) {
             if (dir != 1) {
                 value = -value;
             }
-            angle_x        = ratan2(value, 0x80);
-            g_Task->unk_68 = 0;
+            angle_x             = ratan2(value, 0x80);
+            TASK(Actor)->unk_68 = 0;
         }
     }
 
     work = g_Task;
     if (FIELD(u8, work, 0x0Au) != 0) {
         D_80147CB9[n * 0x10]             = (s8)(FIELD(u8, work, 0x0Au) * 2);
-        D_80147CBA[n * 0x10]             = (s8)(g_Task->unk_0A * 4);
+        D_80147CBA[n * 0x10]             = (s8)(TASK(Actor)->unk_0A * 4);
         work                             = g_Task;
         FIELD(s32, D_80147CBC, n * 0x10) = (angle_x - FIELD(s32, work, 0x64u)) / (FIELD(u8, work, 0x0Au) * 2);
         FIELD(s32, D_80147CC0, n * 0x10) = (angle_y - FIELD(s32, work, 0x68u)) / (FIELD(u8, work, 0x0Au) * 2);
@@ -57,7 +57,7 @@ NON_MATCHING void func_801A3080(Actor* actor, s32 facing) {
         } else {
             angle = D_801C8424[type & BYTE_MASK];
         }
-        FIELD(s32, D_80147CC4, n * 0x10) = ((s16)angle - (g_Task->unk_6C & ANGLE_MASK)) / (g_Task->unk_0A * 4);
+        FIELD(s32, D_80147CC4, n * 0x10) = ((s16)angle - (TASK(Actor)->unk_6C & ANGLE_MASK)) / (TASK(Actor)->unk_0A * 4);
         return;
     }
 

@@ -1,14 +1,14 @@
 #include "area198_13.h"
 
 MATCH void func_801F3A68(void) {
-    g_Task->pos.x.fixed = g_Actors[g_Task->option_flags].pos.x.fixed;
-    g_Task->pos.y.fixed = g_Actors[g_Task->option_flags].pos.y.fixed;
-    g_Task->pos.z.fixed = g_Actors[g_Task->option_flags].pos.z.fixed;
-    Area_SceneSelectRecord(D_801F43D8[g_Task->unk_06].scene_record);
-    g_Task->unk_48       = 1;
-    g_Task->active_flags = 0;
-    g_Task->mirror       = 0;
-    Script_Select(D_801F43D8[g_Task->unk_06].script);
-    g_Task->header.mode = 1;
+    TASK(Actor)->pos.x.fixed = g_Actors[TASK(Actor)->option_flags].pos.x.fixed;
+    TASK(Actor)->pos.y.fixed = g_Actors[TASK(Actor)->option_flags].pos.y.fixed;
+    TASK(Actor)->pos.z.fixed = g_Actors[TASK(Actor)->option_flags].pos.z.fixed;
+    Area_SceneSelectRecord(D_801F43D8[TASK(Actor)->unk_06].scene_record);
+    TASK(Actor)->unk_48       = 1;
+    TASK(Actor)->active_flags = 0;
+    TASK(Actor)->mirror       = 0;
+    Script_Select(D_801F43D8[TASK(Actor)->unk_06].script);
+    TASK(Actor)->header.mode = 1;
     func_801F3B98();
 }

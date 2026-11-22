@@ -21,10 +21,10 @@ MATCH void func_8019DE54(void) {
         }
     }
     SND_SEPlay(EMI_SE_ID(SND_BANK_COMMON, 12));
-    if (g_Task->param.unk_0B != 0) {
+    if (TASK(Actor)->param.unk_0B != 0) {
         g_AreaCameraRefreshCount = 3;
         g_AreaCameraOffsetZ      = (g_AreaCameraOffsetZ - 0x80);
-        g_Task->header.step      = (g_Task->header.step + 1);
+        TASK(Actor)->header.step = (TASK(Actor)->header.step + 1);
         return;
     }
     Actor_Clear();

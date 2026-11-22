@@ -15,7 +15,7 @@ MATCH void func_801F4400(void) {
     func_801F4B6C();
     ACTOR_COUNT_DOWN(TASK(Actor), timer, timer);
     if (timer == 0) {
-        g_Task->timer = 16;
-        g_Task->header.mode++;
+        TASK(Actor)->timer = 16;
+        TASK(Actor)->header.mode++;
     }
 }

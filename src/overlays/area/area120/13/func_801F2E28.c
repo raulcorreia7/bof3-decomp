@@ -25,5 +25,5 @@ MATCH void func_801F2E28(void) {
         TASK_SET(previous);
         previous->timer = 2;
     }
-    g_Task->header.mode += 1;
+    TASK(Actor)->header.mode += 1;
 }

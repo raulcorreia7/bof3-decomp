@@ -6,9 +6,9 @@ MATCH void func_801F4214(void) {
     if (D_801F5818 == 0) {
         Area_ClearWorkColumn();
     }
-    g_Task->timer  = 128;
-    count          = D_801F5818 + 1;
-    D_801F5818     = count;
-    g_Task->unk_06 = count;
-    g_Task->header.mode += 1;
+    TASK(Actor)->timer  = 128;
+    count               = D_801F5818 + 1;
+    D_801F5818          = count;
+    TASK(Actor)->unk_06 = count;
+    TASK(Actor)->header.mode += 1;
 }

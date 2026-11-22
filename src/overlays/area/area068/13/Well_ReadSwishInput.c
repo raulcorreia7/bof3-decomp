@@ -45,7 +45,7 @@ MATCH void Well_ReadSwishInput(void) {
                 g_Task = work;
                 break;
         }
-        g_Task->header.mode = WELL_MODE_SWISH_DELAY;
-        g_Task->timer       = WELL_SWISH_DELAY_FRAMES;
+        TASK(Actor)->header.mode = WELL_MODE_SWISH_DELAY;
+        TASK(Actor)->timer       = WELL_SWISH_DELAY_FRAMES;
     }
 }

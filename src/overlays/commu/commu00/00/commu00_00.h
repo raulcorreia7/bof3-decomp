@@ -8,7 +8,6 @@
  * this image includes the file. */
 
 #include "shared/etc.h"
-#include "area/spad.h"
 #include <stdio.h>
 #include <string.h>
 

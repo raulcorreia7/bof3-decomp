@@ -1,10 +1,10 @@
 #include "boss013_16.h"
 
 MATCH void func_800C1A78(void) {
-    g_BattleCurrentEnemy->script = &D_800C25E4;
-    g_BattleCurrentEnemy->unk_E4 = func_800C1B14;
-    g_BattleCurrentEnemy->unk_E8 = &D_800C2610;
-    g_Task->header.mode          = 2;
+    g_BattleCurrentEnemy->script   = &D_800C25E4;
+    g_BattleCurrentEnemy->unk_E4   = func_800C1B14;
+    g_BattleCurrentEnemy->unk_E8   = &D_800C2610;
+    TASK(PartyMember)->header.mode = 2;
     if (g_Battle.encounter == 0xD) {
         g_BattleCurrentEnemy->base.max_hp  = 0xFFFF;
         g_BattleCurrentEnemy->stats.max_hp = 0xFFFF;
@@ -12,5 +12,5 @@ MATCH void func_800C1A78(void) {
     }
     Area_SceneSelectRecord(0xEF);
     Script_Select(0U);
-    g_Task->unk_2A = 1;
+    TASK(PartyMember)->unk_2A = 1;
 }

@@ -41,7 +41,7 @@ NON_MATCHING void func_801F2C6C(void) {
     }
     D_801F59E4 = tick | (frames << 8) | (phase << 15);
     if (tick >= 0xF) {
-        g_Task->header.mode++;
+        TASK(Actor)->header.mode++;
     }
 }
 #else

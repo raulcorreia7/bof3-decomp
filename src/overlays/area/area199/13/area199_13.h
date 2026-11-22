@@ -5,7 +5,6 @@
  * and its data. Only this image includes the file. */
 
 #include "overlays/area/worlds/world04.h"
-#include "area/spad.h"
 
 /* The shade fan's triangle count: one triangle per 64-unit angle step. */
 #define AREA_SHADE_FAN_SEGMENTS 64

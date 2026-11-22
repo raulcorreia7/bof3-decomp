@@ -6,18 +6,18 @@ MATCH void PlChar_StartFacingTurn(void) {
     if (g_ScenarioState.scenario_id == 15) {
         g_Game.current->u.field.mode.value = 0;
     } else {
-        to_back = g_Task->direction - FACING_RIGHT;
+        to_back = TASK(Actor)->direction - FACING_RIGHT;
         to_back = ABS(to_back);
-        to_away = g_Task->direction - FACING_DOWN;
+        to_away = TASK(Actor)->direction - FACING_DOWN;
         to_away = ABS(to_away);
         if (to_away < to_back) {
-            g_Task->param.turn_step = Actor_GetTurnStep(FACING_DOWN);
-            g_Task->unk_03          = FACING_DOWN;
+            TASK(Actor)->param.turn_step = Actor_GetTurnStep(FACING_DOWN);
+            TASK(Actor)->unk_03          = FACING_DOWN;
         } else {
-            g_Task->param.turn_step = Actor_GetTurnStep(FACING_RIGHT);
-            g_Task->unk_03          = FACING_RIGHT;
+            TASK(Actor)->param.turn_step = Actor_GetTurnStep(FACING_RIGHT);
+            TASK(Actor)->unk_03          = FACING_RIGHT;
         }
-        g_Task->timer = 2;
-        g_Task->header.step++;
+        TASK(Actor)->timer = 2;
+        TASK(Actor)->header.step++;
     }
 }

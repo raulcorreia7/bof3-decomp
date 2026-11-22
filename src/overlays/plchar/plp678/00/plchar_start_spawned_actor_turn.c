@@ -15,9 +15,9 @@ MATCH void func_801D0314(void) {
 #include "overlays/plchar/shared/PlChar_ClearModeIfSlotFree.h"
 
 MATCH void func_801D04DC(void) {
-    D_801D05C4[g_Task->unk_2C]();
+    D_801D05C4[TASK(Actor)->unk_2C]();
 }
 
 MATCH void func_801D0520(void) {
-    D_801D05D0[g_Task->unk_2C]();
+    D_801D05D0[TASK(Actor)->unk_2C]();
 }

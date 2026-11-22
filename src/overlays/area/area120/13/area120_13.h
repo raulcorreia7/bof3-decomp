@@ -6,7 +6,6 @@
 
 #include "sys/actor.h"
 #include "overlays/area/worlds/world03.h"
-#include "area/spad.h"
 
 extern u8 D_801F43B8[];
 

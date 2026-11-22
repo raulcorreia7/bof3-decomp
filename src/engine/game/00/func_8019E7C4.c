@@ -6,10 +6,10 @@ MATCH void func_8019E7C4(void) {
 
     Area_SceneSelectRecord(0x18);
 
-    g_Task->active_flags = 0;
-    g_Task->mirror       = 0;
-    g_Task->unk_2B       = (g_Task->unk_2B + 1);
-    g_Task->unk_48       = 0;
+    TASK(Actor)->active_flags = 0;
+    TASK(Actor)->mirror       = 0;
+    TASK(Actor)->unk_2B       = (TASK(Actor)->unk_2B + 1);
+    TASK(Actor)->unk_48       = 0;
 
     work                    = g_Task;
     work->tint.bytes.rgb.r  = 0;
@@ -18,8 +18,8 @@ MATCH void func_8019E7C4(void) {
     work->gravity           = -8;
     other->tint.bytes.rgb.g = 0;
 
-    g_Task->tint.bytes.rgb.b = 0;
+    TASK(Actor)->tint.bytes.rgb.b = 0;
     Script_Select(9);
 
-    g_Task->header.step = (g_Task->header.step + 1);
+    TASK(Actor)->header.step = (TASK(Actor)->header.step + 1);
 }

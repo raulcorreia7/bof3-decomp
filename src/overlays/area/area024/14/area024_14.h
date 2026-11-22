@@ -19,8 +19,6 @@
 #define WORLD00_AREA024_PTR_7AAC       MEM(volatile u8*, 0x80147AACu)
 #define WORLD00_AREA024_SCRATCH_PTR    SP_REF(volatile Actor*, 0x44u)
 
-#define g_Task                         ((volatile Actor*)g_Task)
-
 /* Per-sprite transform state at 0x800E4940 (0x18-byte stride): the halfword
  * translation base at +0x00 and the rotation angles at +0x10. */
 typedef struct AreaTransform {

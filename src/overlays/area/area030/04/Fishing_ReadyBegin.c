@@ -17,7 +17,7 @@ MATCH void Fishing_ReadyBegin(void) {
     *(u32*)(TASK(u8) + 0x18) = 0;
     *(u32*)(TASK(u8) + 0x1C) = 0;
     *(u32*)(TASK(u8) + 0x20) = 0;
-    g_Task->timer            = 0;
+    TASK(Actor)->timer       = 0;
 
     mode = (g_FishingLure && g_FishingRod) ? 0 : 6;
     func_801DDE94(mode);

@@ -77,7 +77,7 @@ MATCH u8 Script_OpsRunMotion(ScriptState* state, const u8* table, u8 value) {
                     s32  step;
 
                     counter    = (s16*)&g_ScratchPad;
-                    *counter   = COORD_INT(g_Task->pos.z);
+                    *counter   = COORD_INT(TASK(Actor)->pos.z);
                     D_1F800002 = (s16)((*(table + state->cursor + 3) << 8) | *(table + state->cursor + 4));
                     Area_SetFacingOffsetX(value);
                     step       = (0x80 / g_AreaCameraStep) * D_80143FC3;
@@ -92,9 +92,9 @@ MATCH u8 Script_OpsRunMotion(ScriptState* state, const u8* table, u8 value) {
             Actor* work;
 
             state->flags |= GAME_CURSOR_FLAG_MOVING;
-            g_Task->timer = *(table + state->cursor + 3);
-            if (g_Task->timer == 0)
-                g_Task->timer = 1;
+            TASK(Actor)->timer = *(table + state->cursor + 3);
+            if (TASK(Actor)->timer == 0)
+                TASK(Actor)->timer = 1;
             work     = g_Task;
             work->vz = ((s16)((*(table + state->cursor + 1) << 8) | *(table + state->cursor + 2)) - (s16)COORD_INT(work->pos.z)) / work->timer;
             work->vx = 0;
@@ -143,7 +143,7 @@ MATCH u8 Script_OpsRunMotion(ScriptState* state, const u8* table, u8 value) {
         case ACTOR_SCRIPT_MOTION_WAIT_SCRIPT_READY:
             if (Script_AnimStepOnce() != 0)
                 return value;
-            g_Task->option_flags |= ACTOR_OPT_WAIT_STREAM;
+            TASK(Actor)->option_flags |= ACTOR_OPT_WAIT_STREAM;
             state->cursor--;
             break;
         case ACTOR_SCRIPT_MOTION_PLAY_CUE_ON_SCRIPT: {

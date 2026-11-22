@@ -2,13 +2,13 @@
 
 /* func_801F3784 */
 MATCH void Area_RaiseHudBanner(void) {
-    g_Task->screen_y -= 0xA;
-    if ((s16)g_Task->screen_y < 0xC9) {
-        g_Task->unk_03++;
+    TASK(Actor)->screen_y -= 0xA;
+    if ((s16)TASK(Actor)->screen_y < 0xC9) {
+        TASK(Actor)->unk_03++;
     }
 
-    if ((D_801454F2 != 0 && g_Task->param.unk_0B != 0) || g_GameStateIndex == GAME_REQUEST_MESSAGE || GAME_SCRIPT_ACTIVE() != 0) {
-        g_Task->unk_03 = 3;
+    if ((D_801454F2 != 0 && TASK(Actor)->param.unk_0B != 0) || g_GameStateIndex == GAME_REQUEST_MESSAGE || GAME_SCRIPT_ACTIVE() != 0) {
+        TASK(Actor)->unk_03 = 3;
     }
-    Area_DrawHudBanner(92, g_Task->screen_y);
+    Area_DrawHudBanner(92, TASK(Actor)->screen_y);
 }

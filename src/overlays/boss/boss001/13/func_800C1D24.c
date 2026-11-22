@@ -9,14 +9,14 @@ MATCH void func_800C1D24(void) {
     timer    = *counter - 1;
     *counter = timer;
     if (timer == 0) {
-        value                    = g_Task->pos.y.fixed + COORD_HALF;
-        g_Task->pos.y.fixed      = value;
-        COORD_INT(g_Task->pos.z) = Area_HeightSample(g_Task->pos.x.fixed, value);
+        value                               = TASK(PartyMember)->pos.y.fixed + COORD_HALF;
+        TASK(PartyMember)->pos.y.fixed      = value;
+        COORD_INT(TASK(PartyMember)->pos.z) = Area_HeightSample(TASK(PartyMember)->pos.x.fixed, value);
         Area_SceneSelectRecord(0x5F);
         g_BattleCurrentEnemy->script = &D_800C21A0;
-        g_Task->unk_2A               = 0;
+        TASK(PartyMember)->unk_2A    = 0;
         Script_Select(0U);
-        g_Task->header.step += 1;
+        TASK(PartyMember)->header.step += 1;
     }
     Script_AnimStepLoop();
 }

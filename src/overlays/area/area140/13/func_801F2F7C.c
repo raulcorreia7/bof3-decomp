@@ -9,7 +9,7 @@ MATCH void func_801F2F7C(void) {
         if (g_GameStateIndex == GAME_REQUEST_IDLE) {
             SND_SEPlay(EMI_SE_ID(SND_BANK_AREA, 1));
         }
-        (g_Task)->header.step = 1;
+        TASK(Actor)->header.step = 1;
     }
     func_801F3050();
 }

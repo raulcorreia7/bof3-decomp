@@ -5,7 +5,7 @@ __asm__(".include \"include/match/macro.inc\"\n");
 #endif
 
 MATCH void func_801CE404(void) {
-    D_801CF900[g_Task->header.step]();
+    D_801CF900[TASK(Actor)->header.step]();
 }
 
 #include "overlays/plchar/shared/PlChar_StartTurn.h"
@@ -66,9 +66,9 @@ MATCH void func_801CF868(void) {
 }
 
 MATCH void func_801CF878(void) {
-    D_801CF92C[g_Task->unk_2C]();
+    D_801CF92C[TASK(Actor)->unk_2C]();
 }
 
 MATCH void func_801CF8BC(void) {
-    D_801CF938[g_Task->unk_2C]();
+    D_801CF938[TASK(Actor)->unk_2C]();
 }

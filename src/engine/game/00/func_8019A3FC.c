@@ -31,8 +31,8 @@ MATCH void func_8019A3FC(void) {
     work             = g_Task;
     work->draw_layer = 2;
 
-    if (g_Task->unk_06 == 3) {
-        g_Task->header.flags |= ACTOR_FLAG_SEMI_TRANSPARENT;
+    if (TASK(Actor)->unk_06 == 3) {
+        TASK(Actor)->header.flags |= ACTOR_FLAG_SEMI_TRANSPARENT;
         work                     = g_Task;
         work->tint.bytes.flags   = 1;
         work                     = g_Task;
@@ -42,16 +42,16 @@ MATCH void func_8019A3FC(void) {
         work                     = g_Task;
         work->timer              = 20;
     } else {
-        g_Task->tint.bytes.flags = 0;
-        ptr                      = g_Task;
-        ptr->tint.bytes.rgb.b    = 0;
-        ptr->tint.bytes.rgb.g    = 0;
-        ptr->tint.bytes.rgb.r    = 0;
-        work                     = g_Task;
-        work->timer              = 16;
+        TASK(Actor)->tint.bytes.flags = 0;
+        ptr                           = g_Task;
+        ptr->tint.bytes.rgb.b         = 0;
+        ptr->tint.bytes.rgb.g         = 0;
+        ptr->tint.bytes.rgb.r         = 0;
+        work                          = g_Task;
+        work->timer                   = 16;
     }
 
-    ((void (*)(u8, Actor*))Script_Select)(s_SceneHandlerIds[g_Task->unk_06], other);
+    ((void (*)(u8, Actor*))Script_Select)(s_SceneHandlerIds[TASK(Actor)->unk_06], other);
 
-    g_Task->header.mode = 1;
+    TASK(Actor)->header.mode = 1;
 }

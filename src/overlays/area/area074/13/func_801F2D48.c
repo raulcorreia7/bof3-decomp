@@ -8,13 +8,13 @@ MATCH void func_801F2D48(void) {
         return;
     }
     dir = g_Game.members[0].facing & 0x7;
-    if (g_Task->timer != 0) {
+    if (TASK(Actor)->timer != 0) {
         return;
     }
     if (dir != 5 && dir != 1) {
         return;
     }
-    g_Task->direction = dir;
+    TASK(Actor)->direction = dir;
     if (func_801A1AE4(g_CurrentActor)) {
         return;
     }

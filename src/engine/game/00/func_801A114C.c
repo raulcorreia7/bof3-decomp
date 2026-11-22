@@ -22,7 +22,7 @@ MATCH void func_801A114C(Actor* record) {
         if (record->unk_7B == 0) {
             if ((mode != 0) && (D_801C83BC[spad_b->header.step](record, param, 2) & BYTE_MASK)) {
                 Actor_TurnRandom(record);
-                if (g_Task->timer != 0) {
+                if (TASK(Actor)->timer != 0) {
                     timer = RANDOM_MASK(3) + 3;
                     goto block_7;
                 }
@@ -34,15 +34,15 @@ MATCH void func_801A114C(Actor* record) {
             record->unk_7B = timer;
         }
         result = func_801A2A04(record);
-        if (((result & BYTE_MASK) != GAME_NONE) && (g_Task->timer != 0) && (func_801A1A58(record) & BYTE_MASK)) {
-            spad_c              = g_Task;
-            spad_c->unk_03      = spad_c->header.mode;
-            g_Task->header.mode = 0xAU;
-            record->unk_79      = result;
-            g_Task->direction   = (saved & 0x7);
-            spad_d              = g_Task;
-            spad_d->unk_0A      = 0;
-            spad_d->timer       = 0U;
+        if (((result & BYTE_MASK) != GAME_NONE) && (TASK(Actor)->timer != 0) && (func_801A1A58(record) & BYTE_MASK)) {
+            spad_c                   = g_Task;
+            spad_c->unk_03           = spad_c->header.mode;
+            TASK(Actor)->header.mode = 0xAU;
+            record->unk_79           = result;
+            TASK(Actor)->direction   = (saved & 0x7);
+            spad_d                   = g_Task;
+            spad_d->unk_0A           = 0;
+            spad_d->timer            = 0U;
             func_801A3B7C(record);
             spad_e = g_Task;
             if (spad_e->header.mode != 0xA) {
@@ -51,8 +51,8 @@ MATCH void func_801A114C(Actor* record) {
                 goto block_14;
             }
         } else {
-            g_Task->timer     = 0U;
-            g_Task->direction = saved;
+            TASK(Actor)->timer     = 0U;
+            TASK(Actor)->direction = saved;
         block_14:
             func_801A2AE4(record, saved);
             goto block_15; /* the two paths share the exit */

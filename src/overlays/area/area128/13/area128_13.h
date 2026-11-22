@@ -6,6 +6,5 @@
 
 #include "overlays/area/worlds/world03.h"
 #include "scenario/state.h"
-#include "area/spad.h"
 
 #endif

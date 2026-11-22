@@ -26,16 +26,16 @@ MATCH bool Area_SceneSelectRecord(s32 wanted_id) {
         do {
             id = *(u16*)(D_801459F4 + i * 8);
             if (id == wanted_id) {
-                g_Task->sheet_page   = D_801459F4[i * 8 + 4];
-                g_Task->sheet_row    = D_801459F4[i * 8 + 5];
-                g_Task->clut_select  = *(u16*)(D_801459F4 + i * 8 + 2);
-                palette_offset       = id * 2;
-                g_Task->palette_8bit = D_801459F4[i * 8 + 6];
-                g_Task->unk_2C       = D_801459F4[i * 8 + 7];
-                g_Task->voice_flags.raw &= mask;
+                TASK(Actor)->sheet_page   = D_801459F4[i * 8 + 4];
+                TASK(Actor)->sheet_row    = D_801459F4[i * 8 + 5];
+                TASK(Actor)->clut_select  = *(u16*)(D_801459F4 + i * 8 + 2);
+                palette_offset            = id * 2;
+                TASK(Actor)->palette_8bit = D_801459F4[i * 8 + 6];
+                TASK(Actor)->unk_2C       = D_801459F4[i * 8 + 7];
+                TASK(Actor)->voice_flags.raw &= mask;
                 /* FAKE: non-const byte view of the flag table; a const read lets the address loads fold. */
-                g_Task->voice_flags.raw = ((u8*)g_SceneFlagPairs)[palette_offset];
-                g_Task->unk_2B          = ((u8*)g_SceneFlagPairs)[palette_offset + 1];
+                TASK(Actor)->voice_flags.raw = ((u8*)g_SceneFlagPairs)[palette_offset];
+                TASK(Actor)->unk_2B          = ((u8*)g_SceneFlagPairs)[palette_offset + 1];
                 return false;
             }
             i++;

@@ -2,8 +2,8 @@
 
 MATCH void func_801F3A14(void) {
     if (g_ScriptVars[0] == 0x2B) {
-        g_Task->timer       = 16;
-        g_Task->header.mode = 5;
+        TASK(Actor)->timer       = 16;
+        TASK(Actor)->header.mode = 5;
     }
     Area_DrawScreenTint();
     func_801F3C84();

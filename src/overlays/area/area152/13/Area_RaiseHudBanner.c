@@ -10,7 +10,7 @@ MATCH void Area_RaiseHudBanner(void) {
         scratch->unk_03++;
     }
 
-    if (D_801454F2 != 0 && g_Task->param.unk_0B != 0) {
+    if (D_801454F2 != 0 && TASK(Actor)->param.unk_0B != 0) {
         goto force;
     }
     if (g_GameStateIndex == GAME_REQUEST_MESSAGE) {
@@ -20,7 +20,7 @@ MATCH void Area_RaiseHudBanner(void) {
         goto done;
     }
 force:
-    g_Task->unk_03 = 3;
+    TASK(Actor)->unk_03 = 3;
 done:
-    Area_DrawHudBanner(92, g_Task->screen_y);
+    Area_DrawHudBanner(92, TASK(Actor)->screen_y);
 }

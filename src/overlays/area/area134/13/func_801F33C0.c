@@ -11,5 +11,5 @@ MATCH void func_801F33C0(void) {
         g_ScriptVars[1] = 0;
         ACTOR_SET_MODE(0);
     }
-    g_Task->header.step = 0;
+    TASK(Actor)->header.step = 0;
 }

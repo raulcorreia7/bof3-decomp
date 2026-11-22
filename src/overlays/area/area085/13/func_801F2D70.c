@@ -1,14 +1,14 @@
 #include "area085_13.h"
 
 MATCH void func_801F2D70(void) {
-    g_Task->timer -= 1;
-    if (g_Task->timer != 0) {
-        g_Task->tint.bytes.rgb.r -= 4;
-        g_Task->tint.bytes.rgb.g -= 4;
-        g_Task->tint.bytes.rgb.b -= 4;
+    TASK(Actor)->timer -= 1;
+    if (TASK(Actor)->timer != 0) {
+        TASK(Actor)->tint.bytes.rgb.r -= 4;
+        TASK(Actor)->tint.bytes.rgb.g -= 4;
+        TASK(Actor)->tint.bytes.rgb.b -= 4;
     } else {
-        g_Task->timer       = 12;
-        g_Task->header.mode = 3;
+        TASK(Actor)->timer       = 12;
+        TASK(Actor)->header.mode = 3;
     }
     Area_DrawScreenTint();
     func_801F2FCC();

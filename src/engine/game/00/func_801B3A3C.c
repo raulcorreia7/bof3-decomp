@@ -32,8 +32,8 @@ MATCH void func_801B3A3C(void) {
         work              = g_Task;
         work->header.mode = 0x0Cu;
     } else {
-        Script_Request(g_Task->direction);
-        g_Task->header.mode = 1u;
+        Script_Request(TASK(Actor)->direction);
+        TASK(Actor)->header.mode = 1u;
     }
     ACTOR_CLEAR_STEP();
 }

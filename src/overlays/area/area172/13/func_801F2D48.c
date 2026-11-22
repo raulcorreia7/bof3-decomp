@@ -6,6 +6,6 @@ MATCH void func_801F2D48(void) {
     work->tint.steps.delta.g = -1;
     work->tint.steps.delta.r = -1;
     func_801F2DF4(1);
-    g_Task->timer       = 4;
-    g_Task->header.mode = 4;
+    TASK(Actor)->timer       = 4;
+    TASK(Actor)->header.mode = 4;
 }

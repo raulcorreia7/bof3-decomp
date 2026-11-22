@@ -1,5 +1,4 @@
 #include "boss012_16.h"
-#include "area/spad.h"
 #include "overlays/battle/battle.h"
 
 MATCH void func_800C1C08(s32 mode) {

@@ -10,10 +10,10 @@ MATCH void func_801F3714(void) {
     *slot = 384;
     func_801F3954(1);
     *slot      = 0;
-    D_1F80003A = g_Task->timer << 3;
+    D_1F80003A = TASK(Actor)->timer << 3;
     func_801F3954(2);
-    g_Task->timer++;
-    if (g_Task->timer >= 49) {
+    TASK(Actor)->timer++;
+    if (TASK(Actor)->timer >= 49) {
         SYS_SetFlag(g_SceneEventFlags, 129);
         Area_CellSetPalette(48, 113);
         Actor_Clear();

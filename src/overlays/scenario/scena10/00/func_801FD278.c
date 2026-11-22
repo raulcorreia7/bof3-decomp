@@ -47,11 +47,11 @@ MATCH void func_801FD5C0(Actor* actor) {
 
     i = 0;
     do {
-        if (D_801FE894[i].x == COORD_INT(g_Task->pos.x) && D_801FE894[i].y == COORD_INT(g_Task->pos.y)) {
-            g_Task->param.unk_0B = D_801FE894[i].script + ITEM_PART_A;
-            strncpy(g_TextVariables[0], Item_GetRecord(ITEM_CATEGORY_ITEM, g_Task->param.unk_0B), 12);
+        if (D_801FE894[i].x == COORD_INT(TASK(Actor)->pos.x) && D_801FE894[i].y == COORD_INT(TASK(Actor)->pos.y)) {
+            TASK(Actor)->param.unk_0B = D_801FE894[i].script + ITEM_PART_A;
+            strncpy(g_TextVariables[0], Item_GetRecord(ITEM_CATEGORY_ITEM, TASK(Actor)->param.unk_0B), 12);
             g_TextVariables[0][12] = 0;
-            if (Item_Add(ITEM_CATEGORY_ITEM, g_Task->param.unk_0B, 1, 0)) {
+            if (Item_Add(ITEM_CATEGORY_ITEM, TASK(Actor)->param.unk_0B, 1, 0)) {
                 /* FAKE: retail passes the bit index unmasked, as s32. */
                 ((void (*)(void*, s32))SYS_SetFlag)(g_SceneFlags, SCENE_TRIGGER_FLAG_BASE + D_801FE894[i].flag);
                 UI_MessageRequest(MSG_SYSTEM_FOUND_ITEM);
@@ -73,12 +73,12 @@ MATCH void func_801FD734(void) {
 
     i = 0;
     do {
-        if (D_801FE894[i].x == COORD_INT(g_Task->pos.x) && D_801FE894[i].y == COORD_INT(g_Task->pos.y)) {
+        if (D_801FE894[i].x == COORD_INT(TASK(Actor)->pos.x) && D_801FE894[i].y == COORD_INT(TASK(Actor)->pos.y)) {
             if (SYS_TestFlag(g_SceneFlags, SCENE_TRIGGER_FLAG_BASE + D_801FE894[i].flag) == 0) {
                 Script_Select(D_801FE894[i].script);
-                g_Task->mirror = 0;
+                TASK(Actor)->mirror = 0;
             } else {
-                g_Task->header.flags = 0;
+                TASK(Actor)->header.flags = 0;
             }
             return;
         }
@@ -89,15 +89,15 @@ MATCH void func_801FD734(void) {
 MATCH void func_801FD814(void) {
     u8 saved_slot;
 
-    saved_slot               = g_Task->param.actor_slot;
-    g_Task->param.actor_slot = Actor_FindFreeSpawned();
-    if (g_Task->param.actor_slot != GAME_NONE) {
-        g_SpawnedActors[g_Task->param.actor_slot].header.flags = 1;
-        g_SpawnedActors[g_Task->param.actor_slot].type         = 0x5D;
-        g_SpawnedActors[g_Task->param.actor_slot].unk_06       = saved_slot;
-        g_SpawnedActors[g_Task->param.actor_slot].unk_07       = 0;
+    saved_slot                    = TASK(Actor)->param.actor_slot;
+    TASK(Actor)->param.actor_slot = Actor_FindFreeSpawned();
+    if (TASK(Actor)->param.actor_slot != GAME_NONE) {
+        g_SpawnedActors[TASK(Actor)->param.actor_slot].header.flags = 1;
+        g_SpawnedActors[TASK(Actor)->param.actor_slot].type         = 0x5D;
+        g_SpawnedActors[TASK(Actor)->param.actor_slot].unk_06       = saved_slot;
+        g_SpawnedActors[TASK(Actor)->param.actor_slot].unk_07       = 0;
     } else {
-        g_Task->param.actor_slot = saved_slot;
+        TASK(Actor)->param.actor_slot = saved_slot;
         g_ScriptState->cursor -= 2;
     }
 }

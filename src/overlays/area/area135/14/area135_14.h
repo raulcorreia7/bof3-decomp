@@ -6,7 +6,6 @@
 
 #include "sys/actor.h"
 #include "overlays/area/worlds/world03.h"
-#include "area/spad.h"
 #include "scenario/party.h"
 
 /* The fixed work record the dispatch compares the work pointer against. */

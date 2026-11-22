@@ -49,6 +49,6 @@ MATCH void Well_StepSwish(void) {
                 g_Task = work;
                 break;
         }
-        g_Task->header.mode = WELL_MODE_SWISH_INPUT;
+        TASK(Actor)->header.mode = WELL_MODE_SWISH_INPUT;
     }
 }

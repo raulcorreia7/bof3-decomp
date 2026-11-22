@@ -24,8 +24,8 @@ MATCH void func_801F6D44(void) {
     work->pos.x.fixed = 0x4000;
     work->pos.y.fixed = TO_COORD(544);
     func_801F747C();
-    g_Task->timer = 8;
-    g_Task->header.mode += 1;
+    TASK(Actor)->timer = 8;
+    TASK(Actor)->header.mode += 1;
 }
 
 MATCH void func_801F6DD4(void) {
@@ -41,9 +41,9 @@ MATCH void func_801F6DD4(void) {
     work->pos.y.fixed += 0x220000;
     func_801F75BC(fraction, 0xFF);
     func_801F7084(box);
-    if (--g_Task->timer == 0) {
-        g_Task->timer = 0x40;
-        g_Task->header.mode++;
+    if (--TASK(Actor)->timer == 0) {
+        TASK(Actor)->timer = 0x40;
+        TASK(Actor)->header.mode++;
     }
 }
 
@@ -59,8 +59,8 @@ MATCH void func_801F6EA4(void) {
     mode         = actor->timer - 1;
     actor->timer = mode;
     if (mode == 0) {
-        g_Task->timer = 4;
-        g_Task->header.mode += 1;
+        TASK(Actor)->timer = 4;
+        TASK(Actor)->header.mode += 1;
     }
 }
 
@@ -75,25 +75,25 @@ MATCH void func_801F6F2C(void) {
     work->unk_1C      = work->unk_1C + 0x4000;
     work->pos.x.fixed = work->pos.x.fixed + TO_COORD(1);
     func_801F7084(&work->vx);
-    level = g_Task->timer;
+    level = TASK(Actor)->timer;
     func_801F75BC(0x10, (level == 8) ? 0xFF : level << 5);
     actor        = g_Task;
     mode         = actor->timer - 1;
     actor->timer = mode;
     if (mode == 0) {
-        g_Task->timer = 32;
-        g_Task->header.mode += 1;
+        TASK(Actor)->timer = 32;
+        TASK(Actor)->header.mode += 1;
     }
 }
 
 MATCH void func_801F6FF8(void) {
     Actor* work;
 
-    func_801F7084((SceneBox*)&g_Task->vx);
+    func_801F7084((SceneBox*)&TASK(Actor)->vx);
     work = g_Task;
     work->timer--;
     if (work->timer == 0) {
-        g_Task->header.mode++;
+        TASK(Actor)->header.mode++;
     }
 }
 
@@ -247,8 +247,8 @@ MATCH void func_801F77EC(void) {
         i++;
     } while (i < ARRAY_COUNT(work->points));
     func_801F7FCC();
-    g_Task->vx = 512;
-    g_Task->header.mode++;
+    TASK(Actor)->vx = 512;
+    TASK(Actor)->header.mode++;
 }
 
 /* Every 16 ticks, spawn a particle from the path origin toward each path point; then follow the focus and leave on the last tick. */
@@ -260,7 +260,7 @@ MATCH void func_801F78F4(void) {
     u8             i;
 
     work = MEM_PTR(ScenePath, AREA_WORK + 0x1400);
-    if ((g_Task->vx & 0xF) == 0) {
+    if ((TASK(Actor)->vx & 0xF) == 0) {
         i = 0;
         do {
             row = (SceneParticle*)func_801F7FF8();
@@ -279,8 +279,8 @@ MATCH void func_801F78F4(void) {
     }
     setVector(&work->focus, D_80147A8C, g_AreaFocusY, D_80147A94 >> 8);
     func_801F7EC0();
-    if (--g_Task->vx == 0) {
-        g_Task->header.mode++;
+    if (--TASK(Actor)->vx == 0) {
+        TASK(Actor)->header.mode++;
     }
 }
 
@@ -354,13 +354,13 @@ MATCH void func_801F7BC0(void) {
         }
     }
     func_801F7EC0();
-    g_Task->vx = 0x40;
+    TASK(Actor)->vx = 0x40;
 }
 
 MATCH void func_801F7CA8(void) {
     func_801F7EC0();
-    g_Task->vx = g_Task->vx - 1;
-    if (g_Task->vx == 0) {
+    TASK(Actor)->vx = TASK(Actor)->vx - 1;
+    if (TASK(Actor)->vx == 0) {
         func_80196070();
     }
 }

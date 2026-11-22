@@ -13,10 +13,10 @@ NON_MATCHING void func_801F2E64(s32 phase, s32 semi_trans) {
     setWH(&window, 0x10, 0x10);
     g_GfxPrimCursor = (u8*)prim + 8;
     SetTexWindow((DR_TWIN*)((u8*)prim + 8), &window);
-    Area_CellAddPrim(g_Task->pos.x.fixed, g_Task->pos.y.fixed, 1, 0xC);
+    Area_CellAddPrim(TASK(Actor)->pos.x.fixed, TASK(Actor)->pos.y.fixed, 1, 0xC);
 
     origin = (u16)phase << 15;
-    Area_HeightSample(g_Task->pos.x.fixed - origin, g_Task->pos.y.fixed);
+    Area_HeightSample(TASK(Actor)->pos.x.fixed - origin, TASK(Actor)->pos.y.fixed);
 
     SetPolyFT4(prim);
     Camera_ProjectPoint(TASK(s32), (DVECTOR*)&prim->x0);
@@ -25,14 +25,14 @@ NON_MATCHING void func_801F2E64(s32 phase, s32 semi_trans) {
 
     prim->clut  = GetClut(0xD0, 0x1E3);
     prim->tpage = GetTPage(0, 1, 0, 0x2C0);
-    shade       = g_Task->tint.bytes.flags & 7;
+    shade       = TASK(Actor)->tint.bytes.flags & 7;
     setRGB0(prim, shade + 0x80, shade + 0x80, shade + 0x80);
-    shade = g_Task->tint.bytes.rgb.r & 7;
+    shade = TASK(Actor)->tint.bytes.rgb.r & 7;
     setUV0(prim, shade, shade);
-    setRGB0(prim, g_Task->tint.bytes.rgb.b, g_Task->tint.bytes.rgb.b, g_Task->tint.bytes.rgb.b);
+    setRGB0(prim, TASK(Actor)->tint.bytes.rgb.b, TASK(Actor)->tint.bytes.rgb.b, TASK(Actor)->tint.bytes.rgb.b);
     SetSemiTrans(prim, semi_trans & 0xFF);
     SetShadeTex(prim, 0);
-    Area_CellAddPrim(g_Task->pos.x.fixed, g_Task->pos.y.fixed, 1, sizeof(POLY_FT4));
+    Area_CellAddPrim(TASK(Actor)->pos.x.fixed, TASK(Actor)->pos.y.fixed, 1, sizeof(POLY_FT4));
 
     prim            = (POLY_FT4*)g_GfxPrimCursor;
     g_GfxPrimCursor = (u8*)prim + 8;
@@ -40,7 +40,7 @@ NON_MATCHING void func_801F2E64(s32 phase, s32 semi_trans) {
     window.y        = 0;
     setWH(&window, 0x100, 0x100);
     SetTexWindow((DR_TWIN*)((u8*)prim + 8), &window);
-    Area_CellAddPrim(g_Task->pos.x.fixed, g_Task->pos.y.fixed, 1, 0xC);
+    Area_CellAddPrim(TASK(Actor)->pos.x.fixed, TASK(Actor)->pos.y.fixed, 1, 0xC);
 }
 #else
 INCLUDE_ASM(func_801F2E64);

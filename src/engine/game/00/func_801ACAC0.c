@@ -18,15 +18,15 @@ MATCH void func_801ACAC0(void) {
     if (tint_5E != -0x80) {
         work_5E->tint.steps.delta.g = (tint_5E - 4);
     }
-    tint_5F = g_Task->tint.steps.delta.b;
+    tint_5F = TASK(Actor)->tint.steps.delta.b;
     if (tint_5F != -0x80) {
-        g_Task->tint.steps.delta.b = (tint_5F - 4);
+        TASK(Actor)->tint.steps.delta.b = (tint_5F - 4);
     }
-    if ((g_Task->tint.raw & ~0xFF) == 0x80808000) {
+    if ((TASK(Actor)->tint.raw & ~0xFF) == 0x80808000) {
         GFX_PaletteFreeFade(g_CurrentActor->unk_93);
         work_flags               = g_Task;
         work_flags->header.flags = (work_flags->header.flags | 0x40);
-        g_Task->unk_04           = 0;
+        TASK(Actor)->unk_04      = 0;
         return;
     }
     g_CurrentActor->unk_7E = (g_CurrentActor->unk_7E - 1);

@@ -5,7 +5,6 @@
  * and its data. Only this image includes the file. */
 
 #include "overlays/area/worlds/world02.h"
-#include "area/spad.h"
 
 /* D_80147A58 */
 extern Actor g_PartyActors[];

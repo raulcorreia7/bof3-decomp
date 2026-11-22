@@ -14,7 +14,7 @@ MATCH void func_801F3F08(void) {
         scratch              = g_Task;
         scratch->header.step = 1;
     }
-    if ((s16)g_Task->screen_y >= 0x80) {
+    if ((s16)TASK(Actor)->screen_y >= 0x80) {
         delta = -2;
     } else {
         delta = -1;

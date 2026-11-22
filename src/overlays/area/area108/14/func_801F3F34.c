@@ -3,7 +3,7 @@
 MATCH void func_801F3F34(void) {
     Actor* actor;
 
-    g_Task->timer++;
+    TASK(Actor)->timer++;
     actor = g_Task;
     if (actor->timer == 1) {
         Area_CellSetPalette((s16)(COORD_INT(actor->pos.x) + 1), COORD_INT(actor->pos.y));
@@ -12,7 +12,7 @@ MATCH void func_801F3F34(void) {
     if (actor->timer == 5) {
         Area_CellSetPalette(COORD_INT(actor->pos.x), COORD_INT(actor->pos.y));
     }
-    if (g_Task->timer == 15) {
+    if (TASK(Actor)->timer == 15) {
         SYS_ClearFlag(g_SceneEventFlags, 28);
         Actor_Clear();
     }

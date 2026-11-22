@@ -1,13 +1,12 @@
 #include "boss052_16.h"
-#include "area/spad.h"
 
 MATCH void func_800C18FC(void) {
     Script_Request(3);
     Script_AnimStepOnce();
     Battle_DefeatEnemy();
     g_BattleCurrentEnemy->turn.damage_flags.value |= BATTLER_DAMAGE_SKIP_ACTION_STEP;
-    g_Task->header.flags &= ~ACTOR_FLAG_HIDDEN;
+    TASK(Actor)->header.flags &= ~ACTOR_FLAG_HIDDEN;
     ACTOR_SET_MODE(3);
-    g_Task->header.step = 0;
-    g_Task->unk_03      = 0;
+    TASK(Actor)->header.step = 0;
+    TASK(Actor)->unk_03      = 0;
 }

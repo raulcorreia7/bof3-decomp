@@ -20,16 +20,16 @@ MATCH void func_801F4190(void) {
     band           = g_Task;
     band->screen_x = band->unk_32;
     if ((u32)(band->vz - 680000) <= 340000u) {
-        roll       = rand();
-        g_Task->vx = roll & 0x1000;
-        roll       = rand();
-        g_Task->vy = roll & 0x1000;
+        roll            = rand();
+        TASK(Actor)->vx = roll & 0x1000;
+        roll            = rand();
+        TASK(Actor)->vy = roll & 0x1000;
     }
-    if (g_Task->vz > 1019999) {
-        roll       = rand();
-        g_Task->vx = roll & 0x2000;
-        roll       = rand();
-        g_Task->vy = roll & 0x2000;
+    if (TASK(Actor)->vz > 1019999) {
+        roll            = rand();
+        TASK(Actor)->vx = roll & 0x2000;
+        roll            = rand();
+        TASK(Actor)->vy = roll & 0x2000;
         if (g_ScriptVars[0] == 6) {
             g_ScriptVars[0]++;
         }

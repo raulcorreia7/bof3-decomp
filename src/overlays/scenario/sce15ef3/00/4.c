@@ -9,21 +9,21 @@ __asm__(".include \"include/match/macro.inc\"\n");
 MATCH void func_801D0C48(void) {
     u8* work;
 
-    work                   = (u8*)g_Task;
+    work                   = TASK(u8);
     FIELD(s32, work, 0x34) = g_Game.members[0].pos.x.fixed;
     FIELD(s32, work, 0x38) = g_Game.members[0].pos.y.fixed;
     FIELD(s32, work, 0x3C) = D_80145ECC;
     func_801D16DC();
     func_801D19A0();
-    work    = (u8*)g_Task;
+    work    = TASK(u8);
     work[9] = 0x78;
-    work    = (u8*)g_Task;
+    work    = TASK(u8);
     work[1]++;
 }
 
 MATCH void func_801D0CC4(void) {
     if (g_AreaDrawFlags == 0) {
-        g_Task->header.mode = g_Task->header.mode + 1;
+        TASK(Actor)->header.mode = TASK(Actor)->header.mode + 1;
     } else {
         Area_StepSparkEmitters();
         func_801D18CC();
@@ -41,17 +41,17 @@ MATCH void func_801D0D38(void) {
 MATCH void func_801D0D7C(void) {
     u8* work;
 
-    work    = (u8*)g_Task;
+    work    = TASK(u8);
     work[9] = 8;
-    work    = (u8*)g_Task;
+    work    = TASK(u8);
     work[1]++;
 }
 
 MATCH void func_801D0DAC(void) {
-    Scene_DrawRedGradient(-(g_Task->timer << 5) & BYTE_MASK);
-    if (--g_Task->timer == 0) {
-        g_Task->timer = 8;
-        g_Task->header.mode += 1;
+    Scene_DrawRedGradient(-(TASK(Actor)->timer << 5) & BYTE_MASK);
+    if (--TASK(Actor)->timer == 0) {
+        TASK(Actor)->timer = 8;
+        TASK(Actor)->header.mode += 1;
     }
 }
 
@@ -66,24 +66,24 @@ MATCH void func_801D0EAC(void) {
 }
 
 MATCH void func_801D0EF0(void) {
-    g_Task->pos.x.fixed = g_Game.members[2].pos.x.fixed;
-    g_Task->pos.y.fixed = g_Game.members[2].pos.y.fixed;
-    g_Task->pos.z.fixed = TO_COORD(Area_HeightSample(g_Task->pos.x.fixed, g_Task->pos.y.fixed));
-    setVector(g_Task, g_Task->pos.x.fixed, g_Task->pos.y.fixed, g_Task->pos.z.fixed);
-    g_Task->tint.steps.delta.r = 0;
-    g_Task->tint.steps.delta.g = -0x80;
-    g_Task->timer              = 0x20;
-    g_Task->header.mode++;
+    TASK(Actor)->pos.x.fixed = g_Game.members[2].pos.x.fixed;
+    TASK(Actor)->pos.y.fixed = g_Game.members[2].pos.y.fixed;
+    TASK(Actor)->pos.z.fixed = TO_COORD(Area_HeightSample(TASK(Actor)->pos.x.fixed, TASK(Actor)->pos.y.fixed));
+    setVector(TASK(Actor), TASK(Actor)->pos.x.fixed, TASK(Actor)->pos.y.fixed, TASK(Actor)->pos.z.fixed);
+    TASK(Actor)->tint.steps.delta.r = 0;
+    TASK(Actor)->tint.steps.delta.g = -0x80;
+    TASK(Actor)->timer              = 0x20;
+    TASK(Actor)->header.mode++;
 }
 
 MATCH void func_801D0F94(void) {
     Actor* work;
 
-    work = g_Task;
+    work = TASK(Actor);
     work->pos.z.fixed += 0x800000;
     func_801D1D20(&work->pos, &work->vx, work->tint.bytes.rgb.r, work->tint.bytes.rgb.g);
     if (g_ScriptVars[0] == 0xB) {
-        g_Task->header.mode += 1;
+        TASK(Actor)->header.mode += 1;
     }
 }
 
@@ -109,59 +109,59 @@ MATCH void func_801D10AC(void) {
     s32     point[3];
     MATRIX  camera;
 
-    g_Task->pos.x.fixed = TO_COORD(24) + COORD_HALF;
-    g_Task->pos.y.fixed = TO_COORD(18);
-    g_Task->pos.z.fixed = (Area_HeightSample(g_Task->pos.x.fixed, g_Task->pos.y.fixed) << 16) + TO_COORD(0x800);
-    g_Task->screen_x    = 0x80;
-    g_Task->screen_y    = 0x180;
-    g_Task->unk_32      = 0;
-    g_Task->timer       = 8;
-    g_Task->header.mode++;
+    TASK(Actor)->pos.x.fixed = TO_COORD(24) + COORD_HALF;
+    TASK(Actor)->pos.y.fixed = TO_COORD(18);
+    TASK(Actor)->pos.z.fixed = (Area_HeightSample(TASK(Actor)->pos.x.fixed, TASK(Actor)->pos.y.fixed) << 16) + TO_COORD(0x800);
+    TASK(Actor)->screen_x    = 0x80;
+    TASK(Actor)->screen_y    = 0x180;
+    TASK(Actor)->unk_32      = 0;
+    TASK(Actor)->timer       = 8;
+    TASK(Actor)->header.mode++;
     Camera_SetMatrix(&camera);
-    point[0] = g_Task->pos.x.fixed;
-    point[1] = g_Task->pos.y.fixed;
-    point[2] = g_Task->pos.z.fixed;
+    point[0] = TASK(Actor)->pos.x.fixed;
+    point[1] = TASK(Actor)->pos.y.fixed;
+    point[2] = TASK(Actor)->pos.z.fixed;
     Camera_ProjectPoint(point, &start);
     point[2] -= TO_COORD(256);
     Camera_ProjectPoint(point, &end);
-    g_Task->unk_32 = ratan2(end.vy - start.vy, end.vx - start.vx) + 0x400;
+    TASK(Actor)->unk_32 = ratan2(end.vy - start.vy, end.vx - start.vx) + 0x400;
     SND_SEPlay(0x202);
 }
 
 MATCH void func_801D11C8(void) {
-    g_Task->pos.z.fixed += 0xFF000000;
+    TASK(Actor)->pos.z.fixed += 0xFF000000;
     Scene_SetXFixed();
-    if (--g_Task->timer == 0) {
-        g_Task->timer = 4;
-        g_Task->header.mode += 1;
+    if (--TASK(Actor)->timer == 0) {
+        TASK(Actor)->timer = 4;
+        TASK(Actor)->header.mode += 1;
     }
 }
 
 MATCH void func_801D1250(void) {
     u8 timer;
 
-    g_Task->screen_x += 64;
-    g_Task->screen_y -= 64;
+    TASK(Actor)->screen_x += 64;
+    TASK(Actor)->screen_y -= 64;
     Scene_SetXFixed();
-    timer         = g_Task->timer - 1;
-    g_Task->timer = timer;
+    timer              = TASK(Actor)->timer - 1;
+    TASK(Actor)->timer = timer;
     if (timer == 0) {
-        g_Task->timer = 2;
-        g_Task->header.mode += 1;
+        TASK(Actor)->timer = 2;
+        TASK(Actor)->header.mode += 1;
     }
 }
 
 MATCH void func_801D12E0(void) {
     u8 timer;
 
-    g_Task->screen_x -= 64;
-    g_Task->screen_y += 64;
+    TASK(Actor)->screen_x -= 64;
+    TASK(Actor)->screen_y += 64;
     Scene_SetXFixed();
-    timer         = g_Task->timer - 1;
-    g_Task->timer = timer;
+    timer              = TASK(Actor)->timer - 1;
+    TASK(Actor)->timer = timer;
     if (timer == 0) {
-        g_Task->timer = 16;
-        g_Task->header.mode += 1;
+        TASK(Actor)->timer = 16;
+        TASK(Actor)->header.mode += 1;
     }
 }
 
@@ -169,12 +169,12 @@ MATCH void func_801D1370(void) {
     Actor* work;
     u8     timer;
 
-    work           = g_Task;
+    work           = TASK(Actor);
     work->screen_x = work->screen_x - 0x10;
     work->screen_y = work->screen_y - 0x10;
     Scene_SetXFixed();
-    timer         = g_Task->timer - 1;
-    g_Task->timer = timer;
+    timer              = TASK(Actor)->timer - 1;
+    TASK(Actor)->timer = timer;
     if (timer == 0) {
         Actor_Clear();
     }
@@ -185,31 +185,31 @@ MATCH void func_801D13DC(void) {
 }
 
 MATCH void func_801D1420(void) {
-    g_Task->timer       = 0;
-    g_Task->unk_06      = 0x10;
-    g_Task->header.mode = g_Task->header.mode + 1;
+    TASK(Actor)->timer       = 0;
+    TASK(Actor)->unk_06      = 0x10;
+    TASK(Actor)->header.mode = TASK(Actor)->header.mode + 1;
 }
 
 MATCH void func_801D1460(void) {
-    g_Task->timer += 16;
-    if (g_Task->timer == 0) {
+    TASK(Actor)->timer += 16;
+    if (TASK(Actor)->timer == 0) {
         Scene_DrawRedFade(255);
-        g_Task->header.mode += 1;
+        TASK(Actor)->header.mode += 1;
     } else {
-        Scene_DrawRedFade(g_Task->timer);
+        Scene_DrawRedFade(TASK(Actor)->timer);
     }
 }
 
 MATCH void func_801D14DC(void) {
-    g_Task->timer -= 16;
+    TASK(Actor)->timer -= 16;
     if (g_AreaDrawFlags != 0) {
-        Scene_DrawRedFade(g_Task->timer);
+        Scene_DrawRedFade(TASK(Actor)->timer);
     }
-    if (g_Task->timer == 0) {
+    if (TASK(Actor)->timer == 0) {
         if (g_AreaDrawFlags == 0) {
             Actor_Clear();
         } else {
-            g_Task->header.mode--;
+            TASK(Actor)->header.mode--;
         }
     }
 }
@@ -221,17 +221,17 @@ MATCH void func_801D1588(void) {
 #include "overlays/scenario/shared/Scene_EndScan.h"
 
 MATCH void func_801D1614(void) {
-    if (g_Task->timer == 0) {
+    if (TASK(Actor)->timer == 0) {
         Scene_ClaimScanBar();
-        g_Task->timer = (rand() & 0xF) + 0x18;
+        TASK(Actor)->timer = (rand() & 0xF) + 0x18;
     } else {
-        g_Task->timer--;
+        TASK(Actor)->timer--;
     }
     if (g_AreaDrawFlags != 0) {
         Scene_UpdateScanBars(0xF0);
     }
     if (g_AreaDrawFlags == 0) {
-        g_Task->header.mode += 1;
+        TASK(Actor)->header.mode += 1;
     }
 }
 
@@ -441,12 +441,12 @@ MATCH void Scene_SetXFixed(void) {
     u16  angle;
 
     GFX_AddDitheredDrawMode(GFX_LAYER_UI, GetTPage(TPAGE_DEPTH_4BIT, TPAGE_ABR_ADD, 896, 256));
-    pos.x = g_Task->pos.x.fixed;
-    pos.y = g_Task->pos.y.fixed;
-    pos.z = g_Task->pos.z.fixed;
-    x     = g_Task->screen_x;
-    y     = g_Task->screen_y;
-    angle = g_Task->unk_32;
+    pos.x = TASK(Actor)->pos.x.fixed;
+    pos.y = TASK(Actor)->pos.y.fixed;
+    pos.z = TASK(Actor)->pos.z.fixed;
+    x     = TASK(Actor)->screen_x;
+    y     = TASK(Actor)->screen_y;
+    angle = TASK(Actor)->unk_32;
     func_801D1FF8(&pos, x, y, angle, 192, 0);
 }
 

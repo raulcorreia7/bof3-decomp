@@ -26,6 +26,6 @@ MATCH void func_801F345C(void) {
     return;
 
 reset:
-    g_Task->screen_y    = 0;
-    g_Task->header.step = 3;
+    TASK(Actor)->screen_y    = 0;
+    TASK(Actor)->header.step = 3;
 }

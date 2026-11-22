@@ -34,9 +34,9 @@ MATCH void func_801F3490(void) {
         TASK_SET(saved);
     }
     func_801F36B4(7);
-    g_Task->timer++;
-    if (g_Task->timer >= 0x1F) {
-        g_Task->timer = 0x1F;
-        g_Task->header.step++;
+    TASK(Actor)->timer++;
+    if (TASK(Actor)->timer >= 0x1F) {
+        TASK(Actor)->timer = 0x1F;
+        TASK(Actor)->header.step++;
     }
 }

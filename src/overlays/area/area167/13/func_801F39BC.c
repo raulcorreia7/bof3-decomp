@@ -4,8 +4,8 @@
 NON_MATCHING void func_801F39BC(void) {
     s32 shade;
 
-    shade = g_Task->param.unk_0B - 0x4B;
-    if (g_Task->header.step == 0) {
+    shade = TASK(Actor)->param.unk_0B - 0x4B;
+    if (TASK(Actor)->header.step == 0) {
         g_ScratchPadVectors[0].vx = shade;
     }
 }

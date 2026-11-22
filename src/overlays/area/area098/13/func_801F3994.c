@@ -5,20 +5,20 @@ MATCH void func_801F3994(void) {
     u8          timer;
     u8          i;
 
-    g_Task->unk_6C += 0xC0000;
-    g_Task->screen_x -= 6;
-    GFX_DrawColorFan(&g_Task->unk_64, (s16)g_Task->screen_x, 6);
+    TASK(Actor)->unk_6C += 0xC0000;
+    TASK(Actor)->screen_x -= 6;
+    GFX_DrawColorFan(&TASK(Actor)->unk_64, (s16)TASK(Actor)->screen_x, 6);
     ACTOR_COUNT_DOWN(TASK(Actor), timer, timer);
     if ((timer & BYTE_MASK) == 0) {
-        g_Task->timer  = 0x20;
-        g_Task->unk_06 = 0;
-        g_Task->header.mode += 1;
+        TASK(Actor)->timer  = 0x20;
+        TASK(Actor)->unk_06 = 0;
+        TASK(Actor)->header.mode += 1;
         Area_ClearWorkColumn();
-        g_Task->pos.x.fixed = g_Task->unk_64;
-        g_Task->pos.y.fixed = g_Task->unk_68;
-        g_Task->pos.z.fixed = g_Task->unk_6C;
-        spin                = MEM_PTR(SpinEffect, AREA_WORK + 0xC0);
-        i                   = 0;
+        TASK(Actor)->pos.x.fixed = TASK(Actor)->unk_64;
+        TASK(Actor)->pos.y.fixed = TASK(Actor)->unk_68;
+        TASK(Actor)->pos.z.fixed = TASK(Actor)->unk_6C;
+        spin                     = MEM_PTR(SpinEffect, AREA_WORK + 0xC0);
+        i                        = 0;
         do {
             Area_InitSpin(spin);
             i += 1;

@@ -17,8 +17,8 @@ MATCH void Area_WidenActor(void) {
     work->scale.x += 8192;
 
     if (reload->timer == 0) {
-        reload->unk_48      = 0;
-        g_Task->header.mode = 3;
+        reload->unk_48           = 0;
+        TASK(Actor)->header.mode = 3;
     }
 
     Area_AddActor();

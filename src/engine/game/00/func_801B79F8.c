@@ -1,23 +1,23 @@
 #include "game_00.h"
 
 MATCH void func_801B79F8(void) {
-    COORD_INT(g_Task->pos.z) = Area_HeightRead(g_Task->pos.x.fixed, g_Task->pos.y.fixed) - 0x200;
-    g_Task->pos.x.fixed -= g_FacingOffsets[g_Task->direction].x * ((g_Task->voice_flags.scene_flag + 1) << 5);
-    g_Task->pos.y.fixed -= g_FacingOffsets[g_Task->direction].y * ((g_Task->voice_flags.scene_flag + 1) << 5);
-    if (g_Task->direction == FACING_LEFT) {
+    COORD_INT(TASK(Actor)->pos.z) = Area_HeightRead(TASK(Actor)->pos.x.fixed, TASK(Actor)->pos.y.fixed) - 0x200;
+    TASK(Actor)->pos.x.fixed -= g_FacingOffsets[TASK(Actor)->direction].x * ((TASK(Actor)->voice_flags.scene_flag + 1) << 5);
+    TASK(Actor)->pos.y.fixed -= g_FacingOffsets[TASK(Actor)->direction].y * ((TASK(Actor)->voice_flags.scene_flag + 1) << 5);
+    if (TASK(Actor)->direction == FACING_LEFT) {
         Script_Request(0x3C);
     } else {
         Script_Request(0x3D);
     }
-    if (g_Task->unk_05 != 0) {
+    if (TASK(Actor)->unk_05 != 0) {
         Actor_SetSemiTransparent();
-        g_Task->tint.steps.delta.r = -0x80;
-        g_Task->tint.steps.delta.g = -0x80;
-        g_Task->tint.steps.delta.b = -0x80;
-        g_Task->tint.bytes.flags   = 1;
-        g_Task->header.flags &= ~ACTOR_FLAG_HIDDEN;
-        g_Task->unk_04 = 3;
+        TASK(Actor)->tint.steps.delta.r = -0x80;
+        TASK(Actor)->tint.steps.delta.g = -0x80;
+        TASK(Actor)->tint.steps.delta.b = -0x80;
+        TASK(Actor)->tint.bytes.flags   = 1;
+        TASK(Actor)->header.flags &= ~ACTOR_FLAG_HIDDEN;
+        TASK(Actor)->unk_04 = 3;
     } else {
-        g_Task->unk_04 = 4;
+        TASK(Actor)->unk_04 = 4;
     }
 }

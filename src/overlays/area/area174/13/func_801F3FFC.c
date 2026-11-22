@@ -23,9 +23,9 @@ MATCH void func_801F3FFC(void) {
     if (tint_c < -0x40) {
         scratch->tint.steps.delta.b = tint_c + 2;
     }
-    if (COORD_INT(g_Task->pos.z) == 0xA00) {
-        g_Task->header.flags &= ~0x20;
-        g_Task->tint.bytes.flags = 0;
+    if (COORD_INT(TASK(Actor)->pos.z) == 0xA00) {
+        TASK(Actor)->header.flags &= ~0x20;
+        TASK(Actor)->tint.bytes.flags = 0;
         {
             Actor* task            = g_Task;
             task->tint.bytes.rgb.b = 0;

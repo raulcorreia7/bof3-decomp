@@ -7,8 +7,8 @@ MATCH void func_801F2DA0(void) {
 
     work->timer = timer;
     COORD_INT(work->pos.z) += y;
-    if (g_Task->timer >= 16) {
-        g_Task->header.step++;
+    if (TASK(Actor)->timer >= 16) {
+        TASK(Actor)->header.step++;
         func_801F2EA8();
     }
     func_801F3274();

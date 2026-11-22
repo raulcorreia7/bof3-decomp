@@ -1,28 +1,28 @@
 #include "game_00.h"
 
 MATCH void func_801B8394(void) {
-    if (g_Task->voice_flags.scene_flag != 0) {
-        g_Task->pos.x.fixed -= g_FacingOffsets[g_Task->direction].x * 0x60;
-        g_Task->pos.y.fixed -= g_FacingOffsets[g_Task->direction].y * 0x60;
-        g_Task->unk_0A = 7;
+    if (TASK(Actor)->voice_flags.scene_flag != 0) {
+        TASK(Actor)->pos.x.fixed -= g_FacingOffsets[TASK(Actor)->direction].x * 0x60;
+        TASK(Actor)->pos.y.fixed -= g_FacingOffsets[TASK(Actor)->direction].y * 0x60;
+        TASK(Actor)->unk_0A = 7;
     } else {
-        g_Task->pos.x.fixed -= g_FacingOffsets[g_Task->direction].x * 0x40;
-        g_Task->pos.y.fixed -= g_FacingOffsets[g_Task->direction].y * 0x40;
-        g_Task->unk_0A = 5;
+        TASK(Actor)->pos.x.fixed -= g_FacingOffsets[TASK(Actor)->direction].x * 0x40;
+        TASK(Actor)->pos.y.fixed -= g_FacingOffsets[TASK(Actor)->direction].y * 0x40;
+        TASK(Actor)->unk_0A = 5;
     }
-    g_Task->timer                                  = 0;
-    COORD_INT(g_Task->pos.z)                       = Area_HeightRead(g_Task->pos.x.fixed, g_Task->pos.y.fixed);
+    TASK(Actor)->timer                             = 0;
+    COORD_INT(TASK(Actor)->pos.z)                  = Area_HeightRead(TASK(Actor)->pos.x.fixed, TASK(Actor)->pos.y.fixed);
     g_Game.current->u.field.counter.unsigned_value = 2;
-    Script_Request(g_Task->direction + 8);
-    if (g_Task->unk_05 != 0) {
+    Script_Request(TASK(Actor)->direction + 8);
+    if (TASK(Actor)->unk_05 != 0) {
         Actor_SetSemiTransparent();
-        g_Task->tint.steps.delta.r = -0x80;
-        g_Task->tint.steps.delta.g = -0x80;
-        g_Task->tint.steps.delta.b = -0x80;
-        g_Task->tint.bytes.flags   = 1;
-        g_Task->header.flags &= ~ACTOR_FLAG_HIDDEN;
-        g_Task->unk_03 = 3;
+        TASK(Actor)->tint.steps.delta.r = -0x80;
+        TASK(Actor)->tint.steps.delta.g = -0x80;
+        TASK(Actor)->tint.steps.delta.b = -0x80;
+        TASK(Actor)->tint.bytes.flags   = 1;
+        TASK(Actor)->header.flags &= ~ACTOR_FLAG_HIDDEN;
+        TASK(Actor)->unk_03 = 3;
     } else {
-        g_Task->unk_03 = 4;
+        TASK(Actor)->unk_03 = 4;
     }
 }

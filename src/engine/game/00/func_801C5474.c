@@ -10,10 +10,10 @@ MATCH s32 func_801C5474(void) {
         Script_Request(work->direction);
         Actor_ClearVelocity();
         g_Game.current->u.field.mode.unsigned_value = 0;
-        g_Task->header.mode                         = 1;
+        TASK(Actor)->header.mode                    = 1;
         ACTOR_CLEAR_STEP();
-        g_Task->unk_03 = 0;
-        g_Task->unk_04 = 0;
+        TASK(Actor)->unk_03 = 0;
+        TASK(Actor)->unk_04 = 0;
         return 1;
     }
     work->timer = (countdown - 1);

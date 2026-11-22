@@ -13,26 +13,26 @@ NON_MATCHING u8 func_801B0E44(void) {
     /* FAKE: retail's frame is 16 bytes larger than the statements need. */
     FAKE_STACK_PADS(s32, 16);
 
-    saved_dir = g_Task->direction;
+    saved_dir = TASK(Actor)->direction;
     result    = func_801B9598();
-    if ((g_Task->direction == FACING_UP_RIGHT) || (g_Task->direction == FACING_DOWN_LEFT)) {
-        g_Task->timer = 32;
+    if ((TASK(Actor)->direction == FACING_UP_RIGHT) || (TASK(Actor)->direction == FACING_DOWN_LEFT)) {
+        TASK(Actor)->timer = 32;
     } else {
-        g_Task->timer = 16;
+        TASK(Actor)->timer = 16;
     }
-    divisor       = g_RouteSpeedScale[g_Game.current->u.field.counter.unsigned_value];
-    g_Task->timer = (u8)(g_Task->timer / (u32)(divisor & BYTE_MASK));
-    if (g_Task->voice_flags.scene_flag == 0) {
-        SP_REF(s32, 0x8) = g_Task->pos.x.fixed + g_FacingOffsets[g_Task->direction].x * divisor * g_Task->timer;
-        SP_REF(s32, 0xC) = g_Task->pos.y.fixed + g_FacingOffsets[g_Task->direction].y * divisor * g_Task->timer;
+    divisor            = g_RouteSpeedScale[g_Game.current->u.field.counter.unsigned_value];
+    TASK(Actor)->timer = (u8)(TASK(Actor)->timer / (u32)(divisor & BYTE_MASK));
+    if (TASK(Actor)->voice_flags.scene_flag == 0) {
+        SP_REF(s32, 0x8) = TASK(Actor)->pos.x.fixed + g_FacingOffsets[TASK(Actor)->direction].x * divisor * TASK(Actor)->timer;
+        SP_REF(s32, 0xC) = TASK(Actor)->pos.y.fixed + g_FacingOffsets[TASK(Actor)->direction].y * divisor * TASK(Actor)->timer;
     } else {
-        SP_REF(s32, 0x8) = g_Task->pos.x.fixed + g_FacingOffsets[g_Task->direction].x * divisor * g_Task->timer * 2;
-        SP_REF(s32, 0xC) = g_Task->pos.y.fixed + g_FacingOffsets[g_Task->direction].y * divisor * g_Task->timer * 2;
+        SP_REF(s32, 0x8) = TASK(Actor)->pos.x.fixed + g_FacingOffsets[TASK(Actor)->direction].x * divisor * TASK(Actor)->timer * 2;
+        SP_REF(s32, 0xC) = TASK(Actor)->pos.y.fixed + g_FacingOffsets[TASK(Actor)->direction].y * divisor * TASK(Actor)->timer * 2;
     }
     if (g_GameStateIndex != GAME_REQUEST_SCENE_CAMERA) {
         if (((s32 (*)(s32, s32))Area_IsStepBlocked)(SP_REF(s32, 0x8), SP_REF(s32, 0xC)) != 0) {
             result = 0;
-            if (g_Task->header.mode == 2) {
+            if (TASK(Actor)->header.mode == 2) {
                 return 0xFF;
             }
         }
@@ -40,16 +40,16 @@ NON_MATCHING u8 func_801B0E44(void) {
     switch (result & BYTE_MASK) {
         case 2:
             pos2   = (s32*)&D_1F800008;
-            result = Area_HeightReadStep(*(s32*)&D_1F800008, SP_REF(s32, 0xC), g_Task->direction);
+            result = Area_HeightReadStep(*(s32*)&D_1F800008, SP_REF(s32, 0xC), TASK(Actor)->direction);
             func_801B13BC();
             if (((u8*)pos2)[-8] != 0) {
                 if (result >= 0x41) {
                     if (!(func_801A0048(SP_REF(s16, 0x4), SP_REF(s16, 0x6)) & BYTE_MASK) && (g_Task == (void*)g_Game.members)) {
                         if (Area_CellSetPalette(D_80145EC6, D_80145ECA) & BYTE_MASK) {
                             SND_SEPlay(D_801CD0F4[((u8*)pos2)[-7]]);
-                            Script_Request((g_Task->direction >> 1) + 0x10);
+                            Script_Request((TASK(Actor)->direction >> 1) + 0x10);
                         } else {
-                            Script_Request(g_Task->direction);
+                            Script_Request(TASK(Actor)->direction);
                         }
                         g_GameStateIndex = GAME_REQUEST_AREA_CHANGE;
                     }
@@ -59,7 +59,7 @@ NON_MATCHING u8 func_801B0E44(void) {
                 x = ((s16*)pos2)[-2];
                 y = ((s16*)pos2)[-1];
             } else {
-                diff = COORD_INT(g_Task->pos.z) - (s16)result;
+                diff = COORD_INT(TASK(Actor)->pos.z) - (s16)result;
                 diff = ABS(diff);
                 if (diff >= 0x81) {
                     if (!(func_801A0048(SP_REF(s16, 0x4), SP_REF(s16, 0x6)) & BYTE_MASK)) {
@@ -79,11 +79,11 @@ NON_MATCHING u8 func_801B0E44(void) {
             return 0;
         case 3:
             pos3   = (s32*)&D_1F800008;
-            result = Area_HeightReadStep(pos3[0], pos3[1], g_Task->direction);
+            result = Area_HeightReadStep(pos3[0], pos3[1], TASK(Actor)->direction);
             if (SP_REF(u8, 0x0) != 0) {
                 if (result >= 0x41) {
-                    g_AreaCameraStep  = 0;
-                    g_Task->direction = saved_dir;
+                    g_AreaCameraStep       = 0;
+                    TASK(Actor)->direction = saved_dir;
                     return 1;
                 }
                 Area_HeightRead(pos3[0], pos3[1]);

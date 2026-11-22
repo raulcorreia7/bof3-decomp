@@ -22,7 +22,7 @@ MATCH s32 func_801C4E14(void) {
     } else {
         inactive = 1;
         Script_Request(work->direction);
-        g_Task->unk_0A = 4U;
+        TASK(Actor)->unk_0A = 4U;
     }
     Script_AnimStepLoop();
     return inactive;

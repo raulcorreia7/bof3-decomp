@@ -3,7 +3,7 @@
 MATCH void func_801F3588(void) {
     Actor* actor;
 
-    g_Task->header.flags &= ~ACTOR_FLAG_SEMI_TRANSPARENT;
+    TASK(Actor)->header.flags &= ~ACTOR_FLAG_SEMI_TRANSPARENT;
     actor                   = g_Task;
     actor->tint.bytes.rgb.b = 0;
     actor->tint.bytes.rgb.g = 0;

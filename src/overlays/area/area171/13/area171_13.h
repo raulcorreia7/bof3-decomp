@@ -5,7 +5,6 @@
  * and its data. Only this image includes the file. */
 
 #include "overlays/area/worlds/world04.h"
-#include "area/spad.h"
 extern u8 D_80144CAA;
 
 /* The scratchpad cell holding this mode's work pointer. */

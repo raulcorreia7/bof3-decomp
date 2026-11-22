@@ -20,7 +20,7 @@ MATCH void func_801F4F18(void) {
     next->pos.z.fixed = work->pos.z.fixed;
     TASK_SET(work);
     func_8019F75C();
-    g_Task->unk_0A = g_Task->timer;
-    g_Task->timer  = 0;
-    g_Task->unk_04++;
+    TASK(Actor)->unk_0A = TASK(Actor)->timer;
+    TASK(Actor)->timer  = 0;
+    TASK(Actor)->unk_04++;
 }

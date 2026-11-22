@@ -4,29 +4,29 @@ MATCH void func_801B85C0(void) {
     u8  delay;
     u8* record;
 
-    if (g_Task->timer == 0) {
-        delay          = g_Task->unk_0A - 1;
-        g_Task->unk_0A = delay;
+    if (TASK(Actor)->timer == 0) {
+        delay               = TASK(Actor)->unk_0A - 1;
+        TASK(Actor)->unk_0A = delay;
         if ((delay & BYTE_MASK) == 0) {
-            if (g_Task->unk_05 == 0) {
+            if (TASK(Actor)->unk_05 == 0) {
                 g_AreaWalkFlags &= ~AREA_WALK_ENTRY_ACTIVE;
             }
             g_Game.current->u.field.counter.value = 3;
             record                                = (u8*)g_Game.current;
-            g_Task->vx                            = 0;
-            g_Task->vy                            = 0;
+            TASK(Actor)->vx                       = 0;
+            TASK(Actor)->vy                       = 0;
             record[0x12B]                         = 0;
-            g_Task->header.mode                   = 1;
+            TASK(Actor)->header.mode              = 1;
             ACTOR_CLEAR_STEP();
-            g_Task->unk_03 = 0;
-            g_Task->timer  = 0;
-            g_Task->unk_0A = 0;
-            Script_Request(g_Task->direction);
+            TASK(Actor)->unk_03 = 0;
+            TASK(Actor)->timer  = 0;
+            TASK(Actor)->unk_0A = 0;
+            Script_Request(TASK(Actor)->direction);
             return;
         }
         Area_RunWalk();
     }
-    g_Task->timer = (g_Task->timer - 1);
+    TASK(Actor)->timer = (TASK(Actor)->timer - 1);
     Actor_MovementUpdate();
     Script_AnimStepLoop();
 }

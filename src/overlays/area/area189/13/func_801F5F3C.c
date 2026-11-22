@@ -5,20 +5,20 @@
  * step the facing and set the turn parameter. */
 MATCH s32 func_801F5F3C(void) {
     if (g_PadStates[0].held & PADLup) {
-        g_Task->script_record = 1;
+        TASK(Actor)->script_record = 1;
         return 2;
     }
     if (g_PadStates[0].held & PADLright) {
-        g_Task->script_record = 2;
-        g_Task->direction     = g_Task->direction + 1;
-        g_Task->param.unk_0B  = 0xF0;
+        TASK(Actor)->script_record = 2;
+        TASK(Actor)->direction     = TASK(Actor)->direction + 1;
+        TASK(Actor)->param.unk_0B  = 0xF0;
     } else if (g_PadStates[0].held & PADLleft) {
-        g_Task->script_record = 3;
-        g_Task->direction     = g_Task->direction - 1;
-        g_Task->param.unk_0B  = 0x10;
+        TASK(Actor)->script_record = 3;
+        TASK(Actor)->direction     = TASK(Actor)->direction - 1;
+        TASK(Actor)->param.unk_0B  = 0x10;
     } else {
         return 0;
     }
-    g_Task->direction &= 0xF;
+    TASK(Actor)->direction &= 0xF;
     return 1;
 }

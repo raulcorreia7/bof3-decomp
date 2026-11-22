@@ -9,16 +9,16 @@ MATCH void func_801F34BC(void) {
     s16 y;
     u8  step;
 
-    g_Task->timer++;
-    if (g_Task->unk_06 != 0) {
-        step     = g_Task->timer;
+    TASK(Actor)->timer++;
+    if (TASK(Actor)->unk_06 != 0) {
+        step     = TASK(Actor)->timer;
         sample_w = step * 0x19;
         x        = D_801F6210 + ((0xC8 - sample_w) / 2);
         sample_h = step * 6;
         y        = D_801F6212 + ((0x30 - sample_h) >> 1);
         UI_WindowDrawBoxOutline(x, y, sample_w, sample_h);
     }
-    if (g_Task->timer == 8) {
-        g_Task->header.mode = 2;
+    if (TASK(Actor)->timer == 8) {
+        TASK(Actor)->header.mode = 2;
     }
 }

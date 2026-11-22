@@ -22,9 +22,9 @@ MATCH void func_801F745C(void) {
 
     work = g_Task;
     func_801F7660(work->pos.x.fixed, work->pos.y.fixed, work->pos.z.fixed, work->vx);
-    g_Task->vx += 16;
-    if (g_Task->vx > 1280) {
-        g_Task->header.mode += 1;
+    TASK(Actor)->vx += 16;
+    if (TASK(Actor)->vx > 1280) {
+        TASK(Actor)->header.mode += 1;
     }
 }
 

@@ -21,5 +21,5 @@ MATCH void Area_StepHudBannerDown(void) {
         work->unk_03 = 1;
     }
 
-    Area_DrawHudBanner(0x5C, g_Task->screen_y);
+    Area_DrawHudBanner(0x5C, TASK(Actor)->screen_y);
 }

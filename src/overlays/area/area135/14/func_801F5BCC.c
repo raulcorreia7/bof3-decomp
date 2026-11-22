@@ -6,11 +6,11 @@ MATCH s32 func_801F5BCC(s16 height) {
     s16 dy;
     s32 step;
 
-    dy            = height - g_Task->pos.z.part.integer;
-    step          = dy / 0x80;
-    g_Task->timer = ABS(step) * 0x10;
-    g_Task->vy    = 0;
-    g_Task->vx    = 0;
-    g_Task->vz    = dy / g_Task->timer;
-    return g_Task->vz;
+    dy                 = height - TASK(Actor)->pos.z.part.integer;
+    step               = dy / 0x80;
+    TASK(Actor)->timer = ABS(step) * 0x10;
+    TASK(Actor)->vy    = 0;
+    TASK(Actor)->vx    = 0;
+    TASK(Actor)->vz    = dy / TASK(Actor)->timer;
+    return TASK(Actor)->vz;
 }

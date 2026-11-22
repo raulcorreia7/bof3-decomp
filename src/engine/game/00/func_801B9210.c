@@ -5,44 +5,44 @@ MATCH void func_801B9210(void) {
     u8  mode;
     s32 v;
 
-    if (g_Task->tint.bytes.flags != 0) {
-        GFX_PaletteLoad((GAME_PALETTE_STAGE + (g_Task->unk_05 << 6)), 0);
-        g_Task->header.flags &= ~ACTOR_FLAG_SEMI_TRANSPARENT;
-        g_Task->tint.bytes.flags = 0;
+    if (TASK(Actor)->tint.bytes.flags != 0) {
+        GFX_PaletteLoad((GAME_PALETTE_STAGE + (TASK(Actor)->unk_05 << 6)), 0);
+        TASK(Actor)->header.flags &= ~ACTOR_FLAG_SEMI_TRANSPARENT;
+        TASK(Actor)->tint.bytes.flags = 0;
         ACTOR_CLEAR_TINT();
     }
-    g_Task->header.flags &= ~ACTOR_FLAG_HIDDEN;
-    if ((g_Task->pos.x.fixed & 0x7FFF) != 0 || (g_Task->pos.y.fixed & 0x7FFF) != 0) {
-        g_Task->pos.x.fixed      = (g_Task->pos.x.fixed + 0x4800) & ~0x7FFF;
-        g_Task->pos.y.fixed      = (g_Task->pos.y.fixed + 0x4800) & ~0x7FFF;
-        COORD_INT(g_Task->pos.z) = Area_HeightReadStep(g_Task->pos.x.fixed, g_Task->pos.y.fixed, g_Task->direction);
-        if (g_Task->unk_05 == 0) {
-            v                   = g_Task->pos.x.fixed;
+    TASK(Actor)->header.flags &= ~ACTOR_FLAG_HIDDEN;
+    if ((TASK(Actor)->pos.x.fixed & 0x7FFF) != 0 || (TASK(Actor)->pos.y.fixed & 0x7FFF) != 0) {
+        TASK(Actor)->pos.x.fixed      = (TASK(Actor)->pos.x.fixed + 0x4800) & ~0x7FFF;
+        TASK(Actor)->pos.y.fixed      = (TASK(Actor)->pos.y.fixed + 0x4800) & ~0x7FFF;
+        COORD_INT(TASK(Actor)->pos.z) = Area_HeightReadStep(TASK(Actor)->pos.x.fixed, TASK(Actor)->pos.y.fixed, TASK(Actor)->direction);
+        if (TASK(Actor)->unk_05 == 0) {
+            v                   = TASK(Actor)->pos.x.fixed;
             g_AreaScrollTargetX = v;
-            v                   = g_Task->pos.y.fixed;
+            v                   = TASK(Actor)->pos.y.fixed;
             g_AreaScrollTargetY = v;
             Area_InitMapRenderer();
         }
     }
-    saved             = g_Task->direction;
-    g_Task->direction = saved ^ 0x4;
-    mode              = func_801B9598();
+    saved                  = TASK(Actor)->direction;
+    TASK(Actor)->direction = saved ^ 0x4;
+    mode                   = func_801B9598();
     if (mode == 1 || mode == 3) {
         if ((Area_GetActorFacingStepX() << 24) != 0) {
-            g_Task->timer = 0;
+            TASK(Actor)->timer = 0;
             Actor_ClearVelocity();
         } else {
             Area_RunWalk();
-            g_Task->timer--;
+            TASK(Actor)->timer--;
             Actor_Move();
         }
     } else {
         Actor_ClearVelocity();
     }
-    Char_SetCharacterId(g_Task->param.unk_0B);
-    g_Task->direction = saved;
-    g_Task->unk_0A    = 8;
-    Script_Request(g_Task->direction);
+    Char_SetCharacterId(TASK(Actor)->param.unk_0B);
+    TASK(Actor)->direction = saved;
+    TASK(Actor)->unk_0A    = 8;
+    Script_Request(TASK(Actor)->direction);
     SND_SEPlay(EMI_SE_ID(SND_BANK_COMMON, 8));
-    g_Task->unk_03++;
+    TASK(Actor)->unk_03++;
 }

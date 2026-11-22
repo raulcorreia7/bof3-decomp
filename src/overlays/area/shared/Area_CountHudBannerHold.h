@@ -17,7 +17,7 @@ MATCH void Area_CountHudBannerHold(void) {
         }
     }
 
-    if (D_801454F2 != 0 && g_Task->param.unk_0B != 0) {
+    if (D_801454F2 != 0 && TASK(Actor)->param.unk_0B != 0) {
         goto bump;
     }
     if (g_GameStateIndex == GAME_REQUEST_MESSAGE) {
@@ -27,7 +27,7 @@ MATCH void Area_CountHudBannerHold(void) {
         goto done;
     }
 bump:
-    g_Task->unk_03++;
+    TASK(Actor)->unk_03++;
 done:
-    Area_DrawHudBanner(0x5C, g_Task->screen_y);
+    Area_DrawHudBanner(0x5C, TASK(Actor)->screen_y);
 }

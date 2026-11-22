@@ -25,7 +25,7 @@ MATCH s32 func_801FC1D0(s32 member_index) {
     g_CurrentActor = actor;
     Actor_ResetMotion();
     Area_SceneSelectRecord(0x67);
-    g_Task->header.flags = 1;
+    TASK(Actor)->header.flags = 1;
 
     task                              = g_Task;
     task->pos.x.fixed                 = COORD_HALF + g_Game.members[(u8)member_index].pos.x.fixed;
@@ -38,9 +38,9 @@ MATCH s32 func_801FC1D0(s32 member_index) {
     task2                         = g_Task;
     task2->header.mode            = 4;
     task2->pos.z.part.integer     = height;
-    g_Task->header.step           = 0;
-    g_Task->direction             = 0;
-    g_Task->unk_06                = 0;
+    TASK(Actor)->header.step      = 0;
+    TASK(Actor)->direction        = 0;
+    TASK(Actor)->unk_06           = 0;
     actor->ext.bounds.half_height = 0;
     g_Actors[actor_index].unk_77  = 2;
     g_Actors[actor_index].unk_78  = 2;
@@ -49,7 +49,7 @@ MATCH s32 func_801FC1D0(s32 member_index) {
     g_Actors[actor_index].unk_7C                = 0;
     option_flags                                = 0x88;
     Actor_SetOptionFlags(&option_flags);
-    g_Task->header.flags |= ACTOR_FLAG_SEMI_TRANSPARENT;
+    TASK(Actor)->header.flags |= ACTOR_FLAG_SEMI_TRANSPARENT;
     task3                   = g_Task;
     task3->tint.bytes.rgb.b = 0;
     task3->tint.bytes.rgb.g = 0;

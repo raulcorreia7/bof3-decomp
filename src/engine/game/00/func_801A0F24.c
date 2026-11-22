@@ -22,7 +22,7 @@ MATCH void func_801A0F24(Actor* record) {
             if (mode != 0) {
                 if (D_801C83BC[spad_b->header.step](record, param, 2) & BYTE_MASK) {
                     result = func_801A2DB4(record);
-                    if (g_Task->timer != 0) {
+                    if (TASK(Actor)->timer != 0) {
                         record->unk_7B = RANDOM_MASK(3) + 3;
                     }
                 } else {
@@ -37,13 +37,13 @@ MATCH void func_801A0F24(Actor* record) {
             record->unk_7B -= 1;
         block_8:
             if (((result & BYTE_MASK) != GAME_NONE) && (spad_c = g_Task, (spad_c->timer != 0))) {
-                spad_c->unk_03      = spad_c->header.mode;
-                g_Task->header.mode = 0xAU;
-                record->unk_79      = result & 0x7;
-                g_Task->direction   = (saved & 0x7);
-                spad_d              = g_Task;
-                spad_d->unk_0A      = 0;
-                spad_d->timer       = 0U;
+                spad_c->unk_03           = spad_c->header.mode;
+                TASK(Actor)->header.mode = 0xAU;
+                record->unk_79           = result & 0x7;
+                TASK(Actor)->direction   = (saved & 0x7);
+                spad_d                   = g_Task;
+                spad_d->unk_0A           = 0;
+                spad_d->timer            = 0U;
                 func_801A3B7C(record);
                 spad_e = g_Task;
                 if (spad_e->header.mode != 0xA) {
@@ -52,8 +52,8 @@ MATCH void func_801A0F24(Actor* record) {
                     goto block_13;
                 }
             } else {
-                g_Task->timer     = 0U;
-                g_Task->direction = saved;
+                TASK(Actor)->timer     = 0U;
+                TASK(Actor)->direction = saved;
             block_13:
                 func_801A2AE4(record, saved);
                 /* Both paths finish through the idle handler. */

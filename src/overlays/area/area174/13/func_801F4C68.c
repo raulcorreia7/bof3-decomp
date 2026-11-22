@@ -9,11 +9,11 @@ MATCH void func_801F4C68(void) {
     shade = work->tint.steps.delta.r;
     if (shade != -0x80) {
         work->tint.steps.delta.r = shade - 4;
-        g_Task->tint.bytes.rgb.g -= 4;
-        g_Task->tint.bytes.rgb.b -= 4;
+        TASK(Actor)->tint.bytes.rgb.g -= 4;
+        TASK(Actor)->tint.bytes.rgb.b -= 4;
         g_ScriptState->cursor -= 2;
     } else {
         work->header.flags |= 0x40;
-        g_Task->unk_04 = 0;
+        TASK(Actor)->unk_04 = 0;
     }
 }

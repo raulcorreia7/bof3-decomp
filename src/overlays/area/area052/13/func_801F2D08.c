@@ -12,9 +12,9 @@ MATCH void func_801F2D08(void) {
         }
         slot++;
     }
-    g_Task->unk_06 = 0;
-    g_Task->timer  = 0;
+    TASK(Actor)->unk_06 = 0;
+    TASK(Actor)->timer  = 0;
     func_801F3194();
     SND_SEPlay(EMI_SE_ID(SND_BANK_AREA, 3));
-    g_Task->header.mode++;
+    TASK(Actor)->header.mode++;
 }

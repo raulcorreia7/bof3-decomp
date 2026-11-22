@@ -8,9 +8,9 @@ MATCH void func_801F39E0(void) {
     u8  party;
     u16 cursor;
 
-    y      = (g_PartyActors[LOBU(g_Task->unk_18)].pos.y.part.integer - 177) / 2;
-    x      = (g_PartyActors[LOBU(g_Task->unk_18)].pos.x.part.integer - 11) / 2;
-    facing = g_Task->direction & 7;
+    y      = (g_PartyActors[LOBU(TASK(Actor)->unk_18)].pos.y.part.integer - 177) / 2;
+    x      = (g_PartyActors[LOBU(TASK(Actor)->unk_18)].pos.x.part.integer - 11) / 2;
+    facing = TASK(Actor)->direction & 7;
     x += D_80181B00[facing * 2];
     y += D_80181B01[facing * 2];
     if (x >= 7) {
@@ -32,6 +32,6 @@ MATCH void func_801F39E0(void) {
     party  = (g_GameState - g_Game.members) + 1;
     func_801AC768(g_ScriptState, 7, selection, party, 0xC);
     g_ScriptState->cursor              = cursor;
-    g_PartyActors[selection].direction = g_Task->direction & 7;
+    g_PartyActors[selection].direction = TASK(Actor)->direction & 7;
     g_ScriptState->cursor -= 6;
 }

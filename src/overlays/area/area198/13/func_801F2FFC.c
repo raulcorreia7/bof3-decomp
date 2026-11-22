@@ -31,10 +31,10 @@ MATCH void func_801F2FFC(void) {
             work->tint.steps.delta.b = tint_c - 1;
         }
     }
-    if (COORD_INT(g_Task->pos.z) == -0xA00) {
+    if (COORD_INT(TASK(Actor)->pos.z) == -0xA00) {
         g_ScriptVars[0]++;
     }
-    if (COORD_INT(g_Task->pos.z) >= -0xC7F) {
+    if (COORD_INT(TASK(Actor)->pos.z) >= -0xC7F) {
         g_ScriptState->cursor -= 2;
     } else {
         g_ScriptState->count = 0;

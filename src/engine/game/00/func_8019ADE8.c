@@ -13,11 +13,11 @@ MATCH void func_8019ADE8(void) {
     s32              z;
     GameRouteRequest request;
 
-    g_Task->direction = g_Game.members[0].facing & 0x7;
+    TASK(Actor)->direction = g_Game.members[0].facing & 0x7;
     Area_SceneSelectRecord(0x18);
-    g_Task->unk_48       = 0;
-    g_Task->active_flags = 0;
-    g_Task->mirror       = 0;
+    TASK(Actor)->unk_48       = 0;
+    TASK(Actor)->active_flags = 0;
+    TASK(Actor)->mirror       = 0;
     Script_Select(8);
     work                    = g_Task;
     work->pos.x.fixed       = g_Actors[work->unk_06].pos.x.fixed;
@@ -31,6 +31,6 @@ MATCH void func_8019ADE8(void) {
     work2->tint.bytes.rgb.r = 0;
     request.rate            = 3;
     request.flags           = 0;
-    Area_MoveActorRoute(&request, g_Task->direction);
+    Area_MoveActorRoute(&request, TASK(Actor)->direction);
     func_8019AF1C();
 }

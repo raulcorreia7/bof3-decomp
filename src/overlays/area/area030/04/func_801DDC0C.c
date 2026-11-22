@@ -5,6 +5,6 @@
 MATCH void func_801DDC0C(void) {
     if (D_80144125 == 0) {
         UI_ModeSet(0);
-        g_Task->unk_03 += 1;
+        TASK(Actor)->unk_03 += 1;
     }
 }

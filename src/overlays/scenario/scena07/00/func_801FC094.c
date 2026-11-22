@@ -159,11 +159,11 @@ MATCH void func_801FD000(void) {
         if (g_ScratchPad.cells.halves[0] != GAME_NONE) {
             idx = i;
             Actor_SpawnFromRecord(&D_801FDE8C[idx * 17]);
-            g_Task->pos.z.part.integer = 0xA00;
+            TASK(Actor)->pos.z.part.integer = 0xA00;
             if (D_801FDF7C[idx] != 0) {
                 g_CurrentActor->timer_75 = D_801FDF7C[idx];
-                g_Task->unk_03           = g_Task->header.mode;
-                g_Task->header.mode      = 5;
+                TASK(Actor)->unk_03      = TASK(Actor)->header.mode;
+                TASK(Actor)->header.mode = 5;
             }
         }
     }

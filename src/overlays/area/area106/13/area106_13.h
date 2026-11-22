@@ -5,7 +5,6 @@
  * and its data. Only this image includes the file. */
 
 #include "overlays/area/worlds/world02.h"
-#include "area/spad.h"
 
 #define g_CurrentActor ((u8*)g_CurrentActor)
 extern u8 D_801F3EAC[];

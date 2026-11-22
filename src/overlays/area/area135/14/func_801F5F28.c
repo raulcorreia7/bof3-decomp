@@ -11,8 +11,8 @@ NON_MATCHING void func_801F5F28(void) {
     s32   i;
     s32   byte_index;
 
-    column                = COORD_INT(g_Task->pos.x);
-    row                   = COORD_INT(g_Task->pos.y);
+    column                = COORD_INT(TASK(Actor)->pos.x);
+    row                   = COORD_INT(TASK(Actor)->pos.y);
     cell_base_row         = row;
     column_plus_one.fixed = TO_COORD(column + 1);
     i                     = 0;
@@ -21,11 +21,11 @@ NON_MATCHING void func_801F5F28(void) {
         Area_HeightSet(column, height_row, 0);
         byte_index = (u8)i;
         cell_row   = row + byte_index;
-        Area_CellSetCode(column, cell_row, (u8)(g_Task->gravity >> (byte_index * 8)));
+        Area_CellSetCode(column, cell_row, (u8)(TASK(Actor)->gravity >> (byte_index * 8)));
         i++;
         Area_HeightSet(COORD_INT(column_plus_one), height_row, 0);
         byte_index += 2;
-        Area_CellSetCode(column + 1, cell_row, (u8)(g_Task->gravity >> (byte_index * 8)));
+        Area_CellSetCode(column + 1, cell_row, (u8)(TASK(Actor)->gravity >> (byte_index * 8)));
     } while (i < 2);
 }
 #else

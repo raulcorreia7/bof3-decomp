@@ -17,6 +17,6 @@ MATCH void Area_SceneReset(void) {
     if (g_Game.input & INPUT_DIRECTIONAL) {
         func_80167428();
     } else {
-        g_Task->header.mode = 1;
+        TASK(Actor)->header.mode = 1;
     }
 }

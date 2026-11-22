@@ -23,7 +23,6 @@
 #include "menu/save.h"
 #include "common/facing.h"
 #include "slus/part.h"
-#include "area/spad.h"
 #include "menu/save_data.h"
 #include <stdio.h>
 #include "common/util.h"

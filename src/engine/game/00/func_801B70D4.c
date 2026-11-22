@@ -4,8 +4,8 @@ MATCH void func_801B70D4(void) {
     Actor* work;
     s32    delta[3];
 
-    if (g_Task->timer == 0) {
-        g_Task->active_flags |= 0x20;
+    if (TASK(Actor)->timer == 0) {
+        TASK(Actor)->active_flags |= 0x20;
         work              = g_Task;
         work->pos.x.fixed = g_PartyActors[work->unk_18].pos.x.fixed;
         work->pos.y.fixed = g_PartyActors[work->unk_18].pos.y.fixed;

@@ -25,14 +25,14 @@ MATCH void func_801F3388(void) {
         task->tint.steps.delta.g = -0x40;
         task->tint.steps.delta.r = -0x40;
     } else {
-        if (g_Task->tint.steps.delta.r != 0) {
-            g_Task->tint.steps.delta.r += 8;
+        if (TASK(Actor)->tint.steps.delta.r != 0) {
+            TASK(Actor)->tint.steps.delta.r += 8;
         }
-        if (g_Task->tint.steps.delta.g != 0) {
-            g_Task->tint.steps.delta.g += 8;
+        if (TASK(Actor)->tint.steps.delta.g != 0) {
+            TASK(Actor)->tint.steps.delta.g += 8;
         }
-        if (g_Task->tint.steps.delta.b != 0) {
-            g_Task->tint.steps.delta.b += 8;
+        if (TASK(Actor)->tint.steps.delta.b != 0) {
+            TASK(Actor)->tint.steps.delta.b += 8;
         }
     }
 }

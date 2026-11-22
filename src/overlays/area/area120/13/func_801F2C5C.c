@@ -7,6 +7,6 @@ MATCH void func_801F2C5C(void) {
     actor         = g_Task;
     actor->unk_06 = 0;
     actor->unk_32 = 0x78;
-    g_Task->header.mode++;
+    TASK(Actor)->header.mode++;
     SND_SEPlay(EMI_SE_ID(SND_BANK_AREA, 0x01));
 }

@@ -10,9 +10,9 @@ MATCH void func_801B9100(void) {
     adjustment      = work->vz - 8;
     COORD_INT(work->pos.z) += adjustment;
     work->vz = adjustment;
-    Script_Request(g_Task->direction);
-    distance = Area_HeightRead(g_Task->pos.x.fixed, g_Task->pos.y.fixed);
-    if (distance - (s16)COORD_INT(g_Task->pos.z) >= 257) {
+    Script_Request(TASK(Actor)->direction);
+    distance = Area_HeightRead(TASK(Actor)->pos.x.fixed, TASK(Actor)->pos.y.fixed);
+    if (distance - (s16)COORD_INT(TASK(Actor)->pos.z) >= 257) {
         u8* state = &g_GameStateIndex;
 
         if (*state != GAME_REQUEST_AREA_CHANGE) {

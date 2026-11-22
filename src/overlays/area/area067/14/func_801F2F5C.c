@@ -5,9 +5,9 @@ MATCH void func_801F2F5C(void) {
     s16*            row;
     u8              timer;
 
-    quad          = (AreaRippleQuad*)&g_Task->vx;
-    timer         = g_Task->timer + 1;
-    g_Task->timer = timer;
+    quad               = (AreaRippleQuad*)&TASK(Actor)->vx;
+    timer              = TASK(Actor)->timer + 1;
+    TASK(Actor)->timer = timer;
     quad->height += 64;
     quad->angle += 2;
     if (timer == 15) {
@@ -24,7 +24,7 @@ MATCH void func_801F2F5C(void) {
         }
     }
     if ((s16)quad->angle >= 0x101) {
-        g_Task->timer = 7;
-        g_Task->header.mode++;
+        TASK(Actor)->timer = 7;
+        TASK(Actor)->header.mode++;
     }
 }

@@ -88,10 +88,10 @@ NON_MATCHING void func_801BCD60(s32 target_x, s32 target_y) {
             tmp3                     = val2 + (*(g_FacingStepY + tmp0) * 2 * val6);
             FIELD(s32, tmp16, 0x38u) = tmp3;
             val0                     = Area_HeightReadStep(FIELD(s32, tmp16, 0x34u), tmp3, (u8)stack_10);
-            if (Game_TestPlacement(g_Task->pos.x.fixed, g_Task->pos.y.fixed, g_Task->voice_flags.scene_flag, val0) & 0xFF) {
+            if (Game_TestPlacement(TASK(Actor)->pos.x.fixed, TASK(Actor)->pos.y.fixed, TASK(Actor)->voice_flags.scene_flag, val0) & 0xFF) {
                 val0 = 1;
                 tmp1 = val7 - 1;
-                val5 = g_Task->pos.x.fixed;
+                val5 = TASK(Actor)->pos.x.fixed;
                 if (tmp1 > 1) {
                     val8 = tmp1;
                     val4 = val5 + TO_COORD(-1);
@@ -174,8 +174,8 @@ NON_MATCHING void func_801BCD60(s32 target_x, s32 target_y) {
             block_39:
                 if (Area_GetWidth(FIELD(s16, tmp9, 0x36u), FIELD(s16, tmp9, 0x3Au)) & BYTE_MASK) {
                     g_Game.current->status.field.flags.unsigned_value = (u8)(g_Game.current->status.field.flags.unsigned_value & 0xFE);
-                    g_Task->draw_layer                                = (u8)g_AreaDrawMode;
-                    g_Task->direction                                 = (u8)stack_10;
+                    TASK(Actor)->draw_layer                           = (u8)g_AreaDrawMode;
+                    TASK(Actor)->direction                            = (u8)stack_10;
                 } else {
                     goto block_41; /* retail branch */
                 }
@@ -186,11 +186,11 @@ NON_MATCHING void func_801BCD60(s32 target_x, s32 target_y) {
             FIELD(s32, tmp14, 0x34u) = val9;
             FIELD(s32, tmp14, 0x38u) = val2;
         }
-        tmp23                    = g_Task;
-        FIELD(s32, tmp23, 0x34u) = (s32)(FIELD(s32, tmp23, 0x34u) & ~0x7FFF);
-        tmp5                     = FIELD(s32, tmp23, 0x38u) & ~0x7FFF;
-        FIELD(s32, tmp23, 0x38u) = tmp5;
-        COORD_INT(g_Task->pos.z) = Area_HeightRead(FIELD(s32, tmp23, 0x34u), tmp5);
+        tmp23                         = g_Task;
+        FIELD(s32, tmp23, 0x34u)      = (s32)(FIELD(s32, tmp23, 0x34u) & ~0x7FFF);
+        tmp5                          = FIELD(s32, tmp23, 0x38u) & ~0x7FFF;
+        FIELD(s32, tmp23, 0x38u)      = tmp5;
+        COORD_INT(TASK(Actor)->pos.z) = Area_HeightRead(FIELD(s32, tmp23, 0x34u), tmp5);
     }
 }
 #else

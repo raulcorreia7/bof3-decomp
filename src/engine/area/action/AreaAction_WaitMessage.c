@@ -11,6 +11,6 @@ MATCH void AreaAction_WaitMessage(void) {
         }
         g_CurrentActor->interaction_flags = (g_CurrentActor->interaction_flags & ~ACTOR_INTERACTION_PENDING);
         g_GameFlags &= ~GAME_FLAG_SCRIPT_ACTIVE;
-        g_Task->unk_04 = 0;
+        TASK(Actor)->unk_04 = 0;
     }
 }

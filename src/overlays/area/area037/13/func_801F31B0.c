@@ -18,7 +18,7 @@ NON_MATCHING void func_801F31B0(void) {
             angle = j * 0x200 - 0x100;
             if ((j & 3) == 0) {
                 SetDrawMode((DR_MODE*)g_GfxPrimCursor, 0, 0, (GetGraphType() == 1 || GetGraphType() == 2) ? 0x2A5 : 0xB5, 0);
-                Area_CellAddPrim(g_Task->pos.x.fixed, g_Task->pos.y.fixed, (j >> 3) == 0, sizeof(DR_MODE));
+                Area_CellAddPrim(TASK(Actor)->pos.x.fixed, TASK(Actor)->pos.y.fixed, (j >> 3) == 0, sizeof(DR_MODE));
             }
             for (i = 0; i < 32; i++) {
                 tile = (TILE_1*)g_GfxPrimCursor;
@@ -33,7 +33,7 @@ NON_MATCHING void func_801F31B0(void) {
                 gte_ldv0(g_ScratchPadVectors);
                 gte_rtps();
                 gte_stsxy2(&tile->x0);
-                Area_CellAddPrim(g_Task->pos.x.fixed, g_Task->pos.y.fixed, (j >> 3) == 0, sizeof(TILE_1));
+                Area_CellAddPrim(TASK(Actor)->pos.x.fixed, TASK(Actor)->pos.y.fixed, (j >> 3) == 0, sizeof(TILE_1));
             }
         }
     }

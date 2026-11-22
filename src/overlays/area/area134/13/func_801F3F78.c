@@ -25,8 +25,8 @@ MATCH void func_801F3F78(void) {
     }
     TASK_SET(actor);
     if (*state == 0) {
-        g_Task->timer       = D_801F5724[0x10 + (RANDOM_MASK(0xF))];
-        g_Task->header.mode = 3;
+        TASK(Actor)->timer       = D_801F5724[0x10 + (RANDOM_MASK(0xF))];
+        TASK(Actor)->header.mode = 3;
         return;
     }
     if (g_PadStates[0].held == (PADLup | PADLright) || g_PadStates[0].held == (PADLright | PADLdown) || g_PadStates[0].held == PADLright) {

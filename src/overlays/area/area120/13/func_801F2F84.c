@@ -8,6 +8,6 @@ MATCH void func_801F2F84(void) {
     if (actor->timer == 0) {
         setRECT(&rect, 832, 256, D_801F43BC, D_801F43BE);
         StoreImage(&rect, (u32*)AREA_WORK);
-        g_Task->header.mode++;
+        TASK(Actor)->header.mode++;
     }
 }

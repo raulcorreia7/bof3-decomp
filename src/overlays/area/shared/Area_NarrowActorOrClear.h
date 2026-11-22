@@ -19,8 +19,8 @@ MATCH void Area_NarrowActorOrClear(void) {
             Actor_Clear();
             return;
         }
-        check->unk_48       = 0;
-        g_Task->header.mode = 1;
+        check->unk_48            = 0;
+        TASK(Actor)->header.mode = 1;
         return;
     }
 

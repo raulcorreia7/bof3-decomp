@@ -9,5 +9,5 @@ MATCH void func_801B00F8(void) {
         D_80146256 = countdown - 1;
     }
     func_801BDBC4();
-    D_801CD0AC[g_Task->header.mode]();
+    D_801CD0AC[TASK(Actor)->header.mode]();
 }

@@ -22,12 +22,12 @@ MATCH void func_801F2D0C(void) {
     if (tuneC != -0x80) {
         spad2->tint.steps.delta.b = (tuneC - 2);
     }
-    g_Task->scale.x += 2048;
-    g_Task->scale.y += 2048;
-    if ((g_Task->tint.raw & ~0xFF) == 0x80808000) {
+    TASK(Actor)->scale.x += 2048;
+    TASK(Actor)->scale.y += 2048;
+    if ((TASK(Actor)->tint.raw & ~0xFF) == 0x80808000) {
         GFX_PaletteFreeFade(g_CurrentActor->unk_93);
-        g_Task->header.flags |= 0x40;
-        g_Task->unk_04 = 0;
+        TASK(Actor)->header.flags |= 0x40;
+        TASK(Actor)->unk_04 = 0;
     } else {
         g_CurrentActor->unk_7E -= 2;
     }

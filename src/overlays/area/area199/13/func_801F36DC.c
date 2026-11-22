@@ -11,12 +11,12 @@ NON_MATCHING void func_801F36DC(void) {
 
     GFX_ADD_DITHERED_DRAW_MODE(4, getTPage(1, 1, 320, 256));
 
-    if (g_Task->timer < 0xFF) {
-        g_Task->timer++;
+    if (TASK(Actor)->timer < 0xFF) {
+        TASK(Actor)->timer++;
     }
 
     radius = 0x20;
-    age    = g_Task->timer;
+    age    = TASK(Actor)->timer;
     if (age >= 0x15) {
         radius += (age - 0x14) * 20;
     }
@@ -26,7 +26,7 @@ NON_MATCHING void func_801F36DC(void) {
         draw_radius = 0x1F4;
     }
 
-    age = g_Task->timer;
+    age = TASK(Actor)->timer;
     if (age >= 0x15) {
         shade = 0x80 + (age - 0x14) * 12;
     } else {
@@ -37,9 +37,9 @@ NON_MATCHING void func_801F36DC(void) {
     } else {
         draw_shade = 0xFF;
     }
-    func_801F3EA0(0x82, g_Task->timer + 0xA, draw_radius, draw_shade);
+    func_801F3EA0(0x82, TASK(Actor)->timer + 0xA, draw_radius, draw_shade);
 
-    radius = g_Task->timer * 12;
+    radius = TASK(Actor)->timer * 12;
     if (radius < 0x31) {
         draw_radius = radius;
     } else {
@@ -47,27 +47,27 @@ NON_MATCHING void func_801F36DC(void) {
     }
 
     shade = rsin(0x100);
-    x     = 0x82 + shade * (0x10E - g_Task->timer * 9) / ONE;
+    x     = 0x82 + shade * (0x10E - TASK(Actor)->timer * 9) / ONE;
     shade = rcos(0x100);
-    shade = g_Task->timer + 0xA + shade * (0x10E - g_Task->timer * 9) / ONE;
+    shade = TASK(Actor)->timer + 0xA + shade * (0x10E - TASK(Actor)->timer * 9) / ONE;
     func_801F3AB0(x, shade, 0x40, draw_radius);
 
     shade = rsin(0x100);
-    x     = 0x82 + shade * (0xF0 - g_Task->timer * 8) / ONE;
+    x     = 0x82 + shade * (0xF0 - TASK(Actor)->timer * 8) / ONE;
     shade = rcos(0x100);
-    shade = g_Task->timer + 0xA + shade * (0xF0 - g_Task->timer * 8) / ONE;
+    shade = TASK(Actor)->timer + 0xA + shade * (0xF0 - TASK(Actor)->timer * 8) / ONE;
     func_801F3AB0(x, shade, 0x20, draw_radius);
 
     shade = rsin(0x100);
-    x     = 0x82 + shade * (0xB4 - g_Task->timer * 6) / ONE;
+    x     = 0x82 + shade * (0xB4 - TASK(Actor)->timer * 6) / ONE;
     shade = rcos(0x100);
-    shade = g_Task->timer + 0xA + shade * (0xB4 - g_Task->timer * 6) / ONE;
+    shade = TASK(Actor)->timer + 0xA + shade * (0xB4 - TASK(Actor)->timer * 6) / ONE;
     func_801F3AB0(x, shade, 8, draw_radius);
 
     shade = rsin(0x100);
-    x     = 0x82 + shade * (0x78 - g_Task->timer * 4) / ONE;
+    x     = 0x82 + shade * (0x78 - TASK(Actor)->timer * 4) / ONE;
     shade = rcos(0x100);
-    shade = g_Task->timer + 0xA + shade * (0x78 - g_Task->timer * 4) / ONE;
+    shade = TASK(Actor)->timer + 0xA + shade * (0x78 - TASK(Actor)->timer * 4) / ONE;
     func_801F3AB0(x, shade, 0x10, draw_radius);
 }
 #else

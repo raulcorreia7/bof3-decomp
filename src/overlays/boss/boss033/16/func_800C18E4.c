@@ -1,7 +1,5 @@
 #include "boss033_16.h"
 
-#define g_Task ((PartyMember*)g_Task)
-
 MATCH void func_800C18E4(void) {
     u32    slot;
     s32    enemy;
@@ -30,8 +28,8 @@ MATCH void func_800C18E4(void) {
     g_BattleEffects[slot & BYTE_MASK].unk_04       = 0;
     g_BattleEffects[slot & BYTE_MASK].unk_0B       = slot;
     g_BattleEffects[slot & BYTE_MASK].target.party = g_Task;
-    g_Task->unk_09                                 = slot;
-    g_Task->timer                                  = 16;
-    g_Task->header.flags |= 0x40;
-    g_Task->header.step++;
+    TASK(PartyMember)->unk_09                      = slot;
+    TASK(PartyMember)->timer                       = 16;
+    TASK(PartyMember)->header.flags |= 0x40;
+    TASK(PartyMember)->header.step++;
 }

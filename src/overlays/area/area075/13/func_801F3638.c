@@ -3,5 +3,5 @@
 MATCH void func_801F3638(void) {
     SND_SEQueueSelection(0x200);
     g_ScriptState->cursor -= 2;
-    g_Task->unk_04 = 1;
+    TASK(Actor)->unk_04 = 1;
 }

@@ -5,7 +5,7 @@ MATCH void func_801F2C84(void) {
     u8     shade;
     u8     step;
 
-    g_Task->timer -= 1;
+    TASK(Actor)->timer -= 1;
     work = g_Task;
     step = work->timer;
     if (step != 0) {

@@ -15,14 +15,14 @@
     work->vx = x;                                                                                            \
     work->vy = y;                                                                                            \
     if ((Area_CellGetCode(x, y) & BYTE_MASK) == 0xA1) {                                                      \
-        g_Task->param.unk_0B = 1;                                                                            \
+        TASK(Actor)->param.unk_0B = 1;                                                                       \
     } else if ((Area_CellGetCode(x, y) & BYTE_MASK) == 0xA0) {                                               \
-        g_Task->param.unk_0B = 2;                                                                            \
+        TASK(Actor)->param.unk_0B = 2;                                                                       \
     } else if ((Area_CellGetCode(x, y) & BYTE_MASK) == 0xAE) {                                               \
-        g_Task->param.unk_0B = 3;                                                                            \
+        TASK(Actor)->param.unk_0B = 3;                                                                       \
     } else if (g_Game.walk_flags & AREA_WALK_TRANSITION) {                                                   \
-        g_Task->param.unk_0B = 4;                                                                            \
+        TASK(Actor)->param.unk_0B = 4;                                                                       \
     } else {                                                                                                 \
-        g_Task->param.unk_0B = 0;                                                                            \
+        TASK(Actor)->param.unk_0B = 0;                                                                       \
     }                                                                                                        \
-    HANDLERS[g_Task->header.mode]();
+    HANDLERS[TASK(Actor)->header.mode]();

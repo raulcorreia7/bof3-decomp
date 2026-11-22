@@ -24,9 +24,9 @@ MATCH void func_801F3740(void) {
     if (tuneC != -0x80) {
         spad2->tint.steps.delta.b = (tuneC - 2);
     }
-    if ((g_Task->tint.raw & ~0xFF) == 0x80808000) {
-        g_Task->header.flags |= 0x40;
-        g_Task->unk_04 = 0;
+    if ((TASK(Actor)->tint.raw & ~0xFF) == 0x80808000) {
+        TASK(Actor)->header.flags |= 0x40;
+        TASK(Actor)->unk_04 = 0;
     } else {
         g_ScriptState->cursor -= 2;
     }

@@ -6,7 +6,7 @@ MATCH void func_8019EB38(void) {
     Actor* state;
     s32    step;
 
-    g_Task->direction      = (u8)g_Game.members[0].facing;
+    TASK(Actor)->direction = (u8)g_Game.members[0].facing;
     work                   = g_Task;
     work->pos.x.fixed      = g_Game.members[0].pos.x.fixed + g_FacingSteps[work->direction].x;
     work->pos.y.fixed      = g_Game.members[0].pos.y.fixed + g_FacingStepY[work->direction * 2];

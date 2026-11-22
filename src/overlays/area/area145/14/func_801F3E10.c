@@ -1,11 +1,11 @@
 #include "area145_14.h"
 
 MATCH void func_801F3E10(void) {
-    g_Task->header.flags &= ~ACTOR_FLAG_HIDDEN;
-    COORD_INT(g_Task->pos.z) = Area_HeightRead(g_Task->pos.x.fixed, g_Task->pos.y.fixed) + 2000;
-    g_Task->gravity          = -8;
-    setVector(g_Task, 0, 0, 0);
-    g_Task->unk_04 = 1;
+    TASK(Actor)->header.flags &= ~ACTOR_FLAG_HIDDEN;
+    COORD_INT(TASK(Actor)->pos.z) = Area_HeightRead(TASK(Actor)->pos.x.fixed, TASK(Actor)->pos.y.fixed) + 2000;
+    TASK(Actor)->gravity          = -8;
+    setVector(TASK(Actor), 0, 0, 0);
+    TASK(Actor)->unk_04 = 1;
     Script_Select(0x3B);
     g_ScriptState->flags |= 0x40;
     g_ScriptState->unk_01 = (D_80146250 - g_Game.members) * 20;

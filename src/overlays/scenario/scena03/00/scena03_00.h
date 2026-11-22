@@ -30,8 +30,6 @@ typedef struct Scena03Work {
 ASSERT_OFFSET(Scena03Work, line, 0x0C);
 ASSERT_SIZE(Scena03Work, 0x1A);
 
-#define SCN_LINE ((Scena03Work*)g_Task)
-
 typedef struct Scena03Quad {
     s32    x;          /* +0x00 centre */
     s32    y;          /* +0x04 */

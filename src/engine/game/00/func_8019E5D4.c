@@ -6,10 +6,10 @@ MATCH void func_8019E5D4(void) {
 
     Area_SceneSelectRecord(0x18);
 
-    g_Task->active_flags = 0;
-    g_Task->mirror       = 0;
-    g_Task->unk_2B++;
-    g_Task->unk_48 = 0;
+    TASK(Actor)->active_flags = 0;
+    TASK(Actor)->mirror       = 0;
+    TASK(Actor)->unk_2B++;
+    TASK(Actor)->unk_48 = 0;
 
     value = rand();
     {
@@ -36,5 +36,5 @@ MATCH void func_8019E5D4(void) {
 
     ACTOR_CLEAR_TINT();
     Script_Select(sel + 0xB);
-    g_Task->header.step++;
+    TASK(Actor)->header.step++;
 }

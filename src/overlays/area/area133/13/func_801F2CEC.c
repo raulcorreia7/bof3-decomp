@@ -1,5 +1,4 @@
 #include "area133_13.h"
-#include "area/spad.h"
 
 MATCH void func_801F2CEC(void) {
     u8  index;
@@ -15,6 +14,6 @@ MATCH void func_801F2CEC(void) {
     selection = D_801F2DD4[index];
     result    = Actor_ClaimSlot(3, 0, selection, x, y);
     if ((u8)result != 0xFF) {
-        g_Task->param.unk_0B = result;
+        TASK(Actor)->param.unk_0B = result;
     }
 }

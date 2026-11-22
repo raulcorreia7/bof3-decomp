@@ -9,7 +9,7 @@ MATCH void func_801F2E48(void) {
     s32 timer;
     u8  actor;
 
-    g_Task->timer += 1;
+    TASK(Actor)->timer += 1;
     shade3 = D_801F412C + 3;
     shade2 = shade3 - 1;
     shade1 = shade3 - 2;
@@ -37,18 +37,18 @@ MATCH void func_801F2E48(void) {
         break;
     } while ((s32)shade3 < (s32)end);
 
-    timer = g_Task->timer;
+    timer = TASK(Actor)->timer;
     actor = 0x60;
     if (timer < 0x61) {
         actor = timer;
     }
     func_801F3030(actor);
-    g_Task->unk_0A += 4;
-    g_Task->unk_0A &= 0x3F;
+    TASK(Actor)->unk_0A += 4;
+    TASK(Actor)->unk_0A &= 0x3F;
     func_801F3850();
 
     if (D_801F412C[8] == 0) {
-        g_Task->timer = 0x60;
-        g_Task->header.step += 1;
+        TASK(Actor)->timer = 0x60;
+        TASK(Actor)->header.step += 1;
     }
 }

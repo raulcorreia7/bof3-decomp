@@ -15,10 +15,10 @@ MATCH void func_801F2E98(void) {
     }
     rect[3] += 0x40;
     func_801F358C(rect);
-    if (--g_Task->timer == 0) {
+    if (--TASK(Actor)->timer == 0) {
         func_801F39AC();
-        rect[4]       = 0;
-        g_Task->timer = 0;
-        g_Task->header.mode++;
+        rect[4]            = 0;
+        TASK(Actor)->timer = 0;
+        TASK(Actor)->header.mode++;
     }
 }

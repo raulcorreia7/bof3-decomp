@@ -6,7 +6,6 @@
 
 #include "overlays/scenario/scenario.h"
 #include "area/effects.h"
-#include "area/spad.h"
 
 void            func_801F3C3C(s32 value);
 void            func_801F8358(void);
@@ -117,10 +116,10 @@ void                       func_801F9330(Scena07BurstBuffer* buffer);
  * both members matching. */
 static inline void Scene_TurnBurst(s32 step) {
     func_801F9330(D_801FDFC0);
-    if (g_Task->vx >= 9) {
+    if (TASK(Actor)->vx >= 9) {
         D_801FDFC0->angle += step;
     }
-    if (--g_Task->vx == 0) {
+    if (--TASK(Actor)->vx == 0) {
         func_80196070();
     }
 }
@@ -130,9 +129,9 @@ void func_801F81D4(FallingSpark* spark);
 /* The position setup func_801F7A30 and func_801F7D6C share: place the actor at the lead member's position and
  * sample the ground there. Every change must keep both members matching. */
 static inline void Scene_PlaceAtLead(void) {
-    g_Task->pos.x.fixed = g_Game.members[0].pos.x.fixed;
-    g_Task->pos.y.fixed = g_Game.members[0].pos.y.fixed;
-    g_Task->pos.z.fixed = Area_HeightSample(g_Task->pos.x.fixed, g_Task->pos.y.fixed) << 16;
+    TASK(Actor)->pos.x.fixed = g_Game.members[0].pos.x.fixed;
+    TASK(Actor)->pos.y.fixed = g_Game.members[0].pos.y.fixed;
+    TASK(Actor)->pos.z.fixed = Area_HeightSample(TASK(Actor)->pos.x.fixed, TASK(Actor)->pos.y.fixed) << 16;
 }
 
 void Scene_InitSpark(FallingSpark* spark);
@@ -151,12 +150,12 @@ extern u8 D_801FDFC8;
 
 /* The panel fade step func_801F72E0 and func_801F80F0 share: draw the panel table, dim it by 12 and
  * advance the actor when its countdown ends. Every change must keep both members matching. */
-#define SCENA07_PANEL_FADE_STEP() \
-    Trail_Update(SCENA07_TRAIL);  \
-    Trail_Draw(SCENA07_TRAIL);    \
-    D_800E4C1E -= 0xC;            \
-    if (--g_Task->timer == 0) {   \
-        g_Task->header.step++;    \
+#define SCENA07_PANEL_FADE_STEP()    \
+    Trail_Update(SCENA07_TRAIL);     \
+    Trail_Draw(SCENA07_TRAIL);       \
+    D_800E4C1E -= 0xC;               \
+    if (--TASK(Actor)->timer == 0) { \
+        TASK(Actor)->header.step++;  \
     }
 
 /* The panel brighten step func_801F724C and func_801F805C share: draw the panel table, brighten it by 6
@@ -165,9 +164,9 @@ extern u8 D_801FDFC8;
     Trail_Update(SCENA07_TRAIL);      \
     Trail_Draw(SCENA07_TRAIL);        \
     D_800E4C1E += 6;                  \
-    if (--g_Task->timer == 0) {       \
-        g_Task->timer = 32;           \
-        g_Task->header.step++;        \
+    if (--TASK(Actor)->timer == 0) {  \
+        TASK(Actor)->timer = 32;      \
+        TASK(Actor)->header.step++;   \
     }
 u8   func_801F85D8(void);
 void func_801F9DA8(void);

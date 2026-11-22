@@ -20,19 +20,19 @@ MATCH void func_801BBE98(void) {
     work2 = g_Task;
     ret   = Area_HeightRead(work2->pos.x.fixed, work2->pos.y.fixed);
 
-    work                     = g_Task;
-    work->tint.bytes.rgb.r   = 0;
-    ptr                      = g_Task;
-    COORD_INT(work->pos.z)   = ret;
-    ptr->tint.bytes.rgb.g    = 0;
-    g_Task->tint.bytes.rgb.b = 0;
-    g_Task->tint.bytes.flags = 2;
+    work                          = g_Task;
+    work->tint.bytes.rgb.r        = 0;
+    ptr                           = g_Task;
+    COORD_INT(work->pos.z)        = ret;
+    ptr->tint.bytes.rgb.g         = 0;
+    TASK(Actor)->tint.bytes.rgb.b = 0;
+    TASK(Actor)->tint.bytes.flags = 2;
 
     g_Game.current->u.field.counter.value = 3;
     g_Game.current->u.field.mode.value    = 0;
     g_Game.current->u.field.step.value    = 0;
 
-    Script_Select(g_Task->direction);
+    Script_Select(TASK(Actor)->direction);
 
     work = g_Task;
     work->header.mode++;

@@ -32,6 +32,6 @@ MATCH void Actor_SelectSprite(u32 record_index) {
         (&D_80145A04)[g_GfxTransferCount] = (base0 + ((u32*)base0)[entry[0]]);
         g_GfxTransferCount++;
     }
-    g_Task->mirror = entry[2];
-    g_Task->script = base8 + ((u16*)base8)[entry[1]];
+    TASK(Actor)->mirror = entry[2];
+    TASK(Actor)->script = base8 + ((u16*)base8)[entry[1]];
 }

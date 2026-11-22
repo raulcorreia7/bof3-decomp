@@ -21,15 +21,15 @@ MATCH u32 Actor_RunInteractions(void) {
             SP_REF(s8, 0x3) = 0;
             if (row->timer == 0 && (g_Actors[i].interaction_flags & ACTOR_INTERACTION_SCRIPT_PENDING)) {
                 if (g_Actors[i].interaction_flags & ACTOR_INTERACTION_SCRIPT_REQUEST) {
-                    if ((s8)func_801A17A0(&g_Actors[i].interaction_flags) && !(g_Task->option_flags & ACTOR_OPT_ROUTE_LOCKED)) {
-                        g_Actors[i].unk_79 = g_Task->direction & 0x7;
-                        if (!(g_Task->option_flags & ACTOR_OPT_KEEP_FACING)) {
-                            g_Task->direction = (g_Game.members[0].facing ^ 0x4) & 0x7;
-                            Script_DispatchSelector(g_Task->direction);
+                    if ((s8)func_801A17A0(&g_Actors[i].interaction_flags) && !(TASK(Actor)->option_flags & ACTOR_OPT_ROUTE_LOCKED)) {
+                        g_Actors[i].unk_79 = TASK(Actor)->direction & 0x7;
+                        if (!(TASK(Actor)->option_flags & ACTOR_OPT_KEEP_FACING)) {
+                            TASK(Actor)->direction = (g_Game.members[0].facing ^ 0x4) & 0x7;
+                            Script_DispatchSelector(TASK(Actor)->direction);
                         } else {
-                            Script_DispatchSelector(g_Task->direction & 0x7);
+                            Script_DispatchSelector(TASK(Actor)->direction & 0x7);
                         }
-                        if (g_Task->header.mode == 0xA) {
+                        if (TASK(Actor)->header.mode == 0xA) {
                             g_Actors[i].unk_79 |= 1;
                         }
                     }
@@ -39,20 +39,20 @@ MATCH u32 Actor_RunInteractions(void) {
             } else if (g_CurrentActor->interaction_flags & ACTOR_INTERACTION_PENDING) {
                 func_801A3A08();
                 continue;
-            } else if (g_Actors[i].roll_90 >= 0x1F && g_Task->timer == 0) {
+            } else if (g_Actors[i].roll_90 >= 0x1F && TASK(Actor)->timer == 0) {
                 func_801A27C4(&g_Actors[i]);
             } else {
-                D_801C83D8[g_Task->header.mode](&g_Actors[i]);
+                D_801C83D8[TASK(Actor)->header.mode](&g_Actors[i]);
             }
-            if (g_Task->unk_06 == 0xA) {
+            if (TASK(Actor)->unk_06 == 0xA) {
                 continue;
             }
             flags = g_Actors[i].interaction_flags;
             if (!(flags & 0x40)) {
                 if (flags & ACTOR_INTERACTION_MOVING) {
-                    Script_DispatchSelector(g_Task->direction);
+                    Script_DispatchSelector(TASK(Actor)->direction);
                     g_Actors[i].interaction_flags &= ~ACTOR_INTERACTION_MOVING;
-                } else if (!(g_Task->option_flags & ACTOR_OPT_WAIT_STREAM)) {
+                } else if (!(TASK(Actor)->option_flags & ACTOR_OPT_WAIT_STREAM)) {
                     n = g_Actors[i].unk_78 - 2 < 0 ? 0 : g_Actors[i].unk_78 - 2;
                     j = 0;
                     do {
@@ -60,8 +60,8 @@ MATCH u32 Actor_RunInteractions(void) {
                         Script_AnimStepLoop();
                     } while (j <= n);
                 }
-            } else if (!(g_Task->option_flags & ACTOR_OPT_WAIT_STREAM)) {
-                if (g_Task->header.flags & ACTOR_FLAG_STEP_MOVE) {
+            } else if (!(TASK(Actor)->option_flags & ACTOR_OPT_WAIT_STREAM)) {
+                if (TASK(Actor)->header.flags & ACTOR_FLAG_STEP_MOVE) {
                     Script_AnimStepLoop();
                 } else {
                     Script_AnimStepOnce();

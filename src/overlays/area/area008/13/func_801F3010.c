@@ -3,9 +3,9 @@
 MATCH void func_801F3010(void) {
     volatile Actor* previous;
 
-    g_Task->timer = 0;
+    TASK(Actor)->timer = 0;
     if ((g_ScriptVars[3] & 0x80u) != 0u) {
-        g_Task->header.mode = 9;
+        TASK(Actor)->header.mode = 9;
         return;
     }
     previous                  = g_Task;

@@ -12,6 +12,6 @@ MATCH void func_801F2C48(void) {
     work[0x5F]               = 0x7F;
     work[0x5E]               = 0x7F;
     work[0x5D]               = 0x7F;
-    g_Task->timer            = 150;
-    g_Task->header.mode      = 1;
+    TASK(Actor)->timer       = 150;
+    TASK(Actor)->header.mode = 1;
 }

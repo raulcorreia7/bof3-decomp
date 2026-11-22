@@ -3,7 +3,7 @@
 MATCH void func_801F3590(void) {
     Actor* work;
 
-    if (g_GameCellType == 0 && g_AreaSceneMode == g_Task->unk_0A) {
+    if (g_GameCellType == 0 && g_AreaSceneMode == TASK(Actor)->unk_0A) {
         return;
     }
     work = g_Task;

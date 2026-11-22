@@ -21,7 +21,7 @@ MATCH void func_800C1F88(void) {
         }
         work->pos.y.fixed = g_AreaScrollTargetY + ((s8*)g_BattleScrollDeltas)[offset + 1];
         Script_Select(4);
-        ((PartyMember*)g_Task)->header.step++;
+        TASK(PartyMember)->header.step++;
     }
     Script_AnimStepOnce();
 }

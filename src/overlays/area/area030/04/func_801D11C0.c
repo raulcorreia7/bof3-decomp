@@ -11,15 +11,15 @@ MATCH void func_801D11C0(void) {
         return;
     }
     if (g_AreaTargetCellY >= 0x39) {
-        g_Task->header.step = 3;
+        TASK(Actor)->header.step = 3;
     }
-    g_Task->mirror           = g_Game.members[0].unk_2A;
-    g_Task->unk_49           = D_80145ED9;
-    g_Task->unk_4A           = D_80145EDA;
-    g_Task->script_record    = D_80145EDB;
-    *(s32*)&g_Task->script   = D_80145EE0;
-    *(s32*)(TASK(u8) + 0x54) = D_80145EE4;
-    *(u16*)(TASK(u8) + 0x58) = D_80145EE8;
-    *(u16*)(TASK(u8) + 0x5A) = D_80145EEA;
+    TASK(Actor)->mirror         = g_Game.members[0].unk_2A;
+    TASK(Actor)->unk_49         = D_80145ED9;
+    TASK(Actor)->unk_4A         = D_80145EDA;
+    TASK(Actor)->script_record  = D_80145EDB;
+    *(s32*)&TASK(Actor)->script = D_80145EE0;
+    *(s32*)(TASK(u8) + 0x54)    = D_80145EE4;
+    *(u16*)(TASK(u8) + 0x58)    = D_80145EE8;
+    *(u16*)(TASK(u8) + 0x5A)    = D_80145EEA;
     Area_AddActor();
 }

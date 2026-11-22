@@ -20,10 +20,10 @@ MATCH u8 func_801ABD68(s32 pos_x, s32 pos_y, s32 step_count, void* deltas) {
     work2 = g_Task;
     dz    = dist - COORD_INT(work2->pos.z);
     if (FIELD(u8, deltas, 0x4u) != 0) {
-        count          = count ? count : 1;
-        work2->timer   = count;
-        g_Task->unk_0A = count + 1;
-        work3          = g_Task;
+        count               = count ? count : 1;
+        work2->timer        = count;
+        TASK(Actor)->unk_0A = count + 1;
+        work3               = g_Task;
         work3->header.flags |= ACTOR_FLAG_STEP_MOVE;
         setVector(work3, dx / count, dy / count, dz / count);
     }

@@ -7,9 +7,9 @@ MATCH void func_801F349C(void) {
     FAKE_STACK_PADS(u8, 16);
 
     for (i = 0; i < 3; i++) {
-        row->pos.x  = g_Task->pos.x.fixed;
-        row->pos.y  = g_Task->pos.y.fixed;
-        row->pos.z  = g_Task->pos.z.fixed + 0x03800000;
+        row->pos.x  = TASK(Actor)->pos.x.fixed;
+        row->pos.y  = TASK(Actor)->pos.y.fixed;
+        row->pos.z  = TASK(Actor)->pos.z.fixed + 0x03800000;
         row->angle  = (i << 12) / 3;
         row->scale  = 0xC00;
         row->unk_14 = 0;

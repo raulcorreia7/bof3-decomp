@@ -17,7 +17,7 @@ MATCH void func_801F3D24(void) {
     func_801F43C8();
     func_801F462C(MEM_PTR(s32, AREA_WORK), 128, 128, 0);
     PopMatrix();
-    if (--g_Task->vx == 0) {
+    if (--TASK(Actor)->vx == 0) {
         func_80196070();
     }
 }

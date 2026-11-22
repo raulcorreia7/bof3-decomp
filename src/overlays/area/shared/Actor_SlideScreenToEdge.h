@@ -10,9 +10,9 @@ MATCH void Actor_SlideScreenToEdge(void) {
     screen_y       = work->screen_y + 0x10;
     work->screen_y = screen_y;
     if ((s16)screen_y >= 0x80) {
-        g_Task->header.step += 1;
+        TASK(Actor)->header.step += 1;
     }
-    v = g_Task->unk_32;
+    v = TASK(Actor)->unk_32;
     if (v != 0) {
         Area_Update(0);
     } else {

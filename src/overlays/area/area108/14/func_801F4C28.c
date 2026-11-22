@@ -24,16 +24,16 @@ MATCH s32 func_801F4C28(void) {
     if (tuneC < -0x30) {
         spad2->tint.steps.delta.b = (tuneC + 1);
     }
-    if ((g_Task->tint.raw & ~0xFF) == 0xD0D0D000) {
+    if ((TASK(Actor)->tint.raw & ~0xFF) == 0xD0D0D000) {
         GFX_PaletteFreeFade(g_CurrentActor->unk_93);
-        spad3                    = g_Task;
-        spad3->header.flags      = (spad3->header.flags & 0xDF);
-        g_Task->tint.bytes.flags = 0;
-        spad4                    = g_Task;
-        spad4->tint.bytes.rgb.b  = 0;
-        spad4->tint.bytes.rgb.g  = 0;
-        spad4->tint.bytes.rgb.r  = 0;
-        g_Task->unk_04           = 0;
+        spad3                         = g_Task;
+        spad3->header.flags           = (spad3->header.flags & 0xDF);
+        TASK(Actor)->tint.bytes.flags = 0;
+        spad4                         = g_Task;
+        spad4->tint.bytes.rgb.b       = 0;
+        spad4->tint.bytes.rgb.g       = 0;
+        spad4->tint.bytes.rgb.r       = 0;
+        TASK(Actor)->unk_04           = 0;
         return;
     }
     g_CurrentActor->unk_7E = (g_CurrentActor->unk_7E - 2);

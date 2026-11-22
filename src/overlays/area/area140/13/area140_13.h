@@ -6,7 +6,6 @@
 
 #include "sys/actor.h"
 #include "overlays/area/worlds/world03.h"
-#include "area/spad.h"
 #include "game/spawn.h"
 
 typedef struct Area140InputSnapshot {

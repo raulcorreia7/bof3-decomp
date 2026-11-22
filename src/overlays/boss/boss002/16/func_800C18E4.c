@@ -2,5 +2,5 @@
 
 MATCH void func_800C18E4(void) {
     Script_Select(6);
-    ((Actor*)g_Task)->header.step++;
+    TASK(Actor)->header.step++;
 }

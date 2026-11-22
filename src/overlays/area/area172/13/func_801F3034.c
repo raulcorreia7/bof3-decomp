@@ -6,5 +6,5 @@ MATCH void func_801F3034(void) {
     work           = g_Task;
     work->timer    = 8;
     work->screen_x = 0;
-    g_Task->header.mode++;
+    TASK(Actor)->header.mode++;
 }

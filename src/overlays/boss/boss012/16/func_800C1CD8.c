@@ -1,5 +1,4 @@
 #include "boss012_16.h"
-#include "area/spad.h"
 
 /* Draws a textured quad from the screen top down to the task; shade picks the texture row. */
 MATCH void func_800C1CD8(s32 shade) {

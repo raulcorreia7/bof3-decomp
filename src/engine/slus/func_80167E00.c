@@ -21,24 +21,24 @@ NON_MATCHING void func_80167E00(void) {
 
     for (i = 0; i < 30; i++) {
         g_Task = &g_Actors[i];
-        if (!(g_Task->header.flags & ACTOR_FLAG_IN_USE)) {
+        if (!(TASK(Actor)->header.flags & ACTOR_FLAG_IN_USE)) {
             continue;
         }
-        if (g_Task->unk_06 != 9) {
-            if (g_Task->active_flags & 0x10) {
-                g_Task->draw_layer = 4;
+        if (TASK(Actor)->unk_06 != 9) {
+            if (TASK(Actor)->active_flags & 0x10) {
+                TASK(Actor)->draw_layer = 4;
             } else {
-                g_Task->draw_layer = g_AreaDrawMode;
+                TASK(Actor)->draw_layer = g_AreaDrawMode;
             }
         } else if (g_AreaDrawMode == GFX_LAYER_BATTLE_SCENE) {
             continue;
         }
-        if (g_Task->unk_06 == 10) {
+        if (TASK(Actor)->unk_06 == 10) {
             Actor_ProjectForDraw();
             continue;
         }
         for (slot = 0; slot < D_800E3800; slot++) {
-            if (SCENE_SLOTS[slot].scene == g_Task->unk_2C) {
+            if (SCENE_SLOTS[slot].scene == TASK(Actor)->unk_2C) {
                 break;
             }
         }

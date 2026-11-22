@@ -10,7 +10,7 @@ MATCH void func_801F3108(void) {
     pos.y = actor->pos.y.fixed;
     pos.z = actor->pos.z.fixed;
     func_801F31E8(&pos, actor->vz);
-    if (g_Task->vz > 0x07FFFFFF) {
-        g_Task->header.mode++;
+    if (TASK(Actor)->vz > 0x07FFFFFF) {
+        TASK(Actor)->header.mode++;
     }
 }

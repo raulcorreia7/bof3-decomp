@@ -7,7 +7,6 @@
 
 #include "overlays/area/worlds/world00.h"
 #include "area/fishing.h"
-#include "area/spad.h"
 #include "game/item.h"
 #include <stdio.h>
 
