@@ -9,8 +9,7 @@ MATCH void func_8019F5B8(s16 x, s16 y, u8 unused, u8 palette) {
 
     index = 0;
     TEXT_Format(g_UiTextFormatBuffer, D_80195860, g_Task->unk_06);
-    SetDrawMode((DR_MODE*)g_GfxPrimCursor, 0, 0, getTPage(TPAGE_DEPTH_4BIT, TPAGE_ABR_HALF, FONT_TPAGE_X, FONT_TPAGE_Y), NULL);
-    GFX_AddPrim(g_Task->draw_layer, sizeof(DR_MODE));
+    GFX_ADD_LAYER_DRAW_MODE(g_Task->draw_layer, getTPage(TPAGE_DEPTH_4BIT, TPAGE_ABR_HALF, FONT_TPAGE_X, FONT_TPAGE_Y));
     do {
         ch = g_UiTextFormatBuffer[index & BYTE_MASK];
         if (ch != ' ') {

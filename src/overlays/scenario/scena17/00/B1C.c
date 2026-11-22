@@ -711,7 +711,7 @@ MATCH void func_801F9160(s16 x, s16 y) {
     prim = (SPRT*)g_GfxPrimCursor;
     SetSprt(prim);
     PSX_SET_NEUTRAL_RGB(prim);
-    prim->clut = 0x7B85;
+    prim->clut = getClut(80, 494);
     prim->v0   = 0x40;
     setXY0(prim, x, y);
     prim->u0 = 0;

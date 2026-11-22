@@ -542,8 +542,7 @@ MATCH void func_801D2CF8(s32 x, s32 y, s32 icon) {
     SPRT* sprite;
     u8    index;
 
-    SetDrawMode((DR_MODE*)g_GfxPrimCursor, 0, 0, getTPage(TPAGE_DEPTH_4BIT, TPAGE_ABR_HALF, 896, 256), NULL);
-    GFX_AddPrim(GFX_LAYER_UI, sizeof(DR_MODE));
+    GFX_ADD_DRAW_MODE(getTPage(TPAGE_DEPTH_4BIT, TPAGE_ABR_HALF, 896, 256));
     sprite = (SPRT*)g_GfxPrimCursor;
     SetSprt(sprite);
     setXY0(sprite, x, y);
@@ -552,10 +551,10 @@ MATCH void func_801D2CF8(s32 x, s32 y, s32 icon) {
     index = icon;
     if (index == GAME_NONE) {
         setUV0(sprite, 0, 0);
-        sprite->clut = 0x7BC8;
+        sprite->clut = getClut(128, 495);
     } else {
         setUV0(sprite, (icon & 7) * 32, (index / 8) * 40);
-        sprite->clut = 0x7BC9;
+        sprite->clut = getClut(144, 495);
     }
     GFX_AddPrim(GFX_LAYER_UI, sizeof(SPRT));
 }
@@ -591,7 +590,7 @@ MATCH void FairyCasino_DrawFramePiece(s32 x, s32 y, s32 index) {
     setWH(sprt, D_801DAC60[index + 2], D_801DAC60[index + 3]);
     setRGB0(sprt, 128, 128, 128);
     setUV0(sprt, D_801DAC60[index], D_801DAC60[index + 1]);
-    sprt->clut = 0x7887;
+    sprt->clut = getClut(112, 482);
     GFX_AddPrim(GFX_LAYER_UI, sizeof(SPRT));
 }
 
@@ -606,8 +605,7 @@ MATCH void FairyCasino_DrawFrame(s16 x, s16 y) {
     } else {
         tpage = 0x1D;
     }
-    SetDrawMode((DR_MODE*)g_GfxPrimCursor, 0, 0, tpage, 0);
-    GFX_AddPrim(GFX_LAYER_UI, sizeof(DR_MODE));
+    GFX_ADD_DRAW_MODE(tpage);
     FairyCasino_DrawFramePiece(x, y, 0);
     for (i = 0; i < 6; i++) {
         FairyCasino_DrawFramePiece((s16)(x + 0x20 + 8 * i), y, 1);
@@ -1111,8 +1109,7 @@ MATCH void func_801D4910(s32 x, s32 y) {
     } else {
         tpage = 0x1D;
     }
-    SetDrawMode((DR_MODE*)g_GfxPrimCursor, 0, 0, tpage, 0);
-    GFX_AddPrim(GFX_LAYER_UI, 0xC);
+    GFX_ADD_DRAW_MODE(tpage);
     FairyCasino_DrawFramePiece((s16)x, (s16)y, 0xB);
     for (i = 0; i < 9; i++) {
         FairyCasino_DrawFramePiece((s16)(x + 8 + i * 8), (s16)(y - 1), 0xD);
@@ -1301,8 +1298,7 @@ MATCH void func_801D5788(void) {
     s32      n;
 
     func_801D5B2C();
-    SetDrawMode((DR_MODE*)g_GfxPrimCursor, 0, 0, GetTPage(TPAGE_DEPTH_8BIT, TPAGE_ABR_SUB, 0x140, 0), 0);
-    GFX_AddPrim(GFX_LAYER_TOP, sizeof(DR_MODE));
+    GFX_ADD_LAYER_DRAW_MODE(GFX_LAYER_TOP, GetTPage(TPAGE_DEPTH_8BIT, TPAGE_ABR_SUB, 0x140, 0));
     g4 = (POLY_G4*)g_GfxPrimCursor;
     SetPolyG4(g4);
     SetSemiTrans(g4, 1);
@@ -2170,7 +2166,7 @@ MATCH void func_801D875C(s16 x, s16 y, s32 index) {
     sprt->v0   = D_801DAE88[slot][1];
     sprt->w    = D_801DAE88[slot][2];
     sprt->h    = D_801DAE88[slot][3];
-    sprt->clut = ((D_801DAE88[slot][5] + 0x1E0) << 6) | (D_801DAE88[slot][4] >> 4);
+    sprt->clut = getClut(D_801DAE88[slot][4], D_801DAE88[slot][5] + 0x1E0);
     sprt->r0   = 0x80;
     sprt->g0   = 0x80;
     sprt->b0   = 0x80;

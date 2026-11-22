@@ -283,8 +283,7 @@ MATCH void func_801F7E34(s32* pos_a, s32* pos_b, u8 shade) {
     DVECTOR  xy;
     MATRIX   matrix;
 
-    SetDrawMode((DR_MODE*)g_GfxPrimCursor, 0, 1, GetTPage(TPAGE_DEPTH_4BIT, TPAGE_ABR_ADD, FONT_TPAGE_X, FONT_TPAGE_Y), 0);
-    GFX_AddPrim(GFX_LAYER_UI, sizeof(DR_MODE));
+    GFX_ADD_DITHERED_DRAW_MODE(GFX_LAYER_UI, GetTPage(TPAGE_DEPTH_4BIT, TPAGE_ABR_ADD, FONT_TPAGE_X, FONT_TPAGE_Y));
     Camera_SetMatrix(&matrix);
     prim = (LINE_F2*)g_GfxPrimCursor;
     SetLineF2(prim);

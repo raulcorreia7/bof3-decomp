@@ -17,8 +17,7 @@ NON_MATCHING void func_801F46C8(s32 turn, s32 count, s32 angle, s32 height) {
     } else {
         tpage = 0x35;
     }
-    SetDrawMode((DR_MODE*)g_GfxPrimCursor, 0, 1, tpage, 0);
-    GFX_AddPrim(GFX_LAYER_SCENE_BACK, sizeof(DR_MODE));
+    GFX_ADD_DITHERED_DRAW_MODE(GFX_LAYER_SCENE_BACK, tpage);
 
     RotTrans(&g_ScratchPadVectors[0], (VECTOR*)matrix.t, &flag);
     RotMatrix(&g_ScratchPadVectors[1], &matrix);
@@ -60,8 +59,7 @@ NON_MATCHING void func_801F46C8(s32 turn, s32 count, s32 angle, s32 height) {
     } else {
         tpage = 0x35;
     }
-    SetDrawMode((DR_MODE*)g_GfxPrimCursor, 0, 0, tpage, 0);
-    GFX_AddPrim(GFX_LAYER_SCENE_BACK, sizeof(DR_MODE));
+    GFX_ADD_LAYER_DRAW_MODE(GFX_LAYER_SCENE_BACK, tpage);
     PopMatrix();
 }
 #else

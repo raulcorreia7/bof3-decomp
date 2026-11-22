@@ -18,8 +18,7 @@ NON_MATCHING void func_801F3070(s32 mode) {
     } else {
         tpage = 0x95;
     }
-    SetDrawMode((DR_MODE*)g_GfxPrimCursor, 0, 0, tpage, 0);
-    GFX_AddPrim(GFX_LAYER_FIELD_SCENE, sizeof(DR_MODE));
+    GFX_ADD_LAYER_DRAW_MODE(GFX_LAYER_FIELD_SCENE, tpage);
 
     for (i = 0; i < 2; i++) {
         prim = (POLY_FT4*)g_GfxPrimCursor;

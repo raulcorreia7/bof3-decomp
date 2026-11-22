@@ -11,8 +11,7 @@ NON_MATCHING void func_801F039C(s16 x, s16 y, s32 width, s32 height) {
     s16   right_x;
     s16   bottom_y;
 
-    SetDrawMode((DR_MODE*)g_GfxPrimCursor, 0, 0, GetTPage(0, 0, 0x3C0, 0), 0);
-    GFX_AddPrim(1, 0xC);
+    GFX_ADD_DRAW_MODE(GetTPage(0, 0, 0x3C0, 0));
 
     tile = (TILE*)g_GfxPrimCursor;
     SetTile(tile);

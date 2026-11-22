@@ -15,8 +15,7 @@ NON_MATCHING void func_800C236C(u8 phase) {
         i++;
     } while (i < 64);
 
-    SetDrawMode((DR_MODE*)g_GfxPrimCursor, 0, 0, GetTPage(0, 0, 0x3C0, 0), 0);
-    GFX_AddPrim(3, sizeof(DR_MODE));
+    GFX_ADD_LAYER_DRAW_MODE(3, GetTPage(0, 0, 0x3C0, 0));
     i = 0;
     do {
         prim = (POLY_G3*)g_GfxPrimCursor;
