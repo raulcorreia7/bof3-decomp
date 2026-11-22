@@ -42,7 +42,7 @@ MATCH void func_8015684C(u32* record, s32 cell_x, s32 cell_y) {
     v[1].vz           = z - 128;
     SetPolyFT4(prim);
     SetShadeTex(prim, 0);
-    RotTransPers4(vert, &v[1], &v[2], &v[3], (s32*)((u8*)prim + 8), (s32*)((u8*)prim + 0x10), (s32*)((u8*)prim + 0x18), (s32*)((u8*)prim + 0x20), &p, &flag);
+    RotTransPers4(vert, &v[1], &v[2], &v[3], (s32*)&prim->x0, (s32*)&prim->x1, (s32*)&prim->x2, (s32*)&prim->x3, &p, &flag);
     Area_ApplyTileToQuad(0xB1800110u, prim, 1);
     GFX_AddPrim(state, sizeof(POLY_FT4));
 }

@@ -63,7 +63,7 @@ MATCH void Area_CellDrawSides(u8* record, s32 cell_x, s32 cell_y) {
         }
         v[0].vz = v[2].vz - 128;
         v[1].vz = v[3].vz - 128;
-        RotTransPers4(&v[0], &v[1], &v[2], &v[3], (s32*)((u8*)prim + 8), (s32*)((u8*)prim + 0x10), (s32*)((u8*)prim + 0x18), (s32*)((u8*)prim + 0x20), &p, &flag);
+        RotTransPers4(&v[0], &v[1], &v[2], &v[3], (s32*)&prim->x0, (s32*)&prim->x1, (s32*)&prim->x2, (s32*)&prim->x3, &p, &flag);
         count--;
         Area_ApplyTileToQuad(D_8017F8E0[side], prim, 1);
         side++;
