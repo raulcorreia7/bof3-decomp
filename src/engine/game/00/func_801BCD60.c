@@ -46,7 +46,7 @@ NON_MATCHING void func_801BCD60(s32 target_x, s32 target_y) {
     stack_20 = target_y;
     tmp8     = g_Task;
     stack_18 = target_x;
-    if ((tmp8->header.flags & 0x80) && !((g_Game.flags | g_Game.walk_flags) & BIT(0)) && !(D_80145FBC & 1)) {
+    if ((tmp8->header.flags & 0x80) && !((g_Game.flags | g_Game.walk_flags) & BIT(0)) && !(g_Game.members[0].status.field.flags.value & 1)) {
         val9  = tmp8->pos.x.fixed;
         val2  = tmp8->pos.y.fixed;
         tmp6  = val9 - target_x;
@@ -160,10 +160,10 @@ NON_MATCHING void func_801BCD60(s32 target_x, s32 target_y) {
         }
         if (val6 != 0) {
             tmp9  = g_Task;
-            val10 = tmp9->pos.x.fixed - D_80145EC4;
+            val10 = tmp9->pos.x.fixed - g_Game.members[0].pos.x.fixed;
             val10 = ABS(val10);
             if (val10 <= TO_COORD(6)) {
-                val11 = tmp9->pos.y.fixed - D_80145EC8;
+                val11 = tmp9->pos.y.fixed - g_Game.members[0].pos.y.fixed;
                 val11 = ABS(val11);
                 if (val11 > TO_COORD(6)) {
                     goto block_39; /* retail branch */

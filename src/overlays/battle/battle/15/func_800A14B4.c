@@ -17,10 +17,10 @@ MATCH void func_800A14B4(void) {
     if (BATTLER_IS_PLAYER(slot)) {
         g_Game.members[slot].u.turn.action_flags.volatile_value |= BATTLER_ACTION_POWER_BOOST;
         index = *p * BATTLE_PARTY_STRIDE;
-        count = (&D_80145FC8)[index];
+        count = (&g_Game.members[0].focus_counter)[index];
         if (count < 2u) {
-            next                 = count + 1;
-            (&D_80145FC8)[index] = next;
+            next                                      = count + 1;
+            (&g_Game.members[0].focus_counter)[index] = next;
         }
     } else {
         ENEMY_COMBATANT(slot).turn.action_flags.value |= BATTLER_ACTION_POWER_BOOST;

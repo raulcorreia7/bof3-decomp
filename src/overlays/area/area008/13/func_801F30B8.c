@@ -10,7 +10,7 @@ MATCH void func_801F30B8(void) {
     previous                  = TASK(Actor);
     WORLD00_AREA008_STATE_PTR = (volatile Actor*)&g_BattlePartyBattlers[1];
     TASK_SET(&g_BattlePartyBattlers[1]);
-    if (D_80146028 == 8 && D_8014601A == 1) {
+    if (g_Game.members[1].unk_58 == 8 && g_Game.members[1].unk_4A == 1) {
         Script_Select(1);
         D_801F53F4            = D_801F4680[RANDOM_MASK(3)];
         g_Task                = previous;

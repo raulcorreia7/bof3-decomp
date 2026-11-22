@@ -9,7 +9,7 @@ MATCH s32 func_801F4914(s32 x, s32 y) {
     i = 0;
     x &= BYTE_MASK;
     y &= BYTE_MASK;
-    mode = &D_80145E98;
+    mode = &g_Game.members[0].facing;
     off  = 0;
     for (; i <= 0; i++, off += 4) {
         if (x == D_801F68B4[off] && y == D_801F68B4[off + 1] && (D_801F68B4[off + 2] & 0xF) == *mode) {

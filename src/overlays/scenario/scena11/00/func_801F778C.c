@@ -10,7 +10,7 @@ MATCH void func_801F778C(void) {
         case 0:
             g_GameFlags |= 8;
             g_ScenarioState.step = 1;
-            switch (D_80145E98) {
+            switch (g_Game.members[0].facing) {
                 case 6:
                     Scene_SetupParty(3);
                     break;

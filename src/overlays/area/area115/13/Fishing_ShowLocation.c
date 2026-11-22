@@ -21,8 +21,8 @@ MATCH void Fishing_ShowLocation(void) {
     switch (*state) {
         case 0:
             Game_SetScriptActive();
-            pos = &D_80145EC6;
-            if ((Area_CellGetCode(pos[0], D_80145ECA) & BYTE_MASK) == 0xA1) {
+            pos = &g_Game.members[0].pos.x.part.integer;
+            if ((Area_CellGetCode(pos[0], g_Game.members[0].pos.y.part.integer) & BYTE_MASK) == 0xA1) {
                 for (index = 0; index < 5; index++) {
                     if (g_GameEntryAreaId == D_801F4E90[index][0]) {
                         break;

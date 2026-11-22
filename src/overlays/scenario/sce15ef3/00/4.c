@@ -12,7 +12,7 @@ MATCH void func_801D0C48(void) {
     work                   = TASK(u8);
     FIELD(s32, work, 0x34) = g_Game.members[0].pos.x.fixed;
     FIELD(s32, work, 0x38) = g_Game.members[0].pos.y.fixed;
-    FIELD(s32, work, 0x3C) = D_80145ECC;
+    FIELD(s32, work, 0x3C) = g_Game.members[0].pos.z.fixed;
     func_801D16DC();
     func_801D19A0();
     work    = TASK(u8);

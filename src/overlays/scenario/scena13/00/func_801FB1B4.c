@@ -9,10 +9,10 @@ MATCH void func_801FB1B4(void) {
 
     switch (g_ScenarioState.step) {
         case 0:
-            if (D_801460FB != 0) {
+            if (g_Game.members[1].u.field.mode.unsigned_value != 0) {
                 break;
             }
-            if (D_8014623B != 0) {
+            if (g_Game.members[2].u.field.mode.unsigned_value != 0) {
                 break;
             }
             Scene_SetupParty(0xA);

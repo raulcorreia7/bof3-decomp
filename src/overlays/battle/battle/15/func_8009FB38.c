@@ -18,7 +18,7 @@ NON_MATCHING void func_8009FB38(void) {
         if (g_Battle.party_count != 0) {
             u8* dst_base;
 
-            dst_base = D_80145F04;
+            dst_base = g_Game.members[0].chr.name;
             do {
                 s32 offset;
 

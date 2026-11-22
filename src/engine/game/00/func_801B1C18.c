@@ -12,15 +12,15 @@ MATCH s32 func_801B1C18(s32 x, s32 y, s32 mode) {
 
     span_x = abs(x - g_Game.members[0].pos.x.fixed) >> 15;
     span_y = abs(y - g_Game.members[0].pos.y.fixed) >> 15;
-    if ((x >> 16) > D_80145EC6) {
+    if ((x >> 16) > g_Game.members[0].pos.x.part.integer) {
         dir_x = 1;
     } else {
-        dir_x = -((x >> 16) < D_80145EC6);
+        dir_x = -((x >> 16) < g_Game.members[0].pos.x.part.integer);
     }
-    if ((y >> 16) > D_80145ECA) {
+    if ((y >> 16) > g_Game.members[0].pos.y.part.integer) {
         dir_y = 1;
     } else {
-        dir_y = -((y >> 16) < D_80145ECA);
+        dir_y = -((y >> 16) < g_Game.members[0].pos.y.part.integer);
     }
     for (i = 0; i <= span_x; i++) {
         /* The tracked height cell is the s16 at +0xA of the pair base; both

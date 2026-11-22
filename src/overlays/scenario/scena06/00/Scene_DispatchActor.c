@@ -145,19 +145,19 @@ MATCH s32 func_801FD294(void) {
 }
 
 MATCH void func_801FD29C(void) {
-    D_80144DF8 = D_801FE464[0];
-    D_80144DF2 = D_801FE464[6];
-    D_80144DF5 = D_801FE464[7];
-    D_80144E00 = D_801FE464[1];
-    D_80144E20 = D_801FE464[1];
-    D_80144E04 = D_801FE464[2];
-    D_80144E24 = D_801FE464[2];
-    D_80144E06 = D_801FE464[3];
-    D_80144E26 = D_801FE464[3];
-    D_80144E08 = D_801FE464[4];
-    D_80144E28 = D_801FE464[4];
-    D_80144E0A = D_801FE464[5];
-    D_80144E2A = D_801FE464[5];
+    g_Characters[7].hp                 = D_801FE464[0];
+    g_Characters[7].equip.weapon       = D_801FE464[6];
+    g_Characters[7].equip.armor        = D_801FE464[7];
+    g_Characters[7].stats.max_hp       = D_801FE464[1];
+    g_Characters[7].base.max_hp        = D_801FE464[1];
+    g_Characters[7].stats.power        = D_801FE464[2];
+    g_Characters[7].base.power         = D_801FE464[2];
+    g_Characters[7].stats.defense      = D_801FE464[3];
+    g_Characters[7].base.defense       = D_801FE464[3];
+    g_Characters[7].stats.agility      = D_801FE464[4];
+    g_Characters[7].base.agility       = D_801FE464[4];
+    g_Characters[7].stats.intelligence = D_801FE464[5];
+    g_Characters[7].base.intelligence  = D_801FE464[5];
 }
 
 MATCH s8 func_801FD34C(s32 entry, s8 dir_x, s8 dir_y, s16 vz_start, s16 vz_delta, u8 landing_script, u8 flags) {

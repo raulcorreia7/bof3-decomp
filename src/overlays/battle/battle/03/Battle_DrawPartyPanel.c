@@ -71,7 +71,7 @@ NON_MATCHING void Battle_DrawPartyPanel(s32 x, s32 y) {
             var_s0      = temp_v0_199 * 4;
             var_s0      = temp_v0_199 * 5;
             var_s0      = temp_v0_199 * BATTLE_PARTY_STRIDE;
-            UI_TextDrawString((s16)(var_s4 + 6), (s16)(var_s6 + 5), var_a2_187, 5U, var_s0 + D_80145F04);
+            UI_TextDrawString((s16)(var_s4 + 6), (s16)(var_s6 + 5), var_a2_187, 5U, var_s0 + g_Game.members[0].chr.name);
             func_801DA078((var_s4 + 0x3A) & HALF_MASK, (var_s6 + 6) & HALF_MASK, 1);
             func_801DA078((var_s4 + 4) & HALF_MASK, (s16)var_s7, 0);
             temp_v1_221 = *(u16*)(D_80145F10 + var_s0);

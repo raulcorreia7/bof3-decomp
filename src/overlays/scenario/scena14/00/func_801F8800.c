@@ -16,12 +16,12 @@ MATCH void func_801F8800(u8 amount) {
 MATCH void func_801F8850(void) {
     u8* flags;
 
-    flags = &D_80145FF4;
+    flags = &g_Game.members[1].unk_24;
     *flags &= 0xFE;
-    D_80146134 &= 0xFE;
+    g_Game.members[2].unk_24 &= 0xFE;
     Game_RequestAreaChange(AREA_ID_DESERT_MANMO, TO_COORD(41) + COORD_HALF, TO_COORD(22) + COORD_HALF, AREA_ENTRY_MAP_LOADING);
     Game_SetScriptActive();
     g_ScenarioState.state_04 = 2;
     g_ScenarioState.step     = 0;
-    D_80146871 &= 0xFE;
+    g_ScenarioState.flags_01 &= 0xFE;
 }

@@ -129,7 +129,7 @@ NON_MATCHING void func_801FB268(void) {
                 g_ScriptVars[0]          = 0;
                 g_ScenarioState.state_04 = 0;
                 g_ScenarioState.step     = 0;
-                D_80146258 &= ~0x80;
+                g_Game.flags &= ~0x80;
             }
             break;
     }

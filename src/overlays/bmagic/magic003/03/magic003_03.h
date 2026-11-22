@@ -5,8 +5,6 @@
 
 #include "overlays/bmagic/bmagic.h"
 
-extern u8 D_801463D6;
-
 #define MAGIC003_STEP_COUNT 5
 
 typedef struct Magic003Steps {

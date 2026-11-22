@@ -77,7 +77,7 @@ NON_MATCHING void func_8019FAA0(u16 area_id, u32 entry_x, u32 entry_y, u8 entry_
     world_flags = g_Game.walk_flags;
     if ((world_flags & AREA_WALK_MAP_LOADING) != 0) {
         if ((entry_facing & 0x80u) != 0) {
-            D_80146260 = 0u;
+            g_Game.unk_3CE[2] = 0u;
             Scene_SetupParty((u32)(entry_facing & 0x7Fu));
             g_Game.walk_flags &= ~AREA_WALK_ACCEPT_LOCK;
             Party_RunFrame();

@@ -11,7 +11,7 @@ MATCH void func_801F34DC(void) {
     edge              = g_Actors->pos.x.fixed;
     g_Task            = g_Actors;
     g_GameState       = g_Game.members;
-    work->pos.x.fixed = D_80145EC4 - edge;
+    work->pos.x.fixed = g_Game.members[0].pos.x.fixed - edge;
     g_Task            = work;
     do {
         TASK_SET(g_Game.members);

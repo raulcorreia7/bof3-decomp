@@ -12,7 +12,7 @@ MATCH void func_801F3514(void) {
     u8*      script;
     s16*     out;
 
-    script = &D_80145EDB;
+    script = &g_Game.members[0].unk_4B;
     if (TASK(Actor)->script_record != *script) {
         Script_Request(*script);
         TASK(Actor)->script_record = *script;
@@ -39,15 +39,15 @@ MATCH void func_801F3514(void) {
     *out       = 0x3200;
     vertex->vx = (s16)(((((g_AreaScrollTargetX - 1) & 0xFFFFFF) + 1) >> 9) - 0x4000);
     D_1F800016 = (s16)(((((g_AreaScrollTargetY - 1) & 0xFFFFFF) + 1) >> 9) - 0x4000);
-    D_1F800018 = (s16)(-D_80145ECE / 2);
+    D_1F800018 = (s16)(-g_Game.members[0].pos.z.part.integer / 2);
     RotTransPers(vertex, (long*)screen, &depth, &flag);
 
     TASK(Actor)->screen_x = 0xA0;
     if (g_Game.members[0].unk_14 != 0) {
-        TASK(Actor)->screen_y = D_1F800034[1];
-        D_80145EC0            = D_1F800034[1];
+        TASK(Actor)->screen_y                   = D_1F800034[1];
+        g_Game.members[0].screen_y.signed_value = D_1F800034[1];
     } else {
-        TASK(Actor)->screen_y = D_80145EC0;
+        TASK(Actor)->screen_y = g_Game.members[0].screen_y.signed_value;
     }
 
     if (g_AreaGridActorCount < 0x28) {

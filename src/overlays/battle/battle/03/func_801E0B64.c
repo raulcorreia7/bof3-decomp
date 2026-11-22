@@ -20,7 +20,7 @@ MATCH void func_801E0B64(void) {
             s32 offset;
 
             offset      = index * BATTLE_PARTY_STRIDE;
-            dst         = (u8*)D_80145F04 + offset;
+            dst         = (u8*)g_Game.members[0].chr.name + offset;
             field_index = D_80145FCC[offset];
             src         = (u8*)&g_Characters[field_index];
             dst[0x0E]   = src[0x0E];

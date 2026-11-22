@@ -12,7 +12,7 @@ MATCH s32 Area_EncounterCanStart(void) {
     if (g_Game.flags & 0x20) {
         D_80145FB8 = 0;
     }
-    if (FIELD(u8, Area_EncounterFindZone(D_80145EC6, D_80145ECA), 0x4u) == 0) {
+    if (FIELD(u8, Area_EncounterFindZone(g_Game.members[0].pos.x.part.integer, g_Game.members[0].pos.y.part.integer), 0x4u) == 0) {
         D_80145FB8 = 0;
     }
     if (D_80145FB8 == 0) {
