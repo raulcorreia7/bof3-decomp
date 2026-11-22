@@ -206,11 +206,7 @@ MATCH void func_801EF8A4(void) {
     PartyMember* active;
     PartyMember* work;
 
-    active = BATTLE_ACTIVE_WORK;
-    if (active->param.unk_0B == 132) {
-        work              = TASK(PartyMember);
-        work->header.step = work->header.step + 1;
-    }
+    MAGIC113_ADVANCE_AT_ACTIVE_PARAM(132);
 }
 
 MATCH void func_801EF8E4(void) {
@@ -270,11 +266,7 @@ MATCH void func_801EFD00(void) {
     PartyMember* active;
     PartyMember* work;
 
-    active = BATTLE_ACTIVE_WORK;
-    if (active->param.unk_0B == 132) {
-        work              = TASK(PartyMember);
-        work->header.step = work->header.step + 1;
-    }
+    MAGIC113_ADVANCE_AT_ACTIVE_PARAM(132);
 }
 
 MATCH void func_801EFD40(void) {

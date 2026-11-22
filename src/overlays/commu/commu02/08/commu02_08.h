@@ -157,4 +157,21 @@ void func_801D97C8(s32 unused, s32 x, s32 y);
 void func_801D9B80(s32 x, s32 y, s32 width, s32 height);
 void func_801DA7A4(void);
 
+/* Stop the current selection BGM and request the scene cue once the scene is free, then play it when
+ * the overlay is ready and step the scene event. A statement macro: the member declares s32 bgm_offset
+ * and u8* step. */
+#define COMMU02_START_SCENE_BGM()                                                              \
+    if (D_801F294D == 0) {                                                                     \
+        if (g_GameStateIndex != GAME_REQUEST_MESSAGE) {                                        \
+            bgm_offset = g_SndBGMId * 4;                                                       \
+            SND_SeqStop(g_SelectionSepSlots[bgm_offset], g_SelectionSepSlots[bgm_offset + 1]); \
+            SND_BGMRequest(D_801DB0CC);                                                        \
+            D_801F294D += 1;                                                                   \
+        }                                                                                      \
+    } else if (EMI_IsReady() != 0) {                                                           \
+        SND_BGMPlay(D_801DB0CC, BGM_CUE_LEVEL_DEFAULT, BGM_CUE_SHAPE_DEFAULT);                 \
+        step  = &g_SceneEventState.step;                                                       \
+        *step = *step + 1;                                                                     \
+    }
+
 #endif

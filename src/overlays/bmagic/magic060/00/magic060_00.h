@@ -36,4 +36,12 @@ void func_801EF76C(u8* text, s32 x, s32 y);
 void func_801EF924(u8* text, s32 x, s32 y);
 void func_801EFB00(u16 value, s32 x, s32 y);
 
+/* Advance the effect mode when the effect battler's parameter is `param_value`. A statement macro:
+ * the member declares PartyMember* work. */
+#define MAGIC060_ADVANCE_AT_EFFECT_PARAM(param_value) \
+    work = (PartyMember*)g_BattleEffectBattler;       \
+    if (work->param.unk_0B == (param_value)) {        \
+        TASK(PartyMember)->header.step++;             \
+    }
+
 #endif

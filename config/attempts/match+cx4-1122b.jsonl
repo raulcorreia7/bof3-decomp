@@ -1,0 +1,2 @@
+{"function": "emi/scenario/scena07/00@0x801FC2D0", "tried": "lifted retail switch; split actor locals per case; changed state width and actor-store order", "first_diff": "frame reserves 0x20 instead of retail 0x30; extra 16 bytes of unused stack and scheduling differ; 825 instructions", "score": null}
+{"function": "emi/scenario/scena07/00@0x801FC2D0", "tried": "permuter 120s on func_801FC2D0: base 1120, best 1120", "first_diff": "candidates in work/permute/nonmatchings/func_801FC2D0/output-*", "score": 1120}

@@ -424,18 +424,7 @@ MATCH void func_801D25CC(void) {
     s32 bgm_offset;
     u8* step;
 
-    if (D_801F294D == 0) {
-        if (g_GameStateIndex != GAME_REQUEST_MESSAGE) {
-            bgm_offset = g_SndBGMId * 4;
-            SND_SeqStop(g_SelectionSepSlots[bgm_offset], g_SelectionSepSlots[bgm_offset + 1]);
-            SND_BGMRequest(D_801DB0CC);
-            D_801F294D += 1;
-        }
-    } else if (EMI_IsReady() != 0) {
-        SND_BGMPlay(D_801DB0CC, BGM_CUE_LEVEL_DEFAULT, BGM_CUE_SHAPE_DEFAULT);
-        step  = &g_SceneEventState.step;
-        *step = *step + 1;
-    }
+    COMMU02_START_SCENE_BGM();
 }
 
 MATCH void func_801D269C(s32 x, s32 y) {
@@ -1105,18 +1094,7 @@ MATCH void func_801D4840(void) {
     s32 bgm_offset;
     u8* step;
 
-    if (D_801F294D == 0) {
-        if (g_GameStateIndex != GAME_REQUEST_MESSAGE) {
-            bgm_offset = g_SndBGMId * 4;
-            SND_SeqStop(g_SelectionSepSlots[bgm_offset], g_SelectionSepSlots[bgm_offset + 1]);
-            SND_BGMRequest(D_801DB0CC);
-            D_801F294D += 1;
-        }
-    } else if (EMI_IsReady() != 0) {
-        SND_BGMPlay(D_801DB0CC, BGM_CUE_LEVEL_DEFAULT, BGM_CUE_SHAPE_DEFAULT);
-        step  = &g_SceneEventState.step;
-        *step = *step + 1;
-    }
+    COMMU02_START_SCENE_BGM();
 }
 
 /* Draws the fairy casino board frame from its corner, edge and side pieces. */
