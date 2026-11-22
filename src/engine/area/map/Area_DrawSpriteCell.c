@@ -9,17 +9,8 @@
  * selects the clut by clut and appends the primitive.
  */
 MATCH void Area_DrawSpriteCell(s32 mirror, SpriteCell* cell, u16 clut) {
-    /* FAKE: keep the masked bit in a2. */
-    FAKE_REG(s32, mode_bit, "a2");
-    /* FAKE: keep the shifted flags in a3. */
-    FAKE_REG(s32, mode_flags, "a3");
-    /* FAKE: keep the shifted byte in v0. */
+    /* FAKE: keep the page word in v0. */
     FAKE_REG(s32, draw_value, "v0");
-    s32 mode_bits;
-    /* FAKE: reuse the retail a0 value for input, pointer, and output. */
-    FAKE_REG(s32, scratch, "a0");
-    s32         packed;
-    Actor*      work;
     s32         delta;
     SPRT*       sprite;
     u8*         scratch_base;
@@ -28,43 +19,8 @@ MATCH void Area_DrawSpriteCell(s32 mirror, SpriteCell* cell, u16 clut) {
     s32         sprite_mirror = mirror;
     s16         sprite_clut   = clut;
 
-    if ((GetGraphType() == 1) || (GetGraphType() == 2)) {
-        work       = g_Task;
-        draw_value = work->tint.bytes.flags;
-        mode_bit   = (draw_value & 0x3) << 7;
-        scratch    = work->sheet_page;
-        draw_value = scratch * 2;
-        packed     = draw_value & 0x60;
-        scratch    = scratch & 0xF;
-        if (work->palette_8bit != PALETTE_TYPE_CELL) {
-            draw_value = packed | 0x200;
-            draw_value = mode_bit | draw_value;
-        } else {
-            draw_value = mode_bit | packed;
-        }
-    } else {
-        scratch    = g_Task;
-        draw_value = ((Actor*)scratch)->tint.bytes.flags;
-        mode_flags = (draw_value & 0x3) << 5;
-        packed     = ((Actor*)scratch)->sheet_page;
-        draw_value = ((u32)packed >> 4) << 8;
-        mode_bits  = draw_value & 0x100;
-        /* FAKE: hide the masked bit's range so the shift stays arithmetic. */
-        FAKE_OPAQUE(mode_bits);
-        mode_bit   = mode_bits >> 4;
-        packed     = packed & 0xF;
-        draw_value = draw_value & 0x200;
-        mode_bits  = ((Actor*)scratch)->palette_8bit;
-        scratch    = draw_value * 4;
-        if (mode_bits != 0) {
-            draw_value = mode_bit | 0x80;
-            draw_value = mode_flags | draw_value;
-        } else {
-            draw_value = mode_flags | mode_bit;
-        }
-        draw_value |= packed;
-    }
-    draw_value |= scratch;
+    draw_value = getTPage(g_Task->palette_8bit != PALETTE_TYPE_CELL, g_Task->tint.bytes.flags, g_Task->sheet_page << 6, (g_Task->sheet_page >> 4) << 8);
+    FAKE_OPAQUE(draw_value);
     GFX_ADD_LAYER_DRAW_MODE(SPAD_CURSOR->draw_layer, draw_value);
     sprite = (SPRT*)g_GfxPrimCursor;
     SetSprt(sprite);
