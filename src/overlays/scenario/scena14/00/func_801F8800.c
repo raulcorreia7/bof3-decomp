@@ -23,5 +23,5 @@ MATCH void func_801F8850(void) {
     Game_SetScriptActive();
     g_ScenarioState.state_04 = 2;
     g_ScenarioState.step     = 0;
-    D_80146871 &= 0xFE;
+    g_ScenarioState.flags_01 &= 0xFE;
 }
