@@ -101,8 +101,8 @@ Callback g_FishingLureSteps[6] = {
 FishingCastStep g_FishingLureCastSteps[4] = {
     {0, 0},
     {0, 0},
-    {0x100000, 0xFFFE0000},
-    {0x280000, 0xFFFE0000},
+    {0x100000, -0x20000},
+    {0x280000, -0x20000},
 };
 /* The cue row is a 16.16 fixed-point offset and step; four rows. */
 FishingCueStep g_FishingLureFlyCueSteps[4] = {

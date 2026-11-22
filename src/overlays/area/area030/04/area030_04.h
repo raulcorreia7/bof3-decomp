@@ -121,8 +121,8 @@ ASSERT_SIZE(FishingCueStep, 0x08);
 
 /* One row of g_FishingLureCastSteps: the 16.16 lure step and its limit, indexed by cue_index. */
 typedef struct FishingCastStep {
-    u32 step;
-    u32 limit;
+    s32 step;
+    s32 limit;
 } FishingCastStep;
 
 ASSERT_SIZE(FishingCastStep, 0x08);
