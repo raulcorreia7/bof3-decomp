@@ -76,7 +76,7 @@ MATCH void func_801EEF64(void) {
                 archive = EMI_SLOT_KAIZAR_D;
                 break;
         }
-        EMI_LoadArchive(archive);
+        EMI_ArchiveLoad(archive);
         g_Task->header.mode += 1;
     }
 }
@@ -139,26 +139,26 @@ MATCH void func_801EF1C0(void) {
     }
     if (found) {
         if (g_EmiLoadedCharacterIndex == 7) {
-            EMI_LoadArchive((g_Battle.scroll_dir & 0x2) ? EMI_SLOT_BRTU247 : EMI_SLOT_BRTD247);
+            EMI_ArchiveLoad((g_Battle.scroll_dir & 0x2) ? EMI_SLOT_BRTU247 : EMI_SLOT_BRTD247);
         }
         if (g_EmiLoadedCharacterIndex == 0xD) {
-            EMI_LoadArchive((g_Battle.scroll_dir & 0x2) ? EMI_SLOT_BRTU457 : EMI_SLOT_BRTD457);
+            EMI_ArchiveLoad((g_Battle.scroll_dir & 0x2) ? EMI_SLOT_BRTU457 : EMI_SLOT_BRTD457);
         }
         if (g_EmiLoadedCharacterIndex == 0xE) {
-            EMI_LoadArchive((g_Battle.scroll_dir & 0x2) ? EMI_SLOT_BRTU467 : EMI_SLOT_BRTD467);
+            EMI_ArchiveLoad((g_Battle.scroll_dir & 0x2) ? EMI_SLOT_BRTU467 : EMI_SLOT_BRTD467);
         }
         if (g_EmiLoadedCharacterIndex == 0xF) {
             if (g_Battle.scroll_dir & 0x2) {
-                EMI_LoadArchive(EMI_SLOT_BRTU478);
+                EMI_ArchiveLoad(EMI_SLOT_BRTU478);
             } else {
-                EMI_LoadArchive(EMI_SLOT_BRTD478);
+                EMI_ArchiveLoad(EMI_SLOT_BRTD478);
             }
         }
     } else {
         if (g_Battle.scroll_dir & 0x2) {
-            EMI_LoadFamilyArchive(g_EmiLoadedCharacterIndex & 0x7F, 2);
+            EMI_ArchiveLoadFamily(g_EmiLoadedCharacterIndex & 0x7F, 2);
         } else {
-            EMI_LoadFamilyArchive(g_EmiLoadedCharacterIndex & 0x7F, 1);
+            EMI_ArchiveLoadFamily(g_EmiLoadedCharacterIndex & 0x7F, 1);
         }
     }
     g_Task->header.mode += 1;
@@ -169,9 +169,9 @@ MATCH void func_801EF3D0(void) {
         return;
     }
     if (g_Battle.scroll_dir & 0x2) {
-        EMI_LoadArchive(D_800B499C[g_Battle.dragon_form][1][g_EmiLoadedCharacterIndex]);
+        EMI_ArchiveLoad(D_800B499C[g_Battle.dragon_form][1][g_EmiLoadedCharacterIndex]);
     } else {
-        EMI_LoadArchive(D_800B499C[g_Battle.dragon_form][0][g_EmiLoadedCharacterIndex]);
+        EMI_ArchiveLoad(D_800B499C[g_Battle.dragon_form][0][g_EmiLoadedCharacterIndex]);
     }
     g_Task->header.mode += 1;
 }

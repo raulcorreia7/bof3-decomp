@@ -14,6 +14,6 @@ MATCH void func_801E75B0(void) {
             slot = EMI_SLOT_REID01;
         }
     }
-    EMI_LoadArchive(slot);
+    EMI_ArchiveLoad(slot);
     g_Task->header.mode++;
 }

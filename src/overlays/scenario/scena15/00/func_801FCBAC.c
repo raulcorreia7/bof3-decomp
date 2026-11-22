@@ -12,7 +12,7 @@ NON_MATCHING void func_801FCBAC(void) {
 
     switch (g_ScenarioState.step_05) {
         case 0:
-            EMI_LoadArchive(EMI_SLOT_SCE15EF0);
+            EMI_ArchiveLoad(EMI_SLOT_SCE15EF0);
             Scene_SetupParty(4);
             g_ScenarioState.step_05 = 1;
             break;

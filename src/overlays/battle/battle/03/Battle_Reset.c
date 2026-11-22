@@ -137,7 +137,7 @@ NON_MATCHING void Battle_Reset(void) {
     } while ((u32)(slot & BYTE_MASK) < 0xBU);
     slot = 0;
     if (BATTLE_IS_RANDOM()) {
-        EMI_LoadArchive(g_GameAreaId + EMI_SLOT_ENEMY);
+        EMI_ArchiveLoad(g_GameAreaId + EMI_SLOT_ENEMY);
         slot = 0;
     }
     index = slot & BYTE_MASK;

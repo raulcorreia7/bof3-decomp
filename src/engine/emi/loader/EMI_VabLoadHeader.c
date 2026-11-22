@@ -3,7 +3,7 @@
 /* selects the next EMI entry, transfers its dispatch metadata into
  * loader state, releases any prior owner, and advances the loader step.
  */
-MATCH void EMI_LoadVabHeader(void) {
+MATCH void EMI_VabLoadHeader(void) {
     /* FAKE: unused frame, 64 bytes. */
     FAKE_STACK_PADS(u8, 64);
     volatile u32* table_word;
@@ -35,7 +35,7 @@ MATCH void EMI_LoadVabHeader(void) {
         }
     }
 
-    EMI_CopySector();
+    EMI_SectorCopy();
     {
         u32* loader_step;
         loader_step  = &g_EmiStep;

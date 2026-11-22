@@ -19,7 +19,7 @@ MATCH void SYS_StartFrontend(void) {
     SYS_ThreadWait(1U);
     SND_Init();
     SND_SetBankLayout(0U);
-    EMI_LoadArchive(EMI_SLOT_FIRST);
+    EMI_ArchiveLoad(EMI_SLOT_FIRST);
     while (EMI_IsReady() == 0)
         SYS_ThreadWait(1U);
     SsUtSetReverbDepth(0x28, 0x28);

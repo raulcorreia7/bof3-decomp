@@ -5,7 +5,7 @@ MATCH void Fairy_LoadCommu05(void) {
         g_SceneEventState.mode = SCENE_EVENT_MESSAGE;
     } else {
         g_AreaWalkFlags |= AREA_WALK_BUSY_ALL;
-        EMI_LoadArchive(EMI_SLOT_COMMU05);
+        EMI_ArchiveLoad(EMI_SLOT_COMMU05);
         FAIRY_EVENT_STEP = FAIRY_EVENT_STEP + 1;
     }
 }

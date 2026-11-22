@@ -29,7 +29,7 @@ MATCH void Battle_LoadBattleArchive(void) {
     } else {
         arg = 7;
     }
-    EMI_LoadArchive(arg);
+    EMI_ArchiveLoad(arg);
     UI_PanelResetTasks();
     state                        = &g_GameEntrySubstate;
     counter                      = *state;

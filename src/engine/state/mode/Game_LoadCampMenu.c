@@ -5,7 +5,7 @@ MATCH void Game_LoadCampMenu(void) {
     u16  ev;
     u8   pv;
 
-    EMI_LoadArchive(EMI_SLOT_START);
+    EMI_ArchiveLoad(EMI_SLOT_START);
 
     while (!EMI_IsReady()) {
         SYS_ThreadWait(1u);
