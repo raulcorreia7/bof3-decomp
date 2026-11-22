@@ -301,54 +301,21 @@ NON_MATCHING void func_801D1A20(void) {
 INCLUDE_ASM(func_801D1A20);
 #endif
 
-#ifdef NON_MATCHING
-NON_MATCHING void func_801D1B58(void) {
+/* Fades the topping and base tints down to their own colours, 8 levels a frame, then opens the next round. */
+MATCH void func_801D1B58(void) {
     u8* fade;
     u8  level;
-    u8  value0;
-    u8  value1;
-    u8  value2;
-    u8  value3;
-    u8  value4;
-    u8  value5;
 
-    fade  = &D_80148654;
-    level = *fade;
-
-    value0 = D_801D9EF0[0];
-    if (value0 < level) {
-        value0 = level;
-    }
-    g_ShisuTopping[0] = value0;
-    value1            = D_801D9EF0[1];
-    if (value1 < level) {
-        value1 = level;
-    }
-    g_ShisuTopping[1] = value1;
-    value2            = D_801D9EF0[2];
-    if (value2 < level) {
-        value2 = level;
-    }
-    g_ShisuTopping[2] = value2;
-    value3            = D_801D9EF4[0];
-    if (value3 < level) {
-        value3 = level;
-    }
-    g_ShisuBase[0] = value3;
-    value4         = D_801D9EF4[1];
-    if (value4 < level) {
-        value4 = level;
-    }
-    g_ShisuBase[1] = value4;
-    value5         = D_801D9EF4[2];
-    if (value5 < level) {
-        value5 = level;
-    }
-    g_ShisuBase[2] = value5;
-
-    level -= 8;
-    *fade = level;
-    if ((u8)level == 0) {
+    fade              = &D_80148654;
+    level             = *fade;
+    g_ShisuTopping[0] = (D_801D9EF0[0] < level) ? level : D_801D9EF0[0];
+    g_ShisuTopping[1] = (D_801D9EF0[1] < level) ? level : D_801D9EF0[1];
+    g_ShisuTopping[2] = (D_801D9EF0[2] < level) ? level : D_801D9EF0[2];
+    g_ShisuBase[0]    = (D_801D9EF4[0] < level) ? level : D_801D9EF4[0];
+    g_ShisuBase[1]    = (D_801D9EF4[1] < level) ? level : D_801D9EF4[1];
+    g_ShisuBase[2]    = (D_801D9EF4[2] < level) ? level : D_801D9EF4[2];
+    *fade             = level - 8;
+    if (*fade == 0) {
         D_801DA0C1        = 5;
         D_801DA049        = 1;
         D_80148652        = 0;
@@ -358,13 +325,10 @@ NON_MATCHING void func_801D1B58(void) {
         g_ShisuBase[0]    = D_801D9EF4[0];
         g_ShisuBase[1]    = D_801D9EF4[1];
         g_ShisuBase[2]    = D_801D9EF4[2];
-        g_ShisuIngredients.rounds += 1;
+        g_ShisuIngredients.rounds++;
         D_80148651 -= 2;
     }
 }
-#else
-INCLUDE_ASM(func_801D1B58);
-#endif
 
 MATCH void func_801D1CA4(void) {
     g_ShisuIngredients.held[0] = Item_Count(ITEM_CATEGORY_ITEM, ITEM_MACKEREL, 0);

@@ -1,5 +1,6 @@
 #include "area118_13.h"
 
+/* Runs the scene clock while the field is free: a tick every 30 frames (40 in phase 1); 15 ticks step the task. */
 MATCH void func_801F2C6C(void) {
     u16 clock;
     u8  phase;
@@ -24,18 +25,19 @@ MATCH void func_801F2C6C(void) {
         return;
     }
 
+    /* The packed word stays raw: bit-fields write each field back and grow the body. */
     clock  = D_801F59E4;
     phase  = clock >> 15;
     frames = (clock & 0x7F00) >> 8;
     tick   = clock;
     frames++;
-    if ((phase == 0 && frames >= 0x1E) || (phase != 0 && frames >= 0x28)) {
+    if ((phase == 0 && frames >= 30) || (phase != 0 && frames >= 40)) {
         frames = 0;
         tick++;
     }
     clock      = (phase << 15) | (frames << 8) | tick;
     D_801F59E4 = clock;
-    if ((clock & 0xFF) >= 0xF) {
+    if ((clock & 0xFF) >= 15) {
         g_Task->header.mode++;
     }
 }
