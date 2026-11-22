@@ -1,0 +1,3 @@
+{"function": "exe/slus_004_22@0x8014BC70", "tried": "declared var_s7, var_s4 and var_fp as s8 in each combination (width changes the allocation order)", "first_diff": "every combination moves the first difference earlier or grows it (fp 0x8014BEE0, 241 diff lines versus 230); reverted", "score": null}
+{"function": "exe/slus_004_22@0x8014D290", "tried": "register and const work-pointer declarations", "first_diff": "register keeps 0x8014D2B0 (move a2 versus a3); const moves it to 0x8014D290; neither helps", "score": null}
+{"function": "exe/slus_004_22@0x80167428", "tried": "MAX() and ABS() rewritten as explicit compare and negate branches", "first_diff": "0x80167438 unchanged; the macros already expand to retail's bgez/negu and slt/move pairs", "score": null}
