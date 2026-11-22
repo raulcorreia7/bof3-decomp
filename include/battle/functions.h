@@ -65,6 +65,8 @@ void        func_801DAAE4(void);
 void        Effect_RotatePosition(void* work);
 s32         func_801DD59C(s32 amount);
 u8          func_801DD7AC(s32 selector);
+/* func_801E24F8 */
+void        func_801E24F8(u32 enemy_index, u32 script_index);
 void        func_801E257C(u32 enemy_index, u32 script_index);
 /* func_801E29B4 */
 /* func_800AC218 */

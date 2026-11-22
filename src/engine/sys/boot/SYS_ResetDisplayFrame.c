@@ -1,11 +1,14 @@
 #include "engine/slus/slus.h"
 
-/* clears one ordering table and resets its four boot render flags.
+/* clears one frame's ordering table and arms its draw environment to clear the background to black.
  */
 MATCH void SYS_ResetDisplayFrame(u8* work) {
+    DRAWENV* draw;
+
     ClearOTagR((u_long*)(work + 0x70), 8);
-    work[0x2C] = 1;
-    work[0x2D] = 0;
-    work[0x2E] = 0;
-    work[0x2F] = 0;
+    draw       = (DRAWENV*)(work + 0x14);
+    draw->isbg = 1;
+    draw->r0   = 0;
+    draw->g0   = 0;
+    draw->b0   = 0;
 }

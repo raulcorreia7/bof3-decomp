@@ -12,6 +12,6 @@ MATCH void Fishing_MoveFish(void) {
         work               = TASK(FishingState);
         work->motion.unk_34 += work->pos_x;
         work->y_38.pos_y += work->cursor_10;
-        work->bounce.half.key = (u16)(work->bounce.half.key + work->step_14);
+        work->bounce.half.key = (u16)(work->bounce.half.key + work->bounce_speed);
     }
 }

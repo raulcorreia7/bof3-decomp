@@ -9,9 +9,9 @@ MATCH void Battle_ScrollEscapeBack(void) {
     u32           index;
 
     if (g_AreaCameraMoving == 0) {
-        index            = g_Battle.scroll_dir;
-        g_AreaCameraStep = 0x40;
-        scroll_a         = &g_AreaTargetCellX;
+        index             = g_Battle.scroll_dir;
+        g_AreaCameraSpeed = 0x40;
+        scroll_a          = &g_AreaTargetCellX;
         *scroll_a += g_BattleScrollDeltas[index].dx;
         counter          = g_Battle.ui_mode;
         delta            = g_BattleScrollDeltas[index].dy;

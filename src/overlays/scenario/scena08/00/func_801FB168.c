@@ -7,7 +7,7 @@ __asm__(".include \"include/match/macro.inc\"\n");
 MATCH void func_801FB168(void) {
     u8* step;
 
-    step = &g_ScenarioState.step_05;
+    step = &g_ScenarioState.step;
     switch (*step) {
         case 0:
             D_80147ACF = 3;

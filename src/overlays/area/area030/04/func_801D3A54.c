@@ -1,7 +1,7 @@
 #include "area030_04.h"
 
 /* Panel cursor fields of the scratchpad work record. */
-#define FISHING_CURSOR_TIMER    (TASK(FishingState)->step_timer)
+#define FISHING_CURSOR_TIMER    (TASK(FishingState)->timer)
 #define FISHING_CURSOR_ROW_Y    (TASK(FishingState)->origin_x)
 #define FISHING_CURSOR_ITEM_PTR (TASK(FishingState)->item.pointer)
 #define FISHING_CURSOR_COUNT    (TASK(FishingState)->counter_49)
@@ -20,7 +20,7 @@ MATCH void func_801D3A54(void) {
     u8*           item_next;
 
     work = TASK(FishingState);
-    work->step_timer -= 1;
+    work->timer -= 1;
     work->origin_x -= 2;
     if (FISHING_CURSOR_TIMER == 0) {
         item = (u8*)FISHING_CURSOR_ITEM_PTR;

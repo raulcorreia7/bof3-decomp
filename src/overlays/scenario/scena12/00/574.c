@@ -55,10 +55,10 @@ MATCH void func_801F7240(void) {
     SCENA12_STEP_COUNTER();
 }
 
-/* The statements of func_801F7348 and func_801F7518, byte-identical twins: unless a message is pending, the entry state is 4 or scene flag 0x2E is set, queue script step 5 with g_ScenarioState.step_05 = 0x19, raise the script-active flag and clear the work. */
+/* The statements of func_801F7348 and func_801F7518, byte-identical twins: unless a message is pending, the entry state is 4 or scene flag 0x2E is set, queue script step 5 with g_ScenarioState.step = 0x19, raise the script-active flag and clear the work. */
 #define SCENA12_START_SCRIPT()                                                                                        \
     if (g_GameStateIndex != GAME_REQUEST_MESSAGE && g_GameEntryState != 4 && SYS_TestFlag(g_SceneFlags, 0x2E) == 0) { \
-        g_ScenarioState.step_05  = 0x19;                                                                              \
+        g_ScenarioState.step     = 0x19;                                                                              \
         g_ScenarioState.state_04 = 5;                                                                                 \
         g_GameFlags |= GAME_FLAG_SCRIPT_ACTIVE;                                                                       \
         Actor_Clear();                                                                                                \
@@ -163,9 +163,9 @@ NON_MATCHING void Menu_DrawHeaderBar(s32 x, s32 y, s32 width, s32 height, u8 win
     prim->tpage = getTPage(TPAGE_DEPTH_4BIT, TPAGE_ABR_HALF, FONT_TPAGE_X, FONT_TPAGE_Y);
     GFX_AddPrim(GFX_LAYER_UI, sizeof(POLY_FT4));
 
+    odd  = (width - 3) & 1;
     half = ((s32)width1_u - 4) >> 1;
     prim = (POLY_FT4*)g_GfxPrimCursor;
-    odd  = (width - 3) & 1;
     SetPolyFT4(prim);
     PSX_SET_SEMI_TRANSPARENT(prim);
     half_u = half;

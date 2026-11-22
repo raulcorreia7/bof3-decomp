@@ -12,7 +12,7 @@ MATCH void func_801D78FC(void) {
     u8             i;
     s8             result;
 
-    Menu_DrawClutStrip(D_80144953);
+    Menu_DrawClutStrip(g_WindowClut);
     panel = &g_UiPanelTasks[MENU_START_PANEL_CURSOR_FRAME];
     if (g_BattleMessageState == 0) {
         panel->active = 1;

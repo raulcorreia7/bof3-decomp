@@ -27,7 +27,7 @@ NON_MATCHING void Menu_UpdateFormation(void) {
     val2 = 0;
     val1 = 0;
     val6 = 0;
-    Menu_DrawClutStrip(D_80144953);
+    Menu_DrawClutStrip(g_WindowClut);
     *(u8*)(&D_801485DC) = 0;
     if (g_FormationPickColumn != 0x7F) {
         tmp2                                                 = (g_FormationPickRow * 3) + g_FormationPickColumn;

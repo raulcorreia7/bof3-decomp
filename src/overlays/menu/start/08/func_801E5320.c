@@ -6,7 +6,7 @@ MATCH void func_801E5320(void) {
     u16* pad;
     u8   count;
 
-    Menu_DrawClutStrip(D_80144953);
+    Menu_DrawClutStrip(g_WindowClut);
     MENU_DRAW_HEADER();
     WinDrawCueText(28, 21, 0xAA);
     func_801E14A8(0x62, 0x4C, D_801ED870, g_SaveCardPort, 0);
@@ -27,12 +27,12 @@ MATCH void func_801E5320(void) {
         SND_SEPlay(EMI_SE_ID(SND_BANK_COMMON, 4));
         g_MenuStartTimer      = 2;
         D_801ED7FC            = 5;
-        count                 = g_MenuStartStep;
-        g_MenuStartStep       = 0xE;
+        count                 = g_MenuCampStep;
+        g_MenuCampStep        = 0xE;
         g_MenuStartReturnStep = count + 1;
     } else if ((*pad & g_InputMasks[MENU_INPUT_CANCEL]) != 0) {
         SND_SEPlay(EMI_SE_ID(SND_BANK_COMMON, 6));
-        g_MenuStartStep     = 0;
+        g_MenuCampStep      = 0;
         g_GameEntrySubstate = 1;
     }
 }

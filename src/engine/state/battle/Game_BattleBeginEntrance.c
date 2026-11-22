@@ -9,7 +9,7 @@ MATCH void Game_BattleBeginEntrance(void) {
     Actor_RunInteractions();
     Area_RunLoadingFrame();
     if (EMI_IsReady() && local_ready) {
-        g_AreaCameraStep             = 0;
+        g_AreaCameraSpeed            = 0;
         g_Battle.outcome.event_flags = 0;
         g_Battle.phase.mode          = BATTLE_MODE_ENTRANCE;
         g_Battle.phase.step          = 0;

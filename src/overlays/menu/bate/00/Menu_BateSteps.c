@@ -42,7 +42,7 @@ MATCH void Menu_StartFadeIn(void) {
 }
 
 MATCH void func_801D0EE4(void) {
-    u8* base = &D_80144953;
+    u8* base = &g_WindowClut;
     Menu_DrawClutStrip(*base);
     if (g_UiWindowEffectBusy != 0) {
         return;
@@ -57,7 +57,7 @@ MATCH void func_801D0EE4(void) {
 MATCH void func_801D0F70(void) {
     u8* timer;
 
-    Menu_DrawClutStrip(D_80144953);
+    Menu_DrawClutStrip(g_WindowClut);
     timer = &D_80148654;
     if (TIMER_EXPIRED(*timer)) {
         D_801D8ED4.unk_00 = 0;
@@ -71,7 +71,7 @@ MATCH void func_801D0F70(void) {
 
 MATCH void func_801D0FF8(void) {
     SYS_DISPATCH_BYTE(g_MenuBateStep2Sub1Steps, g_MenuStep.state);
-    Menu_DrawClutStrip(D_80144953);
+    Menu_DrawClutStrip(g_WindowClut);
 }
 
 MATCH void func_801D1044(void) {

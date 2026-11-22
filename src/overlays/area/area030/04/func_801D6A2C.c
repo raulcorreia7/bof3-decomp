@@ -12,12 +12,12 @@ MATCH void func_801D6A2C(void) {
         FishingState* record;
         FishingState* retired;
 
-        record              = TASK(FishingState);
-        record->counter_48  = 0;
-        retired             = TASK(FishingState);
-        record->origin_x    = 0xF0;
-        record->origin_y    = 0xBA;
-        retired->step_timer = 0;
+        record             = TASK(FishingState);
+        record->counter_48 = 0;
+        retired            = TASK(FishingState);
+        record->origin_x   = 0xF0;
+        record->origin_y   = 0xBA;
+        retired->timer     = 0;
     }
 
     TASK(FishingState)->step_index = 0;

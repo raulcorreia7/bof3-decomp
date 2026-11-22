@@ -7,11 +7,11 @@ __asm__(".include \"include/match/macro.inc\"\n");
 #endif
 
 MATCH void func_801FC498(void) {
-    switch (g_ScenarioState.step_05) {
+    switch (g_ScenarioState.step) {
         case 0:
             if (g_GameStateIndex != GAME_REQUEST_MESSAGE) {
-                g_ScriptVars[0]         = 0x1E;
-                g_ScenarioState.step_05 = 1;
+                g_ScriptVars[0]      = 0x1E;
+                g_ScenarioState.step = 1;
             }
             break;
         case 1: {
@@ -26,7 +26,7 @@ MATCH void func_801FC498(void) {
                 *progress       = 0x20;
                 g_ScriptVars[1] = 0;
                 Game_ClearScriptActive();
-                g_ScenarioState.step_05  = 0;
+                g_ScenarioState.step     = 0;
                 g_ScenarioState.state_04 = 0;
             } else {
                 strncpy((char*)g_TextVariables[0], (char*)Item_GetRecord(ITEM_CATEGORY_WEAPON, (u8)(*stored + 1)), ITEM_NAME_LENGTH);
@@ -34,14 +34,14 @@ MATCH void func_801FC498(void) {
                 MESSAGE_START_WAIT(MSG_SCENA06_148);
                 SYS_SetFlag(g_SceneFlags, 0x22);
                 SND_SEPlay(0x106);
-                g_ScenarioState.step_05 = 0x15;
+                g_ScenarioState.step = 0x15;
             }
             break;
         }
         case 10:
             if (g_GameStateIndex != GAME_REQUEST_MESSAGE) {
-                g_ScriptVars[0]         = 0x23;
-                g_ScenarioState.step_05 = 0xC;
+                g_ScriptVars[0]      = 0x23;
+                g_ScenarioState.step = 0xC;
             }
             break;
         case 12: {
@@ -56,7 +56,7 @@ MATCH void func_801FC498(void) {
                 *progress       = 0x25;
                 g_ScriptVars[1] = 0;
                 Game_ClearScriptActive();
-                g_ScenarioState.step_05  = 0;
+                g_ScenarioState.step     = 0;
                 g_ScenarioState.state_04 = 0;
             } else {
                 strncpy((char*)g_TextVariables[1], (char*)Item_GetRecord(ITEM_CATEGORY_ARMOR, (u8)(*stored + 1)), ITEM_NAME_LENGTH);
@@ -64,21 +64,21 @@ MATCH void func_801FC498(void) {
                 MESSAGE_START_WAIT(MSG_SCENA06_149);
                 SYS_SetFlag(g_SceneFlags, 0x23);
                 SND_SEPlay(0x106);
-                g_ScenarioState.step_05 = 0x15;
+                g_ScenarioState.step = 0x15;
             }
             break;
         }
         case 20:
             UI_MessageRequest(MSG_SYSTEM_NOTHING_FOUND);
-            g_GameStateIndex        = GAME_REQUEST_MESSAGE;
-            g_ScenarioState.step_05 = 0x15;
+            g_GameStateIndex     = GAME_REQUEST_MESSAGE;
+            g_ScenarioState.step = 0x15;
             break;
         case 21:
             if (g_GameStateIndex != GAME_REQUEST_MESSAGE) {
                 g_ScriptVars[0] = 0;
                 g_ScriptVars[1] = 0;
                 Game_ClearScriptActive();
-                g_ScenarioState.step_05  = 0;
+                g_ScenarioState.step     = 0;
                 g_ScenarioState.state_04 = 0;
             }
             break;

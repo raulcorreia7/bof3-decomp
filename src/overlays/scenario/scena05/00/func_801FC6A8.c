@@ -10,7 +10,7 @@ MATCH void func_801FC6A8(void) {
     u8* state;
     u8  next;
 
-    state = &g_ScenarioState.step_05;
+    state = &g_ScenarioState.step;
     switch (*state) {
         case 0:
             if (!(g_UiWindowChannel & FRONTEND_FLAG_CONFIRM)) {
@@ -38,7 +38,7 @@ MATCH void func_801FC6A8(void) {
 MATCH void func_801FC778(void) {
     u8* state;
 
-    state = &g_ScenarioState.step_05;
+    state = &g_ScenarioState.step;
     switch (*state) {
         case 0:
             MESSAGE_START_WAIT(MSG_SCENA05_076);
@@ -84,7 +84,7 @@ MATCH void func_801FCAA0(void) {
         g_ScriptVars[1]          = 0;
         g_ScriptVars[2]          = 0;
         g_ScriptVars[3]          = 0;
-        g_ScenarioState.step_05  = 0;
+        g_ScenarioState.step     = 0;
         g_ScenarioState.state_04 = 0x15;
     }
 }
@@ -96,14 +96,14 @@ MATCH void func_801FCB1C(void) {
     g_ScriptVars[1]          = 0;
     g_ScriptVars[2]          = 0;
     g_ScriptVars[3]          = 0;
-    g_ScenarioState.step_05  = 0;
+    g_ScenarioState.step     = 0;
     g_ScenarioState.state_04 = 8;
 }
 
 MATCH void func_801FCB80(void) {
     Game_SetScriptActive();
     SCRIPT_VARS_CLEAR_ALL();
-    g_ScenarioState.step_05  = 0;
+    g_ScenarioState.step     = 0;
     g_ScenarioState.state_04 = 12;
 }
 
@@ -114,21 +114,21 @@ MATCH void func_801FCBD4(void) {
 MATCH void func_801FCC28(void) {
     Game_SetScriptActive();
     SCRIPT_VARS_CLEAR_EXCEPT_CHOICE();
-    g_ScenarioState.step_05  = 0;
+    g_ScenarioState.step     = 0;
     g_ScenarioState.state_04 = 16;
 }
 
 MATCH void func_801FCC74(void) {
     Game_SetScriptActive();
     SCRIPT_VARS_CLEAR_EXCEPT_CHOICE();
-    g_ScenarioState.step_05  = 0;
+    g_ScenarioState.step     = 0;
     g_ScenarioState.state_04 = 17;
 }
 
 MATCH void func_801FCCC0(void) {
     Game_SetScriptActive();
     SCRIPT_VARS_CLEAR_EXCEPT_CHOICE();
-    g_ScenarioState.step_05  = 0;
+    g_ScenarioState.step     = 0;
     g_ScenarioState.state_04 = 18;
 }
 
@@ -147,7 +147,7 @@ MATCH s32 func_801FCD60(void) {
     g_ScriptVars[1]          = 0;    \
     g_ScriptVars[2]          = 0;    \
     g_ScriptVars[3]          = 0;    \
-    g_ScenarioState.step_05  = 0;    \
+    g_ScenarioState.step     = 0;    \
     g_ScenarioState.state_04 = state
 
 MATCH s32 func_801FCD68(s32 x, s32 y) {
@@ -165,7 +165,7 @@ MATCH s32 func_801FCD68(s32 x, s32 y) {
             }
         } else if (SYS_TestFlag(g_SceneFlags, 9) == 0 && (u32)(x - TO_COORD(132)) <= TO_COORD_HALF(2) && (y == TO_COORD(12) || y == TO_COORD_HALF(12) || y == TO_COORD(24) || y == TO_COORD_HALF(24))) {
             Game_SetScriptActive();
-            g_ScenarioState.step_05 = 20;
+            g_ScenarioState.step = 20;
             SCRIPT_VARS_CLEAR_ALL();
             g_ScenarioState.state_04 = 4;
             return 1;

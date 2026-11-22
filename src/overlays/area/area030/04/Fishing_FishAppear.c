@@ -16,7 +16,7 @@ NON_MATCHING void Fishing_FishAppear(void) {
     TASK(FishingState)->active_flags = 0;
     TASK(FishingState)->counter_48   = 2;
     TASK(FishingState)->state_29     = 5;
-    TASK(FishingState)->step_timer   = 0;
+    TASK(FishingState)->timer        = 0;
     TASK(FishingState)->saved_index  = 0;
     FISHING_ROW->fish_row            = (u8)RANDOM_MASK(3);
     count                            = FISHING_ENTRY(TASK(FishingState)->cue_index)->count;
@@ -38,8 +38,8 @@ NON_MATCHING void Fishing_FishAppear(void) {
     } else if (TASK(FishingState)->bounce.half.key < limit) {
         TASK(FishingState)->bounce.half.key = limit;
     }
-    TASK(FishingState)->counter_08 = 4;
-    TASK(FishingState)->step_14    = 0;
+    TASK(FishingState)->counter_08   = 4;
+    TASK(FishingState)->bounce_speed = 0;
     Script_Select(0);
     TASK(FishingState)->handler_index += 1;
 }

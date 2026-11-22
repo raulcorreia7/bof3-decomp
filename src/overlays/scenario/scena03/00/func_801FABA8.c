@@ -6,19 +6,19 @@ __asm__(".include \"include/match/macro.inc\"\n");
 #endif
 
 MATCH void func_801FABA8(void) {
-    switch (g_ScenarioState.step_05) {
+    switch (g_ScenarioState.step) {
         case 0:
             if (g_GameStateIndex != GAME_REQUEST_MESSAGE) {
                 g_ScriptVars[0] = 0;
                 UI_ModeSet(0);
-                g_ScenarioState.step_05 = 1;
+                g_ScenarioState.step = 1;
             }
             break;
         case 1:
             if (g_UiWindowEffectBusy == 0) {
                 g_ScenarioState.timer_06 = 60;
                 g_AreaDrawFlags          = 0;
-                g_ScenarioState.step_05  = 2;
+                g_ScenarioState.step     = 2;
             }
             break;
         case 2:
@@ -26,7 +26,7 @@ MATCH void func_801FABA8(void) {
                 g_ScenarioState.timer_06--;
             } else {
                 func_8019FA28(0x63, TO_COORD(6), TO_COORD(38), 0x80);
-                g_ScenarioState.step_05 = 3;
+                g_ScenarioState.step = 3;
                 g_ScenarioState.flags_01 |= 1;
             }
             break;
@@ -34,19 +34,19 @@ MATCH void func_801FABA8(void) {
             if (g_ScriptVars[0] == 10) {
                 Game_ClearScriptActive();
                 g_ScenarioState.state_04 = 0;
-                g_ScenarioState.step_05  = 0;
+                g_ScenarioState.step     = 0;
             }
             break;
         case 4:
             if (g_GameStateIndex == GAME_REQUEST_MESSAGE && g_UiMessageRequest == 0xC) {
-                g_ScenarioState.step_05 = 5;
+                g_ScenarioState.step = 5;
             }
             break;
         case 5:
             if (g_GameStateIndex != GAME_REQUEST_MESSAGE) {
                 g_ScriptVars[1]          = 0;
                 g_ScenarioState.state_04 = 0;
-                g_ScenarioState.step_05  = 0;
+                g_ScenarioState.step     = 0;
                 g_GameFlags &= 0xFEFF;
             }
             break;
@@ -57,20 +57,20 @@ MATCH void func_801FABA8(void) {
                 g_AreaDrawFlags = 0x1F;
                 g_ScriptVars[0] = 1;
                 UI_ModeSet(1);
-                g_ScenarioState.step_05 = 7;
+                g_ScenarioState.step = 7;
             }
             break;
         case 7:
             if (g_ScriptVars[0] == 5) {
                 UI_ModeSet(0);
-                g_ScenarioState.step_05 = 8;
+                g_ScenarioState.step = 8;
             }
             break;
         case 8:
             if (g_UiWindowEffectBusy == 0) {
                 g_ScenarioState.timer_06 = 60;
                 g_AreaDrawFlags          = 0;
-                g_ScenarioState.step_05  = 9;
+                g_ScenarioState.step     = 9;
             }
             break;
         case 9:
@@ -80,7 +80,7 @@ MATCH void func_801FABA8(void) {
                 SND_BGMFadeOut(g_SndBGMId, 100, 8);
                 SND_XAStartStream(0, 1);
                 func_801C16B8();
-                g_ScenarioState.step_05 = 10;
+                g_ScenarioState.step = 10;
             }
             break;
         case 10:
@@ -89,13 +89,13 @@ MATCH void func_801FABA8(void) {
                 g_ScenarioState.flags_01 &= 0xFE;
                 Area_BundleRunOpcodes();
                 UI_ModeSet(1);
-                g_ScenarioState.step_05 = 11;
+                g_ScenarioState.step = 11;
             }
             break;
         case 11:
             if (g_UiWindowEffectBusy == 0) {
-                g_ScriptVars[0]         = 6;
-                g_ScenarioState.step_05 = 12;
+                g_ScriptVars[0]      = 6;
+                g_ScenarioState.step = 12;
             }
             break;
         case 12:
@@ -104,41 +104,41 @@ MATCH void func_801FABA8(void) {
                 Game_ClearScriptActive();
                 g_ScriptVars[0]          = 0;
                 g_ScenarioState.state_04 = 0;
-                g_ScenarioState.step_05  = 0;
+                g_ScenarioState.step     = 0;
             }
             break;
         case 13:
             if (g_GameStateIndex == GAME_REQUEST_MESSAGE && g_UiMessageRequest == 0x11) {
-                g_ScenarioState.step_05 = 14;
+                g_ScenarioState.step = 14;
             }
             break;
         case 14:
             if (g_GameStateIndex != GAME_REQUEST_MESSAGE) {
                 g_ScenarioState.state_04 = 0;
-                g_ScenarioState.step_05  = 0;
+                g_ScenarioState.step     = 0;
                 g_GameFlags &= 0xFEFF;
             }
             break;
         case 15:
             func_801BE1B0(2);
-            g_ScenarioState.step_05 = 16;
+            g_ScenarioState.step = 16;
             break;
         case 16:
             if (g_ScriptVars[0] == 1) {
-                g_AreaDrawFlags         = 0;
-                g_ScenarioState.step_05 = 17;
+                g_AreaDrawFlags      = 0;
+                g_ScenarioState.step = 17;
             }
             break;
         case 17:
             func_8019FA28(0x63, TO_COORD_HALF(6), TO_COORD(35), 0x83);
-            g_GameRequestType       = 0xFF;
-            g_GameEntryMode         = 0xFF;
-            g_ScenarioState.step_05 = 18;
+            g_GameRequestType    = 0xFF;
+            g_GameEntryMode      = 0xFF;
+            g_ScenarioState.step = 18;
             break;
         case 18:
             g_AreaDrawFlags          = 0x1F;
             g_ScenarioState.timer_06 = 60;
-            g_ScenarioState.step_05  = 19;
+            g_ScenarioState.step     = 19;
             break;
         case 19:
             if (g_ScenarioState.timer_06 != 0) {
@@ -150,8 +150,8 @@ MATCH void func_801FABA8(void) {
                 }
                 g_ScenarioState.timer_06--;
             } else {
-                g_AreaDrawFlags         = 0;
-                g_ScenarioState.step_05 = 20;
+                g_AreaDrawFlags      = 0;
+                g_ScenarioState.step = 20;
             }
             break;
         case 20:
@@ -159,21 +159,21 @@ MATCH void func_801FABA8(void) {
             g_AreaScrollTargetY = TO_COORD_HALF(11);
             Area_InitMapRenderer();
             g_ScenarioState.timer_06 = 10;
-            g_ScenarioState.step_05  = 21;
+            g_ScenarioState.step     = 21;
             break;
         case 21:
             if (g_ScenarioState.timer_06 != 0) {
                 g_ScenarioState.timer_06--;
             } else {
-                g_AreaDrawFlags         = 0x1F;
-                g_ScenarioState.step_05 = 22;
+                g_AreaDrawFlags      = 0x1F;
+                g_ScenarioState.step = 22;
                 g_ScriptVars[0]++;
             }
             break;
         case 22:
             if (g_ScriptVars[0] == 4) {
-                g_AreaDrawFlags         = 0;
-                g_ScenarioState.step_05 = 23;
+                g_AreaDrawFlags      = 0;
+                g_ScenarioState.step = 23;
             }
             break;
         case 23:
@@ -181,35 +181,35 @@ MATCH void func_801FABA8(void) {
             g_AreaScrollTargetY = TO_COORD(35);
             Area_InitMapRenderer();
             g_ScenarioState.timer_06 = 10;
-            g_ScenarioState.step_05  = 24;
+            g_ScenarioState.step     = 24;
             break;
         case 24:
             if (g_ScenarioState.timer_06 != 0) {
                 g_ScenarioState.timer_06--;
             } else {
-                g_AreaDrawFlags         = 0x1F;
-                g_ScenarioState.step_05 = 25;
+                g_AreaDrawFlags      = 0x1F;
+                g_ScenarioState.step = 25;
                 g_ScriptVars[0]++;
             }
             break;
         case 25:
             if (g_ScriptVars[0] == 9) {
-                g_AreaDrawFlags         = 0;
-                g_ScenarioState.step_05 = 26;
+                g_AreaDrawFlags      = 0;
+                g_ScenarioState.step = 26;
             }
             break;
         case 26:
             g_AreaScrollTargetX = TO_COORD(6);
             g_AreaScrollTargetY = TO_COORD(9);
             Area_InitMapRenderer();
-            g_ScenarioState.step_05 = 27;
+            g_ScenarioState.step = 27;
             break;
         case 27:
             if (g_ScenarioState.timer_06 != 0) {
                 g_ScenarioState.timer_06--;
             } else {
-                g_AreaDrawFlags         = 0x1F;
-                g_ScenarioState.step_05 = 28;
+                g_AreaDrawFlags      = 0x1F;
+                g_ScenarioState.step = 28;
                 g_ScriptVars[0]++;
             }
             break;
@@ -219,7 +219,7 @@ MATCH void func_801FABA8(void) {
                 g_GameCellType = 3;
                 SYS_SetFlag(g_SceneFlags, 0x1C);
                 g_ScenarioState.state_04 = 0;
-                g_ScenarioState.step_05  = 0;
+                g_ScenarioState.step     = 0;
             }
             break;
     }

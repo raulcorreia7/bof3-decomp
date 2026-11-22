@@ -28,8 +28,10 @@ extern u8          g_SaveEntryFacing;
 extern u32         g_SaveEntryX;
 extern u32         g_SaveEntryY;
 extern u8          g_SceneFlagWords[]; /* 0x80144E88 */
-extern s8          D_80144950;
-extern u8          D_80144953;
+/* D_80144950 */
+extern s8          g_MessageSpeed;
+/* D_80144953 */
+extern u8          g_WindowClut;
 extern u8          D_80144954;
 /* D_80144956 */
 extern u8          g_AutoRun;
@@ -166,9 +168,9 @@ extern s16         g_AreaCameraOffsetY;
 /* D_8014932C */
 extern s16         g_AreaCameraOffsetZ;
 /* D_8014932E */
-extern s16         g_AreaCameraStep;
+extern s16         g_AreaCameraSpeed;
 /* D_80149330 */
-extern s16         g_AreaCameraHeightStep;
+extern s16         g_AreaCameraHeightDelta;
 /* D_80149332 */
 extern u8          g_AreaCameraMoving;
 /* D_80149333 */

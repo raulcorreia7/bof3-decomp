@@ -9,6 +9,6 @@ MATCH void func_801F4790(void) {
         g_ScriptVars[0] = 1;
         Game_ClearScriptActive();
         g_ScenarioState.state_04 = 0;
-        g_ScenarioState.step_05  = 0;
+        g_ScenarioState.step     = 0;
     }
 }

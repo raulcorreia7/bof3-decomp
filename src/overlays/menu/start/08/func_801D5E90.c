@@ -13,7 +13,7 @@ NON_MATCHING void func_801D5E90(void) {
     u8*            cursor;
 
     panel = &g_UiPanelTasks[14];
-    Menu_DrawClutStrip(D_80144953);
+    Menu_DrawClutStrip(g_WindowClut);
     D_80148624                                                = 1;
     D_80148628                                                = panel->pos.x + 7;
     D_8014862A                                                = panel->pos.y + ((panel->unk_0B - panel->unk_0A) * 13 + 0x1A);

@@ -6,7 +6,7 @@ MATCH void func_801D8D64(void) {
     u8* timer = &D_80148654;
     u8  count;
 
-    Menu_DrawClutStrip(D_80144953);
+    Menu_DrawClutStrip(g_WindowClut);
     count  = *timer - 1;
     *timer = count;
     if (count == 0) {

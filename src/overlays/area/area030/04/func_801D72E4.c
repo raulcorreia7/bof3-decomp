@@ -20,26 +20,26 @@ NON_MATCHING void func_801D72E4(s16 panel_x, s16 panel_y) {
 
     UI_WindowDraw(panel_x & HALF_MASK, panel_y & HALF_MASK, 242, 159, UI_WINDOW_OPEN_ALL, (s32)g_WindowStyle);
     if (TASK(FishingState)->counter_08 != 0) {
-        if (TASK(FishingState)->step_timer == 0) {
+        if (TASK(FishingState)->timer == 0) {
             health = TASK(FishingState)->bounce.half.unk_3C;
             if (TASK(FishingState)->bounce.half.key != health) {
-                TASK(FishingState)->step_limit      = (s32)(health * 9);
+                TASK(FishingState)->bounce_accel    = (s32)(health * 9);
                 TASK(FishingState)->bounce.half.key = (s16)TASK(FishingState)->bounce.half.unk_3C;
             }
             if ((s8)TASK(FishingState)->counter_08 > 0) {
-                scroll_pos                  = TASK(FishingState)->step_14 - 1;
-                TASK(FishingState)->step_14 = scroll_pos;
+                scroll_pos                       = TASK(FishingState)->bounce_speed - 1;
+                TASK(FishingState)->bounce_speed = scroll_pos;
                 if (scroll_pos < 0) {
-                    TASK(FishingState)->step_14 = 0x35;
+                    TASK(FishingState)->bounce_speed = 0x35;
                 }
             }
-            TASK(FishingState)->step_timer = (u8)(TASK(FishingState)->step_timer + 1);
+            TASK(FishingState)->timer      = (u8)(TASK(FishingState)->timer + 1);
             TASK(FishingState)->step_index = (u8)(TASK(FishingState)->step_index + 1);
         }
         if (TASK(FishingState)->step_index == 0) {
-            scroll_pos = TASK(FishingState)->step_14;
-            if (scroll_pos == TASK(FishingState)->step_limit) {
-                TASK(FishingState)->step_timer       = 0U;
+            scroll_pos = TASK(FishingState)->bounce_speed;
+            if (scroll_pos == TASK(FishingState)->bounce_accel) {
+                TASK(FishingState)->timer            = 0U;
                 TASK(FishingState)->counter_08       = 0U;
                 member                               = Actor_FindFreeSpawned() & BYTE_MASK;
                 g_SpawnedActors[member].header.flags = 1;
@@ -49,9 +49,9 @@ NON_MATCHING void func_801D72E4(s16 panel_x, s16 panel_y) {
             } else {
                 scroll_pos = scroll_pos - 1;
                 if ((s8)TASK(FishingState)->counter_08 > 0) {
-                    TASK(FishingState)->step_14 = scroll_pos;
+                    TASK(FishingState)->bounce_speed = scroll_pos;
                     if (scroll_pos < 0) {
-                        TASK(FishingState)->step_14 = 0x35;
+                        TASK(FishingState)->bounce_speed = 0x35;
                     }
                 }
                 TASK(FishingState)->step_index = (u8)(TASK(FishingState)->step_index + 1);
@@ -61,10 +61,10 @@ NON_MATCHING void func_801D72E4(s16 panel_x, s16 panel_y) {
             if (TASK(FishingState)->step_index == 4) {
                 TASK(FishingState)->step_index = 0U;
                 if ((s8)TASK(FishingState)->counter_08 < 0) {
-                    scroll_pos                  = TASK(FishingState)->step_14 + 1;
-                    TASK(FishingState)->step_14 = scroll_pos;
+                    scroll_pos                       = TASK(FishingState)->bounce_speed + 1;
+                    TASK(FishingState)->bounce_speed = scroll_pos;
                     if (scroll_pos >= 0x36) {
-                        TASK(FishingState)->step_14 = 0;
+                        TASK(FishingState)->bounce_speed = 0;
                     }
                 }
             }
@@ -82,7 +82,7 @@ NON_MATCHING void func_801D72E4(s16 panel_x, s16 panel_y) {
     } else {
         bar_count = 9;
     }
-    bar_index = (u8)TASK(FishingState)->step_14;
+    bar_index = (u8)TASK(FishingState)->bounce_speed;
     count     = 0;
     if (bar_count != 0) {
         bar_x = (s16)(panel_x + 6);

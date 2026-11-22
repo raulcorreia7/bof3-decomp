@@ -13,7 +13,7 @@ MATCH void func_801D7240(void) {
     u8 state;
     u8 pending;
 
-    Menu_DrawClutStrip(D_80144953);
+    Menu_DrawClutStrip(g_WindowClut);
     func_801D9110();
     SND_SEPlay(EMI_SE_ID(SND_BANK_COMMON, 2));
     /* Volatile on the timer and the latched byte keeps the retail store order:

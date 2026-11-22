@@ -11,7 +11,7 @@ typedef struct SceneSlot {
  * type-10 step, or looks its scene up in the loaded scene table and D_80183A70 and runs the type step only on a
  * listed scene.
  */
-#define SCENE_SLOTS ((SceneSlot*)D_801459F4)
+#define SCENE_SLOTS ((SceneSlot*)g_SceneActorDefs)
 
 #ifdef NON_MATCHING
 NON_MATCHING void func_80167E00(void) {

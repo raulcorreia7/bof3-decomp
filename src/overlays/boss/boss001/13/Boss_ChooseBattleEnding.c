@@ -5,9 +5,9 @@
 MATCH void Boss_ChooseBattleEnding(void) {
     if (g_Battle.outcome.result & BATTLE_RESULT_DEFEAT) {
         g_ScenarioState.state_04 = 6;
-        g_ScenarioState.step_05  = 0x32;
+        g_ScenarioState.step     = 0x32;
     } else {
-        g_ScenarioState.step_05++;
+        g_ScenarioState.step++;
     }
     Battle_EndToArea();
 }

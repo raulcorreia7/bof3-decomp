@@ -33,7 +33,7 @@ NON_MATCHING void Menu_OpenPartyScreen(void) {
     g_UiPanelTasks[MENU_START_PANEL_CURSOR].panel  = 6;
     g_UiPanelTasks[MENU_START_PANEL_CURSOR].mode   = MENU_START_MODE_CURSOR;
     g_UiPanelTasks[MENU_START_PANEL_CURSOR].active = 0;
-    Menu_DrawClutStrip(D_80144953);
+    Menu_DrawClutStrip(g_WindowClut);
     g_MenuPartyCommand = 0;
     SND_SEPlay(EMI_SE_ID(SND_BANK_COMMON, 2));
     D_80148654       = 5;

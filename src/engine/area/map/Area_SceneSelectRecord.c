@@ -24,14 +24,14 @@ MATCH bool Area_SceneSelectRecord(s32 wanted_id) {
         mask      = ~0xFF;
         count_ptr = (u8*)SCENE_TABLE_BASE;
         do {
-            id = *(u16*)(D_801459F4 + i * 8);
+            id = *(u16*)(g_SceneActorDefs + i * 8);
             if (id == wanted_id) {
-                TASK(Actor)->sheet_page   = D_801459F4[i * 8 + 4];
-                TASK(Actor)->sheet_row    = D_801459F4[i * 8 + 5];
-                TASK(Actor)->clut_select  = *(u16*)(D_801459F4 + i * 8 + 2);
+                TASK(Actor)->sheet_page   = g_SceneActorDefs[i * 8 + 4];
+                TASK(Actor)->sheet_row    = g_SceneActorDefs[i * 8 + 5];
+                TASK(Actor)->clut_select  = *(u16*)(g_SceneActorDefs + i * 8 + 2);
                 palette_offset            = id * 2;
-                TASK(Actor)->palette_8bit = D_801459F4[i * 8 + 6];
-                TASK(Actor)->unk_2C       = D_801459F4[i * 8 + 7];
+                TASK(Actor)->palette_8bit = g_SceneActorDefs[i * 8 + 6];
+                TASK(Actor)->unk_2C       = g_SceneActorDefs[i * 8 + 7];
                 TASK(Actor)->voice_flags.raw &= mask;
                 /* FAKE: non-const byte view of the flag table; a const read lets the address loads fold. */
                 TASK(Actor)->voice_flags.raw = ((u8*)g_SceneFlagPairs)[palette_offset];

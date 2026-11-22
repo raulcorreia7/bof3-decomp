@@ -7,7 +7,7 @@ MATCH void Menu_ChoosePartyCommand(void) {
     u8*  slot;
     u8*  cursor;
 
-    Menu_DrawClutStrip(D_80144953);
+    Menu_DrawClutStrip(g_WindowClut);
     g_UiPanelTasks[MENU_START_PANEL_DESCRIPTION].u.message.id = g_MenuPartyCommand + 0x1F;
     if (g_BattlePanelMode == 0) {
         g_UiPanelTasks[MENU_START_PANEL_CURSOR].active = 1;

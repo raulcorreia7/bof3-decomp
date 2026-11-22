@@ -2,6 +2,6 @@
 
 /* func_801E462C */
 MATCH void Menu_UpdateCamp(void) {
-    D_801ED138[g_MenuStartStep]();
+    D_801ED138[g_MenuCampStep]();
     Area_SceneDraw();
 }

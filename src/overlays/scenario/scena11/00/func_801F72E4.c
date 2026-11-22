@@ -26,7 +26,7 @@ MATCH void func_801F72E4(void) {
                 *sub                     = 0;
                 g_ScriptVars[3]          = 0;
                 g_AreaDrawFlags          = 0;
-                g_ScenarioState.step_05  = 0;
+                g_ScenarioState.step     = 0;
                 g_ScenarioState.state_04 = 8;
                 switch (g_EmiLoadedCharacterIndex & 0x7F) {
                     case 7:
@@ -168,7 +168,7 @@ MATCH void func_801F72E4(void) {
         g_ScriptVars[1]          = 0;
         g_ScriptVars[2]          = 0;
         g_ScriptVars[3]          = 0;
-        g_ScenarioState.step_05  = 0;
+        g_ScenarioState.step     = 0;
         g_ScenarioState.state_04 = 0;
     }
     g_ScenarioState.mode_02 = 2;

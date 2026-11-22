@@ -15,7 +15,7 @@ MATCH void func_801FCE18(void) {
     g_ScriptVars[1]          = 0;
     g_ScriptVars[2]          = 0;
     g_ScriptVars[3]          = 0;
-    g_ScenarioState.step_05  = 0;
+    g_ScenarioState.step     = 0;
     g_ScenarioState.state_04 = 1;
 }
 
@@ -25,14 +25,14 @@ MATCH void func_801FCE6C(void) {
     g_ScriptVars[1]          = 0;
     g_ScriptVars[2]          = 0;
     g_ScriptVars[3]          = 0;
-    g_ScenarioState.step_05  = 0;
+    g_ScenarioState.step     = 0;
     g_ScenarioState.state_04 = 2;
 }
 
 MATCH void func_801FCEC0(void) {
     if (SYS_TestFlag(g_SceneFlags, 5) == 0) {
         Game_SetScriptActive();
-        g_ScenarioState.step_05  = 0xA;
+        g_ScenarioState.step     = 0xA;
         *g_ScriptVars            = 0;
         g_ScriptVars[1]          = 0;
         g_ScriptVars[2]          = 0;
@@ -43,7 +43,7 @@ MATCH void func_801FCEC0(void) {
 
 MATCH void func_801FCF30(void) {
     Game_SetScriptActive();
-    g_ScenarioState.step_05  = 15;
+    g_ScenarioState.step     = 15;
     g_ScriptVars[0]          = 0;
     g_ScriptVars[1]          = 0;
     g_ScriptVars[2]          = 0;
@@ -62,13 +62,13 @@ MATCH void func_801FCFC0(void) {
     g_ScriptVars[1]          = 0;
     g_ScriptVars[2]          = 0;
     g_ScriptVars[3]          = 0;
-    g_ScenarioState.step_05  = 0;
+    g_ScenarioState.step     = 0;
     g_ScenarioState.state_04 = 4;
 }
 
 MATCH void func_801FD014(void) {
     Game_SetScriptActive();
-    g_ScenarioState.step_05  = 20;
+    g_ScenarioState.step     = 20;
     g_ScriptVars[0]          = 0;
     g_ScriptVars[1]          = 0;
     g_ScriptVars[2]          = 0;
@@ -82,13 +82,13 @@ MATCH void func_801FD06C(void) {
     g_ScriptVars[1]          = 0;
     g_ScriptVars[2]          = 0;
     g_ScriptVars[3]          = 0;
-    g_ScenarioState.step_05  = 0;
+    g_ScenarioState.step     = 0;
     g_ScenarioState.state_04 = 6;
 }
 
 MATCH void func_801FD0C4(void) {
     Game_SetScriptActive();
-    g_ScenarioState.step_05  = 20;
+    g_ScenarioState.step     = 20;
     g_ScriptVars[0]          = 0;
     g_ScriptVars[1]          = 0;
     g_ScriptVars[2]          = 0;
@@ -102,13 +102,13 @@ MATCH void func_801FD11C(void) {
     g_ScriptVars[1]          = 0;
     g_ScriptVars[2]          = 0;
     g_ScriptVars[3]          = 0;
-    g_ScenarioState.step_05  = 0;
+    g_ScenarioState.step     = 0;
     g_ScenarioState.state_04 = 10;
 }
 
 MATCH void func_801FD170(void) {
     Game_SetScriptActive();
-    g_ScenarioState.step_05  = 10;
+    g_ScenarioState.step     = 10;
     g_ScriptVars[0]          = 0;
     g_ScriptVars[1]          = 0;
     g_ScriptVars[2]          = 0;
@@ -121,9 +121,9 @@ MATCH void func_801FD1C8(void) {
     *g_ScriptVars   = 0;
     g_ScriptVars[1] = 0;
     if (SYS_TestFlag(g_SceneFlags, 34) == 0) {
-        g_ScenarioState.step_05 = 0;
+        g_ScenarioState.step = 0;
     } else {
-        g_ScenarioState.step_05 = 0x14;
+        g_ScenarioState.step = 0x14;
     }
     g_ScenarioState.state_04 = 0x10;
 }
@@ -133,9 +133,9 @@ MATCH void func_801FD234(void) {
     *g_ScriptVars   = 0;
     g_ScriptVars[1] = 0;
     if (SYS_TestFlag(g_SceneFlags, 35) != 0) {
-        g_ScenarioState.step_05 = 0x14;
+        g_ScenarioState.step = 0x14;
     } else {
-        g_ScenarioState.step_05 = 0xA;
+        g_ScenarioState.step = 0xA;
     }
     g_ScenarioState.state_04 = 0x10;
 }
@@ -255,8 +255,8 @@ MATCH s32 func_801FD800(s32 x, s32 y) {
     if (g_GameAreaId == AREA_ID_WYNDIA_CASTLE) {
         if ((x == TO_COORD(49) || x == TO_COORD_HALF(49)) && (u32)(y - TO_COORD(39)) <= TO_COORD_HALF(2)) {
             Game_SetScriptActive();
-            g_ScriptVars[0]         = 10;
-            g_ScenarioState.step_05 = 5;
+            g_ScriptVars[0]      = 10;
+            g_ScenarioState.step = 5;
             SCRIPT_VARS_CLEAR_EXCEPT_CHOICE();
             g_ScenarioState.state_04 = 2;
             return 1;
@@ -265,7 +265,7 @@ MATCH s32 func_801FD800(s32 x, s32 y) {
             SYS_SetFlag(g_SceneFlags, 8);
             Game_SetScriptActive();
             SCRIPT_VARS_CLEAR_ALL();
-            g_ScenarioState.step_05  = 0;
+            g_ScenarioState.step     = 0;
             g_ScenarioState.state_04 = 3;
         }
     }
@@ -273,14 +273,14 @@ MATCH s32 func_801FD800(s32 x, s32 y) {
         (u32)(x - TO_COORD(39)) <= TO_COORD_HALF(11)) {
         Game_SetScriptActive();
         SCRIPT_VARS_CLEAR_ALL();
-        g_ScenarioState.step_05  = 0;
+        g_ScenarioState.step     = 0;
         g_ScenarioState.state_04 = 5;
         return 1;
     }
     if (g_GameAreaId == AREA_ID_MAEKYSS_GORGE && SYS_TestFlag(g_SceneFlags, 0) == 0 && (y == TO_COORD(31) || y == TO_COORD_HALF(31)) && (u32)(x - TO_COORD(28)) <= TO_COORD_HALF(3)) {
         Game_SetScriptActive();
         SCRIPT_VARS_CLEAR_ALL();
-        g_ScenarioState.step_05  = 0;
+        g_ScenarioState.step     = 0;
         g_ScenarioState.state_04 = 12;
         return 1;
     }
@@ -288,14 +288,14 @@ MATCH s32 func_801FD800(s32 x, s32 y) {
         if (SYS_TestFlag(g_SceneFlags, 40) == 0 && SYS_TestFlag(g_SceneFlags, 39) && (x == TO_COORD(48) || x == TO_COORD_HALF(49)) && (u32)(y - TO_COORD(4)) <= TO_COORD_HALF(5)) {
             Game_SetScriptActive();
             SCRIPT_VARS_CLEAR_ALL();
-            g_ScenarioState.step_05  = 0;
+            g_ScenarioState.step     = 0;
             g_ScenarioState.state_04 = 14;
             return 1;
         }
         if (SYS_TestFlag(g_SceneFlags, 42) == 0 && SYS_TestFlag(g_SceneFlags, 39) && (x == TO_COORD_HALF(27) || x == TO_COORD(28)) && (u32)(y - TO_COORD(4)) <= TO_COORD_HALF(5)) {
             Game_SetScriptActive();
-            g_ScriptVars[0]         = 20;
-            g_ScenarioState.step_05 = 20;
+            g_ScriptVars[0]      = 20;
+            g_ScenarioState.step = 20;
             SCRIPT_VARS_CLEAR_EXCEPT_CHOICE();
             g_ScenarioState.state_04 = 14;
             return 1;
@@ -304,8 +304,8 @@ MATCH s32 func_801FD800(s32 x, s32 y) {
     if (g_GameAreaId == AREA_ID_RHAPALA_DOCK) {
         if (SYS_TestFlag(g_SceneFlags, 13) && SYS_TestFlag(g_SceneFlags, 14) == 0 && (x == TO_COORD(67) || x == TO_COORD_HALF(67)) && (u32)(y - TO_COORD(50)) <= TO_COORD_HALF(2)) {
             Game_SetScriptActive();
-            g_ScenarioState.step_05 = 10;
-            g_ScriptVars[0]         = 0;
+            g_ScenarioState.step = 10;
+            g_ScriptVars[0]      = 0;
             SCRIPT_VARS_CLEAR_EXCEPT_CHOICE();
             g_ScenarioState.state_04 = 4;
             return 1;
@@ -313,16 +313,16 @@ MATCH s32 func_801FD800(s32 x, s32 y) {
         if (SYS_TestFlag(g_SceneFlags, 30) == 0) {
             if ((x == TO_COORD_HALF(27) || x == TO_COORD(28)) && (u32)(y - TO_COORD(61)) <= TO_COORD_HALF(2)) {
                 Game_SetScriptActive();
-                g_ScenarioState.step_05 = 30;
-                g_ScriptVars[0]         = 0;
+                g_ScenarioState.step = 30;
+                g_ScriptVars[0]      = 0;
                 SCRIPT_VARS_CLEAR_EXCEPT_CHOICE();
                 g_ScenarioState.state_04 = 4;
                 return 1;
             }
         } else if (SYS_TestFlag(g_SceneFlags, 36) == 0 && (x == TO_COORD_HALF(27) || x == TO_COORD(28)) && (u32)(y - TO_COORD(61)) <= TO_COORD_HALF(2)) {
             Game_SetScriptActive();
-            g_ScriptVars[0]         = 20;
-            g_ScenarioState.step_05 = 5;
+            g_ScriptVars[0]      = 20;
+            g_ScenarioState.step = 5;
             SCRIPT_VARS_CLEAR_EXCEPT_CHOICE();
             g_ScenarioState.state_04 = 10;
             return 1;
@@ -342,13 +342,13 @@ MATCH s32 func_801FDD7C(void) {
         g_ScriptVars[1]          = 0;
         g_ScriptVars[2]          = 0;
         g_ScriptVars[3]          = 0;
-        g_ScenarioState.step_05  = 0;
+        g_ScenarioState.step     = 0;
         g_ScenarioState.state_04 = 0xB;
         return 1;
     }
 
     Game_SetScriptActive();
-    g_ScenarioState.step_05  = 5;
+    g_ScenarioState.step     = 5;
     g_ScriptVars[0]          = 0;
     g_ScriptVars[1]          = 0;
     g_ScriptVars[2]          = 0;
@@ -367,7 +367,7 @@ MATCH s32 func_801FDE34(void) {
         g_ScriptVars[1]          = 0;
         g_ScriptVars[2]          = 0;
         g_ScriptVars[3]          = 0;
-        g_ScenarioState.step_05  = 0;
+        g_ScenarioState.step     = 0;
         g_ScenarioState.state_04 = 0xD;
         return 1;
     }
@@ -381,7 +381,7 @@ MATCH s32 func_801FDEA4(void) {
         g_ScriptVars[1]          = 0;
         g_ScriptVars[2]          = 0;
         g_ScriptVars[3]          = 0;
-        g_ScenarioState.step_05  = 0;
+        g_ScenarioState.step     = 0;
         g_ScenarioState.state_04 = 15;
         return 1;
     } else if (SYS_TestFlag(g_SceneEventFlags, 5) == 0 || SYS_TestFlag(g_SceneEventFlags, 6) == 0) {
@@ -390,12 +390,12 @@ MATCH s32 func_801FDEA4(void) {
         g_ScriptVars[1]          = 0;
         g_ScriptVars[2]          = 0;
         g_ScriptVars[3]          = 0;
-        g_ScenarioState.step_05  = 0;
+        g_ScenarioState.step     = 0;
         g_ScenarioState.state_04 = 15;
         return 1;
     } else if (SYS_TestFlag(g_SceneFlags, 0x2C) == 0) {
         Game_SetScriptActive();
-        g_ScenarioState.step_05  = 5;
+        g_ScenarioState.step     = 5;
         g_ScriptVars[0]          = 0;
         g_ScriptVars[1]          = 0;
         g_ScriptVars[2]          = 0;
@@ -404,7 +404,7 @@ MATCH s32 func_801FDEA4(void) {
         return 1;
     } else {
         Game_SetScriptActive();
-        g_ScenarioState.step_05  = 30;
+        g_ScenarioState.step     = 30;
         g_ScenarioState.state_04 = 15;
         return 1;
     }

@@ -18,14 +18,14 @@ MATCH void Battle_StartEscapeScroll(void) {
     func_801DE560(1, 0, 0, 60, (u8*)&D_801EB082);
     g_BattleMessageState = 1;
     speed_offset         = g_Battle.scroll_dir * index;
-    g_AreaCameraStep     = 0x20;
+    g_AreaCameraSpeed    = 0x20;
     *(u16*)&g_AreaTargetCellX += (s8)((u8*)g_BattleScrollDeltas)[speed_offset];
     value = ((u8*)g_BattleScrollDeltas)[speed_offset + 1];
     *(u16*)&g_AreaTargetCellY += (s8)value;
     if (g_Battle.ui_step == 2) {
-        g_AreaCameraHeightStep = (((((s32 (*)(s32, s32))Area_HeightSample)(g_AreaScrollTargetX, g_AreaScrollTargetY) - g_AreaCameraHeight) << 16) >> 21);
+        g_AreaCameraHeightDelta = (((((s32 (*)(s32, s32))Area_HeightSample)(g_AreaScrollTargetX, g_AreaScrollTargetY) - g_AreaCameraHeight) << 16) >> 21);
     } else {
-        g_AreaCameraHeightStep = 0;
+        g_AreaCameraHeightDelta = 0;
     }
     EMI_ArchiveLoad(EMI_SLOT_BATL_SE);
     index = 5;

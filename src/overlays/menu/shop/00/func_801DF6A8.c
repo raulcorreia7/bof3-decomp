@@ -9,7 +9,7 @@ MATCH void func_801DF6A8(void) {
     u16 y;
 
     slot = 0;
-    Menu_DrawClutStrip(D_80144953);
+    Menu_DrawClutStrip(g_WindowClut);
     count = Party_CountOrder(PARTY_ORDER_FIELD);
     MENU_DRAW_HEADER();
     if (count != 0) {

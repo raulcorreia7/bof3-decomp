@@ -18,13 +18,13 @@ MATCH void UI_MessageOpenPresetPanel(void) {
     x            = *(u16*)((u8*)&D_8017F944 + (FAKE_VOLATILE(u8, *mode) * 4));
     panel->pos.x = ((x + 35) << 4);
 
-    y                    = *(u16*)((u8*)&D_8017F946 + (FAKE_VOLATILE(u8, *mode) * 4));
-    panel->u.grow.step_x = 0xE3;
-    panel->u.grow.step_y = 0x66;
-    panel->u.grow.w      = 0;
-    panel->u.grow.h      = 0;
-    panel->unk_0A        = 0x47;
-    panel->pos.y         = ((y + 16) << 4);
+    y                          = *(u16*)((u8*)&D_8017F946 + (FAKE_VOLATILE(u8, *mode) * 4));
+    panel->u.grow.width_delta  = 0xE3;
+    panel->u.grow.height_delta = 0x66;
+    panel->u.grow.w            = 0;
+    panel->u.grow.h            = 0;
+    panel->unk_0A              = 0x47;
+    panel->pos.y               = ((y + 16) << 4);
 
     panel         = g_UiPanelCurrent;
     panel->unk_0B = 0x20;

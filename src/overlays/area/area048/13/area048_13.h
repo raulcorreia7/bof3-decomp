@@ -52,7 +52,7 @@ static inline void Area_StartScriptedMove(u8 facing) {
             g_ScriptState->flags |= 0x80;
         } else {
             Area_SetFacingOffsetX(TASK(Actor)->direction);
-            g_AreaCameraHeightStep = 0;
+            g_AreaCameraHeightDelta = 0;
             g_ScriptState->flags |= 0x40;
         }
     }

@@ -12,7 +12,7 @@ MATCH void func_801E1C20(void) {
     s32  input;
 
     selection = &D_80148655;
-    Menu_DrawClutStrip(D_80144953);
+    Menu_DrawClutStrip(g_WindowClut);
     Menu_DrawHeaderBar(MENU_HEADER_X, 16, MENU_HEADER_WIDTH, MENU_HEADER_HEIGHT, g_WindowStyle);
     WinDrawCueText(28, 19, (u16)((s8)*selection + 0xBC));
     func_801E26A8(0x1C, 0x40);
@@ -21,7 +21,7 @@ MATCH void func_801E1C20(void) {
         case 0:
             if (g_PadStates[0].pressed & PADLright) {
                 SND_SEPlay(EMI_SE_ID(SND_BANK_COMMON, 1));
-                option  = &D_80144950;
+                option  = &g_MessageSpeed;
                 next    = *option + 1;
                 *option = next;
                 if ((s8)next >= 3) {
@@ -29,7 +29,7 @@ MATCH void func_801E1C20(void) {
                 }
             } else if (g_PadStates[0].pressed & PADLleft) {
                 SND_SEPlay(EMI_SE_ID(SND_BANK_COMMON, 1));
-                option  = &D_80144950;
+                option  = &g_MessageSpeed;
                 next    = *option - 1;
                 *option = next;
                 if ((s8)next < 0) {
@@ -59,7 +59,7 @@ MATCH void func_801E1C20(void) {
         case 2:
             if (g_PadStates[0].pressed & PADLleft) {
                 SND_SEPlay(EMI_SE_ID(SND_BANK_COMMON, 1));
-                option  = &D_80144953;
+                option  = &g_WindowClut;
                 next    = *option - 1;
                 *option = next;
                 if ((s8)next < 0) {
@@ -67,7 +67,7 @@ MATCH void func_801E1C20(void) {
                 }
             } else if (g_PadStates[0].pressed & PADLright) {
                 SND_SEPlay(EMI_SE_ID(SND_BANK_COMMON, 1));
-                option  = &D_80144953;
+                option  = &g_WindowClut;
                 next    = *option + 1;
                 *option = next;
                 if ((s8)next >= 4) {

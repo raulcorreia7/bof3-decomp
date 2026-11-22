@@ -191,15 +191,15 @@ MATCH void func_801F7CE0(void) {
 MATCH void func_801F7D80(void) {
     Actor* work;
     s32*   pos;
-    s16    step;
+    s16    script_pc;
 
     work = TASK(Actor);
     pos  = &work->vx;
     func_801F7FFC((Scena03Quad*)pos);
     func_801F8170(pos);
-    step            = work->script_pc - 8;
-    work->script_pc = step;
-    if (step < 0) {
+    script_pc       = work->script_pc - 8;
+    work->script_pc = script_pc;
+    if (script_pc < 0) {
         TASK(Actor)->unk_06 = 1;
         Actor_Clear();
     }
@@ -235,7 +235,7 @@ MATCH void func_801F7E6C(void) {
             spawned->unk_06            = 0;
             spawned->type              = 0x21;
             actor                      = TASK(Actor);
-            spawned->scene_step        = actor->pos.x.fixed;
+            spawned->vx                = actor->pos.x.fixed;
             spawned->selection         = actor->pos.y.fixed;
             spawned->unk_14            = actor->pos.z.fixed;
             record                     = (Actor*)spawned;
@@ -564,7 +564,7 @@ NON_MATCHING void func_801F8E00(void) {
             Scene_SetupParty(5);
             SYS_SetFlag(g_SceneFlags, 0x18);
             g_ScenarioState.state_04 = 5;
-            g_ScenarioState.step_05  = 2;
+            g_ScenarioState.step     = 2;
         }
     }
     if (g_GameCellType == 1 && !SYS_TestFlag(g_SceneFlags, 0x17)) {
@@ -592,7 +592,7 @@ NON_MATCHING void func_801F8E00(void) {
             SYS_SetFlag(g_SceneFlags, 0x1B);
             g_ScenarioState.timer_06 = 30;
             g_ScenarioState.state_04 = 6;
-            g_ScenarioState.step_05  = 6;
+            g_ScenarioState.step     = 6;
         }
     }
     g_ScenarioState.mode_02 = 2;

@@ -16,7 +16,7 @@ MATCH void func_801F4470(void) {
         g_SceneEventState.mode      = 0;
         g_SceneEventState.step      = 0;
         g_ScenarioState.state_04    = 5;
-        g_ScenarioState.step_05     = 0;
+        g_ScenarioState.step        = 0;
         Scene_SetupParty(5);
         g_ScriptVars[0] = 30;
     }

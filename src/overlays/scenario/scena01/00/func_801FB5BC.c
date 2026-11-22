@@ -12,15 +12,15 @@ MATCH void func_801FB5BC(void) {
     u8  v;
     u8* step;
 
-    switch (g_ScenarioState.step_05) {
+    switch (g_ScenarioState.step) {
         case 0:
-            g_ScenarioState.step_05 = 1;
+            g_ScenarioState.step = 1;
             SYS_SetFlag(g_SceneFlags, 0x19);
             Game_RequestAreaChange(AREA_ID_MCNEIL_BEFORE_NUE, TO_COORD(2), TO_COORD(0x14), AREA_ENTRY_MAP_LOADING);
             break;
         case 1:
-            g_AreaDrawFlags         = 0x1F;
-            g_ScenarioState.step_05 = 2;
+            g_AreaDrawFlags      = 0x1F;
+            g_ScenarioState.step = 2;
             break;
         case 2:
             if (g_ScriptVars[0] != 1) {
@@ -37,7 +37,7 @@ MATCH void func_801FB5BC(void) {
             g_SpawnedActors[g_ScratchPad.cells.bytes[0]].camera_angle.y = g_AreaCameraAngle.vy;
             g_SpawnedActors[g_ScratchPad.cells.bytes[0]].camera_angle.z = 0x31E;
             g_SpawnedActors[g_ScratchPad.cells.bytes[0]].layer          = 0x14;
-            g_ScenarioState.step_05                                     = 3;
+            g_ScenarioState.step                                        = 3;
             break;
         case 3:
             if (g_ScriptVars[0] != 3) {
@@ -54,7 +54,7 @@ MATCH void func_801FB5BC(void) {
             g_SpawnedActors[g_ScratchPad.cells.bytes[0]].camera_angle.y = g_AreaCameraAngle.vy;
             g_SpawnedActors[g_ScratchPad.cells.bytes[0]].camera_angle.z = 0x200;
             g_SpawnedActors[g_ScratchPad.cells.bytes[0]].layer          = 0x14;
-            g_ScenarioState.step_05                                     = 4;
+            g_ScenarioState.step                                        = 4;
             break;
         case 4:
             if (g_ScriptVars[0] != 0x12) {
@@ -77,18 +77,18 @@ MATCH void func_801FB5BC(void) {
         case 15:
             if (g_GameStateIndex != GAME_REQUEST_MESSAGE) {
                 Scene_SetupParty(1);
-                g_ScenarioState.step_05 = 0x10;
+                g_ScenarioState.step = 0x10;
             }
             break;
         case 16:
             if (g_ScriptVars[0] == 0x19) {
                 UI_ModeSet(UI_MODE_LONG_FADE_OUT);
-                g_ScenarioState.step_05 = 0x11;
+                g_ScenarioState.step = 0x11;
             }
             break;
         case 17:
-            g_ScriptVars[2]         = 0;
-            g_ScenarioState.step_05 = 0x12;
+            g_ScriptVars[2]      = 0;
+            g_ScenarioState.step = 0x12;
             SYS_SetFlag(g_SceneFlags, 0x1B);
             Game_RequestAreaChange(AREA_ID_FARM_BEFORE_NUE, TO_COORD(0xF), TO_COORD(0x1F), AREA_ENTRY_MAP_LOADING);
             break;
@@ -105,8 +105,8 @@ MATCH void func_801FB5BC(void) {
             g_AreaCameraRefreshCount = 2;
             *step                    = 0;
             g_GameFlags |= GAME_FLAG_SCROLL_LOCK;
-            g_ScriptVars[0]         = 2;
-            g_ScenarioState.step_05 = 0x13;
+            g_ScriptVars[0]      = 2;
+            g_ScenarioState.step = 0x13;
             break;
         case 19:
             if (g_ScriptVars[0] != 0x19) {

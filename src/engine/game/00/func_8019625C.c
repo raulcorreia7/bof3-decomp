@@ -33,8 +33,8 @@ NON_MATCHING void func_8019625C(void) {
             divisor           = s_PaletteFadeDivisors[table_index];
             quotient          = value / divisor;
             source_index      = value % divisor;
-            remainder         = entry->step / divisor;
-            destination_index = entry->step % divisor;
+            remainder         = entry->cell_index / divisor;
+            destination_index = entry->cell_index % divisor;
             scale             = s_PaletteFadeScales[table_index];
             count             = s_PaletteFadeCounts[table_index] << 4;
             source_index      = (u8)(scale * source_index);
@@ -86,7 +86,7 @@ NON_MATCHING void func_8019625C(void) {
             g_GfxPalettePending = 1u;
             if ((entry->flags & 0x40u) != 0u) {
                 entry->flags &= 0xBFu;
-                entry->target->saved_byte = entry->step;
+                entry->target->saved_byte = entry->cell_index;
                 if ((entry->flags & 0x80u) != 0u) {
                     entry->target->flags |= 4u;
                 }

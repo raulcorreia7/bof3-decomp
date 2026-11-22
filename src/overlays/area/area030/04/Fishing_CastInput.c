@@ -21,7 +21,7 @@ MATCH void Fishing_CastInput(void) {
 
         work             = TASK(FishingState);
         work->y_38.pos_y = TO_COORD(65);
-        work->step_timer = 0;
+        work->timer      = 0;
 
         tail            = TASK(FishingState);
         tail->sub_index = 2;

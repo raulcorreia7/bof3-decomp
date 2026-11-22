@@ -12,8 +12,8 @@ MATCH void UI_MessageShrinkPanel(void) {
 
     count          = 0;
     task           = (MenuPanelTask*)g_UiPanelCurrent;
-    task->u.grow.w = (task->u.grow.w - task->u.grow.step_x);
-    task->pos.x    = (task->pos.x + (s16)task->u.grow.step_x / 2);
+    task->u.grow.w = (task->u.grow.w - task->u.grow.width_delta);
+    task->pos.x    = (task->pos.x + (s16)task->u.grow.width_delta / 2);
     if ((task->u.grow.w << 16) < 0) {
         switch (task->mode) {
             case 0:
@@ -34,8 +34,8 @@ MATCH void UI_MessageShrinkPanel(void) {
         g_UiPanelCurrent->u.grow.w = 0;
     }
     task           = (MenuPanelTask*)g_UiPanelCurrent;
-    task->u.grow.h = (task->u.grow.h - task->u.grow.step_y);
-    task->pos.y    = (task->pos.y + (s16)task->u.grow.step_y / 2);
+    task->u.grow.h = (task->u.grow.h - task->u.grow.height_delta);
+    task->pos.y    = (task->pos.y + (s16)task->u.grow.height_delta / 2);
     if ((task->u.grow.h << 16) < 0) {
         switch (task->mode) {
             case 0:

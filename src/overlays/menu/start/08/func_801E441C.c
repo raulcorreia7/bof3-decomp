@@ -27,7 +27,7 @@ MATCH void func_801E441C(void) {
         }
         if ((g_PadStates[0].pressed & g_InputMasks[MENU_INPUT_CONFIRM]) || (g_PadStates[0].pressed & PADstart)) {
             UI_ModeSet(UI_MODE_FADE_OUT);
-            g_MenuStartStep += 1;
+            g_MenuCampStep += 1;
             SND_SEPlay(EMI_SE_ID(SND_BANK_COMMON, 5));
         }
     }

@@ -7,7 +7,7 @@ MATCH void func_801D7314(void) {
     s32 buttons;
     u8  old;
 
-    Menu_DrawClutStrip(D_80144953);
+    Menu_DrawClutStrip(g_WindowClut);
     g_UiPanelTasks[16].unk_08                                 = 0;
     g_UiPanelTasks[MENU_START_PANEL_DESCRIPTION].u.message.id = (&D_801EC488)[(s8)D_801ED648];
     g_UiPanelTasks[MENU_START_PANEL_CURSOR].active            = 1;

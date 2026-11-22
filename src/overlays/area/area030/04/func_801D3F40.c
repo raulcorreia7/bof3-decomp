@@ -21,13 +21,13 @@ MATCH void func_801D3F40(void) {
         TASK(FishingState)->item.pointer = TASK(FishingState)->item.pointer + 1;
         TASK(FishingState)->counter_49   = left;
         TASK(FishingState)->origin_x     = 0x23;
-        TASK(FishingState)->step_timer   = 4;
+        TASK(FishingState)->timer        = 4;
     }
-    style = TASK(FishingState)->step_timer;
+    style = TASK(FishingState)->timer;
     if (style != 0) {
         style -= 1;
-        TASK(FishingState)->step_timer = style;
-        func_801D9740(0, TASK(FishingState)->text.pointer, ((8 - ((4 - TASK(FishingState)->step_timer) * 2)) & 0xFE) | 0x80, 0x1D);
+        TASK(FishingState)->timer = style;
+        func_801D9740(0, TASK(FishingState)->text.pointer, ((8 - ((4 - TASK(FishingState)->timer) * 2)) & 0xFE) | 0x80, 0x1D);
     }
     if (TASK(FishingState)->counter_49 != 0) {
         u16* ox = &D_80144154;
@@ -43,7 +43,7 @@ MATCH void func_801D3F40(void) {
             index = id * 3;
             UI_TextDraw(TASK(FishingState)->origin_x, (D_80144154 + 2), D_801E1F16[index], 1, (u8*)(index + D_801E1F14));
             if ((s16)TASK(FishingState)->origin_x == 0x1D) {
-                TASK(FishingState)->step_timer = 4;
+                TASK(FishingState)->timer = 4;
                 TASK(FishingState)->handler_index += 1;
             }
         } else {

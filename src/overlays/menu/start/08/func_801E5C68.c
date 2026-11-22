@@ -5,7 +5,7 @@ MATCH void func_801E5C68(void) {
     u16 step;
 
     step = 3;
-    Menu_DrawClutStrip(D_80144953);
+    Menu_DrawClutStrip(g_WindowClut);
     MENU_DRAW_HEADER();
     g_MenuStartReturnStep = 2;
     switch (g_SaveCardStatus) {
@@ -48,6 +48,6 @@ MATCH void func_801E5C68(void) {
             SND_SEPlay(EMI_SE_ID(SND_BANK_COMMON, 4));
         }
         g_GameEntrySubstate = step;
-        g_MenuStartStep     = g_MenuStartReturnStep;
+        g_MenuCampStep      = g_MenuStartReturnStep;
     }
 }

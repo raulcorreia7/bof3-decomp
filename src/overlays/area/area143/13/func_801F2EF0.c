@@ -16,8 +16,8 @@ MATCH s32 func_801F2EF0(void) {
     do {
         if (spark->active != 0) {
             D_801F5310++;
-            step          = spark->z_step + 0x20000;
-            spark->z_step = step;
+            step           = spark->z_delta + 0x20000;
+            spark->z_delta = step;
             spark->pos.vz += step;
             spark->blink ^= 1;
             func_801F2DB8(spark);

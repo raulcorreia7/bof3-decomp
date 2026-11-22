@@ -11,12 +11,12 @@ MATCH void func_801D5574(void) {
     s32 mask;
     s32 t;
 
-    TASK(FishingState)->step_timer += 1;
+    TASK(FishingState)->timer += 1;
     if (TASK(FishingState)->saved_index == 0) {
-        Fishing_DrawWindowFrame(MENU_HEADER_X, (MENU_HEADER_Y - TASK(FishingState)->step_timer * 16) & 0xFFFE, MENU_HEADER_WIDTH, MENU_HEADER_HEIGHT, 0);
+        Fishing_DrawWindowFrame(MENU_HEADER_X, (MENU_HEADER_Y - TASK(FishingState)->timer * 16) & 0xFFFE, MENU_HEADER_WIDTH, MENU_HEADER_HEIGHT, 0);
         y      = FISHING_SHOP_COLUMNS_Y;
         mask   = 0;
-        t      = TASK(FishingState)->step_timer * 3;
+        t      = TASK(FishingState)->timer * 3;
         offset = t << 4;
         offset -= t;
         offset += FISHING_SHOP_COLUMNS_X;
@@ -31,8 +31,8 @@ MATCH void func_801D5574(void) {
         y      = FISHING_SHOP_COLUMNS_Y;
     }
     func_801D7C10(offset, y, mask);
-    func_801D72E4(39, (TASK(FishingState)->step_timer * 60 + 64));
-    if (TASK(FishingState)->step_timer == 4) {
+    func_801D72E4(39, (TASK(FishingState)->timer * 60 + 64));
+    if (TASK(FishingState)->timer == 4) {
         if (TASK(FishingState)->saved_index == 0) {
             TASK(FishingState)->handler_index = 0;
         } else if (TASK(FishingState)->cue_index == 0) {

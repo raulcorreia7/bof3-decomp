@@ -9,7 +9,7 @@ MATCH void func_801F7BFC(void) {
     u8* state;
     s32 next;
 
-    state = &g_ScenarioState.step_05;
+    state = &g_ScenarioState.step;
     switch (*state) {
         case 0:
             if (g_GameStateIndex == GAME_REQUEST_MESSAGE) {

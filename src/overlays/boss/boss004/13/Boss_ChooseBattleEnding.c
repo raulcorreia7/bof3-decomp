@@ -5,11 +5,11 @@ MATCH void Boss_ChooseBattleEnding(void) {
         g_Game.battle_order = 7;
         g_Battle.outcome.options |= 0x80;
         Battle_EndToArea();
-        g_ScenarioState.step_05 = 0x32;
+        g_ScenarioState.step = 0x32;
     } else {
         u8* step;
 
-        step = &g_ScenarioState.step_05;
+        step = &g_ScenarioState.step;
         (*step)++;
         Battle_EndToArea();
     }

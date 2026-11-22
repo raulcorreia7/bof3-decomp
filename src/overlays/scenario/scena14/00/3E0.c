@@ -76,7 +76,7 @@ MATCH void func_801F7028(void) {
             SYS_SetFlag(g_SceneFlags, 0x1E);
             func_801BE1B0(2);
             g_ScenarioState.state_04 = 7;
-            g_ScenarioState.step_05  = 6;
+            g_ScenarioState.step     = 6;
         }
     }
     if (LOHU(g_GameAreaId) == AREA_ID_DRAGNIER_ELDER_FIGHT && SYS_TestFlag(g_SceneFlags, 0x13) && !SYS_TestFlag(g_SceneFlags, 0x14)) {
@@ -156,7 +156,7 @@ MATCH void func_801F7028(void) {
             g_AreaScrollTargetY = 0xD8000;
             Area_InitMapRenderer();
             g_ScenarioState.state_04 = 2;
-            g_ScenarioState.step_05  = 0x1E;
+            g_ScenarioState.step     = 0x1E;
         }
     }
     if (LOHU(g_GameAreaId) == AREA_ID_DESERT_ENTRANCE_CAMP && !SYS_TestFlag(g_SceneFlags, 0)) {
@@ -169,12 +169,12 @@ MATCH void func_801F7028(void) {
             SYS_SetFlag(g_SceneFlags, 0xD);
             func_801BE1B0(1);
             g_ScenarioState.state_04 = 5;
-            g_ScenarioState.step_05  = 0;
+            g_ScenarioState.step     = 0;
         }
         if (LOBU(g_GameLastCellType) == 5 && !SYS_TestFlag(g_SceneFlags, 0xF)) {
             func_801BE1B0(2);
             g_ScenarioState.state_04 = 5;
-            g_ScenarioState.step_05  = 0xA;
+            g_ScenarioState.step     = 0xA;
         }
     }
     D_80146872 = 2;
@@ -216,7 +216,7 @@ MATCH void func_801F7960(void) {
 
 #include "overlays/scenario/shared/Scene_SpawnActor.h"
 
-MATCH bool Scene_SpawnActor(u8 type, s16 angle_x, s16 angle_y, s16 angle_z, u8 layer, s32 scene_step){SCENE_SPAWN_ACTOR(D_801FC4C0)}
+MATCH bool Scene_SpawnActor(u8 type, s16 angle_x, s16 angle_y, s16 angle_z, u8 layer, s32 vx){SCENE_SPAWN_ACTOR(D_801FC4C0)}
 
 MATCH void func_801F7B5C(void) {
     SYS_DISPATCH_BYTE(D_801FC424, g_ScenarioState.state_04);

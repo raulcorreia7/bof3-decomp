@@ -63,9 +63,9 @@ NON_MATCHING void Menu_DrawHeaderBar(s32 x, s32 y, s32 width, s32 height, u8 win
     prim->tpage = getTPage(TPAGE_DEPTH_4BIT, TPAGE_ABR_HALF, FONT_TPAGE_X, FONT_TPAGE_Y);
     GFX_AddPrim(GFX_LAYER_UI, sizeof(POLY_FT4));
 
+    odd  = (width - 3) & 1;
     half = ((s32)width1_u - 4) >> 1;
     prim = (POLY_FT4*)g_GfxPrimCursor;
-    odd  = (width - 3) & 1;
     SetPolyFT4(prim);
     PSX_SET_SEMI_TRANSPARENT(prim);
     half_u = half;

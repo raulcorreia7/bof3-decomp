@@ -14,9 +14,9 @@ MATCH void func_801F3440(void) {
         g_ScriptVars[1] = 0xFE;
         step            = 0x1E;
     }
-    g_ScriptVars[2]         = 0;
-    g_ScriptVars[3]         = 0;
-    g_ScenarioState.step_05 = step;
+    g_ScriptVars[2]      = 0;
+    g_ScriptVars[3]      = 0;
+    g_ScenarioState.step = step;
     TASK_SET(actor);
     func_80196070();
 }

@@ -1017,7 +1017,7 @@ NON_MATCHING void func_801FA3E4(void) {
             D_80146889[0]            = 4;
             D_80146921               = 4;
             g_ScenarioState.state_04 = 4;
-            g_ScenarioState.step_05  = 10;
+            g_ScenarioState.step     = 10;
         }
     }
     if (LOHU(g_GameAreaId) == 2 && SYS_TestFlag(g_SceneFlags, 6) && !SYS_TestFlag(g_SceneFlags, 7)) {
@@ -1044,7 +1044,7 @@ NON_MATCHING void func_801FA3E4(void) {
         Game_SetScriptActive();
         g_AreaDrawFlags          = 0;
         g_ScenarioState.state_04 = 8;
-        g_ScenarioState.step_05  = 0;
+        g_ScenarioState.step     = 0;
         D_801FEA70               = D_80145E98;
         D_801FEA74               = D_80145EC4;
         D_801FEA78               = D_80145EC8;
@@ -1054,7 +1054,7 @@ NON_MATCHING void func_801FA3E4(void) {
             Game_SetScriptActive();
             g_ScriptVars[0]          = 0;
             g_ScenarioState.state_04 = 9;
-            g_ScenarioState.step_05  = 0;
+            g_ScenarioState.step     = 0;
             Scene_RunScenario(4);
             Scene_SetupParty(10);
         }
@@ -1088,7 +1088,7 @@ NON_MATCHING void func_801FA3E4(void) {
                 Area_InitMapRenderer();
                 SYS_SetFlag(g_SceneFlags, 20);
                 g_ScenarioState.state_04 = 10;
-                g_ScenarioState.step_05  = 10;
+                g_ScenarioState.step     = 10;
             }
         }
     }
@@ -1099,7 +1099,7 @@ NON_MATCHING void func_801FA3E4(void) {
                 g_AreaDrawFlags = 0;
                 Scene_SetupParty(0);
                 g_ScenarioState.state_04 = 1;
-                g_ScenarioState.step_05  = 0;
+                g_ScenarioState.step     = 0;
                 g_ScenarioState.timer_06 = 150;
             }
         }

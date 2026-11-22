@@ -20,8 +20,8 @@ MATCH s32 Area_StepSparkEmitters(void) {
                         spark->active = 1;
                         spark->life   = (rand() & 0x1F) + 0x20;
                         setVector(&spark->pos, emitter->pos.vx + ((rand() & 0xFF) << 8) - 0x10000, emitter->pos.vy + ((rand() & 0xFF) << 8) - 0x10000, emitter->pos.vz);
-                        spark->z_step = 0;
-                        spark->blink  = rand() & 1;
+                        spark->z_delta = 0;
+                        spark->blink   = rand() & 1;
                     }
                 }
                 emitter->timer = rand() & 7;

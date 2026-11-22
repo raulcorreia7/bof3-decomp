@@ -308,8 +308,8 @@ MATCH s32 func_801D18CC(void) {
     i     = 0;
     do {
         if (spark->active != 0) {
-            step          = spark->z_step + 0x20000;
-            spark->z_step = step;
+            step           = spark->z_delta + 0x20000;
+            spark->z_delta = step;
             spark->pos.vz += step;
             spark->blink ^= 1;
             func_801D1758(spark);
