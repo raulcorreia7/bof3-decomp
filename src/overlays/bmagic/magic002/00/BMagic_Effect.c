@@ -103,12 +103,12 @@ NON_MATCHING void func_801EF1FC(s16 x0, s16 y0, s16 x1, s16 y1, s16 x2, s16 y2) 
     SVECTOR  light = D_801EEC10;
     s16      prev_x[10];
     s16      prev_z[10];
-    s16      cur_x[10];
-    s16      cur_z[10];
+    s16      ring_x[10];
+    s16      ring_z[10];
     u8       prev_light[10];
-    u8       cur_light[10];
+    u8       ring_light[10];
     u8       prev_mirror[10];
-    u8       cur_mirror[10];
+    u8       ring_mirror[10];
     s16      quad_x[4];
     s16      quad_y[4];
     s32      avg_x;
@@ -118,7 +118,7 @@ NON_MATCHING void func_801EF1FC(s16 x0, s16 y0, s16 x1, s16 y1, s16 x2, s16 y2) 
     s32      dot;
     s16      angle;
     s16      prev_height;
-    s16      cur_height;
+    s16      ring_height;
     s16      i;
     s16      j;
     s8       point;
@@ -127,86 +127,86 @@ NON_MATCHING void func_801EF1FC(s16 x0, s16 y0, s16 x1, s16 y1, s16 x2, s16 y2) 
     tpage = GetTPage(0x3C0, 0x100, 0, 0);
     GFX_ADD_DRAW_MODE(tpage);
 
-    cur_height = -x1;
+    ring_height = -x1;
     for (i = 0; i < 10; i++) {
-        cur_x[i] = 0;
-        cur_z[i] = 0;
-        vec.vx   = cur_x[i];
-        vec.vy   = cur_height;
-        vec.vz   = cur_z[i];
+        ring_x[i] = 0;
+        ring_z[i] = 0;
+        vec.vx    = ring_x[i];
+        vec.vy    = ring_height;
+        vec.vz    = ring_z[i];
         VectorNormalS(&vec, &normal);
-        dot           = normal.vx * light.vx + normal.vy * light.vy + normal.vz * light.vz;
-        cur_light[i]  = (u8)((u32)SquareRoot0(dot) >> 4);
-        normal.vy     = -normal.vy;
-        dot           = normal.vx * light.vx + normal.vy * light.vy + normal.vz * light.vz;
-        cur_mirror[i] = (u8)((u32)SquareRoot0(dot) >> 4);
+        dot            = normal.vx * light.vx + normal.vy * light.vy + normal.vz * light.vz;
+        ring_light[i]  = (u8)((u32)SquareRoot0(dot) >> 4);
+        normal.vy      = -normal.vy;
+        dot            = normal.vx * light.vx + normal.vy * light.vy + normal.vz * light.vz;
+        ring_mirror[i] = (u8)((u32)SquareRoot0(dot) >> 4);
     }
 
-    prev_height = cur_height;
+    prev_height = ring_height;
     for (i = 1; i < 5; i++) {
         for (j = 0; j < 10; j++) {
-            prev_x[j]      = cur_x[j];
-            prev_z[j]      = cur_z[j];
-            prev_light[j]  = cur_light[j];
-            prev_mirror[j] = cur_mirror[j];
+            prev_x[j]      = ring_x[j];
+            prev_z[j]      = ring_z[j];
+            prev_light[j]  = ring_light[j];
+            prev_mirror[j] = ring_mirror[j];
         }
-        cur_x[0]    = FIXED_MUL(-x1, rsin(i << 8));
-        cur_z[0]    = 0;
-        cur_height  = FIXED_MUL(-x1, rcos(i << 8));
-        ring_radius = cur_x[0];
-        vec.vx      = cur_x[0];
-        vec.vy      = cur_height;
-        vec.vz      = cur_z[0];
+        ring_x[0]   = FIXED_MUL(-x1, rsin(i << 8));
+        ring_z[0]   = 0;
+        ring_height = FIXED_MUL(-x1, rcos(i << 8));
+        ring_radius = ring_x[0];
+        vec.vx      = ring_x[0];
+        vec.vy      = ring_height;
+        vec.vz      = ring_z[0];
         VectorNormalS(&vec, &normal);
-        dot           = normal.vx * light.vx + normal.vy * light.vy + normal.vz * light.vz;
-        cur_light[0]  = (u8)((u32)SquareRoot0(dot) >> 4);
-        normal.vy     = -normal.vy;
-        dot           = normal.vx * light.vx + normal.vy * light.vy + normal.vz * light.vz;
-        cur_mirror[0] = (u8)((u32)SquareRoot0(dot) >> 4);
+        dot            = normal.vx * light.vx + normal.vy * light.vy + normal.vz * light.vz;
+        ring_light[0]  = (u8)((u32)SquareRoot0(dot) >> 4);
+        normal.vy      = -normal.vy;
+        dot            = normal.vx * light.vx + normal.vy * light.vy + normal.vz * light.vz;
+        ring_mirror[0] = (u8)((u32)SquareRoot0(dot) >> 4);
 
         angle = (u8)y1;
         for (point = 1; angle < 0x800; point++, angle += 0x100) {
-            cur_x[point] = FIXED_MUL(ring_radius, rcos(angle));
-            cur_z[point] = FIXED_MUL(ring_radius, rsin(angle));
-            vec.vx       = cur_x[point];
-            vec.vy       = cur_height;
-            vec.vz       = cur_z[point];
+            ring_x[point] = FIXED_MUL(ring_radius, rcos(angle));
+            ring_z[point] = FIXED_MUL(ring_radius, rsin(angle));
+            vec.vx        = ring_x[point];
+            vec.vy        = ring_height;
+            vec.vz        = ring_z[point];
             VectorNormalS(&vec, &normal);
-            dot               = normal.vx * light.vx + normal.vy * light.vy + normal.vz * light.vz;
-            cur_light[point]  = (u8)((u32)SquareRoot0(dot) >> 4);
-            normal.vy         = -normal.vy;
-            dot               = normal.vx * light.vx + normal.vy * light.vy + normal.vz * light.vz;
-            cur_mirror[point] = (u8)((u32)SquareRoot0(dot) >> 4);
+            dot                = normal.vx * light.vx + normal.vy * light.vy + normal.vz * light.vz;
+            ring_light[point]  = (u8)((u32)SquareRoot0(dot) >> 4);
+            normal.vy          = -normal.vy;
+            dot                = normal.vx * light.vx + normal.vy * light.vy + normal.vz * light.vz;
+            ring_mirror[point] = (u8)((u32)SquareRoot0(dot) >> 4);
         }
 
-        cur_x[point] = -ring_radius;
-        cur_z[point] = 0;
-        vec.vx       = cur_x[point];
-        vec.vy       = cur_height;
-        vec.vz       = cur_z[point];
+        ring_x[point] = -ring_radius;
+        ring_z[point] = 0;
+        vec.vx        = ring_x[point];
+        vec.vy        = ring_height;
+        vec.vz        = ring_z[point];
         VectorNormalS(&vec, &normal);
-        dot               = normal.vx * light.vx + normal.vy * light.vy + normal.vz * light.vz;
-        cur_light[point]  = (u8)((u32)SquareRoot0(dot) >> 4);
-        normal.vy         = -normal.vy;
-        dot               = normal.vx * light.vx + normal.vy * light.vy + normal.vz * light.vz;
-        cur_mirror[point] = (u8)((u32)SquareRoot0(dot) >> 4);
+        dot                = normal.vx * light.vx + normal.vy * light.vy + normal.vz * light.vz;
+        ring_light[point]  = (u8)((u32)SquareRoot0(dot) >> 4);
+        normal.vy          = -normal.vy;
+        dot                = normal.vx * light.vx + normal.vy * light.vy + normal.vz * light.vz;
+        ring_mirror[point] = (u8)((u32)SquareRoot0(dot) >> 4);
         point++;
 
         for (j = 0; j < point - 1; j++) {
-            avg_x      = (prev_x[j] + prev_x[j + 1] + cur_x[j] + cur_x[j + 1]) / 4;
-            avg_z      = (prev_z[j] + prev_z[j + 1] + cur_z[j] + cur_z[j + 1]) / 4;
-            mid_height = (prev_height + cur_height) / 2;
+            avg_x      = (prev_x[j] + prev_x[j + 1] + ring_x[j] + ring_x[j + 1]) / 4;
+            avg_z      = (prev_z[j] + prev_z[j + 1] + ring_z[j] + ring_z[j + 1]) / 4;
+            mid_height = (prev_height + ring_height) / 2;
             centre.vx  = (avg_x * x2) >> 8;
             centre.vy  = (mid_height * x2) >> 8;
             centre.vz  = (avg_z * x2) >> 8;
 
             quad_x[0] = ((prev_x[j] - avg_x) * y2) >> 8;
             quad_x[1] = ((prev_x[j + 1] - avg_x) * y2) >> 8;
-            quad_x[2] = ((cur_x[j] - avg_x) * y2) >> 8;
-            quad_x[3] = ((cur_x[j + 1] - avg_x) * y2) >> 8;
+            quad_x[2] = ((ring_x[j] - avg_x) * y2) >> 8;
+            quad_x[3] = ((ring_x[j + 1] - avg_x) * y2) >> 8;
             quad_y[0] = ((prev_height - mid_height) * y2) >> 8;
             quad_y[1] = quad_y[0];
-            quad_y[2] = ((cur_height - mid_height) * y2) >> 8;
+            quad_y[2] = ((ring_height - mid_height) * y2) >> 8;
             quad_y[3] = quad_y[2];
 
             prim = (POLY_G4*)g_GfxPrimCursor;
@@ -215,8 +215,8 @@ NON_MATCHING void func_801EF1FC(s16 x0, s16 y0, s16 x1, s16 y1, s16 x2, s16 y2) 
                    x0 + centre.vx + quad_x[3], y0 + centre.vy + quad_y[3]);
             setRGB0(prim, prev_light[j], prev_light[j], 0);
             setRGB1(prim, prev_light[j], prev_light[j], 0);
-            setRGB2(prim, cur_light[j + 1], cur_light[j + 1], 0);
-            setRGB3(prim, cur_light[j + 1], cur_light[j + 1], 0);
+            setRGB2(prim, ring_light[j + 1], ring_light[j + 1], 0);
+            setRGB3(prim, ring_light[j + 1], ring_light[j + 1], 0);
             SetSemiTrans(prim, 1);
             GFX_AddPrim(GFX_LAYER_UI, sizeof(POLY_G4));
 
@@ -226,12 +226,12 @@ NON_MATCHING void func_801EF1FC(s16 x0, s16 y0, s16 x1, s16 y1, s16 x2, s16 y2) 
                    x0 + centre.vx + quad_x[3], y0 - centre.vy - quad_y[3]);
             setRGB0(prim, prev_mirror[j], prev_mirror[j], 0);
             setRGB1(prim, prev_mirror[j], prev_mirror[j], 0);
-            setRGB2(prim, cur_mirror[j + 1], cur_mirror[j + 1], 0);
-            setRGB3(prim, cur_mirror[j + 1], cur_mirror[j + 1], 0);
+            setRGB2(prim, ring_mirror[j + 1], ring_mirror[j + 1], 0);
+            setRGB3(prim, ring_mirror[j + 1], ring_mirror[j + 1], 0);
             SetSemiTrans(prim, 1);
             GFX_AddPrim(GFX_LAYER_UI, sizeof(POLY_G4));
         }
-        prev_height = cur_height;
+        prev_height = ring_height;
     }
 }
 #else
