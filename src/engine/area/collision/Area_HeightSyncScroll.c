@@ -6,6 +6,6 @@
 MATCH void Area_HeightSyncScroll(void) {
     if (g_AreaCameraMoving == 0) {
         Area_ScrollAdvance(COORD_INT(g_Game.current->pos.z));
-        g_GameStateIndex = GAME_REQUEST_IDLE;
+        g_SysThreads[0].tail.game_entry.request = GAME_REQUEST_IDLE;
     }
 }
