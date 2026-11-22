@@ -131,4 +131,7 @@ void func_801F8108(s32 x, s32 y);
     SND_SEPlay(cue);                                 \
     g_Task->header.mode += 1;
 
+extern u8 D_80181B17;
+extern u8 D_80181B18;
+
 #endif
