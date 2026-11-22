@@ -58,8 +58,8 @@ BattlePartyPanelSteps g_BattlePartyPanelSteps = {
 
 /* 0x801D0FAC */
 BattleMenuRowsPanelSteps g_BattleMenuRowsPanelSteps = {
-    (Callback)Battle_DrawMenuRows,
-    (Callback)Battle_AnimateMenuRows,
+    (Callback)Battle_DrawMenuPanels,
+    (Callback)Battle_AnimatePanels,
     (Callback)func_801EAB64,
 };
 

@@ -1,7 +1,7 @@
 #include "battle_03.h"
 
 /* func_801E9390 */
-MATCH void Battle_AnimateMenuRows(void) {
+MATCH void Battle_AnimatePanels(void) {
     u8*            mode;
     s32            i;
     s32            index;
@@ -29,5 +29,5 @@ MATCH void Battle_AnimateMenuRows(void) {
         i += 1;
     } while ((i & BYTE_MASK) < 7u);
     task = g_UiPanelCurrent;
-    Battle_DrawPanelRows(task->pos.x, task->pos.y);
+    Battle_DrawPanels(task->pos.x, task->pos.y);
 }
