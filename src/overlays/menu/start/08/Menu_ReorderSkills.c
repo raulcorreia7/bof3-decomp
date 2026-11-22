@@ -17,7 +17,7 @@ MATCH void Menu_ReorderSkills(void) {
     u8*         flag;
 
     Menu_DrawClutStrip(g_WindowClut);
-    flag                                                      = &D_801485C4;
+    flag                                                      = &g_UiPanelTasks[18].unk_0C;
     *flag                                                     = 0;
     g_UiPanelTasks[MENU_START_PANEL_CURSOR].active            = 1;
     g_UiPanelTasks[MENU_START_PANEL_CURSOR].pos.x             = g_UiPanelTasks[16].pos.x + 7;

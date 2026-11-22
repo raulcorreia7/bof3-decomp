@@ -53,17 +53,17 @@ NON_MATCHING void Battle_ReadCommandMenu(void) {
             return;
         }
         SND_SEPlay(EMI_SE_ID(SND_BANK_COMMON, 4));
-        D_8014839F          = 2;
-        *(u8*)(&D_8014837B) = 2;
+        g_UiPanelTasks[3].state          = 2;
+        *(u8*)(&g_UiPanelTasks[2].state) = 2;
         g_Battle.phase.step += 2;
         g_Battle.phase.sub_step = g_Battle.panel_slot;
         return;
     }
     if (g_PadStates[0].held & PADselect) {
         SND_SEPlay(EMI_SE_ID(SND_BANK_COMMON, 4));
-        *(u8*)(&D_8014837B) = 2;
-        D_80148357          = 2;
-        D_8014839F          = 2;
+        *(u8*)(&g_UiPanelTasks[2].state) = 2;
+        g_UiPanelTasks[1].state          = 2;
+        g_UiPanelTasks[3].state          = 2;
         Battle_DrawPanels(D_8014837C, D_8014837E);
         func_801D8450((u32)g_Battle.panel_slot);
         Battle_DrawPartyPanel((s32)D_80148358, (s32)D_8014835A);
@@ -73,8 +73,8 @@ NON_MATCHING void Battle_ReadCommandMenu(void) {
     var_s0 = 5;
     if (g_PadStates[0].held & (INPUT_DIRECTIONAL | PADL1 | PADR1)) {
         var_s5     = pad - 4;
-        var_s6     = &D_8014837B;
-        var_s6     = &D_8014837B;
+        var_s6     = &g_UiPanelTasks[2].state;
+        var_s6     = &g_UiPanelTasks[2].state;
         var_s3     = &g_Battle.cursor.panel_entry;
         var_s3     = &g_Battle.cursor.panel_entry;
         var_s2     = &g_Battle.cursor.panel_entry - 5;

@@ -42,7 +42,7 @@ NON_MATCHING void func_801D55B0(void) {
         func_801D6AC4(*sel);
     }
 
-    UI_MessageSetVariable(0, 5, g_Characters[g_CharSlot[g_PartyFieldOrder[D_80148510]]].name);
+    UI_MessageSetVariable(0, 5, g_Characters[g_CharSlot[g_PartyFieldOrder[g_UiPanelTasks[13].unk_0C]]].name);
     g_UiPanelTasks[MENU_START_PANEL_DESCRIPTION].u.message.id = D_801EC448[(s8)D_801ED620];
     g_UiPanelTasks[MENU_START_PANEL_ITEMS].flags              = (u8)D_801EC450[(s8)D_801ED620];
     if (g_PadStates[0].pressed & g_InputMasks[MENU_INPUT_CONFIRM]) {

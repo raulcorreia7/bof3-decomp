@@ -17,34 +17,34 @@ MATCH void func_801D28D0(void) {
     u8               selected_cursor;
     u8*              counter;
 
-    panel              = (MenuChoicePanel*)&D_8014842C;
-    item_index         = panel->group & BYTE_MASK;
-    item_entry         = D_801C893C[item_index][panel->group_cursor];
-    g_ShopItemCategory = panel->group;
-    g_ShopItemId       = item_entry;
-    D_80148340         = Item_GetDescription(item_index, item_entry);
-    D_80148435         = 0;
-    if (D_8014842F == 0) {
-        D_80148624     = 1;
-        panel_x        = panel->pos.x;
-        initial_cursor = panel->group_cursor;
-        initial_first  = panel->group_first;
-        D_80148498     = 0;
-        D_80148628     = panel_x + 7;
-        row_offset     = ((initial_cursor - initial_first) * 0xD) + 0x1B;
-        D_8014862A     = panel->pos.y + row_offset;
+    panel                    = (MenuChoicePanel*)&g_UiPanelTasks[7].active;
+    item_index               = panel->group & BYTE_MASK;
+    item_entry               = D_801C893C[item_index][panel->group_cursor];
+    g_ShopItemCategory       = panel->group;
+    g_ShopItemId             = item_entry;
+    D_80148340               = Item_GetDescription(item_index, item_entry);
+    g_UiPanelTasks[7].unk_09 = 0;
+    if (g_UiPanelTasks[7].state == 0) {
+        g_UiPanelTasks[21].active = 1;
+        panel_x                   = panel->pos.x;
+        initial_cursor            = panel->group_cursor;
+        initial_first             = panel->group_first;
+        g_UiPanelTasks[10].active = 0;
+        D_80148628                = panel_x + 7;
+        row_offset                = ((initial_cursor - initial_first) * 0xD) + 0x1B;
+        D_8014862A                = panel->pos.y + row_offset;
     }
     buttons = INPUT_REPEATED(g_PadStates[0].pressed, (INPUT_DIRECTIONAL | PADL1 | PADR1));
     if (buttons & PADLleft) {
         SND_SEPlay(EMI_SE_ID(SND_BANK_COMMON, 1));
-        D_8014843C = 0x32;
+        g_UiPanelTasks[7].u.grow.w = 0x32;
         panel->group--;
         if ((s8)panel->group < 0) {
             panel->group = 3;
         }
     } else if (buttons & PADLright) {
         SND_SEPlay(EMI_SE_ID(SND_BANK_COMMON, 1));
-        D_8014843C = 0x31;
+        g_UiPanelTasks[7].u.grow.w = 0x31;
         panel->group++;
         if (panel->group >= 4U) {
             panel->group = 0;
@@ -116,8 +116,8 @@ MATCH void func_801D28D0(void) {
         }
         if (g_PadStates[0].pressed & g_InputMasks[MENU_INPUT_CANCEL]) {
             SND_SEPlay(EMI_SE_ID(SND_BANK_COMMON, 6));
-            D_8014842F = 1;
-            D_80148654 = 7;
+            g_UiPanelTasks[7].state = 1;
+            D_80148654              = 7;
             D_80148652 += 3;
         }
     }

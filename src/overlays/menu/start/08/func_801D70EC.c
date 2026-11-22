@@ -10,8 +10,8 @@ MATCH bool func_801D70EC(void) {
     g_EquipPreview[EQUIP_SLOT_ARMOR]       = g_Characters[record].equip.armor;
     g_EquipPreview[EQUIP_SLOT_ACCESSORY_1] = g_Characters[record].equip.accessories[0];
     g_EquipPreview[EQUIP_SLOT_ACCESSORY_2] = g_Characters[record].equip.accessories[1];
-    if (g_EquipPreview[D_8014850E] != 0) {
-        g_EquipPreview[D_8014850E]                   = 0;
+    if (g_EquipPreview[g_UiPanelTasks[13].unk_0A] != 0) {
+        g_EquipPreview[g_UiPanelTasks[13].unk_0A]    = 0;
         g_UiPanelTasks[MENU_START_PANEL_ITEMS].flags = 0;
         return 1;
     }

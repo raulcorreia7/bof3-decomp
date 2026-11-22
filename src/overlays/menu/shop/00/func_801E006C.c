@@ -7,57 +7,57 @@ MATCH void func_801E006C(void) {
 
     UI_MessageSetVariable(0, 5, g_Characters[D_801E6264[D_801E625C]].name);
     D_80148340 = 0x75;
-    if (D_8014839F == 0) {
-        D_80148624 = 1;
-        D_80148628 = D_801483A0;
-        D_80148628 = D_80148628 + 0x2A;
-        D_8014862A = D_801483A2 + 7;
+    if (g_UiPanelTasks[3].state == 0) {
+        g_UiPanelTasks[21].active = 1;
+        D_80148628                = g_UiPanelTasks[3].pos.x;
+        D_80148628                = D_80148628 + 0x2A;
+        D_8014862A                = g_UiPanelTasks[3].pos.y + 7;
     } else {
-        D_80148624 = 0;
+        g_UiPanelTasks[21].active = 0;
     }
     input = INPUT_REPEATED(g_PadStates[0].pressed, INPUT_DIRECTIONAL);
     if (input & PADLleft) {
         SND_SEPlay(EMI_SE_ID(SND_BANK_COMMON, 1));
-        D_801483A9 = 0x32;
-        D_801E625C = D_801E625C - 1;
+        g_UiPanelTasks[3].flags = 0x32;
+        D_801E625C              = D_801E625C - 1;
         if (((s8)D_801E625C) < 0) {
             D_801E625C = D_801E6258 - 1;
         }
     } else if (input & PADLright) {
         SND_SEPlay(EMI_SE_ID(SND_BANK_COMMON, 1));
-        D_801483A9 = 0x31;
+        g_UiPanelTasks[3].flags = 0x31;
         D_801E625C += 1;
         if ((D_801E625C) > (D_801E6258 - 1)) {
             D_801E625C = 0;
         }
     }
-    D_80148382 = D_801E6264[D_801E625C];
-    D_801483A6 = D_801E6264[D_801E625C];
+    g_UiPanelTasks[2].unk_0A = D_801E6264[D_801E625C];
+    g_UiPanelTasks[3].unk_0A = D_801E6264[D_801E625C];
     if (g_PadStates[0].pressed & g_InputMasks[MENU_INPUT_CONFIRM]) {
         SND_SEPlay(EMI_SE_ID(SND_BANK_COMMON, 3));
         SND_SEPlay(EMI_SE_ID(SND_BANK_COMMON, 2));
-        input                = 1;
-        D_8014839F           = 3;
-        D_801483C1           = 7;
-        D_801483C2           = 0xB;
-        g_BattleMessageState = 2;
-        ff                   = 0xFF;
-        D_801483A8           = ff;
-        D_801483CC           = ff;
-        D_8014837B           = input;
-        D_801483C0           = input;
-        D_801483CA           = 0;
-        D_801483CB           = 0;
-        D_801483C4           = BATTLE_PARTY_STRIDE;
-        D_801483C6           = 0x3E;
-        D_801483CD           = 0;
+        input                    = 1;
+        g_UiPanelTasks[3].state  = 3;
+        g_UiPanelTasks[4].panel  = 7;
+        g_UiPanelTasks[4].mode   = 0xB;
+        g_BattleMessageState     = 2;
+        ff                       = 0xFF;
+        g_UiPanelTasks[3].unk_0C = ff;
+        g_UiPanelTasks[4].unk_0C = ff;
+        g_UiPanelTasks[2].state  = input;
+        g_UiPanelTasks[4].active = input;
+        g_UiPanelTasks[4].unk_0A = 0;
+        g_UiPanelTasks[4].unk_0B = 0;
+        g_UiPanelTasks[4].pos.x  = BATTLE_PARTY_STRIDE;
+        g_UiPanelTasks[4].pos.y  = 0x3E;
+        g_UiPanelTasks[4].flags  = 0;
         (*((s8*)(&g_MenuStep.state)))++;
         return;
     }
     if (g_PadStates[0].pressed & g_InputMasks[MENU_INPUT_CANCEL]) {
         SND_SEPlay(EMI_SE_ID(SND_BANK_COMMON, 6));
-        D_8014837B = 1;
-        D_8014839F = 1;
+        g_UiPanelTasks[2].state = 1;
+        g_UiPanelTasks[3].state = 1;
         (*((s8*)(&g_MenuStep.sub_step)))--;
     }
 }

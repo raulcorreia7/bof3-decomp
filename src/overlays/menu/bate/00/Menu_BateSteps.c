@@ -80,18 +80,18 @@ MATCH void func_801D1044(void) {
     u8* step;
     s32 category;
 
-    D_801483C0 = 1;
-    D_801483C4 = D_80148358 + 6;
-    D_801483C6 = D_8014835A + (D_8014835E * 13 + 0x57);
-    pressed    = INPUT_GetRepeatedButtons(g_PadStates[0].pressed & INPUT_DIRECTIONAL) & (PADLup | PADLdown);
-    D_8014835F = 0xFF;
-    D_80148361 = 1;
+    g_UiPanelTasks[4].active = 1;
+    g_UiPanelTasks[4].pos.x  = D_80148358 + 6;
+    g_UiPanelTasks[4].pos.y  = D_8014835A + (g_UiPanelTasks[1].unk_0A * 13 + 0x57);
+    pressed                  = INPUT_GetRepeatedButtons(g_PadStates[0].pressed & INPUT_DIRECTIONAL) & (PADLup | PADLdown);
+    g_UiPanelTasks[1].unk_0B = 0xFF;
+    g_UiPanelTasks[1].flags  = 1;
     if (pressed != 0) {
         SND_SEPlay(EMI_SE_ID(SND_BANK_COMMON, 0x01));
-        D_8014835E ^= 3;
+        g_UiPanelTasks[1].unk_0A ^= 3;
     }
-    D_80148339 = D_8014835E;
-    if (D_8014835E == 0 || D_8014835E != 3) {
+    g_UiPanelTasks[0].unk_09 = g_UiPanelTasks[1].unk_0A;
+    if (g_UiPanelTasks[1].unk_0A == 0 || g_UiPanelTasks[1].unk_0A != 3) {
         item     = &D_80144DF2;
         category = 1;
     } else {
@@ -102,21 +102,21 @@ MATCH void func_801D1044(void) {
     D_801483AC = 0xDC;
     if (g_PadStates[0].pressed & g_InputMasks[MENU_INPUT_CONFIRM]) {
         SND_SEPlay(EMI_SE_ID(SND_BANK_COMMON, 0x03));
-        step       = &g_MenuStep.state;
-        D_8014833B = D_8014833A->type;
-        D_8014835F = D_8014835E;
+        step                     = &g_MenuStep.state;
+        g_UiPanelTasks[0].unk_0B = D_8014833A->type;
+        g_UiPanelTasks[1].unk_0B = g_UiPanelTasks[1].unk_0A;
         (*step)++;
     } else if (g_PadStates[0].pressed & g_InputMasks[MENU_INPUT_CANCEL]) {
         SND_SEPlay(EMI_SE_ID(SND_BANK_COMMON, 0x06));
         SND_SEPlay(EMI_SE_ID(SND_BANK_COMMON, 0x02));
-        g_UiPanelTasks[0].state = 1;
-        D_80148357              = 1;
-        D_8014837B              = 1;
-        D_8014839F              = 1;
-        D_801483C0              = 0;
-        D_80148624              = 0;
-        D_80148654              = 5;
-        g_MenuStep.state        = 0;
+        g_UiPanelTasks[0].state   = 1;
+        g_UiPanelTasks[1].state   = 1;
+        g_UiPanelTasks[2].state   = 1;
+        g_UiPanelTasks[3].state   = 1;
+        g_UiPanelTasks[4].active  = 0;
+        g_UiPanelTasks[21].active = 0;
+        D_80148654                = 5;
+        g_MenuStep.state          = 0;
         g_MenuStep.sub_step += 1;
     }
 }
