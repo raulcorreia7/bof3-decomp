@@ -1,7 +1,6 @@
 #include "area173_14.h"
 
-#ifdef NON_MATCHING
-NON_MATCHING void Area_Update(void) {
+MATCH void Area_Update(void) {
     POLY_FT4* prim;
     long      depth;
     long      flag;
@@ -11,8 +10,6 @@ NON_MATCHING void Area_Update(void) {
     s32       y1;
     s32       x1;
     s8        bias;
-    s32       product;
-    s32       offset;
 
     g_ScratchPadVectors[0].vy = g_ScratchPadVectors[1].vy = g_ScratchPadVectors[2].vy = g_ScratchPadVectors[3].vy = ((FIX_INT(TASK(Actor)->pos.y.fixed) - 0x80) << 7) | 0x40;
     GFX_ADD_LAYER_DRAW_MODE(GFX_LAYER_FIELD_SCENE, getTPage(TPAGE_DEPTH_8BIT, TPAGE_ABR_HALF, 320, 256));
@@ -21,14 +18,10 @@ NON_MATCHING void Area_Update(void) {
         prim = (POLY_FT4*)g_GfxPrimCursor;
         SetPolyFT4(prim);
         SetShadeTex(prim, 0);
-        bias    = FAKE_VOLATILE(u8, D_801F4ED4[AREA_ROW_SCALE_OFFSET + i]); /* FAKE: retail loads the scale unsigned and sign-extends it apart; the volatile read keeps the two steps. */
-        product = TASK(Actor)->screen_y * bias;
-        offset  = product + 0x40;
-        g_ScratchPadVectors[0].vx = g_ScratchPadVectors[2].vx = ((FIX_INT(TASK(Actor)->pos.x.fixed) - 0x7F) << 7) + offset;
-        bias    = FAKE_VOLATILE(u8, D_801F4ED4[AREA_ROW_SCALE_OFFSET + i]); /* FAKE: retail loads the scale unsigned and sign-extends it apart; the volatile read keeps the two steps. */
-        product = TASK(Actor)->screen_y * bias;
-        offset  = product - 0x40;
-        g_ScratchPadVectors[1].vx = g_ScratchPadVectors[3].vx = ((FIX_INT(TASK(Actor)->pos.x.fixed) - 0x80) << 7) + offset;
+        bias = FAKE_VOLATILE(u8, D_801F4ED4[AREA_ROW_SCALE_OFFSET + i]); /* FAKE: retail loads the scale unsigned and sign-extends it apart; the volatile read keeps the two steps. */
+        g_ScratchPadVectors[0].vx = g_ScratchPadVectors[2].vx = ((FIX_INT(TASK(Actor)->pos.x.fixed) - 0x7F) << 7) + (s16)(TASK(Actor)->screen_y * bias + 0x40);
+        bias = FAKE_VOLATILE(u8, D_801F4ED4[AREA_ROW_SCALE_OFFSET + i]); /* FAKE: retail loads the scale unsigned and sign-extends it apart; the volatile read keeps the two steps. */
+        g_ScratchPadVectors[1].vx = g_ScratchPadVectors[3].vx = ((FIX_INT(TASK(Actor)->pos.x.fixed) - 0x80) << 7) + (s16)(TASK(Actor)->screen_y * bias - 0x40);
         x                                                     = (g_ScratchPadVectors[0].vx + 0x4000) << 9;
         y                                                     = (g_ScratchPadVectors[0].vy + 0x4000) << 9;
         g_ScratchPadVectors[0].vz                             = -Area_HeightSample(x, y) / 2;
@@ -43,6 +36,3 @@ NON_MATCHING void Area_Update(void) {
         GFX_AddPrim(GFX_LAYER_FIELD_SCENE, sizeof(POLY_FT4));
     }
 }
-#else
-INCLUDE_ASM(Area_Update);
-#endif
