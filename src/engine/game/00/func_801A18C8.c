@@ -10,7 +10,7 @@ MATCH void func_801A18C8(Actor* record) {
     state      = GAME_REQUEST_MESSAGE;
     if (*game_state != state) {
         if (work->callback_index != GAME_NONE) {
-            Game_DispatchScenarioRecord(record);
+            Game_ScenarioDispatchRecord(record);
         }
         if (*game_state != state) {
             if (g_Task->unk_06 == 5) {

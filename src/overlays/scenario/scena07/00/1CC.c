@@ -992,107 +992,76 @@ MATCH void func_801FA698(void) {
     D_80146872 = 1;
 }
 
-#ifdef NON_MATCHING
-NON_MATCHING void func_801FA6B4(void) {
-    switch (g_ScenarioState.step_05) {
-        case 0:
-            SCENARIO_MESSAGE_WAIT(MSG_SCENA07_013, 1);
-            break;
-        case 1:
-            if (g_GameStateIndex != GAME_REQUEST_MESSAGE) {
-                Scene_SetupParty(0);
-                g_ScenarioState.step_05 = 2;
-            }
-            break;
-        case 2:
-            if (g_ScriptVars[0] == 1) {
-                g_AreaScrollTargetX     = TO_COORD(53);
-                g_AreaCameraStep        = 0x20;
-                g_ScenarioState.step_05 = 3;
-                g_AreaScrollTargetY     = g_Game.members[0].pos.y.fixed;
-            }
-            break;
-        case 3:
-            if (g_AreaCameraMoving == 0) {
-                g_ScriptVars[0]         = 2;
-                g_ScenarioState.step_05 = 4;
-            }
-            break;
-        case 4:
-            if (g_ScriptVars[0] == 0xA) {
-                UI_ModeSet(0xD);
-                g_ScenarioState.step_05 = 5;
-            }
-            break;
-        case 5:
-            if (WINDOW_EFFECT_BUSY()) {
-                break;
-            }
-            g_AreaDrawFlags = 0;
-            SCENARIO_MESSAGE_WAIT(MSG_SCENA07_026, 6);
-            break;
-        case 6:
-            if (g_GameStateIndex != GAME_REQUEST_MESSAGE) {
-                g_ScriptVars[2]         = 1;
-                g_ScenarioState.step_05 = 7;
-                SYS_SetFlag(g_SceneFlags, 13);
-                Game_RequestAreaChange(AREA_ID_RHAPALA_DOCK, TO_COORD(51), TO_COORD(33), AREA_ENTRY_MAP_LOADING | FACING_UP);
-            }
-            break;
-        case 7:
-            if (g_ScriptVars[0] == 0xD) {
-                SYS_SetFlag(g_SceneFlags, 15);
-                Game_ClearScriptActive();
-                Scene_ClearScriptState(&g_ScenarioState.step_05);
-            }
-            break;
-        case 10:
-            SCENARIO_MESSAGE_WAIT(MSG_SCENA07_041, 11);
-            break;
-        case 11:
-            if (g_GameStateIndex != GAME_REQUEST_MESSAGE) {
-                Scene_SetupParty(2);
-                g_ScenarioState.step_05 = 12;
-            }
-            break;
-        case 12:
-            if (g_ScriptVars[0] == 0x15) {
-                SYS_SetFlag(g_SceneFlags, 14);
-                Game_ClearScriptActive();
-                Scene_ClearScriptState(&g_ScenarioState.step_05);
-            }
-            break;
-        case 20:
-            SCENARIO_MESSAGE_WAIT(MSG_SCENA07_041, 21);
-            break;
-        case 21:
-            if (g_GameStateIndex != GAME_REQUEST_MESSAGE) {
-                Scene_SetupParty(0);
-                g_ScenarioState.step_05 = 22;
-            }
-            break;
-        case 22:
-            if (g_ScriptVars[0] == 1) {
-                SYS_SetFlag(g_SceneFlags, 16);
-                Game_ClearScriptActive();
-                Scene_ClearScriptState(&g_ScenarioState.step_05);
-            }
-            break;
-        case 30:
-            SCENARIO_MESSAGE_WAIT(MSG_SCENA07_019, 31);
-            break;
-        case 31:
-            if (g_GameStateIndex != GAME_REQUEST_MESSAGE) {
-                Game_ClearScriptActive();
-                g_ScenarioState.step_05  = 0;
-                g_ScenarioState.state_04 = 0;
-            }
-            break;
+/* Sets up the scena07 areas on entry: scroll, tiles and the scene script each area starts with. */
+MATCH void func_801FA6B4(void) {
+    u8* bgm;
+
+    if (LOHU(g_GameAreaId) == AREA_ID_CAMP_BEFORE_ANGEL_TOWER && !SYS_TestFlag(g_SceneFlags, 7)) {
+        func_801C1DF0(1);
+        func_801BE1B0(2);
+        g_ScrollHeight = 0xD80;
+        Area_AdvanceScroll(0xD80);
     }
+    if (LOHU(g_GameAreaId) == AREA_ID_URKAN_TAPA) {
+        if (g_GameCellType == 1 && !SYS_TestFlag(g_SceneFlags, 4)) {
+            SYS_SetFlag(g_SceneFlags, 4);
+            g_AreaScrollTargetX = 0x5B8000;
+            g_AreaScrollTargetY = 0x98000;
+            Area_InitMapRenderer();
+            func_801BE1B0(0);
+            bgm = &g_SndBGMId;
+            SND_StartDecrescendo(g_SelectionSepSlots[*bgm * 4], g_SelectionSequences[*bgm * 4], 100, 0x20);
+            *bgm = 1;
+        }
+    } else if (!SYS_TestFlag(g_SceneFlags, 4)) {
+        SYS_ClearFlag(g_SceneFlags, 5);
+        SYS_ClearFlag(g_SceneFlags, 6);
+    }
+    if (LOHU(g_GameAreaId) == AREA_ID_ANGEL_TOWER_GARR_FIGHT) {
+        if (!SYS_TestFlag(g_SceneFlags, 8)) {
+            Game_SetScriptActive();
+            g_ScriptVars[0] = 0;
+            func_801BE1B0(0);
+            g_ScenarioState.state_04 = 6;
+            g_ScenarioState.step_05  = 0;
+        }
+        if (!SYS_TestFlag(g_SceneFlags, 9)) {
+            func_801A4BC0(0x25, 0x3D, 0x51);
+            func_801A4BC0(0x26, 0x3D, 0x51);
+        } else {
+            EMI_LoadArchive(0x254);
+            while (!EMI_IsReady()) {
+                SYS_ThreadWait(1);
+            }
+            func_801A4BC0(0x25, 0x3D, 0x50);
+            func_801A4BC0(0x26, 0x3D, 0x50);
+        }
+    }
+    if (LOHU(g_GameAreaId) == AREA_ID_TIDAL_CAVES_OUTSIDE) {
+        SYS_SetFlag(g_SceneEventFlags, 0x4F);
+    }
+    if (LOHU(g_GameAreaId) == AREA_ID_FAIRY_VILLAGE_DOLPHIN && g_GameCellType == 1) {
+        if (!SYS_TestFlag(g_SceneFlags, 0)) {
+            Game_SetScriptActive();
+            g_ScriptVars[0] = 0;
+            func_801C1DF0(0);
+            func_801BE1B0(0);
+            g_AreaDrawFlags          = 0;
+            g_ScenarioState.state_04 = 1;
+            g_ScenarioState.step_05  = 0;
+        } else if (!SYS_TestFlag(g_SceneFlags, 2) && SYS_TestFlag(g_SceneFlags, 1)) {
+            Game_SetScriptActive();
+            g_AreaScrollTargetX = 0x2D8000;
+            g_AreaScrollTargetY = 0x5D0000;
+            Area_InitMapRenderer();
+            func_801BE1B0(2);
+            g_ScenarioState.state_04 = 3;
+            g_ScenarioState.step_05  = 0;
+            D_80146258 |= 8;
+        }
+    }
+    D_80146872 = 2;
 }
-#else
-INCLUDE_ASM(func_801FA6B4);
-#endif
 
 MATCH void func_801FAA2C(void) {
     SYS_DISPATCH_BYTE(D_801FDE1C, g_ScenarioState.state_04);

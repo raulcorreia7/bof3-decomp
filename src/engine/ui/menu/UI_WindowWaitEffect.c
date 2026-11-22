@@ -9,6 +9,6 @@ MATCH void UI_WindowWaitEffect(u8 wait_steps) {
             SYS_ThreadWait(1);
             break;
         }
-        Game_UpdateMenuFrame();
+        Game_MenuUpdateFrame();
     } while (WINDOW_EFFECT_BUSY());
 }
