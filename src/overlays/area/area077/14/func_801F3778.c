@@ -8,7 +8,7 @@ MATCH void func_801F3778(u8 count, Pos2* current, RECT* rect) {
     for (i = 0; i < count - 1; i++) {
         if (current[1].vx >= rect->x && current[1].vx < rect->x + rect->w) {
             if (current[0].vx >= current[1].vx) {
-                func_801F3898(current[0], current[1], shade);
+                Area_DrawLine(current[0], current[1], shade);
             } else {
                 func_801F3B48(&current[1], shade);
             }
