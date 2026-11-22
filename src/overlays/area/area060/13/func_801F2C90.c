@@ -17,6 +17,7 @@ NON_MATCHING void func_801F2C90(void) {
     s32       high;
     s32       low;
     s32       value;
+    s32       fill;
 
     rect = (RECT*)g_GfxPrimCursor;
     g_GfxPrimCursor += sizeof(RECT);
@@ -123,12 +124,13 @@ NON_MATCHING void func_801F2C90(void) {
     SetDrawMode((DR_MODE*)g_GfxPrimCursor, 0, 0, (GetGraphType() == 1 || GetGraphType() == 2) ? 0x2A5 : 0xB5, 0);
     func_801F3288(sizeof(DR_MODE));
 
+    fill = (0x20 << 24) | (0x20 << 16) | (0x20 << 8) | 0x20;
     for (row = 0; row < 10; row++) {
         high  = ((row + 1) / 2) + 0x20;
         low   = (row / 2) + 0x20;
         value = (high << 24) | (high << 16) | (low << 8) | low;
         for (col = 0x2D; col < 0x31; col++) {
-            D_80104030[col + (g_AreaTargetCellY + 3) * g_AreaMapBundle.width]       = 0x20202020;
+            D_80104030[col + (g_AreaTargetCellY + 3) * g_AreaMapBundle.width]       = fill;
             D_80104030[col + (g_AreaTargetCellY + row + 4) * g_AreaMapBundle.width] = value;
         }
     }
@@ -137,7 +139,7 @@ NON_MATCHING void func_801F2C90(void) {
         low   = ((row + 1) / 2) + 0x20;
         value = (high << 24) | (high << 16) | (low << 8) | low;
         for (col = 0x2D; col < 0x31; col++) {
-            D_80104030[col + (g_AreaTargetCellY - 3) * g_AreaMapBundle.width]       = 0x20202020;
+            D_80104030[col + (g_AreaTargetCellY - 3) * g_AreaMapBundle.width]       = fill;
             D_80104030[col + (g_AreaTargetCellY - row - 4) * g_AreaMapBundle.width] = value;
         }
     }
