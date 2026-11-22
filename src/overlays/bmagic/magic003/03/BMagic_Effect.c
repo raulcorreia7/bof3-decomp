@@ -142,7 +142,7 @@ MATCH void func_801EF12C(void) {
 
 MATCH void func_801EF1FC(void) {
     if (TASK(PartyMember)->param.unk_0B == 0) {
-        *D_8014637C &= 0xBF;
+        D_8014637C->header.flags &= 0xBF;
         Battle_SelectActiveBattlerScript(4, 0);
         TASK(PartyMember)->header.mode += 1;
     }

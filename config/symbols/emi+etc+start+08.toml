@@ -26,11 +26,11 @@ g_SaveFileNameFormat = { addr = 0x801D0EC8, source = "Format of the card file na
 jtbl_801D0EE0 = { addr = 0x801D0EE0, type = "Callback", source = "The switch table of func_801E5C68: the jump targets of its jr dispatch." }
 Party_InitDefaults = { addr = 0x801D15C0, type = "func", source = "Sets the default party: copies g_NewGameCharacters into g_Characters and sets the willpower of each character." }
 Menu_DispatchStep = { addr = 0x801D1740, type = "func", source = "Entry of the start menu: dispatches on the menu step byte g_MenuStep.step through the D_801EC35C handlers." }
-Menu_SwapBytes = { addr = 0x801D4A30, type = "func", source = "Swaps the two bytes that two pointers address; the start callers pass entries of D_801C893C and D_801C8950, adjacent rows or mirrored pairs." }
-Menu_SwapBytes2 = { addr = 0x801D6668, type = "func", source = "Swaps the two bytes that two pointers address; the start callers pass entries of D_801C893C and D_801C8950, adjacent rows or mirrored pairs. Same bytes as Menu_SwapBytes at 0x801D4A30." }
+Menu_SwapBytes = { addr = 0x801D4A30, type = "func", source = "Swaps the two bytes that two pointers address; the start callers pass entries of g_ItemCategoryIds and g_ItemCategoryCounts, adjacent rows or mirrored pairs." }
+Menu_SwapBytes2 = { addr = 0x801D6668, type = "func", source = "Swaps the two bytes that two pointers address; the start callers pass entries of g_ItemCategoryIds and g_ItemCategoryCounts, adjacent rows or mirrored pairs. Same bytes as Menu_SwapBytes at 0x801D4A30." }
 Menu_PreviewStrongestEquipment = { addr = 0x801D67D8, type = "func", source = "Fills g_EquipPreview for the party member at the slot: the weapon, shield, helmet and armor of most power in the inventory that the member can equip (a tie keeps the lower id), then the member's two accessories." }
 Menu_ReorderSkills = { addr = 0x801D8908, type = "func", source = "moves the skill list cursor and swaps two picked skills in a character's ability list (SkillOrder work area)" }
-Menu_SwapBytes3 = { addr = 0x801D933C, type = "func", source = "Swaps the two bytes that two pointers address; the start callers pass entries of D_801C893C and D_801C8950, adjacent rows or mirrored pairs. Same bytes as Menu_SwapBytes at 0x801D4A30." }
+Menu_SwapBytes3 = { addr = 0x801D933C, type = "func", source = "Swaps the two bytes that two pointers address; the start callers pass entries of g_ItemCategoryIds and g_ItemCategoryCounts, adjacent rows or mirrored pairs. Same bytes as Menu_SwapBytes at 0x801D4A30." }
 Menu_PackSkills = { addr = 0x801D9350, type = "func", source = "moves the empty slots of the ability list to the end" }
 Menu_SortSkillsDescending = { addr = 0x801D942C, type = "func", source = "packs, then bubble-sorts the ability list in descending order of the ability row's byte 0" }
 Menu_SortSkillsAscending = { addr = 0x801D9548, type = "func", source = "packs, then bubble-sorts the ability list in ascending order of the ability row's byte 0" }
@@ -43,7 +43,7 @@ Menu_RunPartyChange = { addr = 0x801DA320, type = "func", source = "runs the par
 Menu_UpdatePartyChange = { addr = 0x801DA474, type = "func", source = "moves the cursor between the field party and the reserve list and picks two members to swap" }
 Menu_ClosePartyScreen = { addr = 0x801DA984, type = "func", source = "waits, hides the party panels and returns to the command menu (step 1)" }
 Menu_OpenFormationScreen = { addr = 0x801DAA68, type = "func", source = "opens the formation screen: description bar, member panels, then the formation grid (Menu_OpenFormation); sub_step 2" }
-Menu_SwapBytes4 = { addr = 0x801DAC08, type = "func", source = "Swaps the two bytes that two pointers address; the start callers pass entries of D_801C893C and D_801C8950, adjacent rows or mirrored pairs. Same bytes as Menu_SwapBytes at 0x801D4A30." }
+Menu_SwapBytes4 = { addr = 0x801DAC08, type = "func", source = "Swaps the two bytes that two pointers address; the start callers pass entries of g_ItemCategoryIds and g_ItemCategoryCounts, adjacent rows or mirrored pairs. Same bytes as Menu_SwapBytes at 0x801D4A30." }
 Menu_OpenFormation = { addr = 0x801DAC1C, type = "func", source = "builds the formation grid cells and panels from the party menu flags and picks g_PartyFormation's cell" }
 Menu_OpenPartyChange = { addr = 0x801DAE14, type = "func", source = "lists the characters outside the field order into the reserve list and opens its panel" }
 Menu_SwapPartyMembers = { addr = 0x801DB04C, type = "func", source = "swaps a field member with another or a reserve member, with their skill order rows" }

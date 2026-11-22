@@ -125,7 +125,7 @@ NON_MATCHING void func_801D0D4C(void) {
             SND_SEPlay(EMI_SE_ID(SND_BANK_COMMON, 6));
             D_801F294D += 1;
         } else if (g_PadStates[0].pressed & g_InputMasks[MENU_INPUT_CONFIRM]) {
-            item_entry = D_801C893C[panel->group][panel->group_cursor];
+            item_entry = g_ItemCategoryIds[panel->group][panel->group_cursor];
             if (item_entry == 0) {
                 SND_SEPlay(EMI_SE_ID(SND_BANK_COMMON, 7));
                 return;
@@ -137,7 +137,7 @@ NON_MATCHING void func_801D0D4C(void) {
             g_UiPanelTasks[1].active                        = 0;
             D_801F294D                                      = 4;
         }
-        item_entry = D_801C893C[panel->group][panel->group_cursor];
+        item_entry = g_ItemCategoryIds[panel->group][panel->group_cursor];
         if (item_entry != 0) {
             UI_TextDraw(0x1D, 0x15, 0, 0xFF, UI_MessageGetText(Item_GetDescription(panel->group, item_entry) & HALF_MASK));
         }

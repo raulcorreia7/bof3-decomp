@@ -15,13 +15,13 @@ MATCH void Battle_ConfirmItem(void) {
     g_Battle.command_count += 1u;
     g_BattleMessages[((D_801EC328 - 1) & 0xF)].record_type = 1u;
     g_BattleActorTurn->choice                              = *cursor;
-    if (D_801C8950[*group][*cursor] >= 2u) {
-        D_801C8950[*group][*cursor] -= 1u;
+    if (g_ItemCategoryCounts[*group][*cursor] >= 2u) {
+        g_ItemCategoryCounts[*group][*cursor] -= 1u;
     } else {
         /* FAKE: block boundary keeps the group read base-relative off the cursor la. */
         FAKE_ORDER_FENCE();
-        D_801C893C[*group][*cursor] = 0;
-        D_801C8950[*group][*cursor] = 0;
+        g_ItemCategoryIds[*group][*cursor]    = 0;
+        g_ItemCategoryCounts[*group][*cursor] = 0;
     }
     Battle_ClearMenuPanels();
     g_Battle.phase.step     = 1u;

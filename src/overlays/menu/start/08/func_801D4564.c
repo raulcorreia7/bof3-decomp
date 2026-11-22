@@ -11,14 +11,15 @@ MATCH void func_801D4564(void) {
     u32              span;
 
     Menu_DrawClutStrip(g_WindowClut);
-    g_UiPanelTasks[MENU_START_PANEL_DESCRIPTION].u.message.id = Item_GetDescription(g_UiPanelTasks[13].unk_0A, D_801C893C[g_UiPanelTasks[13].unk_0A][g_UiPanelTasks[MENU_START_PANEL_ITEMS].unk_0C]);
-    g_UiPanelTasks[MENU_START_PANEL_CURSOR].active            = 1;
-    g_UiPanelTasks[MENU_START_PANEL_CURSOR].pos.x             = (u16)g_UiPanelTasks[MENU_START_PANEL_ITEMS].pos.x + 7;
-    span                                                      = (g_UiPanelTasks[13].unk_0C - g_UiPanelTasks[MENU_START_PANEL_ITEMS].unk_0B) * 0xD + 0x1A;
-    g_UiPanelTasks[MENU_START_PANEL_CURSOR].pos.y             = (u16)g_UiPanelTasks[MENU_START_PANEL_ITEMS].pos.y + span;
-    panel                                                     = &D_80148504;
-    pressed                                                   = INPUT_GetRepeatedButtons(g_PadStates[0].pressed & (PADLup | PADLdown | PADL1 | PADR1));
-    cursor                                                    = g_UiPanelTasks[13].unk_0C;
+    g_UiPanelTasks[MENU_START_PANEL_DESCRIPTION].u.message.id =
+        Item_GetDescription(g_UiPanelTasks[13].unk_0A, g_ItemCategoryIds[g_UiPanelTasks[13].unk_0A][g_UiPanelTasks[MENU_START_PANEL_ITEMS].unk_0C]);
+    g_UiPanelTasks[MENU_START_PANEL_CURSOR].active = 1;
+    g_UiPanelTasks[MENU_START_PANEL_CURSOR].pos.x  = (u16)g_UiPanelTasks[MENU_START_PANEL_ITEMS].pos.x + 7;
+    span                                           = (g_UiPanelTasks[13].unk_0C - g_UiPanelTasks[MENU_START_PANEL_ITEMS].unk_0B) * 0xD + 0x1A;
+    g_UiPanelTasks[MENU_START_PANEL_CURSOR].pos.y  = (u16)g_UiPanelTasks[MENU_START_PANEL_ITEMS].pos.y + span;
+    panel                                          = &D_80148504;
+    pressed                                        = INPUT_GetRepeatedButtons(g_PadStates[0].pressed & (PADLup | PADLdown | PADL1 | PADR1));
+    cursor                                         = g_UiPanelTasks[13].unk_0C;
     if (pressed & PADLup) {
         if (cursor != 0) {
             g_UiPanelTasks[13].unk_0C = cursor - 1;

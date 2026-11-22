@@ -12,7 +12,7 @@ MATCH void func_801F321C(void) {
     dst   = (AreaVertex*)AREA108_VERTEX_DST;
     state = AREA108_STATE_BASE;
     count = 0;
-    in    = (const AreaVertex*)D_80147B40;
+    in    = (const AreaVertex*)g_PartyActors[1].script;
     do {
         *dst          = *in;
         state->base_x = ((dst->points[0].x + dst->points[1].x + dst->points[2].x + dst->points[3].x) >> 2);

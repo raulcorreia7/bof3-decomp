@@ -75,7 +75,7 @@
  * Writers and readers: `emi/etc/shop/00@0x801D2828` and `@0x801D334C` build the shop
  * panel (group 0, the group's first entry, the cursor, the drawn cursor 0xFF);
  * `emi/etc/start/08@0x801D3D00` reads the same four fields of the start panel
- * through D_801C893C and D_801C8950 and clears the drawn cursor with 0xFF.
+ * through g_ItemCategoryIds and g_ItemCategoryCounts and clears the drawn cursor with 0xFF.
  * The x and y are the panel's screen position: the draw calls take x + 7 and
  * y + 7, and the panel animation slides x (MENU_ADVANCE_PANEL). */
 typedef struct MenuChoicePanel {

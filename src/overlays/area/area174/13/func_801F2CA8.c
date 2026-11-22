@@ -13,7 +13,7 @@ MATCH void func_801F2CA8(void) {
     if (TASK(Actor)->unk_06 != 0) {
         Area_UpdateShots();
     }
-    if (D_80147A8C == TO_COORD(60) + COORD_HALF) {
+    if (g_PartyActors[0].pos.x.fixed == TO_COORD(60) + COORD_HALF) {
         TASK(Actor)->header.mode += 1;
     }
 }

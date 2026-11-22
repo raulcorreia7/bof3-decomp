@@ -22,8 +22,8 @@ MATCH bool Item_Add(s32 category, u8 item_id, u8 count, s32 unused) {
     }
     limit                       = 99;
     g_ScratchPad.cells.bytes[0] = 0;
-    keys                        = D_801C893C[category & BYTE_MASK];
-    vals                        = D_801C8950[category & BYTE_MASK];
+    keys                        = g_ItemCategoryIds[category & BYTE_MASK];
+    vals                        = g_ItemCategoryCounts[category & BYTE_MASK];
     i                           = 0;
     do {
         if (*keys == key) {
@@ -40,8 +40,8 @@ MATCH bool Item_Add(s32 category, u8 item_id, u8 count, s32 unused) {
         vals++;
     } while ((i & BYTE_MASK) < 128U);
     i    = 0;
-    keys = D_801C893C[category & BYTE_MASK];
-    vals = D_801C8950[category & BYTE_MASK];
+    keys = g_ItemCategoryIds[category & BYTE_MASK];
+    vals = g_ItemCategoryCounts[category & BYTE_MASK];
     do {
         if ((*keys == 0) || (*vals == 0)) {
             *keys                       = item_id;

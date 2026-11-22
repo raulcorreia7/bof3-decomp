@@ -4,30 +4,28 @@
 #define AREA_EFFECT_PART_TILE 0x9111u
 #define AREA_EFFECT_PART_WORD (AREA_EFFECT_PART_TAG | AREA_EFFECT_PART_TILE)
 
+/* Draws the two ground quads of a field-effect part at the task's position: each
+ * one projects the four scratchpad corners and queues a textured tile. The task's
+ * phase byte advances by phase_step and wraps at twelve; halved, it picks the two
+ * tiles of the pair, the second one two rows on and wrapping at six. */
 #ifdef NON_MATCHING
 NON_MATCHING void func_801F3F5C(s32 part, s32 span, s32 phase_step, s32 offset) {
     POLY_FT4* prim;
     long      depth;
     long      flag;
-    s32       i;
-    u32       row;
-    u32       next_row;
-    u32       indices[2];
     u32       part_words[2];
     s32       x;
     s32       y;
-    s32       step;
     s32       height;
-    s32       next_y;
     s32       tpage;
-    s16*      row2_y;
-    s16*      row3_y;
+    u32       row;
+    u32       next_row;
+    s32       i;
 
-    row  = TASK(Actor)->unk_0A;
-    step = span;
-    row += phase_step;
+    row                 = TASK(Actor)->unk_0A + phase_step;
     TASK(Actor)->unk_0A = row;
-    row                 = TASK(Actor)->unk_0A;
+
+    row = TASK(Actor)->unk_0A;
     if (row < 12U) {
         next_row = row;
     } else {
@@ -35,52 +33,47 @@ NON_MATCHING void func_801F3F5C(s32 part, s32 span, s32 phase_step, s32 offset) 
     }
     TASK(Actor)->unk_0A = next_row;
 
-    row        = TASK(Actor)->unk_0A >> 1;
-    indices[0] = row;
-    indices[1] = row + 2;
-    if (indices[1] >= 6U) {
-        indices[1] = row - 4;
-    }
-
+    row           = TASK(Actor)->unk_0A >> 1;
     part_words[0] = row;
-    part_words[1] = indices[1];
+    if (row + 2 < 6U) {
+        part_words[1] = row + 2;
+    } else {
+        part_words[1] = row - 4;
+    }
     for (i = 0; i < 2; i++) {
         part_words[i] += ((u32)part << 16) | AREA_EFFECT_PART_WORD;
     }
 
-    y      = ((TASK(Actor)->pos.y.part.integer - 0x80) << 7) + 0x10;
-    x      = ((TASK(Actor)->pos.x.part.integer - 0x80) << 7) + 0x10;
-    row2_y = &g_ScratchPadVectors[2].vy;
-    row3_y = &g_ScratchPadVectors[3].vy;
+    y = ((TASK(Actor)->pos.y.part.integer - 0x80) << 7) + 0x10;
+    x = ((TASK(Actor)->pos.x.part.integer - 0x80) << 7) + 0x10;
 
     for (i = 0; i < 2; i++) {
         tpage = getTPage(1, 0, 320, 256);
-        SetDrawMode((DR_MODE*)g_GfxPrimCursor, 0, 0, tpage, NULL);
+        GFX_SET_DRAW_MODE(tpage);
         Area_CellAddPrim(TASK(Actor)->pos.x.fixed, TASK(Actor)->pos.y.fixed, 1, 0xC);
         prim = (POLY_FT4*)g_GfxPrimCursor;
         SetPolyFT4(prim);
         SetShadeTex(prim, 0);
 
-        g_ScratchPadVectors[0].vx = x;
-        g_ScratchPadVectors[2].vx = x;
-        g_ScratchPadVectors[1].vx = x - i * step;
-        g_ScratchPadVectors[3].vx = x - i * step;
-        next_y                    = y + step;
+        g_ScratchPadVectors[0].vx = x + i * span;
+        g_ScratchPadVectors[2].vx = x + i * span;
+        g_ScratchPadVectors[1].vx = x - i * span;
+        g_ScratchPadVectors[3].vx = x - i * span;
         if (i == 0) {
-            g_ScratchPadVectors[0].vy = y + step - offset;
-            g_ScratchPadVectors[1].vy = y - step - offset;
-            *row2_y                   = y;
-            *row3_y                   = next_y;
+            g_ScratchPadVectors[0].vy = (y + span) - offset;
+            g_ScratchPadVectors[1].vy = (y - span) - offset;
+            g_ScratchPadVectors[2].vy = y + span;
+            g_ScratchPadVectors[3].vy = y - span;
         } else {
             g_ScratchPadVectors[0].vy = y - offset;
             g_ScratchPadVectors[1].vy = y - offset;
-            *row2_y                   = y;
-            *row3_y                   = y;
+            g_ScratchPadVectors[2].vy = y;
+            g_ScratchPadVectors[3].vy = y;
         }
 
         height                    = -Area_HeightSample(TASK(Actor)->pos.x.fixed, TASK(Actor)->pos.y.fixed) / 2;
-        g_ScratchPadVectors[0].vz = height - ((step * 2) + 0xC0);
-        g_ScratchPadVectors[1].vz = height - ((step * 2) + 0xC0);
+        g_ScratchPadVectors[0].vz = height - ((span * 2) + 0xC0);
+        g_ScratchPadVectors[1].vz = height - ((span * 2) + 0xC0);
         height                    = -Area_HeightSample(TASK(Actor)->pos.x.fixed, TASK(Actor)->pos.y.fixed) / 2;
         g_ScratchPadVectors[2].vz = height - 0xC0;
         g_ScratchPadVectors[3].vz = height - 0xC0;

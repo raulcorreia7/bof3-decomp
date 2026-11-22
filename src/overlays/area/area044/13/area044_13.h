@@ -6,11 +6,6 @@
 
 #include "overlays/area/worlds/world01.h"
 
-/* D_80147A58 */
-extern Actor g_PartyActors[];
-extern u8    D_80147A61;
-extern u8    D_80147AF9;
-
 /* The first cell pair table: entry n's x at byte 2n and its y at 2n+1. */
 extern u8 D_801F3FB4[];
 /* The second cell pair table: entry n's x at byte n and its y at n+1. */

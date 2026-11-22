@@ -152,8 +152,8 @@ extern volatile u8 D_8014865F;
 extern u8*         D_8018E7CC;
 /* D_8018E990 */
 extern u8          g_SaveCardDirectory[];
-extern u8*         D_801C893C[];
-extern u8*         D_801C8950[];
+extern u8*         g_ItemCategoryIds[];
+extern u8*         g_ItemCategoryCounts[];
 extern ShopStock   g_GameShopStock[SHOP_COUNT];
 extern char        D_801D0C1C[];
 extern char        D_801D0C20[];

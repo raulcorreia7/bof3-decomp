@@ -7,8 +7,8 @@
 __asm__(".include \"include/match/macro.inc\"\n");
 #endif
 
-#ifdef NON_MATCHING
-NON_MATCHING void func_801FA24C(void) {
+/* The Wyndia rooftop confrontation: the shop hand-off, the party-size choice and the escape route. */
+MATCH void func_801FA24C(void) {
     switch (g_ScenarioState.step) {
         case 0:
             if (g_Game.members[0].pos.x.part.integer == 0x1B && g_Game.members[0].pos.y.part.integer < 0x24) {
@@ -75,9 +75,11 @@ NON_MATCHING void func_801FA24C(void) {
             break;
         case 6:
             if (g_ScriptVars[0] == 0x12) {
+                u8* flags = &g_ScenarioState.flags_01;
+
                 g_ScriptVars[2]      = 3;
-                g_ScenarioState.step = 14;
-                g_ScenarioState.flags_01 |= 1;
+                g_ScenarioState.step = 0xE;
+                *flags |= 1;
                 SYS_SetFlag(g_SceneFlags, 9);
                 func_8019FA28(0x17, TO_COORD(0x48), TO_COORD(6), 0x87);
             }
@@ -120,7 +122,7 @@ NON_MATCHING void func_801FA24C(void) {
                 g_ScenarioState.step = 19;
                 func_801C16B8();
                 SND_BGMPlay(0x1D, 0x64, 8);
-                g_Game.flags |= 0x80;
+                g_GameFlags |= 0x80;
             }
             break;
         case 19:
@@ -154,7 +156,7 @@ NON_MATCHING void func_801FA24C(void) {
         case 58:
             if (g_ScriptVars[0] == 0x24) {
                 g_ScenarioState.step = 59;
-                g_Game.flags ^= 0x80;
+                g_GameFlags ^= 0x80;
             }
             break;
         case 59:
@@ -173,6 +175,3 @@ NON_MATCHING void func_801FA24C(void) {
             break;
     }
 }
-#else
-INCLUDE_ASM(func_801FA24C);
-#endif

@@ -532,9 +532,6 @@ extern u8                    D_80146856;
 extern volatile u32          D_80146858;
 extern volatile u32          D_8014685C;
 /* Retail data D_80147000-D_8014FFFF (one declaration each). */
-/* D_80147A58 */
-/* The four party actor rows after g_Actors. */
-extern u8                    g_PartyActors[];
 extern u8                    D_80147ACC[];
 extern PanelSortItem         D_80147CFC[];
 extern PanelSortItem         D_80147D08[]; /* == &D_80147CFC[1] */
@@ -785,8 +782,8 @@ extern u32                  D_80190C60; /* end of the BSS stup2 clears */
 extern u8                   D_801C839C[];
 extern u8                   D_801C839D[];
 extern ActorModeCallback    D_801C83D8[];
-extern u8*                  D_801C893C[];
-extern u8*                  D_801C8950[];
+extern u8*                  g_ItemCategoryIds[];
+extern u8*                  g_ItemCategoryCounts[];
 /* Ability elements and flags share a 16-bit mask in this image. */
 extern u16                  D_801CA71C;
 /* The scratchpad work cell. Not volatile: 37 matched SLUS readers keep the

@@ -63,8 +63,8 @@ Callback g_MenuActionSteps[3] = {func_8019959C, func_801997EC, UI_PanelSetPosX};
 
 Callback g_UiPanelTaskSteps[4] = {func_8019959C, func_80199938, func_80199978, func_801999B8};
 
-char g_ItemCategoryLabels[5][8] = {"ITEM" T_END T_END T_END T_END, "WEAPON" T_END T_END, "ARMOR" T_END T_END T_END,
-                         "OPTION" T_END T_END, "VITAL" T_END T_END T_END};
+char g_ItemCategoryLabels[5][8] = {"ITEM" T_END T_END T_END T_END, "WEAPON" T_END T_END, "ARMOR" T_END3,
+                                   "OPTION" T_END T_END, "VITAL" T_END3};
 
 u8* g_ItemCategoryLabelPointers[5] = {(u8*)&g_ItemCategoryLabels[0][0], (u8*)&g_ItemCategoryLabels[1][0], (u8*)&g_ItemCategoryLabels[2][0], (u8*)&g_ItemCategoryLabels[3][0],
                      (u8*)&g_ItemCategoryLabels[4][0]};
@@ -456,9 +456,9 @@ AreaActionCallback g_AreaActions[11] = {
 
 u8 g_FindZenny[4] = {0x00, 0x00, 0x01, 0x0A};
 
-u8* D_801C893C[5] = {g_InventoryIds[0], g_InventoryIds[1], g_InventoryIds[2], g_InventoryIds[3], g_VitalItemIds};
+u8* g_ItemCategoryIds[5] = {g_InventoryIds[0], g_InventoryIds[1], g_InventoryIds[2], g_InventoryIds[3], g_VitalItemIds};
 
-u8* D_801C8950[5] = {g_InventoryCounts[0], g_InventoryCounts[1], g_InventoryCounts[2], g_InventoryCounts[3], (u8*)0};
+u8* g_ItemCategoryCounts[5] = {g_InventoryCounts[0], g_InventoryCounts[1], g_InventoryCounts[2], g_InventoryCounts[3], (u8*)0};
 
 Item g_Items[ITEM_COUNT] = {
     ITEM("Nothing", 0, ITEM_TYPE_ITEM, 0x4000, 0),

@@ -16,10 +16,10 @@ MATCH void func_8009EC48(void) {
         saved = ENEMY_COMBATANT(slot).status & STATUS_BLIND;
         ENEMY_COMBATANT(slot).status &= ~STATUS_BLIND;
     }
-    p_flag     = &g_BattleState;
-    flag       = *p_flag;
-    D_801EC324 = 0x64;
-    *p_flag    = flag | BATTLE_STATE_CRITICAL;
+    p_flag                        = &g_BattleState;
+    flag                          = *p_flag;
+    g_BattleCalcStats[1].accuracy = 0x64;
+    *p_flag                       = flag | BATTLE_STATE_CRITICAL;
     /* FAKE: statement boundary keeps the retail register order and schedule. */
     FAKE_ORDER_LOCK(slot_arg = g_BattleActiveBattler);
     type_arg                          = g_BattleTarget;

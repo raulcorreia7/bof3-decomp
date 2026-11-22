@@ -249,8 +249,8 @@ MATCH void func_801F2D5C(void) {
 MATCH void func_801F2DB4(void) {
     Actor* scratch;
 
-    scratch       = TASK(Actor);
-    g_PartyActors = 0;
+    scratch                       = TASK(Actor);
+    g_PartyActors[0].header.flags = 0;
     scratch->header.mode++;
 }
 
@@ -375,7 +375,7 @@ MATCH void func_801F3314(void) {
     dst   = (AreaVertex*)WORLD00_AREA024_VERTEX_DST;
     state = (u16*)WORLD00_AREA024_STATE_BASE;
     count = 0;
-    in    = (const AreaVertex*)D_80147AA8;
+    in    = (const AreaVertex*)g_PartyActors[0].script;
     do {
         *dst     = *in;
         state[0] = ((dst->points[0].x + dst->points[1].x + dst->points[2].x + dst->points[3].x) >> 2);
@@ -422,7 +422,7 @@ MATCH void func_801F362C(void) {
     u16           t1;
     u16           t2;
 
-    src   = D_80147AA8;
+    src   = g_PartyActors[0].script;
     dst   = (u8*)WORLD00_AREA024_VERTEX_DST;
     state = (u16*)WORLD00_AREA024_STATE_BASE;
     count = 0;
@@ -640,7 +640,7 @@ MATCH s32 func_801F3E48(u8 shade) {
 
     vec   = D_801F2C04;
     saved = TASK(volatile Actor);
-    TASK_SET(&g_PartyActors);
+    TASK_SET(&g_PartyActors[0]);
     PushMatrix();
 
     mtxp  = &matrix;

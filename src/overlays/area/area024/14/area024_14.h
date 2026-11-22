@@ -19,10 +19,8 @@
 #define WORLD00_AREA024_PTR_7AAC       MEM(volatile u8*, 0x80147AACu)
 #define WORLD00_AREA024_SCRATCH_PTR    SP_REF(volatile Actor*, 0x44u)
 
-/* D_80147A58 */
-extern volatile u8 g_PartyActors;
-extern VECTOR      D_801F2C04;
-extern Callback    D_801F4214[];
+extern VECTOR   D_801F2C04;
+extern Callback D_801F4214[];
 
 void func_801F2C58(void);
 void func_801F2CB0(void);
