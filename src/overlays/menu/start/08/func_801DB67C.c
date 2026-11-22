@@ -5,7 +5,7 @@ MATCH void func_801DB67C(void) {
     u8  value;
     s16 offset;
 
-    Menu_DrawClutStrip(D_80144953);
+    Menu_DrawClutStrip(g_WindowClut);
     i      = 0;
     value  = 4;
     offset = -0x96;

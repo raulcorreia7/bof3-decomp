@@ -7,7 +7,7 @@ MATCH void Menu_ClosePartyScreen(void) {
     u8  value;
     u8  i;
 
-    Menu_DrawClutStrip(D_80144953);
+    Menu_DrawClutStrip(g_WindowClut);
     counter  = &D_80148654;
     count    = *counter - 1;
     *counter = count;

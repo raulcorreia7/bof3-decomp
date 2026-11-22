@@ -15,7 +15,7 @@ NON_MATCHING void func_801D8390(void) {
     s32 pad;
     s32 count;
 
-    Menu_DrawClutStrip(D_80144953);
+    Menu_DrawClutStrip(g_WindowClut);
     base        = (u8*)&D_801484CC;
     *(s16*)base = 0x17;
     base[0x110] = 1;

@@ -9,7 +9,7 @@ MATCH void SAVE_RunLoadVerify(void) {
     u16 stored;
     u32 sum;
 
-    Menu_DrawClutStrip(D_80144953);
+    Menu_DrawClutStrip(g_WindowClut);
     MENU_DRAW_HEADER();
     SAVE_DrawSlots(SAVE_SLOTS_X, SAVE_SLOTS_Y, 0);
     SAVE_AccessFile(0, 0, 0, 0, 0);

@@ -43,13 +43,13 @@
  * A bare statement macro: the member declares `timer` and `count`. Kept: tested
  * as an inline, the member's local frame disappears and the bytes move; the
  * do/while form moves bytes too. */
-#define ETC_TICK_SCENE_TIMER()      \
-    Menu_DrawClutStrip(D_80144953); \
-    timer  = &D_80148654;           \
-    count  = *timer - 1;            \
-    *timer = count;                 \
-    if (count == 0) {               \
-        D_80148651 += 1;            \
+#define ETC_TICK_SCENE_TIMER()        \
+    Menu_DrawClutStrip(g_WindowClut); \
+    timer  = &D_80148654;             \
+    count  = *timer - 1;              \
+    *timer = count;                   \
+    if (count == 0) {                 \
+        D_80148651 += 1;              \
     }
 
 /* Step the master panel right and clamp it at the given x. Kept: as an inline

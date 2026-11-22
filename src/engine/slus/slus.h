@@ -402,7 +402,8 @@ extern s32                   D_80144967;
 /* Retail data D_80145000-D_80146FFF (one declaration each). */
 extern s32                   D_80145030;
 extern u8                    D_80145990[];
-extern u32*                  D_801459D0[];
+/* D_801459D0 */
+extern u32*                  g_GfxOtHeads[GFX_LAYER_COUNT];
 extern void*                 D_801459F8;
 extern u32                   D_801459FC;
 extern u16                   D_80145A54[];

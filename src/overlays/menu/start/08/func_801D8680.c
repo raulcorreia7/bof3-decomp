@@ -14,7 +14,7 @@ MATCH void func_801D8680(void) {
     u8             next_count;
     s32            row_index;
 
-    Menu_DrawClutStrip(D_80144953);
+    Menu_DrawClutStrip(g_WindowClut);
     /* FAKE: pure C reaches 92.0% after the panel, table, mask, and counter rewrites. */
     FAKE_HOLD(flag_value, 0xFF);
     panel  = &D_801484CC;

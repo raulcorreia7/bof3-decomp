@@ -6,7 +6,7 @@ MATCH void func_801D2EAC(void) {
     s32 pad;
     u8  cursor;
 
-    Menu_DrawClutStrip(D_80144953);
+    Menu_DrawClutStrip(g_WindowClut);
     D_80148504.type                                           = 0;
     D_80148504.group_cursor                                   = 0xFF;
     g_UiPanelTasks[MENU_START_PANEL_CURSOR].active            = 1;

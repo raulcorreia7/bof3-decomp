@@ -13,7 +13,7 @@ NON_MATCHING void Menu_UpdatePartyChange(void) {
     s16          id;
     volatile u8* flag;
 
-    panel_data = &D_80144953;
+    panel_data = &g_WindowClut;
     Menu_DrawClutStrip(*panel_data);
     flag                                                 = &D_801485DC;
     *flag                                                = 0;

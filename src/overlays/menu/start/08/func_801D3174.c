@@ -20,7 +20,7 @@ MATCH void func_801D3174(void) {
     s32 offset;
     u16 pad;
 
-    Menu_DrawClutStrip(D_80144953);
+    Menu_DrawClutStrip(g_WindowClut);
     step = &D_8014850C;
     mode = 3;
     if (D_801ED618 == 0) {

@@ -8,7 +8,7 @@ MATCH void func_801DA35C(void) {
     u8*            timer;
     u8*            state_counter;
 
-    panel_data = &D_80144953;
+    panel_data = &g_WindowClut;
     Menu_DrawClutStrip(*panel_data);
     timer     = &D_80148654;
     remaining = *timer - 1;

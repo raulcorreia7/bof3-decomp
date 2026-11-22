@@ -12,7 +12,7 @@ MATCH void func_801D5A28(void) {
 
     task  = &g_UiPanelTasks[MENU_START_PANEL_CURSOR];
     group = &g_UiPanelTasks[MENU_START_PANEL_ITEMS].unk_0A;
-    Menu_DrawClutStrip(D_80144953);
+    Menu_DrawClutStrip(g_WindowClut);
     task->active = 1;
     task->pos.x  = g_UiPanelTasks[MENU_START_PANEL_ITEMS].pos.x + 6;
     task->pos.y  = g_UiPanelTasks[MENU_START_PANEL_ITEMS].pos.y + (*group * 0xD + 0x57);

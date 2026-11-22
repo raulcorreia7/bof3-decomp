@@ -13,7 +13,7 @@ MATCH void func_801D2564(void) {
     u16* pad_state;
     u16  pad_buttons;
 
-    panel_data = &D_80144953;
+    panel_data = &g_WindowClut;
     Menu_DrawClutStrip(*panel_data);
     panel_data += 0x15;
     selection       = &D_80148656;

@@ -7,7 +7,7 @@ NON_MATCHING void func_801D40D8(void) {
     u16* pad;
     u8** records;
 
-    Menu_DrawClutStrip(D_80144953);
+    Menu_DrawClutStrip(g_WindowClut);
     flag = &D_80148624;
     UI_MessageSetVariable(0, 0xC, Item_GetRecord(D_8014850E, D_801C893C[D_8014850E][D_80148510]));
     g_UiPanelTasks[MENU_START_PANEL_DESCRIPTION].u.message.id = 0x1A;

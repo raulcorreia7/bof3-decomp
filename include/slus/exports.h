@@ -120,7 +120,8 @@ extern u8           g_Scenario2Flags[];
 /* 0x80145xxx: pad state, shared text buffer and field words. */
 extern u16          D_80145048;
 extern u8           D_801454F2;
-extern u8*          D_801459F4;
+/* D_801459F4 */
+extern u8*          g_SceneActorDefs;
 /* Event descriptors opened by the executable's card setup. */
 /* The palette cell map: 4 rows of 16 cells, 0xFF where a cell is free. */
 #define PALETTE_MAP_ROWS    4

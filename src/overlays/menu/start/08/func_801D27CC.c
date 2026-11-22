@@ -5,7 +5,7 @@ extern s8 D_80148656;
 MATCH void func_801D27CC(void) {
     u8* records;
     u8* panel_data;
-    panel_data = &D_80144953;
+    panel_data = &g_WindowClut;
     Menu_DrawClutStrip(*panel_data);
     records = panel_data + 0x15;
     UI_MessageSetVariable(0, 5, g_CharSlot[g_PartyFieldOrder[D_80148656]] * 0xA4 + records);

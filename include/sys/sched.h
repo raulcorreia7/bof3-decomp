@@ -12,6 +12,7 @@
  * (`sh $v0, %lo(D_80143B40)($at)`, value 2 = SYS_THREAD_OPEN) and the
  * entry word at +0x04 (`sw $a1, %lo(D_80143B44)($at)`). */
 #define SYS_THREAD_SIZE         0x80
+#define SYS_THREAD_COUNT        4
 
 /* The scheduler: 0x80-byte thread records, a cursor, and the entry points that
  * register, run and stop threads. */
@@ -34,7 +35,7 @@ typedef struct Thread {
     u16      countdown;
     Callback entry;
     s32      thread_id;
-    u32      unk_0C;
+    u8*      work;  /* 0x0C - the kernel work block whose +0x94 word this thread's context keeps */
     u32      stack; /* thread stack top, OpenTh's sp argument */
     u8       pad_14[0x30];
     u32      gp; /* OpenTh's gp argument */
@@ -43,6 +44,7 @@ typedef struct Thread {
 
 ASSERT_OFFSET(Thread, state, 0x00);
 ASSERT_OFFSET(Thread, entry, 0x04);
+ASSERT_OFFSET(Thread, work, 0x0C);
 ASSERT_OFFSET(Thread, stack, 0x10);
 ASSERT_OFFSET(Thread, gp, 0x44);
 ASSERT_SIZE(Thread, SYS_THREAD_SIZE);

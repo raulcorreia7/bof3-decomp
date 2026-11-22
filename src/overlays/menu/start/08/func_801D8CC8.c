@@ -3,7 +3,7 @@
 MATCH void func_801D8CC8(void) {
     u8* counter;
 
-    Menu_DrawClutStrip(D_80144953);
+    Menu_DrawClutStrip(g_WindowClut);
     counter = &D_80148654;
     *counter -= 1;
     if (*counter == 0) {
