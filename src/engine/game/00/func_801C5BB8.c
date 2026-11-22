@@ -15,8 +15,8 @@ MATCH void func_801C5BB8(void) {
         *flags &= 0xBF;
         func_801C5874();
     } else {
-        value = &D_80143F84;
+        value = &g_PartyPos.z.fixed;
         *value += D_80143F5C;
-        Area_ScrollAdvance(g_ScrollHeight);
+        Area_ScrollAdvance(COORD_INT(g_PartyPos.z));
     }
 }

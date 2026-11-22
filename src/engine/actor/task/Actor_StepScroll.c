@@ -9,7 +9,7 @@ MATCH s8 Actor_StepScroll(s32 entry, s8 dir_x, s8 dir_y, s16 vz_start, s16 vz_de
 
     COORD_INT(TASK(Actor)->pos.z) += (TASK(Actor)->vz >> 8);
     TASK(Actor)->vz = TASK(Actor)->vz + vz_delta;
-    Area_ScrollAdvance(g_ScrollHeight[0]);
+    Area_ScrollAdvance(COORD_INT(g_PartyPos.z));
     TASK(Actor)->unk_0A = TASK(Actor)->unk_0A - 1;
     limit               = Area_HeightSample(g_AreaScrollTargetX, g_AreaScrollTargetY);
     if (TASK(Actor)->vz < 0 && limit > COORD_INT(TASK(Actor)->pos.z)) {

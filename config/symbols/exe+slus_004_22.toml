@@ -67,6 +67,7 @@ g_AreaEncounterPlacement = { addr = 0x80143F24, size = 0x20, source = "The field
 g_EncounterOriginX = { addr = 0x80143F24, type = "s32", alias = true, source = "The formation origin x; a unit that keeps its own absolute address per access reads this view of g_AreaEncounterPlacement.origin.x." }
 g_EncounterOriginY = { addr = 0x80143F28, type = "s32", alias = true, source = "The formation origin y; a unit that keeps its own absolute address per access reads this view of g_AreaEncounterPlacement.origin.y." }
 g_SysResetHoldFrames = { addr = 0x80143F44, source = "SYS_Main counts held reset-key frames until EMI_IsReady" }
+g_PartyPos = { addr = 0x80143F7C, size = 0xC, alias = true, source = "The party's field position in 16.16; the area scroll code reads x, y and z and g_ScrollHeight is the integer half of z." }
 g_PartyX = { addr = 0x80143F7C, type = "s32", source = "X position of the party." }
 g_PartyY = { addr = 0x80143F80, type = "s32", source = "Y position of the party." }
 g_ScrollHeight = { addr = 0x80143F86, type = "s16", source = "Ground height under the party." }
@@ -224,6 +225,7 @@ g_ActorWalkDestX = { addr = 0x80146908, size = 0x4, alias = true, source = "x of
 g_ActorWalkDestY = { addr = 0x8014690C, size = 0x4, alias = true, source = "y of the destination func_801AC33C walks the actor to; the Actor.walk_dest_y word (byte 0x84) seen as a column of g_Actors" }
 D_80146910 = { addr = 0x80146910, size = 0x4, alias = true, source = "The Actor.unk_88 word (byte 0x88) seen as a column of g_Actors" }
 g_PartyActors = { addr = 0x80147A58, source = "The four party actor rows after g_Actors; Area_UpdateParty steps them and the walk and adopt scripts index them by party slot." }
+g_AreaFocus = { addr = 0x80147A8C, size = 0xC, alias = true, source = "The area's focus point in 16.16; the area placement and scene camera code copy it to actors and scroll targets." }
 g_AreaFocusY = { addr = 0x80147A90, source = "Y focus of the area." }
 g_ActorTurnRamps = { addr = 0x80147CB8, type = "ActorTurnRamp", size = 0x50, source = "The turn ramps of the four party slots and one non-party slot: the steps and frame counts that turn an actor's angle words over several frames." }
 g_ScriptWorkRecord = { addr = 0x80148208, type = "Actor", source = "The script work record." }
