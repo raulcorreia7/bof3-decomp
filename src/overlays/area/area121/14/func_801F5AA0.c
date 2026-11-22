@@ -9,8 +9,7 @@ MATCH void func_801F5AA0(s16 x, s16 y, u8 row) {
     setWH(sprite, 0x50, 0x20);
     sprite->clut = WORLD_SPRITE_CLUT;
     setXY0(sprite, x, y);
-    sprite->v0 = row * 0x20 + 0x78;
-    sprite->u0 = 0;
+    setUV0(sprite, 0, row * 0x20 + 0x78);
     setRGB0(sprite, 128, 128, 128);
     GFX_AddPrim(GFX_LAYER_EFFECT_FRONT, sizeof(SPRT));
 }

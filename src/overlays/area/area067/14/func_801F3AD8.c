@@ -15,10 +15,9 @@ MATCH void func_801F3AD8(AreaRippleQuad* quad) {
         prim = (POLY_G4*)g_GfxPrimCursor;
         SetPolyG4(prim);
         SetSemiTrans(prim, 1);
-        prim->x0 = prim->x1 = quad->x + ((quad->radius * rcos(angle)) >> 12);
-        prim->y0            = 0;
-        prim->y1            = quad->y + ((quad->radius * rsin(angle)) >> 13);
-        color               = shade;
+        setXY0(prim, prim->x1 = quad->x + ((quad->radius * rcos(angle)) >> 12), 0);
+        prim->y1 = quad->y + ((quad->radius * rsin(angle)) >> 13);
+        color    = shade;
         if (shade >= 0x100) {
             color = 0xFF;
         }
