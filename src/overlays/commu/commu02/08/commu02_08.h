@@ -135,7 +135,7 @@ void func_801D3184(s32 x, s32 y);
 
 void func_801D32A0(s32 x, s32 y, u8 mode);
 void func_801D4AE0(s16 x, s16 y, u8 flag);
-void func_801D4EA4(s32 left, s32 top, s32 icon_row, s32 raised);
+void func_801D4EA4(s16 left, s16 top, u8 icon_row, u8 raised);
 void func_801D4F88(s32 x, s32 y, s32 show_values);
 void func_801D5B2C(void);
 /* func_801D7EA0 */
