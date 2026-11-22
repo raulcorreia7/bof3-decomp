@@ -26,6 +26,13 @@ extern Callback D_801FC418[];
 extern Callback D_801FC424[];
 
 extern s8 D_801FC44C[];
+extern u8 D_80148660;
+
+void func_801C7A54(s32 arg);
+void func_801F4400(void);
+void func_801F4508(void);
+void func_801F4674(void);
+void func_801F4764(void);
 /* D_801FC468 */
 
 #endif
