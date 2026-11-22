@@ -15,7 +15,7 @@ MATCH void func_801E0F0C(void) {
     /* FAKE: retail materializes the +0x124 mask in a3. */
     FAKE_REG(s32, mask, "a3");
 
-    ACTOR_COUNT_DOWN(count, unk_09);
+    ACTOR_COUNT_DOWN(TASK(PartyMember), count, unk_09);
     if ((count & BYTE_MASK) == 0) {
         work         = g_Game.current;
         one          = 1;
@@ -34,10 +34,10 @@ MATCH void func_801E0F0C(void) {
         SND_SEQueueSelection(0x206);
         if (g_Battle.outcome.event_flags == 0) {
             Battle_OpenPanel();
-            Battle_SetTextPartyName(g_Task->slot);
+            Battle_SetTextPartyName(TASK(PartyMember)->slot);
             func_801DEBC4(0, g_Game.current->chr.character_id);
         }
-        g_Task->unk_03 = 2;
+        TASK(PartyMember)->unk_03 = 2;
         func_801DEDE4();
     }
 }

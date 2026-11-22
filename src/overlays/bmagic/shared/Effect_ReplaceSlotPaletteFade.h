@@ -5,19 +5,19 @@ MATCH void Effect_ReplaceSlotPaletteFade(void) {
     u8    slot;
     u8    count;
 
-    slot = g_Task->unk_04;
+    slot = TASK(PartyMember)->unk_04;
     if (slot < BATTLE_PARTY_CHARACTERS_COUNT) {
         battler = &g_Game.members[slot];
     } else {
         battler = &g_BattleEnemyBattlers[slot - BATTLE_PARTY_CHARACTERS_COUNT];
     }
 
-    count          = g_Task->unk_09 - 1;
-    g_Task->unk_09 = count;
+    count                     = TASK(PartyMember)->unk_09 - 1;
+    TASK(PartyMember)->unk_09 = count;
     if (count == 0) {
         GFX_PaletteFreeFadeTarget(battler);
-        g_Task->timer  = GFX_PaletteAllocFade(battler, 0, 0, 0, 1);
-        g_Task->unk_09 = 8;
-        g_Task->header.step += 1;
+        TASK(PartyMember)->timer  = GFX_PaletteAllocFade(battler, 0, 0, 0, 1);
+        TASK(PartyMember)->unk_09 = 8;
+        TASK(PartyMember)->header.step += 1;
     }
 }

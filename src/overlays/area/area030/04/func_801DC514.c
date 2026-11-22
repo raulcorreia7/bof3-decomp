@@ -5,7 +5,7 @@
 MATCH void func_801DC514(void) {
     if (D_80144199 == 3) {
         func_801DDE94(3);
-        FISHING_STATE->sub_index += 1;
+        TASK(FishingState)->sub_index += 1;
     }
     Script_AnimStepLoop();
 }

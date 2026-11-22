@@ -18,13 +18,13 @@ MATCH void func_801EEC98(void) {
     u32          slot;
     s32          i;
 
-    g_Task->facing = g_BattleEffectBattler->facing;
-    battler        = g_BattleEffectBattler;
-    task           = g_Task;
+    TASK(PartyMember)->facing = g_BattleEffectBattler->facing;
+    battler                   = g_BattleEffectBattler;
+    task                      = g_Task;
     WorldPos_Copy(&task->pos, &battler->pos);
-    task->param.unk_0B = 0;
-    g_Task->unk_09     = 0;
-    g_Task->header.mode++;
+    task->param.unk_0B        = 0;
+    TASK(PartyMember)->unk_09 = 0;
+    TASK(PartyMember)->header.mode++;
     Battle_SelectActiveBattlerScript(12, 2);
     func_801EF490();
     slot = Battle_AllocEffect(1, 70) & BYTE_MASK;
@@ -35,14 +35,14 @@ MATCH void func_801EEC98(void) {
     g_BattleEffects[slot].unk_06       = 1;
     g_BattleEffects[slot].step_index   = 70;
     g_BattleEffects[slot].target.party = owner;
-    g_Task->param.unk_0B++;
+    TASK(PartyMember)->param.unk_0B++;
     slot                               = Battle_AllocEffect(1, 70) & BYTE_MASK;
     parent                             = g_Task;
     g_BattleEffects[slot].header.mode  = 1;
     g_BattleEffects[slot].target.party = parent;
-    g_BattleEffects[slot].unk_03       = g_Task->unk_03;
-    g_BattleEffects[slot].unk_04       = g_Task->unk_04;
-    g_Task->param.unk_0B++;
+    g_BattleEffects[slot].unk_03       = TASK(PartyMember)->unk_03;
+    g_BattleEffects[slot].unk_04       = TASK(PartyMember)->unk_04;
+    TASK(PartyMember)->param.unk_0B++;
     g_BattleEffectBattler->header.flags |= ACTOR_FLAG_HIDDEN;
     g_Battle.flags |= BATTLE_STATE_DAMAGE_APPLIED;
     BMAGIC_POINT_AT_PALETTE_ROW(dst, src, i);
@@ -56,13 +56,13 @@ MATCH void func_801EEF8C(void) {
     PartyMember* battler;
     u8           selector;
 
-    if (g_Task->param.unk_0B < 2) {
+    if (TASK(PartyMember)->param.unk_0B < 2) {
         BMAGIC_SELECT_TARGET_BATTLER();
-        g_Task->unk_5D = D_801EFE10[g_Task->unk_04 * 3];
-        g_Task->unk_5E = D_801EFE11[g_Task->unk_04 * 3];
-        g_Task->unk_5F = D_801EFE12[g_Task->unk_04 * 3];
+        TASK(PartyMember)->unk_5D = D_801EFE10[TASK(PartyMember)->unk_04 * 3];
+        TASK(PartyMember)->unk_5E = D_801EFE11[TASK(PartyMember)->unk_04 * 3];
+        TASK(PartyMember)->unk_5F = D_801EFE12[TASK(PartyMember)->unk_04 * 3];
         GFX_PaletteFreeFadeTarget(battler);
-        g_Task->timer = GFX_PaletteAllocFade(battler, (s8)g_Task->unk_5D, (s8)g_Task->unk_5E, (s8)g_Task->unk_5F, 0);
+        TASK(PartyMember)->timer = GFX_PaletteAllocFade(battler, (s8)TASK(PartyMember)->unk_5D, (s8)TASK(PartyMember)->unk_5E, (s8)TASK(PartyMember)->unk_5F, 0);
         Battle_SelectActiveBattlerScript(4, 0);
         g_BattleEffectBattler->header.flags &= ~ACTOR_FLAG_HIDDEN;
         Battle_ApplyDamageFlags(LOBU(g_Battle.target_selector), 0x20);
@@ -70,21 +70,21 @@ MATCH void func_801EEF8C(void) {
         if ((u32)(g_Battle.action_id - 0x85) < 4) {
             SND_SEQueueSelection(0x101);
         }
-        g_Task->header.mode += 1;
+        TASK(PartyMember)->header.mode += 1;
     }
 }
 
 MATCH void func_801EF158(void) {
     u16 cue;
 
-    if (g_Task->param.unk_0B == 0) {
-        cue = D_801EFE40[g_Task->unk_04];
+    if (TASK(PartyMember)->param.unk_0B == 0) {
+        cue = D_801EFE40[TASK(PartyMember)->unk_04];
         if (cue != 0) {
             SND_SEQueueSelection(cue);
         }
         Battle_MarkDamaged(g_Battle.target_selector);
-        g_Task->unk_09 = 0;
-        g_Task->header.mode++;
+        TASK(PartyMember)->unk_09 = 0;
+        TASK(PartyMember)->header.mode++;
     }
 }
 
@@ -92,27 +92,27 @@ MATCH void func_801EF1F0(void) {
     PartyMember* battler;
     u8           selector;
 
-    if (g_Task->unk_09 < 12) {
+    if (TASK(PartyMember)->unk_09 < 12) {
         Effect_DrawScreenFade();
-        g_Task->unk_09 += 4;
+        TASK(PartyMember)->unk_09 += 4;
     }
-    if ((s8)g_Task->unk_5D != 0) {
-        g_Task->unk_5D -= 2;
+    if ((s8)TASK(PartyMember)->unk_5D != 0) {
+        TASK(PartyMember)->unk_5D -= 2;
     }
-    if ((s8)g_Task->unk_5E != 0) {
-        g_Task->unk_5E -= 2;
+    if ((s8)TASK(PartyMember)->unk_5E != 0) {
+        TASK(PartyMember)->unk_5E -= 2;
     }
-    if ((s8)g_Task->unk_5F != 0) {
-        g_Task->unk_5F -= 2;
+    if ((s8)TASK(PartyMember)->unk_5F != 0) {
+        TASK(PartyMember)->unk_5F -= 2;
     }
-    g_PaletteFades[g_Task->timer].offset.r = g_Task->unk_5D;
-    g_PaletteFades[g_Task->timer].offset.g = g_Task->unk_5E;
-    g_PaletteFades[g_Task->timer].offset.b = g_Task->unk_5F;
-    if ((LOWU(g_Task->unk_5C) & ~0xFF) == 0) {
+    g_PaletteFades[TASK(PartyMember)->timer].offset.r = TASK(PartyMember)->unk_5D;
+    g_PaletteFades[TASK(PartyMember)->timer].offset.g = TASK(PartyMember)->unk_5E;
+    g_PaletteFades[TASK(PartyMember)->timer].offset.b = TASK(PartyMember)->unk_5F;
+    if ((LOWU(TASK(PartyMember)->unk_5C) & ~0xFF) == 0) {
         BMAGIC_SELECT_TARGET_BATTLER();
         GFX_PaletteFreeFadeTarget(battler);
         Battle_FadePoisonedBattler(g_Battle.target_selector);
-        g_Task->header.mode++;
+        TASK(PartyMember)->header.mode++;
     }
 }
 
@@ -136,54 +136,54 @@ MATCH void func_801EF3E0(void) {
 MATCH void func_801EF490(void) {
     switch (g_Battle.action_id) {
         case ABILITY_THUNDER_STRIKE:
-            g_Task->unk_03 = 0;
-            g_Task->unk_04 = 0;
+            TASK(PartyMember)->unk_03 = 0;
+            TASK(PartyMember)->unk_04 = 0;
             break;
         case ABILITY_FLAME_STRIKE:
-            g_Task->unk_03 = 1;
-            g_Task->unk_04 = 1;
+            TASK(PartyMember)->unk_03 = 1;
+            TASK(PartyMember)->unk_04 = 1;
             break;
         case ABILITY_MIND_FLAY:
-            g_Task->unk_03 = 0;
-            g_Task->unk_04 = 2;
+            TASK(PartyMember)->unk_03 = 0;
+            TASK(PartyMember)->unk_04 = 2;
             break;
         case ABILITY_WIND_STRIKE:
-            g_Task->unk_03 = 1;
-            g_Task->unk_04 = 3;
+            TASK(PartyMember)->unk_03 = 1;
+            TASK(PartyMember)->unk_04 = 3;
             break;
         case ABILITY_FROST_STRIKE:
-            g_Task->unk_03 = 0;
-            g_Task->unk_04 = 4;
+            TASK(PartyMember)->unk_03 = 0;
+            TASK(PartyMember)->unk_04 = 4;
             break;
         case ABILITY_PYROKINESIS:
-            g_Task->unk_03 = 1;
-            g_Task->unk_04 = 5;
+            TASK(PartyMember)->unk_03 = 1;
+            TASK(PartyMember)->unk_04 = 5;
             break;
         case ABILITY_HOLY_STRIKE:
-            g_Task->unk_03 = 0;
-            g_Task->unk_04 = 6;
+            TASK(PartyMember)->unk_03 = 0;
+            TASK(PartyMember)->unk_04 = 6;
             break;
         /* FAKE: retail bounds the compare tree above ABILITY_HOLY_STRIKE, so one id there shares the default body; the bytes do not say which id, ABILITY_DEMONBANE is the nearest. */
         case ABILITY_DEMONBANE:
         default:
-            g_Task->unk_03 = 0;
-            g_Task->unk_04 = 7;
+            TASK(PartyMember)->unk_03 = 0;
+            TASK(PartyMember)->unk_04 = 7;
             break;
         case ABILITY_FLAME_CLAW:
-            g_Task->unk_03 = 1;
-            g_Task->unk_04 = 8;
+            TASK(PartyMember)->unk_03 = 1;
+            TASK(PartyMember)->unk_04 = 8;
             break;
         case ABILITY_FROST_CLAW:
-            g_Task->unk_03 = 1;
-            g_Task->unk_04 = 9;
+            TASK(PartyMember)->unk_03 = 1;
+            TASK(PartyMember)->unk_04 = 9;
             break;
         case ABILITY_THUNDER_CLAW:
-            g_Task->unk_03 = 1;
-            g_Task->unk_04 = 10;
+            TASK(PartyMember)->unk_03 = 1;
+            TASK(PartyMember)->unk_04 = 10;
             break;
         case ABILITY_SHINING_CLAW:
-            g_Task->unk_03 = 1;
-            g_Task->unk_04 = 11;
+            TASK(PartyMember)->unk_03 = 1;
+            TASK(PartyMember)->unk_04 = 11;
             break;
     }
 }
@@ -198,8 +198,8 @@ MATCH void func_801EF910(void) {
     Magic004TaskSteps handlers;
 
     handlers = D_801EEC18;
-    SYS_DISPATCH_BYTE(handlers.steps, g_Task->header.step);
-    if (g_Task->header.flags != 0) {
+    SYS_DISPATCH_BYTE(handlers.steps, TASK(PartyMember)->header.step);
+    if (TASK(PartyMember)->header.flags != 0) {
         Area_AddGridActor();
     }
 }
@@ -210,15 +210,15 @@ MATCH void func_801EF9E8(void) {
     u8 counter;
 
     Script_AnimStepOnce();
-    counter        = g_Task->unk_09 - 1;
-    g_Task->unk_09 = counter;
+    counter                   = TASK(PartyMember)->unk_09 - 1;
+    TASK(PartyMember)->unk_09 = counter;
     if (!(counter & BYTE_MASK)) {
         if (g_Battle.action_id > 0x84) {
             Battle_PlayActiveBattlerSE(2, 4);
         } else {
             Battle_PlayActiveBattlerSE(0, 4);
         }
-        g_Task->header.step += 1;
+        TASK(PartyMember)->header.step += 1;
     }
 }
 
@@ -236,41 +236,41 @@ MATCH void func_801EFAD4(void) {
 MATCH void func_801EFBEC(void) {
     PartyMember* work;
 
-    work              = g_Task;
-    work->pos.x.fixed = g_Battle.selected_actor->pos.x.fixed;
-    work->pos.y.fixed = g_Battle.selected_actor->pos.y.fixed;
-    work->pos.z.fixed = g_Battle.selected_actor->pos.z.fixed + 0x800000;
-    g_Task->unk_25    = 0x1D;
-    g_Task->unk_26    = 0;
-    if (g_Task->unk_03 != 0) {
-        g_Task->unk_27 = 0x1A;
-        g_Task->unk_28 = 1;
-        g_Task->unk_24 = 0;
+    work                      = g_Task;
+    work->pos.x.fixed         = g_Battle.selected_actor->pos.x.fixed;
+    work->pos.y.fixed         = g_Battle.selected_actor->pos.y.fixed;
+    work->pos.z.fixed         = g_Battle.selected_actor->pos.z.fixed + 0x800000;
+    TASK(PartyMember)->unk_25 = 0x1D;
+    TASK(PartyMember)->unk_26 = 0;
+    if (TASK(PartyMember)->unk_03 != 0) {
+        TASK(PartyMember)->unk_27 = 0x1A;
+        TASK(PartyMember)->unk_28 = 1;
+        TASK(PartyMember)->unk_24 = 0;
     } else {
-        g_Task->unk_27 = 0xA0;
-        g_Task->unk_28 = 0;
-        g_Task->unk_24 = 4;
+        TASK(PartyMember)->unk_27 = 0xA0;
+        TASK(PartyMember)->unk_28 = 0;
+        TASK(PartyMember)->unk_24 = 4;
     }
-    g_Task->unk_5D       = 0;
-    g_Task->unk_5E       = 0;
-    g_Task->unk_5F       = 0;
-    g_Task->unk_5C       = 0;
-    g_Task->unk_2A       = 0;
-    g_Task->unk_29       = 4;
-    g_Task->unk_2C.value = 0;
-    g_Task->unk_2B       = 1;
+    TASK(PartyMember)->unk_5D       = 0;
+    TASK(PartyMember)->unk_5E       = 0;
+    TASK(PartyMember)->unk_5F       = 0;
+    TASK(PartyMember)->unk_5C       = 0;
+    TASK(PartyMember)->unk_2A       = 0;
+    TASK(PartyMember)->unk_29       = 4;
+    TASK(PartyMember)->unk_2C.value = 0;
+    TASK(PartyMember)->unk_2B       = 1;
     Script_Select(0);
-    g_Task->unk_09 = D_801EFE34[g_Task->unk_04];
-    g_Task->header.step += 1;
+    TASK(PartyMember)->unk_09 = D_801EFE34[TASK(PartyMember)->unk_04];
+    TASK(PartyMember)->header.step += 1;
 }
 
 MATCH void func_801EFD84(void) {
     u8 count;
 
-    count = g_Task->unk_09;
+    count = TASK(PartyMember)->unk_09;
     if (count != 0) {
         count -= 1;
-        g_Task->unk_09 = count;
+        TASK(PartyMember)->unk_09 = count;
         if (!(count & BYTE_MASK)) {
             SND_SEQueueSelection(0x101);
         }

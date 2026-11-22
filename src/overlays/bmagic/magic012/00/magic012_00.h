@@ -5,8 +5,6 @@
 
 #include "overlays/bmagic/bmagic.h"
 
-#define g_Task ((PartyMember*)g_Task)
-
 /* func_800AF3A0 */
 void Battle_StepRangeToward(VECTOR pos, s16 step);
 void func_801EEEAC(void);

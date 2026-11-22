@@ -6,16 +6,16 @@
 MATCH void Fishing_PromptSlideOut(void) {
     s32 val;
 
-    val                     = FISHING_STATE->origin_y - 8;
-    FISHING_STATE->origin_y = val;
+    val                          = TASK(FishingState)->origin_y - 8;
+    TASK(FishingState)->origin_y = val;
 
     if ((s16)val < -0x19) {
-        if (FISHING_STATE->counter_07 != 0u) {
-            FISHING_STATE->handler_index = 1u;
+        if (TASK(FishingState)->counter_07 != 0u) {
+            TASK(FishingState)->handler_index = 1u;
         } else {
-            FISHING_STATE->handler_index = 0u;
+            TASK(FishingState)->handler_index = 0u;
         }
     }
 
-    Fishing_DrawWindowFrame(MENU_HEADER_X, FISHING_STATE->origin_y, MENU_HEADER_WIDTH, MENU_HEADER_HEIGHT, 0);
+    Fishing_DrawWindowFrame(MENU_HEADER_X, TASK(FishingState)->origin_y, MENU_HEADER_WIDTH, MENU_HEADER_HEIGHT, 0);
 }

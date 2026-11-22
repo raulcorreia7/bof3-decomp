@@ -5,6 +5,6 @@ MATCH void Battle_UpdatePoseActor(void) {
     Callback handlers[2] = {Battle_StartPoseActor, Battle_PlayPoseActor};
 
     g_Scripts = BATTLE_SCRIPT_TABLE;
-    handlers[g_Task->header.mode]();
+    handlers[TASK(PartyMember)->header.mode]();
     g_Scripts = AREA_SCRIPT_TABLE;
 }

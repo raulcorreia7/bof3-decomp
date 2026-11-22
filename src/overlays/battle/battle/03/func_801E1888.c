@@ -14,9 +14,9 @@ MATCH void func_801E1888(void) {
         if ((g_Game.current->u.turn.action_flags.value & BATTLER_ACTION_DRAGON_FORM) && ((g_Battle.dragon_form & BYTE_MASK) != 4) && ((u32)((short)g_Battle.dragon_form - 7) >= 2)) {
             Battle_PlayEffectSE(3);
         }
-        g_Task->header.step = g_Task->header.step + 1;
+        TASK(PartyMember)->header.step = TASK(PartyMember)->header.step + 1;
     } else {
-        g_Task->unk_09 = count - 1;
+        TASK(PartyMember)->unk_09 = count - 1;
     }
     Battle_IsPartyMemberBlocked();
 }

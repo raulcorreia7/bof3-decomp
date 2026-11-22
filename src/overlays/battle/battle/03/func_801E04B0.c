@@ -6,8 +6,8 @@ MATCH void func_801E04B0(void) {
 
     enemy_work = g_Game.current;
     if (HAS_STATUS(*enemy_work, STATUS_KO)) {
-        g_Task->unk_03 = 2;
-        g_Task->timer  = 0;
+        TASK(PartyMember)->unk_03 = 2;
+        TASK(PartyMember)->timer  = 0;
         return;
     }
     work                                = g_Task;
@@ -15,8 +15,8 @@ MATCH void func_801E04B0(void) {
     work->unk_0C                        = 0;
     work->unk_10                        = -0x2000;
     Effect_RotatePosition(work);
-    g_Task->timer = 4;
+    TASK(PartyMember)->timer = 4;
     Battle_IsPartyMemberBlocked();
     SND_SEQueueSelection(0x205);
-    g_Task->unk_03 += 1;
+    TASK(PartyMember)->unk_03 += 1;
 }

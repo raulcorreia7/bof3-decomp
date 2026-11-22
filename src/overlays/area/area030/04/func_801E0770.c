@@ -28,7 +28,7 @@ MATCH s32 func_801E0770(void) {
     if (3 != D_80145E92[0]) {
         return result;
     }
-    work = FISHING_STATE;
+    work = TASK(FishingState);
     d    = -g_SpawnedActors[0].pos.x.fixed + work->motion.unk_34;
     if (d < 0) {
         d = -d;

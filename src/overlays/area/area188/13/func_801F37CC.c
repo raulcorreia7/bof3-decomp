@@ -16,7 +16,7 @@ MATCH void func_801F37CC(void) {
         if (g_Task->timer == 16) {
             SND_SEPlay(EMI_SE_ID(SND_BANK_AREA, 0x16));
         }
-        ACTOR_COUNT_DOWN(mode, timer);
+        ACTOR_COUNT_DOWN(TASK(Actor), mode, timer);
         if (!(mode & BYTE_MASK)) {
             g_Task->unk_03 = 0x80;
             g_Task->header.mode += 1;

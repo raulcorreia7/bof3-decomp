@@ -30,9 +30,9 @@
     }                                                                          \
     rot.vz = (roll & 0x1F) << 7;                                               \
     FAKE_BARRIER(); /* FAKE: keeps the roll store before the position load. */ \
-    pos.vx = (g_Task->pos.x.fixed >> 9) - 0x4000;                              \
-    pos.vy = (g_Task->pos.y.fixed >> 9) - 0x4000;                              \
-    pos.vz = -COORD_INT(g_Task->pos.z) / 2;                                    \
+    pos.vx = (TASK(PartyMember)->pos.x.fixed >> 9) - 0x4000;                   \
+    pos.vy = (TASK(PartyMember)->pos.y.fixed >> 9) - 0x4000;                   \
+    pos.vz = -COORD_INT(TASK(PartyMember)->pos.z) / 2;                         \
     RotTrans(&pos, (VECTOR*)matrix.t, &flags);                                 \
     RotMatrix(&rot, &matrix);                                                  \
     MulMatrix2(&g_CameraMatrix, &matrix);                                      \

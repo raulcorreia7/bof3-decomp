@@ -8,14 +8,14 @@ __asm__(".include \"include/match/macro.inc\"\n");
 #include "overlays/bmagic/shared/BMagic_DispatchMode.h"
 
 MATCH void func_801EECDC(void) {
-    g_Task->header.mode += 1;
+    TASK(PartyMember)->header.mode += 1;
 }
 
 MATCH void func_801EECFC(void) {
     Magic064MainSteps steps;
 
     steps = D_801EEC10;
-    steps.steps[g_Task->header.step]();
+    steps.steps[TASK(PartyMember)->header.step]();
 }
 
 MATCH void func_801EED7C(void) {
@@ -28,8 +28,8 @@ MATCH void func_801EED7C(void) {
     Script_Request((battler->facing + 0x38) & BYTE_MASK);
     g_Task = saved;
     SND_SEPlay(EMI_SE_ID(SND_BANK_COMMON, 0x00));
-    g_Task->param.unk_0B = 0;
-    g_Task->header.step += 1;
+    TASK(PartyMember)->param.unk_0B = 0;
+    TASK(PartyMember)->header.step += 1;
 }
 
 MATCH void func_801EEE1C(void) {
@@ -52,26 +52,26 @@ MATCH void func_801EEEA8(void) {
     PartyMember* target;
     u8           index;
 
-    if (g_Task->unk_09-- != 0) {
+    if (TASK(PartyMember)->unk_09-- != 0) {
         return;
     }
 
-    scroll_x                   = &g_AreaScrollTargetX;
-    scroll_y                   = &g_AreaScrollTargetY;
-    g_Task->pos.x.fixed        = *scroll_x;
-    g_Task->pos.y.fixed        = *scroll_y;
-    g_Task->pos.z.part.integer = g_AreaCameraHeight;
-    *scroll_x                  = g_Game.members[g_Battle.active_battler].pos.x.fixed;
-    *scroll_y                  = g_Game.members[g_Battle.active_battler].pos.y.fixed;
-    g_AreaCameraHeight         = Area_HeightSample(g_AreaScrollTargetX, g_AreaScrollTargetY);
+    scroll_x                              = &g_AreaScrollTargetX;
+    scroll_y                              = &g_AreaScrollTargetY;
+    TASK(PartyMember)->pos.x.fixed        = *scroll_x;
+    TASK(PartyMember)->pos.y.fixed        = *scroll_y;
+    TASK(PartyMember)->pos.z.part.integer = g_AreaCameraHeight;
+    *scroll_x                             = g_Game.members[g_Battle.active_battler].pos.x.fixed;
+    *scroll_y                             = g_Game.members[g_Battle.active_battler].pos.y.fixed;
+    g_AreaCameraHeight                    = Area_HeightSample(g_AreaScrollTargetX, g_AreaScrollTargetY);
     func_801F103C();
     index                               = Battle_AllocEffect(1, 0x3A) & BYTE_MASK;
     target                              = g_Task;
     g_BattleEffects[index].header.mode  = 3;
     g_BattleEffects[index].target.party = target;
-    g_Task->unk_09                      = 1;
-    g_Task->timer                       = 1;
-    g_Task->header.step += 1;
+    TASK(PartyMember)->unk_09           = 1;
+    TASK(PartyMember)->timer            = 1;
+    TASK(PartyMember)->header.step += 1;
 }
 
 MATCH void func_801EEFF8(void) {
@@ -79,13 +79,13 @@ MATCH void func_801EEFF8(void) {
     u8           timer;
     PartyMember* task;
 
-    if (g_Task->timer != 0) {
+    if (TASK(PartyMember)->timer != 0) {
         Area_CellIndex();
-        g_Task->timer = 0;
+        TASK(PartyMember)->timer = 0;
     }
 
-    timer          = g_Task->unk_09;
-    g_Task->unk_09 = timer + 0xFF;
+    timer                     = TASK(PartyMember)->unk_09;
+    TASK(PartyMember)->unk_09 = timer + 0xFF;
     if (timer != 0) {
         return;
     }
@@ -94,9 +94,9 @@ MATCH void func_801EEFF8(void) {
     task                                      = g_Task;
     g_BattleEffects[effect_slot].header.mode  = 1;
     g_BattleEffects[effect_slot].target.party = task;
-    g_Task->param.unk_0B &= 0xFE;
+    TASK(PartyMember)->param.unk_0B &= 0xFE;
     SND_SEPlay(0x101);
-    g_Task->header.step++;
+    TASK(PartyMember)->header.step++;
 }
 
 MATCH void func_801EF0D8(void) {
@@ -125,22 +125,22 @@ MATCH void func_801EF0E0(void) {
     g_BattleEffects[effect_slot & BYTE_MASK].unk_03       = 0;
     g_BattleEffects[effect_slot & BYTE_MASK].unk_06       = 1;
     g_BattleEffects[effect_slot & BYTE_MASK].step_index   = 58;
-    g_Task->unk_09                                        = 1;
-    g_Task->header.step += 1;
+    TASK(PartyMember)->unk_09                             = 1;
+    TASK(PartyMember)->header.step += 1;
 }
 
 MATCH void func_801EF20C(void) {
     u8 timer;
 
-    timer = g_Task->unk_09;
+    timer = TASK(PartyMember)->unk_09;
     if (timer != 0) {
-        g_Task->unk_09 = timer - 1;
+        TASK(PartyMember)->unk_09 = timer - 1;
         return;
     }
     GFX_PaletteFreeFadeTarget(g_BattleEffectBattler);
     g_BattleEffectBattler->header.flags |= PARTY_MEMBER_FLAG_HANDLER_BUSY;
-    g_Task->unk_09 = 0;
-    g_Task->header.step += 1;
+    TASK(PartyMember)->unk_09 = 0;
+    TASK(PartyMember)->header.step += 1;
 }
 
 MATCH void func_801EF29C(void) {
@@ -169,7 +169,7 @@ MATCH void func_801EF2A4(void) {
         }
     }
     EMI_ArchiveLoad(value);
-    g_Task->header.step += 1;
+    TASK(PartyMember)->header.step += 1;
 }
 
 MATCH void func_801EF3C8(void) {
@@ -184,12 +184,12 @@ MATCH void func_801EF3C8(void) {
     if (battler->unk_09 != 0x80) {
         battler->unk_09 += 2;
     } else if (EMI_IsReady()) {
-        Script_Request(g_Task->facing);
+        Script_Request(TASK(PartyMember)->facing);
         GFX_PaletteFreeFadeTarget(&g_Game.members[g_Battle.active_battler]);
-        GFX_PaletteLoad((g_Task->slot << 6) + BATTLE_ACTION_BLOCK_TABLE, 0);
+        GFX_PaletteLoad((TASK(PartyMember)->slot << 6) + BATTLE_ACTION_BLOCK_TABLE, 0);
         func_801DDAB4(g_Game.members[g_Battle.active_battler].chr.status);
         GFX_PaletteUploadRows();
-        g_Task->header.flags &= ~PARTY_MEMBER_FLAG_HANDLER_BUSY;
+        TASK(PartyMember)->header.flags &= ~PARTY_MEMBER_FLAG_HANDLER_BUSY;
         SND_SEPlay(0x102);
         battler->header.step += 1;
     }
@@ -220,23 +220,23 @@ MATCH void func_801EF5FC(void) {
         FAKE_BARRIER();
         g_AreaCameraHeight = COORD_INT(work->pos.z);
         func_801F103C();
-        g_Task->unk_09      = 0x40;
-        g_Task->timer       = 1;
-        g_Task->header.mode = 2;
-        g_Task->header.step = 0;
+        TASK(PartyMember)->unk_09      = 0x40;
+        TASK(PartyMember)->timer       = 1;
+        TASK(PartyMember)->header.mode = 2;
+        TASK(PartyMember)->header.step = 0;
     }
 }
 
 MATCH void func_801EF69C(void) {
     u8 timer;
 
-    if (g_Task->timer != 0) {
+    if (TASK(PartyMember)->timer != 0) {
         Area_CellIndex();
-        g_Task->timer = 0;
+        TASK(PartyMember)->timer = 0;
     }
 
-    timer          = g_Task->unk_09;
-    g_Task->unk_09 = timer + 0xFF;
+    timer                     = TASK(PartyMember)->unk_09;
+    TASK(PartyMember)->unk_09 = timer + 0xFF;
     if (timer != 0) {
         return;
     }
@@ -259,20 +259,20 @@ MATCH void func_801EF7F8(void) {
     Magic064SecondSteps handlers;
 
     handlers = D_801EEC50;
-    handlers.steps[g_Task->header.step]();
-    if (g_Task->header.flags) {
+    handlers.steps[TASK(PartyMember)->header.step]();
+    if (TASK(PartyMember)->header.flags) {
         Area_AddGridActor();
     }
 }
 
 MATCH void func_801EF87C(void) {
-    g_Task->header.step += 1;
+    TASK(PartyMember)->header.step += 1;
 }
 
 MATCH void func_801EF89C(void) {
     Callback table[2] = {func_801EF8F4, func_801F001C};
 
-    table[g_Task->unk_03]();
+    table[TASK(PartyMember)->unk_03]();
 }
 
 #ifdef NON_MATCHING
@@ -285,8 +285,8 @@ INCLUDE_ASM(func_801EF8F4);
 MATCH void func_801F001C(void) {
     Script_AnimStepOnce();
     g_BattleEffectBattler->header.step += 1;
-    g_Task->header.step += 1;
-    g_Task->unk_03 = 0;
+    TASK(PartyMember)->header.step += 1;
+    TASK(PartyMember)->unk_03 = 0;
 }
 
 MATCH void func_801F007C(void) {
@@ -300,7 +300,7 @@ MATCH void func_801F009C(void) {
     u16               i;
 
     handlers = D_801EEC5C;
-    SYS_DISPATCH_BYTE(handlers.steps, g_Task->header.step);
+    SYS_DISPATCH_BYTE(handlers.steps, TASK(PartyMember)->header.step);
     tpage = getTPage(TPAGE_DEPTH_4BIT, TPAGE_ABR_ADD, FONT_TPAGE_X, FONT_TPAGE_Y);
     GFX_ADD_LAYER_DRAW_MODE(BMAGIC_LAYER_FOREGROUND, tpage);
     for (i = 0; i < MAGIC064_RING_COUNT; i++) {
@@ -312,20 +312,20 @@ MATCH void func_801F009C(void) {
 }
 
 MATCH void func_801F01C4(void) {
-    g_Task->param.unk_0B = 0;
-    g_Task->unk_09       = 64;
+    TASK(PartyMember)->param.unk_0B = 0;
+    TASK(PartyMember)->unk_09       = 64;
     func_801F03D8();
-    g_Task->header.step++;
+    TASK(PartyMember)->header.step++;
 }
 
 MATCH void func_801F0214(void) {
     u8 timer;
 
     func_801F03D8();
-    timer          = g_Task->unk_09 - 1;
-    g_Task->unk_09 = timer;
+    timer                     = TASK(PartyMember)->unk_09 - 1;
+    TASK(PartyMember)->unk_09 = timer;
     if (timer == 0) {
-        g_Task->header.step = g_Task->header.step + 1;
+        TASK(PartyMember)->header.step = TASK(PartyMember)->header.step + 1;
     }
 }
 
@@ -334,19 +334,19 @@ MATCH void func_801F0278(void) {
 
     func_801F03D8();
     if (!(g_FrameCount & 0x1)) {
-        ticks = g_Task->param.unk_0B;
+        ticks = TASK(PartyMember)->param.unk_0B;
         if (ticks >= 0x18U) {
             g_BattleEffectBattler->header.step += 1;
-            g_Task->header.step += 1;
+            TASK(PartyMember)->header.step += 1;
             return;
         }
-        g_Task->param.unk_0B = ticks + 1;
+        TASK(PartyMember)->param.unk_0B = ticks + 1;
     }
 }
 
 MATCH void func_801F0310(void) {
     if (g_BattleEffectBattler->header.step == 0xA) {
-        g_Task->header.step += 1;
+        TASK(PartyMember)->header.step += 1;
     }
     func_801F03D8();
 }
@@ -393,8 +393,8 @@ MATCH void func_801F0448(void) {
  * their speeds, and the centre at the battler screen point plus its facing offset. */
 MATCH void func_801F04A0(void) {
     D_801F28B4->angle       = rand() & 0xFFF;
-    D_801F28B4->inner.fixed = TO_COORD(g_Task->param.unk_0B);
-    D_801F28B4->outer.fixed = TO_COORD(g_Task->param.unk_0B);
+    D_801F28B4->inner.fixed = TO_COORD(TASK(PartyMember)->param.unk_0B);
+    D_801F28B4->outer.fixed = TO_COORD(TASK(PartyMember)->param.unk_0B);
     D_801F28B4->inner_speed = 0x32000;
     D_801F28B4->outer_speed = 0x19800;
     D_801F28B4->x           = BATTLE_ACTIVE_PARTY.screen_x.signed_value + D_801F138C[BATTLE_ACTIVE_PARTY.facing][0];
@@ -441,21 +441,21 @@ MATCH void func_801F0C38(void) {
     Magic064SecondSteps handlers;
 
     handlers = D_801EEC70;
-    SYS_DISPATCH_BYTE(handlers.steps, g_Task->header.step);
-    if (g_Task->header.flags != 0) {
+    SYS_DISPATCH_BYTE(handlers.steps, TASK(PartyMember)->header.step);
+    if (TASK(PartyMember)->header.flags != 0) {
         Area_AddGridActor();
     }
 }
 
 MATCH void func_801F0CBC(void) {
-    Script_Request(g_Task->param.unk_0B);
+    Script_Request(TASK(PartyMember)->param.unk_0B);
     do {
     } while (!(Script_AnimStepOnce() & BYTE_MASK));
-    g_Task->header.step += 1;
+    TASK(PartyMember)->header.step += 1;
 }
 
 MATCH void func_801F0D14(void) {
-    g_Task->header.step += 1;
+    TASK(PartyMember)->header.step += 1;
 }
 
 MATCH void func_801F0D34(void) {
@@ -477,9 +477,9 @@ MATCH void func_801F0DD8(void) {
     counter      = work->unk_09 - 1;
     work->unk_09 = counter;
     if (counter == -6) {
-        g_Task->header.step++;
+        TASK(PartyMember)->header.step++;
     }
-    Area_PaletteUpdateTint((s8)g_Task->unk_09);
+    Area_PaletteUpdateTint((s8)TASK(PartyMember)->unk_09);
 }
 
 MATCH void func_801F0E50(void) {
@@ -501,7 +501,7 @@ MATCH void func_801F0E90(void) {
     if (work->unk_09 == 0) {
         Effect_Reset();
     }
-    Area_PaletteUpdateTint((s8)g_Task->unk_09);
+    Area_PaletteUpdateTint((s8)TASK(PartyMember)->unk_09);
 }
 
 MATCH void func_801F0EEC(u32 sprite, s32 blend, s32 color) {
@@ -512,7 +512,7 @@ MATCH void func_801F0EEC(u32 sprite, s32 blend, s32 color) {
 
     tpage = GetTPage(TPAGE_DEPTH_15BIT, blend & BYTE_MASK, 832, 256);
     GFX_SET_DRAW_MODE(tpage);
-    Area_CellAddPrim(g_Task->pos.x.fixed, g_Task->pos.y.fixed, 0, sizeof(DR_MODE));
+    Area_CellAddPrim(TASK(PartyMember)->pos.x.fixed, TASK(PartyMember)->pos.y.fixed, 0, sizeof(DR_MODE));
     prim = (SPRT*)g_GfxPrimCursor;
     SetSprt(prim);
     setRGB0(prim, color, color, color);
@@ -529,7 +529,7 @@ MATCH void func_801F0EEC(u32 sprite, s32 blend, s32 color) {
     setUV0(prim, D_801F13A4[sprite & BYTE_MASK].x, D_801F13A4[sprite & BYTE_MASK].y);
     setWH(prim, 80, 72);
     SetSemiTrans(prim, 1);
-    Area_CellAddPrim(g_Task->pos.x.fixed, g_Task->pos.y.fixed, 0, sizeof(SPRT));
+    Area_CellAddPrim(TASK(PartyMember)->pos.x.fixed, TASK(PartyMember)->pos.y.fixed, 0, sizeof(SPRT));
 }
 
 /* Rebuild the field map view around the scroll target: clear the cell links, place the camera,

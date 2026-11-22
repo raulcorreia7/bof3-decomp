@@ -4,8 +4,8 @@
 MATCH void Battle_CopyBattlerGhost(void) {
     PartyMember* scratch;
 
-    g_Task->header.flags = (g_BattleEffectBattler->header.flags | ACTOR_FLAG_SEMI_TRANSPARENT);
-    g_Task->unk_48       = g_BattleEffectBattler->unk_48;
+    TASK(PartyMember)->header.flags = (g_BattleEffectBattler->header.flags | ACTOR_FLAG_SEMI_TRANSPARENT);
+    TASK(PartyMember)->unk_48       = g_BattleEffectBattler->unk_48;
 
     scratch          = g_Task;
     scratch->scale.x = g_BattleEffectBattler->scale.x;
@@ -14,8 +14,8 @@ MATCH void Battle_CopyBattlerGhost(void) {
     scratch->unk_5A  = BATTLE_ACTIVE_WORK->unk_5A;
     scratch->unk_4B  = g_BattleEffectBattler->unk_4B;
 
-    g_Task->unk_4A = g_BattleEffectBattler->unk_4A;
-    g_Task->unk_49 = g_BattleEffectBattler->unk_49;
+    TASK(PartyMember)->unk_4A = g_BattleEffectBattler->unk_4A;
+    TASK(PartyMember)->unk_49 = g_BattleEffectBattler->unk_49;
 
     scratch         = g_Task;
     scratch->unk_4C = BATTLE_ACTIVE_WORK->unk_4C;
@@ -23,8 +23,8 @@ MATCH void Battle_CopyBattlerGhost(void) {
     scratch->unk_54 = BATTLE_ACTIVE_WORK->unk_54;
     scratch->unk_27 = g_BattleEffectBattler->unk_27;
 
-    g_Task->unk_28 = g_BattleEffectBattler->unk_28;
-    g_Task->unk_2A = g_BattleEffectBattler->unk_2A;
+    TASK(PartyMember)->unk_28 = g_BattleEffectBattler->unk_28;
+    TASK(PartyMember)->unk_2A = g_BattleEffectBattler->unk_2A;
 
     scratch              = g_Task;
     scratch->pos.x.fixed = g_BattleEffectBattler->pos.x.fixed;

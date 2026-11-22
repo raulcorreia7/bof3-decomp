@@ -4,44 +4,44 @@
  * scratch state byte `0x03`. */
 MATCH void func_801D6A2C(void) {
     Area_SceneSelectRecord(0x47);
-    FISHING_STATE->active_flags = 0x80;
-    FISHING_STATE->state_29     = 1;
-    FISHING_STATE->state_2A     = 0;
+    TASK(FishingState)->active_flags = 0x80;
+    TASK(FishingState)->state_29     = 1;
+    TASK(FishingState)->state_2A     = 0;
 
     {
         FishingState* record;
         FishingState* retired;
 
-        record              = FISHING_STATE;
+        record              = TASK(FishingState);
         record->counter_48  = 0;
-        retired             = FISHING_STATE;
+        retired             = TASK(FishingState);
         record->origin_x    = 0xF0;
         record->origin_y    = 0xBA;
         retired->step_timer = 0;
     }
 
-    FISHING_STATE->step_index = 0;
-    FISHING_STATE->cue_index  = 0;
+    TASK(FishingState)->step_index = 0;
+    TASK(FishingState)->cue_index  = 0;
 
     {
         FishingState* record;
         FishingState* retired;
 
-        record            = FISHING_STATE;
+        record            = TASK(FishingState);
         record->tint_5D   = 0;
-        retired           = FISHING_STATE;
+        retired           = TASK(FishingState);
         record->pos_x     = 0x6A;
         record->cursor_10 = 0x6A;
         retired->tint_5E  = 0;
     }
 
-    FISHING_STATE->tint_5F = 0;
-    FISHING_STATE->row_4B  = 0xFF;
+    TASK(FishingState)->tint_5F = 0;
+    TASK(FishingState)->row_4B  = 0xFF;
 
     {
         FishingState* record;
 
-        record            = FISHING_STATE;
+        record            = TASK(FishingState);
         record->sub_index = (record->sub_index + 1);
     }
 }

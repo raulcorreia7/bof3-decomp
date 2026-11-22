@@ -3,7 +3,7 @@
 /* Draws the area-030 accessory rows: the accessory icons of every
  * slot with their count text and the frame behind them. */
 /* RESIDUAL: 47.01%; retail frame 0x78, current frame 0x70, and the
- * call sequence differ. FISHING_STATE->y_38.slot.slot is the typed s16 at
+ * call sequence differ. TASK(FishingState)->y_38.slot.slot is the typed s16 at
  * offset 0x3A. resume: reproduce the retail control-flow and frame shape. */
 #ifdef NON_MATCHING
 NON_MATCHING void func_801D8364(s16 panel_x, s16 panel_y) {
@@ -24,18 +24,18 @@ NON_MATCHING void func_801D8364(s16 panel_x, s16 panel_y) {
     u8* text;
 
     UI_WindowDraw(panel_x, (panel_y + 1) & HALF_MASK, 139, 158, UI_WINDOW_OPEN_TOP_LEFT, (s32)g_WindowStyle);
-    if (FISHING_STATE->step_index != 0) {
-        FISHING_STATE->step_index = (u8)(FISHING_STATE->step_index - 1);
-        max_count                 = 0xA;
-        max_rows                  = (u8)(FISHING_STATE->y_38.pos_y - 1);
-        if (FISHING_STATE->counter_08 != 0) {
-            offset_y = (s16)(25 - (FISHING_STATE->step_index * 4));
+    if (TASK(FishingState)->step_index != 0) {
+        TASK(FishingState)->step_index = (u8)(TASK(FishingState)->step_index - 1);
+        max_count                      = 0xA;
+        max_rows                       = (u8)(TASK(FishingState)->y_38.pos_y - 1);
+        if (TASK(FishingState)->counter_08 != 0) {
+            offset_y = (s16)(25 - (TASK(FishingState)->step_index * 4));
         } else {
-            offset_y = (s16)(25 - ((3 - FISHING_STATE->step_index) * 4));
+            offset_y = (s16)(25 - ((3 - TASK(FishingState)->step_index) * 4));
         }
     } else {
         max_count = 9;
-        max_rows  = FISHING_STATE->y_38.pos_y;
+        max_rows  = TASK(FishingState)->y_38.pos_y;
         offset_y  = 25;
     }
     slot   = 0;
@@ -51,8 +51,8 @@ NON_MATCHING void func_801D8364(s16 panel_x, s16 panel_y) {
         if (g_Accessories[accessory].type == ITEM_TYPE_FISHING_LURE) {
             if ((row >= (s32)max_rows) && (index < (s32)max_count)) {
                 if (*D_80145E94 == 2) {
-                    if (FISHING_STATE->counter_07 & 1) {
-                        if (FISHING_STATE->step_14 == index) {
+                    if (TASK(FishingState)->counter_07 & 1) {
+                        if (TASK(FishingState)->step_14 == index) {
                             UI_TextDraw(bar_x, bar_y, UI_TEXT_DIM, ITEM_NAME_LENGTH, (&g_Accessories[accessory]));
                             UI_TextDraw(bar_x, (s16)(text_y + row_y), 0, ITEM_NAME_LENGTH, (&g_Accessories[*cursor]));
                             if (g_InventoryCounts[3][slot] >= 2U) {
@@ -71,8 +71,8 @@ NON_MATCHING void func_801D8364(s16 panel_x, s16 panel_y) {
                     UI_TextDrawGlyphString(text_x, (s16)(text_y + (row_y + 2)), 0U, text);
                 }
             drawn: /* the count text is drawn once, from either path */
-                if (FISHING_STATE->step_14 == index) {
-                    FISHING_STATE->y_38.slot.slot = (s16)slot;
+                if (TASK(FishingState)->step_14 == index) {
+                    TASK(FishingState)->y_38.slot.slot = (s16)slot;
                 }
                 bar_y += 13;
                 row_y += 13;
@@ -83,12 +83,12 @@ NON_MATCHING void func_801D8364(s16 panel_x, s16 panel_y) {
         slot += 1;
         cursor += 1;
     } while (slot < 128);
-    FISHING_STATE->unk_1C = row - 1;
-    if (FISHING_STATE->step_14 >= index) {
+    TASK(FishingState)->unk_1C = row - 1;
+    if (TASK(FishingState)->step_14 >= index) {
         if ((row - 1 != 0) && (index != 0)) {
-            FISHING_STATE->step_14 = index - 1;
+            TASK(FishingState)->step_14 = index - 1;
         } else {
-            FISHING_STATE->step_14 = 0;
+            TASK(FishingState)->step_14 = 0;
         }
     }
     func_801D90FC((s32)panel_x, panel_y);
@@ -104,11 +104,11 @@ NON_MATCHING void func_801D8364(s16 panel_x, s16 panel_y) {
     } else {
         index -= 9;
         text_y = (s16)(114 - (index * 6));
-        if (FISHING_STATE->step_index != 0) {
-            if (FISHING_STATE->counter_08 != 0) {
-                text_y = (s16)(text_y + (FISHING_STATE->step_index * 2));
+        if (TASK(FishingState)->step_index != 0) {
+            if (TASK(FishingState)->counter_08 != 0) {
+                text_y = (s16)(text_y + (TASK(FishingState)->step_index * 2));
             } else {
-                text_y = (s16)(text_y - (FISHING_STATE->step_index * 2));
+                text_y = (s16)(text_y - (TASK(FishingState)->step_index * 2));
             }
         }
     }

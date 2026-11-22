@@ -12,14 +12,14 @@ MATCH void func_801EEC70(void) {
     u32          slot;
     u8           i;
 
-    g_Task->param.unk_0B = 0;
+    TASK(PartyMember)->param.unk_0B = 0;
     Battle_CenterCamera();
-    g_Task->facing       = g_BattleEffectBattler->facing;
-    g_Task->pos.x.fixed  = g_BattleEffectBattler->pos.x.fixed;
-    g_Task->pos.y.fixed  = g_BattleEffectBattler->pos.y.fixed;
-    g_Task->unk_09       = 0;
-    g_Task->param.unk_0B = 0;
-    g_Task->header.mode += 1;
+    TASK(PartyMember)->facing       = g_BattleEffectBattler->facing;
+    TASK(PartyMember)->pos.x.fixed  = g_BattleEffectBattler->pos.x.fixed;
+    TASK(PartyMember)->pos.y.fixed  = g_BattleEffectBattler->pos.y.fixed;
+    TASK(PartyMember)->unk_09       = 0;
+    TASK(PartyMember)->param.unk_0B = 0;
+    TASK(PartyMember)->header.mode += 1;
     i = 0;
     do {
         slot                               = Battle_AllocEffect(1, 4) & BYTE_MASK;
@@ -28,11 +28,11 @@ MATCH void func_801EEC70(void) {
         g_BattleEffects[slot].unk_0B       = i;
         g_BattleEffects[slot].target.party = work;
         g_BattleEffects[slot].arg.unk_09   = D_801EFA90[i] + 1;
-        g_BattleEffects[slot].unk_08       = g_Task->facing;
-        g_BattleEffects[slot].pos.x.fixed  = g_Task->pos.x.fixed;
-        g_BattleEffects[slot].pos.y.fixed  = g_Task->pos.y.fixed;
-        g_BattleEffects[slot].pos.z.fixed  = g_Task->pos.z.fixed;
-        g_Task->param.unk_0B += 1;
+        g_BattleEffects[slot].unk_08       = TASK(PartyMember)->facing;
+        g_BattleEffects[slot].pos.x.fixed  = TASK(PartyMember)->pos.x.fixed;
+        g_BattleEffects[slot].pos.y.fixed  = TASK(PartyMember)->pos.y.fixed;
+        g_BattleEffects[slot].pos.z.fixed  = TASK(PartyMember)->pos.z.fixed;
+        TASK(PartyMember)->param.unk_0B += 1;
         i++;
     } while (i < 10);
     SND_SEQueueSelection(0x100);
@@ -43,7 +43,7 @@ MATCH void func_801EEDF8(void) {
     s32 timer;
     u8  timer_next;
 
-    timer = g_Task->unk_09;
+    timer = TASK(PartyMember)->unk_09;
     if (timer != 16) {
         if (timer < 17) {
             cue = 0x101;
@@ -63,10 +63,10 @@ MATCH void func_801EEDF8(void) {
     block_7:
         SND_SEQueueSelection(cue);
     }
-    timer_next     = g_Task->unk_09 + 1;
-    g_Task->unk_09 = timer_next;
+    timer_next                = TASK(PartyMember)->unk_09 + 1;
+    TASK(PartyMember)->unk_09 = timer_next;
     if ((timer_next & BYTE_MASK) == 25) {
-        g_Task->header.mode += 1;
+        TASK(PartyMember)->header.mode += 1;
     }
 }
 
@@ -76,8 +76,8 @@ MATCH void func_801EEDF8(void) {
 #include "overlays/bmagic/shared/BMagic_DispatchEffectMode.h"
 
 MATCH void func_801EEF4C(void) {
-    SYS_DISPATCH_BYTE(D_801EFAF0, g_Task->header.step);
-    if (g_Task->header.step != 0 && g_Task->header.flags != 0) {
+    SYS_DISPATCH_BYTE(D_801EFAF0, TASK(PartyMember)->header.step);
+    if (TASK(PartyMember)->header.step != 0 && TASK(PartyMember)->header.flags != 0) {
         Battle_ProjectRange();
         func_801EF1B0();
         func_801EF4C4();
@@ -90,8 +90,8 @@ MATCH void func_801EEFDC(void) {
     PartyMember* next;
     u8           timer;
 
-    timer          = g_Task->unk_09 - 1;
-    g_Task->unk_09 = timer;
+    timer                     = TASK(PartyMember)->unk_09 - 1;
+    TASK(PartyMember)->unk_09 = timer;
     if (timer == 0) {
         next         = g_Task;
         next->unk_0C = D_801EFAA0[next->param.unk_0B].x;
@@ -103,9 +103,9 @@ MATCH void func_801EEFDC(void) {
         if (work->param.unk_0B == 0) {
             Battle_ApplyDamageFlags(g_Battle.target_selector, 0x10);
         }
-        g_Task->unk_09 = 32;
-        g_Task->timer  = 2;
-        g_Task->header.step += 1;
+        TASK(PartyMember)->unk_09 = 32;
+        TASK(PartyMember)->timer  = 2;
+        TASK(PartyMember)->header.step += 1;
     }
 }
 
@@ -133,24 +133,24 @@ NON_MATCHING void func_801EF1B0(void) {
     s32         i;
     s32         tpage;
 
-    g_ScratchPad.cells.words[0] = g_Task->timer;
+    g_ScratchPad.cells.words[0] = TASK(PartyMember)->timer;
     if (g_Battle.action_id == 50) {
-        g_ScratchPad.cells.words[2] = g_Task->unk_09 * 3;
+        g_ScratchPad.cells.words[2] = TASK(PartyMember)->unk_09 * 3;
     } else {
-        g_ScratchPad.cells.words[2] = g_Task->unk_09 * 5;
+        g_ScratchPad.cells.words[2] = TASK(PartyMember)->unk_09 * 5;
     }
-    g_ScratchPad.cells.words[3] = g_Task->unk_09;
+    g_ScratchPad.cells.words[3] = TASK(PartyMember)->unk_09;
     spad                        = &g_ScratchPad;
     for (i = 0; i < 16; i++) {
         tpage = getTPage(TPAGE_DEPTH_4BIT, TPAGE_ABR_ADD, 320, 256);
         SetDrawMode((DR_MODE*)g_GfxPrimCursor, 0, 1, tpage, 0);
-        Area_CellAddPrim(g_Task->pos.x.fixed, g_Task->pos.y.fixed, 2, sizeof(DR_MODE));
+        Area_CellAddPrim(TASK(PartyMember)->pos.x.fixed, TASK(PartyMember)->pos.y.fixed, 2, sizeof(DR_MODE));
         prim = (POLY_G3*)g_GfxPrimCursor;
         SetPolyG3(prim);
         SetSemiTrans(prim, 1);
-        setXY3(prim, g_Task->screen_x.value, g_Task->screen_y.value, g_Task->screen_x.value + FIXED_MUL(rsin(i << 8), spad->cells.words[0]),
-               g_Task->screen_y.value + FIXED_MUL(rcos(i << 8), spad->cells.words[0]), g_Task->screen_x.value + FIXED_MUL(rsin((i + 1) << 8), spad->cells.words[0]),
-               g_Task->screen_y.value + FIXED_MUL(rcos((i + 1) << 8), spad->cells.words[0]));
+        setXY3(prim, TASK(PartyMember)->screen_x.value, TASK(PartyMember)->screen_y.value, TASK(PartyMember)->screen_x.value + FIXED_MUL(rsin(i << 8), spad->cells.words[0]),
+               TASK(PartyMember)->screen_y.value + FIXED_MUL(rcos(i << 8), spad->cells.words[0]), TASK(PartyMember)->screen_x.value + FIXED_MUL(rsin((i + 1) << 8), spad->cells.words[0]),
+               TASK(PartyMember)->screen_y.value + FIXED_MUL(rcos((i + 1) << 8), spad->cells.words[0]));
         if (g_Battle.action_id == 50) {
             setRGB0(prim, spad->cells.words[3], spad->cells.words[2], spad->cells.words[2]);
             setRGB1(prim, spad->cells.words[2], spad->cells.words[2], 1);
@@ -160,7 +160,7 @@ NON_MATCHING void func_801EF1B0(void) {
             setRGB1(prim, spad->cells.words[2], spad->cells.words[3], spad->cells.words[2]);
             setRGB2(prim, spad->cells.words[2], spad->cells.words[3], spad->cells.words[2]);
         }
-        Area_CellAddPrim(g_Task->pos.x.fixed, g_Task->pos.y.fixed, 2, sizeof(POLY_G3));
+        Area_CellAddPrim(TASK(PartyMember)->pos.x.fixed, TASK(PartyMember)->pos.y.fixed, 2, sizeof(POLY_G3));
     }
 }
 #else
@@ -186,14 +186,15 @@ NON_MATCHING void func_801EF4C4(void) {
     for (i = 0; i < 16; i++) {
         tpage = getTPage(TPAGE_DEPTH_4BIT, TPAGE_ABR_ADD, 320, 256);
         SetDrawMode((DR_MODE*)g_GfxPrimCursor, 0, 1, tpage, 0);
-        Area_CellAddPrim(g_Task->pos.x.fixed, g_Task->pos.y.fixed, 2, sizeof(DR_MODE));
+        Area_CellAddPrim(TASK(PartyMember)->pos.x.fixed, TASK(PartyMember)->pos.y.fixed, 2, sizeof(DR_MODE));
         prim = (POLY_G4*)g_GfxPrimCursor;
         SetPolyG4(prim);
         SetSemiTrans(prim, 1);
-        setXY4(prim, g_Task->screen_x.value + FIXED_MUL(rsin(i << 8), g_ScratchPad.cells.words[0]), g_Task->screen_y.value + FIXED_MUL(rcos(i << 8), g_ScratchPad.cells.words[0]),
-               g_Task->screen_x.value + FIXED_MUL(rsin((i + 1) << 8), g_ScratchPad.cells.words[0]), g_Task->screen_y.value + FIXED_MUL(rcos((i + 1) << 8), g_ScratchPad.cells.words[0]),
-               g_Task->screen_x.value + FIXED_MUL(rsin(i << 8), g_ScratchPad.cells.words[1]), g_Task->screen_y.value + FIXED_MUL(rcos(i << 8), g_ScratchPad.cells.words[1]),
-               g_Task->screen_x.value + FIXED_MUL(rsin((i + 1) << 8), g_ScratchPad.cells.words[1]), g_Task->screen_y.value + FIXED_MUL(rcos((i + 1) << 8), g_ScratchPad.cells.words[1]));
+        setXY4(prim, TASK(PartyMember)->screen_x.value + FIXED_MUL(rsin(i << 8), g_ScratchPad.cells.words[0]), TASK(PartyMember)->screen_y.value + FIXED_MUL(rcos(i << 8), g_ScratchPad.cells.words[0]),
+               TASK(PartyMember)->screen_x.value + FIXED_MUL(rsin((i + 1) << 8), g_ScratchPad.cells.words[0]),
+               TASK(PartyMember)->screen_y.value + FIXED_MUL(rcos((i + 1) << 8), g_ScratchPad.cells.words[0]), TASK(PartyMember)->screen_x.value + FIXED_MUL(rsin(i << 8), g_ScratchPad.cells.words[1]),
+               TASK(PartyMember)->screen_y.value + FIXED_MUL(rcos(i << 8), g_ScratchPad.cells.words[1]), TASK(PartyMember)->screen_x.value + FIXED_MUL(rsin((i + 1) << 8), g_ScratchPad.cells.words[1]),
+               TASK(PartyMember)->screen_y.value + FIXED_MUL(rcos((i + 1) << 8), g_ScratchPad.cells.words[1]));
         if (g_Battle.action_id == 50) {
             setRGB0(prim, g_ScratchPad.cells.words[3], g_ScratchPad.cells.words[2], g_ScratchPad.cells.words[3]);
             setRGB1(prim, g_ScratchPad.cells.words[3], g_ScratchPad.cells.words[2], g_ScratchPad.cells.words[3]);
@@ -203,7 +204,7 @@ NON_MATCHING void func_801EF4C4(void) {
         }
         setRGB2(prim, 1, 1, 1);
         setRGB3(prim, 1, 1, 1);
-        Area_CellAddPrim(g_Task->pos.x.fixed, g_Task->pos.y.fixed, 2, sizeof(POLY_G4));
+        Area_CellAddPrim(TASK(PartyMember)->pos.x.fixed, TASK(PartyMember)->pos.y.fixed, 2, sizeof(POLY_G4));
     }
 }
 #else
@@ -215,22 +216,23 @@ MATCH void func_801EF898(void) {
     s32     i;
     s32     tpage;
 
-    g_ScratchPad.cells.words[0] = g_Task->timer * 3;
-    g_ScratchPad.cells.words[2] = g_Task->unk_09 * 6;
-    g_ScratchPad.cells.words[3] = g_Task->unk_09;
+    g_ScratchPad.cells.words[0] = TASK(PartyMember)->timer * 3;
+    g_ScratchPad.cells.words[2] = TASK(PartyMember)->unk_09 * 6;
+    g_ScratchPad.cells.words[3] = TASK(PartyMember)->unk_09;
     for (i = 0; i < 16; i++) {
         tpage = getTPage(TPAGE_DEPTH_4BIT, TPAGE_ABR_ADD, 320, 256);
         SetDrawMode((DR_MODE*)g_GfxPrimCursor, 0, 1, tpage, 0);
-        Area_CellAddPrim(g_Task->pos.x.fixed, g_Task->pos.y.fixed, 2, sizeof(DR_MODE));
+        Area_CellAddPrim(TASK(PartyMember)->pos.x.fixed, TASK(PartyMember)->pos.y.fixed, 2, sizeof(DR_MODE));
         prim = (TILE_1*)g_GfxPrimCursor;
         SetTile1(prim);
         SetSemiTrans(prim, 1);
-        setXY0(prim, g_Task->screen_x.value + FIXED_MUL(rsin(i << 8), g_ScratchPad.cells.words[0]), g_Task->screen_y.value + FIXED_MUL(rcos(i << 8), g_ScratchPad.cells.words[0]));
+        setXY0(prim, TASK(PartyMember)->screen_x.value + FIXED_MUL(rsin(i << 8), g_ScratchPad.cells.words[0]),
+               TASK(PartyMember)->screen_y.value + FIXED_MUL(rcos(i << 8), g_ScratchPad.cells.words[0]));
         if (g_Battle.action_id == 50) {
             setRGB0(prim, g_ScratchPad.cells.words[2], g_ScratchPad.cells.words[2], g_ScratchPad.cells.words[3]);
         } else {
             setRGB0(prim, g_ScratchPad.cells.words[2], g_ScratchPad.cells.words[3], g_ScratchPad.cells.words[2]);
         }
-        Area_CellAddPrim(g_Task->pos.x.fixed, g_Task->pos.y.fixed, 2, sizeof(TILE_1));
+        Area_CellAddPrim(TASK(PartyMember)->pos.x.fixed, TASK(PartyMember)->pos.y.fixed, 2, sizeof(TILE_1));
     }
 }

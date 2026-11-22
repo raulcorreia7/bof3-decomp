@@ -30,21 +30,21 @@ MATCH void func_801D0F5C(void) {
         dst += 2;
     } while (i < 31);
 
-    D_800396C0            = 0;
-    D_800396FE            = 0;
-    g_GfxPalettePending   = 1;
-    FISHING_STATE->unk_5C = 1;
+    D_800396C0                 = 0;
+    D_800396FE                 = 0;
+    g_GfxPalettePending        = 1;
+    TASK(FishingState)->unk_5C = 1;
 
     if (g_AreaTargetCellY >= 0x39) {
-        FISHING_STATE->mode_index = 3;
-        FISHING_STATE->sub_index  = 2;
+        TASK(FishingState)->mode_index = 3;
+        TASK(FishingState)->sub_index  = 2;
     } else {
-        FISHING_STATE->saved_index = FISHING_STATE->saved_value_27;
-        FISHING_STATE->flags |= ACTOR_FLAG_SEMI_TRANSPARENT;
-        FISHING_STATE->saved_value_27 = 0x7B;
-        FISHING_STATE->tint_5D        = -0x80;
-        FISHING_STATE->tint_5E        = -0x80;
-        FISHING_STATE->tint_5F        = -0x80;
-        FISHING_STATE->sub_index      = (FISHING_STATE->sub_index + 1);
+        TASK(FishingState)->saved_index = TASK(FishingState)->saved_value_27;
+        TASK(FishingState)->flags |= ACTOR_FLAG_SEMI_TRANSPARENT;
+        TASK(FishingState)->saved_value_27 = 0x7B;
+        TASK(FishingState)->tint_5D        = -0x80;
+        TASK(FishingState)->tint_5E        = -0x80;
+        TASK(FishingState)->tint_5F        = -0x80;
+        TASK(FishingState)->sub_index      = (TASK(FishingState)->sub_index + 1);
     }
 }

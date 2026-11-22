@@ -6,7 +6,7 @@ MATCH void func_801F2D4C(void) {
     s32    timer;
     s8     step;
 
-    ACTOR_COUNT_DOWN(timer, timer);
+    ACTOR_COUNT_DOWN(TASK(Actor), timer, timer);
     if (!(timer & BYTE_MASK)) {
         UI_MessageStartArea(MSG_AREA107_TIDE_LEVEL_CHANGED);
         work              = g_Task;

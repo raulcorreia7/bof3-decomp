@@ -5,10 +5,10 @@ MATCH void Effect_ReplacePaletteFade(void) {
     PartyMember* actor;
 
     actor = g_Battle.selected_actor;
-    if (--g_Task->unk_09 == 0) {
+    if (--TASK(PartyMember)->unk_09 == 0) {
         GFX_PaletteFreeFadeTarget(actor);
-        g_Task->timer  = GFX_PaletteAllocFade((u8*)actor, 0, 0, 0, 1);
-        g_Task->unk_09 = 8;
-        g_Task->header.mode++;
+        TASK(PartyMember)->timer  = GFX_PaletteAllocFade((u8*)actor, 0, 0, 0, 1);
+        TASK(PartyMember)->unk_09 = 8;
+        TASK(PartyMember)->header.mode++;
     }
 }

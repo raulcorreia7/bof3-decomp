@@ -13,19 +13,19 @@ MATCH void func_801EEC5C(void) {
     u32          effect_slot;
 
     actor                                     = g_Battle.selected_actor;
-    g_Task->pos.x.fixed                       = actor->pos.x.fixed;
-    g_Task->pos.y.fixed                       = actor->pos.y.fixed;
-    g_Task->pos.z.fixed                       = actor->pos.z.fixed;
-    g_Task->screen_x.value                    = actor->screen_x.value;
-    g_Task->screen_y.value                    = actor->screen_y.value - 16;
+    TASK(PartyMember)->pos.x.fixed            = actor->pos.x.fixed;
+    TASK(PartyMember)->pos.y.fixed            = actor->pos.y.fixed;
+    TASK(PartyMember)->pos.z.fixed            = actor->pos.z.fixed;
+    TASK(PartyMember)->screen_x.value         = actor->screen_x.value;
+    TASK(PartyMember)->screen_y.value         = actor->screen_y.value - 16;
     effect_slot                               = Battle_AllocEffect(1, 21) & BYTE_MASK;
     g_BattleEffects[effect_slot].target.party = g_Task;
     g_BattleEffects[effect_slot].unk_08       = actor->facing;
     g_BattleEffects[effect_slot].pos.x.fixed  = actor->pos.x.fixed;
     g_BattleEffects[effect_slot].pos.y.fixed  = actor->pos.y.fixed;
     g_BattleEffects[effect_slot].pos.z.fixed  = actor->pos.z.fixed;
-    g_Task->param.unk_0B                      = 0;
-    g_Task->header.mode++;
+    TASK(PartyMember)->param.unk_0B           = 0;
+    TASK(PartyMember)->header.mode++;
     SND_SEQueueSelection(0x100);
 }
 
@@ -35,15 +35,15 @@ MATCH void func_801EED60(void) {
     u8*          selector;
     PartyMember* battler;
 
-    g_Task->screen_x.value = g_BattleSelectedActor->screen_x.value;
-    g_Task->screen_y.value = g_BattleSelectedActor->screen_y.value - 0x10;
-    if (g_Task->param.unk_0B == 0xFF) {
+    TASK(PartyMember)->screen_x.value = g_BattleSelectedActor->screen_x.value;
+    TASK(PartyMember)->screen_y.value = g_BattleSelectedActor->screen_y.value - 0x10;
+    if (TASK(PartyMember)->param.unk_0B == 0xFF) {
         BMAGIC_RELEASE_TARGET_AND_PLAY();
     }
 }
 
 MATCH void func_801EEE4C(void) {
-    SYS_DISPATCH_BYTE(D_801EF988, g_Task->header.mode);
+    SYS_DISPATCH_BYTE(D_801EF988, TASK(PartyMember)->header.mode);
     if (g_BattleEffectBattler->param.unk_0B != 0xFF) {
         func_801EF654();
         func_801EF14C();
@@ -55,9 +55,9 @@ MATCH void func_801EEE4C(void) {
 
 MATCH void func_801EEF1C(void) {
     Battle_ApplyDamageFlags(g_Battle.target_selector, 32);
-    g_Task->unk_09 = 0;
-    g_Task->timer  = 0;
-    g_Task->header.mode++;
+    TASK(PartyMember)->unk_09 = 0;
+    TASK(PartyMember)->timer  = 0;
+    TASK(PartyMember)->header.mode++;
 }
 
 MATCH void func_801EEF7C(void) {
@@ -65,9 +65,9 @@ MATCH void func_801EEF7C(void) {
     u8           step;
     PartyMember* battler;
 
-    g_Task->timer++;
-    step           = g_Task->unk_09 + 1;
-    g_Task->unk_09 = step;
+    TASK(PartyMember)->timer++;
+    step                      = TASK(PartyMember)->unk_09 + 1;
+    TASK(PartyMember)->unk_09 = step;
     if (step == 0x10) {
         slot = LOBU(g_Battle.target_selector);
         if (slot < BATTLE_PARTY_CHARACTERS_COUNT) {
@@ -77,8 +77,8 @@ MATCH void func_801EEF7C(void) {
         }
         func_80196718(battler);
         func_8019651C(battler, 6, 4, 8, 0);
-        g_Task->unk_09 = 0;
-        g_Task->header.mode++;
+        TASK(PartyMember)->unk_09 = 0;
+        TASK(PartyMember)->header.mode++;
     }
 }
 
@@ -86,23 +86,23 @@ MATCH void func_801EF078(void) {
     u8 timer;
     u8 count;
 
-    timer = g_Task->timer;
+    timer = TASK(PartyMember)->timer;
     if (timer < 16U) {
-        g_Task->timer = timer + 1;
+        TASK(PartyMember)->timer = timer + 1;
     }
-    count          = g_Task->unk_09 + 1;
-    g_Task->unk_09 = count;
+    count                     = TASK(PartyMember)->unk_09 + 1;
+    TASK(PartyMember)->unk_09 = count;
     if ((count & BYTE_MASK) == 0x10) {
-        g_Task->unk_09 = 0;
-        g_Task->header.mode += 1;
+        TASK(PartyMember)->unk_09 = 0;
+        TASK(PartyMember)->header.mode += 1;
     }
 }
 
 MATCH void func_801EF0FC(void) {
     u8 count;
 
-    count          = g_Task->unk_09 + 1;
-    g_Task->unk_09 = count;
+    count                     = TASK(PartyMember)->unk_09 + 1;
+    TASK(PartyMember)->unk_09 = count;
     if ((count & BYTE_MASK) == 0x20) {
         g_BattleEffectBattler->param.unk_0B = 0xFF;
         Effect_Reset();
@@ -123,8 +123,8 @@ MATCH void func_801EF654(void) {
     long    flags;
 
     PushMatrix();
-    setVector(&rot, 0, 0, g_Task->timer << 4);
-    BMAGIC_PROJECT_ACTOR_MATRIX(g_Task);
+    setVector(&rot, 0, 0, TASK(PartyMember)->timer << 4);
+    BMAGIC_PROJECT_ACTOR_MATRIX(TASK(PartyMember));
 }
 
 MATCH void func_801EF710(void) {
@@ -134,24 +134,24 @@ MATCH void func_801EF710(void) {
     s32      angle;
     s32      next;
 
-    switch (g_Task->header.mode) {
+    switch (TASK(PartyMember)->header.mode) {
         /* FAKE: retail compare tree needs a third case below 2 on the default body; the bytes do not say which mode. */
         case 1:
         default:
-            D_1F800000_WORD[0] = g_Task->unk_09 * 3 + 16;
+            D_1F800000_WORD[0] = TASK(PartyMember)->unk_09 * 3 + 16;
             break;
         case 2:
             D_1F800000_WORD[0] = 64;
             break;
         case 3:
-            D_1F800000_WORD[0] = 64 - g_Task->unk_09 * 2;
+            D_1F800000_WORD[0] = 64 - TASK(PartyMember)->unk_09 * 2;
             break;
     }
     i = 0;
     do {
         tpage = getTPage(TPAGE_DEPTH_4BIT, TPAGE_ABR_ADD, 320, 256);
         SetDrawMode((DR_MODE*)g_GfxPrimCursor, 0, 1, tpage, 0);
-        Area_CellAddPrim(g_Task->pos.x.fixed, g_Task->pos.y.fixed, 2, sizeof(DR_MODE));
+        Area_CellAddPrim(TASK(PartyMember)->pos.x.fixed, TASK(PartyMember)->pos.y.fixed, 2, sizeof(DR_MODE));
         prim = (POLY_G3*)g_GfxPrimCursor;
         SetPolyG3(prim);
         PSX_SET_SEMI_TRANSPARENT(prim);
@@ -165,7 +165,7 @@ MATCH void func_801EF710(void) {
         setRGB0(prim, 0x20, 0x20, 0xC0);
         setRGB1(prim, 1, 1, 1);
         setRGB2(prim, 1, 1, 1);
-        Area_CellAddPrim(g_Task->pos.x.fixed, g_Task->pos.y.fixed, 2, sizeof(POLY_G3));
+        Area_CellAddPrim(TASK(PartyMember)->pos.x.fixed, TASK(PartyMember)->pos.y.fixed, 2, sizeof(POLY_G3));
         i++;
     } while (i < 32);
 }

@@ -32,6 +32,6 @@ MATCH void Battle_WaitAilment(void) {
         flags     = *row_flags & (STATUS_BLIND | STATUS_SILENCED | STATUS_SLEEPING);
     }
     if (flags != 0) {
-        g_Task->header.mode++;
+        TASK(PartyMember)->header.mode++;
     }
 }

@@ -22,17 +22,17 @@ MATCH void func_801E8DD8(void) {
             row      = slot[5];
             offset_y = D_801EB109[g_Game.members[row].chr.character_id * 2u];
         }
-        dst->screen_y.value = *(u16*)((slot + 0x30u)) - offset_y - 8u;
-        g_Task->depth       = g_BattleEffectBattler->depth;
+        dst->screen_y.value      = *(u16*)((slot + 0x30u)) - offset_y - 8u;
+        TASK(PartyMember)->depth = g_BattleEffectBattler->depth;
     } else {
         row = slot[5];
         row -= 3;
-        offset_x               = g_BattleEnemyBattlers[row].panel_offset_x;
-        g_Task->screen_x.value = *(u16*)((slot + 0x2Eu)) + offset_x;
-        row                    = slot[5];
+        offset_x                          = g_BattleEnemyBattlers[row].panel_offset_x;
+        TASK(PartyMember)->screen_x.value = *(u16*)((slot + 0x2Eu)) + offset_x;
+        row                               = slot[5];
         row -= 3;
-        offset_y               = ENCOUNTER_ENEMIES[g_BattleEnemyBattlers[row].type].height;
-        g_Task->screen_y.value = *(u16*)((slot + 0x30u)) - offset_y - 8u;
-        g_Task->depth          = *(u16*)((slot + 0x32u));
+        offset_y                          = ENCOUNTER_ENEMIES[g_BattleEnemyBattlers[row].type].height;
+        TASK(PartyMember)->screen_y.value = *(u16*)((slot + 0x30u)) - offset_y - 8u;
+        TASK(PartyMember)->depth          = *(u16*)((slot + 0x32u));
     }
 }

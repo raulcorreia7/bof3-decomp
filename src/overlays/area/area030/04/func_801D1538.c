@@ -7,7 +7,7 @@ MATCH void func_801D1538(void) {
     FishingState* spike;
 
     if (D_80145E92[0] == 1) {
-        spike             = FISHING_STATE;
+        spike             = TASK(FishingState);
         spike->mode_index = 0;
     } else {
         u8 bit = 1;
@@ -15,10 +15,10 @@ MATCH void func_801D1538(void) {
         if (g_AreaTargetCellY >= 0x38) {
             return;
         }
-        spike             = FISHING_STATE;
+        spike             = TASK(FishingState);
         spike->mode_index = bit;
     }
 
-    spike            = FISHING_STATE;
+    spike            = TASK(FishingState);
     spike->sub_index = 0;
 }

@@ -2,7 +2,7 @@
 
 MATCH void func_801E1938(void) {
     if (Battle_IsPartyMemberBlocked() != 0u) {
-        g_Task->header.mode = (g_Task->header.mode + 1u);
-        g_Task->header.step = 0u;
+        TASK(PartyMember)->header.mode = (TASK(PartyMember)->header.mode + 1u);
+        TASK(PartyMember)->header.step = 0u;
     }
 }

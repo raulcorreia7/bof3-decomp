@@ -31,16 +31,16 @@ MATCH void func_800A87D4(void) {
     if (*type < 3) {
         Battle_MoveRangeToward((BattleRange*)&g_Game.members[*type], 0x50);
         if (func_800AF5FC((BattleRange*)&g_Game.members[*type], 0x10000) != 0) {
-            Script_Select((BATTLE_WORK->facing + 0x44) & BYTE_MASK);
+            Script_Select((TASK(PartyMember)->facing + 0x44) & BYTE_MASK);
             Battle_MarkDamaged(*type);
-            BATTLE_WORK->header.mode++;
+            TASK(PartyMember)->header.mode++;
         }
     } else {
         Battle_MoveRangeToward((BattleRange*)&((volatile EnemyBattler*)g_BattleEnemies)[*type], 0x50);
         if (func_800AF5FC((BattleRange*)&((volatile EnemyBattler*)g_BattleEnemies)[*type], 0x10000) != 0) {
-            Script_Select((BATTLE_WORK->facing + 0x44) & BYTE_MASK);
+            Script_Select((TASK(PartyMember)->facing + 0x44) & BYTE_MASK);
             Battle_MarkDamaged(*type);
-            BATTLE_WORK->header.mode++;
+            TASK(PartyMember)->header.mode++;
         }
     }
     func_801DEE4C();

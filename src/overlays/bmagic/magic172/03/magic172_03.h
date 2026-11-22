@@ -33,9 +33,9 @@ void            func_801F0908(void);
     GFX_AddPrim(BMAGIC_LAYER_OVER_BATTLERS, sizeof(DR_MODE));                                                                                                                           \
     g_ScratchPad.cells.halves[0] = 16;                                                                                                                                                  \
     g_ScratchPad.cells.halves[2] = ANGLE;                                                                                                                                               \
-    x                            = g_Task->screen_x.value;                                                                                                                              \
-    y                            = g_Task->screen_y.value;                                                                                                                              \
-    g_ScratchPad.cells.halves[3] = g_Task->unk_09 * 6;                                                                                                                                  \
+    x                            = TASK(PartyMember)->screen_x.value;                                                                                                                   \
+    y                            = TASK(PartyMember)->screen_y.value;                                                                                                                   \
+    g_ScratchPad.cells.halves[3] = TASK(PartyMember)->unk_09 * 6;                                                                                                                       \
     i                            = 1;                                                                                                                                                   \
     do {                                                                                                                                                                                \
         prim = (LINE_G2*)g_GfxPrimCursor;                                                                                                                                               \
@@ -48,11 +48,11 @@ void            func_801F0908(void);
         g_ScratchPad.cells.halves[2] = (g_ScratchPad.cells.halves[2] + (rand() & WOBBLE)) & 0xFFF;                                                                                      \
         prim->x1                     = x + FIXED_MUL(rsin(g_ScratchPad.cells.halves[2]), g_ScratchPad.cells.halves[0]);                                                                 \
         prim->y1                     = y + FIXED_MUL(rcos(g_ScratchPad.cells.halves[2]), g_ScratchPad.cells.halves[0]);                                                                 \
-        if (g_Task->header.step < 3) {                                                                                                                                                  \
+        if (TASK(PartyMember)->header.step < 3) {                                                                                                                                       \
             g_ScratchPad.cells.halves[3] = (g_ScratchPad.cells.halves[0] - FADE) * 6;                                                                                                   \
         }                                                                                                                                                                               \
         setRGB0(prim, g_ScratchPad.cells.halves[3], g_ScratchPad.cells.halves[3], g_ScratchPad.cells.halves[3] / 3);                                                                    \
-        if (g_Task->header.step < 3) {                                                                                                                                                  \
+        if (TASK(PartyMember)->header.step < 3) {                                                                                                                                       \
             g_ScratchPad.cells.halves[3] = (g_ScratchPad.cells.halves[0] - (FADE + 1)) * 6;                                                                                             \
         }                                                                                                                                                                               \
         setRGB1(prim, g_ScratchPad.cells.halves[3], g_ScratchPad.cells.halves[3], g_ScratchPad.cells.halves[3] / 3);                                                                    \

@@ -4,11 +4,11 @@
 MATCH void func_801E1050(void) {
     PartyMember* work;
 
-    Battle_ClearSlotPending(g_Task->slot);
+    Battle_ClearSlotPending(TASK(PartyMember)->slot);
     work                            = g_Game.current;
     work->u.turn.damage_flags.value = work->u.turn.damage_flags.value & ~(BATTLER_DAMAGE_UNK_4 | BATTLER_DAMAGE_UNK_5 | BATTLER_DAMAGE_TAKEN | BATTLER_DAMAGE_NUMBER);
     work->u.turn.damage_flags.value = work->u.turn.damage_flags.value & ~BATTLER_DAMAGE_ROW_PRESENT;
-    g_Task->header.mode             = 3;
-    g_Task->header.step             = 0;
-    g_Task->unk_03                  = 0;
+    TASK(PartyMember)->header.mode  = 3;
+    TASK(PartyMember)->header.step  = 0;
+    TASK(PartyMember)->unk_03       = 0;
 }

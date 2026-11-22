@@ -12,15 +12,15 @@ MATCH void func_801EED04(void) {
         BMAGIC_EFFECT_SLOTS[i].header.mode  = 0;
         BMAGIC_EFFECT_SLOTS[i].header.step  = 0;
     }
-    battler            = g_BattleSelectedActor;
-    g_Task->facing     = battler->facing;
+    battler                   = g_BattleSelectedActor;
+    TASK(PartyMember)->facing = battler->facing;
     /* kept: the facing store makes retail reread the work cell; one local for the whole copy merges the two loads. */
-    work               = g_Task;
-    work->pos.x        = battler->pos.x;
-    work->pos.y        = battler->pos.y;
-    work->pos.z        = battler->pos.z;
-    work->param.unk_0B = 0;
-    g_Task->header.mode++;
+    work                      = g_Task;
+    work->pos.x               = battler->pos.x;
+    work->pos.y               = battler->pos.y;
+    work->pos.z               = battler->pos.z;
+    work->param.unk_0B        = 0;
+    TASK(PartyMember)->header.mode++;
     /* kept: the GAME_NONE local holds 0xFF in a callee-saved register across the spawn loop; the literal is reloaded each pass. */
     for (i = 0, none = GAME_NONE; i < BMAGIC_EFFECT_SPAWN_COUNT; i++) {
         slot = BMagic_AllocEffect();
@@ -29,7 +29,7 @@ MATCH void func_801EED04(void) {
             BMAGIC_EFFECT_SLOTS[slot].unk_0B       = i;
             BMAGIC_EFFECT_SLOTS[slot].header.flags |= BMAGIC_EFFECT_IN_USE | ACTOR_FLAG_HIDDEN;
             BMAGIC_EFFECT_SLOTS[slot].arg.unk_09 = RANDOM_MASK(0x1F) + 1;
-            g_Task->param.unk_0B++;
+            TASK(PartyMember)->param.unk_0B++;
         }
     }
     SND_SEQueueSelection(EMI_SE_ID(SND_BANK_COMMON, 0));

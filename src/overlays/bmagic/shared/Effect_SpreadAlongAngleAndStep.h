@@ -6,19 +6,19 @@ MATCH void Effect_SpreadAlongAngleAndStep(void) {
     u8   count;
 
     angle_cell = &D_1F800004;
-    phase      = g_Task->param.unk_0B & 0xF;
-    g_Task->unk_0C += 2;
-    *angle_cell         = phase << 8;
-    g_Task->pos.x.fixed = g_BattleEffectBattler->pos.x.fixed + rsin(*angle_cell) * g_Task->unk_0C;
-    g_Task->pos.y.fixed = g_BattleEffectBattler->pos.y.fixed + rcos(*angle_cell) * g_Task->unk_0C;
-    if (g_Task->unk_20 < g_Task->unk_14) {
-        b              = g_Task->unk_14 - g_Task->unk_20;
-        g_Task->unk_14 = b;
-        g_Task->pos.z.fixed += b;
+    phase      = TASK(PartyMember)->param.unk_0B & 0xF;
+    TASK(PartyMember)->unk_0C += 2;
+    *angle_cell                    = phase << 8;
+    TASK(PartyMember)->pos.x.fixed = g_BattleEffectBattler->pos.x.fixed + rsin(*angle_cell) * TASK(PartyMember)->unk_0C;
+    TASK(PartyMember)->pos.y.fixed = g_BattleEffectBattler->pos.y.fixed + rcos(*angle_cell) * TASK(PartyMember)->unk_0C;
+    if (TASK(PartyMember)->unk_20 < TASK(PartyMember)->unk_14) {
+        b                         = TASK(PartyMember)->unk_14 - TASK(PartyMember)->unk_20;
+        TASK(PartyMember)->unk_14 = b;
+        TASK(PartyMember)->pos.z.fixed += b;
     }
-    count          = g_Task->unk_09 + 2;
-    g_Task->unk_09 = count;
+    count                     = TASK(PartyMember)->unk_09 + 2;
+    TASK(PartyMember)->unk_09 = count;
     if (count == 16) {
-        g_Task->header.step++;
+        TASK(PartyMember)->header.step++;
     }
 }

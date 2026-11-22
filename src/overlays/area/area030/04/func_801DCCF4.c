@@ -11,7 +11,7 @@ MATCH void func_801DCCF4(void) {
         D_80144287 = value;
         UI_CursorDraw(28, ((value << 4) + 88), 0);
 
-        record          = FISHING_STATE;
+        record          = TASK(FishingState);
         record->flag_04 = (record->flag_04 + 1);
     }
 

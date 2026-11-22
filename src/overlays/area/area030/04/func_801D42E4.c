@@ -13,9 +13,9 @@ MATCH void func_801D42E4(void) {
     g_Task->timer        = 4;
     g_Task->unk_0A       = 0;
 
-    work              = FISHING_STATE;
+    work              = TASK(FishingState);
     work->saved_index = 0;
-    advanced          = FISHING_STATE;
+    advanced          = TASK(FishingState);
 
     work->motion.unk_34 = 0;
     work->y_38.pos_y    = 0;

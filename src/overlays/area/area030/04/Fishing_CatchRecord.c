@@ -18,10 +18,10 @@ MATCH void Fishing_CatchRecord(void) {
 
         SND_SEPlay(EMI_SE_ID(SND_BANK_COMMON, 2));
 
-        record             = FISHING_STATE;
+        record             = TASK(FishingState);
         record->step_timer = 8;
 
-        record            = FISHING_STATE;
+        record            = TASK(FishingState);
         record->sub_index = (record->sub_index + 1);
     }
 

@@ -24,6 +24,6 @@ MATCH void func_801DFA60(void) {
             Battle_PlayEffectSE(3);
         }
         Battle_PlayEffectSE(4);
-        g_Task->header.step = g_Task->header.step + 1;
+        TASK(PartyMember)->header.step = TASK(PartyMember)->header.step + 1;
     }
 }
