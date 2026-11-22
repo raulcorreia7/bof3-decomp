@@ -1,0 +1,2 @@
+{"function": "emi/scenario/scena08/00@0x801FC45C", "tried": "permuter 120s on func_801FC45C: base 1210, best 1210", "first_diff": "candidates in work/permute/nonmatchings/func_801FC45C/output-*", "score": 1210}
+{"function": "emi/scenario/scena08/00@0x801FC45C", "tried": "lifted retail switch, reordered spawn fields, varied state and party save statement order and typed views", "first_diff": "scheduler moves the script-variable load ahead of the game-flags store at 0x801FCACC; 776 instructions in each body", "score": null}
