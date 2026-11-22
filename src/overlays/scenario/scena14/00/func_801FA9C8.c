@@ -153,7 +153,7 @@ MATCH void func_801FA9C8(void) {
             }
             g_AreaDrawFlags = 0;
             g_ScriptVars[0]++;
-            SCENARIO_MESSAGE_WAIT(0x22, 21);
+            SCENARIO_MESSAGE_WAIT(MSG_SCENA14_034, 21);
             break;
         case 21:
             state = &g_GameStateIndex;
@@ -220,7 +220,7 @@ MATCH void func_801FA9C8(void) {
             SND_BGMPause(g_SndBGMId);
             SND_XAStartStream(2, 1);
             Item_VitalAdd(0xC);
-            SCENARIO_MESSAGE_WAIT(0x2A, 31);
+            SCENARIO_MESSAGE_WAIT(MSG_SCENA14_042, 31);
             break;
         case 31:
             if (!SND_XAIsIdle() || g_GameStateIndex == GAME_REQUEST_MESSAGE) {
