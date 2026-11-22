@@ -5,7 +5,6 @@ MATCH bool Game_BattleWalkMembersIn(void) {
     PartyMember* work;
     s32          i;
     s32          j;
-    s32          offset;
     u8           order;
     s32          clut_offset;
     u16*         dst;
@@ -64,8 +63,7 @@ MATCH bool Game_BattleWalkMembersIn(void) {
     }
 
     for (i = 0; i < g_Game.party_size; i++) {
-        offset = i * BATTLE_PARTY_STRIDE;
-        if ((&D_80145E9B)[offset] != 2) {
+        if (g_Game.members[i].param.unk_0B != 2) {
             return 0;
         }
     }

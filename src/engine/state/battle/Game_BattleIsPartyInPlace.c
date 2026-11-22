@@ -3,7 +3,6 @@
 /* func_801BF78C */
 MATCH bool Game_BattleIsPartyInPlace(void) {
     u8* work;
-    s32 off;
     s32 i;
     u8  j;
 
@@ -24,8 +23,7 @@ MATCH bool Game_BattleIsPartyInPlace(void) {
         }
     }
     for (i = 0; i < g_Game.party_size; i++) {
-        off = i * BATTLE_PARTY_STRIDE;
-        if ((&D_80145E9B)[off] != 1) {
+        if (g_Game.members[i].param.unk_0B != 1) {
             return 0;
         }
     }

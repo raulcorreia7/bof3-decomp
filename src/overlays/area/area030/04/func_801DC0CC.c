@@ -11,10 +11,10 @@ MATCH void func_801DC0CC(void) {
     u16           cue;
 
     Fishing_DrawCatchBar(0, FISHING_CATCH_BAR_Y);
-    Fishing_DrawCatchIcon(FISHING_CATCH_ICON_X, FISHING_CATCH_ICON_Y, D_8014688E[g_FishingHookedFish * 0x98]);
+    Fishing_DrawCatchIcon(FISHING_CATCH_ICON_X, FISHING_CATCH_ICON_Y, g_Actors[g_FishingHookedFish].unk_06);
 
     offset = g_FishingHookedFish * 0x98;
-    Fishing_DrawCatchRow(D_8014688E[offset], D_80146918[offset], 0);
+    Fishing_DrawCatchRow(g_Actors[g_FishingHookedFish].unk_06, D_80146918[offset], 0);
     Fishing_DrawRank(FISHING_CATCH_RANK_X, FISHING_CATCH_RANK_Y);
     Fishing_DrawIconRow(8, FISHING_CATCH_ROW_Y, 68);
 

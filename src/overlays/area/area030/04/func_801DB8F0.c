@@ -15,10 +15,10 @@ MATCH void func_801DB8F0(void) {
     }
 
     Fishing_DrawCatchBar(0, FISHING_CATCH_BAR_Y);
-    Fishing_DrawCatchIcon(FISHING_CATCH_ICON_X, FISHING_CATCH_ICON_Y, D_8014688E[g_FishingHookedFish * 0x98]);
+    Fishing_DrawCatchIcon(FISHING_CATCH_ICON_X, FISHING_CATCH_ICON_Y, g_Actors[g_FishingHookedFish].unk_06);
 
     offset = g_FishingHookedFish * 0x98;
-    Fishing_DrawCatchRow(D_8014688E[offset], TASK(FishingState)->timer, 0);
+    Fishing_DrawCatchRow(g_Actors[g_FishingHookedFish].unk_06, TASK(FishingState)->timer, 0);
 
     if (TASK(FishingState)->timer == g_Actors[g_FishingHookedFish].roll_90) {
         if (g_FishingNewRecord != 0) {
