@@ -68,6 +68,7 @@ extern u8       D_80143F1D;
 extern u16      D_80144F54;
 extern s8       D_8014504A;
 extern s8       D_8014504B;
+extern u8       D_80148660;
 extern u8       D_801FE608[];
 extern u8       D_801FE71C[];
 /* The scene band's velocity. */
@@ -82,6 +83,5 @@ extern Callback jtbl_801F6C6C[6];
 extern u8       D_801FE694[];
 extern u8       D_801FE6C8[];
 extern u8       D_801FE750;
-extern u8       D_80148660;
 
 #endif
