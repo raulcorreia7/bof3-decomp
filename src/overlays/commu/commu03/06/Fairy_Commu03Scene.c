@@ -219,7 +219,7 @@ NON_MATCHING void func_801D1250(s32 scene, s32 mode) {
         setXYWH(prim, left + 0x49, top + 0x3F + i * 4, yoff, 4);
         setUVWH(prim, 0x98, 0xD8, 4, 8);
         setRGB0(prim, 0x80, 0x80, 0x80);
-        prim->clut = 0x780B;
+        prim->clut = getClut(176, 480);
         if (GetGraphType() == 1) {
             tpage = 0xF;
         } else {

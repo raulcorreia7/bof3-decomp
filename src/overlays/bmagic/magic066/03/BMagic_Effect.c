@@ -278,8 +278,7 @@ NON_MATCHING void func_801EF984(void) {
     } else {
         tpage = 0x35;
     }
-    SetDrawMode((DR_MODE*)g_GfxPrimCursor, 0, 1, tpage, 0);
-    GFX_AddPrim(3, 0xC);
+    GFX_ADD_DITHERED_DRAW_MODE(3, tpage);
 
     for (i = 0; i < 3; i++) {
         for (j = 0; j < 8; j++) {
@@ -333,8 +332,7 @@ NON_MATCHING void func_801EF984(void) {
     } else {
         tpage = 0x15;
     }
-    SetDrawMode((DR_MODE*)g_GfxPrimCursor, 0, 1, tpage, 0);
-    GFX_AddPrim(3, 0xC);
+    GFX_ADD_DITHERED_DRAW_MODE(3, tpage);
 }
 #else
 INCLUDE_ASM(func_801EF984);

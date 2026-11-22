@@ -21,10 +21,10 @@ MATCH void UI_IconDraw(s32 sprite_x, s32 sprite_y, s32 icon_id, s32 dimmed) {
         case 1:
         case 3:
         case 0xF:
-            clut = 0x780E;
+            clut = getClut(224, 480);
             break;
         default:
-            clut = 0x780C;
+            clut = getClut(192, 480);
             break;
     }
     sprite->clut = clut;

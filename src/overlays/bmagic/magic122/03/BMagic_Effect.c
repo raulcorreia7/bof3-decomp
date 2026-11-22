@@ -240,8 +240,7 @@ NON_MATCHING void func_801EFBA8(void) {
     s32          outer_radius;
     s32          white;
 
-    SetDrawMode((DR_MODE*)g_GfxPrimCursor, 0, 1, getTPage(TPAGE_DEPTH_4BIT, TPAGE_ABR_ADD, 320, 256), 0);
-    GFX_AddPrim(BMAGIC_LAYER_OVER_BATTLERS, sizeof(DR_MODE));
+    GFX_ADD_DITHERED_DRAW_MODE(BMAGIC_LAYER_OVER_BATTLERS, getTPage(TPAGE_DEPTH_4BIT, TPAGE_ABR_ADD, 320, 256));
     g_ScratchPad.cells.halves[4] = g_Task->screen_x.value;
     g_ScratchPad.cells.halves[5] = g_Task->screen_y.value;
     g_ScratchPad.cells.halves[1] = g_Task->unk_14;
@@ -319,8 +318,7 @@ NON_MATCHING void func_801EFBA8(void) {
             outer_radius += 18;
         } while (iteration < g_Task->timer + 1);
     }
-    SetDrawMode((DR_MODE*)g_GfxPrimCursor, 0, 1, getTPage(TPAGE_DEPTH_4BIT, TPAGE_ABR_HALF, 320, 256), 0);
-    GFX_AddPrim(BMAGIC_LAYER_OVER_BATTLERS, sizeof(DR_MODE));
+    GFX_ADD_DITHERED_DRAW_MODE(BMAGIC_LAYER_OVER_BATTLERS, getTPage(TPAGE_DEPTH_4BIT, TPAGE_ABR_HALF, 320, 256));
 }
 #else
 INCLUDE_ASM(func_801EFBA8);

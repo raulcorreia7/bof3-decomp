@@ -10,8 +10,7 @@ NON_MATCHING void func_801F3258(u8* window) {
     u16         i;
     TrailPoint* next;
 
-    SetDrawMode((DR_MODE*)g_GfxPrimCursor, 0, 1, GetTPage(TPAGE_DEPTH_4BIT, TPAGE_ABR_ADD, 0x3C0, 0) & 0xFFFF, NULL);
-    GFX_AddPrim(1, sizeof(DR_MODE));
+    GFX_ADD_DITHERED_DRAW_MODE(1, GetTPage(TPAGE_DEPTH_4BIT, TPAGE_ABR_ADD, 0x3C0, 0) & 0xFFFF);
     point = (TrailPoint*)window;
     GFX_DrawFan(&point->screen, point->width, (u16)point->angle - 0x400, 0x80);
     colour = 0x80;

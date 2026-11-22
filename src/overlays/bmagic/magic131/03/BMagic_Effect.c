@@ -539,8 +539,7 @@ NON_MATCHING void func_801F06B4(void) {
     } else {
         tpage = 0x35;
     }
-    SetDrawMode((DR_MODE*)g_GfxPrimCursor, 0, 1, tpage, 0);
-    GFX_AddPrim(GFX_LAYER_EFFECT, sizeof(DR_MODE));
+    GFX_ADD_DITHERED_DRAW_MODE(GFX_LAYER_EFFECT, tpage);
 
     g_ScratchPad.cells.halves[4] = (s8)g_Task->unk_5D * 8;
     g_ScratchPad.cells.halves[5] = (s8)g_Task->unk_5D * 8;

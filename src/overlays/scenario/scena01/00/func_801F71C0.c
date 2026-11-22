@@ -16,8 +16,7 @@ MATCH void func_801F71C0(void) {
 MATCH void func_801F729C(void) {
     POLY_G4* prim;
 
-    SetDrawMode((DR_MODE*)g_GfxPrimCursor, 0, 1, GetTPage(TPAGE_DEPTH_8BIT, TPAGE_ABR_SUB, 0x140, 0) & 0xFFFF, 0);
-    GFX_AddPrim(GFX_LAYER_EFFECT_FRONT, sizeof(DR_MODE));
+    GFX_ADD_DITHERED_DRAW_MODE(GFX_LAYER_EFFECT_FRONT, GetTPage(TPAGE_DEPTH_8BIT, TPAGE_ABR_SUB, 0x140, 0) & 0xFFFF);
     prim = (POLY_G4*)g_GfxPrimCursor;
     SetPolyG4(prim);
     SetSemiTrans(prim, 1);
@@ -35,8 +34,7 @@ MATCH void func_801F729C(void) {
     prim->b3 = 0;
     prim->b2 = 0;
     GFX_AddPrim(GFX_LAYER_EFFECT_FRONT, sizeof(POLY_G4));
-    SetDrawMode((DR_MODE*)g_GfxPrimCursor, 0, 0, GetTPage(TPAGE_DEPTH_15BIT, TPAGE_ABR_QUARTER, 0x140, 0x140) & 0xFFFF, 0);
-    GFX_AddPrim(GFX_LAYER_EFFECT_FRONT, sizeof(DR_MODE));
+    GFX_ADD_LAYER_DRAW_MODE(GFX_LAYER_EFFECT_FRONT, GetTPage(TPAGE_DEPTH_15BIT, TPAGE_ABR_QUARTER, 0x140, 0x140) & 0xFFFF);
 }
 
 MATCH void func_801F73B8(void) {

@@ -4,8 +4,7 @@ MATCH void func_801F3124(u8* data) {
     POLY_G3* poly;
     u8       half_color;
 
-    SetDrawMode((DR_MODE*)g_GfxPrimCursor, 0, 1, GetTPage(0, 1, 0x380, 0x100), 0);
-    GFX_AddPrim(data[0x1B], sizeof(DR_MODE));
+    GFX_ADD_DITHERED_DRAW_MODE(data[0x1B], GetTPage(0, 1, 0x380, 0x100));
 
     poly = (POLY_G3*)g_GfxPrimCursor;
     SetPolyG3(poly);

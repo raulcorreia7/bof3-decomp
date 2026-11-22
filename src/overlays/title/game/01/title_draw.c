@@ -68,8 +68,7 @@ MATCH void Title_DrawChoicePrompt(void) { /* func_801D11E4 */
     }
 
     if (g_AreaDrawFlags != 0u && LOBU(g_UiPopupRequest) != 0u) {
-        SetDrawMode((DR_MODE*)g_GfxPrimCursor, 0, 0, getTPage(TPAGE_DEPTH_8BIT, TPAGE_ABR_HALF, 832, 256), 0);
-        GFX_AddPrim(GFX_LAYER_EFFECT_FRONT, sizeof(DR_MODE));
+        GFX_ADD_LAYER_DRAW_MODE(GFX_LAYER_EFFECT_FRONT, getTPage(TPAGE_DEPTH_8BIT, TPAGE_ABR_HALF, 832, 256));
         GFX_BuildGlyphPrimitive(192, 4, 10, 2, 0);
     }
 }

@@ -3,8 +3,7 @@
 MATCH void func_801F555C(s16 x, s16 y, u8 row) {
     SPRT* sprite;
 
-    SetDrawMode((DR_MODE*)g_GfxPrimCursor, 0, 0, getTPage(TPAGE_DEPTH_8BIT, TPAGE_ABR_HALF, 768, 256), NULL);
-    GFX_AddPrim(GFX_LAYER_EFFECT_FRONT, sizeof(DR_MODE));
+    GFX_ADD_LAYER_DRAW_MODE(GFX_LAYER_EFFECT_FRONT, getTPage(TPAGE_DEPTH_8BIT, TPAGE_ABR_HALF, 768, 256));
     sprite = GFX_CURSOR(SPRT);
     SetSprt(sprite);
     setWH(sprite, 0x50, 0x20);
