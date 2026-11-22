@@ -2,6 +2,7 @@
 #define SCENARIO_PARTY_H
 
 #include "common/vector.h"
+#include "game/character.h"
 #include "types.h"
 
 #define PARTY_FLAGS             0x80144F59u
@@ -54,23 +55,24 @@ typedef struct FormationOrder {
 
 ASSERT_SIZE(FormationOrder, 0x3);
 
-/* The party's formation, menu flags and its field and battle order rows, indexed by PartyOrder;
- * each order row holds character ids or FORMATION_SLOT_EMPTY. The save block stores the same record at
- * 0x680, and Party_CountOrder reads a row as base + order * PARTY_SLOT_COUNT. */
+/* The party record the save block stores at 0x680: the formation byte, the menu flags and the two
+ * order rows. The runtime order rows are the g_PartyOrders table. */
 typedef struct PartyOrders {
-    /* 0x00 */ u8 formation;  /* front-end formation index; battle/battle/15 reads it as a menu mode */
-    /* 0x01 */ u8 menu_flags; /* bits 3 to 5 mark the first special-master reward of Teepo, Rei and Momo */
-    /* 0x02 */ u8 order[2][PARTY_SLOT_COUNT];
+    /* 0x00 */ u8 formation;
+    /* 0x01 */ u8 menu_flags;
+    /* 0x02 */ u8 order[PARTY_ORDER_COUNT][PARTY_SLOT_COUNT];
 } PartyOrders;
 
 ASSERT_OFFSET(PartyOrders, menu_flags, 0x01);
 ASSERT_OFFSET(PartyOrders, order, 0x02);
 ASSERT_SIZE(PartyOrders, 0x08);
 
+/* The field and battle party order rows, indexed by PartyOrder; each row holds character ids or
+ * FORMATION_SLOT_EMPTY. Party_CountOrder reads a row as base + order * PARTY_SLOT_COUNT. */
 /* D_80144F50 */
-extern u32         g_Zenny;
-/* D_80144F58 */
-extern PartyOrders g_PartyOrders;
+extern u32 g_Zenny;
+/* D_80144F5A */
+extern u8  g_PartyOrders[PARTY_ORDER_COUNT][PARTY_SLOT_COUNT];
 /* Stored character id -> character-record slot (Observed:
  * `sel = map[party_order[slot]]`). */
 
