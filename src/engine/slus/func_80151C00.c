@@ -4,10 +4,7 @@
 #define BOB   (D_801490BA_byte)
 #define BLINK (D_801490BB_byte)
 
-/* Steps the menu cursor bob: the offset BOB walks between -3 and 3 (the direction is
- * g_UiMessageChoiceStep); at each end the BLINK blink counter runs, reloading the
- * cue timer and, at zero, counting g_UiMessageChoiceTimer down.
- */
+/* Steps the menu cursor bob and its blink timer. */
 /* func_80151C00 */
 MATCH void func_80151C00(void) {
     s8  pos;
