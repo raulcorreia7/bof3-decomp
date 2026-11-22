@@ -82,5 +82,6 @@ extern Callback jtbl_801F6C6C[6];
 extern u8       D_801FE694[];
 extern u8       D_801FE6C8[];
 extern u8       D_801FE750;
+extern u8       D_80148660;
 
 #endif
