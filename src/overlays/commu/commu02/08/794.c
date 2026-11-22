@@ -2134,8 +2134,40 @@ MATCH void func_801D81A4(s16 x, s16 y) {
     COMMU_DRAW_CELL_GRID(func_801D875C, 0x22, 7, 4, 6);
 }
 
-INCLUDE_ASM(func_801D830C);
+#ifdef NON_MATCHING
+void func_801D851C(s16 x, s16 y, s32 width, s32 index);
 
+NON_MATCHING void func_801D830C(s32 arg_x, s32 arg_y, s32 kind, s32 mode) {
+    TILE* tile;
+    s32   tile_x;
+    s32   tile_y;
+    s32   row;
+    u8*   style;
+    s16   x = arg_x;
+    s16   y = arg_y;
+
+    UI_WindowDraw(x, y, 0x48, 0x26, 0x80, *(style = &g_WindowStyle));
+    func_801D81A4(x, y);
+    UI_TextDraw(x + 6, y + 4, 0, 5, (mode & BYTE_MASK) ? D_801DB080 : style + 0xE96 + (kind & BYTE_MASK) * 5);
+    tile = (TILE*)g_GfxPrimCursor;
+    SetTile(tile);
+    tile_x   = x + 6;
+    tile_y   = y + 0x12;
+    tile->x0 = tile_x;
+    tile->y0 = tile_y;
+    tile->w  = 0x3C;
+    tile->h  = 0x10;
+    setRGB0(tile, 0, 0, 0);
+    GFX_AddPrim(GFX_LAYER_UI, sizeof(TILE));
+    row = kind & BYTE_MASK;
+    func_801D851C(tile_x, tile_y, g_Fairies[row][5] * 12, 0);
+    func_801D851C(tile_x, y + 0x16, g_Fairies[row][6] * 12, 1);
+    func_801D851C(tile_x, y + 0x1A, g_Fairies[row][7] * 12, 2);
+    func_801D851C(tile_x, y + 0x1E, g_Fairies[row][8] * 12, 3);
+}
+#else
+INCLUDE_ASM(func_801D830C);
+#endif
 INCLUDE_ASM(func_801D851C);
 
 MATCH void func_801D875C(s16 x, s16 y, s32 index) {

@@ -4,246 +4,232 @@
 __asm__(".include \"include/match/macro.inc\"\n");
 #endif
 
-#ifdef NON_MATCHING
-NON_MATCHING void func_801FB788(void) {
-    u8* vars;
-    s32 i;
-    s32 r;
+/* Step script: the cutscene that swaps the party's loaded character, then the area changes that follow it. */
+MATCH void func_801FB788(void) {
+    SpawnedActor* actor;
+    s32           slot;
 
     switch (g_ScenarioState.step_05) {
         case 0:
-            EMI_ArchiveLoad(EMI_SLOT_SCE15EF0);
-            Scene_SetupParty(4);
+            EMI_ArchiveLoad(0x292);
+            func_801BE1B0(0);
             g_ScenarioState.step_05 = 1;
             break;
         case 1:
-            if (g_ScriptVars[0] == 0xB) {
-                if ((u8)Scene_SpawnActor(0x13, -0x32A, g_AreaCameraAngle.vy, 0x80, 0x70, 0)) {
-                    g_ScenarioState.step_05 = 2;
+            if (g_ScriptVars[3] == 0x10) {
+                slot = func_8019601C() & 0xFF;
+                if (slot != 0xFF) {
+                    actor               = &g_SpawnedActors[slot];
+                    actor->header.flags = 1;
+                    actor->pos.x.fixed  = 0x3B8000;
+                    actor->type         = 0x88;
+                    actor->unk_06       = 1;
+                    actor->pos.y.fixed  = 0x220000;
+                    actor->pos.z.fixed  = TO_COORD(0x800);
+                    actor->scene_step   = 0x3F8000;
+                    actor->selection    = 0x220000;
+                    actor->unk_14       = TO_COORD(0x600);
                 }
+                g_ScenarioState.timer_06 = 0x20;
+                g_ScenarioState.step_05  = 2;
             }
             break;
         case 2:
-            if (EMI_IsReady()) {
-                if (g_ScriptVars[0] == 0xC) {
-                    D_801FE748 = Actor_FindFreeSpawned();
-                    if (D_801FE748 != GAME_NONE) {
-                        g_SpawnedActors[D_801FE748].header.flags = 1;
-                        g_SpawnedActors[D_801FE748].type         = 0x9C;
-                        g_ScenarioState.timer_06                 = 0xF0;
-                        g_ScenarioState.step_05                  = 3;
-                    }
-                }
+            if (--g_ScenarioState.timer_06 == 0) {
+                g_ScriptVars[3]         = 0x18;
+                g_ScenarioState.step_05 = 3;
             }
             break;
         case 3:
-            if (--g_ScenarioState.timer_06 == 0) {
-                g_AreaSceneMode         = 2;
+            if (g_ScriptVars[3] == 0) {
+                func_801BE1B0(7);
                 g_ScenarioState.step_05 = 4;
             }
             break;
         case 4:
-            if (SYS_TestFlag(g_SceneEventFlags, 0x81)) {
-                if ((u8)Scene_SpawnActor(0x13, -0x2AA, g_AreaCameraAngle.vy, 0x200, 0x3C, 0)) {
-                    g_ScenarioState.step_05 = 5;
+            if (EMI_IsReady() && g_ScriptVars[0] == 0xF) {
+                D_801FE748 = func_8019601C();
+                if (D_801FE748 != 0xFF) {
+                    g_SpawnedActors[D_801FE748].header.flags = 1;
+                    g_SpawnedActors[D_801FE748].type         = 0xA0;
                 }
+                SND_StartDecrescendo(0, 0, 0x64, 0x10);
+                g_ScenarioState.step_05 = 5;
             }
             break;
         case 5:
-            if (!(g_SpawnedActors[D_801FE748].header.flags & 1)) {
-                i = 5;
-                do {
-                    r = Scene_SetupParty((u8)i);
-                    i++;
-                    if ((u8)r == 0) {
-                        break;
-                    }
-                } while ((u8)i < 9);
-                g_ScenarioState.step_05 = 6;
+            if (g_ScriptVars[0] == 0x11) {
+                D_801FE748 = func_8019601C();
+                if (D_801FE748 != 0xFF) {
+                    g_SpawnedActors[D_801FE748].header.flags = 1;
+                    g_SpawnedActors[D_801FE748].type         = 0x9F;
+                    g_ScenarioState.step_05                  = 6;
+                }
+                SND_SeqStop(0, 0);
             }
             break;
         case 6:
-            if (g_ScriptVars[0] == 0xE) {
-                func_801FDC6C(0x2E8000, 0x6D0000, 0, 0x13, 0);
-                g_ScenarioState.timer_06 = 0xA;
+            if (g_ScriptVars[0] == 0x12) {
+                g_ScenarioState.timer_06 = 0x1E;
                 g_ScenarioState.step_05  = 7;
             }
             break;
         case 7:
             if (--g_ScenarioState.timer_06 == 0) {
+                SND_BGMRequest(0xA2);
                 g_ScenarioState.step_05 = 8;
                 g_ScriptVars[0]++;
             }
             break;
         case 8:
-            if (g_ScriptVars[0] == 0x13) {
-                g_ScenarioState.timer_06 = 0xA;
-                g_ScenarioState.step_05  = 9;
+            if (g_ScriptVars[0] == 0x14 && EMI_IsReady()) {
+                func_801C601C(1);
+                g_ScenarioState.step_05 = 9;
             }
             break;
         case 9:
-            if (--g_ScenarioState.timer_06 == 0) {
-                g_ScenarioState.state_04 = 0;
-                g_ScenarioState.step_05  = 0;
-                g_ScriptVars[0]++;
-            }
-            break;
-        case 15:
-            Game_ClearScriptActive();
-            g_AreaSceneMode = 2;
-            SYS_SetFlag(g_SceneFlags, 1);
-            Scene_SetupParty(9);
-            g_ScenarioState.state_04 = 0;
-            g_ScenarioState.step_05  = 0;
-            break;
-        case 20:
-            func_801FDC6C(0x440000, 0x20000, 4, 0xFF, 0);
-            g_ScriptVars[0] = 1;
-            Scene_SetupParty(1);
-            g_ScenarioState.step_05 = 0x15;
-            break;
-        case 21:
-            if (g_ScriptVars[0] == 3) {
-                UI_ModeSet(0);
-                g_ScenarioState.step_05 = 0x16;
-            }
-            break;
-        case 22:
-            if (!WINDOW_EFFECT_BUSY()) {
-                g_AreaDrawFlags = 0;
-                SCENARIO_MESSAGE_WAIT(MSG_SCENA15_003, 0x17);
-            }
-            break;
-        case 23:
-            if (g_GameStateIndex != GAME_REQUEST_MESSAGE) {
-                g_ScenarioState.step_05 = 0x18;
-            }
-            break;
-        case 24:
-            SYS_SetFlag(g_SceneFlags, 2);
-            func_8019FA28(0x58, 0x3E0000, 0x210000, 0x82);
-            g_GameEntryMode         = 0xFF;
-            D_80143F1D              = 0xFF;
-            g_GamePrevSelection     = 0x8E;
-            g_ScenarioState.step_05 = 0x19;
-            break;
-        case 25:
-            if (!WINDOW_EFFECT_BUSY()) {
-                g_AreaDrawFlags = 0x1F;
-                UI_ModeSet(1);
-                g_AreaCameraOffsetZ      = 0x5DC;
-                g_AreaCameraRefreshCount = 2;
-                g_ScenarioState.step_05  = 0x1A;
-            }
-            break;
-        case 26:
-            if (g_ScriptVars[0] == 5) {
-                func_8019FA28(0xAE, 0x440000, 0x38000, 0x82);
-                g_GameEntryMode         = 0;
-                g_ScenarioState.step_05 = 0x1B;
-            }
-            break;
-        case 27:
-            vars = g_ScriptVars;
-            if (*vars == 6) {
-                SYS_SetFlag(g_SceneFlags, 3);
-                *vars                    = 0;
-                g_ScenarioState.state_04 = 0;
-                g_ScenarioState.step_05  = 0;
-            }
-            break;
-        case 30:
-            func_801FDC6C(0x520000, 0x2F0000, 5, 2, 0);
-            Scene_SetupParty(3);
-            g_ScenarioState.step_05 = 0x1F;
-            break;
-        case 31:
-            vars = g_ScriptVars;
-            if (*vars == 2) {
-                SYS_SetFlag(g_SceneFlags, 4);
-                *vars                    = 0;
-                g_ScenarioState.state_04 = 0;
-                g_ScenarioState.step_05  = 0;
-            }
-            break;
-        case 40:
-            g_ScriptVars[0] = 0xA;
-            Scene_SetupParty(4);
-            g_ScenarioState.step_05 = 0x29;
-            break;
-        case 41:
-            if (g_ScriptVars[0] == 0xC) {
-                SYS_SetFlag(g_SceneFlags, 5);
-                func_8019FA28(0x3A, 0x140000, 0x10000, 0x81);
-                g_ScenarioState.step_05 = 0x2A;
-                g_GamePrevSelection     = g_SndBGMId;
-            }
-            break;
-        case 42:
-            if (g_ScriptVars[0] == 0xE) {
-                func_8019FA28(0xAE, 0x250000, 0x3A0000, 0x85);
-                g_ScenarioState.step_05 = 0x2B;
-            }
-            break;
-        case 43:
-            if (g_ScriptVars[0] == 0) {
-                Game_ClearScriptActive();
-                SYS_SetFlag(g_SceneFlags, 6);
-                g_ScenarioState.state_04 = 0;
-                g_ScenarioState.step_05  = 0;
-            }
-            break;
-        case 50:
-            SYS_SetFlag(g_SceneFlags, 7);
-            func_8019FA28(2, 0x1A0000, 0x170000, 0x87);
-            D_80143F1D              = 0xFF;
-            g_GamePrevSelection     = 0x8E;
-            g_ScenarioState.step_05 = 0x33;
-            break;
-        case 51:
-            if (g_ScriptVars[0] == 1) {
-                g_AreaDrawFlags = 0x1F;
-                UI_ModeSet(1);
-                g_ScenarioState.step_05 = 0x34;
-            }
-            break;
-        case 52:
-            if (g_ScriptVars[0] == 2) {
-                Game_ClearScriptActive();
-                SYS_SetFlag(g_SceneFlags, 8);
-                func_8019FA28(0xAE, 0xA0000, 0x78000, 0x86);
-                g_ScenarioState.state_04 = 0;
-                g_ScenarioState.step_05  = 0;
+            if (g_ScriptVars[0] == 0x15) {
+                g_ScenarioState.step_05 = 10;
             }
             break;
         case 10:
+            if (g_ScriptVars[0] == 0x16) {
+                u8* loaded;
+
+                loaded     = &g_EmiLoadedCharacterIndex;
+                D_801FE74C = *loaded;
+                EMI_PartyLoad(7, 4, 2, 0);
+                if (D_801FE74C != *loaded) {
+                    D_801FE74C = *loaded;
+                    *loaded    = 0xFF;
+                } else {
+                    D_801FE74C = 0xFF;
+                }
+                g_ScenarioState.timer_06 = 0x3C;
+                g_ScenarioState.step_05  = 11;
+            }
+            break;
         case 11:
+            if (g_ScenarioState.timer_06 == 0) {
+                if (!EMI_IsReady()) {
+                    break;
+                }
+                if (D_801FE74C != 0xFF) {
+                    u8* loaded = &g_EmiLoadedCharacterIndex;
+
+                    *loaded = D_801FE74C;
+                    func_801C1DF0(0);
+                    *loaded = 0xFF;
+                    EMI_PartyLoadCode(7, 4, 2);
+                    *loaded = D_801FE74C;
+                } else {
+                    func_801C1DF0(0);
+                }
+                func_801BE1B0(8);
+                func_801FC100();
+                g_ScriptVars[0]++;
+                SND_BGMPlay(0xA2, 0x64, 8);
+                g_SpawnedActors[D_801FE748].header.mode++;
+                g_ScenarioState.step_05 = 12;
+            } else {
+                g_ScenarioState.timer_06--;
+            }
+            break;
         case 12:
+            if (g_ScriptVars[0] == 0x2B && EMI_IsReady()) {
+                SYS_SetFlag(g_SceneFlags, 9);
+                func_8019FA28(0xC4, 0x120000, 0x140000, 0x81);
+                g_GamePrevSelection     = 0x95;
+                g_ScenarioState.step_05 = 13;
+            }
+            break;
         case 13:
+            if (g_ScriptVars[0] == 1) {
+                func_8019FA28(0x2D, 0xF8000, 0x358000, 0x87);
+                g_GameRequestType       = 1;
+                g_GamePrevSelection     = 0xA2;
+                g_ScenarioState.step_05 = 14;
+            }
+            break;
         case 14:
+            if (g_ScriptVars[0] == 2) {
+                func_8019FA28(0xAE, 0x320000, 0x270000, 0x89);
+                g_GamePrevSelection     = 0xA2;
+                g_GameEntryMode         = 0;
+                g_ScenarioState.step_05 = 15;
+            }
+            break;
+        case 15:
+            if (g_ScriptVars[0] == 0xD) {
+                SYS_SetFlag(g_SceneFlags, 0xA);
+                func_8019FA28(0x98, 0x180000, 0x270000, 0x80);
+                g_GameRequestType       = 1;
+                g_GamePrevSelection     = 0xA2;
+                g_ScenarioState.step_05 = 16;
+            }
+            break;
         case 16:
+            if (g_ScriptVars[0] == 0) {
+                SYS_SetFlag(g_SceneFlags, 0xA);
+                func_8019FA28(0xAE, 0x2F8000, 0x278000, 0x8A);
+                g_GameRequestType       = 0xFF;
+                g_GamePrevSelection     = 0xFF;
+                g_GameEntryMode         = 0;
+                g_ScenarioState.step_05 = 17;
+            }
+            break;
         case 17:
+            if (g_UiWindowEffectBusy == 0) {
+                SCENARIO_MESSAGE_WAIT(MSG_SCENA15_030, 18);
+            }
+            break;
         case 18:
+            if (g_GameStateIndex != GAME_REQUEST_MESSAGE && EMI_IsReady()) {
+                SND_BGMPlay(0xA2, 0x64, 8);
+                g_AreaDrawFlags = 0x1F;
+                UI_ModeSet(1);
+                g_ScriptVars[0]         = 1;
+                g_ScenarioState.step_05 = 19;
+            }
+            break;
         case 19:
-        case 28:
-        case 29:
-        case 32:
-        case 33:
-        case 34:
-        case 35:
-        case 36:
-        case 37:
-        case 38:
-        case 39:
-        case 44:
-        case 45:
-        case 46:
-        case 47:
-        case 48:
-        case 49:
+            if (g_ScriptVars[0] == 0x14) {
+                g_ScriptVars[0]++;
+                g_ScenarioState.timer_06 = 0x5A;
+                g_ScenarioState.step_05  = 20;
+            }
+            break;
+        case 20:
+            if (g_ScriptVars[0] == 0x26 && --g_ScenarioState.timer_06 == 0) {
+                Scene_SpawnActor(0x13, -0x2AA, g_AreaCameraAngle.vy, 0x5E, 0x40, 0);
+                g_ScenarioState.step_05 = 21;
+            }
+            break;
+        case 21:
+            if (g_ScriptVars[0] == 0x2B) {
+                Scene_SpawnActor(0x13, -0x2AA, g_AreaCameraAngle.vy, 0x200, 0x28, 0);
+                g_ScenarioState.step_05 = 22;
+            }
+            break;
+        case 22:
+            if (g_ScriptVars[0] == 0x3C) {
+                SND_BGMRequest(0x79);
+                g_ScenarioState.step_05 = 23;
+            }
+            break;
+        case 23:
+            if (g_ScriptVars[0] == 0x3F && EMI_IsReady()) {
+                g_ScenarioState.step_05 = 24;
+                g_ScriptVars[0]++;
+            }
+            break;
+        case 24:
+            if (g_ScriptVars[0] == 0) {
+                Game_ClearScriptActive();
+                SYS_SetFlag(g_SceneFlags, 0xB);
+                g_ScenarioState.state_04 = 0;
+                g_ScenarioState.step_05  = 0;
+            }
             break;
     }
 }
-#else
-INCLUDE_ASM(func_801FB788);
-#endif
