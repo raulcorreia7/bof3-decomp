@@ -15,7 +15,7 @@ MATCH void func_801F924C(void) {
         g_AreaCameraX = 0x63FF;
         scroll        = &g_AreaScrollTargetX;
         party         = &g_PartyX;
-        focus         = &D_80147A8C;
+        focus         = &g_PartyActors[0].pos.x.fixed;
         g_AreaTileOriginX += 20;
         *scroll += TO_COORD(20);
         *party += TO_COORD(20);

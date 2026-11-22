@@ -23,13 +23,10 @@ extern Magic010Steps D_801EEC04;
 #define EFFECT_TICK_INCREMENT 1
 #define EFFECT_TICK_LIMIT     0x10
 
-/* The four field actor rows that follow g_Actors. */
-/* D_80147A58 */
-extern Actor g_PartyActors[4];
 /* The target cell offset of each facing: a signed x and y byte at facing * 2. */
-extern s8    D_801F0C94[8];
+extern s8 D_801F0C94[8];
 /* Per facing pair (D_801F0CBC >> 1): the divisor of the rise at each step from the target cell. */
-extern u8    D_801F0C9C[2][15];
+extern u8 D_801F0C9C[2][15];
 
 /* The caster's facing, the flag func_801EEC80 raises for encounters 0x1C, 0x23, 0x2F and 0x34, and the
  * target cell the effect starts from. */

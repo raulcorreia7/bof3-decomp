@@ -14,8 +14,6 @@ extern Actor D_80143F48;
 extern u8    D_80143FBC;
 /* The four party work rows, and the shadow record each party row owns: 0x10
  * bytes, its flag byte first. */
-/* D_80147A58 */
-extern Actor g_PartyActors[];
 
 /* The scratchpad work pointer; the dispatch entry bytes select a handler. */
 
@@ -32,15 +30,6 @@ extern Actor g_PartyActors[];
 /* The shared camera-position words the view step copies. */
 /* The camera seed halfword the request step stores. */
 extern u8   D_80147AAC[];
-/* The scaled grid position and size the step checks compare against. */
-extern u8   D_80147C29;
-extern s32  D_80147C2C;
-extern s32  D_80147C30;
-extern s32  D_80147C54;
-extern s32  D_80147C58;
-extern s32  D_80147C5C;
-extern u8   D_80147C90;
-extern u8   D_80147C97;
 extern char D_801F2C04[];
 /* D_80149340 */
 

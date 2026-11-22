@@ -34,7 +34,7 @@ MATCH void func_801F3740(void) {
             break;
 
         case 1:
-            if (D_80147AF9 != 0) {
+            if (g_PartyActors[1].timer != 0) {
                 break;
             }
             func_801F2DF4();
@@ -70,7 +70,7 @@ MATCH void func_801F3740(void) {
         } break;
 
         case 11:
-            if (D_80147A61 == 0) {
+            if (g_PartyActors[0].timer == 0) {
                 func_801F2DF4();
                 SND_SEPlay(EMI_SE_ID(SND_BANK_AREA, 2));
                 g_SceneEventStep = 20;

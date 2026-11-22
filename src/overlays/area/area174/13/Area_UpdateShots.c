@@ -23,7 +23,7 @@ MATCH u8 Area_UpdateShots(void) {
             shot->angle = func_801F3320(&work->pos.x.fixed, &work->vx);
             life        = shot->timer - 1;
             shot->timer = life;
-            if (life == 0 || shot->pos.x.fixed >= D_80147A8C - TO_COORD(1)) {
+            if (life == 0 || shot->pos.x.fixed >= g_PartyActors[0].pos.x.fixed - TO_COORD(1)) {
                 shot->active = 0;
             }
             func_801F2FEC(&shot->pos.x.fixed, shot->unk_08, shot->unk_0A, shot->angle, 128, 0);

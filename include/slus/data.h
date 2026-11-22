@@ -111,13 +111,10 @@ extern s16           D_80146916;
 /* D_80147A8C */
 extern Coord3        g_AreaFocus;
 extern s32           D_80147A8C;
-extern s32           D_80147A94;
 /* Per-slot effect work arrays at a 0x30-byte stride: the accumulators at
  * D_801FD030, the seeded deltas at D_801FCA90 and the per-cell lifetimes at
  * D_801FD5D0.
  */
-extern u8*           D_80147AA8;
-extern s32           D_80147AC4;
 /* D_80148208 */
 extern struct Actor* g_ScriptWorkRecord;
 extern s16           D_80148334;
