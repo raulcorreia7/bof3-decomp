@@ -22,5 +22,5 @@ MATCH void Area_RaiseHudBanner(void) {
 force:
     TASK(Actor)->unk_03 = 3;
 done:
-    Area_DrawHudBanner(92, TASK(Actor)->screen_y);
+    Area_DrawHudBanner(92, (TASK(Actor))->screen_y);
 }

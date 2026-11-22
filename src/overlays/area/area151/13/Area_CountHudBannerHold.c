@@ -26,5 +26,5 @@ MATCH void Area_CountHudBannerHold(void) {
 bump:
     TASK(Actor)->unk_03++;
 done:
-    Area_DrawHudBanner(92, TASK(Actor)->screen_y);
+    Area_DrawHudBanner(92, (TASK(Actor))->screen_y);
 }
