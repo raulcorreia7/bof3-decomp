@@ -571,7 +571,7 @@ NON_MATCHING void func_801F85F0(s16 x, s16 y, s16 radius) {
         setRGB1(prim, 0x60, 0x60, 0x60);
         setRGB2(prim, 0x40, 0x40, 0x80);
         setRGB3(prim, 0x60, 0x60, 0x60);
-        prim->tpage = GetTPage(TPAGE_DEPTH_15BIT, TPAGE_ABR_HALF, 0x340, 0x100);
+        setTPage(prim, TPAGE_DEPTH_15BIT, TPAGE_ABR_HALF, 0x340, 0x100);
         GFX_AddPrim(GFX_LAYER_EFFECT_FRONT, sizeof(POLY_GT4));
 
         prim = (POLY_GT4*)g_GfxPrimCursor;
@@ -594,7 +594,7 @@ NON_MATCHING void func_801F85F0(s16 x, s16 y, s16 radius) {
         setRGB1(prim, 0x80, 0x40, 0x40);
         setRGB2(prim, 0x60, 0x60, 0x60);
         setRGB3(prim, 0x80, 0x40, 0x40);
-        prim->tpage = GetTPage(TPAGE_DEPTH_15BIT, TPAGE_ABR_HALF, 0x340, 0x100);
+        setTPage(prim, TPAGE_DEPTH_15BIT, TPAGE_ABR_HALF, 0x340, 0x100);
         GFX_AddPrim(GFX_LAYER_EFFECT_FRONT, sizeof(POLY_GT4));
     } while (count < 16);
 }
@@ -1013,10 +1013,10 @@ NON_MATCHING void func_801FA3E4(void) {
             /* FAKE: the volatile Y assignment forces the retail reload; plain split stores score 423 rows. */
             Area_ScrollAdvance(Area_HeightSample(g_AreaScrollTargetX = TO_COORD_HALF(81), FAKE_VOLATILE(s32, g_AreaScrollTargetY) = TO_COORD_HALF(30)));
             Area_InitMapRenderer();
-            D_801468FF               = 13;
-            D_80146997               = 14;
+            g_Actors[0].unk_77       = 13;
+            g_Actors[1].unk_77       = 14;
             D_80146889[0]            = 4;
-            D_80146921               = 4;
+            g_Actors[1].header.mode  = 4;
             g_ScenarioState.state_04 = 4;
             g_ScenarioState.step     = 10;
         }

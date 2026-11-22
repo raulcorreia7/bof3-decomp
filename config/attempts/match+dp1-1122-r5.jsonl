@@ -1,0 +1,2 @@
+{"function": "emi/world03/area135/14@0x801F5D98", "tried": "actor local, and a FAKE_BARRIER between the x load and the gravity store: the local leaves the swap, the barrier moves 80 rows", "first_diff": "0x801F5DFC lw v1,52(v0) against lw v1,56(v0) (x and y loads swapped)", "score": "8 rows"}
+{"function": "emi/world01/area052/13@0x801F3A14", "tried": "re-read the prologue: retail computes both s16 shifts and the argument moves before saving ra/s2, the draft saves the frame first", "first_diff": "0x801F3A28 sra s0 against sw ra,28(sp)", "score": "11 rows, prologue order"}

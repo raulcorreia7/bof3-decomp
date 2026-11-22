@@ -11,21 +11,21 @@ NON_MATCHING void func_801DA9DC(void) {
     u32  capped;
     u32* follow_ptr;
 
-    if ((TASK(FishingState)->cue_index != 0) && (D_80144199 == 3)) {
+    if ((TASK(FishingState)->cue_index != 0) && (g_SpawnedActors[4].header.mode == 3)) {
         TASK(FishingState)->cue_index = 0;
         func_801DDE94(1);
     }
-    if ((g_PadStates[0].pressed & PADRup) && (D_80144199 == 0)) {
+    if ((g_PadStates[0].pressed & PADRup) && (g_SpawnedActors[4].header.mode == 0)) {
         SND_SEPlay(EMI_SE_ID(SND_BANK_AREA, 3));
         TASK(FishingState)->sub_index  = (u8)(TASK(FishingState)->sub_index + 1);
-        D_801440B1                     = 0;
+        g_SpawnedActors[2].header.mode = 0;
         g_SpawnedActors[0].header.mode = 0;
-        D_80144125                     = 7;
+        g_SpawnedActors[3].header.mode = 7;
         return;
     }
     if (g_SpawnedActors[0].pos.y.fixed >= FISHING_CATCH_HEIGHT) {
         SND_SEPlay(EMI_SE_ID(SND_BANK_AREA, 3));
-        D_801440B1                     = 0;
+        g_SpawnedActors[2].header.mode = 0;
         g_SpawnedActors[0].header.mode = 0;
         TASK(FishingState)->mode_index = 1;
         TASK(FishingState)->sub_index  = 0U;

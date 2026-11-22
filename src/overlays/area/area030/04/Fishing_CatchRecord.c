@@ -8,7 +8,7 @@ MATCH void Fishing_CatchRecord(void) {
     u8            value;
     u16           limit;
 
-    if (D_80144199 == 4) {
+    if (g_SpawnedActors[4].header.mode == 4) {
         value = g_Actors[g_FishingHookedFish].unk_06;
         limit = g_Actors[g_FishingHookedFish].roll_90;
         if (g_FishingBestCatch[value] < limit) {

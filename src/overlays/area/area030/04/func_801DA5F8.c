@@ -5,7 +5,7 @@
  * selected by the non-volatile scratchpad pointer cell at 0x1F800044. */
 
 MATCH void func_801DA5F8(void) {
-    u8* state_byte = &D_801440B1;
+    u8* state_byte = &g_SpawnedActors[2].header.mode;
 
     (*state_byte)++;
     Script_Request(1);

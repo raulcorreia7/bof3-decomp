@@ -262,8 +262,7 @@ MATCH void func_801D1544(void) {
 }
 
 #ifdef NON_MATCHING
-NON_MATCHING void Scene_DrawBands(s32 band_height, u16 radius, u16 jitter_mask) {
-    s16              new_var;
+NON_MATCHING void Scene_DrawBands(s16 band_height, u16 radius, u16 jitter_mask) {
     long             depth;
     long             flag;
     POLY_G4*         primitive;
@@ -297,10 +296,9 @@ NON_MATCHING void Scene_DrawBands(s32 band_height, u16 radius, u16 jitter_mask) 
         work    = g_Task;
         cell[0] = ((work->ticker + i) & 0xF) << 8;
         if RANDOM_MASK (1) {
-            new_var  = (s16)jitter_mask;
-            cell[-1] = radius_base + (RANDOM_MASK(new_var));
+            cell[-1] = radius_base + (RANDOM_MASK(jitter_mask));
         } else {
-            cell[-1] = radius_base - (RANDOM_MASK(new_var));
+            cell[-1] = radius_base - (RANDOM_MASK(jitter_mask));
         }
         prev[0].vx = 0;
         prev[1].vx = 0;
@@ -343,10 +341,10 @@ NON_MATCHING void Scene_DrawBands(s32 band_height, u16 radius, u16 jitter_mask) 
             }
             RotTransPers4(quad, quad + 1, prev, prev + 1, (long*)&primitive->x0, (long*)&primitive->x1, (long*)&primitive->x2, (long*)&primitive->x3, &depth, &flag);
             GFX_AddPrim(GFX_LAYER_EFFECT_FRONT, sizeof(POLY_G4));
-            g_ScratchPadVectors[0].vy += ((s16)band_height) * 2;
-            g_ScratchPadVectors[1].vy += ((s16)band_height) * 2;
-            g_ScratchPadVectors[2].vy += ((s16)band_height) * 2;
-            g_ScratchPadVectors[3].vy += ((s16)band_height) * 2;
+            g_ScratchPadVectors[0].vy += band_height * 2;
+            g_ScratchPadVectors[1].vy += band_height * 2;
+            g_ScratchPadVectors[2].vy += band_height * 2;
+            g_ScratchPadVectors[3].vy += band_height * 2;
             primitive = GFX_BeginPolyG4(1);
             setRGB0(primitive, shade, ramp[0], 1);
             setRGB1(primitive, ramp[0], ramp[0], ramp[0]);
@@ -375,7 +373,7 @@ NON_MATCHING void Scene_DrawBands(s32 band_height, u16 radius, u16 jitter_mask) 
             }
             RotTransPers4(quad, quad + 1, prev, prev + 1, (long*)&primitive->x0, (long*)&primitive->x1, (long*)&primitive->x2, (long*)&primitive->x3, &depth, &flag);
             GFX_AddPrim(GFX_LAYER_EFFECT_FRONT, sizeof(POLY_G4));
-            g_ScratchPadVectors[0].vy -= ((s16)band_height) * 2;
+            g_ScratchPadVectors[0].vy -= band_height * 2;
         }
         i++;
     } while (i < 18);

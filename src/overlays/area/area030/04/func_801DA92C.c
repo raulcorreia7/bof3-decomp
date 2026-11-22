@@ -13,10 +13,10 @@ MATCH void func_801DA92C(void) {
     i     = 3;
     flags = &D_801E31E3;
 
-    counter    = &D_8014403E;
-    D_8014419E = 1;
+    counter                   = &g_SpawnedActors[1].header.step;
+    g_SpawnedActors[4].unk_06 = 1;
     (*counter)++;
-    D_80144199++;
+    g_SpawnedActors[4].header.mode++;
     TASK(FishingState)->cue_index = 1;
 
     do {
