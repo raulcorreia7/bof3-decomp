@@ -15,6 +15,7 @@ MATCH s16 Area_HeightSample(s32 x, s32 y) {
     s32  stride;
     s8*  heights_below;
     u32* cell_below;
+    u32* cell_next;
     u32  corners;
     s32  width;
     s32  whole_x;
@@ -79,7 +80,8 @@ MATCH s16 Area_HeightSample(s32 x, s32 y) {
     corner[1]   = (cell[1] >> 16) + heights[1] * g_AreaHeightOffsetEnabled;
     next_offset = stride + 4;
     next        = width + 1;
-    corner[2]   = *(u32*)((u8*)cell + next_offset) + heights[next] * g_AreaHeightOffsetEnabled;
+    cell_next   = (u32*)((u8*)cell + next_offset);
+    corner[2]   = *cell_next + heights[next] * g_AreaHeightOffsetEnabled;
     corner[3]   = (*cell_below >> 8) + *heights_below * g_AreaHeightOffsetEnabled;
     if ((corner[0] >= corner[1]) & (corner[0] >= corner[2]) & (corner[0] >= corner[3])) {
         return corner[0] << 5;
