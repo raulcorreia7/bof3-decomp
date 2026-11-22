@@ -31,32 +31,32 @@ NON_MATCHING void func_801F49A0(s32 phase) {
         SetPolyFT4(prim);
         SetShadeTex(prim, 0);
 
-        x                       = D_1F800034_U16[0] + cell_x * 128 - 0x40;
-        y                       = D_1F800034_U16[1] + cell_y * 128 - 0x40;
+        x                         = D_1F800034_U16[0] + cell_x * 128 - 0x40;
+        y                         = D_1F800034_U16[1] + cell_y * 128 - 0x40;
         g_ScratchPadVectors[0].vx = x;
         g_ScratchPadVectors[0].vy = y;
-        height                  = Area_HeightSample((x + 0x4000) << 9, (y + 0x4000) << 9);
+        height                    = Area_HeightSample((x + 0x4000) << 9, (y + 0x4000) << 9);
         g_ScratchPadVectors[0].vz = (-height / 2) - (D_801F5994[i].shade[0] * TASK(Actor)->unk_32) / 128;
 
-        x                       = D_1F800034_U16[0] + cell_x * 128 + 0x40;
-        y                       = D_1F800034_U16[1] + cell_y * 128 - 0x40;
+        x                         = D_1F800034_U16[0] + cell_x * 128 + 0x40;
+        y                         = D_1F800034_U16[1] + cell_y * 128 - 0x40;
         g_ScratchPadVectors[1].vx = x;
         g_ScratchPadVectors[1].vy = y;
-        height                  = Area_HeightSample((x + 0x4000) << 9, (y + 0x4000) << 9);
+        height                    = Area_HeightSample((x + 0x4000) << 9, (y + 0x4000) << 9);
         g_ScratchPadVectors[1].vz = (-height / 2) - (D_801F5994[i].shade[1] * TASK(Actor)->unk_32) / 128;
 
-        x                       = D_1F800034_U16[0] + cell_x * 128 - 0x40;
-        y                       = D_1F800034_U16[1] + cell_y * 128 + 0x40;
+        x                         = D_1F800034_U16[0] + cell_x * 128 - 0x40;
+        y                         = D_1F800034_U16[1] + cell_y * 128 + 0x40;
         g_ScratchPadVectors[2].vx = x;
         g_ScratchPadVectors[2].vy = y;
-        height                  = Area_HeightSample((x + 0x4000) << 9, (y + 0x4000) << 9);
+        height                    = Area_HeightSample((x + 0x4000) << 9, (y + 0x4000) << 9);
         g_ScratchPadVectors[2].vz = (-height / 2) - (D_801F5994[i].shade[2] * TASK(Actor)->unk_32) / 128;
 
-        x                       = D_1F800034_U16[0] + cell_x * 128 + 0x40;
-        y                       = D_1F800034_U16[1] + cell_y * 128 + 0x40;
+        x                         = D_1F800034_U16[0] + cell_x * 128 + 0x40;
+        y                         = D_1F800034_U16[1] + cell_y * 128 + 0x40;
         g_ScratchPadVectors[3].vx = x;
         g_ScratchPadVectors[3].vy = y;
-        height                  = Area_HeightSample((x + 0x4000) << 9, (y + 0x4000) << 9);
+        height                    = Area_HeightSample((x + 0x4000) << 9, (y + 0x4000) << 9);
         g_ScratchPadVectors[3].vz = (-height / 2) - (D_801F5994[i].shade[3] * TASK(Actor)->unk_32) / 128;
 
         if (D_801F5994[i].page != 0) {

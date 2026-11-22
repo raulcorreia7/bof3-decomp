@@ -16,12 +16,12 @@ NON_MATCHING void func_801F4258(s32 mode) {
     s32      color;
     s32      i;
 
-    cell_x = D_801F4E78[mode] << 16;
-    cell_y = D_801F4E7C[mode] << 16;
+    cell_x                    = D_801F4E78[mode] << 16;
+    cell_y                    = D_801F4E7C[mode] << 16;
     g_ScratchPadVectors[0].vx = (D_801F4E78[mode] - 0x80) << 7;
     g_ScratchPadVectors[0].vy = (D_801F4E7C[mode] - 0x80) << 7;
     g_ScratchPadVectors[0].vz = -(D_801F4E80[mode] << 3);
-    depth = RotTransPers(g_ScratchPadVectors, (long*)D_1F800034, &p, &flag);
+    depth                     = RotTransPers(g_ScratchPadVectors, (long*)D_1F800034, &p, &flag);
     if (((u32)(((u16*)D_1F800034)[0] + 0x3C) & HALF_MASK) >= 0x1B9) {
         return;
     }
@@ -33,20 +33,20 @@ NON_MATCHING void func_801F4258(s32 mode) {
     }
     SetDrawMode((DR_MODE*)g_GfxPrimCursor, 0, 1, getTPage(TPAGE_DEPTH_8BIT, TPAGE_ABR_ADD, 320, 256), 0);
     Area_CellAddPrim(cell_x, cell_y, 1, sizeof(DR_MODE));
-    screen = D_1F800034;
+    screen                    = D_1F800034;
     g_ScratchPadVectors[2].vx = screen[0];
     g_ScratchPadVectors[0].vx = screen[0];
-    offset = 1125 * D_801F4E84[mode] / depth;
+    offset                    = 1125 * D_801F4E84[mode] / depth;
     g_ScratchPadVectors[1].vx = screen[0] + offset;
-    offset = 1125 * D_801F4E84[mode] / depth;
+    offset                    = 1125 * D_801F4E84[mode] / depth;
     g_ScratchPadVectors[3].vx = screen[0] - offset;
     g_ScratchPadVectors[3].vy = screen[1];
     g_ScratchPadVectors[1].vy = screen[1];
-    radius = D_801F4E84[mode] + ABS((D_801F4E84[mode] * rsin(g_AreaCameraAngle.vx)) >> 13);
-    offset = 1125 * radius / depth;
+    radius                    = D_801F4E84[mode] + ABS((D_801F4E84[mode] * rsin(g_AreaCameraAngle.vx)) >> 13);
+    offset                    = 1125 * radius / depth;
     g_ScratchPadVectors[2].vy = screen[1] + offset;
-    radius = D_801F4E84[mode] + ABS((D_801F4E84[mode] * rsin(g_AreaCameraAngle.vx)) >> 13);
-    offset = 1125 * radius / depth;
+    radius                    = D_801F4E84[mode] + ABS((D_801F4E84[mode] * rsin(g_AreaCameraAngle.vx)) >> 13);
+    offset                    = 1125 * radius / depth;
     g_ScratchPadVectors[0].vy = screen[1] - offset;
     for (i = 0; i < 4; i++) {
         prim = (POLY_G3*)g_GfxPrimCursor;
@@ -58,7 +58,7 @@ NON_MATCHING void func_801F4258(s32 mode) {
         prim->y1 = g_ScratchPadVectors[i].vy;
         prim->x2 = g_ScratchPadVectors[(i + 1) & 3].vx;
         prim->y2 = g_ScratchPadVectors[(i + 1) & 3].vy;
-        color = ((D_8014686B << 4) + 0x10) * mode;
+        color    = ((D_8014686B << 4) + 0x10) * mode;
         prim->r0 = color | (mode == 0 ? 0x50 : 0);
         prim->g0 = color;
         prim->b0 = (mode == 0 ? 0x50 : 0);

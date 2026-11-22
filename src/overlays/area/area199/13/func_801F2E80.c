@@ -4,9 +4,9 @@
 /* Draws the area backdrop: the two opening panels, then the cell sprites of the payload table,
  * scrolled by y_offset. */
 NON_MATCHING void func_801F2E80(s32 y_offset) {
-    RECT*               window;
-    POLY_FT4*           prim;
-    Area199CellSprite*  sprite;
+    RECT*              window;
+    POLY_FT4*          prim;
+    Area199CellSprite* sprite;
 
     if ((g_AreaDrawFlags & AREA_DRAW_CELL_LAYERS) == 0) {
         return;
@@ -49,10 +49,9 @@ NON_MATCHING void func_801F2E80(s32 y_offset) {
         prim = (POLY_FT4*)g_GfxPrimCursor;
         SetPolyFT4(prim);
         SetShadeTex(prim, 1);
-        setXY4(prim, sprite->x, sprite->y + y_offset, sprite->x + sprite->w, sprite->y + y_offset, sprite->x, sprite->y + sprite->h + y_offset,
-               sprite->x + sprite->w, sprite->y + sprite->h + y_offset);
-        setUV4(prim, sprite->u, sprite->v, sprite->u + sprite->u_size, sprite->v, sprite->u, sprite->v + sprite->v_size, sprite->u + sprite->u_size,
-               sprite->v + sprite->v_size);
+        setXY4(prim, sprite->x, sprite->y + y_offset, sprite->x + sprite->w, sprite->y + y_offset, sprite->x, sprite->y + sprite->h + y_offset, sprite->x + sprite->w,
+               sprite->y + sprite->h + y_offset);
+        setUV4(prim, sprite->u, sprite->v, sprite->u + sprite->u_size, sprite->v, sprite->u, sprite->v + sprite->v_size, sprite->u + sprite->u_size, sprite->v + sprite->v_size);
         prim->tpage = getTPage(TPAGE_DEPTH_8BIT, TPAGE_ABR_HALF, (sprite->page << 7) + 0x140, 256);
         prim->clut  = getClut(0, sprite->page + 0x1E5);
         GFX_AddPrim(GFX_LAYER_BACKDROP, sizeof(POLY_FT4));

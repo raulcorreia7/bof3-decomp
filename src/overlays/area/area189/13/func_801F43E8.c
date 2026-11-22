@@ -21,7 +21,7 @@ NON_MATCHING void func_801F43E8(s32 scale) {
     tile = (TILE_1*)g_GfxPrimCursor;
     SetTile1(tile);
     SetSemiTrans(tile, 1);
-    shade   = ((scale << 8) - scale) / 128;
+    shade    = ((scale << 8) - scale) / 128;
     tile->y0 = 0x2D;
     tile->x0 = (((g_AreaCameraAngle.vy + 0x200) & 0xFFF) * 5) >> 4;
     tile->r0 = shade;
@@ -30,9 +30,9 @@ NON_MATCHING void func_801F43E8(s32 scale) {
     func_801F497C(sizeof(TILE_1));
     func_801F4B64(tile);
 
-    cell_y = g_AreaTargetCellY;
-    tile   = (TILE_1*)g_GfxPrimCursor;
-    y      = cell_y / 85 - 1;
+    cell_y   = g_AreaTargetCellY;
+    tile     = (TILE_1*)g_GfxPrimCursor;
+    y        = cell_y / 85 - 1;
     tile->y0 = y;
     if ((u16)y < 0x5A) {
         SetTile1(tile);

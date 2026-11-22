@@ -86,7 +86,7 @@ NON_MATCHING void func_800AC964(void) {
                         groups[i].count = groups[i].count - 1;
                         count           = count - 1;
                         UI_PanelOpenTask(panel, 3);
-                        panels                             = panels + 1;
+                        panels                              = panels + 1;
                         g_UiPanelTasks[panel].mode          = 4;
                         g_UiPanelTasks[panel].state         = 0;
                         g_UiPanelTasks[panel].pos.x         = x;
@@ -96,7 +96,7 @@ NON_MATCHING void func_800AC964(void) {
                         g_UiPanelTasks[panel].unk_0A        = j + 3;
                         g_UiPanelTasks[panel].u.addr.unk_10 = x;
                         g_UiPanelTasks[panel].u.addr.unk_12 = y;
-                        y = y + 8;
+                        y                                   = y + 8;
                     }
                     j = j + 1;
                     if (j >= g_Battle.enemy_count) {
@@ -119,7 +119,7 @@ NON_MATCHING void func_800AC964(void) {
                         groups[i].count = groups[i].count - 1;
                         count           = count - 1;
                         UI_PanelOpenTask(panel, 3);
-                        panels                             = panels + 1;
+                        panels                              = panels + 1;
                         g_UiPanelTasks[panel].mode          = 4;
                         g_UiPanelTasks[panel].state         = 0;
                         g_UiPanelTasks[panel].pos.x         = x;
@@ -129,7 +129,7 @@ NON_MATCHING void func_800AC964(void) {
                         g_UiPanelTasks[panel].unk_0A        = j + 3;
                         g_UiPanelTasks[panel].u.addr.unk_10 = x;
                         g_UiPanelTasks[panel].u.addr.unk_12 = y;
-                        y = y + 8;
+                        y                                   = y + 8;
                     }
                     j = j + 1;
                     if (j >= g_Battle.enemy_count) {

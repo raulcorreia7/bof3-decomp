@@ -1,5 +1,5 @@
 /* The shared area.h gives this symbol no arguments; this image's function reads two. */
-#define func_801F31EC func_801F31EC_shared_proto
+#define func_801F31EC Area_SharedVoidProto
 #include "area077_14.h"
 #undef func_801F31EC
 
@@ -35,9 +35,9 @@ NON_MATCHING void func_801F31EC(s32 x, s32 y) {
     D_801F6B6C = 0;
     func_801F3BC4(x, y, 0x48, 0x48);
     GFX_AddBlendDrawMode(1);
-    D_801F6B70 = 0x40;
-    D_801F6B74 = 0;
-    D_801F6B6C = 0;
+    D_801F6B70   = 0x40;
+    D_801F6B74   = 0;
+    D_801F6B6C   = 0;
     inner_left   = x + 3;
     inner_bottom = y + 0x44;
     inner_right  = x + 0x44;
