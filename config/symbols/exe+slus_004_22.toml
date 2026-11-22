@@ -63,13 +63,13 @@ g_GameRequestType = { addr = 0x80143F1D, source = "Type of the game request." }
 g_GameEntryMode = { addr = 0x80143F1E, source = "Entry mode of the field: Game_UpdateAreaLoad sets it to 10, 20 or 0 and Game_UpdateField tests it against GAME_NONE." }
 g_GamePrevSelection = { addr = 0x80143F1F, source = "The previous game selection." }
 g_EncounterSteps = { addr = 0x80143F22, source = "Steps walked since the last encounter: Area_WalkStep and func_801B146C add 1 per step (2 when direction is 2 or 6), func_80197F48 and func_801984E8 reset it, and Area_EncounterCanStart starts a fight once it reaches the threshold Area_EncounterRollThreshold stores in D_80145FB8." }
-g_AreaEncounterPlacement = { addr = 0x80143F24, size = 0x20, source = "The field-battle formation origin and one start position per party order slot; Area_EncounterBuild and Game_BattleStartEncounter fill it and the placement, camera and battle start code read it." }
 g_EncounterOriginX = { addr = 0x80143F24, type = "s32", alias = true, source = "The formation origin x; a unit that keeps its own absolute address per access reads this view of g_AreaEncounterPlacement.origin.x." }
+g_AreaEncounterPlacement = { addr = 0x80143F24, size = 0x20, source = "The field-battle formation origin and one start position per party order slot; Area_EncounterBuild and Game_BattleStartEncounter fill it and the placement, camera and battle start code read it." }
 g_EncounterOriginY = { addr = 0x80143F28, type = "s32", alias = true, source = "The formation origin y; a unit that keeps its own absolute address per access reads this view of g_AreaEncounterPlacement.origin.y." }
 g_EncounterParty = { addr = 0x80143F2C, type = "FormationPos", size = 0x18, alias = true, source = "g_AreaEncounterPlacement.party: one field-battle start position per party order slot." }
 g_SysResetHoldFrames = { addr = 0x80143F44, source = "SYS_Main counts held reset-key frames until EMI_IsReady" }
-g_PartyPos = { addr = 0x80143F7C, size = 0xC, alias = true, source = "The party's field position in 16.16; the area scroll code reads x, y and z and g_ScrollHeight is the integer half of z." }
 g_PartyX = { addr = 0x80143F7C, type = "s32", source = "X position of the party." }
+g_PartyPos = { addr = 0x80143F7C, size = 0xC, alias = true, source = "The party's field position in 16.16; the area scroll code reads x, y and z and g_ScrollHeight is the integer half of z." }
 g_PartyY = { addr = 0x80143F80, type = "s32", source = "Y position of the party." }
 g_ScrollHeight = { addr = 0x80143F86, type = "s16", source = "Ground height under the party." }
 g_SpawnedActors = { addr = 0x80143FC8, size = 0x910, source = "The actor slots." }
@@ -95,8 +95,8 @@ g_SceneEventFlags = { addr = 0x80144F28, type = "u8", source = "Scene event flag
 g_Zenny = { addr = 0x80144F50, size = 0x4, source = "Party_SpendZenny subtracts from it when the balance covers the price, Party_AddZenny adds to it and clamps it at 9999999, and every shop panel prints it as the money held" }
 g_PartyFormation = { addr = 0x80144F58, source = "Party formation." }
 g_PartyMenuFlags = { addr = 0x80144F59, size = 0x1, source = "Menu flags of the party: the master menu (emi/etc/sisyou/00 func_801D3A24) sets bit 3, 4 or 5 (1 << the character index of Teepo, Rei, Momo) with the first reward of the special master; the shop tests the same bits to enable the item classes 11, 13 and 14." }
-g_PartyOrders = { addr = 0x80144F5A, size = 0x6, alias = true, source = "The field and battle party order rows, indexed by PartyOrder; each row holds character ids or FORMATION_SLOT_EMPTY." }
 g_PartyFieldOrder = { addr = 0x80144F5A, size = 0x3, source = "Party order in the field." }
+g_PartyOrders = { addr = 0x80144F5A, size = 0x6, alias = true, source = "The field and battle party order rows, indexed by PartyOrder; each row holds character ids or FORMATION_SLOT_EMPTY." }
 g_PartyBattleOrder = { addr = 0x80144F5D, size = 0x3, source = "Party order in battle." }
 g_LearnedAbilities = { addr = 0x80144F80, size = 0x20, source = "One bit per ability id, set once the party has learned it: the sisyou master lesson tests and sets it before Char_AbilityAdd, and battle/15 sets it when a party member learns an enemy skill." }
 g_IdentifiedEnemies = { addr = 0x80144FA0, size = 0x20, source = "One bit per enemy type byte (256 bits): Identify sets the bit of the targeted enemy and the identified test reads it." }
@@ -195,6 +195,7 @@ g_BattleGeneCount = { addr = 0x801463C7, type = "u8", source = "Number of genes 
 g_DragonForm = { addr = 0x801463C9, type = "u8", source = "Selected dragon form; the dragon_form member of g_Battle.", alias = true }
 g_BattleActionLock = { addr = 0x801463CE, type = "u8", source = "Frames during which the battle actions are locked; the action_lock member of g_Battle.", alias = true }
 g_BattlePendingStatus = { addr = 0x801463D8, type = "u16", source = "Status effects to apply to a battler; the pending_status member of g_Battle.", alias = true }
+g_EmiStream = { addr = 0x80146450, size = 0x50, alias = true, source = "The CD/EMI stream: the entry being transferred, the sector ring cursor, the CD callback state and the last sync result; the g_Emi* and g_Cd* rows at these addresses are the access views." }
 g_EmiStartSector = { addr = 0x80146450, source = "EMI_NextEntry loads it from g_EmiSlotSectors[slot]; CD_OnReady checks it against g_EmiSectorCursor on the first sector" }
 g_EmiBytesLeft = { addr = 0x80146454, source = "Bytes left to load from the EMI archive." }
 g_EmiLoadArg = { addr = 0x80146458, source = "Load argument of the EMI entry being loaded." }

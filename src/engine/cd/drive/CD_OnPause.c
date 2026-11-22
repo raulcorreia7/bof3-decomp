@@ -3,17 +3,17 @@
 /* selects the CD-read dispatch mode from the latched sync status.
  */
 MATCH void CD_OnPause(void) {
-    if (g_CdSyncStatus < 0) {
-        g_CdState = CD_STATE_PAUSE;
+    if (g_EmiStream.cd_sync_status < 0) {
+        g_EmiStream.cd_state = CD_STATE_PAUSE;
         return;
     }
-    g_CdState = CD_STATE_IDLE_END;
-    if (D_8014648B & 0x1) {
-        g_CdState = CD_STATE_SET_SPEED;
+    g_EmiStream.cd_state = CD_STATE_IDLE_END;
+    if (g_EmiStream.unk_3B & 0x1) {
+        g_EmiStream.cd_state = CD_STATE_SET_SPEED;
         return;
     }
-    if (D_8014648B & 0x2) {
+    if (g_EmiStream.unk_3B & 0x2) {
         CdReadyCallback(NULL);
-        g_EmiStreamState = 2;
+        g_EmiStream.state = 2;
     }
 }

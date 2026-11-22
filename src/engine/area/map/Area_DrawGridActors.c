@@ -74,11 +74,11 @@ NON_MATCHING void Area_DrawGridActors(void) {
             count = g_AreaGridActorCount;
         } while (var_s7 < (count - 1));
     }
-    tpage  = getTPage(TPAGE_DEPTH_8BIT, TPAGE_ABR_HALF, 320, 256);
+    tpage = getTPage(TPAGE_DEPTH_8BIT, TPAGE_ABR_HALF, 320, 256);
+    GFX_ADD_LAYER_DRAW_MODE(GFX_LAYER_FIELD_SCENE, tpage);
     var_s7 = 0;
     var_s4 = 0;
     var_fp = 0;
-    GFX_ADD_LAYER_DRAW_MODE(GFX_LAYER_FIELD_SCENE, tpage);
     do {
         if (g_AreaDrawFlags & AREA_DRAW_CELL_LAYERS) {
             Area_CellDrawLayer(var_s7);
