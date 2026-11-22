@@ -5,7 +5,7 @@
  * height in the z integer, and when unk_0A runs out it writes 0x10 divided by the byte from
  * g_RouteSpeedScale into unk_0A, or calls Actor_ApplyVelocity and sets unk_04 to 3.
  */
-MATCH s8 Actor_StepMovement(s32 entry, s8 dir_x, s8 dir_y, s16 vz_start, s16 vz_delta, u8 landing_script, u8 flags) {
+MATCH s8 Actor_MovementStep(s32 entry, s8 dir_x, s8 dir_y, s16 vz_start, s16 vz_delta, u8 landing_script, u8 flags) {
     Actor* work;
     s32    speed;
     s16    height;

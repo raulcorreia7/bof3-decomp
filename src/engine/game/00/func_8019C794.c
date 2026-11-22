@@ -28,6 +28,6 @@ MATCH void func_8019C794(void) {
             g_SpawnedActors[index].header.mode  = 3;
         }
     }
-    Actor_StepAnimLoop();
+    Script_AnimStepLoop();
     Area_SetDrawMode();
 }

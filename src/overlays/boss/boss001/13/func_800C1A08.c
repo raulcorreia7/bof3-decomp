@@ -15,5 +15,5 @@ MATCH void func_800C1A08(void) {
         Area_SetCellPalette(100, 20);
         g_Task->header.step += 1;
     }
-    Actor_StepAnimLoop();
+    Script_AnimStepLoop();
 }

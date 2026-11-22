@@ -86,7 +86,7 @@ NON_MATCHING void func_801F4608(s32 input) {
                     }
                     tmp11        = g_Task;
                     tmp11->timer = (tmp11->timer - 1);
-                    Actor_UpdateMovement();
+                    Actor_MovementUpdate();
                     g_Game.current->u.field.mode.value = 1;
                     tmp6                               = g_Task;
                     tmp6->header.step                  = 1;

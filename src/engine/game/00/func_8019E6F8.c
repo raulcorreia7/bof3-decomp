@@ -4,7 +4,7 @@ MATCH void func_8019E6F8(void) {
     Actor* work;
     s32    value;
 
-    Actor_StepAnimLoop();
+    Script_AnimStepLoop();
     work     = g_Task;
     value    = work->vz + work->gravity;
     work->vz = value;

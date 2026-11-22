@@ -27,7 +27,7 @@ MATCH void func_800ADB74(void) {
         FAKE_OPAQUE(slot);
     }
     if (slot != GAME_NONE) {
-        Actor_StepAnimLoop();
+        Script_AnimStepLoop();
         Area_AddActor();
     }
 }

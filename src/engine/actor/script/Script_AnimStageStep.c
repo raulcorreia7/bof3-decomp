@@ -4,7 +4,7 @@
  * frame table at +0x54 to +0x5A, then the position (+0x58) moves on by 2.
  */
 /* func_8014DB98 */
-MATCH void Actor_StageAnimStep(void) {
+MATCH void Script_AnimStageStep(void) {
     u16    index;
     u16    next_index;
     Actor* current_work;

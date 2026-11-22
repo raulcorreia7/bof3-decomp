@@ -62,7 +62,7 @@ MATCH void Fishing_LureFly(void) {
         if (work_e->y_38.pos_y == TO_COORD(60)) {
             g_AreaCameraStep = 0x40;
         }
-        Actor_StepAnimLoop();
+        Script_AnimStepLoop();
     }
     Area_AddGridActor();
 }

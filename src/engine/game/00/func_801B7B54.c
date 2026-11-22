@@ -10,6 +10,6 @@ MATCH void func_801B7B54(void) {
         func_801C51B0();
         g_Task->unk_04++;
     } else {
-        Actor_StepAnimLoop();
+        Script_AnimStepLoop();
     }
 }

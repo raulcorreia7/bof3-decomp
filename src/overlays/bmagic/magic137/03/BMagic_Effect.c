@@ -245,7 +245,7 @@ MATCH void func_801F001C(void) {
     g_Task->param.phase = 0;
     g_Task->unk_09      = 0;
     Script_Select(3);
-    Actor_StepAnimLoop();
+    Script_AnimStepLoop();
     Area_AddActor();
     g_Task->header.step++;
 }

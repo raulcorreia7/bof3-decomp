@@ -241,7 +241,7 @@ MATCH void func_801F7A9C(void) {
 MATCH void func_801F7AD0(void) {
     SYS_DISPATCH_TASK(D_801FE8E4, 2, g_Task);
     Trail_Update(SCENA08_TRAIL);
-    func_801F90C8(SCENA08_TRAIL);
+    Trail_Draw(SCENA08_TRAIL);
 }
 
 MATCH void func_801F7B2C(void) {
@@ -687,7 +687,7 @@ MATCH void func_801F8D4C(FallingSpark* spark) {
 
 #include "shared/Trail_Update.h"
 
-INCLUDE_ASM(func_801F90C8);
+#include "shared/Trail_Draw.h"
 
 #include "shared/MATH_AverageAngle.h"
 

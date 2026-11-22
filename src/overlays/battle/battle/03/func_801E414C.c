@@ -7,7 +7,7 @@ MATCH void func_801E414C(void) {
     u32           flags;
     EnemyBattler* enemy;
 
-    Actor_StepAnimOnce();
+    Script_AnimStepOnce();
     if ((g_BattleCurrentEnemy->status & STATUS_KO) != 0) {
         GFX_PaletteFreeFadeTarget((void*)g_Task);
         half = &g_Battle.flags;

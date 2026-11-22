@@ -40,7 +40,7 @@ MATCH void Battle_RunAilmentActor(void) {
         g_Task->header.mode = 0;
     }
     func_801E8DD8();
-    Actor_StepAnimLoop();
+    Script_AnimStepLoop();
     Area_AddActor();
     if ((Battle_SlotIsBlocked(g_BattleEffectBattler->slot) & BYTE_MASK) && !ACTOR_IN_USE(*g_BattleEffectBattler)) {
         g_Task->header.mode = 0;

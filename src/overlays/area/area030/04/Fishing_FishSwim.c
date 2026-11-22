@@ -71,5 +71,5 @@ MATCH void Fishing_FishSwim(void) {
         }
     }
     Fishing_MoveFish();
-    Actor_StepAnimLoop();
+    Script_AnimStepLoop();
 }

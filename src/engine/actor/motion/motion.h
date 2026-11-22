@@ -6,14 +6,14 @@
 
 void Actor_ClearVelocity(void);
 /* func_8015C2D4 */
-s8   Actor_InitMovement(s32 entry, s8 dir_x, s8 dir_y, s16 vz_start, s16 vz_delta, u8 landing_script, s32 flags);
+s8   Actor_MovementInit(s32 entry, s8 dir_x, s8 dir_y, s16 vz_start, s16 vz_delta, u8 landing_script, s32 flags);
 /* func_8015C540 */
-s8   Actor_StepMovement(s32 entry, s8 dir_x, s8 dir_y, s16 vz_start, s16 vz_delta, u8 landing_script, u8 flags);
+s8   Actor_MovementStep(s32 entry, s8 dir_x, s8 dir_y, s16 vz_start, s16 vz_delta, u8 landing_script, u8 flags);
 /* func_8015C9CC */
 void Actor_ApplyVelocity(void);
-/* Actor_UpdateMovement */
+/* Actor_MovementUpdate */
 /* func_801B0DFC */
-void Actor_UpdateMovement(void);
+void Actor_MovementUpdate(void);
 /* Actor_IsInRange */
 /* func_801BDD58 */
 u8   Actor_IsInRange(s32 pos_x, s32 pos_y, s16 z, s32 reach, Actor* record);

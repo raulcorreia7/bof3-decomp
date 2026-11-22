@@ -22,7 +22,7 @@ typedef enum ActorScriptControl {
 
 /* func_801A9944 */
 /* Runs one script control opcode. */
-MATCH u8 Script_RunControlOps(void* sub, s32 target, u8 value) {
+MATCH u8 Script_OpsRunControl(void* sub, s32 target, u8 value) {
     u8*    target_bytes;
     u16    next_cursor_e7;
     u16    next_cursor_e8;

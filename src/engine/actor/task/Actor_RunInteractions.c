@@ -57,14 +57,14 @@ MATCH u32 Actor_RunInteractions(void) {
                     j = 0;
                     do {
                         j++;
-                        Actor_StepAnimLoop();
+                        Script_AnimStepLoop();
                     } while (j <= n);
                 }
             } else if (!(g_Task->option_flags & ACTOR_OPT_WAIT_STREAM)) {
                 if (g_Task->header.flags & ACTOR_FLAG_STEP_MOVE) {
-                    Actor_StepAnimLoop();
+                    Script_AnimStepLoop();
                 } else {
-                    Actor_StepAnimOnce();
+                    Script_AnimStepOnce();
                 }
             }
         }

@@ -100,7 +100,7 @@ MATCH void func_801B0568(void) {
             Actor_RequestRoute((g_Task->direction + 8) & BYTE_MASK);
             tmp6        = g_Task;
             tmp6->timer = (tmp6->timer - 1);
-            Actor_UpdateMovement();
+            Actor_MovementUpdate();
             g_Game.current->u.field.mode.value = 1;
             g_Task->header.step                = 2;
             return;

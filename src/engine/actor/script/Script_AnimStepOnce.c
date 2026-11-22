@@ -1,10 +1,10 @@
 #include "engine/slus/slus.h"
 
-/* Plays the sprite animation once: as Actor_StepAnimLoop, but at the end of the stream it sets the delay (+0x4A)
+/* Plays the sprite animation once: as Script_AnimStepLoop, but at the end of the stream it sets the delay (+0x4A)
  * to 1 and returns 1 without staging, so the last frame holds.
  */
 /* func_8014DAEC */
-MATCH u8 Actor_StepAnimOnce(void) {
+MATCH u8 Script_AnimStepOnce(void) {
     u8  result;
     u8  count;
     u16 index;
@@ -22,7 +22,7 @@ MATCH u8 Actor_StepAnimOnce(void) {
             g_Task->script_pc = *(u8*)(g_Task->script + index + 1) << 1;
             result            = 1;
         }
-        Actor_StageAnimStep();
+        Script_AnimStageStep();
     }
     return result;
 }

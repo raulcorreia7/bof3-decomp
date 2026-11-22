@@ -45,7 +45,7 @@ MATCH void func_801EEE50(void) {
 
     work   = g_Task;
     g_Task = D_801EC2E0->target.party;
-    Actor_StepAnimOnce();
+    Script_AnimStepOnce();
     g_Task        = work;
     work->unk_09  = 0;
     g_Task->timer = 0;
@@ -162,8 +162,16 @@ MATCH void func_801EF3C4(void) {
 
     g_Task->pos.z.part.integer = (u16)g_Task->pos.z.part.integer + g_Task->unk_14;
     g_Task->unk_14             = g_Task->unk_14 + g_Task->unk_20;
+<<<<<<< HEAD
     Actor_StepAnimLoop();
     if (g_Task->pos.z.part.integer < Area_HeightSample(g_Task->pos.x.fixed, g_Task->pos.y.fixed)) {
+||||||| 65251afba
+    Actor_StepAnimLoop();
+    if (g_Task->pos.z.part.integer < Area_SampleHeight(g_Task->pos.x.fixed, g_Task->pos.y.fixed)) {
+=======
+    Script_AnimStepLoop();
+    if (g_Task->pos.z.part.integer < Area_SampleHeight(g_Task->pos.x.fixed, g_Task->pos.y.fixed)) {
+>>>>>>> public/main
         offset_x                   = (RANDOM_MOD(6) << 16) + 0x20000;
         g_Task->pos.x.fixed        = g_BattleEffectBattler->pos.x.fixed + offset_x;
         offset_y                   = (RANDOM_MOD(6) << 16) - 0x30000;

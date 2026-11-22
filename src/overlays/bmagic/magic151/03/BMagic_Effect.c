@@ -68,7 +68,7 @@ MATCH void func_801EEF24(void) {
     }
     saved  = g_Task;
     g_Task = &g_Game.members[g_Battle.active_battler];
-    if (!(Actor_StepAnimOnce() & BYTE_MASK)) {
+    if (!(Script_AnimStepOnce() & BYTE_MASK)) {
         g_Task = saved;
         return;
     }

@@ -3,7 +3,7 @@
 
 MATCH void func_800C1978(s32 mode) {
     g_Battle.flags |= BATTLE_STATE_EFFECT_LOADING;
-    Actor_StepAnimOnce();
+    Script_AnimStepOnce();
     GFX_ClearRect(832, 256, 128, 256);
     SND_QueueSelectionSE(EMI_SE_ID(SND_BANK_ENEMY, 1));
     g_Task->unk_18   = (s16)g_Task->screen_x;

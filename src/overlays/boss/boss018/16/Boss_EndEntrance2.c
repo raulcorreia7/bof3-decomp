@@ -2,7 +2,7 @@
 
 /* func_800C1ADC */
 MATCH void Boss_EndEntrance2(void) {
-    if (Actor_StepAnimOnce() != 0) {
+    if (Script_AnimStepOnce() != 0) {
         ACTOR_SET_MODE(2);
     }
 }

@@ -5,8 +5,16 @@ NON_MATCHING void func_801F3354(void) {
     s16 height;
 
     g_Task->vz += g_Task->gravity;
+<<<<<<< HEAD
     Actor_UpdateMovement();
     height = Area_HeightRead(g_Task->pos.x.fixed, g_Task->pos.y.fixed);
+||||||| 65251afba
+    Actor_UpdateMovement();
+    height = Area_ReadHeight(g_Task->pos.x.fixed, g_Task->pos.y.fixed);
+=======
+    Actor_MovementUpdate();
+    height = Area_ReadHeight(g_Task->pos.x.fixed, g_Task->pos.y.fixed);
+>>>>>>> public/main
     if (COORD_INT(g_Task->pos.z) < height) {
         COORD_INT(g_Task->pos.z) = height;
         g_Task->vz               = 0;

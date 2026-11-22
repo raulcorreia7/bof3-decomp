@@ -85,7 +85,7 @@ MATCH void func_801BC000(void) {
                     }
                     tmp11        = g_Task;
                     tmp11->timer = (tmp11->timer - 1);
-                    Actor_UpdateMovement();
+                    Actor_MovementUpdate();
                     g_Game.current->u.field.mode.value = 1;
                     tmp6                               = g_Task;
                     tmp6->header.step                  = 1;

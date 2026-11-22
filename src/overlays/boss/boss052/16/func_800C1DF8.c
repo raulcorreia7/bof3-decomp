@@ -8,7 +8,7 @@ MATCH void func_800C1DF8(void) {
     type                 = g_BattleEnemyBattlers[0].type;
     g_Task->timer        = ENCOUNTER_ENEMIES[type].unk_84[2];
     Script_Select(4);
-    Actor_StepAnimLoop();
+    Script_AnimStepLoop();
     Area_AddActor();
     g_Task->header.step++;
 }

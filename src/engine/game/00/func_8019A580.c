@@ -11,7 +11,7 @@ MATCH void func_8019A580(void) {
         next->header.mode++;
         return;
     }
-    Actor_StepAnimLoop();
+    Script_AnimStepLoop();
     next = g_Task;
     if ((next->timer & 0x4) != 0) {
         if (next->unk_05 == 6) {

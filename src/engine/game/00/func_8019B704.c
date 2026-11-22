@@ -98,7 +98,7 @@ NON_MATCHING void func_8019B704(void) {
                     break;
             }
         }
-        Actor_StepAnimLoop();
+        Script_AnimStepLoop();
         Area_SetDrawMode();
     }
 }

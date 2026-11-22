@@ -45,18 +45,18 @@ void func_801F131C(void);
 void func_801F13D4(void);
 
 /* Fades the tint down to -0x80, then once the effect battler's param is 1 and the fade is done, moves the effect onto that battler and advances. Needs a local `s8 tint`. */
-#define EFFECT_APPEAR_AT_BATTLER()                                                                                           \
-    tint = (s8)g_Task->unk_5D;                                                                                               \
-    if (tint != -0x80) {                                                                                                     \
-        g_Task->unk_5D = tint - 0x10;                                                                                        \
-        g_Task->unk_5E -= 0x10;                                                                                              \
-        g_Task->unk_5F -= 0x10;                                                                                              \
-    }                                                                                                                        \
-    if ((g_BattleEffectBattler->param.unk_0B == 1) && ((s8)g_Task->unk_5D == -0x80) && (Actor_StepAnimOnce() & BYTE_MASK)) { \
-        g_Task->pos.x.fixed = g_BattleEffectBattler->pos.x.fixed;                                                            \
-        g_Task->pos.y.fixed = g_BattleEffectBattler->pos.y.fixed;                                                            \
-        g_Task->pos.z.fixed = g_BattleEffectBattler->pos.z.fixed;                                                            \
-        g_Task->header.step++;                                                                                               \
+#define EFFECT_APPEAR_AT_BATTLER()                                                                                            \
+    tint = (s8)g_Task->unk_5D;                                                                                                \
+    if (tint != -0x80) {                                                                                                      \
+        g_Task->unk_5D = tint - 0x10;                                                                                         \
+        g_Task->unk_5E -= 0x10;                                                                                               \
+        g_Task->unk_5F -= 0x10;                                                                                               \
+    }                                                                                                                         \
+    if ((g_BattleEffectBattler->param.unk_0B == 1) && ((s8)g_Task->unk_5D == -0x80) && (Script_AnimStepOnce() & BYTE_MASK)) { \
+        g_Task->pos.x.fixed = g_BattleEffectBattler->pos.x.fixed;                                                             \
+        g_Task->pos.y.fixed = g_BattleEffectBattler->pos.y.fixed;                                                             \
+        g_Task->pos.z.fixed = g_BattleEffectBattler->pos.z.fixed;                                                             \
+        g_Task->header.step++;                                                                                                \
     }
 
 #endif

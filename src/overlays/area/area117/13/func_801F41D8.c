@@ -62,7 +62,7 @@ MATCH void func_801F41D8(void) {
             }
             func_801B0DFC();
             ((PartyMember*)g_Task)->unk_09--;
-            Actor_StepAnimLoop();
+            Script_AnimStepLoop();
             g_GameFlags |= 0x2000;
         next_record:
             i++;

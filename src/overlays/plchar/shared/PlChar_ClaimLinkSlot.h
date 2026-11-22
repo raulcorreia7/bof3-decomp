@@ -1,6 +1,6 @@
 /* Launches the facing probe from a free actor slot once the script reaches CHAR_LAUNCH_SCRIPT_PC. */
 MATCH void PlChar_ClaimLinkSlot(void) {
-    Actor_StepAnimLoop();
+    Script_AnimStepLoop();
     if (g_Task->script_pc == CHAR_LAUNCH_SCRIPT_PC) {
         g_Task->param.actor_slot = Actor_FindFreeSpawned();
         if (g_Task->param.actor_slot != GAME_NONE) {

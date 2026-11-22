@@ -18,5 +18,5 @@ MATCH void func_800C1D24(void) {
         Script_Select(0U);
         g_Task->header.step += 1;
     }
-    Actor_StepAnimLoop();
+    Script_AnimStepLoop();
 }

@@ -6,8 +6,16 @@ MATCH void func_801F44C4(void) {
     s16 height;
 
     g_Task->vz += g_Task->gravity;
+<<<<<<< HEAD
     Actor_UpdateMovement();
     height = ((s32 (*)(s32, s32))Area_HeightRead)(g_Task->pos.x.fixed, g_Task->pos.y.fixed);
+||||||| 65251afba
+    Actor_UpdateMovement();
+    height = ((s32 (*)(s32, s32))Area_ReadHeight)(g_Task->pos.x.fixed, g_Task->pos.y.fixed);
+=======
+    Actor_MovementUpdate();
+    height = ((s32 (*)(s32, s32))Area_ReadHeight)(g_Task->pos.x.fixed, g_Task->pos.y.fixed);
+>>>>>>> public/main
     if (COORD_INT(g_Task->pos.z) < height) {
         g_Task->header.flags &= ~0x20;
         g_Task->tint.bytes.flags = 0;

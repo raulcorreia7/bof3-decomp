@@ -23,7 +23,7 @@ typedef enum ActorScriptWait {
 /* func_801AA470 */
 /* Runs one wait or camera opcode. */
 #ifdef NON_MATCHING
-NON_MATCHING u8 Script_RunWaitOps(void* sub, s32 target, u8 value) {
+NON_MATCHING u8 Script_OpsRunWait(void* sub, s32 target, u8 value) {
     u8* code;
     u8* cmd;
     u8  slot;
@@ -160,5 +160,5 @@ back:
     goto set_cursor;
 }
 #else
-INCLUDE_ASM(Script_RunWaitOps);
+INCLUDE_ASM(Script_OpsRunWait);
 #endif

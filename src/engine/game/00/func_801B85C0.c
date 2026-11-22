@@ -27,6 +27,6 @@ MATCH void func_801B85C0(void) {
         Area_RunWalk();
     }
     g_Task->timer = (g_Task->timer - 1);
-    Actor_UpdateMovement();
-    Actor_StepAnimLoop();
+    Actor_MovementUpdate();
+    Script_AnimStepLoop();
 }

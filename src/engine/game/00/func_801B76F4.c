@@ -4,8 +4,16 @@ MATCH void func_801B76F4(void) {
     s16 dist;
 
     g_Task->vz += g_Task->gravity;
+<<<<<<< HEAD
     Actor_UpdateMovement();
     dist = Area_HeightRead(g_Task->pos.x.fixed, g_Task->pos.y.fixed);
+||||||| 65251afba
+    Actor_UpdateMovement();
+    dist = Area_ReadHeight(g_Task->pos.x.fixed, g_Task->pos.y.fixed);
+=======
+    Actor_MovementUpdate();
+    dist = Area_ReadHeight(g_Task->pos.x.fixed, g_Task->pos.y.fixed);
+>>>>>>> public/main
     if ((s16)COORD_INT(g_Task->pos.z) < dist) {
         COORD_INT(g_Task->pos.z) = dist;
         if (g_Task->vz < -0x80) {
@@ -22,5 +30,5 @@ MATCH void func_801B76F4(void) {
     if ((g_Task->unk_05 == 0) && (((g_Game.flags | g_Game.walk_flags) & (GAME_FLAG_SCROLL_LOCK | AREA_WALK_ENTRY_ACTIVE)) == 0)) {
         Area_AdvanceScroll((s16)COORD_INT(g_Task->pos.z));
     }
-    Actor_StepAnimLoop();
+    Script_AnimStepLoop();
 }

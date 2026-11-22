@@ -22,7 +22,7 @@ typedef enum ActorScriptFlow {
 /* func_801A8F94 */
 /* Runs flow opcodes until a movement or wait opcode; returns the facing selection. */
 #ifdef NON_MATCHING
-NON_MATCHING u8 Script_RunFlowOps(ScriptState* state, u8* base, s32 seed) {
+NON_MATCHING u8 Script_OpsRunFlow(ScriptState* state, u8* base, s32 seed) {
     s32                 left;
     s32                 sel;
     s32                 dist;
@@ -180,7 +180,7 @@ NON_MATCHING u8 Script_RunFlowOps(ScriptState* state, u8* base, s32 seed) {
                 state->cursor = (u16)(state->cursor + step + 1);
                 break;
             case 0xB0:
-                Script_RunSoundOps(state, base);
+                Script_OpsRunSound(state, base);
                 state->cursor += 1;
                 break;
             default:
@@ -189,5 +189,5 @@ NON_MATCHING u8 Script_RunFlowOps(ScriptState* state, u8* base, s32 seed) {
     }
 }
 #else
-INCLUDE_ASM(Script_RunFlowOps);
+INCLUDE_ASM(Script_OpsRunFlow);
 #endif
