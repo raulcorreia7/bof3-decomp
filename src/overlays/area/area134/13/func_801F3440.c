@@ -4,8 +4,8 @@ MATCH void func_801F3440(void) {
     Actor* actor;
     u8     step;
 
-    actor      = TASK(Actor);
-    D_80146250 = &g_Game.members[2].header.flags;
+    actor       = TASK(Actor);
+    g_GameState = &g_Game.members[2];
     TASK_SET(&g_Game.members[2].header.flags);
     if (g_Game.members[2].pos.x.fixed > 0x33FFFF) {
         g_ScriptVars[1] = 0xFF;

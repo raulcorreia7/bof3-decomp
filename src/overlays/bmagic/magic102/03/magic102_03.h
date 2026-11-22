@@ -3,8 +3,6 @@
 
 /* The bmagic/magic102/03 overlay. Only this image includes the file. */
 
-#define FAKE_DECL_BATTLE_PARTY_CELL_RECORD
-
 #include "overlays/bmagic/bmagic.h"
 #include "slus/exports.h"
 #include "slus/functions.h"
