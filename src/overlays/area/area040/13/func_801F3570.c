@@ -1,25 +1,16 @@
 #include "area040_13.h"
 
-#ifdef NON_MATCHING
-NON_MATCHING s32 func_801F3570(void) {
-    s16 x;
-    s32 y;
-    u8  column;
-    s32 row;
+MATCH s32 func_801F3570(void) {
+    u8 row;
+    u8 column;
 
-    row = 0;
-    do {
-        y      = row + 0x20;
-        column = 0;
-        do {
-            x = column + 0x94;
-            if ((func_801F30B8(x, y) & BYTE_MASK) != D_801F4960[row][column]) {
+    for (row = 0; row < 4; row++) {
+        for (column = 0; column < 4; column++) {
+            if ((func_801F30B8((s16)(column + 0x94), (s16)(row + 0x20)) & BYTE_MASK) != D_801F4960[row][column]) {
                 return 0;
             }
-            column += 1;
-        } while (column < 4);
-        row += 1;
-    } while (row < 4);
+        }
+    }
 
     SYS_SetFlag(g_SceneEventFlags, 0x27);
     func_801A4BC0(0x92, 0x1C, 0xA1);
@@ -28,9 +19,6 @@ NON_MATCHING s32 func_801F3570(void) {
     func_801A4BC0(0x93, 0x1D, 0xC0);
     g_SceneEventState.step = 0xA;
     Area_CellSetPalette(0x92, 0x1D);
-    SND_SEPlay(EMI_SE_ID(SND_BANK_AREA, 3));
+    SND_SEPlay(EMI_SE_ID(SND_BANK_COMMON, 3));
     return 1;
 }
-#else
-INCLUDE_ASM(func_801F3570);
-#endif

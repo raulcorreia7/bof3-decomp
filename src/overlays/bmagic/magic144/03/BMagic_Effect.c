@@ -155,7 +155,7 @@ MATCH void func_801EF554(void) {
     SYS_DISPATCH_BYTE(D_801F04EC, TASK(PartyMember)->header.step);
     if (TASK(PartyMember)->header.flags != 0 && TASK(PartyMember)->header.step != 0) {
         Battle_ProjectRange();
-        func_801EF818();
+        Effect_DrawFlameColumn();
     }
 }
 
@@ -169,12 +169,8 @@ MATCH void func_801EF654(void) {
 
 #include "overlays/bmagic/shared/Effect_CountDownByTwoFinishAtOne.h"
 
-#ifdef NON_MATCHING
-NON_MATCHING void func_801EF818(void) {
-}
-#else
-INCLUDE_ASM(func_801EF818);
-#endif
+/* func_801EF818 */
+#include "overlays/bmagic/shared/Effect_DrawFlameColumn.h"
 
 MATCH void func_801EFF74(void) {
     PartyMember* work;

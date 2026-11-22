@@ -16,7 +16,7 @@ MATCH void func_801F4378(void) {
                 seconds    = timer / GAME_CLOCK_THIRTIETHS_PER_SECOND;
                 thirtieths = timer % GAME_CLOCK_THIRTIETHS_PER_SECOND;
                 hundredths = thirtieths * 10 / 3;
-                func_801F4B0C(124, 46, 72, 17, 0);
+                UI_WindowDrawPanel(124, 46, 72, 17, 0);
                 TEXT_Format(g_UiTextFormatBuffer, D_801F2C04, seconds, hundredths);
                 g_UiTextFormatBuffer[2] = 0x8F;
                 UI_TextDraw(140, 48, (seconds < 10) * 2, 5, g_UiTextFormatBuffer);
@@ -94,7 +94,7 @@ MATCH void func_801F4378(void) {
             seconds    = timer / GAME_CLOCK_THIRTIETHS_PER_SECOND;
             thirtieths = timer % GAME_CLOCK_THIRTIETHS_PER_SECOND;
             hundredths = thirtieths * 10 / 3;
-            func_801F4B0C(124, 46, 72, 17, 0);
+            UI_WindowDrawPanel(124, 46, 72, 17, 0);
             TEXT_Format(g_UiTextFormatBuffer, D_801F2C04, seconds, hundredths + (rand() & 3));
             g_UiTextFormatBuffer[2] = 0x8F;
             UI_TextDraw(140, 48, (seconds < 10) ? ((g_SaveData.scene_event_timer >> 1) & 2) : 0, 5, g_UiTextFormatBuffer);

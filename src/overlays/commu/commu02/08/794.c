@@ -7,7 +7,6 @@ __asm__(".include \"include/match/macro.inc\"\n");
 #endif
 
 void func_801D4910(s32 x, s32 y);
-void func_801D4EA4(s32 left, s32 top, s32 icon_row, s32 raised);
 void func_801D8058(s32 left, s32 top);
 void func_801D2908(s16 x, s16 y, u8 mode);
 void Menu_DrawPanelIcon(u16 x, u16 y, s32 u, s32 v, u16 clut, u8 color);
@@ -1184,33 +1183,19 @@ NON_MATCHING void func_801D4AE0(s16 x, s16 y, u8 flag) {
 INCLUDE_ASM(func_801D4AE0);
 #endif
 
-#ifdef NON_MATCHING
-NON_MATCHING void func_801D4EA4(s32 left, s32 top, s32 icon_row, s32 raised) {
+MATCH void func_801D4EA4(s16 left, s16 top, u8 icon_row, u8 raised) {
     s32 i;
-    s32 x;
-    s32 draw_y;
-    s32 up_y;
     u8  icon;
-    u8* icons;
 
-    icon  = (u8)icon_row * 5 + 3;
-    up_y  = (top - 8) << 16;
-    icons = D_801DB080;
-    x     = left;
+    icon = icon_row * 5 + 3;
     for (i = 0; i < 3; i++) {
-        if (D_801DB0B8 == i && (u8)raised != 0) {
-            draw_y = up_y >> 16;
+        if (D_801DB0B8 == i && raised != 0) {
+            func_801D2CF8((s16)(left + i * 32), (s16)(top - 8), D_801DB080[icon + i]);
         } else {
-            draw_y = top;
+            func_801D2CF8((s16)(left + i * 32), (s16)top, D_801DB080[icon + i]);
         }
-        func_801D2CF8((s16)x, (s16)draw_y, icons[icon]);
-        icon++;
-        x += 32;
     }
 }
-#else
-INCLUDE_ASM(func_801D4EA4);
-#endif
 
 MATCH void func_801D4F88(s32 x, s32 y, s32 show_values) {
     s32 i;
@@ -2338,13 +2323,13 @@ NON_MATCHING void Menu_DrawHeaderBar(s32 x, s32 y, s32 width, s32 height, u8 win
     prim->x3 = x + width1;
     setXY0(prim, x + width1 - 2, top);
     prim->x2 = x + width1 - 2;
-    prim->y3 = bottom_y;
     setUV0(prim, 0u, 0u);
     prim->u1 = 2u;
     prim->v1 = 0u;
     prim->u2 = 0u;
     prim->u3 = 2u;
     prim->v3 = bottom_v;
+    prim->y3 = bottom_y;
     setRGB0(prim, 172, 172, 172);
     prim->y1 += 2;
     prim->y2 -= 1;
