@@ -14,6 +14,11 @@ extern Actor D_80143F48;
 /* The state handler tables the dispatchers index. */
 extern Callback D_801F47E8[];
 extern u8       D_801F4D94;
+/* The 5-byte cell-run rows at rows 2, 4 and 6 of the D_801F4D94 table; the
+ * 0x7A, 0x7B and 0x7C flags retire them. */
+extern u8       D_801F4D9E[];
+extern u8       D_801F4DA8[];
+extern u8       D_801F4DB2[];
 extern u8       D_801F4DBC[];
 extern Callback D_801F4DC4[];
 

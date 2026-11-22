@@ -7,7 +7,7 @@ MATCH void Menu_OpenFormationScreen(void) {
     MenuPanelTask* panel;
     u8             i;
 
-    record = &D_801484BC;
+    record = &g_UiPanelTasks[11].active;
     panels = (MenuPanelTask*)(record + 0x120);
     i      = 0;
     record++;

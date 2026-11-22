@@ -8,7 +8,7 @@ MATCH void UI_MessageClosePanel(void) {
 
     g_UiMessageWindow.selection_index = 0;
     UI_PanelOpenTask(1, 0);
-    count           = g_UiMessageStep;
-    D_80148356      = 2;
-    g_UiMessageStep = count + 1;
+    count                  = g_UiMessageStep;
+    g_UiPanelTasks[1].mode = 2;
+    g_UiMessageStep        = count + 1;
 }

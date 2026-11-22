@@ -10,37 +10,37 @@ MATCH void func_801E09F4(void) {
     u8* flag2;
 
     D_80148340 = 0x18;
-    D_80148628 = D_801483E8 + 5;
-    sum        = (D_801483EE << 4) + 0x1A;
-    D_8014862A = D_801483EA + sum;
+    D_80148628 = g_UiPanelTasks[5].pos.x + 5;
+    sum        = (g_UiPanelTasks[5].unk_0A << 4) + 0x1A;
+    D_8014862A = g_UiPanelTasks[5].pos.y + sum;
     buttons    = INPUT_REPEATED(g_PadStates[0].pressed, (PADLup | PADLdown));
     if (buttons & PADLup) {
         u8 next;
 
         SND_SEPlay(EMI_SE_ID(SND_BANK_COMMON, 1));
-        next       = D_801483EE - 1;
-        D_801483EE = next;
+        next                     = g_UiPanelTasks[5].unk_0A - 1;
+        g_UiPanelTasks[5].unk_0A = next;
         if ((s8)next < 0) {
-            D_801483EE = 2;
+            g_UiPanelTasks[5].unk_0A = 2;
         }
     } else if (buttons & PADLdown) {
         u8 next;
 
         SND_SEPlay(EMI_SE_ID(SND_BANK_COMMON, 1));
-        next       = D_801483EE + 1;
-        D_801483EE = next;
+        next                     = g_UiPanelTasks[5].unk_0A + 1;
+        g_UiPanelTasks[5].unk_0A = next;
         if ((next & BYTE_MASK) >= 3U) {
-            D_801483EE = 0;
+            g_UiPanelTasks[5].unk_0A = 0;
         }
     }
     if (g_PadStates[0].pressed & g_InputMasks[MENU_INPUT_CONFIRM]) {
         SND_SEPlay(EMI_SE_ID(SND_BANK_COMMON, 3));
-        raw = D_801483EE & BYTE_MASK;
+        raw = g_UiPanelTasks[5].unk_0A & BYTE_MASK;
         if (raw == 0) {
-            flag       = &g_MenuStep.state;
-            count      = *flag;
-            D_801483EF = D_801483EE;
-            *flag      = count + 1;
+            flag                     = &g_MenuStep.state;
+            count                    = *flag;
+            g_UiPanelTasks[5].unk_0B = g_UiPanelTasks[5].unk_0A;
+            *flag                    = count + 1;
             return;
         }
         Menu_RunAbilityStockSort(raw);
@@ -49,10 +49,10 @@ MATCH void func_801E09F4(void) {
     if (g_PadStates[0].pressed & g_InputMasks[MENU_INPUT_CANCEL]) {
         SND_SEPlay(EMI_SE_ID(SND_BANK_COMMON, 2));
         SND_SEPlay(EMI_SE_ID(SND_BANK_COMMON, 6));
-        flag2                = &g_MenuStep.sub_step;
-        D_801483E4           = 0;
-        count2               = *flag2;
-        g_BattleMessageState = 4;
-        *flag2               = count2 - 2;
+        flag2                    = &g_MenuStep.sub_step;
+        g_UiPanelTasks[5].active = 0;
+        count2                   = *flag2;
+        g_BattleMessageState     = 4;
+        *flag2                   = count2 - 2;
     }
 }

@@ -1,7 +1,7 @@
 #include "start_08.h"
 
 MATCH void func_801D8188(void) {
-    u8* slot = &D_80148624;
+    u8* slot = &g_UiPanelTasks[21].active;
     /* FAKE: branch-select byte pinned to s0; gcc swaps s0/s1 without it (94.78%). */
     FAKE_REG(s8*, toggle, "s0");
     u16* key;

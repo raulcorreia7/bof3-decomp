@@ -5,6 +5,7 @@
  * and its data. Only this image includes the file. */
 
 #include "overlays/boss/boss.h"
+#include "menu/panel.h"
 
 /* The scratchpad work area is a PartyMember record in this image. */
 
@@ -31,7 +32,6 @@ extern u16          D_80145F18;
 extern u16          D_801462E8;
 extern u32          D_801462EC;
 extern volatile u8  D_80146322;
-extern u8           D_80148603;
 extern EnemyBattler D_801EB748[];
 extern u8           D_801FE4E4;
 extern u8           D_801FE4EC[];
