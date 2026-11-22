@@ -2,9 +2,7 @@
 
 #ifdef NON_MATCHING
 NON_MATCHING void func_801BCD60(s32 target_x, s32 target_y) {
-    s8     stack_10;
-    s32    stack_18;
-    s32    stack_20;
+    s8     direction;
     s16    val0;
     s32    tmp0;
     s32    tmp1;
@@ -43,9 +41,7 @@ NON_MATCHING void func_801BCD60(s32 target_x, s32 target_y) {
     Actor* tmp22;
     Actor* tmp23;
 
-    stack_20 = target_y;
-    tmp8     = g_Task;
-    stack_18 = target_x;
+    tmp8 = g_Task;
     if ((tmp8->header.flags & 0x80) && !((g_Game.flags | g_Game.walk_flags) & BIT(0)) && !(g_Game.members[0].status.field.flags.value & 1)) {
         val9  = tmp8->pos.x.fixed;
         val2  = tmp8->pos.y.fixed;
@@ -54,7 +50,7 @@ NON_MATCHING void func_801BCD60(s32 target_x, s32 target_y) {
         if (tmp6 < 0) {
             val12 = -val12;
         }
-        tmp7 = val2 - stack_20;
+        tmp7 = val2 - target_y;
         val1 = tmp7;
         if (tmp7 < 0) {
             val1 = -val1;
@@ -69,7 +65,7 @@ NON_MATCHING void func_801BCD60(s32 target_x, s32 target_y) {
         val0  = Area_HeightRead(tmp15->pos.x.fixed, tmp15->pos.y.fixed);
         val0 <<= 0x10;
         val0 = (s16)(val0 >> 0x10);
-        val0 -= Area_HeightRead(stack_18, stack_20);
+        val0 -= Area_HeightRead(target_x, target_y);
         val0 = ABS(val0);
         val0 = (s16)(val0 >> 8);
         val3 -= val0;
@@ -81,13 +77,13 @@ NON_MATCHING void func_801BCD60(s32 target_x, s32 target_y) {
         if (val6 > 0) {
             val7 = 0;
         loop_18:
-            func_801BD290(stack_18, stack_20, &stack_10);
-            tmp0               = (u8)stack_10 * 8;
+            func_801BD290(target_x, target_y, &direction);
+            tmp0               = (u8)direction * 8;
             tmp16              = g_Task;
             tmp16->pos.x.fixed = (s32)(val9 + (((s32*)g_FacingSteps)[tmp0] * 2 * val6));
             tmp3               = val2 + (*(g_FacingStepY + tmp0) * 2 * val6);
             tmp16->pos.y.fixed = tmp3;
-            val0               = Area_HeightReadStep(tmp16->pos.x.fixed, tmp3, (u8)stack_10);
+            val0               = Area_HeightReadStep(tmp16->pos.x.fixed, tmp3, (u8)direction);
             if (Game_TestPlacement(TASK(Actor)->pos.x.fixed, TASK(Actor)->pos.y.fixed, TASK(Actor)->voice_flags.scene_flag, val0) & 0xFF) {
                 val0 = 1;
                 tmp1 = val7 - 1;
@@ -175,7 +171,7 @@ NON_MATCHING void func_801BCD60(s32 target_x, s32 target_y) {
                 if (Area_GetWidth(tmp9->pos.x.part.integer, tmp9->pos.y.part.integer) & BYTE_MASK) {
                     g_Game.current->status.field.flags.unsigned_value = (u8)(g_Game.current->status.field.flags.unsigned_value & 0xFE);
                     TASK(Actor)->draw_layer                           = (u8)g_AreaDrawMode;
-                    TASK(Actor)->direction                            = (u8)stack_10;
+                    TASK(Actor)->direction                            = (u8)direction;
                 } else {
                     goto block_41; /* retail branch */
                 }
