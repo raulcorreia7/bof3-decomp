@@ -1,0 +1,3 @@
+{"function": "emi/etc/commu01/07@0x801D2D98", "tried": "read the prologue: retail copies a0 to s6 and a1 to s5; the draft copies a0 to s5 and a1 to s6, and the whole body follows that swap", "first_diff": "0x801D2DA0 sw s6,56(sp) against sw s5,52(sp)", "score": "74 rows"}
+{"function": "emi/etc/bate/00@0x801D2304", "tried": "read the prologue: retail frame 0x48 (candidate 0x40), saves s1 at 0x24 and s0 at 0x20", "first_diff": "0x801D2304 addiu sp,-72 against addiu sp,-64", "score": "124 rows"}
+{"function": "emi/etc/game/00@0x801A0048", "tried": "read the head: v0/v1 and s3/s2 rotate, and the negative branch target is 0x801A02BC against 0x801A0144, so the bodies diverge", "first_diff": "0x801A007C lw v0 against lw v1", "score": "148 rows"}
