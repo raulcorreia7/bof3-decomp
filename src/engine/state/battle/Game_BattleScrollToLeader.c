@@ -30,9 +30,9 @@ MATCH void Game_BattleScrollToLeader(void) {
         dst   = 0;
         do {
             index++;
-            tmp                                                  = *(s32*)((u8*)g_EncounterParty + src);
+            tmp                                                  = *(s32*)((u8*)g_AreaEncounterPlacement.party + src);
             *((s32*)((u8*)&g_Game.members[0].pos.x.fixed + dst)) = tmp;
-            tmp                                                  = *(s32*)((u8*)&g_EncounterParty[0].y + src);
+            tmp                                                  = *(s32*)((u8*)&g_AreaEncounterPlacement.party[0].y + src);
             *((s32*)((u8*)&g_Game.members[0].pos.y.fixed + dst)) = tmp;
             src += 2 * sizeof(s32);
             dst += BATTLE_PARTY_STRIDE;
