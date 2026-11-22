@@ -5,7 +5,7 @@ MATCH void func_801F3630(void) {
     u16 i;
 
     p = MEM_PTR(u8, AREA_WORK);
-    for (i = 0; i < AREA_ROW_COUNT; i++) {
+    for (i = 0; i < AREA_EFFECT_COUNT; i++) {
         if (p[0] == 0) {
             p[0] = 1;
             p[2] = 0;
@@ -13,6 +13,6 @@ MATCH void func_801F3630(void) {
             D_801F43E4 ^= 1;
             return;
         }
-        p += AREA_ROW_STRIDE;
+        p += AREA_EFFECT_STRIDE;
     }
 }
