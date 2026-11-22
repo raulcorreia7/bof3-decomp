@@ -5,6 +5,7 @@ __asm__(".include \"include/match/macro.inc\"\n");
 #endif
 
 #ifdef NON_MATCHING
+/* Draws the targeted enemy's resistance bar: one 12x12 textured segment per element. */
 NON_MATCHING void func_801EFCE8(s32 x, s32 y) {
     POLY_FT4*     prim;
     u16*          uv_left;
@@ -26,11 +27,7 @@ NON_MATCHING void func_801EFCE8(s32 x, s32 y) {
     do {
         prim = (POLY_FT4*)g_GfxPrimCursor;
         SetPolyFT4(prim);
-        prim->y2 = y + 12;
-        prim->y3 = y + 12;
-        setXY2(prim, x, y, x + 12, y);
-        prim->x2 = x;
-        prim->x3 = x + 12;
+        setXYWH(prim, x, y, 12, 12);
 
         *color = 0x30;
         if ((u32)uv_right < (u32)uv_end) {
