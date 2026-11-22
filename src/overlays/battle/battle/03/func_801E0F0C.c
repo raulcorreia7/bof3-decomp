@@ -15,8 +15,7 @@ MATCH void func_801E0F0C(void) {
     /* FAKE: retail materializes the +0x124 mask in a3. */
     FAKE_REG(s32, mask, "a3");
 
-    count                     = TASK(PartyMember)->unk_09 - 1;
-    TASK(PartyMember)->unk_09 = count;
+    ACTOR_COUNT_DOWN(TASK(PartyMember), count, unk_09);
     if ((count & BYTE_MASK) == 0) {
         work         = g_Game.current;
         one          = 1;
