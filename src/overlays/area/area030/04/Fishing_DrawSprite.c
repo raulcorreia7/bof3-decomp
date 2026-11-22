@@ -4,7 +4,7 @@
  * is given, sourcing its CLUT, size and texture coordinates from the panel
  * table, and appends it to the ordering-table layer layer names. */
 /* func_801E0DCC */
-MATCH u8* Fishing_DrawSprite(s32 icon_index, s32 layer, s16 sprite_x, s16 sprite_y) {
+MATCH SPRT* Fishing_DrawSprite(s32 icon_index, s32 layer, s16 sprite_x, s16 sprite_y) {
     SPRT* sprite;
 
     sprite = (SPRT*)g_GfxPrimCursor;
@@ -15,5 +15,5 @@ MATCH u8* Fishing_DrawSprite(s32 icon_index, s32 layer, s16 sprite_x, s16 sprite
     setWH(sprite, D_801E2424[icon_index & BYTE_MASK].width, D_801E2424[icon_index & BYTE_MASK].height);
     setUV0(sprite, D_801E2424[icon_index & BYTE_MASK].u, D_801E2424[icon_index & BYTE_MASK].v);
     GFX_AddPrim((u8)layer, sizeof(SPRT));
-    return (u8*)sprite;
+    return sprite;
 }

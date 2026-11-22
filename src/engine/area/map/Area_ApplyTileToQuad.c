@@ -19,7 +19,7 @@ typedef union AreaTileCorner {
 
 /* func_80155560 */
 #ifdef NON_MATCHING
-NON_MATCHING s32 Area_ApplyTileToQuad(u32 part_word, void* prim, s32 mode) {
+NON_MATCHING s32 Area_ApplyTileToQuad(u32 part_word, POLY_FT4* prim, s32 mode) {
     AreaTileCorner uv[5];
     AreaTileRect*  rect;
     POLY_FT4*      poly;

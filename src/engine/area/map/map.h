@@ -79,7 +79,7 @@ s32         Area_CellSetPalette(s32 x, s32 y);
 u8          Area_CellClearPalette(s32 x, s32 y);
 void        Area_CellClear(s32 x, s32 y);
 /* func_80155560 */
-extern s32  Area_ApplyTileToQuad(u32 part_word, void* prim, s32 mode);
+extern s32  Area_ApplyTileToQuad(u32 part_word, POLY_FT4* prim, s32 mode);
 /* func_801558F0 */
 s32         Area_CellGetId(s32 x, s32 y);
 /* func_801559AC */
