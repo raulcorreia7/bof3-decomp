@@ -1,13 +1,13 @@
 #include "battle_15.h"
 
-/* Draws the battle command list: copies the command page, draws up to three rows with the affordability color
+/* Draws the battle command list: copies the command page, draws up to three lines with the affordability color
  * and the price text, and the cursor box.
  */
 /* func_800B1728 */
 MATCH void Battle_DrawCommandList(void) {
     s32 entry;
     u16 line_y;
-    s32 row;
+    s32 line;
     s32 i;
     u8  clut;
     u8  slot_b;
@@ -22,8 +22,8 @@ MATCH void Battle_DrawCommandList(void) {
     UI_ListDrawScrollbar(D_800B70B8, ((BattlePanelByteCells*)(void*)g_UiPanelCurrent)->scale, (g_UiPanelCurrent->pos.x + 0x80), (g_UiPanelCurrent->pos.y + 0x18), 3,
                          ((BattlePanelByteCells*)(void*)g_UiPanelCurrent)->rows, 0x5C);
     for (i = 0; (i & BYTE_MASK) < 3U; i++) {
-        row    = i & BYTE_MASK;
-        entry  = (s16)g_UiPanelCurrent->u.battle.row_base + row;
+        line   = i & BYTE_MASK;
+        entry  = (s16)g_UiPanelCurrent->u.battle.row_base + line;
         slot_a = D_80145518[entry].gate_03;
         if (slot_a != GAME_NONE) {
             slot_b = D_80145518[entry].slot_01;
@@ -35,15 +35,15 @@ MATCH void Battle_DrawCommandList(void) {
             if (slot_c != GAME_NONE) {
                 sum += D_800B4C7C[slot_c];
             }
-            line_y = row << 5;
+            line_y = line << 5;
             clut   = 0;
-            if (g_Game.members[BATTLE_ACTIVE_ROW->slot].chr.ap < sum) {
+            if (g_Game.members[BATTLE_ACTIVE_MEMBER->slot].chr.ap < sum) {
                 clut = 7;
             }
             func_800B1DAC((g_UiPanelCurrent->pos.x + 0x10), (g_UiPanelCurrent->pos.y + (line_y + 0x18)), slot_a & 0x1F);
             line_y += 0x2D;
             UI_TextDrawString((g_UiPanelCurrent->pos.x + 16), (g_UiPanelCurrent->pos.y + line_y), clut, TEXT_LENGTH_MAX,
-                              UI_MessageGetText(((u8*)&D_800B4C90)[D_80145518[(s16)g_UiPanelCurrent->u.battle.row_base + row].gate_03 & 0x1F]));
+                              UI_MessageGetText(((u8*)&D_800B4C90)[D_80145518[(s16)g_UiPanelCurrent->u.battle.row_base + line].gate_03 & 0x1F]));
             TEXT_Format(g_UiTextFormatBuffer, D_80096A2C, sum & BYTE_MASK);
             UI_TextDrawGlyphString((g_UiPanelCurrent->pos.x + 88), (g_UiPanelCurrent->pos.y + line_y), clut, g_UiTextFormatBuffer);
         }

@@ -1,7 +1,7 @@
 #include "game_00.h"
 
 MATCH void func_801C05AC(void) {
-    PartyMember* row;
+    PartyMember* member;
     s32          i;
 
     if (!(g_AreaWalkFlags & AREA_WALK_MAP_LOADING)) {
@@ -14,10 +14,10 @@ MATCH void func_801C05AC(void) {
             }
         }
         for (i = 0; i < g_PartySize; i++) {
-            row = &g_Game.members[i];
+            member = &g_Game.members[i];
             if (!((g_GameFlags >> i) & 0x1)) {
-                g_GameState = row;
-                TASK_SET(row);
+                g_GameState = member;
+                TASK_SET(member);
                 if (g_Game.members[i].slot == 0) {
                     func_801B00F8();
                 } else {

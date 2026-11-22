@@ -57,19 +57,19 @@ MATCH bool func_801C6658(s32 table_index, s32 table_slot, s32 entry_index, s32 s
     sel  = 0;
     sub  = table_slot & BYTE_MASK;
     do {
-        new_var                       = g_EncounterOriginY;
-        count                         = 0;
-        g_EncounterParty[sub].x.fixed = g_EncounterOriginX + cur_a;
-        g_EncounterParty[sub].y.fixed = new_var + cur_b;
+        new_var                                     = g_AreaEncounterPlacement.origin.y.fixed;
+        count                                       = 0;
+        g_AreaEncounterPlacement.party[sub].x.fixed = g_AreaEncounterPlacement.origin.x.fixed + cur_a;
+        g_AreaEncounterPlacement.party[sub].y.fixed = new_var + cur_b;
         do {
             if (((func_801C6888(sub) & BYTE_MASK) != 0) && ((func_801C69C8(sub) & BYTE_MASK) != 0)) {
                 D_801CD944[sub].active = 1;
                 return 1;
             }
             if ((sel & BYTE_MASK) != flip) {
-                g_EncounterParty[sub].x.fixed += step_a;
+                g_AreaEncounterPlacement.party[sub].x.fixed += step_a;
             } else {
-                g_EncounterParty[sub].y.fixed += step_b;
+                g_AreaEncounterPlacement.party[sub].y.fixed += step_b;
             }
             count += 1;
         } while ((count & BYTE_MASK) < 8U);

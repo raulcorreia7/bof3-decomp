@@ -41,8 +41,8 @@ MATCH s8 Actor_MovementInit(s32 entry, s8 dir_x, s8 dir_y, s16 vz_start, s16 vz_
     } else {
         g_AreaCameraSpeed       = size * 8;
         g_AreaCameraHeightDelta = 0;
-        g_AreaScrollTargetX     = g_PartyX + (dir_x << 15);
-        g_AreaScrollTargetY     = g_PartyY + (dir_y << 15);
+        g_AreaScrollTargetX     = g_PartyPos.x.fixed + (dir_x << 15);
+        g_AreaScrollTargetY     = g_PartyPos.y.fixed + (dir_y << 15);
         TASK(Actor)->unk_04     = 2;
     }
     return 1;

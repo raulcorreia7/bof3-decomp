@@ -20,7 +20,7 @@ NON_MATCHING void func_800B0B0C(s16 base_x, s16 base_y) {
 
         UI_WindowDraw((u16)(base_x + slot_offset), y_value, 45u, 20u, 0u, (s32)g_WindowStyle);
 
-        selection_byte = g_Battle.row_cursor;
+        selection_byte = g_Battle.selection;
         if (selection_byte & 0x80u) {
             active_slot = selection_byte & 0x7Fu;
             if (slot == active_slot) {
@@ -39,7 +39,7 @@ NON_MATCHING void func_800B0B0C(s16 base_x, s16 base_y) {
         slot += 1u;
     } while (BATTLER_IS_PLAYER(slot));
 
-    selection_byte = g_Battle.row_cursor;
+    selection_byte = g_Battle.selection;
 
     if (!(selection_byte & 0x80u)) {
         active_slot = selection_byte & 0x7Fu;

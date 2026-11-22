@@ -382,9 +382,7 @@ extern u8                    D_80142CE0[];
 /* D_80143740 */
 extern u32                   g_AreaCellPackets[];
 /* SLUS-only state: overlays declare these addresses with their own views, so
- * the registry does not emit them, except g_SysThreads. */
-/* D_80143B40 */
-extern Thread                g_SysThreads[]; /* four threads, 0x80 bytes each */
+ * the registry does not emit them; g_SysThreads stays in sys/sched.h. */
 extern u8                    D_80143D75;
 extern u8                    D_80143D76;
 extern u8                    D_80143D77;

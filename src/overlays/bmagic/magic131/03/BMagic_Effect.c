@@ -548,8 +548,8 @@ MATCH void func_801F058C(void) {
 
 #include "overlays/bmagic/shared/Effect_SetActorMatrix.h"
 
-#ifdef NON_MATCHING
-NON_MATCHING void func_801F06B4(void) {
+/* Draws the effect as 8 rings of 16 textured quads around the party member. */
+MATCH void func_801F06B4(void) {
     POLY_FT4* poly;
     long      depth;
     long      flag;
@@ -581,10 +581,10 @@ NON_MATCHING void func_801F06B4(void) {
         for (i = 1; i < 17; i++) {
             angle = i;
             angle &= 0xF;
-            g_ScratchPad.cells.halves[3] = angle << 7;
+            g_ScratchPad.cells.halves[3] = angle << 8;
             g_ScratchPadVectors[0].vx    = g_ScratchPadVectors[1].vx;
             g_ScratchPadVectors[0].vy    = g_ScratchPadVectors[1].vy;
-            g_ScratchPadVectors[1].vx    = FIXED_MUL(rsin(angle << 7), g_ScratchPad.cells.halves[1]);
+            g_ScratchPadVectors[1].vx    = FIXED_MUL(rsin(angle << 8), g_ScratchPad.cells.halves[1]);
             g_ScratchPadVectors[1].vy    = FIXED_MUL(rcos(g_ScratchPad.cells.halves[3]), g_ScratchPad.cells.halves[1]);
             g_ScratchPadVectors[2].vx    = g_ScratchPadVectors[3].vx;
             g_ScratchPadVectors[2].vy    = g_ScratchPadVectors[3].vy;
@@ -595,9 +595,9 @@ NON_MATCHING void func_801F06B4(void) {
             SetSemiTrans(poly, 1);
             poly->tpage = GetTPage(TPAGE_DEPTH_8BIT, TPAGE_ABR_ADD, 0x340, 0x100);
             poly->clut  = GetClut(0, 0x1FA);
-            setUV4(poly, ((i & 1) + (ring - 1) / 4 * 2) << 6, FIELD(u8, D_801F1C08, 0xB + ring - 1), (((i & 1) + (ring - 1) / 4 * 2) << 6) + 0x3F, FIELD(u8, D_801F1C08, 0xB + ring - 1),
-                   ((i & 1) + (ring - 1) / 4 * 2) << 6, FIELD(u8, D_801F1C08, 0x13 + ring - 1) - 1 + FIELD(u8, D_801F1C08, 0xB + ring - 1), (((i & 1) + (ring - 1) / 4 * 2) << 6) + 0x3F,
-                   FIELD(u8, D_801F1C08, 0x13 + ring - 1) - 1 + FIELD(u8, D_801F1C08, 0xB + ring - 1));
+            setUV4(poly, ((i & 1) + (ring - 1) / 4 * 2) << 6, g_BMagicRingUvRows[0xB + ring], (((i & 1) + (ring - 1) / 4 * 2) << 6) + 0x3F, g_BMagicRingUvRows[0xB + ring],
+                   ((i & 1) + (ring - 1) / 4 * 2) << 6, g_BMagicRingUvRows[0x13 + ring] - 1 + g_BMagicRingUvRows[0xB + ring], (((i & 1) + (ring - 1) / 4 * 2) << 6) + 0x3F,
+                   g_BMagicRingUvRows[0x13 + ring] - 1 + g_BMagicRingUvRows[0xB + ring]);
             RotTransPers4(&g_ScratchPadVectors[0], &g_ScratchPadVectors[1], &g_ScratchPadVectors[2], &g_ScratchPadVectors[3], (long*)&poly->x0, (long*)&poly->x1, (long*)&poly->x2, (long*)&poly->x3,
                           &depth, &flag);
             setRGB0(poly, g_ScratchPad.cells.halves[4], g_ScratchPad.cells.halves[5], g_ScratchPad.cells.halves[6]);
@@ -607,9 +607,6 @@ NON_MATCHING void func_801F06B4(void) {
         }
     }
 }
-#else
-INCLUDE_ASM(func_801F06B4);
-#endif
 
 MATCH void func_801F0B44(void) {
     BMAGIC_DISPATCH_AND_DRAW_IN_OWN_MATRIX(D_801F1C24, func_801F0D44, func_801F0DF4);

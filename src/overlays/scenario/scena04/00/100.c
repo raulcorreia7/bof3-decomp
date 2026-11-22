@@ -256,23 +256,23 @@ MATCH void func_801F78F4(void) {
     /* FAKE: retail reserves 16 bytes of unused stack. */
     FAKE_STACK_PADS(u8, 16);
     ScenePath*     work;
-    SceneParticle* row;
+    SceneParticle* particle;
     u8             i;
 
     work = MEM_PTR(ScenePath, AREA_WORK + 0x1400);
     if ((TASK(Actor)->vx & 0xF) == 0) {
         i = 0;
         do {
-            row = (SceneParticle*)func_801F7FF8();
-            if (row != NULL) {
-                *(ScenePathPoint*)row = *(ScenePathPoint*)work;
-                row->velocity.vx      = (work->points[i].vx - work->focus.vx) >> 4;
-                row->velocity.vy      = (work->points[i].vy - work->focus.vy) >> 4;
-                row->velocity.vz      = (work->points[i].vz - work->focus.vz) >> 4;
-                VectorNormal(&row->velocity.vx, &row->velocity.vx);
-                row->unk_24 = 0x80;
-                row->unk_20 = 0x1000;
-                row->life   = 0x80;
+            particle = (SceneParticle*)func_801F7FF8();
+            if (particle != NULL) {
+                *(ScenePathPoint*)particle = *(ScenePathPoint*)work;
+                particle->velocity.vx      = (work->points[i].vx - work->focus.vx) >> 4;
+                particle->velocity.vy      = (work->points[i].vy - work->focus.vy) >> 4;
+                particle->velocity.vz      = (work->points[i].vz - work->focus.vz) >> 4;
+                VectorNormal(&particle->velocity.vx, &particle->velocity.vx);
+                particle->unk_24 = 0x80;
+                particle->unk_20 = 0x1000;
+                particle->life   = 0x80;
             }
             i++;
         } while (i < 8);
@@ -301,37 +301,37 @@ MATCH void func_801F7AC8(void) {
 }
 
 MATCH void func_801F7B00(void) {
-    /* FAKE: unused frame, 16 bytes; `row` and `shade` also stay uninitialized
+    /* FAKE: unused frame, 16 bytes; `particle` and `shade` also stay uninitialized
        when the frame count skips the spawn, as in retail. */
     FAKE_STACK_PADS(u8, 16);
-    u8* row;
+    u8* particle;
     s32 shade;
     s32 height;
 
     if ((g_FrameCount & 0x7) == 0) {
-        row   = func_801F7FF8();
-        shade = 0x80;
-        if (row != NULL) {
-            FIELD(s32, row, 0x00) = D_80146954;
-            FIELD(s32, row, 0x04) = D_80146958;
-            height                = D_8014695C;
-            FIELD(s32, row, 0x10) = 0;
-            FIELD(s32, row, 0x14) = 0;
-            FIELD(s32, row, 0x18) = 0;
-            FIELD(s8, row, 0x24)  = shade;
-            FIELD(s32, row, 0x20) = 0x800;
-            FIELD(s8, row, 0x25)  = shade;
-            FIELD(s32, row, 0x08) = height >> 8;
+        particle = func_801F7FF8();
+        shade    = 0x80;
+        if (particle != NULL) {
+            FIELD(s32, particle, 0x00) = D_80146954;
+            FIELD(s32, particle, 0x04) = D_80146958;
+            height                     = D_8014695C;
+            FIELD(s32, particle, 0x10) = 0;
+            FIELD(s32, particle, 0x14) = 0;
+            FIELD(s32, particle, 0x18) = 0;
+            FIELD(s8, particle, 0x24)  = shade;
+            FIELD(s32, particle, 0x20) = 0x800;
+            FIELD(s8, particle, 0x25)  = shade;
+            FIELD(s32, particle, 0x08) = height >> 8;
         }
     }
-    func_801F7EC0(shade, row);
+    func_801F7EC0(shade, particle);
     if (g_ScriptVarsReq.byte == 3) {
         Scene_AdvanceActorMode();
     }
 }
 
 MATCH void func_801F7BC0(void) {
-    u8*  row;
+    u8*  particle;
     u8   i;
     s32  angle;
     s32* spot;
@@ -339,18 +339,18 @@ MATCH void func_801F7BC0(void) {
     i    = 0;
     spot = &D_80146954;
     for (; i < 16; i++) {
-        row = func_801F7FF8();
-        if (row != NULL) {
-            FIELD(s32, row, 0x00) = spot[0];
-            angle                 = i << 8;
-            FIELD(s32, row, 0x04) = spot[1];
-            FIELD(s32, row, 0x08) = spot[2] >> 8;
-            FIELD(s32, row, 0x10) = rsin(angle) >> 2;
-            FIELD(s32, row, 0x14) = rcos(angle) >> 2;
-            FIELD(s32, row, 0x18) = 0;
-            FIELD(s8, row, 0x24)  = 0x40;
-            FIELD(s32, row, 0x20) = 0x800;
-            FIELD(s8, row, 0x25)  = 0x40;
+        particle = func_801F7FF8();
+        if (particle != NULL) {
+            FIELD(s32, particle, 0x00) = spot[0];
+            angle                      = i << 8;
+            FIELD(s32, particle, 0x04) = spot[1];
+            FIELD(s32, particle, 0x08) = spot[2] >> 8;
+            FIELD(s32, particle, 0x10) = rsin(angle) >> 2;
+            FIELD(s32, particle, 0x14) = rcos(angle) >> 2;
+            FIELD(s32, particle, 0x18) = 0;
+            FIELD(s8, particle, 0x24)  = 0x40;
+            FIELD(s32, particle, 0x20) = 0x800;
+            FIELD(s8, particle, 0x25)  = 0x40;
         }
     }
     func_801F7EC0();
@@ -366,7 +366,7 @@ MATCH void func_801F7CA8(void) {
 }
 
 /* Draw one particle as a semi-transparent billboard quad at its projected position, shaded by its brightness. */
-MATCH void func_801F7CF0(SceneParticle* row) {
+MATCH void func_801F7CF0(SceneParticle* particle) {
     POLY_FT4* prim;
     DVECTOR   screen;
     DVECTOR   scale;
@@ -375,12 +375,12 @@ MATCH void func_801F7CF0(SceneParticle* row) {
     FAKE_STACK_PADS(u8, 32);
 
     SetDrawMode((DR_MODE*)g_GfxPrimCursor, 0, 0, GetTPage(TPAGE_DEPTH_4BIT, TPAGE_ABR_ADD, 704, 256) & HALF_MASK, 0);
-    Area_CellAddPrim(row->pos.vx, row->pos.vy, 1, sizeof(DR_MODE));
+    Area_CellAddPrim(particle->pos.vx, particle->pos.vy, 1, sizeof(DR_MODE));
     prim = (POLY_FT4*)g_GfxPrimCursor;
     SetPolyFT4(prim);
     SetSemiTrans(prim, 1);
-    screen.vx = (u32)row->unk_20 >> 6;
-    pos       = row->pos;
+    screen.vx = (u32)particle->unk_20 >> 6;
+    pos       = particle->pos;
     pos.vz <<= 8;
     Game_ProjectWorldPoint(&pos, &screen, &scale);
     Camera_ProjectPoint((s32*)&pos, &screen);
@@ -391,33 +391,33 @@ MATCH void func_801F7CF0(SceneParticle* row) {
     setClut(prim, 160, STAGE_PALETTE_Y + 3);
     prim->tpage = GetTPage(TPAGE_DEPTH_4BIT, TPAGE_ABR_ADD, 704, 256);
     setUVWH(prim, 224, 48, 31, 31);
-    setRGB0(prim, row->unk_24, row->unk_24, row->unk_24);
-    Area_CellAddPrim(row->pos.vx, row->pos.vy, 1, sizeof(POLY_FT4));
+    setRGB0(prim, particle->unk_24, particle->unk_24, particle->unk_24);
+    Area_CellAddPrim(particle->pos.vx, particle->pos.vy, 1, sizeof(POLY_FT4));
 }
 
 MATCH void func_801F7EC0() {
     u8             camera[32];
-    SceneParticle* row;
+    SceneParticle* particle;
     u8             i;
     s32            height;
 
     Camera_SetMatrix(camera);
-    row = MEM_PTR(SceneParticle, AREA_WORK);
-    for (i = 0; i < 128; row++, i++) {
-        if (row->life != 0) {
-            func_801F7CF0(row);
-            row->pos.vx += row->velocity.vx;
-            row->pos.vy += row->velocity.vy;
-            row->pos.vz += row->velocity.vz;
-            height = Area_HeightSample(row->pos.vx, row->pos.vy);
-            if (row->pos.vz < height) {
-                row->pos.vz      = height;
-                row->velocity.vz = 0;
-                VectorNormal(&row->velocity.vx, &row->velocity.vx);
+    particle = MEM_PTR(SceneParticle, AREA_WORK);
+    for (i = 0; i < 128; particle++, i++) {
+        if (particle->life != 0) {
+            func_801F7CF0(particle);
+            particle->pos.vx += particle->velocity.vx;
+            particle->pos.vy += particle->velocity.vy;
+            particle->pos.vz += particle->velocity.vz;
+            height = Area_HeightSample(particle->pos.vx, particle->pos.vy);
+            if (particle->pos.vz < height) {
+                particle->pos.vz      = height;
+                particle->velocity.vz = 0;
+                VectorNormal(&particle->velocity.vx, &particle->velocity.vx);
             }
-            row->unk_24--;
-            row->unk_20 += 4;
-            row->life--;
+            particle->unk_24--;
+            particle->unk_20 += 4;
+            particle->life--;
         }
     }
 }

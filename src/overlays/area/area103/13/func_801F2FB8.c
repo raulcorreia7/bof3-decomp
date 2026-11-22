@@ -3,7 +3,7 @@
 #ifdef NON_MATCHING
 /* Draws the ribbon trail of one spin row: thirty-two quads from the projected centre point, each
  * edge turned from the segment direction by the accumulated length. */
-NON_MATCHING void func_801F2FB8(AreaSpinEffect* row) {
+NON_MATCHING void func_801F2FB8(AreaSpinEffect* effect) {
     VECTOR   point;
     VECTOR   from;
     VECTOR   edge;
@@ -17,12 +17,12 @@ NON_MATCHING void func_801F2FB8(AreaSpinEffect* row) {
     s32      turn;
     s32      i;
 
-    angle    = row->angle;
-    scale    = row->scale;
-    shade    = row->unk_14;
-    point.vx = row->pos.x + ((rcos(angle) * scale) >> 4);
-    point.vy = row->pos.y + ((rsin(angle) * scale) >> 4);
-    point.vz = row->pos.z;
+    angle    = effect->angle;
+    scale    = effect->scale;
+    shade    = effect->unk_14;
+    point.vx = effect->pos.x + ((rcos(angle) * scale) >> 4);
+    point.vy = effect->pos.y + ((rsin(angle) * scale) >> 4);
+    point.vz = effect->pos.z;
     Camera_ProjectPoint((s32*)&point, &screen);
     screen2 = screen;
     length  = 0;
@@ -45,8 +45,8 @@ NON_MATCHING void func_801F2FB8(AreaSpinEffect* row) {
         point.vz += 0x70000;
         from = point;
         scale += 0x18;
-        point.vx = row->pos.x + ((rcos(angle) * scale) >> 4);
-        point.vy = row->pos.y + ((rsin(angle) * scale) >> 4);
+        point.vx = effect->pos.x + ((rcos(angle) * scale) >> 4);
+        point.vy = effect->pos.y + ((rsin(angle) * scale) >> 4);
         from.vx  = point.vx - from.vx;
         from.vy  = point.vy - from.vy;
         from.vz  = 0;

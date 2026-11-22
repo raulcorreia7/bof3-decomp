@@ -4,20 +4,20 @@
 MATCH void func_801F2C48(void) {
     u8            slot;
     u8            option_flags;
-    SpawnedActor* row;
+    SpawnedActor* spawned_actor;
     Actor*        actor;
     Actor*        parent;
     SpawnedActor* src;
 
     slot = Actor_FindFreeSpawned();
     if (slot != GAME_NONE) {
-        D_801F6520 = g_Game.members[TASK(Actor)->option_flags].character_index != 0;
-        row        = &g_SpawnedActors[slot];
+        D_801F6520    = g_Game.members[TASK(Actor)->option_flags].character_index != 0;
+        spawned_actor = &g_SpawnedActors[slot];
         GFX_ClearRect(0x340, 0x100, 0x80, 0x100);
         option_flags        = TASK(Actor)->option_flags;
         src                 = (SpawnedActor*)&g_Game.members[option_flags];
-        *row                = *src;
-        actor               = (Actor*)row;
+        *spawned_actor      = *src;
+        actor               = (Actor*)spawned_actor;
         actor->header.flags = 1;
         actor->header.mode  = 2;
         actor->header.step  = 0;

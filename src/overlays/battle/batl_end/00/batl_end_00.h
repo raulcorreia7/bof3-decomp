@@ -21,8 +21,8 @@ extern const char D_801EEC04[];
 extern const char D_801EEC4C[];
 extern const char D_801EEC50[];
 u8                func_801EEDA8(void);
-/* Sets the panel row the reward list opens on. */
-void              func_801DE9A8(u8 row);
+/* Sets the reward list's first entry. */
+void              func_801DE9A8(u8 entry);
 s32               func_801EF6C0(void);
 u16               func_801EF928(u8 id, u8 flag);
 extern void       func_801EFE5C(void);

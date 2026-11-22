@@ -10,7 +10,7 @@ NON_MATCHING u16 func_801EF928(u8 id, u8 flag) {
     s32 work;
     s32 exp;
     s32 delta;
-    s32 row;
+    s32 level_offset;
     s32 gain;
 
     delta     = 0;
@@ -34,10 +34,10 @@ NON_MATCHING u16 func_801EF928(u8 id, u8 flag) {
             return ((u8)final_level - level) & 0xFFFF;
         case 1:
             for (i = level; i < final_level; i++) {
-                row      = id * LEVEL_GROWTH_LEVEL_COUNT;
-                modifier = g_Characters[id].level_up_modifiers[0];
-                gain     = delta + (&g_LevelGrowth[0][row])[i].hp;
-                delta    = (s8)modifier + gain;
+                level_offset = id * LEVEL_GROWTH_LEVEL_COUNT;
+                modifier     = g_Characters[id].level_up_modifiers[0];
+                gain         = delta + (&g_LevelGrowth[0][level_offset])[i].hp;
+                delta        = (s8)modifier + gain;
             }
             if ((s16)delta < 0) {
                 return 0;
@@ -45,10 +45,10 @@ NON_MATCHING u16 func_801EF928(u8 id, u8 flag) {
             return delta & 0xFFFF;
         case 2:
             for (i = level; i < final_level; i++) {
-                row      = id * LEVEL_GROWTH_LEVEL_COUNT;
-                modifier = g_Characters[id].level_up_modifiers[1];
-                gain     = delta + (&g_LevelGrowth[0][row])[i].ap;
-                delta    = (s8)modifier + gain;
+                level_offset = id * LEVEL_GROWTH_LEVEL_COUNT;
+                modifier     = g_Characters[id].level_up_modifiers[1];
+                gain         = delta + (&g_LevelGrowth[0][level_offset])[i].ap;
+                delta        = (s8)modifier + gain;
             }
             if ((s16)delta < 0) {
                 return 0;
@@ -56,10 +56,10 @@ NON_MATCHING u16 func_801EF928(u8 id, u8 flag) {
             return delta & 0xFFFF;
         case 3:
             for (i = level; i < final_level; i++) {
-                row      = id * LEVEL_GROWTH_LEVEL_COUNT;
-                modifier = g_Characters[id].level_up_modifiers[2];
-                gain     = delta + ((&g_LevelGrowth[0][row])[i].power_defense >> 4);
-                delta    = (s8)modifier + gain;
+                level_offset = id * LEVEL_GROWTH_LEVEL_COUNT;
+                modifier     = g_Characters[id].level_up_modifiers[2];
+                gain         = delta + ((&g_LevelGrowth[0][level_offset])[i].power_defense >> 4);
+                delta        = (s8)modifier + gain;
             }
             if ((s16)delta < 0) {
                 return 0;
@@ -67,10 +67,10 @@ NON_MATCHING u16 func_801EF928(u8 id, u8 flag) {
             return delta & 0xFFFF;
         case 4:
             for (i = level; i < final_level; i++) {
-                row      = id * LEVEL_GROWTH_LEVEL_COUNT;
-                modifier = g_Characters[id].level_up_modifiers[3];
-                gain     = delta + ((&g_LevelGrowth[0][row])[i].power_defense & 0xF);
-                delta    = (s8)modifier + gain;
+                level_offset = id * LEVEL_GROWTH_LEVEL_COUNT;
+                modifier     = g_Characters[id].level_up_modifiers[3];
+                gain         = delta + ((&g_LevelGrowth[0][level_offset])[i].power_defense & 0xF);
+                delta        = (s8)modifier + gain;
             }
             if ((s16)delta < 0) {
                 return 0;
@@ -78,10 +78,10 @@ NON_MATCHING u16 func_801EF928(u8 id, u8 flag) {
             return delta & 0xFFFF;
         case 5:
             for (i = level; i < final_level; i++) {
-                row      = id * LEVEL_GROWTH_LEVEL_COUNT;
-                modifier = g_Characters[id].level_up_modifiers[4];
-                gain     = delta + ((&g_LevelGrowth[0][row])[i].agility_intelligence >> 4);
-                delta    = (s8)modifier + gain;
+                level_offset = id * LEVEL_GROWTH_LEVEL_COUNT;
+                modifier     = g_Characters[id].level_up_modifiers[4];
+                gain         = delta + ((&g_LevelGrowth[0][level_offset])[i].agility_intelligence >> 4);
+                delta        = (s8)modifier + gain;
             }
             if ((s16)delta < 0) {
                 return 0;
@@ -89,10 +89,10 @@ NON_MATCHING u16 func_801EF928(u8 id, u8 flag) {
             return delta & 0xFFFF;
         case 6:
             for (i = level; i < final_level; i++) {
-                row      = id * LEVEL_GROWTH_LEVEL_COUNT;
-                modifier = g_Characters[id].level_up_modifiers[5];
-                gain     = delta + ((&g_LevelGrowth[0][row])[i].agility_intelligence & 0xF);
-                delta    = (s8)modifier + gain;
+                level_offset = id * LEVEL_GROWTH_LEVEL_COUNT;
+                modifier     = g_Characters[id].level_up_modifiers[5];
+                gain         = delta + ((&g_LevelGrowth[0][level_offset])[i].agility_intelligence & 0xF);
+                delta        = (s8)modifier + gain;
             }
             if ((s16)delta < 0) {
                 return 0;

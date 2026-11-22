@@ -3,20 +3,20 @@
 /* Four state handlers; the binary keeps the table at this address and no
  * header declares it. */
 
-/* 0x118-byte enemy work rows; the rows are anchors that the code addresses by
- * byte offset. The row's action points and cap are read through the
+/* 0x118-byte enemy work records; the records are anchors that the code addresses by
+ * byte offset. The record's action points and cap are read through the
  * EnemyBattler record. */
 
 /* advances the battle menu panel: dispatches the state handler,
  * copies the selected enemy's figures and the panel fields into the panel
  * record, closes the panel when the slot becomes blocked, and toggles the
- * enemy row's 0x2000 flag from the row's shutter counters.
+ * enemy record's 0x2000 flag from the record's shutter counters.
  */
 /* func_801E960C */
 MATCH void Battle_UpdateEnemyPanel(void) {
     BattlePanelTask* task;
     BattlePanelTask* panel;
-    u8*              row;
+    u8*              cell;
     u32              slot;
     u32              offset;
     u16              flags;
@@ -27,8 +27,8 @@ MATCH void Battle_UpdateEnemyPanel(void) {
     handlers[BATTLE_PANEL_TASK->state]();
 
     task = BATTLE_PANEL_TASK;
-    row  = D_801EB35C + task->selection.slot * 0x118;
-    func_801EA1E0(&task->ratio, (row + 0x2C), &task->max_hp, &task->hp, (row + 0x20), &task->cursor, &task->pad_16[2], &task->unk_08);
+    cell = D_801EB35C + task->selection.slot * 0x118;
+    func_801EA1E0(&task->ratio, (cell + 0x2C), &task->max_hp, &task->hp, (cell + 0x20), &task->cursor, &task->pad_16[2], &task->unk_08);
 
     if (Battle_SlotIsBlocked(BATTLE_PANEL_TASK->selection.slot) != 0) {
         panel = BATTLE_PANEL_TASK;

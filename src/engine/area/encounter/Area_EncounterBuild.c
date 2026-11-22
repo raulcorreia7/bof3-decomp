@@ -22,8 +22,8 @@ MATCH s32 Area_EncounterBuild(u8 work_mode, s32 work_index) {
         D_801CD8C8 = work_mode;
     }
     if ((work_index & BYTE_MASK) == 0) {
-        g_EncounterOriginX = g_AreaScrollTargetX & 0xFFFF8000;
-        g_EncounterOriginY = g_AreaScrollTargetY & 0xFFFF8000;
+        g_AreaEncounterPlacement.origin.x.fixed = g_AreaScrollTargetX & 0xFFFF8000;
+        g_AreaEncounterPlacement.origin.y.fixed = g_AreaScrollTargetY & 0xFFFF8000;
     }
     D_801CD8CC = ((Area_EncounterPick() & BYTE_MASK) * 9) + ENCOUNTER_TABLE_BASE;
     D_801CD8C0 = Area_EncounterRollEnemies(D_801CD8CC);
@@ -52,8 +52,8 @@ MATCH s32 Area_EncounterBuild(u8 work_mode, s32 work_index) {
 loop_16:
     if ((i & BYTE_MASK) < (Party_CountOrder(PARTY_ORDER_BATTLE) & BYTE_MASK)) {
         type = g_PartyBattleOrder[i & BYTE_MASK];
-        x    = g_EncounterParty[i & BYTE_MASK].x.fixed;
-        y    = g_EncounterParty[i & BYTE_MASK].y.fixed;
+        x    = g_AreaEncounterPlacement.party[i & BYTE_MASK].x.fixed;
+        y    = g_AreaEncounterPlacement.party[i & BYTE_MASK].y.fixed;
         if ((type == 2) || (type == 6)) {
             reach = 1;
         } else {

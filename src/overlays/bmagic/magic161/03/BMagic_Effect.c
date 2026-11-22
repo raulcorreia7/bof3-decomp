@@ -20,19 +20,19 @@ MATCH void func_801EEC84(void) {
     index  = Battle_AllocEffect(1, 84);
     active = g_Battle.active_battler;
     if (BATTLER_IS_PLAYER(active)) {
-        BattleWorkImage* row;
+        BattleWorkImage* image;
 
-        row                     = (BattleWorkImage*)&g_Game.members[active];
+        image                   = (BattleWorkImage*)&g_Game.members[active];
         slot                    = &g_BattleEffects[index & BYTE_MASK];
-        *(BattleWorkImage*)slot = *row;
+        *(BattleWorkImage*)slot = *image;
     } else {
-        BattleWorkImage* row;
+        BattleWorkImage* image;
         u32              enemy;
 
         slot                    = &g_BattleEffects[index & BYTE_MASK];
         enemy                   = active - BATTLE_PARTY_CHARACTERS_COUNT;
-        row                     = (BattleWorkImage*)&g_BattleEnemyBattlers[enemy];
-        *(BattleWorkImage*)slot = *row;
+        image                   = (BattleWorkImage*)&g_BattleEnemyBattlers[enemy];
+        *(BattleWorkImage*)slot = *image;
     }
     work                                            = TASK(PartyMember);
     g_BattleEffects[index & BYTE_MASK].unk_06       = 1;

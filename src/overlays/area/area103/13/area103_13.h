@@ -56,7 +56,7 @@ typedef struct AreaSpinEffect {
 
 ASSERT_SIZE(AreaSpinEffect, 0x4BC);
 
-void func_801F2FB8(AreaSpinEffect* row);
+void func_801F2FB8(AreaSpinEffect* effect);
 
 /* The shared frame tail of the scripted scene steps: every fifth frame it
  * advances the cell palette cycle, then draws both cell layers and the overlay. */

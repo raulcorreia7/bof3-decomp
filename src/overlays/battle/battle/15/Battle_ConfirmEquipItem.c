@@ -6,7 +6,7 @@ MATCH void Battle_ConfirmEquipItem(void) {
     g_Battle.selection_latch        = 0;
     g_BattleActorTurn->command.type = BATTLE_COMMAND_ITEM;
 
-    BATTLE_ACTIVE_ROW->header.mode = 2;
+    BATTLE_ACTIVE_MEMBER->header.mode = 2;
     g_Battle.command_count += 1u;
     g_BattleMessages[((D_801EC328 - 1) & 0xF)].record_type = 1u;
     Battle_ClearMenuPanels();

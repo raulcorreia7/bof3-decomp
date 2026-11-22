@@ -2,7 +2,7 @@
 
 /* func_801A06D8 */
 MATCH u32 Actor_RunInteractions(void) {
-    Actor* row;
+    Actor* actor;
     u32    result;
     u8     i;
     u8     n;
@@ -12,14 +12,14 @@ MATCH u32 Actor_RunInteractions(void) {
     result = g_Game.walk_flags & AREA_WALK_LEADER_SWITCH_ACTIVE;
     if (result == 0) {
         for (i = 0; i < ENTITY_MAX; i++) {
-            row            = &g_Actors[i];
-            g_Task         = row;
-            g_CurrentActor = row;
-            if (!ACTOR_IN_USE(*row)) {
+            actor          = &g_Actors[i];
+            g_Task         = actor;
+            g_CurrentActor = actor;
+            if (!ACTOR_IN_USE(*actor)) {
                 continue;
             }
             SP_REF(s8, 0x3) = 0;
-            if (row->timer == 0 && (g_Actors[i].interaction_flags & ACTOR_INTERACTION_SCRIPT_PENDING)) {
+            if (actor->timer == 0 && (g_Actors[i].interaction_flags & ACTOR_INTERACTION_SCRIPT_PENDING)) {
                 if (g_Actors[i].interaction_flags & ACTOR_INTERACTION_SCRIPT_REQUEST) {
                     if ((s8)func_801A17A0(&g_Actors[i].interaction_flags) && !(TASK(Actor)->option_flags & ACTOR_OPT_ROUTE_LOCKED)) {
                         g_Actors[i].unk_79 = TASK(Actor)->direction & 0x7;
@@ -34,7 +34,7 @@ MATCH u32 Actor_RunInteractions(void) {
                         }
                     }
                 } else {
-                    func_801A18C8(row);
+                    func_801A18C8(actor);
                 }
             } else if (g_CurrentActor->interaction_flags & ACTOR_INTERACTION_PENDING) {
                 func_801A3A08();

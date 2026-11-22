@@ -152,7 +152,112 @@ MATCH void func_801EF348(void) {
 #include "overlays/bmagic/shared/Effect_SetActorMatrix.h"
 
 #ifdef NON_MATCHING
+/* Draws the effect's spiral: twenty-four rings of eight quads sweep from the effect's start angle,
+ * each ring one shade darker and 0x28 deeper; the step 2 and 3 branches flicker the first ring
+ * against the radius tables. */
 NON_MATCHING void func_801EF458(void) {
+    POLY_G4* prim;
+    long     p;
+    long     flag;
+    s32      tpage;
+    s32      shade;
+    s32      shade2;
+    s32      radius;
+    s32      ring;
+    s32      step;
+
+    tpage = getTPage(TPAGE_DEPTH_4BIT, TPAGE_ABR_ADD, 320, 256);
+    SetDrawMode((DR_MODE*)g_GfxPrimCursor, 0, 1, tpage, 0);
+    Area_CellAddPrim(TASK(PartyMember)->pos.x.fixed, TASK(PartyMember)->pos.y.fixed, 0, sizeof(DR_MODE));
+    g_ScratchPad.cells.halves[2] = 0;
+    g_ScratchPad.cells.halves[7] = TASK(PartyMember)->param.unk_0B << 1;
+    shade                        = (3 * rsin((g_FrameCount & 0x3F) << 6)) >> 12;
+    g_ScratchPad.cells.halves[6] = TASK(PartyMember)->timer & 0xF;
+    if (TASK(PartyMember)->header.step >= 2) {
+        g_ScratchPad.cells.halves[4] = D_801F02DC[g_ScratchPad.cells.halves[6]];
+        g_ScratchPad.cells.halves[0] = g_ScratchPad.cells.halves[7] + ((rsin(g_ScratchPad.cells.halves[6] << 8) << 2) >> 12);
+        if (TASK(PartyMember)->header.mode != 0 && TASK(PartyMember)->unk_09 != 0) {
+            g_ScratchPad.cells.halves[4] = D_801F031C[g_ScratchPad.cells.halves[6]];
+            g_ScratchPad.cells.halves[0] = g_ScratchPad.cells.halves[7] + ((rsin(g_ScratchPad.cells.halves[6] << 8) << 2) >> 12);
+        }
+    } else {
+        g_ScratchPad.cells.halves[4] = D_801F031C[g_ScratchPad.cells.halves[6]];
+        g_ScratchPad.cells.halves[0] = g_ScratchPad.cells.halves[7] + ((rsin(g_ScratchPad.cells.halves[6] << 8) << 2) >> 12);
+    }
+    radius = 7;
+    for (ring = 1; ring < 0x19; ring++) {
+        g_ScratchPad.cells.halves[2] = -(ring * 40);
+        g_ScratchPad.cells.halves[3] = g_ScratchPad.cells.halves[2];
+        shade2                       = shade;
+        shade                        = (3 * rsin(((g_FrameCount + ring) & 0x3F) << 6) * ring) >> 12;
+        g_ScratchPad.cells.halves[5] = g_ScratchPad.cells.halves[4];
+        g_ScratchPad.cells.halves[1] = g_ScratchPad.cells.halves[0];
+        g_ScratchPad.cells.halves[6] = (TASK(PartyMember)->timer + ring) & 0xF;
+        if (TASK(PartyMember)->header.step == 2) {
+            g_ScratchPad.cells.halves[4] = D_801F02DC[g_ScratchPad.cells.halves[6]];
+            if (g_ScratchPad.cells.halves[6] < 8) {
+                g_ScratchPad.cells.halves[0] = g_ScratchPad.cells.halves[7] + FIXED_MUL(rsin(g_ScratchPad.cells.halves[6] << 8), radius);
+            } else {
+                g_ScratchPad.cells.halves[0] = g_ScratchPad.cells.halves[7] + ((rsin(g_ScratchPad.cells.halves[6] << 8) << 2) >> 12);
+            }
+            if (TASK(PartyMember)->header.mode != 0 ? (ring < TASK(PartyMember)->unk_09) : (TASK(PartyMember)->unk_09 < ring)) {
+                g_ScratchPad.cells.halves[0] = g_ScratchPad.cells.halves[7];
+                g_ScratchPad.cells.halves[4] = D_801F031C[g_ScratchPad.cells.halves[6]];
+            }
+        } else if (TASK(PartyMember)->header.step == 3) {
+            g_ScratchPad.cells.halves[4] = D_801F02DC[g_ScratchPad.cells.halves[6]];
+            if (g_ScratchPad.cells.halves[6] < 8) {
+                g_ScratchPad.cells.halves[0] = g_ScratchPad.cells.halves[7] + FIXED_MUL(rsin(g_ScratchPad.cells.halves[6] << 8), radius);
+            } else {
+                g_ScratchPad.cells.halves[0] = g_ScratchPad.cells.halves[7] + ((rsin(g_ScratchPad.cells.halves[6] << 8) << 2) >> 12);
+            }
+            if (TASK(PartyMember)->header.mode != 0 ? (TASK(PartyMember)->unk_09 < ring) : (ring < TASK(PartyMember)->unk_09)) {
+                g_ScratchPad.cells.halves[0] = g_ScratchPad.cells.halves[7];
+                g_ScratchPad.cells.halves[4] = D_801F031C[g_ScratchPad.cells.halves[6]];
+            }
+        } else {
+            g_ScratchPad.cells.halves[4] = D_801F031C[g_ScratchPad.cells.halves[6]];
+            g_ScratchPad.cells.halves[0] = g_ScratchPad.cells.halves[7] + ((rsin(g_ScratchPad.cells.halves[6] << 8) << 2) >> 12);
+        }
+        g_ScratchPadVectors[1].vx = shade + FIXED_MUL(rcos(0), g_ScratchPad.cells.halves[0]);
+        g_ScratchPadVectors[1].vy = FIXED_MUL(rsin(0), g_ScratchPad.cells.halves[0]);
+        g_ScratchPadVectors[1].vz = g_ScratchPad.cells.halves[2];
+        g_ScratchPadVectors[3].vx = shade2 + FIXED_MUL(rcos(0), g_ScratchPad.cells.halves[1]);
+        g_ScratchPadVectors[3].vy = FIXED_MUL(rsin(0), g_ScratchPad.cells.halves[1]);
+        g_ScratchPadVectors[3].vz = g_ScratchPad.cells.halves[3];
+        for (step = 1; step < 9; step++) {
+            g_ScratchPadVectors[0].vx = g_ScratchPadVectors[1].vx;
+            g_ScratchPadVectors[0].vy = g_ScratchPadVectors[1].vy;
+            g_ScratchPadVectors[0].vz = g_ScratchPadVectors[1].vz;
+            g_ScratchPadVectors[2].vx = g_ScratchPadVectors[3].vx;
+            g_ScratchPadVectors[2].vy = g_ScratchPadVectors[3].vy;
+            g_ScratchPadVectors[2].vz = g_ScratchPadVectors[3].vz;
+            g_ScratchPadVectors[1].vx = shade + FIXED_MUL(rcos(step << 9), g_ScratchPad.cells.halves[0]);
+            g_ScratchPadVectors[1].vy = FIXED_MUL(rsin(step << 9), g_ScratchPad.cells.halves[0]);
+            g_ScratchPadVectors[1].vz = g_ScratchPad.cells.halves[2];
+            g_ScratchPadVectors[3].vx = shade2 + FIXED_MUL(rcos(step << 9), g_ScratchPad.cells.halves[1]);
+            g_ScratchPadVectors[3].vy = FIXED_MUL(rsin(step << 9), g_ScratchPad.cells.halves[1]);
+            g_ScratchPadVectors[3].vz = g_ScratchPad.cells.halves[3];
+            prim                      = (POLY_G4*)g_GfxPrimCursor;
+            SetPolyG4(prim);
+            prim->r0 = g_ScratchPad.cells.halves[4];
+            prim->g0 = g_ScratchPad.cells.halves[4] / 3;
+            prim->b0 = g_ScratchPad.cells.halves[4] / 2;
+            prim->r1 = g_ScratchPad.cells.halves[4];
+            prim->g1 = g_ScratchPad.cells.halves[4] / 3;
+            prim->b1 = g_ScratchPad.cells.halves[4] / 2;
+            prim->r2 = g_ScratchPad.cells.halves[5];
+            prim->g2 = g_ScratchPad.cells.halves[5] / 3;
+            prim->b2 = g_ScratchPad.cells.halves[5] / 2;
+            prim->r3 = g_ScratchPad.cells.halves[5];
+            prim->g3 = g_ScratchPad.cells.halves[5] / 3;
+            prim->b3 = g_ScratchPad.cells.halves[5] / 2;
+            RotTransPers4(&g_ScratchPadVectors[0], &g_ScratchPadVectors[1], &g_ScratchPadVectors[2], &g_ScratchPadVectors[3], (long*)&prim->x0, (long*)&prim->x1, (long*)&prim->x2, (long*)&prim->x3,
+                          &p, &flag);
+            Area_CellAddPrim(TASK(PartyMember)->pos.x.fixed, TASK(PartyMember)->pos.y.fixed, 0, sizeof(POLY_G4));
+        }
+        radius += 3;
+    }
 }
 #else
 INCLUDE_ASM(func_801EF458);

@@ -18,8 +18,8 @@ MATCH bool Game_BattleLoadPartyScripts(void) {
     FAKE_REG(u8*, phase2_base, "v0");
     u8*  tbl;
     u8*  base;
-    u16* source_row;
-    u16* destination_row;
+    u16* source;
+    u16* destination;
     s32  neg;
     /* FAKE: unused frame, 24 bytes. */
     FAKE_STACK_PADS(u8, 24);
@@ -86,10 +86,10 @@ phase2:
         g_GameState = phase2_rec;
         TASK_SET(phase2_rec);
         do {
-            base                   = (u8*)((phase2_rec[0x05] << 6) + (u32)tbl);
-            source_row             = (u16*)base;
-            destination_row        = source_row + 0x60;
-            destination_row[index] = source_row[index];
+            base               = (u8*)((phase2_rec[0x05] << 6) + (u32)tbl);
+            source             = (u16*)base;
+            destination        = source + 0x60;
+            destination[index] = source[index];
             index++;
         } while (index < 32);
         off += BATTLE_PARTY_STRIDE;

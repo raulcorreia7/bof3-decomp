@@ -7,7 +7,7 @@ MATCH void UI_ModeSetWait(u16 local_mode) {
     if (*busy != 0) {
         return;
     }
-    g_UiModeLocal = local_mode & BYTE_MASK;
+    g_SysThreads[2].tail.screen_effect.mode = local_mode & BYTE_MASK;
     SYS_ThreadRegister(2, UI_ModeDispatchLocal);
     if (*busy != 0) {
         do {

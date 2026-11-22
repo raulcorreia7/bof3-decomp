@@ -559,7 +559,7 @@ void Menu_DrawCommandRow(s16 x, s16 y, u8 row, u8 selected, s32 unused);
 u16  Item_GetPrice(ItemCategory category, s32 item_id);
 s32  Char_GetExpForLevel(s32 character, s32 level);
 void Menu_DrawHeaderBar(s32 x, s32 y, s32 width, s32 height, u8 window_style);
-void Menu_DrawRowIcons(u8* row_record, s32 palette_index);
+void Menu_DrawRowIcons(u8* entry, s32 palette_index);
 void Menu_DrawEquipStatWindow(u16 x, u16 y, u8 character_index, u8 item_type, u8 item_id);
 void Menu_DrawWindowFrame(s16 x, s16 y, u8 width, u8 height);
 /* func_801DC6FC */

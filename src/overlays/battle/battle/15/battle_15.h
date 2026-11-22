@@ -25,7 +25,7 @@
 /* The actor's target slot, signed, moved by one step before the wrap helper clamps it. */
 #define ACTOR_TARGET_STEP(delta)       ((s8)g_BattleActorTurn->command.target + (delta))
 #define BATTLE_ACTIVE_MESSAGE_SLOT_PTR (*(volatile void**)&g_BattleMessageSlot)
-#define BATTLE_ACTIVE_ROW              ((PartyMember*)g_BattleMessageSlot)
+#define BATTLE_ACTIVE_MEMBER           ((PartyMember*)g_BattleMessageSlot)
 /* Fixed-address bases, tables, and rodata pointers. The raw literals live only
  * here; function bodies reference these named accessors. */
 #define BATTLE_LOCK_RAM_BASE           D_80150000
@@ -47,12 +47,12 @@
 #define BATTLE_HIT_RATE_MIN            50
 #define g_AreaScrollTargetY            (*(u32*)&g_AreaScrollTargetY)
 
-/* Pick the battler's step rule row from the flagged, player and enemy tables.
+/* Pick the battler's step rule entry from the flagged, player and enemy tables.
  * Kept: as an inline the enemy table pointer loads into $a0 before the branch
  * (first instruction differs in both members). */
 #define BATTLE_BATTLER_STEP_RULE(flagged, player, enemy)                                                  \
     do {                                                                                                  \
-        u32 row;                                                                                          \
+        u32 slot;                                                                                         \
         u8  battler;                                                                                      \
         u8  result;                                                                                       \
         battler = g_Battle.active_battler;                                                                \
@@ -63,8 +63,8 @@
                 result = player[g_Game.members[battler].chr.character_id];                                \
             }                                                                                             \
         } else {                                                                                          \
-            row    = (u32)battler - 3u;                                                                   \
-            result = enemy[(u32)g_BattleEnemyBattlers[row].type * 0x88u];                                 \
+            slot   = (u32)battler - 3u;                                                                   \
+            result = enemy[(u32)g_BattleEnemyBattlers[slot].type * 0x88u];                                \
         }                                                                                                 \
         return result;                                                                                    \
     } while (0)
@@ -79,7 +79,7 @@ typedef enum PartyFormation {
     PARTY_FORMATION_REFUGE  = 0x05, /* battle/battle/03 Battle_ApplyTurnDamage tests g_PartyFormation == 5 */
 } PartyFormation;
 
-/* The selection byte g_Battle.row_cursor: bit 7 marks an active selection, the low
+/* The selection byte g_Battle.selection: bit 7 marks an active selection, the low
  * seven bits are its slot. */
 typedef enum BattleSelectionFlags {
     BATTLE_SELECTION_ACTIVE = 1 << 7,
@@ -91,8 +91,8 @@ typedef struct BattleSelectionAction {
     u32      unk_04;
 } BattleSelectionAction;
 
-/* Player flag row of the selection table: stride 0x140, flag word at the
- * row's +0x128 (the table's base symbol D_80145FB8). */
+/* Player flag record of the selection table: stride 0x140, flag word at the
+ * record's +0x128 (the table's base symbol D_80145FB8). */
 typedef volatile struct BattleSelectionPlayer {
     volatile u32 flags; /* +0x128 */
     u8           pad_04[0x13C];
@@ -126,7 +126,7 @@ typedef struct BattleStatDisplayTemplate {
 
 ASSERT_SIZE(BattleStatDisplayTemplate, 0x18);
 
-/* Battle-local work row (stride 0x140 at g_Game.members). Offsets 0x24..0x4B
+/* Battle-local work record (stride 0x140 at g_Game.members). Offsets 0x24..0x4B
  * are the g_Task stores in func_800ADD44 (retail asm byte/half/word
  * widths, matching its exact twin func_800ADA4C). +0x120/+0x124/+0x128 alias
  * D_80145FB0 (u8), D_80145FB4[i].flags (u32) and D_80145FB8[i].flags
@@ -175,10 +175,10 @@ typedef struct BattleEventPacket {
     u8  effect_type; /* +0x01 the type Battle_ApplyEnemyEvent switches on to pick the record update */
     u8  selector;    /* +0x02 the bits that select the cells the packet updates */
     u8  value;       /* +0x03 the value the selected cells take */
-    u8  choice_ai;   /* +0x04 the byte copied to the work row's +0x7E */
+    u8  choice_ai;   /* +0x04 the byte copied to the work record's +0x7E */
     u8  pad_05;
     s16 panel_id;  /* +0x06 the panel id; Battle_ApplyEnemyEvent stores it in the panel-owner table */
-    u8  unk_08[8]; /* +0x08 the eight bytes copied to the work row's +0x8C */
+    u8  unk_08[8]; /* +0x08 the eight bytes copied to the work record's +0x8C */
 } BattleEventPacket;
 
 ASSERT_OFFSET(BattleEventPacket, type, 0x00);
@@ -433,7 +433,7 @@ extern u8                                D_800B70B8[];
 extern u8                                D_800E4050;
 extern u16                               D_800E405E;
 extern u16                               D_800E4068;
-/* Playable-character record rows are byte-addressed; each typed row is 0xA4 bytes. */
+/* Playable-character records are byte-addressed; each typed record is 0xA4 bytes. */
 extern volatile u32                      D_80144F60[];
 extern u8                                D_801454FD; /* plain: Battle_SelectItem stores it outside the volatile order */
 extern volatile u8                       D_801454FE;
@@ -442,7 +442,7 @@ extern volatile u8                       D_801454FF;
 extern BattleSlot                        g_BattleTargetRows[];
 extern BattleSlot                        D_80145518[];
 extern u8                                D_8014551B;
-/* Battler base halfwords, one u16 per 0x140-byte player row. */
+/* Battler base halfwords, one u16 per 0x140-byte player record. */
 extern u16                               D_80145FAA[];
 extern u8                                D_80145FB2;
 extern volatile BattlePlayerDamageStatus D_80145FB4[];
@@ -525,7 +525,7 @@ extern u8                        D_801CD78E[];
 extern u32                       D_801EB082;
 extern u8                        D_801EB3DC[];
 extern BattleStatDisplayTemplate D_801EBEF0;
-/* Battler base halfwords, one u16 per 0x118-byte enemy row. */
+/* Battler base halfwords, one u16 per 0x118-byte enemy record. */
 extern u8                        D_801EBEFA; /* Nine-slot affinity mirror in the high battle block. */
 extern u8                        D_801EBEFB;
 extern u8                        D_801EBEFC;
@@ -606,7 +606,7 @@ void        func_80099328(void);
 /* func_80099364 */
 void        Battle_ChooseEquipAction(void);
 /* func_80099568 */
-void        Battle_SelectEquipRow(void);
+void        Battle_SelectEquipSlot(void);
 /* func_80099830 */
 void        Battle_SelectEquipChoice(void);
 /* func_80099B74 */
@@ -641,7 +641,7 @@ void        Battle_FailEscape(void);
 void        func_8009B964(void);
 /* func_8009BACC */
 u8          Battle_CalcEscapeChance(s32 diff);
-bool        func_8009C794(s32 skip_slot, s32 row_index);
+bool        func_8009C794(s32 skip_slot, s32 enemy_slot);
 /* func_8009C8AC */
 u8          Battle_ActionHasElement(u16 required_mask);
 /* func_8009CCBC */
@@ -1203,7 +1203,7 @@ static inline void BattleSetSelectionFlag(u32 flag) {
     Battle_MarkDamageApplied();
 }
 
-/* Run the handler-quad row at offset with the spad step. */
+/* Run the handler quad at offset with the spad step. */
 static inline void BattleRunHandlerQuad(s32 offset) {
     BattleTaskModes handlers;
     PartyMember*    work;
