@@ -261,24 +261,4 @@
 #define SPU_EXT_VOL_R        HW_REF(u16, 0x1F801DB6)
 #define CACHE_CTRL           HW_REF(u32, 0xFFFE0130)
 
-/* Repeating register blocks: DMA channels, root counters, SPU voices. */
-#define SIO_DATA(n)          HW_REF(u32, 0x1F801040 + (u32)(n) * 0x10)
-#define SIO_STAT(n)          HW_REF(u32, 0x1F801044 + (u32)(n) * 0x10)
-#define SIO_MODE(n)          HW_REF(u16, 0x1F801048 + (u32)(n) * 0x10)
-#define SIO_CTRL(n)          HW_REF(u16, 0x1F80104A + (u32)(n) * 0x10)
-#define SIO_BAUD(n)          HW_REF(u16, 0x1F80104E + (u32)(n) * 0x10)
-#define DMA_MADR(ch)         HW_REF(u32, 0x1F801080 + (u32)(ch) * 0x10)
-#define DMA_BCR(ch)          HW_REF(u32, 0x1F801084 + (u32)(ch) * 0x10)
-#define DMA_CHCR(ch)         HW_REF(u32, 0x1F801088 + (u32)(ch) * 0x10)
-#define TIMER_COUNT(n)       HW_REF(u32, 0x1F801100 + (u32)(n) * 0x10)
-#define TIMER_MODE(n)        HW_REF(u32, 0x1F801104 + (u32)(n) * 0x10)
-#define TIMER_TARGET(n)      HW_REF(u32, 0x1F801108 + (u32)(n) * 0x10)
-#define SPU_V_VOL_L(v)       HW_REF(u16, 0x1F801C00 + (u32)(v) * 0x10)
-#define SPU_V_VOL_R(v)       HW_REF(u16, 0x1F801C02 + (u32)(v) * 0x10)
-#define SPU_V_PITCH(v)       HW_REF(u16, 0x1F801C04 + (u32)(v) * 0x10)
-#define SPU_V_START(v)       HW_REF(u16, 0x1F801C06 + (u32)(v) * 0x10)
-#define SPU_V_ADSR(v)        HW_REF(u32, 0x1F801C08 + (u32)(v) * 0x10)
-#define SPU_V_CURVOL(v)      HW_REF(u16, 0x1F801C0C + (u32)(v) * 0x10)
-#define SPU_V_REPEAT(v)      HW_REF(u16, 0x1F801C0E + (u32)(v) * 0x10)
-
 #endif
