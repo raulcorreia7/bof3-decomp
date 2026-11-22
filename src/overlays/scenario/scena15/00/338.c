@@ -851,9 +851,7 @@ NON_MATCHING void func_801F97CC(WorldPos* pos, s32* arg) {
     FAKE_BARRIER(); /* FAKE: keep the point stores before the call setup. */
     Camera_ProjectPoint(point, (DVECTOR*)&poly->x3);
 
-    poly->r0 = (g_Task->unk_06 & 2) != 0 ? 0x80 : 0;
-    poly->b0 = 0;
-    poly->g0 = (g_Task->unk_06 & 2) == 0 ? 0x80 : 0;
+    setRGB0(poly, (g_Task->unk_06 & 2) != 0 ? 0x80 : 0, (g_Task->unk_06 & 2) == 0 ? 0x80 : 0, 0);
     Area_AddCellPrim(pos->x.fixed, pos->y.fixed, 0, sizeof(POLY_F4));
 }
 #else
