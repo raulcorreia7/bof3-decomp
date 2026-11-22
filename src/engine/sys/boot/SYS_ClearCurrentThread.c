@@ -19,6 +19,6 @@ MATCH void SYS_ClearCurrentThread(void) {
     } while (i >= 0);
 
     for (i = 0; i < 16; i++) {
-        ((u8*)g_SysCurrentThread + i)[0x70] = 0;
+        g_SysCurrentThread->pad_70[i] = 0;
     }
 }

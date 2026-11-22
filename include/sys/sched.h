@@ -38,8 +38,10 @@ typedef struct Thread {
     u8*      work;  /* 0x0C - the kernel work block whose +0x94 word this thread's context keeps */
     u32      stack; /* thread stack top, OpenTh's sp argument */
     u8       pad_14[0x30];
-    u32      gp; /* OpenTh's gp argument */
-    u8       pad_48[0x38];
+    u32      gp;           /* OpenTh's gp argument */
+    u8       pad_48[0x18]; /* 0x48 */
+    u16      pad_60[0x08]; /* 0x60 - the halfword run SYS_ClearCurrentThread clears */
+    u8       pad_70[0x10]; /* 0x70 - the byte run SYS_ClearCurrentThread clears */
 } Thread;
 
 ASSERT_OFFSET(Thread, state, 0x00);
