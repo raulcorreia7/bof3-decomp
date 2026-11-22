@@ -112,22 +112,16 @@ MATCH void func_801EEFF4(void) {
 MATCH void func_801EF020(BMagicStreakSegment* record) {
     s32 offset;
 
-    record->active       = 1;
-    record->unk_01       = 0;
-    record->life         = 16;
-    offset               = (RANDOM_MASK(0x1FF) - 0x100) << 8;
-    record->head.vx      = g_Task->pos.x.fixed + offset + offset;
-    record->head.vy      = g_Task->pos.y.fixed + 0x20000;
-    record->head.vz      = g_Task->pos.z.fixed;
-    record->tail.vx      = g_Task->pos.x.fixed + offset;
-    record->tail.vy      = g_Task->pos.y.fixed;
-    record->tail.vz      = g_Task->pos.z.fixed;
+    record->active = 1;
+    record->unk_01 = 0;
+    record->life   = 16;
+    offset         = (RANDOM_MASK(0x1FF) - 0x100) << 8;
+    setVector(&record->head, g_Task->pos.x.fixed + offset + offset, g_Task->pos.y.fixed + 0x20000, g_Task->pos.z.fixed);
+    setVector(&record->tail, g_Task->pos.x.fixed + offset, g_Task->pos.y.fixed, g_Task->pos.z.fixed);
     record->head_color.r = RANDOM_MASK(1) << 7;
     record->head_color.g = RANDOM_MASK(1) << 7;
     record->head_color.b = RANDOM_MASK(1) << 7;
-    record->velocity.vx  = offset >> 1;
-    record->velocity.vy  = 0x10000;
-    record->velocity.vz  = 0;
+    setVector(&record->velocity, offset >> 1, 0x10000, 0);
     record->tail_color.r = 0;
     record->tail_color.g = 0;
     record->tail_color.b = 0;

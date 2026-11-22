@@ -8,13 +8,11 @@ MATCH void Area_SceneReset(void) {
     Actor*       work;
     PartyMember* mode_work;
 
-    work                               = g_Task;
-    mode_work                          = g_Game.current;
-    g_AreaCameraStep                   = 0;
-    g_AreaCameraHeightStep             = 0;
-    work->vx                           = 0;
-    work->vy                           = 0;
-    work->vz                           = 0;
+    work                   = g_Task;
+    mode_work              = g_Game.current;
+    g_AreaCameraStep       = 0;
+    g_AreaCameraHeightStep = 0;
+    setVector(work, 0, 0, 0);
     *(u8*)&mode_work->u.turn.hp_change = 3; /* FAKE: retail stores the byte. */
     if (g_Game.input & INPUT_DIRECTIONAL) {
         func_80167428();

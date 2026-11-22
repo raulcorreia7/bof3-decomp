@@ -142,12 +142,8 @@ NON_MATCHING void func_801EFE04(s16 band_height, u16 radius, u16 jitter_mask) {
         }
         g_ScratchPad.cells.halves[5] = g_ScratchPad.cells.halves[6];
         g_ScratchPad.cells.halves[6] = band_height - RANDOM_MASK(3);
-        g_ScratchPadVectors[2].vx    = 0;
-        g_ScratchPadVectors[2].vy    = g_ScratchPadVectors[0].vy;
-        g_ScratchPadVectors[2].vz    = g_ScratchPadVectors[0].vz;
-        g_ScratchPadVectors[3].vx    = 0;
-        g_ScratchPadVectors[3].vy    = g_ScratchPadVectors[0].vy - g_ScratchPad.cells.halves[5];
-        g_ScratchPadVectors[3].vz    = g_ScratchPadVectors[0].vz;
+        setVector(&g_ScratchPadVectors[2], 0, g_ScratchPadVectors[0].vy, g_ScratchPadVectors[0].vz);
+        setVector(&g_ScratchPadVectors[3], 0, g_ScratchPadVectors[0].vy - g_ScratchPad.cells.halves[5], g_ScratchPadVectors[0].vz);
         setVector(&g_ScratchPadVectors[0], 0, FIXED_MUL(rsin(g_ScratchPad.cells.halves[1]), g_ScratchPad.cells.halves[0]), -(i << 6));
         setVector(&g_ScratchPadVectors[1], 0, g_ScratchPadVectors[0].vy - g_ScratchPad.cells.halves[6], -(i << 6));
         prim = (POLY_G4*)g_GfxPrimCursor;

@@ -170,13 +170,11 @@ NON_MATCHING s32 Area_CellDrawRing(void) {
                             rec             = D_1F800010;
                             D_1F80001C.vx   = ux + 0x80;
                             D_1F800024.vx   = ux;
-                            D_1F80002C.vx   = ux + 0x80;
-                            D_1F80002C.vy   = uy + 0x80;
-                            D_1F80002C.vz   = -(rec[3] * 0x10);
-                            D_1F80001C.vy   = uy;
-                            D_1F800024.vy   = uy + 0x80;
-                            D_1F80001C.vz   = -(((*(s32*)rec << 0x10) >> 0x18) * 0x10);
-                            D_1F800024.vz   = -(rec[2] * 0x10);
+                            setVector(&D_1F80002C, ux + 0x80, uy + 0x80, -(rec[3] * 0x10));
+                            D_1F80001C.vy = uy;
+                            D_1F800024.vy = uy + 0x80;
+                            D_1F80001C.vz = -(((*(s32*)rec << 0x10) >> 0x18) * 0x10);
+                            D_1F800024.vz = -(rec[2] * 0x10);
                             gte_ldv3c(&D_1F80001C);
                             pkt2 = &g_AreaCellPrims[s2][g_GfxBufferIndex];
                             gte_rtpt();

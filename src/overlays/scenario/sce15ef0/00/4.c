@@ -7,12 +7,10 @@ __asm__(".include \"include/match/macro.inc\"\n");
 #include "overlays/scenario/shared/Scene_DispatchEntity.h"
 
 MATCH void func_801D0C48(void) {
-    g_Task->pos.x.fixed      = TO_COORD(48) + COORD_HALF;
-    g_Task->pos.y.fixed      = TO_COORD(116);
-    g_Task->pos.z.fixed      = Area_HeightSample(g_Task->pos.x.fixed, TO_COORD(116)) << 16;
-    g_Task->vx               = 0x308000;
-    g_Task->vy               = 0x718000;
-    g_Task->vz               = 0xFEC00000;
+    g_Task->pos.x.fixed = TO_COORD(48) + COORD_HALF;
+    g_Task->pos.y.fixed = TO_COORD(116);
+    g_Task->pos.z.fixed = Area_HeightSample(g_Task->pos.x.fixed, TO_COORD(116)) << 16;
+    setVector(g_Task, 0x308000, 0x718000, 0xFEC00000);
     g_Task->screen_x         = 0;
     g_Task->tint.bytes.rgb.r = 0;
     g_Task->timer            = 8;

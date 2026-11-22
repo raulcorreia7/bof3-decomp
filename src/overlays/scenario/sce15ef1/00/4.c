@@ -92,13 +92,11 @@ MATCH void func_801D0F10(void) {
     func_801D2088();
     func_801D1A60();
     if (g_ScriptVars[0] == 0x14) {
-        origin_x            = g_Task->unk_64;
-        origin_y            = g_Task->unk_68;
-        origin_z            = g_Task->unk_6C;
-        mode                = g_Task->header.mode + 1;
-        g_Task->vx          = 0;
-        g_Task->vy          = 0;
-        g_Task->vz          = 0;
+        origin_x = g_Task->unk_64;
+        origin_y = g_Task->unk_68;
+        origin_z = g_Task->unk_6C;
+        mode     = g_Task->header.mode + 1;
+        setVector(g_Task, 0, 0, 0);
         g_Task->unk_18      = origin_x;
         g_Task->unk_1C      = origin_y;
         g_Task->gravity     = origin_z;
