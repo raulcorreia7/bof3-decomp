@@ -209,12 +209,8 @@ MATCH void func_801F7DCC(s32 red, s32 green, s32 blue) {
     prim = (POLY_G4*)g_GfxPrimCursor;
     SetPolyG4(prim);
     setXY4(prim, 0, 0, SCREEN_WIDTH - 1, 0, 0, SCREEN_HEIGHT - 1, SCREEN_WIDTH - 1, SCREEN_HEIGHT - 1);
-    prim->r0 = prim->r1 = red;
-    prim->g0 = prim->g1 = green;
-    prim->b0 = prim->b1 = blue;
-    prim->r2 = prim->r3 = 0;
-    prim->g2 = prim->g3 = 0;
-    prim->b2 = prim->b3 = 0;
+    setRGB0(prim, prim->r1 = red, prim->g1 = green, prim->b1 = blue);
+    setRGB2(prim, prim->r3 = 0, prim->g3 = 0, prim->b3 = 0);
     GFX_AddPrim(GFX_LAYER_BACKDROP, sizeof(POLY_G4));
 }
 

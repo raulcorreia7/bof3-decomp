@@ -31,10 +31,10 @@ NON_MATCHING void Area_InitMapRenderer(void) {
             g_AreaCellPrims[row][i].pad2 = 0;
         }
     }
-    *(s16*)(&g_AreaCameraAngle.vx) = -682;
-    g_AreaCameraAngle.vy           = 0;
-    g_AreaCameraAngle.vz           = ANGLE_45;
-    g_AreaPreviousCameraAngle      = g_AreaCameraAngle;
+    g_AreaCameraAngle.vx      = -682;
+    g_AreaCameraAngle.vy      = 0;
+    g_AreaCameraAngle.vz      = ANGLE_45;
+    g_AreaPreviousCameraAngle = g_AreaCameraAngle;
     setXY4(&g_AreaCellPrims[0][0], 0, 0, 0, 0, 0, 0, 0, 0);
     setXY4(&g_AreaCellPrims[0][1], 0, 0, 0, 0, 0, 0, 0, 0);
     g_AreaCameraOffsetZ = 0;

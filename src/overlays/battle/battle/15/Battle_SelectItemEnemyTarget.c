@@ -24,7 +24,7 @@ MATCH void Battle_SelectItemEnemyTarget(void) {
             }
             /* FAKE: byte pointer access keeps the address in a register so the
              * store merges into the shared SND_SEPlay delay slot. */
-            *(u8*)&g_Battle.ui_mode += 1;
+            g_Battle.ui_mode += 1;
             SND_SEPlay(EMI_SE_ID(SND_BANK_COMMON, 1));
             return;
         }

@@ -6,7 +6,7 @@ MATCH void func_800A0660(void) {
     u16 saved;
     u32 slot;
 
-    slot = (*(u8*)&g_Battle.active_battler);
+    slot = g_Battle.active_battler;
     if (BATTLER_IS_PLAYER(slot)) {
         saved = g_Game.members[slot].chr.status & STATUS_BLIND;
         g_Game.members[slot].chr.status &= ~STATUS_BLIND;
@@ -17,7 +17,7 @@ MATCH void func_800A0660(void) {
     battler                           = (u8*)&g_Battle.active_battler;
     D_801EC324                        = 0x64;
     slot                              = *battler;
-    type                              = (*(u8*)&g_Battle.target);
+    type                              = g_Battle.target;
     g_Battle.target_record->hp_change = Battle_CalcDamage(slot, type, BATTLE_ELEMENT_FROM_WEAPON) / 2;
     slot                              = *battler;
     if (BATTLER_IS_PLAYER(slot)) {

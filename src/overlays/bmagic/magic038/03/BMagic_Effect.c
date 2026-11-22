@@ -38,13 +38,13 @@ MATCH void func_801EEC70(void) {
         dst[i + 16] = src[i + 16];
     }
     i       = 0;
-    row_dst = MEM_PTR(u16, AREA_PALETTE_UPLOAD_ROW(AREA_PALETTE_BMAGIC_ROW));
-    row_src = MEM_PTR(u16, AREA_PALETTE_ARENA_33C00);
+    row_dst = g_AreaPaletteCopy->rows[AREA_PALETTE_BMAGIC_ROW].colors;
+    row_src = g_AreaPaletteArena->rows[AREA_PALETTE_BMAGIC_ROW].colors;
     for (; i < 16; i++) {
         row_dst[i] = row_src[i] | PSX_COLOR_STP_BIT;
     }
-    *MEM_PTR(u16, AREA_PALETTE_UPLOAD_ROW(AREA_PALETTE_BMAGIC_ROW)) = *MEM_PTR(u16, AREA_PALETTE_ARENA_33C00);
-    g_GfxPalettePending                                             = 1;
+    g_AreaPaletteCopy->rows[AREA_PALETTE_BMAGIC_ROW].colors[0] = g_AreaPaletteArena->rows[AREA_PALETTE_BMAGIC_ROW].colors[0];
+    g_GfxPalettePending                                        = 1;
     SND_SEQueueSelection(EMI_SE_ID(SND_BANK_COMMON, 0));
 }
 

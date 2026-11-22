@@ -7,9 +7,9 @@ MATCH void func_801ACC08(void) {
 
     g_CurrentActor->unk_93 = GFX_PaletteAllocFade(TASK_BYTES, 0U, 0U, 0U, 1);
     flags_set              = g_Task;
-    *(u8*)(flags_set) |= 0x20;
+    flags_set->header.flags |= 0x20;
     flags_clear = g_Task;
-    *(u8*)(flags_clear) &= 0xBF;
+    flags_clear->header.flags &= 0xBF;
     g_Task->tint.steps.flags = 1;
     tint                     = g_Task;
     tint->tint.steps.delta.b = -0x80;

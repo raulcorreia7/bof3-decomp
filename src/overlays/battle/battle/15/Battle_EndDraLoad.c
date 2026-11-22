@@ -9,6 +9,6 @@ MATCH void Battle_EndDraLoad(void) {
         g_GfxPalettePending++;
         /* Plain view: a volatile access pins the increment and blocks the
          * epilogue hoist the original image performs. */
-        *(u8*)&g_Battle.ui_step += 1;
+        g_Battle.ui_step += 1;
     }
 }

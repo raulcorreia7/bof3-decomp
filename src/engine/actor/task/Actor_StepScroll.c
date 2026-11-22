@@ -31,7 +31,7 @@ MATCH s8 Actor_StepScroll(s32 entry, s8 dir_x, s8 dir_y, s16 vz_start, s16 vz_de
                 /* FAKE: byte-view stores keep the g_AreaScrollTargetY load after the 0x34 store. */
                 FIELD(s32, g_Task, 0x34) = g_AreaScrollTargetX;
                 COORD_INT(g_Task->pos.z) = limit;
-                FIELD(s32, g_Task, 0x38) = g_AreaScrollTargetY;
+                g_Task->pos.y.fixed      = g_AreaScrollTargetY;
                 Area_ScrollAdvance(limit);
                 g_Task->unk_04 = 0;
                 return 0;

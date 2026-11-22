@@ -21,7 +21,7 @@ MATCH void Battle_SelectItemPartyTarget(void) {
     if ((trigger & (PADLup | PADLdown)) != 0) {
         if ((Item_GetFlags(g_UiPanelTasks[16].unk_0A, D_801C893C[g_UiPanelTasks[16].unk_0A][g_UiPanelTasks[16].unk_0C]) & ITEM_USABLE_MENU) != 0u) {
             g_BattleActorTurn->command.target = Battle_TargetNext(3);
-            *(u8*)&g_Battle.ui_mode -= 1u;
+            g_Battle.ui_mode -= 1u;
             SND_SEPlay(EMI_SE_ID(SND_BANK_COMMON, 1));
             return;
         }

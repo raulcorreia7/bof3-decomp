@@ -24,9 +24,9 @@ MATCH void func_801ACAC0(void) {
     }
     if ((g_Task->tint.raw & ~0xFF) == 0x80808000) {
         GFX_PaletteFreeFade(g_CurrentActor->unk_93);
-        work_flags         = g_Task;
-        *(u8*)(work_flags) = (*(u8*)(work_flags) | 0x40);
-        g_Task->unk_04     = 0;
+        work_flags               = g_Task;
+        work_flags->header.flags = (work_flags->header.flags | 0x40);
+        g_Task->unk_04           = 0;
         return;
     }
     g_CurrentActor->unk_7E = (g_CurrentActor->unk_7E - 1);
