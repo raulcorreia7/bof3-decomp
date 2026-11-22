@@ -15,7 +15,7 @@ MATCH void Fishing_LureCast(void) {
     work->y_38.pos_y                    = g_Game.members[0].pos.y.fixed - COORD_HALF;
     TASK(FishingState)->bounce.half.key = Area_HeightSample(work->motion.unk_34, work->y_38.pos_y) + 0x100;
 
-    distance                      = g_FishingRodRow->max_distance * D_801440BC / 255 + 8;
+    distance                      = g_FishingRodRow->max_distance * g_SpawnedActors[2].vx / 255 + 8;
     TASK(FishingState)->cursor_10 = distance;
     TASK(FishingState)->cue_index = distance / 15;
     if (TASK(FishingState)->cue_index >= 4) {

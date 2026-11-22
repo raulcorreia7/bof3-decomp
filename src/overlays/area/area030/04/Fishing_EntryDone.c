@@ -4,8 +4,8 @@
  * then advances the scratchpad work object: byte 0x02 += 1, byte 0x03 = 0. */
 /* func_801D9C9C */
 MATCH void Fishing_EntryDone(void) {
-    if (D_80144199 == 4) {
-        D_8014403D += 1;
+    if (g_SpawnedActors[4].header.mode == 4) {
+        g_SpawnedActors[1].header.mode += 1;
         TASK(FishingState)->mode_index += 1;
         TASK(FishingState)->sub_index = 0;
     }

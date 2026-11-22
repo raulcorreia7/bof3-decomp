@@ -12,11 +12,11 @@ MATCH void func_801DDE94(s8 request) {
     s8  saved;
 
     saved = request;
-    state = D_80144125;
+    state = g_SpawnedActors[3].header.mode;
     if ((state == 4) || (state == 6) || (state == 0)) {
-        counter    = &D_80144125;
-        D_8014412B = 1;
+        counter                   = &g_SpawnedActors[3].header.mode;
+        g_SpawnedActors[3].unk_07 = 1;
         *counter += 1;
     }
-    D_8014412A = saved;
+    g_SpawnedActors[3].unk_06 = saved;
 }

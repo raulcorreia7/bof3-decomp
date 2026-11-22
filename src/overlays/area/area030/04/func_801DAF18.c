@@ -5,13 +5,13 @@
 MATCH void func_801DAF18(void) {
     u8 counter;
 
-    D_8014419E = 2;
-    counter    = D_80144199;
-    D_801440B1 = 0;
-    D_80144199 = (counter + 1);
+    g_SpawnedActors[4].unk_06      = 2;
+    counter                        = g_SpawnedActors[4].header.mode;
+    g_SpawnedActors[2].header.mode = 0;
+    g_SpawnedActors[4].header.mode = (counter + 1);
 
     g_AreaScrollTargetY = *(u32*)(D_801468C0 + g_FishingHookedFish * 152);
     SND_StartDecrescendo(0, 0, 0x64, 8);
-    D_80144125 = 7;
+    g_SpawnedActors[3].header.mode = 7;
     TASK(FishingState)->sub_index += 1;
 }

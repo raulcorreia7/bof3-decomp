@@ -4,10 +4,10 @@
  * cursor return speed otherwise. */
 MATCH void func_801DB04C(void) {
     if (TASK(FishingState)->timer != 0) {
-        D_801E31F8 = 2;
-        D_8014421C = g_FishingRodRow->unk_07;
+        D_801E31F8                   = 2;
+        g_SpawnedActors[5].selection = g_FishingRodRow->unk_07;
     } else {
-        D_801E31F8 = 1;
-        D_8014421C = g_FishingRodRow->cursor_return_speed;
+        D_801E31F8                   = 1;
+        g_SpawnedActors[5].selection = g_FishingRodRow->cursor_return_speed;
     }
 }
