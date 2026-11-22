@@ -4,13 +4,9 @@
 /* func_8009E500 */
 #ifdef NON_MATCHING
 NON_MATCHING void Battle_DrainAp(void) {
-    u32  battler_slot;
-    u16* value;
-    u16* limit;
-
     if (!(Battle_PickAbility(g_Battle.active_battler, g_Battle.target) & BYTE_MASK)) {
         if (BATTLER_IS_PLAYER(g_Battle.target)) {
-            if (g_Game.members[g_Battle.target].u.turn.damage_flags.volatile_value & BATTLER_DAMAGE_IMMUNE) {
+            if (g_Game.members[g_Battle.target].u.turn.damage_flags.value & BATTLER_DAMAGE_IMMUNE) {
                 g_Battle.target_record->ap_change = 0;
             } else {
                 g_Battle.target_record->ap_change = g_Game.members[g_Battle.target].chr.ap / 5;
@@ -22,23 +18,23 @@ NON_MATCHING void Battle_DrainAp(void) {
         }
         g_Battle.action->unk_08              = 2;
         g_Battle.target_record->target_flags = 2;
-        battler_slot                         = g_Battle.active_battler;
-        if (battler_slot < 3) {
-            value = &g_Game.members[battler_slot].chr.ap;
-            limit = &g_Game.members[battler_slot].chr.stats.max_ap;
+        if (g_Battle.active_battler < 3) {
+            if (g_Game.members[g_Battle.active_battler].chr.stats.max_ap < g_Game.members[g_Battle.active_battler].chr.ap + g_Battle.target_record->ap_change) {
+                g_Battle.action->unk_08 |= 8;
+            }
+            func_800AAEBC(-Char_AddPoints(&g_Game.members[g_Battle.active_battler].chr.ap, g_Game.members[g_Battle.active_battler].chr.stats.max_ap, g_Battle.target_record->ap_change),
+                          g_BattleActiveBattler_nv);
         } else {
-            battler_slot -= 3;
-            value = &g_BattleEnemyBattlers[battler_slot].ap;
-            limit = &g_BattleEnemyBattlers[battler_slot].stats.max_ap;
+            if (ENEMY_COMBATANT(g_Battle.active_battler).stats.max_ap < ENEMY_COMBATANT(g_Battle.active_battler).ap + g_Battle.target_record->ap_change) {
+                g_Battle.action->unk_08 |= 8;
+            }
+            func_800AAEBC(-Char_AddPoints(&ENEMY_COMBATANT(g_Battle.active_battler).ap, ENEMY_COMBATANT(g_Battle.active_battler).stats.max_ap, g_Battle.target_record->ap_change),
+                          g_BattleActiveBattler_nv);
         }
-        if (*limit < *value + g_Battle.target_record->ap_change) {
-            g_Battle.action->unk_08 |= 8;
-        }
-        func_800AAEBC(-Char_AddPoints(value, *limit, g_Battle.target_record->ap_change), g_Battle.active_battler);
         g_Battle.action->unk_08 = 0;
-    } else {
-        g_Battle.target_record->target_flags = 2;
+        return;
     }
+    g_Battle.target_record->target_flags = 2;
 }
 #else
 INCLUDE_ASM(Battle_DrainAp);
