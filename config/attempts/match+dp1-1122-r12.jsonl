@@ -1,0 +1,2 @@
+{"function": "emi/etc/start/08@0x801DAE14", "tried": "swapped the total/next pointer declaration order: the base still lands in a1 and the count copy in t2 instead of retail v1/t2", "first_diff": "0x801DAE24 lui a1 against lui v1 (base register)", "score": "16 rows"}
+{"function": "emi/world03/area119/13@0x801F3F04", "tried": "read the prologue: retail interleaves each callee-saved save with its constant setup (s7, s4, s1); the draft saves s1 and zeroes it first", "first_diff": "0x801F3F28 sw s7,60(sp) against sw s1,36(sp)", "score": "30 rows"}
