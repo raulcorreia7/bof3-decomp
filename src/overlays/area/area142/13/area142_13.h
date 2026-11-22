@@ -10,6 +10,8 @@
 
 /* The state handler table the dispatcher indexes. */
 extern u8       D_801F3554[];
+/* The tile ring's two phase signs, read by their own address after the payload's first records. */
+extern s8       D_801F355C[];
 /* The state handler tables the dispatchers index. */
 extern Callback D_801F3B7C[];
 

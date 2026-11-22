@@ -18,6 +18,9 @@
 /* The payload's first words: the per-state handler pointers. */
 extern u8 D_801F3A90[];
 
+/* The screen spread of the quad's far edge: a signed byte a sprite row. */
+extern volatile u8 D_801F3AAC[];
+
 /* The quad's blue level by step, in units of 8. */
 extern u8 D_801F3AB0[];
 
