@@ -28,8 +28,8 @@ MATCH void Game_BattlePlaceMembers(void) {
                 if ((i & BYTE_MASK) >= 3U)
                     break;
             }
-            TASK(Actor)->pos.x.fixed = *(s32*)((u8*)g_EncounterParty + tab);
-            val                      = Area_HeightRead(TASK(Actor)->pos.x.fixed, TASK(Actor)->pos.y.fixed = *(s32*)((u8*)&g_EncounterParty[0].y + tab));
+            TASK(Actor)->pos.x.fixed = *(s32*)((u8*)g_AreaEncounterPlacement.party + tab);
+            val                      = Area_HeightRead(TASK(Actor)->pos.x.fixed, TASK(Actor)->pos.y.fixed = *(s32*)((u8*)&g_AreaEncounterPlacement.party[0].y + tab));
             work                     = TASK(Actor);
             work->param.unk_0B       = 0;
             COORD_INT(work->pos.z)   = val;

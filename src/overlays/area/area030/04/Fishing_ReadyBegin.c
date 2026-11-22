@@ -19,7 +19,7 @@ MATCH void Fishing_ReadyBegin(void) {
     *(u32*)(TASK(u8) + 0x20) = 0;
     TASK(Actor)->timer       = 0;
 
-    mode = (g_FishingLure && g_FishingRod) ? 0 : 6;
+    mode = (g_FishingEquipment.lure_id && g_FishingEquipment.rod_id) ? 0 : 6;
     func_801DDE94(mode);
 
     if (g_Game.current->chr.character_id == CHAR_ID_RYU_YOUNG) {

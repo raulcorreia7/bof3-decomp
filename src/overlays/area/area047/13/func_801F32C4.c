@@ -5,12 +5,12 @@ MATCH void func_801F32C4(void) {
     u8  i;
 
     p = MEM_PTR(u8, AREA_WORK);
-    for (i = 0; i < AREA_ROW_COUNT; i++) {
-        if (p[AREA_ROW_FLAG_OFFSET] == 0) {
-            p[AREA_ROW_FLAG_OFFSET]     = 1;
-            p[AREA_ROW_FLAG_OFFSET + 1] = 0;
+    for (i = 0; i < AREA_RING_COUNT; i++) {
+        if (p[AREA_RING_FLAG_OFFSET] == 0) {
+            p[AREA_RING_FLAG_OFFSET]     = 1;
+            p[AREA_RING_FLAG_OFFSET + 1] = 0;
             return;
         }
-        p += AREA_ROW_STRIDE;
+        p += AREA_RING_STRIDE;
     }
 }

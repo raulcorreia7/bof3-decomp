@@ -1,0 +1,9 @@
+{"function": "emi/world04/area189/13@0x801F5D6C", "tried": "sched2: D_80145040 = TASK(...)->pos.x.fixed written before D_80145048 = g_GameAreaId", "first_diff": "35 diffs: the block before the pad test and the branch offsets move", "score": 35}
+{"function": "emi/world04/area189/13@0x801F5D6C", "tried": "sched2: both TASK position stores written before the area store and g_GameEntryFacing", "first_diff": "70 diffs: the entry block and the frame change", "score": 70}
+{"function": "emi/world04/area189/13@0x801F5D6C", "tried": "sched2: FAKE_ORDER_FENCE before the area store and before the x store to hold the block boundary", "first_diff": "59-61 diffs: the fence moves the pad test and the branch targets", "score": 59}
+{"function": "emi/world02/area104/14@0x801F656C", "tried": "sched2: x declared s16 to change the 0x60000 materialisation", "first_diff": "77 diffs: the saved-register set changes", "score": 77}
+{"function": "emi/world02/area104/14@0x801F656C", "tried": "local-alloc: drop the FAKE_REG base s3 pin", "first_diff": "27 diffs: the pointer takes s4 as the note predicts", "score": 27}
+{"function": "emi/world02/area104/14@0x801F656C", "tried": "frame: FAKE_STACK_PADS retyped s32 for the same 8 bytes", "first_diff": "19 diffs, unchanged", "score": 19}
+{"function": "emi/etc/start/08@0x801DAC1C", "tried": "sched2: count declared s32 so the u8 mask is not forced at the call result", "first_diff": "117 diffs: the prologue and the call-result extension move", "score": 117}
+{"function": "emi/etc/start/08@0x801DAC1C", "tried": "sched2: (u8)count cast at the comparison only", "first_diff": "8 diffs, unchanged", "score": 8}
+{"function": "emi/etc/start/08@0x801DAC1C", "tried": "sched2: a second u8 party local assigned from count and used in the row test", "first_diff": "8 diffs, unchanged", "score": 8}

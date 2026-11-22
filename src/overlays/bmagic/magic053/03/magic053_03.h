@@ -7,6 +7,7 @@
 #define FAKE_DECL_BATTLE_PARTY_CELL_RECORD
 #include "overlays/bmagic/bmagic.h"
 #include "sys/scene.h"
+#include "battle/bmagic.h"
 
 extern s16          D_1F800004;
 extern u16          D_1F80000A;
@@ -18,13 +19,7 @@ extern BattleEffect D_801F0578[];
 void func_801EFD50(void);
 void func_801F01C0(void);
 
-#define MAGIC053_STEP_COUNT 3
-
-typedef struct Magic053Steps {
-    Callback steps[MAGIC053_STEP_COUNT];
-} Magic053Steps;
-
-extern Magic053Steps D_801EEC04;
+extern MagicModuleSteps D_801EEC04;
 
 extern Callback D_801F0554[];
 

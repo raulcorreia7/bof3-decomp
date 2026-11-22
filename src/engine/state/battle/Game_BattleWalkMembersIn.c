@@ -18,8 +18,8 @@ MATCH bool Game_BattleWalkMembersIn(void) {
         return 1;
     }
 
-    g_EncounterOriginX = g_AreaScrollTargetX + (s_CameraScrollDeltas[g_Battle.scroll_dir].dx << 16);
-    g_EncounterOriginY = g_AreaScrollTargetY + (s_CameraScrollDeltas[g_Battle.scroll_dir].dy << 16);
+    g_AreaEncounterPlacement.origin.x.fixed = g_AreaScrollTargetX + (s_CameraScrollDeltas[g_Battle.scroll_dir].dx << 16);
+    g_AreaEncounterPlacement.origin.y.fixed = g_AreaScrollTargetY + (s_CameraScrollDeltas[g_Battle.scroll_dir].dy << 16);
 
     for (i = 0; i < g_Game.party_size; i++) {
         work           = &g_Game.members[i];
@@ -34,8 +34,8 @@ MATCH bool Game_BattleWalkMembersIn(void) {
                 }
                 g_Game.current->status.field.flags.unsigned_value &= 0xFE;
                 TASK(Actor)->draw_layer       = g_AreaDrawMode;
-                TASK(Actor)->pos.x            = g_EncounterParty[order].x;
-                TASK(Actor)->pos.y            = g_EncounterParty[order].y;
+                TASK(Actor)->pos.x            = g_AreaEncounterPlacement.party[order].x;
+                TASK(Actor)->pos.y            = g_AreaEncounterPlacement.party[order].y;
                 COORD_INT(TASK(Actor)->pos.z) = Area_HeightRead(TASK(Actor)->pos.x.fixed, TASK(Actor)->pos.y.fixed);
                 TASK(Actor)->unk_48           = 0;
                 TASK(Actor)->param.unk_0B     = 1;

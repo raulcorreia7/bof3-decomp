@@ -52,10 +52,10 @@ MATCH s32 Item_Count(u8 category, u8 item_id, u8 mode) {
         }
     }
     if (category == ITEM_CATEGORY_ACCESSORY) {
-        if (g_FishingRod == item_id)
+        if (g_FishingEquipment.rod_id == item_id)
             count++;
-        if (g_FishingLure == item_id)
-            count += g_FishingLureQty;
+        if (g_FishingEquipment.lure_id == item_id)
+            count += g_FishingEquipment.lure_count;
     }
     return count;
 }

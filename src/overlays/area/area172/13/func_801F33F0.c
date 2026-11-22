@@ -2,12 +2,12 @@
 
 MATCH void func_801F33F0(void) {
     Actor* work;
-    Actor* step;
+    Actor* actor;
 
     work        = TASK(Actor);
     work->timer = 32;
-    step        = TASK(Actor);
+    actor       = TASK(Actor);
     work->vx    = 0;
-    step->header.mode++;
+    actor->header.mode++;
     g_AreaDrawFlags = 0;
 }

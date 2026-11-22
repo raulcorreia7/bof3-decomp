@@ -10,10 +10,10 @@ MATCH void Area_ScrollStartRoute(s8 route_index) {
     D_80143FC0 = 3;
     D_80143FBF = route_index;
     D_80143FC1 |= 0x80;
-    g_PartyX       = MEM(s32, 0x80149308u);
-    g_PartyY       = g_AreaScrollTargetY;
-    dist           = Area_HeightSample(first, MEM(s32, 0x8014930Cu));
-    g_ScrollHeight = dist;
+    g_PartyPos.x.fixed      = MEM(s32, 0x80149308u);
+    g_PartyPos.y.fixed      = g_AreaScrollTargetY;
+    dist                    = Area_HeightSample(first, MEM(s32, 0x8014930Cu));
+    COORD_INT(g_PartyPos.z) = dist;
     Area_ScrollAdvance(dist);
     D_80143F49 = 1;
     D_80143F4A = 0;

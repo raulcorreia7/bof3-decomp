@@ -96,32 +96,26 @@ extern u8           g_GameRequestType;
 /* 0x80144xxx: party and menu state. */
 extern u16          D_80143F20;
 
-/* Field-battle placement: the formation origin and one start position per party order slot. */
-typedef Coord2 FormationPos;
-
-extern s32          g_EncounterOriginX;
-extern s32          g_EncounterOriginY;
-extern FormationPos g_EncounterParty[3];
 /* D_80143F44 */
-extern u8           g_SysResetHoldFrames;
-extern u8           D_80143F50;
-extern u8           D_80143FC0;
-extern u8           D_801448D8;
-extern s8           D_801448E9;
-extern s8           g_SceneEventMode;
-extern s8           g_SceneEventStep;
-extern u8           g_SceneEventSelection;
-extern volatile u8  g_SndMono;
-extern u8           g_WindowStyle;
-extern u8           g_SavedScriptVars[4];
-extern u8           D_80144955;
+extern u8          g_SysResetHoldFrames;
+extern u8          D_80143F50;
+extern u8          D_80143FC0;
+extern u8          D_801448D8;
+extern s8          D_801448E9;
+extern s8          g_SceneEventMode;
+extern s8          g_SceneEventStep;
+extern u8          g_SceneEventSelection;
+extern volatile u8 g_SndMono;
+extern u8          g_WindowStyle;
+extern u8          g_SavedScriptVars[4];
+extern u8          D_80144955;
 /* D_80144E98 */
-extern u8           g_Scenario2Flags[];
+extern u8          g_Scenario2Flags[];
 /* 0x80145xxx: pad state, shared text buffer and field words. */
-extern u16          D_80145048;
-extern u8           D_801454F2;
+extern u16         D_80145048;
+extern u8          D_801454F2;
 /* D_801459F4 */
-extern u8*          g_SceneActorDefs;
+extern u8*         g_SceneActorDefs;
 /* Event descriptors opened by the executable's card setup. */
 /* The palette cell map: 4 rows of 16 cells, 0xFF where a cell is free. */
 #define PALETTE_MAP_ROWS    4

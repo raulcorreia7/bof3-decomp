@@ -11,7 +11,7 @@ extern Callback D_801F0990[];
 extern Callback D_801F09A0[];
 
 /* D_801F09B0 */
-extern TrailPoint BMagic_Trail[][BMAGIC_TRAIL_LENGTH];
+extern BMagicTrailPoint BMagic_Trail[][BMAGIC_TRAIL_LENGTH];
 
 void func_801EED90(void);
 /* func_800AF3A0 */

@@ -52,8 +52,8 @@ MATCH void Battle_RebuildFormBattler(void) {
     g_Game.members[TASK(PartyMember)->slot].unk_48      = 2;
     g_Game.members[TASK(PartyMember)->slot].scale.x     = 0;
     g_Game.members[TASK(PartyMember)->slot].u.turn.damage_flags.value |= BATTLER_DAMAGE_FORM_EFFECT_PLAYING;
-    g_BattleEffects[TASK(PartyMember)->slot].pos.x.fixed = g_EncounterParty[TASK(PartyMember)->slot].x.fixed;
-    g_BattleEffects[TASK(PartyMember)->slot].pos.y.fixed = g_EncounterParty[TASK(PartyMember)->slot].y.fixed;
+    g_BattleEffects[TASK(PartyMember)->slot].pos.x.fixed = g_AreaEncounterPlacement.party[TASK(PartyMember)->slot].x.fixed;
+    g_BattleEffects[TASK(PartyMember)->slot].pos.y.fixed = g_AreaEncounterPlacement.party[TASK(PartyMember)->slot].y.fixed;
     g_BattleEffects[TASK(PartyMember)->slot].pos.z.fixed = Area_HeightSample(g_BattleEffects[TASK(PartyMember)->slot].pos.x.fixed, g_BattleEffects[TASK(PartyMember)->slot].pos.y.fixed) << 16;
     if (g_Game.members[TASK(PartyMember)->slot].chr.character_id == CHAR_ID_RYU_ADULT || g_Game.members[TASK(PartyMember)->slot].chr.character_id == CHAR_ID_RYU_YOUNG) {
         g_Game.members[TASK(PartyMember)->slot].chr.ap                    = D_801EB4C8;
