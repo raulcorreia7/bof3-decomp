@@ -7,14 +7,14 @@ MATCH void SND_SEPlay(u16 se_id) {
     s32 scaled;
     s32 next;
 
-    D_8018B408 = EMI_SE_ID_BANK(se_id);
-    D_8018B404 = EMI_SE_ID_INDEX(se_id);
+    g_SndSeBank   = EMI_SE_ID_BANK(se_id);
+    g_SndSeRecord = EMI_SE_ID_INDEX(se_id);
     ((void (*)(void))g_SndSeReaders[EMI_SE_ID_BANK(se_id)])();
 
-    if (D_8018B3F4 == 0x80) {
-        switch (D_8018B3E4) {
+    if (g_SndSeUseVolume == 0x80) {
+        switch (g_SndSeLayers) {
             case 3:
-                scaled = D_8018B39C * (D_8018B3F4 - D_8018B3A4);
+                scaled = D_8018B39C * (g_SndSeUseVolume - D_8018B3A4);
                 if (scaled < 0) {
                     scaled += 0x7F;
                 }
@@ -64,63 +64,63 @@ MATCH void SND_SEPlay(u16 se_id) {
         }
 
         if ((se_id & 0xF000) == 0) {
-            D_8018B3D8 = 0x17FF;
-            D_8018B3DC = 0x17FF;
+            g_SndSeVolumeL = 0x17FF;
+            g_SndSeVolumeR = 0x17FF;
         }
     }
 
     if (D_8018232A == 0) {
-        if (D_8018B3E4 == 1) {
+        if (g_SndSeLayers == 1) {
             goto initial_mode1;
-        } else if (D_8018B3E4 < 2) {
-            if (D_8018B3E4 == 0) {
+        } else if (g_SndSeLayers < 2) {
+            if (g_SndSeLayers == 0) {
                 goto initial_mode0;
             }
             return;
-        } else if (D_8018B3E4 == 2) {
+        } else if (g_SndSeLayers == 2) {
             goto initial_mode2;
-        } else if (D_8018B3E4 != 3) {
+        } else if (g_SndSeLayers != 3) {
             return;
         }
     initial_mode3:
         D_8018B394 = SsUtKeyOnV(D_8018B390, D_8018B30C, D_8018B380, D_8018B388, D_8018B38C, D_8018B398, D_8018B39C, D_8018B3A0);
-        if (D_8018B3F4 == 0x80) {
-            SsUtSetDetVVol(D_8018B394, D_8018B3D8, D_8018B3DC);
+        if (g_SndSeUseVolume == 0x80) {
+            SsUtSetDetVVol(D_8018B394, g_SndSeVolumeL, g_SndSeVolumeR);
         }
     initial_mode2:
         D_8018B36C = SsUtKeyOnV(D_8018B368, D_8018B30C, D_8018B358, D_8018B360, D_8018B364, D_8018B370, D_8018B374, D_8018B378);
-        if (D_8018B3F4 == 0x80) {
-            SsUtSetDetVVol(D_8018B36C, D_8018B3D8, D_8018B3DC);
+        if (g_SndSeUseVolume == 0x80) {
+            SsUtSetDetVVol(D_8018B36C, g_SndSeVolumeL, g_SndSeVolumeR);
         }
     initial_mode1:
         D_8018B344 = SsUtKeyOnV(D_8018B340, D_8018B30C, D_8018B330, D_8018B338, D_8018B33C, D_8018B348, D_8018B34C, D_8018B350);
-        if (D_8018B3F4 == 0x80) {
-            SsUtSetDetVVol(D_8018B344, D_8018B3D8, D_8018B3DC);
+        if (g_SndSeUseVolume == 0x80) {
+            SsUtSetDetVVol(D_8018B344, g_SndSeVolumeL, g_SndSeVolumeR);
         }
     initial_mode0:
         D_8018B31C = SsUtKeyOnV(D_8018B318, D_8018B30C, D_8018B308, D_8018B310, D_8018B314, D_8018B320, D_8018B324, D_8018B328);
-        if (D_8018B3F4 == 0x80) {
-            SsUtSetDetVVol(D_8018B31C, D_8018B3D8, D_8018B3DC);
+        if (g_SndSeUseVolume == 0x80) {
+            SsUtSetDetVVol(D_8018B31C, g_SndSeVolumeL, g_SndSeVolumeR);
         }
     initial_done:
-        D_8018232A = -1;
-        D_8018B3F0 = D_8018B318;
-        D_8018B3EC = D_8018B3E8;
+        D_8018232A           = -1;
+        g_SndSeLastVoice     = D_8018B318;
+        g_SndSeLastRetrigger = g_SndSeRetrigger;
         goto queue_done;
     } else {
-        if (D_8018B3F0 != D_8018B318) {
-            if (D_8018B3E4 == 1) {
+        if (g_SndSeLastVoice != D_8018B318) {
+            if (g_SndSeLayers == 1) {
                 goto queue_standard1;
             }
-            if (D_8018B3E4 < 2) {
+            if (g_SndSeLayers < 2) {
                 goto queue_standard_low;
             }
             goto queue_standard23;
         }
-        if (D_8018B3EC > D_8018B3E8) {
+        if (g_SndSeLastRetrigger > g_SndSeRetrigger) {
             goto queue_array_guard; /* once per active SE */
         }
-        switch (D_8018B3E4) {
+        switch (g_SndSeLayers) {
             case 3:
                 goto queue_special3;
             case 2:
@@ -136,77 +136,77 @@ MATCH void SND_SEPlay(u16 se_id) {
 
 queue_special3:
     D_8018B394 = SsUtKeyOnV(D_8018B390, D_8018B30C, D_8018B380, D_8018B388, D_8018B38C, D_8018B398, D_8018B39C, D_8018B3A0);
-    if (D_8018B3F4 == 0x80) {
-        SsUtSetDetVVol(D_8018B394, D_8018B3D8, D_8018B3DC);
+    if (g_SndSeUseVolume == 0x80) {
+        SsUtSetDetVVol(D_8018B394, g_SndSeVolumeL, g_SndSeVolumeR);
     }
 queue_special2:
     D_8018B36C = SsUtKeyOnV(D_8018B368, D_8018B30C, D_8018B358, D_8018B360, D_8018B364, D_8018B370, D_8018B374, D_8018B378);
-    if (D_8018B3F4 == 0x80) {
-        SsUtSetDetVVol(D_8018B36C, D_8018B3D8, D_8018B3DC);
+    if (g_SndSeUseVolume == 0x80) {
+        SsUtSetDetVVol(D_8018B36C, g_SndSeVolumeL, g_SndSeVolumeR);
     }
 queue_special1:
     D_8018B344 = SsUtKeyOnV(D_8018B340, D_8018B30C, D_8018B330, D_8018B338, D_8018B33C, D_8018B348, D_8018B34C, D_8018B350);
-    if (D_8018B3F4 == 0x80) {
-        SsUtSetDetVVol(D_8018B344, D_8018B3D8, D_8018B3DC);
+    if (g_SndSeUseVolume == 0x80) {
+        SsUtSetDetVVol(D_8018B344, g_SndSeVolumeL, g_SndSeVolumeR);
     }
 queue_special0:
     D_8018B31C = SsUtKeyOnV(D_8018B318, D_8018B30C, D_8018B308, D_8018B310, D_8018B314, D_8018B320, D_8018B324, D_8018B328);
-    if (D_8018B3F4 == 0x80) {
-        SsUtSetDetVVol(D_8018B31C, D_8018B3DC, D_8018B3DC);
+    if (g_SndSeUseVolume == 0x80) {
+        SsUtSetDetVVol(D_8018B31C, g_SndSeVolumeR, g_SndSeVolumeR);
     }
     goto queue_update; /* shared active-SE update */
 
 queue_array_guard:
-    if (g_SndVoiceStatus[D_8018B3F0] != 0) {
+    if (g_SndVoiceStatus[g_SndSeLastVoice] != 0) {
         return;
     }
-    if (D_8018B3E4 == 1) {
+    if (g_SndSeLayers == 1) {
         goto queue_standard1;
     }
-    if (D_8018B3E4 >= 2) {
+    if (g_SndSeLayers >= 2) {
         goto queue_standard23;
     }
-    if (D_8018B3E4 == 0) {
+    if (g_SndSeLayers == 0) {
         goto queue_standard0;
     }
     return;
 
 /* A duplicate of the array-guard mode-0 tail: deleting it moves the shared tail and breaks the match. */
 queue_standard_low:
-    if (D_8018B3E4 == 0) {
+    if (g_SndSeLayers == 0) {
         goto queue_standard0;
     }
     return;
 
 queue_standard23:
-    if (D_8018B3E4 == 2) {
+    if (g_SndSeLayers == 2) {
         goto queue_standard2;
     }
-    if (D_8018B3E4 != 3) {
+    if (g_SndSeLayers != 3) {
         return;
     }
 queue_standard3:
     D_8018B394 = SsUtKeyOnV(D_8018B390, D_8018B30C, D_8018B380, D_8018B388, D_8018B38C, D_8018B398, D_8018B39C, D_8018B3A0);
-    if (D_8018B3F4 == 0x80) {
-        SsUtSetDetVVol(D_8018B394, D_8018B3D8, D_8018B3DC);
+    if (g_SndSeUseVolume == 0x80) {
+        SsUtSetDetVVol(D_8018B394, g_SndSeVolumeL, g_SndSeVolumeR);
     }
 queue_standard2:
     D_8018B36C = SsUtKeyOnV(D_8018B368, D_8018B30C, D_8018B358, D_8018B360, D_8018B364, D_8018B370, D_8018B374, D_8018B378);
-    if (D_8018B3F4 == 0x80) {
-        SsUtSetDetVVol(D_8018B36C, D_8018B3D8, D_8018B3DC);
+    if (g_SndSeUseVolume == 0x80) {
+        SsUtSetDetVVol(D_8018B36C, g_SndSeVolumeL, g_SndSeVolumeR);
     }
 queue_standard1:
     D_8018B344 = SsUtKeyOnV(D_8018B340, D_8018B30C, D_8018B330, D_8018B338, D_8018B33C, D_8018B348, D_8018B34C, D_8018B350);
-    if (D_8018B3F4 == 0x80) {
-        SsUtSetDetVVol(D_8018B344, D_8018B3D8, D_8018B3DC);
+    if (g_SndSeUseVolume == 0x80) {
+        SsUtSetDetVVol(D_8018B344, g_SndSeVolumeL, g_SndSeVolumeR);
     }
 queue_standard0:
     D_8018B31C = SsUtKeyOnV(D_8018B318, D_8018B30C, D_8018B308, D_8018B310, D_8018B314, D_8018B320, D_8018B324, D_8018B328);
-    if (D_8018B3F4 == 0x80) {
-        SsUtSetDetVVol(D_8018B31C, D_8018B3D8, D_8018B3DC);
+    if (g_SndSeUseVolume == 0x80) {
+        SsUtSetDetVVol(D_8018B31C, g_SndSeVolumeL, g_SndSeVolumeR);
     }
 queue_update:
-    D_8018B3F0 = D_8018B318;
-    D_8018B3EC = D_8018B3E8;
+    g_SndSeLastVoice     = D_8018B318;
+    g_SndSeLastRetrigger = g_SndSeRetrigger;
 queue_done:;
 }
