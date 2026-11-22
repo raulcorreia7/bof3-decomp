@@ -16,7 +16,7 @@ MATCH void Area_CellLoadRowsPrev(void) {
         for (col = 0; col < AREA_CELL_GRID_COLS; col++) {
             rotCol = (rotCol == AREA_CELL_GRID_COLS - 1) ? 0 : rotCol + 1;
             cell   = &g_AreaCells[g_AreaGridRowCursor][rotCol];
-            Area_CellRequestRows(cell);
+            Area_CellReleasePrims(cell);
             if (i == 0) {
                 base = -2;
             } else {

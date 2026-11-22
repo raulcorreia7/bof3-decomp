@@ -15,7 +15,7 @@
 /* func_801530D0 */
 #ifdef NON_MATCHING
 NON_MATCHING s32 Area_CellDrawRing(void) {
-    s32       sp10_row;
+    s32       grid_row;
     s32       origin_x;
     s32       next_row;
     s32       next_col;
@@ -89,17 +89,17 @@ NON_MATCHING s32 Area_CellDrawRing(void) {
         SCRATCH(s32, 0xC) = 0;
     }
     map_width_ptr = MEM_PTR(u8, MAP_BUNDLE_BASE);
-    sp10_row      = g_AreaGridRowCursor;
+    grid_row      = g_AreaGridRowCursor;
     D_80149341    = SCRATCH(s32, 0xC);
     low_min       = SCRATCH_AT(u8, 0);
     vert          = g_ScratchPadVectors;
     do {
         next_row = 0;
-        if (sp10_row != 0x37) {
-            next_row = sp10_row + 1;
+        if (grid_row != 0x37) {
+            next_row = grid_row + 1;
         }
         window   = SCRATCH(s32, 0xC);
-        sp10_row = next_row;
+        grid_row = next_row;
         col      = g_AreaGridColCursor + window;
         wrapped  = col;
         if (col >= 28) {
@@ -114,9 +114,9 @@ NON_MATCHING s32 Area_CellDrawRing(void) {
                     next_col = col + 1;
                 }
                 col  = next_col;
-                cell = &g_AreaCells[sp10_row][col];
+                cell = &g_AreaCells[grid_row][col];
                 if ((cell->tile_x == 0) || (cell->tile_y == 0)) {
-                    Area_CellRequestRows(cell);
+                    Area_CellReleasePrims(cell);
                     D_8014933A |= 1;
                 } else {
                     vert->vx   = (cell->tile_x << 7) - (AREA_CELL_ORIGIN + AREA_CELL_HALF);
@@ -128,9 +128,9 @@ NON_MATCHING s32 Area_CellDrawRing(void) {
                     gte_rtps();
                     gte_stsxy(&D_1F800034[0]);
                     if (((u16)(D_1F800034[0] + 0x32) >= 0x1A5U) || ((u16)(D_1F800034[1] + 0xC8) >= 0x1EBU)) {
-                        Area_CellRequestRows(cell);
+                        Area_CellReleasePrims(cell);
                     } else {
-                        s2 = cell->prim_id & AREA_CELL_PRIM_MASK;
+                        s2 = cell->prim_slot & AREA_CELL_PRIM_MASK;
                         if (s2 != 0) {
                             prim = g_AreaCellPrims[s2];
                             v16  = prim[0].pad1;
@@ -140,23 +140,23 @@ NON_MATCHING s32 Area_CellDrawRing(void) {
                             }
                             goto block_38;
                         }
-                        v16           = Area_CellAllocPrimRow();
-                        s2            = v16;
-                        cell->prim_id = v16;
+                        v16             = Area_CellAllocPrimSlot();
+                        s2              = v16;
+                        cell->prim_slot = v16;
                         if (s2 != 0) {
                             rec   = D_1F800010;
                             prim  = g_AreaCellPrims[s2];
                             sword = *(s32*)rec;
                             if (((rec[4] < ((sword << 0x10) >> 0x18)) | (rec[6] < (sword >> 0x18))) != 0) {
-                                prim[1].pad1 = Area_CellAllocPrimRow();
+                                prim[1].pad1 = Area_CellAllocPrimSlot();
                             }
                             rec   = D_1F800010;
                             sword = *(s32*)rec;
                             below = rec + *map_width_ptr * 4;
                             if (((below[0] < ((sword << 8) >> 0x18)) | (((*(s32*)below << 0x10) >> 0x18) < (sword >> 0x18))) != 0) {
-                                prim[1].pad2 = Area_CellAllocPrimRow();
+                                prim[1].pad2 = Area_CellAllocPrimSlot();
                             }
-                            cell->prim_id |= Area_CellUpload(cell->tile_x, cell->tile_y, prim, g_GfxBufferIndex);
+                            cell->prim_slot |= Area_CellUpload(cell->tile_x, cell->tile_y, prim, g_GfxBufferIndex);
                             v = 1;
                             if (g_GfxBufferIndex == 0) {
                                 v = 2;
@@ -178,13 +178,13 @@ NON_MATCHING s32 Area_CellDrawRing(void) {
                             gte_ldv3c(&D_1F80001C);
                             pkt2 = &g_AreaCellPrims[s2][g_GfxBufferIndex];
                             gte_rtpt();
-                            if (cell->prim_id & 0x8000) {
-                                if (cell->prim_id & 0x4000) {
+                            if (cell->prim_slot & 0x8000) {
+                                if (cell->prim_slot & 0x4000) {
                                     LINK_PACKET((s6 != 0) ? s6 - 1 : 0, g_GfxBufferIndex, pkt);
                                 } else {
                                     LINK_PACKET(s6, g_GfxBufferIndex + 2, pkt);
                                 }
-                            } else if ((cell->prim_id & 0x4000) && ((g_AreaDrawMode == GFX_LAYER_FIELD_SCENE) || ((g_AreaDrawMode == GFX_LAYER_BATTLE_SCENE) && (depth_threshold < s6)))) {
+                            } else if ((cell->prim_slot & 0x4000) && ((g_AreaDrawMode == GFX_LAYER_FIELD_SCENE) || ((g_AreaDrawMode == GFX_LAYER_BATTLE_SCENE) && (depth_threshold < s6)))) {
                                 *low_min = *(u32*)rec ^ 0x80;
                                 word     = *(u32*)rec >> 8;
                                 if (((word & BYTE_MASK) ^ 0x80) < *low_min) {
@@ -201,7 +201,7 @@ NON_MATCHING s32 Area_CellDrawRing(void) {
                                 }
                                 tmp = g_AreaCellPacketCount;
                                 g_AreaCellPacketCount += 1;
-                                g_AreaCellPackets[tmp] = (s6 << 0x18) | (cell->prim_id & AREA_CELL_PRIM_MASK) | (*low_min << 0x10);
+                                g_AreaCellPackets[tmp] = (s6 << 0x18) | (cell->prim_slot & AREA_CELL_PRIM_MASK) | (*low_min << 0x10);
                             } else {
                                 LINK_PACKET(s6, g_GfxBufferIndex, &prim[g_GfxBufferIndex]);
                             }
@@ -222,7 +222,7 @@ NON_MATCHING s32 Area_CellDrawRing(void) {
                                 vert[0].vz       = -(rec[0] * 0x10);
                                 vert[1].vz       = -((s8) * (u16*)(rec + 2) * 0x10);
                                 gte_ldv3c(&g_ScratchPadVectors[0]);
-                                LINK_PACKET(s6, g_GfxBufferIndex + (((cell->prim_id >> 0xC) & 2) ^ 2), link);
+                                LINK_PACKET(s6, g_GfxBufferIndex + (((cell->prim_slot >> 0xC) & 2) ^ 2), link);
                                 gte_rtpt();
                                 gte_stsxy3((s32*)&link->x3, (s32*)&link->x2, (s32*)D_1F800034);
                             }
@@ -242,7 +242,7 @@ NON_MATCHING s32 Area_CellDrawRing(void) {
                                 vert[0].vz       = -(rec[0] * 0x10);
                                 D_1F80001C.vz    = -(((*(s32*)rec << 0x10) >> 0x18) * 0x10);
                                 gte_ldv3c(&g_ScratchPadVectors[0]);
-                                LINK_PACKET(s6, g_GfxBufferIndex + (((cell->prim_id >> 0xB) & 2) ^ 2), link);
+                                LINK_PACKET(s6, g_GfxBufferIndex + (((cell->prim_slot >> 0xB) & 2) ^ 2), link);
                                 gte_rtpt();
                                 gte_stsxy3((s32*)&link->x2, (s32*)&link->x3, (s32*)D_1F800034);
                             }

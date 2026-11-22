@@ -7,15 +7,15 @@
 MATCH void Area_CellRefreshGrid(void) {
     s32 row;
     s32 col;
-    s32 rotRow;
+    s32 grid_row;
     s32 rotCol;
 
-    rotRow = g_AreaGridRowCursor;
+    grid_row = g_AreaGridRowCursor;
     for (row = 0; row < AREA_CELL_GRID_ROWS; row++) {
-        rotRow = (rotRow == AREA_CELL_GRID_ROWS - 1) ? 0 : rotRow + 1;
+        grid_row = (grid_row == AREA_CELL_GRID_ROWS - 1) ? 0 : grid_row + 1;
         for (col = 0, rotCol = g_AreaGridColCursor; col < AREA_CELL_GRID_COLS; col++) {
             rotCol = (rotCol == AREA_CELL_GRID_COLS - 1) ? 0 : rotCol + 1;
-            Area_CellGet(row, col, &g_AreaCells[rotRow][rotCol]);
+            Area_CellGet(row, col, &g_AreaCells[grid_row][rotCol]);
         }
     }
     Area_CellIndex();
