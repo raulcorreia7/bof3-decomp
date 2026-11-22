@@ -31,13 +31,13 @@ MATCH void func_801F3514(void) {
         g_Task->tint.steps.delta.b = 0;
     }
 
-    vertex                             = g_ScratchPadVectors;
-    screen                             = D_1F800034;
+    vertex                   = g_ScratchPadVectors;
+    screen                   = D_1F800034;
     /* A raw store: the member store would let the scroll loads move above it. */
     FIELD(s16, g_Task, 0x32) = 0x3200;
-    vertex->vx                         = (s16)(((((g_AreaScrollTargetX - 1) & 0xFFFFFF) + 1) >> 9) - 0x4000);
-    D_1F800016                         = (s16)(((((g_AreaScrollTargetY - 1) & 0xFFFFFF) + 1) >> 9) - 0x4000);
-    D_1F800018                         = (s16)(-D_80145ECE / 2);
+    vertex->vx               = (s16)(((((g_AreaScrollTargetX - 1) & 0xFFFFFF) + 1) >> 9) - 0x4000);
+    D_1F800016               = (s16)(((((g_AreaScrollTargetY - 1) & 0xFFFFFF) + 1) >> 9) - 0x4000);
+    D_1F800018               = (s16)(-D_80145ECE / 2);
     RotTransPers(vertex, (long*)screen, &depth, &flag);
 
     g_Task->screen_x = 0xA0;

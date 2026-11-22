@@ -21,7 +21,7 @@ MATCH void Fishing_LureCast(void) {
     if (FISHING_STATE->cue_index >= 4) {
         FISHING_STATE->cue_index = 3;
     }
-    value = FISHING_STATE->y_38.pos_y - (FISHING_STATE->cursor_10 << 15);
+    value                    = FISHING_STATE->y_38.pos_y - (FISHING_STATE->cursor_10 << 15);
     FISHING_STATE->cursor_10 = value;
     if (value >= FISHING_CAMERA_Y_MAX) {
         g_AreaScrollTargetY = FISHING_CAMERA_Y_MAX;
