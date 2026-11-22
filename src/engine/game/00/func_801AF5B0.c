@@ -33,7 +33,7 @@ NON_MATCHING u8 func_801AF5B0(s32 item_category, s32 character_index, s32 abilit
 case_1:
     mapped_character = g_CharSlot[g_PartyFieldOrder[(u8)ch]];
     character_offset = (u32)mapped_character * PARTY_RECORD_STRIDE;
-    required_level   = Char_GetAbilityCost((u8)mapped_character, (u8)type, 0u) & BYTE_MASK;
+    required_level   = Char_AbilityGetCost((u8)mapped_character, (u8)type, 0u) & BYTE_MASK;
     learned_level    = g_Characters[mapped_character].ap;
     if (learned_level < required_level)
         return 0;
@@ -42,7 +42,7 @@ case_1:
     return 0;
 case_2:
     character_offset = (u32)(u8)ch * BATTLE_PARTY_STRIDE;
-    required_level   = Char_GetAbilityCost((u8)ch, (u8)type, 1u) & BYTE_MASK;
+    required_level   = Char_AbilityGetCost((u8)ch, (u8)type, 1u) & BYTE_MASK;
     learned_level    = *(const u16*)(D_80145F1A + character_offset);
     if (learned_level < required_level)
         return 0;

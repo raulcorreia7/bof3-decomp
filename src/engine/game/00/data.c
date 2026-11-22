@@ -24,26 +24,26 @@ u8 s_PaletteSlotStrides[8] = {0x10, 0x00, 0x20, 0x40, 0x80, 0xCC, 0xCC, 0xCC};
 
 Callback g_GameCampMenuLoad[3] = {Game_LoadCampMenu, func_801E3E88, func_801E1680};
 
-Callback g_GameModes[12] = {Game_NewGame,          Game_UpdateAreaLoad, Game_UpdateField,   Game_UpdateMenu,        func_801979D4,         Game_UpdateBattle,
-                             Game_UpdateCameraLook, Game_UpdateShop,     Game_UpdateFishing, Game_UpdateAbilityMenu, Game_UpdateShisu, Game_UpdateSceneCamera};
+Callback g_GameModes[12] = {Game_NewGame,          Game_UpdateAreaLoad, Game_UpdateField,   Game_MenuUpdate,        func_801979D4,         Game_UpdateBattle,
+                             Game_CameraLookUpdate, Game_ShopUpdate,     Game_FishingUpdate, Game_AbilityMenuUpdate, Game_ShisuUpdate, Game_SceneCameraUpdate};
 
-Callback g_GameMenuSteps[3] = {Game_LoadMenu, Game_UpdateMenuFrame, Game_ReturnFromMenu};
+Callback g_GameMenuSteps[3] = {Game_MenuLoad, Game_MenuUpdateFrame, Game_MenuReturn};
 
 u8 s_DirectionJitters[4] = {0xFF, 0x00, 0x01, 0x00};
 
-Callback g_GameBattleSteps[8] = {Game_BattleTurnToEncounter, Battle_LoadPartySprites, Game_BattleWalkToEncounter, Battle_LoadBattleArchive, Game_BattleBeginEntrance, func_801D1014, Game_ScrollToParty, Game_ReturnFromBattle};
+Callback g_GameBattleSteps[8] = {Game_BattleTurnToEncounter, Game_BattleLoadPartySprites, Game_BattleWalkToEncounter, Game_BattleLoadArchive, Game_BattleBeginEntrance, func_801D1014, Game_ScrollToParty, Game_ReturnFromBattle};
 
 Step2 s_BattleScrollCellSteps[4] = {{4, 0}, {0, 4}, {-4, 0}, {0, -4}};
 
-Callback g_GameShopSteps[3] = {Game_LoadShopOverlay, func_80199398, Game_ReturnFromShop};
+Callback g_GameShopSteps[3] = {Game_ShopLoadOverlay, func_80199398, Game_ShopReturn};
 
-Callback g_GameFishingSteps[4] = {Game_EndFishing, func_801E0BD0, Game_ReturnFromFishing, func_801E0C20};
+Callback g_GameFishingSteps[4] = {Game_FishingEnd, func_801E0BD0, Game_FishingReturn, func_801E0C20};
 
-Callback g_MenuAbilityOpen[3] = {Game_LoadAbilityMenu, Game_UpdateAbilityMenuFrame, Game_ReturnFromAbilityMenu};
+Callback g_MenuAbilityOpen[3] = {Game_AbilityMenuLoad, Game_AbilityMenuUpdateFrame, Game_AbilityMenuReturn};
 
-Callback g_GameShisuSteps[3] = {Game_LoadShisu, Game_UpdateShisuFrame, Game_ReturnFromShisu};
+Callback g_GameShisuSteps[3] = {Game_ShisuLoad, Game_ShisuUpdateFrame, Game_ShisuReturn};
 
-Callback g_GameSceneCameraSteps[3] = {Game_RunScene, Game_OrbitSceneCamera, Game_EndSceneCamera};
+Callback g_GameSceneCameraSteps[3] = {Game_RunScene, Game_SceneCameraOrbit, Game_SceneCameraEnd};
 
 u8 s_MenuLine1Run[12] = {0x00, 0x00, 0x0B, 0x01, 0x00, 0x14, 0x02, 0x00, 0x0C, 0x00, 0x00, 0xFF};
 
@@ -349,8 +349,8 @@ ActorStepCallback D_801C83BC[7] = {(ActorStepCallback)func_801A225C, (ActorStepC
 
 ActorModeCallback D_801C83D8[11] = {(ActorModeCallback)func_801A0AE4, (ActorModeCallback)func_801A0CFC, (ActorModeCallback)func_801A0F24,
                              (ActorModeCallback)func_801A114C, (ActorModeCallback)func_801A1384, (ActorModeCallback)func_801A271C,
-                             (ActorModeCallback)func_801A1A24, (ActorModeCallback)func_801A3410, (ActorModeCallback)Game_DispatchFadeWhite,
-                             (ActorModeCallback)Game_DispatchFadeBlack, (ActorModeCallback)func_801A3B7C};
+                             (ActorModeCallback)func_801A1A24, (ActorModeCallback)func_801A3410, (ActorModeCallback)Game_FadeDispatchWhite,
+                             (ActorModeCallback)Game_FadeDispatchBlack, (ActorModeCallback)func_801A3B7C};
 
 u8 s_EntityRouteIndices[8][4] = {{0x03, 0x05, 0x07, 0x01}, {0x05, 0x01, 0x07, 0x03}, {0x07, 0x05, 0x03, 0x01},
                                  {0x01, 0x07, 0x05, 0x03}, {0x07, 0x01, 0x03, 0x05}, {0x03, 0x01, 0x07, 0x05},
@@ -360,9 +360,9 @@ u16 D_801C8424[8] = {
     0x0600, 0x0800, 0x0A00, 0x0C00, 0x0E00, 0x0000, 0x0200, 0x0400,
 };
 
-Callback D_801C8434[2] = {Game_StartFadeWhite, func_801A3648};
+Callback D_801C8434[2] = {Game_FadeStartWhite, func_801A3648};
 
-Callback D_801C843C[2] = {Game_StartFadeBlack, func_801A386C};
+Callback D_801C843C[2] = {Game_FadeStartBlack, func_801A386C};
 
 u8 s_ScriptOpcodeLengths[16] = {0x11, 0x10, 0x13, 0x12, 0x11, 0x12, 0x10, 0x11,
                                 0x0C, 0x0D, 0x0E, 0x0E, 0x02, 0x04, 0x07, 0x00};
@@ -2172,16 +2172,16 @@ s8 s_EntityPlacementOffsets[32] = {
     0x00, 0xFD, 0xFD, 0x00, 0x02, 0xFE, 0xFF, 0xFC, 0x03, 0x00, 0x00, 0xFD, 0x02, 0x02, 0x04, 0xFF,
 };
 
-Callback D_801CD0AC[15] = {func_801B016C, func_801B0320, func_801B69C0, Game_RunLeaderSwitch, func_801B29BC, func_801B2A70, func_801B2C38, func_801B2D90,
+Callback D_801CD0AC[15] = {func_801B016C, func_801B0320, func_801B69C0, Game_LeaderSwitchRun, func_801B29BC, func_801B2A70, func_801B2C38, func_801B2D90,
                            Area_Climb,    func_801D9B14, func_801B3690, func_801B371C,        func_801B3BFC, func_801F4D9C, func_801C22D8};
 
 Callback D_801CD0E8[3] = {func_801B036C, func_801B0568, func_801B0DA0};
 
 u16 D_801CD0F4[4] = {0x0103, 0x0109, 0x010A, 0x0000};
 
-Callback D_801CD0FC[5] = {func_801B1E24, func_801B207C, func_801B21E8, func_801B26E0, Game_EndLeaderSwitch};
+Callback D_801CD0FC[5] = {func_801B1E24, func_801B207C, func_801B21E8, func_801B26E0, Game_LeaderSwitchEnd};
 
-Callback D_801CD110[2] = {Game_RequestMenu, Game_WaitMenuClose};
+Callback D_801CD110[2] = {Game_MenuRequest, Game_MenuWaitClose};
 
 Callback D_801CD118[2] = {func_801B2AB4, func_801B2B6C};
 

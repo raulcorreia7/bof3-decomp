@@ -32,5 +32,5 @@ MATCH void Scene_Start(u8 scenario_index) {
         SYS_ThreadWait(1u);
     }
 
-    Game_UpdateScenario();
+    Game_ScenarioUpdate();
 }

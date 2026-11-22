@@ -108,7 +108,7 @@ magic, is a container tag.
 A subject with its own family of functions is a tag; a new tag goes into the tables above in the same
 change.
 
-The first word after an engine tag is the subsystem (the folder under the module, or a family of three or more functions), and the function says its verb after it: `UI_TextDraw`, `UI_WindowDrawFrame`, `UI_SpriteDraw`, `UI_IconDraw`, `UI_CursorDraw`, `UI_MessageStartArea`, `UI_MessageAnswerSelect`, `UI_PanelOpenTask`, `UI_ListDrawItemRow`, `UI_ModeSet`; `GFX_PaletteLoad`, `GFX_FadeRunBlack`. `Actor_MovementUpdate`, `Script_AnimStepLoop`, `Script_OpsRunFlow`. A word the subsystem repeats is dropped.
+The first word after an engine tag is the subsystem (the folder under the module, or a family of three or more functions), and the function says its verb after it: `UI_TextDraw`, `UI_WindowDrawFrame`, `UI_SpriteDraw`, `UI_IconDraw`, `UI_CursorDraw`, `UI_MessageStartArea`, `UI_MessageAnswerSelect`, `UI_PanelOpenTask`, `UI_ListDrawItemRow`, `UI_ModeSet`; `GFX_PaletteLoad`, `GFX_FadeRunBlack`. `Actor_MovementUpdate`, `Script_AnimStepLoop`, `Script_OpsRunFlow`. `EMI_ArchiveLoad`, `EMI_PartyLoadArchives`, `EMI_VabLoadBody`. A word the subsystem repeats is dropped.
 
 UI parts: shared text, fonts, glyphs and windows are `UI_`; the message window, its panels, answer
 lists and area messages are `UI_Message*` and `UI_MessageAnswer*`; panels, cursors, sprites and icons are `UI_Panel*`, `UI_Cursor*`, `UI_Sprite*` and `UI_Icon*`; `Menu_` is only the menu screens' own code, and a widget
@@ -178,7 +178,7 @@ game's own records owns keeps its meaning (`Callback`, `Bank`, `Slot`, `Cell`); 
 A function name takes one of two orders:
 
 1. **Verb first**, the default: `Tag_VerbObject`. The tag, an underscore, a verb, then the thing
-   acted on: `Party_AddMember`, `Battle_FindTarget`, `Shop_Buy`.
+   acted on: `Party_MemberAdd`, `Battle_FindTarget`, `Shop_Buy`.
 2. **Object first**, for a family: `Tag_ObjectVerb`. When three or more functions under one tag act
    on the same object, the object comes first, so the family sorts together, as PsyQ writes
    `SsSeqOpen`, `SsSeqPlay` and `SsSeqClose`: `UI_MessageWindowOpen`, `UI_MessageWindowClose`,
@@ -445,8 +445,8 @@ two systems have their own thing under one noun. `B` in a disc label marks the b
 | `PLCHAR`, `BPLCHAR`      | character archive                                                                                 |
 | `PLP###`                 | code of one party: the three digits name its characters (`PLP012`: Ryu, Nina, Garr)               |
 | `COMMU00` to `COMMU05`   | Fairy Village: the village program (`COMMU00`) and its event scripts (`COMMU01` to `COMMU05`)     |
-| `BATE`                   | ability menu (`Game_LoadAbilityMenu` loads it)                                                    |
-| `SHISU`                  | the scena11 shisu screen, where the player mixes the four ingredients (`Game_LoadShisu` loads it) |
+| `BATE`                   | ability menu (`Game_AbilityMenuLoad` loads it)                                                    |
+| `SHISU`                  | the scena11 shisu screen, where the player mixes the four ingredients (`Game_ShisuLoad` loads it) |
 | `SISYOU` (師匠)          | `Master` menu                                                                                     |
 | `SHOP`                   | shop program                                                                                      |
 | `START`                  | start menu                                                                                        |

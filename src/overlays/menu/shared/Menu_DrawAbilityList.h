@@ -66,10 +66,10 @@ MATCH void Menu_DrawAbilityList(MenuListPanel* panel) {
             if (n == panel->selected) {
                 shade = UI_TEXT_HIGHLIGHT;
             }
-            element = Char_GetAbilityElement(*list);
+            element = Char_AbilityGetElement(*list);
             ability = &g_Abilities[*list];
             /* needs: type: D_80148656 is read signed here and unsigned above */
-            cost    = Char_GetAbilityCost(g_CharSlot[g_PartyFieldOrder[(s8)D_80148656]], *list, 0);
+            cost    = Char_AbilityGetCost(g_CharSlot[g_PartyFieldOrder[(s8)D_80148656]], *list, 0);
             if (n == panel->selected || n == panel->unk_0C) {
                 if (shade != UI_TEXT_DIM) {
                     UI_ListDrawAbilityRow(panel->pos.x + MENU_ABILITY_LIST_ICON_X, y + MENU_ABILITY_LIST_ROW_Y + MENU_ABILITY_LIST_SHADOW_DY, UI_TEXT_DIM, element, ability, cost,

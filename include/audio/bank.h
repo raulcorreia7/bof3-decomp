@@ -7,7 +7,7 @@
 
 /* One audio bank record of the main executable's EMI loader (seven records at
  * 0x8014677C): where the VAB header sits, where the SE table and the sequence
- * package go, and the bank's VAB id. EMI_LoadVabBody reads vab_header,
+ * package go, and the bank's VAB id. EMI_VabLoadBody reads vab_header,
  * vab_id and spu_address as the three SsVabOpenHeadSticky arguments;
  * EMI_LoadSE and EMI_LoadSequence copy to destination and
  * sequence_buffer. */

@@ -30,7 +30,7 @@ MATCH void Title_Begin(void) { /* func_801D0C90 */
     u16 state;
 
     SND_SetBankLayout(2u);
-    EMI_LoadArchive(EMI_SLOT_DEMO);
+    EMI_ArchiveLoad(EMI_SLOT_DEMO);
 
     while (!EMI_IsReady()) {
         SYS_ThreadWait(1u);

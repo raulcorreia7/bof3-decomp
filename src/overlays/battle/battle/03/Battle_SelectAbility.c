@@ -47,9 +47,9 @@ MATCH void Battle_SelectAbility(void) {
     action = *(u16*)&g_Battle.action_id;
     if (action != 0x97) {
         if (BATTLER_IS_PLAYER(g_Battle.active_battler)) {
-            D_801463C8 = Char_GetAbilityCost(BATTLE_ACTIVE_PARTY.slot, action & BYTE_MASK, 1);
+            D_801463C8 = Char_AbilityGetCost(BATTLE_ACTIVE_PARTY.slot, action & BYTE_MASK, 1);
         } else {
-            D_801463C8 = Char_GetAbilityCost(ENEMY_COMBATANT(g_Battle.active_battler).slot, action & BYTE_MASK, 1);
+            D_801463C8 = Char_AbilityGetCost(ENEMY_COMBATANT(g_Battle.active_battler).slot, action & BYTE_MASK, 1);
         }
     } else {
         D_801463C8 = D_801463B8[0];

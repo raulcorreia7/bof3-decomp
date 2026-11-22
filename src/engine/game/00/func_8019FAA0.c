@@ -29,7 +29,7 @@ NON_MATCHING void func_8019FAA0(u16 area_id, u32 entry_x, u32 entry_y, u8 entry_
     if (g_GameAreaId != area_id) {
         if (g_GameStateIndex == GAME_REQUEST_AREA_CHANGE) {
             g_GameAreaId = area_id;
-            EMI_LoadArchive((u32)(area_id + EMI_SLOT_AREA));
+            EMI_ArchiveLoad((u32)(area_id + EMI_SLOT_AREA));
             while (EMI_IsReady() == 0)
                 SYS_ThreadWait(1u);
         }
@@ -71,7 +71,7 @@ NON_MATCHING void func_8019FAA0(u16 area_id, u32 entry_x, u32 entry_y, u8 entry_
 
     SYS_ClearFlag(g_SceneEventFlags, 0x1Cu);
     g_ScenarioState.mode_02 = 1u;
-    Game_UpdateScenario();
+    Game_ScenarioUpdate();
     func_801C05AC();
 
     world_flags = g_Game.walk_flags;

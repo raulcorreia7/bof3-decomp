@@ -37,13 +37,13 @@ MATCH void func_801D62DC(void) {
         }
         g_AreaWalkFlags &= ~AREA_WALK_BUSY_ALL;
         g_PartySize = Party_CountOrder(PARTY_ORDER_FIELD);
-        Party_BuildBattlers(PARTY_ORDER_FIELD);
+        Party_BattlersBuild(PARTY_ORDER_FIELD);
         i = 0;
         if (g_Game.party_size != 0) {
             base = selection * 0x30;
             do {
                 TASK_SET(((u8*)g_Game.members + i * BATTLE_PARTY_STRIDE));
-                Party_LoadMemberSprite(g_Game.members[i].chr.character_id, i);
+                Party_MemberLoadSprite(g_Game.members[i].chr.character_id, i);
                 Script_Select(g_Task->direction);
                 offset                           = i * 0x10 + base;
                 ((ShopSelection*)g_Task)->unk_34 = FIELD(s32, &D_801E537C, offset);

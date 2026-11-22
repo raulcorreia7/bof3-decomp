@@ -9,7 +9,7 @@ MATCH void func_801B2C38(void) {
     if (g_Game.current->u.field.mode.unsigned_value == 0) {
         Script_Request(g_Task->direction);
         g_Task->timer = 0;
-        Party_ClearBattlerState(CHAR_INDEX_RYU);
+        Party_BattlersClearState(CHAR_INDEX_RYU);
         g_Task->header.mode  = 1;
         g_Task->param.unk_0B = 0;
         func_801B036C();

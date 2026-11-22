@@ -377,7 +377,7 @@ MATCH void func_801FD6FC(u8 character) {
     ability = g_Characters[character].abilities.skill;
     for (i = 0; i < 10; i++) {
         if (*ability != 0) {
-            Char_AddAbility(*ability, 0, 1, 0);
+            Char_AbilityAdd(*ability, 0, 1, 0);
             *ability = 0;
         }
         ability++;
@@ -393,7 +393,7 @@ INCLUDE_ASM(func_801FD780);
 
 /* func_801FE178 */
 MATCH void Party_JoinRei(void) {
-    Party_JoinMember(CHAR_ID_REI);
+    Party_MemberJoin(CHAR_ID_REI);
 }
 
 #include "overlays/scenario/shared/Scene_RemoveRei.h"
@@ -404,7 +404,7 @@ MATCH void Scene_RemoveReiTeepo(void) {
     g_Characters[g_CharSlot[CHAR_ID_REI]].party_flags &= ~PARTY_FLAG_JOINED;
     FAKE_BARRIER(); /* FAKE: retail keeps the second index load below the first store. */
     g_Characters[g_CharSlot[CHAR_ID_TEEPO]].party_flags &= ~PARTY_FLAG_JOINED;
-    Party_RemoveMember(CHAR_ID_REI);
-    Party_RemoveMember(CHAR_ID_TEEPO);
+    Party_MemberRemove(CHAR_ID_REI);
+    Party_MemberRemove(CHAR_ID_TEEPO);
     Party_LoadPalettes();
 }

@@ -9,7 +9,7 @@ Scene_RunSaveMenu = { addr = 0x801F9490, type = "func", source = "replaces the c
 Scene_EnterSaveMenu = { addr = 0x801F9504, type = "func", source = "The save menu's first step: clears the save flags, places the party at the Dragnier surface save point, loads the shop archive and advances the substate." }
 Scene_UpdateSaveMenu = { addr = 0x801F9654, type = "func", source = "updates menu panel tasks and dispatches the shop step" }
 Scene_ExitToTitle = { addr = 0x801F967C, type = "func", source = "clears scene script variables, exits sound and replaces the callback with the frontend start" }
-Scene_SetPartyRyuYoungTeepoRei = { addr = 0x801F96D4, type = "func", source = "Streams the EMI family for young Ryu, Teepo and Rei, empties g_Game.party_size and joins the three with Party_JoinMember." }
+Scene_SetPartyRyuYoungTeepoRei = { addr = 0x801F96D4, type = "func", source = "Streams the EMI family for young Ryu, Teepo and Rei, empties g_Game.party_size and joins the three with Party_MemberJoin." }
 g_SceneActorDispatch = { addr = 0x801F97D8, source = "scenario actor dispatch table" }
 g_EndingGlyphWidth = { addr = 0x801F97DC, source = "ending roll lines set up by Scene_StartEndingXA and drawn as scrolling text: advance width per glyph" }
 g_EndingRollText = { addr = 0x801F981C, source = "ending roll lines set up by Scene_StartEndingXA and drawn as scrolling text: line text table, -1 ends it" }

@@ -162,7 +162,7 @@ extern s8 g_UiMessageChoice;
 
 /* A countdown timer expires when the decrement reaches zero. */
 #define TIMER_EXPIRED(timer)   (--(timer) == 0)
-/* EMI_LoadFamilyArchive packs the loaded archive's index (low 7 bits) with
+/* EMI_ArchiveLoadFamily packs the loaded archive's index (low 7 bits) with
  * the family-0 (PL) marker bit; readers mask the index off. */
 #define EMI_LOADED_INDEX_MASK  0x7F
 #define EMI_LOADED_PL          0x80
@@ -207,7 +207,7 @@ typedef enum GameRequest {
     GAME_REQUEST_MENU         = 1, /* state 3 */
     GAME_REQUEST_MESSAGE      = 2, /* state 4, the message window wait */
     GAME_REQUEST_BATTLE       = 3, /* state 5 */
-    GAME_REQUEST_CAMERA_LOOK  = 4, /* state 6, Game_UpdateCameraLook: free camera orbit */
+    GAME_REQUEST_CAMERA_LOOK  = 4, /* state 6, Game_CameraLookUpdate: free camera orbit */
     GAME_REQUEST_AREA_CHANGE  = 5, /* state 1 */
     GAME_REQUEST_SHOP         = 6, /* state 7 */
     GAME_REQUEST_ABILITY_MENU = 7, /* state 9; scena06 writes it */

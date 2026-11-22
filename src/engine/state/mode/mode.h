@@ -16,11 +16,11 @@ void       Game_NewGame(void);
 /* func_8019FA28 */
 void       Game_RequestAreaChange(u16 area_id, u32 entry_x, u32 entry_y, u8 entry_facing);
 /* func_801A782C */
-void       Game_UpdateScenario(void);
+void       Game_ScenarioUpdate(void);
 /* func_801A7878 */
-void       Game_DispatchScenarioRecord(void* record);
+void       Game_ScenarioDispatchRecord(void* record);
 /* func_801A7A34 */
-s8         Game_CallScenario(u16 handler_arg0, u16 handler_arg1);
+s8         Game_ScenarioCall(u16 handler_arg0, u16 handler_arg1);
 /* func_801A7BF0 */
 void       Game_UpdateScene(void);
 /* Game_ReadCommand */
@@ -48,38 +48,38 @@ extern s32 Game_SetScriptActive(void);
 
 void Game_UpdateAreaLoad(void);
 void Game_UpdateField(void);
-void Game_UpdateMenu(void);
-void Game_LoadMenu(void);
-void Game_ReturnFromMenu(void);
+void Game_MenuUpdate(void);
+void Game_MenuLoad(void);
+void Game_MenuReturn(void);
 void Game_UpdateBattle(void);
 /* func_80197EFC */
 void Game_ScrollToParty(void);
 /* func_80197F48 */
 void Game_ReturnFromBattle(void);
-void Game_UpdateCameraLook(void);
+void Game_CameraLookUpdate(void);
 /* func_801981D4 */
-void Game_EndCameraLook(void);
-void Game_UpdateShop(void);
-void Game_LoadShopOverlay(void);
-void Game_ReturnFromShop(void);
-void Game_UpdateFishing(void);
+void Game_CameraLookEnd(void);
+void Game_ShopUpdate(void);
+void Game_ShopLoadOverlay(void);
+void Game_ShopReturn(void);
+void Game_FishingUpdate(void);
 /* func_801984E8 */
-void Game_EndFishing(void);
+void Game_FishingEnd(void);
 /* func_801985C8 */
-void Game_ReturnFromFishing(void);
-void Game_UpdateAbilityMenu(void);
-void Game_LoadAbilityMenu(void);
-void Game_ReturnFromAbilityMenu(void);
-void Game_UpdateShisu(void);
-void Game_LoadShisu(void);
-void Game_ReturnFromShisu(void);
-void Game_UpdateSceneCamera(void);
+void Game_FishingReturn(void);
+void Game_AbilityMenuUpdate(void);
+void Game_AbilityMenuLoad(void);
+void Game_AbilityMenuReturn(void);
+void Game_ShisuUpdate(void);
+void Game_ShisuLoad(void);
+void Game_ShisuReturn(void);
+void Game_SceneCameraUpdate(void);
 /* func_80198B00 */
 void Game_RunScene(void);
 /* func_80198B44 */
-void Game_OrbitSceneCamera(void);
+void Game_SceneCameraOrbit(void);
 /* func_80198B6C */
-void Game_EndSceneCamera(void);
+void Game_SceneCameraEnd(void);
 /* func_80198CAC */
 void Game_UpdateClock(void);
 /* func_801990D0 */
@@ -87,37 +87,37 @@ void Game_EaseCameraToRest(void);
 /* func_80199308 */
 void Game_RunSceneFrame(void);
 /* func_80199368 */
-void Game_UpdateMenuFrame(void);
+void Game_MenuUpdateFrame(void);
 /* func_801993F0 */
-void Game_UpdateAbilityMenuFrame(void);
+void Game_AbilityMenuUpdateFrame(void);
 /* func_80199418 */
-void Game_UpdateShisuFrame(void);
+void Game_ShisuUpdateFrame(void);
 /* func_801A3594 */
-void Game_DispatchFadeWhite(void);
+void Game_FadeDispatchWhite(void);
 /* func_801A35D8 */
-void Game_StartFadeWhite(void);
+void Game_FadeStartWhite(void);
 /* func_801A37D4 */
-void Game_DispatchFadeBlack(void);
+void Game_FadeDispatchBlack(void);
 /* func_801A3818 */
-void Game_StartFadeBlack(void);
+void Game_FadeStartBlack(void);
 /* func_801A8CB4 */
 s8   Game_CallArea(s32 handler_x, s32 handler_y);
 /* func_801B1AE8 */
-void Game_RunLeaderSwitch(void);
+void Game_LeaderSwitchRun(void);
 /* func_801B2950 */
-void Game_EndLeaderSwitch(void);
+void Game_LeaderSwitchEnd(void);
 /* func_801B2A00 */
-void Game_RequestMenu(void);
+void Game_MenuRequest(void);
 /* func_801B2A20 */
-void Game_WaitMenuClose(void);
+void Game_MenuWaitClose(void);
 /* func_801B5684 */
-bool Game_RequestLeaderSwitch(void);
+bool Game_LeaderSwitchRequest(void);
 /* func_801B5758 */
-bool Game_RequestFieldMenu(void);
+bool Game_MenuRequestField(void);
 /* func_801B5884 */
-bool Game_RequestCameraLook(void);
+bool Game_CameraLookRequest(void);
 /* func_801B5910 */
-bool Game_RequestSceneCamera(void);
+bool Game_SceneCameraRequest(void);
 /* func_801B5AE4 */
 s8   Game_FindRockAhead(s32 route_index, s32 route_flags);
 /* func_801B5EBC */

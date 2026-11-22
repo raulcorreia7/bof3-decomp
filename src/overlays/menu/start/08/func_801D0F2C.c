@@ -42,13 +42,13 @@ NON_MATCHING void func_801D0F2C(u8 start) {
         g_Characters[D_80181B18].character_id         = 8;
         g_Characters[D_80181B18].base.evasion         = 0xC;
     }
-    EMI_LoadPartyArchives(SP_REF(u8, 0), SP_REF(u8, 1), SP_REF(u8, 2), 0);
+    EMI_PartyLoadArchives(SP_REF(u8, 0), SP_REF(u8, 1), SP_REF(u8, 2), 0);
     g_PartySize = 0;
     src         = D_801EBA44[start].party;
     for (i = 0; i < 3; i++) {
         member = *src++;
         if (member != 0xFF && (member & 0x80) == 0) {
-            Party_JoinMember(member);
+            Party_MemberJoin(member);
         } else {
             g_PartyFieldOrder[i]  = 0xFF;
             g_PartyBattleOrder[i] = 0xFF;
@@ -113,7 +113,7 @@ NON_MATCHING void func_801D0F2C(u8 start) {
     }
     D_80145548 = D_801EBA44[start].unk_58;
     if (D_801EBA44[start].unk_58 != 0) {
-        Char_AddAbility(0x97, D_80181B17, 0, 0);
+        Char_AbilityAdd(0x97, D_80181B17, 0, 0);
     }
     for (i = 0; i < 3; i++) {
         D_801454F4[i][0] = 0;

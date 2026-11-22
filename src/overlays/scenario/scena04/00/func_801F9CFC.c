@@ -83,7 +83,7 @@ MATCH void func_801FA074(void) {
 }
 
 MATCH void func_801FA0B4(void) {
-    EMI_LoadPartyArchives(CHAR_ID_RYU_YOUNG, CHAR_ID_NINA_YOUNG, CHAR_ID_MOMO, 0);
+    EMI_PartyLoadArchives(CHAR_ID_RYU_YOUNG, CHAR_ID_NINA_YOUNG, CHAR_ID_MOMO, 0);
     g_PartyFieldOrder     = 255;
     D_80144F5B            = 255;
     D_80144F5C            = 255;
@@ -91,8 +91,8 @@ MATCH void func_801FA0B4(void) {
     D_80144F5E            = 255;
     D_80144F5F            = 255;
     g_Game.party_size     = 0;
-    Party_JoinMember(CHAR_ID_RYU_YOUNG);
-    Party_JoinMember(CHAR_ID_NINA_YOUNG);
+    Party_MemberJoin(CHAR_ID_RYU_YOUNG);
+    Party_MemberJoin(CHAR_ID_NINA_YOUNG);
 }
 
 #include "overlays/scenario/shared/Scene_SetPartyRyuYoungNinaYoungMomo.h"

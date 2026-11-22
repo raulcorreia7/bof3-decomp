@@ -27,7 +27,7 @@ MATCH u8 func_800C2138(u32 mode) {
             D_800C26E0 = 0;
             TASK_SET(&D_801EB860);
             g_BattleCurrentEnemy = (EnemyBattler*)&D_801EB860;
-            Party_LoadMemberSprite(1, 1);
+            Party_MemberLoadSprite(1, 1);
             g_BattleCurrentEnemy->script = &D_800C25FC;
             g_Task->unk_29               = 4;
             Script_Select((g_Task->facing + 4) & BYTE_MASK);

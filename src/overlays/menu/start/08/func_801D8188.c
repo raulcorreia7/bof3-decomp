@@ -28,7 +28,7 @@ MATCH void func_801D8188(void) {
     if (*key & g_InputMasks[MENU_INPUT_CONFIRM]) {
         if (*toggle != 0) {
             SND_PlaySE(EMI_SE_ID(SND_BANK_COMMON, 4));
-            Char_AddAbility(*(Party_GetAbilities(g_UiPanelTasks[16].unk_0A, g_UiPanelTasks[16].unk_0B, CHAR_INDEX_RYU) + g_UiPanelTasks[16].unk_0C), CHAR_INDEX_RYU, 1, 0);
+            Char_AbilityAdd(*(Party_GetAbilities(g_UiPanelTasks[16].unk_0A, g_UiPanelTasks[16].unk_0B, CHAR_INDEX_RYU) + g_UiPanelTasks[16].unk_0C), CHAR_INDEX_RYU, 1, 0);
             *(Party_GetAbilities(g_UiPanelTasks[16].unk_0A, g_UiPanelTasks[16].unk_0B, 0) + g_UiPanelTasks[16].unk_0C) = 0;
         } else {
             SND_PlaySE(EMI_SE_ID(SND_BANK_COMMON, 6));

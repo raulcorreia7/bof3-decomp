@@ -22,15 +22,15 @@ MATCH void SAVE_RunLoadRestore(void) {
             g_InputMasks[INPUT_SLOT_UNUSED]  = PADselect;
         }
         g_Game.party_size = Party_CountOrder(PARTY_ORDER_FIELD);
-        EMI_LoadFamilyArchive(g_EmiLoadedCharacterIndex & EMI_LOADED_INDEX_MASK, EMI_FAMILY_PLP);
+        EMI_ArchiveLoadFamily(g_EmiLoadedCharacterIndex & EMI_LOADED_INDEX_MASK, EMI_FAMILY_PLP);
         while (EMI_IsReady() == 0) {
             SYS_ThreadWait(1);
         }
-        EMI_LoadFamilyArchive(g_EmiLoadedCharacterIndex & EMI_LOADED_INDEX_MASK, EMI_FAMILY_PL);
+        EMI_ArchiveLoadFamily(g_EmiLoadedCharacterIndex & EMI_LOADED_INDEX_MASK, EMI_FAMILY_PL);
         while (EMI_IsReady() == 0) {
             SYS_ThreadWait(1);
         }
-        Party_BuildBattlers(PARTY_ORDER_FIELD);
+        Party_BattlersBuild(PARTY_ORDER_FIELD);
         {
             u8* src;
             s8* dst;
