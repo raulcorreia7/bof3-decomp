@@ -589,7 +589,128 @@ NON_MATCHING void func_801D1EE8(void) {
 INCLUDE_ASM(func_801D1EE8);
 #endif
 
+/* One 0x28-byte textured-quad record of the table at TASK(Actor)->script: the clut
+ * index, four vertices, the face normal and four packed uv pairs. */
+typedef struct PanelPiece {
+    s16 clut;           /* 0x00 */
+    u16 vertices[4][3]; /* 0x02 */
+    s16 normal[3];      /* 0x1A */
+    u16 uv[4];          /* 0x20 */
+} PanelPiece;
+
+/* One 0x28-byte textured quad, with a halves view over the uv pairs. */
+typedef union PanelQuadPrim {
+    POLY_FT4 ft4;
+
+    struct {
+        u8  pad_00[0x0C];
+        u16 uv0; /* 0x0C */
+        u8  pad_0E[0x06];
+        u16 uv1; /* 0x14 */
+        u8  pad_16[0x06];
+        u16 uv2; /* 0x1C */
+        u8  pad_1E[0x06];
+        u16 uv3; /* 0x24 */
+        u8  pad_26[0x02];
+    } halves;
+} PanelQuadPrim;
+
+#ifdef NON_MATCHING
+NON_MATCHING void func_801D2308(void* record) {
+    CVECTOR        color;
+    VECTOR         normal;
+    MATRIX         m;
+    MATRIX         light;
+    MATRIX         light_mtx;
+    long           depth;
+    long           flag;
+    Actor*         saved;
+    u8             abr;
+    u16            count;
+    u16            tpage;
+    PanelPiece*    piece;
+    PanelQuadPrim* quad;
+    u16            i;
+
+    saved = TASK(Actor);
+    TASK_SET(record);
+    PushMatrix();
+    count = TASK(Actor)->range_54.table[0];
+    Actor_BuildTransformMatrix(&m);
+    SetRotMatrix(&m);
+    SetTransMatrix(&m);
+    if (TASK(Actor)->unk_48 == 0) {
+        normal.vx = normal.vy = normal.vz = TASK(Actor)->scale.x;
+        ScaleMatrix(&m, &normal);
+    }
+    light = m;
+    func_8015B2AC(light_mtx.m[0], &TASK(Actor)->unk_64);
+    Camera_ApplyMatrix(&light);
+    SetLightMatrix(&light_mtx);
+
+    abr = TASK(Actor)->range_54.table[3];
+    if ((abr & 0x40) == 0) {
+        abr = 2;
+    }
+    piece = (PanelPiece*)TASK(Actor)->script;
+    tpage = GetTPage(TPAGE_DEPTH_4BIT, abr & 0x3, 704, 256);
+    i     = 0;
+    if (count != 0) {
+        do {
+            quad = (PanelQuadPrim*)g_GfxPrimCursor;
+            SetPolyFT4(&quad->ft4);
+
+            setVector(&g_ScratchPadVectors[0], piece->vertices[0][0], piece->vertices[0][1], piece->vertices[0][2]);
+            setVector(&g_ScratchPadVectors[1], piece->vertices[1][0], piece->vertices[1][1], piece->vertices[1][2]);
+            setVector(&g_ScratchPadVectors[2], piece->vertices[2][0], piece->vertices[2][1], piece->vertices[2][2]);
+            setVector(&g_ScratchPadVectors[3], piece->vertices[3][0], piece->vertices[3][1], piece->vertices[3][2]);
+            setVector(&normal, piece->normal[0], piece->normal[1], piece->normal[2]);
+            quad->halves.uv0 = piece->uv[0];
+            quad->halves.uv1 = piece->uv[1];
+            quad->halves.uv2 = piece->uv[2];
+            quad->halves.uv3 = piece->uv[3];
+
+            RotTransPers(&g_ScratchPadVectors[0], (long*)&quad->ft4.x0, &depth, &flag);
+            RotTransPers(&g_ScratchPadVectors[1], (long*)&quad->ft4.x1, &depth, &flag);
+            RotTransPers(&g_ScratchPadVectors[2], (long*)&quad->ft4.x2, &depth, &flag);
+            RotTransPers(&g_ScratchPadVectors[3], (long*)&quad->ft4.x3, &depth, &flag);
+
+            quad->ft4.x0 += 88;
+            quad->ft4.x1 += 88;
+            quad->ft4.y0 += 40;
+            quad->ft4.x2 += 88;
+            quad->ft4.y1 += 40;
+            quad->ft4.x3 += 88;
+            quad->ft4.y2 += 40;
+            quad->ft4.y3 += 40;
+
+            setRGB0(&quad->ft4, TASK(Actor)->tint.bytes.rgb.r, TASK(Actor)->tint.bytes.rgb.g, TASK(Actor)->tint.bytes.rgb.b);
+            if ((TASK(Actor)->range_54.table[3] & 0x80) != 0) {
+                VectorNormalS(&normal, g_ScratchPadVectors);
+                color.r  = TASK(Actor)->tint.bytes.rgb.r;
+                color.g  = TASK(Actor)->tint.bytes.rgb.g;
+                color.b  = TASK(Actor)->tint.bytes.rgb.b;
+                color.cd = quad->ft4.code;
+                NormalColorCol(g_ScratchPadVectors, &color, (CVECTOR*)&quad->ft4.r0);
+            }
+
+            quad->ft4.tpage = tpage;
+            quad->ft4.clut  = GetClut(piece->clut * 16, STAGE_PALETTE_Y + 3);
+            SetSemiTrans(&quad->ft4, (abr >> 6) & 1);
+            if (func_801AFF90((Pos2*)&quad->ft4.x0, (Pos2*)&quad->ft4.x1, (Pos2*)&quad->ft4.x2) > 0) {
+                GFX_AddPrim(GFX_LAYER_UI, sizeof(POLY_FT4));
+            }
+
+            piece++;
+            i++;
+        } while ((u16)i < count);
+    }
+    PopMatrix();
+    TASK_SET(saved);
+}
+#else
 INCLUDE_ASM(func_801D2308);
+#endif
 
 #ifdef NON_MATCHING
 NON_MATCHING void func_801D27BC(void) {
@@ -604,34 +725,31 @@ NON_MATCHING void func_801D27BC(void) {
     s32   bias;
     s8    initial;
 
-    record_cell = &D_801F501C;
-    x           = g_AreaScrollTargetX;
-    scroll_x    = &g_AreaScrollTargetX;
-    scroll_y    = &g_AreaScrollTargetY;
-    bias        = 0x1000;
-    record      = *record_cell;
-    D_801DA09C  = record;
-    record      = D_801DA09C;
-    y           = *scroll_y;
-    D_801DA098  = record[1];
-
+    record_cell      = &D_801F501C;
+    D_801DA09C       = *record_cell;
+    scroll_x         = &g_AreaScrollTargetX;
+    scroll_y         = &g_AreaScrollTargetY;
+    bias             = 0x1000;
+    record           = D_801DA09C;
     D_801DA049       = 0;
     D_801DA090       = 0;
     g_ShisuBaseScale = bias;
     D_801DA0AC       = 0;
     D_801DA0B0       = 0;
     g_ShisuBaseAngle = 0;
+    x                = *scroll_x;
+    y                = *scroll_y;
     initial          = -0x80;
     g_ShisuBase[0]   = initial;
     g_ShisuBase[1]   = initial;
     g_ShisuBase[2]   = initial;
-    D_801DA07C       = *scroll_x;
+    D_801DA07C       = x;
     D_801DA080       = y;
-    height           = Area_HeightSample(x, y);
+    D_801DA098       = record[1];
+    height           = Area_HeightSample(g_AreaScrollTargetX, g_AreaScrollTargetY);
     D_801DA084       = (height << 16) - SHISU_HEIGHT_BIAS;
 
-    record              = *record_cell;
-    D_801DA114          = record + 2;
+    D_801DA114          = *record_cell + 2;
     next_record         = D_801DA114;
     D_801DA0C1          = 0;
     D_801DA108          = 0;
@@ -639,13 +757,15 @@ NON_MATCHING void func_801D27BC(void) {
     D_801DA124          = 0;
     D_801DA128          = 0;
     g_ShisuToppingAngle = 0;
+    x                   = *scroll_x;
+    y                   = *scroll_y;
     g_ShisuTopping[0]   = initial;
     g_ShisuTopping[1]   = initial;
     g_ShisuTopping[2]   = initial;
-    D_801DA0F4          = *scroll_x;
-    D_801DA0F8          = *scroll_y;
+    D_801DA0F4          = x;
+    D_801DA0F8          = y;
     D_801DA110          = next_record[1];
-    height              = Area_HeightSample(*scroll_x, *scroll_y);
+    height              = Area_HeightSample(g_AreaScrollTargetX, g_AreaScrollTargetY);
     D_801DA0FC          = (height << 16) + SHISU_HEIGHT_BIAS;
 }
 #else

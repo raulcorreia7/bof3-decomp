@@ -313,8 +313,8 @@ MATCH void func_801F7B00(void) {
         shade    = 0x80;
         if (particle != NULL) {
             FIELD(s32, particle, 0x00) = D_80146954;
-            FIELD(s32, particle, 0x04) = D_80146958;
-            height                     = D_8014695C;
+            FIELD(s32, particle, 0x04) = g_Actors[1].pos.y.fixed;
+            height                     = g_Actors[1].pos.z.fixed;
             FIELD(s32, particle, 0x10) = 0;
             FIELD(s32, particle, 0x14) = 0;
             FIELD(s32, particle, 0x18) = 0;
@@ -577,10 +577,10 @@ MATCH void func_801F817C(void) {
             if (SYS_TestFlag(g_SceneFlags, 0xC) == 0) {
                 g_ScriptVarsWord = 0;
                 Area_ScrollStartRoute(0);
-                pad_flag = &D_80145EB4;
+                pad_flag = &g_Game.members[0].unk_24;
                 *pad_flag &= 0xDF;
-                D_80145FF4 &= 0xDF;
-                D_80146134 &= 0xDF;
+                g_Game.members[1].unk_24 &= 0xDF;
+                g_Game.members[2].unk_24 &= 0xDF;
                 /* kept: the slot index round-trips through the scratch word so
                  * each row address re-reads it; a local index drops 0xA8 bytes
                  * (0x418 vs 0x4C0) and typed g_SpawnedActors rows drop 0xC0. */

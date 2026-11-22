@@ -47,14 +47,14 @@ MATCH void Battle_SelectAbility(void) {
     action = g_Battle.action_id;
     if (action != 0x97) {
         if (BATTLER_IS_PLAYER(g_Battle.active_battler)) {
-            D_801463C8 = Char_AbilityGetCost(BATTLE_ACTIVE_PARTY.slot, action & BYTE_MASK, 1);
+            g_Battle.unk_E8 = Char_AbilityGetCost(BATTLE_ACTIVE_PARTY.slot, action & BYTE_MASK, 1);
         } else {
-            D_801463C8 = Char_AbilityGetCost(ENEMY_COMBATANT(g_Battle.active_battler).slot, action & BYTE_MASK, 1);
+            g_Battle.unk_E8 = Char_AbilityGetCost(ENEMY_COMBATANT(g_Battle.active_battler).slot, action & BYTE_MASK, 1);
         }
     } else {
-        D_801463C8 = D_801463B8[0];
+        g_Battle.unk_E8 = D_801463B8[0];
     }
-    if (ap < D_801463C8) {
+    if (ap < g_Battle.unk_E8) {
         Battle_OpenPanel();
         Battle_QueueEvent(2, 0, 0, 45, UI_MessageGetText(0x36));
         g_Battle.phase.step     = 0;

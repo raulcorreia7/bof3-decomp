@@ -12,7 +12,7 @@ MATCH u8 func_801F330C(void) {
     ring  = MEM_PTR(AreaRingEffect, AREA_WORK);
     i     = 0;
     shade = 0x20;
-    pos   = &D_80145EC4;
+    pos   = &g_Game.members[0].pos.x.fixed;
     for (; i < AREA_RING_COUNT; i++) {
         if (ring->active != 0) {
             alive = 1;

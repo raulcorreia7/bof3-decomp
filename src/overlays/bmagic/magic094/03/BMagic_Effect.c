@@ -172,26 +172,14 @@ NON_MATCHING void func_801EF14C(void) {
                     shade = 1;
                 }
                 D_1F800000_WORD[3] = shade;
-                prim->r0           = 1;
-                prim->g0           = 1;
-                prim->b0           = 1;
-                prim->r1           = shade;
-                prim->g1           = shade;
-                prim->b1           = -0x3F - TASK(PartyMember)->unk_09 * 6;
-                prim->r2           = shade;
-                prim->g2           = shade;
-                prim->b2           = prim->b1;
+                setRGB0(prim, 1, 1, 1);
+                setRGB1(prim, shade, shade, -0x3F - TASK(PartyMember)->unk_09 * 6);
+                setRGB2(prim, shade, shade, prim->b1);
             } else {
                 D_1F800000_WORD[3] = scale;
-                prim->r0           = 1;
-                prim->g0           = 1;
-                prim->b0           = 1;
-                prim->r1           = scale;
-                prim->g1           = scale;
-                prim->b1           = 0xC0;
-                prim->r2           = scale;
-                prim->g2           = scale;
-                prim->b2           = 0xC0;
+                setRGB0(prim, 1, 1, 1);
+                setRGB1(prim, scale, scale, 0xC0);
+                setRGB2(prim, scale, scale, 0xC0);
             }
             RotTransPers3(&g_ScratchPadVectors[0], &g_ScratchPadVectors[1], &g_ScratchPadVectors[2], (long*)&prim->x0, (long*)&prim->x1, (long*)&prim->x2, &depth, &flag);
             Area_CellAddPrim(x, y, 2, sizeof(POLY_G3));

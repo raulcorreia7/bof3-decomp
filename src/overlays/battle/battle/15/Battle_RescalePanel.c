@@ -13,7 +13,7 @@ MATCH void Battle_RescalePanel(Character* rec, s32 slot) {
     party_slot    = slot & BYTE_MASK;
     member_offset = party_slot * BATTLE_PARTY_STRIDE;
 
-    rec->stats.power           = func_801DE0AC(rec->base.power, (FIELD(s8, &D_80145FBC, member_offset) * 2) + 0x64);
+    rec->stats.power           = func_801DE0AC(rec->base.power, (FIELD(s8, &g_Game.members[0].status.field.flags.value, member_offset) * 2) + 0x64);
     rec->stats.defense         = func_801DE0AC(rec->base.defense, (FIELD(s8, &D_80145FBD, member_offset) * 2) + 0x64);
     rec->stats.agility         = func_801DE0AC(rec->base.agility, (FIELD(s8, &D_80145FBE, member_offset) * 2) + 0x64);
     rec->stats.intelligence    = func_801DE0AC(rec->base.intelligence, (FIELD(s8, &D_80145FBF, member_offset) * 2) + 0x64);

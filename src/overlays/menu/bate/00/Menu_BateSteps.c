@@ -92,10 +92,10 @@ MATCH void func_801D1044(void) {
     }
     g_UiPanelTasks[0].unk_09 = g_UiPanelTasks[1].unk_0A;
     if (g_UiPanelTasks[1].unk_0A == 0 || g_UiPanelTasks[1].unk_0A != 3) {
-        item     = &D_80144DF2;
+        item     = &g_Characters[7].equip.weapon;
         category = 1;
     } else {
-        item     = &D_80144DF5;
+        item     = &g_Characters[7].equip.armor;
         category = 2;
     }
     D_80148388 = Item_GetDescription(category, *item);

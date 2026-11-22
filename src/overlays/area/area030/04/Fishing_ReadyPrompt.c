@@ -4,7 +4,7 @@
  * work counter, queues SE 0x102, and bumps the work phase. */
 /* func_801D9FE8 */
 MATCH void Fishing_ReadyPrompt(void) {
-    if (D_80144125 == 0 && D_8014403D == 1) {
+    if (g_SpawnedActors[3].header.mode == 0 && g_SpawnedActors[1].header.mode == 1) {
         TASK(FishingState)->timer = 4;
         SND_SEPlay(EMI_SE_ID(SND_BANK_COMMON, 2));
         TASK(FishingState)->sub_index += 1;

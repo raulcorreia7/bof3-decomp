@@ -15,7 +15,7 @@ NON_MATCHING void func_801F2FB8(AreaSpinEffect* effect) {
     s16      shade;
     s32      length;
     s32      turn;
-    s32      i;
+    u8       i;
 
     angle    = effect->angle;
     scale    = effect->scale;

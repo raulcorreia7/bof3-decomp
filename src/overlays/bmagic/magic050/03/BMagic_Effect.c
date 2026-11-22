@@ -128,28 +128,18 @@ MATCH void func_801EF138(void) {
 
 /* Draws the ring of sixteen glowing triangles around the caster, sized by the timer. */
 MATCH void func_801EF1B0(void) {
-    POLY_G3*     prim;
-    s32          i;
-    s32          tpage;
-    PartyMember* member;
-    s32          shade;
-    u8           level;
+    POLY_G3* prim;
+    s32      i;
+    s32      tpage;
 
-    member                      = TASK(PartyMember);
-    g_ScratchPad.cells.words[0] = member->timer;
+    g_ScratchPad.cells.words[0] = TASK(PartyMember)->timer;
     if (g_Battle.action_id == 50) {
-        level = member->unk_09;
-        shade = level * 2;
-        shade += level;
-        g_ScratchPad.cells.words[2] = shade;
+        g_ScratchPad.cells.words[2] = TASK(PartyMember)->unk_09 * 3;
+        g_ScratchPad.cells.words[3] = TASK(PartyMember)->unk_09;
     } else {
-        level = member->unk_09;
-        shade = level * 4;
-        shade += level;
-        g_ScratchPad.cells.words[2] = shade;
+        g_ScratchPad.cells.words[2] = TASK(PartyMember)->unk_09 * 5;
+        g_ScratchPad.cells.words[3] = TASK(PartyMember)->unk_09;
     }
-    D_1F80000C = member->unk_09;
-    FAKE_ORDER_FENCE(); /* FAKE: the order fence keeps the loop setup after the scratch stores. */
     for (i = 0; i < 16; i++) {
         tpage = getTPage(TPAGE_DEPTH_4BIT, TPAGE_ABR_ADD, 320, 256);
         SetDrawMode((DR_MODE*)g_GfxPrimCursor, 0, 1, tpage, 0);
@@ -173,22 +163,21 @@ MATCH void func_801EF1B0(void) {
     }
 }
 
-#ifdef NON_MATCHING
-NON_MATCHING void func_801EF4C4(void) {
-    POLY_G4*     prim;
-    PartyMember* work;
-    s32          i;
-    s32          tpage;
+/* Draws the ring of sixteen glowing quads around the caster, from the timer out to half again its size. */
+MATCH void func_801EF4C4(void) {
+    POLY_G4* prim;
+    s32      i;
+    s32      tpage;
 
-    work                        = g_Task;
-    g_ScratchPad.cells.words[0] = work->timer;
-    g_ScratchPad.cells.words[1] = work->timer + (u32)work->timer / 2;
+    g_ScratchPad.cells.words[0] = TASK(PartyMember)->timer;
+    g_ScratchPad.cells.words[1] = TASK(PartyMember)->timer + TASK(PartyMember)->timer / 2;
     if (g_Battle.action_id == 50) {
-        SPAD(0)->cells.words[2] = work->unk_09 << 2;
+        g_ScratchPad.cells.words[2] = TASK(PartyMember)->unk_09 * 4;
+        g_ScratchPad.cells.words[3] = TASK(PartyMember)->unk_09;
     } else {
-        g_ScratchPad.cells.words[2] = work->unk_09 * 6;
+        g_ScratchPad.cells.words[2] = TASK(PartyMember)->unk_09 * 6;
+        g_ScratchPad.cells.words[3] = TASK(PartyMember)->unk_09;
     }
-    g_ScratchPad.cells.words[3] = work->unk_09;
     for (i = 0; i < 16; i++) {
         tpage = getTPage(TPAGE_DEPTH_4BIT, TPAGE_ABR_ADD, 320, 256);
         SetDrawMode((DR_MODE*)g_GfxPrimCursor, 0, 1, tpage, 0);
@@ -213,9 +202,6 @@ NON_MATCHING void func_801EF4C4(void) {
         Area_CellAddPrim(TASK(PartyMember)->pos.x.fixed, TASK(PartyMember)->pos.y.fixed, 2, sizeof(POLY_G4));
     }
 }
-#else
-INCLUDE_ASM(func_801EF4C4);
-#endif
 
 MATCH void func_801EF898(void) {
     TILE_1* prim;

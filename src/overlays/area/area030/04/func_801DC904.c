@@ -6,7 +6,7 @@ MATCH void func_801DC904(void) {
     volatile u8* scratch;
     u8           flag;
 
-    flag = D_80144281;
+    flag = g_SpawnedActors[6].header.mode;
     if (flag == 3u) {
         scratch    = SP_REF(volatile u8*, 0x44u);
         scratch[3] = (scratch[3] + 1u);

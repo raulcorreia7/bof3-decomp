@@ -28,7 +28,7 @@ NON_MATCHING void func_801B1E24(void) {
                 if (((result & BYTE_MASK) != 0) && ((func_801B1C18(SP_REF(s32, 0x8u), SP_REF(s32, 0xCu), TASK(PartyMember)->speed) & BYTE_MASK) != 0)) {
                     goto found;
                 }
-                if ((func_801B1B2C(D_80145EC4, D_80145EC8, facing, TASK(PartyMember)->speed) & BYTE_MASK) == 0) {
+                if ((func_801B1B2C(g_Game.members[0].pos.x.fixed, g_Game.members[0].pos.y.fixed, facing, TASK(PartyMember)->speed) & BYTE_MASK) == 0) {
                     goto next;
                 }
             } else if ((func_801B1B2C(g_Game.members[0].pos.x.fixed, g_Game.members[0].pos.y.fixed, facing, member->speed) & BYTE_MASK) == 0) {

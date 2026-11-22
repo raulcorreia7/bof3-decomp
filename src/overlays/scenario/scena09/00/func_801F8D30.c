@@ -25,7 +25,7 @@ MATCH void func_801F8D30(void) {
             }
             break;
         case 5:
-            if (D_80145ECC > ((1 << 27) - 1)) {
+            if (g_Game.members[0].pos.z.fixed > ((1 << 27) - 1)) {
                 SYS_SetFlag(g_SceneFlags, 0x27);
                 if (SYS_TestFlag(g_SceneFlags, 0x26)) {
                     g_ScriptVars[0]      = 5;
@@ -36,7 +36,7 @@ MATCH void func_801F8D30(void) {
             }
             goto clear_script;
         case 6:
-            if (D_80145ECC > ((1 << 27) - 1)) {
+            if (g_Game.members[0].pos.z.fixed > ((1 << 27) - 1)) {
                 SYS_SetFlag(g_SceneFlags, 0x26);
                 if (SYS_TestFlag(g_SceneFlags, 0x27)) {
                     g_ScriptVars[0]      = 5;

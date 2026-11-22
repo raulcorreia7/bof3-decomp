@@ -12,7 +12,7 @@ MATCH void func_801F7F08(void) {
 
     switch (g_ScenarioState.step) {
         case 0:
-            if (D_80145F09 != 6) {
+            if (g_Game.members[0].chr.character_id != 6) {
                 g_ScenarioState.step = 0x32;
                 break;
             }
@@ -81,7 +81,7 @@ MATCH void func_801F7F08(void) {
             g_ScenarioState.step = 0x32;
             break;
         case 0x14:
-            if (D_80145F09 != 7) {
+            if (g_Game.members[0].chr.character_id != 7) {
                 g_ScenarioState.step = 0x32;
                 break;
             }

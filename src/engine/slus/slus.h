@@ -413,7 +413,6 @@ extern u16                   D_80145ACC;
 extern s32                   D_80145DA0;
 extern u8                    D_80145E9B[];
 extern s32                   D_80145EC4;
-extern u8                    D_80145F03;
 extern u8                    D_8014626C[];
 extern volatile u32          g_EmiStartSector;
 extern volatile u32          g_EmiBytesLeft;

@@ -1047,10 +1047,10 @@ MATCH void func_801F92DC(void) {
     }
     func_801F9868();
     if (g_GameAreaId == AREA_ID_NO_TEXT_25) {
-        D_801468A0 = 2;
-        D_801468A4 = 2;
-        D_80147BA0 = 1;
-        D_80147BA4 = 3;
+        g_Actors[0].unk_18 = 2;
+        D_801468A4         = 2;
+        D_80147BA0         = 1;
+        D_80147BA4         = 3;
         SND_SEPlay(EMI_SE_ID(SND_BANK_AREA, 0));
         g_ScenarioState.state_04 = 0xB;
         g_ScenarioState.timer_06 = 20;
@@ -1705,11 +1705,11 @@ MATCH void func_801FA7D8(void) {
             counter = &g_ScenarioState.timer_06;
             count   = *counter;
             if (count != 0u) {
-                pos = &D_801469EC;
+                pos = &g_Actors[2].pos.x.fixed;
                 *pos += (s8)D_801FCA4C[count & 0xFu] << 11;
                 delta    = (((s8)D_801FCA4C[count & 0xFu])) << 11;
                 *counter = (count - 1u);
-                D_801469F0 -= delta;
+                g_Actors[2].pos.y.fixed -= delta;
                 return;
             }
             g_ScenarioState.step = 0xFu;
@@ -2105,8 +2105,8 @@ MATCH void func_801FB924(void) {
                 index = *counter >> 12;
                 if (D_801FCA64[index * 2] != 0) {
                     TASK_SET((u8*)g_Actors);
-                    D_80146890 = D_801FCA65[index * 2];
-                    Script_Request(D_80146890);
+                    g_Actors[0].direction = D_801FCA65[index * 2];
+                    Script_Request(g_Actors[0].direction);
                 }
             } else {
                 g_ScriptVarsReq.byte++;
@@ -2144,8 +2144,8 @@ MATCH void func_801FB924(void) {
             counter[1]                = (camera[1] >= 0) ? 0x40 : -magnitude;
             if ((g_FrameCount & 0x3) == 0) {
                 TASK_SET((u8*)g_Actors);
-                D_80146890 = (D_80146890 + 1) & 0x3;
-                Script_Request(D_80146890);
+                g_Actors[0].direction = (g_Actors[0].direction + 1) & 0x3;
+                Script_Request(g_Actors[0].direction);
             }
             SND_SEPlay(EMI_SE_ID(SND_BANK_AREA, 4));
             if (g_ScriptVars[2] == 0x15) {

@@ -124,7 +124,7 @@ case10:
         return 0xFF;
     work = g_Task;
     if (work == (Actor*)&D_8014626C)
-        bit = D_80146277 & 1;
+        bit = g_Game.unk_3E7 & 1;
     else
         bit = g_Game.current->status.field.flags.unsigned_value & 1;
     if (bit != 0)

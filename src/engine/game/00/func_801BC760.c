@@ -24,11 +24,11 @@ NON_MATCHING s32 func_801BC760(void) {
     PartyMember* saved;
 
     dir    = TASK(Actor)->direction;
-    goal_x = D_80145EC4 + (g_Game.members[0].unk_0C * g_Game.members[0].unk_09);
-    goal_y = D_80145EC8 + (g_Game.members[0].unk_10 * g_Game.members[0].unk_09);
+    goal_x = g_Game.members[0].pos.x.fixed + (g_Game.members[0].unk_0C * g_Game.members[0].unk_09);
+    goal_y = g_Game.members[0].pos.y.fixed + (g_Game.members[0].unk_10 * g_Game.members[0].unk_09);
     if (g_Game.members[TASK(Actor)->unk_05 ^ 3].u.field.mode.unsigned_value != 9) {
         if (TASK(Actor)->unk_05 == 2) {
-            if (D_80145FD6 == 0) {
+            if (g_Game.members[1].pad_06 == 0) {
                 TASK(Actor)->unk_06 = 1;
             } else {
                 TASK(Actor)->unk_06 = 0;
@@ -39,9 +39,9 @@ NON_MATCHING s32 func_801BC760(void) {
             db   = TASK(Actor)->pos.y.fixed - goal_y;
             db   = ABS(db);
             dsum = da + db;
-            dc   = (D_80146144 + (D_8014611C * D_80146119)) - goal_x;
+            dc   = (g_Game.members[2].pos.x.fixed + (g_Game.members[2].unk_0C * g_Game.members[2].unk_09)) - goal_x;
             dc   = ABS(dc);
-            dd   = (D_80146148 + (D_80146120 * D_80146119)) - goal_y;
+            dd   = (g_Game.members[2].pos.y.fixed + (g_Game.members[2].unk_10 * g_Game.members[2].unk_09)) - goal_y;
             dd   = ABS(dd);
             if ((dc + dd) < dsum) {
                 TASK(Actor)->unk_06 = 2;
@@ -115,15 +115,15 @@ NON_MATCHING s32 func_801BC760(void) {
         if (*TASK(u8) & ACTOR_FLAG_OFFSCREEN) {
             saved          = g_Game.current;
             g_Game.current = g_Game.members;
-            near_a         = (D_80145EC4 + (g_Game.members[0].unk_0C * g_Game.members[0].unk_09)) & ~0x7FFF;
-            near_b         = (D_80145EC8 + (g_Game.members[0].unk_10 * g_Game.members[0].unk_09)) & ~0x7FFF;
+            near_a         = (g_Game.members[0].pos.x.fixed + (g_Game.members[0].unk_0C * g_Game.members[0].unk_09)) & ~0x7FFF;
+            near_b         = (g_Game.members[0].pos.y.fixed + (g_Game.members[0].unk_10 * g_Game.members[0].unk_09)) & ~0x7FFF;
             if (!(Game_TestPlacement(near_a, near_b, TASK(Actor)->voice_flags.scene_flag, Area_HeightRead(near_a, near_b)) & BYTE_MASK)) {
                 g_Game.current = saved;
                 *TASK(u8) |= ACTOR_FLAG_HIDDEN;
                 TASK(Actor)->pos.x.fixed = near_a;
                 TASK(Actor)->pos.y.fixed = near_b;
                 g_Game.current->status.field.flags.value &= 0xFE;
-                g_Game.current->status.field.flags.value |= (D_80145FBC & 1);
+                g_Game.current->status.field.flags.value |= (g_Game.members[0].status.field.flags.value & 1);
                 COORD_INT(TASK(Actor)->pos.z) = Area_HeightRead(near_a, near_b);
                 TASK(Actor)->draw_layer       = g_Game.members[0].unk_29;
                 FIELD(s8, g_Task, 0x1u)       = 2;

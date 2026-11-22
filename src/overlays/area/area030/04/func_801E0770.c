@@ -21,7 +21,7 @@ MATCH s32 func_801E0770(void) {
     if (0xFF != g_FishingHookedFish) {
         return result;
     }
-    if (0 != D_80144199) {
+    if (0 != g_SpawnedActors[4].header.mode) {
         return result;
     }
     limit = 32767;

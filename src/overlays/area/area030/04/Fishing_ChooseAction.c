@@ -8,29 +8,29 @@
 MATCH void Fishing_ChooseAction(void) {
     switch (g_PadStates[0].pressed & (PADRup | PADRdown | PADRleft | PADL1)) {
         case PADRup:
-            D_80144125 = 7;
-            D_8014403D = 4;
+            g_SpawnedActors[3].header.mode = 7;
+            g_SpawnedActors[1].header.mode = 4;
             TASK(FishingState)->sub_index++;
             break;
         case PADRleft:
-            D_80144125                     = 7;
-            D_8014403D                     = 4;
+            g_SpawnedActors[3].header.mode = 7;
+            g_SpawnedActors[1].header.mode = 4;
             TASK(FishingState)->mode_index = 9;
             TASK(FishingState)->sub_index  = 0;
             break;
         case PADRdown:
-            D_80144125 = 7;
+            g_SpawnedActors[3].header.mode = 7;
             if (g_FishingEquipment.lure_id == 0 || g_FishingEquipment.rod_id == 0) {
-                D_8014403D                     = 4;
+                g_SpawnedActors[1].header.mode = 4;
                 TASK(FishingState)->mode_index = 9;
                 TASK(FishingState)->sub_index  = 0;
                 break;
             }
             if (Fishing_FishStacksFull() & BYTE_MASK) {
                 if (g_FishingFullNoticeShown == 0) {
-                    g_FishingFullNoticeShown      = 1;
-                    D_8014403D                    = 4;
-                    TASK(FishingState)->sub_index = 7;
+                    g_FishingFullNoticeShown       = 1;
+                    g_SpawnedActors[1].header.mode = 4;
+                    TASK(FishingState)->sub_index  = 7;
                     break;
                 }
             } else {
@@ -43,8 +43,8 @@ MATCH void Fishing_ChooseAction(void) {
             FAKE_ORDER_LOCK_END;
             break;
         case PADL1:
-            D_80144125                     = 7;
-            D_8014403D                     = 4;
+            g_SpawnedActors[3].header.mode = 7;
+            g_SpawnedActors[1].header.mode = 4;
             TASK(FishingState)->mode_index = 0xA;
             TASK(FishingState)->sub_index  = 0;
             break;

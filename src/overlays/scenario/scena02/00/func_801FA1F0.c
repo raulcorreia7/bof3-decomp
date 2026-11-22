@@ -40,7 +40,7 @@ MATCH void func_801FA1F0(void) {
             }
             break;
         case 15:
-            if (D_801460FB != 7) {
+            if (g_Game.members[1].u.field.mode.unsigned_value != 7) {
                 Scene_SetupParty(2);
                 g_ScenarioState.step = 0x10;
             }

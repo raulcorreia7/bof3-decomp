@@ -68,8 +68,8 @@ MATCH u32 Actor_RunInteractions(void) {
                 }
             }
         }
-        result     = (u16)g_EncounterSteps;
-        D_80146878 = result;
+        result                 = (u16)g_EncounterSteps;
+        g_ScenarioState.unk_08 = result;
     }
     return result;
 }

@@ -9,7 +9,6 @@
 extern u32* D_80143534[][2];
 
 /* The marker screen-y source flag and the y it holds. */
-extern s32 D_80145EA4;
 extern s16 D_80145EC0;
 
 /* The scratchpad work row the entry paths read. */
@@ -65,6 +64,8 @@ void func_801F5D20(void);
 u8   func_801F5D6C(void);
 bool func_801F5EA8(void);
 s32  func_801F5F3C(void);
+void Char_AddFatigue(void);
+void func_801F6088(void);
 
 extern Callback D_801F62F4[];
 

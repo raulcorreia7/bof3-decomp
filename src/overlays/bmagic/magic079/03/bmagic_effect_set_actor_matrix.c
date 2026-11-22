@@ -240,18 +240,10 @@ NON_MATCHING void func_801EF458(void) {
             g_ScratchPadVectors[3].vz = g_ScratchPad.cells.halves[3];
             prim                      = (POLY_G4*)g_GfxPrimCursor;
             SetPolyG4(prim);
-            prim->r0 = g_ScratchPad.cells.halves[4];
-            prim->g0 = g_ScratchPad.cells.halves[4] / 3;
-            prim->b0 = g_ScratchPad.cells.halves[4] / 2;
-            prim->r1 = g_ScratchPad.cells.halves[4];
-            prim->g1 = g_ScratchPad.cells.halves[4] / 3;
-            prim->b1 = g_ScratchPad.cells.halves[4] / 2;
-            prim->r2 = g_ScratchPad.cells.halves[5];
-            prim->g2 = g_ScratchPad.cells.halves[5] / 3;
-            prim->b2 = g_ScratchPad.cells.halves[5] / 2;
-            prim->r3 = g_ScratchPad.cells.halves[5];
-            prim->g3 = g_ScratchPad.cells.halves[5] / 3;
-            prim->b3 = g_ScratchPad.cells.halves[5] / 2;
+            setRGB0(prim, g_ScratchPad.cells.halves[4], g_ScratchPad.cells.halves[4] / 3, g_ScratchPad.cells.halves[4] / 2);
+            setRGB1(prim, g_ScratchPad.cells.halves[4], g_ScratchPad.cells.halves[4] / 3, g_ScratchPad.cells.halves[4] / 2);
+            setRGB2(prim, g_ScratchPad.cells.halves[5], g_ScratchPad.cells.halves[5] / 3, g_ScratchPad.cells.halves[5] / 2);
+            setRGB3(prim, g_ScratchPad.cells.halves[5], g_ScratchPad.cells.halves[5] / 3, g_ScratchPad.cells.halves[5] / 2);
             RotTransPers4(&g_ScratchPadVectors[0], &g_ScratchPadVectors[1], &g_ScratchPadVectors[2], &g_ScratchPadVectors[3], (long*)&prim->x0, (long*)&prim->x1, (long*)&prim->x2, (long*)&prim->x3,
                           &p, &flag);
             Area_CellAddPrim(TASK(PartyMember)->pos.x.fixed, TASK(PartyMember)->pos.y.fixed, 0, sizeof(POLY_G4));
