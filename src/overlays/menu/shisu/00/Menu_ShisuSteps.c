@@ -228,12 +228,12 @@ MATCH void func_801D1910(void) {
 /* Copies the equipped item's status values onto the equip list's title row. */
 NON_MATCHING void func_801D1964(void) {
     if ((D_801DA0C6 != 0) && (D_801DA04E != 0)) {
-        D_801D9EF0[0] = g_ShisuToppingR;
-        D_801D9EF0[1] = g_ShisuToppingG;
-        D_801D9EF0[2] = g_ShisuToppingB;
-        D_801D9EF0[4] = g_ShisuBaseR;
-        D_801D9EF0[5] = g_ShisuBaseG;
-        D_801D9EF0[6] = g_ShisuBaseB;
+        D_801D9EF0[0] = g_ShisuTopping[0];
+        D_801D9EF0[1] = g_ShisuTopping[1];
+        D_801D9EF0[2] = g_ShisuTopping[2];
+        D_801D9EF4[0] = g_ShisuBase[0];
+        D_801D9EF4[1] = g_ShisuBase[1];
+        D_801D9EF4[2] = g_ShisuBase[2];
         D_801DA0C1    = 4;
         D_801DA049    = 4;
         D_80148654    = 0;
@@ -262,32 +262,32 @@ NON_MATCHING void func_801D1A20(void) {
     if (value0 < (u8)level) {
         value0 = level;
     }
-    g_ShisuToppingR = value0;
-    value1          = D_801D9EF0[1];
+    g_ShisuTopping[0] = value0;
+    value1            = D_801D9EF0[1];
     if (value1 < (u8)level) {
         value1 = level;
     }
-    g_ShisuToppingG = value1;
-    value2          = D_801D9EF0[2];
+    g_ShisuTopping[1] = value1;
+    value2            = D_801D9EF0[2];
     if (value2 < (u8)level) {
         value2 = level;
     }
-    g_ShisuToppingB = value2;
-    value3          = D_801D9EF0[4];
+    g_ShisuTopping[2] = value2;
+    value3            = D_801D9EF4[0];
     if (value3 < (u8)level) {
         value3 = level;
     }
-    g_ShisuBaseR = value3;
-    value4       = D_801D9EF0[5];
+    g_ShisuBase[0] = value3;
+    value4         = D_801D9EF4[1];
     if (value4 < (u8)level) {
         value4 = level;
     }
-    g_ShisuBaseG = value4;
-    value5       = D_801D9EF0[6];
+    g_ShisuBase[1] = value4;
+    value5         = D_801D9EF4[2];
     if (value5 < (u8)level) {
         value5 = level;
     }
-    g_ShisuBaseB = value5;
+    g_ShisuBase[2] = value5;
     if ((u8)level == 0x80) {
         SND_PlaySE(0x200);
     }
@@ -319,45 +319,45 @@ NON_MATCHING void func_801D1B58(void) {
     if (value0 < level) {
         value0 = level;
     }
-    g_ShisuToppingR = value0;
-    value1          = D_801D9EF0[1];
+    g_ShisuTopping[0] = value0;
+    value1            = D_801D9EF0[1];
     if (value1 < level) {
         value1 = level;
     }
-    g_ShisuToppingG = value1;
-    value2          = D_801D9EF0[2];
+    g_ShisuTopping[1] = value1;
+    value2            = D_801D9EF0[2];
     if (value2 < level) {
         value2 = level;
     }
-    g_ShisuToppingB = value2;
-    value3          = D_801D9EF0[4];
+    g_ShisuTopping[2] = value2;
+    value3            = D_801D9EF4[0];
     if (value3 < level) {
         value3 = level;
     }
-    g_ShisuBaseR = value3;
-    value4       = D_801D9EF0[5];
+    g_ShisuBase[0] = value3;
+    value4         = D_801D9EF4[1];
     if (value4 < level) {
         value4 = level;
     }
-    g_ShisuBaseG = value4;
-    value5       = D_801D9EF0[6];
+    g_ShisuBase[1] = value4;
+    value5         = D_801D9EF4[2];
     if (value5 < level) {
         value5 = level;
     }
-    g_ShisuBaseB = value5;
+    g_ShisuBase[2] = value5;
 
     level -= 8;
     *fade = level;
     if ((u8)level == 0) {
-        D_801DA0C1      = 5;
-        D_801DA049      = 1;
-        D_80148652      = 0;
-        g_ShisuToppingR = D_801D9EF0[0];
-        g_ShisuToppingG = D_801D9EF0[1];
-        g_ShisuToppingB = D_801D9EF0[2];
-        g_ShisuBaseR    = D_801D9EF0[4];
-        g_ShisuBaseG    = D_801D9EF0[5];
-        g_ShisuBaseB    = D_801D9EF0[6];
+        D_801DA0C1        = 5;
+        D_801DA049        = 1;
+        D_80148652        = 0;
+        g_ShisuTopping[0] = D_801D9EF0[0];
+        g_ShisuTopping[1] = D_801D9EF0[1];
+        g_ShisuTopping[2] = D_801D9EF0[2];
+        g_ShisuBase[0]    = D_801D9EF4[0];
+        g_ShisuBase[1]    = D_801D9EF4[1];
+        g_ShisuBase[2]    = D_801D9EF4[2];
         g_ShisuIngredients.rounds += 1;
         D_80148651 -= 2;
     }
@@ -550,9 +550,9 @@ NON_MATCHING void func_801D27BC(void) {
     D_801DA0B0       = 0;
     g_ShisuBaseAngle = 0;
     initial          = -0x80;
-    g_ShisuBaseR     = initial;
-    g_ShisuBaseG     = initial;
-    g_ShisuBaseB     = initial;
+    g_ShisuBase[0]   = initial;
+    g_ShisuBase[1]   = initial;
+    g_ShisuBase[2]   = initial;
     D_801DA07C       = *scroll_x;
     D_801DA080       = y;
     height           = Area_SampleHeight(x, y);
@@ -567,9 +567,9 @@ NON_MATCHING void func_801D27BC(void) {
     D_801DA124          = 0;
     D_801DA128          = 0;
     g_ShisuToppingAngle = 0;
-    g_ShisuToppingR     = initial;
-    g_ShisuToppingG     = initial;
-    g_ShisuToppingB     = initial;
+    g_ShisuTopping[0]   = initial;
+    g_ShisuTopping[1]   = initial;
+    g_ShisuTopping[2]   = initial;
     D_801DA0F4          = *scroll_x;
     D_801DA0F8          = *scroll_y;
     D_801DA110          = next_record[1];
@@ -594,28 +594,28 @@ NON_MATCHING s32 func_801D2978(void) {
     }
     g_ShisuBaseScale = g_ShisuScales[amount];
 
-    saved[0] = g_ShisuBaseR;
-    saved[1] = g_ShisuBaseG;
-    saved[2] = g_ShisuBaseB;
+    saved[0] = g_ShisuBase[0];
+    saved[1] = g_ShisuBase[1];
+    saved[2] = g_ShisuBase[2];
     if (g_ShisuIngredients.used[2] * 3 < 0xFF - saved[0]) {
-        g_ShisuBaseR = saved[0] + g_ShisuIngredients.used[2] * 3;
+        g_ShisuBase[0] = saved[0] + g_ShisuIngredients.used[2] * 3;
     } else {
-        g_ShisuBaseR = 0xFF;
+        g_ShisuBase[0] = 0xFF;
     }
-    if (g_ShisuIngredients.used[2] * 3 < 0xFF - g_ShisuBaseG) {
-        g_ShisuBaseG += g_ShisuIngredients.used[2] * 3;
+    if (g_ShisuIngredients.used[2] * 3 < 0xFF - g_ShisuBase[1]) {
+        g_ShisuBase[1] += g_ShisuIngredients.used[2] * 3;
     } else {
-        g_ShisuBaseG = 0xFF;
+        g_ShisuBase[1] = 0xFF;
     }
-    if (g_ShisuIngredients.used[2] * 3 < g_ShisuBaseB) {
-        g_ShisuBaseB -= g_ShisuIngredients.used[2] * 3;
+    if (g_ShisuIngredients.used[2] * 3 < g_ShisuBase[2]) {
+        g_ShisuBase[2] -= g_ShisuIngredients.used[2] * 3;
     } else {
-        g_ShisuBaseB = 0;
+        g_ShisuBase[2] = 0;
     }
     func_801D2308(&D_801DA044 + 1);
-    g_ShisuBaseR = saved[0];
-    g_ShisuBaseG = saved[1];
-    g_ShisuBaseB = saved[2];
+    g_ShisuBase[0] = saved[0];
+    g_ShisuBase[1] = saved[1];
+    g_ShisuBase[2] = saved[2];
     return saved[2];
 }
 #else

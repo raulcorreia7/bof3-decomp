@@ -76,3 +76,8 @@ def test_a_word_of_a_record_is_written_as_its_member(tree: gen_body.Tree) -> Non
     assert gen_body.global_text("D_80100000", ctx, 4) == "g_State.first"
     # No member of that width sits there: the word keeps its own name.
     assert gen_body.global_text("D_80100004", ctx, 2) == "D_80100004"
+
+
+def test_a_handwritten_instruction_comment_is_not_part_of_its_operand() -> None:
+    text = "/* E4328 8017A328 00011A24 */  addiu      $k0, $zero, 0x100 /* handwritten instruction */\n"
+    assert gen_body.instructions(text) == ["addiu $k0, $zero, 0x100"]
