@@ -12,17 +12,7 @@ MATCH void func_801EEC28(void) {
 
     SYS_DISPATCH_BYTE(handlers.steps, g_Task->header.mode);
 
-    for (i = 0; i < BMAGIC_EFFECT_COUNT; i++) {
-        if (D_801EFE14[i].header.flags & BMAGIC_EFFECT_IN_USE) {
-            saved_task            = g_Task;
-            saved_battler         = g_BattleEffectBattler;
-            g_Task                = (PartyMember*)&D_801EFE14[i];
-            g_BattleEffectBattler = D_801EFE14[i].target.party;
-            func_801EF534();
-            g_BattleEffectBattler = saved_battler;
-            g_Task                = saved_task;
-        }
-    }
+    BMAGIC_RUN_EFFECT_SLOTS(D_801EFE14, func_801EF534);
 }
 
 MATCH void func_801EED30(void) {

@@ -12,17 +12,7 @@ MATCH void func_801EEC04(void) {
     BMagic_DispatchTaskPair(func_801EED0C, func_801EF118);
     Battle_ProjectRange();
 
-    for (i = 0; i < BMAGIC_EFFECT_COUNT; i++) {
-        if (D_801F0694[i].header.flags & BMAGIC_EFFECT_IN_USE) {
-            saved_task            = g_Task;
-            saved_battler         = g_BattleEffectBattler;
-            g_Task                = (PartyMember*)&D_801F0694[i];
-            g_BattleEffectBattler = D_801F0694[i].target.party;
-            func_801EFE48();
-            g_BattleEffectBattler = saved_battler;
-            g_Task                = saved_task;
-        }
-    }
+    BMAGIC_RUN_EFFECT_SLOTS(D_801F0694, func_801EFE48);
 }
 
 #ifdef NON_MATCHING
@@ -185,11 +175,7 @@ MATCH void func_801EF504(void) {
 MATCH void func_801EF570(void) {
     u8 timer;
 
-    timer          = g_Task->unk_09 + 1;
-    g_Task->unk_09 = timer;
-    if (timer == 160) {
-        g_Task->header.step = g_Task->header.step + 1;
-    }
+    BMAGIC_STEP_TIMER(unk_09, 1, 160);
 }
 
 /* func_801EF5C0 */
@@ -266,11 +252,7 @@ MATCH void func_801F0070(void) {
 MATCH void func_801F00DC(void) {
     u8 timer;
 
-    timer          = g_Task->unk_09 + 1;
-    g_Task->unk_09 = timer;
-    if (timer == 160) {
-        g_Task->header.step = g_Task->header.step + 1;
-    }
+    BMAGIC_STEP_TIMER(unk_09, 1, 160);
 }
 
 MATCH void func_801F012C(void) {

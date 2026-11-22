@@ -384,11 +384,7 @@ MATCH void func_801F05A4(void) {
 MATCH void func_801F05F4(void) {
     u8 timer;
 
-    timer          = g_Task->unk_09 + 4;
-    g_Task->unk_09 = timer;
-    if (timer == 16) {
-        g_Task->header.step = g_Task->header.step + 1;
-    }
+    BMAGIC_STEP_TIMER(unk_09, 4, 16);
 }
 
 #include "overlays/bmagic/shared/Effect_NextStepOnLastTick.h"

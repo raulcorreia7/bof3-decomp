@@ -100,11 +100,7 @@ MATCH void func_801EF354(void) {
 MATCH void func_801EF3DC(void) {
     u8 timer;
 
-    timer         = g_Task->timer + 1;
-    g_Task->timer = timer;
-    if (timer == 16) {
-        g_Task->header.step = g_Task->header.step + 1;
-    }
+    BMAGIC_STEP_TIMER(timer, 1, 16);
 }
 
 MATCH void Effect_CountDownTimerStep2(void) {

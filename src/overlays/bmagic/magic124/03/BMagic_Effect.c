@@ -15,17 +15,7 @@ MATCH void func_801EEC14(void) {
     SYS_DISPATCH_BYTE(handlers.steps, g_Task->header.mode);
     tpage = getTPage(TPAGE_DEPTH_4BIT, TPAGE_ABR_ADD, 320, 256);
     GFX_AddDitheredDrawMode(BMAGIC_LAYER_OVER_BATTLERS, tpage);
-    for (i = 0; i < BMAGIC_EFFECT_COUNT; i++) {
-        if (BMAGIC_EFFECT_SLOTS[i].header.flags & BMAGIC_EFFECT_IN_USE) {
-            saved_task            = g_Task;
-            saved_battler         = g_BattleEffectBattler;
-            g_Task                = (PartyMember*)&BMAGIC_EFFECT_SLOTS[i];
-            g_BattleEffectBattler = BMAGIC_EFFECT_SLOTS[i].target.party;
-            BMagic_DispatchEffectMode();
-            g_BattleEffectBattler = saved_battler;
-            g_Task                = saved_task;
-        }
-    }
+    BMAGIC_RUN_EFFECT_SLOTS(BMAGIC_EFFECT_SLOTS, BMagic_DispatchEffectMode);
     func_801EF0B0();
     tpage = getTPage(TPAGE_DEPTH_4BIT, TPAGE_ABR_HALF, 320, 256);
     GFX_AddDitheredDrawMode(BMAGIC_LAYER_OVER_BATTLERS, tpage);
@@ -161,11 +151,7 @@ MATCH void func_801EF3FC(void) {
 MATCH void func_801EF588(void) {
     u8 timer;
 
-    timer         = g_Task->timer + 4;
-    g_Task->timer = timer;
-    if (timer == 16) {
-        g_Task->header.step = g_Task->header.step + 1;
-    }
+    BMAGIC_STEP_TIMER(timer, 4, 16);
 }
 
 MATCH void func_801EF5D8(void) {
