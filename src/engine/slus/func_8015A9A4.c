@@ -21,6 +21,7 @@ NON_MATCHING void func_8015A9A4(void) {
     u16     sy;
     u8      step;
     s8      sstep;
+    u8      cell;
 
     task = g_Task;
     dx   = COORD_INT(task->pos.x) - g_AreaTileOriginX;
@@ -35,7 +36,8 @@ NON_MATCHING void func_8015A9A4(void) {
     }
     actor         = g_Task;
     task->unk_32  = key;
-    key           = (actor->unk_32 + ((((u8*)actor->range_54.table)[1] << 24) >> 24)) << 8;
+    cell          = ((u8*)actor->range_54.table)[1];
+    key           = ((u16)actor->unk_32 + ((cell << 24) >> 24)) << 8;
     actor->unk_32 = key;
     if (g_AreaDrawMode == GFX_LAYER_BATTLE_SCENE) {
         if (D_8014933F != 0) {
@@ -48,6 +50,7 @@ NON_MATCHING void func_8015A9A4(void) {
         low = (((u16)COORD_INT(actor->pos.z) >> 5) & BYTE_MASK) ^ 0x80;
     }
     actor->unk_32 = key | low;
+    FAKE_BARRIER();
     if (!(((u8*)TASK(Actor)->range_54.table)[3] & 0x10)) {
         Actor_ReadValue();
     }

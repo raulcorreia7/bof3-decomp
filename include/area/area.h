@@ -57,8 +57,6 @@
 
 #define AREA_TILE_RECT_SIZE              0x04
 
-#define AREA_TILE_QUAD_SIZE              0x08
-
 #define AREA_MAP_LIST_RECORD_HEADER_SIZE 0x04
 
 #define AREA_MAP_CELL_HEADER_SIZE        0x04
@@ -291,13 +289,6 @@ typedef struct AreaTileRect {
 
 ASSERT_SIZE(AreaTileRect, AREA_TILE_RECT_SIZE);
 
-/* Eight-byte tile table B descriptor: four UV pairs. */
-typedef struct AreaTileQuad {
-    u8 uv_pairs[4][2];
-} AreaTileQuad;
-
-ASSERT_SIZE(AreaTileQuad, AREA_TILE_QUAD_SIZE);
-
 /* +0x20/+0x22 list entry header; the body follows as u32 words. */
 typedef struct AreaMapListHeader {
     u8 operand[2];
@@ -371,6 +362,7 @@ typedef struct AreaActorDef {
     u8  script_section; /* 0x07 - copied to work+0x2C; script-table index */
 } AreaActorDef;
 
+ASSERT_OFFSET(AreaActorDef, script_section, 0x07);
 ASSERT_SIZE(AreaActorDef, AREA_ACTOR_DEF_SIZE);
 
 typedef struct AreaActorDefs {
