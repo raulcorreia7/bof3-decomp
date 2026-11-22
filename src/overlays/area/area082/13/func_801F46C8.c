@@ -12,11 +12,7 @@ NON_MATCHING void func_801F46C8(s32 turn, s32 count, s32 angle, s32 height) {
     s32      tpage;
 
     PushMatrix();
-    if (GetGraphType() == 1 || GetGraphType() == 2) {
-        tpage = 0xA5;
-    } else {
-        tpage = 0x35;
-    }
+    tpage = getTPage(0, 1, 320, 256);
     GFX_ADD_DITHERED_DRAW_MODE(GFX_LAYER_SCENE_BACK, tpage);
 
     RotTrans(&g_ScratchPadVectors[0], (VECTOR*)matrix.t, &flag);
@@ -54,11 +50,7 @@ NON_MATCHING void func_801F46C8(s32 turn, s32 count, s32 angle, s32 height) {
         } while (j < 2);
     }
 
-    if (GetGraphType() == 1 || GetGraphType() == 2) {
-        tpage = 0xA5;
-    } else {
-        tpage = 0x35;
-    }
+    tpage = getTPage(0, 1, 320, 256);
     GFX_ADD_LAYER_DRAW_MODE(GFX_LAYER_SCENE_BACK, tpage);
     PopMatrix();
 }

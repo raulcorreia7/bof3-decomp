@@ -1,27 +1,46 @@
 #include "area119_13.h"
 
 #ifdef NON_MATCHING
-NON_MATCHING void func_801F3F04(s32 depth) {
+NON_MATCHING void func_801F3F04(s32 steps) {
     POLY_FT4* prim;
     long      p;
     long      flag;
     s32       i;
+    s32       order;
+    s32       phase;
+    s32       step;
+    s32       spread;
+    s32       shade;
+    s32       x;
+    s32       y;
 
-    i = 0;
+    phase = (g_FrameCount * 4) & 7;
+    step  = phase * steps;
+    x     = (g_Task->pos.x.fixed >> 9) - 0x4000;
+    y     = (g_Task->pos.y.fixed >> 9) - 0x4000;
+    i     = 0;
+    order = 0;
     do {
         prim = (POLY_FT4*)g_GfxPrimCursor;
         SetPolyFT4(prim);
         SetShadeTex(prim, 0);
-        g_ScratchPadVectors[0].vx = g_ScratchPadVectors[2].vx = -0x40C0;
-        g_ScratchPadVectors[0].vy = g_ScratchPadVectors[1].vy = -0x40C0;
-        g_ScratchPadVectors[1].vx = g_ScratchPadVectors[3].vx = AREA_CELL_HALF;
-        g_ScratchPadVectors[2].vy = g_ScratchPadVectors[3].vy = AREA_CELL_HALF;
-        g_ScratchPadVectors[0].vz = g_ScratchPadVectors[1].vz = g_ScratchPadVectors[2].vz = g_ScratchPadVectors[3].vz = depth;
-        RotTransPers4(&g_ScratchPadVectors[0], &g_ScratchPadVectors[1], &g_ScratchPadVectors[2], &g_ScratchPadVectors[3], (long*)&prim->x0, (long*)&prim->x1, (long*)&prim->x2, (long*)&prim->x3, &p,
-                      &flag);
-        Area_CellAddPrim(0, 0, depth, sizeof(POLY_FT4));
+        g_ScratchPadVectors[0].vx = x;
+        D_1F800016                = y;
+        D_1F800018                = -0x80 - step - order * 8;
+        RotTransPers(g_ScratchPadVectors, (long*)D_1F800034, &p, &flag);
+        spread   = step / 16 + 4 + ((i < 4) ? order / 2 : steps * 2);
+        shade    = 8 - steps;
+        shade    = (((7 - i) * 8 + 7 - phase) << 17) / shade;
+        prim->x0 = prim->x2 = (u16)D_1F800034[0] - spread;
+        prim->x1 = prim->x3 = (u16)D_1F800034[0] + spread;
+        prim->y0 = prim->y1 = (u16)D_1F800034[1] - spread;
+        prim->y2 = prim->y3 = (u16)D_1F800034[1] + spread;
+        order += steps;
+        Area_ApplyTileToQuad((shade & 0xF80000) | (0xBAu << 24) | 0x9124u, prim, 1);
+        prim->g0 >>= 1;
         i++;
-    } while (i < 1);
+        Area_CellAddPrim(g_Task->pos.x.fixed, g_Task->pos.y.fixed, 1, sizeof(POLY_FT4));
+    } while (i < 8);
 }
 #else
 INCLUDE_ASM(func_801F3F04);

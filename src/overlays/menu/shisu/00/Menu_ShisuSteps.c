@@ -584,6 +584,7 @@ INCLUDE_ASM(func_801D27BC);
 NON_MATCHING s32 func_801D2978(void) {
     s8 amount;
     u8 saved[3];
+    s8 v;
 
     amount = g_ShisuIngredients.used[1] - g_ShisuIngredients.rounds;
     if (amount <= 0) {
@@ -593,20 +594,21 @@ NON_MATCHING s32 func_801D2978(void) {
         amount = 20;
     }
     g_ShisuBaseScale = g_ShisuScales[amount];
-
-    saved[0] = g_ShisuBase[0];
-    saved[1] = g_ShisuBase[1];
-    saved[2] = g_ShisuBase[2];
-    if (g_ShisuIngredients.used[2] * 3 < 0xFF - saved[0]) {
-        g_ShisuBase[0] = saved[0] + g_ShisuIngredients.used[2] * 3;
+    saved[0]         = g_ShisuBase[0];
+    saved[1]         = g_ShisuBase[1];
+    saved[2]         = g_ShisuBase[2];
+    if (g_ShisuIngredients.used[2] * 3 >= 0xFF - saved[0]) {
+        v = -1;
     } else {
-        g_ShisuBase[0] = 0xFF;
+        v = saved[0] + g_ShisuIngredients.used[2] * 3;
     }
-    if (g_ShisuIngredients.used[2] * 3 < 0xFF - g_ShisuBase[1]) {
-        g_ShisuBase[1] += g_ShisuIngredients.used[2] * 3;
+    g_ShisuBase[0] = v;
+    if (g_ShisuIngredients.used[2] * 3 >= 0xFF - g_ShisuBase[1]) {
+        v = -1;
     } else {
-        g_ShisuBase[1] = 0xFF;
+        v = g_ShisuBase[1] + g_ShisuIngredients.used[2] * 3;
     }
+    g_ShisuBase[1] = v;
     if (g_ShisuIngredients.used[2] * 3 < g_ShisuBase[2]) {
         g_ShisuBase[2] -= g_ShisuIngredients.used[2] * 3;
     } else {
@@ -616,7 +618,6 @@ NON_MATCHING s32 func_801D2978(void) {
     g_ShisuBase[0] = saved[0];
     g_ShisuBase[1] = saved[1];
     g_ShisuBase[2] = saved[2];
-    return saved[2];
 }
 #else
 INCLUDE_ASM(func_801D2978);

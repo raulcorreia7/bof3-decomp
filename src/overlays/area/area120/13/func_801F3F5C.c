@@ -54,11 +54,7 @@ NON_MATCHING void func_801F3F5C(s32 part, s32 span, s32 phase_step, s32 offset) 
     row3_y = &g_ScratchPadVectors[3].vy;
 
     for (i = 0; i < 2; i++) {
-        if (GetGraphType() == 1 || GetGraphType() == 2) {
-            tpage = 0x225;
-        } else {
-            tpage = 0x95;
-        }
+        tpage = getTPage(1, 0, 320, 256);
         SetDrawMode((DR_MODE*)g_GfxPrimCursor, 0, 0, tpage, NULL);
         Area_CellAddPrim(g_Task->pos.x.fixed, g_Task->pos.y.fixed, 1, 0xC);
         prim = (POLY_FT4*)g_GfxPrimCursor;

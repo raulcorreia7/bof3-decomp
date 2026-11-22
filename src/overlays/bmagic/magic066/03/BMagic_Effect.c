@@ -271,13 +271,7 @@ NON_MATCHING void func_801EF984(void) {
     s32 y;
     s32 z;
 
-    if (GetGraphType() == 1) {
-        tpage = 0xA5;
-    } else if (GetGraphType() == 2) {
-        tpage = 0xA5;
-    } else {
-        tpage = 0x35;
-    }
+    tpage = getTPage(0, 1, 320, 256);
     GFX_ADD_DITHERED_DRAW_MODE(3, tpage);
 
     for (i = 0; i < 3; i++) {
@@ -325,13 +319,7 @@ NON_MATCHING void func_801EF984(void) {
         }
     }
 
-    if (GetGraphType() == 1) {
-        tpage = 0x25;
-    } else if (GetGraphType() == 2) {
-        tpage = 0x25;
-    } else {
-        tpage = 0x15;
-    }
+    tpage = getTPage(0, 0, 320, 256);
     GFX_ADD_DITHERED_DRAW_MODE(3, tpage);
 }
 #else

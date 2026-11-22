@@ -21,6 +21,7 @@ extern u8       D_80146921;
 extern u8       D_80146997;
 extern s8       D_80147ACF;
 extern s16      D_80147AD6;
+extern u8       D_80148660;
 extern u32      D_801F6C00;
 /* D_801FE894 */
 extern Callback D_801FE8A0[];
@@ -129,5 +130,8 @@ void func_801F8108(s32 x, s32 y);
     g_Task->unk_2C = 0;                              \
     SND_SEPlay(cue);                                 \
     g_Task->header.mode += 1;
+
+extern u8 D_80181B17;
+extern u8 D_80181B18;
 
 #endif

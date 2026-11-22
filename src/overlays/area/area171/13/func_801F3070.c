@@ -13,11 +13,7 @@ NON_MATCHING void func_801F3070(s32 mode) {
 
     g_ScratchPadVectors[0].vx = g_ScratchPadVectors[1].vx = g_ScratchPadVectors[2].vx = g_ScratchPadVectors[3].vx = ((g_Task->pos.x.part.integer - 0x80) << 7) + 0x40;
 
-    if (GetGraphType() == 1 || GetGraphType() == 2) {
-        tpage = 0x225;
-    } else {
-        tpage = 0x95;
-    }
+    tpage = getTPage(1, 0, 320, 256);
     GFX_ADD_LAYER_DRAW_MODE(GFX_LAYER_FIELD_SCENE, tpage);
 
     for (i = 0; i < 2; i++) {
