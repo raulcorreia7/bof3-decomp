@@ -4,6 +4,7 @@
 /* The bmagic/magic021/03 overlay. Only this image includes the file. */
 
 #include "overlays/bmagic/bmagic.h"
+#include "battle/bmagic.h"
 
 extern s16 g_ScratchPadHalves;
 extern s16 D_1F800004;
@@ -15,13 +16,7 @@ extern BattleEffect D_801EFE14[];
 #define BMAGIC_EFFECT_COUNT 64
 void func_801EF534(void);
 
-#define MAGIC021_STEP_COUNT 3
-
-typedef struct Magic021Steps {
-    Callback steps[MAGIC021_STEP_COUNT];
-} Magic021Steps;
-
-extern Magic021Steps D_801EEC04;
+extern MagicModuleSteps D_801EEC04;
 
 extern BMagicEffectSteps D_801EEC10;
 

@@ -32,7 +32,7 @@ MATCH void func_801D4E74(void) {
     }
     if ((g_PadStates[0].pressed & g_InputMasks[MENU_INPUT_CONFIRM]) != 0) {
         SND_SEPlay(EMI_SE_ID(SND_BANK_COMMON, 4));
-        if (g_SaveSlots[g_SaveSlotFirst].card_index == GAME_NONE) {
+        if (g_SaveSlots[g_SaveSlotFirst].bytes.card_index == GAME_NONE) {
             if (D_801E60FC != 0) {
                 D_8014865B = 0;
                 D_80148652 = 0xD;

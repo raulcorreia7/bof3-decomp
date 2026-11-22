@@ -38,7 +38,7 @@ typedef struct SceneSample {
     u8  unk_20[8];
 } SceneSample;
 
-ASSERT_SIZE(SceneSample, 0x28);
+ASSERT_SIZE(SceneSample, 0x28); /* the same 0x28 row as area108's SceneSampleTrack, whose weights are u16 */
 
 /* Field-space endpoints passed by value to func_801F78EC. */
 typedef struct SceneLinePoint {

@@ -41,14 +41,6 @@ typedef struct FairyExploreReward {
 
 ASSERT_SIZE(FairyExploreReward, FAIRY_EXPLORE_STRIDE);
 
-/* A `COMMU02.EMI` prize row: the same two bytes as an exploration reward. */
-typedef struct FairyPrize {
-    u8 item_index;
-    u8 item_type;
-} FairyPrize;
-
-ASSERT_SIZE(FairyPrize, FAIRY_PRIZE_STRIDE);
-
 typedef enum FairyJobType {
     FAIRY_JOB_IDLE  = 0,
     FAIRY_JOB_HUNT  = 9,
