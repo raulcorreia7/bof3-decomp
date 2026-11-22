@@ -18,10 +18,10 @@ MATCH void func_801F2DE8(void) {
     for (x = D_801F364C[COORD_INT(g_Task->pos.x)].x0; x < D_801F364C[COORD_INT(g_Task->pos.x)].x_end; x++) {
         map = (AreaMapBundle*)MAP_BUNDLE_BASE;
         for (y = D_801F364C[COORD_INT(g_Task->pos.x)].y0; y < D_801F364C[COORD_INT(g_Task->pos.x)].y_end; y++) {
-            height                                                                    = Area_HeightSample(x << 16, y << 16);
-            value                                                                     = (-(COORD_INT(g_Task->pos.z) * 2) - height) / 32;
-            /* kept: the byte address sums offset then base; indexing the bundle adds the base first. */
-            *(u8*)(g_AreaMapBundle.height_offset * 4 + x + y * map->width + (u32)map) = value;
+            height                                                                           = Area_HeightSample(x << 16, y << 16);
+            value                                                                            = (-(COORD_INT(g_Task->pos.z) * 2) - height) / 32;
+            /* kept: the byte address sums the offset, then the bundle base; indexing the bundle adds the base first. */
+            *(u8*)(g_AreaMapBundle.height_offset * 4 + x + y * map->width + MAP_BUNDLE_BASE) = value;
         }
     }
 }
