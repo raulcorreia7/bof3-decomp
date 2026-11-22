@@ -11,7 +11,7 @@
 #include "game/item.h"
 #include <stdio.h>
 
-#define FISHING_STATE        ((FishingState*)g_Task)
+#define FISHING_STATE        TASK(FishingState)
 #define FISHING_ROW          ((Actor*)g_CurrentActor)
 #define FISHING_ENTRY(index) (&((FishingSceneCue*)g_FishingSpecies)[(index)])
 

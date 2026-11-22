@@ -6,7 +6,7 @@ MATCH void func_801F2C88(void) {
     s32 i;
 
     i      = 0;
-    work   = (u8*)g_Task;
+    work   = TASK(u8);
     g_Task = D_80146920;
     row    = D_80146920;
     do {

@@ -10,13 +10,13 @@ MATCH void func_801F32FC(void) {
     s16    slot;
     u8     i;
 
-    actor = (Actor*)g_Task;
+    actor = TASK(Actor);
     saved = g_CurrentActor;
     for (i = 0; i < 5; i++) {
         slot = SP_REF(s16, 0x0u) = Actor_FindFreeField();
         if (slot != 0xFF) {
             Actor_SpawnFromRecord(D_801F57B0[i]);
-            work               = (Actor*)g_Task;
+            work               = TASK(Actor);
             work->pos.x.fixed  = actor->pos.x.fixed + TO_COORD(3);
             work->pos.y.fixed  = actor->pos.y.fixed;
             work->pos.z.fixed  = actor->pos.z.fixed;

@@ -435,8 +435,9 @@ MATCH void func_801D26E0(s16 x, s16 y) {
     GFX_AddPrim(GFX_LAYER_UI, sizeof(LINE_F2));
 }
 
-#ifdef NON_MATCHING
-NON_MATCHING void Menu_DrawCharacterWindow(s32 px, s32 py, u8 character_index, s32 shaded, s32 unused) {
+/* Draws one party member's status window from g_Characters: portrait, name, level, the poison
+ * and confusion labels, HP, AP and the experience bar. */
+MATCH void Menu_DrawCharacterWindow(s32 px, s32 py, u8 character_index, s32 shaded, s32 unused) {
     Character* records;
     Character* stats;
     u32        clut;
@@ -517,9 +518,6 @@ NON_MATCHING void Menu_DrawCharacterWindow(s32 px, s32 py, u8 character_index, s
     px = 0;
     py = 0;
 }
-#else
-INCLUDE_ASM(Menu_DrawCharacterWindow);
-#endif
 
 #include "overlays/menu/shared/Menu_DrawStatPanel.h"
 

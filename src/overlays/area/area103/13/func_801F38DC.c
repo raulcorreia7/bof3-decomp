@@ -15,7 +15,7 @@ MATCH void func_801F38DC(void) {
     org   = *(VECTOR*)&g_Task->vx;
     pt[0] = org.vx + (rcos(angle) << 5);
     pt[1] = org.vy + (rsin(angle) << 5);
-    pt[2] = org.vz - ((AreaRingDepthView*)g_Task)->depth;
+    pt[2] = org.vz - TASK(AreaRingDepthView)->depth;
     if (pt[2] < g_Task->vz) {
         pt[2] = g_Task->vz;
     }
@@ -34,7 +34,7 @@ MATCH void func_801F38DC(void) {
         org.vz += TO_COORD(16);
         pt[0] = org.vx + (rcos(angle) << 5);
         pt[1] = org.vy + (rsin(angle) << 5);
-        pt[2] = org.vz - ((AreaRingDepthView*)g_Task)->depth;
+        pt[2] = org.vz - TASK(AreaRingDepthView)->depth;
         if (pt[2] < g_Task->vz) {
             pt[2] = g_Task->vz;
         }

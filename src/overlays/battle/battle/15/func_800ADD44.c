@@ -18,14 +18,14 @@ MATCH void func_800ADD44(void) {
     BATTLE_WORK->unk_24       = 0x80;
     BATTLE_WORK->unk_27       = 0x1B;
     BATTLE_WORK->unk_28       = 1;
-    work                      = (volatile PartyMember*)g_Task;
+    work                      = TASK(volatile PartyMember);
     work->unk_2B              = 0;
-    next                      = (PartyMember*)g_Task;
+    next                      = TASK(PartyMember);
     work->unk_2C.signed_value = 2;
     next->unk_2A              = 0;
-    work                      = (volatile PartyMember*)g_Task;
+    work                      = TASK(volatile PartyMember);
     work->unk_4B              = 0xFF;
-    slotp                     = (PartyMember*)g_Task;
+    slotp                     = TASK(PartyMember);
     work->pos.z.fixed         = 0;
     pair                      = &D_801485EE;
     base                      = (u8*)D_80145518;
@@ -35,6 +35,6 @@ MATCH void func_800ADD44(void) {
         Script_Select(slot);
     }
     D_801485FA        = *pair;
-    work              = (volatile PartyMember*)g_Task;
+    work              = TASK(volatile PartyMember);
     work->header.mode = work->header.mode + 1;
 }

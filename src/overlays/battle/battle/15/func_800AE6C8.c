@@ -6,7 +6,7 @@ MATCH void func_800AE6C8(void) {
     u16         total;
     BattleWork* work;
 
-    work            = (BattleWork*)g_Task;
+    work            = TASK(BattleWork);
     counter         = work->unk_09[0] + 1;
     value           = work->unk_10 + 2;
     total           = work->unk_30 + value;

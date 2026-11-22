@@ -15,7 +15,7 @@ MATCH void func_801F3A7C(void) {
     selection = D_801F3ED8[0x34u + index];
     result    = Actor_ClaimSlot(4, 0, selection, x, y);
     if ((u8)result != 0xFF) {
-        work      = (u8*)g_Task;
+        work      = TASK(u8);
         work[0xB] = result;
     }
 }

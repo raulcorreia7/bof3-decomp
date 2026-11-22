@@ -214,7 +214,33 @@ MATCH void func_801EF488(void) {
 /* func_801EF668 */
 #include "overlays/bmagic/shared/BMagic_DispatchEffectMode.h"
 
-INCLUDE_ASM(func_801EF6AC);
+/* Runs the effect step with g_Scripts on the character sprites, then cycles nine colours of the
+ * battle magic palette row every fourth frame. */
+MATCH void func_801EF6AC(void) {
+    u16* dst;
+    u16* src;
+    u8   i;
+
+    g_Scripts = CHARACTER_SPRITES_BASE;
+    SYS_DISPATCH_BYTE(D_801F1BD4, g_Task->header.step);
+    if (g_Task->header.flags != 0 && g_Task->header.step != 0) {
+        Area_AddGridActor();
+        if ((g_FrameCount & 3) == 0) {
+            i   = 0;
+            dst = MEM_PTR(u16, AREA_PALETTE_UPLOAD_ROW(AREA_PALETTE_BMAGIC_ROW));
+            src = MEM_PTR(u16, AREA_PALETTE_ARENA_33C00);
+            for (; i < 9; i++) {
+                dst[i + 0x21] = src[g_Task->unk_04 + i] | PSX_COLOR_STP_BIT;
+            }
+            g_GfxPalettePending = 1;
+            g_Task->unk_04 += 9;
+            if (g_Task->unk_04 >= 0x7B) {
+                g_Task->unk_04 = 0x21;
+            }
+        }
+    }
+    g_Scripts = AREA_SCRIPT_TABLE;
+}
 
 MATCH void func_801EF7FC(void) {
     PartyMember* work;

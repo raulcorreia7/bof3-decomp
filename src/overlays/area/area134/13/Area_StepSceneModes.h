@@ -6,7 +6,7 @@
 #define AREA_TASK_PLAIN ((Actor*)*(struct Task**)&g_Task)
 
 #define AREA_STEP_SCENE_MODES(work)                                 \
-    work        = (Actor*)g_Task;                                   \
+    work        = TASK(Actor);                                      \
     g_Task      = (void*)g_Actors;                                  \
     g_GameState = g_Game.members;                                   \
     g_Task      = (void*)work;                                      \

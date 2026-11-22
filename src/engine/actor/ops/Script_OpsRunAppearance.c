@@ -90,9 +90,9 @@ NON_MATCHING u8 Script_OpsRunAppearance(void* sub, s32 target, u8 value) {
             break;
         case ACTOR_SCRIPT_APPEARANCE_SET_TRANSPARENCY:
             if ((code + CUR(sub))[1] & 0x80) {
-                *(u8*)g_Task |= ACTOR_FLAG_SEMI_TRANSPARENT;
+                *TASK(u8) |= ACTOR_FLAG_SEMI_TRANSPARENT;
             } else {
-                *(u8*)g_Task &= ~ACTOR_FLAG_SEMI_TRANSPARENT;
+                *TASK(u8) &= ~ACTOR_FLAG_SEMI_TRANSPARENT;
             }
             g_Task->tint.steps.flags = (code + CUR(sub))[1] & 3;
             CUR(sub) += 1;
