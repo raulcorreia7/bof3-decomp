@@ -68,7 +68,7 @@ extern struct Task* g_Task;
 #define TASK(type)       ((type*)g_Task)
 
 /* The current task as raw bytes, for a record with no type. */
-#define TASK_BYTES       TASK(u8)
+#define TASK_BYTES       ((u8*)g_Task)
 
 /* Point the cell at a record of any type: the cell holds the record as an untyped task pointer. */
 #define TASK_SET(record) (g_Task = (void*)(record))
