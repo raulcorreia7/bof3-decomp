@@ -13,8 +13,8 @@ MATCH void func_801F6368(void) {
     s32      shade;
     s32      tpage;
 
-    x = g_Game.members[0].pos.x.part.integer - 0x25;
-    y = g_Game.members[0].pos.y.part.integer - 0x2D;
+    x        = g_Game.members[0].pos.x.part.integer - 0x25;
+    y        = g_Game.members[0].pos.y.part.integer - 0x2D;
     centre_x = (((x - y) * rcos(0x200)) >> 12) + 0xFA;
     centre_y = (((x + y) * rcos(0x200)) >> 12) + 0xAF;
 
