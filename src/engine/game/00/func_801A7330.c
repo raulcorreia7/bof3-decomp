@@ -25,7 +25,7 @@ MATCH void func_801A7330(const volatile u8* data) {
     D_1F800002 = (u16)((data[1] << 8) | data[2]);
 
     Actor_ResetMotion();
-    Area_SelectSceneRecord(D_1F800002);
+    Area_SceneSelectRecord(D_1F800002);
 
     g_Task->header.flags = ACTOR_FLAG_IN_USE;
 
@@ -40,7 +40,7 @@ MATCH void func_801A7330(const volatile u8* data) {
 
     g_Actors[*counter].unk_88 = 0;
 
-    dist = Area_SampleHeight(work->pos.x.fixed, work->pos.y.fixed);
+    dist = Area_HeightSample(work->pos.x.fixed, work->pos.y.fixed);
 
     w2                   = g_Task;
     w2->header.mode      = 6;

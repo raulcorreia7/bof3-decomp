@@ -18,7 +18,7 @@ MATCH void func_801EEC5C(void) {
     work->pos.x.fixed          = channel[0];
     y                          = channel[1];
     work->pos.y.fixed          = y;
-    g_Task->pos.z.part.integer = Area_SampleHeight(work->pos.x.fixed, y);
+    g_Task->pos.z.part.integer = Area_HeightSample(work->pos.x.fixed, y);
     g_Task->param.unk_0B       = rand() & 0x3F;
     g_Task->unk_09             = 0x30;
     g_Task->header.mode += 1;

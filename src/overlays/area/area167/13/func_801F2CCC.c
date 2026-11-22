@@ -18,7 +18,7 @@ MATCH void func_801F2CCC(void) {
     cell                       = g_Task;
     cell->pos.x.part.integer   = AREA167_ENTRY_TABLE(u8, 0x18, pair);
     cell->pos.y.part.integer   = AREA167_ENTRY_TABLE(u8, 0x19, pair);
-    height                     = Area_SampleHeight(cell->pos.x.fixed, cell->pos.y.fixed);
+    height                     = Area_HeightSample(cell->pos.x.fixed, cell->pos.y.fixed);
     g_Task->pos.z.part.integer = -height / 2 - AREA167_ENTRY_TABLE(u16, 0x00, pair);
     g_Task->gravity            = AREA167_ENTRY_TABLE(s32, 0x08, entry * 4);
     g_Task->screen_y           = 0;

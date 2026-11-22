@@ -21,12 +21,12 @@ MATCH void func_801F3324(void) {
     g_ScratchPadVectors[1].vy = g_ScratchPadVectors[3].vy = g_Task->screen_y - 0x2140;
     x                                                     = (g_ScratchPadVectors[0].vx + 0x4000) << 9;
     y                                                     = (g_ScratchPadVectors[0].vy + 0x4000) << 9;
-    g_ScratchPadVectors[0].vz                             = -Area_SampleHeight(x, y) / 2 + 0x40;
-    g_ScratchPadVectors[2].vz                             = -Area_SampleHeight(x, y) / 2 + 0x180;
+    g_ScratchPadVectors[0].vz                             = -Area_HeightSample(x, y) / 2 + 0x40;
+    g_ScratchPadVectors[2].vz                             = -Area_HeightSample(x, y) / 2 + 0x180;
     x1                                                    = (g_ScratchPadVectors[1].vx + 0x4000) << 9;
     y1                                                    = (g_ScratchPadVectors[1].vy + 0x4000) << 9;
-    g_ScratchPadVectors[1].vz                             = -Area_SampleHeight(x1, y1) / 2 + 0x40;
-    g_ScratchPadVectors[3].vz                             = -Area_SampleHeight(x1, y1) / 2 + 0x180;
+    g_ScratchPadVectors[1].vz                             = -Area_HeightSample(x1, y1) / 2 + 0x40;
+    g_ScratchPadVectors[3].vz                             = -Area_HeightSample(x1, y1) / 2 + 0x180;
     RotTransPers4(&g_ScratchPadVectors[0], &g_ScratchPadVectors[1], &g_ScratchPadVectors[2], &g_ScratchPadVectors[3], (long*)&prim->x0, (long*)&prim->x1, (long*)&prim->x2, (long*)&prim->x3, &depth,
                   &flag);
     Area_ApplyTileToQuad((0x2550 << 16) | 0x127, prim, 1);

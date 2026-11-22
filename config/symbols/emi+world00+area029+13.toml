@@ -1,5 +1,5 @@
 ["emi/world00/area029/13"]
 g_AreaModuleId = { addr = 0x801F2C00, source = "Module id of the area: the first payload word of its overlay, 52 + the area number." }
-Area_SpawnWeightedActor = { addr = 0x801F2C04, type = "func", source = "Weighted random actor spawn from a per-image weight row, places the picked Actor row at a table coordinate with Area_SampleHeight." }
+Area_SpawnWeightedActor = { addr = 0x801F2C04, type = "func", source = "Weighted random actor spawn from a per-image weight row, places the picked Actor row at a table coordinate with Area_HeightSample." }
 g_AreaSpawnPositions = { addr = 0x801F2DBC, source = "Positions for weighted actor spawns." }
 g_AreaSpawnWeights = { addr = 0x801F2DCC, source = "Weights for actor spawns." }

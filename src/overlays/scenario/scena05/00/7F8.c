@@ -58,7 +58,7 @@ MATCH void func_801F7554(void) {
             actor                 = g_Task;
             spawned->pos.x.fixed  = actor->pos.x.fixed;
             spawned->pos.y.fixed  = actor->pos.y.fixed;
-            spawned->pos.z.fixed  = Area_SampleHeight(actor->pos.x.fixed, actor->pos.y.fixed) << 16;
+            spawned->pos.z.fixed  = Area_HeightSample(actor->pos.x.fixed, actor->pos.y.fixed) << 16;
         }
     }
     actor = g_Task;

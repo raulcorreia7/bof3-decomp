@@ -82,10 +82,10 @@ NON_MATCHING void func_801F3F5C(s32 part, s32 span, s32 phase_step, s32 offset) 
             *row3_y                   = y;
         }
 
-        height                    = -Area_SampleHeight(g_Task->pos.x.fixed, g_Task->pos.y.fixed) / 2;
+        height                    = -Area_HeightSample(g_Task->pos.x.fixed, g_Task->pos.y.fixed) / 2;
         g_ScratchPadVectors[0].vz = height - ((step * 2) + 0xC0);
         g_ScratchPadVectors[1].vz = height - ((step * 2) + 0xC0);
-        height                    = -Area_SampleHeight(g_Task->pos.x.fixed, g_Task->pos.y.fixed) / 2;
+        height                    = -Area_HeightSample(g_Task->pos.x.fixed, g_Task->pos.y.fixed) / 2;
         g_ScratchPadVectors[2].vz = height - 0xC0;
         g_ScratchPadVectors[3].vz = height - 0xC0;
 

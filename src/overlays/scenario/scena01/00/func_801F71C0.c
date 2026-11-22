@@ -48,7 +48,7 @@ MATCH void func_801F73FC(void) {
     work              = g_Task;
     work->pos.x.fixed = TO_COORD(96);
     work->pos.y.fixed = TO_COORD(17);
-    height            = Area_SampleHeight(work->pos.x.fixed, work->pos.y.fixed);
+    height            = Area_HeightSample(work->pos.x.fixed, work->pos.y.fixed);
 
     work              = g_Task;
     work->pos.z.fixed = height << 16;

@@ -12,5 +12,5 @@ MATCH void Area_RunFrame(void) {
     Actor_DispatchAll();
     GFX_PaletteUpdateAnimations();
     func_8019625C();
-    Area_DrawScene();
+    Area_SceneDraw();
 }

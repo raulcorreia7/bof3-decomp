@@ -29,7 +29,7 @@ MATCH void func_801C0758(s32 x, s32 y, u8 type) {
                 *y_ptr = out_y;
             }
             (&g_Game.members[0].facing)[index]                     = type;
-            FIELD(s16, &COORD_INT(g_Game.members[0].pos.z), index) = Area_ReadHeight(*x_ptr, *y_ptr);
+            FIELD(s16, &COORD_INT(g_Game.members[0].pos.z), index) = Area_HeightRead(*x_ptr, *y_ptr);
             if (count != 0) {
                 ((u8*)&g_Game.members[0])[index] |= 0x40;
             } else {

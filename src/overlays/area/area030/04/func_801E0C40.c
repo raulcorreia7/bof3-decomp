@@ -8,5 +8,5 @@ MATCH void func_801E0C40(void) {
     func_801BDAB8();
     func_801E09B4();
     Actor_DispatchAll();
-    Area_DrawScene();
+    Area_SceneDraw();
 }

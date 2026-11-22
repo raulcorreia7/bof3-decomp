@@ -19,7 +19,7 @@ MATCH void func_801B016C(void) {
     g_Task->param.unk_0B = 0;
 
     pos                                      = g_Task;
-    COORD_INT(g_Task->pos.z)                 = Area_ReadHeight(pos->pos.x.fixed, pos->pos.y.fixed);
+    COORD_INT(g_Task->pos.z)                 = Area_HeightRead(pos->pos.x.fixed, pos->pos.y.fixed);
     g_Game.current->u.field.counter.value    = 3;
     g_Game.current->u.field.step.value       = 0;
     g_Game.current->u.field.mode.value       = 0;

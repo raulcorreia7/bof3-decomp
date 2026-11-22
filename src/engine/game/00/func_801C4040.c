@@ -9,7 +9,7 @@ MATCH s32 func_801C4040(s32 pos_x, s32 pos_y, s16 probe_range) {
         return 1;
     }
     if ((pos_x & HALF_MASK) != 0) {
-        if (Area_ReadStepHeight(pos_x, pos_y, 3) >= 0x41) {
+        if (Area_HeightReadStep(pos_x, pos_y, 3) >= 0x41) {
             /* Retail reloads the scratch flag per test; clean C may hoist. */
             if (SP_REF(u8, 0x0u) != 0) {
                 return 1;
@@ -17,20 +17,20 @@ MATCH s32 func_801C4040(s32 pos_x, s32 pos_y, s16 probe_range) {
         }
     }
     if ((pos_y & HALF_MASK) != 0) {
-        if (Area_ReadStepHeight(pos_x, pos_y, 5) >= 0x41) {
+        if (Area_HeightReadStep(pos_x, pos_y, 5) >= 0x41) {
             if (SP_REF(u8, 0x0u) != 0) {
                 return 1;
             }
         }
     }
     if (((pos_x & HALF_MASK) != 0) && ((pos_y & HALF_MASK) != 0)) {
-        if (Area_ReadStepHeight(pos_x, pos_y, 4) >= 0x41) {
+        if (Area_HeightReadStep(pos_x, pos_y, 4) >= 0x41) {
             if (SP_REF(u8, 0x0u) != 0) {
                 return 1;
             }
         }
     }
-    dist = Area_ReadHeight(pos_x, pos_y) - probe_range;
+    dist = Area_HeightRead(pos_x, pos_y) - probe_range;
     dist = ABS(dist);
     if (dist < 193) {
         saved                    = COORD_INT(g_Task->pos.z);

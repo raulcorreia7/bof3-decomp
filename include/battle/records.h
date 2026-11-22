@@ -97,9 +97,9 @@ ASSERT_SIZE(BattleAction, 0x0A);
  * that the game overlay fills before a wild encounter and the battle overlay
  * walks to place the enemy.
  *
- *   emi/etc/game/00 Area_RollEncounterEnemies   writes the id at +0x01 and the live flag
+ *   emi/etc/game/00 Area_EncounterRollEnemies   writes the id at +0x01 and the live flag
  *                                    at +0x00
- *   emi/etc/game/00 Area_PlaceEncounterEnemies   writes the encounter position at +0x04
+ *   emi/etc/game/00 Area_EncounterPlaceEnemies   writes the encounter position at +0x04
  *                                    and +0x08
  *   emi/battle/battle/15 func_800ABC30 reads all three and hands the id, the
  *                                    x and the y to Battle_InitEnemy

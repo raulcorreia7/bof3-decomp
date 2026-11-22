@@ -9,7 +9,7 @@ __asm__(".include \"include/match/macro.inc\"\n");
 MATCH void func_801F6FAC(void) {
     Actor* work;
 
-    Area_SelectSceneRecord(0x1EA);
+    Area_SceneSelectRecord(0x1EA);
     work                     = g_Task;
     work->unk_48             = 0;
     work->pos.z.part.integer = 0x64;
@@ -558,7 +558,7 @@ MATCH void func_801F86D8(void) {
                 actor->type         = 0x20;
                 actor->pos.x.fixed  = MEM_PTR(Coord3, D_801468BC)->x.fixed;
                 actor->pos.y.fixed  = MEM_PTR(Coord3, D_801468BC)->y.fixed;
-                actor->pos.z.fixed  = (Area_SampleHeight(actor->pos.x.fixed, actor->pos.y.fixed) << 16) + 0x800000;
+                actor->pos.z.fixed  = (Area_HeightSample(actor->pos.x.fixed, actor->pos.y.fixed) << 16) + 0x800000;
             }
             g_ScenarioState.step_05 = 12;
             break;

@@ -12,7 +12,7 @@ MATCH void func_801F44F4(void) {
 
     g_Task->pos.x.part.integer = AREA168_ENTRY_TABLE(u8, 0x50, pair);
     g_Task->pos.y.part.integer = AREA168_ENTRY_TABLE(u8, 0x51, pair);
-    g_Task->pos.z.part.integer = -Area_SampleHeight(g_Task->pos.x.fixed, g_Task->pos.y.fixed) / 2 - AREA168_ENTRY_TABLE(u16, 0x30, pair);
+    g_Task->pos.z.part.integer = -Area_HeightSample(g_Task->pos.x.fixed, g_Task->pos.y.fixed) / 2 - AREA168_ENTRY_TABLE(u16, 0x30, pair);
     quad                       = entry * 4;
     g_Task->gravity            = AREA168_ENTRY_TABLE(s32, 0x3C, quad);
     g_Task->screen_y           = 0;

@@ -18,7 +18,7 @@ MATCH void func_801F46AC(void) {
         col = 0;
         do {
             g_AreaHeightOffsetEnabled = 1;
-            height                    = Area_ReadHeight(x, y);
+            height                    = Area_HeightRead(x, y);
             if (highest < height) {
                 highest = height;
             }
@@ -35,7 +35,7 @@ MATCH void func_801F46AC(void) {
     selection                   = func_801F5C60(g_Task->pos.x.fixed, g_Task->pos.y.fixed);
     g_SceneEventState.selection = selection;
     if (selection != 0xFF) {
-        func_801F5BCC(Area_SampleHeight(g_Task->pos.x.fixed, g_Task->pos.y.fixed) + 0x280);
+        func_801F5BCC(Area_HeightSample(g_Task->pos.x.fixed, g_Task->pos.y.fixed) + 0x280);
     } else {
         func_801F5BCC(highest + 0x180);
     }

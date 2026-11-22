@@ -8,7 +8,7 @@
     steps         = g_Task->timer;                            \
     x             = g_Task->pos.x.fixed + g_Task->vx * steps; \
     y             = g_Task->pos.y.fixed + g_Task->vy * steps; \
-    ground        = Area_SampleHeight(x, y);                  \
+    ground        = Area_HeightSample(x, y);                  \
     work          = g_Task;                                   \
     floor_height  = COORD_INT(work->pos.z) - 224;             \
     work->vz      = (ground - floor_height) / work->timer;    \

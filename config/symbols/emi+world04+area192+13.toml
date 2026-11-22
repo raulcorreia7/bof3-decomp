@@ -1,4 +1,4 @@
 ["emi/world04/area192/13"]
 jtbl_801F2C04 = { addr = 0x801F2C04, type = "Callback", size = 0x7C, source = "The switch table of func_801F2E98: 31 jump targets of its jr dispatch." }
-Area_ResumeSceneAfterMessage = { addr = 0x801F2CA8, type = "func", source = "Clears the message request; when the menu selection is idle sets the script-active flag, g_ScenarioState.state_04 to 1 and step_05 to 0x14." }
+Area_SceneResumeAfterMessage = { addr = 0x801F2CA8, type = "func", source = "Clears the message request; when the menu selection is idle sets the script-active flag, g_ScenarioState.state_04 to 1 and step_05 to 0x14." }
 Area_CloseTalk = { addr = 0x801F2E44, type = "func", source = "Reactivates the script (Game_SetScriptActive), clears the current actor's ACTOR_FLAG_INTERACTION_PENDING bit and advances its counter at 0x7E." }

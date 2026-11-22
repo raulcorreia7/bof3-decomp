@@ -8,7 +8,7 @@ MATCH u8 func_8019EEE4(void) {
     s32 index;
 
     found    = 0;
-    distance = Area_SampleHeight(g_Task->pos.x.fixed, g_Task->pos.y.fixed);
+    distance = Area_HeightSample(g_Task->pos.x.fixed, g_Task->pos.y.fixed);
     slot     = Actor_FindInRange(g_Task->pos.x.fixed, g_Task->pos.y.fixed, 0);
     if (slot != -1) {
         g_Actors[slot].interaction_flags |= ACTOR_INTERACTION_PENDING;
@@ -59,7 +59,7 @@ MATCH u8 func_8019EEE4(void) {
                 g_SpawnedActors[index].header.mode      = 1;
                 g_SpawnedActors[index].pos.x.fixed      = g_Task->pos.x.fixed;
                 g_SpawnedActors[index].pos.y.fixed      = g_Task->pos.y.fixed;
-                COORD_INT(g_SpawnedActors[index].pos.z) = Area_SampleHeight(g_SpawnedActors[index].pos.x.fixed, g_SpawnedActors[index].pos.y.fixed) + 0x100;
+                COORD_INT(g_SpawnedActors[index].pos.z) = Area_HeightSample(g_SpawnedActors[index].pos.x.fixed, g_SpawnedActors[index].pos.y.fixed) + 0x100;
                 g_SpawnedActors[index].link             = 0;
             }
             g_Game.members[0].unk_07 = 1;

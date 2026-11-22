@@ -72,7 +72,7 @@ typedef struct ScenarioHandlers {
 
 ASSERT_SIZE(ScenarioHandlers, 0x14);
 
-/* Four-byte battle party slot. Area_PlaceEncounterParty marks it active, stores its sort
+/* Four-byte battle party slot. Area_EncounterPlaceParty marks it active, stores its sort
  * key and orders the slots by that key. */
 typedef struct PartySlot {
     u8 active;

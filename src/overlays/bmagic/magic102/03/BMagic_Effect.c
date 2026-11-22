@@ -41,28 +41,28 @@ MATCH void func_801EEC80(void) {
     g_Task->unk_09       = 0;
     for (i = 0; i < BATTLE_PARTY_CHARACTERS_COUNT; i++) {
         if (g_Game.members[i].header.flags) {
-            D_801F0ECC[i] = COORD_INT(g_Game.members[i].pos.z) - Area_SampleHeight(g_BattleEffects[i].pos.x.fixed, g_BattleEffects[i].pos.y.fixed);
+            D_801F0ECC[i] = COORD_INT(g_Game.members[i].pos.z) - Area_HeightSample(g_BattleEffects[i].pos.x.fixed, g_BattleEffects[i].pos.y.fixed);
         }
     }
     for (i = 0; i < 8; i++) {
         if (!(Battle_SlotIsBlocked((u8)(i + 3)) & BYTE_MASK)) {
-            D_801F0F40[i] = COORD_INT(g_BattleEnemyBattlers[i].pos.z) - Area_SampleHeight(g_BattleEffects[i + 3].pos.x.fixed, g_BattleEffects[i + 3].pos.y.fixed);
+            D_801F0F40[i] = COORD_INT(g_BattleEnemyBattlers[i].pos.z) - Area_HeightSample(g_BattleEffects[i + 3].pos.x.fixed, g_BattleEffects[i + 3].pos.y.fixed);
             D_801F0F50[i] = COORD_INT(g_BattleEnemyBattlers[i].pos.z);
         }
     }
     for (i = 0; i < ACTOR_COUNT; i++) {
         if (g_Actors[i].header.flags) {
-            D_801F0ED4[i] = COORD_INT(g_Actors[i].pos.z) - Area_SampleHeight(g_Actors[i].pos.x.fixed, g_Actors[i].pos.y.fixed);
+            D_801F0ED4[i] = COORD_INT(g_Actors[i].pos.z) - Area_HeightSample(g_Actors[i].pos.x.fixed, g_Actors[i].pos.y.fixed);
         }
     }
     for (i = 0; i < 4; i++) {
         if (g_PartyActors[i].header.flags) {
-            D_801F0F10[i] = COORD_INT(g_PartyActors[i].pos.z) - Area_SampleHeight(g_PartyActors[i].pos.x.fixed, g_PartyActors[i].pos.y.fixed);
+            D_801F0F10[i] = COORD_INT(g_PartyActors[i].pos.z) - Area_HeightSample(g_PartyActors[i].pos.x.fixed, g_PartyActors[i].pos.y.fixed);
         }
     }
     for (i = 0; i < ACTOR_SLOT_COUNT; i++) {
         if (g_SpawnedActors[i].header.flags && g_SpawnedActors[i].type == 0x17) {
-            D_801F0F18[i] = COORD_INT(g_SpawnedActors[i].pos.z) - Area_SampleHeight(g_SpawnedActors[i].pos.x.fixed, g_SpawnedActors[i].pos.y.fixed);
+            D_801F0F18[i] = COORD_INT(g_SpawnedActors[i].pos.z) - Area_HeightSample(g_SpawnedActors[i].pos.x.fixed, g_SpawnedActors[i].pos.y.fixed);
         }
     }
     for (i = 0; i < AREA_CELL_GRID_ROWS; i++) {
@@ -172,33 +172,33 @@ MATCH void func_801EF2B8(void) {
     if (g_Battle.target_selector & BATTLE_TARGET_PARTY_SIDE) {
         for (i = 0; i < 3; i++) {
             if (g_Game.members[i].header.flags) {
-                COORD_INT(g_Game.members[i].pos.z) = D_801F0ECC[i] + Area_SampleHeight(g_BattleEffects[i].pos.x.fixed, g_BattleEffects[i].pos.y.fixed);
+                COORD_INT(g_Game.members[i].pos.z) = D_801F0ECC[i] + Area_HeightSample(g_BattleEffects[i].pos.x.fixed, g_BattleEffects[i].pos.y.fixed);
             }
         }
     } else {
         for (i = 0; i < 8; i++) {
             if (!(Battle_SlotIsBlocked((u8)(i + 3)) & BYTE_MASK)) {
-                if (D_801F0CC0 && D_801F0F50[i] > Area_SampleHeight(g_BattleEffects[i + 3].pos.x.fixed, g_BattleEffects[i + 3].pos.y.fixed)) {
+                if (D_801F0CC0 && D_801F0F50[i] > Area_HeightSample(g_BattleEffects[i + 3].pos.x.fixed, g_BattleEffects[i + 3].pos.y.fixed)) {
                     COORD_INT(g_BattleEnemyBattlers[i].pos.z) = D_801F0F50[i];
                 } else {
-                    COORD_INT(g_BattleEnemyBattlers[i].pos.z) = D_801F0F40[i] + Area_SampleHeight(g_BattleEffects[i + 3].pos.x.fixed, g_BattleEffects[i + 3].pos.y.fixed);
+                    COORD_INT(g_BattleEnemyBattlers[i].pos.z) = D_801F0F40[i] + Area_HeightSample(g_BattleEffects[i + 3].pos.x.fixed, g_BattleEffects[i + 3].pos.y.fixed);
                 }
             }
         }
     }
     for (i = 0; i < 30; i++) {
         if (g_Actors[i].header.flags) {
-            COORD_INT(g_Actors[i].pos.z) = D_801F0ED4[i] + Area_SampleHeight(g_Actors[i].pos.x.fixed, g_Actors[i].pos.y.fixed);
+            COORD_INT(g_Actors[i].pos.z) = D_801F0ED4[i] + Area_HeightSample(g_Actors[i].pos.x.fixed, g_Actors[i].pos.y.fixed);
         }
     }
     for (i = 0; i < 4; i++) {
         if (g_PartyActors[i].header.flags) {
-            COORD_INT(g_PartyActors[i].pos.z) = D_801F0F10[i] + Area_SampleHeight(g_PartyActors[i].pos.x.fixed, g_PartyActors[i].pos.y.fixed);
+            COORD_INT(g_PartyActors[i].pos.z) = D_801F0F10[i] + Area_HeightSample(g_PartyActors[i].pos.x.fixed, g_PartyActors[i].pos.y.fixed);
         }
     }
     for (i = 0; i < 20; i++) {
         if (g_SpawnedActors[i].header.flags && g_SpawnedActors[i].type == 0x17) {
-            COORD_INT(g_SpawnedActors[i].pos.z) = D_801F0F18[i] + Area_SampleHeight(g_SpawnedActors[i].pos.x.fixed, g_SpawnedActors[i].pos.y.fixed);
+            COORD_INT(g_SpawnedActors[i].pos.z) = D_801F0F18[i] + Area_HeightSample(g_SpawnedActors[i].pos.x.fixed, g_SpawnedActors[i].pos.y.fixed);
         }
     }
     g_AreaCameraRefreshCount = 2;
@@ -434,9 +434,9 @@ MATCH void func_801F0488(ScenePart* part_list, s32 x, s32 y) {
     }
 }
 
-/* Draws one sprite of a scene record as an FT4 primitive, like the resident Area_DrawSceneSprite, but the sprite stands
+/* Draws one sprite of a scene record as an FT4 primitive, like the resident Area_SceneDrawSprite, but the sprite stands
  * on the ground: its depth is half the ground height under its origin. */
-MATCH void Area_DrawGroundSceneSprite(u8* record, s32 origin_x, s32 origin_y) {
+MATCH void Area_SceneDrawGroundSprite(u8* record, s32 origin_x, s32 origin_y) {
     POLY_FT4* prim;
     u8*       frame;
     s32       z;
@@ -451,7 +451,7 @@ MATCH void Area_DrawGroundSceneSprite(u8* record, s32 origin_x, s32 origin_y) {
         return;
     }
     setVector(g_ScratchPadVectors, ((origin_x - 0x80) << 0x7) + FIELD(s8, record, 7) * 2, ((origin_y - 0x80) << 7) + FIELD(s8, record, 0x6) * 2,
-              -Area_SampleHeight((g_ScratchPadVectors->vx + AREA_CELL_ORIGIN) << 9, (g_ScratchPadVectors->vy + AREA_CELL_ORIGIN) << 9) / 2);
+              -Area_HeightSample((g_ScratchPadVectors->vx + AREA_CELL_ORIGIN) << 9, (g_ScratchPadVectors->vy + AREA_CELL_ORIGIN) << 9) / 2);
     z = RotTransPers(g_ScratchPadVectors, (long*)D_1F800034_U16, &depth, &flag);
     if (((u32)(D_1F800034_U16[0] + 0x3C) & HALF_MASK) >= 0x1B9) {
         return;

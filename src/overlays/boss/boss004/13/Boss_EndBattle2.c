@@ -9,7 +9,7 @@ MATCH void Boss_EndBattle2(void) {
     Battle_ShowActorEntry(2);
     Battle_CopyActorEntry(2, (PartyMember*)g_BattleEnemyBattlers, 1);
     TASK_SET(func_800AC754(2));
-    Area_SelectSceneRecord(0x5F);
+    Area_SceneSelectRecord(0x5F);
     g_Task->unk_48 = 0;
     g_Task->unk_2A = 0;
     Script_Select(1);
@@ -18,7 +18,7 @@ MATCH void Boss_EndBattle2(void) {
     Battle_ShowActorEntry(3);
     Battle_CopyActorEntry(3, (PartyMember*)&g_BattleEnemyBattlers[1], 1);
     TASK_SET(func_800AC754(3));
-    Area_SelectSceneRecord(0x5F);
+    Area_SceneSelectRecord(0x5F);
     g_Task->unk_48 = 0;
     g_Task->unk_2A = 0;
     Script_Select(1);

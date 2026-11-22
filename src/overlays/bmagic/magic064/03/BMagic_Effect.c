@@ -63,7 +63,7 @@ MATCH void func_801EEEA8(void) {
     g_Task->pos.z.part.integer = g_AreaCameraHeight;
     *scroll_x                  = g_Game.members[g_Battle.active_battler].pos.x.fixed;
     *scroll_y                  = g_Game.members[g_Battle.active_battler].pos.y.fixed;
-    g_AreaCameraHeight         = Area_SampleHeight(g_AreaScrollTargetX, g_AreaScrollTargetY);
+    g_AreaCameraHeight         = Area_HeightSample(g_AreaScrollTargetX, g_AreaScrollTargetY);
     func_801F103C();
     index                               = Battle_AllocEffect(1, 0x3A) & BYTE_MASK;
     target                              = g_Task;

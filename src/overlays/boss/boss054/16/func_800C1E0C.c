@@ -3,7 +3,7 @@
 #define g_Task ((PartyMember*)g_Task)
 
 MATCH void func_800C1E0C(void) {
-    Area_SelectSceneRecord(467);
+    Area_SceneSelectRecord(467);
     if (g_Battle.target_selector < 3) {
         g_Task->pos.x = g_Game.members[g_Battle.target_selector].pos.x;
         g_Task->pos.y = g_Game.members[g_Battle.target_selector].pos.y;

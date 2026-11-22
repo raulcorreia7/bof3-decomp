@@ -17,13 +17,13 @@ NON_MATCHING void func_801F4634(s32 tile_offset, s32 height) {
 
     x                         = (g_ScratchPadVectors[0].vx + 0x4000) << 9;
     sample_y0                 = (g_ScratchPadVectors[0].vy + 0x4000) << 9;
-    g_ScratchPadVectors[0].vz = -Area_SampleHeight(x, sample_y0) / 2 - g_Task->pos.z.part.integer - height + 8;
-    g_ScratchPadVectors[2].vz = -Area_SampleHeight(x, sample_y0) / 2 - g_Task->pos.z.part.integer + height;
+    g_ScratchPadVectors[0].vz = -Area_HeightSample(x, sample_y0) / 2 - g_Task->pos.z.part.integer - height + 8;
+    g_ScratchPadVectors[2].vz = -Area_HeightSample(x, sample_y0) / 2 - g_Task->pos.z.part.integer + height;
 
     x                         = (g_ScratchPadVectors[1].vx + 0x4000) << 9;
     sample_y1                 = (g_ScratchPadVectors[1].vy + 0x4000) << 9;
-    g_ScratchPadVectors[1].vz = -Area_SampleHeight(x, sample_y1) / 2 - g_Task->pos.z.part.integer - height + 8;
-    g_ScratchPadVectors[3].vz = -Area_SampleHeight(x, sample_y1) / 2 - g_Task->pos.z.part.integer + height;
+    g_ScratchPadVectors[1].vz = -Area_HeightSample(x, sample_y1) / 2 - g_Task->pos.z.part.integer - height + 8;
+    g_ScratchPadVectors[3].vz = -Area_HeightSample(x, sample_y1) / 2 - g_Task->pos.z.part.integer + height;
 
     prim = (POLY_FT4*)g_GfxPrimCursor;
     SetPolyFT4(prim);

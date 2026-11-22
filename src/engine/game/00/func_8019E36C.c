@@ -9,7 +9,7 @@ MATCH void func_8019E36C(void) {
     g_Task->vz = add;
     COORD_INT(g_Task->pos.z) += add;
     Script_AnimStepLoop();
-    dist  = Area_SampleHeight(g_Task->pos.x.fixed, g_Task->pos.y.fixed);
+    dist  = Area_HeightSample(g_Task->pos.x.fixed, g_Task->pos.y.fixed);
     limit = COORD_INT(g_Task->pos.z);
     if (dist >= limit) {
         Actor_Clear();

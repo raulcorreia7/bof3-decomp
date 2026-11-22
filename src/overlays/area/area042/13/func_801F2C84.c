@@ -6,7 +6,7 @@ NON_MATCHING void func_801F2C84(void) {
     s32 value;
     FAKE_STACK_PADS(u8, 16); /* FAKE: retail's frame is 0x28, the body's locals take 0x18. */
 
-    height                   = Area_SampleHeight(g_Task->vx, g_Task->vy);
+    height                   = Area_HeightSample(g_Task->vx, g_Task->vy);
     value                    = (height << 0x10) + TO_COORD(0x100);
     g_Task->vz               = value;
     g_Task->gravity          = value;

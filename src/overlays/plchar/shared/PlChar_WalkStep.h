@@ -18,8 +18,8 @@ MATCH void PlChar_WalkStep(void) {
     }
     x    = g_Task->pos.x.fixed + g_FacingSteps[g_Task->direction].x;
     y    = g_Task->pos.y.fixed + g_FacingStepY[g_Task->direction * 2];
-    dist = Area_ReadHeight(x, y) - COORD_INT(g_Task->pos.z);
-    Area_ReadStepHeight(x, y, g_Task->direction);
+    dist = Area_HeightRead(x, y) - COORD_INT(g_Task->pos.z);
+    Area_HeightReadStep(x, y, g_Task->direction);
     if (SP_REF(u8, 0x0u) != 0 && dist >= 65) {
         Script_Request((g_Task->direction - 1) / 2 + 0x46);
         g_Task->header.step++;
@@ -27,14 +27,14 @@ MATCH void PlChar_WalkStep(void) {
         g_Task->unk_2B = 1;
         x              = g_Task->pos.x.fixed + g_FacingSteps[FACING_RIGHT].x;
         y              = g_Task->pos.y.fixed + g_FacingSteps[FACING_RIGHT].y;
-        dist           = Area_ReadStepHeight(x, y, FACING_RIGHT);
-        if (SP_REF(u8, 0x0u) != 0 && dist >= 65 && COORD_INT(g_Task->pos.z) < Area_ReadHeight(x, y)) {
+        dist           = Area_HeightReadStep(x, y, FACING_RIGHT);
+        if (SP_REF(u8, 0x0u) != 0 && dist >= 65 && COORD_INT(g_Task->pos.z) < Area_HeightRead(x, y)) {
             g_Task->unk_2B = 0;
         }
         x    = g_Task->pos.x.fixed + g_FacingSteps[FACING_DOWN].x;
         y    = g_Task->pos.y.fixed + g_FacingSteps[FACING_DOWN].y;
-        dist = Area_ReadStepHeight(x, y, FACING_DOWN);
-        if (SP_REF(u8, 0x0u) != 0 && dist >= 65 && COORD_INT(g_Task->pos.z) < Area_ReadHeight(x, y)) {
+        dist = Area_HeightReadStep(x, y, FACING_DOWN);
+        if (SP_REF(u8, 0x0u) != 0 && dist >= 65 && COORD_INT(g_Task->pos.z) < Area_HeightRead(x, y)) {
             g_Task->unk_2B = 0;
         }
         /* FAKE: retail reads SND_PlaySE as void(s32). */

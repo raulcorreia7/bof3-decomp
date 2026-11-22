@@ -4,20 +4,20 @@
 #include "types.h"
 
 /* func_8015477C */
-s16         Area_SampleHeight(s32 x, s32 y);
-/* Area_GetHeight */
+s16         Area_HeightSample(s32 x, s32 y);
+/* Area_HeightGet */
 /* func_80154ABC */
-s32         Area_GetHeight(s32 x, s32 y, u8 mode);
+s32         Area_HeightGet(s32 x, s32 y, u8 mode);
 /* func_80154ED0 */
-extern void Area_EnableHeightOffset(void);
+extern void Area_HeightEnableOffset(void);
 /* func_80154F28 */
-s16         Area_ReadHeight(s32 x, s32 y);
+s16         Area_HeightRead(s32 x, s32 y);
 /* func_80154F78 */
-s16         Area_ReadStepHeight(s32 x, s32 y, u8 mode);
+s16         Area_HeightReadStep(s32 x, s32 y, u8 mode);
 /* func_80155038 */
-void        Area_StoreHeight(s32 x, s32 y, u8 value);
+void        Area_HeightSet(s32 x, s32 y, u8 value);
 /* func_80167848 */
-void        Area_SyncScrollHeight(void);
+void        Area_HeightSyncScroll(void);
 
 #endif
 

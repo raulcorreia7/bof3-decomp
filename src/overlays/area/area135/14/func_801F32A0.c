@@ -15,5 +15,5 @@ MATCH void func_801F32A0(s32 value) {
     z                         = D_80147A94;
     work->pos.z.fixed         = z;
     g_AreaHeightOffsetEnabled = 1;
-    g_Task->vz                = Area_ReadHeight(x, work->pos.y.fixed) << 16;
+    g_Task->vz                = Area_HeightRead(x, work->pos.y.fixed) << 16;
 }

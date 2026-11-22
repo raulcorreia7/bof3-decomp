@@ -28,7 +28,7 @@ NON_MATCHING void Game_BattleSetEncounterSpot(s32 x, s32 y, s32 party_slot) {
         rec->pos.x = x_start - (FIELD(s32, &D_80181CAC, off) * (s_CameraScrollDeltas[battle->scroll_dir].dy / 4));
         rec->pos.y = y_start + (FIELD(s32, D_80181CA8, off) * (s_CameraScrollDeltas[battle->scroll_dir].dy / 4));
     }
-    COORD_INT(g_Task->pos.z) = Area_ReadHeight(g_Task->pos.x.fixed, g_Task->pos.y.fixed);
+    COORD_INT(g_Task->pos.z) = Area_HeightRead(g_Task->pos.x.fixed, g_Task->pos.y.fixed);
 }
 #else
 INCLUDE_ASM(Game_BattleSetEncounterSpot);

@@ -17,7 +17,7 @@ NON_MATCHING void func_801F5174(s32 steps, s32 radius) {
 
     x      = (g_Task->pos.x.part.integer - 0x80) << 7;
     y      = (g_Task->pos.y.part.integer - 0x80) << 7;
-    ground = (s16)(-Area_SampleHeight(g_Task->pos.x.fixed, g_Task->pos.y.fixed) / 2);
+    ground = (s16)(-Area_HeightSample(g_Task->pos.x.fixed, g_Task->pos.y.fixed) / 2);
     phase  = (g_FrameCount << 2) & 7;
     z      = ground - phase * steps;
     j      = 0;

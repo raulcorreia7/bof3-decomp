@@ -10,7 +10,7 @@ MATCH void func_801F82D8(s32 slot) {
     Actor* other;
 
     TASK_SET(&g_SpawnedActors[slot & BYTE_MASK]);
-    Area_SelectSceneRecord(0x18);
+    Area_SceneSelectRecord(0x18);
 
     g_Task->active_flags = 0;
     g_Task->mirror       = 0;
