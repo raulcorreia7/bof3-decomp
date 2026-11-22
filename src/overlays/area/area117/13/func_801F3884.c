@@ -20,12 +20,12 @@ MATCH void func_801F3884(s32 tile, s32 offset) {
     x                             = (vectors[0].vx + 0x4000) << 9;
     y                             = (vectors[0].vy + 0x4000) << 9;
     vectors[0].vz                 = -Area_HeightSample(x, y) / 2 - (lower = offset - 0x40) + 8;
-    vectors[2].vz = -Area_HeightSample(x, y) / 2 + (upper = offset + 0x40);
-    x1            = (vectors[1].vx + 0x4000) << 9;
-    y1            = (vectors[1].vy + 0x4000) << 9;
-    vectors[1].vz = -Area_HeightSample(x1, y1) / 2 - lower + 8;
-    vectors[3].vz = -Area_HeightSample(x1, y1) / 2 + upper;
-    prim          = (POLY_FT4*)g_GfxPrimCursor;
+    vectors[2].vz                 = -Area_HeightSample(x, y) / 2 + (upper = offset + 0x40);
+    x1                            = (vectors[1].vx + 0x4000) << 9;
+    y1                            = (vectors[1].vy + 0x4000) << 9;
+    vectors[1].vz                 = -Area_HeightSample(x1, y1) / 2 - lower + 8;
+    vectors[3].vz                 = -Area_HeightSample(x1, y1) / 2 + upper;
+    prim                          = (POLY_FT4*)g_GfxPrimCursor;
     SetPolyFT4(prim);
     SetShadeTex(prim, 0);
     RotTransPers4(&vectors[0], &vectors[1], &vectors[2], &vectors[3], (long*)&prim->x0, (long*)&prim->x1, (long*)&prim->x2, (long*)&prim->x3, &depth, &flag);
