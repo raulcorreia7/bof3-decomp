@@ -122,6 +122,7 @@ s32        func_801FA644(void);
 void func_801F6FAC(void);
 void func_801F781C(u16 x, u16 y, u16 width, u16 height);
 void func_801F79E8(u16 x, u16 y);
+u8   func_801FE2B0(void);
 u16  func_801FD278(void);
 
 #endif
