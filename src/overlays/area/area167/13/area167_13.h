@@ -22,4 +22,14 @@ extern u8 D_801F68B4[];
 /* The per-sprite-row screen scale of the quad's far edge: a signed byte a row. */
 #define AREA_ROW_SCALE_OFFSET                    0x34
 
+/* Clear the message request; when the selection is idle, hand the scene to its script with result 0x60. */
+#define AREA167_START_SCRIPT_ON_IDLE() \
+    MESSAGE_REQUEST_CLEAR();           \
+    if (MENU_SELECTION_IDLE()) {       \
+        Game_SetScriptActive();        \
+        g_ScriptVars[3]        = 0x60; \
+        g_SceneEventState.mode = 0x20; \
+        g_SceneEventState.step = 0xA;  \
+    }
+
 #endif

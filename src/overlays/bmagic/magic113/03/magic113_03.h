@@ -61,4 +61,13 @@ void            func_801F02CC(void);
 /* The corner angles of the outline, in steps of 273 (a fifteenth of a turn). */
 extern s8 D_801F0BB8[];
 
+/* Advance the effect mode when the active battler's parameter is `param_value`. A statement macro:
+ * the member declares PartyMember* active and PartyMember* work. */
+#define MAGIC113_ADVANCE_AT_ACTIVE_PARAM(param_value) \
+    active = BATTLE_ACTIVE_WORK;                      \
+    if (active->param.unk_0B == (param_value)) {      \
+        work              = TASK(PartyMember);        \
+        work->header.step = work->header.step + 1;    \
+    }
+
 #endif

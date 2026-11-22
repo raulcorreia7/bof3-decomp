@@ -21,9 +21,7 @@ src/overlays/area/area130/13/Item_AddSeaCharts.c	Item_AddSeaCharts
 src/overlays/area/area134/13/area134_13.h	World_SpawnActorAtFocus
 src/overlays/area/area136/13/Actor_WalkWhileWithinLimit.c	Actor_WalkWhileWithinLimit
 src/overlays/area/area139/13/Actor_SlideScreenOffBottom.c	Actor_SlideScreenOffBottom
-src/overlays/area/area139/13/Actor_SlideScreenUp.c	Actor_SlideScreenUp
 src/overlays/area/area142/13/Effect_ClearTimerNextStep.c	Effect_ClearTimerNextStep
-src/overlays/area/area151/13/Actor_Fly.c	Actor_Fly
 src/overlays/area/area152/13/Actor_Fly.c	Actor_Fly
 src/overlays/area/area152/13/Actor_ZoomIn.c	Actor_ZoomIn
 src/overlays/area/area156/13/WorldMap_WaveCells.c	WorldMap_WaveCells
