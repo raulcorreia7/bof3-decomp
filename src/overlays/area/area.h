@@ -4,6 +4,7 @@
 /* The area group's declarations: the symbols two or more area images read or call. */
 
 #include "game.h"
+#include "area/map.h"
 #include "sys/exe.h"
 #include "sys/scene.h"
 #include "gfx/vram.h"
@@ -90,18 +91,6 @@ typedef struct WorldMapMarker {
 } WorldMapMarker;
 
 ASSERT_SIZE(WorldMapMarker, 4);
-
-/* One 4-byte world map point: the cell x and y, then the destination area id
- * (func_801B690C stores it in g_GameEntryAreaId) and the location type (the
- * Fishing_ShowLocation tables select their message set by it). */
-typedef struct WorldMapPoint {
-    u8 x;       /* 0x00 */
-    u8 y;       /* 0x01 */
-    u8 area_id; /* 0x02 */
-    u8 type;    /* 0x03 */
-} WorldMapPoint;
-
-ASSERT_SIZE(WorldMapPoint, 4);
 
 /* One fishing location row: the location type a WorldMapPoint carries, then the five fish ids
  * the location lists on the Fishing_ShowLocation message. */
