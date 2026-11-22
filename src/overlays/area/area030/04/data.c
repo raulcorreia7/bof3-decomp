@@ -98,9 +98,11 @@ Callback g_FishingCastGaugeSteps[4] = {
 Callback g_FishingLureSteps[6] = {
     (Callback)func_801D0C90, (Callback)Fishing_LureCast, (Callback)Fishing_LureFly, (Callback)Fishing_LureSettle, (Callback)Fishing_LureFloat, (Callback)Fishing_LureHooked,
 };
-/* Stride 8: the row of the cue index, read as [cue_index * 8] by Fishing_LureCast. needs: type. */
-u8 D_801E1D38[32] = {
-    0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x10, 0x00, 0x00, 0x00, 0xFE, 0xFF, 0x00, 0x00, 0x28, 0x00, 0x00, 0x00, 0xFE, 0xFF,
+FishingCastStep g_FishingLureCastSteps[4] = {
+    {0, 0},
+    {0, 0},
+    {0x100000, -0x20000},
+    {0x280000, -0x20000},
 };
 /* The cue row is a 16.16 fixed-point offset and step; four rows. */
 FishingCueStep g_FishingLureFlyCueSteps[4] = {

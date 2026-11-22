@@ -27,6 +27,6 @@ extern u8 D_801F3CF9[];
 extern u8 D_801F3CFA[];
 extern u8 D_801F3CFB[];
 
-s8 func_801F34F8(s32 x, s32 y);
+s8 Area_FindMemberAt(s32 x, s32 y);
 
 #endif

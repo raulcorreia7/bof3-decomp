@@ -666,7 +666,62 @@ MATCH void func_801F9330(Scena07BurstBuffer* buffer) {
     }
 }
 
-INCLUDE_ASM(func_801F97E0);
+/* Draws the burst: 32 semi-transparent Gouraud quads between a ring of radius 32 at its position and the ring 0x700 units higher, shaded by its size. */
+MATCH void func_801F97E0(Scena07Burst* burst) {
+    DVECTOR  low;
+    DVECTOR  high;
+    VECTOR   point;
+    MATRIX   unused;
+    POLY_G4* prim;
+    s32      angle;
+    u8       shade;
+    u32      level;
+    s8       i;
+
+    angle    = 0;
+    point.vx = burst->pos.vx + (rcos(0) << 5);
+    point.vy = burst->pos.vy + (rsin(0) << 5);
+    point.vz = burst->pos.vz;
+    Camera_ProjectPoint(&point, &low);
+    point.vz = burst->pos.vz + TO_COORD(0x700);
+    Camera_ProjectPoint(&point, &high);
+    level = burst->unk_10;
+    shade = 0x80;
+    if (level >= 0x100) {
+        level = 0xFF;
+    }
+    for (i = 0; i < 32; i++) {
+        angle += 0x80;
+        point.vx = burst->pos.vx + (rcos((u16)angle) << 5);
+        point.vy = burst->pos.vy + (rsin((u16)angle) << 5);
+        point.vz = burst->pos.vz;
+        SetDrawMode((DR_MODE*)g_GfxPrimCursor, 0, 1, GetTPage(TPAGE_DEPTH_4BIT, TPAGE_ABR_ADD, FONT_TPAGE_X, FONT_TPAGE_Y), 0);
+        Area_CellAddPrim(point.vx, point.vy, 0, sizeof(DR_MODE));
+        prim = GFX_BeginPolyG4(1);
+        setXY2(prim, low.vx, low.vy, high.vx, high.vy);
+        setRGB0(prim, level, level, level);
+        setRGB1(prim, level, level, level);
+        Camera_ProjectPoint(&point, &low);
+        point.vz = burst->pos.vz + TO_COORD(0x700);
+        Camera_ProjectPoint(&point, &high);
+        prim->x2 = low.vx;
+        prim->y2 = low.vy;
+        prim->x3 = high.vx;
+        prim->y3 = high.vy;
+        if ((u8)(i - 4) >= 16) {
+            shade += 4;
+        } else {
+            shade -= 4;
+        }
+        level = (u16)(shade * burst->unk_10) >> 7;
+        if (level >= 0x100) {
+            level = 0xFF;
+        }
+        setRGB2(prim, level, level, level);
+        setRGB3(prim, level, level, level);
+        Area_CellAddPrim(point.vx, point.vy, 0, sizeof(POLY_G4));
+    }
+}
 
 MATCH s32 func_801F9A80(SceneEffectRow* row) {
     POLY_F4* poly;

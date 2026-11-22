@@ -56,6 +56,6 @@ void func_801F3280(s16 x1, s16 y1, s16 radius1, u16 angle1, s16 x2, s16 y2, s16 
 
 /* func_801F4188 */
 s32  Scene_EventBegin(void);
-void func_801F4B0C(s32, s32, s32, s32, s32);
+void func_801F4B0C(s32 x, s32 y, s16 width, s16 height, u8 mode);
 
 #endif
