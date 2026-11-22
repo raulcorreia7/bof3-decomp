@@ -231,8 +231,170 @@ MATCH void func_801EFBE4(void) {
     }
 }
 
+/* Draws the Last Resort trail: every tick of the effect timer joins the rim point it turns to to the rim point the
+ * previous tick left, four semi-transparent Gouraud quads around the join in two area cell packets. */
+/* func_801EFC44 */
 #ifdef NON_MATCHING
 NON_MATCHING void func_801EFC44(void) {
+    POLY_G4* poly;
+    long     depth;
+    long     flag;
+    SVECTOR  rim;
+    s32      fade;
+    s32      i;
+    s32      join;
+    s32      shade;
+    s32      span;
+    s32      tpage;
+    s32      x;
+    s32      y;
+
+    D_1F80000C                  = (TASK(PartyMember)->param.unk_0B & 0x1F) << 7;
+    g_ScratchPad.cells.words[0] = 0xC0 - TASK(PartyMember)->unk_09 * 2;
+    D_1F800008                  = -(TASK(PartyMember)->unk_09 * 12);
+    rim.vx                      = FIXED_MUL(rsin(D_1F80000C), g_ScratchPad.cells.words[0]);
+    rim.vy                      = FIXED_MUL(rcos(D_1F80000C), g_ScratchPad.cells.words[0]);
+    rim.vz                      = D_1F800008;
+    join                        = TASK(PartyMember)->timer * 2;
+    if (TASK(PartyMember)->timer <= 1) {
+        return;
+    }
+    for (i = 1; i < TASK(PartyMember)->timer; i++) {
+        D_1F80000C                  = ((TASK(PartyMember)->param.unk_0B - i) & 0x1F) << 7;
+        g_ScratchPad.cells.words[0] = 0xC0 - (TASK(PartyMember)->unk_09 - i) * 2;
+        D_1F800008                  = -((TASK(PartyMember)->unk_09 - i) * 12);
+        span                        = TASK(PartyMember)->timer * 3 - i / 2;
+
+        /* The join face: this tick's rim against the rim point the previous tick left. */
+        g_ScratchPadVectors[1].vx = rim.vx;
+        g_ScratchPadVectors[1].vy = rim.vy;
+        g_ScratchPadVectors[3].vx = rim.vx;
+        g_ScratchPadVectors[3].vy = rim.vy;
+        g_ScratchPadVectors[1].vz = rim.vz - join;
+        g_ScratchPadVectors[3].vz = rim.vz - join / 2;
+        g_ScratchPadVectors[0].vx = FIXED_MUL(rsin(D_1F80000C), D_1F800008);
+        g_ScratchPadVectors[0].vy = FIXED_MUL(rcos(D_1F80000C), D_1F800008);
+        g_ScratchPadVectors[0].vz = D_1F800008 - span;
+        g_ScratchPadVectors[2].vx = g_ScratchPadVectors[0].vx;
+        g_ScratchPadVectors[2].vy = g_ScratchPadVectors[0].vy;
+        g_ScratchPadVectors[2].vz = D_1F800008 - span / 2;
+        x                         = (g_ScratchPadVectors[3].vx << 9) + TASK(PartyMember)->pos.x.fixed;
+        y                         = (g_ScratchPadVectors[3].vy << 9) + TASK(PartyMember)->pos.y.fixed;
+        tpage                     = getTPage(TPAGE_DEPTH_4BIT, TPAGE_ABR_ADD, 320, 256);
+        SetDrawMode((DR_MODE*)g_GfxPrimCursor, 0, 1, tpage, 0);
+        Area_CellAddPrim(x, y, 0, sizeof(DR_MODE));
+        poly = (POLY_G4*)g_GfxPrimCursor;
+        SetPolyG4(poly);
+        SetSemiTrans(poly, 1);
+        RotTransPers4(&g_ScratchPadVectors[0], &g_ScratchPadVectors[1], &g_ScratchPadVectors[2], &g_ScratchPadVectors[3], (long*)&poly->x0, (long*)&poly->x1, (long*)&poly->x2, (long*)&poly->x3,
+                      &depth, &flag);
+        if (TASK(PartyMember)->header.step == 2) {
+            /* The last tick darkens the join with the depth it has covered. */
+            fade       = TASK(PartyMember)->unk_09 + i - 24;
+            D_1F800004 = fade;
+            if (fade >= 17) {
+                fade       = 15;
+                D_1F800004 = fade;
+            }
+            shade      = 0xC0 - fade * 12;
+            D_1F800004 = 0x30 - D_1F800004 * 3;
+        } else {
+            D_1F800004 = 0x30 - i * 3;
+            shade      = 0xC0 - i * 12;
+        }
+        setRGB0(poly, 1, 1, 1);
+        setRGB1(poly, 1, 1, 1);
+        setRGB2(poly, shade, D_1F800004, D_1F800004);
+        if (i == 1) {
+            setRGB3(poly, i, i, i);
+        } else {
+            setRGB3(poly, shade, D_1F800004, D_1F800004);
+        }
+        Area_CellAddPrim(x, y, 0, sizeof(POLY_G4));
+
+        /* The near side of the join. */
+        g_ScratchPadVectors[1].vx = rim.vx;
+        g_ScratchPadVectors[1].vy = rim.vy;
+        g_ScratchPadVectors[3].vx = rim.vx;
+        g_ScratchPadVectors[3].vy = rim.vy;
+        g_ScratchPadVectors[1].vz = rim.vz - join / 2;
+        g_ScratchPadVectors[3].vz = rim.vz;
+        g_ScratchPadVectors[0].vx = FIXED_MUL(rsin(D_1F80000C), D_1F800008);
+        g_ScratchPadVectors[0].vy = FIXED_MUL(rcos(D_1F80000C), D_1F800008);
+        g_ScratchPadVectors[0].vz = D_1F800008 - span / 2;
+        g_ScratchPadVectors[2].vx = g_ScratchPadVectors[0].vx;
+        g_ScratchPadVectors[2].vy = g_ScratchPadVectors[0].vy;
+        g_ScratchPadVectors[2].vz = D_1F800008;
+        poly                      = (POLY_G4*)g_GfxPrimCursor;
+        SetPolyG4(poly);
+        SetSemiTrans(poly, 1);
+        RotTransPers4(&g_ScratchPadVectors[0], &g_ScratchPadVectors[1], &g_ScratchPadVectors[2], &g_ScratchPadVectors[3], (long*)&poly->x0, (long*)&poly->x1, (long*)&poly->x2, (long*)&poly->x3,
+                      &depth, &flag);
+        setRGB0(poly, shade, D_1F800004, D_1F800004);
+        setRGB1(poly, shade, D_1F800004, D_1F800004);
+        setRGB2(poly, shade, shade, shade);
+        setRGB3(poly, shade, shade, shade);
+        Area_CellAddPrim(x, y, 0, sizeof(POLY_G4));
+
+        /* The far side of the join. */
+        g_ScratchPadVectors[1].vx = rim.vx;
+        g_ScratchPadVectors[1].vy = rim.vy;
+        g_ScratchPadVectors[3].vx = rim.vx;
+        g_ScratchPadVectors[3].vy = rim.vy;
+        g_ScratchPadVectors[1].vz = rim.vz;
+        g_ScratchPadVectors[3].vz = rim.vz + join / 2;
+        g_ScratchPadVectors[0].vx = FIXED_MUL(rsin(D_1F80000C), g_ScratchPad.cells.words[0]);
+        g_ScratchPadVectors[0].vy = FIXED_MUL(rcos(D_1F80000C), g_ScratchPad.cells.words[0]);
+        g_ScratchPadVectors[0].vz = D_1F800008;
+        g_ScratchPadVectors[2].vx = g_ScratchPadVectors[0].vx;
+        g_ScratchPadVectors[2].vy = g_ScratchPadVectors[0].vy;
+        g_ScratchPadVectors[2].vz = D_1F800008 + span / 2;
+        poly                      = (POLY_G4*)g_GfxPrimCursor;
+        SetPolyG4(poly);
+        SetSemiTrans(poly, 1);
+        RotTransPers4(&g_ScratchPadVectors[0], &g_ScratchPadVectors[1], &g_ScratchPadVectors[2], &g_ScratchPadVectors[3], (long*)&poly->x0, (long*)&poly->x1, (long*)&poly->x2, (long*)&poly->x3,
+                      &depth, &flag);
+        setRGB0(poly, shade, shade, shade);
+        setRGB1(poly, shade, shade, shade);
+        setRGB2(poly, shade, D_1F800004, D_1F800004);
+        setRGB3(poly, shade, D_1F800004, D_1F800004);
+        Area_CellAddPrim(x, y, 0, sizeof(POLY_G4));
+
+        /* The outer face of the join, in a second packet, which leaves this tick's rim for the next tick. */
+        g_ScratchPadVectors[1].vx = rim.vx;
+        g_ScratchPadVectors[1].vy = rim.vy;
+        g_ScratchPadVectors[3].vx = rim.vx;
+        g_ScratchPadVectors[3].vy = rim.vy;
+        g_ScratchPadVectors[1].vz = rim.vz + join / 2;
+        g_ScratchPadVectors[3].vz = rim.vz + join;
+        g_ScratchPadVectors[0].vx = FIXED_MUL(rsin(D_1F80000C), g_ScratchPad.cells.words[0]);
+        g_ScratchPadVectors[0].vy = FIXED_MUL(rcos(D_1F80000C), g_ScratchPad.cells.words[0]);
+        g_ScratchPadVectors[0].vz = D_1F800008 + span / 2;
+        g_ScratchPadVectors[2].vx = g_ScratchPadVectors[0].vx;
+        g_ScratchPadVectors[2].vy = g_ScratchPadVectors[0].vy;
+        g_ScratchPadVectors[2].vz = D_1F800008 + span;
+        rim.vx                    = g_ScratchPadVectors[0].vx;
+        rim.vy                    = g_ScratchPadVectors[0].vy;
+        rim.vz                    = D_1F800008;
+        tpage                     = getTPage(TPAGE_DEPTH_4BIT, TPAGE_ABR_ADD, 320, 256);
+        SetDrawMode((DR_MODE*)g_GfxPrimCursor, 0, 1, tpage, 0);
+        Area_CellAddPrim(x, y, 0, sizeof(DR_MODE));
+        poly = (POLY_G4*)g_GfxPrimCursor;
+        SetPolyG4(poly);
+        SetSemiTrans(poly, 1);
+        RotTransPers4(&g_ScratchPadVectors[0], &g_ScratchPadVectors[1], &g_ScratchPadVectors[2], &g_ScratchPadVectors[3], (long*)&poly->x0, (long*)&poly->x1, (long*)&poly->x2, (long*)&poly->x3,
+                      &depth, &flag);
+        setRGB0(poly, shade, D_1F800004, D_1F800004);
+        if (i == 1) {
+            setRGB1(poly, i, i, i);
+        } else {
+            setRGB1(poly, shade, D_1F800004, D_1F800004);
+        }
+        setRGB2(poly, 1, 1, 1);
+        setRGB3(poly, 1, 1, 1);
+        Area_CellAddPrim(x, y, 0, sizeof(POLY_G4));
+        join = span;
+    }
 }
 #else
 INCLUDE_ASM(func_801EFC44);

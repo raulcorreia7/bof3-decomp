@@ -176,7 +176,114 @@ MATCH void func_801EF654(void) {
 }
 
 #ifdef NON_MATCHING
+/* Draws the magic124 ribbon: timer segments stepping from the effect position along unk_14, each a pair of semi-transparent Gouraud bands swung by a sine of the segment and unk_0B, fading to white at the tail. */
 NON_MATCHING void func_801EF6E8(void) {
+    POLY_G4* prim;
+    s16*     params;
+    s32      swing;
+    s16      angle;
+    s16      sway;
+    u8       grey;
+    u8       red;
+    u8       green;
+    u8       blue;
+    u8       i;
+
+    params    = g_ScratchPad.cells.halves;
+    params[1] = (rand() & 1) + 3;
+    params[6] = g_ScratchPadVectors[0].vx = TASK(PartyMember)->screen_x.value;
+    params[7] = g_ScratchPadVectors[0].vy = TASK(PartyMember)->screen_y.value;
+    red                                   = TASK(PartyMember)->unk_09 * 8;
+    green                                 = TASK(PartyMember)->unk_09 * 4;
+    grey                                  = TASK(PartyMember)->unk_09 * 15;
+    blue                                  = grey;
+    angle                                 = TASK(PartyMember)->unk_14 - 0x400;
+    sway                                  = FIXED_MUL(rsin((TASK(PartyMember)->param.unk_0B & 0x1F) << 7), 4);
+    params[4]                             = g_ScratchPadVectors[0].vx + FIXED_MUL(rsin(angle), sway);
+    params[5]                             = g_ScratchPadVectors[0].vy + FIXED_MUL(rcos(angle), sway);
+    params[2]                             = ratan2(params[6] - params[4], params[7] - params[5]) - 0x400;
+    for (i = 1; i < TASK(PartyMember)->timer + 1; i++) {
+        params[0] = params[1];
+        if ((i & 7) == 0) {
+            params[1] = (rand() & 3) + 2;
+        }
+        params[6] = params[4];
+        params[7] = params[5];
+        g_ScratchPadVectors[0].vx += FIXED_MUL(rsin(TASK(PartyMember)->unk_14), 16);
+        g_ScratchPadVectors[0].vy += FIXED_MUL(rcos(TASK(PartyMember)->unk_14), 16);
+        swing     = FIXED_MUL(rsin(i * (0x800 / TASK(PartyMember)->timer)), (rand() & 0xF) + 0x18);
+        sway      = FIXED_MUL(rsin(((TASK(PartyMember)->param.unk_0B + i) & 0x1F) << 7), swing);
+        params[4] = g_ScratchPadVectors[0].vx + FIXED_MUL(rsin(angle), sway);
+        params[5] = g_ScratchPadVectors[0].vy + FIXED_MUL(rcos(angle), sway);
+        params[3] = params[2] + 0x400;
+        params[2] = ratan2(params[6] - params[4], params[7] - params[5]);
+
+        prim = (POLY_G4*)g_GfxPrimCursor;
+        SetPolyG4(prim);
+        SetSemiTrans(prim, 1);
+        params[3] += 0x400;
+        params[2] += 0x400;
+        setXY4(prim, params[6], params[7], params[6] + FIXED_MUL(rsin(params[3]), params[0]), params[7] + FIXED_MUL(rcos(params[3]), params[0]), params[4], params[5],
+               params[4] + FIXED_MUL(rsin(params[2]), params[1]), params[5] + FIXED_MUL(rcos(params[2]), params[1]));
+        setRGB0(prim, grey, grey, grey);
+        setRGB1(prim, red, green, blue);
+        setRGB2(prim, grey, grey, grey);
+        setRGB3(prim, red, green, blue);
+        if (i == TASK(PartyMember)->timer) {
+            setRGB2(prim, 1, 1, 1);
+            setRGB3(prim, 1, 1, 1);
+        }
+        GFX_AddPrim(BMAGIC_LAYER_OVER_BATTLERS, sizeof(POLY_G4));
+
+        prim = (POLY_G4*)g_GfxPrimCursor;
+        SetPolyG4(prim);
+        SetSemiTrans(prim, 1);
+        setXY4(prim, params[6] + FIXED_MUL(rsin(params[3]), params[0]), params[7] + FIXED_MUL(rcos(params[3]), params[0]), params[6] + FIXED_MUL(rsin(params[3]), params[0] + 8),
+               params[7] + FIXED_MUL(rcos(params[3]), params[0] + 8), params[4] + FIXED_MUL(rsin(params[2]), params[1]), params[5] + FIXED_MUL(rcos(params[2]), params[1]),
+               params[4] + FIXED_MUL(rsin(params[2]), params[1] + 8), params[5] + FIXED_MUL(rcos(params[2]), params[1] + 8));
+        setRGB0(prim, red, green, blue);
+        setRGB1(prim, 1, 1, 1);
+        setRGB2(prim, red, green, blue);
+        setRGB3(prim, 1, 1, 1);
+        if (i == TASK(PartyMember)->timer) {
+            setRGB2(prim, 1, 1, 1);
+            setRGB3(prim, 1, 1, 1);
+        }
+        GFX_AddPrim(BMAGIC_LAYER_OVER_BATTLERS, sizeof(POLY_G4));
+
+        prim = (POLY_G4*)g_GfxPrimCursor;
+        SetPolyG4(prim);
+        SetSemiTrans(prim, 1);
+        params[3] -= 0x800;
+        params[2] -= 0x800;
+        setXY4(prim, params[6] + FIXED_MUL(rsin(params[3]), params[0]), params[7] + FIXED_MUL(rcos(params[3]), params[0]), params[6], params[7], params[4] + FIXED_MUL(rsin(params[2]), params[1]),
+               params[5] + FIXED_MUL(rcos(params[2]), params[1]), params[4], params[5]);
+        setRGB0(prim, red, green, blue);
+        setRGB1(prim, grey, grey, grey);
+        setRGB2(prim, red, green, blue);
+        setRGB3(prim, grey, grey, grey);
+        if (i == TASK(PartyMember)->timer) {
+            setRGB2(prim, 1, 1, 1);
+            setRGB3(prim, 1, 1, 1);
+        }
+        GFX_AddPrim(BMAGIC_LAYER_OVER_BATTLERS, sizeof(POLY_G4));
+
+        prim = (POLY_G4*)g_GfxPrimCursor;
+        SetPolyG4(prim);
+        SetSemiTrans(prim, 1);
+        setXY4(prim, params[6] + FIXED_MUL(rsin(params[3]), params[0] + 8), params[7] + FIXED_MUL(rcos(params[3]), params[0] + 8), params[6] + FIXED_MUL(rsin(params[3]), params[0]),
+               params[7] + FIXED_MUL(rcos(params[3]), params[0]), params[4] + FIXED_MUL(rsin(params[2]), params[1] + 8), params[5] + FIXED_MUL(rcos(params[2]), params[1] + 8),
+               params[4] + FIXED_MUL(rsin(params[2]), params[1]), params[5] + FIXED_MUL(rcos(params[2]), params[1]));
+        setRGB0(prim, 1, 1, 1);
+        setRGB1(prim, red, green, blue);
+        setRGB2(prim, 1, 1, 1);
+        setRGB3(prim, red, green, blue);
+        if (i == TASK(PartyMember)->timer) {
+            setRGB2(prim, 1, 1, 1);
+            setRGB3(prim, 1, 1, 1);
+        }
+        GFX_AddPrim(BMAGIC_LAYER_OVER_BATTLERS, sizeof(POLY_G4));
+    }
 }
 #else
 INCLUDE_ASM(func_801EF6E8);

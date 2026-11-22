@@ -24,6 +24,9 @@ extern BattleEffect* D_801EC2E0;
 
 extern BattleEffectHalfColumn D_801EC388[];
 
+/* The direction the magic002 sphere's two shades are measured against. */
+extern SVECTOR D_801EEC10;
+
 void func_801EF030(s32 x, s32 y, u16 radius, s32 phase);
 void func_801EF1FC(s16 x0, s16 y0, s16 x1, s16 y1, s16 x2, s16 y2);
 
