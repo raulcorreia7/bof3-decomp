@@ -8,7 +8,6 @@
 #include "area/spad.h"
 
 extern u8  D_8014686B;
-extern u8  D_80147CC8;
 /* The disc's colour rows: one byte table per channel, indexed by the work record's byte 6. */
 extern u8  D_801F4D5C[];
 extern u8  D_801F4D5D[];

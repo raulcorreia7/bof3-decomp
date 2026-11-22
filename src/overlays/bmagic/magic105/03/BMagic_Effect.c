@@ -55,8 +55,8 @@ MATCH void func_801EED1C(void) {
     for (i = 0; i < 16; i++) {
         MEM_PTR(u16, AREA_PALETTE_UPLOAD_ROW(AREA_PALETTE_BATL_OVR_ROW))[i] = MEM_PTR(u16, AREA_PALETTE_ARENA_ROW(AREA_PALETTE_BATL_OVR_ROW))[i] | PSX_COLOR_STP_BIT;
     }
-    *MEM_PTR(u16, AREA_PALETTE_UPLOAD_ROW(AREA_PALETTE_BATL_OVR_ROW)) = 0;
-    g_GfxPalettePending                                               = 1;
+    g_AreaPaletteCopy->rows[AREA_PALETTE_BATL_OVR_ROW].colors[0] = 0;
+    g_GfxPalettePending                                          = 1;
     SND_SEQueueSelection(EMI_SE_ID(SND_BANK_COMMON, 0x00));
     g_Task->header.mode++;
 }

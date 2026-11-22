@@ -21,12 +21,16 @@ void func_801F2E18(void);
 /* The palette row clear the setup step enters. */
 void func_801F30CC(void);
 
-/* The mode gate the step tests. */
-u8 func_801F34FC(void);
+/* Projects the 14 points, then steps and draws the six records at AREA_WORK; nonzero while any is active. */
+u8   func_801F34FC(void);
+/* Draws one rising record of AREA_WORK as three semi-transparent triangles. */
+void func_801F3124(u8* data);
 
 /* A 16-byte point row of the table at D_801F3D80. */
 typedef VECTOR AreaPoint;
 
 extern AreaPoint D_801F3D80[];
+/* The sound effect ids the rising records play in turn, after the 14 points of D_801F3D80. */
+extern u16       D_801F3E60[];
 
 #endif

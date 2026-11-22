@@ -1,0 +1,1 @@
+{"function": "emi/scenario/scena14/00@0x801FA9C8", "tried": "33-case script in its own unit; g_PartySize for the restore loop bound; a case-scoped GameStateIndex pointer in case 22. MATCH", "first_diff": "", "score": 0}

@@ -50,9 +50,6 @@ extern Actor g_PartyActors[];
 
 /* The work word the stage route reads. */
 extern s32          D_80147AC4;
-extern s8           D_80147CB9[];
-extern s8           D_80147CBA[];
-extern s32          D_80147CC4[];
 /* The shared route steps the stage table indexes. */
 extern s8           D_80181B00[];
 extern s8           D_80181B01[];

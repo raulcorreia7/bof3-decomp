@@ -73,8 +73,8 @@ NON_MATCHING void Area_AddGridActor(void) {
     rot = RotTransPers(&vec, &sxy, &p, &flag);
 
     FIELD(s32, g_Task, 0x60) = rot;
-    FIELD(u16, g_Task, 0x2E) = (u16)sxy;
-    FIELD(u16, g_Task, 0x30) = (u16)(sxy >> 16);
+    g_Task->screen_x         = (u16)sxy;
+    g_Task->screen_y         = (u16)(sxy >> 16);
     if (g_AreaGridActorCount < 0x28) {
         g_AreaGridActors[g_AreaGridActorCount] = (s32)g_Task;
         g_AreaGridActorCount++;

@@ -222,6 +222,7 @@ g_ActorWalkDestY = { addr = 0x8014690C, size = 0x4, alias = true, source = "y of
 D_80146910 = { addr = 0x80146910, size = 0x4, alias = true, source = "The Actor.unk_88 word (byte 0x88) seen as a column of g_Actors" }
 g_PartyActors = { addr = 0x80147A58, source = "The four party actor rows after g_Actors; Area_UpdateParty steps them and the walk and adopt scripts index them by party slot." }
 g_AreaFocusY = { addr = 0x80147A90, source = "Y focus of the area." }
+g_ActorTurnRamps = { addr = 0x80147CB8, type = "ActorTurnRamp", size = 0x50, source = "The turn ramps of the four party slots and one non-party slot: the steps and frame counts that turn an actor's angle words over several frames." }
 g_ScriptWorkRecord = { addr = 0x80148208, type = "Actor", source = "The script work record." }
 g_ScriptState = { addr = 0x80148210, type = "ScriptState", source = "The script state." }
 g_AreaGridActors = { addr = 0x8014828C, source = "The grid actors queued for the frame, as task pointers." }

@@ -27,14 +27,14 @@ NON_MATCHING void func_801EED18(void) {
     g_Task->param.unk_0B += 1;
     BMAGIC_BRIGHTEN_PALETTE_ROW(dst, src, i);
     i   = 0;
-    dst = MEM_PTR(u16, AREA_PALETTE_UPLOAD_ROW(AREA_PALETTE_BMAGIC_ROW));
-    src = MEM_PTR(u16, AREA_PALETTE_ARENA_33C00);
+    dst = g_AreaPaletteCopy->rows[AREA_PALETTE_BMAGIC_ROW].colors;
+    src = g_AreaPaletteArena->rows[AREA_PALETTE_BMAGIC_ROW].colors;
     for (; i < 16; i++) {
         *dst++ = *src++ | PSX_COLOR_STP_BIT;
     }
-    *MEM_PTR(u16, AREA_PALETTE_UPLOAD_ROW(AREA_PALETTE_BATL_OVR_ROW)) = *MEM_PTR(u16, AREA_PALETTE_ARENA_ROW(AREA_PALETTE_BATL_OVR_ROW));
-    *MEM_PTR(u16, AREA_PALETTE_UPLOAD_ROW(AREA_PALETTE_BMAGIC_ROW))   = *MEM_PTR(u16, AREA_PALETTE_ARENA_33C00);
-    g_GfxPalettePending                                               = 1;
+    g_AreaPaletteCopy->rows[AREA_PALETTE_BATL_OVR_ROW].colors[0] = g_AreaPaletteArena->rows[AREA_PALETTE_BATL_OVR_ROW].colors[0];
+    g_AreaPaletteCopy->rows[AREA_PALETTE_BMAGIC_ROW].colors[0]   = g_AreaPaletteArena->rows[AREA_PALETTE_BMAGIC_ROW].colors[0];
+    g_GfxPalettePending                                          = 1;
 }
 #else
 INCLUDE_ASM(func_801EED18);

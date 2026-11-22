@@ -33,7 +33,7 @@ NON_MATCHING void func_801D7EB0(s32 x, s32 y) {
         }
         work = TASK(FishingState);
         if (work->pos_x == row) {
-            FIELD(s16, work, 0x36u) = slot;
+            work->motion.half.cursor = slot;
         }
         if (D_80145E94[0] == 2 && !(((work = TASK(FishingState))->counter_07) & 1) && work->pos_x == row) {
             UI_TextDraw(x + 5, (s16)icon_y, UI_TEXT_DIM, ITEM_NAME_LENGTH, (u8*)&g_Accessories[*slot_list]);

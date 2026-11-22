@@ -68,7 +68,8 @@ extern u8  D_801F6B70;
 extern u8  D_801F6B74;
 
 void       func_801F3778(u8 count, Pos2* current, RECT* rect);
-void       func_801F3898(Pos2 first, Pos2 second, u8 shade);
+/* func_801F3898 */
+void       Area_DrawLine(Pos2 first, Pos2 second, u8 shade);
 /* The two sprite tables the step draws index by the timer's low two bits. */
 extern s32 D_801F62CC[];
 extern s32 D_801F62DC[];

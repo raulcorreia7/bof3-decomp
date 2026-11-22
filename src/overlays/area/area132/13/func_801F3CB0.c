@@ -18,11 +18,7 @@ MATCH void func_801F3CB0(void) {
     SetPolyG4(prim);
     SetSemiTrans(prim, 0);
     setXY4(prim, 0, 0, SCREEN_WIDTH, 0, 0, 200, SCREEN_WIDTH, 200);
-    prim->r0 = prim->r1 = 0;
-    prim->g0 = prim->g1 = 200;
-    prim->b0 = prim->b1 = 255;
-    prim->r2 = prim->r3 = 0;
-    prim->g2 = prim->g3 = 0;
-    prim->b2 = prim->b3 = 32;
+    setRGB0(prim, prim->r1 = 0, prim->g1 = 200, prim->b1 = 255);
+    setRGB2(prim, prim->r3 = 0, prim->g3 = 0, prim->b3 = 32);
     GFX_AddPrim(GFX_LAYER_BACKDROP, sizeof(POLY_G4));
 }

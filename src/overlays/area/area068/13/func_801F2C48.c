@@ -2,11 +2,11 @@
 
 MATCH void func_801F2C48(void) {
     void** scratchpad;
-    void*  work;
+    Actor* work;
 
-    scratchpad            = SP_PTR(void*, 0u);
-    work                  = scratchpad[0x44u / sizeof(void*)];
-    FIELD(u8, work, 0x9u) = 0xB4;
-    work                  = g_Task;
-    FIELD(u8, work, 0x1u) = 1;
+    scratchpad        = SP_PTR(void*, 0u);
+    work              = scratchpad[0x44u / sizeof(void*)];
+    work->timer       = 0xB4;
+    work              = g_Task;
+    work->header.mode = 1;
 }

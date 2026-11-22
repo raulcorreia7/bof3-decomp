@@ -39,8 +39,8 @@ MATCH void func_801EED04(void) {
     for (; i < 16; i++) {
         *dst++ = *src++ | PSX_COLOR_STP_BIT;
     }
-    *MEM_PTR(u16, AREA_PALETTE_UPLOAD_ROW(AREA_PALETTE_BATL_OVR_ROW)) = 0;
-    g_GfxPalettePending                                               = 1;
+    g_AreaPaletteCopy->rows[AREA_PALETTE_BATL_OVR_ROW].colors[0] = 0;
+    g_GfxPalettePending                                          = 1;
     g_Task->header.mode += 1;
 }
 

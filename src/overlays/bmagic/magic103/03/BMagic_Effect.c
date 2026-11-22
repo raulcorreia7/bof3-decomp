@@ -29,15 +29,15 @@ MATCH void func_801EEC70(void) {
     g_BattleEffects[slot].header.mode  = 0;
     g_Task->param.unk_0B += 1;
     /* Copies the first two colour rows of arena palette 26 into the work copy with STP set, then clears colour 0 of each. */
-    dst = MEM_PTR(u16, AREA_PALETTE_UPLOAD_ROW(AREA_PALETTE_BATL_OVR_ROW));
-    src = MEM_PTR(u16, AREA_PALETTE_ARENA_ROW(AREA_PALETTE_BATL_OVR_ROW));
+    dst = g_AreaPaletteCopy->rows[AREA_PALETTE_BATL_OVR_ROW].colors;
+    src = g_AreaPaletteArena->rows[AREA_PALETTE_BATL_OVR_ROW].colors;
     for (i = 1; i < 16; i++) {
         dst[i]      = src[i] | PSX_COLOR_STP_BIT;
         dst[i + 16] = src[i + 16] | PSX_COLOR_STP_BIT;
     }
-    MEM_PTR(u16, AREA_PALETTE_UPLOAD_ROW(AREA_PALETTE_BATL_OVR_ROW))[0]  = 0;
-    MEM_PTR(u16, AREA_PALETTE_UPLOAD_ROW(AREA_PALETTE_BATL_OVR_ROW))[16] = 0;
-    g_GfxPalettePending                                                  = 1;
+    g_AreaPaletteCopy->rows[AREA_PALETTE_BATL_OVR_ROW].colors[0]  = 0;
+    g_AreaPaletteCopy->rows[AREA_PALETTE_BATL_OVR_ROW].colors[16] = 0;
+    g_GfxPalettePending                                           = 1;
     SND_SEQueueSelection(EMI_SE_ID(SND_BANK_COMMON, 0));
     g_Task->header.mode += 1;
 }

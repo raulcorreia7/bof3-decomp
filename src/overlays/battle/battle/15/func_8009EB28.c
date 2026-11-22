@@ -18,7 +18,7 @@ MATCH void func_8009EB28(void) {
 
     flagp   = &g_Battle.flags;
     flag    = *flagp;
-    battler = (*(u8*)&g_Battle.active_battler);
+    battler = g_Battle.active_battler;
     *flagp  = flag | BATTLE_STATE_DAMAGE_APPLIED;
     if (BATTLER_IS_PLAYER(battler)) {
         base = g_Game.members[battler].chr.stats.power;
