@@ -1,6 +1,6 @@
 #include "game_00.h"
 
-MATCH u8 func_801B9F08(u8 arg0, u8 arg1, s8 arg2) {
+MATCH u8 func_801B9F08(u8 cell0, u8 cell1, s8 cell2) {
     u8  cells[3];
     s32 count;
     u8* pos;
@@ -8,9 +8,9 @@ MATCH u8 func_801B9F08(u8 arg0, u8 arg1, s8 arg2) {
     s32 index;
     s32 inner;
 
-    cells[0] = arg0;
-    cells[1] = arg1;
-    cells[2] = arg2;
+    cells[0] = cell0;
+    cells[1] = cell1;
+    cells[2] = cell2;
 
     count = 0;
     pos   = cells;
@@ -25,7 +25,7 @@ loop:
 done:
 
     for (index = 0; index < (count & BYTE_MASK); index++)
-        cells[index] = ((u8*)&g_ScratchPad)[cells[index]];
+        cells[index] = g_ScratchPad.cells.bytes[cells[index]];
 
     if ((count & BYTE_MASK) == 2 && cells[0] == 0x70 && cells[1] == cells[0])
         return 0x70;
