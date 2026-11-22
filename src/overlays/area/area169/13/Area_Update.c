@@ -50,7 +50,7 @@ MATCH void Area_Update(void) {
         }
         RotTransPers4(&g_ScratchPadVectors[0], &g_ScratchPadVectors[1], &g_ScratchPadVectors[2], &g_ScratchPadVectors[3], (long*)&prim->x0, (long*)&prim->x1, (long*)&prim->x2, (long*)&prim->x3,
                       &depth, &flag);
-        Area_ApplyTileToQuad((TASK(Actor)->direction << 21) | 0x12510000 | (0x10C - i), prim, 1);
+        Area_ApplyTileToQuad((TASK(Actor)->direction << 21) | (0x1251 << 16) | (0x10C - i), prim, 1);
         GFX_AddPrim(GFX_LAYER_FIELD_SCENE, sizeof(POLY_FT4));
     }
 }
