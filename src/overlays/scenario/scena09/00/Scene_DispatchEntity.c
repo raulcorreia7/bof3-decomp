@@ -126,7 +126,7 @@ NON_MATCHING void func_801F7920(void) {
             SYS_SetFlag(g_SceneFlags, 0x2F);
             g_ScenarioState.state_04 = 0xF;
             g_AreaDrawFlags          = 0;
-            g_ScenarioState.step_05  = 0xA;
+            g_ScenarioState.step     = 0xA;
             g_ScriptVars[0]          = 0;
             switch (g_EmiLoadedCharacterIndex & 0x7F) {
                 case 7:
@@ -182,7 +182,7 @@ NON_MATCHING void func_801F7920(void) {
         }
         if (SYS_TestFlag(g_SceneFlags, 0x36) && SYS_TestFlag(g_SceneFlags, 0x31) && g_GameCellType == 0 && !SYS_TestFlag(g_SceneFlags, 0x34)) {
             Game_SetScriptActive();
-            g_ScenarioState.step_05 = 0x46;
+            g_ScenarioState.step = 0x46;
             D_80146258 |= 8;
             g_ScriptVars[0]          = 0;
             g_ScenarioState.state_04 = 0xF;
@@ -193,7 +193,7 @@ NON_MATCHING void func_801F7920(void) {
             SYS_SetFlag(g_SceneFlags, 0x32);
             g_AreaDrawFlags = 0;
             Game_SetScriptActive();
-            g_ScenarioState.step_05  = 0x3C;
+            g_ScenarioState.step     = 0x3C;
             g_ScriptVars[0]          = 0;
             g_ScenarioState.state_04 = 0xF;
         }
@@ -201,7 +201,7 @@ NON_MATCHING void func_801F7920(void) {
             D_80146258 |= 8;
             g_AreaDrawFlags = 0;
             Game_SetScriptActive();
-            g_ScenarioState.step_05  = 0x6E;
+            g_ScenarioState.step     = 0x6E;
             g_ScriptVars[0]          = 0;
             g_ScenarioState.state_04 = 0xF;
         }
@@ -217,7 +217,7 @@ NON_MATCHING void func_801F7920(void) {
             g_AreaCameraRefreshCount = 2;
             g_ScenarioState.state_04 = 3;
             g_AreaDrawFlags          = 0;
-            g_ScenarioState.step_05  = 0;
+            g_ScenarioState.step     = 0;
             g_ScriptVars[0]          = 0;
             g_AreaCameraOffsetZ += 0xA80;
             switch (g_EmiLoadedCharacterIndex & 0x7F) {
@@ -257,7 +257,7 @@ NON_MATCHING void func_801F7920(void) {
         if (!SYS_TestFlag(g_SceneFlags, 0)) {
             g_AreaDrawFlags          = 0;
             g_ScenarioState.state_04 = 1;
-            g_ScenarioState.step_05  = 0;
+            g_ScenarioState.step     = 0;
             g_ScriptVars[0]          = 0;
             switch (g_EmiLoadedCharacterIndex & 0x7F) {
                 case 7:
@@ -294,7 +294,7 @@ NON_MATCHING void func_801F7920(void) {
         if (SYS_TestFlag(g_SceneFlags, 6) && !SYS_TestFlag(g_SceneFlags, 7)) {
             g_AreaDrawFlags          = 0;
             g_ScenarioState.state_04 = 4;
-            g_ScenarioState.step_05  = 0;
+            g_ScenarioState.step     = 0;
             g_ScriptVars[0]          = 0;
             g_ScriptVars[1]          = 0;
             g_ScriptVars[2]          = 0;
@@ -320,7 +320,7 @@ NON_MATCHING void func_801F7920(void) {
                 if (SYS_TestFlag(g_SceneFlags, 0x38) && g_GameCellType == 2) {
                     g_AreaDrawFlags = 0;
                     Game_SetScriptActive();
-                    g_ScenarioState.step_05  = 0x78;
+                    g_ScenarioState.step     = 0x78;
                     g_ScriptVars[0]          = 0;
                     g_ScenarioState.state_04 = 0xF;
                 }
@@ -333,7 +333,7 @@ NON_MATCHING void func_801F7920(void) {
         if (!SYS_TestFlag(g_SceneFlags, 0x13)) {
             Game_SetScriptActive();
             g_ScenarioState.state_04    = 7;
-            g_ScenarioState.step_05     = 0;
+            g_ScenarioState.step        = 0;
             g_ScriptVars[0]             = 0;
             g_ScriptVars[1]             = 0;
             g_ScriptVars[2]             = 0;
@@ -370,7 +370,7 @@ NON_MATCHING void func_801F7920(void) {
         g_AreaDrawFlags = 0;
         Game_SetScriptActive();
         g_ScenarioState.state_04 = 8;
-        g_ScenarioState.step_05  = 0x1E;
+        g_ScenarioState.step     = 0x1E;
         g_ScriptVars[0]          = 0;
         g_ScriptVars[1]          = 0;
         g_ScriptVars[2]          = 0;

@@ -2,8 +2,8 @@
 
 MATCH void GFX_PaletteCopyAnimationColors(GraphicsPaletteAnimation* slot) {
     GraphicsPaletteAnimation* slot_copy;
-    u8*                       owner;
-    u8*                       entry;
+    Actor*                    owner;
+    PaletteAnimationStep*     entry;
     volatile u16*             base;
     u32                       index;
     u32                       stride;
@@ -22,30 +22,30 @@ MATCH void GFX_PaletteCopyAnimationColors(GraphicsPaletteAnimation* slot) {
     u32 i;
 
     slot_copy = slot;
-    owner     = slot_copy->owner;
-    index     = owner[0x28];
+    owner     = (Actor*)slot_copy->owner;
+    index     = owner->palette_8bit;
     value     = slot_copy->unk_03;
     divisor   = s_PaletteSlotDivisors[index];
     quotient  = value / divisor;
     remainder = value % divisor;
-    flags     = owner[0x24];
+    flags     = owner->active_flags;
     stride    = s_PaletteSlotStrides[index];
     product   = stride * remainder;
     entry     = slot_copy->current_entry;
-    dst       = entry[0] + product;
-    src       = entry[1] + product;
+    dst       = entry->dst_column + product;
+    src       = entry->src_column + product;
     if ((flags & 0x4u) != 0u) {
         start = quotient + 0x10u;
     } else {
         start = quotient;
     }
     i = 0u;
-    if (entry[2] != 0u) {
+    if (entry->count != 0u) {
         base = g_GraphicsPaletteDst + ((start & BYTE_MASK) << 8);
         do {
             base[(dst & BYTE_MASK) + (i & BYTE_MASK)] = base[(src & BYTE_MASK) + (i & BYTE_MASK)];
             i++;
-        } while ((i & BYTE_MASK) < slot_copy->current_entry[2]);
+        } while ((i & BYTE_MASK) < slot_copy->current_entry->count);
     }
     g_GfxPalettePending = 1u;
 }

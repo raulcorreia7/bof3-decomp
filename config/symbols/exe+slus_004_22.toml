@@ -19,7 +19,7 @@ g_AreaMapBundle = { addr = 0x80104000, type = "AreaMapBundle", size = 0x30, sour
 g_AreaCells = { addr = 0x8012C000, size = 0x1880, source = "The area cells." }
 g_AreaCellPrims = { addr = 0x8012D880, size = 0x14000, source = "The primitives of the area cells." }
 g_AreaCellGrid = { addr = 0x80141880, type = "u16", size = 0xC40, source = "The grid of area cells." }
-g_AreaCellPrimFreeIds = { addr = 0x801424C0, type = "u16", size = 0x800, source = "Free primitive row ids of the area cells." }
+g_AreaCellPrimFreeSlots = { addr = 0x801424C0, type = "u16", size = 0x800, source = "The free primitive-ring slots of the area cells: Area_CellAllocPrimSlot pops from it and Area_CellFreePrimSlot pushes to it." }
 g_AreaCellPacketLists = { addr = 0x80142CC0, type = "AreaCellPacketList", alias = true, source = "D_80142CC0 as the cell ordering lists: per grid row, six lists of a first and a last packet. Area_CellDrawRing appends to them by the last packet; Area_DrawGridActors splices a whole list in by its first and last." }
 D_80142CC4 = { addr = 0x80142CC4, alias = true, source = "The last-packet word of the first cell ordering list (g_AreaCellPacketLists[0][0].tail), which the cell draws index by byte offset." }
 g_AreaCellPackets = { addr = 0x80143740, source = "Cell packet words: layer in the top byte, depth in the high halfword, primitive index in the low bits." }
@@ -295,7 +295,7 @@ g_AreaCameraSpeed = { addr = 0x8014932E, type = "s16", source = "Step of the are
 g_AreaCameraHeightDelta = { addr = 0x80149330, type = "s16", source = "Height step of the area camera." }
 g_AreaCameraMoving = { addr = 0x80149332, type = "u8", source = "Tells whether the area camera is moving." }
 g_AreaCameraRefreshCount = { addr = 0x80149333, type = "u8", source = "Frames the area camera keeps refreshing." }
-g_AreaCellPrimFreeIndex = { addr = 0x80149334, type = "u16", source = "Area_CellAllocPrimRow advances it past the popped id and Area_CellFreePrimRow steps it back before storing; 0 means no id is left" }
+g_AreaCellPrimFreeIndex = { addr = 0x80149334, type = "u16", source = "Area_CellAllocPrimSlot advances it past the popped slot and Area_CellFreePrimSlot steps it back before storing; 0 means no slot is left" }
 g_AreaTileRemainderY = { addr = 0x80149338, type = "s16", source = "Y remainder of the area tiles." }
 g_AreaSceneMode = { addr = 0x8014933B, type = "u8", source = "Mode of the area scene." }
 g_AreaCellPacketCount = { addr = 0x8014933D, source = "Number of words in the cell packet list." }
@@ -481,9 +481,9 @@ Area_InitMapRenderer = { addr = 0x80153DE8, type = "func", source = "Initializes
 Area_CellGet = { addr = 0x801541C0, type = "func", source = "Returns the area cell at panel coordinates." }
 Area_CellUpload = { addr = 0x80154294, type = "func", source = "Uploads an area cell." }
 Area_BundleApplyObjects = { addr = 0x80154438, type = "func", source = "Applies each area map bundle object record to its selected map row." }
-Area_CellAllocPrimRow = { addr = 0x8015456C, type = "func", source = "Allocates a primitive row for an area cell." }
-Area_CellRequestRows = { addr = 0x801545B4, type = "func", source = "Queues the rows of an area cell." }
-Area_CellFreePrimRow = { addr = 0x80154664, type = "func", source = "Frees a primitive row of the area cells." }
+Area_CellAllocPrimSlot = { addr = 0x8015456C, type = "func", source = "Pops the primitive-ring slot the next area cell draws with; 0 when the ring is empty." }
+Area_CellReleasePrims = { addr = 0x801545B4, type = "func", source = "Releases an area cell's primitive-ring slot and the two link slots its second prim row holds." }
+Area_CellFreePrimSlot = { addr = 0x80154664, type = "func", source = "Pushes a primitive-ring slot back onto the free ring." }
 Area_CellRefreshGrid = { addr = 0x80154698, type = "func", source = "Refreshes the area cell grid." }
 Area_HeightSample = { addr = 0x8015477C, type = "func", source = "Returns the ground height at a point." }
 Area_HeightGet = { addr = 0x80154ABC, type = "func", source = "the body returns g_AreaMapBundle.height" }

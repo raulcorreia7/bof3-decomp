@@ -29,7 +29,7 @@ MATCH void func_801F35B0(void) {
         if (TASK(Actor)->direction != 0) {
             prim = g_AreaCellPrims[id][1].pad1;
             if (prim == 0) {
-                prim                        = Area_CellAllocPrimRow();
+                prim                        = Area_CellAllocPrimSlot();
                 g_AreaCellPrims[id][1].pad1 = prim;
                 row_id                      = prim & HALF_MASK;
                 Area_ApplyTileToQuad(*(u32*)(entry + 4), &g_AreaCellPrims[row_id][0], 2);
@@ -37,7 +37,7 @@ MATCH void func_801F35B0(void) {
         } else {
             prim = g_AreaCellPrims[id][1].pad2;
             if (prim == 0) {
-                prim                        = Area_CellAllocPrimRow();
+                prim                        = Area_CellAllocPrimSlot();
                 g_AreaCellPrims[id][1].pad2 = prim;
                 row_id                      = prim & HALF_MASK;
                 Area_ApplyTileToQuad(*(u32*)(entry + 4), &g_AreaCellPrims[row_id][0], 2);

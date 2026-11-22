@@ -571,13 +571,13 @@ MATCH void func_801F103C(void) {
     g_AreaCameraRefreshCount  = 3;
     for (row = 0; row < 56; row++) {
         for (col = 0; col < 28; col++) {
-            cell          = &g_AreaCells[row][col];
-            cell->prim_id = 0;
+            cell            = &g_AreaCells[row][col];
+            cell->prim_slot = 0;
             BMagic_ProjectCell(row, col, cell);
         }
     }
     row   = 0x3FF;
-    order = &g_AreaCellPrimFreeIds[0x3FF];
+    order = &g_AreaCellPrimFreeSlots[0x3FF];
     for (; row >= 0; row--) {
         *order = row;
         order--;

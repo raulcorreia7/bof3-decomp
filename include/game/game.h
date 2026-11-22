@@ -55,15 +55,27 @@ typedef struct PaletteFade {
 ASSERT_OFFSET(PaletteFade, target, 0x08);
 ASSERT_SIZE(PaletteFade, 0x0C);
 
+/* One 4-byte step of a palette animation: the destination and source cell
+ * columns, the cells to copy and the frames to hold. A step whose first byte is
+ * GAME_NONE ends the list; its second byte is the step count back to the loop. */
+typedef struct PaletteAnimationStep {
+    u8 dst_column; /* 0x00 */
+    u8 src_column; /* 0x01 */
+    u8 count;      /* 0x02 */
+    u8 frames;     /* 0x03 */
+} PaletteAnimationStep;
+
+ASSERT_SIZE(PaletteAnimationStep, 0x04);
+
 /* One 0x10-byte slot of the palette animation table at g_PaletteAnimations; bit 0 of flags marks it in use. */
 typedef struct GraphicsPaletteAnimation {
-    u8  flags;
-    u8  unk_01;
-    u8  unk_02;
-    u8  unk_03;
-    u8* source_table;
-    u8* current_entry;
-    u8* owner;
+    u8                    flags;
+    u8                    unk_01;
+    u8                    unk_02;
+    u8                    unk_03;
+    u8*                   source_table;
+    PaletteAnimationStep* current_entry;
+    u8*                   owner;
 } GraphicsPaletteAnimation;
 
 ASSERT_SIZE(GraphicsPaletteAnimation, 0x10);
