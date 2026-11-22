@@ -1,26 +1,30 @@
 #include "area148_13.h"
 
 #ifdef NON_MATCHING
-NON_MATCHING void func_801F4A50(s16 x0, s16 y0, s16 radius0, u16 angle0, s16 x1, s16 y1, s16 radius1, u16 angle1) {
+NON_MATCHING void func_801F4A50(s16 x1, s16 y1, s16 radius1, u16 angle1, s16 x2, s16 y2, s16 radius2, u16 angle2) {
     POLY_G4* poly;
+
+    /* FAKE: retail reserves 0x20 frame bytes above the parameter homes that no access explains. */
+    FAKE_STACK_PADS(u8, 0x20);
+
     poly = (POLY_G4*)g_GfxPrimCursor;
     SetPolyG4(poly);
     SetSemiTrans(poly, 1);
-    setXY4(poly, x0, y0, x1, y1, x0 + FIXED_MUL(radius0, rcos(angle0)), y0 + FIXED_MUL(radius0, rsin(angle0)), x1 + FIXED_MUL(radius1, rcos(angle1 + ANGLE_180)),
-           y1 + FIXED_MUL(radius1, rsin(angle1 + ANGLE_180)));
-    setRGB0(poly, 64, 0, 0);
-    setRGB1(poly, 64, 0, 0);
+    setXY4(poly, x1, y1, x2, y2, x1 + FIXED_MUL(radius1, rcos(angle1)), y1 + FIXED_MUL(radius1, rsin(angle1)), x2 + FIXED_MUL(radius2, rcos(angle2 + ANGLE_180)),
+           y2 + FIXED_MUL(radius2, rsin(angle2 + ANGLE_180)));
+    setRGB0(poly, D_801F6138[g_Task->unk_06 * 3], D_801F6139[g_Task->unk_06 * 3], D_801F613A[g_Task->unk_06 * 3]);
+    setRGB1(poly, D_801F6138[(s16)(g_Task->unk_06 * 3)], D_801F6139[(s16)(g_Task->unk_06 * 3)], D_801F613A[(s16)(g_Task->unk_06 * 3)]);
     setRGB2(poly, 0, 0, 0);
     setRGB3(poly, 0, 0, 0);
-    GFX_AddPrim(GFX_LAYER_EFFECT, sizeof(POLY_G4));
+    Area_CellAddPrim(g_Task->unk_18, g_Task->unk_1C, 0, sizeof(POLY_G4));
 
     poly++;
-    poly[0]  = poly[-1];
-    poly->x2 = x0 + FIXED_MUL(radius0, rcos(angle0 + ANGLE_180));
-    poly->y2 = y0 + FIXED_MUL(radius0, rsin(angle0 + ANGLE_180));
-    poly->x3 = x1 + FIXED_MUL(radius1, rcos(angle1));
-    poly->y3 = y1 + FIXED_MUL(radius1, rsin(angle1));
-    GFX_AddPrim(GFX_LAYER_EFFECT, sizeof(POLY_G4));
+    memcpy(poly, poly - 1, sizeof(POLY_G4));
+    poly->x2 = x1 + FIXED_MUL(radius1, rcos(angle1 + ANGLE_180));
+    poly->y2 = y1 + FIXED_MUL(radius1, rsin(angle1 + ANGLE_180));
+    poly->x3 = x2 + FIXED_MUL(radius2, rcos(angle2));
+    poly->y3 = y2 + FIXED_MUL(radius2, rsin(angle2));
+    Area_CellAddPrim(g_Task->unk_18, g_Task->unk_1C, 0, sizeof(POLY_G4));
 }
 #else
 INCLUDE_ASM(func_801F4A50);
