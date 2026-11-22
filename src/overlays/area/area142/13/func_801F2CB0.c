@@ -11,11 +11,11 @@ NON_MATCHING void func_801F2CB0(s32 timer) {
     s32      phase;
     s32      angle;
     s32      next;
-    s32      rim_angle;
-    s32      x;
-    s32      y;
+    s32      rim;
+    s32      far;
+    s32      x1, y1, x2, y2, x3, y3, x4, y4, x5, y5, x6, y6;
     s32      shade;
-    u32      color;
+    s32      blue_a, blue_b, red_a, red_b;
 
     if ((g_AreaDrawFlags & AREA_DRAW_CELL_LAYERS) == 0) {
         return;
@@ -34,98 +34,43 @@ NON_MATCHING void func_801F2CB0(s32 timer) {
         SetPolyG4(outer);
 
         /* The wedge spans the screen centre and the inner rim; the two bands taper out from it. */
-        angle     = i << 8;
-        wedge->x0 = 160;
-        wedge->y0 = 120;
-        x         = 160 + (rcos(angle) >> 4) / 3;
-        band->x0  = x;
-        wedge->x1 = x;
-        y         = 120 + (rsin(angle) >> 5) / 3;
-        band->y0  = y;
-        wedge->y1 = y;
-
-        next      = (i + 1) << 8;
-        x         = 160 + (rcos(next) >> 4) / 3;
-        band->x1  = x;
-        wedge->x2 = x;
-        y         = 120 + (rsin(next) >> 5) / 3;
-        band->y1  = y;
-        wedge->y2 = y;
-
-        x         = 160 + (rcos(next) >> 3) / 3;
-        outer->x0 = x;
-        band->x2  = x;
-        y         = 120 + (rsin(next) >> 4) / 3;
-        outer->y0 = y;
-        band->y2  = y;
-
-        rim_angle = (i + 2) << 8;
-        x         = 160 + (rcos(rim_angle) >> 3) / 3;
-        outer->x1 = x;
-        band->x3  = x;
-        y         = 120 + (rsin(rim_angle) >> 4) / 3;
-        outer->y1 = y;
-        band->y3  = y;
-
-        x         = 160 + (rcos(rim_angle) >> 2) / 3;
-        outer->x2 = x;
-        y         = 120 + (rsin(rim_angle) >> 3) / 3;
-        outer->y2 = y;
-
-        rim_angle = (i + 3) << 8;
-        x         = 160 + (rcos(rim_angle) >> 2) / 3;
-        outer->x3 = x;
-        y         = 120 + (rsin(rim_angle) >> 3) / 3;
-        outer->y3 = y;
+        angle = i << 8;
+        next  = (i + 1) << 8;
+        rim   = (i + 2) << 8;
+        far   = (i + 3) << 8;
+        x1    = 160 + (rcos(angle) >> 4) / 3;
+        y1    = 120 + (rsin(angle) >> 5) / 3;
+        x2    = 160 + (rcos(next) >> 4) / 3;
+        y2    = 120 + (rsin(next) >> 5) / 3;
+        x3    = 160 + (rcos(next) >> 3) / 3;
+        y3    = 120 + (rsin(next) >> 4) / 3;
+        x4    = 160 + (rcos(rim) >> 3) / 3;
+        y4    = 120 + (rsin(rim) >> 4) / 3;
+        x5    = 160 + (rcos(rim) >> 2) / 3;
+        y5    = 120 + (rsin(rim) >> 3) / 3;
+        x6    = 160 + (rcos(far) >> 2) / 3;
+        y6    = 120 + (rsin(far) >> 3) / 3;
+        setXY3(wedge, 160, 120, x1, y1, x2, y2);
+        setXY4(band, x1, y1, x2, y2, x3, y3, x4, y4);
+        setXY4(outer, x3, y3, x4, y4, x5, y5, x6, y6);
 
         /* The rim shade follows the timer; a blue wave runs with it and a red one half a turn against it. */
-        shade     = abs(0x80 - timer) >> 1;
-        wedge->b0 = shade;
-        wedge->g0 = shade;
-        wedge->r0 = shade;
-        outer->b3 = shade;
-        outer->g3 = shade;
-        outer->r3 = shade;
-        outer->b2 = shade;
-        outer->g2 = shade;
-        outer->r2 = shade;
-
-        color = (rcos(angle + phase) >> 6) + 0x80;
-        color >>= 1;
-        outer->b0 = color;
-        band->b2  = color;
-        band->b0  = color;
-        wedge->b1 = color;
-
-        color = (rcos(next + phase) >> 6) + 0x80;
-        color >>= 1;
-        outer->b1 = color;
-        band->b3  = color;
-        band->b1  = color;
-        wedge->b2 = color;
-
-        color = (rcos(angle - phase + ANGLE_180) >> 6) + 0x80;
-        color >>= 1;
-        outer->r0 = color;
-        band->r2  = color;
-        band->r0  = color;
-        wedge->r1 = color;
-
-        color = (rcos(next - phase + ANGLE_180) >> 6) + 0x80;
-        color >>= 1;
-        outer->r1 = color;
-        band->r3  = color;
-        band->r1  = color;
-        wedge->r2 = color;
-
-        wedge->g2 = 0;
-        wedge->g1 = 0;
-        band->g1  = 0;
-        band->g0  = 0;
-        band->g3  = 0;
-        band->g2  = 0;
-        outer->g1 = 0;
-        outer->g0 = 0;
+        shade  = abs(0x80 - timer) >> 1;
+        blue_a = ((rcos(angle + phase) >> 6) + 0x80) >> 1;
+        blue_b = ((rcos(next + phase) >> 6) + 0x80) >> 1;
+        red_a  = ((rcos(angle - phase + ANGLE_180) >> 6) + 0x80) >> 1;
+        red_b  = ((rcos(next - phase + ANGLE_180) >> 6) + 0x80) >> 1;
+        setRGB0(wedge, shade, shade, shade);
+        setRGB1(wedge, red_a, 0, blue_a);
+        setRGB2(wedge, red_b, 0, blue_b);
+        setRGB0(band, red_a, 0, blue_a);
+        setRGB1(band, red_b, 0, blue_b);
+        setRGB2(band, red_a, 0, blue_a);
+        setRGB3(band, red_b, 0, blue_b);
+        setRGB0(outer, red_a, 0, blue_a);
+        setRGB1(outer, red_b, 0, blue_b);
+        setRGB2(outer, shade, shade, shade);
+        setRGB3(outer, shade, shade, shade);
 
         GFX_AddPrim(GFX_LAYER_BACKDROP, sizeof(POLY_G3));
         GFX_AddPrim(GFX_LAYER_BACKDROP, sizeof(POLY_G4));

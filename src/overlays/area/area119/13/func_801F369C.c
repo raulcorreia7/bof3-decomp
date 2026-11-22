@@ -45,7 +45,7 @@ NON_MATCHING void func_801F369C(s32 level) {
 
             setUV4(prim, 0xE0, 0x30, 0xFF, 0x30, 0xE0, 0x4F, 0xFF, 0x4F);
             prim->tpage = getTPage(TPAGE_DEPTH_4BIT, TPAGE_ABR_ADD, 704, 256);
-            prim->clut  = 0x78CA;
+            prim->clut  = getClut(160, 483);
             /* the band fades from its bottom row toward the top of the pillar */
             setRGB0(prim, (0x3F - row) * level * 2 / 0x80, (0x3F - row) * level / 0x80, (0x3F - row) * level * 2 / 0x80);
             GFX_AddPrim(4, sizeof(POLY_FT4));
@@ -69,7 +69,7 @@ NON_MATCHING void func_801F369C(s32 level) {
         SetSemiTrans(prim, 1);
         setUV4(prim, 0xE0, 0x30, 0xFF, 0x30, 0xE0, 0x4F, 0xFF, 0x4F);
         prim->tpage = getTPage(TPAGE_DEPTH_4BIT, TPAGE_ABR_ADD, 704, 256);
-        prim->clut  = 0x78CA;
+        prim->clut  = getClut(160, 483);
         setRGB0(prim, level * 0x60 / 0x80, level * 0x30 / 0x80, level * 0x60 / 0x80);
         Area_CellAddPrim(TO_COORD(0x3F), TO_COORD(0x3D), 1, sizeof(POLY_FT4));
     }

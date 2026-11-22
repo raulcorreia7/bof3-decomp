@@ -40,17 +40,12 @@ NON_MATCHING void func_801F3584(s32 height, s32 y, s32 flag) {
                       &otz);
 
         SetSemiTrans(prim, 0);
-        prim->r0 = prim->g0 = prim->b0 = 0x50;
-        prim->clut                     = getClut(0, 485);
-        prim->tpage                    = getTPage(TPAGE_DEPTH_8BIT, TPAGE_ABR_HALF, (flag << 7) + 0x140, 256);
-        prim->u0                       = D_801F4320[flag][0] + ((rsin(i << 7) * height) >> 16);
-        prim->v0                       = D_801F4320[flag][1] + ((rcos(i << 7) * height) >> 16);
-        prim->u1                       = D_801F4320[flag][0] + ((rsin((i + 1) << 7) * height) >> 16);
-        prim->v1                       = D_801F4320[flag][1] + ((rcos((i + 1) << 7) * height) >> 16);
-        prim->u2                       = D_801F4320[flag][0] + ((rsin(i << 7) * y) >> 16);
-        prim->v2                       = D_801F4320[flag][1] + ((rcos(i << 7) * y) >> 16);
-        prim->u3                       = D_801F4320[flag][0] + ((rsin((i + 1) << 7) * y) >> 16);
-        prim->v3                       = D_801F4320[flag][1] + ((rcos((i + 1) << 7) * y) >> 16);
+        setRGB0(prim, 0x50, 0x50, 0x50);
+        prim->clut  = getClut(0, 485);
+        prim->tpage = getTPage(TPAGE_DEPTH_8BIT, TPAGE_ABR_HALF, (flag << 7) + 0x140, 256);
+        setUV4(prim, D_801F4320[flag][0] + ((rsin(i << 7) * height) >> 16), D_801F4320[flag][1] + ((rcos(i << 7) * height) >> 16), D_801F4320[flag][0] + ((rsin((i + 1) << 7) * height) >> 16),
+               D_801F4320[flag][1] + ((rcos((i + 1) << 7) * height) >> 16), D_801F4320[flag][0] + ((rsin(i << 7) * y) >> 16), D_801F4320[flag][1] + ((rcos(i << 7) * y) >> 16),
+               D_801F4320[flag][0] + ((rsin((i + 1) << 7) * y) >> 16), D_801F4320[flag][1] + ((rcos((i + 1) << 7) * y) >> 16));
 
         Area_CellAddPrim(TASK(Actor)->pos.x.fixed, TASK(Actor)->pos.y.fixed, 0, sizeof(POLY_FT4));
     }
