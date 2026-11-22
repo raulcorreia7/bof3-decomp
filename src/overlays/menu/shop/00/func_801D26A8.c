@@ -7,8 +7,8 @@ MATCH void func_801D26A8(void) {
 
     block = Item_GetRecord(g_ShopItemCategory, g_ShopItemId);
     UI_MessageSetVariable(0, 0xC, block);
-    D_80148340 = 0x4D;
-    D_80148624 = 0;
+    D_80148340                = 0x4D;
+    g_UiPanelTasks[21].active = 0;
     if (g_PadStates[0].pressed != 0) {
         i = 0;
         while (i < Party_CountOrder(PARTY_ORDER_FIELD)) {
@@ -19,7 +19,7 @@ MATCH void func_801D26A8(void) {
             }
             i++;
         }
-        D_8014840B = 1;
+        g_UiPanelTasks[6].state = 1;
         if ((Item_Count(g_ShopItemCategory, g_ShopItemId, 0) & HALF_MASK) != 0) {
             state = &g_MenuStep.state;
             *state -= 2;

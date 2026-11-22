@@ -10,7 +10,7 @@ MATCH void UI_MessageUpdateChoiceInput(void) {
     if ((g_PadStates[0].pressed & g_InputMasks[MENU_INPUT_CANCEL]) != 0) {
         u8* step;
 
-        D_80148357              = 3;
+        g_UiPanelTasks[1].state = 3;
         g_UiPanelTasks[0].state = 1;
         step                    = &g_UiMessageStep;
         *step                   = *step + 1;

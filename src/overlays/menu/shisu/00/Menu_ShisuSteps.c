@@ -73,10 +73,10 @@ MATCH void func_801D0FAC(void) {
     if (g_UiWindowEffectBusy == 0) {
         u8* step = &g_MenuStep.step;
 
-        g_MenuStep.sub_step = 0;
-        D_80148354          = 0;
-        *D_80148378         = 0;
-        D_8014839C          = 0;
+        g_MenuStep.sub_step      = 0;
+        g_UiPanelTasks[1].active = 0;
+        *D_80148378              = 0;
+        g_UiPanelTasks[3].active = 0;
         *step += 1;
         return;
     }
@@ -181,7 +181,7 @@ MATCH void func_801D11F4(void) {
 
     g_UiPanelTasks[0].active = 1;
     D_80148334               = D_8014837C + g_ShisuIngredients.command * 48;
-    D_80148336               = D_8014837E + 4;
+    g_UiPanelTasks[0].pos.y  = D_8014837E + 4;
     if (g_ShisuIngredients.rounds != 0) {
         D_801DA0FC = D_801DA084 + g_ShisuBaseScale * 0xA00;
     }
@@ -289,10 +289,10 @@ NON_MATCHING void func_801D14C0(void) {
     }
 update:
     g_UiPanelTasks[0].active = 1;
-    D_80148334               = D_801483A0 + 7;
-    D_80148336               = D_801483A2 + g_ShisuIngredients.cursor * 13 + 26;
+    D_80148334               = g_UiPanelTasks[3].pos.x + 7;
+    g_UiPanelTasks[0].pos.y  = g_UiPanelTasks[3].pos.y + g_ShisuIngredients.cursor * 13 + 26;
     g_UiPanelTasks[0].unk_0A = g_ShisuIngredients.cursor;
-    D_801483A6               = g_ShisuIngredients.cursor;
+    g_UiPanelTasks[3].unk_0A = g_ShisuIngredients.cursor;
     if (g_ShisuIngredients.rounds != 0) {
         D_801DA0FC = D_801DA084 + g_ShisuBaseScale * 0xA00;
     }
@@ -483,9 +483,9 @@ INCLUDE_ASM(func_801D1D1C);
 
 MATCH void func_801D1E34(void) {
     FIELD(u8, g_UiPanelTasks, 0x0) = 0;
-    D_80148357                     = 1;
-    D_8014837B                     = 1;
-    D_8014839F                     = 1;
+    g_UiPanelTasks[1].state        = 1;
+    g_UiPanelTasks[2].state        = 1;
+    g_UiPanelTasks[3].state        = 1;
 }
 
 MATCH s32 func_801D1E60(void) {

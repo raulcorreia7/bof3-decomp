@@ -18,9 +18,9 @@ MATCH void func_801D1244(void) {
     u8  next;
     u8* cursor;
 
-    category                       = D_80148338;
+    category                       = g_UiPanelTasks[0].unk_08;
     cursor_x                       = (u16)D_80148334;
-    row                            = D_8014833B;
+    row                            = g_UiPanelTasks[0].unk_0B;
     first                          = LOBU(D_8014833A);
     g_UiPanelTasks[1].flags        = 0;
     g_UiPanelTasks[4].pos.x        = cursor_x + 7;
@@ -264,20 +264,20 @@ MATCH void Menu_ApplyEquipment(void) {
 MATCH void func_801D1FA0(void) {
     u8 slot;
 
-    slot = D_8014833D;
-    if (Item_GetEquipability(D_80148338, slot) & 0x1) {
+    slot = g_UiPanelTasks[0].flags;
+    if (Item_GetEquipability(g_UiPanelTasks[0].unk_08, slot) & 0x1) {
         D_80148511 = 0;
     } else {
         D_80148511 = 1;
     }
-    D_801D8ED4.equipped_items[0]          = D_80144DF2;
-    D_801D8ED4.equipped_items[1]          = D_80144DF3;
-    D_801D8ED4.equipped_items[2]          = D_80144DF4;
-    D_801D8ED4.equipped_items[3]          = D_80144DF5;
-    D_801D8ED4.equipped_items[4]          = D_80144DF6;
+    D_801D8ED4.equipped_items[0]                        = D_80144DF2;
+    D_801D8ED4.equipped_items[1]                        = D_80144DF3;
+    D_801D8ED4.equipped_items[2]                        = D_80144DF4;
+    D_801D8ED4.equipped_items[3]                        = D_80144DF5;
+    D_801D8ED4.equipped_items[4]                        = D_80144DF6;
     /* @bug The trial set stores both accessories to the first accessory slot, so the second keeps its old value. */
-    D_801D8ED4.equipped_items[4]          = D_80144DF7;
-    D_801D8ED4.equipped_items[D_8014835E] = slot;
+    D_801D8ED4.equipped_items[4]                        = D_80144DF7;
+    D_801D8ED4.equipped_items[g_UiPanelTasks[1].unk_0A] = slot;
 }
 
 MATCH void func_801D2070(void) {

@@ -44,7 +44,6 @@ extern u16      D_80148430;
 extern s16      D_80148432;
 extern s8       D_80148451;
 extern s8       D_80148452;
-extern u8       D_80148453;
 extern s16      D_80148454;
 extern s16      D_80148456;
 extern s8       D_80148475;

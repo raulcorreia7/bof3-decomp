@@ -7,8 +7,8 @@ MATCH void func_801D4A44(void) {
     u8  j;
 
     for (i = 0; i < INV_SLOTS_PER_CATEGORY - 1; i++) {
-        row  = D_801C893C[D_8014850E];
-        pair = D_801C8950[D_8014850E];
+        row  = D_801C893C[g_UiPanelTasks[13].unk_0A];
+        pair = D_801C8950[g_UiPanelTasks[13].unk_0A];
         for (j = 0; j < INV_SLOTS_PER_CATEGORY - 1 - i; j++) {
             if (row[0] == 0 && row[1] != 0) {
                 Menu_SwapBytes(row, row + 1);
