@@ -1,5 +1,5 @@
-#ifndef SCENARIO_SCENE_APPEND_TRAIL_DOTS_H
-#define SCENARIO_SCENE_APPEND_TRAIL_DOTS_H
+#ifndef SHARED_SCENE_APPEND_TRAIL_DOTS_H
+#define SHARED_SCENE_APPEND_TRAIL_DOTS_H
 
 /* Appends the frame's capture pixels to the dot trail: projects the capture once, then adds one
  * dot per lit palette pixel of the capture row the timer picks. A statement macro: the
