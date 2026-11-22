@@ -849,7 +849,7 @@ ASSERT_SIZE(BattleRange, 0x40);
  * to that battler, and the answer's own ending step sets REPRISAL_DONE so the
  * answer is not itself answered (func_801E020C, func_801E414C, func_801D43EC).
  * EFFECT_LOADING is held from the action's effect stream request
- * (EMI_LoadArchive) until the loader is ready (Battle_EndEffectLoad). */
+ * (EMI_ArchiveLoad) until the loader is ready (Battle_EndEffectLoad). */
 
 /* The items a battle drops: ids and how many of each. Battle_RollEnemyDrops fills it. */
 typedef struct BattleDrops {

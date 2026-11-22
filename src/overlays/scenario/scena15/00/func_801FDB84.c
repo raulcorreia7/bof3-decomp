@@ -196,7 +196,7 @@ MATCH void func_801FE3C8(void) {
     for (slot = 0; slot < PARTY_SLOT_COUNT; slot++) {
         Party_RemoveMember(ids[slot]);
     }
-    EMI_LoadPartyArchives(CHAR_ID_RYU_ADULT, CHAR_ID_REI, CHAR_ID_GARR, 0);
+    EMI_PartyLoadArchives(CHAR_ID_RYU_ADULT, CHAR_ID_REI, CHAR_ID_GARR, 0);
     g_PartySize = 0;
     Party_JoinMember(CHAR_ID_RYU_ADULT);
     Party_LoadPalettes();

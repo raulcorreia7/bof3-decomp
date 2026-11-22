@@ -3,7 +3,7 @@
 /* starts the current EMI entry transfer and records either its
  * active-slot state or a terminal loader error before advancing the step.
  */
-MATCH void EMI_LoadVabBody(void) {
+MATCH void EMI_VabLoadBody(void) {
     u32 read_cursor;
     u8  entry_index;
     u8  source_index;

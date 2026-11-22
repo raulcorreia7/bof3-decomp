@@ -109,7 +109,7 @@ typedef enum EMISlotId {
     EMI_SLOT_COUNT      = 887,
 } EMISlotId;
 
-/* The family argument of EMI_LoadFamilyArchive selects the numbered series that the
+/* The family argument of EMI_ArchiveLoadFamily selects the numbered series that the
  * index counts into. */
 typedef enum EMIFamily {
     EMI_FAMILY_PL   = 0,

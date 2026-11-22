@@ -6,6 +6,6 @@ MATCH void func_800C1C44(void) {
     Script_Select(8U);
     ((PartyMember*)g_Task)->unk_24 &= 0x77;
     Script_AnimStepLoop();
-    EMI_LoadArchive(EMI_SLOT_BATL_RET);
+    EMI_ArchiveLoad(EMI_SLOT_BATL_RET);
     ((PartyMember*)g_Task)->unk_03 += 1;
 }

@@ -2,6 +2,6 @@
 
 /* returns one loader slot's disc start LBA from the file table.
  */
-MATCH DiscLba EMI_GetArchiveSector(EMISlotId emi_id) {
+MATCH DiscLba EMI_ArchiveGetSector(EMISlotId emi_id) {
     return g_EmiSlotLbas[emi_id];
 }
