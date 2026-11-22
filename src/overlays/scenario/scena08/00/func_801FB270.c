@@ -9,8 +9,8 @@
 __asm__(".include \"include/match/macro.inc\"\n");
 #endif
 
-#ifdef NON_MATCHING
-NON_MATCHING void func_801FB270(void) {
+/* Runs the scene script one step per frame, keyed on g_ScenarioState.step_05. */
+MATCH void func_801FB270(void) {
     switch (g_ScenarioState.step_05) {
         case 0:
             *(u32*)g_ScriptVars = 0;
@@ -58,7 +58,7 @@ NON_MATCHING void func_801FB270(void) {
             }
             g_ScenarioState.timer_06 = 0x20;
             g_ScenarioState.step_05  = 4;
-            SND_StartDecrescendo(g_SelectionSepSlots[g_SndBGMId * 4], g_SelectionSequences[g_SndBGMId * 4], 0x64, 0x20);
+            SND_StartDecrescendo(((u8*)g_SelectionSepSlots)[g_SndBGMId * 4], ((u8*)g_SelectionSequences)[g_SndBGMId * 4], 0x64, 0x20);
             break;
         case 4:
             if (g_ScenarioState.timer_06-- != 0) {
@@ -126,7 +126,7 @@ NON_MATCHING void func_801FB270(void) {
             func_801C7A54(0x20);
             g_ScenarioState.step_05 = 13;
             break;
-        case 13:
+        case 14:
             EMI_ArchiveLoad(EMI_SLOT_A108SE2);
             while (EMI_IsReady() == 0) {
                 func_801992B8();
@@ -136,8 +136,9 @@ NON_MATCHING void func_801FB270(void) {
             g_ScriptVars[0]++;
             g_ScenarioState.step_05 = 15;
             break;
-        case 14: {
-            u8 slot;
+        case 15: {
+            SpawnedActor* record;
+            u8            slot;
 
             if (g_ScriptVars[0] != 0x23) {
                 break;
@@ -145,14 +146,15 @@ NON_MATCHING void func_801FB270(void) {
             slot                        = Actor_FindFreeSpawned();
             g_ScratchPad.cells.bytes[0] = slot;
             if (slot != 0xFF) {
-                g_SpawnedActors[slot].header.flags = 1;
-                g_SpawnedActors[slot].type         = 0x63;
+                record               = &g_SpawnedActors[slot];
+                record->header.flags = 1;
+                record->type         = 0x63;
             }
             g_ScenarioState.timer_06 = 0x3C;
             g_ScenarioState.step_05  = 16;
             break;
         }
-        case 15:
+        case 16:
             if (g_ScenarioState.timer_06-- != 0) {
                 break;
             }
@@ -161,12 +163,12 @@ NON_MATCHING void func_801FB270(void) {
             g_ScriptVars[0]++;
             g_ScenarioState.step_05 = 17;
             break;
-        case 16:
+        case 17:
             if (g_ScenarioState.timer_06-- == 0) {
                 g_ScenarioState.step_05 = 18;
             }
             break;
-        case 17:
+        case 18:
             if (g_ScriptVars[0] != 0) {
                 break;
             }
@@ -178,10 +180,5 @@ NON_MATCHING void func_801FB270(void) {
             g_ScenarioState.state_04 = 0;
             g_ScenarioState.step_05  = 0;
             break;
-        case 18:
-            break;
     }
 }
-#else
-INCLUDE_ASM(func_801FB270);
-#endif
