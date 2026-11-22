@@ -31,16 +31,18 @@ MATCH void func_801D0C4C(void) {
 
 #ifdef NON_MATCHING
 NON_MATCHING void func_801D0D4C(void) {
-    u8* counts;
-    u8  page;
-    u8  remaining;
-    u8  total;
+    u8 page;
+    u8 remaining;
+    u8 count;
 
-    counts    = (u8*)&D_801D19F0;
-    remaining = counts[4];
+    remaining = D_801D19F0.unk_04;
     page      = 0;
-    while (remaining >= counts[page]) {
-        remaining -= counts[page];
+    while (1) {
+        count = ((u8*)&D_801D19F0)[page];
+        if (remaining < count) {
+            break;
+        }
+        remaining -= count;
         page++;
     }
     func_801D1724(0x20, 0x18);
@@ -51,26 +53,27 @@ NON_MATCHING void func_801D0D4C(void) {
         case 1:
             func_801D129C(0x28, 0x28, remaining);
             break;
+        case 2:
         default:
             func_801D14C8(0x28, 0x28, remaining);
             break;
     }
-    total = counts[0] + counts[1] + counts[2];
-    if (g_PadStates[0].pressed & PADRright) {
-        counts[4] += 1;
-        if ((s8)counts[4] >= total) {
-            counts[4] = 0;
+    remaining = (u8)D_801D19F0.unk_00 + (u8)D_801D19F0.unk_01 + (u8)D_801D19F0.unk_02;
+    if (g_PadStates[0].pressed & PADLright) {
+        D_801D19F0.unk_04++;
+        if (D_801D19F0.unk_04 >= remaining) {
+            D_801D19F0.unk_04 = 0;
         }
     }
     if (g_PadStates[0].pressed & PADLleft) {
-        counts[4] -= 1;
-        if ((s8)counts[4] < 0) {
-            counts[4] = total - 1;
+        D_801D19F0.unk_04--;
+        if (D_801D19F0.unk_04 < 0) {
+            D_801D19F0.unk_04 = remaining - 1;
         }
     }
-    TEXT_Format(g_UiTextFormatBuffer, D_801D0C04, (s8)counts[4] + 1, total);
+    TEXT_Format(g_UiTextFormatBuffer, D_801D0C04, D_801D19F0.unk_04 + 1, remaining);
     UI_TextDrawGlyphString(0xEE, 0x2C, 0, g_UiTextFormatBuffer);
-    if (g_PadStates[0].pressed & (g_InputMasks[INPUT_SLOT_CONFIRM] | g_InputMasks[INPUT_SLOT_CANCEL])) {
+    if (g_PadStates[0].pressed & (g_InputMasks[INPUT_SLOT_CANCEL] | g_InputMasks[INPUT_SLOT_CONFIRM])) {
         D_801F294C += 1;
     }
 }

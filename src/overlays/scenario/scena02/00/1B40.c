@@ -7,9 +7,8 @@
 __asm__(".include \"include/match/macro.inc\"\n");
 #endif
 
-#ifdef NON_MATCHING
 /* Runs the scene script one step per frame, keyed on g_ScenarioState.step_05. */
-NON_MATCHING void func_801F8740(void) {
+MATCH void func_801F8740(void) {
     switch (g_ScenarioState.step_05) {
         case 0:
             if (g_ScriptVars[0] == 3) {
@@ -127,6 +126,3 @@ NON_MATCHING void func_801F8740(void) {
             break;
     }
 }
-#else
-INCLUDE_ASM(func_801F8740);
-#endif
