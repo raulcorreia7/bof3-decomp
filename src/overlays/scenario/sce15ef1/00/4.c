@@ -500,8 +500,8 @@ MATCH void func_801D23A0(void) {
     }
 }
 
-#ifdef NON_MATCHING
-NON_MATCHING void func_801D2474(void) {
+/* Plots the trail dots for the current table cell around the tracked actor. */
+MATCH void func_801D2474(void) {
     s32       pos[3];
     DVECTOR   screen;
     MATRIX    matrix;
@@ -520,13 +520,12 @@ NON_MATCHING void func_801D2474(void) {
         for (col = 0; col < D_801D393C[D_801D40AC].w; col++) {
             if (*(u16*)D_801D40B0 != 0) {
                 dot        = (TrailDot*)D_801D40B4;
-                n          = D_801D40A8;
                 dot->color = *(u16*)D_801D40B0;
-                n++;
-                D_801D40A8 = n;
                 dot->x     = screen.vx - D_801D393C[D_801D40AC].x + col;
                 D_801D40B4 = (u32)(dot + 1);
                 dot->y     = screen.vy - D_801D393C[D_801D40AC].y + row;
+                n          = D_801D40A8 + 1;
+                D_801D40A8 = n;
             }
             D_801D40B0 += 2;
         }
@@ -537,9 +536,6 @@ NON_MATCHING void func_801D2474(void) {
         TASK(Actor)->header.mode += 1;
     }
 }
-#else
-INCLUDE_ASM(func_801D2474);
-#endif
 
 MATCH void func_801D26BC(void) {
     u8        order[16];
@@ -786,14 +782,16 @@ MATCH void func_801D2FD8(void) {
     }
 }
 
-#ifdef NON_MATCHING
-NON_MATCHING void func_801D30AC(void) {
+/* The same trail-dot plot as func_801D2474, run for the next table cell. */
+MATCH void func_801D30AC(void) {
     s32       pos[3];
     DVECTOR   screen;
     MATRIX    matrix;
     TrailDot* dot;
     u8        row;
     u8        col;
+    u8        step;
+    u16       n;
 
     Camera_SetMatrix(&matrix);
     pos[0] = ((Actor*)TASK(Actor)->unk_4C)->pos.x.fixed;
@@ -805,22 +803,21 @@ NON_MATCHING void func_801D30AC(void) {
             if (*(u16*)D_801D40B0 != 0) {
                 dot        = (TrailDot*)D_801D40B4;
                 dot->color = *(u16*)D_801D40B0;
-                D_801D40A8 += 1;
+                dot->x     = screen.vx - D_801D393C[D_801D40AC].x + col;
                 D_801D40B4 = (u32)(dot + 1);
                 dot->y     = screen.vy - D_801D393C[D_801D40AC].y + row;
-                dot->x     = screen.vx - D_801D393C[D_801D40AC].x + col;
+                n          = D_801D40A8 + 1;
+                D_801D40A8 = n;
             }
             D_801D40B0 += 2;
         }
     }
-    TASK(Actor)->timer += 1;
-    if (TASK(Actor)->timer == 2) {
+    step               = TASK(Actor)->timer + 1;
+    TASK(Actor)->timer = step;
+    if (step == 2) {
         TASK(Actor)->header.mode += 1;
     }
 }
-#else
-INCLUDE_ASM(func_801D30AC);
-#endif
 
 MATCH void func_801D32F4(void) {
     u8        order[16];
