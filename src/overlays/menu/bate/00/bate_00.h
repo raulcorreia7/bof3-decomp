@@ -10,7 +10,7 @@
 #include "scenario/party.h"
 
 /* FAKE: the callers pass and read the cost as s32, the width the real prototype (u8) lacks. */
-#define Char_GetAbilityCost ((s32 (*)(s32, s32, s32))Char_GetAbilityCost)
+#define Char_AbilityGetCost ((s32 (*)(s32, s32, s32))Char_AbilityGetCost)
 
 extern u8  D_80148339;
 extern u8  D_8014835F;

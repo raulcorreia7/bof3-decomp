@@ -2,8 +2,8 @@
 /* func_801FADAC (scena11), func_801FD018 (scena12) */
 MATCH void Scene_JoinReiGarr(void) {
     EMI_PartyLoadArchives(CHAR_ID_RYU_ADULT, CHAR_ID_REI, CHAR_ID_GARR, 0);
-    Party_BuildBattlers(PARTY_ORDER_FIELD);
-    Party_JoinMember(CHAR_ID_REI);
-    Party_JoinMember(CHAR_ID_GARR);
+    Party_BattlersBuild(PARTY_ORDER_FIELD);
+    Party_MemberJoin(CHAR_ID_REI);
+    Party_MemberJoin(CHAR_ID_GARR);
     Party_LoadPalettes();
 }

@@ -17,7 +17,7 @@ MATCH void Actor_SpawnPartyFromRecord(u8* script) {
         TASK_SET(&g_Actors[slot]);
         g_CurrentActor = &g_Actors[slot];
         Actor_ResetMotion();
-        Party_LoadMemberSprite(script[1], script[0xF]);
+        Party_MemberLoadSprite(script[1], script[0xF]);
         g_Task->header.flags = ACTOR_FLAG_IN_USE;
         coord_x              = script[5] << 16;
         slot_off             = *counter * ACTOR_SIZE;

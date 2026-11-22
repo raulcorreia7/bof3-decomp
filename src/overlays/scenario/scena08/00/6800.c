@@ -84,8 +84,8 @@ MATCH void func_801FDF84(void) {
     g_Characters[CHAR_INDEX_REI].equip.helmet = ARMOR_BANDANA;
     g_Characters[CHAR_INDEX_REI].equip.armor  = ARMOR_LIGHT_CLOTHING;
     Char_RebuildStats(&g_Characters[CHAR_INDEX_REI]);
-    Char_RestoreHP(CHAR_INDEX_REI, 0, 0);
-    Char_RestoreAP(CHAR_INDEX_REI, 0, 0);
+    Char_HPRestore(CHAR_INDEX_REI, 0, 0);
+    Char_APRestore(CHAR_INDEX_REI, 0, 0);
 }
 
 #include "overlays/scenario/shared/Scene_DispatchActor.h"
@@ -163,7 +163,7 @@ INCLUDE_ASM(func_801FE2A0);
 MATCH void Scene_SetPartyWhelp(void) {
     EMI_PartyLoadArchives(CHAR_ID_RYU_ADULT, CHAR_ID_GARR, CHAR_ID_WHELP, 0);
     g_Game.party_size = 0;
-    Party_JoinMember(CHAR_ID_WHELP);
+    Party_MemberJoin(CHAR_ID_WHELP);
     Party_LoadPalettes();
 }
 
@@ -171,19 +171,19 @@ MATCH void Scene_SetPartyWhelp(void) {
 MATCH void Scene_SetPartyRyuAdult(void) {
     g_Characters[g_CharSlot[10]].party_flags &= ~PARTY_FLAG_JOINED;
     g_Game.party_size = 0;
-    Party_JoinMember(CHAR_ID_RYU_ADULT);
+    Party_MemberJoin(CHAR_ID_RYU_ADULT);
 }
 
 /* func_801FE740 */
 MATCH void Party_JoinGarr(void) {
-    Party_JoinMember(CHAR_ID_GARR);
+    Party_MemberJoin(CHAR_ID_GARR);
 }
 
 MATCH void func_801FE760(void) {
     EMI_PartyLoadArchives(CHAR_ID_RYU_ADULT, CHAR_ID_GARR, CHAR_ID_REI, 0);
     g_Game.party_size = 0;
-    Party_JoinMember(CHAR_ID_RYU_ADULT);
-    Party_JoinMember(CHAR_ID_GARR);
+    Party_MemberJoin(CHAR_ID_RYU_ADULT);
+    Party_MemberJoin(CHAR_ID_GARR);
     Party_LoadPalettes();
 }
 
@@ -191,9 +191,9 @@ MATCH void func_801FE760(void) {
 
 MATCH void func_801FE800(void) {
     g_Game.party_size = 0;
-    Party_JoinMember(CHAR_ID_RYU_ADULT);
-    Party_JoinMember(CHAR_ID_NINA_ADULT);
-    Party_JoinMember(CHAR_ID_REI);
+    Party_MemberJoin(CHAR_ID_RYU_ADULT);
+    Party_MemberJoin(CHAR_ID_NINA_ADULT);
+    Party_MemberJoin(CHAR_ID_REI);
     Party_LoadPalettes();
 }
 
@@ -204,5 +204,5 @@ MATCH void func_801FE840(void) {
 
 /* func_801FE874 */
 MATCH void Party_RemoveGarr(void) {
-    Party_RemoveMember(CHAR_ID_GARR);
+    Party_MemberRemove(CHAR_ID_GARR);
 }

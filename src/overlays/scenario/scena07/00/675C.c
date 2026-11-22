@@ -176,11 +176,11 @@ MATCH void Scene_SetPartyRyuYoungNinaYoungGarr(void) {
 }
 
 MATCH void func_801FDBCC(void) {
-    Party_RemoveMember(D_80146189);
+    Party_MemberRemove(D_80146189);
 }
 
 MATCH void func_801FDBF4(void) {
-    Party_RemoveMember(CHAR_ID_GARR);
+    Party_MemberRemove(CHAR_ID_GARR);
     g_Characters[g_CharSlot[CHAR_ID_NINA_YOUNG]].party_flags &= ~PARTY_FLAG_JOINED;
     /* FAKE: the slot map is const here, so the retail empty load delay needs the barrier. */
     FAKE_BARRIER();

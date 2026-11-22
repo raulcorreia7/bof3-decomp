@@ -19,7 +19,7 @@ Scene_DispatchActor = { addr = 0x801FE018, type = "func", source = "dispatches a
 Scene_SetPartyWhelp = { addr = 0x801FE698, type = "func", source = "clears the party, streams archives and joins the Whelp with party palettes for the scene" }
 Scene_SetPartyRyuAdult = { addr = 0x801FE6DC, type = "func", source = "clears the party and joins adult Ryu for the scene" }
 Party_JoinGarr = { addr = 0x801FE740, type = "func", source = "Adds Garr to the party." }
-Scene_SetPartyRyuAdultGarrNinaAdult = { addr = 0x801FE7AC, type = "func", source = "Streams the EMI family for adult Ryu, Garr and adult Nina, empties g_Game.party_size, joins the three with Party_JoinMember and restages the party palettes." }
+Scene_SetPartyRyuAdultGarrNinaAdult = { addr = 0x801FE7AC, type = "func", source = "Streams the EMI family for adult Ryu, Garr and adult Nina, empties g_Game.party_size, joins the three with Party_MemberJoin and restages the party palettes." }
 Party_RemoveGarr = { addr = 0x801FE874, type = "func", source = "Removes Garr from the party." }
 g_SceneEntityDispatch = { addr = 0x801FE894, source = "scenario entity dispatch table" }
 g_SceneActorDispatch = { addr = 0x801FE9C0, source = "scenario actor dispatch table" }

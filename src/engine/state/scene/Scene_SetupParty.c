@@ -58,7 +58,7 @@ NON_MATCHING s32 Scene_SetupParty(u32 scene) {
             g_PartyFieldOrder[i] = g_Game.members[SP_SLOTS[i]].chr.character_id;
         for (i = 0; i < (u8)count - 1; i++) {
             if (i != SP_SLOTS[i]) {
-                Party_SwapMembers((u8)i, SP_SLOTS[i], 0);
+                Party_MemberSwap((u8)i, SP_SLOTS[i], 0);
                 for (j = i; j < (u8)count; j++) {
                     if (i == SP_SLOTS[j]) {
                         SP_SLOTS[j] = SP_SLOTS[i];

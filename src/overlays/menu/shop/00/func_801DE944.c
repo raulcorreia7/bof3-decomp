@@ -28,13 +28,13 @@ MATCH void func_801DE944(void) {
     EMI_PartyLoadArchives(party[0], g_PartyFieldOrder[1], g_PartyFieldOrder[2], 0);
     if (D_8014504A == 0 || (SYS_TestFlag(party - 0x32, 119) != 0 && g_GameAreaId != AREA_ID_ADULT_CAMP) || g_GameAreaId == AREA_ID_BOAT_AFTER_BLACK_SHIP) {
         g_PartySize = Party_CountOrder(PARTY_ORDER_FIELD);
-        Party_BuildBattlers(PARTY_ORDER_FIELD);
+        Party_BattlersBuild(PARTY_ORDER_FIELD);
         i = 0;
         if (i < g_Game.party_size) {
             row = 0;
             do {
                 TASK_SET(((u8*)g_Game.members + row));
-                Party_LoadMemberSprite(((PartyMember*)((u8*)&g_Game.members[0] + row))->chr.character_id, (u8)i);
+                Party_MemberLoadSprite(((PartyMember*)((u8*)&g_Game.members[0] + row))->chr.character_id, (u8)i);
                 Script_Select(g_Task->direction);
                 if (D_8014504A != 0) {
                     ACTOR_SET_MODE(0);
@@ -61,7 +61,7 @@ MATCH void func_801DE944(void) {
         g_Game.members[0].slot   = 0;
         *(Character*)(actor - 5) = *(Character*)(party - 0x5F2);
         g_Task->unk_48           = 0;
-        Party_LoadMemberSprite(g_Game.members[0].chr.character_id, 0);
+        Party_MemberLoadSprite(g_Game.members[0].chr.character_id, 0);
         Script_Select(g_Task->direction);
         ACTOR_SET_MODE(0);
         g_Task->header.step = 0;

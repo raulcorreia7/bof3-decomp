@@ -70,8 +70,8 @@ MATCH void Char_ApplyLevelUps(s32 char_id) {
         if (value >= 1000) {
             g_Characters[(u8)char_id].base.intelligence = 999;
         }
-        Char_AddAbility(g_LevelGrowth[(u8)char_id][level].ability, (u8)char_id, 0, 0);
-        Char_AddAbility(g_LevelGrowth[(u8)char_id][level].extra_ability, (u8)char_id, 0, 0);
+        Char_AbilityAdd(g_LevelGrowth[(u8)char_id][level].ability, (u8)char_id, 0, 0);
+        Char_AbilityAdd(g_LevelGrowth[(u8)char_id][level].extra_ability, (u8)char_id, 0, 0);
         level++;
     }
 

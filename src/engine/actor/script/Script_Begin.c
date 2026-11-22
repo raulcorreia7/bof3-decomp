@@ -33,7 +33,7 @@ MATCH void Script_Begin(s32 script_index, s32 position) {
         if (flags & 0x2) {
             flags &= 0xFC;
             /* FAKE: the retail call passes script_index as a third argument the real prototype lacks. */
-            ((void (*)(s32, s32, s32))Party_LoadMemberSprite)((u8)g_Task->unk_64, (g_Task->unk_68 / 80) & BYTE_MASK, script_index);
+            ((void (*)(s32, s32, s32))Party_MemberLoadSprite)((u8)g_Task->unk_64, (g_Task->unk_68 / 80) & BYTE_MASK, script_index);
             g_Task->active_flags = g_Task->active_flags | flags;
         }
         g_Task->script_record = selector;

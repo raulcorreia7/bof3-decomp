@@ -36,8 +36,8 @@ NON_MATCHING void func_800B2C90(MenuPanelTask* task) {
                 if (index == task->flags) {
                     icon = 2;
                 }
-                ability_type = Char_GetAbilityCost(D_80148656, *types, 1U);
-                ability_id   = (u8)(Char_GetAbilityElement((s32)*types));
+                ability_type = Char_AbilityGetCost(D_80148656, *types, 1U);
+                ability_id   = (u8)(Char_AbilityGetElement((s32)*types));
                 ability_obj  = &g_Abilities[*types];
                 icon_x       = (s16)task->u.battle.cursor + index;
                 if ((icon_x == task->flags) || (icon_x == task->unk_0C)) {
