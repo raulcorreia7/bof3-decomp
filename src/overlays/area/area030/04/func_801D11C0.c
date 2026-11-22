@@ -20,6 +20,6 @@ MATCH void func_801D11C0(void) {
     *(s32*)&g_Task->script      = D_80145EE0;
     *(s32*)((u8*)g_Task + 0x54) = D_80145EE4;
     *(u16*)((u8*)g_Task + 0x58) = D_80145EE8;
-    *(u16*)((u8*)g_Task + 0x5A) = D_80145EEA;
+    g_Task->frame_cells         = D_80145EEA;
     Area_AddActor();
 }

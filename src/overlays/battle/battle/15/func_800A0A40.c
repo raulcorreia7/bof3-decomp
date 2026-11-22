@@ -11,7 +11,7 @@ MATCH void func_800A0A40(void) {
 
     pFlag         = &g_Battle.flags;
     flag          = *pFlag;
-    battler_index = (*(u8*)&g_Battle.active_battler);
+    battler_index = g_Battle.active_battler;
     *pFlag        = flag | BATTLE_STATE_DAMAGE_APPLIED;
     if (BATTLER_IS_PLAYER(battler_index)) {
         u16 base;

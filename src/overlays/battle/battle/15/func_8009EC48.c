@@ -8,7 +8,7 @@ MATCH void func_8009EC48(void) {
     u8            slot_arg;
     u8            type_arg;
 
-    slot = (*(u8*)&g_Battle.active_battler);
+    slot = g_Battle.active_battler;
     if (BATTLER_IS_PLAYER(slot)) {
         saved = g_Game.members[slot].chr.status & STATUS_BLIND;
         g_Game.members[slot].chr.status &= ~STATUS_BLIND;
@@ -24,7 +24,7 @@ MATCH void func_8009EC48(void) {
     FAKE_ORDER_LOCK(slot_arg = g_BattleActiveBattler);
     type_arg                          = g_BattleTarget;
     g_Battle.target_record->hp_change = Battle_CalcDamage(slot_arg, type_arg, BATTLE_ELEMENT_FROM_WEAPON);
-    slot                              = (*(u8*)&g_Battle.active_battler);
+    slot                              = g_Battle.active_battler;
     if (BATTLER_IS_PLAYER(slot)) {
         g_Game.members[slot].chr.status |= saved;
         return;

@@ -23,7 +23,7 @@ MATCH void Battle_SelectAbilityEnemyTarget(void) {
     entry   = Party_GetAbilities(message[0], g_UiPanelTasks[16].unk_0B, 1);
     if ((g_Abilities[entry[g_UiPanelTasks[16].unk_0C]].targeting_flags & ABILITY_TARGET_FLAG_BOTH_SIDES) != 0u && (trigger & (PADLup | PADLdown)) != 0) {
         g_BattleActorTurn->command.target = Battle_TargetNext(0);
-        *(u8*)&g_Battle.ui_mode += 1u;
+        g_Battle.ui_mode += 1u;
         SND_SEPlay(EMI_SE_ID(SND_BANK_COMMON, 1));
         return;
     }

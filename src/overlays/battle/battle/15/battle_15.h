@@ -57,7 +57,7 @@
         u32 row;                                                                                          \
         u8  battler;                                                                                      \
         u8  result;                                                                                       \
-        battler = *(u8*)&g_Battle.active_battler;                                                         \
+        battler = g_Battle.active_battler;                                                                \
         if (battler < 3u) {                                                                               \
             if ((g_Game.members[battler].u.turn.action_flags.value & BATTLER_ACTION_DRAGON_FORM) != 0u) { \
                 result = flagged[g_Battle.dragon_form];                                                   \
@@ -1185,7 +1185,7 @@ static inline void BattleSetSelectionFlag(u32 flag) {
     u8          one;
 
     if (Battle_PickAbility(g_Battle.active_battler, g_Battle.target) == 0) {
-        mode = *(u8*)&g_Battle.target;
+        mode = g_Battle.target;
         if (mode < 3u) {
             g_Game.members[mode].u.turn.action_flags.value |= flag;
         } else {
@@ -1237,6 +1237,6 @@ u8           Battle_SelectStepRule(void);
 #define BATTLE_ADD_MESSAGE_AND_STEP() \
     temp = UI_MessageGetText(0x4000); \
     Battle_AddMessage(2, 0xFF, temp); \
-    *(u8*)&g_Battle.ui_mode += 1;
+    g_Battle.ui_mode += 1;
 
 #endif

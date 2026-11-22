@@ -48,7 +48,7 @@ MATCH void Battle_DrawCommandList(void) {
             UI_TextDrawGlyphString((g_UiPanelCurrent->pos.x + 88), (g_UiPanelCurrent->pos.y + line_y), clut, g_UiTextFormatBuffer);
         }
     }
-    if ((*(u8*)&g_Battle.ui_step != 6) || (*(u8*)&g_Battle.ui_mode != 5)) {
+    if ((g_Battle.ui_step != 6) || (g_Battle.ui_mode != 5)) {
         UI_CursorDraw((g_UiPanelCurrent->pos.x + 7) & HALF_MASK, (g_UiPanelCurrent->pos.y + 0x20 + *(s16*)&g_UiPanelCurrent->u.battle.cursor * 32) & HALF_MASK, 0);
     }
 }

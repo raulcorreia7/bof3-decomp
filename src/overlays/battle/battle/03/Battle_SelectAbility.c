@@ -44,7 +44,7 @@ MATCH void Battle_SelectAbility(void) {
         g_Battle.phase.sub_step = 0;
         return;
     }
-    action = *(u16*)&g_Battle.action_id;
+    action = g_Battle.action_id;
     if (action != 0x97) {
         if (BATTLER_IS_PLAYER(g_Battle.active_battler)) {
             D_801463C8 = Char_AbilityGetCost(BATTLE_ACTIVE_PARTY.slot, action & BYTE_MASK, 1);

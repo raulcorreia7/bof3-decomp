@@ -112,14 +112,14 @@ NON_MATCHING s32 func_801BC760(void) {
         }
     }
     if (!((g_Game.flags | g_Game.walk_flags) & BIT(0))) {
-        if (*(u8*)g_Task & ACTOR_FLAG_OFFSCREEN) {
+        if (g_Task->header.flags & ACTOR_FLAG_OFFSCREEN) {
             saved          = g_Game.current;
             g_Game.current = g_Game.members;
             near_a         = (D_80145EC4 + (g_Game.members[0].unk_0C * g_Game.members[0].unk_09)) & ~0x7FFF;
             near_b         = (D_80145EC8 + (g_Game.members[0].unk_10 * g_Game.members[0].unk_09)) & ~0x7FFF;
             if (!(Game_TestPlacement(near_a, near_b, g_Task->voice_flags.scene_flag, Area_HeightRead(near_a, near_b)) & BYTE_MASK)) {
                 g_Game.current = saved;
-                *(u8*)g_Task |= ACTOR_FLAG_HIDDEN;
+                g_Task->header.flags |= ACTOR_FLAG_HIDDEN;
                 g_Task->pos.x.fixed = near_a;
                 g_Task->pos.y.fixed = near_b;
                 g_Game.current->status.field.flags.value &= 0xFE;

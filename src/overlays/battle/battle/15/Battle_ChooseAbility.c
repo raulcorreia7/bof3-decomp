@@ -122,7 +122,7 @@ NON_MATCHING void Battle_ChooseAbility(void) {
         D_801454F5[g_UiPanelTasks[16].unk_0A * 3]        = g_UiPanelTasks[16].u.addr.unk_10;
         D_801454F6[g_UiPanelTasks[16].unk_0A * 3]        = group->cursor;
         SND_SEPlay(EMI_SE_ID(SND_BANK_COMMON, 6));
-        *(volatile u8*)&g_Battle.ui_step += 1;
+        g_Battle.ui_step += 1;
         return;
     }
     if ((g_PadStates[0].pressed & g_InputMasks[BATTLE_INPUT_CONFIRM]) != 0u) {

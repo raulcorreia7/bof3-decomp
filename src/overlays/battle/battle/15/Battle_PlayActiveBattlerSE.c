@@ -15,7 +15,7 @@ MATCH void Battle_PlayActiveBattlerSE(s32 effect_0, s32 effect_1) {
     /* FAKE: holds the effect_1 copy to the retail s0 home. */
     FAKE_REG(s32, other, "s0");
 
-    type  = *(u8*)&g_Battle.active_battler;
+    type  = g_Battle.active_battler;
     sel   = effect_0;
     other = effect_1;
     if (type < 3u) {
