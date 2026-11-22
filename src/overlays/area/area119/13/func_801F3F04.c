@@ -36,7 +36,7 @@ NON_MATCHING void func_801F3F04(s32 steps) {
         prim->y0 = prim->y1 = (u16)D_1F800034[1] - spread;
         prim->y2 = prim->y3 = (u16)D_1F800034[1] + spread;
         order += steps;
-        Area_ApplyTileToQuad((shade & 0xF80000) | 0xBA009124, prim, 1);
+        Area_ApplyTileToQuad((shade & 0xF80000) | (0xBAu << 24) | 0x9124u, prim, 1);
         prim->g0 >>= 1;
         i++;
         Area_CellAddPrim(g_Task->pos.x.fixed, g_Task->pos.y.fixed, 1, sizeof(POLY_FT4));
