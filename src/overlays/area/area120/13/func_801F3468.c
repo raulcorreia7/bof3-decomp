@@ -24,8 +24,7 @@ MATCH void func_801F3468(AreaRow* row) {
     SetTile(tile);
     SetSemiTrans(tile, 1);
     setXY0(tile, screen[0].vx - 1, screen[0].vy - 1);
-    tile->w  = 3;
-    tile->h  = 3;
+    setWH(tile, 3, 3);
     tile->g0 = 0x20;
     tile->r0 = 0x20;
     blue     = (rand() & 1) << 5;

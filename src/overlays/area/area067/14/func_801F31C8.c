@@ -14,8 +14,7 @@ MATCH void func_801F31C8(AreaRippleQuad* quad) {
         prim  = (LINE_G2*)g_GfxPrimCursor;
         SetLineG2(prim);
         SetSemiTrans(prim, 1);
-        prim->x0      = quad->x;
-        prim->y0      = quad->y;
+        setXY0(prim, quad->x, quad->y);
         prim->x1      = quad->x + ((quad->radius * rcos(angle)) >> ((i & 1) + 12));
         LOH(prim->y1) = quad->y + ((quad->radius * rsin(angle)) >> ((i & 1) + 12));
         setRGB0(prim, 0x80, 0x80, 0x80);

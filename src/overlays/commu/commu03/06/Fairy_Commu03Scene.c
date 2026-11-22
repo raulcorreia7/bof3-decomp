@@ -278,12 +278,10 @@ NON_MATCHING void func_801D1714(s16 x, s16 y, u32 clut, u8* text) {
             } else {
                 t2 = t1;
             }
-            v          = (t2 >> 5) << 3;
-            poly->v0   = v;
-            poly->v1   = poly->v0;
-            poly->r0   = 0x80;
-            poly->g0   = 0x80;
-            poly->b0   = 0x80;
+            v        = (t2 >> 5) << 3;
+            poly->v0 = v;
+            poly->v1 = poly->v0;
+            setRGB0(poly, 0x80, 0x80, 0x80);
             poly->clut = color;
             poly->v3 = poly->v2 = poly->v1 + 8;
             poly->tpage         = getTPage(TPAGE_DEPTH_4BIT, TPAGE_ABR_HALF, FONT_TPAGE_X, FONT_TPAGE_Y);

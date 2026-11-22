@@ -35,29 +35,15 @@ NON_MATCHING void Area_InitMapRenderer(void) {
     g_AreaCameraAngle.vy           = 0;
     g_AreaCameraAngle.vz           = ANGLE_45;
     g_AreaPreviousCameraAngle      = g_AreaCameraAngle;
-    g_AreaCellPrims[0][0].x0       = 0;
-    g_AreaCellPrims[0][0].y0       = 0;
-    g_AreaCellPrims[0][0].x1       = 0;
-    g_AreaCellPrims[0][0].y1       = 0;
-    g_AreaCellPrims[0][0].x2       = 0;
-    g_AreaCellPrims[0][0].y2       = 0;
-    g_AreaCellPrims[0][0].x3       = 0;
-    g_AreaCellPrims[0][0].y3       = 0;
-    g_AreaCellPrims[0][1].x0       = 0;
-    g_AreaCellPrims[0][1].y0       = 0;
-    g_AreaCellPrims[0][1].x1       = 0;
-    g_AreaCellPrims[0][1].y1       = 0;
-    g_AreaCellPrims[0][1].x2       = 0;
-    g_AreaCellPrims[0][1].y2       = 0;
-    g_AreaCellPrims[0][1].x3       = 0;
-    g_AreaCellPrims[0][1].y3       = 0;
-    g_AreaCameraOffsetZ            = 0;
-    g_AreaCameraOffsetY            = 0;
-    g_AreaCameraOffsetX            = 0;
-    g_AreaCameraX                  = 0x7FFF - ((s32)g_AreaScrollTargetX >> 8);
-    g_AreaCameraY                  = 0x8000 - ((s32)g_AreaScrollTargetY >> 8);
-    g_AreaTileOriginX              = ((s32)g_AreaScrollTargetX >> 0x10) - 24;
-    g_AreaTileOriginY              = ((s32)g_AreaScrollTargetY >> 0x10) + 3;
+    setXY4(&g_AreaCellPrims[0][0], 0, 0, 0, 0, 0, 0, 0, 0);
+    setXY4(&g_AreaCellPrims[0][1], 0, 0, 0, 0, 0, 0, 0, 0);
+    g_AreaCameraOffsetZ = 0;
+    g_AreaCameraOffsetY = 0;
+    g_AreaCameraOffsetX = 0;
+    g_AreaCameraX       = 0x7FFF - ((s32)g_AreaScrollTargetX >> 8);
+    g_AreaCameraY       = 0x8000 - ((s32)g_AreaScrollTargetY >> 8);
+    g_AreaTileOriginX   = ((s32)g_AreaScrollTargetX >> 0x10) - 24;
+    g_AreaTileOriginY   = ((s32)g_AreaScrollTargetY >> 0x10) + 3;
     if (g_GameRequestFlags & AREA_LOAD_FLAG_FISHING) {
         g_AreaCameraHeight = 0;
     } else {

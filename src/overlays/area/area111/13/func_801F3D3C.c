@@ -23,8 +23,6 @@ MATCH void func_801F3D3C(void) {
     if (g_ScriptState->move_mode != 0) {
         frames        = 32;
         g_Task->timer = 32;
-        g_Task->vx    = dx / frames;
-        g_Task->vy    = dy / frames;
-        g_Task->vz    = dz / frames;
+        setVector(g_Task, dx / frames, dy / frames, dz / frames);
     }
 }

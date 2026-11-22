@@ -66,12 +66,10 @@ MATCH void func_801D0EAC(void) {
 }
 
 MATCH void func_801D0EF0(void) {
-    g_Task->pos.x.fixed        = g_Game.members[2].pos.x.fixed;
-    g_Task->pos.y.fixed        = g_Game.members[2].pos.y.fixed;
-    g_Task->pos.z.fixed        = TO_COORD(Area_HeightSample(g_Task->pos.x.fixed, g_Task->pos.y.fixed));
-    g_Task->vx                 = g_Task->pos.x.fixed;
-    g_Task->vy                 = g_Task->pos.y.fixed;
-    g_Task->vz                 = g_Task->pos.z.fixed;
+    g_Task->pos.x.fixed = g_Game.members[2].pos.x.fixed;
+    g_Task->pos.y.fixed = g_Game.members[2].pos.y.fixed;
+    g_Task->pos.z.fixed = TO_COORD(Area_HeightSample(g_Task->pos.x.fixed, g_Task->pos.y.fixed));
+    setVector(g_Task, g_Task->pos.x.fixed, g_Task->pos.y.fixed, g_Task->pos.z.fixed);
     g_Task->tint.steps.delta.r = 0;
     g_Task->tint.steps.delta.g = -0x80;
     g_Task->timer              = 0x20;
@@ -417,8 +415,7 @@ MATCH void func_801D1FF8(Pos3* pos, s16 radius_a, s16 radius_b, u16 angle_b, u8 
         prim = (POLY_G3*)g_GfxPrimCursor;
         SetPolyG3(prim);
         SetSemiTrans(prim, 1);
-        prim->x0 = screen.vx;
-        prim->y0 = screen.vy;
+        setXY0(prim, screen.vx, screen.vy);
         rot.vx   = (scale.vx * rcos(angle)) >> 12;
         rot.vy   = (scale.vy * rsin(angle)) >> 12;
         prim->x1 = screen.vx + ((rot.vx * rcos(angle_b) - rot.vy * rsin(angle_b)) >> 12);

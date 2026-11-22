@@ -249,9 +249,7 @@ MATCH void func_801F7C24(void) {
     VECTOR to;
     s32    cos;
 
-    from.vx             = -0x6000;
-    from.vy             = -0x12000;
-    from.vz             = 1 << 24;
+    setVector(&from, -0x6000, -0x12000, 1 << 24);
     cos                 = rcos(g_Task->unk_6C);
     to.vx               = (from.vx * cos - from.vy * rsin(g_Task->unk_6C)) >> 12;
     cos                 = rsin(g_Task->unk_6C);
@@ -260,9 +258,7 @@ MATCH void func_801F7C24(void) {
     g_Task->pos.x.fixed = D_80147B24[0] + to.vx;
     g_Task->pos.y.fixed = D_80147B24[1] + to.vy;
     g_Task->pos.z.fixed = D_80147B24[2] + to.vz;
-    g_Task->vx          = D_80147B24[0] + to.vx - ((s16)g_Task->screen_x << 15);
-    g_Task->vy          = D_80147B24[1] + to.vy;
-    g_Task->vz          = D_80147B24[2] + to.vz;
+    setVector(g_Task, D_80147B24[0] + to.vx - ((s16)g_Task->screen_x << 15), D_80147B24[1] + to.vy, D_80147B24[2] + to.vz);
     func_801F7E34(&g_Task->pos.x.fixed, &g_Task->vx, 0x40);
     g_Task->screen_x += 1;
     if ((s16)g_Task->screen_x == 330) {

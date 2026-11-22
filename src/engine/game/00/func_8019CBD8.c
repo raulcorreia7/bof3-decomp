@@ -15,10 +15,8 @@ MATCH void func_8019CBD8(void) {
     other->tint.steps.delta.g  = -0x80;
     g_Task->tint.steps.delta.b = -0x80;
     work                       = g_Task;
-    work->vx                   = 0;
-    work->vy                   = 0;
-    work->vz                   = 0;
-    work->timer                = 0;
+    setVector(work, 0, 0, 0);
+    work->timer = 0;
     func_8019D270();
     g_Task->param.unk_0B = 0U;
     counter              = g_Task;

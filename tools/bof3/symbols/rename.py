@@ -226,7 +226,7 @@ def check_rename(
         path = ctx.root / name
         if not name.startswith(("src/", "include/", "config/")) or not path.is_file():
             continue
-        if name == HISTORY:
+        if name.startswith(HISTORY):
             continue
         data = edits[path].encode("utf-8") if path in edits else path.read_bytes()
         if address:

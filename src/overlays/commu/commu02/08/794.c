@@ -2148,16 +2148,11 @@ MATCH void func_801D875C(s16 x, s16 y, s32 index) {
     GFX_ADD_DRAW_MODE(tpage);
     sprt = (SPRT*)g_GfxPrimCursor;
     SetSprt(sprt);
-    sprt->x0   = x;
-    sprt->y0   = y;
-    sprt->u0   = D_801DAE88[slot][0];
-    sprt->v0   = D_801DAE88[slot][1];
-    sprt->w    = D_801DAE88[slot][2];
-    sprt->h    = D_801DAE88[slot][3];
+    setXY0(sprt, x, y);
+    setUV0(sprt, D_801DAE88[slot][0], D_801DAE88[slot][1]);
+    setWH(sprt, D_801DAE88[slot][2], D_801DAE88[slot][3]);
     sprt->clut = getClut(D_801DAE88[slot][4], D_801DAE88[slot][5] + 0x1E0);
-    sprt->r0   = 0x80;
-    sprt->g0   = 0x80;
-    sprt->b0   = 0x80;
+    setRGB0(sprt, 0x80, 0x80, 0x80);
     GFX_AddPrim(GFX_LAYER_UI, sizeof(SPRT));
 }
 

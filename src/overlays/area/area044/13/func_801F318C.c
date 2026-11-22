@@ -23,9 +23,7 @@ NON_MATCHING void func_801F318C(u8 facing, u8 actor_index) {
             actor->pos.y.fixed += actor->vy * actor->timer;
             actor->pos.z.fixed += actor->vz * actor->timer;
         }
-        g_Task->vx          = g_PartyActors[actor_index].vx;
-        g_Task->vy          = g_PartyActors[actor_index].vy;
-        g_Task->vz          = g_PartyActors[actor_index].vz;
+        setVector(g_Task, g_PartyActors[actor_index].vx, g_PartyActors[actor_index].vy, g_PartyActors[actor_index].vz);
         g_Task->timer       = 0x20;
         g_Task->header.mode = 1;
         g_Task->header.step = 1;

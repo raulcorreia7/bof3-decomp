@@ -21,10 +21,9 @@ MATCH void Effect_DrawSparkleRays(u16 angle, u16 radius) {
         SetLineG2(prim);
         SetSemiTrans(prim, 1);
         g_ScratchPad.cells.ray.angle = (i & 0x1F) << 7;
-        prim->x0                     = LOHU(g_ScratchPad.cells.ray.x);
-        prim->y0                     = LOHU(g_ScratchPad.cells.ray.y);
-        prim->x1                     = LOHU(g_ScratchPad.cells.ray.x) + FIXED_MUL(rcos(g_ScratchPad.cells.ray.angle), radius);
-        prim->y1                     = LOHU(g_ScratchPad.cells.ray.y) + FIXED_MUL(rsin(g_ScratchPad.cells.ray.angle), radius);
+        setXY0(prim, LOHU(g_ScratchPad.cells.ray.x), LOHU(g_ScratchPad.cells.ray.y));
+        prim->x1 = LOHU(g_ScratchPad.cells.ray.x) + FIXED_MUL(rcos(g_ScratchPad.cells.ray.angle), radius);
+        prim->y1 = LOHU(g_ScratchPad.cells.ray.y) + FIXED_MUL(rsin(g_ScratchPad.cells.ray.angle), radius);
         setRGB0(prim, LOHU(g_ScratchPad.cells.ray.shade.r), LOHU(g_ScratchPad.cells.ray.shade.g), LOHU(g_ScratchPad.cells.ray.shade.b));
         setRGB1(prim, 1, 1, 1);
         Area_CellAddPrim(EFFECT_SPARKLE_TASK->pos.x.fixed, EFFECT_SPARKLE_TASK->pos.y.fixed, 2, BMAGIC_RAY_CELL_SIZE);

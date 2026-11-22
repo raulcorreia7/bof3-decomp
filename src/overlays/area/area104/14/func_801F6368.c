@@ -28,11 +28,8 @@ loop:
     prim = (POLY_F3*)g_GfxPrimCursor;
     setPolyF3(prim);
     SetSemiTrans(prim, 1);
-    angle    = i * 0xAA;
-    prim->x0 = centre_x;
-    prim->y0 = centre_y;
-    prim->x1 = centre_x + ((radius * rcos(angle)) >> 12);
-    prim->y1 = centre_y + ((radius * rsin(angle)) >> 12);
+    angle = i * 0xAA;
+    setXY2(prim, centre_x, centre_y, centre_x + ((radius * rcos(angle)) >> 12), centre_y + ((radius * rsin(angle)) >> 12));
     i++;
     angle    = i * 0xAA;
     prim->x2 = centre_x + ((radius * rcos(angle)) >> 12);

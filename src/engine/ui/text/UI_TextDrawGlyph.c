@@ -31,14 +31,9 @@ MATCH void UI_TextDrawGlyph(s32 color, u8* text) {
     }
     if (*text != STRING_SPACE) {
         GLYPH->tpage = GetTPage(TPAGE_DEPTH_4BIT, TPAGE_ABR_ADD, FONT_TPAGE_X, FONT_TPAGE_Y);
-        GLYPH->u0    = (s8)GLYPH_U;
-        GLYPH->v0    = (s8)GLYPH_V;
-        GLYPH->u1    = (s8)(width + GLYPH_U);
-        GLYPH->v1    = (s8)GLYPH_V;
-        GLYPH->u2    = (s8)GLYPH_U;
-        GLYPH->v2    = (s8)((s8)GLYPH_V + (height - ROW_OFFSET));
-        GLYPH->u3    = (s8)(width + GLYPH_U);
-        GLYPH->v3    = (s8)((s8)GLYPH_V + (height - ROW_OFFSET));
+        setUV3(GLYPH, (s8)GLYPH_U, (s8)GLYPH_V, (s8)(width + GLYPH_U), (s8)GLYPH_V, (s8)GLYPH_U, (s8)((s8)GLYPH_V + (height - ROW_OFFSET)));
+        GLYPH->u3 = (s8)(width + GLYPH_U);
+        GLYPH->v3 = (s8)((s8)GLYPH_V + (height - ROW_OFFSET));
         setRGB0(GLYPH, 0x80, 0x80, 0x80);
         setXY4(GLYPH, (u16)WINDOW->window.text.x, (u16)WINDOW->window.text.y, (s16)GLYPH_RIGHT, (u16)WINDOW->window.text.y, (u16)WINDOW->window.text.x, (s16)GLYPH_BOTTOM, (s16)GLYPH_RIGHT,
                (s16)GLYPH_BOTTOM);

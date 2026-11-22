@@ -402,9 +402,7 @@ NON_MATCHING void func_80117E78(s32 brightness, s32 unused) {
                 setUV4(primitive, 224, 48, 255, 48, 224, 79, 255, 79);
                 primitive->clut  = getClut(80, STAGE_PALETTE_Y + 3);
                 primitive->tpage = getTPage(TPAGE_DEPTH_4BIT, TPAGE_ABR_ADD, 704, 256);
-                primitive->r0    = brightness / 2;
-                primitive->g0    = brightness;
-                primitive->b0    = brightness / 2;
+                setRGB0(primitive, brightness / 2, brightness, brightness / 2);
                 Area_CellAddPrim(col << 16, row << 16, 1, sizeof(POLY_FT4));
             }
         }

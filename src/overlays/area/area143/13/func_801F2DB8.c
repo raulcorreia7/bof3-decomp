@@ -22,8 +22,7 @@ MATCH void func_801F2DB8(SpriteSpark* spark) {
         SetTile(tile);
         SetSemiTrans(tile, 1);
         Camera_ProjectPoint(&spark->pos.vx, (DVECTOR*)&tile->x0);
-        tile->w  = 3;
-        tile->h  = 3;
+        setWH(tile, 3, 3);
         tile->b0 = 8;
         tile->g0 = 8;
         tile->r0 = 8;

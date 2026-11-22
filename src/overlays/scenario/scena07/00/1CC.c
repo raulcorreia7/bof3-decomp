@@ -678,10 +678,8 @@ MATCH void func_801F97E0(Scena07Burst* burst) {
     u32      level;
     s8       i;
 
-    angle    = 0;
-    point.vx = burst->pos.vx + (rcos(0) << 5);
-    point.vy = burst->pos.vy + (rsin(0) << 5);
-    point.vz = burst->pos.vz;
+    angle = 0;
+    setVector(&point, burst->pos.vx + (rcos(0) << 5), burst->pos.vy + (rsin(0) << 5), burst->pos.vz);
     Camera_ProjectPoint(&point, &low);
     point.vz = burst->pos.vz + TO_COORD(0x700);
     Camera_ProjectPoint(&point, &high);
@@ -692,9 +690,7 @@ MATCH void func_801F97E0(Scena07Burst* burst) {
     }
     for (i = 0; i < 32; i++) {
         angle += 0x80;
-        point.vx = burst->pos.vx + (rcos((u16)angle) << 5);
-        point.vy = burst->pos.vy + (rsin((u16)angle) << 5);
-        point.vz = burst->pos.vz;
+        setVector(&point, burst->pos.vx + (rcos((u16)angle) << 5), burst->pos.vy + (rsin((u16)angle) << 5), burst->pos.vz);
         SetDrawMode((DR_MODE*)g_GfxPrimCursor, 0, 1, GetTPage(TPAGE_DEPTH_4BIT, TPAGE_ABR_ADD, FONT_TPAGE_X, FONT_TPAGE_Y), 0);
         Area_CellAddPrim(point.vx, point.vy, 0, sizeof(DR_MODE));
         prim = GFX_BeginPolyG4(1);

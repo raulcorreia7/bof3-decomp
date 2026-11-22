@@ -957,15 +957,11 @@ MATCH void func_801D3EFC(s16 x, s16 y, u8 ordinal) {
 
     sprite = GFX_CURSOR(SPRT_16);
     SetSprt16(sprite);
-    sprite->x0   = x;
-    sprite->y0   = y;
-    icon         = ordinal;
-    sprite->u0   = (icon % 10) * 16 + 0x50 - (icon / 10) * 0x30;
-    sprite->v0   = (icon / 10) * 16 - 0x20;
+    setXY0(sprite, x, y);
+    icon = ordinal;
+    setUV0(sprite, (icon % 10) * 16 + 0x50 - (icon / 10) * 0x30, (icon / 10) * 16 - 0x20);
     sprite->clut = (D_801D4CD4[icon] >> 4) | 0x7840;
-    sprite->r0   = GFX_COLOR_NEUTRAL;
-    sprite->g0   = GFX_COLOR_NEUTRAL;
-    sprite->b0   = GFX_COLOR_NEUTRAL;
+    setRGB0(sprite, GFX_COLOR_NEUTRAL, GFX_COLOR_NEUTRAL, GFX_COLOR_NEUTRAL);
     GFX_AddPrim(GFX_LAYER_UI, sizeof(SPRT_16));
 }
 
@@ -981,17 +977,12 @@ MATCH void func_801D4030(s16 x, s16 y, u8 piece) {
 
     sprite = GFX_CURSOR(SPRT);
     SetSprt(sprite);
-    offset       = piece * 6;
-    sprite->x0   = x;
-    sprite->y0   = y;
-    sprite->u0   = D_801D4CE0[offset];
-    sprite->v0   = D_801D4CE0[offset + 1];
-    sprite->w    = D_801D4CE0[offset + 2];
-    sprite->h    = D_801D4CE0[offset + 3];
+    offset = piece * 6;
+    setXY0(sprite, x, y);
+    setUV0(sprite, D_801D4CE0[offset], D_801D4CE0[offset + 1]);
+    setWH(sprite, D_801D4CE0[offset + 2], D_801D4CE0[offset + 3]);
     sprite->clut = getClut(D_801D4CE0[offset + 4], D_801D4CE0[offset + 5] + 0x1E0);
-    sprite->r0   = GFX_COLOR_NEUTRAL;
-    sprite->g0   = GFX_COLOR_NEUTRAL;
-    sprite->b0   = GFX_COLOR_NEUTRAL;
+    setRGB0(sprite, GFX_COLOR_NEUTRAL, GFX_COLOR_NEUTRAL, GFX_COLOR_NEUTRAL);
     GFX_AddPrim(GFX_LAYER_UI, sizeof(SPRT));
 }
 

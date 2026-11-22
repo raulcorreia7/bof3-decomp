@@ -544,9 +544,7 @@ MATCH void func_801F8A5C(void) {
 MATCH void func_801F8AA0(void) {
     s32 cue;
 
-    g_Task->vx = 0;
-    g_Task->vy = 0;
-    g_Task->vz = 0;
+    setVector(g_Task, 0, 0, 0);
     if (!(g_Task->unk_06 & 0x1)) {
         g_Task->unk_18 = 0x3000;
         g_Task->unk_1C = 0;

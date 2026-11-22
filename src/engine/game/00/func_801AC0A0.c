@@ -17,7 +17,5 @@ MATCH void func_801AC0A0(s8 tuning_delta) {
     step          = next;
     g_Task->timer = step;
     work          = g_Task;
-    work->vx      = (buf[0] - work->pos.x.fixed) / step;
-    work->vy      = (buf[1] - work->pos.y.fixed) / step;
-    work->vz      = (buf[2] - COORD_INT(work->pos.z)) / step;
+    setVector(work, (buf[0] - work->pos.x.fixed) / step, (buf[1] - work->pos.y.fixed) / step, (buf[2] - COORD_INT(work->pos.z)) / step);
 }

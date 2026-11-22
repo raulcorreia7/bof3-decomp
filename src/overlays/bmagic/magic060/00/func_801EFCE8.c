@@ -62,19 +62,10 @@ NON_MATCHING void func_801EFCE8(s32 x, s32 y) {
             }
         }
 
-        prim->r0    = *color;
-        prim->g0    = *color;
-        prim->b0    = *color;
+        setRGB0(prim, *color, *color, *color);
         prim->tpage = GetTPage(TPAGE_DEPTH_4BIT, TPAGE_ABR_HALF, 0x3C0, 0x100);
         prim->clut  = GetClut(0, 0x1E0);
-        prim->u0    = *uv_left;
-        prim->v0    = *uv_right;
-        prim->u1    = *uv_left + 12;
-        prim->v1    = *uv_right;
-        prim->u2    = *uv_left;
-        prim->v2    = *uv_right + 12;
-        prim->u3    = *uv_left + 12;
-        prim->v3    = *uv_right + 12;
+        setUV4(prim, *uv_left, *uv_right, *uv_left + 12, *uv_right, *uv_left, *uv_right + 12, *uv_left + 12, *uv_right + 12);
         GFX_AddPrim(GFX_LAYER_UI, sizeof(POLY_FT4));
         x += 20;
         uv_left += 2;

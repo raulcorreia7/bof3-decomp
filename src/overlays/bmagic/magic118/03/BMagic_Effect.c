@@ -148,9 +148,7 @@ MATCH void BMagic_DrawBurnSprites(void) {
     g_ScratchPadVectors[1].vx    = FIXED_MUL(rcos(0), g_ScratchPad.cells.halves[0]);
     g_ScratchPadVectors[1].vy    = FIXED_MUL(rsin(0), g_ScratchPad.cells.halves[0]);
     g_ScratchPadVectors[1].vz    = -(g_ScratchPad.cells.halves[3] + FIXED_MUL(rsin(0), 0x20));
-    g_ScratchPadVectors[3].vx    = FIXED_MUL(rcos(0), g_ScratchPad.cells.halves[0]);
-    g_ScratchPadVectors[3].vy    = FIXED_MUL(rsin(0), g_ScratchPad.cells.halves[0]);
-    g_ScratchPadVectors[3].vz    = 0;
+    setVector(&g_ScratchPadVectors[3], FIXED_MUL(rcos(0), g_ScratchPad.cells.halves[0]), FIXED_MUL(rsin(0), g_ScratchPad.cells.halves[0]), 0);
     for (i = 1; i <= 32; i++) {
         g_ScratchPad.cells.halves[4] = ((i + g_FrameCount) & 0xF) << 8;
         g_ScratchPadVectors[0].vx    = g_ScratchPadVectors[1].vx;

@@ -20,16 +20,7 @@ MATCH void Effect_DrawTexturedQuad(void) {
     prim->y3    = g_Task->screen_y.value + FIXED_MUL(rsin(2560), g_ScratchPad.cells.halves[0]);
     prim->tpage = GetTPage(TPAGE_DEPTH_4BIT, TPAGE_ABR_SUB, 832, 256);
     prim->clut  = GetClut(32, 506);
-    prim->u0    = 128;
-    prim->v0    = 32;
-    prim->u1    = 160;
-    prim->v1    = 32;
-    prim->u2    = 128;
-    prim->v2    = 64;
-    prim->u3    = 160;
-    prim->v3    = 64;
-    prim->r0    = g_ScratchPad.cells.halves[2];
-    prim->g0    = g_ScratchPad.cells.halves[2];
-    prim->b0    = g_ScratchPad.cells.halves[2];
+    setUV4(prim, 128, 32, 160, 32, 128, 64, 160, 64);
+    setRGB0(prim, g_ScratchPad.cells.halves[2], g_ScratchPad.cells.halves[2], g_ScratchPad.cells.halves[2]);
     Area_CellAddPrim(g_Task->pos.x.fixed, g_Task->pos.y.fixed, 2, sizeof(POLY_FT4));
 }

@@ -48,13 +48,13 @@ NON_MATCHING void UI_MessageLayoutChoicePanel(void) {
 
     g_UiPanelCurrent->unk_0A        = 220;
     height                          = count * 13;
-    g_UiPanelCurrent->unk_0B        = (s32)(height + 8) + g_UiMessageWindow.last_row * 2;
+    g_UiPanelCurrent->unk_0B        = (s32)height + 8 + g_UiMessageWindow.last_row * 2;
     g_UiPanelCurrent->u.addr.unk_18 = 48;
     g_UiPanelCurrent->pos.x         = ((g_UiPanelCurrent->unk_0A >> 1) + 48) * 16;
     g_UiPanelCurrent->pos.y         = ((u32)((g_UiPanelCurrent->unk_0B >> 1) + 120) - (height >> 1)) * 16;
+    g_UiPanelCurrent->u.addr.unk_1A = 120 - ((s32)height + g_UiMessageWindow.last_row) / 2;
     g_UiPanelCurrent->u.addr.unk_10 = 0;
     g_UiPanelCurrent->u.addr.unk_12 = 0;
-    g_UiPanelCurrent->u.addr.unk_1A = 120 - ((s32)height + g_UiMessageWindow.last_row) / 2;
     g_UiPanelCurrent->u.addr.unk_14 = (g_UiPanelCurrent->unk_0A * 16) / 5;
     g_UiPanelCurrent->u.addr.unk_16 = (g_UiPanelCurrent->unk_0B * 16) / 5;
     base                            = 124 - ((s32)height + g_UiMessageWindow.last_row) / 2;

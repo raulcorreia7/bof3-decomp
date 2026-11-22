@@ -275,8 +275,7 @@ draw:
     k         = i * 2;
     angle     = (k + g_Task->unk_09) & 0xF;
     params[2] = angle << 8;
-    prim->x0  = params[3] + FIXED_MUL(rsin(params[2]), params[7]);
-    prim->y0  = params[4] + FIXED_MUL(rcos(params[2]), params[7]);
+    setXY0(prim, params[3] + FIXED_MUL(rsin(params[2]), params[7]), params[4] + FIXED_MUL(rcos(params[2]), params[7]));
 
     angle     = (k + 5 + g_Task->unk_09) & 0xF;
     params[2] = angle << 8;

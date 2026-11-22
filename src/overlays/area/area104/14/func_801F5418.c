@@ -26,10 +26,8 @@ MATCH void func_801F5418(s32 width, s32 palette) {
     prim->u3    = prim->u1;
     prim->v0    = 0xD8;
     prim->v1    = 0xD8;
-    prim->r0    = 0x80;
-    prim->g0    = 0x80;
-    prim->b0    = 0x80;
-    prim->v2    = prim->v0 + 8;
-    prim->v3    = prim->v2;
+    setRGB0(prim, 0x80, 0x80, 0x80);
+    prim->v2 = prim->v0 + 8;
+    prim->v3 = prim->v2;
     GFX_AddPrim(GFX_LAYER_EFFECT_FRONT, 0x28);
 }

@@ -12,13 +12,11 @@ MATCH void func_8019B3A8(void) {
     ACTOR_CLEAR_TINT();
     work               = g_Task;
     work->option_flags = 0;
-    work->vx           = 0;
-    work->vy           = 0;
-    work->vz           = 0;
-    work->unk_18       = 0;
-    work->unk_1C       = 0;
-    work->gravity      = 0;
-    g_Task->unk_0A     = 0;
+    setVector(work, 0, 0, 0);
+    work->unk_18   = 0;
+    work->unk_1C   = 0;
+    work->gravity  = 0;
+    g_Task->unk_0A = 0;
     Script_Select(0);
     g_Task->header.mode++;
 }
