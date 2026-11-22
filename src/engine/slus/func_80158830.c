@@ -24,12 +24,11 @@ typedef union MoveEntry {
  */
 MATCH void func_80158830(void* obj) {
     RECT       rect;
-    MoveEntry* row;
+    MoveEntry* entry;
     u32        control;
     u32        dividend;
     u32        divisor;
     u32        rem;
-    u32        row_offset;
     s16        x_part;
     u8*        base;
     u32        index;
@@ -42,21 +41,21 @@ MATCH void func_80158830(void* obj) {
         index    = 2;
         /* The constant-true loop test and the doubled break reproduce the retail scan branch layout. */
         for (; 2 != 0; index += 2) {
-            row = (MoveEntry*)(base + (index << 2));
-            if (row->bytes.index >= (s32)rem) {
-                if (row->bytes.index) {
+            entry = (MoveEntry*)(base + (index << 2));
+            if (entry->bytes.index >= (s32)rem) {
+                if (entry->bytes.index) {
                     break;
                 } else {
                     break;
                 }
             }
         }
-        row    = (MoveEntry*)((index << 2) + (u32)base);
-        x_part = ((row->wide.flags & 0xF) << 7) + SCREEN_WIDTH;
-        rect.x = row->bytes.x;
-        setRECT(&rect, x_part + (rect.x >> 1), row->bytes.y + 256, row->bytes.w, row->bytes.h + 1);
-        control = row->control;
-        SetDrawMove((DR_MOVE*)g_GfxPrimCursor, &rect, (((row->control >> 0xD) & 0x780) + SCREEN_WIDTH) + ((control >> 9) & 0x7F), (row->control & BYTE_MASK) | 0x100);
+        entry  = (MoveEntry*)((index << 2) + (u32)base);
+        x_part = ((entry->wide.flags & 0xF) << 7) + SCREEN_WIDTH;
+        rect.x = entry->bytes.x;
+        setRECT(&rect, x_part + (rect.x >> 1), entry->bytes.y + 256, entry->bytes.w, entry->bytes.h + 1);
+        control = entry->control;
+        SetDrawMove((DR_MOVE*)g_GfxPrimCursor, &rect, (((entry->control >> 0xD) & 0x780) + SCREEN_WIDTH) + ((control >> 9) & 0x7F), (entry->control & BYTE_MASK) | 0x100);
         GFX_AddPrim(GFX_LAYER_FIELD_SCENE, sizeof(DR_MOVE));
     }
 }

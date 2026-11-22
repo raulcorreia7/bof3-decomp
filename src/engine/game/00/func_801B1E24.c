@@ -2,8 +2,8 @@
 
 #ifdef NON_MATCHING
 NON_MATCHING void func_801B1E24(void) {
-    PartyMember* rows;
-    PartyMember* row;
+    PartyMember* members;
+    PartyMember* member;
     s32          i;
     s8           prev;
     s32          index;
@@ -19,25 +19,25 @@ NON_MATCHING void func_801B1E24(void) {
     value = *base;
     i     = 0;
     if (g_Game.party_size != 0) {
-        rows = (PartyMember*)(base - 8);
-        row  = rows;
+        members = (PartyMember*)(base - 8);
+        member  = members;
         do {
-            TASK_SET(row);
+            TASK_SET(member);
             prev = i - 1;
             if (prev < 0) {
                 prev = g_Game.party_size - 1;
             }
-            if (!(rows->header.flags & 1) && prev != 0) {
+            if (!(members->header.flags & 1) && prev != 0) {
                 index  = (prev - 1) * 2 + (value & BYTE_MASK) * 4;
-                result = func_801B1B2C(rows->pos.x.fixed + (s_EntityPlacementOffsets[index] << 15), rows->pos.y.fixed + (D_801CD08D[index] << 15), value & BYTE_MASK, row->speed);
+                result = func_801B1B2C(members->pos.x.fixed + (s_EntityPlacementOffsets[index] << 15), members->pos.y.fixed + (D_801CD08D[index] << 15), value & BYTE_MASK, member->speed);
                 if (((result & BYTE_MASK) != 0) && ((func_801B1C18(SP_REF(s32, 8), SP_REF(s32, 0xC), TASK(PartyMember)->speed) & 0xFF) != 0)) {
-                    goto found; /* first position test matched: run the row mark */
+                    goto found; /* first position test matched: run the member mark */
                 }
                 if (!(func_801B1B2C(D_80145EC4, D_80145EC8, value & BYTE_MASK, TASK(PartyMember)->speed) & 0xFF)) {
-                    goto next; /* fallback position rejected: next row */
+                    goto next; /* fallback position rejected: next member */
                 }
-            } else if (!(func_801B1B2C(rows->pos.x.fixed, rows->pos.y.fixed, value & BYTE_MASK, row->speed) & BYTE_MASK)) {
-                goto next; /* fallback position rejected: next row */
+            } else if (!(func_801B1B2C(members->pos.x.fixed, members->pos.y.fixed, value & BYTE_MASK, member->speed) & BYTE_MASK)) {
+                goto next; /* fallback position rejected: next member */
             }
         found:
             if (i != 0) {
@@ -48,7 +48,7 @@ NON_MATCHING void func_801B1E24(void) {
             }
         next:
             i++;
-            row++;
+            member++;
         } while (i < g_Game.party_size);
     }
 
@@ -58,7 +58,7 @@ NON_MATCHING void func_801B1E24(void) {
     while (i < g_Game.party_size) {
         if (D_80145E91[offset] == 3) {
             state = TASK(Actor)->header.step + 1;
-            goto store; /* row not in state 3: keep the incremented state */
+            goto store; /* member not in state 3: keep the incremented state */
         }
         i++;
         offset += BATTLE_PARTY_STRIDE;
