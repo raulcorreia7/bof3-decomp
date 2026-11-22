@@ -7,6 +7,7 @@ NON_MATCHING void func_801EEF10(void) {
     u8*  step;
     u16  value;
     u16  i;
+    u16  index16;
     u32  gray;
     u16  color;
 
@@ -22,13 +23,15 @@ NON_MATCHING void func_801EEF10(void) {
 
     if (g_PadStates[0].held != 0) {
         for (i = 0; i < AREA_PALETTE_COLORS; i++) {
-            color                    = g_BattleEffectPalette[i];
-            gray                     = (PSX_COLOR_R(color) + PSX_COLOR_G(color) + PSX_COLOR_B(color)) / 3U;
-            value                    = (color & PSX_COLOR_STP_BIT) | (gray << 10) | (gray << 5) | gray;
-            g_BattleEffectPalette[i] = value;
+            index16                        = i;
+            color                          = g_BattleEffectPalette[index16];
+            gray                           = (PSX_COLOR_R(color) + PSX_COLOR_G(color) + PSX_COLOR_B(color)) / 3U;
+            value                          = (color & PSX_COLOR_STP_BIT) | (gray << 10) | (gray << 5) | gray;
+            g_BattleEffectPalette[index16] = value;
         }
+        i      = 0;
         mirror = GAME_PALETTE_MIRROR_U16;
-        for (i = 0; i < AREA_PALETTE_COLORS; i++) {
+        for (; i < AREA_PALETTE_COLORS; i++) {
             color     = mirror[i];
             gray      = (PSX_COLOR_R(color) + PSX_COLOR_G(color) + PSX_COLOR_B(color)) / 3U;
             value     = (color & PSX_COLOR_STP_BIT) | (gray << 10) | (gray << 5) | gray;

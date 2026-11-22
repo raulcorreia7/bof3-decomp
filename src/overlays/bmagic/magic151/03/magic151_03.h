@@ -15,38 +15,24 @@ typedef struct Magic151Steps {
     Callback steps[MAGIC151_STEP_COUNT];
 } Magic151Steps;
 
-/* The battle panel rows the setup fills, one 0x24-byte row a panel. */
-typedef struct BattlePanelRow {
-    u8  mode_00;
-    u8  unk_01;
-    s16 x_02;
-    s16 y_04;
-    u8  unk_06;
-    u8  unk_07;
-    u8  battler;
-    u8  pad_09[0x1B];
-} BattlePanelRow;
-
-ASSERT_SIZE(BattlePanelRow, 0x24);
-
 /* The palette row the battle load copies. */
-extern u8             D_801463B9;
-extern BattlePanelRow D_80148332[];
+extern u8            D_801463B9;
+extern BattlePanel   D_80148332[];
 /* The panel x offsets by scroll direction. */
-extern s8             D_801EAEA4[];
+extern s8            D_801EAEA4[];
 /* The panel x and y offsets of each battler facing, two bytes a facing. */
-extern s8             D_801EB0B0[];
-extern s8             D_801EB0B1[];
+extern s8            D_801EB0B0[];
+extern s8            D_801EB0B1[];
 /* The effect cells of each member row, indexed with the member stride. */
-extern u8             D_801EBF47[];
-extern u8             D_801EC039[];
-extern u32            D_801EC044[];
+extern u8            D_801EBF47[];
+extern u8            D_801EC039[];
+extern u32           D_801EC044[];
 /* The staged encounter origin and ground height. */
-extern s32            D_801EC364;
-extern s32            D_801EC368;
-extern s32            D_801EC36C;
-extern Magic151Steps  D_801EEC10;
-extern Magic151Steps  D_801EEC24;
+extern s32           D_801EC364;
+extern s32           D_801EC368;
+extern s32           D_801EC36C;
+extern Magic151Steps D_801EEC10;
+extern Magic151Steps D_801EEC24;
 
 extern BMagicEffectSteps D_801EEC38;
 void                     func_800A68A4(void);

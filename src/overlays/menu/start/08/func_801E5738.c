@@ -1,7 +1,7 @@
 #include "start_08.h"
 
 /* The staged shop record is a 0x1C-byte slot and the byte at +0x15 marks the
- * slot hidden (0xFF); g_SaveSlots[0].card_index is that byte of the first slot, so the cursor's
+ * slot hidden (0xFF); g_SaveSlots[0].bytes.card_index is that byte of the first slot, so the cursor's
  * slot sits one stride per index above it. */
 #define SHOP_SLOT_STRIDE 0x1C
 
@@ -34,7 +34,7 @@ MATCH void func_801E5738(void) {
         SND_SEPlay(EMI_SE_ID(SND_BANK_COMMON, 1));
     }
     if (g_PadStates[0].pressed & g_InputMasks[MENU_INPUT_CONFIRM]) {
-        if (*(&g_SaveSlots[0].card_index + (g_SaveSlotFirst * SHOP_SLOT_STRIDE)) != GAME_NONE) {
+        if (*(&g_SaveSlots[0].bytes.card_index + (g_SaveSlotFirst * SHOP_SLOT_STRIDE)) != GAME_NONE) {
             SND_SEPlay(EMI_SE_ID(SND_BANK_COMMON, 4));
             D_8014865B = 1;
             g_MenuCampStep++;

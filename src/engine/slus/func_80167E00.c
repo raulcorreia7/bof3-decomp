@@ -1,17 +1,10 @@
 #include "engine/slus/slus.h"
 
-/* One 8-byte scene entry: its id and the area byte at +7. */
-typedef struct SceneSlot {
-    u16 id;
-    u8  pad_02[5];
-    u8  scene;
-} SceneSlot;
-
 /* steps the 30 field actor slots: when the selected slot is live it refreshes its state byte and runs the
  * type-10 step, or looks its scene up in the loaded scene table and D_80183A70 and runs the type step only on a
  * listed scene.
  */
-#define SCENE_SLOTS ((SceneSlot*)g_SceneActorDefs)
+#define SCENE_SLOTS ((AreaActorDef*)g_SceneActorDefs)
 
 #ifdef NON_MATCHING
 NON_MATCHING void func_80167E00(void) {
@@ -38,7 +31,7 @@ NON_MATCHING void func_80167E00(void) {
             continue;
         }
         for (slot = 0; slot < FAKE_VOLATILE(u8, D_800E3800); slot++) {
-            if (SCENE_SLOTS[slot].scene == TASK(Actor)->unk_2C) {
+            if (SCENE_SLOTS[slot].script_section == TASK(Actor)->unk_2C) {
                 break;
             }
         }
