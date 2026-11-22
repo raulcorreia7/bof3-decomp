@@ -10,7 +10,11 @@
 extern Callback D_801F02B4[];
 
 extern s32 D_801F037C[];
-void       func_801EF458(void);
+/* The ring radius of each timer cell, read by the effect's step branches. */
+extern s32 D_801F02DC[];
+extern s32 D_801F031C[];
+
+void func_801EF458(void);
 
 extern Callback D_801F02C8[];
 void            func_801F002C(void);
