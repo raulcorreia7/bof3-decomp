@@ -63,7 +63,7 @@ NON_MATCHING void func_801F8740(void) {
             }
             break;
         case 6:
-            SCENARIO_MESSAGE_WAIT(0x9A, 7);
+            SCENARIO_MESSAGE_WAIT(MSG_SCENA02_154, 7);
             break;
         case 7:
             if (g_GameStateIndex != 2) {

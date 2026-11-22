@@ -666,7 +666,7 @@ MATCH void func_801F9330(Scena07BurstBuffer* buffer) {
     }
 }
 
-/* Draws the burst: 32 semi-transparent Gouraud quads between a ring of radius 32 at its position and the ring 0x7000000 higher, shaded by its size. */
+/* Draws the burst: 32 semi-transparent Gouraud quads between a ring of radius 32 at its position and the ring 0x700 units higher, shaded by its size. */
 MATCH void func_801F97E0(Scena07Burst* burst) {
     DVECTOR  low;
     DVECTOR  high;
@@ -683,7 +683,7 @@ MATCH void func_801F97E0(Scena07Burst* burst) {
     point.vy = burst->pos.vy + (rsin(0) << 5);
     point.vz = burst->pos.vz;
     Camera_ProjectPoint(&point, &low);
-    point.vz = burst->pos.vz + 0x7000000;
+    point.vz = burst->pos.vz + TO_COORD(0x700);
     Camera_ProjectPoint(&point, &high);
     level = burst->unk_10;
     shade = 0x80;
@@ -702,7 +702,7 @@ MATCH void func_801F97E0(Scena07Burst* burst) {
         setRGB0(prim, level, level, level);
         setRGB1(prim, level, level, level);
         Camera_ProjectPoint(&point, &low);
-        point.vz = burst->pos.vz + 0x7000000;
+        point.vz = burst->pos.vz + TO_COORD(0x700);
         Camera_ProjectPoint(&point, &high);
         prim->x2 = low.vx;
         prim->y2 = low.vy;

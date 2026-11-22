@@ -4,9 +4,6 @@
 __asm__(".include \"include/match/macro.inc\"\n");
 #endif
 
-extern s8 D_8014865F;
-extern u8 D_80148660;
-
 /* Runs the scene script one step per frame, keyed on g_ScenarioState.step_05. */
 MATCH void func_801FAB08(void) {
     switch (g_ScenarioState.step_05) {
@@ -56,7 +53,7 @@ MATCH void func_801FAB08(void) {
                 g_ScriptVars[0] = 0x1F;
                 SND_SeqStop(0, 1);
                 SND_SeqPlay(0, 2, 100, 100);
-                SCENARIO_MESSAGE_WAIT(13, 8);
+                SCENARIO_MESSAGE_WAIT(MSG_SCENA06_013, 8);
             }
             break;
         case 8:
