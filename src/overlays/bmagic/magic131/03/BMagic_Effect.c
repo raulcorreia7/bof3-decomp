@@ -595,9 +595,9 @@ MATCH void func_801F06B4(void) {
             SetSemiTrans(poly, 1);
             poly->tpage = GetTPage(TPAGE_DEPTH_8BIT, TPAGE_ABR_ADD, 0x340, 0x100);
             poly->clut  = GetClut(0, 0x1FA);
-            setUV4(poly, ((i & 1) + (ring - 1) / 4 * 2) << 6, ((u8*)D_801F1C08)[0xB + ring], (((i & 1) + (ring - 1) / 4 * 2) << 6) + 0x3F, ((u8*)D_801F1C08)[0xB + ring],
-                   ((i & 1) + (ring - 1) / 4 * 2) << 6, ((u8*)D_801F1C08)[0x13 + ring] - 1 + ((u8*)D_801F1C08)[0xB + ring], (((i & 1) + (ring - 1) / 4 * 2) << 6) + 0x3F,
-                   ((u8*)D_801F1C08)[0x13 + ring] - 1 + ((u8*)D_801F1C08)[0xB + ring]);
+            setUV4(poly, ((i & 1) + (ring - 1) / 4 * 2) << 6, g_BMagicRingUvRows[0xB + ring], (((i & 1) + (ring - 1) / 4 * 2) << 6) + 0x3F, g_BMagicRingUvRows[0xB + ring],
+                   ((i & 1) + (ring - 1) / 4 * 2) << 6, g_BMagicRingUvRows[0x13 + ring] - 1 + g_BMagicRingUvRows[0xB + ring], (((i & 1) + (ring - 1) / 4 * 2) << 6) + 0x3F,
+                   g_BMagicRingUvRows[0x13 + ring] - 1 + g_BMagicRingUvRows[0xB + ring]);
             RotTransPers4(&g_ScratchPadVectors[0], &g_ScratchPadVectors[1], &g_ScratchPadVectors[2], &g_ScratchPadVectors[3], (long*)&poly->x0, (long*)&poly->x1, (long*)&poly->x2, (long*)&poly->x3,
                           &depth, &flag);
             setRGB0(poly, g_ScratchPad.cells.halves[4], g_ScratchPad.cells.halves[5], g_ScratchPad.cells.halves[6]);
