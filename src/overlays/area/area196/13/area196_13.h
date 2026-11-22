@@ -5,7 +5,6 @@
  * and its data. Only this image includes the file. */
 
 #include "overlays/area/worlds/world04.h"
-#include "area/spad.h"
 
 /* The scratchpad work row the step paths read. */
 /* The scroll counter the step paths test. */

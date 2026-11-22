@@ -3,12 +3,12 @@
 MATCH void Effect_Wait(void) {
     PartyMember* work;
 
-    work = g_Task;
+    work = TASK(PartyMember);
     work->param.unk_0B++;
-    work = g_Task;
+    work = TASK(PartyMember);
     work->unk_09--;
     if (work->unk_09 == 0) {
-        work = g_Task;
+        work = TASK(PartyMember);
         work->header.step++;
     }
 }

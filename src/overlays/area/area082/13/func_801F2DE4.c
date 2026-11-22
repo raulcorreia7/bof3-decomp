@@ -6,18 +6,18 @@ MATCH void func_801F2DE4(void) {
     s32     pos[3];
     MATRIX  matrix;
 
-    g_Task->unk_2C -= 1;
-    if (g_Task->unk_2C == 0) {
+    TASK(Actor)->unk_2C -= 1;
+    if (TASK(Actor)->unk_2C == 0) {
         Camera_SetMatrix(&matrix);
-        pos[0] = g_Task->pos.x.fixed;
-        pos[1] = g_Task->pos.y.fixed;
-        pos[2] = g_Task->pos.z.fixed;
+        pos[0] = TASK(Actor)->pos.x.fixed;
+        pos[1] = TASK(Actor)->pos.y.fixed;
+        pos[2] = TASK(Actor)->pos.z.fixed;
         Camera_ProjectPoint(pos, from);
         pos[1] += 0x10000;
         Camera_ProjectPoint(pos, to);
-        g_Task->unk_6C = ratan2(to[0].vy - from[0].vy, to[0].vx - from[0].vx) + 0x400;
-        g_Task->unk_2C = 30;
-        g_Task->vy     = 0;
-        g_Task->header.mode += 1;
+        TASK(Actor)->unk_6C = ratan2(to[0].vy - from[0].vy, to[0].vx - from[0].vx) + 0x400;
+        TASK(Actor)->unk_2C = 30;
+        TASK(Actor)->vy     = 0;
+        TASK(Actor)->header.mode += 1;
     }
 }

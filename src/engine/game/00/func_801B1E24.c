@@ -42,9 +42,9 @@ NON_MATCHING void func_801B1E24(void) {
         found:
             if (i != 0) {
                 Party_BattlersClearState(i & BYTE_MASK);
-                g_Task->header.mode = 3;
+                TASK(Actor)->header.mode = 3;
                 Actor_SetSemiTransparent();
-                g_Task->tint.bytes.flags = 1;
+                TASK(Actor)->tint.bytes.flags = 1;
             }
         next:
             i++;
@@ -57,7 +57,7 @@ NON_MATCHING void func_801B1E24(void) {
     offset = BATTLE_PARTY_STRIDE;
     while (i < g_Game.party_size) {
         if (D_80145E91[offset] == 3) {
-            state = g_Task->header.step + 1;
+            state = TASK(Actor)->header.step + 1;
             goto store; /* row not in state 3: keep the incremented state */
         }
         i++;
@@ -65,7 +65,7 @@ NON_MATCHING void func_801B1E24(void) {
     }
     state = 4;
 store:
-    g_Task->header.step = state;
+    TASK(Actor)->header.step = state;
 }
 #else
 INCLUDE_ASM(func_801B1E24);

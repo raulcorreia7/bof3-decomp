@@ -48,7 +48,7 @@ MATCH void func_801EEEB0(void) {
             if (g_Battle.party_count != 0) {
                 do {
                     slot                               = Battle_AllocEffect(1, 8) & BYTE_MASK;
-                    work                               = g_Task;
+                    work                               = TASK(PartyMember);
                     g_BattleEffects[slot].header.mode  = 0;
                     g_BattleEffects[slot].unk_04       = i;
                     g_BattleEffects[slot].arg.unk_09   = row * 0x28 + 1;
@@ -131,7 +131,7 @@ MATCH void func_801EF2CC(void) {
         do {
             slot = BMagic_AllocEffect();
             if (slot != GAME_NONE) {
-                work                                   = g_Task;
+                work                                   = TASK(PartyMember);
                 BMAGIC_EFFECT_SLOTS[slot].header.mode  = 0;
                 BMAGIC_EFFECT_SLOTS[slot].unk_0B       = i;
                 BMAGIC_EFFECT_SLOTS[slot].arg.unk_09   = ((i & BYTE_MASK) >> 2) + 0x10;
@@ -148,7 +148,7 @@ MATCH void func_801EF444(void) {
     u8           timer;
     PartyMember* work;
 
-    work         = g_Task;
+    work         = TASK(PartyMember);
     timer        = work->unk_09 - 1;
     work->unk_09 = timer;
     battler      = &g_Game.members[work->unk_04];

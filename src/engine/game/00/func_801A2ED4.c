@@ -1,7 +1,5 @@
 #include "game_00.h"
 
-#define WORK g_Task
-
 MATCH u8 func_801A2ED4(Actor* entity, u8 route_step) {
     u32 target_x;
     u32 target_y;
@@ -20,8 +18,8 @@ MATCH u8 func_801A2ED4(Actor* entity, u8 route_step) {
 
     target_x = g_Game.members[0].pos.x.fixed + g_Game.members[0].unk_0C * g_Game.members[0].unk_09;
     target_y = g_Game.members[0].pos.y.fixed + g_Game.members[0].unk_10 * g_Game.members[0].unk_09;
-    if ((WORK->direction & 0x1) == 0) {
-        WORK->direction++;
+    if ((TASK(Actor)->direction & 0x1) == 0) {
+        TASK(Actor)->direction++;
     }
     best = 0xFF;
     if ((route_step & BYTE_MASK) == 0u) {
@@ -31,9 +29,9 @@ MATCH u8 func_801A2ED4(Actor* entity, u8 route_step) {
     }
     for (i = 0; i < 4; i++) {
         if ((func_801A1AE4(entity) & BYTE_MASK) == 0) {
-            route = WORK->direction;
-            wx    = WORK->pos.x.fixed;
-            wy    = WORK->pos.y.fixed;
+            route = TASK(Actor)->direction;
+            wx    = TASK(Actor)->pos.x.fixed;
+            wy    = TASK(Actor)->pos.y.fixed;
             route &= 7;
             px = &g_FacingSteps[route].x;
             py = &g_FacingStepY[route * 2];
@@ -49,14 +47,14 @@ MATCH u8 func_801A2ED4(Actor* entity, u8 route_step) {
             if ((route_step & BYTE_MASK) != 0u) {
                 if (entity->unk_88 < dist) {
                     entity->unk_88 = dist;
-                    best           = WORK->direction;
+                    best           = TASK(Actor)->direction;
                 }
             } else if (dist < entity->unk_88) {
                 entity->unk_88 = dist;
-                best           = WORK->direction;
+                best           = TASK(Actor)->direction;
             }
         }
-        WORK->direction = (WORK->direction + 2) & 0x7;
+        TASK(Actor)->direction = (TASK(Actor)->direction + 2) & 0x7;
     }
     return best;
 }

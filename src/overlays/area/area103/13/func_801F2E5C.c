@@ -10,10 +10,10 @@ MATCH void func_801F2E5C(void) {
     u8              i;
 
     GFX_AddDitheredDrawMode(GFX_LAYER_UI, GetTPage(TPAGE_DEPTH_4BIT, TPAGE_ABR_ADD, 0x380, 0x100));
-    pos.x = g_Task->pos.x.fixed;
-    pos.y = g_Task->pos.y.fixed;
-    pos.z = g_Task->pos.z.fixed;
-    func_801F352C(&pos, g_Task->timer << 2, 0x80, 0);
+    pos.x = TASK(Actor)->pos.x.fixed;
+    pos.y = TASK(Actor)->pos.y.fixed;
+    pos.z = TASK(Actor)->pos.z.fixed;
+    func_801F352C(&pos, TASK(Actor)->timer << 2, 0x80, 0);
     Camera_SetMatrix(&matrix);
     row = (AreaSpinEffect*)AREA_WORK;
     for (i = 0; i < 3; i++) {
@@ -24,6 +24,6 @@ MATCH void func_801F2E5C(void) {
     }
     ACTOR_COUNT_DOWN(TASK(Actor), timer, timer);
     if (!(timer & 0xFF)) {
-        g_Task->header.mode += 1;
+        TASK(Actor)->header.mode += 1;
     }
 }

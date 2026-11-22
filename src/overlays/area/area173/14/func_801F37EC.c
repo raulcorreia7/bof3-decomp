@@ -15,7 +15,7 @@ MATCH void func_801F37EC(void) {
         *slot      = 0;
         D_1F80003A = 0x180;
         func_801F3954(2);
-        g_Task->timer = 96;
-        g_Task->header.step++;
+        TASK(Actor)->timer = 96;
+        TASK(Actor)->header.step++;
     }
 }

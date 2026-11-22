@@ -18,7 +18,7 @@ MATCH void func_801E3638(void) {
                 g_BattleCurrentEnemy->turn.damage_flags.value ^= 0x800;
             }
         }
-        work = g_Task;
+        work = TASK(PartyMember);
         if (work->facing == FACING_UP || work->facing == FACING_RIGHT) {
             work->pos.x.fixed = g_BattleEffects[work->slot].pos.x.fixed + (g_BattleEffects[work->slot].arg.sway << 9);
         } else {

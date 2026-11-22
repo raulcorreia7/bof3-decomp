@@ -9,7 +9,7 @@ MATCH void func_801F331C(void) {
     dot = AREA_TRAIL_DOTS;
     for (i = 0; i < D_801F651C; dot++, i++) {
         if (dot->active != 0) {
-            if (g_Task->unk_06 == 0) {
+            if (TASK(Actor)->unk_06 == 0) {
                 if (dot->life != 0) {
                     dot->x += dot->dx;
                     dot->y += dot->dy;

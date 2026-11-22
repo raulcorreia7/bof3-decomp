@@ -4,7 +4,7 @@ MATCH void func_8019AB5C(void) {
     Actor* work;
     u8     value;
 
-    work  = g_Task;
+    work  = TASK(Actor);
     value = work->timer;
     if (value == 0) {
         SYS_ClearFlag(g_SceneEventFlags, 28u);

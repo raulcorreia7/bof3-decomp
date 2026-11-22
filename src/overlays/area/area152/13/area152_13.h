@@ -5,7 +5,6 @@
  * and its data. Only this image includes the file. */
 
 #include "overlays/area/worlds/world04.h"
-#include "area/spad.h"
 #include "common/util.h"
 
 /* The work origin offset, step and threshold this overlay advances. */

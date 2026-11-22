@@ -15,21 +15,21 @@ MATCH void WorldMap_UpdateClouds(void) {
     s32       x_high;
     s32       y_high;
 
-    if (g_Task->header.step == 0) {
-        COORD_INT(g_Task->pos.y) += g_FrameCount & 0xF;
-        g_Task->header.step++;
+    if (TASK(Actor)->header.step == 0) {
+        COORD_INT(TASK(Actor)->pos.y) += g_FrameCount & 0xF;
+        TASK(Actor)->header.step++;
     }
     if ((g_AreaDrawFlags & AREA_DRAW_CELL_LAYERS) == 0) {
         return;
     }
 
-    width = g_Task->param.cloud_layer - 2;
-    g_Task->pos.y.fixed += 0x800 + (width << 10);
-    if (g_AreaMapBundle.height + 8 < COORD_INT(g_Task->pos.y)) {
-        COORD_INT(g_Task->pos.y) = -8;
+    width = TASK(Actor)->param.cloud_layer - 2;
+    TASK(Actor)->pos.y.fixed += 0x800 + (width << 10);
+    if (g_AreaMapBundle.height + 8 < COORD_INT(TASK(Actor)->pos.y)) {
+        COORD_INT(TASK(Actor)->pos.y) = -8;
     }
 
-    if (abs(g_AreaTargetCellX - COORD_INT(g_Task->pos.x)) >= WORLDMAP_CLOUD_DRAW_RANGE && abs(g_AreaTargetCellY - COORD_INT(g_Task->pos.y)) >= WORLDMAP_CLOUD_DRAW_RANGE) {
+    if (abs(g_AreaTargetCellX - COORD_INT(TASK(Actor)->pos.x)) >= WORLDMAP_CLOUD_DRAW_RANGE && abs(g_AreaTargetCellY - COORD_INT(TASK(Actor)->pos.y)) >= WORLDMAP_CLOUD_DRAW_RANGE) {
         return;
     }
 
@@ -41,8 +41,8 @@ MATCH void WorldMap_UpdateClouds(void) {
     q2       = quad + 2;
     q3       = quad + 3;
     size     = ((2 - width) << 8) + abs(0xF - (g_FrameCount & 0x1F));
-    x_high   = (g_Task->pos.x.fixed >> 9) - (AREA_CELL_ORIGIN - AREA_CELL_HALF);
-    y_high   = (g_Task->pos.y.fixed >> 9) - (AREA_CELL_ORIGIN - AREA_CELL_HALF);
+    x_high   = (TASK(Actor)->pos.x.fixed >> 9) - (AREA_CELL_ORIGIN - AREA_CELL_HALF);
+    y_high   = (TASK(Actor)->pos.y.fixed >> 9) - (AREA_CELL_ORIGIN - AREA_CELL_HALF);
     quad->vz = WORLD_CLOUD_DEPTH;
     q1->vz   = WORLD_CLOUD_DEPTH;
     q2->vz   = WORLD_CLOUD_DEPTH;
@@ -61,7 +61,7 @@ MATCH void WorldMap_UpdateClouds(void) {
 
     for (row = 0; row < (2 - width) * 4 + 1; row++) {
         for (col = 0; col < (2 - width) * 4; col++) {
-            cell = Area_CellFindQuad(COORD_INT(g_Task->pos.x) - (2 - width) + col, COORD_INT(g_Task->pos.y) - (2 - width) + row);
+            cell = Area_CellFindQuad(COORD_INT(TASK(Actor)->pos.x) - (2 - width) + col, COORD_INT(TASK(Actor)->pos.y) - (2 - width) + row);
             if (cell == NULL) {
                 continue;
             }
@@ -77,16 +77,16 @@ MATCH void WorldMap_UpdateClouds(void) {
             prim->tpage      = getTPage(TPAGE_DEPTH_4BIT, TPAGE_ABR_SUB, 704, 256);
             setRGB0(prim, 40, 40, 40);
             setUV4(prim, g_WorldMapCloudTexture.u_origin[width] + col * g_WorldMapCloudTexture.cell_size[width],
-                   g_WorldMapCloudTexture.v_origin[width] + row * g_WorldMapCloudTexture.cell_size[width] - g_WorldMapCloudTexture.cell_size[width] * COORD_FRAC(g_Task->pos.y) / 0x10000,
+                   g_WorldMapCloudTexture.v_origin[width] + row * g_WorldMapCloudTexture.cell_size[width] - g_WorldMapCloudTexture.cell_size[width] * COORD_FRAC(TASK(Actor)->pos.y) / 0x10000,
                    g_WorldMapCloudTexture.cell_size[width] + (g_WorldMapCloudTexture.u_origin[width] + g_WorldMapCloudTexture.cell_size[width] * col),
-                   g_WorldMapCloudTexture.v_origin[width] + row * g_WorldMapCloudTexture.cell_size[width] - g_WorldMapCloudTexture.cell_size[width] * COORD_FRAC(g_Task->pos.y) / 0x10000,
+                   g_WorldMapCloudTexture.v_origin[width] + row * g_WorldMapCloudTexture.cell_size[width] - g_WorldMapCloudTexture.cell_size[width] * COORD_FRAC(TASK(Actor)->pos.y) / 0x10000,
                    g_WorldMapCloudTexture.u_origin[width] + col * g_WorldMapCloudTexture.cell_size[width],
-                   g_WorldMapCloudTexture.cell_size[width] +
-                       (u8)(g_WorldMapCloudTexture.v_origin[width] + row * g_WorldMapCloudTexture.cell_size[width] - g_WorldMapCloudTexture.cell_size[width] * COORD_FRAC(g_Task->pos.y) / 0x10000),
+                   g_WorldMapCloudTexture.cell_size[width] + (u8)(g_WorldMapCloudTexture.v_origin[width] + row * g_WorldMapCloudTexture.cell_size[width] -
+                                                                  g_WorldMapCloudTexture.cell_size[width] * COORD_FRAC(TASK(Actor)->pos.y) / 0x10000),
                    g_WorldMapCloudTexture.cell_size[width] + (g_WorldMapCloudTexture.u_origin[width] + g_WorldMapCloudTexture.cell_size[width] * col),
-                   g_WorldMapCloudTexture.cell_size[width] +
-                       (u8)(g_WorldMapCloudTexture.v_origin[width] + row * g_WorldMapCloudTexture.cell_size[width] - g_WorldMapCloudTexture.cell_size[width] * COORD_FRAC(g_Task->pos.y) / 0x10000));
-            Area_CellAddPrim((COORD_INT(g_Task->pos.x) - (2 - width) + col) << 16, (COORD_INT(g_Task->pos.y) - (2 - width) + row) << 16, 1, 0x28);
+                   g_WorldMapCloudTexture.cell_size[width] + (u8)(g_WorldMapCloudTexture.v_origin[width] + row * g_WorldMapCloudTexture.cell_size[width] -
+                                                                  g_WorldMapCloudTexture.cell_size[width] * COORD_FRAC(TASK(Actor)->pos.y) / 0x10000));
+            Area_CellAddPrim((COORD_INT(TASK(Actor)->pos.x) - (2 - width) + col) << 16, (COORD_INT(TASK(Actor)->pos.y) - (2 - width) + row) << 16, 1, 0x28);
         }
     }
 }

@@ -20,20 +20,20 @@
  * colour row read from the three channel symbols. A bare statement macro, not `do { } while (0)`:
  * the wrapper steers register allocation. Each member declares `prim` and `i`; every change must
  * verify func_801F30C0 and func_801F3274. */
-#define AREA_DRAW_TRIANGLE_FAN(x, y, radius, angle, red, green, blue)                                \
-    i = 0;                                                                                           \
-    do {                                                                                             \
-        prim = GFX_BeginPolyG3(1);                                                                   \
-        setXY2(prim, x, y, x + FIXED_MUL(radius, rcos(angle)), y + FIXED_MUL(radius, rsin(angle)));  \
-        angle += AREA_RING_ANGLE_STEP;                                                               \
-        prim->x2 = x + FIXED_MUL(radius, rcos(angle));                                               \
-        prim->y2 = y + FIXED_MUL(radius, rsin(angle));                                               \
-        /* The row's unk_06 selects one colour triplet of the table. */                              \
-        setRGB0(prim, red[g_Task->unk_06 * 3], green[g_Task->unk_06 * 3], blue[g_Task->unk_06 * 3]); \
-        setRGB1(prim, 0, 0, 0);                                                                      \
-        setRGB2(prim, 0, 0, 0);                                                                      \
-        i += 1;                                                                                      \
-        GFX_AddPrim(GFX_LAYER_EFFECT, sizeof(POLY_G3));                                              \
+#define AREA_DRAW_TRIANGLE_FAN(x, y, radius, angle, red, green, blue)                                               \
+    i = 0;                                                                                                          \
+    do {                                                                                                            \
+        prim = GFX_BeginPolyG3(1);                                                                                  \
+        setXY2(prim, x, y, x + FIXED_MUL(radius, rcos(angle)), y + FIXED_MUL(radius, rsin(angle)));                 \
+        angle += AREA_RING_ANGLE_STEP;                                                                              \
+        prim->x2 = x + FIXED_MUL(radius, rcos(angle));                                                              \
+        prim->y2 = y + FIXED_MUL(radius, rsin(angle));                                                              \
+        /* The row's unk_06 selects one colour triplet of the table. */                                             \
+        setRGB0(prim, red[TASK(Actor)->unk_06 * 3], green[TASK(Actor)->unk_06 * 3], blue[TASK(Actor)->unk_06 * 3]); \
+        setRGB1(prim, 0, 0, 0);                                                                                     \
+        setRGB2(prim, 0, 0, 0);                                                                                     \
+        i += 1;                                                                                                     \
+        GFX_AddPrim(GFX_LAYER_EFFECT, sizeof(POLY_G3));                                                             \
     } while (i < 8)
 
 #endif

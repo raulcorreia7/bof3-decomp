@@ -52,17 +52,17 @@ found:
         flags = g_Characters[type].status;
         if ((flags & 0x4000) != 0) {
             Script_Stage(rec[0x4B], 0, MEM_PTR(u8, BATTLE_SCRIPT_TABLE), 0xA00);
-            g_Task->param.unk_0B = 0;
+            TASK(Actor)->param.unk_0B = 0;
         } else {
             sel = rec[0x08];
             if ((sel & BYTE_MASK) == s_RouteIndexByMode[g_Battle.scroll_dir]) {
                 if (rec[0x0B] != 0) {
                     Script_Stage(sel, 0, MEM_PTR(u8, BATTLE_SCRIPT_TABLE), 0xA00);
-                    g_Task->param.unk_0B = 0;
+                    TASK(Actor)->param.unk_0B = 0;
                 }
             } else {
                 rec[0x08] = (sel + rec[0x0B]) & 0x7;
-                Script_Stage(g_Task->direction, 0, MEM_PTR(u8, BATTLE_SCRIPT_TABLE), 0xA00);
+                Script_Stage(TASK(Actor)->direction, 0, MEM_PTR(u8, BATTLE_SCRIPT_TABLE), 0xA00);
             }
             Script_AnimStepLoop();
         }
@@ -94,11 +94,11 @@ phase2:
         } while (index < 32);
         off += BATTLE_PARTY_STRIDE;
         Actor_SetSemiTransparent();
-        g_Task->param.unk_0B     = 0;
-        g_Task->tint.bytes.rgb.r = neg;
-        g_Task->tint.bytes.rgb.g = neg;
-        g_Task->tint.bytes.rgb.b = neg;
-        g_Task->tint.bytes.flags = 1;
+        TASK(Actor)->param.unk_0B     = 0;
+        TASK(Actor)->tint.bytes.rgb.r = neg;
+        TASK(Actor)->tint.bytes.rgb.g = neg;
+        TASK(Actor)->tint.bytes.rgb.b = neg;
+        TASK(Actor)->tint.bytes.flags = 1;
         slot++;
     } while (slot < g_Game.party_size);
     return 1;

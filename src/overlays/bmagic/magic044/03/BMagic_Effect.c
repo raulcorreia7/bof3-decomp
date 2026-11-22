@@ -17,13 +17,13 @@ MATCH void func_801EEC5C(void) {
     u8           slot;
 
     TASK(PartyMember)->facing = g_BattleEffectBattler->facing;
-    task                      = g_Task;
+    task                      = TASK(PartyMember);
     WorldPos_Copy(&task->pos, &g_BattleEffectBattler->pos);
     task->param.unk_0B = 0;
     TASK(PartyMember)->header.mode += 1;
     for (i = 0; i < 2; i++) {
         slot                               = Battle_AllocEffect(1, 6) & BYTE_MASK;
-        work                               = g_Task;
+        work                               = TASK(PartyMember);
         g_BattleEffects[slot].header.mode  = 0;
         g_BattleEffects[slot].unk_04       = i;
         g_BattleEffects[slot].target.party = work;
@@ -93,7 +93,7 @@ MATCH void func_801EEEFC(void) {
     }
     Effect_RotatePosition(g_Task);
     record                    = g_BattleEffectBattler;
-    work                      = g_Task;
+    work                      = TASK(PartyMember);
     work->pos.x.fixed         = record->pos.x.fixed + work->unk_0C;
     work->pos.y.fixed         = record->pos.y.fixed + work->unk_10;
     work->pos.z.fixed         = record->pos.z.fixed + work->unk_14;
@@ -354,13 +354,13 @@ MATCH void func_801F05AC(void) {
     PartyMember* state;
 
     rand();
-    work = g_Task;
+    work = TASK(PartyMember);
     work->screen_x.value -= 1;
     FAKE_BARRIER(); /* FAKE: reloads the g_Task cell after the store, as retail does; plain C caches it (0x78 vs 0x8C), FAKE_DECL_TASK_VOLATILE re-reads each use (0x84) and moves seven other functions. */
-    next = g_Task;
+    next = TASK(PartyMember);
     next->unk_09 += 4;
     next->screen_y.value -= 1;
-    state = g_Task;
+    state = TASK(PartyMember);
     if (state->unk_09 == 0x10) {
         state->header.step++;
     }
@@ -372,14 +372,14 @@ MATCH void func_801F0638(void) {
     PartyMember* state;
     u8           timer;
 
-    work = g_Task;
+    work = TASK(PartyMember);
     work->screen_y.value -= 2;
     work->unk_09 += 1;
     rand();
-    next = g_Task;
+    next = TASK(PartyMember);
     next->screen_x.value -= 1;
     FAKE_BARRIER(); /* FAKE: reloads the g_Task cell before the timer, as retail does; plain C caches it (0x88 vs 0xA0), FAKE_DECL_TASK_VOLATILE re-reads each use (0x98) and moves seven other functions. */
-    state        = g_Task;
+    state        = TASK(PartyMember);
     timer        = state->timer - 1;
     state->timer = timer;
     if (timer == 0) {

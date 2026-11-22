@@ -2,9 +2,9 @@
 
 MATCH void func_801F3E18(void) {
     func_801F3F04(7);
-    g_Task->timer += 1;
-    if (g_Task->timer >= 31U) {
-        g_Task->timer = 31;
-        g_Task->header.step += 1;
+    TASK(Actor)->timer += 1;
+    if (TASK(Actor)->timer >= 31U) {
+        TASK(Actor)->timer = 31;
+        TASK(Actor)->header.step += 1;
     }
 }

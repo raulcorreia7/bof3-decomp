@@ -4,7 +4,7 @@ MATCH void func_8019C124(s32 step_byte) {
     Actor* work;
     s32    vel;
 
-    work = g_Task;
+    work = TASK(Actor);
     if (COORD_FRAC(work->pos.x) != 0) {
         vel = work->vx;
         if (vel > 0) {
@@ -35,5 +35,5 @@ MATCH void func_8019C124(s32 step_byte) {
         return;
     }
 set_state:
-    g_Task->header.mode = 3;
+    TASK(Actor)->header.mode = 3;
 }

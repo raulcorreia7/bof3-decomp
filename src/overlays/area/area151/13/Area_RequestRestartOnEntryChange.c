@@ -8,7 +8,7 @@ MATCH s32 Area_RequestRestartOnEntryChange(void) {
 
     Actor_SetScreenOrigin();
     if (g_GameEntryState != 1) {
-        scratch = g_Task;
+        scratch = TASK(Actor);
         step    = scratch->param.unk_0B;
         if (step == scratch->option_flags && g_GameStateIndex != GAME_REQUEST_AREA_CHANGE) {
             if (step != 1) {
@@ -18,9 +18,9 @@ MATCH s32 Area_RequestRestartOnEntryChange(void) {
                 goto tail;
             }
         }
-        (g_Task)->unk_48      = 2;
-        (g_Task)->timer       = 8;
-        (g_Task)->header.mode = 4;
+        TASK(Actor)->unk_48      = 2;
+        TASK(Actor)->timer       = 8;
+        TASK(Actor)->header.mode = 4;
     }
 tail:
     Area_AddActor();

@@ -10,10 +10,10 @@ MATCH void Well_LowerCount(void) {
     }
     g_WellIdleFrames++;
     if (g_WellIdleFrames >= WELL_IDLE_FRAMES_MAX) {
-        work = g_Task;
+        work = TASK(Actor);
         step = WELL_MODE_FAIL;
     } else {
-        work = g_Task;
+        work = TASK(Actor);
         step = WELL_MODE_LOWER_REPEAT;
     }
     work->header.mode = step;

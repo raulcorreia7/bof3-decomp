@@ -3,7 +3,7 @@
 MATCH void func_801F559C(void) {
     Actor* work;
 
-    work = g_Task;
+    work = TASK(Actor);
     work->pos.x.fixed += work->vx;
     g_AreaScrollTargetX = work->pos.x.fixed;
     FAKE_BARRIER(); /* FAKE: the y block starts after the x target store. */

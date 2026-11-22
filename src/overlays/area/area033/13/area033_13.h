@@ -7,7 +7,6 @@
 #include "overlays/area/worlds/world00.h"
 #include "sys/scene.h"
 #include "gfx/prim.h"
-#include "area/spad.h"
 
 /* The scratchpad quad vertices the map arrow draws through. */
 /* The map step: 9 runs the area entry instead of the reset. */

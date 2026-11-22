@@ -5,7 +5,7 @@ MATCH void func_801E347C(void) {
     s32          old38;
     s32          old34;
 
-    work = g_Task;
+    work = TASK(PartyMember);
     work->header.flags &= ~ACTOR_FLAG_HIDDEN;
     Battle_RequestEnemyScript(0);
     old34                     = TASK(PartyMember)->pos.x.fixed;
@@ -13,7 +13,7 @@ MATCH void func_801E347C(void) {
     TASK(PartyMember)->unk_0C = 0x80000;
     TASK(PartyMember)->unk_10 = 0;
     TASK(PartyMember)->unk_18 = old34;
-    work                      = g_Task;
+    work                      = TASK(PartyMember);
     work->unk_1C              = old38;
     Effect_RotatePosition(work);
     {
@@ -29,10 +29,10 @@ MATCH void func_801E347C(void) {
         depth -= dx;
         TASK(volatile PartyMember)->pos.x.fixed = depth;
         depth -= dy;
-        work              = g_Task;
+        work              = TASK(PartyMember);
         work->pos.x.fixed = depth;
         Effect_RotatePosition(work);
     }
-    work              = g_Task;
+    work              = TASK(PartyMember);
     work->header.step = work->header.step + 1;
 }

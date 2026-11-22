@@ -2,14 +2,14 @@
 /* func_801F5140 (area104/14), func_801F5684 (area121/14) */
 MATCH bool Actor_TurnByPad(void) {
     if (g_PadStates[0].held & PADLdown) {
-        g_Task->direction ^= 4;
+        TASK(Actor)->direction ^= 4;
     } else if (g_PadStates[0].held & PADLright) {
-        g_Task->direction++;
+        TASK(Actor)->direction++;
     } else if (g_PadStates[0].held & PADLleft) {
-        g_Task->direction--;
+        TASK(Actor)->direction--;
     } else if (!(g_PadStates[0].held & PADLup)) {
         return 0;
     }
-    g_Task->direction &= 7;
+    TASK(Actor)->direction &= 7;
     return 1;
 }

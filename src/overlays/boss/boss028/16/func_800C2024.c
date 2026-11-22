@@ -3,15 +3,15 @@
 MATCH void func_800C2024(void) {
     s32 y;
 
-    ((PartyMember*)g_Task)->unk_24 = 0;
-    ((PartyMember*)g_Task)->unk_2A = 0;
-    ((PartyMember*)g_Task)->unk_48 = 0;
-    ((PartyMember*)g_Task)->unk_29 = 5;
+    TASK(PartyMember)->unk_24 = 0;
+    TASK(PartyMember)->unk_2A = 0;
+    TASK(PartyMember)->unk_48 = 0;
+    TASK(PartyMember)->unk_29 = 5;
     Area_SceneSelectRecord(0x15C);
     Script_Select(6U);
-    ((PartyMember*)g_Task)->pos.x.fixed      = g_BattleEffectBattler->pos.x.fixed;
-    y                                        = g_BattleEffectBattler->pos.y.fixed;
-    ((PartyMember*)g_Task)->pos.y.fixed      = y;
-    COORD_INT(((PartyMember*)g_Task)->pos.z) = Area_HeightSample(((PartyMember*)g_Task)->pos.x.fixed, y);
-    ((PartyMember*)g_Task)->header.step += 1;
+    TASK(PartyMember)->pos.x.fixed      = g_BattleEffectBattler->pos.x.fixed;
+    y                                   = g_BattleEffectBattler->pos.y.fixed;
+    TASK(PartyMember)->pos.y.fixed      = y;
+    COORD_INT(TASK(PartyMember)->pos.z) = Area_HeightSample(TASK(PartyMember)->pos.x.fixed, y);
+    TASK(PartyMember)->header.step += 1;
 }

@@ -7,12 +7,12 @@ MATCH void Effect_CountDownTimerCapped(void) {
     u8           timer;
     u8           count;
 
-    first = g_Task;
+    first = TASK(PartyMember);
     timer = first->unk_09;
     if (timer != 0x2E) {
         first->unk_09 = timer + 1;
     }
-    work        = g_Task;
+    work        = TASK(PartyMember);
     count       = work->timer - 1;
     work->timer = count;
     if (count == 0) {

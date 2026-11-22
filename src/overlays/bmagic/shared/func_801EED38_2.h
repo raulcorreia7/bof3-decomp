@@ -27,7 +27,7 @@ MATCH void func_801EED38(void) {
     for (i = 0; i < D_801F0194[TASK(PartyMember)->unk_04]; i++) {
         sparkle_index = BMagic_AllocEffect();
         if (sparkle_index != GAME_NONE) {
-            owner                                          = g_Task;
+            owner                                          = TASK(PartyMember);
             BMAGIC_EFFECT_SLOTS[sparkle_index].header.mode = 0;
             BMAGIC_EFFECT_SLOTS[sparkle_index].header.step = 0;
             BMAGIC_EFFECT_SLOTS[sparkle_index].battler     = owner;

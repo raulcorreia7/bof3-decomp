@@ -1,5 +1,4 @@
 #include "area049_13.h"
-#include "area/spad.h"
 #include "overlays/area/shared/AreaSprite.h"
 
 #if BOF3_USE_ASM
@@ -82,7 +81,7 @@ MATCH void func_801172D0(void) {
     D_801181DC = MEM_PTR(AreaSprite, AREA_WORK);
     i          = 0;
     do {
-        actor                 = g_Task;
+        actor                 = TASK(Actor);
         work                  = D_801181DC;
         work->origin.x        = actor->pos.x.fixed;
         work->origin.y        = actor->pos.y.fixed;
@@ -230,7 +229,7 @@ MATCH void func_80117864(void* arg0) {
         u8  unk_26;
     }* p = arg0;
 
-    Actor* a = g_Task;
+    Actor* a = TASK(Actor);
     s32    v;
 
     p->unk_04 = a->pos.x.fixed;
@@ -284,7 +283,7 @@ MATCH u8 func_80117900(void) {
 }
 
 MATCH void func_80117A30(void) {
-    SYS_DISPATCH_BYTE(D_801181AC, g_Task->header.step);
+    SYS_DISPATCH_BYTE(D_801181AC, TASK(Actor)->header.step);
 }
 
 MATCH void func_80117A74(void) {
@@ -292,14 +291,14 @@ MATCH void func_80117A74(void) {
         func_80117B60(0x40);
         func_80196070();
     }
-    g_Task->header.step++;
+    TASK(Actor)->header.step++;
 }
 
 MATCH void func_80117ACC(void) {
     if (SYS_TestFlag(D_80144ED0, 62) != 0) {
-        g_Task->timer++;
-        func_80117B60(0x80 - (g_Task->timer >> 1));
-        if (g_Task->timer >= 128) {
+        TASK(Actor)->timer++;
+        func_80117B60(0x80 - (TASK(Actor)->timer >> 1));
+        if (TASK(Actor)->timer >= 128) {
             func_80196070();
         }
     }
@@ -328,7 +327,7 @@ MATCH void func_80117B60(s32 scale) {
 }
 
 MATCH void func_80117BF4(void) {
-    SYS_DISPATCH_BYTE(D_801181B4, g_Task->header.step);
+    SYS_DISPATCH_BYTE(D_801181B4, TASK(Actor)->header.step);
 }
 
 MATCH void func_80117C38(void) {
@@ -338,24 +337,24 @@ MATCH void func_80117C38(void) {
 MATCH void func_80117C58(void) {
     u32 slot;
 
-    if (SYS_TestFlag(D_80144ED0, D_801181D0[COORD_INT(g_Task->pos.x)]) != 0) {
+    if (SYS_TestFlag(D_80144ED0, D_801181D0[COORD_INT(TASK(Actor)->pos.x)]) != 0) {
         SND_SEPlay(0x20A);
         slot = Actor_FindFreeSpawned() & BYTE_MASK;
         if (slot != GAME_NONE) {
             g_SpawnedActors[slot].header.flags = ACTOR_FLAG_IN_USE;
             g_SpawnedActors[slot].type         = 0x6E;
-            g_SpawnedActors[slot].pos.x.fixed  = D_801181C0[COORD_INT(g_Task->pos.x)].x;
-            g_SpawnedActors[slot].pos.y.fixed  = D_801181C0[COORD_INT(g_Task->pos.x)].y;
+            g_SpawnedActors[slot].pos.x.fixed  = D_801181C0[COORD_INT(TASK(Actor)->pos.x)].x;
+            g_SpawnedActors[slot].pos.y.fixed  = D_801181C0[COORD_INT(TASK(Actor)->pos.x)].y;
             g_SpawnedActors[slot].pos.z.fixed  = TO_COORD(1920);
         }
         slot = Actor_FindFreeSpawned() & BYTE_MASK;
         if (slot != GAME_NONE) {
             g_SpawnedActors[slot].header.flags = ACTOR_FLAG_IN_USE;
             g_SpawnedActors[slot].type         = 0x6D;
-            g_SpawnedActors[slot].unk_06       = COORD_INT(g_Task->pos.x);
+            g_SpawnedActors[slot].unk_06       = COORD_INT(TASK(Actor)->pos.x);
         }
-        g_Task->timer = 0;
-        g_Task->header.step += 1;
+        TASK(Actor)->timer = 0;
+        TASK(Actor)->header.step += 1;
     }
     func_80117E78(0x80, 0);
 }
@@ -382,8 +381,8 @@ NON_MATCHING void func_80117E78(s32 brightness, s32 unused) {
     long      flag;
 
     corner = g_ScratchPadVectors;
-    for (row = D_801181D4[COORD_INT(g_Task->pos.x)][1]; row < D_801181D4[COORD_INT(g_Task->pos.x)][3]; row++) {
-        for (col = D_801181D4[COORD_INT(g_Task->pos.x)][0]; col < D_801181D4[COORD_INT(g_Task->pos.x)][2]; col++) {
+    for (row = D_801181D4[COORD_INT(TASK(Actor)->pos.x)][1]; row < D_801181D4[COORD_INT(TASK(Actor)->pos.x)][3]; row++) {
+        for (col = D_801181D4[COORD_INT(TASK(Actor)->pos.x)][0]; col < D_801181D4[COORD_INT(TASK(Actor)->pos.x)][2]; col++) {
             sum = row + col;
             if (sum & 1) {
                 setVector(corner, ((col - 0x80) << 7) + 0x40, ((row - 0x80) << 7) + 0x40, -0x340);

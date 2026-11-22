@@ -24,7 +24,7 @@ MATCH void func_801EEC80(void) {
     }
     SND_SEPlay(EMI_SE_ID(SND_BANK_COMMON, 0));
     TASK(PartyMember)->unk_09 = 2;
-    work                      = g_Task;
+    work                      = TASK(PartyMember);
     rect.x                    = work->screen_x.value - work->unk_09;
     rect.y                    = work->screen_y.value - work->unk_09 + g_GfxBufferIndex * 240;
     rect.h = rect.w = work->unk_09 * 2;

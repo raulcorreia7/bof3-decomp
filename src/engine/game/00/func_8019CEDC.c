@@ -4,8 +4,8 @@ MATCH void func_8019CEDC(void) {
     Actor* work;
     s32    moved;
 
-    g_Task->timer = (g_Task->timer - 1);
-    work          = g_Task;
+    TASK(Actor)->timer = (TASK(Actor)->timer - 1);
+    work               = TASK(Actor);
     work->pos.x.fixed += work->vx;
     moved             = work->pos.y.fixed + work->vy;
     work->pos.y.fixed = moved;
@@ -18,8 +18,8 @@ MATCH void func_8019CEDC(void) {
             }
         }
         func_8019D270();
-        g_Task->param.unk_0B = 0;
-        g_Task->header.mode  = 1;
+        TASK(Actor)->param.unk_0B = 0;
+        TASK(Actor)->header.mode  = 1;
     }
     Actor_ProjectForDraw();
 }

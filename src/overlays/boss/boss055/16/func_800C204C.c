@@ -5,7 +5,7 @@ MATCH void func_800C204C(void) {
 
     result = func_801E3160();
     if (result != 0u) {
-        ((EnemyBattler*)g_Task)->header.mode++;
-        ((EnemyBattler*)g_Task)->header.step = 0u;
+        TASK(EnemyBattler)->header.mode++;
+        TASK(EnemyBattler)->header.step = 0u;
     }
 }

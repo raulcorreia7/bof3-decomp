@@ -31,7 +31,7 @@ MATCH void func_801EED18(void) {
     TASK(PartyMember)->unk_09       = 0x10;
     TASK(PartyMember)->header.mode += 1;
     slot                               = Battle_AllocEffect(1, 0x5F) & BYTE_MASK;
-    g_BattleEffects[slot].target.party = g_Task;
+    g_BattleEffects[slot].target.party = TASK(PartyMember);
     g_BattleEffects[slot].header.mode  = 0;
     TASK(PartyMember)->param.unk_0B += 1;
     SND_SEQueueSelection(EMI_SE_ID(SND_BANK_COMMON, 0));
@@ -123,7 +123,7 @@ MATCH void func_801EF310(void) {
     u8           shade;
     u8           slot;
 
-    work = g_Task;
+    work = TASK(PartyMember);
     work->pos.x.fixed += work->unk_0C;
     work->pos.y.fixed += work->unk_10;
     work->unk_14 -= work->unk_20;
@@ -132,7 +132,7 @@ MATCH void func_801EF310(void) {
     if ((g_FrameCount & 3) == 0) {
         slot = BMagic_AllocEffect();
         if (slot != GAME_NONE) {
-            owner                                  = g_Task;
+            owner                                  = TASK(PartyMember);
             BMAGIC_EFFECT_SLOTS[slot].header.mode  = 1;
             BMAGIC_EFFECT_SLOTS[slot].arg.unk_09   = 1;
             BMAGIC_EFFECT_SLOTS[slot].target.party = owner;
@@ -312,7 +312,7 @@ MATCH void func_801F055C(void) {
     if (--TASK(PartyMember)->unk_09 == 0) {
         TASK(PartyMember)->facing = BATTLE_ACTIVE_WORK->facing;
         src                       = BATTLE_ACTIVE_WORK;
-        dst                       = g_Task;
+        dst                       = TASK(PartyMember);
         dst->pos.x.fixed          = src->pos.x.fixed;
         dst->pos.y.fixed          = src->pos.y.fixed;
         z                         = src->pos.z.fixed;
@@ -330,7 +330,7 @@ MATCH void func_801F061C(void) {
     u8           count;
 
     src               = g_BattleEffectBattler;
-    work              = g_Task;
+    work              = TASK(PartyMember);
     work->pos.x.fixed = src->pos.x.fixed;
     work->pos.y.fixed = src->pos.y.fixed;
     work->pos.z.fixed -= work->unk_14;
@@ -348,7 +348,7 @@ MATCH void func_801F068C(void) {
     TASK(PartyMember)->unk_09 += 1;
     TASK(PartyMember)->timer -= 2;
     battler           = g_BattleEffectBattler;
-    task              = g_Task;
+    task              = TASK(PartyMember);
     task->pos.x.fixed = battler->pos.x.fixed;
     task->pos.y.fixed = battler->pos.y.fixed;
     task->pos.z.fixed -= task->unk_14;

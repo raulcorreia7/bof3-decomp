@@ -4,8 +4,8 @@
 MATCH void Area_HeightSampleForward(void) {
     s32 y;
 
-    (g_Task)->unk_18  = (g_Task)->pos.x.fixed + (g_FacingSteps[(g_Task)->direction].x * 5);
-    y                 = (g_Task)->pos.y.fixed + (g_FacingStepY[(g_Task)->direction * 2] * 5);
-    (g_Task)->unk_1C  = y;
-    (g_Task)->gravity = Area_HeightSample((g_Task)->unk_18, y) << 0x10;
+    TASK(Actor)->unk_18  = TASK(Actor)->pos.x.fixed + (g_FacingSteps[TASK(Actor)->direction].x * 5);
+    y                    = TASK(Actor)->pos.y.fixed + (g_FacingStepY[TASK(Actor)->direction * 2] * 5);
+    TASK(Actor)->unk_1C  = y;
+    TASK(Actor)->gravity = Area_HeightSample(TASK(Actor)->unk_18, y) << 0x10;
 }

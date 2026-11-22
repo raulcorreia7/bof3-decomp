@@ -5,7 +5,7 @@ MATCH void func_8019E6F8(void) {
     s32    value;
 
     Script_AnimStepLoop();
-    work     = g_Task;
+    work     = TASK(Actor);
     value    = work->vz + work->gravity;
     work->vz = value;
     COORD_INT(work->pos.z) += value;

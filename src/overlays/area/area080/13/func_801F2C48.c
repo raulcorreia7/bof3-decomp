@@ -4,7 +4,7 @@ MATCH void func_801F2C48(void) {
     Actor*    work;
     AreaRing* ring;
 
-    work = g_Task;
+    work = TASK(Actor);
     WorldPos_Copy(&work->pos, &D_80146954);
 
     ring       = (AreaRing*)AREA_WORK;
@@ -17,6 +17,6 @@ MATCH void func_801F2C48(void) {
 
     func_801F3834();
 
-    g_Task->timer = AREA_RING_STEP_FRAMES;
-    g_Task->header.mode += 1;
+    TASK(Actor)->timer = AREA_RING_STEP_FRAMES;
+    TASK(Actor)->header.mode += 1;
 }

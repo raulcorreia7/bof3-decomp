@@ -9,20 +9,20 @@ MATCH void func_8019E95C(void) {
         return;
     }
 
-    g_Task->draw_layer   = (g_Task->draw_layer + 1);
-    g_Task->mirror       = 0;
-    g_Task->active_flags = 0;
-    g_Task->unk_2B       = (g_Task->unk_2B + 1);
-    g_Task->unk_48       = 1;
+    TASK(Actor)->draw_layer   = (TASK(Actor)->draw_layer + 1);
+    TASK(Actor)->mirror       = 0;
+    TASK(Actor)->active_flags = 0;
+    TASK(Actor)->unk_2B       = (TASK(Actor)->unk_2B + 1);
+    TASK(Actor)->unk_48       = 1;
 
-    work                     = g_Task;
-    work->tint.bytes.rgb.r   = 0;
-    other                    = g_Task;
-    work->vy                 = -0x2000;
-    work->vx                 = 0;
-    work->vz                 = 64;
-    other->tint.bytes.rgb.g  = 0;
-    g_Task->tint.bytes.rgb.b = 0;
+    work                          = TASK(Actor);
+    work->tint.bytes.rgb.r        = 0;
+    other                         = TASK(Actor);
+    work->vy                      = -0x2000;
+    work->vx                      = 0;
+    work->vz                      = 64;
+    other->tint.bytes.rgb.g       = 0;
+    TASK(Actor)->tint.bytes.rgb.b = 0;
     Script_Select(0);
-    g_Task->header.step = (g_Task->header.step + 1);
+    TASK(Actor)->header.step = (TASK(Actor)->header.step + 1);
 }

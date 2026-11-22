@@ -14,5 +14,5 @@ MATCH void func_801F3D78(void) {
         g_SpawnedActors[actor_slot].link         = link;
         g_SpawnedActors[actor_slot].screen_x     = (link & BYTE_MASK) * 24 + 12;
     }
-    g_Task->param.actor_slot = actor_slot;
+    TASK(Actor)->param.actor_slot = actor_slot;
 }

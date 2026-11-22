@@ -11,21 +11,21 @@
         long      flag;                                                                                                                                                                               \
         POLY_FT4* prim;                                                                                                                                                                               \
                                                                                                                                                                                                       \
-        g_Task->pos.z.part.integer += 0x10;                                                                                                                                                           \
-        if (g_Task->pos.z.part.integer >= 641) {                                                                                                                                                      \
-            g_Task->header.mode = 3;                                                                                                                                                                  \
+        TASK(Actor)->pos.z.part.integer += 0x10;                                                                                                                                                      \
+        if (TASK(Actor)->pos.z.part.integer >= 641) {                                                                                                                                                 \
+            TASK(Actor)->header.mode = 3;                                                                                                                                                             \
         }                                                                                                                                                                                             \
         if (g_AreaDrawFlags & 0x1B) {                                                                                                                                                                 \
             PushMatrix();                                                                                                                                                                             \
             setVector(&rotation, 0, 0, 0);                                                                                                                                                            \
-            setVector(&vertex, (g_Task->pos.x.fixed >> 9) - 0x4000, (g_Task->pos.y.fixed >> 9) - 0x4000, -g_Task->pos.z.part.integer / 2);                                                            \
+            setVector(&vertex, (TASK(Actor)->pos.x.fixed >> 9) - 0x4000, (TASK(Actor)->pos.y.fixed >> 9) - 0x4000, -TASK(Actor)->pos.z.part.integer / 2);                                             \
             RotTransMatrix(&vertex, matrix, &trans_flag);                                                                                                                                             \
             RotMatrix(&rotation, &matrix);                                                                                                                                                            \
             MulMatrix2(&g_CameraMatrix, &matrix);                                                                                                                                                     \
             SetRotMatrix(&matrix);                                                                                                                                                                    \
             SetTransMatrix(&matrix);                                                                                                                                                                  \
             prim                      = (POLY_FT4*)g_GfxPrimCursor;                                                                                                                                   \
-            depth                     = (g_Task->pos.z.part.integer >> 7) * 10 + 16;                                                                                                                  \
+            depth                     = (TASK(Actor)->pos.z.part.integer >> 7) * 10 + 16;                                                                                                             \
             g_ScratchPadVectors[0].vz = g_ScratchPadVectors[0].vy = 0;                                                                                                                                \
             g_ScratchPadVectors[1].vz = g_ScratchPadVectors[1].vx = 0;                                                                                                                                \
             g_ScratchPadVectors[2].vz = g_ScratchPadVectors[2].vx = 0;                                                                                                                                \
@@ -47,7 +47,7 @@
             RotTransPers4(&g_ScratchPadVectors[0], &g_ScratchPadVectors[1], &g_ScratchPadVectors[2], &g_ScratchPadVectors[3], (long*)&prim->x0, (long*)&prim->x1, (long*)&prim->x2, (long*)&prim->x3, \
                           &depth, &flag);                                                                                                                                                             \
             setRGB0(prim, 128, 128, 128);                                                                                                                                                             \
-            Area_CellAddPrim(g_Task->pos.x.fixed, g_Task->pos.y.fixed, 1, sizeof(POLY_FT4));                                                                                                          \
+            Area_CellAddPrim(TASK(Actor)->pos.x.fixed, TASK(Actor)->pos.y.fixed, 1, sizeof(POLY_FT4));                                                                                                \
             PopMatrix();                                                                                                                                                                              \
         }                                                                                                                                                                                             \
     }

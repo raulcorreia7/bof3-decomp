@@ -17,6 +17,7 @@ NON_MATCHING void Battle_NextCommandMember(void) {
             g_PadStates[0].held = 0;
         if (*cursor < 3) {
             slot = cursor;
+            flag = &g_BattleMessageState;
             for (; *slot < BATTLE_PARTY_CHARACTERS_COUNT; ((u8*)slot)[0] += 1) {
                 id    = D_801462F6[*slot];
                 index = id & BYTE_MASK;
@@ -28,7 +29,6 @@ NON_MATCHING void Battle_NextCommandMember(void) {
                         g_BattleActorTurn   = &g_Game.members[index].u.turn.command;
                         Battle_ShowMessage((s32)&g_Game.members[index]);
                         ((u8*)slot)[-0x22] += 1;
-                        flag        = &g_BattleMessageState;
                         *flag       = 1;
                         flag[-0x24] = 1;
                         flag[-0x48] = 1;

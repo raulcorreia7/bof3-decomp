@@ -8,25 +8,25 @@ MATCH void func_801ACAC0(void) {
     s8     tint_5E;
     s8     tint_5F;
 
-    work_5D = g_Task;
+    work_5D = TASK(Actor);
     tint_5D = work_5D->tint.steps.delta.r;
     if (tint_5D != -0x80) {
         work_5D->tint.steps.delta.r = (tint_5D - 4);
     }
-    work_5E = g_Task;
+    work_5E = TASK(Actor);
     tint_5E = work_5E->tint.steps.delta.g;
     if (tint_5E != -0x80) {
         work_5E->tint.steps.delta.g = (tint_5E - 4);
     }
-    tint_5F = g_Task->tint.steps.delta.b;
+    tint_5F = TASK(Actor)->tint.steps.delta.b;
     if (tint_5F != -0x80) {
-        g_Task->tint.steps.delta.b = (tint_5F - 4);
+        TASK(Actor)->tint.steps.delta.b = (tint_5F - 4);
     }
-    if ((g_Task->tint.raw & ~0xFF) == 0x80808000) {
+    if ((TASK(Actor)->tint.raw & ~0xFF) == 0x80808000) {
         GFX_PaletteFreeFade(g_CurrentActor->unk_93);
-        work_flags               = g_Task;
+        work_flags               = TASK(Actor);
         work_flags->header.flags = (work_flags->header.flags | 0x40);
-        g_Task->unk_04           = 0;
+        TASK(Actor)->unk_04      = 0;
         return;
     }
     g_CurrentActor->unk_7E = (g_CurrentActor->unk_7E - 1);

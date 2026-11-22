@@ -51,7 +51,7 @@ MATCH void func_801B2FC8(void) {
         }
         UI_MessageRequest(resource);
     state:
-        g_GameStateIndex    = GAME_REQUEST_MESSAGE;
-        g_Task->header.step = 2;
+        g_GameStateIndex         = GAME_REQUEST_MESSAGE;
+        TASK(Actor)->header.step = 2;
     }
 }

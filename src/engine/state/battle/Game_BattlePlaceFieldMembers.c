@@ -65,14 +65,14 @@ NON_MATCHING void Game_BattlePlaceFieldMembers(void) {
             member         = &g_Game.members[i];
             g_Game.current = member;
             TASK_SET(member);
-            g_Task->direction         = s_RouteIndexByMode[g_Battle.scroll_dir];
+            TASK(Actor)->direction    = s_RouteIndexByMode[g_Battle.scroll_dir];
             TASK(PartyMember)->unk_29 = 6;
             if (i != 0) {
                 TASK(PartyMember)->unk_07 = 0;
                 TASK(PartyMember)->pad_06 = TASK(PartyMember)->slot - 1;
             }
             func_801C3204();
-            Script_Select(g_Task->direction);
+            Script_Select(TASK(Actor)->direction);
         }
     } else {
         Scene_SetupParty(g_Game.battle_order);

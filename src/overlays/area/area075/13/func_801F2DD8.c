@@ -3,14 +3,14 @@
 MATCH void func_801F2DD8(void) {
     u8 tint;
 
-    tint                     = g_Task->tint.bytes.rgb.r - 2;
-    g_Task->tint.bytes.rgb.r = tint;
+    tint                          = TASK(Actor)->tint.bytes.rgb.r - 2;
+    TASK(Actor)->tint.bytes.rgb.r = tint;
     /* FAKE: the shift preserves the retail zero test. */
     if ((tint << 24) == 0) {
         Actor_Clear();
     }
-    if (!(g_Task->tint.bytes.rgb.r & 0x1F)) {
-        g_Task->unk_06 += 1;
+    if (!(TASK(Actor)->tint.bytes.rgb.r & 0x1F)) {
+        TASK(Actor)->unk_06 += 1;
     }
-    func_801F2E64(g_Task->unk_06, 1);
+    func_801F2E64(TASK(Actor)->unk_06, 1);
 }

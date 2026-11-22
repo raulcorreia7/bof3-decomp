@@ -2,6 +2,6 @@
 
 /* func_801B2A00 */
 MATCH void Game_MenuRequest(void) {
-    g_Task->header.step = 1;
-    g_GameStateIndex    = GAME_REQUEST_MENU;
+    TASK(Actor)->header.step = 1;
+    g_GameStateIndex         = GAME_REQUEST_MENU;
 }

@@ -19,7 +19,7 @@ MATCH void func_801B2AB4(void) {
                 index++;
             } while (index < g_Game.party_size);
         }
-        g_Task->param.unk_0B = 0xFF;
+        TASK(Actor)->param.unk_0B = 0xFF;
     }
-    g_Task->header.step = 1;
+    TASK(Actor)->header.step = 1;
 }

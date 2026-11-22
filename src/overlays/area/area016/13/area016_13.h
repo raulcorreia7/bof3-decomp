@@ -6,7 +6,6 @@
  * the file. */
 
 #include "overlays/area/worlds/world00.h"
-#include "area/spad.h"
 #include "common/util.h"
 
 #define AREA_SCENE_RECORD    0xF

@@ -23,7 +23,7 @@ MATCH void func_801EEC70(void) {
     i = 0;
     do {
         slot                               = Battle_AllocEffect(1, 4) & BYTE_MASK;
-        work                               = g_Task;
+        work                               = TASK(PartyMember);
         g_BattleEffects[slot].header.mode  = 0;
         g_BattleEffects[slot].unk_0B       = i;
         g_BattleEffects[slot].target.party = work;
@@ -93,11 +93,11 @@ MATCH void func_801EEFDC(void) {
     timer                     = TASK(PartyMember)->unk_09 - 1;
     TASK(PartyMember)->unk_09 = timer;
     if (timer == 0) {
-        next         = g_Task;
+        next         = TASK(PartyMember);
         next->unk_0C = D_801EFAA0[next->param.unk_0B].x;
         next->unk_10 = D_801EFAA0[next->param.unk_0B].y;
         Effect_RotatePosition(next);
-        work              = g_Task;
+        work              = TASK(PartyMember);
         work->pos.x.fixed = g_AreaScrollTargetX + work->unk_0C;
         work->pos.y.fixed = g_AreaScrollTargetY + work->unk_10;
         if (work->param.unk_0B == 0) {
@@ -115,9 +115,9 @@ MATCH void func_801EF138(void) {
     PartyMember* work;
     u8           count;
 
-    work = g_Task;
+    work = TASK(PartyMember);
     work->timer++;
-    work         = g_Task;
+    work         = TASK(PartyMember);
     count        = work->unk_09 - 1;
     work->unk_09 = count;
     if (count == 0) {

@@ -9,49 +9,49 @@ NON_MATCHING void func_8019B704(void) {
     s16 dist;
     s16 temp;
 
-    g_Task->unk_06       = 0;
-    g_Task->option_flags = 0;
-    if (g_Task->vx != 0) {
-        saved      = g_Task->vx;
-        acc        = saved + g_Task->unk_18;
-        g_Task->vx = acc;
-        acc        = ABS(acc);
+    TASK(Actor)->unk_06       = 0;
+    TASK(Actor)->option_flags = 0;
+    if (TASK(Actor)->vx != 0) {
+        saved           = TASK(Actor)->vx;
+        acc             = saved + TASK(Actor)->unk_18;
+        TASK(Actor)->vx = acc;
+        acc             = ABS(acc);
         if (acc < ONE) {
-            g_Task->vx     = saved;
-            g_Task->unk_18 = 0;
+            TASK(Actor)->vx     = saved;
+            TASK(Actor)->unk_18 = 0;
         }
-        total               = g_Task->pos.x.fixed + g_Task->vx;
-        g_Task->pos.x.fixed = total;
-        delta               = total - D_80145EC4;
+        total                    = TASK(Actor)->pos.x.fixed + TASK(Actor)->vx;
+        TASK(Actor)->pos.x.fixed = total;
+        delta                    = total - D_80145EC4;
     } else {
-        saved          = g_Task->vy;
-        acc            = saved + g_Task->unk_1C;
-        g_Task->unk_1C = acc;
-        acc            = ABS(acc);
+        saved               = TASK(Actor)->vy;
+        acc                 = saved + TASK(Actor)->unk_1C;
+        TASK(Actor)->unk_1C = acc;
+        acc                 = ABS(acc);
         if (acc < ONE) {
-            g_Task->vy     = saved;
-            g_Task->unk_1C = 0;
+            TASK(Actor)->vy     = saved;
+            TASK(Actor)->unk_1C = 0;
         }
-        total               = g_Task->pos.y.fixed + g_Task->vy;
-        g_Task->pos.y.fixed = total;
-        delta               = total - D_80145EC8;
+        total                    = TASK(Actor)->pos.y.fixed + TASK(Actor)->vy;
+        TASK(Actor)->pos.y.fixed = total;
+        delta                    = total - D_80145EC8;
     }
     delta = ABS(delta);
-    if ((g_Task->unk_18 == 0) && (g_Task->unk_1C == 0)) {
-        g_Task->unk_06       = 1;
-        g_Task->option_flags = 0;
+    if ((TASK(Actor)->unk_18 == 0) && (TASK(Actor)->unk_1C == 0)) {
+        TASK(Actor)->unk_06       = 1;
+        TASK(Actor)->option_flags = 0;
     }
-    acc        = g_Task->vz + g_Task->gravity;
-    g_Task->vz = acc;
-    COORD_INT(g_Task->pos.z) += acc;
+    acc             = TASK(Actor)->vz + TASK(Actor)->gravity;
+    TASK(Actor)->vz = acc;
+    COORD_INT(TASK(Actor)->pos.z) += acc;
     if ((g_AreaCameraMoving == 0) && (delta > TO_COORD(4)) && (g_AreaScrollTargetX == D_80145EC4) && (g_AreaScrollTargetY == D_80145EC8)) {
-        if (g_Task->vx > 0) {
+        if (TASK(Actor)->vx > 0) {
             g_AreaTargetCellX = (s16)(g_AreaTargetCellX + 5);
-        } else if (g_Task->vx < 0) {
+        } else if (TASK(Actor)->vx < 0) {
             g_AreaTargetCellX = (s16)(g_AreaTargetCellX - 5);
-        } else if (g_Task->vy > 0) {
+        } else if (TASK(Actor)->vy > 0) {
             g_AreaTargetCellY = (s16)(g_AreaTargetCellY + 5);
-        } else if (g_Task->vy < 0) {
+        } else if (TASK(Actor)->vy < 0) {
             g_AreaTargetCellY = (s16)(g_AreaTargetCellY - 5);
         }
         temp                   = Area_HeightSample(g_AreaScrollTargetX, g_AreaScrollTargetY);
@@ -59,33 +59,33 @@ NON_MATCHING void func_8019B704(void) {
         if (temp < (s16)g_AreaCameraHeight) {
             g_AreaCameraHeightStep = (s16)((temp - (s16)g_AreaCameraHeight) / 20);
         }
-        g_AreaCameraStep = 0x40;
-        g_Task->timer    = 20;
+        g_AreaCameraStep   = 0x40;
+        TASK(Actor)->timer = 20;
     }
-    dist = Area_HeightSample(g_Task->pos.x.fixed, g_Task->pos.y.fixed);
-    if (dist < (s16)COORD_INT(g_Task->pos.z)) {
-        g_Task->gravity = -8;
+    dist = Area_HeightSample(TASK(Actor)->pos.x.fixed, TASK(Actor)->pos.y.fixed);
+    if (dist < (s16)COORD_INT(TASK(Actor)->pos.z)) {
+        TASK(Actor)->gravity = -8;
     } else {
-        g_Task->vz               = 0;
-        g_Task->gravity          = 0;
-        COORD_INT(g_Task->pos.z) = (u16)dist;
+        TASK(Actor)->vz               = 0;
+        TASK(Actor)->gravity          = 0;
+        COORD_INT(TASK(Actor)->pos.z) = (u16)dist;
     }
     if ((func_8019C028() & 0xFF) == 0) {
-        if ((Area_GetVx(g_Task->pos.x.fixed, g_Task->pos.y.fixed) & 0xFF) != 0) {
-            g_Task->unk_06       = 1;
-            g_Task->option_flags = 2;
+        if ((Area_GetVx(TASK(Actor)->pos.x.fixed, TASK(Actor)->pos.y.fixed) & 0xFF) != 0) {
+            TASK(Actor)->unk_06       = 1;
+            TASK(Actor)->option_flags = 2;
         } else if ((func_8019C1E4() & 0xFF) != 0) {
-            g_Task->unk_06       = 1;
-            g_Task->option_flags = 1;
+            TASK(Actor)->unk_06       = 1;
+            TASK(Actor)->option_flags = 1;
         }
-        if (g_Task->unk_06 != 0) {
-            switch (g_Task->option_flags) {
+        if (TASK(Actor)->unk_06 != 0) {
+            switch (TASK(Actor)->option_flags) {
                 case 0:
-                    if ((COORD_FRAC(g_Task->pos.x) == 0) && (COORD_FRAC(g_Task->pos.y) == 0)) {
-                        g_Task->option_flags = 0;
-                        g_Task->unk_0A       = 0;
+                    if ((COORD_FRAC(TASK(Actor)->pos.x) == 0) && (COORD_FRAC(TASK(Actor)->pos.y) == 0)) {
+                        TASK(Actor)->option_flags = 0;
+                        TASK(Actor)->unk_0A       = 0;
                         Script_Select(0);
-                        g_Task->header.mode = 5;
+                        TASK(Actor)->header.mode = 5;
                     } else {
                         func_8019C124(0);
                     }

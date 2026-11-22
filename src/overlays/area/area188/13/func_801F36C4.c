@@ -5,15 +5,15 @@ MATCH void func_801F36C4(void) {
     u8     frame;
     u8     remaining;
 
-    frame          = g_Task->unk_06;
-    g_Task->unk_06 = frame + 1;
+    frame               = TASK(Actor)->unk_06;
+    TASK(Actor)->unk_06 = frame + 1;
     if (!(frame & 3)) {
         Area_ClaimSpawnSlot();
     }
     Area_UpdateSpawnSlots();
     AREA_SPAWN_TICK();
-    Area_DrawYellowLine(&g_Task->unk_18, &g_Task->pos.x, 0x40);
-    task = g_Task;
+    Area_DrawYellowLine(&TASK(Actor)->unk_18, &TASK(Actor)->pos.x, 0x40);
+    task = TASK(Actor);
     task->vx -= 0x800;
     task->vy -= 0x200;
     task->unk_18 += task->vx;
@@ -21,7 +21,7 @@ MATCH void func_801F36C4(void) {
     task->unk_1C += task->vy;
     ACTOR_COUNT_DOWN(TASK(Actor), remaining, timer);
     if (!(remaining & 0xFF)) {
-        g_Task->timer = 16;
-        g_Task->header.mode += 1;
+        TASK(Actor)->timer = 16;
+        TASK(Actor)->header.mode += 1;
     }
 }

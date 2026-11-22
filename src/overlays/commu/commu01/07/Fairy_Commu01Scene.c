@@ -622,7 +622,65 @@ MATCH void func_801D28A4(s16 x, s16 y, u8 slot, s32 selected) {
     }
 }
 
+/* The four stat bar colours D_801D0C04 holds, one RGB triple per bar. */
+typedef struct {
+    u8 rgb[4][3];
+} FairyBarColors;
+
+#ifdef NON_MATCHING
+NON_MATCHING void func_801D2D98(s16 x, s16 y, s16 width, u8 channel, u8 blink) {
+    FairyBarColors colors;
+    u8*            rgb;
+    s32            scale;
+    POLY_G4*       poly;
+
+    colors = *(FairyBarColors*)D_801D0C04;
+    if (blink) {
+        if (g_FrameCount & 8) {
+            scale = (g_FrameCount & 6) << 5 | 0x3F;
+        } else {
+            scale = (~g_FrameCount & 6) << 5 | 0x3F;
+        }
+    } else {
+        scale = 0x80;
+    }
+
+    poly = (POLY_G4*)g_GfxPrimCursor;
+    SetPolyG4(poly);
+    poly->x0 = x;
+    poly->y2 = y + 2;
+    poly->x1 = x + width;
+    poly->y0 = y;
+    poly->y1 = y;
+    poly->x2 = poly->x0;
+    poly->y3 = y + 2;
+    poly->x3 = poly->x1;
+    rgb      = colors.rgb[channel];
+    setRGB2(poly, rgb[0] * scale, rgb[1] * scale, rgb[2] * scale);
+    setRGB0(poly, poly->r2 >> 2, poly->g2 >> 2, poly->b2 >> 2);
+    setRGB3(poly, poly->r2, poly->g2, poly->b2);
+    setRGB1(poly, poly->r0, poly->g0, poly->b0);
+    GFX_AddPrim(GFX_LAYER_UI, sizeof(POLY_G4));
+
+    poly = (POLY_G4*)g_GfxPrimCursor;
+    SetPolyG4(poly);
+    poly->x0 = x;
+    poly->y0 = y + 2;
+    poly->x1 = x + width;
+    poly->y1 = y + 2;
+    poly->x2 = poly->x0;
+    poly->y2 = y + 4;
+    poly->x3 = poly->x1;
+    poly->y3 = y + 4;
+    setRGB0(poly, rgb[0] * scale, rgb[1] * scale, rgb[2] * scale);
+    setRGB2(poly, poly->r0 >> 2, poly->g0 >> 2, poly->b0 >> 2);
+    setRGB1(poly, poly->r0, poly->g0, poly->b0);
+    setRGB3(poly, poly->r2, poly->g2, poly->b2);
+    GFX_AddPrim(GFX_LAYER_UI, sizeof(POLY_G4));
+}
+#else
 INCLUDE_ASM(func_801D2D98);
+#endif
 
 #define FAIRY_OVERVIEW_GROUP_COUNT     3
 #define FAIRY_OVERVIEW_ROOM_COUNT      8

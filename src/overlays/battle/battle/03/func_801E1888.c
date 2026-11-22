@@ -7,7 +7,7 @@ MATCH void func_801E1888(void) {
     PartyMember* work;
     u8           count;
 
-    work  = g_Task;
+    work  = TASK(PartyMember);
     count = work->unk_09;
     if (count == 0) {
         Battle_PlayEffectSE(5);

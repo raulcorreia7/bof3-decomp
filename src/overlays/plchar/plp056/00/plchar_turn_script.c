@@ -6,7 +6,7 @@ __asm__(".include \"include/match/macro.inc\"\n");
 #endif
 
 MATCH void func_801CE404(void) {
-    D_801D0858[g_Task->header.step]();
+    D_801D0858[TASK(Actor)->header.step]();
 }
 
 #include "overlays/plchar/shared/func_801CE448.h"

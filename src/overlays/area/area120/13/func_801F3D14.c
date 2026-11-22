@@ -3,10 +3,10 @@
 MATCH void func_801F3D14(void) {
     u8 step;
 
-    g_Task->timer += 2;
-    step = g_Task->timer;
+    TASK(Actor)->timer += 2;
+    step = TASK(Actor)->timer;
     func_801F3F5C(0x80 - (step * 2), 0x40 - step, 1, 0);
-    if (g_Task->timer >= 64U) {
+    if (TASK(Actor)->timer >= 64U) {
         Actor_Clear();
     }
 }

@@ -7,7 +7,7 @@ MATCH void func_801F34DC(void) {
     Actor* work;
     s32    edge;
 
-    work              = g_Task;
+    work              = TASK(Actor);
     edge              = g_Actors->pos.x.fixed;
     g_Task            = g_Actors;
     g_GameState       = g_Game.members;

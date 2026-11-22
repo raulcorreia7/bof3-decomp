@@ -25,7 +25,7 @@ MATCH void func_801EEC94(void) {
     TASK(PartyMember)->unk_09       = 16;
     TASK(PartyMember)->header.mode += 1;
     slot                               = Battle_AllocEffect(1, 74);
-    owner                              = g_Task;
+    owner                              = TASK(PartyMember);
     g_BattleEffects[slot].header.mode  = 0;
     g_BattleEffects[slot].arg.unk_09   = 0;
     g_BattleEffects[slot].target.party = owner;
@@ -35,7 +35,7 @@ MATCH void func_801EEC94(void) {
     TASK(PartyMember)->param.unk_0B += 1;
     for (i = 0; i < 4; i++) {
         slot                               = Battle_AllocEffect(1, 74);
-        spawner                            = g_Task;
+        spawner                            = TASK(PartyMember);
         g_BattleEffects[slot].header.mode  = 1;
         g_BattleEffects[slot].unk_0B       = i * 8;
         g_BattleEffects[slot].unk_04       = i;
@@ -77,7 +77,7 @@ MATCH void func_801EF0C0(void) {
         for (i = 0; i < 4; i++) {
             func_801EF2F0(D_800B6BF0[i]);
             slot                               = Battle_AllocEffect(1, 72);
-            owner                              = g_Task;
+            owner                              = TASK(PartyMember);
             g_BattleEffects[slot].unk_04       = i;
             g_BattleEffects[slot].arg.unk_09   = i * 5 + 1;
             g_BattleEffects[slot].unk_0A       = i * 12 + 1;

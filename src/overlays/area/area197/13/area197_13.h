@@ -5,7 +5,6 @@
  * and its data. Only this image includes the file. */
 
 #include "overlays/area/worlds/world04.h"
-#include "area/spad.h"
 #include "area/effects.h"
 /* The state handler banks the step dispatchers index. */
 extern u8       D_801F431C[];

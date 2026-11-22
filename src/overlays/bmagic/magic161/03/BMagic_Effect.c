@@ -34,7 +34,7 @@ MATCH void func_801EEC84(void) {
         row                     = (BattleWorkImage*)&g_BattleEnemyBattlers[enemy];
         *(BattleWorkImage*)slot = *row;
     }
-    work                                            = g_Task;
+    work                                            = TASK(PartyMember);
     g_BattleEffects[index & BYTE_MASK].unk_06       = 1;
     g_BattleEffects[index & BYTE_MASK].header.mode  = 0;
     g_BattleEffects[index & BYTE_MASK].header.step  = 0;

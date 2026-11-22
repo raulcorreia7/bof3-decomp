@@ -7,7 +7,7 @@ MATCH void func_801F2D80(void) {
     Trail_Draw(MEM_PTR(Trail, AREA_WORK));
     ACTOR_COUNT_DOWN(TASK(Actor), remaining, timer);
     if (!(remaining & BYTE_MASK)) {
-        g_Task->timer = 16;
-        g_Task->header.mode += 1;
+        TASK(Actor)->timer = 16;
+        TASK(Actor)->header.mode += 1;
     }
 }

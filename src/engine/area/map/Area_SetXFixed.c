@@ -8,29 +8,29 @@ MATCH void Area_SetXFixed(Actor* entity) {
     u8     state;
     u8     flags;
 
-    start_x = g_Task->pos.x.fixed;
-    if (g_Task->timer != 0) {
-        g_Task->pos.x.fixed = start_x + g_Task->vx;
-        g_Task->pos.y.fixed += g_Task->vy;
-        COORD_INT(g_Task->pos.z) += g_Task->vz;
-        g_Task->timer--;
-        if (g_Task->timer == 0) {
+    start_x = TASK(Actor)->pos.x.fixed;
+    if (TASK(Actor)->timer != 0) {
+        TASK(Actor)->pos.x.fixed = start_x + TASK(Actor)->vx;
+        TASK(Actor)->pos.y.fixed += TASK(Actor)->vy;
+        COORD_INT(TASK(Actor)->pos.z) += TASK(Actor)->vz;
+        TASK(Actor)->timer--;
+        if (TASK(Actor)->timer == 0) {
             if (!(entity->interaction_flags & 0x80)) {
-                COORD_INT(g_Task->pos.z) = Area_HeightSample(g_Task->pos.x.fixed, g_Task->pos.y.fixed);
+                COORD_INT(TASK(Actor)->pos.z) = Area_HeightSample(TASK(Actor)->pos.x.fixed, TASK(Actor)->pos.y.fixed);
             }
-            work            = g_Task;
+            work            = TASK(Actor);
             entity->roll_90 = 0;
             mode            = work->header.step;
             if (mode - 1 < 3) {
                 entity->timer_75 = (mode & 0x3) * 30;
                 if ((entity->timer_75 & 0xFE) != 0) {
                     func_801A275C(&entity->interaction_flags);
-                    if (!(g_Task->option_flags & ACTOR_OPT_ROUTE_LOCKED)) {
-                        g_Task->direction &= 7;
+                    if (!(TASK(Actor)->option_flags & ACTOR_OPT_ROUTE_LOCKED)) {
+                        TASK(Actor)->direction &= 7;
                         entity->interaction_flags |= ACTOR_INTERACTION_MOVING;
                     }
                     if (!(entity->interaction_flags & 0x40)) {
-                        state = (g_Task->script_pc < 8) ? 6 : 0;
+                        state = (TASK(Actor)->script_pc < 8) ? 6 : 0;
                     } else {
                         state = 0xFF;
                     }
@@ -41,7 +41,7 @@ MATCH void Area_SetXFixed(Actor* entity) {
     }
     func_801A3D1C(&entity->interaction_flags);
     if (g_GameStateIndex != GAME_REQUEST_MESSAGE) {
-        if (g_Task->timer <= g_Task->unk_0A) {
+        if (TASK(Actor)->timer <= TASK(Actor)->unk_0A) {
             flags = entity->interaction_flags | ACTOR_INTERACTION_SCRIPT_REQUEST;
         } else {
             flags = entity->interaction_flags & ~ACTOR_INTERACTION_SCRIPT_REQUEST;

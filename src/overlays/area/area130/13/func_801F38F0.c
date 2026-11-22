@@ -10,7 +10,7 @@ MATCH void func_801F38F0(void) {
         slot               = &g_SpawnedActors[index];
         slot->header.flags = 1;
         slot->type         = 0x78;
-        work               = g_Task;
+        work               = TASK(Actor);
         WorldPos_Copy(&slot->pos, &work->pos);
     }
 }

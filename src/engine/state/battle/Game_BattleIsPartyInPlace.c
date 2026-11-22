@@ -19,8 +19,8 @@ MATCH bool Game_BattleIsPartyInPlace(void) {
                 break;
             }
         }
-        if (g_Task->param.unk_0B == 0 && (Script_AnimStepOnce() & BYTE_MASK) != 0) {
-            g_Task->param.unk_0B = 1;
+        if (TASK(Actor)->param.unk_0B == 0 && (Script_AnimStepOnce() & BYTE_MASK) != 0) {
+            TASK(Actor)->param.unk_0B = 1;
         }
     }
     for (i = 0; i < g_Game.party_size; i++) {

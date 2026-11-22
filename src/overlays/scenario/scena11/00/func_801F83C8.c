@@ -5,8 +5,6 @@
 __asm__(".include \"include/match/macro.inc\"\n");
 #endif
 
-#define g_TaskMember ((PartyMember*)g_Task)
-
 MATCH void func_801F83C8(void) {
     u8           index;
     PartyMember* work;
@@ -88,17 +86,17 @@ MATCH void func_801F83C8(void) {
             break;
         case 9:
             TASK_SET(&g_Game.members[0]);
-            g_Task->param.actor_slot = Actor_FindFreeSpawned();
-            if (g_Task->param.actor_slot != 0xFF) {
-                g_SpawnedActors[g_Task->param.actor_slot].header.flags = 1;
-                g_SpawnedActors[g_Task->param.actor_slot].type         = 6;
-                g_SpawnedActors[g_Task->param.actor_slot].unk_06       = 3;
-                g_SpawnedActors[g_Task->param.actor_slot].scene_step   = 0;
-                g_SpawnedActors[g_Task->param.actor_slot].selection    = 0x3A;
-                work                                                   = g_TaskMember;
-                g_SpawnedActors[g_Task->param.actor_slot].screen_x     = work->screen_x.value;
-                g_SpawnedActors[g_Task->param.actor_slot].screen_y     = work->screen_y.value;
-                g_ScenarioState.step_05                                = 0xA;
+            TASK(Actor)->param.actor_slot = Actor_FindFreeSpawned();
+            if (TASK(Actor)->param.actor_slot != 0xFF) {
+                g_SpawnedActors[TASK(Actor)->param.actor_slot].header.flags = 1;
+                g_SpawnedActors[TASK(Actor)->param.actor_slot].type         = 6;
+                g_SpawnedActors[TASK(Actor)->param.actor_slot].unk_06       = 3;
+                g_SpawnedActors[TASK(Actor)->param.actor_slot].scene_step   = 0;
+                g_SpawnedActors[TASK(Actor)->param.actor_slot].selection    = 0x3A;
+                work                                                        = TASK(PartyMember);
+                g_SpawnedActors[TASK(Actor)->param.actor_slot].screen_x     = work->screen_x.value;
+                g_SpawnedActors[TASK(Actor)->param.actor_slot].screen_y     = work->screen_y.value;
+                g_ScenarioState.step_05                                     = 0xA;
             }
             break;
         case 10:

@@ -30,7 +30,7 @@ MATCH void func_801EED44(void) {
     }
 
     actor                    = g_BattleEffectBattler;
-    work                     = g_Task;
+    work                     = TASK(PartyMember);
     work->pos.x.fixed        = actor->pos.x.fixed;
     work->pos.y.fixed        = actor->pos.y.fixed;
     pose                     = actor->pos.z.part.integer;
@@ -42,7 +42,7 @@ MATCH void func_801EED44(void) {
     }
 
     effect                                                       = D_801EC2E0;
-    saved                                                        = g_Task;
+    saved                                                        = TASK(PartyMember);
     g_AreaPaletteCopy->rows[AREA_PALETTE_BATL_OVR_ROW].colors[0] = g_AreaPaletteArena->rows[AREA_PALETTE_BATL_OVR_ROW].colors[0];
     g_Task                                                       = BattleEffect_GetTarget(effect);
     Script_Select(1);
@@ -53,7 +53,7 @@ MATCH void func_801EED44(void) {
 MATCH void func_801EEE74(void) {
     PartyMember* saved;
 
-    saved  = g_Task;
+    saved  = TASK(PartyMember);
     g_Task = D_801EC2E0->target.party;
     if (Script_AnimStepOnce() & BYTE_MASK) {
         saved->header.mode++;
@@ -67,9 +67,9 @@ MATCH void func_801EEEDC(void) {
     u8           index;
 
     index                               = Battle_AllocEffect(1, 0x42);
-    published                           = g_Task;
+    published                           = TASK(PartyMember);
     g_BattleEffects[index].header.mode  = 0;
-    saved                               = g_Task;
+    saved                               = TASK(PartyMember);
     g_BattleEffects[index].target.party = published;
     g_Task                              = D_801EC2E0->target.party;
     Script_AnimStepOnce();
@@ -81,7 +81,7 @@ MATCH void func_801EEEDC(void) {
 MATCH void func_801EEF88(void) {
     PartyMember* saved_work;
 
-    saved_work = g_Task;
+    saved_work = TASK(PartyMember);
     g_Task     = D_801EC2E0->target.party;
     Script_AnimStepOnce();
     g_Task = saved_work;
@@ -112,7 +112,7 @@ MATCH void func_801EF0B8(void) {
     COORD_INT(TASK(PartyMember)->pos.z)        = COORD_INT(g_BattleEffectBattler->pos.z);
     slot                                       = Battle_AllocEffect(1, 66);
     effect_index                               = slot & BYTE_MASK;
-    task                                       = g_Task;
+    task                                       = TASK(PartyMember);
     g_BattleEffects[effect_index].header.mode  = 1;
     g_BattleEffects[effect_index].target.party = task;
     TASK(PartyMember)->timer                   = slot;
@@ -128,7 +128,7 @@ MATCH void func_801EF18C(void) {
 
     if ((g_FrameCount & 0x3) == 0x3) {
         slot                                   = BMagic_AllocEffect();
-        BMAGIC_EFFECT_SLOTS[slot].target.party = g_Task;
+        BMAGIC_EFFECT_SLOTS[slot].target.party = TASK(PartyMember);
         BMAGIC_EFFECT_SLOTS[slot].unk_0B       = TASK(PartyMember)->unk_09;
         tick                                   = TASK(PartyMember)->unk_09;
         if (tick < 100) {

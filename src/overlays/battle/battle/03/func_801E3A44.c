@@ -5,7 +5,7 @@ MATCH void func_801E3A44(void) {
     u8           count;
 
     Battle_IsEnemyBlocked();
-    work         = g_Task;
+    work         = TASK(PartyMember);
     count        = work->unk_09 - 1;
     work->unk_09 = count;
     if (count == 0) {

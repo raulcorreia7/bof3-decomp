@@ -5,7 +5,6 @@
  * and its data. Only this image includes the file. */
 
 #include "overlays/area/worlds/world01.h"
-#include "area/spad.h"
 
 extern void* D_80146954;
 extern u8    D_801F4644[];

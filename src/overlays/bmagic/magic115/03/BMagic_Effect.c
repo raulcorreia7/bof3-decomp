@@ -19,7 +19,7 @@ MATCH void func_801EEC80(void) {
     TASK(PartyMember)->pos.y.fixed     = actor->pos.y.fixed;
     TASK(PartyMember)->pos.z.fixed     = actor->pos.z.fixed;
     slot                               = Battle_AllocEffect(1, 48) & BYTE_MASK;
-    work                               = g_Task;
+    work                               = TASK(PartyMember);
     g_BattleEffects[slot].header.mode  = 0;
     g_BattleEffects[slot].target.party = work;
     GFX_PaletteFreeFadeTarget(actor);

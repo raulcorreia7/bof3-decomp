@@ -19,12 +19,12 @@ MATCH void func_801EEC5C(void) {
 
     TASK(PartyMember)->facing          = g_BattleEffectBattler->facing;
     battler                            = g_BattleEffectBattler;
-    task                               = g_Task;
+    task                               = TASK(PartyMember);
     task->pos.x.fixed                  = battler->pos.x.fixed;
     task->pos.y.fixed                  = battler->pos.y.fixed;
     task->pos.z.fixed                  = battler->pos.z.fixed;
     slot                               = Battle_AllocEffect(1, 90) & BYTE_MASK;
-    g_BattleEffects[slot].target.party = g_Task;
+    g_BattleEffects[slot].target.party = TASK(PartyMember);
     g_BattleEffects[slot].header.mode  = 0;
     g_BattleEffects[slot].arg.unk_09   = 4;
     /* Copies the first three colour rows of arena palette 26 into the work copy, STP set on rows 0 and 2. */
@@ -95,7 +95,7 @@ MATCH void func_801EF03C(void) {
         D_1F800008[3] = TASK(PartyMember)->screen_y.value;
         func_800B0118();
         battler           = g_BattleEffectBattler;
-        task              = g_Task;
+        task              = TASK(PartyMember);
         task->pos.x.fixed = battler->pos.x.fixed;
         task->pos.y.fixed = battler->pos.y.fixed;
         task->pos.z.fixed = battler->pos.z.fixed;
@@ -108,7 +108,7 @@ MATCH void func_801EF03C(void) {
         TASK(PartyMember)->unk_5D       = RANDOM_MASK(1);
         TASK(PartyMember)->unk_5E       = RANDOM_MASK(3);
         TASK(PartyMember)->unk_5F       = RANDOM_MASK(3);
-        effect                          = g_Task;
+        effect                          = TASK(PartyMember);
         effect->unk_04                  = 0;
         effect->unk_0C                  = 0;
         TASK(PartyMember)->param.unk_0B = 0;
@@ -140,7 +140,7 @@ MATCH void func_801EF268(void) {
 MATCH void func_801EF324(void) {
     PartyMember* work;
 
-    work = g_Task;
+    work = TASK(PartyMember);
     if (++work->unk_0C == 0x2E) {
         work->header.step++;
     }

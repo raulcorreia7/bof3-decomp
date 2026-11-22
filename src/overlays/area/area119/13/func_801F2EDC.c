@@ -8,19 +8,19 @@ MATCH void func_801F2EDC(void) {
     s32 dx;
     s16 span;
 
-    g_Task->screen_y = 0;
+    TASK(Actor)->screen_y = 0;
     if (SYS_TestFlag(D_80144ED0, 0x0F) == 0) {
         bundle                                 = MEM_PTR(u8, MAP_BUNDLE_BASE);
         g_AreaCellCodes[bundle[0] * 62 + 0x41] = 0x52;
         g_AreaCellCodes[bundle[0] * 63 + 0x41] = 0x52;
-        g_Task->header.step                    = 5;
+        TASK(Actor)->header.step               = 5;
     } else {
-        g_Task->header.step += 1;
+        TASK(Actor)->header.step += 1;
         dx = D_80145EC4 - 0x428000;
         if (ABS(dx) <= 0x8000 && (Area119_Distance(D_80145EC8, -0x3E0000) <= 0x10000 || Area119_Distance(D_80145EC8, -0x3F0000) <= 0x10000)) {
-            span                = -0x100;
-            g_Task->screen_y    = span;
-            g_Task->header.step = 3;
+            span                     = -0x100;
+            TASK(Actor)->screen_y    = span;
+            TASK(Actor)->header.step = 3;
         }
     }
     func_801F3324();

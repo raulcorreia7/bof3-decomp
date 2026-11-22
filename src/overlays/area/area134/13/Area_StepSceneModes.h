@@ -2,7 +2,6 @@
  * position and the scene's script bytes. The dance keeps every write of the work cell (the unit
  * declares it volatile); the mode stores read the cell through its plain view. Both members of
  * area134/13 use it: verify each after a change. */
-#undef g_Task
 #define AREA_TASK_PLAIN ((Actor*)*(struct Task**)&g_Task)
 
 #define AREA_STEP_SCENE_MODES(work)                                 \

@@ -39,7 +39,7 @@ MATCH void func_801EEDD8(void) {
     TASK(PartyMember)->header.mode++;
     for (i = 0; i < 32; i++) {
         slot                                   = BMagic_AllocEffect() & BYTE_MASK;
-        task                                   = g_Task;
+        task                                   = TASK(PartyMember);
         BMAGIC_EFFECT_SLOTS[slot].header.mode  = 0;
         BMAGIC_EFFECT_SLOTS[slot].unk_04       = i;
         BMAGIC_EFFECT_SLOTS[slot].unk_0B       = 0;
@@ -202,12 +202,12 @@ MATCH void func_801F028C(void) {
 MATCH void func_801F02FC(void) {
     PartyMember* work;
 
-    work = g_Task;
+    work = TASK(PartyMember);
     work->timer += 2;
-    work = g_Task;
+    work = TASK(PartyMember);
     work->unk_09 += 4;
     if (work->unk_09 == 16) {
-        work = g_Task;
+        work = TASK(PartyMember);
         work->header.step++;
     }
 }
@@ -216,9 +216,9 @@ MATCH void func_801F0368(void) {
     PartyMember* work;
     u8           count;
 
-    work = g_Task;
+    work = TASK(PartyMember);
     work->timer++;
-    work         = g_Task;
+    work         = TASK(PartyMember);
     count        = work->unk_09 - 4;
     work->unk_09 = count;
     if (count == 0) {

@@ -7,7 +7,6 @@
 #include "overlays/scenario/scenario.h"
 #include "engine/game/00/game_00.h"
 #include "area/effects.h"
-#include "area/spad.h"
 #include "overlays/area/shared/AreaSprite.h"
 #define SCRATCH_ROW_STRIDE 0x28
 #define SCRATCH_ROW_OFFSET 0x00
@@ -94,42 +93,42 @@ void func_801F85F0(s16 x, s16 y, s16 radius);
 void func_801F8108(s32 x, s32 y);
 
 /* The two screen-effect steps of 348.c: draw at the actor's screen position, turn it by `step`, and leave the scene when the countdown ends. They differ only in the sign of the turn. */
-#define SCENA08_SCREEN_EFFECT_STEP(work, step)                                        \
-    func_801F85F0((s16)g_Task->screen_x, (s16)g_Task->screen_y, (s16)g_Task->unk_32); \
-    (work) = g_Task;                                                                  \
-    (work)->unk_32 += (step);                                                         \
-    if (--(work)->frame_cells == 0) {                                                 \
-        func_80196070();                                                              \
+#define SCENA08_SCREEN_EFFECT_STEP(work, step)                                                       \
+    func_801F85F0((s16)TASK(Actor)->screen_x, (s16)TASK(Actor)->screen_y, (s16)TASK(Actor)->unk_32); \
+    (work) = g_Task;                                                                                 \
+    (work)->unk_32 += (step);                                                                        \
+    if (--(work)->frame_cells == 0) {                                                                \
+        func_80196070();                                                                             \
     }
 
 /* The two sparkle steps of 348.c: stir the seed, advance the frame counters and move to the next mode after `reset` frames. They differ only in `reset`. */
-#define SCENA08_SPARKLE_STEP(count, timer, reset)  \
-    func_801F8534();                               \
-    g_Task->script_pc += RANDOM_MASK(BYTE_MASK);   \
-    if ((g_Task->frame_cells & 3) == 0) {          \
-        g_Task->unk_2C += 1;                       \
-    }                                              \
-    (count)             = g_Task->unk_32 + 1;      \
-    (timer)             = g_Task->frame_cells - 1; \
-    g_Task->frame_cells = (timer);                 \
-    g_Task->unk_32      = (count);                 \
-    if ((timer) == 0) {                            \
-        g_Task->frame_cells = (reset);             \
-        g_Task->header.mode += 1;                  \
+#define SCENA08_SPARKLE_STEP(count, timer, reset)            \
+    func_801F8534();                                         \
+    TASK(Actor)->script_pc += RANDOM_MASK(BYTE_MASK);        \
+    if ((TASK(Actor)->frame_cells & 3) == 0) {               \
+        TASK(Actor)->unk_2C += 1;                            \
+    }                                                        \
+    (count)                  = TASK(Actor)->unk_32 + 1;      \
+    (timer)                  = TASK(Actor)->frame_cells - 1; \
+    TASK(Actor)->frame_cells = (timer);                      \
+    TASK(Actor)->unk_32      = (count);                      \
+    if ((timer) == 0) {                                      \
+        TASK(Actor)->frame_cells = (reset);                  \
+        TASK(Actor)->header.mode += 1;                       \
     }
 
 /* The two sparkle starts of 348.c: seed the frame counters, stir the seed 0x40 times and play `cue`. They differ only in `cue`. */
-#define SCENA08_SPARKLE_START(i, cue)                \
-    g_Task->frame_cells = 0x20;                      \
-    g_Task->unk_32      = 0;                         \
-    g_Task->script_pc   = 0;                         \
-    for ((i) = 0; (i) < 0x40; (i)++) {               \
-        g_Task->script_pc += RANDOM_MASK(BYTE_MASK); \
-        func_801F81F4(g_Task->script_pc);            \
-    }                                                \
-    g_Task->unk_2C = 0;                              \
-    SND_SEPlay(cue);                                 \
-    g_Task->header.mode += 1;
+#define SCENA08_SPARKLE_START(i, cue)                     \
+    TASK(Actor)->frame_cells = 0x20;                      \
+    TASK(Actor)->unk_32      = 0;                         \
+    TASK(Actor)->script_pc   = 0;                         \
+    for ((i) = 0; (i) < 0x40; (i)++) {                    \
+        TASK(Actor)->script_pc += RANDOM_MASK(BYTE_MASK); \
+        func_801F81F4(TASK(Actor)->script_pc);            \
+    }                                                     \
+    TASK(Actor)->unk_2C = 0;                              \
+    SND_SEPlay(cue);                                      \
+    TASK(Actor)->header.mode += 1;
 
 extern u8 D_80181B17;
 extern u8 D_80181B18;

@@ -6,14 +6,14 @@ MATCH void func_801ACA14(void) {
     Actor* work;
 
     g_CurrentActor->unk_93 = GFX_PaletteAllocFade(TASK_BYTES, 0U, 0U, 0U, 1);
-    flags_set              = g_Task;
+    flags_set              = TASK(Actor);
     flags_set->header.flags |= 0x20;
-    tint                     = g_Task;
-    tint->tint.steps.delta.b = -0x40;
-    tint->tint.steps.delta.g = -0x40;
-    tint->tint.steps.delta.r = -0x40;
-    g_Task->tint.steps.flags = 1;
-    work                     = g_Task;
-    g_CurrentActor->unk_7E   = (g_CurrentActor->unk_7E - 1);
-    work->unk_04             = 1;
+    tint                          = TASK(Actor);
+    tint->tint.steps.delta.b      = -0x40;
+    tint->tint.steps.delta.g      = -0x40;
+    tint->tint.steps.delta.r      = -0x40;
+    TASK(Actor)->tint.steps.flags = 1;
+    work                          = TASK(Actor);
+    g_CurrentActor->unk_7E        = (g_CurrentActor->unk_7E - 1);
+    work->unk_04                  = 1;
 }

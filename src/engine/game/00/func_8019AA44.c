@@ -4,7 +4,7 @@ MATCH void func_8019AA44(void) {
     Actor*  work;
     Angle3* angle;
 
-    work = g_Task;
+    work = TASK(Actor);
     if (work->timer != 0) {
         angle = &D_801481E8;
         angle->x += D_801481F8.x;

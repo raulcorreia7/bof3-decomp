@@ -1,8 +1,44 @@
 #include "area118_13.h"
 
-#ifdef NON_MATCHING
-NON_MATCHING void func_801F3058(void) {
+#include "overlays/area/shared/func_801F2C48.h"
+
+/* Places the gate at its entry cell and height, marks its two cells closed (0x52) or, once its scene flag is set, open (0xA1), and starts the away step when the party stands in it. */
+MATCH void func_801F3058(void) {
+    Actor* work;
+    Actor* cell;
+    Actor* gate;
+    Actor* row;
+    s32    entry;
+    s32    pair;
+    s16    screen_y;
+    s32    height;
+
+    work                            = TASK(Actor);
+    work->unk_0A                    = work->pos.y.part.integer + 1;
+    cell                            = TASK(Actor);
+    entry                           = work->pos.x.part.integer;
+    cell->param.unk_0B              = D_801F5138[cell->pos.y.part.integer];
+    pair                            = entry * 2;
+    gate                            = TASK(Actor);
+    gate->pos.x.part.integer        = D_801F515C[pair];
+    gate->pos.y.part.integer        = D_801F515D[pair];
+    gate->direction                 = entry == 0;
+    height                          = Area_HeightSample(TASK(Actor)->pos.x.fixed, TASK(Actor)->pos.y.fixed);
+    TASK(Actor)->pos.z.part.integer = -height / 2 - D_801F513C[entry];
+    TASK(Actor)->unk_32             = D_801F513C[entry];
+    TASK(Actor)->screen_x           = D_801F514C[entry];
+    TASK(Actor)->screen_y           = 0;
+    if (!SYS_TestFlag(D_80144ED0, TASK(Actor)->param.unk_0B)) {
+        (g_AreaCellCodes + COORD_INT(TASK(Actor)->pos.y) * ((AreaMapBundle*)MAP_BUNDLE_BASE)->width)[COORD_INT(TASK(Actor)->pos.x)]                                                       = 0x52;
+        (g_AreaCellCodes +
+         (COORD_INT(TASK(Actor)->pos.y) + (TASK(Actor)->direction == FACING_UP_LEFT)) * ((AreaMapBundle*)MAP_BUNDLE_BASE)->width)[COORD_INT(TASK(Actor)->pos.x) + TASK(Actor)->direction] = 0x52;
+        TASK(Actor)->header.step                                                                                                                                                          = 5;
+    } else {
+        (g_AreaCellCodes + COORD_INT(TASK(Actor)->pos.y) * ((AreaMapBundle*)MAP_BUNDLE_BASE)->width)[COORD_INT(TASK(Actor)->pos.x)]                                                       = 0xA1;
+        (g_AreaCellCodes +
+         (COORD_INT(TASK(Actor)->pos.y) + (TASK(Actor)->direction == FACING_UP_LEFT)) * ((AreaMapBundle*)MAP_BUNDLE_BASE)->width)[COORD_INT(TASK(Actor)->pos.x) + TASK(Actor)->direction] = 0xA1;
+        TASK(Actor)->header.step++;
+        AREA_ENTRY_CELL_AWAY_STEP(-0x100, 1)
+    }
+    func_801F381C(0);
 }
-#else
-INCLUDE_ASM(func_801F3058);
-#endif

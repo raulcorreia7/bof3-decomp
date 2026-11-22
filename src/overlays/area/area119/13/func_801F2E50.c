@@ -4,6 +4,6 @@ MATCH void func_801F2E50(void) {
     if (g_ScriptVars[0] == 0x28) {
         Actor_Clear();
     } else {
-        g_Task->header.mode = 0;
+        TASK(Actor)->header.mode = 0;
     }
 }

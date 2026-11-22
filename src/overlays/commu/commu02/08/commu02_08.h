@@ -79,6 +79,8 @@ extern u8       D_801D0C30[12];
 extern u8       D_801D0C3C[];
 extern u8       D_801DAAAC[];
 extern u16      D_801DAC34[2][8];
+/* The three 4-byte column labels drawn by func_801D2AC4. */
+extern u8       D_801DAC54[3][4];
 extern u8       D_801DAC60[];
 extern u8       D_801DACA8[];
 extern u8       D_801DACAC[];
@@ -122,7 +124,7 @@ extern u8  D_801F294F;
 
 void func_801D2794(s32 count, s32 shown, s32 chosen);
 void func_801D2870(void);
-void func_801D2AC4(s16 x, s16 y, s32 column, s32 style);
+void func_801D2AC4(s16 x, s16 y, u8 column, u8 style);
 
 u8 Party_GetJoinedCharacter(u8);
 

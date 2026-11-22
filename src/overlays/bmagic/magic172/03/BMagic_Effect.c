@@ -24,14 +24,14 @@ MATCH void func_801EEC5C(void) {
     TASK(PartyMember)->param.unk_0B = 0;
     TASK(PartyMember)->header.mode += 1;
     first_slot                               = Battle_AllocEffect(1, 0x51) & BYTE_MASK;
-    work                                     = g_Task;
+    work                                     = TASK(PartyMember);
     g_BattleEffects[first_slot].header.mode  = 0;
     g_BattleEffects[first_slot].target.party = work;
     TASK(PartyMember)->param.unk_0B += 1;
     i = 0;
     do {
         slot                               = Battle_AllocEffect(1, 0x51);
-        target                             = g_Task;
+        target                             = TASK(PartyMember);
         g_BattleEffects[slot].header.mode  = 1;
         g_BattleEffects[slot].unk_04       = first_slot;
         g_BattleEffects[slot].arg.unk_09   = i + 1;
@@ -109,7 +109,7 @@ MATCH void func_801EF158(void) {
     TASK(PartyMember)->pos.z.fixed = g_BattleEffectBattler->pos.z.fixed + 0x800000;
     actor                          = g_Battle.selected_actor;
     angle                          = ratan2(actor->pos.x.fixed - TASK(PartyMember)->pos.x.fixed, actor->pos.y.fixed - TASK(PartyMember)->pos.y.fixed);
-    work                           = g_Task;
+    work                           = TASK(PartyMember);
     work->param.unk_0B             = 0;
     work->unk_0C                   = angle;
     TASK(PartyMember)->unk_09      = 0;
@@ -198,7 +198,7 @@ MATCH void func_801EF590(void) {
         TASK(PartyMember)->pos.z.fixed = g_BattleEffectBattler->pos.z.fixed + 0x800000;
         actor                          = g_Battle.selected_actor;
         angle                          = ratan2(actor->pos.x.fixed - TASK(PartyMember)->pos.x.fixed, actor->pos.y.fixed - TASK(PartyMember)->pos.y.fixed);
-        work                           = g_Task;
+        work                           = TASK(PartyMember);
         work->unk_09                   = 0;
         work->unk_0C                   = angle;
         TASK(PartyMember)->header.step += 1;

@@ -4,7 +4,7 @@ MATCH void func_801F5B24(void) {
     Actor* work;
     u8     count;
 
-    work  = g_Task;
+    work  = TASK(Actor);
     count = work->unk_0A;
     if (count == 0) {
         work->pos.x.fixed = g_Game.members[0].pos.x.fixed;
@@ -12,7 +12,7 @@ MATCH void func_801F5B24(void) {
         work->pos.y.fixed = g_Game.members[0].pos.y.fixed;
         work->pos.z.fixed = D_80145ECC + TO_COORD(128);
         func_801F5BB0(work);
-        g_Task->header.mode += 1;
+        TASK(Actor)->header.mode += 1;
         return;
     }
     work->unk_0A = count - 1;

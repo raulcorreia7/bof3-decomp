@@ -27,9 +27,9 @@ MATCH void func_801D2064(void) {
     s32*             angle_cell;
     s32              velocity;
 
-    g_Task->ticker++;
+    TASK(SceneBandEffect)->ticker++;
 
-    work                                    = g_Task;
+    work                                    = TASK(SceneBandEffect);
     counter                                 = work->orbit_counter + 1;
     FAKE_VOLATILE(s32, work->orbit_counter) = counter;
     angle                                   = SCE10EFF_ORBIT_ANGLE(counter);
@@ -38,15 +38,15 @@ MATCH void func_801D2064(void) {
     g_ScratchPad                            = 0x18;
 
     velocity     = rcos(angle) * g_ScratchPad;
-    work         = g_Task;
+    work         = TASK(SceneBandEffect);
     work->proj.x = D_801D2744->proj.x + velocity;
 
     velocity        = rsin(*angle_cell) * g_ScratchPad;
-    scratch         = g_Task;
+    scratch         = TASK(SceneBandEffect);
     scratch->proj.y = D_801D2744->proj.y + velocity;
     scratch->band -= 2;
 
-    if (g_Task->band == 0) {
+    if (TASK(SceneBandEffect)->band == 0) {
         D_801D2744->ticker++;
         Actor_Clear();
     }
@@ -65,8 +65,8 @@ MATCH void func_801D218C(void) {
     d          = &g_ScratchPad;
     vec        = (s16*)g_ScratchPadVectors;
     d[0]       = 0x40;
-    D_1F800004 = ((g_Task->ticker + 2) & 0xF) << 8;
-    D_1F80000C = g_Task->band;
+    D_1F800004 = ((TASK(SceneBandEffect)->ticker + 2) & 0xF) << 8;
+    D_1F80000C = TASK(SceneBandEffect)->band;
     i          = 1;
     D_1F800008 = RANDOM_MASK(0x3F);
     vec[0]     = 0;
@@ -85,7 +85,7 @@ MATCH void func_801D218C(void) {
             } else {
                 g_ScratchPad = 0x80 - RANDOM_MASK(0x3F);
             }
-            page    = ((g_Task->ticker + i + 2) & 0xF) << 8;
+            page    = ((TASK(SceneBandEffect)->ticker + i + 2) & 0xF) << 8;
             vec[0]  = 0;
             cell[0] = page;
             vec[1]  = FIXED_MUL(rsin(page), cell[-1]);
@@ -106,7 +106,7 @@ MATCH void func_801D240C(void) {
     s32      angle;
     s32      i;
 
-    g_ScratchPad = RANDOM_MASK(7) + g_Task->band * 3;
+    g_ScratchPad = RANDOM_MASK(7) + TASK(SceneBandEffect)->band * 3;
 
     SetDrawMode((DR_MODE*)g_GfxPrimCursor, 0, 1, getTPage(TPAGE_DEPTH_4BIT, TPAGE_ABR_ADD, 320, 256), 0);
     i         = 0;
@@ -116,15 +116,15 @@ MATCH void func_801D240C(void) {
     do {
         primitive = GFX_BeginPolyG3(1);
 
-        setXY0(primitive, g_Task->origin.x, g_Task->origin.y);
+        setXY0(primitive, TASK(SceneBandEffect)->origin.x, TASK(SceneBandEffect)->origin.y);
         angle         = i << 9;
-        primitive->x1 = g_Task->origin.x + FIXED_MUL(rsin(angle), *angle_ptr);
-        primitive->y1 = g_Task->origin.y + FIXED_MUL(rcos(angle), *angle_ptr);
+        primitive->x1 = TASK(SceneBandEffect)->origin.x + FIXED_MUL(rsin(angle), *angle_ptr);
+        primitive->y1 = TASK(SceneBandEffect)->origin.y + FIXED_MUL(rcos(angle), *angle_ptr);
         i++;
         angle         = i << 9;
-        primitive->x2 = g_Task->origin.x + FIXED_MUL(rsin(angle), *angle_ptr);
-        primitive->y2 = g_Task->origin.y + FIXED_MUL(rcos(angle), *angle_ptr);
-        setRGB0(primitive, g_Task->band * 8, g_Task->band * 8, g_Task->band * 6);
+        primitive->x2 = TASK(SceneBandEffect)->origin.x + FIXED_MUL(rsin(angle), *angle_ptr);
+        primitive->y2 = TASK(SceneBandEffect)->origin.y + FIXED_MUL(rcos(angle), *angle_ptr);
+        setRGB0(primitive, TASK(SceneBandEffect)->band * 8, TASK(SceneBandEffect)->band * 8, TASK(SceneBandEffect)->band * 6);
         setRGB1(primitive, 1, 1, 1);
         setRGB2(primitive, 1, 1, 1);
         GFX_AddPrim(GFX_LAYER_EFFECT_FRONT, sizeof(POLY_G3));
@@ -135,12 +135,12 @@ MATCH void func_801D2658(void) {
     s16     vec[3];
     TILE_1* primitive;
 
-    vec[0]    = (g_Task->proj.x >> 9) - 0x4000;
+    vec[0]    = (TASK(SceneBandEffect)->proj.x >> 9) - 0x4000;
     primitive = (TILE_1*)g_GfxPrimCursor;
-    vec[1]    = (g_Task->proj.y >> 9) - 0x4000;
-    vec[2]    = -(g_Task->proj_z / 2);
+    vec[1]    = (TASK(SceneBandEffect)->proj.y >> 9) - 0x4000;
+    vec[2]    = -(TASK(SceneBandEffect)->proj_z / 2);
     SetTile1(primitive);
     RotTransPers((SVECTOR*)vec, (long*)&primitive->x0, (long*)vec, (long*)&vec[2]);
-    g_Task->origin.x = primitive->x0;
-    g_Task->origin.y = primitive->y0;
+    TASK(SceneBandEffect)->origin.x = primitive->x0;
+    TASK(SceneBandEffect)->origin.y = primitive->y0;
 }

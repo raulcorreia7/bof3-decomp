@@ -4,9 +4,9 @@ MATCH void func_800C1CBC(void) {
     Script_AnimStepLoop();
     if (EMI_IsReady() != 0) {
         Battle_DefeatEnemy();
-        ((PartyMember*)g_Task)->header.flags &= ~PARTY_MEMBER_FLAG_HANDLER_BUSY;
-        ((PartyMember*)g_Task)->header.mode = 6;
-        ((PartyMember*)g_Task)->header.step = 4;
-        ((PartyMember*)g_Task)->unk_03      = 6;
+        TASK(PartyMember)->header.flags &= ~PARTY_MEMBER_FLAG_HANDLER_BUSY;
+        TASK(PartyMember)->header.mode = 6;
+        TASK(PartyMember)->header.step = 4;
+        TASK(PartyMember)->unk_03      = 6;
     }
 }

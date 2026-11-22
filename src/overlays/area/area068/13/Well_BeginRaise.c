@@ -4,6 +4,6 @@
 MATCH void Well_BeginRaise(void) {
     if (g_PadStates[0].pressed == PADRdown) {
         g_WellPressCount += 1;
-        g_Task->header.mode = WELL_MODE_RAISE_READY;
+        TASK(Actor)->header.mode = WELL_MODE_RAISE_READY;
     }
 }

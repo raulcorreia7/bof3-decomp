@@ -3,13 +3,13 @@
 MATCH void func_801F33FC(void) {
     u8 direction;
 
-    direction = g_Task->direction;
-    if (direction != SYS_TestFlag(g_SceneEventFlags, (s32)g_Task->param.scene_event_flag) && (s8)func_801F3C44(g_Task->pos.x.fixed | 0x8000, g_Task->pos.y.fixed | 0x8000) < 0) {
-        Area_CellSetPalette((s32)(s16)((u16)COORD_INT(g_Task->pos.x) + 1), (s32)(s16)((u16)COORD_INT(g_Task->pos.y) + 1));
-        g_Task->header.step += 1;
+    direction = TASK(Actor)->direction;
+    if (direction != SYS_TestFlag(g_SceneEventFlags, (s32)TASK(Actor)->param.scene_event_flag) && (s8)func_801F3C44(TASK(Actor)->pos.x.fixed | 0x8000, TASK(Actor)->pos.y.fixed | 0x8000) < 0) {
+        Area_CellSetPalette((s32)(s16)((u16)COORD_INT(TASK(Actor)->pos.x) + 1), (s32)(s16)((u16)COORD_INT(TASK(Actor)->pos.y) + 1));
+        TASK(Actor)->header.step += 1;
         if (g_GameStateIndex == GAME_REQUEST_IDLE) {
             SND_SEPlay(EMI_SE_ID(SND_BANK_AREA, 0x05));
         }
-        func_801F3950(g_Task->direction, COORD_INT(g_Task->pos.z));
+        func_801F3950(TASK(Actor)->direction, COORD_INT(TASK(Actor)->pos.z));
     }
 }

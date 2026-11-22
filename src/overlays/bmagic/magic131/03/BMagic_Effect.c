@@ -47,7 +47,7 @@ MATCH void func_801EEDEC(void) {
     TASK(PartyMember)->timer        = 0;
     TASK(PartyMember)->header.mode += 1;
     slot                               = Battle_AllocEffect(1, 105) & BYTE_MASK;
-    target                             = g_Task;
+    target                             = TASK(PartyMember);
     g_BattleEffects[slot].header.mode  = 1;
     g_BattleEffects[slot].target.party = target;
     TASK(PartyMember)->param.unk_0B += 1;
@@ -93,7 +93,7 @@ MATCH void func_801EF000(void) {
     g_Game.members[1].header.flags     = 0;
     g_Game.members[2].header.flags     = 0;
     slot                               = Battle_AllocEffect(1, 0x69) & BYTE_MASK;
-    work                               = g_Task;
+    work                               = TASK(PartyMember);
     g_BattleEffects[slot].unk_04       = 0x21;
     g_BattleEffects[slot].header.mode  = 0;
     g_BattleEffects[slot].arg.unk_09   = 0x18;
@@ -112,7 +112,7 @@ MATCH void func_801EF110(void) {
 
     if (TASK(PartyMember)->param.unk_0B == 0) {
         slot                               = Battle_AllocEffect(1, 0x69) & BYTE_MASK;
-        work                               = g_Task;
+        work                               = TASK(PartyMember);
         g_BattleEffects[slot].header.mode  = 1;
         g_BattleEffects[slot].target.party = work;
         TASK(PartyMember)->param.unk_0B++;
@@ -188,7 +188,7 @@ MATCH void func_801EF488(void) {
             do {
                 slot                              = i & BYTE_MASK;
                 g_Game.members[slot].header.flags = 1;
-                prev                              = g_Task;
+                prev                              = TASK(PartyMember);
                 battler                           = &g_Game.members[slot];
                 g_Task                            = battler;
                 Script_Select((battler->facing + 4) & BYTE_MASK);
@@ -271,14 +271,14 @@ MATCH void func_801EF7FC(void) {
         TASK(PartyMember)->unk_1C         = -1;
         TASK(PartyMember)->unk_2A         = 0;
     }
-    work = g_Task;
+    work = TASK(PartyMember);
     for (i = 0; i < 16; i++) {
         work->unk_0C += work->unk_18;
         work->unk_10 += work->unk_1C;
         work->screen_x.value += work->unk_0C;
         work->screen_y.value += work->unk_10;
     }
-    task                      = g_Task;
+    task                      = TASK(PartyMember);
     task->unk_0C              = ~task->unk_0C + 1;
     task->unk_25              = 5;
     task->unk_10              = ~task->unk_10 + 1;
@@ -286,7 +286,7 @@ MATCH void func_801EF7FC(void) {
     TASK(PartyMember)->unk_27 = 2;
     TASK(PartyMember)->unk_28 = 1;
     TASK(PartyMember)->unk_24 = 0x80;
-    actor                     = g_Task;
+    actor                     = TASK(PartyMember);
     actor->unk_48             = 0;
     actor->scale.x            = 0x10000;
     actor->scale.y            = 0x10000;
@@ -332,7 +332,7 @@ MATCH void func_801EFA68(void) {
 }
 
 MATCH void func_801EFB64(void) {
-    PartyMember* work  = g_Task;
+    PartyMember* work  = TASK(PartyMember);
     u8           timer = work->unk_09 - 1;
     work->unk_0C += work->unk_18;
     work->unk_09 = timer;
@@ -457,7 +457,7 @@ MATCH void func_801F0034(void) {
             TASK(PartyMember)->unk_10 += TASK(PartyMember)->unk_1C;
         }
     }
-    work        = g_Task;
+    work        = TASK(PartyMember);
     timer       = work->timer - 1;
     work->timer = timer;
     work->screen_x.value += work->unk_0C;
@@ -510,7 +510,7 @@ MATCH void func_801F04C0(void) {
     s32          x;
     s32          z;
 
-    work              = g_Task;
+    work              = TASK(PartyMember);
     x                 = g_AreaScrollTargetX;
     active            = g_BattleEffectBattler;
     work->pos.x.fixed = x;
@@ -534,9 +534,9 @@ MATCH void func_801F058C(void) {
     PartyMember* active;
     s8           count;
 
-    work = g_Task;
+    work = TASK(PartyMember);
     work->unk_09 += 2;
-    work         = g_Task;
+    work         = TASK(PartyMember);
     count        = work->unk_5D - 4;
     work->unk_5D = count;
     if (count == 0) {
@@ -619,7 +619,7 @@ MATCH void func_801F0BCC(void) {
     PartyMember* work;
     PartyMember* source;
 
-    work              = g_Task;
+    work              = TASK(PartyMember);
     source            = g_BattleEffectBattler;
     work->pos.x.fixed = g_AreaScrollTargetX;
     /* FAKE: Keep the Y load after the X store; the scheduler hoists it (without it 0x7C vs 0x80 bytes). */
@@ -649,7 +649,7 @@ MATCH void Effect_CountDownAndStep2(void) {
 }
 
 MATCH void func_801F0CE4(void) {
-    PartyMember* work = g_Task;
+    PartyMember* work = TASK(PartyMember);
     u8           timer;
 
     work->unk_14 += 0x10;

@@ -28,9 +28,9 @@ NON_MATCHING void func_801A3080(Actor* actor, s32 facing) {
 
     dir = type & BYTE_MASK;
     if ((work->vx + work->vy) != 0) {
-        value = (s16)(Area_HeightSample(work->pos.x.fixed + g_FacingSteps[dir].x, work->pos.y.fixed + g_FacingStepY[dir * 2]) - COORD_INT(g_Task->pos.z));
+        value = (s16)(Area_HeightSample(work->pos.x.fixed + g_FacingSteps[dir].x, work->pos.y.fixed + g_FacingStepY[dir * 2]) - COORD_INT(TASK(Actor)->pos.z));
         if (facing & 2) {
-            g_Task->unk_64 = 0;
+            TASK(Actor)->unk_64 = 0;
             if (dir != 3) {
                 value = -value;
             }
@@ -39,15 +39,15 @@ NON_MATCHING void func_801A3080(Actor* actor, s32 facing) {
             if (dir != 1) {
                 value = -value;
             }
-            angle_x        = ratan2(value, 0x80);
-            g_Task->unk_68 = 0;
+            angle_x             = ratan2(value, 0x80);
+            TASK(Actor)->unk_68 = 0;
         }
     }
 
     work = g_Task;
     if (FIELD(u8, work, 0x0Au) != 0) {
         g_ActorTurnRamps[n].frames_xy = (s8)(FIELD(u8, work, 0x0Au) * 2);
-        g_ActorTurnRamps[n].frames_z  = (s8)(g_Task->unk_0A * 4);
+        g_ActorTurnRamps[n].frames_z  = (s8)(TASK(Actor)->unk_0A * 4);
         work                          = g_Task;
         g_ActorTurnRamps[n].step_x    = (angle_x - FIELD(s32, work, 0x64u)) / (FIELD(u8, work, 0x0Au) * 2);
         g_ActorTurnRamps[n].step_y    = (angle_y - FIELD(s32, work, 0x68u)) / (FIELD(u8, work, 0x0Au) * 2);
@@ -56,7 +56,7 @@ NON_MATCHING void func_801A3080(Actor* actor, s32 facing) {
         } else {
             angle = D_801C8424[type & BYTE_MASK];
         }
-        g_ActorTurnRamps[n].step_z = ((s16)angle - (g_Task->unk_6C & ANGLE_MASK)) / (g_Task->unk_0A * 4);
+        g_ActorTurnRamps[n].step_z = ((s16)angle - (TASK(Actor)->unk_6C & ANGLE_MASK)) / (TASK(Actor)->unk_0A * 4);
         return;
     }
 

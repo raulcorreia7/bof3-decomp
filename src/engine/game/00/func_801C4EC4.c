@@ -3,18 +3,18 @@
 MATCH bool func_801C4EC4(void) {
     u8 count;
 
-    g_Task->unk_0A = (g_Task->unk_0A - 1);
-    count          = g_Task->unk_0A;
+    TASK(Actor)->unk_0A = (TASK(Actor)->unk_0A - 1);
+    count               = TASK(Actor)->unk_0A;
     if (count == 0) {
-        Script_Request(g_Task->direction == FACING_RIGHT ? 0x37 : 0x34);
-        g_Task->direction ^= 4;
+        Script_Request(TASK(Actor)->direction == FACING_RIGHT ? 0x37 : 0x34);
+        TASK(Actor)->direction ^= 4;
         return true;
     }
-    if (g_Task->direction == FACING_RIGHT) {
+    if (TASK(Actor)->direction == FACING_RIGHT) {
         Script_Request((7 - count));
     } else {
         Script_Request((count + 1));
     }
-    g_Task->timer = 1;
+    TASK(Actor)->timer = 1;
     return false;
 }

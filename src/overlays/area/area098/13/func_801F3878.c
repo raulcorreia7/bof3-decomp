@@ -4,13 +4,13 @@ MATCH void func_801F3878(void) {
     u16 scroll;
     u8  remaining;
 
-    scroll           = g_Task->screen_x + 0x20;
-    g_Task->screen_x = scroll;
-    GFX_DrawColorFan(&g_Task->unk_64, (s16)scroll, 6);
+    scroll                = TASK(Actor)->screen_x + 0x20;
+    TASK(Actor)->screen_x = scroll;
+    GFX_DrawColorFan(&TASK(Actor)->unk_64, (s16)scroll, 6);
     ACTOR_COUNT_DOWN(TASK(Actor), remaining, timer);
     if (!(remaining & BYTE_MASK)) {
-        g_Task->timer = 128;
-        g_Task->header.mode += 1;
+        TASK(Actor)->timer = 128;
+        TASK(Actor)->header.mode += 1;
         SND_SEPlay(EMI_SE_ID(SND_BANK_AREA, 0x09));
     }
 }

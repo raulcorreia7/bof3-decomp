@@ -3,13 +3,13 @@
 MATCH void func_801F3398(void) {
     s16 t;
 
-    g_Task->screen_y += 0x80;
-    t              = g_Task->unk_32 - 1;
-    g_Task->unk_32 = t;
+    TASK(Actor)->screen_y += 0x80;
+    t                   = TASK(Actor)->unk_32 - 1;
+    TASK(Actor)->unk_32 = t;
     if (t == 0) {
         Area_ClearWorkColumn();
-        g_Task->unk_32 = 300;
-        g_Task->header.mode++;
+        TASK(Actor)->unk_32 = 300;
+        TASK(Actor)->header.mode++;
         SND_SEPlay(0x209);
     }
 }

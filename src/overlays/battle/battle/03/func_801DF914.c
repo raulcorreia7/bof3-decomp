@@ -20,6 +20,6 @@ MATCH void func_801DF914(void) {
     }
     Script_Request((TASK(PartyMember)->facing + 0xC) & BYTE_MASK);
     func_801DEDE4();
-    work              = g_Task;
+    work              = TASK(PartyMember);
     work->header.mode = work->header.mode + 1;
 }

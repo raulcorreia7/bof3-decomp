@@ -6,7 +6,6 @@
 
 #include "overlays/scenario/scenario.h"
 #include "sys/exe.h"
-#include "area/spad.h"
 #include "area/effects.h"
 
 extern u8  D_80144E90[];

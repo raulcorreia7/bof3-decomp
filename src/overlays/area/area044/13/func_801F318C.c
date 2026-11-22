@@ -1,5 +1,4 @@
 #include "area044_13.h"
-#include "area/spad.h"
 
 #ifdef NON_MATCHING
 NON_MATCHING void func_801F318C(u8 facing, u8 actor_index) {
@@ -23,10 +22,10 @@ NON_MATCHING void func_801F318C(u8 facing, u8 actor_index) {
             actor->pos.y.fixed += actor->vy * actor->timer;
             actor->pos.z.fixed += actor->vz * actor->timer;
         }
-        setVector(g_Task, g_PartyActors[actor_index].vx, g_PartyActors[actor_index].vy, g_PartyActors[actor_index].vz);
-        g_Task->timer       = 0x20;
-        g_Task->header.mode = 1;
-        g_Task->header.step = 1;
+        setVector(TASK(Actor), g_PartyActors[actor_index].vx, g_PartyActors[actor_index].vy, g_PartyActors[actor_index].vz);
+        TASK(Actor)->timer       = 0x20;
+        TASK(Actor)->header.mode = 1;
+        TASK(Actor)->header.step = 1;
     }
 }
 #else

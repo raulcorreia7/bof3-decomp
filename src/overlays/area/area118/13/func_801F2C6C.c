@@ -38,6 +38,6 @@ MATCH void func_801F2C6C(void) {
     clock      = (phase << 15) | (frames << 8) | tick;
     D_801F59E4 = clock;
     if ((clock & 0xFF) >= 15) {
-        g_Task->header.mode++;
+        TASK(Actor)->header.mode++;
     }
 }

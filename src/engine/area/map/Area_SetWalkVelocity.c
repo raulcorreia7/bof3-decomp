@@ -11,25 +11,25 @@ MATCH void Area_SetWalkVelocity(void) {
 
     /* Step size from route type; rate from the shared selector bundle. */
     rate = g_RouteSpeedScale[g_Game.current->u.field.counter.unsigned_value];
-    if ((g_Task->direction == FACING_UP_RIGHT) || (g_Task->direction == FACING_DOWN_LEFT)) {
-        step          = 0x20;
-        g_Task->timer = step;
+    if ((TASK(Actor)->direction == FACING_UP_RIGHT) || (TASK(Actor)->direction == FACING_DOWN_LEFT)) {
+        step               = 0x20;
+        TASK(Actor)->timer = step;
     } else {
-        step          = 0x10;
-        g_Task->timer = step;
+        step               = 0x10;
+        TASK(Actor)->timer = step;
     }
-    g_Task->timer = (g_Task->timer / (rate & BYTE_MASK));
+    TASK(Actor)->timer = (TASK(Actor)->timer / (rate & BYTE_MASK));
     if ((g_Game.flags & 0x1000) != 0) {
-        g_Task->timer *= 2;
+        TASK(Actor)->timer *= 2;
     }
-    g_Task->vx = g_FacingOffsets[g_Task->direction].x * rate;
-    high       = g_FacingOffsets[g_Task->direction].y * rate;
-    g_Task->vy = high;
-    pos_x      = g_Task->pos.x.fixed + g_Task->vx * g_Task->timer;
-    pos_y      = g_Task->pos.y.fixed + high * g_Task->timer;
-    result     = Area_HeightReadStep(pos_x, pos_y, g_Task->direction);
+    TASK(Actor)->vx = g_FacingOffsets[TASK(Actor)->direction].x * rate;
+    high            = g_FacingOffsets[TASK(Actor)->direction].y * rate;
+    TASK(Actor)->vy = high;
+    pos_x           = TASK(Actor)->pos.x.fixed + TASK(Actor)->vx * TASK(Actor)->timer;
+    pos_y           = TASK(Actor)->pos.y.fixed + high * TASK(Actor)->timer;
+    result          = Area_HeightReadStep(pos_x, pos_y, TASK(Actor)->direction);
     if (SP_REF(volatile u8, 0x0u) != 0) {
         result = Area_HeightRead(pos_x, pos_y);
     }
-    g_Task->vz = (result - COORD_INT(g_Task->pos.z)) / g_Task->timer;
+    TASK(Actor)->vz = (result - COORD_INT(TASK(Actor)->pos.z)) / TASK(Actor)->timer;
 }

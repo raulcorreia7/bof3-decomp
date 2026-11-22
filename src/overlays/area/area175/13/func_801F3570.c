@@ -1,7 +1,7 @@
 #include "area175_13.h"
 
 MATCH void func_801F3570(void) {
-    g_Task->timer = 0;
-    g_Task->header.mode++;
+    TASK(Actor)->timer = 0;
+    TASK(Actor)->header.mode++;
     SND_SEPlay(526);
 }

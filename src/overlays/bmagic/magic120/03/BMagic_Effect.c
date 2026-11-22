@@ -15,7 +15,7 @@ MATCH void func_801EEC70(void) {
     TASK(PartyMember)->facing = g_BattleEffectBattler->facing;
     WorldPos_Copy(&TASK(PartyMember)->pos, &g_BattleEffectBattler->pos);
     slot                               = Battle_AllocEffect(1, 15) & BYTE_MASK;
-    work                               = g_Task;
+    work                               = TASK(PartyMember);
     g_BattleEffects[slot].header.mode  = 0;
     g_BattleEffects[slot].arg.unk_09   = 4;
     g_BattleEffects[slot].target.party = work;
@@ -77,12 +77,12 @@ MATCH void func_801EEEC8(void) {
 
     if (TASK(PartyMember)->param.unk_0B == 1) {
         slot                               = Battle_AllocEffect(1, 15) & BYTE_MASK;
-        task                               = g_Task;
+        task                               = TASK(PartyMember);
         g_BattleEffects[slot].header.mode  = 1;
         g_BattleEffects[slot].unk_0B       = 2;
         g_BattleEffects[slot].target.party = task;
         slot                               = Battle_AllocEffect(1, 15) & BYTE_MASK;
-        task2                              = g_Task;
+        task2                              = TASK(PartyMember);
         g_BattleEffects[slot].header.mode  = 1;
         g_BattleEffects[slot].unk_0B       = 3;
         g_BattleEffects[slot].target.party = task2;
@@ -128,7 +128,7 @@ MATCH void func_801EF0D8(void) {
         g_ScratchPad.cells.halves[4] = TASK(PartyMember)->screen_x.value;
         g_ScratchPad.cells.halves[5] = TASK(PartyMember)->screen_y.value;
         angle                        = ratan2(g_ScratchPad.cells.halves[6] - g_ScratchPad.cells.halves[4], g_ScratchPad.cells.halves[7] - g_ScratchPad.cells.halves[5]);
-        work                         = g_Task;
+        work                         = TASK(PartyMember);
         work->param.unk_0B           = 17;
         work->unk_14                 = angle;
         TASK(PartyMember)->unk_09    = 0;
@@ -260,7 +260,7 @@ MATCH void func_801EFDD4(void) {
     TASK(PartyMember)->unk_2A = g_BattleEffectBattler->facing & 1;
     TASK(PartyMember)->unk_29 = 3;
     TASK(PartyMember)->unk_24 = 4;
-    work                      = g_Task;
+    work                      = TASK(PartyMember);
     work->unk_2B              = 0;
     work->unk_2C.value        = 0;
     switch (TASK(PartyMember)->param.unk_0B) {
@@ -385,7 +385,7 @@ MATCH void func_801F0274(void) {
             }
             TASK(PartyMember)->param.unk_0B = j;
             TASK(PartyMember)->timer        = enemy;
-            work                            = g_Task;
+            work                            = TASK(PartyMember);
             work->unk_0C                    = D_801F0CE4[j].x;
             work->unk_10                    = D_801F0CE4[j].y;
             Effect_RotatePosition(work);
@@ -477,7 +477,7 @@ MATCH void func_801F08AC(void) {
         if (Battle_SlotIsBlocked((i + BATTLE_PARTY_CHARACTERS_COUNT) & BYTE_MASK) != 0) {
             continue;
         }
-        work                                = g_Task;
+        work                                = TASK(PartyMember);
         work->facing                        = g_BattleEnemyBattlers[i].unk_08;
         TASK(PartyMember)->pos.x.fixed      = g_BattleEnemyBattlers[i].pos.x.fixed;
         TASK(PartyMember)->pos.y.fixed      = g_BattleEnemyBattlers[i].pos.y.fixed;

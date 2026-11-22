@@ -11,7 +11,7 @@ MATCH void Area_StartEntryCell(void) {
     s32    height;
     s32    z;
 
-    work                     = g_Task;
+    work                     = TASK(Actor);
     entry                    = COORD_INT(work->pos.x);
     pair                     = entry * 2;
     work->pos.x.part.integer = AREA_PAYLOAD_FIELD(D_801F3F5C, u8, 0x20, pair);
@@ -20,14 +20,14 @@ MATCH void Area_StartEntryCell(void) {
 
     z                        = -height / 2;
     point                    = (u16*)&D_801F3F5C[0x14 + pair];
-    cell                     = g_Task;
+    cell                     = TASK(Actor);
     cell->pos.z.part.integer = z - *point;
     cell->unk_32             = *point;
     cell->vx                 = (s32)(AREA_PAYLOAD_FIELD(D_801F3F5C, u8, 0x1C, entry) << 24);
     cell->header.step += 1;
     cell->screen_y = 0;
 
-    row = g_Task;
+    row = TASK(Actor);
     if (abs(g_Game.members[0].pos.x.fixed - (TO_COORD(COORD_INT(row->pos.x) + 1) | COORD_HALF)) <= COORD_HALF) {
         if (abs(g_Game.members[0].pos.y.fixed - TO_COORD(COORD_INT(row->pos.y))) <= TO_COORD(1) || abs(g_Game.members[0].pos.y.fixed - TO_COORD(COORD_INT(row->pos.y) + 1)) <= TO_COORD(1)) {
             row->screen_y    = 0xC0;

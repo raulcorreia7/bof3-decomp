@@ -1,5 +1,4 @@
 #include "boss012_16.h"
-#include "area/spad.h"
 #include "overlays/battle/battle.h"
 
 MATCH void func_800C1C08(s32 mode) {
@@ -12,7 +11,7 @@ MATCH void func_800C1C08(s32 mode) {
 
     sprt = (SPRT*)g_GfxPrimCursor;
     setRGB0(sprt, 0x80, 0x80, 0x80);
-    task     = g_Task;
+    task     = TASK(PartyMember);
     sprt->x0 = task->unk_18 - 0x28;
     y1       = task->unk_1C;
     y2       = task->gravity - 0x3C;

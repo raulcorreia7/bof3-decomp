@@ -41,7 +41,7 @@ MATCH void func_801EEC98(void) {
         row                     = (BattleWorkImage*)&g_BattleEnemyBattlers[enemy];
         *(BattleWorkImage*)slot = *row;
     }
-    work                                            = g_Task;
+    work                                            = TASK(PartyMember);
     g_BattleEffects[index & BYTE_MASK].header.mode  = 1;
     g_BattleEffects[index & BYTE_MASK].unk_06       = 1;
     g_BattleEffects[index & BYTE_MASK].header.step  = 0;
@@ -69,7 +69,7 @@ MATCH void func_801EEF08(void) {
         i = 0;
         do {
             slot                               = Battle_AllocEffect(1, 42) & BYTE_MASK;
-            g_BattleEffects[slot].target.party = g_Task;
+            g_BattleEffects[slot].target.party = TASK(PartyMember);
             g_BattleEffects[slot].header.mode  = 0;
             g_BattleEffects[slot].unk_0B       = i;
             g_BattleEffects[slot].arg.unk_09   = i * 4 + 1;
@@ -117,7 +117,7 @@ MATCH void func_801EF198(void) {
     if (!(count & BYTE_MASK)) {
         actor                     = g_BattleSelectedActor;
         TASK(PartyMember)->facing = actor->facing;
-        work                      = g_Task;
+        work                      = TASK(PartyMember);
         work->unk_0C              = D_801EF8B0[work->param.unk_0B].x;
         work->unk_10              = D_801EF8B0[work->param.unk_0B].y;
         Effect_RotatePosition(work);

@@ -7,8 +7,8 @@ MATCH void func_801F3B98(void) {
         Actor_Clear();
         return;
     }
-    g_Task->timer -= 1;
-    if (g_Task->timer != 0) {
+    TASK(Actor)->timer -= 1;
+    if (TASK(Actor)->timer != 0) {
         return;
     }
     index = Actor_FindFreeSpawned();
@@ -17,9 +17,9 @@ MATCH void func_801F3B98(void) {
         g_SpawnedActors[index].type         = 0x18;
         g_SpawnedActors[index].header.mode  = 0x58;
         g_SpawnedActors[index].header.step  = 0;
-        g_SpawnedActors[index].pos.x.fixed  = D_801F4614[g_Task->param.unk_0B].x << 12;
-        g_SpawnedActors[index].pos.y.fixed  = D_801F4614[g_Task->param.unk_0B].y << 12;
-        g_Task->timer                       = RANDOM_MASK(15) + 20;
-        g_Task->param.unk_0B                = (g_Task->param.unk_0B + 1) & 0x7;
+        g_SpawnedActors[index].pos.x.fixed  = D_801F4614[TASK(Actor)->param.unk_0B].x << 12;
+        g_SpawnedActors[index].pos.y.fixed  = D_801F4614[TASK(Actor)->param.unk_0B].y << 12;
+        TASK(Actor)->timer                  = RANDOM_MASK(15) + 20;
+        TASK(Actor)->param.unk_0B           = (TASK(Actor)->param.unk_0B + 1) & 0x7;
     }
 }

@@ -36,7 +36,7 @@ NON_MATCHING void func_801F2D20(void) {
 
     func_801AC1DC(origin, work->unk_1C);
 
-    setVector(&projection, ((origin[0] + g_Task->pos.x.fixed) >> 9) - 0x4000, ((origin[1] + g_Task->pos.y.fixed) >> 9) - 0x4000, -(origin[2] + COORD_INT(g_Task->pos.z)) / 2);
+    setVector(&projection, ((origin[0] + TASK(Actor)->pos.x.fixed) >> 9) - 0x4000, ((origin[1] + TASK(Actor)->pos.y.fixed) >> 9) - 0x4000, -(origin[2] + COORD_INT(TASK(Actor)->pos.z)) / 2);
 
     work->unk_60 = RotTransPers(&projection, (long*)&poly->x3, &depth, &flag);
 
@@ -58,22 +58,22 @@ NON_MATCHING void func_801F2D20(void) {
     setClut(poly, 0, STAGE_PALETTE_Y + 3);
     poly->tpage = GetTPage(TPAGE_DEPTH_4BIT, TPAGE_ABR_ADD, 704, 256);
 
-    setUV4(poly, 0, g_Task->timer & 0x15, 16, g_Task->timer & 0x15, 0, (g_Task->timer & 0x15) + poly->y2, 16, (g_Task->timer & 0x15) + poly->y2);
+    setUV4(poly, 0, TASK(Actor)->timer & 0x15, 16, TASK(Actor)->timer & 0x15, 0, (TASK(Actor)->timer & 0x15) + poly->y2, 16, (TASK(Actor)->timer & 0x15) + poly->y2);
 
     SetShadeTex(poly, 0);
 
-    if (g_Task->unk_60 >= 0x221) {
+    if (TASK(Actor)->unk_60 >= 0x221) {
         shade      = 128;
         semi_trans = 0;
-    } else if (g_Task->unk_60 >= 0x1E1) {
-        shade      = ((g_Task->unk_60 & 0xFF) - 0x1E0) << 1;
+    } else if (TASK(Actor)->unk_60 >= 0x1E1) {
+        shade      = ((TASK(Actor)->unk_60 & 0xFF) - 0x1E0) << 1;
         semi_trans = 1;
     } else {
         goto done;
     }
     setRGB0(poly, shade, shade, shade);
     SetSemiTrans(poly, semi_trans);
-    Area_CellAddPrim(g_Task->pos.x.fixed, g_Task->pos.y.fixed, 0, sizeof(POLY_FT4));
+    Area_CellAddPrim(TASK(Actor)->pos.x.fixed, TASK(Actor)->pos.y.fixed, 0, sizeof(POLY_FT4));
 
 done:
     func_801F3004(0, 0, 256, 256);

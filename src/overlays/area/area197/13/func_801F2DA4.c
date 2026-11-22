@@ -5,10 +5,10 @@ MATCH void func_801F2DA4(void) {
     u8     first;
     u8     second;
 
-    if (g_Task->header.step == 0) {
+    if (TASK(Actor)->header.step == 0) {
         g_AreaSceneMode = 1;
         Area_CellSetPalette(2, 119);
-        g_Task->header.step++;
+        TASK(Actor)->header.step++;
     }
     Camera_SetMatrix(&matrix);
     first  = func_801F2FC4();
@@ -16,5 +16,5 @@ MATCH void func_801F2DA4(void) {
     if (first != 0 || second != 0) {
         return;
     }
-    g_Task->header.mode++;
+    TASK(Actor)->header.mode++;
 }

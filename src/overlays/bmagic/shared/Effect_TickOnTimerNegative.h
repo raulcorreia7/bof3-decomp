@@ -4,7 +4,7 @@ MATCH void Effect_TickOnTimerNegative(void) {
     PartyMember* work;
     s8           timer;
 
-    work         = g_Task;
+    work         = TASK(PartyMember);
     timer        = work->unk_09 - 2;
     work->unk_09 = timer;
     if (timer < 0) {

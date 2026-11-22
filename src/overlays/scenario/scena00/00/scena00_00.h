@@ -4,7 +4,6 @@
 #define FAKE_DECL_GAME_SCRATCH_BASE_SCALAR
 #include "common/vector.h"
 #include "overlays/scenario/scenario.h"
-#include "area/spad.h"
 #include "common/util.h"
 
 /* Scene_DrawTriangle: the third vertex is `size` rotated by this angle
@@ -13,8 +12,6 @@
 #define SCN_TRI_SHADE_V0   0x28
 #define SCN_TRI_SHADE_V1   0x6E
 #define SCN_TRI_SHADE_V2   0x64
-#define SCN_EFFECT         ((SceneEffect*)g_Task)
-#define SPAD_ROW           g_Task
 
 #define g_PartyY           ((u32*)&g_PartyY)
 

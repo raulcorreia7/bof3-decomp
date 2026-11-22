@@ -6,7 +6,7 @@ MATCH void func_801F33F0(void) {
     u8*    flag;
     u8     step;
 
-    s    = g_Task;
+    s    = TASK(Actor);
     flag = &g_ScriptVars[3];
     step = *flag;
     e    = &g_Actors[s->param.unk_0B];
@@ -19,7 +19,7 @@ MATCH void func_801F33F0(void) {
         g_ScriptVars[1] = 2;
         *flag           = next;
         SND_SEPlay(EMI_SE_ID(SND_BANK_AREA, 13));
-        if ((g_Task)->script_pc < 5u) {
+        if (TASK(Actor)->script_pc < 5u) {
             D_80146876[0] = 0xFF;
         }
         Script_Select(2);

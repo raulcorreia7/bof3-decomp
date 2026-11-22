@@ -3,6 +3,6 @@
 MATCH void func_801F4E9C(void) {
     Actor* actor;
 
-    actor = g_Task;
+    actor = TASK(Actor);
     actor->active_flags |= 0x10;
 }

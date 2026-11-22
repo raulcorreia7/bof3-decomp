@@ -3,10 +3,10 @@
 MATCH void func_801F3D98(void) {
     u8 remaining;
 
-    g_Task->screen_x -= 0x10;
-    g_Task->unk_03 -= 8;
+    TASK(Actor)->screen_x -= 0x10;
+    TASK(Actor)->unk_03 -= 8;
     Area_UpdateSpawnSlots();
-    Area_DrawYellowLine(&g_Task->unk_18, &g_Task->pos.x, g_Task->unk_03);
+    Area_DrawYellowLine(&TASK(Actor)->unk_18, &TASK(Actor)->pos.x, TASK(Actor)->unk_03);
     ACTOR_COUNT_DOWN(TASK(Actor), remaining, timer);
     if (!(remaining & BYTE_MASK)) {
         Actor_Clear();

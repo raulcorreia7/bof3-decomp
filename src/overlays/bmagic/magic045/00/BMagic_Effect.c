@@ -25,10 +25,10 @@ MATCH void func_801EEC5C(void) {
         TASK(PartyMember)->pos.y                        = g_BattleEffectBattler->pos.y;
         TASK(PartyMember)->pos.z                        = g_BattleEffectBattler->pos.z;
         first                                           = Battle_AllocEffect(1, 0x31);
-        g_BattleEffects[first & BYTE_MASK].target.party = g_Task;
+        g_BattleEffects[first & BYTE_MASK].target.party = TASK(PartyMember);
         g_BattleEffects[first & BYTE_MASK].header.mode  = 0;
         slot                                            = Battle_AllocEffect(1, 0x31) & BYTE_MASK;
-        g_BattleEffects[slot].target.party              = g_Task;
+        g_BattleEffects[slot].target.party              = TASK(PartyMember);
         g_BattleEffects[slot].unk_0B                    = first;
         g_BattleEffects[slot].header.mode               = 1;
         g_GfxPalettePending                             = 1;
@@ -68,7 +68,7 @@ MATCH void func_801EEF80(void) {
     COORD_INT(TASK(PartyMember)->pos.z) = COORD_INT(g_BattleEffectBattler->pos.z) + 0x100;
     TASK(PartyMember)->unk_25           = 0x1D;
     TASK(PartyMember)->unk_26           = 0;
-    work                                = g_Task;
+    work                                = TASK(PartyMember);
     work->unk_48                        = 1;
     work->scale.x                       = 0x10000;
     work->scale.y                       = 0x10000;
@@ -108,7 +108,7 @@ MATCH void func_801EF118(void) {
         TASK(PartyMember)->unk_5E = 0;
         TASK(PartyMember)->unk_5F = 0;
         TASK(PartyMember)->unk_0C = ratan2(g_BattleEffectBattler->pos.x.fixed - TASK(PartyMember)->pos.x.fixed, g_BattleEffectBattler->pos.y.fixed - TASK(PartyMember)->pos.y.fixed);
-        work                      = g_Task;
+        work                      = TASK(PartyMember);
         work->unk_14              = 0x40;
         work->unk_09              = 16;
         work->unk_20              = -8;
@@ -130,7 +130,7 @@ MATCH void func_801EF2B0(void) {
     TASK(PartyMember)->unk_5F -= 6;
     TASK(PartyMember)->pos.x.fixed += (rsin(TASK(PartyMember)->unk_0C) << 13) >> 12;
     angle = (rcos(TASK(PartyMember)->unk_0C) << 13) >> 12;
-    task  = g_Task;
+    task  = TASK(PartyMember);
     task->pos.y.fixed += angle;
     count        = task->unk_09 - 1;
     task->unk_09 = count;
@@ -205,7 +205,7 @@ MATCH void func_801EF724(void) {
     TASK(PartyMember)->unk_5D -= 3;
     TASK(PartyMember)->unk_5E -= 3;
     TASK(PartyMember)->unk_5F -= 3;
-    work                                = g_Task;
+    work                                = TASK(PartyMember);
     work->pos.x.fixed                   = g_BattleEffects[work->param.unk_0B].pos.x.fixed;
     work->pos.y.fixed                   = g_BattleEffects[work->param.unk_0B].pos.y.fixed;
     COORD_INT(TASK(PartyMember)->pos.z) = Area_HeightSample(work->pos.x.fixed, work->pos.y.fixed);

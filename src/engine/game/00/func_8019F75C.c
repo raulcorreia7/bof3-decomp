@@ -8,18 +8,18 @@ MATCH void func_8019F75C(void) {
     s32 limit;
 
     dst   = MEM_PTR(u8, BATTLE_SCRIPT_TABLE);
-    limit = *g_Task->range_54.table * 0x28;
+    limit = *TASK(Actor)->range_54.table * 0x28;
     index = 0;
     if (limit > 0) {
         do {
-            *dst = *g_Task->script;
-            g_Task->script += 1;
+            *dst = *TASK(Actor)->script;
+            TASK(Actor)->script += 1;
             index += 1;
             dst += 1;
         } while (index < limit);
     }
-    g_Task->script = MEM_PTR(u8, BATTLE_SCRIPT_TABLE);
+    TASK(Actor)->script = MEM_PTR(u8, BATTLE_SCRIPT_TABLE);
     func_8019D648();
     func_8019D9C0();
-    g_Task->timer = 16;
+    TASK(Actor)->timer = 16;
 }

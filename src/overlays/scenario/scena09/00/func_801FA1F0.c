@@ -99,20 +99,20 @@ MATCH void func_801FA1F0(void) {
                 if (g_PartyFieldOrder[i] != 7) {
                     continue;
                 }
-                g_Task                   = (Actor*)&g_Game.members[i];
-                g_Task->param.actor_slot = Actor_FindFreeSpawned();
-                if (g_Task->param.actor_slot == GAME_NONE) {
+                g_Task                        = (Actor*)&g_Game.members[i];
+                TASK(Actor)->param.actor_slot = Actor_FindFreeSpawned();
+                if (TASK(Actor)->param.actor_slot == GAME_NONE) {
                     continue;
                 }
-                g_SpawnedActors[g_Task->param.actor_slot].header.flags = ACTOR_FLAG_IN_USE;
-                g_SpawnedActors[g_Task->param.actor_slot].type         = 6;
-                g_SpawnedActors[g_Task->param.actor_slot].unk_06       = 2;
-                work                                                   = g_Task;
-                g_SpawnedActors[work->param.actor_slot].scene_step     = 0;
-                g_SpawnedActors[work->param.actor_slot].selection      = 0x24;
-                g_SpawnedActors[work->param.actor_slot].screen_x       = work->screen_x;
-                g_SpawnedActors[work->param.actor_slot].screen_y       = work->screen_y;
-                g_ScriptVars[0]                                        = 4;
+                g_SpawnedActors[TASK(Actor)->param.actor_slot].header.flags = ACTOR_FLAG_IN_USE;
+                g_SpawnedActors[TASK(Actor)->param.actor_slot].type         = 6;
+                g_SpawnedActors[TASK(Actor)->param.actor_slot].unk_06       = 2;
+                work                                                        = TASK(Actor);
+                g_SpawnedActors[work->param.actor_slot].scene_step          = 0;
+                g_SpawnedActors[work->param.actor_slot].selection           = 0x24;
+                g_SpawnedActors[work->param.actor_slot].screen_x            = work->screen_x;
+                g_SpawnedActors[work->param.actor_slot].screen_y            = work->screen_y;
+                g_ScriptVars[0]                                             = 4;
             }
             g_ScenarioState.step_05 = 0x22;
             break;

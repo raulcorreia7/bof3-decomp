@@ -9,11 +9,11 @@ MATCH s32 func_801C69C8(s32 record_index) {
      * array reproduces that frame. */
     u8            unk_10[0x20];
 
-    index               = record_index & BYTE_MASK;
-    slot                = &g_EncounterParty[index];
-    mode                = D_801CD944[index].key;
-    result              = 0;
-    g_Task->pos.z.fixed = Area_HeightSample(slot->x.fixed, slot->y.fixed) << 16;
+    index                    = record_index & BYTE_MASK;
+    slot                     = &g_EncounterParty[index];
+    mode                     = D_801CD944[index].key;
+    result                   = 0;
+    TASK(Actor)->pos.z.fixed = Area_HeightSample(slot->x.fixed, slot->y.fixed) << 16;
     if ((func_801C7518(slot->x.fixed, slot->y.fixed, mode) & BYTE_MASK) != 0) {
         result = Actor_FindInRange(slot->x.fixed, slot->y.fixed, mode) == -1;
     }

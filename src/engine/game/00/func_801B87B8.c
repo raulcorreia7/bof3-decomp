@@ -3,53 +3,53 @@
 MATCH void func_801B87B8(void) {
     Actor* work;
 
-    if (g_Task->timer == 0) {
-        if (Area_CellTestCorners(g_Task->pos.x.fixed, g_Task->pos.y.fixed, g_Task->voice_flags.scene_flag, 0xD0, 0) & BYTE_MASK) {
+    if (TASK(Actor)->timer == 0) {
+        if (Area_CellTestCorners(TASK(Actor)->pos.x.fixed, TASK(Actor)->pos.y.fixed, TASK(Actor)->voice_flags.scene_flag, 0xD0, 0) & BYTE_MASK) {
             func_801B8A0C();
             return;
         }
         func_801B8A9C();
         if (func_801B8D18() & BYTE_MASK) {
-            Script_Request(g_Task->direction);
-            g_Task->header.step = 3;
-            g_Task->unk_03      = 0;
+            Script_Request(TASK(Actor)->direction);
+            TASK(Actor)->header.step = 3;
+            TASK(Actor)->unk_03      = 0;
             return;
         }
         if ((func_801B9598() & BYTE_MASK) == 0) {
-            work            = g_Task;
+            work            = TASK(Actor);
             work->direction = (work->direction + 1);
             func_801B9598();
         }
         switch (g_PadStates[0].held & INPUT_DIRECTIONAL) {
             case PADLup:
-                g_Task->param.unk_0B = 0;
+                TASK(Actor)->param.unk_0B = 0;
                 break;
             case PADLup | PADLright:
-                g_Task->param.unk_0B = 1;
+                TASK(Actor)->param.unk_0B = 1;
                 break;
             case PADLright:
-                g_Task->param.unk_0B = 2;
+                TASK(Actor)->param.unk_0B = 2;
                 break;
             case PADLright | PADLdown:
-                g_Task->param.unk_0B = 3;
+                TASK(Actor)->param.unk_0B = 3;
                 break;
             case PADLdown:
-                g_Task->param.unk_0B = 4;
+                TASK(Actor)->param.unk_0B = 4;
                 break;
             case PADLdown | PADLleft:
-                g_Task->param.unk_0B = 5;
+                TASK(Actor)->param.unk_0B = 5;
                 break;
             case PADLleft:
-                g_Task->param.unk_0B = 6;
+                TASK(Actor)->param.unk_0B = 6;
                 break;
             case PADLleft | PADLup:
-                g_Task->param.unk_0B = 7;
+                TASK(Actor)->param.unk_0B = 7;
                 break;
         }
-        Script_Request((g_Task->param.unk_0B + 8) & BYTE_MASK);
+        Script_Request((TASK(Actor)->param.unk_0B + 8) & BYTE_MASK);
         Area_RunWalk();
     }
-    g_Task->timer -= 1;
+    TASK(Actor)->timer -= 1;
     Actor_MovementUpdate();
     Script_AnimStepLoop();
 }

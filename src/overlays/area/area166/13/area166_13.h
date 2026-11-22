@@ -5,7 +5,6 @@
  * and its data. Only this image includes the file. */
 
 #include "overlays/area/worlds/world04.h"
-#include "area/spad.h"
 
 /* The party position in 16.16 fixed point. */
 /* The scratchpad cell holding this mode's work pointer. */

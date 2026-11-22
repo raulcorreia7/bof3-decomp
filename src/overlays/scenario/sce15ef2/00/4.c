@@ -5,9 +5,9 @@ __asm__(".include \"include/match/macro.inc\"\n");
 #endif
 
 MATCH void func_801D0C04(void) {
-    D_801D1B1C[g_Task->header.mode]();
-    if (g_Task->header.mode != 0) {
-        func_801D1218(&g_Task->pos, (s16)g_Task->vx, 7);
+    D_801D1B1C[TASK(Actor)->header.mode]();
+    if (TASK(Actor)->header.mode != 0) {
+        func_801D1218(&TASK(Actor)->pos, (s16)TASK(Actor)->vx, 7);
     }
 }
 
@@ -15,9 +15,9 @@ MATCH void func_801D0C70(void) {
     u8* work;
     u8* step;
 
-    work                  = (u8*)g_Task;
+    work                  = TASK(u8);
     work[9]               = 0x10;
-    step                  = (u8*)g_Task;
+    step                  = TASK(u8);
     FIELD(s32, work, 0xC) = 0;
     step[1]++;
 }
@@ -26,24 +26,24 @@ MATCH void func_801D0CA0(void) {
     Actor* work;
     u8     timer;
 
-    work        = g_Task;
+    work        = TASK(Actor);
     timer       = work->timer - 1;
     work->vx    = work->vx + 0x10;
     work->timer = timer;
     if (timer == 0) {
-        g_Task->timer       = 32;
-        g_Task->header.mode = g_Task->header.mode + 1;
+        TASK(Actor)->timer       = 32;
+        TASK(Actor)->header.mode = TASK(Actor)->header.mode + 1;
     }
 }
 
 MATCH void func_801D0D00(void) {
     u8 timer;
 
-    timer         = g_Task->timer - 1;
-    g_Task->timer = timer;
+    timer              = TASK(Actor)->timer - 1;
+    TASK(Actor)->timer = timer;
     if (timer == 0) {
-        g_Task->timer       = 16;
-        g_Task->header.mode = g_Task->header.mode + 1;
+        TASK(Actor)->timer       = 16;
+        TASK(Actor)->header.mode = TASK(Actor)->header.mode + 1;
     }
 }
 
@@ -51,7 +51,7 @@ MATCH void func_801D0D5C(void) {
     Actor* work;
     u8     timer;
 
-    work        = g_Task;
+    work        = TASK(Actor);
     timer       = work->timer - 1;
     work->vx    = work->vx - 0x10;
     work->timer = timer;
@@ -69,16 +69,16 @@ MATCH void func_801D0DA4(void) {
 MATCH void func_801D0E30(void) {
     u8 timer;
 
-    timer = g_Task->timer;
+    timer = TASK(Actor)->timer;
     if (timer == 0) {
         Scene_ClaimScanBar();
-        g_Task->timer = RANDOM_MASK(0xF) + 24;
+        TASK(Actor)->timer = RANDOM_MASK(0xF) + 24;
     } else {
-        g_Task->timer = timer - 1;
+        TASK(Actor)->timer = timer - 1;
     }
     Scene_UpdateScanBars(240);
     if (g_ScriptVars[0] == 14) {
-        g_Task->header.mode += 1;
+        TASK(Actor)->header.mode += 1;
     }
 }
 
@@ -90,40 +90,40 @@ MATCH void func_801D0EC4(void) {
 
 MATCH void func_801D0EF8(void) {
     SYS_DISPATCH_TASK(D_801D1B38, 1, g_Task);
-    if (g_Task->header.mode != 0) {
-        func_801D17A0((s16)g_Task->screen_x, (s16)g_Task->screen_y, 0x80);
+    if (TASK(Actor)->header.mode != 0) {
+        func_801D17A0((s16)TASK(Actor)->screen_x, (s16)TASK(Actor)->screen_y, 0x80);
     }
 }
 
 MATCH void func_801D0F68(void) {
     Actor* work;
 
-    work                = g_Task;
-    work->timer         = 10;
-    work->screen_x      = 0;
-    work->screen_y      = 0;
-    g_Task->header.mode = g_Task->header.mode + 1;
+    work                     = TASK(Actor);
+    work->timer              = 10;
+    work->screen_x           = 0;
+    work->screen_y           = 0;
+    TASK(Actor)->header.mode = TASK(Actor)->header.mode + 1;
 }
 
 MATCH void func_801D0F9C(void) {
     Actor* work;
     u8     timer;
 
-    work           = g_Task;
+    work           = TASK(Actor);
     timer          = work->timer - 1;
     work->timer    = timer;
     work->screen_x = work->screen_x + 0x15;
     work->screen_y = work->screen_y + 9;
     if (timer == 0) {
-        g_Task->timer       = 90;
-        g_Task->header.mode = g_Task->header.mode + 1;
+        TASK(Actor)->timer       = 90;
+        TASK(Actor)->header.mode = TASK(Actor)->header.mode + 1;
     }
 }
 
 MATCH void func_801D1008(void) {
     if (g_ScriptVars[0] == 9) {
-        g_Task->timer       = 30;
-        g_Task->header.mode = g_Task->header.mode + 1;
+        TASK(Actor)->timer       = 30;
+        TASK(Actor)->header.mode = TASK(Actor)->header.mode + 1;
     }
 }
 
@@ -131,7 +131,7 @@ MATCH void func_801D1050(void) {
     Actor* work;
     u8     timer;
 
-    work           = g_Task;
+    work           = TASK(Actor);
     timer          = work->timer - 1;
     work->timer    = timer;
     work->screen_x = work->screen_x - 7;
@@ -148,17 +148,17 @@ MATCH void func_801D10A4(void) {
 MATCH void func_801D10E8(void) {
     u8* work;
 
-    work    = (u8*)g_Task;
+    work    = TASK(u8);
     work[9] = 0x10;
-    work    = (u8*)g_Task;
+    work    = TASK(u8);
     work[1]++;
 }
 
 MATCH void func_801D1118(void) {
-    Scene_DrawRedGradient(-(g_Task->timer << 4) & BYTE_MASK);
-    if (--g_Task->timer == 0) {
-        g_Task->timer = 16;
-        g_Task->header.mode += 1;
+    Scene_DrawRedGradient(-(TASK(Actor)->timer << 4) & BYTE_MASK);
+    if (--TASK(Actor)->timer == 0) {
+        TASK(Actor)->timer = 16;
+        TASK(Actor)->header.mode += 1;
     }
 }
 

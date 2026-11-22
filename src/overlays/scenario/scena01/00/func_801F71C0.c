@@ -45,32 +45,32 @@ MATCH void func_801F73FC(void) {
     Actor* work;
     s32    height;
 
-    work              = g_Task;
+    work              = TASK(Actor);
     work->pos.x.fixed = TO_COORD(96);
     work->pos.y.fixed = TO_COORD(17);
     height            = Area_HeightSample(work->pos.x.fixed, work->pos.y.fixed);
 
-    work              = g_Task;
+    work              = TASK(Actor);
     work->pos.z.fixed = height << 16;
     work->screen_x    = 0x180;
     work->screen_y    = 0x500;
     work->timer       = 0;
     Area_ClearWorkColumn();
 
-    g_Task->header.mode += 1;
+    TASK(Actor)->header.mode += 1;
     SND_SEPlay(EMI_SE_ID(SND_BANK_AREA, 2));
 }
 
 MATCH void func_801F7480(void) {
-    func_801F7678(g_Task->timer);
+    func_801F7678(TASK(Actor)->timer);
     if ((g_FrameCount & 0x1) == 0) {
         Area_AddSpark();
     }
     Area_StepSparks();
-    g_Task->timer = (g_Task)->timer + 4;
-    if (g_Task->timer == 0) {
-        g_Task->timer       = 32;
-        g_Task->header.mode = (g_Task)->header.mode + 1;
+    TASK(Actor)->timer = TASK(Actor)->timer + 4;
+    if (TASK(Actor)->timer == 0) {
+        TASK(Actor)->timer       = 32;
+        TASK(Actor)->header.mode = TASK(Actor)->header.mode + 1;
     }
 }
 
@@ -80,18 +80,18 @@ MATCH void func_801F752C(void) {
         Area_AddSpark();
     }
     Area_StepSparks();
-    if (--g_Task->timer == 0) {
-        g_Task->timer = 252;
-        g_Task->header.mode += 1;
+    if (--TASK(Actor)->timer == 0) {
+        TASK(Actor)->timer = 252;
+        TASK(Actor)->header.mode += 1;
     }
 }
 
 MATCH void func_801F75C8(void) {
-    func_801F7678(g_Task->timer);
+    func_801F7678(TASK(Actor)->timer);
     Area_StepSparks();
-    g_Task->timer = (g_Task)->timer - 4;
-    if (g_Task->timer == 0) {
-        g_Task->header.mode = (g_Task)->header.mode + 1;
+    TASK(Actor)->timer = TASK(Actor)->timer - 4;
+    if (TASK(Actor)->timer == 0) {
+        TASK(Actor)->header.mode = TASK(Actor)->header.mode + 1;
     }
 }
 
@@ -119,22 +119,22 @@ NON_MATCHING void func_801F7678(s32 shade_arg) {
 
     Camera_SetMatrix(&matrix);
     angle    = 0;
-    point[0] = g_Task->pos.x.fixed + ((FIELD(s16, g_Task, 0x2E) * rcos(0)) >> 4);
-    point[1] = g_Task->pos.y.fixed + ((FIELD(s16, g_Task, 0x2E) * rsin(0)) >> 4);
-    point[2] = g_Task->pos.z.fixed;
+    point[0] = TASK(Actor)->pos.x.fixed + ((FIELD(s16, g_Task, 0x2E) * rcos(0)) >> 4);
+    point[1] = TASK(Actor)->pos.y.fixed + ((FIELD(s16, g_Task, 0x2E) * rsin(0)) >> 4);
+    point[2] = TASK(Actor)->pos.z.fixed;
     Camera_ProjectPoint(point, &inner);
-    point[2] = g_Task->pos.z.fixed + (FIELD(s16, g_Task, 0x30) << 16);
+    point[2] = TASK(Actor)->pos.z.fixed + (FIELD(s16, g_Task, 0x30) << 16);
     Camera_ProjectPoint(point, &outer);
     shade = ((g_FrameCount & 1) << 2) | 0x40;
     for (i = 0; i < AREA_RING_POINTS; i++) {
         last_inner = inner;
         last_outer = outer;
         angle += AREA_RING_ANGLE_STEP;
-        point[0] = g_Task->pos.x.fixed + ((FIELD(s16, g_Task, 0x2E) * rcos((u16)angle)) >> 4);
-        point[1] = g_Task->pos.y.fixed + ((FIELD(s16, g_Task, 0x2E) * rsin((u16)angle)) >> 4);
-        point[2] = g_Task->pos.z.fixed;
+        point[0] = TASK(Actor)->pos.x.fixed + ((FIELD(s16, g_Task, 0x2E) * rcos((u16)angle)) >> 4);
+        point[1] = TASK(Actor)->pos.y.fixed + ((FIELD(s16, g_Task, 0x2E) * rsin((u16)angle)) >> 4);
+        point[2] = TASK(Actor)->pos.z.fixed;
         Camera_ProjectPoint(point, &inner);
-        point[2] = g_Task->pos.z.fixed + (FIELD(s16, g_Task, 0x30) << 16);
+        point[2] = TASK(Actor)->pos.z.fixed + (FIELD(s16, g_Task, 0x30) << 16);
         Camera_ProjectPoint(point, &outer);
 
         SetDrawMode((DR_MODE*)g_GfxPrimCursor, 0, 1, GetTPage(TPAGE_DEPTH_4BIT, TPAGE_ABR_ADD, FONT_TPAGE_X, FONT_TPAGE_Y), 0);
@@ -179,16 +179,16 @@ MATCH void func_801F7D04(void) {
         case 0:
             break;
         case 1:
-            g_Task->screen_x = 0;
+            TASK(Actor)->screen_x = 0;
             func_801F7DCC(64, 90, 255);
             break;
         case 2:
-            screen_x = g_Task->screen_x;
+            screen_x = TASK(Actor)->screen_x;
             if (screen_x < 191) {
-                next_x           = screen_x + 1;
-                g_Task->screen_x = next_x;
+                next_x                = screen_x + 1;
+                TASK(Actor)->screen_x = next_x;
             }
-            red  = (s16)g_Task->screen_x;
+            red  = (s16)TASK(Actor)->screen_x;
             blue = 255 - red * 2;
             red += 64;
             if (blue < 0) {
@@ -225,7 +225,7 @@ MATCH void func_801F7EDC(void) {
     SetPolyF4(prim);
     SetSemiTrans(prim, 1);
     setXYWH(prim, 0, 0, SCREEN_WIDTH, SCREEN_HEIGHT);
-    setRGB0(prim, (s16)g_Task->screen_x / 8, 0, 0);
+    setRGB0(prim, (s16)TASK(Actor)->screen_x / 8, 0, 0);
     GFX_AddPrim(GFX_LAYER_EFFECT, sizeof(POLY_F4));
 }
 

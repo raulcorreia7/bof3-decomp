@@ -5,7 +5,6 @@
  * and its data. Only this image includes the file. */
 
 #include "overlays/area/worlds/world02.h"
-#include "area/spad.h"
 
 /* The work-window byte offset and row stride this overlay scans. */
 #define SCRATCH_ROW_OFFSET    0x00

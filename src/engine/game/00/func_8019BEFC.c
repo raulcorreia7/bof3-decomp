@@ -3,13 +3,13 @@
 MATCH void func_8019BEFC(void) {
     Actor* work;
     u8     count;
-    work  = g_Task;
+    work  = TASK(Actor);
     count = work->timer;
     if (count != 0) {
         work->timer = (count - 1);
     }
     if (g_AreaCameraMoving == 0) {
-        work = g_Task;
+        work = TASK(Actor);
         if (work->timer == 0) {
             work->header.mode = 1;
             func_8019BFD4();

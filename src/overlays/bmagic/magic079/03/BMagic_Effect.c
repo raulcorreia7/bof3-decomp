@@ -16,7 +16,7 @@ MATCH void func_801EEC5C(void) {
     TASK(PartyMember)->param.unk_0B = 0;
     for (i = 0; i < 4; i++) {
         slot                               = Battle_AllocEffect(1, 43) & BYTE_MASK;
-        work                               = g_Task;
+        work                               = TASK(PartyMember);
         g_BattleEffects[slot].header.mode  = i;
         g_BattleEffects[slot].header.step  = 0;
         g_BattleEffects[slot].arg.unk_09   = 0x10;
