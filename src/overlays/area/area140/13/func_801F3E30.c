@@ -1,7 +1,6 @@
 #include "area140_13.h"
 
-#ifdef NON_MATCHING
-NON_MATCHING void func_801F3E30(void) {
+MATCH void func_801F3E30(void) {
     u8  shift_x;
     u8  shift_y;
     u16 x;
@@ -14,13 +13,11 @@ NON_MATCHING void func_801F3E30(void) {
         shift_y                = D_80181B01[TASK(Actor)->direction * 2];
         x                      = COORD_INT(TASK(Actor)->pos.x) + (s8)shift_x;
         y                      = COORD_INT(TASK(Actor)->pos.y) + (s8)shift_y;
-        if (g_Game.members[0].unk_09 != 0) {
-            if (g_Game.members[0].u.field.mode.unsigned_value == 1) {
-                if ((func_801F4058(x, y) & BYTE_MASK) == 0) {
-                    if (((u16)(x - 0x44) < 0xD) && ((u16)(y - 6) < 0xB)) {
-                        g_ScriptState->steps = 2;
-                        Area_MoveActorRoute(g_ScriptState, TASK(Actor)->direction);
-                    }
+        if (g_Game.members[0].unk_09 != 0 && g_Game.members[0].u.field.mode.unsigned_value == 1) {
+            if ((func_801F4058(x, y) & BYTE_MASK) == 0) {
+                if (((u16)(x - 0x44) < 0xD) && ((u16)(y - 6) < 0xB)) {
+                    g_ScriptState->steps = 2;
+                    Area_MoveActorRoute(g_ScriptState, TASK(Actor)->direction);
                 }
             }
         } else {
@@ -40,6 +37,3 @@ NON_MATCHING void func_801F3E30(void) {
         g_ScriptState->cursor += 4;
     }
 }
-#else
-INCLUDE_ASM(func_801F3E30);
-#endif

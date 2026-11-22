@@ -295,9 +295,9 @@ extern u16                 D_1F80000E; /* 0x1F80000E */
 extern s8                  D_800E4D40; /* 0x800E4D40 */
 extern s16                 D_800E4D42; /* 0x800E4D42 */
 extern u8                  D_80143BB1;
-extern volatile u16        g_GameAreaId;
+extern u16                 g_GameAreaId;
 /* D_80143F06 */
-extern volatile u8         g_GameLastCellType; /* 0x80143F06 */
+extern u8                  g_GameLastCellType; /* 0x80143F06 */
 /* D_80143F08 */
 extern volatile u32        g_GameLastX; /* 0x80143F08 */
 /* D_80143F0C */

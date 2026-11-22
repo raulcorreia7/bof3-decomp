@@ -1,5 +1,7 @@
 #include "game_00.h"
 
+extern volatile u16 g_GameAreaId; /* local: volatile access; the shared copy is plain */
+
 MATCH void func_801A68C0(u8* script) {
     s16*   counter = (s16*)&g_ScratchPad;
     s16    slot;
