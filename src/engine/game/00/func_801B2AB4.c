@@ -2,7 +2,6 @@
 
 MATCH void func_801B2AB4(void) {
     s32 index;
-    s32 offset;
     u8  state;
 
     if (BATTLE_IS_RANDOM()) {
@@ -10,12 +9,10 @@ MATCH void func_801B2AB4(void) {
     } else {
         index = 1;
         if (index < g_Game.party_size) {
-            state  = 5;
-            offset = BATTLE_PARTY_STRIDE;
+            state = 5;
             do {
                 Party_BattlersClearState(index & BYTE_MASK);
-                D_80145E91[offset] = state;
-                offset += BATTLE_PARTY_STRIDE;
+                g_Game.members[index].header.mode = state;
                 index++;
             } while (index < g_Game.party_size);
         }

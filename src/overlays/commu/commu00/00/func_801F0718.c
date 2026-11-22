@@ -34,7 +34,7 @@ MATCH void func_801F0718(u8 source_index, u8 task_index) {
     COORD_FRAC(TASK(Actor)->pos.x) = 0;
     COORD_INT(TASK(Actor)->pos.y)  = D_801F2568[task_index][1];
     COORD_FRAC(TASK(Actor)->pos.y) = 0;
-    distance                       = Area_HeightSample(*((u32*)&D_801468BC[(task_index & BYTE_MASK) * ACTOR_SIZE]), *((u32*)&D_801468C0[(task_index & BYTE_MASK) * ACTOR_SIZE]));
+    distance                       = Area_HeightSample(g_Actors[task_index & BYTE_MASK].pos.x.fixed, g_Actors[task_index & BYTE_MASK].pos.y.fixed);
     COORD_INT(TASK(Actor)->pos.z)  = distance;
     TASK(Actor)->unk_05            = source_index;
     Area_SceneSelectRecord(D_801F24FC[TASK(Actor)->unk_05 % 6]);

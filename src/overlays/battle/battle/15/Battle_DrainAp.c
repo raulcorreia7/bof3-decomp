@@ -2,8 +2,9 @@
 
 /* Takes a fifth of the target's AP and gives it to the active battler. */
 /* func_8009E500 */
-#ifdef NON_MATCHING
-NON_MATCHING void Battle_DrainAp(void) {
+MATCH void Battle_DrainAp(void) {
+    s16 gained;
+
     if (!(Battle_PickAbility(g_Battle.active_battler, g_Battle.target) & BYTE_MASK)) {
         if (BATTLER_IS_PLAYER(g_Battle.target)) {
             if (g_Game.members[g_Battle.target].u.turn.damage_flags.value & BATTLER_DAMAGE_IMMUNE) {
@@ -22,20 +23,16 @@ NON_MATCHING void Battle_DrainAp(void) {
             if (g_Game.members[g_Battle.active_battler].chr.stats.max_ap < g_Game.members[g_Battle.active_battler].chr.ap + g_Battle.target_record->ap_change) {
                 g_Battle.action->unk_08 |= 8;
             }
-            func_800AAEBC(-Char_AddPoints(&g_Game.members[g_Battle.active_battler].chr.ap, g_Game.members[g_Battle.active_battler].chr.stats.max_ap, g_Battle.target_record->ap_change),
-                          g_BattleActiveBattler_nv);
+            gained = Char_AddPoints(&g_Game.members[g_Battle.active_battler].chr.ap, g_Game.members[g_Battle.active_battler].chr.stats.max_ap, g_Battle.target_record->ap_change);
         } else {
             if (ENEMY_COMBATANT(g_Battle.active_battler).stats.max_ap < ENEMY_COMBATANT(g_Battle.active_battler).ap + g_Battle.target_record->ap_change) {
                 g_Battle.action->unk_08 |= 8;
             }
-            func_800AAEBC(-Char_AddPoints(&ENEMY_COMBATANT(g_Battle.active_battler).ap, ENEMY_COMBATANT(g_Battle.active_battler).stats.max_ap, g_Battle.target_record->ap_change),
-                          g_BattleActiveBattler_nv);
+            gained = Char_AddPoints(&ENEMY_COMBATANT(g_Battle.active_battler).ap, ENEMY_COMBATANT(g_Battle.active_battler).stats.max_ap, g_Battle.target_record->ap_change);
         }
+        func_800AAEBC(-gained, g_BattleActiveBattler_nv);
         g_Battle.action->unk_08 = 0;
         return;
     }
     g_Battle.target_record->target_flags = 2;
 }
-#else
-INCLUDE_ASM(Battle_DrainAp);
-#endif
