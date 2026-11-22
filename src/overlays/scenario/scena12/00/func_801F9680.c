@@ -61,7 +61,7 @@ MATCH void func_801F9680(void) {
             }
             g_ScenarioState.step_05 = 7;
             g_ScriptVars[2]         = 2;
-            Game_RequestAreaChange(0x88, TO_COORD(4), TO_COORD(1), 0x84);
+            Game_RequestAreaChange(AREA_ID_BLACK_SHIP_BOOST_COUNTER, TO_COORD(4), TO_COORD(1), 0x84);
             break;
         case 7:
             Area_ScrollStartRoute(0);
@@ -75,7 +75,7 @@ MATCH void func_801F9680(void) {
             g_ScriptVars[2]         = 1;
             g_ScenarioState.step_05 = 9;
             SYS_SetFlag(g_SceneFlags, 0x24);
-            Game_RequestAreaChange(0x88, TO_COORD(12), TO_COORD(89), 0x85);
+            Game_RequestAreaChange(AREA_ID_BLACK_SHIP_BOOST_COUNTER, TO_COORD(12), TO_COORD(89), 0x85);
             break;
         case 9:
             if (g_ScriptVars[0] != 10) {
@@ -116,7 +116,7 @@ MATCH void func_801F9680(void) {
             g_ScriptVars[0]         = 0;
             g_ScriptVars[1]         = 1;
             g_ScenarioState.step_05 = 22;
-            Game_RequestAreaChange(0x88, TO_COORD(12), TO_COORD(89), 0x87);
+            Game_RequestAreaChange(AREA_ID_BLACK_SHIP_BOOST_COUNTER, TO_COORD(12), TO_COORD(89), 0x87);
             break;
         case 22:
             if (g_ScriptVars[0] != 10) {
@@ -140,13 +140,13 @@ MATCH void func_801F9680(void) {
         case 25:
             g_ScenarioState.step_05 = 26;
             switch (g_GameAreaId) {
-                case 0x85:
+                case AREA_ID_BOAT_AFTER_BLACK_SHIP:
                     Scene_SetupParty(4);
                     break;
-                case 0x87:
+                case AREA_ID_BLACK_SHIP_EARLY:
                     Scene_SetupParty(2);
                     break;
-                case 0x88:
+                case AREA_ID_BLACK_SHIP_BOOST_COUNTER:
                     Scene_SetupParty(8);
                     break;
             }
@@ -159,7 +159,7 @@ MATCH void func_801F9680(void) {
             g_ScriptVars[1]         = 1;
             g_ScriptVars[2]         = 0;
             g_ScenarioState.step_05 = 22;
-            Game_RequestAreaChange(0x88, TO_COORD(12), TO_COORD(89), 0x87);
+            Game_RequestAreaChange(AREA_ID_BLACK_SHIP_BOOST_COUNTER, TO_COORD(12), TO_COORD(89), 0x87);
             break;
         case 27:
             SCENARIO_MESSAGE_WAIT(MSG_SCENA12_019, 28);
@@ -183,19 +183,19 @@ MATCH void func_801F9680(void) {
             switch (g_EmiLoadedCharacterIndex & 0x7F) {
                 case 17:
                     g_ScriptVars[1] = 0;
-                    Game_RequestAreaChange(0x85, TO_COORD(6), TO_COORD(92), 0x85);
+                    Game_RequestAreaChange(AREA_ID_BOAT_AFTER_BLACK_SHIP, TO_COORD(6), TO_COORD(92), 0x85);
                     break;
                 case 8:
                     g_ScriptVars[1] = 0;
-                    Game_RequestAreaChange(0x85, TO_COORD(6), TO_COORD(92), 0x86);
+                    Game_RequestAreaChange(AREA_ID_BOAT_AFTER_BLACK_SHIP, TO_COORD(6), TO_COORD(92), 0x86);
                     break;
                 case 13:
                     g_ScriptVars[1] = 1;
-                    Game_RequestAreaChange(0x85, TO_COORD(6), TO_COORD(92), 0x86);
+                    Game_RequestAreaChange(AREA_ID_BOAT_AFTER_BLACK_SHIP, TO_COORD(6), TO_COORD(92), 0x86);
                     break;
                 case 16:
                     g_ScriptVars[1] = 2;
-                    Game_RequestAreaChange(0x85, TO_COORD(6), TO_COORD(92), 0x86);
+                    Game_RequestAreaChange(AREA_ID_BOAT_AFTER_BLACK_SHIP, TO_COORD(6), TO_COORD(92), 0x86);
                     break;
             }
             break;
@@ -209,10 +209,10 @@ MATCH void func_801F9680(void) {
             SYS_SetFlag(g_SceneFlags, 0x27);
             switch (g_EmiLoadedCharacterIndex & 0x7F) {
                 case 8:
-                    Game_RequestAreaChange(0x85, TO_COORD_HALF(49), TO_COORD_HALF(38), 0x87);
+                    Game_RequestAreaChange(AREA_ID_BOAT_AFTER_BLACK_SHIP, TO_COORD_HALF(49), TO_COORD_HALF(38), 0x87);
                     break;
                 case 17:
-                    Game_RequestAreaChange(0x85, TO_COORD_HALF(49), TO_COORD_HALF(38), 0x88);
+                    Game_RequestAreaChange(AREA_ID_BOAT_AFTER_BLACK_SHIP, TO_COORD_HALF(49), TO_COORD_HALF(38), 0x88);
                     break;
             }
             break;

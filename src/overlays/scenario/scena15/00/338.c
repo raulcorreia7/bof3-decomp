@@ -912,7 +912,159 @@ MATCH void func_801F9CE8(void) {
     D_80146872 = 1;
 }
 
-INCLUDE_ASM(func_801F9CFC);
+/* Sets up the scene of the area being entered: camera, draw flags, spawned actors and the
+ * event points each cell offers, then moves the scene to its run state. */
+MATCH void func_801F9CFC(void) {
+    u8 slot;
+
+    if (g_GameAreaId == AREA_ID_DAUNA_MINE_WORKER && SYS_TestFlag(g_SceneFlags, 7) && !SYS_TestFlag(g_SceneFlags, 8)) {
+        g_AreaDrawFlags = 0;
+    }
+    if (g_GameAreaId == AREA_ID_WYNDIA_WORLD_MAP && SYS_TestFlag(g_SceneFlags, 9) && !SYS_TestFlag(g_SceneFlags, 0xA)) {
+        g_AreaCameraOffsetZ      = 0x5DC;
+        g_AreaCameraRefreshCount = 2;
+    }
+    if (g_GameAreaId == AREA_ID_CAER_XHAN_LIFT_RIDE && SYS_TestFlag(g_SceneFlags, 0x16)) {
+        D_80147ACF          = 2;
+        g_AreaSceneMode     = 2;
+        g_AreaCameraOffsetZ = 0xD00;
+        D_80147AD6          = 0;
+        D_801FE750          = 0;
+        D_80147A8C += TO_COORD(12);
+        Scene_SpawnActor(0x31, g_AreaCameraAngle.vx, g_AreaCameraAngle.vy, g_AreaCameraAngle.vz, 0xFF, 0);
+    }
+    if (g_GameAreaId == AREA_ID_DRAGNIER_WORLD_MAP && SYS_TestFlag(g_SceneFlags, 0xA) && !SYS_TestFlag(g_SceneFlags, 0xB)) {
+        g_AreaCameraOffsetZ      = 0x5DC;
+        g_AreaCameraRefreshCount = 2;
+    }
+    if (g_GameAreaId == 0x9E) {
+        if (g_GameCellType == 0 && !SYS_TestFlag(g_SceneFlags, 0x20)) {
+            func_801FA6BC(0);
+        }
+        if (g_GameCellType == 1 && !SYS_TestFlag(g_SceneFlags, 0x21)) {
+            SYS_SetFlag(g_SceneFlags, 0x21);
+        }
+    }
+    if (g_GameAreaId == 0x9F) {
+        if (g_GameCellType == 0 && !SYS_TestFlag(g_SceneFlags, 0x22)) {
+            func_801FA6BC(1);
+        }
+        if (g_GameCellType == 1 && !SYS_TestFlag(g_SceneFlags, 0x23)) {
+            SYS_SetFlag(g_SceneFlags, 0x23);
+        }
+    }
+    if (g_GameAreaId == 0xA0) {
+        if (g_GameCellType == 0 && !SYS_TestFlag(g_SceneFlags, 0x24)) {
+            SYS_SetFlag(g_SceneFlags, 0x24);
+        }
+        if (g_GameCellType == 1 && !SYS_TestFlag(g_SceneFlags, 0x25)) {
+            func_801FA6BC(2);
+        }
+    }
+    if (g_GameAreaId == 0xA1) {
+        if (g_GameCellType == 0 && !SYS_TestFlag(g_SceneFlags, 0x26)) {
+            SYS_SetFlag(g_SceneFlags, 0x26);
+        }
+        if (g_GameCellType == 1 && !SYS_TestFlag(g_SceneFlags, 0x27)) {
+            func_801FA6BC(3);
+        }
+    }
+    if (g_GameAreaId == 0xA2) {
+        if (g_GameCellType == 0 && !SYS_TestFlag(g_SceneFlags, 0x28)) {
+            func_801FA6BC(4);
+        }
+        if (g_GameCellType == 1 && !SYS_TestFlag(g_SceneFlags, 0x29)) {
+            func_801FA6BC(5);
+        }
+    }
+    if (g_GameAreaId == 0xA3) {
+        if (g_GameCellType == 0 && !SYS_TestFlag(g_SceneFlags, 0x2A)) {
+            func_801FA6BC(6);
+        }
+        if (g_GameCellType == 1 && !SYS_TestFlag(g_SceneFlags, 0x2B)) {
+            SYS_SetFlag(g_SceneFlags, 0x2B);
+        }
+    }
+    if (g_GameAreaId == 0xA4 && g_GameCellType == 0 && !SYS_TestFlag(g_SceneFlags, 0x2C)) {
+        func_801FA6BC(7);
+    }
+    if (g_GameAreaId == 0xA5) {
+        if (g_GameCellType == 0 && !SYS_TestFlag(g_SceneFlags, 0x2D)) {
+            SYS_SetFlag(g_SceneFlags, 0x2D);
+        }
+        if (g_GameCellType == 1 && !SYS_TestFlag(g_SceneFlags, 0x2E)) {
+            func_801FA6BC(8);
+        }
+    }
+    if (g_GameAreaId == 0xA6 && g_GameCellType == 0 && !SYS_TestFlag(g_SceneFlags, 0x2F)) {
+        func_801FA6BC(9);
+    }
+    if (g_GameAreaId == AREA_ID_EDEN_TEEPO_FIGHT && SYS_TestFlag(g_SceneFlags, 0x12)) {
+        g_AreaDrawFlags = 0;
+    }
+    if (g_GameAreaId == AREA_ID_MYRIA_STATION_AFTER_SAMPLES && g_GameCellType == 2) {
+        if (!SYS_TestFlag(g_SceneFlags, 0)) {
+            SYS_SetFlag(g_SceneFlags, 0);
+            Scene_SetupParty(3);
+        }
+        if (SYS_TestFlag(g_SceneFlags, 0x15) && !SYS_TestFlag(g_SceneFlags, 0x16)) {
+            slot = Actor_FindFreeSpawned();
+            if (slot != 0xFF) {
+                g_SpawnedActors[slot].header.flags = 1;
+                g_SpawnedActors[slot].type         = 0xAF;
+            }
+            func_801FDC6C(TO_COORD_HALF(46), TO_COORD(109), 2, 3, 3);
+            func_801C1DF0(3);
+            Scene_SetupParty(0xA);
+            g_AreaDrawFlags = AREA_DRAW_ALL_FLAGS;
+        }
+    }
+    if (g_GameAreaId == AREA_ID_MYRIA_STATION_MYRIA_ROOM) {
+        if (SYS_TestFlag(g_SceneFlags, 2) && !SYS_TestFlag(g_SceneFlags, 3)) {
+            func_801FDC6C(TO_COORD(68), TO_COORD(2), 0xC, 6, 1);
+        }
+        if (SYS_TestFlag(g_SceneFlags, 0xA) && !SYS_TestFlag(g_SceneFlags, 0xB)) {
+            SND_BGMRequest(0xA2);
+            g_AreaDrawFlags = 0;
+        }
+        if (SYS_TestFlag(g_SceneFlags, 0x13)) {
+            if (!SYS_TestFlag(g_SceneFlags, 0x14)) {
+                g_AreaDrawFlags = AREA_DRAW_ALL_FLAGS;
+                func_801C1DF0(2);
+                Scene_SetupParty(0x13);
+            } else if (!SYS_TestFlag(g_SceneFlags, 0x15)) {
+                g_AreaDrawFlags = AREA_DRAW_ALL_FLAGS;
+            }
+        }
+    }
+    if (g_GameAreaId == AREA_ID_DESERT_OF_DEATH_MAP && SYS_TestFlag(D_80144EF8, 1)) {
+        g_SpawnedActors[0].header.flags |= 0x40;
+    }
+    if (g_GameAreaId == AREA_ID_MYRIA_STATION_MYRIA_FIGHT) {
+        if (SYS_TestFlag(g_SceneFlags, 0x13)) {
+            slot = Actor_FindFreeSpawned();
+            if (slot != 0xFF) {
+                g_SpawnedActors[slot].header.flags = 1;
+                g_SpawnedActors[slot].type         = 0xAB;
+            }
+            slot = Actor_FindFreeSpawned();
+            if (slot != 0xFF) {
+                g_SpawnedActors[slot].header.flags = 1;
+                g_SpawnedActors[slot].type         = 0xB0;
+            }
+            D_801FE754      = 4;
+            g_AreaDrawFlags = AREA_DRAW_ALL_FLAGS;
+        }
+        if (SYS_TestFlag(g_SceneFlags, 0x14) && !SYS_TestFlag(g_SceneFlags, 0x15)) {
+            g_AreaDrawFlags = AREA_DRAW_ALL_FLAGS;
+        }
+        if (SYS_TestFlag(g_SceneFlags, 0x15) && !SYS_TestFlag(g_SceneFlags, 0x16)) {
+            D_801FE754      = 4;
+            g_AreaDrawFlags = AREA_DRAW_ALL_FLAGS;
+        }
+    }
+    D_80146872 = 2;
+}
 
 MATCH void func_801FA6BC(u8 point) {
     u8  slot;
