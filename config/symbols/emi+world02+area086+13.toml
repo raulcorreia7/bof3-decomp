@@ -1,3 +1,7 @@
 ["emi/world02/area086/13"]
 g_AreaModuleId = { addr = 0x801F2C00, source = "Module id of the area: the first payload word of its overlay, 52 + the area number." }
 Area_FindMemberAt = { addr = 0x801F34F8, type = "func", source = "Returns the first party member (g_Game.members, header.flags set) whose position plus unk_0C/unk_10 times unk_09 lies within (speed + 2) << 15 of (x << 16, y << 16), or -1." }
+D_801F3674 = { addr = 0x801F3674, type = "s8", alias = true, source = "The two cell depths of each depth row func_801F3070 queues its quads at; inside D_801F364C." }
+D_801F367C = { addr = 0x801F367C, type = "u8", alias = true, source = "The first and end part of each part range func_801F3070 draws; inside D_801F364C." }
+D_801F3684 = { addr = 0x801F3684, type = "s8", alias = true, source = "The corner offsets of each quad shape func_801F3070 reads; inside D_801F364C." }
+D_801F36C0 = { addr = 0x801F36C0, alias = true, source = "The part table func_801F3070 draws: cell word and tile word per quad; inside D_801F364C." }
