@@ -15,7 +15,7 @@ MATCH void func_800A0660(void) {
         ENEMY_COMBATANT(slot).status &= ~STATUS_BLIND;
     }
     battler                           = (u8*)&g_Battle.active_battler;
-    D_801EC324                        = 0x64;
+    g_BattleCalcStats[1].accuracy     = 0x64;
     slot                              = *battler;
     type                              = g_Battle.target;
     g_Battle.target_record->hp_change = Battle_CalcDamage(slot, type, BATTLE_ELEMENT_FROM_WEAPON) / 2;
