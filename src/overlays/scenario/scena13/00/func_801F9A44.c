@@ -13,9 +13,9 @@ MATCH void func_801F9A44(void) {
 
     switch (g_ScenarioState.step_05) {
         case 0:
-            SND_FadeOutBGM(g_SndBGMId, 0x64, 8);
-            SND_PlaySE(0x208);
-            SND_PlaySE(0x207);
+            SND_BGMFadeOut(g_SndBGMId, 0x64, 8);
+            SND_SEPlay(0x208);
+            SND_SEPlay(0x207);
             g_ScenarioState.step_05 = 1;
             break;
         case 1:
@@ -51,9 +51,9 @@ MATCH void func_801F9A44(void) {
             break;
         }
         case 5:
-            SND_PlaySE(0x20A);
-            SND_PlaySE(0x209);
-            SND_PlayBGM(g_SndBGMId, 0x6E, 0x20);
+            SND_SEPlay(0x20A);
+            SND_SEPlay(0x209);
+            SND_BGMPlay(g_SndBGMId, 0x6E, 0x20);
             g_ScenarioState.timer_06 = 0x30;
             g_ScenarioState.step_05  = 6;
             break;
@@ -69,8 +69,8 @@ MATCH void func_801F9A44(void) {
             g_ScenarioState.step_05  = 0;
             break;
         case 10:
-            SND_PlaySE(0x20A);
-            SND_PlaySE(0x209);
+            SND_SEPlay(0x20A);
+            SND_SEPlay(0x209);
             g_ScenarioState.timer_06 = 0x1E;
             g_ScenarioState.step_05  = 0xB;
             break;
@@ -112,19 +112,19 @@ MATCH void func_801F9A44(void) {
             if (g_ScriptVars[0] != 4) {
                 break;
             }
-            SND_StartXAStream(5, 1);
+            SND_XAStartStream(5, 1);
             UI_MessageStartArea(MSG_SCENA13_005);
             g_GameStateIndex        = 2;
             g_ScenarioState.step_05 = 0xF;
             break;
         case 15:
-            if (SND_IsXAIdle() == 0) {
+            if (SND_XAIsIdle() == 0) {
                 break;
             }
             if (g_GameStateIndex == 2) {
                 break;
             }
-            SND_PlayBGM(g_SndBGMId, 0x6E, 0x20);
+            SND_BGMPlay(g_SndBGMId, 0x6E, 0x20);
             progress                = &g_ScriptVars[0];
             g_ScenarioState.step_05 = 0x10;
             *progress               = *progress + 1;

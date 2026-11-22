@@ -112,7 +112,7 @@ MATCH void func_801FA8B8(void) {
             }
             UI_ModeSet(5);
             g_AreaDrawFlags = 0x1F;
-            SND_PlaySE(0x20C);
+            SND_SEPlay(0x20C);
             g_ScenarioState.step_05 = 7;
             break;
         case 7:
@@ -174,14 +174,14 @@ MATCH void func_801FAC88(void) {
             if (g_ScriptVars[0] == 0x0F) {
                 UI_ModeSet(UI_MODE_LONG_FADE_OUT);
                 Char_RebuildPartyStats();
-                SND_StartXAStream(0, 1);
+                SND_XAStartStream(0, 1);
                 g_ScenarioState.step_05 = 2;
             }
             break;
         case 2:
             if (WINDOW_EFFECT_IDLE()) {
                 g_AreaDrawFlags = 0;
-                if (SND_IsXAIdle() != 0) {
+                if (SND_XAIsIdle() != 0) {
                     g_ScenarioState.step_05 = 3;
                 }
             }
@@ -613,7 +613,7 @@ MATCH s32 func_801FDB1C(void) {
 MATCH s32 func_801FDBA8(void) {
     if (SYS_TestFlag(g_SceneFlags, 0x3D) == 0) {
         SYS_SetFlag(g_SceneFlags, 0x3D);
-        SND_PlaySE(EMI_SE_ID(SND_BANK_AREA, 0x03));
+        SND_SEPlay(EMI_SE_ID(SND_BANK_AREA, 0x03));
         return 1;
     }
 

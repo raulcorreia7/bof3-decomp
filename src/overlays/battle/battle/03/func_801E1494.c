@@ -21,7 +21,7 @@ MATCH void func_801E1494(void) {
         if (value >= 0) {
             Battle_PlayEffectSE(0);
         } else {
-            SND_QueueSelectionSE(0x206);
+            SND_SEQueueSelection(0x206);
         }
         entry         = g_Game.current;
         amount        = entry->chr.hp - entry->u.turn.hp_change;

@@ -16,7 +16,7 @@ MATCH void Fishing_CatchRecord(void) {
             g_FishingNewRecord        = 1;
         }
 
-        SND_PlaySE(EMI_SE_ID(SND_BANK_COMMON, 2));
+        SND_SEPlay(EMI_SE_ID(SND_BANK_COMMON, 2));
 
         record             = FISHING_STATE;
         record->step_timer = 8;

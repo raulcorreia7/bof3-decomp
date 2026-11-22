@@ -85,17 +85,17 @@ MATCH void func_801F8770(void) {
                 g_AreaDrawFlags = 0;
                 g_ScriptVars[0] = 0x17;
                 SCENARIO_MESSAGE_WAIT(MSG_SCENA09_020, 0xA);
-                SND_FadeOutSequence(0, 1, 4, 0x1E);
+                SND_SeqFadeOut(0, 1, 4, 0x1E);
             }
             break;
         case 10:
             if (g_GameStateIndex != GAME_REQUEST_MESSAGE) {
-                SND_StartXAStream(3, 1);
+                SND_XAStartStream(3, 1);
                 g_ScenarioState.step_05 = 0xB;
             }
             break;
         case 11:
-            if ((u8)SND_IsXAIdle() != 0) {
+            if ((u8)SND_XAIsIdle() != 0) {
                 func_801C1DF0(5);
                 g_ScenarioState.step_05 = 0xC;
                 SYS_SetFlag(g_SceneFlags, 6);
@@ -105,7 +105,7 @@ MATCH void func_801F8770(void) {
             if (g_GameStateIndex == 0) {
                 g_ScenarioState.step_05 = 0xD;
                 Game_RequestAreaChange(0x37, 0x160000, 0x130000, 0x82);
-                SND_PlayBGM(0x79, 0x64, 8);
+                SND_BGMPlay(0x79, 0x64, 8);
             }
             break;
         case 13:

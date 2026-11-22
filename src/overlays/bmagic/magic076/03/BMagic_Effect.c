@@ -49,7 +49,7 @@ MATCH void func_801EED48(void) {
     g_BattleEffects[slot].arg.unk_09   = 1;
     g_BattleEffects[slot].target.party = owner;
     g_Task->param.unk_0B += 1;
-    SND_QueueSelectionSE(EMI_SE_ID(SND_BANK_COMMON, 0x00));
+    SND_SEQueueSelection(EMI_SE_ID(SND_BANK_COMMON, 0x00));
     for (i = 0; i < AREA_PALETTE_COLORS; i++) {
         MEM_PTR(u16, AREA_PALETTE_UPLOAD_ROW(AREA_PALETTE_BATL_OVR_ROW))[i] = MEM_PTR(u16, AREA_PALETTE_ARENA_ROW(AREA_PALETTE_BATL_OVR_ROW))[i] | PSX_COLOR_STP_BIT;
     }
@@ -206,7 +206,7 @@ MATCH void func_801EFA60(void) {
     g_Task->unk_09 = count;
     if (!(count & BYTE_MASK)) {
         if (g_Task->param.unk_0B == 0) {
-            SND_QueueSelectionSE(EMI_SE_ID(SND_BANK_COMMON, 0x01));
+            SND_SEQueueSelection(EMI_SE_ID(SND_BANK_COMMON, 0x01));
         }
         g_Task->unk_0C      = 8;
         angle               = &g_ScratchPad.cells.halves[2];

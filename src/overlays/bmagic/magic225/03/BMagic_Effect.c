@@ -56,7 +56,7 @@ MATCH void func_801EED28(void) {
         dst[i]     = src[i];
     }
     g_GfxPalettePending = 1;
-    SND_QueueSelectionSE(EMI_SE_ID(SND_BANK_COMMON, 1));
+    SND_SEQueueSelection(EMI_SE_ID(SND_BANK_COMMON, 1));
 }
 
 MATCH void func_801EEE8C(void) {
@@ -70,7 +70,7 @@ MATCH void func_801EEE8C(void) {
     if (count == 0) {
         i = 0;
         do {
-            SND_QueueSelectionSE(EMI_SE_ID(SND_BANK_COMMON, 0x00));
+            SND_SEQueueSelection(EMI_SE_ID(SND_BANK_COMMON, 0x00));
             slot = BMagic_AllocEffect();
             if (slot != GAME_NONE) {
                 work                                   = g_Task;

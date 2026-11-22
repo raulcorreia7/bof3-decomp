@@ -59,8 +59,8 @@ MATCH void func_801CF3C0(void) {
             }
         }
     }
-    /* FAKE: retail reads SND_PlaySE as void(s32). */
-    ((void (*)(s32))SND_PlaySE)(g_Task->unk_2C + 0x100);
+    /* FAKE: retail reads SND_SEPlay as void(s32). */
+    ((void (*)(s32))SND_SEPlay)(g_Task->unk_2C + 0x100);
     Script_Request((((s32)(g_Task->direction - 1) / 2) + 0x42) & 0xFF);
     g_Task->param.unk_0B = 0;
     g_Task->unk_06       = 0;
@@ -88,8 +88,8 @@ MATCH void func_801CFC38(void) {
 }
 
 MATCH void func_801CFC7C(void) {
-    /* FAKE: retail reads SND_PlaySE as void(s32). */
-    ((void (*)(s32))SND_PlaySE)(g_Task->unk_2C + 0x100);
+    /* FAKE: retail reads SND_SEPlay as void(s32). */
+    ((void (*)(s32))SND_SEPlay)(g_Task->unk_2C + 0x100);
     Script_Request((((s32)(g_Task->direction - 1) / 2) + 0x42) & 0xFF);
     g_Task->unk_0A = 8;
     g_Task->unk_03 = 1;

@@ -79,7 +79,7 @@ MATCH void func_801FD1A4(void) {
             }
             g_ScriptVars[0] = 0;
             Game_ClearScriptActive();
-            SND_PlaySE(0x203);
+            SND_SEPlay(0x203);
             SYS_SetFlag(g_SceneFlags, 0x10);
             Game_RequestAreaChange(0xF, TO_COORD_HALF(25), TO_COORD(81), 1);
         reset:

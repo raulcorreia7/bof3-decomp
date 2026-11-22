@@ -20,7 +20,7 @@ MATCH void func_801F2C48(void) {
     ((Actor*)g_Task)->tint.bytes.rgb.r = 0;
     ((Actor*)g_Task)->header.mode++;
     if (SYS_TestFlag(g_SceneFlags, 0x25) != 0) {
-        SND_StopSequence(0, 0);
-        SND_PlaySE(EMI_SE_ID(SND_BANK_AREA, 3));
+        SND_SeqStop(0, 0);
+        SND_SEPlay(EMI_SE_ID(SND_BANK_AREA, 3));
     }
 }

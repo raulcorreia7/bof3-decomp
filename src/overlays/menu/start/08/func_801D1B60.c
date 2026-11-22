@@ -27,7 +27,7 @@ MATCH void func_801D1B60(void) {
     TASK_SET(saved_work);
     input = INPUT_GetRepeatedButtons(g_PadStates[0].pressed & (PADLright | PADLleft));
     if (input & PADLleft) {
-        SND_PlaySE(EMI_SE_ID(SND_BANK_COMMON, 1));
+        SND_SEPlay(EMI_SE_ID(SND_BANK_COMMON, 1));
         D_80148654 = 0;
         D_80148655 = D_80148655 - 1;
         if ((s8)D_80148655 < 0) {
@@ -35,7 +35,7 @@ MATCH void func_801D1B60(void) {
         }
     }
     if (input & PADLright) {
-        SND_PlaySE(EMI_SE_ID(SND_BANK_COMMON, 1));
+        SND_SEPlay(EMI_SE_ID(SND_BANK_COMMON, 1));
         D_80148654 = 0;
         D_80148655 = D_80148655 + 1;
         if ((s8)D_80148655 >= 7) {
@@ -63,10 +63,10 @@ MATCH void func_801D1B60(void) {
                 D_80148651++;
                 return;
             }
-            SND_PlaySE(EMI_SE_ID(SND_BANK_COMMON, 7));
+            SND_SEPlay(EMI_SE_ID(SND_BANK_COMMON, 7));
             return;
         }
-        SND_PlaySE(EMI_SE_ID(SND_BANK_COMMON, 4));
+        SND_SEPlay(EMI_SE_ID(SND_BANK_COMMON, 4));
         D_80148654               = 5;
         g_UiPanelTasks[7].state  = 1;
         g_UiPanelTasks[8].state  = 1;

@@ -12,6 +12,6 @@ MATCH s32 func_801F2C04(void) {
         SYS_SetFlag(D_80144EA0, 8);
     }
     if (g_UiMessageChoice != 2) {
-        SND_PlaySE(EMI_SE_ID(SND_BANK_AREA, 0x08));
+        SND_SEPlay(EMI_SE_ID(SND_BANK_AREA, 0x08));
     }
 }

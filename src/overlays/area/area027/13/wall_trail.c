@@ -180,7 +180,7 @@ MATCH void func_801F2C74(void) {
         dst += 0x26;
         i++;
     } while ((i & BYTE_MASK) < 3u);
-    SND_PlaySE(EMI_SE_ID(SND_BANK_AREA, 6));
+    SND_SEPlay(EMI_SE_ID(SND_BANK_AREA, 6));
     g_Task->timer = 64;
     g_Task->header.mode++;
 }

@@ -321,7 +321,7 @@ NON_MATCHING void func_801F9498(void) {
                 g_ScenarioState.step_05 = 0x66;
                 UI_ModeSet(0xD);
                 func_801C16B8();
-                SND_FadeOutSequence(0, 0, 4, 0x1E);
+                SND_SeqFadeOut(0, 0, 4, 0x1E);
             } else if (script_vars[0] == 0x65) {
                 script_vars[0] = 0;
                 Game_ClearScriptActive();
@@ -330,13 +330,13 @@ NON_MATCHING void func_801F9498(void) {
             }
             break;
         case 102:
-            SND_StartXAStream(0, 1);
+            SND_XAStartStream(0, 1);
             g_ScenarioState.step_05 = 0x67;
             break;
         case 103:
             if (g_UiWindowEffectBusy == 0) {
                 g_AreaDrawFlags = 0;
-                if (SND_IsXAIdle()) {
+                if (SND_XAIsIdle()) {
                     g_ScenarioState.step_05 = 0x68;
                 }
             }
@@ -348,7 +348,7 @@ NON_MATCHING void func_801F9498(void) {
             break;
         case 105:
             if (g_UiWindowEffectBusy == 0) {
-                SND_PlayBGM(0x61, 0x64, 8);
+                SND_BGMPlay(0x61, 0x64, 8);
                 Game_ClearScriptActive();
                 g_ScenarioState.step_05  = 0;
                 g_ScenarioState.state_04 = 0;

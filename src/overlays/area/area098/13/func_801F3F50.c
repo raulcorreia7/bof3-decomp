@@ -5,7 +5,7 @@ MATCH void func_801F3F50(void) {
     s32 fade;
 
     if ((s16)g_Task->screen_y == 90) {
-        SND_PlaySE(0x201);
+        SND_SEPlay(0x201);
     }
     level            = g_Task->screen_y;
     g_Task->screen_y = level + 1;

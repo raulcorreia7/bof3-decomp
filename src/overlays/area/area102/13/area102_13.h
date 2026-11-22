@@ -31,7 +31,7 @@ void func_801F36B4(s32 steps);
         if ((g_Task)->timer == 0) {                         \
             (g_Task)->header.step += 1;                     \
             if (func_801F3194() != 0) {                     \
-                SND_PlaySE(EMI_SE_ID(SND_BANK_AREA, 0x00)); \
+                SND_SEPlay(EMI_SE_ID(SND_BANK_AREA, 0x00)); \
             }                                               \
         }                                                   \
     }

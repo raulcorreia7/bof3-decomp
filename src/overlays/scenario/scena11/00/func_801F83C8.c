@@ -26,7 +26,7 @@ MATCH void func_801F83C8(void) {
                 break;
             }
             *progress = 0;
-            SND_FadeOutSequence(0, 0, 4, 0x1E);
+            SND_SeqFadeOut(0, 0, 4, 0x1E);
             SYS_SetFlag(g_SceneFlags, 7);
             g_ScenarioState.step_05 = 2;
             Game_RequestAreaChange(0x44, 0x300000, 0x198000, 0x82);
@@ -82,8 +82,8 @@ MATCH void func_801F83C8(void) {
             g_GameState = &g_Game.members[0];
             TASK_SET(&g_Game.members[0]);
             D_80145FA8 &= 0xBF;
-            SND_PlaySE(0x201);
-            SND_FadeOutSequence(0, 1, 4, 0x1E);
+            SND_SEPlay(0x201);
+            SND_SeqFadeOut(0, 1, 4, 0x1E);
             g_ScenarioState.step_05 = 9;
             break;
         case 9:
@@ -102,11 +102,11 @@ MATCH void func_801F83C8(void) {
             }
             break;
         case 10:
-            SND_StartXAStream(6, 1);
+            SND_XAStartStream(6, 1);
             g_ScenarioState.step_05 = 0xB;
             break;
         case 11:
-            if ((SND_IsXAIdle() & 0xFF) == 0) {
+            if ((SND_XAIsIdle() & 0xFF) == 0) {
                 break;
             }
             UI_MessageStartArea(MSG_SCENA11_040);
@@ -133,16 +133,16 @@ MATCH void func_801F83C8(void) {
             g_GameState = &g_Game.members[0];
             TASK_SET(&g_Game.members[0]);
             D_80145FA8 &= 0xBF;
-            SND_FadeOutSequence(0, 1, 4, 0x1E);
+            SND_SeqFadeOut(0, 1, 4, 0x1E);
             Scene_SetupParty(5);
             g_ScenarioState.step_05 = 0x10;
             break;
         case 0x10:
-            SND_StartXAStream(5, 1);
+            SND_XAStartStream(5, 1);
             g_ScenarioState.step_05 = 0x11;
             break;
         case 0x11:
-            if ((SND_IsXAIdle() & 0xFF) == 0) {
+            if ((SND_XAIsIdle() & 0xFF) == 0) {
                 break;
             }
             g_ScriptVars[0]         = 2;
@@ -174,7 +174,7 @@ MATCH void func_801F83C8(void) {
             } else {
                 UI_MessageStartArea(MSG_SCENA11_050);
                 g_GameStateIndex = 2;
-                SND_PlaySE(0x106);
+                SND_SEPlay(0x106);
                 g_ScenarioState.step_05 = 0x14;
             }
             break;
@@ -220,7 +220,7 @@ MATCH void func_801F83C8(void) {
             }
             *progress               = 0;
             g_ScenarioState.step_05 = 0x2A;
-            SND_FadeOutSequence(0, 0, 4, 0x1E);
+            SND_SeqFadeOut(0, 0, 4, 0x1E);
             Game_RequestAreaChange(0x44, 0x300000, 0x198000, 0x88);
             g_GamePrevSelection = 0x7D;
             break;

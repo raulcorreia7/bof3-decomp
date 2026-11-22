@@ -4,7 +4,7 @@ MATCH void func_801F3640(void) {
     Actor* actor;
 
     if (SYS_TestFlag(g_SceneEventFlags, 17)) {
-        SND_PlaySE(EMI_SE_ID(SND_BANK_AREA, 0x02));
+        SND_SEPlay(EMI_SE_ID(SND_BANK_AREA, 0x02));
         actor               = g_Task;
         actor->param.unk_0B = 0x80;
         actor->pos.z.fixed  = -0x180;

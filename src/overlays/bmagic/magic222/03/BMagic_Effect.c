@@ -103,7 +103,7 @@ MATCH void func_801EF148(void) {
     g_Task->unk_14 -= g_Task->unk_20;
     g_Task->pos.z.fixed = g_BattleEffectBattler->pos.z.fixed + g_Task->unk_14;
     if (--g_Task->unk_09 == 0) {
-        SND_QueueSelectionSE(EMI_SE_ID(SND_BANK_COMMON, 1));
+        SND_SEQueueSelection(EMI_SE_ID(SND_BANK_COMMON, 1));
         for (i = 0; i < 8; i++) {
             slot                               = Battle_AllocEffect(1, 0x60) & BYTE_MASK;
             g_BattleEffects[slot].target.party = g_BattleEffectBattler;
@@ -130,7 +130,7 @@ MATCH void func_801EF324(void) {
     count          = g_Task->unk_09 - 1;
     g_Task->unk_09 = count;
     if (!(count & BYTE_MASK)) {
-        SND_QueueSelectionSE(EMI_SE_ID(SND_BANK_COMMON, 0x02));
+        SND_SEQueueSelection(EMI_SE_ID(SND_BANK_COMMON, 0x02));
         slot                               = Battle_AllocEffect(1, 96) & BYTE_MASK;
         work                               = g_BattleEffectBattler;
         g_BattleEffects[slot].header.mode  = 3;

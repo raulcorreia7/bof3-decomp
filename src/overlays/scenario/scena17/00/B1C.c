@@ -68,7 +68,7 @@ MATCH void func_801F7924(void) {
         g_AreaScrollTargetY = TO_COORD(19) + COORD_HALF;
         Area_InitMapRenderer();
         g_AreaSceneMode = 4;
-        SND_RequestBGM(0x96);
+        SND_BGMRequest(0x96);
         UI_ModeSet(UI_MODE_FADE_IN);
         func_801F88CC(0, 0x80);
         step = &g_ScenarioState.state_04;
@@ -90,7 +90,7 @@ MATCH void func_801F7A08(void) {
     timer = &g_ScenarioState.step_05;
     *timer -= 1;
     if (*timer == 0) {
-        SND_PlayBGM(0x96, 0x64, 0x8);
+        SND_BGMPlay(0x96, 0x64, 0x8);
         *timer = 30;
         g_ScenarioState.state_04 += 1;
     }
@@ -269,7 +269,7 @@ MATCH void func_801F7FF0(void) {
     if (g_UiWindowEffectBusy == 0) {
         bgm = &g_SndBGMId;
         row = *bgm * 4;
-        SND_StopSequence(g_SelectionSepSlots[row], g_SelectionSequences[row]);
+        SND_SeqStop(g_SelectionSepSlots[row], g_SelectionSequences[row]);
         stage                    = &D_80146873;
         *bgm                     = 0xFF;
         g_AreaDrawFlags          = 0;
@@ -288,7 +288,7 @@ MATCH void func_801F8088(void) {
 MATCH void Scene_StartEndingXA(void) {
     s8* step;
 
-    SND_StartXAStream(8, 1);
+    SND_XAStartStream(8, 1);
     step               = &g_ScenarioState.state_04;
     g_EndingRollLine   = 0;
     g_EndingRollScroll = 0;
@@ -301,7 +301,7 @@ MATCH void Scene_WaitEndingXA(void) {
     s8* step;
 
     ready = Scene_UpdateEndingRoll();
-    if ((u8)SND_IsXAIdle() && ready) {
+    if ((u8)SND_XAIsIdle() && ready) {
         UI_ModeSet(UI_MODE_LONG_FADE_OUT);
         step  = &g_ScenarioState.state_04;
         *step = *step + 1;
@@ -335,7 +335,7 @@ MATCH void func_801F81F8(void) {
     UI_ModeSet(UI_MODE_FADE_IN);
     SYS_ThreadWait(1);
     g_AreaDrawFlags = 0x1F;
-    SND_PlayBGM(0xA0, 0x64, 0x8);
+    SND_BGMPlay(0xA0, 0x64, 0x8);
     step = &g_ScenarioState.state_04;
     *step += 1;
 }
@@ -485,7 +485,7 @@ MATCH void func_801F8710(void) {
 
     if (g_UiWindowEffectBusy == 0) {
         bgm = &g_SndBGMId;
-        SND_StopSequence(g_SelectionSepSlots[*bgm * 4], g_SelectionSequences[*bgm * 4]);
+        SND_SeqStop(g_SelectionSepSlots[*bgm * 4], g_SelectionSequences[*bgm * 4]);
         *bgm = GAME_NONE;
         SND_SetBankLayout(0);
         g_AreaDrawFlags = 0;

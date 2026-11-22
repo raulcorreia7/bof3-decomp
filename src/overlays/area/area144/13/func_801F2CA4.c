@@ -3,7 +3,7 @@
 MATCH void func_801F2CA4(void) {
     if (func_801F34FC() == 0) {
         func_801F30CC();
-        SND_PlaySE(EMI_SE_ID(SND_BANK_AREA, 3));
+        SND_SEPlay(EMI_SE_ID(SND_BANK_AREA, 3));
         g_Task->header.mode++;
     }
 }

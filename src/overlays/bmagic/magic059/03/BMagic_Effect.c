@@ -108,7 +108,7 @@ NON_MATCHING void func_801EED0C(void) {
     g_Task->pos.x.fixed = rsin(0) << 6;
     g_Task->pos.y.fixed = rcos(0) << 6;
     func_801F0544();
-    SND_QueueSelectionSE(0x100);
+    SND_SEQueueSelection(0x100);
     g_Task->unk_09 = D_801F065C[g_Task->facing];
     g_Task->header.mode++;
 }

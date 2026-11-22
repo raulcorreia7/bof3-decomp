@@ -71,20 +71,20 @@ NON_MATCHING void Menu_UpdatePartyChange(void) {
         }
     }
     if (old_side != *(u8*)D_80148658 || old_row != *(u8*)&D_80148659) {
-        SND_PlaySE(EMI_SE_ID(SND_BANK_COMMON, 0));
+        SND_SEPlay(EMI_SE_ID(SND_BANK_COMMON, 0));
     }
     if (g_PadStates[0].pressed & g_InputMasks[MENU_INPUT_CONFIRM]) {
         s8* face = (s8*)&D_8014865A;
 
         if (*face == 0x7F) {
-            SND_PlaySE(EMI_SE_ID(SND_BANK_COMMON, 3));
+            SND_SEPlay(EMI_SE_ID(SND_BANK_COMMON, 3));
             *face      = *(u8*)D_80148658;
             D_8014865D = *(u8*)&D_80148659;
             return;
         }
         result     = Menu_SwapPartyMembers();
         D_801ED69C = result;
-        SND_PlaySE(result == GAME_NONE ? EMI_SE_ID(SND_BANK_COMMON, 3) : EMI_SE_ID(SND_BANK_COMMON, 7));
+        SND_SEPlay(result == GAME_NONE ? EMI_SE_ID(SND_BANK_COMMON, 3) : EMI_SE_ID(SND_BANK_COMMON, 7));
         D_8014865A = 0x7F;
         D_8014865D = 0x7F;
         return;
@@ -92,7 +92,7 @@ NON_MATCHING void Menu_UpdatePartyChange(void) {
     if (g_PadStates[0].pressed & g_InputMasks[MENU_INPUT_CANCEL]) {
         s8* face;
 
-        SND_PlaySE(EMI_SE_ID(SND_BANK_COMMON, 6));
+        SND_SEPlay(EMI_SE_ID(SND_BANK_COMMON, 6));
         face = (s8*)&D_8014865A;
         if (*face != 0x7F) {
             *face      = 0x7F;

@@ -29,20 +29,20 @@ MATCH void func_801D8680(void) {
     buttons                                        = INPUT_GetRepeatedButtons(g_PadStates[0].pressed & (PADLup | PADLdown));
     at_end                                         = g_UiPanelTasks[16].unk_0B == 3;
     if (buttons & PADLup) {
-        SND_PlaySE(EMI_SE_ID(SND_BANK_COMMON, 0));
+        SND_SEPlay(EMI_SE_ID(SND_BANK_COMMON, 0));
         g_UiPanelTasks[18].unk_0B -= 1;
         if ((s8)g_UiPanelTasks[18].unk_0B < 0) {
             g_UiPanelTasks[18].unk_0B = D_801EC4A4[at_end * 6] - 1;
         }
     } else if (buttons & PADLdown) {
-        SND_PlaySE(EMI_SE_ID(SND_BANK_COMMON, 0));
+        SND_SEPlay(EMI_SE_ID(SND_BANK_COMMON, 0));
         g_UiPanelTasks[18].unk_0B += 1;
         if ((D_801EC4A4[at_end * 6] - 1) < g_UiPanelTasks[18].unk_0B) {
             g_UiPanelTasks[18].unk_0B = 0;
         }
     }
     if (g_PadStates[0].pressed & g_InputMasks[MENU_INPUT_CONFIRM]) {
-        SND_PlaySE(EMI_SE_ID(SND_BANK_COMMON, 3));
+        SND_SEPlay(EMI_SE_ID(SND_BANK_COMMON, 3));
         row_index = (u8)at_end;
         FAKE_ORDER_FENCE();
         rows  = D_801EC4A4;
@@ -59,7 +59,7 @@ MATCH void func_801D8680(void) {
         return;
     }
     if (g_PadStates[0].pressed & g_InputMasks[MENU_INPUT_CANCEL]) {
-        SND_PlaySE(EMI_SE_ID(SND_BANK_COMMON, 6));
+        SND_SEPlay(EMI_SE_ID(SND_BANK_COMMON, 6));
         task->active = 0;
         g_MenuStep.state -= 1;
     }

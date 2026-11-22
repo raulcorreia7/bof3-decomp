@@ -23,8 +23,8 @@ MATCH void Game_ReturnFromBattle(void) {
             }
             sel = &g_SndBGMId;
             SsSepReplay(g_SelectionEffectVoices[g_SelectionSepSlots[*sel << 2]], g_SelectionSequences[*sel << 2]);
-            SND_SetSequenceVolume((u16)(s8)(u8)g_SelectionEffectVoices[g_SelectionSepSlots[*sel << 2]], g_SelectionSequences[*sel << 2], 0, 0);
-            SND_FadeInSequence((u16)(s8)(u8)g_SelectionEffectVoices[g_SelectionSepSlots[*sel << 2]], g_SelectionSequences[*sel << 2], 0x64, 8);
+            SND_SeqSetVolume((u16)(s8)(u8)g_SelectionEffectVoices[g_SelectionSepSlots[*sel << 2]], g_SelectionSequences[*sel << 2], 0, 0);
+            SND_SeqFadeIn((u16)(s8)(u8)g_SelectionEffectVoices[g_SelectionSepSlots[*sel << 2]], g_SelectionSequences[*sel << 2], 0x64, 8);
         }
         g_Battle.outcome.options = 0;
         g_Battle.encounter       = 0;

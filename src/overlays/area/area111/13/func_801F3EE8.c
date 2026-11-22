@@ -46,7 +46,7 @@ MATCH void func_801F3EE8(void) {
                 func_801A4BC0(0x12, 0xAD, 0xA1);
                 func_801A4BC0(0x11, 0xAE, 0xC0);
                 func_801A4BC0(0x12, 0xAE, 0xC0);
-                SND_PlaySE(EMI_SE_ID(SND_BANK_AREA, 5));
+                SND_SEPlay(EMI_SE_ID(SND_BANK_AREA, 5));
                 SYS_SetFlag(g_SceneEventFlags, 0x28);
                 D_801448EE             = 0x1E;
                 g_SceneEventState.step = 0x17;

@@ -16,7 +16,7 @@ MATCH void func_801FB300(void) {
     if (*step == 0) {
         Party_AddZenny(0x32, 0);
         SYS_SetFlag(g_SceneFlags, 0x23);
-        SND_PlaySE(EMI_SE_ID(SND_BANK_COMMON, 6));
+        SND_SEPlay(EMI_SE_ID(SND_BANK_COMMON, 6));
         Game_ClearScriptActive();
         *step                    = 0;
         g_ScenarioState.state_04 = 0;

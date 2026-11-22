@@ -18,6 +18,6 @@ MATCH void Battle_ToggleItemTargetSide(void) {
     }
     if ((Item_GetFlags(g_UiPanelTasks[16].unk_0A, D_801C893C[g_UiPanelTasks[16].unk_0A][g_UiPanelTasks[16].unk_0C]) & ITEM_USABLE_MENU) != 0u) {
         g_BattleActorTurn->command.target ^= BATTLE_TARGET_BOTH_SIDES;
-        SND_PlaySE(EMI_SE_ID(SND_BANK_COMMON, 1));
+        SND_SEPlay(EMI_SE_ID(SND_BANK_COMMON, 1));
     }
 }

@@ -47,7 +47,7 @@ MATCH void Game_UpdateField(void) {
             }
             selection = g_SndBGMId;
             if (selection != GAME_NONE && g_GamePrevSelection != selection) {
-                SND_StopSequence(g_SelectionSepSlots[selection * 4], g_SelectionSequences[selection * 4]);
+                SND_SeqStop(g_SelectionSepSlots[selection * 4], g_SelectionSequences[selection * 4]);
             }
             g_GameEntryState = GAME_MODE_AREA_LOAD;
             break;

@@ -50,7 +50,7 @@ MATCH void func_801EED28(void) {
     *MEM_PTR(u16, AREA_PALETTE_UPLOAD_ROW(AREA_PALETTE_BMAGIC_ROW))   = *MEM_PTR(u16, AREA_PALETTE_ARENA_33C00);
     *MEM_PTR(u16, AREA_PALETTE_UPLOAD_ROW(AREA_PALETTE_BATL_OVR_ROW)) = *MEM_PTR(u16, AREA_PALETTE_ARENA_ROW(AREA_PALETTE_BATL_OVR_ROW));
     g_GfxPalettePending                                               = 1;
-    SND_QueueSelectionSE(EMI_SE_ID(SND_BANK_COMMON, 0));
+    SND_SEQueueSelection(EMI_SE_ID(SND_BANK_COMMON, 0));
 }
 
 MATCH void func_801EEE50(void) {
@@ -78,7 +78,7 @@ MATCH void func_801EEF54(void) {
     timer          = g_Task->unk_09 - 1;
     g_Task->unk_09 = timer;
     if (timer == 0) {
-        SND_QueueSelectionSE(0x101);
+        SND_SEQueueSelection(0x101);
         Battle_ApplyDamageFlags(g_Battle.target_selector, 0x10);
         g_Task->header.mode = g_Task->header.mode + 1;
     }

@@ -42,7 +42,7 @@ MATCH void func_801EECFC(void) {
     g_BattleEffects[slot].pos.x.fixed   = actor->pos.x.fixed;
     g_BattleEffects[slot].pos.y.fixed   = actor->pos.y.fixed;
     g_BattleEffects[slot].pos.z.fixed   = actor->pos.z.fixed + TO_COORD(256);
-    SND_QueueSelectionSE(EMI_SE_ID(SND_BANK_COMMON, 0x00));
+    SND_SEQueueSelection(EMI_SE_ID(SND_BANK_COMMON, 0x00));
     g_Task->param.unk_0B = 0;
     g_Task->header.mode += 1;
 }
@@ -213,7 +213,7 @@ MATCH void Effect_PlayCueAtTick(void) {
 
     count = g_Task->unk_09;
     if ((count & BYTE_MASK) == 8) {
-        SND_QueueSelectionSE(0x101);
+        SND_SEQueueSelection(0x101);
         g_Task->header.step += 1;
         return;
     }
@@ -236,7 +236,7 @@ MATCH void Effect_PlayCueOnTimeout(void) {
     work        = g_Task;
     work->timer = work->timer - 1;
     if (work->timer == 0) {
-        SND_QueueSelectionSE(0x102);
+        SND_SEQueueSelection(0x102);
         g_Task->header.step = g_Task->header.step + 1;
     }
 }

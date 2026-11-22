@@ -31,8 +31,8 @@ MATCH void Game_MenuReturn(void) {
     }
     UI_ModeSet(3u);
     Area_WaitWindowEffect(1u);
-    if ((D_80143F20 == 0x6Eu) && !(SND_TestEffectVoicesBusy(&sep_index, &seq_index) & BYTE_MASK)) {
-        SND_FadeInSequence(sep_index, seq_index, 0x14, 0x10);
+    if ((D_80143F20 == 0x6Eu) && !(SND_VoiceTestEffectsBusy(&sep_index, &seq_index) & BYTE_MASK)) {
+        SND_SeqFadeIn(sep_index, seq_index, 0x14, 0x10);
     }
     request = &D_8014869C;
     if (*request != 0u) {

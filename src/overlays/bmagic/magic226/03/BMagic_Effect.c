@@ -34,7 +34,7 @@ MATCH void func_801EED18(void) {
     g_BattleEffects[slot].target.party = g_Task;
     g_BattleEffects[slot].header.mode  = 0;
     g_Task->param.unk_0B += 1;
-    SND_QueueSelectionSE(EMI_SE_ID(SND_BANK_COMMON, 0));
+    SND_SEQueueSelection(EMI_SE_ID(SND_BANK_COMMON, 0));
     BMAGIC_POINT_AT_PALETTE_ROW(dst, src, i);
     for (; i < AREA_PALETTE_COLORS; i++) {
         *dst++ = *src++ | PSX_COLOR_STP_BIT;
@@ -162,7 +162,7 @@ MATCH void func_801EF310(void) {
         i++;
     } while (i < 0x20);
     g_AreaCameraAngle.vx += 0x14;
-    SND_QueueSelectionSE(0x101);
+    SND_SEQueueSelection(0x101);
     g_Task->unk_09 = 8;
     g_Task->header.step += 1;
 }

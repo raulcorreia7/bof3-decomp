@@ -8,7 +8,7 @@ MATCH void func_801FB0F0(void) {
     switch (g_ScenarioState.step_05) {
         case 0:
             g_AreaDrawFlags = AREA_DRAW_ALL_FLAGS;
-            SND_PlayBGM(15, BGM_CUE_LEVEL_DEFAULT, BGM_CUE_SHAPE_DEFAULT);
+            SND_BGMPlay(15, BGM_CUE_LEVEL_DEFAULT, BGM_CUE_SHAPE_DEFAULT);
             func_801C601C(0);
             g_ScenarioState.step_05 = 1;
             break;

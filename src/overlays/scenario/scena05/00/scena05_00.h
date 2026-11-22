@@ -19,7 +19,7 @@
     Game_SetScriptActive();                                                         \
     g_ScriptVars[2] = 0;                                                            \
     g_ScriptVars[3] = 0;                                                            \
-    SND_PlaySE(EMI_SE_ID(SND_BANK_AREA, 2));                                        \
+    SND_SEPlay(EMI_SE_ID(SND_BANK_AREA, 2));                                        \
     g_ScenarioState.step_05  = timer;                                               \
     g_ScenarioState.timer_06 = 0;                                                   \
     return 1

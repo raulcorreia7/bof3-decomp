@@ -59,8 +59,8 @@ MATCH void func_801FA7DC(void) {
             }
             *progress               = 5;
             g_ScenarioState.step_05 = 0xD;
-            SND_PlaySE(0x20E);
-            SND_PlayBGM(0x8F, 0x64, 8);
+            SND_SEPlay(0x20E);
+            SND_BGMPlay(0x8F, 0x64, 8);
             return;
         }
         case 13: {
@@ -128,8 +128,8 @@ MATCH void func_801FA7DC(void) {
             }
             g_ScenarioState.step_05 = 0x1D;
             g_GameFlags ^= 0x80;
-            SND_StopSequence(0, 0);
-            SND_StopSequence(0, 1);
+            SND_SeqStop(0, 0);
+            SND_SeqStop(0, 1);
             SYS_SetFlag(g_SceneFlags, 0x2C);
             Char_RebuildPartyStats();
             switch (g_EmiLoadedCharacterIndex & 0x7F) {

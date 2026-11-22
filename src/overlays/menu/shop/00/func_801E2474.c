@@ -17,8 +17,8 @@ MATCH void func_801E2474(void) {
         return;
     }
     if ((g_PadStates[0].pressed & g_InputMasks[MENU_INPUT_CANCEL]) != 0) {
-        SND_PlaySE(EMI_SE_ID(SND_BANK_COMMON, 6));
-        SND_PlaySE(EMI_SE_ID(SND_BANK_COMMON, 2));
+        SND_SEPlay(EMI_SE_ID(SND_BANK_COMMON, 6));
+        SND_SEPlay(EMI_SE_ID(SND_BANK_COMMON, 2));
         D_80148357 = 2;
         D_8014837B = 1;
         D_8014839F = 1;

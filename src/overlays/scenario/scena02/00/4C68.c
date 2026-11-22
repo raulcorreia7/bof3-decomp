@@ -7,7 +7,7 @@ __asm__(".include \"include/match/macro.inc\"\n");
 MATCH void func_801FB868(void) {
     switch (g_ScenarioState.step_05) {
         case 0:
-            SND_PlaySE(EMI_SE_ID(SND_BANK_AREA, 0x0B));
+            SND_SEPlay(EMI_SE_ID(SND_BANK_AREA, 0x0B));
             g_ScenarioState.step_05 = 1;
             break;
         case 1: {
@@ -74,7 +74,7 @@ MATCH void func_801FB868(void) {
             break;
         case 20:
             func_801FCECC(0x99);
-            SND_StopSequence(0, 0);
+            SND_SeqStop(0, 0);
             g_ScriptVars[0] = 0x41;
             Scene_SetupParty(0x11);
             func_801C601C(3);

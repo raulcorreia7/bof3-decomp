@@ -22,16 +22,16 @@ MATCH void func_801D8188(void) {
     key                                                       = &g_PadStates[0].pressed;
     slot -= 180;
     if (*key & (PADLright | PADLleft)) {
-        SND_PlaySE(EMI_SE_ID(SND_BANK_COMMON, 1));
+        SND_SEPlay(EMI_SE_ID(SND_BANK_COMMON, 1));
         *toggle ^= 1;
     }
     if (*key & g_InputMasks[MENU_INPUT_CONFIRM]) {
         if (*toggle != 0) {
-            SND_PlaySE(EMI_SE_ID(SND_BANK_COMMON, 4));
+            SND_SEPlay(EMI_SE_ID(SND_BANK_COMMON, 4));
             Char_AbilityAdd(*(Party_GetAbilities(g_UiPanelTasks[16].unk_0A, g_UiPanelTasks[16].unk_0B, CHAR_INDEX_RYU) + g_UiPanelTasks[16].unk_0C), CHAR_INDEX_RYU, 1, 0);
             *(Party_GetAbilities(g_UiPanelTasks[16].unk_0A, g_UiPanelTasks[16].unk_0B, 0) + g_UiPanelTasks[16].unk_0C) = 0;
         } else {
-            SND_PlaySE(EMI_SE_ID(SND_BANK_COMMON, 6));
+            SND_SEPlay(EMI_SE_ID(SND_BANK_COMMON, 6));
         }
         count = &D_80148651;
         *count -= 2;
@@ -41,6 +41,6 @@ MATCH void func_801D8188(void) {
     if (*key & g_InputMasks[MENU_INPUT_CANCEL]) {
         g_UiPanelTasks[16].flags = 0xFF;
         D_80148651 -= 2;
-        SND_PlaySE(EMI_SE_ID(SND_BANK_COMMON, 6));
+        SND_SEPlay(EMI_SE_ID(SND_BANK_COMMON, 6));
     }
 }

@@ -19,19 +19,19 @@ MATCH void func_801E5320(void) {
             g_SaveCardPort = D_801ED7F4;
         }
         if (prev_byte != g_SaveCardPort) {
-            SND_PlaySE(EMI_SE_ID(SND_BANK_COMMON, 1));
+            SND_SEPlay(EMI_SE_ID(SND_BANK_COMMON, 1));
         }
     }
     pad = &g_PadStates[0].pressed;
     if ((*pad & g_InputMasks[MENU_INPUT_CONFIRM]) != 0) {
-        SND_PlaySE(EMI_SE_ID(SND_BANK_COMMON, 4));
+        SND_SEPlay(EMI_SE_ID(SND_BANK_COMMON, 4));
         g_MenuStartTimer      = 2;
         D_801ED7FC            = 5;
         count                 = g_MenuStartStep;
         g_MenuStartStep       = 0xE;
         g_MenuStartReturnStep = count + 1;
     } else if ((*pad & g_InputMasks[MENU_INPUT_CANCEL]) != 0) {
-        SND_PlaySE(EMI_SE_ID(SND_BANK_COMMON, 6));
+        SND_SEPlay(EMI_SE_ID(SND_BANK_COMMON, 6));
         g_MenuStartStep     = 0;
         g_GameEntrySubstate = 1;
     }

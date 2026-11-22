@@ -29,14 +29,14 @@ MATCH void func_801D0CC8(void) {
     D_801DB0CC = g_SndBGMId;
     cues       = g_SelectionSepSlots + g_SndBGMId * 4;
     sequences  = g_SelectionSequences + g_SndBGMId * 4;
-    SND_StopSequence(*cues, *sequences);
-    SND_RequestBGM(BGM_COMMU02);
+    SND_SeqStop(*cues, *sequences);
+    SND_BGMRequest(BGM_COMMU02);
     D_801F294D += 1;
 }
 
 MATCH void func_801D0D54(void) {
     if (EMI_IsReady() != 0) {
-        SND_PlayBGM(BGM_COMMU02, BGM_CUE_LEVEL_DEFAULT, BGM_CUE_SHAPE_DEFAULT);
+        SND_BGMPlay(BGM_COMMU02, BGM_CUE_LEVEL_DEFAULT, BGM_CUE_SHAPE_DEFAULT);
         D_801F294D = 0;
         D_801F294C += 1;
     }
@@ -52,7 +52,7 @@ MATCH void func_801D0DE0(void) {
 
     if (D_801F294E == 0) {
         D_801DB0C4 = 4;
-        SND_PlaySE(EMI_SE_ID(SND_BANK_COMMON, 0x02));
+        SND_SEPlay(EMI_SE_ID(SND_BANK_COMMON, 0x02));
         D_801F294E += 1;
         return;
     }

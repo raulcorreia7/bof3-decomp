@@ -10,7 +10,7 @@ MATCH void func_801F4048(void) {
         case 3:
         case 4:
             g_ScriptVars[0] = 10;
-            SND_PlaySE(EMI_SE_ID(SND_BANK_AREA, 5));
+            SND_SEPlay(EMI_SE_ID(SND_BANK_AREA, 5));
             break;
         case 2:
             g_ScriptVars[0] = 20;

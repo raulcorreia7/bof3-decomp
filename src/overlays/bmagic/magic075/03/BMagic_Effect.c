@@ -37,7 +37,7 @@ MATCH void func_801EEC70(void) {
         dst[i] = src[i];
     }
     g_GfxPalettePending = 1;
-    SND_QueueSelectionSE(0x100);
+    SND_SEQueueSelection(0x100);
 }
 
 MATCH void func_801EEDE0(void) {

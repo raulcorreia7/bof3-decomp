@@ -19,7 +19,7 @@ NON_MATCHING void func_801E4744(void) {
     row_base = D_801ECDBC + (s8)D_801ED7E4 * 0xC;
     cell     = D_801ED7E8 * 0x60 + row_base + (s8)D_801ED7E0;
     if (input & PADLup) {
-        SND_PlaySE(EMI_SE_ID(SND_BANK_COMMON, 0));
+        SND_SEPlay(EMI_SE_ID(SND_BANK_COMMON, 0));
         page = D_801ECDBC + D_801ED7E8 * 0x60;
         do {
             row        = D_801ED7E4 - 1;
@@ -29,7 +29,7 @@ NON_MATCHING void func_801E4744(void) {
             }
         } while (*(page + (s8)D_801ED7E4 * 0xC + (s8)D_801ED7E0) == 0);
     } else if (input & PADLdown) {
-        SND_PlaySE(EMI_SE_ID(SND_BANK_COMMON, 0));
+        SND_SEPlay(EMI_SE_ID(SND_BANK_COMMON, 0));
         page = D_801ECDBC + D_801ED7E8 * 0x60;
         do {
             row        = D_801ED7E4 + 1;
@@ -39,7 +39,7 @@ NON_MATCHING void func_801E4744(void) {
             }
         } while (*(page + (s8)D_801ED7E4 * 0xC + (s8)D_801ED7E0) == 0);
     } else if (input & PADLleft) {
-        SND_PlaySE(EMI_SE_ID(SND_BANK_COMMON, 0));
+        SND_SEPlay(EMI_SE_ID(SND_BANK_COMMON, 0));
         if (*cell != 0 && *cell < 6) {
             D_801ED7E0 = 9;
         } else {
@@ -54,7 +54,7 @@ NON_MATCHING void func_801E4744(void) {
             } while (*(page + (s8)D_801ED7E0) == 0);
         }
     } else if (input & PADLright) {
-        SND_PlaySE(EMI_SE_ID(SND_BANK_COMMON, 0));
+        SND_SEPlay(EMI_SE_ID(SND_BANK_COMMON, 0));
         if (*cell != 0 && *cell < 6) {
             D_801ED7E0 = 0;
         } else {
@@ -75,22 +75,22 @@ NON_MATCHING void func_801E4744(void) {
         switch (*cell) {
             case NAME_ENTRY_NEXT:
                 if (D_801ED7DC < 4) {
-                    SND_PlaySE(EMI_SE_ID(SND_BANK_COMMON, 3));
+                    SND_SEPlay(EMI_SE_ID(SND_BANK_COMMON, 3));
                     D_801ED7DC += 1;
                 } else {
-                    SND_PlaySE(EMI_SE_ID(SND_BANK_COMMON, 7));
+                    SND_SEPlay(EMI_SE_ID(SND_BANK_COMMON, 7));
                 }
                 break;
             case NAME_ENTRY_BACK:
                 if (D_801ED7DC != 0) {
-                    SND_PlaySE(EMI_SE_ID(SND_BANK_COMMON, 3));
+                    SND_SEPlay(EMI_SE_ID(SND_BANK_COMMON, 3));
                     D_801ED7DC -= 1;
                 } else {
-                    SND_PlaySE(EMI_SE_ID(SND_BANK_COMMON, 7));
+                    SND_SEPlay(EMI_SE_ID(SND_BANK_COMMON, 7));
                 }
                 break;
             case NAME_ENTRY_QUIT:
-                SND_PlaySE(EMI_SE_ID(SND_BANK_COMMON, 3));
+                SND_SEPlay(EMI_SE_ID(SND_BANK_COMMON, 3));
                 g_MenuStartStep     = 0;
                 g_GameEntrySubstate = 1;
                 break;
@@ -99,7 +99,7 @@ NON_MATCHING void func_801E4744(void) {
                 break;
             default:
                 D_801ED105 = 0;
-                SND_PlaySE(EMI_SE_ID(SND_BANK_COMMON, 3));
+                SND_SEPlay(EMI_SE_ID(SND_BANK_COMMON, 3));
                 s_CampMenuState[D_801ED7DC] = *cell;
                 if (D_801ED7DC < 4) {
                     D_801ED7DC += 1;
@@ -109,22 +109,22 @@ NON_MATCHING void func_801E4744(void) {
     }
     if ((g_PadStates[0].pressed & PADRright) || (input & (PADR1 | PADR2))) {
         if (D_801ED7DC < 4) {
-            SND_PlaySE(EMI_SE_ID(SND_BANK_COMMON, 1));
+            SND_SEPlay(EMI_SE_ID(SND_BANK_COMMON, 1));
             D_801ED7DC += 1;
         }
     } else if (g_PadStates[0].pressed & PADRleft) {
         if (D_801ED7DC != 0) {
-            SND_PlaySE(EMI_SE_ID(SND_BANK_COMMON, 1));
+            SND_SEPlay(EMI_SE_ID(SND_BANK_COMMON, 1));
             D_801ED7DC -= 1;
         }
     } else if (input & PADL1) {
         if (D_801ED7DC != 0) {
-            SND_PlaySE(EMI_SE_ID(SND_BANK_COMMON, 1));
+            SND_SEPlay(EMI_SE_ID(SND_BANK_COMMON, 1));
             D_801ED7DC -= 1;
         }
     } else if (input & PADL2) {
         if (D_801ED7DC != 0) {
-            SND_PlaySE(EMI_SE_ID(SND_BANK_COMMON, 1));
+            SND_SEPlay(EMI_SE_ID(SND_BANK_COMMON, 1));
             D_801ED7DC -= 1;
         }
     } else {
@@ -134,12 +134,12 @@ NON_MATCHING void func_801E4744(void) {
             if (cell_index != 0 && (s_CampMenuState[cell_index] == 0xFF || s_CampMenuState[cell_index] == 0)) {
                 D_801ED7DC -= 1;
             }
-            SND_PlaySE(EMI_SE_ID(SND_BANK_COMMON, 6));
+            SND_SEPlay(EMI_SE_ID(SND_BANK_COMMON, 6));
             s_CampMenuState[D_801ED7DC] = 0xFF;
             return;
         }
         if (g_PadStates[0].pressed & PADstart) {
-            SND_PlaySE(EMI_SE_ID(SND_BANK_COMMON, 5));
+            SND_SEPlay(EMI_SE_ID(SND_BANK_COMMON, 5));
             count = 5;
             for (slot = 4; slot >= 0; slot--) {
                 if (s_CampMenuState[slot] != 0xFF) {

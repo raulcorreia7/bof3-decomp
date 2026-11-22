@@ -72,10 +72,10 @@ MATCH void func_801D8DC8(void) {
     D_801ED891 = g_BattleListCursor;
     D_801ED890 = g_UiPanelTasks[17].unk_0A;
     if (old != panel->unk_0B) {
-        SND_PlaySE(EMI_SE_ID(SND_BANK_COMMON, 0));
+        SND_SEPlay(EMI_SE_ID(SND_BANK_COMMON, 0));
     }
     if (g_PadStates[0].pressed & g_InputMasks[MENU_INPUT_CANCEL]) {
-        SND_PlaySE(EMI_SE_ID(SND_BANK_COMMON, 6));
+        SND_SEPlay(EMI_SE_ID(SND_BANK_COMMON, 6));
         D_80148597                                     = 1;
         g_UiPanelTasks[MENU_START_PANEL_CURSOR].active = 0;
         D_80148654                                     = 7;

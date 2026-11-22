@@ -8,14 +8,14 @@ MATCH void PlChar_ReleaseSpawnedActor(void) {
     if (g_Task->unk_0A != 0) {
         g_Task->unk_0A--;
         if (g_Task->unk_0A == 0) {
-            /* FAKE: retail reads SND_PlaySE as void(s32). */
-            ((void (*)(s32))SND_PlaySE)(g_Task->unk_2C + EMI_SE_ID(SND_BANK_COMMON, 0));
+            /* FAKE: retail reads SND_SEPlay as void(s32). */
+            ((void (*)(s32))SND_SEPlay)(g_Task->unk_2C + EMI_SE_ID(SND_BANK_COMMON, 0));
             g_SpawnedActors[g_Task->param.actor_slot].unk_08 = g_Task->direction;
             if (g_Task->option_flags == 0) {
                 g_Task->option_flags = ACTOR_OPT_HIDDEN_ON_SPAWN;
             }
             g_SpawnedActors[g_Task->param.actor_slot].unk_0A = g_Task->option_flags;
-            SND_PlaySE(EMI_SE_ID(SND_BANK_COMMON, 11));
+            SND_SEPlay(EMI_SE_ID(SND_BANK_COMMON, 11));
         }
     }
 }

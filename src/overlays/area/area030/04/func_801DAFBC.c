@@ -4,8 +4,8 @@
  * and advances the sub-state to 2, then runs the shared world update. */
 MATCH void func_801DAFBC(void) {
     if (D_80144199 == 3) {
-        SND_StopSequence(0, 0);
-        SND_PlayBGM(0x29, 0x64, 8);
+        SND_SeqStop(0, 0);
+        SND_BGMPlay(0x29, 0x64, 8);
         func_801DDE94(2);
         D_8014420D += 1;
         FISHING_STATE->step_timer = 0;

@@ -135,7 +135,7 @@ MATCH void func_801F8CE4(void) {
             }
             UI_ModeSet(1);
             g_AreaDrawFlags = 0x1F;
-            SND_RequestBGM(0x8C);
+            SND_BGMRequest(0x8C);
             g_ScenarioState.step_05 = 0x18;
             break;
         case 24:

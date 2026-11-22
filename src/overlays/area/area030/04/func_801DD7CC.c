@@ -7,7 +7,7 @@ MATCH void func_801DD7CC(void) {
     UI_TextDraw(29, 20, 0, TEXT_LENGTH_MAX, MESSAGE_TABLE_TEXT(AREA_MESSAGE_TABLE, FISHING_MESSAGE_HOW_TO_PAGE_HINT));
     if ((D_80144281 == 0xE) && (D_80144288 == 0)) {
         if (g_PadStates[0].pressed & g_InputMasks[FISHING_INPUT_CANCEL]) {
-            SND_PlaySE(EMI_SE_ID(SND_BANK_COMMON, 6));
+            SND_SEPlay(EMI_SE_ID(SND_BANK_COMMON, 6));
             FISHING_STATE->flag_04   = 0;
             FISHING_STATE->sub_index = (FISHING_STATE->sub_index - 1);
             return;

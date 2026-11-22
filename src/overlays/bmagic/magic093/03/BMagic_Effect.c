@@ -65,7 +65,7 @@ MATCH void func_801EED04(void) {
         *dst++ = *src++ | PSX_COLOR_STP_BIT;
     }
     g_GfxPalettePending = 1;
-    SND_QueueSelectionSE(EMI_SE_ID(SND_BANK_COMMON, 0x00));
+    SND_SEQueueSelection(EMI_SE_ID(SND_BANK_COMMON, 0x00));
 }
 
 /* Starts the effect once bytes 0x09 and 0x0B of the work record are both zero. */
@@ -327,7 +327,7 @@ MATCH void func_801EFEDC(void) {
                     id = EMI_SE_ID(SND_BANK_COMMON, 0x03);
                     break;
             }
-            SND_QueueSelectionSE(id);
+            SND_SEQueueSelection(id);
         }
         g_Task->param.unk_0B = 0x10;
         g_Task->unk_09       = 0;

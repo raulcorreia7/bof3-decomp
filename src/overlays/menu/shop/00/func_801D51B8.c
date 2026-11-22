@@ -26,7 +26,7 @@ MATCH void func_801D51B8(void) {
                 return;
             }
         }
-        SND_PlaySE(EMI_SE_ID(SND_BANK_COMMON, 7));
+        SND_SEPlay(EMI_SE_ID(SND_BANK_COMMON, 7));
     }
     g_MenuStep.state = 0xC;
 }

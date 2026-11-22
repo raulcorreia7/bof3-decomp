@@ -35,7 +35,7 @@ MATCH s32 PlChar_ProbeCellSpawn(s16 x, s16 y) {
         }
         D_801490E4[0] = 0;
         if (Item_Add(ITEM_CATEGORY_ITEM, ITEM_HORSERADISH, 1, 0) & BYTE_MASK) {
-            SND_PlaySE(EMI_SE_ID(SND_BANK_COMMON, 6));
+            SND_SEPlay(EMI_SE_ID(SND_BANK_COMMON, 6));
             UI_MessageRequest(MSG_SYSTEM_FOUND_ITEM);
         } else {
             UI_MessageRequest(MSG_SYSTEM_FOUND_ITEM_NO_ROOM);

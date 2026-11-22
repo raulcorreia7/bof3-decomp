@@ -4,7 +4,7 @@ MATCH void func_801F2F40(void) {
     if (g_AreaCameraOffsetZ < 0x880) {
         D_80147AD0      = 1;
         g_ScriptVars[0] = 10;
-        SND_PlaySE(1);
+        SND_SEPlay(1);
         g_Task->unk_04++;
     }
     func_801F3140(-4);

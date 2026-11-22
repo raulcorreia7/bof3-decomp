@@ -208,7 +208,7 @@ g_EmiSectorCursor = { addr = 0x80146808, source = "Current sector of the EMI str
 g_EmiServiceState = { addr = 0x8014682D, type = "u8", source = "func_801638B0 sets 1/8 in the read loop and func_80163EA0 returns == 0 func_80163AF0/80163C58/80163D20 set 4/6/7" }
 g_SndCDVolume = { addr = 0x80146830, type = "u8", source = "SND_SetCDVolume latches the level; SND_FadeCDVolume steps it toward the requested level" }
 g_SndCDMix = { addr = 0x8014683C, type = "CdlATV", size = 4, source = "Api:CdMix SND_SetCDVolume fills the four attenuator bytes." }
-g_EmiStreamMode = { addr = 0x80146840, source = "EMI_Update runs EMI_UpdateStream for 1 and SND_UpdateXA for 2" }
+g_EmiStreamMode = { addr = 0x80146840, source = "EMI_Update runs EMI_UpdateStream for 1 and SND_XAUpdate for 2" }
 g_EmiStreamFlags = { addr = 0x80146854, source = "Flags of the EMI stream." }
 g_ScriptVars = { addr = 0x80146864, type = "u8", size = 0x4, source = "Script variables." }
 g_ScriptVarsWord = { addr = 0x80146864, type = "u32", alias = true, source = "The four script variable bytes of g_ScriptVars read and cleared as one word." }
@@ -243,13 +243,13 @@ D_80148650 = { addr = 0x80148650, alias = true, source = "Byte of g_MenuStep rea
 D_80148651 = { addr = 0x80148651, alias = true, source = "Byte of g_MenuStep read as a symbol of its own." }
 D_80148652 = { addr = 0x80148652, alias = true, source = "Byte of g_MenuStep read as a symbol of its own." }
 D_8014865C = { addr = 0x8014865C, source = "Font-state param." }
-g_SndBankSe = { addr = 0x801486A0, size = 0x364, source = "The SE tables of the seven sound banks, 124 bytes each; the SE readers of SND_ReadSeBank0 to SND_ReadSeBank6 read them." }
+g_SndBankSe = { addr = 0x801486A0, size = 0x364, source = "The SE tables of the seven sound banks, 124 bytes each; the SE readers of SND_SEReadBank0 to SND_SEReadBank6 read them." }
 g_SndBankHeaders = { addr = 0x80148A18, size = 0x1C, source = "The address of each sound bank's VAB header; SND_SetBankLayout lays the banks end to end and the SE readers resolve tones through it." }
 g_SndBankSequences = { addr = 0x80148A34, size = 0x1C, source = "The address of each sound bank's sequence data, right after its VAB header; SND_SetBankLayout stores it." }
 g_SndVabIds = { addr = 0x80148FB0, type = "s8", size = 0x7, source = "SND_Init seeds slot i with i and SND_Exit passes each to SsVabClose" }
 g_SelectionEffectVoices = { addr = 0x80148FC0, type = "s8", source = "Voices of the selection sound effects." }
 g_SndVoiceVolume = { addr = 0x80148FC8, type = "s8", size = 0x18, source = "SND_StartVolumeSweep passes [voice] to SsUtAutoVol as the start level and stores the target back" }
-g_SndVoiceTargetVolume = { addr = 0x80148FF8, type = "u8", size = 0x18, source = "SND_StartVolumeSweep passes [voice] as the end level; SND_DecreaseVoiceTargetVolume lowers it clamped at zero" }
+g_SndVoiceTargetVolume = { addr = 0x80148FF8, type = "u8", size = 0x18, source = "SND_StartVolumeSweep passes [voice] as the end level; SND_VoiceDecreaseTargetVolume lowers it clamped at zero" }
 g_UiMessageState = { addr = 0x801490A0, source = "State of the message window." }
 g_UiWindowStep = { addr = 0x801490A1, type = "u8", source = "Step of the window script." }
 g_UiMessageChoiceMode = { addr = 0x801490A2, source = "Mode of the message choice." }
@@ -595,40 +595,40 @@ Actor_SpawnHelper = { addr = 0x8015CC00, type = "func", source = "Creates a help
 SND_Init = { addr = 0x8015CD00, type = "func", source = "Initializes the sound system." }
 SND_Start = { addr = 0x8015CE70, type = "func", source = "Starts the sound system." }
 SND_Exit = { addr = 0x8015CEBC, type = "func", source = "Shuts down the sound system." }
-SND_UpdateVoiceStatus = { addr = 0x8015D044, type = "func", source = "Updates the status of the sound voices." }
-SND_DecreaseVoiceTargetVolume = { addr = 0x8015D104, type = "func", source = "Subtracts from a voice target volume and clamps it at zero." }
-SND_LowerVoiceLevel = { addr = 0x8015D148, type = "func", source = "Lowers a voice level." }
-SND_RaiseVoiceLevel = { addr = 0x8015D1BC, type = "func", source = "Raises a voice level." }
+SND_VoiceUpdateStatus = { addr = 0x8015D044, type = "func", source = "Updates the status of the sound voices." }
+SND_VoiceDecreaseTargetVolume = { addr = 0x8015D104, type = "func", source = "Subtracts from a voice target volume and clamps it at zero." }
+SND_VoiceLowerLevel = { addr = 0x8015D148, type = "func", source = "Lowers a voice level." }
+SND_VoiceRaiseLevel = { addr = 0x8015D1BC, type = "func", source = "Raises a voice level." }
 SND_StartVolumeSweep = { addr = 0x8015D228, type = "func", source = "starts a volume sweep from g_SndVoiceVolume to g_SndVoiceTargetVolume on the voice" }
 SND_StartPanSweep = { addr = 0x8015D290, type = "func", source = "Starts a pan sweep on a voice." }
-SND_PlaySequence = { addr = 0x8015D300, type = "func", source = "Starts the BGM's effect voice through SsSepPlay after the volume/duck setup." }
-SND_StopSequence = { addr = 0x8015D404, type = "func", source = "Stops a sound sequence." }
-SND_SetSequenceVolume = { addr = 0x8015D438, type = "func", source = "Sets the volume of a sound sequence." }
-SND_FadeInSequence = { addr = 0x8015D49C, type = "func", source = "Pins the SsSepVol pair and forwards the effect group and id to SsSepSetCrescendo." }
+SND_SeqPlay = { addr = 0x8015D300, type = "func", source = "Starts the BGM's effect voice through SsSepPlay after the volume/duck setup." }
+SND_SeqStop = { addr = 0x8015D404, type = "func", source = "Stops a sound sequence." }
+SND_SeqSetVolume = { addr = 0x8015D438, type = "func", source = "Sets the volume of a sound sequence." }
+SND_SeqFadeIn = { addr = 0x8015D49C, type = "func", source = "Pins the SsSepVol pair and forwards the effect group and id to SsSepSetCrescendo." }
 SND_StartDecrescendo = { addr = 0x8015D4F8, type = "func", source = "Starts a decrescendo on a sound sequence." }
-SND_FadeOutSequence = { addr = 0x8015D554, type = "func", source = "Fades out a sound sequence." }
-SND_StopAllSequences = { addr = 0x8015D5D8, type = "func", source = "Stops all four voices of every live selection effect." }
-SND_TestEffectVoicesBusy = { addr = 0x8015D660, type = "func", source = "Returns 1 when no effect voice is free; otherwise returns 0 and writes the entry index and seq of the first voice of the sep table whose seq slot reports end-of-sequence." }
-SND_QueueSelectionSE = { addr = 0x8015D71C, type = "func", source = "Marks the four effect voice slots free and queues the SE through SND_PlaySE." }
-SND_QueueSeVolume = { addr = 0x8015D7C8, type = "func", source = "Queues a sound SE with its volume." }
+SND_SeqFadeOut = { addr = 0x8015D554, type = "func", source = "Fades out a sound sequence." }
+SND_SeqStopAll = { addr = 0x8015D5D8, type = "func", source = "Stops all four voices of every live selection effect." }
+SND_VoiceTestEffectsBusy = { addr = 0x8015D660, type = "func", source = "Returns 1 when no effect voice is free; otherwise returns 0 and writes the entry index and seq of the first voice of the sep table whose seq slot reports end-of-sequence." }
+SND_SEQueueSelection = { addr = 0x8015D71C, type = "func", source = "Marks the four effect voice slots free and queues the SE through SND_SEPlay." }
+SND_SEQueueVolume = { addr = 0x8015D7C8, type = "func", source = "Queues a sound SE with its volume." }
 Actor_PlayCueByDistance = { addr = 0x8015D820, type = "func", source = "Plays the cue and sets the sound level when the point D_80145EC6/D_80145ECA lies within a range band of the actor; script op caller passes the cue and actor index." }
-SND_QueueProximitySE = { addr = 0x8015DC08, type = "func", source = "Plays the proximity SE of the area." }
-SND_PlaySE = { addr = 0x8015DF18, type = "func", source = "Dispatches a SE's bank and record, updates the interpolated channel values and keys the requested voices." }
-SND_ReadSeBank0 = { addr = 0x8015E994, type = "func", source = "Reads a SE of sound bank 0 into voice slots (entry 0 of g_SndSeReaders)." }
-SND_ReadSeBank1 = { addr = 0x8015EFAC, type = "func", source = "Reads a SE of sound bank 1 into voice slots (entry 1 of g_SndSeReaders)." }
-SND_ReadSeBank2 = { addr = 0x8015F5C8, type = "func", source = "Reads a SE of sound bank 2 into voice slots (entry 2 of g_SndSeReaders)." }
-SND_ReadSeBank3 = { addr = 0x8015FBE4, type = "func", source = "Reads a SE of sound bank 3 into voice slots (entry 3 of g_SndSeReaders)." }
-SND_ReadSeBank4 = { addr = 0x80160200, type = "func", source = "Reads a SE of sound bank 4 into voice slots (entry 4 of g_SndSeReaders)." }
-SND_ReadSeBank5 = { addr = 0x8016081C, type = "func", source = "Reads a SE of sound bank 5 into voice slots (entry 5 of g_SndSeReaders)." }
-SND_ReadSeBank6 = { addr = 0x80160E38, type = "func", source = "Reads a SE of sound bank 6 into voice slots (entry 6 of g_SndSeReaders)." }
+SND_SEQueueProximity = { addr = 0x8015DC08, type = "func", source = "Plays the proximity SE of the area." }
+SND_SEPlay = { addr = 0x8015DF18, type = "func", source = "Dispatches a SE's bank and record, updates the interpolated channel values and keys the requested voices." }
+SND_SEReadBank0 = { addr = 0x8015E994, type = "func", source = "Reads a SE of sound bank 0 into voice slots (entry 0 of g_SndSeReaders)." }
+SND_SEReadBank1 = { addr = 0x8015EFAC, type = "func", source = "Reads a SE of sound bank 1 into voice slots (entry 1 of g_SndSeReaders)." }
+SND_SEReadBank2 = { addr = 0x8015F5C8, type = "func", source = "Reads a SE of sound bank 2 into voice slots (entry 2 of g_SndSeReaders)." }
+SND_SEReadBank3 = { addr = 0x8015FBE4, type = "func", source = "Reads a SE of sound bank 3 into voice slots (entry 3 of g_SndSeReaders)." }
+SND_SEReadBank4 = { addr = 0x80160200, type = "func", source = "Reads a SE of sound bank 4 into voice slots (entry 4 of g_SndSeReaders)." }
+SND_SEReadBank5 = { addr = 0x8016081C, type = "func", source = "Reads a SE of sound bank 5 into voice slots (entry 5 of g_SndSeReaders)." }
+SND_SEReadBank6 = { addr = 0x80160E38, type = "func", source = "Reads a SE of sound bank 6 into voice slots (entry 6 of g_SndSeReaders)." }
 SND_SetBankLayout = { addr = 0x80161808, type = "func", source = "Lays the seven sound banks of the given layout row (header size, sequence size and SPU address each) end to end from the sound heap base: stores each bank's header and sequence addresses in g_SndBankHeaders and g_SndBankSequences and its SPU address, header, sequence buffer and number in g_EmiBanks." }
-SND_StartBGM = { addr = 0x80161B24, type = "func", source = "Waits for the loader then starts the requested BGM's cue." }
-SND_RequestBGM = { addr = 0x80161BBC, type = "func", source = "Starts the background music if it changed." }
-SND_PlayBGM = { addr = 0x80161C20, type = "func", source = "Starts the background music cue." }
-SND_FadeOutBGM = { addr = 0x80161CD0, type = "func", source = "Fades out the background music." }
-SND_PauseBGM = { addr = 0x80161D20, type = "func", source = "Pauses the sequence player for the selected entry." }
-SND_ResumeBGM = { addr = 0x80161D74, type = "func", source = "Replays the selected entry's sequence." }
-SND_InstallSequenceFuncs = { addr = 0x80161DC8, type = "func", source = "fills SsFCALL, the libsnd note, program, pitch bend, meta event and control-change handler table" }
+SND_BGMStart = { addr = 0x80161B24, type = "func", source = "Waits for the loader then starts the requested BGM's cue." }
+SND_BGMRequest = { addr = 0x80161BBC, type = "func", source = "Starts the background music if it changed." }
+SND_BGMPlay = { addr = 0x80161C20, type = "func", source = "Starts the background music cue." }
+SND_BGMFadeOut = { addr = 0x80161CD0, type = "func", source = "Fades out the background music." }
+SND_BGMPause = { addr = 0x80161D20, type = "func", source = "Pauses the sequence player for the selected entry." }
+SND_BGMResume = { addr = 0x80161D74, type = "func", source = "Replays the selected entry's sequence." }
+SND_SeqInstallFuncs = { addr = 0x80161DC8, type = "func", source = "fills SsFCALL, the libsnd note, program, pitch bend, meta event and control-change handler table" }
 EMI_Init = { addr = 0x80161F58, type = "func", source = "CdInit loop, VSync(3), clears the 24 callback states" }
 EMI_ArchiveLoad = { addr = 0x80161FDC, type = "func", source = "Latch slot id, reset ring, install CD callbacks." }
 EMI_ArchiveGetSector = { addr = 0x80162160, type = "func", source = "Returns the disc sector of an EMI file." }
@@ -662,10 +662,10 @@ EMI_SectorDecompress = { addr = 0x80163238, type = "func", source = "Reads a sec
 EMI_SectorCopyToScratchpad = { addr = 0x8016327C, type = "func", source = "Stages a sector of the EMI stream." }
 EMI_SectorUploadImage = { addr = 0x80163378, type = "func", source = "Uploads a sector of the EMI stream to video memory." }
 EMI_VabUploadBody = { addr = 0x80163418, type = "func", source = "Transfers the body of a sound bank to the SPU." }
-SND_StartXAStream = { addr = 0x801636A0, type = "func", source = "Starts loading an overlay." }
-SND_ResolveXAStream = { addr = 0x80163744, type = "func", source = "Resolves one loader entry from its packed key and latches the base and scaled entry bounds." }
-SND_StoreXASyncResult = { addr = 0x80163858, type = "func", source = "Callback that reads the result of an XA stream command." }
-SND_UpdateXA = { addr = 0x801638B0, type = "func", source = "Runs the current XA audio state." }
+SND_XAStartStream = { addr = 0x801636A0, type = "func", source = "Starts loading an overlay." }
+SND_XAResolveStream = { addr = 0x80163744, type = "func", source = "Resolves one loader entry from its packed key and latches the base and scaled entry bounds." }
+SND_XASetSyncResult = { addr = 0x80163858, type = "func", source = "Callback that reads the result of an XA stream command." }
+SND_XAUpdate = { addr = 0x801638B0, type = "func", source = "Runs the current XA audio state." }
 SND_XAStateIdle = { addr = 0x801639B8, type = "func", source = "XA audio state: idle." }
 SND_XAStateSeek = { addr = 0x801639D0, type = "func", source = "XA audio state: seeking." }
 SND_XAStateSeekResult = { addr = 0x80163A54, type = "func", source = "State 2, negative status retries state 1 or moves to 8, success goes to state 3." }
@@ -675,8 +675,8 @@ SND_XAStateReadResult = { addr = 0x80163C58, type = "func", source = "XA audio s
 SND_XAStatePause = { addr = 0x80163D20, type = "func", source = "State 6, issues CdlPause, accepted goes to state 7." }
 SND_XAStatePauseResult = { addr = 0x80163D80, type = "func", source = "State 7, negative retries state 6 or 8, success resets to state 0 and sets progress 3." }
 SND_XAStateWaitSync = { addr = 0x80163E3C, type = "func", source = "State 8, waits for CdSync, completion returns to state 6." }
-SND_HasXACDError = { addr = 0x80163E88, type = "func", source = "Tells whether the CD reported an error." }
-SND_IsXAIdle = { addr = 0x80163EA0, type = "func", source = "Tells whether the CD is idle." }
+SND_XAHasCDError = { addr = 0x80163E88, type = "func", source = "Tells whether the CD reported an error." }
+SND_XAIsIdle = { addr = 0x80163EA0, type = "func", source = "Tells whether the CD is idle." }
 SND_SetCDVolume = { addr = 0x80163EB0, type = "func", source = "Latches the level and halves the four CdMix output bytes when the mode flag is set." }
 SND_FadeCDVolume = { addr = 0x80163F50, type = "func", source = "Steps the latched level toward the requested level through SND_SetCDVolume." }
 LZ77_DecodeBegin = { addr = 0x80164028, type = "func", source = "Starts decoding an EMI entry." }

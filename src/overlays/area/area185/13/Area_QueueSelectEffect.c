@@ -2,5 +2,5 @@
 
 /* func_801F3328 */
 MATCH void Area_QueueSelectEffect(void) {
-    SND_QueueSelectionSE(0x201);
+    SND_SEQueueSelection(0x201);
 }

@@ -98,13 +98,13 @@ MATCH void func_801F87C4(void) {
             if (*progress == 0x2C) {
                 g_ScenarioState.step_05 = 0x1D;
                 *progress               = 0x2D;
-                SND_StopSequence(0, 2);
+                SND_SeqStop(0, 2);
             }
             break;
         }
         case 29:
             if (g_ScriptVars[0] == 0x32) {
-                SND_PlayBGM(0x39, 0x64, 8);
+                SND_BGMPlay(0x39, 0x64, 8);
                 g_ScenarioState.step_05 = 0x1F;
             }
             break;
@@ -112,7 +112,7 @@ MATCH void func_801F87C4(void) {
             break;
         case 31:
             if (g_ScriptVars[0] == 0x50) {
-                SND_StopSequence(0, 1);
+                SND_SeqStop(0, 1);
                 UI_ModeSet(0xD);
                 g_ScenarioState.step_05 = 0x20;
             }
@@ -122,7 +122,7 @@ MATCH void func_801F87C4(void) {
                 break;
             }
             g_AreaDrawFlags = 0;
-            SND_PlaySequence(0, 3, 0x64, 0x64);
+            SND_SeqPlay(0, 3, 0x64, 0x64);
             SCENARIO_MESSAGE_WAIT(MSG_SCENA05_019, 0x21);
             break;
         case 33:

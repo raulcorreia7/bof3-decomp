@@ -518,8 +518,8 @@ MATCH void func_801F817C(void) {
             if (SYS_TestFlag(g_SceneFlags, 3) == 0) {
                 SYS_SetFlag(g_SceneFlags, 3);
                 g_ScriptVarsWord = 0;
-                SND_FadeOutBGM(g_SndBGMId, 0x64, 8);
-                SND_PlayBGM(0x3F, 0x64, 8);
+                SND_BGMFadeOut(g_SndBGMId, 0x64, 8);
+                SND_BGMPlay(0x3F, 0x64, 8);
                 Game_SetScriptActive();
                 g_ScenarioState.state_04 = 1;
                 g_ScenarioState.step_05  = 7;

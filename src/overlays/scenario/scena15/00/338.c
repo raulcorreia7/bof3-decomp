@@ -569,7 +569,7 @@ MATCH void func_801F8AA0(void) {
         if (!(g_Task->unk_06 & 0x4)) {
             cue = 0x207;
         }
-        SND_PlaySE(cue);
+        SND_SEPlay(cue);
     }
 }
 
@@ -641,7 +641,7 @@ MATCH void func_801F8EA8(void) {
         if (!(g_Task->unk_06 & 0x4)) {
             cue = 0x208;
         }
-        SND_PlaySE(cue);
+        SND_SEPlay(cue);
     }
 }
 
@@ -851,9 +851,7 @@ NON_MATCHING void func_801F97CC(WorldPos* pos, s32* arg) {
     FAKE_BARRIER(); /* FAKE: keep the point stores before the call setup. */
     Camera_ProjectPoint(point, (DVECTOR*)&poly->x3);
 
-    poly->r0 = (g_Task->unk_06 & 2) != 0 ? 0x80 : 0;
-    poly->b0 = 0;
-    poly->g0 = (g_Task->unk_06 & 2) == 0 ? 0x80 : 0;
+    setRGB0(poly, (g_Task->unk_06 & 2) != 0 ? 0x80 : 0, (g_Task->unk_06 & 2) == 0 ? 0x80 : 0, 0);
     Area_CellAddPrim(pos->x.fixed, pos->y.fixed, 0, sizeof(POLY_F4));
 }
 #else

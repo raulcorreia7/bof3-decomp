@@ -20,6 +20,6 @@ MATCH void func_801E54A4(void) {
         goto queue_cue;
     }
 queue_cue:
-    SND_PlaySE(EMI_SE_ID(SND_BANK_COMMON, 7));
+    SND_SEPlay(EMI_SE_ID(SND_BANK_COMMON, 7));
     g_MenuStartStep = 0xD;
 }

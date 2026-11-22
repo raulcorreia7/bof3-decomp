@@ -110,7 +110,7 @@ MATCH void func_801F8F34(void) {
             if (g_ScriptVars[0] != 0xA) {
                 break;
             }
-            SND_PlayBGM(0x14, 0x64, 8);
+            SND_BGMPlay(0x14, 0x64, 8);
             g_ScenarioState.step_05 = 0x12;
             break;
         case 18:
@@ -149,8 +149,8 @@ MATCH void func_801F8F34(void) {
             if (g_ScriptVars[0] != 0x18) {
                 break;
             }
-            SND_StopSequence(0, 1);
-            SND_PlayBGM(0x13, 0x64, 8);
+            SND_SeqStop(0, 1);
+            SND_BGMPlay(0x13, 0x64, 8);
             g_ScratchPad.cells.bytes[0] = Actor_FindFreeSpawned();
             if (g_ScratchPad.cells.bytes[0] == GAME_NONE) {
                 break;

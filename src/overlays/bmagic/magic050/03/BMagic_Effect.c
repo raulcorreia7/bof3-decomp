@@ -35,7 +35,7 @@ MATCH void func_801EEC70(void) {
         g_Task->param.unk_0B += 1;
         i++;
     } while (i < 10);
-    SND_QueueSelectionSE(0x100);
+    SND_SEQueueSelection(0x100);
 }
 
 MATCH void func_801EEDF8(void) {
@@ -61,7 +61,7 @@ MATCH void func_801EEDF8(void) {
     } else {
         cue = 0x102;
     block_7:
-        SND_QueueSelectionSE(cue);
+        SND_SEQueueSelection(cue);
     }
     timer_next     = g_Task->unk_09 + 1;
     g_Task->unk_09 = timer_next;

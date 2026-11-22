@@ -15,7 +15,7 @@ MATCH void func_801F8050(void) {
         if (phase != 1) {
             if (phase < 2 && phase == 0) {
                 if (!SYS_TestFlag(g_SceneFlags, 0x3A)) {
-                    SND_RequestBGM(0);
+                    SND_BGMRequest(0);
                     while (!EMI_IsReady()) {
                         SYS_ThreadWait(1);
                     }
@@ -44,7 +44,7 @@ MATCH void func_801F8050(void) {
                 }
                 break;
             case 1:
-                SND_RequestBGM(8);
+                SND_BGMRequest(8);
                 while (!EMI_IsReady()) {
                     SYS_ThreadWait(1);
                 }
@@ -86,7 +86,7 @@ MATCH void func_801F8050(void) {
                 break;
             case 3:
                 if (!SYS_TestFlag(g_SceneFlags, 5)) {
-                    SND_StopSequence(0, 0);
+                    SND_SeqStop(0, 0);
                     g_ScenarioState.step_05  = 0xA;
                     g_ScenarioState.state_04 = 6;
                 }
@@ -94,7 +94,7 @@ MATCH void func_801F8050(void) {
             case 4:
                 SCRIPT_VARS_CLEAR_ALL();
                 g_ScenarioState.timer_06 = 0;
-                SND_StopSequence(0, 0);
+                SND_SeqStop(0, 0);
                 g_AreaDrawFlags = 0x1F;
                 break;
         }
@@ -216,7 +216,7 @@ MATCH void func_801F8050(void) {
                 break;
             case 1:
                 if (!SYS_TestFlag(g_SceneFlags, 0xA)) {
-                    SND_StopSequence(0, 0);
+                    SND_SeqStop(0, 0);
                     g_ScenarioState.step_05  = 0x13;
                     g_ScenarioState.state_04 = 8;
                 }

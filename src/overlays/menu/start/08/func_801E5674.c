@@ -4,7 +4,7 @@ MATCH void func_801E5674(void) {
     s8 count;
 
     if (g_MenuStartTimer == 4) {
-        SND_PlaySE(EMI_SE_ID(SND_BANK_COMMON, 2));
+        SND_SEPlay(EMI_SE_ID(SND_BANK_COMMON, 2));
     }
     Menu_DrawClutStrip(D_80144953);
     MENU_DRAW_HEADER();

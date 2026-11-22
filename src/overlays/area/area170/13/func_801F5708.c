@@ -13,7 +13,7 @@ MATCH void func_801F5708(void) {
         SYS_SetFlag(g_SceneEventFlags, 121);
         Script_Select(1);
         UI_MessageStartArea(MSG_AREA170_FOUND_HE_SHELLS);
-        SND_PlaySE(EMI_SE_ID(SND_BANK_COMMON, 6));
+        SND_SEPlay(EMI_SE_ID(SND_BANK_COMMON, 6));
         goto done;
     }
     UI_MessageRequest(request);

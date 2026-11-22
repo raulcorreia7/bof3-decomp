@@ -144,7 +144,7 @@ MATCH void func_801F9F0C(void) {
             if (*progress != 2) {
                 break;
             }
-            SND_PlaySE(0x20C);
+            SND_SEPlay(0x20C);
             *progress               = 0;
             g_ScriptVars[2]         = 4;
             g_ScriptVars[1]         = 6;
@@ -235,7 +235,7 @@ MATCH void func_801F9F0C(void) {
             if (g_ScriptVars[0] != 4) {
                 break;
             }
-            SND_FadeOutSequence(0, 1, 4, 0x1E);
+            SND_SeqFadeOut(0, 1, 4, 0x1E);
             UI_ModeSet(0xD);
             g_ScenarioState.step_05 = 0x14;
             break;

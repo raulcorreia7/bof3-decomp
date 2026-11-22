@@ -7,7 +7,7 @@ MATCH s32 func_801F2CE4(void) {
     tick          = g_Task->timer;
     g_Task->timer = tick + 1;
     if (tick == 0) {
-        SND_PlaySE(EMI_SE_ID(SND_BANK_AREA, 0x00));
+        SND_SEPlay(EMI_SE_ID(SND_BANK_AREA, 0x00));
     }
     Trail_Update((Trail*)AREA_WORK);
     Trail_Draw(MEM_PTR(Trail, AREA_WORK));

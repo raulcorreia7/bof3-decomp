@@ -127,19 +127,19 @@ MATCH void func_801F9320(void) {
             if (g_ScriptVars[0] != 1) {
                 break;
             }
-            SND_PauseBGM(g_SndBGMId);
-            SND_StartXAStream(2, 1);
+            SND_BGMPause(g_SndBGMId);
+            SND_XAStartStream(2, 1);
             Item_VitalAdd(VITAL_ITEM_CARD_KEY_B);
             SCENARIO_MESSAGE_WAIT(MSG_SCENA14_029, 0x20);
             break;
         case 32:
-            if (SND_IsXAIdle() == 0) {
+            if (SND_XAIsIdle() == 0) {
                 break;
             }
             if (g_GameStateIndex == GAME_REQUEST_MESSAGE) {
                 break;
             }
-            SND_ResumeBGM(g_SndBGMId);
+            SND_BGMResume(g_SndBGMId);
             g_ScenarioState.step_05 = 0x21;
             g_ScriptVars[0]++;
             break;

@@ -40,7 +40,7 @@ MATCH void func_801EEDA0(void) {
         dst += 1;
     }
     g_GfxPalettePending = 1;
-    SND_QueueSelectionSE(EMI_SE_ID(SND_BANK_COMMON, 0));
+    SND_SEQueueSelection(EMI_SE_ID(SND_BANK_COMMON, 0));
     g_Task->facing    = g_BattleEffectBattler->facing;
     work              = g_Task;
     battler           = g_BattleEffectBattler;
@@ -83,7 +83,7 @@ MATCH void func_801EEF44(void) {
         return;
     }
     g_Task->header.mode += 1;
-    SND_QueueSelectionSE(EMI_SE_ID(SND_BANK_COMMON, 0x01));
+    SND_SEQueueSelection(EMI_SE_ID(SND_BANK_COMMON, 0x01));
     slot                               = Battle_AllocEffect(1, 7) & BYTE_MASK;
     g_BattleEffects[slot].header.mode  = 0;
     g_BattleEffects[slot].unk_08       = g_BattleEffectBattler->facing;
@@ -376,7 +376,7 @@ MATCH void func_801EFE70(void) {
     timer              = timer_task->unk_09 - 1;
     timer_task->unk_09 = timer;
     if (timer == 0) {
-        SND_QueueSelectionSE(EMI_SE_ID(SND_BANK_COMMON, 2));
+        SND_SEQueueSelection(EMI_SE_ID(SND_BANK_COMMON, 2));
         position_task              = g_Task;
         x                          = g_AreaScrollTargetX;
         x_offset                   = position_task->unk_0C;

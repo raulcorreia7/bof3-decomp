@@ -37,8 +37,8 @@ MATCH void PlChar_WalkStep(void) {
         if (SP_REF(u8, 0x0u) != 0 && dist >= 65 && COORD_INT(g_Task->pos.z) < Area_HeightRead(x, y)) {
             g_Task->unk_2B = 0;
         }
-        /* FAKE: retail reads SND_PlaySE as void(s32). */
-        ((void (*)(s32))SND_PlaySE)(g_Task->unk_2C + 0x100);
+        /* FAKE: retail reads SND_SEPlay as void(s32). */
+        ((void (*)(s32))SND_SEPlay)(g_Task->unk_2C + 0x100);
         Script_Request((g_Task->direction - 1) / 2 + 0x42);
         g_Task->unk_0A = 5;
     }

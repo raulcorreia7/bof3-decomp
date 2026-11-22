@@ -23,18 +23,18 @@ MATCH void func_801F8F18(void) {
                 Char_RebuildPartyStats();
                 g_ScenarioState.step_05 = 3;
                 SYS_SetFlag(g_SceneFlags, 0x11);
-                SND_FadeOutSequence(0, 0, 4, 0x1E);
+                SND_SeqFadeOut(0, 0, 4, 0x1E);
             }
             break;
         case 3:
             if (WINDOW_EFFECT_IDLE()) {
                 g_AreaDrawFlags = 0;
-                SND_StartXAStream(0, 1);
+                SND_XAStartStream(0, 1);
                 g_ScenarioState.step_05 = 4;
             }
             break;
         case 4:
-            if (SND_IsXAIdle() != 0) {
+            if (SND_XAIsIdle() != 0) {
                 g_ScenarioState.step_05 = 5;
                 Game_RequestAreaChange(AREA_ID_RHAPALA_WORLD_MAP, TO_COORD(49), TO_COORD(46), FACING_RIGHT);
             }

@@ -10,8 +10,8 @@ __asm__(".include \"include/match/macro.inc\"\n");
 MATCH void func_801FCC24(void) {
     switch (g_ScenarioState.step_05) {
         case 0:
-            SND_StopSequence(0, 0);
-            SND_PlayBGM(26, BGM_CUE_LEVEL_DEFAULT, BGM_CUE_SHAPE_DEFAULT);
+            SND_SeqStop(0, 0);
+            SND_BGMPlay(26, BGM_CUE_LEVEL_DEFAULT, BGM_CUE_SHAPE_DEFAULT);
             g_GameFlags |= 0x80;
             Scene_SetupParty(0xB);
             g_ScenarioState.step_05 = 1;

@@ -12,7 +12,7 @@ MATCH void func_800C1A78(void) {
     g_Task->screen_y.signed_value = 80;
     g_Task->timer                 = 1;
     g_Task->unk_24 |= 0x88;
-    SND_PlaySE(EMI_SE_ID(SND_BANK_ENEMY, 2));
+    SND_SEPlay(EMI_SE_ID(SND_BANK_ENEMY, 2));
     func_800C23D4(g_Task->unk_09);
     g_Task->unk_03++;
 }

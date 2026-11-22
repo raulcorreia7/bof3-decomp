@@ -18,17 +18,17 @@ MATCH void func_801F2D80(void) {
         }
     }
     if (old != MEM_PTR(u8, g_Task->unk_4C)[0]) {
-        SND_PlaySE(0x204);
+        SND_SEPlay(0x204);
     }
 
     if ((g_PadStates[0].pressed & g_InputMasks[MENU_INPUT_CONFIRM]) != 0) {
-        SND_PlaySE(0x205);
+        SND_SEPlay(0x205);
         work                     = g_Task;
         D_801F5990[work->unk_06] = MEM_PTR(u8, work->unk_4C)[0];
         D_801448EE               = 1;
         g_Task->header.mode += 1;
     } else if ((g_PadStates[0].pressed & g_InputMasks[MENU_INPUT_CANCEL]) != 0) {
-        SND_PlaySE(0x206);
+        SND_SEPlay(0x206);
         D_801448EE = 0xFF;
         g_Task->header.mode += 2;
     }

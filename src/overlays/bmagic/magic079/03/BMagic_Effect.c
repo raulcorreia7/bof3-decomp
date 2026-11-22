@@ -23,6 +23,6 @@ MATCH void func_801EEC5C(void) {
         g_BattleEffects[slot].target.party = work;
         g_Task->param.unk_0B               = g_Task->param.unk_0B + 1;
     }
-    SND_QueueSelectionSE(0x100);
+    SND_SEQueueSelection(0x100);
     g_Task->header.mode = g_Task->header.mode + 1;
 }

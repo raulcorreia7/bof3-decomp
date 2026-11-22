@@ -302,7 +302,7 @@ MATCH void func_801F7DBC(void) {
             } else if (SYS_TestFlag(g_SceneFlags, 0x12) == 0) {
                 func_801F3E60(1);
                 g_AreaDrawFlags = 0;
-                SND_PlaySE(0x203);
+                SND_SEPlay(0x203);
             } else if (SYS_TestFlag(g_SceneFlags, 0x13) == 0) {
                 func_801C1DF0(6);
                 func_801BE1B0(6);

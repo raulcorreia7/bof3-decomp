@@ -24,7 +24,7 @@ NON_MATCHING void func_8019FAA0(u16 area_id, u32 entry_x, u32 entry_y, u8 entry_
     if (seed == 0xFFu)
         g_SndBGMId = 0xFFu;
     else
-        SND_StartBGM(seed, 100, 8);
+        SND_BGMStart(seed, 100, 8);
 
     if (g_GameAreaId != area_id) {
         if (g_GameStateIndex == GAME_REQUEST_AREA_CHANGE) {

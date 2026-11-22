@@ -19,21 +19,21 @@ MATCH void func_801DC0CC(void) {
     Fishing_DrawIconRow(8, FISHING_CATCH_ROW_Y, 68);
 
     if ((g_PadStates[0].pressed & (PADLup | PADLdown)) != 0) {
-        SND_PlaySE(EMI_SE_ID(SND_BANK_COMMON, 0));
+        SND_SEPlay(EMI_SE_ID(SND_BANK_COMMON, 0));
         work            = FISHING_STATE;
         work->cue_index = (work->cue_index ^ 0x1);
     } else if ((g_PadStates[0].pressed & PADRdown) != 0) {
         cue = 0x103;
-        SND_PlaySE(cue);
-        SND_PlaySE(EMI_SE_ID(SND_BANK_COMMON, 2));
+        SND_SEPlay(cue);
+        SND_SEPlay(EMI_SE_ID(SND_BANK_COMMON, 2));
         work            = FISHING_STATE;
         work->sub_index = (work->sub_index + 1);
     } else if ((g_PadStates[0].pressed & PADRup) != 0) {
         cue             = 0x106;
         work            = FISHING_STATE;
         work->cue_index = 1;
-        SND_PlaySE(cue);
-        SND_PlaySE(EMI_SE_ID(SND_BANK_COMMON, 2));
+        SND_SEPlay(cue);
+        SND_SEPlay(EMI_SE_ID(SND_BANK_COMMON, 2));
         work            = FISHING_STATE;
         work->sub_index = (work->sub_index + 1);
     }

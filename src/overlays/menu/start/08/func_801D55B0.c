@@ -32,7 +32,7 @@ NON_MATCHING void func_801D55B0(void) {
         }
     }
     if ((s8)old != *sel) {
-        SND_PlaySE(EMI_SE_ID(SND_BANK_COMMON, 1));
+        SND_SEPlay(EMI_SE_ID(SND_BANK_COMMON, 1));
     }
 
     if ((s8)D_801ED620 == 1) {
@@ -46,9 +46,9 @@ NON_MATCHING void func_801D55B0(void) {
     g_UiPanelTasks[MENU_START_PANEL_DESCRIPTION].u.message.id = D_801EC448[(s8)D_801ED620];
     g_UiPanelTasks[MENU_START_PANEL_ITEMS].flags              = (u8)D_801EC450[(s8)D_801ED620];
     if (g_PadStates[0].pressed & g_InputMasks[MENU_INPUT_CONFIRM]) {
-        SND_PlaySE(EMI_SE_ID(SND_BANK_COMMON, 3));
+        SND_SEPlay(EMI_SE_ID(SND_BANK_COMMON, 3));
         if ((s8)D_801ED620 == 0) {
-            SND_PlaySE(EMI_SE_ID(SND_BANK_COMMON, 2));
+            SND_SEPlay(EMI_SE_ID(SND_BANK_COMMON, 2));
             for (i = 0; i < Party_CountOrder(PARTY_ORDER_FIELD); i++) {
                 g_UiPanelTasks[i + 4].state = 7;
             }
@@ -81,7 +81,7 @@ NON_MATCHING void func_801D55B0(void) {
             func_801D6E6C();
         }
     } else if (g_PadStates[0].pressed & g_InputMasks[MENU_INPUT_CANCEL]) {
-        SND_PlaySE(EMI_SE_ID(SND_BANK_COMMON, 6));
+        SND_SEPlay(EMI_SE_ID(SND_BANK_COMMON, 6));
         cursor_task->active = 0;
         D_80148654          = 0;
         D_80148663          = *party_cursor;

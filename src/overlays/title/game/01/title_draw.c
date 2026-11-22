@@ -53,7 +53,7 @@ MATCH void SND_StopSelectionEffect(void) { /* func_801D1184 */
     if (selection != 0xFFu) {
         u32 offset = selection << 2;
 
-        SND_StopSequence(g_SelectionSepSlots[offset], g_SelectionSepSlots[offset + 1u]);
+        SND_SeqStop(g_SelectionSepSlots[offset], g_SelectionSepSlots[offset + 1u]);
         *selection_ptr = 0xFFu;
     }
 }

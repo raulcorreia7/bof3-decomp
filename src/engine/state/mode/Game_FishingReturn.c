@@ -23,7 +23,7 @@ MATCH void Game_FishingReturn(void) {
     Game_RequestAreaChange(*(u16*)&g_GameLastAreaId, *(u32*)&g_GameLastX, *(u32*)&g_GameLastY, FACING_DOWN_RIGHT);
     selection = g_SndBGMId;
     if (selection != GAME_NONE && g_GamePrevSelection != selection) {
-        SND_StopSequence(g_SelectionSepSlots[selection * 4], g_SelectionSequences[selection * 4]);
+        SND_SeqStop(g_SelectionSepSlots[selection * 4], g_SelectionSequences[selection * 4]);
     }
     g_GameEntryState    = GAME_MODE_AREA_LOAD;
     g_GameEntrySubstate = 0;

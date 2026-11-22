@@ -36,14 +36,14 @@ NON_MATCHING void func_801FCEC0(void) {
             g_AreaDrawFlags = 0;
             func_801C16B8();
             g_ScenarioState.step_05 = 0x15;
-            SND_FadeOutSequence(0, 0, 4, 0x1E);
+            SND_SeqFadeOut(0, 0, 4, 0x1E);
             break;
         case 0x15:
-            SND_StartXAStream(0, 1);
+            SND_XAStartStream(0, 1);
             g_ScenarioState.step_05 = 0x16;
             break;
         case 0x16:
-            if ((SND_IsXAIdle() & BYTE_MASK) == 0) {
+            if ((SND_XAIsIdle() & BYTE_MASK) == 0) {
                 break;
             }
             g_ScenarioState.step_05 = 0x17;
@@ -58,7 +58,7 @@ NON_MATCHING void func_801FCEC0(void) {
             }
             g_ScriptVars[2]         = 8;
             g_ScenarioState.step_05 = 0x18;
-            SND_PlayBGM(7, BGM_CUE_LEVEL_DEFAULT, BGM_CUE_SHAPE_DEFAULT);
+            SND_BGMPlay(7, BGM_CUE_LEVEL_DEFAULT, BGM_CUE_SHAPE_DEFAULT);
             break;
         case 0x18:
             if (g_ScriptVars[0] == 1) {
@@ -122,14 +122,14 @@ NON_MATCHING void func_801FCEC0(void) {
             g_AreaDrawFlags = 0;
             func_801C16B8();
             g_ScenarioState.step_05 = 0xB;
-            SND_FadeOutSequence(0, 0, 4, 0x1E);
+            SND_SeqFadeOut(0, 0, 4, 0x1E);
             break;
         case 0xB:
-            SND_StartXAStream(0, 1);
+            SND_XAStartStream(0, 1);
             g_ScenarioState.step_05 = 0xC;
             break;
         case 0xC:
-            if ((SND_IsXAIdle() & BYTE_MASK) == 0) {
+            if ((SND_XAIsIdle() & BYTE_MASK) == 0) {
                 break;
             }
             g_ScenarioState.step_05 = 0xD;
@@ -144,7 +144,7 @@ NON_MATCHING void func_801FCEC0(void) {
             }
             g_ScriptVars[2]         = 8;
             g_ScenarioState.step_05 = 0x18;
-            SND_PlayBGM(7, BGM_CUE_LEVEL_DEFAULT, BGM_CUE_SHAPE_DEFAULT);
+            SND_BGMPlay(7, BGM_CUE_LEVEL_DEFAULT, BGM_CUE_SHAPE_DEFAULT);
             break;
     }
 }
