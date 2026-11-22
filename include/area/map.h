@@ -292,4 +292,16 @@ extern s32                    g_EncounterOriginX;
 /* D_80143F28 */
 extern s32                    g_EncounterOriginY;
 
+/* One 4-byte world map point: the cell x and y, then the destination area id
+ * (func_801B690C stores it in g_GameEntryAreaId) and the location type (the
+ * Fishing_ShowLocation tables select their message set by it). */
+typedef struct WorldMapPoint {
+    u8 x;       /* 0x00 */
+    u8 y;       /* 0x01 */
+    u8 area_id; /* 0x02 */
+    u8 type;    /* 0x03 */
+} WorldMapPoint;
+
+ASSERT_SIZE(WorldMapPoint, 4);
+
 #endif
