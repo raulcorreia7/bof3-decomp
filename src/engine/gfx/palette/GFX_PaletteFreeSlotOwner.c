@@ -3,7 +3,7 @@
 /* scans the 0x10-stride slot table at D_80145DA0 and hands the index
  * of every entry whose key word equals owner to func_8014E484.
  */
-MATCH void GFX_FreePaletteSlotOwner(void* owner) {
+MATCH void GFX_PaletteFreeSlotOwner(void* owner) {
     s32   index;
     s32   offset;
     void* key;
@@ -13,7 +13,7 @@ MATCH void GFX_FreePaletteSlotOwner(void* owner) {
     offset = 0;
     do {
         if (*(void**)(((u8*)&D_80145DA0) + offset) == key) {
-            GFX_FreePaletteSlot(index & BYTE_MASK);
+            GFX_PaletteFreeSlot(index & BYTE_MASK);
         }
         index += 1;
         offset += 0x10;

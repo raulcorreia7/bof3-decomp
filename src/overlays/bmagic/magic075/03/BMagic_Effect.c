@@ -30,8 +30,8 @@ MATCH void func_801EEC70(void) {
         g_BattleEffects[slot].target.party = work;
         i++;
     } while (i < 7);
-    GFX_FreePaletteFadeTarget(actor);
-    g_Task->timer = GFX_AllocPaletteFade(actor, 0, 0, 0, 1);
+    GFX_PaletteFreeFadeTarget(actor);
+    g_Task->timer = GFX_PaletteAllocFade(actor, 0, 0, 0, 1);
     BMAGIC_POINT_AT_PALETTE_ROW(dst, src, i);
     for (; i < 16; i++) {
         dst[i] = src[i];
@@ -56,7 +56,7 @@ MATCH void func_801EEEB0(void) {
     g_PaletteFades[g_Task->timer].offset.g -= 2;
     g_PaletteFades[g_Task->timer].offset.b -= 2;
     if (g_PaletteFades[g_Task->timer].offset.r == 0) {
-        GFX_FreePaletteFade(g_Task->timer);
+        GFX_PaletteFreeFade(g_Task->timer);
         Battle_MarkDamaged(g_Battle.target_selector);
         BATTLE_RAISE_STATE(BATTLE_STATE_EFFECT_PLAYING);
         Effect_Reset();

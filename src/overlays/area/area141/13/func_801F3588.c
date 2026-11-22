@@ -9,5 +9,5 @@ MATCH void func_801F3588(void) {
     actor->tint.bytes.rgb.g = 0;
     actor->tint.bytes.rgb.r = 0;
     actor->tint.bytes.flags = 0;
-    GFX_FreePaletteFadeTarget(g_Task);
+    GFX_PaletteFreeFadeTarget(g_Task);
 }

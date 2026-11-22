@@ -22,10 +22,9 @@ MATCH void UI_WindowDrawPanelBox(s16 x, s16 y, u8 w, u8 h) {
     width  = w;
     tile_w = (s16)width + 1;
     setXY0(tile, x, y);
-    height  = h;
-    tile_h  = (s16)height + 1;
-    tile->w = tile_w;
-    tile->h = tile_h;
+    height = h;
+    tile_h = (s16)height + 1;
+    setWH(tile, tile_w, tile_h);
     setRGB0(tile, 0, 0, 0);
     SetSemiTrans(tile, 1);
     GFX_AddPrim(GFX_LAYER_UI, sizeof(TILE));

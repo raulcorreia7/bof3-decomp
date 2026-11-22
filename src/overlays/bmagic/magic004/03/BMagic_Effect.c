@@ -61,8 +61,8 @@ MATCH void func_801EEF8C(void) {
         g_Task->unk_5D = D_801EFE10[g_Task->unk_04 * 3];
         g_Task->unk_5E = D_801EFE11[g_Task->unk_04 * 3];
         g_Task->unk_5F = D_801EFE12[g_Task->unk_04 * 3];
-        GFX_FreePaletteFadeTarget(battler);
-        g_Task->timer = GFX_AllocPaletteFade(battler, (s8)g_Task->unk_5D, (s8)g_Task->unk_5E, (s8)g_Task->unk_5F, 0);
+        GFX_PaletteFreeFadeTarget(battler);
+        g_Task->timer = GFX_PaletteAllocFade(battler, (s8)g_Task->unk_5D, (s8)g_Task->unk_5E, (s8)g_Task->unk_5F, 0);
         Battle_SelectActiveBattlerScript(4, 0);
         g_BattleEffectBattler->header.flags &= ~ACTOR_FLAG_HIDDEN;
         Battle_ApplyDamageFlags(LOBU(g_Battle.target_selector), 0x20);
@@ -110,7 +110,7 @@ MATCH void func_801EF1F0(void) {
     g_PaletteFades[g_Task->timer].offset.b = g_Task->unk_5F;
     if ((LOWU(g_Task->unk_5C) & ~0xFF) == 0) {
         BMAGIC_SELECT_TARGET_BATTLER();
-        GFX_FreePaletteFadeTarget(battler);
+        GFX_PaletteFreeFadeTarget(battler);
         Battle_FadePoisonedBattler(g_Battle.target_selector);
         g_Task->header.mode++;
     }

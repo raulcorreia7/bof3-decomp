@@ -4,7 +4,7 @@
 /* func_801F3CE4 */
 MATCH void Area_FreePaletteOnChange(void) {
     if (g_GameStateIndex == GAME_REQUEST_AREA_CHANGE) {
-        GFX_FreePaletteSlotOwner(g_Task);
+        GFX_PaletteFreeSlotOwner(g_Task);
     } else {
         FIELD(u16, (void*)(u32)g_ScriptState, 0xAu) = (FIELD(u16, (void*)(u32)g_ScriptState, 0xAu) - 2u);
     }

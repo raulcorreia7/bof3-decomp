@@ -63,7 +63,7 @@ MATCH u16 Battle_CureStatus(u8 battler_index, u16 status_mask) {
     if (BATTLER_IS_PLAYER(battler_index)) {
         volatile u8* battler;
         battler = (u8*)(&g_Game.members[battler_index]);
-        GFX_FreePaletteFadeTarget(battler);
+        GFX_PaletteFreeFadeTarget(battler);
         saved_work                               = g_BattleWorkCell;
         g_Game.members[battler_index].chr.status = status;
         g_BattleWorkCell                         = battler;
@@ -71,7 +71,7 @@ MATCH u16 Battle_CureStatus(u8 battler_index, u16 status_mask) {
     } else {
         volatile u8* battler;
         battler = (u8*)(&((volatile EnemyBattler*)g_BattleEnemies)[battler_index]);
-        GFX_FreePaletteFadeTarget(battler);
+        GFX_PaletteFreeFadeTarget(battler);
         saved_work                            = g_BattleWorkCell;
         ENEMY_COMBATANT(battler_index).status = status;
         g_BattleWorkCell                      = battler;

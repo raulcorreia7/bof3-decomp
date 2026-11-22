@@ -64,8 +64,8 @@ MATCH void func_801EEE60(void) {
         } else {
             battler = (PartyMember*)(g_BattleEnemies + slot * BATTLE_ENEMY_STRIDE);
         }
-        GFX_FreePaletteFadeTarget(battler);
-        GFX_AllocPaletteFade(battler, 6, 4, 8, 0);
+        GFX_PaletteFreeFadeTarget(battler);
+        GFX_PaletteAllocFade(battler, 6, 4, 8, 0);
         Battle_ApplyDamageFlags(g_Battle.target_selector, 0x200);
     }
     timer         = g_Task->timer + 1;

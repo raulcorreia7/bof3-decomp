@@ -213,8 +213,8 @@ MATCH void func_801EF564(void) {
     } else {
         battler = (PartyMember*)(g_BattleEnemies + g_Task->param.unk_0B * BATTLE_ENEMY_STRIDE);
     }
-    GFX_FreePaletteFadeTarget(battler);
-    g_Task->timer          = GFX_AllocPaletteFade(battler, 0, 0, 0, 1);
+    GFX_PaletteFreeFadeTarget(battler);
+    g_Task->timer          = GFX_PaletteAllocFade(battler, 0, 0, 0, 1);
     g_Task->screen_x.value = battler->screen_x.value - 32;
     y                      = battler->screen_y.value - 12;
     g_Task->screen_y.value = y;
@@ -249,7 +249,7 @@ MATCH void func_801EF834(void) {
         if (g_Task->unk_04 == 0) {
             SND_QueueSelectionSE(EMI_SE_ID(SND_BANK_COMMON, 2));
         }
-        GFX_FreePaletteFade(g_Task->timer);
+        GFX_PaletteFreeFade(g_Task->timer);
         Battle_FadePoisonedBattler(g_Task->param.unk_0B);
         g_Task->unk_09 = 0;
         g_Task->timer  = 4;

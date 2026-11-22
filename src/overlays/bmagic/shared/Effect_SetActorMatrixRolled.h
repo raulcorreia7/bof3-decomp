@@ -7,8 +7,6 @@ MATCH void Effect_SetActorMatrixRolled(void) {
     long    flags;
 
     PushMatrix();
-    rot.vx = 0;
-    rot.vy = 0;
-    rot.vz = 512;
+    setVector(&rot, 0, 0, 512);
     BMAGIC_PROJECT_ACTOR_MATRIX(g_Task);
 }

@@ -5,7 +5,7 @@ MATCH void func_800C1CFC(void) {
 
     Script_AnimStepOnce();
     Battle_DefeatEnemy();
-    GFX_FreePaletteSlotOwner(g_Task);
+    GFX_PaletteFreeSlotOwner(g_Task);
     work = g_BattleCurrentEnemy;
     work->turn.damage_flags.value |= BATTLER_DAMAGE_SKIP_ACTION_STEP;
     g_Task->header.flags &= ~ACTOR_FLAG_HIDDEN;

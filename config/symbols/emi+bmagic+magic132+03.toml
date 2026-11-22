@@ -3,8 +3,8 @@ Battle_ApplyDamageFlags = { addr = 0x800A9610, alias = true, source = "Applies t
 Battle_MarkDamaged = { addr = 0x800A9820, type = "func", source = "Marks the selected battlers as damaged." }
 Battle_FadePoisonedBattler = { addr = 0x800AF814, type = "func", source = "Starts the palette fade of the battler at battler_index when it is poisoned: party members 0 to 2 from g_Game.members, enemies from g_BattleEnemies; does nothing for a blocked slot.", alias = true }
 Battle_CenterCamera = { addr = 0x800AFD9C, alias = true, source = "Centres the battle camera on the living battlers." }
-GFX_AllocPaletteFade = { addr = 0x8019651C, alias = true, source = "Claims the first free of the 32 g_PaletteFades entries for a target, fills its red, green and blue offsets and table index from the target, marks the palette cells it fades and returns its index, or 0xFF when all are active." }
-GFX_FreePaletteFadeTarget = { addr = 0x80196718, alias = true, source = "Releases every g_PaletteFades entry whose target is the given target." }
+GFX_PaletteAllocFade = { addr = 0x8019651C, alias = true, source = "Claims the first free of the 32 g_PaletteFades entries for a target, fills its red, green and blue offsets and table index from the target, marks the palette cells it fades and returns its index, or 0xFF when all are active." }
+GFX_PaletteFreeFadeTarget = { addr = 0x80196718, alias = true, source = "Releases every g_PaletteFades entry whose target is the given target." }
 Effect_RotatePosition = { addr = 0x801DD350, type = "func", source = "Integrates the effect velocity pairs the effect steps read; battle/03 owns the body." }
 Battle_AllocEffect = { addr = 0x801E590C, alias = true, source = "Claims a free battle effect slot." }
 Effect_Reset = { addr = 0x801E5988, type = "func", source = "Clears every timer, state and flag byte of the shared BattleEffect work record; every effect countdown calls it first. battle/03 owns the body." }

@@ -73,13 +73,13 @@ MATCH s32 func_801EEF3C(void) {
             g_Game.members[g_Battle.active_battler].header.step = 4;
             g_Game.members[g_Battle.active_battler].chr.hp      = 0;
             g_Game.members[g_Battle.active_battler].chr.status  = STATUS_KO;
-            GFX_FreePaletteFadeTarget(&g_Game.members[g_Battle.active_battler]);
+            GFX_PaletteFreeFadeTarget(&g_Game.members[g_Battle.active_battler]);
         } else {
             ENEMY_COMBATANT(g_Battle.active_battler).header.mode = 6;
             ENEMY_COMBATANT(g_Battle.active_battler).header.step = 4;
             ENEMY_COMBATANT(g_Battle.active_battler).hp          = 0;
             ENEMY_COMBATANT(g_Battle.active_battler).status      = STATUS_KO;
-            GFX_FreePaletteFadeTarget(g_BattleEnemies + g_Battle.active_battler * BATTLE_ENEMY_STRIDE);
+            GFX_PaletteFreeFadeTarget(g_BattleEnemies + g_Battle.active_battler * BATTLE_ENEMY_STRIDE);
         }
         g_Task->header.mode += 1;
     }

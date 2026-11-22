@@ -6,8 +6,8 @@ MATCH void Effect_ReplacePaletteFade(void) {
 
     actor = g_Battle.selected_actor;
     if (--g_Task->unk_09 == 0) {
-        GFX_FreePaletteFadeTarget(actor);
-        g_Task->timer  = GFX_AllocPaletteFade((u8*)actor, 0, 0, 0, 1);
+        GFX_PaletteFreeFadeTarget(actor);
+        g_Task->timer  = GFX_PaletteAllocFade((u8*)actor, 0, 0, 0, 1);
         g_Task->unk_09 = 8;
         g_Task->header.mode++;
     }

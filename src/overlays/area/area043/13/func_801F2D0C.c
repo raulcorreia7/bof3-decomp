@@ -25,7 +25,7 @@ MATCH void func_801F2D0C(void) {
     g_Task->scale.x += 2048;
     g_Task->scale.y += 2048;
     if ((g_Task->tint.raw & ~0xFF) == 0x80808000) {
-        GFX_FreePaletteFade(g_CurrentActor->unk_93);
+        GFX_PaletteFreeFade(g_CurrentActor->unk_93);
         g_Task->header.flags |= 0x40;
         g_Task->unk_04 = 0;
     } else {

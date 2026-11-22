@@ -22,8 +22,8 @@ MATCH void func_801EEC80(void) {
     work                               = g_Task;
     g_BattleEffects[slot].header.mode  = 0;
     g_BattleEffects[slot].target.party = work;
-    GFX_FreePaletteFadeTarget(actor);
-    g_Task->timer = GFX_AllocPaletteFade(actor, 0, 0, 0, 1);
+    GFX_PaletteFreeFadeTarget(actor);
+    g_Task->timer = GFX_PaletteAllocFade(actor, 0, 0, 0, 1);
     BMAGIC_POINT_AT_PALETTE_ROW(dst, src, i);
     for (; i < 16; i++) {
         dst[i] = src[i] | PSX_COLOR_STP_BIT;
@@ -52,7 +52,7 @@ MATCH void func_801EEEB0(void) {
         g_PaletteFades[g_Task->timer].offset.b -= 1;
     }
     if (g_PaletteFades[g_Task->timer].offset.r == 0) {
-        GFX_FreePaletteFade(g_Task->timer);
+        GFX_PaletteFreeFade(g_Task->timer);
         g_Task->header.mode++;
     }
 }

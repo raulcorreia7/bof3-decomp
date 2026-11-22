@@ -386,9 +386,7 @@ NON_MATCHING void func_80117E78(s32 brightness, s32 unused) {
         for (col = D_801181D4[COORD_INT(g_Task->pos.x)][0]; col < D_801181D4[COORD_INT(g_Task->pos.x)][2]; col++) {
             sum = row + col;
             if (sum & 1) {
-                corner->vx = ((col - 0x80) << 7) + 0x40;
-                corner->vy = ((row - 0x80) << 7) + 0x40;
-                corner->vz = -0x340;
+                setVector(corner, ((col - 0x80) << 7) + 0x40, ((row - 0x80) << 7) + 0x40, -0x340);
                 RotTransPers(corner, (long*)D_1F800034_U16, &depth, &flag);
                 half = 3 - ((g_FrameCount / 3 + sum) & 7);
                 if (half < 0) {

@@ -10,7 +10,7 @@ MATCH void Party_LoadPalettes(void) {
         work   = (Actor*)((u8*)g_Game.members + i * BATTLE_PARTY_STRIDE);
         block  = GAME_PALETTE_STAGE + i * 0x40;
         g_Task = work;
-        GFX_FreePaletteFadeTarget(work);
-        GFX_LoadPalette(block, 0);
+        GFX_PaletteFreeFadeTarget(work);
+        GFX_PaletteLoad(block, 0);
     }
 }

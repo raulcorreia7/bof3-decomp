@@ -111,11 +111,11 @@ MATCH void func_801EF138(void) {
         }
         saved  = g_Task;
         g_Task = &g_Game.members[g_Battle.active_battler];
-        GFX_FreePaletteFadeTarget(g_Task);
+        GFX_PaletteFreeFadeTarget(g_Task);
         s_BattleBattlerTemplates[g_Battle.active_battler].unk_27 = g_Game.members[g_Battle.active_battler].unk_27;
-        GFX_LoadPalette((g_Task->slot << 6) + BATTLE_ACTION_BLOCK_TABLE, g_Battle.unk_D0[9]);
+        GFX_PaletteLoad((g_Task->slot << 6) + BATTLE_ACTION_BLOCK_TABLE, g_Battle.unk_D0[9]);
         func_801DDAB4(g_Game.members[g_Battle.active_battler].chr.status);
-        GFX_UploadPaletteRows();
+        GFX_PaletteUploadRows();
         Script_Request((g_Task->facing + 4) & BYTE_MASK);
         g_Task = saved;
         saved->unk_03 += 1;
@@ -652,10 +652,8 @@ NON_MATCHING void func_801F14D0(s32 band_height, s16 radius, u16 jitter_mask) {
         g_ScratchPadVectors[3].vy    = g_ScratchPadVectors[0].vy - g_ScratchPad.cells.halves[5];
         g_ScratchPadVectors[3].vz    = g_ScratchPadVectors[0].vz;
         setVector(&g_ScratchPadVectors[0], 0, FIXED_MUL(rsin(g_ScratchPad.cells.halves[1]), g_ScratchPad.cells.halves[0]), -(i << 6));
-        g_ScratchPadVectors[1].vx = 0;
-        g_ScratchPadVectors[1].vy = g_ScratchPadVectors[0].vy - g_ScratchPad.cells.halves[6];
-        g_ScratchPadVectors[1].vz = -(i << 6);
-        prim                      = (POLY_G4*)g_GfxPrimCursor;
+        setVector(&g_ScratchPadVectors[1], 0, g_ScratchPadVectors[0].vy - g_ScratchPad.cells.halves[6], -(i << 6));
+        prim = (POLY_G4*)g_GfxPrimCursor;
         SetPolyG4(prim);
         SetSemiTrans(prim, 1);
         setRGB0(prim, g_ScratchPad.cells.halves[2], g_ScratchPad.cells.halves[2], g_ScratchPad.cells.halves[2]);

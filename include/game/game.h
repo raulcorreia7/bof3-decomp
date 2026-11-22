@@ -19,8 +19,8 @@
 /* Rows in the palette fade table g_PaletteFades. */
 #define PALETTE_FADE_COUNT 32
 
-/* `PaletteFade.flags` bit 0 marks a row in use (@source: write:GFX_AllocPaletteFade@0x8019651C,
- * read:GFX_FreePaletteFade@0x80196670). */
+/* `PaletteFade.flags` bit 0 marks a row in use (@source: write:GFX_PaletteAllocFade@0x8019651C,
+ * read:GFX_PaletteFreeFade@0x80196670). */
 typedef enum PaletteFadeFlags {
     PALETTE_FADE_ACTIVE = 1 << 0,
 } PaletteFadeFlags;

@@ -4,8 +4,8 @@ Battle_MarkDamaged = { addr = 0x800A9820, type = "func", source = "Marks the sel
 Battle_SelectActiveBattlerScript = { addr = 0x800AEF98, type = "func", source = "Selects the active battler's actor script for a step and payload; a party member's facing offsets the step.", alias = true }
 Battle_FadePoisonedBattler = { addr = 0x800AF814, type = "func", source = "Starts the palette fade of the battler at battler_index when it is poisoned: party members 0 to 2 from g_Game.members, enemies from g_BattleEnemies; does nothing for a blocked slot.", alias = true }
 Battle_PlayActiveBattlerSE = { addr = 0x800AFC98, type = "func", source = "Plays the active battler's SEs: a party member's two effect SEs, or the enemy SE and selection voice.", alias = true }
-GFX_AllocPaletteFade = { addr = 0x8019651C, alias = true }
-GFX_FreePaletteFadeTarget = { addr = 0x80196718, alias = true }
+GFX_PaletteAllocFade = { addr = 0x8019651C, alias = true }
+GFX_PaletteFreeFadeTarget = { addr = 0x80196718, alias = true }
 Battle_SlotIsBlocked = { addr = 0x801DB524, alias = true, source = "Tells whether a battler slot can not be selected." }
 Battle_AllocEffect = { addr = 0x801E590C, alias = true, source = "Claims a free battle effect slot." }
 Effect_Reset = { addr = 0x801E5988, type = "func", source = "Clears every timer, state and flag byte of the shared BattleEffect work record; every effect countdown calls it first. battle/03 owns the body." }
