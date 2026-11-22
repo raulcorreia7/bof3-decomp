@@ -42,5 +42,5 @@ MATCH void func_800C20CC(void) {
             ((PartyMember*)g_Task)->header.step++;
         }
     }
-    Actor_StepAnimOnce();
+    Script_AnimStepOnce();
 }

@@ -14,5 +14,5 @@ MATCH void func_800C18A8(void) {
     func_800C238C(2, 6);
     func_80196CF0(g_Task, D_800C352C);
     g_Task->header.mode = 2;
-    Actor_StepAnimLoop();
+    Script_AnimStepLoop();
 }

@@ -20,7 +20,7 @@ typedef enum ActorScriptFace {
 
 /* func_801ABA24 */
 /* Runs one facing-script opcode. */
-MATCH u8 Script_RunFaceOps(void* sub, s32 target, u8 value) {
+MATCH u8 Script_OpsRunFace(void* sub, s32 target, u8 value) {
     u8  action;
     u8  result;
     u32 mode;

@@ -70,7 +70,7 @@ MATCH void func_801EF250(void) {
 MATCH void func_801EF328(void) {
     u8 timer;
 
-    Actor_StepAnimOnce();
+    Script_AnimStepOnce();
     timer          = g_Task->unk_09 - 1;
     g_Task->unk_09 = timer;
     if (timer == 0) {
@@ -80,7 +80,7 @@ MATCH void func_801EF328(void) {
 }
 
 MATCH void func_801EF394(void) {
-    if (Actor_StepAnimOnce() & BYTE_MASK) {
+    if (Script_AnimStepOnce() & BYTE_MASK) {
         Battle_MarkDamaged(g_Battle.target_selector);
         BATTLE_ACTIVE_WORK->param.unk_0B -= 1;
         g_Task->header.step += 1;

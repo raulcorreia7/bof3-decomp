@@ -24,6 +24,6 @@ MATCH void func_801DBA94(void) {
     if (state->step_timer == 0) {
         state->sub_index = (state->sub_index + 1);
     }
-    Actor_StepAnimLoop();
+    Script_AnimStepLoop();
     Fishing_DrawDimScreen();
 }

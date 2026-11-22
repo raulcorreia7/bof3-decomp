@@ -471,27 +471,21 @@ MATCH void func_801F88FC(Scena03Line* line) {
     s8       i;
 
     GFX_AddDitheredDrawMode(GFX_LAYER_UI, GetTPage(TPAGE_DEPTH_4BIT, TPAGE_ABR_ADD, FONT_TPAGE_X, FONT_TPAGE_Y));
-    i      = 0;
-    rot.vx = (rsin(line->yaw) * rcos(line->pitch)) >> 8;
-    rot.vy = (rsin(line->yaw) * rsin(line->pitch)) >> 8;
-    rot.vz = rcos(line->yaw) << 4;
+    i = 0;
+    setVector(&rot, (rsin(line->yaw) * rcos(line->pitch)) >> 8, (rsin(line->yaw) * rsin(line->pitch)) >> 8, rcos(line->yaw) << 4);
     Camera_SetMatrix(&camera);
     do {
         primitive = (LINE_G2*)g_GfxPrimCursor;
         SetLineG2(primitive);
         SetSemiTrans(primitive, 1);
 
-        scale    = (line->radius * line->start_scale) >> 8;
-        point.vx = g_Game.members[0].pos.x.fixed + ((scale * rot.vx) >> 8);
-        point.vy = g_Game.members[0].pos.y.fixed + ((scale * rot.vy) >> 8);
-        point.vz = g_Game.members[0].pos.z.fixed + (scale * rot.vz);
+        scale = (line->radius * line->start_scale) >> 8;
+        setVector(&point, g_Game.members[0].pos.x.fixed + ((scale * rot.vx) >> 8), g_Game.members[0].pos.y.fixed + ((scale * rot.vy) >> 8), g_Game.members[0].pos.z.fixed + (scale * rot.vz));
         Camera_ProjectPoint(&point.vx, (DVECTOR*)&primitive->x0);
         setRGB0(primitive, (line->start_scale * line->color.r) >> 8, (line->start_scale * line->color.g) >> 8, (line->start_scale * line->color.b) >> 8);
 
-        scale    = (line->radius * line->end_scale) >> 8;
-        point.vx = g_Game.members[0].pos.x.fixed + ((scale * rot.vx) >> 8);
-        point.vy = g_Game.members[0].pos.y.fixed + ((scale * rot.vy) >> 8);
-        point.vz = g_Game.members[0].pos.z.fixed + (scale * rot.vz);
+        scale = (line->radius * line->end_scale) >> 8;
+        setVector(&point, g_Game.members[0].pos.x.fixed + ((scale * rot.vx) >> 8), g_Game.members[0].pos.y.fixed + ((scale * rot.vy) >> 8), g_Game.members[0].pos.z.fixed + (scale * rot.vz));
         Camera_ProjectPoint(&point.vx, (DVECTOR*)&primitive->x1);
         setRGB1(primitive, (line->end_scale * line->color.r) >> 8, (line->end_scale * line->color.g) >> 8, (line->end_scale * line->color.b) >> 8);
         GFX_AddPrim(GFX_LAYER_UI, sizeof(LINE_G2));

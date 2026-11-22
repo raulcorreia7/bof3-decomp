@@ -9,5 +9,5 @@ MATCH void func_800C1848(void) {
     EnemyBattler_SetScript(work, D_800C1E14, func_800C1B18, D_800C1E20);
     GFX_PaletteStartAnimation(spad, D_800C1E64);
     ACTOR_SET_MODE(2);
-    Actor_StepAnimLoop();
+    Script_AnimStepLoop();
 }

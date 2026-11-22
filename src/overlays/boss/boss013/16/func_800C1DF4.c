@@ -8,7 +8,7 @@ MATCH void func_800C1DF4(void) {
         work->header.step++;
     } else {
         work->pos.x.fixed += COORD_HALF;
-        Actor_StepAnimLoop();
-        Actor_StepAnimLoop();
+        Script_AnimStepLoop();
+        Script_AnimStepLoop();
     }
 }

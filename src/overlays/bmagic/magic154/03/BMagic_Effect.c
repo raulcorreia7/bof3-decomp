@@ -116,7 +116,7 @@ MATCH void func_801EF1EC(void) {
         g_Task->unk_2C.value = 0;
         g_Task->unk_2B       = 0;
         Script_Select(0U);
-        Actor_StepAnimLoop();
+        Script_AnimStepLoop();
         g_Task->unk_09 = 0;
         g_Task->header.step += 1;
     }
@@ -174,11 +174,11 @@ MATCH void func_801EF58C(void) {
     timer          = g_Task->unk_09 - 1;
     g_Task->unk_09 = timer;
     if (!(timer & BYTE_MASK)) {
-        Actor_StepAnimOnce();
+        Script_AnimStepOnce();
         Battle_PlayActiveBattlerSE(2, 4);
         g_BattleEffectBattler->param.unk_0B -= 1;
         g_Task->header.step += 1;
-    } else if (Actor_StepAnimOnce() & BYTE_MASK) {
+    } else if (Script_AnimStepOnce() & BYTE_MASK) {
         Battle_PlayActiveBattlerSE(2, 4);
         g_Task->unk_09 = 0;
         g_BattleEffectBattler->param.unk_0B -= 1;
@@ -189,7 +189,7 @@ MATCH void func_801EF58C(void) {
 /* Lowers the effect ticker step once the effect is ready. */
 /* func_801EF648 */
 MATCH void Effect_LowerTickerStepOnReady(void) {
-    if (Actor_StepAnimOnce() & BYTE_MASK) {
+    if (Script_AnimStepOnce() & BYTE_MASK) {
         BATTLE_ACTIVE_WORK->unk_09--;
         g_Task->header.step++;
     }

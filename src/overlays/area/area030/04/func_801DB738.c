@@ -18,6 +18,6 @@ MATCH void func_801DB738(void) {
         record->sub_index  = (record->sub_index + 1);
     }
 
-    Actor_StepAnimLoop();
+    Script_AnimStepLoop();
     Fishing_DrawDimScreen();
 }

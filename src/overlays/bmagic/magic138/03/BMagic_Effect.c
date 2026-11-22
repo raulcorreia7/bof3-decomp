@@ -27,7 +27,7 @@ MATCH void func_801EEC88(void) {
     g_Task->unk_09       = 0;
     saved_work           = g_Task;
     TASK_SET(g_BattleEffectBattler);
-    Actor_StepAnimLoop();
+    Script_AnimStepLoop();
     TASK_SET(saved_work);
     saved_work->header.mode += 1;
 }
@@ -56,7 +56,7 @@ MATCH void func_801EED60(void) {
         }
         saved_work = g_Task;
         TASK_SET(g_BattleEffectBattler);
-        Actor_StepAnimLoop();
+        Script_AnimStepLoop();
         TASK_SET(saved_work);
     }
 }
@@ -66,7 +66,7 @@ MATCH void func_801EEED8(void) {
 
     saved_work = g_Task;
     TASK_SET(g_BattleEffectBattler);
-    Actor_StepAnimLoop();
+    Script_AnimStepLoop();
     TASK_SET(saved_work);
     if (saved_work->param.unk_0B == 0) {
         Battle_MarkDamaged(g_Battle.target_selector);
@@ -165,7 +165,7 @@ MATCH void func_801EF3A0(void) {
             g_Task->header.step += 1;
         }
     }
-    Actor_StepAnimLoop();
+    Script_AnimStepLoop();
 }
 
 MATCH void func_801EF50C(void) {
@@ -202,7 +202,7 @@ MATCH void func_801EF5D0(void) {
 }
 
 MATCH void func_801EF6A4(void) {
-    if (Actor_StepAnimLoop() != 0u) {
+    if (Script_AnimStepLoop() != 0u) {
         g_Task->header.step = g_Task->header.step + 1;
     } else {
         Area_AddActor();

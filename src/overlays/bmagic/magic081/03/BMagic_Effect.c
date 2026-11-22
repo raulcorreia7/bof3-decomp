@@ -65,7 +65,7 @@ MATCH void func_801EEE74(void) {
 
     saved  = g_Task;
     g_Task = D_801EC2E0->target.party;
-    if (Actor_StepAnimOnce() & BYTE_MASK) {
+    if (Script_AnimStepOnce() & BYTE_MASK) {
         saved->header.mode++;
     }
     g_Task = saved;
@@ -82,7 +82,7 @@ MATCH void func_801EEEDC(void) {
     saved                               = g_Task;
     g_BattleEffects[index].target.party = published;
     g_Task                              = D_801EC2E0->target.party;
-    Actor_StepAnimOnce();
+    Script_AnimStepOnce();
     g_Task              = saved;
     saved->param.unk_0B = 1;
     g_Task->header.mode++;
@@ -93,7 +93,7 @@ MATCH void func_801EEF88(void) {
 
     saved_work = g_Task;
     g_Task     = D_801EC2E0->target.party;
-    Actor_StepAnimOnce();
+    Script_AnimStepOnce();
     g_Task = saved_work;
     if (saved_work->param.unk_0B == 0) {
         Battle_MarkDamaged(g_Battle.target_selector);

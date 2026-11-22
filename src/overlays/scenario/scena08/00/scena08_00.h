@@ -81,7 +81,7 @@ void func_801F8964(FallingSpark* spark);
 /* func_801F8D98 */
 void Trail_Update(Trail* trail);
 
-void func_801F90C8(void* table);
+void Trail_Draw(Trail* trail);
 void func_801FA32C(void);
 void func_801FE12C(void);
 

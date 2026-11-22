@@ -4,7 +4,7 @@
  * stream (step count at +0x49) or follows a jump step (delay >= 0x80), returning 1 on a wrap or jump, then stages the step.
  */
 /* func_8014D978 */
-MATCH u8 Actor_StepAnimLoop(void) {
+MATCH u8 Script_AnimStepLoop(void) {
     Actor* first_work;
     Actor* work;
     u8*    entry;
@@ -26,7 +26,7 @@ MATCH u8 Actor_StepAnimLoop(void) {
                 result          = 1;
             }
         }
-        Actor_StageAnimStep();
+        Script_AnimStageStep();
     }
     return result;
 }

@@ -109,7 +109,7 @@ NON_MATCHING void func_80167428(void) {
             func_801C4C48();
             tmp11                  = g_Task;
             FIELD(u8, tmp11, 0x9u) = (u8)(FIELD(u8, tmp11, 0x9u) - 1);
-            Actor_UpdateMovement();
+            Actor_MovementUpdate();
             val4 = 2;
         }
     } else {

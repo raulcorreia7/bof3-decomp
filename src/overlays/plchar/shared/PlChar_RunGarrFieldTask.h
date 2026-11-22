@@ -19,7 +19,7 @@ s32 PlChar_FollowerInReach(u8 index);
             g_GameFlags |= 0x1000;                                                                                 \
             Area_RunWalk();                                                                                        \
             g_Task->timer--;                                                                                       \
-            Actor_UpdateMovement();                                                                                \
+            Actor_MovementUpdate();                                                                                \
             g_GameState->u.field.mode.unsigned_value = 1;                                                          \
             g_Task->header.step++;                                                                                 \
             return;                                                                                                \

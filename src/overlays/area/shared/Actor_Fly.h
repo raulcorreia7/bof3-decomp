@@ -18,6 +18,6 @@ MATCH void Actor_Fly(void) {
     work = g_Task;
     work->pos.x.fixed += work->vx;
     work->pos.y.fixed += work->vy;
-    Actor_StepAnimLoop();
+    Script_AnimStepLoop();
     Area_AddGridActor();
 }

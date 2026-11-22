@@ -28,6 +28,6 @@ MATCH void func_801DB8F0(void) {
         FISHING_STATE->step_timer = 4;
         FISHING_STATE->sub_index  = (FISHING_STATE->sub_index + 1);
     }
-    Actor_StepAnimLoop();
+    Script_AnimStepLoop();
     Fishing_DrawDimScreen();
 }

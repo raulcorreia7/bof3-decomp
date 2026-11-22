@@ -25,7 +25,7 @@ typedef enum ActorScriptAppearance {
 /* func_801AAB00 */
 /* Runs one appearance opcode. */
 #ifdef NON_MATCHING
-NON_MATCHING u8 Script_RunAppearanceOps(void* sub, s32 target, u8 value) {
+NON_MATCHING u8 Script_OpsRunAppearance(void* sub, s32 target, u8 value) {
     u8* code;
     u8* cmd;
     u8  slot;
@@ -180,5 +180,5 @@ NON_MATCHING u8 Script_RunAppearanceOps(void* sub, s32 target, u8 value) {
     return value;
 }
 #else
-INCLUDE_ASM(Script_RunAppearanceOps);
+INCLUDE_ASM(Script_OpsRunAppearance);
 #endif

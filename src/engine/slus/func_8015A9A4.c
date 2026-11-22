@@ -51,10 +51,8 @@ NON_MATCHING void func_8015A9A4(void) {
     if (!(((u8*)g_Task->range_54.table)[3] & 0x10)) {
         Actor_ReadValue();
     }
-    actor  = g_Task;
-    vec.vx = (actor->pos.x.fixed >> 9) - 0x4000;
-    vec.vy = (actor->pos.y.fixed >> 9) - 0x4000;
-    vec.vz = -COORD_INT(actor->pos.z) / 2;
+    actor = g_Task;
+    setVector(&vec, (actor->pos.x.fixed >> 9) - 0x4000, (actor->pos.y.fixed >> 9) - 0x4000, -COORD_INT(actor->pos.z) / 2);
     gte_ldv0(&vec);
     gte_rtps();
     gte_stsxy(sxy);

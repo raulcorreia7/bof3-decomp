@@ -29,7 +29,7 @@ typedef enum ActorScriptMotion {
 /* The entry cell at 0x1F800002 is stored through D_1F800002 and read back signed. */
 /* func_801A9DE8 */
 /* Runs one motion opcode. */
-MATCH u8 Script_RunMotionOps(ScriptState* state, const u8* table, u8 value) {
+MATCH u8 Script_OpsRunMotion(ScriptState* state, const u8* table, u8 value) {
     u8 byte;
     u8 result;
 
@@ -141,7 +141,7 @@ MATCH u8 Script_RunMotionOps(ScriptState* state, const u8* table, u8 value) {
             break;
         }
         case ACTOR_SCRIPT_MOTION_WAIT_SCRIPT_READY:
-            if (Actor_StepAnimOnce() != 0)
+            if (Script_AnimStepOnce() != 0)
                 return value;
             g_Task->option_flags |= ACTOR_OPT_WAIT_STREAM;
             state->cursor--;

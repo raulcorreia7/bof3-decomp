@@ -16,5 +16,5 @@ MATCH u8 Battle_IsPartyMemberBlocked(void) {
         return 1u;
     }
 
-    return Actor_StepAnimOnce();
+    return Script_AnimStepOnce();
 }

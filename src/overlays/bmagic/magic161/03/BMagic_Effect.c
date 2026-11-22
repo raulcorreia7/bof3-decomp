@@ -73,7 +73,7 @@ MATCH void func_801EEF80(void) {
 MATCH void func_801EF06C(void) {
     u8 count;
 
-    Actor_StepAnimOnce();
+    Script_AnimStepOnce();
     count          = g_Task->unk_09 - 1;
     g_Task->unk_09 = count;
     if (!(count & BYTE_MASK)) {
@@ -94,7 +94,7 @@ MATCH void func_801EF0E8(void) {
         g_Task->unk_09 = count + 4;
     }
     func_801EF1DC();
-    Actor_StepAnimOnce();
+    Script_AnimStepOnce();
 }
 
 #include "overlays/bmagic/shared/Effect_LowerTickerStepOnReady.h"

@@ -10,7 +10,7 @@ MATCH void func_800C1894(void) {
     enemy->unk_E8 = D_800C318C;
 
     g_Task->header.mode = 2;
-    Actor_StepAnimLoop();
+    Script_AnimStepLoop();
     if (g_Battle.encounter == 26) {
         Battle_LoadEnemyBattler(0, func_800AC704(89));
         g_BattleCurrentEnemy->unk_7F = 1;

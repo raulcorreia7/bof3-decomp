@@ -294,7 +294,7 @@ MATCH void func_801EFDD4(void) {
 
 MATCH void func_801F0008(void) {
     Area_AddGridActor();
-    if (Actor_StepAnimOnce() & BYTE_MASK) {
+    if (Script_AnimStepOnce() & BYTE_MASK) {
         Effect_Reset();
     }
 }
@@ -302,7 +302,7 @@ MATCH void func_801F0008(void) {
 MATCH void func_801F0044(void) {
     u8 count;
 
-    Actor_StepAnimLoop();
+    Script_AnimStepLoop();
     Area_AddGridActor();
     count          = g_Task->unk_09 - 1;
     g_Task->unk_09 = count;

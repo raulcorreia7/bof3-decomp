@@ -11,7 +11,7 @@ MATCH void Effect_ShakeScreen(void) {
         work         = (PartyMember*)g_Task;
         work->unk_5E = -(work->param.unk_0B * 16);
     }
-    Actor_StepAnimOnce();
+    Script_AnimStepOnce();
     {
         PartyMember* work;
         u8           old;

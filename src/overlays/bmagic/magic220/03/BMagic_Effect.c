@@ -91,7 +91,7 @@ MATCH void func_801EF078(void) {
 MATCH void func_801EF1F4(void) {
     u8 count;
 
-    Actor_StepAnimOnce();
+    Script_AnimStepOnce();
     g_Task->param.unk_0B += 0xC;
     count          = g_Task->unk_09 - 1;
     g_Task->unk_09 = count;
@@ -204,7 +204,7 @@ MATCH void func_801EF8CC(void) {
     if (count != 0) {
         g_Task->unk_5D = count - 2;
     }
-    if (Actor_StepAnimOnce() & BYTE_MASK) {
+    if (Script_AnimStepOnce() & BYTE_MASK) {
         g_BattleEffectBattler->param.unk_0B -= 1;
         Effect_Reset();
     }

@@ -1,7 +1,7 @@
 #include "boss034_16.h"
 
 MATCH void func_800C1A78(void) {
-    Actor_StepAnimOnce();
+    Script_AnimStepOnce();
     GFX_ClearRect(832, 256, 192, 256);
     g_Task->unk_18                = g_Task->screen_x.signed_value;
     g_Task->unk_1C                = g_Task->screen_y.signed_value;

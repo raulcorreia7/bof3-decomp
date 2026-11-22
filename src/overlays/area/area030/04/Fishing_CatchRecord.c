@@ -25,5 +25,5 @@ MATCH void Fishing_CatchRecord(void) {
         record->sub_index = (record->sub_index + 1);
     }
 
-    Actor_StepAnimLoop();
+    Script_AnimStepLoop();
 }

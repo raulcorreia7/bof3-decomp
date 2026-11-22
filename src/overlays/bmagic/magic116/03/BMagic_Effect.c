@@ -25,7 +25,7 @@ MATCH void func_801EED2C(void) {
 
     saved  = g_Task;
     g_Task = D_801EC2E0->target.party;
-    if (Actor_StepAnimOnce() & BYTE_MASK) {
+    if (Script_AnimStepOnce() & BYTE_MASK) {
         g_Task        = saved;
         saved->unk_09 = 0x78;
         g_Task->header.mode++;

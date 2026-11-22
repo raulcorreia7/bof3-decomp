@@ -38,6 +38,6 @@ MATCH void func_801DC0CC(void) {
         work->sub_index = (work->sub_index + 1);
     }
     UI_CursorDraw(32, FISHING_STATE->cue_index * 12 + 182, 0);
-    Actor_StepAnimLoop();
+    Script_AnimStepLoop();
     Fishing_DrawDimScreen();
 }

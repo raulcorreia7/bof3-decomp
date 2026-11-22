@@ -112,7 +112,7 @@ MATCH void func_801EF0D0(void) {
 MATCH void func_801EF2A8(void) {
     PartyMember* work;
 
-    if (Actor_StepAnimOnce() != 0u) {
+    if (Script_AnimStepOnce() != 0u) {
         work               = (PartyMember*)g_BattleEffectBattler;
         work->param.unk_0B = work->param.unk_0B + 1;
         Effect_Reset();

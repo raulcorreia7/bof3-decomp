@@ -22,6 +22,6 @@ MATCH void func_801DBFC8(void) {
         work                     = FISHING_STATE;
         work->sub_index          = (work->sub_index + 1);
     }
-    Actor_StepAnimLoop();
+    Script_AnimStepLoop();
     Fishing_DrawDimScreen();
 }
