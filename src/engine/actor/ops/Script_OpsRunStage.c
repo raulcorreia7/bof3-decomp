@@ -44,11 +44,11 @@ NON_MATCHING u8 Script_OpsRunStage(ScriptState* state, const u8* table, u8 value
     byte = table[state->cursor];
     switch (byte) {
         case ACTOR_SCRIPT_STAGE_SET_SCRIPT_ACTIVE: {
-            g_Game.flags |= GAME_FLAG_SCRIPT_ACTIVE;
+            g_GameFlags |= GAME_FLAG_SCRIPT_ACTIVE;
             break;
         }
         case ACTOR_SCRIPT_STAGE_CLEAR_SCRIPT_ACTIVE: {
-            g_Game.flags &= ~GAME_FLAG_SCRIPT_ACTIVE;
+            g_GameFlags &= ~GAME_FLAG_SCRIPT_ACTIVE;
             break;
         }
         case ACTOR_SCRIPT_STAGE_FADE_WHITE:
@@ -106,10 +106,10 @@ NON_MATCHING u8 Script_OpsRunStage(ScriptState* state, const u8* table, u8 value
         }
         case ACTOR_SCRIPT_STAGE_SET_RECORD_INDEX:
             if (Actor_GetOwner() == 1) {
-                entry                         = g_AreaLoads[g_GameAreaId];
-                byte                          = table[state->cursor + 1];
-                list                          = *(u32**)((u8*)entry + 0x18);
-                g_Game.current->u.field.index = list[byte];
+                entry                      = g_AreaLoads[g_GameAreaId];
+                byte                       = table[state->cursor + 1];
+                list                       = *(u32**)((u8*)entry + 0x18);
+                g_GameState->u.field.index = list[byte];
             } else {
                 state->script_index = table[state->cursor + 1];
             }
@@ -139,7 +139,7 @@ NON_MATCHING u8 Script_OpsRunStage(ScriptState* state, const u8* table, u8 value
             volatile Actor* work;
 
             flag               = table[state->cursor + 1];
-            slot               = g_Game.current->chr.character_id;
+            slot               = g_GameState->chr.character_id;
             work               = SCRATCH_WORK;
             work->param.unk_0B = Actor_SpawnHelper(flag - 0x90, -((flag ^ 0x94) == 0) & 0xA, D_80181B28[g_CharSlot[slot]], work->pos.x.fixed, work->pos.y.fixed, work->pos.z.fixed);
             state->cursor += 1;
