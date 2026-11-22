@@ -1,9 +1,9 @@
 #include "area102_13.h"
 
 MATCH s32 func_801F3194(void) {
-    s32 vx;
-    s32 vy;
-    s16 vz;
+    s32  vx;
+    s32  vy;
+    s16  vz;
     long depth;
     long flag;
 

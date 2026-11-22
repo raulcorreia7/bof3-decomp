@@ -39,6 +39,7 @@ ASSERT_SIZE(AnswerCell, 4);
 extern AnswerCell D_801F4908[4];
 /* The first four answer flags, cleared by the low four mask bits and set by the high four. */
 extern u8         D_801F4928[4];
+
 /* A cell and the reach around it on each axis. */
 typedef struct CellZone {
     /* 0x00 */ u8 x;
@@ -46,6 +47,7 @@ typedef struct CellZone {
     /* 0x02 */ u8 reach_x;
     /* 0x03 */ u8 reach_y;
 } CellZone;
+
 ASSERT_SIZE(CellZone, 0x04);
 /* The four zones func_801F3CF0 tests the party against. */
 extern CellZone D_801F492C[4];

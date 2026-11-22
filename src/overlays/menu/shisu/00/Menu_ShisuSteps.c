@@ -246,43 +246,43 @@ INCLUDE_ASM(func_801D1964);
 
 /* Fades the six tint channels up to the fade level. */
 MATCH void func_801D1A20(void) {
-    u8 base2;
-    u8 base1;
-    u8 base0;
-    u8 topping2;
-    u8 topping1;
-    u8 topping0;
-    u8 level;
+    u8  base2;
+    u8  base1;
+    u8  base0;
+    u8  topping2;
+    u8  topping1;
+    u8  topping0;
+    u8  level;
     u8* fade;
 
-    fade  = &D_80148654;
-    level = *fade;
+    fade     = &D_80148654;
+    level    = *fade;
     topping0 = D_801D9EF0[0];
     if (topping0 < level) {
         topping0 = level;
     }
     g_ShisuTopping[0] = topping0;
-    topping1 = D_801D9EF0[1];
+    topping1          = D_801D9EF0[1];
     if (topping1 < level) {
         topping1 = level;
     }
     g_ShisuTopping[1] = topping1;
-    topping2 = D_801D9EF0[2];
+    topping2          = D_801D9EF0[2];
     if (topping2 < level) {
         topping2 = level;
     }
     g_ShisuTopping[2] = topping2;
-    base0 = D_801D9EF4[0];
+    base0             = D_801D9EF4[0];
     if (base0 < level) {
         base0 = level;
     }
     g_ShisuBase[0] = base0;
-    base1 = D_801D9EF4[1];
+    base1          = D_801D9EF4[1];
     if (base1 < level) {
         base1 = level;
     }
     g_ShisuBase[1] = base1;
-    base2 = D_801D9EF4[2];
+    base2          = D_801D9EF4[2];
     if (base2 < level) {
         base2 = level;
     }
