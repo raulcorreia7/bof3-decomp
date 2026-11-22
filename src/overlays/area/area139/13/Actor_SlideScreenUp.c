@@ -1,16 +1,3 @@
 #include "area139_13.h"
 
-/* func_801F3F14 */
-MATCH void Actor_SlideScreenUp(void) {
-    Actor* work;
-
-    work = TASK(Actor);
-    work->screen_y += 0x20;
-    if ((s16)work->screen_y >= 0) {
-        if (g_GameStateIndex == GAME_REQUEST_IDLE) {
-            SND_SEPlay(EMI_SE_ID(SND_BANK_AREA, 1));
-        }
-        TASK(Actor)->header.step = 1;
-    }
-    Area_Update();
-}
+#include "overlays/area/shared/Actor_SlideScreenUp.h"
