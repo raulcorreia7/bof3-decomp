@@ -1,0 +1,2 @@
+{"function": "emi/scenario/sce15ef1/00@0x801D2474", "tried": "permuter 300s on func_801D2474: base 665, best 665", "first_diff": "candidates in work/permute/nonmatchings/func_801D2474/output-*", "score": 665}
+{"function": "emi/scenario/sce15ef1/00@0x801D2474", "tried": "permuter 300s on func_801D2474: base 380, best 380", "first_diff": "candidates in work/permute/nonmatchings/func_801D2474/output-*", "score": 380}
