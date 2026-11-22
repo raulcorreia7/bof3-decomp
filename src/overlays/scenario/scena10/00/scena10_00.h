@@ -58,6 +58,8 @@ ASSERT_OFFSET(SceneTriggerRow, x, 0x02);
 ASSERT_OFFSET(SceneTriggerRow, y, 0x04);
 ASSERT_SIZE(SceneTriggerRow, 6);
 
+extern u8 D_8014554F[];
+
 /* D_801FE80C */
 extern Callback        D_801FE820[];
 extern SceneTriggerRow D_801FE894[16];
