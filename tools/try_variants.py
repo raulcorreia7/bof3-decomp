@@ -15,7 +15,6 @@ line is `best (N, tag)`. Run `check-<image>` on a match.
 
 import argparse
 import re
-import sys
 from pathlib import Path
 
 from bof3.adapters.match import run_match
@@ -54,7 +53,7 @@ def main():
             lines, differing = result.lines, result.differing
             if result.matched:
                 print(tag, "=> MATCH")
-                sys.exit(0)
+                return
             if not differing:
                 print(tag, "=> ERR", "\n".join(lines)[-260:].replace("\n", " / "))
                 continue
