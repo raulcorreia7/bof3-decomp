@@ -119,8 +119,8 @@ extern ScenarioHandlers*    g_ScenarioHandlers[20];
 extern AreaHooks            g_AreaHooks;
 /* D_801C890C */
 extern AreaActionCallback   g_AreaActions[11];
-extern u8*                  D_801C893C[5];
-extern u8*                  D_801C8950[5];
+extern u8*                  g_ItemCategoryIds[5];
+extern u8*                  g_ItemCategoryCounts[5];
 extern ShopStock            g_GameShopStock[SHOP_COUNT];
 extern UvRect               D_801CCE84[62];
 extern UvRect               D_801CCF7C[53];

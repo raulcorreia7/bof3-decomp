@@ -122,7 +122,7 @@ NON_MATCHING void func_801F7920(void) {
         if (SYS_TestFlag(g_SceneFlags, 0x2E) && !SYS_TestFlag(g_SceneFlags, 0x2F)) {
             Game_SetScriptActive();
             SYS_SetFlag(g_Scenario2Flags + 0x20, 0x3E);
-            g_Game.flags |= 8;
+            g_GameFlags |= 8;
             SYS_SetFlag(g_SceneFlags, 0x2F);
             g_ScenarioState.state_04 = 0xF;
             g_AreaDrawFlags          = 0;
@@ -183,7 +183,7 @@ NON_MATCHING void func_801F7920(void) {
         if (SYS_TestFlag(g_SceneFlags, 0x36) && SYS_TestFlag(g_SceneFlags, 0x31) && g_GameCellType == 0 && !SYS_TestFlag(g_SceneFlags, 0x34)) {
             Game_SetScriptActive();
             g_ScenarioState.step = 0x46;
-            g_Game.flags |= 8;
+            g_GameFlags |= 8;
             g_ScriptVars[0]          = 0;
             g_ScenarioState.state_04 = 0xF;
         }
@@ -198,7 +198,7 @@ NON_MATCHING void func_801F7920(void) {
             g_ScenarioState.state_04 = 0xF;
         }
         if (g_ScriptVars[2] == 1 && SYS_TestFlag(g_SceneFlags, 0x38) && g_GameCellType == 0) {
-            g_Game.flags |= 8;
+            g_GameFlags |= 8;
             g_AreaDrawFlags = 0;
             Game_SetScriptActive();
             g_ScenarioState.step     = 0x6E;
@@ -366,7 +366,7 @@ NON_MATCHING void func_801F7920(void) {
         }
     }
     if (g_GameAreaId == AREA_ID_HIDDEN_FACTORY_HUGE_SLUG && g_GameCellType == 2 && SYS_TestFlag(g_SceneFlags, 0x3D) && !SYS_TestFlag(g_SceneFlags, 0x16)) {
-        g_Game.flags |= 8;
+        g_GameFlags |= 8;
         g_AreaDrawFlags = 0;
         Game_SetScriptActive();
         g_ScenarioState.state_04 = 8;

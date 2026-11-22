@@ -340,8 +340,8 @@ D_801C88FC = { addr = 0x801C88FC, size = 0x8, source = "The two tint-lighten han
 D_801C8904 = { addr = 0x801C8904, size = 0x8, source = "The two tint-darken handlers func_801ACC08 and func_801ACCD8 that actor script stage 0x87 runs through func_801ACBC4." }
 g_AreaActions = { addr = 0x801C890C, source = "The field action of each party leader, by CharacterId." }
 g_FindZenny = { addr = 0x801C8938, size = 0x4, source = "The zenny a find pays, by step of the fading field action; AreaAction_ShowFind reads the entry." }
-D_801C893C = { addr = 0x801C893C, size = 0x14, source = "Pointers to the five item categories." }
-D_801C8950 = { addr = 0x801C8950, size = 0x14, source = "Pointers to the five item category inventory counts: four g_InventoryCounts rows and a null for the vital items; Item_Count and Item_Add pick one by category." }
+g_ItemCategoryIds = { addr = 0x801C893C, size = 0x14, source = "Pointers to the five item categories." }
+g_ItemCategoryCounts = { addr = 0x801C8950, size = 0x14, source = "Pointers to the five item category inventory counts: four g_InventoryCounts rows and a null for the vital items; Item_Count and Item_Add pick one by category." }
 g_Items = { addr = 0x801C8964, size = 0x678, source = "The Item records of GAME.EMI that every image reads, 0x678 bytes." }
 g_VitalItems = { addr = 0x801C8FDC, size = 0x100, source = "The VitalItem records of GAME.EMI that every image reads." }
 g_Weapons = { addr = 0x801C90DC, size = 0x7C8, source = "The Weapon records of GAME.EMI that every image reads, indexed by equip.weapon." }

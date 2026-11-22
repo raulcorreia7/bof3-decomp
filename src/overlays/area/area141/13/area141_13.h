@@ -13,6 +13,8 @@ extern Actor D_80143F48;
 
 /* The state handler tables the dispatchers index. */
 extern Callback D_801F47E8[];
+/* The angular speed of the marker ring's wave, one per row parity. */
+extern s8       D_801F47F4[];
 extern u8       D_801F4D94;
 /* The 5-byte cell-run rows at rows 2, 4 and 6 of the D_801F4D94 table; the
  * 0x7A, 0x7B and 0x7C flags retire them. */

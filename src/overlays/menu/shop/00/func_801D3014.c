@@ -28,11 +28,11 @@ MATCH void func_801D3014(void) {
             if (price > 9999999) {
                 *wallet = 9999999;
             }
-            stock = D_801C8950[g_ShopItemCategory] + g_ShopStockIndex;
+            stock = g_ItemCategoryCounts[g_ShopItemCategory] + g_ShopStockIndex;
             *stock -= g_ShopItemCount;
-            if (D_801C8950[g_ShopItemCategory][g_ShopStockIndex] == 0) {
-                D_801C893C[g_ShopItemCategory][g_ShopStockIndex] = 0;
-                D_801C8950[g_ShopItemCategory][g_ShopStockIndex] = 0;
+            if (g_ItemCategoryCounts[g_ShopItemCategory][g_ShopStockIndex] == 0) {
+                g_ItemCategoryIds[g_ShopItemCategory][g_ShopStockIndex]    = 0;
+                g_ItemCategoryCounts[g_ShopItemCategory][g_ShopStockIndex] = 0;
             }
         } else {
             SND_SEPlay(EMI_SE_ID(SND_BANK_COMMON, 6));

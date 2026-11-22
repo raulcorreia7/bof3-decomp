@@ -29,7 +29,7 @@ MATCH void func_801D3174(void) {
     *step = mode;
     base  = step;
     base -= 8;
-    g_UiPanelTasks[MENU_START_PANEL_DESCRIPTION].u.message.id = Item_GetDescription(D_8014850E, D_801C893C[D_8014850E][g_UiPanelTasks[MENU_START_PANEL_ITEMS].unk_0C]);
+    g_UiPanelTasks[MENU_START_PANEL_DESCRIPTION].u.message.id = Item_GetDescription(D_8014850E, g_ItemCategoryIds[D_8014850E][g_UiPanelTasks[MENU_START_PANEL_ITEMS].unk_0C]);
     pad                                                       = g_PadStates[0].pressed;
     g_UiPanelTasks[MENU_START_PANEL_CURSOR].active            = 1;
     g_UiPanelTasks[MENU_START_PANEL_CURSOR].pos.x             = (u16)g_UiPanelTasks[MENU_START_PANEL_ITEMS].pos.x + 7;
@@ -108,8 +108,8 @@ MATCH void func_801D3174(void) {
     if (old_cursor != base[0xC]) {
         SND_SEPlay(EMI_SE_ID(SND_BANK_COMMON, 0));
     }
-    row  = D_801C893C[base[0xA]] + base[0xC];
-    pair = D_801C8950[base[0xA]] + base[0xC];
+    row  = g_ItemCategoryIds[base[0xA]] + base[0xC];
+    pair = g_ItemCategoryCounts[base[0xA]] + base[0xC];
     if (((MenuChoicePanel*)base)->confirm_timer != 0) {
         return;
     }
@@ -143,7 +143,7 @@ MATCH void func_801D3174(void) {
                     goto fail;
                 }
             } else {
-                if ((Item_PassesTest(base[8], CHAR_ID_RYU_YOUNG, base[0xA], D_801C893C[base[0xA]][base[0xC]]) & BYTE_MASK) != 0) {
+                if ((Item_PassesTest(base[8], CHAR_ID_RYU_YOUNG, base[0xA], g_ItemCategoryIds[base[0xA]][base[0xC]]) & BYTE_MASK) != 0) {
                     saved      = base[0xC];
                     D_8014865B = 0;
                     counter    = g_MenuStep.sub_step + 3;

@@ -367,8 +367,10 @@ extern volatile u32          D_800B6D1C[1];
 extern volatile u16          D_800B6D20[4];
 extern volatile u16          D_800B6D28[4];
 extern volatile u16          D_800B6D30[28];
-extern s32                   D_800B6D44;
-extern s32                   D_800B6D50;
+/* The two glyph runs UI_SpriteDrawRun stamps at the frame's top-left corner;
+ * they lie inside the D_800B6D30 word table, so their length is unproven. */
+extern u8                    D_800B6D44[];
+extern u8                    D_800B6D50[];
 /* D_800B6D5C */
 extern u8                    s_BattleFrameTitles[2][5];
 /* D_800B6D68 */
@@ -517,8 +519,8 @@ extern u8                        D_80148656;
 /* Handle ring slot array: one u32 per 8-byte record (func_800A60DC writes
  * g_BattleMessages[(D_801EC328 - 1) & 0xF].text). */
 extern volatile u8               D_80150000[];
-extern u8*                       D_801C893C[];
-extern u8*                       D_801C8950[];
+extern u8*                       g_ItemCategoryIds[];
+extern u8*                       g_ItemCategoryCounts[];
 extern char                      g_MenuInventoryCountFormat[];
 extern u8                        D_801C90ED[];
 extern u8                        D_801CAF13;

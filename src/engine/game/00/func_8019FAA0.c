@@ -10,9 +10,9 @@ NON_MATCHING void func_8019FAA0(u16 area_id, u32 entry_x, u32 entry_y, u8 entry_
     u8        mode;
 
     if ((entry_facing & 0x80u) != 0)
-        g_Game.walk_flags |= AREA_WALK_MAP_LOADING;
+        g_AreaWalkFlags |= AREA_WALK_MAP_LOADING;
     else
-        g_Game.walk_flags &= 0x7FFFu;
+        g_AreaWalkFlags &= 0x7FFFu;
     Actor_ClearAll();
     GFX_PaletteResetFades();
 
@@ -74,12 +74,12 @@ NON_MATCHING void func_8019FAA0(u16 area_id, u32 entry_x, u32 entry_y, u8 entry_
     Game_ScenarioUpdate();
     func_801C05AC();
 
-    world_flags = g_Game.walk_flags;
+    world_flags = g_AreaWalkFlags;
     if ((world_flags & AREA_WALK_MAP_LOADING) != 0) {
         if ((entry_facing & 0x80u) != 0) {
             g_Game.unk_3CE[2] = 0u;
             Scene_SetupParty((u32)(entry_facing & 0x7Fu));
-            g_Game.walk_flags &= ~AREA_WALK_ACCEPT_LOCK;
+            g_AreaWalkFlags &= ~AREA_WALK_ACCEPT_LOCK;
             Party_RunFrame();
         }
     } else if ((g_Game.flags & 0x800u) == 0) {
@@ -93,7 +93,7 @@ NON_MATCHING void func_8019FAA0(u16 area_id, u32 entry_x, u32 entry_y, u8 entry_
             if (g_Game.party_size < 2u)
                 goto end;
             func_8019FF88(0, entry_x, entry_y);
-            if (((g_Game.flags & 0x800u) == 0) && ((g_Game.walk_flags & AREA_WALK_MAP_LOADING) == 0))
+            if (((g_Game.flags & 0x800u) == 0) && ((g_AreaWalkFlags & AREA_WALK_MAP_LOADING) == 0))
                 Area_CellSetPalette(g_AreaTargetCellX, g_AreaTargetCellY);
             goto tail;
         }
@@ -102,13 +102,13 @@ NON_MATCHING void func_8019FAA0(u16 area_id, u32 entry_x, u32 entry_y, u8 entry_
         mode = g_Game.party_size;
         if (mode < 2u)
             goto end;
-        world_flags       = g_Game.walk_flags;
-        g_Game.walk_flags = world_flags | 0x12u;
+        world_flags     = g_AreaWalkFlags;
+        g_AreaWalkFlags = world_flags | 0x12u;
         if (mode == 3u)
-            g_Game.walk_flags = world_flags | 0x16u;
+            g_AreaWalkFlags = world_flags | 0x16u;
     }
 end:
-    g_Game.walk_flags &= 0xEE7Fu;
+    g_AreaWalkFlags &= 0xEE7Fu;
 }
 #else
 INCLUDE_ASM(func_8019FAA0);

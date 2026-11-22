@@ -16,8 +16,8 @@ MATCH void func_801D5114(void) {
     type = D_80148504.group;
     mask = 1 << g_CharSlot[g_PartyFieldOrder[D_80148656]];
     for (i = 0; i < INV_SLOTS_PER_CATEGORY - 1; i++) {
-        left  = D_801C893C[type];
-        right = D_801C8950[type];
+        left  = g_ItemCategoryIds[type];
+        right = g_ItemCategoryCounts[type];
         for (j = 0; j < INV_SLOTS_PER_CATEGORY - 1 - i; j++) {
             if (left[0] != 0 && left[1] != 0 && (mask & Item_GetEquipability(type, left[0])) == 0 && (mask & Item_GetEquipability(type, left[1])) != 0) {
                 Menu_SwapBytes(left, left + 1);
