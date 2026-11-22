@@ -234,9 +234,6 @@ INCLUDE_ASM(func_801D1250);
  * spaces. */
 NON_MATCHING void func_801D1714(s16 x, s16 y, u32 clut, u8* text) {
     POLY_FT4* poly;
-    u8*       p;
-    s16       X;
-    s16       Y;
     s32       t1;
     s32       t2;
     u16       color;
@@ -244,22 +241,19 @@ NON_MATCHING void func_801D1714(s16 x, s16 y, u32 clut, u8* text) {
     u8        u;
     u8        v;
 
-    p     = text;
-    X     = x;
-    Y     = y;
     color = (clut & 0x3F) | STAGE_PALETTE_CLUT;
-    c     = *p;
+    c     = *text;
     while (c != 0) {
         if (c != ' ') {
             poly = (POLY_FT4*)g_GfxPrimCursor;
             SetPolyFT4(poly);
-            poly->x0 = X + 4;
-            poly->x1 = X + 0xC;
-            poly->y1 = poly->y0 = Y;
-            poly->x2            = poly->x0 - 4;
+            poly->x0 = x + 4;
+            poly->x1 = x + 0xC;
+            poly->y1 = poly->y0 = y;
             poly->y3 = poly->y2 = poly->y0 + 8;
+            poly->x2            = poly->x0 - 4;
             poly->x3            = poly->x1 - 4;
-            c                   = *p;
+            c                   = *text;
             t1                  = c - ' ';
             if (t1 < 0) {
                 t2 = c - 1;
@@ -271,7 +265,7 @@ NON_MATCHING void func_801D1714(s16 x, s16 y, u32 clut, u8* text) {
             poly->u1 = u + 7;
             poly->u2 = poly->u0;
             poly->u3 = poly->u1;
-            c        = *p;
+            c        = *text;
             t1       = c - ' ';
             if (t1 < 0) {
                 t2 = c - 1;
@@ -287,9 +281,9 @@ NON_MATCHING void func_801D1714(s16 x, s16 y, u32 clut, u8* text) {
             poly->tpage         = getTPage(TPAGE_DEPTH_4BIT, TPAGE_ABR_HALF, FONT_TPAGE_X, FONT_TPAGE_Y);
             GFX_AddPrim(GFX_LAYER_UI, sizeof(POLY_FT4));
         }
-        p += 1;
-        X += 8;
-        c = *p;
+        text += 1;
+        x += 8;
+        c = *text;
     }
 }
 #else

@@ -150,7 +150,7 @@ MATCH s32 func_801FDB14(s32 x, s32 y) {
     }
     if (LOHU(g_GameAreaId) == AREA_ID_ANGEL_TOWER_OUTSIDE && g_GameCellType == 0) {
         if ((u32)((y >> 16) - 0x3C) < 5 && (u32)((x >> 16) - 0x22) < 4) {
-            g_ScratchPad.cells.bytes[0] = D_80145E98;
+            g_ScratchPad.cells.bytes[0] = g_Game.members[0].facing;
             if (g_ScratchPad.cells.bytes[0] != 5 && g_ScratchPad.cells.bytes[0] != 6 && g_ScratchPad.cells.bytes[0] != 4) {
                 if (!func_801FE2B0()) {
                     g_ScriptVars[0] = 0x10;
@@ -196,7 +196,7 @@ MATCH s32 func_801FDB14(s32 x, s32 y) {
     }
     if (LOHU(g_GameAreaId) == AREA_ID_MACHINE_GUILD_DOCK) {
         if (g_GameCellType == 0 && SYS_TestFlag(g_SceneFlags, 0xB) && !SYS_TestFlag(g_SceneFlags, 0xE) && y == 0x118000 && (u32)((x >> 16) - 0x18) < 5) {
-            g_ScratchPad.cells.bytes[0] = D_80145E98;
+            g_ScratchPad.cells.bytes[0] = g_Game.members[0].facing;
             if (g_ScratchPad.cells.bytes[0] < 2 || g_ScratchPad.cells.bytes[0] == 2) {
                 Game_SetScriptActive();
                 g_ScenarioState.state_04 = 4;

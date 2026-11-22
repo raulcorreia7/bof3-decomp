@@ -9,7 +9,6 @@
 /* The scratchpad work pointer; the dispatch entry bytes select a handler. */
 
 /* The camera words and the slot flags the reset path sets. */
-extern u8       D_80146018;
 extern u8       D_80146158;
 /* The integer half of the focus x, stepped by the scene trigger. */
 extern u16      D_80147A8E;

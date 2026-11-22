@@ -8,7 +8,7 @@ MATCH void func_800AD434(void) {
     work = TASK(PartyMember);
     funcs[work->header.step]();
     two = 2u;
-    if (!(D_80148624 & 0x1)) {
+    if (!(g_UiPanelTasks[21].active & 0x1)) {
         TASK(PartyMember)->header.mode = two;
         TASK(PartyMember)->header.step = 0;
         return;

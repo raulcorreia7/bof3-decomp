@@ -10,7 +10,7 @@ MATCH void func_801F5B24(void) {
         work->pos.x.fixed = g_Game.members[0].pos.x.fixed;
         FAKE_BARRIER(); /* FAKE: keeps the y and z loads below the x store */
         work->pos.y.fixed = g_Game.members[0].pos.y.fixed;
-        work->pos.z.fixed = D_80145ECC + TO_COORD(128);
+        work->pos.z.fixed = g_Game.members[0].pos.z.fixed + TO_COORD(128);
         func_801F5BB0(work);
         TASK(Actor)->header.mode += 1;
         return;

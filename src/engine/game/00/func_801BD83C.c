@@ -12,7 +12,7 @@ MATCH void func_801BD83C(void) {
 
     offset   = TASK(Actor)->unk_06 * BATTLE_PARTY_STRIDE;
     mode     = (&g_Game.members[0].u.field.mode.unsigned_value)[offset];
-    screen_y = FIELD(u16, &D_80145ECE, offset);
+    screen_y = FIELD(u16, &g_Game.members[0].pos.z.part.integer, offset);
     if (mode == 3) {
         value = COORD_INT(TASK(Actor)->pos.z);
         diff  = value - (s16)screen_y;

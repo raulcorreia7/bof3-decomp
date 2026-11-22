@@ -16,7 +16,6 @@ typedef struct Magic151Steps {
 } Magic151Steps;
 
 /* The palette row the battle load copies. */
-extern u8            D_801463B9;
 extern BattlePanel   D_80148332[];
 /* The panel x offsets by scroll direction. */
 extern s8            D_801EAEA4[];

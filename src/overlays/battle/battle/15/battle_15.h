@@ -458,7 +458,6 @@ extern s8                                D_80145FC0;
 extern s8                                D_80145FC1;
 extern s8                                D_80145FC2;
 extern s8                                D_80145FC3;
-extern u8                                D_801460E9;
 extern u16                               D_801460EA;
 extern u8                                D_801460F2;
 /* FAKE: g_Battle.ui_step as a global of its own; the sites that use it match only with a separate symbol. */
@@ -475,7 +474,6 @@ extern u8                        g_BattleActiveBattler_nv;
 extern volatile u8               g_BattleTarget;
 extern u8                        g_BattleTarget_nv;
 extern u16                       D_801463B4;
-extern u8                        D_801463D6;
 /* D_801463D8 */
 /* D_80148570 */
 extern volatile u8               g_BattleChoicePanel[];

@@ -47,10 +47,10 @@ MATCH void func_801D5A28(void) {
             task->unk_0C = 0;
         }
     }
-    D_80148531 = task->unk_0A;
-    D_80148534 = task->unk_0C;
-    D_80148532 = s_SkillOrderGroups[D_80148510][D_8014850E];
-    record     = &g_Characters[g_CharSlot[g_PartyFieldOrder[task->unk_0C]]];
+    g_UiPanelTasks[14].unk_09 = task->unk_0A;
+    g_UiPanelTasks[14].unk_0C = task->unk_0C;
+    g_UiPanelTasks[14].unk_0A = s_SkillOrderGroups[g_UiPanelTasks[13].unk_0C][g_UiPanelTasks[13].unk_0A];
+    record                    = &g_Characters[g_CharSlot[g_PartyFieldOrder[task->unk_0C]]];
     switch (task->unk_0A) {
         case EQUIP_SLOT_WEAPON:
         default:
@@ -83,9 +83,9 @@ MATCH void func_801D5A28(void) {
         u8* step;
 
         SND_SEPlay(EMI_SE_ID(SND_BANK_COMMON, 3));
-        D_80148533 = s_SkillOrderTypes[D_80148510][D_8014850E];
-        step       = &D_80148651;
-        D_8014850F = D_8014850E;
+        g_UiPanelTasks[14].unk_0B = s_SkillOrderTypes[g_UiPanelTasks[13].unk_0C][g_UiPanelTasks[13].unk_0A];
+        step                      = &D_80148651;
+        g_UiPanelTasks[13].unk_0B = g_UiPanelTasks[13].unk_0A;
         (*step)++;
         return;
     }
@@ -103,13 +103,13 @@ MATCH void func_801D5A28(void) {
     if (g_PadStates[0].pressed & g_InputMasks[MENU_INPUT_CANCEL]) {
         SND_SEPlay(EMI_SE_ID(SND_BANK_COMMON, 6));
         SND_SEPlay(EMI_SE_ID(SND_BANK_COMMON, 2));
-        D_8014852B   = 3;
+        g_UiPanelTasks[14].state = 3;
         /* Byte constraint: the three stores below use the absolute cells. */
-        task         = &g_UiPanelTasks[MENU_START_PANEL_ITEMS];
-        task->state  = 4;
-        task->unk_0B = 0xFF;
-        task->unk_0A = 0xFF;
-        i            = 0;
+        task                     = &g_UiPanelTasks[MENU_START_PANEL_ITEMS];
+        task->state              = 4;
+        task->unk_0B             = 0xFF;
+        task->unk_0A             = 0xFF;
+        i                        = 0;
         while (i < Party_CountOrder(PARTY_ORDER_FIELD)) {
             g_UiPanelTasks[i + 4].state = 8;
             i++;

@@ -18,7 +18,7 @@ MATCH void func_801DD08C(void) {
         work_offset    = index * 0x140u;
         template_index = g_Game.members[index].character_index;
         src            = (Cpy16*)(&g_Characters[template_index]);
-        dst            = (Cpy16*)(D_80145F04 + work_offset);
+        dst            = (Cpy16*)(g_Game.members[0].chr.name + work_offset);
         end            = src + 10;
         do {
             *dst = *src;

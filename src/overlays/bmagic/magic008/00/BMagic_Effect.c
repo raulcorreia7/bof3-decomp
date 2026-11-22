@@ -391,7 +391,8 @@ MATCH void func_801F0568(void) {
 #ifdef NON_MATCHING
 NON_MATCHING void func_801F05FC(void) {
     PartyMember* work;
-    s8           tint;
+    /* FAKE: retail keeps the tint in v1, leaving v0 for the task pointer. */
+    FAKE_REG(s8, tint, "v1");
 
     TASK(PartyMember)->header.flags |= ACTOR_FLAG_SEMI_TRANSPARENT;
     TASK(PartyMember)->unk_5C = 1;

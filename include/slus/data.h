@@ -74,7 +74,6 @@ extern u8  D_80145E93[];
 extern s16 D_80145EC6;
 extern s32 D_80145EC8;
 extern s16 D_80145ECA;
-extern s32 D_80145ECC;
 extern s16 D_80145ECE;
 extern u8  D_80145ED8;
 extern u8  D_80145EDB;

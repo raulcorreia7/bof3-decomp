@@ -101,7 +101,7 @@ MATCH void func_801F71FC(void) {
     if (g_GameAreaId == AREA_ID_MCNEIL_MANOR_AREA) {
         if (!SYS_TestFlag(g_SceneFlags, 0)) {
             SYS_SetFlag(g_SceneFlags, 0);
-            flags_byte = &D_80146871;
+            flags_byte = &g_ScenarioState.flags_01;
             *flags_byte |= 1;
             g_GameFlags |= 0x80;
             Game_SetScriptActive();
@@ -191,7 +191,7 @@ MATCH void func_801F71FC(void) {
         }
     }
     if (g_GameAreaId == AREA_ID_CAMP_ANGEL_TOWER) {
-        if ((D_80146871 & 1) != 0 && !SYS_TestFlag(g_SceneFlags, 2)) {
+        if ((g_ScenarioState.flags_01 & 1) != 0 && !SYS_TestFlag(g_SceneFlags, 2)) {
             SYS_SetFlag(g_SceneFlags, 2);
             SND_SeqStop(0, 0);
             SND_BGMRequest(0x4D);
@@ -206,7 +206,7 @@ MATCH void func_801F71FC(void) {
         g_ScenarioState.step     = 0;
         g_ScenarioState.state_04 = 0;
         g_ScenarioState.timer_06 = 0;
-        if ((D_80146871 & 1) != 0 && g_GameLastAreaId == AREA_ID_CAMP_ANGEL_TOWER) {
+        if ((g_ScenarioState.flags_01 & 1) != 0 && g_GameLastAreaId == AREA_ID_CAMP_ANGEL_TOWER) {
             SYS_ClearFlag(g_SceneFlags, 2);
             SND_SeqStop(0, 0);
             SND_BGMRequest(0x11);

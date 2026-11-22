@@ -198,8 +198,8 @@ MATCH void func_801FB864(void) {
             D_80146866 = 0;
             D_80146867 = 0;
         step_zero:
-            g_ScenarioState.step = 0;
-            D_80146874           = 0;
+            g_ScenarioState.step     = 0;
+            g_ScenarioState.state_04 = 0;
             break;
         case 33:
             g_ScriptVars[0] = 0;
@@ -256,9 +256,9 @@ MATCH void func_801FB864(void) {
             break;
         case 47:
             if (g_GameStateIndex == 0) {
-                D_80146866           = 0;
-                g_ScenarioState.step = 0;
-                D_80146874           = 0;
+                D_80146866               = 0;
+                g_ScenarioState.step     = 0;
+                g_ScenarioState.state_04 = 0;
                 SYS_SetFlag(g_SceneFlags, 0x3F);
                 func_801A78F8();
                 func_8019FA28(0x7E, 0x500000, 0x1E0000, 4);

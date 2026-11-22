@@ -25,7 +25,7 @@ MATCH void func_801DF3F8(void) {
     if ((g_Battle.phase.mode == BATTLE_MODE_COMMANDS) && (g_Battle.phase.step >= 2U)) {
         PartyMember* work;
 
-        if (g_Game.current->chr.character_id != g_Game.members[D_801462EE].chr.character_id) {
+        if (g_Game.current->chr.character_id != g_Game.members[g_Battle.unk_0E].chr.character_id) {
             offset       = -0x1E;
             work         = TASK(PartyMember);
             work->unk_5F = offset;

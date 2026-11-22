@@ -231,7 +231,7 @@ NON_MATCHING void func_801EF484(void) {
     func_801DE190(TASK(PartyMember)->slot);
     TASK(PartyMember)->header.flags &= ~PARTY_MEMBER_FLAG_HANDLER_BUSY;
     Party_MemberLoadSprite(D_80181B34[g_EmiLoadedCharacterIndex][0], 0);
-    GFX_PaletteLoad(GAME_PALETTE_STAGE + TASK(PartyMember)->slot * 0x40, D_801463B9);
+    GFX_PaletteLoad(GAME_PALETTE_STAGE + TASK(PartyMember)->slot * 0x40, g_Battle.unk_D0[9]);
     func_801DDAB4(g_Game.members[g_Battle.active_battler].chr.status);
     GFX_PaletteUploadRows();
     Script_Request((u8)(TASK(PartyMember)->facing + 4));

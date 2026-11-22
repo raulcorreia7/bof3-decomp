@@ -8,7 +8,7 @@ MATCH void func_801E4E10(void) {
     expected = 4;
     enemy    = g_BattleCurrentEnemy;
     if (enemy->turn.command.type == expected) {
-        enemy->ap = enemy->ap - D_801463C8;
+        enemy->ap = enemy->ap - g_Battle.unk_E8;
     }
     battle_flags = &g_Battle.flags;
     *battle_flags |= 0x800;

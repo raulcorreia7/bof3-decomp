@@ -10,7 +10,6 @@
 
 /* The world overlay's reading of the shared field work row. */
 
-extern u8          D_8014601A;
 extern u16         D_80146028;
 extern volatile u8 D_801460E8;
 extern u16         D_80146876[];

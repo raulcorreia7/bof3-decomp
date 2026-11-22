@@ -6,59 +6,59 @@ MATCH void func_801E2150(void) {
     u8  next;
     u8  row;
 
-    D_80148340 = 0x32;
-    D_80148624 = 1;
-    D_8014845A = 0;
-    D_80148628 = D_80148358 + 4;
-    D_8014862A = D_8014835A + (D_8014835F - D_8014835E) * 0xD + 0x1A;
-    buttons    = INPUT_REPEATED(g_PadStates[0].pressed, (INPUT_DIRECTIONAL | PADL1 | PADR1));
-    row        = D_8014835F;
+    D_80148340                = 0x32;
+    g_UiPanelTasks[21].active = 1;
+    g_UiPanelTasks[8].unk_0A  = 0;
+    D_80148628                = D_80148358 + 4;
+    D_8014862A                = D_8014835A + (g_UiPanelTasks[1].unk_0B - g_UiPanelTasks[1].unk_0A) * 0xD + 0x1A;
+    buttons                   = INPUT_REPEATED(g_PadStates[0].pressed, (INPUT_DIRECTIONAL | PADL1 | PADR1));
+    row                       = g_UiPanelTasks[1].unk_0B;
     if (buttons & PADLup) {
         if (row != 0) {
-            D_8014835F = row - 1;
+            g_UiPanelTasks[1].unk_0B = row - 1;
         }
-        if (D_8014835F < D_8014835E) {
-            D_8014835C = 0xF0;
+        if (g_UiPanelTasks[1].unk_0B < g_UiPanelTasks[1].unk_0A) {
+            g_UiPanelTasks[1].unk_08 = 0xF0;
         }
     } else if (buttons & PADLdown) {
         if (row < 16) {
-            D_8014835F = row + 1;
+            g_UiPanelTasks[1].unk_0B = row + 1;
         }
-        if (D_8014835F >= D_8014835E + 9) {
-            D_8014835C = 0x10;
+        if (g_UiPanelTasks[1].unk_0B >= g_UiPanelTasks[1].unk_0A + 9) {
+            g_UiPanelTasks[1].unk_08 = 0x10;
         }
     } else if (buttons & PADL1) {
-        if (D_8014835E == 0) {
-            D_8014835F = 0;
-        } else if (D_8014835E < 9) {
-            D_8014835F -= D_8014835E;
-            D_8014835E = 0;
+        if (g_UiPanelTasks[1].unk_0A == 0) {
+            g_UiPanelTasks[1].unk_0B = 0;
+        } else if (g_UiPanelTasks[1].unk_0A < 9) {
+            g_UiPanelTasks[1].unk_0B -= g_UiPanelTasks[1].unk_0A;
+            g_UiPanelTasks[1].unk_0A = 0;
         } else {
-            D_8014835F -= 9;
-            D_8014835E -= 9;
+            g_UiPanelTasks[1].unk_0B -= 9;
+            g_UiPanelTasks[1].unk_0A -= 9;
         }
     } else if (buttons & PADR1) {
-        if (D_8014835E == 8) {
-            D_8014835F = 0x10;
+        if (g_UiPanelTasks[1].unk_0A == 8) {
+            g_UiPanelTasks[1].unk_0B = 0x10;
         } else {
-            next       = row + 8;
-            D_8014835F = next - D_8014835E;
-            D_8014835E = 8;
+            next                     = row + 8;
+            g_UiPanelTasks[1].unk_0B = next - g_UiPanelTasks[1].unk_0A;
+            g_UiPanelTasks[1].unk_0A = 8;
         }
     }
-    if (row != D_8014835F) {
+    if (row != g_UiPanelTasks[1].unk_0B) {
         SND_SEPlay(EMI_SE_ID(SND_BANK_COMMON, 0));
     }
-    if (D_8014835C == 0) {
+    if (g_UiPanelTasks[1].unk_08 == 0) {
         pad = g_PadStates[0].pressed;
         if (pad & g_InputMasks[MENU_INPUT_CONFIRM]) {
-            if (D_80148361 != GAME_NONE) {
+            if (g_UiPanelTasks[1].flags != GAME_NONE) {
                 SND_SEPlay(EMI_SE_ID(SND_BANK_COMMON, 3));
                 SND_SEPlay(EMI_SE_ID(SND_BANK_COMMON, 2));
                 func_801E2724();
-                D_80148357 = 3;
-                D_80148624 = 0;
-                D_80148654 = 8;
+                g_UiPanelTasks[1].state   = 3;
+                g_UiPanelTasks[21].active = 0;
+                D_80148654                = 8;
                 D_80148652 += 1;
             } else {
                 SND_SEPlay(EMI_SE_ID(SND_BANK_COMMON, 7));
@@ -66,11 +66,11 @@ MATCH void func_801E2150(void) {
         } else if (pad & g_InputMasks[MENU_INPUT_CANCEL]) {
             SND_SEPlay(EMI_SE_ID(SND_BANK_COMMON, 6));
             SND_SEPlay(EMI_SE_ID(SND_BANK_COMMON, 2));
-            g_UiPanelTasks[0].state = 1;
-            D_80148357              = 1;
-            D_80148624              = 0;
-            D_80148654              = 0xA;
-            D_80148652              = 0;
+            g_UiPanelTasks[0].state   = 1;
+            g_UiPanelTasks[1].state   = 1;
+            g_UiPanelTasks[21].active = 0;
+            D_80148654                = 0xA;
+            D_80148652                = 0;
             D_80148651 += 1;
         }
     }

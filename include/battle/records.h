@@ -992,7 +992,6 @@ extern volatile u32 g_Scripts;
 /* D_80145A00 */
 extern u8           g_GfxTransferCount;
 extern s32          D_80145A04;
-extern u8           D_80146229;
 extern u16          D_8014622A;
 extern u8           D_80146232;
 extern s16          D_801462AA;
@@ -1130,7 +1129,6 @@ extern PartyMember*  g_BattleSelectedActor;
 extern void*         D_80146390;
 extern s32           D_8014639C;
 extern u16           D_801463B2;
-extern u8            D_801463B9;
 /* FAKE: g_Battle.action_id as a global of its own; the sites that use it match only with a separate symbol. */
 extern volatile u16  g_BattleActionId;
 extern u16           D_801463C2;
@@ -1144,7 +1142,6 @@ extern u8            D_801463CF;
 extern u8            D_801463D4;
 extern u8            D_801463D5;
 extern u8            D_801463D7;
-extern u8            D_80148450;
 extern u8            D_8014845A;
 extern u8            D_80148474;
 extern u8            D_80148498;

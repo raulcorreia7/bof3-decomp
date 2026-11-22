@@ -35,23 +35,23 @@ NON_MATCHING void func_801B21E8(void) {
 
     val3  = 3;
     val14 = g_Game.current->status.field.flags.unsigned_value;
-    if (D_80145FD1 == 3) {
+    if (g_Game.members[1].header.mode == 3) {
         Party_BattlersSwapRows(0, 1, 1);
         if (g_Game.party_size == 3) {
-            if (D_80146111 == 3) {
+            if (g_Game.members[2].header.mode == 3) {
                 Party_BattlersSwapRows(1, 2, 1);
             }
         }
     } else if (g_Game.party_size == 3) {
-        if (D_80146111 == g_Game.party_size) {
+        if (g_Game.members[2].header.mode == g_Game.party_size) {
             Party_BattlersSwapRows(0, 2, 1);
         }
     }
     val4 = 0;
     cnt  = g_Game.party_size;
     if (cnt > 0) {
-        val13 = &D_80145FBC;
-        val13 = &D_80145FBC;
+        val13 = &g_Game.members[0].status.field.flags.value;
+        val13 = &g_Game.members[0].status.field.flags.value;
         val0  = &D_1F800008;
         val0  = &D_1F800008;
         val6  = -2;
@@ -101,8 +101,8 @@ NON_MATCHING void func_801B21E8(void) {
                         val8 = val3 & BYTE_MASK;
                     }
                     if ((val8 == 0) || !(val9 & BYTE_MASK)) {
-                        val1 = D_80145EC4;
-                        val2 = D_80145EC8;
+                        val1 = g_Game.members[0].pos.x.fixed;
+                        val2 = g_Game.members[0].pos.y.fixed;
                         goto block_26; /* retail branch */
                     }
                 } else {
@@ -126,22 +126,22 @@ NON_MATCHING void func_801B21E8(void) {
     TASK_SET(g_Game.members);
     g_Game.current    = g_Game.members;
     g_AreaCameraSpeed = 0x20;
-    tmp3              = g_AreaScrollTargetX - D_80145EC4;
+    tmp3              = g_AreaScrollTargetX - g_Game.members[0].pos.x.fixed;
     val7              = tmp3;
     if (tmp3 < 0) {
         val7 = -val7;
     }
-    tmp2  = g_AreaScrollTargetY - D_80145EC8;
+    tmp2  = g_AreaScrollTargetY - g_Game.members[0].pos.y.fixed;
     val10 = tmp2;
     if (tmp2 < 0) {
         val10 = -val10;
     }
-    g_AreaScrollTargetX = D_80145EC4;
-    g_AreaScrollTargetY = D_80145EC8;
+    g_AreaScrollTargetX = g_Game.members[0].pos.x.fixed;
+    g_AreaScrollTargetY = g_Game.members[0].pos.y.fixed;
     val7                = MAX(val7, val10);
     tmp0                = ((u32)val7 >> 0xD) & BYTE_MASK;
     if (tmp0 != 0) {
-        g_AreaCameraHeightDelta = (s16)((s16)((u16)D_80145ECE - g_AreaCameraHeight) / tmp0);
+        g_AreaCameraHeightDelta = (s16)((s16)((u16)g_Game.members[0].pos.z.part.integer - g_AreaCameraHeight) / tmp0);
     } else {
         g_AreaCameraHeightDelta = 0;
     }

@@ -6,7 +6,7 @@ MATCH void func_801F3558(void) {
     g_CurrentActor->interaction_flags &= 0xFE;
 
     if (g_Game.members[0].chr.character_id == CHAR_ID_MOMO) {
-        state = &D_80144CAA;
+        state = &g_Characters[5].equip.weapon;
         if (*state != 0x4B) {
             return;
         }
