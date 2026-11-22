@@ -55,7 +55,9 @@ NON_MATCHING void func_801E03F8(void) {
     pos_y       = TASK(FishingState)->y_38.pos_y;
     if (pos_y < upper_limit) {
         if (pos_y <= lower_limit) {
-            TASK(FishingState)->cursor_10 = ABS(TASK(FishingState)->cursor_10);
+            if (TASK(FishingState)->cursor_10 < 0) {
+                TASK(FishingState)->cursor_10 = -TASK(FishingState)->cursor_10;
+            }
         }
     } else {
         if (TASK(FishingState)->cursor_10 > 0) {
@@ -65,13 +67,17 @@ NON_MATCHING void func_801E03F8(void) {
     for (index = 0; index < 8; index++) {
         vx    = g_FacingOffsets[index].x;
         value = vx;
-        value = ABS(value);
+        if (value < 0) {
+            value = -value;
+        }
         if (value < 0x401) {
             vx = vx * 2;
         }
         vy    = g_FacingOffsets[index].y;
         value = vy;
-        value = ABS(value);
+        if (value < 0) {
+            value = -value;
+        }
         if (value < 0x401) {
             vy = vy * 2;
         }
