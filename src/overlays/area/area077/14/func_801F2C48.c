@@ -14,11 +14,11 @@ MATCH void func_801F2C48(void) {
     } while (i < 32);
 
     g_GameFlags |= GAME_FLAG_SCRIPT_ACTIVE;
-    ((Actor*)g_Task)->screen_x         = 0;
-    ((Actor*)g_Task)->screen_y         = 2560;
-    ((Actor*)g_Task)->unk_32           = 0;
-    ((Actor*)g_Task)->tint.bytes.rgb.r = 0;
-    ((Actor*)g_Task)->header.mode++;
+    TASK(Actor)->screen_x         = 0;
+    TASK(Actor)->screen_y         = 2560;
+    TASK(Actor)->unk_32           = 0;
+    TASK(Actor)->tint.bytes.rgb.r = 0;
+    TASK(Actor)->header.mode++;
     if (SYS_TestFlag(g_SceneFlags, 0x25) != 0) {
         SND_SeqStop(0, 0);
         SND_SEPlay(EMI_SE_ID(SND_BANK_AREA, 3));

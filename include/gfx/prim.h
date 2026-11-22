@@ -22,70 +22,68 @@ typedef struct UvRect {
 ASSERT_SIZE(UvRect, 0x4);
 
 /* The screen, in pixels. */
-#define SCREEN_WIDTH                 320
-#define SCREEN_HEIGHT                240
+#define SCREEN_WIDTH                320
+#define SCREEN_HEIGHT               240
 
 /* retail addresses */
 /* First primitive arena: bank n starts at this address + n * 0x9000. */
-#define PRIM_ARENA_BASE              0x80028FCCu
+#define PRIM_ARENA_BASE             0x80028FCCu
 
 /* Semi-transparent primitive: the PsyQ SetSemiTrans code bit, set. */
-#define PSX_SET_SEMI_TRANSPARENT(p)  SetSemiTrans((p), 1)
+#define PSX_SET_SEMI_TRANSPARENT(p) SetSemiTrans((p), 1)
 
 /* Neutral full-brightness colour: 0x80 is the midpoint of each 5-bit channel. */
-#define PSX_SET_NEUTRAL_RGB(p)       setRGB0((p), 128, 128, 128)
+#define PSX_SET_NEUTRAL_RGB(p)      setRGB0((p), 128, 128, 128)
 
 /* Begin a draw-mode primitive at the shared cursor with the default
  * texture window and no extra argument. */
-#define GFX_SET_DRAW_MODE(tpage)     SetDrawMode((DR_MODE*)g_GfxPrimCursor, 0, 0, (tpage), 0)
+#define GFX_SET_DRAW_MODE(tpage)    SetDrawMode((DR_MODE*)g_GfxPrimCursor, 0, 0, (tpage), 0)
 
 /* Draw one cue record's text at (x, y): the resource is the text bank. */
-#define WinDrawCueText(x, y, cue)    UI_TextDraw((x), (y), 0, 0xFF, UI_MessageGetText(cue))
+#define WinDrawCueText(x, y, cue)   UI_TextDraw((x), (y), 0, 0xFF, UI_MessageGetText(cue))
 /* Fixed-address accessor global. */
-#define g_GraphicsPaletteDst         MEM_PTR(volatile u16, 0x80037800u)
+#define g_GraphicsPaletteDst        MEM_PTR(volatile u16, 0x80037800u)
 
 /* The low nibble of a sprite cell's size byte indexes g_SpriteSizes. */
-#define GFX_SPRITE_SIZE_MASK         0x0F
+#define GFX_SPRITE_SIZE_MASK        0x0F
 
 /* The texture page the 4-bit font sheets load into (@source: wiki:systems/rendering). */
-#define FONT_TPAGE_X                 960
-#define FONT_TPAGE_Y                 0
+#define FONT_TPAGE_X                960
+#define FONT_TPAGE_Y                0
 
 /* GetTPage `tp`: the colour depth of the texture page (bits 7-8 of the page word; PsyQ manual: 4-bit CLUT, 8-bit CLUT, 15-bit direct). */
-#define TPAGE_DEPTH_4BIT             0
-#define TPAGE_DEPTH_8BIT             1
-#define TPAGE_DEPTH_15BIT            2
+#define TPAGE_DEPTH_4BIT            0
+#define TPAGE_DEPTH_8BIT            1
+#define TPAGE_DEPTH_15BIT           2
 
 /* GetTPage `abr`: the semi-transparency rate (bits 5-6 of the page word): B is the back pixel, F the primitive's. */
-#define TPAGE_ABR_HALF               0 /* 0.5 B + 0.5 F */
-#define TPAGE_ABR_ADD                1 /* B + F */
-#define TPAGE_ABR_SUB                2 /* B - F */
-#define TPAGE_ABR_QUARTER            3 /* B + 0.25 F */
+#define TPAGE_ABR_HALF              0 /* 0.5 B + 0.5 F */
+#define TPAGE_ABR_ADD               1 /* B + F */
+#define TPAGE_ABR_SUB               2 /* B - F */
+#define TPAGE_ABR_QUARTER           3 /* B + 0.25 F */
 
 /* The eight ordering-table layers of GFX_AddPrim: layer 7 is linked first and draws first (behind everything), layer 0 last
  * (in front). Proof: SYS_Main clears the table with ClearOTagR(work + 0x70, 8) and draws it from work + 0x8C, which is entry 7.
  * The layers named here are the ones whose content the callers show; the battle-magic family names 2, 3 and 5
  * relative to GFX_LAYER_BATTLE_SCENE (src/overlays/bmagic/bmagic.h). */
-#define GFX_LAYER_TOP                0 /* the menu cursor and full-screen flashes */
-#define GFX_LAYER_UI                 1 /* text, windows and menu sprites */
-#define GFX_LAYER_EFFECT_FRONT       2 /* screen effects and effect sprites in front of the scene */
-#define GFX_LAYER_EFFECT             3 /* effect portraits, rings and quads over the scene */
-#define GFX_LAYER_BATTLE_SCENE       4 /* g_AreaDrawMode while a battle runs (Game_BattleLoadPartySprites) */
-#define GFX_LAYER_SCENE_BACK         5 /* scenery pieces and display moves behind the actors */
-#define GFX_LAYER_FIELD_SCENE        6 /* g_AreaDrawMode in the field (Game_NewGame) */
-#define GFX_LAYER_BACKDROP           7 /* gradients and map quads behind the scene */
+#define GFX_LAYER_TOP               0 /* the menu cursor and full-screen flashes */
+#define GFX_LAYER_UI                1 /* text, windows and menu sprites */
+#define GFX_LAYER_EFFECT_FRONT      2 /* screen effects and effect sprites in front of the scene */
+#define GFX_LAYER_EFFECT            3 /* effect portraits, rings and quads over the scene */
+#define GFX_LAYER_BATTLE_SCENE      4 /* g_AreaDrawMode while a battle runs (Game_BattleLoadPartySprites) */
+#define GFX_LAYER_SCENE_BACK        5 /* scenery pieces and display moves behind the actors */
+#define GFX_LAYER_FIELD_SCENE       6 /* g_AreaDrawMode in the field (Game_NewGame) */
+#define GFX_LAYER_BACKDROP          7 /* gradients and map quads behind the scene */
 
 /* A textured primitive's colour channel that leaves the texel unchanged (128 is 1.0 in the PSX modulation). */
-#define GFX_COLOR_NEUTRAL            128
+#define GFX_COLOR_NEUTRAL           128
 
 /* Color packing. */
-#define PSX_COLOR_R(c)               ((u16)(c) & 0x1Fu)
-#define PSX_COLOR_G(c)               (((u16)(c) >> 5) & 0x1Fu)
-#define PSX_COLOR_B(c)               (((u16)(c) >> 10) & 0x1Fu)
-#define PSX_COLOR_STP(c)             (((u16)(c) >> 15) & 1u)
+#define PSX_COLOR_R(c)              ((u16)(c) & 0x1Fu)
+#define PSX_COLOR_G(c)              (((u16)(c) >> 5) & 0x1Fu)
+#define PSX_COLOR_B(c)              (((u16)(c) >> 10) & 0x1Fu)
 /* The semi-transparency (STP) bit of a 15-bit colour word. */
-#define PSX_COLOR_STP_BIT            0x8000
-#define PSX_PACK_COLOR(r, g, b, stp) ((u16)((r) | ((g) << 5) | ((b) << 10) | ((u16)(stp) << 15)))
+#define PSX_COLOR_STP_BIT           0x8000
 
 /* Shared primitive cursor (PsyQ SDK global, owned by the main exe). A named
  * symbol (not a fixed-address macro) so codegen emits the symbol-relative

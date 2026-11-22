@@ -1,3 +1,6 @@
+/* FAKE: retail re-reads each scroll target right after storing it. */
+#define FAKE_DECL_AREA_SCROLL_TARGET_VOLATILE
+#define FAKE_DECL_AREA_SCROLL_TARGET_Y_VOLATILE
 #include "scena08_00.h"
 #include "area/map.h"
 
@@ -5,10 +8,11 @@
 __asm__(".include \"include/match/macro.inc\"\n");
 #endif
 
-#ifdef NON_MATCHING
-NON_MATCHING void func_801FD704(void) {
-    SpawnedActor* actor;
-    u8            slot;
+/* Step script: the party loads, the Rei collapse cutscene, the scripted battle and the chapter advance. */
+MATCH void func_801FD704(void) {
+    u8  slot;
+    s32 x;
+    s32 y;
 
     switch (g_ScenarioState.step_05) {
         case 0:
@@ -25,7 +29,7 @@ NON_MATCHING void func_801FD704(void) {
             g_AreaScrollTargetY     = TO_COORD(15);
             g_PartyY                = TO_COORD(15);
             g_ScenarioState.step_05 = 2;
-            g_AreaCameraStep        = g_RouteSpeedScale[5];
+            g_AreaCameraStep        = g_RouteSpeedScale[5] * 8;
             break;
         case 2:
             if (!EMI_IsReady()) {
@@ -37,7 +41,8 @@ NON_MATCHING void func_801FD704(void) {
             slot                        = Actor_FindFreeSpawned();
             g_ScratchPad.cells.bytes[0] = slot;
             if ((slot & BYTE_MASK) != GAME_NONE) {
-                actor               = &g_SpawnedActors[slot];
+                SpawnedActor* actor = &g_SpawnedActors[slot];
+
                 actor->header.flags = 1;
                 actor->type         = 0x5F;
                 actor->header.mode  = 8;
@@ -72,7 +77,8 @@ NON_MATCHING void func_801FD704(void) {
             slot                        = Actor_FindFreeSpawned();
             g_ScratchPad.cells.bytes[0] = slot;
             if ((slot & BYTE_MASK) != GAME_NONE) {
-                actor               = &g_SpawnedActors[slot];
+                SpawnedActor* actor = &g_SpawnedActors[slot];
+
                 actor->header.flags = 1;
                 actor->type         = 0x60;
                 actor->header.mode  = 0;
@@ -96,26 +102,33 @@ NON_MATCHING void func_801FD704(void) {
             SND_BGMFadeOut(g_SndBGMId, BGM_CUE_LEVEL_DEFAULT, 0x20);
             SCENARIO_MESSAGE_WAIT(MSG_SCENA08_009, 7);
             break;
-        case 7:
-            if (g_GameStateIndex == GAME_REQUEST_MESSAGE) {
+        case 7: {
+            u8* state = &g_GameStateIndex;
+            u8* slots = (u8*)g_CharSlot;
+
+            if (*state == GAME_REQUEST_MESSAGE) {
                 break;
             }
             func_801FDF84();
-            g_GameStateIndex = 6;
-            g_Characters[g_CharSlot[CHAR_ID_RYU_ADULT]].party_flags |= 0x02;
-            g_Characters[g_CharSlot[CHAR_ID_REI]].party_flags |= 0x02;
-            g_Characters[g_CharSlot[CHAR_ID_REI]].hp = 0;
-            g_Characters[g_CharSlot[CHAR_ID_REI]].status |= 0x6000;
+            *state = 6;
+            g_Characters[slots[CHAR_ID_RYU_ADULT]].party_flags |= 0x02;
+            g_Characters[slots[CHAR_ID_REI]].party_flags |= 0x02;
+            g_Characters[slots[CHAR_ID_REI]].hp = 0;
+            g_Characters[slots[CHAR_ID_REI]].status |= 0x6000;
             g_ScenarioState.step_05 = 8;
             break;
-        case 8:
-            if (g_GameStateIndex != 0) {
+        }
+        case 8: {
+            u8* state = &g_GameStateIndex;
+
+            if (*state != 0) {
                 break;
             }
-            g_GameStateIndex        = 1;
+            *state                  = 1;
             D_80148660              = 1;
             g_ScenarioState.step_05 = 9;
             break;
+        }
         case 9:
             if (g_GameStateIndex != 0) {
                 break;
@@ -189,15 +202,19 @@ NON_MATCHING void func_801FD704(void) {
             g_AreaDrawFlags = 0;
             SCENARIO_MESSAGE_WAIT(MSG_SCENA08_034, 19);
             break;
-        case 19:
-            if (g_GameStateIndex == GAME_REQUEST_MESSAGE) {
+        case 19: {
+            u8* state = &g_GameStateIndex;
+            u8* slots = (u8*)g_CharSlot;
+
+            if (*state == GAME_REQUEST_MESSAGE) {
                 break;
             }
-            g_GameStateIndex = 6;
-            g_Characters[g_CharSlot[CHAR_ID_RYU_ADULT]].party_flags |= 0x02;
-            g_Characters[g_CharSlot[CHAR_ID_REI]].party_flags &= ~0x02;
+            *state = 6;
+            g_Characters[slots[CHAR_ID_RYU_ADULT]].party_flags |= 0x02;
+            g_Characters[slots[CHAR_ID_REI]].party_flags &= ~0x02;
             g_ScenarioState.step_05 = 20;
             break;
+        }
         case 20:
             if (g_GameStateIndex != 0) {
                 break;
@@ -206,9 +223,11 @@ NON_MATCHING void func_801FD704(void) {
             g_AreaDrawFlags = AREA_DRAW_ALL_FLAGS;
             UI_ModeSet(1);
             g_AreaScrollTargetX = g_Game.members[0].pos.x.fixed;
+            x                   = g_AreaScrollTargetX;
             g_AreaScrollTargetY = g_Game.members[0].pos.y.fixed;
+            y                   = g_AreaScrollTargetY;
             g_ScriptVars[0]     = 0;
-            Area_ScrollAdvance(Area_HeightSample(g_AreaScrollTargetX, g_AreaScrollTargetY));
+            Area_ScrollAdvance(Area_HeightSample(x, y));
             Area_InitMapRenderer();
             g_ScenarioState.step_05 = 21;
             break;
@@ -223,6 +242,3 @@ NON_MATCHING void func_801FD704(void) {
             break;
     }
 }
-#else
-INCLUDE_ASM(func_801FD704);
-#endif

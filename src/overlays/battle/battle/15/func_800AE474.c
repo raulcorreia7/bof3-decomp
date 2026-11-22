@@ -3,7 +3,7 @@
 MATCH void func_800AE474(void) {
     PartyMember* work;
 
-    work = (PartyMember*)g_Task;
+    work = TASK(PartyMember);
     work->unk_09++;
     if (work->unk_09 == 0) {
         Effect_Reset();

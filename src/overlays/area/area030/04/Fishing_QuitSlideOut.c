@@ -12,10 +12,10 @@ MATCH void Fishing_QuitSlideOut(void) {
 
     FISHING_STATE->step_timer = (FISHING_STATE->step_timer + 1);
     Fishing_DrawPromptBox((s16)(0x6C - (FISHING_STATE->step_timer * 0x50)), 86);
-    work = (u8*)g_Task;
+    work = TASK(u8);
     if (work[9] == 5) {
         work[9] = 0;
-        work    = (u8*)g_Task;
+        work    = TASK(u8);
         if (work[6] == 0) {
             word_counter = &g_GameEntrySubstate;
             *word_counter += 1;

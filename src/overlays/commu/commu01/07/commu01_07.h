@@ -96,19 +96,6 @@ extern u8             D_801F286D[];
  * it off the selection pointer the commu request walks. */
 #define COMMU_REQUEST_ANCHOR(rec) (*(u32*)((rec) + 0x73F))
 
-/* The column of the selected fairy room in its row of four. */
-static inline s32 Commu01_RoomColumn(u8 selection) {
-    s32 index;
-    s32 offset;
-
-    index  = selection - 1;
-    offset = index;
-    if (index < 0) {
-        offset = selection + 2;
-    }
-    return index - ((offset >> 2) << 2);
-}
-
 void func_801D28A4(s16 x, s16 y, u8 slot, s32 selected);
 void func_801D2D98(s16 x, s16 y, s32 width, u8 channel, u8 blink);
 void func_801D3038(void);

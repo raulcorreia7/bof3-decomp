@@ -110,11 +110,9 @@ src/overlays/bmagic/magic081/03/magic081_03.h	BattleEffect_GetTarget
 src/overlays/bmagic/magic102/03/BMagic_Effect.c	Area_SceneDrawGroundSprite
 src/overlays/bmagic/shared/Actor_Clear.h	Actor_Clear
 src/overlays/boss/boss036/16/Effect_AddActor.c	Effect_AddActor
-src/overlays/commu/commu01/07/commu01_07.h	Commu01_RoomColumn
 src/overlays/commu/commu02/08/794.c	Menu_DrawHeaderBar
 src/overlays/commu/commu02/08/794.c	Menu_DrawPanelIcon
 src/overlays/commu/commu02/08/794.c	Party_GetJoinedCharacter
-src/overlays/commu/commu02/08/commu02_08.h	Commu02_CursorCell
 src/overlays/menu/shared/Char_GetExpForLevel.h	Char_GetExpForLevel
 src/overlays/menu/shared/Char_GetExpProgress.h	Char_GetExpProgress
 src/overlays/menu/shared/Item_GetPrice.h	Item_GetPrice

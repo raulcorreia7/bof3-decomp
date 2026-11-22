@@ -4,7 +4,7 @@ MATCH void func_801F2CE0(void) {
     u8* work;
     u8  value;
 
-    work    = (u8*)g_Task;
+    work    = TASK(u8);
     value   = work[9];
     work[9] = value + 0xFF;
     if (value == 0) {

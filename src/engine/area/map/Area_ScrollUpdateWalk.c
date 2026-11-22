@@ -7,7 +7,7 @@ MATCH void Area_ScrollUpdateWalk(void) {
     s32 product;
     u8  index;
 
-    work = (u8*)g_Task;
+    work = TASK(u8);
     if ((work[0x08] == 2) || (work[0x08] == 6)) {
         g_AreaCameraStep = 4;
     } else {
@@ -15,7 +15,7 @@ MATCH void Area_ScrollUpdateWalk(void) {
     }
     index               = g_Game.current->u.field.counter.unsigned_value;
     product             = g_AreaCameraStep * g_RouteSpeedScale[index];
-    state               = (u8*)g_Task;
+    state               = TASK(u8);
     g_AreaCameraStep    = product;
     g_AreaScrollTargetX = ((s32*)state)[13] + ((s32*)state)[3] * state[0x09];
     g_AreaScrollTargetY = ((s32*)state)[14] + ((s32*)state)[4] * state[0x09];
