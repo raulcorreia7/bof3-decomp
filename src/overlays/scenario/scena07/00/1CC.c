@@ -150,14 +150,14 @@ MATCH void func_801F7408(void) {
 
 MATCH void func_801F7480(void) {
     u8  i;
-    u8* row;
+    u8* effect;
 
     if ((TASK(Actor)->vx & D_801FDD7C[TASK(Actor)->timer]) == 0) {
         D_801FDFBC->unk_10 += D_801FDD84[TASK(Actor)->timer];
         for (i = 0; i < D_801FDD84[TASK(Actor)->timer]; i++) {
-            row = func_801F9DD4();
-            if (row != NULL) {
-                func_801F9E10(row);
+            effect = func_801F9DD4();
+            if (effect != NULL) {
+                func_801F9E10(effect);
             }
         }
     }
@@ -719,7 +719,7 @@ MATCH void func_801F97E0(Scena07Burst* burst) {
     }
 }
 
-MATCH s32 func_801F9A80(SceneEffectRow* row) {
+MATCH s32 func_801F9A80(SceneEffectRow* effect) {
     POLY_F4* poly;
     s32      point[3];
     DVECTOR  screen;
@@ -728,17 +728,17 @@ MATCH s32 func_801F9A80(SceneEffectRow* row) {
     poly = (POLY_F4*)g_GfxPrimCursor;
     SetPolyF4(poly);
     SetSemiTrans(poly, 1);
-    point[0] = row->x;
-    point[1] = row->y;
-    point[2] = row->unk_C + (row->unk_14 << 8);
+    point[0] = effect->x;
+    point[1] = effect->y;
+    point[2] = effect->unk_C + (effect->unk_14 << 8);
     Camera_ProjectPoint(point, &screen);
     setXY2(poly, screen.vx - 1, screen.vy, screen.vx + 1, screen.vy);
-    point[0] = row->x;
-    point[1] = row->y;
-    point[2] = row->unk_C - (row->unk_14 << 8);
+    point[0] = effect->x;
+    point[1] = effect->y;
+    point[2] = effect->unk_C - (effect->unk_14 << 8);
     landed   = 0;
-    if (point[2] < row->unk_1C) {
-        point[2] = row->unk_1C;
+    if (point[2] < effect->unk_1C) {
+        point[2] = effect->unk_1C;
         landed   = 1;
     }
     Camera_ProjectPoint(point, &screen);
@@ -751,8 +751,8 @@ MATCH s32 func_801F9A80(SceneEffectRow* row) {
     return landed;
 }
 
-/* Draw a ring of 16 translucent triangles around the row, on the ground below it. */
-MATCH void func_801F9BDC(SceneEffectRow* row) {
+/* Draw a ring of 16 translucent triangles around the effect, on the ground below it. */
+MATCH void func_801F9BDC(SceneEffectRow* effect) {
     DVECTOR  center;
     DVECTOR  edge;
     s32      pos[3];
@@ -760,15 +760,15 @@ MATCH void func_801F9BDC(SceneEffectRow* row) {
     u8       i;
     u16      angle;
 
-    pos[0] = row->x;
-    pos[1] = row->y;
-    pos[2] = Area_HeightSample(row->x, row->y) << 16;
+    pos[0] = effect->x;
+    pos[1] = effect->y;
+    pos[2] = Area_HeightSample(effect->x, effect->y) << 16;
     Camera_ProjectPoint(pos, &center);
     angle  = 0;
     i      = 0;
-    pos[0] = row->x + (rcos(0) << 2);
-    pos[1] = row->y + (rsin(0) << 2);
-    pos[2] = Area_HeightSample(row->x, row->y) << 16;
+    pos[0] = effect->x + (rcos(0) << 2);
+    pos[1] = effect->y + (rsin(0) << 2);
+    pos[2] = Area_HeightSample(effect->x, effect->y) << 16;
     Camera_ProjectPoint(pos, &edge);
     do {
         prim = (POLY_G3*)g_GfxPrimCursor;
@@ -778,10 +778,10 @@ MATCH void func_801F9BDC(SceneEffectRow* row) {
         angle += 256;
         prim->x1 = edge.vx;
         prim->y1 = edge.vy;
-        pos[0]   = row->x + (rcos(angle) << 2);
-        pos[1]   = row->y + (rsin(angle) << 2);
+        pos[0]   = effect->x + (rcos(angle) << 2);
+        pos[1]   = effect->y + (rsin(angle) << 2);
         i++;
-        pos[2] = Area_HeightSample(row->x, row->y) << 16;
+        pos[2] = Area_HeightSample(effect->x, effect->y) << 16;
         Camera_ProjectPoint(pos, &edge);
         prim->x2 = edge.vx;
         prim->y2 = edge.vy;
@@ -794,56 +794,56 @@ MATCH void func_801F9BDC(SceneEffectRow* row) {
 
 MATCH void func_801F9DA8(void) {
     s32 index;
-    s8* row;
+    s8* effect;
 
-    row   = (s8*)(AREA_WORK + 0x95C);
-    index = 0;
+    effect = (s8*)(AREA_WORK + 0x95C);
+    index  = 0;
     do {
-        *row = 0;
+        *effect = 0;
         index += 1;
-        row += 32;
+        effect += 32;
     } while ((index & BYTE_MASK) < 0x40U);
 }
 
 MATCH u8* func_801F9DD4(void) {
-    u8* row;
+    u8* effect;
     u8  i;
 
-    row = MEM_PTR(u8, AREA_WORK + 0x95C);
+    effect = MEM_PTR(u8, AREA_WORK + 0x95C);
     for (i = 0; i < 64; i++) {
-        if (row[0] == 0) {
-            return row;
+        if (effect[0] == 0) {
+            return effect;
         }
-        row += 32;
+        effect += 32;
     }
     return NULL;
 }
 
-/* Starts a burst row at a random distance and angle around the actor, on the ground. */
-MATCH void func_801F9E10(u8* row) {
+/* Starts a burst at a random distance and angle around the actor, on the ground. */
+MATCH void func_801F9E10(u8* effect) {
     s32  radius;
     u32  angle;
     s32* cell;
     /* FAKE: the retail frame holds 16 bytes no statement explains. */
     FAKE_STACK_PADS(u8, 16);
 
-    cell    = (s32*)row;
-    row[0]  = 1;
-    row[1]  = 0;
-    row[2]  = 16;
-    cell[6] = 0;
-    cell[5] = 0;
-    radius  = ((rand() % 2) << 16) | ((rand() & BYTE_MASK) << 8);
-    angle   = rand() & 0xFC0;
-    cell[1] = TASK(Actor)->pos.x.fixed + ((radius * rcos(angle)) >> 12);
-    cell[2] = TASK(Actor)->pos.y.fixed + ((radius * rsin(angle)) >> 12);
-    cell[7] = Area_HeightSample(cell[1], cell[2]) << 16;
-    cell[3] = cell[7];
+    cell      = (s32*)effect;
+    effect[0] = 1;
+    effect[1] = 0;
+    effect[2] = 16;
+    cell[6]   = 0;
+    cell[5]   = 0;
+    radius    = ((rand() % 2) << 16) | ((rand() & BYTE_MASK) << 8);
+    angle     = rand() & 0xFC0;
+    cell[1]   = TASK(Actor)->pos.x.fixed + ((radius * rcos(angle)) >> 12);
+    cell[2]   = TASK(Actor)->pos.y.fixed + ((radius * rsin(angle)) >> 12);
+    cell[7]   = Area_HeightSample(cell[1], cell[2]) << 16;
+    cell[3]   = cell[7];
 }
 
-/* Advances the active effect rows: project, update and retire each. */
+/* Advances the active effects: project, update and retire each. */
 MATCH u8 func_801F9EFC(void) {
-    SceneEffectRow* row;
+    SceneEffectRow* effect;
     MATRIX          matrix;
     s32             tpage;
     u8              i;
@@ -852,17 +852,17 @@ MATCH u8 func_801F9EFC(void) {
     tpage = GetTPage(TPAGE_DEPTH_4BIT, TPAGE_ABR_ADD, FONT_TPAGE_X, FONT_TPAGE_Y);
     GFX_ADD_DITHERED_DRAW_MODE(GFX_LAYER_UI, tpage & HALF_MASK);
     Camera_SetMatrix(&matrix);
-    row = (SceneEffectRow*)(AREA_WORK + 0x95C);
-    for (i = 0; i < 64; row++, i++) {
-        if (row->active != 0) {
-            if (func_801F9A80(row) & BYTE_MASK) {
-                func_801F9BDC(row);
+    effect = (SceneEffectRow*)(AREA_WORK + 0x95C);
+    for (i = 0; i < 64; effect++, i++) {
+        if (effect->active != 0) {
+            if (func_801F9A80(effect) & BYTE_MASK) {
+                func_801F9BDC(effect);
             }
-            row->unk_14 += 0x2000;
-            row->unk_18 += 0x100000;
-            row->unk_C += row->unk_18;
-            if (--row->unk_2 == 0) {
-                row->active = 0;
+            effect->unk_14 += 0x2000;
+            effect->unk_18 += 0x100000;
+            effect->unk_C += effect->unk_18;
+            if (--effect->unk_2 == 0) {
+                effect->active = 0;
             }
             ran = 1;
         }

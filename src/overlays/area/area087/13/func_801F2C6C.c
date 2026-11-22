@@ -4,7 +4,7 @@ MATCH void func_801F2C6C(void) {
     s8*            state;
     s16*           pos;
     s16*           at;
-    WorldMapPoint* row;
+    WorldMapPoint* point;
     u8*            dst;
     u8*            src;
     u8*            from;
@@ -30,18 +30,18 @@ MATCH void func_801F2C6C(void) {
                 }
                 UI_MessageStartArea((s16)D_801F55D8[index][g_ScenarioState.scenario_id]);
             } else {
-                at  = pos;
-                row = (WorldMapPoint*)D_801F4DD4;
+                at    = pos;
+                point = (WorldMapPoint*)D_801F4DD4;
                 for (;;) {
                     s16 x = at[0];
 
-                    if (x == row->x && at[2] == row->y) {
+                    if (x == point->x && at[2] == point->y) {
                         break;
                     }
-                    row++;
+                    point++;
                 }
                 for (offset = 0, index = 0; index < 3; index++, offset += 5) {
-                    if (row->type == D_801F5718[offset]) {
+                    if (point->type == D_801F5718[offset]) {
                         break;
                     }
                 }

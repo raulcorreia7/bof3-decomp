@@ -260,35 +260,35 @@ MATCH void func_801F7484(void) {
     TASK(SceneEffect)->step               = 1;
 }
 
-/* Draws the forward scenario line from the active work point toward the row point in 0x8000 steps. */
+/* Draws the forward scenario line from the active work point toward the actor point in 0x8000 steps. */
 MATCH void func_801F74EC(void) {
     SceneEffect*   work;
-    Actor*         row;
+    Actor*         actor;
     SceneLinePoint point;
     SceneLinePoint next;
-    SceneLinePoint row_point;
+    SceneLinePoint actor_point;
     SceneLineColor color;
     s16            stop;
 
-    work              = TASK(SceneEffect);
-    color             = D_801F6C04;
-    row               = (Actor*)&g_Actors[work->channel_06];
-    point.x           = work->pos.x;
-    next.x            = point.x;
-    point.y           = work->pos.y;
-    next.y            = point.y;
-    point.z           = work->pos.z;
-    next.z            = point.z;
-    row_point.x       = row->pos.x.fixed;
-    row_point.y       = row->pos.y.fixed;
-    row_point.z.fixed = row->pos.z.fixed;
-    stop              = 1;
+    work                = TASK(SceneEffect);
+    color               = D_801F6C04;
+    actor               = (Actor*)&g_Actors[work->channel_06];
+    point.x             = work->pos.x;
+    next.x              = point.x;
+    point.y             = work->pos.y;
+    next.y              = point.y;
+    point.z             = work->pos.z;
+    next.z              = point.z;
+    actor_point.x       = actor->pos.x.fixed;
+    actor_point.y       = actor->pos.y.fixed;
+    actor_point.z.fixed = actor->pos.z.fixed;
+    stop                = 1;
     do {
         next.x = point.x;
         next.y = point.y + 0x8000;
-        if (row_point.y < next.y) {
-            next.y = row_point.y;
-            next.z = row_point.z;
+        if (actor_point.y < next.y) {
+            next.y = actor_point.y;
+            next.z = actor_point.z;
             stop   = 0;
         } else {
             next.z.part.integer = Area_HeightSample(point.x, next.y);
@@ -302,35 +302,35 @@ MATCH void func_801F74EC(void) {
     }
 }
 
-/* Draws the scenario line forward from the active point to the row point in 0x8000 steps, then back
- * from the far corner to the row point.
+/* Draws the scenario line forward from the active point to the actor point in 0x8000 steps, then back
+ * from the far corner to the actor point.
  */
 MATCH void func_801F7670(void) {
     FAKE_STACK_PADS(u8, 8);
     SceneEffect*   work;
-    Actor*         row;
+    Actor*         actor;
     SceneLinePoint point;
     SceneLinePoint next;
-    SceneLinePoint row_point;
+    SceneLinePoint actor_point;
     SceneLineColor color;
     s16            stop;
 
-    work              = TASK(SceneEffect);
-    color             = D_801F6C04;
-    row               = (Actor*)&g_Actors[work->channel_06];
-    point.x           = work->pos.x;
-    point.y           = work->pos.y;
-    point.z           = work->pos.z;
-    row_point.x       = row->pos.x.fixed;
-    row_point.y       = row->pos.y.fixed;
-    row_point.z.fixed = row->pos.z.fixed;
-    stop              = 1;
+    work                = TASK(SceneEffect);
+    color               = D_801F6C04;
+    actor               = (Actor*)&g_Actors[work->channel_06];
+    point.x             = work->pos.x;
+    point.y             = work->pos.y;
+    point.z             = work->pos.z;
+    actor_point.x       = actor->pos.x.fixed;
+    actor_point.y       = actor->pos.y.fixed;
+    actor_point.z.fixed = actor->pos.z.fixed;
+    stop                = 1;
     do {
         next.x = point.x;
         next.y = point.y + 0x8000;
-        if (row_point.y < next.y) {
-            next.y = row_point.y;
-            next.z = row_point.z;
+        if (actor_point.y < next.y) {
+            next.y = actor_point.y;
+            next.z = actor_point.z;
             stop   = 0;
         } else {
             next.z.part.integer = Area_HeightSample(point.x, next.y);
@@ -349,9 +349,9 @@ MATCH void func_801F7670(void) {
     do {
         next.x = point.x;
         next.y = point.y - COORD_HALF;
-        if (next.y < row_point.y) {
-            next.y = row_point.y;
-            next.z = row_point.z;
+        if (next.y < actor_point.y) {
+            next.y = actor_point.y;
+            next.z = actor_point.z;
             stop   = 0;
         } else {
             next.z.part.integer = Area_HeightSample(point.x, next.y);

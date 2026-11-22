@@ -1,33 +1,35 @@
 #include "engine/slus/slus.h"
 
-/* func_80153CC4 */
+/* empties the two cell packet lists the buffer index selects in every grid
+ * row, then advances to the next row; the buffer's own pair is SYS_PrepareFrame's.
+ */
 MATCH void Area_CellResetPacketLists(void) {
-    u32 base_t0;
-    u32 level_t1;
-    s32 count_a3;
-    s32 offset_a2;
-    s32 count_a1;
-    u32 step_a0;
-    u32 v0;
-    u32 v1;
+    u8* base;
+    u32 level;
+    s32 row;
+    s32 row_offset;
+    s32 column;
+    u32 column_offset;
+    u32 address;
+    u32 slot;
 
-    count_a3  = 0;
-    level_t1  = g_GfxBufferIndex & BYTE_MASK;
-    base_t0   = (u8*)&D_80142CC0;
-    offset_a2 = 0;
+    row        = 0;
+    level      = g_GfxBufferIndex & BYTE_MASK;
+    base       = (u8*)&D_80142CC0;
+    row_offset = 0;
     do {
-        count_a1 = 0;
-        step_a0  = level_t1;
+        column        = 0;
+        column_offset = level;
         do {
-            v0 = step_a0 << 3;
-            count_a1++;
-            v1                       = v0 + offset_a2;
-            v0                       = v0 + base_t0;
-            *(u32*)(D_80142CC4 + v1) = offset_a2 + v0;
-            *(u32*)(D_80142CC0 + v1) = 0;
-            step_a0 += 2;
-        } while (count_a1 < 2);
-        count_a3++;
-        offset_a2 += 0x30;
-    } while (count_a3 < 56);
+            address = column_offset << 3;
+            column++;
+            slot                       = address + row_offset;
+            address                    = address + base;
+            *(u32*)(D_80142CC4 + slot) = row_offset + address;
+            *(u32*)(D_80142CC0 + slot) = 0;
+            column_offset += 2;
+        } while (column < 2);
+        row++;
+        row_offset += 0x30;
+    } while (row < 56);
 }

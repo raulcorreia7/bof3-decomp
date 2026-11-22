@@ -4,11 +4,11 @@
 #ifdef NON_MATCHING
 NON_MATCHING void Menu_OpenPartyScreen(void) {
     volatile u8*   record;
-    MenuPanelTask* rows;
+    MenuPanelTask* panels;
     u8             i;
 
     record                                                    = &D_801484BC;
-    rows                                                      = (MenuPanelTask*)(record + 0x120);
+    panels                                                    = (MenuPanelTask*)(record + 0x120);
     g_UiPanelTasks[MENU_START_PANEL_DESCRIPTION].panel        = 6;
     g_UiPanelTasks[MENU_START_PANEL_DESCRIPTION].mode         = MENU_START_MODE_MESSAGE;
     g_UiPanelTasks[MENU_START_PANEL_DESCRIPTION].state        = 2;
@@ -17,10 +17,10 @@ NON_MATCHING void Menu_OpenPartyScreen(void) {
     LOH(g_UiPanelTasks[MENU_START_PANEL_DESCRIPTION].pos.y)   = -0x14;
     g_UiPanelTasks[MENU_START_PANEL_DESCRIPTION].u.message.id = 0;
     for (i = 0; i < 2; i++) {
-        rows[i].panel  = 6;
-        rows[i].mode   = MENU_START_MODE_CURSOR_FRAME;
-        rows[i].active = 0;
-        rows[i].unk_0A = 0;
+        panels[i].panel  = 6;
+        panels[i].mode   = MENU_START_MODE_CURSOR_FRAME;
+        panels[i].active = 0;
+        panels[i].unk_0A = 0;
     }
     g_UiPanelTasks[18].mode                        = MENU_START_MODE_COMMANDS;
     g_BattlePanelMode                              = 2;
