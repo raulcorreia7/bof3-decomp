@@ -445,8 +445,8 @@ two systems have their own thing under one noun. `B` in a disc label marks the b
 | `PLCHAR`, `BPLCHAR`      | character archive                                                                                 |
 | `PLP###`                 | code of one party: the three digits name its characters (`PLP012`: Ryu, Nina, Garr)               |
 | `COMMU00` to `COMMU05`   | Fairy Village: the village program (`COMMU00`) and its event scripts (`COMMU01` to `COMMU05`)     |
-| `BATE`                   | ability menu (`Game_LoadAbilityMenu` loads it)                                                    |
-| `SHISU`                  | the scena11 shisu screen, where the player mixes the four ingredients (`Game_LoadShisu` loads it) |
+| `BATE`                   | ability menu (`Game_AbilityMenuLoad` loads it)                                                    |
+| `SHISU`                  | the scena11 shisu screen, where the player mixes the four ingredients (`Game_ShisuLoad` loads it) |
 | `SISYOU` (師匠)          | `Master` menu                                                                                     |
 | `SHOP`                   | shop program                                                                                      |
 | `START`                  | start menu                                                                                        |

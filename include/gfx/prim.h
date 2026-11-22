@@ -70,7 +70,7 @@ ASSERT_SIZE(UvRect, 0x4);
 #define GFX_LAYER_UI                 1 /* text, windows and menu sprites */
 #define GFX_LAYER_EFFECT_FRONT       2 /* screen effects and effect sprites in front of the scene */
 #define GFX_LAYER_EFFECT             3 /* effect portraits, rings and quads over the scene */
-#define GFX_LAYER_BATTLE_SCENE       4 /* g_AreaDrawMode while a battle runs (Battle_LoadPartySprites) */
+#define GFX_LAYER_BATTLE_SCENE       4 /* g_AreaDrawMode while a battle runs (Game_BattleLoadPartySprites) */
 #define GFX_LAYER_SCENE_BACK         5 /* scenery pieces and display moves behind the actors */
 #define GFX_LAYER_FIELD_SCENE        6 /* g_AreaDrawMode in the field (Game_NewGame) */
 #define GFX_LAYER_BACKDROP           7 /* gradients and map quads behind the scene */

@@ -30,9 +30,9 @@ s32 Game_IsScriptVar0Equal(u8** cursor);
 s32 Game_IsScriptVar1Equal(u8** cursor);
 s32 Game_IsScriptVar2Equal(u8** cursor);
 s32 Game_IsScriptVar3Equal(u8** cursor);
-s32 Game_SetScriptVar(u8* operand);
-s32 Game_IsScriptVarEqual(u8* operand);
-s32 Game_IncScriptVar(u8* operand);
+s32 Game_ScriptVarSet(u8* operand);
+s32 Game_ScriptVarIsEqual(u8* operand);
+s32 Game_ScriptVarInc(u8* operand);
 /* func_8015BABC */
 s32 Game_TestNever(void);
 

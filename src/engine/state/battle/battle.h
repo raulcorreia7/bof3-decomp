@@ -14,10 +14,10 @@ void Game_BattleStartScripted(u8 mode_byte);
 
 /* func_80197A60 */
 void Game_BattleTurnToEncounter(void);
-void Battle_LoadPartySprites(void);
+void Game_BattleLoadPartySprites(void);
 /* func_80197C1C */
 void Game_BattleWalkToEncounter(void);
-void Battle_LoadBattleArchive(void);
+void Game_BattleLoadArchive(void);
 /* func_80197E54 */
 void Game_BattleBeginEntrance(void);
 /* func_801BEDD0 */
