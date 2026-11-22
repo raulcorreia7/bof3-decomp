@@ -36,7 +36,7 @@ NON_MATCHING void Area_DrawGridActors(void) {
     s8   last;
     s32  lowest;
     s32  tpage;
-    u32* packet_ptr;
+    u32* packet_slot;
     u32  actor_key;
     u8*  entry;
     FAKE_STACK_PADS(u8, 16);
@@ -95,11 +95,11 @@ NON_MATCHING void Area_DrawGridActors(void) {
                 }
                 packet_index += 1;
             }
-            packet     = packet_index;
-            packet_ptr = &g_AreaCellPackets[packet];
-            actor_key  = OBJ_KEY(actor);
-            rows       = 0;
-            merged     = actor_key < *(u16*)((u8*)packet_ptr + 2);
+            packet      = packet_index;
+            packet_slot = &g_AreaCellPackets[packet];
+            actor_key   = OBJ_KEY(actor);
+            rows        = 0;
+            merged      = actor_key < *(u16*)((u8*)packet_slot + 2);
             while (merged || (packet == g_AreaCellPacketCount)) {
                 obj = OBJ(actor);
                 key = *(u16*)(obj + 0x32);
@@ -127,7 +127,7 @@ NON_MATCHING void Area_DrawGridActors(void) {
                     D_80147D0C[panel].depth     = *(s32*)(obj + 0x60) | WORD_SIGN_BIT;
                 }
                 actor += 1;
-                merged = OBJ_KEY(actor) < *(u16*)((u8*)packet_ptr + 2);
+                merged = OBJ_KEY(actor) < *(u16*)((u8*)packet_slot + 2);
             }
             row = 0;
             if ((rows - 1) > 0) {
