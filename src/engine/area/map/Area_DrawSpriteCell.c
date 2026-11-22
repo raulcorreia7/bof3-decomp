@@ -9,8 +9,7 @@
  * selects the clut by clut and appends the primitive.
  */
 MATCH void Area_DrawSpriteCell(s32 mirror, SpriteCell* cell, u16 clut) {
-    /* FAKE: keep the page word in v0. */
-    FAKE_REG(s32, draw_value, "v0");
+    u16         tpage;
     s32         delta;
     SPRT*       sprite;
     u8*         scratch_base;
@@ -19,9 +18,8 @@ MATCH void Area_DrawSpriteCell(s32 mirror, SpriteCell* cell, u16 clut) {
     s32         sprite_mirror = mirror;
     s16         sprite_clut   = clut;
 
-    draw_value = getTPage(g_Task->palette_8bit != PALETTE_TYPE_CELL, g_Task->tint.bytes.flags, g_Task->sheet_page << 6, (g_Task->sheet_page >> 4) << 8);
-    FAKE_OPAQUE(draw_value);
-    GFX_ADD_LAYER_DRAW_MODE(SPAD_CURSOR->draw_layer, draw_value);
+    tpage = getTPage(g_Task->palette_8bit != PALETTE_TYPE_CELL, g_Task->tint.bytes.flags, g_Task->sheet_page << 6, (g_Task->sheet_page >> 4) << 8);
+    GFX_ADD_LAYER_DRAW_MODE(SPAD_CURSOR->draw_layer, tpage);
     sprite = (SPRT*)g_GfxPrimCursor;
     SetSprt(sprite);
     setWH(sprite, g_SpriteSizes[sprite_cell->size & GFX_SPRITE_SIZE_MASK][0], g_SpriteSizes[sprite_cell->size & GFX_SPRITE_SIZE_MASK][1]);

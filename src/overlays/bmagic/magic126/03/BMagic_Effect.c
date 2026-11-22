@@ -235,11 +235,7 @@ MATCH void func_801EFB74(void) {
 MATCH void func_801EFC94(void) {
     u8 timer;
 
-    timer          = g_Task->unk_09 + 2;
-    g_Task->unk_09 = timer;
-    if (timer == 150) {
-        g_Task->header.step = g_Task->header.step + 1;
-    }
+    BMAGIC_STEP_TIMER(unk_09, 2, 150);
 }
 
 /* func_801EFCE4 */

@@ -36,6 +36,10 @@ The test: [natural names](../../../../docs/naming.md#functions).
 | `g_ShopSelectStep`                                                      | `g_ShopSelectedItem`                                                    | the item, not a step of the code                                    |
 | `unk_01`, `state_02`, `step_01` (task header)                           | `mode`, `step`, with `flags` at 0x00                                    | the era names for the first three bytes of every task record        |
 | `Struct_801E3C40`, `Record3`                                            | `ShopStock`, `MasterSkill`, `EncounterTable`                            | a type is a game noun                                               |
+| `tmp10`, `var_s0`, `new_var`, `value2`, `arg1`                          | `tpage`, `shade`, `row`, `target`                                       | a local says what it holds, in the SDK's or the game's word         |
+| `draw_value` behind a `FAKE_REG`, one `delta` reused for three things   | `u16 tpage`; `r`, `g`, `b`                                              | a name never records how the match was reached; fix the type first  |
+| `sprite_cell = cell` copies named after the argument                    | the argument itself, or the role the copy plays                         | a copy that exists only for the allocator carries a `FAKE:` note    |
+| `0x17`, `STEP_23`, `FLAG_0x40`                                          | `FISHING_STEP_REEL`, `ACTOR_HIDDEN`                                     | a constant is its meaning to the callers, never its value           |
 
 The right column shows the form, not facts: every name still needs its evidence (step 3). When the
 evidence shows only the mechanics, use the plainest game verb from the

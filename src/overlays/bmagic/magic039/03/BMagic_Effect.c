@@ -185,11 +185,7 @@ MATCH void func_801EF584(void) {
 MATCH void func_801EF690(void) {
     u8 timer;
 
-    timer          = g_Task->unk_09 + 16;
-    g_Task->unk_09 = timer;
-    if (timer == 128) {
-        g_Task->header.step = g_Task->header.step + 1;
-    }
+    BMAGIC_STEP_TIMER(unk_09, 16, 128);
 }
 
 MATCH void Effect_CountDownTimer(void) {

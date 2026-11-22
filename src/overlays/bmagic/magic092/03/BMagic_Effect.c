@@ -11,17 +11,7 @@ MATCH void func_801EEC04(void) {
 
     BMagic_DispatchTaskPair(func_801EED04, Effect_StartOnZeroTick);
 
-    for (i = 0; i < BMAGIC_EFFECT_COUNT; i++) {
-        if (D_801F07F8[i].header.flags & BMAGIC_EFFECT_IN_USE) {
-            saved_task            = g_Task;
-            saved_battler         = g_BattleEffectBattler;
-            g_Task                = (PartyMember*)&D_801F07F8[i];
-            g_BattleEffectBattler = D_801F07F8[i].target.party;
-            func_801EF7FC();
-            g_BattleEffectBattler = saved_battler;
-            g_Task                = saved_task;
-        }
-    }
+    BMAGIC_RUN_EFFECT_SLOTS(D_801F07F8, func_801EF7FC);
 }
 
 /* Clears the effect slot table and spawns one effect 0x28 at each selectable battler, the

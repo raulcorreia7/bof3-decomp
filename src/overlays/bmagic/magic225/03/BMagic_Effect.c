@@ -12,17 +12,7 @@ MATCH void func_801EEC14(void) {
 
     SYS_DISPATCH_BYTE(handlers.steps, g_Task->header.mode);
 
-    for (i = 0; i < BMAGIC_EFFECT_COUNT; i++) {
-        if (D_801F03BC[i].header.flags & BMAGIC_EFFECT_IN_USE) {
-            saved_task            = g_Task;
-            saved_battler         = g_BattleEffectBattler;
-            g_Task                = (PartyMember*)&D_801F03BC[i];
-            g_BattleEffectBattler = D_801F03BC[i].target.party;
-            func_801EFE0C();
-            g_BattleEffectBattler = saved_battler;
-            g_Task                = saved_task;
-        }
-    }
+    BMAGIC_RUN_EFFECT_SLOTS(D_801F03BC, func_801EFE0C);
 }
 
 /* Clears the effect slots, centers the camera, claims the first effect slot and reloads palette rows 2 and 26 of
