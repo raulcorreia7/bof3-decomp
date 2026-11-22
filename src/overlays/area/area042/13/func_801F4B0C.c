@@ -2,7 +2,7 @@
 
 #ifdef NON_MATCHING
 /* Draws a window panel in four quads (edges and two halves of the middle), then its frame. */
-NON_MATCHING void func_801F4B0C(s32 x, s32 y, s16 width, s16 height, u8 mode) {
+NON_MATCHING void func_801F4B0C(s16 x, s16 y, s16 width, s16 height, u8 mode) {
     RECT*     texture_window;
     POLY_FT4* primitive;
     s32       color;
@@ -46,7 +46,7 @@ NON_MATCHING void func_801F4B0C(s32 x, s32 y, s16 width, s16 height, u8 mode) {
     primitive = (POLY_FT4*)g_GfxPrimCursor;
     SetPolyFT4(primitive);
     SetSemiTrans(primitive, 1);
-    setXY4(primitive, x + 2, y, x + 2 + half, y, x + 2, y + height, x + 2 + half, y + height);
+    setXY4(primitive, x + 2, y, (s16)(x + 2) + half, y, x + 2, y + height, (s16)(x + 2) + half, y + height);
     setUV4(primitive, 0, 0, half, 0, 0, height, half, height);
     setRGB0(primitive, color, color, color);
     primitive->clut  = GetClut((mode << 5) | 0x10, 0x1E1);
@@ -56,7 +56,7 @@ NON_MATCHING void func_801F4B0C(s32 x, s32 y, s16 width, s16 height, u8 mode) {
     primitive = (POLY_FT4*)g_GfxPrimCursor;
     SetPolyFT4(primitive);
     SetSemiTrans(primitive, 1);
-    setXY4(primitive, x + half + 2, y, x + half + (half + odd + 2), y, x + half + 2, y + height, x + half + (half + odd + 2), y + height);
+    setXY4(primitive, x + half + 2, y, x + half + (s16)(half + odd + 2), y, x + half + 2, y + height, x + half + (s16)(half + odd + 2), y + height);
     setUV4(primitive, 0, 0, half + odd, 0, 0, height, half + odd, height);
     setRGB0(primitive, color, color, color);
     primitive->clut  = GetClut((mode << 5) | 0x10, 0x1E1);
@@ -66,14 +66,28 @@ NON_MATCHING void func_801F4B0C(s32 x, s32 y, s16 width, s16 height, u8 mode) {
     primitive = (POLY_FT4*)g_GfxPrimCursor;
     SetPolyFT4(primitive);
     SetSemiTrans(primitive, 1);
-    setXY4(primitive, x + width - 2, y, x + width, y, x + width - 2, y + height, x + width, y + height);
-    setUV4(primitive, 0, 0, 2, 0, 0, height, 2, height);
+    primitive->x2 = x + width - 2;
     setRGB0(primitive, color, color, color);
+    primitive->x0 = x + width - 2;
+    primitive->y2 = y + height;
+    primitive->v2 = height;
+    primitive->x1 = x + width;
+    primitive->x3 = x + width;
+    primitive->y1 = y;
+    primitive->u1 = 2;
+    primitive->u3 = 2;
+    primitive->y3 = y + height;
+    primitive->u0 = 0;
+    primitive->v0 = 0;
+    primitive->y0 = y;
+    primitive->u2 = 0;
+    primitive->v3 = height;
+    primitive->v1 = 0;
     primitive->y2 -= 1;
     primitive->v2 -= 1;
     primitive->y1 += 2;
-    primitive->v1 += 2;
     primitive->y3 -= 3;
+    primitive->v1 += 2;
     primitive->v3 -= 3;
     primitive->clut  = GetClut((mode << 5) | 0x10, 0x1E1);
     primitive->tpage = getTPage(TPAGE_DEPTH_4BIT, abr, FONT_TPAGE_X, FONT_TPAGE_Y);
