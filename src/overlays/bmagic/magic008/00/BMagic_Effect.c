@@ -171,11 +171,7 @@ MATCH void func_801EF7C8(void) {
 }
 
 MATCH void func_801EF9D4(void) {
-    if (TASK(PartyMember)->param.unk_0B == 0xFF) {
-        BATTLE_ACTIVE_WORK->header.flags &= ~PARTY_MEMBER_FLAG_HANDLER_BUSY;
-        Battle_SelectActiveBattlerScript(4, 0);
-        TASK(PartyMember)->header.mode += 1;
-    }
+    MAGIC008_RELEASE_ACTIVE_AT_END();
 }
 
 MATCH void Effect_StartPlaying5(void) {
@@ -213,11 +209,7 @@ MATCH void func_801EFAD4(void) {
 }
 
 MATCH void func_801EFC90(void) {
-    if (TASK(PartyMember)->param.unk_0B == 0xFF) {
-        BATTLE_ACTIVE_WORK->header.flags &= ~PARTY_MEMBER_FLAG_HANDLER_BUSY;
-        Battle_SelectActiveBattlerScript(4, 0);
-        TASK(PartyMember)->header.mode += 1;
-    }
+    MAGIC008_RELEASE_ACTIVE_AT_END();
 }
 
 MATCH void Effect_StartPlaying7(void) {
@@ -633,14 +625,7 @@ MATCH void func_801F1294(void) {
 MATCH void func_801F1384(void) {
     u8 timer;
 
-    Script_AnimStepOnce();
-    timer                     = TASK(PartyMember)->unk_09 - 1;
-    TASK(PartyMember)->unk_09 = timer;
-    if (!(timer & BYTE_MASK)) {
-        Battle_PlayActiveBattlerSE(2, 0);
-        Battle_MarkDamaged(g_Battle.target_selector);
-        TASK(PartyMember)->header.step += 1;
-    }
+    MAGIC008_COUNT_DOWN_MARK_DAMAGED(2);
 }
 
 MATCH void func_801F1400(void) {
@@ -681,14 +666,7 @@ MATCH void Effect_ReloadTimerAndStep2(void) {
 MATCH void func_801F1804(void) {
     u8 timer;
 
-    Script_AnimStepOnce();
-    timer                     = TASK(PartyMember)->unk_09 - 1;
-    TASK(PartyMember)->unk_09 = timer;
-    if (!(timer & BYTE_MASK)) {
-        Battle_PlayActiveBattlerSE(2, 0);
-        Battle_MarkDamaged(g_Battle.target_selector);
-        TASK(PartyMember)->header.step += 1;
-    }
+    MAGIC008_COUNT_DOWN_MARK_DAMAGED(2);
 }
 
 MATCH void func_801F1880(void) {

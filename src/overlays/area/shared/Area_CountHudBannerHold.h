@@ -3,8 +3,7 @@
  * the work state, and draws the banner record 0x5C at the work y
  * coordinate.
  */
-/* func_801F382C (area115), func_801F3840 (area121), func_801F438C
- * (area088), func_801F385C (area087) */
+/* func_801F36EC (area152), func_801F3798 (area151), func_801F382C (area115), func_801F3840 (area121), func_801F385C (area087), func_801F438C (area088), func_801F38EC (area104) */
 MATCH void Area_CountHudBannerHold(void) {
     Actor* work;
 
