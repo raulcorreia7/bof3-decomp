@@ -8,7 +8,7 @@ MATCH void func_801E1A14(void) {
     expected = 4;
     work     = g_Game.current;
     if (work->u.turn.command.type == expected) {
-        work->chr.ap = work->chr.ap - D_801463C8;
+        work->chr.ap = work->chr.ap - g_Battle.unk_E8;
     }
     battle_flags = &g_Battle.flags;
     *battle_flags |= 0x800;

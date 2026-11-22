@@ -5,9 +5,9 @@ MATCH void func_801F2C48(void) {
 
     g_AreaCameraOffsetZ      = 0x1C80;
     g_AreaCameraRefreshCount = 2;
-    D_80145ED8               = 1;
-    D_80146018               = 1;
-    D_80146158               = 1;
+    g_Game.members[0].unk_48 = 1;
+    g_Game.members[1].unk_48 = 1;
+    g_Game.members[2].unk_48 = 1;
     work                     = TASK(u8);
     work[0x5F]               = 0x7F;
     work[0x5E]               = 0x7F;

@@ -32,11 +32,11 @@ MATCH void Battle_StartEscapeScroll(void) {
     if (g_Game.members[0].u.turn.command.type == BATTLE_COMMAND_ITEM) {
         func_801DDE7C(D_80145FB2, g_Game.members[0].u.turn.command.id);
     }
-    if (D_801460E9 == 5) {
-        func_801DDE7C(D_801460F2, D_801460EA);
+    if (g_Game.members[1].u.turn.command.type == 5) {
+        func_801DDE7C(g_Game.members[1].u.turn.choice, g_Game.members[1].u.turn.command.id);
     }
-    if (D_80146229 == 5) {
-        func_801DDE7C(D_80146232, D_8014622A);
+    if (g_Game.members[2].u.turn.command.type == 5) {
+        func_801DDE7C(g_Game.members[2].u.turn.choice, g_Game.members[2].u.turn.command.id);
     }
     count = 0;
     if (g_Battle.party_count != 0) {

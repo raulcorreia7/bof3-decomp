@@ -71,7 +71,7 @@ MATCH void func_801F8F34(void) {
             g_AreaScrollTargetX  = 0x210000;
             g_AreaCameraSpeed    = 0x20;
             g_ScenarioState.step = 0xC;
-            g_AreaScrollTargetY  = D_80145EC8;
+            g_AreaScrollTargetY  = g_Game.members[0].pos.y.fixed;
             break;
         case 12:
             if (g_AreaCameraMoving != 0) {
@@ -86,7 +86,7 @@ MATCH void func_801F8F34(void) {
             }
             g_AreaScrollTargetX         = 0x160000;
             g_AreaCameraSpeed           = 0x20;
-            g_AreaScrollTargetY         = D_80145EC8;
+            g_AreaScrollTargetY         = g_Game.members[0].pos.y.fixed;
             g_ScratchPad.cells.bytes[0] = Actor_FindFreeSpawned();
             if (g_ScratchPad.cells.bytes[0] == GAME_NONE) {
                 break;

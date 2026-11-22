@@ -55,7 +55,6 @@ bool func_801F4058(s16 x, s16 y);
 u8 func_801F4380(s32 x, s32 y);
 
 /* The party proximity check's row count. */
-extern u8 D_80146254;
 
 /* The x step of each facing in the resident facing table, and the y step as the
  * second byte. */

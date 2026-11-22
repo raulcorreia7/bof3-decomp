@@ -41,7 +41,6 @@ enum WellMode {
 #define WELL_CUE_LOWER_END_REPEAT EMI_SE_ID(SND_BANK_AREA, 1)
 #define WELL_CUE_SWISH            EMI_SE_ID(SND_BANK_AREA, 2)
 
-extern u8  D_80145E97;
 extern u8  D_80145EDA;
 extern u16 D_80145EE8;
 extern u8  g_WellTimeLimits[WELL_TIME_LIMIT_COUNT];

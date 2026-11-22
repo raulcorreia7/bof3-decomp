@@ -124,7 +124,7 @@ MATCH s32 func_801FE2A0(s32 x, s32 y) {
         return 1;
     }
     if (LOHU(g_GameAreaId) == AREA_ID_OGRE_ROAD && !SYS_TestFlag(g_SceneFlags, 8) && (u32)((x >> 16) - 0x45) < 3 && (u32)((y >> 16) - 0x37) < 3) {
-        g_ScratchPad.cells.bytes[0] = D_80145E98;
+        g_ScratchPad.cells.bytes[0] = g_Game.members[0].facing;
         if (g_ScratchPad.cells.bytes[0] != 6 && g_ScratchPad.cells.bytes[0] != 7 && g_ScratchPad.cells.bytes[0] != 0) {
             g_ScenarioState.state_04 = 6;
             g_ScenarioState.step     = 0;

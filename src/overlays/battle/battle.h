@@ -93,7 +93,6 @@ extern volatile u8                  g_BattleUIState;
 /* Main-executable battle-selection cell consumed by the countdown arm. */
 extern u8                           g_BattleActionType_nv;
 extern u8                           D_801463B8[];
-extern u8                           D_801463CB;
 extern volatile BattleSelectionType D_801CA71C[];
 /* D_801EB0B0 */
 extern s8                           g_BattlePanelOffsets[];
@@ -108,7 +107,6 @@ extern u8                           D_801EC324;
 extern u8                           D_801EC328;
 /* Queued-slot records at g_BattleEffects (stride 0x78). */
 #define BATTLE_EFFECT_COUNT 48
-extern u8 D_80145FC8;
 
 extern PanelOwner D_801ED9B0[];
 /* Prototypes the images of this group share. */

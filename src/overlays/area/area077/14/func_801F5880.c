@@ -15,7 +15,7 @@ MATCH s32 func_801F5880(s32 x, s32 y) {
     i    = 0;
     id0  = x & 0xFF;
     id1  = y & 0xFF;
-    mode = &D_80145E98;
+    mode = &g_Game.members[0].facing;
     off  = 0;
     for (; i < 2; i++, off += 4) {
         if (id0 == D_801F6B14[off] && id1 == D_801F6B15[off] && D_801F6B16[off] == *mode) {

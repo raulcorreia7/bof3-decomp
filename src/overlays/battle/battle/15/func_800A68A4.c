@@ -57,6 +57,6 @@ MATCH void func_800A68A4(void) {
     }
     g_BattleTargetRows[0].gate_03 = (D_800B6F5C << 5) + (D_800B6F58 & 0x1F);
     g_Battle.dragon_form          = D_800B6F58;
-    D_801463B9                    = D_800B6F5C;
+    g_Battle.unk_D0[9]            = D_800B6F5C;
     Battle_RescaleStats(g_Battle.active_battler);
 }

@@ -725,38 +725,37 @@ NON_MATCHING void func_801F0FBC(void) {
     LINE_F2* prim;
     long     depth;
     long     flag;
-    s32      i;
-    s32      angle;
+    u32      i;
     s32      x;
     s32      y;
     s32      z;
-    s32      radius;
-    s32      shade;
+    u32      radius;
+    u32      shade;
     s32      tpage;
+
     if (TASK(PartyMember)->unk_09 >= 0x19) {
         func_801F0E90();
         i      = 0;
         x      = TASK(PartyMember)->pos.x.fixed;
         y      = TASK(PartyMember)->pos.y.fixed;
-        z      = (TASK(PartyMember)->facing >= 2) ? -2 : 0;
+        z      = (TASK(PartyMember)->header.mode >= 2) ? -2 : 0;
         radius = ~TASK(PartyMember)->unk_09 & 0x1F;
         shade  = 0x80 - radius * 16;
         do {
-            tpage = getTPage(1, 1, 320, 256);
+            tpage = (GetGraphType() == 1 || GetGraphType() == 2) ? 0x2A5 : 0xB5;
             SetDrawMode((DR_MODE*)g_GfxPrimCursor, 0, 1, tpage, 0);
             Area_CellAddPrim(x, y, z, sizeof(DR_MODE));
             prim = (LINE_F2*)g_GfxPrimCursor;
             SetLineF2(prim);
             PSX_SET_SEMI_TRANSPARENT(prim);
             g_ScratchPadVectors[0].vx = FIXED_MUL(rcos(i << 6) * 16, radius);
-            angle                     = i;
-            g_ScratchPadVectors[0].vy = FIXED_MUL(rsin(angle << 6) * 16, radius);
             g_ScratchPadVectors[0].vz = 0;
+            g_ScratchPadVectors[0].vy = FIXED_MUL(rsin(i << 6) * 16, radius);
             RotTransPers(&g_ScratchPadVectors[0], (long*)&prim->x0, &depth, &flag);
             i++;
             g_ScratchPadVectors[0].vx = FIXED_MUL(rcos(i << 6) * 16, radius);
-            D_1F800016                = FIXED_MUL(radius, rsin(i << 6) * 16);
-            D_1F800018                = 0;
+            g_ScratchPadVectors[0].vz = 0;
+            g_ScratchPadVectors[0].vy = FIXED_MUL(rsin(i << 6) * 16, radius);
             RotTransPers(&g_ScratchPadVectors[0], (long*)&prim->x1, &depth, &flag);
             setRGB0(prim, shade, shade, shade);
             Area_CellAddPrim(x, y, z, sizeof(LINE_F2));

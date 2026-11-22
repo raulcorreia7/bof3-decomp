@@ -270,13 +270,13 @@ MATCH void func_801D1FA0(void) {
     } else {
         D_80148511 = 1;
     }
-    D_801D8ED4.equipped_items[0]                        = D_80144DF2;
-    D_801D8ED4.equipped_items[1]                        = D_80144DF3;
-    D_801D8ED4.equipped_items[2]                        = D_80144DF4;
-    D_801D8ED4.equipped_items[3]                        = D_80144DF5;
-    D_801D8ED4.equipped_items[4]                        = D_80144DF6;
+    D_801D8ED4.equipped_items[0]                        = g_Characters[7].equip.weapon;
+    D_801D8ED4.equipped_items[1]                        = g_Characters[7].equip.shield;
+    D_801D8ED4.equipped_items[2]                        = g_Characters[7].equip.helmet;
+    D_801D8ED4.equipped_items[3]                        = g_Characters[7].equip.armor;
+    D_801D8ED4.equipped_items[4]                        = g_Characters[7].equip.accessories[0];
     /* @bug The trial set stores both accessories to the first accessory slot, so the second keeps its old value. */
-    D_801D8ED4.equipped_items[4]                        = D_80144DF7;
+    D_801D8ED4.equipped_items[4]                        = g_Characters[7].equip.accessories[1];
     D_801D8ED4.equipped_items[g_UiPanelTasks[1].unk_0A] = slot;
 }
 

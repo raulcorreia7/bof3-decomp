@@ -9,12 +9,12 @@ MATCH void func_801E16B4(void) {
         state = work->u.turn.command.type;
         if (state == 4) {
             if (!(work->u.turn.action_flags.value & BATTLER_ACTION_DRAGON_FORM)) {
-                if (!(func_801DDF50(work->chr.character_id, D_801463CD) & BYTE_MASK)) {
+                if (!(func_801DDF50(work->chr.character_id, g_Battle.unk_EA[3]) & BYTE_MASK)) {
                     TASK(PartyMember)->unk_09 = 0x1E;
                 } else {
                     goto block_8;
                 }
-            } else if (((g_Battle.dragon_form == state) || ((g_Battle.dragon_form - 7) < 2U)) && (func_801DDF50(work->chr.character_id, D_801463CD) & BYTE_MASK)) {
+            } else if (((g_Battle.dragon_form == state) || ((g_Battle.dragon_form - 7) < 2U)) && (func_801DDF50(work->chr.character_id, g_Battle.unk_EA[3]) & BYTE_MASK)) {
                 goto block_8;
             }
         } else {

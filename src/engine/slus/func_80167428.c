@@ -48,7 +48,7 @@ NON_MATCHING void func_80167428(void) {
         FIELD(s8, (g_Task), 0x1u)         = 3;
         return;
     }
-    if (g_InputMasks[FIELD_INPUT_VIEW] & D_8014625C) {
+    if (g_InputMasks[FIELD_INPUT_VIEW] & g_Game.input) {
         FIELD(s8, g_Game.current, 0x11Cu) = 3;
         g_GameEntrySubstate += 1;
         FIELD(s8, (g_Task), 0x1u) = 1;
@@ -71,12 +71,12 @@ NON_MATCHING void func_80167428(void) {
         actor = g_Task;
         tmp0  = actor->direction * 8;
         tmp2  = ((s32*)g_FacingSteps)[tmp0];
-        tmp4  = D_80145EC4 - (actor->pos.x.fixed + tmp2);
+        tmp4  = g_Game.members[0].pos.x.fixed - (actor->pos.x.fixed + tmp2);
         val2  = tmp4;
         if (tmp4 < 0) {
             val2 = -val2;
         }
-        tmp5 = D_80145EC8 - (actor->pos.y.fixed + *(g_FacingStepY + tmp0));
+        tmp5 = g_Game.members[0].pos.y.fixed - (actor->pos.y.fixed + *(g_FacingStepY + tmp0));
         val0 = tmp5;
         if (tmp5 < 0) {
             val0 = -val0;
@@ -91,7 +91,7 @@ NON_MATCHING void func_80167428(void) {
             g_AreaCameraHeightDelta = 0;
             val4                    = 1;
         } else {
-            if (g_InputMasks[FIELD_INPUT_RUN] & D_8014625C) {
+            if (g_InputMasks[FIELD_INPUT_RUN] & g_Game.input) {
                 if ((g_AutoRun ^ 1) != 0) {
                     goto block_28; /* retail branch */
                 }

@@ -13,6 +13,6 @@ MATCH void Area_SceneInit(void) {
     work                                    = TASK(Actor);
     FIELD(u32, work, 0x34u)                 = g_Game.members[0].pos.x.fixed;
     FIELD(u32, work, 0x38u)                 = g_Game.members[0].pos.y.fixed;
-    FIELD(u32, work, 0x3Cu)                 = D_80145ECC;
+    FIELD(u32, work, 0x3Cu)                 = g_Game.members[0].pos.z.fixed;
     work->header.mode                       = work->header.mode + 1;
 }

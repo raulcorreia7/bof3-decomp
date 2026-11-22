@@ -25,7 +25,7 @@ MATCH void func_80167910(void) {
     if (D_8014626C[0] & 0x40) {
         return;
     }
-    setVector(&pos, (s16)((D_801462A0 >> 9) - 0x4000), (s16)((D_801462A4 >> 9) - 0x4000), (s16)(-(D_801462AA + 0x80) / 2));
+    setVector(&pos, (s16)((g_Game.base_x.fixed >> 9) - 0x4000), (s16)((g_Game.base_y.fixed >> 9) - 0x4000), (s16)(-(D_801462AA + 0x80) / 2));
     TASK(Actor)->unk_60   = RotTransPers(&pos, (long*)&sxy, &p, &flag);
     TASK(Actor)->screen_x = sxy.vx;
     TASK(Actor)->screen_y = sxy.vy;

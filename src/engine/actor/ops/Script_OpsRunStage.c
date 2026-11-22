@@ -71,7 +71,7 @@ NON_MATCHING u8 Script_OpsRunStage(ScriptState* state, const u8* table, u8 value
         case ACTOR_SCRIPT_STAGE_CAMERA_SCROLL: {
             s32* base;
 
-            base = &D_80145EC4;
+            base = &g_Game.members[0].pos.x.fixed;
             if ((g_AreaScrollTargetX != base[0]) || (g_AreaScrollTargetY != base[1])) {
                 delta_x = g_AreaScrollTargetX - base[0];
                 delta_x = ABS(delta_x);

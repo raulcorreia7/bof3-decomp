@@ -560,7 +560,7 @@ NON_MATCHING void func_801F8E00(void) {
             Game_SetScriptActive();
             SND_BGMFadeOut(g_SndBGMId, 100, 8);
             SND_BGMPlay(20, 0, 8);
-            D_80146258 |= 0x80;
+            g_Game.flags |= 0x80;
             Scene_SetupParty(5);
             SYS_SetFlag(g_SceneFlags, 0x18);
             g_ScenarioState.state_04 = 5;

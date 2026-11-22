@@ -137,7 +137,6 @@ extern void*           D_800B6178[];
 /* D_800B65F8 */
 extern BattleSelection g_BattleSelections[];
 /* D_80143F00 */
-extern s32             D_80145ED0;
 extern volatile u8     D_80145F18[];
 extern u8              D_80145F20[];
 extern u8              D_80145F22[];
@@ -153,7 +152,6 @@ extern u8              D_80145FC7;
 extern u8              D_80145FC9;
 extern u8              D_80145FCC[];
 extern u8              D_801462F6[];
-extern u8              D_80146304; /* oscillation direction latch */
 extern u8              D_80146308; /* UI oscillator byte */
 extern u8              D_80146364[];
 extern u16             D_80146388;

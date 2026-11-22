@@ -334,7 +334,6 @@ extern s32                 D_8014503C;   /* 0x8014503C */
 extern s8                  D_8014504B;   /* 0x8014504B */
 extern u8                  D_801457AB;
 extern u8                  D_80145E9B;
-extern u16                 D_80145EBC; /* 0x80145EBC */
 extern u32                 D_80145EDC; /* 0x80145EDC */
 extern u8                  D_80145F00; /* 0x80145F00 */
 extern u8                  D_80145FB4[];
@@ -363,7 +362,6 @@ extern u8                  D_8014626F;
 extern u8                  D_80146270;
 extern u8                  D_80146855;
 extern u8                  D_80146856;
-extern u16                 D_80146878;
 extern u8                  D_8014688F;
 extern u8                  D_80146893[]; /* 0x80146893 */
 extern GameSlotByteColumn  D_801468B1[];
@@ -1377,7 +1375,7 @@ static inline s32 Game_AddStepByFlag(s32 step, Actor* actor, s32 value_b, u8 fla
 
     bit0 = flag_bits & 1;
     if (bit0 != 0) {
-        if ((D_80146878 & 0x1) != (g_EncounterSteps & 0x1)) {
+        if ((g_ScenarioState.unk_08 & 0x1) != (g_EncounterSteps & 0x1)) {
             value = actor->unk_7B;
             if (value < 0xFAu) {
                 actor->unk_7B = (u8)(value + step);

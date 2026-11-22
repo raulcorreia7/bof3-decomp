@@ -9,7 +9,6 @@
 extern u32* D_80143534[][2];
 
 /* The marker screen-y source flag and the y it holds. */
-extern s32 D_80145EA4;
 extern s16 D_80145EC0;
 
 /* The scratchpad work row the entry paths read. */

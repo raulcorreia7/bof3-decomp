@@ -8,7 +8,7 @@ MATCH void func_801B2B6C(void) {
         if (g_SpawnedActors[route].header.flags == 0) {
             TASK(Actor)->param.unk_0B = 0xFF;
         }
-    } else if ((g_Game.party_size < 2) || ((D_80145FD1 == 5) && ((g_Game.party_size != 3) || (D_80146111 == D_80145FD1)))) {
+    } else if ((g_Game.party_size < 2) || ((g_Game.members[1].header.mode == 5) && ((g_Game.party_size != 3) || (g_Game.members[2].header.mode == g_Game.members[1].header.mode)))) {
         TASK(Actor)->param.unk_0B = 0;
         g_GameStateIndex          = GAME_REQUEST_BATTLE;
         g_AreaWalkFlags &= ~AREA_WALK_TRANSITION;

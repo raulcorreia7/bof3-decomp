@@ -1037,7 +1037,7 @@ NON_MATCHING void func_801FA3E4(void) {
     if (LOHU(g_GameAreaId) == 3) {
         if (!SYS_TestFlag(g_SceneFlags, 14)) {
             Scene_RunScenario(3);
-            flags = &D_80145FD0;
+            flags = &g_Game.members[1].header.flags;
             *flags |= 0x40;
         }
     }
@@ -1046,9 +1046,9 @@ NON_MATCHING void func_801FA3E4(void) {
         g_AreaDrawFlags          = 0;
         g_ScenarioState.state_04 = 8;
         g_ScenarioState.step     = 0;
-        D_801FEA70               = D_80145E98;
-        D_801FEA74               = D_80145EC4;
-        D_801FEA78               = D_80145EC8;
+        D_801FEA70               = g_Game.members[0].facing;
+        D_801FEA74               = g_Game.members[0].pos.x.fixed;
+        D_801FEA78               = g_Game.members[0].pos.y.fixed;
     }
     if (LOHU(g_GameAreaId) == 15) {
         if (SYS_TestFlag(g_SceneFlags, 14) && !SYS_TestFlag(g_SceneFlags, 15)) {
@@ -1118,7 +1118,7 @@ NON_MATCHING void func_801FA3E4(void) {
             Scene_RunScenario(2);
             Scene_SetupParty(3);
             SYS_SetFlag(g_SceneFlags, 2);
-            D_80146258 &= 0xFFDF;
+            g_Game.flags &= 0xFFDF;
         }
     }
     D_80146872 = 2;
