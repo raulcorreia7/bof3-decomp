@@ -8,10 +8,10 @@ MATCH void CD_Update(void) {
     Cpy16*       dst;
     const Cpy16* src;
     const Cpy16* end;
-    u32          callbacks[9];
+    Callback     callbacks[CD_STATE_COUNT];
 
     dst = (Cpy16*)callbacks;
-    src = (const Cpy16*)g_CdSteps;
+    src = (const Cpy16*)g_CdStateHandlers;
     end = src + 2;
     do {
         *dst = *src;
@@ -20,5 +20,5 @@ MATCH void CD_Update(void) {
     } while (src != end);
     *(u32*)(dst) = src->w[0];
 
-    ((Callback)callbacks[g_CdStep])();
+    callbacks[g_CdState]();
 }

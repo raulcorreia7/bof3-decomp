@@ -16,5 +16,5 @@ MATCH void EMI_ArchiveStart(void) {
     D_80146492      = 3;
     g_EmiReadStatus = 0;
     state           = D_8014648B;
-    g_CdStep        = state == 1 ? 6 : 1;
+    g_CdState       = state == 1 ? CD_STATE_PAUSE : CD_STATE_SET_SPEED;
 }
