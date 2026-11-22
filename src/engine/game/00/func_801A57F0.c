@@ -4,11 +4,6 @@
 
 /* Packed spawn record staging halfword in scratchpad. */
 
-/* Parallel per-slot shadow tables overlaying the 0x98-byte work-area
- * records; each column stores one field of every slot at a fixed address.
- * The scalars D_801468FF, D_80146914 and D_80146916 are columns too,
- * addressed through byte offsets because the headers declare them as scalars. */
-
 MATCH void func_801A57F0(u8* script) {
     s16*   counter = (s16*)&g_ScratchPad;
     s32    coord_x;
@@ -57,9 +52,9 @@ MATCH void func_801A57F0(u8* script) {
     g_Actors[*counter].unk_7C                      = (script[0xF] | (script[0xE] << 8));
     /* FAKE: forces the counter re-read before the next shadow store. */
     FAKE_BARRIER();
-    D_80146900[*counter][0]                       = script[0xB];
-    FIELD(u8, &D_801468FF, *counter * ACTOR_SIZE) = script[0x10];
-    D_8014691C[*counter][0]                       = 0x7F;
+    g_Actors[*counter].unk_78 = script[0xB];
+    g_Actors[*counter].unk_77 = script[0x10];
+    g_Actors[*counter].unk_94 = 0x7F;
 
     Actor_SetOptionFlags(script + 0xD);
 

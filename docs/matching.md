@@ -525,6 +525,11 @@ step that breaks the match instead of compensating with a helper. A missing type
 `needs: type` line ([types](conventions.md#casts-become-member-access)). Stop when the image check passes
 and each remaining finding is `kept: <reason>`.
 
+A per-slot column (`u8 D_X[ENTITY_MAX][ACTOR_SIZE]`, `D_X[i * BATTLE_PARTY_STRIDE]`, `(&D_X)[off]`) becomes
+`g_Actors[i].member` or `g_Game.members[i].member` unless the function already holds another base for the same
+record: `tools/match.sh` then reports a shorter function, because the member form lets CSE merge the column's
+`lui` pair with the record's. Keep the column and its `FAKE:` note in that function, and fold every other user.
+
 Across functions, collect every consumer's offsets, widths and strides, then place the type: in the
 image header when two or more consumers in one image use it, in `include/<subsystem>/` when proven
 across images. A union is only for one offset that holds different proven types.
