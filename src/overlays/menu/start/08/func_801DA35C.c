@@ -4,7 +4,7 @@ MATCH void func_801DA35C(void) {
     u8             index;
     u8*            panel_data;
     u8             remaining;
-    MenuPanelTask* row;
+    MenuPanelTask* panel;
     u8*            timer;
     u8*            state_counter;
 
@@ -18,9 +18,9 @@ MATCH void func_801DA35C(void) {
         panel_data += 0x607;
     loop_2:
         if (index < Party_CountOrder(PARTY_ORDER_FIELD)) {
-            row = (MenuPanelTask*)&D_801483C0 + index;
-            if (g_Characters[g_CharSlot[*(panel_data + (row->unk_0B * 3) + row->unk_0A)]].party_flags & 0x2) {
-                row->unk_0C = 1;
+            panel = (MenuPanelTask*)&D_801483C0 + index;
+            if (g_Characters[g_CharSlot[*(panel_data + (panel->unk_0B * 3) + panel->unk_0A)]].party_flags & 0x2) {
+                panel->unk_0C = 1;
             }
             index += 1;
             goto loop_2; /* retail back edge: a while form needs a second register (82.19%) */

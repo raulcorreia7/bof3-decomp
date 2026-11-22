@@ -39,41 +39,41 @@ MATCH void func_801F7424(Actor* actor) {
 
 /* func_801F7574 */
 MATCH void Scene_ClearWorkRows(void) {
-    SparkParticle* row;
+    SparkParticle* particle;
     u8             i;
 
-    row = (SparkParticle*)(MEM_PTR(u8, AREA_WORK + 0x800) + TASK(Actor)->unk_06 * 0x500);
-    for (i = 0; i < SCENE_SPARK_COUNT; i++, row++) {
-        row->header.active = 0;
+    particle = (SparkParticle*)(MEM_PTR(u8, AREA_WORK + 0x800) + TASK(Actor)->unk_06 * 0x500);
+    for (i = 0; i < SCENE_SPARK_COUNT; i++, particle++) {
+        particle->header.active = 0;
     }
 }
 
 MATCH s32 func_801F75BC(void) {
     MATRIX         camera;
-    SparkParticle* row;
+    SparkParticle* particle;
     u8             i;
     u8             life;
     s32            alive;
 
     Camera_SetMatrix(&camera);
-    alive = 0;
-    row   = (SparkParticle*)(MEM_PTR(u8, AREA_WORK + 0x800) + TASK(Actor)->unk_06 * 0x500);
-    for (i = 0; i < SCENE_SPARK_COUNT; row++, i++) {
-        if (row->header.active == 0) {
+    alive    = 0;
+    particle = (SparkParticle*)(MEM_PTR(u8, AREA_WORK + 0x800) + TASK(Actor)->unk_06 * 0x500);
+    for (i = 0; i < SCENE_SPARK_COUNT; particle++, i++) {
+        if (particle->header.active == 0) {
             continue;
         }
-        row->pos.vx += row->velocity.vx;
-        row->pos.vy += row->velocity.vy;
-        row->pos.vz += row->velocity.vz;
-        row->velocity.vz -= 0x40000;
-        row->header.shade -= 4;
-        row->frame       = rand() & 7;
-        life             = row->header.life - 1;
-        row->header.life = life;
+        particle->pos.vx += particle->velocity.vx;
+        particle->pos.vy += particle->velocity.vy;
+        particle->pos.vz += particle->velocity.vz;
+        particle->velocity.vz -= 0x40000;
+        particle->header.shade -= 4;
+        particle->frame       = rand() & 7;
+        life                  = particle->header.life - 1;
+        particle->header.life = life;
         if (life == 0) {
-            row->header.active = 0;
+            particle->header.active = 0;
         }
-        func_801F7424(row);
+        func_801F7424(particle);
         alive = 1;
     }
     return alive;
