@@ -95,7 +95,7 @@ void func_801D12A8(void);
 void func_801D13C0(void);
 void func_801D1430(void);
 void func_801D1544(void);
-void Scene_DrawBands(s32 band_height, u16 radius, u16 jitter_mask);
+void Scene_DrawBands(s16 band_height, u16 radius, u16 jitter_mask);
 void func_801D1D58(void);
 void func_801D1DE0(void);
 void func_801D1EFC(void);
