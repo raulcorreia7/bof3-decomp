@@ -183,12 +183,8 @@ NON_MATCHING void func_801EF280(s32* values) {
     prim = (POLY_G3*)g_GfxPrimCursor;
     SetPolyG3(prim);
 
-    g_ScratchPadVectors[0].vx = g_Task->pos.x.fixed >> 9;
-    g_ScratchPadVectors[0].vy = g_Task->pos.y.fixed >> 9;
-    g_ScratchPadVectors[0].vz = 0;
-    g_ScratchPadVectors[1].vx = g_Task->unk_0C >> 9;
-    g_ScratchPadVectors[1].vy = g_Task->unk_10 >> 9;
-    g_ScratchPadVectors[1].vz = 0;
+    setVector(&g_ScratchPadVectors[0], g_Task->pos.x.fixed >> 9, g_Task->pos.y.fixed >> 9, 0);
+    setVector(&g_ScratchPadVectors[1], g_Task->unk_0C >> 9, g_Task->unk_10 >> 9, 0);
     g_ScratchPadVectors[2].vx = 0;
     g_ScratchPadVectors[2].vy = 0;
     mode                      = g_Task->param.unk_0B;

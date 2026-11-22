@@ -7,11 +7,9 @@ MATCH void func_801F2C48(void) {
     work = g_Task;
     WorldPos_Copy(&work->pos, &D_80146954);
 
-    ring          = (AreaRing*)AREA_WORK;
-    D_801F44A0    = ring;
-    ring->base.vx = work->pos.x.fixed;
-    ring->base.vy = work->pos.y.fixed;
-    ring->base.vz = work->pos.z.fixed + TO_COORD(2048);
+    ring       = (AreaRing*)AREA_WORK;
+    D_801F44A0 = ring;
+    setVector(&ring->base, work->pos.x.fixed, work->pos.y.fixed, work->pos.z.fixed + TO_COORD(2048));
     setVector(&ring->center, work->pos.x.fixed, work->pos.y.fixed, work->pos.z.fixed);
     ring->unk_22 = 32;
     ring->unk_23 = 0;
