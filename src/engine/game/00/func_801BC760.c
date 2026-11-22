@@ -33,7 +33,7 @@ NON_MATCHING s32 func_801BC760(void) {
             } else {
                 TASK(Actor)->unk_06 = 0;
             }
-        } else if ((u8)g_Game.party_size >= 3U) {
+        } else if ((u8)g_PartySize >= 3U) {
             da   = TASK(Actor)->pos.x.fixed - goal_x;
             da   = ABS(da);
             db   = TASK(Actor)->pos.y.fixed - goal_y;
@@ -82,8 +82,8 @@ NON_MATCHING s32 func_801BC760(void) {
     } else {
         count = 5;
     }
-    g_Game.current->u.field.counter.value = count;
-    cnt2                                  = g_Game.current->u.field.counter.value;
+    g_GameState->u.field.counter.value = count;
+    cnt2                               = g_GameState->u.field.counter.value;
     if (cnt2 >= 3U) {
         if (cnt2 >= 6U) {
             cnt2 = 5;
@@ -91,7 +91,7 @@ NON_MATCHING s32 func_801BC760(void) {
     } else {
         cnt2 = 3;
     }
-    g_Game.current->u.field.counter.value = cnt2;
+    g_GameState->u.field.counter.value = cnt2;
     func_801BD290(near_a, near_b, TASK(s8) + 8);
     result = func_801BC4D0();
     if ((result & BYTE_MASK) != 1) {
@@ -111,26 +111,26 @@ NON_MATCHING s32 func_801BC760(void) {
             return result & BYTE_MASK;
         }
     }
-    if (!((g_Game.flags | g_Game.walk_flags) & BIT(0))) {
+    if (!((g_GameFlags | g_AreaWalkFlags) & BIT(0))) {
         if (*TASK(u8) & ACTOR_FLAG_OFFSCREEN) {
-            saved          = g_Game.current;
-            g_Game.current = g_Game.members;
-            near_a         = (g_Game.members[0].pos.x.fixed + (g_Game.members[0].unk_0C * g_Game.members[0].unk_09)) & ~0x7FFF;
-            near_b         = (g_Game.members[0].pos.y.fixed + (g_Game.members[0].unk_10 * g_Game.members[0].unk_09)) & ~0x7FFF;
+            saved       = g_GameState;
+            g_GameState = g_Game.members;
+            near_a      = (g_Game.members[0].pos.x.fixed + (g_Game.members[0].unk_0C * g_Game.members[0].unk_09)) & ~0x7FFF;
+            near_b      = (g_Game.members[0].pos.y.fixed + (g_Game.members[0].unk_10 * g_Game.members[0].unk_09)) & ~0x7FFF;
             if (!(Game_TestPlacement(near_a, near_b, TASK(Actor)->voice_flags.scene_flag, Area_HeightRead(near_a, near_b)) & BYTE_MASK)) {
-                g_Game.current = saved;
+                g_GameState = saved;
                 *TASK(u8) |= ACTOR_FLAG_HIDDEN;
                 TASK(Actor)->pos.x.fixed = near_a;
                 TASK(Actor)->pos.y.fixed = near_b;
-                g_Game.current->status.field.flags.value &= 0xFE;
-                g_Game.current->status.field.flags.value |= (g_Game.members[0].status.field.flags.value & 1);
+                g_GameState->status.field.flags.value &= 0xFE;
+                g_GameState->status.field.flags.value |= (g_Game.members[0].status.field.flags.value & 1);
                 COORD_INT(TASK(Actor)->pos.z) = Area_HeightRead(near_a, near_b);
                 TASK(Actor)->draw_layer       = g_Game.members[0].unk_29;
                 FIELD(s8, g_Task, 0x1u)       = 2;
                 FIELD(s8, g_Task, 0x2u)       = 2;
                 return 0xFF;
             }
-            g_Game.current = saved;
+            g_GameState = saved;
         }
     }
     return result & BYTE_MASK;

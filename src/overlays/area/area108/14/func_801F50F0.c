@@ -7,20 +7,20 @@ NON_MATCHING void func_801F50F0(void) {
     u8                index;
     s8                weight2;
 
-    switch (g_SceneEventState.step) {
+    switch (g_SceneEventStep) {
         case 0:
             if (--LOHU(D_801448EE) == 0) {
                 g_AreaScrollTargetX = g_PartyActors[1].pos.x.fixed;
                 g_AreaScrollTargetY = g_PartyActors[1].pos.y.fixed;
                 g_AreaCameraSpeed   = g_RouteSpeedScale[3] * 8;
-                g_SceneEventState.step++;
+                g_SceneEventStep++;
             }
             break;
         case 1:
             if (!g_AreaCameraMoving) {
                 s8* step;
 
-                step = &g_SceneEventState.step;
+                step = &g_SceneEventStep;
                 /* Retail passes the masked byte, the owner declares the argument s8. */
                 ((void (*)(u8))Area_ScrollStartRoute)((u8)(g_PartyActors[1].unk_77 - 1));
                 D_80143FC0      = 4;
@@ -34,9 +34,9 @@ NON_MATCHING void func_801F50F0(void) {
 
                 g_ScriptVars[3] = 0;
                 if (g_PartyActors[1].unk_77 == 9) {
-                    g_SceneEventState.step = 4;
+                    g_SceneEventStep = 4;
                 } else {
-                    step                = &g_SceneEventState.step;
+                    step                = &g_SceneEventStep;
                     g_AreaScrollTargetX = g_Game.members[0].pos.x.fixed;
                     g_AreaScrollTargetY = g_Game.members[0].pos.y.fixed;
                     g_AreaCameraSpeed   = g_RouteSpeedScale[4] * 8;
@@ -47,7 +47,7 @@ NON_MATCHING void func_801F50F0(void) {
         case 3:
             if (!g_AreaCameraMoving) {
                 Area_ScrollAdvance(Area_HeightSample(g_AreaScrollTargetX, g_AreaScrollTargetY));
-                g_SceneEventState.step = 0;
+                g_SceneEventStep       = 0;
                 g_SceneEventState.mode = SCENE_EVENT_NONE;
                 Game_ClearScriptActive();
             }
@@ -65,8 +65,8 @@ NON_MATCHING void func_801F50F0(void) {
                     slot->pos.y.fixed  = 0x2F8000;
                     slot->pos.z.fixed  = Area_HeightSample(slot->pos.x.fixed, slot->pos.y.fixed);
                 }
-                D_801448EE             = 0x1E;
-                g_SceneEventState.step = 5;
+                D_801448EE       = 0x1E;
+                g_SceneEventStep = 5;
                 {
                     u8* flag = &D_801F629B;
                     *flag    = (*flag & 0xF0) | 0x41;
@@ -107,12 +107,12 @@ NON_MATCHING void func_801F50F0(void) {
                 Area_CellSetPalette(0x20, 0x2F);
                 g_PartyActors[0].header.flags = 0;
                 *timer                        = 0x1E;
-                g_SceneEventState.step        = 9;
+                g_SceneEventStep              = 9;
             }
         } break;
         case 9:
             if (--LOHU(D_801448EE) == 0) {
-                g_SceneEventState.step   = 0;
+                g_SceneEventStep         = 0;
                 g_SceneEventState.mode   = SCENE_EVENT_NONE;
                 g_ScenarioState.state_04 = 3;
                 g_ScenarioState.step     = 0;
