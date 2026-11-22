@@ -6,7 +6,7 @@ MATCH void func_801F44C4(void) {
     s16 height;
 
     g_Task->vz += g_Task->gravity;
-    Actor_UpdateMovement();
+    Actor_MovementUpdate();
     height = ((s32 (*)(s32, s32))Area_ReadHeight)(g_Task->pos.x.fixed, g_Task->pos.y.fixed);
     if (COORD_INT(g_Task->pos.z) < height) {
         g_Task->header.flags &= ~0x20;

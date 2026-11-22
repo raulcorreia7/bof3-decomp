@@ -33,5 +33,5 @@ MATCH void func_801E0044(void) {
         checked->y_38.slot.low.pos_low = value;
         ended->mode_index              = 0;
     }
-    Actor_StepAnimLoop();
+    Script_AnimStepLoop();
 }

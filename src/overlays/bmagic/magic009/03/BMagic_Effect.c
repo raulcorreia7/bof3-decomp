@@ -183,7 +183,7 @@ MATCH void func_801EF788(void) {
             Battle_PlayActiveBattlerSE(2, 5);
         }
     }
-    if (Actor_StepAnimOnce() & BYTE_MASK) {
+    if (Script_AnimStepOnce() & BYTE_MASK) {
         g_Task->unk_09 = 8;
         g_Task->header.step += 1;
     }

@@ -15,9 +15,7 @@ NON_MATCHING void func_801F3AE4(u32 angle, s32 pos, s32 variant) {
     s32       ofs;
 
     setVector(&trans, (pos >> 9) - 0x4000, -0x3A40, -0x80);
-    rot.vx = 0;
-    rot.vy = 0;
-    rot.vz = angle;
+    setVector(&rot, 0, 0, angle);
     PushMatrix();
     RotTransMatrix(&trans, matrix, &flag);
     Camera_SetModelMatrix(&rot, &matrix);

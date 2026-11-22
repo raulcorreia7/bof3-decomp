@@ -335,7 +335,7 @@ MATCH void func_801F023C(void) {
 MATCH void func_801F042C(void) {
     u8 count;
 
-    Actor_StepAnimLoop();
+    Script_AnimStepLoop();
     count          = g_Task->unk_09 - 1;
     g_Task->unk_09 = count;
     if (!(count & BYTE_MASK)) {
@@ -352,7 +352,7 @@ MATCH void func_801F04EC(void) {
     PartyMember* member;
     PartyMember* work;
 
-    Actor_StepAnimLoop();
+    Script_AnimStepLoop();
     g_Task->unk_5D -= 0x10;
     g_Task->unk_5E -= 0x10;
     g_Task->unk_5F -= 0x10;

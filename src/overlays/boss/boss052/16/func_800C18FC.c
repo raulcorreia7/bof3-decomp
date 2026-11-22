@@ -3,7 +3,7 @@
 
 MATCH void func_800C18FC(void) {
     Script_Request(3);
-    Actor_StepAnimOnce();
+    Script_AnimStepOnce();
     Battle_DefeatEnemy();
     g_BattleCurrentEnemy->turn.damage_flags.value |= BATTLER_DAMAGE_SKIP_ACTION_STEP;
     g_Task->header.flags &= ~ACTOR_FLAG_HIDDEN;

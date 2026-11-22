@@ -2,7 +2,7 @@
 #include "area/spad.h"
 
 MATCH void func_800C193C(void) {
-    if (Actor_StepAnimLoop() != 0) {
+    if (Script_AnimStepLoop() != 0) {
         g_Task->unk_03 = 1;
     }
 }

@@ -6,7 +6,7 @@
     }                                                                                                                                                                                    \
     Area_RunWalk();                                                                                                                                                                      \
     g_Task->timer -= 1;                                                                                                                                                                  \
-    Actor_UpdateMovement();                                                                                                                                                              \
+    Actor_MovementUpdate();                                                                                                                                                              \
     g_Game.current->u.field.mode.value = 1;                                                                                                                                              \
     g_Task->header.step                = 1;                                                                                                                                              \
     return 1;

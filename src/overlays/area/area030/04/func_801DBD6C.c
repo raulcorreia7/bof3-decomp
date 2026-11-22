@@ -41,6 +41,6 @@ MATCH void func_801DBD6C(void) {
             work->sub_index = (work->sub_index + 1);
         }
     }
-    Actor_StepAnimLoop();
+    Script_AnimStepLoop();
     Fishing_DrawDimScreen();
 }

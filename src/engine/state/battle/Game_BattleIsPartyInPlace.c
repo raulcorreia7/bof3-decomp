@@ -19,7 +19,7 @@ MATCH bool Game_BattleIsPartyInPlace(void) {
                 break;
             }
         }
-        if (g_Task->param.unk_0B == 0 && (Actor_StepAnimOnce() & BYTE_MASK) != 0) {
+        if (g_Task->param.unk_0B == 0 && (Script_AnimStepOnce() & BYTE_MASK) != 0) {
             g_Task->param.unk_0B = 1;
         }
     }

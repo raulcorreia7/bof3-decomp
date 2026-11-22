@@ -8,9 +8,9 @@ MATCH void func_801B6A04(void) {
     work = g_Task;
     if ((work->option_flags & ACTOR_OPT_WAIT_STREAM) == 0) {
         if (work->header.flags & ACTOR_FLAG_STEP_MOVE) {
-            Actor_StepAnimLoop();
+            Script_AnimStepLoop();
         } else {
-            Actor_StepAnimOnce();
+            Script_AnimStepOnce();
         }
     }
 }

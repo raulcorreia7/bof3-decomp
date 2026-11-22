@@ -33,5 +33,5 @@
             }                                                                         \
             g_Task->header.step++;                                                    \
         }                                                                             \
-        Actor_StepAnimOnce();                                                         \
+        Script_AnimStepOnce();                                                        \
     }

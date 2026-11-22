@@ -95,7 +95,7 @@ MATCH void func_801B146C(void) {
             Area_RunWalk();
             work_j        = g_Task;
             work_j->timer = (work_j->timer - 1);
-            Actor_UpdateMovement();
+            Actor_MovementUpdate();
             g_Task->header.step = 2;
             goto block_end; /* leave the frame flags alone */
         }

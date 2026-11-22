@@ -14,8 +14,8 @@ MATCH void func_801B0568(void) {
     Actor* tmp8;
     Actor* tmp9;
 
-    if (!GAME_SCRIPT_ACTIVE() && !(g_AreaWalkFlags & AREA_WALK_ENTRY_PENDING) && !(func_801B6258() & BYTE_MASK) && !(Game_RequestLeaderSwitch() & BYTE_MASK) &&
-        !(Game_RequestFieldMenu() & BYTE_MASK) && !(Game_RequestPersonalAction() & BYTE_MASK) && !(Game_RequestCameraLook() & BYTE_MASK) && !(Game_RequestSceneCamera() & BYTE_MASK)) {
+    if (!GAME_SCRIPT_ACTIVE() && !(g_AreaWalkFlags & AREA_WALK_ENTRY_PENDING) && !(func_801B6258() & BYTE_MASK) && !(Game_LeaderSwitchRequest() & BYTE_MASK) &&
+        !(Game_MenuRequestField() & BYTE_MASK) && !(Game_RequestPersonalAction() & BYTE_MASK) && !(Game_CameraLookRequest() & BYTE_MASK) && !(Game_SceneCameraRequest() & BYTE_MASK)) {
         tmp9 = g_Task;
         tmp4 = tmp9->unk_0A;
         if (tmp4 != 0) {
@@ -100,7 +100,7 @@ MATCH void func_801B0568(void) {
             Actor_RequestRoute((g_Task->direction + 8) & BYTE_MASK);
             tmp6        = g_Task;
             tmp6->timer = (tmp6->timer - 1);
-            Actor_UpdateMovement();
+            Actor_MovementUpdate();
             g_Game.current->u.field.mode.value = 1;
             g_Task->header.step                = 2;
             return;

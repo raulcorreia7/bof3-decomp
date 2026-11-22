@@ -16,7 +16,7 @@ g_BattleEffects = { addr = 0x801EC330, alias = true, source = "Battle effect wor
 Effect_DrawScreenFade = { addr = 0x801EF6E0, type = "func", source = "Draws the two-part screen fade whose shade is the effect timer (byte 0x09) times 16 in magic004 (ThundrStrike)." }
 BMagic_DispatchEffectMode = { addr = 0x801EF8CC, type = "func", source = "Runs the handler that header.mode (byte 0x01) selects from the effect handlers of magic004." }
 Effect_SetDuration = { addr = 0x801EF9A0, type = "func", source = "Reloads the effect timer (byte 0x09) with the value func_800AFF98 returns and advances header.step (byte 0x02) in magic004 (ThundrStrike)." }
-Effect_LowerTickerStepOnReady = { addr = 0x801EFA70, type = "func", source = "Lowers the active battler's ticker (byte 0x0B) and advances header.step (byte 0x02) once the script stream reports ready (Actor_StepAnimOnce) in magic004 (ThundrStrike)." }
+Effect_LowerTickerStepOnReady = { addr = 0x801EFA70, type = "func", source = "Lowers the active battler's ticker (byte 0x0B) and advances header.step (byte 0x02) once the script stream reports ready (Script_AnimStepOnce) in magic004 (ThundrStrike)." }
 BMagic_RunStep = { addr = 0x801EFAF4, type = "func", source = "Runs the battle magic effect step with the script table set for the overlay." }
 Effect_StepWhileTickUnderTwo = { addr = 0x801EFBA8, type = "func", source = "Advances header.step (byte 0x02) while the ticker (byte 0x0B) of g_BattleEffectBattler is under 2 in magic004 (ThundrStrike)." }
 D_801EFE40 = { addr = 0x801EFE40, source = "Sound SE id per effect index of the magic004 effect, read by func_801EF158 with the effect's unk_04 index." }

@@ -23,7 +23,7 @@ BMagic_DrawDome = { addr = 0x801EF4C0, type = "func", source = "Draws the textur
 Effect_CopyBattlerCoords2 = { addr = 0x801EFAD8, type = "func", source = "Copies the position of g_BattleEffectBattler into the effect, clears the effect timer (byte 0x09) and counter (byte 0x0A) and advances header.step (byte 0x02) in magic056 (Sacrifice)." }
 Effect_CountUpAndStepAt30 = { addr = 0x801EFBA4, type = "func", source = "Counts the effect timer (byte 0x09) up and advances header.step (byte 0x02) at 30 in magic056 (Sacrifice)." }
 Effect_CountDownTimerCapped = { addr = 0x801EFBF4, type = "func", source = "Raises the effect timer (byte 0x09) up to 0x2E, counts the effect counter (byte 0x0A) down and at zero lowers the active battler's ticker (byte 0x0B) and clears the effect in magic056 (Sacrifice)." }
-Effect_PrimeTintOnScriptReady = { addr = 0x801F0024, type = "func", source = "Once the script stream reports ready (Actor_StepAnimOnce) makes the actor semi-transparent, starts its tint at zero and advances header.step (byte 0x02) in magic056 (Sacrifice)." }
+Effect_PrimeTintOnScriptReady = { addr = 0x801F0024, type = "func", source = "Once the script stream reports ready (Script_AnimStepOnce) makes the actor semi-transparent, starts its tint at zero and advances header.step (byte 0x02) in magic056 (Sacrifice)." }
 g_BMagicEffectModes = { addr = 0x801F0744, source = "Handlers of magic056 (Sacrifice), run by header.mode (byte 0x01)." }
 D_801F0754 = { addr = 0x801F0754, source = "First step handlers of the magic056 effect, run by header.step (byte 0x02) from func_801EF1F4." }
 D_801F0760 = { addr = 0x801F0760, source = "Second step handlers of the magic056 effect, run by header.step (byte 0x02) from func_801EFA50." }

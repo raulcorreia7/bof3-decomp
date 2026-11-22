@@ -18,6 +18,6 @@ MATCH void func_801DBEDC(void) {
     if ((g_PadStates[0].pressed & (PADRup | PADRdown)) != 0) {
         FISHING_STATE->sub_index = 0xE;
     }
-    Actor_StepAnimLoop();
+    Script_AnimStepLoop();
     Fishing_DrawDimScreen();
 }

@@ -149,10 +149,8 @@ NON_MATCHING void func_801EFE04(s16 band_height, u16 radius, u16 jitter_mask) {
         g_ScratchPadVectors[3].vy    = g_ScratchPadVectors[0].vy - g_ScratchPad.cells.halves[5];
         g_ScratchPadVectors[3].vz    = g_ScratchPadVectors[0].vz;
         setVector(&g_ScratchPadVectors[0], 0, FIXED_MUL(rsin(g_ScratchPad.cells.halves[1]), g_ScratchPad.cells.halves[0]), -(i << 6));
-        g_ScratchPadVectors[1].vx = 0;
-        g_ScratchPadVectors[1].vy = g_ScratchPadVectors[0].vy - g_ScratchPad.cells.halves[6];
-        g_ScratchPadVectors[1].vz = -(i << 6);
-        prim                      = (POLY_G4*)g_GfxPrimCursor;
+        setVector(&g_ScratchPadVectors[1], 0, g_ScratchPadVectors[0].vy - g_ScratchPad.cells.halves[6], -(i << 6));
+        prim = (POLY_G4*)g_GfxPrimCursor;
         SetPolyG4(prim);
         SetSemiTrans(prim, 1);
         setRGB0(prim, g_ScratchPad.cells.halves[2], g_ScratchPad.cells.halves[2], g_ScratchPad.cells.halves[2]);

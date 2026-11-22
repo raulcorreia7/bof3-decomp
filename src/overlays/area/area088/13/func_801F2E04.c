@@ -2,7 +2,7 @@
 
 MATCH void func_801F2E04(void) {
     Trail_Update(MEM_PTR(Trail, AREA_WORK));
-    func_801F3258(MEM_PTR(u8, AREA_WORK));
+    Trail_Draw(MEM_PTR(Trail, AREA_WORK));
     D_800E4B3E -= 6;
     if (--g_Task->timer == 0) {
         g_Task->header.mode++;

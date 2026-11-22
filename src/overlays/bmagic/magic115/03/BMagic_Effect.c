@@ -104,7 +104,7 @@ MATCH void func_801EF27C(void) {
     s8           tint;
     PartyMember* battler;
 
-    Actor_StepAnimLoop();
+    Script_AnimStepLoop();
     count               = g_Task->unk_09 + 1;
     g_Task->unk_09      = count;
     angle               = (count & 0x3F) << 6;
@@ -143,7 +143,7 @@ MATCH void func_801EF49C(void) {
     g_Task->unk_5D -= 4;
     g_Task->unk_5E -= 4;
     g_Task->unk_5F -= 4;
-    Actor_StepAnimLoop();
+    Script_AnimStepLoop();
     tick                = g_Task->unk_09 + 1;
     g_Task->unk_09      = tick;
     d                   = &g_ScratchPad.cells.words[0];
@@ -187,8 +187,8 @@ MATCH void func_801EF690(void) {
 }
 
 MATCH void func_801EF7A4(void) {
-    Actor_StepAnimOnce();
-    if (Actor_StepAnimOnce() != 0u) {
+    Script_AnimStepOnce();
+    if (Script_AnimStepOnce() != 0u) {
         g_Task->header.step = g_Task->header.step + 2;
     }
 }
@@ -198,7 +198,7 @@ MATCH void func_801EF7F4(void) {
     g_Task->unk_5D -= 4;
     g_Task->unk_5E -= 4;
     g_Task->unk_5F -= 4;
-    Actor_StepAnimOnce();
+    Script_AnimStepOnce();
     g_Task->unk_5D = value;
     g_Task->header.step += 1;
 }
