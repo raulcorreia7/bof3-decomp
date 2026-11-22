@@ -23,9 +23,20 @@
  * @source: wiki:data/field#fairy-village-and-fishing.
  */
 
-extern u8 g_FishingLure;
-extern u8 g_FishingLureQty; /* lures held; Item_Count adds it to the lure's item count */
-extern u8 g_FishingRod;
+/* The equipped lure, how many of it are held, and the equipped rod. */
+typedef struct FishingEquipment {
+    /* 0x00 */ u8 lure_id;    /* accessory id; its row is the FISHING_LURE_STRIDE entry of the lure table */
+    /* 0x01 */ u8 lure_count; /* lures held; Item_Count adds it to the lure's item count */
+    /* 0x02 */ u8 rod_id;     /* accessory id; its row is the FISHING_ROD_STRIDE entry of the rod table */
+} FishingEquipment;
+
+ASSERT_OFFSET(FishingEquipment, lure_id, 0x00);
+ASSERT_OFFSET(FishingEquipment, lure_count, 0x01);
+ASSERT_OFFSET(FishingEquipment, rod_id, 0x02);
+ASSERT_SIZE(FishingEquipment, 0x03);
+
+/* D_80145026 */
+extern FishingEquipment g_FishingEquipment;
 
 #define FISHING_ROD_TABLE                  0x801E2748u
 #define FISHING_LURE_TABLE                 0x801E2720u

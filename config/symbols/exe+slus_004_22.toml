@@ -100,9 +100,7 @@ g_IdentifiedEnemies = { addr = 0x80144FA0, size = 0x20, source = "One bit per en
 g_PlayClock = { addr = 0x80144FC0, size = 0x4, source = "Play time." }
 g_FishingBestCatch = { addr = 0x80144FE4, size = 0x20, source = "Best catch of each fish." }
 g_EmiLoadedCharacterIndex = { addr = 0x80145024, source = "Index of the last loaded EMI character." }
-g_FishingLure = { addr = 0x80145026, source = "Accessory id of the equipped lure; Item_Count counts it with the held accessories." }
-g_FishingLureQty = { addr = 0x80145027, source = "Number of equipped lures held; Item_Count adds it to the lure's item count." }
-g_FishingRod = { addr = 0x80145028, source = "Accessory id of the equipped rod; Item_Count counts it with the held accessories." }
+g_FishingEquipment = { addr = 0x80145026, size = 0x3, source = "The equipped lure, the lures held and the equipped rod; Item_Count counts them with the held accessories." }
 g_SndBGMId = { addr = 0x80145029, source = "Id of the background music being played." }
 g_BattleCount = { addr = 0x8014502C, source = "Number of battles fought." }
 g_InventoryIds = { addr = 0x8014504C, size = 0x200, source = "Item ids of each inventory category." }
