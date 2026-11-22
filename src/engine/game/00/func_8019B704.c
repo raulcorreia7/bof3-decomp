@@ -54,7 +54,7 @@ NON_MATCHING void func_8019B704(void) {
         } else if (g_Task->vy < 0) {
             g_AreaTargetCellY = (s16)(g_AreaTargetCellY - 5);
         }
-        temp                   = Area_SampleHeight(g_AreaScrollTargetX, g_AreaScrollTargetY);
+        temp                   = Area_HeightSample(g_AreaScrollTargetX, g_AreaScrollTargetY);
         g_AreaCameraHeightStep = 0;
         if (temp < (s16)g_AreaCameraHeight) {
             g_AreaCameraHeightStep = (s16)((temp - (s16)g_AreaCameraHeight) / 20);
@@ -62,7 +62,7 @@ NON_MATCHING void func_8019B704(void) {
         g_AreaCameraStep = 0x40;
         g_Task->timer    = 20;
     }
-    dist = Area_SampleHeight(g_Task->pos.x.fixed, g_Task->pos.y.fixed);
+    dist = Area_HeightSample(g_Task->pos.x.fixed, g_Task->pos.y.fixed);
     if (dist < (s16)COORD_INT(g_Task->pos.z)) {
         g_Task->gravity = -8;
     } else {

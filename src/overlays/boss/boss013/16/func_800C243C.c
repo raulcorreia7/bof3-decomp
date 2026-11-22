@@ -5,7 +5,7 @@ MATCH void func_800C243C(void) {
         if (!(g_Battle.boss_flags & 0x1)) {
             Battle_ShowActorEntry(2);
             TASK_SET(func_800AC754(2));
-            Area_SelectSceneRecord(0xF9);
+            Area_SceneSelectRecord(0xF9);
             g_Task->unk_24 &= 0xFE;
             if (g_Battle.boss_flags & 0x40) {
                 Script_Select(1);
@@ -16,13 +16,13 @@ MATCH void func_800C243C(void) {
         }
         Battle_ShowActorEntry(1);
         TASK_SET(func_800AC754(1));
-        Area_SelectSceneRecord(0xEF);
+        Area_SceneSelectRecord(0xEF);
         Script_Select(0);
         g_Task->unk_58 = g_BattleEnemyBattlers[1].unk_58;
         g_Task->unk_5A = g_BattleEnemyBattlers[1].unk_5A;
         Battle_ShowActorEntry(0);
         TASK_SET(func_800AC754(0));
-        Area_SelectSceneRecord(0xEE);
+        Area_SceneSelectRecord(0xEE);
         Script_Select(0);
         g_Task->unk_58 = g_BattleEnemyBattlers[0].unk_58;
         g_Task->unk_5A = g_BattleEnemyBattlers[0].unk_5A;

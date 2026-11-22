@@ -5,7 +5,7 @@ MATCH void func_801F32C8(void) {
     s16    height;
 
     g_Task->header.flags &= ~ACTOR_FLAG_HIDDEN;
-    height                  = Area_ReadHeight(g_Task->pos.x.fixed, g_Task->pos.y.fixed);
+    height                  = Area_HeightRead(g_Task->pos.x.fixed, g_Task->pos.y.fixed);
     actor                   = g_Task;
     COORD_INT(actor->pos.z) = height + 0x7D0;
     actor->unk_04           = 1;

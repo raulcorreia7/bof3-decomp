@@ -4,7 +4,7 @@ MATCH void func_800C2BA0(void) {
     Boss055ScriptIds scripts;
 
     scripts = D_800C1828;
-    Area_SelectSceneRecord(0x30D);
+    Area_SceneSelectRecord(0x30D);
     g_Task->unk_48      = 0;
     g_Task->unk_24      = 0;
     g_Task->pos.z.fixed = 0;

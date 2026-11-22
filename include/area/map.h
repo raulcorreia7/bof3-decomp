@@ -252,8 +252,8 @@ ASSERT_SIZE(AreaLoad, GAME_TABLE_ENTRY_SIZE);
 #define MAP_ZONE_SIZE 0x08
 
 /* A tile rectangle of a map and what the field code reads once the party stands in it.
- * Area_FindEncounterZoneOf and Area_FindEncounterZone compare the four corners as unsigned bytes against (x, y);
- * `rate` indexes the D_801CD1B8 pair table (Area_RollEncounterThreshold), `type` is returned by func_801A0348, and
+ * Area_EncounterFindZoneOf and Area_EncounterFindZone compare the four corners as unsigned bytes against (x, y);
+ * `rate` indexes the D_801CD1B8 pair table (Area_EncounterRollThreshold), `type` is returned by func_801A0348, and
  * func_801A0380 uses `seed` directly when `pick` is 0, else `seed` indexes the D_80181E40 picker. */
 typedef struct {
     Cell2 min;

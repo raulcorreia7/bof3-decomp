@@ -107,7 +107,7 @@ src/overlays/battle/battle/15/Menu_DrawPanelIcon.c	Menu_DrawPanelIcon
 src/overlays/battle/battle/15/Menu_SetPosX_800B23F8.c	Menu_SetPosX_800B23F8
 src/overlays/battle/battle/15/UI_PanelSlideLeft.c	UI_PanelSlideLeft
 src/overlays/bmagic/magic081/03/magic081_03.h	BattleEffect_GetTarget
-src/overlays/bmagic/magic102/03/BMagic_Effect.c	Area_DrawGroundSceneSprite
+src/overlays/bmagic/magic102/03/BMagic_Effect.c	Area_SceneDrawGroundSprite
 src/overlays/bmagic/shared/Actor_Clear.h	Actor_Clear
 src/overlays/boss/boss036/16/Effect_AddActor.c	Effect_AddActor
 src/overlays/commu/commu01/07/commu01_07.h	Commu01_RoomColumn

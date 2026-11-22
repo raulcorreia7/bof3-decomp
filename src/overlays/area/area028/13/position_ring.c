@@ -321,5 +321,5 @@ MATCH void func_801F3424(void) {
     slot->type         = 0x40;
     slot->pos.x.fixed  = TO_COORD(21);
     slot->pos.y.fixed  = TO_COORD(91);
-    slot->pos.z.fixed  = Area_SampleHeight(slot->pos.x.fixed, TO_COORD(91)) << 16;
+    slot->pos.z.fixed  = Area_HeightSample(slot->pos.x.fixed, TO_COORD(91)) << 16;
 }

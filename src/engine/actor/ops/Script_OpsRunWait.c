@@ -37,7 +37,7 @@ NON_MATCHING u8 Script_OpsRunWait(void* sub, s32 target, u8 value) {
         case ACTOR_SCRIPT_WAIT_SNAP_PARTY_TO_SCROLL:
             g_PartyX       = g_AreaScrollTargetX;
             g_PartyY       = g_AreaScrollTargetY;
-            g_ScrollHeight = Area_SampleHeight(g_AreaScrollTargetX, g_AreaScrollTargetY);
+            g_ScrollHeight = Area_HeightSample(g_AreaScrollTargetX, g_AreaScrollTargetY);
             return value;
         case ACTOR_SCRIPT_WAIT_PLAY_CUE_ON_SCRIPT:
             if (g_GameStateIndex != GAME_REQUEST_BATTLE) {
@@ -132,7 +132,7 @@ NON_MATCHING u8 Script_OpsRunWait(void* sub, s32 target, u8 value) {
             return value;
         case ACTOR_SCRIPT_WAIT_MOVE_AND_SET_CELL_PALETTE:
             Actor_ApplyVelocity();
-            COORD_INT(g_Task->pos.z) = Area_SampleHeight(g_Task->pos.x.fixed, g_Task->pos.y.fixed);
+            COORD_INT(g_Task->pos.z) = Area_HeightSample(g_Task->pos.x.fixed, g_Task->pos.y.fixed);
             /* fallthrough */
         case ACTOR_SCRIPT_WAIT_SET_CELL_PALETTE:
             Area_SetCellPalette(COORD_INT(g_Task->pos.x), COORD_INT(g_Task->pos.y));

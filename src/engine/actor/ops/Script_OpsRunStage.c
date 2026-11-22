@@ -82,10 +82,10 @@ NON_MATCHING u8 Script_OpsRunStage(ScriptState* state, const u8* table, u8 value
                 if ((sel & BYTE_MASK) < (span_y & BYTE_MASK)) {
                     sel = span_y;
                 }
-                Area_SampleHeight(g_AreaScrollTargetX, g_AreaScrollTargetY);
+                Area_HeightSample(g_AreaScrollTargetX, g_AreaScrollTargetY);
                 g_AreaScrollTargetX = base[0];
                 g_AreaScrollTargetY = base[1];
-                span                = Area_SampleHeight(base[0], base[1]);
+                span                = Area_HeightSample(base[0], base[1]);
                 g_AreaCameraStep    = 0x20;
                 step                = sel & BYTE_MASK;
                 if (step == 0) {
@@ -100,7 +100,7 @@ NON_MATCHING u8 Script_OpsRunStage(ScriptState* state, const u8* table, u8 value
                 state->cursor--;
                 break;
             }
-            span = Area_SampleHeight(g_AreaScrollTargetX, g_AreaScrollTargetY);
+            span = Area_HeightSample(g_AreaScrollTargetX, g_AreaScrollTargetY);
             Area_AdvanceScroll((s16)span);
             break;
         }

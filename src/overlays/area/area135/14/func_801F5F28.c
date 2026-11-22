@@ -18,12 +18,12 @@ NON_MATCHING void func_801F5F28(void) {
     i                     = 0;
     do {
         height_row = cell_base_row + (u8)i;
-        Area_StoreHeight(column, height_row, 0);
+        Area_HeightSet(column, height_row, 0);
         byte_index = (u8)i;
         cell_row   = row + byte_index;
         Area_SetCellCode(column, cell_row, (u8)(g_Task->gravity >> (byte_index * 8)));
         i++;
-        Area_StoreHeight(COORD_INT(column_plus_one), height_row, 0);
+        Area_HeightSet(COORD_INT(column_plus_one), height_row, 0);
         byte_index += 2;
         Area_SetCellCode(column + 1, cell_row, (u8)(g_Task->gravity >> (byte_index * 8)));
     } while (i < 2);

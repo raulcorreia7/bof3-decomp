@@ -22,7 +22,7 @@ segments:
       - [0x508, c, func_801F3108]
       - [0x540, c, func_801F3140]
       - [0x6D4, c, func_801F32D4]
-      - [0x860, c, Area_RunSceneEvent]
+      - [0x860, c, Area_SceneRunEvent]
       - [0xACC, c, func_801F36CC]
   # Placement: .data resumes after another section in the retail bytes; one segment would group both .data runs.
   - name: data

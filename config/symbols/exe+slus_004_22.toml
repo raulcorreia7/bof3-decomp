@@ -46,7 +46,7 @@ g_GfxBuffers = { addr = 0x80143D48, source = "SYS_InitRuntime initializes the di
 g_GfxCurrentBuffer = { addr = 0x80143E68, source = "SYS_Main selects a display frame and passes its display and draw environments to PsyQ" }
 g_FrameCount = { addr = 0x80143E6C, source = "Absolute frame counter." }
 g_SysLastVSync = { addr = 0x80143EF8, source = "SYS_Main stores the VSync return value" }
-g_SysDrawTime = { addr = 0x80143EFC, source = "The VSync(1) value SYS_CaptureDrawTime stores at DrawSync; Area_CanStartEncounter reads it." }
+g_SysDrawTime = { addr = 0x80143EFC, source = "The VSync(1) value SYS_CaptureDrawTime stores at DrawSync; Area_EncounterCanStart reads it." }
 g_GameAreaId = { addr = 0x80143F00, source = "The area to load." }
 g_GameArea = { addr = 0x80143F00, size = 0x20, alias = true, source = "The current area and the request to change it." }
 g_GameRequestFlags = { addr = 0x80143F02, source = "Flags of the game request." }
@@ -62,9 +62,9 @@ g_GameEntryFacing = { addr = 0x80143F1C, source = "The entry facing Game_Request
 g_GameRequestType = { addr = 0x80143F1D, source = "Type of the game request." }
 g_GameEntryMode = { addr = 0x80143F1E, source = "Entry mode of the field: Game_UpdateAreaLoad sets it to 10, 20 or 0 and Game_UpdateField tests it against GAME_NONE." }
 g_GamePrevSelection = { addr = 0x80143F1F, source = "The previous game selection." }
-g_EncounterSteps = { addr = 0x80143F22, source = "Steps walked since the last encounter: Area_WalkStep and func_801B146C add 1 per step (2 when direction is 2 or 6), func_80197F48 and func_801984E8 reset it, and Area_CanStartEncounter starts a fight once it reaches the threshold Area_RollEncounterThreshold stores in D_80145FB8." }
-g_EncounterOriginX = { addr = 0x80143F24, type = "s32", source = "Area_BuildEncounter and func_801BFE34 store the field-battle formation origin x; Area_PlaceEncounterEnemies and func_801C6658 offset party start positions from it" }
-g_EncounterOriginY = { addr = 0x80143F28, type = "s32", source = "Area_BuildEncounter and func_801BFE34 store the field-battle formation origin y; Area_PlaceEncounterEnemies and func_801C6658 offset party start positions from it" }
+g_EncounterSteps = { addr = 0x80143F22, source = "Steps walked since the last encounter: Area_WalkStep and func_801B146C add 1 per step (2 when direction is 2 or 6), func_80197F48 and func_801984E8 reset it, and Area_EncounterCanStart starts a fight once it reaches the threshold Area_EncounterRollThreshold stores in D_80145FB8." }
+g_EncounterOriginX = { addr = 0x80143F24, type = "s32", source = "Area_EncounterBuild and func_801BFE34 store the field-battle formation origin x; Area_EncounterPlaceEnemies and func_801C6658 offset party start positions from it" }
+g_EncounterOriginY = { addr = 0x80143F28, type = "s32", source = "Area_EncounterBuild and func_801BFE34 store the field-battle formation origin y; Area_EncounterPlaceEnemies and func_801C6658 offset party start positions from it" }
 g_EncounterParty = { addr = 0x80143F2C, type = "FormationPos", size = 0x18, source = "func_801BFE34 and func_801C6658 store one field-battle start position per party order slot; func_801C6888 and func_801C69C8 test them for overlap and height" }
 g_SysResetHoldFrames = { addr = 0x80143F44, source = "SYS_Main counts held reset-key frames until EMI_IsReady" }
 g_PartyX = { addr = 0x80143F7C, type = "s32", source = "X position of the party." }
@@ -136,7 +136,7 @@ g_FairyVillagePendingQueueCount = { addr = 0x80145E5C, source = "Number of fairy
 g_FairyVillageUpdateCount = { addr = 0x80145E5D, type = "u8", source = "Number of fairy village updates." }
 g_Game = { addr = 0x80145E90, type = "GameState", size = 0x41C, source = "The game's party state: the three party members, the member the running mode points at, the party size and order, and the game and walk flags." }
 g_BattlePartyBattlers = { addr = 0x80145E90, alias = true, source = "The three party members; the members of g_Game." }
-g_AreaPartySpeed = { addr = 0x80145FAC, alias = true, source = "The speed level of each party member (u.field.counter_11C), one per 0x140-byte member of g_Game; Area_CanStartEncounter reads member 0." }
+g_AreaPartySpeed = { addr = 0x80145FAC, alias = true, source = "The speed level of each party member (u.field.counter_11C), one per 0x140-byte member of g_Game; Area_EncounterCanStart reads member 0." }
 g_GameState = { addr = 0x80146250, alias = true, source = "The member of g_Game that the running mode works on; the current member of g_Game." }
 g_PartySize = { addr = 0x80146254, alias = true, source = "Number of characters in the party; the party_size member of g_Game." }
 g_BattlePartyOrder = { addr = 0x80146255, alias = true, source = "Party order command list applied when play resumes; the battle_order member of g_Game." }
@@ -350,7 +350,7 @@ SYS_ThreadExit = { addr = 0x8014B8B0, type = "func", source = "Empties the curre
 SYS_ThreadClose = { addr = 0x8014B900, type = "func", source = "Empties one thread and closes it." }
 SYS_ThreadReplace = { addr = 0x8014B954, type = "func", source = "Replaces the running callback." }
 SYS_ClearCurrentThread = { addr = 0x8014BA04, type = "func", source = "Clears the current thread work area at offsets 0x60 through 0x7F." }
-Area_DrawScene = { addr = 0x8014BA54, type = "func", source = "Draws the area scene." }
+Area_SceneDraw = { addr = 0x8014BA54, type = "func", source = "Draws the area scene." }
 Area_SwapGridActors = { addr = 0x8014BAB8, type = "func", source = "Swaps two objects of the draw list." }
 Area_SwapActors = { addr = 0x8014BAEC, type = "func", source = "Swaps two actors of the draw list." }
 Area_DrawActors = { addr = 0x8014BB20, type = "func", source = "Sorts and draws the area actors." }
@@ -375,7 +375,7 @@ Script_AnimStepReverse = { addr = 0x8014DA24, type = "func", source = "Plays the
 Script_AnimStepOnce = { addr = 0x8014DAEC, type = "func", source = "As the looping step function, but at the end of the stream it sets +0x4A to 1 and returns 1 without staging, so the last frame holds; callers wait on it for a one-shot animation to end." }
 Script_AnimStageStep = { addr = 0x8014DB98, type = "func", source = "Stages the next two-byte step of the animation stream at +0x50: the delay byte to +0x4A, the frame byte through the frame table at +0x54 to +0x5A, then +0x58 += 2. Called by the loop and one-shot step functions and Script_Seek." }
 Actor_SelectSprite = { addr = 0x8014DC08, type = "func", source = "Selects a sprite record of the actor: its sheet, animation and mirror." }
-Area_SelectSceneRecord = { addr = 0x8014DD3C, type = "func", source = "Finds a scene record by id." }
+Area_SceneSelectRecord = { addr = 0x8014DD3C, type = "func", source = "Finds a scene record by id." }
 Actor_ReadValue = { addr = 0x8014DFE8, type = "func", source = "Reads a field record value for the actor." }
 SYS_ReadCd = { addr = 0x8014E0A8, type = "func", source = "Reads sectors from the CD." }
 SYS_LoadExe = { addr = 0x8014E0FC, type = "func", source = "Loads the logo executable from the CD." }
@@ -475,13 +475,13 @@ Area_AllocCellPrimRow = { addr = 0x8015456C, type = "func", source = "Allocates 
 Area_RequestCellRows = { addr = 0x801545B4, type = "func", source = "Queues the rows of an area cell." }
 Area_FreeCellPrimRow = { addr = 0x80154664, type = "func", source = "Frees a primitive row of the area cells." }
 Area_RefreshCellGrid = { addr = 0x80154698, type = "func", source = "Refreshes the area cell grid." }
-Area_SampleHeight = { addr = 0x8015477C, type = "func", source = "Returns the ground height at a point." }
-Area_GetHeight = { addr = 0x80154ABC, type = "func", source = "the body returns g_AreaMapBundle.height" }
-Area_EnableHeightOffset = { addr = 0x80154ED0, type = "func", source = "Enables the height offset of the active mode." }
-Area_ReadHeight = { addr = 0x80154F28, type = "func", source = "Reads the height of a point with the mode height offset." }
-Area_ReadStepHeight = { addr = 0x80154F78, type = "func", source = "Reads the height of a step." }
+Area_HeightSample = { addr = 0x8015477C, type = "func", source = "Returns the ground height at a point." }
+Area_HeightGet = { addr = 0x80154ABC, type = "func", source = "the body returns g_AreaMapBundle.height" }
+Area_HeightEnableOffset = { addr = 0x80154ED0, type = "func", source = "Enables the height offset of the active mode." }
+Area_HeightRead = { addr = 0x80154F28, type = "func", source = "Reads the height of a point with the mode height offset." }
+Area_HeightReadStep = { addr = 0x80154F78, type = "func", source = "Reads the height of a step." }
 Area_AdvanceScroll = { addr = 0x80154FD8, type = "func", source = "Records the sampled value and advances the vertical scroll accumulator." }
-Area_StoreHeight = { addr = 0x80155038, type = "func", source = "Stores a value in the map bundle at the scaled index." }
+Area_HeightSet = { addr = 0x80155038, type = "func", source = "Stores a value in the map bundle at the scaled index." }
 Area_SetCellPalette = { addr = 0x8015507C, type = "func", source = "Sets the palette of an area cell." }
 Area_ClearCellPalette = { addr = 0x80155218, type = "func", source = "Clears the palette of an area cell." }
 Area_ClearCell = { addr = 0x801553B8, type = "func", source = "Clears an area cell." }
@@ -491,7 +491,7 @@ Area_FindCellQuad = { addr = 0x801559AC, type = "func", source = "Returns the po
 Area_AddCellPrim = { addr = 0x80155A08, type = "func", source = "Adds a primitive to an area cell." }
 Area_UpdatePaletteTint = { addr = 0x80155AF8, type = "func", source = "Updates the tint of the area palette." }
 Area_DrawCellLayer = { addr = 0x80155B40, type = "func", source = "Draws a layer of area cells." }
-Area_AddScenePrim = { addr = 0x80155D88, type = "func", source = "Chooses the draw mode and queues the scene packet." }
+Area_SceneAddPrim = { addr = 0x80155D88, type = "func", source = "Chooses the draw mode and queues the scene packet." }
 Area_TestCondition = { addr = 0x80155E7C, type = "func", source = "Resolves the class and polarity of a palette tint request." }
 Area_DrawPartQuads = { addr = 0x80156000, type = "func", source = "Projects each five-record part in the list and appends its textured quadrangle." }
 Area_DrawQuad = { addr = 0x80156228, type = "func", source = "Draws the textured quads of a scene part." }
@@ -500,7 +500,7 @@ Area_DrawCellAtPoint = { addr = 0x80156E00, type = "func", source = "probes the 
 Area_DrawCellQuad = { addr = 0x80156ED4, type = "func", source = "Copies the selected pool records into one flat quad and appends it." }
 Area_DrawGouraudQuads = { addr = 0x8015707C, type = "func", source = "Draws one Gouraud-shaded quadrangle per eight-record part." }
 Area_DrawParts = { addr = 0x80157358, type = "func", source = "Draws the textured quads in part_list through the GTE." }
-Area_DrawSceneSprite = { addr = 0x801579A8, type = "func", source = "Draws one scene record's sprite as an FT4 quad." }
+Area_SceneDrawSprite = { addr = 0x801579A8, type = "func", source = "Draws one scene record's sprite as an FT4 quad." }
 Area_DrawCellSides = { addr = 0x80157CE4, type = "func", source = "draws one or two vertical side quads of a map cell, with the heights of the lower neighbour" }
 Area_RunBundleOpcodes = { addr = 0x80157F98, type = "func", source = "Runs the opcodes of the area bundle." }
 Area_CyclePalette = { addr = 0x801580A4, type = "func", source = "Copies a palette record to the graphics palette." }
@@ -736,11 +736,11 @@ EMI_PartyLoadCode = { addr = 0x80166F3C, type = "func", source = "Loads the part
 EMI_PartyLoad = { addr = 0x80166F84, type = "func", source = "Loads the party archive of a family." }
 EMI_PartyFindArchive = { addr = 0x80166FF8, type = "func", source = "Finds the archive of the current party." }
 EMI_ArchiveLoadFamily = { addr = 0x8016728C, type = "func", source = "Maps a content family and index to a loader slot and starts its stream." }
-Area_DispatchScene = { addr = 0x80167344, type = "func", source = "Dispatches the area scene." }
-Area_InitScene = { addr = 0x801673AC, type = "func", source = "Sets up the area scene." }
-Area_StepSceneTimer = { addr = 0x80167800, type = "func", source = "Ticks the scene timer and runs Area_ResetScene on expiry." }
-Area_SyncScrollHeight = { addr = 0x80167848, type = "func", source = "Syncs the scroll height with the actor." }
-Area_ResetScene = { addr = 0x8016788C, type = "func", source = "Resets the mode work record: clears the camera step counters and the actor velocity, sets byte 0x11C of the mode work area to 3, then runs func_80167428 when a directional input is held or sets mode 1." }
+Area_SceneDispatch = { addr = 0x80167344, type = "func", source = "Dispatches the area scene." }
+Area_SceneInit = { addr = 0x801673AC, type = "func", source = "Sets up the area scene." }
+Area_SceneStepTimer = { addr = 0x80167800, type = "func", source = "Ticks the scene timer and runs Area_SceneReset on expiry." }
+Area_HeightSyncScroll = { addr = 0x80167848, type = "func", source = "Syncs the scroll height with the actor." }
+Area_SceneReset = { addr = 0x8016788C, type = "func", source = "Resets the mode work record: clears the camera step counters and the actor velocity, sets byte 0x11C of the mode work area to 3, then runs func_80167428 when a directional input is held or sets mode 1." }
 Char_HPAdd = { addr = 0x80167FDC, type = "func", source = "Heals HP of a character." }
 Char_APAdd = { addr = 0x801680CC, type = "func", source = "Adds to current_ap clamped at max_ap." }
 Char_HPLose = { addr = 0x8016813C, type = "func", source = "Damages HP of a character." }
@@ -1276,7 +1276,7 @@ g_UiPanelOrigins = { addr = 0x8017F90C, source = "Origins of the menu panels." }
 g_AreaLoads = { addr = 0x8017F974, source = "Pointers to the 200 AreaLoad records, indexed by area id." }
 g_AreaEncounterZones = { addr = 0x8017FC94, source = "The area encounter zones." }
 g_EncounterZones = { addr = 0x80181164, source = "Encounter zone lists, one per map." }
-g_SceneFlagPairs = { addr = 0x80181484, source = "Two flag bytes per scene id; Area_SelectSceneRecord copies the pair of the matched scene id into the task." }
+g_SceneFlagPairs = { addr = 0x80181484, source = "Two flag bytes per scene id; Area_SceneSelectRecord copies the pair of the matched scene id into the task." }
 g_FacingOffsets = { addr = 0x80181AC0, type = "Offset2", source = "8 facing offsets of two words each, added to a position by the plchar route walkers" }
 g_CharSlot = { addr = 0x80181B10, size = 12, source = "Character slot map." }
 g_FacingSteps = { addr = 0x80181B94, type = "Offset2", source = "8 facing steps, PlChar_ProbeFacingCell adds step x and y to a position" }

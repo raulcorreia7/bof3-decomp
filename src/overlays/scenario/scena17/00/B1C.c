@@ -37,7 +37,7 @@ MATCH void func_801F77B4(void) {
         Area_AdvanceScroll(0x300);
         Camera_Update();
         func_801A0514();
-        Area_DrawScene();
+        Area_SceneDraw();
         setRECT(&rect, 0, g_GfxBufferIndex * SCREEN_HEIGHT, SCREEN_WIDTH, SCREEN_HEIGHT);
         SetDrawMove((DR_MOVE*)g_GfxPrimCursor, &rect, 0x2C0, 0);
         GFX_AddPrim(GFX_LAYER_SCENE_BACK, sizeof(DR_MOVE));
@@ -164,7 +164,7 @@ MATCH void func_801F7C6C(void) {
     s8* step;
 
     if (g_AreaCameraMoving == 0) {
-        Area_AdvanceScroll(Area_SampleHeight(g_AreaScrollTargetX, g_AreaScrollTargetY));
+        Area_AdvanceScroll(Area_HeightSample(g_AreaScrollTargetX, g_AreaScrollTargetY));
         step                = &g_ScenarioState.state_04;
         g_AreaScrollTargetX = TO_COORD(46);
         *step += 1;
@@ -180,9 +180,9 @@ MATCH void func_801F7D08(void) {
     s8* step;
 
     if (g_AreaCameraMoving == 0) {
-        Area_AdvanceScroll(Area_SampleHeight(g_AreaScrollTargetX, g_AreaScrollTargetY));
+        Area_AdvanceScroll(Area_HeightSample(g_AreaScrollTargetX, g_AreaScrollTargetY));
         g_AreaScrollTargetX    = TO_COORD(38);
-        g_AreaCameraHeightStep = ((Area_SampleHeight(g_AreaScrollTargetX, g_AreaScrollTargetY) - g_AreaCameraHeight) / 128);
+        g_AreaCameraHeightStep = ((Area_HeightSample(g_AreaScrollTargetX, g_AreaScrollTargetY) - g_AreaCameraHeight) / 128);
         step                   = &g_ScenarioState.state_04;
         g_AreaSceneMode        = 1;
         *step                  = *step + 1;
@@ -199,7 +199,7 @@ MATCH void func_801F7DF4(void) {
     s8* state;
 
     if (g_AreaCameraMoving == 0) {
-        Area_AdvanceScroll(Area_SampleHeight(g_AreaScrollTargetX, g_AreaScrollTargetY));
+        Area_AdvanceScroll(Area_HeightSample(g_AreaScrollTargetX, g_AreaScrollTargetY));
         state                  = &g_ScenarioState.state_04;
         g_AreaCameraStep       = 0x10;
         g_AreaScrollTargetX    = TO_COORD(25);
@@ -589,7 +589,7 @@ NON_MATCHING void func_801F8B10(s32 scale, s32 shade) {
     col    = shade;
     PushMatrix();
     setVector(&axis, 0, 0, 0);
-    rot.vz = -Area_SampleHeight(g_AreaScrollTargetX, g_AreaScrollTargetY) / 2;
+    rot.vz = -Area_HeightSample(g_AreaScrollTargetX, g_AreaScrollTargetY) / 2;
     rot.vx = (g_AreaScrollTargetX >> 9) - 0x4000;
     rot.vy = (g_AreaScrollTargetY >> 9) - 0x4000;
     RotTransMatrix(&rot, mtx, &flag);

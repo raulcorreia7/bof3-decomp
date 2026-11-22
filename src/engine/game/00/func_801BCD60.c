@@ -66,10 +66,10 @@ NON_MATCHING void func_801BCD60(s32 target_x, s32 target_y) {
             val3 = 1;
         }
         tmp15 = g_Task;
-        val0  = Area_ReadHeight(FIELD(s32, tmp15, 0x34u), FIELD(s32, tmp15, 0x38u));
+        val0  = Area_HeightRead(FIELD(s32, tmp15, 0x34u), FIELD(s32, tmp15, 0x38u));
         val0 <<= 0x10;
         val0 = (s16)(val0 >> 0x10);
-        val0 -= Area_ReadHeight(stack_18, stack_20);
+        val0 -= Area_HeightRead(stack_18, stack_20);
         val0 = ABS(val0);
         val0 = (s16)(val0 >> 8);
         val3 -= val0;
@@ -87,7 +87,7 @@ NON_MATCHING void func_801BCD60(s32 target_x, s32 target_y) {
             FIELD(s32, tmp16, 0x34u) = (s32)(val9 + (((s32*)g_FacingSteps)[tmp0] * 2 * val6));
             tmp3                     = val2 + (*(g_FacingStepY + tmp0) * 2 * val6);
             FIELD(s32, tmp16, 0x38u) = tmp3;
-            val0                     = Area_ReadStepHeight(FIELD(s32, tmp16, 0x34u), tmp3, (u8)stack_10);
+            val0                     = Area_HeightReadStep(FIELD(s32, tmp16, 0x34u), tmp3, (u8)stack_10);
             if (Game_TestPlacement(FIELD(s32, g_Task, 0x34u), FIELD(s32, g_Task, 0x38u), FIELD(u8, g_Task, 0x70u), val0) & 0xFF) {
                 val0 = 1;
                 tmp1 = val7 - 1;
@@ -100,11 +100,11 @@ NON_MATCHING void func_801BCD60(s32 target_x, s32 target_y) {
                     tmp10                    = g_Task;
                     FIELD(s32, tmp10, 0x34u) = val3;
                     tmp18                    = g_Task;
-                    if (Game_TestPlacement(FIELD(s32, tmp18, 0x34u), FIELD(s32, tmp18, 0x38u), FIELD(u8, tmp18, 0x70u), Area_ReadHeight(val3, FIELD(s32, tmp10, 0x38u))) & 0xFF) {
+                    if (Game_TestPlacement(FIELD(s32, tmp18, 0x34u), FIELD(s32, tmp18, 0x38u), FIELD(u8, tmp18, 0x70u), Area_HeightRead(val3, FIELD(s32, tmp10, 0x38u))) & 0xFF) {
                         tmp11                    = g_Task;
                         FIELD(s32, tmp11, 0x34u) = val4;
                         tmp19                    = g_Task;
-                        if (Game_TestPlacement(FIELD(s32, tmp19, 0x34u), FIELD(s32, tmp19, 0x38u), FIELD(u8, tmp19, 0x70u), Area_ReadHeight(val4, FIELD(s32, tmp11, 0x38u))) & 0xFF) {
+                        if (Game_TestPlacement(FIELD(s32, tmp19, 0x34u), FIELD(s32, tmp19, 0x38u), FIELD(u8, tmp19, 0x70u), Area_HeightRead(val4, FIELD(s32, tmp11, 0x38u))) & 0xFF) {
                             val4 += TO_COORD(-1);
                             val3 += TO_COORD(1);
                             val0 += 1;
@@ -131,11 +131,11 @@ NON_MATCHING void func_801BCD60(s32 target_x, s32 target_y) {
                         tmp12                    = g_Task;
                         FIELD(s32, tmp12, 0x38u) = val3;
                         tmp21                    = g_Task;
-                        if (Game_TestPlacement(FIELD(s32, tmp21, 0x34u), FIELD(s32, tmp21, 0x38u), FIELD(u8, tmp21, 0x70u), Area_ReadHeight(FIELD(s32, tmp12, 0x34u), val3)) & 0xFF) {
+                        if (Game_TestPlacement(FIELD(s32, tmp21, 0x34u), FIELD(s32, tmp21, 0x38u), FIELD(u8, tmp21, 0x70u), Area_HeightRead(FIELD(s32, tmp12, 0x34u), val3)) & 0xFF) {
                             tmp13                    = g_Task;
                             FIELD(s32, tmp13, 0x38u) = val4;
                             tmp22                    = g_Task;
-                            if (Game_TestPlacement(FIELD(s32, tmp22, 0x34u), FIELD(s32, tmp22, 0x38u), FIELD(u8, tmp22, 0x70u), Area_ReadHeight(FIELD(s32, tmp13, 0x34u), val4)) & 0xFF) {
+                            if (Game_TestPlacement(FIELD(s32, tmp22, 0x34u), FIELD(s32, tmp22, 0x38u), FIELD(u8, tmp22, 0x70u), Area_HeightRead(FIELD(s32, tmp13, 0x34u), val4)) & 0xFF) {
                                 val4 += TO_COORD(-1);
                                 val3 += TO_COORD(1);
                                 val0 += 1;
@@ -190,7 +190,7 @@ NON_MATCHING void func_801BCD60(s32 target_x, s32 target_y) {
         FIELD(s32, tmp23, 0x34u) = (s32)(FIELD(s32, tmp23, 0x34u) & ~0x7FFF);
         tmp5                     = FIELD(s32, tmp23, 0x38u) & ~0x7FFF;
         FIELD(s32, tmp23, 0x38u) = tmp5;
-        COORD_INT(g_Task->pos.z) = Area_ReadHeight(FIELD(s32, tmp23, 0x34u), tmp5);
+        COORD_INT(g_Task->pos.z) = Area_HeightRead(FIELD(s32, tmp23, 0x34u), tmp5);
     }
 }
 #else

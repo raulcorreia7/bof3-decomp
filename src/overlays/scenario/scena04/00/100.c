@@ -245,7 +245,7 @@ MATCH void func_801F77EC(void) {
     do {
         work->points[i].vx = work->focus.vx + D_801FA1A4[i];
         work->points[i].vy = work->focus.vy + D_801FA1C4[i];
-        work->points[i].vz = (s16)Area_SampleHeight(work->points[i].vx, work->points[i].vy) << 8;
+        work->points[i].vz = (s16)Area_HeightSample(work->points[i].vx, work->points[i].vy) << 8;
         i++;
     } while (i < ARRAY_COUNT(work->points));
     func_801F7FCC();
@@ -411,7 +411,7 @@ MATCH void func_801F7EC0() {
             row->pos.vx += row->velocity.vx;
             row->pos.vy += row->velocity.vy;
             row->pos.vz += row->velocity.vz;
-            height = Area_SampleHeight(row->pos.vx, row->pos.vy);
+            height = Area_HeightSample(row->pos.vx, row->pos.vy);
             if (row->pos.vz < height) {
                 row->pos.vz      = height;
                 row->velocity.vz = 0;

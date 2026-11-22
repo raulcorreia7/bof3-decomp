@@ -13,7 +13,7 @@ MATCH void func_801F4DC8(void) {
         slot->type         = 0x51;
         slot->header.mode  = 0xA;
         slot->pos.y.fixed  = TO_COORD(65) + COORD_HALF;
-        slot->pos.z.fixed  = Area_SampleHeight(slot->pos.x.fixed, TO_COORD(65) + COORD_HALF) << 0x10;
+        slot->pos.z.fixed  = Area_HeightSample(slot->pos.x.fixed, TO_COORD(65) + COORD_HALF) << 0x10;
         return;
     }
     g_ScriptState->cursor -= 2;

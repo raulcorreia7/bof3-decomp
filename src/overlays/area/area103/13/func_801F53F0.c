@@ -16,7 +16,7 @@ NON_MATCHING void func_801F53F0(s32 radius) {
 
     x = (g_Task->pos.x.part.integer - 0x80) << 7;
     y = (g_Task->pos.y.part.integer - 0x80) << 7;
-    z = -((s16)Area_SampleHeight(g_Task->pos.x.fixed, g_Task->pos.y.fixed) / 2);
+    z = -((s16)Area_HeightSample(g_Task->pos.x.fixed, g_Task->pos.y.fixed) / 2);
     setVector(&g_ScratchPadVectors[0], x, y, z);
     RotTransPers(g_ScratchPadVectors, (long*)D_1F800034_U16, &depth, &flag);
 

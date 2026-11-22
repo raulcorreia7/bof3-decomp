@@ -24,7 +24,7 @@ MATCH void func_801F395C(void) {
 
     D_801F44A4->pos.x.fixed = g_Task->pos.x.fixed + (rcos(angle) << 8);
     D_801F44A4->pos.y.fixed = g_Task->pos.y.fixed + (rsin(angle) << 8);
-    D_801F44A4->pos.z.fixed = Area_SampleHeight(D_801F44A4->pos.x.fixed, D_801F44A4->pos.y.fixed) << 16;
+    D_801F44A4->pos.z.fixed = Area_HeightSample(D_801F44A4->pos.x.fixed, D_801F44A4->pos.y.fixed) << 16;
 
     turn                   = angle + spread + 0x800;
     D_801F44A4->velocity_x = rcos(turn) << 4;

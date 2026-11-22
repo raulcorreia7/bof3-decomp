@@ -8,7 +8,7 @@ MATCH void func_801F2CE0(void) {
     g_Task->vx                 = TO_COORD(92);
     g_Task->unk_18             = TO_COORD(92);
     g_Task->vy                 = TO_COORD_HALF(9);
-    g_Task->pos.z.part.integer = Area_SampleHeight(g_Task->vx, (g_Task->unk_1C + g_Task->vy) / 2);
+    g_Task->pos.z.part.integer = Area_HeightSample(g_Task->vx, (g_Task->unk_1C + g_Task->vy) / 2);
     func_801F308C(0);
 
     for (i = 0; i < 2; i++) {

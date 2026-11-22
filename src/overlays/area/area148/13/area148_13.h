@@ -49,7 +49,7 @@ extern s8                  g_PartyTrailOffset[32][2];
 void func_801F37B8(s32 mode, s32 value);
 
 /* func_801F4544 */
-void Area_SampleForwardHeight(void);
+void Area_HeightSampleForward(void);
 void func_801F45C8(void);
 void func_801F4614(void);
 void func_801F4798(void* first, void* second);

@@ -12,7 +12,7 @@ segments:
       - [0x28C, c, func_801F2E8C]
       - [0x30C, c, UI_MessageRunArea]
       - [0x3B0, c, func_801F2FB0]
-      - [0x524, c, Area_InitSceneActor]
+      - [0x524, c, Area_SceneInitActor]
       - [0x5B0, c, func_801F31B0]
       - [0x6E8, c, Actor_ZoomIn]
       - [0x764, c, Area_RequestRestartOnEntryChange]

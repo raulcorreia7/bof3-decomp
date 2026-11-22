@@ -21,12 +21,12 @@ MATCH s32 func_801C4FE0(void) {
     counter = COORD_INT(work->pos.z);
     moved   = 0;
 
-    result = Area_ReadHeight(x, y);
+    result = Area_HeightRead(x, y);
     slot   = g_Game.current->chr.character_id;
     if (result - D_80181B70[slot] < counter) {
         COORD_INT(g_Task->pos.z) -= D_80181B88[slot];
     } else {
-        COORD_INT(g_Task->pos.z) = Area_ReadHeight(x, y) - D_80181B70[g_Game.current->chr.character_id];
+        COORD_INT(g_Task->pos.z) = Area_HeightRead(x, y) - D_80181B70[g_Game.current->chr.character_id];
         if (g_Task->direction == FACING_LEFT) {
             Script_Request(0x3C);
         } else {

@@ -53,7 +53,7 @@ MATCH void func_801A6C98(u8* record) {
         y |= 32768;
     }
     work->pos.y.fixed        = y;
-    COORD_INT(g_Task->pos.z) = Area_SampleHeight(work->pos.x.fixed, y);
+    COORD_INT(g_Task->pos.z) = Area_HeightSample(work->pos.x.fixed, y);
     data                     = (SpawnScript*)script;
 
     work                  = g_Task;

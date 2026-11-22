@@ -139,7 +139,7 @@ ASSERT_SIZE(ActorTint, 0x04);
 
 /* The word at +0x70: the scene flag-table byte alone, or the whole word. The word
  * packs voice numbers above the byte (SND_QueueSelectionSE ORs them in,
- * Area_SelectSceneRecord masks and loads it); area code clears it or passes it
+ * Area_SceneSelectRecord masks and loads it); area code clears it or passes it
  * whole as the range mode of Game_GetPartySize. */
 typedef union ActorVoiceFlags {
     u32 raw;
@@ -170,7 +170,7 @@ typedef union ActorRole {
     u8 cloud_layer;     /* the world-map cloud layer; two less is its texture row */
     u8 actor_slot;      /* the g_SpawnedActors row a helper actor was spawned in */
     u8 party_index;     /* the party row the actor follows */
-    u8 scene_record_id; /* the scene record Area_SelectSceneRecord selects */
+    u8 scene_record_id; /* the scene record Area_SceneSelectRecord selects */
     u8 facing;
     u8 scene_event_flag;
     u8 turn_step;

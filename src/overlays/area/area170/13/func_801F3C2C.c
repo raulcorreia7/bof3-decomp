@@ -17,7 +17,7 @@ MATCH void func_801F3C2C(void) {
     cell                       = g_Task;
     cell->pos.x.part.integer   = AREA_PAYLOAD_FIELD(D_801F57BC, u8, 0xF0, pair);
     cell->pos.y.part.integer   = AREA_PAYLOAD_FIELD(D_801F57BC, u8, 0xF1, pair);
-    height                     = Area_SampleHeight(cell->pos.x.fixed, cell->pos.y.fixed);
+    height                     = Area_HeightSample(cell->pos.x.fixed, cell->pos.y.fixed);
     g_Task->pos.z.part.integer = -height / 2 - AREA_PAYLOAD_FIELD(D_801F57BC, u16, 0xE4, pair);
     g_Task->screen_y           = 0;
     g_Task->header.step += 1;

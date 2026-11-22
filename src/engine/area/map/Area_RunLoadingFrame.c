@@ -7,5 +7,5 @@ MATCH void Area_RunLoadingFrame(void) {
     func_801A0514();
     Actor_DispatchAll();
     func_8019625C();
-    Area_DrawScene();
+    Area_SceneDraw();
 }

@@ -35,7 +35,7 @@ MATCH s32 func_801F33B0(void) {
             sprite->half_size += 8;
             y                = sprite->origin.y + sprite->unk_1C;
             sprite->origin.y = y;
-            sprite->unk_10   = Area_SampleHeight(sprite->origin.x, y) << 16;
+            sprite->unk_10   = Area_HeightSample(sprite->origin.x, y) << 16;
             func_801F2FC4(sprite);
         }
         sprite++;

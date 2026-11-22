@@ -8,7 +8,7 @@ MATCH void func_801F2CA4(void) {
     g_Task->unk_18  = 0x6B8000;
     g_Task->unk_1C  = 0x118000;
     g_Task->vy      = 1146880;
-    value           = (Area_SampleHeight(g_Task->vx, 0x118000) << 0x10) + 0x01000000;
+    value           = (Area_HeightSample(g_Task->vx, 0x118000) << 0x10) + 0x01000000;
     g_Task->gravity = value;
     g_Task->vz      = value;
     func_801F302C(&g_Task->vx, &g_Task->unk_18, g_Task);

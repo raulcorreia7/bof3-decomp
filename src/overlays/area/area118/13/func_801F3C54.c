@@ -17,7 +17,7 @@ NON_MATCHING void func_801F3C54(void) {
     g_Task->direction          = entry < 1;
     g_Task->pos.y.part.integer = D_801F515D[pair];
 
-    height                     = Area_SampleHeight(g_Task->pos.x.fixed, g_Task->pos.y.fixed);
+    height                     = Area_HeightSample(g_Task->pos.x.fixed, g_Task->pos.y.fixed);
     z                          = -height / 2;
     g_Task->pos.z.part.integer = z - D_801F513C[pair];
     g_Task->unk_32             = D_801F513C[pair];

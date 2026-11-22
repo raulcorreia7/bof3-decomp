@@ -32,7 +32,7 @@ MATCH void PlChar_SpawnLinkedActor(s32 spawn_type, s32 spawn_x, s32 spawn_y, s32
         g_SpawnedActors[slot].header.flags     = one;
         g_SpawnedActors[slot].header.mode      = type;
         g_SpawnedActors[slot].pos.y.fixed      = y_word;
-        COORD_INT(g_SpawnedActors[slot].pos.z) = Area_SampleHeight(g_SpawnedActors[slot].pos.x.fixed, y_word) + 0x200;
+        COORD_INT(g_SpawnedActors[slot].pos.z) = Area_HeightSample(g_SpawnedActors[slot].pos.x.fixed, y_word) + 0x200;
         g_SpawnedActors[slot].link             = one;
     }
 }

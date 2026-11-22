@@ -25,6 +25,6 @@ MATCH void Area_SetFacingOffsetX(u8 route_index) {
     g_AreaScrollTargetX    = x;
     g_PartyY               = y;
     g_AreaScrollTargetY    = y;
-    D_80143F5C             = ((Area_SampleHeight(g_PartyX, g_PartyY) - g_ScrollHeight) << 16) / ((0x80 / g_AreaCameraStep) * D_80143FC3);
+    D_80143F5C             = ((Area_HeightSample(g_PartyX, g_PartyY) - g_ScrollHeight) << 16) / ((0x80 / g_AreaCameraStep) * D_80143FC3);
     g_AreaCameraHeightStep = 0;
 }

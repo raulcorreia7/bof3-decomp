@@ -86,9 +86,9 @@ MATCH void func_801B0568(void) {
                     if ((g_Task->unk_06 == 0) || (Area_GetCellCode((tmp2 >> 0x10), (tmp10 >> 0x10)) & BYTE_MASK)) {
                         g_EncounterSteps = 0;
                         g_AreaWalkFlags &= ~(AREA_WALK_TRANSITION | 0x2000);
-                        Area_RollEncounterThreshold(0U);
+                        Area_EncounterRollThreshold(0U);
                     }
-                } else if (Area_CanStartEncounter() & BYTE_MASK) {
+                } else if (Area_EncounterCanStart() & BYTE_MASK) {
                     func_801B6418();
                     g_GameEntryPosX   = TO_COORD(25);
                     g_GameEntryPosY   = TO_COORD(25);

@@ -7,7 +7,7 @@ MATCH void func_801F44C4(void) {
 
     g_Task->vz += g_Task->gravity;
     Actor_MovementUpdate();
-    height = ((s32 (*)(s32, s32))Area_ReadHeight)(g_Task->pos.x.fixed, g_Task->pos.y.fixed);
+    height = ((s32 (*)(s32, s32))Area_HeightRead)(g_Task->pos.x.fixed, g_Task->pos.y.fixed);
     if (COORD_INT(g_Task->pos.z) < height) {
         g_Task->header.flags &= ~0x20;
         g_Task->tint.bytes.flags = 0;

@@ -13,6 +13,6 @@ MATCH void func_801F2D1C(void) {
         slot->header.mode  = 6;
         slot->pos.x.fixed  = TO_COORD(54);
         slot->pos.y.fixed  = TO_COORD(66);
-        slot->pos.z.fixed  = Area_SampleHeight(slot->pos.x.fixed, TO_COORD(66)) << 0x10;
+        slot->pos.z.fixed  = Area_HeightSample(slot->pos.x.fixed, TO_COORD(66)) << 0x10;
     }
 }

@@ -15,10 +15,10 @@ MATCH void func_801F32A8(void) {
     level->unk_0A              = countdown;
     level->timer               = countdown;
     from                       = g_Task;
-    distance                   = Area_SampleHeight(from->pos.x.fixed, from->pos.y.fixed);
+    distance                   = Area_HeightSample(from->pos.x.fixed, from->pos.y.fixed);
     position                   = g_Task;
     COORD_INT(position->pos.z) = distance;
-    offset_distance            = Area_SampleHeight(position->pos.x.fixed + 0x8000, position->pos.y.fixed - 0x8000);
+    offset_distance            = Area_HeightSample(position->pos.x.fixed + 0x8000, position->pos.y.fixed - 0x8000);
     gate                       = g_Task;
     if (COORD_INT(gate->pos.z) < offset_distance) {
         gate->vx = 0;

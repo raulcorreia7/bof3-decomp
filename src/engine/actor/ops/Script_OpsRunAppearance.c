@@ -144,7 +144,7 @@ NON_MATCHING u8 Script_OpsRunAppearance(void* sub, s32 target, u8 value) {
             break;
         case ACTOR_SCRIPT_APPEARANCE_SELECT_SCENE_SCRIPT:
             cmd = code + CUR(sub);
-            Area_SelectSceneRecord(cmd[2] | (cmd[1] << 8));
+            Area_SceneSelectRecord(cmd[2] | (cmd[1] << 8));
             Script_Select((code + CUR(sub))[3]);
             FIELD(s8, g_Task, 0x2Au) = (code + CUR(sub))[4] & 1;
             CUR(sub) += 4;

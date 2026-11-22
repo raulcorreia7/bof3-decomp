@@ -28,7 +28,7 @@ typedef struct PanelSortItem {
 ASSERT_SIZE(PanelSortItem, 0xC);
 /* The executable's area map, camera, cell and scene functions, in address order. */
 /* func_8014BA54 */
-extern void Area_DrawScene(void);
+extern void Area_SceneDraw(void);
 /* func_8014BAB8 */
 void        Area_SwapGridActors(s32 first, s32 second);
 /* func_8014BAEC */
@@ -46,7 +46,7 @@ void        Area_AddGridActor(void);
 /* func_8014D4E0 */
 extern void Area_AddActor(void);
 /* func_8014DD3C */
-bool        Area_SelectSceneRecord(s32 wanted_id);
+bool        Area_SceneSelectRecord(s32 wanted_id);
 
 /* func_801A3E50 */
 void        Area_RunSetupStream(u8* cursor);
@@ -91,7 +91,7 @@ void        Area_UpdatePaletteTint(s32 delta);
 /* func_80155B40 */
 void        Area_DrawCellLayer(s32 layer);
 /* func_80155D88 */
-void        Area_AddScenePrim(s32 scene);
+void        Area_SceneAddPrim(s32 scene);
 /* func_80155E7C */
 s8          Area_TestCondition(s32 request);
 /* func_80156ED4 */
@@ -99,7 +99,7 @@ void        Area_DrawCellQuad(s32 mask, s32 index);
 /* func_80157358 */
 void        Area_DrawParts(ScenePart* part_list, s32 x, s32 y);
 /* func_801579A8 */
-void        Area_DrawSceneSprite(u8* record, s32 origin_x, s32 origin_y);
+void        Area_SceneDrawSprite(u8* record, s32 origin_x, s32 origin_y);
 /* func_80157F98 */
 void        Area_RunBundleOpcodes(void);
 /* func_801580A4 */
@@ -123,13 +123,13 @@ void        Area_UpdateParty(void);
 /* func_80166CB0 */
 s32         Area_GetCellCode(s32 x, s32 y);
 /* func_80167344 */
-void        Area_DispatchScene(void);
+void        Area_SceneDispatch(void);
 /* func_801673AC */
-void        Area_InitScene(void);
+void        Area_SceneInit(void);
 /* func_800C3254 (boss055), func_8014CE48 (slus), func_801F3DCC (area198) */
 extern s32  Area_RoundSpriteCoordinate(s32 pair, s32 step);
 /* func_80167800 (slus), func_801BC3B8 (game) */
-void        Area_StepSceneTimer(void);
+void        Area_SceneStepTimer(void);
 /* func_80154438 */
 void        Area_ApplyMapBundleObjects(void);
 

@@ -4,7 +4,7 @@ MATCH void func_8019E7C4(void) {
     Actor* work;
     Actor* other;
 
-    Area_SelectSceneRecord(0x18);
+    Area_SceneSelectRecord(0x18);
 
     g_Task->active_flags = 0;
     g_Task->mirror       = 0;

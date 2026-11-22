@@ -72,9 +72,9 @@ MATCH void func_801D2CE4(void) {
 
     p = &D_801DA084;
     *p += 0x200000;
-    h = Area_SampleHeight(g_AreaScrollTargetX, g_AreaScrollTargetY);
+    h = Area_HeightSample(g_AreaScrollTargetX, g_AreaScrollTargetY);
     if ((h << 16) < *p) {
-        *p         = Area_SampleHeight(g_AreaScrollTargetX, g_AreaScrollTargetY) << 16;
+        *p         = Area_HeightSample(g_AreaScrollTargetX, g_AreaScrollTargetY) << 16;
         D_801DA04E = 1;
     } else {
         D_801DA04E = 0;
@@ -118,8 +118,8 @@ MATCH void func_801D2E80(void) {
     s32  target;
     s32  delta;
 
-    target = (Area_SampleHeight(g_AreaScrollTargetX, g_AreaScrollTargetY) << 16) + g_ShisuBaseScale * 0xA00;
-    delta  = (Area_SampleHeight(g_AreaScrollTargetX, g_AreaScrollTargetY) << 16) + SHISU_HEIGHT_BIAS - target;
+    target = (Area_HeightSample(g_AreaScrollTargetX, g_AreaScrollTargetY) << 16) + g_ShisuBaseScale * 0xA00;
+    delta  = (Area_HeightSample(g_AreaScrollTargetX, g_AreaScrollTargetY) << 16) + SHISU_HEIGHT_BIAS - target;
     follow = &D_801DA0FC;
     *follow -= delta / 16;
     if (*follow < target) {

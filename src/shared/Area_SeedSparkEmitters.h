@@ -16,7 +16,7 @@
             emitter->timer  = RANDOM_MASK(0x1F);                                         \
             emitter->pos.vx = (cells)[i][0] << 16;                                       \
             emitter->pos.vy = (cells)[i][1] << 16;                                       \
-            emitter->pos.vz = Area_SampleHeight(emitter->pos.vx, emitter->pos.vy) << 16; \
+            emitter->pos.vz = Area_HeightSample(emitter->pos.vx, emitter->pos.vy) << 16; \
             emitter++;                                                                   \
         }                                                                                \
     }

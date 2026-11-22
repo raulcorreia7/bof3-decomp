@@ -30,12 +30,12 @@ NON_MATCHING void func_801F3070(s32 mode) {
         if (mode != 0) {
             x                         = (g_ScratchPadVectors[0].vx + 0x4000) << 9;
             y                         = (g_ScratchPadVectors[0].vy + 0x4000) << 9;
-            g_ScratchPadVectors[0].vz = -Area_SampleHeight(x, y) / 2 - g_Task->pos.z.part.fraction - 0x180;
-            g_ScratchPadVectors[2].vz = -Area_SampleHeight(x, y) / 2 - g_Task->pos.z.part.fraction;
+            g_ScratchPadVectors[0].vz = -Area_HeightSample(x, y) / 2 - g_Task->pos.z.part.fraction - 0x180;
+            g_ScratchPadVectors[2].vz = -Area_HeightSample(x, y) / 2 - g_Task->pos.z.part.fraction;
             x                         = (g_ScratchPadVectors[1].vx + 0x4000) << 9;
             y1                        = (g_ScratchPadVectors[1].vy + 0x4000) << 9;
-            g_ScratchPadVectors[1].vz = -Area_SampleHeight(x, y1) / 2 - g_Task->pos.z.part.fraction - 0x180;
-            g_ScratchPadVectors[3].vz = -Area_SampleHeight(x, y1) / 2 - g_Task->pos.z.part.fraction;
+            g_ScratchPadVectors[1].vz = -Area_HeightSample(x, y1) / 2 - g_Task->pos.z.part.fraction - 0x180;
+            g_ScratchPadVectors[3].vz = -Area_HeightSample(x, y1) / 2 - g_Task->pos.z.part.fraction;
         } else {
             g_ScratchPadVectors[1].vz = g_ScratchPadVectors[3].vz = g_Task->unk_32;
             g_ScratchPadVectors[0].vz = g_ScratchPadVectors[2].vz = g_Task->unk_32 - 0x180;

@@ -9,5 +9,5 @@ MATCH void func_801F2C7C(void) {
     g_Task->pos.x.fixed      = source->pos.x.fixed;
     y                        = source->pos.y.fixed;
     g_Task->pos.y.fixed      = y;
-    COORD_INT(g_Task->pos.z) = Area_SampleHeight(g_Task->pos.x.fixed, y) - 0x40;
+    COORD_INT(g_Task->pos.z) = Area_HeightSample(g_Task->pos.x.fixed, y) - 0x40;
 }

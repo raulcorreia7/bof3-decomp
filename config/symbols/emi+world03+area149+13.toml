@@ -3,4 +3,4 @@ D_801448EE_U16 = { addr = 0x801448EE, type = "u16", size = 0x2, source = "The sc
 g_AreaModuleId = { addr = 0x801F2C00, source = "Module id of the area: the first payload word of its overlay, 52 + the area number." }
 Area_DrawScreenTint = { addr = 0x801F2DE0, type = "func", source = "Draws a semi-transparent tile over the whole screen in the colour of the task tint." }
 Actor_PlaceAtFocus = { addr = 0x801F2EC4, type = "func", source = "Copies D_80147A8C, g_AreaFocusY and D_80147A94 into the actor position at bytes 0x34, 0x38 and 0x3C." }
-Area_RunSceneEvent = { addr = 0x801F3460, type = "func", source = "Runs the area's scene event: pans the camera between the Caer Xhan and station edges, then requests the Myria Station or Caer Xhan lift area change." }
+Area_SceneRunEvent = { addr = 0x801F3460, type = "func", source = "Runs the area's scene event: pans the camera between the Caer Xhan and station edges, then requests the Myria Station or Caer Xhan lift area change." }

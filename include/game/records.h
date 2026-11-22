@@ -16,7 +16,7 @@
  * cleared by Actor_Free(s). The frontend cues, the staged scene objects and
  * the area030 fishing actors all use the same rows. The position words are the
  * same 16.16 coordinates as the field actor's (sys/actor.h): the
- * ground height from Area_SampleHeight sits in the halfword at +0x3E.
+ * ground height from Area_HeightSample sits in the halfword at +0x3E.
  *
  * The allocator's result is the actor slot. Callers test it against 0xFF for none. No retail string names the table. */
 #define ACTOR_SLOT_SIZE                0x74

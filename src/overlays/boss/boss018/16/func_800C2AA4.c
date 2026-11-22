@@ -27,8 +27,8 @@ MATCH void func_800C2AA4(void) {
             func_800C29AC(0, 0);
         }
     }
-    D_801EB66E                           = Area_SampleHeight(D_801EB664, D_801EB668);
-    g_Game.members[0].pos.z.part.integer = Area_SampleHeight(g_Game.members[0].pos.x.fixed, g_Game.members[0].pos.y.fixed);
+    D_801EB66E                           = Area_HeightSample(D_801EB664, D_801EB668);
+    g_Game.members[0].pos.z.part.integer = Area_HeightSample(g_Game.members[0].pos.x.fixed, g_Game.members[0].pos.y.fixed);
     if (g_Game.members[0].u.turn.action_flags.value & 2) {
         D_801EBF5C = g_Game.members[0].pos.z.fixed;
     }

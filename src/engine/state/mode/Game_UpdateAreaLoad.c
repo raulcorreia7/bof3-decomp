@@ -44,7 +44,7 @@ MATCH void Game_UpdateAreaLoad(void) {
 
     pending_world = LOHU(g_GameAreaId);
     if (pending_world != AREA_ID_DESERT_OF_DEATH_MAP) {
-        Area_RollEncounterThreshold(1u);
+        Area_EncounterRollThreshold(1u);
     }
 
     final_world_flags = g_AreaWalkFlags;

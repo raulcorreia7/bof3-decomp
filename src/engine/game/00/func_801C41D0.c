@@ -1,6 +1,6 @@
 #include "game_00.h"
 
-#define BLOCKED(px, py, dir) (Area_ReadStepHeight((px), (py), (dir)) >= 0x41 && ((u8*)&g_ScratchPad)[0])
+#define BLOCKED(px, py, dir) (Area_HeightReadStep((px), (py), (dir)) >= 0x41 && ((u8*)&g_ScratchPad)[0])
 
 #ifdef NON_MATCHING
 NON_MATCHING s32 func_801C41D0(s32 pos_x, s32 pos_y, s16 probe_range) {
@@ -49,7 +49,7 @@ NON_MATCHING s32 func_801C41D0(s32 pos_x, s32 pos_y, s16 probe_range) {
     if ((pos_y & HALF_MASK) == 0) {
         b = (((pos_y >> 16) - 1) << 16) | 0x8000;
         a = ((u32)pos_x >> 16) << 16;
-        if (Area_ReadStepHeight(a, b, 1) + 1 > 0x41 && ((u8*)&g_ScratchPad)[0])
+        if (Area_HeightReadStep(a, b, 1) + 1 > 0x41 && ((u8*)&g_ScratchPad)[0])
             return 1;
         a = (a & HALF_MASK) | (((pos_x >> 16) + 1) << 16);
         if (BLOCKED(a, b, 1))
@@ -72,7 +72,7 @@ NON_MATCHING s32 func_801C41D0(s32 pos_x, s32 pos_y, s16 probe_range) {
         if (BLOCKED(a | 0x8000, b | 0x8000, 0))
             return 1;
     }
-    dist = Area_ReadHeight(pos_x, pos_y) - probe_range;
+    dist = Area_HeightRead(pos_x, pos_y) - probe_range;
     dist = ABS(dist);
     if (dist < 193) {
         saved                    = COORD_INT(g_Task->pos.z);

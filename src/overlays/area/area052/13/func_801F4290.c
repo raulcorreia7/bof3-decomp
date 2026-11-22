@@ -16,6 +16,6 @@ MATCH void func_801F4290(void) {
     slot->pos.x.fixed  = TO_COORD(136);
     slot->pos.y.fixed  = TO_COORD(17);
     /* kept: retail reads the sampled height as an int, with no halfword extension. */
-    slot->pos.z.fixed  = ((s32 (*)(s32, s32))Area_SampleHeight)(slot->pos.x.fixed, TO_COORD(17)) << 8;
+    slot->pos.z.fixed  = ((s32 (*)(s32, s32))Area_HeightSample)(slot->pos.x.fixed, TO_COORD(17)) << 8;
     slot->link         = 8;
 }

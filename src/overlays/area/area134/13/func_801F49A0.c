@@ -48,7 +48,7 @@ MATCH s32 func_801F49A0(void) {
         work->origin.x += work->unk_18;
         work->half_size += 8;
         work->origin.y += work->unk_1C;
-        work->unk_10 = Area_SampleHeight(work->origin.x, work->origin.y) << 16;
+        work->unk_10 = Area_HeightSample(work->origin.x, work->origin.y) << 16;
         func_801F46EC(work);
     next:
         work++;
