@@ -10,10 +10,10 @@ MATCH void func_801DB808(void) {
     TASK(FishingState)->timer = (TASK(FishingState)->timer - 1);
 
     Fishing_DrawCatchBar(0, FISHING_CATCH_BAR_Y);
-    Fishing_DrawCatchIcon(FISHING_CATCH_ICON_X, FISHING_CATCH_ICON_Y, D_8014688E[g_FishingHookedFish * 0x98]);
+    Fishing_DrawCatchIcon(FISHING_CATCH_ICON_X, FISHING_CATCH_ICON_Y, g_Actors[g_FishingHookedFish].unk_06);
 
     offset = g_FishingHookedFish * 0x98;
-    Fishing_DrawCatchRow(D_8014688E[offset], 0, TASK(FishingState)->timer);
+    Fishing_DrawCatchRow(g_Actors[g_FishingHookedFish].unk_06, 0, TASK(FishingState)->timer);
 
     if (TASK(FishingState)->timer == 0) {
         TASK(FishingState)->sub_index = (TASK(FishingState)->sub_index + 1);

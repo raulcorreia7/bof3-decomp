@@ -19,13 +19,15 @@
 /* The current map row in the field-loader table. */
 /* The party position in 16.16 fixed point. */
 /* The payload's first words: the per-state handler pointers. */
-extern u8       D_801F4FAC[];
+extern u8          D_801F4FAC[];
+/* The screen spread of the quad's far edge, a signed byte a sprite row, in the payload. */
+extern volatile u8 D_801F4FE4[];
 /* The palette callbacks this overlay animates. */
-extern Callback D_801F66D4[17];
+extern Callback    D_801F66D4[17];
 /* The row table the step lookup reads through the load entry. */
-extern u8*      D_801F6748[];
+extern u8*         D_801F6748[];
 /* The signed per-step offsets the scripted move adds to x and subtracts from y, indexed by the 4-bit step. */
-extern s8       D_801F6754[];
+extern s8          D_801F6754[];
 
 /* Claims a spawn slot for an actor of the given actor_type linked to the current actor; with no slot free it backs the script cursor up by 2. func_801F43FC and func_801F4D90 share it; every change must verify both. A statement macro: an inline function loads actor_type before the call and moves the bytes. */
 #define AREA_SPAWN_LINKED_ACTOR(actor_type)                                              \

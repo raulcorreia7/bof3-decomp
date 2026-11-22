@@ -1,42 +1,42 @@
 #include "area142_13.h"
 
 #ifdef NON_MATCHING
+/* The scroll target's tile ring: a 16 by 16 grid of semi-transparent, shaded tiles. */
 NON_MATCHING void func_801F3118(void) {
     TILE_1* tile;
+    s32     fade;
     s32     i;
     s32     j;
-    s32     mode;
-    s32     value;
-    s32     angle;
-    s32     p;
-    s32     flag;
+    long    depth;
+    long    flag;
 
-    D_1F800034[0] = -0x3100;
-    D_1F800034[1] = -0x3A00;
+    if (abs(g_AreaTargetCellX - COORD_INT(TASK(Actor)->pos.x)) + abs(g_AreaTargetCellY - COORD_INT(TASK(Actor)->pos.y)) >= 0x15) {
+        return;
+    }
 
-    mode = getTPage(TPAGE_DEPTH_8BIT, TPAGE_ABR_ADD, 320, 256);
-    SetDrawMode((DR_MODE*)g_GfxPrimCursor, 0, 1, mode, 0);
+    SetDrawMode((DR_MODE*)g_GfxPrimCursor, 0, 1, (GetGraphType() == 1 || GetGraphType() == 2) ? 0x2A5 : 0xB5, 0);
     Area_CellAddPrim(TASK(Actor)->pos.x.fixed, TASK(Actor)->pos.y.fixed, 1, sizeof(DR_MODE));
 
-    for (i = 0; i < 32; i++) {
-        for (j = 0; j < 8; j++) {
+    TASK(Actor)->timer += 2;
+
+    for (i = 0; i < 16; i++) {
+        fade = ~(TASK(Actor)->timer - (i << 4)) & 0xFF;
+        for (j = 0; j < 16; j++) {
             tile = (TILE_1*)g_GfxPrimCursor;
             SetTile1(tile);
             SetSemiTrans(tile, 1);
-            value = (0x17F - ((i << 3) + (g_FrameCount & 0x7))) >> 1;
-            setRGB0(tile, value / 4, value / 4, value);
+            setRGB0(tile, fade, fade, fade);
 
-            angle = 256 + j * ANGLE_45;
-            setVector(&g_ScratchPadVectors[0], D_1F800034[0] + (((rsin(angle) * ((i << 4) + (g_FrameCount & 0xF)) * 5)) >> 16),
-                      D_1F800034[1] + (((rcos(angle) * ((i << 4) + (g_FrameCount & 0xF)) * 5)) >> 16), -0x340 - (rsin(((i << 4) + (g_FrameCount & 0xF)) * 5) >> 5));
-            RotTransPers(g_ScratchPadVectors, (long*)&tile->x0, (long*)&p, (long*)&flag);
+            g_ScratchPadVectors[0].vx = (((rsin((j << 8) + (u8)(g_FrameCount << 4) * D_801F355C[i & 1]) >> 6) * 3) - 0x4000) + (TASK(Actor)->pos.x.fixed >> 9);
+            g_ScratchPadVectors[0].vy = (((rcos((j << 8) + (u8)(g_FrameCount << 4) * D_801F355C[i & 1]) >> 6) * 3) - 0x4000) + (TASK(Actor)->pos.y.fixed >> 9);
+            g_ScratchPadVectors[0].vz = -0x180 - ((u8)(TASK(Actor)->timer - (i << 4)) << 1);
+            RotTransPers(g_ScratchPadVectors, (long*)&tile->x0, &depth, &flag);
 
             Area_CellAddPrim(TASK(Actor)->pos.x.fixed, TASK(Actor)->pos.y.fixed, 1, sizeof(TILE_1));
         }
     }
 
-    mode = getTPage(TPAGE_DEPTH_8BIT, TPAGE_ABR_ADD, 320, 256);
-    GFX_SET_DRAW_MODE(mode);
+    SetDrawMode((DR_MODE*)g_GfxPrimCursor, 0, 0, (GetGraphType() == 1 || GetGraphType() == 2) ? 0x2A5 : 0xB5, 0);
     Area_CellAddPrim(TASK(Actor)->pos.x.fixed, TASK(Actor)->pos.y.fixed, 1, sizeof(DR_MODE));
 }
 #else

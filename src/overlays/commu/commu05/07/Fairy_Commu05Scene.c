@@ -11,34 +11,33 @@ MATCH void func_801D0C10(void) {
 
 MATCH void func_801D0C4C(void) {
     if (D_80145E44 != 0) {
-        D_801D19F0.unk_00 = ((D_80145E44 - 1) / 7) + 1;
+        D_801D19F0.pages[0] = ((D_80145E44 - 1) / 7) + 1;
     } else {
-        D_801D19F0.unk_00 = 0;
+        D_801D19F0.pages[0] = 0;
     }
     if (g_FairyVillagePendingQueueCount != 0) {
-        D_801D19F0.unk_01 = ((g_FairyVillagePendingQueueCount - 1) / 20) + 1;
+        D_801D19F0.pages[1] = ((g_FairyVillagePendingQueueCount - 1) / 20) + 1;
     } else {
-        D_801D19F0.unk_01 = 0;
+        D_801D19F0.pages[1] = 0;
     }
     if (g_FairyVillageUpdateCount != 0) {
-        D_801D19F0.unk_02 = ((g_FairyVillageUpdateCount - 1) / 8) + 1;
+        D_801D19F0.pages[2] = ((g_FairyVillageUpdateCount - 1) / 8) + 1;
     } else {
-        D_801D19F0.unk_02 = 0;
+        D_801D19F0.pages[2] = 0;
     }
-    D_801D19F0.unk_04 = 0;
+    D_801D19F4 = 0;
     D_801F294C += 1;
 }
 
-#ifdef NON_MATCHING
-NON_MATCHING void func_801D0D4C(void) {
+MATCH void func_801D0D4C(void) {
     u8 page;
     u8 remaining;
     u8 count;
 
-    remaining = D_801D19F0.unk_04;
+    remaining = D_801D19F4;
     page      = 0;
     while (1) {
-        count = ((u8*)&D_801D19F0)[page];
+        count = D_801D19F0.pages[page];
         if (remaining < count) {
             break;
         }
@@ -58,28 +57,25 @@ NON_MATCHING void func_801D0D4C(void) {
             func_801D14C8(0x28, 0x28, remaining);
             break;
     }
-    remaining = (u8)D_801D19F0.unk_00 + (u8)D_801D19F0.unk_01 + (u8)D_801D19F0.unk_02;
+    remaining = D_801D19F0.pages[0] + D_801D19F0.pages[1] + D_801D19F0.pages[2];
     if (g_PadStates[0].pressed & PADLright) {
-        D_801D19F0.unk_04++;
-        if (D_801D19F0.unk_04 >= remaining) {
-            D_801D19F0.unk_04 = 0;
+        D_801D19F4++;
+        if (D_801D19F4 >= remaining) {
+            D_801D19F4 = 0;
         }
     }
     if (g_PadStates[0].pressed & PADLleft) {
-        D_801D19F0.unk_04--;
-        if (D_801D19F0.unk_04 < 0) {
-            D_801D19F0.unk_04 = remaining - 1;
+        D_801D19F4--;
+        if (D_801D19F4 < 0) {
+            D_801D19F4 = remaining - 1;
         }
     }
-    TEXT_Format(g_UiTextFormatBuffer, D_801D0C04, D_801D19F0.unk_04 + 1, remaining);
+    TEXT_Format(g_UiTextFormatBuffer, D_801D0C04, D_801D19F4 + 1, remaining);
     UI_TextDrawGlyphString(0xEE, 0x2C, 0, g_UiTextFormatBuffer);
     if (g_PadStates[0].pressed & (g_InputMasks[INPUT_SLOT_CANCEL] | g_InputMasks[INPUT_SLOT_CONFIRM])) {
         D_801F294C += 1;
     }
 }
-#else
-INCLUDE_ASM(func_801D0D4C);
-#endif
 
 MATCH void func_801D0F34(void) {
     /* FAKE: retail reads g_SceneEventState.step as u8[]. */
