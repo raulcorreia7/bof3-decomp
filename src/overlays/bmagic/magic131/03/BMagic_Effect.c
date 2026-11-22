@@ -222,20 +222,20 @@ MATCH void func_801EF6AC(void) {
     u8   i;
 
     g_Scripts = CHARACTER_SPRITES_BASE;
-    SYS_DISPATCH_BYTE(D_801F1BD4, g_Task->header.step);
-    if (g_Task->header.flags != 0 && g_Task->header.step != 0) {
+    SYS_DISPATCH_BYTE(D_801F1BD4, TASK(PartyMember)->header.step);
+    if (TASK(PartyMember)->header.flags != 0 && TASK(PartyMember)->header.step != 0) {
         Area_AddGridActor();
         if ((g_FrameCount & 3) == 0) {
             i   = 0;
             dst = g_AreaPaletteCopy->rows[AREA_PALETTE_BMAGIC_ROW].colors;
             src = g_AreaPaletteArena->rows[AREA_PALETTE_BMAGIC_ROW].colors;
             for (; i < 9; i++) {
-                dst[i + 0x21] = src[g_Task->unk_04 + i] | PSX_COLOR_STP_BIT;
+                dst[i + 0x21] = src[TASK(PartyMember)->unk_04 + i] | PSX_COLOR_STP_BIT;
             }
             g_GfxPalettePending = 1;
-            g_Task->unk_04 += 9;
-            if (g_Task->unk_04 >= 0x7B) {
-                g_Task->unk_04 = 0x21;
+            TASK(PartyMember)->unk_04 += 9;
+            if (TASK(PartyMember)->unk_04 >= 0x7B) {
+                TASK(PartyMember)->unk_04 = 0x21;
             }
         }
     }
