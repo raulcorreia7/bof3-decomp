@@ -1,50 +1,50 @@
 #include "game_00.h"
 
-MATCH s32 func_801AFD10(u8* column_counter, u8* row_offset, u8* row_flag, u8* position) {
+MATCH s32 func_801AFD10(u8* first_row, u8* scroll_y, u8* extra_rows, u8* scroll) {
     u8 state;
     u8 hi;
     u8 lo;
     u8 ret;
 
-    state = *position;
+    state = *scroll;
     lo    = state & 0xF;
     hi    = state >> 4;
     if (hi == 1) {
         if (lo == 0) {
-            *column_counter = *column_counter + 1;
+            *first_row = *first_row + 1;
         }
         lo = (lo + 4) % 12;
         if (lo == 0) {
             hi          = 0;
-            *row_offset = 0;
-            *row_flag   = 0;
-            ret         = *column_counter;
+            *scroll_y   = 0;
+            *extra_rows = 0;
+            ret         = *first_row;
         } else {
-            *row_offset = -lo;
-            *row_flag   = 1;
-            ret         = *column_counter - 1;
+            *scroll_y   = -lo;
+            *extra_rows = 1;
+            ret         = *first_row - 1;
         }
     } else if (hi == 0xF) {
         if (lo == 0) {
-            *column_counter = *column_counter - 1;
-            lo              = 8;
+            *first_row = *first_row - 1;
+            lo         = 8;
         } else {
             lo = lo - 4;
         }
         if (lo == 0) {
             hi          = 0;
-            *row_offset = 0;
-            *row_flag   = 0;
+            *scroll_y   = 0;
+            *extra_rows = 0;
         } else {
-            *row_offset = -lo;
-            *row_flag   = 1;
+            *scroll_y   = -lo;
+            *extra_rows = 1;
         }
-        ret = *column_counter;
+        ret = *first_row;
     } else {
-        *row_offset = 0;
-        *row_flag   = 0;
-        ret         = *column_counter;
+        *scroll_y   = 0;
+        *extra_rows = 0;
+        ret         = *first_row;
     }
-    *position = lo + (hi << 4);
+    *scroll = lo + (hi << 4);
     return ret;
 }
