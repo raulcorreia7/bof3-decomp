@@ -430,7 +430,7 @@ MATCH void func_801F7790(void) {
                 g_ScenarioState.step_05 = (g_ScenarioState.step_05 + 1u);
                 break;
             }
-            GFX_CopyPaletteCapped(((u8)*timer));
+            GFX_PaletteCopyCapped(((u8)*timer));
             break;
         }
 
@@ -450,7 +450,7 @@ MATCH void func_801F7790(void) {
             timer = &g_ScenarioState.timer_06;
             if (--*timer != 0u) {
                 UI_TextDraw(72, 80, 0, TEXT_LENGTH_MAX, (u8*)(SCENA16_VRAM_BASE + SCENA16_D_80010006));
-                GFX_CopyPaletteCapped((u8)*timer);
+                GFX_PaletteCopyCapped((u8)*timer);
                 break;
             }
             Scene_RestorePalette();
@@ -557,14 +557,14 @@ MATCH void func_801F7CC4(void) {
             if (*progress < 191u) {
                 UI_TextDraw(72, 80, 0, TEXT_LENGTH_MAX, (u8*)(SCENA16_VRAM_BASE + SCENA16_D_80010006));
                 if (*progress < 32u) {
-                    GFX_CopyPaletteCapped((*progress & BYTE_MASK));
+                    GFX_PaletteCopyCapped((*progress & BYTE_MASK));
                 } else if (*progress == 32u) {
                     Scene_RestorePalette();
                 } else if (*progress > 159u) {
                     u16 inverted;
 
                     inverted = (0xBFu - *progress);
-                    GFX_CopyPaletteCapped((inverted & BYTE_MASK));
+                    GFX_PaletteCopyCapped((inverted & BYTE_MASK));
                 }
             } else if (*progress == 191u) {
                 Scene_RestorePalette();
@@ -702,7 +702,7 @@ MATCH s32 func_801F83A8(void) {
     return 0;
 }
 
-#include "overlays/scenario/shared/GFX_CopyPaletteCapped.h"
+#include "overlays/scenario/shared/GFX_PaletteCopyCapped.h"
 
 /* Restores the scene palette. */
 /* func_801F845C */

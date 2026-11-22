@@ -163,8 +163,8 @@ MATCH void func_801EF444(void) {
     work->unk_09 = timer;
     battler      = &g_Game.members[work->unk_04];
     if (!(timer & BYTE_MASK)) {
-        GFX_FreePaletteFadeTarget(battler);
-        g_Task->timer  = GFX_AllocPaletteFade(battler, 0, 0, 0, 1);
+        GFX_PaletteFreeFadeTarget(battler);
+        g_Task->timer  = GFX_PaletteAllocFade(battler, 0, 0, 0, 1);
         g_Task->unk_09 = 8;
         g_Task->header.step += 1;
     }
@@ -206,7 +206,7 @@ MATCH void func_801EF688(void) {
     g_Task->unk_09 = count;
     battler        = &g_Game.members[unk04];
     if (!(count & BYTE_MASK)) {
-        GFX_FreePaletteFadeTarget(battler);
+        GFX_PaletteFreeFadeTarget(battler);
         Battle_FadePoisonedBattler(g_Task->unk_04);
         g_Task->header.step += 1;
     }

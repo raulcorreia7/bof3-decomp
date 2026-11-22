@@ -3,8 +3,8 @@ MATCH void Effect_StartPaletteFade(void) {
     PartyMember** actor;
 
     actor = &g_Battle.selected_actor;
-    GFX_FreePaletteFadeTarget(*actor);
-    g_Task->param.unk_0B = GFX_AllocPaletteFade(*actor, 0, 0, 0, 1);
+    GFX_PaletteFreeFadeTarget(*actor);
+    g_Task->param.unk_0B = GFX_PaletteAllocFade(*actor, 0, 0, 0, 1);
     g_Task->unk_09       = 0;
     g_Task->header.mode += 1;
 }

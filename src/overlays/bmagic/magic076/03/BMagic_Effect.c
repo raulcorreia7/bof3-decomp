@@ -76,7 +76,7 @@ MATCH void Effect_DarkenPalette(void) {
     g_PaletteFades[g_Task->timer].offset.g--;
     g_PaletteFades[g_Task->timer].offset.b--;
     if (--g_Task->unk_09 == 0) {
-        GFX_FreePaletteFadeTarget(g_Battle.selected_actor);
+        GFX_PaletteFreeFadeTarget(g_Battle.selected_actor);
         g_Task->header.mode++;
     }
 }

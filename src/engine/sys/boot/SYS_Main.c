@@ -18,7 +18,7 @@ MATCH void SYS_Main(void) {
         rand();
         PutDispEnv((DISPENV*)g_GfxCurrentBuffer);
         PutDrawEnv((DRAWENV*)(g_GfxCurrentBuffer + 0x14));
-        GFX_UploadPalette();
+        GFX_PaletteUpload();
         GFX_UpdateTransferQueue();
         DrawOTag((u_long*)(g_GfxCurrentBuffer + 0x8C));
         SYS_UpdateKeyState();

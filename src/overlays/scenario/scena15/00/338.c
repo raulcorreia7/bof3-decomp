@@ -273,8 +273,7 @@ MATCH void func_801F7AEC(void) {
         task = g_Task;
         setXY0(tile, task->screen_x + 0x334, (u16)(task->screen_y + (((g_GfxBufferIndex ^ 1) * 0xF0) - 0x15)));
     }
-    tile->w = 0x18;
-    tile->h = 0x30;
+    setWH(tile, 0x18, 0x30);
     setRGB0(tile, 0, 0, 0);
     GFX_AddPrim(GFX_LAYER_BACKDROP, sizeof(TILE));
 

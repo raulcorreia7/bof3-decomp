@@ -19,9 +19,7 @@ MATCH s32 Area_StepSparkEmitters(void) {
                     if (spark != NULL) {
                         spark->active = 1;
                         spark->life   = (rand() & 0x1F) + 0x20;
-                        spark->pos.vx = emitter->pos.vx + ((rand() & 0xFF) << 8) - 0x10000;
-                        spark->pos.vy = emitter->pos.vy + ((rand() & 0xFF) << 8) - 0x10000;
-                        spark->pos.vz = emitter->pos.vz;
+                        setVector(&spark->pos, emitter->pos.vx + ((rand() & 0xFF) << 8) - 0x10000, emitter->pos.vy + ((rand() & 0xFF) << 8) - 0x10000, emitter->pos.vz);
                         spark->z_step = 0;
                         spark->blink  = rand() & 1;
                     }

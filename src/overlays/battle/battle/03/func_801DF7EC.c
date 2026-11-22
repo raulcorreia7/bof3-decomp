@@ -17,7 +17,7 @@ MATCH void func_801DF7EC(void) {
     entry->offset.g                            = sprite;
     *((u8*)&g_PaletteFades->offset.r + offset) = sprite;
     if ((g_Battle.selection_latch == 0) || (((value = g_BattleActorTurn->command.target) != g_Task->slot) && ((value & BATTLE_TARGET_PARTY_SIDE) == 0))) {
-        GFX_FreePaletteFade(g_Task->unk_07);
+        GFX_PaletteFreeFade(g_Task->unk_07);
         g_Task->header.step = 0;
     }
 }

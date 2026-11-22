@@ -118,8 +118,8 @@ NON_MATCHING void Battle_Reset(void) {
         MEM_PTR(u16, 0x80039600u)[0xF0 + row_offset] = MEM_PTR(u16, 0x80035600u)[0xF0 + row_offset];
         index                                        = slot & BYTE_MASK;
     } while ((u32)(slot & BYTE_MASK) < 0x10U);
-    GFX_CopyPalette(0x1A);
-    GFX_CopyPalette(0x1B);
+    GFX_PaletteCopy(0x1A);
+    GFX_PaletteCopy(0x1B);
     slot = 0;
     do {
         if ((u32)slot < 3U) {
@@ -131,7 +131,7 @@ NON_MATCHING void Battle_Reset(void) {
         } else if (!(Battle_SlotIsBlocked((u32)slot) & BYTE_MASK) && (g_Battle.encounter != 37)) {
             g_Task = (((((s32)(((s32)slot * 8) + slot) * 4) - slot) * 8) + g_BattleEnemies);
         found: /* the live battler's work pointer */
-            GFX_UploadPaletteRows();
+            GFX_PaletteUploadRows();
         }
         slot += 1;
     } while ((u32)(slot & BYTE_MASK) < 0xBU);

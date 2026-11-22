@@ -287,8 +287,7 @@ MATCH void func_801D1758(SpriteSpark* spark) {
     SetTile(box);
     SetSemiTrans(box, 1);
     setXY0(box, xy.vx - 1, xy.vy - 1);
-    box->w = 3;
-    box->h = 3;
+    setWH(box, 3, 3);
     if (spark->blink != 0) {
         setRGB0(box, 32, 32, 32);
     } else {

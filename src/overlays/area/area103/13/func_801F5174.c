@@ -25,19 +25,11 @@ NON_MATCHING void func_801F5174(s32 steps, s32 radius) {
         prim = (POLY_FT4*)g_GfxPrimCursor;
         SetPolyFT4(prim);
         SetShadeTex(prim, 0);
-        size                      = phase * steps / 4 + j * 2 + 8;
-        g_ScratchPadVectors[0].vx = x - size;
-        g_ScratchPadVectors[0].vy = y - size;
-        g_ScratchPadVectors[0].vz = z - j * 8 + steps * 16;
-        g_ScratchPadVectors[1].vx = x + size;
-        g_ScratchPadVectors[1].vy = y - size;
-        g_ScratchPadVectors[1].vz = z - j * 8;
-        g_ScratchPadVectors[2].vx = x - size;
-        g_ScratchPadVectors[2].vy = y + size;
-        g_ScratchPadVectors[2].vz = z - j * 8;
-        g_ScratchPadVectors[3].vx = x + size;
-        g_ScratchPadVectors[3].vy = y + size;
-        g_ScratchPadVectors[3].vz = z - j * 8 - steps * 16;
+        size = phase * steps / 4 + j * 2 + 8;
+        setVector(&g_ScratchPadVectors[0], x - size, y - size, z - j * 8 + steps * 16);
+        setVector(&g_ScratchPadVectors[1], x + size, y - size, z - j * 8);
+        setVector(&g_ScratchPadVectors[2], x - size, y + size, z - j * 8);
+        setVector(&g_ScratchPadVectors[3], x + size, y + size, z - j * 8 - steps * 16);
         RotTransPers4(&g_ScratchPadVectors[1], &g_ScratchPadVectors[2], &g_ScratchPadVectors[3], &g_ScratchPadVectors[0], (long*)&prim->x1, (long*)&prim->x2, (long*)&prim->x3, (long*)&prim->x0,
                       &depth, &flag);
         part   = (7 - i) * 8 + 7 - phase;

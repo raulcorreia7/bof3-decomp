@@ -3,9 +3,7 @@
 MATCH void func_801F2F50(void) {
     u8 remaining;
 
-    D_801F44A0->center.vx = D_80146954.x.fixed;
-    D_801F44A0->center.vy = D_80146954.y.fixed;
-    D_801F44A0->center.vz = D_80146954.z.fixed;
+    setVector(&D_801F44A0->center, D_80146954.x.fixed, D_80146954.y.fixed, D_80146954.z.fixed);
     Area_ProjectRing(D_801F44A0);
     func_801F31A0(D_801F44A0);
     func_801F33DC(D_801F44A0);

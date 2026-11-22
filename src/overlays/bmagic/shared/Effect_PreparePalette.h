@@ -8,8 +8,8 @@ MATCH void Effect_PreparePalette(void) {
 
     if (--g_Task->unk_09 == 0) {
         selected = &g_Battle.selected_actor;
-        GFX_FreePaletteFadeTarget(*selected);
-        g_Task->timer  = GFX_AllocPaletteFade(*selected, 0, 0, 0, 1);
+        GFX_PaletteFreeFadeTarget(*selected);
+        g_Task->timer  = GFX_PaletteAllocFade(*selected, 0, 0, 0, 1);
         g_Task->unk_09 = BMAGIC_PALETTE_BRIGHTEN_FRAMES;
         g_Task->header.mode++;
     }

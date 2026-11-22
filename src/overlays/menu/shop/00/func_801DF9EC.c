@@ -20,8 +20,8 @@ NON_MATCHING void func_801DF9EC(void) {
     }
 
     pressed = &g_PadStates[0].pressed;
-    input   = INPUT_GetRepeatedButtons(*pressed & 0xA000);
-    if (input & 0xA000) {
+    input   = INPUT_GetRepeatedButtons(*pressed & (PADLleft | PADLright));
+    if (input & (PADLleft | PADLright)) {
         SND_PlaySE(EMI_SE_ID(SND_BANK_COMMON, 1));
         D_801E6260 ^= 1;
     }

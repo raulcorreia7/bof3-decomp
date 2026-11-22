@@ -48,8 +48,8 @@ MATCH void SYS_StartFrontend(void) {
         dst += 1;
     }
     UI_PanelResetTasks();
-    GFX_ResetPaletteFades();
-    GFX_FreeAllPaletteSlots();
+    GFX_PaletteResetFades();
+    GFX_PaletteFreeAllSlots();
     g_AreaDrawFlags = AREA_DRAW_ALL_FLAGS;
     g_AreaDrawMode  = GFX_LAYER_FIELD_SCENE;
     g_Scripts       = AREA_SCRIPT_TABLE;
@@ -60,7 +60,7 @@ MATCH void SYS_StartFrontend(void) {
     D_80143D77      = 0;
     D_80143D76      = 0;
     D_80143D75      = 0;
-    GFX_ResetPalette();
+    GFX_PaletteReset();
     g_GfxPalettePending += 1;
     SYS_ThreadRegister(1, SYS_EnterFrontend);
     SYS_ThreadExit();

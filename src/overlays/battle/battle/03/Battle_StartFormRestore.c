@@ -40,9 +40,9 @@ MATCH void Battle_StartFormRestore(void) {
     g_UiPanelTasks[g_Task->slot + 13].unk_0B      = g_Game.members[g_Task->slot].chr.hp * 55 / g_Game.members[g_Task->slot].chr.stats.max_hp;
     g_UiPanelTasks[g_Task->slot + 13].unk_0C      = g_Game.members[g_Task->slot].chr.ap * 55 / g_Game.members[g_Task->slot].chr.stats.max_ap;
     Script_Select(g_Task->facing + 4);
-    GFX_LoadPalette((u8*)(BATTLE_ACTION_BLOCK_TABLE + (g_Task->slot << 6)), 0);
+    GFX_PaletteLoad((u8*)(BATTLE_ACTION_BLOCK_TABLE + (g_Task->slot << 6)), 0);
     func_801DDAB4(g_Game.members[g_Task->slot].chr.status);
-    GFX_UploadPaletteRows();
+    GFX_PaletteUploadRows();
     g_Task->header.flags &= ~ACTOR_FLAG_HIDDEN;
     g_Task = saved;
     saved->header.mode++;

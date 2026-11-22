@@ -12,9 +12,7 @@ MATCH void func_801F387C(s32 angle) {
     rot.vy = -angle;
     rot.vz = 0;
     rot.vx = 0;
-    pos.vx = g_Task->pos.x.fixed;
-    pos.vy = g_Task->pos.y.fixed;
-    pos.vz = COORD_INT(g_Task->pos.z);
+    setVector(&pos, g_Task->pos.x.fixed, g_Task->pos.y.fixed, COORD_INT(g_Task->pos.z));
 
     PushMatrix();
     RotTransMatrix(&pos, matrix, &flag);

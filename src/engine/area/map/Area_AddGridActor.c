@@ -69,10 +69,8 @@ NON_MATCHING void Area_AddGridActor(void) {
     g_Task->unk_32 = sort;
     Actor_ReadValue();
 
-    vec.vx = (g_Task->pos.x.fixed >> 9) - 0x4000;
-    vec.vy = (g_Task->pos.y.fixed >> 9) - 0x4000;
-    vec.vz = -COORD_INT(g_Task->pos.z) / 2;
-    rot    = RotTransPers(&vec, &sxy, &p, &flag);
+    setVector(&vec, (g_Task->pos.x.fixed >> 9) - 0x4000, (g_Task->pos.y.fixed >> 9) - 0x4000, -COORD_INT(g_Task->pos.z) / 2);
+    rot = RotTransPers(&vec, &sxy, &p, &flag);
 
     FIELD(s32, g_Task, 0x60) = rot;
     FIELD(u16, g_Task, 0x2E) = (u16)sxy;

@@ -21,9 +21,8 @@ NON_MATCHING void func_801F34AC(void) {
         prim = (POLY_FT4*)g_GfxPrimCursor;
         SetPolyFT4(prim);
         SetShadeTex(prim, 0);
-        quad->vx = g_Task->pos.x.fixed + D_801F4344[i] * 0x80 + (s8)D_801F4354[i] * g_Task->timer * 8;
-        quad->vy = g_Task->pos.y.fixed + D_801F4344[i + 1] * 0x80 + (s8)D_801F4354[i + 1] * g_Task->timer * 8;
-        quad->vz = COORD_INT(g_Task->pos.z);
+        setVector(quad, g_Task->pos.x.fixed + D_801F4344[i] * 0x80 + (s8)D_801F4354[i] * g_Task->timer * 8, g_Task->pos.y.fixed + D_801F4344[i + 1] * 0x80 + (s8)D_801F4354[i + 1] * g_Task->timer * 8,
+                  COORD_INT(g_Task->pos.z));
         RotTransPers(quad, (long*)sxy, &p, &flag);
         prim->x0 = prim->x2 = sxy[0] - g_Task->timer;
         prim->y0 = prim->y1 = SP_REF(u16, 0x36) - g_Task->timer;

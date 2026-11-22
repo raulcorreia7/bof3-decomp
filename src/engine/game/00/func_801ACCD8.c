@@ -24,7 +24,7 @@ MATCH void func_801ACCD8(void) {
         g_Task->tint.steps.delta.b = (tuneC + 4);
     }
     if ((g_Task->tint.raw & ~0xFF) == 0xC0C0C000) {
-        GFX_FreePaletteFade(g_CurrentActor->unk_93);
+        GFX_PaletteFreeFade(g_CurrentActor->unk_93);
         spad3                     = g_Task;
         *(u8*)(spad3)             = (*(u8*)(spad3) & 0xDF);
         g_Task->tint.bytes.flags  = 0;
