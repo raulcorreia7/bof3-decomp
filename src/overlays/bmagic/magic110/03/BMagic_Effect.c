@@ -19,11 +19,11 @@ MATCH void func_801EEC94(void) {
     TASK(PartyMember)->unk_09       = 0x58;
     TASK(PartyMember)->header.mode += 1;
     slot                               = Battle_AllocEffect(1, 16) & BYTE_MASK;
-    g_BattleEffects[slot].target.party = g_Task;
+    g_BattleEffects[slot].target.party = TASK(PartyMember);
     g_BattleEffects[slot].header.mode  = 1;
     TASK(PartyMember)->param.unk_0B += 1;
     slot                               = Battle_AllocEffect(1, 16) & BYTE_MASK;
-    work                               = g_Task;
+    work                               = TASK(PartyMember);
     g_BattleEffects[slot].header.mode  = 0;
     g_BattleEffects[slot].arg.unk_09   = 0x28;
     g_BattleEffects[slot].target.party = work;
@@ -83,7 +83,7 @@ MATCH void func_801EEF80(void) {
         func_800A9610(g_Battle.target_selector, 16);
         for (i = 0; i < 6; i++) {
             slot                               = Battle_AllocEffect(1, 16) & BYTE_MASK;
-            work                               = g_Task;
+            work                               = TASK(PartyMember);
             g_BattleEffects[slot].header.mode  = 2;
             g_BattleEffects[slot].unk_0B       = i;
             g_BattleEffects[slot].target.party = work;
@@ -157,10 +157,10 @@ MATCH void func_801EF528(void) {
     PartyMember* work;
     PartyMember* next;
 
-    work                      = g_Task;
+    work                      = TASK(PartyMember);
     work->screen_x.value      = 0xA0;
     work->unk_25              = 0x1D;
-    next                      = g_Task;
+    next                      = TASK(PartyMember);
     work->screen_y.value      = 0x12C;
     next->unk_26              = 0;
     TASK(PartyMember)->unk_27 = 0x1A;
@@ -169,7 +169,7 @@ MATCH void func_801EF528(void) {
     {
         PartyMember* task;
 
-        task          = g_Task;
+        task          = TASK(PartyMember);
         task->unk_48  = 2;
         task->scale.x = 0x30000;
         task->scale.y = 0xC000;
@@ -190,7 +190,7 @@ MATCH void func_801EF648(void) {
     PartyMember* work;
 
     TASK(PartyMember)->screen_x.value = (RANDOM_MASK(3)) + 0x9F;
-    work                              = g_Task;
+    work                              = TASK(PartyMember);
     work->screen_y.value -= 2;
     work->scale.y += 0x2000;
     if (work->scale.y > 0x17FFF) {
@@ -235,7 +235,7 @@ MATCH void func_801EF7B4(void) {
 MATCH void func_801EF844(void) {
     PartyMember* work;
 
-    work                             = g_Task;
+    work                             = TASK(PartyMember);
     FAKE_VOLATILE(s32, work->unk_0C) = 0x60000;
     FAKE_VOLATILE(s32, work->unk_10) = 0x60000;
     work->pos.x.fixed                = g_AreaScrollTargetX + FAKE_VOLATILE(s32, work->unk_0C);
@@ -249,7 +249,7 @@ MATCH void func_801EF844(void) {
 MATCH void func_801EF8C0(void) {
     PartyMember* work;
 
-    work = g_Task;
+    work = TASK(PartyMember);
     if ((work->unk_14 += 0x40) == 0xC00) {
         work->header.step++;
     }
@@ -306,7 +306,7 @@ MATCH void func_801F0040(void) {
     PartyMember* work;
     s32*         channel;
 
-    work                     = g_Task;
+    work                     = TASK(PartyMember);
     channel                  = &g_AreaScrollTargetX;
     work->pos.x.fixed        = channel[0] + D_801F04A4[work->param.unk_0B].x;
     work->pos.y.fixed        = channel[1] + D_801F04A4[work->param.unk_0B].y;
@@ -319,9 +319,9 @@ MATCH void func_801F0040(void) {
 MATCH void func_801F00D8(void) {
     PartyMember* work;
 
-    work         = g_Task;
+    work         = TASK(PartyMember);
     work->unk_09 = work->unk_09 + 2;
-    work         = g_Task;
+    work         = TASK(PartyMember);
     work->timer  = work->timer - 1;
     if (work->timer == 0) {
         Effect_Reset();

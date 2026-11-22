@@ -13,11 +13,11 @@ MATCH void func_801B036C(void) {
         if (!(func_801B6674() & BYTE_MASK) && !(func_801B6258() & BYTE_MASK) && !(Game_LeaderSwitchRequest() & BYTE_MASK) && !(Game_MenuRequestField() & BYTE_MASK) &&
             !(Game_RequestPersonalAction() & BYTE_MASK) && !(Game_CameraLookRequest() & BYTE_MASK) && !(Game_SceneCameraRequest() & BYTE_MASK) && (g_Game.input != 0)) {
             Game_GetInput();
-            g_Task->option_flags = 0;
-            g_Task->unk_0A       = 2;
-            g_Task->param.unk_0B = 0;
-            Actor_RequestRoute(g_Task->direction);
-            g_Task->header.step = 1;
+            TASK(Actor)->option_flags = 0;
+            TASK(Actor)->unk_0A       = 2;
+            TASK(Actor)->param.unk_0B = 0;
+            Actor_RequestRoute(TASK(Actor)->direction);
+            TASK(Actor)->header.step = 1;
         }
     }
 }

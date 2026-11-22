@@ -15,7 +15,7 @@ MATCH void func_801EEC5C(void) {
 
     src                                = g_Battle.selected_actor;
     slot                               = Battle_AllocEffect(1, 26) & BYTE_MASK;
-    g_BattleEffects[slot].target.party = g_Task;
+    g_BattleEffects[slot].target.party = TASK(PartyMember);
     g_BattleEffects[slot].unk_08       = src->facing;
     g_BattleEffects[slot].pos.x.fixed  = src->pos.x.fixed;
     g_BattleEffects[slot].pos.y.fixed  = src->pos.y.fixed;

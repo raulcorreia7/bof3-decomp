@@ -15,9 +15,9 @@ NON_MATCHING void func_801F5174(s32 steps, s32 radius) {
     s32       part;
     s32       phase;
 
-    x      = (g_Task->pos.x.part.integer - 0x80) << 7;
-    y      = (g_Task->pos.y.part.integer - 0x80) << 7;
-    ground = (s16)(-Area_HeightSample(g_Task->pos.x.fixed, g_Task->pos.y.fixed) / 2);
+    x      = (TASK(Actor)->pos.x.part.integer - 0x80) << 7;
+    y      = (TASK(Actor)->pos.y.part.integer - 0x80) << 7;
+    ground = (s16)(-Area_HeightSample(TASK(Actor)->pos.x.fixed, TASK(Actor)->pos.y.fixed) / 2);
     phase  = (g_FrameCount << 2) & 7;
     z      = ground - phase * steps;
     j      = 0;
@@ -35,7 +35,7 @@ NON_MATCHING void func_801F5174(s32 steps, s32 radius) {
         part   = (7 - i) * 8 + 7 - phase;
         radius = part * (radius << 18) / 128 & (0xF8 << 16);
         Area_ApplyTileToQuad((part / 4 << 19) | (0xBA00 << 16) | 0x9124, prim, 1);
-        Area_CellAddPrim(g_Task->pos.x.fixed, g_Task->pos.y.fixed, 2, sizeof(POLY_FT4));
+        Area_CellAddPrim(TASK(Actor)->pos.x.fixed, TASK(Actor)->pos.y.fixed, 2, sizeof(POLY_FT4));
         j += steps;
     }
 }

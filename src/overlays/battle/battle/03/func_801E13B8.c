@@ -13,7 +13,7 @@ MATCH void func_801E13B8(void) {
     work  = g_Game.current;
     flags = work->u.turn.damage_flags.value;
     if ((flags & 0x2000u) == 0u) {
-        cell   = g_Task;
+        cell   = TASK(PartyMember);
         masked = flags & ~0x70u;
         masked &= ~0x200u;
         work->u.turn.damage_flags.value = masked;

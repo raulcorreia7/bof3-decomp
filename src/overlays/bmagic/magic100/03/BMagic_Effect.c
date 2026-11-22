@@ -25,11 +25,11 @@ MATCH void func_801EEC70(void) {
     odd = 1;
     do {
         slot                              = Battle_AllocEffect(1, 10) & BYTE_MASK;
-        work                              = g_Task;
+        work                              = TASK(PartyMember);
         g_BattleEffects[slot].header.mode = 0;
         g_BattleEffects[slot].unk_0B      = i;
         g_BattleEffects[slot].arg.unk_09  = odd;
-        counter                           = g_Task;
+        counter                           = TASK(PartyMember);
         /* FAKE: the target link stays before the loop counter update. */
         FAKE_ORDER_LOCK(g_BattleEffects[slot].target.party = work);
         count = counter->param.unk_0B;
@@ -78,7 +78,7 @@ MATCH s32 func_801EEF3C(void) {
         TASK(PartyMember)->pos.z.fixed = g_BattleEffectBattler->pos.z.fixed;
         TASK(PartyMember)->facing      = g_BattleEffectBattler->facing;
         battler                        = g_BattleEffectBattler;
-        work                           = g_Task;
+        work                           = TASK(PartyMember);
         WorldPos_Copy(&work->pos, &battler->pos);
         TASK(PartyMember)->unk_20 = (ratan2(battler->pos.x.fixed - work->pos.x.fixed, battler->pos.y.fixed - work->pos.y.fixed) + 0x800) & ANGLE_MASK;
         if (TASK(PartyMember)->param.unk_0B & 1) {
@@ -154,11 +154,11 @@ MATCH void func_801EF358(void) {
     s32          angle;
     u8           timer;
 
-    setup_task         = g_Task;
+    setup_task         = TASK(PartyMember);
     setup_task->unk_0C = 0x1000;
     setup_task->unk_10 = 0;
     Effect_RotatePosition(setup_task);
-    position_task              = g_Task;
+    position_task              = TASK(PartyMember);
     position_task->pos.x.fixed = position_task->pos.x.fixed + position_task->unk_0C;
     position_task->pos.y.fixed = position_task->pos.y.fixed + position_task->unk_10;
     COORD_INT(position_task->pos.z) += 0x40;
@@ -169,7 +169,7 @@ MATCH void func_801EF358(void) {
     }
     position_task->unk_20 = angle & ANGLE_MASK;
     FAKE_BARRIER(); /* FAKE: keeps the timer load after the angle store. */
-    timer_task        = g_Task;
+    timer_task        = TASK(PartyMember);
     timer             = timer_task->timer - 1;
     timer_task->timer = timer;
     if (timer == 0) {

@@ -5,7 +5,6 @@
  * and its data. Only this image includes the file. */
 
 #include "overlays/area/worlds/world01.h"
-#include "area/spad.h"
 
 /* Frames without a press before a well minigame phase ends, and steps of the bucket swish. */
 #define WELL_IDLE_FRAMES_MAX    0x1C
@@ -72,18 +71,18 @@ extern u16 g_WellSwishButtons;
 
 /* One tick of the lowering timer: running out stores the press count and ends the phase; a press counts
  * and takes press_mode, otherwise idle_mode. */
-#define WELL_TICK_LOWER(end_cue, press_mode, idle_mode) \
-    if (--g_WellLowerTimer == 0) {                      \
-        SND_SEPlay(end_cue);                            \
-        g_WellLowerTimer    = 0;                        \
-        g_WellLowerCount    = g_WellPressCount;         \
-        g_Task->header.mode = WELL_MODE_LOWER_DONE;     \
-    } else if (g_PadStates[0].pressed == PADRup) {      \
-        g_WellIdleFrames = 0;                           \
-        g_WellPressCount += 1;                          \
-        g_Task->header.mode = (press_mode);             \
-    } else {                                            \
-        g_Task->header.mode = (idle_mode);              \
+#define WELL_TICK_LOWER(end_cue, press_mode, idle_mode)  \
+    if (--g_WellLowerTimer == 0) {                       \
+        SND_SEPlay(end_cue);                             \
+        g_WellLowerTimer         = 0;                    \
+        g_WellLowerCount         = g_WellPressCount;     \
+        TASK(Actor)->header.mode = WELL_MODE_LOWER_DONE; \
+    } else if (g_PadStates[0].pressed == PADRup) {       \
+        g_WellIdleFrames = 0;                            \
+        g_WellPressCount += 1;                           \
+        TASK(Actor)->header.mode = (press_mode);         \
+    } else {                                             \
+        TASK(Actor)->header.mode = (idle_mode);          \
     }
 
 #endif

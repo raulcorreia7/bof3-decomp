@@ -3,11 +3,11 @@
 MATCH void func_800C1DCC(void) {
     EnemyBattler* work;
 
-    work                = g_BattleCurrentEnemy;
-    work->script        = D_800C3180;
-    work->unk_E4        = func_800C20F0;
-    work->unk_E8        = D_800C3194;
-    g_Task->facing      = FACING_RIGHT;
-    g_Task->header.mode = 2;
+    work                           = g_BattleCurrentEnemy;
+    work->script                   = D_800C3180;
+    work->unk_E4                   = func_800C20F0;
+    work->unk_E8                   = D_800C3194;
+    TASK(PartyMember)->facing      = FACING_RIGHT;
+    TASK(PartyMember)->header.mode = 2;
     Script_AnimStepLoop();
 }

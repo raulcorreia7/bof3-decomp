@@ -4,5 +4,5 @@ MATCH void func_800C19C4(void) {
     Boss054Modes handlers;
 
     handlers = D_800C1804;
-    handlers.modes[((PartyMember*)g_Task)->header.mode]();
+    handlers.modes[TASK(PartyMember)->header.mode]();
 }

@@ -5,7 +5,7 @@ MATCH void func_801F4574(void) {
         if (g_GameStateIndex == GAME_REQUEST_IDLE) {
             SND_SEPlay(EMI_SE_ID(SND_BANK_AREA, 0));
         }
-        g_Task->header.step++;
+        TASK(Actor)->header.step++;
     }
     func_801F4640(1);
 }

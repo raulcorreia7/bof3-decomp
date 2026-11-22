@@ -5,7 +5,6 @@
  * and its data. Only this image includes the file. */
 
 #include "overlays/area/worlds/world04.h"
-#include "area/spad.h"
 #include <string.h>
 
 /* The map bundle header bytes this overlay reads by their own addresses. */
@@ -90,31 +89,31 @@ void func_801F3060(s32 index, s32 flag);
 void func_801F3324(s32 source_y, s32 dest_y);
 
 /* Steps the cycling frame timer and copies the frame row at table offset to dest_y every sixth tick. */
-#define AREA_CYCLE_FRAME(offset, dest_y)                                 \
-    g_Task->timer++;                                                     \
-    if (g_Task->timer % 6 == 0) {                                        \
-        g_Task->timer = (g_Task->timer < 24) ? g_Task->timer : 0;        \
-        func_801F3324(D_801F4ED4[(offset) + g_Task->timer / 6], dest_y); \
+#define AREA_CYCLE_FRAME(offset, dest_y)                                         \
+    TASK(Actor)->timer++;                                                        \
+    if (TASK(Actor)->timer % 6 == 0) {                                           \
+        TASK(Actor)->timer = (TASK(Actor)->timer < 24) ? TASK(Actor)->timer : 0; \
+        func_801F3324(D_801F4ED4[(offset) + TASK(Actor)->timer / 6], dest_y);    \
     }
 
 /* Sweeps the three func_801F3954 frames by the step timer and moves to the next step after limit ticks. */
-#define AREA_SWEEP_STEP(limit)      \
-    s16* slot;                      \
-    u8   x;                         \
-                                    \
-    slot       = &D_1F800038;       \
-    x          = g_Task->timer;     \
-    D_1F80003A = 0;                 \
-    *slot      = -(x * 8);          \
-    func_801F3954(0);               \
-    *slot = g_Task->timer * 8;      \
-    func_801F3954(1);               \
-    *slot = 0;                      \
-    func_801F3954(2);               \
-    g_Task->timer += 1;             \
-    if (g_Task->timer >= (limit)) { \
-        g_Task->timer = 0;          \
-        g_Task->header.step += 1;   \
+#define AREA_SWEEP_STEP(limit)           \
+    s16* slot;                           \
+    u8   x;                              \
+                                         \
+    slot       = &D_1F800038;            \
+    x          = TASK(Actor)->timer;     \
+    D_1F80003A = 0;                      \
+    *slot      = -(x * 8);               \
+    func_801F3954(0);                    \
+    *slot = TASK(Actor)->timer * 8;      \
+    func_801F3954(1);                    \
+    *slot = 0;                           \
+    func_801F3954(2);                    \
+    TASK(Actor)->timer += 1;             \
+    if (TASK(Actor)->timer >= (limit)) { \
+        TASK(Actor)->timer = 0;          \
+        TASK(Actor)->header.step += 1;   \
     }
 
 #endif

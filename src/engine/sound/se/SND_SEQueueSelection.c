@@ -18,7 +18,7 @@ MATCH void SND_SEQueueSelection(s32 se_id) {
     packed |= (*(u8*)&D_8018B344 & 0x1F) << 13;
     packed |= (*(u8*)&D_8018B36C & 0x1F) << 18;
     packed |= (*(u8*)&D_8018B394 & 0x1F) << 23;
-    work                  = g_Task;
+    work                  = TASK(Actor);
     work->voice_flags.raw = work->voice_flags.raw | packed;
     work->header.flags    = (work->header.flags | ACTOR_FLAG_SELECTION_EFFECT);
 }

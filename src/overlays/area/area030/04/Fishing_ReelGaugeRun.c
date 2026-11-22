@@ -7,6 +7,6 @@
 MATCH void Fishing_ReelGaugeRun(void) {
     Callback handler;
 
-    handler = g_FishingReelGaugeSteps[g_Task->header.mode];
+    handler = g_FishingReelGaugeSteps[TASK(Actor)->header.mode];
     handler();
 }

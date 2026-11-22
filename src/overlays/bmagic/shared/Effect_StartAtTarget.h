@@ -5,7 +5,7 @@ MATCH void Effect_StartAtTarget(void) {
     s32          z;
 
     TASK(PartyMember)->header.flags &= ~ACTOR_FLAG_HIDDEN;
-    work                     = g_Task;
+    work                     = TASK(PartyMember);
     actor                    = g_BattleEffectBattler;
     work->pos.x.fixed        = actor->pos.x.fixed;
     work->pos.y.fixed        = actor->pos.y.fixed;

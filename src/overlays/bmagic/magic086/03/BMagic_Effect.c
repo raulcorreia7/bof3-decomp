@@ -12,12 +12,12 @@ MATCH void func_801EEC94(void) {
     u8           slot;
 
     actor                                  = g_Battle.selected_actor;
-    task                                   = g_Task;
+    task                                   = TASK(PartyMember);
     task->pos.x.fixed                      = actor->pos.x.fixed;
     task->pos.y.fixed                      = actor->pos.y.fixed;
     task->pos.z.fixed                      = actor->pos.z.fixed;
     slot                                   = Battle_AllocEffect(1, 29);
-    g_BattleEffects[slot].target.party     = g_Task;
+    g_BattleEffects[slot].target.party     = TASK(PartyMember);
     g_BattleEffects[slot].header.mode      = 0;
     g_BattleEffects[slot].arg.unk_09       = 0;
     g_BattleEffects[slot].unk_0A           = 0;
@@ -25,7 +25,7 @@ MATCH void func_801EEC94(void) {
     g_BattleEffects[slot].pos.y            = TASK(PartyMember)->pos.y;
     COORD_INT(g_BattleEffects[slot].pos.z) = COORD_INT(TASK(PartyMember)->pos.z);
     slot                                   = Battle_AllocEffect(1, 29);
-    g_BattleEffects[slot].target.party     = g_Task;
+    g_BattleEffects[slot].target.party     = TASK(PartyMember);
     g_BattleEffects[slot].header.mode      = 1;
     g_BattleEffects[slot].unk_0B           = 48;
     g_BattleEffects[slot].arg.unk_09       = 0;
@@ -56,7 +56,7 @@ MATCH void func_801EEE44(void) {
 MATCH void func_801EEFF0(void) {
     PartyMember* work;
 
-    work = g_Task;
+    work = TASK(PartyMember);
     if (work->param.unk_0B == 2) {
         work->header.mode = (work->header.mode + 1);
     }
@@ -102,7 +102,7 @@ MATCH void func_801EF3A0(void) {
 
     active = BATTLE_ACTIVE_WORK;
     if (active->param.unk_0B == 2) {
-        work              = g_Task;
+        work              = TASK(PartyMember);
         work->header.step = work->header.step + 1;
     }
 }

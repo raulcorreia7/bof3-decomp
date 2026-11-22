@@ -11,7 +11,7 @@ MATCH void func_801E483C(void) {
     }
     GFX_PaletteFreeFadeTarget((void*)g_Task);
     GFX_PaletteAllocFade((void*)g_Task, 255, 255, 255, 0);
-    work                         = g_Task;
+    work                         = TASK(PartyMember);
     work->unk_1C                 = -0x2000;
     work->unk_10                 = 0;
     ((PartyMember*)work)->unk_03 = 3;

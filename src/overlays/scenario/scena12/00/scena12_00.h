@@ -5,7 +5,6 @@
  * includes the file. */
 
 #include "overlays/scenario/scenario.h"
-#include "area/spad.h"
 
 extern s32          D_80147B24[];
 extern volatile s32 D_80147B28;

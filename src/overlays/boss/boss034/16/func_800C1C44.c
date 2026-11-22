@@ -2,10 +2,10 @@
 
 MATCH void func_800C1C44(void) {
     Area_SceneSelectRecord(0x1C1);
-    ((PartyMember*)g_Task)->unk_2A = 1;
+    TASK(PartyMember)->unk_2A = 1;
     Script_Select(8U);
-    ((PartyMember*)g_Task)->unk_24 &= 0x77;
+    TASK(PartyMember)->unk_24 &= 0x77;
     Script_AnimStepLoop();
     EMI_ArchiveLoad(EMI_SLOT_BATL_RET);
-    ((PartyMember*)g_Task)->unk_03 += 1;
+    TASK(PartyMember)->unk_03 += 1;
 }

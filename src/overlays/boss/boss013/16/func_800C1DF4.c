@@ -3,7 +3,7 @@
 MATCH void func_800C1DF4(void) {
     PartyMember* work;
 
-    work = g_Task;
+    work = TASK(PartyMember);
     if (work->header.flags & 0x80) {
         work->header.step++;
     } else {

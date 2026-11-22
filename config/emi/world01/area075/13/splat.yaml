@@ -46,7 +46,7 @@ segments:
       - [0x1AD4, c, func_801F46D4]
       - [0x1BBC, c, func_801F47BC]
       - [0x1C74, c, func_801F4874]
-      - [0x1E50, c, func_801F4A50]
+      - [0x1E50, c, UI_WindowDrawPanel]
       - [0x23CC, c, func_801F4FCC]
   # Placement: .data resumes after another section in the retail bytes; one segment would group both .data runs.
   - name: data

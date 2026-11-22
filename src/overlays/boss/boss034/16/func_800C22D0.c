@@ -5,7 +5,7 @@ MATCH void func_800C22D0(void) {
     TASK_SET(func_800AC754(0));
     Area_SceneSelectRecord(0x1C1);
     Script_Select(8);
-    g_Task->unk_2A = 1;
-    g_Task->unk_58 = g_BattleEnemyBattlers[0].unk_58;
-    g_Task->unk_5A = g_BattleEnemyBattlers[0].unk_5A;
+    TASK(PartyMember)->unk_2A = 1;
+    TASK(PartyMember)->unk_58 = g_BattleEnemyBattlers[0].unk_58;
+    TASK(PartyMember)->unk_5A = g_BattleEnemyBattlers[0].unk_5A;
 }

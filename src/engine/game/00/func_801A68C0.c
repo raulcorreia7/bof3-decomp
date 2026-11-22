@@ -21,13 +21,13 @@ MATCH void func_801A68C0(u8* script) {
     GAME_WORK_AREA_PTR = &g_Actors[slot];
     rows               = g_Actors;
 
-    tile              = FIELD(s32, g_AreaLoads[tile], 0x8u) + offset;
-    g_Task->direction = script[0] & 0xF;
+    tile                   = FIELD(s32, g_AreaLoads[tile], 0x8u) + offset;
+    TASK(Actor)->direction = script[0] & 0xF;
     Actor_ResetMotion();
     SYS_InitScratchpad((u8*)tile);
     func_801A4B80(4);
 
-    work = g_Task;
+    work = TASK(Actor);
     x    = script[2] << 16;
     if (script[1] != 0) {
         x |= 32768;
@@ -39,14 +39,14 @@ MATCH void func_801A68C0(u8* script) {
     }
     work->pos.y.fixed = y;
 
-    COORD_INT(g_Task->pos.z) = Area_HeightSample(work->pos.x.fixed, y);
-    g_Task->header.mode      = script[5];
-    g_Task->header.step      = script[7];
-    g_Task->unk_06           = script[0] >> 4;
-    g_Task->gravity          = 0;
-    g_Task->unk_1C           = 0;
-    g_Task->unk_18           = 0;
-    g_Task->voice_flags.raw  = FIELD(u8, g_Task->range_54.table, 0x2u);
+    COORD_INT(TASK(Actor)->pos.z) = Area_HeightSample(work->pos.x.fixed, y);
+    TASK(Actor)->header.mode      = script[5];
+    TASK(Actor)->header.step      = script[7];
+    TASK(Actor)->unk_06           = script[0] >> 4;
+    TASK(Actor)->gravity          = 0;
+    TASK(Actor)->unk_1C           = 0;
+    TASK(Actor)->unk_18           = 0;
+    TASK(Actor)->voice_flags.raw  = FIELD(u8, TASK(Actor)->range_54.table, 0x2u);
 
     rows[*counter].unk_88                               = 0;
     rows[*counter].walk_dest_y                          = 0;
@@ -58,21 +58,21 @@ MATCH void func_801A68C0(u8* script) {
 
     Actor_SetOptionFlags(script + 8);
 
-    g_Task->tint.steps.delta.r = -0x80;
-    g_Task->tint.steps.delta.b = -0x80;
-    g_Task->tint.steps.delta.g = -0x80;
-    g_Task->tint.bytes.flags   = 2;
+    TASK(Actor)->tint.steps.delta.r = -0x80;
+    TASK(Actor)->tint.steps.delta.b = -0x80;
+    TASK(Actor)->tint.steps.delta.g = -0x80;
+    TASK(Actor)->tint.bytes.flags   = 2;
 
     if (D_80146900[*counter][0] == 0) {
-        Area_CellSetCode(COORD_INT(g_Task->pos.x), COORD_INT(g_Task->pos.y), 0x10);
-        if (COORD_FRAC(g_Task->pos.x) != 0) {
-            Area_CellSetCode((s16)((u16)COORD_INT(g_Task->pos.x) + 1), COORD_INT(g_Task->pos.y), 0x10);
+        Area_CellSetCode(COORD_INT(TASK(Actor)->pos.x), COORD_INT(TASK(Actor)->pos.y), 0x10);
+        if (COORD_FRAC(TASK(Actor)->pos.x) != 0) {
+            Area_CellSetCode((s16)((u16)COORD_INT(TASK(Actor)->pos.x) + 1), COORD_INT(TASK(Actor)->pos.y), 0x10);
         }
-        if (COORD_FRAC(g_Task->pos.y) != 0) {
-            Area_CellSetCode(COORD_INT(g_Task->pos.x), (s16)((u16)COORD_INT(g_Task->pos.y) + 1), 0x10);
+        if (COORD_FRAC(TASK(Actor)->pos.y) != 0) {
+            Area_CellSetCode(COORD_INT(TASK(Actor)->pos.x), (s16)((u16)COORD_INT(TASK(Actor)->pos.y) + 1), 0x10);
         }
-        if ((COORD_FRAC(g_Task->pos.x) != 0) && (COORD_FRAC(g_Task->pos.y) != 0)) {
-            Area_CellSetCode((s16)((u16)COORD_INT(g_Task->pos.x) + 1), (s16)((u16)COORD_INT(g_Task->pos.y) + 1), 0x10);
+        if ((COORD_FRAC(TASK(Actor)->pos.x) != 0) && (COORD_FRAC(TASK(Actor)->pos.y) != 0)) {
+            Area_CellSetCode((s16)((u16)COORD_INT(TASK(Actor)->pos.x) + 1), (s16)((u16)COORD_INT(TASK(Actor)->pos.y) + 1), 0x10);
         }
     }
 

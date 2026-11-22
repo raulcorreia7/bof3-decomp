@@ -7,7 +7,7 @@ MATCH void func_800C1A34(void) {
     g_Battle.target_selector    = 0x40;
     TASK_SET(&g_BattleEnemyBattlers[7]);
     Battle_CenterCamera();
-    g_AreaScrollTargetX = g_EncounterOriginX + (LOW(g_Task->pos.x) - g_EncounterOriginX) / 2;
-    g_AreaScrollTargetY = g_EncounterOriginY + (LOW(g_Task->pos.y) - g_EncounterOriginY) / 2;
+    g_AreaScrollTargetX = g_EncounterOriginX + (LOW(TASK(PartyMember)->pos.x) - g_EncounterOriginX) / 2;
+    g_AreaScrollTargetY = g_EncounterOriginY + (LOW(TASK(PartyMember)->pos.y) - g_EncounterOriginY) / 2;
     g_AreaCameraStep    = 0x20;
 }

@@ -47,17 +47,17 @@ NON_MATCHING void Fishing_SpawnFish(void) {
         if ((s32)count > 0) {
             row_offset = row_index * FISHING_ROW_STRIDE;
             do {
-                row            = &g_Actors[row_offset];
-                g_Task         = row;
-                g_CurrentActor = row;
-                *row           = 0x21;
-                g_Task->unk_05 = row_index;
-                g_Task->unk_06 = column;
-                roll           = RANDOM_MASK(0xFF);
+                row                 = &g_Actors[row_offset];
+                g_Task              = row;
+                g_CurrentActor      = row;
+                *row                = 0x21;
+                TASK(Actor)->unk_05 = row_index;
+                TASK(Actor)->unk_06 = column;
+                roll                = RANDOM_MASK(0xFF);
             loop_4:
                 ROW_ROLL    = roll;
                 roll        = ROW_ROLL;
-                limit       = *(LIMIT_TABLE + (g_Task->unk_06 * FISHING_TYPE_STRIDE));
+                limit       = *(LIMIT_TABLE + (TASK(Actor)->unk_06 * FISHING_TYPE_STRIDE));
                 roll_masked = roll & HALF_MASK;
                 if (limit < roll_masked) {
                     roll = roll - (limit >> 1);
@@ -93,14 +93,14 @@ NON_MATCHING void Fishing_SpawnFish(void) {
                         }
                     }
                 }
-                g_Task->header.mode = 0;
+                TASK(Actor)->header.mode = 0;
                 ACTOR_CLEAR_STEP();
                 row_offset += FISHING_ROW_STRIDE;
-                g_Task->unk_03 = 0;
+                TASK(Actor)->unk_03 = 0;
                 row_index += 1;
-                g_Task->unk_04 = 0;
+                TASK(Actor)->unk_04 = 0;
                 count -= 1;
-                g_Task->tint.bytes.flags = 0;
+                TASK(Actor)->tint.bytes.flags = 0;
             } while ((s32)count > 0);
         }
         column += 1;

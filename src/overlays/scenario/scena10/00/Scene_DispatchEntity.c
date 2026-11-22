@@ -10,16 +10,16 @@ MATCH void func_801F6FAC(void) {
     Actor* work;
 
     Area_SceneSelectRecord(0x1EA);
-    work                     = g_Task;
-    work->unk_48             = 0;
-    work->pos.z.part.integer = 0x64;
-    g_Task->active_flags     = 0;
-    g_Task->mirror           = 0;
-    g_Task->timer            = 0;
-    g_Task->unk_0A           = 0x1E;
-    g_Task->draw_layer       = 1;
-    Script_Select((u8)(g_Task->unk_06 - 0x4E));
-    g_Task->header.mode = 1;
+    work                      = TASK(Actor);
+    work->unk_48              = 0;
+    work->pos.z.part.integer  = 0x64;
+    TASK(Actor)->active_flags = 0;
+    TASK(Actor)->mirror       = 0;
+    TASK(Actor)->timer        = 0;
+    TASK(Actor)->unk_0A       = 0x1E;
+    TASK(Actor)->draw_layer   = 1;
+    Script_Select((u8)(TASK(Actor)->unk_06 - 0x4E));
+    TASK(Actor)->header.mode = 1;
 }
 
 #ifdef NON_MATCHING
@@ -35,7 +35,7 @@ NON_MATCHING void func_801F7068(void) {
     count = 0;
     while (i < 3) {
         width = D_801FE7CC[i].w;
-        timer = g_Task->timer;
+        timer = TASK(Actor)->timer;
         limit = timer << 4;
         if (limit < width) {
             width = limit;
@@ -48,14 +48,14 @@ NON_MATCHING void func_801F7068(void) {
         } else {
             count++;
         }
-        if ((g_Task->option_flags & (1 << i)) == 0) {
+        if ((TASK(Actor)->option_flags & (1 << i)) == 0) {
             UI_WindowDrawBoxOutline(D_801FE7CC[i].x, D_801FE7CC[i].y, (u8)width, (u8)height);
         }
         i++;
     }
-    g_Task->timer++;
+    TASK(Actor)->timer++;
     if (count == 6) {
-        g_Task->header.mode = 2;
+        TASK(Actor)->header.mode = 2;
     }
 }
 #else
@@ -67,28 +67,28 @@ MATCH void func_801F719C(void) {
 
     i = 0;
     do {
-        if (((g_Task->option_flags >> i) & 1) == 0) {
+        if (((TASK(Actor)->option_flags >> i) & 1) == 0) {
             UI_WindowDrawPanelBox(D_801FE7CC[i].x, D_801FE7CC[i].y, (u8)D_801FE7CC[i].w, (u8)D_801FE7CC[i].h);
         }
         i++;
     } while (i < 3);
-    if ((g_Task->option_flags & 1) == 0) {
-        g_Task->screen_x = (u16)D_801FE7CC[0].x + D_801FE804[0];
-        g_Task->screen_y = (u16)D_801FE7CC[0].y + D_801FE804[1];
+    if ((TASK(Actor)->option_flags & 1) == 0) {
+        TASK(Actor)->screen_x = (u16)D_801FE7CC[0].x + D_801FE804[0];
+        TASK(Actor)->screen_y = (u16)D_801FE7CC[0].y + D_801FE804[1];
         Script_AnimStepLoop();
         Area_AddActor();
     }
-    if (((g_Task->option_flags >> 1) & 1) == 0) {
-        sprintf((char*)g_UiTextFormatBuffer, D_801F6C04, Item_GetRecord(ITEM_CATEGORY_ITEM, g_Task->unk_06));
+    if (((TASK(Actor)->option_flags >> 1) & 1) == 0) {
+        sprintf((char*)g_UiTextFormatBuffer, D_801F6C04, Item_GetRecord(ITEM_CATEGORY_ITEM, TASK(Actor)->unk_06));
         UI_TextDraw((s16)((u16)D_801FE7CC[1].x + 4), (s16)((u16)D_801FE7CC[1].y + 2), 0, 8, g_UiTextFormatBuffer);
-        sprintf((char*)g_UiTextFormatBuffer, D_801F6C08, (u16)Item_Count(ITEM_CATEGORY_ITEM, g_Task->unk_06, 0));
+        sprintf((char*)g_UiTextFormatBuffer, D_801F6C08, (u16)Item_Count(ITEM_CATEGORY_ITEM, TASK(Actor)->unk_06, 0));
         UI_TextDraw((s16)((u16)D_801FE7CC[1].x + 0x48), (s16)((u16)D_801FE7CC[1].y + 2), 0, 2, g_UiTextFormatBuffer);
     }
     func_801F781C((u16)D_801FE7CC[2].x + 1, (u16)D_801FE7CC[2].y + 1, 0x80, 0x68);
-    if (g_Task->unk_0A != 0) {
-        g_Task->unk_0A--;
+    if (TASK(Actor)->unk_0A != 0) {
+        TASK(Actor)->unk_0A--;
     } else if (g_PadStates[0].held != 0) {
-        g_Task->header.mode = 3;
+        TASK(Actor)->header.mode = 3;
     }
 }
 
@@ -102,7 +102,7 @@ NON_MATCHING void func_801F73EC(void) {
     i = 0;
     do {
         width = D_801FE7CC[i].w;
-        limit = (u16)(g_Task->timer << 4);
+        limit = (u16)(TASK(Actor)->timer << 4);
         if (limit < width) {
             width = limit;
         }
@@ -110,14 +110,14 @@ NON_MATCHING void func_801F73EC(void) {
         if (limit < height) {
             height = limit;
         }
-        if (((g_Task->option_flags >> i) & 1) == 0) {
+        if (((TASK(Actor)->option_flags >> i) & 1) == 0) {
             UI_WindowDrawBoxOutline(D_801FE7CC[i].x, D_801FE7CC[i].y, (u8)width, (u8)height);
         }
         i++;
     } while (i < 3);
-    g_Task->timer--;
-    if (g_Task->timer == 0) {
-        g_Task->header.mode = 4;
+    TASK(Actor)->timer--;
+    if (TASK(Actor)->timer == 0) {
+        TASK(Actor)->header.mode = 4;
     }
 }
 #else
@@ -133,9 +133,9 @@ MATCH void func_801F7518(void) {
 }
 
 MATCH void func_801F755C(void) {
-    g_Task->unk_06 = 0x4E;
+    TASK(Actor)->unk_06 = 0x4E;
     func_801F6FAC();
-    g_Task->header.step = 0;
+    TASK(Actor)->header.step = 0;
 }
 
 /* Item panel step: move the cursor, switch panel, or move one of the selected item into the stock at D_80144908. */
@@ -143,28 +143,28 @@ MATCH void func_801F7590(void) {
     func_801F7DDC();
     if (g_PadStates[0].pressed & (PADLup | PADLdown)) {
         if (g_PadStates[0].pressed & PADLup) {
-            g_Task->header.step--;
+            TASK(Actor)->header.step--;
         } else {
-            g_Task->header.step++;
+            TASK(Actor)->header.step++;
         }
-        g_Task->header.step &= 7;
+        TASK(Actor)->header.step &= 7;
         SND_SEPlay(EMI_SE_ID(SND_BANK_AREA, 6));
-        g_Task->unk_06 = (g_Task->header.step & 7) + 0x4E;
-        Script_Select(g_Task->unk_06 - 0x4E);
+        TASK(Actor)->unk_06 = (TASK(Actor)->header.step & 7) + 0x4E;
+        Script_Select(TASK(Actor)->unk_06 - 0x4E);
     }
     if (g_PadStates[0].pressed & PADRleft) {
         SND_SEPlay(EMI_SE_ID(SND_BANK_AREA, 9));
-        g_Task->unk_0A      = 20;
-        g_Task->header.mode = 2;
+        TASK(Actor)->unk_0A      = 20;
+        TASK(Actor)->header.mode = 2;
     } else if (g_PadStates[0].pressed & PADRup) {
         SND_SEPlay(EMI_SE_ID(SND_BANK_AREA, 12));
-        g_Task->header.mode = 3;
+        TASK(Actor)->header.mode = 3;
     } else if (g_PadStates[0].pressed & PADRdown) {
-        if (Item_Count(ITEM_CATEGORY_ITEM, g_Task->unk_06, 0) & 0xFFFF) {
-            if (D_80144908[g_Task->header.step] < 100) {
-                D_80144908[g_Task->header.step]++;
+        if (Item_Count(ITEM_CATEGORY_ITEM, TASK(Actor)->unk_06, 0) & 0xFFFF) {
+            if (D_80144908[TASK(Actor)->header.step] < 100) {
+                D_80144908[TASK(Actor)->header.step]++;
             }
-            Item_Remove(ITEM_CATEGORY_ITEM, g_Task->unk_06, 1, 0);
+            Item_Remove(ITEM_CATEGORY_ITEM, TASK(Actor)->unk_06, 1, 0);
             SND_SEPlay(EMI_SE_ID(SND_BANK_AREA, 10));
         } else {
             SND_SEPlay(EMI_SE_ID(SND_BANK_AREA, 13));
@@ -178,11 +178,11 @@ MATCH void func_801F7758(void) {
     rect = &D_801FE7CC[2];
     UI_WindowDrawPanelBox(rect->x, rect->y, (u8)rect->w, (u8)rect->h);
     func_801F781C((u16)rect->x + 1, (u16)rect->y + 1, 128, 104);
-    if (g_Task->unk_0A != 0) {
-        g_Task->unk_0A--;
+    if (TASK(Actor)->unk_0A != 0) {
+        TASK(Actor)->unk_0A--;
     } else if (g_PadStates[0].pressed != 0) {
         SND_SEPlay(EMI_SE_ID(SND_BANK_AREA, 12));
-        g_Task->header.mode = 1;
+        TASK(Actor)->header.mode = 1;
     }
 }
 
@@ -280,10 +280,10 @@ MATCH void func_801F7DDC(void) {
     sprintf(g_UiTextFormatBuffer, D_801F6C04, D_801FE874);
     UI_TextDraw((u16)D_801FE7CC[3].x + 8, D_801FE7CC[3].y + 2, 0, ITEM_NAME_LENGTH, g_UiTextFormatBuffer);
     func_801F7AD4();
-    UI_CursorDraw(D_801FE808[0], (u16)(D_801FE808[1] + (g_Task->header.step & 7) * 15), 0);
+    UI_CursorDraw(D_801FE808[0], (u16)(D_801FE808[1] + (TASK(Actor)->header.step & 7) * 15), 0);
     func_801F7C34();
-    g_Task->screen_x = D_801FE7CC[5].x + D_801FE804[0];
-    g_Task->screen_y = D_801FE7CC[5].y + D_801FE804[1];
+    TASK(Actor)->screen_x = D_801FE7CC[5].x + D_801FE804[0];
+    TASK(Actor)->screen_y = D_801FE7CC[5].y + D_801FE804[1];
     UI_WindowDrawPanelBox(D_801FE7CC[5].x, D_801FE7CC[5].y, (u8)D_801FE7CC[5].w, (u8)D_801FE7CC[5].h);
     Script_AnimStepLoop();
     Area_AddActor();

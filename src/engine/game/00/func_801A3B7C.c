@@ -5,30 +5,30 @@ MATCH void func_801A3B7C(Actor* entity) {
     u8  current;
     s32 sel;
 
-    if (g_Task->option_flags & ACTOR_OPT_ROUTE_LOCKED) {
-        g_Task->direction = entity->unk_79;
+    if (TASK(Actor)->option_flags & ACTOR_OPT_ROUTE_LOCKED) {
+        TASK(Actor)->direction = entity->unk_79;
     }
 
-    if (g_Task->unk_0A != 0) {
-        g_Task->unk_0A--;
+    if (TASK(Actor)->unk_0A != 0) {
+        TASK(Actor)->unk_0A--;
         return;
     }
 
     target  = entity->unk_79;
-    current = g_Task->direction;
+    current = TASK(Actor)->direction;
     if (target == current) {
-        g_Task->header.mode = g_Task->unk_03;
-        if (!(g_Task->option_flags & ACTOR_OPT_NO_TARGET)) {
+        TASK(Actor)->header.mode = TASK(Actor)->unk_03;
+        if (!(TASK(Actor)->option_flags & ACTOR_OPT_NO_TARGET)) {
             if ((func_801A1AE4(entity) & BYTE_MASK) != 0u) {
-                g_Task->direction &= 7u;
-                g_Task->unk_0A = 0u;
+                TASK(Actor)->direction &= 7u;
+                TASK(Actor)->unk_0A = 0u;
                 return;
             }
         }
-        Area_MoveActorRoute((u8*)entity + 0x74, g_Task->direction);
-        g_Task->direction |= 8u;
+        Area_MoveActorRoute((u8*)entity + 0x74, TASK(Actor)->direction);
+        TASK(Actor)->direction |= 8u;
         entity->interaction_flags |= ACTOR_INTERACTION_MOVING;
-        g_Task->unk_0A = g_Task->timer >> 1;
+        TASK(Actor)->unk_0A = TASK(Actor)->timer >> 1;
         return;
     }
 
@@ -37,10 +37,10 @@ MATCH void func_801A3B7C(Actor* entity) {
         sel = 1;
     }
 
-    g_Task->unk_0A    = 3u;
-    current           = g_Task->direction;
-    g_Task->vy        = 0;
-    g_Task->vx        = 0;
-    g_Task->direction = (current + sel) & 0x7u;
+    TASK(Actor)->unk_0A    = 3u;
+    current                = TASK(Actor)->direction;
+    TASK(Actor)->vy        = 0;
+    TASK(Actor)->vx        = 0;
+    TASK(Actor)->direction = (current + sel) & 0x7u;
     entity->interaction_flags |= ACTOR_INTERACTION_MOVING;
 }

@@ -68,7 +68,7 @@ MATCH u8 Script_OpsRunMotion(ScriptState* state, const u8* table, u8 value) {
                     s32    den;
 
                     Area_MoveActorRoute(state, value);
-                    work     = g_Task;
+                    work     = TASK(Actor);
                     den      = work->timer * state->steps;
                     work->vz = ((s16)((*(table + state->cursor + 3) << 8) | *(table + state->cursor + 4)) - (s16)COORD_INT(work->pos.z)) / den;
                     state->flags |= GAME_CURSOR_FLAG_MOVING;
@@ -77,7 +77,7 @@ MATCH u8 Script_OpsRunMotion(ScriptState* state, const u8* table, u8 value) {
                     s32  step;
 
                     counter    = (s16*)&g_ScratchPad;
-                    *counter   = COORD_INT(g_Task->pos.z);
+                    *counter   = COORD_INT(TASK(Actor)->pos.z);
                     D_1F800002 = (s16)((*(table + state->cursor + 3) << 8) | *(table + state->cursor + 4));
                     Area_SetFacingOffsetX(value);
                     step       = (0x80 / g_AreaCameraStep) * D_80143FC3;
@@ -92,10 +92,10 @@ MATCH u8 Script_OpsRunMotion(ScriptState* state, const u8* table, u8 value) {
             Actor* work;
 
             state->flags |= GAME_CURSOR_FLAG_MOVING;
-            g_Task->timer = *(table + state->cursor + 3);
-            if (g_Task->timer == 0)
-                g_Task->timer = 1;
-            work     = g_Task;
+            TASK(Actor)->timer = *(table + state->cursor + 3);
+            if (TASK(Actor)->timer == 0)
+                TASK(Actor)->timer = 1;
+            work     = TASK(Actor);
             work->vz = ((s16)((*(table + state->cursor + 1) << 8) | *(table + state->cursor + 2)) - (s16)COORD_INT(work->pos.z)) / work->timer;
             work->vx = 0;
             work->vy = 0;
@@ -113,7 +113,7 @@ MATCH u8 Script_OpsRunMotion(ScriptState* state, const u8* table, u8 value) {
                 return 0xFF;
             }
             state->cursor += 2;
-            work  = g_Task;
+            work  = TASK(Actor);
             value = work->direction & 0x7;
             break;
         }
@@ -134,7 +134,7 @@ MATCH u8 Script_OpsRunMotion(ScriptState* state, const u8* table, u8 value) {
                     state->flags |= 0x40;
                 }
             }
-            work                   = g_Task;
+            work                   = TASK(Actor);
             work->vz               = 0;
             COORD_INT(work->pos.z) = (u16)((*(table + state->cursor + 3) << 8) | *(table + state->cursor + 4));
             state->cursor += 4;
@@ -143,7 +143,7 @@ MATCH u8 Script_OpsRunMotion(ScriptState* state, const u8* table, u8 value) {
         case ACTOR_SCRIPT_MOTION_WAIT_SCRIPT_READY:
             if (Script_AnimStepOnce() != 0)
                 return value;
-            g_Task->option_flags |= ACTOR_OPT_WAIT_STREAM;
+            TASK(Actor)->option_flags |= ACTOR_OPT_WAIT_STREAM;
             state->cursor--;
             break;
         case ACTOR_SCRIPT_MOTION_PLAY_CUE_ON_SCRIPT: {
@@ -152,7 +152,7 @@ MATCH u8 Script_OpsRunMotion(ScriptState* state, const u8* table, u8 value) {
 
             if (g_GameStateIndex != GAME_REQUEST_BATTLE) {
                 mode                = Actor_ReadState();
-                work                = g_Task;
+                work                = TASK(Actor);
                 GAME_ENTITY_COUNTER = mode;
                 /* FAKE: counter store before work read. */
                 FAKE_BARRIER();
@@ -187,7 +187,7 @@ MATCH u8 Script_OpsRunMotion(ScriptState* state, const u8* table, u8 value) {
         case ACTOR_SCRIPT_MOTION_SET_CELL_PALETTE: {
             Actor* work;
 
-            work   = g_Task;
+            work   = TASK(Actor);
             result = Area_CellSetPalette(COORD_INT(work->pos.x), COORD_INT(work->pos.y));
             /* Retail shares the cue check with case 0xFC. */
             goto queue_cue;
@@ -195,7 +195,7 @@ MATCH u8 Script_OpsRunMotion(ScriptState* state, const u8* table, u8 value) {
         case ACTOR_SCRIPT_MOTION_CLEAR_CELL_PALETTE: {
             Actor* work;
 
-            work   = g_Task;
+            work   = TASK(Actor);
             result = Area_CellClearPalette(COORD_INT(work->pos.x), COORD_INT(work->pos.y));
         }
         queue_cue:

@@ -624,9 +624,6 @@ MATCH void func_801F3D5C(void) {
     } while (i < 16u);
 }
 
-/* This function stores the cell; the typed view macro is not an assignable object. */
-#undef g_Task
-
 MATCH s32 func_801F3E48(u8 shade) {
     SVECTOR         verts[4];
     VECTOR          vec;

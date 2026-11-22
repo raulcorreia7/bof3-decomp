@@ -6,6 +6,6 @@ MATCH void func_801F3408(void) {
     }
     Area_StepSparks();
     if (*g_ScriptVars == 0x29) {
-        g_Task->header.mode++;
+        TASK(Actor)->header.mode++;
     }
 }

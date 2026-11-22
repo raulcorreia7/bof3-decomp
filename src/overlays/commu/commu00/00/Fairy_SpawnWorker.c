@@ -11,23 +11,23 @@ MATCH void Fairy_SpawnWorker(u8 source_index, u8 task_index) {
     record_index                = g_FairyJobs[source_index].type - 1;
     index                       = record_index;
     g_Task                      = &g_Actors[task_index];
-    g_Task->unk_05              = source_index;
-    g_Task->header.mode         = 6;
+    TASK(Actor)->unk_05         = source_index;
+    TASK(Actor)->header.mode    = 6;
     g_Actors[task_index].unk_78 = 0;
     ACTOR_CLEAR_STEP();
     /* Each pair is written value half first, then the zero half the caller
      * reads back as one 32-bit coordinate word. */
-    COORD_INT(g_Task->pos.x)  = D_801F25A4[index][D_801F2928[index]][0];
-    COORD_FRAC(g_Task->pos.x) = 0;
-    variant_index             = index;
-    COORD_INT(g_Task->pos.y)  = D_801F25A4[index][D_801F2928[index]][1];
-    COORD_FRAC(g_Task->pos.y) = 0;
-    distance                  = Area_HeightSample(*((u32*)(&COORD_FRAC(g_Task->pos.x))), *((u32*)(&COORD_FRAC(g_Task->pos.y))));
-    COORD_INT(g_Task->pos.z)  = distance;
-    g_Task->direction         = D_801F25A4[variant_index][D_801F2928[variant_index]][2];
-    g_Task->unk_48            = 0;
-    Area_SceneSelectRecord(D_801F24FC[g_Task->unk_05 % 6]);
-    Script_DispatchSelector(g_Task->direction);
+    COORD_INT(TASK(Actor)->pos.x)  = D_801F25A4[index][D_801F2928[index]][0];
+    COORD_FRAC(TASK(Actor)->pos.x) = 0;
+    variant_index                  = index;
+    COORD_INT(TASK(Actor)->pos.y)  = D_801F25A4[index][D_801F2928[index]][1];
+    COORD_FRAC(TASK(Actor)->pos.y) = 0;
+    distance                       = Area_HeightSample(*((u32*)(&COORD_FRAC(TASK(Actor)->pos.x))), *((u32*)(&COORD_FRAC(TASK(Actor)->pos.y))));
+    COORD_INT(TASK(Actor)->pos.z)  = distance;
+    TASK(Actor)->direction         = D_801F25A4[variant_index][D_801F2928[variant_index]][2];
+    TASK(Actor)->unk_48            = 0;
+    Area_SceneSelectRecord(D_801F24FC[TASK(Actor)->unk_05 % 6]);
+    Script_DispatchSelector(TASK(Actor)->direction);
     switch (g_FairyRooms[variant_index * 8]) {
         case 0:
             func_801F0BF4(task_index);

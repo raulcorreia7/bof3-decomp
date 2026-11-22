@@ -12,7 +12,7 @@ MATCH s8 Actor_MovementStep(s32 entry, s8 dir_x, s8 dir_y, s16 vz_start, s16 vz_
     u8     count;
     s32    sum;
 
-    work              = g_Task;
+    work              = TASK(Actor);
     speed             = work->vz;
     sum               = work->pos.x.fixed;
     count             = work->unk_0A - 1;
@@ -21,27 +21,27 @@ MATCH s8 Actor_MovementStep(s32 entry, s8 dir_x, s8 dir_y, s16 vz_start, s16 vz_
     COORD_INT(work->pos.z) += work->vz >> 8;
     work->unk_0A = count;
     work->vz     = speed + vz_delta;
-    height       = Area_HeightSample(g_Task->pos.x.fixed, g_Task->pos.y.fixed);
-    if (g_Task->vz < 0 && height > COORD_INT(g_Task->pos.z)) {
-        COORD_INT(g_Task->pos.z) = height;
+    height       = Area_HeightSample(TASK(Actor)->pos.x.fixed, TASK(Actor)->pos.y.fixed);
+    if (TASK(Actor)->vz < 0 && height > COORD_INT(TASK(Actor)->pos.z)) {
+        COORD_INT(TASK(Actor)->pos.z) = height;
         if (flags & 0x2) {
-            g_Task->unk_04 = 0;
+            TASK(Actor)->unk_04 = 0;
             return 0;
         }
     }
-    if (g_Task->vz <= 0 && speed >= 0 && landing_script != GAME_NONE) {
-        if (g_Task->unk_06 != 6) {
-            g_Task->mirror = flags & 0x1;
+    if (TASK(Actor)->vz <= 0 && speed >= 0 && landing_script != GAME_NONE) {
+        if (TASK(Actor)->unk_06 != 6) {
+            TASK(Actor)->mirror = flags & 0x1;
         }
         Script_Request(landing_script);
     }
-    if (g_Task->unk_0A == 0) {
-        if (g_Task->param.unk_0B != 0) {
-            g_Task->unk_0A = 0x10 / g_RouteSpeedScale[FIELD(u8, (void*)entry, 0x4u)];
-            g_Task->param.unk_0B -= 1;
+    if (TASK(Actor)->unk_0A == 0) {
+        if (TASK(Actor)->param.unk_0B != 0) {
+            TASK(Actor)->unk_0A = 0x10 / g_RouteSpeedScale[FIELD(u8, (void*)entry, 0x4u)];
+            TASK(Actor)->param.unk_0B -= 1;
         } else {
             Actor_ApplyVelocity();
-            g_Task->unk_04 = 3;
+            TASK(Actor)->unk_04 = 3;
         }
     }
     func_801A3D1C((void*)entry);

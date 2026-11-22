@@ -3,10 +3,10 @@
 MATCH void Effect_NextStepUnderTickLimit(void) {
     PartyMember* work;
 
-    work = g_Task;
+    work = TASK(PartyMember);
     if (work->param.unk_0B < 5) {
         work->unk_09      = 8;
-        work              = g_Task;
+        work              = TASK(PartyMember);
         work->header.step = work->header.step + 1;
     }
 }

@@ -7,28 +7,28 @@ MATCH bool Game_GetInput(void) {
     type = g_Game.input & INPUT_DIRECTIONAL;
     switch (type) {
         case PADLup:
-            g_Task->direction = FACING_UP_LEFT;
+            TASK(Actor)->direction = FACING_UP_LEFT;
             break;
         case PADLup | PADLright:
-            g_Task->direction = FACING_UP;
+            TASK(Actor)->direction = FACING_UP;
             break;
         case PADLright:
-            g_Task->direction = FACING_UP_RIGHT;
+            TASK(Actor)->direction = FACING_UP_RIGHT;
             break;
         case PADLright | PADLdown:
-            g_Task->direction = FACING_RIGHT;
+            TASK(Actor)->direction = FACING_RIGHT;
             break;
         case PADLdown:
-            g_Task->direction = FACING_DOWN_RIGHT;
+            TASK(Actor)->direction = FACING_DOWN_RIGHT;
             break;
         case PADLdown | PADLleft:
-            g_Task->direction = FACING_DOWN;
+            TASK(Actor)->direction = FACING_DOWN;
             break;
         case PADLleft:
-            g_Task->direction = FACING_DOWN_LEFT;
+            TASK(Actor)->direction = FACING_DOWN_LEFT;
             break;
         case PADLleft | PADLup:
-            g_Task->direction = FACING_LEFT;
+            TASK(Actor)->direction = FACING_LEFT;
             break;
         default:
             return 0;

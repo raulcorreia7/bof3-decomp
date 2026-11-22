@@ -1,5 +1,4 @@
 #include "area026_13.h"
-#include "area/spad.h"
 
 /* Dispatch handlers, indexed by work byte +0x01. */
 static const Callback s_SpinEffectModes[4] = {
@@ -219,7 +218,7 @@ static u16 D_801F4CDC[2] = {0x0031, 0xFFFF};
 static u8  D_801F4CE0[4] = {0x1C, 0x00, 0x00, 0x1C};
 
 MATCH s32 func_801F2C04(void) {
-    SYS_DISPATCH_BYTE(s_SpinEffectModes, g_Task->header.mode);
+    SYS_DISPATCH_BYTE(s_SpinEffectModes, TASK(Actor)->header.mode);
 }
 
 /* `work2` re-reads the slot so each site emits its own address load;
@@ -231,12 +230,12 @@ MATCH void func_801F2C48(void) {
     s32    v1;
     s32    v2;
 
-    work         = g_Task;
+    work         = TASK(Actor);
     v0           = work->pos.x.fixed;
     v1           = work->pos.y.fixed;
     v2           = work->pos.z.fixed;
     work->timer  = 10;
-    work2        = g_Task;
+    work2        = TASK(Actor);
     work->unk_1C = 0;
     setVector(work, v0, v1, v2);
     work2->header.mode++;
@@ -250,15 +249,15 @@ MATCH void func_801F2C94(void) {
     Actor* work3;
     u8     count;
 
-    work = g_Task;
+    work = TASK(Actor);
     func_801F2D5C(&work->vx, work->unk_1C);
-    work2 = g_Task;
+    work2 = TASK(Actor);
     work->unk_1C += 0x1199;
     count        = (work2->timer - 1);
     work2->timer = count;
     if (count == 0) {
         SND_SEPlay(EMI_SE_ID(SND_BANK_AREA, 13));
-        work3 = g_Task;
+        work3 = TASK(Actor);
         work3->header.mode++;
     }
 }
@@ -414,7 +413,7 @@ MATCH void func_801F32B8(void) {
     selection = D_801F4CE0[index];
     result    = Actor_ClaimSlot(1, 0, selection, x, y);
     if ((u8)result != GAME_NONE) {
-        work               = g_Task;
+        work               = TASK(Actor);
         work->param.unk_0B = result;
     }
 }

@@ -14,7 +14,7 @@ MATCH void Well_ReadSwishInput(void) {
         switch (*input) {
             case PADLup:
             case (PADLup | PADLright):
-                work        = g_Task;
+                work        = TASK(Actor);
                 g_GameState = g_Game.members;
                 TASK_SET(g_Game.members);
                 g_Game.members[0].pos.y.fixed -= 0x800;
@@ -22,7 +22,7 @@ MATCH void Well_ReadSwishInput(void) {
                 break;
             case PADLright:
             case (PADLdown | PADLright):
-                work        = g_Task;
+                work        = TASK(Actor);
                 g_GameState = g_Game.members;
                 TASK_SET(g_Game.members);
                 g_Game.members[0].pos.x.fixed += 0x800;
@@ -30,7 +30,7 @@ MATCH void Well_ReadSwishInput(void) {
                 break;
             case PADLdown:
             case (PADLleft | PADLdown):
-                work        = g_Task;
+                work        = TASK(Actor);
                 g_GameState = g_Game.members;
                 TASK_SET(g_Game.members);
                 g_Game.members[0].pos.y.fixed += 0x800;
@@ -38,14 +38,14 @@ MATCH void Well_ReadSwishInput(void) {
                 break;
             case PADLleft:
             case (PADLleft | PADLup):
-                work        = g_Task;
+                work        = TASK(Actor);
                 g_GameState = g_Game.members;
                 TASK_SET(g_Game.members);
                 g_Game.members[0].pos.x.fixed -= 0x800;
                 g_Task = work;
                 break;
         }
-        g_Task->header.mode = WELL_MODE_SWISH_DELAY;
-        g_Task->timer       = WELL_SWISH_DELAY_FRAMES;
+        TASK(Actor)->header.mode = WELL_MODE_SWISH_DELAY;
+        TASK(Actor)->timer       = WELL_SWISH_DELAY_FRAMES;
     }
 }

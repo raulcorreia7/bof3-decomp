@@ -9,7 +9,7 @@ MATCH void func_801F2D34(void) {
     ACTOR_COUNT_DOWN(TASK(Actor), remaining, timer);
     if (!(remaining & BYTE_MASK)) {
         func_801F3834();
-        g_Task->timer = 120;
-        g_Task->header.mode++;
+        TASK(Actor)->timer = 120;
+        TASK(Actor)->header.mode++;
     }
 }

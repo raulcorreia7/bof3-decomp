@@ -538,13 +538,13 @@ NON_MATCHING void Menu_DrawHeaderBar(s32 x, s32 y, s32 width, s32 height, u8 win
     prim->x3 = x + width1;
     setXY0(prim, x + width1 - 2, top);
     prim->x2 = x + width1 - 2;
-    prim->y3 = bottom_y;
     setUV0(prim, 0u, 0u);
     prim->u1 = 2u;
     prim->v1 = 0u;
     prim->u2 = 0u;
     prim->u3 = 2u;
     prim->v3 = bottom_v;
+    prim->y3 = bottom_y;
     setRGB0(prim, 172, 172, 172);
     prim->y1 += 2;
     prim->y2 -= 1;

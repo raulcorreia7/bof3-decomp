@@ -19,7 +19,7 @@ MATCH void func_801EEC90(void) {
     slot = Battle_AllocEffect(1, 82) & BYTE_MASK;
     Effect_CopyActiveBattlerToSlot(slot);
     BMAGIC_POINT_AT_PALETTE_ROW(dst, src, i);
-    work                               = g_Task;
+    work                               = TASK(PartyMember);
     g_BattleEffects[slot].header.mode  = 1;
     g_BattleEffects[slot].unk_06       = 1;
     g_BattleEffects[slot].header.step  = 0;
@@ -54,7 +54,7 @@ MATCH void func_801EEE94(void) {
         SND_SEQueueSelection(EMI_SE_ID(SND_BANK_COMMON, 0x00));
         for (i = 0, anchor = 1; i < 6; i++) {
             slot                               = Battle_AllocEffect(1, 82) & BYTE_MASK;
-            work                               = g_Task;
+            work                               = TASK(PartyMember);
             g_BattleEffects[slot].header.mode  = 0;
             g_BattleEffects[slot].unk_0B       = i;
             g_BattleEffects[slot].arg.unk_09   = anchor;
@@ -126,7 +126,7 @@ MATCH void func_801EF380(void) {
     PartyMember* work;
     u8           count;
 
-    work = g_Task;
+    work = TASK(PartyMember);
     work->scale.x += 0x4000;
     count        = work->unk_09 + 1;
     work->unk_09 = count;
@@ -137,7 +137,7 @@ MATCH void func_801EF380(void) {
 }
 
 MATCH void func_801EF3E4(void) {
-    PartyMember* work = g_Task;
+    PartyMember* work = TASK(PartyMember);
     u8           timer;
     work->scale.x -= 0x4000;
     timer        = work->unk_09 - 1;

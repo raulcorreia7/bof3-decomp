@@ -4,7 +4,7 @@ MATCH void func_801F3388(void) {
     Actor* work;
     Actor* task;
 
-    work = g_Task;
+    work = TASK(Actor);
     work->pos.x.fixed += D_801F43B0[work->unk_0A & 0xF] << 11;
     work->pos.y.fixed -= D_801F43B0[work->unk_0A & 0xF] << 11;
     work->pos.z.part.integer += D_801F43B0[work->unk_0A & 0xF] * 16;
@@ -20,19 +20,19 @@ MATCH void func_801F3388(void) {
             g_SpawnedActors[index].type         = 0xAC;
         }
         g_ScriptVars[1]          = 0;
-        task                     = g_Task;
+        task                     = TASK(Actor);
         task->tint.steps.delta.b = -0x40;
         task->tint.steps.delta.g = -0x40;
         task->tint.steps.delta.r = -0x40;
     } else {
-        if (g_Task->tint.steps.delta.r != 0) {
-            g_Task->tint.steps.delta.r += 8;
+        if (TASK(Actor)->tint.steps.delta.r != 0) {
+            TASK(Actor)->tint.steps.delta.r += 8;
         }
-        if (g_Task->tint.steps.delta.g != 0) {
-            g_Task->tint.steps.delta.g += 8;
+        if (TASK(Actor)->tint.steps.delta.g != 0) {
+            TASK(Actor)->tint.steps.delta.g += 8;
         }
-        if (g_Task->tint.steps.delta.b != 0) {
-            g_Task->tint.steps.delta.b += 8;
+        if (TASK(Actor)->tint.steps.delta.b != 0) {
+            TASK(Actor)->tint.steps.delta.b += 8;
         }
     }
 }

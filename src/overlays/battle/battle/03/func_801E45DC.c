@@ -5,7 +5,7 @@ MATCH void func_801E45DC(void) {
     u32          slot;
     u8           count;
 
-    work        = g_Task;
+    work        = TASK(PartyMember);
     count       = work->timer - 1;
     work->timer = count;
     if (count == 0) {
@@ -13,7 +13,7 @@ MATCH void func_801E45DC(void) {
             Battle_QueueAction(g_BattleCurrentEnemy->turn.hp_change, TASK(PartyMember)->slot);
         } else {
             slot                               = Battle_AllocEffect(0, 1) & BYTE_MASK;
-            g_BattleEffects[slot].target.party = g_Task;
+            g_BattleEffects[slot].target.party = TASK(PartyMember);
             g_BattleEffects[slot].unk_07       = 3;
             g_BattleEffects[slot].unk_27       = 0;
         }

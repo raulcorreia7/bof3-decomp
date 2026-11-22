@@ -87,10 +87,10 @@ NON_MATCHING void Party_MemberRemove(s32 character_id) {
                     wsrc += 4;
                     wdst += 4;
                 } while (wsrc != wend);
-                g_Task->unk_05                            = (u8)slot;
-                g_Task->sheet_row                         = (u8)frac;
-                g_Task->clut_select                       = (u8)code;
-                g_Task->script_record                     = 0xFF;
+                TASK(Actor)->unk_05                       = (u8)slot;
+                TASK(Actor)->sheet_row                    = (u8)frac;
+                TASK(Actor)->clut_select                  = (u8)code;
+                TASK(Actor)->script_record                = 0xFF;
                 (&g_Game.members[0].character_index)[off] = g_CharSlot[FIELD(u8, &g_Game.members[0].chr.character_id, off)];
             }
             off += BATTLE_PARTY_STRIDE;

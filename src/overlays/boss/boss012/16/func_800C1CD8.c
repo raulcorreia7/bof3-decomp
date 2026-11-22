@@ -1,5 +1,4 @@
 #include "boss012_16.h"
-#include "area/spad.h"
 
 /* Draws a textured quad from the screen top down to the task; shade picks the texture row. */
 MATCH void func_800C1CD8(s32 shade) {
@@ -12,7 +11,7 @@ MATCH void func_800C1CD8(s32 shade) {
     poly        = (POLY_FT4*)g_GfxPrimCursor;
     poly->tpage = GetTPage(TPAGE_DEPTH_15BIT, TPAGE_ABR_HALF, 0x340, 0x100);
     setRGB0(poly, 0x80, 0x80, 0x80);
-    task = g_Task;
+    task = TASK(PartyMember);
     setXY2(poly, task->unk_18 - 0x28, 0, task->unk_18 + 0x40, 0);
     poly->x2 = task->unk_18 - 0x28;
     bottom   = task->gravity - 0x3C;

@@ -43,7 +43,7 @@ MATCH void func_801EED30(void) {
         row                     = (BattleWorkImage*)&g_BattleEnemyBattlers[enemy];
         *(BattleWorkImage*)slot = *row;
     }
-    work                                = g_Task;
+    work                                = TASK(PartyMember);
     g_BattleEffects[index].unk_06       = 1;
     g_BattleEffects[index].header.mode  = 0;
     g_BattleEffects[index].header.step  = 0;
@@ -89,7 +89,7 @@ MATCH void func_801EF104(void) {
     TASK(PartyMember)->param.unk_0B = 0;
     for (i = 0; i < 12; i++) {
         slot                                   = BMagic_AllocEffect() & BYTE_MASK;
-        work                                   = g_Task;
+        work                                   = TASK(PartyMember);
         BMAGIC_EFFECT_SLOTS[slot].arg.unk_09   = (i >> 1) * 3 + 1;
         BMAGIC_EFFECT_SLOTS[slot].target.party = work;
         TASK(PartyMember)->param.unk_0B += 1;
@@ -152,7 +152,7 @@ MATCH void func_801EF600(void) {
     if (!(count & BYTE_MASK)) {
         offset                 = rand() & 0x7;
         actor                  = g_BattleSelectedActor;
-        work                   = g_Task;
+        work                   = TASK(PartyMember);
         work->pos.x.fixed      = actor->pos.x.fixed;
         work->pos.y.fixed      = actor->pos.y.fixed;
         COORD_INT(work->pos.z) = (s16)((u16)COORD_INT(actor->pos.z) + (offset << 5));
@@ -174,7 +174,7 @@ MATCH void func_801EF600(void) {
 MATCH void func_801EF7A0(void) {
     PartyMember* work;
 
-    work        = g_Task;
+    work        = TASK(PartyMember);
     work->timer = work->timer - 2;
     if (work->timer == 0) {
         work               = (PartyMember*)g_BattleEffectBattler;

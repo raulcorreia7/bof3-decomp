@@ -2,14 +2,14 @@
 
 /* func_801F38EC */
 MATCH void Area_CountHudBannerHold(void) {
-    if (g_Task->param.unk_0B == 0) {
-        g_Task->timer++;
-        if (g_Task->timer >= 90) {
-            g_Task->param.unk_0B++;
+    if (TASK(Actor)->param.unk_0B == 0) {
+        TASK(Actor)->timer++;
+        if (TASK(Actor)->timer >= 90) {
+            TASK(Actor)->param.unk_0B++;
         }
     }
 
-    if (D_801454F2 != 0 && g_Task->param.unk_0B != 0) {
+    if (D_801454F2 != 0 && TASK(Actor)->param.unk_0B != 0) {
         goto bump; /* skips the 0x100 test: advance state byte 0x03 */
     }
     if (g_GameStateIndex == GAME_REQUEST_MESSAGE) {
@@ -19,7 +19,7 @@ MATCH void Area_CountHudBannerHold(void) {
         goto done; /* skips the advance: panel `0x5C` draws next */
     }
 bump:
-    g_Task->unk_03++;
+    TASK(Actor)->unk_03++;
 done:
-    Area_DrawHudBanner(92, g_Task->screen_y);
+    Area_DrawHudBanner(92, TASK(Actor)->screen_y);
 }

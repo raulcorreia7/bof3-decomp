@@ -7,7 +7,6 @@
 #include "common/vector.h"
 #include "overlays/area/shared/AreaSprite.h"
 #include "overlays/area/worlds/world02.h"
-#include "area/spad.h"
 #include <rand.h>
 
 /* The vertex rows and the per-row transform state the stage animates. */
@@ -46,14 +45,14 @@ typedef struct AreaPosEntry {
 ASSERT_SIZE(AreaPosEntry, 0x04);
 
 /* Place the actor on the row of `table` that the current stage number selects. */
-#define AREA_PLACE_ACTOR(table)                                     \
-    do {                                                            \
-        u32 i = (u8)(D_80147B67 - 1);                               \
-                                                                    \
-        COORD_INT(g_Task->pos.x)  = (table)[i].x;                   \
-        COORD_FRAC(g_Task->pos.x) = ((table)[i].x_half != 0) << 15; \
-        COORD_INT(g_Task->pos.y)  = (table)[i].y;                   \
-        COORD_FRAC(g_Task->pos.y) = ((table)[i].y_half != 0) << 15; \
+#define AREA_PLACE_ACTOR(table)                                          \
+    do {                                                                 \
+        u32 i = (u8)(D_80147B67 - 1);                                    \
+                                                                         \
+        COORD_INT(TASK(Actor)->pos.x)  = (table)[i].x;                   \
+        COORD_FRAC(TASK(Actor)->pos.x) = ((table)[i].x_half != 0) << 15; \
+        COORD_INT(TASK(Actor)->pos.y)  = (table)[i].y;                   \
+        COORD_FRAC(TASK(Actor)->pos.y) = ((table)[i].y_half != 0) << 15; \
     } while (0)
 
 /* The game-overlay state bytes the cancel path resets. */

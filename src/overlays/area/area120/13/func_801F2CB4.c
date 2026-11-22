@@ -8,11 +8,11 @@ MATCH void func_801F2CB4(void) {
     func_801F3630();
     func_801F3630();
     func_801F36B0();
-    timer          = g_Task->unk_32 - 1;
-    g_Task->unk_32 = timer;
+    timer               = TASK(Actor)->unk_32 - 1;
+    TASK(Actor)->unk_32 = timer;
     if (timer == 0) {
-        g_Task->unk_06 = 1;
-        g_Task->unk_32 = 0x3C;
-        g_Task->header.mode++;
+        TASK(Actor)->unk_06 = 1;
+        TASK(Actor)->unk_32 = 0x3C;
+        TASK(Actor)->header.mode++;
     }
 }

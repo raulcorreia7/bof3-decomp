@@ -24,10 +24,10 @@ MATCH void func_801EEC5C(void) {
 
     TASK(PartyMember)->facing = g_BattleEffectBattler->facing;
     battler                   = g_BattleEffectBattler;
-    task                      = g_Task;
+    task                      = TASK(PartyMember);
     WorldPos_Copy(&task->pos, &battler->pos);
     slot                               = Battle_AllocEffect(1, 56) & BYTE_MASK;
-    owner                              = g_Task;
+    owner                              = TASK(PartyMember);
     g_BattleEffects[slot].header.mode  = 0;
     g_BattleEffects[slot].arg.unk_09   = 4;
     g_BattleEffects[slot].target.party = owner;
@@ -85,7 +85,7 @@ MATCH void func_801EEF2C(void) {
         TASK(PartyMember)->facing = g_BattleEffectBattler->facing;
         Battle_CenterCamera();
         Battle_ProjectRange();
-        work                         = g_Task;
+        work                         = TASK(PartyMember);
         battler                      = g_BattleEffectBattler;
         g_ScratchPad.cells.halves[6] = work->screen_x.value;
         g_ScratchPad.cells.halves[7] = work->screen_y.value;
@@ -130,12 +130,12 @@ MATCH void func_801EEF2C(void) {
 MATCH void func_801EF158(void) {
     PartyMember* work;
 
-    work = g_Task;
+    work = TASK(PartyMember);
     work->timer += 3;
-    work = g_Task;
+    work = TASK(PartyMember);
     work->unk_09++;
     if (work->unk_09 == 8) {
-        work = g_Task;
+        work = TASK(PartyMember);
         work->header.step++;
     }
 }

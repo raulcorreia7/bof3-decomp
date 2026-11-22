@@ -5,7 +5,6 @@
  * and its data. Only this image includes the file. */
 
 #include "overlays/area/worlds/world00.h"
-#include "area/spad.h"
 
 /* The owner is src/engine/game/00/game_00.h; that header is not visible to this
  * overlay, so keep the local declaration with the owner's volatile qualifier. */

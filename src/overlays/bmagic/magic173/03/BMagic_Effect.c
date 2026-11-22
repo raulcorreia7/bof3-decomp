@@ -19,13 +19,13 @@ MATCH void func_801EEC5C(void) {
     u16*         dst;
 
     TASK(PartyMember)->facing = g_BattleEffectBattler->facing;
-    task                      = g_Task;
+    task                      = TASK(PartyMember);
     WorldPos_Copy(&task->pos, &g_BattleEffectBattler->pos);
     task->param.unk_0B = 0;
     TASK(PartyMember)->header.mode += 1;
     for (i = 0; i < 2; i++) {
         slot                               = Battle_AllocEffect(1, 24);
-        work                               = g_Task;
+        work                               = TASK(PartyMember);
         g_BattleEffects[slot].header.mode  = 0;
         g_BattleEffects[slot].unk_04       = i;
         g_BattleEffects[slot].target.party = work;
@@ -79,7 +79,7 @@ MATCH void func_801EEEEC(void) {
                 TASK(PartyMember)->unk_14 = 0;
                 break;
             case 0x6C:
-                work = g_Task;
+                work = TASK(PartyMember);
                 if (work->facing & 2) {
                     work->unk_0C = 0x20000;
                 } else {

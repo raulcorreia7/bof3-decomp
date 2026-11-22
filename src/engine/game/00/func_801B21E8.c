@@ -83,10 +83,10 @@ NON_MATCHING void func_801B21E8(void) {
                 g_PartyFieldOrder[val4]         = g_Game.current->chr.character_id;
                 if (val4 != 0) {
                     Actor_SetSemiTransparent();
-                    tmp6                     = g_Task;
-                    *(u8*)(tmp6)             = (u8)(*(u8*)(tmp6) & 0xBF);
-                    g_Task->tint.steps.flags = 1;
-                    g_Task->direction        = (u8)(g_Game.members[0].facing ^ 4);
+                    tmp6                          = g_Task;
+                    *(u8*)(tmp6)                  = (u8)(*(u8*)(tmp6) & 0xBF);
+                    TASK(Actor)->tint.steps.flags = 1;
+                    TASK(Actor)->direction        = (u8)(g_Game.members[0].facing ^ 4);
                 }
                 if (!(*val13 & 1) && (val4 != 0)) {
                     tmp4  = g_Task;
@@ -97,7 +97,7 @@ NON_MATCHING void func_801B21E8(void) {
                     val8  = val3 & BYTE_MASK;
                     val9  = 0;
                     if (val8 != 0) {
-                        val9 = func_801B1C18(*(s32*)val0, FIELD(s32, val0, 0x4u), g_Task->voice_flags.scene_flag);
+                        val9 = func_801B1C18(*(s32*)val0, FIELD(s32, val0, 0x4u), TASK(Actor)->voice_flags.scene_flag);
                         val8 = val3 & BYTE_MASK;
                     }
                     if ((val8 == 0) || !(val9 & BYTE_MASK)) {
@@ -109,7 +109,7 @@ NON_MATCHING void func_801B21E8(void) {
                     val1 = FIELD(s32, val13, -0xF8);
                     val2 = FIELD(s32, val13, -0xF4);
                 block_26:
-                    func_801B1B2C(val1, val2, g_Task->direction, g_Task->voice_flags.scene_flag);
+                    func_801B1B2C(val1, val2, TASK(Actor)->direction, TASK(Actor)->voice_flags.scene_flag);
                 }
                 tmp7                     = g_Task;
                 tmp7->pos.x.fixed        = (s32) * (s32*)(&D_1F800008);

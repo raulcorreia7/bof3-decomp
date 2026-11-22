@@ -8,7 +8,7 @@ MATCH void func_801F40C8(void) {
     if (*state == 0xFE) {
         func_80196070();
     }
-    actor          = g_Task;
+    actor          = TASK(Actor);
     g_Game.current = (PartyMember*)&D_80146110;
     TASK_SET(&D_80146110);
     if (g_Game.members[2].pos.x.fixed > 0x33FFFF) {
@@ -20,9 +20,9 @@ MATCH void func_801F40C8(void) {
         func_80196070();
     } else {
         TASK_SET(actor);
-        if (g_Task->timer-- == 0) {
+        if (TASK(Actor)->timer-- == 0) {
             g_ScenarioState.timer_06 = 0;
-            g_Task->header.mode      = 1;
+            TASK(Actor)->header.mode = 1;
         }
     }
 }

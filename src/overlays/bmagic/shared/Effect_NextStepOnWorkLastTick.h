@@ -3,7 +3,7 @@
 MATCH void Effect_NextStepOnWorkLastTick(void) {
     PartyMember* work;
 
-    work = g_Task;
+    work = TASK(PartyMember);
     if (work->param.unk_0B == 1) {
         work->header.mode = work->header.mode + 1;
     }

@@ -4,11 +4,11 @@ MATCH void func_801B8A0C(void) {
     Actor* work;
 
     g_Game.current->u.field.counter.value = 3;
-    work                                  = g_Task;
+    work                                  = TASK(Actor);
     work->direction                       = work->param.unk_0B;
-    Script_Request(g_Task->direction);
+    Script_Request(TASK(Actor)->direction);
     g_Game.current->u.field.mode.value = 0;
-    g_Task->header.mode                = 1;
-    g_Task->header.step                = 0;
-    g_Task->unk_03                     = 0;
+    TASK(Actor)->header.mode           = 1;
+    TASK(Actor)->header.step           = 0;
+    TASK(Actor)->unk_03                = 0;
 }

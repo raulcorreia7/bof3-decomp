@@ -6,18 +6,18 @@ MATCH void func_8019C954(void) {
     s16    counter;
 
     index = D_80145E9B;
-    g_Task->header.flags |= ACTOR_FLAG_SKIP_PALETTE_STAGE;
-    g_Task->active_flags = 1;
-    record               = (Actor*)&g_SpawnedActors[index];
-    g_Task->unk_2C       = record->unk_2C;
-    g_Task->clut_select  = 0x7B;
-    g_Task->palette_8bit = PALETTE_TYPE_CELLS_2;
-    g_Task->sheet_page   = 0x1D;
-    g_Task->sheet_row    = 0;
-    g_Task->unk_4C       = record->unk_4C;
-    g_Task->unk_2B       = 1;
-    g_Task->draw_layer   = record->draw_layer;
-    g_Task->unk_48       = 0;
+    TASK(Actor)->header.flags |= ACTOR_FLAG_SKIP_PALETTE_STAGE;
+    TASK(Actor)->active_flags = 1;
+    record                    = (Actor*)&g_SpawnedActors[index];
+    TASK(Actor)->unk_2C       = record->unk_2C;
+    TASK(Actor)->clut_select  = 0x7B;
+    TASK(Actor)->palette_8bit = PALETTE_TYPE_CELLS_2;
+    TASK(Actor)->sheet_page   = 0x1D;
+    TASK(Actor)->sheet_row    = 0;
+    TASK(Actor)->unk_4C       = record->unk_4C;
+    TASK(Actor)->unk_2B       = 1;
+    TASK(Actor)->draw_layer   = record->draw_layer;
+    TASK(Actor)->unk_48       = 0;
     {
         u8* work;
         u8* next;
@@ -31,8 +31,8 @@ MATCH void func_8019C954(void) {
         FIELD(s16, work, 0x3Eu) = counter;
         next[0x5E]              = 0;
     }
-    g_Task->tint.bytes.rgb.b = 0;
-    g_Task->tint.bytes.flags = 0;
+    TASK(Actor)->tint.bytes.rgb.b = 0;
+    TASK(Actor)->tint.bytes.flags = 0;
     Script_Select(0x4E);
-    g_Task->header.mode = 2;
+    TASK(Actor)->header.mode = 2;
 }

@@ -14,6 +14,6 @@ MATCH void func_801F3F80(void) {
     selection = D_801F4644[index];
     result    = Actor_SpawnHelper(3, 0, selection, x, y, g_Game.members[0].pos.z.fixed);
     if ((u8)result != GAME_NONE) {
-        g_Task->param.unk_0B = result;
+        TASK(Actor)->param.unk_0B = result;
     }
 }

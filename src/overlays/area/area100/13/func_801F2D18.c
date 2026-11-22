@@ -2,7 +2,7 @@
 
 MATCH void func_801F2D18(void) {
     s32    pos[3];
-    Actor* work = g_Task;
+    Actor* work = TASK(Actor);
 
     pos[0] = work->pos.x.fixed;
     pos[1] = work->pos.y.fixed;

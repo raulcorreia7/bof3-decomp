@@ -25,10 +25,10 @@ MATCH void func_801E0F0C(void) {
         work->chr.willpower >>= 1;
         work->u.turn.damage_flags.value &= mask;
         slot                               = Battle_AllocEffect(0, 1) & BYTE_MASK;
-        spad                               = g_Task;
+        spad                               = TASK(PartyMember);
         g_BattleEffects[slot].unk_07       = 1;
         g_BattleEffects[slot].unk_27       = 6;
-        spad2                              = g_Task;
+        spad2                              = TASK(PartyMember);
         g_BattleEffects[slot].target.party = spad;
         Script_Select((spad2->facing + 4) & BYTE_MASK);
         SND_SEQueueSelection(0x206);

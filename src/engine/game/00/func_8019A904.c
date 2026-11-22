@@ -6,7 +6,7 @@ MATCH void func_8019A904(void) {
     s32    pos_y;
     s32    pos_z;
 
-    work                     = g_Task;
+    work                     = TASK(Actor);
     pos_x                    = g_AreaCameraAngle.vx;
     pos_y                    = g_AreaCameraAngle.vy;
     pos_z                    = g_AreaCameraAngle.vz;

@@ -11,7 +11,7 @@ MATCH void Battle_StartPoseActor(void) {
     TASK(PartyMember)->unk_24 = 0x84;
     TASK(PartyMember)->unk_27 = D_801EB4A4[TASK(PartyMember)->unk_07] + 0xB0;
     TASK(PartyMember)->unk_28 = 0;
-    work                      = g_Task;
+    work                      = TASK(PartyMember);
     work->unk_2B              = 0;
     work->unk_2C.value        = 0;
     if (TASK(PartyMember)->unk_07 != 6) {

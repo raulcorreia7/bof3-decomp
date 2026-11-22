@@ -1047,7 +1047,7 @@ static inline void BattleAdvanceCoords(u8 (*tail_update)(void)) {
         TASK(PartyMember)->timer = 4;
         TASK(PartyMember)->unk_03 += 1;
     }
-    work = g_Task;
+    work = TASK(PartyMember);
     work->pos.x.fixed += work->unk_0C;
     work->pos.y.fixed += work->unk_10;
     tail_update();

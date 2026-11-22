@@ -17,8 +17,8 @@ MATCH bool func_801A1AE4(Actor* arg) {
         return 1;
     }
 
-    if (Actor_FindInRange(pos_x, pos_y, g_Task->voice_flags.scene_flag) == -1) {
-        return Game_GetPartySize(x, y, g_Task->voice_flags.scene_flag) != -1;
+    if (Actor_FindInRange(pos_x, pos_y, TASK(Actor)->voice_flags.scene_flag) == -1) {
+        return Game_GetPartySize(x, y, TASK(Actor)->voice_flags.scene_flag) != -1;
     }
 
     return 1;

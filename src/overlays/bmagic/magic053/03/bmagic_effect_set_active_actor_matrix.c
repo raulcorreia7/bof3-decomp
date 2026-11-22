@@ -52,7 +52,7 @@ MATCH void func_801EF174(void) {
         TASK(PartyMember)->unk_26 = 0;
         TASK(PartyMember)->unk_27 = 0x1A;
         TASK(PartyMember)->unk_28 = 1;
-        work                      = g_Task;
+        work                      = TASK(PartyMember);
         work->unk_48              = 2;
         work->scale.x             = 0x10000;
         work->scale.y             = 0x10000;
@@ -62,7 +62,7 @@ MATCH void func_801EF174(void) {
         TASK(PartyMember)->unk_5C = 0;
         TASK(PartyMember)->unk_2A = 0;
         TASK(PartyMember)->unk_29 = 4;
-        sprite                    = g_Task;
+        sprite                    = TASK(PartyMember);
         sprite->unk_2B            = 1;
         sprite->unk_2C.value      = 0;
         TASK(PartyMember)->unk_24 = 0;
@@ -81,7 +81,7 @@ MATCH void func_801EF420(void) {
     u8           i;
     u8           slot;
 
-    work = g_Task;
+    work = TASK(PartyMember);
     work->pos.x.fixed += work->unk_0C;
     work->pos.y.fixed += work->unk_10;
     work->unk_14 -= work->unk_20;
@@ -99,7 +99,7 @@ MATCH void func_801EF420(void) {
         for (i = 0; i < 8; i++) {
             slot = BMagic_AllocEffect();
             if (slot != GAME_NONE) {
-                owner                                  = g_Task;
+                owner                                  = TASK(PartyMember);
                 BMAGIC_EFFECT_SLOTS[slot].header.mode  = 0;
                 BMAGIC_EFFECT_SLOTS[slot].unk_0B       = i;
                 BMAGIC_EFFECT_SLOTS[slot].target.party = owner;
@@ -195,7 +195,7 @@ MATCH void func_801EFF24(void) {
     s32          direction;
     s32          velocity;
 
-    task       = g_Task;
+    task       = TASK(PartyMember);
     angle_cell = &D_1F800004;
     direction  = task->param.unk_0B;
     task->unk_0C += 2;

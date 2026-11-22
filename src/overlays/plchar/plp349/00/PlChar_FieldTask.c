@@ -6,7 +6,7 @@ __asm__(".include \"include/match/macro.inc\"\n");
 #endif
 
 MATCH void func_801CE404(void) {
-    D_801CF5EC[g_Task->header.step]();
+    D_801CF5EC[TASK(Actor)->header.step]();
 }
 
 MATCH void PlChar_StartTurnTeepo(void) {
@@ -26,23 +26,23 @@ MATCH void func_801CE654(void) {
 MATCH void func_801CE698(void) {
     u8 direction;
 
-    direction = g_Task->direction;
+    direction = TASK(Actor)->direction;
     if (!(direction & 1)) {
-        g_Task->direction = (direction - 1) & 7;
+        TASK(Actor)->direction = (direction - 1) & 7;
         if (!(func_801CF184() & 0xFF)) {
-            g_Task->direction = (g_Task->direction + 2) & 7;
+            TASK(Actor)->direction = (TASK(Actor)->direction + 2) & 7;
             if (!(func_801CF184() & 0xFF)) {
-                g_Task->direction = (g_Task->direction - 2) & 7;
+                TASK(Actor)->direction = (TASK(Actor)->direction - 2) & 7;
             }
         }
     }
     /* FAKE: retail reads SND_SEPlay as void(s32). */
-    ((void (*)(s32))SND_SEPlay)(g_Task->unk_2C + 0x100);
-    Script_Request((((s32)(g_Task->direction - 1) / 2) + 0x42) & 0xFF);
-    g_Task->param.unk_0B = 0;
-    g_Task->unk_06       = 0;
-    g_Task->unk_0A       = 8;
-    g_Task->unk_03       = 1;
+    ((void (*)(s32))SND_SEPlay)(TASK(Actor)->unk_2C + 0x100);
+    Script_Request((((s32)(TASK(Actor)->direction - 1) / 2) + 0x42) & 0xFF);
+    TASK(Actor)->param.unk_0B = 0;
+    TASK(Actor)->unk_06       = 0;
+    TASK(Actor)->unk_0A       = 8;
+    TASK(Actor)->unk_03       = 1;
 }
 
 #include "overlays/plchar/shared/PlChar_RunPersonalAction.h"
@@ -66,10 +66,10 @@ MATCH void func_801CEF10(void) {
 
 MATCH void func_801CEF54(void) {
     /* FAKE: retail reads SND_SEPlay as void(s32). */
-    ((void (*)(s32))SND_SEPlay)(g_Task->unk_2C + 0x100);
-    Script_Request(((g_Task->direction - 1) / 2) + 0x42);
-    g_Task->unk_0A = 8;
-    g_Task->unk_03 = 1;
+    ((void (*)(s32))SND_SEPlay)(TASK(Actor)->unk_2C + 0x100);
+    Script_Request(((TASK(Actor)->direction - 1) / 2) + 0x42);
+    TASK(Actor)->unk_0A = 8;
+    TASK(Actor)->unk_03 = 1;
 }
 
 #include "overlays/plchar/shared/PlChar_UpdateLinkedFacing.h"
@@ -100,9 +100,9 @@ MATCH void func_801CF554(void) {
 }
 
 MATCH void func_801CF564(void) {
-    D_801CF62C[g_Task->unk_2C]();
+    D_801CF62C[TASK(Actor)->unk_2C]();
 }
 
 MATCH void func_801CF5A8(void) {
-    D_801CF638[g_Task->unk_2C]();
+    D_801CF638[TASK(Actor)->unk_2C]();
 }

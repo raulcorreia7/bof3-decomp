@@ -40,13 +40,13 @@ MATCH void func_801EEEBC(void) {
     PartyMember* work;
     PartyMember* draw;
 
-    work = g_Task;
+    work = TASK(PartyMember);
     work->unk_14 += 0x100;
     work->unk_18 += 4;
     work->unk_0C += work->unk_1C;
     work->unk_09++;
     work->unk_10 += work->unk_20;
-    draw = g_Task;
+    draw = TASK(PartyMember);
     func_801EF1FC(draw->unk_0C >> 16, draw->unk_10 >> 16, (draw->unk_18 << 15) >> 16, draw->unk_14, draw->unk_60, draw->unk_58);
     if (TASK(PartyMember)->unk_09 >= 0xB) {
         TASK(PartyMember)->header.mode++;
@@ -57,12 +57,12 @@ MATCH void func_801EEF84(void) {
     PartyMember* work;
     PartyMember* draw;
 
-    work = g_Task;
+    work = TASK(PartyMember);
     work->unk_60 += 4;
     work->unk_09++;
     work->unk_58 -= 8;
     work->unk_14 += 0x20;
-    draw = g_Task;
+    draw = TASK(PartyMember);
     func_801EF1FC(draw->unk_0C >> 16, draw->unk_10 >> 16, (draw->unk_18 << 15) >> 16, draw->unk_14, draw->unk_60, draw->unk_58);
     if (TASK(PartyMember)->unk_09 >= 0x29) {
         Effect_Reset();

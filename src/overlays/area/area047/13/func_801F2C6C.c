@@ -1,14 +1,13 @@
 #include "area047_13.h"
-#include "area/spad.h"
 
 MATCH void func_801F2C6C(void) {
     s32 remaining;
 
-    remaining  = g_Task->vx - 1;
-    g_Task->vx = remaining;
+    remaining       = TASK(Actor)->vx - 1;
+    TASK(Actor)->vx = remaining;
     if (remaining == 0) {
-        g_Task->vx = 560;
+        TASK(Actor)->vx = 560;
         func_801F3298();
-        g_Task->header.mode += 1;
+        TASK(Actor)->header.mode += 1;
     }
 }

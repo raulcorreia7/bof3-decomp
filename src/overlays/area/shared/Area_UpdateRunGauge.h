@@ -9,24 +9,24 @@ MATCH void Area_UpdateRunGauge(void) {
     u8     held;
     u8     level;
 
-    timer = g_Task->unk_0A;
+    timer = TASK(Actor)->unk_0A;
 
     if (timer != 0) {
-        g_Task->unk_0A = timer - 1;
+        TASK(Actor)->unk_0A = timer - 1;
     }
 
-    if (g_Task->unk_0A == 0) {
+    if (TASK(Actor)->unk_0A == 0) {
         if (g_PadStates[0].held & g_InputMasks[WORLD_INPUT_RUN]) {
-            held = g_Task->param.unk_0B;
+            held = TASK(Actor)->param.unk_0B;
             if (held < 0x40U) {
-                g_Task->param.unk_0B = held + 1;
+                TASK(Actor)->param.unk_0B = held + 1;
             }
 
-            if (g_Task->param.unk_0B == 0x40) {
-                g_Task->unk_0A = 0x1E;
+            if (TASK(Actor)->param.unk_0B == 0x40) {
+                TASK(Actor)->unk_0A = 0x1E;
             }
         } else {
-            level = g_Task->param.unk_0B;
+            level = TASK(Actor)->param.unk_0B;
             if (level != 0) {
                 if (level >= 0x31U) {
                     step = 3;
@@ -37,18 +37,18 @@ MATCH void Area_UpdateRunGauge(void) {
                     }
                 }
 
-                if (g_Task->header.step != 0) {
-                    g_Task->param.unk_0B -= step >> 1;
+                if (TASK(Actor)->header.step != 0) {
+                    TASK(Actor)->param.unk_0B -= step >> 1;
                     if (g_FrameCount & 1) {
-                        g_Task->param.unk_0B -= step & 1;
+                        TASK(Actor)->param.unk_0B -= step & 1;
                     }
                 } else {
-                    g_Task->param.unk_0B -= step;
+                    TASK(Actor)->param.unk_0B -= step;
                 }
             }
         }
 
-        w       = g_Task;
+        w       = TASK(Actor);
         clamped = (s8)w->param.unk_0B;
         if (clamped >= 0) {
             stored = 0x40;

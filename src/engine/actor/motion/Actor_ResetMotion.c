@@ -6,13 +6,13 @@ MATCH void Actor_ResetMotion(void) {
     Actor* motion;
     Actor* animation;
 
-    g_Task->unk_04                 = 0;
-    g_Task->unk_03                 = 0;
-    g_Task->active_flags           = 0;
-    step                           = g_Task;
+    TASK(Actor)->unk_04            = 0;
+    TASK(Actor)->unk_03            = 0;
+    TASK(Actor)->active_flags      = 0;
+    step                           = TASK(Actor);
     step->unk_0A                   = 0;
     step->timer                    = 0;
-    motion                         = g_Task;
+    motion                         = TASK(Actor);
     animation                      = g_CurrentActor;
     motion->scale.y                = 0x10000;
     motion->scale.x                = 0x10000;

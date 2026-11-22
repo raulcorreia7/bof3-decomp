@@ -17,10 +17,10 @@ MATCH void func_801EEC5C(void) {
 
     Battle_CenterCamera();
     offset                                  = (Battle_AllocEffect(1, 25) & BYTE_MASK) * BATTLE_EFFECT_STRIDE;
-    FIELD(PartyMember*, D_801EC3A4, offset) = g_Task;
+    FIELD(PartyMember*, D_801EC3A4, offset) = TASK(PartyMember);
     FIELD(u8, D_801EC338, offset)           = ((PartyMember*)D_8014637C)->facing;
     scroll_x                                = g_AreaScrollTargetX;
-    work                                    = g_Task;
+    work                                    = TASK(PartyMember);
     FIELD(s32, D_801EC364, offset)          = scroll_x;
     FIELD(s32, D_801EC368, offset)          = g_AreaScrollTargetY;
     FIELD(s32, D_801EC36C, offset)          = work->pos.z.fixed + 0x04000000;

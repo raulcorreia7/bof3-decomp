@@ -9,7 +9,7 @@ MATCH void func_801F3F00(void) {
         actor               = &g_SpawnedActors[slot];
         actor->header.flags = 1;
         actor->type         = 0x2D;
-        actor->pos.x.fixed  = g_Task->pos.x.fixed;
-        actor->pos.y.fixed  = g_Task->pos.y.fixed;
+        actor->pos.x.fixed  = TASK(Actor)->pos.x.fixed;
+        actor->pos.y.fixed  = TASK(Actor)->pos.y.fixed;
     }
 }

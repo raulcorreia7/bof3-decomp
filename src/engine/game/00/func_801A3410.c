@@ -7,10 +7,10 @@ MATCH void func_801A3410(void* work_index) {
     u8     index;
 
     index = Script_FindSlot(FIELD(u8, g_Task, 0x18));
-    work  = g_Task;
+    work  = TASK(Actor);
     if (work->timer == 0) {
         work->active_flags |= 0x20;
-        work              = g_Task;
+        work              = TASK(Actor);
         work->pos.x.fixed = g_Actors[index].pos.x.fixed;
         work->pos.y.fixed = g_Actors[index].pos.y.fixed;
         work->pos.z.fixed = FIELD(s32, &D_801468C4, index * ACTOR_SIZE);
@@ -20,12 +20,12 @@ MATCH void func_801A3410(void* work_index) {
             work->unk_6C = g_Actors[index].unk_6C;
         }
         func_801AC1DC(delta, FIELD(u8, g_Task, 0x1Cu));
-        work = g_Task;
+        work = TASK(Actor);
         work->pos.x.fixed += delta[0];
         work->pos.y.fixed += delta[1];
         COORD_INT(work->pos.z) += delta[2];
     }
     func_801A1384(work_index);
-    tail = g_Task;
+    tail = TASK(Actor);
     tail->direction &= 7;
 }

@@ -5,15 +5,15 @@ MATCH void func_8019B150(void) {
     s32    flag;
 
     flag = 1;
-    Area_SceneSelectRecord(g_Task->unk_2C);
+    Area_SceneSelectRecord(TASK(Actor)->unk_2C);
 
-    g_Task->unk_48 = flag;
+    TASK(Actor)->unk_48 = flag;
 
-    g_Task->active_flags = 0;
+    TASK(Actor)->active_flags = 0;
 
-    work         = g_Task;
+    work         = TASK(Actor);
     work->mirror = (work->unk_06 >> 7);
 
-    Script_Select((g_Task->unk_06 & 0x7F));
-    g_Task->header.mode = flag;
+    Script_Select((TASK(Actor)->unk_06 & 0x7F));
+    TASK(Actor)->header.mode = flag;
 }

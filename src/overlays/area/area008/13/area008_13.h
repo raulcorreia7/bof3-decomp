@@ -1,7 +1,6 @@
 #ifndef OVERLAY_WORLD00_AREA008_13_H
 #define OVERLAY_WORLD00_AREA008_13_H
 #include "overlays/area/worlds/world00.h"
-#include "area/spad.h"
 #include <rand.h>
 #include <stdio.h>
 
@@ -69,11 +68,11 @@ void func_801F461C(void);
  * else mode 5 when the second byte is 3. */
 static inline void FieldSelectDrawMode(void) {
     if ((g_ScriptVars[3] & 0x80u) != 0u) {
-        g_Task->header.mode = 9;
+        TASK(Actor)->header.mode = 9;
         return;
     }
     if (g_ScriptVars[2] == 3) {
-        g_Task->header.mode = 5;
+        TASK(Actor)->header.mode = 5;
     }
 }
 
@@ -85,12 +84,12 @@ static inline void FieldActivateActor(void) {
     s32    index;
 
     if ((g_ScriptVars[3] & 0x80u) != 0u) {
-        g_Task->header.mode = 0x0E;
+        TASK(Actor)->header.mode = 0x0E;
         return;
     }
-    s = &g_Actors[g_Task->param.unk_0B];
+    s = &g_Actors[TASK(Actor)->param.unk_0B];
     s->header.flags |= 0x40;
-    s               = g_Task;
+    s               = TASK(Actor);
     index           = s->param.unk_0B;
     g_ScriptVars[2] = 3;
     e               = &g_Actors[index];

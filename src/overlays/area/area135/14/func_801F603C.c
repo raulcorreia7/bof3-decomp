@@ -1,5 +1,6 @@
 #include "area135_14.h"
 
+/* Actor_IsInRange without the height test, on the record the D_80147C29..90 globals belong to and the task's reach. */
 MATCH s32 func_801F603C(s32 x, s32 y) {
     u8  timer;
     s32 step_x;
@@ -13,7 +14,7 @@ MATCH s32 func_801F603C(s32 x, s32 y) {
     step_y = D_80147C30 * timer;
     dx     = abs(x - (D_80147C54 + step_x));
     dy     = y - (D_80147C58 + step_y);
-    range  = (g_Task->voice_flags.scene_flag + D_80147C90 + 2) << 15;
+    range  = (TASK(Actor)->voice_flags.scene_flag + D_80147C90 + 2) << 15;
     if (dx < range) {
         if (abs(dy) < range) {
             return 1;

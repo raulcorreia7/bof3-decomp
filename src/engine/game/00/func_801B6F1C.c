@@ -6,9 +6,9 @@ MATCH void func_801B6F1C(void) {
     u8  flags;
     u32 saved;
 
-    count = g_Task->timer;
+    count = TASK(Actor)->timer;
     if (count != 0) {
-        g_Task->timer = (count - 1);
+        TASK(Actor)->timer = (count - 1);
         Actor_MovementUpdate();
         return;
     }
@@ -17,14 +17,14 @@ MATCH void func_801B6F1C(void) {
         func_801B6BC8();
         return;
     }
-    saved                        = g_Task->vz;
+    saved                        = TASK(Actor)->vz;
     g_Game.current->u.field.wait = (wait - 1);
     Area_RunWalk();
     flags = g_Game.current->u.field.flags;
     if (flags & 0x80) {
-        g_Task->vz = saved;
+        TASK(Actor)->vz = saved;
     }
-    count         = g_Task->timer;
-    g_Task->timer = (count - 1);
+    count              = TASK(Actor)->timer;
+    TASK(Actor)->timer = (count - 1);
     Actor_MovementUpdate();
 }

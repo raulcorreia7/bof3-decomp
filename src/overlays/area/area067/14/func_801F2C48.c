@@ -7,7 +7,7 @@ MATCH void func_801F2C48(void) {
     DVECTOR         screen;
     u8              scratch[32];
 
-    quad       = (AreaRippleQuad*)&g_Task->vx;
+    quad       = (AreaRippleQuad*)&TASK(Actor)->vx;
     D_801F53A0 = TO_COORD(28);
     D_801F53A4 = TO_COORD(24);
     Camera_SetMatrix(scratch);
@@ -31,7 +31,7 @@ MATCH void func_801F2C48(void) {
     quad->y      = (s16)quad->y >> 1;
 
     MESSAGE_START_WAIT(MSG_AREA067_020);
-    g_Task->timer = 50;
-    g_Task->header.mode++;
+    TASK(Actor)->timer = 50;
+    TASK(Actor)->header.mode++;
     SND_SEPlay(EMI_SE_ID(SND_BANK_AREA, 0));
 }

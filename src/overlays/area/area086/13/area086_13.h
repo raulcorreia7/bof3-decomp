@@ -8,6 +8,17 @@
 
 extern Callback D_801F3658[];
 
+/* A span of map cells: the first column and row, then the column and row it stops before. */
+typedef struct AreaCellSpan {
+    u8 x0;
+    u8 y0;
+    u8 x_end;
+    u8 y_end;
+} AreaCellSpan;
+
+/* The cell span of each gate position, indexed by the task's cell x. */
+extern AreaCellSpan D_801F364C[];
+
 void       func_801F2DE8(void);
 void       func_801F3070(void);
 extern u8  D_801F3664[];

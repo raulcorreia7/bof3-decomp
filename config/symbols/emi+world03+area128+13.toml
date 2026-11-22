@@ -1,2 +1,4 @@
 ["emi/world03/area128/13"]
 g_AreaModuleId = { addr = 0x801F2C00, source = "Module id of the area: the first payload word of its overlay, 52 + the area number." }
+D_801F3328 = { addr = 0x801F3328, alias = true, source = "The glow reach of each ring point func_801F2C04 draws; inside D_801F32E0." }
+D_801F334C = { addr = 0x801F334C, alias = true, source = "The first ring point of each glow quad func_801F2C04 draws; inside D_801F32E0." }

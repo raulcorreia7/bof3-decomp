@@ -5,6 +5,6 @@ MATCH void func_801B870C(void) {
      * a u8 flag (also written by func_801C5474). Promotion to a named field needs
      * a proven struct owner/layout from callers, strides, and field accesses. */
     g_Game.current->u.field.mode.unsigned_value = 5;
-    D_801CD36C[g_Task->unk_03]();
+    D_801CD36C[TASK(Actor)->unk_03]();
     Script_AnimStepLoop();
 }

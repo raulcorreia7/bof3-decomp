@@ -34,7 +34,7 @@ MATCH void func_801EED48(void) {
     TASK(PartyMember)->timer        = 0;
     TASK(PartyMember)->header.mode += 1;
     slot                               = Battle_AllocEffect(1, 98);
-    owner                              = g_Task;
+    owner                              = TASK(PartyMember);
     g_BattleEffects[slot].header.mode  = 0;
     g_BattleEffects[slot].arg.unk_09   = 1;
     g_BattleEffects[slot].target.party = owner;
@@ -108,7 +108,7 @@ MATCH void func_801EF3F4(void) {
     TASK(PartyMember)->unk_09 = timer;
     if (timer == 0) {
         TASK(PartyMember)->unk_04 = g_BattleEffectBattler->unk_04;
-        work                      = g_Task;
+        work                      = TASK(PartyMember);
         work->pos.x.fixed         = g_BattleEffectBattler->pos.x.fixed;
         work->pos.y.fixed         = g_BattleEffectBattler->pos.y.fixed;
         work->pos.z.fixed         = g_BattleEffectBattler->pos.z.fixed + 0x00C00000;

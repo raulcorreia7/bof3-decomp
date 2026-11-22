@@ -5,7 +5,7 @@ MATCH void Area_SlideHudBannerLeft(void) {
     Actor* scratch;
     u8     mode;
 
-    scratch = g_Task;
+    scratch = TASK(Actor);
     scratch->screen_x -= 0x10;
     if ((s16)scratch->screen_x < -0x2F) {
         scratch->header.step = 0;
@@ -13,9 +13,9 @@ MATCH void Area_SlideHudBannerLeft(void) {
 
     if (D_801454F2 != 2) {
         mode                 = 1;
-        scratch              = g_Task;
+        scratch              = TASK(Actor);
         scratch->header.step = mode;
     }
 
-    Area_DrawHud(16, (g_Task)->screen_x);
+    Area_DrawHud(16, TASK(Actor)->screen_x);
 }

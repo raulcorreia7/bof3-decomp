@@ -7,10 +7,10 @@ MATCH void Actor_ZoomOut(void) {
 
     Actor_SetScreenOrigin();
 
-    scratch = g_Task;
+    scratch = TASK(Actor);
     scratch->timer -= 1;
 
-    check = g_Task;
+    check = TASK(Actor);
     scratch->scale.x -= 0x2000;
 
     if (check->timer == 0) {
@@ -18,8 +18,8 @@ MATCH void Actor_ZoomOut(void) {
             Actor_Clear();
             return;
         }
-        check->unk_48       = 0;
-        g_Task->header.mode = 1;
+        check->unk_48            = 0;
+        TASK(Actor)->header.mode = 1;
         return;
     }
 

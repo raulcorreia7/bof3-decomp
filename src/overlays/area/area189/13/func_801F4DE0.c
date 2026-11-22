@@ -15,7 +15,7 @@ NON_MATCHING void func_801F4DE0(void) {
     SetGeomOffset(0xA0, 0xB9);
     SetGeomScreen(0x12C);
     g_AreaCameraAngle.vx     = -0x2EE;
-    g_Task->direction        = LOBU(D_8014504B);
+    TASK(Actor)->direction   = LOBU(D_8014504B);
     D_801492DC               = ((0x12 - LOBU(D_8014504B)) & 0xF) << 8;
     work                     = g_Task;
     g_AreaScrollTargetX      = work->pos.x.fixed;
@@ -23,11 +23,11 @@ NON_MATCHING void func_801F4DE0(void) {
     g_AreaScrollTargetY      = work->pos.y.fixed;
     g_AreaCameraRefreshCount = 4;
     match                    = 0;
-    g_Task->pos.z.fixed      = func_801F4A04(work->pos.x.fixed, work->pos.y.fixed) << 16;
+    TASK(Actor)->pos.z.fixed = func_801F4A04(work->pos.x.fixed, work->pos.y.fixed) << 16;
     Actor_ClearVelocity_801F5F20();
-    g_Task->active_flags  = 0;
-    g_Task->script_record = 0;
-    g_EncounterSteps      = 0;
+    TASK(Actor)->active_flags  = 0;
+    TASK(Actor)->script_record = 0;
+    g_EncounterSteps           = 0;
 
     value = (rand() & 0x1F) + 0x96;
     count = Party_CountOrder(PARTY_ORDER_FIELD) & BYTE_MASK;
@@ -70,7 +70,7 @@ NON_MATCHING void func_801F4DE0(void) {
     SYS_ClearFlag(flags, 0x8C);
     SYS_ClearFlag(flags, 0x8D);
     SYS_ClearFlag(flags, 0x8E);
-    g_Task->header.step += 1;
+    TASK(Actor)->header.step += 1;
 }
 #else
 INCLUDE_ASM(func_801F4DE0);

@@ -11,21 +11,21 @@ MATCH void func_801F38DC(void) {
     u16       angle;
 
     Camera_SetMatrix(camera);
-    angle = (u16)g_Task->gravity;
-    org   = *(VECTOR*)&g_Task->vx;
+    angle = (u16)TASK(Actor)->gravity;
+    org   = *(VECTOR*)&TASK(Actor)->vx;
     pt[0] = org.vx + (rcos(angle) << 5);
     pt[1] = org.vy + (rsin(angle) << 5);
     pt[2] = org.vz - TASK(AreaRingDepthView)->depth;
-    if (pt[2] < g_Task->vz) {
-        pt[2] = g_Task->vz;
+    if (pt[2] < TASK(Actor)->vz) {
+        pt[2] = TASK(Actor)->vz;
     }
     Camera_ProjectPoint(pt, &a);
     pt[2] = org.vz;
-    if (g_Task->unk_1C < pt[2]) {
-        pt[2] = g_Task->unk_1C;
+    if (TASK(Actor)->unk_1C < pt[2]) {
+        pt[2] = TASK(Actor)->unk_1C;
     }
     Camera_ProjectPoint(pt, &b);
-    while (org.vz < g_Task->unk_1C + TO_COORD(256)) {
+    while (org.vz < TASK(Actor)->unk_1C + TO_COORD(256)) {
         prim = (POLY_FT4*)g_GfxPrimCursor;
         SetPolyFT4(prim);
         SetSemiTrans(prim, 0);
@@ -35,13 +35,13 @@ MATCH void func_801F38DC(void) {
         pt[0] = org.vx + (rcos(angle) << 5);
         pt[1] = org.vy + (rsin(angle) << 5);
         pt[2] = org.vz - TASK(AreaRingDepthView)->depth;
-        if (pt[2] < g_Task->vz) {
-            pt[2] = g_Task->vz;
+        if (pt[2] < TASK(Actor)->vz) {
+            pt[2] = TASK(Actor)->vz;
         }
         Camera_ProjectPoint(pt, &a);
         pt[2] = org.vz;
-        if (g_Task->unk_1C < pt[2]) {
-            pt[2] = g_Task->unk_1C;
+        if (TASK(Actor)->unk_1C < pt[2]) {
+            pt[2] = TASK(Actor)->unk_1C;
         }
         Camera_ProjectPoint(pt, &b);
         prim->x2 = a.vx;

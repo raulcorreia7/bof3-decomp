@@ -27,19 +27,19 @@ MATCH void func_801F518C(void) {
     }
     switch (func_801F5F3C() & BYTE_MASK) {
         case 0:
-            g_Task->timer = 0;
+            TASK(Actor)->timer = 0;
             func_801F5D20();
             break;
         case 1:
             g_Game.current->u.field.mode.unsigned_value = 1;
             angle                                       = &D_801492DC;
-            *angle                                      = (*angle + (s8)g_Task->param.unk_0B) & 0xFFF;
-            g_Task->header.step                         = 4;
+            *angle                                      = (*angle + (s8)TASK(Actor)->param.unk_0B) & 0xFFF;
+            TASK(Actor)->header.step                    = 4;
             break;
         case 2:
             func_801F54B0();
-            x = g_Task->pos.x.fixed + g_Task->vx * g_Task->timer;
-            y = g_Task->pos.y.fixed + g_Task->vy * g_Task->timer;
+            x = TASK(Actor)->pos.x.fixed + TASK(Actor)->vx * TASK(Actor)->timer;
+            y = TASK(Actor)->pos.y.fixed + TASK(Actor)->vy * TASK(Actor)->timer;
             if ((u32)((x >> 24) - 0x10) < 5 && (y >> 24) >= 0x18) {
                 UI_MessageStartArea(MSG_AREA189_ASK_RETURN_BASE_CAMP);
                 *state = GAME_REQUEST_MESSAGE;
@@ -50,10 +50,10 @@ MATCH void func_801F518C(void) {
                 func_801F5D20();
                 return;
             }
-            g_Task->timer--;
+            TASK(Actor)->timer--;
             func_801F559C();
             g_Game.current->u.field.mode.unsigned_value = 1;
-            g_Task->header.step                         = 3;
+            TASK(Actor)->header.step                    = 3;
             break;
     }
 }

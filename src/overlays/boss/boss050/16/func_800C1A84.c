@@ -3,7 +3,7 @@
 MATCH void func_800C1A84(void) {
     PartyMember* saved;
 
-    saved = (PartyMember*)g_Task;
+    saved = TASK(PartyMember);
     TASK_SET((D_801EC2E0->target.bytes));
     if (Script_AnimStepOnce() & BYTE_MASK) {
         saved->header.mode++;

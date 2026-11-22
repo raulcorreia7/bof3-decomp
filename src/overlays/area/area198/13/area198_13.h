@@ -5,7 +5,6 @@
  * and its data. Only this image includes the file. */
 
 #include "overlays/area/worlds/world04.h"
-#include "area/spad.h"
 
 /* The scenario state byte the update gates on. */
 /* The global state byte this entry tests. */
@@ -40,7 +39,7 @@ typedef struct SpriteOffset {
 
 ASSERT_SIZE(SpriteOffset, 8);
 
-/* One sprite offset per actor type, indexed by g_Task->unk_06. */
+/* One sprite offset per actor type, indexed by TASK(Actor)->unk_06. */
 extern SpriteOffset D_801F43D4[];
 
 /* This image's copy of the sprite coordinate rounding (link-only name: the slus copy shares it). */

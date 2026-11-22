@@ -15,23 +15,23 @@ MATCH void func_801F6EB4(void) {
     u32  cell3;
     s16* scratch;
 
-    g_Task->unk_03 = Actor_FindFreeField();
-    if (g_Task->unk_03 == GAME_NONE) {
+    TASK(Actor)->unk_03 = Actor_FindFreeField();
+    if (TASK(Actor)->unk_03 == GAME_NONE) {
         return;
     }
 
-    g_Actors[g_Task->unk_03].header.flags = 1;
-    g_Task->unk_04                        = Actor_FindFreeField();
-    if (g_Task->unk_04 == GAME_NONE) {
-        g_Actors[g_Task->unk_03].header.flags = 0;
+    g_Actors[TASK(Actor)->unk_03].header.flags = 1;
+    TASK(Actor)->unk_04                        = Actor_FindFreeField();
+    if (TASK(Actor)->unk_04 == GAME_NONE) {
+        g_Actors[TASK(Actor)->unk_03].header.flags = 0;
         return;
     }
 
-    scratch                               = (s16*)g_ScratchPad.cells.bytes;
-    data                                  = (u8*)D_801FCF30;
-    g_Actors[g_Task->unk_04].header.flags = 1;
-    work                                  = (u8*)g_Task;
-    *scratch                              = work[3];
+    scratch                                    = (s16*)g_ScratchPad.cells.bytes;
+    data                                       = (u8*)D_801FCF30;
+    g_Actors[TASK(Actor)->unk_04].header.flags = 1;
+    work                                       = TASK(u8);
+    *scratch                                   = work[3];
     Actor_SpawnPartyFromRecord(data);
     Script_Begin(0x61, 0xC);
     *scratch = work[4];
@@ -44,28 +44,28 @@ MATCH void func_801F6EB4(void) {
     g_Actors[work[4]].pos.x.fixed -= ONE;
     g_Actors[work[4]].pos.y.fixed += ONE;
     g_Actors[work[3]].header.flags |= ACTOR_FLAG_SEMI_TRANSPARENT;
-    g_Actors[g_Task->unk_04].header.flags |= ACTOR_FLAG_SEMI_TRANSPARENT;
-    cell                           = (u8*)g_Task;
+    g_Actors[TASK(Actor)->unk_04].header.flags |= ACTOR_FLAG_SEMI_TRANSPARENT;
+    cell                           = TASK(u8);
     cell4                          = cell[4];
     cell3                          = cell[3];
     D_801468E4[cell4 * ACTOR_SIZE] = 0;
     D_801468E4[cell3 * ACTOR_SIZE] = 0;
     GFX_PaletteAllocFade(&g_Actors[work[3]], 15, 0, 0, 1);
     GFX_PaletteAllocFade(&g_Actors[work[4]], 0, 0, 15, 1);
-    g_Task->timer       = 4;
-    g_Task->header.mode = 1;
+    TASK(Actor)->timer       = 4;
+    TASK(Actor)->header.mode = 1;
 }
 
 MATCH void func_801F7260(void) {
-    if (g_Task->timer != 0) {
+    if (TASK(Actor)->timer != 0) {
         g_Game.members->header.flags |= 0x40;
-        g_Task->timer -= 1;
+        TASK(Actor)->timer -= 1;
         return;
     }
     g_Game.members->header.flags &= ~PARTY_MEMBER_FLAG_HANDLER_BUSY;
-    g_Actors[g_Task->unk_03].header.flags = 0;
-    g_Actors[g_Task->unk_04].header.flags = 0;
-    g_Task->header.mode                   = 2;
+    g_Actors[TASK(Actor)->unk_03].header.flags = 0;
+    g_Actors[TASK(Actor)->unk_04].header.flags = 0;
+    TASK(Actor)->header.mode                   = 2;
 }
 
 #include "shared/Actor_FreePaletteFades.h"
@@ -74,19 +74,19 @@ MATCH void func_801F73BC(void) {
     RECT     rect;
     DR_MOVE* prim;
 
-    if (g_Task->timer == 0) {
+    if (TASK(Actor)->timer == 0) {
         prim = (DR_MOVE*)g_GfxPrimCursor;
-        setRECT(&rect, *(&D_801FCF40 + g_Task->header.mode * 2) / 4 + 0x2C0, *(&D_801FCF42 + g_Task->header.mode * 2) + 0x100, 0x10, 0x28);
+        setRECT(&rect, *(&D_801FCF40 + TASK(Actor)->header.mode * 2) / 4 + 0x2C0, *(&D_801FCF42 + TASK(Actor)->header.mode * 2) + 0x100, 0x10, 0x28);
         SetDrawMove(prim, &rect, D_801FCF40 / 4 + 0x2C0, D_801FCF42 + 0x100);
-        g_Task->header.mode++;
-        g_Task->draw_layer = 0;
-        g_Task->timer      = g_Task->header.mode;
-        GFX_AddPrim(g_Task->draw_layer, sizeof(DR_MOVE));
-        if (g_Task->header.mode == 4) {
+        TASK(Actor)->header.mode++;
+        TASK(Actor)->draw_layer = 0;
+        TASK(Actor)->timer      = TASK(Actor)->header.mode;
+        GFX_AddPrim(TASK(Actor)->draw_layer, sizeof(DR_MOVE));
+        if (TASK(Actor)->header.mode == 4) {
             Actor_Clear();
         }
     } else {
-        g_Task->timer--;
+        TASK(Actor)->timer--;
     }
 }
 
@@ -113,9 +113,9 @@ MATCH void func_801F7A9C(void) {
 MATCH void func_801F7AE0(void) {
     u8* work;
 
-    work    = (u8*)g_Task;
+    work    = TASK(u8);
     work[9] = 0xF;
-    work    = (u8*)g_Task;
+    work    = TASK(u8);
     work[1]++;
 }
 
@@ -124,16 +124,16 @@ MATCH void func_801F7B10(void) {
     s32*   ptr;
     u8     value;
 
-    actor = g_Task;
+    actor = TASK(Actor);
     ptr   = &actor->vx;
     func_801F7FFC((Scena03Quad*)ptr);
     func_801F8170(ptr);
     actor->tint.halves.unk_5E += 1;
-    value         = g_Task->timer - 1;
-    g_Task->timer = value;
+    value              = TASK(Actor)->timer - 1;
+    TASK(Actor)->timer = value;
     if (!(value & BYTE_MASK)) {
-        g_Task->timer = 8;
-        g_Task->header.mode += 1;
+        TASK(Actor)->timer = 8;
+        TASK(Actor)->header.mode += 1;
     }
 }
 
@@ -142,16 +142,16 @@ MATCH void func_801F7BB0(void) {
     s32*   ptr;
     u8     value;
 
-    actor = g_Task;
+    actor = TASK(Actor);
     ptr   = &actor->vx;
     func_801F7FFC((Scena03Quad*)ptr);
     func_801F8170(ptr);
     actor->script_pc += 4;
-    value         = g_Task->timer - 1;
-    g_Task->timer = value;
+    value              = TASK(Actor)->timer - 1;
+    TASK(Actor)->timer = value;
     if (!(value & BYTE_MASK)) {
-        g_Task->timer = 8;
-        g_Task->header.mode += 1;
+        TASK(Actor)->timer = 8;
+        TASK(Actor)->header.mode += 1;
     }
 }
 
@@ -159,14 +159,14 @@ MATCH void func_801F7C50(void) {
     s32* ptr;
     u8   value;
 
-    ptr = &g_Task->vx;
+    ptr = &TASK(Actor)->vx;
     func_801F7FFC((Scena03Quad*)ptr);
     func_801F8170(ptr);
-    value         = g_Task->timer - 1;
-    g_Task->timer = value;
+    value              = TASK(Actor)->timer - 1;
+    TASK(Actor)->timer = value;
     if (!(value & BYTE_MASK)) {
-        g_Task->timer = 128;
-        g_Task->header.mode += 1;
+        TASK(Actor)->timer = 128;
+        TASK(Actor)->header.mode += 1;
     }
 }
 
@@ -175,16 +175,16 @@ MATCH void func_801F7CE0(void) {
     s32*   pos;
     u8     remaining;
 
-    work = g_Task;
+    work = TASK(Actor);
     pos  = &work->vx;
     func_801F7FFC((Scena03Quad*)pos);
     func_801F8170(pos);
     work->frame_cells -= 8;
     work->tint.halves.unk_5C -= 0x40;
-    remaining     = g_Task->timer - 1;
-    g_Task->timer = remaining;
+    remaining          = TASK(Actor)->timer - 1;
+    TASK(Actor)->timer = remaining;
     if (!(remaining & BYTE_MASK)) {
-        g_Task->header.mode += 1;
+        TASK(Actor)->header.mode += 1;
     }
 }
 
@@ -193,14 +193,14 @@ MATCH void func_801F7D80(void) {
     s32*   pos;
     s16    step;
 
-    work = g_Task;
+    work = TASK(Actor);
     pos  = &work->vx;
     func_801F7FFC((Scena03Quad*)pos);
     func_801F8170(pos);
     step            = work->script_pc - 8;
     work->script_pc = step;
     if (step < 0) {
-        g_Task->unk_06 = 1;
+        TASK(Actor)->unk_06 = 1;
         Actor_Clear();
     }
 }
@@ -225,7 +225,7 @@ MATCH void func_801F7E6C(void) {
     u8             i;
     u8             slot;
 
-    effects = (SpawnedActor**)&g_Task->vx;
+    effects = (SpawnedActor**)&TASK(Actor)->vx;
     for (i = 0; i < 5; i++) {
         slot = Actor_FindFreeSpawned();
         if (slot != GAME_NONE) {
@@ -234,7 +234,7 @@ MATCH void func_801F7E6C(void) {
             spawned->header.flags      = 1;
             spawned->unk_06            = 0;
             spawned->type              = 0x21;
-            actor                      = g_Task;
+            actor                      = TASK(Actor);
             spawned->scene_step        = actor->pos.x.fixed;
             spawned->selection         = actor->pos.y.fixed;
             spawned->unk_14            = actor->pos.z.fixed;
@@ -245,14 +245,14 @@ MATCH void func_801F7E6C(void) {
             record->tint.halves.unk_5E = 0;
         }
     }
-    g_Task->header.mode += 1;
+    TASK(Actor)->header.mode += 1;
 }
 
 MATCH void func_801F7F84(void) {
     SpawnedActor** effects; /* the five effect slots spawned at +0x0C */
     u8             i;
 
-    effects = (SpawnedActor**)&g_Task->vx;
+    effects = (SpawnedActor**)&TASK(Actor)->vx;
     for (i = 0; i < 5; i++) {
         if (effects[i]->unk_06 == 0) {
             return;
@@ -339,8 +339,8 @@ MATCH void func_801F82E4(void) {
 }
 
 MATCH void func_801F8328(void) {
-    g_Task->timer = 96;
-    g_Task->header.mode++;
+    TASK(Actor)->timer = 96;
+    TASK(Actor)->header.mode++;
     SND_SEPlay(EMI_SE_ID(SND_BANK_AREA, 4));
 }
 
@@ -349,7 +349,7 @@ MATCH void func_801F8370(void) {
     s32           actor_index;
     u8            remaining;
 
-    if (g_Task->timer & 0x4) {
+    if (TASK(Actor)->timer & 0x4) {
         actor_index = func_8019601C() & BYTE_MASK;
         if (actor_index != 0xFF) {
             actor               = &g_SpawnedActors[actor_index];
@@ -357,10 +357,10 @@ MATCH void func_801F8370(void) {
             actor->type         = 0x24;
         }
     }
-    remaining     = g_Task->timer - 1;
-    g_Task->timer = remaining;
+    remaining          = TASK(Actor)->timer - 1;
+    TASK(Actor)->timer = remaining;
     if (!(remaining & BYTE_MASK)) {
-        g_Task->header.mode += 1;
+        TASK(Actor)->header.mode += 1;
     }
 }
 
@@ -375,7 +375,7 @@ MATCH void func_801F844C(void) {
 MATCH void func_801F8490(void) {
     Scena03Work* work;
 
-    work                   = SCN_LINE;
+    work                   = TASK(Scena03Work);
     work->line.radius      = 0x600;
     work->line.start_scale = 0x100;
     work->line.end_scale   = 0x100;
@@ -390,14 +390,14 @@ MATCH void func_801F8490(void) {
     if (rand() & 1) {
         work->line.color.b = 0;
     }
-    g_Task->header.mode++;
+    TASK(Actor)->header.mode++;
 }
 
 MATCH void func_801F853C(void) {
     Scena03Work* work;
     s16          value;
 
-    work = SCN_LINE;
+    work = TASK(Scena03Work);
     func_801F88FC(&work->line);
     value                  = work->line.start_scale - 0x10;
     work->line.start_scale = value;
@@ -409,7 +409,7 @@ MATCH void func_801F853C(void) {
     }
     if (work->line.end_scale < 0) {
         work->line.start_scale = 0;
-        g_Task->header.mode += 1;
+        TASK(Actor)->header.mode += 1;
     }
 }
 
@@ -424,36 +424,36 @@ MATCH void func_801F85FC(void) {
 #include "shared/Actor_TrackFocus.h"
 
 MATCH void func_801F8710(void) {
-    GFX_DrawShadedDisc((s16)g_Task->screen_x, (s16)g_Task->screen_y, g_Task->timer, 0x80, 0);
-    g_Task->timer += 15;
-    if (g_Task->timer >= 61) {
-        g_Task->timer = 255;
-        g_Task->header.mode += 1;
+    GFX_DrawShadedDisc((s16)TASK(Actor)->screen_x, (s16)TASK(Actor)->screen_y, TASK(Actor)->timer, 0x80, 0);
+    TASK(Actor)->timer += 15;
+    if (TASK(Actor)->timer >= 61) {
+        TASK(Actor)->timer = 255;
+        TASK(Actor)->header.mode += 1;
     }
 }
 
 MATCH void func_801F87A4(void) {
     u8 count;
 
-    GFX_DrawShadedDisc((s16)g_Task->screen_x, (s16)g_Task->screen_y, (g_Task->timer & 0x1) | 0x3C, 0x80, 0);
-    if (g_Task->timer == 215) {
+    GFX_DrawShadedDisc((s16)TASK(Actor)->screen_x, (s16)TASK(Actor)->screen_y, (TASK(Actor)->timer & 0x1) | 0x3C, 0x80, 0);
+    if (TASK(Actor)->timer == 215) {
         SND_SEPlay(EMI_SE_ID(SND_BANK_AREA, 8));
     }
-    count         = g_Task->timer - 1;
-    g_Task->timer = count;
+    count              = TASK(Actor)->timer - 1;
+    TASK(Actor)->timer = count;
     if (count == 0) {
-        g_Task->timer = 60;
-        g_Task->header.mode += 1;
+        TASK(Actor)->timer = 60;
+        TASK(Actor)->header.mode += 1;
     }
 }
 
 /* Shrinks the disc effect. */
 /* func_801F885C */
 MATCH void Area_ShrinkDisc(void) {
-    GFX_DrawShadedDisc((s16)g_Task->screen_x, (s16)g_Task->screen_y, g_Task->timer, 0x80, 0);
-    g_Task->timer -= 1;
-    if ((s8)g_Task->timer < 0) {
-        g_Task->header.mode += 1;
+    GFX_DrawShadedDisc((s16)TASK(Actor)->screen_x, (s16)TASK(Actor)->screen_y, TASK(Actor)->timer, 0x80, 0);
+    TASK(Actor)->timer -= 1;
+    if ((s8)TASK(Actor)->timer < 0) {
+        TASK(Actor)->header.mode += 1;
     }
 }
 

@@ -5,8 +5,8 @@ MATCH void func_801F2DA0(void) {
     AreaRippleQuad* quad;
     u8              count;
 
-    quad = (AreaRippleQuad*)&g_Task->vx;
-    if (g_Task->timer >= 0x1A) {
+    quad = (AreaRippleQuad*)&TASK(Actor)->vx;
+    if (TASK(Actor)->timer >= 0x1A) {
         quad->radius += 2;
     } else {
         quad->radius -= 2;
@@ -15,6 +15,6 @@ MATCH void func_801F2DA0(void) {
     func_801F31C8(quad);
     ACTOR_COUNT_DOWN(TASK(Actor), count, timer);
     if (count == 0) {
-        g_Task->header.mode++;
+        TASK(Actor)->header.mode++;
     }
 }

@@ -2,8 +2,8 @@
 
 MATCH void func_800C1940(void) {
     if (Script_AnimStepLoop() != 0) {
-        g_Task->unk_09 = 64;
-        g_Task->timer  = 32;
-        g_Task->unk_03 = 1;
+        TASK(PartyMember)->unk_09 = 64;
+        TASK(PartyMember)->timer  = 32;
+        TASK(PartyMember)->unk_03 = 1;
     }
 }

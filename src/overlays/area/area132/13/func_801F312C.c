@@ -5,7 +5,7 @@ MATCH void func_801F312C(void) {
     s32    limit;
     u8     timer;
 
-    work = g_Task;
+    work = TASK(Actor);
     work->unk_1C += 0x1000000;
     limit = work->vz + 0x8000000;
     if (limit < work->unk_1C) {
@@ -15,7 +15,7 @@ MATCH void func_801F312C(void) {
     func_801F3268();
     ACTOR_COUNT_DOWN(TASK(Actor), timer, timer);
     if (timer == 0) {
-        g_Task->timer = 16;
-        g_Task->header.mode++;
+        TASK(Actor)->timer = 16;
+        TASK(Actor)->header.mode++;
     }
 }

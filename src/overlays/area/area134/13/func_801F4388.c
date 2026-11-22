@@ -8,12 +8,12 @@ MATCH void func_801F4388(void) {
     s32    z;
 
     Area_ClearWorkColumn();
-    work                   = g_Task;
+    work                   = TASK(Actor);
     x                      = work->pos.x.fixed;
     y                      = work->pos.y.fixed;
     z                      = work->pos.z.fixed;
     work->timer            = 64;
-    work2                  = g_Task;
+    work2                  = TASK(Actor);
     /* FAKE: indexed stores across gravity and active_flags preserve the coordinate load order. */
     MEM_PTR(s16, work)[16] = 0;
     MEM_PTR(s32, work)[9]  = 0x1000000;

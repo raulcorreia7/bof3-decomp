@@ -6,30 +6,30 @@ MATCH void func_801C22D8(void) {
     Actor* work;
 
     if (g_GameStateIndex != GAME_REQUEST_SCENE_CAMERA) {
-        g_Task->header.mode = 1;
+        TASK(Actor)->header.mode = 1;
         return;
     }
-    work = g_Task;
+    work = TASK(Actor);
     dx   = D_801462A0 - work->pos.x.fixed;
     dy   = D_801462A4 - work->pos.y.fixed;
     if (dx < 0 && dy < 0) {
         work->direction = FACING_UP_LEFT;
     } else if (dx > 0 && dy > 0) {
-        g_Task->direction = FACING_DOWN_RIGHT;
+        TASK(Actor)->direction = FACING_DOWN_RIGHT;
     } else if (dx < 0 && dy > 0) {
-        g_Task->direction = FACING_DOWN_LEFT;
+        TASK(Actor)->direction = FACING_DOWN_LEFT;
     } else if (dx > 0 && dy < 0) {
-        g_Task->direction = FACING_UP_RIGHT;
+        TASK(Actor)->direction = FACING_UP_RIGHT;
     } else if (dx > 0 && dy == 0) {
-        g_Task->direction = FACING_RIGHT;
+        TASK(Actor)->direction = FACING_RIGHT;
     } else if (dx < 0 && dy == 0) {
-        g_Task->direction = FACING_LEFT;
+        TASK(Actor)->direction = FACING_LEFT;
     } else if (dx == 0) {
         if (dy > 0) {
-            g_Task->direction = FACING_DOWN;
+            TASK(Actor)->direction = FACING_DOWN;
         } else if (dy < 0) {
-            g_Task->direction = FACING_UP;
+            TASK(Actor)->direction = FACING_UP;
         }
     }
-    Script_Request(g_Task->direction);
+    Script_Request(TASK(Actor)->direction);
 }

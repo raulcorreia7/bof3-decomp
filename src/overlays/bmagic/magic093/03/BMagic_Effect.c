@@ -22,7 +22,7 @@ MATCH void func_801EED04(void) {
         for (i = 0; i < 8; i++) {
             if (!Battle_SlotIsBlocked((u8)(i + 3))) {
                 slot                               = Battle_AllocEffect(1, 77) & BYTE_MASK;
-                owner                              = g_Task;
+                owner                              = TASK(PartyMember);
                 g_BattleEffects[slot].header.mode  = 0;
                 g_BattleEffects[slot].unk_03       = i;
                 g_BattleEffects[slot].arg.unk_09   = 16;
@@ -34,7 +34,7 @@ MATCH void func_801EED04(void) {
         for (i = 0; i < 3; i++) {
             if (!Battle_SlotIsBlocked((u8)i)) {
                 slot                               = Battle_AllocEffect(1, 77) & BYTE_MASK;
-                owner                              = g_Task;
+                owner                              = TASK(PartyMember);
                 g_BattleEffects[slot].header.mode  = 0;
                 g_BattleEffects[slot].unk_03       = i;
                 g_BattleEffects[slot].arg.unk_09   = 16;
@@ -45,7 +45,7 @@ MATCH void func_801EED04(void) {
     }
     for (i = 0; i < 8; i++) {
         slot                                   = BMagic_AllocEffect() & BYTE_MASK;
-        owner                                  = g_Task;
+        owner                                  = TASK(PartyMember);
         BMAGIC_EFFECT_SLOTS[slot].header.mode  = 0;
         BMAGIC_EFFECT_SLOTS[slot].unk_04       = i;
         BMAGIC_EFFECT_SLOTS[slot].target.party = owner;
@@ -53,7 +53,7 @@ MATCH void func_801EED04(void) {
     }
     for (i = 0; i < 16; i++) {
         slot                                   = BMagic_AllocEffect() & BYTE_MASK;
-        owner                                  = g_Task;
+        owner                                  = TASK(PartyMember);
         BMAGIC_EFFECT_SLOTS[slot].header.mode  = 1;
         BMAGIC_EFFECT_SLOTS[slot].unk_0B       = i;
         BMAGIC_EFFECT_SLOTS[slot].arg.unk_09   = i * 8 + 24;
@@ -187,7 +187,7 @@ MATCH void func_801EF710(void) {
 
     active = BATTLE_ACTIVE_WORK;
     if (active->param.unk_0B == 8) {
-        work              = g_Task;
+        work              = TASK(PartyMember);
         work->header.step = work->header.step + 1;
     }
 }
@@ -195,7 +195,7 @@ MATCH void func_801EF710(void) {
 MATCH void func_801EF750(void) {
     PartyMember* work;
 
-    work         = g_Task;
+    work         = TASK(PartyMember);
     work->unk_09 = work->unk_09 - 1;
     if (work->unk_09 == 0) {
         work               = (PartyMember*)g_BattleEffectBattler;
@@ -345,12 +345,12 @@ MATCH void func_801F00A0(void) {
 MATCH void func_801F00F0(void) {
     PartyMember* work;
 
-    work = g_Task;
+    work = TASK(PartyMember);
     work->unk_09 += 2;
-    work = g_Task;
+    work = TASK(PartyMember);
     work->timer--;
     if (work->timer == 48) {
-        work = g_Task;
+        work = TASK(PartyMember);
         work->header.step++;
     }
 }

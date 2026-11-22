@@ -39,7 +39,7 @@ MATCH void func_801EEC94(void) {
         row   = (BattleWorkImage*)&g_BattleEnemyBattlers[enemy];
         *slot = *row;
     }
-    work                                = g_Task;
+    work                                = TASK(PartyMember);
     g_BattleEffects[index].header.mode  = 3;
     g_BattleEffects[index].unk_06       = 1;
     g_BattleEffects[index].header.step  = 0;
@@ -58,7 +58,7 @@ MATCH void func_801EEC94(void) {
     TASK(PartyMember)->unk_27                                                = Battle_CopyCellPalette(g_BattleEffectBattler);
     TASK(PartyMember)->unk_28                                                = g_BattleEffectBattler->unk_28;
     TASK(PartyMember)->unk_24                                                = g_BattleEffectBattler->unk_24;
-    Battle_SetCellPaletteStp(g_Task);
+    Battle_SetCellPaletteStp(TASK(PartyMember));
     g_BattleEffectBattler->header.flags |= PARTY_MEMBER_FLAG_HANDLER_BUSY;
 }
 
@@ -204,12 +204,12 @@ MATCH void Effect_CopyBattlerCoords2(void) {
 MATCH void func_801EFB38(void) {
     PartyMember* work;
 
-    work = g_Task;
+    work = TASK(PartyMember);
     work->timer += 2;
-    work = g_Task;
+    work = TASK(PartyMember);
     work->unk_09++;
     if (work->unk_09 == 12) {
-        work = g_Task;
+        work = TASK(PartyMember);
         work->header.step++;
     }
 }
@@ -275,7 +275,7 @@ MATCH void func_801F00C8(void) {
     TASK(PartyMember)->unk_5E -= 16;
     TASK(PartyMember)->unk_5F -= 16;
     if ((s8)TASK(PartyMember)->unk_5D == -128) {
-        work   = g_Task;
+        work   = TASK(PartyMember);
         source = BATTLE_ACTIVE_WORK;
         WorldPos_Copy(&work->pos, &source->pos);
         work->header.step += 1;
@@ -319,7 +319,7 @@ MATCH void func_801F023C(void) {
             g_GameState = saved;
         }
         if (g_Battle.active_battler < BATTLE_PARTY_CHARACTERS_COUNT) {
-            task = g_Task;
+            task = TASK(PartyMember);
             TASK_SET(&g_Game.members[g_Battle.active_battler]);
             Script_Select(TASK(PartyMember)->facing + 16);
             TASK_SET(task);
@@ -357,7 +357,7 @@ MATCH void func_801F04EC(void) {
     TASK(PartyMember)->unk_5E -= 0x10;
     TASK(PartyMember)->unk_5F -= 0x10;
     if ((s8)TASK(PartyMember)->unk_5D == -0x80) {
-        work              = g_Task;
+        work              = TASK(PartyMember);
         work->pos.x.fixed = D_8014637C->pos.x.fixed;
         /* FAKE: retail re-reads the party cell for the next copy. */
         FAKE_BARRIER();

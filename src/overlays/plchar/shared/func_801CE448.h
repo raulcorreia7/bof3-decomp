@@ -5,34 +5,34 @@ MATCH void func_801CE448(void) {
 
     if (SYS_TestFlag(&g_SceneFlagWords[8], 0x16)) {
         if (Party_CountOrder(PARTY_ORDER_FIELD) == 1 && !(g_GameRequestFlags & AREA_LOAD_FLAG_SHOP)) {
-            g_Task->unk_04 = 0x50;
+            TASK(Actor)->unk_04 = 0x50;
         } else {
-            g_Task->unk_04 = 0x40;
+            TASK(Actor)->unk_04 = 0x40;
         }
     } else {
-        g_Task->unk_04 = 0x41;
+        TASK(Actor)->unk_04 = 0x41;
     }
-    switch (g_Task->unk_04) {
+    switch (TASK(Actor)->unk_04) {
         case 0x50:
-            direction = g_Task->direction;
+            direction = TASK(Actor)->direction;
             if (abs(direction - FACING_DOWN) > abs(direction - FACING_RIGHT)) {
-                g_Task->param.turn_step = Actor_GetTurnStep(FACING_RIGHT);
-                g_Task->unk_03          = FACING_RIGHT;
+                TASK(Actor)->param.turn_step = Actor_GetTurnStep(FACING_RIGHT);
+                TASK(Actor)->unk_03          = FACING_RIGHT;
             } else {
-                g_Task->param.turn_step = Actor_GetTurnStep(FACING_DOWN);
-                g_Task->unk_03          = FACING_DOWN;
-                g_Task->unk_04          = 0x52;
+                TASK(Actor)->param.turn_step = Actor_GetTurnStep(FACING_DOWN);
+                TASK(Actor)->unk_03          = FACING_DOWN;
+                TASK(Actor)->unk_04          = 0x52;
             }
             break;
         case 0x40:
-            g_Task->param.turn_step = Actor_GetTurnStep(FACING_RIGHT);
-            g_Task->unk_03          = FACING_RIGHT;
+            TASK(Actor)->param.turn_step = Actor_GetTurnStep(FACING_RIGHT);
+            TASK(Actor)->unk_03          = FACING_RIGHT;
             break;
         case 0x41:
-            g_Task->param.turn_step = Actor_GetTurnStep(FACING_DOWN);
-            g_Task->unk_03          = FACING_DOWN;
+            TASK(Actor)->param.turn_step = Actor_GetTurnStep(FACING_DOWN);
+            TASK(Actor)->unk_03          = FACING_DOWN;
             break;
     }
-    g_Task->timer = 2;
-    g_Task->header.step++;
+    TASK(Actor)->timer = 2;
+    TASK(Actor)->header.step++;
 }

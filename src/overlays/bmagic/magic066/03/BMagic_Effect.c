@@ -15,12 +15,12 @@ MATCH void func_801EEC70(void) {
     u16*         dst;
 
     battler                            = g_BattleEffectBattler;
-    task                               = g_Task;
+    task                               = TASK(PartyMember);
     task->pos.x.fixed                  = battler->pos.x.fixed;
     task->pos.y.fixed                  = battler->pos.y.fixed;
     task->pos.z.fixed                  = battler->pos.z.fixed;
     slot                               = Battle_AllocEffect(1, 17) & BYTE_MASK;
-    g_BattleEffects[slot].target.party = g_Task;
+    g_BattleEffects[slot].target.party = TASK(PartyMember);
     g_BattleEffects[slot].header.mode  = 0;
     /* Copies arena palette rows 26 and 2 into the work copy with STP set, then restores row 2's color 0. */
     for (i = 0, dst = g_AreaPaletteCopy->rows[AREA_PALETTE_BATL_OVR_ROW].colors, src = g_AreaPaletteArena->rows[AREA_PALETTE_BATL_OVR_ROW].colors; i < AREA_PALETTE_COLORS; i++) {
@@ -51,7 +51,7 @@ MATCH void func_801EEDB8(void) {
     TASK(PartyMember)->unk_09 = timer;
     if (timer == 0) {
         slot                               = Battle_AllocEffect(1, 17) & BYTE_MASK;
-        work                               = g_Task;
+        work                               = TASK(PartyMember);
         g_BattleEffects[slot].header.mode  = 1;
         g_BattleEffects[slot].target.party = work;
         Battle_ApplyDamageFlags(g_Battle.target_selector, 0x20);
@@ -83,7 +83,7 @@ MATCH void func_801EEF78(void) {
 }
 
 MATCH void func_801EEFF8(void) {
-    PartyMember* work = g_Task;
+    PartyMember* work = TASK(PartyMember);
     u8           timer;
 
     work->pos.y.fixed += 0xFFFF4000;

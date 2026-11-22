@@ -6,22 +6,22 @@ MATCH void func_801F342C(void) {
     Actor* scratch;
     Actor* check;
 
-    scratch = g_Task;
+    scratch = TASK(Actor);
     scratch->vx += 8;
     func_801F4060(scratch->vx);
     /* FAKE: retail splits each re-read across a cell copy so the row stays
      * in one register. */
-    cell_1  = g_Task;
+    cell_1  = TASK(Actor);
     scratch = (Actor*)cell_1;
     scratch->timer--;
     if (scratch->timer != 0) {
         return;
     }
-    cell_2          = g_Task;
+    cell_2          = TASK(Actor);
     scratch         = (Actor*)cell_2;
     scratch->unk_32 = 0x140;
     scratch->timer  = 16;
-    check           = g_Task;
+    check           = TASK(Actor);
     scratch->vx     = 256;
     scratch->vy     = 256;
     check->header.mode++;

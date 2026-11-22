@@ -27,7 +27,7 @@ MATCH void func_801EED30(void) {
         D_801F0FD4[i] = 0;
     }
     TASK(PartyMember)->facing = g_BattleEffectBattler->facing;
-    work                      = g_Task;
+    work                      = TASK(PartyMember);
     actor                     = g_BattleEffectBattler;
     work->pos.x.fixed         = actor->pos.x.fixed;
     work->pos.y.fixed         = actor->pos.y.fixed;
@@ -36,7 +36,7 @@ MATCH void func_801EED30(void) {
     work->pos.z.fixed         = z;
     TASK(PartyMember)->header.mode += 1;
     slot                                           = Battle_AllocEffect(1, 0x3F);
-    g_BattleEffects[slot & BYTE_MASK].target.party = g_Task;
+    g_BattleEffects[slot & BYTE_MASK].target.party = TASK(PartyMember);
     g_BattleEffects[slot & BYTE_MASK].header.mode  = 0;
     TASK(PartyMember)->param.unk_0B += 1;
     SND_SEQueueSelection(0x100);
@@ -74,7 +74,7 @@ MATCH void func_801EF008(void) {
     s32          z;
 
     TASK(PartyMember)->facing = g_BattleEffectBattler->facing;
-    work                      = g_Task;
+    work                      = TASK(PartyMember);
     actor                     = g_BattleEffectBattler;
     work->pos.x.fixed         = actor->pos.x.fixed;
     work->pos.y.fixed         = actor->pos.y.fixed;
@@ -144,7 +144,7 @@ MATCH void func_801EF454(void) {
     count                     = TASK(PartyMember)->unk_09 - 1;
     TASK(PartyMember)->unk_09 = count;
     if (count == 0) {
-        work = g_Task;
+        work = TASK(PartyMember);
         /* kept: retail reloads the battler row at each access; a PartyMember* local changes the bytes. */
         if (BATTLER_IS_PLAYER(work->param.unk_0B)) {
             work->pos.x.fixed = g_Game.members[work->param.unk_0B].pos.x.fixed;
@@ -166,7 +166,7 @@ MATCH void func_801EF454(void) {
 MATCH void func_801EF5D4(void) {
     PartyMember* work;
 
-    work         = g_Task;
+    work         = TASK(PartyMember);
     work->unk_0C = work->unk_0C + work->unk_18;
     if (--work->unk_18 == 0x10) {
         work->header.step++;
@@ -176,7 +176,7 @@ MATCH void func_801EF5D4(void) {
 MATCH void func_801EF61C(void) {
     PartyMember* work;
     u8           timer;
-    work = g_Task;
+    work = TASK(PartyMember);
     work->unk_0C += work->unk_18;
     if (g_FrameCount & 1) {
         work->unk_18 -= 1;

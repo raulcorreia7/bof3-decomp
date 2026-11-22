@@ -5,7 +5,6 @@
  * and its data. Only this image includes the file. */
 
 #include "overlays/area/worlds/world01.h"
-#include "area/spad.h"
 
 /* Both body words of the map bundle's 0x81 record, written by func_801F2D00. */
 #define AREA051_RECORD_81_WORD ((0x0421u << 16) | 0x4E73u)

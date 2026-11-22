@@ -11,7 +11,7 @@ MATCH void Area_ClimbLadder(void) {
         func_801C56E4();
     }
     if (!((g_Game.flags | g_Game.walk_flags) & (GAME_FLAG_SCROLL_LOCK | AREA_WALK_ENTRY_ACTIVE))) {
-        Area_ScrollAdvance(COORD_INT((g_Task)->pos.z));
+        Area_ScrollAdvance(COORD_INT(TASK(Actor)->pos.z));
         Area_ScrollUpdateWalk();
     }
 }
