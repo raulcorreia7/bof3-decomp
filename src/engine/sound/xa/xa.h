@@ -4,13 +4,13 @@
 #include "types.h"
 
 /* func_801636A0 */
-void SND_StartXAStream(s32 key, s32 unused);
+void SND_XAStartStream(s32 key, s32 unused);
 /* func_80163744 */
-void SND_ResolveXAStream(s32 stream_id);
+void SND_XAResolveStream(s32 stream_id);
 /* func_80163858 */
-void SND_StoreXASyncResult(s32 intr, u8* result);
+void SND_XASetSyncResult(s32 intr, u8* result);
 /* func_801638B0 */
-void SND_UpdateXA(void);
+void SND_XAUpdate(void);
 /* func_801639B8 */
 void SND_XAStateIdle(void);
 /* func_801639D0 */
@@ -30,9 +30,9 @@ void SND_XAStatePauseResult(void);
 /* func_80163E3C */
 void SND_XAStateWaitSync(void);
 /* func_80163E88 */
-bool SND_HasXACDError(void);
+bool SND_XAHasCDError(void);
 /* func_80163EA0 */
-u8   SND_IsXAIdle(void);
+u8   SND_XAIsIdle(void);
 /* func_80163EB0 */
 void SND_SetCDVolume(u8 volume);
 /* func_80163F50 */

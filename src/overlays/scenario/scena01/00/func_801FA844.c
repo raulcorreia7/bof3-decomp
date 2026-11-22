@@ -222,7 +222,7 @@ NON_MATCHING void func_801FA844(void) {
             break;
         case 30:
             g_ScriptVars[0] = 0x64;
-            SND_PlaySE(0x202);
+            SND_SEPlay(0x202);
             g_ScriptVars[0] = 0x65;
             func_801BE1B0(9);
             func_801C601C(0);
@@ -230,8 +230,8 @@ NON_MATCHING void func_801FA844(void) {
             break;
         case 31:
             if (g_ScriptVars[0] == 0x66) {
-                SND_StopSequence(0, 0);
-                SND_PlayBGM(0x19, 0x64, 8);
+                SND_SeqStop(0, 0);
+                SND_BGMPlay(0x19, 0x64, 8);
                 g_ScenarioState.step_05 = 0x20;
             }
             break;
@@ -265,7 +265,7 @@ NON_MATCHING void func_801FA844(void) {
             }
             break;
         case 38:
-            SND_PlaySE(0x203);
+            SND_SEPlay(0x203);
             g_ScriptVars[0]         = 0x6E;
             g_ScenarioState.step_05 = 0x27;
             break;

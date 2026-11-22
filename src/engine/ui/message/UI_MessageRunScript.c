@@ -100,7 +100,7 @@ NON_MATCHING void UI_MessageRunScript(void) {
                 break;
             case 0xA:
                 CHAN_CURSOR(chan) += 1;
-                SND_PlaySE(*D_801490B0 | 0x200);
+                SND_SEPlay(*D_801490B0 | 0x200);
                 break;
             case 0xB:
                 loop                   = 0;

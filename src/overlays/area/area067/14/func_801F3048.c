@@ -14,6 +14,6 @@ MATCH void func_801F3048(void) {
         quad->height    = 0;
         g_Task->timer   = 15;
         g_Task->header.mode++;
-        SND_PlaySE(EMI_SE_ID(SND_BANK_AREA, 3));
+        SND_SEPlay(EMI_SE_ID(SND_BANK_AREA, 3));
     }
 }

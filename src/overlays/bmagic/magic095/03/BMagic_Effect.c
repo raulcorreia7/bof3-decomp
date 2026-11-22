@@ -45,7 +45,7 @@ MATCH void func_801EEC9C(void) {
         g_BattleEffects[slot].unk_0B       = i;
         g_BattleEffects[slot].unk_0A       = 0;
     }
-    SND_QueueSelectionSE(EMI_SE_ID(SND_BANK_COMMON, 0));
+    SND_SEQueueSelection(EMI_SE_ID(SND_BANK_COMMON, 0));
     g_Task->unk_09 = 0;
     g_Task->timer  = 0;
     g_Task->header.mode += 1;
@@ -84,8 +84,8 @@ MATCH void func_801EEF64(void) {
     counter        = g_Task->unk_09 + 1;
     g_Task->unk_09 = counter;
     if ((counter & BYTE_MASK) == 0x40) {
-        SND_QueueSelectionSE(0x101);
-        SND_QueueSelectionSE(0x102);
+        SND_SEQueueSelection(0x101);
+        SND_SEQueueSelection(0x102);
         g_Task->unk_09 = 0x30;
         g_Task->header.mode += 1;
     }

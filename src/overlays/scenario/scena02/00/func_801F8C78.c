@@ -14,9 +14,9 @@ MATCH void func_801F8C78(void) {
     switch (g_ScenarioState.step_05) {
         case 0:
             if (!SYS_TestFlag(g_SceneFlags, 0x35)) {
-                SND_StopSequence(0, 1);
+                SND_SeqStop(0, 1);
             }
-            SND_StopSequence(0, 0);
+            SND_SeqStop(0, 0);
             Scene_SetupParty(0x18);
             Area_StartScrollRoute(5);
             g_ScenarioState.step_05 = 1;
@@ -65,7 +65,7 @@ MATCH void func_801F8C78(void) {
                 break;
             }
             D_80146258 |= 8;
-            SND_PlayBGM(0x20, 0x64, 8);
+            SND_BGMPlay(0x20, 0x64, 8);
             g_ScenarioState.step_05 = 5;
             D_80146258 |= 0x80;
             break;

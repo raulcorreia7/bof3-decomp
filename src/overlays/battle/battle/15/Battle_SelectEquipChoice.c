@@ -66,19 +66,19 @@ NON_MATCHING void Battle_SelectEquipChoice(void) {
         }
     }
     if (g_BattleListCursor != FIELD(u8, row_base, 0xBu)) {
-        SND_PlaySE(EMI_SE_ID(SND_BANK_COMMON, 0));
+        SND_SEPlay(EMI_SE_ID(SND_BANK_COMMON, 0));
     }
     choice                                          = D_801485A1;
     g_BattleMessages[((D_801EC328 - 1) & 0xF)].text = UI_MessageGetText(Item_GetDescription((s32)D_8014859C, (s32)choice) & HALF_MASK);
     row_base                                        = &g_PadStates[0].pressed;
     if (g_InputMasks[BATTLE_INPUT_CANCEL] & *row_base) {
-        SND_PlaySE(EMI_SE_ID(SND_BANK_COMMON, 6));
+        SND_SEPlay(EMI_SE_ID(SND_BANK_COMMON, 6));
         goto block_33; /* shared scroll/confirm join */
     }
     Battle_PreviewEquipment();
     if (g_InputMasks[BATTLE_INPUT_CONFIRM] & *row_base) {
         if (choice != 0) {
-            SND_PlaySE(EMI_SE_ID(SND_BANK_COMMON, 3));
+            SND_SEPlay(EMI_SE_ID(SND_BANK_COMMON, 3));
             Battle_ApplyEquipment();
         block_33:
             g_BattleListCursor = 0xFF;
@@ -87,7 +87,7 @@ NON_MATCHING void Battle_SelectEquipChoice(void) {
             g_Battle.ui_mode -= 1;
             return;
         }
-        SND_PlaySE(EMI_SE_ID(SND_BANK_COMMON, 7));
+        SND_SEPlay(EMI_SE_ID(SND_BANK_COMMON, 7));
     }
 }
 #else

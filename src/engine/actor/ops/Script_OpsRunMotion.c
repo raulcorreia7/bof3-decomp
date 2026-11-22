@@ -157,7 +157,7 @@ MATCH u8 Script_OpsRunMotion(ScriptState* state, const u8* table, u8 value) {
                 /* FAKE: counter store before work read. */
                 FAKE_BARRIER();
                 if ((work->script_pc != mode) && (mode == *(table + state->cursor + 2)))
-                    SND_PlaySE((u16)(0x200u | *(table + state->cursor + 1)));
+                    SND_SEPlay((u16)(0x200u | *(table + state->cursor + 1)));
             }
             state->cursor += 2;
             break;
@@ -200,7 +200,7 @@ MATCH u8 Script_OpsRunMotion(ScriptState* state, const u8* table, u8 value) {
         }
         queue_cue:
             if (result != 0)
-                SND_PlaySE(EMI_SE_ID(SND_BANK_COMMON, 3));
+                SND_SEPlay(EMI_SE_ID(SND_BANK_COMMON, 3));
             return value;
         case ACTOR_SCRIPT_MOTION_WAIT:
             state->cursor--;

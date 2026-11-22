@@ -18,8 +18,8 @@ MATCH void func_801F8C0C(void) {
             if (g_ScriptVars[0] == 4) {
                 g_ScriptVars[1]         = 2;
                 g_ScenarioState.step_05 = 2;
-                SND_StopSequence(0, 0);
-                SND_PlayBGM(0xE, 0x64, 8);
+                SND_SeqStop(0, 0);
+                SND_BGMPlay(0xE, 0x64, 8);
                 g_GameFlags |= 0x80;
                 Game_RequestAreaChange(0xA, TO_COORD(0x4F), TO_COORD(5), 3);
             }
@@ -29,14 +29,14 @@ MATCH void func_801F8C0C(void) {
                 g_ScriptVars[1]         = 3;
                 g_ScriptVars[2]         = 7;
                 g_ScenarioState.step_05 = 3;
-                SND_StopSequence(0, 1);
+                SND_SeqStop(0, 1);
                 Game_RequestAreaChange(0xA, TO_COORD(0x60), TO_COORD(0x12), 3);
             }
             break;
         case 3:
             if (g_ScriptVars[0] == 1) {
                 UI_ModeSet(0xF);
-                SND_PlaySE(0x201);
+                SND_SEPlay(0x201);
                 g_ScenarioState.step_05 = 4;
             }
             break;

@@ -40,7 +40,7 @@ MATCH void func_801EEC5C(void) {
         g_Task->param.unk_0B += 1;
         i++;
     } while (i < 8);
-    SND_QueueSelectionSE(EMI_SE_ID(SND_BANK_COMMON, 0));
+    SND_SEQueueSelection(EMI_SE_ID(SND_BANK_COMMON, 0));
 }
 
 #include "overlays/bmagic/shared/Effect_MarkDamagedOnZeroTick.h"
@@ -143,7 +143,7 @@ MATCH void func_801EF210(void) {
         }
     }
     Battle_ApplyDamageFlags(g_Battle.target_selector, 0x10);
-    SND_QueueSelectionSE(0x101);
+    SND_SEQueueSelection(0x101);
     g_Task->unk_09 = 16;
     g_Task->header.step += 1;
 }
@@ -171,7 +171,7 @@ MATCH void func_801EF430(void) {
     timer_next    = g_Task->timer - 2;
     g_Task->timer = timer_next;
     if (!(timer_next & BYTE_MASK)) {
-        SND_QueueSelectionSE(0x102);
+        SND_SEQueueSelection(0x102);
         g_Task->unk_09 = 0x10;
         g_Task->header.step += 1;
     }

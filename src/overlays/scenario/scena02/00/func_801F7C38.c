@@ -82,7 +82,7 @@ MATCH void func_801F7C38(void) {
                 g_ScenarioState.step_05 = 0x1F;
                 UI_ModeSet(0xD);
                 Char_RebuildPartyStats();
-                SND_FadeOutSequence(0, 1, 4, 0x1E);
+                SND_SeqFadeOut(0, 1, 4, 0x1E);
             } else if (vars[0] == 0x65) {
                 Game_ClearScriptActive();
                 vars[0] = 0;
@@ -91,7 +91,7 @@ MATCH void func_801F7C38(void) {
             break;
         }
         case 31:
-            SND_StartXAStream(0, 1);
+            SND_XAStartStream(0, 1);
             g_ScenarioState.step_05 = 0x20;
             break;
         case 32:
@@ -99,7 +99,7 @@ MATCH void func_801F7C38(void) {
                 break;
             }
             g_AreaDrawFlags = 0;
-            if (SND_IsXAIdle() != 0) {
+            if (SND_XAIsIdle() != 0) {
                 g_ScenarioState.step_05 = 0x21;
             }
             break;
@@ -112,7 +112,7 @@ MATCH void func_801F7C38(void) {
             if (WINDOW_EFFECT_BUSY()) {
                 break;
             }
-            SND_PlayBGM(0x11, 0x64, 8);
+            SND_BGMPlay(0x11, 0x64, 8);
             SCENARIO_MESSAGE_WAIT(MSG_SCENA02_010, 0x23);
             break;
         case 35:

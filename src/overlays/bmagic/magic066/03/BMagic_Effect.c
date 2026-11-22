@@ -36,7 +36,7 @@ MATCH void func_801EEC70(void) {
     }
     *MEM_PTR(u16, AREA_PALETTE_UPLOAD_ROW(AREA_PALETTE_BMAGIC_ROW)) = *MEM_PTR(u16, AREA_PALETTE_ARENA_33C00);
     g_GfxPalettePending                                             = 1;
-    SND_PlaySE(EMI_SE_ID(SND_BANK_COMMON, 0));
+    SND_SEPlay(EMI_SE_ID(SND_BANK_COMMON, 0));
     g_Task->param.unk_0B = 0;
     g_Task->unk_09       = 24;
     g_Task->header.mode += 1;

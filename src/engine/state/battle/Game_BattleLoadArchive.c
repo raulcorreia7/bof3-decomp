@@ -16,7 +16,7 @@ MATCH void Game_BattleLoadArchive(void) {
             for (i = 0; i < 1376; i++) {
                 D_8018E268[i] = D_80148A50[i];
             }
-            SND_StopSequence(g_SelectionSepSlots[g_SndBGMId * 4], g_SelectionSequences[g_SndBGMId * 4]);
+            SND_SeqStop(g_SelectionSepSlots[g_SndBGMId * 4], g_SelectionSequences[g_SndBGMId * 4]);
         }
         g_EmiStreamFlags |= 0x40;
     }

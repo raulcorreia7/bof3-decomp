@@ -38,7 +38,7 @@ MATCH void Title_Begin(void) { /* func_801D0C90 */
 
     GFX_PaletteReset();
     g_GfxPalettePending += 1u;
-    SND_PlayBGM(BGM_TITLE, BGM_CUE_LEVEL_DEFAULT, BGM_CUE_SHAPE_DEFAULT);
+    SND_BGMPlay(BGM_TITLE, BGM_CUE_LEVEL_DEFAULT, BGM_CUE_SHAPE_DEFAULT);
 
     state                   = g_UiTitleState;
     g_UiTitleFadePhase      = 1u;

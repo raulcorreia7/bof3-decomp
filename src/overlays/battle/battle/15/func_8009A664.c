@@ -14,6 +14,6 @@ MATCH void func_8009A664(void) {
     }
     if ((INPUT_REPEATED(g_PadStates[0].pressed, INPUT_DIRECTIONAL) & INPUT_DIRECTIONAL) && (Item_GetFlags(entry >> 8, entry & BYTE_MASK) & ITEM_USABLE_MENU)) {
         g_BattleActorTurn->command.target ^= BATTLE_TARGET_BOTH_SIDES;
-        SND_PlaySE(EMI_SE_ID(SND_BANK_COMMON, 1));
+        SND_SEPlay(EMI_SE_ID(SND_BANK_COMMON, 1));
     }
 }

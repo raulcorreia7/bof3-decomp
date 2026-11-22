@@ -8,8 +8,8 @@ __asm__(".include \"include/match/macro.inc\"\n");
 MATCH void func_801FA548(void) {
     switch (g_ScenarioState.step_05) {
         case 0:
-            SND_StopSequence(0, 0);
-            SND_PlayBGM(0x25, 0x64, 8);
+            SND_SeqStop(0, 0);
+            SND_BGMPlay(0x25, 0x64, 8);
             SCENARIO_MESSAGE_WAIT(MSG_SCENA02_020, 1);
             break;
         case 1:
@@ -27,15 +27,15 @@ MATCH void func_801FA548(void) {
             break;
         case 3:
             if (g_ScriptVars[0] == 6) {
-                SND_StopSequence(0, 1);
+                SND_SeqStop(0, 1);
                 g_ScenarioState.step_05 = 4;
                 D_80146258 |= GAME_FLAG_SCROLL_LOCK;
             }
             break;
         case 4:
             if (g_ScriptVars[0] == 0xE) {
-                SND_StartXAStream(1, 1);
-                SND_PlaySE(0x203);
+                SND_XAStartStream(1, 1);
+                SND_SEPlay(0x203);
                 g_ScriptVars[1]         = 0;
                 g_ScriptVars[3]         = 0;
                 g_ScenarioState.step_05 = 5;
@@ -50,12 +50,12 @@ MATCH void func_801FA548(void) {
                 g_ScriptVars[3]          = 0;
                 g_ScriptVars[0]          = 0x15;
                 g_ScenarioState.step_05  = 0xF;
-                SND_PlaySE(0x204);
+                SND_SEPlay(0x204);
             }
             break;
         case 15:
             if (g_ScriptVars[0] == 0x19) {
-                SND_PlaySE(0x201);
+                SND_SEPlay(0x201);
                 UI_ModeSet(0xF);
                 g_ScenarioState.step_05 = 0x10;
             }
@@ -84,8 +84,8 @@ MATCH void func_801FA548(void) {
             break;
         case 19:
             if (g_ScriptVars[0] == 0x23) {
-                SND_StopSequence(0, 0);
-                SND_StopSequence(0, 1);
+                SND_SeqStop(0, 0);
+                SND_SeqStop(0, 1);
                 Scene_SetupParty(6);
                 g_ScenarioState.step_05 = 0x14;
             }

@@ -23,6 +23,6 @@ MATCH void func_801D4BBC(void) {
         flag             = D_801E60FC;
         g_SaveCardStatus = flag ? SAVE_WRITE_STATUS_NO_FILE : CARD_EVENT_CAPACITY;
     }
-    SND_PlaySE(EMI_SE_ID(SND_BANK_COMMON, 7));
+    SND_SEPlay(EMI_SE_ID(SND_BANK_COMMON, 7));
     g_MenuStep.state = 0xC;
 }

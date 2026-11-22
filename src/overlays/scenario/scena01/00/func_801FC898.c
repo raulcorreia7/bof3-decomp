@@ -37,14 +37,14 @@ MATCH void func_801FC898(void) {
             g_AreaDrawFlags = 0;
             func_801C16B8();
             g_ScenarioState.step_05 = 0x15;
-            SND_FadeOutSequence(0, 0, 4, 0x1E);
+            SND_SeqFadeOut(0, 0, 4, 0x1E);
             break;
         case 0x15:
-            SND_StartXAStream(0, 1);
+            SND_XAStartStream(0, 1);
             g_ScenarioState.step_05 = 0x16;
             break;
         case 0x16:
-            if ((SND_IsXAIdle() & BYTE_MASK) == 0) {
+            if ((SND_XAIsIdle() & BYTE_MASK) == 0) {
                 break;
             }
             g_ScenarioState.step_05 = 0x17;
@@ -55,7 +55,7 @@ MATCH void func_801FC898(void) {
             }
             g_ScenarioState.step_05 = 0x18;
             Game_RequestAreaChange(AREA_ID_CEDAR_WOODS_HOUSE, TO_COORD(0x51), TO_COORD(8), 0x85);
-            SND_PlayBGM(7, BGM_CUE_LEVEL_DEFAULT, BGM_CUE_SHAPE_DEFAULT);
+            SND_BGMPlay(7, BGM_CUE_LEVEL_DEFAULT, BGM_CUE_SHAPE_DEFAULT);
             break;
         case 0x18:
             if (g_ScriptVars[0] == 1) {
@@ -90,7 +90,7 @@ MATCH void func_801FC898(void) {
                 g_ScriptVars[0]         = 0;
                 g_ScriptVars[2]         = 5;
                 func_801C16B8();
-                SND_StartXAStream(0, 1);
+                SND_XAStartStream(0, 1);
                 if (g_Game.party_size == 3) {
                     Game_RequestAreaChange(AREA_ID_CEDAR_WOODS_HOUSE, TO_COORD(0x51), TO_COORD(8), 0x83);
                 } else {

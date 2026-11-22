@@ -26,7 +26,7 @@ MATCH void SND_Init(void) {
     g_SelectionEffectVoices[4] = -1;
     g_SelectionEffectVoices[5] = -1;
     g_SelectionEffectVoices[6] = -1;
-    SND_InstallSequenceFuncs();
+    SND_SeqInstallFuncs();
     D_8018B410                           = 0xFFFF;
     D_8018B414                           = 3;
     D_80148A04                           = 0x7FF;

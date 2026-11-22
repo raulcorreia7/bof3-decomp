@@ -107,7 +107,7 @@ MATCH void func_801EEC80(void) {
             D_801F0CC0 = 0;
             break;
     }
-    SND_QueueSelectionSE(0x100);
+    SND_SEQueueSelection(0x100);
     g_Task->header.mode += 1;
 }
 

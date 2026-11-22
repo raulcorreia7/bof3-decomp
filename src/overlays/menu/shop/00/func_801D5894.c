@@ -35,7 +35,7 @@ MATCH void func_801D5894(void) {
         if (g_SaveCardStatus == CARD_EVENT_ERROR) {
             g_SaveCardStatus = SAVE_WRITE_STATUS_WRITE_FAILED;
         }
-        SND_PlaySE(EMI_SE_ID(SND_BANK_COMMON, 7));
+        SND_SEPlay(EMI_SE_ID(SND_BANK_COMMON, 7));
     }
     g_MenuStep.state = 0xC;
 }

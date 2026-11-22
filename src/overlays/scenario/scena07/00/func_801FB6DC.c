@@ -28,15 +28,15 @@ MATCH void func_801FB6DC(void) {
             if (g_UiWindowEffectBusy == 0) {
                 g_ScriptVars[0]++;
                 func_801C16B8();
-                SND_PauseBGM(g_SndBGMId);
-                SND_StartXAStream(0, 1);
+                SND_BGMPause(g_SndBGMId);
+                SND_XAStartStream(0, 1);
                 g_AreaDrawFlags         = 0;
                 g_ScenarioState.step_05 = 4;
             }
             break;
         case 4:
-            if (SND_IsXAIdle()) {
-                SND_ResumeBGM(g_SndBGMId);
+            if (SND_XAIsIdle()) {
+                SND_BGMResume(g_SndBGMId);
                 g_ScenarioState.flags_01 &= 0xFE;
                 SYS_SetFlag(g_SceneFlags, 2);
                 Game_RequestAreaChange(0xAF, TO_COORD(0x2D) + COORD_HALF, TO_COORD(0x5E), 0x83);

@@ -17,6 +17,6 @@ MATCH void func_801F2F98(void) {
         }
         i++;
     } while (i < 0x10);
-    SND_PlaySE(0x206);
+    SND_SEPlay(0x206);
     g_Task->header.step++;
 }

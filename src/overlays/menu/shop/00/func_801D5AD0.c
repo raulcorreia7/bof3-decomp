@@ -10,12 +10,12 @@ MATCH void func_801D5AD0(void) {
     if ((Menu_ChooseYesNo() & BYTE_MASK) != 0) {
         flag = &D_8014865B;
         if (*flag != 0) {
-            SND_PlaySE(EMI_SE_ID(SND_BANK_COMMON, 4));
+            SND_SEPlay(EMI_SE_ID(SND_BANK_COMMON, 4));
             count = g_MenuStep.state;
             *flag = 0;
             count++;
         } else {
-            SND_PlaySE(EMI_SE_ID(SND_BANK_COMMON, 6));
+            SND_SEPlay(EMI_SE_ID(SND_BANK_COMMON, 6));
             count = 4;
         }
         g_MenuStep.state = count;

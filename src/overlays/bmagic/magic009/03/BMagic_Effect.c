@@ -78,7 +78,7 @@ MATCH void func_801EEF08(void) {
         } while (i < 3);
         Battle_SelectActiveBattlerScript(4, 0);
         BATTLE_ACTIVE_WORK->header.flags &= ~PARTY_MEMBER_FLAG_HANDLER_BUSY;
-        SND_QueueSelectionSE(EMI_SE_ID(SND_BANK_COMMON, 0));
+        SND_SEQueueSelection(EMI_SE_ID(SND_BANK_COMMON, 0));
         g_Task->unk_09 = 8;
         g_Task->header.mode += 1;
     }

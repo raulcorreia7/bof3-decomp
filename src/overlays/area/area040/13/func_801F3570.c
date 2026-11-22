@@ -28,7 +28,7 @@ NON_MATCHING s32 func_801F3570(void) {
     func_801A4BC0(0x93, 0x1D, 0xC0);
     g_SceneEventState.step = 0xA;
     Area_SetCellPalette(0x92, 0x1D);
-    SND_PlaySE(EMI_SE_ID(SND_BANK_AREA, 3));
+    SND_SEPlay(EMI_SE_ID(SND_BANK_AREA, 3));
     return 1;
 }
 #else

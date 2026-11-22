@@ -4,7 +4,7 @@
 MATCH void Battle_CancelEquipItem(void) {
     u8 mode;
 
-    SND_PlaySE(EMI_SE_ID(SND_BANK_COMMON, 6));
+    SND_SEPlay(EMI_SE_ID(SND_BANK_COMMON, 6));
     Battle_ShowMessage((void*)BATTLE_ACTIVE_MESSAGE_SLOT_PTR);
     mode                     = 2;
     g_Battle.selection_latch = 0;

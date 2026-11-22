@@ -106,13 +106,13 @@ MATCH s32 func_801FC5A4(void) {
 MATCH void func_801FC5FC(void) {
     Item_VitalAdd(VITAL_ITEM_FLIER);
     MESSAGE_START_WAIT(MSG_SCENA03_047);
-    SND_PauseBGM(g_SndBGMId);
-    SND_StartXAStream(2, 1);
-    while (!(SND_IsXAIdle() & BYTE_MASK)) {
+    SND_BGMPause(g_SndBGMId);
+    SND_XAStartStream(2, 1);
+    while (!(SND_XAIsIdle() & BYTE_MASK)) {
         Area_RunLoadingFrame();
         SYS_ThreadWait(1U);
     }
-    SND_ResumeBGM(g_SndBGMId);
+    SND_BGMResume(g_SndBGMId);
 }
 
 MATCH void func_801FC688(void) {

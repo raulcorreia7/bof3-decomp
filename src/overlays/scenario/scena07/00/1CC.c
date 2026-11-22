@@ -82,7 +82,7 @@ MATCH void func_801F7050(void) {
         actor->pos.y.fixed += 0; /* FAKE: retail reloads and stores y with no change. */
         actor->pos.z.fixed += actor->vz;
     }
-    SND_PlaySE(EMI_SE_ID(SND_BANK_AREA, 2));
+    SND_SEPlay(EMI_SE_ID(SND_BANK_AREA, 2));
     g_Task->vz = -g_Task->vz;
     g_Task->header.step++;
 }
@@ -106,7 +106,7 @@ MATCH void func_801F71C0(void) {
     Trail_Update(SCENA07_TRAIL);
     Trail_Draw(SCENA07_TRAIL);
     if (--g_Task->timer == 0) {
-        SND_PlaySE(EMI_SE_ID(SND_BANK_AREA, 3));
+        SND_SEPlay(EMI_SE_ID(SND_BANK_AREA, 3));
         g_Task->timer = 32;
         g_Task->header.step++;
     }
@@ -145,7 +145,7 @@ MATCH void func_801F7408(void) {
     g_Task->timer = 0;
     g_Task->vx    = 95;
     g_Task->header.step++;
-    SND_PlaySE(EMI_SE_ID(SND_BANK_AREA, 5));
+    SND_SEPlay(EMI_SE_ID(SND_BANK_AREA, 5));
 }
 
 MATCH void func_801F7480(void) {
@@ -252,7 +252,7 @@ NON_MATCHING void func_801F78B0(void) {
     func_801F90F4(MEM_PTR(Scena07BurstBuffer, AREA_WORK + 0x424));
     g_Task->vx = 0x28;
     g_Task->header.step++;
-    SND_PlaySE(EMI_SE_ID(SND_BANK_AREA, 0x09));
+    SND_SEPlay(EMI_SE_ID(SND_BANK_AREA, 0x09));
 }
 #else
 INCLUDE_ASM(func_801F78B0);
@@ -367,7 +367,7 @@ MATCH void func_801F7E68(void) {
         Trail_Update(SCENA07_TRAIL);
     }
     if (g_Task->unk_06 != 0) {
-        SND_PlaySE(EMI_SE_ID(SND_BANK_AREA, 3));
+        SND_SEPlay(EMI_SE_ID(SND_BANK_AREA, 3));
     }
     g_Task->header.step++;
 }
@@ -391,7 +391,7 @@ MATCH void func_801F7FA4(void) {
         if (g_Task->unk_06 == 0) {
             Actor_Clear();
         } else {
-            SND_PlaySE(EMI_SE_ID(SND_BANK_AREA, 4));
+            SND_SEPlay(EMI_SE_ID(SND_BANK_AREA, 4));
             g_Task->timer = 32;
             g_Task->header.step++;
         }
@@ -507,7 +507,7 @@ MATCH void func_801F86BC(FallingSpark* spark) {
         spark->header.life = spark->life_reload;
         spark->header.type = next;
         if (D_801FDFC4 == 0) {
-            SND_PlaySE(EMI_SE_ID(SND_BANK_AREA, 0x00));
+            SND_SEPlay(EMI_SE_ID(SND_BANK_AREA, 0x00));
             D_801FDFC4 = 1;
         }
     }
@@ -521,7 +521,7 @@ MATCH void func_801F8764(FallingSpark* spark) {
 
     if (D_801FDFC8 == 0) {
         if (g_Task->unk_06 == 0) {
-            SND_PlaySE(EMI_SE_ID(SND_BANK_AREA, 1));
+            SND_SEPlay(EMI_SE_ID(SND_BANK_AREA, 1));
         }
         D_801FDFC8 = 1;
     }

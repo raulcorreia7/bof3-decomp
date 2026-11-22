@@ -14,7 +14,7 @@ MATCH void Battle_RouteEquipItem(void) {
             g_Battle.ui_step = 8;
         }
         g_Battle.ui_mode = 0;
-        SND_PlaySE(EMI_SE_ID(SND_BANK_COMMON, 3));
+        SND_SEPlay(EMI_SE_ID(SND_BANK_COMMON, 3));
         return;
     }
     if ((flags & ITEM_USABLE_MENU) != 0) {

@@ -4,6 +4,6 @@ Area_DrawMatrixLightPillar = { addr = 0x801F3980, type = "func", source = "Draws
 Actor_RunAreaStep = { addr = 0x801F4008, type = "func", source = "Clears the work byte 0x48 and frees the palette fade target of the current g_Task." }
 UI_MessageShowParty = { addr = 0x801F403C, type = "func", source = "Looks through the tags of g_PartyMemberMessages[0] for the first one matching a party member's tag byte (D_80145F09[j][0]), starts its area message and sets g_GameStateIndex to GAME_REQUEST_MESSAGE." }
 Area_SkipIfHasKey = { addr = 0x801F4304, type = "func", source = "Script branch: skips the next 3 script bytes when Item_VitalHas(VITAL_ITEM_KEY) reports the key; no C caller, it is reached through the area145 script tables." }
-Area_PauseBGM = { addr = 0x801F434C, type = "func", source = "Pauses the BGM of g_SndBGMId through SND_PauseBGM; the same body as Area_PauseBGM in area039, area057 and area108." }
-Area_ResumeBGM = { addr = 0x801F4374, type = "func", source = "Resumes the BGM of g_SndBGMId through SND_ResumeBGM; the same body as Area_ResumeBGM in area057 and area108." }
+Area_PauseBGM = { addr = 0x801F434C, type = "func", source = "Pauses the BGM of g_SndBGMId through SND_BGMPause; the same body as Area_PauseBGM in area039, area057 and area108." }
+Area_ResumeBGM = { addr = 0x801F4374, type = "func", source = "Resumes the BGM of g_SndBGMId through SND_BGMResume; the same body as Area_ResumeBGM in area057 and area108." }
 g_PartyMemberMessages = { addr = 0x801F5C9C, size = 0x24, source = "Tag and message id pairs of the party member talk: UI_MessageShowParty matches each tags[i] against byte 0 of a party member row and starts messages[i] with UI_MessageStartArea." }

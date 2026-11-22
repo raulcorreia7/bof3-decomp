@@ -64,8 +64,8 @@ MATCH void func_801FAC54(void) {
             if (g_ScriptVars[0] != 1) {
                 break;
             }
-            SND_StopSequence(0, 0);
-            SND_PlayBGM(0xD, 0x64, 8);
+            SND_SeqStop(0, 0);
+            SND_BGMPlay(0xD, 0x64, 8);
             g_ScenarioState.step_05 = 0x10;
             g_ScriptVars[0]         = 0x1E;
             Game_RequestAreaChange(AREA_ID_CEDAR_WOODS_HOUSE_BALIO_SUNDER, TO_COORD(0x22), TO_COORD(0x11), AREA_ENTRY_MAP_LOADING | FACING_UP_RIGHT);

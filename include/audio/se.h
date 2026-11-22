@@ -3,7 +3,7 @@
 
 /* One VAB bank's sound-effect table from an EMI type-8 entry: 4-byte
  * records naming an SPU voice, a VAB program and a tone. The dispatcher
- * `SND_PlaySE` (`0x8015DF18`) splits an SE id into bank and record index, then
+ * `SND_SEPlay` (`0x8015DF18`) splits an SE id into bank and record index, then
  * calls that bank's reader through `g_SndSeReaders[bank]`; the reader keys the
  * record's voices.
  *

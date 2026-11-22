@@ -15,14 +15,14 @@ MATCH void func_801F2E98(void) {
         case 3:
             if (!WINDOW_EFFECT_BUSY()) {
                 g_AreaDrawFlags = 0;
-                SND_PauseBGM(g_SndBGMId);
+                SND_BGMPause(g_SndBGMId);
                 func_801F3548();
-                SND_StartXAStream(0, 1);
+                SND_XAStartStream(0, 1);
                 g_SceneEventState.step = 4;
             }
             break;
         case 4:
-            if ((SND_IsXAIdle() & BYTE_MASK) != 0) {
+            if ((SND_XAIsIdle() & BYTE_MASK) != 0) {
                 u8* flag;
                 u8  flag_value;
 

@@ -45,7 +45,7 @@ MATCH void func_801FB36C(void) {
                         SCENARIO_RETURN_TO_START();
                         SYS_SetFlag(g_SceneFlags, 0x24);
                         SYS_SetFlag(g_SceneFlags, 0x25);
-                        SND_PlaySE(EMI_SE_ID(SND_BANK_COMMON, 6));
+                        SND_SEPlay(EMI_SE_ID(SND_BANK_COMMON, 6));
                     } else {
                         SCENARIO_MESSAGE_WAIT(MSG_SCENA02_109, 3);
                     }
@@ -75,7 +75,7 @@ MATCH void func_801FB36C(void) {
                         SCENARIO_RETURN_TO_START();
                         SYS_SetFlag(g_SceneFlags, 0x24);
                         SYS_SetFlag(g_SceneFlags, 0x25);
-                        SND_PlaySE(EMI_SE_ID(SND_BANK_COMMON, 6));
+                        SND_SEPlay(EMI_SE_ID(SND_BANK_COMMON, 6));
                     } else {
                         SCENARIO_MESSAGE_WAIT(MSG_SCENA02_109, 0xD);
                     }
@@ -120,7 +120,7 @@ MATCH void func_801FB36C(void) {
                         SCENARIO_RETURN_TO_START();
                         SYS_SetFlag(g_SceneFlags, 0x24);
                         SYS_SetFlag(g_SceneFlags, 0x25);
-                        SND_PlaySE(EMI_SE_ID(SND_BANK_COMMON, 6));
+                        SND_SEPlay(EMI_SE_ID(SND_BANK_COMMON, 6));
                     } else {
                         UI_MessageStartArea(MSG_SCENA02_109);
                         *state                  = GAME_REQUEST_MESSAGE;

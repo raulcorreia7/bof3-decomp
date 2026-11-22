@@ -28,16 +28,16 @@ MATCH void func_801D4E74(void) {
         }
     }
     if (prev != g_SaveSlotFirst) {
-        SND_PlaySE(EMI_SE_ID(SND_BANK_COMMON, 1));
+        SND_SEPlay(EMI_SE_ID(SND_BANK_COMMON, 1));
     }
     if ((g_PadStates[0].pressed & g_InputMasks[MENU_INPUT_CONFIRM]) != 0) {
-        SND_PlaySE(EMI_SE_ID(SND_BANK_COMMON, 4));
+        SND_SEPlay(EMI_SE_ID(SND_BANK_COMMON, 4));
         if (g_SaveSlots[g_SaveSlotFirst].card_index == GAME_NONE) {
             if (D_801E60FC != 0) {
                 D_8014865B = 0;
                 D_80148652 = 0xD;
             } else {
-                SND_PlaySE(EMI_SE_ID(SND_BANK_COMMON, 7));
+                SND_SEPlay(EMI_SE_ID(SND_BANK_COMMON, 7));
                 D_80148652       = 0xC;
                 g_SaveCardStatus = CARD_EVENT_CAPACITY;
             }
@@ -46,7 +46,7 @@ MATCH void func_801D4E74(void) {
             D_80148652 = D_80148652 + 1;
         }
     } else if ((g_PadStates[0].pressed & g_InputMasks[MENU_INPUT_CANCEL]) != 0) {
-        SND_PlaySE(EMI_SE_ID(SND_BANK_COMMON, 6));
+        SND_SEPlay(EMI_SE_ID(SND_BANK_COMMON, 6));
         D_80148652 = 0xB;
     }
 }

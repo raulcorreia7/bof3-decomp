@@ -21,7 +21,7 @@ MATCH void func_801EEC70(void) {
     g_BattleEffects[slot].target.party = g_Task;
     g_BattleEffects[slot].header.mode  = 0;
     g_Task->param.unk_0B += 1;
-    SND_QueueSelectionSE(0x100);
+    SND_SEQueueSelection(0x100);
 }
 
 #include "overlays/bmagic/shared/Effect_MarkDamagedOnZeroTick.h"

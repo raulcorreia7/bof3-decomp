@@ -17,27 +17,27 @@ MATCH void func_800A65BC(void) {
     input                                           = INPUT_REPEATED(*pad_state, (PADLup | PADLdown | PADL1 | PADR1));
     pad                                             = *pad_state;
     if (pad & g_InputMasks[BATTLE_INPUT_CANCEL]) {
-        SND_PlaySE(EMI_SE_ID(SND_BANK_COMMON, 6));
+        SND_SEPlay(EMI_SE_ID(SND_BANK_COMMON, 6));
         state = (u8*)&g_Battle.ui_mode;
         *state += 1;
         return;
     }
     if (pad & (g_InputMasks[BATTLE_INPUT_CONFIRM] | PADRup)) {
         if (g_BattleTargetRows[g_BattleTargetCursorCol + D_801485CA].gate_03 == GAME_NONE) {
-            SND_PlaySE(EMI_SE_ID(SND_BANK_COMMON, 7));
+            SND_SEPlay(EMI_SE_ID(SND_BANK_COMMON, 7));
         } else {
-            SND_PlaySE(EMI_SE_ID(SND_BANK_COMMON, 4));
+            SND_SEPlay(EMI_SE_ID(SND_BANK_COMMON, 4));
             g_Battle.ui_mode = 2;
             return;
         }
     }
     if (g_PadStates[0].pressed & PADRup) {
         if (g_BattleTargetRows[g_BattleTargetCursorCol + D_801485CA].gate_03 != GAME_NONE) {
-            SND_PlaySE(EMI_SE_ID(SND_BANK_COMMON, 4));
+            SND_SEPlay(EMI_SE_ID(SND_BANK_COMMON, 4));
             g_Battle.ui_mode = 2;
             return;
         }
-        SND_PlaySE(EMI_SE_ID(SND_BANK_COMMON, 7));
+        SND_SEPlay(EMI_SE_ID(SND_BANK_COMMON, 7));
     }
     cursor_words = (u16*)&g_BattleTargetCursorCol;
     /* FAKE: hides the constant base from cse so the row word stays 2(a2). */
@@ -83,6 +83,6 @@ MATCH void func_800A65BC(void) {
     }
 
     if (*(s16*)&g_BattleTargetCursorCol + D_801485CA != cursor_total) {
-        SND_PlaySE(EMI_SE_ID(SND_BANK_COMMON, 1));
+        SND_SEPlay(EMI_SE_ID(SND_BANK_COMMON, 1));
     }
 }

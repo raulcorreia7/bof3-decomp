@@ -52,8 +52,8 @@ MATCH void func_801F5E4C(void) {
                     g_SpawnedActors[actor_index].pos.x.part.integer = g_Game.members[0].pos.x.part.integer;
                     g_SpawnedActors[actor_index].pos.y.part.integer = g_Game.members[0].pos.y.part.integer;
                 }
-                SND_StopSequence(g_BGMTracks[g_SndBGMId].sep_slot, g_BGMTracks[g_SndBGMId].sequence);
-                SND_PlayBGM(0x94, BGM_CUE_LEVEL_DEFAULT, BGM_CUE_SHAPE_DEFAULT);
+                SND_SeqStop(g_BGMTracks[g_SndBGMId].sep_slot, g_BGMTracks[g_SndBGMId].sequence);
+                SND_BGMPlay(0x94, BGM_CUE_LEVEL_DEFAULT, BGM_CUE_SHAPE_DEFAULT);
                 g_SceneEventMode = SCENE_EVENT_NONE;
                 *state           = 0;
             }

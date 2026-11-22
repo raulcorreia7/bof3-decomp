@@ -45,13 +45,13 @@ MATCH void func_801FBF30(void) {
             break;
         case 3:
             if (g_ScriptVars[0] == 0x13) {
-                SND_StopSequence(0, 1);
+                SND_SeqStop(0, 1);
                 g_ScenarioState.step_05 = 4;
             }
             break;
         case 4:
             if (g_ScriptVars[0] == 0x1E) {
-                SND_PlayBGM(0, BGM_CUE_LEVEL_DEFAULT, BGM_CUE_SHAPE_DEFAULT);
+                SND_BGMPlay(0, BGM_CUE_LEVEL_DEFAULT, BGM_CUE_SHAPE_DEFAULT);
                 g_ScenarioState.step_05 = 5;
             }
             break;

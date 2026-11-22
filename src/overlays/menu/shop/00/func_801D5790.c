@@ -9,7 +9,7 @@ MATCH void func_801D5790(void) {
     SAVE_DrawSlots(SAVE_SLOTS_X, SAVE_SLOTS_Y, 0);
     if (Menu_ChooseYesNo() & BYTE_MASK) {
         if (D_8014865B != 0) {
-            SND_PlaySE(EMI_SE_ID(SND_BANK_COMMON, 4));
+            SND_SEPlay(EMI_SE_ID(SND_BANK_COMMON, 4));
             prev       = D_80148652;
             D_801E60EC = SAVE_WAIT_CREATE;
             D_80148652 = 0x13;
@@ -17,7 +17,7 @@ MATCH void func_801D5790(void) {
             D_801E6094 = prev + 1;
             return;
         }
-        SND_PlaySE(EMI_SE_ID(SND_BANK_COMMON, 6));
+        SND_SEPlay(EMI_SE_ID(SND_BANK_COMMON, 6));
         D_80148652 -= 5;
     }
 }

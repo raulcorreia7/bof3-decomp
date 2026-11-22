@@ -4,6 +4,6 @@ MATCH void func_801F32D8(void) {
     }
     D_801455C7 = 0;
     if (g_GameCellType != 0) {
-        SND_PlaySE(EMI_SE_ID(SND_BANK_AREA, 12));
+        SND_SEPlay(EMI_SE_ID(SND_BANK_AREA, 12));
     }
 }

@@ -31,7 +31,7 @@ MATCH void func_801EFF68(void) {
         g_Task->timer = value3;
         if (!(value3 & BYTE_MASK)) {
             if (g_Task->param.unk_0B == 0) {
-                SND_QueueSelectionSE(0x101);
+                SND_SEQueueSelection(0x101);
             }
             g_Task->unk_10 = 8;
             g_Task->unk_14 = 8;

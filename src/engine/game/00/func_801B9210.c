@@ -43,6 +43,6 @@ MATCH void func_801B9210(void) {
     g_Task->direction = saved;
     g_Task->unk_0A    = 8;
     Script_Request(g_Task->direction);
-    SND_PlaySE(EMI_SE_ID(SND_BANK_COMMON, 8));
+    SND_SEPlay(EMI_SE_ID(SND_BANK_COMMON, 8));
     g_Task->unk_03++;
 }

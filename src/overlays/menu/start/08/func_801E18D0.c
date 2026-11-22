@@ -14,7 +14,7 @@ MATCH void func_801E18D0(void) {
     UI_CursorDraw((((s8)D_80148655 * 0x30) + 0x76) & 0xFFFE, 42, 0);
     pressed = INPUT_GetRepeatedButtons(g_PadStates[0].pressed & INPUT_DIRECTIONAL);
     if (pressed & (PADLright | PADLleft)) {
-        SND_PlaySE(EMI_SE_ID(SND_BANK_COMMON, 1));
+        SND_SEPlay(EMI_SE_ID(SND_BANK_COMMON, 1));
         /* Retail reads this byte signed for the toggle test. */
         if (*(s8*)&D_80148655 == 0) {
             D_80148655 = 1;
@@ -23,13 +23,13 @@ MATCH void func_801E18D0(void) {
         }
     }
     if (pressed & PADLup) {
-        SND_PlaySE(EMI_SE_ID(SND_BANK_COMMON, 0));
+        SND_SEPlay(EMI_SE_ID(SND_BANK_COMMON, 0));
         D_80148655 = 7;
         D_80148652 += 1;
         return;
     }
     if (pressed & PADLdown) {
-        SND_PlaySE(EMI_SE_ID(SND_BANK_COMMON, 0));
+        SND_SEPlay(EMI_SE_ID(SND_BANK_COMMON, 0));
         D_80148655 = 2;
         D_80148652 += 1;
         return;
@@ -39,15 +39,15 @@ MATCH void func_801E18D0(void) {
 
         if (*mode == 0) {
             if (g_GameEntryState != 2) {
-                SND_PlaySE(EMI_SE_ID(SND_BANK_COMMON, 6));
-                SND_PlaySE(EMI_SE_ID(SND_BANK_COMMON, 2));
+                SND_SEPlay(EMI_SE_ID(SND_BANK_COMMON, 6));
+                SND_SEPlay(EMI_SE_ID(SND_BANK_COMMON, 2));
             }
             D_80148653 = 0;
             D_80148654 = 0;
             D_80148652 += 3;
             return;
         }
-        SND_PlaySE(EMI_SE_ID(SND_BANK_COMMON, 4));
+        SND_SEPlay(EMI_SE_ID(SND_BANK_COMMON, 4));
         func_801E2668((u8)*mode, 0x70, 0x26);
         UI_CursorDraw(((*mode * 0x30) + 0x76) & 0xFFFE, 42, 0);
         D_80144950                      = 1;
@@ -76,8 +76,8 @@ MATCH void func_801E18D0(void) {
     return;
 advance:
     if (g_GameEntryState != 2) {
-        SND_PlaySE(EMI_SE_ID(SND_BANK_COMMON, 6));
-        SND_PlaySE(EMI_SE_ID(SND_BANK_COMMON, 2));
+        SND_SEPlay(EMI_SE_ID(SND_BANK_COMMON, 6));
+        SND_SEPlay(EMI_SE_ID(SND_BANK_COMMON, 2));
     }
     D_80148654 = 0;
     D_80148653 = 0;

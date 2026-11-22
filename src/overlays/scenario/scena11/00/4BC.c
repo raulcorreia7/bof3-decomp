@@ -37,7 +37,7 @@ MATCH void func_801F7178(void) {
     Area_AdvanceScroll(scroll);
     if (g_AreaCameraAngle.vy >= 241) {
         if (g_GameStateIndex == GAME_REQUEST_IDLE) {
-            SND_PlaySE(EMI_SE_ID(SND_BANK_AREA, 3));
+            SND_SEPlay(EMI_SE_ID(SND_BANK_AREA, 3));
         }
         g_Task->header.mode = 2;
     }
@@ -53,7 +53,7 @@ MATCH void func_801F7200(void) {
     Area_AdvanceScroll(scroll);
     if (g_AreaCameraAngle.vy < -240) {
         if (g_GameStateIndex == GAME_REQUEST_IDLE) {
-            SND_PlaySE(EMI_SE_ID(SND_BANK_AREA, 3));
+            SND_SEPlay(EMI_SE_ID(SND_BANK_AREA, 3));
         }
         g_Task->header.mode = 1;
     }

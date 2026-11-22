@@ -7,7 +7,7 @@ MATCH void Area_AdvanceCountdown(void) {
     (g_Task)->screen_y = count;
     if ((s16)count <= 0) {
         if (g_GameStateIndex == GAME_REQUEST_IDLE) {
-            SND_PlaySE(EMI_SE_ID(SND_BANK_AREA, 0x01));
+            SND_SEPlay(EMI_SE_ID(SND_BANK_AREA, 0x01));
         }
         (g_Task)->header.step = 1;
     }

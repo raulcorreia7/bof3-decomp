@@ -69,7 +69,7 @@ MATCH void func_801F7268(void) {
         g_Task->unk_2C -= 1;
     }
     if (g_Task->frame_cells == 2) {
-        SND_PlaySE(EMI_SE_ID(SND_BANK_AREA, 0x0C));
+        SND_SEPlay(EMI_SE_ID(SND_BANK_AREA, 0x0C));
     }
     timer               = g_Task->frame_cells - 1;
     g_Task->frame_cells = timer;
@@ -90,7 +90,7 @@ MATCH void func_801F7320(void) {
     timer               = g_Task->frame_cells - 1;
     g_Task->frame_cells = timer;
     if (timer == 0) {
-        SND_PlaySE(EMI_SE_ID(SND_BANK_AREA, 9));
+        SND_SEPlay(EMI_SE_ID(SND_BANK_AREA, 9));
         g_Task->frame_cells = 20;
         g_Task->header.mode++;
     }
@@ -218,7 +218,7 @@ MATCH void func_801F79EC(void) {
     FallingSpark* spark;
 
     if (g_Task->frame_cells == 4) {
-        SND_PlaySE(EMI_SE_ID(SND_BANK_AREA, 0x01));
+        SND_SEPlay(EMI_SE_ID(SND_BANK_AREA, 0x01));
     }
     if ((g_Task->frame_cells & 0x7) == 0) {
         spark = func_801F8B14();
@@ -251,7 +251,7 @@ MATCH void func_801F7B2C(void) {
     g_Task->pos.z = Area_HeightSample(g_Task->pos.x.fixed, 4587520) << 16;
     g_Task->timer = 32;
     g_Task->header.step += 1;
-    SND_PlaySE(EMI_SE_ID(SND_BANK_AREA, 0x02));
+    SND_SEPlay(EMI_SE_ID(SND_BANK_AREA, 0x02));
 }
 
 MATCH void func_801F7BA8(void) {
@@ -275,7 +275,7 @@ MATCH void func_801F7C08(void) {
         g_Task->pos.z = Area_HeightSample(g_Task->pos.x.fixed, 7733248) << 16;
         g_Task->timer = 32;
         g_Task->header.step += 1;
-        SND_PlaySE(EMI_SE_ID(SND_BANK_AREA, 0x02));
+        SND_SEPlay(EMI_SE_ID(SND_BANK_AREA, 0x02));
     }
 }
 
@@ -764,8 +764,8 @@ MATCH void func_801F98E0(void) {
         g_Task->pos.z = 0x2C00000;
         g_Task->vz    = 8388608;
         g_Task->header.mode += 1;
-        SND_PlaySE(EMI_SE_ID(SND_BANK_AREA, 0x02));
-        SND_PlaySE(EMI_SE_ID(SND_BANK_AREA, 0x03));
+        SND_SEPlay(EMI_SE_ID(SND_BANK_AREA, 0x02));
+        SND_SEPlay(EMI_SE_ID(SND_BANK_AREA, 0x03));
     }
 }
 
@@ -777,8 +777,8 @@ MATCH void func_801F995C(void) {
     if (g_Task->pos.x.fixed == 0x490000) {
         setVector(g_Task, 14563, 65536, 12116878);
         g_Task->header.mode += 1;
-        SND_PlaySE(EMI_SE_ID(SND_BANK_AREA, 2));
-        SND_PlaySE(EMI_SE_ID(SND_BANK_AREA, 3));
+        SND_SEPlay(EMI_SE_ID(SND_BANK_AREA, 2));
+        SND_SEPlay(EMI_SE_ID(SND_BANK_AREA, 3));
     }
 }
 
@@ -801,8 +801,8 @@ MATCH void func_801F9AC0(void) {
         g_Task->pos.z = Area_HeightSample(g_Task->pos.x.fixed, 4915200) << 16;
         setVector(g_Task, 0xFFFF4925, 0xFFFF0000, 4993220);
         g_Task->header.mode += 1;
-        SND_PlaySE(EMI_SE_ID(SND_BANK_AREA, 0x02));
-        SND_PlaySE(EMI_SE_ID(SND_BANK_AREA, 0x03));
+        SND_SEPlay(EMI_SE_ID(SND_BANK_AREA, 0x02));
+        SND_SEPlay(EMI_SE_ID(SND_BANK_AREA, 0x03));
     }
 }
 
@@ -826,8 +826,8 @@ MATCH void func_801F9C00(void) {
     work->pos.z.fixed = TO_COORD(2048);
     work->vz          = 0;
     work->header.mode += 1;
-    SND_PlaySE(EMI_SE_ID(SND_BANK_AREA, 4));
-    SND_PlaySE(EMI_SE_ID(SND_BANK_AREA, 5));
+    SND_SEPlay(EMI_SE_ID(SND_BANK_AREA, 4));
+    SND_SEPlay(EMI_SE_ID(SND_BANK_AREA, 5));
 }
 
 MATCH void func_801F9C58(void) {
@@ -849,7 +849,7 @@ MATCH void func_801F9CE0(void) {
     work->pos.z.fixed = TO_COORD(1536);
     work->vz          = 0;
     work->header.mode += 1;
-    SND_PlaySE(EMI_SE_ID(SND_BANK_AREA, 10));
+    SND_SEPlay(EMI_SE_ID(SND_BANK_AREA, 10));
 }
 
 MATCH void func_801F9D30(void) {
@@ -1070,7 +1070,7 @@ NON_MATCHING void func_801FA3E4(void) {
         g_ScriptVars[3] = 0;
         if (SYS_TestFlag(g_SceneFlags, 15)) {
             if (!SYS_TestFlag(g_SceneFlags, 17)) {
-                SND_RequestBGM(0x74);
+                SND_BGMRequest(0x74);
                 while (!EMI_IsReady()) {
                     SYS_ThreadWait(1);
                 }
@@ -1215,17 +1215,17 @@ NON_MATCHING void func_801FABA0(void) {
                 g_AreaDrawFlags = 0;
                 g_ScriptVars[0] = 0x17;
                 SCENARIO_MESSAGE_WAIT(MSG_SCENA08_020, 0xA);
-                SND_FadeOutSequence(0, 1, 4, 0x1E);
+                SND_SeqFadeOut(0, 1, 4, 0x1E);
             }
             break;
         case 10:
             if (g_GameStateIndex != GAME_REQUEST_MESSAGE) {
-                SND_StartXAStream(3, 1);
+                SND_XAStartStream(3, 1);
                 g_ScenarioState.step_05 = 0xB;
             }
             break;
         case 11:
-            if ((u8)SND_IsXAIdle() != 0) {
+            if ((u8)SND_XAIsIdle() != 0) {
                 func_801C1DF0(5);
                 g_ScenarioState.step_05 = 0xC;
                 SYS_SetFlag(g_SceneFlags, 6);
@@ -1235,7 +1235,7 @@ NON_MATCHING void func_801FABA0(void) {
             if (g_GameStateIndex == 0) {
                 g_ScenarioState.step_05 = 0xD;
                 Game_RequestAreaChange(0x37, 0x160000, 0x130000, 0x82);
-                SND_PlayBGM(0x79, 0x64, 8);
+                SND_BGMPlay(0x79, 0x64, 8);
             }
             break;
         case 13:

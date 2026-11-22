@@ -30,6 +30,6 @@ MATCH void Battle_PlayActiveBattlerSE(s32 effect_0, s32 effect_1) {
     } else if (BATTLE_IS_SCRIPTED()) {
         Battle_PlayEnemySE(*ENEMY_COMBATANT(type).unk_E8);
     } else {
-        SND_QueueSelectionSE((ENEMY_COMBATANT(type).type * 2u) | 0x600u);
+        SND_SEQueueSelection((ENEMY_COMBATANT(type).type * 2u) | 0x600u);
     }
 }

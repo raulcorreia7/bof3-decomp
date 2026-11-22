@@ -74,7 +74,7 @@ extern u16 g_WellSwishButtons;
  * and takes press_mode, otherwise idle_mode. */
 #define WELL_TICK_LOWER(end_cue, press_mode, idle_mode) \
     if (--g_WellLowerTimer == 0) {                      \
-        SND_PlaySE(end_cue);                            \
+        SND_SEPlay(end_cue);                            \
         g_WellLowerTimer    = 0;                        \
         g_WellLowerCount    = g_WellPressCount;         \
         g_Task->header.mode = WELL_MODE_LOWER_DONE;     \

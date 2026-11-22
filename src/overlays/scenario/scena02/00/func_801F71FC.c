@@ -30,7 +30,7 @@ MATCH void func_801F71FC(void) {
                 g_ScenarioState.step_05  = 0;
             }
             if (!SYS_TestFlag(g_SceneFlags, 0x20)) {
-                SND_RequestBGM(0xF);
+                SND_BGMRequest(0xF);
                 while (!EMI_IsReady()) {
                     SYS_ThreadWait(1);
                 }
@@ -194,12 +194,12 @@ MATCH void func_801F71FC(void) {
     if (g_GameAreaId == AREA_ID_CAMP_ANGEL_TOWER) {
         if ((D_80146871 & 1) != 0 && !SYS_TestFlag(g_SceneFlags, 2)) {
             SYS_SetFlag(g_SceneFlags, 2);
-            SND_StopSequence(0, 0);
-            SND_RequestBGM(0x4D);
+            SND_SeqStop(0, 0);
+            SND_BGMRequest(0x4D);
             while (!EMI_IsReady()) {
                 SYS_ThreadWait(1);
             }
-            SND_PlayBGM(0x4D, 0x64, 8);
+            SND_BGMPlay(0x4D, 0x64, 8);
         }
     }
     if (g_GameAreaId == AREA_ID_YRAAL_WORLD_MAP) {
@@ -209,12 +209,12 @@ MATCH void func_801F71FC(void) {
         g_ScenarioState.timer_06 = 0;
         if ((D_80146871 & 1) != 0 && g_GameLastAreaId == AREA_ID_CAMP_ANGEL_TOWER) {
             SYS_ClearFlag(g_SceneFlags, 2);
-            SND_StopSequence(0, 0);
-            SND_RequestBGM(0x11);
+            SND_SeqStop(0, 0);
+            SND_BGMRequest(0x11);
             while (!EMI_IsReady()) {
                 SYS_ThreadWait(1);
             }
-            SND_PlayBGM(0x11, 0x64, 8);
+            SND_BGMPlay(0x11, 0x64, 8);
         }
     }
     g_ScenarioState.mode_02 = 2;

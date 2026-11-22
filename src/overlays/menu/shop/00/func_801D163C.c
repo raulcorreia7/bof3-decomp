@@ -45,7 +45,7 @@ MATCH void func_801D163C(void) {
         }
     }
     if ((s8)old != g_ShopStockIndex) {
-        SND_PlaySE(EMI_SE_ID(SND_BANK_COMMON, 0));
+        SND_SEPlay(EMI_SE_ID(SND_BANK_COMMON, 0));
     }
     D_8014845C = g_ShopStockIndex;
     if (g_PadStates[0].pressed & g_InputMasks[MENU_INPUT_CONFIRM]) {
@@ -69,13 +69,13 @@ MATCH void func_801D163C(void) {
         }
         if (g_Zenny >= (u32)g_ShopItemPrice) {
             D_8014865B = 1;
-            SND_PlaySE(EMI_SE_ID(SND_BANK_COMMON, 3));
+            SND_SEPlay(EMI_SE_ID(SND_BANK_COMMON, 3));
             D_80148652 += 1;
         } else {
-            SND_PlaySE(EMI_SE_ID(SND_BANK_COMMON, 7));
+            SND_SEPlay(EMI_SE_ID(SND_BANK_COMMON, 7));
         }
     } else if (g_PadStates[0].pressed & g_InputMasks[MENU_INPUT_CANCEL]) {
-        SND_PlaySE(EMI_SE_ID(SND_BANK_COMMON, 6));
+        SND_SEPlay(EMI_SE_ID(SND_BANK_COMMON, 6));
         for (i = 0; i < (u8)Party_CountOrder(PARTY_ORDER_FIELD); i++) {
             g_UiPanelTasks[i + 3].state = 1;
         }

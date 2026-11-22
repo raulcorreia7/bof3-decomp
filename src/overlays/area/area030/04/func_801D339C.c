@@ -29,7 +29,7 @@ MATCH void func_801D339C(void) {
 
     cue = D_801E1DA0[FISHING_STATE->cue_index];
     if (cue != 0xFFFF) {
-        SND_PlaySE(cue);
+        SND_SEPlay(cue);
     }
 
     state                = FISHING_STATE;

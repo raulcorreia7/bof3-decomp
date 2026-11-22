@@ -63,7 +63,7 @@ MATCH void Scene_EffectBegin(void) { /* func_801D0C70 */
 
     g_Task->ticker = 0;
     g_Task->unk_01++;
-    SND_PlaySE(EMI_SE_ID(SND_BANK_AREA, 3));
+    SND_SEPlay(EMI_SE_ID(SND_BANK_AREA, 3));
 }
 
 /* func_801D0E64 */

@@ -10,7 +10,7 @@ MATCH void Well_ReadSwishInput(void) {
         g_PadStates[0].pressed == (PADLdown | PADLleft)) {
         input              = &g_PadStates[0].pressed;
         g_WellSwishButtons = *input;
-        SND_PlaySE(WELL_CUE_SWISH);
+        SND_SEPlay(WELL_CUE_SWISH);
         switch (*input) {
             case PADLup:
             case (PADLup | PADLright):

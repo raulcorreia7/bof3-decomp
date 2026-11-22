@@ -33,7 +33,7 @@ MATCH void Fishing_CatchPage(void) {
         } else {
             FISHING_STATE->sub_index = 0xD;
         }
-        SND_PlaySE(EMI_SE_ID(SND_BANK_COMMON, 2));
+        SND_SEPlay(EMI_SE_ID(SND_BANK_COMMON, 2));
         FISHING_STATE->sub_index++;
     }
     Script_AnimStepLoop();

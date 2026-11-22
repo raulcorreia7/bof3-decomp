@@ -2,7 +2,7 @@
 
 /* func_80096E90 */
 MATCH void Battle_CancelAttack(void) {
-    SND_PlaySE(EMI_SE_ID(SND_BANK_COMMON, 6));
+    SND_SEPlay(EMI_SE_ID(SND_BANK_COMMON, 6));
     D_8014839F = 1u;
     D_8014837B = 1u;
     Battle_ShowMessage((void*)BATTLE_ACTIVE_MESSAGE_SLOT_PTR);

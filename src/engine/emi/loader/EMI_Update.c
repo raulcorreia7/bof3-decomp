@@ -6,6 +6,6 @@ MATCH void EMI_Update(void) {
     if (g_EmiStreamMode == 1) {
         EMI_UpdateStream();
     } else if (g_EmiStreamMode == 2) {
-        SND_UpdateXA();
+        SND_XAUpdate();
     }
 }

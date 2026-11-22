@@ -23,7 +23,7 @@ MATCH void Fishing_FishSwim(void) {
                     D_801E3200 = 1;
                     Area_SceneSelectRecord(*(u16*)(D_801E2ACA + work->cue_index * sizeof(FishingSceneCue)));
                     if (!(*(u8*)g_Task & ACTOR_FLAG_OFFSCREEN)) {
-                        SND_PlaySE(EMI_SE_ID(SND_BANK_AREA, 6));
+                        SND_SEPlay(EMI_SE_ID(SND_BANK_AREA, 6));
                     }
                     FISHING_STATE->flags &= ~ACTOR_FLAG_SEMI_TRANSPARENT;
                     FISHING_STATE->state_2A   = 0;

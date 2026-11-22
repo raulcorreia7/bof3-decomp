@@ -58,7 +58,7 @@ MATCH void func_801F73FC(void) {
     Area_ClearWorkColumn();
 
     g_Task->header.mode += 1;
-    SND_PlaySE(EMI_SE_ID(SND_BANK_AREA, 2));
+    SND_SEPlay(EMI_SE_ID(SND_BANK_AREA, 2));
 }
 
 MATCH void func_801F7480(void) {

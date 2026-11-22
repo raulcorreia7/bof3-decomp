@@ -9,7 +9,7 @@ __asm__(".include \"include/match/macro.inc\"\n");
 MATCH void func_801F8EB0(void) {
     switch (g_ScenarioState.step_05) {
         case 0:
-            SND_PlayBGM(1, BGM_CUE_LEVEL_DEFAULT, BGM_CUE_SHAPE_DEFAULT);
+            SND_BGMPlay(1, BGM_CUE_LEVEL_DEFAULT, BGM_CUE_SHAPE_DEFAULT);
             g_ScenarioState.step_05 = 1;
             break;
         case 1:

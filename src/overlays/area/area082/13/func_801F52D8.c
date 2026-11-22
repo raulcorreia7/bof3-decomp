@@ -7,7 +7,7 @@ MATCH void func_801F52D8(void) {
     setXY4(poly, 0, 0, 320, 0, 0, 240, 320, 240);
     setRGB0(poly, 0xFF, 0xFF, 0xFF);
     GFX_AddPrim(GFX_LAYER_BATTLE_SCENE, 24);
-    SND_PlaySE(0x202);
+    SND_SEPlay(0x202);
     D_8014933A = 1;
     func_801F5388(0x80);
     D_80145EED[2] = 0;

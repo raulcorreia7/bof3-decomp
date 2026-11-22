@@ -8,7 +8,7 @@ MATCH void func_801E441C(void) {
     if (g_UiWindowChannel & FRONTEND_FLAG_CONFIRM) {
         if ((D_801ED86C != 0) && (g_PadStates[0].pressed & (PADLup | PADLdown))) {
             D_801ED7EC ^= 1;
-            SND_PlaySE(EMI_SE_ID(SND_BANK_COMMON, 1));
+            SND_SEPlay(EMI_SE_ID(SND_BANK_COMMON, 1));
         }
         if (D_801ED7EC != 0) {
             D_801ED864 += 8;
@@ -28,7 +28,7 @@ MATCH void func_801E441C(void) {
         if ((g_PadStates[0].pressed & g_InputMasks[MENU_INPUT_CONFIRM]) || (g_PadStates[0].pressed & PADstart)) {
             UI_ModeSet(UI_MODE_FADE_OUT);
             g_MenuStartStep += 1;
-            SND_PlaySE(EMI_SE_ID(SND_BANK_COMMON, 5));
+            SND_SEPlay(EMI_SE_ID(SND_BANK_COMMON, 5));
         }
     }
 }

@@ -72,8 +72,8 @@ NON_MATCHING void func_801F98A4(void) {
             }
             break;
         case 8:
-            SND_StopSequence(0, 0);
-            SND_PlaySE(0x208);
+            SND_SeqStop(0, 0);
+            SND_SEPlay(0x208);
             g_SndVoiceTargetVolume[16] = 0x7F;
             g_SndVoiceVolume[16]       = 0;
             g_ScenarioState.step_05    = 9;
@@ -95,14 +95,14 @@ NON_MATCHING void func_801F98A4(void) {
             timer = &g_ScenarioState.timer_06;
             (*timer)++;
             if (*timer >= 200) {
-                SND_PlaySE(0x209);
+                SND_SEPlay(0x209);
                 *timer                  = 0;
                 g_ScenarioState.step_05 = 12;
             }
-            SND_DecreaseVoiceTargetVolume(0x10, 4);
+            SND_VoiceDecreaseTargetVolume(0x10, 4);
             SND_StartVolumeSweep(0x10);
             if ((s8)g_SndVoiceTargetVolume[16] < 9) {
-                SND_PlaySE(0x209);
+                SND_SEPlay(0x209);
                 *timer                  = 0;
                 g_ScenarioState.step_05 = 12;
             }
@@ -111,7 +111,7 @@ NON_MATCHING void func_801F98A4(void) {
             if (g_ScriptVars[0] != 6) {
                 break;
             }
-            SND_PlayBGM(0x4E, 0x64, 8);
+            SND_BGMPlay(0x4E, 0x64, 8);
             g_ScenarioState.step_05 = 15;
             break;
         case 15:
@@ -132,7 +132,7 @@ NON_MATCHING void func_801F98A4(void) {
             }
             break;
         case 16:
-            SND_PlaySE(0x208);
+            SND_SEPlay(0x208);
             g_ScenarioState.step_05 = 21;
             break;
         case 21:
@@ -165,7 +165,7 @@ NON_MATCHING void func_801F98A4(void) {
             if (g_ScriptVars[0] != 6) {
                 break;
             }
-            SND_PlaySE(0x209);
+            SND_SEPlay(0x209);
             Game_BattleStartScripted(0x15);
             g_ScenarioState.step_05 = 25;
             break;

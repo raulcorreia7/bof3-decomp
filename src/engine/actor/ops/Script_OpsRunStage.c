@@ -18,7 +18,7 @@ typedef enum ActorScriptStage {
     ACTOR_SCRIPT_STAGE_SET_RECORD_INDEX    = 0x86, /* args: [index]; pick the actor/game record, halt cursor */
     ACTOR_SCRIPT_STAGE_TINT_DARK           = 0x87, /* tint-darken handler for the actor type (D_801C8904) */
     ACTOR_SCRIPT_STAGE_TINT_LIGHT          = 0x88, /* tint-lighten handler for the actor type (D_801C88FC) */
-    ACTOR_SCRIPT_STAGE_START_XA            = 0x89, /* args: [xa_id_u16]; SND_StartXAStream */
+    ACTOR_SCRIPT_STAGE_START_XA            = 0x89, /* args: [xa_id_u16]; SND_XAStartStream */
     ACTOR_SCRIPT_STAGE_SOUND_STUB          = 0x8A, /* args: [id_u16]; the empty sound stub func_80164020 */
     ACTOR_SCRIPT_STAGE_WAIT_XA_IDLE        = 0x8B, /* wait while the XA stream is not idle */
     ACTOR_SCRIPT_STAGE_SPAWN_HELPER        = 0x8C, /* args: [flag]; Actor_SpawnHelper claims a slot at the actor */
@@ -122,7 +122,7 @@ NON_MATCHING u8 Script_OpsRunStage(ScriptState* state, const u8* table, u8 value
             func_801AC9D0();
             break;
         case ACTOR_SCRIPT_STAGE_START_XA:
-            SND_StartXAStream((table[state->cursor + 1] << 8) | table[state->cursor + 2], 1);
+            SND_XAStartStream((table[state->cursor + 1] << 8) | table[state->cursor + 2], 1);
             state->cursor += 2;
             break;
         case ACTOR_SCRIPT_STAGE_SOUND_STUB:
@@ -130,7 +130,7 @@ NON_MATCHING u8 Script_OpsRunStage(ScriptState* state, const u8* table, u8 value
             state->cursor += 2;
             break;
         case ACTOR_SCRIPT_STAGE_WAIT_XA_IDLE:
-            if ((SND_IsXAIdle() & BYTE_MASK) != 0) {
+            if ((SND_XAIsIdle() & BYTE_MASK) != 0) {
                 break;
             }
             state->cursor--;

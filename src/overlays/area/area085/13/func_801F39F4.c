@@ -9,7 +9,7 @@ MATCH void func_801F39F4(void) {
         g_SpawnedActors[slot].header.flags             = 1;
         g_SpawnedActors[g_Task->param.actor_slot].type = 0x47;
         g_SpawnedActors[g_Task->param.actor_slot].link = 0;
-        SND_PlaySE(EMI_SE_ID(SND_BANK_AREA, 0x00));
+        SND_SEPlay(EMI_SE_ID(SND_BANK_AREA, 0x00));
         return;
     }
     g_ScriptState->cursor -= 2;

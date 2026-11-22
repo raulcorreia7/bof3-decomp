@@ -6,8 +6,8 @@ MATCH void func_801F2C40(void) {
     if (!(g_Task->direction & 0x1)) {
         g_Task->direction = (g_Task->direction - 1) & 0x7;
     }
-    /* FAKE: retail reads SND_PlaySE as void(s32). */
-    ((void (*)(s32))SND_PlaySE)(g_Task->unk_2C + 0x100);
+    /* FAKE: retail reads SND_SEPlay as void(s32). */
+    ((void (*)(s32))SND_SEPlay)(g_Task->unk_2C + 0x100);
     Script_Request(((g_Task->direction - 1) / 2) + 0x42);
     g_Game.current->u.field.flags |= 0x40;
     slot                     = Actor_FindFreeSpawned();

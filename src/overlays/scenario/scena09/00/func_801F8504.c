@@ -36,16 +36,16 @@ MATCH void func_801F8504(void) {
             if (*g_ScriptVars != 0x11) {
                 break;
             }
-            SND_FadeOutSequence(0, 0, 4, 0x1E);
-            SND_StartXAStream(3, 1);
+            SND_SeqFadeOut(0, 0, 4, 0x1E);
+            SND_XAStartStream(3, 1);
             g_ScenarioState.step_05 = 6;
             break;
         case 6:
-            if (SND_IsXAIdle() == 0) {
+            if (SND_XAIsIdle() == 0) {
                 break;
             }
             *g_ScriptVars = 0x12;
-            SND_PlayBGM(0x10, 0x64, 8);
+            SND_BGMPlay(0x10, 0x64, 8);
             g_ScenarioState.step_05 = 7;
             break;
         case 7:

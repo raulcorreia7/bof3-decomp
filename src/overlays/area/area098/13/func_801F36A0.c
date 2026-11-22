@@ -4,7 +4,7 @@ MATCH void func_801F36A0(void) {
     Actor* work;
 
     if (g_Task->timer == 20) {
-        SND_PlaySE(EMI_SE_ID(SND_BANK_AREA, 0x05));
+        SND_SEPlay(EMI_SE_ID(SND_BANK_AREA, 0x05));
     }
     if (g_Task->timer < 21U) {
         g_Task->timer += 1;

@@ -80,7 +80,7 @@ MATCH void Title_WaitInput(void) { /* func_801D0F00 */
         UI_ModeSet(UI_MODE_SLOW_FADE_OUT);
         sel  = g_SndBGMId;
         bank = D_80143F20;
-        SND_FadeOutBGM(sel, bank, 8);
+        SND_BGMFadeOut(sel, bank, 8);
         g_UiTitleState = g_UiTitleState + 1u;
     }
     Title_DrawChoicePrompt();

@@ -96,7 +96,7 @@ MATCH void func_801EF2B4(void) {
         g_BattleEffects[index & BYTE_MASK].target.party = work;
         g_Task->param.unk_0B++;
     }
-    SND_QueueSelectionSE(0x100);
+    SND_SEQueueSelection(0x100);
     g_BattleEffectBattler->header.flags |= PARTY_MEMBER_FLAG_HANDLER_BUSY;
     g_Task->header.mode++;
 }
@@ -203,7 +203,7 @@ MATCH void func_801EFBD8(void) {
         if (g_Battle.active_battler < BATTLE_PARTY_CHARACTERS_COUNT) {
             Battle_PlayActiveBattlerSE(2, 0);
         }
-        SND_QueueSelectionSE(0x203);
+        SND_SEQueueSelection(0x203);
         Battle_MarkDamaged(g_Battle.target_selector);
         record       = g_Task;
         heading      = ratan2(g_BattleEffectBattler->pos.x.fixed - record->pos.x.fixed, g_BattleEffectBattler->pos.y.fixed - record->pos.y.fixed);
@@ -476,7 +476,7 @@ MATCH void func_801F0770(void) {
             if (g_Battle.active_battler < BATTLE_PARTY_CHARACTERS_COUNT) {
                 Battle_PlayActiveBattlerSE(2, 0);
             }
-            SND_QueueSelectionSE(0x203);
+            SND_SEQueueSelection(0x203);
         }
         g_Task->header.step++;
     }
@@ -594,7 +594,7 @@ MATCH void func_801F0E54(void) {
         if (g_Battle.active_battler < 3) {
             Battle_PlayActiveBattlerSE(2, 0);
         }
-        SND_QueueSelectionSE(EMI_SE_ID(SND_BANK_AREA, 0x03));
+        SND_SEQueueSelection(EMI_SE_ID(SND_BANK_AREA, 0x03));
         g_Task->header.step += 1;
     }
 }

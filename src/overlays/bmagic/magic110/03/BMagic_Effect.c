@@ -43,12 +43,12 @@ MATCH void func_801EEC94(void) {
     g_GfxPalettePending                                               = 1;
     *MEM_PTR(u16, AREA_PALETTE_UPLOAD_ROW(AREA_PALETTE_BATL_OVR_ROW)) = *MEM_PTR(u16, AREA_PALETTE_ARENA_ROW(AREA_PALETTE_BATL_OVR_ROW));
     *MEM_PTR(u16, AREA_PALETTE_UPLOAD_ROW(AREA_PALETTE_BMAGIC_ROW))   = *MEM_PTR(u16, AREA_PALETTE_ARENA_33C00);
-    SND_QueueSelectionSE(EMI_SE_ID(SND_BANK_COMMON, 0));
+    SND_SEQueueSelection(EMI_SE_ID(SND_BANK_COMMON, 0));
 }
 
 MATCH void func_801EEE68(void) {
     if (g_Task->param.unk_0B == 2) {
-        SND_QueueSelectionSE(0x101);
+        SND_SEQueueSelection(0x101);
         g_Task->unk_09 = 0;
         g_Task->timer  = 0;
         g_Task->header.mode += 1;

@@ -40,9 +40,9 @@ MATCH void func_801DC248(void) {
             FISHING_PAGE_HANDLER = 0;
             *counter += 1;
         }
-        SND_StopSequence(0, 1);
-        SND_PlayBGM(0x28, 0x64, 8);
-        SND_PlaySE(EMI_SE_ID(SND_BANK_AREA, 3));
+        SND_SeqStop(0, 1);
+        SND_BGMPlay(0x28, 0x64, 8);
+        SND_SEPlay(EMI_SE_ID(SND_BANK_AREA, 3));
     }
     Script_AnimStepLoop();
 }

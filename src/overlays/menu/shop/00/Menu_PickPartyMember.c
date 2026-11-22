@@ -60,7 +60,7 @@ MATCH void Menu_PickPartyMember(void) {
     index_kept:;
     }
     if (prev_side != D_80148658 || prev_index != D_80148659) {
-        SND_PlaySE(EMI_SE_ID(SND_BANK_COMMON, 0));
+        SND_SEPlay(EMI_SE_ID(SND_BANK_COMMON, 0));
     }
     if (g_PadStates[0].pressed & g_InputMasks[MENU_INPUT_CONFIRM]) {
         s8* cursor;
@@ -69,7 +69,7 @@ MATCH void Menu_PickPartyMember(void) {
 
         cursor = &D_8014865A;
         if (*cursor == 0x7F) {
-            SND_PlaySE(EMI_SE_ID(SND_BANK_COMMON, 3));
+            SND_SEPlay(EMI_SE_ID(SND_BANK_COMMON, 3));
             chosen_side  = D_80148658;
             chosen_index = D_80148659;
             *cursor      = chosen_side;
@@ -78,7 +78,7 @@ MATCH void Menu_PickPartyMember(void) {
         }
         result     = func_801DF478();
         D_801E6254 = result;
-        SND_PlaySE(result == GAME_NONE ? EMI_SE_ID(SND_BANK_COMMON, 3) : EMI_SE_ID(SND_BANK_COMMON, 7));
+        SND_SEPlay(result == GAME_NONE ? EMI_SE_ID(SND_BANK_COMMON, 3) : EMI_SE_ID(SND_BANK_COMMON, 7));
         D_8014865A = 0x7F;
         D_8014865D = 0x7F;
         return;
@@ -86,7 +86,7 @@ MATCH void Menu_PickPartyMember(void) {
     if (g_PadStates[0].pressed & g_InputMasks[MENU_INPUT_CANCEL]) {
         s8* cursor;
 
-        SND_PlaySE(EMI_SE_ID(SND_BANK_COMMON, 6));
+        SND_SEPlay(EMI_SE_ID(SND_BANK_COMMON, 6));
         cursor = &D_8014865A;
         if (*cursor != 0x7F) {
             *cursor    = 0x7F;

@@ -16,15 +16,15 @@ MATCH void func_801F529C(void) {
                 Item_VitalAdd(VITAL_ITEM_ID_CARD);
                 UI_MessageStartArea(MSG_AREA135_FOUND_ID_CARD);
                 *game_state = GAME_REQUEST_MESSAGE;
-                SND_PauseBGM(g_SndBGMId);
-                SND_StartXAStream(2, 1);
+                SND_BGMPause(g_SndBGMId);
+                SND_XAStartStream(2, 1);
                 g_SceneEventState.step = 1;
             }
             break;
         case 1:
-            xa_idle = SND_IsXAIdle();
+            xa_idle = SND_XAIsIdle();
             if (xa_idle != 0 && g_GameStateIndex != GAME_REQUEST_MESSAGE) {
-                SND_ResumeBGM(g_SndBGMId);
+                SND_BGMResume(g_SndBGMId);
                 Game_ClearScriptActive();
                 g_SceneEventState.mode = SCENE_EVENT_NONE;
                 g_SceneEventState.step = 0;
@@ -37,7 +37,7 @@ MATCH void func_801F529C(void) {
                 goto message_request;
             } else {
                 SYS_ToggleFlag(g_SceneEventFlags, 42);
-                SND_PlaySE(EMI_SE_ID(SND_BANK_AREA, 3));
+                SND_SEPlay(EMI_SE_ID(SND_BANK_AREA, 3));
                 D_801448EE             = 10;
                 g_SceneEventState.step = 6;
             }
@@ -91,7 +91,7 @@ MATCH void func_801F529C(void) {
             if (g_PadStates[0].held & PADRdown) {
                 func_801F61A8(140);
                 g_SpawnedActors[g_SceneActorSlot].header.mode = 3;
-                SND_PlaySE(EMI_SE_ID(SND_BANK_AREA, 9));
+                SND_SEPlay(EMI_SE_ID(SND_BANK_AREA, 9));
                 g_ScriptVars[3]        = 10;
                 g_SceneEventState.step = 23;
             }
@@ -113,7 +113,7 @@ MATCH void func_801F529C(void) {
             if (g_PadStates[0].held & PADRdown) {
                 func_801F61A8(142);
                 g_SpawnedActors[g_SceneActorSlot].header.mode = 3;
-                SND_PlaySE(EMI_SE_ID(SND_BANK_AREA, 9));
+                SND_SEPlay(EMI_SE_ID(SND_BANK_AREA, 9));
                 g_ScriptVars[3]        = 12;
                 g_SceneEventState.step = 26;
             }

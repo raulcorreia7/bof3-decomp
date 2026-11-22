@@ -50,6 +50,6 @@ MATCH void EMI_VabUploadBody(void) {
         g_EmiBanks[*bank].flags &= ~2;
     }
     if ((g_EmiStreamFlags & 0x40) && (D_80146482 == D_80146855)) {
-        SND_PlaySequence(D_80146482, D_80146856, 100, 100);
+        SND_SeqPlay(D_80146482, D_80146856, 100, 100);
     }
 }

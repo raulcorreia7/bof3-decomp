@@ -43,7 +43,7 @@ MATCH void func_801F6CCC(void) {
     g_SaveEntryY      = 0x88000u;
     g_SaveEntryFacing = FACING_DOWN;
     g_Game.flags      = (flags | GAME_FLAG_MENU_LOCK | 0x200u);
-    SND_RequestBGM(6u);
+    SND_BGMRequest(6u);
 
     while (!EMI_IsReady()) {
         SYS_ThreadWait(1u);
@@ -171,15 +171,15 @@ MATCH void func_801F7188(void) {
         SCENA16_D_80143C30 = 0u;
         g_AreaDrawFlags    = 0u;
         Scene_RestorePalette();
-        SND_PlaySE(EMI_SE_ID(SND_BANK_AREA, 19));
-        SND_PlaySE(EMI_SE_ID(SND_BANK_AREA, 20));
+        SND_SEPlay(EMI_SE_ID(SND_BANK_AREA, 19));
+        SND_SEPlay(EMI_SE_ID(SND_BANK_AREA, 20));
         sel_ptr   = &g_SndBGMId;
         selection = *sel_ptr;
 
         if (selection != 0xFFu) {
             selection_offset = selection << 2;
             /* The const byte view: dropping the cast moves this call's loads. */
-            SND_StopSequence(((const u8*)(g_SelectionSepSlots))[selection_offset], ((const u8*)(g_SelectionSepSlots))[selection_offset + 1u]);
+            SND_SeqStop(((const u8*)(g_SelectionSepSlots))[selection_offset], ((const u8*)(g_SelectionSepSlots))[selection_offset + 1u]);
             *sel_ptr = 0xFFu;
         }
 
@@ -202,7 +202,7 @@ MATCH void func_801F7230(void) {
             if (WINDOW_EFFECT_IDLE()) {
                 UI_ModeSet(UI_MODE_FADE_IN);
                 SsSetMVol(0, 0);
-                SND_PlayBGM(6u, 0x50, 8);
+                SND_BGMPlay(6u, 0x50, 8);
                 next  = &g_ScenarioState.step_05;
                 step  = *next;
                 flags = SCENA16_D_80146258;
@@ -347,7 +347,7 @@ MATCH void func_801F7230(void) {
             if (g_ScriptVars[3] == 0x60u) {
                 Game_RequestAreaChange(AREA_ID_TITLE_INTRO, TO_COORD(7), TO_COORD(20), FACING_UP_LEFT);
                 SCENA16_D_80143F1D = 0xFFu;
-                SND_FadeOutBGM(6u, 0x50, 0x40);
+                SND_BGMFadeOut(6u, 0x50, 0x40);
                 g_ScriptVars[2]          = 0u;
                 g_ScenarioState.state_04 = 3;
                 g_ScenarioState.step_05  = 0u;
@@ -469,7 +469,7 @@ MATCH void func_801F7790(void) {
         }
 
         case 9:
-            SND_PlayBGM(2u, 100, 0x20);
+            SND_BGMPlay(2u, 100, 0x20);
             Game_RequestAreaChange(AREA_ID_DAUNA_MINE_WORKER, TO_COORD(52), TO_COORD(67), FACING_RIGHT);
             g_ScenarioState.state_04 = 4;
             g_ScenarioState.step_05  = 0u;
@@ -645,7 +645,7 @@ MATCH void func_801F7CC4(void) {
             }
             g_AreaDrawFlags = 0u;
             UI_ModeSet(UI_MODE_FADE_IN);
-            SND_FadeOutBGM(2u, 0x6E, 0x20);
+            SND_BGMFadeOut(2u, 0x6E, 0x20);
             state  = &g_ScenarioState.step_05;
             *state = (*state + 1u);
             break;
