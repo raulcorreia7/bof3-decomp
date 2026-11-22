@@ -16,5 +16,5 @@ MATCH void EMI_ArchiveStart(void) {
     D_80146492      = 3;
     g_EmiReadStatus = 0;
     state           = D_8014648B;
-    D_8014648A      = state == 1 ? 6 : 1;
+    g_CdStep        = state == 1 ? 6 : 1;
 }

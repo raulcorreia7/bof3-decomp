@@ -24,8 +24,8 @@ MATCH void EMI_Init(void) {
 
     *loader_state   = bootstrap_address;
     g_EmiStreamMode = 0;
-    D_8014648A      = 0;
-    D_8014648C      = 0;
+    g_CdStep        = 0;
+    g_CdSyncStatus  = 0;
     D_8014681A      = 0xFFFF;
 
     do {

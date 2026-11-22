@@ -15,7 +15,7 @@ MATCH void CD_SetSpeed(void) {
     if (CdControl(CdlSetmode, param, result) == 0) {
         return;
     }
-    D_80146492 = 2;
-    D_8014648C = 0;
-    D_8014648A = 2;
+    D_80146492     = 2;
+    g_CdSyncStatus = 0;
+    g_CdStep       = 2;
 }

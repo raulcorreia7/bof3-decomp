@@ -3,13 +3,13 @@
 /* selects the CD-read dispatch mode from the latched sync status.
  */
 MATCH void CD_OnPause(void) {
-    if (D_8014648C < 0) {
-        D_8014648A = 6;
+    if (g_CdSyncStatus < 0) {
+        g_CdStep = 6;
         return;
     }
-    D_8014648A = 8;
+    g_CdStep = 8;
     if (D_8014648B & 0x1) {
-        D_8014648A = 1;
+        g_CdStep = 1;
         return;
     }
     if (D_8014648B & 0x2) {
