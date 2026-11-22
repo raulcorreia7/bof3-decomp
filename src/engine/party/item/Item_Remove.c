@@ -11,8 +11,8 @@ MATCH u8 Item_Remove(s32 category, u8 item_id, s32 count, s32 unused) {
         return false;
     if ((count & BYTE_MASK) == 0)
         return false;
-    ids   = D_801C893C[category & BYTE_MASK];
-    qtys  = D_801C8950[category & BYTE_MASK];
+    ids   = g_ItemCategoryIds[category & BYTE_MASK];
+    qtys  = g_ItemCategoryCounts[category & BYTE_MASK];
     index = 0;
     while ((index & BYTE_MASK) < INV_SLOTS_PER_CATEGORY) {
         if (*ids == item_id) {

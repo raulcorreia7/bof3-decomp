@@ -286,8 +286,8 @@ extern u8              D_80148694;
  * LOBU, and etc/start/09 and etc/shop/00 test and store the whole word. */
 /* D_8018E990 */
 extern u8              g_SaveCardDirectory[];
-extern u8*             D_801C893C[];
-extern u8*             D_801C8950[];
+extern u8*             g_ItemCategoryIds[];
+extern u8*             g_ItemCategoryCounts[];
 extern char            g_MenuStatFormat[4];
 extern char            g_MenuExperienceFormat[4];
 extern char            g_MenuExperienceBlank[12];

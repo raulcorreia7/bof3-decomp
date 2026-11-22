@@ -84,7 +84,7 @@ MATCH void Battle_SelectItem(void) {
     if (old_cursor != panel->group_cursor) {
         SND_SEPlay(EMI_SE_ID(SND_BANK_COMMON, 0));
     }
-    handle                                          = UI_MessageGetText(Item_GetDescription(g_UiPanelTasks[16].unk_0A, D_801C893C[g_UiPanelTasks[16].unk_0A][g_UiPanelTasks[16].unk_0C]) & HALF_MASK);
+    handle = UI_MessageGetText(Item_GetDescription(g_UiPanelTasks[16].unk_0A, g_ItemCategoryIds[g_UiPanelTasks[16].unk_0A][g_UiPanelTasks[16].unk_0C]) & HALF_MASK);
     g_BattleMessages[((D_801EC328 - 1) & 0xF)].text = handle;
     if (((MenuChoicePanel*)g_BattleChoicePanel)->confirm_timer != 0) {
         return;
@@ -115,7 +115,7 @@ MATCH void Battle_SelectItem(void) {
         return;
     }
     if ((g_PadStates[0].pressed & g_InputMasks[BATTLE_INPUT_CONFIRM]) != 0u) {
-        value                         = D_801C893C[g_UiPanelTasks[16].unk_0A][g_UiPanelTasks[16].unk_0C] + (g_UiPanelTasks[16].unk_0A << 8);
+        value                         = g_ItemCategoryIds[g_UiPanelTasks[16].unk_0A][g_UiPanelTasks[16].unk_0C] + (g_UiPanelTasks[16].unk_0A << 8);
         g_BattleActorTurn->command.id = value;
         if ((Item_PassesTest(g_UiPanelTasks[16].unk_08, CHAR_ID_RYU_YOUNG, ((MenuChoicePanel*)g_BattleChoicePanel)->group, value) & BYTE_MASK) == 0) {
             SND_SEPlay(EMI_SE_ID(SND_BANK_COMMON, 7));

@@ -22,8 +22,8 @@ MATCH void func_801999F8(MenuPanelTask* task) {
     UI_WindowDraw((u16)(task->pos.x + 3), (u16)(task->pos.y + 3), 153, 154, task->unk_09, g_WindowStyle);
     value = func_801AFD10(&task->unk_0B, &row, &count, (u8*)&task->u.list.scroll) & BYTE_MASK;
     y     = task->pos.y + (s8)row;
-    src   = D_801C893C[task->unk_0A] + value;
-    dst   = D_801C8950[task->unk_0A] + value;
+    src   = g_ItemCategoryIds[task->unk_0A] + value;
+    dst   = g_ItemCategoryCounts[task->unk_0A] + value;
     for (i = 0; i < count + 9; i++) {
         byte = *src;
         if (byte != 0) {
@@ -92,5 +92,5 @@ MATCH void func_801999F8(MenuPanelTask* task) {
         UI_SpriteDraw((task->pos.x + (i + 11) * 8), (task->pos.y + 144), 0x1C, UI_SPRITE_ALT_PAGE);
     }
     UI_SpriteDraw((task->pos.x + 136), (task->pos.y + 144), 0x1D, UI_SPRITE_ALT_PAGE);
-    UI_ListDrawScrollbar(D_801C893C[task->unk_0A], task->unk_0B, (task->pos.x + 0x90), (task->pos.y + 0x18), 9, (task->unk_0A != 4) ? 0x80 : 0x20, 0x74);
+    UI_ListDrawScrollbar(g_ItemCategoryIds[task->unk_0A], task->unk_0B, (task->pos.x + 0x90), (task->pos.y + 0x18), 9, (task->unk_0A != 4) ? 0x80 : 0x20, 0x74);
 }

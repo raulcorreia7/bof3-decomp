@@ -16,14 +16,14 @@ MATCH void func_801D40D8(void) {
 
     Menu_DrawClutStrip(g_WindowClut);
     slot = &D_80148624;
-    UI_MessageSetVariable(0, 0xC, Item_GetRecord(D_8014850E, D_801C893C[D_8014850E][D_80148510]));
+    UI_MessageSetVariable(0, 0xC, Item_GetRecord(D_8014850E, g_ItemCategoryIds[D_8014850E][D_80148510]));
     D_801484CC                                    = 0x1A;
     toggle                                        = (s8*)&D_8014865B;
     *slot                                         = 1;
     sel                                           = 1 - *toggle;
     g_UiPanelTasks[MENU_START_PANEL_CURSOR].pos.x = LOHU(D_801484C0) + (sel << 5) + 0xDE;
     g_UiPanelTasks[MENU_START_PANEL_CURSOR].pos.y = LOHU(D_801484C2) + 5;
-    records                                       = D_801C893C;
+    records                                       = g_ItemCategoryIds;
     pad                                           = &g_PadStates[0].pressed;
     if (*pad & (PADLright | PADLleft)) {
         SND_SEPlay(EMI_SE_ID(SND_BANK_COMMON, 1));
@@ -34,8 +34,8 @@ MATCH void func_801D40D8(void) {
     if (pressed & g_InputMasks[MENU_INPUT_CONFIRM]) {
         if (*toggle != 0) {
             SND_SEPlay(EMI_SE_ID(SND_BANK_COMMON, 4));
-            D_801C893C[D_8014850E][D_80148510] = 0;
-            D_801C8950[D_8014850E][D_80148510] = 0;
+            g_ItemCategoryIds[D_8014850E][D_80148510]    = 0;
+            g_ItemCategoryCounts[D_8014850E][D_80148510] = 0;
         } else {
             SND_SEPlay(EMI_SE_ID(SND_BANK_COMMON, 6));
         }

@@ -456,9 +456,9 @@ AreaActionCallback g_AreaActions[11] = {
 
 u8 g_FindZenny[4] = {0x00, 0x00, 0x01, 0x0A};
 
-u8* D_801C893C[5] = {g_InventoryIds[0], g_InventoryIds[1], g_InventoryIds[2], g_InventoryIds[3], g_VitalItemIds};
+u8* g_ItemCategoryIds[5] = {g_InventoryIds[0], g_InventoryIds[1], g_InventoryIds[2], g_InventoryIds[3], g_VitalItemIds};
 
-u8* D_801C8950[5] = {g_InventoryCounts[0], g_InventoryCounts[1], g_InventoryCounts[2], g_InventoryCounts[3], (u8*)0};
+u8* g_ItemCategoryCounts[5] = {g_InventoryCounts[0], g_InventoryCounts[1], g_InventoryCounts[2], g_InventoryCounts[3], (u8*)0};
 
 Item g_Items[ITEM_COUNT] = {
     ITEM("Nothing", 0, ITEM_TYPE_ITEM, 0x4000, 0),

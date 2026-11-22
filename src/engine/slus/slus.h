@@ -782,8 +782,8 @@ extern u32                  D_80190C60; /* end of the BSS stup2 clears */
 extern u8                   D_801C839C[];
 extern u8                   D_801C839D[];
 extern ActorModeCallback    D_801C83D8[];
-extern u8*                  D_801C893C[];
-extern u8*                  D_801C8950[];
+extern u8*                  g_ItemCategoryIds[];
+extern u8*                  g_ItemCategoryCounts[];
 /* Ability elements and flags share a 16-bit mask in this image. */
 extern u16                  D_801CA71C;
 /* The scratchpad work cell. Not volatile: 37 matched SLUS readers keep the
