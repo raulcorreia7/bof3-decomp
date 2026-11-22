@@ -34,7 +34,7 @@ MATCH void Battle_TryEscape(void) {
         divisor = g_Battle.living_enemy_count;
         enemy_sum /= divisor;
 
-        for (slot = 0; slot < (*(u8*)&g_Battle.party_count); slot++) {
+        for (slot = 0; slot < g_Battle.party_count; slot++) {
             if (Battle_SlotIsBlocked((u8)slot) == 0) {
                 player_sum += g_Game.members[slot].chr.stats.agility;
             }

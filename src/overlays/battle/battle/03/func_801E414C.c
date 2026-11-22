@@ -19,13 +19,13 @@ MATCH void func_801E414C(void) {
         if ((*half2 & BATTLE_STATE_REPRISAL_PENDING) != 0) {
             *half2 = (*half2 & ~BATTLE_STATE_REPRISAL_PENDING) | BATTLE_STATE_REPRISAL_DONE;
         } else if ((g_Battle.target_selector & BATTLE_TARGET_BOTH_SIDES) == 0) {
-            action_type = *(u8*)&g_Battle.action_type;
+            action_type = g_Battle.action_type;
             if (action_type == BATTLE_ACTION_ATTACK) {
                 if ((func_801E4368() & BYTE_MASK) != 0) {
                     *half2 |= BATTLE_STATE_REPRISAL_PENDING;
                 }
             }
-            action_type = *(u8*)&g_Battle.action_type;
+            action_type = g_Battle.action_type;
             if ((action_type == BATTLE_ACTION_ABILITY) && ((FIELD(u16, &D_801CA71C, g_Battle.action_id * 0x14) & 0x800) != 0) && ((func_801E4368() & BYTE_MASK) != 0) &&
                 ((g_Abilities[g_Battle.action_id].targeting_flags & ABILITY_TARGET_FLAG_ALL) == 0)) {
                 g_Battle.flags |= BATTLE_STATE_REPRISAL_PENDING;

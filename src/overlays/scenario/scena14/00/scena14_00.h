@@ -21,11 +21,18 @@ extern u8 D_801FC4C0;
 
 extern s32      g_AreaFocusY;
 extern u16      D_80147A96;
+extern u8       D_80148660;
 extern u32      D_801F6C00;
 extern Callback D_801FC418[];
-extern Callback D_801FC424[];
 
-extern s8 D_801FC44C[];
+extern Callback D_801FC424[];
+extern s8       D_801FC44C[];
+
+void func_801C7A54(s32 arg);
+void func_801F4400(void);
+void func_801F4508(void);
+void func_801F4674(void);
+void func_801F4764(void);
 /* D_801FC468 */
 
 #endif

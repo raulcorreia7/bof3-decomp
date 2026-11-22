@@ -88,7 +88,7 @@ NON_MATCHING void Battle_ReadCommandMenu(void) {
             var_v0_215 = var_s0 + 1;
             if (temp_v1_206 & FIELD(u16, var_s5, 0x4u)) {
                 SND_SEPlay(EMI_SE_ID(SND_BANK_COMMON, 1));
-                if (*(u8*)(&g_Battle.cursor.panel_entry) == (var_s1 + 1)) {
+                if (g_Battle.cursor.panel_entry == (var_s1 + 1)) {
                     if (*(u8*)((u8*)(&g_Battle.cursor.panel_entry) + -1) != 0) {
                         if (((u32)((var_s0 - 1) & BYTE_MASK) >= 2U) || !(g_BattleActorTurn->action_flags.value & BATTLER_ACTION_DRAGON_FORM)) {
                             temp_a0_239                                             = var_s0 + 1;
@@ -102,14 +102,14 @@ NON_MATCHING void Battle_ReadCommandMenu(void) {
                             return;
                         }
                         *(u8*)((u8*)(&g_Battle.cursor.panel_entry) + -1) = 0U;
-                        *(u8*)(&g_Battle.cursor.panel_entry)             = 0;
+                        g_Battle.cursor.panel_entry                      = 0;
                         return;
                     }
                     goto block_26;
                 }
             block_26:
                 *(u8*)((u8*)(&g_Battle.cursor.panel_entry) + -1) = 8U;
-                *(u8*)(&g_Battle.cursor.panel_entry)             = var_s0 + 1;
+                g_Battle.cursor.panel_entry                      = var_s0 + 1;
                 var_v0_215                                       = var_s0 + 1;
                 goto block_27;
             }
