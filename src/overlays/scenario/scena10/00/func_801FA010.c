@@ -4,7 +4,7 @@
 __asm__(".include \"include/match/macro.inc\"\n");
 #endif
 
-/* The village elder's first request: the message, the spawn and the world-map trip. */
+/* The scene's opening message handshake, its spawned actors and the map transition. */
 MATCH void func_801FA010(void) {
     u8 i;
     u8 message_index;
