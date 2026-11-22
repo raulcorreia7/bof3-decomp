@@ -1,0 +1,1 @@
+{"function": "emi/world04/area196/13@0x801F3030", "tried": "transcribed from the asm as a u16 origin cell plus sixteen rows of eight GT4 bands, each row closing with two back-facing GT4s and two sprites (one coverage draft, 520 instructions)", "first_diff": "0x801F3034: retail keeps the scratchpad base in v1 and the draft in v0 (lui register choice)", "score": null}
