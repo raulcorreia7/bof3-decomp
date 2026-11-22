@@ -15,17 +15,17 @@ MATCH void Battle_NextCommandMember(void) {
             g_PadStates[0].held = 0;
         if (*cursor < 3) {
             slot = cursor;
-            for (; *slot < BATTLE_PARTY_CHARACTERS_COUNT; ((u8*)slot)[0] += 1) {
+            for (; *slot < BATTLE_PARTY_CHARACTERS_COUNT; slot[0] += 1) {
                 id    = D_801462F6[*slot];
                 index = id & BYTE_MASK;
                 if (index != GAME_NONE) {
-                    ((u8*)slot)[-0x15] = id;
+                    slot[-0x15] = id;
                     if (!HAS_STATUS(g_Game.members[index], STATUS_CONFUSED) &&
                         !(g_Game.members[index].u.turn.action_flags.volatile_value & (BATTLER_ACTION_DRAGON_FORM_QUEUED | BATTLER_ACTION_CHARGING | BATTLER_ACTION_DRAGON_FORM_BERSERK))) {
                         g_BattleMessageSlot = (u8*)&g_Game.members[index];
                         g_BattleActorTurn   = &g_Game.members[index].u.turn.command;
                         Battle_ShowMessage((s32)&g_Game.members[index]);
-                        ((u8*)slot)[-0x22] += 1;
+                        slot[-0x22] += 1;
                         g_UiPanelTasks[4].state = 1;
                         g_UiPanelTasks[3].state = 1;
                         g_UiPanelTasks[2].state = 1;
