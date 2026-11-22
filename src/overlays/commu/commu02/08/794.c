@@ -2506,12 +2506,12 @@ MATCH u8 Party_GetJoinedCharacter(u8 arg) {
     return 0xFF;
 }
 
-#ifdef NON_MATCHING
-NON_MATCHING void func_801D9348(u16 x, u16 y, s32 color, s32 frame_mode) {
+/* Draws the 127 by 53 cursor frame two pixels right of x, blinking when color is set, in the channels frame_mode picks. */
+MATCH void func_801D9348(u16 x, u16 y, s32 color, s32 frame_mode) {
     u8       rgb[3];
     u8       base;
     u8       i;
-    s32      left;
+    s16      right;
     s32      state;
     LINE_F3* line3;
     LINE_F4* line4;
@@ -2535,27 +2535,25 @@ NON_MATCHING void func_801D9348(u16 x, u16 y, s32 color, s32 frame_mode) {
         }
     }
 
-    left  = x + 2;
+    x += 2;
+    right = x;
     line3 = (LINE_F3*)g_GfxPrimCursor;
     SetLineF3(line3);
-    setXY3(line3, left + 4, y, left, y + 4, left, y + 0x34);
+    setXY3(line3, right + 4, y, x, y + 4, x, y + 0x34);
     setRGB0(line3, rgb[2], rgb[1], rgb[0]);
     GFX_AddPrim(GFX_LAYER_UI, sizeof(LINE_F3));
 
     line4 = (LINE_F4*)g_GfxPrimCursor;
     SetLineF4(line4);
-    setXY0(line4, left + 4, y);
-    line4->x3 = left;
+    setXY0(line4, right + 4, y);
+    line4->x3 = x;
     line4->y3 = y + 0x34;
     line4->y1 = y;
     line4->y2 = y + 0x34;
-    line4->x1 = (line4->x2 = left + 0x7F - 1);
+    line4->x1 = (line4->x2 = right + 0x7F - 1);
     setRGB0(line4, rgb[2], rgb[1], rgb[0]);
     GFX_AddPrim(GFX_LAYER_UI, sizeof(LINE_F4));
 }
-#else
-INCLUDE_ASM(func_801D9348);
-#endif
 
 #ifdef NON_MATCHING
 NON_MATCHING void func_801D94D0(s32 page, s32 left, s32 top, s32 cursor_col_arg, s32 cursor_row_arg) {
