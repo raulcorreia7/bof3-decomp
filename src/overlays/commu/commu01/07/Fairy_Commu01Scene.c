@@ -579,13 +579,10 @@ MATCH void func_801D28A4(s16 x, s16 y, u8 slot, s32 selected) {
     func_8014F800((s16)(x + 6), (s16)(y + 4), 0, 5, (u32)&names[offset]);
     prim = GFX_CURSOR(TILE);
     SetTile(prim);
-    prim->x0 = x + 6;
-    prim->y0 = y + 0x12;
-    prim->w  = 0x3C;
-    prim->h  = 0x10;
-    prim->r0 = 0;
-    prim->g0 = 0;
-    prim->b0 = 0;
+    setXY0(prim, x + 6, y + 0x12);
+    prim->w = 0x3C;
+    prim->h = 0x10;
+    setRGB0(prim, 0, 0, 0);
     GFX_AddPrim(GFX_LAYER_UI, sizeof(TILE));
     sel = selected;
     if (sel == 0) {
@@ -669,8 +666,7 @@ NON_MATCHING void func_801D3038(void) {
             if (GetGraphType() != 1) {
                 GetGraphType();
             }
-            SetDrawMode((DR_MODE*)g_GfxPrimCursor, 0, 0, 0, 0);
-            GFX_AddPrim(1, sizeof(DR_MODE));
+            GFX_ADD_DRAW_MODE(0);
             shade = ((g_FrameCount & 8) ? (g_FrameCount & 6) : (~g_FrameCount & 6)) << 5 | 0x3F;
             tile  = GFX_CURSOR(TILE);
             SetTile(tile);
@@ -996,7 +992,7 @@ MATCH void func_801D4030(s16 x, s16 y, u8 piece) {
     sprite->v0   = D_801D4CE0[offset + 1];
     sprite->w    = D_801D4CE0[offset + 2];
     sprite->h    = D_801D4CE0[offset + 3];
-    sprite->clut = ((D_801D4CE0[offset + 5] + 0x1E0) << 6) | (D_801D4CE0[offset + 4] >> 4);
+    sprite->clut = getClut(D_801D4CE0[offset + 4], D_801D4CE0[offset + 5] + 0x1E0);
     sprite->r0   = GFX_COLOR_NEUTRAL;
     sprite->g0   = GFX_COLOR_NEUTRAL;
     sprite->b0   = GFX_COLOR_NEUTRAL;

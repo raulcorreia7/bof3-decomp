@@ -141,6 +141,7 @@ extern s32       D_801D8EE8[6];
 extern s32       D_801D8F00[6];
 
 void Menu_DrawPortrait(s32 sprite_x, s32 sprite_y, s32 atlas_index, s32 shade_mode);
+void Menu_DrawCharacterPortrait(u16 sprite_x, u16 sprite_y, u8 atlas_index, u8 shade_mode);
 void Menu_DrawIcon(u16 sprite_x, u16 sprite_y, u8 icon_column, u8 shade_mode);
 s32  Char_GetExpForLevel(s32 character, s32 level);
 

@@ -13,8 +13,7 @@ MATCH void func_801F3468(AreaRow* row) {
     dot = (TILE_1*)g_GfxPrimCursor;
     SetTile1(dot);
     SetSemiTrans(dot, 1);
-    dot->x0 = screen[0].vx;
-    dot->y0 = screen[0].vy;
+    setXY0(dot, screen[0].vx, screen[0].vy);
     dot->g0 = 0x80;
     dot->r0 = 0x80;
     blue    = (rand() & 1) << 7;
@@ -24,8 +23,7 @@ MATCH void func_801F3468(AreaRow* row) {
     tile = (TILE*)g_GfxPrimCursor;
     SetTile(tile);
     SetSemiTrans(tile, 1);
-    tile->x0 = screen[0].vx - 1;
-    tile->y0 = screen[0].vy - 1;
+    setXY0(tile, screen[0].vx - 1, screen[0].vy - 1);
     tile->w  = 3;
     tile->h  = 3;
     tile->g0 = 0x20;

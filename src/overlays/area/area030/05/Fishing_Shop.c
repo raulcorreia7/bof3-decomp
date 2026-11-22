@@ -346,7 +346,7 @@ MATCH void Fishing_ShopDrawBackdrop(void) {
         ((POLY_FT4*)cursor)->x1    = i * 160 + 160;
         ((POLY_FT4*)cursor)->x0    = i * 160;
         ((POLY_FT4*)cursor)->tpage = quad_tpage;
-        ((POLY_FT4*)cursor)->clut  = 0x7A80;
+        ((POLY_FT4*)cursor)->clut  = getClut(0, 490);
         ((POLY_FT4*)cursor)->y0    = 0;
         ((POLY_FT4*)cursor)->y1    = 0;
         ((POLY_FT4*)cursor)->y2    = 240;

@@ -17,13 +17,10 @@ NON_MATCHING void UI_ListDrawScrollbar(u8* marks, u8 thumb_top, s16 x, s16 y, u8
             if (marks[(u16)i] != 0) {
                 tile = (TILE*)g_GfxPrimCursor;
                 SetTile(tile);
-                tile->r0 = 0x80;
-                tile->g0 = 0;
-                tile->b0 = 0;
-                tile->x0 = x + 4;
-                tile->y0 = y + (track_size * (u16)i) / total + 3;
-                tile->w  = 3;
-                tile->h  = y + (track_size * ((u16)i + 1)) / total + 3 - tile->y0;
+                setRGB0(tile, 0x80, 0, 0);
+                setXY0(tile, x + 4, y + (track_size * (u16)i) / total + 3);
+                tile->w = 3;
+                tile->h = y + (track_size * ((u16)i + 1)) / total + 3 - tile->y0;
                 GFX_AddPrim(GFX_LAYER_UI, sizeof(TILE));
             }
             i++;

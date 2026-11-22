@@ -10,7 +10,7 @@ NON_MATCHING void func_801F6774(void) {
     setPolyFT4(prim);
     SetSemiTrans(prim, 1);
     prim->tpage = getTPage(TPAGE_DEPTH_4BIT, TPAGE_ABR_HALF, 896, 256);
-    prim->clut  = 0x7BC6;
+    prim->clut  = getClut(96, 495);
     setUV4(prim, 0, 0, 0x40, 0, 0, 0x40, 0x40, 0x40);
     setXY4(prim, 255, 134, 300, 179, 210, 179, 255, 224);
     setRGB0(prim, 0x80, 0x80, 0x80);

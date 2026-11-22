@@ -93,8 +93,7 @@ NON_MATCHING void func_801F7660(s32 x, s32 y, s32 z, u16 angle) {
     POLY_G4* primitive;
 
     height = z;
-    SetDrawMode((DR_MODE*)g_GfxPrimCursor, 0, 1, GetTPage(0, 1, 0x3C0, 0) & 0xFFFF, 0);
-    GFX_AddPrim(GFX_LAYER_UI, sizeof(DR_MODE));
+    GFX_ADD_DITHERED_DRAW_MODE(GFX_LAYER_UI, GetTPage(0, 1, 0x3C0, 0) & 0xFFFF);
     Camera_SetMatrix(&matrix);
 
     outer_color = 0x80;

@@ -227,8 +227,7 @@ MATCH void func_801EFC74(void) {
     s32      i;
     s32      scale;
 
-    SetDrawMode((DR_MODE*)g_GfxPrimCursor, 0, 1, getTPage(TPAGE_DEPTH_4BIT, TPAGE_ABR_SUB, 320, 256), 0);
-    GFX_AddPrim(BMAGIC_LAYER_BEHIND_BATTLERS, sizeof(DR_MODE));
+    GFX_ADD_DITHERED_DRAW_MODE(BMAGIC_LAYER_BEHIND_BATTLERS, getTPage(TPAGE_DEPTH_4BIT, TPAGE_ABR_SUB, 320, 256));
     if (g_Task->header.step >= 2) {
         g_ScratchPad.cells.halves[0] = ((g_Task->unk_09 * 4 + 0x210) * rcos(0x800)) >> 12;
     } else {

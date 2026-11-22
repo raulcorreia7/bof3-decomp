@@ -167,7 +167,7 @@ MATCH void func_801F7134(s32 chapter_id) {
     setXY0(prim, 32, 32);
     setUV0(prim, 0, 32);
     setWH(prim, 256, 1768);
-    prim->clut = 0x7A80;
+    prim->clut = getClut(0, 490);
     setRGB0(prim, g_Task->tint.bytes.rgb.r, g_Task->tint.bytes.rgb.g, g_Task->tint.bytes.rgb.b);
     SetShadeTex(prim, 0);
     SetSemiTrans(prim, chapter_id & BYTE_MASK);

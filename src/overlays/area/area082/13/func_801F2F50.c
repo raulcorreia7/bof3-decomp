@@ -26,8 +26,7 @@ MATCH void func_801F2F50(Pos3* pos, s16 radius_a, s16 radius_b, u16 angle_b, u8 
         prim = (POLY_G3*)g_GfxPrimCursor;
         SetPolyG3(prim);
         SetSemiTrans(prim, 1);
-        prim->x0 = screen.vx;
-        prim->y0 = screen.vy;
+        setXY0(prim, screen.vx, screen.vy);
         rot.vx   = (scale.vx * rcos(angle)) >> 12;
         rot.vy   = (scale.vy * rsin(angle)) >> 12;
         prim->x1 = screen.vx + ((rot.vx * rcos(angle_b) - rot.vy * rsin(angle_b)) >> 12);

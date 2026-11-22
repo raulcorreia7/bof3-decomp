@@ -38,11 +38,8 @@ MATCH void func_801F3298(void) {
                 }
                 prim = (TILE_1*)g_GfxPrimCursor;
                 SetTile1(prim);
-                prim->x0 = (s16)tile->x >> 4;
-                prim->y0 = (s16)tile->y >> 4;
-                prim->r0 = (tile->color & 0x1F) << 3;
-                prim->g0 = (tile->color & 0x3E0) >> 2;
-                prim->b0 = (tile->color & 0x7C00) >> 7;
+                setXY0(prim, (s16)tile->x >> 4, (s16)tile->y >> 4);
+                setRGB0(prim, (tile->color & 0x1F) << 3, (tile->color & 0x3E0) >> 2, (tile->color & 0x7C00) >> 7);
                 GFX_AddPrim(GFX_LAYER_EFFECT_FRONT, sizeof(TILE_1));
                 missed = 0;
             }

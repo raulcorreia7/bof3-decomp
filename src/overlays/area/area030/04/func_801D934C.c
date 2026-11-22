@@ -28,21 +28,16 @@ MATCH void func_801D934C(u16 x, u16 y, u16 width, u16 height) {
     poly->y1 = y;
     poly->y2 = y + 2;
     poly->y3 = y + 2;
-    poly->r0 = red;
-    poly->g0 = green;
-    poly->b0 = blue;
+    setRGB0(poly, red, green, blue);
     PSX_SET_SEMI_TRANSPARENT(poly);
     GFX_AddPrim(GFX_LAYER_EFFECT_FRONT, sizeof(POLY_F4));
 
     tile = GFX_CURSOR(TILE);
     SetTile(tile);
-    tile->x0 = x;
-    tile->y0 = y + 2;
-    tile->w  = width;
-    tile->h  = height - 4;
-    tile->r0 = red;
-    tile->g0 = green;
-    tile->b0 = blue;
+    setXY0(tile, x, y + 2);
+    tile->w = width;
+    tile->h = height - 4;
+    setRGB0(tile, red, green, blue);
     PSX_SET_SEMI_TRANSPARENT(tile);
     GFX_AddPrim(GFX_LAYER_EFFECT_FRONT, sizeof(TILE));
 
@@ -56,9 +51,7 @@ MATCH void func_801D934C(u16 x, u16 y, u16 width, u16 height) {
     poly->y1 = y + height - 2;
     poly->y2 = y + height;
     poly->y3 = y + height;
-    poly->r0 = red;
-    poly->g0 = green;
-    poly->b0 = blue;
+    setRGB0(poly, red, green, blue);
     PSX_SET_SEMI_TRANSPARENT(poly);
     GFX_AddPrim(GFX_LAYER_EFFECT_FRONT, sizeof(POLY_F4));
 }

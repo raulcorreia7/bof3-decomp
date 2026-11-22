@@ -14,8 +14,7 @@ NON_MATCHING void func_801F2DA0(void* position, s32 radius1, s32 radius2) {
     u16      angle;
 
     pos = position;
-    SetDrawMode((DR_MODE*)g_GfxPrimCursor, 0, 1, GetTPage(TPAGE_DEPTH_4BIT, TPAGE_ABR_ADD, 0x380, 0x100), 0);
-    GFX_AddPrim(GFX_LAYER_EFFECT_FRONT, sizeof(DR_MODE));
+    GFX_ADD_DITHERED_DRAW_MODE(GFX_LAYER_EFFECT_FRONT, GetTPage(TPAGE_DEPTH_4BIT, TPAGE_ABR_ADD, 0x380, 0x100));
     Camera_SetMatrix(&camera);
     point.vx = pos[0] + (((s16)radius1 * rcos(0)) >> 4);
     sine     = rsin(0);
@@ -35,10 +34,7 @@ NON_MATCHING void func_801F2DA0(void* position, s32 radius1, s32 radius2) {
         prim = (POLY_G4*)g_GfxPrimCursor;
         SetPolyG4(prim);
         SetSemiTrans(prim, 1);
-        prim->x0 = inner.vx;
-        prim->y0 = inner.vy;
-        prim->x1 = outer.vx;
-        prim->y1 = outer.vy;
+        setXY2(prim, inner.vx, inner.vy, outer.vx, outer.vy);
         turn += 0x80;
         angle    = turn;
         point.vx = pos[0] + (((s16)radius1 * rcos(angle)) >> 4);

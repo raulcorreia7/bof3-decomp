@@ -9,8 +9,7 @@ NON_MATCHING void func_801F36DC(void) {
     s32 x;
     u8  age;
 
-    SetDrawMode((DR_MODE*)g_GfxPrimCursor, 0, 1, (GetGraphType() == 1 || GetGraphType() == 2) ? 0x2A5 : 0xB5, 0);
-    GFX_AddPrim(4, sizeof(DR_MODE));
+    GFX_ADD_DITHERED_DRAW_MODE(4, (GetGraphType() == 1 || GetGraphType() == 2) ? 0x2A5 : 0xB5);
 
     if (g_Task->timer < 0xFF) {
         g_Task->timer++;

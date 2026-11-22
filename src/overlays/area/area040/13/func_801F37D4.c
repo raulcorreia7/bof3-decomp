@@ -23,15 +23,10 @@ NON_MATCHING void func_801F37D4(void) {
             prim = (POLY_F4*)g_GfxPrimCursor;
             SetPolyF4(prim);
             SetSemiTrans(prim, 1);
-            prim->x0 = g_AreaCellPrims[id][g_GfxBufferIndex ? 0 : 1].x0;
-            prim->y0 = g_AreaCellPrims[id][g_GfxBufferIndex ? 0 : 1].y0;
-            prim->x1 = g_AreaCellPrims[id][g_GfxBufferIndex ? 0 : 1].x1;
-            prim->y1 = g_AreaCellPrims[id][g_GfxBufferIndex ? 0 : 1].y1;
-            prim->x2 = g_AreaCellPrims[id][g_GfxBufferIndex ? 0 : 1].x2;
-            prim->y2 = g_AreaCellPrims[id][g_GfxBufferIndex ? 0 : 1].y2;
-            prim->x3 = g_AreaCellPrims[id][g_GfxBufferIndex ? 0 : 1].x3;
-            prim->y3 = g_AreaCellPrims[id][g_GfxBufferIndex ? 0 : 1].y3;
-            shade    = (s32)((g_FrameCount >> 1) & 0xF) - 8;
+            setXY4(prim, g_AreaCellPrims[id][g_GfxBufferIndex ? 0 : 1].x0, g_AreaCellPrims[id][g_GfxBufferIndex ? 0 : 1].y0, g_AreaCellPrims[id][g_GfxBufferIndex ? 0 : 1].x1,
+                   g_AreaCellPrims[id][g_GfxBufferIndex ? 0 : 1].y1, g_AreaCellPrims[id][g_GfxBufferIndex ? 0 : 1].x2, g_AreaCellPrims[id][g_GfxBufferIndex ? 0 : 1].y2,
+                   g_AreaCellPrims[id][g_GfxBufferIndex ? 0 : 1].x3, g_AreaCellPrims[id][g_GfxBufferIndex ? 0 : 1].y3);
+            shade = (s32)((g_FrameCount >> 1) & 0xF) - 8;
             if (shade < 0) {
                 shade = -shade;
             }
