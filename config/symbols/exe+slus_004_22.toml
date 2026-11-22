@@ -192,6 +192,7 @@ g_BattleGeneCount = { addr = 0x801463C7, type = "u8", source = "Number of genes 
 g_DragonForm = { addr = 0x801463C9, type = "u8", source = "Selected dragon form; the dragon_form member of g_Battle.", alias = true }
 g_BattleActionLock = { addr = 0x801463CE, type = "u8", source = "Frames during which the battle actions are locked; the action_lock member of g_Battle.", alias = true }
 g_BattlePendingStatus = { addr = 0x801463D8, type = "u16", source = "Status effects to apply to a battler; the pending_status member of g_Battle.", alias = true }
+g_EmiStream = { addr = 0x80146450, size = 0x50, alias = true, source = "The CD/EMI stream: the entry being transferred, the sector ring cursor, the CD callback state and the last sync result; the g_Emi* and g_Cd* rows at these addresses are the access views." }
 g_EmiStartSector = { addr = 0x80146450, source = "EMI_NextEntry loads it from g_EmiSlotSectors[slot]; CD_OnReady checks it against g_EmiSectorCursor on the first sector" }
 g_EmiBytesLeft = { addr = 0x80146454, source = "Bytes left to load from the EMI archive." }
 g_EmiLoadArg = { addr = 0x80146458, source = "Load argument of the EMI entry being loaded." }
