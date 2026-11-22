@@ -8,7 +8,6 @@
 /* The orbit angle cell the effect path keeps in the scratchpad. */
 extern volatile s16 D_1F80000E;
 
-extern u16 D_80036C00[256];
 extern u16 g_BattleEffectPalette[256];
 
 /* The facing lookup that seeds the actor's effect timer. */

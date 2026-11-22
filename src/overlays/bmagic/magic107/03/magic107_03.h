@@ -11,12 +11,11 @@ extern s32 D_1F80000C;
 
 /* Column views of g_BattleEffects: func_801EEC5C stores through them because
  * member stores let the D_8014637C load move above the target store. */
-extern u8       D_801EC338[];
-extern u8       D_801EC364[];
-extern u8       D_801EC368[];
-extern u8       D_801EC36C[];
-extern u8       D_801EC3A4[];
-extern Callback D_801F048C[];
+extern u8 D_801EC338[];
+extern u8 D_801EC364[];
+extern u8 D_801EC368[];
+extern u8 D_801EC36C[];
+extern u8 D_801EC3A4[];
 
 void func_801EED40(void);
 void func_801EF0E4(void);

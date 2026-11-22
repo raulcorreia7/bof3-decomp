@@ -33,13 +33,12 @@ void func_801EFD4C(void);
 
 void func_801EFEC8(void);
 
-extern Magic003SecondSteps      D_801EEC18;
-extern Callback                 D_801F0AD8[];
-void                            BMagic_DispatchEffectMode(void);
 /* The target column of g_BattleEffects: each store forms its own slot base. */
 extern BattleEffectTargetColumn D_801EC3A4[];
+extern Magic003SecondSteps      D_801EEC18;
 extern u8                       D_801F0A84[];
 extern u8                       D_801F0A98[];
+extern Callback                 D_801F0AD8[];
 extern u8                       D_801F0B04[];
 void                            func_801F03F0(s32 dir);
 

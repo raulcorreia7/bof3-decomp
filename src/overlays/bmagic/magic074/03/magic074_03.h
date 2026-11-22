@@ -34,7 +34,6 @@ extern u8   D_801F0550[];
 /* The sparkle count of each type, and the launch delay step between its groups of four. */
 #define EFFECT_SPARKLE_COUNTS D_801F0548
 #define EFFECT_SPARKLE_DELAYS D_801F054C
-extern u8 D_801F0548[];
 extern u8 D_801F054C[];
 /* The colour rows of each type. */
 #define EFFECT_SPARKLE_COLORS D_801F0530
