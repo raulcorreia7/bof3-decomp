@@ -37,7 +37,7 @@ MATCH void func_801EEC70(void) {
         u16* row;
         u16* arena;
 
-        for (i = 1, row = MEM_PTR(u16, AREA_PALETTE_UPLOAD_ROW(AREA_PALETTE_BATL_OVR_ROW)) + 1, arena = MEM_PTR(u16, AREA_PALETTE_ARENA_ROW(AREA_PALETTE_BATL_OVR_ROW)) + 1; i < 16; i++) {
+        for (i = 1, row = g_AreaPaletteCopy->rows[AREA_PALETTE_BATL_OVR_ROW].colors + 1, arena = g_AreaPaletteArena->rows[AREA_PALETTE_BATL_OVR_ROW].colors + 1; i < 16; i++) {
             *row++ = *arena++ | PSX_COLOR_STP_BIT;
         }
     }
@@ -45,7 +45,7 @@ MATCH void func_801EEC70(void) {
         u16* arena;
         u16* row;
 
-        for (i = 1, arena = MEM_PTR(u16, AREA_PALETTE_ARENA_ROW(AREA_PALETTE_BATL_OVR_ROW)) + 1, row = MEM_PTR(u16, AREA_PALETTE_UPLOAD_ROW(AREA_PALETTE_BATL_OVR_ROW)) + 1; i < 16; i++) {
+        for (i = 1, arena = g_AreaPaletteArena->rows[AREA_PALETTE_BATL_OVR_ROW].colors + 1, row = g_AreaPaletteCopy->rows[AREA_PALETTE_BATL_OVR_ROW].colors + 1; i < 16; i++) {
             row[16] = arena[16];
             arena++;
             row++;
@@ -55,18 +55,18 @@ MATCH void func_801EEC70(void) {
         u16* arena;
         u16* row;
 
-        for (i = 1, arena = MEM_PTR(u16, AREA_PALETTE_ARENA_ROW(AREA_PALETTE_BATL_OVR_ROW)) + 1, row = MEM_PTR(u16, AREA_PALETTE_UPLOAD_ROW(AREA_PALETTE_BATL_OVR_ROW)) + 1; i < 16; i++) {
+        for (i = 1, arena = g_AreaPaletteArena->rows[AREA_PALETTE_BATL_OVR_ROW].colors + 1, row = g_AreaPaletteCopy->rows[AREA_PALETTE_BATL_OVR_ROW].colors + 1; i < 16; i++) {
             row[32] = arena[32] | PSX_COLOR_STP_BIT;
             arena++;
             row++;
         }
     }
-    MEM_PTR(u16, AREA_PALETTE_UPLOAD_ROW(AREA_PALETTE_BATL_OVR_ROW))[0]  = 0;
-    MEM_PTR(u16, AREA_PALETTE_UPLOAD_ROW(AREA_PALETTE_BATL_OVR_ROW))[16] = 0;
-    MEM_PTR(u16, AREA_PALETTE_UPLOAD_ROW(AREA_PALETTE_BATL_OVR_ROW))[32] = 0;
-    g_GfxPalettePending                                                  = 1;
-    g_Task->param.unk_0B                                                 = 0;
-    g_Task->unk_09                                                       = 0;
+    g_AreaPaletteCopy->rows[AREA_PALETTE_BATL_OVR_ROW].colors[0]  = 0;
+    g_AreaPaletteCopy->rows[AREA_PALETTE_BATL_OVR_ROW].colors[16] = 0;
+    g_AreaPaletteCopy->rows[AREA_PALETTE_BATL_OVR_ROW].colors[32] = 0;
+    g_GfxPalettePending                                           = 1;
+    g_Task->param.unk_0B                                          = 0;
+    g_Task->unk_09                                                = 0;
     g_Task->header.mode += 1;
 }
 

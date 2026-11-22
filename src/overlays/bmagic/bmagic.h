@@ -299,10 +299,10 @@ static inline void BMagic_AdvanceEffectStep(u8 limit) {
 /* Zero `i`, point `dst` at palette row 26 (the BATL_OVR bank) in the working palette and `src` at
  * the same row in the arena. A statement macro: the member declares its pointers and index, and
  * the setup order is retail's. */
-#define BMAGIC_POINT_AT_PALETTE_ROW(dst, src, i)                              \
-    (i)   = 0;                                                                \
-    (dst) = MEM_PTR(u16, AREA_PALETTE_UPLOAD_ROW(AREA_PALETTE_BATL_OVR_ROW)); \
-    (src) = MEM_PTR(u16, AREA_PALETTE_ARENA_ROW(AREA_PALETTE_BATL_OVR_ROW))
+#define BMAGIC_POINT_AT_PALETTE_ROW(dst, src, i)                       \
+    (i)   = 0;                                                         \
+    (dst) = g_AreaPaletteCopy->rows[AREA_PALETTE_BATL_OVR_ROW].colors; \
+    (src) = g_AreaPaletteArena->rows[AREA_PALETTE_BATL_OVR_ROW].colors
 
 /* Set the top bit of every halfword of that row in the working palette. */
 #define BMAGIC_BRIGHTEN_PALETTE_ROW(dst, src, i) \

@@ -40,7 +40,7 @@ MATCH void func_801EECA4(void) {
     g_BattleEffects[slot].pos.y.fixed  = g_Task->pos.y.fixed;
     g_BattleEffects[slot].pos.z.fixed  = g_Task->pos.z.fixed;
     g_Task->param.unk_0B += 1;
-    for (i = 0, dst = MEM_PTR(u16, AREA_PALETTE_UPLOAD_ROW(AREA_PALETTE_BATL_OVR_ROW)), src = MEM_PTR(u16, AREA_PALETTE_ARENA_ROW(AREA_PALETTE_BATL_OVR_ROW)); i < 16; i++) {
+    for (i = 0, dst = g_AreaPaletteCopy->rows[AREA_PALETTE_BATL_OVR_ROW].colors, src = g_AreaPaletteArena->rows[AREA_PALETTE_BATL_OVR_ROW].colors; i < 16; i++) {
         dst[i]      = src[i];
         dst[i + 16] = src[i + 16];
     }

@@ -36,8 +36,8 @@ NON_MATCHING void func_801EEC94(void) {
     g_BattleEffects[slot].target.party = work;
     g_Task->param.unk_0B += 1;
     i   = 0;
-    dst = MEM_PTR(u16, AREA_PALETTE_UPLOAD_ROW(AREA_PALETTE_BMAGIC_ROW));
-    src = MEM_PTR(u16, AREA_PALETTE_ARENA_ROW(AREA_PALETTE_BMAGIC_ROW));
+    dst = g_AreaPaletteCopy->rows[AREA_PALETTE_BMAGIC_ROW].colors;
+    src = g_AreaPaletteArena->rows[AREA_PALETTE_BMAGIC_ROW].colors;
     for (; i < 0x100; i++) {
         dst[i] = src[i] | PSX_COLOR_STP_BIT;
     }

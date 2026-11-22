@@ -37,10 +37,10 @@ MATCH void func_801EED28(void) {
     g_BattleEffects[slot].target.party = work;
     g_Task->param.unk_0B += 1;
     i       = 0;
-    row_dst = MEM_PTR(u16, AREA_PALETTE_UPLOAD_ROW(AREA_PALETTE_BMAGIC_ROW));
-    row_src = MEM_PTR(u16, AREA_PALETTE_ARENA_33C00);
-    dst     = MEM_PTR(u16, AREA_PALETTE_UPLOAD_ROW(AREA_PALETTE_BATL_OVR_ROW));
-    src     = MEM_PTR(u16, AREA_PALETTE_ARENA_ROW(AREA_PALETTE_BATL_OVR_ROW));
+    row_dst = g_AreaPaletteCopy->rows[AREA_PALETTE_BMAGIC_ROW].colors;
+    row_src = g_AreaPaletteArena->rows[AREA_PALETTE_BMAGIC_ROW].colors;
+    dst     = g_AreaPaletteCopy->rows[AREA_PALETTE_BATL_OVR_ROW].colors;
+    src     = g_AreaPaletteArena->rows[AREA_PALETTE_BATL_OVR_ROW].colors;
     for (; i < AREA_PALETTE_COLORS; i++) {
         row_dst[i] = row_src[i];
         dst[i]     = src[i];

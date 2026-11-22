@@ -227,8 +227,8 @@ MATCH void func_801EF6AC(void) {
         Area_AddGridActor();
         if ((g_FrameCount & 3) == 0) {
             i   = 0;
-            dst = MEM_PTR(u16, AREA_PALETTE_UPLOAD_ROW(AREA_PALETTE_BMAGIC_ROW));
-            src = MEM_PTR(u16, AREA_PALETTE_ARENA_33C00);
+            dst = g_AreaPaletteCopy->rows[AREA_PALETTE_BMAGIC_ROW].colors;
+            src = g_AreaPaletteArena->rows[AREA_PALETTE_BMAGIC_ROW].colors;
             for (; i < 9; i++) {
                 dst[i + 0x21] = src[g_Task->unk_04 + i] | PSX_COLOR_STP_BIT;
             }

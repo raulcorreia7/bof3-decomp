@@ -29,20 +29,20 @@ MATCH void func_801EEC70(void) {
     g_BattleEffects[slot].arg.unk_09   = 16;
     g_Task->param.unk_0B += 1;
     /* Copies arena palette rows 26 and 2 into the work copy with STP set, then restores the first color of each. */
-    for (i = 0, dst = MEM_PTR(u16, AREA_PALETTE_UPLOAD_ROW(AREA_PALETTE_BATL_OVR_ROW)), src = MEM_PTR(u16, AREA_PALETTE_ARENA_ROW(AREA_PALETTE_BATL_OVR_ROW)); i < AREA_PALETTE_COLORS; i++) {
+    for (i = 0, dst = g_AreaPaletteCopy->rows[AREA_PALETTE_BATL_OVR_ROW].colors, src = g_AreaPaletteArena->rows[AREA_PALETTE_BATL_OVR_ROW].colors; i < AREA_PALETTE_COLORS; i++) {
         *dst++ = *src++ | PSX_COLOR_STP_BIT;
     }
     {
         u16* row_dst;
         u16* row_src;
 
-        for (i = 0, row_dst = MEM_PTR(u16, AREA_PALETTE_UPLOAD_ROW(AREA_PALETTE_BMAGIC_ROW)), row_src = MEM_PTR(u16, AREA_PALETTE_ARENA_33C00); i < 16; i++) {
+        for (i = 0, row_dst = g_AreaPaletteCopy->rows[AREA_PALETTE_BMAGIC_ROW].colors, row_src = g_AreaPaletteArena->rows[AREA_PALETTE_BMAGIC_ROW].colors; i < 16; i++) {
             *row_dst++ = *row_src++ | PSX_COLOR_STP_BIT;
         }
     }
-    g_GfxPalettePending                                               = 1;
-    *MEM_PTR(u16, AREA_PALETTE_UPLOAD_ROW(AREA_PALETTE_BATL_OVR_ROW)) = *MEM_PTR(u16, AREA_PALETTE_ARENA_ROW(AREA_PALETTE_BATL_OVR_ROW));
-    *MEM_PTR(u16, AREA_PALETTE_UPLOAD_ROW(AREA_PALETTE_BMAGIC_ROW))   = *MEM_PTR(u16, AREA_PALETTE_ARENA_33C00);
+    g_GfxPalettePending                                          = 1;
+    g_AreaPaletteCopy->rows[AREA_PALETTE_BATL_OVR_ROW].colors[0] = g_AreaPaletteArena->rows[AREA_PALETTE_BATL_OVR_ROW].colors[0];
+    g_AreaPaletteCopy->rows[AREA_PALETTE_BMAGIC_ROW].colors[0]   = g_AreaPaletteArena->rows[AREA_PALETTE_BMAGIC_ROW].colors[0];
 }
 
 #include "overlays/bmagic/shared/Effect_CountDownTimerQueueEffect.h"
