@@ -4,7 +4,7 @@ MATCH void func_801F2CD4(void) {
     s8 value;
     u8 value2;
 
-    ACTOR_COUNT_DOWN(value2, timer);
+    ACTOR_COUNT_DOWN(TASK(Actor), value2, timer);
     if (value2 & BYTE_MASK) {
         g_AreaCameraOffsetZ = g_AreaCameraOffsetZ - 0x2A;
         value               = g_Task->tint.bytes.rgb.r;

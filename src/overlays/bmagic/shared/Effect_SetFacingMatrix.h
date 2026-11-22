@@ -9,7 +9,7 @@ MATCH void Effect_SetFacingMatrix(void) {
     PushMatrix();
     rot.vx = 0;
     rot.vy = 0;
-    switch (g_Task->facing) {
+    switch (TASK(PartyMember)->facing) {
         case 0:
             rot.vz = 0;
             break;
@@ -23,5 +23,5 @@ MATCH void Effect_SetFacingMatrix(void) {
             rot.vz = ANGLE_270;
             break;
     }
-    BMAGIC_PROJECT_ACTOR_MATRIX(g_Task);
+    BMAGIC_PROJECT_ACTOR_MATRIX(TASK(PartyMember));
 }

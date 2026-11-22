@@ -7,10 +7,10 @@
 MATCH void Fishing_PromptRun(void) {
     FishingState* record;
 
-    record = FISHING_STATE;
+    record = TASK(FishingState);
     if (((u8*)record != &D_80144124) && (D_80144125 < 4u)) {
         Actor_Clear();
         return;
     }
-    g_FishingPromptSteps[FISHING_STATE->handler_index]();
+    g_FishingPromptSteps[TASK(FishingState)->handler_index]();
 }

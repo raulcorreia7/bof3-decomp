@@ -21,8 +21,6 @@
 /* Engine helpers this target calls. The implementing bodies live in the
  * battle/battle/03 overlay; the call sites in this target fix the parameter roles
  * named in the prototypes below. */
-/* Typed view of the scratchpad work area; each use reloads the cell. */
-#define BATTLE_WORK                    TASK(PartyMember)
 
 /* The actor's target slot, signed, moved by one step before the wrap helper clamps it. */
 #define ACTOR_TARGET_STEP(delta)       ((s8)g_BattleActorTurn->command.target + (delta))
@@ -1209,7 +1207,7 @@ static inline void BattleRunHandlerQuad(s32 offset) {
     PartyMember*    work;
 
     handlers = *(BattleTaskModes*)((Callback*)&D_800969B8 + offset);
-    handlers.modes[BATTLE_WORK->header.mode]();
+    handlers.modes[TASK(PartyMember)->header.mode]();
     work = TASK(PartyMember);
     if ((work->header.flags != 0u) && (work->header.mode != 0u)) {
         func_800AE9C4(work->unk_04);

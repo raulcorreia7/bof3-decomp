@@ -8,14 +8,14 @@ MATCH void func_801D34A0(void) {
     s32           val;
     FishingState* stepped;
 
-    work = FISHING_STATE;
+    work = TASK(FishingState);
 
     val            = work->origin_x - 0x1E;
     work->origin_x = val;
 
     if ((s16)val < 0xA1) {
         work->step_timer       = 0x1E;
-        stepped                = FISHING_STATE;
+        stepped                = TASK(FishingState);
         work->origin_x         = 0xA0;
         stepped->handler_index = (stepped->handler_index + 1);
     }

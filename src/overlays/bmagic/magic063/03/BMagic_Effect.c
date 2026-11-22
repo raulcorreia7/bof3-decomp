@@ -34,9 +34,9 @@ MATCH void func_801EECF8(void) {
         D_801F0454[(i << 5) + 1] = 0;
         D_801F0454[(i << 5) + 2] = 0;
     }
-    g_Task->param.unk_0B = 0;
-    g_Task->unk_09       = 0;
-    g_Task->header.mode += 1;
+    TASK(PartyMember)->param.unk_0B = 0;
+    TASK(PartyMember)->unk_09       = 0;
+    TASK(PartyMember)->header.mode += 1;
     for (i = 0; i < 8; i++) {
         battler = i + BATTLE_PARTY_CHARACTERS_COUNT;
         if (!Battle_SlotIsBlocked(battler) && g_Battle.active_battler != i + BATTLE_PARTY_CHARACTERS_COUNT) {
@@ -44,7 +44,7 @@ MATCH void func_801EECF8(void) {
             g_BattleEffects[slot].target.party = g_Task;
             g_BattleEffects[slot].header.mode  = 0;
             g_BattleEffects[slot].unk_04       = battler;
-            g_Task->param.unk_0B += 1;
+            TASK(PartyMember)->param.unk_0B += 1;
         }
     }
     for (i = 0; i < BATTLE_PARTY_CHARACTERS_COUNT; i++) {
@@ -54,7 +54,7 @@ MATCH void func_801EECF8(void) {
             g_BattleEffects[slot].target.party = g_Task;
             g_BattleEffects[slot].header.mode  = 0;
             g_BattleEffects[slot].unk_04       = i;
-            g_Task->param.unk_0B += 1;
+            TASK(PartyMember)->param.unk_0B += 1;
         }
     }
     SND_SEQueueSelection(EMI_SE_ID(SND_BANK_COMMON, 0));
@@ -82,20 +82,20 @@ MATCH void func_801EEFE4(void) {
     s32          offset;
     u32          random;
 
-    index = g_Task->unk_04;
+    index = TASK(PartyMember)->unk_04;
     if (index < BATTLE_PARTY_CHARACTERS_COUNT) {
         record = &g_Game.members[index];
     } else {
         record = (PartyMember*)&g_BattleEnemies[index * BATTLE_ENEMY_STRIDE];
     }
-    target               = g_Task;
-    target->pos.x.fixed  = record->pos.x.fixed;
-    target->pos.y.fixed  = record->pos.y.fixed;
-    target->pos.z.fixed  = record->pos.z.fixed + TO_COORD(512);
-    random               = RANDOM_MASK(0xF);
-    g_Task->unk_09       = random + 1;
-    g_Task->param.unk_0B = 0;
-    g_Task->header.step += 1;
+    target                          = g_Task;
+    target->pos.x.fixed             = record->pos.x.fixed;
+    target->pos.y.fixed             = record->pos.y.fixed;
+    target->pos.z.fixed             = record->pos.z.fixed + TO_COORD(512);
+    random                          = RANDOM_MASK(0xF);
+    TASK(PartyMember)->unk_09       = random + 1;
+    TASK(PartyMember)->param.unk_0B = 0;
+    TASK(PartyMember)->header.step += 1;
     claimed = func_801F0354();
     if (claimed != GAME_NONE) {
         offset                                  = claimed << 5;
@@ -110,20 +110,20 @@ MATCH void func_801EEFE4(void) {
 MATCH void func_801EF110(void) {
     u8 timer;
 
-    timer          = g_Task->unk_09 - 1;
-    g_Task->unk_09 = timer;
+    timer                     = TASK(PartyMember)->unk_09 - 1;
+    TASK(PartyMember)->unk_09 = timer;
     if (timer == 0) {
         if (g_BattleEffectBattler->param.unk_0B == 1) {
-            g_Task->header.step = 3;
+            TASK(PartyMember)->header.step = 3;
         } else {
             g_BattleEffectBattler->param.unk_0B -= 1;
-            g_Task->header.step += 1;
+            TASK(PartyMember)->header.step += 1;
         }
     }
 }
 
 MATCH void func_801EF190(void) {
-    if (g_Task->param.unk_0B == 0) {
+    if (TASK(PartyMember)->param.unk_0B == 0) {
         Effect_Reset();
     }
 }
@@ -135,7 +135,7 @@ MATCH void func_801EF1C8(void) {
     s32          off;
     PartyMember* task;
 
-    if (g_Task->param.unk_0B != 0) {
+    if (TASK(PartyMember)->param.unk_0B != 0) {
         return;
     }
     i = 0;
@@ -150,13 +150,13 @@ MATCH void func_801EF1C8(void) {
             val                                  = ((i >> 1) & 0x70) + (RANDOM_MASK(0xF)) + 1;
             D_801F0454[off + 10]                 = val;
             D_801F0454[off + 8]                  = 0x40 - val;
-            g_Task->param.unk_0B++;
+            TASK(PartyMember)->param.unk_0B++;
         }
         i++;
     } while (i < 0x5C);
     SND_SEQueueSelection(0x101);
     SND_SEQueueSelection(0x102);
-    g_Task->header.step++;
+    TASK(PartyMember)->header.step++;
 }
 
 #include "overlays/bmagic/shared/Effect_EndOnZeroTick.h"

@@ -10,5 +10,5 @@ MATCH void func_801E35D8(void) {
         Battle_RequestEnemyScript(0);
     }
     Battle_IsEnemyBlocked();
-    g_Task->header.mode += 1;
+    TASK(PartyMember)->header.mode += 1;
 }

@@ -18,9 +18,9 @@ MATCH void func_801E13B8(void) {
         masked &= ~0x200u;
         work->u.turn.damage_flags.value = masked;
         Battle_ClearSlotPending(cell->slot);
-        g_Task->header.mode = 2;
-        g_Task->header.step = 0;
-        g_Task->unk_03      = 0;
-        g_Task->unk_04      = 0;
+        TASK(PartyMember)->header.mode = 2;
+        TASK(PartyMember)->header.step = 0;
+        TASK(PartyMember)->unk_03      = 0;
+        TASK(PartyMember)->unk_04      = 0;
     }
 }

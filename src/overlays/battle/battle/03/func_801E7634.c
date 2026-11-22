@@ -14,9 +14,9 @@ MATCH void func_801E7634(void) {
         g_Task      = g_BattleEffectBattler;
         g_GameState = &g_Game.members[g_BattleEffectBattler->slot];
         Script_Select((g_BattleEffectBattler->facing + 4) & BYTE_MASK);
-        GFX_PaletteFreeFadeTarget(&g_Game.members[g_Task->slot]);
-        GFX_PaletteLoad((g_Task->slot << 6) + BATTLE_ACTION_BLOCK_TABLE, 0);
-        func_801DDAB4(g_Game.members[g_Task->slot].chr.status);
+        GFX_PaletteFreeFadeTarget(&g_Game.members[TASK(PartyMember)->slot]);
+        GFX_PaletteLoad((TASK(PartyMember)->slot << 6) + BATTLE_ACTION_BLOCK_TABLE, 0);
+        func_801DDAB4(g_Game.members[TASK(PartyMember)->slot].chr.status);
         GFX_PaletteUploadRows();
         g_Game.current->u.turn.action_flags.value &= ~BATTLER_ACTION_DRAGON_FORM_QUEUED;
         func_801E0B64();

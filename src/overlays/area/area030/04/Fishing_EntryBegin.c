@@ -15,21 +15,21 @@ MATCH void Fishing_EntryBegin(void) {
     g_FishingFullNoticeShown = 0;
     g_FishingNewRecord       = 0;
 
-    work           = FISHING_STATE;
+    work           = TASK(FishingState);
     work->state_29 = 5;
 
-    state    = FISHING_STATE;
+    state    = TASK(FishingState);
     distance = Area_HeightSample(state->motion.unk_34, state->y_38.pos_y);
 
-    panel                          = g_Game.current;
-    FISHING_STATE->bounce.half.key = distance;
-    flag                           = panel[0x79];
+    panel                               = g_Game.current;
+    TASK(FishingState)->bounce.half.key = distance;
+    flag                                = panel[0x79];
     if (flag == 0) {
         Script_Begin(0xA, 2);
     } else {
         Script_Select(0xB);
     }
 
-    work            = FISHING_STATE;
+    work            = TASK(FishingState);
     work->sub_index = (work->sub_index + 1);
 }

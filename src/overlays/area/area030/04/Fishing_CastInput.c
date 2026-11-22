@@ -19,18 +19,18 @@ MATCH void Fishing_CastInput(void) {
         D_801E31F8 = 0xFF;
         Script_Request(2);
 
-        work             = FISHING_STATE;
+        work             = TASK(FishingState);
         work->y_38.pos_y = TO_COORD(65);
         work->step_timer = 0;
 
-        tail            = FISHING_STATE;
+        tail            = TASK(FishingState);
         tail->sub_index = 2;
     } else if ((g_PadStates[0].pressed & g_InputMasks[FISHING_INPUT_CANCEL]) != 0 && D_80144125 == 0) {
-        state             = FISHING_STATE;
+        state             = TASK(FishingState);
         D_801440B1        = 0;
         state->mode_index = 1;
 
-        next            = FISHING_STATE;
+        next            = TASK(FishingState);
         next->sub_index = 0;
     }
     Script_AnimStepLoop();

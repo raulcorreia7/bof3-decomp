@@ -11,7 +11,6 @@
 #include "game/item.h"
 #include <stdio.h>
 
-#define FISHING_STATE        TASK(FishingState)
 #define FISHING_ROW          ((Actor*)g_CurrentActor)
 #define FISHING_ENTRY(index) (&((FishingSceneCue*)g_FishingSpecies)[(index)])
 
@@ -797,7 +796,7 @@ static inline void WorldAdvanceFishingSubState(u8 subState) {
         SND_BGMPlay(0x28, 0x64, 8);
         SND_SEPlay(EMI_SE_ID(SND_BANK_AREA, 3));
         func_801DDE94(subState);
-        FISHING_STATE->sub_index += 1;
+        TASK(FishingState)->sub_index += 1;
     }
     Script_AnimStepLoop();
 }
@@ -811,7 +810,7 @@ static inline void FishingDrawCue(u8 accessoryCue) {
     Fishing_DrawWindowFrame(MENU_HEADER_X, MENU_HEADER_Y, MENU_HEADER_WIDTH, MENU_HEADER_HEIGHT, 0);
     mask = 0;
     if (D_80145E93[0] >= 3u) {
-        record = FISHING_STATE;
+        record = TASK(FishingState);
         mask   = BIT(record->cue_index) & BYTE_MASK;
     }
     func_801D7C10(FISHING_SHOP_COLUMNS_X, FISHING_SHOP_COLUMNS_Y, mask);

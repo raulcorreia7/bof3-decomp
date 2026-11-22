@@ -13,14 +13,14 @@ NON_MATCHING void func_801EECB0(void) {
     u8           slot;
     u8           count;
 
-    battler              = g_BattleEffectBattler;
-    g_Task->pos.x.fixed  = battler->pos.x.fixed;
-    g_Task->pos.y.fixed  = battler->pos.y.fixed;
-    g_Task->pos.z.fixed  = battler->pos.z.fixed;
-    g_Task->param.unk_0B = 0;
-    g_Task->unk_09       = 0xA;
-    g_Task->timer        = 0;
-    g_Task->header.mode += 1;
+    battler                         = g_BattleEffectBattler;
+    TASK(PartyMember)->pos.x.fixed  = battler->pos.x.fixed;
+    TASK(PartyMember)->pos.y.fixed  = battler->pos.y.fixed;
+    TASK(PartyMember)->pos.z.fixed  = battler->pos.z.fixed;
+    TASK(PartyMember)->param.unk_0B = 0;
+    TASK(PartyMember)->unk_09       = 0xA;
+    TASK(PartyMember)->timer        = 0;
+    TASK(PartyMember)->header.mode += 1;
 
     count = 0;
     do {
@@ -30,7 +30,7 @@ NON_MATCHING void func_801EECB0(void) {
         g_BattleEffects[slot].arg.unk_09   = ((count & BYTE_MASK) << 3) + 1;
         g_BattleEffects[slot].target.party = task;
         FAKE_BARRIER(); /* FAKE: retail re-reads the g_Task cell for the ticker; plain C keeps the copy. */
-        g_Task->param.unk_0B++;
+        TASK(PartyMember)->param.unk_0B++;
         count++;
     } while (count < 8);
 
@@ -39,7 +39,7 @@ NON_MATCHING void func_801EECB0(void) {
     g_BattleEffects[slot].header.mode  = 1;
     g_BattleEffects[slot].target.party = task;
     FAKE_BARRIER(); /* FAKE: retail re-reads the g_Task cell for the ticker; plain C keeps the copy. */
-    g_Task->param.unk_0B++;
+    TASK(PartyMember)->param.unk_0B++;
     SND_SEQueueSelection(0x100);
 }
 #else
@@ -50,39 +50,39 @@ MATCH void func_801EEE14(void) {
     u8            timer;
     PartyMember** selected;
 
-    timer          = g_Task->unk_09 - 1;
-    g_Task->unk_09 = timer;
+    timer                     = TASK(PartyMember)->unk_09 - 1;
+    TASK(PartyMember)->unk_09 = timer;
     if (!(timer & BYTE_MASK)) {
         selected = &g_Battle.selected_actor;
         GFX_PaletteFreeFadeTarget(*selected);
-        g_Task->unk_09 = GFX_PaletteAllocFade(*selected, 0, 0, 0, 1);
-        g_Task->header.mode += 1;
+        TASK(PartyMember)->unk_09 = GFX_PaletteAllocFade(*selected, 0, 0, 0, 1);
+        TASK(PartyMember)->header.mode += 1;
     }
 }
 
 MATCH void func_801EEEB4(void) {
     u8 timer;
 
-    g_PaletteFades[g_Task->unk_09].offset.r += 2;
-    g_PaletteFades[g_Task->unk_09].offset.g += 1;
-    g_PaletteFades[g_Task->unk_09].offset.b += 1;
-    timer         = g_Task->timer + 1;
-    g_Task->timer = timer;
+    g_PaletteFades[TASK(PartyMember)->unk_09].offset.r += 2;
+    g_PaletteFades[TASK(PartyMember)->unk_09].offset.g += 1;
+    g_PaletteFades[TASK(PartyMember)->unk_09].offset.b += 1;
+    timer                    = TASK(PartyMember)->timer + 1;
+    TASK(PartyMember)->timer = timer;
     if (timer == 8) {
-        g_Task->header.mode++;
+        TASK(PartyMember)->header.mode++;
     }
 }
 
 #include "overlays/bmagic/shared/Effect_NextStepOnWorkLastTick.h"
 
 MATCH void func_801EEFF8(void) {
-    g_PaletteFades[g_Task->unk_09].offset.r -= 2;
-    g_PaletteFades[g_Task->unk_09].offset.g -= 1;
-    g_PaletteFades[g_Task->unk_09].offset.b -= 1;
-    if (--g_Task->timer == 0) {
+    g_PaletteFades[TASK(PartyMember)->unk_09].offset.r -= 2;
+    g_PaletteFades[TASK(PartyMember)->unk_09].offset.g -= 1;
+    g_PaletteFades[TASK(PartyMember)->unk_09].offset.b -= 1;
+    if (--TASK(PartyMember)->timer == 0) {
         GFX_PaletteFreeFadeTarget(g_Battle.selected_actor);
         Battle_FadePoisonedBattler(g_Battle.target_selector);
-        g_Task->header.mode += 1;
+        TASK(PartyMember)->header.mode += 1;
     }
 }
 
@@ -95,8 +95,8 @@ MATCH void func_801EF1D4(void) {
     Magic041Steps handlers;
 
     handlers = D_801EEC1C;
-    SYS_DISPATCH_BYTE(handlers.steps, g_Task->header.step);
-    if (ACTOR_IN_USE(*g_Task) && g_Task->header.step != 0) {
+    SYS_DISPATCH_BYTE(handlers.steps, TASK(PartyMember)->header.step);
+    if (ACTOR_IN_USE(*TASK(PartyMember)) && TASK(PartyMember)->header.step != 0) {
         BMAGIC_DRAW_IN_ACTOR_MATRIX(func_801EF670);
     }
 }
@@ -105,15 +105,15 @@ MATCH void func_801EF27C(void) {
     PartyMember* src;
     PartyMember* dst;
 
-    if (--g_Task->unk_09 == 0) {
-        src              = g_BattleEffectBattler;
-        dst              = g_Task;
-        dst->pos.x.fixed = src->pos.x.fixed;
-        dst->pos.y.fixed = src->pos.y.fixed;
-        dst->pos.z       = src->pos.z;
-        dst->unk_09      = 0;
-        g_Task->timer    = 0;
-        g_Task->header.step++;
+    if (--TASK(PartyMember)->unk_09 == 0) {
+        src                      = g_BattleEffectBattler;
+        dst                      = g_Task;
+        dst->pos.x.fixed         = src->pos.x.fixed;
+        dst->pos.y.fixed         = src->pos.y.fixed;
+        dst->pos.z               = src->pos.z;
+        dst->unk_09              = 0;
+        TASK(PartyMember)->timer = 0;
+        TASK(PartyMember)->header.step++;
     }
 }
 
@@ -144,8 +144,8 @@ MATCH void func_801EF3D0(void) {
     Magic041SecondSteps handlers;
 
     handlers = D_801EEC28;
-    SYS_DISPATCH_BYTE(handlers.steps, g_Task->header.step);
-    if (ACTOR_IN_USE(*g_Task) && g_Task->header.step != 0) {
+    SYS_DISPATCH_BYTE(handlers.steps, TASK(PartyMember)->header.step);
+    if (ACTOR_IN_USE(*TASK(PartyMember)) && TASK(PartyMember)->header.step != 0) {
         BMAGIC_DRAW_IN_ACTOR_MATRIX(func_801EFAB8);
     }
 }
@@ -153,12 +153,12 @@ MATCH void func_801EF3D0(void) {
 MATCH void func_801EF484(void) {
     PartyMember* src;
 
-    src                 = (PartyMember*)g_BattleEffectBattler;
-    g_Task->pos.x.fixed = src->pos.x.fixed;
-    g_Task->pos.y.fixed = src->pos.y.fixed;
-    g_Task->pos.z       = src->pos.z;
-    g_Task->unk_09      = 0;
-    g_Task->header.step = g_Task->header.step + 1;
+    src                            = (PartyMember*)g_BattleEffectBattler;
+    TASK(PartyMember)->pos.x.fixed = src->pos.x.fixed;
+    TASK(PartyMember)->pos.y.fixed = src->pos.y.fixed;
+    TASK(PartyMember)->pos.z       = src->pos.z;
+    TASK(PartyMember)->unk_09      = 0;
+    TASK(PartyMember)->header.step = TASK(PartyMember)->header.step + 1;
 }
 
 #include "overlays/bmagic/shared/Effect_CountUpByTwoAndStep.h"
@@ -179,11 +179,11 @@ NON_MATCHING void func_801EF670(void) {
     s32      y;
     s32      tpage;
 
-    g_ScratchPad.cells.halves[0] = g_Task->unk_09 * 24;
-    g_ScratchPad.cells.halves[1] = g_Task->unk_09 << 5;
-    g_ScratchPad.cells.halves[5] = g_Task->timer * 12;
-    g_ScratchPad.cells.halves[6] = g_Task->timer * 6;
-    g_ScratchPad.cells.halves[7] = g_Task->timer * 6;
+    g_ScratchPad.cells.halves[0] = TASK(PartyMember)->unk_09 * 24;
+    g_ScratchPad.cells.halves[1] = TASK(PartyMember)->unk_09 << 5;
+    g_ScratchPad.cells.halves[5] = TASK(PartyMember)->timer * 12;
+    g_ScratchPad.cells.halves[6] = TASK(PartyMember)->timer * 6;
+    g_ScratchPad.cells.halves[7] = TASK(PartyMember)->timer * 6;
     g_ScratchPadVectors[0].vx    = FIXED_MUL(rsin(0), g_ScratchPad.cells.halves[1]);
     g_ScratchPadVectors[0].vy    = FIXED_MUL(rcos(0), g_ScratchPad.cells.halves[1]);
     g_ScratchPadVectors[1].vz    = -64;
@@ -201,8 +201,8 @@ NON_MATCHING void func_801EF670(void) {
         g_ScratchPadVectors[3].vy = g_ScratchPadVectors[2].vy;
         g_ScratchPadVectors[2].vx = FIXED_MUL(rsin(i << 7), g_ScratchPad.cells.halves[0]);
         g_ScratchPadVectors[2].vy = FIXED_MUL(rcos(i << 7), g_ScratchPad.cells.halves[0]);
-        x                         = (g_ScratchPadVectors[2].vx << 9) + g_Task->pos.x.fixed;
-        y                         = (g_ScratchPadVectors[2].vy << 9) + g_Task->pos.y.fixed;
+        x                         = (g_ScratchPadVectors[2].vx << 9) + TASK(PartyMember)->pos.x.fixed;
+        y                         = (g_ScratchPadVectors[2].vy << 9) + TASK(PartyMember)->pos.y.fixed;
         tpage                     = getTPage(TPAGE_DEPTH_4BIT, TPAGE_ABR_ADD, 320, 256);
         SetDrawMode((DR_MODE*)g_GfxPrimCursor, 0, 1, tpage, 0);
         Area_CellAddPrim(x, y, 0, sizeof(DR_MODE));
@@ -233,7 +233,7 @@ MATCH void func_801EFAB8(void) {
     tpage = getTPage(TPAGE_DEPTH_4BIT, TPAGE_ABR_ADD, 320, 256);
     GFX_ADD_DITHERED_DRAW_MODE(BMAGIC_LAYER_BEHIND_BATTLERS, tpage);
     g_ScratchPad.cells.halves[0] = 0x88;
-    g_ScratchPad.cells.halves[3] = g_Task->unk_09 << 3;
+    g_ScratchPad.cells.halves[3] = TASK(PartyMember)->unk_09 << 3;
     setVector(&g_ScratchPadVectors[2], FIXED_MUL(rsin(0), g_ScratchPad.cells.halves[0]), FIXED_MUL(rcos(0), g_ScratchPad.cells.halves[0]), 0);
     g_ScratchPadVectors[1].vz = 0;
     g_ScratchPadVectors[0].vz = 0;

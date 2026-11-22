@@ -6,7 +6,7 @@ MATCH void func_8019B1E8(void) {
     u8     flag;
 
     if (Script_AnimStepOnce() & BYTE_MASK) {
-        ACTOR_COUNT_DOWN(count, timer);
+        ACTOR_COUNT_DOWN(TASK(Actor), count, timer);
         if ((count & BYTE_MASK) == 0) {
             g_Task->header.mode = 2;
         }

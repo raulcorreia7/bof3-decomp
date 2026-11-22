@@ -4,7 +4,7 @@ MATCH void Effect_AppearAtTarget(void) {
     PartyMember* actor;
     s32          z;
 
-    g_Task->header.flags &= ~ACTOR_FLAG_HIDDEN;
+    TASK(PartyMember)->header.flags &= ~ACTOR_FLAG_HIDDEN;
     work              = g_Task;
     actor             = g_BattleEffectBattler;
     work->pos.x.fixed = actor->pos.x.fixed;
@@ -12,5 +12,5 @@ MATCH void Effect_AppearAtTarget(void) {
     z                 = actor->pos.z.fixed;
     work->unk_09      = 0;
     work->pos.z.fixed = z;
-    g_Task->header.step += 1;
+    TASK(PartyMember)->header.step += 1;
 }

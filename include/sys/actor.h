@@ -42,15 +42,15 @@
  * inline form does not match. Use it as the first statement of a function body. */
 #define ACTOR_RUN_MODE_HANDLER(first, second) \
     Callback table[2] = {first, second};      \
-    table[g_Task->header.mode]()
+    table[TASK(TaskHeader)->mode]()
 
 /* Clear the actor's step: the current mode starts again at step 0. */
-#define ACTOR_CLEAR_STEP() (g_Task->header.step = 0)
+#define ACTOR_CLEAR_STEP() (TASK(TaskHeader)->step = 0)
 
-/* Count the task's `field` down by one and keep the new value in `remaining`; the caller tests it. */
-#define ACTOR_COUNT_DOWN(remaining, field) \
-    (remaining)   = g_Task->field - 1;     \
-    g_Task->field = (remaining)
+/* Count the `field` of a task record down by one and keep the new value in `remaining`; the caller tests it. */
+#define ACTOR_COUNT_DOWN(task, remaining, field) \
+    (remaining)   = (task)->field - 1;           \
+    (task)->field = (remaining)
 
 /* Clear the actor's three tint bytes: the row draws untinted. A bare statement
  * macro: use it as a whole statement, never under an unbraced `if`. */

@@ -21,17 +21,17 @@ MATCH void func_801EEC5C(void) {
     for (i = 0; i < 8; i++) {
         D_801EF790[i] = 0;
     }
-    g_Task->facing = g_BattleEffectBattler->facing;
-    task           = g_Task;
+    TASK(PartyMember)->facing = g_BattleEffectBattler->facing;
+    task                      = g_Task;
     WorldPos_Copy(&task->pos, &g_BattleEffectBattler->pos);
     task->param.unk_0B = 0;
-    g_Task->header.mode += 1;
+    TASK(PartyMember)->header.mode += 1;
     slot                               = Battle_AllocEffect(1, 103) & BYTE_MASK;
     target                             = g_Task;
     g_BattleEffects[slot].header.mode  = 0;
     g_BattleEffects[slot].arg.unk_09   = 1;
     g_BattleEffects[slot].target.party = target;
-    g_Task->param.unk_0B += 1;
+    TASK(PartyMember)->param.unk_0B += 1;
     BMAGIC_BRIGHTEN_PALETTE_ROW(dst, src, i);
     g_GfxPalettePending = 1;
     SND_SEQueueSelection(EMI_SE_ID(SND_BANK_COMMON, 0x00));

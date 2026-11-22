@@ -1,9 +1,9 @@
 #include "battle_15.h"
 
 MATCH void func_800A8CC8(void) {
-    Script_Select((BATTLE_WORK->facing + 0x50) & BYTE_MASK);
+    Script_Select((TASK(PartyMember)->facing + 0x50) & BYTE_MASK);
     func_801DEE4C();
-    BATTLE_WORK->unk_29 = 3;
-    BATTLE_WORK->unk_09 = 8;
-    BATTLE_WORK->header.mode++;
+    TASK(PartyMember)->unk_29 = 3;
+    TASK(PartyMember)->unk_09 = 8;
+    TASK(PartyMember)->header.mode++;
 }

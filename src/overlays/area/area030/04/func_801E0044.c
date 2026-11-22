@@ -13,16 +13,16 @@ MATCH void func_801E0044(void) {
     FAKE_REG(u16, value, "v0");
     FishingState* ended;
 
-    work                = FISHING_STATE;
+    work                = TASK(FishingState);
     work->motion.unk_34 = work->motion.unk_34 + work->pos_x;
     timer               = work->step_timer;
     work->step_timer    = timer - 1;
-    checked             = FISHING_STATE;
+    checked             = TASK(FishingState);
     work->y_38.pos_y    = work->y_38.pos_y + work->cursor_10;
     state               = 1;
     if (checked->step_timer == 0) {
         checked->handler_index = state;
-        ended                  = FISHING_STATE;
+        ended                  = TASK(FishingState);
         value                  = checked->motion.half.unk_34;
         value &= 0x8000;
         checked->motion.half.unk_34 = value;

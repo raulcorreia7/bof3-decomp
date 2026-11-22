@@ -7,25 +7,25 @@ MATCH void func_801D6CB0(void) {
     u8 steps;
     s8 direction;
 
-    steps = FISHING_STATE->step_timer;
+    steps = TASK(FishingState)->step_timer;
     if (steps == 0) {
-        if (D_801E207C[FISHING_STATE->step_index].animation_id == -1) {
-            FISHING_STATE->step_index = D_801E207C[FISHING_STATE->step_index].next_step;
+        if (D_801E207C[TASK(FishingState)->step_index].animation_id == -1) {
+            TASK(FishingState)->step_index = D_801E207C[TASK(FishingState)->step_index].next_step;
         }
-        Script_Request(D_801E207C[FISHING_STATE->step_index].animation_id & 0x7F);
-        FISHING_STATE->step_timer = D_801E207C[FISHING_STATE->step_index].next_step;
-        FISHING_STATE->step_index = FISHING_STATE->step_index + 1;
+        Script_Request(D_801E207C[TASK(FishingState)->step_index].animation_id & 0x7F);
+        TASK(FishingState)->step_timer = D_801E207C[TASK(FishingState)->step_index].next_step;
+        TASK(FishingState)->step_index = TASK(FishingState)->step_index + 1;
     } else {
-        FISHING_STATE->step_timer = steps - 1;
-        if (!(D_801E207C[FISHING_STATE->step_index - 1].animation_id & 0x80)) {
+        TASK(FishingState)->step_timer = steps - 1;
+        if (!(D_801E207C[TASK(FishingState)->step_index - 1].animation_id & 0x80)) {
             Script_AnimStepLoop();
         }
     }
-    FISHING_STATE->pos_x += D_801E207C[FISHING_STATE->step_index - 1].delta_x;
-    FISHING_STATE->cursor_10 += D_801E207C[FISHING_STATE->step_index - 1].delta_y;
-    FISHING_STATE->cue_index -= D_801E207C[FISHING_STATE->step_index - 1].delta_x;
+    TASK(FishingState)->pos_x += D_801E207C[TASK(FishingState)->step_index - 1].delta_x;
+    TASK(FishingState)->cursor_10 += D_801E207C[TASK(FishingState)->step_index - 1].delta_y;
+    TASK(FishingState)->cue_index -= D_801E207C[TASK(FishingState)->step_index - 1].delta_x;
     direction = 1;
-    if (D_801E207C[FISHING_STATE->step_index - 1].delta_y < 0) {
+    if (D_801E207C[TASK(FishingState)->step_index - 1].delta_y < 0) {
         /* FAKE: keeps GCC from turning the flag into sge (nor/srl); 7 pure-C spellings stayed at 96.24%. */
         FAKE_BARRIER();
         direction = 0;

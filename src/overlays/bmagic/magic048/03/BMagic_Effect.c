@@ -11,11 +11,11 @@ MATCH void func_801EEC70(void) {
     u32          slot;
     u8           i;
 
-    g_Task->param.unk_0B = 0;
-    g_Task->facing       = g_BattleEffectBattler->facing;
-    WorldPos_Copy(&g_Task->pos, &g_BattleEffectBattler->pos);
-    g_Task->unk_09 = 10;
-    g_Task->header.mode += 1;
+    TASK(PartyMember)->param.unk_0B = 0;
+    TASK(PartyMember)->facing       = g_BattleEffectBattler->facing;
+    WorldPos_Copy(&TASK(PartyMember)->pos, &g_BattleEffectBattler->pos);
+    TASK(PartyMember)->unk_09 = 10;
+    TASK(PartyMember)->header.mode += 1;
     i = 0;
     do {
         slot                               = Battle_AllocEffect(1, 30) & BYTE_MASK;
@@ -24,8 +24,8 @@ MATCH void func_801EEC70(void) {
         g_BattleEffects[slot].unk_0B       = i;
         g_BattleEffects[slot].arg.unk_09   = ((i ^ 0xF) - 3) * 8;
         g_BattleEffects[slot].target.party = work;
-        g_BattleEffects[slot].unk_08       = g_Task->facing;
-        g_Task->param.unk_0B += 1;
+        g_BattleEffects[slot].unk_08       = TASK(PartyMember)->facing;
+        TASK(PartyMember)->param.unk_0B += 1;
         i++;
     } while (i < 12);
 }
@@ -38,8 +38,8 @@ MATCH void func_801EEC70(void) {
 #include "overlays/bmagic/shared/BMagic_DispatchEffectMode.h"
 
 MATCH void func_801EEEB4(void) {
-    SYS_DISPATCH_BYTE(D_801EF81C, g_Task->header.step);
-    if (g_Task->header.step != 0 && g_Task->header.flags != 0) {
+    SYS_DISPATCH_BYTE(D_801EF81C, TASK(PartyMember)->header.step);
+    if (TASK(PartyMember)->header.step != 0 && TASK(PartyMember)->header.flags != 0) {
         func_801EF5C8();
         func_801EF234();
         PopMatrix();
@@ -51,17 +51,17 @@ MATCH s32 func_801EEF3C(void) {
     FAKE_REG(s32, scroll, "a1"); /* FAKE: pins the scroll offset to retail a1; the best plain form differs in 6 instructions (scroll and battler registers). */
     u8 count;
 
-    count          = g_Task->unk_09 - 1;
-    g_Task->unk_09 = count;
+    count                     = TASK(PartyMember)->unk_09 - 1;
+    TASK(PartyMember)->unk_09 = count;
     if ((count & BYTE_MASK) == 0) {
         func_801EF6A0();
-        g_Task->unk_0C = 0x10000;
-        g_Task->unk_10 = 0;
+        TASK(PartyMember)->unk_0C = 0x10000;
+        TASK(PartyMember)->unk_10 = 0;
         Effect_RotatePosition(g_Task);
-        g_Task->pos.x.fixed = g_BattleEffectBattler->pos.x.fixed + g_Task->unk_0C;
-        g_Task->pos.y.fixed = g_BattleEffectBattler->pos.y.fixed + g_Task->unk_10;
-        g_Task->unk_0C      = 0x80000;
-        g_Task->unk_10      = 0;
+        TASK(PartyMember)->pos.x.fixed = g_BattleEffectBattler->pos.x.fixed + TASK(PartyMember)->unk_0C;
+        TASK(PartyMember)->pos.y.fixed = g_BattleEffectBattler->pos.y.fixed + TASK(PartyMember)->unk_10;
+        TASK(PartyMember)->unk_0C      = 0x80000;
+        TASK(PartyMember)->unk_10      = 0;
         Effect_RotatePosition(g_Task);
         work = g_Task;
         work->unk_0C += g_AreaScrollTargetX;
@@ -69,24 +69,24 @@ MATCH s32 func_801EEF3C(void) {
         work->unk_14 = COORD_INT(work->pos.z) + 0x100;
         scroll       = g_AreaScrollTargetY;
         work->unk_10 += scroll;
-        COORD_INT(work->pos.z) = COORD_INT(g_BattleEffectBattler->pos.z) + 0x100;
-        work->unk_09           = 0;
-        g_Task->timer          = 0;
-        g_Task->header.step += 1;
+        COORD_INT(work->pos.z)   = COORD_INT(g_BattleEffectBattler->pos.z) + 0x100;
+        work->unk_09             = 0;
+        TASK(PartyMember)->timer = 0;
+        TASK(PartyMember)->header.step += 1;
     }
 }
 
 MATCH void func_801EF05C(void) {
     VECTOR pos;
 
-    g_Task->unk_09 += 1;
-    setVector(&pos, (g_Task->unk_0C >> 9) - AREA_CELL_ORIGIN, (g_Task->unk_10 >> 9) - AREA_CELL_ORIGIN, g_Task->unk_14 >> 1);
+    TASK(PartyMember)->unk_09 += 1;
+    setVector(&pos, (TASK(PartyMember)->unk_0C >> 9) - AREA_CELL_ORIGIN, (TASK(PartyMember)->unk_10 >> 9) - AREA_CELL_ORIGIN, TASK(PartyMember)->unk_14 >> 1);
     Battle_StepRangeToward(pos, 0x10);
-    if (g_Task->timer != 16) {
-        g_Task->timer += 1;
+    if (TASK(PartyMember)->timer != 16) {
+        TASK(PartyMember)->timer += 1;
     }
-    if (func_800AF6B8(g_Task->unk_0C, g_Task->unk_10, g_Task->pos.z.fixed, 0x60000) != 0) {
-        g_Task->header.step += 1;
+    if (func_800AF6B8(TASK(PartyMember)->unk_0C, TASK(PartyMember)->unk_10, TASK(PartyMember)->pos.z.fixed, 0x60000) != 0) {
+        TASK(PartyMember)->header.step += 1;
     }
 }
 
@@ -94,11 +94,11 @@ MATCH void func_801EF158(void) {
     VECTOR pos;
     u8     count;
 
-    setVector(&pos, (g_Task->unk_0C >> 9) - AREA_CELL_ORIGIN, (g_Task->unk_10 >> 9) - AREA_CELL_ORIGIN, g_Task->unk_14 >> 1);
+    setVector(&pos, (TASK(PartyMember)->unk_0C >> 9) - AREA_CELL_ORIGIN, (TASK(PartyMember)->unk_10 >> 9) - AREA_CELL_ORIGIN, TASK(PartyMember)->unk_14 >> 1);
     Battle_StepRangeToward(pos, 0x10);
-    g_Task->unk_09 = g_Task->unk_09 + 1;
-    count          = g_Task->timer - 1;
-    g_Task->timer  = count;
+    TASK(PartyMember)->unk_09 = TASK(PartyMember)->unk_09 + 1;
+    count                     = TASK(PartyMember)->timer - 1;
+    TASK(PartyMember)->timer  = count;
     if (!(count & BYTE_MASK)) {
         g_BattleEffectBattler->param.unk_0B -= 1;
         Effect_Reset();
@@ -116,14 +116,14 @@ MATCH void func_801EF234(void) {
 
     tpage = getTPage(TPAGE_DEPTH_4BIT, TPAGE_ABR_ADD, 320, 256);
     SetDrawMode((DR_MODE*)g_GfxPrimCursor, 0, 1, tpage, 0);
-    Area_CellAddPrim(g_Task->pos.x.fixed, g_Task->pos.y.fixed, 2, sizeof(DR_MODE));
-    g_ScratchPad.cells.halves[1] = g_Task->unk_09 * 4;
-    g_ScratchPad.cells.halves[2] = g_Task->unk_09 * 6;
-    if (g_Task->unk_09 >= 9) {
+    Area_CellAddPrim(TASK(PartyMember)->pos.x.fixed, TASK(PartyMember)->pos.y.fixed, 2, sizeof(DR_MODE));
+    g_ScratchPad.cells.halves[1] = TASK(PartyMember)->unk_09 * 4;
+    g_ScratchPad.cells.halves[2] = TASK(PartyMember)->unk_09 * 6;
+    if (TASK(PartyMember)->unk_09 >= 9) {
         g_ScratchPad.cells.halves[2] += rand() & 0xF;
     }
-    g_ScratchPad.cells.halves[3] = g_Task->timer * 8;
-    g_ScratchPad.cells.halves[4] = g_Task->timer * 4;
+    g_ScratchPad.cells.halves[3] = TASK(PartyMember)->timer * 8;
+    g_ScratchPad.cells.halves[4] = TASK(PartyMember)->timer * 4;
     /* FAKE: the first corner through the scratchpad view keeps the base register on the second corner, as retail does; through g_ScratchPadVectors it moves to the first. */
     g_ScratchPad.vectors[0].vx   = 0;
     setVector(&g_ScratchPadVectors[1], 0, FIXED_MUL(rcos(0), g_ScratchPad.cells.halves[2]), FIXED_MUL(rsin(0), g_ScratchPad.cells.halves[2]));
@@ -147,7 +147,7 @@ MATCH void func_801EF234(void) {
         setRGB3(prim, g_ScratchPad.cells.halves[3], g_ScratchPad.cells.halves[4], g_ScratchPad.cells.halves[4]);
         RotTransPers4(&g_ScratchPadVectors[0], &g_ScratchPadVectors[1], &g_ScratchPadVectors[2], &g_ScratchPadVectors[3], (long*)&prim->x0, (long*)&prim->x1, (long*)&prim->x2, (long*)&prim->x3,
                       &depth, &flag);
-        Area_CellAddPrim(g_Task->pos.x.fixed, g_Task->pos.y.fixed, 2, sizeof(POLY_G4));
+        Area_CellAddPrim(TASK(PartyMember)->pos.x.fixed, TASK(PartyMember)->pos.y.fixed, 2, sizeof(POLY_G4));
     }
 }
 
@@ -158,8 +158,8 @@ MATCH void func_801EF5C8(void) {
     long    flags;
 
     PushMatrix();
-    setVector(&rot, 0, 0, ratan2(g_Task->unk_10 - g_Task->pos.y.fixed, g_Task->unk_0C - g_Task->pos.x.fixed) & ANGLE_MASK);
-    BMAGIC_PROJECT_ACTOR_MATRIX(g_Task);
+    setVector(&rot, 0, 0, ratan2(TASK(PartyMember)->unk_10 - TASK(PartyMember)->pos.y.fixed, TASK(PartyMember)->unk_0C - TASK(PartyMember)->pos.x.fixed) & ANGLE_MASK);
+    BMAGIC_PROJECT_ACTOR_MATRIX(TASK(PartyMember));
 }
 
 MATCH void func_801EF6A0(void) {
@@ -191,5 +191,5 @@ MATCH void func_801EF6A0(void) {
             }
         }
     }
-    COORD_INT(g_Task->pos.z) = g_ScratchPad.cells.words[0] / g_ScratchPad.cells.words[1];
+    COORD_INT(TASK(PartyMember)->pos.z) = g_ScratchPad.cells.words[0] / g_ScratchPad.cells.words[1];
 }

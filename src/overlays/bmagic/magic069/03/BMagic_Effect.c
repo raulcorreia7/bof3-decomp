@@ -15,11 +15,11 @@ MATCH void func_801EEC5C(void) {
     u16*         dst;
     u16*         src;
 
-    actor                  = g_Battle.selected_actor;
-    g_Task->screen_x.value = actor->screen_x.value;
-    g_Task->screen_y.value = actor->screen_y.value;
-    g_Task->param.unk_0B   = 0;
-    g_Task->header.mode += 1;
+    actor                             = g_Battle.selected_actor;
+    TASK(PartyMember)->screen_x.value = actor->screen_x.value;
+    TASK(PartyMember)->screen_y.value = actor->screen_y.value;
+    TASK(PartyMember)->param.unk_0B   = 0;
+    TASK(PartyMember)->header.mode += 1;
     for (i = 0; i < 3; i++) {
         PartyMember* work;
 
@@ -29,7 +29,7 @@ MATCH void func_801EEC5C(void) {
         g_BattleEffects[slot].unk_0B       = i;
         g_BattleEffects[slot].arg.unk_09   = i + 1;
         g_BattleEffects[slot].target.party = work;
-        g_Task->param.unk_0B += 1;
+        TASK(PartyMember)->param.unk_0B += 1;
     }
     for (i = 0; i < 3; i++) {
         PartyMember* work;
@@ -40,7 +40,7 @@ MATCH void func_801EEC5C(void) {
         g_BattleEffects[slot].unk_0B       = i;
         g_BattleEffects[slot].arg.unk_09   = i + 1;
         g_BattleEffects[slot].target.party = work;
-        g_Task->param.unk_0B += 1;
+        TASK(PartyMember)->param.unk_0B += 1;
     }
     /* Copies the first three CLUTs of arena palette row 26 into the work copy. */
     BMAGIC_POINT_AT_PALETTE_ROW(dst, src, i);
@@ -61,17 +61,17 @@ MATCH void func_801EEC5C(void) {
 MATCH void func_801EEED4(void) {
     s32 tpage;
 
-    SYS_DISPATCH_BYTE(D_801F0504, g_Task->header.step);
+    SYS_DISPATCH_BYTE(D_801F0504, TASK(PartyMember)->header.step);
     tpage = getTPage(TPAGE_DEPTH_4BIT, TPAGE_ABR_ADD, 320, 256);
     GFX_ADD_DITHERED_DRAW_MODE(BMAGIC_LAYER_OVER_BATTLERS, tpage);
-    if (g_Task->header.flags & 0x1) {
-        if (g_Task->header.step != 0) {
+    if (TASK(PartyMember)->header.flags & 0x1) {
+        if (TASK(PartyMember)->header.step != 0) {
             func_801EFF14();
             func_801EFC00();
         }
     }
-    if (g_Task->header.flags & 0x1) {
-        if (g_Task->header.step >= 3) {
+    if (TASK(PartyMember)->header.flags & 0x1) {
+        if (TASK(PartyMember)->header.step >= 3) {
             func_801F0104();
         }
     }
@@ -83,28 +83,28 @@ MATCH void func_801EF034(void) {
     PartyMember* src;
     PartyMember* dst;
 
-    if (--g_Task->unk_09 == 0) {
-        dst                 = g_Task;
-        src                 = g_BattleEffectBattler;
-        dst->unk_0C         = 0xB;
-        dst->screen_x.value = src->screen_x.value + 0x37;
-        dst->screen_y.value = src->screen_y.value - 0x10;
-        dst->unk_09         = 0;
-        g_Task->timer       = 32;
-        g_Task->header.step++;
+    if (--TASK(PartyMember)->unk_09 == 0) {
+        dst                      = g_Task;
+        src                      = g_BattleEffectBattler;
+        dst->unk_0C              = 0xB;
+        dst->screen_x.value      = src->screen_x.value + 0x37;
+        dst->screen_y.value      = src->screen_y.value - 0x10;
+        dst->unk_09              = 0;
+        TASK(PartyMember)->timer = 32;
+        TASK(PartyMember)->header.step++;
     }
 }
 
 MATCH void func_801EF0C4(void) {
     s32 step_next;
 
-    step_next      = g_Task->unk_0C - 1;
-    g_Task->unk_0C = step_next;
-    g_Task->screen_x.value -= step_next;
-    if (g_Task->unk_0C == 0) {
-        if (g_Task->param.unk_0B == 0) {
+    step_next                 = TASK(PartyMember)->unk_0C - 1;
+    TASK(PartyMember)->unk_0C = step_next;
+    TASK(PartyMember)->screen_x.value -= step_next;
+    if (TASK(PartyMember)->unk_0C == 0) {
+        if (TASK(PartyMember)->param.unk_0B == 0) {
             SND_SEQueueSelection(0x103);
-            g_Task->header.step += 1;
+            TASK(PartyMember)->header.step += 1;
             return;
         }
         g_BattleEffectBattler->param.unk_0B -= 1;
@@ -115,12 +115,12 @@ MATCH void func_801EF0C4(void) {
 MATCH void func_801EF15C(void) {
     u8 count;
 
-    count          = g_Task->unk_09 + 1;
-    g_Task->unk_09 = count;
+    count                     = TASK(PartyMember)->unk_09 + 1;
+    TASK(PartyMember)->unk_09 = count;
     if ((count & BYTE_MASK) == 0x10) {
         func_801F0274();
-        g_Task->param.unk_0B = 0;
-        g_Task->header.step += 1;
+        TASK(PartyMember)->param.unk_0B = 0;
+        TASK(PartyMember)->header.step += 1;
     }
 }
 
@@ -128,23 +128,23 @@ MATCH void func_801EF1D0(void) {
     u8 value;
     u8 value2;
 
-    if (g_Task->param.unk_0B != 0) {
-        value          = g_Task->unk_09 + 4;
-        g_Task->unk_09 = value;
+    if (TASK(PartyMember)->param.unk_0B != 0) {
+        value                     = TASK(PartyMember)->unk_09 + 4;
+        TASK(PartyMember)->unk_09 = value;
         if ((value & BYTE_MASK) == 0x10) {
-            g_Task->param.unk_0B = 0;
+            TASK(PartyMember)->param.unk_0B = 0;
         }
     } else {
-        value2         = g_Task->unk_09 - 2;
-        g_Task->unk_09 = value2;
+        value2                    = TASK(PartyMember)->unk_09 - 2;
+        TASK(PartyMember)->unk_09 = value2;
         if (!(value2 & BYTE_MASK)) {
-            g_Task->param.unk_0B = 1;
+            TASK(PartyMember)->param.unk_0B = 1;
         }
     }
     if (g_BattleEffectBattler->param.unk_0B == 1) {
         SND_SEQueueSelection(0x101);
-        g_Task->unk_09 = 0x10;
-        g_Task->header.step += 1;
+        TASK(PartyMember)->unk_09 = 0x10;
+        TASK(PartyMember)->header.step += 1;
     }
 }
 
@@ -162,9 +162,9 @@ MATCH void func_801EF2AC(void) {
 }
 
 MATCH void func_801EF30C(void) {
-    SYS_DISPATCH_BYTE(D_801F0518, g_Task->header.step);
+    SYS_DISPATCH_BYTE(D_801F0518, TASK(PartyMember)->header.step);
     GFX_AddDitheredDrawMode(BMAGIC_LAYER_OVER_BATTLERS, getTPage(TPAGE_DEPTH_4BIT, TPAGE_ABR_ADD, 320, 256));
-    if (g_Task->header.flags & 0x1 && g_Task->header.step != 0) {
+    if (TASK(PartyMember)->header.flags & 0x1 && TASK(PartyMember)->header.step != 0) {
         func_801EFF14();
         func_801EFC00();
     }
@@ -175,25 +175,25 @@ MATCH void func_801EF430(void) {
     PartyMember* src;
     PartyMember* dst;
 
-    if (--g_Task->unk_09 == 0) {
-        dst                 = g_Task;
-        src                 = g_BattleEffectBattler;
-        dst->unk_0C         = 0xB;
-        dst->screen_x.value = src->screen_x.value - 0x37;
-        dst->screen_y.value = src->screen_y.value - 0x10;
-        dst->unk_09         = 0;
-        g_Task->timer       = 32;
-        g_Task->header.step++;
+    if (--TASK(PartyMember)->unk_09 == 0) {
+        dst                      = g_Task;
+        src                      = g_BattleEffectBattler;
+        dst->unk_0C              = 0xB;
+        dst->screen_x.value      = src->screen_x.value - 0x37;
+        dst->screen_y.value      = src->screen_y.value - 0x10;
+        dst->unk_09              = 0;
+        TASK(PartyMember)->timer = 32;
+        TASK(PartyMember)->header.step++;
     }
 }
 
 MATCH void func_801EF4C0(void) {
     s32 count;
 
-    count          = g_Task->unk_0C - 1;
-    g_Task->unk_0C = count;
-    g_Task->screen_x.value += count;
-    if (g_Task->unk_0C == 0) {
+    count                     = TASK(PartyMember)->unk_0C - 1;
+    TASK(PartyMember)->unk_0C = count;
+    TASK(PartyMember)->screen_x.value += count;
+    if (TASK(PartyMember)->unk_0C == 0) {
         BATTLE_ACTIVE_WORK->param.unk_0B -= 1;
         Effect_Reset();
     }
@@ -208,52 +208,52 @@ MATCH void func_801EF564(void) {
     u8           slot;
     u16          y;
 
-    if (g_Task->param.unk_0B < BATTLE_PARTY_CHARACTERS_COUNT) {
-        battler = &g_Game.members[g_Task->param.unk_0B];
+    if (TASK(PartyMember)->param.unk_0B < BATTLE_PARTY_CHARACTERS_COUNT) {
+        battler = &g_Game.members[TASK(PartyMember)->param.unk_0B];
     } else {
-        battler = (PartyMember*)(g_BattleEnemies + g_Task->param.unk_0B * BATTLE_ENEMY_STRIDE);
+        battler = (PartyMember*)(g_BattleEnemies + TASK(PartyMember)->param.unk_0B * BATTLE_ENEMY_STRIDE);
     }
     GFX_PaletteFreeFadeTarget(battler);
-    g_Task->timer          = GFX_PaletteAllocFade(battler, 0, 0, 0, 1);
-    g_Task->screen_x.value = battler->screen_x.value - 32;
-    y                      = battler->screen_y.value - 12;
-    g_Task->screen_y.value = y;
-    slot                   = g_Task->param.unk_0B;
+    TASK(PartyMember)->timer          = GFX_PaletteAllocFade(battler, 0, 0, 0, 1);
+    TASK(PartyMember)->screen_x.value = battler->screen_x.value - 32;
+    y                                 = battler->screen_y.value - 12;
+    TASK(PartyMember)->screen_y.value = y;
+    slot                              = TASK(PartyMember)->param.unk_0B;
     if (slot < BATTLE_PARTY_CHARACTERS_COUNT) {
         if (g_Game.members[slot].facing < 2) {
-            g_Task->screen_y.value = y - s_BattlePanelYOffsets[g_Game.members[slot].chr.character_id * 2];
+            TASK(PartyMember)->screen_y.value = y - s_BattlePanelYOffsets[g_Game.members[slot].chr.character_id * 2];
         } else {
-            g_Task->screen_y.value = y - D_801EB109[g_Game.members[slot].chr.character_id * 2];
+            TASK(PartyMember)->screen_y.value = y - D_801EB109[g_Game.members[slot].chr.character_id * 2];
         }
     } else {
-        g_Task->screen_y.value = y - ENCOUNTER_ENEMIES[g_BattleEnemyBattlers[slot - BATTLE_PARTY_CHARACTERS_COUNT].type].height;
+        TASK(PartyMember)->screen_y.value = y - ENCOUNTER_ENEMIES[g_BattleEnemyBattlers[slot - BATTLE_PARTY_CHARACTERS_COUNT].type].height;
     }
-    g_Task->unk_09 = 0;
-    g_Task->header.step += 1;
+    TASK(PartyMember)->unk_09 = 0;
+    TASK(PartyMember)->header.step += 1;
 }
 
 MATCH void func_801EF724(void) {
-    g_PaletteFades[g_Task->timer].offset.r += 1;
-    g_PaletteFades[g_Task->timer].offset.g += 1;
-    g_PaletteFades[g_Task->timer].offset.b += 1;
-    if (g_PaletteFades[g_Task->timer].offset.r == 16) {
-        g_Task->header.step += 1;
+    g_PaletteFades[TASK(PartyMember)->timer].offset.r += 1;
+    g_PaletteFades[TASK(PartyMember)->timer].offset.g += 1;
+    g_PaletteFades[TASK(PartyMember)->timer].offset.b += 1;
+    if (g_PaletteFades[TASK(PartyMember)->timer].offset.r == 16) {
+        TASK(PartyMember)->header.step += 1;
     }
 }
 
 MATCH void func_801EF834(void) {
-    g_PaletteFades[g_Task->timer].offset.r -= 1;
-    g_PaletteFades[g_Task->timer].offset.g -= 1;
-    g_PaletteFades[g_Task->timer].offset.b -= 1;
-    if (g_PaletteFades[g_Task->timer].offset.r == 0) {
-        if (g_Task->unk_04 == 0) {
+    g_PaletteFades[TASK(PartyMember)->timer].offset.r -= 1;
+    g_PaletteFades[TASK(PartyMember)->timer].offset.g -= 1;
+    g_PaletteFades[TASK(PartyMember)->timer].offset.b -= 1;
+    if (g_PaletteFades[TASK(PartyMember)->timer].offset.r == 0) {
+        if (TASK(PartyMember)->unk_04 == 0) {
             SND_SEQueueSelection(EMI_SE_ID(SND_BANK_COMMON, 2));
         }
-        GFX_PaletteFreeFade(g_Task->timer);
-        Battle_FadePoisonedBattler(g_Task->param.unk_0B);
-        g_Task->unk_09 = 0;
-        g_Task->timer  = 4;
-        g_Task->header.step += 1;
+        GFX_PaletteFreeFade(TASK(PartyMember)->timer);
+        Battle_FadePoisonedBattler(TASK(PartyMember)->param.unk_0B);
+        TASK(PartyMember)->unk_09 = 0;
+        TASK(PartyMember)->timer  = 4;
+        TASK(PartyMember)->header.step += 1;
     }
 }
 
@@ -262,14 +262,14 @@ MATCH void func_801EF9C4(void) {
     u8 counter;
 
     func_801EFA84();
-    timer = g_Task->timer;
+    timer = TASK(PartyMember)->timer;
     if ((timer & BYTE_MASK) != 24) {
-        g_Task->timer = timer + 4;
+        TASK(PartyMember)->timer = timer + 4;
     }
-    counter        = g_Task->unk_09 + 1;
-    g_Task->unk_09 = counter;
+    counter                   = TASK(PartyMember)->unk_09 + 1;
+    TASK(PartyMember)->unk_09 = counter;
     if ((counter & BYTE_MASK) == 0x14) {
-        g_Task->header.step += 1;
+        TASK(PartyMember)->header.step += 1;
     }
 }
 
@@ -284,11 +284,11 @@ MATCH void func_801EFA84(void) {
     GFX_ADD_DITHERED_DRAW_MODE(BMAGIC_LAYER_FOREGROUND, tpage);
     prim = (POLY_FT4*)g_GfxPrimCursor;
     SetPolyFT4(prim);
-    setXY4(prim, g_Task->screen_x.value, g_Task->screen_y.value, g_Task->screen_x.value + 48, g_Task->screen_y.value, g_Task->screen_x.value, g_Task->screen_y.value + g_Task->timer,
-           g_Task->screen_x.value + 48, g_Task->screen_y.value + g_Task->timer);
+    setXY4(prim, TASK(PartyMember)->screen_x.value, TASK(PartyMember)->screen_y.value, TASK(PartyMember)->screen_x.value + 48, TASK(PartyMember)->screen_y.value, TASK(PartyMember)->screen_x.value,
+           TASK(PartyMember)->screen_y.value + TASK(PartyMember)->timer, TASK(PartyMember)->screen_x.value + 48, TASK(PartyMember)->screen_y.value + TASK(PartyMember)->timer);
     setTPage(prim, TPAGE_DEPTH_4BIT, TPAGE_ABR_HALF, 896, 256);
     setClut(prim, 32, 506);
-    setUV4(prim, 0, 32, 64, 32, 0, g_Task->timer + 32, 64, g_Task->timer + 32);
+    setUV4(prim, 0, 32, 64, 32, 0, TASK(PartyMember)->timer + 32, 64, TASK(PartyMember)->timer + 32);
     setRGB0(prim, GFX_COLOR_NEUTRAL, GFX_COLOR_NEUTRAL, GFX_COLOR_NEUTRAL);
     GFX_AddPrim(BMAGIC_LAYER_FOREGROUND, sizeof(POLY_FT4));
 }
@@ -300,18 +300,18 @@ MATCH void func_801EFC00(void) {
     s32      i;
     s32      j;
 
-    g_ScratchPad.cells.halves[0] = g_Task->timer;
-    g_ScratchPad.cells.halves[1] = (g_Task->timer >> 2) + 1;
-    if (g_Task->header.step < 2) {
-        g_ScratchPad.cells.halves[3] = 0x80 - g_Task->param.unk_0B * 48;
-        g_ScratchPad.cells.halves[4] = 0x80 - g_Task->param.unk_0B * 48;
+    g_ScratchPad.cells.halves[0] = TASK(PartyMember)->timer;
+    g_ScratchPad.cells.halves[1] = (TASK(PartyMember)->timer >> 2) + 1;
+    if (TASK(PartyMember)->header.step < 2) {
+        g_ScratchPad.cells.halves[3] = 0x80 - TASK(PartyMember)->param.unk_0B * 48;
+        g_ScratchPad.cells.halves[4] = 0x80 - TASK(PartyMember)->param.unk_0B * 48;
     } else {
-        g_ScratchPad.cells.halves[3] = g_Task->unk_09 * 6 + 0x80;
-        g_ScratchPad.cells.halves[4] = 0x80 - g_Task->unk_09 * 6;
+        g_ScratchPad.cells.halves[3] = TASK(PartyMember)->unk_09 * 6 + 0x80;
+        g_ScratchPad.cells.halves[4] = 0x80 - TASK(PartyMember)->unk_09 * 6;
     }
     for (i = 0; i < 4; i++) {
-        g_ScratchPad.cells.halves[6] = g_Task->screen_x.value + FIXED_MUL(rsin(i << 10), g_ScratchPad.cells.halves[0]);
-        g_ScratchPad.cells.halves[7] = g_Task->screen_y.value + FIXED_MUL(rcos(i << 10), g_ScratchPad.cells.halves[0]);
+        g_ScratchPad.cells.halves[6] = TASK(PartyMember)->screen_x.value + FIXED_MUL(rsin(i << 10), g_ScratchPad.cells.halves[0]);
+        g_ScratchPad.cells.halves[7] = TASK(PartyMember)->screen_y.value + FIXED_MUL(rcos(i << 10), g_ScratchPad.cells.halves[0]);
         for (j = 0; j < 3; j++) {
             prim = (POLY_G3*)g_GfxPrimCursor;
             SetPolyG3(prim);
@@ -338,11 +338,11 @@ MATCH void func_801EFF14(void) {
     s32      i;
     s32      segment;
 
-    g_ScratchPad.cells.halves[0] = g_Task->timer;
-    g_ScratchPad.cells.halves[6] = g_Task->screen_x.value;
-    g_ScratchPad.cells.halves[7] = g_Task->screen_y.value;
-    if (g_Task->header.step < 2) {
-        g_ScratchPad.cells.halves[3] = 0x80 - g_Task->param.unk_0B * 48;
+    g_ScratchPad.cells.halves[0] = TASK(PartyMember)->timer;
+    g_ScratchPad.cells.halves[6] = TASK(PartyMember)->screen_x.value;
+    g_ScratchPad.cells.halves[7] = TASK(PartyMember)->screen_y.value;
+    if (TASK(PartyMember)->header.step < 2) {
+        g_ScratchPad.cells.halves[3] = 0x80 - TASK(PartyMember)->param.unk_0B * 48;
     } else {
         g_ScratchPad.cells.halves[3] = 0x80;
     }
@@ -370,10 +370,10 @@ MATCH void func_801F0104(void) {
     shade      = (volatile u16*)&D_1F800006;
     line       = (LINE_F2*)g_GfxPrimCursor;
     *shade     = 0x80;
-    D_1F80000C = g_Task->screen_x.value;
+    D_1F80000C = TASK(PartyMember)->screen_x.value;
     /* FAKE: retail stores each staged coordinate before loading the next. */
     FAKE_ORDER_FENCE();
-    D_1F80000E = g_Task->screen_y.value;
+    D_1F80000E = TASK(PartyMember)->screen_y.value;
     /* FAKE: retail keeps the argument move in the call's delay slot. */
     FAKE_ORDER_FENCE();
     SetLineF2(line);

@@ -2,5 +2,5 @@
 
 /* func_801E6FA0 */
 MATCH void Battle_RestartAilmentActor(void) {
-    g_Task->header.mode = 0;
+    TASK(PartyMember)->header.mode = 0;
 }

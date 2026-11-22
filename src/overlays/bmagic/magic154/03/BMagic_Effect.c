@@ -30,9 +30,9 @@ MATCH void func_801EEC90(void) {
     }
     g_GfxPalettePending = 1;
     g_BattleEffectBattler->header.flags |= 0x40;
-    g_Task->param.unk_0B = 1;
-    g_Task->unk_09       = 1;
-    g_Task->header.mode++;
+    TASK(PartyMember)->param.unk_0B = 1;
+    TASK(PartyMember)->unk_09       = 1;
+    TASK(PartyMember)->header.mode++;
 }
 
 MATCH void func_801EEE94(void) {
@@ -42,15 +42,15 @@ MATCH void func_801EEE94(void) {
     PartyMember* actor;
     PartyMember* work;
 
-    if (g_Task->param.unk_0B == 0) {
-        actor          = g_Battle.selected_actor;
-        g_Task->facing = actor->facing;
-        g_Task->unk_0C = 0;
-        g_Task->unk_10 = -TO_COORD_HALF(1);
+    if (TASK(PartyMember)->param.unk_0B == 0) {
+        actor                     = g_Battle.selected_actor;
+        TASK(PartyMember)->facing = actor->facing;
+        TASK(PartyMember)->unk_0C = 0;
+        TASK(PartyMember)->unk_10 = -TO_COORD_HALF(1);
         Effect_RotatePosition(g_Task);
-        g_Task->pos.x.fixed = actor->pos.x.fixed + g_Task->unk_0C;
-        g_Task->pos.y.fixed = actor->pos.y.fixed + g_Task->unk_10;
-        g_Task->pos.z.fixed = actor->pos.z.fixed;
+        TASK(PartyMember)->pos.x.fixed = actor->pos.x.fixed + TASK(PartyMember)->unk_0C;
+        TASK(PartyMember)->pos.y.fixed = actor->pos.y.fixed + TASK(PartyMember)->unk_10;
+        TASK(PartyMember)->pos.z.fixed = actor->pos.z.fixed;
         SND_SEQueueSelection(EMI_SE_ID(SND_BANK_COMMON, 0x00));
         for (i = 0, anchor = 1; i < 6; i++) {
             slot                               = Battle_AllocEffect(1, 82) & BYTE_MASK;
@@ -59,19 +59,19 @@ MATCH void func_801EEE94(void) {
             g_BattleEffects[slot].unk_0B       = i;
             g_BattleEffects[slot].arg.unk_09   = anchor;
             g_BattleEffects[slot].target.party = work;
-            g_Task->param.unk_0B += 1;
+            TASK(PartyMember)->param.unk_0B += 1;
             anchor += 3;
         }
-        g_Task->header.mode += 1;
+        TASK(PartyMember)->header.mode += 1;
     }
 }
 
 MATCH void func_801EEFE0(void) {
-    if (g_Task->unk_09 == 0) {
+    if (TASK(PartyMember)->unk_09 == 0) {
         Battle_SelectActiveBattlerScript(4, 0);
         BATTLE_ACTIVE_WORK->header.flags &= ~PARTY_MEMBER_FLAG_HANDLER_BUSY;
         Battle_ApplyDamageFlags(g_Battle.target_selector, 0x10U);
-        g_Task->header.mode += 1;
+        TASK(PartyMember)->header.mode += 1;
     }
 }
 
@@ -83,8 +83,8 @@ MATCH void func_801EEFE0(void) {
 MATCH void func_801EF104(void) {
     GFX_AddDitheredDrawMode(BMAGIC_LAYER_OVER_BATTLERS, getTPage(TPAGE_DEPTH_4BIT, TPAGE_ABR_ADD, 320, 256));
     g_Scripts = BMAGIC_SCRIPT_TABLE;
-    SYS_DISPATCH_BYTE(g_BMagicEffectModes + 2, g_Task->header.step);
-    if (g_Task->header.flags != 0 && g_Task->header.step != 0) {
+    SYS_DISPATCH_BYTE(g_BMagicEffectModes + 2, TASK(PartyMember)->header.step);
+    if (TASK(PartyMember)->header.flags != 0 && TASK(PartyMember)->header.step != 0) {
         Area_AddGridActor();
     }
     g_Scripts = AREA_SCRIPT_TABLE;
@@ -93,32 +93,32 @@ MATCH void func_801EF104(void) {
 MATCH void func_801EF1EC(void) {
     u8 timer;
 
-    timer          = g_Task->unk_09 - 1;
-    g_Task->unk_09 = timer;
+    timer                     = TASK(PartyMember)->unk_09 - 1;
+    TASK(PartyMember)->unk_09 = timer;
     if (!(timer & BYTE_MASK)) {
-        g_Task->facing = g_BattleEffectBattler->facing;
-        g_Task->unk_0C = 0;
-        g_Task->unk_10 = g_Task->param.unk_0B << 0xF;
+        TASK(PartyMember)->facing = g_BattleEffectBattler->facing;
+        TASK(PartyMember)->unk_0C = 0;
+        TASK(PartyMember)->unk_10 = TASK(PartyMember)->param.unk_0B << 0xF;
         Effect_RotatePosition(g_Task);
-        g_Task->pos.x.fixed  = g_BattleEffectBattler->pos.x.fixed + g_Task->unk_0C;
-        g_Task->pos.y.fixed  = g_BattleEffectBattler->pos.y.fixed + g_Task->unk_10;
-        g_Task->pos.z.fixed  = g_BattleEffectBattler->pos.z.fixed;
-        g_Task->scale.x      = 0x8000;
-        g_Task->scale.y      = 0x8000;
-        g_Task->unk_48       = 2;
-        g_Task->unk_25       = 0x1D;
-        g_Task->unk_26       = 0;
-        g_Task->unk_27       = 0xA0;
-        g_Task->unk_28       = 0;
-        g_Task->unk_2A       = g_Task->facing & 0x1;
-        g_Task->unk_29       = 3;
-        g_Task->unk_24       = 4;
-        g_Task->unk_2C.value = 0;
-        g_Task->unk_2B       = 0;
+        TASK(PartyMember)->pos.x.fixed  = g_BattleEffectBattler->pos.x.fixed + TASK(PartyMember)->unk_0C;
+        TASK(PartyMember)->pos.y.fixed  = g_BattleEffectBattler->pos.y.fixed + TASK(PartyMember)->unk_10;
+        TASK(PartyMember)->pos.z.fixed  = g_BattleEffectBattler->pos.z.fixed;
+        TASK(PartyMember)->scale.x      = 0x8000;
+        TASK(PartyMember)->scale.y      = 0x8000;
+        TASK(PartyMember)->unk_48       = 2;
+        TASK(PartyMember)->unk_25       = 0x1D;
+        TASK(PartyMember)->unk_26       = 0;
+        TASK(PartyMember)->unk_27       = 0xA0;
+        TASK(PartyMember)->unk_28       = 0;
+        TASK(PartyMember)->unk_2A       = TASK(PartyMember)->facing & 0x1;
+        TASK(PartyMember)->unk_29       = 3;
+        TASK(PartyMember)->unk_24       = 4;
+        TASK(PartyMember)->unk_2C.value = 0;
+        TASK(PartyMember)->unk_2B       = 0;
         Script_Select(0U);
         Script_AnimStepLoop();
-        g_Task->unk_09 = 0;
-        g_Task->header.step += 1;
+        TASK(PartyMember)->unk_09 = 0;
+        TASK(PartyMember)->header.step += 1;
     }
 }
 
@@ -132,7 +132,7 @@ MATCH void func_801EF380(void) {
     work->unk_09 = count;
     work->scale.y += 0x8000;
     if (count == 4) {
-        g_Task->header.step++;
+        TASK(PartyMember)->header.step++;
     }
 }
 
@@ -150,8 +150,8 @@ MATCH void func_801EF3E4(void) {
 }
 
 MATCH void func_801EF454(void) {
-    g_Task->scale.y -= 0x1000;
-    if ((s8)g_Task->unk_5F == -0x80) {
+    TASK(PartyMember)->scale.y -= 0x1000;
+    if ((s8)TASK(PartyMember)->unk_5F == -0x80) {
         g_BattleEffectBattler->param.unk_0B -= 1;
         Effect_Reset();
     }
@@ -160,8 +160,8 @@ MATCH void func_801EF454(void) {
 MATCH void func_801EF4B4(void) {
     Magic154Steps handlers = D_801EEC14;
 
-    SYS_DISPATCH_BYTE(handlers.steps, g_Task->header.step);
-    if (g_Task->header.flags != 0) {
+    SYS_DISPATCH_BYTE(handlers.steps, TASK(PartyMember)->header.step);
+    if (TASK(PartyMember)->header.flags != 0) {
         Area_AddGridActor();
     }
 }
@@ -171,18 +171,18 @@ MATCH void func_801EF4B4(void) {
 MATCH void func_801EF58C(void) {
     u8 timer;
 
-    timer          = g_Task->unk_09 - 1;
-    g_Task->unk_09 = timer;
+    timer                     = TASK(PartyMember)->unk_09 - 1;
+    TASK(PartyMember)->unk_09 = timer;
     if (!(timer & BYTE_MASK)) {
         Script_AnimStepOnce();
         Battle_PlayActiveBattlerSE(2, 4);
         g_BattleEffectBattler->param.unk_0B -= 1;
-        g_Task->header.step += 1;
+        TASK(PartyMember)->header.step += 1;
     } else if (Script_AnimStepOnce() & BYTE_MASK) {
         Battle_PlayActiveBattlerSE(2, 4);
-        g_Task->unk_09 = 0;
+        TASK(PartyMember)->unk_09 = 0;
         g_BattleEffectBattler->param.unk_0B -= 1;
-        g_Task->header.step += 1;
+        TASK(PartyMember)->header.step += 1;
     }
 }
 
@@ -191,7 +191,7 @@ MATCH void func_801EF58C(void) {
 MATCH void Effect_LowerTickerStepOnReady(void) {
     if (Script_AnimStepOnce() & BYTE_MASK) {
         BATTLE_ACTIVE_WORK->unk_09--;
-        g_Task->header.step++;
+        TASK(PartyMember)->header.step++;
     }
 }
 

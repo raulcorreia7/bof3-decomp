@@ -15,7 +15,7 @@ MATCH bool Fishing_LureInRange(void) {
 
     if (g_SpawnedActors[0].header.mode == 4) {
         if (g_FishingHookedFish == GAME_NONE && D_80145E92[0] == 3) {
-            if (FISHING_STATE->cue_index == 0x16 && (g_FishingLureRow->unk_0E & 0xF) == g_SpawnedActors[0].header.mode) {
+            if (TASK(FishingState)->cue_index == 0x16 && (g_FishingLureRow->unk_0E & 0xF) == g_SpawnedActors[0].header.mode) {
                 return true;
             }
             row        = g_FishingLureRow;
@@ -23,7 +23,7 @@ MATCH bool Fishing_LureInRange(void) {
             /* FAKE: keeps the unk_07 byte load ahead of the scratchpad
              * pointer load (retail +0x8C before +0x90). */
             FAKE_BARRIER();
-            work  = FISHING_STATE;
+            work  = TASK(FishingState);
             range = (entry_byte - row->unk_0F + 3) & BYTE_MASK;
             /* FAKE: Actor_IsInRange reads the slot through the field actor layout. */
             if (Actor_IsInRange(work->motion.unk_34, work->y_38.pos_y, work->bounce.half.key, range, (Actor*)g_SpawnedActors) & BYTE_MASK) {
@@ -31,6 +31,6 @@ MATCH bool Fishing_LureInRange(void) {
             }
         }
     }
-    FISHING_STATE->handler_index = 1;
+    TASK(FishingState)->handler_index = 1;
     return false;
 }
