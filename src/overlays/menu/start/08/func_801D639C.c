@@ -10,7 +10,7 @@ MATCH void func_801D639C(void) {
     u8  next_slot;
     u8  prev_slot;
 
-    choice = &D_80144953;
+    choice = &g_WindowClut;
     Menu_DrawClutStrip(*choice);
     choice += 0x15;
     record = (g_CharSlot[g_PartyFieldOrder[g_UiPanelTasks[MENU_START_PANEL_ITEMS].unk_0C]] * 0xA4) + choice;

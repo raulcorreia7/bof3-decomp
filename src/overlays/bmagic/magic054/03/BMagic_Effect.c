@@ -12,7 +12,71 @@ MATCH void func_801EEC2C(void) {
 }
 
 #ifdef NON_MATCHING
+/* Spawns one effect slot per living battler on the selected side, marks each row busy, and
+ * otherwise applies the encounter 0x37 damage flags and advances the local work. */
 NON_MATCHING void func_801EEC98(void) {
+    BattleWorkImage* row;
+    BattleWorkImage* slot;
+    PartyMember*     member;
+    PartyMember*     saved;
+    u32              index;
+    u8               i;
+
+    if (g_Battle.encounter == 0x37) {
+        func_800A9610(g_Battle.target_selector, 0x10);
+        TASK(PartyMember)->header.mode = 3;
+        TASK(PartyMember)->unk_09      = 0x1E;
+        return;
+    }
+    TASK(PartyMember)->param.unk_0B = 0;
+    TASK(PartyMember)->header.mode += 1;
+    if (g_Battle.target_selector & BATTLE_TARGET_ENEMY_SIDE) {
+        for (i = 0; i < 8; i++) {
+            if (func_801DB524((u8)(i + 3)) != 0) {
+                continue;
+            }
+            func_801E24F8((u8)(i + 3), 4);
+            index = func_801E590C(1, 0x2C);
+            row   = (BattleWorkImage*)&g_BattleEnemyBattlers[i];
+            slot  = (BattleWorkImage*)&D_801EC330[index & BYTE_MASK];
+            *slot = *row;
+
+            D_801EC330[index & BYTE_MASK].unk_06       = 1;
+            D_801EC330[index & BYTE_MASK].header.mode  = 0;
+            D_801EC330[index & BYTE_MASK].header.step  = 0;
+            D_801EC330[index & BYTE_MASK].step_index   = 0x2C;
+            D_801EC330[index & BYTE_MASK].unk_0B       = i;
+            D_801EC330[index & BYTE_MASK].target.party = TASK(PartyMember);
+            TASK(PartyMember)->param.unk_0B++;
+            g_BattleEnemyBattlers[i].header.flags |= PARTY_MEMBER_FLAG_HANDLER_BUSY;
+        }
+    } else {
+        for (i = 0; i < 3; i++) {
+            if (func_801DB524(i) != 0) {
+                continue;
+            }
+            member = &g_Game.members[i];
+            saved  = TASK(PartyMember);
+            TASK_SET(member);
+            Script_Select((u8)(member->facing + 0x10));
+            TASK_SET(saved);
+
+            index = func_801E590C(1, 0x2C);
+            row   = (BattleWorkImage*)member;
+            slot  = (BattleWorkImage*)&D_801EC330[index & BYTE_MASK];
+            *slot = *row;
+
+            D_801EC330[index & BYTE_MASK].unk_06       = 1;
+            D_801EC330[index & BYTE_MASK].header.mode  = 0;
+            D_801EC330[index & BYTE_MASK].header.step  = 0;
+            D_801EC330[index & BYTE_MASK].step_index   = 0x2C;
+            D_801EC330[index & BYTE_MASK].unk_0B       = i;
+            D_801EC330[index & BYTE_MASK].target.party = TASK(PartyMember);
+            TASK(PartyMember)->param.unk_0B++;
+            g_Game.members[i].header.flags |= PARTY_MEMBER_FLAG_HANDLER_BUSY;
+        }
+    }
+    SND_SEQueueSelection(0x100);
 }
 #else
 INCLUDE_ASM(func_801EEC98);

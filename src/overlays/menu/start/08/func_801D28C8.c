@@ -5,7 +5,7 @@ MATCH void func_801D28C8(void) {
     u8  count;
     s32 i;
 
-    Menu_DrawClutStrip(D_80144953);
+    Menu_DrawClutStrip(g_WindowClut);
     counter = &D_80148654;
     count   = *counter;
     count--;

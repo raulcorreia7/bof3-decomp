@@ -16,7 +16,7 @@ MATCH void EMI_ArchiveLoad(u32 emi_id) {
     ring_index           = 0;
     g_EmiRequestedSlotId = emi_id;
     g_EmiNextSlot        = 0;
-    D_80146482           = 0;
+    g_EmiUploadBank      = 0;
     D_80146486           = 0;
     D_80146488           = 1;
     g_EmiRingSlot        = 0;

@@ -20,15 +20,15 @@ MATCH void EMI_VabUploadBody(void) {
         while ((s16)SsVabTransCompleted(SS_IMMEDIATE) == 0) {
         }
     } else {
-        D_80146482 = D_80146483;
-        D_80146474 = D_80146478;
-        *state     = 0;
+        g_EmiUploadBank = g_EmiEntryBank;
+        D_80146474      = D_80146478;
+        *state          = 0;
     }
     ring   = &g_EmiRingBase;
     sizes  = (s32*)&ring[45];
-    result = SsVabTransBodyPartly((u8*)(*ring + (D_80146488 << 11)), sizes[D_80146488], g_EmiBanks[D_80146482].vab_id);
+    result = SsVabTransBodyPartly((u8*)(*ring + (D_80146488 << 11)), sizes[D_80146488], g_EmiBanks[g_EmiUploadBank].vab_id);
     D_80146474 -= sizes[D_80146488];
-    if ((D_80146474 == 0) && (result == g_EmiBanks[D_80146482].vab_id)) {
+    if ((D_80146474 == 0) && (result == g_EmiBanks[g_EmiUploadBank].vab_id)) {
         D_80146486 = 0;
         while ((s16)SsVabTransCompleted(SS_IMMEDIATE) == 0) {
         }
@@ -39,7 +39,7 @@ MATCH void EMI_VabUploadBody(void) {
     if (result < 0) {
         return;
     }
-    bank = &D_80146482;
+    bank = &g_EmiUploadBank;
     if (g_EmiBanks[*bank].flags & 2) {
         voice                          = SsSepOpenJ((u32*)g_EmiBanks[*bank].sequence_buffer, g_EmiBanks[*bank].vab_id, 4);
         g_SelectionEffectVoices[*bank] = voice;
@@ -49,7 +49,7 @@ MATCH void EMI_VabUploadBody(void) {
         }
         g_EmiBanks[*bank].flags &= ~2;
     }
-    if ((g_EmiStreamFlags & 0x40) && (D_80146482 == D_80146855)) {
-        SND_SeqPlay(D_80146482, D_80146856, 100, 100);
+    if ((g_EmiStreamFlags & 0x40) && (g_EmiUploadBank == D_80146855)) {
+        SND_SeqPlay(g_EmiUploadBank, D_80146856, 100, 100);
     }
 }

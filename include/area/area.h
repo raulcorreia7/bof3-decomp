@@ -351,7 +351,7 @@ typedef struct AreaScriptSection {
  * `exe/slus_004_22@0x8014DD3C` copies `script_section` to work+0x2C;
  * `@0x8014D6DC` uses it as a script-table directory index and
  * `@0x80167E00` compares it before resolving the record id in a terminated
- * list. `D_801459F4` publishes the record array at `0x800E3800 + 4`. */
+ * list. `g_SceneActorDefs` publishes the record array at `0x800E3800 + 4`. */
 typedef enum SpriteTextureMode {
     SPRITE_TEXTURE_MODE_0  = 0,
     SPRITE_TEXTURE_MODE_1  = 1,
@@ -379,7 +379,7 @@ typedef struct AreaActorDefs {
 } AreaActorDefs;
 
 /* `0x801459F0` - the four pointers the loader publishes together. Each word has
- * its own name in the tree (`g_Scripts` the script table, `D_801459F4` the scene
+ * its own name in the tree (`g_Scripts` the script table, `g_SceneActorDefs` the scene
  * records); this type is what a reader casts the address to when it wants all
  * four, so the words keep their own declarations. */
 typedef struct AreaWorkPointers {

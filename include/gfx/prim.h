@@ -66,6 +66,7 @@ ASSERT_SIZE(UvRect, 0x4);
  * (in front). Proof: SYS_Main clears the table with ClearOTagR(work + 0x70, 8) and draws it from work + 0x8C, which is entry 7.
  * The layers named here are the ones whose content the callers show; the battle-magic family names 2, 3 and 5
  * relative to GFX_LAYER_BATTLE_SCENE (src/overlays/bmagic/bmagic.h). */
+#define GFX_LAYER_COUNT             8
 #define GFX_LAYER_TOP               0 /* the menu cursor and full-screen flashes */
 #define GFX_LAYER_UI                1 /* text, windows and menu sprites */
 #define GFX_LAYER_EFFECT_FRONT      2 /* screen effects and effect sprites in front of the scene */

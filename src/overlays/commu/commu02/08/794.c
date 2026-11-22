@@ -11,7 +11,22 @@ void func_801D8058(s32 left, s32 top);
 void func_801D2908(s16 x, s16 y, u8 mode);
 void Menu_DrawPanelIcon(u16 x, u16 y, s32 u, s32 v, u16 clut, u8 color);
 
+#ifdef NON_MATCHING
+NON_MATCHING void func_801D1394(void) {
+    s8 value;
+
+    value      = D_801DB0C4 - 1;
+    D_801DB0C4 = value;
+    func_801D3184(0x26 - ((value & BYTE_MASK) * -0x12), 0x10 - ((value & BYTE_MASK) * -0xE));
+    func_801D32A0(0xA8 - ((u8)D_801DB0C4 * 0xE), 0x10 - ((u8)D_801DB0C4 * -0x19), 0);
+    if ((u8)D_801DB0C4 == 0) {
+        D_801F294E = 0;
+        D_801F294D += 1;
+    }
+}
+#else
 INCLUDE_ASM(func_801D1394);
+#endif
 
 MATCH void func_801D143C(void) {
     s8 value;
@@ -2349,9 +2364,9 @@ NON_MATCHING void Menu_DrawHeaderBar(s32 x, s32 y, s32 width, s32 height, u8 win
     prim->tpage = getTPage(TPAGE_DEPTH_4BIT, TPAGE_ABR_HALF, FONT_TPAGE_X, FONT_TPAGE_Y);
     GFX_AddPrim(GFX_LAYER_UI, sizeof(POLY_FT4));
 
+    odd  = (width - 3) & 1;
     half = ((s32)width1_u - 4) >> 1;
     prim = (POLY_FT4*)g_GfxPrimCursor;
-    odd  = (width - 3) & 1;
     SetPolyFT4(prim);
     PSX_SET_SEMI_TRANSPARENT(prim);
     half_u = half;

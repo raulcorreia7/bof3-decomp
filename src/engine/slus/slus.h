@@ -402,7 +402,8 @@ extern s32                   D_80144967;
 /* Retail data D_80145000-D_80146FFF (one declaration each). */
 extern s32                   D_80145030;
 extern u8                    D_80145990[];
-extern u32*                  D_801459D0[];
+/* D_801459D0 */
+extern u32*                  g_GfxOtHeads[GFX_LAYER_COUNT];
 extern void*                 D_801459F8;
 extern u32                   D_801459FC;
 extern u16                   D_80145A54[];
@@ -427,16 +428,20 @@ extern s32                   D_80146474;
 extern volatile u32          D_80146478;
 extern volatile u8           g_EmiReadStatus;
 extern volatile u8           g_EmiNextSlot;
-extern u8                    D_80146482;
-extern u8                    D_80146483;
+/* D_80146482 */
+extern u8                    g_EmiUploadBank;
+/* D_80146483 */
+extern u8                    g_EmiEntryBank;
 extern volatile u8           D_80146484;
 extern volatile u8           D_80146485;
 extern volatile u8           D_80146486;
 extern s8                    D_80146488;
 extern s8                    g_EmiRingSlot;
-extern s8                    D_8014648A;
+/* D_8014648A */
+extern s8                    g_CdState;
 extern s8                    D_8014648B;
-extern s32                   D_8014648C;
+/* D_8014648C */
+extern s32                   g_CdSyncStatus;
 extern u16                   g_EmiStreamIdleFrames;
 extern u16                   D_80146492;
 extern u8                    g_EmiStreamState;
@@ -523,9 +528,8 @@ extern CdlATV                g_SndCDMix;
 extern u8                    g_EmiStreamMode;
 extern OverlaySlotCursor     D_80146844;
 extern u32*                  D_80146848;
-extern s16                   D_8014684E;
-extern s16                   D_80146850[];
-extern s16                   D_80146852;
+/* D_8014684C */
+extern RECT                  g_EmiUploadRect;
 extern u8                    D_80146855;
 extern u8                    D_80146856;
 extern volatile u32          D_80146858;
@@ -614,7 +618,7 @@ extern const struct MenuPanelSteps g_UiMessageChoiceSteps;
 /* D_80149B64 */
 extern const struct MenuPanelSteps g_UiMessagePresetSteps;
 extern const VECTOR                D_80149BF0;
-extern const u32                   g_CdSteps[];
+extern const Callback              g_CdStateHandlers[CD_STATE_COUNT];
 extern const EmiRingSteps          g_EmiRingSteps;
 extern const char                  D_80149F9C[];
 extern const char                  D_80149FAC[];
@@ -758,10 +762,14 @@ extern s32          D_8018B454;
 extern u16          D_8018B458;
 extern u16          D_8018B45A;
 extern CdlLOC       D_8018B490;
-extern u8           D_8018B4A0;
-extern u8           D_8018B4A4;
-extern u8           D_8018B4A8;
-extern u8           D_8018B4AC;
+/* D_8018B4A0 */
+extern u8           g_EmiVramType;
+/* D_8018B4A4 */
+extern u8           g_EmiVramRow;
+/* D_8018B4A8 */
+extern u8           g_EmiVramEntryCount;
+/* D_8018B4AC */
+extern u8           g_EmiVramStep;
 extern u32          D_8018B4B0;
 extern void (*D_8018E7D4)(s16 voice);
 extern void (*D_8018E988)(s16 voice);

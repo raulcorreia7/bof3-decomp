@@ -6,11 +6,11 @@
 MATCH void CD_OnSeek(void) {
     s32 state;
 
-    state = D_8014648C;
+    state = g_CdSyncStatus;
     if (state < 0) {
-        state = 1;
+        state = CD_STATE_SET_SPEED;
     } else {
-        state = 4;
+        state = CD_STATE_READ;
     }
-    D_8014648A = state;
+    g_CdState = state;
 }

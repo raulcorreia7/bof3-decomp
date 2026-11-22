@@ -55,7 +55,7 @@ MATCH void SAVE_RunLoadRestore(void) {
         if (g_PadStates[0].held & PADstart) {
             D_801ED18C = 1;
         }
-        Menu_DrawClutStrip(D_80144953);
+        Menu_DrawClutStrip(g_WindowClut);
         MENU_DRAW_HEADER();
         SAVE_DrawSlots(SAVE_SLOTS_X, SAVE_SLOTS_Y, 0U);
         UI_TextDraw(28, 21, 0, TEXT_LENGTH_MAX, UI_MessageGetText(0xB1));

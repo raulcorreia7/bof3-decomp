@@ -144,9 +144,9 @@ NON_MATCHING void UI_MessageRunScript(void) {
             default:
                 if (!(g_UiWindowChannel & FRONTEND_FLAG_NO_INPUT_WAIT)) {
                     if (g_InputMasks[MESSAGE_INPUT_SPEED_UP] & g_PadStates[0].held) {
-                        chan[2] = STEP_TABLE[D_80144950 * 4];
+                        chan[2] = STEP_TABLE[g_MessageSpeed * 4];
                     } else {
-                        chan[2] = STEP_TABLE[D_80144950 * 4 + 1];
+                        chan[2] = STEP_TABLE[g_MessageSpeed * 4 + 1];
                     }
                     if (g_UiWindowChannel & FRONTEND_FLAG_FORCE_STEP) {
                         chan[2] = 3;

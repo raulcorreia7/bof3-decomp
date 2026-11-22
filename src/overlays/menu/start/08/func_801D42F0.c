@@ -12,7 +12,7 @@ MATCH void func_801D42F0(void) {
     u8  old;
     u8  result;
 
-    Menu_DrawClutStrip(D_80144953);
+    Menu_DrawClutStrip(g_WindowClut);
     items  = &D_801C893C[D_8014850E][D_80148510];
     counts = &D_801C8950[D_8014850E][D_80148510];
     UI_MessageSetVariable(0, 0xC, (const u8*)&g_Items[*items]);

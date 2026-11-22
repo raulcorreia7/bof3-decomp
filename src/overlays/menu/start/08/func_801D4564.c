@@ -10,7 +10,7 @@ MATCH void func_801D4564(void) {
     s32              pressed;
     u32              span;
 
-    Menu_DrawClutStrip(D_80144953);
+    Menu_DrawClutStrip(g_WindowClut);
     g_UiPanelTasks[MENU_START_PANEL_DESCRIPTION].u.message.id = Item_GetDescription(D_8014850E, D_801C893C[D_8014850E][g_UiPanelTasks[MENU_START_PANEL_ITEMS].unk_0C]);
     g_UiPanelTasks[MENU_START_PANEL_CURSOR].active            = 1;
     g_UiPanelTasks[MENU_START_PANEL_CURSOR].pos.x             = (u16)g_UiPanelTasks[MENU_START_PANEL_ITEMS].pos.x + 7;

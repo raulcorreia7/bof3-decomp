@@ -14,7 +14,7 @@ MATCH void func_801D7E4C(void) {
     s8  result;
 
     u8* flag;
-    Menu_DrawClutStrip(D_80144953);
+    Menu_DrawClutStrip(g_WindowClut);
     state = g_UiPanelTasks[MENU_START_PANEL_ITEMS].state;
     flag  = &D_80148624;
     latch = flag - 0x48;

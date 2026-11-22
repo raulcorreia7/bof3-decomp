@@ -6,11 +6,11 @@
 MATCH void CD_OnRead(void) {
     u8 mode;
 
-    if (D_8014648C < 0) {
+    if (g_CdSyncStatus < 0) {
         g_EmiStreamState = 0;
-        mode             = 4;
+        mode             = CD_STATE_READ;
     } else {
-        mode = 8;
+        mode = CD_STATE_IDLE_END;
     }
-    D_8014648A = mode;
+    g_CdState = mode;
 }

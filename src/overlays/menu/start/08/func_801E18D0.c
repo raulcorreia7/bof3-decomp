@@ -6,7 +6,7 @@ MATCH void func_801E18D0(void) {
     s32 pressed;
 
     D_80148654 = 0;
-    Menu_DrawClutStrip(D_80144953);
+    Menu_DrawClutStrip(g_WindowClut);
     Menu_DrawHeaderBar(MENU_HEADER_X, 16, MENU_HEADER_WIDTH, MENU_HEADER_HEIGHT, g_WindowStyle);
     WinDrawCueText(28, 19, (u16)((s8)D_80148655 + 0xBC));
     func_801E26A8(0x1C, 0x40);
@@ -50,14 +50,14 @@ MATCH void func_801E18D0(void) {
         SND_SEPlay(EMI_SE_ID(SND_BANK_COMMON, 4));
         func_801E2668((u8)*mode, 0x70, 0x26);
         UI_CursorDraw(((*mode * 0x30) + 0x76) & 0xFFFE, 42, 0);
-        D_80144950                      = 1;
+        g_MessageSpeed                  = 1;
         g_InputMasks[INPUT_SLOT_SPEAK]  = PADRdown | PADL2 | PADR2;
         g_InputMasks[INPUT_SLOT_MOVE]   = PADRright;
         g_InputMasks[INPUT_SLOT_ACTION] = PADRup;
         g_InputMasks[INPUT_SLOT_MENU]   = PADRleft;
         g_InputMasks[INPUT_SLOT_VIEW]   = PADR1;
         g_WindowStyle                   = 0;
-        D_80144953                      = 0;
+        g_WindowClut                    = 0;
         g_SndMono                       = 0;
         D_80144954                      = 0;
         D_80144955                      = 0;
