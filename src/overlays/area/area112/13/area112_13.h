@@ -38,9 +38,6 @@ void func_801F2EA8(void);
 void func_801F3274(void);
 void Area_DrawLightPillar(s32* pos);
 
-/* The per-cell words at the map bundle's +0x30: one replicated shade byte a cell. */
-extern u32 D_80104030[];
-
 /* The scene flag id of each cell the step handles, by cell column. */
 extern u8  D_801F420C[];
 /* The ground height of each cell, by cell column. */

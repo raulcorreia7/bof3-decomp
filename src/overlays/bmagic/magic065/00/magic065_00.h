@@ -21,9 +21,9 @@ ASSERT_SIZE(EnemyStealRow, 0x118);
 extern EnemyStealRow D_801EB6C8[];
 extern u8            D_801EC2E4;
 extern BattleEffect  D_801EC330[];
+extern Magic065Steps D_801EEC04;
 /* The drop chance of each rate index. */
 extern s8            D_801EF508[];
-extern Magic065Steps D_801EEC04;
 
 #define MAGIC065_TASK_STEP_COUNT 4
 
