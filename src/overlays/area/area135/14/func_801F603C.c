@@ -1,6 +1,6 @@
 #include "area135_14.h"
 
-/* Actor_IsInRange without the height test, on the record at 0x80147C20 (D_80147C29..90) and the task's reach. */
+/* Actor_IsInRange without the height test, on the record the D_80147C29..90 globals belong to and the task's reach. */
 MATCH s32 func_801F603C(s32 x, s32 y) {
     u8  timer;
     s32 step_x;
