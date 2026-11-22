@@ -21,8 +21,8 @@ MATCH void func_801F60C0(void) {
             TASK(Actor)->unk_0A--;
         }
     }
-    /* FAKE: retail passes g_WindowStyle sign-extended, as a call without the prototype does. */
-    ((void (*)())UI_WindowDraw)(0x7E, 0x2E, 0x48, 0x11, 0xF2, *(s8*)&g_WindowStyle);
+    /* FAKE: the prototype takes u8, which zero-extends; retail calls without it and sign-extends. */
+    ((void (*)())UI_WindowDraw)(0x7E, 0x2E, 0x48, 0x11, 0xF2, (s8)g_WindowStyle);
     UI_WindowDrawFrame(0x80, 0x30, 0x44, 0xD, 2);
     if (g_GameStateIndex == GAME_REQUEST_IDLE) {
         digit = rand() & 3;
