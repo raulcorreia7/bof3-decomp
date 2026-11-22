@@ -233,6 +233,7 @@ ASSERT_SIZE(BattleEffect, 0x78);
 
 /* Battle effect work records (stride 0x78). */
 extern BattleEffect g_BattleEffects[];
+
 ASSERT_OFFSET(BattleEffect, step_index, 0x05);
 ASSERT_OFFSET(BattleEffect, unk_27, 0x27);
 ASSERT_OFFSET(BattleEffect, unk_29, 0x29);
@@ -241,6 +242,9 @@ ASSERT_OFFSET(BattleEffect, unk_4C, 0x4C);
 ASSERT_OFFSET(BattleEffect, unk_5C, 0x5C);
 ASSERT_OFFSET(BattleEffect, target_index, 0x60);
 ASSERT_OFFSET(BattleEffect, target, 0x74);
+
+/* Stats of the two battlers a damage calculation reads. */
+extern Stats g_BattleCalcStats[2];
 
 /* A flag word of a battle work record. The overlays test and set bits through
  * `value`; the ones that race the other overlay's tasks read `volatile_value`. */

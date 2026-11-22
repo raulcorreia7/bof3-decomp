@@ -541,7 +541,6 @@ extern u8                        D_801EC2E8[];
 extern volatile s16              D_801EC2EE;
 extern volatile u16              D_801EC2F2;
 extern volatile u16              D_801EC30C;
-extern u16                       D_801EC30E;
 extern volatile u16              D_801EC310;
 extern volatile u16              D_801EC312;
 /* D_801EC364 */

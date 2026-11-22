@@ -31,12 +31,12 @@ MATCH void func_8009EDB4(void) {
     } else {
         level = ((raw >> 1) + 0x1E);
     }
-    D_801EC324 = level;
+    g_BattleCalcStats[1].accuracy = level;
     /* FAKE: keep the level store ahead of the counter store. */
     FAKE_BARRIER();
     counter  = &D_801EC30C;
     *counter = 0;
-    Char_AddStat(counter, action + (D_801EC30E));
+    Char_AddStat(counter, action + (g_BattleCalcStats[1].defense));
     battler_index  = g_Battle.active_battler;
     selection_type = g_Battle.target;
     /* FAKE: keeps the 0xFFFF load in the jal delay slot. */
