@@ -29,7 +29,7 @@ NON_MATCHING s32 func_801F3350(s32 x, s32 y) {
             y0 = D_801F3CF9[row];
             if (y0 < D_801F3CFB[row]) {
                 do {
-                    if ((s8)func_801F34F8(x0, y0) >= 0) {
+                    if ((s8)Area_FindMemberAt(x0, y0) >= 0) {
                         return 0;
                     }
                     y0++;

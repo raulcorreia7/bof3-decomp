@@ -24,7 +24,7 @@ segments:
       - [0xC98, c, func_801F3898]
       - [0xD44, c, func_801F3944]
       - [0xE14, c, func_801F3A14]
-      - [0xFE4, c, func_801F3BE4]
+      - [0xFE4, c, Area_FindMemberAt]
       - [0x10F0, c, func_801F3CF0]
       - [0x1214, c, func_801F3E14]
       - [0x1258, c, Actor_SnapToGround]

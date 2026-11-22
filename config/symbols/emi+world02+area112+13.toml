@@ -7,3 +7,4 @@ Actor_SnapToGround = { addr = 0x801F3E58, type = "func", source = "Stores the gr
 Area_DrawActorLightPillar = { addr = 0x801F3EA4, type = "func", source = "draws a light pillar at the actor's position" }
 Area_DrawLightPillar = { addr = 0x801F3EEC, type = "func", source = "Draws a pillar of light at pos: sixteen semi-transparent Gouraud quads from a ring of radius 32 at pos to the same ring 0x800 units higher, shaded 0x20 or 0x24 by the frame parity and stepped by 4 per segment." }
 g_PartyMemberMessages = { addr = 0x801F48FC, size = 0xC, source = "Tag and message id pairs of the party member talk: UI_MessageShowParty matches each tags[i] against byte 0 of a party member row and starts messages[i] with UI_MessageStartArea." }
+Area_FindMemberAt = { addr = 0x801F3BE4, type = "func", source = "Returns the first party member (g_Game.members, header.flags set) whose position plus unk_0C/unk_10 times unk_09 lies within (speed + 2) << 15 of (x << 16, y << 16), or -1." }
