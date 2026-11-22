@@ -147,7 +147,11 @@ extern volatile s32 g_AreaScrollTargetX;
 extern s32 g_AreaScrollTargetX;
 #endif
 /* D_8014930C */
-extern s32         g_AreaScrollTargetY; /* 0x8014930C */
+#ifdef FAKE_DECL_AREA_SCROLL_TARGET_Y_VOLATILE
+extern volatile s32 g_AreaScrollTargetY;
+#else
+extern s32 g_AreaScrollTargetY; /* 0x8014930C */
+#endif
 /* D_80149310 */
 extern s32         g_AreaCameraX;
 /* D_80149318 */
