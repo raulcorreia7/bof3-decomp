@@ -24,21 +24,21 @@ MATCH void func_801FE058(void) {
     Game_SetScriptActive();
     g_ScenarioState.state_04 = 7;
     g_ScenarioState.timer_06 = 32;
-    g_ScenarioState.step_05  = 0;
+    g_ScenarioState.step     = 0;
 }
 
 MATCH void func_801FE0A0(void) {
     g_ScriptVars[0] = 0;
     Game_SetScriptActive();
     g_ScenarioState.state_04 = 7;
-    g_ScenarioState.step_05  = 0xA;
+    g_ScenarioState.step     = 0xA;
 }
 
 MATCH void func_801FE0E0(void) {
     g_ScriptVars[0] = 0;
     Game_SetScriptActive();
     g_ScenarioState.state_04 = 10;
-    g_ScenarioState.step_05  = 0;
+    g_ScenarioState.step     = 0;
     SYS_SetFlag(g_SceneFlags, 19);
 }
 
@@ -62,14 +62,14 @@ MATCH s32 func_801FE170(s32 x, s32 y) {
         if (SYS_TestFlag(g_SceneFlags, 6) == 0) {
             Game_SetScriptActive();
             g_ScenarioState.state_04 = 4;
-            g_ScenarioState.step_05  = 5;
+            g_ScenarioState.step     = 5;
             return 1;
         }
         if (SYS_TestFlag(g_SceneFlags, 7) == 0) {
             Game_SetScriptActive();
             *g_ScriptVars            = 0;
             g_ScenarioState.state_04 = 5;
-            g_ScenarioState.step_05  = 0;
+            g_ScenarioState.step     = 0;
             return 1;
         }
         goto block_7;
@@ -85,7 +85,7 @@ block_7:
 MATCH s32 func_801FE2A0(s32 x, s32 y) {
     if (LOHU(g_GameAreaId) == AREA_ID_DAUNA_MINE_ADULT && !SYS_TestFlag(g_SceneFlags, 5) && (u32)((x >> 16) - 0x1C) < 2 && (u32)((y >> 16) - 0x2B) < 2) {
         g_ScenarioState.state_04 = 4;
-        g_ScenarioState.step_05  = 0;
+        g_ScenarioState.step     = 0;
         Game_SetScriptActive();
         return 1;
     }
@@ -93,7 +93,7 @@ MATCH s32 func_801FE2A0(s32 x, s32 y) {
         if (x == TO_COORD(0x2F) && y <= TO_COORD(0x1F) && g_ScenarioState.state_04 != 8) {
             Game_SetScriptActive();
             g_ScenarioState.state_04 = 8;
-            g_ScenarioState.step_05  = 10;
+            g_ScenarioState.step     = 10;
             g_ScenarioState.timer_06 = 20;
             return 1;
         }
@@ -113,21 +113,21 @@ MATCH s32 func_801FE2A0(s32 x, s32 y) {
             SND_SEPlay(0x204);
             Game_SetScriptActive();
             g_ScenarioState.state_04 = 8;
-            g_ScenarioState.step_05  = 20;
+            g_ScenarioState.step     = 20;
             return 1;
         }
     }
     if (LOHU(g_GameAreaId) == AREA_ID_FARM && !SYS_TestFlag(g_SceneFlags, 0x10) && SYS_TestFlag(g_SceneFlags, 0xF) && y <= 0x38000 && (u32)((x >> 16) - 0x1C) < 2) {
         Game_SetScriptActive();
         g_ScenarioState.state_04 = 9;
-        g_ScenarioState.step_05  = 5;
+        g_ScenarioState.step     = 5;
         return 1;
     }
     if (LOHU(g_GameAreaId) == AREA_ID_OGRE_ROAD && !SYS_TestFlag(g_SceneFlags, 8) && (u32)((x >> 16) - 0x45) < 3 && (u32)((y >> 16) - 0x37) < 3) {
         g_ScratchPad.cells.bytes[0] = D_80145E98;
         if (g_ScratchPad.cells.bytes[0] != 6 && g_ScratchPad.cells.bytes[0] != 7 && g_ScratchPad.cells.bytes[0] != 0) {
             g_ScenarioState.state_04 = 6;
-            g_ScenarioState.step_05  = 0;
+            g_ScenarioState.step     = 0;
             Game_SetScriptActive();
             return 1;
         }
@@ -136,7 +136,7 @@ MATCH s32 func_801FE2A0(s32 x, s32 y) {
         if (y >= TO_COORD(0xF) && (u32)((x >> 16) - 0x20) < 6) {
             Game_SetScriptActive();
             g_ScenarioState.state_04 = 0xB;
-            g_ScenarioState.step_05  = 0;
+            g_ScenarioState.step     = 0;
             g_ScriptVars[0]          = 0;
             return 1;
         }

@@ -34,7 +34,7 @@ NON_MATCHING void func_801F3BC0(void) {
     if (offset) {
         g_ScriptState->steps = offset + 1;
         Area_SetFacingOffsetX(TASK(Actor)->direction);
-        g_AreaCameraHeightStep = 0;
+        g_AreaCameraHeightDelta = 0;
         g_ScriptState->flags |= 0x40;
         TASK(Actor)->vz               = 0;
         COORD_INT(TASK(Actor)->pos.z) = -0x500;

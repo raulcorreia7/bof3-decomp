@@ -74,7 +74,7 @@ MATCH void func_801FC4AC(void* entity, void* bits) {
     Game_SetScriptActive();
     SYS_SetFlag(bits, 20U);
     g_ScenarioState.state_04 = 4;
-    g_ScenarioState.step_05  = 0;
+    g_ScenarioState.step     = 0;
 }
 
 MATCH void func_801FC4F4(void* entity, void* flags) {
@@ -96,7 +96,7 @@ MATCH void func_801FC578(void* entity, void* flags) {
 MATCH s32 func_801FC5A4(void) {
     if ((D_80144EA2 & 0xF) == 0xF) {
         Game_SetScriptActive();
-        g_ScenarioState.step_05  = 6;
+        g_ScenarioState.step     = 6;
         g_ScenarioState.timer_06 = 30;
         return 1;
     }
@@ -121,7 +121,7 @@ MATCH void func_801FC688(void) {
 MATCH s32 func_801FC690(void) {
     Game_SetScriptActive();
     g_ScenarioState.state_04 = 6;
-    g_ScenarioState.step_05  = 0;
+    g_ScenarioState.step     = 0;
     return 0;
 }
 
@@ -129,7 +129,7 @@ MATCH s32 func_801FC6C4(void) {
     Game_SetScriptActive();
     g_ScenarioState.timer_06 = 30;
     g_ScenarioState.state_04 = 7;
-    g_ScenarioState.step_05  = 0;
+    g_ScenarioState.step     = 0;
     return 0;
 }
 
@@ -180,7 +180,7 @@ MATCH s32 func_801FC8AC(s32 entry_x, s32 entry_y) {
             if (entry_x == TO_COORD(92)) {
                 SYS_SetFlag(g_SceneFlags, 7U);
                 g_ScenarioState.state_04 = 3;
-                g_ScenarioState.step_05  = 0xA;
+                g_ScenarioState.step     = 0xA;
                 return 1;
             }
             return 0;
@@ -195,7 +195,7 @@ MATCH s8 func_801FC944(s32 entry_x, s32 entry_y) {
         if (entry_y == TO_COORD(65) + COORD_HALF) {
             if (((entry_x >> 0x10) - 32) < 4U) {
                 g_ScenarioState.state_04 = 4;
-                g_ScenarioState.step_05  = 5;
+                g_ScenarioState.step     = 5;
                 return Scene_ShowMessage(MSG_SCENA03_051);
             }
             return 0;
@@ -225,7 +225,7 @@ MATCH s8 func_801FC9DC(s32 entry_x, s32 entry_y) {
             if (((entry_x >> 0x10) - 31) < 2U) {
             block_9:
                 g_ScenarioState.state_04 = 5;
-                g_ScenarioState.step_05  = 0;
+                g_ScenarioState.step     = 0;
                 return Scene_ShowMessage(MSG_SCENA03_018);
             }
             /* Duplicate return node #11. Try simplifying control flow for better match */
@@ -242,7 +242,7 @@ MATCH s8 func_801FCAB8(s32 entry_x, s32 entry_y) {
         if ((entry_x >> 0x10) == 21) {
             if (((entry_y >> 0x10) - 52) < 2U) {
                 g_ScenarioState.state_04 = 5;
-                g_ScenarioState.step_05  = 0x10;
+                g_ScenarioState.step     = 0x10;
                 return Scene_ShowMessage(MSG_SCENA03_031);
             }
         }
@@ -263,17 +263,17 @@ MATCH s8 func_801FCB4C(s32 entry_x, s32 entry_y) {
         }
         g_ScriptVars[1]          = 1;
         g_ScenarioState.state_04 = 6;
-        g_ScenarioState.step_05  = 5;
+        g_ScenarioState.step     = 5;
         return Scene_ShowMessage(MSG_SCENA03_012);
     }
     if (g_GameCellType == 3 && entry_y == TO_COORD(11) + COORD_HALF && ((entry_x >> 16) - 5) < 2U) {
         if (SYS_TestFlag(g_SceneFlags, 0x1C) == 0) {
             Game_SetScriptActive();
-            g_ScenarioState.step_05  = 0xF;
+            g_ScenarioState.step     = 0xF;
             g_ScenarioState.state_04 = 6;
             return 1;
         } else {
-            g_ScenarioState.step_05  = 0xD;
+            g_ScenarioState.step     = 0xD;
             g_ScenarioState.state_04 = 6;
             return Scene_ShowMessage(MSG_SCENA03_017);
         }
@@ -296,7 +296,7 @@ MATCH s8 func_801FCD1C(s32 x, s32 y) {
             if (((x >> 16) - 14) < 4U) {
                 Game_SetScriptActive();
                 g_ScenarioState.state_04 = 8;
-                g_ScenarioState.step_05  = 2;
+                g_ScenarioState.step     = 2;
                 g_ScenarioState.timer_06 = 30;
                 return 1;
             }
@@ -325,7 +325,7 @@ MATCH void func_801FCE18(void) {
     Game_SetScriptActive();
     g_ScenarioState.timer_06 = 30;
     g_ScenarioState.state_04 = 7;
-    g_ScenarioState.step_05  = 0;
+    g_ScenarioState.step     = 0;
 }
 
 MATCH void func_801FCE6C(void) {

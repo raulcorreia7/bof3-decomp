@@ -1,7 +1,6 @@
 #include "area082_13.h"
 
-#ifdef NON_MATCHING
-NON_MATCHING void func_801F46C8(s32 turn, s32 count, s32 angle, s32 height) {
+MATCH void func_801F46C8(s32 turn, s32 count, s32 angle, s32 height) {
     MATRIX   matrix;
     POLY_G4* prim;
     long     depth;
@@ -10,6 +9,7 @@ NON_MATCHING void func_801F46C8(s32 turn, s32 count, s32 angle, s32 height) {
     s32      j;
     s32      side;
     s32      tpage;
+    s32      ring_offset;
 
     PushMatrix();
     tpage = getTPage(0, 1, 320, 256);
@@ -24,10 +24,11 @@ NON_MATCHING void func_801F46C8(s32 turn, s32 count, s32 angle, s32 height) {
 
     for (i = turn; i < count; i++) {
         g_ScratchPadVectors[2].vx = g_ScratchPadVectors[3].vx = 0;
-        g_ScratchPadVectors[2].vy                             = D_801F5764[i + 20].y * height;
-        g_ScratchPadVectors[3].vy                             = D_801F5764[i + 21].y * height;
-        g_ScratchPadVectors[2].vz                             = -D_801F5764[i + 20].x * 48;
-        g_ScratchPadVectors[3].vz                             = -D_801F5764[i + 21].x * 48;
+        ring_offset                                           = (i + 1) * 2;
+        g_ScratchPadVectors[2].vy                             = D_801F578A[ring_offset + 1] * height;
+        g_ScratchPadVectors[3].vy                             = D_801F578A[ring_offset + 3] * height;
+        g_ScratchPadVectors[2].vz                             = -D_801F578A[ring_offset] * 48;
+        g_ScratchPadVectors[3].vz                             = -D_801F578A[ring_offset + 2] * 48;
 
         j    = 0;
         side = -1;
@@ -54,6 +55,3 @@ NON_MATCHING void func_801F46C8(s32 turn, s32 count, s32 angle, s32 height) {
     GFX_ADD_LAYER_DRAW_MODE(GFX_LAYER_SCENE_BACK, tpage);
     PopMatrix();
 }
-#else
-INCLUDE_ASM(func_801F46C8);
-#endif

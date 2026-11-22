@@ -42,9 +42,9 @@ MATCH void func_801D3C74(void) {
         func_801D9740(*(D_801E1F16 + color_offset), color_offset + D_801E1F14, (FISHING_PALETTE_WIDTH - (anim_count * FISHING_EXPAND_STEP_STRIDE)) & BYTE_MASK,
                       0x125 - ((FISHING_EXPAND_STEP_COUNT - anim_count) * FISHING_EXPAND_STEP_STRIDE));
     } else {
-        work->step_timer = (work->step_timer - 1);
-        timer            = TASK(FishingState);
-        if (timer->step_timer == 0) {
+        work->timer = (work->timer - 1);
+        timer       = TASK(FishingState);
+        if (timer->timer == 0) {
             timer->column = (timer->column + 1);
             queue         = TASK(FishingState);
             queue_pos     = queue->column;

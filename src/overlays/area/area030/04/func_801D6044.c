@@ -21,7 +21,7 @@ MATCH void func_801D6044(void) {
 
     TASK(FishingState)->tint_5E    = 0;
     TASK(FishingState)->tint_5F    = 0;
-    TASK(FishingState)->step_timer = 0;
+    TASK(FishingState)->timer      = 0;
     TASK(FishingState)->step_index = 0;
     TASK(FishingState)->cue_index  = 0;
 

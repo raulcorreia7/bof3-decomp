@@ -7,13 +7,13 @@
  * quit prompt message). */
 /* func_801DA058 */
 MATCH void Fishing_QuitSlideIn(void) {
-    TASK(FishingState)->step_timer = (TASK(FishingState)->step_timer - 1);
-    Fishing_DrawPromptBox((s16)((TASK(FishingState)->step_timer * 0x50) + 0x6C), 86);
-    if (TASK(FishingState)->step_timer == 0) {
+    TASK(FishingState)->timer = (TASK(FishingState)->timer - 1);
+    Fishing_DrawPromptBox((s16)((TASK(FishingState)->timer * 0x50) + 0x6C), 86);
+    if (TASK(FishingState)->timer == 0) {
         TASK(FishingState)->cue_index = 1;
         TASK(FishingState)->sub_index = (TASK(FishingState)->sub_index + 1);
     }
     Fishing_DrawDimScreen();
-    Fishing_DrawWindowFrame(MENU_HEADER_X, (MENU_HEADER_Y - (TASK(FishingState)->step_timer * 8)) & 0xFFFE, MENU_HEADER_WIDTH, MENU_HEADER_HEIGHT, 0U);
-    UI_TextDraw(29, 21 - (TASK(FishingState)->step_timer * 8), 0, TEXT_LENGTH_MAX, MESSAGE_TABLE_TEXT(AREA_MESSAGE_TABLE, FISHING_MESSAGE_QUIT_PROMPT));
+    Fishing_DrawWindowFrame(MENU_HEADER_X, (MENU_HEADER_Y - (TASK(FishingState)->timer * 8)) & 0xFFFE, MENU_HEADER_WIDTH, MENU_HEADER_HEIGHT, 0U);
+    UI_TextDraw(29, 21 - (TASK(FishingState)->timer * 8), 0, TEXT_LENGTH_MAX, MESSAGE_TABLE_TEXT(AREA_MESSAGE_TABLE, FISHING_MESSAGE_QUIT_PROMPT));
 }

@@ -23,7 +23,7 @@ MATCH void func_801F2DD4(void) {
         default:
             return;
     }
-    g_ScenarioState.step_05  = event;
+    g_ScenarioState.step     = event;
     g_ScriptVars[0]          = 0;
     g_ScriptVars[1]          = 0;
     g_ScriptVars[2]          = 0;

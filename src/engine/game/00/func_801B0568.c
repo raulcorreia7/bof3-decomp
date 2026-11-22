@@ -30,8 +30,8 @@ MATCH void func_801B0568(void) {
             TASK(Actor)->option_flags = 0;
             TASK(Actor)->timer        = 0U;
             TASK(Actor)->param.unk_0B = 0;
-            g_AreaCameraStep          = 0;
-            g_AreaCameraHeightStep    = 0;
+            g_AreaCameraSpeed         = 0;
+            g_AreaCameraHeightDelta   = 0;
             TASK(Actor)->header.step  = 0;
             return;
         }

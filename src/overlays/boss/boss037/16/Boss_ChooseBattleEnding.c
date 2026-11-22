@@ -2,7 +2,7 @@
 
 MATCH void Boss_ChooseBattleEnding(void) {
     if BATTLE_IS_VICTORY () {
-        g_ScenarioState.step_05 = 28;
+        g_ScenarioState.step = 28;
         Battle_EndVictory();
     } else {
         Battle_EndDefeat();

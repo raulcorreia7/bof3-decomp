@@ -17,11 +17,11 @@ MATCH void func_801D5398(void) {
     }
     func_801D7C10(FISHING_SHOP_COLUMNS_X, FISHING_SHOP_COLUMNS_Y, mask);
 
-    work             = TASK(FishingState);
-    work->step_timer = (u8)(work->step_timer - 1);
-    func_801D72E4(39, (s16)(TASK(FishingState)->step_timer * 60 + 64));
+    work        = TASK(FishingState);
+    work->timer = (u8)(work->timer - 1);
+    func_801D72E4(39, (s16)(TASK(FishingState)->timer * 60 + 64));
 
-    if (TASK(FishingState)->step_timer == 0) {
+    if (TASK(FishingState)->timer == 0) {
         index                               = Actor_FindFreeSpawned() & BYTE_MASK;
         g_SpawnedActors[index].header.flags = 1;
         g_SpawnedActors[index].type         = 0x1A;

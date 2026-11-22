@@ -21,7 +21,7 @@ MATCH void func_801F4270(void) {
                 if (TASK(u8) == (u8*)&g_Game) {
                     g_AreaScrollTargetX = x;
                     g_AreaScrollTargetY = y;
-                    g_AreaCameraStep    = 0x20;
+                    g_AreaCameraSpeed   = 0x20;
                 }
             } else {
                 g_ScriptState->cursor -= 4;

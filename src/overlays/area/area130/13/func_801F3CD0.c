@@ -3,7 +3,7 @@
 MATCH void func_801F3CD0(void) {
     u8* record;
 
-    switch (g_ScenarioState.step_05) {
+    switch (g_ScenarioState.step) {
         case 0:
             if (g_GameStateIndex == GAME_REQUEST_MESSAGE) {
                 break;

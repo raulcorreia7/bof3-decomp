@@ -9,11 +9,11 @@ MATCH void func_801DFFEC(void) {
     u32  x;
     u32  y;
 
-    record                         = TASK(u32);
-    x                              = record[13];
-    y                              = record[14];
-    TASK(FishingState)->step_timer = 8;
-    record[3]                      = ((x & 0xFFFF8000u) - x) >> 3;
-    record[4]                      = ((y & 0xFFFF8000u) - y) >> 3;
+    record                    = TASK(u32);
+    x                         = record[13];
+    y                         = record[14];
+    TASK(FishingState)->timer = 8;
+    record[3]                 = ((x & 0xFFFF8000u) - x) >> 3;
+    record[4]                 = ((y & 0xFFFF8000u) - y) >> 3;
     TASK(FishingState)->mode_index += 1;
 }

@@ -13,8 +13,8 @@ MATCH void func_801F2CB4(void) {
                 SYS_SetFlag(g_SceneFlags, 22);
                 Game_SetScriptActive();
                 SCRIPT_VARS_CLEAR_ALL();
-                g_ScenarioState.step_05 = 0;
-                value                   = 7;
+                g_ScenarioState.step = 0;
+                value                = 7;
                 goto value_store;
             }
             if (!SYS_TestFlag(g_SceneFlags, 26)) {
@@ -24,8 +24,8 @@ MATCH void func_801F2CB4(void) {
                 Game_SetScriptActive();
                 value = 0x32;
             }
-            g_ScenarioState.step_05 = value;
-            value                   = 7;
+            g_ScenarioState.step = value;
+            value                = 7;
             SCRIPT_VARS_CLEAR_ALL();
         value_store:
             g_ScenarioState.state_04 = value;

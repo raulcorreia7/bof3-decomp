@@ -14,7 +14,7 @@ MATCH void UI_MessageReset(void) {
     /* FAKE: opaque base keeps one register for the -4..0x2A record accesses (match.h operand fake-match helper). */
     FAKE_OPAQUE(base);
     base[-4]               = 0;
-    g_UiWindowStep         = 0;
+    g_UiMessageStep        = 0;
     g_UiMessageChoiceMode  = 0;
     g_UiMessageChoiceStep  = 0;
     *D_801490BA            = 0;

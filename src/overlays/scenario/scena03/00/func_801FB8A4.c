@@ -8,7 +8,7 @@ __asm__(".include \"include/match/macro.inc\"\n");
 MATCH void func_801FB8A4(void) {
     u8 slot;
 
-    switch (g_ScenarioState.step_05) {
+    switch (g_ScenarioState.step) {
         case 0:
             if (g_GameStateIndex != GAME_REQUEST_MESSAGE) {
                 break;
@@ -16,19 +16,19 @@ MATCH void func_801FB8A4(void) {
             if (g_UiMessageRequest != 1) {
                 break;
             }
-            g_ScenarioState.step_05 = 1;
+            g_ScenarioState.step = 1;
             break;
         case 1:
             if (g_GameStateIndex == GAME_REQUEST_MESSAGE) {
                 break;
             }
             g_ScenarioState.state_04 = 0;
-            g_ScenarioState.step_05  = 0;
+            g_ScenarioState.step     = 0;
             g_GameFlags &= ~GAME_FLAG_SCRIPT_ACTIVE;
             break;
         case 2:
             if (g_ScenarioState.timer_06 == 0) {
-                g_ScenarioState.step_05 = 3;
+                g_ScenarioState.step = 3;
             } else {
                 g_ScenarioState.timer_06--;
             }
@@ -36,7 +36,7 @@ MATCH void func_801FB8A4(void) {
         case 3:
             SND_StartDecrescendo(0, 0, 100, 0x20);
             func_801BE1B0(0);
-            g_ScenarioState.step_05 = 4;
+            g_ScenarioState.step = 4;
             break;
         case 4:
             if (g_ScriptVars[0] != 0x10) {
@@ -53,7 +53,7 @@ MATCH void func_801FB8A4(void) {
                 g_SpawnedActors[g_ScratchPad.cells.bytes[0]].layer          = 0x10;
             }
             g_ScenarioState.timer_06 = 0x10;
-            g_ScenarioState.step_05  = 5;
+            g_ScenarioState.step     = 5;
             break;
         case 5:
             if (g_ScriptVars[0] != 0x13) {
@@ -65,12 +65,12 @@ MATCH void func_801FB8A4(void) {
                 g_AreaCameraOffsetZ += 0x40;
             } else {
                 g_ScenarioState.timer_06 = 6;
-                g_ScenarioState.step_05  = 6;
+                g_ScenarioState.step     = 6;
             }
             break;
         case 6:
             if (g_ScenarioState.timer_06 == 0) {
-                g_ScenarioState.step_05 = 7;
+                g_ScenarioState.step = 7;
             } else {
                 g_ScenarioState.timer_06--;
             }
@@ -78,7 +78,7 @@ MATCH void func_801FB8A4(void) {
         case 7:
             if (g_ScenarioState.timer_06 == 0x20) {
                 SND_SEPlay(0x201);
-                g_ScenarioState.step_05 = 8;
+                g_ScenarioState.step = 8;
                 break;
             }
             if ((g_ScenarioState.timer_06 & 3) == 3) {
@@ -90,7 +90,7 @@ MATCH void func_801FB8A4(void) {
             break;
         case 8:
             if (g_ScenarioState.timer_06 == 0x30) {
-                g_ScenarioState.step_05 = 9;
+                g_ScenarioState.step = 9;
                 break;
             }
             if (g_ScenarioState.timer_06 & 1) {
@@ -103,7 +103,7 @@ MATCH void func_801FB8A4(void) {
         case 9:
             if (g_ScenarioState.timer_06 == 0x50) {
                 SND_SEPlay(0x201);
-                g_ScenarioState.step_05 = 10;
+                g_ScenarioState.step = 10;
                 break;
             }
             if (g_ScenarioState.timer_06 & 1) {
@@ -116,7 +116,7 @@ MATCH void func_801FB8A4(void) {
         case 10:
             if (g_ScenarioState.timer_06 == 0x90) {
                 SND_SEPlay(0x204);
-                g_ScenarioState.step_05     = 11;
+                g_ScenarioState.step        = 11;
                 slot                        = Actor_FindFreeSpawned();
                 g_ScratchPad.cells.bytes[0] = slot;
                 if ((slot & BYTE_MASK) != GAME_NONE) {
@@ -134,7 +134,7 @@ MATCH void func_801FB8A4(void) {
             break;
         case 11:
             if (g_ScenarioState.timer_06 == 0xA0) {
-                g_ScenarioState.step_05 = 12;
+                g_ScenarioState.step = 12;
                 SND_SEPlay(0x201);
                 SND_SEPlay(0x205);
                 break;
@@ -150,7 +150,7 @@ MATCH void func_801FB8A4(void) {
             if (g_ScenarioState.timer_06 == 0x110) {
                 SND_SEPlay(0x202);
                 SND_SEPlay(0x206);
-                g_ScenarioState.step_05 = 13;
+                g_ScenarioState.step = 13;
                 break;
             }
             if (g_ScenarioState.timer_06 & 1) {
@@ -162,7 +162,7 @@ MATCH void func_801FB8A4(void) {
             break;
         case 13:
             if (g_ScenarioState.timer_06 == 0x130) {
-                g_ScenarioState.step_05 = 14;
+                g_ScenarioState.step = 14;
                 break;
             }
             if ((g_ScenarioState.timer_06 & 3) == 1) {
@@ -185,7 +185,7 @@ MATCH void func_801FB8A4(void) {
                     g_SpawnedActors[g_ScratchPad.cells.bytes[0]].camera_angle.z = 0x200;
                     g_SpawnedActors[g_ScratchPad.cells.bytes[0]].layer          = 0x3C;
                 }
-                g_ScenarioState.step_05 = 16;
+                g_ScenarioState.step = 16;
             } else if (g_ScriptVars[0] < 0x15) {
                 func_801FC1D0(0);
                 func_801FC1D0(1);
@@ -197,14 +197,14 @@ MATCH void func_801FB8A4(void) {
             }
             g_AreaDrawFlags = 0;
             SND_BGMFadeOut(g_SndBGMId, 100, 8);
-            g_ScenarioState.step_05 = 17;
+            g_ScenarioState.step = 17;
             break;
         case 17:
             g_AreaScrollTargetX = TO_COORD(36);
             g_AreaScrollTargetY = TO_COORD(74);
             Area_InitMapRenderer();
             g_ScenarioState.timer_06 = 10;
-            g_ScenarioState.step_05  = 18;
+            g_ScenarioState.step     = 18;
             break;
         case 18:
             if (g_ScenarioState.timer_06 != 0) {
@@ -214,7 +214,7 @@ MATCH void func_801FB8A4(void) {
                 UI_ModeSet(1);
                 g_ScriptVars[0]++;
                 SND_BGMPlay(0x49, 100, 8);
-                g_ScenarioState.step_05 = 19;
+                g_ScenarioState.step = 19;
             }
             break;
         case 19:
@@ -227,7 +227,7 @@ MATCH void func_801FB8A4(void) {
                 g_SpawnedActors[slot].header.flags                = 1;
                 g_SpawnedActors[g_ScratchPad.cells.bytes[0]].type = 0x25;
             }
-            g_ScenarioState.step_05 = 20;
+            g_ScenarioState.step = 20;
             break;
         case 20:
             if (g_ScriptVars[0] != 0x27) {
@@ -240,7 +240,7 @@ MATCH void func_801FB8A4(void) {
             Game_ClearScriptActive();
             g_ScriptVars[0]          = 0;
             g_ScenarioState.state_04 = 0;
-            g_ScenarioState.step_05  = 0;
+            g_ScenarioState.step     = 0;
             func_801A78F8();
             break;
     }

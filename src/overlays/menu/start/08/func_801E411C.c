@@ -22,7 +22,7 @@ MATCH void func_801E411C(void) {
     } else if (((((u16)packed >> 8) == 1) && (((packed & 0xF) == 1) || ((packed & 0xF) != 0))) || ((((u16)packed >> 8) != 0) && ((packed & 0xF) == 1))) {
         D_801ED86C = 0;
     }
-    next_state      = g_MenuStartStep + 1;
-    D_801ED7EC      = D_801ED86C - 1;
-    g_MenuStartStep = next_state;
+    next_state     = g_MenuCampStep + 1;
+    D_801ED7EC     = D_801ED86C - 1;
+    g_MenuCampStep = next_state;
 }

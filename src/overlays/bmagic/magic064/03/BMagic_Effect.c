@@ -565,8 +565,8 @@ MATCH void func_801F103C(void) {
         Area_CellLoadRowsPrev();
         g_AreaTileRemainderY += 0x200;
     }
-    g_AreaCameraStep          = 0;
-    g_AreaCameraHeightStep    = 0;
+    g_AreaCameraSpeed         = 0;
+    g_AreaCameraHeightDelta   = 0;
     g_AreaHeightOffsetEnabled = 0;
     g_AreaCameraRefreshCount  = 3;
     for (row = 0; row < 56; row++) {

@@ -5,7 +5,7 @@ __asm__(".include \"include/match/macro.inc\"\n");
 #endif
 
 MATCH void func_801F96E0(void) {
-    switch (g_ScenarioState.step_05) {
+    switch (g_ScenarioState.step) {
         case 0:
             if (!(g_UiWindowChannel & FRONTEND_FLAG_CONFIRM)) {
                 break;
@@ -20,18 +20,18 @@ MATCH void func_801F96E0(void) {
                 default:
                     return;
             }
-            g_GameStateIndex        = GAME_REQUEST_MESSAGE;
-            g_ScenarioState.step_05 = 1;
+            g_GameStateIndex     = GAME_REQUEST_MESSAGE;
+            g_ScenarioState.step = 1;
             break;
         case 1:
             if (g_ScriptVars[0] == 2) {
                 if (g_GameStateIndex != GAME_REQUEST_MESSAGE) {
-                    g_ScenarioState.step_05 = 2;
+                    g_ScenarioState.step = 2;
                 }
                 break;
             }
             if (g_ScriptVars[0] == 0x0A) {
-                g_ScenarioState.step_05 = 4;
+                g_ScenarioState.step = 4;
             }
             break;
         case 2:

@@ -7,18 +7,18 @@ __asm__(".include \"include/match/macro.inc\"\n");
 MATCH void func_801FC900(void) {
     u16* timer;
 
-    switch (g_ScenarioState.step_05) {
+    switch (g_ScenarioState.step) {
         case 0:
             UI_MessageStartArea(MSG_SCENA10_002);
-            g_GameStateIndex        = 2;
-            g_ScenarioState.step_05 = 1;
+            g_GameStateIndex     = 2;
+            g_ScenarioState.step = 1;
             break;
 
         case 1:
             if (g_GameStateIndex != 2 && g_PadStates[0].held != 0) {
                 Scene_SetupParty(0);
                 g_ScenarioState.timer_06 = 0x1E;
-                g_ScenarioState.step_05  = 2;
+                g_ScenarioState.step     = 2;
                 D_801FE9DC               = 1;
             }
             break;
@@ -29,11 +29,11 @@ MATCH void func_801FC900(void) {
             if (--*timer == 0) {
                 SYS_ClearFlag(g_SceneEventFlags, 0x4F);
                 HIH(g_AreaScrollTargetY) += 7;
-                g_AreaSceneMode  = 1;
-                g_AreaCameraStep = D_80181BD7 << 3;
+                g_AreaSceneMode   = 1;
+                g_AreaCameraSpeed = D_80181BD7 << 3;
                 SCENA10_SPAWN_ANGLED_ACTOR(-0x3B4, 0x2A6);
-                D_801FE9DC              = 0;
-                g_ScenarioState.step_05 = 3;
+                D_801FE9DC           = 0;
+                g_ScenarioState.step = 3;
             }
             break;
 
@@ -41,7 +41,7 @@ MATCH void func_801FC900(void) {
             if (g_AreaCameraMoving == 0) {
                 g_AreaSceneMode          = 2;
                 g_ScenarioState.timer_06 = 0x1E;
-                g_ScenarioState.step_05  = 4;
+                g_ScenarioState.step     = 4;
             }
             break;
 
@@ -49,9 +49,9 @@ MATCH void func_801FC900(void) {
             timer = &g_ScenarioState.timer_06;
             if (--*timer == 0) {
                 HIH(g_AreaScrollTargetY) -= 7;
-                g_AreaCameraStep = D_80181BD7 << 3;
+                g_AreaCameraSpeed = D_80181BD7 << 3;
                 SCENA10_SPAWN_ANGLED_ACTOR(-0x2AA, 0x200);
-                g_ScenarioState.step_05 = 5;
+                g_ScenarioState.step = 5;
             }
             break;
 
@@ -61,7 +61,7 @@ MATCH void func_801FC900(void) {
                 Game_ClearScriptActive();
                 SYS_SetFlag(g_SceneFlags, 0x35);
                 g_ScenarioState.state_04 = 0;
-                g_ScenarioState.step_05  = 0;
+                g_ScenarioState.step     = 0;
             }
             break;
     }

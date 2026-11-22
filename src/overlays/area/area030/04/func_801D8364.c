@@ -52,7 +52,7 @@ NON_MATCHING void func_801D8364(s16 panel_x, s16 panel_y) {
             if ((row >= (s32)max_rows) && (index < (s32)max_count)) {
                 if (*D_80145E94 == 2) {
                     if (TASK(FishingState)->counter_07 & 1) {
-                        if (TASK(FishingState)->step_14 == index) {
+                        if (TASK(FishingState)->bounce_speed == index) {
                             UI_TextDraw(bar_x, bar_y, UI_TEXT_DIM, ITEM_NAME_LENGTH, (&g_Accessories[accessory]));
                             UI_TextDraw(bar_x, (s16)(text_y + row_y), 0, ITEM_NAME_LENGTH, (&g_Accessories[*cursor]));
                             if (g_InventoryCounts[3][slot] >= 2U) {
@@ -71,7 +71,7 @@ NON_MATCHING void func_801D8364(s16 panel_x, s16 panel_y) {
                     UI_TextDrawGlyphString(text_x, (s16)(text_y + (row_y + 2)), 0U, text);
                 }
             drawn: /* the count text is drawn once, from either path */
-                if (TASK(FishingState)->step_14 == index) {
+                if (TASK(FishingState)->bounce_speed == index) {
                     TASK(FishingState)->y_38.slot.slot = (s16)slot;
                 }
                 bar_y += 13;
@@ -84,11 +84,11 @@ NON_MATCHING void func_801D8364(s16 panel_x, s16 panel_y) {
         cursor += 1;
     } while (slot < 128);
     TASK(FishingState)->unk_1C = row - 1;
-    if (TASK(FishingState)->step_14 >= index) {
+    if (TASK(FishingState)->bounce_speed >= index) {
         if ((row - 1 != 0) && (index != 0)) {
-            TASK(FishingState)->step_14 = index - 1;
+            TASK(FishingState)->bounce_speed = index - 1;
         } else {
-            TASK(FishingState)->step_14 = 0;
+            TASK(FishingState)->bounce_speed = 0;
         }
     }
     func_801D90FC((s32)panel_x, panel_y);

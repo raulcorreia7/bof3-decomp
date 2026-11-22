@@ -86,12 +86,12 @@ NON_MATCHING u8 Script_OpsRunStage(ScriptState* state, const u8* table, u8 value
                 g_AreaScrollTargetX = base[0];
                 g_AreaScrollTargetY = base[1];
                 span                = Area_HeightSample(base[0], base[1]);
-                g_AreaCameraStep    = 0x20;
+                g_AreaCameraSpeed   = 0x20;
                 step                = sel & BYTE_MASK;
                 if (step == 0) {
-                    g_AreaCameraHeightStep = 0;
+                    g_AreaCameraHeightDelta = 0;
                 } else {
-                    g_AreaCameraHeightStep = (s16)(((s16)span - (s32)g_AreaCameraHeight) / (step * 4));
+                    g_AreaCameraHeightDelta = (s16)(((s16)span - (s32)g_AreaCameraHeight) / (step * 4));
                 }
                 state->cursor--;
                 break;

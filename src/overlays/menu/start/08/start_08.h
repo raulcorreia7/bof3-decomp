@@ -488,7 +488,7 @@ extern u8              D_801ED8BC;
 extern u8              D_801ED8BD;
 extern u8              D_801ED8D4;
 extern u8              D_801ED8D5;
-extern u8              g_MenuStartStep;
+extern u8              g_MenuCampStep;
 extern u8              D_801ED864;
 extern u8              D_801ED868;
 extern u8              D_801ED86C;

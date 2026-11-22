@@ -24,10 +24,10 @@ MATCH void func_801DEBC4(void) {
         Script_Select(D_801E2330[TASK(FishingState)->counter_08 * 2]);
 
         state                             = TASK(FishingState);
-        state->step_14                    = -2;
+        state->bounce_speed               = -2;
         state->pos_x                      = 0;
         state->cursor_10                  = 0;
-        state->step_timer                 = 0x10;
+        state->timer                      = 0x10;
         TASK(FishingState)->handler_index = 1;
     }
 }

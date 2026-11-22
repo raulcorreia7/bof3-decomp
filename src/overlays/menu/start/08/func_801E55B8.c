@@ -9,6 +9,6 @@ MATCH void func_801E55B8(void) {
     count            = g_MenuStartTimer + 1;
     g_MenuStartTimer = count;
     if (count == 4) {
-        g_MenuStartStep += 1;
+        g_MenuCampStep += 1;
     }
 }

@@ -14,12 +14,12 @@ MATCH void func_80151894(void) {
     g_UiMessageStateTimer[0] = value + 0xFF;
     if (value == 0) {
         advance = g_UiPanelTasks[0].state + 1;
-        index   = g_UiWindowStep + 1;
+        index   = g_UiMessageStep + 1;
         mode    = advance;
         flags   = g_UiWindowChannel;
         flags |= FRONTEND_FLAG_SELECTION;
         g_UiPanelTasks[0].state = mode;
-        g_UiWindowStep          = index;
+        g_UiMessageStep         = index;
         g_UiWindowChannel       = flags;
     }
 }

@@ -47,5 +47,5 @@ MATCH void SAVE_RunLoadVerify(void) {
             }
         }
     }
-    g_MenuStartStep = 0xD;
+    g_MenuCampStep = 0xD;
 }

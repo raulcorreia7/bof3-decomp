@@ -7,6 +7,6 @@ MATCH void func_801F2DBC(void) {
     } else if (g_UiMessageChoice == 2) {
         Game_SetScriptActive();
         g_ScenarioState.state_04 = 1;
-        g_ScenarioState.step_05  = 0x14;
+        g_ScenarioState.step     = 0x14;
     }
 }

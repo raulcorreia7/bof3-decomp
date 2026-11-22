@@ -76,7 +76,7 @@ MATCH void func_801F7F78(void) {
     if (g_GameAreaId == 0x85) {
         if (SYS_TestFlag(g_SceneFlags, 0x24) && !SYS_TestFlag(g_SceneFlags, 0x26) && g_GameCellType == 2) {
             Game_SetScriptActive();
-            g_ScenarioState.step_05  = 0x19;
+            g_ScenarioState.step     = 0x19;
             g_ScenarioState.state_04 = 5;
         }
         switch (g_ScriptVars[2]) {
@@ -127,7 +127,7 @@ MATCH void func_801F7F78(void) {
             SYS_SetFlag(g_SceneFlags, 0x2F);
             Game_SetScriptActive();
             SCRIPT_VARS_CLEAR_ALL();
-            g_ScenarioState.step_05  = 0;
+            g_ScenarioState.step     = 0;
             g_ScenarioState.state_04 = 9;
         }
     }
@@ -248,7 +248,7 @@ MATCH void func_801F7F78(void) {
     }
     if (g_GameAreaId == 0x2D || g_GameAreaId == 0x41 || g_GameAreaId == 0x57 || g_GameAreaId == 0x10 || g_GameAreaId == 0x73) {
         SCRIPT_VARS_CLEAR_ALL();
-        g_ScenarioState.step_05  = 0;
+        g_ScenarioState.step     = 0;
         g_ScenarioState.state_04 = 0;
     }
     D_80146872 = 2;

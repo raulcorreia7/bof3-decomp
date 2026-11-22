@@ -26,7 +26,7 @@ NON_MATCHING void func_80167428(void) {
     Actor*       actor;
 
     if (g_PadStates[0].pressed & PADstart) {
-        g_AreaCameraStep    = 0x20;
+        g_AreaCameraSpeed   = 0x20;
         player              = g_Game.current;
         tmp3                = player->pos.x.fixed;
         tmp7                = g_AreaScrollTargetX - tmp3;
@@ -38,9 +38,9 @@ NON_MATCHING void func_80167428(void) {
         val3                = MAX(val3, val1);
         tmp1                = ((u32)val3 >> 0xD) & BYTE_MASK;
         if (tmp1 != 0) {
-            g_AreaCameraHeightStep = (u16)((s16)(player->pos.z.part.integer - g_AreaCameraHeight) / tmp1);
+            g_AreaCameraHeightDelta = (u16)((s16)(player->pos.z.part.integer - g_AreaCameraHeight) / tmp1);
         } else {
-            g_AreaCameraHeightStep = 0;
+            g_AreaCameraHeightDelta = 0;
         }
         FIELD(s8, g_Game.current, 0x11Cu) = 3;
         tmp12                             = g_Task;
@@ -62,8 +62,8 @@ NON_MATCHING void func_80167428(void) {
         tmp9->vx                          = 0;
         tmp9->vy                          = 0;
         tmp9->vz                          = 0;
-        g_AreaCameraStep                  = 0;
-        g_AreaCameraHeightStep            = 0;
+        g_AreaCameraSpeed                 = 0;
+        g_AreaCameraHeightDelta           = 0;
         FIELD(s8, (g_Task), 0x1u)         = 1;
         return;
     }
@@ -82,14 +82,14 @@ NON_MATCHING void func_80167428(void) {
             val0 = -val0;
         }
         if ((val2 > TO_COORD(6)) || (val0 > TO_COORD(6)) || (g_GameStateIndex == GAME_REQUEST_AREA_CHANGE)) {
-            tmp10                  = g_Task;
-            tmp10->timer           = 0U;
-            tmp10->vx              = 0;
-            tmp10->vy              = 0;
-            tmp10->vz              = 0;
-            g_AreaCameraStep       = 0;
-            g_AreaCameraHeightStep = 0;
-            val4                   = 1;
+            tmp10                   = g_Task;
+            tmp10->timer            = 0U;
+            tmp10->vx               = 0;
+            tmp10->vy               = 0;
+            tmp10->vz               = 0;
+            g_AreaCameraSpeed       = 0;
+            g_AreaCameraHeightDelta = 0;
+            val4                    = 1;
         } else {
             if (g_InputMasks[FIELD_INPUT_RUN] & D_8014625C) {
                 if ((g_AutoRun ^ 1) != 0) {

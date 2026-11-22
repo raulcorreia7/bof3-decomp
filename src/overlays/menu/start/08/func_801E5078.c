@@ -38,10 +38,10 @@ MATCH void func_801E5078(void) {
     } else {
         SND_SEPlay(EMI_SE_ID(SND_BANK_COMMON, 7));
         g_SaveCardStatus = SAVE_LOAD_STATUS_NO_CARD;
-        g_MenuStartStep  = 0xD;
+        g_MenuCampStep   = 0xD;
         D_801ED870       = 0;
         return;
     }
     g_MenuStartTimer = 4;
-    g_MenuStartStep += 1;
+    g_MenuCampStep += 1;
 }

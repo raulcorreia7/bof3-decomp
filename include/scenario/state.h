@@ -7,7 +7,7 @@
 /* Copied whole from the save image 0x801448D8 by etc/start/08 SAVE_RunLoadRestore.
  * scenario_id selects the overlay and its handler table (func_801A782C); flags_01
  * bit 0x80 and 0x20 are set by Scene_RequestChapterAdvance and func_8019A904; mode_02 is the
- * dispatch byte of every scenario overlay (scena09 75C.c); step_05 is the step
+ * dispatch byte of every scenario overlay (scena09 75C.c); step is the step
  * each controller switches on (scena00 8.c); timer_06 counts that step down. */
 /* g_ScenarioState.flags_01. Bit 0x01 is read by the script type 9 and by the Ryu pajama intro checks; its role is
  * not named. */
@@ -36,7 +36,7 @@ typedef struct ScenarioState {
     u8  mode_02;
     u8  unk_03;
     s8  state_04;
-    u8  step_05;
+    u8  step;
     u16 timer_06;
     u16 unk_08;
     u8  pad_0A[6]; /* the copy is 0x10 bytes; these six bytes have no reader */
@@ -45,7 +45,7 @@ typedef struct ScenarioState {
 ASSERT_OFFSET(ScenarioState, flags_01, 0x01);
 ASSERT_OFFSET(ScenarioState, mode_02, 0x02);
 ASSERT_OFFSET(ScenarioState, state_04, 0x04);
-ASSERT_OFFSET(ScenarioState, step_05, 0x05);
+ASSERT_OFFSET(ScenarioState, step, 0x05);
 ASSERT_OFFSET(ScenarioState, timer_06, 0x06);
 ASSERT_SIZE(ScenarioState, 0x10);
 
@@ -53,18 +53,18 @@ ASSERT_SIZE(ScenarioState, 0x10);
 /* D_80146870 */
 /* The byte nine bytes before g_ScenarioState; the field readers still name it by address. */
 extern ScenarioState g_ScenarioState; /* 0x80146870 */
-/* state_04 and step_05 as one halfword (step in the high byte); area085 and
+/* state_04 and step as one halfword (step in the high byte); area085 and
  * area105 compare the pair with one lhu. */
 #define SCENARIO_PROGRESS (*(u16*)&g_ScenarioState.state_04)
 
 /* Put the scene back at the state and step that Scene_Start begins it with. */
 #define SCENARIO_RETURN_TO_START() \
-    g_ScenarioState.step_05  = 0;  \
+    g_ScenarioState.step     = 0;  \
     g_ScenarioState.state_04 = 0
 
-/* Open the area message `id`, wait for its window, and leave the scene at step `step`. */
-#define SCENARIO_MESSAGE_WAIT(id, step) \
-    MESSAGE_START_WAIT(id);             \
-    g_ScenarioState.step_05 = (step)
+/* Open the area message `id`, wait for its window, and leave the scene at step `next_step`. */
+#define SCENARIO_MESSAGE_WAIT(id, next_step) \
+    MESSAGE_START_WAIT(id);                  \
+    g_ScenarioState.step = (next_step)
 
 #endif

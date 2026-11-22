@@ -17,26 +17,26 @@ MATCH void Fishing_LureFloat(void) {
     }
     TASK(FishingState)->motion.unk_34 += TASK(FishingState)->pos_x;
     TASK(FishingState)->y_38.pos_y += TASK(FishingState)->cursor_10;
-    step                              = TASK(FishingState)->step_14 + TASK(FishingState)->step_limit;
+    step                              = TASK(FishingState)->bounce_speed + TASK(FishingState)->bounce_accel;
     total                             = TASK(FishingState)->bounce.unk_3C + step;
-    TASK(FishingState)->step_14       = step;
+    TASK(FishingState)->bounce_speed  = step;
     TASK(FishingState)->bounce.unk_3C = total;
-    if (total > 0 && TASK(FishingState)->step_limit == 0) {
+    if (total > 0 && TASK(FishingState)->bounce_accel == 0) {
         if (TASK(FishingState)->saved_index == 0) {
             TASK(FishingState)->bounce.unk_3C = 0;
         } else {
-            TASK(FishingState)->step_14    = 0x40000;
-            TASK(FishingState)->step_limit = -0x8000;
-            slot                           = Actor_FindFreeSpawned() & BYTE_MASK;
+            TASK(FishingState)->bounce_speed = 0x40000;
+            TASK(FishingState)->bounce_accel = -0x8000;
+            slot                             = Actor_FindFreeSpawned() & BYTE_MASK;
             if (slot != GAME_NONE) {
                 g_SpawnedActors[slot].header.flags = 1;
                 g_SpawnedActors[slot].type         = 0xA;
             }
         }
     } else {
-        if (TASK(FishingState)->bounce.unk_3C < 0 && TASK(FishingState)->step_limit != 0) {
-            TASK(FishingState)->step_limit  = 0;
-            TASK(FishingState)->saved_index = 0;
+        if (TASK(FishingState)->bounce.unk_3C < 0 && TASK(FishingState)->bounce_accel != 0) {
+            TASK(FishingState)->bounce_accel = 0;
+            TASK(FishingState)->saved_index  = 0;
         } else {
             if (TASK(FishingState)->bounce.unk_3C > 0) {
                 TASK(FishingState)->saved_index = 1;

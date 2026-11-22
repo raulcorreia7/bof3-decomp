@@ -17,13 +17,13 @@ MATCH void func_801DD9A0(void) {
 
     if (g_AreaCameraMoving == 0) {
         if (((PADRup & g_PadStates[0].held) || (g_AreaScrollTargetY == TO_COORD(21))) && (D_80144125 == 0)) {
-            g_AreaCameraStep              = 0x40;
+            g_AreaCameraSpeed             = 0x40;
             g_AreaScrollTargetY           = TO_COORD(60);
             TASK(FishingState)->sub_index = 1;
         } else {
             u32* work = &g_AreaScrollTargetY;
 
-            g_AreaCameraStep = 0x20;
+            g_AreaCameraSpeed = 0x20;
             *work -= 0x8000;
         }
     }

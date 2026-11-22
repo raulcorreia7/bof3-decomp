@@ -80,7 +80,7 @@ MATCH u8 Script_OpsRunMotion(ScriptState* state, const u8* table, u8 value) {
                     *counter   = COORD_INT(TASK(Actor)->pos.z);
                     D_1F800002 = (s16)((*(table + state->cursor + 3) << 8) | *(table + state->cursor + 4));
                     Area_SetFacingOffsetX(value);
-                    step       = (0x80 / g_AreaCameraStep) * D_80143FC3;
+                    step       = (0x80 / g_AreaCameraSpeed) * D_80143FC3;
                     D_80143F5C = ((SP_REF(s16, 0x2u) - *counter) << 16) / step;
                     state->flags |= 0x40;
                 }
@@ -130,7 +130,7 @@ MATCH u8 Script_OpsRunMotion(ScriptState* state, const u8* table, u8 value) {
                     state->flags |= GAME_CURSOR_FLAG_MOVING;
                 } else {
                     Area_SetFacingOffsetX(value);
-                    g_AreaCameraHeightStep = 0;
+                    g_AreaCameraHeightDelta = 0;
                     state->flags |= 0x40;
                 }
             }
