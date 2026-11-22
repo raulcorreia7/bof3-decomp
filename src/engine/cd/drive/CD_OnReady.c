@@ -73,7 +73,7 @@ MATCH void CD_OnReady(u8 status, u8* result) {
             next          = g_EmiNextSlot;
             g_EmiNextSlot = next + 1;
             if (EMI_NextEntry(next) == 0) {
-                EMI_EndArchive();
+                EMI_ArchiveEnd();
             }
         }
 

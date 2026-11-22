@@ -193,15 +193,15 @@ g_EmiBytesLeft = { addr = 0x80146454, source = "Bytes left to load from the EMI 
 g_EmiLoadArg = { addr = 0x80146458, source = "Load argument of the EMI entry being loaded." }
 g_EmiFirstWord = { addr = 0x8014645C, source = "EMI_NextEntry copies EMITocEntry.first_word; CD_OnReady compares it with the first word of the first sector" }
 g_EmiEntryType = { addr = 0x80146460, source = "Type of the EMI entry being loaded." }
-g_EmiRingBase = { addr = 0x80146464, source = "EMI_LoadArchive stores the CD base and EMI_CopySector, StageSector and UploadSector index it by sector" }
-g_EmiRequestedSlotId = { addr = 0x80146468, source = "Slot id stored by EMI_LoadArchive before stream dispatch." }
+g_EmiRingBase = { addr = 0x80146464, source = "EMI_ArchiveLoad stores the CD base and EMI_SectorCopy, StageSector and UploadSector index it by sector" }
+g_EmiRequestedSlotId = { addr = 0x80146468, source = "Slot id stored by EMI_ArchiveLoad before stream dispatch." }
 g_EmiStep = { addr = 0x8014646C, source = "EMI_NextEntry clears it; the payload loaders count sectors in it and CD_OnReady checks the first sector at 0" }
-g_EmiReadStatus = { addr = 0x80146480, source = "EMI_StartArchive clears it; CD_OnReady sets 1 on a sector mismatch and the VAB body loaders set 2; EMI_UpdateStream tests it" }
-g_EmiNextSlot = { addr = 0x80146481, source = "EMI_LoadArchive clears it and CD_OnReady passes it, then increments it, to EMI_NextEntry" }
+g_EmiReadStatus = { addr = 0x80146480, source = "EMI_ArchiveStart clears it; CD_OnReady sets 1 on a sector mismatch and the VAB body loaders set 2; EMI_UpdateStream tests it" }
+g_EmiNextSlot = { addr = 0x80146481, source = "EMI_ArchiveLoad clears it and CD_OnReady passes it, then increments it, to EMI_NextEntry" }
 g_EmiRingSlot = { addr = 0x80146489, source = "Slot of the EMI sector ring." }
-g_EmiStreamIdleFrames = { addr = 0x80146490, source = "Frames since the EMI stream last made progress; EMI_StartArchive clears it and EMI_UpdateStream restarts the read at EMI_STREAM_TIMEOUT_FRAMES." }
+g_EmiStreamIdleFrames = { addr = 0x80146490, source = "Frames since the EMI stream last made progress; EMI_ArchiveStart clears it and EMI_UpdateStream restarts the read at EMI_STREAM_TIMEOUT_FRAMES." }
 g_EmiStreamState = { addr = 0x80146494, source = "State of the EMI stream." }
-g_EmiRingStates = { addr = 0x801464A0, source = "CD_OnReady tests bit 7 of the ring slot state; EMI_LoadToVram and EMI_LoadVabBody store 3 and 4" }
+g_EmiRingStates = { addr = 0x801464A0, source = "CD_OnReady tests bit 7 of the ring slot state; EMI_LoadToVram and EMI_VabLoadBody store 3 and 4" }
 g_EmiSlotSectors = { addr = 0x80146678, source = "Start sector of each EMI slot." }
 g_EmiBanks = { addr = 0x8014677C, size = 0x8C, source = "The seven sound bank records of the EMI loader: SPU address, VAB header, SE table, sequence buffer and VAB id of each bank; SND_SetBankLayout fills them." }
 g_EmiSectorCursor = { addr = 0x80146808, source = "Current sector of the EMI stream." }
@@ -630,22 +630,22 @@ SND_PauseBGM = { addr = 0x80161D20, type = "func", source = "Pauses the sequence
 SND_ResumeBGM = { addr = 0x80161D74, type = "func", source = "Replays the selected entry's sequence." }
 SND_InstallSequenceFuncs = { addr = 0x80161DC8, type = "func", source = "fills SsFCALL, the libsnd note, program, pitch bend, meta event and control-change handler table" }
 EMI_Init = { addr = 0x80161F58, type = "func", source = "CdInit loop, VSync(3), clears the 24 callback states" }
-EMI_LoadArchive = { addr = 0x80161FDC, type = "func", source = "Latch slot id, reset ring, install CD callbacks." }
-EMI_GetArchiveSector = { addr = 0x80162160, type = "func", source = "Returns the disc sector of an EMI file." }
-EMI_StartArchive = { addr = 0x80162178, type = "func", source = "Reset transfer counters, LBA to CdlLOC, arm the next CD step." }
-CD_OnSync = { addr = 0x801621E8, type = "func", source = "CD sync callback installed by EMI_LoadArchive" }
+EMI_ArchiveLoad = { addr = 0x80161FDC, type = "func", source = "Latch slot id, reset ring, install CD callbacks." }
+EMI_ArchiveGetSector = { addr = 0x80162160, type = "func", source = "Returns the disc sector of an EMI file." }
+EMI_ArchiveStart = { addr = 0x80162178, type = "func", source = "Reset transfer counters, LBA to CdlLOC, arm the next CD step." }
+CD_OnSync = { addr = 0x801621E8, type = "func", source = "CD sync callback installed by EMI_ArchiveLoad" }
 CD_OnReady = { addr = 0x80162230, type = "func", source = "Handles a finished CD sector of the EMI stream." }
 EMI_ReadToc = { addr = 0x80162500, type = "func", source = "MATH_TBL check and the entry sector offsets" }
 EMI_LoadToRam = { addr = 0x801625E4, type = "func", source = "Type 0, copy the payload to its destination." }
 EMI_LoadCompressed = { addr = 0x80162618, type = "func", source = "Types 1 and 2, queue the payload for the streaming ring." }
 EMI_LoadToVram = { addr = 0x80162698, type = "func", source = "Type 3, upload the graphics payload." }
-EMI_LoadVabHeader = { addr = 0x80162790, type = "func", source = "Type 6, VAB header." }
-EMI_LoadVabBody = { addr = 0x80162898, type = "func", source = "Type 7, VAB body." }
+EMI_VabLoadHeader = { addr = 0x80162790, type = "func", source = "Type 6, VAB header." }
+EMI_VabLoadBody = { addr = 0x80162898, type = "func", source = "Type 7, VAB body." }
 EMI_LoadSE = { addr = 0x801629F0, type = "func", source = "Type 8, one VAB bank's SE table." }
 EMI_LoadSequence = { addr = 0x80162A6C, type = "func", source = "Loads a sequence of the EMI archive." }
 EMI_NextEntry = { addr = 0x80162B08, type = "func", source = "Starts the next read of the EMI stream." }
-EMI_CopySector = { addr = 0x80162C14, type = "func", source = "Copy the next part of the CD sector to its destination." }
-EMI_EndArchive = { addr = 0x80162CD8, type = "func", source = "Ends the EMI stream." }
+EMI_SectorCopy = { addr = 0x80162C14, type = "func", source = "Copy the next part of the CD sector to its destination." }
+EMI_ArchiveEnd = { addr = 0x80162CD8, type = "func", source = "Ends the EMI stream." }
 EMI_IsReady = { addr = 0x80162D00, type = "func", source = "Loader state is ready." }
 CD_Update = { addr = 0x80162D18, type = "func", source = "Runs the current CD step of the EMI loader." }
 CD_Idle = { addr = 0x80162D9C, type = "func", source = "Loader modes 0 and 8, no-op." }
@@ -658,10 +658,10 @@ CD_Pause = { addr = 0x80162F34, type = "func", source = "Mode 6, CdPause." }
 CD_OnPause = { addr = 0x80162F88, type = "func", source = "Mode 7, latch the pause result and rearm." }
 EMI_Update = { addr = 0x80163010, type = "func", source = "Per frame, mode 1 streaming and mode 2 CD requests." }
 EMI_UpdateStream = { addr = 0x8016305C, type = "func", source = "Services the EMI stream." }
-EMI_DecompressSector = { addr = 0x80163238, type = "func", source = "Reads a sector of the EMI stream." }
-EMI_CopySectorToScratchpad = { addr = 0x8016327C, type = "func", source = "Stages a sector of the EMI stream." }
-EMI_UploadSectorImage = { addr = 0x80163378, type = "func", source = "Uploads a sector of the EMI stream to video memory." }
-EMI_UploadVabBody = { addr = 0x80163418, type = "func", source = "Transfers the body of a sound bank to the SPU." }
+EMI_SectorDecompress = { addr = 0x80163238, type = "func", source = "Reads a sector of the EMI stream." }
+EMI_SectorCopyToScratchpad = { addr = 0x8016327C, type = "func", source = "Stages a sector of the EMI stream." }
+EMI_SectorUploadImage = { addr = 0x80163378, type = "func", source = "Uploads a sector of the EMI stream to video memory." }
+EMI_VabUploadBody = { addr = 0x80163418, type = "func", source = "Transfers the body of a sound bank to the SPU." }
 SND_StartXAStream = { addr = 0x801636A0, type = "func", source = "Starts loading an overlay." }
 SND_ResolveXAStream = { addr = 0x80163744, type = "func", source = "Resolves one loader entry from its packed key and latches the base and scaled entry bounds." }
 SND_StoreXASyncResult = { addr = 0x80163858, type = "func", source = "Callback that reads the result of an XA stream command." }
@@ -731,11 +731,11 @@ Party_ClearBattlerState = { addr = 0x80166CEC, type = "func", source = "Clears t
 Party_ResetBattlers = { addr = 0x80166D34, type = "func", source = "Resets the party battlers." }
 Party_ClearActiveBattlers = { addr = 0x80166D8C, type = "func", source = "Clears the state of the active party battlers." }
 SYS_ShowFileNotFound = { addr = 0x80166DF4, type = "func", source = "Shows the file not found screen." }
-EMI_LoadPartyArchives = { addr = 0x80166E88, type = "func", source = "Arms the overlay loader for a family key and waits for the stream to become ready." }
-EMI_LoadPartyCode = { addr = 0x80166F3C, type = "func", source = "Loads the party archive of the PLP family." }
-EMI_LoadParty = { addr = 0x80166F84, type = "func", source = "Loads the party archive of a family." }
-EMI_FindPartyArchive = { addr = 0x80166FF8, type = "func", source = "Finds the archive of the current party." }
-EMI_LoadFamilyArchive = { addr = 0x8016728C, type = "func", source = "Maps a content family and index to a loader slot and starts its stream." }
+EMI_PartyLoadArchives = { addr = 0x80166E88, type = "func", source = "Arms the overlay loader for a family key and waits for the stream to become ready." }
+EMI_PartyLoadCode = { addr = 0x80166F3C, type = "func", source = "Loads the party archive of the PLP family." }
+EMI_PartyLoad = { addr = 0x80166F84, type = "func", source = "Loads the party archive of a family." }
+EMI_PartyFindArchive = { addr = 0x80166FF8, type = "func", source = "Finds the archive of the current party." }
+EMI_ArchiveLoadFamily = { addr = 0x8016728C, type = "func", source = "Maps a content family and index to a loader slot and starts its stream." }
 Area_DispatchScene = { addr = 0x80167344, type = "func", source = "Dispatches the area scene." }
 Area_InitScene = { addr = 0x801673AC, type = "func", source = "Sets up the area scene." }
 Area_StepSceneTimer = { addr = 0x80167800, type = "func", source = "Ticks the scene timer and runs Area_ResetScene on expiry." }
@@ -1293,7 +1293,7 @@ g_SndSeReaders = { addr = 0x8018232C, source = "Handlers that read a sound SE." 
 g_SndBankSpuAddress = { addr = 0x80182348, source = "SPU start address of each sound bank." }
 g_SndBankHeaderSize = { addr = 0x8018239C, source = "Header size of each sound bank." }
 g_SndBankSequenceSize = { addr = 0x801823F0, source = "Sequence size of each sound bank." }
-g_EmiSlotLbas = { addr = 0x80182444, source = "EMI_GetArchiveSector returns its entry for a slot id" }
+g_EmiSlotLbas = { addr = 0x80182444, source = "EMI_ArchiveGetSector returns its entry for a slot id" }
 g_EmiHeaderTag = { addr = 0x80183224, source = "Tag of the EMI header." }
 g_XAStreamSlots = { addr = 0x80183230, source = "Slot ids of the XA streams." }
 g_XACues = { addr = 0x8018323C, source = "Cue tables of the XA stream groups." }

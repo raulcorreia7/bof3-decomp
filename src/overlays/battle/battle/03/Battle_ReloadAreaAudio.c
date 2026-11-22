@@ -5,7 +5,7 @@ MATCH void Battle_ReloadAreaAudio(void) {
         volatile u8* state = &g_Battle.phase.sub_step;
 
         g_EmiStreamFlags |= 0x20u;
-        EMI_LoadArchive(g_GameAreaId + EMI_SLOT_AREA);
+        EMI_ArchiveLoad(g_GameAreaId + EMI_SLOT_AREA);
         *state += 1u;
     }
 }

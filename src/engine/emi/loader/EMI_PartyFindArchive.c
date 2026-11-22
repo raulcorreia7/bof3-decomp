@@ -1,6 +1,6 @@
 #include "engine/slus/slus.h"
 
-MATCH u8 EMI_FindPartyArchive(u8 member_a, u8 member_b, u8 member_c) {
+MATCH u8 EMI_PartyFindArchive(u8 member_a, u8 member_b, u8 member_c) {
     s32       i;
     s32       j;
     s32       count;

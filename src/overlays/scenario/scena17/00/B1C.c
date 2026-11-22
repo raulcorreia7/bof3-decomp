@@ -434,7 +434,7 @@ MATCH void func_801F84F4(void) {
         *timer          = 30;
         D_801F9DD8      = 0;
         g_ScenarioState.state_04 += 1;
-        EMI_LoadArchive(EMI_SLOT_ENDKANJI);
+        EMI_ArchiveLoad(EMI_SLOT_ENDKANJI);
         func_801F8FAC(0xE0, 0xBE, 0x80, 1);
     } else {
         func_801F8FAC(0xE0, 0xBE, value, 1);
@@ -811,7 +811,7 @@ MATCH void Scene_EnterSaveMenu(void) {
     D_80148698                    = 1;
     D_80148699                    = 0;
     D_80143BB4                    = 1;
-    EMI_LoadArchive(EMI_SLOT_SHOP);
+    EMI_ArchiveLoad(EMI_SLOT_SHOP);
     while (EMI_IsReady() == 0) {
         SYS_ThreadWait(1);
     }

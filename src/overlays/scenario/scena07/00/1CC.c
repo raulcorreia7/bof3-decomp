@@ -1029,7 +1029,7 @@ MATCH void func_801FA6B4(void) {
             func_801A4BC0(0x25, 0x3D, 0x51);
             func_801A4BC0(0x26, 0x3D, 0x51);
         } else {
-            EMI_LoadArchive(0x254);
+            EMI_ArchiveLoad(0x254);
             while (!EMI_IsReady()) {
                 SYS_ThreadWait(1);
             }

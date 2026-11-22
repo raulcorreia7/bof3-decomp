@@ -444,7 +444,7 @@ MATCH s32 func_801FDEA4(void) {
 }
 
 MATCH void func_801FDFFC(void) {
-    EMI_LoadPartyArchives(CHAR_ID_RYU_YOUNG, CHAR_ID_NINA_YOUNG, CHAR_ID_MOMO, 0U);
+    EMI_PartyLoadArchives(CHAR_ID_RYU_YOUNG, CHAR_ID_NINA_YOUNG, CHAR_ID_MOMO, 0U);
     Party_BuildBattlers(PARTY_ORDER_FIELD);
     Party_JoinMember(CHAR_ID_RYU_YOUNG);
     Party_JoinMember(CHAR_ID_MOMO);
@@ -452,21 +452,21 @@ MATCH void func_801FDFFC(void) {
 }
 
 MATCH void func_801FE048(void) {
-    EMI_LoadPartyArchives(CHAR_ID_RYU_YOUNG, CHAR_ID_NINA_YOUNG, CHAR_ID_MOMO, 0U);
+    EMI_PartyLoadArchives(CHAR_ID_RYU_YOUNG, CHAR_ID_NINA_YOUNG, CHAR_ID_MOMO, 0U);
     Party_BuildBattlers(PARTY_ORDER_FIELD);
     Party_JoinMember(CHAR_ID_MOMO);
     Party_LoadPalettes();
 }
 
 MATCH void func_801FE08C(void) {
-    EMI_LoadPartyArchives(CHAR_ID_RYU_YOUNG, CHAR_ID_NINA_YOUNG, CHAR_ID_MOMO, 0U);
+    EMI_PartyLoadArchives(CHAR_ID_RYU_YOUNG, CHAR_ID_NINA_YOUNG, CHAR_ID_MOMO, 0U);
     Party_BuildBattlers(PARTY_ORDER_FIELD);
     Party_JoinMember(CHAR_ID_NINA_YOUNG);
     Party_LoadPalettes();
 }
 
 MATCH void func_801FE0D0(void) {
-    EMI_LoadPartyArchives(CHAR_ID_RYU_YOUNG, CHAR_ID_NINA_YOUNG, CHAR_ID_MOMO, 0U);
+    EMI_PartyLoadArchives(CHAR_ID_RYU_YOUNG, CHAR_ID_NINA_YOUNG, CHAR_ID_MOMO, 0U);
     Party_BuildBattlers(PARTY_ORDER_FIELD);
     Party_JoinMember(CHAR_ID_NINA_YOUNG);
     Party_JoinMember(CHAR_ID_MOMO);
@@ -486,7 +486,7 @@ MATCH void Party_JoinPeco(void) {
 #include "overlays/scenario/shared/Scene_JoinNina.h"
 
 MATCH void func_801FE198(void) {
-    EMI_LoadPartyArchives(CHAR_ID_RYU_YOUNG, CHAR_ID_NINA_YOUNG, CHAR_ID_GARR, 0U);
+    EMI_PartyLoadArchives(CHAR_ID_RYU_YOUNG, CHAR_ID_NINA_YOUNG, CHAR_ID_GARR, 0U);
     Party_BuildBattlers(PARTY_ORDER_FIELD);
     Party_JoinMember(CHAR_ID_GARR);
 }
@@ -496,7 +496,7 @@ MATCH void Scene_JoinNina3(void) {
 }
 
 MATCH void func_801FE210(void) {
-    EMI_LoadPartyArchives(CHAR_ID_RYU_YOUNG, CHAR_ID_NINA_YOUNG, CHAR_ID_GARR, 0U);
+    EMI_PartyLoadArchives(CHAR_ID_RYU_YOUNG, CHAR_ID_NINA_YOUNG, CHAR_ID_GARR, 0U);
     Party_BuildBattlers(PARTY_ORDER_FIELD);
     Party_JoinMember(CHAR_ID_NINA_YOUNG);
     Party_JoinMember(CHAR_ID_GARR);

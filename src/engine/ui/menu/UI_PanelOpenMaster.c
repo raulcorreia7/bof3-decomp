@@ -5,7 +5,7 @@ MATCH void UI_PanelOpenMaster(void) {
     switch (g_SceneEventStep) {
         case 0:
             g_AreaWalkFlags |= AREA_WALK_BUSY_ALL;
-            EMI_LoadArchive(EMI_SLOT_SISYOU);
+            EMI_ArchiveLoad(EMI_SLOT_SISYOU);
             {
                 s8* state = &g_SceneEventStep;
                 *state    = *state + 1;
@@ -28,7 +28,7 @@ MATCH void UI_PanelOpenMaster(void) {
             return;
         case 3:
             g_EmiStreamFlags = 0x20;
-            EMI_LoadFamilyArchive(g_EmiLoadedCharacterIndex & EMI_LOADED_INDEX_MASK, EMI_FAMILY_PL);
+            EMI_ArchiveLoadFamily(g_EmiLoadedCharacterIndex & EMI_LOADED_INDEX_MASK, EMI_FAMILY_PL);
             g_SceneEventStep = g_SceneEventStep + 1;
             return;
         case 4:

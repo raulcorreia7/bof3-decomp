@@ -3,7 +3,7 @@
 /* initializes EMI streaming state, refreshes the active LBA, and
  * installs CD callbacks.
  */
-MATCH void EMI_LoadArchive(u32 emi_id) {
+MATCH void EMI_ArchiveLoad(u32 emi_id) {
     u32 cd_base;
     u32 active_lba;
     u32 current_lba;
@@ -44,7 +44,7 @@ MATCH void EMI_LoadArchive(u32 emi_id) {
 
     active_lba          = g_EmiRequestedSlotId;
     D_80146858          = 0;
-    new_lba             = EMI_GetArchiveSector(active_lba);
+    new_lba             = EMI_ArchiveGetSector(active_lba);
     slot                = g_EmiNextSlot;
     g_EmiSlotSectors[0] = new_lba;
     g_EmiSectorCursor   = new_lba;
@@ -55,5 +55,5 @@ MATCH void EMI_LoadArchive(u32 emi_id) {
     g_EmiStreamState = 0;
     CdReadyCallback(CD_OnReady);
     CdSyncCallback((CdlCB)CD_OnSync);
-    EMI_StartArchive();
+    EMI_ArchiveStart();
 }

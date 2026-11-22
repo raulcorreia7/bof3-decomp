@@ -8,6 +8,6 @@ MATCH void EMI_LoadSE(void) {
         g_EmiLoadArg = g_EmiBanks[D_80146483].se_records;
     }
 
-    EMI_CopySector();
+    EMI_SectorCopy();
     EMI_LOADER_STEP += 1;
 }

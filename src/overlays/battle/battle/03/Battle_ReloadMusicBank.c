@@ -29,7 +29,7 @@ MATCH void Battle_ReloadMusicBank(void) {
                 }
                 template_id = g_BGMTracks[action].bank_slot;
                 D_801463B0  = template_id;
-                EMI_LoadArchive(template_id);
+                EMI_ArchiveLoad(template_id);
             } else {
                 g_Battle.outcome.result |= BATTLE_RESULT_NO_BGM;
             }

@@ -14,9 +14,9 @@ const u32 g_CdSteps[9] = {
 
 const EmiRingSteps g_EmiRingSteps = {{
     (u32)func_80163230,
-    (u32)EMI_CopySectorToScratchpad,
-    (u32)EMI_DecompressSector,
-    (u32)EMI_UploadSectorImage,
-    (u32)EMI_UploadVabBody,
+    (u32)EMI_SectorCopyToScratchpad,
+    (u32)EMI_SectorDecompress,
+    (u32)EMI_SectorUploadImage,
+    (u32)EMI_VabUploadBody,
     (u32)func_80163698,
 }};

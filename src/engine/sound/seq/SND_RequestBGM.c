@@ -12,7 +12,7 @@ MATCH bool SND_RequestBGM(s32 bgm_id) {
     current = g_SndBGMId;
     value   = *(u16*)((u8*)g_BGMTracks + ((bgm_id & BYTE_MASK) << 2));
     if ((value != *(u16*)((u8*)g_BGMTracks + (current << 2))) || (current == GAME_NONE)) {
-        EMI_LoadArchive(value);
+        EMI_ArchiveLoad(value);
         return 1;
     }
     return 0;

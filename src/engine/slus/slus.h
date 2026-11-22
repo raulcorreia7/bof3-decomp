@@ -322,7 +322,7 @@ typedef struct {
 ASSERT_SIZE(WindowTextRow, 0x06);
 
 /* The bank records at g_EmiBanks seen from its second symbol, 0x80146780 (EMIBank + 4):
- * EMI_LoadVabHeader and SND_SetBankLayout reach it through this symbol and a typed
+ * EMI_VabLoadHeader and SND_SetBankLayout reach it through this symbol and a typed
  * EMIBank access moves their register allocation. */
 typedef struct EMIAudioLink {
     u32 word;

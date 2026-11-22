@@ -274,7 +274,7 @@ MATCH void func_801FE360(void) {
     for (i = 0; i < g_Game.party_size; i++) {
         Party_RemoveMember(g_Game.members[i].chr.character_id);
     }
-    EMI_LoadPartyArchives(CHAR_ID_RYU_ADULT, CHAR_ID_MOMO, CHAR_ID_NINA_ADULT, 0);
+    EMI_PartyLoadArchives(CHAR_ID_RYU_ADULT, CHAR_ID_MOMO, CHAR_ID_NINA_ADULT, 0);
     g_Game.party_size = 0;
     Party_JoinMember(CHAR_ID_RYU_ADULT);
     Party_JoinMember(CHAR_ID_MOMO);
@@ -297,7 +297,7 @@ MATCH void func_801FE438(void) {
     for (slot = 0; slot < PARTY_SLOT_COUNT; slot++) {
         ids[slot] = D_80144908[slot];
     }
-    EMI_LoadPartyArchives(ids[0], ids[1], ids[2], 0);
+    EMI_PartyLoadArchives(ids[0], ids[1], ids[2], 0);
     for (slot = 0; slot < PARTY_SLOT_COUNT; slot++) {
         if (ids[slot] != CHAR_ID_RYU_ADULT) {
             Party_JoinMember(ids[slot]);
