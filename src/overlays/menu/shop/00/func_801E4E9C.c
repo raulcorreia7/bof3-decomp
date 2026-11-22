@@ -17,7 +17,7 @@ MATCH void func_801E4E9C(MenuPanelTask* panel_task) {
     do {
         /* FAKE: steer item read through base. */
         base = (u8*)slot;
-        if ((slot[2] & 0x1) && (slot[0x16] == D_80148361)) {
+        if ((slot[2] & 0x1) && (slot[0x16] == g_UiPanelTasks[1].flags)) {
             func_801E4FC8((u16)(panel_task->pos.x + col + 4), (u16)(panel_task->pos.y + row + 5), base[0], 0);
             col += 0x25;
             if (col >= 75) {

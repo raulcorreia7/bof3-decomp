@@ -7,7 +7,7 @@ NON_MATCHING void Menu_OpenPartyScreen(void) {
     MenuPanelTask* panels;
     u8             i;
 
-    record                                                    = &D_801484BC;
+    record                                                    = &g_UiPanelTasks[11].active;
     panels                                                    = (MenuPanelTask*)(record + 0x120);
     g_UiPanelTasks[MENU_START_PANEL_DESCRIPTION].panel        = 6;
     g_UiPanelTasks[MENU_START_PANEL_DESCRIPTION].mode         = MENU_START_MODE_MESSAGE;

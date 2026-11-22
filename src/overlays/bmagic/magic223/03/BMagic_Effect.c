@@ -6,14 +6,13 @@ __asm__(".include \"include/match/macro.inc\"\n");
 
 #include "overlays/bmagic/shared/Effect_RunSlots.h"
 
-#ifdef NON_MATCHING
-NON_MATCHING void func_801EED18(void) {
-    BattleEffectTargetColumn* targets;
-    PartyMember*              target;
-    u32                       i;
-    u32                       slot;
-    u16*                      palette;
-    u16*                      arena;
+/* Starts the effect at the caster: clears the slots, spawns the driver and 48 particles and builds the two effect palette rows. */
+MATCH void func_801EED18(void) {
+    PartyMember* target;
+    u32          i;
+    u32          slot;
+    u16*         palette;
+    u16*         arena;
 
     i = 0;
     do {
@@ -40,19 +39,21 @@ NON_MATCHING void func_801EED18(void) {
     for (i = 0; i < 0x30; i++) {
         slot = BMagic_AllocEffect() & BYTE_MASK;
         if (slot != BYTE_MASK) {
-            target                                = g_Task;
-            BMAGIC_EFFECT_SLOTS[slot].header.mode = 0;
-            BMAGIC_EFFECT_SLOTS[slot].unk_0B      = i;
-            targets                               = (BattleEffectTargetColumn*)&BMAGIC_EFFECT_SLOTS[13].unk_5C;
-            targets[slot].target.party            = target;
-            BMAGIC_EFFECT_SLOTS[slot].arg.unk_09  = ((i >> 3) << 4) + (rand() & 0xF) + 1;
+            PartyMember* target;
+
+            target                                 = g_Task;
+            BMAGIC_EFFECT_SLOTS[slot].header.mode  = 0;
+            BMAGIC_EFFECT_SLOTS[slot].unk_0B       = i;
+            BMAGIC_EFFECT_SLOTS[slot].target.party = target;
+            BMAGIC_EFFECT_SLOTS[slot].arg.unk_09   = ((i >> 3) << 4) + (rand() & 0xF) + 1;
             TASK(PartyMember)->param.unk_0B++;
         }
     }
 
-    arena   = BATTLE_PALETTE_SOURCE_COLORS;
+    i       = 1;
     palette = BATTLE_EFFECT_PALETTE_COLORS;
-    for (i = 1; i < 0x10; i++) {
+    arena   = BATTLE_PALETTE_SOURCE_COLORS;
+    for (; i < 0x10; i++) {
         palette[0]  = arena[0] | 0x8000;
         palette[16] = arena[16] | 0x8000;
         palette++;
@@ -63,9 +64,6 @@ NON_MATCHING void func_801EED18(void) {
     g_GfxPalettePending              = 1;
     SND_SEQueueSelection(0x100);
 }
-#else
-INCLUDE_ASM(func_801EED18);
-#endif
 
 #include "overlays/bmagic/shared/Effect_RequestTargetOnTimerZero.h"
 

@@ -9,7 +9,7 @@ MATCH void UI_MessageStartRequest(void) {
     entry                    = *(u16*)(SLUS_LOAD_ADDRESS + g_UiMessageRequest * 2);
     g_UiMessageStateTimer[0] = 8;
     g_UiMessageState.state   = 1;
-    D_801490B9               = 0;
+    g_UiMessageState.index   = 0;
     g_UiMessageStep          = 0;
     entry += SLUS_LOAD_ADDRESS;
     g_UiMessageScript = entry;

@@ -229,18 +229,14 @@ MATCH void func_801EF324(void) {
     GFX_AddDitheredDrawMode(BMAGIC_LAYER_OVER_BATTLERS, tpage);
 }
 
-#ifdef NON_MATCHING
-NON_MATCHING void func_801EFBA8(void) {
-    POLY_G4*     prim;
-    PartyMember* effect_task;
-    s32          iteration;
-    s32          inner_angle;
-    s32          outer_angle;
-    s32          radius;
-    s32          previous_iteration;
-    s32          inner_radius;
-    s32          outer_radius;
-    s32          white;
+/* Draws the trail: for each step, two Gouraud quads either side of a path that swings on a sine, widening with the step. */
+MATCH void func_801EFBA8(void) {
+    POLY_G4* prim;
+    s32      iteration;
+    s32      inner_angle;
+    s32      outer_angle;
+    s32      radius;
+    s32      previous_iteration;
 
     GFX_ADD_DITHERED_DRAW_MODE(BMAGIC_LAYER_OVER_BATTLERS, getTPage(TPAGE_DEPTH_4BIT, TPAGE_ABR_ADD, 320, 256));
     g_ScratchPad.cells.halves[4] = TASK(PartyMember)->screen_x.value;
@@ -248,9 +244,6 @@ NON_MATCHING void func_801EFBA8(void) {
     g_ScratchPad.cells.halves[1] = TASK(PartyMember)->unk_14;
     iteration                    = 1;
     if (iteration < TASK(PartyMember)->timer + 1) {
-        outer_radius = 18;
-        inner_radius = 0;
-        white        = 1;
         do {
             g_ScratchPad.cells.halves[6] = g_ScratchPad.cells.halves[4];
             g_ScratchPad.cells.halves[7] = g_ScratchPad.cells.halves[5];
@@ -266,16 +259,14 @@ NON_MATCHING void func_801EFBA8(void) {
             radius                       = rsin(inner_angle);
             previous_iteration           = iteration - 1;
             radius                       = FIXED_MUL((radius * 3) << 1, previous_iteration) + 4;
-            effect_task                  = g_Task;
-            g_ScratchPad.cells.halves[0] = inner_radius + radius;
-            g_ScratchPad.cells.halves[0] = g_ScratchPad.cells.halves[0] / effect_task->param.unk_0B + 1;
+            g_ScratchPad.cells.halves[0] = previous_iteration * 18 + radius;
+            g_ScratchPad.cells.halves[0] = g_ScratchPad.cells.halves[0] / TASK(PartyMember)->param.unk_0B + 1;
             prim->x1                     = g_ScratchPad.cells.halves[6] + FIXED_MUL(rsin(g_ScratchPad.cells.halves[2]), g_ScratchPad.cells.halves[0]);
             prim->y1                     = g_ScratchPad.cells.halves[7] + FIXED_MUL(rcos(g_ScratchPad.cells.halves[2]), g_ScratchPad.cells.halves[0]);
             radius                       = rsin(outer_angle);
             radius                       = FIXED_MUL((radius * 3) << 1, iteration) + 4;
-            effect_task                  = g_Task;
-            g_ScratchPad.cells.halves[0] = outer_radius + radius;
-            g_ScratchPad.cells.halves[0] = g_ScratchPad.cells.halves[0] / effect_task->param.unk_0B + 1;
+            g_ScratchPad.cells.halves[0] = iteration * 18 + radius;
+            g_ScratchPad.cells.halves[0] = g_ScratchPad.cells.halves[0] / TASK(PartyMember)->param.unk_0B + 1;
             prim->x3                     = g_ScratchPad.cells.halves[4] + FIXED_MUL(rsin(g_ScratchPad.cells.halves[2]), g_ScratchPad.cells.halves[0]);
             prim->y3                     = g_ScratchPad.cells.halves[5] + FIXED_MUL(rcos(g_ScratchPad.cells.halves[2]), g_ScratchPad.cells.halves[0]);
             setXY0(prim, g_ScratchPad.cells.halves[6], g_ScratchPad.cells.halves[7]);
@@ -283,9 +274,9 @@ NON_MATCHING void func_801EFBA8(void) {
             prim->y2                     = g_ScratchPad.cells.halves[5];
             g_ScratchPad.cells.halves[3] = TASK(PartyMember)->unk_04 * 4;
             setRGB0(prim, TASK(PartyMember)->unk_04 * 8, g_ScratchPad.cells.halves[3], g_ScratchPad.cells.halves[3]);
-            setRGB1(prim, white, white, white);
+            setRGB1(prim, 1, 1, 1);
             setRGB2(prim, TASK(PartyMember)->unk_04 * 8, g_ScratchPad.cells.halves[3], g_ScratchPad.cells.halves[3]);
-            setRGB3(prim, white, white, white);
+            setRGB3(prim, 1, 1, 1);
             GFX_AddPrim(BMAGIC_LAYER_OVER_BATTLERS, sizeof(POLY_G4));
             prim = (POLY_G4*)g_GfxPrimCursor;
             SetPolyG4(prim);
@@ -293,17 +284,14 @@ NON_MATCHING void func_801EFBA8(void) {
             g_ScratchPad.cells.halves[2] = (g_ScratchPad.cells.halves[1] - ANGLE_90) & ANGLE_MASK;
             radius                       = rsin(inner_angle);
             radius                       = FIXED_MUL((radius * 3) << 1, previous_iteration) + 4;
-            effect_task                  = g_Task;
-            g_ScratchPad.cells.halves[0] = inner_radius + radius;
-            g_ScratchPad.cells.halves[0] = g_ScratchPad.cells.halves[0] / effect_task->param.unk_0B + 1;
+            g_ScratchPad.cells.halves[0] = previous_iteration * 18 + radius;
+            g_ScratchPad.cells.halves[0] = g_ScratchPad.cells.halves[0] / TASK(PartyMember)->param.unk_0B + 1;
             setXY0(prim, g_ScratchPad.cells.halves[6] + FIXED_MUL(rsin(g_ScratchPad.cells.halves[2]), g_ScratchPad.cells.halves[0]),
                    g_ScratchPad.cells.halves[7] + FIXED_MUL(rcos(g_ScratchPad.cells.halves[2]), g_ScratchPad.cells.halves[0]));
-            inner_radius += 18;
             radius                       = rsin(outer_angle);
             radius                       = FIXED_MUL((radius * 3) << 1, iteration) + 4;
-            effect_task                  = g_Task;
-            g_ScratchPad.cells.halves[0] = outer_radius + radius;
-            g_ScratchPad.cells.halves[0] = g_ScratchPad.cells.halves[0] / effect_task->param.unk_0B + 1;
+            g_ScratchPad.cells.halves[0] = iteration * 18 + radius;
+            g_ScratchPad.cells.halves[0] = g_ScratchPad.cells.halves[0] / TASK(PartyMember)->param.unk_0B + 1;
             prim->x2                     = g_ScratchPad.cells.halves[4] + FIXED_MUL(rsin(g_ScratchPad.cells.halves[2]), g_ScratchPad.cells.halves[0]);
             prim->y2                     = g_ScratchPad.cells.halves[5] + FIXED_MUL(rcos(g_ScratchPad.cells.halves[2]), g_ScratchPad.cells.halves[0]);
             iteration++;
@@ -312,16 +300,12 @@ NON_MATCHING void func_801EFBA8(void) {
             prim->x3                     = g_ScratchPad.cells.halves[4];
             prim->y3                     = g_ScratchPad.cells.halves[5];
             g_ScratchPad.cells.halves[3] = TASK(PartyMember)->unk_04 * 4;
-            setRGB0(prim, white, white, white);
+            setRGB0(prim, 1, 1, 1);
             setRGB1(prim, TASK(PartyMember)->unk_04 * 8, g_ScratchPad.cells.halves[3], g_ScratchPad.cells.halves[3]);
-            setRGB2(prim, white, white, white);
+            setRGB2(prim, 1, 1, 1);
             setRGB3(prim, TASK(PartyMember)->unk_04 * 8, g_ScratchPad.cells.halves[3], g_ScratchPad.cells.halves[3]);
             GFX_AddPrim(BMAGIC_LAYER_OVER_BATTLERS, sizeof(POLY_G4));
-            outer_radius += 18;
         } while (iteration < TASK(PartyMember)->timer + 1);
     }
     GFX_ADD_DITHERED_DRAW_MODE(BMAGIC_LAYER_OVER_BATTLERS, getTPage(TPAGE_DEPTH_4BIT, TPAGE_ABR_HALF, 320, 256));
 }
-#else
-INCLUDE_ASM(func_801EFBA8);
-#endif

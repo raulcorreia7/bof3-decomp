@@ -22,7 +22,7 @@ MATCH void UI_PanelUpdateTasks(void) {
             task   = taskBase;
             offset = 0;
             do {
-                if ((((u8*)g_UiPanelTasks)[offset] != 0) && (*((u8*)&D_8014833F + offset) == mode)) {
+                if ((((u8*)g_UiPanelTasks)[offset] != 0) && (*((u8*)&g_UiPanelTasks[0].layer + offset) == mode)) {
                     g_UiPanelCurrent = (MenuPanelTask*)task;
                     funcs[task[1]]();
                 }

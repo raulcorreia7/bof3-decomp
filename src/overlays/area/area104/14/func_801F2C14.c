@@ -1,8 +1,7 @@
 #include "area104_14.h"
 
 /* The sine wave that ripples through the map's cell heights around the target cell. */
-#ifdef NON_MATCHING
-NON_MATCHING void func_801F2C14(void) {
+MATCH void func_801F2C14(void) {
     u8* map_width;
     s32 cell_x;
     s32 cell_y;
@@ -12,6 +11,7 @@ NON_MATCHING void func_801F2C14(void) {
     s32 delta_1;
     s32 angle_0;
     s32 angle_1;
+    s32 width;
 
     if (g_AreaSceneMode == 0) {
         return;
@@ -27,7 +27,11 @@ NON_MATCHING void func_801F2C14(void) {
         delta_0 = (rsin(((g_FrameCount << 7) + angle_0) & 0xFFF) >> 10) - (rsin((((g_FrameCount - 1) << 7) + angle_0) & 0xFFF) >> 10);
         delta_1 = (rsin(((g_FrameCount << 7) + angle_1) & 0xFFF) >> 10) - (rsin((((g_FrameCount - 1) << 7) + angle_1) & 0xFFF) >> 10);
         for (offset_x = 0; offset_x < 35; offset_x++) {
-            if (cell_y + offset_y < 0 || cell_y + offset_y >= g_AreaMapBundle.height || cell_x + offset_x < 0 || cell_x + offset_x >= *map_width) {
+            if (cell_y + offset_y < 0 || cell_y + offset_y >= g_AreaMapBundle.height || cell_x + offset_x < 0) {
+                continue;
+            }
+            width = *map_width;
+            if (cell_x + offset_x >= (u8)width) {
                 continue;
             }
             /* The cell's four corner heights. */
@@ -43,6 +47,3 @@ NON_MATCHING void func_801F2C14(void) {
     COORD_INT(g_Game.members[0].pos.z) = Area_HeightSample(g_Game.members[0].pos.x.fixed, g_Game.members[0].pos.y.fixed);
     g_AreaCameraRefreshCount           = 2;
 }
-#else
-INCLUDE_ASM(func_801F2C14);
-#endif

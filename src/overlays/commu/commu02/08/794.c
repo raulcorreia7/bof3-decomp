@@ -2478,26 +2478,26 @@ NON_MATCHING void func_801D94D0(s32 page, s32 left, s32 top, s32 cursor_col_arg,
 INCLUDE_ASM(func_801D94D0);
 #endif
 
-#ifdef NON_MATCHING
-NON_MATCHING void func_801D97C8(s32 unused, s32 x, s32 y) {
-    const u8* const* labels;
-    const u8*        dots;
-    u16              row;
-    u16              column;
-    u16              clut;
-    s32              tpage;
-    u16              left;
+/* Draws the stat legend panel at (x, y): five labels, their dot leaders, the four stat icons and the two arrows. */
+MATCH void func_801D97C8(s32 unused, s32 x, s32 y) {
+    const u8* dots;
+    u16       row;
+    u16       column;
+    u16       clut;
+    s32       tpage;
+    u16       left;
+    u16       top;
 
-    left   = x;
-    labels = D_801DB038;
+    left = x;
+    top  = y;
     UI_WindowDraw((u16)(x + 3), (u16)(y + 3), 0x4D, 0x2F, 0, g_WindowStyle);
     for (row = 0; row < 5; row++) {
-        UI_TextDrawString((s16)(x + 0x2A), (s16)(y + (row * 8) + 6), 0, MENU_LABEL_LENGTH, labels[row]);
+        UI_TextDrawString((s16)(x + 0x2A), (s16)(top + (row * 8) + 6), 0, MENU_LABEL_LENGTH, D_801DB038[row]);
     }
     for (row = 0; row < 5; row++) {
         for (column = 0; column < 3; column++) {
             dots = D_801DB054;
-            UI_TextDrawString((s16)(left + (column * 4) + 0x1A), (s16)(y + (row * 8) + 6), 0, 1, dots);
+            UI_TextDrawString((s16)(left + (column * 4) + 0x1A), (s16)(top + (row * 8) + 6), 0, 1, dots);
         }
     }
 
@@ -2505,22 +2505,19 @@ NON_MATCHING void func_801D97C8(s32 unused, s32 x, s32 y) {
     GFX_ADD_DRAW_MODE(tpage);
 
     clut = GetClut(0x30, 0x1E0);
-    Menu_DrawPanelIcon((s16)(left + 0x0E), (s16)(y + 6), 0x1D, 0, clut, 0x7F);
+    Menu_DrawPanelIcon((s16)(left + 0x0E), (s16)(top + 6), 0x1D, 0, clut, 0x7F);
     clut = GetClut(0x30, 0x1E0);
-    Menu_DrawPanelIcon((s16)(left + 0x0E), (s16)(y + 0x0E), 0x1C, 0, clut, 0x7F);
+    Menu_DrawPanelIcon((s16)(left + 0x0E), (s16)(top + 0x0E), 0x1C, 0, clut, 0x7F);
     clut = GetClut(0x30, 0x1E0);
-    Menu_DrawPanelIcon((s16)(left + 0x0E), (s16)(y + 0x16), 0x1B, 0, clut, 0x7F);
+    Menu_DrawPanelIcon((s16)(left + 0x0E), (s16)(top + 0x16), 0x1B, 0, clut, 0x7F);
     clut = GetClut(0x30, 0x1E0);
-    Menu_DrawPanelIcon((s16)(left + 0x0E), (s16)(y + 0x1E), 0x1E, 0, clut, 0x7F);
+    Menu_DrawPanelIcon((s16)(left + 0x0E), (s16)(top + 0x1E), 0x1E, 0, clut, 0x7F);
     clut = GetClut(0, 0x1E0);
-    Menu_DrawPanelIcon((s16)(left + 0x0A), (s16)(y + 0x26), 4, 2, clut, 0x7F);
+    Menu_DrawPanelIcon((s16)(left + 0x0A), (s16)(top + 0x26), 4, 2, clut, 0x7F);
     clut = GetClut(0, 0x1E0);
-    Menu_DrawPanelIcon((s16)(left + 0x12), (s16)(y + 0x26), 5, 2, clut, 0x7F);
-    func_801AF390((s16)left, (s16)y, g_MenuPortraitAtlas + 0xC8, 0);
+    Menu_DrawPanelIcon((s16)(left + 0x12), (s16)(top + 0x26), 5, 2, clut, 0x7F);
+    func_801AF390((s16)left, (s16)top, g_MenuPortraitAtlas + 0xC8, 0);
 }
-#else
-INCLUDE_ASM(func_801D97C8);
-#endif
 
 MATCH void Menu_DrawPanelIcon(u16 x, u16 y, s32 u, s32 v, u16 clut, u8 color) {
     MenuDrawPanelIcon(x, y, u, v, clut, color);

@@ -10,18 +10,18 @@ MATCH void func_801E032C(void) {
     u8  previous;
     s8  next;
 
-    entry      = (u8*)&g_Characters[D_801483A6] + DECOMP_OFFSETOF(Character, abilities.skill) + D_801483A7;
+    entry      = (u8*)&g_Characters[g_UiPanelTasks[3].unk_0A] + DECOMP_OFFSETOF(Character, abilities.skill) + g_UiPanelTasks[3].unk_0B;
     D_80148340 = g_Abilities[*entry].description;
-    if (D_8014839F == 0) {
-        D_80148624 = 1;
-        D_80148628 = D_801483A0 + 7;
-        row        = D_801483A7 * 0xD + 0x1A;
-        D_8014862A = D_801483A2 + row;
+    if (g_UiPanelTasks[3].state == 0) {
+        g_UiPanelTasks[21].active = 1;
+        D_80148628                = g_UiPanelTasks[3].pos.x + 7;
+        row                       = g_UiPanelTasks[3].unk_0B * 0xD + 0x1A;
+        D_8014862A                = g_UiPanelTasks[3].pos.y + row;
     } else {
-        D_80148624 = 0;
+        g_UiPanelTasks[21].active = 0;
     }
     input    = INPUT_REPEATED(g_PadStates[0].pressed, INPUT_DIRECTIONAL);
-    cursor   = &D_801483A7;
+    cursor   = &g_UiPanelTasks[3].unk_0B;
     previous = *cursor;
     if (input & PADLup) {
         next    = previous - 1;
@@ -36,18 +36,18 @@ MATCH void func_801E032C(void) {
             *cursor = 9;
         }
     }
-    index = &D_801483A7;
+    index = &g_UiPanelTasks[3].unk_0B;
     if (previous != *index) {
         SND_SEPlay(EMI_SE_ID(SND_BANK_COMMON, 0));
     }
-    D_801483A8 = 0xFF;
-    cell       = (u8*)&g_Characters[D_801483A6] + DECOMP_OFFSETOF(Character, abilities.skill) + *index;
+    g_UiPanelTasks[3].unk_0C = 0xFF;
+    cell                     = (u8*)&g_Characters[g_UiPanelTasks[3].unk_0A] + DECOMP_OFFSETOF(Character, abilities.skill) + *index;
     if (g_PadStates[0].pressed & g_InputMasks[MENU_INPUT_CONFIRM]) {
         u8* step;
 
         SND_SEPlay(EMI_SE_ID(SND_BANK_COMMON, 3));
-        D_801483A8 = *index;
-        step       = &D_80148652;
+        g_UiPanelTasks[3].unk_0C = *index;
+        step                     = &D_80148652;
         (*step)++;
         return;
     }
@@ -66,11 +66,11 @@ MATCH void func_801E032C(void) {
 
         SND_SEPlay(EMI_SE_ID(SND_BANK_COMMON, 2));
         SND_SEPlay(EMI_SE_ID(SND_BANK_COMMON, 6));
-        D_8014837B           = 2;
-        D_8014839F           = 4;
-        D_801483A8           = 0xFF;
-        g_BattleMessageState = 1;
-        step                 = &D_80148652;
+        g_UiPanelTasks[2].state  = 2;
+        g_UiPanelTasks[3].state  = 4;
+        g_UiPanelTasks[3].unk_0C = 0xFF;
+        g_BattleMessageState     = 1;
+        step                     = &D_80148652;
         (*step)--;
     }
 }

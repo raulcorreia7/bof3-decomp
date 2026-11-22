@@ -9,7 +9,7 @@ MATCH void func_800AD930(void) {
         work = TASK(PartyMember);
         work->header.step--;
     }
-    if (!(D_80148624 & 0x1)) {
+    if (!(g_UiPanelTasks[21].active & 0x1)) {
         TASK(PartyMember)->header.mode++;
         TASK(PartyMember)->header.step = 0;
     }
