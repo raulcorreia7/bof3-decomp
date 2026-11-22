@@ -24,7 +24,7 @@
 
 /* The character sprites container loaded at 0x8003B800 (PLxxx archives;
  * @source: wiki:formats/character): a table of section offsets relative to the container.
- * Party_LoadMemberSprite stores the selected section's address in the scratchpad work
+ * Party_MemberLoadSprite stores the selected section's address in the scratchpad work
  * record at +0x4C. A section starts with a count and the offset of its palette
  * table; the table is a list of offsets, each to CHARACTER_PALETTE_COLORS
  * 16-bit colors, which GFX_PaletteLoad copies to two VRAM staging rows. */
@@ -86,7 +86,7 @@ typedef enum EquipPreviewChange {
 
 /* Which party-order array a call reads: the walking order g_PartyFieldOrder or the
  * battle order g_PartyBattleOrder, three character ids each, 0xFF for an empty
- * position. Party_CountOrder and Party_BuildBattlers take it as their mode. */
+ * position. Party_CountOrder and Party_BattlersBuild take it as their mode. */
 typedef enum PartyOrder {
     PARTY_ORDER_FIELD  = 0,
     PARTY_ORDER_BATTLE = 1,
@@ -221,7 +221,7 @@ typedef struct AbilitySet {
 
 ASSERT_SIZE(AbilitySet, 0x28);
 
-/* Character.unk_07, the party flags: bit 0 marks the rows Party_JoinMember joins. */
+/* Character.unk_07, the party flags: bit 0 marks the rows Party_MemberJoin joins. */
 #define PARTY_FLAG_JOINED 0x01
 
 typedef struct Character {
@@ -297,7 +297,7 @@ typedef struct LevelGrowth {
     u8  power_defense;
     u8  agility_intelligence;
     u8  ability;
-    u8  extra_ability; /* Char_ApplyLevelUps learns both ability bytes through Char_AddAbility */
+    u8  extra_ability; /* Char_ApplyLevelUps learns both ability bytes through Char_AbilityAdd */
 } LevelGrowth;
 
 ASSERT_OFFSET(LevelGrowth, exp, 0x00);

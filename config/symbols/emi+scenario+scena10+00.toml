@@ -12,11 +12,11 @@ jtbl_801F6F00 = { addr = 0x801F6F00, type = "Callback", source = "The switch tab
 Scene_DispatchEntity = { addr = 0x801F6F68, type = "func", source = "dispatches a scene entity by its callback index" }
 func_801F6F70 = { addr = 0x801F6F70, alias = true, source = "Scene_DispatchEntity+0x8, after its g_Task load; the start the split used before the function was moved back to that load" }
 Scene_DispatchActor = { addr = 0x801FD464, type = "func", source = "dispatches a scenario actor to its callback handler" }
-Scene_JoinPartyRyuAdultGarrNinaAdult = { addr = 0x801FE314, type = "func", source = "Streams the EMI family for adult Ryu, Garr and adult Nina, empties g_Game.party_size and joins the three in that order with Party_JoinMember, without the palette restage of Scene_SetPartyRyuAdultGarrNinaAdult." }
+Scene_JoinPartyRyuAdultGarrNinaAdult = { addr = 0x801FE314, type = "func", source = "Streams the EMI family for adult Ryu, Garr and adult Nina, empties g_Game.party_size and joins the three in that order with Party_MemberJoin, without the palette restage of Scene_SetPartyRyuAdultGarrNinaAdult." }
 Party_JoinNinaAdult = { addr = 0x801FE3F8, type = "func", source = "Adds Nina Adult to the party." }
 Party_JoinMomo = { addr = 0x801FE418, type = "func", source = "Adds Momo to the party." }
 Scene_RebuildRyuGarrParty = { addr = 0x801FE4F0, type = "func", source = "Clears the three party slots of D_80144908, keeps the last id that is neither adult Ryu (7) nor Garr (2), adult Nina (8) when none is, streams the EMI family for Ryu, Garr and that id and joins all three." }
-Scene_RemoveMomo = { addr = 0x801FE614, type = "func", source = "Removes character 5 (CHAR_ID_MOMO) from the party through Party_RemoveMember, which clears the id from the walking and battle orders and shrinks g_Game.party_size, then restages every party palette through Party_LoadPalettes." }
+Scene_RemoveMomo = { addr = 0x801FE614, type = "func", source = "Removes character 5 (CHAR_ID_MOMO) from the party through Party_MemberRemove, which clears the id from the walking and battle orders and shrinks g_Game.party_size, then restages every party palette through Party_LoadPalettes." }
 Scene_StashPartyExceptRyuAdult = { addr = 0x801FE6F4, type = "func", source = "Copies the character ids of the party into D_80144908, removes every listed member except adult Ryu (7) and runs Party_LoadPalettes." }
 g_SceneEntityDispatch = { addr = 0x801FE80C, source = "scenario entity dispatch table" }
 g_SceneActorDispatch = { addr = 0x801FE97C, source = "scenario actor dispatch table" }

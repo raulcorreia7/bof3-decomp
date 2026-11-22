@@ -178,7 +178,7 @@ game's own records owns keeps its meaning (`Callback`, `Bank`, `Slot`, `Cell`); 
 A function name takes one of two orders:
 
 1. **Verb first**, the default: `Tag_VerbObject`. The tag, an underscore, a verb, then the thing
-   acted on: `Party_AddMember`, `Battle_FindTarget`, `Shop_Buy`.
+   acted on: `Party_MemberAdd`, `Battle_FindTarget`, `Shop_Buy`.
 2. **Object first**, for a family: `Tag_ObjectVerb`. When three or more functions under one tag act
    on the same object, the object comes first, so the family sorts together, as PsyQ writes
    `SsSeqOpen`, `SsSeqPlay` and `SsSeqClose`: `UI_MessageWindowOpen`, `UI_MessageWindowClose`,

@@ -653,16 +653,16 @@ MATCH s32 func_801FDC70(void) {
 /* func_801FDCF4 */
 MATCH void Scene_JoinAdultNinaWithGarr(void) {
     EMI_PartyLoadArchives(CHAR_ID_RYU_ADULT, CHAR_ID_NINA_ADULT, CHAR_ID_GARR, 0U);
-    Party_BuildBattlers(PARTY_ORDER_FIELD);
-    Party_JoinMember(CHAR_ID_NINA_ADULT);
+    Party_BattlersBuild(PARTY_ORDER_FIELD);
+    Party_MemberJoin(CHAR_ID_NINA_ADULT);
     Party_LoadPalettes();
 }
 
 /* func_801FDD38 */
 MATCH void Scene_JoinGarrWithAdultNina(void) {
     EMI_PartyLoadArchives(CHAR_ID_RYU_ADULT, CHAR_ID_NINA_ADULT, CHAR_ID_GARR, 0U);
-    Party_BuildBattlers(PARTY_ORDER_FIELD);
-    Party_JoinMember(CHAR_ID_GARR);
+    Party_BattlersBuild(PARTY_ORDER_FIELD);
+    Party_MemberJoin(CHAR_ID_GARR);
     Party_LoadPalettes();
 }
 
@@ -673,8 +673,8 @@ MATCH void Scene_JoinGarrWithAdultNina(void) {
 #include "overlays/scenario/shared/Scene_JoinAdultNina.h"
 
 MATCH void func_801FDE50(void) {
-    Party_BuildBattlers(PARTY_ORDER_FIELD);
-    Party_JoinMember(CHAR_ID_PECO);
+    Party_BattlersBuild(PARTY_ORDER_FIELD);
+    Party_MemberJoin(CHAR_ID_PECO);
     Party_LoadPalettes();
 }
 
@@ -685,8 +685,8 @@ MATCH void func_801FDE50(void) {
 /* func_801FDF10 */
 MATCH void Scene_JoinMomoWithPeco(void) {
     EMI_PartyLoadArchives(CHAR_ID_RYU_ADULT, CHAR_ID_PECO, CHAR_ID_MOMO, 0U);
-    Party_BuildBattlers(PARTY_ORDER_FIELD);
-    Party_JoinMember(CHAR_ID_MOMO);
+    Party_BattlersBuild(PARTY_ORDER_FIELD);
+    Party_MemberJoin(CHAR_ID_MOMO);
     Party_LoadPalettes();
 }
 
@@ -695,33 +695,33 @@ MATCH void Scene_JoinMomoWithPeco(void) {
 /* func_801FE014 */
 MATCH void Scene_JoinAdultNinaWithRei(void) {
     EMI_PartyLoadArchives(CHAR_ID_RYU_ADULT, CHAR_ID_REI, CHAR_ID_NINA_ADULT, 0U);
-    Party_BuildBattlers(PARTY_ORDER_FIELD);
-    Party_JoinMember(CHAR_ID_NINA_ADULT);
+    Party_BattlersBuild(PARTY_ORDER_FIELD);
+    Party_MemberJoin(CHAR_ID_NINA_ADULT);
     Party_LoadPalettes();
 }
 
 /* func_801FE058 */
 MATCH void Scene_JoinReiAdultNina(void) {
     EMI_PartyLoadArchives(CHAR_ID_RYU_ADULT, CHAR_ID_REI, CHAR_ID_NINA_ADULT, 0);
-    Party_BuildBattlers(PARTY_ORDER_FIELD);
-    Party_JoinMember(CHAR_ID_REI);
-    Party_JoinMember(CHAR_ID_NINA_ADULT);
+    Party_BattlersBuild(PARTY_ORDER_FIELD);
+    Party_MemberJoin(CHAR_ID_REI);
+    Party_MemberJoin(CHAR_ID_NINA_ADULT);
     Party_LoadPalettes();
 }
 
 /* func_801FE0A4 */
 MATCH void Scene_JoinReiWithAdultNina(void) {
     EMI_PartyLoadArchives(CHAR_ID_RYU_ADULT, CHAR_ID_REI, CHAR_ID_NINA_ADULT, 0U);
-    Party_BuildBattlers(PARTY_ORDER_FIELD);
-    Party_JoinMember(CHAR_ID_REI);
+    Party_BattlersBuild(PARTY_ORDER_FIELD);
+    Party_MemberJoin(CHAR_ID_REI);
     Party_LoadPalettes();
 }
 
 /* func_801FE0E8 */
 MATCH void Scene_JoinRyuAdult(void) {
     EMI_PartyLoadArchives(CHAR_ID_RYU_ADULT, CHAR_ID_REI, CHAR_ID_NINA_ADULT, 0U);
-    Party_BuildBattlers(PARTY_ORDER_FIELD);
-    Party_JoinMember(CHAR_ID_RYU_ADULT);
+    Party_BattlersBuild(PARTY_ORDER_FIELD);
+    Party_MemberJoin(CHAR_ID_RYU_ADULT);
     Party_LoadPalettes();
 }
 
@@ -729,8 +729,8 @@ MATCH void Scene_JoinRyuAdult(void) {
 
 /* func_801FE154 */
 MATCH void Scene_RemoveReiGarr(void) {
-    Party_RemoveMember(CHAR_ID_REI);
-    Party_RemoveMember(CHAR_ID_GARR);
+    Party_MemberRemove(CHAR_ID_REI);
+    Party_MemberRemove(CHAR_ID_GARR);
     Party_LoadPalettes();
 }
 
@@ -738,15 +738,15 @@ MATCH void Scene_RemoveReiGarr(void) {
 
 /* func_801FE1AC */
 MATCH void Scene_RemoveGarrAdultNina(void) {
-    Party_RemoveMember(CHAR_ID_GARR);
-    Party_RemoveMember(CHAR_ID_NINA_ADULT);
+    Party_MemberRemove(CHAR_ID_GARR);
+    Party_MemberRemove(CHAR_ID_NINA_ADULT);
     Party_LoadPalettes();
 }
 
 /* func_801FE1DC */
 MATCH void Scene_RemoveReiAdultNina(void) {
-    Party_RemoveMember(CHAR_ID_REI);
-    Party_RemoveMember(CHAR_ID_NINA_ADULT);
+    Party_MemberRemove(CHAR_ID_REI);
+    Party_MemberRemove(CHAR_ID_NINA_ADULT);
     Party_LoadPalettes();
 }
 
@@ -760,6 +760,6 @@ MATCH void Scene_RemoveReiAdultNina(void) {
 
 /* func_801FE35C */
 MATCH void Scene_RemoveRyuAdult(void) {
-    Party_RemoveMember(CHAR_ID_RYU_ADULT);
+    Party_MemberRemove(CHAR_ID_RYU_ADULT);
     Party_LoadPalettes();
 }

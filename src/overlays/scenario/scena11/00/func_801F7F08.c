@@ -48,7 +48,7 @@ MATCH void func_801F7F08(void) {
             TASK_SET(&g_Game.members[0]);
             g_GameState = &g_Game.members[0];
             func_801C308C(0);
-            Char_LoseHP(1, 6);
+            Char_HPLose(1, 6);
             UI_MessageRequest(MSG_SYSTEM_STUNG_BY_CATERPILLAR);
             g_GameStateIndex        = 2;
             g_ScenarioState.step_05 = 2;

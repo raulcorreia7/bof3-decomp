@@ -9,7 +9,7 @@ MATCH void Scene_StashPartyExceptRyuAdult(void) {
     }
     for (slot = 0; slot < 3; slot++) {
         if (ids[slot] != CHAR_ID_RYU_ADULT) {
-            Party_RemoveMember(ids[slot]);
+            Party_MemberRemove(ids[slot]);
         }
     }
     Party_LoadPalettes();

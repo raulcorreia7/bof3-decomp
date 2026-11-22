@@ -217,54 +217,54 @@ MATCH s32 func_801FD208(void) {
 /* func_801FD298 */
 MATCH void Scene_JoinMomoNinaPeco(void) {
     g_Characters[g_CharSlot[6]].party_flags |= PARTY_FLAG_JOINED;
-    Party_BuildBattlers(PARTY_ORDER_FIELD);
-    Party_JoinMember(CHAR_ID_MOMO);
-    Party_JoinMember(CHAR_ID_NINA_YOUNG);
-    Party_JoinMember(CHAR_ID_PECO);
+    Party_BattlersBuild(PARTY_ORDER_FIELD);
+    Party_MemberJoin(CHAR_ID_MOMO);
+    Party_MemberJoin(CHAR_ID_NINA_YOUNG);
+    Party_MemberJoin(CHAR_ID_PECO);
 }
 
 /* func_801FD30C */
 MATCH void Party_JoinNinaYoung(void) {
-    Party_JoinMember(CHAR_ID_NINA_YOUNG);
+    Party_MemberJoin(CHAR_ID_NINA_YOUNG);
 }
 
 /* func_801FD32C */
 MATCH void Party_JoinMomo(void) {
-    Party_JoinMember(CHAR_ID_MOMO);
+    Party_MemberJoin(CHAR_ID_MOMO);
 }
 
 /* func_801FD34C */
 MATCH void Party_JoinPeco(void) {
-    Party_JoinMember(CHAR_ID_PECO);
+    Party_MemberJoin(CHAR_ID_PECO);
 }
 
 /* func_801FD36C */
 MATCH void Party_JoinRyuYoung(void) {
-    Party_JoinMember(CHAR_ID_RYU_YOUNG);
+    Party_MemberJoin(CHAR_ID_RYU_YOUNG);
 }
 
 MATCH void func_801FD38C(void) {
     EMI_PartyLoadArchives(CHAR_ID_RYU_YOUNG, CHAR_ID_NINA_YOUNG, CHAR_ID_MOMO, 0U);
-    Party_BuildBattlers(PARTY_ORDER_FIELD);
-    Party_JoinMember(CHAR_ID_MOMO);
+    Party_BattlersBuild(PARTY_ORDER_FIELD);
+    Party_MemberJoin(CHAR_ID_MOMO);
 }
 
 /* func_801FD3C8 */
 MATCH void Scene_JoinNinaYoung(void) {
     EMI_PartyLoadArchives(CHAR_ID_RYU_YOUNG, CHAR_ID_NINA_YOUNG, CHAR_ID_MOMO, 0U);
-    Party_BuildBattlers(PARTY_ORDER_FIELD);
-    Party_JoinMember(CHAR_ID_NINA_YOUNG);
+    Party_BattlersBuild(PARTY_ORDER_FIELD);
+    Party_MemberJoin(CHAR_ID_NINA_YOUNG);
 }
 
 MATCH void func_801FD404(void) {
     EMI_PartyLoadArchives(CHAR_ID_RYU_YOUNG, CHAR_ID_NINA_YOUNG, CHAR_ID_PECO, 0U);
-    Party_BuildBattlers(PARTY_ORDER_FIELD);
-    Party_JoinMember(CHAR_ID_PECO);
+    Party_BattlersBuild(PARTY_ORDER_FIELD);
+    Party_MemberJoin(CHAR_ID_PECO);
 }
 
 /* func_801FD440 */
 MATCH void Party_JoinGarr(void) {
-    Party_JoinMember(CHAR_ID_GARR);
+    Party_MemberJoin(CHAR_ID_GARR);
 }
 
 #include "overlays/scenario/shared/Scene_JoinNina.h"
@@ -275,8 +275,8 @@ MATCH void Scene_JoinNina2(void) {
 
 /* func_801FD4D8 */
 MATCH void Scene_RemoveMomoNina(void) {
-    Party_RemoveMember(CHAR_ID_MOMO);
-    Party_RemoveMember(CHAR_ID_NINA_YOUNG);
+    Party_MemberRemove(CHAR_ID_MOMO);
+    Party_MemberRemove(CHAR_ID_NINA_YOUNG);
     Party_LoadPalettes();
 }
 
@@ -288,6 +288,6 @@ MATCH void Scene_RemoveMomoNina(void) {
 
 /* func_801FD580 */
 MATCH void Scene_RemoveRyuYoung(void) {
-    Party_RemoveMember(CHAR_ID_RYU_YOUNG);
+    Party_MemberRemove(CHAR_ID_RYU_YOUNG);
     Party_LoadPalettes();
 }

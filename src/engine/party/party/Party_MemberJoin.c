@@ -1,6 +1,6 @@
 #include "engine/game/00/game_00.h"
 
-MATCH s32 Party_JoinMember(s32 char_id) {
+MATCH s32 Party_MemberJoin(s32 char_id) {
     s32 id;
 
     func_801C1840();
@@ -11,10 +11,10 @@ MATCH s32 Party_JoinMember(s32 char_id) {
         g_PartyFieldOrder[g_PartySize]           = char_id;
         g_PartyBattleOrder[g_PartySize]          = char_id;
         g_Game.members[g_PartySize].header.flags = PARTY_MEMBER_FLAG_OCCUPIED;
-        Party_ClearBattlerState(g_PartySize);
+        Party_BattlersClearState(g_PartySize);
         TASK_SET(&g_Game.members[g_PartySize]);
         g_Task->active_flags = 1;
-        Party_LoadMemberSprite(id, g_Game.party_size);
+        Party_MemberLoadSprite(id, g_Game.party_size);
         /* FAKE: retail reads g_CharSlot as u8[]. */
         g_Game.members[g_Game.party_size].chr             = g_Characters[((u8*)g_CharSlot)[id]];
         g_Task->unk_05                                    = g_PartySize;

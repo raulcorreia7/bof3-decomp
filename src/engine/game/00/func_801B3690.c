@@ -7,7 +7,7 @@ MATCH void func_801B3690(void) {
     g_PersonalActions[hint & 0x7F]();
     if (g_Game.current->u.field.mode.unsigned_value == 0) {
         Script_Request(g_Task->direction);
-        Party_ClearBattlerState(CHAR_INDEX_RYU);
+        Party_BattlersClearState(CHAR_INDEX_RYU);
         g_Task->header.mode = 1;
     }
 }

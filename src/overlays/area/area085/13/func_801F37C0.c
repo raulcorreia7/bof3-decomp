@@ -6,7 +6,7 @@ MATCH void func_801F37C0(void) {
 
     if (SCENARIO_PROGRESS == 0xC06) {
         g_Task->header.flags &= ~ACTOR_FLAG_HIDDEN;
-        Party_LoadMemberSprite(CHAR_ID_GARR, 2);
+        Party_MemberLoadSprite(CHAR_ID_GARR, 2);
         Script_Select(1);
         return;
     }

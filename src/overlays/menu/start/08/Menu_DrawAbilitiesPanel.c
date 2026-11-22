@@ -27,9 +27,9 @@ MATCH void Menu_DrawAbilitiesPanel(MenuPanelTask* task) {
             if (n == task->flags) {
                 color = 2;
             }
-            level   = Char_GetAbilityElement(*text);
+            level   = Char_AbilityGetElement(*text);
             entry   = (u8*)&g_Abilities[*text];
-            ability = Char_GetAbilityCost(g_CharSlot[g_PartyFieldOrder[(s8)D_80148656]], *text, 0);
+            ability = Char_AbilityGetCost(g_CharSlot[g_PartyFieldOrder[(s8)D_80148656]], *text, 0);
             if (n == task->flags || n == task->unk_0C) {
                 if ((u8)color != 7) {
                     UI_ListDrawAbilityRow((s16)(task->pos.x + 7), (s16)(y + 0x1A), UI_TEXT_DIM, level, entry, ability, 1);

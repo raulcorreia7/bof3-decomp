@@ -76,7 +76,7 @@ NON_MATCHING void func_801D3A24(void) {
                     if (BIT_ARRAY_TEST(g_LearnedAbilities, skill)) {
                         continue;
                     }
-                    if (!(Char_AddAbility(skill, g_Game.members[g_MenuMasterCursor].character_index, 0, 0) & 0xFF)) {
+                    if (!(Char_AbilityAdd(skill, g_Game.members[g_MenuMasterCursor].character_index, 0, 0) & 0xFF)) {
                         continue;
                     }
                     func_801D39CC(g_Game.members[g_MenuMasterCursor].character_index);

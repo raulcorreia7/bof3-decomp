@@ -143,7 +143,7 @@ MATCH void func_801F8B84(void) {
             if (g_ScriptVars[0] != 6) {
                 break;
             }
-            Char_LoseHP(0xFFFF, 7);
+            Char_HPLose(0xFFFF, 7);
             Game_ClearScriptActive();
             g_ScriptVars[1]          = 0;
             g_ScriptVars[2]          = 0;

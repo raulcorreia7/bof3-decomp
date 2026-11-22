@@ -30,9 +30,9 @@ MATCH void Scene_JoinMomo3(void) {
 
 MATCH void func_801FD064(void) {
     EMI_PartyLoadArchives(CHAR_ID_RYU_ADULT, CHAR_ID_MOMO, CHAR_ID_GARR, 0);
-    Party_BuildBattlers(PARTY_ORDER_FIELD);
-    Party_JoinMember(CHAR_ID_GARR);
-    Party_JoinMember(CHAR_ID_MOMO);
+    Party_BattlersBuild(PARTY_ORDER_FIELD);
+    Party_MemberJoin(CHAR_ID_GARR);
+    Party_MemberJoin(CHAR_ID_MOMO);
     Party_LoadPalettes();
 }
 

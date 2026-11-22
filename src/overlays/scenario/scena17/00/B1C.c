@@ -31,7 +31,7 @@ MATCH void func_801F77B4(void) {
 
     if (g_GameAreaId == AREA_ID_END_GAME_SAVE) {
         Game_SetScriptActive();
-        Party_HideBattlers();
+        Party_BattlersHide();
         g_AreaCameraAngle.vx = -0x2E4;
         g_AreaCameraAngle.vz = 0x12C;
         Area_AdvanceScroll(0x300);

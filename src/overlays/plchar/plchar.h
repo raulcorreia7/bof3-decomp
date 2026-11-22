@@ -161,7 +161,7 @@ void PlChar_SpawnLinkedActor(s32 spawn_type, s32 spawn_x, s32 spawn_y, s32 code)
         } else if (roll >= 12) {                                                \
             CALLEE(2, x, y, cell & BYTE_MASK);                                  \
             func_801C308C(0);                                                   \
-            Char_LoseHP(1, g_Game.current->chr.character_id);                   \
+            Char_HPLose(1, g_Game.current->chr.character_id);                   \
             UI_MessageRequest(MSG_SYSTEM_STUNG_BY_CATERPILLAR);                 \
             g_GameStateIndex     = GAME_REQUEST_MESSAGE;                        \
             g_Task->param.unk_0B = 1;                                           \

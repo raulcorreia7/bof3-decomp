@@ -337,12 +337,12 @@ MATCH void func_801FCE6C(void) {
     D_80144F5E[0]         = 255;
     D_80144F5F            = 255;
     g_Game.party_size     = 0;
-    Party_JoinMember(CHAR_ID_RYU_YOUNG);
+    Party_MemberJoin(CHAR_ID_RYU_YOUNG);
 }
 
 /* func_801FCEDC */
 MATCH void Party_JoinNinaYoung(void) {
-    Party_JoinMember(CHAR_ID_NINA_YOUNG);
+    Party_MemberJoin(CHAR_ID_NINA_YOUNG);
 }
 
 #include "overlays/scenario/shared/Scene_RemoveNina.h"

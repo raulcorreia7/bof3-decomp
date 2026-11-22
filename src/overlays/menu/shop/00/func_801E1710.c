@@ -19,7 +19,7 @@ MATCH void func_801E1710(MenuPanelTask* task) {
     list = &CHARACTER_BLOCK->records[task->unk_0A][DECOMP_OFFSETOF(Character, abilities.skill)];
     do {
         if (*list != 0) {
-            level   = Char_GetAbilityElement(*list);
+            level   = Char_AbilityGetElement(*list);
             shade   = (n == task->unk_0C) * 2;
             ability = (Ability*)&g_Abilities[*list];
             if (n == task->unk_0B || n == task->unk_0C) {

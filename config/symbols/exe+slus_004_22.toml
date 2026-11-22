@@ -93,7 +93,7 @@ g_PartyFormation = { addr = 0x80144F58, source = "Party formation." }
 g_PartyMenuFlags = { addr = 0x80144F59, size = 0x1, source = "Menu flags of the party: the master menu (emi/etc/sisyou/00 func_801D3A24) sets bit 3, 4 or 5 (1 << the character index of Teepo, Rei, Momo) with the first reward of the special master; the shop tests the same bits to enable the item classes 11, 13 and 14." }
 g_PartyFieldOrder = { addr = 0x80144F5A, size = 0x3, source = "Party order in the field." }
 g_PartyBattleOrder = { addr = 0x80144F5D, size = 0x3, source = "Party order in battle." }
-g_LearnedAbilities = { addr = 0x80144F80, size = 0x20, source = "One bit per ability id, set once the party has learned it: the sisyou master lesson tests and sets it before Char_AddAbility, and battle/15 sets it when a party member learns an enemy skill." }
+g_LearnedAbilities = { addr = 0x80144F80, size = 0x20, source = "One bit per ability id, set once the party has learned it: the sisyou master lesson tests and sets it before Char_AbilityAdd, and battle/15 sets it when a party member learns an enemy skill." }
 g_IdentifiedEnemies = { addr = 0x80144FA0, size = 0x20, source = "One bit per enemy type byte (256 bits): Identify sets the bit of the targeted enemy and the identified test reads it." }
 g_PlayClock = { addr = 0x80144FC0, size = 0x4, source = "Play time." }
 g_FishingBestCatch = { addr = 0x80144FE4, size = 0x20, source = "Best catch of each fish." }
@@ -579,8 +579,8 @@ Camera_StepZ = { addr = 0x8015BE10, type = "func", source = "Steps the camera z 
 Camera_StepAngle = { addr = 0x8015BEA0, type = "func", source = "Turns the camera angle over a number of frames." }
 Game_ClearScriptActive = { addr = 0x8015C058, type = "func", source = "Marks the script as inactive." }
 Game_SetScriptActive = { addr = 0x8015C088, type = "func", source = "Marks the script as active." }
-Party_ShowBattlers = { addr = 0x8015C0B8, type = "func", source = "Shows the party battlers." }
-Party_HideBattlers = { addr = 0x8015C100, type = "func", source = "Hides the party battlers." }
+Party_BattlersShow = { addr = 0x8015C0B8, type = "func", source = "Shows the party battlers." }
+Party_BattlersHide = { addr = 0x8015C100, type = "func", source = "Hides the party battlers." }
 Actor_GetOwner = { addr = 0x8015C148, type = "func", source = "Returns the type of the current task." }
 Actor_Run = { addr = 0x8015C264, type = "func", source = "Runs the handler of the actor." }
 Actor_MovementInit = { addr = 0x8015C2D4, type = "func", source = "Seeds the hold counter and velocity dividers from the handler entry - or publishes the direction into the scroll globals." }
@@ -688,9 +688,9 @@ Char_ApplyMaster = { addr = 0x801648A0, type = "func", source = "Applies the cha
 Char_RebuildStats = { addr = 0x80164A44, type = "func", source = "Rebuilds the stats of a character from base, fatigue and equipment." }
 Char_PreviewEquip = { addr = 0x80164D2C, type = "func", source = "Copies a party record, puts item_id in its equipment slot, rebuilds the stats and returns the four stat values with up/down flags; the equip stat windows of the start and shop menus call it." }
 Item_Add = { addr = 0x801650B4, type = "func", source = "Adds items to the inventory." }
-Char_AddAbility = { addr = 0x801651DC, type = "func", source = "Teaches an ability to a character." }
-Char_RestoreHP = { addr = 0x80165280, type = "func", source = "Restores HP of a character." }
-Char_RestoreAP = { addr = 0x8016534C, type = "func", source = "Restores AP of a character." }
+Char_AbilityAdd = { addr = 0x801651DC, type = "func", source = "Teaches an ability to a character." }
+Char_HPRestore = { addr = 0x80165280, type = "func", source = "Restores HP of a character." }
+Char_APRestore = { addr = 0x8016534C, type = "func", source = "Restores AP of a character." }
 Char_RestoreWillpower = { addr = 0x801653DC, type = "func", source = "Adds the amount to current_willpower of a character record, clamps at willpower, and amount 0 restores to willpower." }
 Char_AddCappedStat = { addr = 0x8016546C, type = "func", source = "Adds to a stat, capped at 999." }
 Char_AddWillpower = { addr = 0x801654B0, type = "func", source = "Adds to the willpower of a character, capped at 99." }
@@ -708,7 +708,7 @@ Item_GetEquipability = { addr = 0x80165EC0, type = "func", source = "Returns whi
 Item_GetFlags = { addr = 0x80165F68, type = "func", source = "Returns the flags of an item." }
 Item_GetPower = { addr = 0x80166034, type = "func", source = "Returns the power of a weapon or armor." }
 UI_TextClearFormatBuffer = { addr = 0x801660B0, type = "func", source = "Clears the UI format buffer." }
-Char_GetAbilityElement = { addr = 0x801660DC, type = "func", source = "Returns the element of an ability." }
+Char_AbilityGetElement = { addr = 0x801660DC, type = "func", source = "Returns the element of an ability." }
 Item_VitalHas = { addr = 0x80166140, type = "func", source = "Tells whether a vital item is held." }
 Item_VitalAdd = { addr = 0x80166180, type = "func", source = "Adds a vital item." }
 Item_VitalRemove = { addr = 0x801661C4, type = "func", source = "Removes a vital item." }
@@ -720,16 +720,16 @@ Item_Remove = { addr = 0x801665A0, type = "func", source = "Removes items from t
 Party_SpendZenny = { addr = 0x8016663C, type = "func", source = "Subtracts the amount from PARTY_ZENNY when the balance covers it." }
 Party_AddZenny = { addr = 0x8016666C, type = "func", source = "Adds zenny to the party, capped at 9999999." }
 Item_GetDescription = { addr = 0x801666C8, type = "func", source = "Returns the resource id of a choice entry." }
-Party_AddMember = { addr = 0x801667A4, type = "func", source = "Appends a character to the field and battle order arrays - replacing a free field slot after three." }
+Party_MemberAdd = { addr = 0x801667A4, type = "func", source = "Appends a character to the field and battle order arrays - replacing a free field slot after three." }
 Item_CanEquip = { addr = 0x80166904, type = "func", source = "Returns whether the character with equip bit bit can equip the item in the slot role: the item icon selects the equip slot, its equipability byte must have the bit." }
-Char_GetAbilityCost = { addr = 0x80166A10, type = "func", source = "Returns the AP cost of an ability." }
+Char_AbilityGetCost = { addr = 0x80166A10, type = "func", source = "Returns the AP cost of an ability." }
 Party_GetAbilities = { addr = 0x80166AE4, type = "func", source = "Resolves the party record a slot type points at and returns its ability panel." }
 Char_GetAbilities = { addr = 0x80166B94, type = "func", source = "Resolves the character record and returns the panel its ability-type record selects." }
 GFX_PaletteLoad = { addr = 0x80166C48, type = "func", source = "Stages a palette." }
 Area_GetCellCode = { addr = 0x80166CB0, type = "func", source = "Returns the code of an area cell." }
-Party_ClearBattlerState = { addr = 0x80166CEC, type = "func", source = "Clears the state of a party battler." }
-Party_ResetBattlers = { addr = 0x80166D34, type = "func", source = "Resets the party battlers." }
-Party_ClearActiveBattlers = { addr = 0x80166D8C, type = "func", source = "Clears the state of the active party battlers." }
+Party_BattlersClearState = { addr = 0x80166CEC, type = "func", source = "Clears the state of a party battler." }
+Party_BattlersReset = { addr = 0x80166D34, type = "func", source = "Resets the party battlers." }
+Party_BattlersClearActive = { addr = 0x80166D8C, type = "func", source = "Clears the state of the active party battlers." }
 SYS_ShowFileNotFound = { addr = 0x80166DF4, type = "func", source = "Shows the file not found screen." }
 EMI_PartyLoadArchives = { addr = 0x80166E88, type = "func", source = "Arms the overlay loader for a family key and waits for the stream to become ready." }
 EMI_PartyLoadCode = { addr = 0x80166F3C, type = "func", source = "Loads the party archive of the PLP family." }
@@ -741,10 +741,10 @@ Area_InitScene = { addr = 0x801673AC, type = "func", source = "Sets up the area 
 Area_StepSceneTimer = { addr = 0x80167800, type = "func", source = "Ticks the scene timer and runs Area_ResetScene on expiry." }
 Area_SyncScrollHeight = { addr = 0x80167848, type = "func", source = "Syncs the scroll height with the actor." }
 Area_ResetScene = { addr = 0x8016788C, type = "func", source = "Resets the mode work record: clears the camera step counters and the actor velocity, sets byte 0x11C of the mode work area to 3, then runs func_80167428 when a directional input is held or sets mode 1." }
-Char_AddHP = { addr = 0x80167FDC, type = "func", source = "Heals HP of a character." }
-Char_AddAP = { addr = 0x801680CC, type = "func", source = "Adds to current_ap clamped at max_ap." }
-Char_LoseHP = { addr = 0x8016813C, type = "func", source = "Damages HP of a character." }
-Char_SpendAP = { addr = 0x80168248, type = "func", source = "Clamps the amount to one below current_ap and debits it." }
+Char_HPAdd = { addr = 0x80167FDC, type = "func", source = "Heals HP of a character." }
+Char_APAdd = { addr = 0x801680CC, type = "func", source = "Adds to current_ap clamped at max_ap." }
+Char_HPLose = { addr = 0x8016813C, type = "func", source = "Damages HP of a character." }
+Char_APSpend = { addr = 0x80168248, type = "func", source = "Clamps the amount to one below current_ap and debits it." }
 SpuGetKeyStatus = { addr = 0x801682E0, type = "func", source = "LIBSPU.LIB 148 bytes" }
 _spu_init = { addr = 0x80168374, type = "func", source = "LIBSPU.LIB 2988 bytes" }
 _spu_writeByIO = { addr = 0x80168608, type = "func", source = "LIBSPU.LIB 2988 bytes" }

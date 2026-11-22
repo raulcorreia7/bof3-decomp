@@ -537,7 +537,7 @@ MATCH void func_801F817C(void) {
                         Area_StartScrollRoute(1);
                     case 2:
                     default:
-                        Party_HideBattlers();
+                        Party_BattlersHide();
                         break;
                 }
             }
@@ -552,7 +552,7 @@ MATCH void func_801F817C(void) {
         }
         if (SYS_TestFlag(g_SceneFlags, 3) != 0) {
             if (SYS_TestFlag(g_SceneFlags, 4) == 0) {
-                Party_HideBattlers();
+                Party_BattlersHide();
                 g_AreaDrawFlags = 0x1F;
             }
         }

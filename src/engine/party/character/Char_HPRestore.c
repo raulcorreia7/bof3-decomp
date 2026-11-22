@@ -1,6 +1,6 @@
 #include "engine/slus/slus.h"
 
-MATCH bool Char_RestoreHP(s32 character_index, s32 amount, s32 use_battle_copy) {
+MATCH bool Char_HPRestore(s32 character_index, s32 amount, s32 use_battle_copy) {
     Character* rec;
     s32        cur;
     s32        limit;

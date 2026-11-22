@@ -2,7 +2,7 @@
 
 /* clears the four flag bytes of the 0x140-stride record selected by character_index.
  */
-MATCH void Party_ClearBattlerState(s32 character_index) {
+MATCH void Party_BattlersClearState(s32 character_index) {
     u32 index;
 
     index             = (character_index & BYTE_MASK) * BATTLE_PARTY_STRIDE;

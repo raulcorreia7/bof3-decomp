@@ -13,7 +13,7 @@
 #include <stdio.h>
 
 /* FAKE: the callers read the cost as s32, the width the real prototype (u8) lacks. */
-#define Char_GetAbilityCost           ((s32 (*)(u8, u8, u8))Char_GetAbilityCost)
+#define Char_AbilityGetCost           ((s32 (*)(u8, u8, u8))Char_AbilityGetCost)
 
 /* Antique IDs: GAME.EMI item table, @source: wiki:data/records#gameemi-fixed-tables. */
 #define SHOP_ANTIQUE_FIRST            ITEM_CLAY_VASE

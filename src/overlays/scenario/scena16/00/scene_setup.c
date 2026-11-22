@@ -89,7 +89,7 @@ MATCH void func_801F6E30(void) {
     g_AreaCameraAngle.vz = 0;
     g_AreaCameraAngle.vy = 0;
     SCENA16_D_8014932C   = 0x100;
-    Party_HideBattlers();
+    Party_BattlersHide();
 
     if (SYS_TestFlag(g_SceneFlags, 1) == 0) {
         state           = g_SceneFlags;
@@ -112,7 +112,7 @@ MATCH void func_801F6EB0(void) {
 
     if (g_GameCellType == 2u) {
         g_AreaDrawFlags = AREA_DRAW_ALL_FLAGS;
-        Party_HideBattlers();
+        Party_BattlersHide();
     }
 }
 
@@ -140,7 +140,7 @@ MATCH void func_801F6F30(void) {
             g_SpawnedActors[g_ScratchPad.cells.bytes[0]].layer          = 0x40u;
         }
 
-        Party_HideBattlers();
+        Party_BattlersHide();
         SCENA16_D_80145EC4 = 0x330000u;
         SCENA16_D_80145EC8 = 0x400000u;
         SYS_SetFlag(g_SceneFlags, 2);
@@ -242,7 +242,7 @@ MATCH void func_801F7230(void) {
             }
             g_AreaDrawFlags = AREA_DRAW_ALL_FLAGS;
             Game_SetScriptActive();
-            Party_HideBattlers();
+            Party_BattlersHide();
             UI_ModeSet(UI_MODE_FADE_IN);
             g_ScriptVars[3]          = 1u;
             g_ScenarioState.timer_06 = 0u;

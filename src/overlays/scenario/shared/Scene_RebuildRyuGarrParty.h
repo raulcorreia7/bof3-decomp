@@ -16,8 +16,8 @@ MATCH void Scene_RebuildRyuGarrParty(void) {
     }
     EMI_PartyLoadArchives(CHAR_ID_RYU_ADULT, CHAR_ID_GARR, character & BYTE_MASK, 0);
     g_Game.party_size = 0;
-    Party_JoinMember(CHAR_ID_RYU_ADULT);
-    Party_JoinMember(CHAR_ID_GARR);
-    Party_JoinMember(character & BYTE_MASK);
+    Party_MemberJoin(CHAR_ID_RYU_ADULT);
+    Party_MemberJoin(CHAR_ID_GARR);
+    Party_MemberJoin(character & BYTE_MASK);
     Party_LoadPalettes();
 }
