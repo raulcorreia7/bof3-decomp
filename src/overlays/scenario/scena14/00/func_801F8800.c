@@ -22,6 +22,6 @@ MATCH void func_801F8850(void) {
     Game_RequestAreaChange(AREA_ID_DESERT_MANMO, TO_COORD(41) + COORD_HALF, TO_COORD(22) + COORD_HALF, AREA_ENTRY_MAP_LOADING);
     Game_SetScriptActive();
     g_ScenarioState.state_04 = 2;
-    g_ScenarioState.step_05  = 0;
+    g_ScenarioState.step     = 0;
     D_80146871 &= 0xFE;
 }

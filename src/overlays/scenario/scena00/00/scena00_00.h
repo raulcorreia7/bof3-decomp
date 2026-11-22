@@ -38,7 +38,7 @@ typedef struct SceneSample {
     u8  unk_20[8];
 } SceneSample;
 
-ASSERT_SIZE(SceneSample, 0x28);
+ASSERT_SIZE(SceneSample, 0x28); /* the same 0x28 row as area108's SceneSampleTrack, whose weights are u16 */
 
 /* Field-space endpoints passed by value to func_801F78EC. */
 typedef struct SceneLinePoint {
@@ -157,12 +157,12 @@ ASSERT_SIZE(SceneEffectSlot, 0x30);
 
 /* The per-slot sample effect: func_801FC01C seeds it from the sample table at
  * D_80147BD8 and func_801FC3A0 steps it every frame. `accum` is the 16.16 sample,
- * `delta` its per-frame step and `life_step` the amount taken off the cell's
+ * `delta` its per-frame step and `life_delta` the amount taken off the cell's
  * lifetime. */
 typedef struct SceneSampleEffect {
     SceneEffectSlot delta[SCENE_EFFECT_SLOT_COUNT];
     SceneEffectSlot accum[SCENE_EFFECT_SLOT_COUNT];
-    SceneEffectSlot life_step[SCENE_EFFECT_SLOT_COUNT];
+    SceneEffectSlot life_delta[SCENE_EFFECT_SLOT_COUNT];
 } SceneSampleEffect;
 
 ASSERT_SIZE(SceneSampleEffect, 0x10E0);

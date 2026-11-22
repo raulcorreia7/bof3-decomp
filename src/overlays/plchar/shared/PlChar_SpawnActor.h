@@ -1,5 +1,5 @@
 /* Spawns one field record for the character: claims a free g_SpawnedActors slot, writes the type byte at +0x05, the caller's type at +0x01, the 16.16 position words at +0x34/+0x38, the ground height at +0x3E and clears the link byte at +0x0B. */
-MATCH void PlChar_SpawnActor(s32 spawn_type, s32 spawn_x, s32 spawn_y) {
+MATCH void PlChar_SpawnActor(s32 spawn_type, s32 vx, s32 spawn_y) {
     /* FAKE: retail keeps the type in $s1. */
     s32 y;
     FAKE_REG(s32, type, "s1");
@@ -8,7 +8,7 @@ MATCH void PlChar_SpawnActor(s32 spawn_type, s32 spawn_x, s32 spawn_y) {
     s32 x_word;
     s32 y_word;
 
-    x    = spawn_x;
+    x    = vx;
     y    = spawn_y;
     type = spawn_type;
     slot = Actor_FindFreeSpawned();

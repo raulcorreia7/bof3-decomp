@@ -172,8 +172,153 @@ MATCH void func_801EF3A8(void) {
     }
 }
 
+/* Lays the dragon breath on the caster's screen point: two spine points step 12 units down the
+ * heading unk_14, and every step rings them with four semi-transparent quads - a narrow lip and a
+ * wider skirt at heading + 0x400, and the same pair at heading - 0x400 - shaded by unk_09 * 15,
+ * its quarter on the trailing edges and white on the wide face. */
 #ifdef NON_MATCHING
 NON_MATCHING void BMagic_DrawDragonBreath(void) {
+    POLY_G4* prim;
+    s32      tpage;
+    s16      i;
+    s16      jitter;
+    s16      prev_jitter;
+
+    tpage = getTPage(TPAGE_DEPTH_4BIT, TPAGE_ABR_ADD, 320, 256);
+    GFX_ADD_DITHERED_DRAW_MODE(BMAGIC_LAYER_OVER_BATTLERS, tpage);
+    jitter                       = 0;
+    g_ScratchPad.cells.halves[4] = TASK(PartyMember)->screen_x.value;
+    g_ScratchPad.cells.halves[5] = TASK(PartyMember)->screen_y.value;
+    for (i = 1; i < TASK(PartyMember)->timer + 1; i++) {
+        /* The old spine point becomes the near end of this step's ribbon. */
+        g_ScratchPad.cells.halves[6] = g_ScratchPad.cells.halves[4];
+        g_ScratchPad.cells.halves[7] = g_ScratchPad.cells.halves[5];
+        g_ScratchPad.cells.halves[4] += FIXED_MUL(rsin(TASK(PartyMember)->unk_14), 12);
+        g_ScratchPad.cells.halves[5] += FIXED_MUL(rcos(TASK(PartyMember)->unk_14), 12);
+        /* The ribbon keeps its last thickness once the step index reaches four. */
+        g_ScratchPad.cells.halves[0] = g_ScratchPad.cells.halves[1] = TASK(PartyMember)->param.unk_0B * 4;
+        if (i - 1 < 4) {
+            g_ScratchPad.cells.halves[0] = TASK(PartyMember)->param.unk_0B * (i - 1);
+        }
+        if (i < 4) {
+            g_ScratchPad.cells.halves[1] = TASK(PartyMember)->param.unk_0B * i;
+        }
+        g_ScratchPad.cells.halves[3] = TASK(PartyMember)->unk_09 * 15;
+        prev_jitter                  = jitter;
+        jitter                       = rand() & 3;
+        prim                         = (POLY_G4*)g_GfxPrimCursor;
+        SetPolyG4(prim);
+        SetSemiTrans(prim, 1);
+        g_ScratchPad.cells.halves[0] += prev_jitter;
+        g_ScratchPad.cells.halves[1] += jitter;
+        /* Lit lip: the near side swings off both spine points at heading + 0x400. */
+        g_ScratchPad.cells.halves[2] = (TASK(PartyMember)->unk_14 + 0x400) & ANGLE_MASK;
+        prim->x1                     = g_ScratchPad.cells.halves[6] + FIXED_MUL(rsin(g_ScratchPad.cells.halves[2]), g_ScratchPad.cells.halves[0]);
+        prim->y1                     = g_ScratchPad.cells.halves[7] + FIXED_MUL(rcos(g_ScratchPad.cells.halves[2]), g_ScratchPad.cells.halves[0]);
+        prim->x3                     = g_ScratchPad.cells.halves[4] + FIXED_MUL(rsin(g_ScratchPad.cells.halves[2]), g_ScratchPad.cells.halves[1]);
+        prim->y3                     = g_ScratchPad.cells.halves[5] + FIXED_MUL(rcos(g_ScratchPad.cells.halves[2]), g_ScratchPad.cells.halves[1]);
+        prim->x0                     = g_ScratchPad.cells.halves[6];
+        prim->y0                     = g_ScratchPad.cells.halves[7];
+        prim->x2                     = g_ScratchPad.cells.halves[4];
+        prim->y2                     = g_ScratchPad.cells.halves[5];
+        setRGB0(prim, g_ScratchPad.cells.halves[3], g_ScratchPad.cells.halves[3], g_ScratchPad.cells.halves[3]);
+        setRGB2(prim, g_ScratchPad.cells.halves[3], g_ScratchPad.cells.halves[3], g_ScratchPad.cells.halves[3]);
+        setRGB1(prim, g_ScratchPad.cells.halves[3], g_ScratchPad.cells.halves[3] / 4, g_ScratchPad.cells.halves[3] / 4);
+        setRGB3(prim, g_ScratchPad.cells.halves[3], g_ScratchPad.cells.halves[3] / 4, g_ScratchPad.cells.halves[3] / 4);
+        GFX_AddPrim(BMAGIC_LAYER_OVER_BATTLERS, sizeof(POLY_G4));
+        /* Far lip: the same pair of widths swung the other way, heading - 0x400. */
+        prim = (POLY_G4*)g_GfxPrimCursor;
+        SetPolyG4(prim);
+        SetSemiTrans(prim, 1);
+        g_ScratchPad.cells.halves[2] = (TASK(PartyMember)->unk_14 - 0x400) & ANGLE_MASK;
+        prim->x0                     = g_ScratchPad.cells.halves[6] + FIXED_MUL(rsin(g_ScratchPad.cells.halves[2]), g_ScratchPad.cells.halves[0]);
+        prim->y0                     = g_ScratchPad.cells.halves[7] + FIXED_MUL(rcos(g_ScratchPad.cells.halves[2]), g_ScratchPad.cells.halves[0]);
+        prim->x2                     = g_ScratchPad.cells.halves[4] + FIXED_MUL(rsin(g_ScratchPad.cells.halves[2]), g_ScratchPad.cells.halves[1]);
+        prim->y2                     = g_ScratchPad.cells.halves[5] + FIXED_MUL(rcos(g_ScratchPad.cells.halves[2]), g_ScratchPad.cells.halves[1]);
+        prim->x1                     = g_ScratchPad.cells.halves[6];
+        prim->y1                     = g_ScratchPad.cells.halves[7];
+        prim->x3                     = g_ScratchPad.cells.halves[4];
+        prim->y3                     = g_ScratchPad.cells.halves[5];
+        setRGB1(prim, g_ScratchPad.cells.halves[3], g_ScratchPad.cells.halves[3], g_ScratchPad.cells.halves[3]);
+        setRGB3(prim, g_ScratchPad.cells.halves[3], g_ScratchPad.cells.halves[3], g_ScratchPad.cells.halves[3]);
+        setRGB0(prim, g_ScratchPad.cells.halves[3], g_ScratchPad.cells.halves[3] / 4, g_ScratchPad.cells.halves[3] / 4);
+        setRGB2(prim, g_ScratchPad.cells.halves[3], g_ScratchPad.cells.halves[3] / 4, g_ScratchPad.cells.halves[3] / 4);
+        GFX_AddPrim(BMAGIC_LAYER_OVER_BATTLERS, sizeof(POLY_G4));
+        /* Skirt: a ring four units thicker than the rib, white on its wide face. */
+        prim = (POLY_G4*)g_GfxPrimCursor;
+        SetPolyG4(prim);
+        SetSemiTrans(prim, 1);
+        g_ScratchPad.cells.halves[2] = (TASK(PartyMember)->unk_14 + 0x400) & ANGLE_MASK;
+        g_ScratchPad.cells.halves[0] = g_ScratchPad.cells.halves[1] = (TASK(PartyMember)->param.unk_0B + 4) * 4;
+        if (i - 1 < 4) {
+            g_ScratchPad.cells.halves[0] = (TASK(PartyMember)->param.unk_0B + 4) * (i - 1);
+        }
+        if (i < 4) {
+            g_ScratchPad.cells.halves[1] = (TASK(PartyMember)->param.unk_0B + 4) * i;
+        }
+        g_ScratchPad.cells.halves[0] += prev_jitter;
+        g_ScratchPad.cells.halves[1] += jitter;
+        prim->x1                     = g_ScratchPad.cells.halves[6] + FIXED_MUL(rsin(g_ScratchPad.cells.halves[2]), g_ScratchPad.cells.halves[0]);
+        prim->y1                     = g_ScratchPad.cells.halves[7] + FIXED_MUL(rcos(g_ScratchPad.cells.halves[2]), g_ScratchPad.cells.halves[0]);
+        prim->x3                     = g_ScratchPad.cells.halves[4] + FIXED_MUL(rsin(g_ScratchPad.cells.halves[2]), g_ScratchPad.cells.halves[1]);
+        prim->y3                     = g_ScratchPad.cells.halves[5] + FIXED_MUL(rcos(g_ScratchPad.cells.halves[2]), g_ScratchPad.cells.halves[1]);
+        g_ScratchPad.cells.halves[0] = g_ScratchPad.cells.halves[1] = TASK(PartyMember)->param.unk_0B * 4;
+        if (i - 1 < 4) {
+            g_ScratchPad.cells.halves[0] = TASK(PartyMember)->param.unk_0B * (i - 1);
+        }
+        if (i < 4) {
+            g_ScratchPad.cells.halves[1] = TASK(PartyMember)->param.unk_0B * i;
+        }
+        g_ScratchPad.cells.halves[0] += prev_jitter;
+        g_ScratchPad.cells.halves[1] += jitter;
+        prim->x0 = g_ScratchPad.cells.halves[6] + FIXED_MUL(rsin(g_ScratchPad.cells.halves[2]), g_ScratchPad.cells.halves[0]);
+        prim->y0 = g_ScratchPad.cells.halves[7] + FIXED_MUL(rcos(g_ScratchPad.cells.halves[2]), g_ScratchPad.cells.halves[0]);
+        prim->x2 = g_ScratchPad.cells.halves[4] + FIXED_MUL(rsin(g_ScratchPad.cells.halves[2]), g_ScratchPad.cells.halves[1]);
+        prim->y2 = g_ScratchPad.cells.halves[5] + FIXED_MUL(rcos(g_ScratchPad.cells.halves[2]), g_ScratchPad.cells.halves[1]);
+        setRGB0(prim, g_ScratchPad.cells.halves[3], g_ScratchPad.cells.halves[3] / 4, g_ScratchPad.cells.halves[3] / 4);
+        setRGB2(prim, g_ScratchPad.cells.halves[3], g_ScratchPad.cells.halves[3] / 4, g_ScratchPad.cells.halves[3] / 4);
+        setRGB1(prim, 1, 1, 1);
+        setRGB3(prim, 1, 1, 1);
+        GFX_AddPrim(BMAGIC_LAYER_OVER_BATTLERS, sizeof(POLY_G4));
+        /* Far skirt: the wide ring on the far side, heading - 0x400, mirrored across the rib. */
+        prim = (POLY_G4*)g_GfxPrimCursor;
+        SetPolyG4(prim);
+        SetSemiTrans(prim, 1);
+        g_ScratchPad.cells.halves[2] = (TASK(PartyMember)->unk_14 - 0x400) & ANGLE_MASK;
+        g_ScratchPad.cells.halves[0] = g_ScratchPad.cells.halves[1] = (TASK(PartyMember)->param.unk_0B + 4) * 4;
+        if (i - 1 < 4) {
+            g_ScratchPad.cells.halves[0] = (TASK(PartyMember)->param.unk_0B + 4) * (i - 1);
+        }
+        if (i < 4) {
+            g_ScratchPad.cells.halves[1] = (TASK(PartyMember)->param.unk_0B + 4) * i;
+        }
+        g_ScratchPad.cells.halves[0] += prev_jitter;
+        g_ScratchPad.cells.halves[1] += jitter;
+        prim->x0                     = g_ScratchPad.cells.halves[6] + FIXED_MUL(rsin(g_ScratchPad.cells.halves[2]), g_ScratchPad.cells.halves[0]);
+        prim->y0                     = g_ScratchPad.cells.halves[7] + FIXED_MUL(rcos(g_ScratchPad.cells.halves[2]), g_ScratchPad.cells.halves[0]);
+        prim->x2                     = g_ScratchPad.cells.halves[4] + FIXED_MUL(rsin(g_ScratchPad.cells.halves[2]), g_ScratchPad.cells.halves[1]);
+        prim->y2                     = g_ScratchPad.cells.halves[5] + FIXED_MUL(rcos(g_ScratchPad.cells.halves[2]), g_ScratchPad.cells.halves[1]);
+        g_ScratchPad.cells.halves[0] = g_ScratchPad.cells.halves[1] = TASK(PartyMember)->param.unk_0B * 4;
+        if (i - 1 < 4) {
+            g_ScratchPad.cells.halves[0] = TASK(PartyMember)->param.unk_0B * (i - 1);
+        }
+        if (i < 4) {
+            g_ScratchPad.cells.halves[1] = TASK(PartyMember)->param.unk_0B * i;
+        }
+        g_ScratchPad.cells.halves[0] += prev_jitter;
+        g_ScratchPad.cells.halves[1] += jitter;
+        prim->x1 = g_ScratchPad.cells.halves[6] + FIXED_MUL(rsin(g_ScratchPad.cells.halves[2]), g_ScratchPad.cells.halves[0]);
+        prim->y1 = g_ScratchPad.cells.halves[7] + FIXED_MUL(rcos(g_ScratchPad.cells.halves[2]), g_ScratchPad.cells.halves[0]);
+        prim->x3 = g_ScratchPad.cells.halves[4] + FIXED_MUL(rsin(g_ScratchPad.cells.halves[2]), g_ScratchPad.cells.halves[1]);
+        prim->y3 = g_ScratchPad.cells.halves[5] + FIXED_MUL(rcos(g_ScratchPad.cells.halves[2]), g_ScratchPad.cells.halves[1]);
+        setRGB1(prim, g_ScratchPad.cells.halves[3], g_ScratchPad.cells.halves[3] / 4, g_ScratchPad.cells.halves[3] / 4);
+        setRGB3(prim, g_ScratchPad.cells.halves[3], g_ScratchPad.cells.halves[3] / 4, g_ScratchPad.cells.halves[3] / 4);
+        setRGB0(prim, 1, 1, 1);
+        setRGB2(prim, 1, 1, 1);
+        GFX_AddPrim(BMAGIC_LAYER_OVER_BATTLERS, sizeof(POLY_G4));
+    }
+    tpage = getTPage(TPAGE_DEPTH_4BIT, TPAGE_ABR_HALF, 320, 256);
+    GFX_ADD_DITHERED_DRAW_MODE(BMAGIC_LAYER_OVER_BATTLERS, tpage);
 }
 #else
 INCLUDE_ASM(BMagic_DrawDragonBreath);

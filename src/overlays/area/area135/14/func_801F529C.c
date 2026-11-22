@@ -75,8 +75,8 @@ MATCH void func_801F529C(void) {
         case 20:
             if (g_GameStateIndex != GAME_REQUEST_MESSAGE) {
                 func_801F6168(g_RouteSpeedScale[3] << 3);
-                g_AreaCameraHeightStep = 0;
-                g_SceneEventState.step = 21;
+                g_AreaCameraHeightDelta = 0;
+                g_SceneEventState.step  = 21;
             }
             break;
         case 21:
@@ -84,7 +84,7 @@ MATCH void func_801F529C(void) {
                 func_801F61A8(139);
                 g_SpawnedActors[g_SceneActorSlot].header.mode = 2;
                 g_SceneEventState.step                        = 22;
-                g_AreaCameraStep                              = g_RouteSpeedScale[3] << 3;
+                g_AreaCameraSpeed                             = g_RouteSpeedScale[3] << 3;
             }
             break;
         case 22:
@@ -172,7 +172,7 @@ MATCH void func_801F529C(void) {
             if (g_ScriptVars[3] == 21) {
                 g_AreaScrollTargetX                           = g_Game.members[0].pos.x.fixed;
                 g_AreaScrollTargetY                           = g_Game.members[0].pos.y.fixed;
-                g_AreaCameraStep                              = g_RouteSpeedScale[3] << 3;
+                g_AreaCameraSpeed                             = g_RouteSpeedScale[3] << 3;
                 g_SpawnedActors[g_SceneActorSlot].header.mode = 5;
                 g_SceneEventState.step                        = 31;
             }

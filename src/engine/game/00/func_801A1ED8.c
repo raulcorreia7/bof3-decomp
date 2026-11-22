@@ -1,59 +1,65 @@
 #include "game_00.h"
 
+#define AREA_CELL_BLOCKED(x, y) ((s32 (*)(u16, u16))Area_CellIsBlocked)((u16)(x), (u16)(y))
+
+/* Accumulates the blocked-cell probes around a 16.16 point for the route's facing. */
 #ifdef NON_MATCHING
 NON_MATCHING s32 func_801A1ED8(s32 x, s32 y, s32 route, s32 unused) {
-    /* FAKE: register pins reproduce retail's s1/s2/s0/s3/s4 assignment; pinned 84.06%. */
-    FAKE_REG(s32, sx, "s1");
-    FAKE_REG(s32, sy, "s2");
-    /* FAKE: pin reproduces retail's result register. */
-    FAKE_REG(s32, result, "s0");
-    /* FAKE: pins continue the assignment from the note above. */
-    FAKE_REG(s32, s3, "s3");
-    /* FAKE: pin continues the assignment from the note above. */
-    FAKE_REG(s32, s4, "s4");
-    sx = x;
-    sy = y;
-    switch (route & BYTE_MASK) {
-        case FACING_DOWN:
-            if (sy & HALF_MASK) {
-                s4     = (s16)(sx >> 16);
-                s3     = ((sy >> 16) + 1) & HALF_MASK;
-                result = Area_CellIsBlocked(s4 & HALF_MASK, s3);
-                if (sx & HALF_MASK) {
-                    s3 = ((sy >> 16) + 1) & HALF_MASK;
-                    result += (Area_CellIsBlocked((s4 + 1) & HALF_MASK, s3) + func_801A223C(sx & 0xFFFF0000, sy)) + func_801A223C(sx + 0x8000, sy);
-                }
-                break;
-            }
-            goto body_up;
+    s32 sum;
+    s32 xcell;
+    s32 ycell;
 
+    switch (route & BYTE_MASK) {
         case FACING_UP:
-        body_up:
-            s3     = (s16)(sx >> 16);
-            s4     = ((u32)sy) >> 16;
-            result = Area_CellIsBlocked(s3 & HALF_MASK, s4);
-            if (sx & HALF_MASK) {
-                result += (Area_CellIsBlocked((s3 + 1) & HALF_MASK, s4) + func_801A223C(sx & 0xFFFF0000, sy)) + func_801A223C(sx + 0x8000, sy);
+            xcell = x >> 16;
+            ycell = ((u32)y) >> 16;
+            sum   = AREA_CELL_BLOCKED(xcell & HALF_MASK, ycell);
+            if (x & HALF_MASK) {
+                sum += AREA_CELL_BLOCKED((xcell + 1) & HALF_MASK, ycell);
+                sum += func_801A223C(x & ~HALF_MASK, y);
+                sum += func_801A223C(x + COORD_HALF, y);
+            }
+            break;
+
+        case FACING_DOWN:
+            if (y & HALF_MASK) {
+                xcell = x >> 16;
+                ycell = ((y >> 16) + 1) & HALF_MASK;
+                sum   = AREA_CELL_BLOCKED(xcell & HALF_MASK, ycell);
+                if (x & HALF_MASK) {
+                    sum += AREA_CELL_BLOCKED((xcell + 1) & HALF_MASK, ycell);
+                    sum += func_801A223C(x & ~HALF_MASK, y);
+                    sum += func_801A223C(x + COORD_HALF, y);
+                }
+            } else {
+                xcell = x >> 16;
+                ycell = ((u32)y) >> 16;
+                sum   = AREA_CELL_BLOCKED(xcell & HALF_MASK, ycell);
+                if (x & HALF_MASK) {
+                    sum += AREA_CELL_BLOCKED((xcell + 1) & HALF_MASK, ycell);
+                    sum += func_801A223C(x & ~HALF_MASK, y);
+                    sum += func_801A223C(x + COORD_HALF, y);
+                }
             }
             break;
 
         case FACING_RIGHT:
-            if (sx & HALF_MASK) {
-                s4 = ((sx >> 16) + 1) & HALF_MASK;
+            if (x & HALF_MASK) {
+                xcell = ((x >> 16) + 1) & HALF_MASK;
             } else {
-                s4 = ((u32)sx) >> 16;
+                xcell = ((u32)x) >> 16;
             }
-            /* cases 3 and 7 share the y-axis accumulation. */
-            goto body_7;
+            goto probe_x;
 
         case FACING_LEFT:
-            s4 = ((u32)sx) >> 16;
-        body_7:
-            s3 = (s16)(sy >> 16);
-
-            result = Area_CellIsBlocked(s4, s3 & HALF_MASK);
-            if (sy & HALF_MASK) {
-                result += (Area_CellIsBlocked(s4, (s3 + 1) & HALF_MASK) + func_801A223C(sx, sy & 0xFFFF0000)) + func_801A223C(sx, sy + 0x8000);
+            xcell = ((u32)x) >> 16;
+        probe_x:
+            ycell = y >> 16;
+            sum   = AREA_CELL_BLOCKED(xcell, ycell & HALF_MASK);
+            if (y & HALF_MASK) {
+                sum += AREA_CELL_BLOCKED(xcell, (ycell + 1) & HALF_MASK);
+                sum += func_801A223C(x, y & ~HALF_MASK);
+                sum += func_801A223C(x, y + COORD_HALF);
             }
             break;
 
@@ -61,9 +67,11 @@ NON_MATCHING s32 func_801A1ED8(s32 x, s32 y, s32 route, s32 unused) {
             return 1;
     }
 
-    result += func_801A21EC(sx, sy);
-    return (result & BYTE_MASK) != 0;
+    sum += func_801A21EC(x, y);
+    return (sum & BYTE_MASK) != 0;
 }
 #else
 INCLUDE_ASM(func_801A1ED8);
 #endif
+
+#undef AREA_CELL_BLOCKED

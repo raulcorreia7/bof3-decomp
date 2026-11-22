@@ -5,7 +5,7 @@ __asm__(".include \"include/match/macro.inc\"\n");
 #endif
 
 MATCH void func_801F8504(void) {
-    switch (g_ScenarioState.step_05) {
+    switch (g_ScenarioState.step) {
         case 0:
             if (D_8014625A & 7) {
                 break;
@@ -13,15 +13,15 @@ MATCH void func_801F8504(void) {
             D_80146258 |= 8;
             func_801C601C(1);
             Scene_SetupParty(5);
-            g_ScenarioState.step_05 = 2;
+            g_ScenarioState.step = 2;
             break;
         case 2:
             if (*g_ScriptVars != 0x12) {
                 break;
             }
-            *g_ScriptVars           = 0;
-            g_ScriptVars[2]         = 0;
-            g_ScenarioState.step_05 = 3;
+            *g_ScriptVars        = 0;
+            g_ScriptVars[2]      = 0;
+            g_ScenarioState.step = 3;
             SYS_SetFlag(g_SceneFlags, 2);
             func_8019FA28(0x31, 0x540000, 0x640000, 0x86);
             break;
@@ -29,8 +29,8 @@ MATCH void func_801F8504(void) {
             if (g_AreaCameraMoving) {
                 break;
             }
-            *g_ScriptVars           = 1;
-            g_ScenarioState.step_05 = 5;
+            *g_ScriptVars        = 1;
+            g_ScenarioState.step = 5;
             break;
         case 5:
             if (*g_ScriptVars != 0x11) {
@@ -38,7 +38,7 @@ MATCH void func_801F8504(void) {
             }
             SND_SeqFadeOut(0, 0, 4, 0x1E);
             SND_XAStartStream(3, 1);
-            g_ScenarioState.step_05 = 6;
+            g_ScenarioState.step = 6;
             break;
         case 6:
             if (SND_XAIsIdle() == 0) {
@@ -46,7 +46,7 @@ MATCH void func_801F8504(void) {
             }
             *g_ScriptVars = 0x12;
             SND_BGMPlay(0x10, 0x64, 8);
-            g_ScenarioState.step_05 = 7;
+            g_ScenarioState.step = 7;
             break;
         case 7:
             if (*g_ScriptVars != 0x12) {
@@ -56,11 +56,11 @@ MATCH void func_801F8504(void) {
             SYS_SetFlag(g_SceneFlags, 3);
             SYS_ClearFlag(g_SceneFlags, 0x25);
             Game_ClearScriptActive();
-            g_ScenarioState.step_05  = 0;
+            g_ScenarioState.step     = 0;
             g_ScenarioState.state_04 = 0;
             break;
         case 10:
-            g_ScenarioState.step_05 = 0xB;
+            g_ScenarioState.step = 0xB;
             SYS_SetFlag(g_SceneFlags, 4);
             func_8019FA28(0x31, 0x3F8000, 0x140000, 0x87);
             break;
@@ -70,7 +70,7 @@ MATCH void func_801F8504(void) {
             }
             SYS_SetFlag(g_SceneFlags, 4);
             Game_ClearScriptActive();
-            g_ScenarioState.step_05  = 0;
+            g_ScenarioState.step     = 0;
             g_ScenarioState.state_04 = 0;
             break;
     }

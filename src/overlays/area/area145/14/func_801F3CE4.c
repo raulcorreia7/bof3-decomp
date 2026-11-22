@@ -13,6 +13,6 @@ MATCH void func_801F3CE4(void) {
     offset                             = *index;
     delta                              = 0x200 / g_ActorTurnRamps[offset].frames_z;
     state                              = g_ScriptState;
-    g_ActorTurnRamps[offset].step_z    = delta;
+    g_ActorTurnRamps[offset].delta_z   = delta;
     state->flags |= 8;
 }

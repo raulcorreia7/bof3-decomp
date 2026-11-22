@@ -10,7 +10,7 @@ __asm__(".include \"include/match/macro.inc\"\n");
 #endif
 
 MATCH void func_801FC898(void) {
-    switch (g_ScenarioState.step_05) {
+    switch (g_ScenarioState.step) {
         case 0: {
             u8* vars;
 
@@ -19,7 +19,7 @@ MATCH void func_801FC898(void) {
                 vars[0]         = 0;
                 g_ScriptVars[2] = 5;
                 UI_ModeSet(UI_MODE_LONG_FADE_OUT);
-                g_ScenarioState.step_05 = 0x14;
+                g_ScenarioState.step = 0x14;
             }
             if (vars[0] == 0x65) {
                 vars[0]         = 0;
@@ -36,24 +36,24 @@ MATCH void func_801FC898(void) {
             }
             g_AreaDrawFlags = 0;
             func_801C16B8();
-            g_ScenarioState.step_05 = 0x15;
+            g_ScenarioState.step = 0x15;
             SND_SeqFadeOut(0, 0, 4, 0x1E);
             break;
         case 0x15:
             SND_XAStartStream(0, 1);
-            g_ScenarioState.step_05 = 0x16;
+            g_ScenarioState.step = 0x16;
             break;
         case 0x16:
             if ((SND_XAIsIdle() & BYTE_MASK) == 0) {
                 break;
             }
-            g_ScenarioState.step_05 = 0x17;
+            g_ScenarioState.step = 0x17;
             break;
         case 0x17:
             if (g_Game.party_size != 3) {
                 break;
             }
-            g_ScenarioState.step_05 = 0x18;
+            g_ScenarioState.step = 0x18;
             Game_RequestAreaChange(AREA_ID_CEDAR_WOODS_HOUSE, TO_COORD(0x51), TO_COORD(8), 0x85);
             SND_BGMPlay(7, BGM_CUE_LEVEL_DEFAULT, BGM_CUE_SHAPE_DEFAULT);
             break;
@@ -70,12 +70,12 @@ MATCH void func_801FC898(void) {
                 break;
             }
             if (g_ScriptVars[0] == 0xC8) {
-                D_8014865C              = -2;
-                D_80148698              = 1;
-                g_GameEntryState        = GAME_MODE_SHOP;
-                g_MenuStep.step         = 0;
-                D_80148699              = 0;
-                g_ScenarioState.step_05 = 3;
+                D_8014865C           = -2;
+                D_80148698           = 1;
+                g_GameEntryState     = GAME_MODE_SHOP;
+                g_MenuStep.step      = 0;
+                D_80148699           = 0;
+                g_ScenarioState.step = 3;
             } else if (g_ScriptVars[0] == 0xC9) {
                 g_ScriptVars[0] = 0;
                 g_ScriptVars[1] = 0;
@@ -86,9 +86,9 @@ MATCH void func_801FC898(void) {
             break;
         case 5:
             if (g_ScriptVars[0] == 0x64) {
-                g_ScenarioState.step_05 = 6;
-                g_ScriptVars[0]         = 0;
-                g_ScriptVars[2]         = 5;
+                g_ScenarioState.step = 6;
+                g_ScriptVars[0]      = 0;
+                g_ScriptVars[2]      = 5;
                 func_801C16B8();
                 SND_XAStartStream(0, 1);
                 if (g_Game.party_size == 3) {
@@ -107,12 +107,12 @@ MATCH void func_801FC898(void) {
             break;
         case 6:
             if (g_ScriptVars[0] == 1) {
-                D_8014865C              = -2;
-                D_80148698              = 1;
-                g_GameEntryState        = GAME_MODE_SHOP;
-                g_MenuStep.step         = 0;
-                D_80148699              = 0;
-                g_ScenarioState.step_05 = 7;
+                D_8014865C           = -2;
+                D_80148698           = 1;
+                g_GameEntryState     = GAME_MODE_SHOP;
+                g_MenuStep.step      = 0;
+                D_80148699           = 0;
+                g_ScenarioState.step = 7;
             }
             break;
         case 3:

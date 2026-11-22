@@ -57,8 +57,6 @@
 
 #define AREA_TILE_RECT_SIZE              0x04
 
-#define AREA_TILE_QUAD_SIZE              0x08
-
 #define AREA_MAP_LIST_RECORD_HEADER_SIZE 0x04
 
 #define AREA_MAP_CELL_HEADER_SIZE        0x04
@@ -248,55 +246,60 @@ typedef enum FieldTaskMode {
 #define FIELD_SPEED_RUN                 4
 
 /* One +0x24 cell record: four signed corner heights, loaded as s8 by
- * `@0x801530D0`, `@0x8015684C` and `@0x80157CE4`.
+ * `@0x801530D0`, `@0x8015684C` and `@0x80157CE4`, or whole by the cell side
+ * drawer.
  */
 typedef union AreaCellCorners {
     s8  corner_height[4];
     u16 corner_pair[2]; /* the heights in pairs, as halfwords */
+    s32 word;
 } AreaCellCorners;
 
 ASSERT_SIZE(AreaCellCorners, AREA_MAP_CELL_RECORD_SIZE);
 
-/* The g_AreaCellPrims row bits of AreaCell.prim_id. */
+/* The g_AreaCellPrims slot bits of AreaCell.prim_slot. */
 #define AREA_CELL_PRIM_MASK 0xFFF
 
 /* One cell of the 56 x 28 screen grid: the tile it shows (the grid-wrapped panel position that
- * Area_CellGet stores) and its row in g_AreaCellPrims (0 = none). */
+ * Area_CellGet stores) and its slot in g_AreaCellPrims (0 = none). */
 typedef struct AreaCell {
     u8  tile_x;
     u8  tile_y;
-    u16 prim_id; /* low 12 bits: the g_AreaCellPrims row; upper bits are flags */
+    u16 prim_slot; /* low 12 bits: the g_AreaCellPrims slot; upper bits are flags */
 } AreaCell;
 
 ASSERT_SIZE(AreaCell, 0x4);
 
 extern AreaCell g_AreaCells[AREA_CELL_GRID_ROWS][AREA_CELL_GRID_COLS];
 extern u16      g_AreaCellGrid[AREA_CELL_GRID_ROWS][AREA_CELL_GRID_COLS];
-/* Zero in the load image: 0x400 rows of one POLY_FT4 per display buffer
- * (g_GfxBufferIndex). In a row's second record, pad1 and pad2 hold the rows of the two linked
+/* Zero in the load image: 0x400 slots of one POLY_FT4 per display buffer
+ * (g_GfxBufferIndex). In a slot's second record, pad1 and pad2 hold the slots of the two linked
  * cells (0 = none); in its first, pad1 holds the pending upload request. */
 extern POLY_FT4 g_AreaCellPrims[][2];
-extern u16      g_AreaCellPrimFreeIds[0x400];
+extern u16      g_AreaCellPrimFreeSlots[0x400];
 extern u16      g_AreaCellPrimFreeIndex;
 extern s16      g_AreaGridColCursor;
 extern s16      g_AreaGridRowCursor;
 
 /* Four-byte tile table A rectangle. */
-typedef struct AreaTileRect {
-    u8 dv;
-    u8 du;
-    u8 v;
-    s8 u; /* signed: `lb a0,3(a1)` at 0x80155670; 0x80 reads as -128 */
+typedef union AreaTileRect {
+    struct {
+        u8 dv;
+        u8 du;
+        u8 v;
+        s8 u; /* signed: `lb a0,3(a1)` at 0x80155670; 0x80 reads as -128 */
+    } fields;
+
+    /* The size pair and the page corner read as one signed halfword, as
+     * Area_ApplyTileToQuad does before masking the low byte. */
+    struct {
+        u8  height;
+        u8  width;
+        s16 v;
+    } box;
 } AreaTileRect;
 
 ASSERT_SIZE(AreaTileRect, AREA_TILE_RECT_SIZE);
-
-/* Eight-byte tile table B descriptor: four UV pairs. */
-typedef struct AreaTileQuad {
-    u8 uv_pairs[4][2];
-} AreaTileQuad;
-
-ASSERT_SIZE(AreaTileQuad, AREA_TILE_QUAD_SIZE);
 
 /* +0x20/+0x22 list entry header; the body follows as u32 words. */
 typedef struct AreaMapListHeader {
@@ -371,6 +374,7 @@ typedef struct AreaActorDef {
     u8  script_section; /* 0x07 - copied to work+0x2C; script-table index */
 } AreaActorDef;
 
+ASSERT_OFFSET(AreaActorDef, script_section, 0x07);
 ASSERT_SIZE(AreaActorDef, AREA_ACTOR_DEF_SIZE);
 
 typedef struct AreaActorDefs {

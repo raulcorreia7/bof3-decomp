@@ -260,7 +260,7 @@ MATCH void func_801F7DBC(void) {
         if (g_GameCellType == 1 && g_GameLastAreaId == AREA_ID_RELAY_POINT_A_PORTAL && SYS_TestFlag(g_SceneFlags, 0xC) != 0 && SYS_TestFlag(g_SceneFlags, 0xD) == 0) {
             Game_SetScriptActive();
             g_ScenarioState.state_04 = 4;
-            g_ScenarioState.step_05  = 0xA;
+            g_ScenarioState.step     = 0xA;
         }
         if (g_GameCellType == 0 && SYS_TestFlag(g_SceneFlags, 0xD) != 0 && SYS_TestFlag(g_SceneFlags, 0xE) == 0) {
             func_801C1DF0(4);
@@ -282,7 +282,7 @@ MATCH void func_801F7DBC(void) {
         g_AreaCameraAngle.vx     = -0x386;
         g_AreaCameraAngle.vz     = 0x150;
         g_ScenarioState.state_04 = 1;
-        g_ScenarioState.step_05  = 0;
+        g_ScenarioState.step     = 0;
     }
 
     if (LOHU(g_GameAreaId) == AREA_ID_DRAGNIER_SURFACE) {
@@ -325,7 +325,7 @@ MATCH void func_801F7DBC(void) {
             SND_StartDecrescendo(0, 0, 0x64, 0x10);
             func_801BE1B0(0);
             g_ScenarioState.state_04 = 7;
-            g_ScenarioState.step_05  = 0;
+            g_ScenarioState.step     = 0;
         }
     }
 
@@ -333,7 +333,7 @@ MATCH void func_801F7DBC(void) {
         if (g_GameCellType == 0 && SYS_TestFlag(g_SceneFlags, 7) == 0) {
             func_801BE1B0(5);
             g_ScenarioState.state_04 = 3;
-            g_ScenarioState.step_05  = 0;
+            g_ScenarioState.step     = 0;
         }
         if (g_GameCellType == 4 && SYS_TestFlag(g_SceneFlags, 8) == 0) {
             func_801BE1B0(6);
@@ -354,7 +354,7 @@ MATCH void func_801F7DBC(void) {
                 g_SpawnedActors[D_801FBFEC].camera_angle.x = -0x2AA;
                 g_SpawnedActors[D_801FBFEC].camera_angle.y = g_AreaCameraAngle.vy;
                 g_SpawnedActors[D_801FBFEC].camera_angle.z = 0x200;
-                g_SpawnedActors[D_801FBFEC].scene_step     = 0;
+                g_SpawnedActors[D_801FBFEC].vx             = 0;
                 g_SpawnedActors[D_801FBFEC].layer          = 0x1E;
             }
         } else if (SYS_TestFlag(g_SceneFlags, 3) != 0 && SYS_TestFlag(g_SceneFlags, 4) == 0) {

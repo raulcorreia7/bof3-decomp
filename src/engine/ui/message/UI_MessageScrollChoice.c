@@ -12,7 +12,7 @@ MATCH void UI_MessageScrollChoice(void) {
     if ((*pad & g_InputMasks[MENU_INPUT_CONFIRM]) != 0) {
         u8* step;
 
-        step  = &g_UiWindowStep;
+        step  = &g_UiMessageStep;
         *step = *step + 1;
     }
     action = INPUT_REPEATED(*pad, (PADLup | PADLdown));

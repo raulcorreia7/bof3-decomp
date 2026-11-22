@@ -30,6 +30,11 @@ extern u8 D_801F4E54[];
 extern u8 D_801F4E6C[];
 extern u8 D_801F4E70[];
 extern u8 D_801F4E74[];
+/* The ground patch tables func_801F4258 samples by mode: cell x, cell y, height and radius. */
+extern u8 D_801F4E78[];
+extern u8 D_801F4E7C[];
+extern u8 D_801F4E80[];
+extern u8 D_801F4E84[];
 
 s32  func_801F4C28(s32 x, s32 y);
 void func_801F2EC0(void);
@@ -52,7 +57,7 @@ static inline void Area_StartScriptedMove(u8 facing) {
             g_ScriptState->flags |= 0x80;
         } else {
             Area_SetFacingOffsetX(TASK(Actor)->direction);
-            g_AreaCameraHeightStep = 0;
+            g_AreaCameraHeightDelta = 0;
             g_ScriptState->flags |= 0x40;
         }
     }

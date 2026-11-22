@@ -13,7 +13,7 @@
 #define BATTLE_PANEL_TASK ((BattlePanelTask*)g_UiPanelCurrent)
 
 /* The battle system as the two battle overlays implement it. A battle keeps a
- * 0x140-byte local work row per party member and a 0x118-byte enemy row
+ * 0x140-byte work record per party member and a 0x118-byte enemy record
  * (PartyMember, EnemyBattler in records.h); both carry the action block,
  * the HP/AP change cells and the status word the result screens read.
  *
@@ -21,7 +21,7 @@
  * its agility, its action mode and the level-priority multiplier table at
  * 0x801EAF3C (enemy scores also add a random value), then sorts the
  * BattleRank rows at 0x801EB550 high to low. Each battler runs its step
- * handler from D_801EB120 (party) or its row's handler (enemy); actions are
+ * handler from D_801EB120 (party) or its record's handler (enemy); actions are
  * queued in the 48 slots at 0x801EC330 and dispatched by Battle_UpdateEffects
  * (0x801E5824) through the handler table at 0x801D0CC0.
  *
@@ -45,14 +45,14 @@ extern BattleScrollDelta g_BattleScrollDeltas[4];
 /* D_800B6510 */
 extern u8                g_BattleActionSelection[232];
 extern u8*               D_800B6AB0[];
-/* One-field views of the same rows: the local rows (stride 0x140) and the
- * enemy rows (stride 0x118), each anchored at the field the retail symbol
+/* One-field views of the same records: the party records (stride 0x140) and the
+ * enemy records (stride 0x118), each anchored at the field the retail symbol
  * names. */
 extern u8                D_801454F5[];
 extern u8                D_801454F6[];
 extern u8                D_80145FA8[];
 
-/* One 8-byte row of the 16-row message ring at g_BattleMessages; D_801EC328 is the next row to fill. */
+/* One 8-byte message of the 16-message ring at g_BattleMessages; D_801EC328 is the next message to fill. */
 typedef struct BattleMessageSlot {
     u8  flags;       /* 0x00 bit 0 waits for a button, bit 1 counts record_type down */
     u8  record_type; /* 0x01 the record type, or the wait countdown while bit 1 of flags is set */
@@ -67,7 +67,7 @@ ASSERT_SIZE(BattleMessageSlot, 0x08);
 
 extern BattleMessageSlot g_BattleMessages[16];
 
-/* One 0xC-byte row of the event slot table at g_BattleEventSlots; D_801EB4DC points at the running row. */
+/* One 0xC-byte record of the event slot table at g_BattleEventSlots; D_801EB4DC points at the running event. */
 typedef struct BattleEventSlot {
     u8  active;     /* 0x00 set while the event runs */
     u8  event_type; /* 0x01 indexes g_BattleEvents.steps and its flag bit */

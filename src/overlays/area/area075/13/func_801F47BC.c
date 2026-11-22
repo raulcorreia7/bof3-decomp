@@ -7,7 +7,7 @@ MATCH void func_801F47BC(void) {
     if ((g_PadStates[0].pressed & PADRdown) == 0) {
         return;
     }
-    g_SpawnedActors[D_801F58CE[1]].scene_step -= 1;
+    g_SpawnedActors[D_801F58CE[1]].vx -= 1;
     TASK_SET(&g_Game);
     g_Game.members[0].unk_4A = 1;
     Script_AnimStepLoop();

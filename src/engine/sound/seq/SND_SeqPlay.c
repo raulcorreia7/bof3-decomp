@@ -8,13 +8,13 @@ MATCH void SND_SeqPlay(u16 sep_slot, s32 sequence, s32 left_volume, s32 right_vo
     s16 seq;
 
     seq = sequence;
-    SsSepStop(g_SelectionEffectVoices[sep_slot & HALF_MASK], seq);
+    SsSepStop(g_SelectionEffectVoices[sep_slot], seq);
     if (D_80144954 == 0u) {
         D_8018B418 = 0x1FFF;
         D_8018B41A = 0x1FFF;
-        SsSepSetVol(g_SelectionEffectVoices[sep_slot & HALF_MASK], seq, left_volume, right_volume);
+        SsSepSetVol(g_SelectionEffectVoices[sep_slot], seq, left_volume, right_volume);
     } else {
-        SsSepSetVol(g_SelectionEffectVoices[sep_slot & HALF_MASK], seq, 0, 0);
+        SsSepSetVol(g_SelectionEffectVoices[sep_slot], seq, 0, 0);
     }
-    SsSepPlay(g_SelectionEffectVoices[sep_slot & HALF_MASK], seq, SSPLAY_PLAY, 1);
+    SsSepPlay(g_SelectionEffectVoices[sep_slot], seq, SSPLAY_PLAY, 1);
 }

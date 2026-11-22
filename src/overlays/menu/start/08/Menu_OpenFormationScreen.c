@@ -3,12 +3,12 @@
 /* func_801DAA68 */
 MATCH void Menu_OpenFormationScreen(void) {
     u8*            record;
-    MenuPanelTask* rows;
+    MenuPanelTask* panels;
     MenuPanelTask* panel;
     u8             i;
 
     record = &D_801484BC;
-    rows   = (MenuPanelTask*)(record + 0x120);
+    panels = (MenuPanelTask*)(record + 0x120);
     i      = 0;
     record++;
     record--;
@@ -20,8 +20,8 @@ MATCH void Menu_OpenFormationScreen(void) {
     g_UiPanelTasks[MENU_START_PANEL_DESCRIPTION].pos.y        = 16;
     g_UiPanelTasks[MENU_START_PANEL_DESCRIPTION].u.message.id = 0;
     while (i < 2) {
-        /* FAKE: retail adds the row offset and `rows` in this operand order; plain forms swap it. */
-        panel = (MenuPanelTask*)(i * sizeof(MenuPanelTask) + (u32)rows);
+        /* FAKE: retail adds the panel offset and `panels` in this operand order; plain forms swap it. */
+        panel = (MenuPanelTask*)(i * sizeof(MenuPanelTask) + (u32)panels);
         i++;
         panel->panel  = 6;
         panel->mode   = MENU_START_MODE_CURSOR_FRAME;

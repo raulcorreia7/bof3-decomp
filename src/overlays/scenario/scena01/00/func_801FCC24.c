@@ -8,13 +8,13 @@ __asm__(".include \"include/match/macro.inc\"\n");
 #endif
 
 MATCH void func_801FCC24(void) {
-    switch (g_ScenarioState.step_05) {
+    switch (g_ScenarioState.step) {
         case 0:
             SND_SeqStop(0, 0);
             SND_BGMPlay(26, BGM_CUE_LEVEL_DEFAULT, BGM_CUE_SHAPE_DEFAULT);
             g_GameFlags |= 0x80;
             Scene_SetupParty(0xB);
-            g_ScenarioState.step_05 = 1;
+            g_ScenarioState.step = 1;
             break;
         case 1:
             if (g_ScriptVars[0] != 2) {
@@ -23,7 +23,7 @@ MATCH void func_801FCC24(void) {
             Game_ClearScriptActive();
             g_ScriptVars[1]          = 0;
             g_ScriptVars[2]          = 0;
-            g_ScenarioState.step_05  = 0x2D;
+            g_ScenarioState.step     = 0x2D;
             g_ScenarioState.state_04 = 9;
             break;
     }
@@ -35,7 +35,7 @@ MATCH void func_801FCCF4(void) {
 MATCH void func_801FCCFC(void) {
     u8* state;
 
-    state = &g_ScenarioState.step_05;
+    state = &g_ScenarioState.step;
     switch (*state) {
         case 0:
             MESSAGE_START_WAIT(MSG_SCENA01_024);
@@ -56,7 +56,7 @@ MATCH void func_801FCCFC(void) {
 MATCH void func_801FCD9C(void) {
     u8* state;
 
-    state = &g_ScenarioState.step_05;
+    state = &g_ScenarioState.step;
     switch (*state) {
         case 0:
             MESSAGE_START_WAIT(MSG_SCENA01_052);
@@ -75,7 +75,7 @@ MATCH void func_801FCD9C(void) {
 MATCH void func_801FCE30(void) {
     u8* state;
 
-    state = &g_ScenarioState.step_05;
+    state = &g_ScenarioState.step;
     switch (*state) {
         case 0:
             MESSAGE_START_WAIT(MSG_SCENA01_052);

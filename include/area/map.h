@@ -268,4 +268,40 @@ ASSERT_OFFSET(EncounterZone, min, 0x00);
 ASSERT_OFFSET(EncounterZone, max, 0x02);
 ASSERT_SIZE(EncounterZone, MAP_ZONE_SIZE);
 
+/* One party member's start position in a field battle, 16.16. */
+typedef Coord2 FormationPos;
+
+/* Field-battle placement: the formation origin and one start position per party order slot.
+ * Area_EncounterBuild and Game_BattleStartEncounter fill it; the placement, camera and battle
+ * start code read it. The origin's integer halves are D_80143F26 and D_80143F2A. */
+typedef struct AreaEncounterPlacement {
+    /* 0x00 */ Coord2       origin;
+    /* 0x08 */ FormationPos party[3];
+} AreaEncounterPlacement;
+
+ASSERT_OFFSET(AreaEncounterPlacement, origin, 0x00);
+ASSERT_OFFSET(AreaEncounterPlacement, party, 0x08);
+ASSERT_SIZE(AreaEncounterPlacement, 0x20);
+
+/* D_80143F24 */
+extern AreaEncounterPlacement g_AreaEncounterPlacement;
+/* The origin words as their own symbols: the placement, the battle start and the magic151 effect code
+ * keep retail's per-access absolute address, and the record base hoists into a register there. */
+/* D_80143F24 */
+extern s32                    g_EncounterOriginX;
+/* D_80143F28 */
+extern s32                    g_EncounterOriginY;
+
+/* One 4-byte world map point: the cell x and y, then the destination area id
+ * (func_801B690C stores it in g_GameEntryAreaId) and the location type (the
+ * Fishing_ShowLocation tables select their message set by it). */
+typedef struct WorldMapPoint {
+    u8 x;       /* 0x00 */
+    u8 y;       /* 0x01 */
+    u8 area_id; /* 0x02 */
+    u8 type;    /* 0x03 */
+} WorldMapPoint;
+
+ASSERT_SIZE(WorldMapPoint, 4);
+
 #endif

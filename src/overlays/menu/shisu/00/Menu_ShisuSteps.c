@@ -89,7 +89,7 @@ MATCH void func_801D1018(void) {
         Item_Remove(ITEM_CATEGORY_ITEM, ITEM_SHALY_SEED, g_ShisuIngredients.used[1], 0);
         Item_Remove(ITEM_CATEGORY_ITEM, ITEM_VINEGAR, g_ShisuIngredients.used[2], 0);
         Item_Remove(ITEM_CATEGORY_ITEM, ITEM_HORSERADISH, g_ShisuIngredients.used[3], 0);
-        g_ScenarioState.step_05 = 0x14;
+        g_ScenarioState.step = 0x14;
         func_801D1EE8();
         if (D_801DA044 >= 0x33) {
             g_ScriptVars[3] = 2;
@@ -110,7 +110,7 @@ MATCH void func_801D1018(void) {
             g_ScriptVars[3] = 1;
         }
     } else {
-        g_ScenarioState.step_05 = 5;
+        g_ScenarioState.step = 5;
     }
     UI_PanelResetTasks();
     {

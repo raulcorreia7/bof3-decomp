@@ -150,7 +150,110 @@ MATCH void func_801EF2CC(void) {
 }
 
 #ifdef NON_MATCHING
+/* Draws the two leech rings and the centre quads and links both primitive runs into the map cell
+ * by depth. */
 NON_MATCHING void func_801EF318(void) {
+    POLY_F4* prim;
+    LINE_F4* line;
+    u8*      base;
+    u8*      line_base;
+    s32      values[16];
+    s32      line_values[12];
+    long     depth;
+    long     flag;
+    s32      ring;
+    s32      seg;
+    s32      tpage;
+
+    tpage = getTPage(TPAGE_DEPTH_8BIT, TPAGE_ABR_ADD, 320, 256);
+    SetDrawMode((DR_MODE*)g_GfxPrimCursor, 0, 1, tpage, 0);
+    Area_CellAddPrim(TASK(PartyMember)->pos.x.fixed, TASK(PartyMember)->pos.y.fixed, 2, sizeof(DR_MODE));
+
+    base                        = g_GfxPrimCursor;
+    line_base                   = base + 16 * sizeof(POLY_F4);
+    line                        = (LINE_F4*)line_base;
+    g_ScratchPad.cells.words[0] = TASK(PartyMember)->unk_09 * 10;
+    g_ScratchPad.cells.words[1] = TASK(PartyMember)->unk_09 * 7;
+
+    for (ring = 0; ring < 2; ring++) {
+        g_ScratchPadVectors[1].vx = FIXED_MUL(rcos(D_801F08B8[ring]), g_ScratchPad.cells.words[1]);
+        g_ScratchPadVectors[1].vy = FIXED_MUL(rcos(0x180), FIXED_MUL(rsin(D_801F08B8[ring]), g_ScratchPad.cells.words[0]));
+        g_ScratchPadVectors[1].vz = FIXED_MUL(rsin(0x180), FIXED_MUL(rsin(D_801F08B8[ring]), g_ScratchPad.cells.words[0]));
+        g_ScratchPadVectors[3].vx = FIXED_MUL(rcos(D_801F08B8[ring + 1]), g_ScratchPad.cells.words[1]);
+        g_ScratchPadVectors[3].vy = FIXED_MUL(rcos(0x180), FIXED_MUL(rsin(D_801F08B8[ring + 1]), g_ScratchPad.cells.words[0]));
+        g_ScratchPadVectors[3].vz = FIXED_MUL(rsin(0x180), FIXED_MUL(rsin(D_801F08B8[ring + 1]), g_ScratchPad.cells.words[0]));
+        for (seg = 1; seg < 7; seg++) {
+            prim = (POLY_F4*)g_GfxPrimCursor;
+            SetPolyF4(prim);
+            SetSemiTrans(prim, 1);
+
+            g_ScratchPadVectors[0].vx = g_ScratchPadVectors[1].vx;
+            g_ScratchPadVectors[0].vy = g_ScratchPadVectors[1].vy;
+            g_ScratchPadVectors[0].vz = g_ScratchPadVectors[1].vz;
+            g_ScratchPadVectors[1].vx = FIXED_MUL(rcos(D_801F08B8[ring]), g_ScratchPad.cells.words[1]);
+            g_ScratchPadVectors[1].vy = FIXED_MUL(rcos(D_801F089C[seg]), FIXED_MUL(rsin(D_801F08B8[ring]), g_ScratchPad.cells.words[0]));
+            g_ScratchPadVectors[1].vz = FIXED_MUL(rsin(D_801F089C[seg]), FIXED_MUL(rsin(D_801F08B8[ring]), g_ScratchPad.cells.words[0]));
+
+            g_ScratchPadVectors[2].vx = g_ScratchPadVectors[3].vx;
+            g_ScratchPadVectors[2].vy = g_ScratchPadVectors[3].vy;
+            g_ScratchPadVectors[2].vz = g_ScratchPadVectors[3].vz;
+            g_ScratchPadVectors[3].vx = FIXED_MUL(rcos(D_801F08B8[ring + 1]), g_ScratchPad.cells.words[1]);
+            g_ScratchPadVectors[3].vy = FIXED_MUL(rcos(D_801F089C[seg]), FIXED_MUL(rsin(D_801F08B8[ring + 1]), g_ScratchPad.cells.words[0]));
+            g_ScratchPadVectors[3].vz = FIXED_MUL(rsin(D_801F089C[seg]), FIXED_MUL(rsin(D_801F08B8[ring + 1]), g_ScratchPad.cells.words[0]));
+
+            func_801EFE14(line, &line_values[ring * 6 + seg - 1], g_ScratchPadVectors[0], g_ScratchPadVectors[1], g_ScratchPadVectors[3], g_ScratchPadVectors[2]);
+            line++;
+            values[ring * 6 + seg - 1] = RotAverage4(&g_ScratchPadVectors[0], &g_ScratchPadVectors[1], &g_ScratchPadVectors[2], &g_ScratchPadVectors[3], (long*)&prim->x0, (long*)&prim->x1,
+                                                     (long*)&prim->x2, (long*)&prim->x3, &depth, &flag);
+
+            setRGB0(prim, 0x10, 0x10, 0x80);
+            /* The flash brightens one segment per frame; from step 5 the segment fades with the timer. */
+            if (TASK(PartyMember)->header.step == 3 && ((g_FrameCount & 0x1C) >> 2) == seg) {
+                setRGB0(prim, 0x30, 0x30, 0x40);
+            }
+            if (TASK(PartyMember)->header.step >= 5) {
+                setRGB0(prim, TASK(PartyMember)->timer + 0x10, 0x10, 0x80 - TASK(PartyMember)->timer);
+            }
+            g_GfxPrimCursor += sizeof(POLY_F4);
+        }
+    }
+
+    for (ring = 0; ring < 4; ring += 2) {
+        for (seg = 0; seg < 6; seg += 3) {
+            prim = (POLY_F4*)g_GfxPrimCursor;
+            SetPolyF4(prim);
+            SetSemiTrans(prim, 1);
+
+            g_ScratchPadVectors[0].vx = FIXED_MUL(rcos(D_801F08B8[ring]), g_ScratchPad.cells.words[1]);
+            g_ScratchPadVectors[0].vy = FIXED_MUL(rcos(D_801F089C[seg]), FIXED_MUL(rsin(D_801F08B8[ring]), g_ScratchPad.cells.words[0]));
+            g_ScratchPadVectors[0].vz = FIXED_MUL(rsin(D_801F089C[seg]), FIXED_MUL(rsin(D_801F08B8[ring]), g_ScratchPad.cells.words[0]));
+
+            g_ScratchPadVectors[1].vx = FIXED_MUL(rcos(D_801F08B8[ring]), g_ScratchPad.cells.words[1]);
+            g_ScratchPadVectors[1].vy = FIXED_MUL(rcos(D_801F089C[seg + 3]), FIXED_MUL(rsin(D_801F08B8[ring]), g_ScratchPad.cells.words[0]));
+            g_ScratchPadVectors[1].vz = FIXED_MUL(rsin(D_801F089C[seg + 3]), FIXED_MUL(rsin(D_801F08B8[ring]), g_ScratchPad.cells.words[0]));
+
+            g_ScratchPadVectors[2].vx = FIXED_MUL(rcos(D_801F08B8[ring]), g_ScratchPad.cells.words[1]);
+            g_ScratchPadVectors[2].vy = FIXED_MUL(rcos(D_801F089C[seg + 1]), FIXED_MUL(rsin(D_801F08B8[ring]), g_ScratchPad.cells.words[0]));
+            g_ScratchPadVectors[2].vz = FIXED_MUL(rsin(D_801F089C[seg + 1]), FIXED_MUL(rsin(D_801F08B8[ring]), g_ScratchPad.cells.words[0]));
+
+            g_ScratchPadVectors[3].vx = FIXED_MUL(rcos(D_801F08B8[ring]), g_ScratchPad.cells.words[1]);
+            g_ScratchPadVectors[3].vy = FIXED_MUL(rcos(D_801F08A4[seg]), FIXED_MUL(rsin(D_801F08B8[ring]), g_ScratchPad.cells.words[0]));
+            g_ScratchPadVectors[3].vz = FIXED_MUL(rsin(D_801F08A4[seg]), FIXED_MUL(rsin(D_801F08B8[ring]), g_ScratchPad.cells.words[0]));
+
+            values[12 + ring + seg / 3] = RotAverage4(&g_ScratchPadVectors[0], &g_ScratchPadVectors[1], &g_ScratchPadVectors[2], &g_ScratchPadVectors[3], (long*)&prim->x0, (long*)&prim->x1,
+                                                      (long*)&prim->x2, (long*)&prim->x3, &depth, &flag);
+
+            setRGB0(prim, 1, 1, 0x80);
+            if (TASK(PartyMember)->header.step >= 5) {
+                setRGB0(prim, TASK(PartyMember)->timer + 1, 1, 0x80 - TASK(PartyMember)->timer);
+            }
+            g_GfxPrimCursor += sizeof(POLY_F4);
+        }
+    }
+
+    func_800AF0F8(TASK(PartyMember)->pos.x.fixed, TASK(PartyMember)->pos.y.fixed, values, base, 16, sizeof(POLY_F4), 2);
+    func_800AF0F8(TASK(PartyMember)->pos.x.fixed, TASK(PartyMember)->pos.y.fixed, line_values, line_base, 12, sizeof(LINE_F4), 2);
+    g_GfxPrimCursor = (u8*)line;
 }
 #else
 INCLUDE_ASM(func_801EF318);

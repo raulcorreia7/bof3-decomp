@@ -157,7 +157,7 @@ extern ScenePathPoint D_801FA240[];
 
 void func_801F7EC0();
 
-void func_801F7CF0(SceneParticle* row);
+void func_801F7CF0(SceneParticle* particle);
 
 void func_801F7FCC(void);
 

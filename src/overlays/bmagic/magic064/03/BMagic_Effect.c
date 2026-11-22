@@ -276,7 +276,98 @@ MATCH void func_801EF89C(void) {
 }
 
 #ifdef NON_MATCHING
+/* Stages the effect's four sprite rows over the active battler's work image. */
 NON_MATCHING void func_801EF8F4(void) {
+    BattleEffect*    slot;
+    BattleWorkImage* image;
+    PartyMember*     saved;
+    u16*             stage;
+    u16*             mirror;
+    u8               i;
+
+    stage   = (u16*)(BATTLE_ACTION_BLOCK_TABLE + 0x140);
+    mirror  = (u16*)(GAME_PALETTE_MIRROR + 0x140);
+    *stage  = 0;
+    *mirror = 0;
+    for (i = 1; i < 0x20; i++) {
+        stage[i]  = 0xFFFF;
+        mirror[i] = 0xFFFF;
+    }
+    g_GfxPalettePending = 1;
+    GFX_ClearRect(0x340, 0x100, 0xC0, 0x100);
+
+    slot                    = &g_BattleEffects[Battle_AllocEffect(1, 0x3A) & BYTE_MASK];
+    image                   = (BattleWorkImage*)&BATTLE_ACTIVE_PARTY;
+    *(BattleWorkImage*)slot = *image;
+    slot->header.mode       = 2;
+    slot->unk_06            = 1;
+    slot->step_index        = 0x3A;
+    slot->header.step       = 0;
+    slot->header.flags &= ~PARTY_MEMBER_FLAG_HANDLER_BUSY;
+    slot->target.party = TASK(PartyMember);
+    slot->screen_x     = 0x20;
+    FIELD(u8, slot, 0x24) |= 0x88;
+    slot->screen_y = 0x40;
+    slot->unk_27   = 0x7B;
+    slot->unk_0B   = TASK(PartyMember)->facing + 0x38;
+    saved          = TASK(PartyMember);
+    TASK_SET(slot);
+    GFX_PaletteLoad((u8*)slot, 0);
+    func_801DDAB4(BATTLE_ACTIVE_PARTY.chr.status);
+    GFX_PaletteUploadRows();
+    TASK_SET(saved);
+
+    slot                    = &g_BattleEffects[Battle_AllocEffect(1, 0x3A) & BYTE_MASK];
+    image                   = (BattleWorkImage*)&BATTLE_ACTIVE_PARTY;
+    *(BattleWorkImage*)slot = *image;
+    slot->header.mode       = 2;
+    slot->unk_06            = 1;
+    slot->step_index        = 0x3A;
+    slot->header.step       = 0;
+    slot->header.flags &= ~PARTY_MEMBER_FLAG_HANDLER_BUSY;
+    slot->target.party = TASK(PartyMember);
+    slot->screen_x     = 0x20;
+    FIELD(u8, slot, 0x24) |= 0x88;
+    slot->screen_y = 0x90;
+    slot->unk_27   = 0x7D;
+    slot->unk_0B   = TASK(PartyMember)->facing + 0x38;
+
+    slot                    = &g_BattleEffects[Battle_AllocEffect(1, 0x3A) & BYTE_MASK];
+    image                   = (BattleWorkImage*)&BATTLE_ACTIVE_PARTY;
+    *(BattleWorkImage*)slot = *image;
+    slot->header.mode       = 2;
+    slot->unk_06            = 1;
+    slot->step_index        = 0x3A;
+    slot->header.step       = 0;
+    slot->header.flags &= ~PARTY_MEMBER_FLAG_HANDLER_BUSY;
+    slot->target.party = TASK(PartyMember);
+    slot->screen_x     = 0x80;
+    FIELD(u8, slot, 0x24) |= 0x88;
+    slot->screen_y = 0x40;
+    slot->unk_27   = 0x7C;
+    slot->unk_0B   = TASK(PartyMember)->facing + 0x3C;
+    saved          = TASK(PartyMember);
+    TASK_SET(slot);
+    GFX_PaletteLoad((u8*)slot, 1);
+    func_801DDAB4(BATTLE_ACTIVE_PARTY.chr.status);
+    GFX_PaletteUploadRows();
+    TASK_SET(saved);
+
+    slot                    = &g_BattleEffects[Battle_AllocEffect(1, 0x3A) & BYTE_MASK];
+    image                   = (BattleWorkImage*)&BATTLE_ACTIVE_PARTY;
+    *(BattleWorkImage*)slot = *image;
+    slot->header.mode       = 2;
+    slot->unk_06            = 1;
+    slot->step_index        = 0x3A;
+    slot->header.step       = 0;
+    slot->header.flags &= ~PARTY_MEMBER_FLAG_HANDLER_BUSY;
+    slot->target.party = TASK(PartyMember);
+    slot->screen_x     = 0x80;
+    FIELD(u8, slot, 0x24) |= 0x88;
+    slot->unk_27   = 0x7D;
+    slot->unk_0B   = TASK(PartyMember)->facing + 0x3C;
+    slot->screen_y = 0x90;
+    TASK(PartyMember)->unk_03 += 1;
 }
 #else
 INCLUDE_ASM(func_801EF8F4);
@@ -565,19 +656,19 @@ MATCH void func_801F103C(void) {
         Area_CellLoadRowsPrev();
         g_AreaTileRemainderY += 0x200;
     }
-    g_AreaCameraStep          = 0;
-    g_AreaCameraHeightStep    = 0;
+    g_AreaCameraSpeed         = 0;
+    g_AreaCameraHeightDelta   = 0;
     g_AreaHeightOffsetEnabled = 0;
     g_AreaCameraRefreshCount  = 3;
     for (row = 0; row < 56; row++) {
         for (col = 0; col < 28; col++) {
-            cell          = &g_AreaCells[row][col];
-            cell->prim_id = 0;
+            cell            = &g_AreaCells[row][col];
+            cell->prim_slot = 0;
             BMagic_ProjectCell(row, col, cell);
         }
     }
     row   = 0x3FF;
-    order = &g_AreaCellPrimFreeIds[0x3FF];
+    order = &g_AreaCellPrimFreeSlots[0x3FF];
     for (; row >= 0; row--) {
         *order = row;
         order--;

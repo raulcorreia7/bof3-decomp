@@ -2,12 +2,12 @@
 
 MATCH void func_801F4B24(void) {
     s32           slot;
-    SpawnedActor* row;
+    SpawnedActor* spawned_actor;
 
     slot = Actor_FindFreeSpawned() & BYTE_MASK;
     if (slot != GAME_NONE) {
-        row               = &g_SpawnedActors[slot];
-        row->header.flags = 1;
-        row->type         = 0xB9;
+        spawned_actor               = &g_SpawnedActors[slot];
+        spawned_actor->header.flags = 1;
+        spawned_actor->type         = 0xB9;
     }
 }

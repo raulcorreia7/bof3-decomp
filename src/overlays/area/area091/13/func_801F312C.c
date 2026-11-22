@@ -17,7 +17,7 @@ MATCH void func_801F312C(void) {
         g_AreaScrollTargetX = TO_COORD(31) + COORD_HALF;
         g_AreaScrollTargetY = TO_COORD(26);
         g_Task              = actor;
-        g_AreaCameraStep    = 0x20;
+        g_AreaCameraSpeed   = 0x20;
         actor->unk_04 += 1;
     }
     func_801F2ED4(TASK(Actor)->unk_0A * 0xA, 0xFF);

@@ -106,8 +106,8 @@ MATCH void func_801B146C(void) {
             g_EncounterSteps = counter + 2;
         }
         Actor_ClearVelocity();
-        g_AreaCameraStep       = 0;
-        g_AreaCameraHeightStep = 0;
+        g_AreaCameraSpeed       = 0;
+        g_AreaCameraHeightDelta = 0;
         if (!(g_GameRequestFlags & AREA_LOAD_FLAG_WORLD_MAP) && !(g_Game.walk_flags & (0x20 | AREA_WALK_ENTRY_PENDING))) {
             if (Area_EncounterCanStart() & BYTE_MASK) {
                 g_Game.current->u.field.counter.unsigned_value = 3U;

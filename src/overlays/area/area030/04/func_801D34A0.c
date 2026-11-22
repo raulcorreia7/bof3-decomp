@@ -14,7 +14,7 @@ MATCH void func_801D34A0(void) {
     work->origin_x = val;
 
     if ((s16)val < 0xA1) {
-        work->step_timer       = 0x1E;
+        work->timer            = 0x1E;
         stepped                = TASK(FishingState);
         work->origin_x         = 0xA0;
         stepped->handler_index = (stepped->handler_index + 1);

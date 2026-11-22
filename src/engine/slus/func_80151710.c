@@ -16,8 +16,8 @@ MATCH void func_80151710(void) {
     } else {
         UI_MessageDispatchStep();
     }
-    count          = g_UiWindowStep;
-    D_801490B8[0]  = 0;
-    D_80148357     = 3;
-    g_UiWindowStep = count + 1;
+    count           = g_UiMessageStep;
+    D_801490B8[0]   = 0;
+    D_80148357      = 3;
+    g_UiMessageStep = count + 1;
 }

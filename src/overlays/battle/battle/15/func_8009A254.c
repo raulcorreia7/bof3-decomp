@@ -5,7 +5,7 @@ MATCH void func_8009A254(void) {
     s32 input;
 
     /* First word of the record of the slot that owns the message panel. */
-    slot_data = g_Game.members[BATTLE_ACTIVE_ROW->slot].u.turn.command.id;
+    slot_data = g_Game.members[BATTLE_ACTIVE_MEMBER->slot].u.turn.command.id;
     if (g_PadStates[0].pressed & g_InputMasks[BATTLE_INPUT_CANCEL]) {
         g_Battle.ui_mode = 4;
         return;

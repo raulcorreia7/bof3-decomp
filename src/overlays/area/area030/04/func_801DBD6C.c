@@ -10,8 +10,8 @@ MATCH void func_801DBD6C(void) {
     u16           cue;
     u8            state;
 
-    work             = TASK(FishingState);
-    work->step_timer = (work->step_timer - 1);
+    work        = TASK(FishingState);
+    work->timer = (work->timer - 1);
 
     Fishing_DrawCatchBar(0, FISHING_CATCH_BAR_Y);
     Fishing_DrawCatchIcon(FISHING_CATCH_ICON_X, FISHING_CATCH_ICON_Y, D_8014688E[g_FishingHookedFish * 0x98]);
@@ -24,14 +24,14 @@ MATCH void func_801DBD6C(void) {
     state = work->saved_index;
     if (state == 1) {
         cue = 0x43;
-        Fishing_DrawIconRow(8, work->step_timer * FISHING_CATCH_ROW_STEP + FISHING_CATCH_ROW_Y, cue);
+        Fishing_DrawIconRow(8, work->timer * FISHING_CATCH_ROW_STEP + FISHING_CATCH_ROW_Y, cue);
     } else if (state == 2) {
         cue = 0x42;
-        Fishing_DrawIconRow(8, work->step_timer * FISHING_CATCH_ROW_STEP + FISHING_CATCH_ROW_Y, cue);
+        Fishing_DrawIconRow(8, work->timer * FISHING_CATCH_ROW_STEP + FISHING_CATCH_ROW_Y, cue);
     }
 
     work = TASK(FishingState);
-    if (work->step_timer == 0) {
+    if (work->timer == 0) {
         state = work->saved_index;
         if (state == 1) {
             work->cue_index = 0;

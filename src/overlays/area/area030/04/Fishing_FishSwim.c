@@ -12,7 +12,7 @@ MATCH void Fishing_FishSwim(void) {
     s32           delta;
     s16           turn;
 
-    if (TASK(FishingState)->step_timer == 0) {
+    if (TASK(FishingState)->timer == 0) {
         if (Fishing_LureInRange() & BYTE_MASK) {
             TASK(FishingState)->handler_index = 3;
         } else {
@@ -46,28 +46,28 @@ MATCH void Fishing_FishSwim(void) {
             turn = Area_HeightSample(TASK(FishingState)->motion.unk_34 + TASK(FishingState)->pos_x * 0x10, TASK(FishingState)->y_38.pos_y + TASK(FishingState)->cursor_10 * 0x10);
             work = TASK(FishingState);
             if (work->bounce.half.key < turn) {
-                work->step_14 = (turn - work->bounce.half.key) / 16;
+                work->bounce_speed = (turn - work->bounce.half.key) / 16;
             } else {
-                work->step_14 = 0;
+                work->bounce_speed = 0;
                 if (roll & 0x10) {
                     if (roll & 0x20) {
                         if (work->bounce.half.key != 0 && -(D_801E2AD2[work->cue_index * sizeof(FishingSceneCue)] << 8) >= work->bounce.half.key + 0x20) {
-                            work->step_14 = 2;
+                            work->bounce_speed = 2;
                         }
                     } else {
                         delta = work->bounce.half.key - 0x20;
                         if (delta >= turn && delta >= -((D_801E2AD2[work->cue_index * sizeof(FishingSceneCue)] + 1) << 8)) {
-                            work->step_14 = -2;
+                            work->bounce_speed = -2;
                         }
                     }
                 }
             }
             if (roll & 0x40) {
-                TASK(FishingState)->pos_x     = 0;
-                TASK(FishingState)->cursor_10 = 0;
-                TASK(FishingState)->step_14   = 0;
+                TASK(FishingState)->pos_x        = 0;
+                TASK(FishingState)->cursor_10    = 0;
+                TASK(FishingState)->bounce_speed = 0;
             }
-            TASK(FishingState)->step_timer = 0x10;
+            TASK(FishingState)->timer = 0x10;
         }
     }
     Fishing_MoveFish();

@@ -12,10 +12,10 @@ MATCH void func_801D3050(void) {
         i       = 0;
         battler = &g_Battle.active_battler;
         do {
-            s32 row;
+            s32 enemy_slot;
 
-            row                   = *battler - 3;
-            g_TextVariables[0][i] = g_BattleEnemyBattlers[row].name[i];
+            enemy_slot            = *battler - 3;
+            g_TextVariables[0][i] = g_BattleEnemyBattlers[enemy_slot].name[i];
             i++;
         } while (i < 8);
         Battle_OpenPanel();

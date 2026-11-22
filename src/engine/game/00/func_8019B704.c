@@ -54,12 +54,12 @@ NON_MATCHING void func_8019B704(void) {
         } else if (TASK(Actor)->vy < 0) {
             g_AreaTargetCellY = (s16)(g_AreaTargetCellY - 5);
         }
-        temp                   = Area_HeightSample(g_AreaScrollTargetX, g_AreaScrollTargetY);
-        g_AreaCameraHeightStep = 0;
+        temp                    = Area_HeightSample(g_AreaScrollTargetX, g_AreaScrollTargetY);
+        g_AreaCameraHeightDelta = 0;
         if (temp < (s16)g_AreaCameraHeight) {
-            g_AreaCameraHeightStep = (s16)((temp - (s16)g_AreaCameraHeight) / 20);
+            g_AreaCameraHeightDelta = (s16)((temp - (s16)g_AreaCameraHeight) / 20);
         }
-        g_AreaCameraStep   = 0x40;
+        g_AreaCameraSpeed  = 0x40;
         TASK(Actor)->timer = 20;
     }
     dist = Area_HeightSample(TASK(Actor)->pos.x.fixed, TASK(Actor)->pos.y.fixed);

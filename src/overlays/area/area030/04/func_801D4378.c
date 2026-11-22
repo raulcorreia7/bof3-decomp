@@ -8,8 +8,8 @@
 MATCH void func_801D4378(void) {
     s32 mask;
 
-    TASK(FishingState)->step_timer--;
-    if (TASK(FishingState)->step_timer == 0) {
+    TASK(FishingState)->timer--;
+    if (TASK(FishingState)->timer == 0) {
         TASK(FishingState)->saved_index = 1;
         if (!(TASK(FishingState)->counter_07 & 0x1)) {
             TASK(FishingState)->handler_index++;
@@ -18,8 +18,8 @@ MATCH void func_801D4378(void) {
         }
     }
     if (TASK(FishingState)->saved_index == 0) {
-        Fishing_DrawWindowFrame(MENU_HEADER_X, (MENU_HEADER_Y - TASK(FishingState)->step_timer * 16) & 0xFFFE, MENU_HEADER_WIDTH, MENU_HEADER_HEIGHT, 0);
-        func_801D7C10((u16)(TASK(FishingState)->step_timer * FISHING_SHOP_SLIDE_STEP + FISHING_SHOP_COLUMNS_X), FISHING_SHOP_COLUMNS_Y, 0);
+        Fishing_DrawWindowFrame(MENU_HEADER_X, (MENU_HEADER_Y - TASK(FishingState)->timer * 16) & 0xFFFE, MENU_HEADER_WIDTH, MENU_HEADER_HEIGHT, 0);
+        func_801D7C10((u16)(TASK(FishingState)->timer * FISHING_SHOP_SLIDE_STEP + FISHING_SHOP_COLUMNS_X), FISHING_SHOP_COLUMNS_Y, 0);
     } else {
         Fishing_DrawWindowFrame(MENU_HEADER_X, MENU_HEADER_Y, MENU_HEADER_WIDTH, MENU_HEADER_HEIGHT, 0);
         mask = 0;
@@ -28,10 +28,10 @@ MATCH void func_801D4378(void) {
         }
         func_801D7C10(FISHING_SHOP_COLUMNS_X, FISHING_SHOP_COLUMNS_Y, mask);
     }
-    func_801D88E0(FISHING_EQUIP_PANEL_X - TASK(FishingState)->step_timer * FISHING_SHOP_SLIDE_STEP, FISHING_PANEL_CONTENT_Y);
+    func_801D88E0(FISHING_EQUIP_PANEL_X - TASK(FishingState)->timer * FISHING_SHOP_SLIDE_STEP, FISHING_PANEL_CONTENT_Y);
     if (!(TASK(FishingState)->counter_07 & 0x1)) {
-        func_801D7EB0((s16)(TASK(FishingState)->step_timer * FISHING_SHOP_SLIDE_STEP + FISHING_ITEM_PANEL_X), FISHING_PANEL_CONTENT_Y);
+        func_801D7EB0((s16)(TASK(FishingState)->timer * FISHING_SHOP_SLIDE_STEP + FISHING_ITEM_PANEL_X), FISHING_PANEL_CONTENT_Y);
     } else {
-        func_801D8364(TASK(FishingState)->step_timer * FISHING_SHOP_SLIDE_STEP + FISHING_ITEM_PANEL_X, FISHING_PANEL_CONTENT_Y);
+        func_801D8364(TASK(FishingState)->timer * FISHING_SHOP_SLIDE_STEP + FISHING_ITEM_PANEL_X, FISHING_PANEL_CONTENT_Y);
     }
 }

@@ -110,7 +110,7 @@ segments:
       - [0x2A48, c, Battle_ToggleItemTargetSide]
       - [0x2B28, c, func_80099328]
       - [0x2B64, c, Battle_ChooseEquipAction]
-      - [0x2D68, c, Battle_SelectEquipRow]
+      - [0x2D68, c, Battle_SelectEquipSlot]
       - [0x3030, c, Battle_SelectEquipChoice]
       - [0x3374, c, Battle_SelectEquipItem]
       - [0x3680, c, Battle_RouteEquipItem]

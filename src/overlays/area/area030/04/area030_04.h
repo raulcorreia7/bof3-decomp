@@ -155,15 +155,15 @@ typedef struct FishingState {
     u8                            cue_index;
     u8                            counter_07;
     u8                            counter_08;
-    u8                            step_timer;
+    u8                            timer;
     u8                            step_index;
     u8                            saved_index;
     s32                           pos_x;
     s32                           cursor_10; /* the icon cursor; it steps by 8 and stops at 0xAE */
-    s32                           step_14;
+    s32                           bounce_speed;
     u32                           step_delta;
     u32                           unk_1C;
-    u32                           step_limit;
+    u32                           bounce_accel;
     u8                            active_flags;
     u8                            saved_25; /* a value copied in from the entry table */
     u8                            saved_26; /* a value copied in from the entry table */

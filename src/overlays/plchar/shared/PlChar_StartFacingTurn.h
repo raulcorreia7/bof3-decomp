@@ -11,11 +11,11 @@ MATCH void PlChar_StartFacingTurn(void) {
         to_away = TASK(Actor)->direction - FACING_DOWN;
         to_away = ABS(to_away);
         if (to_away < to_back) {
-            TASK(Actor)->param.turn_step = Actor_GetTurnStep(FACING_DOWN);
-            TASK(Actor)->unk_03          = FACING_DOWN;
+            TASK(Actor)->param.turn_delta = Actor_GetTurnStep(FACING_DOWN);
+            TASK(Actor)->unk_03           = FACING_DOWN;
         } else {
-            TASK(Actor)->param.turn_step = Actor_GetTurnStep(FACING_RIGHT);
-            TASK(Actor)->unk_03          = FACING_RIGHT;
+            TASK(Actor)->param.turn_delta = Actor_GetTurnStep(FACING_RIGHT);
+            TASK(Actor)->unk_03           = FACING_RIGHT;
         }
         TASK(Actor)->timer = 2;
         TASK(Actor)->header.step++;

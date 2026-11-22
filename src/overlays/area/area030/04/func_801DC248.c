@@ -1,7 +1,7 @@
 #include "area030_04.h"
 
 /* Panel page fields of the scratchpad work record. */
-#define FISHING_PAGE_STEP     (TASK(FishingState)->step_timer)
+#define FISHING_PAGE_STEP     (TASK(FishingState)->timer)
 #define FISHING_PAGE_CATEGORY (TASK(FishingState)->saved_index)
 #define FISHING_PAGE_FLAG     (TASK(FishingState)->cue_index)
 #define FISHING_SLOT_HANDLER  (TASK(FishingState)->mode_index)

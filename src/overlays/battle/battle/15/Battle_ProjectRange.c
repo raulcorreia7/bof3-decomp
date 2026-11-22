@@ -2,20 +2,20 @@
 
 /* func_800AF764 */
 MATCH void Battle_ProjectRange(void) {
-    s16         vec[3];
-    long        flags[2];
-    TILE_1*     primitive;
-    BattleWork* work;
-    BattleWork* store;
+    s16          vec[3];
+    long         flags[2];
+    TILE_1*      primitive;
+    BattleRange* work;
+    BattleRange* store;
 
-    work      = TASK(BattleWork);
+    work      = TASK(BattleRange);
     vec[0]    = ((s32)work->range_x >> 9) - 0x4000;
     primitive = (TILE_1*)g_GfxPrimCursor;
     vec[1]    = ((s32)work->range_y >> 9) - 0x4000;
     vec[2]    = -((s16)work->unk3E / 2);
     SetTile1(primitive);
     RotTransPers((SVECTOR*)vec, (long*)&primitive->x0, &flags[0], &flags[1]);
-    store         = TASK(BattleWork);
+    store         = TASK(BattleRange);
     store->unk_2E = primitive->x0;
     store->unk_30 = primitive->y0;
 }

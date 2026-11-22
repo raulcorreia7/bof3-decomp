@@ -16,9 +16,11 @@ extern u16         D_80033A08[];
 /* retail addresses */
 extern u16         D_800C1A70;
 extern volatile u8 D_80140000[];
-/* D_80143F7C */
 extern u32         g_UiPopupRequest;
 extern u16         g_GameAreaId;
+/* The party's field position, 16.16; g_ScrollHeight is the integer half of z. */
+/* D_80143F7C */
+extern Coord3      g_PartyPos;
 extern s32         g_PartyX; /* 0x80143F7C */
 /* D_80143F80 */
 extern s32         g_PartyY; /* 0x80143F80 */
@@ -106,6 +108,9 @@ extern u8            D_8014688E[];
 extern u8            D_801468BC[];
 extern u8            D_801468C0[];
 extern s16           D_80146916;
+/* The area's focus point, 16.16; g_AreaFocusY is y and the integer half of z is D_80147A96. */
+/* D_80147A8C */
+extern Coord3        g_AreaFocus;
 extern s32           D_80147A8C;
 extern s32           D_80147A94;
 /* Per-slot effect work arrays at a 0x30-byte stride: the accumulators at
@@ -168,9 +173,9 @@ extern s16         g_AreaCameraOffsetY;
 /* D_8014932C */
 extern s16         g_AreaCameraOffsetZ;
 /* D_8014932E */
-extern s16         g_AreaCameraStep;
+extern s16         g_AreaCameraSpeed;
 /* D_80149330 */
-extern s16         g_AreaCameraHeightStep;
+extern s16         g_AreaCameraHeightDelta;
 /* D_80149332 */
 extern u8          g_AreaCameraMoving;
 /* D_80149333 */

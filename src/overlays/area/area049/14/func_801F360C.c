@@ -17,7 +17,7 @@ MATCH void func_801F360C(void) {
         Area_CellSetCode(12, 85, 0xC0);
         g_ScenarioState.state_04 = 4;
         *g_ScriptVars            = 0;
-        g_ScenarioState.step_05  = 0x1E;
+        g_ScenarioState.step     = 0x1E;
         return;
     }
     g_CurrentActor->interaction_flags &= ~ACTOR_INTERACTION_PENDING;

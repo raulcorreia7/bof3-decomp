@@ -10,7 +10,7 @@ MATCH void func_801D5D88(void) {
 
     u8 mode;
 
-    mode = TASK(FishingState)->step_timer;
+    mode = TASK(FishingState)->timer;
     if (mode == 0) {
         offset = TASK(FishingState)->step_index * 3;
         if (D_801E2008[offset] == GAME_NONE) {
@@ -20,10 +20,10 @@ MATCH void func_801D5D88(void) {
             TASK(FishingState)->cue_index  = 0;
         }
         Script_Select(D_801E2008[TASK(FishingState)->step_index * 3]);
-        TASK(FishingState)->step_timer = D_801E2009[TASK(FishingState)->step_index * 3];
+        TASK(FishingState)->timer = D_801E2009[TASK(FishingState)->step_index * 3];
         TASK(FishingState)->step_index += 1;
     } else {
-        TASK(FishingState)->step_timer = mode - 1;
+        TASK(FishingState)->timer = mode - 1;
         Script_AnimStepLoop();
     }
     Area_AddActor();

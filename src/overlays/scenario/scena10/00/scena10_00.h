@@ -18,26 +18,12 @@ extern char D_801F6C08[];
 extern char D_801F6C10[];
 
 /* A scene rectangle the panel draws: position and size. */
-typedef struct Scena10Rect {
-    s16 x; /* 0x00 */
-    s16 y; /* 0x02 */
-    u16 w; /* 0x04 */
-    u16 h; /* 0x06 */
-} Scena10Rect;
-
-ASSERT_OFFSET(Scena10Rect, x, 0x00);
-ASSERT_OFFSET(Scena10Rect, y, 0x02);
-ASSERT_OFFSET(Scena10Rect, w, 0x04);
-ASSERT_OFFSET(Scena10Rect, h, 0x06);
-ASSERT_SIZE(Scena10Rect, 8);
-
-/* The panel draws entry 2. */
-extern Scena10Rect D_801FE7CC[];
-extern u8          D_801FE804[2];
-extern u8          D_801FE808[2];
-extern u8          D_801FE830[8][3];
-extern Pos2        D_801FE848[];
-extern u8          D_801FE874[];
+extern RectU16 D_801FE7CC[];
+extern u8      D_801FE804[2];
+extern u8      D_801FE808[2];
+extern u8      D_801FE830[8][3];
+extern Pos2    D_801FE848[];
+extern u8      D_801FE874[];
 
 /* The g_SceneFlags bit the scene trigger row flags count from. */
 #define SCENE_TRIGGER_FLAG_BASE 0x20

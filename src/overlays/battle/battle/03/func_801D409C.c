@@ -18,7 +18,7 @@ MATCH void func_801D409C(void) {
         return;
     }
 
-    state = &g_Battle.row_cursor;
+    state = &g_Battle.selection;
     if (*state < 3) {
         clear_flag = ~8;
         battler    = state + 0x8F;
@@ -47,7 +47,7 @@ MATCH void func_801D409C(void) {
                 Battle_AddMessage(1, 0, UI_MessageGetText(BATTLE_TEXT_CANT_LEARN));
                 return;
             }
-        } while (g_Battle.row_cursor < 3);
+        } while (g_Battle.selection < 3);
     }
     phase_byte  = &g_Battle.phase.sub_step;
     *phase_byte = *phase_byte + 1;

@@ -7,7 +7,7 @@
 MATCH void Menu_SelectScreen(void) {
     s32        index;
     u8*        pond;
-    Character* row;
+    Character* character;
     u16        flags;
     s32        count;
     u32        have;
@@ -26,18 +26,18 @@ MATCH void Menu_SelectScreen(void) {
     count = 0;
 
     /* retail walks the records from the status halfword: +0x8 is current_hp, +0x10 is max_hp */
-    row = &g_Characters[0];
+    character = &g_Characters[0];
     do {
-        need = row->stats.max_hp >> 2;
-        have = row->hp;
+        need = character->stats.max_hp >> 2;
+        have = character->hp;
         if (have < need) {
-            flags = row->status | STATUS_LOW_HP;
+            flags = character->status | STATUS_LOW_HP;
         } else {
-            flags = row->status & ~STATUS_LOW_HP;
+            flags = character->status & ~STATUS_LOW_HP;
         }
-        row->status = flags;
+        character->status = flags;
         count++;
-        row++;
+        character++;
     } while ((u8)count < CHAR_INDEX_COUNT);
 
     g_MenuStep.sub_step = 0;

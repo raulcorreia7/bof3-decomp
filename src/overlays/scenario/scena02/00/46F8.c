@@ -10,7 +10,7 @@ MATCH void func_801FB2F8(void) {
 }
 
 MATCH void func_801FB300(void) {
-    u8* step = &g_ScenarioState.step_05;
+    u8* step = &g_ScenarioState.step;
 
     if (*step == 0) {
         Party_AddZenny(0x32, 0);

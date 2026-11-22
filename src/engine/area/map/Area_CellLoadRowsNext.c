@@ -7,18 +7,18 @@
 MATCH void Area_CellLoadRowsNext(void) {
     s32 row;
     s32 col;
-    s32 rotRow;
+    s32 grid_row;
     s32 rotCol;
 
     for (row = 0; row < 2; row++) {
-        rotRow = (g_AreaGridRowCursor == AREA_CELL_GRID_ROWS - 1) ? 0 : g_AreaGridRowCursor + 1;
-        rotCol = g_AreaGridColCursor;
+        grid_row = (g_AreaGridRowCursor == AREA_CELL_GRID_ROWS - 1) ? 0 : g_AreaGridRowCursor + 1;
+        rotCol   = g_AreaGridColCursor;
         for (col = 0; col < AREA_CELL_GRID_COLS; col++) {
             rotCol = (rotCol == AREA_CELL_GRID_COLS - 1) ? 0 : rotCol + 1;
-            Area_CellRequestRows(&g_AreaCells[rotRow][rotCol]);
-            Area_CellGet(row + AREA_CELL_GRID_ROWS, col, &g_AreaCells[rotRow][rotCol]);
+            Area_CellReleasePrims(&g_AreaCells[grid_row][rotCol]);
+            Area_CellGet(row + AREA_CELL_GRID_ROWS, col, &g_AreaCells[grid_row][rotCol]);
         }
-        g_AreaGridRowCursor = rotRow;
+        g_AreaGridRowCursor = grid_row;
     }
     g_AreaTileOriginX++;
     g_AreaTileOriginY++;

@@ -7,9 +7,9 @@ __asm__(".include \"include/match/macro.inc\"\n");
 
 /* Word 1 of the overlay's secondary-state handler run: the step sequence of primary state 7. */
 MATCH void func_801FA7DC(void) {
-    switch (g_ScenarioState.step_05) {
+    switch (g_ScenarioState.step) {
         case 0:
-            g_ScenarioState.step_05 = 1;
+            g_ScenarioState.step = 1;
             Game_RequestAreaChange(0xBC, 0x158000, 0xB0000, 0x8F);
             g_GamePrevSelection = 0xFF;
             return;
@@ -24,8 +24,8 @@ MATCH void func_801FA7DC(void) {
             break;
         case 5:
             UI_MessageStartArea(MSG_SCENA12_011);
-            g_GameStateIndex        = 2;
-            g_ScenarioState.step_05 = 6;
+            g_GameStateIndex     = 2;
+            g_ScenarioState.step = 6;
             return;
         case 6:
             if (g_GameStateIndex == 2) {
@@ -38,17 +38,17 @@ MATCH void func_801FA7DC(void) {
             Game_SetScriptActive();
             g_GameFlags |= 8;
             Scene_SetupParty(0x10);
-            g_ScenarioState.step_05 = 0xB;
+            g_ScenarioState.step = 0xB;
             return;
         case 11: {
             u8* progress = &g_ScriptVars[0];
             if (*progress != 1) {
                 return;
             }
-            *progress               = 0;
-            g_ScriptVars[2]         = 8;
-            g_ScenarioState.step_05 = 0xC;
-            g_GamePrevSelection     = 0xFF;
+            *progress            = 0;
+            g_ScriptVars[2]      = 8;
+            g_ScenarioState.step = 0xC;
+            g_GamePrevSelection  = 0xFF;
             Game_RequestAreaChange(0xBC, 0xA0000, 0x570000, 0x91);
             return;
         }
@@ -57,8 +57,8 @@ MATCH void func_801FA7DC(void) {
             if (*progress != 4) {
                 return;
             }
-            *progress               = 5;
-            g_ScenarioState.step_05 = 0xD;
+            *progress            = 5;
+            g_ScenarioState.step = 0xD;
             SND_SEPlay(0x20E);
             SND_BGMPlay(0x8F, 0x64, 8);
             return;
@@ -68,9 +68,9 @@ MATCH void func_801FA7DC(void) {
             if (*progress != 0x14) {
                 return;
             }
-            *progress               = 0;
-            g_ScriptVars[2]         = 0;
-            g_ScenarioState.step_05 = 0xE;
+            *progress            = 0;
+            g_ScriptVars[2]      = 0;
+            g_ScenarioState.step = 0xE;
             SYS_SetFlag(g_SceneFlags, 0x2B);
             g_GamePrevSelection = 0xFF;
             Game_RequestAreaChange(0xBC, 0x120000, 0x70000, 0x92);
@@ -79,17 +79,17 @@ MATCH void func_801FA7DC(void) {
         }
         case 14:
             Area_ScrollStartRoute(4);
-            g_ScenarioState.step_05 = 0xF;
+            g_ScenarioState.step = 0xF;
             return;
         case 15: {
             u8* progress = &g_ScriptVars[0];
             if (*progress != 1) {
                 return;
             }
-            *progress               = 0;
-            g_ScenarioState.step_05 = 0x10;
-            g_ScriptVars[2]         = 0;
-            g_GamePrevSelection     = 0xFF;
+            *progress            = 0;
+            g_ScenarioState.step = 0x10;
+            g_ScriptVars[2]      = 0;
+            g_GamePrevSelection  = 0xFF;
             Game_RequestAreaChange(0xBC, 0xC0000, 0x590000, 0x93);
             g_GamePrevSelection = 0x8F;
             return;
@@ -99,34 +99,34 @@ MATCH void func_801FA7DC(void) {
                 return;
             }
             UI_ModeSet(0xD);
-            g_ScenarioState.step_05 = 0x11;
+            g_ScenarioState.step = 0x11;
             return;
         case 17:
             if (g_UiWindowEffectBusy != 0) {
                 return;
             }
-            g_AreaDrawFlags         = 0;
-            g_ScenarioState.step_05 = 0x12;
+            g_AreaDrawFlags      = 0;
+            g_ScenarioState.step = 0x12;
             return;
         case 18:
             UI_MessageStartArea(MSG_SCENA12_023);
-            g_GameStateIndex        = 2;
-            g_ScenarioState.step_05 = 0x13;
+            g_GameStateIndex     = 2;
+            g_ScenarioState.step = 0x13;
             return;
         case 19: {
             u8* armed = &g_GameStateIndex;
             if (*armed == 2) {
                 return;
             }
-            *armed                  = 6;
-            g_ScenarioState.step_05 = 0x14;
+            *armed               = 6;
+            g_ScenarioState.step = 0x14;
             return;
         }
         case 20:
             if (g_GameStateIndex != 0) {
                 return;
             }
-            g_ScenarioState.step_05 = 0x1D;
+            g_ScenarioState.step = 0x1D;
             g_GameFlags ^= 0x80;
             SND_SeqStop(0, 0);
             SND_SeqStop(0, 1);
@@ -169,8 +169,8 @@ MATCH void func_801FA7DC(void) {
             g_GamePrevSelection = 0x8B;
             return;
         case 29:
-            g_AreaDrawFlags         = 0x1F;
-            g_ScenarioState.step_05 = 0x1E;
+            g_AreaDrawFlags      = 0x1F;
+            g_ScenarioState.step = 0x1E;
             return;
         case 30: {
             u8* progress = &g_ScriptVars[0];
@@ -198,6 +198,6 @@ MATCH void func_801FA7DC(void) {
         default:
             return;
     }
-    g_ScenarioState.step_05  = 0;
+    g_ScenarioState.step     = 0;
     g_ScenarioState.state_04 = 0;
 }

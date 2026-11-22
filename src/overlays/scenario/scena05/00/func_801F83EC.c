@@ -16,7 +16,7 @@ MATCH void func_801F8428(void) {
 MATCH void func_801F8430(void) {
     u8* step;
 
-    step = &g_ScenarioState.step_05;
+    step = &g_ScenarioState.step;
     switch (*step) {
         case 0:
             MESSAGE_START_WAIT(MSG_SCENA05_005);

@@ -5,9 +5,9 @@
  */
 /* The head stays unprototyped: retail callers pass whole words and the callee narrows them itself. */
 /* func_8015CB18 */
-MATCH s32 Actor_ClaimSlot(id, step, selection, x, y)
+MATCH s32 Actor_ClaimSlot(id, vx, selection, x, y)
 u16       id;
-s8        step;
+s8        vx;
 s8        selection;
 s16       x;
 u16       y;
@@ -22,7 +22,7 @@ u16       y;
     if (slot != GAME_NONE) {
         g_SpawnedActors[slot].header.flags = 1;
         g_SpawnedActors[slot].type         = 6;
-        g_SpawnedActors[slot].scene_step   = step;
+        g_SpawnedActors[slot].vx           = vx;
         g_SpawnedActors[slot].unk_06       = byte_value;
         g_SpawnedActors[slot].selection    = selection;
         g_SpawnedActors[slot].screen_x     = half_value;

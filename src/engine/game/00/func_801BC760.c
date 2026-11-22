@@ -2,7 +2,7 @@
 
 #ifdef NON_MATCHING
 NON_MATCHING s32 func_801BC760(void) {
-    PartyMember* row;
+    PartyMember* member;
     s32          goal_x;
     s32          goal_y;
     s32          span;
@@ -52,13 +52,13 @@ NON_MATCHING s32 func_801BC760(void) {
             TASK(Actor)->unk_06 = 0;
         }
     }
-    row    = &g_Game.members[TASK(Actor)->unk_06];
+    member = &g_Game.members[TASK(Actor)->unk_06];
     span   = TO_COORD(1) + COORD_HALF;
-    tgt_x  = row->pos.x.fixed + (row->unk_0C * row->unk_09);
-    near_a = tgt_x - (g_FacingSteps[row->facing].x * 2);
-    tgt_y  = row->pos.y.fixed + (row->unk_10 * row->unk_09);
-    near_b = tgt_y - (g_FacingSteps[row->facing].y * 2);
-    if (row->speed != 0) {
+    tgt_x  = member->pos.x.fixed + (member->unk_0C * member->unk_09);
+    near_a = tgt_x - (g_FacingSteps[member->facing].x * 2);
+    tgt_y  = member->pos.y.fixed + (member->unk_10 * member->unk_09);
+    near_b = tgt_y - (g_FacingSteps[member->facing].y * 2);
+    if (member->speed != 0) {
         span = TO_COORD(2);
     }
     dx = TASK(Actor)->pos.x.fixed - tgt_x;

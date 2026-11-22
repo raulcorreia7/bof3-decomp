@@ -8,7 +8,7 @@ __asm__(".include \"include/match/macro.inc\"\n");
 #endif
 
 MATCH void func_801F9874(void) {
-    switch (g_ScenarioState.step_05) {
+    switch (g_ScenarioState.step) {
         case 0:
             if (g_Game.members[0].chr.character_id != CHAR_ID_REI) {
                 SCENARIO_MESSAGE_WAIT(MSG_SCENA01_007, 1);
@@ -27,20 +27,20 @@ MATCH void func_801F9874(void) {
         case 2:
             if (g_GameStateIndex != GAME_REQUEST_MESSAGE) {
                 SND_SEPlay(0x103);
-                g_ScenarioState.step_05 = 10;
+                g_ScenarioState.step = 10;
                 g_GameFlags |= 0x1E;
             }
             break;
         case 10:
             Game_SetScriptActive();
-            g_ScenarioState.step_05 = 11;
+            g_ScenarioState.step = 11;
             Game_RequestAreaChange(8, 0x540000, 0x1D0000, 0x81);
             g_GamePrevSelection = 11;
             break;
         case 11:
             g_ScriptVars[0] = 2;
             Area_ScrollStartRoute(0);
-            g_ScenarioState.step_05 = 12;
+            g_ScenarioState.step = 12;
             break;
         case 12:
             if (g_ScriptVars[0] == 0x16) {

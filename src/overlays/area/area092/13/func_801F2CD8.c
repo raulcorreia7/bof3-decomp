@@ -11,7 +11,7 @@ MATCH void func_801F2CD8(void) {
         g_ScriptVars[1]          = 0;
         g_ScriptVars[2]          = 0;
         g_ScriptVars[3]          = 0;
-        g_ScenarioState.step_05  = 0;
+        g_ScenarioState.step     = 0;
         g_ScenarioState.state_04 = 8;
     }
 }

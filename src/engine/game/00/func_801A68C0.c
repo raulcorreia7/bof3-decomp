@@ -4,7 +4,7 @@ MATCH void func_801A68C0(u8* script) {
     s16*   counter = (s16*)&g_ScratchPad;
     s16    slot;
     s32    tile;
-    Actor* rows;
+    Actor* actors;
     Actor* work;
     s32    x;
     s32    y;
@@ -19,7 +19,7 @@ MATCH void func_801A68C0(u8* script) {
     offset             = script[9] * 8;
     g_Task             = &g_Actors[slot];
     GAME_WORK_AREA_PTR = &g_Actors[slot];
-    rows               = g_Actors;
+    actors             = g_Actors;
 
     tile                   = FIELD(s32, g_AreaLoads[tile], 0x8u) + offset;
     TASK(Actor)->direction = script[0] & 0xF;
@@ -48,8 +48,8 @@ MATCH void func_801A68C0(u8* script) {
     TASK(Actor)->unk_18           = 0;
     TASK(Actor)->voice_flags.raw  = FIELD(u8, TASK(Actor)->range_54.table, 0x2u);
 
-    rows[*counter].unk_88                               = 0;
-    rows[*counter].walk_dest_y                          = 0;
+    actors[*counter].unk_88                             = 0;
+    actors[*counter].walk_dest_y                        = 0;
     FIELD(s32, g_ActorWalkDestX, *counter * ACTOR_SIZE) = 0;
     FIELD(u8, &D_801468FF, *counter * ACTOR_SIZE)       = script[0xA];
     FIELD(u8, D_80146900, *counter * ACTOR_SIZE)        = script[6];

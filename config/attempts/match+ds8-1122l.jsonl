@@ -1,0 +1,9 @@
+{"function": "emi/battle/battle/15@0x800AEEC8", "tried": "sched2: the unk_0A = 0 store written before target.party = g_Task", "first_diff": "12 diffs: retail hoists the g_Task load above li v0,1; the draft keeps it at the store", "score": 12}
+{"function": "emi/battle/battle/15@0x800AEEC8", "tried": "sched2: a u32 party local assigned right after the alloc and used by the target.party store", "first_diff": "25 diffs: the slot masking and the whole store block reorder", "score": 25}
+{"function": "emi/battle/battle/15@0x800AEEC8", "tried": "sched2: the party local assigned after status = 1 instead of before", "first_diff": "25 diffs, same block reorder", "score": 25}
+{"function": "emi/world01/area044/13@0x801F318C", "tried": "sched2: the vz = 0 store written before the vx store at function entry", "first_diff": "26 diffs: retail masks facing (andi a0) then shifts it before the prologue saves; the draft shifts the table value first", "score": 26}
+{"function": "emi/world01/area044/13@0x801F318C", "tried": "sched2: the timer = 0x20 store written first", "first_diff": "26 diffs, unchanged", "score": 26}
+{"function": "emi/world01/area044/13@0x801F318C", "tried": "sched2: the vy store moved before vx and the others", "first_diff": "124 diffs: the table addressing and the branch block move", "score": 124}
+{"function": "emi/bmagic/magic220/03@0x801EED18", "tried": "sched2: target.party = g_Task written before header.mode = 0", "first_diff": "81 diffs: the effect block and the branch offsets move", "score": 81}
+{"function": "emi/bmagic/magic220/03@0x801EED18", "tried": "sched2: header.mode = 0 moved after the param counter increment", "first_diff": "81 diffs: same block reorder", "score": 81}
+{"function": "emi/bmagic/magic220/03@0x801EED18", "tried": "local-alloc: a PartyMember* task local taken after Battle_CenterCamera for the five task stores", "first_diff": "83 diffs: the base load count and the saved registers change", "score": 83}

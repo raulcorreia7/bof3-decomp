@@ -16,16 +16,16 @@
 #include "overlays/area/shared/UI_MessageAnswerSelectValue.h"
 
 /* func_800F500C */
-void Fishing_ShopRun(void);
+void  Fishing_ShopRun(void);
 /* func_801E0C80 */
-void Fishing_SetDrawMode(s32 graphic, s32 layer);
+void  Fishing_SetDrawMode(s32 graphic, s32 layer);
 /* func_801E0DCC */
-u8*  Fishing_DrawSprite(s32 icon_index, s32 layer, s16 sprite_x, s16 sprite_y);
+SPRT* Fishing_DrawSprite(s32 icon_index, s32 layer, s16 sprite_x, s16 sprite_y);
 /* func_801F2C4C */
-void UI_MessageAnswerSelectValue(void);
-void func_801F2D1C(void);
-void func_801F3060(void);
-void func_801F3360(void);
-void func_801F36D0(void);
+void  UI_MessageAnswerSelectValue(void);
+void  func_801F2D1C(void);
+void  func_801F3060(void);
+void  func_801F3360(void);
+void  func_801F36D0(void);
 
 #endif

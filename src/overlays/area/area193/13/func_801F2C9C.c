@@ -5,6 +5,6 @@ MATCH s32 func_801F2C9C(void) {
     if (g_UiMessageChoice == 1) {
         Game_SetScriptActive();
         g_ScenarioState.state_04 = 1;
-        g_ScenarioState.step_05  = 0;
+        g_ScenarioState.step     = 0;
     }
 }

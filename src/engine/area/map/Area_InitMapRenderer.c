@@ -61,19 +61,19 @@ NON_MATCHING void Area_InitMapRenderer(void) {
     }
     g_AreaTileRemainderY      = height;
     D_80149336                = 0;
-    g_AreaCameraStep          = 0;
-    g_AreaCameraHeightStep    = 0;
+    g_AreaCameraSpeed         = 0;
+    g_AreaCameraHeightDelta   = 0;
     g_AreaHeightOffsetEnabled = 0;
     g_AreaSceneMode           = 0;
     g_AreaCameraRefreshCount  = 3;
     g_AreaCellCodes           = (g_AreaMapBundle.byte_code_offset * 4) + (MAP_BUNDLE_BASE + 0x00);
     for (row = 0; row < AREA_CELL_GRID_ROWS; row++) {
         for (col = 0; col < AREA_CELL_GRID_COLS; col++) {
-            g_AreaCells[row][col].prim_id = 0;
+            g_AreaCells[row][col].prim_slot = 0;
             Area_CellGet(row, col, &g_AreaCells[row][col]);
         }
     }
-    order = &g_AreaCellPrimFreeIds[0x3FF];
+    order = &g_AreaCellPrimFreeSlots[0x3FF];
     for (i = 0x3FF; i >= 0; i--) {
         *order = i;
         order--;

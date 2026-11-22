@@ -32,11 +32,11 @@ MATCH void func_801F3EE8(void) {
             u16* timer = &D_801448EE;
 
             if (TIMER_EXPIRED(*timer)) {
-                g_AreaScrollTargetX    = 0x118000;
-                g_AreaScrollTargetY    = 0xAF0000;
-                g_AreaCameraHeightStep = 0;
-                g_SceneEventState.step = 0x16;
-                g_AreaCameraStep       = g_RouteSpeedScale[4] * 8;
+                g_AreaScrollTargetX     = 0x118000;
+                g_AreaScrollTargetY     = 0xAF0000;
+                g_AreaCameraHeightDelta = 0;
+                g_SceneEventState.step  = 0x16;
+                g_AreaCameraSpeed       = g_RouteSpeedScale[4] * 8;
             }
         } break;
         case 21:
@@ -56,11 +56,11 @@ MATCH void func_801F3EE8(void) {
             u16* timer = &D_801448EE;
 
             if (TIMER_EXPIRED(*timer)) {
-                g_AreaCameraHeightStep = 0;
-                g_SceneEventState.step = 0x18;
-                g_AreaScrollTargetX    = g_Game.members[0].pos.x.fixed;
-                g_AreaScrollTargetY    = g_Game.members[0].pos.y.fixed;
-                g_AreaCameraStep       = g_RouteSpeedScale[4] * 8;
+                g_AreaCameraHeightDelta = 0;
+                g_SceneEventState.step  = 0x18;
+                g_AreaScrollTargetX     = g_Game.members[0].pos.x.fixed;
+                g_AreaScrollTargetY     = g_Game.members[0].pos.y.fixed;
+                g_AreaCameraSpeed       = g_RouteSpeedScale[4] * 8;
             }
         } break;
         case 23:

@@ -19,6 +19,6 @@ MATCH void SYS_ClearCurrentThread(void) {
     } while (i >= 0);
 
     for (i = 0; i < 16; i++) {
-        g_SysCurrentThread->pad_70[i] = 0;
+        g_SysCurrentThread->tail.clear.byte[i] = 0;
     }
 }

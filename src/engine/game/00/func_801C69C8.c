@@ -10,7 +10,7 @@ MATCH s32 func_801C69C8(s32 record_index) {
     u8            unk_10[0x20];
 
     index                    = record_index & BYTE_MASK;
-    slot                     = &g_EncounterParty[index];
+    slot                     = &g_AreaEncounterPlacement.party[index];
     mode                     = D_801CD944[index].key;
     result                   = 0;
     TASK(Actor)->pos.z.fixed = Area_HeightSample(slot->x.fixed, slot->y.fixed) << 16;

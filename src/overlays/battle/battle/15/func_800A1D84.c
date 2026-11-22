@@ -1,60 +1,57 @@
 #include "battle_15.h"
 
-/* The active battler index selects one of three rows. */
-#define BATTLE_ACTIVE_ROW_COUNT 3
+/* The active battler index selects one of three party members. */
+#define BATTLE_ACTIVE_MEMBER_COUNT 3
 /* The timer counts up to this value before it stops. */
-#define BATTLE_TIMER_MAX        9
+#define BATTLE_TIMER_MAX           9
 
-/* Advances the player battler: bumps its timer and mirrored work row, copies the battler work rows and effect
- * vectors, and mirrors the active row value into the selection slot.
+/* Advances the player battler: bumps its timer and mirrored work record, copies the battler work records and effect
+ * vectors, and mirrors the active member value into the selection slot.
  */
 #ifdef NON_MATCHING
 NON_MATCHING void func_800A1D84(void) {
-    s32 record_index;
-    s32 row_offset;
-    u8  i;
-    u32 row_index;
-    u8* active;
-    u8* cell;
-    u8* src;
-    u8* dst;
-    u8* dest;
-    u8  timer;
+    Character* member_chr;
+    s32        record_index;
+    u8         i;
+    u32        battler_slot;
+    u8*        active;
+    Character* cell;
+    u8*        src;
+    u8*        dst;
+    u8         timer;
 
-    active    = (u8*)&g_Battle.target;
-    row_index = *active;
-    if (row_index < BATTLE_ACTIVE_ROW_COUNT) {
-        row_offset   = row_index * BATTLE_PARTY_STRIDE;
-        record_index = (&g_Game.members[0].character_index)[row_offset];
+    active       = (u8*)&g_Battle.target;
+    battler_slot = *active;
+    if (battler_slot < BATTLE_ACTIVE_MEMBER_COUNT) {
+        record_index = g_Game.members[battler_slot].character_index;
         timer        = g_Characters[record_index].fatigue;
         if (timer < BATTLE_TIMER_MAX) {
             g_Characters[record_index].fatigue = timer + 1;
-            row_offset                         = *active * BATTLE_PARTY_STRIDE;
-            D_80145F1E[row_offset]             = D_80145F1E[row_offset] + 1;
+            g_Game.members[*active].chr.fatigue += 1;
         }
         Char_RebuildStats(&g_Characters[g_Game.members[*active].character_index]);
         i = 0;
         if (g_Battle.party_count != 0) {
             do {
-                dest       = i * BATTLE_PARTY_STRIDE + D_80145F04;
-                cell       = &g_Characters[g_Game.members[i].character_index];
-                dest[0x0E] = cell[0x0E];
-                dest[0x0F] = cell[0x0F];
-                dest[0x10] = cell[0x10];
-                dest[0x11] = cell[0x11];
-                dest[0x12] = cell[0x12];
+                member_chr                       = &g_Game.members[i].chr;
+                cell                             = &g_Characters[g_Game.members[i].character_index];
+                member_chr->equip.weapon         = cell->equip.weapon;
+                member_chr->equip.shield         = cell->equip.shield;
+                member_chr->equip.helmet         = cell->equip.helmet;
+                member_chr->equip.armor          = cell->equip.armor;
+                member_chr->equip.accessories[0] = cell->equip.accessories[0];
                 i += 1;
-                dest[0x13] = cell[0x13];
-                memcpy(dest + 0x3C, cell + 0x1C, 16);
-                memcpy(dest + 0x4C, cell + 0x2C, 16);
+                member_chr->equip.accessories[1] = cell->equip.accessories[1];
+                memcpy((u8*)&member_chr->base, (u8*)&cell->stats, 16);
+                memcpy((u8*)&member_chr->base + 16, (u8*)&cell->stats + 16, 16);
             } while ((u32)(i & BYTE_MASK) < (u8)g_Battle.party_count);
         }
         i = 0;
         Battle_ApplyFormationStats();
         if (g_Battle.party_count != 0) {
             do {
-                dst                    = i * BATTLE_PARTY_STRIDE + D_80145F20;
-                src                    = i * BATTLE_PARTY_STRIDE + (D_80145F20 + 0x20);
+                dst                    = (u8*)&g_Game.members[i].chr.stats;
+                src                    = (u8*)&g_Game.members[i].chr.base;
                 *(Cpy16u*)(dst + 0x00) = *(Cpy16u*)(src + 0x00);
                 *(Cpy16u*)(dst + 0x10) = *(Cpy16u*)(src + 0x10);
                 i += 1;
@@ -68,7 +65,7 @@ NON_MATCHING void func_800A1D84(void) {
                 i += 1;
             } while ((u32)(i & BYTE_MASK) < (u8)g_Battle.party_count);
         }
-        g_Battle.target_record->hp_change = -(s16) * (u16*)(D_80145F20 + (*active * BATTLE_PARTY_STRIDE));
+        g_Battle.target_record->hp_change = -(s16)g_Game.members[*active].chr.stats.max_hp;
     }
 }
 #else

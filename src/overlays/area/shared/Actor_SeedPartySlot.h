@@ -15,7 +15,7 @@
         g_SpawnedActors[TASK(Actor)->param.actor_slot].header.flags = 1;                                  \
         g_SpawnedActors[TASK(Actor)->param.actor_slot].type         = actor_type;                         \
         g_SpawnedActors[TASK(Actor)->param.actor_slot].unk_06       = unk06;                              \
-        g_SpawnedActors[TASK(Actor)->param.actor_slot].scene_step   = 0;                                  \
+        g_SpawnedActors[TASK(Actor)->param.actor_slot].vx           = 0;                                  \
         g_SpawnedActors[TASK(Actor)->param.actor_slot].selection    = (table)[g_PartyFieldOrder[member]]; \
         g_SpawnedActors[TASK(Actor)->param.actor_slot].screen_x     = TASK(Actor)->screen_x;              \
         g_SpawnedActors[TASK(Actor)->param.actor_slot].screen_y     = TASK(Actor)->screen_y;              \

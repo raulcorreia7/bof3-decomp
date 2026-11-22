@@ -30,7 +30,7 @@ MATCH void func_801FC094(void) {
 MATCH void func_801FC1C4(void) {
     u8* step;
 
-    step = &g_ScenarioState.step_05;
+    step = &g_ScenarioState.step;
     switch (*step) {
         case 0:
             func_8019FA28(0x35, 0x120000, 0x180000, 1);

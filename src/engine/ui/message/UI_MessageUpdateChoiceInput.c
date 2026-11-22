@@ -12,14 +12,14 @@ MATCH void UI_MessageUpdateChoiceInput(void) {
 
         D_80148357              = 3;
         g_UiPanelTasks[0].state = 1;
-        step                    = &g_UiWindowStep;
+        step                    = &g_UiMessageStep;
         *step                   = *step + 1;
         return;
     }
     if ((g_PadStates[0].pressed & g_InputMasks[MENU_INPUT_CONFIRM]) != 0) {
         u8* step;
 
-        step  = &g_UiWindowStep;
+        step  = &g_UiMessageStep;
         *step = *step + 2;
         return;
     }

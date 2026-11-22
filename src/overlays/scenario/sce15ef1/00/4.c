@@ -442,17 +442,17 @@ MATCH void func_801D2170(void) {
 /* Spawn an actor from the current one's record, start its script when it is drawn, and advance the mode. */
 MATCH void func_801D21B4(void) {
     u8            slot;
-    SpawnedActor* row;
+    SpawnedActor* spawned_actor;
     Actor*        actor;
     Actor*        parent;
 
     slot = Actor_FindFreeSpawned();
     if (slot != GAME_NONE) {
-        D_801D40AC = 1;
-        row        = &g_SpawnedActors[slot];
+        D_801D40AC    = 1;
+        spawned_actor = &g_SpawnedActors[slot];
         GFX_ClearRect(0x340, 0x100, 0x80, 0x100);
-        *row                = *(SpawnedActor*)TASK(Actor)->unk_4C;
-        actor               = (Actor*)row;
+        *spawned_actor      = *(SpawnedActor*)TASK(Actor)->unk_4C;
+        actor               = (Actor*)spawned_actor;
         actor->header.flags = 1;
         actor->header.mode  = 2;
         actor->header.step  = 0;
@@ -642,7 +642,7 @@ MATCH void func_801D2C00(void) {
  * and hands over to the next mode. */
 MATCH void func_801D2C94(void) {
     Actor* work;
-    Actor* step;
+    Actor* actor;
     Actor* arm;
     Actor* state;
     s32*   pairs;
@@ -653,12 +653,12 @@ MATCH void func_801D2C94(void) {
     work->vy     = 0;
     work->unk_18 = 0;
     work->unk_1C = 0;
-    step         = work;
+    actor        = work;
     for (i = 0; i < 20; i++) {
-        step->unk_18 += 0x100;
-        step->unk_1C += 0x200;
-        step->vx += step->unk_18;
-        step->vy += step->unk_1C;
+        actor->unk_18 += 0x100;
+        actor->unk_1C += 0x200;
+        actor->vx += actor->unk_18;
+        actor->vy += actor->unk_1C;
     }
     arm        = TASK(Actor);
     arm->timer = 20;
@@ -696,18 +696,18 @@ MATCH void func_801D2DEC(void) {
 /* At script value 0x29 spawn an actor from the current one's record and run its script, then advance the mode. */
 MATCH void func_801D2E30(void) {
     u8            slot;
-    SpawnedActor* row;
+    SpawnedActor* spawned_actor;
     Actor*        actor;
     Actor*        parent;
 
     if (g_ScriptVars[0] == 0x29) {
         slot = Actor_FindFreeSpawned();
         if (slot != GAME_NONE) {
-            D_801D40AC = 1;
-            row        = &g_SpawnedActors[slot];
+            D_801D40AC    = 1;
+            spawned_actor = &g_SpawnedActors[slot];
             GFX_ClearRect(0x340, 0x100, 0x80, 0x100);
-            *row                = *(SpawnedActor*)TASK(Actor)->unk_4C;
-            actor               = (Actor*)row;
+            *spawned_actor      = *(SpawnedActor*)TASK(Actor)->unk_4C;
+            actor               = (Actor*)spawned_actor;
             actor->header.flags = 1;
             actor->header.mode  = 2;
             actor->header.step  = 0;

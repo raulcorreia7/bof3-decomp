@@ -4,7 +4,7 @@
 MATCH void Battle_RunDesertDefeat(void) {
     if (((g_Battle.outcome.result & BATTLE_RESULT_DEFEAT) != 0u) && (g_GameLastAreaId == AREA_ID_DESERT_OF_DEATH_MAP)) {
         g_ScenarioState.state_04 = 1u;
-        g_ScenarioState.step_05  = 0x19u;
+        g_ScenarioState.step     = 0x19u;
         Game_SetScriptActive();
         Battle_EndToArea();
     }

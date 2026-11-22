@@ -48,6 +48,6 @@ MATCH void func_801E5C68(void) {
             SND_SEPlay(EMI_SE_ID(SND_BANK_COMMON, 4));
         }
         g_GameEntrySubstate = step;
-        g_MenuStartStep     = g_MenuStartReturnStep;
+        g_MenuCampStep      = g_MenuStartReturnStep;
     }
 }

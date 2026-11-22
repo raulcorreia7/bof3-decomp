@@ -7,9 +7,9 @@ MATCH void Boss_ChooseBattleEnding(void) {
         BOSS_SEND_PARTY_TO_ENDING_POSE(0)
         BOSS_SEND_PARTY_TO_ENDING_POSE(1)
         BOSS_SEND_PARTY_TO_ENDING_POSE(2)
-        result                  = &g_Battle.outcome.result;
-        g_SndBGMId              = 0x6B;
-        g_ScenarioState.step_05 = 0xE;
+        result               = &g_Battle.outcome.result;
+        g_SndBGMId           = 0x6B;
+        g_ScenarioState.step = 0xE;
         *result |= 8;
         Battle_EndVictory();
         return;

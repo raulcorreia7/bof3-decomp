@@ -5,10 +5,10 @@ __asm__(".include \"include/match/macro.inc\"\n");
 #endif
 
 MATCH void func_801EEC28(void) {
-    Magic021Steps handlers = D_801EEC04;
-    PartyMember*  saved_task;
-    PartyMember*  saved_battler;
-    u8            i;
+    MagicModuleSteps handlers = D_801EEC04;
+    PartyMember*     saved_task;
+    PartyMember*     saved_battler;
+    u8               i;
 
     SYS_DISPATCH_BYTE(handlers.steps, TASK(PartyMember)->header.mode);
 
@@ -29,19 +29,19 @@ MATCH void func_801EED30(void) {
     index  = Battle_AllocEffect(1, 9) & BYTE_MASK;
     active = g_Battle.active_battler;
     if (BATTLER_IS_PLAYER(active)) {
-        BattleWorkImage* row;
+        BattleWorkImage* image;
 
-        row                     = (BattleWorkImage*)&g_Game.members[active];
+        image                   = (BattleWorkImage*)&g_Game.members[active];
         slot                    = &g_BattleEffects[index];
-        *(BattleWorkImage*)slot = *row;
+        *(BattleWorkImage*)slot = *image;
     } else {
-        BattleWorkImage* row;
+        BattleWorkImage* image;
         u32              enemy;
 
         slot                    = &g_BattleEffects[index];
         enemy                   = active - BATTLE_PARTY_CHARACTERS_COUNT;
-        row                     = (BattleWorkImage*)&g_BattleEnemyBattlers[enemy];
-        *(BattleWorkImage*)slot = *row;
+        image                   = (BattleWorkImage*)&g_BattleEnemyBattlers[enemy];
+        *(BattleWorkImage*)slot = *image;
     }
     work                                = TASK(PartyMember);
     g_BattleEffects[index].unk_06       = 1;

@@ -7,6 +7,6 @@ MATCH void Area_SceneResumeAfterMessage(void) {
     if (MENU_SELECTION_IDLE()) {
         Game_SetScriptActive();
         g_ScenarioState.state_04 = 1;
-        g_ScenarioState.step_05  = 0x14;
+        g_ScenarioState.step     = 0x14;
     }
 }

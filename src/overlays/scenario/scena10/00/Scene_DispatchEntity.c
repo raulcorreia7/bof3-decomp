@@ -34,7 +34,7 @@ NON_MATCHING void func_801F7068(void) {
     i     = 0;
     count = 0;
     while (i < 3) {
-        width = D_801FE7CC[i].w;
+        width = D_801FE7CC[i].box.w;
         timer = TASK(Actor)->timer;
         limit = timer << 4;
         if (limit < width) {
@@ -42,14 +42,14 @@ NON_MATCHING void func_801F7068(void) {
         } else {
             count++;
         }
-        height = D_801FE7CC[i].h;
+        height = D_801FE7CC[i].box.h;
         if (limit < height) {
             height = limit;
         } else {
             count++;
         }
         if ((TASK(Actor)->option_flags & (1 << i)) == 0) {
-            UI_WindowDrawBoxOutline(D_801FE7CC[i].x, D_801FE7CC[i].y, (u8)width, (u8)height);
+            UI_WindowDrawBoxOutline(D_801FE7CC[i].box.x, D_801FE7CC[i].box.y, (u8)width, (u8)height);
         }
         i++;
     }
@@ -68,23 +68,23 @@ MATCH void func_801F719C(void) {
     i = 0;
     do {
         if (((TASK(Actor)->option_flags >> i) & 1) == 0) {
-            UI_WindowDrawPanelBox(D_801FE7CC[i].x, D_801FE7CC[i].y, (u8)D_801FE7CC[i].w, (u8)D_801FE7CC[i].h);
+            UI_WindowDrawPanelBox(D_801FE7CC[i].signed_box.x, D_801FE7CC[i].signed_box.y, (u8)D_801FE7CC[i].signed_box.w, (u8)D_801FE7CC[i].signed_box.h);
         }
         i++;
     } while (i < 3);
     if ((TASK(Actor)->option_flags & 1) == 0) {
-        TASK(Actor)->screen_x = (u16)D_801FE7CC[0].x + D_801FE804[0];
-        TASK(Actor)->screen_y = (u16)D_801FE7CC[0].y + D_801FE804[1];
+        TASK(Actor)->screen_x = (u16)D_801FE7CC[0].signed_box.x + D_801FE804[0];
+        TASK(Actor)->screen_y = (u16)D_801FE7CC[0].signed_box.y + D_801FE804[1];
         Script_AnimStepLoop();
         Area_AddActor();
     }
     if (((TASK(Actor)->option_flags >> 1) & 1) == 0) {
         sprintf((char*)g_UiTextFormatBuffer, D_801F6C04, Item_GetRecord(ITEM_CATEGORY_ITEM, TASK(Actor)->unk_06));
-        UI_TextDraw((s16)((u16)D_801FE7CC[1].x + 4), (s16)((u16)D_801FE7CC[1].y + 2), 0, 8, g_UiTextFormatBuffer);
+        UI_TextDraw((s16)((u16)D_801FE7CC[1].signed_box.x + 4), (s16)((u16)D_801FE7CC[1].signed_box.y + 2), 0, 8, g_UiTextFormatBuffer);
         sprintf((char*)g_UiTextFormatBuffer, D_801F6C08, (u16)Item_Count(ITEM_CATEGORY_ITEM, TASK(Actor)->unk_06, 0));
-        UI_TextDraw((s16)((u16)D_801FE7CC[1].x + 0x48), (s16)((u16)D_801FE7CC[1].y + 2), 0, 2, g_UiTextFormatBuffer);
+        UI_TextDraw((s16)((u16)D_801FE7CC[1].signed_box.x + 0x48), (s16)((u16)D_801FE7CC[1].signed_box.y + 2), 0, 2, g_UiTextFormatBuffer);
     }
-    func_801F781C((u16)D_801FE7CC[2].x + 1, (u16)D_801FE7CC[2].y + 1, 0x80, 0x68);
+    func_801F781C((u16)D_801FE7CC[2].signed_box.x + 1, (u16)D_801FE7CC[2].signed_box.y + 1, 0x80, 0x68);
     if (TASK(Actor)->unk_0A != 0) {
         TASK(Actor)->unk_0A--;
     } else if (g_PadStates[0].held != 0) {
@@ -101,17 +101,17 @@ NON_MATCHING void func_801F73EC(void) {
 
     i = 0;
     do {
-        width = D_801FE7CC[i].w;
+        width = D_801FE7CC[i].box.w;
         limit = (u16)(TASK(Actor)->timer << 4);
         if (limit < width) {
             width = limit;
         }
-        height = D_801FE7CC[i].h;
+        height = D_801FE7CC[i].box.h;
         if (limit < height) {
             height = limit;
         }
         if (((TASK(Actor)->option_flags >> i) & 1) == 0) {
-            UI_WindowDrawBoxOutline(D_801FE7CC[i].x, D_801FE7CC[i].y, (u8)width, (u8)height);
+            UI_WindowDrawBoxOutline(D_801FE7CC[i].box.x, D_801FE7CC[i].box.y, (u8)width, (u8)height);
         }
         i++;
     } while (i < 3);
@@ -173,11 +173,11 @@ MATCH void func_801F7590(void) {
 }
 
 MATCH void func_801F7758(void) {
-    Scena10Rect* rect;
+    RectU16* rect;
 
     rect = &D_801FE7CC[2];
-    UI_WindowDrawPanelBox(rect->x, rect->y, (u8)rect->w, (u8)rect->h);
-    func_801F781C((u16)rect->x + 1, (u16)rect->y + 1, 128, 104);
+    UI_WindowDrawPanelBox(rect->signed_box.x, rect->signed_box.y, (u8)rect->signed_box.w, (u8)rect->signed_box.h);
+    func_801F781C((u16)rect->signed_box.x + 1, (u16)rect->signed_box.y + 1, 128, 104);
     if (TASK(Actor)->unk_0A != 0) {
         TASK(Actor)->unk_0A--;
     } else if (g_PadStates[0].pressed != 0) {
@@ -232,18 +232,18 @@ MATCH void func_801F79E8(u16 x, u16 y) {
 }
 
 MATCH void func_801F7AD4(void) {
-    Scena10Rect* rect;
-    u8*          record;
-    u8           count;
-    u8           color;
-    s16          x;
-    s16          y;
-    u8           i;
+    RectU16* rect;
+    u8*      record;
+    u8       count;
+    u8       color;
+    s16      x;
+    s16      y;
+    u8       i;
 
     rect = &D_801FE7CC[4];
-    UI_WindowDraw(rect->x, rect->y, rect->w, rect->h, 0, g_WindowStyle);
-    x = rect->x + 8;
-    y = rect->y + 4;
+    UI_WindowDraw(rect->box.x, rect->box.y, rect->box.w, rect->box.h, 0, g_WindowStyle);
+    x = rect->box.x + 8;
+    y = rect->box.y + 4;
     i = 0;
     do {
         record = Item_GetRecord(ITEM_CATEGORY_ITEM, (u8)(i + ITEM_PART_A));
@@ -259,32 +259,33 @@ MATCH void func_801F7AD4(void) {
 
 /* Draw rectangle 6: a styled window with the rectangle as one textured quad. */
 MATCH void func_801F7C34(void) {
-    POLY_FT4*    prim;
-    Scena10Rect* rect;
+    POLY_FT4* prim;
+    RectU16*  rect;
 
     rect = &D_801FE7CC[6];
-    func_801AE3F0((u16)rect->x, (u16)rect->y, rect->w, rect->h, 0, g_WindowStyle);
+    func_801AE3F0((u16)rect->box.x, (u16)rect->box.y, rect->box.w, rect->box.h, 0, g_WindowStyle);
     prim = (POLY_FT4*)g_GfxPrimCursor;
     SetPolyFT4(prim);
     prim->tpage = GetTPage(TPAGE_DEPTH_4BIT, TPAGE_ABR_HALF, 704, 256);
     setClut(prim, 32, 483);
     setRGB0(prim, 0x80, 0x80, 0x80);
-    setXY4(prim, (u16)rect->x, (u16)rect->y, (u16)rect->x + (rect->w - 1), (u16)rect->y, (u16)rect->x, (u16)rect->y + rect->h, (u16)rect->x + (rect->w - 1), (u16)rect->y + rect->h);
-    setUV4(prim, 0xC0, 0x50, (u8)rect->w + 0xBF, 0x50, 0xC0, (u8)rect->h + 0x50, (u8)rect->w + 0xBF, (u8)rect->h + 0x50);
+    setXY4(prim, (u16)rect->box.x, (u16)rect->box.y, (u16)rect->box.x + (rect->box.w - 1), (u16)rect->box.y, (u16)rect->box.x, (u16)rect->box.y + rect->box.h, (u16)rect->box.x + (rect->box.w - 1),
+           (u16)rect->box.y + rect->box.h);
+    setUV4(prim, 0xC0, 0x50, (u8)rect->box.w + 0xBF, 0x50, 0xC0, (u8)rect->box.h + 0x50, (u8)rect->box.w + 0xBF, (u8)rect->box.h + 0x50);
     GFX_AddPrim(GFX_LAYER_UI, sizeof(POLY_FT4));
 }
 
 /* Draw the "Choose parts" window with its item list and cursor, then place and step the cursor actor. */
 MATCH void func_801F7DDC(void) {
-    UI_WindowDraw(D_801FE7CC[3].x, D_801FE7CC[3].y, D_801FE7CC[3].w, D_801FE7CC[3].h, UI_WINDOW_STYLE_TRANSLUCENT, g_WindowStyle);
+    UI_WindowDraw(D_801FE7CC[3].box.x, D_801FE7CC[3].box.y, D_801FE7CC[3].box.w, D_801FE7CC[3].box.h, UI_WINDOW_STYLE_TRANSLUCENT, g_WindowStyle);
     sprintf(g_UiTextFormatBuffer, D_801F6C04, D_801FE874);
-    UI_TextDraw((u16)D_801FE7CC[3].x + 8, D_801FE7CC[3].y + 2, 0, ITEM_NAME_LENGTH, g_UiTextFormatBuffer);
+    UI_TextDraw((u16)D_801FE7CC[3].box.x + 8, D_801FE7CC[3].box.y + 2, 0, ITEM_NAME_LENGTH, g_UiTextFormatBuffer);
     func_801F7AD4();
     UI_CursorDraw(D_801FE808[0], (u16)(D_801FE808[1] + (TASK(Actor)->header.step & 7) * 15), 0);
     func_801F7C34();
-    TASK(Actor)->screen_x = D_801FE7CC[5].x + D_801FE804[0];
-    TASK(Actor)->screen_y = D_801FE7CC[5].y + D_801FE804[1];
-    UI_WindowDrawPanelBox(D_801FE7CC[5].x, D_801FE7CC[5].y, (u8)D_801FE7CC[5].w, (u8)D_801FE7CC[5].h);
+    TASK(Actor)->screen_x = D_801FE7CC[5].signed_box.x + D_801FE804[0];
+    TASK(Actor)->screen_y = D_801FE7CC[5].signed_box.y + D_801FE804[1];
+    UI_WindowDrawPanelBox(D_801FE7CC[5].signed_box.x, D_801FE7CC[5].signed_box.y, (u8)D_801FE7CC[5].signed_box.w, (u8)D_801FE7CC[5].signed_box.h);
     Script_AnimStepLoop();
     Area_AddActor();
 }
@@ -416,7 +417,7 @@ MATCH void func_801F8550(void) {
     }
     SND_BGMRequest(0x7A);
     g_ScenarioState.state_04 = 1;
-    g_ScenarioState.step_05  = 0;
+    g_ScenarioState.step     = 0;
 }
 
 MATCH void func_801F8694(void) {
@@ -426,7 +427,7 @@ MATCH void func_801F8694(void) {
 MATCH void func_801F86D0(void) {
 }
 
-/* Runs one step of a scena10 scene script, picked by g_ScenarioState.step_05: spawns its actors, greys the palette and moves the camera. */
+/* Runs one step of a scena10 scene script, picked by g_ScenarioState.step: spawns its actors, greys the palette and moves the camera. */
 MATCH void func_801F86D8(void) {
     u32           row;
     u32           col;
@@ -439,19 +440,19 @@ MATCH void func_801F86D8(void) {
     u32           packed;
     SpawnedActor* actor;
 
-    switch (g_ScenarioState.step_05) {
+    switch (g_ScenarioState.step) {
         case 0:
             if (g_SpawnedActors[D_801FE9D8].header.flags & 1) {
                 break;
             }
-            g_ScriptVars[0]         = 1;
-            g_ScenarioState.step_05 = 1;
+            g_ScriptVars[0]      = 1;
+            g_ScenarioState.step = 1;
             break;
         case 1:
             if (g_ScriptVars[0] != 5) {
                 break;
             }
-            g_ScenarioState.step_05 = 2;
+            g_ScenarioState.step = 2;
             break;
         case 2:
             if (g_ScriptVars[0] != 6) {
@@ -466,26 +467,26 @@ MATCH void func_801F86D8(void) {
                 g_SpawnedActors[D_801FE9D8].camera_angle.z = 0x200;
                 g_SpawnedActors[D_801FE9D8].layer          = 0x78;
             }
-            g_ScenarioState.step_05 = 3;
+            g_ScenarioState.step = 3;
             break;
         case 3:
             if (g_ScriptVars[0] != 7) {
                 break;
             }
-            g_ScenarioState.step_05 = 4;
+            g_ScenarioState.step = 4;
             break;
         case 4:
             if (g_ScriptVars[0] != 9 || !EMI_IsReady()) {
                 break;
             }
-            g_ScenarioState.step_05 = 5;
+            g_ScenarioState.step = 5;
             break;
         case 5:
             if (g_ScriptVars[0] != 0x19) {
                 break;
             }
             UI_ModeSet(0);
-            g_ScenarioState.step_05 = 6;
+            g_ScenarioState.step = 6;
             break;
         case 6:
             if (g_UiWindowEffectBusy) {
@@ -493,8 +494,8 @@ MATCH void func_801F86D8(void) {
             }
             g_AreaDrawFlags = 0;
             func_8019FA28(0x42, 0x190000, 0x120000, 0x80);
-            g_GamePrevSelection     = 0xFF;
-            g_ScenarioState.step_05 = 7;
+            g_GamePrevSelection  = 0xFF;
+            g_ScenarioState.step = 7;
             break;
         case 7:
             if (g_UiWindowEffectBusy) {
@@ -518,8 +519,8 @@ MATCH void func_801F86D8(void) {
                 } while ((col & 0xFFFF) < AREA_PALETTE_COLORS);
                 row++;
             } while ((row & 0xFF) < AREA_PALETTE_ROWS);
-            g_GfxPalettePending     = 1;
-            g_ScenarioState.step_05 = 8;
+            g_GfxPalettePending  = 1;
+            g_ScenarioState.step = 8;
             break;
         case 8:
             if (g_ScriptVars[0] != 1) {
@@ -527,16 +528,16 @@ MATCH void func_801F86D8(void) {
             }
             g_AreaDrawFlags = 0x1F;
             UI_ModeSet(1);
-            g_ScenarioState.step_05 = 9;
+            g_ScenarioState.step = 9;
             break;
         case 9:
             if (g_ScriptVars[0] != 9) {
                 break;
             }
-            g_AreaScrollTargetX     = 0x160000;
-            g_AreaScrollTargetY     = 0x150000;
-            g_AreaCameraStep        = 0x20;
-            g_ScenarioState.step_05 = 10;
+            g_AreaScrollTargetX  = 0x160000;
+            g_AreaScrollTargetY  = 0x150000;
+            g_AreaCameraSpeed    = 0x20;
+            g_ScenarioState.step = 10;
             break;
         case 10:
             if (g_ScriptVars[0] != 0xB) {
@@ -544,8 +545,8 @@ MATCH void func_801F86D8(void) {
             }
             SYS_SetFlag(g_SceneFlags, 5);
             func_8019FA28(0x52, 0x480000, 0x580000, 0x81);
-            g_GamePrevSelection     = 0xFF;
-            g_ScenarioState.step_05 = 11;
+            g_GamePrevSelection  = 0xFF;
+            g_ScenarioState.step = 11;
             break;
         case 11:
             if (g_ScriptVars[0] != 9) {
@@ -560,7 +561,7 @@ MATCH void func_801F86D8(void) {
                 actor->pos.y.fixed  = MEM_PTR(Coord3, D_801468BC)->y.fixed;
                 actor->pos.z.fixed  = (Area_HeightSample(actor->pos.x.fixed, actor->pos.y.fixed) << 16) + 0x800000;
             }
-            g_ScenarioState.step_05 = 12;
+            g_ScenarioState.step = 12;
             break;
         case 12:
             if (g_ScriptVars[0] != 0) {
@@ -569,7 +570,7 @@ MATCH void func_801F86D8(void) {
             Game_ClearScriptActive();
             SYS_SetFlag(g_SceneFlags, 6);
             g_ScenarioState.state_04 = 0;
-            g_ScenarioState.step_05  = 0;
+            g_ScenarioState.step     = 0;
             break;
     }
 }

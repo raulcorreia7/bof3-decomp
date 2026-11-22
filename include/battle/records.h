@@ -296,6 +296,25 @@ typedef union BattlePanelSelection {
     u8 mode;
 } BattlePanelSelection;
 
+/* The battle panel entries at 0x80148332: one 0x24-byte entry a panel, which
+ * battle/battle/03 opens and bmagic/magic151/03 fills. The base symbol is the
+ * table's first byte, so the fields start at +0. */
+typedef struct BattlePanel {
+    u8  mode_00; /* +0x00 panel mode; Battle_OpenPanels writes 5 and 7 */
+    u8  unk_01;  /* +0x01 */
+    s16 x_02;    /* +0x02 panel x */
+    s16 y_04;    /* +0x04 panel y */
+    u8  unk_06;  /* +0x06 */
+    u8  unk_07;  /* +0x07 */
+    u8  battler; /* +0x08 the battler the entry belongs to */
+    u8  pad_09[0x1B];
+} BattlePanel;
+
+ASSERT_OFFSET(BattlePanel, x_02, 0x02);
+ASSERT_OFFSET(BattlePanel, y_04, 0x04);
+ASSERT_OFFSET(BattlePanel, battler, 0x08);
+ASSERT_SIZE(BattlePanel, 0x24);
+
 /* The byte view of a battle panel task's +0x12 and +0x14 cells. battle/battle/15
  * reads those cells as bytes (Battle_DrawCommandList, func_800B0F9C) and as
  * halfwords, so the cells keep two views. This view starts at the panel
@@ -748,13 +767,23 @@ extern u16          g_AreaWalkFlags;
 extern BattleOwner  D_8014833A[];
 
 typedef struct BattleRange {
-    u8  unk_00[0x34];
+    u8  unk_00[0x08];
+    u8  unk_08;
+    u8  unk_09[0x03];
+    s32 unk_0C;
+    s32 unk_10;
+    u8  unk_14[0x1A];
+    u16 unk_2E;
+    u16 unk_30;
+    u16 unk_32;
     u32 range_x;
     u32 range_y;
     u8  pad_3C[2]; /* 0x3C */
-    u16 unk3E;     /* 0x3E */
+    u16 unk3E;     /* 0x3E vertical span; Battle_ProjectRange projects it negated */
 } BattleRange;
 
+ASSERT_OFFSET(BattleRange, range_x, 0x34);
+ASSERT_OFFSET(BattleRange, range_y, 0x38);
 ASSERT_OFFSET(BattleRange, unk3E, 0x3E);
 ASSERT_SIZE(BattleRange, 0x40);
 
@@ -967,8 +996,8 @@ extern u8           D_80146229;
 extern u16          D_8014622A;
 extern u8           D_80146232;
 extern s16          D_801462AA;
-/* FAKE: g_Battle.row_cursor as a global of its own; the sites that use it match only with a separate symbol. */
-extern u8           g_BattleRowCursor;
+/* FAKE: g_Battle.selection as a global of its own; the sites that use it match only with a separate symbol. */
+extern u8           g_BattleSelection;
 extern u8           D_801462EE;
 /* FAKE: g_Battle.boss_flags as a global of its own; the sites that set a bit in it match only with a separate symbol. */
 extern u8           g_BattleBossFlags;
@@ -988,9 +1017,9 @@ ASSERT_SIZE(GeneCursor, 2);
 /* The battle's state at 0x801462E0, from the phase tuple to the pending status. */
 typedef struct BattleState {
     /* 0x00 */ BattlePhase phase;
-    /* 0x03 */ u8          ui_step; /* step of the battle UI */
-    /* 0x04 */ u8          ui_mode; /* index of the battle UI state handler */
-    /* 0x05 */ u8          row_cursor;
+    /* 0x03 */ u8          ui_step;   /* step of the battle UI */
+    /* 0x04 */ u8          ui_mode;   /* index of the battle UI state handler */
+    /* 0x05 */ u8          selection; /* the party member the command menu is on, or the battler the panel shows; bit 7 marks an active selection */
     /* 0x06 */ union {
         u8         panel_entry; /* the selected entry of the battle panel */
         GeneCursor gene;        /* the gene picker's cursor in Accession */

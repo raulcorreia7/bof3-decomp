@@ -8,7 +8,7 @@ MATCH void func_801F4350(void) {
         MESSAGE_REQUEST_CLEAR();
         *count += 1;
         g_ScenarioState.state_04 = 0xD;
-        g_ScenarioState.step_05  = 8;
+        g_ScenarioState.step     = 8;
     } else {
         g_UiMessageRequest = MSG_AREA120_DECLINE_TAKE_TIME;
     }

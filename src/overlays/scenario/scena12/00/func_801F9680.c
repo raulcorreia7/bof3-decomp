@@ -11,7 +11,7 @@ MATCH void func_801F9680(void) {
     u8* state;
     u8  slot;
 
-    switch (g_ScenarioState.step_05) {
+    switch (g_ScenarioState.step) {
         case 0:
             SCENARIO_MESSAGE_WAIT(MSG_SCENA12_002, 1);
             break;
@@ -36,7 +36,7 @@ MATCH void func_801F9680(void) {
                 UI_MessageStartArea(MSG_SCENA12_013);
                 *state = GAME_REQUEST_MESSAGE;
             }
-            g_ScenarioState.step_05 = 3;
+            g_ScenarioState.step = 3;
             break;
         case 3:
             if (g_GameStateIndex == GAME_REQUEST_MESSAGE) {
@@ -53,27 +53,27 @@ MATCH void func_801F9680(void) {
         case 5:
             g_GameFlags |= 0x20;
             Scene_SetupParty(3);
-            g_ScenarioState.step_05 = 6;
+            g_ScenarioState.step = 6;
             break;
         case 6:
             if (g_ScriptVars[0] != 4) {
                 break;
             }
-            g_ScenarioState.step_05 = 7;
-            g_ScriptVars[2]         = 2;
+            g_ScenarioState.step = 7;
+            g_ScriptVars[2]      = 2;
             Game_RequestAreaChange(AREA_ID_BLACK_SHIP_BOOST_COUNTER, TO_COORD(4), TO_COORD(1), 0x84);
             break;
         case 7:
             Area_ScrollStartRoute(0);
-            g_ScenarioState.step_05 = 8;
+            g_ScenarioState.step = 8;
             break;
         case 8:
             if (g_ScriptVars[0] != 10) {
                 break;
             }
-            g_ScriptVars[0]         = 0;
-            g_ScriptVars[2]         = 1;
-            g_ScenarioState.step_05 = 9;
+            g_ScriptVars[0]      = 0;
+            g_ScriptVars[2]      = 1;
+            g_ScenarioState.step = 9;
             SYS_SetFlag(g_SceneFlags, 0x24);
             Game_RequestAreaChange(AREA_ID_BLACK_SHIP_BOOST_COUNTER, TO_COORD(12), TO_COORD(89), 0x85);
             break;
@@ -103,19 +103,19 @@ MATCH void func_801F9680(void) {
             if (D_801FD288.bytes[0] >= 0x62 && D_801FD288.bytes[0] < 0x67) {
                 Scene_SetupParty(9);
                 SYS_SetFlag(g_SceneFlags, 0x16);
-                g_ScenarioState.step_05 = 40;
+                g_ScenarioState.step = 40;
             } else {
                 Scene_SetupParty(6);
-                g_ScenarioState.step_05 = 21;
+                g_ScenarioState.step = 21;
             }
             break;
         case 21:
             if (g_ScriptVars[0] != 0x23) {
                 break;
             }
-            g_ScriptVars[0]         = 0;
-            g_ScriptVars[1]         = 1;
-            g_ScenarioState.step_05 = 22;
+            g_ScriptVars[0]      = 0;
+            g_ScriptVars[1]      = 1;
+            g_ScenarioState.step = 22;
             Game_RequestAreaChange(AREA_ID_BLACK_SHIP_BOOST_COUNTER, TO_COORD(12), TO_COORD(89), 0x87);
             break;
         case 22:
@@ -138,7 +138,7 @@ MATCH void func_801F9680(void) {
             }
             break;
         case 25:
-            g_ScenarioState.step_05 = 26;
+            g_ScenarioState.step = 26;
             switch (g_GameAreaId) {
                 case AREA_ID_BOAT_AFTER_BLACK_SHIP:
                     Scene_SetupParty(4);
@@ -155,10 +155,10 @@ MATCH void func_801F9680(void) {
             if (g_ScriptVars[0] != 0x28) {
                 break;
             }
-            g_ScriptVars[0]         = 0;
-            g_ScriptVars[1]         = 1;
-            g_ScriptVars[2]         = 0;
-            g_ScenarioState.step_05 = 22;
+            g_ScriptVars[0]      = 0;
+            g_ScriptVars[1]      = 1;
+            g_ScriptVars[2]      = 0;
+            g_ScenarioState.step = 22;
             Game_RequestAreaChange(AREA_ID_BLACK_SHIP_BOOST_COUNTER, TO_COORD(12), TO_COORD(89), 0x87);
             break;
         case 27:
@@ -170,15 +170,15 @@ MATCH void func_801F9680(void) {
             }
             Game_ClearScriptActive();
             g_ScenarioState.state_04 = 0;
-            g_ScenarioState.step_05  = 0;
+            g_ScenarioState.step     = 0;
             break;
         case 40:
             if (g_ScriptVars[0] != 0x14) {
                 break;
             }
-            g_ScriptVars[0]         = 0;
-            g_ScriptVars[2]         = 3;
-            g_ScenarioState.step_05 = 41;
+            g_ScriptVars[0]      = 0;
+            g_ScriptVars[2]      = 3;
+            g_ScenarioState.step = 41;
             SYS_SetFlag(g_SceneFlags, 0x26);
             switch (g_EmiLoadedCharacterIndex & 0x7F) {
                 case 17:
@@ -203,9 +203,9 @@ MATCH void func_801F9680(void) {
             if (g_ScriptVars[0] != 10) {
                 break;
             }
-            g_ScenarioState.step_05 = 42;
-            g_ScriptVars[0]         = 0;
-            g_ScriptVars[2]         = 0;
+            g_ScenarioState.step = 42;
+            g_ScriptVars[0]      = 0;
+            g_ScriptVars[2]      = 0;
             SYS_SetFlag(g_SceneFlags, 0x27);
             switch (g_EmiLoadedCharacterIndex & 0x7F) {
                 case 8:
@@ -219,22 +219,22 @@ MATCH void func_801F9680(void) {
         case 42:
             g_ScriptVars[1] = 0;
             Area_ScrollStartRoute(1);
-            g_ScenarioState.step_05 = 43;
+            g_ScenarioState.step = 43;
             break;
         case 43:
             if (g_ScriptVars[0] != 5) {
                 break;
             }
             UI_ModeSet(4);
-            g_ScenarioState.step_05 = 44;
+            g_ScenarioState.step = 44;
             break;
         case 44:
             if (WINDOW_EFFECT_BUSY()) {
                 break;
             }
-            g_ScenarioState.step_05 = 45;
-            g_ScriptVars[0]         = 0;
-            g_AreaDrawFlags         = 0;
+            g_ScenarioState.step = 45;
+            g_ScriptVars[0]      = 0;
+            g_AreaDrawFlags      = 0;
             g_GameFlags ^= 0xE;
             switch (g_EmiLoadedCharacterIndex & 0x7F) {
                 case 7:
@@ -280,7 +280,7 @@ MATCH void func_801F9680(void) {
             break;
         case 45:
             SCRIPT_VARS_CLEAR_ALL();
-            g_ScenarioState.step_05  = 0;
+            g_ScenarioState.step     = 0;
             g_ScenarioState.state_04 = 6;
             break;
     }
