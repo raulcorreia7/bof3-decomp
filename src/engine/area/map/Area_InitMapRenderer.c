@@ -61,7 +61,7 @@ NON_MATCHING void Area_InitMapRenderer(void) {
     if (g_GameRequestFlags & AREA_LOAD_FLAG_FISHING) {
         g_AreaCameraHeight = 0;
     } else {
-        g_AreaCameraHeight = (s32)Area_SampleHeight(g_AreaScrollTargetX, g_AreaScrollTargetY);
+        g_AreaCameraHeight = (s32)Area_HeightSample(g_AreaScrollTargetX, g_AreaScrollTargetY);
     }
     if (g_GameRequestFlags & AREA_LOAD_FLAG_WORLD_MAP) {
         D_8014933A = 0x80;

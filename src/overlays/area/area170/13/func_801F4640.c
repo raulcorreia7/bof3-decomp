@@ -24,12 +24,12 @@ NON_MATCHING void func_801F4640(s32 sample_height) {
         if (sample_height != 0) {
             y                         = ((s16)(-0x3880 - (i << 4)) + 0x4000) << 9;
             x                         = (g_ScratchPadVectors[0].vx + 0x4000) << 9;
-            g_ScratchPadVectors[0].vz = -Area_SampleHeight(x, y) / 2;
-            g_ScratchPadVectors[2].vz = -Area_SampleHeight(x, y) / 2 + (i == 0 ? 0x180 : 0);
+            g_ScratchPadVectors[0].vz = -Area_HeightSample(x, y) / 2;
+            g_ScratchPadVectors[2].vz = -Area_HeightSample(x, y) / 2 + (i == 0 ? 0x180 : 0);
             y1                        = ((s16)-0x3880 + 0x4000) << 9;
             x1                        = (g_ScratchPadVectors[1].vx + 0x4000) << 9;
-            g_ScratchPadVectors[1].vz = -Area_SampleHeight(x1, y1) / 2;
-            g_ScratchPadVectors[3].vz = -Area_SampleHeight(x1, y1) / 2 + (i == 0 ? 0x180 : 0);
+            g_ScratchPadVectors[1].vz = -Area_HeightSample(x1, y1) / 2;
+            g_ScratchPadVectors[3].vz = -Area_HeightSample(x1, y1) / 2 + (i == 0 ? 0x180 : 0);
         } else {
             g_ScratchPadVectors[1].vz = -0x480;
             if (i == 0) {

@@ -14,5 +14,5 @@ MATCH void func_80199230(void) {
     Actor_DispatchAll();
     GFX_PaletteUpdateAnimations();
     func_8019625C();
-    Area_DrawScene();
+    Area_SceneDraw();
 }

@@ -1,4 +1,4 @@
-/* The area floor quad: one textured POLY_FT4 laid flat at the actor's cell, its long side along x or y as direction picks, and its corners lifted to the terrain by Area_SampleHeight. Each member passes the sprite word for Area_ApplyTileToQuad; area160 and area162 to area165 share Area_UpdateFloorQuad.h. A statement macro, not a static inline: the word is read after RotTransPers4, and an inline argument would load it first. */
+/* The area floor quad: one textured POLY_FT4 laid flat at the actor's cell, its long side along x or y as direction picks, and its corners lifted to the terrain by Area_HeightSample. Each member passes the sprite word for Area_ApplyTileToQuad; area160 and area162 to area165 share Area_UpdateFloorQuad.h. A statement macro, not a static inline: the word is read after RotTransPers4, and an inline argument would load it first. */
 
 #define AREA_DRAW_FLOOR_QUAD(sprite)                                                                                                                                                              \
     do {                                                                                                                                                                                          \
@@ -26,12 +26,12 @@
         }                                                                                                                                                                                         \
         x                         = (g_ScratchPadVectors[0].vx + 0x4000) << 9;                                                                                                                    \
         y                         = (g_ScratchPadVectors[0].vy + 0x4000) << 9;                                                                                                                    \
-        g_ScratchPadVectors[0].vz = -Area_SampleHeight(x, y) / 2 + 0x40;                                                                                                                          \
-        g_ScratchPadVectors[2].vz = -Area_SampleHeight(x, y) / 2 + 0x180;                                                                                                                         \
+        g_ScratchPadVectors[0].vz = -Area_HeightSample(x, y) / 2 + 0x40;                                                                                                                          \
+        g_ScratchPadVectors[2].vz = -Area_HeightSample(x, y) / 2 + 0x180;                                                                                                                         \
         x1                        = (g_ScratchPadVectors[1].vx + 0x4000) << 9;                                                                                                                    \
         y1                        = (g_ScratchPadVectors[1].vy + 0x4000) << 9;                                                                                                                    \
-        g_ScratchPadVectors[1].vz = -Area_SampleHeight(x1, y1) / 2 + 0x40;                                                                                                                        \
-        g_ScratchPadVectors[3].vz = -Area_SampleHeight(x1, y1) / 2 + 0x180;                                                                                                                       \
+        g_ScratchPadVectors[1].vz = -Area_HeightSample(x1, y1) / 2 + 0x40;                                                                                                                        \
+        g_ScratchPadVectors[3].vz = -Area_HeightSample(x1, y1) / 2 + 0x180;                                                                                                                       \
         RotTransPers4(&g_ScratchPadVectors[0], &g_ScratchPadVectors[1], &g_ScratchPadVectors[2], &g_ScratchPadVectors[3], (long*)&prim->x0, (long*)&prim->x1, (long*)&prim->x2, (long*)&prim->x3, \
                       &depth, &flag);                                                                                                                                                             \
         Area_ApplyTileToQuad((sprite), prim, 1);                                                                                                                                                  \

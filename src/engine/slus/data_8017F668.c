@@ -45,7 +45,7 @@ const CellDrawCallback D_8017F668[77] = {
     (CellDrawCallback)func_80157644,
     (CellDrawCallback)func_801576A0,
     (CellDrawCallback)func_8015763C,
-    Area_DrawSceneSprite,
+    Area_SceneDrawSprite,
     (CellDrawCallback)&D_801EFEFC,
     (CellDrawCallback)&D_801F016C,
     (CellDrawCallback)&D_801F0488,

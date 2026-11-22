@@ -26,7 +26,7 @@ MATCH void Camera_SetEncounter(s32 mode) {
     do {
         if (entry->active != 0) {
             count += 1;
-            D_801CD954 += Area_SampleHeight(entry->pos.x, entry->pos.y);
+            D_801CD954 += Area_HeightSample(entry->pos.x, entry->pos.y);
         }
         entry++;
         index += 1;
@@ -36,7 +36,7 @@ MATCH void Camera_SetEncounter(s32 mode) {
 loop_5:
     if ((u8)index < (Party_CountOrder(PARTY_ORDER_BATTLE) & BYTE_MASK)) {
         count += 1;
-        D_801CD954 += Area_SampleHeight(g_EncounterParty[(u8)index].x.fixed, g_EncounterParty[(u8)index].y.fixed);
+        D_801CD954 += Area_HeightSample(g_EncounterParty[(u8)index].x.fixed, g_EncounterParty[(u8)index].y.fixed);
         index += 1;
         goto loop_5;
     }

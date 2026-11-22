@@ -27,9 +27,9 @@ MATCH void Area_SetWalkVelocity(void) {
     g_Task->vy = high;
     pos_x      = g_Task->pos.x.fixed + g_Task->vx * g_Task->timer;
     pos_y      = g_Task->pos.y.fixed + high * g_Task->timer;
-    result     = Area_ReadStepHeight(pos_x, pos_y, g_Task->direction);
+    result     = Area_HeightReadStep(pos_x, pos_y, g_Task->direction);
     if (SP_REF(volatile u8, 0x0u) != 0) {
-        result = Area_ReadHeight(pos_x, pos_y);
+        result = Area_HeightRead(pos_x, pos_y);
     }
     g_Task->vz = (result - COORD_INT(g_Task->pos.z)) / g_Task->timer;
 }

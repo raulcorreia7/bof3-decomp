@@ -301,10 +301,10 @@ u32 D_80183A1C[17] = {
 };
 
 u32 D_80183A60[4] = {
-    (u32)Area_InitScene,
+    (u32)Area_SceneInit,
     (u32)func_80167428,
-    (u32)Area_StepSceneTimer,
-    (u32)Area_SyncScrollHeight,
+    (u32)Area_SceneStepTimer,
+    (u32)Area_HeightSyncScroll,
 };
 
 u16 D_80183A70[32] = {

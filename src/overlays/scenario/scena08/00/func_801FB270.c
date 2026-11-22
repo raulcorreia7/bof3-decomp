@@ -26,8 +26,8 @@ NON_MATCHING void func_801FB270(void) {
             }
             g_PartyX       = g_AreaScrollTargetX;
             g_PartyY       = g_AreaScrollTargetY;
-            g_ScrollHeight = Area_SampleHeight(g_AreaScrollTargetX, g_AreaScrollTargetY);
-            Area_AdvanceScroll(Area_SampleHeight(g_AreaScrollTargetX, g_AreaScrollTargetY));
+            g_ScrollHeight = Area_HeightSample(g_AreaScrollTargetX, g_AreaScrollTargetY);
+            Area_AdvanceScroll(Area_HeightSample(g_AreaScrollTargetX, g_AreaScrollTargetY));
             g_ScriptVars[0]         = 1;
             g_ScenarioState.step_05 = 2;
             break;
@@ -47,7 +47,7 @@ NON_MATCHING void func_801FB270(void) {
                 actor->type         = 0x51;
                 actor->header.mode  = 0;
                 actor->pos.y.fixed  = TO_COORD_HALF(65);
-                actor->pos.z.fixed  = Area_SampleHeight(actor->pos.x.fixed, TO_COORD_HALF(65)) << 16;
+                actor->pos.z.fixed  = Area_HeightSample(actor->pos.x.fixed, TO_COORD_HALF(65)) << 16;
             }
             g_ScenarioState.step_05 = 3;
             break;

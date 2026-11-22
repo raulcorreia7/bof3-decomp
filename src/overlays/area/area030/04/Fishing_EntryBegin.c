@@ -19,7 +19,7 @@ MATCH void Fishing_EntryBegin(void) {
     work->state_29 = 5;
 
     state    = FISHING_STATE;
-    distance = Area_SampleHeight(state->motion.unk_34, state->y_38.pos_y);
+    distance = Area_HeightSample(state->motion.unk_34, state->y_38.pos_y);
 
     panel                          = g_Game.current;
     FISHING_STATE->bounce.half.key = distance;

@@ -2259,7 +2259,7 @@ u8 D_801CD384[128] = {0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x02, 0x00, 0x00, 0x00
 Callback D_801CD404[15] = {func_801BBE98, func_801BBFB4, func_801B69C0, func_801BD32C, func_801BD35C, func_801BD38C, func_801BD394, func_801BD5A4,
                            func_801BD7F8, (Callback)0,   (Callback)0,   (Callback)0,   (Callback)0,   (Callback)0,   func_801C22D8};
 
-Callback D_801CD440[2] = {func_801BC000, Area_StepSceneTimer};
+Callback D_801CD440[2] = {func_801BC000, Area_SceneStepTimer};
 
 Callback D_801CD448[4] = {Area_GrabLadder, Area_ClimbMount, func_801BD83C, Area_ClimbDismount};
 
@@ -2386,7 +2386,7 @@ static u8 s_gap_801CD8CB = 0x00;
 
 s32 D_801CD8CC = 0;
 
-/* 0x74 bytes, all zero: the Actor view Area_BuildEncounter points g_Task at. Actor is larger (ACTOR_SIZE), so the
+/* 0x74 bytes, all zero: the Actor view Area_EncounterBuild points g_Task at. Actor is larger (ACTOR_SIZE), so the
  * array stays bytes; needs: type, the real extent of this work row. */
 u8 D_801CD8D0[116] = {0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00,
                       0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00,

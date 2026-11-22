@@ -54,7 +54,7 @@ NON_MATCHING void Game_BattlePlaceFieldMembers(void) {
             }
             value                                = SCRATCH[j];
             g_Game.members[i].pos.y.fixed        = value;
-            g_Game.members[i].pos.z.part.integer = Area_ReadHeight(g_Game.members[i].pos.x.fixed, value);
+            g_Game.members[i].pos.z.part.integer = Area_HeightRead(g_Game.members[i].pos.x.fixed, value);
             i++;
             party_size = &g_Game.party_size;
             size       = *party_size;

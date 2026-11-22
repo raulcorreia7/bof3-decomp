@@ -18,7 +18,7 @@ extern s16 D_80145EC0;
 /* The character work record, viewed as bytes here. */
 
 /* The area-flag bit store and the global flag byte. */
-/* Steps until the next encounter, rolled by Area_RollEncounterThreshold. */
+/* Steps until the next encounter, rolled by Area_EncounterRollThreshold. */
 extern u16 D_80145FB8;
 /* The sorted object pointer list and its count. */
 /* D_8014828C */

@@ -250,7 +250,7 @@ MATCH void func_801EF8E8(void) {
     if (g_Task->header.step < 3) {
         pos.vz = -COORD_INT(g_Task->pos.z) / 2;
     } else {
-        pos.vz = -(s16)Area_SampleHeight(g_Task->pos.x.fixed, g_Task->pos.y.fixed) / 2;
+        pos.vz = -(s16)Area_HeightSample(g_Task->pos.x.fixed, g_Task->pos.y.fixed) / 2;
     }
     RotTransMatrix(&pos, matrix, &flags);
     Camera_SetModelMatrix(&rot, &matrix);

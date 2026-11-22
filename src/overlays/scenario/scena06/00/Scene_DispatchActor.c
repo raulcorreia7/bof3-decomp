@@ -216,7 +216,7 @@ MATCH s8 func_801FD568(s32 entry, s8 dir_x, s8 dir_y, s16 vz_start, s16 vz_delta
     COORD_INT(work->pos.z) += work->vz >> 8;
     work->unk_0A = count;
     work->vz     = speed + vz_delta;
-    height       = Area_SampleHeight(g_Task->pos.x.fixed, g_Task->pos.y.fixed);
+    height       = Area_HeightSample(g_Task->pos.x.fixed, g_Task->pos.y.fixed);
     if (g_Task->vz < 0 && height > COORD_INT(g_Task->pos.z) + 576) {
         COORD_INT(g_Task->pos.z) = height + 576;
     }
@@ -240,14 +240,14 @@ MATCH s8 func_801FD748(s32 entry, s8 dir_x, s8 dir_y, s16 vz_start, s16 vz_delta
     s16 distance;
     s16 z;
 
-    distance = Area_SampleHeight(g_Task->pos.x.fixed, g_Task->pos.y.fixed);
+    distance = Area_HeightSample(g_Task->pos.x.fixed, g_Task->pos.y.fixed);
     z        = COORD_INT(g_Task->pos.z);
     if (distance < z - 0x240) {
         COORD_INT(g_Task->pos.z) = z + (g_Task->vz >> 8);
         g_Task->vz += vz_delta;
         return 1;
     }
-    COORD_INT(g_Task->pos.z) = Area_SampleHeight(g_Task->pos.x.fixed, g_Task->pos.y.fixed) + 0x240;
+    COORD_INT(g_Task->pos.z) = Area_HeightSample(g_Task->pos.x.fixed, g_Task->pos.y.fixed) + 0x240;
     g_Task->unk_04           = 0;
     return 0;
 }

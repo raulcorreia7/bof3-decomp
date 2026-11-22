@@ -32,7 +32,7 @@ MATCH s32 func_801FDC6C(s32 x, s32 y, s32 unk_06, s32 unk_07, u8 link) {
         g_SpawnedActors[slot].pos.x.fixed  = x;
         g_SpawnedActors[slot].type         = 0x9E;
         g_SpawnedActors[slot].pos.y.fixed  = y;
-        g_SpawnedActors[slot].pos.z.fixed  = (Area_SampleHeight(g_SpawnedActors[slot].pos.x.fixed, y) << 16) + TO_COORD(512);
+        g_SpawnedActors[slot].pos.z.fixed  = (Area_HeightSample(g_SpawnedActors[slot].pos.x.fixed, y) << 16) + TO_COORD(512);
         g_SpawnedActors[slot].unk_06       = unk_06;
         g_SpawnedActors[slot].unk_07       = unk_07;
         g_SpawnedActors[slot].link         = link;

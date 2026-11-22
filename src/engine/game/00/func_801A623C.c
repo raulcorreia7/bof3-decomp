@@ -16,7 +16,7 @@ MATCH void func_801A623C(u8* script) {
     D_1F800002 = ((script[1] << 8) | script[2]);
 
     Actor_ResetMotion();
-    Area_SelectSceneRecord(D_1F800002);
+    Area_SceneSelectRecord(D_1F800002);
 
     g_Task->header.flags = ACTOR_FLAG_IN_USE;
 
@@ -31,7 +31,7 @@ MATCH void func_801A623C(u8* script) {
 
     g_Actors[*counter].unk_88 = 0;
 
-    COORD_INT(g_Task->pos.z) = Area_SampleHeight(work->pos.x.fixed, work->pos.y.fixed);
+    COORD_INT(g_Task->pos.z) = Area_HeightSample(work->pos.x.fixed, work->pos.y.fixed);
     g_Task->header.mode      = script[9];
     g_Task->header.step      = script[0xB];
     g_Task->direction        = script[0] & 0xF;

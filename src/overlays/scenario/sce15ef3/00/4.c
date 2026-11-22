@@ -68,7 +68,7 @@ MATCH void func_801D0EAC(void) {
 MATCH void func_801D0EF0(void) {
     g_Task->pos.x.fixed        = g_Game.members[2].pos.x.fixed;
     g_Task->pos.y.fixed        = g_Game.members[2].pos.y.fixed;
-    g_Task->pos.z.fixed        = TO_COORD(Area_SampleHeight(g_Task->pos.x.fixed, g_Task->pos.y.fixed));
+    g_Task->pos.z.fixed        = TO_COORD(Area_HeightSample(g_Task->pos.x.fixed, g_Task->pos.y.fixed));
     g_Task->vx                 = g_Task->pos.x.fixed;
     g_Task->vy                 = g_Task->pos.y.fixed;
     g_Task->vz                 = g_Task->pos.z.fixed;
@@ -113,7 +113,7 @@ MATCH void func_801D10AC(void) {
 
     g_Task->pos.x.fixed = TO_COORD(24) + COORD_HALF;
     g_Task->pos.y.fixed = TO_COORD(18);
-    g_Task->pos.z.fixed = (Area_SampleHeight(g_Task->pos.x.fixed, g_Task->pos.y.fixed) << 16) + TO_COORD(0x800);
+    g_Task->pos.z.fixed = (Area_HeightSample(g_Task->pos.x.fixed, g_Task->pos.y.fixed) << 16) + TO_COORD(0x800);
     g_Task->screen_x    = 0x80;
     g_Task->screen_y    = 0x180;
     g_Task->unk_32      = 0;

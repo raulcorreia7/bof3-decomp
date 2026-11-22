@@ -19,11 +19,11 @@ MATCH void func_801F924C(void) {
         g_AreaTileOriginX += 20;
         *scroll += TO_COORD(20);
         *party += TO_COORD(20);
-        height         = Area_SampleHeight(g_AreaScrollTargetX, g_AreaScrollTargetY);
+        height         = Area_HeightSample(g_AreaScrollTargetX, g_AreaScrollTargetY);
         g_ScrollHeight = height;
         Area_AdvanceScroll(height);
         Area_RefreshCellGrid();
         *focus += TO_COORD(20);
-        D_80147A96 = Area_SampleHeight(*focus, g_AreaFocusY);
+        D_80147A96 = Area_HeightSample(*focus, g_AreaFocusY);
     }
 }

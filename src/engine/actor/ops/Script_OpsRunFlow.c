@@ -127,12 +127,12 @@ NON_MATCHING u8 Script_OpsRunFlow(ScriptState* state, u8* base, s32 seed) {
                         if (Actor_GetOwner() == 2) {
                             g_PartyX       = (s32)((base[state->cursor + 1] << 16) | ((base[state->cursor + 2] != 0) << 15));
                             g_PartyY       = (s32)((base[state->cursor + 3] << 16) | ((base[state->cursor + 4] != 0) << 15));
-                            g_ScrollHeight = Area_SampleHeight(g_PartyX, g_PartyY);
+                            g_ScrollHeight = Area_HeightSample(g_PartyX, g_PartyY);
                             sel            = 0xFF;
                         } else {
                             g_Task->pos.x.fixed      = (s32)((base[state->cursor + 1] << 16) | ((base[state->cursor + 2] != 0) << 15));
                             g_Task->pos.y.fixed      = (s32)((base[state->cursor + 3] << 16) | ((base[state->cursor + 4] != 0) << 15));
-                            COORD_INT(g_Task->pos.z) = Area_SampleHeight(g_Task->pos.x.fixed, g_Task->pos.y.fixed);
+                            COORD_INT(g_Task->pos.z) = Area_HeightSample(g_Task->pos.x.fixed, g_Task->pos.y.fixed);
                         }
                         state->cursor += 5;
                         break;

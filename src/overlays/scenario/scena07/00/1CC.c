@@ -140,7 +140,7 @@ MATCH void func_801F7408(void) {
     /* FAKE: the retail frame holds 0x10 bytes no statement explains. */
     FAKE_STACK_PADS(u8, 0x10);
 
-    g_Task->pos.z.fixed = TO_COORD(Area_SampleHeight(g_Task->pos.x.fixed, g_Task->pos.y.fixed));
+    g_Task->pos.z.fixed = TO_COORD(Area_HeightSample(g_Task->pos.x.fixed, g_Task->pos.y.fixed));
     func_801F9DA8();
     g_Task->timer = 0;
     g_Task->vx    = 95;
@@ -187,7 +187,7 @@ MATCH void func_801F7638(void) {
     /* FAKE: the retail frame holds 0x10 bytes no statement explains. */
     FAKE_STACK_PADS(u8, 0x10);
 
-    g_Task->pos.z.fixed = TO_COORD(Area_SampleHeight(g_Task->pos.x.fixed, g_Task->pos.y.fixed));
+    g_Task->pos.z.fixed = TO_COORD(Area_HeightSample(g_Task->pos.x.fixed, g_Task->pos.y.fixed));
     burst               = SCENA07_BURST_RECORD;
     burst->pos.vx       = g_Task->pos.x.fixed;
     y                   = g_Task->pos.y.fixed;
@@ -242,7 +242,7 @@ NON_MATCHING void func_801F78B0(void) {
     /* FAKE: the retail frame holds 0x10 bytes no statement explains. */
     FAKE_STACK_PADS(u8, 0x10);
 
-    g_Task->pos.z.fixed = TO_COORD(Area_SampleHeight(g_Task->pos.x.fixed, g_Task->pos.y.fixed));
+    g_Task->pos.z.fixed = TO_COORD(Area_HeightSample(g_Task->pos.x.fixed, g_Task->pos.y.fixed));
     buffer              = MEM_PTR(Scena07BurstBuffer, AREA_WORK + 0x424);
     D_801FDFC0          = buffer;
     buffer->pos.vx      = g_Task->pos.x.fixed;
@@ -314,7 +314,7 @@ NON_MATCHING void func_801F7BE0(void) {
 
     g_Task->pos.x.fixed = g_Game.members[0].pos.x.fixed;
     g_Task->pos.y.fixed = g_Game.members[0].pos.y.fixed;
-    g_Task->pos.z.fixed = TO_COORD(Area_SampleHeight(g_Task->pos.x.fixed, g_Task->pos.y.fixed));
+    g_Task->pos.z.fixed = TO_COORD(Area_HeightSample(g_Task->pos.x.fixed, g_Task->pos.y.fixed));
     buffer              = MEM_PTR(Scena07BurstBuffer, AREA_WORK + 0x424);
     buffer->pos.vx      = g_Task->pos.x.fixed;
     D_801FDFC0          = buffer;
@@ -711,13 +711,13 @@ MATCH void func_801F9BDC(SceneEffectRow* row) {
 
     pos[0] = row->x;
     pos[1] = row->y;
-    pos[2] = Area_SampleHeight(row->x, row->y) << 16;
+    pos[2] = Area_HeightSample(row->x, row->y) << 16;
     Camera_ProjectPoint(pos, &center);
     angle  = 0;
     i      = 0;
     pos[0] = row->x + (rcos(0) << 2);
     pos[1] = row->y + (rsin(0) << 2);
-    pos[2] = Area_SampleHeight(row->x, row->y) << 16;
+    pos[2] = Area_HeightSample(row->x, row->y) << 16;
     Camera_ProjectPoint(pos, &edge);
     do {
         prim = (POLY_G3*)g_GfxPrimCursor;
@@ -730,7 +730,7 @@ MATCH void func_801F9BDC(SceneEffectRow* row) {
         pos[0]   = row->x + (rcos(angle) << 2);
         pos[1]   = row->y + (rsin(angle) << 2);
         i++;
-        pos[2] = Area_SampleHeight(row->x, row->y) << 16;
+        pos[2] = Area_HeightSample(row->x, row->y) << 16;
         Camera_ProjectPoint(pos, &edge);
         prim->x2 = edge.vx;
         prim->y2 = edge.vy;
@@ -786,7 +786,7 @@ MATCH void func_801F9E10(u8* row) {
     angle   = rand() & 0xFC0;
     cell[1] = g_Task->pos.x.fixed + ((radius * rcos(angle)) >> 12);
     cell[2] = g_Task->pos.y.fixed + ((radius * rsin(angle)) >> 12);
-    cell[7] = Area_SampleHeight(cell[1], cell[2]) << 16;
+    cell[7] = Area_HeightSample(cell[1], cell[2]) << 16;
     cell[3] = cell[7];
 }
 

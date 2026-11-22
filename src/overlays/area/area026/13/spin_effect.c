@@ -439,5 +439,5 @@ MATCH void func_801F3360(void) {
     slot->type         = 0x33;
     slot->pos.x.fixed  = TO_COORD(7);
     slot->pos.y.fixed  = TO_COORD(6) + COORD_HALF;
-    slot->pos.z.fixed  = (Area_SampleHeight(slot->pos.x.fixed, TO_COORD(6) + COORD_HALF) << 0x10);
+    slot->pos.z.fixed  = (Area_HeightSample(slot->pos.x.fixed, TO_COORD(6) + COORD_HALF) << 0x10);
 }

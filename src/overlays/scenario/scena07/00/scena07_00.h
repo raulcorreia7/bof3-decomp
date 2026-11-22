@@ -132,7 +132,7 @@ void func_801F81D4(FallingSpark* spark);
 static inline void Scene_PlaceAtLead(void) {
     g_Task->pos.x.fixed = g_Game.members[0].pos.x.fixed;
     g_Task->pos.y.fixed = g_Game.members[0].pos.y.fixed;
-    g_Task->pos.z.fixed = Area_SampleHeight(g_Task->pos.x.fixed, g_Task->pos.y.fixed) << 16;
+    g_Task->pos.z.fixed = Area_HeightSample(g_Task->pos.x.fixed, g_Task->pos.y.fixed) << 16;
 }
 
 void Scene_InitSpark(FallingSpark* spark);

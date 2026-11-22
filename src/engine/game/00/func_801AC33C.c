@@ -22,7 +22,7 @@ MATCH bool func_801AC33C(s32 ease_in, s32 distance) {
     step_x                   = g_FacingOffsets[route_index].x * g_RouteSpeedScale[g_CurrentActor->unk_78];
     step_y                   = g_FacingOffsets[route_index].y * g_RouteSpeedScale[g_CurrentActor->unk_78];
     reached_y                = 0;
-    COORD_INT(g_Task->pos.z) = Area_SampleHeight(g_Task->pos.x.fixed, g_Task->pos.y.fixed);
+    COORD_INT(g_Task->pos.z) = Area_HeightSample(g_Task->pos.x.fixed, g_Task->pos.y.fixed);
     reached_x                = 0;
     if ((g_Task->unk_18 + g_Task->unk_1C) == 0) {
         g_CurrentActor->walk_dest_x = g_Task->pos.x.fixed + (g_FacingSteps[g_Task->direction & 0x7].x << 1) * (distance & BYTE_MASK);

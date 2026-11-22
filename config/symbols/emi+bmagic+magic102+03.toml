@@ -6,5 +6,5 @@ Effect_Reset = { addr = 0x801E5988, type = "func", source = "Clears every timer,
 g_BattleEnemyBattlers = { addr = 0x801EB630, alias = true }
 g_BattleEffects = { addr = 0x801EC330, alias = true }
 Effect_DrawShadedQuads = { addr = 0x801F016C, type = "func", source = "Draws the effect's Gouraud-shaded quads with a depth offset." }
-Area_DrawGroundSceneSprite = { addr = 0x801F0778, type = "func", source = "Draws one sprite of a scene record as an FT4 primitive like Area_DrawSceneSprite, with its depth from Area_SampleHeight under its origin, so the sprite stands on the ground." }
+Area_SceneDrawGroundSprite = { addr = 0x801F0778, type = "func", source = "Draws one sprite of a scene record as an FT4 primitive like Area_SceneDrawSprite, with its depth from Area_HeightSample under its origin, so the sprite stands on the ground." }
 D_801F0C94 = { addr = 0x801F0C94, size = 0x8, source = "Eight bytes." }

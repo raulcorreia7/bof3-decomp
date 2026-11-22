@@ -10,7 +10,7 @@ MATCH void func_801D339C(void) {
     FishingState* state;
     u16           cue;
 
-    Area_SelectSceneRecord(0x2B);
+    Area_SceneSelectRecord(0x2B);
 
     panel               = FISHING_STATE;
     panel->origin_x     = 0x186;

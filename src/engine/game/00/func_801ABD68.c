@@ -16,7 +16,7 @@ MATCH u8 func_801ABD68(s32 pos_x, s32 pos_y, s32 step_count, void* deltas) {
     ret   = work->direction;
     dx    = pos_x - work->pos.x.fixed;
     dy    = pos_y - work->pos.y.fixed;
-    dist  = Area_SampleHeight(pos_x, pos_y);
+    dist  = Area_HeightSample(pos_x, pos_y);
     work2 = g_Task;
     dz    = dist - COORD_INT(work2->pos.z);
     if (FIELD(u8, deltas, 0x4u) != 0) {

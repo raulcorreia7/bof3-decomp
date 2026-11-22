@@ -102,13 +102,13 @@ MATCH void func_801F3F34(void) {
 
         case 47:
             if (g_ScriptVars[3] == 40) {
-                Area_StoreHeight(134, 17, 0);
+                Area_HeightSet(134, 17, 0);
                 Area_SetCellCode(134, 17, 0);
-                Area_StoreHeight(134, 18, 0);
+                Area_HeightSet(134, 18, 0);
                 Area_SetCellCode(134, 18, 0);
-                Area_StoreHeight(135, 17, 0);
+                Area_HeightSet(135, 17, 0);
                 Area_SetCellCode(135, 17, 16);
-                Area_StoreHeight(135, 18, 0);
+                Area_HeightSet(135, 18, 0);
                 Area_SetCellCode(135, 18, 16);
                 g_SaveData.scene_event_timer = 10;
                 g_SceneEventState.step       = 41;

@@ -16,7 +16,7 @@ MATCH void Area_StartEntryCell(void) {
     pair                     = entry * 2;
     work->pos.x.part.integer = AREA_PAYLOAD_FIELD(D_801F3F5C, u8, 0x20, pair);
     work->pos.y.part.integer = AREA_PAYLOAD_FIELD(D_801F3F5C, u8, 0x21, pair);
-    height                   = Area_SampleHeight(work->pos.x.fixed, work->pos.y.fixed);
+    height                   = Area_HeightSample(work->pos.x.fixed, work->pos.y.fixed);
 
     z                        = -height / 2;
     point                    = (u16*)&D_801F3F5C[0x14 + pair];

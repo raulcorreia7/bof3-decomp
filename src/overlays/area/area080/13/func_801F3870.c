@@ -12,7 +12,7 @@ MATCH void func_801F3870(void) {
         if (D_801F44A4->active) {
             D_801F44A4->pos.x.fixed += D_801F44A4->velocity_x;
             D_801F44A4->pos.y.fixed += D_801F44A4->velocity_y;
-            height                  = Area_SampleHeight(D_801F44A4->pos.x.fixed, D_801F44A4->pos.y.fixed);
+            height                  = Area_HeightSample(D_801F44A4->pos.x.fixed, D_801F44A4->pos.y.fixed);
             D_801F44A4->pos.z.fixed = TO_COORD(height);
             Area_DrawSpark(D_801F44A4);
             if (--D_801F44A4->life == 0) {

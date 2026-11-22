@@ -53,9 +53,9 @@ NON_MATCHING void Battle_InitEnemy(s32 enemy_slot, u16 enemy_index, s32 x, s32 y
     enemy->pos.x.fixed                   = x;
     enemy->pos.y.fixed                   = y;
     enemy                                = (EnemyBattler*)g_Task;
-    COORD_INT(enemy->pos.z)              = Area_SampleHeight(enemy->pos.x.fixed, y);
+    COORD_INT(enemy->pos.z)              = Area_HeightSample(enemy->pos.x.fixed, y);
     enemy->unk_2B                        = 0;
-    Area_SelectSceneRecord(FIELD(u16, &D_800E405E, unit_offset));
+    Area_SceneSelectRecord(FIELD(u16, &D_800E405E, unit_offset));
     g_BattleEnemyBattlers[enemy_slot & BYTE_MASK].unk_8A = FIELD(u16, &D_800E405E, unit_offset);
     Battle_LoadEnemyBattler(enemy_slot & BYTE_MASK, enemy_index & BYTE_MASK);
     func_800AD0A8(enemy_slot & BYTE_MASK, enemy_index & HALF_MASK);

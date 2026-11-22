@@ -10,7 +10,7 @@ MATCH void func_801F45A0(void) {
     work->vx      = work->pos.x.fixed + TO_COORD(-1);
     sample_y      = work->pos.y.fixed + TO_COORD(-1);
     work->vy      = sample_y;
-    work->vz      = Area_SampleHeight(work->vx, sample_y) << 0x10;
+    work->vz      = Area_HeightSample(work->vx, sample_y) << 0x10;
     work->unk_1C  = 0;
     g_Task->timer = 10;
     g_Task->header.mode += 1;

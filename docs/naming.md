@@ -108,7 +108,7 @@ magic, is a container tag.
 A subject with its own family of functions is a tag; a new tag goes into the tables above in the same
 change.
 
-The first word after an engine tag is the subsystem (the folder under the module, or a family of three or more functions), and the function says its verb after it: `UI_TextDraw`, `UI_WindowDrawFrame`, `UI_SpriteDraw`, `UI_IconDraw`, `UI_CursorDraw`, `UI_MessageStartArea`, `UI_MessageAnswerSelect`, `UI_PanelOpenTask`, `UI_ListDrawItemRow`, `UI_ModeSet`; `GFX_PaletteLoad`, `GFX_FadeRunBlack`. `Actor_MovementUpdate`, `Script_AnimStepLoop`, `Script_OpsRunFlow`. `EMI_ArchiveLoad`, `EMI_PartyLoadArchives`, `EMI_VabLoadBody`. A word the subsystem repeats is dropped.
+The first word after an engine tag is the subsystem (the folder under the module, or a family of three or more functions), and the function says its verb after it: `UI_TextDraw`, `UI_WindowDrawFrame`, `UI_SpriteDraw`, `UI_IconDraw`, `UI_CursorDraw`, `UI_MessageStartArea`, `UI_MessageAnswerSelect`, `UI_PanelOpenTask`, `UI_ListDrawItemRow`, `UI_ModeSet`; `GFX_PaletteLoad`, `GFX_FadeRunBlack`. `Actor_MovementUpdate`, `Script_AnimStepLoop`, `Script_OpsRunFlow`. `EMI_ArchiveLoad`, `EMI_PartyLoadArchives`, `EMI_VabLoadBody`. `Area_SceneInit`, `Area_EncounterPick`, `Area_HeightSample`. A word the subsystem repeats is dropped.
 
 UI parts: shared text, fonts, glyphs and windows are `UI_`; the message window, its panels, answer
 lists and area messages are `UI_Message*` and `UI_MessageAnswer*`; panels, cursors, sprites and icons are `UI_Panel*`, `UI_Cursor*`, `UI_Sprite*` and `UI_Icon*`; `Menu_` is only the menu screens' own code, and a widget

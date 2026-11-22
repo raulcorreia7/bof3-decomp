@@ -163,7 +163,7 @@ MATCH void func_801EF3C4(void) {
     g_Task->pos.z.part.integer = (u16)g_Task->pos.z.part.integer + g_Task->unk_14;
     g_Task->unk_14             = g_Task->unk_14 + g_Task->unk_20;
     Script_AnimStepLoop();
-    if (g_Task->pos.z.part.integer < Area_SampleHeight(g_Task->pos.x.fixed, g_Task->pos.y.fixed)) {
+    if (g_Task->pos.z.part.integer < Area_HeightSample(g_Task->pos.x.fixed, g_Task->pos.y.fixed)) {
         offset_x                   = (RANDOM_MOD(6) << 16) + 0x20000;
         g_Task->pos.x.fixed        = g_BattleEffectBattler->pos.x.fixed + offset_x;
         offset_y                   = (RANDOM_MOD(6) << 16) - 0x30000;
@@ -282,7 +282,7 @@ MATCH void func_801EF900(void) {
     g_Task->pos.x.fixed    = g_BattleEffectBattler->pos.x.fixed - 1;
     g_Task->pos.y.fixed    = g_BattleEffectBattler->pos.y.fixed - 1;
     x                      = g_Task->pos.x.fixed;
-    height                 = Area_SampleHeight(x, x);
+    height                 = Area_HeightSample(x, x);
     work                   = g_Task;
     work->unk_25           = 0x1D;
     COORD_INT(work->pos.z) = height;
@@ -309,7 +309,7 @@ MATCH void func_801EFA38(void) {
     g_Task->pos.x.fixed      = g_BattleEffectBattler->pos.x.fixed - 1;
     g_Task->pos.y.fixed      = g_BattleEffectBattler->pos.y.fixed - 1;
     x                        = g_Task->pos.x.fixed;
-    COORD_INT(g_Task->pos.z) = Area_SampleHeight(x, x);
+    COORD_INT(g_Task->pos.z) = Area_HeightSample(x, x);
     if (!(0x1 & g_BattleEffectBattler->header.flags)) {
         g_Task->header.step += 1;
     }

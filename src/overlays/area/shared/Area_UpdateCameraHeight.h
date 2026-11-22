@@ -3,7 +3,7 @@
 MATCH void Area_UpdateCameraHeight(void) {
     s32 height;
 
-    height = Area_SampleHeight(g_Game.members[0].pos.x.fixed, g_Game.members[0].pos.y.fixed);
+    height = Area_HeightSample(g_Game.members[0].pos.x.fixed, g_Game.members[0].pos.y.fixed);
     if (g_AreaCameraHeight == height) {
         height -= 0x20;
     }

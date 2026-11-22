@@ -12,7 +12,7 @@ NON_MATCHING void Fishing_LureCast(void) {
     work->motion.unk_34 = D_80145EC4;
     FAKE_BARRIER();
     work->y_38.pos_y               = D_80145EC8 - COORD_HALF;
-    FISHING_STATE->bounce.half.key = (s16)(Area_SampleHeight(work->motion.unk_34, work->y_38.pos_y) + 0x100);
+    FISHING_STATE->bounce.half.key = (s16)(Area_HeightSample(work->motion.unk_34, work->y_38.pos_y) + 0x100);
 
     value                    = g_FishingRodRow->max_distance * D_801440BC / 255 + 8;
     FISHING_STATE->cursor_10 = value;
@@ -50,7 +50,7 @@ NON_MATCHING void Fishing_LureCast(void) {
     FISHING_STATE->unk_6C       = 0;
     FISHING_STATE->counter_48   = 1;
 
-    Area_SelectSceneRecord(g_FishingLureRow->unk_0C);
+    Area_SceneSelectRecord(g_FishingLureRow->unk_0C);
     Script_Select(1);
     index = Actor_FindFreeSpawned() & BYTE_MASK;
     if (index != GAME_NONE) {

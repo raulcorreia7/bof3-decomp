@@ -13,7 +13,7 @@ MATCH void func_801F3AEC(void) {
         actor->header.mode  = 1;
         actor->link         = 1;
         actor->pos.y.fixed  = TO_COORD(28);
-        actor->pos.z.fixed  = (Area_SampleHeight(actor->pos.x.fixed, actor->pos.y.fixed) << 16) + TO_COORD(512);
+        actor->pos.z.fixed  = (Area_HeightSample(actor->pos.x.fixed, actor->pos.y.fixed) << 16) + TO_COORD(512);
         actor->pos.x.fixed -= 0x8000;
     }
 
@@ -26,7 +26,7 @@ MATCH void func_801F3AEC(void) {
         actor->header.mode  = 1;
         actor->link         = 0;
         actor->pos.y.fixed  = TO_COORD(28);
-        actor->pos.z.fixed  = (Area_SampleHeight(actor->pos.x.fixed, actor->pos.y.fixed) << 16) + TO_COORD(512);
+        actor->pos.z.fixed  = (Area_HeightSample(actor->pos.x.fixed, actor->pos.y.fixed) << 16) + TO_COORD(512);
         actor->pos.x.fixed -= 0x8000;
     }
 }

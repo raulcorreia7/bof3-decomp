@@ -10,7 +10,7 @@ MATCH void func_800C1C9C(void) {
     BOSS028_PARTY->unk_2A = 0;
     BOSS028_PARTY->unk_48 = 0;
     BOSS028_PARTY->unk_29 = 2;
-    Area_SelectSceneRecord(0x15C);
+    Area_SceneSelectRecord(0x15C);
     Script_Select(4);
     party                              = BOSS028_PARTY;
     battler                            = g_BattleEffectBattler;

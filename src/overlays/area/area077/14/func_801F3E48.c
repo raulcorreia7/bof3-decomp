@@ -10,7 +10,7 @@ MATCH void func_801F3E48(void) {
 
     g_Task->pos.x.fixed = 0x738000;
     g_Task->pos.y.fixed = 0xB8000;
-    g_Task->pos.z.fixed = (Area_SampleHeight(g_Task->pos.x.fixed, g_Task->pos.y.fixed) << 16) + 0x800000;
+    g_Task->pos.z.fixed = (Area_HeightSample(g_Task->pos.x.fixed, g_Task->pos.y.fixed) << 16) + 0x800000;
     PushMatrix();
     spin = (u8*)(AREA_WORK + 0xD04);
     i    = 0;

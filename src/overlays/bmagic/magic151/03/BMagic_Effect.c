@@ -197,7 +197,7 @@ MATCH void func_801EFAAC(void) {
     g_Task->pos.x.fixed      = g_EncounterOriginX;
     y                        = g_EncounterOriginY;
     g_Task->pos.y.fixed      = y;
-    COORD_INT(g_Task->pos.z) = Area_SampleHeight(g_Task->pos.x.fixed, y);
+    COORD_INT(g_Task->pos.z) = Area_HeightSample(g_Task->pos.x.fixed, y);
     g_Task->param.unk_0B     = 0;
     g_Task->unk_09           = 4;
     g_Task->header.step += 1;

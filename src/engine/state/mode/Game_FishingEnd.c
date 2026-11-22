@@ -9,7 +9,7 @@ MATCH void Game_FishingEnd(void) {
     func_801DE1C0();
     UI_ModeSet(1u);
     Camera_Update();
-    Area_DrawScene();
+    Area_SceneDraw();
     rect.w = 64;
     rect.x = 0;
     rect.h = 120;

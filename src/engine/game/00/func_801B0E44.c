@@ -40,7 +40,7 @@ NON_MATCHING u8 func_801B0E44(void) {
     switch (result & BYTE_MASK) {
         case 2:
             pos2   = (s32*)&D_1F800008;
-            result = Area_ReadStepHeight(*(s32*)&D_1F800008, SP_REF(s32, 0xC), g_Task->direction);
+            result = Area_HeightReadStep(*(s32*)&D_1F800008, SP_REF(s32, 0xC), g_Task->direction);
             func_801B13BC();
             if (((u8*)pos2)[-8] != 0) {
                 if (result >= 0x41) {
@@ -79,14 +79,14 @@ NON_MATCHING u8 func_801B0E44(void) {
             return 0;
         case 3:
             pos3   = (s32*)&D_1F800008;
-            result = Area_ReadStepHeight(pos3[0], pos3[1], g_Task->direction);
+            result = Area_HeightReadStep(pos3[0], pos3[1], g_Task->direction);
             if (SP_REF(u8, 0x0) != 0) {
                 if (result >= 0x41) {
                     g_AreaCameraStep  = 0;
                     g_Task->direction = saved_dir;
                     return 1;
                 }
-                Area_ReadHeight(pos3[0], pos3[1]);
+                Area_HeightRead(pos3[0], pos3[1]);
                 return 0;
             }
             return 0;

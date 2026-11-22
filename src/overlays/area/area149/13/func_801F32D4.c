@@ -15,7 +15,7 @@ MATCH void func_801F32D4(void) {
         g_AreaTileOriginX -= 20;
         party_x = &g_PartyX;
         *party_x -= TO_COORD(20);
-        height         = Area_SampleHeight(g_AreaScrollTargetX, g_AreaScrollTargetY);
+        height         = Area_HeightSample(g_AreaScrollTargetX, g_AreaScrollTargetY);
         g_ScrollHeight = height;
         Area_AdvanceScroll(height);
         Area_RefreshCellGrid();
@@ -23,11 +23,11 @@ MATCH void func_801F32D4(void) {
         for (; i < ACTOR_SLOT_COUNT; i++) {
             if (ACTOR_IN_USE(g_SpawnedActors[i]) && g_SpawnedActors[i].type == 0x37) {
                 g_SpawnedActors[i].pos.x.fixed -= TO_COORD(20);
-                COORD_INT(g_SpawnedActors[i].pos.z) = Area_SampleHeight(g_SpawnedActors[i].pos.x.fixed, g_SpawnedActors[i].pos.y.fixed);
+                COORD_INT(g_SpawnedActors[i].pos.z) = Area_HeightSample(g_SpawnedActors[i].pos.x.fixed, g_SpawnedActors[i].pos.y.fixed);
             }
         }
         focus_x = &D_80147A8C;
         *focus_x -= TO_COORD(20);
-        D_80147A96 = Area_SampleHeight(*focus_x, g_AreaFocusY);
+        D_80147A96 = Area_HeightSample(*focus_x, g_AreaFocusY);
     }
 }

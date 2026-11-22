@@ -4,7 +4,7 @@ MATCH void func_801F2FBC(void) {
     Actor* work;
 
     func_80196718(g_Task);
-    Area_SelectSceneRecord(0x1BD);
+    Area_SceneSelectRecord(0x1BD);
     Script_Select(0);
     g_Task->mirror           = 0;
     g_Task->scale.x          = 57344;

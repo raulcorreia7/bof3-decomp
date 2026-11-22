@@ -127,7 +127,7 @@ MATCH void func_801D1034(void) {
     work->proj.x = source->proj.x;
     coord_y      = source->proj.y;
     work->proj.y = coord_y;
-    distance     = Area_SampleHeight(work->proj.x, coord_y);
+    distance     = Area_HeightSample(work->proj.x, coord_y);
 
     scratch = g_Task;
     scratch->step_index++;
