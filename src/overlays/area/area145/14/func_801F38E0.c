@@ -2,7 +2,7 @@
 
 MATCH void func_801F38E0(void) {
     Actor* work;
-    Actor *depth_target;
+    u8*    depth_target;
     s32    result;
 
     work                           = g_Task;

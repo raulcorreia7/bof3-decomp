@@ -1,7 +1,7 @@
 #include "area140_13.h"
 
 MATCH void func_801F2E64(void) {
-    Actor *work;
+    u8* work;
 
     work                   = TASK(u8);
     FIELD(u16, work, 0x30) = (FIELD(u16, work, 0x30) - 0x20);

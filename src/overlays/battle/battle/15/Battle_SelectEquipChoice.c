@@ -5,7 +5,7 @@ void Battle_ApplyEquipment(void); /* extern */
 /* func_80099830 */
 #ifdef NON_MATCHING
 NON_MATCHING void Battle_SelectEquipChoice(void) {
-    Actor *row_base;
+    u16* row_base;
     s32  pad;
     u32  scroll_lo;
     u32  scroll_hi;

@@ -2,7 +2,7 @@
 
 /* func_801F3DA8 */
 MATCH void Actor_SlideScreenOffBottom(void) {
-    Actor *work;
+    u8* work;
 
     work                   = TASK(u8);
     FIELD(u16, work, 0x30) = (FIELD(u16, work, 0x30) - 0x20);

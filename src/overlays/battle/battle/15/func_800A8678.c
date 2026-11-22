@@ -1,7 +1,7 @@
 #include "battle_15.h"
 
 MATCH void func_800A8678(void) {
-    Actor *work;
+    u8* work;
     u32 offset;
     u32 value;
 
