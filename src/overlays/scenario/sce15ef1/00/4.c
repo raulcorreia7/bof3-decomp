@@ -642,7 +642,7 @@ MATCH void func_801D2C00(void) {
  * and hands over to the next mode. */
 MATCH void func_801D2C94(void) {
     Actor* work;
-    Actor* step;
+    Actor* actor;
     Actor* arm;
     Actor* state;
     s32*   pairs;
@@ -653,12 +653,12 @@ MATCH void func_801D2C94(void) {
     work->vy     = 0;
     work->unk_18 = 0;
     work->unk_1C = 0;
-    step         = work;
+    actor        = work;
     for (i = 0; i < 20; i++) {
-        step->unk_18 += 0x100;
-        step->unk_1C += 0x200;
-        step->vx += step->unk_18;
-        step->vy += step->unk_1C;
+        actor->unk_18 += 0x100;
+        actor->unk_1C += 0x200;
+        actor->vx += actor->unk_18;
+        actor->vy += actor->unk_1C;
     }
     arm        = TASK(Actor);
     arm->timer = 20;

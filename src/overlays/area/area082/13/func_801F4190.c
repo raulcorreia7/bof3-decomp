@@ -3,7 +3,7 @@
 MATCH void func_801F4190(void) {
     Actor* work;
     Actor* band;
-    Actor* step;
+    Actor* actor;
     s32    value;
     s32    quotient;
     s32    roll;
@@ -34,9 +34,9 @@ MATCH void func_801F4190(void) {
             g_ScriptVars[0]++;
         }
     }
-    step = TASK(Actor);
-    if (step->vz > 1369999) {
-        step->header.step++;
+    actor = TASK(Actor);
+    if (actor->vz > 1369999) {
+        actor->header.step++;
     }
     func_801F4430();
 }

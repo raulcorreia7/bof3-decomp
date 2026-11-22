@@ -98,47 +98,47 @@
     func_801576FC((u8*)MAP_BUNDLE_BASE + g_AreaMapBundle.object_list_28 * 4 + (word & HALF_MASK) * 4)
 
 /* One alias arm of a record reader: the tone table and the record table of the bank `alias`. */
-#define SLUS_SE_ALIAS_ARM(alias, tones, se_records)    \
-    case alias:                                        \
-        D_8018B314 = SE_TONE(tones)->min;              \
-        D_8018B320 = SE_TONE(tones)->shift;            \
-        D_8018B32C = SE_TONE(tones)->pan;              \
-        D_8018B324 = SE_TONE(tones)->vol;              \
-        D_8018B328 = SE_TONE(tones)->vol;              \
-        D_8018B318 = (se_records)[D_8018B404 * 4 + 3]; \
+#define SLUS_SE_ALIAS_ARM(alias, tones, se_records)       \
+    case alias:                                           \
+        D_8018B314 = SE_TONE(tones)->min;                 \
+        D_8018B320 = SE_TONE(tones)->shift;               \
+        D_8018B32C = SE_TONE(tones)->pan;                 \
+        D_8018B324 = SE_TONE(tones)->vol;                 \
+        D_8018B328 = SE_TONE(tones)->vol;                 \
+        D_8018B318 = (se_records)[g_SndSeRecord * 4 + 3]; \
         break;
 
-/* Bank record reader: loads record D_8018B404 of the bank's record table into voice slot 0 and fills one more slot per layer on the next voices (wrapping at 24). The head is the one body of banks 0 to 6; the alias switch that follows lets another bank supply the tone and voice. */
+/* Bank record reader: loads record g_SndSeRecord of the bank's record table into voice slot 0 and fills one more slot per layer on the next voices (wrapping at 24). The head is the one body of banks 0 to 6; the alias switch that follows lets another bank supply the tone and voice. */
 #define SLUS_READ_BANK_SE_HEAD(bank, se_records, tones)                                                       \
     s32 record;                                                                                               \
     s16 program;                                                                                              \
     s16 tone;                                                                                                 \
     s16 voice;                                                                                                \
                                                                                                               \
-    D_8018B30C = (bank);                                                                                      \
-    record     = D_8018B404 * 4;                                                                              \
-    D_8018B3E0 = (se_records)[record];                                                                        \
-    program    = (se_records)[record + 1] & EMI_SE_PROGRAM_MASK;                                              \
-    D_8018B308 = program;                                                                                     \
-    D_8018B3F4 = (se_records)[record + 1] & EMI_SE_USE_VOLUME_FLAG;                                           \
-    tone       = (se_records)[record + 2] >> 4;                                                               \
-    D_8018B310 = tone;                                                                                        \
-    D_8018B3E8 = (se_records)[record + 2] & EMI_SE_COMPARE_MASK;                                              \
-    D_8018B40C = g_VabProgramOffsets[program] + VAB_TONE_TABLE + g_VabToneOffsets[tone];                      \
-    D_8018B314 = SE_TONE((tones))->min;                                                                       \
-    D_8018B320 = SE_TONE((tones))->shift;                                                                     \
-    D_8018B32C = SE_TONE((tones))->pan;                                                                       \
-    D_8018B324 = SE_TONE((tones))->vol;                                                                       \
-    D_8018B328 = SE_TONE((tones))->vol;                                                                       \
-    voice      = (se_records)[record + 3] & EMI_SE_VOICE_MASK;                                                \
-    D_8018B318 = voice;                                                                                       \
-    D_8018B3E4 = (se_records)[record + 3] & EMI_SE_LAYER_MASK;                                                \
-    if (D_8018B3E4 != 0) {                                                                                    \
-        D_8018B3E4 = D_8018B3E4 >> 5;                                                                         \
-        switch (D_8018B3E4) {                                                                                 \
+    D_8018B30C       = (bank);                                                                                \
+    record           = g_SndSeRecord * 4;                                                                     \
+    g_SndSeAliasBank = (se_records)[record];                                                                  \
+    program          = (se_records)[record + 1] & EMI_SE_PROGRAM_MASK;                                        \
+    D_8018B308       = program;                                                                               \
+    g_SndSeUseVolume = (se_records)[record + 1] & EMI_SE_USE_VOLUME_FLAG;                                     \
+    tone             = (se_records)[record + 2] >> 4;                                                         \
+    D_8018B310       = tone;                                                                                  \
+    g_SndSeRetrigger = (se_records)[record + 2] & EMI_SE_COMPARE_MASK;                                        \
+    D_8018B40C       = g_VabProgramOffsets[program] + VAB_TONE_TABLE + g_VabToneOffsets[tone];                \
+    D_8018B314       = SE_TONE((tones))->min;                                                                 \
+    D_8018B320       = SE_TONE((tones))->shift;                                                               \
+    D_8018B32C       = SE_TONE((tones))->pan;                                                                 \
+    D_8018B324       = SE_TONE((tones))->vol;                                                                 \
+    D_8018B328       = SE_TONE((tones))->vol;                                                                 \
+    voice            = (se_records)[record + 3] & EMI_SE_VOICE_MASK;                                          \
+    D_8018B318       = voice;                                                                                 \
+    g_SndSeLayers    = (se_records)[record + 3] & EMI_SE_LAYER_MASK;                                          \
+    if (g_SndSeLayers != 0) {                                                                                 \
+        g_SndSeLayers = g_SndSeLayers >> 5;                                                                   \
+        switch (g_SndSeLayers) {                                                                              \
             case 3:                                                                                           \
-                D_8018B380 = (se_records)[D_8018B404 * 4 + 1] & EMI_SE_PROGRAM_MASK;                          \
-                D_8018B388 = D_8018B310 + D_8018B3E4;                                                         \
+                D_8018B380 = (se_records)[g_SndSeRecord * 4 + 1] & EMI_SE_PROGRAM_MASK;                       \
+                D_8018B388 = D_8018B310 + g_SndSeLayers;                                                      \
                 D_8018B38C = D_8018B314;                                                                      \
                 D_8018B398 = D_8018B320;                                                                      \
                 D_8018B40C = g_VabProgramOffsets[D_8018B380] + VAB_TONE_TABLE + g_VabToneOffsets[D_8018B388]; \
@@ -150,8 +150,8 @@
                     D_8018B390 = D_8018B318 + 3 - 24;                                                         \
                 }                                                                                             \
             case 2:                                                                                           \
-                D_8018B358 = (se_records)[D_8018B404 * 4 + 1] & EMI_SE_PROGRAM_MASK;                          \
-                D_8018B360 = D_8018B310 + D_8018B3E4;                                                         \
+                D_8018B358 = (se_records)[g_SndSeRecord * 4 + 1] & EMI_SE_PROGRAM_MASK;                       \
+                D_8018B360 = D_8018B310 + g_SndSeLayers;                                                      \
                 D_8018B364 = D_8018B314;                                                                      \
                 D_8018B370 = D_8018B320;                                                                      \
                 D_8018B40C = g_VabProgramOffsets[D_8018B358] + VAB_TONE_TABLE + g_VabToneOffsets[D_8018B360]; \
@@ -163,8 +163,8 @@
                     D_8018B368 = D_8018B318 + 2 - 24;                                                         \
                 }                                                                                             \
             case 1:                                                                                           \
-                D_8018B330 = (se_records)[D_8018B404 * 4 + 1] & EMI_SE_PROGRAM_MASK;                          \
-                D_8018B338 = D_8018B310 + D_8018B3E4;                                                         \
+                D_8018B330 = (se_records)[g_SndSeRecord * 4 + 1] & EMI_SE_PROGRAM_MASK;                       \
+                D_8018B338 = D_8018B310 + g_SndSeLayers;                                                      \
                 D_8018B33C = D_8018B314;                                                                      \
                 D_8018B348 = D_8018B320;                                                                      \
                 D_8018B40C = g_VabProgramOffsets[D_8018B330] + VAB_TONE_TABLE + g_VabToneOffsets[D_8018B338]; \
@@ -182,8 +182,8 @@
 /* The record reader of banks 0, 4, 5 and 6, whose alias banks are 1 to 3. */
 #define SLUS_READ_BANK_SE(bank, se_records, tones)                    \
     SLUS_READ_BANK_SE_HEAD(bank, se_records, tones)                   \
-    if (D_8018B3E0 != 0) {                                            \
-        D_8018B30C = D_8018B3E0 & EMI_SE_ALIAS_MASK;                  \
+    if (g_SndSeAliasBank != 0) {                                      \
+        D_8018B30C = g_SndSeAliasBank & EMI_SE_ALIAS_MASK;            \
         switch (D_8018B30C) {                                         \
             SLUS_SE_ALIAS_ARM(1, g_SndBankHeaders[1], g_SndBankSe[1]) \
             SLUS_SE_ALIAS_ARM(2, g_SndBankHeaders[2], g_SndBankSe[2]) \
@@ -740,16 +740,26 @@ extern s16          D_8018B398;
 extern s16          D_8018B39C;
 extern s16          D_8018B3A0;
 extern s16          D_8018B3A4;
-extern s16          D_8018B3D8;
-extern s16          D_8018B3DC;
-extern s16          D_8018B3E0;
-extern s16          D_8018B3E4;
-extern s16          D_8018B3E8;
-extern s16          D_8018B3EC;
-extern s16          D_8018B3F0;
-extern s16          D_8018B3F4;
-extern u16          D_8018B404;
-extern u16          D_8018B408;
+/* D_8018B3D8 */
+extern s16          g_SndSeVolumeL;
+/* D_8018B3DC */
+extern s16          g_SndSeVolumeR;
+/* D_8018B3E0 */
+extern s16          g_SndSeAliasBank;
+/* D_8018B3E4 */
+extern s16          g_SndSeLayers;
+/* D_8018B3E8 */
+extern s16          g_SndSeRetrigger;
+/* D_8018B3EC */
+extern s16          g_SndSeLastRetrigger;
+/* D_8018B3F0 */
+extern s16          g_SndSeLastVoice;
+/* D_8018B3F4 */
+extern s16          g_SndSeUseVolume;
+/* D_8018B404 */
+extern u16          g_SndSeRecord;
+/* D_8018B408 */
+extern u16          g_SndSeBank;
 extern u16          D_8018B40C;
 extern s32          D_8018B410;
 extern s32          D_8018B414;

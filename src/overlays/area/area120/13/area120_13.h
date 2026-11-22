@@ -20,14 +20,14 @@ extern u8 D_801F43E4;
 
 extern u16 D_801F4FD4;
 
-/* The work window's rows: a byte table of 0x1C-byte rows. */
-#define AREA_ROW_COUNT  0x100
-#define AREA_ROW_STRIDE 0x1C
+/* The work window's effects: a byte table of 0x1C-byte records. */
+#define AREA_EFFECT_COUNT  0x100
+#define AREA_EFFECT_STRIDE 0x1C
 
-/* One row of the work window the field effects step: its active, timer and
+/* One field effect record the steps animate: its active, timer and
  * state bytes, then the 16.16 position the steps move. */
-typedef struct AreaRow {
-    u8  active;    /* 0x00 nonzero while the row is in use */
+typedef struct AreaEffect {
+    u8  active;    /* 0x00 nonzero while the record is in use */
     u8  timer;     /* 0x01 counts down to the next state */
     u8  state;     /* 0x02 step index */
     u8  side;      /* 0x03 selects the direction */
@@ -38,18 +38,18 @@ typedef struct AreaRow {
     s32 z;         /* 0x10 16.16 z */
     s32 y;         /* 0x14 16.16 y */
     u8  unk_18[4]; /* 0x18 */
-} AreaRow;
+} AreaEffect;
 
-ASSERT_OFFSET(AreaRow, active, 0x00);
-ASSERT_OFFSET(AreaRow, timer, 0x01);
-ASSERT_OFFSET(AreaRow, state, 0x02);
-ASSERT_OFFSET(AreaRow, side, 0x03);
-ASSERT_OFFSET(AreaRow, speed, 0x04);
-ASSERT_OFFSET(AreaRow, angle, 0x08);
-ASSERT_OFFSET(AreaRow, x, 0x0C);
-ASSERT_OFFSET(AreaRow, z, 0x10);
-ASSERT_OFFSET(AreaRow, y, 0x14);
-ASSERT_SIZE(AreaRow, AREA_ROW_STRIDE);
+ASSERT_OFFSET(AreaEffect, active, 0x00);
+ASSERT_OFFSET(AreaEffect, timer, 0x01);
+ASSERT_OFFSET(AreaEffect, state, 0x02);
+ASSERT_OFFSET(AreaEffect, side, 0x03);
+ASSERT_OFFSET(AreaEffect, speed, 0x04);
+ASSERT_OFFSET(AreaEffect, angle, 0x08);
+ASSERT_OFFSET(AreaEffect, x, 0x0C);
+ASSERT_OFFSET(AreaEffect, z, 0x10);
+ASSERT_OFFSET(AreaEffect, y, 0x14);
+ASSERT_SIZE(AreaEffect, AREA_EFFECT_STRIDE);
 
 /* One rising tile in the area work window: a screen position, a growth step clipped by
  * the height table, and an RGB555 colour the state nibble brightens. */
@@ -74,8 +74,8 @@ ASSERT_SIZE(AreaRiseTile, 0x0C);
 /* The height limit of each rising tile, by the row's limit index. */
 extern s16 D_801F4F34[];
 
-/* Queues the row's sprite at its 16.16 position. */
-void func_801F3468(AreaRow* row);
+/* Queues the effect's sprite at its 16.16 position. */
+void func_801F3468(AreaEffect* effect);
 
 /* g_GameEntryState and the byte after it, read as one word. */
 extern u32 g_GameEntryStateWord;
