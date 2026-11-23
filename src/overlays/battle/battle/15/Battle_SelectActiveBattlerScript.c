@@ -17,12 +17,12 @@ asm(".globl Actor_SelectScript_keep_a1\n.set Actor_SelectScript_keep_a1, Script_
  * local emits a redundant `andi 0xFF` that the original bytes do not have. */
 /* func_800AEF98 */
 MATCH void Battle_SelectActiveBattlerScript(s32 step, s32 payload) {
-    u8* work;
-    u8* saved;
-    u32 type;
+    u8*   work;
+    void* saved;
+    u32   type;
 
     work  = (u8*)g_BattleEffectBattler;
-    saved = TASK_BYTES;
+    saved = TASK(void);
     type  = g_Battle.active_battler;
     TASK_SET(work);
     if (type < 3u) {
