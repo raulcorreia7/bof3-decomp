@@ -297,39 +297,39 @@ MATCH void Title_UpdateWindowFade(void) { /* func_801D1B00 */
 
     primary_active   = 1;
     secondary_active = 1;
-    phase            = (u8*)&g_UiTitleChoicePhase;
+    phase            = (u8*)&g_SysThreads[1].tail.title_screen.popup.bytes.choice_phase;
 
     p = *phase;
     if (p == 1u) {
-        alpha                 = g_UiTitlePrimaryAlpha + 4u;
-        g_UiTitlePrimaryAlpha = alpha;
+        alpha                                           = g_SysThreads[1].tail.title_screen.primary_alpha + 4u;
+        g_SysThreads[1].tail.title_screen.primary_alpha = alpha;
         if ((s16)alpha >= 128) {
-            g_UiTitlePrimaryAlpha = 128u;
-            primary_active        = 0;
+            g_SysThreads[1].tail.title_screen.primary_alpha = 128u;
+            primary_active                                  = 0;
         }
 
-        alpha                   = g_UiTitleSecondaryAlpha + 2u;
-        g_UiTitleSecondaryAlpha = alpha;
+        alpha                                             = g_SysThreads[1].tail.title_screen.secondary_alpha + 2u;
+        g_SysThreads[1].tail.title_screen.secondary_alpha = alpha;
         if ((s16)alpha >= 128) {
-            g_UiTitleSecondaryAlpha = 128u;
-            secondary_active        = 0;
+            g_SysThreads[1].tail.title_screen.secondary_alpha = 128u;
+            secondary_active                                  = 0;
         }
 
         if (primary_active == 0u && secondary_active == 0u) {
             *phase = 2u;
         }
     } else if (p == 2u) {
-        primary_active          = 0;
-        secondary_active        = 0;
-        g_UiTitlePrimaryAlpha   = 128u;
-        g_UiTitleSecondaryAlpha = 128u;
+        primary_active                                    = 0;
+        secondary_active                                  = 0;
+        g_SysThreads[1].tail.title_screen.primary_alpha   = 128u;
+        g_SysThreads[1].tail.title_screen.secondary_alpha = 128u;
     }
 
-    if (g_UiTitleChoicePhase != 0u) {
-        Title_DrawChoicePanels(secondary_active, LOBU(g_UiTitleSecondaryAlpha));
+    if (g_SysThreads[1].tail.title_screen.popup.bytes.choice_phase != 0u) {
+        Title_DrawChoicePanels(secondary_active, LOBU(g_SysThreads[1].tail.title_screen.secondary_alpha));
         /* FAKE: second read addressed off the primary word so the secondary
          * address is not shared across the call. */
-        Title_DrawIconPair(26, 24, secondary_active, FIELD(u8, &g_UiTitlePrimaryAlpha, 2));
-        Title_DrawLabelPair(-6, 28, primary_active, LOBU(g_UiTitlePrimaryAlpha));
+        Title_DrawIconPair(26, 24, secondary_active, FIELD(u8, &g_SysThreads[1].tail.title_screen.primary_alpha, 2));
+        Title_DrawLabelPair(-6, 28, primary_active, LOBU(g_SysThreads[1].tail.title_screen.primary_alpha));
     }
 }

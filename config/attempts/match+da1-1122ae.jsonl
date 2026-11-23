@@ -1,0 +1,1 @@
+{"function": "emi/etc/start/08@0x801E4744", "tried": "read D_801ED7E8 into a page_index local before row_base so the two table loads follow retail's order (D7E8 then D7E4)", "first_diff": "72 rows unchanged; the candidate still loads D_801ED7E4 first (lui a0,0x801f at 0x801E4778)", "score": "72 rows"}

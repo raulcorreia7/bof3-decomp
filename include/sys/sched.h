@@ -68,8 +68,8 @@ typedef struct ThreadTitleScreen {
     /* 0x18 */ s16 timer;
     /* 0x1A */ s16 banner_scroll;
     /* 0x1C */ s16 banner_alpha;
-    /* 0x1E */ s16 primary_alpha;
-    /* 0x20 */ s16 secondary_alpha;
+    /* 0x1E */ u16 primary_alpha;
+    /* 0x20 */ u16 secondary_alpha;
     /* 0x22 */ u16 pulse;
     u8             pad_24[0x04];
 
