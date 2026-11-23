@@ -1,0 +1,1 @@
+{"function": "emi/scenario/scena17/00@0x801F8B10", "tried": "ran alloc_priority over the ring body", "first_diff": "the top values all demand saved/stack slots (g_GfxPrimCursor at 38571 goes to STACK, another copy to s0), so the body's register pressure is the mismatch behind the s3/s4 prologue swap and the 0x80159308/0C load order", "score": "194 differing rows"}
