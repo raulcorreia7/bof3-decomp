@@ -106,14 +106,14 @@ MATCH void func_801FCD80(void) {
             g_ScenarioState.step = 22;
             break;
         case 22:
-            if (g_UiWindowEffectBusy == 0) {
+            if (g_SysThreads[2].state == 0) {
                 g_AreaDrawFlags = 0x1F;
                 UI_ModeSet(1);
                 g_ScenarioState.step = 23;
             }
             break;
         case 23:
-            if (g_UiWindowEffectBusy == 0) {
+            if (g_SysThreads[2].state == 0) {
                 g_ScenarioState.step = 24;
             }
             break;
