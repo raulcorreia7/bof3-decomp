@@ -22,11 +22,11 @@ loop:
         goto loop;
     }
 
-    g_GfxBuffers[1].draw.r0 = 0;
-    g_GfxBuffers[1].draw.g0 = 0;
     g_GfxBuffers[1].draw.b0 = 0;
-    g_GfxBuffers[0].draw.r0 = 0;
-    g_GfxBuffers[0].draw.g0 = 0;
+    g_GfxBuffers[1].draw.g0 = 0;
+    g_GfxBuffers[1].draw.r0 = 0;
     g_GfxBuffers[0].draw.b0 = 0;
+    g_GfxBuffers[0].draw.g0 = 0;
+    g_GfxBuffers[0].draw.r0 = 0;
     SYS_ThreadExit();
 }
