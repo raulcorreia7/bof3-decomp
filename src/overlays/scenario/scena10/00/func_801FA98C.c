@@ -6,9 +6,8 @@ __asm__(".include \"include/match/macro.inc\"\n");
 
 #ifdef NON_MATCHING
 NON_MATCHING void func_801FA98C(void) {
-    u8  slot;
-    u8  next;
-    u8* char_slots;
+    u8 slot;
+    u8 next;
 
     switch (g_ScenarioState.step) {
         case 0:
