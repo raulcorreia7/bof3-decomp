@@ -110,7 +110,7 @@ MATCH void func_801D1578(void) {
 }
 
 MATCH void func_801D15E4(void) {
-    if (g_UiWindowEffectBusy == 0) {
+    if (g_SysThreads[2].state == 0) {
         D_80148654 = 0;
         D_80148650 = 1;
         D_80148651 = 0;
@@ -355,7 +355,7 @@ MATCH void func_801D20E8(void) {
 MATCH void func_801D211C(void) {
     Menu_DrawClutStrip(g_WindowClut);
     func_801D2304(0x37, 0x37);
-    if (g_UiWindowEffectBusy == 0) {
+    if (g_SysThreads[2].state == 0) {
         func_801D259C();
         D_80148658 = 0;
         D_80148652 = 0;
@@ -388,7 +388,7 @@ MATCH void func_801D2190(void) {
 }
 
 MATCH void func_801D2298(void) {
-    if (g_UiWindowEffectBusy == 0) {
+    if (g_SysThreads[2].state == 0) {
         D_80148654 = 0;
         D_80148650 = 1;
         D_80148651 = 0;
