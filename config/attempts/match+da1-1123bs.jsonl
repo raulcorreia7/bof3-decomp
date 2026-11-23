@@ -1,0 +1,1 @@
+{"function": "emi/etc/shisu/00@0x801D1D1C", "tried": "read the head: retail sets four constants (1, 2, 0x14, -0x64) before the first store, the draft stores D_80158358 first", "first_diff": "42 rows: first hunk 0x801D1D1C li v1,1 against li v0,20; the constant setup block is reordered", "score": "42 rows"}

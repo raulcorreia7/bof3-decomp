@@ -1,0 +1,1 @@
+{"function": "emi/scenario/scena10/00@0x801F73EC", "tried": "read the head: the mask/shift pair swaps t1/t0 and the g_Task load sits after the table lhu in the draft", "first_diff": "25 rows: retail lw t0,68(t0) before lui at/addu/lhu, the draft sinks the g_Task load to t1 after the lhu; same load-hoist class as shisu/00 and battle/15", "score": "25 rows"}
