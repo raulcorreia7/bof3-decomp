@@ -22,7 +22,7 @@ NON_MATCHING u8 Battle_CanTarget(s32 selector, u32 battler_index) {
         src         = (u8*)&ENEMY_COMBATANT(sel).stats;
     }
     /* Snapshot the target's stats for the damage math. */
-    *(Cpy32u*)D_801EC2E8 = *(Cpy32u*)src;
+    *(Cpy32u*)g_BattleCalcStats = *(Cpy32u*)src;
     if (func_800A40D0(selector & BYTE_MASK) != 0) {
         g_Battle.target        = saved_sel;
         g_Battle.target_record = saved_record;
