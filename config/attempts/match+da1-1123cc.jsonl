@@ -1,0 +1,1 @@
+{"function": "emi/scenario/scena07/00@0x801F78B0", "tried": "read the head: retail addiu sp,-40 before the g_Task load, the draft hoists the load above the prologue; second hunk is a lui/ori vs lui/addiu pair", "first_diff": "22 rows: instruction 1 addiu sp,sp,-40 against lui v0,0x1f80; the load hoist class again", "score": "22 rows"}

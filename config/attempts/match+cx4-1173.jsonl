@@ -1,0 +1,1 @@
+{"function": "emi/scenario/scena08/00@0x801F823C", "tried": "rewrote the geometry stores in retail's observed order as separate assignments", "first_diff": "the byte stores are independent and the scheduler reorders them: 161 differing rows, the same as the chained form", "score": "161 differing rows"}
