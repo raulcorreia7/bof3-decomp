@@ -1,0 +1,1 @@
+{"function": "emi/scenario/scena08/00@0x801F823C", "tried": "an 8-byte u64 pad for the frame gap (after u8 pads)", "first_diff": "0x801F823C: the u64 array is dropped (frame stays 0x70, 161 rows); only byte arrays force the frame and they land in the low slots", "score": "frame gap still unexplained; 161 differing rows"}
