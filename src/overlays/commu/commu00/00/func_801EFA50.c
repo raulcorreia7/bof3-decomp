@@ -6,7 +6,7 @@ NON_MATCHING s32 func_801EFA50(void) {
     s32 queue_off;
     s32 room;
     s32 job;
-    s32 class_index;
+    s32 type_index;
     u32 price;
     u32 wait;
     u8  flags;
@@ -47,12 +47,12 @@ NON_MATCHING s32 func_801EFA50(void) {
                     price = g_Accessories[record].price;
                     break;
             }
-            for (class_index = 0; class_index < FAIRY_VILLAGE_COPY_CLASS_COUNT; class_index++) {
-                if (price <= D_801F24FC_Data.copy_class[class_index][0]) {
+            for (type_index = 0; type_index < FAIRY_VILLAGE_COPY_CLASS_COUNT; type_index++) {
+                if (price <= D_801F24FC_Data.copy_class[type_index][0]) {
                     break;
                 }
             }
-            wait = D_801F24FC_Data.copy_class[class_index][1];
+            wait = D_801F24FC_Data.copy_class[type_index][1];
             if ((u32)(g_BattleCount - g_FairyJobs[job].progress_anchor) < wait) {
                 continue;
             }
@@ -61,7 +61,7 @@ NON_MATCHING s32 func_801EFA50(void) {
                 g_FairyJobs[job].unk_03 |= 0x30;
                 goto queue;
             }
-            value = D_801F24FC_Data.copy_class[class_index][2];
+            value = D_801F24FC_Data.copy_class[type_index][2];
             value += (value * g_Fairies[job][8]) / 100;
             if ((s16)value < 0) {
                 value = 0;
