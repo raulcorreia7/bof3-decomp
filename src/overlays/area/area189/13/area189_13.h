@@ -5,6 +5,8 @@
  * and its data. Only this image includes the file. */
 
 #include "overlays/area/worlds/world04.h"
+/* The scratchpad work row the entry paths read. */
+extern s8*  D_1F800010;
 /* The cell ordering-table rows: six 8-byte lists per grid row, head then tail. */
 extern u8   D_80142CC0[];
 /* The per-buffer ordering-table heads, one 8-byte entry per slot. */
@@ -12,9 +14,6 @@ extern u32* D_80143534[][2];
 
 /* The marker screen-y source flag and the y it holds. */
 extern s16 D_80145EC0;
-
-/* The scratchpad work row the entry paths read. */
-extern s8* D_1F800010;
 
 /* The character work record, viewed as bytes here. */
 
