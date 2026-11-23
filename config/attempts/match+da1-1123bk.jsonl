@@ -1,0 +1,2 @@
+{"function": "emi/etc/commu02/08@0x801D1394", "tried": "read the prologue: retail addiu sp,-24 then sw s0; the draft hoists the first global load above the whole prologue (same class as area042/13)", "first_diff": "49 rows; retail frame only holds s0 at 0x10 and ra at 0x14, the candidate starts with lui v1,0x801e at +0", "score": "49 rows"}
+{"function": "emi/etc/commu02/08@0x801D1394", "tried": "added FAKE_STACK_PADS(u8,0x10) to give the draft retail's 0x18 frame", "first_diff": "49 rows unchanged; the pad does not pull the prologue above the first load", "score": "49 rows"}

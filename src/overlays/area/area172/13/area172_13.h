@@ -25,7 +25,7 @@ extern void func_801F2DF4(s32 blend_mode);
 void        func_801F4060(s16 level);
 void        func_801F4138(s16 x, s16 y, s16 radius, s16 color0, s16 color1);
 void        func_801F47F0(void);
-void        func_801F4E8C(s32 x, s32 y);
+void        func_801F4E8C(s16 x, s16 y);
 
 /* The palette counters the fade advances, one 12-byte row per palette index. */
 extern u8 D_80145BD6[];
