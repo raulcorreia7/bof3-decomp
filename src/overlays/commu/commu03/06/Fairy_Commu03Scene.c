@@ -172,8 +172,8 @@ NON_MATCHING void func_801D1250(s32 scene, s32 mode) {
         UI_TextDraw((s16)(scene + 0x14), (s16)(mode + 0x17), 0, TEXT_LENGTH_MAX, (u8*)AREA_MESSAGE_TABLE + D_800104E2[D_801D1940]);
     }
 
-    func_801AE3F0((s16)(scene + 0x48), (s16)(mode + 0x3C), 0x7C, 0xE, 1, *(s8*)&g_WindowStyle);
-    func_801AED54((s16)(scene + 0x48), (s16)(mode + 0x3C), 0x7C, 0xE, 1);
+    func_801AE3F0((s16)scene + 0x48, (s16)mode + 0x3C, 0x7C, 0xE, 1, *(s8*)&g_WindowStyle);
+    func_801AED54((s16)scene + 0x48, (s16)mode + 0x3C, 0x7C, 0xE, 1);
 
     if (g_SndMono == 0) {
         func_801D1714((s16)(scene + 0x10), (s16)(mode + 0x40), 0, D_801D1904);

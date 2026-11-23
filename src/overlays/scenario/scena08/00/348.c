@@ -468,8 +468,9 @@ void func_801F823C(s16 x, s16 y, s16 height, s16 width) {
     s32       half;
     s32       skew;
     s32       top;
-    u8        v;
+    u16       v;
     u8        i;
+    FAKE_STACK_PADS(u8, 8);
     row = height - 1;
     for (i = 0; i < (height * 2); i++) {
         half = SquareRoot0((height * height) - (row * row));
@@ -487,7 +488,7 @@ void func_801F823C(s16 x, s16 y, s16 height, s16 width) {
         prim->u1    = (prim->u3 = 0x40);
         v           = (i + 0x40) - height;
         prim->v0    = (prim->v1 = i - (height - 0x40));
-        prim->v2    = (prim->v3 = ((i + 0x40) - height) + 1);
+        prim->v2    = (prim->v3 = v + 1);
         prim->tpage = GetTPage(TPAGE_DEPTH_15BIT, TPAGE_ABR_HALF, 0x340, 0x100);
         prim->r0 = 0x40, prim->g0 = 0x40, prim->b0 = 0x80;
         prim->r1 = 0x60, prim->g1 = 0x60, prim->b1 = 0x60;
