@@ -289,6 +289,7 @@ g_AreaCameraX = { addr = 0x80149310, source = "X of the camera position." }
 g_AreaCameraY = { addr = 0x80149314, source = "Y of the camera position." }
 g_AreaCameraHeight = { addr = 0x80149318, type = "s32", source = "Height of the area camera." }
 g_AreaCellCodes = { addr = 0x8014931C, type = "u8", source = "Cell codes of the area." }
+g_AreaMap = { addr = 0x8014931C, alias = true, source = "The area cell grid: code table, tile origin and grid cursors." }
 g_AreaTileOriginX = { addr = 0x80149320, type = "s16", source = "X origin of the area tiles." }
 g_AreaTileOriginY = { addr = 0x80149322, type = "s16", source = "Y origin of the area tiles." }
 g_AreaGridColCursor = { addr = 0x80149324, type = "s16", source = "Column cursor of the area grid." }
