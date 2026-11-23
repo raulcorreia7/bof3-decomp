@@ -351,7 +351,7 @@ NON_MATCHING void func_801F7FA0(void) {
         if (SYS_TestFlag(g_SceneFlags, 0x3C) != 0) {
             func_801C1DF0(5);
             func_801BE1B0(6);
-            g_Game.flags &= 0xFFEF;
+            g_GameFlags &= 0xFFEF;
         }
     }
     if (g_GameAreaId == 0x79) {
