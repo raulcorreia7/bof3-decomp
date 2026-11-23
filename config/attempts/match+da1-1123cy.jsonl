@@ -1,0 +1,1 @@
+{"function": "emi/battle/batl_end/00@0x801EFE5C", "tried": "a FAKE_BARRIER after y = 0x2C to stop the first-increment fold", "first_diff": "1 row baseline; the barrier costs 336 rows (it moves the whole prologue), reverted", "score": "1 row"}
