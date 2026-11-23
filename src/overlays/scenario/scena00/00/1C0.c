@@ -797,13 +797,13 @@ MATCH void func_801F89F0(void) {
     SceneEffect* update_work;
     SceneEffect* setup_work;
 
-    setup_work                              = TASK(SceneEffect);
-    FAKE_VOLATILE(s32, setup_work->pos.x)   = g_PartyActors[0].pos.x.fixed;
-    FAKE_VOLATILE(s32, setup_work->pos.y)   = g_AreaFocus.y.fixed;
-    FIELD(s32, setup_work, 0x3Cu)           = g_PartyActors[0].pos.z.fixed;
-    FAKE_VOLATILE(s32, setup_work->angle.x) = g_PartyActors[0].unk_64;
-    FAKE_VOLATILE(s32, setup_work->angle.y) = g_PartyActors[0].unk_68;
-    setup_work->angle.z                     = g_PartyActors[0].unk_6C;
+    setup_work                    = TASK(SceneEffect);
+    setup_work->pos.x             = g_PartyActors[0].pos.x.fixed;
+    setup_work->pos.y             = g_AreaFocus.y.fixed;
+    FIELD(s32, setup_work, 0x3Cu) = g_PartyActors[0].pos.z.fixed;
+    setup_work->angle.x           = g_PartyActors[0].unk_64;
+    setup_work->angle.y           = g_PartyActors[0].unk_68;
+    setup_work->angle.z           = g_PartyActors[0].unk_6C;
     func_801AC1DC(deltas, FIELD(u8, setup_work, 0x1Cu));
     update_work                     = TASK(SceneEffect);
     update_work->pos.x              = (update_work->pos.x + deltas[0]);
