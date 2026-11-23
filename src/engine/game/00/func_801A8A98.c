@@ -7,7 +7,7 @@ MATCH bool func_801A8A98(s32 candidate_x, s32 candidate_y) {
     value = candidate_y;
     if (LOHU(g_GameAreaId) != AREA_ID_ADULT_CAMP) {
         if ((LOBU(g_GameRequestFlags) == 0x40) && (g_GameCellType == 1) && ((Area_CellGetCode((candidate_x >> 0x10), ((value + 0x8000) >> 0x10)) & BYTE_MASK) == 0xA1) && (value > 0x107FFF)) {
-            buf = (u8*)&g_SceneEventFlags;
+            buf = g_SceneEventFlags;
             if (SYS_TestFlag(buf, 119U) != 0) {
                 D_8014504A = 0;
                 SYS_ClearFlag(buf, 119U);
