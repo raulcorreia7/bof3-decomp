@@ -1,0 +1,1 @@
+{"function": "emi/battle/batl_end/00@0x801EFE5C", "tried": "u8 y and a separate step local to stop the first y+=0x10 fold", "first_diff": "1 row; retail addiu s0,zero,0x2C at 0x801EFE8C then addiu s0,s0,0x10 at 0x801EFF08; u8 y costs 251 rows, the step local 334, both reverted", "score": "1 row"}

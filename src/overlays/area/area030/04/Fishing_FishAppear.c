@@ -1,11 +1,7 @@
 #include "area030_04.h"
 
-/* Each access reloads the work record and the row, as retail does. */
-
-/* Picks the area's spawn row, randomises the facing and position of
- *           the scratchpad work record from its table byte and the play clock,
- *           then bumps the work step counter. */
-/* func_801DE5EC */
+/* Picks the spawn row, randomises the work record's facing and position from its cue row and the
+ * play clock, then bumps the step counter. */
 #ifdef NON_MATCHING
 NON_MATCHING void Fishing_FishAppear(void) {
     s16 limit;

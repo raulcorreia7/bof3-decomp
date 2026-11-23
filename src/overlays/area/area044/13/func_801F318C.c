@@ -16,7 +16,7 @@ NON_MATCHING void func_801F318C(u8 facing, u8 actor_index) {
         if (slot != actor_index) {
             continue;
         }
-        actor = g_Task;
+        actor = TASK(Actor);
         if (actor->timer != 0) {
             actor->pos.x.fixed += actor->vx * actor->timer;
             actor->pos.y.fixed += actor->vy * actor->timer;

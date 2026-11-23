@@ -3,7 +3,7 @@
 #ifdef NON_MATCHING
 NON_MATCHING void func_801F3F04(s32 steps) {
     POLY_FT4* prim;
-    long      p;
+    long      depth;
     long      flag;
     s32       i;
     s32       order;
@@ -27,10 +27,10 @@ NON_MATCHING void func_801F3F04(s32 steps) {
         g_ScratchPadVectors[0].vx = x;
         D_1F800016                = y;
         D_1F800018                = -0x80 - step - order * 8;
-        RotTransPers(g_ScratchPadVectors, (long*)D_1F800034, &p, &flag);
+        RotTransPers(g_ScratchPadVectors, (long*)D_1F800034, &depth, &flag);
         spread   = step / 16 + 4 + ((i < 4) ? order / 2 : steps * 2);
         shade    = 8 - steps;
-        shade    = (((7 - i) * 8 + 7 - phase) << 17) / shade;
+        shade    = (((7 - i) * 8 + (7 - phase)) << 17) / shade;
         prim->x0 = prim->x2 = (u16)D_1F800034[0] - spread;
         prim->x1 = prim->x3 = (u16)D_1F800034[0] + spread;
         prim->y0 = prim->y1 = (u16)D_1F800034[1] - spread;
