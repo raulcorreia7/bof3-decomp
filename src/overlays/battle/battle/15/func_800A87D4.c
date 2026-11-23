@@ -9,7 +9,7 @@ MATCH void func_800A87D4(void) {
 
     index = Battle_AllocEffect(0, 18);
     if ((index & BYTE_MASK) != GAME_NONE) {
-        slot                                            = (BattleWorkImage*)&g_BattleEffects[index & BYTE_MASK];
+        slot                                            = &g_BattleEffects[index & BYTE_MASK];
         /* one struct copy (the 16-byte block-move loop), read through the non-volatile cell */
         *slot                                           = *(BattleWorkImage*)g_BattleWorkCell;
         g_BattleEffects[index & BYTE_MASK].unk_06       = 0;
@@ -27,7 +27,7 @@ MATCH void func_800A87D4(void) {
             work[0xB]--;
         }
     }
-    type = (u8*)&g_Battle.target_selector;
+    type = &g_Battle.target_selector;
     if (*type < 3) {
         Battle_MoveRangeToward((BattleRange*)&g_Game.members[*type], 0x50);
         if (func_800AF5FC((BattleRange*)&g_Game.members[*type], 0x10000) != 0) {
