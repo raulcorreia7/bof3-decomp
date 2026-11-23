@@ -1122,7 +1122,7 @@ MATCH void func_801FAA70(void) {
 
     switch (*step) {
         case 0:
-            if (g_UiWindowEffectBusy == 0) {
+            if (g_SysThreads[2].state == 0) {
                 MESSAGE_START_WAIT(MSG_SCENA07_001);
                 *step = 1;
             }
@@ -1138,7 +1138,7 @@ MATCH void func_801FAA70(void) {
             }
             break;
         case 2:
-            if (g_UiWindowEffectBusy == 0) {
+            if (g_SysThreads[2].state == 0) {
                 *g_ScriptVars = 1;
                 *step         = 3;
             }

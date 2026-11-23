@@ -25,7 +25,7 @@ MATCH void func_801FB6DC(void) {
             }
             break;
         case 3:
-            if (g_UiWindowEffectBusy == 0) {
+            if (g_SysThreads[2].state == 0) {
                 g_ScriptVars[0]++;
                 func_801C16B8();
                 SND_BGMPause(g_SndBGMId);
@@ -46,14 +46,14 @@ MATCH void func_801FB6DC(void) {
             }
             break;
         case 5:
-            if (g_UiWindowEffectBusy == 0) {
+            if (g_SysThreads[2].state == 0) {
                 g_AreaDrawFlags = 0x1F;
                 UI_ModeSet(UI_MODE_FADE_IN);
                 g_ScenarioState.step = 6;
             }
             break;
         case 6:
-            if (g_UiWindowEffectBusy == 0) {
+            if (g_SysThreads[2].state == 0) {
                 g_ScriptVars[0]++;
                 Game_ClearScriptActive();
                 g_GameFlags &= ~GAME_FLAG_SCROLL_LOCK;

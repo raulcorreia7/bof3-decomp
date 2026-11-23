@@ -49,7 +49,7 @@ MATCH void func_801F9F18(void) {
             }
             break;
         case 5:
-            if (g_UiWindowEffectBusy == 0) {
+            if (g_SysThreads[2].state == 0) {
                 SYS_ClearFlag(g_SceneFlags, 0x20);
                 g_ScenarioState.timer_06 = 0x3C;
                 g_ScenarioState.step     = 6;
@@ -97,7 +97,7 @@ MATCH void func_801F9F18(void) {
             }
             break;
         case 10:
-            if (g_UiWindowEffectBusy == 0) {
+            if (g_SysThreads[2].state == 0) {
                 g_ScenarioState.timer_06 = 0x3C;
                 g_AreaDrawFlags          = 0;
                 g_ScenarioState.step     = 11;
@@ -120,14 +120,14 @@ MATCH void func_801F9F18(void) {
             }
             break;
         case 13:
-            if (g_UiWindowEffectBusy == 0) {
+            if (g_SysThreads[2].state == 0) {
                 UI_ModeSet(1);
                 g_AreaDrawFlags      = 0x1F;
                 g_ScenarioState.step = 14;
             }
             break;
         case 14:
-            if (g_UiWindowEffectBusy == 0) {
+            if (g_SysThreads[2].state == 0) {
                 g_ScenarioState.step = 15;
                 g_ScriptVars[0]++;
             }
@@ -174,7 +174,7 @@ MATCH void func_801F9F18(void) {
             }
             break;
         case 27:
-            if (g_UiWindowEffectBusy == 0) {
+            if (g_SysThreads[2].state == 0) {
                 g_AreaDrawFlags = 0x1F;
                 SCENARIO_MESSAGE_WAIT(MSG_SCENA13_042, 28);
             }
