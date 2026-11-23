@@ -1,13 +1,19 @@
 #include "area111_13.h"
 
+/* Reads the grid cell at a column and row: two cells a byte, the even column in the high nibble. */
+static inline s8 Area_SlideCell(s8 x, s8 y) {
+    if (x & 1) {
+        return D_801F5C18[y][x / 2] & 0xF;
+    }
+    return D_801F5C18[y][x / 2] >> 4;
+}
+
 /* Walks the cell grid from the actor along its facing up to a wall cell and starts the slide over the cells crossed. */
 MATCH void func_801F3BC0(void) {
     s8  x;
     s8  y;
     s8  offset;
     s32 facing;
-    s32 nibble;
-    u8  cell;
 
     offset = 0;
     x      = (u32)(TASK(Actor)->pos.x.part.integer - 11) >> 1;
@@ -20,21 +26,10 @@ MATCH void func_801F3BC0(void) {
         if ((u8)(y += D_80181B01[facing]) >= 7) {
             goto done;
         }
-        if (x & 1) {
-            nibble = D_801F5C18[y][x / 2] & 0xF;
-        } else {
-            nibble = D_801F5C18[y][x / 2] >> 4;
-        }
-        cell = nibble;
-        if (cell == 0xF) {
+        if (Area_SlideCell(x, y) == 0xF) {
             goto done;
         }
-        /* The test leaves no code: it keeps the cell live past the wall test, which the bytes need. */
-        if (cell != 0) {
-            offset += 4;
-        } else {
-            offset += 4;
-        }
+        offset += 4;
     }
 done:
     if (offset != 0) {
