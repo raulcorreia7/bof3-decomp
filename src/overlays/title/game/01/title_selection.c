@@ -8,7 +8,7 @@ MATCH void Title_AdvanceFade(void) { /* func_801D0D94 */
     u16* timer_ptr;
     u16  timer;
 
-    timer_ptr  = &g_UiTitleTimer;
+    timer_ptr  = &g_SysThreads[1].tail.title_screen.timer;
     timer      = *timer_ptr - 1u;
     *timer_ptr = timer;
 
@@ -28,7 +28,7 @@ MATCH void Title_StartFade(void) { /* func_801D0DF0 */
     volatile u16* timer_ptr;
     u16           timer;
 
-    timer_ptr  = &g_UiTitleTimer;
+    timer_ptr  = &g_SysThreads[1].tail.title_screen.timer;
     timer      = *timer_ptr - 1u;
     *timer_ptr = timer;
 
@@ -45,9 +45,9 @@ MATCH void Title_StartFade(void) { /* func_801D0DF0 */
 /* func_801D0E54 */
 MATCH void Title_StartSelectedGame(void) { /* func_801D0E54 */
     if (WINDOW_EFFECT_IDLE()) {
-        g_UiTitleFadePhase   = 0u;
-        g_UiTitleChoicePhase = 0u;
-        g_UiTitleInputGate   = 0u;
+        g_SysThreads[1].tail.title_screen.popup.bytes.fade_phase   = 0u;
+        g_SysThreads[1].tail.title_screen.popup.bytes.choice_phase = 0u;
+        g_SysThreads[1].tail.title_screen.popup.bytes.input_gate   = 0u;
         SND_StopSelectionEffect();
         SND_SetBankLayout(0u);
         Actor_ClearAll();
@@ -58,7 +58,7 @@ MATCH void Title_StartSelectedGame(void) { /* func_801D0E54 */
         g_AreaDrawFlags        = 0u;
         Scene_Start(16);
         SYS_ThreadRegister(0, Game_RunMain);
-        g_UiTitleState = g_UiTitleState + 1u;
+        g_SysThreads[1].tail.title_screen.state = g_SysThreads[1].tail.title_screen.state + 1u;
     }
 }
 
@@ -73,7 +73,7 @@ MATCH void Title_WaitInput(void) { /* func_801D0F00 */
         return;
     }
 
-    if (EMI_IsReady() && g_UiWindowEffectBusy == 0u && (g_PadStates[0].pressed & INPUT_ACTION_BUTTONS) != 0u) {
+    if (EMI_IsReady() && g_SysThreads[2].state == 0u && (g_PadStates[0].pressed & INPUT_ACTION_BUTTONS) != 0u) {
         u8  sel;
         u16 bank;
         g_ScenarioState.state_04 = 1u;
@@ -92,9 +92,9 @@ MATCH void Title_WaitInput(void) { /* func_801D0F00 */
  */
 /* func_801D0FB8 */
 MATCH void Title_UpdateChoicePrompt(void) { /* func_801D0FB8 */
-    if (D_80143B40 == 0u) {
-        g_EmiLoadedCharacterIndex = 0xFFu;
-        g_UiTitleState            = 0u;
+    if (g_SysThreads[0].state == 0u) {
+        g_EmiLoadedCharacterIndex               = 0xFFu;
+        g_SysThreads[1].tail.title_screen.state = 0u;
     } else {
         Title_DrawChoicePrompt();
     }

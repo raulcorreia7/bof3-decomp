@@ -1,0 +1,3 @@
+{"function": "emi/world04/area199/13@0x801F36DC", "tried": "reviewed the clamp: draw_radius/draw_shade are locals in the draft and take s1 across the call where retail keeps the radius in a0 and tests a1 on the other side of the clamp", "first_diff": "198 rows; first hunk 0x801F376C lbu v1,9(v0) against lbu a0,9(v0), then li a0,500 against li s1,500", "score": "198 rows"}
+{"function": "emi/battle/battle/15@0x8009704C", "tried": "measured the kept draft; extra andi a0,a0,0xf00c at 0x800970A0", "first_diff": "185 rows; load signedness and the shared-header volatile listed", "score": "185 rows"}
+{"function": "emi/etc/start/08@0x801E4744", "tried": "measured the kept draft; instruction order inside a block", "first_diff": "72 rows", "score": "72 rows"}

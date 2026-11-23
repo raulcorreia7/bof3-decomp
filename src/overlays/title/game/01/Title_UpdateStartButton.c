@@ -26,7 +26,7 @@ MATCH void Title_UpdateStartButton(void) {
                         if (*state < 3u) {
                             *timer = 1u;
                             *state = 2u;
-                        } else if ((g_UiPopupRequest & WIN_POPUP_PENDING_MASK) == WIN_POPUP_PENDING_OPEN) {
+                        } else if ((g_SysThreads[1].tail.title_screen.popup.request & WIN_POPUP_PENDING_MASK) == WIN_POPUP_PENDING_OPEN) {
                             UI_ModeSet(UI_MODE_FADE_OUT);
                             SND_StartSelectionEffect();
                             SND_SEPlay(EMI_SE_ID(SND_BANK_COMMON, 5));

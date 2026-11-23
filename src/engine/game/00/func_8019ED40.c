@@ -1,7 +1,7 @@
 #include "game_00.h"
 
 MATCH void func_8019ED40(void) {
-    if (g_GameStateIndex != GAME_REQUEST_IDLE) {
+    if (g_SysThreads[0].tail.game_entry.request != GAME_REQUEST_IDLE) {
         if (TASK(Actor)->param.unk_0B == 0u) {
             return;
         }

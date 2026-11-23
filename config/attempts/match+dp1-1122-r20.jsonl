@@ -1,0 +1,2 @@
+{"function": "emi/world04/area170/13@0x801F31DC", "tried": "read the prologue: retail copies a1 to s8; the draft copies a1 to s7", "first_diff": "0x801F31E8 sw s8,80(sp) against sw s7,76(sp)", "score": "158 rows"}
+{"function": "emi/etc/commu02/08@0x801D4AE0", "tried": "read the prologue: retail copies a0 to s0 at 0x30; the draft copies a0 to s2 at 0x38", "first_diff": "0x801D4AE4 sw s0,48(sp) against sw s2,56(sp)", "score": "219 rows"}

@@ -1,0 +1,1 @@
+{"function": "emi/bmagic/magic067/03@0x801EEC94", "tried": "Cast the active-battler read to u8 in the enemy index to see whether the andi reorders the load", "first_diff": "0x801EEE58: the load keeps its place before the slot stride; 5 rows of 170", "score": "5 rows differ, 170 words each"}

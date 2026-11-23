@@ -47,4 +47,7 @@ void func_801F3838(u16 line_index);
 void func_801F388C(s32 x, s32 y, s8 type);
 void func_801F4640(s32 sample_height);
 
+/* The row scale bytes the floor quad multiplies by. */
+extern u8 D_801F58B8[];
+
 #endif

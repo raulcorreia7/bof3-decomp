@@ -65,17 +65,17 @@ MATCH void func_801F6D90(void) {
     switch (area_id) {
         case AREA_ID_DAUNA_MINE_WORKER:
             func_801F6F30();
-            LOBU(g_UiPopupRequest) = 1u;
+            LOBU(g_SysThreads[1].tail.title_screen.popup.request) = 1u;
             break;
 
         case AREA_ID_DAUNA_MINE_INTRO:
             func_801F6EB0();
-            LOBU(g_UiPopupRequest) = 1u;
+            LOBU(g_SysThreads[1].tail.title_screen.popup.request) = 1u;
             break;
 
         case AREA_ID_TITLE_INTRO:
             func_801F6E30();
-            LOBU(g_UiPopupRequest) = 0u;
+            LOBU(g_SysThreads[1].tail.title_screen.popup.request) = 0u;
             break;
     }
 
