@@ -1,0 +1,1 @@
+{"function": "emi/scenario/scena15/00@0x801F97CC", "tried": "if/else red/green locals instead of the ternaries: 25 rows, size 0x244 against 0x254", "first_diff": "0x801F99B8 move a2,zero against nop", "score": "19 rows"}
