@@ -20,8 +20,7 @@ NON_MATCHING void func_801F2DCC(void) {
     i     = 0;
     if (g_PartySize != 0) {
         do {
-            /* FAKE: the loop pass gives retail's BIT mask constant a saved register; pure C re-loads 1 in each block. */
-            FAKE_HOLD(one, 1);
+            one = 1;
             index       = i & 0xFF;
             record      = &g_Game.members[index];
             g_GameState = record;
