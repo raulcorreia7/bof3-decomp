@@ -10,33 +10,34 @@ NON_MATCHING s32 func_801A1ED8(s32 x, s32 y, s32 route, s32 unused) {
     s32 ycell;
 
     switch (route & BYTE_MASK) {
-        case FACING_UP:
-            xcell = x >> 16;
-            ycell = ((u32)y) >> 16;
-            sum   = AREA_CELL_BLOCKED(xcell & HALF_MASK, ycell);
+        case FACING_UP: {
+            s32 col = x >> 16;
+            s32 row = ((u32)y) >> 16;
+            sum     = AREA_CELL_BLOCKED(col & HALF_MASK, row);
             if (x & HALF_MASK) {
-                sum += AREA_CELL_BLOCKED((xcell + 1) & HALF_MASK, ycell);
+                sum += AREA_CELL_BLOCKED((col + 1) & HALF_MASK, row);
                 sum += func_801A223C(x & ~HALF_MASK, y);
                 sum += func_801A223C(x + COORD_HALF, y);
             }
             break;
+        }
 
         case FACING_DOWN:
             if (y & HALF_MASK) {
-                xcell = x >> 16;
-                ycell = ((y >> 16) + 1) & HALF_MASK;
-                sum   = AREA_CELL_BLOCKED(xcell & HALF_MASK, ycell);
+                s32 col = x >> 16;
+                s32 row = ((y >> 16) + 1) & HALF_MASK;
+                sum     = AREA_CELL_BLOCKED(col & HALF_MASK, row);
                 if (x & HALF_MASK) {
-                    sum += AREA_CELL_BLOCKED((xcell + 1) & HALF_MASK, ycell);
+                    sum += AREA_CELL_BLOCKED((col + 1) & HALF_MASK, row);
                     sum += func_801A223C(x & ~HALF_MASK, y);
                     sum += func_801A223C(x + COORD_HALF, y);
                 }
             } else {
-                xcell = x >> 16;
-                ycell = ((u32)y) >> 16;
-                sum   = AREA_CELL_BLOCKED(xcell & HALF_MASK, ycell);
+                s32 col = x >> 16;
+                s32 row = ((u32)y) >> 16;
+                sum     = AREA_CELL_BLOCKED(col & HALF_MASK, row);
                 if (x & HALF_MASK) {
-                    sum += AREA_CELL_BLOCKED((xcell + 1) & HALF_MASK, ycell);
+                    sum += AREA_CELL_BLOCKED((col + 1) & HALF_MASK, row);
                     sum += func_801A223C(x & ~HALF_MASK, y);
                     sum += func_801A223C(x + COORD_HALF, y);
                 }
@@ -64,10 +65,12 @@ NON_MATCHING s32 func_801A1ED8(s32 x, s32 y, s32 route, s32 unused) {
             break;
 
         default:
-            return 1;
+            sum = 1;
+            goto done;
     }
 
     sum += func_801A21EC(x, y);
+done:
     return (sum & BYTE_MASK) != 0;
 }
 #else
