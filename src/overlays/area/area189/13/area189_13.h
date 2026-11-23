@@ -5,13 +5,15 @@
  * and its data. Only this image includes the file. */
 
 #include "overlays/area/worlds/world04.h"
+/* The scratchpad work row the entry paths read. */
+extern s8*  D_1F800010;
+/* The cell ordering-table rows: six 8-byte lists per grid row, head then tail. */
+extern u8   D_80142CC0[];
 /* The per-buffer ordering-table heads, one 8-byte entry per slot. */
 extern u32* D_80143534[][2];
 
 /* The marker screen-y source flag and the y it holds. */
 extern s16 D_80145EC0;
-
-/* The scratchpad work row the entry paths read. */
 
 /* The character work record, viewed as bytes here. */
 
@@ -30,6 +32,10 @@ extern u16 D_801492DC;
 
 /* The camera view rotation the refresh compares against. */
 extern SVECTOR  D_801492E0;
+/* The number of words in the cell packet list. */
+extern u8       g_AreaCellPacketCount;
+/* The eight facing rows of the band scan: origin, column and row steps. */
+extern u8       D_801F6108[];
 /* The 16 x 16 block table the height query maps a cell to. */
 extern u8       D_801F6138[];
 /* The key-state word and its mask partner (gameui.h names it g_PadStates[0].pressed). */
@@ -49,6 +55,7 @@ extern u8 D_801F638A[];
 
 /* The image's step passes. */
 void func_801F2DE0(void);
+void Area_CellSetTexture(s32 texture, POLY_FT4* prim);
 void func_801F3514(void);
 void func_801F3800(void);
 void func_801F4150(s32 shade, s32 x);

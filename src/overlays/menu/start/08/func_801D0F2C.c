@@ -1,12 +1,11 @@
 #include "start_08.h"
 
-/* Sets up the save image of a new game from one starting point of the
- * D_801EBA44 table. */
+/* Seeds the save image from one starting point of the D_801EBA44 table. */
 #ifdef NON_MATCHING
 NON_MATCHING void func_801D0F2C(u8 start) {
-    u8* sp;
+    u8* stage;
     u8* src;
-    u8* rows;
+    u8* cell;
     u8  member;
     u16 item;
     u8  vital;
@@ -15,30 +14,26 @@ NON_MATCHING void func_801D0F2C(u8 start) {
     s32 idx;
     u8* row;
 
-    g_SaveAreaId = D_801EBA44[start].area;
-    g_SaveEntryX = D_801EBA44[start].entry_x;
-    /* FAKE: FAKE_ORDER_FENCE keeps the entry index ahead of the scratchpad address; retail forms the index first. */
-    FAKE_ORDER_FENCE();
-    sp                = SP(0);
+    g_SaveAreaId      = D_801EBA44[start].area;
+    g_SaveEntryX      = D_801EBA44[start].entry_x;
+    stage             = SP(0);
     g_SaveEntryY      = D_801EBA44[start].entry_y;
     g_SaveEntryFacing = D_801EBA44[start].facing;
     src               = D_801EBA44[start].party;
     for (i = 0; i < 3; i++) {
         member = *src++;
         if (member != 0xFF) {
-            *sp = member & 0x7F;
+            *stage = member & 0x7F;
         } else {
-            *sp = 0xFF;
+            *stage = 0xFF;
         }
-        sp++;
+        stage++;
     }
     if (start >= 9) {
-        u8* character = &D_80181B17;
-
-        g_Characters[*character].character_id         = 7;
-        g_Characters[*character].base.surprise_chance = 0x37;
-        g_Characters[*character].base.evasion         = 8;
-        g_Characters[*character].base.accuracy        = 0x64;
+        g_Characters[D_80181B17].character_id         = 7;
+        g_Characters[D_80181B17].base.surprise_chance = 0x37;
+        g_Characters[D_80181B17].base.evasion         = 8;
+        g_Characters[D_80181B17].base.accuracy        = 0x64;
         g_Characters[D_80181B18].character_id         = 8;
         g_Characters[D_80181B18].base.evasion         = 0xC;
     }
@@ -120,9 +115,9 @@ NON_MATCHING void func_801D0F2C(u8 start) {
         D_801454F4[i][1] = 0;
         D_801454F4[i][2] = 0;
     }
-    rows = &D_801454FF;
+    cell = &D_801454FF;
     for (i = 0; i < 3; i++) {
-        *rows-- = 0;
+        *cell-- = 0;
     }
 }
 #else

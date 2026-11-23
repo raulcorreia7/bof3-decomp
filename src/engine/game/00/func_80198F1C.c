@@ -8,7 +8,7 @@ MATCH void func_80198F1C(void) {
             D_80143BB1 = 1;
         }
         {
-            u16* counter = &g_GameEntrySubstate;
+            u16* counter = &g_SysThreads[0].tail.game_entry.substate;
             *counter += 1;
         }
         return;

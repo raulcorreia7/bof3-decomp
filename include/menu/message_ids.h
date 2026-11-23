@@ -7,4 +7,7 @@
 
 #include "msg/message_ids.h"
 
+#define MSG_083 83
+#define MSG_084 84
+
 #endif
