@@ -1,0 +1,3 @@
+{"function": "emi/bmagic/magic059/03@0x801EED0C", "tried": "permuter 600s on func_801EED0C: base 9180, best 9180", "first_diff": "candidates in work/permute/nonmatchings/func_801EED0C/output-*", "score": 9180}
+{"function": "emi/scenario/scena10/00@0x801F73EC", "tried": "permuter 600s on func_801F7068: base 130, best 130", "first_diff": "candidates in work/permute/nonmatchings/func_801F7068/output-*", "score": 130}
+{"function": "emi/etc/shisu/00@0x801D1EE8", "tried": "permuter 900s on func_801D1964: base 895, best 895", "first_diff": "candidates in work/permute/nonmatchings/func_801D1964/output-*", "score": 895}
