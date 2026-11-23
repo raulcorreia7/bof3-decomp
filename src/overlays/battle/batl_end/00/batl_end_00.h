@@ -6,7 +6,6 @@
 
 extern u16        D_801463B0;
 extern u16        D_801463B4;
-extern u8         D_8014835F;
 extern s16        D_80148628;
 extern u16        D_8014862A;
 extern char       D_80149118[];
