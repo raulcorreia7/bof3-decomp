@@ -70,9 +70,8 @@ NON_MATCHING void func_801EED0C(void) {
     }
 
     i           = 0;
-    /* Retail forms both palette addresses with lui/ori, so these stay literals. */
-    palette_dst = (u16*)0x8003AC00;
-    palette_src = (u16*)0x80036C00;
+    palette_dst = g_BattleEffectPalette;
+    palette_src = D_80036C00;
     for (; i < 16; i++) {
         *palette_dst++ = *palette_src++ | 0x8000;
     }
