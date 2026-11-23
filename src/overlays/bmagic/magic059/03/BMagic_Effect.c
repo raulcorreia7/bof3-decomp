@@ -37,34 +37,34 @@ NON_MATCHING void func_801EED0C(void) {
 
     speed = 0x80;
     for (i = 0; i < 8; i++) {
-        slot                                  = BMagic_AllocEffect();
-        BMAGIC_EFFECT_SLOTS[slot].target.party = g_Task;
-        BMAGIC_EFFECT_SLOTS[slot].header.mode  = 0;
-        BMAGIC_EFFECT_SLOTS[slot].arg.unk_09   = i << 3;
-        BMAGIC_EFFECT_SLOTS[slot].unk_0B       = 3;
-        BMAGIC_EFFECT_SLOTS[slot].unk_0C       = speed;
+        slot                                    = BMagic_AllocEffect();
+        BMAGIC_EFFECT_SLOTS[slot].target.party  = g_Task;
+        BMAGIC_EFFECT_SLOTS[slot].header.mode   = 0;
+        BMAGIC_EFFECT_SLOTS[slot].arg.unk_09    = i << 3;
+        BMAGIC_EFFECT_SLOTS[slot].unk_0B        = 3;
+        BMAGIC_EFFECT_SLOTS[slot].unk_0C        = speed;
         *(s32*)BMAGIC_EFFECT_SLOTS[slot].pad_14 = 0x800000;
         TASK(PartyMember)->param.unk_0B++;
     }
     speed = 0xC0;
     for (i = 0, phase = 2; i < 8; i++, phase += 8) {
-        slot                                  = BMagic_AllocEffect();
-        BMAGIC_EFFECT_SLOTS[slot].target.party = g_Task;
-        BMAGIC_EFFECT_SLOTS[slot].header.mode  = 0;
-        BMAGIC_EFFECT_SLOTS[slot].arg.unk_09   = phase;
-        BMAGIC_EFFECT_SLOTS[slot].unk_0B       = 2;
-        BMAGIC_EFFECT_SLOTS[slot].unk_0C       = speed;
+        slot                                    = BMagic_AllocEffect();
+        BMAGIC_EFFECT_SLOTS[slot].target.party  = g_Task;
+        BMAGIC_EFFECT_SLOTS[slot].header.mode   = 0;
+        BMAGIC_EFFECT_SLOTS[slot].arg.unk_09    = phase;
+        BMAGIC_EFFECT_SLOTS[slot].unk_0B        = 2;
+        BMAGIC_EFFECT_SLOTS[slot].unk_0C        = speed;
         *(s32*)BMAGIC_EFFECT_SLOTS[slot].pad_14 = 0x400000;
         TASK(PartyMember)->param.unk_0B++;
     }
     speed = 0x100;
     for (i = 0, phase = 4; i < 8; i++, phase += 8) {
-        slot                                  = BMagic_AllocEffect();
-        BMAGIC_EFFECT_SLOTS[slot].target.party = g_Task;
-        BMAGIC_EFFECT_SLOTS[slot].header.mode  = 0;
-        BMAGIC_EFFECT_SLOTS[slot].arg.unk_09   = phase;
-        BMAGIC_EFFECT_SLOTS[slot].unk_0B       = 1;
-        BMAGIC_EFFECT_SLOTS[slot].unk_0C       = speed;
+        slot                                    = BMagic_AllocEffect();
+        BMAGIC_EFFECT_SLOTS[slot].target.party  = g_Task;
+        BMAGIC_EFFECT_SLOTS[slot].header.mode   = 0;
+        BMAGIC_EFFECT_SLOTS[slot].arg.unk_09    = phase;
+        BMAGIC_EFFECT_SLOTS[slot].unk_0B        = 1;
+        BMAGIC_EFFECT_SLOTS[slot].unk_0C        = speed;
         *(s32*)BMAGIC_EFFECT_SLOTS[slot].pad_14 = 0;
         TASK(PartyMember)->param.unk_0B++;
     }
