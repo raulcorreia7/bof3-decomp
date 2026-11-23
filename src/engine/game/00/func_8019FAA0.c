@@ -82,7 +82,7 @@ NON_MATCHING void func_8019FAA0(u16 area_id, u32 entry_x, u32 entry_y, u8 entry_
             g_AreaWalkFlags &= ~AREA_WALK_ACCEPT_LOCK;
             Party_RunFrame();
         }
-    } else if ((g_Game.flags & 0x800u) == 0) {
+    } else if ((g_GameFlags & 0x800u) == 0) {
         if ((world_flags & 0x80u) != 0)
             mode = 1u;
         else if ((world_flags & 0x100u) != 0)
@@ -90,16 +90,16 @@ NON_MATCHING void func_8019FAA0(u16 area_id, u32 entry_x, u32 entry_y, u8 entry_
         else if ((world_flags & 0x200u) != 0)
             mode = 3u;
         else {
-            if (g_Game.party_size < 2u)
+            if (g_PartySize < 2u)
                 goto end;
             func_8019FF88(0, entry_x, entry_y);
-            if (((g_Game.flags & 0x800u) == 0) && ((g_AreaWalkFlags & AREA_WALK_MAP_LOADING) == 0))
+            if (((g_GameFlags & 0x800u) == 0) && ((g_AreaWalkFlags & AREA_WALK_MAP_LOADING) == 0))
                 Area_CellSetPalette(g_AreaTargetCellX, g_AreaTargetCellY);
             goto tail;
         }
         func_8019FF88(mode, entry_x, entry_y);
     tail:
-        mode = g_Game.party_size;
+        mode = g_PartySize;
         if (mode < 2u)
             goto end;
         world_flags     = g_AreaWalkFlags;
