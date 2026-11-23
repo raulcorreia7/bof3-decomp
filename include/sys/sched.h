@@ -57,7 +57,9 @@ ASSERT_OFFSET(ThreadGameEntry, substate, 0x0A);
 ASSERT_OFFSET(ThreadGameEntry, request, 0x28);
 ASSERT_SIZE(ThreadGameEntry, 0x38);
 
-/* Thread slot 1: the title screen's fade, banner and choice state. */
+/* Thread slot 1: the title screen's fade, banner and choice state. The popup
+ * request word holds the pending flag in its low byte and the three phase
+ * bytes above it. */
 typedef struct ThreadTitleScreen {
     u8             pad_00[0x08];
     /* 0x08 */ u16 state;
@@ -70,17 +72,24 @@ typedef struct ThreadTitleScreen {
     /* 0x20 */ s16 secondary_alpha;
     /* 0x22 */ u16 pulse;
     u8             pad_24[0x04];
-    /* 0x28 */ u32 popup_request; /* WIN_POPUP_* flags */
-    /* 0x2C */ u8  fade_phase;
-    /* 0x2D */ u8  choice_phase;
-    /* 0x2E */ u8  input_gate;
-    u8             pad_2F[0x09];
+
+    union {
+        /* 0x28 */ u32 request; /* WIN_POPUP_* flags, tested through the low byte */
+        struct {
+            /* 0x28 */ u8 pending;
+            /* 0x29 */ u8 fade_phase;
+            /* 0x2A */ u8 choice_phase;
+            /* 0x2B */ u8 input_gate;
+        } bytes;
+    } popup;
+
+    u8 pad_2C[0x0C];
 } ThreadTitleScreen;
 
 ASSERT_OFFSET(ThreadTitleScreen, timer, 0x18);
 ASSERT_OFFSET(ThreadTitleScreen, pulse, 0x22);
-ASSERT_OFFSET(ThreadTitleScreen, popup_request, 0x28);
-ASSERT_OFFSET(ThreadTitleScreen, input_gate, 0x2E);
+ASSERT_OFFSET(ThreadTitleScreen, popup, 0x28);
+ASSERT_OFFSET(ThreadTitleScreen, pad_2C, 0x2C);
 ASSERT_SIZE(ThreadTitleScreen, 0x38);
 
 /* Thread slot 2: the window effect's local mode; Thread.state is its busy flag. */
