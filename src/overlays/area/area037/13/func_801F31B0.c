@@ -9,7 +9,7 @@ MATCH void func_801F31B0(void) {
     s32     j;
     s32     value;
 
-    if ((g_AreaDrawFlags & AREA_DRAW_CELL_LAYERS) && abs(g_AreaTargetCellX - 0x2D) < 0xB && abs(g_AreaTargetCellY - 0x23) < 0xB) {
+    if ((g_AreaDrawFlags & AREA_DRAW_CELL_LAYERS) && abs(g_AreaCamera.scroll_x.part.integer - 0x2D) < 0xB && abs(g_AreaCamera.scroll_y.part.integer - 0x23) < 0xB) {
         D_1F800034[0] = -0x2980;
         D_1F800034[1] = -0x2E80;
         for (j = 0; j < 8; j++) {
