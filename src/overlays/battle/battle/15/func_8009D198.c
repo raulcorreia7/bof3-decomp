@@ -5,7 +5,7 @@
 NON_MATCHING void func_8009D198(void) {
     u8  effect;
     u16 action_word;
-    s32 change;
+    s16 change;
 
     if (BATTLER_IS_PLAYER(g_Battle.target)) {
         g_Game.members[g_Battle.target].u.turn.target_flags |= BATTLE_HIT_HP | BATTLE_HIT_HP_LANDED | BATTLE_HIT_AP_LANDED;
@@ -102,8 +102,8 @@ NON_MATCHING void func_8009D198(void) {
     if (g_Battle.target_record->ap_change < -9999) {
         g_Battle.target_record->ap_change = -9999;
     }
-    if (g_Battle.target_record->ap_change != 0) {
-        change = g_Battle.target_record->ap_change;
+    change = g_Battle.target_record->ap_change;
+    if (change != 0) {
         if (BATTLER_IS_PLAYER(g_Battle.target)) {
             if (change > 0) {
                 if (change < g_Game.members[g_Battle.target].chr.ap) {
