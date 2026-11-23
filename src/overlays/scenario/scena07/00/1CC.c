@@ -237,22 +237,19 @@ MATCH void func_801F786C(void) {
 
 #ifdef NON_MATCHING
 NON_MATCHING void func_801F78B0(void) {
-    Scena07BurstBuffer* buffer;
-    int                 new_var;
-    u8                  stack_pad[0x10];
-    ((Actor*)g_Task)->pos.z.fixed = Area_HeightSample(((Actor*)g_Task)->pos.x.fixed, ((Actor*)g_Task)->pos.y.fixed) << 16;
-    buffer                        = MEM_PTR(Scena07BurstBuffer, AREA_WORK + 0x424);
-    D_801FDFC0                    = buffer;
-    /* FAKE: the local delays the lift constant's shift until after the dispatch store. */
-    new_var                       = 0x200;
-    buffer->pos.vx                = ((Actor*)g_Task)->pos.x.fixed;
-    buffer->pos.vy                = ((Actor*)g_Task)->pos.y.fixed;
-    buffer->pos.vz                = ((Actor*)g_Task)->pos.z.fixed + (new_var << 16);
-    buffer->angle                 = 0;
-    func_801F90F4(MEM_PTR(Scena07BurstBuffer, AREA_WORK + 0x424));
-    ((Actor*)g_Task)->vx = 0x28;
-    ((Actor*)g_Task)->header.step++;
-    SND_SEPlay(((((u32)SND_BANK_AREA) << 8) & 0x0F00) | ((u32)0x09));
+    /* FAKE: the retail frame holds 0x10 bytes no statement explains. */
+    FAKE_STACK_PADS(u8, 0x10);
+
+    TASK(Actor)->pos.z.fixed = Area_HeightSample(TASK(Actor)->pos.x.fixed, TASK(Actor)->pos.y.fixed) << 16;
+    D_801FDFC0               = &D_800E4C24;
+    D_800E4C24.pos.vx        = TASK(Actor)->pos.x.fixed;
+    D_800E4C24.pos.vy        = TASK(Actor)->pos.y.fixed;
+    D_800E4C24.pos.vz        = TASK(Actor)->pos.z.fixed + 0x2000000;
+    D_800E4C24.angle         = 0;
+    func_801F90F4(&D_800E4C24);
+    TASK(Actor)->vx = 0x28;
+    TASK(Actor)->header.step++;
+    SND_SEPlay(EMI_SE_ID(SND_BANK_AREA, 9));
 }
 #else
 INCLUDE_ASM(func_801F78B0);
