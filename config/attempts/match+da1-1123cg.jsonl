@@ -1,0 +1,1 @@
+{"function": "emi/etc/shisu/00@0x801D1964", "tried": "a FAKE_BARRIER after the second mode store (24 rows) and the counter right after the modes (27)", "first_diff": "11 rows: retail orders the two mode stores before the D_80158652/D_801EA0A7 loads; both new positions cost rows, reverted", "score": "11 rows"}
