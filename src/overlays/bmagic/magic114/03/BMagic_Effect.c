@@ -739,7 +739,7 @@ NON_MATCHING void func_801F0FBC(void) {
         i        = 0;
         x        = TASK(PartyMember)->pos.x.fixed;
         y        = TASK(PartyMember)->pos.y.fixed;
-        z        = (TASK(PartyMember)->header.mode >= 2) ? -2 : 0;
+        z        = (TASK(PartyMember)->facing >= 2) ? -2 : 0;
         radius   = ~TASK(PartyMember)->unk_09 & 0x1F;
         shade    = 0x80 - radius * 16;
         rot_flag = &flag;
