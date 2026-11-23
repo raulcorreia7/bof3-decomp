@@ -1,0 +1,1 @@
+{"function": "emi/scenario/scena17/00@0x801F8B10", "tried": "moved the cursor pointer declarations ahead of the structs", "first_diff": "0x801F8B1C unchanged, 194 rows: the local declaration order does not move the saved-register allocation here", "score": "194 differing rows"}
