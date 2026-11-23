@@ -1,0 +1,1 @@
+{"function": "emi/scenario/scena10/00@0x801F73EC", "tried": "a const panel pointer for the box reads instead of indexing D_801FE7CC per use", "first_diff": "0x801F7400: the pointer materializes the array base into v0 and shifts the index into a3, doubling the differing rows (62 against 25)", "score": "62 differing rows"}

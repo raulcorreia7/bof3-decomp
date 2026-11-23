@@ -1,0 +1,1 @@
+{"function": "emi/scenario/sce15ef0/00@0x801D1220", "tried": "a FAKE_CLOBBER on a0 before the SetDrawMode call to keep the cursor load after the tpage truncation", "first_diff": "0x801D1294 unchanged: the clobber constrains a0's value but the scheduler still places the cursor's lui/lw before the andi a3", "score": "13 differing rows"}

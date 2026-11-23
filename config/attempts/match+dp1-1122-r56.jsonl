@@ -1,0 +1,3 @@
+{"function": "emi/battle/battle/15@0x80099B74", "tried": "the 0x801483C0/0x801485BB =1 stores swap; panelMode-first (4) and the retail store sequence (11) both miss the 2-row base", "first_diff": "0x80099DB0 sb v1,-31301(at) against sb v1,-31808(at)", "score": "2 rows"}
+{"function": "emi/bmagic/magic059/03@0x801EED0C", "tried": "partial body: 256 of 259 rows differ; frame 8 bytes large, three shared volatiles", "first_diff": "0x801EED0C addiu sp,sp,-40 against addiu sp,sp,-48", "score": "256 rows"}
+{"function": "exe/slus_004_22@0x80154ABC", "tried": "the byte mask rotation spends v1/a1 where retail uses v0/a2", "first_diff": "0x80154E38 andi v0,t8,0xff against andi v1,t8,0xff", "score": "18 rows"}

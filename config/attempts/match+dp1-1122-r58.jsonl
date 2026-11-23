@@ -1,0 +1,3 @@
+{"function": "emi/bmagic/magic041/03@0x801EF670", "tried": "the 0x1f800044 load is scheduled above the frame setup; partial body 203 of 274", "first_diff": "0x801EF670 addiu sp,sp,-88 against lui a0,0x1f80", "score": "271 rows"}
+{"function": "emi/world01/area047/13@0x801F34A0", "tried": "frame 8 bytes short of retail and 8 instructions missing", "first_diff": "0x801F34A0 addiu sp,sp,-136 against addiu sp,sp,-128", "score": "274 rows"}
+{"function": "emi/world04/area199/13@0x801F400C", "tried": "branch targets sit 8 early and the 0x801f4094 bnez flips to beqz; the draft is 2 instructions short", "first_diff": "0x801F4044 beqz v0,0x801f4448 against 0x801f4440", "score": "191 rows"}

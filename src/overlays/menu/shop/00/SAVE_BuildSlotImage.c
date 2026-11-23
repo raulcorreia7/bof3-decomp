@@ -9,28 +9,26 @@ typedef struct SaveSlotSummary {
     u8        unk_0A;
     u8        pad_0B;
     GameClock play_clock;
-    u8        pad_10[4];
-    s32       event_flag;
+    u32       exp;
+    u8        event_flag;
+    u8        pad_15[3];
 } SaveSlotSummary;
 
 ASSERT_SIZE(SaveSlotSummary, 0x18);
 
 #ifdef NON_MATCHING
 NON_MATCHING void SAVE_BuildSlotImage(void) {
-    s32              mode;
-    s32              slot;
-    s32              i;
-    s32              j;
-    s32              name_index;
-    s32              col;
-    u16              n;
-    u16              sum;
-    u32              count;
-    u8*              dst;
-    u8*              src;
-    u16*             masks;
-    SaveData*        work;
     SaveSlotSummary* summary;
+    SaveData*        work;
+    Character*       leader;
+    u16*             masks;
+    u16              i;
+    u16              sum;
+    s32              mode;
+    u8*              dst;
+    u8*              character_index;
+    u8*              src;
+    u8*              flags;
 
     SAVE_FormatSlot();
     func_801EF27C(1, 0x13, g_UiTextFormatBuffer);
@@ -44,63 +42,55 @@ NON_MATCHING void SAVE_BuildSlotImage(void) {
     g_SaveEntryY           = (u32)g_Game.members[0].pos.y.fixed;
     g_SaveAreaId           = g_GameAreaId;
     g_SaveEntryFacing      = g_Game.members[0].facing;
-    work                   = &g_SaveData;
-    masks                  = (u16*)&work->unk_C84[0x38];
-    n                      = 0;
+    i                      = 0;
+    masks                  = (u16*)&g_SaveData.unk_C84[0x38];
     do {
-        j        = n;
-        masks[j] = g_InputMasks[j];
-        n        = n + 1;
-    } while ((u32)n < 9U);
+        masks[i] = g_InputMasks[i];
+        i++;
+    } while (i < 9);
+    work    = &g_SaveData;
+    leader  = &work->characters[0];
     summary = (SaveSlotSummary*)&work->unk_C84[0x1C];
-    strncpy((s8*)summary->name, (s8*)work->characters[0].name, CHARACTER_NAME_LENGTH);
-    slot = 0;
-    col  = 0 & HALF_MASK;
+    strncpy((s8*)summary->name, (s8*)leader->name, CHARACTER_NAME_LENGTH);
+    i               = 0;
+    character_index = &work->emi_loaded_character_index;
     do {
-        name_index = slot & HALF_MASK;
-        if (g_PartyFieldOrder[col] == 4) {
-            mode = work->emi_loaded_character_index & 0x7F;
-            if ((mode != 5) && (mode != 0xC)) {
-                summary->party_order[col] = 0xB;
-            } else {
-                name_index = slot & HALF_MASK;
-                goto store_row; /* the type-4 arm reaches the same store with its own index */
-            }
+        if (g_PartyFieldOrder[i] == 4 && ((mode = *character_index & 0x7F) != 5) && mode != 0xC) {
+            summary->party_order[i] = 0xB;
         } else {
-        store_row:
-            summary->party_order[name_index] = (u8)g_PartyFieldOrder[name_index];
+            summary->party_order[i] = g_PartyFieldOrder[i];
         }
-        slot += 1;
-        col = slot & HALF_MASK;
-    } while ((u32)(slot & HALF_MASK) < 3U);
-    summary->level        = work->characters[0].level;
+        i++;
+    } while (i < 3);
+    flags                 = g_SceneEventFlags;
+    summary->level        = leader->level;
     summary->play_clock   = work->play_clock;
     summary->window_style = work->window_style;
     summary->unk_0A       = work->unk_7B[0];
+    summary->exp          = leader->exp;
+    summary->event_flag   = SYS_TestFlag(flags, 0x92U);
+    D_80145025            = (u8)g_Game.flags;
     sum                   = 0;
     dst                   = g_SaveBuffer;
-    src                   = (u8*)work;
+    src                   = flags - 0x650;
     i                     = 0;
-    summary->event_flag   = SYS_TestFlag(g_SceneEventFlags, 0x92U);
-    D_80145025            = (u8)g_Game.flags;
     do {
-        i += 1;
-        count = i & HALF_MASK;
-        *dst  = *src;
-        dst += 1;
+        i++;
+        *dst = *src;
+        dst++;
         sum += *src;
-        src += 1;
-    } while (count < SAVE_BLOCK_SIZE);
-    if (count < 0x1E00U) {
+        src++;
+    } while (i < SAVE_BLOCK_SIZE);
+    if (i < 0x1E00) {
         do {
             *dst = 0;
-            i += 1;
-            dst += 1;
-        } while ((u32)(i & HALF_MASK) < 7680U);
+            i++;
+            dst++;
+        } while (i < 0x1E00);
     }
     D_800C1A70 = sum;
     if (g_SaveSlotFirst == g_SaveSlotCount) {
-        g_SaveSlotCount += 1;
+        g_SaveSlotCount++;
     }
     func_801D6CE4(g_SaveSlotFirst, (u8*)&g_SaveData);
 }
