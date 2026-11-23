@@ -1,18 +1,18 @@
 #include "start_08.h"
 
 /* func_801DAC1C */
-#ifdef NON_MATCHING
-NON_MATCHING void Menu_OpenFormation(void) {
-    u8* table;
-    u8* base;
-    u8* panel;
-    u8  count;
-    u8  row;
-    u8  col;
-    u8  panel_index;
-    u32 bit;
-    u32 limit;
-    u32 group_base;
+/* Lays out the formation grid: a member cell per filled row and a card for each open formation slot. */
+MATCH void Menu_OpenFormation(void) {
+    u8*            table;
+    MenuPanelTask* panel;
+    u8             count;
+    s32            has_member;
+    u8             row;
+    u8             col;
+    u8             panel_index;
+    u32            bit;
+    u32            limit;
+    u8             group_base;
 
     count = Party_CountOrder(PARTY_ORDER_FIELD);
     switch (count) {
@@ -33,29 +33,28 @@ NON_MATCHING void Menu_OpenFormation(void) {
     bit         = 1;
     panel_index = 0;
     for (row = 0; row < 3; row++) {
-        base  = g_FormationCells;
-        col   = 0;
-        table = (u8*)(row * 3 + (s32)base);
-        for (; col < 3; col++) {
-            if (col == 0 && row < count) {
+        for (col = 0; col < 3; col++) {
+            has_member = row < count;
+            table      = g_FormationCells + row * 3;
+            if (col == 0 && has_member) {
                 table[0] = 1;
             } else {
                 table[col] = 0;
             }
             if (col != 0) {
                 if ((bit & g_PartyMenuFlags) != 0 && panel_index < limit) {
-                    table[col]       = 1;
-                    panel            = &g_UiPanelTasks[12].active + panel_index * 0x24;
-                    panel[1]         = 6;
-                    panel[2]         = 0xB;
-                    panel[3]         = 2;
-                    ((u16*)panel)[2] = (u16)((col - 1) * 0x4B + 0x140);
-                    panel[0xA]       = (u8)(group_base + panel_index);
-                    panel[0]         = 1;
-                    ((u16*)panel)[3] = (u16)(row * 0x36 + 0x3E);
-                    panel[0xB]       = panel_index;
-                    panel[0xC]       = 0;
-                    ((u16*)panel)[8] = 0xE00;
+                    table[col]           = 1;
+                    panel                = &g_UiPanelTasks[MENU_PANEL_CARD_FIRST] + panel_index;
+                    panel->panel         = 6;
+                    panel->mode          = 0xB;
+                    panel->state         = 2;
+                    panel->pos.x         = (col - 1) * 0x4B + 0x140;
+                    panel->unk_0A        = group_base + panel_index;
+                    panel->active        = 1;
+                    panel->pos.y         = row * 0x36 + 0x3E;
+                    panel->unk_0B        = panel_index;
+                    panel->unk_0C        = 0;
+                    panel->u.addr.unk_10 = 0xE00;
                 } else {
                     table[col] = 0;
                 }
@@ -71,6 +70,3 @@ NON_MATCHING void Menu_OpenFormation(void) {
     g_FormationColumn       = (g_PartyFormation & 1) + 1;
     g_FormationRow          = (u8)g_PartyFormation >> 1;
 }
-#else
-INCLUDE_ASM(Menu_OpenFormation);
-#endif
