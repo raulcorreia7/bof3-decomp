@@ -207,6 +207,7 @@ extern s32            D_801457EC; /* end of the group table at 0x801457AC; func_
 extern u8             D_80145E30[];
 extern u8             D_80145E48[];
 extern u8             D_80145E60[];
+extern u8             D_80145E61[];
 extern ShopStock      g_GameShopStock[SHOP_COUNT];
 extern s8             D_801EEC08[];
 extern char           D_801EEC44[];

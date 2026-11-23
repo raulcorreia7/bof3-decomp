@@ -1,0 +1,1 @@
+{"function": "emi/battle/battle/15@0x80099B74", "tried": "all 120 statement orders of the five confirm-branch stores via try_variants: best is the base order ABCDE at 2 rows; no order closes the register swap (allocator-locked)", "first_diff": "0x80099DB0 sb v1,-31301(at) against sb v1,-31808(at)", "score": "2 rows"}

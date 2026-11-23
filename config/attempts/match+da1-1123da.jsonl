@@ -1,0 +1,1 @@
+{"function": "emi/world03/area132/13@0x801F3560", "tried": "read the hunk: the two lhu loads feeding screen.vx - (size[0] >> 1) are swapped (v1/v0) inside the setXY4 argument list", "first_diff": "66 rows: 0x801F3660 lhu v1,34(sp) against lhu v0,34(sp), the whole setXY4 block follows the swap", "score": "66 rows"}
