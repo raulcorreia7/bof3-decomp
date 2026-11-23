@@ -29,7 +29,7 @@ extern u8    D_80143FBC;
 /* The field mode bytes the height steps test. */
 /* The shared camera-position words the view step copies. */
 /* The camera seed halfword the request step stores. */
-extern u8   D_80147AAC[];
+
 extern char D_801F2C04[];
 /* D_80149340 */
 

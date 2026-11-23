@@ -10,9 +10,9 @@ MATCH void func_801FB168(void) {
     step = &g_ScenarioState.step;
     switch (*step) {
         case 0:
-            D_80147ACF = 3;
-            D_80147AD6 = 0;
-            *step      = 1;
+            g_PartyActors[0].unk_77 = 3;
+            g_PartyActors[0].unk_7E = 0;
+            *step                   = 1;
             break;
         case 1:
             if (g_ScriptVars[3] == 0x12) {

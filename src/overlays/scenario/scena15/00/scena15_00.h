@@ -80,8 +80,6 @@ void            func_801F92F0(Coord* position, s32* step);
 
 extern u8       D_80143F49;
 extern u16      D_80146258;
-extern s8       D_80147ACF;
-extern s16      D_80147AD6;
 extern s16      D_801492DA;
 extern s16      D_801492DC;
 extern Callback jtbl_801F6C6C[6];

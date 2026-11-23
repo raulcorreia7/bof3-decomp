@@ -7,7 +7,7 @@ MATCH void func_801F3068(void) {
         TASK(Actor)->unk_04++;
     }
     if (g_PartyActors[0].pos.x.fixed < g_AreaScrollTargetX + TO_COORD(2)) {
-        D_80147AD0 = 3;
+        g_PartyActors[0].unk_78 = 3;
     }
     func_801F3140(-2);
     g_ScriptState->cursor -= 2;

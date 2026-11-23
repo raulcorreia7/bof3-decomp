@@ -18,7 +18,7 @@ MATCH void func_801D3390(void) {
              * allocates. */
             g_TextVariables[0][i] = g_Characters[g_Game.members[g_MenuMasterCursor].character_index].name[i];
         }
-        D_801490DD                                                                             = 0;
+        g_TextVariables[0][5]                                                                  = 0;
         g_Characters[g_Game.members[g_MenuMasterCursor].character_index].master_id             = 0xFF;
         g_Characters[g_Game.members[g_MenuMasterCursor].character_index].master_level          = 0;
         g_Characters[g_Game.members[g_MenuMasterCursor].character_index].level_up_modifiers[0] = 0;

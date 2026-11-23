@@ -938,7 +938,7 @@ MATCH void func_801D3E44(void) {
         for (i = 0; i < 12; i++) {
             g_TextVariables[0][0x20 + i] = record[i];
         }
-        g_TextVariables[0][0x2C] = 0;
+        g_TextVariables[1][12] = 0;
         UI_MessageStartArea(MSG_AREA175_NUMBERS_WON_PRIZE);
         D_801F294D = 7;
     }
@@ -2868,7 +2868,7 @@ MATCH void func_801DA7A4(void) {
     for (i = 0; i < 5; i++) {
         g_TextVariables[0][i] = g_Characters[Party_GetJoinedCharacter(D_801DB0B4)].name[i];
     }
-    D_801490DD = 0;
+    g_TextVariables[0][5] = 0;
     for (i = 0; i < 6; i++) {
         D_801490F8[i] = D_801DB080[i];
     }
@@ -2896,7 +2896,7 @@ MATCH void func_801DA8E8(void) {
             g_TextVariables[0][i] = D_801457E8[Fairy_FindActiveJob(D_801DB0B4)][i];
         }
     }
-    D_801490DD = 0;
+    g_TextVariables[0][5] = 0;
     for (i = 0; i < 6; i++) {
         D_801490F8[i] = D_801DB080[i];
     }

@@ -29,12 +29,11 @@ NON_MATCHING void func_801EF140(void) {
         height += 0x10;
     }
     UI_PanelOpenTask(1, 4);
-    D_80148356 = 0;
-    D_80148357 = 0;
-    D_8014835D = height + 4;
-    FAKE_BARRIER();
-    D_8014835E = g_Battle.cursor.gene.column;
-    D_8014835F = *(u16*)&g_Battle.unk_D0[2];
+    g_UiPanelTasks[1].mode   = 0;
+    g_UiPanelTasks[1].state  = 0;
+    g_UiPanelTasks[1].unk_09 = height + 4;
+    g_UiPanelTasks[1].unk_0A = g_Battle.cursor.gene.column;
+    g_UiPanelTasks[1].unk_0B = *(u16*)&g_Battle.unk_D0[2];
     g_Battle.ui_mode -= 1;
 }
 #else

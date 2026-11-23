@@ -261,70 +261,60 @@ MATCH void func_801EF930(void) {
     }
 }
 
-#ifdef NON_MATCHING
-NON_MATCHING void func_801EF984(void) {
-    u32 tpage;
-    u32 i;
-    u32 j;
-    u32 k;
-    s32 x;
-    s32 y;
-    s32 z;
+/* Draws the effect's three layers over every selectable enemy and party member, then advances the four staggered frame counters. */
+MATCH void func_801EF984(void) {
+    PartyMember* work;
+    s32          tpage;
+    u32          j;
+    u32          i;
+    u8           slot;
 
-    tpage = getTPage(0, 1, 320, 256);
-    GFX_ADD_DITHERED_DRAW_MODE(3, tpage);
-
-    for (i = 0; i < 3; i++) {
-        for (j = 0; j < 8; j++) {
-            if (func_801DB524((u8)(j + 3)) == 0) {
-                TASK(PartyMember)->param.unk_0B = i;
-                TASK(PartyMember)->timer        = j;
-                x                               = g_BattleEnemyBattlers[j].pos.x.fixed + D_801F008C[i];
-                y                               = g_BattleEnemyBattlers[j].pos.y.fixed + D_801F0090[i];
-                z                               = g_BattleEnemyBattlers[j].pos.z.fixed + D_801F0094[i];
-                TASK(PartyMember)->pos.x.fixed  = x;
-                TASK(PartyMember)->pos.y.fixed  = y;
-                TASK(PartyMember)->pos.z.fixed  = z;
-                func_801EFFB0();
-                func_801EFCC8();
-                PopMatrix();
+    tpage = getTPage(TPAGE_DEPTH_4BIT, TPAGE_ABR_ADD, 320, 256);
+    GFX_ADD_DITHERED_DRAW_MODE(BMAGIC_LAYER_OVER_BATTLERS, tpage);
+    for (j = 0; j < 3; j++) {
+        for (i = 0; i < 8; i++) {
+            slot = i;
+            if (Battle_SlotIsBlocked((i + BATTLE_PARTY_CHARACTERS_COUNT) & BYTE_MASK) != 0) {
+                continue;
             }
+            TASK(PartyMember)->param.unk_0B = j;
+            TASK(PartyMember)->timer        = slot;
+            work                            = TASK(PartyMember);
+            work->pos.x.fixed               = g_BattleEnemyBattlers[i].pos.x.fixed + D_801F008C[j].x;
+            work->pos.y.fixed               = g_BattleEnemyBattlers[i].pos.y.fixed + D_801F008C[j].y;
+            work->pos.z.fixed               = g_BattleEnemyBattlers[i].pos.z.fixed + D_801F008C[j].z;
+            func_801EFFB0();
+            func_801EFCC8();
+            PopMatrix();
         }
     }
-
-    for (i = 0; i < 3; i++) {
-        for (j = 0; j < 3; j++) {
-            if (func_801DB524((u8)j) == 0) {
-                TASK(PartyMember)->param.unk_0B = i;
-                TASK(PartyMember)->timer        = j;
-                x                               = g_Game.members[j].pos.x.fixed + D_801F008C[i];
-                y                               = g_Game.members[j].pos.y.fixed + D_801F0090[i];
-                z                               = g_Game.members[j].pos.z.fixed + D_801F0094[i];
-                TASK(PartyMember)->pos.x.fixed  = x;
-                TASK(PartyMember)->pos.y.fixed  = y;
-                TASK(PartyMember)->pos.z.fixed  = z;
-                func_801EFFB0();
-                func_801EFCC8();
-                PopMatrix();
+    for (j = 0; j < 3; j++) {
+        for (i = 0; i < 3; i++) {
+            if (Battle_SlotIsBlocked(i & BYTE_MASK) != 0) {
+                continue;
             }
+            TASK(PartyMember)->param.unk_0B = j;
+            TASK(PartyMember)->timer        = i;
+            work                            = TASK(PartyMember);
+            work->pos.x.fixed               = g_Game.members[i].pos.x.fixed + D_801F008C[j].x;
+            work->pos.y.fixed               = g_Game.members[i].pos.y.fixed + D_801F008C[j].y;
+            work->pos.z.fixed               = g_Game.members[i].pos.z.fixed + D_801F008C[j].z;
+            func_801EFFB0();
+            func_801EFCC8();
+            PopMatrix();
         }
     }
-
-    for (i = 0; i < 4; i++) {
-        if (i * 3 < TASK(PartyMember)->unk_09) {
-            D_801F00B0[i] = D_801F00B0[i] + 1;
+    for (j = 0; j < 4; j++) {
+        if (j * 3 < TASK(PartyMember)->unk_09) {
+            D_801F00B0[j]++;
         }
         if (TASK(PartyMember)->header.step == 1) {
-            D_801F00B0[i] = D_801F00B0[i] & 0xF;
+            D_801F00B0[j] &= 0xF;
         }
     }
-
-    tpage = getTPage(0, 0, 320, 256);
-    GFX_ADD_DITHERED_DRAW_MODE(3, tpage);
+    tpage = getTPage(TPAGE_DEPTH_4BIT, TPAGE_ABR_HALF, 320, 256);
+    GFX_ADD_DITHERED_DRAW_MODE(BMAGIC_LAYER_OVER_BATTLERS, tpage);
 }
-#else
-INCLUDE_ASM(func_801EF984);
-#endif
 
 MATCH void func_801EFCC8(void) {
     POLY_FT4* poly;

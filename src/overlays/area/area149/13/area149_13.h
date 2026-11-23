@@ -14,8 +14,6 @@ extern u8 D_80144EF8[];
 extern u8       D_80146158;
 /* The integer half of the focus x, stepped by the scene trigger. */
 extern u16      D_80147A8E;
-extern s8       D_80147AD0;
-extern s16      D_80147AD6;
 /* The event countdown D_801448EE, stepped and tested unsigned. */
 extern u16      D_801448EE_U16;
 /* The state handler tables the dispatchers index. */

@@ -369,8 +369,6 @@ typedef struct AreaCellPacketList {
 
 /* D_80142CC0 as lists: six per grid row. */
 extern AreaCellPacketList g_AreaCellPacketLists[][6];
-extern SVECTOR            D_1F800024;
-extern SVECTOR            D_1F80002C;
 /* Retail data below D_80145000 (one declaration each). */
 extern s32                D_80010004;
 extern EMIDecodeContext   D_800327A0[];
@@ -531,7 +529,6 @@ extern u8                    D_80146856;
 extern volatile u32          D_80146858;
 extern volatile u32          D_8014685C;
 /* Retail data D_80147000-D_8014FFFF (one declaration each). */
-extern u8                    D_80147ACC[];
 extern PanelSortItem         D_80147CFC[];
 extern PanelSortItem         D_80147D08[]; /* == &D_80147CFC[1] */
 extern PanelSortDepth        D_80147D0C[]; /* == &D_80147CFC[1].depth */

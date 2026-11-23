@@ -925,11 +925,11 @@ MATCH void func_801F9CFC(void) {
         g_AreaCameraRefreshCount = 2;
     }
     if (g_GameAreaId == AREA_ID_CAER_XHAN_LIFT_RIDE && SYS_TestFlag(g_SceneFlags, 0x16)) {
-        D_80147ACF          = 2;
-        g_AreaSceneMode     = 2;
-        g_AreaCameraOffsetZ = 0xD00;
-        D_80147AD6          = 0;
-        D_801FE750          = 0;
+        g_PartyActors[0].unk_77 = 2;
+        g_AreaSceneMode         = 2;
+        g_AreaCameraOffsetZ     = 0xD00;
+        g_PartyActors[0].unk_7E = 0;
+        D_801FE750              = 0;
         D_80147A8C += TO_COORD(12);
         Scene_SpawnActor(0x31, g_AreaCameraAngle.vx, g_AreaCameraAngle.vy, g_AreaCameraAngle.vz, 0xFF, 0);
     }
