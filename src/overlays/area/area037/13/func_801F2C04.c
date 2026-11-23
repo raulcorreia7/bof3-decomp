@@ -16,10 +16,10 @@ MATCH void func_801F2C04(void) {
     }
     if (g_AreaDrawFlags & 0x4) {
         cell_index = TASK(Actor)->param.unk_0B;
-        dx         = g_AreaTargetCellX + 6;
+        dx         = g_AreaCamera.scroll_x.part.integer + 6;
         dx -= D_801F3B34[cell_index];
         if (ABS(dx) < 0xB) {
-            dy = g_AreaTargetCellY + 6;
+            dy = g_AreaCamera.scroll_y.part.integer + 6;
             dy -= D_801F3B38[cell_index];
             if (ABS(dy) < 0xB) {
                 func_801F2D44();
