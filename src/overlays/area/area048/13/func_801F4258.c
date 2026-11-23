@@ -13,7 +13,7 @@ NON_MATCHING void func_801F4258(s32 mode) {
     s32      cell_y;
     s32      offset;
     s32      radius;
-    s32      color;
+    s32      sway;
     s32      i;
 
     g_ScratchPadVectors[0].vx = (D_801F4E78[mode] - 0x80) << 7;
@@ -42,9 +42,12 @@ NON_MATCHING void func_801F4258(s32 mode) {
     g_ScratchPadVectors[3].vx = screen[0] - offset;
     g_ScratchPadVectors[3].vy = screen[1];
     g_ScratchPadVectors[1].vy = screen[1];
-    radius                    = D_801F4E84[mode] + ABS((D_801F4E84[mode] * rsin(g_AreaCameraAngle.vx)) >> 13);
+    sway                      = (D_801F4E84[mode] * rsin(g_AreaCameraAngle.vx)) >> 13;
+    radius                    = D_801F4E84[mode] + ABS(sway);
     offset                    = 1125 * radius / depth;
     g_ScratchPadVectors[2].vy = screen[1] + offset;
+    sway                      = (D_801F4E84[mode] * rsin(g_AreaCameraAngle.vx)) >> 13;
+    radius                    = D_801F4E84[mode] + ABS(sway);
     offset                    = 1125 * radius / depth;
     g_ScratchPadVectors[0].vy = screen[1] - offset;
     for (i = 0; i < 4; i++) {
@@ -57,9 +60,8 @@ NON_MATCHING void func_801F4258(s32 mode) {
         prim->y1 = g_ScratchPadVectors[i].vy;
         prim->x2 = g_ScratchPadVectors[(i + 1) & 3].vx;
         prim->y2 = g_ScratchPadVectors[(i + 1) & 3].vy;
-        color    = ((D_8014686B << 4) + 0x10) * mode;
-        prim->r0 = color | (mode == 0 ? 0x50 : 0);
-        prim->g0 = color;
+        prim->r0 = (((D_8014686B << 4) + 0x10) * mode) | (mode == 0 ? 0x50 : 0);
+        prim->g0 = ((D_8014686B << 4) + 0x10) * mode;
         prim->b0 = (mode == 0 ? 0x50 : 0);
         setRGB1(prim, 0, 0, 0);
         setRGB2(prim, 0, 0, 0);
