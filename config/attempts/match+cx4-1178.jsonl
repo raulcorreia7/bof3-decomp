@@ -1,0 +1,1 @@
+{"function": "emi/scenario/scena17/00@0x801F8B10", "tried": "swapped the radius/col parameter stores at the top", "first_diff": "0x801F8B14: retail keeps scale in s1 and shade in s4; the swap moves the candidates further (196 rows)", "score": "196 differing rows against 194"}

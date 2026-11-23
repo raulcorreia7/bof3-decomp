@@ -1,0 +1,1 @@
+{"function": "emi/world01/area049/14@0x801F2DCC", "tried": "s32 one and moving the u16 one declaration before i", "first_diff": "10 rows: retail keeps &g_Scenario2Flags in s4 and one in s3, the draft swaps them; neither width nor declaration order moves it", "score": "10 rows"}

@@ -1,0 +1,1 @@
+{"function": "emi/world04/area197/13@0x801F3768", "tried": "swapped the two for-initializers (row, depth_z)", "first_diff": "9 rows: retail sets s5=0x1F800034 before saving s8 and li s8,-96, the draft emits li s8 first; the swap costs 11 rows, reverted", "score": "9 rows"}

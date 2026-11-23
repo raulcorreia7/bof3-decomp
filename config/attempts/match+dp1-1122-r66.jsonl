@@ -1,0 +1,3 @@
+{"function": "emi/etc/game/00@0x801C41D0", "tried": "frame 8 bytes short of retail; the load/store statement order (sched1 probe) and 7 missing instructions persist", "first_diff": "0x801C41D0 addiu sp,sp,-48 against addiu sp,sp,-40", "score": "310 rows"}
+{"function": "emi/etc/commu01/07@0x801D3038", "tried": "the counter starts in s0 against retail s4 and the jal targets sit 4 apart; unit-order", "first_diff": "0x801D31D4 move s4,zero against move s0,zero", "score": "223 rows"}
+{"function": "emi/world00/area030/04@0x801D8364", "tried": "frame 8 bytes short of retail and 50 instructions missing", "first_diff": "0x801D8364 addiu sp,sp,-120 against addiu sp,sp,-112", "score": "326 rows"}

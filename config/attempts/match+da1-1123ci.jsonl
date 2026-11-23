@@ -1,0 +1,1 @@
+{"function": "emi/battle/battle/15@0x800AEEC8", "tried": "a FAKE_BARRIER before the target.party store to pin the earlier stores ahead of the g_Task load", "first_diff": "9 rows unchanged: the barrier does not move the load, first hunk stays at 0x800AEF48", "score": "9 rows"}

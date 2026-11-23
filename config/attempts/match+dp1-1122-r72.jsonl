@@ -1,0 +1,3 @@
+{"function": "emi/etc/game/00@0x801BA678", "tried": "frame 16 bytes short of retail; the lhu-vs-lw width and signedness persist across 64 hunks", "first_diff": "0x801BA680 addiu sp,sp,-128 against addiu sp,sp,-112", "score": "667 rows"}
+{"function": "exe/slus_004_22@0x801530D0", "tried": "frame 24 bytes short of retail; +5 instructions, g_GameRequestFlags volatile", "first_diff": "0x801530D0 addiu sp,sp,-120 against addiu sp,sp,-96", "score": "677 rows"}
+{"function": "emi/world00/area030/04@0x801DF334", "tried": "undrafted: 797 words, the largest open body; a full draft is needed", "first_diff": "n/a (no draft)", "score": "797 words"}

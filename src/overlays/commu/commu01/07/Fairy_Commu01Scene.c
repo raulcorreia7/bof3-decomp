@@ -689,28 +689,24 @@ MATCH void func_801D2D98(s16 x, s16 y, s16 width, u8 channel, u8 blink) {
 #define FAIRY_OVERVIEW_ROW_STEP        0x3D
 #define FAIRY_OVERVIEW_JOB_ROW_STEP    0x36
 #define FAIRY_OVERVIEW_JOB_COLUMN_STEP 8
+#define FAIRY_OVERVIEW_ROOM_X(room)    (((room) % FAIRY_OVERVIEW_ROOM_COLUMNS) * FAIRY_OVERVIEW_COLUMN_STEP)
+#define FAIRY_OVERVIEW_ROOM_Y(room)    (((room) / FAIRY_OVERVIEW_ROOM_COLUMNS) * FAIRY_OVERVIEW_ROW_STEP)
 
 /* Draws the fairy job overview and the unlocked room cells. */
-#ifdef NON_MATCHING
-NON_MATCHING void func_801D3038(void) {
+MATCH void func_801D3038(void) {
     TILE* tile;
     u8*   buffer;
     s16   marker_x;
     s16   marker_y;
     s32   shade;
     s32   y;
-    s32   cell_x;
-    s32   cell_y;
     u8    entry_row;
     u8    row;
     u8    column;
     u8    room_type;
-    u8    ordinal;
     u8    count;
-    u8    icon;
     u8    active;
-    u8    group;
-    u8    room;
+    u8    i;
     u8    job;
 
     UI_WindowDraw(0x14, 0x12, 0x118, 0x13, 0xF2, g_WindowStyle);
@@ -739,15 +735,15 @@ NON_MATCHING void func_801D3038(void) {
     UI_WindowDrawOutline(0x20, 0x38, 0xA8, 0x10, 1);
 
     count = Fairy_GetJobActive(0);
-    for (icon = 0; icon < count; icon++) {
-        func_801D4030(0x24 + icon * FAIRY_OVERVIEW_JOB_COLUMN_STEP, 0x3A, 1);
+    for (i = 0; i < count; i++) {
+        func_801D4030(0x24 + i * FAIRY_OVERVIEW_JOB_COLUMN_STEP, 0x3A, 1);
     }
 
-    for (group = 0; group < FAIRY_OVERVIEW_GROUP_COUNT; group++) {
-        y = group * FAIRY_OVERVIEW_JOB_ROW_STEP;
+    for (i = 0; i < FAIRY_OVERVIEW_GROUP_COUNT; i++) {
+        y = i * FAIRY_OVERVIEW_JOB_ROW_STEP;
         UI_WindowDrawOutline(0xF2, y + 0x36, 0x30, 0x30, 1);
-        func_801D4030(0xEF, y + 0x33, group + 3);
-        active = Fairy_GetJobActive(group + 9);
+        func_801D4030(0xEF, y + 0x33, i + 3);
+        active = Fairy_GetJobActive(i + 9);
         for (job = 0; job < active; job++) {
             column = job % FAIRY_OVERVIEW_JOB_COLUMNS;
             row    = job / FAIRY_OVERVIEW_JOB_COLUMNS;
@@ -755,29 +751,24 @@ NON_MATCHING void func_801D3038(void) {
         }
     }
 
-    for (room = 0; room < FAIRY_OVERVIEW_ROOM_COUNT; room++) {
-        cell_x = (room % FAIRY_OVERVIEW_ROOM_COLUMNS) * FAIRY_OVERVIEW_COLUMN_STEP;
-        cell_y = (room / FAIRY_OVERVIEW_ROOM_COLUMNS) * FAIRY_OVERVIEW_ROW_STEP;
-        UI_WindowDrawOutline(cell_x + 0x20, cell_y + 0x6B, 0x28, 0x28, 1);
-        if (room >= D_801F286D[g_GameAreaId]) {
-            UI_WindowDraw(cell_x + 0x20, cell_y + 0x6B, 0x28, 0x28, 1, g_WindowStyle);
+    for (i = 0; i < FAIRY_OVERVIEW_ROOM_COUNT; i++) {
+        UI_WindowDrawOutline(FAIRY_OVERVIEW_ROOM_X(i) + 0x20, FAIRY_OVERVIEW_ROOM_Y(i) + 0x6B, 0x28, 0x28, 1);
+        if (i >= D_801F286D[g_GameAreaId]) {
+            UI_WindowDraw(FAIRY_OVERVIEW_ROOM_X(i) + 0x20, FAIRY_OVERVIEW_ROOM_Y(i) + 0x6B, 0x28, 0x28, 1, g_WindowStyle);
         } else {
-            func_801D4030(cell_x + 0x1A, cell_y + 0x5B, 0);
-            room_type = g_FairyRooms[room * 8];
+            func_801D4030(FAIRY_OVERVIEW_ROOM_X(i) + 0x1A, FAIRY_OVERVIEW_ROOM_Y(i) + 0x5B, 0);
+            room_type = g_FairyRooms[i * 8];
             if (room_type != 0) {
-                if (room_type == 5) {
-                    ordinal = ((u8*)D_801D4C18)[0x21] + D_801457A9[room][0];
+                if (room_type != 5) {
+                    func_801D3EFC(FAIRY_OVERVIEW_ROOM_X(i) + 0x22, FAIRY_OVERVIEW_ROOM_Y(i) + 0x6C, D_801D4C34[room_type]);
                 } else {
-                    ordinal = ((u8*)D_801D4C18)[0x1C + room_type];
+                    func_801D3EFC(FAIRY_OVERVIEW_ROOM_X(i) + 0x22, FAIRY_OVERVIEW_ROOM_Y(i) + 0x6C, D_801D4C34[5] + D_801457A9[i][0]);
                 }
-                func_801D3EFC(cell_x + 0x22, cell_y + 0x6C, ordinal);
             }
-            active = Fairy_GetJobActive(room + 1);
-            if (active != 0) {
-                for (job = 1; job <= active; job++) {
-                    func_801D4694(&marker_x, &marker_y, room + 1, job);
-                    func_801D4030(marker_x, marker_y, 1);
-                }
+            active = Fairy_GetJobActive(i + 1);
+            for (job = 1; job <= active; job++) {
+                func_801D4694(&marker_x, &marker_y, (u8)(i + 1), job);
+                func_801D4030(marker_x, marker_y, 1);
             }
         }
     }
@@ -786,13 +777,10 @@ NON_MATCHING void func_801D3038(void) {
     buffer = g_UiTextFormatBuffer;
     sprintf((char*)buffer, D_801D0C10, D_801455C2);
     UI_TextDrawAscii(0x50, 0x4C, 0, buffer);
-    UI_TextDraw(0x78, 0x4C, 0, 7, (u8*)D_801D4C18 + 0x18);
-    sprintf((char*)buffer, D_801D0C14, *((u8*)&D_801455C2 + 2));
+    UI_TextDraw(0x78, 0x4C, 0, 7, D_801D4C30);
+    sprintf((char*)buffer, D_801D0C14, D_801455C4);
     UI_TextDrawAscii(0xB8, 0x4C, 0, buffer);
 }
-#else
-INCLUDE_ASM(func_801D3038);
-#endif
 
 MATCH void func_801D3594(s16 x, s16 y) {
     s32 i;

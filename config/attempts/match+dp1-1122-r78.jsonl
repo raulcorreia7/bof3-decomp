@@ -1,0 +1,1 @@
+{"function": "emi/battle/batl_end/00@0x801EF140", "tried": "height += 4 before the panel block (29 rows): the add moves ahead of the call and shifts the tail", "first_diff": "0x801EF2AC addiu v0,s1,4 against lui at,0x8015", "score": "4 rows"}

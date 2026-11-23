@@ -1,0 +1,1 @@
+{"function": "emi/battle/batl_end/00@0x801EF140", "tried": "a Character* member local and a u32 column index local to stop the cse2 fold of the column address", "first_diff": "12 rows; the pointer costs 111 and the index local 109 because both change the prologue save set, reverted", "score": "12 rows"}
