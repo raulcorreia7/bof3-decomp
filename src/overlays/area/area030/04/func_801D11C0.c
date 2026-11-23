@@ -10,7 +10,7 @@ MATCH void func_801D11C0(void) {
         ACTOR_CLEAR_STEP();
         return;
     }
-    if (g_AreaTargetCellY >= 0x39) {
+    if (g_AreaCamera.scroll_y.part.integer >= 0x39) {
         TASK(Actor)->header.step = 3;
     }
     TASK(Actor)->mirror         = g_Game.members[0].unk_2A;
