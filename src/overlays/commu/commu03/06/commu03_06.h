@@ -12,7 +12,8 @@
 #define COMMU03_STEP0_COUNT 2
 #define COMMU03_STEP1_COUNT 2
 #define COMMU03_STEP2_COUNT 4
-extern u16 D_800104E2;
+/* Message-table byte offsets, indexed by the fairy's cue id (D_801D1940). */
+extern u16 D_800104E2[];
 /* g_FairyRooms + 3: the selected room's cue count. */
 extern u8  D_801457AB[];
 
