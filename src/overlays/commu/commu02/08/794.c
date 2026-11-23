@@ -2404,16 +2404,18 @@ MATCH void Fairy_GenerateName(void) {
 
 #ifdef NON_MATCHING
 NON_MATCHING void func_801D90D8(s32 x, s32 y, s32 character, s32 frame_mode) {
+    u8  slot;
     s32 index;
     s32 x_copy;
     s32 y_copy;
     u8* window_style;
     u8* text;
 
+    slot         = character;
     window_style = &g_WindowStyle;
-    UI_WindowDraw((u16)(x + 3), (u16)(y + 3), 0x7D, 0x2D, 0, *window_style);
-    index = (((((u8)character << 2) + (u8)character) << 3) + (u8)character) << 2;
-    Menu_DrawPortrait((u16)(x + 6), (u16)(y + 2), ((Character*)((u8*)g_Characters + index))->character_id, 0);
+    UI_WindowDraw((u16)(x + 3), (u16)(y + 3), 125, 45, 0, *window_style);
+    index = slot * PARTY_RECORD_STRIDE;
+    Menu_DrawPortrait((u16)(x + 6), (u16)(y + 2), g_Characters[slot].character_id, 0);
     x_copy = x;
     y_copy = y;
     if ((u8)frame_mode == 0) {
