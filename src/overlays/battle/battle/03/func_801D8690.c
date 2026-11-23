@@ -8,11 +8,10 @@ NON_MATCHING void func_801D8690(s32 x, s32 y, s32 slot) {
     s16 color_b;
     s16 draw_x;
     s16 text_x;
-    s16 text_y;
     u16 packed_color;
     s8  style;
     u8  flag;
-    s32 index;
+    u8  index;
     s32 panel_x;
     s32 panel_y;
 
@@ -20,7 +19,7 @@ NON_MATCHING void func_801D8690(s32 x, s32 y, s32 slot) {
     index        = slot - 3;
     draw_x       = x + 4;
     style        = g_WindowStyle;
-    packed_color = *(u16*)((u8*)D_80033A08 + ((style << 6) | 0x20));
+    packed_color = *(u16*)((u8*)&D_80033A08 + ((style << 6) | 0x20));
     color_r      = (packed_color & 0x1F) * 8;
     color_g      = (packed_color >> 2) & 0xF8;
     color_b      = (packed_color >> 7) & 0xF8;
@@ -36,36 +35,27 @@ NON_MATCHING void func_801D8690(s32 x, s32 y, s32 slot) {
     Battle_DrawPanelShape(draw_x, (s16)(y + 0x13), 3, 0);
     panel_x = x;
     panel_y = y;
-    flag    = g_BattleEnemyBattlers[index & BYTE_MASK].unk_7F;
+    flag    = g_BattleEnemyBattlers[index].unk_7F;
     if (flag == 1) {
         func_801D9E9C(text_x, (s16)(y + 0xA), g_UiPanelCurrent->unk_0B, g_UiPanelCurrent->flags, flag);
     } else {
         func_801D94D4((s16)(x + 0x24), (s16)(y + 0xC), 0, 0xFFFF);
     }
-    text_y = panel_y + 3;
-    UI_TextDrawString((s16)(panel_x + 4), text_y, 0, ENEMY_NAME_LENGTH, g_BattleEnemyBattlers[index & BYTE_MASK].name);
-    Battle_DrawPanelLine((s16)(panel_x + 2), (s16)(panel_y + 2), (s16)(panel_x + 0x49), (s16)(panel_y + 2), color_r, color_g, color_b);
-    Battle_DrawPanelLine((s16)(panel_x + 2), text_y, (s16)(panel_x + 2), (s16)(panel_y + 0x12), color_r, color_g, color_b);
+    y = (s16)(panel_y + 3);
+    UI_TextDrawString((s16)(panel_x + 4), y, 0, ENEMY_NAME_LENGTH, g_BattleEnemyBattlers[index].name);
+    x = (s16)(panel_x + 2);
+    Battle_DrawPanelLine(x, (s16)(panel_y + 2), (s16)(panel_x + 0x49), (s16)(panel_y + 2), color_r, color_g, color_b);
+    Battle_DrawPanelLine(x, y, x, (s16)(panel_y + 0x12), color_r, color_g, color_b);
     color_r -= 0x10;
-    if (color_r < 0) {
-        color_r = 0;
-    } else if (color_r >= 0x100) {
-        color_r = 0xFF;
-    }
     color_g -= 0x10;
-    if (color_g < 0) {
-        color_g = 0;
-    } else if (color_g >= 0x100) {
-        color_g = 0xFF;
-    }
     color_b -= 0x10;
-    if (color_b < 0) {
-        color_b = 0;
-    } else if (color_b >= 0x100) {
-        color_b = 0xFF;
-    }
-    Battle_DrawLine((s16)(panel_x + 0x49), (s16)(panel_y + 2), (s16)(panel_x + 0x49), (s16)(panel_y + 0x12), color_r, color_g, color_b);
-    Battle_DrawLine((s16)(panel_x + 2), (s16)(panel_y + 0x12), (s16)(panel_x + 0x49), (s16)(panel_y + 0x12), color_r, color_g, color_b);
+    color_r = (color_r < 0) ? 0 : ((color_r < 0x100) ? color_r : 0xFF);
+    color_g = (color_g < 0) ? 0 : ((color_g < 0x100) ? color_g : 0xFF);
+    color_b = (color_b < 0) ? 0 : ((color_b < 0x100) ? color_b : 0xFF);
+    x       = (s16)(panel_x + 0x49);
+    y       = (s16)(panel_y + 0x12);
+    Battle_DrawLine(x, (s16)(panel_y + 2), x, y, color_r, color_g, color_b);
+    Battle_DrawLine((s16)(panel_x + 2), y, x, y, color_r, color_g, color_b);
 }
 #else
 INCLUDE_ASM(func_801D8690);

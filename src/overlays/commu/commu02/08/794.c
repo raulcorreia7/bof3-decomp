@@ -2526,62 +2526,60 @@ NON_MATCHING void func_801D94D0(s32 page, s32 left, s32 top, s32 cursor_col_arg,
     u16 y;
     u16 row;
     u16 col;
-    u16 cursor_x;
-    u16 cursor_y;
+    u16 base_y;
     u8  cursor_col;
     u8  cursor_row;
-    u8  code;
 
-    /* FAKE: retail reserves eight bytes outside the active locals. */
-    FAKE_STACK_PADS(u8, 8);
+    base_y     = top;
+    cursor_col = cursor_col_arg;
+    cursor_row = cursor_row_arg;
     memcpy(tags, D_801D0C3C, 20);
-    UI_WindowDraw(left, top, 0x110, 123, 0, g_WindowStyle);
+    UI_WindowDraw(left, base_y, 0x110, 123, 0, g_WindowStyle);
     cell = D_801DAAAC + ((u8)page * 96);
-    y    = top + 6;
+    y    = base_y + 6;
     for (row = 0; row < 8; row++) {
         x = left + 4;
         for (col = 0; col < 12; col++) {
             if (col == 10 && row >= 3) {
-                code = *cell;
-                switch (code) {
+                switch (*cell) {
                     case 1:
-                        UI_TextDraw((s16)x, (s16)y, 4, 5, tags);
+                        UI_TextDraw(x, y, 4, 5, tags);
                         break;
                     case 2:
-                        UI_TextDraw((s16)x, (s16)y, 4, 5, tags + 5);
+                        UI_TextDraw(x, y, 4, 5, tags + 5);
                         break;
                     case 3:
-                        UI_TextDraw((s16)x, (s16)y, UI_TEXT_HIGHLIGHT, 5, tags + 10);
+                        UI_TextDraw(x, y, UI_TEXT_HIGHLIGHT, 5, tags + 10);
                         break;
                     case 4:
-                        UI_TextDraw((s16)x, (s16)y, UI_TEXT_HIGHLIGHT, 5, tags + 15);
-                        break;
-                    default:
-                        UI_TextDraw((s16)x, (s16)y, 0, 1, cell);
+                        UI_TextDraw(x, y, UI_TEXT_HIGHLIGHT, 5, tags + 15);
                         break;
                 }
-            } else {
-                UI_TextDraw((s16)x, (s16)y, 0, 1, cell);
+            } else if (col != 11 || row < 3) {
+                UI_TextDraw(x, y, 0, 1, cell);
             }
-            x += (col == 4 || col == 9) ? 28 : 20;
+            if (col == 4 || col == 9) {
+                x += 28;
+            } else {
+                x += 20;
+            }
             cell++;
         }
         y += 14;
     }
-    cursor_col = cursor_col_arg;
-    cursor_row = cursor_row_arg;
-    cursor_x   = left + 6 + cursor_col * 20;
+    x = left + 6 + cursor_col * 20;
+    y = base_y + 8;
+    y += cursor_row * 14;
     if (cursor_col >= 5) {
-        cursor_x += 8;
+        x += 8;
     }
     if (cursor_col >= 10) {
-        cursor_x += 8;
+        x += 8;
     }
     if (cursor_col == 11 && cursor_row >= 3) {
-        cursor_x -= 20;
+        x -= 20;
     }
-    cursor_y = top + 8 + cursor_row * 14;
-    UI_CursorDraw(cursor_x, cursor_y, 0);
+    UI_CursorDraw(x, y, 0);
 }
 #else
 INCLUDE_ASM(func_801D94D0);
