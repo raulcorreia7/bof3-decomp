@@ -63,11 +63,11 @@ MATCH void SND_StopSelectionEffect(void) { /* func_801D1184 */
  */
 /* func_801D11E4 */
 MATCH void Title_DrawChoicePrompt(void) { /* func_801D11E4 */
-    if (g_GameStateIndex == GAME_REQUEST_AREA_CHANGE && g_GameEntryState == 2u && g_UiWindowEffectBusy == 0u) {
-        LOBU(g_UiPopupRequest) = 0u;
+    if (g_SysThreads[0].tail.game_entry.request == GAME_REQUEST_AREA_CHANGE && g_SysThreads[0].tail.game_entry.state == 2u && g_SysThreads[2].state == 0u) {
+        LOBU(g_SysThreads[1].tail.title_screen.popup.request) = 0u;
     }
 
-    if (g_AreaDrawFlags != 0u && LOBU(g_UiPopupRequest) != 0u) {
+    if (g_AreaDrawFlags != 0u && LOBU(g_SysThreads[1].tail.title_screen.popup.request) != 0u) {
         GFX_ADD_LAYER_DRAW_MODE(GFX_LAYER_EFFECT_FRONT, getTPage(TPAGE_DEPTH_8BIT, TPAGE_ABR_HALF, 832, 256));
         GFX_BuildGlyphPrimitive(192, 4, 10, 2, 0);
     }
@@ -102,16 +102,16 @@ MATCH void Title_DrawChoicePanels(u8 selected, u8 alpha) { /* func_801D12CC */
     primitive = GFX_BuildGlyphPrimitive(172, 212, 9, 2, selected);
     GFX_SetPrimitiveAlpha(primitive, alpha);
 
-    if ((g_UiPopupRequest & WIN_POPUP_PENDING_MASK) == WIN_POPUP_PENDING_OPEN) {
-        primitive     = GFX_BuildGlyphPrimitive(48, 184, 7, 2, 0);
-        pulse_counter = D_80143C2A + 1u;
-        D_80143C2A    = pulse_counter;
-        pulse         = (pulse_counter & 0x20u) == 0u ? ((pulse_counter & 0x1Fu) << 2) : -128 - ((pulse_counter & 0x1Fu) << 2);
-        primitive[4]  = pulse;
-        primitive[5]  = pulse;
-        primitive[6]  = pulse;
+    if ((g_SysThreads[1].tail.title_screen.popup.request & WIN_POPUP_PENDING_MASK) == WIN_POPUP_PENDING_OPEN) {
+        primitive                               = GFX_BuildGlyphPrimitive(48, 184, 7, 2, 0);
+        pulse_counter                           = g_SysThreads[1].tail.title_screen.pulse + 1u;
+        g_SysThreads[1].tail.title_screen.pulse = pulse_counter;
+        pulse                                   = (pulse_counter & 0x20u) == 0u ? ((pulse_counter & 0x1Fu) << 2) : -128 - ((pulse_counter & 0x1Fu) << 2);
+        primitive[4]                            = pulse;
+        primitive[5]                            = pulse;
+        primitive[6]                            = pulse;
     } else {
-        D_80143C2A = 0u;
+        g_SysThreads[1].tail.title_screen.pulse = 0u;
     }
 }
 
