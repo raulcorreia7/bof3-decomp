@@ -124,6 +124,8 @@ extern u8                  D_80148624;
 extern u8                  D_80148625;
 extern u8                  D_80148626;
 extern volatile u8         D_80148627;
+/* D_801492D8 */
+extern AreaCamera          g_AreaCamera;
 /* D_801492E8 */
 extern MATRIX              g_CameraMatrix;
 

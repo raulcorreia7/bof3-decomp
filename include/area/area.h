@@ -35,6 +35,7 @@
 #include "psx/mem.h"
 #include "sys/scratchpad.h"
 #include "psx/psyq.h"
+#include "sys/scene.h"
 #include "engine/actor/motion/motion.h"
 #include "engine/ui/message/message.h"
 
@@ -483,6 +484,29 @@ typedef struct PartyMemberMessages {
 ASSERT_OFFSET(PartyMemberMessages, tags, 0x00);
 ASSERT_OFFSET(PartyMemberMessages, messages, 0x04);
 ASSERT_SIZE(PartyMemberMessages, PARTY_MEMBER_MESSAGE_SIZE);
+
+/* The area view: the camera rotation, its matrix, the scroll target and the camera position.
+ * The target cells are the integer halves of the two target coordinates. */
+typedef struct AreaCamera {
+    CameraAngle angle;          /* 0x00 */
+    CameraAngle previous_angle; /* 0x08 */
+    MATRIX      matrix;         /* 0x10 */
+    Coord       scroll_x;       /* 0x30 */
+    Coord       scroll_y;       /* 0x34 */
+    s32         x;              /* 0x38 */
+    u32         y;              /* 0x3C */
+    s32         height;         /* 0x40 */
+} AreaCamera;
+
+ASSERT_OFFSET(AreaCamera, angle, 0x00);
+ASSERT_OFFSET(AreaCamera, previous_angle, 0x08);
+ASSERT_OFFSET(AreaCamera, matrix, 0x10);
+ASSERT_OFFSET(AreaCamera, scroll_x, 0x30);
+ASSERT_OFFSET(AreaCamera, scroll_y, 0x34);
+ASSERT_OFFSET(AreaCamera, x, 0x38);
+ASSERT_OFFSET(AreaCamera, y, 0x3C);
+ASSERT_OFFSET(AreaCamera, height, 0x40);
+ASSERT_SIZE(AreaCamera, 0x44);
 
 /* Finds the scene-table record for a wanted scene id and fills its palette and
  * tile fields (exe/slus_004_22@0x8014DD3C). */
