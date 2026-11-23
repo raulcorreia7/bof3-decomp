@@ -7,67 +7,63 @@ __asm__(".include \"include/match/macro.inc\"\n");
 #ifdef NON_MATCHING
 /* Draws the targeted enemy's resistance bar: one 12x12 textured segment per element. */
 NON_MATCHING void func_801EFCE8(s32 x, s32 y) {
-    POLY_FT4*     prim;
-    u16*          uv_left;
-    u16*          uv_right;
-    u16*          uv_end;
-    u16*          uv_start;
-    volatile s32* color;
-    u8*           state;
-    s32           selector;
+    POLY_FT4* prim;
+    u16*      uv_left;
+    u16*      uv_right;
+    s32       selector;
+    s32       i;
 
     selector = g_Battle.target_selector - 3;
-    state    = g_BattleEnemyBattlers[selector].stats.resistances;
-    uv_start = (u16*)(D_801F0B8C + 14);
-    uv_right = uv_start;
+    uv_right = (u16*)(D_801F0B8C + 14);
     uv_left  = uv_right - 1;
-    uv_end   = (u16*)((u8*)g_BMagicEffectModes + 2);
-    color    = (volatile s32*)&g_ScratchPad.cells.words[1];
-
+    i        = 0;
     do {
-        prim = (POLY_FT4*)g_GfxPrimCursor;
+        prim = GFX_CURSOR(POLY_FT4);
         SetPolyFT4(prim);
         setXYWH(prim, x, y, 12, 12);
-
-        *color = 0x30;
-        if ((u32)uv_right < (u32)uv_end) {
-            switch (uv_right - uv_start) {
-                case 0:
-                    if (state[0] < 2)
-                        *color = 0x80;
-                    break;
-                case 2:
-                    if (state[1] < 2)
-                        *color = 0x80;
-                    break;
-                case 4:
-                    if (state[2] < 2)
-                        *color = 0x80;
-                    break;
-                case 6:
-                    if (state[3] < 2)
-                        *color = 0x80;
-                    break;
-                case 8:
-                    if (state[4] < 2)
-                        *color = 0x80;
-                    break;
-                case 10:
-                    if (state[5] < 4)
-                        *color = 0x80;
-                    break;
-            }
+        g_ScratchPad.cells.words[1] = 0x30;
+        switch (i) {
+            case 0:
+                if (g_BattleEnemyBattlers[selector].stats.resistances[RES_INDEX_FIRE] < 2) {
+                    g_ScratchPad.cells.words[1] = 0x80;
+                }
+                break;
+            case 1:
+                if (g_BattleEnemyBattlers[selector].stats.resistances[RES_INDEX_FROST] < 2) {
+                    g_ScratchPad.cells.words[1] = 0x80;
+                }
+                break;
+            case 2:
+                if (g_BattleEnemyBattlers[selector].stats.resistances[RES_INDEX_ELECTRIC] < 2) {
+                    g_ScratchPad.cells.words[1] = 0x80;
+                }
+                break;
+            case 3:
+                if (g_BattleEnemyBattlers[selector].stats.resistances[RES_INDEX_WIND] < 2) {
+                    g_ScratchPad.cells.words[1] = 0x80;
+                }
+                break;
+            case 4:
+                if (g_BattleEnemyBattlers[selector].stats.resistances[RES_INDEX_EARTH] < 2) {
+                    g_ScratchPad.cells.words[1] = 0x80;
+                }
+                break;
+            case 5:
+                if (g_BattleEnemyBattlers[selector].stats.resistances[RES_INDEX_HOLY] < 4) {
+                    g_ScratchPad.cells.words[1] = 0x80;
+                }
+                break;
         }
-
-        setRGB0(prim, *color, *color, *color);
-        prim->tpage = GetTPage(TPAGE_DEPTH_4BIT, TPAGE_ABR_HALF, 0x3C0, 0x100);
+        setRGB0(prim, g_ScratchPad.cells.words[1], g_ScratchPad.cells.words[1], g_ScratchPad.cells.words[1]);
+        prim->tpage = GetTPage(TPAGE_DEPTH_4BIT, TPAGE_ABR_ADD, 0x3C0, 0x100);
         prim->clut  = GetClut(0, 0x1E0);
         setUV4(prim, *uv_left, *uv_right, *uv_left + 12, *uv_right, *uv_left, *uv_right + 12, *uv_left + 12, *uv_right + 12);
         GFX_AddPrim(GFX_LAYER_UI, sizeof(POLY_FT4));
         x += 20;
         uv_left += 2;
         uv_right += 2;
-    } while ((s32)uv_right < (s32)uv_end);
+        i++;
+    } while (i < 6);
 }
 #else
 INCLUDE_ASM(func_801EFCE8);
