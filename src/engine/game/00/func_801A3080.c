@@ -14,8 +14,8 @@ NON_MATCHING void func_801A3080(Actor* actor, s32 facing) {
 
     slot    = (s32)(-(((s32)actor - (s32)g_PartyActors) * 0xD79435E5)) >> 3;
     work    = g_Task;
-    angle_x = FIELD(s32, work, 0x64u);
-    angle_y = FIELD(s32, work, 0x68u);
+    angle_x = work->unk_64;
+    angle_y = work->unk_68;
     type    = facing;
     n       = (s8)slot;
     if (n < 0) {
@@ -45,13 +45,13 @@ NON_MATCHING void func_801A3080(Actor* actor, s32 facing) {
     }
 
     work = g_Task;
-    if (FIELD(u8, work, 0x0Au) != 0) {
-        g_ActorTurnRamps[n].frames_xy = (s8)(FIELD(u8, work, 0x0Au) * 2);
+    if (work->timer != 0) {
+        g_ActorTurnRamps[n].frames_xy = (s8)(work->timer * 2);
         g_ActorTurnRamps[n].frames_z  = (s8)(TASK(Actor)->unk_0A * 4);
         work                          = g_Task;
-        g_ActorTurnRamps[n].delta_x   = (angle_x - FIELD(s32, work, 0x64u)) / (FIELD(u8, work, 0x0Au) * 2);
-        g_ActorTurnRamps[n].delta_y   = (angle_y - FIELD(s32, work, 0x68u)) / (FIELD(u8, work, 0x0Au) * 2);
-        if ((((type - 5) & BYTE_MASK) < 2) && (D_801C842A[0] < (FIELD(s32, work, 0x6Cu) & ANGLE_MASK))) {
+        g_ActorTurnRamps[n].delta_x   = (angle_x - work->unk_64) / (work->timer * 2);
+        g_ActorTurnRamps[n].delta_y   = (angle_y - work->unk_68) / (work->timer * 2);
+        if ((((type - 5) & BYTE_MASK) < 2) && (D_801C842A[0] < (work->unk_6C & ANGLE_MASK))) {
             angle = D_801C842A[(facing & BYTE_MASK) - 3] + ONE;
         } else {
             angle = D_801C8424[type & BYTE_MASK];
@@ -63,7 +63,7 @@ NON_MATCHING void func_801A3080(Actor* actor, s32 facing) {
     g_ActorTurnRamps[n].delta_z = 0;
     g_ActorTurnRamps[n].delta_y = 0;
     g_ActorTurnRamps[n].delta_x = 0;
-    FIELD(s32, work, 0x6Cu)     = D_801C8424[type & BYTE_MASK];
+    work->unk_6C                = D_801C8424[type & BYTE_MASK];
 }
 #else
 INCLUDE_ASM(func_801A3080);
