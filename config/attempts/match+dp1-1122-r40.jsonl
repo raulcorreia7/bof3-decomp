@@ -1,0 +1,3 @@
+{"function": "exe/slus_004_22@0x8015A9A4", "tried": "origin loads swapped in the source (159 unchanged); retail reads originX, then the 0x36/0x3A words, then originY", "first_diff": "0x8015A9B0 lh v0,-27872(v0) against lh v0,-27870(v0)", "score": "159 rows"}
+{"function": "emi/world02/area112/13@0x801F3274", "tried": "frame 8 bytes larger and +2 instructions (coverage cause 3)", "first_diff": "0x801F327C addiu sp,sp,-80 against addiu sp,sp,-88", "score": "71 rows"}
+{"function": "emi/world00/area030/04@0x801DE1C0", "tried": "frame 16 bytes larger and +1 instruction (coverage cause 3)", "first_diff": "0x801DE1C0 addiu sp,sp,-48 against addiu sp,sp,-64", "score": "149 rows"}
