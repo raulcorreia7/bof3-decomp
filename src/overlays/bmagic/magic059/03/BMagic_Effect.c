@@ -69,9 +69,10 @@ NON_MATCHING void func_801EED0C(void) {
         TASK(PartyMember)->param.unk_0B++;
     }
 
-    palette_src = D_80036C00;
+    i           = 0;
     palette_dst = g_BattleEffectPalette;
-    for (i = 0; i < 16; i++) {
+    palette_src = D_80036C00;
+    for (; i < 16; i++) {
         *palette_dst++ = *palette_src++ | 0x8000;
     }
     g_BattleEffectPalette[0] = D_80036C00[0];
