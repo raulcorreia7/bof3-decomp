@@ -1,0 +1,1 @@
+{"function": "emi/scenario/scena07/00@0x801F7BE0", "tried": "ordered px/py locals for the Area_HeightSample arguments, then a barrier between the two loads", "first_diff": "3 rows: the locals are copy-propagated back to right-to-left evaluation, the barrier costs 45 rows; the draft stays", "score": "3 rows"}

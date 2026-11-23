@@ -1,0 +1,1 @@
+{"function": "emi/etc/commu02/08@0x801D51D0", "tried": "Padded the frame by eight bytes to reach retail's 0x58", "first_diff": "357 rows become 355: the frame difference is real but minor. The body's own structure accounts for the remaining divergence, so the rewrite must come from the retail listing rather than frame tuning", "score": "355 rows with the pad, 357 without"}

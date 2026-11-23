@@ -1,0 +1,1 @@
+{"function": "emi/scenario/scena07/00@0x801FA01C", "tried": "pinned the vertex pointer (AREA_WORK+0x1164) to s5", "first_diff": "the prologue's first 23 instructions match, but the fixed s5 shifts the body's other values and the row grows to 186 differences; the original allocation (vertex in s6) keeps 171", "score": "186 differing rows vs 171"}

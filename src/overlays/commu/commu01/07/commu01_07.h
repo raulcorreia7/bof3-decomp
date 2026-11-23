@@ -42,6 +42,7 @@ ASSERT_SIZE(CommuTypeRows, 0x2);
 
 extern u16            D_80010000[];
 extern s8             D_801455C2;
+extern u8             D_801455C4;
 extern u8             D_801455C9[];
 /* The commu request slot run's byte columns: the type grid line, the cursor box
  * row and the byte the commit clears, each at the run's eight-byte row stride. */
@@ -67,6 +68,9 @@ extern u16            D_801D4C10[4];
 extern u8             D_801D4C18[12][2];
 /* The channel each commu record type blinks. */
 extern u8             D_801D4C20[];
+/* The overview's separator text and the icon each room type draws; the shop's icon steps with its stock row. */
+extern u8             D_801D4C30[];
+extern u8             D_801D4C34[];
 extern CommuCellFrame D_801D4C44[COMMU_CELL_FRAME_COUNT];
 extern u8             D_801D4CD4[];
 extern u8             D_801D4CE0[];

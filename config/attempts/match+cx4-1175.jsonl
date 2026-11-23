@@ -1,0 +1,1 @@
+{"function": "emi/scenario/scena01/00@0x801FCEC0", "tried": "compared the shared reset_vars tail against retail's layout", "first_diff": "0x801FCED8: the default branch targets 0x801FD274 in retail against the draft's 0x801FD254; the shared tail block sits 0x20 lower because the case bodies between differ in length", "score": "candidate 0x3AC, retail 0x3CC"}

@@ -73,12 +73,12 @@ MATCH void func_801EF72C(void) {
     BMAGIC_PROJECT_ACTOR_MATRIX(TASK(PartyMember));
 }
 
-#ifdef NON_MATCHING
-NON_MATCHING void func_801EF7F8(void) {
+/* Draws the ring of eight shaded quads around the caster; the shades flicker while the action is 0x2B. */
+MATCH void func_801EF7F8(void) {
     POLY_G4* prim;
     long     depth;
     long     flag;
-    u8       i;
+    s32      i;
 
     SetDrawMode((DR_MODE*)g_GfxPrimCursor, 0, 1, getTPage(TPAGE_DEPTH_4BIT, TPAGE_ABR_ADD, 320, 256), 0);
     Area_CellAddPrim(TASK(PartyMember)->pos.x.fixed, TASK(PartyMember)->pos.y.fixed, 0, sizeof(DR_MODE));
@@ -120,11 +120,9 @@ NON_MATCHING void func_801EF7F8(void) {
         setRGB2(prim, 1, 1, 1);
         setRGB3(prim, 1, 1, 1);
         Area_CellAddPrim(TASK(PartyMember)->pos.x.fixed, TASK(PartyMember)->pos.y.fixed, 0, sizeof(POLY_G4));
+        prim++;
     }
 }
-#else
-INCLUDE_ASM(func_801EF7F8);
-#endif
 
 /* func_801EFC24 */
 #include "overlays/bmagic/shared/BMagic_AllocEffect.h"
