@@ -1,0 +1,1 @@
+{"function": "emi/world02/area103/13@0x801F53F0", "tried": "ran the header-gated width test by temporarily changing the prototype to s16 and u8", "first_diff": "61 rows baseline; s16 and u8 both cost 91 rows, so the s32 prototype is right and the pending needs: header on #2145 can be withdrawn", "score": "61 rows"}

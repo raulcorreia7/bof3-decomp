@@ -6,8 +6,8 @@ __asm__(".include \"include/match/macro.inc\"\n");
 
 #include "overlays/bmagic/shared/Effect_RunSlots.h"
 
-#ifdef NON_MATCHING
-NON_MATCHING void func_801EED18(void) {
+/* Mode entry: clears the effect slots, moves the task to the scroll target, spawns effect 0x61 and brightens the palette rows. */
+MATCH void func_801EED18(void) {
     u16* dst;
     u16* src;
     u32  slot;
@@ -15,15 +15,16 @@ NON_MATCHING void func_801EED18(void) {
 
     BMAGIC_CLEAR_EFFECTS(i);
     Battle_CenterCamera();
-    TASK(PartyMember)->pos.x.fixed  = g_AreaScrollTargetX;
-    TASK(PartyMember)->unk_09       = 0x38;
-    TASK(PartyMember)->param.unk_0B = 0;
+    /* FAKE: the cast store keeps the y read behind the x store. */
+    LOW(TASK(PartyMember)->pos.x.fixed) = g_AreaScrollTargetX;
+    TASK(PartyMember)->pos.y.fixed      = g_AreaScrollTargetY;
+    TASK(PartyMember)->param.unk_0B     = 0;
+    TASK(PartyMember)->unk_09           = 0x38;
     TASK(PartyMember)->header.mode += 1;
-    TASK(PartyMember)->pos.y.fixed = g_AreaScrollTargetY;
     SND_SEQueueSelection(EMI_SE_ID(SND_BANK_COMMON, 0));
     slot                               = Battle_AllocEffect(1, 0x61) & BYTE_MASK;
-    g_BattleEffects[slot].header.mode  = 0;
     g_BattleEffects[slot].target.party = g_Task;
+    g_BattleEffects[slot].header.mode  = 0;
     TASK(PartyMember)->param.unk_0B += 1;
     BMAGIC_BRIGHTEN_PALETTE_ROW(dst, src, i);
     i   = 0;
@@ -36,9 +37,6 @@ NON_MATCHING void func_801EED18(void) {
     g_AreaPaletteCopy->rows[AREA_PALETTE_BMAGIC_ROW].colors[0]   = g_AreaPaletteArena->rows[AREA_PALETTE_BMAGIC_ROW].colors[0];
     g_GfxPalettePending                                          = 1;
 }
-#else
-INCLUDE_ASM(func_801EED18);
-#endif
 
 #include "overlays/bmagic/shared/Effect_RequestTargetOnTimerZero.h"
 

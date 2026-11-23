@@ -1,0 +1,1 @@
+{"function": "emi/scenario/scena07/00@0x801FA01C", "tried": "typed the sphere-ring angle as u16 and dropped the rsin/rcos casts", "first_diff": "0x801FA020 unchanged, 171 rows: the hint's narrow-local masks are the draft's own u16 promotions, not a type gap in the angle", "score": "171 differing rows"}

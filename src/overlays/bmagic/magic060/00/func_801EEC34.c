@@ -298,21 +298,19 @@ MATCH void func_801EF924(u8* text, s32 x, s32 y) {
     }
 }
 
-#ifdef NON_MATCHING
-NON_MATCHING void func_801EFB00(u16 value, s32 x, s32 y) {
+/* Draws a five-digit number as 12x12 glyphs, leading zeros hidden. */
+MATCH void func_801EFB00(s32 value, s32 x, s32 y) {
     POLY_FT4* prim;
-    s32       digit;
-    u16       scale;
+    u16       digit;
+    u32       scale;
     s32       i;
     s32       mode;
     s32       started;
-    s16       u;
 
     mode = getTPage(TPAGE_DEPTH_4BIT, TPAGE_ABR_HALF, 320, 256);
     GFX_ADD_DITHERED_DRAW_MODE(BMAGIC_LAYER_FOREGROUND, mode);
     started = 0;
     scale   = 10000;
-    i       = 0;
     for (i = 0; i < 5; i++) {
         prim = GFX_CURSOR(POLY_FT4);
         SetPolyFT4(prim);
@@ -320,20 +318,16 @@ NON_MATCHING void func_801EFB00(u16 value, s32 x, s32 y) {
         setRGB0(prim, 128, 128, 128);
         setTPage(prim, TPAGE_DEPTH_4BIT, TPAGE_ABR_ADD, FONT_TPAGE_X, FONT_TPAGE_Y);
         setClut(prim, 0, 0x1E0);
-        digit = value / scale;
+        digit = (value & HALF_MASK) / (scale & HALF_MASK);
         if (digit != 0) {
             started = 1;
         }
-        value -= digit * scale;
-        scale /= 10;
-        u = (digit + 6) * 12;
-        setUVWH(prim, u, 24, 12, 12);
-        if (started != 0 || scale == 0) {
+        value -= (value & HALF_MASK) / (scale & HALF_MASK) * scale;
+        scale = (scale & HALF_MASK) / 10;
+        setUVWH(prim, (digit + 6) * 12, 24, 12, 12);
+        if (started != 0 || (scale & HALF_MASK) == 0) {
             GFX_AddPrim(BMAGIC_LAYER_FOREGROUND, sizeof(POLY_FT4));
         }
         x += 12;
     }
 }
-#else
-INCLUDE_ASM(func_801EFB00);
-#endif
