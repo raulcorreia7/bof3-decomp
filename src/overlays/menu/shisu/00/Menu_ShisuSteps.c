@@ -189,12 +189,11 @@ MATCH void func_801D11F4(void) {
     func_801D2DA8();
 }
 
-#ifdef NON_MATCHING
 /* Reads the ingredient list and updates the selected amounts. */
-NON_MATCHING void func_801D14C0(void) {
+MATCH void func_801D14C0(void) {
     volatile u16* input;
-    u16           buttons;
-    u16           pressed;
+    s32           buttons;
+    u8            cursor;
 
     input   = &g_PadStates[0].pressed;
     buttons = INPUT_REPEATED(*input, PADLup | PADLdown);
@@ -206,102 +205,102 @@ NON_MATCHING void func_801D14C0(void) {
         g_ShisuIngredients.cursor--;
         if ((s8)g_ShisuIngredients.cursor < 0) {
             g_ShisuIngredients.cursor = 0xFF;
+            D_80148364                = g_ShisuIngredients.command + 0x2B;
             g_MenuStep.sub_step--;
-            D_80148364 = g_ShisuIngredients.command + 0x2B;
         }
     } else if (buttons & PADLdown) {
         SND_SEPlay(EMI_SE_ID(SND_BANK_COMMON, 0));
         g_ShisuIngredients.cursor++;
         if (g_ShisuIngredients.cursor >= 4) {
             g_ShisuIngredients.cursor = 0xFF;
+            D_80148364                = g_ShisuIngredients.command + 0x2B;
             g_MenuStep.sub_step--;
-            D_80148364 = g_ShisuIngredients.command + 0x2B;
         }
     } else {
-        pressed = *input;
-        if ((pressed & g_InputMasks[MENU_INPUT_CANCEL]) || !(pressed & g_InputMasks[MENU_INPUT_CONFIRM])) {
-            goto update;
-        }
-        switch (g_ShisuIngredients.cursor) {
-            case 0:
-                if (g_ShisuIngredients.held[0] == 0) {
-                    goto empty;
-                }
-                if (g_ShisuIngredients.used[0] != 0) {
-                    goto full;
-                }
-                D_801DA0C1 = 1;
-                g_ShisuIngredients.used[0]++;
-                g_ShisuIngredients.held[0]--;
-                goto selected;
-            case 1:
-                if (g_ShisuIngredients.held[1] == 0) {
-                    goto empty;
-                }
-                if (g_ShisuIngredients.used[1] >= 20) {
-                    goto full;
-                }
-                if (g_ShisuIngredients.used[1] == 0) {
-                    D_801DA049 = 1;
-                }
-                g_ShisuIngredients.used[1]++;
-                g_ShisuIngredients.held[1]--;
-                goto selected;
-            case 2:
-                if (g_ShisuIngredients.used[1] == 0) {
-                    D_80148364 = 0x2F;
-                    goto rejected;
-                }
-                if (g_ShisuIngredients.held[2] == 0) {
-                    goto empty;
-                }
-                if (g_ShisuIngredients.used[2] >= 20) {
-                    goto full;
-                }
-                g_ShisuIngredients.used[2]++;
-                g_ShisuIngredients.held[2]--;
-                goto selected;
-            case 3:
-                if (g_ShisuIngredients.used[0] == 0) {
-                    D_80148364 = 0x30;
-                    goto rejected;
-                }
-                if (g_ShisuIngredients.held[3] == 0) {
-                    goto empty;
-                }
-                if (g_ShisuIngredients.used[3] >= 20) {
-                    goto full;
-                }
-                g_ShisuIngredients.used[3]++;
-                g_ShisuIngredients.held[3]--;
-            selected:
-                SND_SEPlay(EMI_SE_ID(SND_BANK_COMMON, 3));
-                break;
-            empty:
-                D_80148364 = 0x2E;
-                goto rejected;
-            full:
-                D_80148364 = 0x2D;
-            rejected:
-                SND_SEPlay(EMI_SE_ID(SND_BANK_COMMON, 7));
-                break;
+        buttons = g_PadStates[0].pressed;
+        if (!(g_InputMasks[MENU_INPUT_CANCEL] & buttons) && (g_InputMasks[MENU_INPUT_CONFIRM] & buttons)) {
+            switch (g_ShisuIngredients.cursor) {
+                case 0:
+                    if (g_ShisuIngredients.held[0] == 0) {
+                        D_80148364 = 0x2E;
+                        SND_SEPlay(EMI_SE_ID(SND_BANK_COMMON, 7));
+                    } else if (g_ShisuIngredients.used[0] == 0) {
+                        D_801DA0C0.header.mode = 1;
+                        g_ShisuIngredients.used[0]++;
+                        g_ShisuIngredients.held[0]--;
+                        SND_SEPlay(EMI_SE_ID(SND_BANK_COMMON, 3));
+                    } else {
+                        D_80148364 = 0x2D;
+                        SND_SEPlay(EMI_SE_ID(SND_BANK_COMMON, 7));
+                    }
+                    break;
+                case 1:
+                    if (g_ShisuIngredients.held[1] == 0) {
+                        D_80148364 = 0x2E;
+                        SND_SEPlay(EMI_SE_ID(SND_BANK_COMMON, 7));
+                    } else if (g_ShisuIngredients.used[1] < 20) {
+                        if (g_ShisuIngredients.used[1] == 0) {
+                            D_801DA048.header.mode = 1;
+                        }
+                        g_ShisuIngredients.used[1]++;
+                        g_ShisuIngredients.held[1]--;
+                        SND_SEPlay(EMI_SE_ID(SND_BANK_COMMON, 3));
+                    } else {
+                        D_80148364 = 0x2D;
+                        SND_SEPlay(EMI_SE_ID(SND_BANK_COMMON, 7));
+                    }
+                    break;
+                case 2:
+                    if (g_ShisuIngredients.used[1] != 0) {
+                        if (g_ShisuIngredients.held[2] == 0) {
+                            D_80148364 = 0x2E;
+                            SND_SEPlay(EMI_SE_ID(SND_BANK_COMMON, 7));
+                        } else if (g_ShisuIngredients.used[2] < 20) {
+                            g_ShisuIngredients.used[2]++;
+                            g_ShisuIngredients.held[2]--;
+                            SND_SEPlay(EMI_SE_ID(SND_BANK_COMMON, 3));
+                        } else {
+                            D_80148364 = 0x2D;
+                            SND_SEPlay(EMI_SE_ID(SND_BANK_COMMON, 7));
+                        }
+                    } else {
+                        D_80148364 = 0x2F;
+                        SND_SEPlay(EMI_SE_ID(SND_BANK_COMMON, 7));
+                    }
+                    break;
+                case 3:
+                    if (g_ShisuIngredients.used[0] != 0) {
+                        if (g_ShisuIngredients.held[3] == 0) {
+                            D_80148364 = 0x2E;
+                            SND_SEPlay(EMI_SE_ID(SND_BANK_COMMON, 7));
+                        } else if (g_ShisuIngredients.used[3] < 20) {
+                            g_ShisuIngredients.used[3]++;
+                            g_ShisuIngredients.held[3]--;
+                            SND_SEPlay(EMI_SE_ID(SND_BANK_COMMON, 3));
+                        } else {
+                            D_80148364 = 0x2D;
+                            SND_SEPlay(EMI_SE_ID(SND_BANK_COMMON, 7));
+                        }
+                    } else {
+                        D_80148364 = 0x30;
+                        SND_SEPlay(EMI_SE_ID(SND_BANK_COMMON, 7));
+                    }
+                    break;
+            }
         }
     }
-update:
+    cursor                   = g_ShisuIngredients.cursor;
     g_UiPanelTasks[0].active = 1;
-    D_80148334               = g_UiPanelTasks[3].pos.x + 7;
-    g_UiPanelTasks[0].pos.y  = g_UiPanelTasks[3].pos.y + g_ShisuIngredients.cursor * 13 + 26;
-    g_UiPanelTasks[0].unk_0A = g_ShisuIngredients.cursor;
-    g_UiPanelTasks[3].unk_0A = g_ShisuIngredients.cursor;
+    g_UiPanelTasks[0].unk_0A = cursor;
+    g_UiPanelTasks[0].pos.x  = g_UiPanelTasks[3].pos.x + 7;
+    g_UiPanelTasks[0].pos.y  = g_UiPanelTasks[3].pos.y + cursor * 13 + 26;
+    g_UiPanelTasks[3].unk_0A = cursor;
     if (g_ShisuIngredients.rounds != 0) {
         D_801DA0FC = D_801DA084 + g_ShisuBaseScale * 0xA00;
     }
     func_801D2C0C();
     func_801D2DA8();
 }
-#else
-INCLUDE_ASM(func_801D14C0);
-#endif
 
 MATCH void func_801D1898(void) {
     Callback handler;
@@ -317,17 +316,17 @@ MATCH void Menu_SetState(void) {
     u8* count;
     u8  value;
 
-    count      = &g_MenuStep.state;
-    value      = *count;
-    D_801DA0C1 = 2;
-    D_801DA049 = 2;
-    *count     = value + 1;
+    count                  = &g_MenuStep.state;
+    value                  = *count;
+    D_801DA0C0.header.mode = 2;
+    D_801DA048.header.mode = 2;
+    *count                 = value + 1;
 }
 
 MATCH void func_801D1910(void) {
     if ((D_801DA0C6 != 0) && (D_801DA04E != 0)) {
-        D_801DA0C1 = 3;
-        D_801DA049 = 3;
+        D_801DA0C0.header.mode = 3;
+        D_801DA048.header.mode = 3;
         {
             u8* step = &g_MenuStep.state;
 
@@ -340,15 +339,15 @@ MATCH void func_801D1910(void) {
 /* Copies the equipped item's status values onto the equip list's title row. */
 NON_MATCHING void func_801D1964(void) {
     if ((D_801DA0C6 != 0) && (D_801DA04E != 0)) {
-        D_801D9EF0[0] = g_ShisuTopping[0];
-        D_801D9EF0[1] = g_ShisuTopping[1];
-        D_801D9EF0[2] = g_ShisuTopping[2];
-        D_801D9EF4[0] = g_ShisuBase[0];
-        D_801D9EF4[1] = g_ShisuBase[1];
-        D_801D9EF4[2] = g_ShisuBase[2];
-        D_801DA0C1    = 4;
-        D_801DA049    = 4;
-        D_80148654    = 0;
+        D_801D9EF0[0]          = g_ShisuTopping[0];
+        D_801D9EF0[1]          = g_ShisuTopping[1];
+        D_801D9EF0[2]          = g_ShisuTopping[2];
+        D_801D9EF4[0]          = g_ShisuBase[0];
+        D_801D9EF4[1]          = g_ShisuBase[1];
+        D_801D9EF4[2]          = g_ShisuBase[2];
+        D_801DA0C0.header.mode = 4;
+        D_801DA048.header.mode = 4;
+        D_80148654             = 0;
         D_80148652 += 1;
     }
 }
@@ -424,15 +423,15 @@ MATCH void func_801D1B58(void) {
     g_ShisuBase[2]    = (D_801D9EF4[2] < level) ? level : D_801D9EF4[2];
     *fade             = level - 8;
     if (*fade == 0) {
-        D_801DA0C1        = 5;
-        D_801DA049        = 1;
-        D_80148652        = 0;
-        g_ShisuTopping[0] = D_801D9EF0[0];
-        g_ShisuTopping[1] = D_801D9EF0[1];
-        g_ShisuTopping[2] = D_801D9EF0[2];
-        g_ShisuBase[0]    = D_801D9EF4[0];
-        g_ShisuBase[1]    = D_801D9EF4[1];
-        g_ShisuBase[2]    = D_801D9EF4[2];
+        D_801DA0C0.header.mode = 5;
+        D_801DA048.header.mode = 1;
+        D_80148652             = 0;
+        g_ShisuTopping[0]      = D_801D9EF0[0];
+        g_ShisuTopping[1]      = D_801D9EF0[1];
+        g_ShisuTopping[2]      = D_801D9EF0[2];
+        g_ShisuBase[0]         = D_801D9EF4[0];
+        g_ShisuBase[1]         = D_801D9EF4[1];
+        g_ShisuBase[2]         = D_801D9EF4[2];
         g_ShisuIngredients.rounds++;
         D_80148651 -= 2;
     }
@@ -725,48 +724,48 @@ NON_MATCHING void func_801D27BC(void) {
     s32   bias;
     s8    initial;
 
-    record_cell      = &D_801F501C;
-    D_801DA09C       = *record_cell;
-    scroll_x         = &g_AreaScrollTargetX;
-    scroll_y         = &g_AreaScrollTargetY;
-    bias             = 0x1000;
-    record           = D_801DA09C;
-    D_801DA049       = 0;
-    D_801DA090       = 0;
-    g_ShisuBaseScale = bias;
-    D_801DA0AC       = 0;
-    D_801DA0B0       = 0;
-    g_ShisuBaseAngle = 0;
-    x                = *scroll_x;
-    y                = *scroll_y;
-    initial          = -0x80;
-    g_ShisuBase[0]   = initial;
-    g_ShisuBase[1]   = initial;
-    g_ShisuBase[2]   = initial;
-    D_801DA07C       = x;
-    D_801DA080       = y;
-    D_801DA098       = record[1];
-    height           = Area_HeightSample(g_AreaScrollTargetX, g_AreaScrollTargetY);
-    D_801DA084       = (height << 16) - SHISU_HEIGHT_BIAS;
+    record_cell            = &D_801F501C;
+    D_801DA09C             = *record_cell;
+    scroll_x               = &g_AreaScrollTargetX;
+    scroll_y               = &g_AreaScrollTargetY;
+    bias                   = 0x1000;
+    record                 = D_801DA09C;
+    D_801DA048.header.mode = 0;
+    D_801DA090             = 0;
+    g_ShisuBaseScale       = bias;
+    D_801DA0AC             = 0;
+    D_801DA0B0             = 0;
+    g_ShisuBaseAngle       = 0;
+    x                      = *scroll_x;
+    y                      = *scroll_y;
+    initial                = -0x80;
+    g_ShisuBase[0]         = initial;
+    g_ShisuBase[1]         = initial;
+    g_ShisuBase[2]         = initial;
+    D_801DA07C             = x;
+    D_801DA080             = y;
+    D_801DA098             = record[1];
+    height                 = Area_HeightSample(g_AreaScrollTargetX, g_AreaScrollTargetY);
+    D_801DA084             = (height << 16) - SHISU_HEIGHT_BIAS;
 
-    D_801DA114          = *record_cell + 2;
-    next_record         = D_801DA114;
-    D_801DA0C1          = 0;
-    D_801DA108          = 0;
-    g_ShisuToppingScale = bias;
-    D_801DA124          = 0;
-    D_801DA128          = 0;
-    g_ShisuToppingAngle = 0;
-    x                   = *scroll_x;
-    y                   = *scroll_y;
-    g_ShisuTopping[0]   = initial;
-    g_ShisuTopping[1]   = initial;
-    g_ShisuTopping[2]   = initial;
-    D_801DA0F4          = x;
-    D_801DA0F8          = y;
-    D_801DA110          = next_record[1];
-    height              = Area_HeightSample(g_AreaScrollTargetX, g_AreaScrollTargetY);
-    D_801DA0FC          = (height << 16) + SHISU_HEIGHT_BIAS;
+    D_801DA114             = *record_cell + 2;
+    next_record            = D_801DA114;
+    D_801DA0C0.header.mode = 0;
+    D_801DA108             = 0;
+    g_ShisuToppingScale    = bias;
+    D_801DA124             = 0;
+    D_801DA128             = 0;
+    g_ShisuToppingAngle    = 0;
+    x                      = *scroll_x;
+    y                      = *scroll_y;
+    g_ShisuTopping[0]      = initial;
+    g_ShisuTopping[1]      = initial;
+    g_ShisuTopping[2]      = initial;
+    D_801DA0F4             = x;
+    D_801DA0F8             = y;
+    D_801DA110             = next_record[1];
+    height                 = Area_HeightSample(g_AreaScrollTargetX, g_AreaScrollTargetY);
+    D_801DA0FC             = (height << 16) + SHISU_HEIGHT_BIAS;
 }
 #else
 INCLUDE_ASM(func_801D27BC);
@@ -806,7 +805,7 @@ NON_MATCHING s32 func_801D2978(void) {
     } else {
         g_ShisuBase[2] = 0;
     }
-    func_801D2308(&D_801DA044 + 1);
+    func_801D2308(&D_801DA048);
     g_ShisuBase[0] = saved[0];
     g_ShisuBase[1] = saved[1];
     g_ShisuBase[2] = saved[2];

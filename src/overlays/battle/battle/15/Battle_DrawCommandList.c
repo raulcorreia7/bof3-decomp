@@ -15,7 +15,7 @@ MATCH void Battle_DrawCommandList(void) {
     u8  slot_c;
     u8  sum;
 
-    Battle_DrawTitledFrame((s16)g_UiPanelCurrent->pos.x, g_UiPanelCurrent->pos.y, g_UiPanelCurrent->unk_08, g_UiPanelCurrent->unk_09, 1);
+    Battle_DrawTitledFrame(g_UiPanelCurrent->pos.x, g_UiPanelCurrent->pos.y, g_UiPanelCurrent->unk_08, g_UiPanelCurrent->unk_09, 1);
     for (i = 0; (i & BYTE_MASK) < 12U; i++) {
         D_800B70B8[i & BYTE_MASK] = D_80145518[i & BYTE_MASK].gate_03 + 1;
     }

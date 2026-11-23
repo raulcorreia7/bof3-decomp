@@ -32,7 +32,7 @@ MATCH void func_801F4768(void) {
         COORD_INT(TASK(Actor)->pos.y) = -8;
     }
 
-    if (abs(g_AreaTargetCellX - COORD_INT(TASK(Actor)->pos.x)) >= 0x1A && abs(g_AreaTargetCellY - COORD_INT(TASK(Actor)->pos.y)) >= 0x1A) {
+    if (abs(g_AreaCamera.scroll_x.part.integer - COORD_INT(TASK(Actor)->pos.x)) >= 0x1A && abs(g_AreaCamera.scroll_y.part.integer - COORD_INT(TASK(Actor)->pos.y)) >= 0x1A) {
         return;
     }
 

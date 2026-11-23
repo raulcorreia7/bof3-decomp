@@ -35,7 +35,7 @@ MATCH void func_801D0F5C(void) {
     g_GfxPalettePending        = 1;
     TASK(FishingState)->unk_5C = 1;
 
-    if (g_AreaTargetCellY >= 0x39) {
+    if (g_AreaCamera.scroll_y.part.integer >= 0x39) {
         TASK(FishingState)->mode_index = 3;
         TASK(FishingState)->sub_index  = 2;
     } else {
