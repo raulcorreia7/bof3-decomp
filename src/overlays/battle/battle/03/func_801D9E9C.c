@@ -24,6 +24,7 @@ NON_MATCHING void func_801D9E9C(s32 x, s32 y, s32 width, s32 second_width, u8 se
     } else {
         v = 0x87;
     }
+    /* The corner UVs are literals in retail (0x97/0x87 and 0xDF), not u + 7, so setUVWH differs. */
     c        = 0xD8;
     poly->v0 = c;
     poly->v1 = c;
@@ -42,6 +43,7 @@ NON_MATCHING void func_801D9E9C(s32 x, s32 y, s32 width, s32 second_width, u8 se
     FAKE_BARRIER(); /* FAKE: retail stores tpage in the GetClut delay slot before the clut store. */
     poly->clut = GetClut(0xB0, STAGE_PALETTE_Y);
     setRGB0(poly, GFX_COLOR_NEUTRAL, GFX_COLOR_NEUTRAL, GFX_COLOR_NEUTRAL);
+    /* The corner stores interleave with the colour and UV constants, so setXYWH differs. */
     poly->x0 = x + (width & BYTE_MASK);
     poly->x2 = x + (width & BYTE_MASK);
     poly->y2 = y + 7;
@@ -53,6 +55,7 @@ NON_MATCHING void func_801D9E9C(s32 x, s32 y, s32 width, s32 second_width, u8 se
     poly->v1 = c;
     poly->y0 = y;
     poly->y1 = y;
+    /* setUVWH here would drop the shared 0xD8/0xDF temp, so the bytes differ. */
     poly->u0 = 0x98;
     poly->u1 = 0x9F;
     poly->u2 = 0x98;
