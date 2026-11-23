@@ -71,7 +71,7 @@ NON_MATCHING void SAVE_BuildSlotImage(void) {
     summary->event_flag   = SYS_TestFlag(flags, 0x92U);
     D_80145025            = (u8)g_Game.flags;
     sum                   = 0;
-    dst                   = MEM_PTR(u8, 0x800C1A00u);
+    dst                   = MEM_PTR(u8, SAVE_IMAGE_ADDR);
     src                   = flags - 0x650;
     i                     = 0;
     do {

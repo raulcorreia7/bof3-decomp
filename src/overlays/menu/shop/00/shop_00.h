@@ -102,6 +102,9 @@ enum {
     SAVE_WAIT_SCAN      = 25,
 };
 
+/* The memory-card save image the card routines write. */
+#define SAVE_IMAGE_ADDR 0x800C1A00u
+
 extern u8          g_SaveBuffer[];
 extern u8          D_80143BB4;
 extern u16         D_80144948;
