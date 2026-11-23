@@ -339,15 +339,15 @@ MATCH void func_801D1910(void) {
 /* Copies the equipped item's status values onto the equip list's title row. */
 NON_MATCHING void func_801D1964(void) {
     if ((D_801DA0C6 != 0) && (D_801DA04E != 0)) {
+        D_801DA0C0.header.mode = 4;
+        D_801DA048.header.mode = 4;
+        D_80148654             = 0;
         D_801D9EF0[0]          = g_ShisuTopping[0];
         D_801D9EF0[1]          = g_ShisuTopping[1];
         D_801D9EF0[2]          = g_ShisuTopping[2];
         D_801D9EF4[0]          = g_ShisuBase[0];
         D_801D9EF4[1]          = g_ShisuBase[1];
         D_801D9EF4[2]          = g_ShisuBase[2];
-        D_801DA0C0.header.mode = 4;
-        D_801DA048.header.mode = 4;
-        D_80148654             = 0;
         D_80148652 += 1;
     }
 }
