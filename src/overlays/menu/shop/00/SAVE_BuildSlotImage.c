@@ -9,94 +9,73 @@ typedef struct SaveSlotSummary {
     u8        unk_0A;
     u8        pad_0B;
     GameClock play_clock;
-    u8        pad_10[4];
-    s32       event_flag;
+    u32       exp;
+    u8        event_flag;
+    u8        pad_15[3];
 } SaveSlotSummary;
 
 ASSERT_SIZE(SaveSlotSummary, 0x18);
 
-#ifdef NON_MATCHING
-NON_MATCHING void SAVE_BuildSlotImage(void) {
+/* The resident save image: the bytes that end where the battle-magic script table starts. */
+#define SAVE_IMAGE_SIZE 0x1E00
+#define SAVE_IMAGE_ADDR (BMAGIC_SCRIPT_TABLE - SAVE_IMAGE_SIZE)
+
+/* Fills the save summary and the saved party position, then copies the save data into the save image and sums it. */
+MATCH void SAVE_BuildSlotImage(void) {
+    u16              i;
     s32              mode;
-    s32              slot;
-    s32              i;
-    s32              j;
-    s32              name_index;
-    s32              col;
-    u16              n;
-    u16              sum;
-    u32              count;
+    s32              sum;
     u8*              dst;
     u8*              src;
-    u16*             masks;
     SaveData*        work;
     SaveSlotSummary* summary;
+    Character*       leader;
 
     SAVE_FormatSlot();
     func_801EF27C(1, 0x13, g_UiTextFormatBuffer);
-    g_SaveData.scene_state = g_ScenarioState;
-    D_80144948             = 0;
-    g_SavedScriptVars[0]   = g_ScriptVars[0];
-    g_SavedScriptVars[1]   = g_ScriptVars[1];
-    g_SavedScriptVars[2]   = g_ScriptVars[2];
-    g_SavedScriptVars[3]   = g_ScriptVars[3];
-    g_SaveEntryX           = (u32)g_Game.members[0].pos.x.fixed;
-    g_SaveEntryY           = (u32)g_Game.members[0].pos.y.fixed;
-    g_SaveAreaId           = g_GameAreaId;
-    g_SaveEntryFacing      = g_Game.members[0].facing;
-    work                   = &g_SaveData;
-    masks                  = (u16*)&work->unk_C84[0x38];
-    n                      = 0;
-    do {
-        j        = n;
-        masks[j] = g_InputMasks[j];
-        n        = n + 1;
-    } while ((u32)n < 9U);
+    g_SaveData.scene_state    = g_ScenarioState;
+    g_SaveData.checksum       = 0;
+    g_SaveData.script_vars[0] = g_ScriptVars[0];
+    g_SaveData.script_vars[1] = g_ScriptVars[1];
+    g_SaveData.script_vars[2] = g_ScriptVars[2];
+    g_SaveData.script_vars[3] = g_ScriptVars[3];
+    g_SaveData.entry_x        = (u32)g_Game.members[0].pos.x.fixed;
+    g_SaveData.entry_y        = (u32)g_Game.members[0].pos.y.fixed;
+    g_SaveData.area_id        = g_GameAreaId;
+    g_SaveData.entry_facing   = g_Game.members[0].facing;
+    for (i = 0; i < 9; i++) {
+        ((u16*)&g_SaveData.unk_C84[0x38])[i] = g_InputMasks[i];
+    }
+    work    = &g_SaveData;
     summary = (SaveSlotSummary*)&work->unk_C84[0x1C];
-    strncpy((s8*)summary->name, (s8*)work->characters[0].name, CHARACTER_NAME_LENGTH);
-    slot = 0;
-    col  = 0 & HALF_MASK;
-    do {
-        name_index = slot & HALF_MASK;
-        if (g_PartyFieldOrder[col] == 4) {
-            mode = work->emi_loaded_character_index & 0x7F;
-            if ((mode != 5) && (mode != 0xC)) {
-                summary->party_order[col] = 0xB;
-            } else {
-                name_index = slot & HALF_MASK;
-                goto store_row; /* the type-4 arm reaches the same store with its own index */
+    leader  = &work->characters[0];
+    strncpy((s8*)summary->name, (s8*)leader->name, CHARACTER_NAME_LENGTH);
+    for (i = 0; i < PARTY_SLOT_COUNT; i++) {
+        if (g_SaveData.party.order[0][i] == 4) {
+            mode = g_SaveData.emi_loaded_character_index & 0x7F;
+            if (mode != 5 && mode != 0xC) {
+                summary->party_order[i] = 0xB;
+                continue;
             }
-        } else {
-        store_row:
-            summary->party_order[name_index] = (u8)g_PartyFieldOrder[name_index];
         }
-        slot += 1;
-        col = slot & HALF_MASK;
-    } while ((u32)(slot & HALF_MASK) < 3U);
-    summary->level        = work->characters[0].level;
+        summary->party_order[i] = g_SaveData.party.order[0][i];
+    }
+    summary->level        = leader->level;
     summary->play_clock   = work->play_clock;
     summary->window_style = work->window_style;
     summary->unk_0A       = work->unk_7B[0];
+    summary->exp          = leader->exp;
+    summary->event_flag   = SYS_TestFlag(g_SaveData.scene_event_flags, 0x92U);
     sum                   = 0;
-    dst                   = g_SaveBuffer;
-    src                   = (u8*)work;
-    i                     = 0;
-    summary->event_flag   = SYS_TestFlag(g_SceneEventFlags, 0x92U);
+    dst                   = MEM_PTR(u8, SAVE_IMAGE_ADDR);
+    src                   = (u8*)&g_SaveData;
     D_80145025            = (u8)g_Game.flags;
-    do {
-        i += 1;
-        count = i & HALF_MASK;
-        *dst  = *src;
-        dst += 1;
-        sum += *src;
-        src += 1;
-    } while (count < SAVE_BLOCK_SIZE);
-    if (count < 0x1E00U) {
-        do {
-            *dst = 0;
-            i += 1;
-            dst += 1;
-        } while ((u32)(i & HALF_MASK) < 7680U);
+    for (i = 0; i < SAVE_BLOCK_SIZE; i++) {
+        *dst++ = *src;
+        sum += *src++;
+    }
+    for (; i < SAVE_IMAGE_SIZE; i++) {
+        *dst++ = 0;
     }
     D_800C1A70 = sum;
     if (g_SaveSlotFirst == g_SaveSlotCount) {
@@ -104,6 +83,3 @@ NON_MATCHING void SAVE_BuildSlotImage(void) {
     }
     func_801D6CE4(g_SaveSlotFirst, (u8*)&g_SaveData);
 }
-#else
-INCLUDE_ASM(SAVE_BuildSlotImage);
-#endif
