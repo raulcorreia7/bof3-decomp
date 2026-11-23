@@ -810,19 +810,18 @@ MATCH void func_801F9500(WorldPos* pos, s32* vx) {
 
 #ifdef NON_MATCHING
 NON_MATCHING void func_801F97CC(WorldPos* pos, s32* arg) {
+    u32      x_arg;
     POLY_F4* poly;
     s32      point[8];
     s32      lift;
-
     poly = (POLY_F4*)g_GfxPrimCursor;
     SetPolyF4(poly);
     SetSemiTrans(poly, 0);
-
     point[0] = pos->x.fixed + arg[0];
     point[1] = pos->y.fixed + arg[1];
     point[2] = pos->z.fixed + arg[2];
-    Camera_ProjectPoint(point, (DVECTOR*)&poly->x0);
-    if (!(TASK(Actor)->unk_06 & 1)) {
+    Camera_ProjectPoint(point, (DVECTOR*)(&poly->x0));
+    if (!(((Actor*)g_Task)->unk_06 & 1)) {
         point[0] = pos->x.fixed - arg[0];
         point[1] = pos->y.fixed + arg[1];
     } else {
@@ -830,27 +829,26 @@ NON_MATCHING void func_801F97CC(WorldPos* pos, s32* arg) {
         point[1] = pos->y.fixed - arg[1];
     }
     point[2] = pos->z.fixed + arg[2];
-    FAKE_BARRIER(); /* FAKE: keep the point stores before the call setup. */
-    Camera_ProjectPoint(point, (DVECTOR*)&poly->x1);
-
+    asm __volatile__("" : : : "memory");
+    Camera_ProjectPoint(point, (DVECTOR*)(&poly->x1));
     point[0] = pos->x.fixed + arg[0];
     point[1] = pos->y.fixed + arg[1];
     lift     = 0x100000;
-    point[2] = pos->z.fixed + arg[2] + lift;
-    Camera_ProjectPoint(point, (DVECTOR*)&poly->x2);
-    if (!(TASK(Actor)->unk_06 & 1)) {
+    point[2] = (pos->z.fixed + arg[2]) + lift;
+    Camera_ProjectPoint(point, (DVECTOR*)(&poly->x2));
+    if (!(((Actor*)g_Task)->unk_06 & 1)) {
         point[0] = pos->x.fixed - arg[0];
         point[1] = pos->y.fixed + arg[1];
     } else {
         point[0] = pos->x.fixed + arg[0];
         point[1] = pos->y.fixed - arg[1];
     }
-    point[2] = pos->z.fixed + arg[2] + lift;
-    FAKE_BARRIER(); /* FAKE: keep the point stores before the call setup. */
-    Camera_ProjectPoint(point, (DVECTOR*)&poly->x3);
-
-    setRGB0(poly, (TASK(Actor)->unk_06 & 2) != 0 ? 0x80 : 0, (TASK(Actor)->unk_06 & 2) == 0 ? 0x80 : 0, 0);
-    Area_CellAddPrim(pos->x.fixed, pos->y.fixed, 0, sizeof(POLY_F4));
+    point[2] = (pos->z.fixed + arg[2]) + lift;
+    asm __volatile__("" : : : "memory");
+    Camera_ProjectPoint(point, (DVECTOR*)(&poly->x3));
+    x_arg    = pos->x.fixed;
+    poly->r0 = ((((Actor*)g_Task)->unk_06 & 2) != 0) ? (0x80) : (0), poly->g0 = ((((Actor*)g_Task)->unk_06 & 2) == 0) ? (0x80) : (0), poly->b0 = 0;
+    Area_CellAddPrim(x_arg, pos->y.fixed, 0, sizeof(POLY_F4));
 }
 #else
 INCLUDE_ASM(func_801F97CC);
