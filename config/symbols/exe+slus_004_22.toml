@@ -45,6 +45,7 @@ g_GfxBufferIndex = { addr = 0x80143D44, source = "Index of the frame buffer bein
 g_GfxBuffers = { addr = 0x80143D48, source = "SYS_InitRuntime initializes the display frames and SYS_Main selects one by g_GfxBufferIndex" }
 g_GfxCurrentBuffer = { addr = 0x80143E68, source = "SYS_Main selects a display frame and passes its display and draw environments to PsyQ" }
 g_FrameCount = { addr = 0x80143E6C, source = "Absolute frame counter." }
+g_LogoHeader = { addr = 0x80143E70, size = 0x88, source = "The staged XF_HDR of LOGO.EXE: SYS_LoadExe copies the first sector here, reads the text to exec.t_addr at exec.t_size, and SYS_StartLogo points exec.s_addr at the 0x801FF000 stack before Exec." }
 g_SysLastVSync = { addr = 0x80143EF8, source = "SYS_Main stores the VSync return value" }
 g_SysDrawTime = { addr = 0x80143EFC, source = "The VSync(1) value SYS_CaptureDrawTime stores at DrawSync; Area_EncounterCanStart reads it." }
 g_GameAreaId = { addr = 0x80143F00, source = "The area to load." }
@@ -119,14 +120,12 @@ g_FairyRooms = { addr = 0x801457A8, source = "Fairy village rooms." }
 D_801457A9 = { addr = 0x801457A9, alias = true, source = "Subtype of each fairy village room." }
 g_GfxPalettePending = { addr = 0x80145988, source = "Palette upload pending flag." }
 g_GfxPrimCursor = { addr = 0x8014598C, size = 0x4, source = "Label primitive context." }
-g_LogoHeader = { addr = 0x80143E70, size = 0x88, source = "The staged XF_HDR of LOGO.EXE: SYS_LoadExe copies the first sector here, reads the text to exec.t_addr at exec.t_size, and SYS_StartLogo points exec.s_addr at the 0x801FF000 stack before Exec." }
-s_DefaultInputMasks = { addr = 0x8017F56C, size = 0x14, source = "The ten default button masks SYS_StartFrontend copies into the first nine g_InputMasks slots on entry to the frontend." }
-g_SysSectorBuffer = { addr = 0x801459F8, size = 0x4, source = "The CD sector staging pointer: SYS_PrepareFrame resets it to AREA_WORK and SYS_LoadExe reads each executable sector there." }
-g_GfxUploadCursor = { addr = 0x801459FC, size = 0x4, source = "The VRAM upload cursor: GFX_DecodeLzss and GFX_ExpandRgb555 decode into it, LoadImage uploads the block and the cursor advances past the aligned size." }
 g_GfxLayerLinks = { addr = 0x80145990, type = "u32", size = 0x40, source = "The two buffers' eight layer link words: SYS_PrepareFrame points each g_GfxOtHeads entry at one and SYS_LinkOt passes its address to AddPrims." }
 g_GfxOtHeads = { addr = 0x801459D0, source = "The eight ordering-table heads: SYS_PrepareFrame seeds each layer's chain anchor and SYS_LinkOt splices the chains into the frame's order table." }
 g_Scripts = { addr = 0x801459F0, type = "u32", source = "Pointer to the active script table: Script_Begin hands a record of it to Script_Seek." }
 g_SceneActorDefs = { addr = 0x801459F4, source = "The loaded scene's actor definition records, published by SYS_StartFrontend from the scene table's first record." }
+g_SysSectorBuffer = { addr = 0x801459F8, size = 0x4, source = "The CD sector staging pointer: SYS_PrepareFrame resets it to AREA_WORK and SYS_LoadExe reads each executable sector there." }
+g_GfxUploadCursor = { addr = 0x801459FC, size = 0x4, source = "The VRAM upload cursor: GFX_DecodeLzss and GFX_ExpandRgb555 decode into it, LoadImage uploads the block and the cursor advances past the aligned size." }
 g_GfxTransferCount = { addr = 0x80145A00, source = "Count of queued VRAM transfers: Actor_SelectSprite appends and GFX_UpdateTransferQueue drains it." }
 g_PadStates = { addr = 0x80145AA4, type = "PadState", size = 0x10, source = "The two pads' state records that SYS_UpdateKeyState publishes from PadRead(0): held now, held last frame and newly pressed buttons." }
 g_InputPressed = { addr = 0x80145AA8, type = "u16", alias = true, source = "g_PadStates[0].pressed, the buttons newly pressed this frame." }
@@ -315,6 +314,7 @@ g_AreaDrawMode = { addr = 0x8014933E, type = "u8", source = "Draw mode of the ar
 g_AreaHeightOffsetEnabled = { addr = 0x80149340, source = "Enables the height offset of the area." }
 g_LogoExePath = { addr = 0x80149800, size = 0x14, source = "SYS_StartLogo passes this LOGO executable path to SYS_LoadExe" }
 D_80149814 = { addr = 0x80149814, size = 0x184, source = "The 51 name cells of the executable's export strings, starting at 0x80149814; g_ExceptionNames holds their pointers." }
+g_ExceptionHexFormat = { addr = 0x80149990, alias = true, source = "The %08X format SYS_ShowException passes to TEXT_Format for the saved registers and the faulting PC." }
 jtbl_80149998 = { addr = 0x80149998, type = "Callback", source = "The switch table of Area_BuildClut: the jump targets of its jr dispatch." }
 D_80149998 = { addr = 0x80149998, size = 0x178, alias = true, source = "View of a record member; the row names the address the link reads, not a second object." }
 g_UiModeLocals = { addr = 0x801499AC, size = 0x54, alias = true, source = "Local UI mode handlers." }
@@ -1279,11 +1279,11 @@ EnablePAD = { addr = 0x8017F3BC, type = "func", size = 0x14, source = "LIBAPI pa
 DesablePAD = { addr = 0x8017F3D0, type = "func", source = "LIBAPI patch.o DesablePAD, words equal retail" }
 _patch_pad = { addr = 0x8017F3E4, type = "func", size = 0x90, source = "PsyQ LIBAPI library routine." }
 g_ExceptionNames = { addr = 0x8017F470, alias = true, source = "The 51 name cells of the executable's export strings: SYS_ShowException draws the first 37 as the register labels and g_ExceptionCauseNames views the cause names from the 39th." }
-g_ExceptionHexFormat = { addr = 0x80149990, alias = true, source = "The %08X format SYS_ShowException passes to TEXT_Format for the saved registers and the faulting PC." }
 g_ExceptionTitle = { addr = 0x8017F504, source = "The EXCEPTION text pointer SYS_ShowException draws as its header." }
 g_ExceptionCauseNames = { addr = 0x8017F508, source = "The INTERRRUPT text cells SYS_ShowException indexes by the exception code." }
 g_SpriteSizes = { addr = 0x8017F53C, source = "Sprite cell sizes by shape." }
 g_SpriteCellRotations = { addr = 0x8017F55C, source = "Sprite cell rotations by shape." }
+s_DefaultInputMasks = { addr = 0x8017F56C, size = 0x14, source = "The ten default button masks SYS_StartFrontend copies into the first nine g_InputMasks slots on entry to the frontend." }
 g_NumberRowShades = { addr = 0x8017F580, source = "Shades of the number font rows." }
 g_TextRowShades = { addr = 0x8017F5A0, source = "Shades of the window font rows." }
 g_TextRowOffsets = { addr = 0x8017F620, source = "UI_TextDrawGlyph takes the per-row pixel offset of the window text" }
