@@ -195,28 +195,28 @@ NON_MATCHING void func_801EF750(void) {
     s32      i;
     u16      phase;
 
-    i = 0;
+    i                            = 0;
     g_ScratchPad.cells.halves[0] = TASK(PartyMember)->timer;
     g_ScratchPad.cells.halves[7] = (TASK(PartyMember)->timer << 1) + (rand() & 7);
-    cells = &g_ScratchPad.cells.halves[2];
+    cells                        = &g_ScratchPad.cells.halves[2];
 draw:
     {
         prim = GFX_CURSOR(POLY_G4);
         SetPolyG4(prim);
         SetSemiTrans(prim, 1);
 
-        phase     = (D_801EFD6C[i] + TASK(PartyMember)->unk_09) & 0x3F;
+        phase    = (D_801EFD6C[i] + TASK(PartyMember)->unk_09) & 0x3F;
         cells[0] = phase << 6;
         setXY0(prim, cells[1] + FIXED_MUL(rsin(phase << 6), cells[5]), cells[2] + FIXED_MUL(rcos(cells[0]), cells[5]));
         prim->x2 = cells[1] + FIXED_MUL(rsin(cells[0]), cells[-2]);
         prim->y2 = cells[2] + FIXED_MUL(rcos(cells[0]), cells[-2]);
 
-        phase        = (D_801EFD6C[i + 1] + TASK(PartyMember)->unk_09) & 0x3F;
-        cells[0]    = phase << 6;
-        prim->x1     = cells[1] + FIXED_MUL(rsin(phase << 6), cells[5]);
-        prim->y1     = cells[2] + FIXED_MUL(rcos(cells[0]), cells[5]);
-        prim->x3     = cells[1] + FIXED_MUL(rsin(cells[0]), cells[-2]);
-        prim->y3     = cells[2] + FIXED_MUL(rcos(cells[0]), cells[-2]);
+        phase    = (D_801EFD6C[i + 1] + TASK(PartyMember)->unk_09) & 0x3F;
+        cells[0] = phase << 6;
+        prim->x1 = cells[1] + FIXED_MUL(rsin(phase << 6), cells[5]);
+        prim->y1 = cells[2] + FIXED_MUL(rcos(cells[0]), cells[5]);
+        prim->x3 = cells[1] + FIXED_MUL(rsin(cells[0]), cells[-2]);
+        prim->y3 = cells[2] + FIXED_MUL(rcos(cells[0]), cells[-2]);
 
         setRGB0(prim, 1, 1, 1);
         setRGB1(prim, 1, 1, 1);
