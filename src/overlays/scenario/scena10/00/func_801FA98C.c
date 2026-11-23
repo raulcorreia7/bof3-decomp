@@ -393,9 +393,7 @@ NON_MATCHING void func_801FA98C(void) {
             g_AreaCameraAngle.vz     = 0x74;
             g_ScenarioState.timer_06 = 4;
             g_ScenarioState.step     = 0x22;
-||||||| ccea36b29
-break;
-}
+    }
 }
 #else
 INCLUDE_ASM(func_801FA98C);
