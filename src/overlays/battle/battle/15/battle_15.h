@@ -985,7 +985,7 @@ void        func_800B258C(void);
 /* func_800B25C0 */
 void        Menu_DrawInventoryWindow(MenuPanelTask* task);
 void        func_800B2C90(MenuPanelTask* task);
-void        func_800B3324(u8, u16, u16, s32, s32, MenuPanelTask*);
+void        func_800B3324(u8 index, s32 x, s32 y, s32 patch, u8 hide_changes, MenuPanelTask* task);
 /* func_800B3AE8 */
 void        Menu_DrawEquipChoiceWindow(MenuPanelTask* task);
 void        func_800B4220(s16 x, s16 y, u8 selected);
