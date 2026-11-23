@@ -37,16 +37,17 @@ MATCH void Battle_SelectEquipItem(void) {
         if (g_BattleTargetCursorCol != 0) {
             SND_SEPlay(EMI_SE_ID(SND_BANK_COMMON, 3));
             g_Game.members[BATTLE_ACTIVE_MEMBER->slot].u.turn.damage_flags.value |= BATTLER_DAMAGE_UNK_14;
-            *(s16*)&g_Game.members[BATTLE_ACTIVE_MEMBER->slot].u.turn.command.id = g_BattleTargetCursorCol;
-            choice                                                               = g_BattleTargetCursorCol;
-            g_BattleActorTurn->command.id                                        = choice;
-            g_BattleMessages[((D_801EC328 - 1) & BATTLE_RING_SLOT_MASK)].text    = UI_MessageGetText(Item_GetDescription(choice >> 8, choice & BYTE_MASK) & HALF_MASK);
-            g_UiPanelTasks[18].state                                             = 1;
-            g_UiPanelTasks[17].state                                             = 2;
-            g_UiPanelTasks[19].active                                            = 0;
-            g_UiPanelTasks[21].active                                            = 0;
-            g_UiPanelTasks[4].active                                             = 1;
-            g_Battle.ui_step                                                     = 7;
+            g_Game.members[BATTLE_ACTIVE_MEMBER->slot].u.turn.command.id      = g_BattleTargetCursorCol;
+            /* g_BattleTargetCursorCol is this panel cell. */
+            choice                                                            = g_UiPanelTasks[18].u.battle.cursor;
+            g_BattleActorTurn->command.id                                     = choice;
+            g_BattleMessages[((D_801EC328 - 1) & BATTLE_RING_SLOT_MASK)].text = UI_MessageGetText(Item_GetDescription(choice >> 8, choice & BYTE_MASK) & HALF_MASK);
+            g_UiPanelTasks[18].state                                          = 1;
+            g_UiPanelTasks[17].state                                          = 2;
+            g_UiPanelTasks[19].active                                         = 0;
+            g_UiPanelTasks[21].active                                         = 0;
+            g_UiPanelTasks[4].active                                          = 1;
+            g_Battle.ui_step                                                  = 7;
         } else {
             SND_SEPlay(EMI_SE_ID(SND_BANK_COMMON, 7));
         }
