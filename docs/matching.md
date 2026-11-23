@@ -31,7 +31,11 @@ Fix causes before functions.
   (header type, struct layout, prototype, data declaration, compiler flag) comes before per-function
   tries.
 - Reuse matched twins, similar bodies and idioms already in the tree. Find twins with `bin/coddog`
-  ([toolchain](toolchain.md#coddog)); a matched twin is shared, not lifted again.
+  ([toolchain](toolchain.md#coddog)); a matched twin is shared, not lifted again. A cluster is worth
+  a look only when one of its members is still in the `INCLUDE_ASM` list: `bin/coddog cluster <target>`
+  names the lead, `bin/coddog match <target> <lead> -t 0.99` lists the members, and one grep over
+  the unit's `.c` files says which are open. Every cluster in the 64 area images checked this way is
+  fully matched, so the twin route is spent for that group.
 - Take functions whose callees are exact first, then the smallest. Take high scores first. Run the
   permuter on functions near a match while you work others. Park a stuck function with its cause
   ([residuals](#residuals)).
