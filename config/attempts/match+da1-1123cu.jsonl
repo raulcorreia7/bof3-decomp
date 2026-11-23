@@ -1,0 +1,1 @@
+{"function": "emi/bmagic/magic067/03@0x801EEC94", "tried": "read the first hunk: retail computes a3*56 (sll/subu/sll) before the lbu from 0x80146374, the draft issues the load first", "first_diff": "5 rows: instruction 114 sll v0,a3,0x4 against lui a0,0x8014; the rest of the function matches", "score": "5 rows"}
