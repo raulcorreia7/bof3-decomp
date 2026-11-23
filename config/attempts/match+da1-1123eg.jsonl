@@ -1,0 +1,6 @@
+{"function": "emi/scenario/scena01/00@0x801F7678", "tried": "lane escalation: all source forms measured at this rung, hand to the stronger rung", "first_diff": "1 rows remain, cause cse operand reuse", "score": "1 rows"}
+{"function": "emi/battle/batl_end/00@0x801EFE5C", "tried": "lane escalation: all source forms measured at this rung, hand to the stronger rung", "first_diff": "1 rows remain, cause first-increment fold", "score": "1 rows"}
+{"function": "emi/world02/area098/13@0x801F5050", "tried": "lane escalation: all source forms measured at this rung, hand to the stronger rung", "first_diff": "2 rows remain, cause counter delay slot", "score": "2 rows"}
+{"function": "emi/scenario/scena07/00@0x801F7BE0", "tried": "lane escalation: all source forms measured at this rung, hand to the stronger rung", "first_diff": "3 rows remain, cause argument-load order", "score": "3 rows"}
+{"function": "emi/world01/area042/13@0x801F2C84", "tried": "lane escalation: all source forms measured at this rung, hand to the stronger rung", "first_diff": "3 rows remain, cause load above addiu sp", "score": "3 rows"}
+{"function": "emi/battle/batl_end/00@0x801EF140", "tried": "lane escalation: all source forms measured at this rung, hand to the stronger rung", "first_diff": "4 rows remain, cause a0/v1 swap", "score": "4 rows"}

@@ -1,0 +1,1 @@
+{"function": "emi/scenario/scena01/00@0x801F7678", "tried": "commuted the second multiply to shade_arg * (shade & BYTE_MASK)", "first_diff": "1 row baseline; the commute costs 65 rows (it reorders the earlier block), reverted", "score": "1 row"}

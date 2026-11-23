@@ -1,26 +1,24 @@
 #include "area111_13.h"
 
-#ifdef NON_MATCHING
-NON_MATCHING void func_801F3460(void) {
+/* Walks the cell grid from the actor along its facing while the cells are empty and sets the script step count from the cells crossed. */
+MATCH void func_801F3460(void) {
     s16 x;
     s16 y;
     s8  offset;
     s32 facing;
     u8  value;
 
-    x = (TASK(Actor)->pos.x.part.integer - 11) >> 1;
-    y = (TASK(Actor)->pos.y.part.integer - 177) >> 1;
-    func_801F4604(x, y, 0x10);
-    facing = TASK(Actor)->direction & 7;
     offset = 0;
+    x      = (TASK(Actor)->pos.x.part.integer - 11) >> 1;
+    y      = (TASK(Actor)->pos.y.part.integer - 177) >> 1;
+    func_801F4604(x, y, 0x10);
+    facing = (TASK(Actor)->direction & 7) * 2;
     for (;;) {
-        x += D_80181B00[facing * 2];
-        if ((u16)x >= 7) {
-            break;
+        if ((u16)(x += D_80181B00[facing]) >= 7) {
+            goto done;
         }
-        y += D_80181B01[facing * 2];
-        if ((u16)y >= 7) {
-            break;
+        if ((u16)(y += D_80181B01[facing]) >= 7) {
+            goto done;
         }
         if (x & 1) {
             value = D_801F5C18[y][x / 2] & 0xF;
@@ -28,10 +26,11 @@ NON_MATCHING void func_801F3460(void) {
             value = D_801F5C18[y][x / 2] >> 4;
         }
         if (value != 0) {
-            break;
+            goto done;
         }
         offset += 4;
     }
+done:
     if (offset != 0) {
         g_ScriptState->steps = offset + 1;
     }
@@ -39,6 +38,3 @@ NON_MATCHING void func_801F3460(void) {
     func_801F4604(x, y, 0);
     SND_SEPlay(EMI_SE_ID(SND_BANK_AREA, 3));
 }
-#else
-INCLUDE_ASM(func_801F3460);
-#endif

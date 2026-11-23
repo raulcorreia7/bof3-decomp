@@ -366,36 +366,40 @@ MATCH void func_801F02B4(void) {
     }
 }
 
-#ifdef NON_MATCHING
-NON_MATCHING void func_801F02FC(void) {
+/* Draws a sphere of 8 bands of 16 additive flat quads around the actor, radius four times byte 0x09;
+ * from step 5 the quads fade with the timer. */
+MATCH void func_801F02FC(void) {
     POLY_F4* prim;
     long     depth;
     long     flag;
-    s32      upper_angle;
-    s32      lower_angle;
+    s32      ring;
     s32      i;
     s32      angle;
     s32      tpage;
     s32      x;
     s32      y;
 
-    upper_angle                 = 0x500;
-    lower_angle                 = 0x400;
     g_ScratchPad.cells.words[0] = TASK(PartyMember)->unk_09 << 2;
-    do {
-        setVector(&g_ScratchPadVectors[1], FIXED_MUL(rsin(0), FIXED_MUL(rcos(lower_angle), g_ScratchPad.cells.words[0])), FIXED_MUL(rcos(0), FIXED_MUL(rcos(lower_angle), g_ScratchPad.cells.words[0])),
-                  FIXED_MUL(rsin(lower_angle), g_ScratchPad.cells.words[0]));
-        setVector(&g_ScratchPadVectors[3], FIXED_MUL(rsin(0), FIXED_MUL(rcos(upper_angle), g_ScratchPad.cells.words[0])), FIXED_MUL(rcos(0), FIXED_MUL(rcos(upper_angle), g_ScratchPad.cells.words[0])),
-                  FIXED_MUL(rsin(upper_angle), g_ScratchPad.cells.words[0]));
-        i = 1;
+    for (ring = 0; ring < 8; ring++) {
+        g_ScratchPadVectors[1].vx = FIXED_MUL(rsin(0), FIXED_MUL(rcos((ring + 4) * 0x100), g_ScratchPad.cells.words[0]));
+        g_ScratchPadVectors[1].vy = FIXED_MUL(rcos(0), FIXED_MUL(rcos((ring + 4) * 0x100), g_ScratchPad.cells.words[0]));
+        g_ScratchPadVectors[1].vz = FIXED_MUL(rsin((ring + 4) * 0x100), g_ScratchPad.cells.words[0]);
+        g_ScratchPadVectors[3].vx = FIXED_MUL(rsin(0), FIXED_MUL(rcos((ring + 5) * 0x100), g_ScratchPad.cells.words[0]));
+        g_ScratchPadVectors[3].vy = FIXED_MUL(rcos(0), FIXED_MUL(rcos((ring + 5) * 0x100), g_ScratchPad.cells.words[0]));
+        g_ScratchPadVectors[3].vz = FIXED_MUL(rsin((ring + 5) * 0x100), g_ScratchPad.cells.words[0]);
+        i                         = 1;
         do {
-            angle = i << 8;
-            setVector(&g_ScratchPadVectors[0], g_ScratchPadVectors[1].vx, g_ScratchPadVectors[1].vy, g_ScratchPadVectors[1].vz);
-            setVector(&g_ScratchPadVectors[1], FIXED_MUL(rsin(angle), FIXED_MUL(rcos(lower_angle), g_ScratchPad.cells.words[0])),
-                      FIXED_MUL(rcos(angle), FIXED_MUL(rcos(lower_angle), g_ScratchPad.cells.words[0])), FIXED_MUL(rsin(lower_angle), g_ScratchPad.cells.words[0]));
-            setVector(&g_ScratchPadVectors[2], g_ScratchPadVectors[3].vx, g_ScratchPadVectors[3].vy, g_ScratchPadVectors[3].vz);
-            setVector(&g_ScratchPadVectors[3], FIXED_MUL(rsin(angle), FIXED_MUL(rcos(upper_angle), g_ScratchPad.cells.words[0])),
-                      FIXED_MUL(rcos(angle), FIXED_MUL(rcos(upper_angle), g_ScratchPad.cells.words[0])), FIXED_MUL(rsin(upper_angle), g_ScratchPad.cells.words[0]));
+            angle                     = i << 8;
+            g_ScratchPadVectors[0].vx = g_ScratchPadVectors[1].vx;
+            g_ScratchPadVectors[0].vy = g_ScratchPadVectors[1].vy;
+            g_ScratchPadVectors[0].vz = g_ScratchPadVectors[1].vz;
+            setVector(&g_ScratchPadVectors[1], FIXED_MUL(rsin(angle), FIXED_MUL(rcos((ring + 4) * 0x100), g_ScratchPad.cells.words[0])),
+                      FIXED_MUL(rcos(angle), FIXED_MUL(rcos((ring + 4) * 0x100), g_ScratchPad.cells.words[0])), FIXED_MUL(rsin((ring + 4) * 0x100), g_ScratchPad.cells.words[0]));
+            g_ScratchPadVectors[2].vx = g_ScratchPadVectors[3].vx;
+            g_ScratchPadVectors[2].vy = g_ScratchPadVectors[3].vy;
+            g_ScratchPadVectors[2].vz = g_ScratchPadVectors[3].vz;
+            setVector(&g_ScratchPadVectors[3], FIXED_MUL(rsin(angle), FIXED_MUL(rcos((ring + 5) * 0x100), g_ScratchPad.cells.words[0])),
+                      FIXED_MUL(rcos(angle), FIXED_MUL(rcos((ring + 5) * 0x100), g_ScratchPad.cells.words[0])), FIXED_MUL(rsin((ring + 5) * 0x100), g_ScratchPad.cells.words[0]));
             x     = (g_ScratchPadVectors[3].vx << 9) + TASK(PartyMember)->pos.x.fixed;
             y     = (g_ScratchPadVectors[3].vy << 9) + TASK(PartyMember)->pos.y.fixed;
             tpage = getTPage(TPAGE_DEPTH_8BIT, TPAGE_ABR_ADD, 320, 256);
@@ -414,12 +418,7 @@ NON_MATCHING void func_801F02FC(void) {
             Area_CellAddPrim(x, y, 2, sizeof(POLY_F4));
             i++;
         } while (i < 17);
-        upper_angle += 0x100;
-        lower_angle += 0x100;
-    } while (upper_angle < 0xD00);
+    }
 }
-#else
-INCLUDE_ASM(func_801F02FC);
-#endif
 
 #include "overlays/bmagic/shared/Effect_SetActorMatrix.h"

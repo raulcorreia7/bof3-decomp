@@ -22,10 +22,6 @@ extern s8            D_801EAEA4[];
 /* The panel x and y offsets of each battler facing, two bytes a facing. */
 extern s8            D_801EB0B0[];
 extern s8            D_801EB0B1[];
-/* The effect cells of each member row, indexed with the member stride. */
-extern u8            D_801EBF47[];
-extern u8            D_801EC039[];
-extern u32           D_801EC044[];
 /* The staged encounter origin and ground height. */
 extern s32           D_801EC364;
 extern s32           D_801EC368;

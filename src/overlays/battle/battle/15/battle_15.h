@@ -1026,6 +1026,8 @@ void Actor_SelectScript_keep_a1(u32 selector, u32 payload);
 bool        Battle_IsAbilityLocked(void);
 /* func_80097EC0 */
 void        Battle_InitAbilityPanel(void);
+/* func_8009A744 */
+void        Battle_ApplyEquipment(void);
 /* func_8009AAE8 */
 extern void Battle_PreviewEquipment(void);
 /* func_8009B03C */

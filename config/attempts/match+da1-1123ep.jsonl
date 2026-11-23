@@ -1,0 +1,1 @@
+{"function": "emi/world01/area075/13@0x801F4874", "tried": "spelled the buffer[2] stores as g_UiTextFormatBuffer[2] elements (the cause-1 member/element form)", "first_diff": "114 baseline; the element spelling costs 116 rows, reverted; the frame stays 0x38 against 0x40", "score": "114 rows"}

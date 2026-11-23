@@ -399,10 +399,10 @@ MATCH POLY_FT4* func_801F3480(const Pos3s* point, s32 angle, u32 texture) {
     quad[1].vz = -382;
     quad[0].vz = -382;
 
-    FAKE_VOLATILE(s16, quad[3].vy) = 0;
-    FAKE_VOLATILE(s16, quad[1].vy) = 0;
-    FAKE_VOLATILE(s16, quad[3].vz) = 0;
-    FAKE_VOLATILE(s16, quad[2].vz) = 0;
+    quad[3].vy = 0;
+    quad[1].vy = 0;
+    quad[3].vz = 0;
+    quad[2].vz = 0;
     RotTransPers4(quad, quad + 1, quad + 2, quad + 3, (long*)&primitive->x0, (long*)&primitive->x1, (long*)&primitive->x2, (long*)&primitive->x3, &depth, &flag);
 
     PopMatrix();

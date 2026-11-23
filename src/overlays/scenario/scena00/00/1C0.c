@@ -1148,15 +1148,15 @@ MATCH void func_801F9868(void) {
                         return;
                     }
                 } else {
-                    u8* pal1;
-                    u8* pal2;
+                    u16* pal1;
+                    u16* pal2;
 
                     i    = 0;
-                    pal1 = MEM_PTR(u8, AREA_PALETTE_ARENA_33E00);
-                    pal2 = MEM_PTR(u8, AREA_PALETTE_WORK + 0x600u);
+                    pal1 = MEM_PTR(u16, AREA_PALETTE_ARENA_33E00);
+                    pal2 = MEM_PTR(u16, AREA_PALETTE_WORK + 0x600u);
                     for (; i < 16; i++) {
-                        *((u16*)pal1 + i + 0x40) = *((u16*)pal1 + i + 0x50);
-                        *((u16*)pal2 + i + 0x40) = *((u16*)pal2 + i + 0x50);
+                        pal1[i + 0x40] = pal1[i + 0x50];
+                        pal2[i + 0x40] = pal2[i + 0x50];
                     }
                     g_GfxPalettePending = 1;
                     if (SYS_TestFlag(g_SceneFlags, 5) == 0) {

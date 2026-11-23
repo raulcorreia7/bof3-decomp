@@ -589,9 +589,9 @@ NON_MATCHING void func_801F8B10(s32 scale, s32 shade) {
     col    = shade;
     PushMatrix();
     setVector(&axis, 0, 0, 0);
-    rot.vz = -Area_HeightSample(g_AreaScrollTargetX, g_AreaScrollTargetY) / 2;
     rot.vx = (g_AreaScrollTargetX >> 9) - 0x4000;
     rot.vy = (g_AreaScrollTargetY >> 9) - 0x4000;
+    rot.vz = -Area_HeightSample(g_AreaScrollTargetX, g_AreaScrollTargetY) / 2;
     RotTransMatrix(&rot, mtx, &flag);
     RotMatrix(&axis, &mtx);
     MulMatrix2(&g_CameraMatrix, &mtx);

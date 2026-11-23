@@ -1,0 +1,2 @@
+{"function": "emi/world03/area120/13@0x801F3010", "tried": "screened for the cause-1 scalar-vs-aggregate recipe recorded in coverage", "first_diff": "117 live rows (coverage records 32): first hunk addiu a0,sp,16 against lui s4,0x800e; not a spelling-only delta", "score": "117 rows"}
+{"function": "emi/scenario/scena10/00@0x801F7FA0", "tried": "screened for the cause-1 spelling recipe", "first_diff": "31 live rows (coverage records 22): first hunk a jal target diverges (0x801f8550 against 0x801f856c), an early size difference", "score": "31 rows"}

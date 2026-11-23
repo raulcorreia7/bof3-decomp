@@ -1,15 +1,17 @@
 #include "area044_13.h"
 
-#ifdef NON_MATCHING
-NON_MATCHING void func_801F318C(u8 facing, u8 actor_index) {
+/* Starts a party actor walking along a facing; a member already bound to it catches up first. */
+MATCH void func_801F318C(u8 facing, u8 actor_index) {
     Actor* actor;
     u8     i;
     s8     slot;
+    s32    step_y;
 
-    g_PartyActors[actor_index].vx    = g_FacingSteps[facing].x >> 2;
+    g_PartyActors[actor_index].vx    = ((Offset2*)g_FacingSteps)[facing].x >> 2;
+    step_y                           = g_FacingStepY[facing * 2];
     g_PartyActors[actor_index].vz    = 0;
     g_PartyActors[actor_index].timer = 0x20;
-    g_PartyActors[actor_index].vy    = g_FacingStepY[facing * 2] >> 2;
+    g_PartyActors[actor_index].vy    = step_y >> 2;
     for (i = 1; i < g_Game.party_size; i++) {
         TASK_SET(&g_Game.members[i]);
         slot = func_8014DE78() - 0x1E;
@@ -28,6 +30,3 @@ NON_MATCHING void func_801F318C(u8 facing, u8 actor_index) {
         TASK(Actor)->header.step = 1;
     }
 }
-#else
-INCLUDE_ASM(func_801F318C);
-#endif
