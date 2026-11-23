@@ -159,12 +159,12 @@ MATCH void func_801EF0F8(s32 offset) {
             if (TASK(PartyMember)->unk_64 > 0) {
                 shadow->x0 = quad->x0 = TASK(PartyMember)->screen_x.value + rim->x;
                 shadow->y0 = quad->y0 = TASK(PartyMember)->screen_y.value + rim->y;
-                rim           = &D_801EF9F8[(segment + 1) & 0xF];
+                rim                   = &D_801EF9F8[(segment + 1) & 0xF];
                 shadow->x1 = quad->x1 = TASK(PartyMember)->screen_x.value + rim->x;
                 shadow->y1 = quad->y1 = TASK(PartyMember)->screen_y.value + rim->y;
                 shadow->x2 = quad->x2 = TASK(PartyMember)->screen_x.value + spiral->x;
                 shadow->y2 = quad->y2 = TASK(PartyMember)->screen_y.value + spiral->y;
-                spiral        = &D_801EFA78[(segment + 1) & 0xF];
+                spiral                = &D_801EFA78[(segment + 1) & 0xF];
                 shadow->x3 = quad->x3 = TASK(PartyMember)->screen_x.value + spiral->x;
                 shadow->y3 = quad->y3 = TASK(PartyMember)->screen_y.value + spiral->y;
                 setUV4(quad, TASK(PartyMember)->unk_09 + D_801EFAF8[ring + 1][segment & 0xF].x, TASK(PartyMember)->unk_09 + D_801EFAF8[ring + 1][segment & 0xF].y,
@@ -174,22 +174,22 @@ MATCH void func_801EF0F8(s32 offset) {
             } else {
                 shadow->x1 = quad->x1 = TASK(PartyMember)->screen_x.value + rim->x;
                 shadow->y1 = quad->y1 = TASK(PartyMember)->screen_y.value + rim->y;
-                rim           = &D_801EF9F8[(segment + 1) & 0xF];
+                rim                   = &D_801EF9F8[(segment + 1) & 0xF];
                 shadow->x0 = quad->x0 = TASK(PartyMember)->screen_x.value + rim->x;
                 shadow->y0 = quad->y0 = TASK(PartyMember)->screen_y.value + rim->y;
                 shadow->x3 = quad->x3 = TASK(PartyMember)->screen_x.value + spiral->x;
                 shadow->y3 = quad->y3 = TASK(PartyMember)->screen_y.value + spiral->y;
-                spiral        = &D_801EFA78[(segment + 1) & 0xF];
+                spiral                = &D_801EFA78[(segment + 1) & 0xF];
                 shadow->x2 = quad->x2 = TASK(PartyMember)->screen_x.value + spiral->x;
                 shadow->y2 = quad->y2 = TASK(PartyMember)->screen_y.value + spiral->y;
-                quad->u1 = TASK(PartyMember)->unk_09 + D_801EFAF8[ring + 1][segment & 0xF].x;
-                quad->v1 = TASK(PartyMember)->unk_09 + D_801EFAF8[ring + 1][segment & 0xF].y;
-                quad->u0 = TASK(PartyMember)->unk_09 + D_801EFAF8[ring + 1][(segment + 1) & 0xF].x;
-                quad->v0 = TASK(PartyMember)->unk_09 + D_801EFAF8[ring + 1][(segment + 1) & 0xF].y;
-                quad->u3 = TASK(PartyMember)->unk_09 + D_801EFAF8[ring][segment & 0xF].x;
-                quad->v3 = TASK(PartyMember)->unk_09 + D_801EFAF8[ring][segment & 0xF].y;
-                quad->u2 = TASK(PartyMember)->unk_09 + D_801EFAF8[ring][(segment + 1) & 0xF].x;
-                quad->v2 = TASK(PartyMember)->unk_09 + D_801EFAF8[ring][(segment + 1) & 0xF].y;
+                quad->u1              = TASK(PartyMember)->unk_09 + D_801EFAF8[ring + 1][segment & 0xF].x;
+                quad->v1              = TASK(PartyMember)->unk_09 + D_801EFAF8[ring + 1][segment & 0xF].y;
+                quad->u0              = TASK(PartyMember)->unk_09 + D_801EFAF8[ring + 1][(segment + 1) & 0xF].x;
+                quad->v0              = TASK(PartyMember)->unk_09 + D_801EFAF8[ring + 1][(segment + 1) & 0xF].y;
+                quad->u3              = TASK(PartyMember)->unk_09 + D_801EFAF8[ring][segment & 0xF].x;
+                quad->v3              = TASK(PartyMember)->unk_09 + D_801EFAF8[ring][segment & 0xF].y;
+                quad->u2              = TASK(PartyMember)->unk_09 + D_801EFAF8[ring][(segment + 1) & 0xF].x;
+                quad->v2              = TASK(PartyMember)->unk_09 + D_801EFAF8[ring][(segment + 1) & 0xF].y;
             }
             GFX_AddPrim(BMAGIC_LAYER_OVER_BATTLERS, sizeof(POLY_F4));
             GFX_AddPrim(BMAGIC_LAYER_OVER_BATTLERS, sizeof(POLY_GT4));

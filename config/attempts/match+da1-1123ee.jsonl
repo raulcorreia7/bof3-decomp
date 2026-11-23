@@ -1,0 +1,1 @@
+{"function": "emi/world02/area098/13@0x801F5050", "tried": "FAKE_ORDER_LOCK on the loop-tail increment after the last call, with a while loop", "first_diff": "2 rows baseline; this placement costs 22 rows (prologue shifts), reverted", "score": "2 rows"}

@@ -188,8 +188,8 @@ NON_MATCHING void func_801EF458(void) {
     for (ring = 1; ring < 25; ring++) {
         cells[3] = cells[2];
         cells[2] = -(ring * 40);
-        shade2                       = shade;
-        shade                        = (3 * rsin(((g_FrameCount + ring) & 0x3F) << 6) * ring) >> 12;
+        shade2   = shade;
+        shade    = (3 * rsin(((g_FrameCount + ring) & 0x3F) << 6) * ring) >> 12;
         cells[5] = cells[4];
         cells[1] = cells[0];
         cells[6] = (TASK(PartyMember)->timer + ring) & 0xF;
