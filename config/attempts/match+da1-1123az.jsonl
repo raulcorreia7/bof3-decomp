@@ -1,0 +1,1 @@
+{"function": "emi/world00/area030/04@0x801DE5EC", "tried": "removed the coord running local from the pos_y expression to cut the live set across the rand calls", "first_diff": "6 baseline; the coord-free form is 26 rows and keeps the 0x20 frame, reverted", "score": "6 rows"}
