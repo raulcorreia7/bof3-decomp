@@ -1,0 +1,2 @@
+{"function": "emi/world01/area075/13@0x801F4874", "tried": "identified the missing saved register: retail keeps s7 (0x34) across the two UI_WindowDrawPanel/UI_TextDraw call pairs, the draft keeps none", "first_diff": "0x801F4884 sw s7,52(sp) missing; frame 0x40 against 0x38, with retail also hoisting all saves above the flag test", "score": "114 rows"}
+{"function": "emi/etc/commu05/07@0x801D14C8", "tried": "measured the kept draft again", "first_diff": "96 rows; first hunk the save set/order", "score": "96 rows"}
