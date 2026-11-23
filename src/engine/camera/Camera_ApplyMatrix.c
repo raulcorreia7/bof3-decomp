@@ -5,7 +5,7 @@
  */
 /* func_8015B4B0 */
 MATCH void Camera_ApplyMatrix(void* matrix) {
-    MulMatrix2(&g_CameraMatrix, matrix);
+    MulMatrix2(&g_AreaCamera.matrix, matrix);
     SetRotMatrix(matrix);
     SetTransMatrix(matrix);
 }

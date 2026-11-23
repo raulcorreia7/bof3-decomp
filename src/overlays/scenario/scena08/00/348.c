@@ -1118,7 +1118,7 @@ NON_MATCHING void func_801FA3E4(void) {
             Scene_RunScenario(2);
             Scene_SetupParty(3);
             SYS_SetFlag(g_SceneFlags, 2);
-            g_Game.flags &= 0xFFDF;
+            g_GameFlags &= 0xFFDF;
         }
     }
     D_80146872 = 2;

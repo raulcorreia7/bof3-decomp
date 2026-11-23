@@ -28,7 +28,7 @@ MATCH void Game_UpdateAreaLoad(void) {
         UI_ModeSet(ui_mode);
         Area_WaitWindowEffect(1u);
         if (LOBU(g_GameRequestFlags) & 0x1u) {
-            func_801A0048(g_AreaTargetCellX, g_AreaTargetCellY);
+            func_801A0048(g_AreaCamera.scroll_x.part.integer, g_AreaCamera.scroll_y.part.integer);
         }
     } else if (ui_mode == 0xFEu) {
         g_AreaDrawFlags = 0u;

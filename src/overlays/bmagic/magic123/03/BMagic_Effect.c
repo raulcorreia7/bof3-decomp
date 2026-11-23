@@ -191,42 +191,42 @@ MATCH void func_801EF584(void) {
 /* Draws the six-quad ring arc around the effect position, blue at the inner rim and fading outward. */
 NON_MATCHING void func_801EF750(void) {
     POLY_G4* prim;
-    s16*     params;
+    s16*     cells;
     s32      i;
-    s32      y3_cosine;
-    s16      inner_radius;
-    u32      phase;
+    u16      phase;
 
-    params    = g_ScratchPad.cells.halves;
-    params[0] = TASK(PartyMember)->timer;
-    params[7] = (TASK(PartyMember)->timer << 1) + (rand() & 7);
-
-    for (i = 0; i < 6; i++) {
+    i                            = 0;
+    g_ScratchPad.cells.halves[0] = TASK(PartyMember)->timer;
+    g_ScratchPad.cells.halves[7] = (TASK(PartyMember)->timer << 1) + (rand() & 7);
+    cells                        = &g_ScratchPad.cells.halves[2];
+draw:
+    {
         prim = GFX_CURSOR(POLY_G4);
         SetPolyG4(prim);
         SetSemiTrans(prim, 1);
 
-        phase     = (D_801EFD6C[i] + TASK(PartyMember)->unk_09) & 0x3F;
-        params[2] = phase << 6;
-        setXY0(prim, params[3] + FIXED_MUL(rsin(phase << 6), params[7]), params[4] + FIXED_MUL(rcos(params[2]), params[7]));
-        prim->x2 = params[3] + FIXED_MUL(rsin(params[2]), params[0]);
-        prim->y2 = params[4] + FIXED_MUL(rcos(params[2]), params[0]);
+        phase    = (D_801EFD6C[i] + TASK(PartyMember)->unk_09) & 0x3F;
+        cells[0] = phase << 6;
+        setXY0(prim, cells[1] + FIXED_MUL(rsin(phase << 6), cells[5]), cells[2] + FIXED_MUL(rcos(cells[0]), cells[5]));
+        prim->x2 = cells[1] + FIXED_MUL(rsin(cells[0]), cells[-2]);
+        prim->y2 = cells[2] + FIXED_MUL(rcos(cells[0]), cells[-2]);
 
-        phase        = (D_801EFD6C[i + 1] + TASK(PartyMember)->unk_09) & 0x3F;
-        params[2]    = phase << 6;
-        prim->x1     = params[3] + FIXED_MUL(rsin(phase << 6), params[7]);
-        prim->y1     = params[4] + FIXED_MUL(rcos(params[2]), params[7]);
-        prim->x3     = params[3] + FIXED_MUL(rsin(params[2]), params[0]);
-        y3_cosine    = rcos(params[2]);
-        inner_radius = params[0];
+        phase    = (D_801EFD6C[i + 1] + TASK(PartyMember)->unk_09) & 0x3F;
+        cells[0] = phase << 6;
+        prim->x1 = cells[1] + FIXED_MUL(rsin(phase << 6), cells[5]);
+        prim->y1 = cells[2] + FIXED_MUL(rcos(cells[0]), cells[5]);
+        prim->x3 = cells[1] + FIXED_MUL(rsin(cells[0]), cells[-2]);
+        prim->y3 = cells[2] + FIXED_MUL(rcos(cells[0]), cells[-2]);
 
         setRGB0(prim, 1, 1, 1);
         setRGB1(prim, 1, 1, 1);
         setRGB2(prim, 0x20, 0x20, 0xC0);
         setRGB3(prim, 0x20, 0x20, 0xC0);
-        prim->y3 = params[4] + FIXED_MUL(y3_cosine, inner_radius);
-
         GFX_AddPrim(BMAGIC_LAYER_OVER_BATTLERS, sizeof(POLY_G4));
+        i++;
+    }
+    if (i < 6) {
+        goto draw;
     }
 }
 #else

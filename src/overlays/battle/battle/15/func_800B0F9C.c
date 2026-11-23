@@ -18,7 +18,7 @@ MATCH void func_800B0F9C(void) {
     u8  step;
     s16 cursor;
 
-    Battle_DrawTitledFrame((s16)g_UiPanelCurrent->pos.x, g_UiPanelCurrent->pos.y, g_UiPanelCurrent->unk_08, g_UiPanelCurrent->unk_09, 0);
+    Battle_DrawTitledFrame(g_UiPanelCurrent->pos.x, g_UiPanelCurrent->pos.y, g_UiPanelCurrent->unk_08, g_UiPanelCurrent->unk_09, 0);
     for (i = 0; (i & BYTE_MASK) < 6U; i++) {
         D_800B70AC[i & BYTE_MASK] = g_BattleTargetRows[i & BYTE_MASK].gate_03 + 1;
     }

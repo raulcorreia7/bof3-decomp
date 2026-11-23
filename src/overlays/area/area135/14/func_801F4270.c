@@ -19,9 +19,9 @@ MATCH void func_801F4270(void) {
                 g_ScriptState->steps   = 1;
                 TASK(Actor)->direction = D_801F6ABC[index].direction;
                 if (TASK(u8) == (u8*)&g_Game) {
-                    g_AreaScrollTargetX = x;
-                    g_AreaScrollTargetY = y;
-                    g_AreaCameraSpeed   = 0x20;
+                    g_AreaCamera.scroll_x.fixed = x;
+                    g_AreaCamera.scroll_y.fixed = y;
+                    g_AreaCameraSpeed           = 0x20;
                 }
             } else {
                 g_ScriptState->cursor -= 4;

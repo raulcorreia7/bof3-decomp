@@ -9,7 +9,7 @@ MATCH u8 Camera_StepY(s16 target, s8 step) {
     u16* angle;
 
     if (step != 0) {
-        angle  = &g_AreaCameraAngle.vy;
+        angle  = &g_AreaCamera.angle.vy;
         value  = *angle + step;
         *angle = value;
         if (step > 0) {
@@ -22,7 +22,7 @@ MATCH u8 Camera_StepY(s16 target, s8 step) {
             }
         }
     }
-    g_AreaCameraAngle.vy = target;
-    D_801481DA           = target + D_801481E2;
+    g_AreaCamera.angle.vy = target;
+    D_801481DA            = target + D_801481E2;
     return 0;
 }

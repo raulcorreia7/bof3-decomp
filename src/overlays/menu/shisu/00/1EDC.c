@@ -40,7 +40,7 @@ MATCH void func_801D2ADC(void) {
 }
 
 MATCH void func_801D2C0C(void) {
-    SYS_DISPATCH_BYTE(D_801D9720, D_801DA049);
+    SYS_DISPATCH_BYTE(D_801D9720, D_801DA048.header.mode);
 }
 
 MATCH void func_801D2C48(void) {
@@ -87,7 +87,7 @@ MATCH void func_801D2D88(void) {
 }
 
 MATCH void func_801D2DA8(void) {
-    SYS_DISPATCH_BYTE(D_801D9734, D_801DA0C1);
+    SYS_DISPATCH_BYTE(D_801D9734, D_801DA0C0.header.mode);
 }
 
 MATCH void func_801D2DE4(void) {

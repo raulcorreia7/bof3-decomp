@@ -53,8 +53,8 @@ MATCH void func_80161454(u32 index) {
             val0 = (val0 * (100 - pan)) / 100;
         }
     } else {
-        tmp2 = (s32)(TASK(Actor)->pos.x.fixed - g_AreaScrollTargetX) >> 0xC;
-        tmp3 = (s32)(TASK(Actor)->pos.y.fixed - g_AreaScrollTargetY) >> 0xC;
+        tmp2 = (s32)(TASK(Actor)->pos.x.fixed - g_AreaCamera.scroll_x.fixed) >> 0xC;
+        tmp3 = (s32)(TASK(Actor)->pos.y.fixed - g_AreaCamera.scroll_y.fixed) >> 0xC;
         tmp5 = ((u32)csqrt((tmp2 * tmp2) + (tmp3 * tmp3)) >> 4) * 0xA;
         if (tmp5 >= 0x37FFU) {
             val1 = 0;

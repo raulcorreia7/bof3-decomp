@@ -5,7 +5,7 @@ MATCH void func_801C5CB4(void) {
     u8  val;
 
     if (g_AreaCameraMoving == 0) {
-        Area_ScrollAdvance(Area_HeightSample(g_AreaScrollTargetX, g_AreaScrollTargetY));
+        Area_ScrollAdvance(Area_HeightSample(g_AreaCamera.scroll_x.fixed, g_AreaCamera.scroll_y.fixed));
         addr       = &D_80143FBC;
         val        = *addr;
         D_80143F5C = 0;

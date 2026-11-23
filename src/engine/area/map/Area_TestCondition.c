@@ -26,7 +26,7 @@ MATCH s8 Area_TestCondition(s32 request) {
     if ((tag & 0xFF00) == 0xFB00) {
         s32 bit = request & 0x1;
 
-        if (((g_AreaCameraAngle.vz - 0x200) & ANGLE_MASK) < 0x801) {
+        if (((g_AreaCamera.angle.vz - 0x200) & ANGLE_MASK) < 0x801) {
             return bit ^ 0x1;
         }
         return bit;

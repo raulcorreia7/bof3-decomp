@@ -40,7 +40,7 @@ loop_5:
         index += 1;
         goto loop_5;
     }
-    rot        = &g_AreaCameraAngle;
+    rot        = &g_AreaCamera.angle;
     D_801CD954 = ((D_801CD954 / count) >> 5) << 5;
     RotMatrix(rot, &matrix);
     offset_x = D_801CD778[mode_index & BYTE_MASK].vx;

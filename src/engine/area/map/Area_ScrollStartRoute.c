@@ -6,12 +6,12 @@ MATCH void Area_ScrollStartRoute(s8 route_index) {
     s16 dist;
 
     func_801BE710((GameReset*)&D_80143FBC);
-    first      = g_AreaScrollTargetX;
+    first      = g_AreaCamera.scroll_x.fixed;
     D_80143FC0 = 3;
     D_80143FBF = route_index;
     D_80143FC1 |= 0x80;
     g_PartyPos.x.fixed      = MEM(s32, 0x80149308u);
-    g_PartyPos.y.fixed      = g_AreaScrollTargetY;
+    g_PartyPos.y.fixed      = g_AreaCamera.scroll_y.fixed;
     dist                    = Area_HeightSample(first, MEM(s32, 0x8014930Cu));
     COORD_INT(g_PartyPos.z) = dist;
     Area_ScrollAdvance(dist);
