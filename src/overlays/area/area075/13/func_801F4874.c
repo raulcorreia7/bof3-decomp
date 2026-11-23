@@ -12,11 +12,11 @@ NON_MATCHING void func_801F4874(void) {
     } else {
         shown = 1;
     }
-    blink = (abs(D_801F58CA - D_801F58CC) >= 0x97) << 1;
+    blink  = (abs(D_801F58CA - D_801F58CC) >= 0x97) << 1;
+    format = (char*)D_801F2C94;
     if ((D_801F58C6 & 1) == 0) {
         UI_WindowDrawPanel(0x18, 0x20, 0x54, 0x11, 0);
         buffer = g_UiTextFormatBuffer;
-        format = (char*)D_801F2C94;
         sprintf((char*)buffer, format, (u8)(D_801F58CA / 100), (u8)(D_801F58CA % 100));
         buffer[2] = 0x3E;
         if (shown) {

@@ -33,11 +33,11 @@ NON_MATCHING void func_801E0F78(void) {
     g_UiPanelTasks[21].unk_0A = 4;
     g_UiPanelTasks[21].active = 0;
     if (!(Item_VitalHas(VITAL_ITEM_FOUNTAIN_PEN) & BYTE_MASK)) {
-        g_UiPanelTasks[6].mode   = 0x12;
-        g_UiPanelTasks[6].pos.x  = BATTLE_PARTY_STRIDE;
         g_UiPanelTasks[6].panel  = 7;
+        g_UiPanelTasks[6].mode   = 0x12;
         g_UiPanelTasks[6].state  = 2;
         g_UiPanelTasks[6].active = 1;
+        g_UiPanelTasks[6].pos.x  = BATTLE_PARTY_STRIDE;
         g_UiPanelTasks[6].pos.y  = 0x26;
     }
 }

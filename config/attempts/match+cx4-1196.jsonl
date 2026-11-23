@@ -1,0 +1,1 @@
+{"function": "emi/scenario/scena15/00@0x801F97CC", "tried": "applied the permuter's score-180 candidate (the x argument cached before the RGB block, the call reading it)", "first_diff": "0x801F99B8: the cached x load lands where retail places the a2 zero, and the a2 stays at 0x801F99DC; the row drops from 19 to 7 differing instructions", "score": "7 differing instructions"}

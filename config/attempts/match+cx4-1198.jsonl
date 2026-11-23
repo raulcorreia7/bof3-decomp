@@ -1,0 +1,1 @@
+{"function": "emi/scenario/scena10/00@0x801F73EC", "tried": "applied the permuter's score-840 candidate (width via the height local, limit inside the locked block)", "first_diff": "0x801F7414: the variable reuse reshuffles the loop and grows the row to 51 differences against the banked 25", "score": "51 differing rows"}

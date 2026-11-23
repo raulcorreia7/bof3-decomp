@@ -1,13 +1,13 @@
 #include "game_00.h"
 
 MATCH s32 func_801A225C(s32 unused, s32 divisor, s32 flag_bits) {
-    u8* work;
+    Actor* work;
 
     if (flag_bits & 0x2) {
-        work      = TASK(u8);
-        work[9]   = (0x20 / (divisor & BYTE_MASK));
-        work      = TASK(u8);
-        work[0xA] = (work[9] >> 1);
+        work         = TASK(Actor);
+        work->timer  = (0x20 / (divisor & BYTE_MASK));
+        work         = TASK(Actor);
+        work->unk_0A = (work->timer >> 1);
     }
     return 1;
 }
