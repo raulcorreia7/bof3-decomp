@@ -1,0 +1,1 @@
+{"function": "exe/slus_004_22@0x80154438", "tried": "screened Area_BundleApplyObjects: claimed by another lane; first hunk is a register copy (t1 vs a3) feeding three field loads", "first_diff": "6 rows of 77: 0x801544AC move t1,t0 against move a3,t0, the same value lands in a different temp", "score": "6 rows"}
