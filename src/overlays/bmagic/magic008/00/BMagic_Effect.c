@@ -397,16 +397,16 @@ typedef struct {
 /* Starts the effect: semi-transparent, tinted, at the scroll target on the battler's depth. */
 MATCH void func_801F05FC(void) {
     PartyMember* work;
-    /* FAKE: retail keeps the tint in v1, leaving v0 for the task pointer. */
-    FAKE_REG(s8, tint, "v1");
+    s8           value;
 
     TASK(PartyMember)->header.flags |= ACTOR_FLAG_SEMI_TRANSPARENT;
-    TASK(PartyMember)->unk_5C = 1;
-    TASK(PartyMember)->unk_2B = 1;
-    tint                      = -0x80;
-    TASK(PartyMember)->unk_5D = tint;
-    TASK(PartyMember)->unk_5E = tint;
-    TASK(PartyMember)->unk_5F = tint;
+    value                     = 1;
+    TASK(PartyMember)->unk_5C = value;
+    TASK(PartyMember)->unk_2B = value;
+    value                     = -0x80;
+    TASK(PartyMember)->unk_5D = value;
+    TASK(PartyMember)->unk_5E = value;
+    TASK(PartyMember)->unk_5F = value;
     work                      = g_Task;
     work->pos.x.fixed         = ((AreaScrollTarget*)&g_AreaScrollTargetX)->x;
     work->pos.y.fixed         = ((AreaScrollTarget*)&g_AreaScrollTargetX)->y;
