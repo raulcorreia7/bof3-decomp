@@ -1,0 +1,2 @@
+{"function": "emi/scenario/scena10/00@0x801FA98C", "tried": "permuter 900s on func_801FA98C: base 7945, best 7945", "first_diff": "candidates in work/permute/nonmatchings/func_801FA98C/output-*", "score": 7945}
+{"function": "emi/scenario/scena10/00@0x801FA98C", "tried": "second permuter window: applied output-7480 (score 7480): in step 29 store camera_angle.y = D_801492DA before camera_angle.x = g_AreaCameraAngle.vx. Hunks 34 -> 31, size 0x1820 -> 0x1824. Clean store reorder, no scratch locals", "first_diff": "0x801FA9A0 layout", "score": 7480}
