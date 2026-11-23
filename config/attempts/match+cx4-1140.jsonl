@@ -1,0 +1,2 @@
+{"function": "emi/scenario/scena10/00@0x801F7068", "tried": "permuter 300s on func_801F7068: base 525, best 525", "first_diff": "candidates in work/permute/nonmatchings/func_801F7068/output-*", "score": 525}
+{"function": "emi/scenario/scena09/00@0x801F9498", "tried": "spelled the case-36 script var as a raw scalar symbol", "first_diff": "0x801F99CC unchanged: the candidate materializes &g_ScriptVars in t0 (lui/addiu/lbu) and retail folds the displacement; the base comes from the unit-wide CSE, not this spelling", "score": "candidate 0xBF0, retail 0xBF4"}
