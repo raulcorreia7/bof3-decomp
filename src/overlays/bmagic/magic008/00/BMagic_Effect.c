@@ -388,23 +388,29 @@ MATCH void func_801F0568(void) {
     }
 }
 
-#ifdef NON_MATCHING
-NON_MATCHING void func_801F05FC(void) {
+/* The area scroll target as the one record retail reads it as: the Y read stays behind the X store. */
+typedef struct {
+    s32 x;
+    s32 y;
+} AreaScrollTarget;
+
+/* Starts the effect: semi-transparent, tinted, at the scroll target on the battler's depth. */
+MATCH void func_801F05FC(void) {
     PartyMember* work;
-    /* FAKE: retail keeps the tint in v1, leaving v0 for the task pointer. */
-    FAKE_REG(s8, tint, "v1");
+    s8           value;
 
     TASK(PartyMember)->header.flags |= ACTOR_FLAG_SEMI_TRANSPARENT;
-    TASK(PartyMember)->unk_5C = 1;
-    TASK(PartyMember)->unk_2B = 1;
-    tint                      = -0x80;
-    TASK(PartyMember)->unk_5D = tint;
-    TASK(PartyMember)->unk_5E = tint;
-    TASK(PartyMember)->unk_5F = tint;
+    value                     = 1;
+    TASK(PartyMember)->unk_5C = value;
+    TASK(PartyMember)->unk_2B = value;
+    value                     = -0x80;
+    TASK(PartyMember)->unk_5D = value;
+    TASK(PartyMember)->unk_5E = value;
+    TASK(PartyMember)->unk_5F = value;
     work                      = g_Task;
-    work->pos.x.fixed         = g_AreaScrollTargetX;
+    work->pos.x.fixed         = ((AreaScrollTarget*)&g_AreaScrollTargetX)->x;
+    work->pos.y.fixed         = ((AreaScrollTarget*)&g_AreaScrollTargetX)->y;
     work->pos.z.fixed         = g_BattleEffectBattler->pos.z.fixed;
-    work->pos.y.fixed         = g_AreaScrollTargetY;
     work->unk_48              = 2;
     work->scale.x             = 0x18000;
     work->scale.y             = 0x28000;
@@ -413,9 +419,6 @@ NON_MATCHING void func_801F05FC(void) {
     TASK(PartyMember)->unk_09 = 0x20;
     TASK(PartyMember)->header.step += 1;
 }
-#else
-INCLUDE_ASM(func_801F05FC);
-#endif
 
 MATCH void func_801F0710(void) {
     u8 count;

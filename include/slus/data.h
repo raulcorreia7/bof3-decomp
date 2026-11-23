@@ -156,6 +156,8 @@ extern s32 g_AreaScrollTargetY; /* 0x8014930C */
 extern s32         g_AreaCameraX;
 /* D_80149318 */
 extern s32         g_AreaCameraHeight;
+/* D_8014931C */
+extern AreaMap     g_AreaMap;
 /* D_80149320 */
 extern s16         g_AreaTileOriginX;
 extern s16         g_AreaTileOriginY;

@@ -508,6 +508,22 @@ ASSERT_OFFSET(AreaCamera, y, 0x3C);
 ASSERT_OFFSET(AreaCamera, height, 0x40);
 ASSERT_SIZE(AreaCamera, 0x44);
 
+/* The area's cell grid: the code table and the tile origin and grid cursors the cell code walks. */
+typedef struct AreaMap {
+    u8* cell_codes;    /* 0x00 */
+    s16 tile_origin_x; /* 0x04 */
+    s16 tile_origin_y; /* 0x06 */
+    s16 grid_column;   /* 0x08 */
+    s16 grid_row;      /* 0x0A */
+} AreaMap;
+
+ASSERT_OFFSET(AreaMap, cell_codes, 0x00);
+ASSERT_OFFSET(AreaMap, tile_origin_x, 0x04);
+ASSERT_OFFSET(AreaMap, tile_origin_y, 0x06);
+ASSERT_OFFSET(AreaMap, grid_column, 0x08);
+ASSERT_OFFSET(AreaMap, grid_row, 0x0A);
+ASSERT_SIZE(AreaMap, 0x0C);
+
 /* Finds the scene-table record for a wanted scene id and fills its palette and
  * tile fields (exe/slus_004_22@0x8014DD3C). */
 
