@@ -723,6 +723,7 @@ NON_MATCHING void func_801F0FBC(void) {
     LINE_F2* prim;
     long     depth;
     long     flag;
+    long*    flag_ptr;
     u32      frame;
     u32      phase;
     u32      i;
@@ -741,6 +742,7 @@ NON_MATCHING void func_801F0FBC(void) {
         z      = (TASK(PartyMember)->header.mode >= 2) ? -2 : 0;
         radius = ~TASK(PartyMember)->unk_09 & 0x1F;
         shade  = 0x80 - radius * 16;
+        flag_ptr = &flag;
         do {
             tpage = (GetGraphType() == 1 || GetGraphType() == 2) ? 0x2A5 : 0xB5;
             SetDrawMode((DR_MODE*)g_GfxPrimCursor, 0, 1, tpage, 0);
@@ -751,12 +753,12 @@ NON_MATCHING void func_801F0FBC(void) {
             g_ScratchPadVectors[0].vx = FIXED_MUL(rcos(i << 6) * 16, radius);
             g_ScratchPadVectors[0].vz = 0;
             g_ScratchPadVectors[0].vy = FIXED_MUL(rsin(i << 6) * 16, radius);
-            RotTransPers(&g_ScratchPadVectors[0], (long*)&prim->x0, &depth, &flag);
+            RotTransPers(&g_ScratchPadVectors[0], (long*)&prim->x0, &depth, flag_ptr);
             i++;
             g_ScratchPadVectors[0].vx = FIXED_MUL(rcos(i << 6) * 16, radius);
             g_ScratchPadVectors[0].vz = 0;
             g_ScratchPadVectors[0].vy = FIXED_MUL(rsin(i << 6) * 16, radius);
-            RotTransPers(&g_ScratchPadVectors[0], (long*)&prim->x1, &depth, &flag);
+            RotTransPers(&g_ScratchPadVectors[0], (long*)&prim->x1, &depth, flag_ptr);
             setRGB0(prim, shade, shade, shade);
             Area_CellAddPrim(x, y, z, sizeof(LINE_F2));
         } while (i < 0x40);
