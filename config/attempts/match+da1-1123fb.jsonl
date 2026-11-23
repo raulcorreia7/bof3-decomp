@@ -1,0 +1,1 @@
+{"function": "emi/world02/area103/13@0x801F53F0", "tried": "declared scale first among the locals to shift it from s2 to retail's s3", "first_diff": "61 rows unchanged: declaration order does not move the saved-register assignment", "score": "61 rows"}

@@ -1,12 +1,12 @@
 #include "battle_15.h"
 
 MATCH void func_800A8BD0(void) {
-    u8* work;
-    u8* saved;
+    u8*   work;
+    void* saved;
 
     BATTLE_ACTIVE_PARTY.header.flags &= ~ACTOR_FLAG_HIDDEN;
     work  = (u8*)g_BattleEffectBattler;
-    saved = TASK_BYTES;
+    saved = TASK(void);
     TASK_SET(work);
     Script_Select((((PartyMember*)work)->facing + 4) & BYTE_MASK);
     TASK_SET(saved);

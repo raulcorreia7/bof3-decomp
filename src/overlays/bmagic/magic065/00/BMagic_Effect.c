@@ -6,28 +6,22 @@ __asm__(".include \"include/match/macro.inc\"\n");
 
 #include "overlays/bmagic/shared/func_801EEC24.h"
 
-#ifdef NON_MATCHING
 /* Sets the steal task up from the effect battler, queues the stolen-item effect, then rolls the
  * steal: the drop rate entry scaled by the agility lead. The result message id lands in unk_0A. */
-NON_MATCHING void func_801EEC90(void) {
-    PartyMember*     work;
-    PartyMember*     actor;
+MATCH void func_801EEC90(void) {
     BattleWorkImage* row;
     s32              value;
     s32              scale;
-    s32              category;
     u32              slot;
-    u16              item;
+    s32              item;
 
-    TASK(PartyMember)->facing = g_BattleEffectBattler->facing;
-    work                      = TASK(PartyMember);
-    actor                     = g_BattleEffectBattler;
-    work->pos.x.fixed         = actor->pos.x.fixed;
-    work->pos.y.fixed         = actor->pos.y.fixed;
-    work->param.unk_0B        = 0;
-    work->pos.z.fixed         = actor->pos.z.fixed;
-    work->unk_09              = 0x1E;
-    work->header.mode += 1;
+    TASK(PartyMember)->facing       = g_BattleEffectBattler->facing;
+    TASK(PartyMember)->pos.x.fixed  = g_BattleEffectBattler->pos.x.fixed;
+    TASK(PartyMember)->pos.y.fixed  = g_BattleEffectBattler->pos.y.fixed;
+    TASK(PartyMember)->pos.z.fixed  = g_BattleEffectBattler->pos.z.fixed;
+    TASK(PartyMember)->param.unk_0B = 0;
+    TASK(PartyMember)->unk_09       = 0x1E;
+    TASK(PartyMember)->header.mode += 1;
     Battle_SelectActiveBattlerScript(12, 2);
     slot                                             = func_801E590C(1, 0x45);
     D_801EC330[slot & BYTE_MASK].target.party        = TASK(PartyMember);
@@ -66,12 +60,12 @@ NON_MATCHING void func_801EEC90(void) {
     if (value < -50) {
         scale = 4;
     }
-    value = D_801EF508[D_801EB6C8[g_Battle.target_selector - 3].rate] * scale;
+    value = D_801EB6C8[g_Battle.target_selector - 3].rate;
+    value = D_801EF508[value] * scale;
     if ((rand() & 0xFF) < value) {
         item = D_801EB6C8[g_Battle.target_selector - 3].item;
         if (item != 0) {
-            category = item >> 8;
-            if (Item_Add(category, item & 0xFF, 1, 0)) {
+            if (Item_Add(item >> 8, item & BYTE_MASK, 1, 0)) {
                 TASK(PartyMember)->timer                      = 0x38;
                 TASK(PartyMember)->unk_2C.value               = item;
                 D_801EB6C8[g_Battle.target_selector - 3].rate = 0;
@@ -88,9 +82,6 @@ NON_MATCHING void func_801EEC90(void) {
         TASK(PartyMember)->timer = 0x3A;
     }
 }
-#else
-INCLUDE_ASM(func_801EEC90);
-#endif
 
 MATCH void func_801EF08C(void) {
     u8 counter;

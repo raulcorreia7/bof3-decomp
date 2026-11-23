@@ -1,72 +1,49 @@
 #include "area140_13.h"
 
-#ifdef NON_MATCHING
-NON_MATCHING u8 func_801F4380(s32 x, s32 y) {
+/* The party at (x, y) facing the leader's way stands on a trigger: sets its flag and recolours the cell, or starts
+ * the scene event while a party member stands ahead on the trigger's cell. Returns 1 when the trigger fired. */
+MATCH u8 func_801F4380(s32 x, s32 y) {
     s32 i;
-    s32 base;
-    s32 table_offset;
-    u8  flag;
-    u8  type;
-    u8  count;
     s32 j;
     u8  actor_slot;
-    u16 limit_y;
-    u16 limit_x;
+    s32 ahead_x;
+    s32 ahead_y;
 
-    for (i = 0, table_offset = 0; i < 8; i++, table_offset += 6) {
-        if ((u8)x == D_801F4A84[table_offset] && (u8)y == D_801F4A85[table_offset] && (D_801F4A86[table_offset] & 0xF) == g_Game.members[0].facing) {
+    for (i = 0; i < AREA140_TRIGGER_COUNT; i++) {
+        if ((u8)x == D_801F4A84[i].x && (u8)y == D_801F4A84[i].y && (D_801F4A84[i].facing & 0xF) == g_Game.members[0].facing) {
             break;
         }
     }
-    if (i == 8) {
+    if (i == AREA140_TRIGGER_COUNT) {
         return 0;
     }
-    base = i * 6;
-    flag = D_801F4A87[base];
-    if (SYS_TestFlag(g_SceneEventFlags, flag) != 0) {
+    if (SYS_TestFlag(g_SceneEventFlags, D_801F4A84[i].flag) != 0) {
         return 0;
     }
-    type = D_801F4A89[base];
-    if (type != 0) {
-        count = g_PartySize;
-        if (count > 0) {
-            limit_y = D_801F4AB6[type * 2];
-            limit_x = D_801F4AB4[type * 2];
-            for (j = 0; j < count; j++) {
-                PartyMember* member;
-                s32          product_x;
-                s32          product_y;
-
-                member    = &g_Game.members[j];
-                product_x = member->unk_0C * member->unk_09;
-                product_y = member->unk_10 * member->unk_09;
-                if ((u16)(((member->pos.y.fixed + product_y) >> 16) - limit_y) >= 2) {
-                    continue;
-                }
-                if ((u16)(((product_x + member->pos.x.fixed) >> 16) - limit_x) < 2) {
-                    Game_SetScriptActive();
-                    g_SceneEventMode = 0x29;
-                    g_SceneEventStep = 0xA;
-                    return 1;
-                }
+    if (D_801F4A84[i].type != 0) {
+        for (j = 0; j < g_PartySize; j++) {
+            ahead_x = g_Game.members[j].pos.x.fixed + g_Game.members[j].unk_0C * g_Game.members[j].unk_09;
+            ahead_y = g_Game.members[j].pos.y.fixed + g_Game.members[j].unk_10 * g_Game.members[j].unk_09;
+            if ((u16)((ahead_y >> 16) - D_801F4AB4[D_801F4A84[i].type].y) < 2 && (u16)((ahead_x >> 16) - D_801F4AB4[D_801F4A84[i].type].x) < 2) {
+                Game_SetScriptActive();
+                g_SceneEventMode = 0x29;
+                g_SceneEventStep = 0xA;
+                return 0;
             }
         }
     }
-    SYS_SetFlag(g_SceneEventFlags, flag);
-    Area_CellSetPalette(D_801F4A84[base], D_801F4A85[base]);
-    if (D_801F4A88[base] != 0) {
+    SYS_SetFlag(g_SceneEventFlags, D_801F4A84[i].flag);
+    Area_CellSetPalette(D_801F4A84[i].x, D_801F4A84[i].y);
+    if (D_801F4A84[i].spawn != 0) {
         actor_slot = Actor_FindFreeSpawned();
-        if (actor_slot != 0xFF) {
+        if (actor_slot != GAME_NONE) {
             g_SpawnedActors[actor_slot].type         = 0x71;
-            g_SpawnedActors[actor_slot].header.flags = 1;
-            g_SpawnedActors[actor_slot].pos.x.fixed  = (u32)D_801F4A84[base] << 16;
-            g_SpawnedActors[actor_slot].pos.y.fixed  = (u32)D_801F4A85[base] << 16;
-            g_SpawnedActors[actor_slot].link         = flag;
+            g_SpawnedActors[actor_slot].header.flags = ACTOR_FLAG_IN_USE;
+            g_SpawnedActors[actor_slot].pos.x.fixed  = D_801F4A84[i].x << 16;
+            g_SpawnedActors[actor_slot].pos.y.fixed  = D_801F4A84[i].y << 16;
+            g_SpawnedActors[actor_slot].link         = D_801F4A84[i].flag;
         }
     }
     SND_SEPlay(EMI_SE_ID(SND_BANK_AREA, 4));
     return 1;
 }
-#else
-INCLUDE_ASM(func_801F4380);
-#endif

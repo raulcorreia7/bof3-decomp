@@ -1,0 +1,1 @@
+{"function": "emi/scenario/scena01/00@0x801FCEC0", "tried": "inverted the case-0 0x65 guard to a break-first form so the reset path becomes the fall-through", "first_diff": "0x801FCED8 unchanged, 168 rows: the compiler normalizes the two guard forms to the same branch and block placement, so the split reset placement is not a source-order effect", "score": "168 differing rows"}

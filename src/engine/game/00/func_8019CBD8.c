@@ -7,7 +7,7 @@ MATCH void func_8019CBD8(void) {
     Actor* counter;
 
     TASK(Actor)->direction = FACING_UP;
-    SYS_InitScratchpad((u8*)(FIELD(s32, g_AreaLoads[g_GameAreaId], 0x8u) + (TASK(Actor)->param.unk_0B * 8)));
+    SYS_InitScratchpad((u8*)(((AreaLoad*)g_AreaLoads[g_GameAreaId])->field_08 + (TASK(Actor)->param.unk_0B * 8)));
     record                          = TASK(Actor);
     record->tint.steps.delta.r      = -0x80;
     other                           = TASK(Actor);

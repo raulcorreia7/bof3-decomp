@@ -1,0 +1,2 @@
+{"function": "emi/scenario/scena07/00@0x801F78B0", "tried": "permuter 600s on func_801F78B0: base 120, best 120", "first_diff": "candidates in work/permute/nonmatchings/func_801F78B0/output-*", "score": 120}
+{"function": "emi/scenario/scena15/00@0x801F97CC", "tried": "permuter 600s on func_801F97CC: base 180, best 180", "first_diff": "candidates in work/permute/nonmatchings/func_801F97CC/output-*", "score": 180}
