@@ -1,0 +1,1 @@
+{"function": "emi/etc/commu02/08@0x801D8058", "tried": "re-measured on current main and tried the reversed x/y copy order", "first_diff": "22 rows but the unit is now off: func starts at +0x6D08 against +0x6CC4, so an earlier draft in commu02/08 grew by 0x44 and this row can no longer be measured cleanly", "score": "22 rows, unit-order blocked"}
