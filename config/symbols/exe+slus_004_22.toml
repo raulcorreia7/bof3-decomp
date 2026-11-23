@@ -278,6 +278,7 @@ g_UiMessageWindow = { addr = 0x801490BC, source = "MenuState block the text, pan
 g_UiMessageChoice = { addr = 0x801490C7, source = "The player's choice in the message window." }
 g_TextVariables = { addr = 0x801490D8, type = "u8", size = 0x200, source = "Text variables." }
 g_AreaCameraAngle = { addr = 0x801492D8, size = 0x8, source = "Angle of the area camera." }
+g_AreaCamera = { addr = 0x801492D8, alias = true, source = "The area view: camera angle, matrix, scroll targets, position and height." }
 g_AreaPreviousCameraAngle = { addr = 0x801492E0, type = "SVECTOR", size = 0x8, source = "The previous frame camera angle copied from g_AreaCameraAngle when it changes." }
 g_CameraMatrix = { addr = 0x801492E8, type = "MATRIX", source = "View matrix of the camera." }
 g_AreaScrollTargetX = { addr = 0x80149308, type = "s32", source = "X scroll target of the area." }

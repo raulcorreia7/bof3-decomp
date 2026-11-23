@@ -1,63 +1,59 @@
 #include "area111_13.h"
 
+/* Draws a band of 32 semi-transparent Gouraud quads between the rings of the
+ * two radii around the position, alternating the shade at the two edges. */
 #ifdef NON_MATCHING
 NON_MATCHING void func_801F2DA0(void* position, s32 radius1, s32 radius2) {
     VECTOR   point;
+    VECTOR   last;
     DVECTOR  inner;
     DVECTOR  outer;
     MATRIX   camera;
+    u8       scratch[32]; /* retail reserves 32 frame bytes past the matrix; no statement uses them */
     POLY_G4* prim;
     s32*     pos;
-    u16      turn;
-    u8       i;
-    s32      sine;
+    s32      turn;
+    s32      shade;
+    u32      i;
     u16      angle;
 
     pos = position;
     GFX_ADD_DITHERED_DRAW_MODE(GFX_LAYER_EFFECT_FRONT, GetTPage(TPAGE_DEPTH_4BIT, TPAGE_ABR_ADD, 0x380, 0x100));
     Camera_SetMatrix(&camera);
-    point.vx = pos[0] + (((s16)radius1 * rcos(0)) >> 4);
-    sine     = rsin(0);
-    point.vy = pos[1] + (((s16)radius1 * sine) >> 4);
-    point.vz = pos[2] + (((s16)radius1 * sine) << 4);
-    Camera_ProjectPoint(&point, &inner);
-    point.vx = pos[0] + (((s16)radius2 * rcos(0)) >> 4);
-    sine     = rsin(0);
-    point.vy = pos[1] + (((s16)radius2 * sine) >> 4);
-    point.vz = pos[2] + (((s16)radius2 * sine) << 4);
-    Camera_ProjectPoint(&point, &outer);
-    turn = 0;
-    i    = 0;
-    do {
+    point.vx = pos[0];
+    point.vy = pos[1] + (((s16)radius1 * rcos(0)) >> 4);
+    point.vz = pos[2] + (((s16)radius1 * rsin(0)) << 4);
+    Camera_ProjectPoint((s32*)&point, &inner);
+    point.vy = pos[1] + (((s16)radius2 * rcos(0)) >> 4);
+    point.vz = pos[2] + (((s16)radius2 * rsin(0)) << 4);
+    Camera_ProjectPoint((s32*)&point, &outer);
+    turn  = 0;
+    shade = GFX_COLOR_NEUTRAL;
+    for (i = 0; (i & BYTE_MASK) < 32; i++) {
+        last = point;
         SetDrawMode((DR_MODE*)g_GfxPrimCursor, 0, 1, GetTPage(TPAGE_DEPTH_4BIT, TPAGE_ABR_ADD, 0x380, 0x100), 0);
-        Area_CellAddPrim(pos[0], pos[1], 0, sizeof(DR_MODE));
-        prim = (POLY_G4*)g_GfxPrimCursor;
-        SetPolyG4(prim);
-        SetSemiTrans(prim, 1);
+        Area_CellAddPrim(last.vx, last.vy, 0, sizeof(DR_MODE));
+        prim = GFX_BeginPolyG4(1);
         setXY2(prim, inner.vx, inner.vy, outer.vx, outer.vy);
-        turn += 0x80;
+        turn += ONE / 32;
         angle    = turn;
-        point.vx = pos[0] + (((s16)radius1 * rcos(angle)) >> 4);
-        sine     = rsin(angle);
-        point.vy = pos[1] + (((s16)radius1 * sine) >> 4);
-        point.vz = pos[2] + (((s16)radius1 * sine) << 4);
-        Camera_ProjectPoint(&point, &inner);
-        point.vx = pos[0] + (((s16)radius2 * rcos(angle)) >> 4);
-        sine     = rsin(angle);
-        point.vy = pos[1] + (((s16)radius2 * sine) >> 4);
-        point.vz = pos[2] + (((s16)radius2 * sine) << 4);
-        Camera_ProjectPoint(&point, &outer);
+        point.vx = pos[0];
+        point.vy = pos[1] + (((s16)radius1 * rcos(angle)) >> 4);
+        point.vz = pos[2] + (((s16)radius1 * rsin(angle)) << 4);
+        Camera_ProjectPoint((s32*)&point, &inner);
+        point.vy = pos[1] + (((s16)radius2 * rcos(angle)) >> 4);
+        point.vz = pos[2] + (((s16)radius2 * rsin(angle)) << 4);
+        Camera_ProjectPoint((s32*)&point, &outer);
         prim->x2 = inner.vx;
         prim->y2 = inner.vy;
         prim->x3 = outer.vx;
         prim->y3 = outer.vy;
-        setRGB0(prim, 0x80, 0x80, 0x80);
+        setRGB0(prim, shade, shade, shade);
         setRGB1(prim, 0, 0, 0);
-        setRGB2(prim, 0x80, 0x80, 0x80);
+        setRGB2(prim, shade, shade, shade);
         setRGB3(prim, 0, 0, 0);
-        Area_CellAddPrim(pos[0], pos[1], 0, sizeof(POLY_G4));
-        i++;
-    } while (i < 32);
+        Area_CellAddPrim(last.vx, last.vy, 0, sizeof(POLY_G4));
+    }
 }
 #else
 INCLUDE_ASM(func_801F2DA0);

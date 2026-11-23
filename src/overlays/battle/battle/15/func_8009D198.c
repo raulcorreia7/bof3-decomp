@@ -3,7 +3,6 @@
 /* Applies the queued hit's HP and AP changes to the target and runs the hit's effect handler. */
 #ifdef NON_MATCHING
 NON_MATCHING void func_8009D198(void) {
-    u8* ability_effects;
     u8  effect;
     u16 action_word;
     u32 damage_flags;
@@ -18,20 +17,25 @@ NON_MATCHING void func_8009D198(void) {
     if (g_Battle.action_type != BATTLE_ACTION_ABILITY || g_Battle.action_id != ABILITY_MEDITATION) {
         if (BATTLER_IS_PLAYER(g_Battle.active_battler)) {
             if (g_Game.members[g_Battle.active_battler].u.turn.action_flags.value & BATTLER_ACTION_MEDITATION) {
-                D_801EC312                                      = D_801EC312 * (g_Game.members[g_Battle.active_battler].unk_139 + 1);
+                {
+                    volatile u16* p = &D_801EC312;
+                    *p              = *p * (g_Game.members[g_Battle.active_battler].unk_139 + 1);
+                }
                 g_Game.members[g_Battle.active_battler].unk_139 = 0;
                 g_Game.members[g_Battle.active_battler].u.turn.action_flags.value &= ~BATTLER_ACTION_MEDITATION;
             }
         } else if (ENEMY_COMBATANT(g_Battle.active_battler).turn.action_flags.value & BATTLER_ACTION_MEDITATION) {
-            D_801EC312                                       = D_801EC312 * (ENEMY_COMBATANT(g_Battle.active_battler).unk_115 + 1);
+            {
+                volatile u16* p = &D_801EC312;
+                *p              = *p * (ENEMY_COMBATANT(g_Battle.active_battler).unk_115 + 1);
+            }
             ENEMY_COMBATANT(g_Battle.active_battler).unk_115 = 0;
             ENEMY_COMBATANT(g_Battle.active_battler).turn.action_flags.value &= ~BATTLER_ACTION_MEDITATION;
         }
     }
 
     if (g_Battle.action_type == BATTLE_ACTION_ABILITY) {
-        ability_effects = MEM_PTR(u8, BATTLE_ABILITY_CALL_TABLE);
-        effect          = ability_effects[g_Battle.action_id];
+        effect = ((u8*)BATTLE_ABILITY_CALL_TABLE)[(u16)g_Battle.action_id];
     } else {
         action_word = g_Battle.action->unk_02;
         effect      = D_800B470C[action_word >> 8][(u8)action_word];
