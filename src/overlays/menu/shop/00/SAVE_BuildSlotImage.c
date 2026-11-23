@@ -16,9 +16,16 @@ typedef struct SaveSlotSummary {
 
 ASSERT_SIZE(SaveSlotSummary, 0x18);
 
+/* The pad masks the save keeps at SaveData+0xCBC. */
+typedef struct SaveInputMasks {
+    u16 mask[9];
+} SaveInputMasks;
+
+#define SAVE_INPUT_MASKS (*(SaveInputMasks*)&g_SaveData.unk_C84[0x38])
+
 /* The resident save image: the bytes that end where the battle-magic script table starts. */
-#define SAVE_IMAGE_SIZE 0x1E00
-#define SAVE_IMAGE_ADDR (BMAGIC_SCRIPT_TABLE - SAVE_IMAGE_SIZE)
+#define SAVE_IMAGE_SIZE  0x1E00
+#define SAVE_IMAGE_ADDR  (BMAGIC_SCRIPT_TABLE - SAVE_IMAGE_SIZE)
 
 /* Fills the save summary and the saved party position, then copies the save data into the save image and sums it. */
 MATCH void SAVE_BuildSlotImage(void) {
@@ -44,7 +51,7 @@ MATCH void SAVE_BuildSlotImage(void) {
     g_SaveData.area_id        = g_GameAreaId;
     g_SaveData.entry_facing   = g_Game.members[0].facing;
     for (i = 0; i < 9; i++) {
-        ((u16*)&g_SaveData.unk_C84[0x38])[i] = g_InputMasks[i];
+        SAVE_INPUT_MASKS.mask[i] = g_InputMasks[i];
     }
     work    = &g_SaveData;
     summary = (SaveSlotSummary*)&work->unk_C84[0x1C];

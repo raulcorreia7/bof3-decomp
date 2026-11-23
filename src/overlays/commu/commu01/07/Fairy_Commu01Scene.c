@@ -760,9 +760,9 @@ MATCH void func_801D3038(void) {
             room_type = g_FairyRooms[i * 8];
             if (room_type != 0) {
                 if (room_type != 5) {
-                    func_801D3EFC(FAIRY_OVERVIEW_ROOM_X(i) + 0x22, FAIRY_OVERVIEW_ROOM_Y(i) + 0x6C, ((u8*)D_801D4C18)[0x1C + room_type]);
+                    func_801D3EFC(FAIRY_OVERVIEW_ROOM_X(i) + 0x22, FAIRY_OVERVIEW_ROOM_Y(i) + 0x6C, D_801D4C34[room_type]);
                 } else {
-                    func_801D3EFC(FAIRY_OVERVIEW_ROOM_X(i) + 0x22, FAIRY_OVERVIEW_ROOM_Y(i) + 0x6C, ((u8*)D_801D4C18)[0x21] + D_801457A9[i][0]);
+                    func_801D3EFC(FAIRY_OVERVIEW_ROOM_X(i) + 0x22, FAIRY_OVERVIEW_ROOM_Y(i) + 0x6C, D_801D4C34[5] + D_801457A9[i][0]);
                 }
             }
             active = Fairy_GetJobActive(i + 1);
@@ -777,8 +777,8 @@ MATCH void func_801D3038(void) {
     buffer = g_UiTextFormatBuffer;
     sprintf((char*)buffer, D_801D0C10, D_801455C2);
     UI_TextDrawAscii(0x50, 0x4C, 0, buffer);
-    UI_TextDraw(0x78, 0x4C, 0, 7, (u8*)D_801D4C18 + 0x18);
-    sprintf((char*)buffer, D_801D0C14, *((u8*)&D_801455C2 + 2));
+    UI_TextDraw(0x78, 0x4C, 0, 7, D_801D4C30);
+    sprintf((char*)buffer, D_801D0C14, D_801455C4);
     UI_TextDrawAscii(0xB8, 0x4C, 0, buffer);
 }
 
