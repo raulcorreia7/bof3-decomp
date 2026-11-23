@@ -1,0 +1,1 @@
+{"function": "emi/etc/commu02/08@0x801D1394", "tried": "sized the unit's drafts to locate the commu02/08 drift: this function is the first culprit", "first_diff": "candidate 0xC4 against retail 0xA8 (0x1C too big); the next function is +0x174C against +0x1730, and the drift accumulates to 0x44 by 0x801D7234", "score": "49 rows, 0xC4 vs 0xA8"}
