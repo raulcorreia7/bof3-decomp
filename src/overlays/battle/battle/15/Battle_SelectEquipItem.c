@@ -3,85 +3,67 @@
 /* The command ring holds sixteen handles. */
 #define BATTLE_RING_SLOT_MASK 0xF
 
-/* func_80099B74 */
-#ifdef NON_MATCHING
-NON_MATCHING void Battle_SelectEquipItem(void) {
-    s32  pad;
+/* Runs the equipment slot list: steps the slot cursor with wrap, queues the chosen item for the active member or backs out to the command ring. */
+MATCH void Battle_SelectEquipItem(void) {
+    s32  repeated;
     u16* pad_state;
-    u16  keys;
-    u32  resource;
-    u8*  resource_id;
+    u16  pressed;
     u16  choice;
-    u8   prev;
-    u8*  slot_cursor;
-    u8   next;
-    /* FAKE: retail reserves 0x20 unused frame bytes. */
-    FAKE_STACK_PADS(u8, 0x28);
+    u8   unused[0x28]; /* 40 bytes of frame the function never touches */
 
-    if (g_BattlePanelMode == 0) {
-        D_801485DC = 1;
-        D_801485E0 = (u16)D_801485BC + 6;
-        D_801485E2 = (u16)D_801485BE + ((g_BattleEquipSlot * 0xD) + 0x57);
+    if (g_UiPanelTasks[18].state == 0) {
+        g_UiPanelTasks[19].active = 1;
+        g_UiPanelTasks[19].pos.x  = g_UiPanelTasks[18].pos.x + 6;
+        g_UiPanelTasks[19].pos.y  = g_UiPanelTasks[18].pos.y + ((g_UiPanelTasks[18].unk_0A * 0xD) + 0x57);
     } else {
-        D_801485DC = 0;
+        g_UiPanelTasks[19].active = 0;
     }
-    resource = 0x32;
-    if (D_8014862E == 0) {
-        resource = 0x30;
-    }
-    resource_id                                                       = UI_MessageGetText(resource);
-    g_BattleMessages[((D_801EC328 - 1) & BATTLE_RING_SLOT_MASK)].text = resource_id;
+    g_BattleMessages[((D_801EC328 - 1) & BATTLE_RING_SLOT_MASK)].text = UI_MessageGetText(D_8014862E == 0 ? 0x30 : 0x32);
     pad_state                                                         = &g_PadStates[0].pressed;
-    pad                                                               = INPUT_REPEATED(*pad_state, (PADLup | PADLdown));
-    keys                                                              = *pad_state;
-    if (keys & g_InputMasks[BATTLE_INPUT_CANCEL]) {
+    repeated                                                          = INPUT_REPEATED(*pad_state, (PADLup | PADLdown));
+    pressed                                                           = *pad_state;
+    if (pressed & g_InputMasks[BATTLE_INPUT_CANCEL]) {
         SND_SEPlay(EMI_SE_ID(SND_BANK_COMMON, 6));
-        g_BattlePanelMode         = 1;
-        g_BattleChoicePhase       = 3;
+        g_UiPanelTasks[18].state  = 1;
+        g_UiPanelTasks[16].state  = 3;
         g_UiPanelTasks[21].active = 0;
         g_UiPanelTasks[4].active  = 1;
-        D_801485DC                = 0;
+        g_UiPanelTasks[19].active = 0;
         g_Battle.ui_step          = 1;
         g_Battle.ui_mode          = 0;
         return;
     }
-    if (keys & g_InputMasks[BATTLE_INPUT_CONFIRM]) {
+    if (pressed & g_InputMasks[BATTLE_INPUT_CONFIRM]) {
         if (g_BattleTargetCursorCol != 0) {
             SND_SEPlay(EMI_SE_ID(SND_BANK_COMMON, 3));
-            g_Game.members[BATTLE_ACTIVE_MEMBER->slot].u.turn.damage_flags.volatile_value |= BATTLER_DAMAGE_UNK_14;
-            *(s16*)&g_Game.members[BATTLE_ACTIVE_MEMBER->slot].u.turn.command.id      = g_BattleTargetCursorCol;
-            choice                                                                    = g_BattleTargetCursorCol;
-            g_BattleActorTurn->command.id                                             = choice;
-            *(s8**)&g_BattleMessages[((D_801EC328 - 1) & BATTLE_RING_SLOT_MASK)].text = (s8*)UI_MessageGetText(Item_GetDescription(choice >> 8, choice & BYTE_MASK) & HALF_MASK);
-            g_UiPanelTasks[4].active                                                  = 1;
-            D_80148597                                                                = 2;
-            D_801485DC                                                                = 0;
-            g_UiPanelTasks[21].active                                                 = 0;
-            g_BattlePanelMode                                                         = 1;
-            g_Battle.ui_step                                                          = 7;
+            g_Game.members[BATTLE_ACTIVE_MEMBER->slot].u.turn.damage_flags.value |= BATTLER_DAMAGE_UNK_14;
+            g_Game.members[BATTLE_ACTIVE_MEMBER->slot].u.turn.command.id      = g_BattleTargetCursorCol;
+            /* g_BattleTargetCursorCol is this panel cell. */
+            choice                                                            = g_UiPanelTasks[18].u.battle.cursor;
+            g_BattleActorTurn->command.id                                     = choice;
+            g_BattleMessages[((D_801EC328 - 1) & BATTLE_RING_SLOT_MASK)].text = UI_MessageGetText(Item_GetDescription(choice >> 8, choice & BYTE_MASK) & HALF_MASK);
+            g_UiPanelTasks[18].state                                          = 1;
+            g_UiPanelTasks[17].state                                          = 2;
+            g_UiPanelTasks[19].active                                         = 0;
+            g_UiPanelTasks[21].active                                         = 0;
+            g_UiPanelTasks[4].active                                          = 1;
+            g_Battle.ui_step                                                  = 7;
         } else {
             SND_SEPlay(EMI_SE_ID(SND_BANK_COMMON, 7));
         }
     }
-    if ((pad & PADLup) != 0) {
+    if (repeated & PADLup) {
         SND_SEPlay(EMI_SE_ID(SND_BANK_COMMON, 0));
-        slot_cursor  = &g_BattleEquipSlot;
-        prev         = *slot_cursor - 1;
-        *slot_cursor = prev;
-        if ((s8)prev < 0) {
-            *slot_cursor = 5;
+        g_UiPanelTasks[18].unk_0A--;
+        if ((s8)g_UiPanelTasks[18].unk_0A < 0) {
+            g_UiPanelTasks[18].unk_0A = 5;
         }
     }
-    if ((pad & PADLdown) != 0) {
+    if (repeated & PADLdown) {
         SND_SEPlay(EMI_SE_ID(SND_BANK_COMMON, 0));
-        slot_cursor  = &g_BattleEquipSlot;
-        next         = *slot_cursor + 1;
-        *slot_cursor = next;
-        if ((s8)next >= 6) {
-            *slot_cursor = 0;
+        g_UiPanelTasks[18].unk_0A++;
+        if ((s8)g_UiPanelTasks[18].unk_0A >= 6) {
+            g_UiPanelTasks[18].unk_0A = 0;
         }
     }
 }
-#else
-INCLUDE_ASM(Battle_SelectEquipItem);
-#endif
