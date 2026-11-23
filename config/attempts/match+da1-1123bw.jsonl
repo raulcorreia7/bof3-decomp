@@ -1,0 +1,1 @@
+{"function": "emi/battle/batl_end/00@0x801EF140", "tried": "stored unk_09 (height + 4) before the mode/state zero stores, and a y local for the sum", "first_diff": "12 rows (from 14): the first hunk stays at 0x801EF2AC, retail addiu v0,s1,4; the y local keeps 12, so the reorder is the kept form", "score": "12 rows"}

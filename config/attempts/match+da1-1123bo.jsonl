@@ -1,0 +1,1 @@
+{"function": "emi/etc/commu02/08@0x801D8058", "tried": "base_x as s32 and u16, and dropping the x/y copies for the parameters directly", "first_diff": "22 rows: retail frame 0x38 against 0x30 and an extra saved register; s32 base_x 52 rows, u16 22, the no-copy form cannot be measured because an earlier draft in the unit is 0x44 bytes off", "score": "22 rows"}

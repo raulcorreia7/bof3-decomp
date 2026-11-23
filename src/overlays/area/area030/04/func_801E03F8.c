@@ -31,9 +31,11 @@ NON_MATCHING void func_801E03F8(void) {
         TASK(FishingState)->pos_x = -TASK(FishingState)->pos_x;
     }
     row_facing  = FISHING_ROW->fish_row;
-    entry_face  = D_801E2AD3[TASK(FishingState)->cue_index * 0x24];
-    upper_limit = (TO_COORD(62) - row_facing * TO_COORD(12)) + entry_face * TO_COORD(15);
-    lower_limit = (TO_COORD(50) - row_facing * TO_COORD(12)) - entry_face * TO_COORD(15);
+    upper_limit = TO_COORD(62) - row_facing * TO_COORD(12);
+    entry_face  = D_801E2AD3[TASK(FishingState)->cue_index * sizeof(FishingSceneCue)];
+    upper_limit += entry_face * TO_COORD(15);
+    lower_limit = TO_COORD(50) - row_facing * TO_COORD(12) - entry_face * TO_COORD(15);
+    /* Clamp the two bounds to 26..62 and 17..50 cells; the tests are > floor - 1. */
     if (upper_limit > 0x19FFFF) {
         value = TO_COORD(62);
         if (upper_limit <= TO_COORD(62)) {

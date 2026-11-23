@@ -1,0 +1,1 @@
+{"function": "emi/scenario/scena08/00@0x801F823C", "tried": "declared the loop index volatile to reach retail's stack-resident index byte", "first_diff": "0x801F823C: the frame stays 0x70 and the row grows to 181 differences; GCC does not place the volatile byte in the retail slot or size the frame", "score": "181 differing rows"}

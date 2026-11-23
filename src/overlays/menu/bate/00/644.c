@@ -400,12 +400,7 @@ MATCH void func_801D2298(void) {
 }
 
 #ifdef NON_MATCHING
-/* The formats and the second counter run the window's rows; the row counters are read through a
- * volatile view, the address retail materializes before indexing it. */
-
-void Menu_DrawPanelFrame(s16 x, s16 y, s32 width, s32 height);
-void func_801D26E0(s16 x, s16 y);
-
+/* The stat tables are indexed through a register-base pointer, as retail materializes it. */
 NON_MATCHING void func_801D2304(s32 x, s32 y) {
     u16 left;
     u16 top;

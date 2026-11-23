@@ -1,5 +1,6 @@
 #include "area082_13.h"
 
+/* Draws the four tiled sections of the actor's rotating ground ring. */
 #ifdef NON_MATCHING
 NON_MATCHING void func_801F4430(void) {
     SVECTOR   rot;
@@ -61,7 +62,7 @@ NON_MATCHING void func_801F4430(void) {
 
         screen_y = TASK(Actor)->screen_y;
         if (screen_y >= 0x41) {
-            y = TASK(Actor)->screen_y - ((rcos(TASK(Actor)->unk_32 + (i << 10)) >> 7) + 0x20);
+            y = (s16)TASK(Actor)->screen_y - ((rcos(TASK(Actor)->unk_32 + (i << 10)) >> 7) + 0x20);
         } else {
             y = screen_y;
         }

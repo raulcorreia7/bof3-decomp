@@ -1,0 +1,1 @@
+{"function": "emi/world03/area135/14@0x801F3CA8", "tried": "read the prologue: retail interleaves the address setups (s1=0x1F800014, s8=s1+24, s7=sp+40) with the saves, the draft emits the whole save set first", "first_diff": "15 rows, prologue only: first hunk 0x801F3CB4 sw s1,52 against sw s2,56", "score": "15 rows"}
