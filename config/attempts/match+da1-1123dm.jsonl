@@ -1,0 +1,1 @@
+{"function": "emi/world02/area104/14@0x801F6774", "tried": "read the hunk: the 0x80 byte stores (0x14/0x24/0x1D/0x25) and the setXY4 constants at 0x10/0x0A are emitted in a different order, and 0xFF lands in v1 vs a2", "first_diff": "20 rows: 0x801F67F0 li v1,255 against li a2,255; the store block order and that register differ", "score": "20 rows"}

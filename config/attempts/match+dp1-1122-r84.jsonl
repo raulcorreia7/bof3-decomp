@@ -1,0 +1,1 @@
+{"function": "emi/etc/bate/00@0x801D165C", "tried": "the i-first declaration order leaves 257 rows and 0x47C unchanged; the closest matched template (Battle_SelectEquipSlot) differs in the same 2 instructions and does not carry the D_80148597 order", "first_diff": "0x801D1660 sw s2,88(sp) against sw s1,84(sp)", "score": "257 rows"}

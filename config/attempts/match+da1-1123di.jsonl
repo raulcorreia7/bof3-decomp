@@ -1,0 +1,1 @@
+{"function": "emi/etc/start/08@0x801DAE14", "tried": "screened the row: the draft is Menu_OpenPartyChange, first hunk is a pointer/zero-store setup order (lui a1/-31510 and move t1 vs t2/t0)", "first_diff": "16 rows: 0x801DAE24 lui v1,0x8015 against lui a1,0x8015; the block reorders the base pointer, the copy and the zeroing", "score": "16 rows"}

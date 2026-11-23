@@ -1,0 +1,1 @@
+{"function": "emi/scenario/scena01/00@0x801F7678", "tried": "combined the u32 cast on the shade operand with the masked argument in the second color", "first_diff": "0x801F7920: the cast/mask pair changes the first color's schedule and yields 24 rows, between the unmasked body's one operand and the fully masked hoist", "score": "24 differing rows against 1"}
