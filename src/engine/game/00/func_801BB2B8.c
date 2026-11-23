@@ -126,7 +126,7 @@ case10:
     if (work == (Actor*)&D_8014626C)
         bit = g_Game.unk_3E7 & 1;
     else
-        bit = g_Game.current->status.field.flags.unsigned_value & 1;
+        bit = g_GameState->status.field.flags.unsigned_value & 1;
     if (bit != 0)
         return 0;
     goto shared52compute;

@@ -13,13 +13,13 @@ NON_MATCHING void func_801B1E24(void) {
 
     facing = g_Game.members[0].facing;
     i      = 0;
-    if (g_Game.party_size != 0) {
+    if (g_PartySize != 0) {
         member = &g_Game.members[0];
         do {
             TASK_SET(member);
             prev = i - 1;
             if (prev < 0) {
-                prev = g_Game.party_size - 1;
+                prev = g_PartySize - 1;
             }
             if ((g_Game.members[0].status.field.flags.unsigned_value & 1) == 0 && prev != 0) {
                 index  = (prev - 1) * 2 + facing * 4;
@@ -44,13 +44,13 @@ NON_MATCHING void func_801B1E24(void) {
         next:
             i++;
             member++;
-        } while (i < g_Game.party_size);
+        } while (i < g_PartySize);
     }
 
     i = 1;
     TASK_SET(g_Game.members);
     state = 4;
-    while (i < g_Game.party_size) {
+    while (i < g_PartySize) {
         if (g_Game.members[i].header.mode == 3) {
             state = TASK(PartyMember)->header.step + 1;
             break;

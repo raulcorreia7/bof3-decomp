@@ -41,7 +41,7 @@ NON_MATCHING void func_801BCD60(s32 target_x, s32 target_y) {
     Actor* tmp23;
 
     tmp8 = g_Task;
-    if ((tmp8->header.flags & 0x80) && !((g_Game.flags | g_Game.walk_flags) & BIT(0)) && !(g_Game.members[0].status.field.flags.value & 1)) {
+    if ((tmp8->header.flags & 0x80) && !((g_GameFlags | g_AreaWalkFlags) & BIT(0)) && !(g_Game.members[0].status.field.flags.value & 1)) {
         val9  = tmp8->pos.x.fixed;
         val2  = tmp8->pos.y.fixed;
         tmp6  = val9 - target_x;
@@ -168,9 +168,9 @@ NON_MATCHING void func_801BCD60(s32 target_x, s32 target_y) {
             } else {
             block_39:
                 if (Area_GetWidth(tmp9->pos.x.part.integer, tmp9->pos.y.part.integer) & BYTE_MASK) {
-                    g_Game.current->status.field.flags.unsigned_value = (u8)(g_Game.current->status.field.flags.unsigned_value & 0xFE);
-                    TASK(Actor)->draw_layer                           = (u8)g_AreaDrawMode;
-                    TASK(Actor)->direction                            = (u8)direction;
+                    g_GameState->status.field.flags.unsigned_value = (u8)(g_GameState->status.field.flags.unsigned_value & 0xFE);
+                    TASK(Actor)->draw_layer                        = (u8)g_AreaDrawMode;
+                    TASK(Actor)->direction                         = (u8)direction;
                 } else {
                     goto block_41; /* retail branch */
                 }
