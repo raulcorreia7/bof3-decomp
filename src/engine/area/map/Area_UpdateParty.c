@@ -7,12 +7,12 @@ MATCH void Area_UpdateParty(void) {
     u8 index;
 
     for (index = 0; index < 4; index++) {
-        u8* work;
+        Actor* work;
 
-        work   = (u8*)&g_PartyActors[index];
+        work   = &g_PartyActors[index];
         g_Task = work;
 
-        if (((work[0] & 0x1u) != 0u) && ((work[0] & 0x40u) == 0u)) {
+        if ((work->header.flags & ACTOR_FLAG_IN_USE) && ((work->header.flags & 0x40u) == 0u)) {
             Actor_ProjectForDraw();
         }
     }
