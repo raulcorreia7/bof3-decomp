@@ -4,8 +4,8 @@
 __asm__(".include \"include/match/macro.inc\"\n");
 #endif
 
-#ifdef NON_MATCHING
-NON_MATCHING void func_801F7300(void) {
+MATCH void func_801F7300(void) {
+    FAKE_REG(s32, arg, "a0");
     if (g_GameAreaId == AREA_ID_WYNDIA_CASTLE) {
         if (!SYS_TestFlag(g_SceneFlags, 3)) {
             g_ScriptVars[0] = 0;
@@ -26,11 +26,14 @@ NON_MATCHING void func_801F7300(void) {
                     func_801C1E3C(1);
                     break;
                 case 2:
+                    arg = 2;
+                    /* FAKE: retail materializes the argument as li a0,2 in the dispatch delay slot; the a0 pin and the opaque keep a fresh constant instead of a copy of the switch value. */
+                    FAKE_OPAQUE(arg);
                     g_Characters[g_CharSlot[2]].party_flags &= 0xFE;
                     /* FAKE: same pin as case 0. */
                     FAKE_BARRIER();
                     g_Characters[g_CharSlot[5]].party_flags &= 0xFE;
-                    func_801C1E3C(2);
+                    func_801C1E3C(arg);
                     break;
             }
         }
@@ -171,6 +174,3 @@ NON_MATCHING void func_801F7300(void) {
     }
     g_ScenarioState.mode_02 = 2;
 }
-#else
-INCLUDE_ASM(func_801F7300);
-#endif
