@@ -182,7 +182,7 @@ extern s16              D_80148364;
 extern u8               D_8014839C;
 extern void             func_801D1CA4(void);
 extern s32              func_801D1E60(void);
-extern void             func_801D1EE8(void);
+extern u8               func_801D1EE8(void);
 extern void             func_801D2308(void* record);
 extern void             func_801D27BC(void);
 /* D_801DA028 */

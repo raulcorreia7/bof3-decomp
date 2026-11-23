@@ -521,7 +521,7 @@ MATCH s32 func_801D1E60(void) {
 }
 
 #ifdef NON_MATCHING
-NON_MATCHING void func_801D1EE8(void) {
+NON_MATCHING u8 func_801D1EE8(void) {
     s32 denominator;
     s32 difference;
     s32 numerator;
@@ -585,10 +585,13 @@ NON_MATCHING void func_801D1EE8(void) {
     subtotal   = g_ShisuIngredients.topping_size * (D_801DA034 * 10);
     total      = subtotal + (g_ShisuIngredients.rounds * ((D_801DA038 * D_801DA03C) / 100));
     D_801DA044 = 0;
+    FAKE_BARRIER();
     D_801DA044 = subtotal;
+    FAKE_BARRIER();
     D_801DA044 = total;
     total      = (total + (D_801DA040 * 0x10)) / 100;
     D_801DA044 = total;
+    return total;
 }
 #else
 INCLUDE_ASM(func_801D1EE8);
