@@ -322,8 +322,8 @@ NON_MATCHING void func_801FA98C(void) {
             }
             g_SpawnedActors[D_801FE9D8].header.flags   = 1;
             g_SpawnedActors[D_801FE9D8].type           = 0x13;
-            g_SpawnedActors[D_801FE9D8].camera_angle.x = g_AreaCameraAngle.vx;
             g_SpawnedActors[D_801FE9D8].camera_angle.y = D_801492DA;
+            g_SpawnedActors[D_801FE9D8].camera_angle.x = g_AreaCameraAngle.vx;
             g_SpawnedActors[D_801FE9D8].camera_angle.z = 0x10E;
             g_SpawnedActors[D_801FE9D8].layer          = 0x40;
             g_ScenarioState.step                       = 0x1E;
