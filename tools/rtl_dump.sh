@@ -6,7 +6,7 @@
 # Letters are GCC's -d flags (default lg): l local allocation (.lreg: each pseudo's uses, live
 # length and hard register), g global allocation and reload (.greg: allocation order, conflicts,
 # spills), L loop (.loop: what moves out of each loop and why, induction values), S scheduling,
-# c combine, s cse, j jump. With a function name it prints that
+# R the second scheduling pass, c combine, s cse, j jump. With a function name it prints that
 # function's part of each dump; the dump files stay in $OUT (default a fresh folder under $TMPDIR).
 # The flags below copy the image build's (build/meson/compile_commands.json) plus -DNON_MATCHING,
 # so a draft body compiles; update them with the build.
