@@ -154,8 +154,8 @@ NON_MATCHING void func_801EF14C(void) {
         g_ScratchPadVectors[2].vx = (rcos(0) * D_1F800000_WORD[0]) >> 12;
         g_ScratchPadVectors[2].vy = (rsin(0) * D_1F800000_WORD[0]) >> 12;
         g_ScratchPadVectors[2].vz = 0;
-        k     = 1;
-        level = scale;
+        k                         = 1;
+        level                     = scale;
         for (i = 1; i < 9; i++) {
             angle                     = k << 8;
             g_ScratchPadVectors[0].vx = (rcos(angle) * D_1F800000_WORD[1]) >> 12;
@@ -170,7 +170,7 @@ NON_MATCHING void func_801EF14C(void) {
             g_ScratchPadVectors[2].vz = 0;
             x                         = (g_ScratchPadVectors[2].vx << 9) + TASK(PartyMember)->pos.x.fixed;
             y                         = ((g_ScratchPadVectors[2].vy << 16) >> 7) + TASK(PartyMember)->pos.y.fixed;
-            tpage = (GetGraphType() == 1 || GetGraphType() == 2) ? 0xA5 : 0x35;
+            tpage                     = (GetGraphType() == 1 || GetGraphType() == 2) ? 0xA5 : 0x35;
             SetDrawMode((DR_MODE*)g_GfxPrimCursor, 0, 1, tpage, NULL);
             Area_CellAddPrim(x, y, 2, sizeof(DR_MODE));
             prim = (POLY_G3*)g_GfxPrimCursor;
