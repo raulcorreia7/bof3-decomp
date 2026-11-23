@@ -6,13 +6,13 @@
  */
 MATCH void EMI_UpdateStream(void) {
     EmiRingSteps callbacks;
-    u8*          head;
+    volatile u8* head;
     s8*          slot;
     s8           next;
     s32          count;
     u16*         frame_counter;
 
-    head      = (u8*)&g_EmiReadStatus;
+    head      = &g_EmiReadStatus;
     callbacks = g_EmiRingSteps;
     if (*head != 0) {
         g_EmiStreamState = 0;
