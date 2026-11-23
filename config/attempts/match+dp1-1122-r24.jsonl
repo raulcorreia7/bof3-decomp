@@ -1,0 +1,3 @@
+{"function": "emi/bmagic/magic097/03@0x801EFE04", "tried": "measured: candidate 0x87C against retail 0x764, frame 0x88 against 0x60; 0x118 bytes over", "first_diff": "0x801EFE04 addiu sp,-96 against addiu sp,-136", "score": "size 0x87C vs 0x764"}
+{"function": "emi/bmagic/magic124/03@0x801EF6E8", "tried": "measured: candidate 0xA64 against retail 0xB24, frame 0x40 against 0x50; 0xC0 bytes short", "first_diff": "0x801EF6E8 addiu sp,-80 against addiu sp,-64", "score": "size 0xA64 vs 0xB24"}
+{"function": "emi/bmagic/magic121/03@0x801EF414", "tried": "measured: 0xD80 against 0xD84 (one instruction short); the branch at 0x801EF4CC targets 0x801F0114 against 0x801F0110", "first_diff": "0x801EF4CC beqz target +4", "score": "size 0xD80 vs 0xD84"}

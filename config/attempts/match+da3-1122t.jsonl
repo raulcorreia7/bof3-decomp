@@ -1,0 +1,1 @@
+{"function": "emi/bmagic/magic114/03@0x801EF280", "tried": "Measured the next hard row and diffed its first hunk", "first_diff": "0x801EF3C4: the draft inserts a bit-extraction block (andi a0,t0,1; andi v1,t0,4; srl; or) retail does not have; 23 hunks, candidate 233 vs retail 266 \u2014 the body needs the asm rewrite", "score": "23 hunks, candidate 233, retail 266"}
