@@ -628,7 +628,8 @@ void               Battle_DrawPanels(s16 x, s16 y);
 void               func_801D7D10(u8 clut_index, u16 x, u16 y, u16 width, u8 height, u8 shade);
 void               func_801D7EB0(s32 x, s32 y);
 void               func_801D8450(u32 panel_index);
-void               func_801D8690(s32 x, s32 y, s32 slot);
+/* func_801D8690 */
+void               Battle_DrawEnemyPanel(s32 x, s32 y, s32 slot);
 void               Battle_DrawEnemyNamePanel(s32 x, s32 y, s32 slot);
 void               func_801D8DF8(s32 panel_x, s32 panel_y, u32 index);
 /* func_801D9304 */

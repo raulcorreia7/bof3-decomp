@@ -16,11 +16,13 @@ NON_MATCHING void func_801F3F5C(s32 part, s32 span, s32 phase_step, s32 offset) 
     u32       part_words[2];
     s32       x;
     s32       y;
-    s32       height;
     s32       tpage;
     u32       row;
     u32       next_row;
     s32       i;
+    s32       height;
+    s16*      vy_top;
+    s16*      vy_bottom;
 
     row                 = TASK(Actor)->unk_0A + phase_step;
     TASK(Actor)->unk_0A = row;
@@ -45,7 +47,10 @@ NON_MATCHING void func_801F3F5C(s32 part, s32 span, s32 phase_step, s32 offset) 
     }
 
     y = ((TASK(Actor)->pos.y.part.integer - 0x80) << 7) + 0x10;
-    x = ((TASK(Actor)->pos.x.part.integer - 0x80) << 7) + 0x10;
+
+    vy_top    = &g_ScratchPadVectors[2].vy;
+    vy_bottom = &g_ScratchPadVectors[3].vy;
+    x         = ((TASK(Actor)->pos.x.part.integer - 0x80) << 7) + 0x10;
 
     for (i = 0; i < 2; i++) {
         tpage = getTPage(1, 0, 320, 256);
@@ -55,20 +60,23 @@ NON_MATCHING void func_801F3F5C(s32 part, s32 span, s32 phase_step, s32 offset) 
         SetPolyFT4(prim);
         SetShadeTex(prim, 0);
 
-        g_ScratchPadVectors[0].vx = x + i * span;
         g_ScratchPadVectors[2].vx = x + i * span;
-        g_ScratchPadVectors[1].vx = x - i * span;
+        g_ScratchPadVectors[0].vx = x + i * span;
         g_ScratchPadVectors[3].vx = x - i * span;
+        g_ScratchPadVectors[1].vx = x - i * span;
         if (i == 0) {
             g_ScratchPadVectors[0].vy = (y + span) - offset;
-            g_ScratchPadVectors[1].vy = (y - span) - offset;
-            g_ScratchPadVectors[2].vy = y + span;
-            g_ScratchPadVectors[3].vy = y - span;
         } else {
             g_ScratchPadVectors[0].vy = y - offset;
+        }
+        if (i == 0) {
+            *vy_top                   = y + span;
+            g_ScratchPadVectors[1].vy = (y - span) - offset;
+            *vy_bottom                = y - span;
+        } else {
+            *vy_top                   = y;
             g_ScratchPadVectors[1].vy = y - offset;
-            g_ScratchPadVectors[2].vy = y;
-            g_ScratchPadVectors[3].vy = y;
+            *vy_bottom                = y;
         }
 
         height                    = -Area_HeightSample(TASK(Actor)->pos.x.fixed, TASK(Actor)->pos.y.fixed) / 2;

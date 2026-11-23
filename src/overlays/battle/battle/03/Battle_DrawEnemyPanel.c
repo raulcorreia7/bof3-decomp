@@ -2,14 +2,13 @@
 
 /* Draws an enemy's name panel: the two-pass frame around the name and the dimmer lower band. */
 #ifdef NON_MATCHING
-NON_MATCHING void func_801D8690(s32 x, s32 y, s32 slot) {
+NON_MATCHING void Battle_DrawEnemyPanel(s32 x, s32 y, s32 slot) {
     s16 color_r;
     s16 color_g;
     s16 color_b;
     s16 draw_x;
     s16 text_x;
     u16 packed_color;
-    u8  flag;
     u8  index;
     s32 panel_x;
     s32 panel_y;
@@ -17,7 +16,7 @@ NON_MATCHING void func_801D8690(s32 x, s32 y, s32 slot) {
     GFX_AddDrawMode(GetTPage(TPAGE_DEPTH_4BIT, TPAGE_ABR_HALF, FONT_TPAGE_X, FONT_TPAGE_Y));
     index        = slot - 3;
     draw_x       = x + 4;
-    packed_color = *(u16*)((u8*)D_80033A08 + (((*(s8*)&g_WindowStyle) << 6) | 0x20));
+    packed_color = *(u16*)(MEM_PTR(u8, 0x80033A08u) + (((*(s8*)&g_WindowStyle) << 6) | 0x20));
     color_r      = (packed_color & 0x1F) * 8;
     color_g      = (packed_color >> 2) & 0xF8;
     color_b      = (packed_color >> 7) & 0xF8;
@@ -33,9 +32,8 @@ NON_MATCHING void func_801D8690(s32 x, s32 y, s32 slot) {
     Battle_DrawPanelShape(draw_x, (s16)(y + 0x13), 3, 0);
     panel_x = x;
     panel_y = y;
-    flag    = g_BattleEnemyBattlers[index].unk_7F;
-    if (flag == 1) {
-        func_801D9E9C(text_x, (s16)(y + 0xA), g_UiPanelCurrent->unk_0B, g_UiPanelCurrent->flags, flag);
+    if (g_BattleEnemyBattlers[index].unk_7F == 1) {
+        func_801D9E9C(text_x, (s16)(y + 0xA), g_UiPanelCurrent->unk_0B, g_UiPanelCurrent->flags, 1);
     } else {
         func_801D94D4((s16)(x + 0x24), (s16)(y + 0xC), 0, 0xFFFF);
     }
@@ -52,5 +50,5 @@ NON_MATCHING void func_801D8690(s32 x, s32 y, s32 slot) {
     Battle_DrawLine((s16)(panel_x + 2), (s16)(panel_y + 0x12), (s16)(panel_x + 0x49), (s16)(panel_y + 0x12), color_r, color_g, color_b);
 }
 #else
-INCLUDE_ASM(func_801D8690);
+INCLUDE_ASM(Battle_DrawEnemyPanel);
 #endif

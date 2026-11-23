@@ -143,7 +143,7 @@ segments:
       - [0x7490, c, func_801D8090]
       - [0x7670, c, func_801D8270]
       - [0x7850, c, func_801D8450]
-      - [0x7A90, c, func_801D8690]
+      - [0x7A90, c, Battle_DrawEnemyPanel]
       - [0x7EE4, c, Battle_DrawEnemyNamePanel]
       - [0x81F8, c, func_801D8DF8]
       - [0x8704, c, Battle_OpenPartyPanel]

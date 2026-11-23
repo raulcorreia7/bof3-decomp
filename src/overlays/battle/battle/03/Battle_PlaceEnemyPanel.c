@@ -24,7 +24,7 @@ MATCH void Battle_PlaceEnemyPanel(void) {
     FAKE_BARRIER();
     y                          = g_BattleEnemyBattlers[enemy_slot].screen_y + g_BattleEnemyBattlers[enemy_slot].panel_offset_y + 0xC;
     BATTLE_PANEL_TASK->y.value = y;
-    func_801D8690((s16)BATTLE_PANEL_TASK->x.value, (s16)y, BATTLE_PANEL_TASK->selection.slot);
+    Battle_DrawEnemyPanel((s16)BATTLE_PANEL_TASK->x.value, (s16)y, BATTLE_PANEL_TASK->selection.slot);
     if (g_Battle.selection_latch != 0) {
         slot = g_BattleActorTurn->command.target;
         if ((slot & 0xC0) == 0) {

@@ -86,6 +86,7 @@ Battle_WaitAreaReload = { addr = 0x801D716C, type = "func", source = "Step after
 Battle_WriteBackParty = { addr = 0x801D7350, type = "func", source = "Copies the party's battle state back to the field characters." }
 Battle_DrawPartyPanel = { addr = 0x801D750C, type = "func", source = "Draws the party panel, one cell per party member." }
 Battle_DrawPanels = { addr = 0x801D7A40, type = "func", source = "Draws the queued battle panels and the two entrance origins around (x, y)." }
+Battle_DrawEnemyPanel = { addr = 0x801D8690, type = "func", source = "battle/03: draws the enemy selection panel placed by Battle_PlaceEnemyPanel (frame via Battle_DrawWindowTile and Battle_DrawPanelShape, name via UI_TextDrawString, border via Battle_DrawPanelLine and Battle_DrawLine)" }
 Battle_DrawEnemyNamePanel = { addr = 0x801D8AE4, type = "func", source = "Draws the 0x4B-pixel name panel of enemy slot minus 3 at (x, y) in the window style colour, with the enemy name text when func_801DA69C allows it and an icon in place when its unk_7F is 1." }
 Battle_OpenPartyPanel = { addr = 0x801D9304, type = "func", source = "Opens panel task 1 for the party list: sizes it from the party count through D_801EAF27 and places it at x 0xF0. Called by Battle_OpenPanels." }
 Battle_OpenPanel = { addr = 0x801D9484, type = "func", source = "writes g_UiPanelTasks through UI_PanelOpenTask from every battle end and ability path" }

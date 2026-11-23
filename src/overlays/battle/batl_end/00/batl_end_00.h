@@ -22,7 +22,7 @@ u8                func_801EEDA8(void);
 /* Sets the reward list's first entry. */
 void              func_801DE9A8(u8 entry);
 s32               func_801EF6C0(void);
-u16               func_801EF928(u8 id, u8 flag);
+u16               func_801EF928(s32 id, s32 flag);
 extern void       func_801EFE5C(void);
 void              func_801F039C(s16 x, s16 y, s32 width, s32 height);
 extern void       func_801F07C0(void);
