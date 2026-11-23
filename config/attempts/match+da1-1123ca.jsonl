@@ -1,0 +1,1 @@
+{"function": "emi/battle/batl_end/00@0x801EF140", "tried": "FAKE_BARRIER before the unk_0A/unk_0B stores in both store orders, and u8/u16 locals for the two task bytes", "first_diff": "4 rows (from 12): the barrier plus the mode/state/unk_09 order matches retail's addiu-then-stores; the locals keep 4 and the remaining hunks are the a0/v1 swap", "score": "4 rows"}

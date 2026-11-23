@@ -1,0 +1,1 @@
+{"function": "emi/world01/area067/14@0x801F38A0", "tried": "read the hunk: retail stores the y fields before adding 2, the draft adds 2 into v0 first and stores at the shifted offsets", "first_diff": "15 rows: 0x801F3954 sh v0,16(s0) against addiu v0,v0,2; the store block and the +2 placement differ", "score": "15 rows"}

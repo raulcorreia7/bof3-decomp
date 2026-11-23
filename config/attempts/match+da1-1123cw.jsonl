@@ -1,0 +1,1 @@
+{"function": "emi/bmagic/magic067/03@0x801EEC94", "tried": "moved effect = &g_BattleEffects[slot] before the enemy index, with and without a barrier", "first_diff": "5 rows baseline; the plain swap costs 13 and the barrier form 57, both reverted", "score": "5 rows"}

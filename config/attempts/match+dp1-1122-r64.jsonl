@@ -1,0 +1,3 @@
+{"function": "emi/battle/battle/15@0x800A0EC4", "tried": "the Stats struct assignment for the 0x20 copy (report lead) leaves 276 rows and 0x4E4 against 0x550; frame stays 8 large", "first_diff": "0x800A0EC4 addiu sp,sp,-32 against addiu sp,sp,-40", "score": "275 rows"}
+{"function": "emi/world04/area199/13@0x801F2E80", "tried": "the branch targets sit 0xAC early and the 0x8014598C load lands in v1; indexed-array spellings at 0x801F44D4 cluster (cause 1)", "first_diff": "0x801F2EA4 beqz v0,0x801f3378 against 0x801f32cc", "score": "191 rows"}
+{"function": "emi/etc/game/00@0x801BCD60", "tried": "frame 8 bytes large and the prologue saves differ; +0 instructions, 49 hunks", "first_diff": "0x801BCD60 addiu sp,sp,-80 against addiu sp,sp,-88", "score": "303 rows"}

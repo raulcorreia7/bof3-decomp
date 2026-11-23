@@ -1,0 +1,1 @@
+{"function": "emi/scenario/scena15/00@0x801F97CC", "tried": "each FAKE_BARRIER is load-bearing: removing the first or the second leaves 21 rows against the 19-row base", "first_diff": "0x801F99B8 move a2,zero against nop", "score": "19 rows"}

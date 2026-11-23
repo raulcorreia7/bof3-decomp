@@ -1,0 +1,1 @@
+{"function": "emi/scenario/scena10/00@0x801F7068", "tried": "read the loop: limit = timer << 4 lives in a3 in retail (sll a3; sltu a3,a2; move a2,a3), in v1 in the draft", "first_diff": "12 rows: first hunk 0x801F70A0 sll a3,v1,4 against sll v1,v1,4; the value's register is the only delta in this block", "score": "12 rows"}

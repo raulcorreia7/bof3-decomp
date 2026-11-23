@@ -7,10 +7,10 @@ __asm__(".include \"include/match/macro.inc\"\n");
 
 #ifdef NON_MATCHING
 NON_MATCHING void func_801FB268(void) {
-    u8           slot;
-    u8           staged_index;
-    s8           staged;
-    volatile u8* staged_slot;
+    u8  slot;
+    s8  staged_index;
+    s8  staged;
+    s8* staged_slot;
 
     switch (g_ScenarioState.step) {
         case 0:
@@ -66,7 +66,7 @@ NON_MATCHING void func_801FB268(void) {
             if (g_ScriptVars[0] == 0x16) {
                 staged                 = Actor_FindFreeSpawned();
                 g_ScenarioState.unk_03 = staged;
-                staged_slot            = &g_ScenarioState.unk_03;
+                staged_slot            = (s8*)&g_ScenarioState.unk_03;
                 if (staged != -1) {
                     g_SpawnedActors[staged].header.flags      = ACTOR_FLAG_IN_USE;
                     staged_index                              = *staged_slot;

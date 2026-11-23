@@ -1,0 +1,3 @@
+{"function": "emi/battle/battle/15@0x800B2C90", "tried": "retail materializes li a3,130 before the frame saves; 52 hunks and signedness remain", "first_diff": "0x800B2CA0 li a3,130 against sw ra,84(sp)", "score": "362 rows"}
+{"function": "emi/etc/game/00@0x801BC760", "tried": "the g_Task load lands in a2 against retail a1; scalar-vs-aggregate spellings at three addresses, partial body", "first_diff": "0x801BC784 lui a1,0x1f80 against lui a2,0x1f80", "score": "289 rows"}
+{"function": "emi/battle/battle/15@0x800AC964", "tried": "the counter starts in t2 against retail t1 and the branch targets differ; +8 instructions", "first_diff": "0x800AC968 move t1,zero against move t2,zero", "score": "360 rows"}

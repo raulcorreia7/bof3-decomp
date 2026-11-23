@@ -1,0 +1,1 @@
+{"function": "emi/etc/commu03/06@0x801D1714", "tried": "read the block: retail stores x0, reloads it, stores x1, reloads it, then the y fields; the draft emits the y store first and defers the x reloads", "first_diff": "24 rows: 0x801D1778 addiu v0,s2,4 against sh s3,10(s0); the field store/reload sequence differs", "score": "24 rows"}

@@ -1,0 +1,1 @@
+{"function": "emi/etc/commu02/08@0x801D51D0", "tried": "Swapped the first two statements to match retail's move s2,zero before the rand mask", "first_diff": "375 rows against the 357 baseline; retail's ordering at 0x801D51F4 comes from scheduling, not source order", "score": "357 baseline; 375 with the swap"}

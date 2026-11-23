@@ -36,7 +36,7 @@ NON_MATCHING void func_801DCFD0(void) {
         UI_TextDraw(29, 20, 0, TEXT_LENGTH_MAX, MESSAGE_TABLE_TEXT(AREA_MESSAGE_TABLE, 83));
         if (*pad_state & g_InputMasks[FISHING_INPUT_CAST]) {
             item = FISHING_ACCESSORY_SLOT(g_SpawnedActors[6].pos.x.part.integer);
-            if (g_Accessories[item].type == ITEM_TYPE_FISHING_ROD) {
+            if (g_Accessories[(u8)item].type == ITEM_TYPE_FISHING_ROD) {
                 saved = item;
                 Item_Remove(ITEM_CATEGORY_ACCESSORY, item, 1, 0);
                 if (g_FishingEquipment.rod_id != 0) {
@@ -61,7 +61,7 @@ NON_MATCHING void func_801DCFD0(void) {
             }
         }
         item = FISHING_ACCESSORY_SLOT(g_SpawnedActors[6].pos.x.part.integer);
-        if (g_Accessories[item].type == ITEM_TYPE_FISHING_ROD) {
+        if (g_Accessories[(u8)item].type == ITEM_TYPE_FISHING_ROD) {
             g_SpawnedActors[6].unk_2C = item + 4;
         } else {
             g_SpawnedActors[6].unk_2C = 0xFFFF;
@@ -74,7 +74,7 @@ NON_MATCHING void func_801DCFD0(void) {
     if (g_SpawnedActors[6].unk_0A == 0) {
         if (*pad_state & g_InputMasks[FISHING_INPUT_CAST]) {
             item = FISHING_ACCESSORY_SLOT(g_SpawnedActors[6].pos.y.part.integer);
-            if (g_Accessories[item].type == ITEM_TYPE_FISHING_LURE) {
+            if (g_Accessories[(u8)item].type == ITEM_TYPE_FISHING_LURE) {
                 if (g_FishingEquipment.lure_id != item) {
                     saved = item;
                     Item_Remove(ITEM_CATEGORY_ACCESSORY, item, 1, 0);
@@ -162,7 +162,7 @@ NON_MATCHING void func_801DCFD0(void) {
     }
 
     item = FISHING_ACCESSORY_SLOT(g_SpawnedActors[6].pos.y.part.integer);
-    if (g_Accessories[item].type == ITEM_TYPE_FISHING_LURE) {
+    if (g_Accessories[(u8)item].type == ITEM_TYPE_FISHING_LURE) {
         g_SpawnedActors[6].unk_2C = item + 4;
     } else {
         g_SpawnedActors[6].unk_2C = 0xFFFF;

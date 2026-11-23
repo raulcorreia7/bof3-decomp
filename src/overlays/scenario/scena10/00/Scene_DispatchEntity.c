@@ -49,7 +49,7 @@ NON_MATCHING void func_801F7068(void) {
             count++;
         }
         if ((TASK(Actor)->option_flags & (1 << i)) == 0) {
-            UI_WindowDrawBoxOutline(D_801FE7CC[i].box.x, D_801FE7CC[i].box.y, (u8)width, (u8)height);
+            UI_WindowDrawBoxOutline(D_801FE7CC[i].signed_box.x, D_801FE7CC[i].signed_box.y, (u8)width, (u8)height);
         }
         i++;
     }
@@ -111,7 +111,7 @@ NON_MATCHING void func_801F73EC(void) {
             height = limit;
         }
         if (((TASK(Actor)->option_flags >> i) & 1) == 0) {
-            UI_WindowDrawBoxOutline(D_801FE7CC[i].box.x, D_801FE7CC[i].box.y, (u8)width, (u8)height);
+            UI_WindowDrawBoxOutline(D_801FE7CC[i].signed_box.x, D_801FE7CC[i].signed_box.y, (u8)width, (u8)height);
         }
         i++;
     } while (i < 3);

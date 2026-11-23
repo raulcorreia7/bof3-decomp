@@ -1,0 +1,1 @@
+{"function": "emi/scenario/scena17/00@0x801F8B10", "tried": "spelled the scratchpad vector accesses as literal 0x1F80001C/24/2C addresses", "first_diff": "0x801F8B10: the literal addresses grow the frame to 0x98 and add spills (234 rows), so the retail form needs the distinct element symbols (D_1F80001C and friends), not constants", "score": "234 differing rows against 194"}
