@@ -3,9 +3,8 @@
 /* Draws the area170 floor quad twice, once per sprite row: the four corner vectors the GTE
  * projects, the row's screen scale, and the cell primitive before and after each quad. */
 /* Area_HeightSample, Area_ApplyTileToQuad and the scale row are not declared by the shared headers. */
-s16       Area_HeightSample(s32 x, s32 y);
-s32       Area_ApplyTileToQuad(u32 part_word, POLY_FT4* prim, s32 mode);
-extern u8 D_801F58B8[];
+s16 Area_HeightSample(s32 x, s32 y);
+s32 Area_ApplyTileToQuad(u32 part_word, POLY_FT4* prim, s32 mode);
 
 MATCH void Area_Update(void) {
     POLY_FT4* prim;
