@@ -1,0 +1,1 @@
+{"function": "emi/scenario/scena07/00@0x801F7BE0", "tried": "pinned the x argument to a0 with an opaque and added a memory barrier to order the global y load after it", "first_diff": "0x801F7BFC unchanged: the scheduler still issues lui/lw a1 before lw a0, so the a0/a1 argument loads stay swapped", "score": "3 differing instructions"}

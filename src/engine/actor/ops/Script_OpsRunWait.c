@@ -117,7 +117,7 @@ NON_MATCHING u8 Script_OpsRunWait(void* sub, s32 target, u8 value) {
             FIELD(u8, sub, 0x6u) = slot;
             return value;
         case ACTOR_SCRIPT_WAIT_UNLOCK_SCROLL:
-            g_Game.flags &= ~GAME_FLAG_SCROLL_LOCK;
+            g_GameFlags &= ~GAME_FLAG_SCROLL_LOCK;
             *(u8*)sub |= 8;
             return value;
         case ACTOR_SCRIPT_WAIT_WAIT_MESSAGE:

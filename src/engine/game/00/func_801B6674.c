@@ -21,7 +21,7 @@ NON_MATCHING bool func_801B6674(void) {
             ACTOR_CLEAR_STEP();
             return 1;
         }
-        if ((cell_code & 0xF0) != 0xA0 && !(g_Game.walk_flags & AREA_WALK_TRANSITION)) {
+        if ((cell_code & 0xF0) != 0xA0 && !(g_AreaWalkFlags & AREA_WALK_TRANSITION)) {
             return 0;
         }
         if (!(status & AREA_LOAD_FLAG_NO_ACTOR_SCRIPT)) {
@@ -32,7 +32,7 @@ NON_MATCHING bool func_801B6674(void) {
         entry_pos_x  = g_GameEntryPosX;
         entry_pos_y  = g_GameEntryPosY;
         entry_facing = g_GameEntryFacing;
-        g_Game.walk_flags &= ~AREA_WALK_TRANSITION;
+        g_AreaWalkFlags &= ~AREA_WALK_TRANSITION;
         Game_RequestAreaChange(entry_area, entry_pos_x, entry_pos_y, entry_facing);
         return 1;
     }
@@ -57,7 +57,7 @@ NON_MATCHING bool func_801B6674(void) {
         entry_pos_y  = g_GameEntryPosY;
         entry_facing = g_GameEntryFacing;
         D_8014504A += 1;
-        g_Game.walk_flags &= ~AREA_WALK_TRANSITION;
+        g_AreaWalkFlags &= ~AREA_WALK_TRANSITION;
         D_80145044 = TASK(Actor)->pos.y.fixed;
         D_80145040 = TASK(Actor)->pos.x.fixed;
         D_80145048 = g_GameAreaId;

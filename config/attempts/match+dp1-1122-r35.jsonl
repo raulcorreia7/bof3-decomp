@@ -1,0 +1,3 @@
+{"function": "emi/world03/area132/13@0x801F3560", "tried": "corner locals (102 rows, 0x60 shorter); the ternary-only draft is a pure v0/v1 allocation tie", "first_diff": "0x801F3660 lhu v1,34(sp) against lhu v0,34(sp)", "score": "12 rows"}
+{"function": "emi/battle/battle/03@0x801E5E2C", "tried": "the draft rotates the first global load a1/a2", "first_diff": "0x801E5E2C lui a1,0x801f against lui a2,0x801f", "score": "143 rows"}
+{"function": "emi/bmagic/magic060/00@0x801EFCE8", "tried": "the draft rotates the first global load v1/v0", "first_diff": "0x801EFCE8 lui v1,0x8014 against lui v0,0x8014", "score": "143 rows"}

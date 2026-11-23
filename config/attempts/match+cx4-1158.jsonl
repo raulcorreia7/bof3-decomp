@@ -1,0 +1,1 @@
+{"function": "emi/scenario/scena15/00@0x801F97CC", "tried": "wrote the setRGB0 fields by hand, split the first unk_06 read into a flags local, and put the pinned a2 zero between the field writes", "first_diff": "0x801F99B0 (+0x1E4): the manual field writes reorder the tail and add rows (28 against 19)", "score": "28 differing rows"}

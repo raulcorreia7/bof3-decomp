@@ -1,0 +1,3 @@
+{"function": "emi/world04/area197/13@0x801F3768", "tried": "corners pointer (104); pad moved above the locals, s32 pad, volatile word pad (9 each); no pad (25)", "first_diff": "0x801F377C sw s5,68(sp) against sw s8,80(sp)", "score": "9 rows"}
+{"function": "emi/world02/area103/13@0x801F5174", "tried": "saved-register order keeps z and radius in the wrong registers (blockers cause 3/6)", "first_diff": "0x801F5180 sw s8,104(sp) against sw s5,92(sp)", "score": "72 rows"}
+{"function": "emi/bmagic/magic137/03@0x801EEC7C", "tried": "the draft narrows the alloc index twice; coverage names a wider retail type and the g_GfxPalettePending volatile (owner decision)", "first_diff": "0x801EECC0 andi a3,v0,0xff against andi v0,v0,0xff", "score": "93 rows"}

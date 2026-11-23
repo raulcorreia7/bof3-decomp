@@ -1,0 +1,3 @@
+{"function": "emi/battle/batl_end/00@0x801EF140", "tried": "task_height local (11); panel call below the stores (31); trailing stores swapped (16)", "first_diff": "0x801EF2AC addiu v0,s1,4 against lui at,0x8015", "score": "4 rows"}
+{"function": "emi/etc/game/00@0x8019625C", "tried": "shape -9 instructions; the first pointer lands in t0 against retail t1 (coverage hard/frame plus g_GfxPalettePending volatile)", "first_diff": "0x80196284 addu t1,t9,v0 against addu t0,t9,v0", "score": "76 rows"}
+{"function": "emi/world04/area173/14@0x801F3060", "tried": "wrong or partial body: 116 of 175 rows differ, the prologue shape and constants included", "first_diff": "0x801F3064 lui a3,0x8010 against sw s5,52(sp)", "score": "116 rows"}
