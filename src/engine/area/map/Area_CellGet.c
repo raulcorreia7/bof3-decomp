@@ -12,8 +12,8 @@ MATCH void Area_CellGet(s32 px, s32 py, AreaCell* out) {
     s32            y;
     u16            value;
 
-    x = g_AreaTileOriginX + (px + 1) / 2 + py;
-    y = g_AreaTileOriginY + px / 2 - py;
+    x = g_AreaMap.tile_origin_x + (px + 1) / 2 + py;
+    y = g_AreaMap.tile_origin_y + px / 2 - py;
 
     if (x > 0) {
         bundle = (AreaMapBundle*)MAP_BUNDLE_BASE;

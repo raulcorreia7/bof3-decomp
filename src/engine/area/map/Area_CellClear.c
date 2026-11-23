@@ -18,19 +18,19 @@ MATCH void Area_CellClear(s32 x, s32 y) {
 
     map                                                         = (AreaMapBundle*)MAP_BUNDLE_BASE;
     *(u8*)((u8*)g_AreaCellCodes + (s16)y * map->width + (s16)x) = 0;
-    dx                                                          = (x - ((u16)g_AreaTileOriginX - 1));
-    dy                                                          = (y - g_AreaTileOriginY);
+    dx                                                          = (x - ((u16)g_AreaMap.tile_origin_x - 1));
+    dy                                                          = (y - g_AreaMap.tile_origin_y);
     row                                                         = dx + dy;
     if ((u32)row >= AREA_CELL_GRID_ROWS)
         return;
     next = row + 1;
-    row  = g_AreaGridRowCursor + next;
+    row  = g_AreaMap.grid_row + next;
     row  = (row >= AREA_CELL_GRID_ROWS) ? (row - AREA_CELL_GRID_ROWS) : row;
     col  = dx - dy;
     if ((u32)col >= AREA_CELL_GRID_ROWS)
         return;
     one  = 1;
-    col  = g_AreaGridColCursor + (col / 2 + one);
+    col  = g_AreaMap.grid_column + (col / 2 + one);
     col  = (col >= AREA_CELL_GRID_COLS) ? (col - AREA_CELL_GRID_COLS) : col;
     cell = g_AreaCellGrid[row][col];
     if (cell != 0) {
