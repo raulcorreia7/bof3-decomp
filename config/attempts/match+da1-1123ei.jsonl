@@ -1,0 +1,2 @@
+{"function": "exe/slus_004_22@0x80167E00", "tried": "screened: claimed by another lane; live first hunk is the direct scalar load against the draft's address materialisation", "first_diff": "19 rows: 0x80167EF0 lui v0,0x800e against lui a3,0x800e + addiu; the cause-1 spelling recipe applies but the row is not mine", "score": "19 rows"}
+{"function": "emi/scenario/scena08/00@0x801FA3E4", "tried": "screened: claimed by another lane; first hunk is a store/flag set order", "first_diff": "147 rows of 478: 0x801FA4A4 lui at,0x8015 against ori v1,v1,0x8000", "score": "147 rows"}
