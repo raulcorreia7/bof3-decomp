@@ -1,0 +1,3 @@
+{"function": "emi/etc/commu02/08@0x801D9B80", "tried": "frame 8 bytes short of retail; same opcodes in other order, unit-order shifts the jal targets", "first_diff": "0x801D9B80 addiu sp,sp,-72 against addiu sp,sp,-64", "score": "130 rows"}
+{"function": "exe/slus_004_22@0x8015083C", "tried": "the window base takes s4+2 against retail s5+12; scalar-vs-aggregate spellings and the jump-table body need a rewrite", "first_diff": "0x80150854 sw s5,36(sp) against sw s4,32(sp)", "score": "365 rows"}
+{"function": "emi/world04/area189/13@0x801F2DE0", "tried": "undrafted: 358 words, draws through a D_80142CC0 base with a D_80143D44 byte; a full draft is needed", "first_diff": "n/a (no draft)", "score": "358 words"}

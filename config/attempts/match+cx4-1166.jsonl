@@ -1,0 +1,1 @@
+{"function": "emi/scenario/scena10/00@0x801F73EC", "tried": "moved the order lock from the width read to the limit shift", "first_diff": "0x801F7400: the same 25 rows, first difference moves to the index address shift (sll t0,t1,0x3 against retail's sll a1,t1,0x3)", "score": "25 differing rows both ways"}

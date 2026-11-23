@@ -1,0 +1,1 @@
+{"function": "emi/battle/batl_end/00@0x801EF140", "tried": "on the 4-row draft: lvl-before-col, u8 col, s32 col locals for the two task bytes", "first_diff": "4 rows unchanged: the remaining hunks are the a0/v1 assignment (retail lbu->a0, lhu->v1), which declaration order and width do not move", "score": "4 rows"}

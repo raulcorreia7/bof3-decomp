@@ -13,7 +13,7 @@ NON_MATCHING void func_800AF0F8(s32 pos_x, s32 pos_y, s32* values, u8* base, u8 
     u32    limit;
     u32    addend;
     u32    adjust;
-    u32    slot;
+    u32    stride;
     u32    claim;
     u32    entry;
     u32    best;
@@ -41,13 +41,13 @@ NON_MATCHING void func_800AF0F8(s32 pos_x, s32 pos_y, s32* values, u8* base, u8 
     } else {
         total = cell + addend;
     }
-    slot = size & BYTE_MASK;
+    stride = size & BYTE_MASK;
     if ((u32)total >= 0x38) {
         g_GfxPrimCursor -= count * size;
     } else {
         cursor = g_GfxPrimCursor;
         limit  = g_GfxBufferIndex * 0x9000 + PRIM_ARENA_BASE;
-        next   = cursor + slot;
+        next   = cursor + stride;
         if (next < limit) {
             offset = (g_GfxBufferIndex + 4) * 8 + total * 0x30;
             if ((count & BYTE_MASK) != 0) {
@@ -62,7 +62,7 @@ NON_MATCHING void func_800AF0F8(s32 pos_x, s32 pos_y, s32* values, u8* base, u8 
                     if (values[best] != 0) {
                         values[best] = 0;
                         packet       = *(P_TAG**)(D_80142CC4 + offset);
-                        address      = base + best * slot;
+                        address      = base + best * stride;
                         setaddr(packet, address);
                         *(u8**)(D_80142CC4 + offset) = (u8*)address;
                     }
@@ -70,7 +70,7 @@ NON_MATCHING void func_800AF0F8(s32 pos_x, s32 pos_y, s32* values, u8* base, u8 
                 } while (claim < (count & BYTE_MASK));
             }
         } else {
-            g_GfxPrimCursor -= count * slot;
+            g_GfxPrimCursor -= count * stride;
         }
     }
 }

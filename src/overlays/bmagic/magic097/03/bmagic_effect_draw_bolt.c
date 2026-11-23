@@ -15,7 +15,7 @@ MATCH void func_801EF5C4(s16 band_height, u16 radius, u16 jitter_mask) {
     s32      i;
 
     g_ScratchPad.cells.halves[0] = radius;
-    g_ScratchPad.cells.halves[1] = (TASK(PartyMember)->param.unk_0B & 0xF) << 8;
+    g_ScratchPad.cells.halves[1] = (TASK(PartyMember)->param.unk_0B & 0xF) * 256;
     g_ScratchPad.cells.halves[2] = TASK(PartyMember)->timer * 15;
     g_ScratchPad.cells.halves[3] = TASK(PartyMember)->timer * 2;
     g_ScratchPad.cells.halves[6] = band_height - RANDOM_MASK(3);
@@ -115,19 +115,18 @@ MATCH void func_801EF5C4(s16 band_height, u16 radius, u16 jitter_mask) {
     }
 }
 
-#ifdef NON_MATCHING
-NON_MATCHING void func_801EFE04(s16 band_height, u16 radius, u16 jitter_mask) {
+/* Draws the bands of func_801EF5C4 from half the radius, each band band_height high. */
+MATCH void func_801EFE04(s16 band_height, s16 radius, u16 jitter_mask) {
     POLY_G4* prim;
     long     p;
     long     flag;
     s32      tpage;
     s32      i;
 
-    g_ScratchPad.cells.halves[0] = radius;
-    g_ScratchPad.cells.halves[1] = (TASK(PartyMember)->param.unk_0B & 0xF) << 8;
+    g_ScratchPad.cells.halves[0] = radius / 2;
+    g_ScratchPad.cells.halves[1] = (TASK(PartyMember)->param.unk_0B & 0xF) * 256;
     g_ScratchPad.cells.halves[2] = TASK(PartyMember)->timer * 15;
-    g_ScratchPad.cells.halves[3] = TASK(PartyMember)->timer * 2;
-    g_ScratchPad.cells.halves[6] = band_height - RANDOM_MASK(3);
+    g_ScratchPad.cells.halves[3] = TASK(PartyMember)->timer * 13;
     g_ScratchPadVectors[0].vy    = FIXED_MUL(rsin(g_ScratchPad.cells.halves[1]), g_ScratchPad.cells.halves[0]);
     g_ScratchPadVectors[0].vz    = 0;
     tpage                        = getTPage(TPAGE_DEPTH_4BIT, TPAGE_ABR_ADD, 320, 256);
@@ -140,13 +139,17 @@ NON_MATCHING void func_801EFE04(s16 band_height, u16 radius, u16 jitter_mask) {
         } else {
             g_ScratchPad.cells.halves[0] = radius - (jitter_mask & rand());
         }
-        g_ScratchPad.cells.halves[5] = g_ScratchPad.cells.halves[6];
-        g_ScratchPad.cells.halves[6] = band_height - RANDOM_MASK(3);
-        setVector(&g_ScratchPadVectors[2], 0, g_ScratchPadVectors[0].vy, g_ScratchPadVectors[0].vz);
-        setVector(&g_ScratchPadVectors[3], 0, g_ScratchPadVectors[0].vy - g_ScratchPad.cells.halves[5], g_ScratchPadVectors[0].vz);
+        g_ScratchPadVectors[2].vx = 0;
+        g_ScratchPadVectors[2].vy = g_ScratchPadVectors[0].vy;
+        g_ScratchPadVectors[2].vz = g_ScratchPadVectors[0].vz;
+        g_ScratchPadVectors[3].vx = 0;
+        g_ScratchPadVectors[3].vy = g_ScratchPadVectors[0].vy - band_height;
+        g_ScratchPadVectors[3].vz = g_ScratchPadVectors[0].vz;
         setVector(&g_ScratchPadVectors[0], 0, FIXED_MUL(rsin(g_ScratchPad.cells.halves[1]), g_ScratchPad.cells.halves[0]), -(i << 6));
-        setVector(&g_ScratchPadVectors[1], 0, g_ScratchPadVectors[0].vy - g_ScratchPad.cells.halves[6], -(i << 6));
-        prim = (POLY_G4*)g_GfxPrimCursor;
+        g_ScratchPadVectors[1].vx = 0;
+        g_ScratchPadVectors[1].vy = g_ScratchPadVectors[0].vy - band_height;
+        g_ScratchPadVectors[1].vz = -(i << 6);
+        prim                      = (POLY_G4*)g_GfxPrimCursor;
         SetPolyG4(prim);
         SetSemiTrans(prim, 1);
         setRGB0(prim, g_ScratchPad.cells.halves[2], g_ScratchPad.cells.halves[2], g_ScratchPad.cells.halves[2]);
@@ -161,65 +164,65 @@ NON_MATCHING void func_801EFE04(s16 band_height, u16 radius, u16 jitter_mask) {
                       &flag);
         Area_CellAddPrim(TASK(PartyMember)->pos.x.fixed, TASK(PartyMember)->pos.y.fixed, 2, sizeof(POLY_G4));
         prim = (POLY_G4*)g_GfxPrimCursor;
-        g_ScratchPadVectors[0].vy -= g_ScratchPad.cells.halves[6];
-        g_ScratchPadVectors[1].vy -= g_ScratchPad.cells.halves[6] * 2;
-        g_ScratchPadVectors[2].vy -= g_ScratchPad.cells.halves[5];
-        g_ScratchPadVectors[3].vy -= g_ScratchPad.cells.halves[5] * 2;
+        g_ScratchPadVectors[0].vy -= band_height;
+        g_ScratchPadVectors[1].vy -= band_height;
+        g_ScratchPadVectors[2].vy -= band_height;
+        g_ScratchPadVectors[3].vy -= band_height;
         SetPolyG4(prim);
         SetSemiTrans(prim, 1);
-        setRGB0(prim, g_ScratchPad.cells.halves[3], g_ScratchPad.cells.halves[3], g_ScratchPad.cells.halves[2]);
+        setRGB0(prim, 1, 1, g_ScratchPad.cells.halves[3]);
         setRGB1(prim, 1, 1, 1);
-        setRGB2(prim, g_ScratchPad.cells.halves[3], g_ScratchPad.cells.halves[3], g_ScratchPad.cells.halves[2]);
-        setRGB3(prim, 1, 1, 1);
         if (i == 1) {
             setRGB2(prim, 1, 1, 1);
+            setRGB3(prim, 1, 1, 1);
+        } else {
+            setRGB2(prim, 1, 1, g_ScratchPad.cells.halves[3]);
             setRGB3(prim, 1, 1, 1);
         }
         RotTransPers4(&g_ScratchPadVectors[0], &g_ScratchPadVectors[1], &g_ScratchPadVectors[2], &g_ScratchPadVectors[3], (long*)&prim->x0, (long*)&prim->x1, (long*)&prim->x2, (long*)&prim->x3, &p,
                       &flag);
         Area_CellAddPrim(TASK(PartyMember)->pos.x.fixed, TASK(PartyMember)->pos.y.fixed, 2, sizeof(POLY_G4));
         prim = (POLY_G4*)g_GfxPrimCursor;
-        g_ScratchPadVectors[0].vy += g_ScratchPad.cells.halves[6] * 2;
-        g_ScratchPadVectors[1].vy += g_ScratchPad.cells.halves[6] * 3;
-        g_ScratchPadVectors[2].vy += g_ScratchPad.cells.halves[5] * 2;
-        g_ScratchPadVectors[3].vy += g_ScratchPad.cells.halves[5] * 3;
+        g_ScratchPadVectors[0].vy += band_height * 2;
+        g_ScratchPadVectors[1].vy += band_height * 2;
+        g_ScratchPadVectors[2].vy += band_height * 2;
+        g_ScratchPadVectors[3].vy += band_height * 2;
         SetPolyG4(prim);
         SetSemiTrans(prim, 1);
-        setRGB0(prim, g_ScratchPad.cells.halves[3], g_ScratchPad.cells.halves[3], g_ScratchPad.cells.halves[2]);
+        setRGB0(prim, 1, 1, g_ScratchPad.cells.halves[3]);
         setRGB1(prim, g_ScratchPad.cells.halves[2], g_ScratchPad.cells.halves[2], g_ScratchPad.cells.halves[2]);
-        setRGB2(prim, g_ScratchPad.cells.halves[3], g_ScratchPad.cells.halves[3], g_ScratchPad.cells.halves[2]);
-        setRGB3(prim, g_ScratchPad.cells.halves[2], g_ScratchPad.cells.halves[2], g_ScratchPad.cells.halves[2]);
         if (i == 1) {
             setRGB2(prim, 1, 1, 1);
             setRGB3(prim, 1, 1, 1);
+        } else {
+            setRGB2(prim, 1, 1, g_ScratchPad.cells.halves[3]);
+            setRGB3(prim, g_ScratchPad.cells.halves[2], g_ScratchPad.cells.halves[2], g_ScratchPad.cells.halves[2]);
         }
         RotTransPers4(&g_ScratchPadVectors[0], &g_ScratchPadVectors[1], &g_ScratchPadVectors[2], &g_ScratchPadVectors[3], (long*)&prim->x0, (long*)&prim->x1, (long*)&prim->x2, (long*)&prim->x3, &p,
                       &flag);
         Area_CellAddPrim(TASK(PartyMember)->pos.x.fixed, TASK(PartyMember)->pos.y.fixed, 2, sizeof(POLY_G4));
         prim = (POLY_G4*)g_GfxPrimCursor;
-        g_ScratchPadVectors[0].vy += g_ScratchPad.cells.halves[6] * 2;
-        g_ScratchPadVectors[1].vy += g_ScratchPad.cells.halves[6];
-        g_ScratchPadVectors[2].vy += g_ScratchPad.cells.halves[5] * 2;
-        g_ScratchPadVectors[3].vy += g_ScratchPad.cells.halves[5];
+        g_ScratchPadVectors[0].vy += band_height;
+        g_ScratchPadVectors[1].vy += band_height;
+        g_ScratchPadVectors[2].vy += band_height;
+        g_ScratchPadVectors[3].vy += band_height;
         SetPolyG4(prim);
         SetSemiTrans(prim, 1);
         setRGB0(prim, 1, 1, 1);
-        setRGB1(prim, g_ScratchPad.cells.halves[3], g_ScratchPad.cells.halves[3], g_ScratchPad.cells.halves[2]);
-        setRGB2(prim, 1, 1, 1);
-        setRGB3(prim, g_ScratchPad.cells.halves[3], g_ScratchPad.cells.halves[3], g_ScratchPad.cells.halves[2]);
+        setRGB1(prim, 1, 1, g_ScratchPad.cells.halves[3]);
         if (i == 1) {
             setRGB2(prim, 1, 1, 1);
             setRGB3(prim, 1, 1, 1);
+        } else {
+            setRGB2(prim, 1, 1, 1);
+            setRGB3(prim, 1, 1, g_ScratchPad.cells.halves[3]);
         }
         RotTransPers4(&g_ScratchPadVectors[0], &g_ScratchPadVectors[1], &g_ScratchPadVectors[2], &g_ScratchPadVectors[3], (long*)&prim->x0, (long*)&prim->x1, (long*)&prim->x2, (long*)&prim->x3, &p,
                       &flag);
         Area_CellAddPrim(TASK(PartyMember)->pos.x.fixed, TASK(PartyMember)->pos.y.fixed, 2, sizeof(POLY_G4));
-        g_ScratchPadVectors[0].vy -= g_ScratchPad.cells.halves[6] * 3;
+        g_ScratchPadVectors[0].vy -= band_height * 2;
     }
 }
-#else
-INCLUDE_ASM(func_801EFE04);
-#endif
 
 /* Draws the lightning bolt of the effect as LINE_G2 segments: each segment swings by the effect ticker, its length
  * and brightness flicker at random, and it goes into the depth cell of the effect's position. The halfword copy of
