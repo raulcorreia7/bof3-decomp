@@ -101,11 +101,11 @@ NON_MATCHING void func_801F73EC(void) {
 
     i = 0;
     do {
-        width  = D_801FE7CC[i].box.w;
-        /* The copy is the clamp's operand, as retail compares against its a2 copy. */
-        height = width;
-        limit  = TASK(Actor)->timer << 4;
-        if (((u16)limit) < height) {
+        width = D_801FE7CC[i].box.w;
+        /* FAKE: retail keeps the loaded width in a2 for the clamp; without this the load folds (0x108). */
+        FAKE_OPAQUE(width);
+        limit = TASK(Actor)->timer << 4;
+        if (((u16)limit) < width) {
             width = limit;
         }
         height = D_801FE7CC[i].box.h;
