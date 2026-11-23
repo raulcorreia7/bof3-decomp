@@ -17,77 +17,66 @@ MATCH void func_801EEC04(void) {
 
 #ifdef NON_MATCHING
 NON_MATCHING void func_801EED0C(void) {
-    BattleEffect* effect;
-    u16*          palette_src;
-    u16*          palette_dst;
-    u32           i;
-    u8            slot;
-    u8            type;
-    u8            phase;
-    s32           speed;
+    u16* palette_src;
+    u16* palette_dst;
+    u32  i;
+    u8   slot;
+    u8   phase;
+    s32  speed;
 
     for (i = 0; i < BMAGIC_EFFECT_COUNT; i++) {
-        D_801F0694[i].header.flags = 0;
-        D_801F0694[i].header.mode  = 0;
-        D_801F0694[i].header.step  = 0;
+        BMAGIC_EFFECT_SLOTS[i].header.flags = 0;
+        BMAGIC_EFFECT_SLOTS[i].header.mode  = 0;
+        BMAGIC_EFFECT_SLOTS[i].header.step  = 0;
     }
-
     TASK(PartyMember)->param.unk_0B    = 0;
     slot                               = Battle_AllocEffect(1, 0x40);
-    g_BattleEffects[slot].header.mode  = 0;
     g_BattleEffects[slot].target.party = g_Task;
+    g_BattleEffects[slot].header.mode  = 0;
     TASK(PartyMember)->param.unk_0B++;
 
-    type  = 3;
     speed = 0x80;
     for (i = 0; i < 8; i++) {
-        slot                 = BMagic_AllocEffect();
-        effect               = &D_801F0694[slot];
-        effect->header.mode  = 0;
-        effect->arg.unk_09   = i << 3;
-        effect->unk_0B       = type;
-        effect->unk_0C       = speed;
-        effect->pos.x.fixed  = 0x800000;
-        effect->target.party = g_Task;
+        slot                                  = BMagic_AllocEffect();
+        BMAGIC_EFFECT_SLOTS[slot].target.party = g_Task;
+        BMAGIC_EFFECT_SLOTS[slot].header.mode  = 0;
+        BMAGIC_EFFECT_SLOTS[slot].arg.unk_09   = i << 3;
+        BMAGIC_EFFECT_SLOTS[slot].unk_0B       = 3;
+        BMAGIC_EFFECT_SLOTS[slot].unk_0C       = speed;
+        *(s32*)BMAGIC_EFFECT_SLOTS[slot].pad_14 = 0x800000;
         TASK(PartyMember)->param.unk_0B++;
     }
-
-    type  = 2;
     speed = 0xC0;
     for (i = 0, phase = 2; i < 8; i++, phase += 8) {
-        slot                 = BMagic_AllocEffect();
-        effect               = &D_801F0694[slot];
-        effect->header.mode  = 0;
-        effect->arg.unk_09   = phase;
-        effect->unk_0B       = type;
-        effect->unk_0C       = speed;
-        effect->pos.x.fixed  = 0x400000;
-        effect->target.party = g_Task;
+        slot                                  = BMagic_AllocEffect();
+        BMAGIC_EFFECT_SLOTS[slot].target.party = g_Task;
+        BMAGIC_EFFECT_SLOTS[slot].header.mode  = 0;
+        BMAGIC_EFFECT_SLOTS[slot].arg.unk_09   = phase;
+        BMAGIC_EFFECT_SLOTS[slot].unk_0B       = 2;
+        BMAGIC_EFFECT_SLOTS[slot].unk_0C       = speed;
+        *(s32*)BMAGIC_EFFECT_SLOTS[slot].pad_14 = 0x400000;
         TASK(PartyMember)->param.unk_0B++;
     }
-
-    type  = 1;
     speed = 0x100;
     for (i = 0, phase = 4; i < 8; i++, phase += 8) {
-        slot                 = BMagic_AllocEffect();
-        effect               = &D_801F0694[slot];
-        effect->header.mode  = 0;
-        effect->arg.unk_09   = phase;
-        effect->unk_0B       = type;
-        effect->unk_0C       = speed;
-        effect->pos.x.fixed  = 0;
-        effect->target.party = g_Task;
+        slot                                  = BMagic_AllocEffect();
+        BMAGIC_EFFECT_SLOTS[slot].target.party = g_Task;
+        BMAGIC_EFFECT_SLOTS[slot].header.mode  = 0;
+        BMAGIC_EFFECT_SLOTS[slot].arg.unk_09   = phase;
+        BMAGIC_EFFECT_SLOTS[slot].unk_0B       = 1;
+        BMAGIC_EFFECT_SLOTS[slot].unk_0C       = speed;
+        *(s32*)BMAGIC_EFFECT_SLOTS[slot].pad_14 = 0;
         TASK(PartyMember)->param.unk_0B++;
     }
 
     palette_src = D_80036C00;
     palette_dst = g_BattleEffectPalette;
     for (i = 0; i < 16; i++) {
-        palette_dst[i] = palette_src[i] | 0x8000;
+        *palette_dst++ = *palette_src++ | 0x8000;
     }
-    g_Battle.flags |= 0x200;
     g_BattleEffectPalette[0] = D_80036C00[0];
-    g_GfxPalettePending      = 1;
+    g_Battle.flags |= 0x200;
+    g_GfxPalettePending = 1;
 
     TASK(PartyMember)->facing = D_8014637C->facing;
     TASK(PartyMember)->unk_0C = 0x40000;
@@ -95,8 +84,8 @@ NON_MATCHING void func_801EED0C(void) {
     Effect_RotatePosition(g_Task);
     TASK(PartyMember)->unk_18      = g_AreaScrollTargetX + TASK(PartyMember)->unk_0C;
     TASK(PartyMember)->unk_1C      = g_AreaScrollTargetY + TASK(PartyMember)->unk_10;
-    TASK(PartyMember)->pos.x.fixed = rsin(0) << 6;
-    TASK(PartyMember)->pos.y.fixed = rcos(0) << 6;
+    TASK(PartyMember)->pos.x.fixed = TASK(PartyMember)->unk_18 + (rsin(0) << 6);
+    TASK(PartyMember)->pos.y.fixed = TASK(PartyMember)->unk_1C + (rcos(0) << 6);
     func_801F0544();
     SND_SEQueueSelection(0x100);
     TASK(PartyMember)->unk_09 = D_801F065C[TASK(PartyMember)->facing];
