@@ -17,16 +17,16 @@ MATCH bool Camera_StepAngle(s16 degrees, s8 duration) {
             }
             scale *= speed;
             frames     = duration * (128 / scale);
-            D_801481F0 = g_AreaCameraAngle.vz << 16;
+            D_801481F0 = g_AreaCamera.angle.vz << 16;
             D_801481F4 = frames;
-            D_80148200 = ((((degrees << 12) / 360) - (g_AreaCameraAngle.vz & 0x7FF)) << 16) / frames;
+            D_80148200 = ((((degrees << 12) / 360) - (g_AreaCamera.angle.vz & 0x7FF)) << 16) / frames;
         } else {
-            g_AreaCameraAngle.vz = (degrees << 12) / 360;
+            g_AreaCamera.angle.vz = (degrees << 12) / 360;
         }
     } else {
         *remaining -= 1;
         D_801481F0 += D_80148200;
-        g_AreaCameraAngle.vz = D_801481F0 >> 16;
+        g_AreaCamera.angle.vz = D_801481F0 >> 16;
     }
     return D_801481F4 != 0;
 }
