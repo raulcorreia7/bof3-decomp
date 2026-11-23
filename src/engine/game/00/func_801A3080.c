@@ -63,7 +63,7 @@ NON_MATCHING void func_801A3080(Actor* actor, s32 facing) {
     g_ActorTurnRamps[n].delta_z = 0;
     g_ActorTurnRamps[n].delta_y = 0;
     g_ActorTurnRamps[n].delta_x = 0;
-    work->unk_6C     = D_801C8424[type & BYTE_MASK];
+    work->unk_6C                = D_801C8424[type & BYTE_MASK];
 }
 #else
 INCLUDE_ASM(func_801A3080);
