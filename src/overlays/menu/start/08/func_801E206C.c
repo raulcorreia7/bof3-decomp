@@ -1,58 +1,58 @@
 #include "start_08.h"
 
 #ifdef NON_MATCHING
+/* Settings screen: draws the option rows and rebinds a pressed button to its input slot. */
 NON_MATCHING void func_801E206C(void) {
     u8* cursor;
-    u16 sel;
+    u16 cue;
+    u16 buttons; /* the pressed actions, reduced to the first one */
+    u16 scan;    /* the pressed actions, scanned for the first one */
     s32 i;
     s32 keys;
 
     Menu_DrawClutStrip(g_WindowClut);
-    Menu_DrawHeaderBar(MENU_HEADER_X, 0x10, MENU_HEADER_WIDTH, MENU_HEADER_HEIGHT, g_WindowStyle);
+    Menu_DrawHeaderBar(MENU_HEADER_X, 16, MENU_HEADER_WIDTH, MENU_HEADER_HEIGHT, g_WindowStyle);
     func_801E26A8(0x1C, 0x40);
     cursor = &D_80148655;
     func_801E2668(*cursor, 0x70, 0x26);
     if ((s8)*cursor != 9) {
-        WinDrawCueText(28, 19, ((s8)*cursor + 0xBC) & HALF_MASK);
+        cue = (s8)*cursor + 0xBC;
     } else if (g_AutoRun != 0) {
-        WinDrawCueText(28, 19, 0xCA);
+        cue = 0xCA;
     } else {
-        WinDrawCueText(28, 19, 0xC5);
+        cue = 0xC5;
     }
+    WinDrawCueText(28, 19, cue);
     func_801E2D84(0xA8, 0x62);
     UI_CursorDraw(0xB0, (((s8)D_80148655 - 8) * 0x12 + 0x6A) & 0xFFFE, 0);
-    sel = g_PadStates[0].pressed & (PADRup | PADRdown | PADRleft | PADRright | PADL1 | PADR1);
-    if (sel != 0) {
+    buttons = g_PadStates[0].pressed & (PADRup | PADRdown | PADRleft | PADRright | PADL1 | PADR1);
+    scan    = buttons;
+    if (buttons != 0) {
         SND_SEPlay(EMI_SE_ID(SND_BANK_COMMON, 3));
         g_InputMasks[INPUT_SLOT_SPEAK] &= ~(PADL2 | PADR2);
         g_InputMasks[INPUT_SLOT_CONFIRM] &= ~(PADL2 | PADR2);
-        i = 0;
-        while (!((sel >> i) & 1)) {
-            i++;
-            if (i >= 16) {
+        for (i = 0; i < 16; i++) {
+            if ((scan >> i) & 1) {
+                i += 1;
                 break;
             }
         }
-        if (i < 16) {
-            do {
-                sel &= ~(1 << i);
-                i++;
-            } while (i < 16);
+        for (; i < 16; i++) {
+            buttons &= ~(1 << i);
         }
         for (i = 0; i < 6; i++) {
-            if (g_InputMasks[D_801ECD14[i]] & sel) {
+            if (g_InputMasks[D_801ECD14[i]] & buttons) {
                 break;
             }
         }
         if (i != 6) {
             g_InputMasks[D_801ECD14[i]] = g_InputMasks[D_801ECD0C[(s8)D_80148655]];
         }
-        g_InputMasks[D_801ECD0C[(s8)D_80148655]] = sel;
+        g_InputMasks[D_801ECD0C[(s8)D_80148655]] = buttons;
         g_InputMasks[INPUT_SLOT_SPEAK] |= PADL2 | PADR2;
         g_InputMasks[INPUT_SLOT_CONFIRM] |= PADL2 | PADR2;
     }
-    sel  = g_PadStates[0].pressed;
-    keys = INPUT_GetRepeatedButtons(sel & INPUT_DIRECTIONAL);
+    keys = INPUT_REPEATED(g_PadStates[0].pressed, INPUT_DIRECTIONAL);
     if (keys & PADLup) {
         SND_SEPlay(EMI_SE_ID(SND_BANK_COMMON, 0));
         D_80148655 = D_80148655 - 1;
@@ -67,11 +67,11 @@ NON_MATCHING void func_801E206C(void) {
             SND_SEPlay(EMI_SE_ID(SND_BANK_COMMON, 0));
             D_80148655 = 8;
         }
-    } else if (sel & (PADLright | PADLleft)) {
+    } else if (g_PadStates[0].pressed & (PADLright | PADLleft)) {
         SND_SEPlay(EMI_SE_ID(SND_BANK_COMMON, 1));
         D_80148655 = 7;
         D_80148652 = D_80148652 - 1;
-    } else if (sel & PADstart) {
+    } else if (g_PadStates[0].pressed & PADstart) {
         SND_SEPlay(EMI_SE_ID(SND_BANK_COMMON, 6));
         D_80148655 = 0;
         D_80148652 = D_80148652 - 2;

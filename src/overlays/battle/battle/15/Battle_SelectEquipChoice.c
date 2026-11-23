@@ -1,89 +1,85 @@
 #include "battle_15.h"
 
-void Battle_ApplyEquipment(void); /* extern */
-
 /* func_80099830 */
 #ifdef NON_MATCHING
 NON_MATCHING void Battle_SelectEquipChoice(void) {
     u16* pad_state;
-    s32  pad;
-    u32  scroll_lo;
-    u32  scroll_hi;
-    u8   choice;
-    u8   new_scroll;
+    s32  buttons;
+    u8   old_cursor;
+    u8   item_id;
+    u8   first_row;
+    u8   last_row;
+    u8   next;
 
     if (D_80148597 == 0) {
         D_801485DC = 1;
         D_801485E0 = D_80148598 + 7;
-        D_801485E2 = D_8014859A + (((g_BattleListCursor - g_UiPanelTasks[17].unk_0A) * 0xD) + 0x1A);
+        D_801485E2 = D_8014859A + ((g_BattleListCursor - D_8014859E) * 13 + 26);
     } else {
         D_801485DC = 0;
     }
     pad_state = &g_PadStates[0].pressed;
     INPUT_REPEATED(*pad_state, (INPUT_DIRECTIONAL | PADL1 | PADR1));
-    pad       = INPUT_REPEATED(*pad_state, (PADLup | PADLdown | PADL1 | PADR1));
-    pad_state = (u16*)&D_80148594;
-    if (pad & PADLup) {
-        if (g_BattleListCursor != 0) {
-            g_BattleListCursor -= 1;
+    buttons    = INPUT_REPEATED(*pad_state, (PADLup | PADLdown | PADL1 | PADR1));
+    old_cursor = g_BattleListCursor;
+    pad_state  = (u16*)&g_UiPanelTasks[17];
+    if (buttons & PADLup) {
+        if (old_cursor != 0) {
+            g_BattleListCursor = old_cursor - 1;
         }
-        if ((u8)g_BattleListCursor < (u8)g_UiPanelTasks[17].unk_0A) {
-            g_UiPanelTasks[17].u.grow.w = 0xF0;
+        if (g_BattleListCursor < D_8014859E) {
+            D_801485A4 = 0xF0;
         }
-    } else if (pad & PADLdown) {
-        if ((u8)g_BattleListCursor < 0x7FU) {
-            g_BattleListCursor += 1;
+    } else if (buttons & PADLdown) {
+        if (old_cursor < 0x7F) {
+            g_BattleListCursor = old_cursor + 1;
         }
-        if ((s32)g_BattleListCursor >= (g_UiPanelTasks[17].unk_0A + 7)) {
-            g_UiPanelTasks[17].u.grow.w = 0x10;
+        if (g_BattleListCursor >= D_8014859E + 7) {
+            D_801485A4 = 0x10;
         }
-    } else if (pad & 4) {
-        scroll_lo = g_UiPanelTasks[17].unk_0A & BYTE_MASK;
-        if (scroll_lo == 0) {
+    } else if (buttons & PADL1) {
+        first_row = D_8014859E;
+        if (first_row == 0) {
             g_BattleListCursor = 0;
-        } else if (scroll_lo < 7U) {
-            g_BattleListCursor -= g_UiPanelTasks[17].unk_0A;
-            g_UiPanelTasks[17].unk_0A = 0;
+        } else if (first_row < 7) {
+            g_BattleListCursor = old_cursor - first_row;
+            D_8014859E         = 0;
         } else {
-            g_BattleListCursor -= 7;
-            new_scroll = g_UiPanelTasks[17].unk_0A - 7;
-            goto block_25; /* shared scroll/confirm join */
+            g_BattleListCursor = old_cursor - 7;
+            D_8014859E         = first_row - 7;
         }
-    } else if (pad & 8) {
-        scroll_hi = g_UiPanelTasks[17].unk_0A & BYTE_MASK;
-        if (scroll_hi == 0x79) {
+    } else if (buttons & PADR1) {
+        last_row = D_8014859E;
+        if (last_row == 0x79) {
             g_BattleListCursor = 0x7F;
+        } else if (last_row >= 0x73) {
+            next               = old_cursor + 0x79;
+            g_BattleListCursor = next - last_row;
+            D_8014859E         = 0x79;
         } else {
-            if (scroll_hi >= 0x73U) {
-                g_BattleListCursor = (g_BattleListCursor + 0x79) - g_UiPanelTasks[17].unk_0A;
-                new_scroll         = 0x79;
-            } else {
-                g_BattleListCursor += 7;
-                new_scroll = g_UiPanelTasks[17].unk_0A + 7;
-            }
-        block_25:
-            g_UiPanelTasks[17].unk_0A = new_scroll;
+            g_BattleListCursor = old_cursor + 7;
+            D_8014859E         = last_row + 7;
         }
     }
-    if (g_BattleListCursor != FIELD(u8, pad_state, 0xBu)) {
+    if (old_cursor != FIELD(u8, pad_state, 0xBu)) {
         SND_SEPlay(EMI_SE_ID(SND_BANK_COMMON, 0));
     }
-    choice                                          = g_UiPanelTasks[17].flags;
-    g_BattleMessages[((D_801EC328 - 1) & 0xF)].text = UI_MessageGetText(Item_GetDescription((s32)g_UiPanelTasks[17].unk_08, (s32)choice) & HALF_MASK);
+    item_id                                         = D_801485A1;
+    g_BattleMessages[((D_801EC328 - 1) & 0xF)].text = UI_MessageGetText(Item_GetDescription((s32)D_8014859C, (s32)item_id) & 0xFFFF);
     pad_state                                       = &g_PadStates[0].pressed;
-    if (g_InputMasks[BATTLE_INPUT_CANCEL] & *pad_state) {
+    if (*pad_state & g_InputMasks[BATTLE_INPUT_CANCEL]) {
         SND_SEPlay(EMI_SE_ID(SND_BANK_COMMON, 6));
-        goto block_33; /* shared scroll/confirm join */
+        goto equip_exit; /* cancel and a confirmed choice share the panel exit */
     }
     Battle_PreviewEquipment();
-    if (g_InputMasks[BATTLE_INPUT_CONFIRM] & *pad_state) {
-        if (choice != 0) {
+    if (*pad_state & g_InputMasks[BATTLE_INPUT_CONFIRM]) {
+        if (item_id != 0) {
             SND_SEPlay(EMI_SE_ID(SND_BANK_COMMON, 3));
             Battle_ApplyEquipment();
-        block_33:
-            g_BattleListCursor        = 0xFF;
-            g_UiPanelTasks[18].unk_0B = 0xFF;
-            D_801485C5                = 1;
+        equip_exit:
+            g_BattleListCursor = 0xFF;
+            D_801485C3         = 0xFF;
+            D_801485C5         = 1;
             g_Battle.ui_mode -= 1;
             return;
         }

@@ -1,8 +1,7 @@
 #include "area189_13.h"
 
 #ifdef NON_MATCHING
-/* Draws the rain sheet: three background tiles whose screen positions follow the target cell and the
- * camera turn, then a three-tile column stepping down the screen, all shaded by `scale`. */
+/* Draws the rain sheet: three placed tiles and a three-tile column stepping down the screen. */
 NON_MATCHING void func_801F43E8(s32 scale) {
     TILE_1* tile;
     s16     cell_x;
@@ -23,7 +22,7 @@ NON_MATCHING void func_801F43E8(s32 scale) {
     SetSemiTrans(tile, 1);
     shade    = ((scale << 8) - scale) / 128;
     tile->y0 = 0x2D;
-    tile->x0 = (((g_AreaCameraAngle.vy + 0x200) & 0xFFF) * 5) >> 4;
+    tile->x0 = (((g_AreaCameraAngle.vz + 0x200) & 0xFFF) * 5) >> 4;
     tile->r0 = shade;
     tile->g0 = (rand() & 0x7F) * scale / 128;
     tile->b0 = (rand() & 0x7F) * scale / 128;
@@ -37,7 +36,7 @@ NON_MATCHING void func_801F43E8(s32 scale) {
     if ((u16)y < 0x5A) {
         SetTile1(tile);
         SetSemiTrans(tile, 1);
-        tile->x0 = (((g_AreaCameraAngle.vy + 0x400) & 0xFFF) * 5) >> 4;
+        tile->x0 = (((g_AreaCameraAngle.vz + 0x400) & 0xFFF) * 5) >> 4;
         tile->r0 = shade;
         tile->g0 = (rand() & 0x7F) * scale / 128;
         tile->b0 = (rand() & 0x7F) * scale / 128;
@@ -60,7 +59,7 @@ NON_MATCHING void func_801F43E8(s32 scale) {
     if ((u16)y < 0x5A) {
         SetTile1(tile);
         SetSemiTrans(tile, 1);
-        tile->x0 = ((g_AreaCameraAngle.vy - 0x200) * 5) >> 4;
+        tile->x0 = (((g_AreaCameraAngle.vz - 0x200) * 5) >> 4) + (cell_y - 0x1480) / 17;
         tile->r0 = ((rand() + 0x80) & 0xFF) * scale / 128;
         tile->g0 = ((rand() + 0x80) & 0xFF) * scale / 128;
         tile->b0 = ((rand() + 0x80) & 0xFF) * scale / 128;
@@ -76,41 +75,27 @@ NON_MATCHING void func_801F43E8(s32 scale) {
     if (dy < 0) {
         dy = -dy;
     }
-    if (dx > 0x900) {
-        dx = 0x900;
-    }
-    if (dy > 0x400) {
-        dy = 0x400;
-    }
-    y = (0xD00 - dx - dy) / 43 + 0x14;
-    if (y > 0x28) {
-        y = 0x28;
-    }
-    x = cell_x;
-    if (x < 0xB00) {
-        x = 0xB00;
-    }
-    if (x > 0x1E00) {
-        x = 0x1E00;
-    }
+    dx     = dx > 0x900 ? 0x900 : dx;
+    dy     = dy > 0x400 ? 0x400 : dy;
+    y      = (0xD00 - dx - dy) / 43 + 0x14;
+    y      = y < 0x28 ? 0x28 : y;
+    x      = cell_x;
+    x      = x < 0xB00 ? 0xB00 : x;
+    x      = x > 0x1E00 ? 0x1E00 : x;
     cell_y = g_AreaTargetCellY;
-    if (cell_y < 0xF00) {
-        cell_y = 0xF00;
-    }
-    if (cell_y > 0x1800) {
-        cell_y = 0x1800;
-    }
+    cell_y = cell_y < 0xF00 ? 0xF00 : cell_y;
+    cell_y = cell_y > 0x1800 ? 0x1800 : cell_y;
     for (i = 0, step = 0; i < 3; i++) {
         tile     = (TILE_1*)g_GfxPrimCursor;
         tile->y0 = y;
         if ((s16)y < 0x5A) {
             SetTile1(tile);
             SetSemiTrans(tile, 1);
-            angle    = ratan2(cell_y - 0x1380, x - 0x1480) + g_AreaCameraAngle.vy + 0x633;
+            angle    = ratan2(cell_y - 0x1380, x - 0x1480) + g_AreaCameraAngle.vz + 0x633;
             tile->x0 = ((angle & 0xFFF) * 5 >> 4) - step;
             tile->r0 = (rand() & 0x7F) * scale / 128;
             tile->g0 = (rand() & 0x7F) * scale / 128;
-            tile->b0 = shade;
+            tile->b0 = ((scale << 8) - scale) / 128;
             func_801F497C(sizeof(TILE_1));
         }
         step += 0xA;
