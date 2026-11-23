@@ -531,7 +531,6 @@ extern u8                    D_80146856;
 extern volatile u32          D_80146858;
 extern volatile u32          D_8014685C;
 /* Retail data D_80147000-D_8014FFFF (one declaration each). */
-extern u8                    D_80147ACC[];
 extern PanelSortItem         D_80147CFC[];
 extern PanelSortItem         D_80147D08[]; /* == &D_80147CFC[1] */
 extern PanelSortDepth        D_80147D0C[]; /* == &D_80147CFC[1].depth */

@@ -20,10 +20,10 @@ MATCH void func_8015A7E8(void) {
         }
         if (rec[9] == 0) {
             off  = (i & BYTE_MASK) * ACTOR_SIZE;
-            ctrl = D_80147ACC[off];
+            ctrl = g_PartyActors[i & BYTE_MASK].interaction_flags;
             if ((ctrl & 0x20) != 0) {
                 if ((ctrl & LZ77_CONTROL_LITERAL_FLAG) != 0) {
-                    func_801A17A0(off + D_80147ACC);
+                    func_801A17A0((u8*)&g_PartyActors[i & BYTE_MASK].interaction_flags);
                 } else {
                     func_801A18C8((u8*)((i & BYTE_MASK) * ACTOR_SIZE + (u32)base));
                 }
