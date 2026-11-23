@@ -136,7 +136,7 @@ MATCH void func_801F9184(void) {
             break;
 
         case 10:
-            if (g_UiWindowEffectBusy != 0) {
+            if (g_SysThreads[2].state != 0) {
                 break;
             }
             g_AreaDrawFlags      = 0;
@@ -233,7 +233,7 @@ MATCH void func_801F9184(void) {
             break;
 
         case 17:
-            if (g_UiWindowEffectBusy != 0) {
+            if (g_SysThreads[2].state != 0) {
                 break;
             }
             g_ScriptVars[0]      = 1;
@@ -412,7 +412,7 @@ MATCH void func_801F9184(void) {
             break;
 
         case 36:
-            if (g_UiWindowEffectBusy != 0) {
+            if (g_SysThreads[2].state != 0) {
                 break;
             }
             g_ScriptVars[2]      = 2;

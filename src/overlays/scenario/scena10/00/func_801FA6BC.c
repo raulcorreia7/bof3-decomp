@@ -62,7 +62,7 @@ MATCH void func_801FA6BC(void) {
             g_ScenarioState.step = 9;
             break;
         case 9:
-            if (g_UiWindowEffectBusy == 0) {
+            if (g_SysThreads[2].state == 0) {
                 g_ScenarioState.step = 10;
             }
             break;

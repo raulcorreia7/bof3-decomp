@@ -1,0 +1,1 @@
+{"function": "emi/world04/area197/13@0x801F3768", "tried": "Changed the RotTransPers output locals to s32 and tried scoping them to the loop", "first_diff": "0x801F3768: s32 keeps the frame at 0x68 and the same 9 rows; the loop scope does not compile because the pair is also read before the loop", "score": "9 rows differ, 158 words each"}

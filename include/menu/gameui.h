@@ -5,6 +5,7 @@
 #include "menu/message_ids.h"
 #include "game/character.h"
 #include "engine/input/pad/pad.h"
+#include "sys/sched.h"
 
 /* Script interpreter state; the same 12-byte record in each handler. */
 typedef struct ScriptState {
@@ -156,9 +157,9 @@ extern s8 g_UiMessageChoice;
 #define MENU_SELECTION_IDLE()  (g_UiMessageChoice == 0)
 #define MENU_SELECTION_ARMED() (g_UiMessageChoice != 0)
 
-/* The window effect has finished (idle) or is still running (busy). */
-#define WINDOW_EFFECT_IDLE()   (g_UiWindowEffectBusy == 0)
-#define WINDOW_EFFECT_BUSY()   (g_UiWindowEffectBusy != 0)
+/* The window effect has finished (idle) or is still running (busy): thread 2's state word. */
+#define WINDOW_EFFECT_IDLE()   (g_SysThreads[2].state == 0)
+#define WINDOW_EFFECT_BUSY()   (g_SysThreads[2].state != 0)
 
 /* A countdown timer expires when the decrement reaches zero. */
 #define TIMER_EXPIRED(timer)   (--(timer) == 0)

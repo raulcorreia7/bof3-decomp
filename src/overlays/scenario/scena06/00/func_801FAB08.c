@@ -48,7 +48,7 @@ MATCH void func_801FAB08(void) {
             }
             break;
         case 7:
-            if (g_UiWindowEffectBusy == 0) {
+            if (g_SysThreads[2].state == 0) {
                 g_AreaDrawFlags = 0;
                 g_ScriptVars[0] = 0x1F;
                 SND_SeqStop(0, 1);
@@ -103,7 +103,7 @@ MATCH void func_801FAB08(void) {
             }
             break;
         case 16:
-            if (g_UiWindowEffectBusy == 0) {
+            if (g_SysThreads[2].state == 0) {
                 g_AreaDrawFlags      = 0;
                 g_ScenarioState.step = 17;
             }

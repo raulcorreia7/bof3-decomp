@@ -1,0 +1,2 @@
+{"function": "emi/etc/commu02/08@0x801D0FE0", "tried": "read the head: retail opens with a 0x20 frame and s1 = &g_PadStates; the draft opens with a division magic, so the body is wrong", "first_diff": "0x801D0FE0 addiu sp,-32 against lui v0,0x51eb", "score": "251 rows"}
+{"function": "exe/slus_004_22@0x80155560", "tried": "read the prologue: retail copies a0 to s3 and a1 to s2; the draft swaps the two parameters", "first_diff": "0x80155564 sw s3,76(sp) against sw s2,72(sp)", "score": "209 rows"}

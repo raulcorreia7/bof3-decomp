@@ -1,0 +1,3 @@
+{"function": "emi/battle/battle/03@0x801D2B58", "tried": "reversed the loop condition (turn_count > turn_cursor) to move the &turn_cursor base", "first_diff": "177 -> 184 rows; the base still takes a1 where retail uses a0 (0x801D2B5C), so reverted; the rest of the body is retail's instruction sequence", "score": "184 rows"}
+{"function": "emi/bmagic/magic078/03@0x801EF318", "tried": "measured the kept draft; frame 0x108 against 0x100", "first_diff": "626 rows; far past the frame", "score": "626 rows"}
+{"function": "emi/etc/commu02/08@0x801D9B80", "tried": "re-measured after the unit merges: the intra-unit drift is gone and the row is comparable again", "first_diff": "0x801D9B80 frame 0x48 against 0x40; same opcodes, order and operands differ", "score": "frame 8"}

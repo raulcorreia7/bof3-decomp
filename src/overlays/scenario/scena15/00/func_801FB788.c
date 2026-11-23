@@ -179,7 +179,7 @@ MATCH void func_801FB788(void) {
             }
             break;
         case 17:
-            if (g_UiWindowEffectBusy == 0) {
+            if (g_SysThreads[2].state == 0) {
                 SCENARIO_MESSAGE_WAIT(MSG_SCENA15_030, 18);
             }
             break;

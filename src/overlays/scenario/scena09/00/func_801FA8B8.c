@@ -54,7 +54,7 @@ MATCH void func_801FA8B8(void) {
             g_ScenarioState.step = 5;
             break;
         case 5:
-            if (g_UiWindowEffectBusy) {
+            if (g_SysThreads[2].state) {
                 break;
             }
             g_AreaDrawFlags      = 0;
@@ -73,7 +73,7 @@ MATCH void func_801FA8B8(void) {
             g_ScenarioState.step = 7;
             break;
         case 7:
-            if (g_UiWindowEffectBusy) {
+            if (g_SysThreads[2].state) {
                 break;
             }
             *g_ScriptVars        = 2;

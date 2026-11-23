@@ -38,7 +38,7 @@ MATCH void func_801FC1C4(void) {
             *step               = 1;
             break;
         case 1:
-            if (g_UiWindowEffectBusy == 0) {
+            if (g_SysThreads[2].state == 0) {
                 *step = 2;
             }
             break;

@@ -1,0 +1,1 @@
+{"function": "emi/bmagic/magic067/03@0x801EEC94", "tried": "Broke the masked slot into a u8 index local before the enemy load so the mask and stride precede it", "first_diff": "0x801EEE58: the index copy does not move the active_battler load; it still precedes the stride. 5 rows of 170", "score": "5 rows differ, 170 words each"}

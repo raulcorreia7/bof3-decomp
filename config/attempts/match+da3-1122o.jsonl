@@ -1,0 +1,1 @@
+{"function": "emi/world03/area132/13@0x801F3560", "tried": "Moved the s16 cast inside the shift of the size halfwords across every corner term", "first_diff": "0x801F3660: retail shifts the size into v1 and subtracts from the screen coordinate in v0; casting after the shift reorders the whole setXY4 block (100 rows against 12)", "score": "12 rows differ, 145 words each"}

@@ -101,7 +101,7 @@ NON_MATCHING void func_801F73EC(void) {
 
     i = 0;
     do {
-        width = D_801FE7CC[i].box.w;
+        FAKE_ORDER_LOCK(width = D_801FE7CC[i].box.w);
         limit = (u16)(TASK(Actor)->timer << 4);
         if (limit < width) {
             width = limit;
@@ -489,7 +489,7 @@ MATCH void func_801F86D8(void) {
             g_ScenarioState.step = 6;
             break;
         case 6:
-            if (g_UiWindowEffectBusy) {
+            if (g_SysThreads[2].state) {
                 break;
             }
             g_AreaDrawFlags = 0;
@@ -498,7 +498,7 @@ MATCH void func_801F86D8(void) {
             g_ScenarioState.step = 7;
             break;
         case 7:
-            if (g_UiWindowEffectBusy) {
+            if (g_SysThreads[2].state) {
                 break;
             }
             row = 0;

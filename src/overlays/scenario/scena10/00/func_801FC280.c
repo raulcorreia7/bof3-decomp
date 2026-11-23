@@ -30,7 +30,7 @@ MATCH void func_801FC280(void) {
             }
             break;
         case 2:
-            if (g_UiWindowEffectBusy == 0) {
+            if (g_SysThreads[2].state == 0) {
                 g_AreaDrawFlags = 0;
                 func_801C1E3C(2);
                 g_ScenarioState.step = 3;
@@ -45,7 +45,7 @@ MATCH void func_801FC280(void) {
             g_ScenarioState.step = 4;
             break;
         case 4:
-            if (g_UiWindowEffectBusy == 0) {
+            if (g_SysThreads[2].state == 0) {
                 g_AreaSceneMode = 2;
                 g_AreaDrawFlags = 0x1F;
                 UI_ModeSet(1);
@@ -78,7 +78,7 @@ MATCH void func_801FC280(void) {
             }
             break;
         case 7:
-            if (g_UiWindowEffectBusy == 0 && g_ScriptVars[0] == 3) {
+            if (g_SysThreads[2].state == 0 && g_ScriptVars[0] == 3) {
                 Game_ClearScriptActive();
                 g_ScriptVars[0] = 0;
                 SYS_SetFlag(g_SceneFlags, 0x18);
@@ -107,7 +107,7 @@ MATCH void func_801FC280(void) {
             }
             break;
         case 14:
-            if (g_UiWindowEffectBusy == 0) {
+            if (g_SysThreads[2].state == 0) {
                 g_AreaDrawFlags = 0;
                 func_801C1DF0(4);
                 g_ScenarioState.step = 15;
@@ -127,7 +127,7 @@ MATCH void func_801FC280(void) {
             g_ScenarioState.step     = 0;
             break;
         case 20:
-            if (g_UiWindowEffectBusy == 0) {
+            if (g_SysThreads[2].state == 0) {
                 Game_ClearScriptActive();
                 g_AreaDrawFlags = 0x1F;
                 UI_ModeSet(0xB);

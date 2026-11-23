@@ -1260,7 +1260,7 @@ MATCH void func_801D50E4(void) {
     u8  bgm;
     u8  state;
 
-    if (g_UiWindowEffectBusy != 0) {
+    if (g_SysThreads[2].state != 0) {
         return;
     }
     bgm             = g_SndBGMId;
@@ -1471,7 +1471,7 @@ MATCH void func_801D5924(void) {
 MATCH void func_801D5978(void) {
     s32 offset;
 
-    if (g_UiWindowEffectBusy == 0) {
+    if (g_SysThreads[2].state == 0) {
         offset = g_SndBGMId * 4;
         SND_SeqStop(g_SelectionSepSlots[offset], g_SelectionSepSlots[offset + 1]);
         SND_BGMRequest(D_801DB0CC);
@@ -1490,7 +1490,7 @@ MATCH void func_801D5978(void) {
 }
 
 MATCH void func_801D5A48(void) {
-    if (g_UiWindowEffectBusy == 0) {
+    if (g_SysThreads[2].state == 0) {
         MESSAGE_START_WAIT(MSG_AREA175_CANNOT_HELP);
         D_801F294D = 0;
         D_801F294C += 1;

@@ -1,0 +1,2 @@
+{"function": "emi/battle/battle/15@0x800A1D84", "tried": "checked the g_Battle.target scalar token against the asm: retail forms base+index (addu a3,a0,t2) exactly like the draft's (u8*)&g_Battle.target view, and no D_80146394 alias exists", "first_diff": "136 rows; first hunk 0x800A1EE0 addu a3,a0,t2 against addu a0,a0,t2 (register only)", "score": "136 rows"}
+{"function": "emi/etc/commu02/08@0x801D9B80", "tried": "carried over; frame 0x48 against 0x40 with the same opcode set", "first_diff": "same opcodes, other order and operands", "score": "frame 8"}
