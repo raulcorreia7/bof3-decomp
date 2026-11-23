@@ -2,12 +2,11 @@
 
 #ifdef NON_MATCHING
 NON_MATCHING void func_801F4DE0(void) {
-    s32    value;
-    s32    count;
-    Actor* work;
-    s32    offset;
-    s32    match;
-    u8*    flags;
+    s32 value;
+    s32 count;
+    s32 offset;
+    s32 match;
+    u8* flags;
 
     /* FAKE: the retail frame holds 0x10 bytes no statement explains. */
     FAKE_STACK_PADS(u8, 0x10);
@@ -17,20 +16,19 @@ NON_MATCHING void func_801F4DE0(void) {
     g_AreaCameraAngle.vx     = -0x2EE;
     TASK(Actor)->direction   = LOBU(D_8014504B);
     D_801492DC               = ((0x12 - LOBU(D_8014504B)) & 0xF) << 8;
-    work                     = g_Task;
-    g_AreaScrollTargetX      = work->pos.x.fixed;
+    g_AreaScrollTargetX      = TASK(Actor)->pos.x.fixed;
     g_AreaCameraOffsetZ      = -0xD80;
-    g_AreaScrollTargetY      = work->pos.y.fixed;
+    g_AreaScrollTargetY      = TASK(Actor)->pos.y.fixed;
     g_AreaCameraRefreshCount = 4;
     match                    = 0;
-    TASK(Actor)->pos.z.fixed = func_801F4A04(work->pos.x.fixed, work->pos.y.fixed) << 16;
+    TASK(Actor)->pos.z.fixed = func_801F4A04(TASK(Actor)->pos.x.fixed, TASK(Actor)->pos.y.fixed) << 16;
     Actor_ClearVelocity_801F5F20();
     TASK(Actor)->active_flags  = 0;
     TASK(Actor)->script_record = 0;
     g_EncounterSteps           = 0;
 
     value = (rand() & 0x1F) + 0x96;
-    count = Party_CountOrder(PARTY_ORDER_FIELD) & BYTE_MASK;
+    count = Party_CountOrder(PARTY_ORDER_FIELD);
     if (count != 0) {
         offset = 0;
         do {

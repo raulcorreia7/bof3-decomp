@@ -11,7 +11,6 @@ NON_MATCHING void Battle_SelectEquipItem(void) {
     u16  keys;
     u32  resource;
     u8*  resource_id;
-    u8   slot;
     u16  choice;
     u8   prev;
     u8*  slot_cursor;
@@ -49,19 +48,17 @@ NON_MATCHING void Battle_SelectEquipItem(void) {
     if (keys & g_InputMasks[BATTLE_INPUT_CONFIRM]) {
         if (g_BattleTargetCursorCol != 0) {
             SND_SEPlay(EMI_SE_ID(SND_BANK_COMMON, 3));
-            slot                                                                     = BATTLE_ACTIVE_MEMBER->slot;
-            g_Game.members[slot].u.turn.damage_flags.volatile_value                  = g_Game.members[slot].u.turn.damage_flags.volatile_value | BATTLER_DAMAGE_UNK_14;
-            g_Game.members[slot].u.turn.command.id                                   = (u16)g_BattleTargetCursorCol;
-            choice                                                                   = (u16)g_BattleTargetCursorCol;
-            g_BattleActorTurn->command.id                                            = choice;
-            resource_id                                                              = UI_MessageGetText(Item_GetDescription((s32)(choice >> 8), choice & BYTE_MASK) & HALF_MASK);
-            BATTLE_SELECTION_RECORD_HANDLE((D_801EC328 - 1) & BATTLE_RING_SLOT_MASK) = resource_id;
-            D_80148597                                                               = 2;
-            g_BattlePanelMode                                                        = 1;
-            D_801485DC                                                               = 0;
-            g_UiPanelTasks[21].active                                                = 0;
-            g_UiPanelTasks[4].active                                                 = 1;
-            g_Battle.ui_step                                                         = 7;
+            g_Game.members[BATTLE_ACTIVE_MEMBER->slot].u.turn.damage_flags.volatile_value |= BATTLER_DAMAGE_UNK_14;
+            *(s16*)&g_Game.members[BATTLE_ACTIVE_MEMBER->slot].u.turn.command.id      = g_BattleTargetCursorCol;
+            choice                                                                    = g_BattleTargetCursorCol;
+            g_BattleActorTurn->command.id                                             = choice;
+            *(s8**)&g_BattleMessages[((D_801EC328 - 1) & BATTLE_RING_SLOT_MASK)].text = (s8*)UI_MessageGetText(Item_GetDescription(choice >> 8, choice & BYTE_MASK) & HALF_MASK);
+            g_UiPanelTasks[4].active                                                  = 1;
+            D_80148597                                                                = 2;
+            D_801485DC                                                                = 0;
+            g_UiPanelTasks[21].active                                                 = 0;
+            g_BattlePanelMode                                                         = 1;
+            g_Battle.ui_step                                                          = 7;
         } else {
             SND_SEPlay(EMI_SE_ID(SND_BANK_COMMON, 7));
         }

@@ -1,0 +1,1 @@
+{"function": "emi/world00/area030/04@0x801DE5EC", "tried": "limit as s32 and u16, and dropping the fish_row casts", "first_diff": "6 rows: retail frame 0x18 (ra 20, s0 16), draft 0x20 (ra 28, s0 24); s32 limit 32 rows, u16 31, no-cast 6", "score": "6 rows"}

@@ -1,0 +1,3 @@
+{"function": "emi/bmagic/magic060/00@0x801EFB00", "tried": "initializer order (41); the prologue copies a1 first against retail a0 and the scale sits in s2 against retail s1", "first_diff": "0x801EFB04 sw s4,40(sp) against sw s1,28(sp)", "score": "40 rows"}
+{"function": "emi/battle/battle/15@0x800B0B0C", "tried": "the a0 parameter lands in s6 against retail s5; three shared volatiles are lane decisions", "first_diff": "0x800B0B10 sw s5,52(sp) against sw s6,56(sp)", "score": "95 rows"}
+{"function": "emi/world02/area106/13@0x801F31DC", "tried": "the 12 constant is materialized early into s3 against retail 1 into s2", "first_diff": "0x801F324C li s2,1 against li s3,12", "score": "81 rows"}

@@ -1,0 +1,1 @@
+{"function": "emi/etc/start/08@0x801E206C", "tried": "took the row first: compared the if/else-if layout at the cue-text arm", "first_diff": "0x801E20E8: retail jumps to 0x801E21D4 with addiu a1,a1,1 in the delay slot, the draft falls into the g_AutoRun test; coverage: draft -2 instructions over 25 hunks with menu/pad/member scalar causes", "score": "76 coverage rows"}

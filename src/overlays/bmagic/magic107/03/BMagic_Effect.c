@@ -312,32 +312,40 @@ MATCH void func_801EFEA8(void) {
 }
 
 #ifdef NON_MATCHING
+/* Draws the sixteen-segment fan of semi-transparent triangles around the effect, shaded by the timer. */
 NON_MATCHING void func_801F01AC(void) {
     POLY_G3* prim;
+    s32      centre;
+    s32      i;
     long     depth;
     long     flag;
-    s32      i;
     s32      tpage;
 
     tpage = getTPage(TPAGE_DEPTH_4BIT, TPAGE_ABR_SUB, 320, 256);
     GFX_ADD_DITHERED_DRAW_MODE(BMAGIC_LAYER_BEHIND_BATTLERS, tpage);
-    g_ScratchPad.cells.halves[5] = TASK(PartyMember)->unk_09 * 12;
-    g_ScratchPad.cells.halves[0] = 240;
-    g_ScratchPadVectors[2].vx    = FIXED_MUL(rsin(0), g_ScratchPad.cells.halves[0]);
-    g_ScratchPadVectors[2].vy    = FIXED_MUL(rcos(0), g_ScratchPad.cells.halves[0]);
+    g_ScratchPad.cells.words[0] = 384;
+    g_ScratchPad.cells.words[2] = ((rsin((TASK(PartyMember)->unk_09 & 0x3F) << 6) << 9) >> 12) + 0x400;
+    centre                      = FIXED_MUL(rcos(g_ScratchPad.cells.words[2]), g_ScratchPad.cells.words[0]);
+    g_ScratchPad.cells.words[0] = 48;
+    g_ScratchPadVectors[2].vx   = FIXED_MUL(rsin(0), g_ScratchPad.cells.words[0]);
+    g_ScratchPadVectors[2].vy   = centre + FIXED_MUL(rcos(0), g_ScratchPad.cells.words[0]);
+    g_ScratchPadVectors[2].vz   = 512;
     for (i = 1; i <= 16; i++) {
         g_ScratchPadVectors[0].vx = 0;
-        g_ScratchPadVectors[0].vy = 0;
+        g_ScratchPadVectors[0].vy = centre;
+        g_ScratchPadVectors[0].vz = 512;
         g_ScratchPadVectors[1].vx = g_ScratchPadVectors[2].vx;
         g_ScratchPadVectors[1].vy = g_ScratchPadVectors[2].vy;
-        setVector(&g_ScratchPadVectors[2], FIXED_MUL(rsin(i << 8), g_ScratchPad.cells.halves[0]), FIXED_MUL(rcos(i << 8), g_ScratchPad.cells.halves[0]), 0);
-        g_ScratchPadVectors[1].vz = 0;
-        g_ScratchPadVectors[0].vz = 0;
+        g_ScratchPadVectors[1].vz = 512;
+        g_ScratchPadVectors[2].vx = FIXED_MUL(rsin(i << 8), g_ScratchPad.cells.words[0]);
+        g_ScratchPadVectors[2].vy = centre + FIXED_MUL(rcos(i << 8), g_ScratchPad.cells.words[0]);
+        g_ScratchPadVectors[2].vz = 512;
         prim                      = (POLY_G3*)g_GfxPrimCursor;
         SetPolyG3(prim);
         SetSemiTrans(prim, 1);
         RotTransPers3(&g_ScratchPadVectors[0], &g_ScratchPadVectors[1], &g_ScratchPadVectors[2], (long*)&prim->x0, (long*)&prim->x1, (long*)&prim->x2, &depth, &flag);
-        setRGB0(prim, g_ScratchPad.cells.halves[5], g_ScratchPad.cells.halves[5], g_ScratchPad.cells.halves[5]);
+        g_ScratchPad.cells.words[3] = TASK(PartyMember)->timer * 3;
+        setRGB0(prim, g_ScratchPad.cells.words[3], g_ScratchPad.cells.words[3], g_ScratchPad.cells.words[3]);
         setRGB1(prim, 1, 1, 1);
         setRGB2(prim, 1, 1, 1);
         GFX_AddPrim(BMAGIC_LAYER_BEHIND_BATTLERS, sizeof(POLY_G3));

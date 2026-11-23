@@ -1,0 +1,1 @@
+{"function": "emi/scenario/scena17/00@0x801F90BC", "tried": "read the prologue: the parameter-to-register map matches retail (s2=uv, s3=x, s4=y, s1=clut), only the copy order is rotated", "first_diff": "8 rows, all prologue: retail copies uv,x,y,clut (a3,a0,a1,a2), the draft clut,uv,x,y (a2,a3,a0,a1)", "score": "8 rows"}
