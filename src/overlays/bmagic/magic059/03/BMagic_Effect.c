@@ -35,8 +35,9 @@ NON_MATCHING void func_801EED0C(void) {
     g_BattleEffects[slot].header.mode  = 0;
     TASK(PartyMember)->param.unk_0B++;
 
+    i     = 0;
     speed = 0x80;
-    for (i = 0; i < 8; i++) {
+    for (; i < 8; i++) {
         slot                                    = BMagic_AllocEffect();
         BMAGIC_EFFECT_SLOTS[slot].target.party  = g_Task;
         BMAGIC_EFFECT_SLOTS[slot].header.mode   = 0;
