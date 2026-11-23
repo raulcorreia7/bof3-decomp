@@ -187,51 +187,37 @@ MATCH void func_801EF584(void) {
     }
 }
 
-#ifdef NON_MATCHING
 /* Draws the six-quad ring arc around the effect position, blue at the inner rim and fading outward. */
-NON_MATCHING void func_801EF750(void) {
+MATCH void func_801EF750(void) {
     POLY_G4* prim;
-    s16*     cells;
     s32      i;
     u16      phase;
 
-    i                            = 0;
     g_ScratchPad.cells.halves[0] = TASK(PartyMember)->timer;
     g_ScratchPad.cells.halves[7] = (TASK(PartyMember)->timer << 1) + (rand() & 7);
-    cells                        = &g_ScratchPad.cells.halves[2];
-draw:
-    {
+    for (i = 0; i < 6; i++) {
         prim = GFX_CURSOR(POLY_G4);
         SetPolyG4(prim);
         SetSemiTrans(prim, 1);
-
-        phase    = (D_801EFD6C[i] + TASK(PartyMember)->unk_09) & 0x3F;
-        cells[0] = phase << 6;
-        setXY0(prim, cells[1] + FIXED_MUL(rsin(phase << 6), cells[5]), cells[2] + FIXED_MUL(rcos(cells[0]), cells[5]));
-        prim->x2 = cells[1] + FIXED_MUL(rsin(cells[0]), cells[-2]);
-        prim->y2 = cells[2] + FIXED_MUL(rcos(cells[0]), cells[-2]);
-
-        phase    = (D_801EFD6C[i + 1] + TASK(PartyMember)->unk_09) & 0x3F;
-        cells[0] = phase << 6;
-        prim->x1 = cells[1] + FIXED_MUL(rsin(phase << 6), cells[5]);
-        prim->y1 = cells[2] + FIXED_MUL(rcos(cells[0]), cells[5]);
-        prim->x3 = cells[1] + FIXED_MUL(rsin(cells[0]), cells[-2]);
-        prim->y3 = cells[2] + FIXED_MUL(rcos(cells[0]), cells[-2]);
-
+        phase                        = (D_801EFD6C[i] + TASK(PartyMember)->unk_09) & 0x3F;
+        g_ScratchPad.cells.halves[2] = phase << 6;
+        setXY0(prim, g_ScratchPad.cells.halves[3] + FIXED_MUL(rsin(phase << 6), g_ScratchPad.cells.halves[7]),
+               g_ScratchPad.cells.halves[4] + FIXED_MUL(rcos(g_ScratchPad.cells.halves[2]), g_ScratchPad.cells.halves[7]));
+        prim->x2                     = g_ScratchPad.cells.halves[3] + FIXED_MUL(rsin(g_ScratchPad.cells.halves[2]), g_ScratchPad.cells.halves[0]);
+        prim->y2                     = g_ScratchPad.cells.halves[4] + FIXED_MUL(rcos(g_ScratchPad.cells.halves[2]), g_ScratchPad.cells.halves[0]);
+        phase                        = (D_801EFD6C[i + 1] + TASK(PartyMember)->unk_09) & 0x3F;
+        g_ScratchPad.cells.halves[2] = phase << 6;
+        prim->x1                     = g_ScratchPad.cells.halves[3] + FIXED_MUL(rsin(phase << 6), g_ScratchPad.cells.halves[7]);
+        prim->y1                     = g_ScratchPad.cells.halves[4] + FIXED_MUL(rcos(g_ScratchPad.cells.halves[2]), g_ScratchPad.cells.halves[7]);
+        prim->x3                     = g_ScratchPad.cells.halves[3] + FIXED_MUL(rsin(g_ScratchPad.cells.halves[2]), g_ScratchPad.cells.halves[0]);
+        prim->y3                     = g_ScratchPad.cells.halves[4] + FIXED_MUL(rcos(g_ScratchPad.cells.halves[2]), g_ScratchPad.cells.halves[0]);
         setRGB0(prim, 1, 1, 1);
         setRGB1(prim, 1, 1, 1);
         setRGB2(prim, 0x20, 0x20, 0xC0);
         setRGB3(prim, 0x20, 0x20, 0xC0);
         GFX_AddPrim(BMAGIC_LAYER_OVER_BATTLERS, sizeof(POLY_G4));
-        i++;
-    }
-    if (i < 6) {
-        goto draw;
     }
 }
-#else
-INCLUDE_ASM(func_801EF750);
-#endif
 
 /* Draws the eight-spark fan around the task screen position, turned by the step timer. */
 MATCH void func_801EF9E0(void) {
