@@ -22,7 +22,7 @@ NON_MATCHING void func_801E0F78(void) {
     g_UiPanelTasks[1].pos.x   = 0x70;
     g_UiPanelTasks[0].pos.y   = panel_y;
     g_UiPanelTasks[1].pos.y   = panel_y;
-    D_8014833A[0].type        = 0;
+    g_UiPanelTasks[0].unk_0A  = 0;
     g_UiPanelTasks[1].panel   = 7;
     g_UiPanelTasks[1].mode    = 2;
     g_UiPanelTasks[1].state   = 2;

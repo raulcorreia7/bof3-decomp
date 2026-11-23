@@ -146,9 +146,6 @@ extern u8             D_80145F1E[];
 /* 0x80146xxx-0x80149xxx: UI buffers, area queries and shared tables. */
 extern u16            D_8014625C;
 extern u8             D_8014626D;
-extern u8             D_80146277;
-extern s32            D_801462A0;
-extern s32            D_801462A4;
 /* FAKE: g_Battle.choose_ending_hook as a global of its own; the sites that use it match only with a separate symbol. */
 extern Callback       g_BattleChooseEndingHook;
 extern EncounterEnemy D_801463DC[];
