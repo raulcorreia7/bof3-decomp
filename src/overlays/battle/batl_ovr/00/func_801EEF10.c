@@ -23,10 +23,10 @@ NON_MATCHING void func_801EEF10(void) {
 
     if (g_PadStates[0].held != 0) {
         for (i = 0; i < AREA_PALETTE_COLORS; i++) {
-            index16                           = i;
-            color                             = g_BattleEffectPalette[index16];
-            gray                              = (PSX_COLOR_R(color) + PSX_COLOR_G(color) + PSX_COLOR_B(color)) / 3U;
-            value                             = (color & PSX_COLOR_STP_BIT) | (gray << 10) | (gray << 5) | gray;
+            index16                        = i;
+            color                          = g_BattleEffectPalette[index16];
+            gray                           = (PSX_COLOR_R(color) + PSX_COLOR_G(color) + PSX_COLOR_B(color)) / 3U;
+            value                          = (color & PSX_COLOR_STP_BIT) | (gray << 10) | (gray << 5) | gray;
             g_BattleEffectPalette[index16] = value;
         }
         i      = 0;
