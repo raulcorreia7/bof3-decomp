@@ -241,15 +241,15 @@ NON_MATCHING void func_801F78B0(void) {
     int                 new_var;
     u8                  stack_pad[0x10];
     ((Actor*)g_Task)->pos.z.fixed = Area_HeightSample(((Actor*)g_Task)->pos.x.fixed, ((Actor*)g_Task)->pos.y.fixed) << 16;
-    buffer                        = (Scena07BurstBuffer*)(0x800E4800u + 0x424);
+    buffer                        = MEM_PTR(Scena07BurstBuffer, AREA_WORK + 0x424);
     D_801FDFC0                    = buffer;
-    /* FAKE: the local delays the shift so the 0x2000000 constant lands after the dispatch store. */
+    /* FAKE: the local delays the lift constant's shift until after the dispatch store. */
     new_var                       = 0x200;
     buffer->pos.vx                = ((Actor*)g_Task)->pos.x.fixed;
     buffer->pos.vy                = ((Actor*)g_Task)->pos.y.fixed;
     buffer->pos.vz                = ((Actor*)g_Task)->pos.z.fixed + (new_var << 16);
     buffer->angle                 = 0;
-    func_801F90F4((Scena07BurstBuffer*)(0x800E4800u + 0x424));
+    func_801F90F4(MEM_PTR(Scena07BurstBuffer, AREA_WORK + 0x424));
     ((Actor*)g_Task)->vx = 0x28;
     ((Actor*)g_Task)->header.step++;
     SND_SEPlay(((((u32)SND_BANK_AREA) << 8) & 0x0F00) | ((u32)0x09));
