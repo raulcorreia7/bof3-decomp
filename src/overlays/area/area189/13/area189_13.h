@@ -41,6 +41,15 @@ extern u8       D_801F6138[];
 /* The key-state word and its mask partner (gameui.h names it g_PadStates[0].pressed). */
 /* The state handler banks the step dispatchers index. */
 extern Callback D_801F6238[];
+/* The marker quad's left and right edge x halfwords and its two bottom y rows. */
+extern u16      D_801F6240[];
+extern u16      D_801F6242[];
+extern u8       D_801F624C[];
+extern u8       D_801F624D[];
+/* The palette tint triple func_801F3800 applies past phase 0x390. */
+extern s8       D_801F6254[];
+extern s8       D_801F6255[];
+extern s8       D_801F6256[];
 extern s8       D_801F6284[];
 extern s8       D_801F6285[];
 extern u8       D_801F62F0[];
@@ -59,6 +68,7 @@ void Area_CellSetTexture(s32 texture, POLY_FT4* prim);
 void func_801F3514(void);
 void func_801F3800(void);
 void func_801F4150(s32 shade, s32 x);
+void func_801F43E8(s32 scale);
 void func_801F497C(u8 size);
 s16  func_801F4A04(s32 x, s32 y);
 void func_801F4B64(TILE_1* source);
