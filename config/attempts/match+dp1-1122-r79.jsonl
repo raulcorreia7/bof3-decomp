@@ -1,0 +1,1 @@
+{"function": "emi/world01/area049/14@0x801F2DCC", "tried": "alloc_priority shows the const-folded g_Scenario2Flags base in s3 (1097) and the 1 constant in s4 (409); a late-declared flags pointer still cascades (219)", "first_diff": "0x801F2E54 lui s4,0x8014 against lui s3,0x8014", "score": "10 rows"}
