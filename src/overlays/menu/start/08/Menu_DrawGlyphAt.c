@@ -1,96 +1,97 @@
 #include "start_08.h"
-#ifdef NON_MATCHING
-/* Appends one 12-pixel glyph cell; codes 0x12..0x15 draw wide or two-row cells. */
-NON_MATCHING u8* Menu_DrawGlyphAt(s16 x, s16 y, s32 color, u8* glyphs, s32 glyph_left, s32 glyph_right) {
-    POLY_FT4* prim;
-    u8*       cursor;
-    u8        code;
-    u8        right;
-    s32       left;
-    s32       width;
-    s32       clut_x;
-    u16       clut;
-    s32       page_y;
-    s32       cell_row;
 
-    Menu_SetGlyphPage(0U);
-    prim = (POLY_FT4*)g_GfxPrimCursor;
-    SetPolyFT4(prim);
-    cursor = glyphs;
-    left   = glyph_left;
-    right  = (u8)glyph_right;
-    code   = *cursor;
-    if ((s32)code < 0x14) {
-        if ((s32)code < 0x12) {
-            if ((s32)code < 2) {
-                width = right - (left & BYTE_MASK);
-                if ((s32)code >= 0) {
-                    return cursor + 1;
-                }
-                goto draw_cell;
-            }
-            width = right - (left & BYTE_MASK);
-            goto draw_cell;
-        }
-        cursor++;
-        setXY4(prim, x, y, x + (right - (left & BYTE_MASK)), y, x, y + 0xC, x + (right - (left & BYTE_MASK)), y + 0xC);
-        setUV0(prim, (s8)(glyph_left + (((code % 21) & BYTE_MASK) * 0xC)), (s8)((((*cursor) / 21) & BYTE_MASK) * 0xC));
-        prim->u1 = (s8)(glyph_right + ((((*cursor) % 21) & BYTE_MASK) * 0xC));
-        prim->v1 = (s8)((((*cursor) / 21) & BYTE_MASK) * 0xC);
-        prim->u2 = (s8)(glyph_left + ((((*cursor) % 21) & BYTE_MASK) * 0xC));
-        prim->v2 = (s8)(((((*cursor) / 21) & BYTE_MASK) * 0xC) + 0xC);
-        prim->u3 = (s8)(((((*cursor) % 21) & BYTE_MASK) * 0xC) + glyph_right);
-        setRGB0(prim, GFX_COLOR_NEUTRAL, GFX_COLOR_NEUTRAL, GFX_COLOR_NEUTRAL);
-        prim->v3 = (s8)(((((*cursor) / 21) & BYTE_MASK) * 0xC) + 0xC);
-        clut     = GetClut((color & 0xF) * 16, STAGE_PALETTE_Y);
-        page_y   = 0x100;
-        goto emit;
-    }
-    if (code != 0x15) {
-        width = right - (left & BYTE_MASK);
-        if (code == GAME_NONE) {
+#ifdef NON_MATCHING
+#define GLYPH_COL(c) ((u8)((c) % 21))
+#define GLYPH_ROW(c) ((u8)((c) / 21))
+
+NON_MATCHING u8* Menu_DrawGlyphAt(s16 x, s16 y, s32 color, u8* cursor, s32 glyph_left, s32 glyph_right) {
+    POLY_FT4* poly;
+    int       code;
+    u8        color8;
+    u8        left8;
+    u8        right8;
+    s16       x1;
+    s16       y1;
+    u16       clut;
+    s32       abr;
+
+    left8  = glyph_left;
+    right8 = glyph_right;
+    color8 = color;
+    Menu_SetGlyphPage(0);
+    poly = (POLY_FT4*)g_GfxPrimCursor;
+    SetPolyFT4(poly);
+    code = *cursor;
+    switch (code) {
+        case 21:
+            cursor += 1;
+            x1 = x + (right8 - left8);
+            y1 = y + 12;
+            setXY4(poly, x, y, x1, y, x, y1, x1, y1);
+            poly->u0 = glyph_left + ((*cursor + 0x64) % 21) * 12;
+            poly->v0 = ((*cursor + 0x64) / 21) * 12;
+            poly->u1 = glyph_right + ((*cursor + 0x64) % 21) * 12;
+            poly->v1 = ((*cursor + 0x64) / 21) * 12;
+            poly->u2 = glyph_left + ((*cursor + 0x64) % 21) * 12;
+            poly->v2 = ((*cursor + 0x64) / 21) * 12 + 12;
+            poly->u3 = glyph_right + ((*cursor + 0x64) % 21) * 12;
+            setRGB0(poly, GFX_COLOR_NEUTRAL, GFX_COLOR_NEUTRAL, GFX_COLOR_NEUTRAL);
+            poly->v3 = ((*cursor + 0x64) / 21) * 12 + 12;
+            clut     = GetClut((color & 0xF) * 16, STAGE_PALETTE_Y);
+            abr      = 0;
+            break;
+        case 18:
+        case 19:
+            cursor += 1;
+            x1 = x + (right8 - left8);
+            y1 = y + 12;
+            setXY4(poly, x, y, x1, y, x, y1, x1, y1);
+            poly->u0 = glyph_left + GLYPH_COL(*cursor) * 12;
+            poly->v0 = GLYPH_ROW(*cursor) * 12;
+            poly->u1 = right8 + GLYPH_COL(*cursor) * 12;
+            poly->v1 = GLYPH_ROW(*cursor) * 12;
+            poly->u2 = glyph_left + GLYPH_COL(*cursor) * 12;
+            poly->v2 = GLYPH_ROW(*cursor) * 12 + 12;
+            poly->u3 = right8 + GLYPH_COL(*cursor) * 12;
+            poly->v3 = GLYPH_ROW(*cursor) * 12 + 12;
+            setRGB0(poly, GFX_COLOR_NEUTRAL, GFX_COLOR_NEUTRAL, GFX_COLOR_NEUTRAL);
+            clut = GetClut((color & 0xF) * 16, STAGE_PALETTE_Y);
+            abr  = 0x100;
+            break;
+        case 0:
+        case 1:
+        case 255:
             return cursor + 1;
-        }
-    draw_cell:
-        setXY4(prim, x, y, x + width, y, x, y + 0xC, x + width, y + 0xC);
-        code = *cursor;
-        if (code < 0x5B) {
-            setUV0(prim, (s8)(left + (((code % 21) & BYTE_MASK) * 0xC)), (s8)((((*cursor) / 21) & BYTE_MASK) * 0xC));
-            prim->u1 = (s8)(right + ((((*cursor) % 21) & BYTE_MASK) * 0xC));
-            prim->v1 = (s8)((((*cursor) / 21) & BYTE_MASK) * 0xC);
-            prim->u2 = (s8)(left + ((((*cursor) % 21) & BYTE_MASK) * 0xC));
-            prim->v2 = (s8)(((((*cursor) / 21) & BYTE_MASK) * 0xC) + 0xC);
-            prim->u3 = (s8)(right + ((((*cursor) % 21) & BYTE_MASK) * 0xC));
-            cell_row = (((*cursor) / 21) & BYTE_MASK) * 3;
-        } else {
-            prim->v0 = (s8)((((*cursor) + 0x23) / 21) * 0xC);
-            prim->u0 = (s8)(left + (((code + 0x23) % 21) * 0xC));
-            prim->u1 = (s8)(right + (((code + 0x23) % 21) * 0xC));
-            prim->v1 = (s8)(((code + 0x23) / 21) * 0xC);
-            prim->u2 = (s8)(left + (((code + 0x23) % 21) * 0xC));
-            prim->v2 = (s8)((((code + 0x23) / 21) * 0xC) + 0xC);
-            prim->u3 = (s8)(right + (((code + 0x23) % 21) * 0xC));
-            cell_row = ((code + 0x23) / 21) * 3;
-        }
-        prim->v3 = (s8)((cell_row * 4) + 0xC);
-        setRGB0(prim, GFX_COLOR_NEUTRAL, GFX_COLOR_NEUTRAL, GFX_COLOR_NEUTRAL);
-        clut_x = (color & 0xF) * 0x10;
-        goto page_low;
+        default:
+            x1 = x + (right8 - left8);
+            y1 = y + 12;
+            setXY4(poly, x, y, x1, y, x, y1, x1, y1);
+            if (*cursor < 0x5B) {
+                poly->u0 = left8 + GLYPH_COL(*cursor) * 12;
+                poly->v0 = GLYPH_ROW(*cursor) * 12;
+                poly->u1 = right8 + GLYPH_COL(*cursor) * 12;
+                poly->v1 = GLYPH_ROW(*cursor) * 12;
+                poly->u2 = left8 + GLYPH_COL(*cursor) * 12;
+                poly->v2 = GLYPH_ROW(*cursor) * 12 + 12;
+                poly->u3 = right8 + GLYPH_COL(*cursor) * 12;
+                poly->v3 = GLYPH_ROW(*cursor) * 12 + 12;
+            } else {
+                poly->u0 = left8 + ((*cursor + 0x23) % 21) * 12;
+                poly->v0 = ((*cursor + 0x23) / 21) * 12;
+                poly->u1 = right8 + ((*cursor + 0x23) % 21) * 12;
+                poly->v1 = ((*cursor + 0x23) / 21) * 12;
+                poly->u2 = left8 + ((*cursor + 0x23) % 21) * 12;
+                poly->v2 = ((*cursor + 0x23) / 21) * 12 + 12;
+                poly->u3 = right8 + ((*cursor + 0x23) % 21) * 12;
+                poly->v3 = ((*cursor + 0x23) / 21) * 12 + 12;
+            }
+            setRGB0(poly, GFX_COLOR_NEUTRAL, GFX_COLOR_NEUTRAL, GFX_COLOR_NEUTRAL);
+            clut = GetClut((color8 & 0xF) * 16, STAGE_PALETTE_Y);
+            abr  = 0;
+            break;
     }
-    cursor++;
-    setXY4(prim, x, y, x + (right - (left & BYTE_MASK)), y, x, y + 0xC, x + (right - (left & BYTE_MASK)), y + 0xC);
-    setUV3(prim, (s8)(glyph_left + (((*cursor + 0x64) % 21) * 0xC)), (s8)(((*cursor + 0x64) / 21) * 0xC), (s8)(glyph_right + (((*cursor + 0x64) % 21) * 0xC)), (s8)(((*cursor + 0x64) / 21) * 0xC),
-           (s8)(glyph_left + (((*cursor + 0x64) % 21) * 0xC)), (s8)((((*cursor + 0x64) / 21) * 0xC) + 0xC));
-    prim->u3 = (s8)((((*cursor + 0x64) % 21) * 0xC) + glyph_right);
-    clut_x   = (color & 0xF) * 0x10;
-    setRGB0(prim, GFX_COLOR_NEUTRAL, GFX_COLOR_NEUTRAL, GFX_COLOR_NEUTRAL);
-    prim->v3 = (s8)((((*cursor + 0x64) / 21) * 0xC) + 0xC);
-page_low:
-    clut   = GetClut(clut_x, STAGE_PALETTE_Y);
-    page_y = 0;
-emit:
-    prim->clut  = clut;
-    prim->tpage = GetTPage(TPAGE_DEPTH_4BIT, TPAGE_ABR_ADD, 960, page_y);
+    poly->clut  = clut;
+    poly->tpage = GetTPage(TPAGE_DEPTH_4BIT, TPAGE_ABR_ADD, 960, abr);
     GFX_AddPrim(GFX_LAYER_UI, sizeof(POLY_FT4));
     return cursor + 1;
 }
