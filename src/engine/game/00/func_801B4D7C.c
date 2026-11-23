@@ -18,7 +18,7 @@ NON_MATCHING u8 func_801B4D7C(u8 wanted_code) {
 
     if (TASK(Actor)->pos.x.part.fraction == 0) {
         g_ScratchPad.cells.halves[0] = TASK(Actor)->pos.x.part.integer - 1;
-        D_1F800002                   = y;
+        g_ScratchPad.cells.ray.y     = y;
         for (i = 0; i < 3; i++) {
             if ((Area_CellGetCode(g_ScratchPad.cells.halves[0], g_ScratchPad.cells.halves[1]) & BYTE_MASK) == wanted_code) {
                 if (TASK(Actor)->direction & 1) {
@@ -43,7 +43,7 @@ NON_MATCHING u8 func_801B4D7C(u8 wanted_code) {
             return 0;
         }
         g_ScratchPad.cells.halves[0] = TASK(Actor)->pos.x.part.integer - 1;
-        D_1F800002                   = TASK(Actor)->pos.y.part.integer - 1;
+        g_ScratchPad.cells.ray.y     = TASK(Actor)->pos.y.part.integer - 1;
         for (i = 0; i < 3; i++) {
             if ((Area_CellGetCode(g_ScratchPad.cells.halves[0], g_ScratchPad.cells.halves[1]) & BYTE_MASK) == wanted_code) {
                 TASK(Actor)->direction = FACING_UP;
@@ -52,7 +52,7 @@ NON_MATCHING u8 func_801B4D7C(u8 wanted_code) {
             g_ScratchPad.cells.halves[0] += 1;
         }
         g_ScratchPad.cells.halves[0] = TASK(Actor)->pos.x.part.integer - 1;
-        D_1F800002                   = TASK(Actor)->pos.y.part.integer + 2;
+        g_ScratchPad.cells.ray.y     = TASK(Actor)->pos.y.part.integer + 2;
         for (i = 0; i < 3; i++) {
             if ((Area_CellGetCode(g_ScratchPad.cells.halves[0], g_ScratchPad.cells.halves[1]) & BYTE_MASK) == wanted_code) {
                 TASK(Actor)->direction = FACING_DOWN;
@@ -64,7 +64,7 @@ NON_MATCHING u8 func_801B4D7C(u8 wanted_code) {
     }
     if (TASK(Actor)->pos.y.part.fraction == 0) {
         g_ScratchPad.cells.halves[0] = x;
-        D_1F800002                   = TASK(Actor)->pos.y.part.integer - 1;
+        g_ScratchPad.cells.ray.y     = TASK(Actor)->pos.y.part.integer - 1;
         for (i = 0; i < 3; i++) {
             if ((Area_CellGetCode(g_ScratchPad.cells.halves[0], g_ScratchPad.cells.halves[1]) & BYTE_MASK) == wanted_code) {
                 if (TASK(Actor)->direction & 1) {
@@ -89,7 +89,7 @@ NON_MATCHING u8 func_801B4D7C(u8 wanted_code) {
             return 0;
         }
         g_ScratchPad.cells.halves[0] = TASK(Actor)->pos.x.part.integer - 1;
-        D_1F800002                   = TASK(Actor)->pos.y.part.integer - 1;
+        g_ScratchPad.cells.ray.y     = TASK(Actor)->pos.y.part.integer - 1;
         for (i = 0; i < 3; i++) {
             if ((Area_CellGetCode(g_ScratchPad.cells.halves[0], g_ScratchPad.cells.halves[1]) & BYTE_MASK) == wanted_code) {
                 TASK(Actor)->direction = FACING_LEFT;
@@ -98,7 +98,7 @@ NON_MATCHING u8 func_801B4D7C(u8 wanted_code) {
             g_ScratchPad.cells.halves[1] += 1;
         }
         g_ScratchPad.cells.halves[0] = TASK(Actor)->pos.x.part.integer + 2;
-        D_1F800002                   = TASK(Actor)->pos.y.part.integer - 1;
+        g_ScratchPad.cells.ray.y     = TASK(Actor)->pos.y.part.integer - 1;
         for (i = 0; i < 3; i++) {
             if ((Area_CellGetCode(g_ScratchPad.cells.halves[0], g_ScratchPad.cells.halves[1]) & BYTE_MASK) == wanted_code) {
                 TASK(Actor)->direction = FACING_RIGHT;
@@ -109,7 +109,7 @@ NON_MATCHING u8 func_801B4D7C(u8 wanted_code) {
         return 0;
     }
     g_ScratchPad.cells.halves[0] = TASK(Actor)->pos.x.part.integer;
-    D_1F800002                   = y;
+    g_ScratchPad.cells.ray.y     = y;
     for (i = 0; i < 2; i++) {
         if ((Area_CellGetCode(g_ScratchPad.cells.halves[0], g_ScratchPad.cells.halves[1]) & BYTE_MASK) == wanted_code) {
             if (TASK(Actor)->direction & 1) {
@@ -131,7 +131,7 @@ NON_MATCHING u8 func_801B4D7C(u8 wanted_code) {
         g_ScratchPad.cells.halves[0] += 1;
     }
     g_ScratchPad.cells.halves[0] = x;
-    D_1F800002                   = TASK(Actor)->pos.y.part.integer;
+    g_ScratchPad.cells.ray.y     = TASK(Actor)->pos.y.part.integer;
     for (i = 0; i < 2; i++) {
         if ((Area_CellGetCode(g_ScratchPad.cells.halves[0], g_ScratchPad.cells.halves[1]) & BYTE_MASK) == wanted_code) {
             if (TASK(Actor)->direction & 1) {

@@ -12,8 +12,8 @@ MATCH void func_801B13BC(void) {
     s32  flag2;
     s16* counter2;
 
-    value    = D_1F80000A;
-    flag     = D_1F800008;
+    value    = g_ScratchPad.cells.ray.shade.g;
+    flag     = g_ScratchPad.cells.halves[4];
     counter  = &D_1F800004;
     *counter = value;
     if ((flag != 0) && (g_FacingOffsets[TASK(Actor)->direction].x > 0)) {
