@@ -63,7 +63,7 @@ MATCH void func_801F78E0(void) {
 MATCH void func_801F7924(void) {
     s8* step;
 
-    if (g_UiWindowEffectBusy == 0) {
+    if (g_SysThreads[2].state == 0) {
         g_AreaScrollTargetX = TO_COORD(176);
         g_AreaScrollTargetY = TO_COORD(19) + COORD_HALF;
         Area_InitMapRenderer();
@@ -77,7 +77,7 @@ MATCH void func_801F7924(void) {
 }
 
 MATCH void func_801F79AC(void) {
-    if ((g_UiWindowEffectBusy == 0) && (EMI_IsReady() != 0)) {
+    if ((g_SysThreads[2].state == 0) && (EMI_IsReady() != 0)) {
         g_ScenarioState.step = 0x5A;
         g_ScenarioState.state_04 += 1;
     }
@@ -266,7 +266,7 @@ MATCH void func_801F7FF0(void) {
     s8* stage;
     u32 row;
 
-    if (g_UiWindowEffectBusy == 0) {
+    if (g_SysThreads[2].state == 0) {
         bgm = &g_SndBGMId;
         row = *bgm * 4;
         SND_SeqStop(g_SelectionSepSlots[row], g_SelectionSequences[row]);
@@ -311,7 +311,7 @@ MATCH void Scene_WaitEndingXA(void) {
 MATCH void func_801F8170(void) {
     s8* stage;
 
-    if (g_UiWindowEffectBusy == 0) {
+    if (g_SysThreads[2].state == 0) {
         stage                    = &D_80146873;
         g_ScenarioState.state_04 = 0;
         *stage                   = *stage + 1;
@@ -341,7 +341,7 @@ MATCH void func_801F81F8(void) {
 }
 
 MATCH void func_801F8274(void) {
-    if (g_UiWindowEffectBusy == 0) {
+    if (g_SysThreads[2].state == 0) {
         g_ScenarioState.step = 0;
         g_ScenarioState.state_04 += 1;
     }
@@ -483,7 +483,7 @@ MATCH void func_801F8710(void) {
     s8* state;
     u8* bgm;
 
-    if (g_UiWindowEffectBusy == 0) {
+    if (g_SysThreads[2].state == 0) {
         bgm = &g_SndBGMId;
         SND_SeqStop(g_SelectionSepSlots[*bgm * 4], g_SelectionSequences[*bgm * 4]);
         *bgm = GAME_NONE;
