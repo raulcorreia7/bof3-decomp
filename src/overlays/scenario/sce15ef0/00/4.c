@@ -109,12 +109,12 @@ MATCH void func_801D11B4(void) {
     }
 }
 
-#ifdef NON_MATCHING
-NON_MATCHING void func_801D1220(s32 value) {
+MATCH void func_801D1220(s32 value) {
     s32      front[3];
     s32      back[3];
     POLY_F4* prim;
-    u16      tpage;
+    POLY_F4* new_var;
+    s32      tpage;
     u8       i;
 
     FAKE_STACK_PADS(u8, 0x18); /* FAKE: retail keeps six unused words between the point rows and the saved registers. */
@@ -128,7 +128,12 @@ NON_MATCHING void func_801D1220(s32 value) {
         tpage = GetTPage(TPAGE_DEPTH_4BIT, TPAGE_ABR_ADD, FONT_TPAGE_X, FONT_TPAGE_Y);
         SetDrawMode((DR_MODE*)g_GfxPrimCursor, 0, 1, tpage, 0);
         Area_CellAddPrim(front[0], front[1], 0, 0xC);
-        prim = (POLY_F4*)g_GfxPrimCursor;
+        i++;
+        /* FAKE: the copy in its own block fixes the cursor pointer's allocation; retail keeps the load and the draw setup apart. */
+        FAKE_ORDER_LOCK_BEGIN
+            new_var = (POLY_F4*)g_GfxPrimCursor;
+            prim    = new_var;
+        FAKE_ORDER_LOCK_END;
         SetPolyF4(prim);
         SetSemiTrans(prim, 1);
         Camera_ProjectPoint(front, (DVECTOR*)&prim->x0);
@@ -139,12 +144,8 @@ NON_MATCHING void func_801D1220(s32 value) {
         Camera_ProjectPoint(back, (DVECTOR*)&prim->x3);
         setRGB0(prim, value, value, value);
         GFX_AddPrim(GFX_LAYER_UI, sizeof(POLY_F4));
-        i++;
     } while (i < 8);
 }
-#else
-INCLUDE_ASM(func_801D1220);
-#endif
 
 /* Draw a red line between two points with a fan at each end. */
 MATCH void func_801D1370(s32* first, s32* second, s16 width) {
