@@ -44,7 +44,7 @@ MATCH void func_801F8CE4(void) {
             g_ScenarioState.step = 0xC;
             break;
         case 12:
-            if (g_UiWindowEffectBusy) {
+            if (g_SysThreads[2].state) {
                 break;
             }
             g_AreaDrawFlags = 0;
@@ -65,7 +65,7 @@ MATCH void func_801F8CE4(void) {
             g_ScenarioState.step = 0xF;
             break;
         case 15:
-            if (g_UiWindowEffectBusy) {
+            if (g_SysThreads[2].state) {
                 break;
             }
             D_801FC4C0 = Actor_FindFreeSpawned();
@@ -79,7 +79,7 @@ MATCH void func_801F8CE4(void) {
             g_ScenarioState.step = 0x10;
             break;
         case 16:
-            if (g_UiWindowEffectBusy) {
+            if (g_SysThreads[2].state) {
                 break;
             }
             func_801F924C();
@@ -109,7 +109,7 @@ MATCH void func_801F8CE4(void) {
             func_801F924C();
             break;
         case 20:
-            if (g_UiWindowEffectBusy) {
+            if (g_SysThreads[2].state) {
                 break;
             }
             g_AreaDrawFlags = 0;
@@ -130,7 +130,7 @@ MATCH void func_801F8CE4(void) {
             g_ScenarioState.step = 0x17;
             break;
         case 23:
-            if (g_UiWindowEffectBusy) {
+            if (g_SysThreads[2].state) {
                 break;
             }
             UI_ModeSet(1);

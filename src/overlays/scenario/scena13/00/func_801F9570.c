@@ -39,7 +39,7 @@ MATCH void func_801F9570(void) {
             g_ScenarioState.step = 21;
             break;
         case 21:
-            if (g_UiWindowEffectBusy == 0) {
+            if (g_SysThreads[2].state == 0) {
                 Area_CellSetPalette(0xC, 9);
                 SCENARIO_MESSAGE_WAIT(MSG_SCENA13_002, 22);
             }
@@ -60,7 +60,7 @@ MATCH void func_801F9570(void) {
             }
             break;
         case 24:
-            if (g_UiWindowEffectBusy == 0) {
+            if (g_SysThreads[2].state == 0) {
                 SCENARIO_MESSAGE_WAIT(MSG_SCENA13_010, 25);
             }
             break;
@@ -81,7 +81,7 @@ MATCH void func_801F9570(void) {
             }
             break;
         case 27:
-            if (g_UiWindowEffectBusy == 0) {
+            if (g_SysThreads[2].state == 0) {
                 g_AreaDrawFlags = 0;
                 MESSAGE_START_WAIT(MSG_SCENA13_020);
                 SND_SeqStop(0, 1);
@@ -114,7 +114,7 @@ MATCH void func_801F9570(void) {
             }
             break;
         case 31:
-            if (g_UiWindowEffectBusy == 0) {
+            if (g_SysThreads[2].state == 0) {
                 Game_ClearScriptActive();
                 g_ScenarioState.state_04 = 0;
                 g_ScenarioState.step     = 0;

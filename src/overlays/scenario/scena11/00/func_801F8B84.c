@@ -63,7 +63,7 @@ MATCH void func_801F8B84(void) {
             g_ScenarioState.step = 0xB;
             break;
         case 11:
-            if (g_UiWindowEffectBusy != 0) {
+            if (g_SysThreads[2].state != 0) {
                 break;
             }
             g_GameStateIndex = 8;
@@ -175,7 +175,7 @@ MATCH void func_801F8B84(void) {
             break;
         }
         case 43:
-            if (g_UiWindowEffectBusy != 0) {
+            if (g_SysThreads[2].state != 0) {
                 break;
             }
             g_AreaDrawFlags      = 0;
