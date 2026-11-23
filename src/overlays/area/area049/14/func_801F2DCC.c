@@ -20,7 +20,7 @@ NON_MATCHING void func_801F2DCC(void) {
     i     = 0;
     if (g_PartySize != 0) {
         do {
-            one = 1;
+            one         = 1;
             index       = i & 0xFF;
             record      = &g_Game.members[index];
             g_GameState = record;
