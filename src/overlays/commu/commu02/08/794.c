@@ -2402,33 +2402,25 @@ MATCH void Fairy_GenerateName(void) {
 
 #include "shared/Menu_DrawPortrait.h"
 
-#ifdef NON_MATCHING
-NON_MATCHING void func_801D90D8(s32 x, s32 y, s32 character, s32 frame_mode) {
+MATCH void func_801D90D8(s32 x, s32 y, s32 character, s32 frame_mode) {
     u8  slot;
-    s32 index;
-    s32 x_copy;
-    s32 y_copy;
-    u8* window_style;
+    s32 frame_x;
+    s32 frame_y;
     u8* text;
 
-    slot         = character;
-    window_style = &g_WindowStyle;
-    UI_WindowDraw((u16)(x + 3), (u16)(y + 3), 125, 45, 0, *window_style);
-    index = slot * PARTY_RECORD_STRIDE;
+    slot = character;
+    UI_WindowDraw((u16)(x + 3), (u16)(y + 3), 125, 45, 0, CHARACTER_BLOCK->window_style);
     Menu_DrawPortrait((u16)(x + 6), (u16)(y + 2), g_Characters[slot].character_id, 0);
-    x_copy = x;
-    y_copy = y;
+    frame_x = x;
+    frame_y = y;
     if ((u8)frame_mode == 0) {
-        text = window_style + 0x16 + index;
+        text = CHARACTER_BLOCK->records[slot];
     } else {
         text = D_801DB080;
     }
     UI_TextDraw((s16)(x + 0x3B), (s16)(y + 0x19), 0, 5, text);
-    func_801AF390((s16)x_copy, (s16)y_copy, g_MenuPortraitAtlas + 0x24, 0);
+    func_801AF390((s16)frame_x, (s16)frame_y, g_MenuPortraitAtlas + 0x24, 0);
 }
-#else
-INCLUDE_ASM(func_801D90D8);
-#endif
 
 MATCH void func_801D9210(void) {
     s32 drawn;
