@@ -1,8 +1,7 @@
 #include "area142_13.h"
 
-#ifdef NON_MATCHING
 /* The scroll target's tile ring: a 16 by 16 grid of semi-transparent, shaded tiles. */
-NON_MATCHING void func_801F3118(void) {
+MATCH void func_801F3118(void) {
     TILE_1* tile;
     s32     fade;
     s32     i;
@@ -27,8 +26,8 @@ NON_MATCHING void func_801F3118(void) {
             SetSemiTrans(tile, 1);
             setRGB0(tile, fade, fade, fade);
 
-            g_ScratchPadVectors[0].vx = (((rsin((j << 8) + (u8)(g_FrameCount << 4) * D_801F355C[i & 1]) >> 6) * 3) - 0x4000) + (TASK(Actor)->pos.x.fixed >> 9);
-            g_ScratchPadVectors[0].vy = (((rcos((j << 8) + (u8)(g_FrameCount << 4) * D_801F355C[i & 1]) >> 6) * 3) - 0x4000) + (TASK(Actor)->pos.y.fixed >> 9);
+            g_ScratchPadVectors[0].vx = (TASK(Actor)->pos.x.fixed >> 9) + (s16)((rsin((j << 8) + (u8)(g_FrameCount << 4) * D_801F355C[i & 1]) >> 6) * 3 - 0x4000);
+            g_ScratchPadVectors[0].vy = (TASK(Actor)->pos.y.fixed >> 9) + (s16)((rcos((j << 8) + (u8)(g_FrameCount << 4) * D_801F355C[i & 1]) >> 6) * 3 - 0x4000);
             g_ScratchPadVectors[0].vz = -0x180 - ((u8)(TASK(Actor)->timer - (i << 4)) << 1);
             RotTransPers(g_ScratchPadVectors, (long*)&tile->x0, &depth, &flag);
 
@@ -39,6 +38,3 @@ NON_MATCHING void func_801F3118(void) {
     SetDrawMode((DR_MODE*)g_GfxPrimCursor, 0, 0, (GetGraphType() == 1 || GetGraphType() == 2) ? 0x2A5 : 0xB5, 0);
     Area_CellAddPrim(TASK(Actor)->pos.x.fixed, TASK(Actor)->pos.y.fixed, 1, sizeof(DR_MODE));
 }
-#else
-INCLUDE_ASM(func_801F3118);
-#endif

@@ -131,16 +131,16 @@ MATCH void func_801EFE24(void) {
     tpage = getTPage(TPAGE_DEPTH_4BIT, TPAGE_ABR_ADD, 320, 256);
     SetDrawMode((DR_MODE*)g_GfxPrimCursor, 0, 1, tpage, 0);
     Area_CellAddPrim(TASK(PartyMember)->pos.x.fixed, TASK(PartyMember)->pos.y.fixed, 2, sizeof(DR_MODE));
-    d          = g_ScratchPadHalves;
-    vec        = g_ScratchPadVectorHalves;
-    d[0]       = 0x80;
-    D_1F800002 = ((TASK(PartyMember)->param.unk_0B + 2) & 0xF) << 8;
-    D_1F800008 = TASK(PartyMember)->timer;
-    i          = 1;
-    D_1F800004 = RANDOM_MASK(0x3F);
-    vec[0]     = 0;
-    D_1F800016 = FIXED_MUL(rsin(D_1F800002), d[0]);
-    D_1F800018 = 0;
+    d                         = g_ScratchPadHalves;
+    vec                       = g_ScratchPadVectorHalves;
+    d[0]                      = 0x80;
+    D_1F800002                = ((TASK(PartyMember)->param.unk_0B + 2) & 0xF) << 8;
+    D_1F800008                = TASK(PartyMember)->timer;
+    i                         = 1;
+    D_1F800004                = RANDOM_MASK(0x3F);
+    vec[0]                    = 0;
+    g_ScratchPadVectors[0].vy = FIXED_MUL(rsin(D_1F800002), d[0]);
+    g_ScratchPadVectors[0].vz = 0;
     if (i < D_1F800008) {
         cell = d + 1;
         do {

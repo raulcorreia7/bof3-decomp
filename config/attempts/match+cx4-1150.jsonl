@@ -1,0 +1,1 @@
+{"function": "emi/scenario/scena10/00@0x801F73EC", "tried": "read the task pointer into a local before the width lock", "first_diff": "0x801F73FC unchanged (the loop index still lands in t0); the local adds the pointer reload and grows the diff to 53 rows, candidate 0x108 against retail 0x10C", "score": "the locked body without the local stays at 25 differing rows"}

@@ -39,8 +39,8 @@ NON_MATCHING u8 func_801B0E44(void) {
     }
     switch (result & BYTE_MASK) {
         case 2:
-            pos2   = (s32*)&D_1F800008;
-            result = Area_HeightReadStep(*(s32*)&D_1F800008, SP_REF(s32, 0xC), TASK(Actor)->direction);
+            pos2   = (s32*)&g_ScratchPad.cells.halves[4];
+            result = Area_HeightReadStep(*(s32*)&g_ScratchPad.cells.halves[4], SP_REF(s32, 0xC), TASK(Actor)->direction);
             func_801B13BC();
             if (((u8*)pos2)[-8] != 0) {
                 if (result >= 0x41) {
@@ -78,7 +78,7 @@ NON_MATCHING u8 func_801B0E44(void) {
             g_Game.walk_flags |= 0x20 | AREA_WALK_ENTRY_PENDING;
             return 0;
         case 3:
-            pos3   = (s32*)&D_1F800008;
+            pos3   = (s32*)&g_ScratchPad.cells.halves[4];
             result = Area_HeightReadStep(pos3[0], pos3[1], TASK(Actor)->direction);
             if (SP_REF(u8, 0x0) != 0) {
                 if (result >= 0x41) {

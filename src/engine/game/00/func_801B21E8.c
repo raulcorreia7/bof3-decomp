@@ -52,8 +52,8 @@ NON_MATCHING void func_801B21E8(void) {
     if (cnt > 0) {
         val13 = &g_Game.members[0].status.field.flags.value;
         val13 = &g_Game.members[0].status.field.flags.value;
-        val0  = &D_1F800008;
-        val0  = &D_1F800008;
+        val0  = &g_ScratchPad.cells.halves[4];
+        val0  = &g_ScratchPad.cells.halves[4];
         val6  = -2;
         val5  = 0;
         do {
@@ -112,7 +112,7 @@ NON_MATCHING void func_801B21E8(void) {
                     func_801B1B2C(val1, val2, TASK(Actor)->direction, TASK(Actor)->voice_flags.scene_flag);
                 }
                 tmp7                     = g_Task;
-                tmp7->pos.x.fixed        = (s32) * (s32*)(&D_1F800008);
+                tmp7->pos.x.fixed        = (s32) * (s32*)(&g_ScratchPad.cells.halves[4]);
                 tmp7->pos.y.fixed        = FIELD(s32, val0, 0x4u);
                 tmp8                     = g_Task;
                 tmp8->pos.z.part.integer = Area_HeightRead(tmp7->pos.x.fixed, FIELD(s32, val0, 0x4u));

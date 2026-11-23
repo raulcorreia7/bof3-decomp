@@ -19,22 +19,22 @@ MATCH s32 Area_CellSetPalette(s32 x, s32 y) {
     s32  value;
     s32  changed;
     s32* object;
-    dx      = x - g_AreaTileOriginX;
-    dy      = y - g_AreaTileOriginY;
+    dx      = x - g_AreaMap.tile_origin_x;
+    dy      = y - g_AreaMap.tile_origin_y;
     changed = 0;
     row     = dx + dy;
     if (((u32)row) >= AREA_CELL_GRID_ROWS) {
         return 0;
     }
     next = row + 1;
-    row  = g_AreaGridRowCursor + next;
+    row  = g_AreaMap.grid_row + next;
     row  = (row >= AREA_CELL_GRID_ROWS) ? (row - AREA_CELL_GRID_ROWS) : (row);
     col  = dx - dy;
     one  = 1;
     if (((u32)col) >= AREA_CELL_GRID_ROWS) {
         return 0;
     }
-    col  = g_AreaGridColCursor + ((col / 2) + one);
+    col  = g_AreaMap.grid_column + ((col / 2) + one);
     col  = (col >= AREA_CELL_GRID_COLS) ? (col - AREA_CELL_GRID_COLS) : (col);
     cell = g_AreaCellGrid[row][col];
     if (cell == 0) {

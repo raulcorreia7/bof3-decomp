@@ -62,16 +62,16 @@ MATCH void func_801D218C(void) {
     s32      page;
     s32      i;
 
-    d          = &g_ScratchPad;
-    vec        = (s16*)g_ScratchPadVectors;
-    d[0]       = 0x40;
-    D_1F800004 = ((TASK(SceneBandEffect)->ticker + 2) & 0xF) << 8;
-    D_1F80000C = TASK(SceneBandEffect)->band;
-    i          = 1;
-    D_1F800008 = RANDOM_MASK(0x3F);
-    vec[0]     = 0;
-    D_1F800016 = FIXED_MUL(rsin(D_1F800004), d[0]);
-    D_1F800018 = 0;
+    d                         = &g_ScratchPad;
+    vec                       = (s16*)g_ScratchPadVectors;
+    d[0]                      = 0x40;
+    D_1F800004                = ((TASK(SceneBandEffect)->ticker + 2) & 0xF) << 8;
+    D_1F80000C                = TASK(SceneBandEffect)->band;
+    i                         = 1;
+    D_1F800008                = RANDOM_MASK(0x3F);
+    vec[0]                    = 0;
+    g_ScratchPadVectors[0].vy = FIXED_MUL(rsin(D_1F800004), d[0]);
+    g_ScratchPadVectors[0].vz = 0;
     if (i < D_1F80000C) {
         cell = d + 1;
         do {

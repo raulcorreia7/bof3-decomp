@@ -34,7 +34,7 @@ MATCH void Area_CellDrawLayer(s32 layer) {
     }
 
     next = layer + 1;
-    row  = g_AreaGridRowCursor + next;
+    row  = g_AreaMap.grid_row + next;
     row  = (row >= AREA_CELL_GRID_ROWS) ? (row - AREA_CELL_GRID_ROWS) : row;
 
     col_offset = D_80149341;
@@ -44,7 +44,7 @@ MATCH void Area_CellDrawLayer(s32 layer) {
 
     col = row ^ 0x1;
     col &= 1;
-    col += g_AreaGridColCursor + col_offset;
+    col += g_AreaMap.grid_column + col_offset;
     col = (col >= AREA_CELL_GRID_COLS) ? (col - AREA_CELL_GRID_COLS) : col;
 
     index = 0;

@@ -2,8 +2,7 @@
 
 #ifdef NON_MATCHING
 NON_MATCHING void func_801F656C(void) {
-    /* FAKE: retail keeps the grid pointer in s3; the best pure-C body puts it in s4. */
-    FAKE_REG(u8*, base, "s3");
+    u8* base;
     s32 col;
     s32 row;
     s16 y;
@@ -12,8 +11,6 @@ NON_MATCHING void func_801F656C(void) {
     u8  index;
     u8  pending;
     u8  next;
-    /* FAKE: retail reserves 8 bytes of frame that no statement uses. */
-    FAKE_STACK_PADS(u8, 8);
 
     base                         = MEM_PTR(u8, AREA_CODE_BASE + 4);
     row                          = 13;
@@ -21,8 +18,8 @@ NON_MATCHING void func_801F656C(void) {
     MEM(u16, AREA_CODE_BASE + 2) = 68;
     do {
         col = 5;
-        x   = 0x60000;
         y   = row;
+        x   = 0x60000;
         do {
             v     = func_801F66D0((s16)col, y);
             *base = v | (func_801F66D0(x >> 16, y) << 4);

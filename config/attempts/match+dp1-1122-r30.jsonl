@@ -1,0 +1,3 @@
+{"function": "emi/etc/start/08@0x801D9748", "tried": "the setup statement order drives the a0/a3 swap and the loop increment placement", "first_diff": "0x801D9754 move a0,zero against addiu a3,v1,288", "score": "36 rows"}
+{"function": "emi/etc/commu03/06@0x801D1714", "tried": "split y stores (24); quad reorder (25); staged x locals (24)", "first_diff": "0x801D1778 addiu v0,s2,4 against sh s3,10(s0)", "score": "24 rows"}
+{"function": "emi/bmagic/magic220/03@0x801EED18", "tried": "the party stores reload the task base into v0 against retail v1", "first_diff": "0x801EED6C lui v0,0x8015 against lui a0,0x8015", "score": "30 rows"}
