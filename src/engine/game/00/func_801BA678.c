@@ -2,7 +2,6 @@
 
 #ifdef NON_MATCHING
 NON_MATCHING s32 func_801BA678(void) {
-    u8     buf[16];
     s16    val0;
     s16    tmp0;
     s16    tmp1;
@@ -48,8 +47,6 @@ NON_MATCHING s32 func_801BA678(void) {
     u8     val20;
     u8*    spad;
     u8     collision_axis;
-    void*  tmp22;
-    void*  tmp23;
     Actor* tmp24;
     void*  tmp25;
     void*  tmp26;

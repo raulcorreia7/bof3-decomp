@@ -11,7 +11,6 @@ NON_MATCHING void func_801F39BC(void) {
     long      flag;
     s32       layer;
     s32       size;
-    s32       i;
     s32       x;
     s32       y;
     s32       x_high;

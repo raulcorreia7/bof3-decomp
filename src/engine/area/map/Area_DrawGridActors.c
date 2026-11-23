@@ -38,7 +38,6 @@ NON_MATCHING void Area_DrawGridActors(void) {
     s32  tpage;
     u32* packet_slot;
     u32  actor_key;
-    u8*  entry;
     FAKE_STACK_PADS(u8, 16);
 
     count = g_AreaGridActorCount;

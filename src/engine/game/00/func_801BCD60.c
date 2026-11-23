@@ -33,7 +33,6 @@ NON_MATCHING void func_801BCD60(s32 target_x, s32 target_y) {
     Actor* tmp14;
     Actor* tmp15;
     Actor* tmp16;
-    void*  tmp17;
     Actor* tmp18;
     Actor* tmp19;
     Actor* tmp20;
