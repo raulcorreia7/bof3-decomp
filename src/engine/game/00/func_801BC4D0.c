@@ -30,13 +30,13 @@ MATCH s32 func_801BC4D0(void) {
         case 5:
             return 1;
         case 3:
-            result = ((s32 (*)(s32, s32, u8))Area_HeightReadStep)(*(s32*)&D_1F800008, FIELD(s32, (&D_1F800008), 0x4u), TASK(Actor)->direction);
+            result = ((s32 (*)(s32, s32, u8))Area_HeightReadStep)(*(s32*)&g_ScratchPad.cells.halves[4], FIELD(s32, (&g_ScratchPad.cells.halves[4]), 0x4u), TASK(Actor)->direction);
             if (SP_REF(u8, 0) != 0) {
                 if ((s16)result >= 0x41) {
                     TASK(Actor)->direction = saved;
                     return 1;
                 }
-                Area_HeightRead(*(s32*)&D_1F800008, FIELD(s32, (&D_1F800008), 0x4u));
+                Area_HeightRead(*(s32*)&g_ScratchPad.cells.halves[4], FIELD(s32, (&g_ScratchPad.cells.halves[4]), 0x4u));
             }
             return 0;
         case 6:

@@ -17,7 +17,7 @@ MATCH void func_801A2AE4(Actor* entity, u8 route_flag) {
         } else {
             TASK(Actor)->direction &= 7;
         }
-        flag = &D_1F800003;
+        flag = &g_ScratchPad.cells.bytes[3];
         if (*flag != GAME_NONE) {
             if ((route_flag & BYTE_MASK) == TASK(Actor)->direction) {
                 entity->interaction_flags &= ~ACTOR_INTERACTION_MOVING;

@@ -34,7 +34,7 @@ NON_MATCHING s32 func_801B95E0(void) {
     if (!(WDIR & AREA_LOAD_FLAG_WORLD_MAP)) {
         if (COORD_FRAC(TASK(Actor)->pos.x) == 0) {
             if (COORD_FRAC(TASK(Actor)->pos.y) == 0) {
-                pad    = (u8*)&D_1F800008;
+                pad    = (u8*)&g_ScratchPad.cells.halves[4];
                 pad[0] = func_801B9F08(1, 2, 3);
                 pad[1] = func_801B9F08(2, 0, 0);
                 PAD_C  = func_801B9F08(3, 0, 0);

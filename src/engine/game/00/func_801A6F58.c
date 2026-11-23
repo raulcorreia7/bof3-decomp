@@ -13,10 +13,10 @@ MATCH void func_801A6F58(u8* script) {
     g_Task             = &g_Actors[slot];
     GAME_WORK_AREA_PTR = &g_Actors[slot];
 
-    D_1F800002 = ((script[1] << 8) | script[2]);
+    g_ScratchPad.cells.ray.y = ((script[1] << 8) | script[2]);
 
     Actor_ResetMotion();
-    Area_SceneSelectRecord(D_1F800002);
+    Area_SceneSelectRecord(g_ScratchPad.cells.ray.y);
 
     TASK(Actor)->header.flags = ACTOR_FLAG_IN_USE;
 
