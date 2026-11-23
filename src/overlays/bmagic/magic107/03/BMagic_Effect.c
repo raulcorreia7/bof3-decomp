@@ -311,11 +311,11 @@ MATCH void func_801EFEA8(void) {
     }
 }
 
-#ifdef NON_MATCHING
 /* Draws the sixteen-segment fan of semi-transparent triangles around the effect, shaded by the timer. */
-NON_MATCHING void func_801F01AC(void) {
+MATCH void func_801F01AC(void) {
     POLY_G3* prim;
-    s32      centre;
+    s32      y;
+    s16      centre;
     s32      i;
     long     depth;
     long     flag;
@@ -325,11 +325,13 @@ NON_MATCHING void func_801F01AC(void) {
     GFX_ADD_DITHERED_DRAW_MODE(BMAGIC_LAYER_BEHIND_BATTLERS, tpage);
     g_ScratchPad.cells.words[0] = 384;
     g_ScratchPad.cells.words[2] = ((rsin((TASK(PartyMember)->unk_09 & 0x3F) << 6) << 9) >> 12) + 0x400;
-    centre                      = FIXED_MUL(rcos(g_ScratchPad.cells.words[2]), g_ScratchPad.cells.words[0]);
+    y                           = FIXED_MUL(rcos(g_ScratchPad.cells.words[2]), g_ScratchPad.cells.words[0]);
     g_ScratchPad.cells.words[0] = 48;
     g_ScratchPadVectors[2].vx   = FIXED_MUL(rsin(0), g_ScratchPad.cells.words[0]);
-    g_ScratchPadVectors[2].vy   = centre + FIXED_MUL(rcos(0), g_ScratchPad.cells.words[0]);
-    g_ScratchPadVectors[2].vz   = 512;
+    centre                      = y;
+    y += FIXED_MUL(rcos(0), g_ScratchPad.cells.words[0]);
+    g_ScratchPadVectors[2].vy = y;
+    g_ScratchPadVectors[2].vz = 512;
     for (i = 1; i <= 16; i++) {
         g_ScratchPadVectors[0].vx = 0;
         g_ScratchPadVectors[0].vy = centre;
@@ -353,6 +355,3 @@ NON_MATCHING void func_801F01AC(void) {
     tpage = getTPage(TPAGE_DEPTH_4BIT, TPAGE_ABR_HALF, 320, 256);
     GFX_ADD_DITHERED_DRAW_MODE(BMAGIC_LAYER_BEHIND_BATTLERS, tpage);
 }
-#else
-INCLUDE_ASM(func_801F01AC);
-#endif

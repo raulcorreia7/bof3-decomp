@@ -1,0 +1,3 @@
+{"function": "emi/battle/battle/15@0x800A8F58", "tried": "the jump and branch targets sit 0x14 early; D_80145FB4 volatile is a lane decision", "first_diff": "0x800A8F98 j 0x800a92e8 against 0x800a92d4", "score": "112 rows"}
+{"function": "emi/world02/area112/13@0x801F2EA8", "tried": "the prologue saves s2 where retail saves ra first; scalar-vs-aggregate at 0x8010402A (cause 1)", "first_diff": "0x801F2EB4 sw s2,24(sp) against sw ra,24(sp)", "score": "152 rows"}
+{"function": "emi/scenario/scena17/00@0x801F8B10", "tried": "a1 lands in s3 against retail s4; the scroll target volatiles are lane decisions", "first_diff": "0x801F8B1C sw s4,112(sp) against sw s3,108(sp)", "score": "194 rows"}
