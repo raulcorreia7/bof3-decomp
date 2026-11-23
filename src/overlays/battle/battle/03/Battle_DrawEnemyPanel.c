@@ -16,7 +16,7 @@ NON_MATCHING void Battle_DrawEnemyPanel(s32 x, s32 y, s32 slot) {
     GFX_AddDrawMode(GetTPage(TPAGE_DEPTH_4BIT, TPAGE_ABR_HALF, FONT_TPAGE_X, FONT_TPAGE_Y));
     index        = slot - 3;
     draw_x       = x + 4;
-    packed_color = *(u16*)(MEM_PTR(u8, 0x80033A08u) + (((*(s8*)&g_WindowStyle) << 6) | 0x20));
+    packed_color = *(u16*)((u8*)D_80033A08 + (((*(s8*)&g_WindowStyle) << 6) | 0x20));
     color_r      = (packed_color & 0x1F) * 8;
     color_g      = (packed_color >> 2) & 0xF8;
     color_b      = (packed_color >> 7) & 0xF8;
