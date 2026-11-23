@@ -1,12 +1,13 @@
 #include "area111_13.h"
 
-#ifdef NON_MATCHING
-NON_MATCHING void func_801F3BC0(void) {
+/* Walks the cell grid from the actor along its facing up to a wall cell and starts the slide over the cells crossed. */
+MATCH void func_801F3BC0(void) {
     s8  x;
     s8  y;
     s8  offset;
     s32 facing;
-    u8  value;
+    s32 nibble;
+    u8  cell;
 
     offset = 0;
     x      = (u32)(TASK(Actor)->pos.x.part.integer - 11) >> 1;
@@ -20,14 +21,20 @@ NON_MATCHING void func_801F3BC0(void) {
             goto done;
         }
         if (x & 1) {
-            value = D_801F5C18[y][x / 2] & 0xF;
+            nibble = D_801F5C18[y][x / 2] & 0xF;
         } else {
-            value = D_801F5C18[y][x / 2] >> 4;
+            nibble = D_801F5C18[y][x / 2] >> 4;
         }
-        if (value == 0xF) {
+        cell = nibble;
+        if (cell == 0xF) {
             goto done;
         }
-        offset += 4;
+        /* The test leaves no code: it keeps the cell live past the wall test, which the bytes need. */
+        if (cell != 0) {
+            offset += 4;
+        } else {
+            offset += 4;
+        }
     }
 done:
     if (offset != 0) {
@@ -39,6 +46,3 @@ done:
         COORD_INT(TASK(Actor)->pos.z) = -0x500;
     }
 }
-#else
-INCLUDE_ASM(func_801F3BC0);
-#endif
