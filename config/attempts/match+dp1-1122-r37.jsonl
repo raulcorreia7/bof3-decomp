@@ -1,0 +1,3 @@
+{"function": "emi/etc/commu01/07@0x801D2D98", "tried": "moving the x2/x3 stores after setRGB2 or setRGB0 (119 each); the single 0x26-store reorder does not move alone", "first_diff": "0x801D2E60 sh s1,26(s3) against sh s2,16(s3)", "score": "4 rows"}
+{"function": "emi/bmagic/magic057/03@0x801EF134", "tried": "the quotient lands in a3 against retail a1 (shape -7 instructions, 11 hunks)", "first_diff": "0x801EF170 mfhi a1 against mfhi a3", "score": "129 rows"}
+{"function": "emi/etc/game/00@0x801A0048", "tried": "the first record load lands in v1 against retail v0 (shape -7 instructions, 26 hunks)", "first_diff": "0x801A007C lw v0,-1676(at) against lw v1,-1676(at)", "score": "148 rows"}
