@@ -736,12 +736,12 @@ NON_MATCHING void func_801F0FBC(void) {
 
     if (TASK(PartyMember)->unk_09 >= 0x19) {
         func_801F0E90();
-        i      = 0;
-        x      = TASK(PartyMember)->pos.x.fixed;
-        y      = TASK(PartyMember)->pos.y.fixed;
-        z      = (TASK(PartyMember)->header.mode >= 2) ? -2 : 0;
-        radius = ~TASK(PartyMember)->unk_09 & 0x1F;
-        shade  = 0x80 - radius * 16;
+        i        = 0;
+        x        = TASK(PartyMember)->pos.x.fixed;
+        y        = TASK(PartyMember)->pos.y.fixed;
+        z        = (TASK(PartyMember)->header.mode >= 2) ? -2 : 0;
+        radius   = ~TASK(PartyMember)->unk_09 & 0x1F;
+        shade    = 0x80 - radius * 16;
         flag_ptr = &flag;
         do {
             tpage = (GetGraphType() == 1 || GetGraphType() == 2) ? 0x2A5 : 0xB5;
