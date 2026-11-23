@@ -13,10 +13,10 @@ MATCH void Title_AdvanceFade(void) { /* func_801D0D94 */
     *timer_ptr = timer;
 
     if ((timer << 16) == 0) {
-        g_UiTitleFadePhase   = 3u;
-        g_UiTitleChoicePhase = 1u;
-        *timer_ptr           = 900u;
-        g_UiTitleState       = g_UiTitleState + 1u;
+        g_SysThreads[1].tail.title_screen.popup.bytes.fade_phase   = 3u;
+        g_SysThreads[1].tail.title_screen.popup.bytes.choice_phase = 1u;
+        *timer_ptr                                                 = 900u;
+        g_SysThreads[1].tail.title_screen.state                    = g_SysThreads[1].tail.title_screen.state + 1u;
     }
 }
 
@@ -35,7 +35,7 @@ MATCH void Title_StartFade(void) { /* func_801D0DF0 */
     if ((timer << 0x10) == 0) {
         UI_ModeSet(UI_MODE_FADE_OUT);
         SND_StartSelectionEffect();
-        g_UiTitleState = g_UiTitleState + 1u;
+        g_SysThreads[1].tail.title_screen.state = g_SysThreads[1].tail.title_screen.state + 1u;
     }
 }
 
@@ -68,7 +68,7 @@ MATCH void Title_StartSelectedGame(void) { /* func_801D0E54 */
  */
 /* func_801D0F00 */
 MATCH void Title_WaitInput(void) { /* func_801D0F00 */
-    if (D_80143B40 == 0u) {
+    if (g_SysThreads[0].state == 0u) {
         g_UiTitleState = 0u;
         return;
     }
