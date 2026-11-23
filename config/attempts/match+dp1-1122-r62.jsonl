@@ -1,0 +1,3 @@
+{"function": "emi/etc/game/00@0x8019B704", "tried": "the sum lands in a1 against retail v0 and both scroll-target volatiles are lane decisions", "first_diff": "0x8019B74C addu v0,a0,v0 against addu a1,a0,v0", "score": "113 rows"}
+{"function": "emi/etc/start/08@0x801EAA14", "tried": "frame 24 bytes short of retail and a partial body (205 of 300)", "first_diff": "0x801EAA14 addiu sp,sp,-112 against addiu sp,sp,-128", "score": "282 rows"}
+{"function": "emi/etc/shisu/00@0x801D2308", "tried": "undrafted: 301 words of matrix and drawing work (PushMatrix first, 0x1F800044 xor-swap of the task cell); a full draft is needed", "first_diff": "n/a (no draft)", "score": "301 words"}
