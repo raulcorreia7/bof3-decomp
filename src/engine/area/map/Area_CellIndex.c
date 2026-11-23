@@ -32,10 +32,10 @@ MATCH void Area_CellIndex(void) {
     record = (u8*)MAP_BUNDLE_BASE + g_AreaMapBundle.cell_record_offset * 4;
     if (*(u32*)record != 0) {
         table         = (u8*)&g_AreaCellGrid;
-        origin_x      = g_AreaTileOriginX;
-        origin_y      = g_AreaTileOriginY;
-        row_offset    = g_AreaGridRowCursor;
-        column_offset = g_AreaGridColCursor;
+        origin_x      = g_AreaMap.tile_origin_x;
+        origin_y      = g_AreaMap.tile_origin_y;
+        row_offset    = g_AreaMap.grid_row;
+        column_offset = g_AreaMap.grid_column;
         do {
             /* FAKE: Reuse v1 for the x delta, difference and adjusted column. */
             FAKE_REG(s32, difference, "v1");

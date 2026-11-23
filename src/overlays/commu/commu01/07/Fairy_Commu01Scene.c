@@ -664,7 +664,14 @@ NON_MATCHING void func_801D2D98(s16 x, s16 y, s16 width, u8 channel, u8 blink) {
 
     poly = (POLY_G4*)g_GfxPrimCursor;
     SetPolyG4(poly);
-    setXYWH(poly, x, y + 2, width, 2);
+    poly->x0 = x;
+    poly->y0 = y + 2;
+    poly->x1 = x + width;
+    poly->y1 = y + 2;
+    poly->x2 = poly->x0;
+    poly->y2 = y + 4;
+    poly->x3 = poly->x1;
+    poly->y3 = y + 4;
     setRGB0(poly, rgb[0] * scale, rgb[1] * scale, rgb[2] * scale);
     setRGB2(poly, poly->r0 >> 2, poly->g0 >> 2, poly->b0 >> 2);
     setRGB1(poly, poly->r0, poly->g0, poly->b0);

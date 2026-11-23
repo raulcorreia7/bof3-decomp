@@ -16,8 +16,8 @@ MATCH void Area_CellAddPrim(s32 x, s32 y, s32 depth, s32 size) {
     s32 count;
     s32 addend;
 
-    index = (x >> 16) - g_AreaTileOriginX;
-    value = (y >> 16) - g_AreaTileOriginY;
+    index = (x >> 16) - g_AreaMap.tile_origin_x;
+    value = (y >> 16) - g_AreaMap.tile_origin_y;
     if (x & HALF_MASK) {
         value += 1;
     }

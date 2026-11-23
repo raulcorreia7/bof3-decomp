@@ -447,6 +447,8 @@ MATCH void func_801D1CA4(void) {
 #ifdef NON_MATCHING
 /* Places the four shisu panels and points the ingredient list at the item counts. */
 NON_MATCHING void func_801D1D1C(void) {
+    MenuPanelTask* panel;
+
     g_UiPanelTasks[1].pos.x      = 0x14;
     g_UiPanelTasks[2].pos.x      = 0x70;
     LOH(g_UiPanelTasks[1].pos.y) = -0x64;
@@ -455,26 +457,30 @@ NON_MATCHING void func_801D1D1C(void) {
     g_UiPanelTasks[3].mode       = 3;
     LOH(g_UiPanelTasks[3].pos.x) = -0x78;
     g_UiPanelTasks[3].pos.y      = 0x3F;
-    g_UiPanelTasks[0].active     = 0;
-    g_UiPanelTasks[0].panel      = 1;
-    g_UiPanelTasks[0].mode       = 0;
-    g_UiPanelTasks[0].state      = 2;
-    g_UiPanelTasks[0].pos.x      = 0;
-    g_UiPanelTasks[0].pos.y      = 0;
-    g_UiPanelTasks[1].active     = 1;
-    g_UiPanelTasks[1].panel      = 1;
-    g_UiPanelTasks[1].mode       = 1;
-    g_UiPanelTasks[1].state      = 2;
-    g_UiPanelTasks[2].active     = 1;
-    g_UiPanelTasks[2].panel      = 1;
-    g_UiPanelTasks[2].mode       = 2;
-    g_UiPanelTasks[2].state      = 2;
-    g_UiPanelTasks[2].unk_0B     = 0xFF;
-    g_UiPanelTasks[3].active     = 1;
-    g_UiPanelTasks[3].panel      = 1;
-    g_UiPanelTasks[3].state      = 2;
-    g_UiPanelTasks[3].unk_0A     = 0xFF;
-    g_UiPanelTasks[3].item_table = (s32)&g_ShisuIngredients;
+    panel                        = &g_UiPanelTasks[0];
+    panel->active                = 0;
+    panel->panel                 = 1;
+    panel->mode                  = 0;
+    panel->state                 = 2;
+    panel->pos.x                 = 0;
+    panel->pos.y                 = 0;
+    panel++;
+    panel->active = 1;
+    panel->panel  = 1;
+    panel->mode   = 1;
+    panel->state  = 2;
+    panel++;
+    panel->active = 1;
+    panel->panel  = 1;
+    panel->mode   = 2;
+    panel->state  = 2;
+    panel->unk_0B = 0xFF;
+    panel++;
+    panel->active     = 1;
+    panel->panel      = 1;
+    panel->state      = 2;
+    panel->unk_0A     = 0xFF;
+    panel->item_table = (s32)&g_ShisuIngredients;
 }
 #else
 INCLUDE_ASM(func_801D1D1C);

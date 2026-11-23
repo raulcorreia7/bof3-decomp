@@ -1,0 +1,2 @@
+{"function": "emi/world01/area075/13@0x801F4874", "tried": "read the s7 use: retail holds &D_801F2C94 (the sprintf format) across both calls; hoisting the format local above the flag test", "first_diff": "114 -> 113 rows, frame stays 0x38 against 0x40; GCC rematerialises the symbol address instead of saving it, reverted", "score": "113 rows, 0x38/0x40"}
+{"function": "emi/etc/commu05/07@0x801D14C8", "tried": "measured the kept draft", "first_diff": "96 rows; save set/order", "score": "96 rows"}

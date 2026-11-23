@@ -2404,16 +2404,18 @@ MATCH void Fairy_GenerateName(void) {
 
 #ifdef NON_MATCHING
 NON_MATCHING void func_801D90D8(s32 x, s32 y, s32 character, s32 frame_mode) {
+    u8  slot;
     s32 index;
     s32 x_copy;
     s32 y_copy;
     u8* window_style;
     u8* text;
 
+    slot         = character;
     window_style = &g_WindowStyle;
-    UI_WindowDraw((u16)(x + 3), (u16)(y + 3), 0x7D, 0x2D, 0, *window_style);
-    index = (((((u8)character << 2) + (u8)character) << 3) + (u8)character) << 2;
-    Menu_DrawPortrait((u16)(x + 6), (u16)(y + 2), ((Character*)((u8*)g_Characters + index))->character_id, 0);
+    UI_WindowDraw((u16)(x + 3), (u16)(y + 3), 125, 45, 0, *window_style);
+    index = slot * PARTY_RECORD_STRIDE;
+    Menu_DrawPortrait((u16)(x + 6), (u16)(y + 2), g_Characters[slot].character_id, 0);
     x_copy = x;
     y_copy = y;
     if ((u8)frame_mode == 0) {
@@ -2526,62 +2528,60 @@ NON_MATCHING void func_801D94D0(s32 page, s32 left, s32 top, s32 cursor_col_arg,
     u16 y;
     u16 row;
     u16 col;
-    u16 cursor_x;
-    u16 cursor_y;
+    u16 base_y;
     u8  cursor_col;
     u8  cursor_row;
-    u8  code;
 
-    /* FAKE: retail reserves eight bytes outside the active locals. */
-    FAKE_STACK_PADS(u8, 8);
+    base_y     = top;
+    cursor_col = cursor_col_arg;
+    cursor_row = cursor_row_arg;
     memcpy(tags, D_801D0C3C, 20);
-    UI_WindowDraw(left, top, 0x110, 123, 0, g_WindowStyle);
+    UI_WindowDraw(left, base_y, 0x110, 123, 0, g_WindowStyle);
     cell = D_801DAAAC + ((u8)page * 96);
-    y    = top + 6;
+    y    = base_y + 6;
     for (row = 0; row < 8; row++) {
         x = left + 4;
         for (col = 0; col < 12; col++) {
             if (col == 10 && row >= 3) {
-                code = *cell;
-                switch (code) {
+                switch (*cell) {
                     case 1:
-                        UI_TextDraw((s16)x, (s16)y, 4, 5, tags);
+                        UI_TextDraw(x, y, 4, 5, tags);
                         break;
                     case 2:
-                        UI_TextDraw((s16)x, (s16)y, 4, 5, tags + 5);
+                        UI_TextDraw(x, y, 4, 5, tags + 5);
                         break;
                     case 3:
-                        UI_TextDraw((s16)x, (s16)y, UI_TEXT_HIGHLIGHT, 5, tags + 10);
+                        UI_TextDraw(x, y, UI_TEXT_HIGHLIGHT, 5, tags + 10);
                         break;
                     case 4:
-                        UI_TextDraw((s16)x, (s16)y, UI_TEXT_HIGHLIGHT, 5, tags + 15);
-                        break;
-                    default:
-                        UI_TextDraw((s16)x, (s16)y, 0, 1, cell);
+                        UI_TextDraw(x, y, UI_TEXT_HIGHLIGHT, 5, tags + 15);
                         break;
                 }
-            } else {
-                UI_TextDraw((s16)x, (s16)y, 0, 1, cell);
+            } else if (col != 11 || row < 3) {
+                UI_TextDraw(x, y, 0, 1, cell);
             }
-            x += (col == 4 || col == 9) ? 28 : 20;
+            if (col == 4 || col == 9) {
+                x += 28;
+            } else {
+                x += 20;
+            }
             cell++;
         }
         y += 14;
     }
-    cursor_col = cursor_col_arg;
-    cursor_row = cursor_row_arg;
-    cursor_x   = left + 6 + cursor_col * 20;
+    x = left + 6 + cursor_col * 20;
+    y = base_y + 8;
+    y += cursor_row * 14;
     if (cursor_col >= 5) {
-        cursor_x += 8;
+        x += 8;
     }
     if (cursor_col >= 10) {
-        cursor_x += 8;
+        x += 8;
     }
     if (cursor_col == 11 && cursor_row >= 3) {
-        cursor_x -= 20;
+        x -= 20;
     }
-    cursor_y = top + 8 + cursor_row * 14;
-    UI_CursorDraw(cursor_x, cursor_y, 0);
+    UI_CursorDraw(x, y, 0);
 }
 #else
 INCLUDE_ASM(func_801D94D0);
