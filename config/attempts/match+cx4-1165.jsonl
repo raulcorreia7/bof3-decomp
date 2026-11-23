@@ -1,0 +1,1 @@
+{"function": "emi/scenario/scena10/00@0x801F73EC", "tried": "pinned the loop index promotion to t1 through a register variable and opaque", "first_diff": "0x801F73FC: the conversion is computed into t0 and copied to the pinned t1 (move t1,t0), adding the instruction the banked lock body does not have", "score": "candidate 0x110, retail 0x10C"}

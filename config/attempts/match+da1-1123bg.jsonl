@@ -1,0 +1,1 @@
+{"function": "emi/scenario/scena09/00@0x801F9498", "tried": "screened the coverage row before editing: the live draft measures far from the recorded 3", "first_diff": "466 rows live (coverage recorded 3): the switch draft diverges at the first branch target 0x801fa078 against 0x801fa074; rewrite row, not a pointer-local fix", "score": "466 rows"}

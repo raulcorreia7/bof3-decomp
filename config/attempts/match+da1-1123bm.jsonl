@@ -1,0 +1,1 @@
+{"function": "emi/etc/shisu/00@0x801D1964", "tried": "moving the D_80148652 counter before the topping copies and a FAKE_BARRIER after D_80148654=0", "first_diff": "11 rows: retail stores the two header.mode bytes before loading D_80158652/D_801EA0A7, the draft hoists both loads; reorder 27 rows, barrier 26, both reverted", "score": "11 rows"}

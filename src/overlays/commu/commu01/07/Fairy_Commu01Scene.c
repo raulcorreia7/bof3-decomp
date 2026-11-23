@@ -627,12 +627,13 @@ typedef struct {
     u8 rgb[4][3];
 } FairyBarColors;
 
-#ifdef NON_MATCHING
-NON_MATCHING void func_801D2D98(s16 x, s16 y, s16 width, u8 channel, u8 blink) {
+/* Draws one stat bar as two shaded quads that meet on the middle row; a blinking bar pulses with the frame count. */
+MATCH void func_801D2D98(s16 x, s16 y, s16 width, u8 channel, u8 blink) {
     FairyBarColors colors;
     u8*            rgb;
     s32            scale;
     POLY_G4*       poly;
+    s16            middle;
 
     colors = *(FairyBarColors*)D_801D0C04;
     if (blink) {
@@ -648,12 +649,13 @@ NON_MATCHING void func_801D2D98(s16 x, s16 y, s16 width, u8 channel, u8 blink) {
     poly = (POLY_G4*)g_GfxPrimCursor;
     SetPolyG4(poly);
     poly->x0 = x;
-    poly->y2 = y + 2;
     poly->x1 = x + width;
+    poly->y2 = y + 2;
     poly->y0 = y;
     poly->y1 = y;
     poly->x2 = poly->x0;
-    poly->y3 = y + 2;
+    middle   = y + 2;
+    poly->y3 = middle;
     poly->x3 = poly->x1;
     rgb      = colors.rgb[channel];
     setRGB2(poly, rgb[0] * scale, rgb[1] * scale, rgb[2] * scale);
@@ -665,9 +667,9 @@ NON_MATCHING void func_801D2D98(s16 x, s16 y, s16 width, u8 channel, u8 blink) {
     poly = (POLY_G4*)g_GfxPrimCursor;
     SetPolyG4(poly);
     poly->x0 = x;
-    poly->y0 = y + 2;
+    poly->y0 = middle;
     poly->x1 = x + width;
-    poly->y1 = y + 2;
+    poly->y1 = middle;
     poly->x2 = poly->x0;
     poly->y2 = y + 4;
     poly->x3 = poly->x1;
@@ -678,9 +680,6 @@ NON_MATCHING void func_801D2D98(s16 x, s16 y, s16 width, u8 channel, u8 blink) {
     setRGB3(poly, poly->r2, poly->g2, poly->b2);
     GFX_AddPrim(GFX_LAYER_UI, sizeof(POLY_G4));
 }
-#else
-INCLUDE_ASM(func_801D2D98);
-#endif
 
 #define FAIRY_OVERVIEW_GROUP_COUNT     3
 #define FAIRY_OVERVIEW_ROOM_COUNT      8
