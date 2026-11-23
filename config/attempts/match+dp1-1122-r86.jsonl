@@ -1,0 +1,1 @@
+{"function": "emi/battle/battle/15@0x80099B74", "tried": "an early u8 mode = 1 local feeding the final =1 store: still 2 rows (the constant coalesces); with all 120 orders exhausted the row is allocator-locked", "first_diff": "0x80099DB0 sb v1,-31301(at) against sb v1,-31808(at)", "score": "2 rows"}
