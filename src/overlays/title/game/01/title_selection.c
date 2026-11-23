@@ -92,7 +92,7 @@ MATCH void Title_WaitInput(void) { /* func_801D0F00 */
  */
 /* func_801D0FB8 */
 MATCH void Title_UpdateChoicePrompt(void) { /* func_801D0FB8 */
-    if (D_80143B40 == 0u) {
+    if (g_SysThreads[0].state == 0u) {
         g_EmiLoadedCharacterIndex               = 0xFFu;
         g_SysThreads[1].tail.title_screen.state = 0u;
     } else {
