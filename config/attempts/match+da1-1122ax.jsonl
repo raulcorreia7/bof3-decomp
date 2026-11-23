@@ -1,0 +1,1 @@
+{"function": "emi/world02/area103/13@0x801F53F0", "tried": "measured the kept draft; prologue save set/order", "first_diff": "0x801F53FC sw s3,44(sp) against sw s2,40(sp); 61 rows", "score": "61 rows"}
