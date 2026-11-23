@@ -80,7 +80,7 @@ static inline void MagicOrbitProjectionStep(s32 depth) {
     }
 }
 
-void func_801EF8F0(s16 band_height, u16 radius, u16 jitter_mask);
+void func_801EF8F0(s16 band_height, s16 radius, s16 jitter_mask);
 /* func_801F043C */
 void func_801F070C(void);
 

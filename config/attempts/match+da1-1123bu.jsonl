@@ -1,0 +1,1 @@
+{"function": "emi/battle/batl_end/00@0x801EF140", "tried": "read the hunk: retail keeps addiu v0,s1,4 and stores it at 0x801EF2AC, the draft emits the two zero-byte stores first and cse2 folds the sum", "first_diff": "14 rows (coverage recorded 4): first hunk 0x801EF2AC addiu v0,s1,4 against lui at,0x8015; the cse2 fold class shared with 0x801EFE5C", "score": "14 rows"}

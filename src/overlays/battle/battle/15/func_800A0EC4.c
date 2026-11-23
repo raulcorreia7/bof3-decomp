@@ -5,17 +5,18 @@
  */
 #ifdef NON_MATCHING
 NON_MATCHING void func_800A0EC4(void) {
-    Character* character;
-    Character* battler_chr;
-    s32        record_index;
-    s32        member_offset;
-    s32        timer;
-    s32        index;
-    s32        member;
-    u16        value;
-    u32        rate;
-    u8*        state;
-    u8*        dest;
+    u8* record;
+    u8* cell;
+    u8  character_index;
+    u32 i;
+    u32 party_slot;
+    s32 record_index;
+    s32 member_offset;
+    s32 timer;
+    s32 member;
+    u16 value;
+    u32 rate;
+    u8* state;
 
     state = &g_Battle.active_battler;
     if (*state < 3U) {
@@ -24,54 +25,66 @@ NON_MATCHING void func_800A0EC4(void) {
         if (timer < 5U) {
             g_Characters[record_index].fatigue = timer + 1;
             member_offset                      = *state * BATTLE_PARTY_STRIDE;
-            D_80145F1E[member_offset]          = D_80145F1E[member_offset] + 1;
+            D_80145F1E[member_offset]++;
         }
         Char_RebuildStats(&g_Characters[g_Game.members[*state].character_index]);
-        index = 0;
+        i = 0;
         if (g_Battle.party_count != 0) {
             do {
-                character                         = &g_Characters[g_Game.members[index].character_index];
-                battler_chr                       = &g_Game.members[index].chr;
-                battler_chr->equip.weapon         = character->equip.weapon;
-                battler_chr->equip.shield         = character->equip.shield;
-                battler_chr->equip.helmet         = character->equip.helmet;
-                battler_chr->equip.armor          = character->equip.armor;
-                battler_chr->equip.accessories[0] = character->equip.accessories[0];
-                battler_chr->equip.accessories[1] = character->equip.accessories[1];
-                index++;
-                __builtin_memcpy(&battler_chr->base, &character->stats, sizeof(Stats));
-            } while ((u32)(index & BYTE_MASK) < (u8)g_Battle.party_count);
+                party_slot    = (u8)i;
+                member_offset = party_slot << 2;
+                member_offset += party_slot;
+                member_offset <<= 6;
+                record                                     = (u8*)g_Game.members[0].chr.name + member_offset;
+                character_index                            = g_Game.members[0].chr.name[member_offset + 0xC8];
+                cell                                       = (u8*)&g_Characters[character_index];
+                ((Character*)record)->equip.weapon         = ((Character*)cell)->equip.weapon;
+                ((Character*)record)->equip.shield         = ((Character*)cell)->equip.shield;
+                ((Character*)record)->equip.helmet         = ((Character*)cell)->equip.helmet;
+                ((Character*)record)->equip.armor          = ((Character*)cell)->equip.armor;
+                ((Character*)record)->equip.accessories[0] = ((Character*)cell)->equip.accessories[0];
+                ((Character*)record)->equip.accessories[1] = ((Character*)cell)->equip.accessories[1];
+                i++;
+                memcpy(record + 0x3C, cell + 0x1C, 0x10);
+                memcpy(record + 0x4C, cell + 0x2C, 0x10);
+            } while ((u8)i < g_Battle.party_count);
         }
-        index = 0;
+        i = 0;
         Battle_ApplyFormationStats();
-        if (g_Battle.party_count != 0) {
-            do {
-                member_offset = index * BATTLE_PARTY_STRIDE;
-                dest          = (u8*)D_80145F20 + member_offset;
-                __builtin_memcpy(dest, dest + 0x20, sizeof(Cpy16u));
-                __builtin_memcpy(dest + 0x10, dest + 0x30, sizeof(Cpy16u));
-                index++;
-            } while ((u32)(index & BYTE_MASK) < (u8)g_Battle.party_count);
+        {
+            u8* count = &g_BattlePartyCount;
+            u8* dst_base;
+            u8* src_base;
+
+            if (*count != 0) {
+                dst_base = D_80145F20;
+                src_base = dst_base + 0x20;
+                do {
+                    u32 member_offset;
+
+                    member_offset = (u8)i * BATTLE_PARTY_STRIDE;
+                    memcpy((u8*)(member_offset + (u32)dst_base), (u8*)(member_offset + (u32)src_base), 0x20);
+                    i++;
+                } while ((u8)i < *count);
+            }
         }
-        index = 0;
+        i = 0;
         func_800A4458();
-        if (g_Battle.party_count != 0) {
+        if (g_BattlePartyCount != 0) {
             do {
-                Battle_RescaleStats(index & BYTE_MASK);
-                index++;
-            } while ((u32)(index & BYTE_MASK) < (u8)g_Battle.party_count);
+                Battle_RescaleStats((u8)i);
+                i++;
+            } while ((u8)i < g_BattlePartyCount);
         }
     } else {
-        member = *state - 3;
-        value  = g_BattleEnemyBattlers[member].stats.max_hp;
+        value = ENEMY_COMBATANT(*state).stats.max_hp;
         if (value != 0xFFFF) {
-            rate = ((u16*)&D_800E4068)[g_BattleEnemyBattlers[member].type * 68] / 10;
-            if ((u32)(rate & HALF_MASK) < value) {
-                g_BattleEnemyBattlers[member].stats.max_hp = value - rate;
-                g_BattleEnemyBattlers[member].base.max_hp -= ((u16*)&D_800E4068)[g_BattleEnemyBattlers[member].type * 68] / 10;
-                value = g_BattleEnemyBattlers[member].stats.max_hp;
-                if (value < g_BattleEnemyBattlers[member].hp) {
-                    g_BattleEnemyBattlers[member].hp = value;
+            rate = (&D_800E4068)[ENEMY_COMBATANT(*state).type * 68] / 10;
+            if ((u16)rate < value) {
+                ENEMY_COMBATANT(*state).stats.max_hp = value - rate;
+                ENEMY_COMBATANT(*state).base.max_hp -= (&D_800E4068)[ENEMY_COMBATANT(*state).type * 68] / 10;
+                if (ENEMY_COMBATANT(*state).stats.max_hp < ENEMY_COMBATANT(*state).hp) {
+                    ENEMY_COMBATANT(*state).hp = ENEMY_COMBATANT(*state).stats.max_hp;
                 }
             }
         }
