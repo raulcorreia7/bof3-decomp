@@ -123,18 +123,17 @@ NON_MATCHING void func_801EF134(void) {
         dx = (RANDOM_MOD(6) << 16) - 0x30000;
     }
     TASK(PartyMember)->pos.x.fixed = g_BattleEffectBattler->pos.x.fixed + dx;
-
     if (TASK(PartyMember)->facing & 1) {
         dy = (RANDOM_MOD(6) << 16) + 0x30000;
     } else {
         dy = (RANDOM_MOD(6) << 16) + 0x20000;
     }
     TASK(PartyMember)->pos.y.fixed = g_BattleEffectBattler->pos.y.fixed + dy;
-
-    TASK(PartyMember)->unk_14             = -0x20;
-    TASK(PartyMember)->unk_20             = -1;
-    TASK(PartyMember)->unk_25             = 0x1D;
-    TASK(PartyMember)->pos.z.part.integer = (u16)TASK(PartyMember)->pos.z.part.integer + 0x600;
+    work                         = TASK(PartyMember);
+    work->unk_14                 = -0x20;
+    work->unk_20                 = -1;
+    work->unk_25                 = 0x1D;
+    work->pos.z.part.integer     = (u16)work->pos.z.part.integer + 0x600;
     TASK(PartyMember)->unk_26             = 0;
     TASK(PartyMember)->unk_48             = 1;
     TASK(PartyMember)->unk_27             = 0xA0;
