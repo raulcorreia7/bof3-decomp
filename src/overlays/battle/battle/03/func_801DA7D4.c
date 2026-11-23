@@ -1,25 +1,22 @@
 #include "battle_03.h"
 
-/* The number of party rows the command list holds. */
-#define BATTLE_COMMAND_MAX 3
-
+/* Orders the live party members by agility and rebuilds the command row list
+ * from the surviving ones, after sizing the enemy side. */
 #ifdef NON_MATCHING
 NON_MATCHING void func_801DA7D4(void) {
-    BattleRank entries[BATTLE_COMMAND_MAX];
+    BattleRank entries[BATTLE_PARTY_CHARACTERS_COUNT];
     BattleRank temp;
-    u8         total;
-    u8         maximum;
+    s32        total;
+    u32        maximum;
     u16        agility;
-    u8         index;
-    u8         left;
-    u8         right;
+    s32        index;
 
     total   = 0;
     maximum = 0;
-    for (index = 3; index < 11; index++) {
-        if (D_801463BA == 0 || (g_BattleEnemyBattlers[index - 3].turn.action_flags.value & BATTLER_ACTION_PREEMPTIVE_TURN)) {
-            if (func_801DB9E4(index)) {
-                agility = g_BattleEnemyBattlers[index - 3].stats.agility;
+    for (index = BATTLE_PARTY_CHARACTERS_COUNT; (u32)(index & BYTE_MASK) < COMBATANT_COUNT; index++) {
+        if (D_801463BA == 0 || (ENEMY_COMBATANT(index & BYTE_MASK).turn.action_flags.value & BATTLER_ACTION_PREEMPTIVE_TURN)) {
+            if (func_801DB9E4(index & BYTE_MASK)) {
+                agility = ENEMY_COMBATANT(index & BYTE_MASK).stats.agility;
                 total += agility;
                 if (maximum < agility) {
                     maximum = agility;
@@ -29,36 +26,36 @@ NON_MATCHING void func_801DA7D4(void) {
     }
 
     total = 0;
-    for (index = 0; index < BATTLE_COMMAND_MAX; index++) {
-        if (D_801463BA == 0 || (g_Game.members[index].u.turn.action_flags.volatile_value & BATTLER_ACTION_PREEMPTIVE_TURN)) {
-            if (func_801DB844(index)) {
-                entries[total].index = index;
-                entries[total].value = g_Game.members[index].chr.stats.agility;
-                total++;
+    for (index = 0; (u32)(index & BYTE_MASK) < BATTLE_PARTY_CHARACTERS_COUNT; index++) {
+        if (D_801463BA == 0 || (g_Game.members[index & BYTE_MASK].u.turn.action_flags.value & BATTLER_ACTION_PREEMPTIVE_TURN)) {
+            if (func_801DB844(index & BYTE_MASK)) {
+                entries[total & BYTE_MASK].index = index & BYTE_MASK;
+                entries[total & BYTE_MASK].value = g_Game.members[index & BYTE_MASK].chr.stats.agility;
+                total += 1;
             }
         }
     }
 
     maximum = total;
-    if (maximum >= 2) {
-        for (left = 0; left < maximum - 1; left++) {
-            for (right = left + 1; right < maximum; right++) {
-                if (entries[left].value < entries[right].value) {
-                    temp           = entries[left];
-                    entries[left]  = entries[right];
-                    entries[right] = temp;
+    if ((maximum & BYTE_MASK) >= 2) {
+        for (total = 0; (total & BYTE_MASK) < (maximum & BYTE_MASK) - 1; total++) {
+            for (index = total + 1; (index & BYTE_MASK) < (maximum & BYTE_MASK); index++) {
+                if (entries[total & BYTE_MASK].value < entries[index & BYTE_MASK].value) {
+                    temp                       = entries[total & BYTE_MASK];
+                    entries[total & BYTE_MASK] = entries[index & BYTE_MASK];
+                    entries[index & BYTE_MASK] = temp;
                 }
             }
         }
     }
 
-    for (index = 0; index < BATTLE_COMMAND_MAX; index++) {
-        D_801462F6[index] = 0xFF;
+    for (index = 0; (u32)(index & BYTE_MASK) < BATTLE_PARTY_CHARACTERS_COUNT; index++) {
+        D_801462F6[index & BYTE_MASK] = 0xFF;
     }
     g_Battle.command_count = 0;
-    for (index = 0; index < maximum; index++) {
-        if (func_801DB844((u8)entries[index].index)) {
-            D_801462F6[g_Battle.command_count] = entries[index].index;
+    for (index = 0; (u32)(index & BYTE_MASK) < (maximum & BYTE_MASK); index++) {
+        if (func_801DB844(entries[index & BYTE_MASK].index)) {
+            D_801462F6[(s8)g_Battle.command_count] = entries[index & BYTE_MASK].index;
             g_Battle.command_count++;
         }
     }
