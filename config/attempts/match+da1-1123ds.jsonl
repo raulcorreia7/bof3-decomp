@@ -1,0 +1,1 @@
+{"function": "emi/world02/area098/13@0x801F5050", "tried": "FAKE_ORDER_LOCK(i += 1) placed before the packet stores with a while loop", "first_diff": "2 rows baseline; the lock costs 39 rows (it pins the value but reallocates the loop), reverted", "score": "2 rows"}
