@@ -2,24 +2,24 @@
 
 /* func_801C2710 */
 MATCH void Area_ScrollUpdateWalk(void) {
-    u8* work;
-    u8* state;
-    s32 product;
-    u8  index;
+    Actor* work;
+    Actor* state;
+    s32    product;
+    u8     index;
 
-    work = TASK(u8);
-    if ((work[0x08] == 2) || (work[0x08] == 6)) {
+    work = TASK(Actor);
+    if ((work->direction == 2) || (work->direction == 6)) {
         g_AreaCameraSpeed = 4;
     } else {
         g_AreaCameraSpeed = 8;
     }
     index                       = g_Game.current->u.field.counter.unsigned_value;
     product                     = g_AreaCameraSpeed * g_RouteSpeedScale[index];
-    state                       = TASK(u8);
+    state                       = TASK(Actor);
     g_AreaCameraSpeed           = product;
-    g_AreaCamera.scroll_x.fixed = ((s32*)state)[13] + ((s32*)state)[3] * state[0x09];
-    g_AreaCamera.scroll_y.fixed = ((s32*)state)[14] + ((s32*)state)[4] * state[0x09];
+    g_AreaCamera.scroll_x.fixed = state->pos.x.fixed + state->vx * state->timer;
+    g_AreaCamera.scroll_y.fixed = state->pos.y.fixed + state->vy * state->timer;
     /* FAKE: barrier pins load after store. */
     FAKE_BARRIER();
-    g_AreaCameraHeightDelta = ((s32*)state)[5];
+    g_AreaCameraHeightDelta = state->vz;
 }

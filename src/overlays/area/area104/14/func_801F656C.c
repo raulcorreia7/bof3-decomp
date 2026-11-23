@@ -2,15 +2,15 @@
 
 #ifdef NON_MATCHING
 NON_MATCHING void func_801F656C(void) {
-    u8* base;
-    s32 col;
-    s32 row;
-    s16 y;
-    s32 x;
-    s32 v;
-    u8  index;
-    u8  pending;
-    u8  next;
+    RECT rect;
+    u8*  base;
+    s32  col;
+    s32  row;
+    s16  y;
+    s32  v;
+    u8   index;
+    u8   pending;
+    u8   next;
 
     base                         = MEM_PTR(u8, AREA_CODE_BASE + 4);
     row                          = 13;
@@ -19,11 +19,9 @@ NON_MATCHING void func_801F656C(void) {
     do {
         col = 5;
         y   = row;
-        x   = 0x60000;
         do {
-            v     = func_801F66D0((s16)col, y);
-            *base = v | (func_801F66D0(x >> 16, y) << 4);
-            x += 0x20000;
+            v     = func_801F66D0(col, y);
+            *base = v | (func_801F66D0(col + 1, y) << 4);
             col += 2;
             base++;
         } while (col < 0x55);
