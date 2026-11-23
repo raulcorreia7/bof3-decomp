@@ -346,8 +346,18 @@ extern u8                    D_80144281;
 extern u8                    D_80144286;
 extern u8                    D_80144287;
 extern u8                    D_80144288;
+extern u8                    D_8014428A;
 extern u8                    D_8014428B;
+/* The rod and lure panel cursor rows, their row counts and the lure page offset. */
+extern s32                   D_8014428C;
+extern s32                   D_80144290;
+extern s32                   D_80144298;
+extern s32                   D_8014429C;
 extern u16                   D_801442AC;
+/* The accessory slot the rod and the lure panel select. */
+extern s16                   D_801442B6;
+extern u16                   D_801442B8;
+extern s16                   D_801442BA;
 extern u16                   D_801442BC;
 extern u16                   D_801442BE;
 extern u8                    D_801454EC[];
