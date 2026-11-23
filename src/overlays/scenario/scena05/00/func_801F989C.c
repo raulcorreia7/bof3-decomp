@@ -152,7 +152,7 @@ MATCH void func_801F98A4(void) {
             g_ScenarioState.step = 15;
             break;
         case 15:
-            SCENARIO_MESSAGE_WAIT(50, 16);
+            SCENARIO_MESSAGE_WAIT(MSG_SCENA05_050, 16);
             break;
 
         case 16:
@@ -221,7 +221,7 @@ MATCH void func_801F98A4(void) {
                 case 12:
                     mode = &g_GameStateIndex;
                     if (*mode != GAME_REQUEST_MESSAGE) {
-                        UI_MessageStartArea(51);
+                        UI_MessageStartArea(MSG_SCENA05_051);
                         *mode                = GAME_REQUEST_MESSAGE;
                         g_ScenarioState.step = 19;
                     }
@@ -232,7 +232,7 @@ MATCH void func_801F98A4(void) {
                 case 14:
                     mode = &g_GameStateIndex;
                     if (*mode != GAME_REQUEST_MESSAGE) {
-                        UI_MessageStartArea(52);
+                        UI_MessageStartArea(MSG_SCENA05_052);
                         *mode                = GAME_REQUEST_MESSAGE;
                         g_ScenarioState.step = 19;
                     }
@@ -241,7 +241,7 @@ MATCH void func_801F98A4(void) {
                 case 6:
                     mode = &g_GameStateIndex;
                     if (*mode != GAME_REQUEST_MESSAGE) {
-                        UI_MessageStartArea(53);
+                        UI_MessageStartArea(MSG_SCENA05_053);
                         *mode                = GAME_REQUEST_MESSAGE;
                         g_ScenarioState.step = 19;
                     }
@@ -250,7 +250,7 @@ MATCH void func_801F98A4(void) {
                 case 16:
                     mode = &g_GameStateIndex;
                     if (*mode != GAME_REQUEST_MESSAGE) {
-                        UI_MessageStartArea(54);
+                        UI_MessageStartArea(MSG_SCENA05_054);
                         *mode                = GAME_REQUEST_MESSAGE;
                         g_ScenarioState.step = 19;
                     }
@@ -624,7 +624,7 @@ MATCH void func_801F98A4(void) {
                 case 16:
                     mode = &g_GameStateIndex;
                     if (*mode != GAME_REQUEST_MESSAGE) {
-                        UI_MessageStartArea(52);
+                        UI_MessageStartArea(MSG_SCENA05_052);
                         *mode                = GAME_REQUEST_MESSAGE;
                         g_ScenarioState.step = 51;
                     }
@@ -633,7 +633,7 @@ MATCH void func_801F98A4(void) {
                 case 4:
                     mode = &g_GameStateIndex;
                     if (*mode != GAME_REQUEST_MESSAGE) {
-                        UI_MessageStartArea(53);
+                        UI_MessageStartArea(MSG_SCENA05_053);
                         *mode                = GAME_REQUEST_MESSAGE;
                         g_ScenarioState.step = 51;
                     }
@@ -644,7 +644,7 @@ MATCH void func_801F98A4(void) {
                 case 15:
                     mode = &g_GameStateIndex;
                     if (*mode != GAME_REQUEST_MESSAGE) {
-                        UI_MessageStartArea(51);
+                        UI_MessageStartArea(MSG_SCENA05_051);
                         *mode                = GAME_REQUEST_MESSAGE;
                         g_ScenarioState.step = 51;
                     }
@@ -653,7 +653,7 @@ MATCH void func_801F98A4(void) {
                 case 14:
                     mode = &g_GameStateIndex;
                     if (*mode != GAME_REQUEST_MESSAGE) {
-                        UI_MessageStartArea(54);
+                        UI_MessageStartArea(MSG_SCENA05_054);
                         *mode                = GAME_REQUEST_MESSAGE;
                         g_ScenarioState.step = 51;
                     }
@@ -779,58 +779,58 @@ MATCH void func_801F98A4(void) {
                 if (SYS_TestFlag(g_SceneFlags, 0x1F) != 0) {
                     switch (g_PartyFieldOrder[0]) {
                         case CHAR_ID_RYU_YOUNG:
-                            MESSAGE_START_WAIT(77);
+                            MESSAGE_START_WAIT(MSG_SCENA05_077);
                             break;
                         case CHAR_ID_NINA_YOUNG:
-                            MESSAGE_START_WAIT(78);
+                            MESSAGE_START_WAIT(MSG_SCENA05_078);
                             break;
                         case CHAR_ID_GARR:
                         case CHAR_ID_TEEPO:
                         case CHAR_ID_REI:
                         case CHAR_ID_MOMO:
-                            MESSAGE_START_WAIT(79);
+                            MESSAGE_START_WAIT(MSG_SCENA05_079);
                             break;
                         case CHAR_ID_PECO:
-                            MESSAGE_START_WAIT(80);
+                            MESSAGE_START_WAIT(MSG_SCENA05_080);
                             break;
                     }
                 } else {
                     switch (g_PartyFieldOrder[0]) {
                         case CHAR_ID_RYU_YOUNG:
-                            MESSAGE_START_WAIT(73);
+                            MESSAGE_START_WAIT(MSG_SCENA05_073);
                             break;
                         case CHAR_ID_NINA_YOUNG:
-                            MESSAGE_START_WAIT(74);
+                            MESSAGE_START_WAIT(MSG_SCENA05_074);
                             break;
                         case CHAR_ID_GARR:
                         case CHAR_ID_TEEPO:
                         case CHAR_ID_REI:
                             break;
                         case CHAR_ID_MOMO:
-                            MESSAGE_START_WAIT(75);
+                            MESSAGE_START_WAIT(MSG_SCENA05_075);
                             break;
                         case CHAR_ID_PECO:
-                            MESSAGE_START_WAIT(76);
+                            MESSAGE_START_WAIT(MSG_SCENA05_076);
                             break;
                     }
                 }
             } else {
                 switch (g_PartyFieldOrder[0]) {
                     case CHAR_ID_RYU_YOUNG:
-                        MESSAGE_START_WAIT(62);
+                        MESSAGE_START_WAIT(MSG_SCENA05_062);
                         break;
                     case CHAR_ID_NINA_YOUNG:
-                        MESSAGE_START_WAIT(63);
+                        MESSAGE_START_WAIT(MSG_SCENA05_063);
                         break;
                     case CHAR_ID_GARR:
                     case CHAR_ID_TEEPO:
                     case CHAR_ID_REI:
                         break;
                     case CHAR_ID_MOMO:
-                        MESSAGE_START_WAIT(64);
+                        MESSAGE_START_WAIT(MSG_SCENA05_064);
                         break;
                     case CHAR_ID_PECO:
-                        MESSAGE_START_WAIT(65);
+                        MESSAGE_START_WAIT(MSG_SCENA05_065);
                         break;
                 }
             }
@@ -954,7 +954,7 @@ MATCH void func_801F98A4(void) {
                 case 3:
                     mode = &g_GameStateIndex;
                     if (*mode != GAME_REQUEST_MESSAGE) {
-                        UI_MessageStartArea(53);
+                        UI_MessageStartArea(MSG_SCENA05_053);
                         *mode                = GAME_REQUEST_MESSAGE;
                         g_ScenarioState.step = 61;
                     }
@@ -963,7 +963,7 @@ MATCH void func_801F98A4(void) {
                 case 5:
                     mode = &g_GameStateIndex;
                     if (*mode != GAME_REQUEST_MESSAGE) {
-                        UI_MessageStartArea(52);
+                        UI_MessageStartArea(MSG_SCENA05_052);
                         *mode                = GAME_REQUEST_MESSAGE;
                         g_ScenarioState.step = 61;
                     }
@@ -972,7 +972,7 @@ MATCH void func_801F98A4(void) {
                 case 13:
                     mode = &g_GameStateIndex;
                     if (*mode != GAME_REQUEST_MESSAGE) {
-                        UI_MessageStartArea(54);
+                        UI_MessageStartArea(MSG_SCENA05_054);
                         *mode                = GAME_REQUEST_MESSAGE;
                         g_ScenarioState.step = 61;
                     }
@@ -981,7 +981,7 @@ MATCH void func_801F98A4(void) {
                 case 15:
                     mode = &g_GameStateIndex;
                     if (*mode != GAME_REQUEST_MESSAGE) {
-                        UI_MessageStartArea(52);
+                        UI_MessageStartArea(MSG_SCENA05_052);
                         *mode                = GAME_REQUEST_MESSAGE;
                         g_ScenarioState.step = 61;
                     }
@@ -992,7 +992,7 @@ MATCH void func_801F98A4(void) {
                 case 16:
                     mode = &g_GameStateIndex;
                     if (*mode != GAME_REQUEST_MESSAGE) {
-                        UI_MessageStartArea(51);
+                        UI_MessageStartArea(MSG_SCENA05_051);
                         *mode                = GAME_REQUEST_MESSAGE;
                         g_ScenarioState.step = 61;
                     }
@@ -1118,58 +1118,58 @@ MATCH void func_801F98A4(void) {
                 if (SYS_TestFlag(g_SceneFlags, 0x1F) != 0) {
                     switch (g_PartyFieldOrder[0]) {
                         case CHAR_ID_RYU_YOUNG:
-                            MESSAGE_START_WAIT(77);
+                            MESSAGE_START_WAIT(MSG_SCENA05_077);
                             break;
                         case CHAR_ID_NINA_YOUNG:
-                            MESSAGE_START_WAIT(78);
+                            MESSAGE_START_WAIT(MSG_SCENA05_078);
                             break;
                         case CHAR_ID_GARR:
                         case CHAR_ID_TEEPO:
                         case CHAR_ID_REI:
                         case CHAR_ID_MOMO:
-                            MESSAGE_START_WAIT(79);
+                            MESSAGE_START_WAIT(MSG_SCENA05_079);
                             break;
                         case CHAR_ID_PECO:
-                            MESSAGE_START_WAIT(80);
+                            MESSAGE_START_WAIT(MSG_SCENA05_080);
                             break;
                     }
                 } else {
                     switch (g_PartyFieldOrder[0]) {
                         case CHAR_ID_RYU_YOUNG:
-                            MESSAGE_START_WAIT(73);
+                            MESSAGE_START_WAIT(MSG_SCENA05_073);
                             break;
                         case CHAR_ID_NINA_YOUNG:
-                            MESSAGE_START_WAIT(74);
+                            MESSAGE_START_WAIT(MSG_SCENA05_074);
                             break;
                         case CHAR_ID_GARR:
                         case CHAR_ID_TEEPO:
                         case CHAR_ID_REI:
                             break;
                         case CHAR_ID_MOMO:
-                            MESSAGE_START_WAIT(75);
+                            MESSAGE_START_WAIT(MSG_SCENA05_075);
                             break;
                         case CHAR_ID_PECO:
-                            MESSAGE_START_WAIT(76);
+                            MESSAGE_START_WAIT(MSG_SCENA05_076);
                             break;
                     }
                 }
             } else {
                 switch (g_PartyFieldOrder[0]) {
                     case CHAR_ID_RYU_YOUNG:
-                        MESSAGE_START_WAIT(62);
+                        MESSAGE_START_WAIT(MSG_SCENA05_062);
                         break;
                     case CHAR_ID_NINA_YOUNG:
-                        MESSAGE_START_WAIT(63);
+                        MESSAGE_START_WAIT(MSG_SCENA05_063);
                         break;
                     case CHAR_ID_GARR:
                     case CHAR_ID_TEEPO:
                     case CHAR_ID_REI:
                         break;
                     case CHAR_ID_MOMO:
-                        MESSAGE_START_WAIT(64);
+                        MESSAGE_START_WAIT(MSG_SCENA05_064);
                         break;
                     case CHAR_ID_PECO:
-                        MESSAGE_START_WAIT(65);
+                        MESSAGE_START_WAIT(MSG_SCENA05_065);
                         break;
                 }
             }
