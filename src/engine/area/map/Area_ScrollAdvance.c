@@ -5,8 +5,8 @@
  */
 MATCH void Area_ScrollAdvance(s16 height) {
     if (g_AreaMapBundle.scroll == 0) {
-        g_AreaTileRemainderY -= (height - g_AreaCameraHeight) * 2;
+        g_AreaTileRemainderY -= (height - g_AreaCamera.height) * 2;
     }
-    g_AreaCameraHeight       = height;
+    g_AreaCamera.height      = height;
     g_AreaCameraRefreshCount = 2;
 }
