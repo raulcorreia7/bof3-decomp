@@ -19,7 +19,7 @@ NON_MATCHING void func_801D8690(s32 x, s32 y, s32 slot) {
     index        = slot - 3;
     draw_x       = x + 4;
     style        = g_WindowStyle;
-    packed_color = *(u16*)(MEM_PTR(u8, 0x80033A08u) + ((style << 6) | 0x20));
+    packed_color = *(u16*)((u8*)&D_80033A08 + ((style << 6) | 0x20));
     color_r      = (packed_color & 0x1F) * 8;
     color_g      = (packed_color >> 2) & 0xF8;
     color_b      = (packed_color >> 7) & 0xF8;
