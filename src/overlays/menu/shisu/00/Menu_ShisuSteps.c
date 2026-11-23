@@ -587,7 +587,7 @@ NON_MATCHING u8 func_801D1EE8(void) {
     }
 
     subtotal   = g_ShisuIngredients.topping_size * (D_801DA034 * 10);
-    total      = subtotal + (g_ShisuIngredients.rounds * ((D_801DA038 * D_801DA03C) / 100));
+    total      = subtotal + (g_ShisuIngredients.used[1] * ((D_801DA038 * D_801DA03C) / 100));
     D_801DA044 = 0;
     FAKE_BARRIER();
     D_801DA044 = subtotal;

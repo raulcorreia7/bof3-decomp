@@ -103,7 +103,7 @@ NON_MATCHING void func_801F73EC(void) {
     do {
         width = D_801FE7CC[i].box.w;
         limit = TASK(Actor)->timer << 4;
-        if (((u16)limit) < height) {
+        if (((u16)limit) < width) {
             width = limit;
         }
         height = D_801FE7CC[i].box.h;
