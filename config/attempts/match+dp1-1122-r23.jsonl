@@ -1,0 +1,2 @@
+{"function": "emi/world03/area148/13@0x801F4A50", "tried": "split the 0x20 pad into two 0x10 arrays (the macro name collides), a named second array (elided), a two-member struct (one block), and a referenced second array with an asm memory operand (frame 0x98, 233 rows): the trig spill slots stay 0x20 high", "first_diff": "0x801F4AA0 sh a3,32(sp) against sh a3,64(sp)", "score": "16 rows"}
+{"function": "emi/world04/area189/13@0x801F5600", "tried": "measured a 400+ row draft; tail row, no source tweak applied", "first_diff": "see asm head", "score": "407 rows"}
