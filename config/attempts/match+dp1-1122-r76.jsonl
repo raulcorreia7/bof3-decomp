@@ -1,0 +1,1 @@
+{"function": "emi/etc/commu01/07@0x801D2D98", "tried": "the 4-row draft is gone: the unit no longer defines the body, so match.sh compares the asm to itself (0 rows). A draft must be written before the store-order note applies again", "first_diff": "n/a (no draft)", "score": "undrafted"}
