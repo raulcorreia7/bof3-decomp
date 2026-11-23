@@ -101,9 +101,11 @@ NON_MATCHING void func_801F73EC(void) {
 
     i = 0;
     do {
-        width = D_801FE7CC[i].box.w;
-        limit = TASK(Actor)->timer << 4;
-        if (((u16)limit) < width) {
+        width  = D_801FE7CC[i].box.w;
+        /* The copy is the clamp's operand, as retail compares against its a2 copy. */
+        height = width;
+        limit  = TASK(Actor)->timer << 4;
+        if (((u16)limit) < height) {
             width = limit;
         }
         height = D_801FE7CC[i].box.h;
