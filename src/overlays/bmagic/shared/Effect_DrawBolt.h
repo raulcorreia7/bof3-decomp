@@ -13,16 +13,16 @@ MATCH void Effect_DrawBolt(void) {
     s32      page;
     s32      i;
 
-    d          = &g_ScratchPad;
-    vec        = g_ScratchPadVectorHalves;
-    d[0]       = BOLT_RADIUS;
-    D_1F800004 = ((TASK(PartyMember)->param.unk_0B + 2) & 0xF) << 8;
-    D_1F80000C = TASK(PartyMember)->timer;
-    i          = 1;
-    D_1F800008 = RANDOM_MASK(0x3F);
-    vec[0]     = 0;
-    D_1F800016 = FIXED_MUL(rsin(D_1F800004), d[0]);
-    D_1F800018 = 0;
+    d                         = &g_ScratchPad;
+    vec                       = g_ScratchPadVectorHalves;
+    d[0]                      = BOLT_RADIUS;
+    D_1F800004                = ((TASK(PartyMember)->param.unk_0B + 2) & 0xF) << 8;
+    D_1F80000C                = TASK(PartyMember)->timer;
+    i                         = 1;
+    D_1F800008                = RANDOM_MASK(0x3F);
+    vec[0]                    = 0;
+    g_ScratchPadVectors[0].vy = FIXED_MUL(rsin(D_1F800004), d[0]);
+    g_ScratchPadVectors[0].vz = 0;
     if (i < D_1F80000C) {
         point = vec;
         cell  = d + 1;

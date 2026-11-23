@@ -779,9 +779,11 @@ INCLUDE_ASM(func_801D27BC);
 
 #ifdef NON_MATCHING
 NON_MATCHING s32 func_801D2978(void) {
-    s8 amount;
-    u8 saved[3];
-    s8 v;
+    s8  amount;
+    u8  saved[3];
+    u8* green;
+    u8* blue;
+    s8  shade;
 
     amount = g_ShisuIngredients.used[1] - g_ShisuIngredients.rounds;
     if (amount <= 0) {
@@ -794,22 +796,24 @@ NON_MATCHING s32 func_801D2978(void) {
     saved[0]         = g_ShisuBase[0];
     saved[1]         = g_ShisuBase[1];
     saved[2]         = g_ShisuBase[2];
-    if (g_ShisuIngredients.used[2] * 3 >= 0xFF - saved[0]) {
-        v = -1;
+    if (0xFF - saved[0] > g_ShisuIngredients.used[2] * 3) {
+        shade = saved[0] + g_ShisuIngredients.used[2] * 3;
     } else {
-        v = saved[0] + g_ShisuIngredients.used[2] * 3;
+        shade = -1;
     }
-    g_ShisuBase[0] = v;
-    if (g_ShisuIngredients.used[2] * 3 >= 0xFF - g_ShisuBase[1]) {
-        v = -1;
+    g_ShisuBase[0] = shade;
+    green          = &g_ShisuBase[1];
+    if (0xFF - *green > g_ShisuIngredients.used[2] * 3) {
+        shade = *green + g_ShisuIngredients.used[2] * 3;
     } else {
-        v = g_ShisuBase[1] + g_ShisuIngredients.used[2] * 3;
+        shade = -1;
     }
-    g_ShisuBase[1] = v;
-    if (g_ShisuIngredients.used[2] * 3 < g_ShisuBase[2]) {
-        g_ShisuBase[2] -= g_ShisuIngredients.used[2] * 3;
+    *green = shade;
+    blue   = &g_ShisuBase[2];
+    if (*blue > g_ShisuIngredients.used[2] * 3) {
+        *blue -= g_ShisuIngredients.used[2] * 3;
     } else {
-        g_ShisuBase[2] = 0;
+        *blue = 0;
     }
     func_801D2308(&D_801DA048);
     g_ShisuBase[0] = saved[0];

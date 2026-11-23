@@ -237,16 +237,16 @@ MATCH void Effect_DrawBolt(void) {
     u8       page;
     s32      i;
 
-    d          = g_ScratchPadHalves;
-    vec        = g_ScratchPadVectorHalves;
-    d[0]       = 0x40;
-    D_1F800002 = ((TASK(PartyMember)->param.unk_0B + 2) & 0xF) << 8;
-    D_1F800008 = TASK(PartyMember)->timer;
-    i          = 1;
-    D_1F800004 = RANDOM_MASK(0x3F);
-    vec[0]     = 0;
-    D_1F800016 = FIXED_MUL(rsin(D_1F800002), d[0]);
-    D_1F800018 = 0;
+    d                         = g_ScratchPadHalves;
+    vec                       = g_ScratchPadVectorHalves;
+    d[0]                      = 0x40;
+    D_1F800002                = ((TASK(PartyMember)->param.unk_0B + 2) & 0xF) << 8;
+    D_1F800008                = TASK(PartyMember)->timer;
+    i                         = 1;
+    D_1F800004                = RANDOM_MASK(0x3F);
+    vec[0]                    = 0;
+    g_ScratchPadVectors[0].vy = FIXED_MUL(rsin(D_1F800002), d[0]);
+    g_ScratchPadVectors[0].vz = 0;
     if (i < D_1F800008) {
         point = vec;
         cell  = d + 1;

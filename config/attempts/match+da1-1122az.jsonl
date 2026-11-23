@@ -1,0 +1,1 @@
+{"function": "emi/world04/area173/14@0x801F3954", "tried": "row-first statement order for the four values derived from start", "first_diff": "33 rows; retail ranks start s5, cell_y s4, cell_x s3, row s2, the draft puts start s4 and cell_y s5; the reorder costs 92 rows, reverted", "score": "33 rows"}

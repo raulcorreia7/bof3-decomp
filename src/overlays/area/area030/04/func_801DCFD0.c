@@ -27,15 +27,15 @@ NON_MATCHING void func_801DCFD0(void) {
 
     if (*pad_state & g_InputMasks[FISHING_INPUT_CANCEL]) {
         SND_SEPlay(EMI_SE_ID(SND_BANK_COMMON, 6));
-        D_80144287 &= ~2;
+        g_SpawnedActors[6].unk_07 &= ~2;
         TASK(FishingState)->flag_04 -= 1;
         return;
     }
 
-    if (!(D_80144287 & 1)) {
+    if (!(g_SpawnedActors[6].unk_07 & 1)) {
         UI_TextDraw(29, 20, 0, TEXT_LENGTH_MAX, MESSAGE_TABLE_TEXT(AREA_MESSAGE_TABLE, 83));
         if (*pad_state & g_InputMasks[FISHING_INPUT_CAST]) {
-            item = FISHING_ACCESSORY_SLOT(D_801442B6);
+            item = FISHING_ACCESSORY_SLOT(g_SpawnedActors[6].pos.x.part.integer);
             if (g_Accessories[item].type == ITEM_TYPE_FISHING_ROD) {
                 saved = item;
                 Item_Remove(ITEM_CATEGORY_ACCESSORY, item, 1, 0);
@@ -45,35 +45,35 @@ NON_MATCHING void func_801DCFD0(void) {
                 g_FishingEquipment.rod_id = saved;
             }
             SND_SEPlay(EMI_SE_ID(SND_BANK_COMMON, 3));
-            D_80144287 &= ~2;
+            g_SpawnedActors[6].unk_07 &= ~2;
             TASK(FishingState)->flag_04 -= 1;
             return;
         }
         if (input & PADLup) {
-            if (D_8014428C != 0) {
+            if (g_SpawnedActors[6].vx != 0) {
                 SND_SEPlay(EMI_SE_ID(SND_BANK_COMMON, 0));
-                D_8014428C -= 1;
+                g_SpawnedActors[6].vx -= 1;
             }
         } else if (input & PADLdown) {
-            if (D_8014428C < D_80144298 - 1) {
+            if (g_SpawnedActors[6].vx < g_SpawnedActors[6].counter_18 - 1) {
                 SND_SEPlay(EMI_SE_ID(SND_BANK_COMMON, 0));
-                D_8014428C += 1;
+                g_SpawnedActors[6].vx += 1;
             }
         }
-        item = FISHING_ACCESSORY_SLOT(D_801442B6);
+        item = FISHING_ACCESSORY_SLOT(g_SpawnedActors[6].pos.x.part.integer);
         if (g_Accessories[item].type == ITEM_TYPE_FISHING_ROD) {
-            D_801442AC = item + 4;
+            g_SpawnedActors[6].unk_2C = item + 4;
         } else {
-            D_801442AC = 0xFFFF;
+            g_SpawnedActors[6].unk_2C = 0xFFFF;
         }
-        UI_CursorDraw(0xA8, (u16)(D_8014428C * FISHING_ACCESSORY_ROW_HEIGHT + 0x5A), 0);
+        UI_CursorDraw(0xA8, (u16)(g_SpawnedActors[6].vx * FISHING_ACCESSORY_ROW_HEIGHT + 0x5A), 0);
         return;
     }
 
     UI_TextDraw(29, 20, 0, TEXT_LENGTH_MAX, MESSAGE_TABLE_TEXT(AREA_MESSAGE_TABLE, 84));
-    if (D_8014428A == 0) {
+    if (g_SpawnedActors[6].unk_0A == 0) {
         if (*pad_state & g_InputMasks[FISHING_INPUT_CAST]) {
-            item = FISHING_ACCESSORY_SLOT(D_801442BA);
+            item = FISHING_ACCESSORY_SLOT(g_SpawnedActors[6].pos.y.part.integer);
             if (g_Accessories[item].type == ITEM_TYPE_FISHING_LURE) {
                 if (g_FishingEquipment.lure_id != item) {
                     saved = item;
@@ -89,85 +89,85 @@ NON_MATCHING void func_801DCFD0(void) {
                             count++;
                         }
                     }
-                    if (D_8014429C >= count) {
-                        if (D_801442B8 != 0 && count - 9 < D_801442B8) {
-                            D_801442B8 -= 1;
+                    if (g_SpawnedActors[6].counter_1C >= count) {
+                        if (g_SpawnedActors[6].pos.y.part.fraction != 0 && count - 9 < g_SpawnedActors[6].pos.y.part.fraction) {
+                            g_SpawnedActors[6].pos.y.part.fraction -= 1;
                         }
                     }
                 }
             }
             SND_SEPlay(EMI_SE_ID(SND_BANK_COMMON, 3));
-            D_80144287 &= ~2;
+            g_SpawnedActors[6].unk_07 &= ~2;
             TASK(FishingState)->flag_04 -= 1;
             return;
         }
         if (input & PADLup) {
-            if (D_80144290 != 0) {
+            if (g_SpawnedActors[6].selection != 0) {
                 SND_SEPlay(EMI_SE_ID(SND_BANK_COMMON, 0));
-                D_80144290 -= 1;
-            } else if (D_801442B8 != 0) {
+                g_SpawnedActors[6].selection -= 1;
+            } else if (g_SpawnedActors[6].pos.y.part.fraction != 0) {
                 SND_SEPlay(EMI_SE_ID(SND_BANK_COMMON, 0));
-                D_80144288 = 4;
-                D_8014428A = 3;
-                D_801442B8 -= 1;
+                g_SpawnedActors[6].unk_08 = 4;
+                g_SpawnedActors[6].unk_0A = 3;
+                g_SpawnedActors[6].pos.y.part.fraction -= 1;
             }
         } else if (input & PADLdown) {
-            if (D_80144290 == 8) {
-                if (D_801442B8 + 8 < D_8014429C) {
+            if (g_SpawnedActors[6].selection == 8) {
+                if (g_SpawnedActors[6].pos.y.part.fraction + 8 < g_SpawnedActors[6].counter_1C) {
                     SND_SEPlay(EMI_SE_ID(SND_BANK_COMMON, 0));
-                    D_80144288 = 0;
-                    D_8014428A = 3;
-                    D_801442B8 += 1;
+                    g_SpawnedActors[6].unk_08 = 0;
+                    g_SpawnedActors[6].unk_0A = 3;
+                    g_SpawnedActors[6].pos.y.part.fraction += 1;
                 }
-            } else if (D_80144290 < D_8014429C) {
+            } else if (g_SpawnedActors[6].selection < g_SpawnedActors[6].counter_1C) {
                 SND_SEPlay(EMI_SE_ID(SND_BANK_COMMON, 0));
-                D_80144290 += 1;
+                g_SpawnedActors[6].selection += 1;
             }
         } else if (*pad_state & PADL1) {
-            old = D_801442B8;
+            old = g_SpawnedActors[6].pos.y.part.fraction;
             if (old >= 9) {
-                D_801442B8 = old - 9;
+                g_SpawnedActors[6].pos.y.part.fraction = old - 9;
                 SND_SEPlay(EMI_SE_ID(SND_BANK_COMMON, 0));
             } else {
-                D_801442B8 = 0;
+                g_SpawnedActors[6].pos.y.part.fraction = 0;
                 if (old != 0) {
                     SND_SEPlay(EMI_SE_ID(SND_BANK_COMMON, 0));
-                } else if (D_80144290 != 0) {
+                } else if (g_SpawnedActors[6].selection != 0) {
                     SND_SEPlay(EMI_SE_ID(SND_BANK_COMMON, 0));
-                    D_80144290 = 0;
+                    g_SpawnedActors[6].selection = 0;
                 }
             }
         } else if (*pad_state & PADR1) {
-            old = D_801442B8;
-            if (D_8014429C < 9) {
-                if (D_80144290 < D_8014429C) {
+            old = g_SpawnedActors[6].pos.y.part.fraction;
+            if (g_SpawnedActors[6].counter_1C < 9) {
+                if (g_SpawnedActors[6].selection < g_SpawnedActors[6].counter_1C) {
                     SND_SEPlay(EMI_SE_ID(SND_BANK_COMMON, 0));
-                    D_80144290 = D_8014429C;
+                    g_SpawnedActors[6].selection = g_SpawnedActors[6].counter_1C;
                 }
             } else {
-                D_801442B8 = old + 9;
-                if (D_801442B8 + 8 < D_8014429C) {
+                g_SpawnedActors[6].pos.y.part.fraction = old + 9;
+                if (g_SpawnedActors[6].pos.y.part.fraction + 8 < g_SpawnedActors[6].counter_1C) {
                     SND_SEPlay(EMI_SE_ID(SND_BANK_COMMON, 0));
                 } else {
-                    D_801442B8 = D_8014429C - 8;
-                    if (D_801442B8 != old) {
+                    g_SpawnedActors[6].pos.y.part.fraction = g_SpawnedActors[6].counter_1C - 8;
+                    if (g_SpawnedActors[6].pos.y.part.fraction != old) {
                         SND_SEPlay(EMI_SE_ID(SND_BANK_COMMON, 0));
-                    } else if (D_80144290 < 8) {
+                    } else if (g_SpawnedActors[6].selection < 8) {
                         SND_SEPlay(EMI_SE_ID(SND_BANK_COMMON, 0));
-                        D_80144290 = 8;
+                        g_SpawnedActors[6].selection = 8;
                     }
                 }
             }
         }
     }
 
-    item = FISHING_ACCESSORY_SLOT(D_801442BA);
+    item = FISHING_ACCESSORY_SLOT(g_SpawnedActors[6].pos.y.part.integer);
     if (g_Accessories[item].type == ITEM_TYPE_FISHING_LURE) {
-        D_801442AC = item + 4;
+        g_SpawnedActors[6].unk_2C = item + 4;
     } else {
-        D_801442AC = 0xFFFF;
+        g_SpawnedActors[6].unk_2C = 0xFFFF;
     }
-    UI_CursorDraw(0xA8, (u16)(D_80144290 * FISHING_ACCESSORY_ROW_HEIGHT + 0x5A), 0);
+    UI_CursorDraw(0xA8, (u16)(g_SpawnedActors[6].selection * FISHING_ACCESSORY_ROW_HEIGHT + 0x5A), 0);
 }
 #else
 INCLUDE_ASM(func_801DCFD0);

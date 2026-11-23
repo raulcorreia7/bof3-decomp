@@ -2,17 +2,11 @@
 
 #ifdef NON_MATCHING
 NON_MATCHING void func_801F3A14(s32 x, s32 y) {
-    /* FAKE: retail shifts the x coordinate in s0 after its parameter copy. */
-    FAKE_REG(s32, column, "s0");
-    /* FAKE: retail shifts the y coordinate in s1 after its parameter copy. */
-    FAKE_REG(s32, row, "s1");
+    s32 column;
+    s32 row;
 
     column = x;
     row    = y;
-    /* FAKE: keep the parameter copy in s0 before the retail in-place shift. */
-    FAKE_OPAQUE(column);
-    /* FAKE: keep the parameter copy in s1 before the retail in-place shift. */
-    FAKE_OPAQUE(row);
     column >>= 16;
     row >>= 16;
     Area_HeightSet(column, row, 0);

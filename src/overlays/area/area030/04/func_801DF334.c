@@ -16,12 +16,12 @@ NON_MATCHING void func_801DF334(void) {
     u8            upper;
 
     work   = TASK(FishingState);
-    center = D_8014423C;
+    center = g_SpawnedActors[5].screen_y;
     span   = g_FishingRodRow->reel_cursor_size * 4;
     lower  = center - span - 0xC;
     upper  = center + span + 0xC;
     if (work->y_38.pos_y <= 0x8000) {
-        D_8014421C                     = -7;
+        g_SpawnedActors[5].selection   = -7;
         g_SpawnedActors[0].header.mode = 0;
         D_80145E92[0]                  = 6;
         D_80145E93[0]                  = 0;
@@ -54,13 +54,13 @@ NON_MATCHING void func_801DF334(void) {
         return;
     }
 
-    if (D_80144199 == 0) {
+    if (g_SpawnedActors[4].header.mode == 0) {
         if ((s8)upper < (s8)work->step_index) {
             work->saved_index += 1;
             if (work->saved_index >= g_FishingRodRow->snap_left_tension) {
                 work->saved_index = 0;
-                if (D_8014421C < 0 && work->cursor_10 > 0 && (func_801E02D4(upper, 1) & BYTE_MASK)) {
-                    D_8014421C                     = -7;
+                if (g_SpawnedActors[5].selection < 0 && work->cursor_10 > 0 && (func_801E02D4(upper, 1) & BYTE_MASK)) {
+                    g_SpawnedActors[5].selection   = -7;
                     g_SpawnedActors[0].header.mode = 0;
                     D_80145E92[0]                  = 6;
                     D_80145E93[0]                  = 0;
@@ -118,8 +118,8 @@ NON_MATCHING void func_801DF334(void) {
                 } else if (work->cursor_10 >= 6) {
                     work->cursor_10 = 5;
                 }
-                if (D_8014421C < 0) {
-                    value = (s8)work->step_index - D_8014423C;
+                if (g_SpawnedActors[5].selection < 0) {
+                    value = (s8)work->step_index - g_SpawnedActors[5].screen_y;
                     if (value < -0x30) {
                         FISHING_ROW->timer_75 = 0xFD;
                     } else if (value < -0x18) {
@@ -174,7 +174,7 @@ NON_MATCHING void func_801DF334(void) {
     if (g_AreaCameraMoving == 0) {
         g_AreaCameraSpeed = 0;
     }
-    if (D_8014423C < (s8)work->step_index && work->cursor_10 > 0) {
+    if (g_SpawnedActors[5].screen_y < (s8)work->step_index && work->cursor_10 > 0) {
         work->y_38.pos_y = work->y_38.pos_y - 0x1000;
         if (work->bounce.half.key < 0) {
             work->bounce.half.key += 8;
@@ -205,7 +205,7 @@ NON_MATCHING void func_801DF334(void) {
         } else {
             work->counter_08 = 2;
         }
-    } else if ((s8)work->step_index < D_8014423C && D_8014421C < 0) {
+    } else if ((s8)work->step_index < g_SpawnedActors[5].screen_y && g_SpawnedActors[5].selection < 0) {
         amount = 0x3E - work->y_38.slot.slot;
         if (amount != 0) {
             work->pos_x = ((0xF0000 - work->motion.unk_34) >> 4) / amount;
