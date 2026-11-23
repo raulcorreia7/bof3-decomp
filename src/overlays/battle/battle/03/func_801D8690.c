@@ -1,7 +1,7 @@
 #include "battle_03.h"
 
-#ifdef NON_MATCHING
 /* Draws an enemy's name panel: the two-pass frame around the name and the dimmer lower band. */
+#ifdef NON_MATCHING
 NON_MATCHING void func_801D8690(s32 x, s32 y, s32 slot) {
     s16 color_r;
     s16 color_g;
@@ -9,24 +9,22 @@ NON_MATCHING void func_801D8690(s32 x, s32 y, s32 slot) {
     s16 draw_x;
     s16 text_x;
     u16 packed_color;
-    s8  style;
     u8  flag;
     u8  index;
     s32 panel_x;
     s32 panel_y;
 
-    GFX_AddDrawMode(GetTPage(TPAGE_DEPTH_4BIT, TPAGE_ABR_HALF, FONT_TPAGE_X, FONT_TPAGE_Y) & HALF_MASK);
+    GFX_AddDrawMode(GetTPage(TPAGE_DEPTH_4BIT, TPAGE_ABR_HALF, FONT_TPAGE_X, FONT_TPAGE_Y));
     index        = slot - 3;
     draw_x       = x + 4;
-    style        = g_WindowStyle;
-    packed_color = *(u16*)((u8*)&D_80033A08 + ((style << 6) | 0x20));
+    packed_color = *(u16*)((u8*)D_80033A08 + (((*(s8*)&g_WindowStyle) << 6) | 0x20));
     color_r      = (packed_color & 0x1F) * 8;
     color_g      = (packed_color >> 2) & 0xF8;
     color_b      = (packed_color >> 7) & 0xF8;
     Battle_DrawWindowTile(draw_x, (s16)(y + 8), 8, 1);
     Battle_DrawPanelShape(draw_x, (s16)(y + 6), 2, 1);
     Battle_DrawPanelShape(draw_x, (s16)(y + 0x19), 3, 1);
-    GFX_AddDrawMode(GetTPage(TPAGE_DEPTH_4BIT, TPAGE_ABR_ADD, FONT_TPAGE_X, FONT_TPAGE_Y) & HALF_MASK);
+    GFX_AddDrawMode(GetTPage(TPAGE_DEPTH_4BIT, TPAGE_ABR_ADD, FONT_TPAGE_X, FONT_TPAGE_Y));
     draw_x = x;
     Battle_DrawWindowTile(draw_x, (s16)(y + 2), 8, 0);
     text_x = x + 6;
@@ -41,21 +39,17 @@ NON_MATCHING void func_801D8690(s32 x, s32 y, s32 slot) {
     } else {
         func_801D94D4((s16)(x + 0x24), (s16)(y + 0xC), 0, 0xFFFF);
     }
-    y = (s16)(panel_y + 3);
-    UI_TextDrawString((s16)(panel_x + 4), y, 0, ENEMY_NAME_LENGTH, g_BattleEnemyBattlers[index].name);
-    x = (s16)(panel_x + 2);
-    Battle_DrawPanelLine(x, (s16)(panel_y + 2), (s16)(panel_x + 0x49), (s16)(panel_y + 2), color_r, color_g, color_b);
-    Battle_DrawPanelLine(x, y, x, (s16)(panel_y + 0x12), color_r, color_g, color_b);
+    UI_TextDrawString((s16)(panel_x + 4), (s16)(panel_y + 3), 0, ENEMY_NAME_LENGTH, g_BattleEnemyBattlers[index].name);
+    Battle_DrawPanelLine((s16)(panel_x + 2), (s16)(panel_y + 2), (s16)(panel_x + 0x49), (s16)(panel_y + 2), color_r, color_g, color_b);
+    Battle_DrawPanelLine((s16)(panel_x + 2), (s16)(panel_y + 3), (s16)(panel_x + 2), (s16)(panel_y + 0x12), color_r, color_g, color_b);
     color_r -= 0x10;
     color_g -= 0x10;
     color_b -= 0x10;
     color_r = (color_r < 0) ? 0 : ((color_r < 0x100) ? color_r : 0xFF);
     color_g = (color_g < 0) ? 0 : ((color_g < 0x100) ? color_g : 0xFF);
     color_b = (color_b < 0) ? 0 : ((color_b < 0x100) ? color_b : 0xFF);
-    x       = (s16)(panel_x + 0x49);
-    y       = (s16)(panel_y + 0x12);
-    Battle_DrawLine(x, (s16)(panel_y + 2), x, y, color_r, color_g, color_b);
-    Battle_DrawLine((s16)(panel_x + 2), y, x, y, color_r, color_g, color_b);
+    Battle_DrawLine((s16)(panel_x + 0x49), (s16)(panel_y + 2), (s16)(panel_x + 0x49), (s16)(panel_y + 0x12), color_r, color_g, color_b);
+    Battle_DrawLine((s16)(panel_x + 2), (s16)(panel_y + 0x12), (s16)(panel_x + 0x49), (s16)(panel_y + 0x12), color_r, color_g, color_b);
 }
 #else
 INCLUDE_ASM(func_801D8690);

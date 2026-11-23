@@ -466,7 +466,6 @@ void               Battle_CureStatus(u32 battler_index, u32 status_mask);
 u8                 func_800A3DF8(u32 battler_index, u32 selection_type);
 s32                func_800A8F58(void);
 s32                func_800AA368(void);
-void               func_800AB0B8(u32 arg0, u8 arg1, u8* arg2);
 void               func_800AB910(void);
 s32                func_800ABBA4(void);
 void               func_800AC964(void);
