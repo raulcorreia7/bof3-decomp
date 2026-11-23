@@ -1,0 +1,3 @@
+{"function": "exe/slus_004_22@0x8014D290", "tried": "the draft rotates a3/a2 and its jump targets sit 8 bytes early", "first_diff": "0x8014D2B0 move a3,v1 against move a2,v1", "score": "133 rows"}
+{"function": "emi/world02/area102/13@0x801F2F44", "tried": "the draft stack frame and saved registers differ from retail", "first_diff": "0x801F2F58 sw s3,52(sp) against sw s1,44(sp)", "score": "118 rows"}
+{"function": "emi/scenario/scena15/00@0x801F97CC", "tried": "bright local (27, size 0x258 against 0x254); the ternary keeps 19 rows at the same size gap", "first_diff": "0x801F99B8 move a2,zero against nop", "score": "19 rows"}
