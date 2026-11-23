@@ -244,7 +244,7 @@ NON_MATCHING void func_801F78B0(void) {
     D_801FDFC0               = &D_800E4C24;
     D_800E4C24.pos.vx        = TASK(Actor)->pos.x.fixed;
     D_800E4C24.pos.vy        = TASK(Actor)->pos.y.fixed;
-    D_800E4C24.pos.vz        = TASK(Actor)->pos.z.fixed + 0x2000000;
+    D_800E4C24.pos.vz        = TASK(Actor)->pos.z.fixed + TO_COORD(0x200);
     D_800E4C24.angle         = 0;
     func_801F90F4(&D_800E4C24);
     TASK(Actor)->vx = 0x28;

@@ -19,9 +19,11 @@ NON_MATCHING void func_801F38A0(s16* row) {
     if (bottom > (s16)row[5]) {
         prim->y2 = prim->y3 = row[5];
     }
-    prim->x1 = prim->x3 = (u16)row[0] + 2;
     prim->x0 = prim->x2 = (u16)row[0];
+    prim->x1 = prim->x3 = (u16)row[0] + 2;
     setRGB0(prim, 0x80, 0x80, 0x80);
+    /* FAKE: the barrier keeps the depth constant out of the branch delay slot, as retail leaves it. */
+    FAKE_BARRIER();
     Area_CellAddPrim(D_801F53A0, D_801F53A4, 4, sizeof(POLY_F4));
 }
 #else
