@@ -25,9 +25,9 @@ NON_MATCHING void func_801FA98C(void) {
             break;
         case 2:
             func_8019FA28(0x80, 0x580000, 0x390000, 0x85);
-            g_GameRequestType   = 0xFF;
-            g_GameEntryMode     = 0xFF;
-            g_GamePrevSelection = 0x88;
+            g_GameRequestType    = 0xFF;
+            g_GameEntryMode      = 0xFF;
+            g_GamePrevSelection  = 0x88;
             g_ScenarioState.step = 3;
             break;
         case 3:
