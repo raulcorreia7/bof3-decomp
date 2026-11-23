@@ -9,9 +9,8 @@ NON_MATCHING void func_801F3808(void) {
     u8  col;
 
     index = (g_CurrentActor - g_PartyActors) + 1;
-    FAKE_BARRIER(); /* FAKE: retail finishes the index arithmetic before the scratchpad position reads. */
-    x = (TASK(Actor)->pos.x.part.integer - 11) / 2;
-    y = (TASK(Actor)->pos.y.part.integer - 177) / 2;
+    x     = (TASK(Actor)->pos.x.part.integer - 11) / 2;
+    y     = (TASK(Actor)->pos.y.part.integer - 177) / 2;
     func_801F4604(x, y, 0);
     for (row = 0; row < 7; row++) {
         for (col = 0; col < 7; col++) {
