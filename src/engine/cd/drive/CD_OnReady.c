@@ -12,7 +12,7 @@ MATCH void CD_OnReady(u8 status, u8* result) {
     u16           state;
     s32           slot;
     u8            next;
-    u8*           cursor;
+    s8*           cursor;
     volatile u32* counter;
 
     read_progress  = &g_EmiStreamState;
@@ -61,9 +61,9 @@ MATCH void CD_OnReady(u8 status, u8* result) {
         }
 
         ((void (*)(void))g_EmiEntryTypes[g_EmiEntryType])();
-        cursor = (u8*)&g_EmiRingSlot;
+        cursor = &g_EmiRingSlot;
         (*cursor)++;
-        if ((s8)*cursor == 0x18) {
+        if (*cursor == 0x18) {
             *cursor = 1;
         }
     }
