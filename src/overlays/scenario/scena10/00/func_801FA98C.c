@@ -23,6 +23,13 @@ NON_MATCHING void func_801FA98C(void) {
             Area_ScrollStartRoute(0);
             g_ScenarioState.step = 3;
             break;
+        case 2:
+            func_8019FA28(0x80, 0x580000, 0x390000, 0x85);
+            g_GameRequestType    = 0xFF;
+            g_GameEntryMode      = 0xFF;
+            g_GamePrevSelection  = 0x88;
+            g_ScenarioState.step = 3;
+            break;
         case 3:
             if (g_ScriptVars[0] != 3) {
                 break;
@@ -63,6 +70,17 @@ NON_MATCHING void func_801FA98C(void) {
                 g_SpawnedActors[g_ScratchPad.cells.bytes[0]].layer          = 0x1E;
                 g_ScenarioState.step                                        = 7;
             }
+            break;
+        case 6:
+            if (WINDOW_EFFECT_BUSY()) {
+                break;
+            }
+            UI_ModeSet(1);
+            g_AreaScrollTargetX = 0x1F0000;
+            g_AreaScrollTargetY = 0x360000;
+            Area_InitMapRenderer();
+            g_ScriptVars[0]++;
+            g_ScenarioState.step = 7;
             break;
         case 7:
             SND_SeqStop(0, 2);
