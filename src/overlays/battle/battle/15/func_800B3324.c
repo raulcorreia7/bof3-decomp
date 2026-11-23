@@ -11,6 +11,7 @@ void Menu_DrawPanelIcon(u16 x, u16 y, s32 u, s32 v, u16 clut, u8 color);
 #ifdef NON_MATCHING
 NON_MATCHING void func_800B3324(u8 index, s32 x, s32 y, s32 patch, u8 hide_changes, MenuPanelTask* task) {
     struct {
+        u8  pad[32];
         u8  flags[8];
         u16 values[4];
     } compare;
@@ -19,7 +20,6 @@ NON_MATCHING void func_800B3324(u8 index, s32 x, s32 y, s32 patch, u8 hide_chang
     Stats*     stats;
     u8*        record;
     u8         items[EQUIP_SLOT_COUNT];
-    u8         name_length;
     u8         i;
     u8         shade;
     s32        icon;
@@ -31,17 +31,17 @@ NON_MATCHING void func_800B3324(u8 index, s32 x, s32 y, s32 patch, u8 hide_chang
     UI_WindowDraw((u16)(x + 4), (u16)(y + 4), 0x78, 0xA3, 0, CHARACTER_BLOCK->window_style);
     chr = (Character*)CHARACTER_BLOCK->records[index];
 
-    name_length = (u8)Game_ReadCommand((u8*)chr);
-    stats       = &chr->stats;
-    if (name_length > CHARACTER_NAME_LENGTH) {
-        name_length = CHARACTER_NAME_LENGTH;
+    shade = (u8)Game_ReadCommand((u8*)chr);
+    left  = x;
+    top   = y;
+    stats = &chr->stats;
+    if (shade > CHARACTER_NAME_LENGTH) {
+        shade = CHARACTER_NAME_LENGTH;
     }
-    UI_TextDraw((s16)(x + 0x3E - name_length * 6), (s16)(y + 7), UI_TEXT_NORMAL, CHARACTER_NAME_LENGTH, (u8*)chr);
+    UI_TextDraw((s16)(x + (0x3E - shade * 6)), (s16)(y + 7), UI_TEXT_NORMAL, CHARACTER_NAME_LENGTH, (u8*)chr);
     for (i = 0, label_y = y + 0x1A; i < 4; i++) {
         UI_TextDraw((s16)(x + 5), (s16)(label_y + i * 13), UI_TEXT_NORMAL, 4, s_BattlePanelEquipTables.stat_labels[i]);
     }
-    left = x;
-    top  = y;
 
     Char_RebuildStats(chr);
     sprintf(g_UiTextFormatBuffer, D_80096A54, stats->power);
@@ -64,9 +64,9 @@ NON_MATCHING void func_800B3324(u8 index, s32 x, s32 y, s32 patch, u8 hide_chang
                 icon = 0x13;
             }
             GFX_AddDrawMode(getTPage(TPAGE_DEPTH_4BIT, TPAGE_ABR_HALF, FONT_TPAGE_X, FONT_TPAGE_Y));
-            Menu_DrawPanelIcon((u16)(left + 0x51), (u16)(top + 0x1A + i * 13 + 2), icon, 0x1C, GetClut(0, STAGE_PALETTE_Y), GFX_COLOR_NEUTRAL);
+            Menu_DrawPanelIcon((u16)(left + 0x51), (u16)(top + (i * 13 + 0x1A) + 2), icon, 0x1C, GetClut(0, STAGE_PALETTE_Y), GFX_COLOR_NEUTRAL);
             sprintf(g_UiTextFormatBuffer, D_80096A54, compare.values[i]);
-            UI_TextDrawGlyphString((s16)(left + 0x59), (s16)(top + 0x1A + i * 13 + 2), compare.flags[i], g_UiTextFormatBuffer);
+            UI_TextDrawGlyphString((s16)(left + 0x59), (s16)(top + (i * 13 + 0x1A) + 2), compare.flags[i], g_UiTextFormatBuffer);
         }
     }
 
@@ -82,7 +82,7 @@ NON_MATCHING void func_800B3324(u8 index, s32 x, s32 y, s32 patch, u8 hide_chang
         record = Item_GetRecord(s_BattlePanelEquipTables.slot_categories[i], items[i]);
         shade  = (i == task->unk_0B) ? UI_TEXT_HIGHLIGHT : UI_TEXT_NORMAL;
         if ((task->flags & 2) != 0) {
-            if (!Item_PassesTest(ITEM_TEST_SELECTABLE, g_CharSlot[g_PartyBattleOrder[(s8)D_80148656]], s_BattlePanelEquipTables.slot_categories[i], items[i])) {
+            if ((Item_PassesTest(ITEM_TEST_SELECTABLE, g_CharSlot[g_PartyBattleOrder[(s8)D_80148656]], s_BattlePanelEquipTables.slot_categories[i], items[i]) & BYTE_MASK) == 0) {
                 shade = UI_TEXT_DIM;
             } else if (i == task->unk_0A) {
                 task->u.addr.unk_10 = (s_BattlePanelEquipTables.slot_categories[i] << 8) + items[i];
@@ -119,7 +119,7 @@ NON_MATCHING void func_800B3324(u8 index, s32 x, s32 y, s32 patch, u8 hide_chang
     UI_SpriteDraw((s16)left, (s16)(top + 0x50), 0xD, UI_SPRITE_ALT_PAGE);
     UI_SpriteDraw((s16)(left + 0x78), (s16)(top + 0x50), 0xF, UI_SPRITE_ALT_PAGE);
     UI_SpriteDraw((s16)left, (s16)(top + 0xA0), 0x10, UI_SPRITE_ALT_PAGE);
-    UI_SpriteDraw((s16)(left + 0x78), (s16)(top + 0xA0), 0x12, UI_SPRITE_ALT_PAGE);
+    UI_SpriteDraw((s16)(left + 0x78), label_y = (s16)(top + 0xA0), 0x12, UI_SPRITE_ALT_PAGE);
 }
 #else
 INCLUDE_ASM(func_800B3324);

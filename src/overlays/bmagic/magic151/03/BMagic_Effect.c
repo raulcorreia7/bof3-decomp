@@ -163,15 +163,12 @@ MATCH void func_801EF388(void) {
     }
 }
 
-#ifdef NON_MATCHING
-/* Sets the battle up for the loaded party: frees and resets each active member's effect cells,
+/* Sets the battle up for the loaded party: frees each active member's fade palette and resets its battler template,
  * rebuilds member zero at the encounter origin, and opens the member panels. */
-NON_MATCHING void func_801EF484(void) {
+MATCH void func_801EF484(void) {
     PartyMember* task;
-    s32          i;
+    u8           i;
     s32          index;
-    u8           slot;
-    u8           party_count;
     s16          panel_x;
     s16          panel_y;
 
@@ -181,16 +178,15 @@ NON_MATCHING void func_801EF484(void) {
     for (i = 0; i < BATTLE_PARTY_CHARACTERS_COUNT; i++) {
         if (g_Game.members[i].header.flags & 1) {
             GFX_PaletteFreeFadeTarget(&g_Game.members[i]);
-            D_801EC039[i * BATTLE_PARTY_STRIDE] = 0;
-            D_801EC044[i * BATTLE_PARTY_STRIDE] = 0;
-            D_801EBF47[i * BATTLE_PARTY_STRIDE] = g_Game.members[i].unk_27;
+            s_BattleBattlerTemplates[i].u.turn.command.type       = 0;
+            s_BattleBattlerTemplates[i].u.turn.damage_flags.value = 0;
+            s_BattleBattlerTemplates[i].unk_27                    = g_Game.members[i].unk_27;
             func_801DDFEC(i);
             func_801DD14C(i);
         }
     }
     func_801DE1B0(g_Battle.active_battler);
     g_Game.members[0]                    = g_Game.members[g_Battle.active_battler];
-    party_count                          = g_Battle.party_count;
     g_Game.members[0].slot               = 0;
     g_Game.members[0].pos.x.fixed        = g_EncounterOriginX;
     g_Game.members[0].pos.y.fixed        = g_EncounterOriginY;
@@ -201,26 +197,25 @@ NON_MATCHING void func_801EF484(void) {
     g_Game.members[1].header.flags       = 0;
     g_Game.members[2].header.flags       = 0;
     g_Battle.active_battler              = 0;
-    g_Battle.party_count                 = 1;
-    g_Battle.living_party_count          = 1;
     g_Battle.flags |= BATTLE_STATE_RELOAD_PARTY;
-    g_Battle.unk_EF[0] = party_count;
+    g_Battle.unk_EF[0]          = g_Battle.party_count;
+    g_Battle.party_count        = 1;
+    g_Battle.living_party_count = 1;
     for (i = 0; i < BATTLE_PARTY_CHARACTERS_COUNT; i++) {
         if (g_Game.members[i].header.flags & 1) {
-            slot = (u8)(i + 0xD);
-            UI_PanelOpenTask(slot, 3);
-            D_80148332[slot].mode_00 = 5;
-            D_80148332[slot].unk_01  = 0;
-            index                    = g_Game.members[i].facing * CHAR_ID_GARR + g_Game.members[i].chr.character_id * 8;
-            panel_x                  = g_Game.members[i].screen_x.value + D_801EB0B0[index];
-            panel_x                  = D_801EAEA4[(g_Battle.scroll_dir & 0xFE) ^ 0x2] + panel_x;
-            D_80148332[slot].x_02    = panel_x;
-            index                    = g_Game.members[i].facing * CHAR_ID_GARR + g_Game.members[i].chr.character_id * 8;
-            panel_y                  = g_Game.members[i].screen_y.value + D_801EB0B1[index] + 0xC;
-            D_80148332[slot].y_04    = panel_y;
-            D_80148332[slot].battler = i;
-            D_80148332[slot].unk_06  = 0;
-            D_80148332[slot].unk_07  = 0;
+            UI_PanelOpenTask(i + 0xD, 3);
+            D_80148332[i + 0xD].mode_00 = 5;
+            D_80148332[i + 0xD].unk_01  = 0;
+            index                       = g_Game.members[i].facing * 2 + g_Game.members[i].chr.character_id * 8;
+            panel_x                     = g_Game.members[i].screen_x.value + D_801EB0B0[index];
+            panel_x                     = D_801EAEA4[(g_Battle.scroll_dir & 0xFE) ^ 0x2] + panel_x;
+            D_80148332[i + 0xD].x_02    = panel_x;
+            index                       = g_Game.members[i].facing * 2 + g_Game.members[i].chr.character_id * 8;
+            panel_y                     = g_Game.members[i].screen_y.value + D_801EB0B1[index] + 0xC;
+            D_80148332[i + 0xD].y_04    = panel_y;
+            D_80148332[i + 0xD].battler = i;
+            D_80148332[i + 0xD].unk_06  = 0;
+            D_80148332[i + 0xD].unk_07  = 0;
         }
     }
     D_80148332[1].x_02    = 0x70;
@@ -238,9 +233,6 @@ NON_MATCHING void func_801EF484(void) {
     TASK_SET(task);
     task->unk_03 += 1;
 }
-#else
-INCLUDE_ASM(func_801EF484);
-#endif
 
 MATCH void func_801EF938(void) {
     if (TASK(PartyMember)->param.unk_0B == 2) {

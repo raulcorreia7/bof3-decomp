@@ -32,6 +32,7 @@ NON_MATCHING void func_801EF140(void) {
     g_UiPanelTasks[1].mode   = 0;
     g_UiPanelTasks[1].state  = 0;
     g_UiPanelTasks[1].unk_09 = height + 4;
+    /* FAKE: retail writes the three fields above before loading the two below. */
     FAKE_BARRIER();
     g_UiPanelTasks[1].unk_0A = g_Battle.cursor.gene.column;
     g_UiPanelTasks[1].unk_0B = *(u16*)&g_Battle.unk_D0[2];

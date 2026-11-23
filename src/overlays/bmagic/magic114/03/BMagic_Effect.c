@@ -146,39 +146,14 @@ MATCH void func_801EF128(void) {
     PopMatrix();
 }
 
-#ifdef NON_MATCHING
-/* A segment's shade: the red, green and blue its first two vertices take, the
- * blue of its third, and the steps the mode-3 and mode-4 flash adds to it. */
-typedef struct Magic114Shade {
-    ColorRGB8 color;
-    u8        tip_blue;
-    s8        red_step;
-    s8        green_step;
-    s8        blue_step;
-} Magic114Shade;
-
-ASSERT_OFFSET(Magic114Shade, color, 0x00);
-ASSERT_SIZE(Magic114Shade, 0x07);
-
-/* The four shades by segment mode: bit 0 picks the brighter row of a pair and
- * bit 2 the pair. */
-static const Magic114Shade shades[4] = {
-    {0x36, 0x36, 0xB0, 0xC0, 5, 4, -1}, /* modes 0 and 2 */
-    {0x40, 0x40, 0xC0, 0xC0, 5, 4, -2}, /* modes 1 and 3 */
-    {0x46, 0x46, 0xB0, 0xC0, 4, 3, -1}, /* modes 4 and 6 */
-    {0x50, 0x50, 0xC0, 0xC0, 4, 3, -2}, /* modes 5 and 7 */
-};
-
-NON_MATCHING void func_801EF280(s32* values) {
-    const Magic114Shade* shade;
-    POLY_G3*             prim;
-    long                 p;
-    long                 flag;
-    s32                  average;
-    u32                  frame_count;
-    u32                  phase;
-    u8                   state;
-    u8                   mode;
+/* One segment of the fan: a three-vertex Gouraud triangle from the task's two points to the
+ * apex, shaded by the segment index, flashed in mode 2 and brightened in modes 3 and 4. */
+MATCH void func_801EF280(s32* values) {
+    POLY_G3* prim;
+    long     p;
+    long     flag;
+    u32      frame;
+    u32      phase;
 
     prim = (POLY_G3*)g_GfxPrimCursor;
     SetPolyG3(prim);
@@ -187,61 +162,80 @@ NON_MATCHING void func_801EF280(s32* values) {
     setVector(&g_ScratchPadVectors[1], TASK(PartyMember)->unk_0C >> 9, TASK(PartyMember)->unk_10 >> 9, 0);
     g_ScratchPadVectors[2].vx = 0;
     g_ScratchPadVectors[2].vy = 0;
-    mode                      = TASK(PartyMember)->param.unk_0B;
-    if (mode < 4) {
+    if (TASK(PartyMember)->param.unk_0B < 4) {
         g_ScratchPadVectors[2].vz = TASK(PartyMember)->timer * 3;
     } else {
         g_ScratchPadVectors[2].vz = -(TASK(PartyMember)->timer * 6) / 2;
     }
 
-    average      = RotAverage3(&g_ScratchPadVectors[0], &g_ScratchPadVectors[1], &g_ScratchPadVectors[2], (long*)&prim->x0, (long*)&prim->x1, (long*)&prim->x2, &p, &flag);
-    mode         = TASK(PartyMember)->param.unk_0B;
-    values[mode] = average;
+    values[TASK(PartyMember)->param.unk_0B] = RotAverage3(&g_ScratchPadVectors[0], &g_ScratchPadVectors[1], &g_ScratchPadVectors[2], (long*)&prim->x0, (long*)&prim->x1, (long*)&prim->x2, &p, &flag);
 
-    shade = &shades[(mode & 1) | ((mode & 4) >> 1)];
-    setRGB0(prim, shade->color.r, shade->color.g, shade->color.b);
-    setRGB1(prim, shade->color.r, shade->color.g, shade->color.b);
-    setRGB2(prim, shade->color.r, shade->color.g, shade->tip_blue);
+    switch (TASK(PartyMember)->param.unk_0B) {
+        case 0:
+        case 2:
+            setRGB0(prim, 0x36, 0x36, 0xB0);
+            setRGB1(prim, 0x36, 0x36, 0xB0);
+            setRGB2(prim, 0x36, 0x36, 0xC0);
+            break;
+        case 1:
+        case 3:
+            setRGB0(prim, 0x40, 0x40, 0xC0);
+            setRGB1(prim, 0x40, 0x40, 0xC0);
+            setRGB2(prim, 0x40, 0x40, 0xC0);
+            break;
+        case 4:
+        case 6:
+            setRGB0(prim, 0x46, 0x46, 0xB0);
+            setRGB1(prim, 0x46, 0x46, 0xB0);
+            setRGB2(prim, 0x46, 0x46, 0xC0);
+            break;
+        case 5:
+        case 7:
+            setRGB0(prim, 0x50, 0x50, 0xC0);
+            setRGB1(prim, 0x50, 0x50, 0xC0);
+            setRGB2(prim, 0x50, 0x50, 0xC0);
+            break;
+    }
 
     if (TASK(PartyMember)->header.mode == 2) {
-        frame_count = g_FrameCount;
-        if ((frame_count & 0x18) == 0) {
-            state = mode;
-            if (state >= 4) {
-                phase = frame_count & 6;
-                state &= 3;
-                if (state == (phase >> 1)) {
-                    setRGB0(prim, 0x80, 0x80, 0xC0);
-                    setRGB1(prim, 0x80, 0x80, 0xC0);
-                    setRGB2(prim, 0x80, 0x80, 0xC0);
-                }
+        frame = g_FrameCount;
+        if ((frame & 0x18) == 0 && TASK(PartyMember)->param.unk_0B >= 4) {
+            phase = frame & 6;
+            if ((TASK(PartyMember)->param.unk_0B & 3) == phase >> 1) {
+                setRGB0(prim, 0x80, 0x80, 0xC0);
+                setRGB1(prim, 0x80, 0x80, 0xC0);
+                setRGB2(prim, 0x80, 0x80, 0xC0);
             }
         }
     }
 
     if (TASK(PartyMember)->header.mode == 3 || TASK(PartyMember)->header.mode == 4) {
-        switch (mode) {
+        switch (TASK(PartyMember)->param.unk_0B) {
             case 1:
+                prim->r1 = TASK(PartyMember)->unk_09 * 5 + 0x40;
+                prim->g1 = TASK(PartyMember)->unk_09 * 4 + 0x40;
+                prim->b1 = 0xC0 - TASK(PartyMember)->unk_09 * 2;
+                break;
             case 2:
+                prim->r0 = TASK(PartyMember)->unk_09 * 5 + 0x36;
+                prim->g0 = TASK(PartyMember)->unk_09 * 4 + 0x36;
+                prim->b0 = 0xB0 - TASK(PartyMember)->unk_09;
+                break;
             case 5:
+                prim->r1 = TASK(PartyMember)->unk_09 * 4 + 0x50;
+                prim->g1 = TASK(PartyMember)->unk_09 * 3 + 0x50;
+                prim->b1 = 0xC0 - TASK(PartyMember)->unk_09 * 2;
+                break;
             case 6:
-                shade = &shades[(mode & 1) | ((mode & 4) >> 1)];
-                if ((mode & 1) != 0) {
-                    setRGB1(prim, shade->color.r + shade->red_step * TASK(PartyMember)->unk_09, shade->color.g + shade->green_step * TASK(PartyMember)->unk_09,
-                            shade->color.b + shade->blue_step * TASK(PartyMember)->unk_09);
-                } else {
-                    setRGB0(prim, shade->color.r + shade->red_step * TASK(PartyMember)->unk_09, shade->color.g + shade->green_step * TASK(PartyMember)->unk_09,
-                            shade->color.b + shade->blue_step * TASK(PartyMember)->unk_09);
-                }
+                prim->r0 = TASK(PartyMember)->unk_09 * 4 + 0x46;
+                prim->g0 = TASK(PartyMember)->unk_09 * 3 + 0x46;
+                prim->b0 = 0xB0 - TASK(PartyMember)->unk_09;
                 break;
         }
     }
 
     g_GfxPrimCursor += sizeof(POLY_G3);
 }
-#else
-INCLUDE_ASM(func_801EF280);
-#endif
 
 MATCH void func_801EF6A8(void) {
     PartyMember* src;
@@ -316,6 +310,8 @@ MATCH void func_801EFA80(void) {
     POLY_G4* prim;
     long     depth;
     long     flag;
+    u32      frame;
+    u32      phase;
     s32      x;
     s32      y;
     s32      tpage;
@@ -585,6 +581,8 @@ MATCH void func_801F093C(void) {
     POLY_G4* prim;
     long     depth;
     long     flag;
+    u32      frame;
+    u32      phase;
     s32      i;
     s32      tpage;
     s32      left;
@@ -725,6 +723,8 @@ NON_MATCHING void func_801F0FBC(void) {
     LINE_F2* prim;
     long     depth;
     long     flag;
+    u32      frame;
+    u32      phase;
     u32      i;
     s32      x;
     s32      y;

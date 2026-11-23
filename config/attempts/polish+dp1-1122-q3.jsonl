@@ -1,0 +1,3 @@
+{"function": "emi/scenario/scena00/00@0x801F8AB8", "tried": "dropping the origin.x volatile pin: 49 rows, 0x110 against 0x114; kept", "first_diff": "the store width", "score": "0 rows with the pin"}
+{"function": "emi/scenario/scena00/00@0x801FA7D8", "tried": "dropping the table-load FAKE_ORDER_LOCK: 350 rows, 0x790 against 0x794; kept", "first_diff": "the load position", "score": "0 rows with the pin"}
+{"function": "emi/scenario/scena00/00@0x801F7670", "tried": "dropping the FAKE_STACK_PADS(u8,8): 69 rows with the frame at -96; kept", "first_diff": "the frame", "score": "0 rows with the pad"}

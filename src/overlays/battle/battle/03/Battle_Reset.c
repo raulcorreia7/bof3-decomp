@@ -7,16 +7,14 @@
 /* func_801D1228 */
 #ifdef NON_MATCHING
 NON_MATCHING void Battle_Reset(void) {
-    PartyMember* members;
-    u8*          src;
-    u8*          dest;
-    u8*          living_count;
-    u8*          count_ptr;
-    u8           slot;
-    s32          index;
-    s32          count;
-    u32          word_offset;
-    s16          flags;
+    u8*  living_count;
+    u8*  count_ptr;
+    u8*  src;
+    u8*  dest;
+    u16* mirror;
+    u16* stage;
+    u8   slot;
+    u8   index;
 
     func_801DE804();
     slot          = 0;
@@ -31,9 +29,8 @@ NON_MATCHING void Battle_Reset(void) {
             slot += 1;
         } while ((u32)(slot & BYTE_MASK) < (u8)g_Battle.party_count);
     }
-    members                       = g_Game.members;
-    *g_Battle.panel_widths        = 8;
-    g_BattleMessageSlot           = (u8*)members;
+    g_Battle.panel_widths[0]      = 8;
+    g_BattleMessageSlot           = (u8*)g_Game.members;
     g_Battle.selection            = 0;
     g_Battle.cursor.panel_entry   = 0;
     D_801462E7                    = 0;
@@ -60,87 +57,65 @@ NON_MATCHING void Battle_Reset(void) {
     func_800ABBA4();
     func_801E5A38();
     func_801DDB7C();
-    index = 0;
-    do {
-        src = (u8*)&members[index].chr.stats;
-        if (ACTOR_IN_USE(g_Game.members[index])) {
-            dest                    = (u8*)&members[index].chr.base;
+    for (slot = 0; slot < 3; slot++) {
+        src = (u8*)&g_Game.members[slot].chr.stats;
+        if (ACTOR_IN_USE(g_Game.members[slot])) {
+            dest                    = (u8*)&g_Game.members[slot].chr.base;
             *(Cpy16u*)(dest)        = *(Cpy16u*)(src);
             *(Cpy16u*)(dest + 0x10) = *(Cpy16u*)(src + 0x10);
-            if (members[index].chr.hp < (u32)(members[index].chr.stats.max_hp >> 2)) {
-                flags = (s16)(members[index].chr.status | 0x2000);
+            if (g_Game.members[slot].chr.hp < (u32)(g_Game.members[slot].chr.stats.max_hp >> 2)) {
+                g_Game.members[slot].chr.status = g_Game.members[slot].chr.status | 0x2000;
             } else {
-                flags = (s16)(members[index].chr.status & 0xDFFF);
+                g_Game.members[slot].chr.status = g_Game.members[slot].chr.status & 0xDFFF;
             }
-            members[index].chr.status                         = flags;
-            count                                             = 0;
-            index                                             = slot & BYTE_MASK;
-            src                                               = (u8*)&members[index].chr.stats;
-            members[index].u.turn.damage_flags.value          = 0;
-            members[index].u.turn.action_flags.volatile_value = 0;
-            members[index].u.turn.command.type                = 0;
-            members[index].u.turn.counter                     = 0;
-            members[index].charge_counter                     = 0;
-            members[index].status_counter                     = 0;
-            members[index].focus_counter                      = 0;
-            members[index].unk_139                            = 0;
-            count                                             = 0;
-            do {
-                members[index].status.unk_12C[count] = 0;
-                count += 1;
-            } while ((u32)(count & BYTE_MASK) < 8U);
+            g_Game.members[slot].u.turn.damage_flags.value          = 0;
+            g_Game.members[slot].u.turn.action_flags.volatile_value = 0;
+            g_Game.members[slot].u.turn.command.type                = 0;
+            g_Game.members[slot].u.turn.counter                     = 0;
+            g_Game.members[slot].charge_counter                     = 0;
+            g_Game.members[slot].status_counter                     = 0;
+            g_Game.members[slot].focus_counter                      = 0;
+            g_Game.members[slot].unk_139                            = 0;
+            for (index = 0; index < 8; index++) {
+                g_Game.members[slot].status.unk_12C[index] = 0;
+            }
         }
-        slot += 1;
-        index = slot & BYTE_MASK;
-    } while ((u32)(slot & BYTE_MASK) < 3U);
-    slot = 0;
+    }
     Battle_ApplyFormationStats();
-    index = 0;
-    do {
-        dest = (u8*)&members[index].chr.stats;
-        if (ACTOR_IN_USE(g_Game.members[index])) {
-            src                     = (u8*)&members[index].chr.base;
+    for (slot = 0; slot < 3; slot++) {
+        dest = (u8*)&g_Game.members[slot].chr.stats;
+        if (ACTOR_IN_USE(g_Game.members[slot])) {
+            src                     = (u8*)&g_Game.members[slot].chr.base;
             *(Cpy16u*)(dest)        = *(Cpy16u*)(src);
             *(Cpy16u*)(dest + 0x10) = *(Cpy16u*)(src + 0x10);
         }
-        slot += 1;
-        index = slot & BYTE_MASK;
-    } while ((u32)(slot & BYTE_MASK) < 3U);
-    slot  = 0;
-    index = 0;
-    do {
-        slot += 1;
-        word_offset                                   = index * 2;
-        MEM_PTR(u16, 0x80039600u)[0xF0 + word_offset] = MEM_PTR(u16, 0x80035600u)[0xF0 + word_offset];
-        index                                         = slot & BYTE_MASK;
-    } while ((u32)(slot & BYTE_MASK) < 0x10U);
+    }
+    mirror = GAME_PALETTE_MIRROR_U16;
+    stage  = (u16*)GAME_PALETTE_STAGE;
+    for (slot = 0; slot < 0x10; slot++) {
+        mirror[0xF0 + slot] = stage[0xF0 + slot];
+    }
     GFX_PaletteCopy(0x1A);
     GFX_PaletteCopy(0x1B);
-    slot = 0;
-    do {
-        if ((u32)slot < 3U) {
+    for (slot = 0; slot < 0xB; slot++) {
+        if (slot < 3) {
             if (ACTOR_IN_USE(g_Game.members[slot])) {
-                g_Task = &members[slot];
+                g_Task = &g_Game.members[slot];
                 goto found; /* joins the shared work-pointer exit */
             }
-        } else if (!(Battle_SlotIsBlocked((u32)slot) & BYTE_MASK) && (g_Battle.encounter != 37)) {
-            g_Task = (((((s32)(((s32)slot * 8) + slot) * 4) - slot) * 8) + g_BattleEnemies);
+        } else if (!(Battle_SlotIsBlocked(slot) & BYTE_MASK) && (g_Battle.encounter != 37)) {
+            g_Task = g_BattleEnemies + ((slot * 36u - slot) * 8u);
         found: /* the live battler's work pointer */
             GFX_PaletteUploadRows();
         }
-        slot += 1;
-    } while ((u32)(slot & BYTE_MASK) < 0xBU);
-    slot = 0;
+    }
     if (BATTLE_IS_RANDOM()) {
         EMI_ArchiveLoad(g_GameAreaId + EMI_SLOT_ENEMY);
         slot = 0;
     }
-    index = slot & BYTE_MASK;
-    do {
-        *(s32*)(g_Battle.unk_84 + index) = 0;
-        slot += 1;
-        index = slot & BYTE_MASK;
-    } while ((u32)(slot & BYTE_MASK) < 0x10U);
+    for (slot = 0; slot < 0x10; slot++) {
+        g_Battle.unk_84[slot] = 0;
+    }
     if (BATTLE_IS_SCRIPTED()) {
         g_Battle.boss_event_hook(BOSS_EVENT_BATTLE_RESET);
     }

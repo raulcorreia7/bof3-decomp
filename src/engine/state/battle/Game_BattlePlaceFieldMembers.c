@@ -3,30 +3,27 @@
 #define SCRATCH ((s32*)&g_ScratchPad)
 
 /* func_801BFB34 */
-#ifdef NON_MATCHING
-NON_MATCHING void Game_BattlePlaceFieldMembers(void) {
+MATCH void Game_BattlePlaceFieldMembers(void) {
     PartyMember* member;
     s32          i;
     s32          j;
-    s32          size;
-    s32          count;
+    u8           size;
+    u8           count;
     s32          value;
-    /* FAKE: unused frame, 32 bytes. */
-    FAKE_STACK_PADS(u8, 32);
+    /* FAKE: unused frame, 16 bytes. */
+    FAKE_STACK_PADS(u8, 16);
 
     i = 0;
-    if ((s32)g_PartySize > 0) {
-        count = g_PartySize;
-        do {
-            SCRATCH[i] = g_Game.members[i].pos.x.fixed;
-            i++;
-        } while (i < count);
+    while (i < g_PartySize) {
+        SCRATCH[i] = g_Game.members[i].pos.x.fixed;
+        i++;
     }
     size = g_PartySize;
     i    = 0;
-    if (g_PartySize != 0) {
+    if (size != 0) {
         do {
-            for (j = 0; j < (u8)size; j++) {
+            count = size;
+            for (j = 0; j < count; j++) {
                 if (g_PartyBattleOrder[j] == g_Game.members[i].chr.character_id)
                     break;
             }
@@ -36,18 +33,16 @@ NON_MATCHING void Game_BattlePlaceFieldMembers(void) {
         } while (i < size);
     }
     i = 0;
-    if ((s32)g_PartySize > 0) {
-        count = g_PartySize;
-        do {
-            SCRATCH[i] = g_Game.members[i].pos.y.fixed;
-            i++;
-        } while (i < count);
+    while (i < g_PartySize) {
+        SCRATCH[i] = g_Game.members[i].pos.y.fixed;
+        i++;
     }
     size = g_PartySize;
     i    = 0;
     if (size != 0) {
         do {
-            for (j = 0; j < (u8)size; j++) {
+            count = size;
+            for (j = 0; j < count; j++) {
                 if (g_PartyBattleOrder[j] == g_Game.members[i].chr.character_id)
                     break;
             }
@@ -77,6 +72,3 @@ NON_MATCHING void Game_BattlePlaceFieldMembers(void) {
         Party_RunFrame();
     }
 }
-#else
-INCLUDE_ASM(Game_BattlePlaceFieldMembers);
-#endif

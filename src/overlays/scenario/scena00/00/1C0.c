@@ -797,13 +797,13 @@ MATCH void func_801F89F0(void) {
     SceneEffect* update_work;
     SceneEffect* setup_work;
 
-    setup_work                              = TASK(SceneEffect);
-    FAKE_VOLATILE(s32, setup_work->pos.x)   = g_PartyActors[0].pos.x.fixed;
-    FAKE_VOLATILE(s32, setup_work->pos.y)   = g_AreaFocus.y.fixed;
-    FIELD(s32, setup_work, 0x3Cu)           = g_PartyActors[0].pos.z.fixed;
-    FAKE_VOLATILE(s32, setup_work->angle.x) = g_PartyActors[0].unk_64;
-    FAKE_VOLATILE(s32, setup_work->angle.y) = g_PartyActors[0].unk_68;
-    setup_work->angle.z                     = g_PartyActors[0].unk_6C;
+    setup_work                    = TASK(SceneEffect);
+    setup_work->pos.x             = g_PartyActors[0].pos.x.fixed;
+    setup_work->pos.y             = g_AreaFocus.y.fixed;
+    FIELD(s32, setup_work, 0x3Cu) = g_PartyActors[0].pos.z.fixed;
+    setup_work->angle.x           = g_PartyActors[0].unk_64;
+    setup_work->angle.y           = g_PartyActors[0].unk_68;
+    setup_work->angle.z           = g_PartyActors[0].unk_6C;
     func_801AC1DC(deltas, FIELD(u8, setup_work, 0x1Cu));
     update_work                     = TASK(SceneEffect);
     update_work->pos.x              = (update_work->pos.x + deltas[0]);
@@ -1148,15 +1148,15 @@ MATCH void func_801F9868(void) {
                         return;
                     }
                 } else {
-                    u8* pal1;
-                    u8* pal2;
+                    u16* pal1;
+                    u16* pal2;
 
                     i    = 0;
-                    pal1 = MEM_PTR(u8, AREA_PALETTE_ARENA_33E00);
-                    pal2 = MEM_PTR(u8, AREA_PALETTE_WORK + 0x600u);
+                    pal1 = MEM_PTR(u16, AREA_PALETTE_ARENA_33E00);
+                    pal2 = MEM_PTR(u16, AREA_PALETTE_WORK + 0x600u);
                     for (; i < 16; i++) {
-                        *((u16*)pal1 + i + 0x40) = *((u16*)pal1 + i + 0x50);
-                        *((u16*)pal2 + i + 0x40) = *((u16*)pal2 + i + 0x50);
+                        pal1[i + 0x40] = pal1[i + 0x50];
+                        pal2[i + 0x40] = pal2[i + 0x50];
                     }
                     g_GfxPalettePending = 1;
                     if (SYS_TestFlag(g_SceneFlags, 5) == 0) {

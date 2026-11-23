@@ -6,8 +6,8 @@ __asm__(".include \"include/match/macro.inc\"\n");
 
 #ifdef NON_MATCHING
 NON_MATCHING void func_801FA98C(void) {
-    u8  slot;
-    u8* char_slots;
+    u8 slot;
+    u8 next;
 
     switch (g_ScenarioState.step) {
         case 0:
@@ -60,6 +60,7 @@ NON_MATCHING void func_801FA98C(void) {
             if (WINDOW_EFFECT_BUSY()) {
                 break;
             }
+            D_801FE9DC = 0;
             UI_ModeSet(1);
             g_AreaScrollTargetX = 0x1F0000;
             g_AreaScrollTargetY = 0x360000;
@@ -124,8 +125,8 @@ NON_MATCHING void func_801FA98C(void) {
             if (WINDOW_EFFECT_BUSY()) {
                 break;
             }
-            g_ScenarioState.step = 0xD;
-            g_ScriptVars[0]++;
+            next = 0xD;
+            goto advance_low;
             break;
         case 13:
             if (g_ScriptVars[0] != 0xD) {
@@ -159,8 +160,8 @@ NON_MATCHING void func_801FA98C(void) {
             if (WINDOW_EFFECT_BUSY()) {
                 break;
             }
-            g_ScenarioState.step = 0x10;
-            g_ScriptVars[0]++;
+            next = 0x10;
+            goto advance_low;
             break;
         case 16:
             if (g_ScriptVars[0] != 0x13) {
@@ -260,9 +261,9 @@ NON_MATCHING void func_801FA98C(void) {
             if (--g_ScenarioState.timer_06 != 0) {
                 break;
             }
-            g_AreaDrawFlags      = 0x1F;
-            g_ScenarioState.step = 0x19;
-            g_ScriptVars[0]++;
+            g_AreaDrawFlags = 0x1F;
+            next            = 0x19;
+            goto advance;
             break;
         case 25:
             if (g_ScriptVars[0] != 6) {
@@ -283,9 +284,9 @@ NON_MATCHING void func_801FA98C(void) {
             if (--g_ScenarioState.timer_06 != 0) {
                 break;
             }
-            g_AreaDrawFlags      = 0x1F;
-            g_ScenarioState.step = 0x1B;
-            g_ScriptVars[0]++;
+            g_AreaDrawFlags = 0x1F;
+            next            = 0x1B;
+            goto advance;
             break;
         case 27:
             if (g_ScriptVars[0] != 8) {
@@ -306,9 +307,9 @@ NON_MATCHING void func_801FA98C(void) {
             if (--g_ScenarioState.timer_06 != 0) {
                 break;
             }
-            g_AreaDrawFlags      = 0x1F;
-            g_ScenarioState.step = 0x1D;
-            g_ScriptVars[0]++;
+            g_AreaDrawFlags = 0x1F;
+            next            = 0x1D;
+            goto advance;
             break;
         case 29:
             if (g_ScriptVars[0] != 0xB) {
@@ -353,9 +354,9 @@ NON_MATCHING void func_801FA98C(void) {
             if (--g_ScenarioState.timer_06 != 0) {
                 break;
             }
-            g_AreaDrawFlags      = 0x1F;
-            g_ScenarioState.step = 0x21;
-            g_ScriptVars[0]++;
+            g_AreaDrawFlags = 0x1F;
+            next            = 0x21;
+            goto advance;
             break;
         case 33:
             if (g_ScriptVars[0] != 0xF) {
@@ -514,9 +515,9 @@ NON_MATCHING void func_801FA98C(void) {
             if (--g_ScenarioState.timer_06 != 0) {
                 break;
             }
-            g_AreaDrawFlags      = 0x1F;
-            g_ScenarioState.step = 0x2D;
-            g_ScriptVars[0]++;
+            g_AreaDrawFlags = 0x1F;
+            next            = 0x2D;
+            goto advance;
             break;
         case 45:
             if (g_ScriptVars[0] != 0x17) {
@@ -585,6 +586,18 @@ NON_MATCHING void func_801FA98C(void) {
             g_ScenarioState.step     = 0;
             break;
     }
+    goto epilogue;
+
+advance_low:
+    g_ScenarioState.step = next;
+    g_ScriptVars[0]++;
+    goto epilogue;
+
+advance:
+    g_ScenarioState.step = next;
+    g_ScriptVars[0]++;
+epilogue:
+    func_801FC220();
 }
 #else
 INCLUDE_ASM(func_801FA98C);
