@@ -109,102 +109,85 @@ MATCH void func_801EF0FC(void) {
     }
 }
 
-#ifdef NON_MATCHING
 /* Draws the effect's six rings of Gouraud triangles: the scratch words stage each ring's radius,
  * twist and depth, and the eight segments step around the ring in 0x100 units. */
-NON_MATCHING void func_801EF14C(void) {
+MATCH void func_801EF14C(void) {
     POLY_G3* prim;
     long     depth;
     long     flag;
-    s32      k;
+    s32      half_step;
     s32      angle;
     s32      i;
-    s32      level;
     s32      ring;
-    s32      scale;
-    s32      count;
-    s32      base;
-    s32      shade;
     s32      tpage;
     s32      x;
     s32      y;
+    s32      depth_step;
 
-    scale = 0x10;
-    count = 1;
-    base  = 0x40;
     for (ring = 0; ring < 6; ring++) {
         switch (TASK(PartyMember)->header.mode) {
             case 1:
             default:
-                D_1F800000_WORD[0] = scale;
-                D_1F800000_WORD[1] = (count << 2) * TASK(PartyMember)->unk_09;
-                D_1F800000_WORD[2] = -(((ring ^ 7) + 1) * 5 * TASK(PartyMember)->unk_09);
+                D_1F800000_WORD[0] = (ring + 1) * 16;
+                D_1F800000_WORD[1] = ((ring + 1) << 2) * TASK(PartyMember)->unk_09;
+                depth_step         = ((ring ^ 7) + 1) * 5;
+                D_1F800000_WORD[2] = -(depth_step * TASK(PartyMember)->unk_09);
                 break;
             case 2:
-                D_1F800000_WORD[0] = scale;
-                D_1F800000_WORD[1] = base;
+                D_1F800000_WORD[0] = (ring + 1) * 16;
+                D_1F800000_WORD[1] = (ring + 1) * 64;
                 D_1F800000_WORD[2] = -(((ring ^ 7) + 1) * 5 << 4);
                 break;
             case 3:
-                D_1F800000_WORD[0] = scale;
-                D_1F800000_WORD[1] = base - TASK(PartyMember)->unk_09;
+                D_1F800000_WORD[0] = (ring + 1) * 16;
+                D_1F800000_WORD[1] = (ring + 1) * 64 - TASK(PartyMember)->unk_09;
                 D_1F800000_WORD[2] = (TASK(PartyMember)->unk_09 << 1) - (((ring ^ 7) + 1) * 5 << 4);
                 break;
         }
-        g_ScratchPadVectors[2].vx = (rcos(0) * D_1F800000_WORD[0]) >> 12;
-        g_ScratchPadVectors[2].vy = (rsin(0) * D_1F800000_WORD[0]) >> 12;
+        g_ScratchPadVectors[2].vx = FIXED_MUL(rcos(0), D_1F800000_WORD[0]);
+        g_ScratchPadVectors[2].vy = FIXED_MUL(rsin(0), D_1F800000_WORD[0]);
         g_ScratchPadVectors[2].vz = 0;
-        k                         = 1;
-        level                     = scale;
-        for (i = 1; i < 9; i++) {
-            angle                     = k << 8;
-            g_ScratchPadVectors[0].vx = (rcos(angle) * D_1F800000_WORD[1]) >> 12;
-            g_ScratchPadVectors[0].vy = (rsin(angle) * D_1F800000_WORD[1]) >> 12;
+        for (i = 1, half_step = 1; i < 9; i++) {
+            angle                     = half_step << 8;
+            g_ScratchPadVectors[0].vx = FIXED_MUL(rcos(angle), D_1F800000_WORD[1]);
+            g_ScratchPadVectors[0].vy = FIXED_MUL(rsin(angle), D_1F800000_WORD[1]);
             g_ScratchPadVectors[1].vz = 0;
             g_ScratchPadVectors[0].vz = D_1F800000_WORD[2];
-            g_ScratchPadVectors[1].vy = g_ScratchPadVectors[2].vy;
             g_ScratchPadVectors[1].vx = g_ScratchPadVectors[2].vx;
+            g_ScratchPadVectors[1].vy = g_ScratchPadVectors[2].vy;
             angle                     = i << 9;
-            g_ScratchPadVectors[2].vx = (rcos(angle) * D_1F800000_WORD[0]) >> 12;
-            g_ScratchPadVectors[2].vy = (rsin(angle) * D_1F800000_WORD[0]) >> 12;
+            g_ScratchPadVectors[2].vx = FIXED_MUL(rcos(angle), D_1F800000_WORD[0]);
+            g_ScratchPadVectors[2].vy = FIXED_MUL(rsin(angle), D_1F800000_WORD[0]);
             g_ScratchPadVectors[2].vz = 0;
             x                         = (g_ScratchPadVectors[2].vx << 9) + TASK(PartyMember)->pos.x.fixed;
             y                         = ((g_ScratchPadVectors[2].vy << 16) >> 7) + TASK(PartyMember)->pos.y.fixed;
-            tpage                     = (GetGraphType() == 1 || GetGraphType() == 2) ? 0xA5 : 0x35;
+            tpage                     = getTPage(TPAGE_DEPTH_4BIT, TPAGE_ABR_ADD, 320, 256);
             SetDrawMode((DR_MODE*)g_GfxPrimCursor, 0, 1, tpage, NULL);
             Area_CellAddPrim(x, y, 2, sizeof(DR_MODE));
             prim = (POLY_G3*)g_GfxPrimCursor;
             SetPolyG3(prim);
             PSX_SET_SEMI_TRANSPARENT(prim);
             if (TASK(PartyMember)->header.mode == 3) {
-                D_1F800000_WORD[3] = level;
-                D_1F800000_WORD[3] = level - (level / 16) * (TASK(PartyMember)->unk_09 >> 1);
+                D_1F800000_WORD[3] = (ring + 1) * 16;
+                D_1F800000_WORD[3] = D_1F800000_WORD[3] - (D_1F800000_WORD[3] / 16) * (TASK(PartyMember)->unk_09 >> 1);
                 if (D_1F800000_WORD[3] < 0) {
                     D_1F800000_WORD[3] = 1;
                 }
                 setRGB0(prim, 1, 1, 1);
-                prim->r1 = D_1F800000_WORD[3];
-                prim->g1 = D_1F800000_WORD[3];
-                prim->b1 = -0x3F - TASK(PartyMember)->unk_09 * 6;
+                setRGB1(prim, D_1F800000_WORD[3], D_1F800000_WORD[3], 0xC1 - TASK(PartyMember)->unk_09 * 6);
                 setRGB2(prim, prim->r1, prim->g1, prim->b1);
             } else {
-                D_1F800000_WORD[3] = level;
+                D_1F800000_WORD[3] = (ring + 1) * 16;
                 setRGB0(prim, 1, 1, 1);
                 setRGB1(prim, D_1F800000_WORD[3], D_1F800000_WORD[3], 0xC0);
                 setRGB2(prim, D_1F800000_WORD[3], D_1F800000_WORD[3], 0xC0);
             }
             RotTransPers3(&g_ScratchPadVectors[0], &g_ScratchPadVectors[1], &g_ScratchPadVectors[2], (long*)&prim->x0, (long*)&prim->x1, (long*)&prim->x2, &depth, &flag);
             Area_CellAddPrim(x, y, 2, sizeof(POLY_G3));
-            k += 2;
+            half_step += 2;
         }
-        scale += 0x10;
-        count += 1;
-        base += 0x40;
     }
 }
-#else
-INCLUDE_ASM(func_801EF14C);
-#endif
 
 MATCH void func_801EF654(void) {
     SVECTOR pos;
