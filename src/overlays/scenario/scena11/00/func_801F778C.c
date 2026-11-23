@@ -30,7 +30,7 @@ MATCH void func_801F778C(void) {
             g_ScenarioState.step = 2;
             break;
         case 2:
-            if (g_UiWindowEffectBusy != 0) {
+            if (g_SysThreads[2].state != 0) {
                 break;
             }
             g_AreaDrawFlags      = 0;
@@ -117,7 +117,7 @@ MATCH void func_801F778C(void) {
             g_ScenarioState.step = 0xD;
             break;
         case 13:
-            if (g_UiWindowEffectBusy != 0) {
+            if (g_SysThreads[2].state != 0) {
                 break;
             }
             g_AreaDrawFlags      = 0;

@@ -32,7 +32,7 @@ MATCH void func_801FC21C(void) {
             }
             break;
         case 12:
-            if (g_UiWindowEffectBusy == 0) {
+            if (g_SysThreads[2].state == 0) {
                 g_AreaDrawFlags = 0;
                 Char_RebuildPartyStats();
                 SND_BGMPause(g_SndBGMId);
@@ -49,7 +49,7 @@ MATCH void func_801FC21C(void) {
             }
             break;
         case 14:
-            if (g_UiWindowEffectBusy == 0) {
+            if (g_SysThreads[2].state == 0) {
                 SYS_SetFlag(g_SceneFlags, 11);
                 g_ScenarioState.step = 15;
                 g_ScriptVars[0]++;

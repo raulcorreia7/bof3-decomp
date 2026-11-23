@@ -27,7 +27,7 @@ MATCH void func_801F88DC(void) {
             g_ScenarioState.step = 2;
             break;
         case 2:
-            if (g_UiWindowEffectBusy) {
+            if (g_SysThreads[2].state) {
                 break;
             }
             g_ScenarioState.step = 3;
@@ -72,7 +72,7 @@ MATCH void func_801F88DC(void) {
             g_ScenarioState.step = 8;
             break;
         case 8:
-            if (g_UiWindowEffectBusy) {
+            if (g_SysThreads[2].state) {
                 break;
             }
             g_AreaDrawFlags = 0;
@@ -110,7 +110,7 @@ MATCH void func_801F88DC(void) {
             g_ScenarioState.step = 12;
             break;
         case 12:
-            if (g_UiWindowEffectBusy) {
+            if (g_SysThreads[2].state) {
                 break;
             }
             g_GameFlags &= 0xFFF7;

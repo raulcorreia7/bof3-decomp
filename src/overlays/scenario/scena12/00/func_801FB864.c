@@ -244,7 +244,7 @@ MATCH void func_801FB864(void) {
             }
             break;
         case 45:
-            if (g_UiWindowEffectBusy == 0) {
+            if (g_SysThreads[2].state == 0) {
                 g_AreaDrawFlags      = 0;
                 g_ScenarioState.step = 0x2E;
             }

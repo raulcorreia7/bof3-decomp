@@ -25,7 +25,7 @@ MATCH void func_801F84B8(void) {
             }
             break;
         case 2:
-            if (g_UiWindowEffectBusy == 0) {
+            if (g_SysThreads[2].state == 0) {
                 g_AreaDrawFlags = 0;
                 SYS_ThreadWait(1);
                 g_GameStateIndex     = 6;
@@ -50,7 +50,7 @@ MATCH void func_801F84B8(void) {
             }
             break;
         case 5:
-            if (g_UiWindowEffectBusy == 0) {
+            if (g_SysThreads[2].state == 0) {
                 g_GameFlags &= 0xFFF7;
                 Game_ClearScriptActive();
                 g_ScenarioState.state_04 = 0;
