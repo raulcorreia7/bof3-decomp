@@ -341,11 +341,11 @@ NON_MATCHING void func_801F7FA0(void) {
             } else if (SYS_TestFlag(g_SceneFlags, 0x3B) == 0) {
                 if (g_GameCellType == 5) {
                     func_801BE1B0(7);
-                    updated_flags = g_Game.flags | 0x10;
+                    updated_flags = g_GameFlags | 0x10;
                 } else {
-                    updated_flags = g_Game.flags & 0xFFEF;
+                    updated_flags = g_GameFlags & 0xFFEF;
                 }
-                g_Game.flags = updated_flags;
+                g_GameFlags = updated_flags;
             }
         }
         if (SYS_TestFlag(g_SceneFlags, 0x3C) != 0) {

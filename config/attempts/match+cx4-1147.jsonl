@@ -1,0 +1,1 @@
+{"function": "emi/scenario/scena10/00@0x801F7FA0", "tried": "spelled the game flags as the g_GameFlags scalar (three sites)", "first_diff": "0x801F803C unchanged: the scalar and the struct member compile to the same address and bytes; sizes stay 0x5CC against retail 0x5B0", "score": "no codegen change"}
