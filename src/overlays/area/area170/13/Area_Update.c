@@ -63,7 +63,7 @@ MATCH void Area_Update(void) {
         g_ScratchPadVectors[3].vz = -Area_HeightSample(x1, y1) / 2 - (u16)TASK(Actor)->pos.z.part.integer;
         RotTransPers4(&g_ScratchPadVectors[0], &g_ScratchPadVectors[1], &g_ScratchPadVectors[2], &g_ScratchPadVectors[3], (long*)&prim->x0, (long*)&prim->x1, (long*)&prim->x2, (long*)&prim->x3,
                       &depth, &flag);
-        Area_ApplyTileToQuad((TASK(Actor)->direction << 21) | 0x25510000 | (0x127 - i), prim, 1);
+        Area_ApplyTileToQuad((TASK(Actor)->direction << 21) | (0x2551 << 16) | (0x127 - i), prim, 1);
         GFX_AddPrim(GFX_LAYER_FIELD_SCENE, sizeof(POLY_FT4));
     }
 }
