@@ -1,0 +1,1 @@
+{"function": "emi/bmagic/magic064/03@0x801EF0E0", "tried": "dropping the FAKE_ORDER_LOCK on the tail store: 42 rows, 0x128 against retail 0x12C; the pin is load-bearing", "first_diff": "the tail store order", "score": "0 rows with the pin"}
