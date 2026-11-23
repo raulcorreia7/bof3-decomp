@@ -466,7 +466,7 @@ NON_MATCHING void func_801F823C(s16 x, s16 y, s16 height, s16 width) {
     s32       half;
     s32       skew;
     s32       top;
-    s32       v;
+    u8        v;
     u8        i;
 
     row = height - 1;
@@ -485,8 +485,8 @@ NON_MATCHING void func_801F823C(s16 x, s16 y, s16 height, s16 width) {
         prim->y2 = prim->y3 = top + 1;
         prim->u0 = prim->u2 = 0x40 - half;
         prim->u1 = prim->u3 = 0x40;
-        v                   = i + 0x40 - (u8)height;
-        prim->v0 = prim->v1 = i - ((u8)height - 0x40);
+        v                   = i + 0x40 - height;
+        prim->v0 = prim->v1 = i - (height - 0x40);
         prim->v2 = prim->v3 = v + 1;
         prim->tpage         = GetTPage(TPAGE_DEPTH_15BIT, TPAGE_ABR_HALF, 0x340, 0x100);
         setRGB0(prim, 0x40, 0x40, 0x80);
