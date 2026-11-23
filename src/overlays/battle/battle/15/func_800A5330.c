@@ -55,15 +55,15 @@ NON_MATCHING void func_800A5330(void) {
     }
 
     if (g_PadStates[0].pressed & g_InputMasks[BATTLE_INPUT_CONFIRM]) {
-        if (g_Battle.cursor.gene.row != -1) {
-            cell = &D_800B7070[g_Battle.cursor.gene.row][g_Battle.cursor.gene.column];
+        if ((u8)g_Battle.cursor.gene.row != GAME_NONE) {
+            cell = &D_800B7070[(u8)g_Battle.cursor.gene.row][g_Battle.cursor.gene.column];
             if (*cell == 0) {
                 SND_SEPlay(EMI_SE_ID(SND_BANK_COMMON, 7));
                 return;
             }
             if (g_Battle.gene_count < GENE_PICK_MAX) {
                 *cell                               = 0;
-                g_Battle.genes[g_Battle.gene_count] = g_Battle.cursor.gene.row * GENE_GRID_COLUMNS + g_Battle.cursor.gene.column;
+                g_Battle.genes[g_Battle.gene_count] = (u8)g_Battle.cursor.gene.row * GENE_GRID_COLUMNS + g_Battle.cursor.gene.column;
                 g_Battle.gene_count++;
                 Battle_SetGeneCount();
                 SND_SEPlay(EMI_SE_ID(SND_BANK_COMMON, 3));
