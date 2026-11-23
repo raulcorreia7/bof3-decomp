@@ -1,0 +1,3 @@
+{"function": "emi/world04/area171/13@0x801F3070", "tried": "signedness at 0x36: retail lh, draft lhu; COORD integer halves and screen fields are all s16, the unsigned read is elsewhere in the body", "first_diff": "0x801F309C lh v0,54(v0) against lhu v0,54(v0)", "score": "160 rows"}
+{"function": "emi/scenario/scena07/00@0x801FA01C", "tried": "prologue order: retail keeps the 0x800e5964 base in s5, the draft in s6 (shape +6 instructions, 40 hunks)", "first_diff": "0x801FA020 sw s5,36(sp) against sw s6,40(sp)", "score": "171 rows"}
+{"function": "emi/scenario/scena08/00@0x801F85F0", "tried": "unit-order plus prologue order: the parameter copy sits in s4 against retail s5", "first_diff": "0x801F85F4 sw s5,44(sp) against sw s4,40(sp)", "score": "92 rows"}
