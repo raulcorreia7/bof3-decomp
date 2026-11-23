@@ -1,9 +1,7 @@
 #include "battle_15.h"
 
-/* The flag bit the picked slot's local work row carries. */
-#define BATTLE_SLOT_SELECTED 8
-/* The command the picked slot's local work row carries. */
-#define BATTLE_SLOT_COMMAND  0xA
+/* The header mode byte the picked slot's work record carries. */
+#define BATTLE_PICKED_SLOT_MODE 0xA
 
 #ifdef NON_MATCHING
 NON_MATCHING s32 func_800AA368(void) {
@@ -37,24 +35,22 @@ NON_MATCHING s32 func_800AA368(void) {
         next_multi_candidate:;
         }
     } else {
+        count = 0;
         if (active < BATTLE_PARTY_CHARACTERS_COUNT) {
             if (mask != 0) {
                 if ((u8)func_800AA5F4(active) != 0) {
                     goto direct_selected;
                 }
-                count = 0;
                 goto collect_fallback;
             }
             if ((u8)func_800AA7A0(active) == 0) {
-                count = 0;
                 goto collect_fallback;
             }
         direct_selected:
-            g_Game.members[g_Battle.target_selector].u.turn.damage_flags.volatile_value |= BATTLE_SLOT_SELECTED;
-            D_80145E91[g_Battle.target_selector * BATTLE_PARTY_STRIDE] = BATTLE_SLOT_COMMAND;
+            g_Game.members[g_Battle.target_selector].u.turn.damage_flags.volatile_value |= BATTLER_DAMAGE_UNK_3;
+            g_Game.members[g_Battle.target_selector].header.mode = BATTLE_PICKED_SLOT_MODE;
             return 1;
         }
-        count = 0;
     collect_fallback:
         for (slot = 0; slot < BATTLE_PARTY_CHARACTERS_COUNT; slot++) {
             if (mask != 0) {
@@ -74,9 +70,9 @@ NON_MATCHING s32 func_800AA368(void) {
         }
     }
     if (count != 0) {
-        pick                                   = candidates[RANDOM_MOD(count)];
-        D_80145E91[pick * BATTLE_PARTY_STRIDE] = BATTLE_SLOT_COMMAND;
-        g_Game.members[pick].u.turn.damage_flags.volatile_value |= BATTLE_SLOT_SELECTED;
+        pick                             = candidates[RANDOM_MOD(count)];
+        g_Game.members[pick].header.mode = BATTLE_PICKED_SLOT_MODE;
+        g_Game.members[pick].u.turn.damage_flags.volatile_value |= BATTLER_DAMAGE_UNK_3;
         return 1;
     }
     return 0;
