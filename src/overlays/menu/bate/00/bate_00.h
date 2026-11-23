@@ -154,6 +154,8 @@ void UI_ListDrawAbilityRow(s16 x, s16 y, u8 shade, u8 element, volatile Ability*
 
 /* func_801D73B4 */
 void Menu_DrawAbilityList(MenuListPanel* panel);
+/* func_801D78A8 */
+void Menu_DrawPanelFrame(s16 x, s16 y, s32 width, s32 height);
 
 /* func_801D165C */
 void func_801D165C(u16 panel_x, u16 panel_y, u8 category, u8 item_id);
@@ -162,6 +164,7 @@ void func_801D1AB8(u16* base, u16* current, u16* trial, u8* change, u8* equipped
 
 void func_801D2304(s32 x, s32 y);
 void func_801D259C(void);
+void func_801D26E0(s16 x, s16 y);
 void func_801D31B0(s16 x, s16 y, u8 index, u8 flag);
 void func_801AE3F0(u16 x, u16 y, u16 width, u16 height, s32 frame_flags, u8 palette);
 
