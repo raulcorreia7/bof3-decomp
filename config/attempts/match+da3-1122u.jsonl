@@ -1,0 +1,1 @@
+{"function": "emi/world00/area037/13@0x801F2D44", "tried": "Measured the next hard row; its first difference is the frame size", "first_diff": "0x801F2D44: retail opens with addiu sp,-0x80 and saves ra at 120(sp); the draft's frame is smaller, so the whole body shifts (277 rows, 283 words) \u2014 rewrite needed", "score": "277 rows, 283 words"}
