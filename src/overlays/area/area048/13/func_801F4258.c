@@ -16,11 +16,11 @@ NON_MATCHING void func_801F4258(s32 mode) {
     s32      color;
     s32      i;
 
-    cell_x                    = D_801F4E78[mode] << 16;
-    cell_y                    = D_801F4E7C[mode] << 16;
     g_ScratchPadVectors[0].vx = (D_801F4E78[mode] - 0x80) << 7;
     g_ScratchPadVectors[0].vy = (D_801F4E7C[mode] - 0x80) << 7;
     g_ScratchPadVectors[0].vz = -(D_801F4E80[mode] << 3);
+    cell_x                    = D_801F4E78[mode] << 16;
+    cell_y                    = D_801F4E7C[mode] << 16;
     depth                     = RotTransPers(g_ScratchPadVectors, (long*)D_1F800034, &p, &flag);
     if (((u32)(((u16*)D_1F800034)[0] + 0x3C) & HALF_MASK) >= 0x1B9) {
         return;
@@ -45,7 +45,6 @@ NON_MATCHING void func_801F4258(s32 mode) {
     radius                    = D_801F4E84[mode] + ABS((D_801F4E84[mode] * rsin(g_AreaCameraAngle.vx)) >> 13);
     offset                    = 1125 * radius / depth;
     g_ScratchPadVectors[2].vy = screen[1] + offset;
-    radius                    = D_801F4E84[mode] + ABS((D_801F4E84[mode] * rsin(g_AreaCameraAngle.vx)) >> 13);
     offset                    = 1125 * radius / depth;
     g_ScratchPadVectors[0].vy = screen[1] - offset;
     for (i = 0; i < 4; i++) {
