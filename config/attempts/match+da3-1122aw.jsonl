@@ -1,0 +1,1 @@
+{"function": "emi/world04/area172/13@0x801F4E8C", "tried": "Typed the left/top copies as s16 instead of s32", "first_diff": "still six rows: the type of the copies does not move GetClut's a0=0/a1=0x1EB setup, which GCC places after the s1/s2 bumps where retail places it at the block top", "score": "6 rows either way"}
