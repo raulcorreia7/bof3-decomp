@@ -10,12 +10,12 @@ MATCH void func_801F2E58(s32 state) {
     mode                 = 1;
     if ((u8)state == 0) {
         g_PartyActors[0].pos.x.fixed = TO_COORD(4) + COORD_HALF;
-        g_AreaFocusY                 = TO_COORD(10);
+        g_AreaFocus.y.fixed          = TO_COORD(10);
         D_80147ACF                   = 1;
         mode                         = 0;
     } else {
         g_PartyActors[0].pos.x.fixed = TO_COORD(4) + COORD_HALF;
-        g_AreaFocusY                 = TO_COORD(100);
+        g_AreaFocus.y.fixed          = TO_COORD(100);
         D_80147ACF                   = 2;
     }
     Area_ScrollStartRoute(mode);

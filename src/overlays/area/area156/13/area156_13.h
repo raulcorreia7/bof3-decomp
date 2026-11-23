@@ -6,6 +6,4 @@
 
 #include "overlays/area/worlds/world04.h"
 
-extern u16 D_80147A96;
-
 #endif

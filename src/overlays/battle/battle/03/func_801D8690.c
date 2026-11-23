@@ -1,115 +1,71 @@
 #include "battle_03.h"
 
-/* 69.64%; opcode/regalloc: prologue saves s3/s4 instead of s1/s0; later register and branch differences remain. */
 #ifdef NON_MATCHING
+/* Draws an enemy's name panel: the two-pass frame around the name and the dimmer lower band. */
 NON_MATCHING void func_801D8690(s32 x, s32 y, s32 slot) {
-    s16 tex_u;
-    s16 temp_a1_190;
-    s16 temp_v0_217;
-    s16 var_a0_154;
-    s16 var_s3;
-    s16 var_s5;
-    s32 temp_v0_233;
-    s32 var_fp;
-    s32 var_s0;
-    s32 var_s1;
-    s32 var_s2;
-    s32 var_s6;
-    s32 var_s7;
-    s32 var_v0_226;
-    s32 var_v1_238;
-    u16 temp_v0_57;
-    u32 temp_v0_61;
-    u8  temp_v1_139;
-    s32 var_s4;
+    s16 color_r;
+    s16 color_g;
+    s16 color_b;
+    s16 draw_x;
+    s16 text_x;
+    s16 text_y;
+    u16 packed_color;
+    s8  style;
+    u8  flag;
+    s32 index;
+    s32 panel_x;
+    s32 panel_y;
 
-    var_s2 = x;
-    var_s1 = y;
-    var_s0 = slot;
     GFX_AddDrawMode(GetTPage(TPAGE_DEPTH_4BIT, TPAGE_ABR_HALF, FONT_TPAGE_X, FONT_TPAGE_Y) & HALF_MASK);
-    var_s4 = var_s0 - 3;
-    var_s0 = var_s2 + 4;
-    var_s0 <<= 0x10;
-    var_s0     = var_s0 >> 0x10;
-    temp_v0_57 = *(u16*)((u8*)&D_80033A08 + ((g_WindowStyle << 6) | 0x20));
-    temp_v0_61 = temp_v0_57 & HALF_MASK;
-    var_s6     = (temp_v0_61 >> 2) & 0xF8;
-    var_s5     = (temp_v0_61 >> 7) & 0xF8;
-    tex_u      = (temp_v0_57 & 0x1F) * 8;
-    Battle_DrawWindowTile((s16)var_s0, (s16)(var_s1 + 8), 8U, 1U);
-    Battle_DrawPanelShape((s16)var_s0, (s16)(var_s1 + 6), 2, 1);
-    Battle_DrawPanelShape((s16)var_s0, (s16)(var_s1 + 0x19), 3, 1);
+    index        = slot - 3;
+    draw_x       = x + 4;
+    style        = g_WindowStyle;
+    packed_color = *(u16*)((u8*)D_80033A08 + ((style << 6) | 0x20));
+    color_r      = (packed_color & 0x1F) * 8;
+    color_g      = (packed_color >> 2) & 0xF8;
+    color_b      = (packed_color >> 7) & 0xF8;
+    Battle_DrawWindowTile(draw_x, (s16)(y + 8), 8, 1);
+    Battle_DrawPanelShape(draw_x, (s16)(y + 6), 2, 1);
+    Battle_DrawPanelShape(draw_x, (s16)(y + 0x19), 3, 1);
     GFX_AddDrawMode(GetTPage(TPAGE_DEPTH_4BIT, TPAGE_ABR_ADD, FONT_TPAGE_X, FONT_TPAGE_Y) & HALF_MASK);
-    var_s0 = var_s2 << 0x10;
-    var_s0 = (s32)(s16)var_s2;
-    Battle_DrawWindowTile((s16)var_s0, (s16)(var_s1 + 2), 8U, 0U);
-    var_s3 = var_s2 + 6;
-    func_801D9DBC(var_s3, (s16)(var_s1 + 0xB), 9, 0, 0U);
-    Battle_DrawPanelShape((s16)var_s0, (s16)var_s1, 2, 0);
-    Battle_DrawPanelShape((s16)var_s0, (s16)(var_s1 + 0x13), 3, 0);
-    var_fp      = var_s2;
-    temp_v1_139 = g_BattleEnemyBattlers[var_s4].unk_7F;
-    var_s7      = var_s1;
-    if (temp_v1_139 == 1) {
-        func_801D9E9C(var_s3, (s16)(var_s1 + 0xA), (u16)g_UiPanelCurrent->unk_0B, (u16)g_UiPanelCurrent->flags, (s8)(s32)temp_v1_139);
-        var_a0_154 = var_fp + 4;
+    draw_x = x;
+    Battle_DrawWindowTile(draw_x, (s16)(y + 2), 8, 0);
+    text_x = x + 6;
+    func_801D9DBC(text_x, (s16)(y + 0xB), 9, 0, 0);
+    Battle_DrawPanelShape(draw_x, y, 2, 0);
+    Battle_DrawPanelShape(draw_x, (s16)(y + 0x13), 3, 0);
+    panel_x = x;
+    panel_y = y;
+    flag    = g_BattleEnemyBattlers[index & BYTE_MASK].unk_7F;
+    if (flag == 1) {
+        func_801D9E9C(text_x, (s16)(y + 0xA), g_UiPanelCurrent->unk_0B, g_UiPanelCurrent->flags, flag);
     } else {
-        func_801D94D4((s32)(s16)(var_s2 + 0x24), (u32)(s16)(var_s1 + 0xC), 0, 0xFFFF);
-        var_a0_154 = var_fp + 4;
+        func_801D94D4((s16)(x + 0x24), (s16)(y + 0xC), 0, 0xFFFF);
     }
-    var_s1 = var_s7 + 3;
-    var_s1 <<= 0x10;
-    var_s1 = var_s1 >> 0x10;
-    UI_TextDrawString(var_a0_154, (s16)var_s1, 0, ENEMY_NAME_LENGTH, g_BattleEnemyBattlers[var_s4].name);
-    var_s0 = var_fp + 2;
-    var_s0 <<= 0x10;
-    var_s0      = var_s0 >> 0x10;
-    temp_a1_190 = var_s7 + 2;
-    var_s3      = var_s6 & BYTE_MASK;
-    var_s4      = tex_u;
-    var_s2      = var_s5 & BYTE_MASK;
-    Battle_DrawPanelLine((s16)var_s0, temp_a1_190, (s16)(var_fp + 0x49), temp_a1_190, (u8)(s32)var_s4, (u8)(s32)var_s3, (u8)var_s2);
-    Battle_DrawPanelLine((s16)var_s0, (s16)var_s1, (s16)var_s0, (s16)(var_s7 + 0x12), (u8)(s32)var_s4, (u8)(s32)var_s3, (u8)var_s2);
-    var_s6 -= 0x10;
-    temp_v0_217 = tex_u - 0x10;
-    var_s5 -= 0x10;
-    if (temp_v0_217 < 0) {
-        tex_u = 0;
-    } else if (temp_v0_217 >= 0x100) {
-        tex_u = 0xFF;
-    } else {
-        tex_u = temp_v0_217;
+    text_y = panel_y + 3;
+    UI_TextDrawString((s16)(panel_x + 4), text_y, 0, ENEMY_NAME_LENGTH, g_BattleEnemyBattlers[index & BYTE_MASK].name);
+    Battle_DrawPanelLine((s16)(panel_x + 2), (s16)(panel_y + 2), (s16)(panel_x + 0x49), (s16)(panel_y + 2), color_r, color_g, color_b);
+    Battle_DrawPanelLine((s16)(panel_x + 2), text_y, (s16)(panel_x + 2), (s16)(panel_y + 0x12), color_r, color_g, color_b);
+    color_r -= 0x10;
+    if (color_r < 0) {
+        color_r = 0;
+    } else if (color_r >= 0x100) {
+        color_r = 0xFF;
     }
-    var_v0_226  = var_s6 << 0x10;
-    temp_v0_233 = var_v0_226 >> 0x10;
-    if (temp_v0_233 >= 0) {
-        var_v1_238 = var_s6;
-        if (temp_v0_233 >= 0x100) {
-            var_v1_238 = 0xFF;
-        }
-    } else {
-        var_v1_238 = 0;
+    color_g -= 0x10;
+    if (color_g < 0) {
+        color_g = 0;
+    } else if (color_g >= 0x100) {
+        color_g = 0xFF;
     }
-    var_s6 = var_v1_238;
-    if (var_s5 >= 0) {
-        var_s2 = (s32)var_s5;
-        if (var_s5 >= 0x100) {
-            var_s2 = 0xFF;
-        }
-    } else {
-        var_s2 = 0;
+    color_b -= 0x10;
+    if (color_b < 0) {
+        color_b = 0;
+    } else if (color_b >= 0x100) {
+        color_b = 0xFF;
     }
-    var_s0 = var_fp + 0x49;
-    var_s0 <<= 0x10;
-    var_s0 = var_s0 >> 0x10;
-    var_s1 = var_s7 + 0x12;
-    var_s1 <<= 0x10;
-    var_s1 = var_s1 >> 0x10;
-    var_s3 = var_s6 & BYTE_MASK;
-    var_s4 = tex_u;
-    var_s2 &= BYTE_MASK;
-    Battle_DrawLine((s16)var_s0, (s16)(var_s7 + 2), (s16)var_s0, (s16)var_s1, (u8)(s32)var_s4, (u8)(s32)var_s3, (u8)var_s2);
-    Battle_DrawLine((s16)(var_fp + 2), (s16)var_s1, (s16)var_s0, (s16)var_s1, (u8)(s32)var_s4, (u8)(s32)var_s3, (u8)var_s2);
+    Battle_DrawLine((s16)(panel_x + 0x49), (s16)(panel_y + 2), (s16)(panel_x + 0x49), (s16)(panel_y + 0x12), color_r, color_g, color_b);
+    Battle_DrawLine((s16)(panel_x + 2), (s16)(panel_y + 0x12), (s16)(panel_x + 0x49), (s16)(panel_y + 0x12), color_r, color_g, color_b);
 }
 #else
 INCLUDE_ASM(func_801D8690);

@@ -9,7 +9,7 @@ MATCH void func_801F32A0(s32 value) {
     work              = TASK(Actor);
     work->pos.x.fixed = g_PartyActors[0].pos.x.fixed;
     FAKE_BARRIER(); /* FAKE: keeps the focus y load after the x store. */
-    work->pos.y.fixed = g_AreaFocusY;
+    work->pos.y.fixed = g_AreaFocus.y.fixed;
     x                 = work->pos.x.fixed;
     FAKE_BARRIER(); /* FAKE: keeps the focus z load after the y store. */
     z                         = g_PartyActors[0].pos.z.fixed;

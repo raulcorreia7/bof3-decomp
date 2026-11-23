@@ -15,7 +15,7 @@ MATCH void func_801F8CAC(void) {
             UI_ModeSet(UI_MODE_LONG_FADE_OUT);
             break;
         case 1:
-            if (g_UiWindowEffectBusy == 0) {
+            if (g_SysThreads[2].state == 0) {
                 g_AreaDrawFlags = 0;
                 func_801C16B8();
                 g_ScenarioState.step = 2;

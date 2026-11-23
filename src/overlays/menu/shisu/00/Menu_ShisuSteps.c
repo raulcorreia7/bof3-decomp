@@ -45,7 +45,7 @@ MATCH void func_801D0E88(void) {
 
 MATCH void func_801D0EC4(void) {
     Menu_DrawClutStrip(g_WindowClut);
-    if (g_UiWindowEffectBusy == 0) {
+    if (g_SysThreads[2].state == 0) {
         u8* step = &g_MenuStep.step;
 
         g_MenuStep.sub_step = 0;
@@ -70,7 +70,7 @@ MATCH void func_801D0F60(void) {
 }
 
 MATCH void func_801D0FAC(void) {
-    if (g_UiWindowEffectBusy == 0) {
+    if (g_SysThreads[2].state == 0) {
         u8* step = &g_MenuStep.step;
 
         g_MenuStep.sub_step      = 0;

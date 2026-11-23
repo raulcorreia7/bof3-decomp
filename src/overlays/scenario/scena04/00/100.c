@@ -238,7 +238,7 @@ MATCH void func_801F77EC(void) {
     FAKE_STACK_PADS(u8, 16);
 
     work = MEM_PTR(ScenePath, AREA_WORK + 0x1400);
-    setVector(&work->focus, g_PartyActors[0].pos.x.fixed, g_AreaFocusY, g_PartyActors[0].pos.z.fixed >> 8);
+    setVector(&work->focus, g_PartyActors[0].pos.x.fixed, g_AreaFocus.y.fixed, g_PartyActors[0].pos.z.fixed >> 8);
     i = 0;
     do {
         work->points[i].vx = work->focus.vx + D_801FA1A4[i];
@@ -277,7 +277,7 @@ MATCH void func_801F78F4(void) {
             i++;
         } while (i < 8);
     }
-    setVector(&work->focus, g_PartyActors[0].pos.x.fixed, g_AreaFocusY, g_PartyActors[0].pos.z.fixed >> 8);
+    setVector(&work->focus, g_PartyActors[0].pos.x.fixed, g_AreaFocus.y.fixed, g_PartyActors[0].pos.z.fixed >> 8);
     func_801F7EC0();
     if (--TASK(Actor)->vx == 0) {
         TASK(Actor)->header.mode++;

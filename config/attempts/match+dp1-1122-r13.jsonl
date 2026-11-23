@@ -1,0 +1,1 @@
+{"function": "emi/world04/area189/13@0x801F4DE0", "tried": "read the first block: retail keeps D_8014504B in a0 and g_Task in a1 for the two LOBU stores; the draft uses a2/a0", "first_diff": "0x801F4E0C lui a0,0x8014 against lui a2,0x8014", "score": "45 rows"}

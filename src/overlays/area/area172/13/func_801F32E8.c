@@ -9,7 +9,7 @@ MATCH void func_801F32E8(void) {
     }
     func_801F3FAC();
     Area_UpdateSpawnSlots();
-    if (g_UiWindowEffectBusy == 0) {
+    if (g_SysThreads[2].state == 0) {
         UI_ModeSet(9);
         g_AreaDrawFlags = 0;
         TASK(Actor)->header.mode++;

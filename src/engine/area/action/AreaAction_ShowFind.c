@@ -11,8 +11,8 @@ MATCH void AreaAction_ShowFind(void) {
         if (msgId != 0) {
             TEXT_Format(&g_TextVariables[0], D_80195F0C, msgId);
             UI_MessageRequest(MSG_SYSTEM_FOUND_ZENNY);
-            g_GameStateIndex    = GAME_REQUEST_MESSAGE;
-            TASK(Actor)->unk_04 = 4U;
+            g_SysThreads[0].tail.game_entry.request = GAME_REQUEST_MESSAGE;
+            TASK(Actor)->unk_04                     = 4U;
             return;
         }
         spad->unk_04 = 5U;

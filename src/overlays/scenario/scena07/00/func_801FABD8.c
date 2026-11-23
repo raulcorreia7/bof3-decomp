@@ -32,7 +32,7 @@ MATCH void func_801FABD8(void) {
             }
             break;
         case 4:
-            if (g_UiWindowEffectBusy == 0) {
+            if (g_SysThreads[2].state == 0) {
                 g_ScenarioState.timer_06 = 0x1E;
                 g_AreaDrawFlags          = 0;
                 g_ScenarioState.step     = 5;
@@ -49,14 +49,14 @@ MATCH void func_801FABD8(void) {
             }
             break;
         case 6:
-            if (g_UiWindowEffectBusy == 0) {
+            if (g_SysThreads[2].state == 0) {
                 g_AreaDrawFlags = 0x1F;
                 UI_ModeSet(1);
                 g_ScenarioState.step = 7;
             }
             break;
         case 7:
-            if (g_UiWindowEffectBusy == 0) {
+            if (g_SysThreads[2].state == 0) {
                 g_ScenarioState.timer_06 = 0x1E;
                 g_ScenarioState.step     = 8;
             }
@@ -145,7 +145,7 @@ MATCH void func_801FABD8(void) {
             }
             break;
         case 16:
-            if (g_UiWindowEffectBusy == 0) {
+            if (g_SysThreads[2].state == 0) {
                 SND_BGMFadeOut(0x63, 0x64, 8);
                 g_AreaDrawFlags      = 0;
                 g_ScenarioState.step = 0x11;
@@ -164,7 +164,7 @@ MATCH void func_801FABD8(void) {
             }
             break;
         case 18:
-            if (g_UiWindowEffectBusy == 0) {
+            if (g_SysThreads[2].state == 0) {
                 g_ScenarioState.step = 0x13;
                 g_ScriptVars[0]++;
             }
@@ -184,7 +184,7 @@ MATCH void func_801FABD8(void) {
             g_ScenarioState.step = 0x16;
             break;
         case 22:
-            if (g_UiWindowEffectBusy == 0) {
+            if (g_SysThreads[2].state == 0) {
                 g_ScriptVars[0]++;
                 UI_ModeSet(1);
                 g_ScenarioState.step = 0x19;

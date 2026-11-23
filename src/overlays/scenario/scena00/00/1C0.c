@@ -799,7 +799,7 @@ MATCH void func_801F89F0(void) {
 
     setup_work                              = TASK(SceneEffect);
     FAKE_VOLATILE(s32, setup_work->pos.x)   = g_PartyActors[0].pos.x.fixed;
-    FAKE_VOLATILE(s32, setup_work->pos.y)   = g_AreaFocusY[0];
+    FAKE_VOLATILE(s32, setup_work->pos.y)   = g_AreaFocus.y.fixed;
     FIELD(s32, setup_work, 0x3Cu)           = g_PartyActors[0].pos.z.fixed;
     FAKE_VOLATILE(s32, setup_work->angle.x) = g_PartyActors[0].unk_64;
     FAKE_VOLATILE(s32, setup_work->angle.y) = g_PartyActors[0].unk_68;
@@ -1333,8 +1333,8 @@ MATCH void func_801F9FB8(void) {
                 g_AreaCameraY = 0x6200;
                 g_AreaTileOriginY -= 0x1E;
                 g_AreaScrollTargetY[0] += TO_COORD(-30);
-                g_AreaFocusY[0] += TO_COORD(-30);
-                g_PartyY[0] += TO_COORD(-30);
+                g_AreaFocus.y.fixed += TO_COORD(-30);
+                g_PartyPos.y.fixed += TO_COORD(-30);
                 Area_CellRefreshGrid();
             }
             break;
@@ -1553,7 +1553,7 @@ MATCH void func_801FA7D8(void) {
             /* FAKE: table load after the fade decrement. */
             FAKE_ORDER_LOCK(value = D_801FCA4C[g_FrameCount & 0xFu]);
             (*fade)--;
-            accum = &D_80147A96;
+            accum = &g_AreaFocus.z.part.integer;
             goto accumulate;
         }
 
@@ -1572,7 +1572,7 @@ MATCH void func_801FA7D8(void) {
                address above it. */
             /* FAKE: the lock holds the retail load order around the index read. */
             FAKE_ORDER_LOCK(index_raw = g_FrameCount);
-            accum      = &D_80147A96;
+            accum      = &g_AreaFocus.z.part.integer;
             D_80146866 = (D_80146866 - 1u);
             /* FAKE: the barrier is the schedule wall after the fade store. */
             FAKE_BARRIER();
@@ -1852,12 +1852,12 @@ MATCH void func_801FB204(void) {
                 g_ScriptVarsReq.byte = 0x1E;
                 g_AreaDrawFlags      = AREA_DRAW_ALL_FLAGS;
                 UI_ModeSet(UI_MODE_FAST_FADE_IN);
-                g_PartyX               = TO_COORD(47);
+                g_PartyPos.x.fixed     = TO_COORD(47);
                 g_AreaScrollTargetX    = TO_COORD(47);
-                g_PartyY[0]            = TO_COORD(29);
+                g_PartyPos.y.fixed     = TO_COORD(29);
                 g_AreaScrollTargetY[0] = TO_COORD(29);
                 Area_InitMapRenderer();
-                D_80143F84.raw = TO_COORD(1408);
+                g_PartyPos.z.fixed = TO_COORD(1408);
                 Area_ScrollAdvance(1408);
                 g_AreaCameraAngle.vx     = -778;
                 g_AreaCameraAngle.vz     = 384;
@@ -1874,8 +1874,8 @@ MATCH void func_801FB204(void) {
                 countdown = &g_ScenarioState.timer_06;
                 if (TIMER_EXPIRED(*countdown)) {
                     Area_ScrollStartRoute(2);
-                    D_80143F84.raw = TO_COORD(1408);
-                    Area_ScrollAdvance(D_80143F84.half[1]);
+                    g_PartyPos.z.fixed = TO_COORD(1408);
+                    Area_ScrollAdvance(g_PartyPos.z.part.integer);
                     slot            = Actor_FindFreeSpawned();
                     g_ScratchPad[0] = slot;
                     if ((slot & BYTE_MASK) != GAME_NONE) {
@@ -2020,7 +2020,7 @@ MATCH void func_801FB924(void) {
     u16* counter;
     /* FAKE: keep the g_Game.members[0].unk_24 address for its masked load/store. */
     u8*  flags;
-    /* FAKE: hold the g_PartyY base before g_AreaFocusY. */
+    /* FAKE: hold the party y base before the focus y store. */
     u32* base;
 
     if ((g_FrameCount & 0x1F) == 0) {
@@ -2031,9 +2031,9 @@ MATCH void func_801FB924(void) {
         g_AreaCameraY = 0x3000;
         g_AreaTileOriginY += 0x20;
         g_AreaScrollTargetY[0] += TO_COORD(32);
-        base = g_PartyY;
-        g_AreaFocusY[0] += TO_COORD(32);
-        /* FAKE: barrier keeps the D_80147B28 load after the g_AreaFocusY store. */
+        base = &g_PartyPos.y.fixed;
+        g_AreaFocus.y.fixed += TO_COORD(32);
+        /* FAKE: barrier keeps the D_80147B28 load after the focus y store. */
         FAKE_BARRIER();
         D_80147B28 += TO_COORD(32);
         base[0] += TO_COORD(32);

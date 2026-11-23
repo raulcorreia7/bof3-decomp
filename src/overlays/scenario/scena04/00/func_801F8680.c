@@ -119,7 +119,7 @@ MATCH void func_801F8680(void) {
             }
             break;
         case 11:
-            if (g_UiWindowEffectBusy != 0) {
+            if (g_SysThreads[2].state != 0) {
                 break;
             }
             g_ScenarioState.timer_06 = 0x3C;
@@ -156,7 +156,7 @@ MATCH void func_801F8680(void) {
             }
             break;
         case 15:
-            if (g_UiWindowEffectBusy != 0) {
+            if (g_SysThreads[2].state != 0) {
                 break;
             }
             func_801C16B8();

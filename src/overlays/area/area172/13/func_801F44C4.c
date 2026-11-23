@@ -31,6 +31,6 @@ MATCH void func_801F44C4(void) {
         TASK(Actor)->tint.bytes.rgb.g += 4;
         TASK(Actor)->tint.bytes.rgb.b += 4;
     }
-    D_80143F84.fixed = TASK(Actor)->pos.z.fixed;
+    g_PartyPos.z.fixed = TASK(Actor)->pos.z.fixed;
     Area_ScrollAdvance(COORD_INT(TASK(Actor)->pos.z));
 }

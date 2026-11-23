@@ -8,8 +8,8 @@ MATCH void func_801F2C04(void) {
         case 0:
             if (g_AreaCameraY == 0x4400) {
                 s32* target = &g_AreaScrollTargetY;
-                s32* focus  = &g_AreaFocusY;
-                s32* party  = &g_PartyY;
+                s32* focus  = &g_AreaFocus.y.fixed;
+                s32* party  = &g_PartyPos.y.fixed;
 
                 g_AreaCameraY = 0x6200;
                 g_AreaTileOriginY -= 0x1E;
@@ -40,8 +40,8 @@ MATCH void func_801F2C04(void) {
         case 10:
             if (g_AreaCameraY == 0x6C00) {
                 s32* target = &g_AreaScrollTargetY;
-                s32* focus  = &g_AreaFocusY;
-                s32* party  = &g_PartyY;
+                s32* focus  = &g_AreaFocus.y.fixed;
+                s32* party  = &g_PartyPos.y.fixed;
 
                 g_AreaCameraY = 0x4E00;
                 g_AreaTileOriginY += 0x1E;

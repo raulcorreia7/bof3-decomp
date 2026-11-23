@@ -23,7 +23,7 @@ MATCH void func_801FA0A4(void) {
             break;
 
         case 2:
-            if (g_UiWindowEffectBusy == 0) {
+            if (g_SysThreads[2].state == 0) {
                 UI_MessageStartArea(MSG_SCENA03_032);
                 g_GameStateIndex     = 2;
                 g_AreaDrawFlags      = 0;
@@ -40,7 +40,7 @@ MATCH void func_801FA0A4(void) {
             break;
 
         case 4:
-            if (g_UiWindowEffectBusy == 0) {
+            if (g_SysThreads[2].state == 0) {
                 g_ScriptVars[0]++;
                 Game_ClearScriptActive();
                 g_ScenarioState.step = 5;
@@ -67,7 +67,7 @@ MATCH void func_801FA0A4(void) {
             break;
 
         case 7:
-            if (g_UiWindowEffectBusy == 0) {
+            if (g_SysThreads[2].state == 0) {
                 g_ScenarioState.step = 8;
                 g_ScriptVars[0]++;
             }

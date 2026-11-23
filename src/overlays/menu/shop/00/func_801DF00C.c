@@ -93,7 +93,7 @@ NON_MATCHING void func_801DF00C(s32 x, s32 y) {
         if (highlight != 0) {
             clut = 7;
         } else {
-            if ((u16)(record->stats.max_ap >> 2) >= record->ap) {
+            if (((u32)record->stats.max_ap >> 2) >= record->ap) {
                 clut = 4;
             }
             if (record->ap == 0) {

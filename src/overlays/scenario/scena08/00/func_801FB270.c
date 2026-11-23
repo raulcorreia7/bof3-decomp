@@ -24,9 +24,9 @@ MATCH void func_801FB270(void) {
             if (g_AreaCameraMoving != 0) {
                 break;
             }
-            g_PartyX       = g_AreaScrollTargetX;
-            g_PartyY       = g_AreaScrollTargetY;
-            g_ScrollHeight = Area_HeightSample(g_AreaScrollTargetX, g_AreaScrollTargetY);
+            g_PartyPos.x.fixed        = g_AreaScrollTargetX;
+            g_PartyPos.y.fixed        = g_AreaScrollTargetY;
+            g_PartyPos.z.part.integer = Area_HeightSample(g_AreaScrollTargetX, g_AreaScrollTargetY);
             Area_ScrollAdvance(Area_HeightSample(g_AreaScrollTargetX, g_AreaScrollTargetY));
             g_ScriptVars[0]      = 1;
             g_ScenarioState.step = 2;

@@ -13,8 +13,6 @@
 /* D_801448FF */
 /* D_80144900 */
 /* D_80144904 */
-extern s32          g_AreaFocusY;
-/* Retail-address data symbols, in address order. */
 extern volatile u16 SCENA16_D_80010004;
 extern volatile u16 SCENA16_D_80010006;
 extern volatile u16 SCENA16_D_80010008;

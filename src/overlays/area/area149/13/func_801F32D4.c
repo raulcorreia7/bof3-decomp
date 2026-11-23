@@ -13,10 +13,10 @@ MATCH void func_801F32D4(void) {
         scroll_target = &g_AreaScrollTargetX;
         *scroll_target -= TO_COORD(20);
         g_AreaTileOriginX -= 20;
-        party_x = &g_PartyX;
+        party_x = &g_PartyPos.x.fixed;
         *party_x -= TO_COORD(20);
-        height         = Area_HeightSample(g_AreaScrollTargetX, g_AreaScrollTargetY);
-        g_ScrollHeight = height;
+        height                    = Area_HeightSample(g_AreaScrollTargetX, g_AreaScrollTargetY);
+        g_PartyPos.z.part.integer = height;
         Area_ScrollAdvance(height);
         Area_CellRefreshGrid();
         /* The live type 0x37 actors move with the camera and stay on the ground. */
@@ -28,6 +28,6 @@ MATCH void func_801F32D4(void) {
         }
         focus_x = &g_PartyActors[0].pos.x.fixed;
         *focus_x -= TO_COORD(20);
-        D_80147A96 = Area_HeightSample(*focus_x, g_AreaFocusY);
+        g_AreaFocus.z.part.integer = Area_HeightSample(*focus_x, g_AreaFocus.y.fixed);
     }
 }

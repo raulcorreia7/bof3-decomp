@@ -87,13 +87,13 @@ MATCH void func_801F8DFC(void) {
         case 12:
             state = &g_GameStateIndex;
             if (*state != GAME_REQUEST_MESSAGE) {
-                g_AreaScrollTargetX = TO_COORD(10);
-                x                   = g_AreaScrollTargetX;
-                g_AreaScrollTargetY = TO_COORD(98);
-                y                   = g_AreaScrollTargetY;
-                g_PartyX            = TO_COORD(10);
-                g_PartyY            = TO_COORD(98);
-                g_ScrollHeight      = Area_HeightSample(x, y);
+                g_AreaScrollTargetX       = TO_COORD(10);
+                x                         = g_AreaScrollTargetX;
+                g_AreaScrollTargetY       = TO_COORD(98);
+                y                         = g_AreaScrollTargetY;
+                g_PartyPos.x.fixed        = TO_COORD(10);
+                g_PartyPos.y.fixed        = TO_COORD(98);
+                g_PartyPos.z.part.integer = Area_HeightSample(x, y);
                 Area_InitMapRenderer();
                 UI_MessageStartArea(MSG_SCENA13_025);
                 *state = GAME_REQUEST_MESSAGE;

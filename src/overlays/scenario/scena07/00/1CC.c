@@ -1046,7 +1046,7 @@ MATCH void func_801FA6B4(void) {
     if (LOHU(g_GameAreaId) == AREA_ID_CAMP_BEFORE_ANGEL_TOWER && !SYS_TestFlag(g_SceneFlags, 7)) {
         func_801C1DF0(1);
         func_801BE1B0(2);
-        g_ScrollHeight = 0xD80;
+        g_PartyPos.z.part.integer = 0xD80;
         Area_ScrollAdvance(0xD80);
     }
     if (LOHU(g_GameAreaId) == AREA_ID_URKAN_TAPA) {
