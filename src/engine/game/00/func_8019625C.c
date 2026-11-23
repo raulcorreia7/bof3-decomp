@@ -2,93 +2,65 @@
 
 #ifdef NON_MATCHING
 NON_MATCHING void func_8019625C(void) {
-    /* FAKE: pin carries entry pointer in t1. */
-    FAKE_REG(PaletteFade*, entry, "$9");
-    s32 entry_index;
-    s32 color_index;
-    s32 count;
-    u32 value;
-    u32 table_index;
-    u32 divisor;
-    u32 quotient;
-    u32 remainder;
-    u32 source_index;
-    u32 destination_index;
-    /* FAKE: pin loads palette scale into a3. */
-    FAKE_REG(u32, scale, "$7");
-    volatile u16* source;
-    u16*          destination;
+    PaletteFade*  fade;
+    s32           i;
+    s32           j;
+    s32           count;
+    u8            divisor;
+    u8            scale;
+    u8            src_bank;
+    u8            src_cell;
+    u8            dst_bank;
+    u8            dst_cell;
+    volatile u16* src;
+    u16*          dst;
     u16           color;
-    s8            red;
-    s8            green;
-    /* FAKE: pin accumulates blue channel in t0. */
-    FAKE_REG(s8, blue, "$8");
-    u8 high_bit;
+    u8            high;
+    s8            r;
+    s8            g;
+    s8            b;
 
-    for (entry_index = 0; entry_index < PALETTE_FADE_COUNT; entry_index++) {
-        entry = &g_PaletteFades[entry_index];
-        if ((entry->flags & PALETTE_FADE_ACTIVE) != 0u) {
-            value             = entry->saved_byte;
-            table_index       = entry->table_index;
-            divisor           = s_PaletteFadeDivisors[table_index];
-            quotient          = value / divisor;
-            source_index      = value % divisor;
-            remainder         = entry->cell_index / divisor;
-            destination_index = entry->cell_index % divisor;
-            scale             = s_PaletteFadeScales[table_index];
-            count             = s_PaletteFadeCounts[table_index] << 4;
-            source_index      = (u8)(scale * source_index);
-            destination_index = (u8)(scale * destination_index);
-            source            = g_GraphicsPaletteDst + quotient * 256u;
-            destination       = MEM_PTR(u16, AREA_PALETTE_WORK) + remainder * 256u;
-
-            for (color_index = 0; color_index < count; color_index++) {
-                high_bit = 1u;
-                if ((entry->flags & 2u) == 0u) {
-                    high_bit = (u8)(source[source_index] >> 15);
-                    color    = source[source_index];
+    for (i = 0; i < PALETTE_FADE_COUNT; i++) {
+        fade = &g_PaletteFades[i];
+        if (fade->flags & PALETTE_FADE_ACTIVE) {
+            divisor  = s_PaletteFadeDivisors[fade->table_index];
+            src_bank = fade->saved_byte / divisor;
+            src_cell = fade->saved_byte % divisor;
+            dst_bank = fade->cell_index / divisor;
+            dst_cell = fade->cell_index % divisor;
+            scale    = s_PaletteFadeScales[fade->table_index];
+            src_cell = scale * src_cell;
+            dst_cell = scale * dst_cell;
+            count    = s_PaletteFadeCounts[fade->table_index] << 4;
+            for (j = 0; j < count; j++) {
+                src  = g_GraphicsPaletteDst + src_bank * 256;
+                dst  = MEM_PTR(u16, AREA_PALETTE_WORK) + dst_bank * 256;
+                high = 1;
+                if (!(fade->flags & 2)) {
+                    high = src[src_cell + j] >> 15;
                 }
-
-                red   = (s8)(color & 0x1Fu);
-                green = (s8)((color >> 5) & 0x1Fu);
-                blue  = (s8)((color >> 10) & 0x1Fu);
-
-                red   = (s8)(red + entry->offset.r);
-                value = red < 0;
-                if (value) {
-                    red = 0;
-                } else if (red >= 0x20) {
-                    red = 0x1F;
-                }
-
-                green = (s8)(green + entry->offset.g);
-                if (green < 0) {
-                    green = 0;
-                } else if (green >= 0x20) {
-                    green = 0x1F;
-                }
-
-                blue = (s8)(blue + entry->offset.b);
-                if (blue < 0) {
-                    blue = 0;
-                } else if (blue >= 0x20) {
-                    blue = 0x1F;
-                }
-
-                if (color_index == 0u) {
-                    destination[destination_index] = 0u;
+                color = src[src_cell + j];
+                b     = (color >> 10) & 0x1F;
+                g     = (color >> 5) & 0x1F;
+                r     = color & 0x1F;
+                r += fade->offset.r;
+                r = (r >= 0) ? ((r < 0x20) ? r : 0x1F) : 0;
+                g += fade->offset.g;
+                g = (g >= 0) ? ((g < 0x20) ? g : 0x1F) : 0;
+                b += fade->offset.b;
+                b = (b >= 0) ? ((b < 0x20) ? b : 0x1F) : 0;
+                if (j == 0) {
+                    dst[dst_cell + j] = 0;
                 } else {
-                    destination[destination_index + color_index] = (u16)((red << 10) | (((high_bit << 15) | (blue << 10)) | (green << 5)));
+                    dst[dst_cell + j] = r | ((high << 15) | (b << 10) | (g << 5));
                 }
-                source_index++;
             }
-
-            g_GfxPalettePending = 1u;
-            if ((entry->flags & 0x40u) != 0u) {
-                entry->flags &= 0xBFu;
-                entry->target->saved_byte = entry->cell_index;
-                if ((entry->flags & 0x80u) != 0u) {
-                    entry->target->flags |= 4u;
+            g_GfxPalettePending = 1;
+            if (fade->flags & 0x40) {
+                fade->flags &= ~0x40;
+                fade->target->saved_byte = fade->cell_index;
+                if (fade->flags & 0x80) {
+                    fade->target->flags |= 4;
                 }
             }
         }
