@@ -234,6 +234,55 @@ NON_MATCHING void func_801FA98C(void) {
             g_ScriptVars[0] = 0;
             SYS_SetFlag(g_SceneFlags, 0x14);
             g_ScenarioState.step = 0x14;
+        case 20:
+            if (g_GameCellType == 0) {
+                D_801FE9DC = 0;
+                break;
+            }
+            D_801FE9DC = 1;
+            break;
+        case 21:
+            if (g_ScriptVars[0] != 2) {
+                break;
+            }
+            g_AreaDrawFlags = 0;
+            func_801C1DF0(2);
+            func_8019FA28(0x84, 0x50000, 0x460000, 0x82);
+            g_GameRequestType        = 0xFF;
+            g_GameEntryMode          = 0xFF;
+            g_ScenarioState.timer_06 = 4;
+            g_ScenarioState.step     = 0x16;
+            break;
+        case 22:
+            if (--g_ScenarioState.timer_06 != 0) {
+                break;
+            }
+            D_801FE9DC           = 1;
+            g_AreaDrawFlags      = 0x1F;
+            g_ScenarioState.step = 0x17;
+            break;
+        case 23:
+            if (g_ScriptVars[0] != 3) {
+                break;
+            }
+            g_AreaScrollTargetX = 0x240000;
+            g_PartyX            = 0x240000;
+            g_AreaDrawFlags     = 0;
+            D_801FE9DC          = 0;
+            g_AreaScrollTargetY = 0x2E0000;
+            g_PartyY            = 0x2E0000;
+            Area_InitMapRenderer();
+            (void)Area_HeightSample(g_AreaScrollTargetX, g_AreaScrollTargetY);
+            g_ScenarioState.timer_06 = 4;
+            g_ScenarioState.step     = 0x18;
+            break;
+        case 24:
+            if (--g_ScenarioState.timer_06 != 0) {
+                break;
+            }
+            g_AreaDrawFlags      = 0x1F;
+            g_ScenarioState.step = 0x19;
+            g_ScriptVars[0]++;
             break;
     }
 }
