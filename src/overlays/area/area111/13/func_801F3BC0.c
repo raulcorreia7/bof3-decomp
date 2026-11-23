@@ -1,7 +1,7 @@
 #include "area111_13.h"
 
 /* Reads the grid cell at a column and row: two cells a byte, the even column in the high nibble. */
-static inline s8 Area111_GridCell(s8 x, s8 y) {
+static inline s8 Area_SlideCell(s8 x, s8 y) {
     if (x & 1) {
         return D_801F5C18[y][x / 2] & 0xF;
     }
@@ -26,7 +26,7 @@ MATCH void func_801F3BC0(void) {
         if ((u8)(y += D_80181B01[facing]) >= 7) {
             goto done;
         }
-        if (Area111_GridCell(x, y) == 0xF) {
+        if (Area_SlideCell(x, y) == 0xF) {
             goto done;
         }
         offset += 4;

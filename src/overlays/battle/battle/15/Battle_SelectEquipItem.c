@@ -40,7 +40,7 @@ MATCH void Battle_SelectEquipItem(void) {
             *(s16*)&g_Game.members[BATTLE_ACTIVE_MEMBER->slot].u.turn.command.id = g_BattleTargetCursorCol;
             choice                                                               = g_BattleTargetCursorCol;
             g_BattleActorTurn->command.id                                        = choice;
-            g_BattleMessages[((D_801EC328 - 1) & BATTLE_RING_SLOT_MASK)].text    = UI_MessageGetText(Item_GetDescription(choice >> 8, (u8)choice) & HALF_MASK);
+            g_BattleMessages[((D_801EC328 - 1) & BATTLE_RING_SLOT_MASK)].text    = UI_MessageGetText(Item_GetDescription(choice >> 8, choice & BYTE_MASK) & HALF_MASK);
             g_UiPanelTasks[18].state                                             = 1;
             g_UiPanelTasks[17].state                                             = 2;
             g_UiPanelTasks[19].active                                            = 0;
