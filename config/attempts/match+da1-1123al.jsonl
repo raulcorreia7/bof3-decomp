@@ -1,0 +1,1 @@
+{"function": "emi/scenario/scena01/00@0x801F7678", "tried": "masked the second multiply's shade_arg (inline and via a loop-local)", "first_diff": "1 row: retail mult v1,v0 reuses the masked arg (andi v1,s5,0xff at 0x801F78E0), the draft multiplies raw s5; inline mask 24 rows, loop-local 207", "score": "1 row"}
