@@ -1,0 +1,1 @@
+{"function": "emi/world02/area103/13@0x801F53F0", "tried": "named retail's s3 as scale (copy radius to s3 then sll in place) and tested the s16/u8 parameter width", "first_diff": "61 rows; the width test needs the area103_13.h prototype (s32 today), so the save order s3-vs-s2 stays the hunk", "score": "61 rows"}
