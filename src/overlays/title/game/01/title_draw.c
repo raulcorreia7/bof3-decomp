@@ -266,7 +266,7 @@ MATCH void Title_UpdateBannerFade(void) { /* func_801D18F8 */
             state->alpha = a;
         }
 
-        if (g_UiTitleFadePhase == 0) {
+        if (g_SysThreads[1].tail.title_screen.popup.bytes.fade_phase == 0) {
             continue;
         }
 
