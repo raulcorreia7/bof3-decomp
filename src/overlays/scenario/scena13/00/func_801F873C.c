@@ -74,7 +74,7 @@ MATCH void func_801F873C(void) {
             }
             break;
         case 8:
-            if (g_UiWindowEffectBusy == 0) {
+            if (g_SysThreads[2].state == 0) {
                 g_ScenarioState.timer_06 = 120;
                 g_AreaDrawFlags          = 0;
                 g_ScenarioState.step     = 9;
@@ -98,7 +98,7 @@ MATCH void func_801F873C(void) {
             }
             break;
         case 11:
-            if (g_UiWindowEffectBusy == 0) {
+            if (g_SysThreads[2].state == 0) {
                 g_AreaDrawFlags = 0x1F;
                 UI_ModeSet(0xB);
                 g_GameFlags &= 0xFFF7;

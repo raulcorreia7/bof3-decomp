@@ -102,7 +102,7 @@ MATCH void func_801FA7DC(void) {
             g_ScenarioState.step = 0x11;
             return;
         case 17:
-            if (g_UiWindowEffectBusy != 0) {
+            if (g_SysThreads[2].state != 0) {
                 return;
             }
             g_AreaDrawFlags      = 0;

@@ -240,7 +240,7 @@ MATCH void func_801F9F0C(void) {
             g_ScenarioState.step = 0x14;
             break;
         case 20:
-            if (g_UiWindowEffectBusy != 0) {
+            if (g_SysThreads[2].state != 0) {
                 break;
             }
             g_AreaDrawFlags      = 0;

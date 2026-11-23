@@ -102,7 +102,7 @@ MATCH void func_801FA010(void) {
             g_ScenarioState.step = 21;
             break;
         case 21:
-            if (g_UiWindowEffectBusy == 0) {
+            if (g_SysThreads[2].state == 0) {
                 g_AreaDrawFlags = 0;
                 SYS_ThreadWait(1);
                 Scene_RunScenario(0);
@@ -126,7 +126,7 @@ MATCH void func_801FA010(void) {
             }
             break;
         case 24:
-            if (g_UiWindowEffectBusy == 0) {
+            if (g_SysThreads[2].state == 0) {
                 SYS_SetFlag(g_SceneFlags, 14);
                 Game_ClearScriptActive();
                 g_AreaDrawFlags = 0x1F;
