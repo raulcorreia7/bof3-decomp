@@ -1,0 +1,2 @@
+{"function": "emi/bmagic/magic078/03@0x801F02FC", "tried": "re-measured the released frame row on the current build", "first_diff": "0x801F0308: unchanged \u2014 retail keeps the value in s6 at 0x48, the draft in s4 at 0x40; 274 positional rows", "score": "274 positional rows, current header"}
+{"function": "emi/bmagic/magic151/03@0x801EF484", "tried": "re-measured the released frame row on the current build", "first_diff": "0x801EF484: unchanged \u2014 retail frame 0x28, draft 0x30 (eight bytes larger); 295 positional rows", "score": "295 positional rows, current header"}
