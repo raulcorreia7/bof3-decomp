@@ -5,6 +5,7 @@ from __future__ import annotations
 import re
 import struct
 from pathlib import Path
+from types import SimpleNamespace
 
 import objdiff_config
 
@@ -99,3 +100,25 @@ def test_a_unit_with_a_draft_is_not_marked_complete(tmp_path: Path) -> None:
     assert not shared.drafted(whole)
     assert shared.drafted(drafted)
     assert shared.drafted(shared_draft)
+
+
+def test_a_split_asm_source_absent_from_the_link_map_has_no_unit(
+    tmp_path: Path,
+) -> None:
+    """Only a split asm object the image links earns a unit; a leftover one does not."""
+    target = "emi/world04/area176/13"
+    split = tmp_path / "build/asm" / target
+    split.mkdir(parents=True)
+    (split / "func_801F3328.s").write_text("")
+    (split / "func_801F3329.s").write_text("")
+    link_map = tmp_path / "build/meson" / f"{target.replace('/', '+')}.map"
+    link_map.parent.mkdir(parents=True)
+    link_map.write_text("LOAD asm+emi+world04+area176+13+func_801F3329.s.o\n")
+    project = SimpleNamespace(
+        root=tmp_path,
+        build_dir=tmp_path / "build/meson",
+        func_address=objdiff_config.FUNC_ADDRESS,
+        assemble=lambda sources, output: output,
+    )
+    units = objdiff_config._unlifted_units(project, {"id": target}, set(), set())
+    assert [unit["name"] for unit in units] == [f"{target}/func_801F3329"]

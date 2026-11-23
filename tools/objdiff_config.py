@@ -453,6 +453,14 @@ def _game_units(
     return units, skipped
 
 
+def _linked_objects(project: Project, target_id: str) -> set[str] | None:
+    """Return the objects an image links, or None when its link map is missing."""
+    path = project.root / "build/meson" / f"{target_id.replace('/', '+')}.map"
+    if not path.is_file():
+        return None
+    return set(path.read_text(encoding="utf-8", errors="replace").split())
+
+
 def _unlifted_units(
     project: Project,
     target: dict[str, Any],
@@ -465,11 +473,15 @@ def _unlifted_units(
     units: list[dict[str, Any]] = []
     if not directory.is_dir():
         return units
+    linked = _linked_objects(project, target_id)
+    flat = target_id.replace("/", "+")
     for source in sorted(directory.glob("*.s")):
         match = project.func_address.match(source.stem)
         if match is None or source.stem in c_stems:
             continue
         if f"{target_id}@0x{int(match.group(1), 16):08X}" in library_ids:
+            continue
+        if linked is not None and f"asm+{flat}+{source.stem}.s.o" not in linked:
             continue
         output = project.build_dir / "objdiff/target" / target_id / f"{source.stem}.o"
         project.assemble([source], output)
