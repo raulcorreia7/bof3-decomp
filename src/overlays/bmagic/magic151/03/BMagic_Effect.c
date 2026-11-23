@@ -198,20 +198,20 @@ MATCH void func_801EF484(void) {
     g_Game.members[2].header.flags       = 0;
     g_Battle.active_battler              = 0;
     g_Battle.flags |= BATTLE_STATE_RELOAD_PARTY;
-    g_Battle.unk_EF[0]                   = g_Battle.party_count;
-    g_Battle.party_count                 = 1;
-    g_Battle.living_party_count          = 1;
+    g_Battle.unk_EF[0]          = g_Battle.party_count;
+    g_Battle.party_count        = 1;
+    g_Battle.living_party_count = 1;
     for (i = 0; i < BATTLE_PARTY_CHARACTERS_COUNT; i++) {
         if (g_Game.members[i].header.flags & 1) {
             UI_PanelOpenTask(i + 0xD, 3);
             D_80148332[i + 0xD].mode_00 = 5;
             D_80148332[i + 0xD].unk_01  = 0;
-            index                    = g_Game.members[i].facing * 2 + g_Game.members[i].chr.character_id * 8;
-            panel_x                  = g_Game.members[i].screen_x.value + D_801EB0B0[index];
-            panel_x                  = D_801EAEA4[(g_Battle.scroll_dir & 0xFE) ^ 0x2] + panel_x;
+            index                       = g_Game.members[i].facing * 2 + g_Game.members[i].chr.character_id * 8;
+            panel_x                     = g_Game.members[i].screen_x.value + D_801EB0B0[index];
+            panel_x                     = D_801EAEA4[(g_Battle.scroll_dir & 0xFE) ^ 0x2] + panel_x;
             D_80148332[i + 0xD].x_02    = panel_x;
-            index                    = g_Game.members[i].facing * 2 + g_Game.members[i].chr.character_id * 8;
-            panel_y                  = g_Game.members[i].screen_y.value + D_801EB0B1[index] + 0xC;
+            index                       = g_Game.members[i].facing * 2 + g_Game.members[i].chr.character_id * 8;
+            panel_y                     = g_Game.members[i].screen_y.value + D_801EB0B1[index] + 0xC;
             D_80148332[i + 0xD].y_04    = panel_y;
             D_80148332[i + 0xD].battler = i;
             D_80148332[i + 0xD].unk_06  = 0;
