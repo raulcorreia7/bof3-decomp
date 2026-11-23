@@ -54,7 +54,7 @@ NON_MATCHING s32 func_801BA678(void) {
     void*  tmp28;
     void*  tmp29;
 
-    if ((0x400 & g_Game.flags) || ((tmp24 = g_Task, val20 = tmp24->direction, (tmp24->pos.x.fixed == 0)) && (tmp24->pos.y.fixed == 0))) {
+    if ((0x400 & g_GameFlags) || ((tmp24 = g_Task, val20 = tmp24->direction, (tmp24->pos.x.fixed == 0)) && (tmp24->pos.y.fixed == 0))) {
         return 1;
     }
     tmp12 = *(D_80181B00 + (TASK(Actor)->direction * 2));
