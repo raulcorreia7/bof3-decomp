@@ -1,0 +1,1 @@
+{"function": "emi/bmagic/magic067/03@0x801EEC94", "tried": "a plain FAKE_BARRIER between the slot allocation and the enemy index (the order that was untried)", "first_diff": "5 rows unchanged: the barrier is neutral, the load still lands before the index math", "score": "5 rows"}

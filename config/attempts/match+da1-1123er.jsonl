@@ -1,0 +1,1 @@
+{"function": "emi/world01/area075/13@0x801F4874", "tried": "hoisted format = D_801F2C94 above the flag test so it is live across both sprintf calls", "first_diff": "113 rows (from 114): the frame is still 0x38 against 0x40 and s7 is not saved, but the hunk count drops by one", "score": "113 rows"}
