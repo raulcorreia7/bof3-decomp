@@ -17,8 +17,8 @@ MATCH bool Game_BattleWalkMembersIn(void) {
         return 1;
     }
 
-    g_AreaEncounterPlacement.origin.x.fixed = g_AreaScrollTargetX + (s_CameraScrollDeltas[g_Battle.scroll_dir].dx << 16);
-    g_AreaEncounterPlacement.origin.y.fixed = g_AreaScrollTargetY + (s_CameraScrollDeltas[g_Battle.scroll_dir].dy << 16);
+    g_AreaEncounterPlacement.origin.x.fixed = g_AreaCamera.scroll_x.fixed + (s_CameraScrollDeltas[g_Battle.scroll_dir].dx << 16);
+    g_AreaEncounterPlacement.origin.y.fixed = g_AreaCamera.scroll_y.fixed + (s_CameraScrollDeltas[g_Battle.scroll_dir].dy << 16);
 
     for (i = 0; i < g_Game.party_size; i++) {
         work           = &g_Game.members[i];
