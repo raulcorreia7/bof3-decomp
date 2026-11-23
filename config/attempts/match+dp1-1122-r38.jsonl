@@ -1,0 +1,3 @@
+{"function": "emi/bmagic/magic067/03@0x801EEC94", "tried": "the effect-record scale is delayed two instructions behind retail; the draft reads active_battler first", "first_diff": "0x801EEE58 sll v0,a3,0x4 against lui a0,0x8014", "score": "5 rows"}
+{"function": "emi/world02/area106/13@0x801F2F38", "tried": "frame 8 bytes larger with the start/tile pair; coverage assigns the frame to cause 3 and the D_801F3EE8 volatile to a lane decision", "first_diff": "0x801F2F38 addiu sp,sp,-120 against addiu sp,sp,-128", "score": "162 rows"}
+{"function": "emi/battle/batl_end/00@0x801F039C", "tried": "saved-register order keeps a1 in s3 against retail s5 (shape -10 instructions, 27 hunks)", "first_diff": "0x801F03A8 sw s5,52(sp) against sw s3,44(sp)", "score": "146 rows"}
