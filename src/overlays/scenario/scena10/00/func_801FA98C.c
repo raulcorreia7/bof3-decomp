@@ -347,6 +347,53 @@ NON_MATCHING void func_801FA98C(void) {
             g_SpawnedActors[D_801FE9D8].layer          = 0x40;
             g_ScenarioState.step                       = 0x1E;
             break;
+        case 30:
+            if (g_SpawnedActors[D_801FE9D8].header.flags & 1) {
+                break;
+            }
+            g_ScenarioState.step = 0x1F;
+            g_ScriptVars[0]++;
+            break;
+        case 31:
+            if (g_ScriptVars[0] != 0xD) {
+                break;
+            }
+            D_801FE9DC          = 1;
+            g_AreaScrollTargetX = 0x50000;
+            g_PartyX            = 0x50000;
+            g_AreaDrawFlags     = 0;
+            g_AreaScrollTargetY = 0x460000;
+            g_PartyY            = 0x460000;
+            Area_InitMapRenderer();
+            (void)Area_HeightSample(g_AreaScrollTargetX, g_AreaScrollTargetY);
+            g_ScenarioState.timer_06 = 4;
+            g_ScenarioState.step     = 0x20;
+            break;
+        case 32:
+            if (--g_ScenarioState.timer_06 != 0) {
+                break;
+            }
+            g_AreaDrawFlags      = 0x1F;
+            g_ScenarioState.step = 0x21;
+            g_ScriptVars[0]++;
+            break;
+        case 33:
+            if (g_ScriptVars[0] != 0xF) {
+                break;
+            }
+            g_AreaScrollTargetX = 0x1A0000;
+            g_PartyX            = 0x1A0000;
+            g_AreaDrawFlags     = 0;
+            D_801FE9DC          = 0;
+            g_AreaScrollTargetY = 0x110000;
+            g_PartyY            = 0x110000;
+            Area_InitMapRenderer();
+            Area_ScrollAdvance(0x320);
+            g_AreaCameraAngle.vx     = -0x32E;
+            g_AreaCameraAngle.vz     = 0x74;
+            g_ScenarioState.timer_06 = 4;
+            g_ScenarioState.step     = 0x22;
+            break;
     }
 }
 #else
