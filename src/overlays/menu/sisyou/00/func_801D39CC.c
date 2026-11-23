@@ -10,5 +10,5 @@ MATCH void func_801D39CC(u32 entry) {
         g_TextVariables[0][i] = name[i];
         i += 1;
     } while (i < 5);
-    D_801490DD = 0;
+    g_TextVariables[0][5] = 0;
 }

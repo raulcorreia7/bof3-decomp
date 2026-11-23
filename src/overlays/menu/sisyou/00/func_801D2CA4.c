@@ -20,7 +20,7 @@ MATCH void func_801D2CA4(void) {
             g_TextVariables[0][i] = g_Characters[g_Game.members[g_MenuMasterCursor].character_index].name[i];
             i += 1;
         } while (i < 5);
-        D_801490DD                                                                             = 0;
+        g_TextVariables[0][5]                                                                  = 0;
         edp                                                                                    = &g_SceneEventState.selection;
         g_Characters[g_Game.members[g_MenuMasterCursor].character_index].master_id             = *edp;
         g_Characters[g_Game.members[g_MenuMasterCursor].character_index].master_level          = g_Characters[g_Game.members[g_MenuMasterCursor].character_index].level;
