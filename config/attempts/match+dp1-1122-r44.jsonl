@@ -1,0 +1,3 @@
+{"function": "emi/world03/area120/13@0x801F3F5C", "tried": "partial body: 224 of 229 rows differ, frame 24 bytes short", "first_diff": "0x801F3F5C lui v0,0x1f80 against lui v1,0x1f80", "score": "224 rows"}
+{"function": "emi/etc/game/00@0x801AED54", "tried": "shape -3 instructions and signedness; the draft moves the arguments where retail loads the flag first", "first_diff": "0x801AED58 lui v0,0x8014 against move t3,a3", "score": "231 rows"}
+{"function": "emi/world04/area170/13@0x801F31DC", "tried": "the a1 parameter lands in s7 against retail s8 (shape -20 instructions)", "first_diff": "0x801F31E8 sw s8,80(sp) against sw s7,76(sp)", "score": "158 rows"}
