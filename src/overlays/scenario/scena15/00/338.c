@@ -279,7 +279,7 @@ MATCH void func_801F7AEC(void) {
 
     cursor          = g_GfxPrimCursor;
     g_GfxPrimCursor = cursor + sizeof(RECT);
-    memcpy(cursor, g_GfxCurrentBuffer + 0x14, sizeof(RECT));
+    memcpy(cursor, &g_GfxCurrentBuffer->draw.clip, sizeof(RECT));
     SetDrawArea((DR_AREA*)g_GfxPrimCursor, (RECT*)cursor);
     GFX_AddPrim(GFX_LAYER_BACKDROP, sizeof(DR_AREA));
 
