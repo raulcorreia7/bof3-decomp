@@ -1,11 +1,11 @@
 #include "game_00.h"
 
 MATCH void func_801A0CFC(Actor* entity) {
-    s32 value;
-    u8* work;
-    u8  saved;
-    u8  mode;
-    u8  param;
+    s32    value;
+    Actor* work;
+    u8     saved;
+    u8     mode;
+    u8     param;
 
     saved = TASK(Actor)->direction;
     D_801C83BC[TASK(Actor)->header.step](entity, 0, 1);
@@ -37,9 +37,9 @@ MATCH void func_801A0CFC(Actor* entity) {
         TASK(Actor)->header.mode = 0x0A;
         entity->unk_79           = (value & 0x7);
         TASK(Actor)->direction   = (saved & 0x7);
-        work                     = TASK(u8);
-        work[0x0A]               = 0;
-        work[9]                  = 0;
+        work                     = TASK(Actor);
+        work->unk_0A             = 0;
+        work->timer              = 0;
         func_801A3B7C(entity);
         if (TASK(Actor)->header.mode == 0x0A) {
             return;

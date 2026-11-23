@@ -1,0 +1,1 @@
+{"function": "emi/battle/battle/15@0x80099B74", "tried": "Declared D_801483C0 volatile in the shared header as a local probe (g_BattlePanelMode is already volatile there)", "first_diff": "still two rows: the mode/0x801E83C0 store pair keeps its order. The volatile sweep does not move this row", "score": "2 rows either way"}
