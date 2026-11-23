@@ -1,0 +1,1 @@
+{"function": "emi/battle/battle/15@0x800AEEC8", "tried": "a task local loaded before status=1 and used at the party store", "first_diff": "9 baseline; the local costs 25 rows and moves the first diff to the andi at 0x800AEF38, reverted", "score": "9 rows"}

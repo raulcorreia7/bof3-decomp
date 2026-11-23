@@ -1,0 +1,1 @@
+{"function": "emi/scenario/sce15ef0/00@0x801D1220", "tried": "the cursor load as its own statement, an a3 pin with opaque and barrier, and a FAKE_USE on the truncated tpage", "first_diff": "0x801D1294: none of the three moves the andi before the cursor's lui/lw; the pin forms copy the raw value into a3 and truncate at the call", "score": "13 differing rows on all forms"}

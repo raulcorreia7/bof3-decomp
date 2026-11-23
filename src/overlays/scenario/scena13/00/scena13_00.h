@@ -63,3 +63,6 @@ extern u8                 D_801FBFEC;
     } while (0)
 
 #endif
+
+/* The character whose party setup the Dragonier elder event selects. */
+extern u8 D_80145F09;
