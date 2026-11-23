@@ -67,7 +67,7 @@ ASSERT_SIZE(CellZone, 0x04);
 extern CellZone D_801F492C[4];
 
 /* The height-table byte offset as the scalar retail reads: one lui per access.
- * Same cell as AreaMapBundle.height_offset (0x8010402A). */
+ * Same cell as AreaMapBundle.height_offset. */
 extern u16 g_AreaMapHeightOffset;
 s8         Area_FindMemberAt(s32 x, s32 y);
 bool       func_801F3CF0(void);
