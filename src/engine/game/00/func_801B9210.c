@@ -17,10 +17,10 @@ MATCH void func_801B9210(void) {
         TASK(Actor)->pos.y.fixed      = (TASK(Actor)->pos.y.fixed + 0x4800) & ~0x7FFF;
         COORD_INT(TASK(Actor)->pos.z) = Area_HeightReadStep(TASK(Actor)->pos.x.fixed, TASK(Actor)->pos.y.fixed, TASK(Actor)->direction);
         if (TASK(Actor)->unk_05 == 0) {
-            v                   = TASK(Actor)->pos.x.fixed;
-            g_AreaScrollTargetX = v;
-            v                   = TASK(Actor)->pos.y.fixed;
-            g_AreaScrollTargetY = v;
+            v                           = TASK(Actor)->pos.x.fixed;
+            g_AreaCamera.scroll_x.fixed = v;
+            v                           = TASK(Actor)->pos.y.fixed;
+            g_AreaCamera.scroll_y.fixed = v;
             Area_InitMapRenderer();
         }
     }

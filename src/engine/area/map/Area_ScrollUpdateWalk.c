@@ -13,12 +13,12 @@ MATCH void Area_ScrollUpdateWalk(void) {
     } else {
         g_AreaCameraSpeed = 8;
     }
-    index               = g_Game.current->u.field.counter.unsigned_value;
-    product             = g_AreaCameraSpeed * g_RouteSpeedScale[index];
-    state               = TASK(u8);
-    g_AreaCameraSpeed   = product;
-    g_AreaScrollTargetX = ((s32*)state)[13] + ((s32*)state)[3] * state[0x09];
-    g_AreaScrollTargetY = ((s32*)state)[14] + ((s32*)state)[4] * state[0x09];
+    index                       = g_Game.current->u.field.counter.unsigned_value;
+    product                     = g_AreaCameraSpeed * g_RouteSpeedScale[index];
+    state                       = TASK(u8);
+    g_AreaCameraSpeed           = product;
+    g_AreaCamera.scroll_x.fixed = ((s32*)state)[13] + ((s32*)state)[3] * state[0x09];
+    g_AreaCamera.scroll_y.fixed = ((s32*)state)[14] + ((s32*)state)[4] * state[0x09];
     /* FAKE: barrier pins load after store. */
     FAKE_BARRIER();
     g_AreaCameraHeightDelta = ((s32*)state)[5];
