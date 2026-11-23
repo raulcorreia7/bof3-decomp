@@ -1,0 +1,1 @@
+{"function": "emi/battle/batl_end/00@0x801EF140", "tried": "u16 height makes the height+4 add match but leaves a 4-row a0/v1 rotation between the panel byte and word stores", "first_diff": "0x801EF2C8 lbu a0,-203(s0) against lbu v1,-203(s0)", "score": "4 rows"}
