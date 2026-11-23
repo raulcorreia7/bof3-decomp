@@ -176,8 +176,7 @@ MATCH void func_801EF3A8(void) {
  * heading unk_14, and every step rings them with four semi-transparent quads - a narrow lip and a
  * wider skirt at heading + 0x400, and the same pair at heading - 0x400 - shaded by unk_09 * 15,
  * its quarter on the trailing edges and white on the wide face. */
-#ifdef NON_MATCHING
-NON_MATCHING void BMagic_DrawDragonBreath(void) {
+MATCH void BMagic_DrawDragonBreath(void) {
     POLY_G4* prim;
     s32      tpage;
     s16      i;
@@ -207,10 +206,10 @@ NON_MATCHING void BMagic_DrawDragonBreath(void) {
         prev_jitter                  = jitter;
         jitter                       = rand() & 3;
         prim                         = (POLY_G4*)g_GfxPrimCursor;
-        SetPolyG4(prim);
-        SetSemiTrans(prim, 1);
         g_ScratchPad.cells.halves[0] += prev_jitter;
         g_ScratchPad.cells.halves[1] += jitter;
+        SetPolyG4(prim);
+        SetSemiTrans(prim, 1);
         /* Lit lip: the near side swings off both spine points at heading + 0x400. */
         g_ScratchPad.cells.halves[2] = (TASK(PartyMember)->unk_14 + 0x400) & ANGLE_MASK;
         prim->x1                     = g_ScratchPad.cells.halves[6] + FIXED_MUL(rsin(g_ScratchPad.cells.halves[2]), g_ScratchPad.cells.halves[0]);
@@ -320,9 +319,6 @@ NON_MATCHING void BMagic_DrawDragonBreath(void) {
     tpage = getTPage(TPAGE_DEPTH_4BIT, TPAGE_ABR_HALF, 320, 256);
     GFX_ADD_DITHERED_DRAW_MODE(BMAGIC_LAYER_OVER_BATTLERS, tpage);
 }
-#else
-INCLUDE_ASM(BMagic_DrawDragonBreath);
-#endif
 
 MATCH void func_801F0198(u8 count) {
     LINE_F2* line;
