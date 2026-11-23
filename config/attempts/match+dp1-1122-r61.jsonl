@@ -1,0 +1,3 @@
+{"function": "emi/world03/area119/13@0x801F369C", "tried": "frame 24 bytes short, 8 instructions missing, mult vs shifts; the prologue shape differs", "first_diff": "0x801F369C addiu sp,sp,-112 against addiu sp,sp,-88", "score": "258 rows"}
+{"function": "emi/etc/game/00@0x801BB2B8", "tried": "frame 8 bytes large, 14 instructions missing, g_GameRequestFlags volatile (lane decision)", "first_diff": "0x801BB2B8 addiu sp,sp,-40 against addiu sp,sp,-48", "score": "249 rows"}
+{"function": "emi/etc/bate/00@0x801D165C", "tried": "undrafted: 279 words of window and item-list drawing (UI_WindowDraw, UI_TextDraw, sprintf, glyph loops, UI_IconDraw); a full draft is needed", "first_diff": "n/a (no draft)", "score": "279 words"}

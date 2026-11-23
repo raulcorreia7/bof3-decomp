@@ -40,7 +40,7 @@ void                     func_801DE1B0(u8 slot);
 void                     func_801F026C(void);
 void                     func_801F0648(void);
 void                     func_801F0D0C(u8 angle0, u8 angle1);
-void                     func_801F14D0(s32 band_height, s16 radius, u16 jitter_mask);
+void                     func_801F14D0(s16 band_height, s16 radius, u16 jitter_mask);
 
 extern Callback D_801F24B8[];
 /* The draw step's handler table and its two-byte row per effect slot. */
