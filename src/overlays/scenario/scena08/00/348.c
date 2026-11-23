@@ -461,7 +461,6 @@ MATCH void func_801F81F4(u16 value) {
 
 #ifdef NON_MATCHING
 NON_MATCHING void func_801F823C(s16 x, s16 y, s16 half_height, s16 half_width);
-extern u16        D_801FE9EC[];
 
 void func_801F823C(s16 x, s16 y, s16 height, s16 width) {
     POLY_GT4* prim;
@@ -489,12 +488,12 @@ void func_801F823C(s16 x, s16 y, s16 height, s16 width) {
         v           = (i + 0x40) - height;
         prim->v0    = (prim->v1 = i - (height - 0x40));
         prim->v2    = (prim->v3 = ((i + 0x40) - height) + 1);
-        prim->tpage = GetTPage(2, 0, 0x340, 0x100);
+        prim->tpage = GetTPage(TPAGE_DEPTH_15BIT, TPAGE_ABR_HALF, 0x340, 0x100);
         prim->r0 = 0x40, prim->g0 = 0x40, prim->b0 = 0x80;
         prim->r1 = 0x60, prim->g1 = 0x60, prim->b1 = 0x60;
         prim->r2 = 0x40, prim->g2 = 0x40, prim->b2 = 0x80;
         prim->r3 = 0x60, prim->g3 = 0x60, prim->b3 = 0x60;
-        GFX_AddPrim(2, sizeof(POLY_GT4));
+        GFX_AddPrim(GFX_LAYER_EFFECT_FRONT, sizeof(POLY_GT4));
         prim = (POLY_GT4*)g_GfxPrimCursor;
         SetPolyGT4(prim);
         SetSemiTrans(prim, 0);
@@ -507,12 +506,12 @@ void func_801F823C(s16 x, s16 y, s16 height, s16 width) {
         skew        = x + skew;
         prim->u1    = (prim->u3 = half);
         prim->v2    = (prim->v3 = ((i + 0x40) - height) - 0x7F);
-        prim->tpage = GetTPage(2, 0, 0x340, 0x100);
+        prim->tpage = GetTPage(TPAGE_DEPTH_15BIT, TPAGE_ABR_HALF, 0x340, 0x100);
         prim->r0 = 0x60, prim->g0 = 0x60, prim->b0 = 0x60;
         prim->r1 = 0x80, prim->g1 = 0x40, prim->b1 = 0x40;
         prim->r2 = 0x60, prim->g2 = 0x60, prim->b2 = 0x60;
         prim->r3 = 0x80, prim->g3 = 0x40, prim->b3 = 0x40;
-        GFX_AddPrim(2, sizeof(POLY_GT4));
+        GFX_AddPrim(GFX_LAYER_EFFECT_FRONT, sizeof(POLY_GT4));
     }
 }
 #else
