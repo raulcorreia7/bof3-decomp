@@ -3,19 +3,19 @@
 #ifdef NON_MATCHING
 /* Queues every copy job the village can afford; unk_03's high nibble is the state: 1 waiting, 2/3/4 result. */
 NON_MATCHING s32 func_801EFA50(void) {
-    s32 queue_off;
     s32 room;
+    s32 room_offset;
     s32 job;
     s32 type_index;
     u32 price;
     u32 wait;
     u8  flags;
-    u8  record;
     s32 value;
     s32 roll;
 
     for (room = 0; room < 8; room++) {
-        if (g_FairyRooms[room * 8] != 0xD) {
+        room_offset = room * 8;
+        if (g_FairyRooms[room_offset] != 0xD) {
             continue;
         }
         for (job = 0; job < FAIRY_JOB_COUNT; job++) {
@@ -28,27 +28,26 @@ NON_MATCHING s32 func_801EFA50(void) {
             if ((g_FairyJobs[job].unk_03 & 0xF0) != 0x10) {
                 continue;
             }
-            record = g_FairyJobs[job].record_state;
             switch (g_FairyJobs[job].unk_03 & 0xF) {
                 case ITEM_CATEGORY_ITEM:
-                    flags = g_Items[record].flags;
-                    price = g_Items[record].price;
+                    price = g_Items[g_FairyJobs[job].record_state].price;
+                    flags = g_Items[g_FairyJobs[job].record_state].flags;
                     break;
                 case ITEM_CATEGORY_WEAPON:
-                    flags = g_Weapons[record].header.flags;
-                    price = g_Weapons[record].price;
+                    price = g_Weapons[g_FairyJobs[job].record_state].price;
+                    flags = g_Weapons[g_FairyJobs[job].record_state].header.flags;
                     break;
                 case ITEM_CATEGORY_ARMOR:
-                    flags = g_Armors[record].header.flags;
-                    price = g_Armors[record].price;
+                    price = g_Armors[g_FairyJobs[job].record_state].price;
+                    flags = g_Armors[g_FairyJobs[job].record_state].header.flags;
                     break;
                 default:
-                    flags = g_Accessories[record].header.flags;
-                    price = g_Accessories[record].price;
+                    price = g_Accessories[g_FairyJobs[job].record_state].price;
+                    flags = g_Accessories[g_FairyJobs[job].record_state].header.flags;
                     break;
             }
             for (type_index = 0; type_index < FAIRY_VILLAGE_COPY_CLASS_COUNT; type_index++) {
-                if (price <= D_801F24FC_Data.copy_class[type_index][0]) {
+                if ((price & HALF_MASK) <= D_801F24FC_Data.copy_class[type_index][0]) {
                     break;
                 }
             }
@@ -62,7 +61,7 @@ NON_MATCHING s32 func_801EFA50(void) {
                 goto queue;
             }
             value = D_801F24FC_Data.copy_class[type_index][2];
-            value += (value * g_Fairies[job][8]) / 100;
+            value += (value * g_Fairies[job][8]) / 20;
             if ((s16)value < 0) {
                 value = 0;
             } else if ((s16)value >= 0x65) {
@@ -72,7 +71,7 @@ NON_MATCHING s32 func_801EFA50(void) {
             if (roll >= 0x65) {
                 roll -= 0x1C;
             }
-            if (roll < (s16)value) {
+            if ((s16)roll < (s16)value) {
                 g_FairyJobs[job].unk_03 |= 0x20;
                 goto queue;
             }
@@ -80,20 +79,18 @@ NON_MATCHING s32 func_801EFA50(void) {
             if (roll >= 0x65) {
                 roll -= 0x1C;
             }
-            if (roll < (s16)value - g_Fairies[job][8] * 2) {
+            if ((s16)roll < 30 - g_Fairies[job][8] * 2) {
                 g_FairyJobs[job].unk_03       = 0x40;
                 g_FairyJobs[job].record_state = 0x37;
             } else {
                 g_FairyJobs[job].unk_03 |= 0x30;
             }
         queue:
-            queue_off                 = g_FairyVillageUpdateCount * 2;
-            D_80145E60[queue_off]     = 3;
-            D_80145E60[queue_off + 1] = (u8)job;
-            g_FairyVillageUpdateCount = (u8)(g_FairyVillageUpdateCount + 1);
+            D_80145E60[g_FairyVillageUpdateCount * 2] = 3;
+            D_80145E61[g_FairyVillageUpdateCount * 2] = job;
+            g_FairyVillageUpdateCount += 1;
         }
     }
-    return 0;
 }
 #else
 INCLUDE_ASM(func_801EFA50);

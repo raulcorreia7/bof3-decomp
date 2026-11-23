@@ -1,0 +1,1 @@
+{"function": "emi/world03/area148/13@0x801F4A50", "tried": "removed the 0x20 pad (frame 0x68 vs retail 0x88) and moved it after the poly local (layout unchanged)", "first_diff": "16 rows: retail homes the parameters at 32(sp), the draft at 64(sp) inside the same 0x88 frame; the pad placement does not move the homes", "score": "16 rows"}

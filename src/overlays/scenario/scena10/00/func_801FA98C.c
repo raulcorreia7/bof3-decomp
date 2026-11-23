@@ -393,6 +393,92 @@ NON_MATCHING void func_801FA98C(void) {
             g_AreaCameraAngle.vz     = 0x74;
             g_ScenarioState.timer_06 = 4;
             g_ScenarioState.step     = 0x22;
+            break;
+        case 34:
+            if (--g_ScenarioState.timer_06 != 0) {
+                break;
+            }
+            g_AreaDrawFlags = 0x1F;
+            g_ScriptVars[0]++;
+            SND_SEPlay(0x205);
+            SND_SEPlay(0x200);
+            SND_StartDecrescendo(0, 0, 0x64, 8);
+            slot       = func_8019601C();
+            D_801FE9D8 = slot;
+            if ((slot & BYTE_MASK) != GAME_NONE) {
+                g_SpawnedActors[D_801FE9D8].header.flags = 1;
+                g_SpawnedActors[D_801FE9D8].type         = 0x18;
+                g_SpawnedActors[D_801FE9D8].header.mode  = 0x5F;
+            }
+            g_AreaSceneMode      = 0x23;
+            g_ScenarioState.step = 0x23;
+            break;
+        case 35:
+            slot       = func_8019601C();
+            D_801FE9D8 = slot;
+            if ((slot & BYTE_MASK) == GAME_NONE) {
+                break;
+            }
+            g_SpawnedActors[D_801FE9D8].header.flags   = 1;
+            g_SpawnedActors[D_801FE9D8].type           = 0x13;
+            g_SpawnedActors[D_801FE9D8].camera_angle.x = -0x3C8;
+            g_SpawnedActors[D_801FE9D8].camera_angle.y = g_AreaCameraAngle.vy;
+            g_SpawnedActors[D_801FE9D8].camera_angle.z = g_AreaCameraAngle.vz;
+            g_SpawnedActors[D_801FE9D8].layer          = 0x40;
+            g_ScenarioState.step                       = 0x24;
+            break;
+        case 36:
+            if (g_SpawnedActors[D_801FE9D8].header.flags & 1) {
+                break;
+            }
+            g_ScenarioState.step = 0x25;
+            break;
+        case 37:
+            slot       = func_8019601C();
+            D_801FE9D8 = slot;
+            if ((slot & BYTE_MASK) == GAME_NONE) {
+                break;
+            }
+            g_SpawnedActors[D_801FE9D8].header.flags   = 1;
+            g_SpawnedActors[D_801FE9D8].type           = 0x13;
+            g_SpawnedActors[D_801FE9D8].camera_angle.x = g_AreaCameraAngle.vx;
+            g_SpawnedActors[D_801FE9D8].camera_angle.y = g_AreaCameraAngle.vy;
+            g_SpawnedActors[D_801FE9D8].camera_angle.z = 0x17C;
+            g_SpawnedActors[D_801FE9D8].layer          = 0x50;
+            g_ScenarioState.step                       = 0x26;
+            break;
+        case 38:
+            if (g_SpawnedActors[D_801FE9D8].header.flags & 1) {
+                break;
+            }
+            g_ScenarioState.step = 0x27;
+            break;
+        case 39:
+            slot       = func_8019601C();
+            D_801FE9D8 = slot;
+            if ((slot & BYTE_MASK) == GAME_NONE) {
+                break;
+            }
+            g_SpawnedActors[D_801FE9D8].header.flags   = 1;
+            g_SpawnedActors[D_801FE9D8].type           = 0x31;
+            g_SpawnedActors[D_801FE9D8].camera_angle.x = -0x3F4;
+            g_SpawnedActors[D_801FE9D8].camera_angle.y = g_AreaCameraAngle.vy;
+            g_SpawnedActors[D_801FE9D8].camera_angle.z = 0x2B0;
+            g_SpawnedActors[D_801FE9D8].layer          = 0xFF;
+            g_SpawnedActors[D_801FE9D8].vx             = 0x100;
+            g_ScenarioState.timer_06                   = 0x50;
+            g_ScenarioState.step                       = 0x28;
+            break;
+        case 40:
+            if (g_SpawnedActors[D_801FE9D8].header.flags & 1) {
+                break;
+            }
+            if (--g_ScenarioState.timer_06 != 0) {
+                break;
+            }
+            UI_ModeSet(0);
+            g_ScenarioState.step = 0x29;
+            break;
     }
 }
 #else

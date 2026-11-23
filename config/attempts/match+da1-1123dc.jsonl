@@ -1,0 +1,1 @@
+{"function": "emi/scenario/scena10/00@0x801F73EC", "tried": "limit before the locked width load (30 rows) and removing the FAKE_ORDER_LOCK (60)", "first_diff": "25 rows: retail loads g_Task before the table lookup; the lock is required (60 without), the reorder costs 30, reverted", "score": "25 rows"}
