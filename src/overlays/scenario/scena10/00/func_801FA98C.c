@@ -61,6 +61,7 @@ NON_MATCHING void func_801FA98C(void) {
             if (WINDOW_EFFECT_BUSY()) {
                 break;
             }
+            D_801FE9DC = 0;
             UI_ModeSet(1);
             g_AreaScrollTargetX = 0x1F0000;
             g_AreaScrollTargetY = 0x360000;
