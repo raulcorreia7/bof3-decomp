@@ -8,7 +8,7 @@ MATCH void Title_AdvanceFade(void) { /* func_801D0D94 */
     u16* timer_ptr;
     u16  timer;
 
-    timer_ptr  = &g_UiTitleTimer;
+    timer_ptr  = &g_SysThreads[1].tail.title_screen.timer;
     timer      = *timer_ptr - 1u;
     *timer_ptr = timer;
 
@@ -28,7 +28,7 @@ MATCH void Title_StartFade(void) { /* func_801D0DF0 */
     volatile u16* timer_ptr;
     u16           timer;
 
-    timer_ptr  = &g_UiTitleTimer;
+    timer_ptr  = &g_SysThreads[1].tail.title_screen.timer;
     timer      = *timer_ptr - 1u;
     *timer_ptr = timer;
 
@@ -73,7 +73,7 @@ MATCH void Title_WaitInput(void) { /* func_801D0F00 */
         return;
     }
 
-    if (EMI_IsReady() && g_UiWindowEffectBusy == 0u && (g_PadStates[0].pressed & INPUT_ACTION_BUTTONS) != 0u) {
+    if (EMI_IsReady() && g_SysThreads[2].state == 0u && (g_PadStates[0].pressed & INPUT_ACTION_BUTTONS) != 0u) {
         u8  sel;
         u16 bank;
         g_ScenarioState.state_04 = 1u;
