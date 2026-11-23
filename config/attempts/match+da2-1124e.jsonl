@@ -1,0 +1,1 @@
+{"function": "emi/bmagic/magic114/03@0x801EF280", "tried": "re-measured the released frame row on the current build after the magic094/151/078 match merge", "first_diff": "0x801EF3B0: retail loads the scratchpad base into a0, the draft into v1; 188 positional rows, unchanged from the earlier park", "score": "188 positional rows, current header"}
