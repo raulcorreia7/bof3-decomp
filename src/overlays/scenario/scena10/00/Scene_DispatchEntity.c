@@ -101,7 +101,7 @@ NON_MATCHING void func_801F73EC(void) {
 
     i = 0;
     do {
-        width = D_801FE7CC[i].box.w;
+        FAKE_ORDER_LOCK(width = D_801FE7CC[i].box.w);
         limit = (u16)(TASK(Actor)->timer << 4);
         if (limit < width) {
             width = limit;
