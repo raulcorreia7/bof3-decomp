@@ -7,7 +7,7 @@ NON_MATCHING void func_801F36B4(s32 steps) {
     POLY_FT4* prim;
     SVECTOR*  corners;
     s16*      out;
-    long      p;
+    long      depth;
     long      flag;
     s32       height;
     s32       i;
@@ -33,13 +33,14 @@ loop:
     prim = g_GfxPrimCursor;
     SetPolyFT4(prim);
     SetShadeTex(prim, 0);
-    rise              = step + (order << 3);
-    corners->vx       = x + rise * TASK(Actor)->vx;
-    SP_REF(s16, 0x18) = height;
-    SP_REF(s16, 0x16) = y + rise * TASK(Actor)->vy;
-    RotTransPers(corners, (long*)&corners[4], &p, &flag);
+    rise        = step + (order << 3);
+    corners->vx = x + rise * TASK(Actor)->vx;
+    D_1F800018  = height;
+    D_1F800016  = y + rise * TASK(Actor)->vy;
+    RotTransPers(corners, (long*)&corners[4], &depth, &flag);
     spread   = step / 16 + 4 + ((i < 4) ? order / 2 : steps * 2);
     shade    = (((7 - i) * 8 + 7 - phase) << 17) / (8 - steps);
+    /* Not setXYWH: retail adds the radius to each corner and stores the far corners first. */
     prim->x0 = prim->x2 = out[0] - spread;
     prim->x1 = prim->x3 = out[0] + spread;
     prim->y0 = prim->y1 = out[1] - spread;

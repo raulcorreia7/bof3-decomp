@@ -1,0 +1,1 @@
+{"function": "emi/world01/area075/13@0x801F45A8", "tried": "read the first hunk by address: the draft materialises &0x80146888 into a1, retail forms each D_801F58CC/D_801F58D0 access with its own lui", "first_diff": "7 rows: branch target 0x801f46c4 vs 0x801f46bc (8 bytes) and the extra lui/addiu a1 pair at 0x801F4634; address spelling remains", "score": "7 rows"}

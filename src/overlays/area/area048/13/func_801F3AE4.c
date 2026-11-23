@@ -30,7 +30,7 @@ NON_MATCHING void func_801F3AE4(u32 angle, s32 pos, s32 variant) {
         }
         ofs = i * 0xC;
         for (j = 0; j < 4; j++) {
-            setVector(&g_ScratchPadVectors[j], D_801F4D94[ofs] << 7, D_801F4D95[ofs] << 7, -(D_801F4D96[ofs] * 320));
+            setVector(&g_ScratchPadVectors[j], D_801F4D94[ofs] * 128, D_801F4D95[ofs] * 128, -(D_801F4D96[ofs] * 320));
             ofs += 3;
         }
         RotTransPers4(&g_ScratchPadVectors[0], &g_ScratchPadVectors[1], &g_ScratchPadVectors[2], &g_ScratchPadVectors[3], (long*)&prim->x0, (long*)&prim->x1, (long*)&prim->x2, (long*)&prim->x3,

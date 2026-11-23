@@ -1,0 +1,1 @@
+{"function": "emi/scenario/scena07/00@0x801F7BE0", "tried": "FAKE_BARRIER before the height call and after the pos.x store", "first_diff": "3 rows baseline; the barriers cost 46 and 42 rows and shift the unit, reverted", "score": "3 rows"}

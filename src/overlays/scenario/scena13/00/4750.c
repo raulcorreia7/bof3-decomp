@@ -55,7 +55,7 @@ NON_MATCHING s32 func_801FB464(s32 x, s32 y) {
             g_ScenarioState.step     = 0;
             return 1;
         }
-        if (g_GameCellType == 1 && SYS_TestFlag(g_SceneFlags, 29) != 0 && SYS_TestFlag(g_SceneFlags, 30) == 0 && x == TO_COORD(59) + COORD_HALF && (u32)((y >> 16) - 31) < 4U) {
+        if (SYS_TestFlag(g_SceneFlags, 29) != 0 && SYS_TestFlag(g_SceneFlags, 30) == 0 && x == TO_COORD(59) + COORD_HALF && (u32)((y >> 16) - 31) < 4U) {
             Game_SetScriptActive();
             g_ScenarioState.state_04 = 8;
             g_ScenarioState.step     = 5;
