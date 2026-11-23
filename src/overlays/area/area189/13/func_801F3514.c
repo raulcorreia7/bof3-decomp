@@ -32,14 +32,14 @@ MATCH void func_801F3514(void) {
         TASK(Actor)->tint.steps.delta.b = 0;
     }
 
-    vertex     = g_ScratchPadVectors;
-    screen     = D_1F800034;
+    vertex                    = g_ScratchPadVectors;
+    screen                    = D_1F800034;
     /* Stored through a pointer: a member store lets the scroll loads move above it. */
-    out        = &TASK(Actor)->unk_32;
-    *out       = 0x3200;
-    vertex->vx = (s16)(((((g_AreaScrollTargetX - 1) & 0xFFFFFF) + 1) >> 9) - 0x4000);
-    D_1F800016 = (s16)(((((g_AreaScrollTargetY - 1) & 0xFFFFFF) + 1) >> 9) - 0x4000);
-    D_1F800018 = (s16)(-g_Game.members[0].pos.z.part.integer / 2);
+    out                       = &TASK(Actor)->unk_32;
+    *out                      = 0x3200;
+    vertex->vx                = (s16)(((((g_AreaScrollTargetX - 1) & 0xFFFFFF) + 1) >> 9) - 0x4000);
+    g_ScratchPadVectors[0].vy = (s16)(((((g_AreaScrollTargetY - 1) & 0xFFFFFF) + 1) >> 9) - 0x4000);
+    g_ScratchPadVectors[0].vz = (s16)(-g_Game.members[0].pos.z.part.integer / 2);
     RotTransPers(vertex, (long*)screen, &depth, &flag);
 
     TASK(Actor)->screen_x = 0xA0;
