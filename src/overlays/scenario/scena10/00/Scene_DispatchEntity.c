@@ -94,20 +94,22 @@ MATCH void func_801F719C(void) {
 
 #ifdef NON_MATCHING
 NON_MATCHING void func_801F73EC(void) {
+    u32 height;
+    u32 width;
+    s32 limit;
     u8  i;
-    u16 height;
-    u16 limit;
-    u16 width;
 
     i = 0;
     do {
-        FAKE_ORDER_LOCK(width = D_801FE7CC[i].box.w);
-        limit = (u16)(TASK(Actor)->timer << 4);
-        if (limit < width) {
+        width  = D_801FE7CC[i].box.w;
+        /* FAKE: the dead copy ranks the width read above the timer read (v0 contest). */
+        height = width;
+        limit  = TASK(Actor)->timer << 4;
+        if (((u16)limit) < height) {
             width = limit;
         }
         height = D_801FE7CC[i].box.h;
-        if (limit < height) {
+        if (((u16)limit) < height) {
             height = limit;
         }
         if (((TASK(Actor)->option_flags >> i) & 1) == 0) {

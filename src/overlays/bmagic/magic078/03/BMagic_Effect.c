@@ -159,8 +159,11 @@ NON_MATCHING void func_801EF318(void) {
     u8*      line_base;
     s32      values[16];
     s32      line_values[12];
+    s32*     azimuth;
+    s32*     azimuth_next;
     long     depth;
     long     flag;
+    s32      ring_base;
     s32      ring;
     s32      seg;
     s32      tpage;
@@ -176,6 +179,7 @@ NON_MATCHING void func_801EF318(void) {
     g_ScratchPad.cells.words[1] = TASK(PartyMember)->unk_09 * 7;
 
     for (ring = 0; ring < 2; ring++) {
+        ring_base                 = ring * 6;
         g_ScratchPadVectors[1].vx = FIXED_MUL(rcos(D_801F08B8[ring]), g_ScratchPad.cells.words[1]);
         g_ScratchPadVectors[1].vy = FIXED_MUL(rcos(0x180), FIXED_MUL(rsin(D_801F08B8[ring]), g_ScratchPad.cells.words[0]));
         g_ScratchPadVectors[1].vz = FIXED_MUL(rsin(0x180), FIXED_MUL(rsin(D_801F08B8[ring]), g_ScratchPad.cells.words[0]));
@@ -201,10 +205,10 @@ NON_MATCHING void func_801EF318(void) {
             g_ScratchPadVectors[3].vy = FIXED_MUL(rcos(D_801F089C[seg]), FIXED_MUL(rsin(D_801F08B8[ring + 1]), g_ScratchPad.cells.words[0]));
             g_ScratchPadVectors[3].vz = FIXED_MUL(rsin(D_801F089C[seg]), FIXED_MUL(rsin(D_801F08B8[ring + 1]), g_ScratchPad.cells.words[0]));
 
-            func_801EFE14(line, &line_values[ring * 6 + seg - 1], g_ScratchPadVectors[0], g_ScratchPadVectors[1], g_ScratchPadVectors[3], g_ScratchPadVectors[2]);
+            func_801EFE14(line, &line_values[seg - 1 + ring_base], g_ScratchPadVectors[0], g_ScratchPadVectors[1], g_ScratchPadVectors[3], g_ScratchPadVectors[2]);
             line++;
-            values[ring * 6 + seg - 1] = RotAverage4(&g_ScratchPadVectors[0], &g_ScratchPadVectors[1], &g_ScratchPadVectors[2], &g_ScratchPadVectors[3], (long*)&prim->x0, (long*)&prim->x1,
-                                                     (long*)&prim->x2, (long*)&prim->x3, &depth, &flag);
+            values[ring_base + seg - 1] = RotAverage4(&g_ScratchPadVectors[0], &g_ScratchPadVectors[1], &g_ScratchPadVectors[2], &g_ScratchPadVectors[3], (long*)&prim->x0, (long*)&prim->x1,
+                                                      (long*)&prim->x2, (long*)&prim->x3, &depth, &flag);
 
             setRGB0(prim, 0x10, 0x10, 0x80);
             /* The flash brightens one segment per frame; from step 5 the segment fades with the timer. */
@@ -219,14 +223,16 @@ NON_MATCHING void func_801EF318(void) {
     }
 
     for (ring = 0; ring < 4; ring += 2) {
+        azimuth      = D_801F089C;
+        azimuth_next = D_801F08A4;
         for (seg = 0; seg < 6; seg += 3) {
             prim = (POLY_F4*)g_GfxPrimCursor;
             SetPolyF4(prim);
             SetSemiTrans(prim, 1);
 
             g_ScratchPadVectors[0].vx = FIXED_MUL(rcos(D_801F08B8[ring]), g_ScratchPad.cells.words[1]);
-            g_ScratchPadVectors[0].vy = FIXED_MUL(rcos(D_801F089C[seg]), FIXED_MUL(rsin(D_801F08B8[ring]), g_ScratchPad.cells.words[0]));
-            g_ScratchPadVectors[0].vz = FIXED_MUL(rsin(D_801F089C[seg]), FIXED_MUL(rsin(D_801F08B8[ring]), g_ScratchPad.cells.words[0]));
+            g_ScratchPadVectors[0].vy = FIXED_MUL(rcos(*azimuth), FIXED_MUL(rsin(D_801F08B8[ring]), g_ScratchPad.cells.words[0]));
+            g_ScratchPadVectors[0].vz = FIXED_MUL(rsin(*azimuth), FIXED_MUL(rsin(D_801F08B8[ring]), g_ScratchPad.cells.words[0]));
 
             g_ScratchPadVectors[1].vx = FIXED_MUL(rcos(D_801F08B8[ring]), g_ScratchPad.cells.words[1]);
             g_ScratchPadVectors[1].vy = FIXED_MUL(rcos(D_801F089C[seg + 3]), FIXED_MUL(rsin(D_801F08B8[ring]), g_ScratchPad.cells.words[0]));
@@ -237,16 +243,18 @@ NON_MATCHING void func_801EF318(void) {
             g_ScratchPadVectors[2].vz = FIXED_MUL(rsin(D_801F089C[seg + 1]), FIXED_MUL(rsin(D_801F08B8[ring]), g_ScratchPad.cells.words[0]));
 
             g_ScratchPadVectors[3].vx = FIXED_MUL(rcos(D_801F08B8[ring]), g_ScratchPad.cells.words[1]);
-            g_ScratchPadVectors[3].vy = FIXED_MUL(rcos(D_801F08A4[seg]), FIXED_MUL(rsin(D_801F08B8[ring]), g_ScratchPad.cells.words[0]));
-            g_ScratchPadVectors[3].vz = FIXED_MUL(rsin(D_801F08A4[seg]), FIXED_MUL(rsin(D_801F08B8[ring]), g_ScratchPad.cells.words[0]));
+            g_ScratchPadVectors[3].vy = FIXED_MUL(rcos(*azimuth_next), FIXED_MUL(rsin(D_801F08B8[ring]), g_ScratchPad.cells.words[0]));
+            g_ScratchPadVectors[3].vz = FIXED_MUL(rsin(*azimuth_next), FIXED_MUL(rsin(D_801F08B8[ring]), g_ScratchPad.cells.words[0]));
 
-            values[12 + ring + seg / 3] = RotAverage4(&g_ScratchPadVectors[0], &g_ScratchPadVectors[1], &g_ScratchPadVectors[2], &g_ScratchPadVectors[3], (long*)&prim->x0, (long*)&prim->x1,
-                                                      (long*)&prim->x2, (long*)&prim->x3, &depth, &flag);
+            values[12 + (ring / 2) * 2 + seg / 3] = RotAverage4(&g_ScratchPadVectors[0], &g_ScratchPadVectors[1], &g_ScratchPadVectors[2], &g_ScratchPadVectors[3], (long*)&prim->x0, (long*)&prim->x1,
+                                                                (long*)&prim->x2, (long*)&prim->x3, &depth, &flag);
 
             setRGB0(prim, 1, 1, 0x80);
             if (TASK(PartyMember)->header.step >= 5) {
                 setRGB0(prim, TASK(PartyMember)->timer + 1, 1, 0x80 - TASK(PartyMember)->timer);
             }
+            azimuth += 3;
+            azimuth_next += 3;
             g_GfxPrimCursor += sizeof(POLY_F4);
         }
     }
