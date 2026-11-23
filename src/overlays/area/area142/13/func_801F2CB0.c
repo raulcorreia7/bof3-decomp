@@ -3,19 +3,13 @@
 #ifdef NON_MATCHING
 /* The area's spiral backdrop: sixteen wedge-and-band steps turn with the actor timer, behind the scene. */
 NON_MATCHING void func_801F2CB0(s32 timer) {
-    POLY_G3* wedge;
-    POLY_G4* band;
-    POLY_G4* outer;
+    POLY_G3* prim;
     s32      mode;
     s32      i;
     s32      phase;
     s32      angle;
-    s32      next;
-    s32      rim;
-    s32      far;
-    s32      x1, y1, x2, y2, x3, y3, x4, y4, x5, y5, x6, y6;
     s32      shade;
-    s32      blue_a, blue_b, red_a, red_b;
+    s32      color;
 
     if ((g_AreaDrawFlags & AREA_DRAW_CELL_LAYERS) == 0) {
         return;
@@ -26,51 +20,71 @@ NON_MATCHING void func_801F2CB0(s32 timer) {
 
     phase = timer << 4;
     for (i = 0; i < 16; i++) {
-        wedge = (POLY_G3*)g_GfxPrimCursor;
-        band  = (POLY_G4*)((u8*)wedge + sizeof(POLY_G3));
-        outer = (POLY_G4*)((u8*)band + sizeof(POLY_G4));
-        SetPolyG3(wedge);
-        SetPolyG4(band);
-        SetPolyG4(outer);
+        prim = (POLY_G3*)g_GfxPrimCursor;
+        SetPolyG3(prim);
+        SetPolyG4((POLY_G4*)(prim + 1));
+        SetPolyG4((POLY_G4*)(prim + 1) + 1);
 
-        /* The wedge spans the screen centre and the inner rim; the two bands taper out from it. */
-        angle = i << 8;
-        next  = (i + 1) << 8;
-        rim   = (i + 2) << 8;
-        far   = (i + 3) << 8;
-        x1    = 160 + (rcos(angle) >> 4) / 3;
-        y1    = 120 + (rsin(angle) >> 5) / 3;
-        x2    = 160 + (rcos(next) >> 4) / 3;
-        y2    = 120 + (rsin(next) >> 5) / 3;
-        x3    = 160 + (rcos(next) >> 3) / 3;
-        y3    = 120 + (rsin(next) >> 4) / 3;
-        x4    = 160 + (rcos(rim) >> 3) / 3;
-        y4    = 120 + (rsin(rim) >> 4) / 3;
-        x5    = 160 + (rcos(rim) >> 2) / 3;
-        y5    = 120 + (rsin(rim) >> 3) / 3;
-        x6    = 160 + (rcos(far) >> 2) / 3;
-        y6    = 120 + (rsin(far) >> 3) / 3;
-        setXY3(wedge, 160, 120, x1, y1, x2, y2);
-        setXY4(band, x1, y1, x2, y2, x3, y3, x4, y4);
-        setXY4(outer, x3, y3, x4, y4, x5, y5, x6, y6);
+        angle    = i << 8;
+        prim->x0 = 160;
+        prim->y0 = 120;
+        /* Each rim point is shared: the wedge's corner is the band's, the band's is the outer's. */
+        prim->x1 = ((POLY_G4*)(prim + 1))->x0 = 160 + (rcos(angle) >> 4) / 3;
+        prim->y1 = ((POLY_G4*)(prim + 1))->y0 = 120 + (rsin(angle) >> 5) / 3;
+        prim->x2 = ((POLY_G4*)(prim + 1))->x1 = 160 + (rcos((i + 1) << 8) >> 4) / 3;
+        prim->y2 = ((POLY_G4*)(prim + 1))->y1 = 120 + (rsin((i + 1) << 8) >> 5) / 3;
+        ((POLY_G4*)(prim + 1))->x2 = ((POLY_G4*)(prim + 1) + 1)->x0 = 160 + (rcos((i + 1) << 8) >> 3) / 3;
+        ((POLY_G4*)(prim + 1))->y2 = ((POLY_G4*)(prim + 1) + 1)->y0 = 120 + (rsin((i + 1) << 8) >> 4) / 3;
+        ((POLY_G4*)(prim + 1))->x3 = ((POLY_G4*)(prim + 1) + 1)->x1 = 160 + (rcos((i + 2) << 8) >> 3) / 3;
+        ((POLY_G4*)(prim + 1))->y3 = ((POLY_G4*)(prim + 1) + 1)->y1 = 120 + (rsin((i + 2) << 8) >> 4) / 3;
+        ((POLY_G4*)(prim + 1) + 1)->x2                              = 160 + (rcos((i + 2) << 8) >> 2) / 3;
+        ((POLY_G4*)(prim + 1) + 1)->y2                              = 120 + (rsin((i + 2) << 8) >> 3) / 3;
+        ((POLY_G4*)(prim + 1) + 1)->x3                              = 160 + (rcos((i + 3) << 8) >> 2) / 3;
+        ((POLY_G4*)(prim + 1) + 1)->y3                              = 120 + (rsin((i + 3) << 8) >> 3) / 3;
 
-        /* The rim shade follows the timer; a blue wave runs with it and a red one half a turn against it. */
-        shade  = abs(0x80 - timer) >> 1;
-        blue_a = ((rcos(angle + phase) >> 6) + 0x80) >> 1;
-        blue_b = ((rcos(next + phase) >> 6) + 0x80) >> 1;
-        red_a  = ((rcos(angle - phase + ANGLE_180) >> 6) + 0x80) >> 1;
-        red_b  = ((rcos(next - phase + ANGLE_180) >> 6) + 0x80) >> 1;
-        setRGB0(wedge, shade, shade, shade);
-        setRGB1(wedge, red_a, 0, blue_a);
-        setRGB2(wedge, red_b, 0, blue_b);
-        setRGB0(band, red_a, 0, blue_a);
-        setRGB1(band, red_b, 0, blue_b);
-        setRGB2(band, red_a, 0, blue_a);
-        setRGB3(band, red_b, 0, blue_b);
-        setRGB0(outer, red_a, 0, blue_a);
-        setRGB1(outer, red_b, 0, blue_b);
-        setRGB2(outer, shade, shade, shade);
-        setRGB3(outer, shade, shade, shade);
+        /* A blue wave turns with the timer, a red one half a turn against it; the rim colours go blue first. */
+        shade = 0x80 - timer;
+        if (shade < 0) {
+            shade = -shade;
+        }
+        shade                          = (u32)shade >> 1;
+        prim->b0                       = shade;
+        prim->g0                       = shade;
+        prim->r0                       = shade;
+        ((POLY_G4*)(prim + 1) + 1)->b3 = shade;
+        ((POLY_G4*)(prim + 1) + 1)->g3 = shade;
+        ((POLY_G4*)(prim + 1) + 1)->r3 = shade;
+        ((POLY_G4*)(prim + 1) + 1)->b2 = shade;
+        ((POLY_G4*)(prim + 1) + 1)->g2 = shade;
+        ((POLY_G4*)(prim + 1) + 1)->r2 = shade;
+        color                          = (u32)((rcos(angle + phase) >> 6) + GFX_COLOR_NEUTRAL) >> 1;
+        ((POLY_G4*)(prim + 1) + 1)->b0 = color;
+        ((POLY_G4*)(prim + 1))->b2     = color;
+        ((POLY_G4*)(prim + 1))->b0     = color;
+        prim->b1                       = color;
+        color                          = (u32)((rcos(((i + 1) << 8) + phase) >> 6) + GFX_COLOR_NEUTRAL) >> 1;
+        ((POLY_G4*)(prim + 1) + 1)->b1 = color;
+        ((POLY_G4*)(prim + 1))->b3     = color;
+        ((POLY_G4*)(prim + 1))->b1     = color;
+        prim->b2                       = color;
+        color                          = (u32)((rcos(angle - phase + ANGLE_180) >> 6) + GFX_COLOR_NEUTRAL) >> 1;
+        ((POLY_G4*)(prim + 1) + 1)->r0 = color;
+        ((POLY_G4*)(prim + 1))->r2     = color;
+        ((POLY_G4*)(prim + 1))->r0     = color;
+        prim->r1                       = color;
+        color                          = (u32)((rcos(((i + 1) << 8) - phase + ANGLE_180) >> 6) + GFX_COLOR_NEUTRAL) >> 1;
+        ((POLY_G4*)(prim + 1) + 1)->r1 = color;
+        ((POLY_G4*)(prim + 1))->r3     = color;
+        ((POLY_G4*)(prim + 1))->r1     = color;
+        prim->r2                       = color;
+        prim->g2                       = 0;
+        prim->g1                       = 0;
+        ((POLY_G4*)(prim + 1))->g1     = 0;
+        ((POLY_G4*)(prim + 1))->g0     = 0;
+        ((POLY_G4*)(prim + 1))->g3     = 0;
+        ((POLY_G4*)(prim + 1))->g2     = 0;
+        ((POLY_G4*)(prim + 1) + 1)->g1 = 0;
+        ((POLY_G4*)(prim + 1) + 1)->g0 = 0;
 
         GFX_AddPrim(GFX_LAYER_BACKDROP, sizeof(POLY_G3));
         GFX_AddPrim(GFX_LAYER_BACKDROP, sizeof(POLY_G4));
