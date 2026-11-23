@@ -5,7 +5,7 @@ MATCH void func_801ACA14(void) {
     Actor* tint;
     Actor* work;
 
-    g_CurrentActor->unk_93 = GFX_PaletteAllocFade(TASK_BYTES, 0U, 0U, 0U, 1);
+    g_CurrentActor->unk_93 = GFX_PaletteAllocFade(TASK(Actor), 0U, 0U, 0U, 1);
     flags_set              = TASK(Actor);
     flags_set->header.flags |= 0x20;
     tint                          = TASK(Actor);
