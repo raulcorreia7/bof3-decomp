@@ -1,0 +1,1 @@
+{"function": "emi/world02/area111/13@0x801F3BC0", "tried": "narrowed value to s8 and reloaded the direction inside the walk loop; MATCH at 0x17C with the C body", "first_diff": "none; the image check passes with the C body", "score": "candidate 0x17C = retail 0x17C (MATCH)"}

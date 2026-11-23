@@ -1,18 +1,17 @@
 #include "area111_13.h"
 
-#ifdef NON_MATCHING
-NON_MATCHING void func_801F3BC0(void) {
+MATCH void func_801F3BC0(void) {
     s8  x;
     s8  y;
     s8  offset;
     s32 facing;
-    u8  value;
+    s8  value;
 
     offset = 0;
     x      = (u32)(TASK(Actor)->pos.x.part.integer - 11) >> 1;
     y      = (u32)(TASK(Actor)->pos.y.part.integer - 177) >> 1;
-    facing = (TASK(Actor)->direction & 7) * 2;
     for (;;) {
+        facing = (TASK(Actor)->direction & 7) * 2;
         if ((u8)(x += D_80181B00[facing]) >= 7) {
             goto done;
         }
@@ -39,6 +38,3 @@ done:
         COORD_INT(TASK(Actor)->pos.z) = -0x500;
     }
 }
-#else
-INCLUDE_ASM(func_801F3BC0);
-#endif
