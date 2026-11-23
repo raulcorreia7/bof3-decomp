@@ -11,7 +11,7 @@ MATCH u8 Camera_StepX(s16 target, s8 step) {
     s32  coord;
 
     if (step != 0) {
-        angle  = &g_AreaCameraAngle.vx;
+        angle  = &g_AreaCamera.angle.vx;
         value  = *angle + step;
         *angle = value;
         if (step > 0) {
@@ -24,8 +24,8 @@ MATCH u8 Camera_StepX(s16 target, s8 step) {
             }
         }
     }
-    g_AreaCameraAngle.vx = target;
-    coord                = D_801481E0 + 682;
-    D_801481D8.vx        = target + coord;
+    g_AreaCamera.angle.vx = target;
+    coord                 = D_801481E0 + 682;
+    D_801481D8.vx         = target + coord;
     return 0;
 }

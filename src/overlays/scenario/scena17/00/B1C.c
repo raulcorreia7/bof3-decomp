@@ -682,7 +682,7 @@ NON_MATCHING void func_801F90BC(s16 x, s16 y, u32 clut, u32 uv) {
 
     prim = (SPRT_16*)g_GfxPrimCursor;
     SetSprt16(prim);
-    setRGB0(prim, 0x80, 0x80, 0x80);
+    PSX_SET_NEUTRAL_RGB(prim);
     setXY0(prim, x, y);
     prim->clut = (clut & 0x3F) | 0x7B80;
     setUV0(prim, (uv & 0xF) << 4, uv & 0xF0);

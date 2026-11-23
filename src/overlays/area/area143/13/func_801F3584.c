@@ -1,9 +1,8 @@
 #include "area143_13.h"
 
-#ifdef NON_MATCHING
 /* Draws the light beam's ring band: thirty-two textured quads between the rim at radius height and
  * the rim at radius y. */
-NON_MATCHING void func_801F3584(s32 height, s32 y, s32 flag) {
+MATCH void func_801F3584(s32 height, s32 y, s32 flag) {
     POLY_FT4* prim;
     s32       i;
     s32       j;
@@ -22,7 +21,8 @@ NON_MATCHING void func_801F3584(s32 height, s32 y, s32 flag) {
 
         /* The rim at height. */
         for (j = 0; j < 2; j++) {
-            angle                     = (i + j) << 7;
+            angle = i + j;
+            angle <<= 7;
             g_ScratchPadVectors[j].vx = g_ScratchPad.unk_34[0];
             g_ScratchPadVectors[j].vy = g_ScratchPad.unk_34[1] - ((rsin(angle) * height) >> 13);
             g_ScratchPadVectors[j].vz = g_ScratchPad.unk_38 + ((rcos(angle) * height) >> 13);
@@ -30,7 +30,8 @@ NON_MATCHING void func_801F3584(s32 height, s32 y, s32 flag) {
 
         /* The rim at y. */
         for (j = 0; j < 2; j++) {
-            angle                         = (i + j) << 7;
+            angle = i + j;
+            angle <<= 7;
             g_ScratchPadVectors[j + 2].vx = g_ScratchPad.unk_34[0];
             g_ScratchPadVectors[j + 2].vy = g_ScratchPad.unk_34[1] - ((rsin(angle) * y) >> 13);
             g_ScratchPadVectors[j + 2].vz = g_ScratchPad.unk_38 + ((rcos(angle) * y) >> 13);
@@ -40,9 +41,10 @@ NON_MATCHING void func_801F3584(s32 height, s32 y, s32 flag) {
                       &otz);
 
         SetSemiTrans(prim, 0);
-        setRGB0(prim, 0x50, 0x50, 0x50);
-        prim->clut  = getClut(0, 485);
-        prim->tpage = getTPage(TPAGE_DEPTH_8BIT, TPAGE_ABR_HALF, (flag << 7) + 0x140, 256);
+        /* The chained store writes b0 first, as retail does. */
+        prim->r0 = prim->g0 = prim->b0 = 0x50;
+        prim->clut                     = getClut(0, 485);
+        prim->tpage                    = getTPage(TPAGE_DEPTH_8BIT, TPAGE_ABR_HALF, (flag << 7) + 0x140, 256);
         setUV4(prim, D_801F4320[flag][0] + ((rsin(i << 7) * height) >> 16), D_801F4320[flag][1] + ((rcos(i << 7) * height) >> 16), D_801F4320[flag][0] + ((rsin((i + 1) << 7) * height) >> 16),
                D_801F4320[flag][1] + ((rcos((i + 1) << 7) * height) >> 16), D_801F4320[flag][0] + ((rsin(i << 7) * y) >> 16), D_801F4320[flag][1] + ((rcos(i << 7) * y) >> 16),
                D_801F4320[flag][0] + ((rsin((i + 1) << 7) * y) >> 16), D_801F4320[flag][1] + ((rcos((i + 1) << 7) * y) >> 16));
@@ -50,6 +52,3 @@ NON_MATCHING void func_801F3584(s32 height, s32 y, s32 flag) {
         Area_CellAddPrim(TASK(Actor)->pos.x.fixed, TASK(Actor)->pos.y.fixed, 0, sizeof(POLY_FT4));
     }
 }
-#else
-INCLUDE_ASM(func_801F3584);
-#endif

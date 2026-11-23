@@ -6,8 +6,8 @@
 MATCH void func_801DC74C(void) {
     if (WINDOW_EFFECT_IDLE()) {
         SYS_ThreadWait(1);
-        g_AreaScrollTargetX = TO_COORD(15);
-        g_AreaScrollTargetY = TO_COORD(60);
+        g_AreaCamera.scroll_x.fixed = TO_COORD(15);
+        g_AreaCamera.scroll_y.fixed = TO_COORD(60);
         Area_InitMapRenderer();
         func_801E0A30();
         UI_ModeSet(3);

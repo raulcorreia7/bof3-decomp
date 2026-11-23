@@ -1,7 +1,6 @@
 #include "area044_13.h"
 
-#ifdef NON_MATCHING
-NON_MATCHING void func_801F2DF4(void) {
+MATCH void func_801F2DF4(void) {
     u8  state;
     u8  variant;
     u8  i;
@@ -54,31 +53,37 @@ NON_MATCHING void func_801F2DF4(void) {
         } while (i < 2);
     }
     if (variant == 0) {
+        s32 x0;
+        s32 column0;
+
         i = 0;
         do {
-            x      = i;
-            column = x + 0x3E;
-            Area_CellSetCode(column, 0xC, 0);
-            Area_CellSetCode(column, 0xD, 0);
-            Area_CellSetCode(column, 0x8, 0x10);
-            Area_CellSetCode(column, 0x9, 0x10);
-            x += 0x3A;
-            Area_CellSetCode(x, 0xC, 0x10);
-            Area_CellSetCode(x, 0xD, 0x10);
+            x0      = i;
+            column0 = x0 + 0x3E;
+            Area_CellSetCode(column0, 0xC, 0);
+            Area_CellSetCode(column0, 0xD, 0);
+            Area_CellSetCode(column0, 0x8, 0x10);
+            Area_CellSetCode(column0, 0x9, 0x10);
+            x0 += 0x3A;
+            Area_CellSetCode(x0, 0xC, 0x10);
+            Area_CellSetCode(x0, 0xD, 0x10);
             i++;
         } while (i < 2);
     } else if (variant == 1) {
+        s32 x1;
+        s32 column1;
+
         i = 0;
         do {
-            x      = i;
-            column = x + 0x3E;
-            Area_CellSetCode(column, 0x8, 0);
-            Area_CellSetCode(column, 0x9, 0);
-            Area_CellSetCode(column, 0xC, 0x10);
-            Area_CellSetCode(column, 0xD, 0x10);
-            x += 0x3A;
-            Area_CellSetCode(x, 0xC, 0x10);
-            Area_CellSetCode(x, 0xD, 0x10);
+            x1      = i;
+            column1 = x1 + 0x3E;
+            Area_CellSetCode(column1, 0x8, 0);
+            Area_CellSetCode(column1, 0x9, 0);
+            Area_CellSetCode(column1, 0xC, 0x10);
+            Area_CellSetCode(column1, 0xD, 0x10);
+            x1 += 0x3A;
+            Area_CellSetCode(x1, 0xC, 0x10);
+            Area_CellSetCode(x1, 0xD, 0x10);
             i++;
         } while (i < 2);
     } else {
@@ -97,6 +102,3 @@ NON_MATCHING void func_801F2DF4(void) {
         } while (i < 2);
     }
 }
-#else
-INCLUDE_ASM(func_801F2DF4);
-#endif
