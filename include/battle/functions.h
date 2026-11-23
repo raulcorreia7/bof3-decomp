@@ -28,6 +28,7 @@ void        Battle_ApplyFormationStats(void);
 /* func_800AAC88 */
 void        Battle_QueueAction(s16 amount, u8 battler_index);
 void        func_800AAEBC(s16 target_index, u8 battler_index);
+void        func_800AB0B8(s32 battler);
 s32         func_800AC704(s32 entry_id);
 /* func_800AC870 */
 void        Battle_CopyActorEntry(s32 entry_id, PartyMember* source_record, s32 mode);
