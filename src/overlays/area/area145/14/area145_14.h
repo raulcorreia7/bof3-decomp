@@ -64,8 +64,8 @@ typedef struct {
 
 extern Area145Step D_801F5CEC[];
 extern Area145Step D_801F5CFC[];
-extern u8          D_801F5D0C[];
-extern u8          D_801F5D1C[];
+extern Area145Step D_801F5D0C[];
+extern Area145Step D_801F5D1C[];
 
 u8 func_801F4DA4(u32 frame);
 u8 func_801F4EDC(s32 t, u32 stage);
