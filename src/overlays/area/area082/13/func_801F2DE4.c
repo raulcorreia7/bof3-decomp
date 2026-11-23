@@ -15,9 +15,9 @@ MATCH void func_801F2DE4(void) {
         Camera_ProjectPoint(pos, from);
         pos[1] += 0x10000;
         Camera_ProjectPoint(pos, to);
-        TASK(Actor)->unk_6C = ratan2(to[0].vy - from[0].vy, to[0].vx - from[0].vx) + 0x400;
-        TASK(Actor)->unk_2C = 30;
-        TASK(Actor)->vy     = 0;
+        TASK(Actor)->angle_z = ratan2(to[0].vy - from[0].vy, to[0].vx - from[0].vx) + 0x400;
+        TASK(Actor)->unk_2C  = 30;
+        TASK(Actor)->vy      = 0;
         TASK(Actor)->header.mode += 1;
     }
 }

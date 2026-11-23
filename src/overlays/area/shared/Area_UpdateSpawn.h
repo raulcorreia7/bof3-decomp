@@ -19,13 +19,13 @@ MATCH void Area_UpdateSpawn(void) {
         s32 z;
         u8  t;
 
-        x               = TASK(Actor)->unk_64;
-        y               = TASK(Actor)->unk_68;
+        x               = TASK(Actor)->angle_x;
+        y               = TASK(Actor)->angle_y;
         TASK(Actor)->vx = -0x1000;
         TASK(Actor)->vy = -0x400;
-        FAKE_ORDER_FENCE(); /* FAKE: the order fence keeps the unk_01/unk_6C loads below the constant stores. */
+        FAKE_ORDER_FENCE(); /* FAKE: the order fence keeps the unk_01/angle_z loads below the constant stores. */
         t                    = TASK(Actor)->header.mode;
-        z                    = TASK(Actor)->unk_6C;
+        z                    = TASK(Actor)->angle_z;
         t                    = t + 1;
         TASK(Actor)->unk_18  = x;
         TASK(Actor)->unk_1C  = y;

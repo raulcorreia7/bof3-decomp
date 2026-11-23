@@ -11,10 +11,10 @@ MATCH void SYS_LinkOt(void) {
 
     index          = 0;
     ordering_table = g_GfxOtHeads;
-    packet         = D_80145990;
+    packet         = (u8*)g_GfxLayerLinks;
     work_offset    = 0x70;
     do {
-        AddPrims(g_GfxCurrentBuffer + work_offset, (void*)((g_GfxBufferIndex << 5) + (u32)packet), *ordering_table);
+        AddPrims((u_long*)((u8*)g_GfxCurrentBuffer + work_offset), (void*)((g_GfxBufferIndex << 5) + (u32)packet), *ordering_table);
         ordering_table++;
         index++;
         packet += 4;

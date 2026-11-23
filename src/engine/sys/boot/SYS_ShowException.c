@@ -38,19 +38,19 @@ MATCH void SYS_ShowException(void) {
         y       = 60;
         x_value = 0x3C;
 
-        PutDispEnv((DISPENV*)g_GfxCurrentBuffer);
-        PutDrawEnv((DRAWENV*)(g_GfxCurrentBuffer + 0x14));
-        DrawOTag((u_long*)(g_GfxCurrentBuffer + 0x8C));
+        PutDispEnv(&g_GfxCurrentBuffer->disp);
+        PutDrawEnv(&g_GfxCurrentBuffer->draw);
+        DrawOTag(g_GfxCurrentBuffer->ot + 7);
 
         g_GfxBufferIndex   = g_GfxBufferIndex ^ 0x1;
-        g_GfxCurrentBuffer = &g_GfxBuffers[g_GfxBufferIndex * 0x90];
+        g_GfxCurrentBuffer = &g_GfxBuffers[g_GfxBufferIndex];
 
-        ClearOTagR((u_long*)(g_GfxCurrentBuffer + 0x70), 8);
+        ClearOTagR(g_GfxCurrentBuffer->ot, 8);
         SYS_PrepareFrame();
 
         for (i = 0; i < 18; i++) {
-            UI_TextDrawGlyphString(x_label, y, 0, (void*)D_8017F470[i]);
-            TEXT_Format(g_UiTextFormatBuffer, D_80149990, saved_context[i + 2]);
+            UI_TextDrawGlyphString(x_label, y, 0, (void*)g_ExceptionNames[i]);
+            TEXT_Format(g_UiTextFormatBuffer, g_ExceptionHexFormat, saved_context[i + 2]);
             UI_TextDrawGlyphString(x_value, y, 0, (void*)g_UiTextFormatBuffer);
             y += 8;
         }
@@ -60,8 +60,8 @@ MATCH void SYS_ShowException(void) {
         x_value = 0xC8;
 
         for (i = 18; i < 37; i++) {
-            UI_TextDrawGlyphString(x_label, y, 0, (void*)D_8017F470[i]);
-            TEXT_Format(g_UiTextFormatBuffer, D_80149990, saved_context[i + 2]);
+            UI_TextDrawGlyphString(x_label, y, 0, (void*)g_ExceptionNames[i]);
+            TEXT_Format(g_UiTextFormatBuffer, g_ExceptionHexFormat, saved_context[i + 2]);
             UI_TextDrawGlyphString(x_value, y, 0, (void*)g_UiTextFormatBuffer);
             y += 8;
         }
@@ -69,9 +69,9 @@ MATCH void SYS_ShowException(void) {
         UI_TextDrawGlyphString(20, 20, 0, (void*)g_ExceptionTitle);
         UI_TextDrawGlyphString(100, 20, UI_TEXT_HIGHLIGHT, *(void* const*)((const u8*)g_ExceptionCauseNames + (exception_code & CAUSE_EXCMASK)));
 
-        TEXT_Format(g_UiTextFormatBuffer, D_80149990, exception_pc);
+        TEXT_Format(g_UiTextFormatBuffer, g_ExceptionHexFormat, exception_pc);
         UI_TextDrawGlyphString(70, 36, 3, (void*)g_UiTextFormatBuffer);
-        TEXT_Format(g_UiTextFormatBuffer, D_80149990, exception_pc[0]);
+        TEXT_Format(g_UiTextFormatBuffer, g_ExceptionHexFormat, exception_pc[0]);
         UI_TextDrawGlyphString(142, 36, 4, (void*)g_UiTextFormatBuffer);
 
         DrawSync(0);

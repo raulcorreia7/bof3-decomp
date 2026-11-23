@@ -26,7 +26,7 @@ MATCH void GFX_DecodeLzss(u32* packed, RECT rect) {
 
     written = 0;
     src     = (u8*)(packed + 1);
-    dst     = (u8*)D_801459FC;
+    dst     = (u8*)g_GfxUploadCursor;
     ring    = SP_PTR(u8, 0);
     count   = rect.w * rect.h * 2;
     for (i = LZSS_RING_START - 1; i >= 0; i--) {
@@ -64,9 +64,9 @@ MATCH void GFX_DecodeLzss(u32* packed, RECT rect) {
             }
         }
     }
-    LoadImage(&rect, (u_long*)D_801459FC);
+    LoadImage(&rect, (u_long*)g_GfxUploadCursor);
     if (count & 0x3) {
         count += 4 - count % 4;
     }
-    D_801459FC += count;
+    g_GfxUploadCursor += count;
 }

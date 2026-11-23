@@ -11,20 +11,18 @@
  */
 MATCH void SYS_ThreadInit(void) {
     s32 i;
-    s32 thread_offset;
     s32 block_offset;
     u8* kernel;
 
     kernel = KERNEL_RAM(0u);
     for (i = 0; i < 4; i++) {
-        thread_offset                                               = i << 7;
+        g_SysThreads[i].state                = SYS_THREAD_EMPTY;
         /* Product-then-bias keeps the multiply on the pre-increment counter, as
          * retail does; a (i + 1) * 0xC0 spelling moves it onto the incremented
          * counter. */
-        block_offset                                                = i * 0xC0 + 0xC0;
-        FIELD(u16, g_SysThreads, thread_offset)                     = 0;
-        FIELD(s32, &D_80143B4C, thread_offset)                      = *(u32*)(kernel + 0x10) + block_offset;
-        FIELD(s32, &D_80143B50, thread_offset)                      = 0x801FF400 + (i + 1) * 0x200;
-        *(s32*)((u8*)FIELD(s32, &D_80143B4C, thread_offset) + 0x94) = 0x40000404;
+        block_offset                         = i * 0xC0 + 0xC0;
+        g_SysThreads[i].work                 = (u8*)(*(u32*)(kernel + 0x10) + block_offset);
+        g_SysThreads[i].stack                = 0x801FF400 + (i + 1) * 0x200;
+        *(s32*)(g_SysThreads[i].work + 0x94) = 0x40000404;
     }
 }

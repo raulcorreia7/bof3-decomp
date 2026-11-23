@@ -380,27 +380,18 @@ extern u8                    D_80142CE0[];
 extern u32                   g_AreaCellPackets[];
 /* SLUS-only state: overlays declare these addresses with their own views, so
  * the registry does not emit them; g_SysThreads stays in sys/sched.h. */
-extern u8                    D_80143D75;
-extern u8                    D_80143D76;
-extern u8                    D_80143D77;
 extern u_long                D_80143DB8;
-extern u8                    D_80143E05;
-extern u8                    D_80143E06;
-extern u8                    D_80143E07;
-extern u32                   D_80143E70[];
-extern s32                   D_80143E8C;
-extern u32                   D_80143EA0;
-extern u32                   D_80143EA4;
+extern struct XF_HDR         g_LogoHeader;
 extern u8                    D_80143F48[];
 extern s16                   g_ScrollHeight[]; /* low half (+2) of the big-endian 0x80143F84 scroll word */
 extern s32                   D_80144967;
 /* Retail data D_80145000-D_80146FFF (one declaration each). */
 extern s32                   D_80145030;
-extern u8                    D_80145990[];
+extern u32                   g_GfxLayerLinks[][GFX_LAYER_COUNT];
 /* D_801459D0 */
 extern u32*                  g_GfxOtHeads[GFX_LAYER_COUNT];
-extern void*                 D_801459F8;
-extern u32                   D_801459FC;
+extern void*                 g_SysSectorBuffer;
+extern u32                   g_GfxUploadCursor;
 extern u16                   D_80145A54[];
 /* Pad repeat decoder state words; shop also reads them (func_801D5D98). */
 /* Text cursor cells: the draw-text entry seeds them and the line printer
@@ -586,7 +577,7 @@ extern u16                         D_80149336;
 extern u8                          g_AreaCellPacketCount;
 /* D_80149340 */
 extern u8                          D_80149341;
-extern const char                  D_80149990[];
+extern const char                  g_ExceptionHexFormat[];
 extern const u32                   g_UiModeLocals[];
 /* D_80149A5C */
 extern const MessageStateSteps     g_UiMessageStateSteps;
@@ -616,9 +607,9 @@ extern const u32                   D_8014AAB8[4];
 extern u8                          D_8016432C;
 /* D_8017F44C */
 extern const char                  D_8017F44C[];
-extern const void* const           D_8017F470[];
+extern const void* const           g_ExceptionNames[];
 /* Retail data D_80170000-D_8017FFFF (one declaration each). */
-extern const u16                   D_8017F56C[10];
+extern const u16                   s_DefaultInputMasks[10];
 extern const Rec_8017F5B4          D_8017F5B4[27];
 /* D_8017F628 */
 extern const u16                   g_AnswerMessages[32];

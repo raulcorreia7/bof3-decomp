@@ -20,12 +20,12 @@ MATCH void GFX_FadeRunWhite(s32 delta, s32 semi_trans, s32 order) {
         level = 0;
     }
     if ((delta16) <= 0) {
-        D_80143E07 = 0;
-        D_80143E06 = 0;
-        D_80143E05 = 0;
-        D_80143D77 = 0;
-        D_80143D76 = 0;
-        D_80143D75 = 0;
+        g_GfxBuffers[1].draw.r0 = 0;
+        g_GfxBuffers[1].draw.g0 = 0;
+        g_GfxBuffers[1].draw.b0 = 0;
+        g_GfxBuffers[0].draw.r0 = 0;
+        g_GfxBuffers[0].draw.g0 = 0;
+        g_GfxBuffers[0].draw.b0 = 0;
     }
     step       = delta16;
     blend_mode = 1;
@@ -33,12 +33,12 @@ MATCH void GFX_FadeRunWhite(s32 delta, s32 semi_trans, s32 order) {
         SYS_ThreadWait(1);
     }
     if (step > 0) {
-        D_80143E07 = 0xFF;
-        D_80143E06 = 0xFF;
-        D_80143E05 = 0xFF;
-        D_80143D77 = 0xFF;
-        D_80143D76 = 0xFF;
-        D_80143D75 = 0xFF;
+        g_GfxBuffers[1].draw.r0 = 0xFF;
+        g_GfxBuffers[1].draw.g0 = 0xFF;
+        g_GfxBuffers[1].draw.b0 = 0xFF;
+        g_GfxBuffers[0].draw.r0 = 0xFF;
+        g_GfxBuffers[0].draw.g0 = 0xFF;
+        g_GfxBuffers[0].draw.b0 = 0xFF;
     }
     SYS_ThreadExit();
 }

@@ -19,7 +19,7 @@ const s8 g_SpriteCellRotations[16] = {
     0, 0, 0, 0, 1, 1, 1, 2, 3, 2, 2, 3, 0, 0, 1, 0,
 };
 
-const u16 D_8017F56C[10] = {
+const u16 s_DefaultInputMasks[10] = {
     0x0043, 0x0020, 0x0080, 0x0008, 0x0004,
     0x0100, 0x0010, 0x0043, 0x0010, 0x0000,
 };

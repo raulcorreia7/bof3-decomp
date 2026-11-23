@@ -25,12 +25,12 @@ MATCH void GFX_FadeRunBlack(s32 delta, s32 semi_trans, s32 order) {
         SYS_ThreadWait(1);
     }
     if (step > 0) {
-        D_80143E07 = 0;
-        D_80143E06 = 0;
-        D_80143E05 = 0;
-        D_80143D77 = 0;
-        D_80143D76 = 0;
-        D_80143D75 = 0;
+        g_GfxBuffers[1].draw.r0 = 0;
+        g_GfxBuffers[1].draw.g0 = 0;
+        g_GfxBuffers[1].draw.b0 = 0;
+        g_GfxBuffers[0].draw.r0 = 0;
+        g_GfxBuffers[0].draw.g0 = 0;
+        g_GfxBuffers[0].draw.b0 = 0;
     }
     SYS_ThreadExit();
 }

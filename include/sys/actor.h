@@ -228,9 +228,9 @@ typedef struct Actor {
                                 *        range_54 (Area_DrawObjectSprite) */
     ActorTint       tint;              /* 0x5C */
     s32             unk_60;            /* 0x60 */
-    s32             unk_64;            /* 0x64 */
-    s32             unk_68;            /* 0x68 */
-    s32             unk_6C;            /* 0x6C */
+    s32             angle_x;           /* 0x64 */
+    s32             angle_y;           /* 0x68 */
+    s32             angle_z;           /* 0x6C */
     ActorVoiceFlags voice_flags;       /* 0x70 - see ActorVoiceFlags */
     u8              interaction_flags; /* 0x74 - ActorInteractionFlags */
     u8              timer_75;          /* 0x75 */
@@ -268,6 +268,9 @@ ASSERT_OFFSET(Actor, gravity, 0x20);
 ASSERT_OFFSET(Actor, active_flags, 0x24);
 ASSERT_OFFSET(Actor, pos, 0x34);
 ASSERT_OFFSET(Actor, range_54, 0x54);
+ASSERT_OFFSET(Actor, angle_x, 0x64);
+ASSERT_OFFSET(Actor, angle_y, 0x68);
+ASSERT_OFFSET(Actor, angle_z, 0x6C);
 ASSERT_OFFSET(Actor, tint, 0x5C);
 ASSERT_OFFSET(Actor, voice_flags, 0x70);
 ASSERT_OFFSET(Actor, interaction_flags, 0x74);

@@ -5,11 +5,11 @@ MATCH void func_801F2EC8(void) {
 
     work->vy += 8192;
     work->pos.y.fixed += work->vy;
-    work->unk_64 -= 6;
-    if (work->unk_64 < 8) {
-        work->unk_64 = 8;
+    work->angle_x -= 6;
+    if (work->angle_x < 8) {
+        work->angle_x = 8;
     }
-    TASK(Actor)->unk_68 += 6;
+    TASK(Actor)->angle_y += 6;
     if (--TASK(Actor)->unk_2C == 0) {
         Actor_Clear();
     }

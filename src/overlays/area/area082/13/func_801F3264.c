@@ -10,8 +10,8 @@ MATCH void func_801F3264(void) {
     pos.x = TASK(Actor)->pos.x.fixed;
     pos.y = TASK(Actor)->pos.y.fixed;
     pos.z = TASK(Actor)->pos.z.fixed;
-    x     = TASK(Actor)->unk_64;
-    y     = TASK(Actor)->unk_68;
-    z     = TASK(Actor)->unk_6C;
+    x     = TASK(Actor)->angle_x;
+    y     = TASK(Actor)->angle_y;
+    z     = TASK(Actor)->angle_z;
     func_801F2F50(&pos, x, y, z, 0xC0, 0);
 }

@@ -13,7 +13,7 @@ MATCH u8 func_801F4EDC(s32 t, u32 stage) {
     s32          x;
     s32          y;
 
-    direction = (g_PartyActors[(u8)stage].unk_6C >> 9) & 3;
+    direction = (g_PartyActors[(u8)stage].angle_z >> 9) & 3;
     if ((u8)stage != 1) {
         step = &D_801F5CFC[direction];
     } else {

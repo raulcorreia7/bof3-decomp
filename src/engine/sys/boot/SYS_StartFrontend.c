@@ -29,7 +29,7 @@ MATCH void SYS_StartFrontend(void) {
     }
     i                         = 0;
     dst                       = g_InputMasks;
-    src                       = D_8017F56C;
+    src                       = s_DefaultInputMasks;
     g_EmiLoadedCharacterIndex = 0xFF;
     g_Game.flags              = 0;
     g_Game.walk_flags         = 0;
@@ -49,16 +49,18 @@ MATCH void SYS_StartFrontend(void) {
     UI_PanelResetTasks();
     GFX_PaletteResetFades();
     GFX_PaletteFreeAllSlots();
-    g_AreaDrawFlags  = AREA_DRAW_ALL_FLAGS;
-    g_AreaDrawMode   = GFX_LAYER_FIELD_SCENE;
-    g_Scripts        = AREA_SCRIPT_TABLE;
-    g_SceneActorDefs = MEM_PTR(u8, (SCENE_TABLE_BASE + 4));
-    D_80143E07       = 0;
-    D_80143E06       = 0;
-    D_80143E05       = 0;
-    D_80143D77       = 0;
-    D_80143D76       = 0;
-    D_80143D75       = 0;
+    g_AreaDrawFlags         = AREA_DRAW_ALL_FLAGS;
+    g_AreaDrawMode          = GFX_LAYER_FIELD_SCENE;
+    g_Scripts               = AREA_SCRIPT_TABLE;
+    g_SceneActorDefs        = MEM_PTR(u8, (SCENE_TABLE_BASE + 4));
+    /* The frame that shows first is cleared first, then the other; each
+     * triple keeps the retail field order. */
+    g_GfxBuffers[1].draw.b0 = 0;
+    g_GfxBuffers[1].draw.g0 = 0;
+    g_GfxBuffers[1].draw.r0 = 0;
+    g_GfxBuffers[0].draw.b0 = 0;
+    g_GfxBuffers[0].draw.g0 = 0;
+    g_GfxBuffers[0].draw.r0 = 0;
     GFX_PaletteReset();
     g_GfxPalettePending += 1;
     SYS_ThreadRegister(1, SYS_EnterFrontend);

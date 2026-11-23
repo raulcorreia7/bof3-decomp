@@ -61,7 +61,7 @@ MATCH s8 func_8015AD00(PanelSortItem* sort_list) {
         ScaleMatrix(&m, &normal);
     }
     light = m;
-    func_8015B2AC(D_801481B8.m[0], &TASK(Actor)->unk_64);
+    func_8015B2AC(D_801481B8.m[0], &TASK(Actor)->angle_x);
     Camera_ApplyMatrix(&light);
     SetLightMatrix(&D_801481B8);
 

@@ -11,9 +11,9 @@ MATCH void func_801D0C48(void) {
     Actor* work;
 
     work           = TASK(Actor);
-    work->unk_64   = g_Game.members[0].pos.x.fixed;
-    work->unk_68   = g_Game.members[0].pos.y.fixed;
-    work->unk_6C   = g_Game.members[0].pos.z.fixed + TO_COORD(128);
+    work->angle_x  = g_Game.members[0].pos.x.fixed;
+    work->angle_y  = g_Game.members[0].pos.y.fixed;
+    work->angle_z  = g_Game.members[0].pos.z.fixed + TO_COORD(128);
     work->timer    = 8;
     work->screen_x = 0;
     TASK(Actor)->header.mode += 1;
@@ -26,7 +26,7 @@ MATCH void func_801D0CC0(void) {
 
     screen_x              = TASK(Actor)->screen_x + 0x20;
     TASK(Actor)->screen_x = screen_x;
-    GFX_DrawColorFan(&TASK(Actor)->unk_64, (s16)screen_x, 6);
+    GFX_DrawColorFan(&TASK(Actor)->angle_x, (s16)screen_x, 6);
     mode               = TASK(Actor)->timer - 1;
     TASK(Actor)->timer = mode;
     if (!(mode & BYTE_MASK)) {
@@ -38,7 +38,7 @@ MATCH void func_801D0CC0(void) {
 MATCH void func_801D0D54(void) {
     u8 mode;
 
-    GFX_DrawColorFan(&TASK(Actor)->unk_64, (s16)TASK(Actor)->screen_x, 6);
+    GFX_DrawColorFan(&TASK(Actor)->angle_x, (s16)TASK(Actor)->screen_x, 6);
     mode               = TASK(Actor)->timer - 1;
     TASK(Actor)->timer = mode;
     if (!(mode & BYTE_MASK)) {
@@ -52,9 +52,9 @@ MATCH void func_801D0DD8(void) {
     u8          timer;
     u8          i;
 
-    TASK(Actor)->unk_6C += TO_COORD(12);
+    TASK(Actor)->angle_z += TO_COORD(12);
     TASK(Actor)->screen_x -= 6;
-    GFX_DrawColorFan(&TASK(Actor)->unk_64, (s16)TASK(Actor)->screen_x, 6);
+    GFX_DrawColorFan(&TASK(Actor)->angle_x, (s16)TASK(Actor)->screen_x, 6);
     timer              = TASK(Actor)->timer - 1;
     TASK(Actor)->timer = timer;
     if ((timer & BYTE_MASK) == 0) {
@@ -62,9 +62,9 @@ MATCH void func_801D0DD8(void) {
         TASK(Actor)->unk_06 = 0;
         TASK(Actor)->header.mode++;
         func_801D199C();
-        TASK(Actor)->pos.x.fixed = TASK(Actor)->unk_64;
-        TASK(Actor)->pos.y.fixed = TASK(Actor)->unk_68;
-        TASK(Actor)->pos.z.fixed = TASK(Actor)->unk_6C;
+        TASK(Actor)->pos.x.fixed = TASK(Actor)->angle_x;
+        TASK(Actor)->pos.y.fixed = TASK(Actor)->angle_y;
+        TASK(Actor)->pos.z.fixed = TASK(Actor)->angle_z;
         spin                     = g_WorldSpins;
         i                        = 0;
         do {
@@ -93,17 +93,17 @@ MATCH void func_801D0F10(void) {
     func_801D2088();
     func_801D1A60();
     if (g_ScriptVars[0] == 0x14) {
-        origin_x = TASK(Actor)->unk_64;
-        origin_y = TASK(Actor)->unk_68;
-        origin_z = TASK(Actor)->unk_6C;
+        origin_x = TASK(Actor)->angle_x;
+        origin_y = TASK(Actor)->angle_y;
+        origin_z = TASK(Actor)->angle_z;
         mode     = TASK(Actor)->header.mode + 1;
         setVector(TASK(Actor), 0, 0, 0);
         TASK(Actor)->unk_18      = origin_x;
         TASK(Actor)->unk_1C      = origin_y;
         TASK(Actor)->gravity     = origin_z;
-        TASK(Actor)->unk_64      = (0x2F8000 - TASK(Actor)->unk_64) >> 7;
-        TASK(Actor)->unk_68      = (0x278000 - TASK(Actor)->unk_68) >> 7;
-        TASK(Actor)->unk_6C      = (TO_COORD(3840) - TASK(Actor)->unk_6C) >> 7;
+        TASK(Actor)->angle_x     = (0x2F8000 - TASK(Actor)->angle_x) >> 7;
+        TASK(Actor)->angle_y     = (0x278000 - TASK(Actor)->angle_y) >> 7;
+        TASK(Actor)->angle_z     = (TO_COORD(3840) - TASK(Actor)->angle_z) >> 7;
         TASK(Actor)->header.mode = mode;
     }
 }
@@ -133,9 +133,9 @@ MATCH void func_801D106C(void) {
     func_801D1678(&TASK(Actor)->unk_18, &TASK(Actor)->pos.x, 0x40);
 
     work = TASK(Actor);
-    work->vx += work->unk_64;
-    work->vy += work->unk_68;
-    work->vz += work->unk_6C;
+    work->vx += work->angle_x;
+    work->vy += work->angle_y;
+    work->vz += work->angle_z;
     work->unk_18 += work->vx;
     work->unk_1C += work->vy;
     work->gravity += work->vz;
@@ -281,7 +281,7 @@ MATCH void func_801D1678(s32* from, s32* to, u8 intensity) {
     setRGB3(prim, 0, 0, 0);
     GFX_AddPrim(GFX_LAYER_EFFECT_FRONT, sizeof(POLY_G4));
 
-    setVector(&step, TASK(Actor)->unk_64, TASK(Actor)->unk_68, TASK(Actor)->unk_6C);
+    setVector(&step, TASK(Actor)->angle_x, TASK(Actor)->angle_y, TASK(Actor)->angle_z);
     phase = g_FrameCount & 0xF;
     setVector(&current, to[0] + step.vx * phase, to[1] + step.vy * phase, to[2] + step.vz * phase);
     while (from[0] < current.vx) {
@@ -292,9 +292,9 @@ MATCH void func_801D1678(s32* from, s32* to, u8 intensity) {
         setXY0(segment, projected.vx, projected.vy);
         setRGB0(segment, intensity, intensity, 0);
         GFX_AddPrim(GFX_LAYER_EFFECT_FRONT, 12);
-        current.vx += TASK(Actor)->unk_64 << 4;
-        current.vy += TASK(Actor)->unk_68 << 4;
-        current.vz += TASK(Actor)->unk_6C << 4;
+        current.vx += TASK(Actor)->angle_x << 4;
+        current.vy += TASK(Actor)->angle_y << 4;
+        current.vz += TASK(Actor)->angle_z << 4;
     }
 }
 

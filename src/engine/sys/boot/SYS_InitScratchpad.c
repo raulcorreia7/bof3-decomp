@@ -2,7 +2,7 @@
 
 /* arms the scratch task for a panel record: marks it in use and ready with its reset flag set and
  * full scale, links the panel as its range record, takes its step list from the panel's +4 word,
- * clears two angle words and seeds the third from D_801C8424 by the facing direction.
+ * clears two angle words and seeds the third from g_ActorFacingAngles by the facing direction.
  */
 /* func_8015AC8C */
 MATCH void SYS_InitScratchpad(u8* panel) {
@@ -19,8 +19,8 @@ MATCH void SYS_InitScratchpad(u8* panel) {
     value                     = FIELD(s32, panel, 0x4u);
     index                     = work->direction;
     work->range_54.table      = panel;
-    work->unk_68              = 0;
-    work->unk_64              = 0;
+    work->angle_y             = 0;
+    work->angle_x             = 0;
     work->script              = (u8*)value;
-    work->unk_6C              = D_801C8424[index];
+    work->angle_z             = g_ActorFacingAngles[index];
 }

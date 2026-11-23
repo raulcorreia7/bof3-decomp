@@ -152,7 +152,7 @@ MATCH void Area_DrawObjectSprite(void) {
     if (TASK(Actor)->active_flags & 0x8) {
         RECT* rect = (RECT*)g_GfxPrimCursor;
         g_GfxPrimCursor += sizeof(RECT);
-        *rect = *(RECT*)(g_GfxCurrentBuffer + 0x14);
+        *rect = g_GfxCurrentBuffer->draw.clip;
         SetDrawArea((DR_AREA*)g_GfxPrimCursor, rect);
         GFX_AddPrim(TASK(Actor)->draw_layer, sizeof(DR_AREA));
     }

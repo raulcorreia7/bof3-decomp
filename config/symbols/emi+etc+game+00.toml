@@ -321,8 +321,8 @@ D_801C8384 = { addr = 0x801C8384, size = 0x38, source = "The 28 entity seed valu
 D_801C83BC = { addr = 0x801C83BC, size = 0x1C, source = "The seven actor step handlers func_801A0AE4 and the rows it builds run by the actor's header.step; the first four share func_801A225C." }
 D_801C83D8 = { addr = 0x801C83D8, size = 0x2C, source = "The 11 object handlers func_801A06D8, func_801A2788 and the slus actor code run by g_Task->header.mode." }
 s_EntityRouteIndices = { addr = 0x801C8404, size = 0x20, source = "The four route indices of each direction that func_801A27C4 walks." }
-D_801C8424 = { addr = 0x801C8424, size = 0x10, source = "The eight facing angles func_801A3080 picks by route type: 0x600 to 0xE00 in 0x200 steps, wrapping at the fifth entry." }
-D_801C842A = { addr = 0x801C842A, size = 0x1, alias = true, source = "The second half of the facing-angle table D_801C8424 from its fourth u16, used as an array by func_801A3080." }
+g_ActorFacingAngles = { addr = 0x801C8424, size = 0x10, source = "The eight facing angles func_801A3080 picks by route type: 0x600 to 0xE00 in 0x200 steps, wrapping at the fifth entry; SYS_InitScratchpad seeds angle_z from it by direction." }
+D_801C842A = { addr = 0x801C842A, size = 0x1, alias = true, source = "The second half of the facing-angle table g_ActorFacingAngles from its fourth u16, used as an array by func_801A3080." }
 D_801C8434 = { addr = 0x801C8434, size = 0x8, source = "The two fade handlers Game_FadeStartWhite and func_801A3648 that func_801A3594 runs by g_Task->unk_04." }
 D_801C843C = { addr = 0x801C843C, size = 0x8, source = "The two fade handlers Game_FadeStartBlack and func_801A386C that func_801A37D4 runs by g_Task->unk_04." }
 s_ScriptOpcodeLengths = { addr = 0x801C8444, size = 0x10, source = "Length in bytes of each script opcode; the script walkers (func_801A4374, func_801A46E8, func_801A4798, func_801A4844, func_801A4BF8) advance the cursor by it." }

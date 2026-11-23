@@ -8,7 +8,7 @@ MATCH s32 SYS_LoadExe(const char* path) {
     const char* current_path;
     s32         sectors;
     s32         attempts;
-    s32*        exe_size;
+    u32*        exe_size;
     CdlFILE     file;
     u32*        src;
     u32*        dst;
@@ -16,14 +16,14 @@ MATCH s32 SYS_LoadExe(const char* path) {
     current_path = path;
     sectors      = 0x80;
     attempts     = 0;
-    exe_size     = (s32*)&D_80143E8C;
+    exe_size     = &g_LogoHeader.exec.t_size;
 
     for (;;) {
         if (CdSearchFile(&file, (char*)current_path) != NULL) {
             CdControl(CdlSetloc, (u_char*)&file, NULL);
-            if (SYS_ReadCd(EMI_SECTOR_SIZE, D_801459F8, sectors) == 0) {
-                Cpy16* s = (Cpy16*)D_801459F8;
-                Cpy16* d = (Cpy16*)D_80143E70;
+            if (SYS_ReadCd(EMI_SECTOR_SIZE, g_SysSectorBuffer, sectors) == 0) {
+                Cpy16* s = (Cpy16*)g_SysSectorBuffer;
+                Cpy16* d = (Cpy16*)&g_LogoHeader;
                 Cpy16* e = s + 8;
                 u32    w0;
                 u32    w1;

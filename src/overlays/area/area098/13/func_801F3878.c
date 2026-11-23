@@ -6,7 +6,7 @@ MATCH void func_801F3878(void) {
 
     scroll                = TASK(Actor)->screen_x + 0x20;
     TASK(Actor)->screen_x = scroll;
-    GFX_DrawColorFan(&TASK(Actor)->unk_64, (s16)scroll, 6);
+    GFX_DrawColorFan(&TASK(Actor)->angle_x, (s16)scroll, 6);
     ACTOR_COUNT_DOWN(TASK(Actor), remaining, timer);
     if (!(remaining & BYTE_MASK)) {
         TASK(Actor)->timer = 128;

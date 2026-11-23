@@ -3,9 +3,9 @@ MATCH void Area_UpdateTurn(void) {
     s32    heading;
 
     actor   = TASK(Actor);
-    heading = actor->unk_6C;
+    heading = actor->angle_z;
     actor->timer--;
-    actor->unk_6C = (heading + actor->vz) & 0xFFF;
+    actor->angle_z = (heading + actor->vz) & 0xFFF;
     if (TASK(Actor)->timer == 0) {
         TASK(Actor)->header.mode = 1;
         Area_EndTurn();

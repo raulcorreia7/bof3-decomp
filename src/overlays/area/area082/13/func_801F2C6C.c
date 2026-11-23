@@ -5,8 +5,8 @@ MATCH void func_801F2C6C(void) {
 
     actor              = TASK(Actor);
     actor->unk_2C      = 0x20;
-    actor->unk_64      = 0;
-    actor->unk_68      = 0;
-    actor->unk_6C      = 0;
+    actor->angle_x     = 0;
+    actor->angle_y     = 0;
+    actor->angle_z     = 0;
     actor->header.mode = actor->header.mode + 1;
 }

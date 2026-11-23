@@ -4,11 +4,11 @@
  * boot-side double buffer.
  */
 MATCH void SYS_InitDisplay(void) {
-    u8* work;
+    DRAWENV* draw;
 
-    work = g_GfxBuffers + 0x14;
-    SetDefDrawEnv((DRAWENV*)work, 0, 0, SCREEN_WIDTH, SCREEN_HEIGHT);
-    SetDefDispEnv((DISPENV*)(work - 0x14), 0, SCREEN_HEIGHT, SCREEN_WIDTH, SCREEN_HEIGHT);
-    SetDefDrawEnv((DRAWENV*)(work + 0x90), 0, SCREEN_HEIGHT, SCREEN_WIDTH, SCREEN_HEIGHT);
-    SetDefDispEnv((DISPENV*)(work + 0x7C), 0, 0, SCREEN_WIDTH, SCREEN_HEIGHT);
+    draw = &g_GfxBuffers[0].draw;
+    SetDefDrawEnv(draw, 0, 0, SCREEN_WIDTH, SCREEN_HEIGHT);
+    SetDefDispEnv(&g_GfxBuffers[0].disp, 0, SCREEN_HEIGHT, SCREEN_WIDTH, SCREEN_HEIGHT);
+    SetDefDrawEnv(&g_GfxBuffers[1].draw, 0, SCREEN_HEIGHT, SCREEN_WIDTH, SCREEN_HEIGHT);
+    SetDefDispEnv(&g_GfxBuffers[1].disp, 0, 0, SCREEN_WIDTH, SCREEN_HEIGHT);
 }

@@ -7,14 +7,12 @@ MATCH void SYS_PrepareFrame(void) {
     u8*   packet;
     u32** ordering;
     u8    buffer_index;
-    u32   packet_offset;
-    u32   table_offset;
     s32   index;
 
     index           = 0;
     ordering        = g_GfxOtHeads;
     buffer_index    = g_GfxBufferIndex;
-    packet          = D_80145990;
+    packet          = (u8*)g_GfxLayerLinks;
     g_GfxPrimCursor = (u8*)(0x80020000u + ((buffer_index * 9) << 12));
     /* The paired no-op increments keep the counter live across the store; a
      * plain while strength-reduces to a countdown and loses the retail shape. */
@@ -27,19 +25,14 @@ MATCH void SYS_PrepareFrame(void) {
         packet += 4;
     }
 
-    index         = 0;
-    buffer_index  = g_GfxBufferIndex;
-    packet        = D_80142CE0;
-    packet_offset = buffer_index << 3;
-    table_offset  = (buffer_index + 4) << 3;
+    index        = 0;
+    buffer_index = g_GfxBufferIndex;
     do {
-        *(u32*)(D_80142CC0 + table_offset) = 0;
-        *(u32*)(D_80142CC4 + table_offset) = (packet + packet_offset);
-        packet += 0x30;
-        table_offset += 0x30;
+        g_AreaCellPacketLists[index][buffer_index + 4].head = NULL;
+        g_AreaCellPacketLists[index][buffer_index + 4].tail = (P_TAG*)&g_AreaCellPacketLists[index][buffer_index + 4];
         index++;
     } while (index < 56);
 
-    D_801459F8 = (void*)AREA_WORK;
-    D_801459FC = AREA_CODE_BASE;
+    g_SysSectorBuffer = (void*)AREA_WORK;
+    g_GfxUploadCursor = AREA_CODE_BASE;
 }

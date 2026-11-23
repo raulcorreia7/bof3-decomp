@@ -10,7 +10,7 @@ MATCH void GFX_ExpandRgb555(u32* pixels, RECT rect) {
     s32 remaining;
 
     count     = rect.w * rect.h * 2;
-    dst       = (u8*)D_801459FC;
+    dst       = (u8*)g_GfxUploadCursor;
     remaining = count;
     while (remaining > 0) {
         color  = *pixels++;
@@ -28,9 +28,9 @@ MATCH void GFX_ExpandRgb555(u32* pixels, RECT rect) {
         dst += 6;
         remaining -= 6;
     }
-    LoadImage(&rect, (u_long*)D_801459FC);
+    LoadImage(&rect, (u_long*)g_GfxUploadCursor);
     if (count & 0x3) {
         count += 4 - count % 4;
     }
-    D_801459FC += count;
+    g_GfxUploadCursor += count;
 }

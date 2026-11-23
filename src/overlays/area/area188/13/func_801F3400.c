@@ -3,7 +3,7 @@
 MATCH void func_801F3400(void) {
     u8 mode;
 
-    GFX_DrawColorFan(&TASK(Actor)->unk_64, (s16)TASK(Actor)->screen_x, 6);
+    GFX_DrawColorFan(&TASK(Actor)->angle_x, (s16)TASK(Actor)->screen_x, 6);
     ACTOR_COUNT_DOWN(TASK(Actor), mode, timer);
     if (!(mode & BYTE_MASK)) {
         TASK(Actor)->timer = 32;

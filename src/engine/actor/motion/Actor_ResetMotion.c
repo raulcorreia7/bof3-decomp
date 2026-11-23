@@ -16,9 +16,9 @@ MATCH void Actor_ResetMotion(void) {
     animation                      = g_CurrentActor;
     motion->scale.y                = 0x10000;
     motion->scale.x                = 0x10000;
-    motion->unk_6C                 = 0;
-    motion->unk_68                 = 0;
-    motion->unk_64                 = 0;
+    motion->angle_z                = 0;
+    motion->angle_y                = 0;
+    motion->angle_x                = 0;
     /* 0x74 is a flag byte and 0x75 a byte timer (Actor.interaction_flags /
      * timer_75); every access in the module is byte-wide, so both stores are
      * byte-wide. */

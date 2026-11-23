@@ -15,9 +15,9 @@ MATCH void func_801A3410(void* work_index) {
         work->pos.y.fixed = g_Actors[index].pos.y.fixed;
         work->pos.z.fixed = g_Actors[index].pos.z.fixed;
         if (work->unk_06 != 0xA) {
-            work->unk_64 = g_Actors[index].unk_64;
-            work->unk_68 = g_Actors[index].unk_68;
-            work->unk_6C = g_Actors[index].unk_6C;
+            work->angle_x = g_Actors[index].angle_x;
+            work->angle_y = g_Actors[index].angle_y;
+            work->angle_z = g_Actors[index].angle_z;
         }
         func_801AC1DC(delta, FIELD(u8, g_Task, 0x1Cu));
         work = TASK(Actor);

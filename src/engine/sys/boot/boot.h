@@ -3,6 +3,8 @@
 
 #include "types.h"
 #include "common/callback.h"
+
+struct GfxFrame;
 /* func_8014AEE0 */
 void        SYS_StartLogo(void);
 /* func_8014AFC0 */
@@ -40,6 +42,6 @@ void SYS_Main(void);
 void SYS_InitRuntime(void);
 void SYS_InitHardware(void);
 void SYS_InitDisplay(void);
-void SYS_ResetDisplayFrame(u8* work);
+void SYS_ResetDisplayFrame(struct GfxFrame* frame);
 
 #endif

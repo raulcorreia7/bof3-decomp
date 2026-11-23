@@ -235,7 +235,7 @@ extern u8                 s_EntityModes[4];
 extern u16                D_801C8384[28];
 /* D_801C8404 */
 extern u8                 s_EntityRouteIndices[8][4];
-extern u16                D_801C8424[8];
+extern u16                g_ActorFacingAngles[8];
 extern u16                D_801C842A[];
 extern Callback           D_801C8434[2];
 extern Callback           D_801C843C[2];

@@ -14,7 +14,7 @@ MATCH u8 func_801F4DA4(u32 frame) {
 
     elapsed = (s32)frame - 5;
     t       = elapsed;
-    off     = ((s32)g_PartyActors[0].unk_6C >> 7) & 0xC;
+    off     = ((s32)g_PartyActors[0].angle_z >> 7) & 0xC;
     limit   = D_801F5CDD[off];
     dx      = D_80181B00[D_801F5CDC[off] * 2] << 16;
     mx      = elapsed;

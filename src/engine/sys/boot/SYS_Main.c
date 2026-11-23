@@ -4,7 +4,7 @@
  * including the guarded EMI service/reset path.
  */
 MATCH void SYS_Main(void) {
-    u8* work;
+    GfxFrame* work;
 
     __main();
     g_SysHardwareInitialized = 0;
@@ -16,18 +16,18 @@ MATCH void SYS_Main(void) {
     for (;;) {
         VSync(2);
         rand();
-        PutDispEnv((DISPENV*)g_GfxCurrentBuffer);
-        PutDrawEnv((DRAWENV*)(g_GfxCurrentBuffer + 0x14));
+        PutDispEnv(&g_GfxCurrentBuffer->disp);
+        PutDrawEnv(&g_GfxCurrentBuffer->draw);
         GFX_PaletteUpload();
         GFX_UpdateTransferQueue();
-        DrawOTag((u_long*)(g_GfxCurrentBuffer + 0x8C));
+        DrawOTag(g_GfxCurrentBuffer->ot + 7);
         SYS_UpdateKeyState();
         SND_VoiceUpdateStatus();
 
         g_GfxBufferIndex ^= 1;
-        work               = g_GfxBuffers + g_GfxBufferIndex * 0x90;
+        work               = &g_GfxBuffers[g_GfxBufferIndex];
         g_GfxCurrentBuffer = work;
-        ClearOTagR((u_long*)(work + 0x70), 8);
+        ClearOTagR(work->ot, 8);
         SYS_PrepareFrame();
 
         if ((g_PadStates[0].held & (PADselect | PADstart)) == (PADselect | PADstart)) {

@@ -77,24 +77,37 @@ extern u8           g_UiTitleInputGate;
 extern Thread*      g_SysCurrentThread;
 /* D_80143D44 */
 extern u8           g_GfxBufferIndex;
+
+/* The double-buffered display record: the display and draw environments and
+ * the eight ordering-table heads, 0x90 bytes per buffer. */
+typedef struct GfxFrame {
+    DISPENV disp;  /* 0x00 */
+    DRAWENV draw;  /* 0x14 */
+    u_long  ot[8]; /* 0x70 */
+} GfxFrame;
+
+ASSERT_OFFSET(GfxFrame, draw, 0x14);
+ASSERT_OFFSET(GfxFrame, ot, 0x70);
+ASSERT_SIZE(GfxFrame, 0x90);
+
 /* D_80143D48 */
-extern u8           g_GfxBuffers[];
+extern GfxFrame  g_GfxBuffers[2];
 /* D_80143E68 */
-extern u8*          g_GfxCurrentBuffer;
+extern GfxFrame* g_GfxCurrentBuffer;
 /* D_80143E6C */
-extern u32          g_FrameCount;
+extern u32       g_FrameCount;
 /* D_80143EF8 */
-extern s32          g_SysLastVSync;
+extern s32       g_SysLastVSync;
 /* The VSync count captured when drawing finished. */
 /* D_80143EFC */
-extern s32          g_SysDrawTime;
+extern s32       g_SysDrawTime;
 /* D_80143F10 */
-extern u16          g_GameEntryAreaId;
+extern u16       g_GameEntryAreaId;
 /* D_80143F1C */
-extern u8           g_GameEntryFacing;
-extern u8           g_GameRequestType;
+extern u8        g_GameEntryFacing;
+extern u8        g_GameRequestType;
 /* 0x80144xxx: party and menu state. */
-extern u16          D_80143F20;
+extern u16       D_80143F20;
 
 /* D_80143F44 */
 extern u8          g_SysResetHoldFrames;

@@ -4,13 +4,13 @@
  * the executable's boot loop.
  */
 MATCH void SYS_InitRuntime(void) {
-    u8* work;
+    GfxFrame* work;
 
     SYS_InitHardware();
     SYS_InitDisplay();
     work = g_GfxBuffers;
     SYS_ResetDisplayFrame(work);
-    SYS_ResetDisplayFrame(work + 0x90);
+    SYS_ResetDisplayFrame(work + 1);
     SYS_ThreadInit();
     g_GfxBufferIndex   = 0;
     g_GfxCurrentBuffer = work;

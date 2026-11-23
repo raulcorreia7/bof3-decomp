@@ -122,10 +122,10 @@ MATCH void func_801F7C24(void) {
     s32    cos;
 
     setVector(&from, -0x6000, -0x12000, 1 << 24);
-    cos                      = rcos(TASK(Actor)->unk_6C);
-    to.vx                    = (from.vx * cos - from.vy * rsin(TASK(Actor)->unk_6C)) >> 12;
-    cos                      = rsin(TASK(Actor)->unk_6C);
-    to.vy                    = (from.vx * cos + from.vy * rcos(TASK(Actor)->unk_6C)) >> 12;
+    cos                      = rcos(TASK(Actor)->angle_z);
+    to.vx                    = (from.vx * cos - from.vy * rsin(TASK(Actor)->angle_z)) >> 12;
+    cos                      = rsin(TASK(Actor)->angle_z);
+    to.vy                    = (from.vx * cos + from.vy * rcos(TASK(Actor)->angle_z)) >> 12;
     to.vz                    = from.vz;
     TASK(Actor)->pos.x.fixed = g_PartyActors[1].pos.x.fixed + to.vx;
     TASK(Actor)->pos.y.fixed = g_PartyActors[1].pos.y.fixed + to.vy;

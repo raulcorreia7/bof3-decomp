@@ -831,7 +831,7 @@ segments:
       - [0xE93D0, asm, DesablePAD]
       - [0xE93E4, asm, _patch_pad]
       - [0xE944C, .rodata, D_8017F44C]
-      - [0xE9470, .rodata, D_8017F470]
+      - [0xE9470, .rodata, g_ExceptionNames]
       - [0xE953C, .rodata, data_8017F53C]
       - [0xE9668, .rodata, data_8017F668]
       - [0xE9974, .rodata, D_8017F974]

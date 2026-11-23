@@ -5,19 +5,19 @@
  */
 MATCH void SYS_StartLogo(void) {
     u_long* ordering_table;
-    u32*    exec_state;
+    u_long* text_addr;
 
     SYS_LoadExe(g_LogoExePath);
 
-    exec_state  = &D_80143EA0;
-    *exec_state = 0x801FF000;
-    D_80143EA4  = 0;
+    text_addr                = &g_LogoHeader.exec.s_addr;
+    *text_addr               = 0x801FF000;
+    g_LogoHeader.exec.s_size = 0;
 
     StopCallback();
     PadStop();
     StopCARD();
     EnterCriticalSection();
-    Exec((struct EXEC*)(exec_state - 8), 0, 0);
+    Exec(&g_LogoHeader.exec, 0, 0);
     ExitCriticalSection();
     SYS_InitHardware();
 

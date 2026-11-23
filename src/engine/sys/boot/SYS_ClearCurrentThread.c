@@ -5,19 +5,11 @@
  */
 /* func_8014BA04 */
 MATCH void SYS_ClearCurrentThread(void) {
-    u8* base;
-    u8* p;
     s32 i;
 
-    base = (u8*)g_SysCurrentThread;
-    p    = base + 0xE;
-    i    = 7;
-    do {
-        *(u16*)(p + 0x60) = 0;
-        i -= 1;
-        p -= 2;
-    } while (i >= 0);
-
+    for (i = 7; i >= 0; i--) {
+        g_SysCurrentThread->tail.clear.halfword[i] = 0;
+    }
     for (i = 0; i < 16; i++) {
         g_SysCurrentThread->tail.clear.byte[i] = 0;
     }

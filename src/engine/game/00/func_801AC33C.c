@@ -55,13 +55,13 @@ MATCH bool func_801AC33C(s32 ease_in, s32 distance) {
         old_a = g_ActorTurnRamps[index].frames_xy;
         if (old_a != 0) {
             g_ActorTurnRamps[index].frames_xy = old_a - 1;
-            TASK(Actor)->unk_64 += g_ActorTurnRamps[index].delta_x;
-            TASK(Actor)->unk_68 += g_ActorTurnRamps[index].delta_y;
+            TASK(Actor)->angle_x += g_ActorTurnRamps[index].delta_x;
+            TASK(Actor)->angle_y += g_ActorTurnRamps[index].delta_y;
         }
         old_b = g_ActorTurnRamps[index].frames_z;
         if (old_b != 0) {
             g_ActorTurnRamps[index].frames_z = old_b - 1;
-            TASK(Actor)->unk_6C += g_ActorTurnRamps[index].delta_z;
+            TASK(Actor)->angle_z += g_ActorTurnRamps[index].delta_z;
         }
     }
     if (step_x < 0) {

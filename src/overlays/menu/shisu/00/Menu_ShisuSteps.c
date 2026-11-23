@@ -649,7 +649,7 @@ NON_MATCHING void func_801D2308(void* record) {
         ScaleMatrix(&m, &normal);
     }
     light = m;
-    func_8015B2AC(light_mtx.m[0], &TASK(Actor)->unk_64);
+    func_8015B2AC(light_mtx.m[0], &TASK(Actor)->angle_x);
     Camera_ApplyMatrix(&light);
     SetLightMatrix(&light_mtx);
 

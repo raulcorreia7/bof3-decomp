@@ -686,7 +686,7 @@ MATCH void Scene_DrawTriangle(s32 size, s32 angle_x, s32 angle_y, s32 angle_z) {
     s32           v2x;
     s32           v2y;
 
-    saved         = *(SceneRotation*)&TASK(Actor)->unk_64;
+    saved         = *(SceneRotation*)&TASK(Actor)->angle_x;
     work          = TASK(SceneEffect);
     work->angle.x = angle_x;
     work->angle.y = angle_y;
@@ -713,7 +713,7 @@ MATCH void Scene_DrawTriangle(s32 size, s32 angle_x, s32 angle_y, s32 angle_z) {
     GFX_AddPrim(TASK(Actor)->draw_layer, sizeof(POLY_G3));
     PopMatrix();
 
-    *(SceneRotation*)&TASK(Actor)->unk_64 = saved;
+    *(SceneRotation*)&TASK(Actor)->angle_x = saved;
 }
 
 MATCH void func_801F8748(void) {
@@ -801,9 +801,9 @@ MATCH void func_801F89F0(void) {
     setup_work->pos.x             = g_PartyActors[0].pos.x.fixed;
     setup_work->pos.y             = g_AreaFocus.y.fixed;
     FIELD(s32, setup_work, 0x3Cu) = g_PartyActors[0].pos.z.fixed;
-    setup_work->angle.x           = g_PartyActors[0].unk_64;
-    setup_work->angle.y           = g_PartyActors[0].unk_68;
-    setup_work->angle.z           = g_PartyActors[0].unk_6C;
+    setup_work->angle.x           = g_PartyActors[0].angle_x;
+    setup_work->angle.y           = g_PartyActors[0].angle_y;
+    setup_work->angle.z           = g_PartyActors[0].angle_z;
     func_801AC1DC(deltas, FIELD(u8, setup_work, 0x1Cu));
     update_work                     = TASK(SceneEffect);
     update_work->pos.x              = (update_work->pos.x + deltas[0]);
@@ -2093,9 +2093,9 @@ MATCH void func_801FB924(void) {
             /* FAKE: keep the countdown address live only across its decrement/store. */
             u16* timer;
 
-            if (g_PartyActors[2].unk_64 != 0 || g_PartyActors[2].unk_68 != 0) {
-                g_PartyActors[2].unk_64 = 0;
-                g_PartyActors[2].unk_68 = 0;
+            if (g_PartyActors[2].angle_x != 0 || g_PartyActors[2].angle_y != 0) {
+                g_PartyActors[2].angle_x = 0;
+                g_PartyActors[2].angle_y = 0;
             }
             counter = &g_PadStates[0].pressed;
             if ((*counter & INPUT_DIRECTIONAL) != 0) {
@@ -2139,7 +2139,7 @@ MATCH void func_801FB924(void) {
             D_1F800010[magnitude = 1] = RANDOM_MASK(0x7) - 3;
             camera                    = D_1F800010;
             magnitude                 = 0x40;
-            counter                   = &g_PartyActors[2].unk_64;
+            counter                   = &g_PartyActors[2].angle_x;
             counter[0]                = (camera[0] >= 0) ? 0x40 : -magnitude;
             counter[1]                = (camera[1] >= 0) ? 0x40 : -magnitude;
             if ((g_FrameCount & 0x3) == 0) {
@@ -2193,20 +2193,20 @@ MATCH void func_801FBE88(void) {
     D_1F800010[0] = 0;
     if ((*pad & PADLright) != 0u) {
         D_1F800010[0] += 2;
-        g_PartyActors[2].unk_64 += 0x40;
+        g_PartyActors[2].angle_x += 0x40;
     }
     if ((*pad & PADLleft) != 0u) {
         D_1F800010[0] -= 2;
-        g_PartyActors[2].unk_64 -= 0x40;
+        g_PartyActors[2].angle_x -= 0x40;
     }
     D_1F800010[1] = 0;
     if ((*pad & PADLdown) != 0u) {
         D_1F800010[1] += 2;
-        g_PartyActors[2].unk_68 += 0x40;
+        g_PartyActors[2].angle_y += 0x40;
     }
     if ((*pad & PADLup) != 0u) {
         D_1F800010[1] -= 2;
-        g_PartyActors[2].unk_68 -= 0x40;
+        g_PartyActors[2].angle_y -= 0x40;
     }
     SND_SEPlay(EMI_SE_ID(SND_BANK_AREA, 4));
 }
