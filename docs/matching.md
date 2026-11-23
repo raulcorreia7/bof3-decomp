@@ -564,6 +564,17 @@ differences. Import with `tools/permuter_import.py <source.c>`
 ([toolchain](toolchain.md#permuter)), let it search, and restate the best candidate as clean C89,
 keeping only the changes the score needs. A zero score is not proof; the image link is.
 
+The importer takes the first `NON_MATCHING` of the file, so a unit that holds several drafts feeds
+it the wrong function: it reports the import under that function's name and every search after
+grapples with a target it was never asked for. Isolate the draft first: keep the file's includes,
+append one `#ifdef NON_MATCHING` block holding the function, import through a throwaway source
+beside the unit, then delete it.
+
+A size difference dominates the score (each shifted instruction counts against the whole tail), so
+the run only steers allocation when the draft already has the target's instruction count. Restate
+the candidate in the unit and measure with `tools/match.sh`; a lower permuter score that compiles
+worse is not progress.
+
 ## Polish
 
 Polish is part of every match, not a later pass: an exact function lands only after it reads the way
