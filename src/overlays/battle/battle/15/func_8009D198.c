@@ -1,7 +1,5 @@
 #include "battle_15.h"
 
-extern u8 g_BattleAbilityEffectIds[232];
-
 /* Applies the queued hit's HP and AP changes to the target and runs the hit's effect handler. */
 #ifdef NON_MATCHING
 NON_MATCHING void func_8009D198(void) {
@@ -36,7 +34,7 @@ NON_MATCHING void func_8009D198(void) {
     }
 
     if (g_Battle.action_type == BATTLE_ACTION_ABILITY) {
-        effect = g_BattleAbilityEffectIds[(u16)g_Battle.action_id];
+        effect = ((u8*)BATTLE_ABILITY_CALL_TABLE)[(u16)g_Battle.action_id];
     } else {
         action_word = g_Battle.action->unk_02;
         effect      = D_800B470C[action_word >> 8][(u8)action_word];
