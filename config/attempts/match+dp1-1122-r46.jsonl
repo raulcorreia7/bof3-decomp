@@ -1,0 +1,3 @@
+{"function": "emi/scenario/scena01/00@0x801FCEC0", "tried": "the branch targets sit 0x20 early: the draft is 8 instructions short of retail", "first_diff": "0x801FCED8 beqz v0,0x801fd274 against beqz v0,0x801fd254", "score": "168 rows"}
+{"function": "emi/world04/area199/13@0x801F36DC", "tried": "the state byte lands in a0 against retail v1 and the frame is 8 bytes large", "first_diff": "0x801F376C lbu v1,9(v0) against lbu a0,9(v0)", "score": "198 rows"}
+{"function": "emi/world02/area111/13@0x801F4140", "tried": "the first global load lands in a3 against retail v1 (shape, 20 hunks)", "first_diff": "0x801F4174 lui v1,0x8014 against lui a3,0x8014", "score": "184 rows"}
