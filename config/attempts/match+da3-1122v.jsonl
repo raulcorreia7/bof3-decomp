@@ -1,0 +1,1 @@
+{"function": "emi/world01/area048/13@0x801F4258", "tried": "Moved the two cell_* table reads after the first RotTransPers to align the call-argument setup", "first_diff": "0x801F4274: the argument setup still inserts three words; 255 rows against 256, so the head order is not the lever \u2014 the body needs the asm rewrite", "score": "255 rows, candidate 372, retail 334"}
