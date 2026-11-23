@@ -70,7 +70,7 @@ MATCH void func_801F3D28(void) {
             if (g_AreaCameraMoving != 0) {
                 break;
             }
-            *(u16*)&g_UiWindowChannel |= FRONTEND_FLAG_MODE_LATCH;
+            LOHU(g_UiWindowChannel) |= FRONTEND_FLAG_MODE_LATCH;
             g_SceneEventState.step = 20;
             break;
         case 20:
