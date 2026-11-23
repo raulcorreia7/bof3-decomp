@@ -1,0 +1,3 @@
+{"function": "emi/battle/battle/15@0x800AEEC8", "tried": "task local before the stores (25); party store first (25)", "first_diff": "0x800AEF48 lui a0,0x1f80 against li v0,1", "score": "9 rows"}
+{"function": "exe/slus_004_22@0x80167E00", "tried": "plain D_800E3800 bound drops the address materialization but shifts the tail (59)", "first_diff": "0x80167EF0 lui v0,0x800e against lui a3,0x800e", "score": "19 rows"}
+{"function": "emi/world04/area189/13@0x801F5038", "tried": "the 0xffff constant and stack address rotate a1/a2", "first_diff": "0x801F503C lui a1,0xff against lui a2,0xff", "score": "27 rows"}
