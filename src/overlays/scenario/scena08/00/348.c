@@ -460,7 +460,10 @@ MATCH void func_801F81F4(u16 value) {
 }
 
 #ifdef NON_MATCHING
-NON_MATCHING void func_801F823C(s16 x, s16 y, s16 height, s16 width) {
+NON_MATCHING void func_801F823C(s16 x, s16 y, s16 half_height, s16 half_width);
+extern u16        D_801FE9EC[];
+
+void func_801F823C(s16 x, s16 y, s16 height, s16 width) {
     POLY_GT4* prim;
     s16       row;
     s32       half;
@@ -468,51 +471,48 @@ NON_MATCHING void func_801F823C(s16 x, s16 y, s16 height, s16 width) {
     s32       top;
     u8        v;
     u8        i;
-
     row = height - 1;
-    for (i = 0; i < height * 2; i++) {
-        half = SquareRoot0(height * height - row * row);
+    for (i = 0; i < (height * 2); i++) {
+        half = SquareRoot0((height * height) - (row * row));
         skew = (width * rsin(D_801FE9EC[i])) >> 12;
         prim = (POLY_GT4*)g_GfxPrimCursor;
         row -= 1;
         SetPolyGT4(prim);
         SetSemiTrans(prim, 0);
-        /* The grouped x0/x2 and y0/y1 stores are the retail order; setXYWH interleaves them. */
-        prim->x0 = prim->x2 = x - half + skew;
-        top                 = i + (y - height);
-        prim->y0 = prim->y1 = top;
-        prim->x1 = prim->x3 = x - half + skew + half;
-        prim->y2 = prim->y3 = top + 1;
-        prim->u0 = prim->u2 = 0x40 - half;
-        prim->u1 = prim->u3 = 0x40;
-        v                   = i + 0x40 - height;
-        prim->v0 = prim->v1 = i - (height - 0x40);
-        prim->v2 = prim->v3 = v + 1;
-        prim->tpage         = GetTPage(TPAGE_DEPTH_15BIT, TPAGE_ABR_HALF, 0x340, 0x100);
-        setRGB0(prim, 0x40, 0x40, 0x80);
-        setRGB1(prim, 0x60, 0x60, 0x60);
-        setRGB2(prim, 0x40, 0x40, 0x80);
-        setRGB3(prim, 0x60, 0x60, 0x60);
-        GFX_AddPrim(GFX_LAYER_EFFECT_FRONT, sizeof(POLY_GT4));
-
+        prim->x0    = (prim->x2 = (x - half) + skew);
+        top         = i + (y - height);
+        prim->y0    = (prim->y1 = top);
+        prim->x1    = (prim->x3 = ((x - half) + skew) + half);
+        prim->y2    = (prim->y3 = top + 1);
+        prim->u0    = (prim->u2 = 0x40 - half);
+        prim->u1    = (prim->u3 = 0x40);
+        v           = (i + 0x40) - height;
+        prim->v0    = (prim->v1 = i - (height - 0x40));
+        prim->v2    = (prim->v3 = ((i + 0x40) - height) + 1);
+        prim->tpage = GetTPage(2, 0, 0x340, 0x100);
+        prim->r0 = 0x40, prim->g0 = 0x40, prim->b0 = 0x80;
+        prim->r1 = 0x60, prim->g1 = 0x60, prim->b1 = 0x60;
+        prim->r2 = 0x40, prim->g2 = 0x40, prim->b2 = 0x80;
+        prim->r3 = 0x60, prim->g3 = 0x60, prim->b3 = 0x60;
+        GFX_AddPrim(2, sizeof(POLY_GT4));
         prim = (POLY_GT4*)g_GfxPrimCursor;
         SetPolyGT4(prim);
         SetSemiTrans(prim, 0);
-        prim->y0 = prim->y1 = top;
-        prim->y2 = prim->y3 = top + 1;
-        prim->u0 = prim->u2 = 0;
-        skew                = x + skew;
-        prim->x0 = prim->x2 = skew;
-        prim->x1 = prim->x3 = skew + half;
-        prim->v0 = prim->v1 = v - 0x80;
-        prim->u1 = prim->u3 = half;
-        prim->v2 = prim->v3 = v - 0x7F;
-        prim->tpage         = GetTPage(TPAGE_DEPTH_15BIT, TPAGE_ABR_HALF, 0x340, 0x100);
-        setRGB0(prim, 0x60, 0x60, 0x60);
-        setRGB1(prim, 0x80, 0x40, 0x40);
-        setRGB2(prim, 0x60, 0x60, 0x60);
-        setRGB3(prim, 0x80, 0x40, 0x40);
-        GFX_AddPrim(GFX_LAYER_EFFECT_FRONT, sizeof(POLY_GT4));
+        prim->y0    = (prim->y1 = top);
+        prim->y2    = (prim->y3 = top + 1);
+        prim->u0    = (prim->u2 = 0);
+        prim->x0    = (prim->x2 = skew);
+        prim->x1    = (prim->x3 = skew + half);
+        prim->v0    = (prim->v1 = ((i + 0x40) - height) - 0x80);
+        skew        = x + skew;
+        prim->u1    = (prim->u3 = half);
+        prim->v2    = (prim->v3 = ((i + 0x40) - height) - 0x7F);
+        prim->tpage = GetTPage(2, 0, 0x340, 0x100);
+        prim->r0 = 0x60, prim->g0 = 0x60, prim->b0 = 0x60;
+        prim->r1 = 0x80, prim->g1 = 0x40, prim->b1 = 0x40;
+        prim->r2 = 0x60, prim->g2 = 0x60, prim->b2 = 0x60;
+        prim->r3 = 0x80, prim->g3 = 0x40, prim->b3 = 0x40;
+        GFX_AddPrim(2, sizeof(POLY_GT4));
     }
 }
 #else
