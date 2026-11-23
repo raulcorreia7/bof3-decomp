@@ -8,7 +8,7 @@ NON_MATCHING void func_801EF52C(void) {
     /* FAKE: the group byte offset stays in a3 so the table bases stay direct; the plain form is 139 rows off. */
     FAKE_REG(s32, group_byte_offset, "a3");
     s32  group_number;
-    s32  weighted_job_offset;
+    s32  fairy_offset;
     s32  queue_record_index;
     s32  record_group_number;
     s32  active_job_offset;
@@ -36,11 +36,10 @@ NON_MATCHING void func_801EF52C(void) {
                 *timer_ptr                    = *battle_count_ptr;
             } else if (current_progress < 11) {
                 record_group_number = group_number;
-                for (weighted_job_offset = 0, active_job_offset = 0; active_job_offset < FAIRY_JOB_COUNT * FAIRY_JOB_STRIDE;
-                     active_job_offset += FAIRY_JOB_STRIDE, weighted_job_offset += FAIRY_STRIDE) {
+                for (fairy_offset = 0, active_job_offset = 0; active_job_offset < FAIRY_JOB_COUNT * FAIRY_JOB_STRIDE; active_job_offset += FAIRY_JOB_STRIDE, fairy_offset += FAIRY_STRIDE) {
                     if (((u8*)g_FairyJobs)[active_job_offset] != 0 && ((u8*)g_FairyJobs)[active_job_offset + 1] == record_group_number) {
                         active_job_count += 1;
-                        weighted_progress += (&D_801F2560)[0x1A7 + weighted_job_offset];
+                        weighted_progress += D_801F2707[fairy_offset];
                     }
                 }
                 if ((u8)active_job_count != 0) {
@@ -49,7 +48,7 @@ NON_MATCHING void func_801EF52C(void) {
                         progress_divisor = 5;
                     }
                     battle_delta = (*battle_count_ptr - *timer_ptr) / progress_divisor;
-                    progress_cap = ((u8*)battle_count_ptr)[0x598] + 4;
+                    progress_cap = FIELD(u8, battle_count_ptr, 0x598u) + 4;
                     if (battle_delta != 0 && D_801457AB[group_byte_offset] < progress_cap) {
                         updated_progress              = D_801457AB[group_byte_offset] + battle_delta;
                         D_801457AB[group_byte_offset] = updated_progress;

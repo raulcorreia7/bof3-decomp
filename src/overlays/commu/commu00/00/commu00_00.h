@@ -242,6 +242,7 @@ extern FairyVariant   D_801F26CC[1];
 /* D_801F26EC */
 extern Callback       g_FairyCommu05Steps[FAIRY_COMMU05_STEP_COUNT];
 extern u8             D_801F2706[][9];
+extern u8             D_801F2707[];
 extern u8             D_801F2708[];
 extern volatile u8    D_801F2928[1];
 /* Label table rows are the three age buckets; each row holds one entry per
