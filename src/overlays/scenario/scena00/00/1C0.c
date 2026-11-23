@@ -2093,9 +2093,9 @@ MATCH void func_801FB924(void) {
             /* FAKE: keep the countdown address live only across its decrement/store. */
             u16* timer;
 
-            if (D_80147BEC[0] != 0 || D_80147BF0[0] != 0) {
-                D_80147BEC[0] = 0;
-                D_80147BF0[0] = 0;
+            if (g_PartyActors[2].unk_64 != 0 || g_PartyActors[2].unk_68 != 0) {
+                g_PartyActors[2].unk_64 = 0;
+                g_PartyActors[2].unk_68 = 0;
             }
             counter = &g_PadStates[0].pressed;
             if ((*counter & INPUT_DIRECTIONAL) != 0) {
@@ -2139,7 +2139,7 @@ MATCH void func_801FB924(void) {
             D_1F800010[magnitude = 1] = RANDOM_MASK(0x7) - 3;
             camera                    = D_1F800010;
             magnitude                 = 0x40;
-            counter                   = D_80147BEC;
+            counter                   = &g_PartyActors[2].unk_64;
             counter[0]                = (camera[0] >= 0) ? 0x40 : -magnitude;
             counter[1]                = (camera[1] >= 0) ? 0x40 : -magnitude;
             if ((g_FrameCount & 0x3) == 0) {
@@ -2193,20 +2193,20 @@ MATCH void func_801FBE88(void) {
     D_1F800010[0] = 0;
     if ((*pad & PADLright) != 0u) {
         D_1F800010[0] += 2;
-        D_80147BEC[0] += 0x40;
+        g_PartyActors[2].unk_64 += 0x40;
     }
     if ((*pad & PADLleft) != 0u) {
         D_1F800010[0] -= 2;
-        D_80147BEC[0] -= 0x40;
+        g_PartyActors[2].unk_64 -= 0x40;
     }
     D_1F800010[1] = 0;
     if ((*pad & PADLdown) != 0u) {
         D_1F800010[1] += 2;
-        D_80147BF0[0] += 0x40;
+        g_PartyActors[2].unk_68 += 0x40;
     }
     if ((*pad & PADLup) != 0u) {
         D_1F800010[1] -= 2;
-        D_80147BF0[0] -= 0x40;
+        g_PartyActors[2].unk_68 -= 0x40;
     }
     SND_SEPlay(EMI_SE_ID(SND_BANK_AREA, 4));
 }

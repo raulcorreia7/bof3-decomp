@@ -127,10 +127,10 @@ MATCH void func_801F7C24(void) {
     cos                      = rsin(TASK(Actor)->unk_6C);
     to.vy                    = (from.vx * cos + from.vy * rcos(TASK(Actor)->unk_6C)) >> 12;
     to.vz                    = from.vz;
-    TASK(Actor)->pos.x.fixed = D_80147B24[0] + to.vx;
-    TASK(Actor)->pos.y.fixed = D_80147B24[1] + to.vy;
-    TASK(Actor)->pos.z.fixed = D_80147B24[2] + to.vz;
-    setVector(TASK(Actor), D_80147B24[0] + to.vx - ((s16)TASK(Actor)->screen_x << 15), D_80147B24[1] + to.vy, D_80147B24[2] + to.vz);
+    TASK(Actor)->pos.x.fixed = g_PartyActors[1].pos.x.fixed + to.vx;
+    TASK(Actor)->pos.y.fixed = g_PartyActors[1].pos.y.fixed + to.vy;
+    TASK(Actor)->pos.z.fixed = g_PartyActors[1].pos.z.fixed + to.vz;
+    setVector(TASK(Actor), g_PartyActors[1].pos.x.fixed + to.vx - ((s16)TASK(Actor)->screen_x << 15), g_PartyActors[1].pos.y.fixed + to.vy, g_PartyActors[1].pos.z.fixed + to.vz);
     func_801F7E34(&TASK(Actor)->pos.x.fixed, &TASK(Actor)->vx, 0x40);
     TASK(Actor)->screen_x += 1;
     if ((s16)TASK(Actor)->screen_x == 330) {

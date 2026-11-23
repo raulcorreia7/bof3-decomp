@@ -168,8 +168,6 @@ extern s32               D_801468A4;
 extern s32               D_801469EC;
 extern s32               D_801469F0;
 extern u32               D_80147B28;
-extern s32               D_80147BEC[];
-extern s32               D_80147BF0[];
 extern SceneLineColor    D_801F6C04;
 extern Callback          D_801FC980[];
 extern Callback          D_801FC988[];
