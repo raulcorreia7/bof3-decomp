@@ -578,8 +578,12 @@ NON_MATCHING u8 func_801D1EE8(void) {
     } else {
         D_801DA040 = 200 - ((difference * 100) / denominator);
     }
-    if (D_801DA040 < 0) {
-        D_801DA040 = 0;
+    /* Retail keeps the address in one register for the clamp's read and store. */
+    {
+        s32* score = &D_801DA040;
+        if (*score < 0) {
+            *score = 0;
+        }
     }
 
     subtotal   = g_ShisuIngredients.topping_size * (D_801DA034 * 10);
