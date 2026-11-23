@@ -177,24 +177,22 @@ MATCH void func_801F36E4(void) {
 }
 
 MATCH void func_801F3728(void) {
-    u8*  next;
     u16* counter;
     s32  value;
     u8   flag;
     /* FAKE: pin the reloaded cell pointer to v1 (retail's second
      * g_Task load lands in $v1; allocator picks $v0 without it). */
-    FAKE_REG(u8*, work, "$3");
+    FAKE_REG(Actor*, work, "$3");
 
     Actor_SetSemiTransparent();
     flag                          = 1;
     TASK(Actor)->tint.bytes.flags = flag;
-    work                          = TASK(u8);
-    value                         = ((Actor*)work)->pos.x.fixed;
-    work[4]                       = flag;
-    next                          = work + 0xC;
+    work                          = TASK(Actor);
+    value                         = work->pos.x.fixed;
+    work->unk_04                  = flag;
     counter                       = &g_Game.current->u.field.unk_122;
-    value += *(s32*)next;
-    ((Actor*)work)->pos.x.fixed = value;
+    value += work->vx;
+    work->pos.x.fixed = value;
     *counter -= 2;
 }
 
