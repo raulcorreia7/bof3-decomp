@@ -2,75 +2,79 @@
 
 /* Applies the equipment chosen in the item list: moves the six slots through Item_Remove and Item_Add and rebuilds the stats. */
 /* func_8009A744 */
-#ifdef NON_MATCHING
-NON_MATCHING void Battle_ApplyEquipment(void) {
+MATCH void Battle_ApplyEquipment(void) {
     u8* slots[6];
-    /* FAKE: the base record pointer and the slot counter take retail's s0 and s1 homes (pure-C best 46.40%). */
-    FAKE_REG(Character*, base, "s0");
-    Character* member_chr;
-    Character* character;
-    u8*        stats;
-    u8         value;
-    u8         party_position;
-    u8         character_index;
-    /* FAKE: the slot counter takes retail's s1 home (pure-C best 46.40%). */
-    FAKE_REG(u8, i, "s1");
-    u8 j;
+    u8* record;
+    u8* cell;
+    u8  character_index;
+    u8  value;
+    u32 i;
+    u32 slot;
+    u32 member_offset;
+    u32 party_slot;
 
-    party_position  = g_PartyBattleOrder[g_UiPanelTasks[18].unk_0C];
-    character_index = g_CharSlot[party_position];
-    base            = &g_Characters[character_index];
-    slots[0]        = &base->equip.weapon;
-    slots[1]        = &base->equip.shield;
-    slots[2]        = &base->equip.helmet;
-    slots[3]        = &base->equip.armor;
-    slots[4]        = &base->equip.accessories[0];
-    slots[5]        = &base->equip.accessories[1];
-    for (i = 0; i < 6; i++) {
-        value = s_BattleEquipment[i];
-        if (value != 0) {
-            if (value != *slots[i]) {
-                Item_Remove(D_800B44B0[i], value, 1, 0);
-                Item_Add(D_800B44B0[i], *slots[i], 1, 0);
-                *slots[i] = s_BattleEquipment[i];
-            }
+    record   = (u8*)&g_Characters[g_CharSlot[g_PartyBattleOrder[g_UiPanelTasks[18].unk_0C]]];
+    slots[0] = record + 0xE;
+    slots[1] = record + 0xF;
+    slots[2] = record + 0x10;
+    slots[3] = record + 0x11;
+    slots[4] = record + 0x12;
+    slots[5] = record + 0x13;
+    for (i = 0; (u8)i < 6; i++) {
+        slot  = (u8)i;
+        value = s_BattleEquipment[slot];
+        if (value != 0 && value != *slots[slot]) {
+            Item_Remove(D_800B44B0[slot], value, 1, 0);
+            Item_Add(D_800B44B0[slot], *slots[slot], 1, 0);
+            *slots[slot] = s_BattleEquipment[slot];
         }
     }
-    Char_RebuildStats(base);
-    if (g_Battle.party_count != 0) {
+    Char_RebuildStats((Character*)record);
+    {
+        u8* count = &g_BattlePartyCount;
+
         i = 0;
-        do {
-            character                        = &g_Characters[g_Game.members[i].character_index];
-            member_chr                       = &g_Game.members[i].chr;
-            member_chr->equip.weapon         = character->equip.weapon;
-            member_chr->equip.shield         = character->equip.shield;
-            member_chr->equip.helmet         = character->equip.helmet;
-            member_chr->equip.armor          = character->equip.armor;
-            member_chr->equip.accessories[0] = character->equip.accessories[0];
-            member_chr->equip.accessories[1] = character->equip.accessories[1];
-            memcpy((u8*)&member_chr->base, (u8*)&character->stats, 0x10);
-            memcpy((u8*)&member_chr->base + 0x10, (u8*)&character->stats + 0x10, 0x10);
-            i++;
-        } while ((u8)i < g_Battle.party_count);
+        if (*count != 0) {
+            do {
+                party_slot    = (u8)i;
+                member_offset = party_slot << 2;
+                member_offset += party_slot;
+                member_offset <<= 6;
+                record                                     = (u8*)g_Game.members[0].chr.name + member_offset;
+                character_index                            = g_Game.members[0].chr.name[member_offset + 0xC8];
+                cell                                       = (u8*)&g_Characters[character_index];
+                ((Character*)record)->equip.weapon         = ((Character*)cell)->equip.weapon;
+                ((Character*)record)->equip.shield         = ((Character*)cell)->equip.shield;
+                ((Character*)record)->equip.helmet         = ((Character*)cell)->equip.helmet;
+                ((Character*)record)->equip.armor          = ((Character*)cell)->equip.armor;
+                ((Character*)record)->equip.accessories[0] = ((Character*)cell)->equip.accessories[0];
+                ((Character*)record)->equip.accessories[1] = ((Character*)cell)->equip.accessories[1];
+                memcpy(record + 0x3C, cell + 0x1C, 0x10);
+                memcpy(record + 0x4C, cell + 0x2C, 0x10);
+                i++;
+            } while ((u8)i < *count);
+        }
     }
     Battle_ApplyFormationStats();
-    j = 0;
-    do {
-        stats = (u8*)&g_Game.members[j].chr.stats;
-        if (ACTOR_IN_USE(g_Game.members[j])) {
-            memcpy(stats, stats + 0x20, 0x20);
-        }
-        j++;
-    } while (j < 3);
-    func_800A4458();
-    if (g_Battle.party_count != 0) {
+    {
+        u8* dst_base = D_80145F20;
+        u8* src_base = dst_base + 0x20;
+
         i = 0;
         do {
-            Battle_RescaleStats(i);
+            member_offset = (u8)i * BATTLE_PARTY_STRIDE;
+            if (ACTOR_IN_USE(g_Game.members[(u8)i])) {
+                memcpy((u8*)(member_offset + (u32)dst_base), (u8*)(member_offset + (u32)src_base), 0x20);
+            }
             i++;
-        } while ((u8)i < g_Battle.party_count);
+        } while ((u8)i < 3);
+    }
+    i = 0;
+    func_800A4458();
+    if (g_BattlePartyCount != 0) {
+        do {
+            Battle_RescaleStats((u8)i);
+            i++;
+        } while ((u8)i < g_BattlePartyCount);
     }
 }
-#else
-INCLUDE_ASM(Battle_ApplyEquipment);
-#endif

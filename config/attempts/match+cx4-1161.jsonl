@@ -1,0 +1,1 @@
+{"function": "emi/scenario/sce15ef0/00@0x801D1220", "tried": "pinned the GetTPage tpage argument to a3, with and without an opaque", "first_diff": "0x801D1294: the pin alone is inert (the andi a3 still follows the cursor's lui/lw); with the opaque the value is copied into a3 and the truncation moves late (46 rows)", "score": "13 differing rows"}

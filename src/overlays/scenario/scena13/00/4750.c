@@ -28,14 +28,11 @@ MATCH void func_801FB414(void) {
     g_SceneEventState.selection = 17;
 }
 
-#ifdef NON_MATCHING
-NON_MATCHING s32 func_801FB464(s32 x, s32 y) {
-    u8 cell_type;
-
+MATCH s32 func_801FB464(s32 x, s32 y) {
     if (LOHU(g_GameAreaId) == AREA_ID_STEEL_BEACH_FREIGHTER && g_GameCellType == 1 && SYS_TestFlag(g_SceneFlags, 14) == 0 && x == TO_COORD(66) + COORD_HALF && (u32)((y >> 16) - 58) < 2U) {
         Game_SetScriptActive();
         g_ScenarioState.state_04 = 4;
-        g_ScenarioState.step     = 0;
+        g_ScenarioState.step     = 20;
         return 1;
     }
     if (LOHU(g_GameAreaId) == AREA_ID_RELAY_POINT_A_PORTAL && g_GameCellType == 4 && SYS_TestFlag(g_SceneFlags, 15) == 0 && (u32)((x >> 16) - 54) < 3U && (u32)((y >> 16) - 50) < 4U &&
@@ -49,17 +46,19 @@ NON_MATCHING s32 func_801FB464(s32 x, s32 y) {
         SYS_SetFlag(g_SceneFlags, 6);
     }
     if (LOHU(g_GameAreaId) == AREA_ID_DRAGNIER_SURFACE) {
-        if (g_GameCellType == 0 && SYS_TestFlag(g_SceneFlags, 20) == 0 && x == TO_COORD(59) + COORD_HALF && (u32)((y >> 16) - 31) < 4U) {
-            Game_SetScriptActive();
-            g_ScenarioState.state_04 = 6;
-            g_ScenarioState.step     = 0;
-            return 1;
-        }
-        if (SYS_TestFlag(g_SceneFlags, 29) != 0 && SYS_TestFlag(g_SceneFlags, 30) == 0 && x == TO_COORD(59) + COORD_HALF && (u32)((y >> 16) - 31) < 4U) {
-            Game_SetScriptActive();
-            g_ScenarioState.state_04 = 8;
-            g_ScenarioState.step     = 5;
-            return 1;
+        if (g_GameCellType == 0) {
+            if (SYS_TestFlag(g_SceneFlags, 20) == 0 && x == TO_COORD(59) + COORD_HALF && (u32)((y >> 16) - 31) < 4U) {
+                Game_SetScriptActive();
+                g_ScenarioState.state_04 = 6;
+                g_ScenarioState.step     = 20;
+                return 1;
+            }
+            if (SYS_TestFlag(g_SceneFlags, 29) != 0 && SYS_TestFlag(g_SceneFlags, 30) == 0 && x == TO_COORD(59) + COORD_HALF && (u32)((y >> 16) - 31) < 4U) {
+                Game_SetScriptActive();
+                g_ScenarioState.state_04 = 8;
+                g_ScenarioState.step     = 5;
+                return 1;
+            }
         }
         if (g_GameCellType == 1 && SYS_TestFlag(g_SceneFlags, 17) == 0 && x == TO_COORD(66) + COORD_HALF && (u32)((y >> 16) - 100) < 3U) {
             Game_SetScriptActive();
@@ -69,30 +68,36 @@ NON_MATCHING s32 func_801FB464(s32 x, s32 y) {
         }
     }
     if (LOHU(g_GameAreaId) == AREA_ID_DRAGNIER_ELDER_FIGHT) {
-        cell_type = g_GameCellType;
-        if (cell_type == 2 && (x >> 16) == 37 && (u32)((y >> 16) - 29) < 2U && (g_Game.members[0].facing == 0 || (u32)(g_Game.members[0].facing - 6) < 2U) && SYS_TestFlag(g_SceneFlags, 27) == 0) {
-            Game_SetScriptActive();
-            if (SYS_TestFlag(g_SceneFlags, 24) == 0) {
-                if (g_Game.members[0].chr.character_id == cell_type) {
-                    Scene_SetupParty((u32)g_SceneFlags);
+        if (g_GameCellType == 2 && (x >> 16) == 0x25 && (u32)((y >> 16) - 0x1D) < 2U) {
+            g_ScratchPad.cells.bytes[0] = D_80145E98;
+            if (((u8)(D_80145E98 - 6) < 2U) || (D_80145E98 == 0)) {
+                if (SYS_TestFlag(g_SceneFlags, 0x1B) == 0) {
+                    Game_SetScriptActive();
+                    if (SYS_TestFlag(g_SceneFlags, 0x18) == 0) {
+                        if (D_80145F09 == 2) {
+                            Scene_SetupParty(1);
+                        }
+                    } else if (SYS_TestFlag(g_SceneFlags, 0x19) == 0) {
+                        if (D_80145F09 == 8) {
+                            Scene_SetupParty(4);
+                        } else if (D_80145F09 == 5) {
+                            Scene_SetupParty(3);
+                        } else {
+                            Scene_SetupParty(2);
+                        }
+                    } else if (SYS_TestFlag(g_SceneFlags, 0x1A) == 0) {
+                        if (D_80145F09 != 7) {
+                            Scene_SetupParty(5);
+                        }
+                    } else {
+                        if (D_80145F09 == 7) {
+                            Scene_SetupParty(8);
+                        }
+                    }
+                    g_ScriptVars[0] = 1;
+                    return 1;
                 }
-            } else if (SYS_TestFlag(g_SceneFlags, 25) == 0) {
-                if (g_Game.members[0].chr.character_id == 8) {
-                    Scene_SetupParty(4);
-                } else if (g_Game.members[0].chr.character_id == 5) {
-                    Scene_SetupParty(3);
-                } else {
-                    Scene_SetupParty(2);
-                }
-            } else if (SYS_TestFlag(g_SceneFlags, 26) == 0) {
-                if (g_Game.members[0].chr.character_id != 7) {
-                    Scene_SetupParty((u32)g_SceneFlags);
-                }
-            } else if (g_Game.members[0].chr.character_id == 7) {
-                Scene_SetupParty((u32)g_SceneFlags);
             }
-            g_ScriptVars[0] = 1;
-            return 1;
         }
     }
     if (LOHU(g_GameAreaId) == AREA_ID_COLONY_OUTSIDE && SYS_TestFlag(g_SceneEventFlags, 45) != 0 && SYS_TestFlag(g_SceneFlags, 11) == 0 && (u32)((x >> 16) - 10) < 2U && (u32)((y >> 16) - 98) < 3U &&
@@ -117,9 +122,6 @@ NON_MATCHING s32 func_801FB464(s32 x, s32 y) {
     }
     return 0;
 }
-#else
-INCLUDE_ASM(func_801FB464);
-#endif
 
 MATCH s32 func_801FBA34(s32 x, s32 y) {
     if (LOHU(g_GameAreaId) == 0x8F && g_GameCellType == 0 && SYS_TestFlag(g_SceneFlags, 0x1C) != 0 && SYS_TestFlag(g_SceneFlags, 0x1D) == 0 && (x >> 16) == 0x2E && (u32)((y >> 16) - 0x1F) < 4U) {

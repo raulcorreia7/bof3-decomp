@@ -1,0 +1,3 @@
+{"function": "emi/etc/game/00@0x801AFA1C", "tried": "top computed before SetPolyFT4 (125); doubled thumb term (75); leading factor (76)", "first_diff": "0x801AFAE8 mflo a2 against mflo v1", "score": "54 rows"}
+{"function": "emi/battle/battle/15@0x800ABCE0", "tried": "the a0 parameter lands in s1 against retail s2 (shape -5 instructions)", "first_diff": "0x800ABCE4 sw s2,24(sp) against sw s1,20(sp)", "score": "99 rows"}
+{"function": "emi/bmagic/magic107/03@0x801F01AC", "tried": "frame 8 bytes short against retail, -27 instructions, mult vs shifts", "first_diff": "0x801F01AC addiu sp,sp,-72 against addiu sp,sp,-64", "score": "182 rows"}
