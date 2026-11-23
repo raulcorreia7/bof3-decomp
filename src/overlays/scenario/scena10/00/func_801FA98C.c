@@ -11,17 +11,17 @@ NON_MATCHING void func_801FA98C(void) {
 
     switch (g_ScenarioState.step) {
         case 0:
+            D_801FE9DC = 0;
+            UI_ModeSet(0);
             g_ScenarioState.step = 1;
-            Game_RequestAreaChange(AREA_ID_WYNDIA_HONEY_BALCONY, TO_COORD(113) + COORD_HALF, TO_COORD(9), AREA_ENTRY_MAP_LOADING);
-            g_GamePrevSelection = 0xFF;
             break;
         case 1:
             if (WINDOW_EFFECT_BUSY()) {
                 break;
             }
-            g_ScriptVars[0] = 1;
-            Area_ScrollStartRoute(0);
-            g_ScenarioState.step = 3;
+            g_AreaDrawFlags = 0;
+            func_801C1DF0(1);
+            g_ScenarioState.step = 2;
             break;
         case 2:
             func_8019FA28(0x80, 0x580000, 0x390000, 0x85);
@@ -31,45 +31,30 @@ NON_MATCHING void func_801FA98C(void) {
             g_ScenarioState.step = 3;
             break;
         case 3:
-            if (g_ScriptVars[0] != 3) {
+            if (WINDOW_EFFECT_BUSY()) {
                 break;
             }
-            slot                        = Actor_FindFreeSpawned();
-            g_ScratchPad.cells.bytes[0] = slot;
-            if ((slot & BYTE_MASK) != GAME_NONE) {
-                g_SpawnedActors[slot].header.flags                          = 1;
-                g_SpawnedActors[g_ScratchPad.cells.bytes[0]].type           = 0x31;
-                g_SpawnedActors[g_ScratchPad.cells.bytes[0]].camera_angle.x = g_AreaCameraAngle.vx;
-                g_SpawnedActors[g_ScratchPad.cells.bytes[0]].camera_angle.y = g_AreaCameraAngle.vy;
-                g_SpawnedActors[g_ScratchPad.cells.bytes[0]].camera_angle.z = 292;
-                g_SpawnedActors[g_ScratchPad.cells.bytes[0]].vx             = 0x700;
-                g_SpawnedActors[g_ScratchPad.cells.bytes[0]].layer          = 0x5A;
-                g_ScenarioState.step                                        = 4;
-            }
+            g_AreaDrawFlags = 0x1F;
+            UI_ModeSet(1);
+            g_ScriptVars[0]      = 1;
+            g_ScenarioState.step = 4;
             break;
         case 4:
-            if (g_ScriptVars[0] != 7) {
+            if (g_ScriptVars[0] != 6) {
                 break;
             }
-            SND_BGMPlay(0x27, BGM_CUE_LEVEL_DEFAULT, BGM_CUE_SHAPE_DEFAULT);
-            g_ScenarioState.step = 5;
-            g_GameFlags |= GAME_FLAG_SCROLL_LOCK;
+            SND_BGMFadeOut(0x88, 0x64, 4);
+            SND_SEPlay(0x204);
+            D_801FE9DC               = 1;
+            g_ScenarioState.timer_06 = 0x1E;
+            g_ScenarioState.step     = 5;
             break;
         case 5:
-            if (g_ScriptVars[0] != 0xA) {
+            if (--g_ScenarioState.timer_06 != 0) {
                 break;
             }
-            slot                        = Actor_FindFreeSpawned();
-            g_ScratchPad.cells.bytes[0] = slot;
-            if ((slot & BYTE_MASK) != GAME_NONE) {
-                g_SpawnedActors[slot].header.flags                          = 1;
-                g_SpawnedActors[g_ScratchPad.cells.bytes[0]].type           = 0x13;
-                g_SpawnedActors[g_ScratchPad.cells.bytes[0]].camera_angle.x = -949;
-                g_SpawnedActors[g_ScratchPad.cells.bytes[0]].camera_angle.y = g_AreaCameraAngle.vy;
-                g_SpawnedActors[g_ScratchPad.cells.bytes[0]].camera_angle.z = g_AreaCameraAngle.vz;
-                g_SpawnedActors[g_ScratchPad.cells.bytes[0]].layer          = 0x1E;
-                g_ScenarioState.step                                        = 7;
-            }
+            UI_ModeSet(0);
+            g_ScenarioState.step = 6;
             break;
         case 6:
             if (WINDOW_EFFECT_BUSY()) {
@@ -83,18 +68,16 @@ NON_MATCHING void func_801FA98C(void) {
             g_ScenarioState.step = 7;
             break;
         case 7:
-            SND_SeqStop(0, 2);
-            SND_SEPlay(EMI_SE_ID(SND_BANK_AREA, 2));
+            if (WINDOW_EFFECT_BUSY()) {
+                break;
+            }
             g_ScenarioState.step = 8;
             break;
         case 8:
-            if (g_ScriptVars[0] != 0xC) {
+            if (g_ScriptVars[0] != 8) {
                 break;
             }
-            SND_BGMPlay(0x24, BGM_CUE_LEVEL_DEFAULT, BGM_CUE_SHAPE_DEFAULT);
-            SND_SEPlay(EMI_SE_ID(SND_BANK_AREA, 3));
             g_ScenarioState.step = 9;
-            g_GameFlags ^= GAME_FLAG_SCROLL_LOCK;
             break;
         case 9:
             if (g_ScriptVars[0] != 0xD) {
