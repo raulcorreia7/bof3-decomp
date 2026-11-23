@@ -1,12 +1,13 @@
 #include "battle_15.h"
 
+extern u8 g_BattleAbilityEffectIds[232];
+
 /* Applies the queued hit's HP and AP changes to the target and runs the hit's effect handler. */
 #ifdef NON_MATCHING
 NON_MATCHING void func_8009D198(void) {
     u8  effect;
     u16 action_word;
-    u32 damage_flags;
-    s16 change;
+    s32 change;
 
     if (BATTLER_IS_PLAYER(g_Battle.target)) {
         g_Game.members[g_Battle.target].u.turn.target_flags |= BATTLE_HIT_HP | BATTLE_HIT_HP_LANDED | BATTLE_HIT_AP_LANDED;
@@ -35,7 +36,7 @@ NON_MATCHING void func_8009D198(void) {
     }
 
     if (g_Battle.action_type == BATTLE_ACTION_ABILITY) {
-        effect = ((u8*)BATTLE_ABILITY_CALL_TABLE)[(u16)g_Battle.action_id];
+        effect = g_BattleAbilityEffectIds[(u16)g_Battle.action_id];
     } else {
         action_word = g_Battle.action->unk_02;
         effect      = D_800B470C[action_word >> 8][(u8)action_word];
@@ -43,11 +44,11 @@ NON_MATCHING void func_8009D198(void) {
     g_BattleItemEffects[effect]();
 
     if (BATTLER_IS_PLAYER(g_Battle.target)) {
-        damage_flags = g_Game.members[g_Battle.target].u.turn.damage_flags.value;
-    } else {
-        damage_flags = ENEMY_COMBATANT(g_Battle.target).turn.damage_flags.value;
-    }
-    if (damage_flags & BATTLER_DAMAGE_IMMUNE) {
+        if (g_Game.members[g_Battle.target].u.turn.damage_flags.value & BATTLER_DAMAGE_IMMUNE) {
+            g_Battle.target_record->hp_change = 0;
+            g_Battle.target_record->ap_change = 0;
+        }
+    } else if (ENEMY_COMBATANT(g_Battle.target).turn.damage_flags.value & BATTLER_DAMAGE_IMMUNE) {
         g_Battle.target_record->hp_change = 0;
         g_Battle.target_record->ap_change = 0;
     }
@@ -58,8 +59,8 @@ NON_MATCHING void func_8009D198(void) {
     if (g_Battle.target_record->hp_change < -9999) {
         g_Battle.target_record->hp_change = -9999;
     }
-    if (g_Battle.target_record->hp_change != 0) {
-        change = g_Battle.target_record->hp_change;
+    change = g_Battle.target_record->hp_change;
+    if (change != 0) {
         if (BATTLER_IS_PLAYER(g_Battle.target)) {
             if (change > 0) {
                 if (change < g_Game.members[g_Battle.target].chr.hp) {
