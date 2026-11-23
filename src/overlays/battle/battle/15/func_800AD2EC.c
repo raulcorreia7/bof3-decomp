@@ -9,12 +9,12 @@ MATCH void func_800AD2EC(void) {
     u16          label;
     u8           count;
 
-    TASK_BYTES[0x29] = 1;
-    TASK_BYTES[0x25] = 0x1E;
-    TASK_BYTES[0x26] = 0;
-    TASK_BYTES[0x24] = 0x80;
-    TASK_BYTES[0x27] = 0x1B;
-    TASK_BYTES[0x28] = 1;
+    TASK_BYTES[0x29]          = 1;
+    TASK(Actor)->sheet_page   = 0x1E;
+    TASK(Actor)->sheet_row    = 0;
+    TASK(Actor)->active_flags = 0x80;
+    TASK(Actor)->clut_select  = 0x1B;
+    TASK_BYTES[0x28]          = 1;
     {
         u8* record;
         u8* other;
