@@ -22,7 +22,7 @@ MATCH void func_8019ADE8(void) {
     work                    = TASK(Actor);
     work->pos.x.fixed       = g_Actors[work->unk_06].pos.x.fixed;
     work->pos.y.fixed       = g_Actors[work->unk_06].pos.y.fixed;
-    z                       = FIELD(s32, &g_Actors[work->unk_06], 0x3Cu);
+    z                       = g_Actors[work->unk_06].pos.z.fixed;
     work->tint.bytes.flags  = 0;
     work2                   = TASK(Actor);
     work->pos.z.fixed       = z;

@@ -12,16 +12,18 @@ MATCH void func_801A5400(u8* script) {
     s16    dist;
     u8*    data;
     s16*   counter;
+    u16*   counter_words;
 
-    counter = (s16*)&g_ScratchPad;
-    data    = script;
+    counter       = (s16*)&g_ScratchPad;
+    counter_words = (u16*)&g_ScratchPad;
+    data          = script;
     if (*counter < 30) {
-        slot_record               = &g_Actors[*counter];
-        g_Task                    = slot_record;
-        g_CurrentActor            = slot_record;
-        FIELD(u16, counter, 0x2u) = data[0x2] | (data[0x1] << 8);
+        slot_record      = &g_Actors[*counter];
+        g_Task           = slot_record;
+        g_CurrentActor   = slot_record;
+        counter_words[1] = data[0x2] | (data[0x1] << 8);
         Actor_ResetMotion();
-        Area_SceneSelectRecord(FIELD(u16, counter, 0x2u));
+        Area_SceneSelectRecord(counter_words[1]);
         TASK(Actor)->header.flags      = ACTOR_FLAG_IN_USE;
         coord_record                   = TASK(Actor);
         g_Actors[*counter].walk_dest_x = coord_record->pos.x.fixed = (data[0x5] << 0x10) | (data[0x4] != 0 ? 0x8000 : 0);

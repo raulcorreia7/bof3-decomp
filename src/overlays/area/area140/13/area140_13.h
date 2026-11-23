@@ -65,16 +65,30 @@ extern u8 D_80181B01[];
 extern u8 D_801F4A6C[];
 extern u8 D_801F4A6D[];
 
-/* The eight trigger rows: cell x, cell y, facing, effect flag, spawn flag and spawn type. */
-extern u8 D_801F4A84[];
-extern u8 D_801F4A85[];
-extern u8 D_801F4A86[];
-extern u8 D_801F4A87[];
-extern u8 D_801F4A88[];
-extern u8 D_801F4A89[];
+/* A cell and facing that sets a scene flag, recolours the cell and may spawn its effect or wait for the party. */
+typedef struct Area140Trigger {
+    u8 x;
+    u8 y;
+    u8 facing;
+    u8 flag;
+    u8 spawn; /* nonzero spawns the effect actor on the cell */
+    u8 type;  /* nonzero indexes D_801F4AB4: the cell the party must leave first */
+} Area140Trigger;
 
-/* The two projected-position limits of the party proximity check, by spawn type. */
-extern u16 D_801F4AB4[];
-extern u16 D_801F4AB6[];
+ASSERT_SIZE(Area140Trigger, 0x06);
+
+/* The cell a party member's projected position must not touch. */
+typedef struct Area140Cell {
+    u16 x;
+    u16 y;
+} Area140Cell;
+
+ASSERT_SIZE(Area140Cell, 0x04);
+
+/* The trigger cell count func_801F4380 walks. */
+#define AREA140_TRIGGER_COUNT 8
+
+extern Area140Trigger D_801F4A84[AREA140_TRIGGER_COUNT];
+extern Area140Cell    D_801F4AB4[];
 
 #endif

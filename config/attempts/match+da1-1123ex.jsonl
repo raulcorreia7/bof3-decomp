@@ -1,0 +1,1 @@
+{"function": "emi/etc/commu02/08@0x801D8058", "tried": "u32 y_fixed (23), u32 n (23) and the parameter-only form without the x/y copies", "first_diff": "22 rows baseline: the widths cost a row and the no-copy form shifts the unit (func starts +0x6D08 against +0x6CC4), so neither is usable", "score": "22 rows"}
