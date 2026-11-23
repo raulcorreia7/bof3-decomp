@@ -1,0 +1,1 @@
+{"function": "emi/scenario/scena10/00@0x801F7068", "tried": "pinned the limit shift to a3 with an opaque", "first_diff": "0x801F7090: the timer load coalesces into the pinned a3 (lbu a3) and the shift becomes sll a3,a3 instead of retail's lbu v1; sll a3,v1", "score": "12 differing rows, the same count"}
