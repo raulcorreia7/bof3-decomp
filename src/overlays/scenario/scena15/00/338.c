@@ -810,7 +810,6 @@ MATCH void func_801F9500(WorldPos* pos, s32* vx) {
 
 #ifdef NON_MATCHING
 NON_MATCHING void func_801F97CC(WorldPos* pos, s32* arg) {
-    u32      x_arg;
     POLY_F4* poly;
     s32      point[8];
     s32      lift;
@@ -846,9 +845,8 @@ NON_MATCHING void func_801F97CC(WorldPos* pos, s32* arg) {
     point[2] = (pos->z.fixed + arg[2]) + lift;
     asm __volatile__("" : : : "memory");
     Camera_ProjectPoint(point, (DVECTOR*)(&poly->x3));
-    x_arg = pos->x.fixed;
     setRGB0(poly, (((Actor*)g_Task)->unk_06 & 2) != 0 ? 0x80 : 0, (((Actor*)g_Task)->unk_06 & 2) == 0 ? 0x80 : 0, 0);
-    Area_CellAddPrim(x_arg, pos->y.fixed, 0, sizeof(POLY_F4));
+    Area_CellAddPrim(pos->x.fixed, pos->y.fixed, 0, sizeof(POLY_F4));
 }
 #else
 INCLUDE_ASM(func_801F97CC);
