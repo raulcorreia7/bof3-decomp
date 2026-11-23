@@ -13,7 +13,7 @@ MATCH void func_801F3234(void) {
         TASK(Actor)->header.step++;
     }
 
-    if (abs(g_AreaTargetCellX - COORD_INT(TASK(Actor)->pos.x)) + abs(g_AreaTargetCellY - COORD_INT(TASK(Actor)->pos.y)) >= 0x15) {
+    if (abs(g_AreaCamera.scroll_x.part.integer - COORD_INT(TASK(Actor)->pos.x)) + abs(g_AreaCamera.scroll_y.part.integer - COORD_INT(TASK(Actor)->pos.y)) >= 0x15) {
         return;
     }
 

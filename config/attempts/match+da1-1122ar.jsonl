@@ -1,0 +1,3 @@
+{"function": "emi/world01/area075/13@0x801F4874", "tried": "inspected the frame-8 cause: retail saves s0-s7,ra in a 0x40 frame and loads D_801F58C6 before the prologue", "first_diff": "114 rows; frame 0x40 against 0x38, the retail extra slot is a wider or extra live local, per the coverage unblocker", "score": "114 rows"}
+{"function": "emi/etc/commu05/07@0x801D14C8", "tried": "re-measured after the unit merges: the row is comparable again", "first_diff": "96 rows; first hunk 0x801D14CC move t0,a0 against the candidate prologue save", "score": "96 rows"}
+{"function": "emi/etc/bate/00@0x801D1C90", "tried": "re-checked the unit-order block", "first_diff": "code before it in the unit has another size", "score": "-"}

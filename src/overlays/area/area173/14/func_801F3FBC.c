@@ -1,7 +1,7 @@
 #include "area173_14.h"
 
-#ifdef NON_MATCHING
-NON_MATCHING void func_801F3FBC(s32 mode, s32 value) {
+/* Draws the three runs of the mode's board: a draw-mode packet and a projected quad per run. */
+MATCH void func_801F3FBC(s32 mode, s32 value) {
     POLY_FT4* prim;
     s32       tpage;
     s32       i;
@@ -11,28 +11,26 @@ NON_MATCHING void func_801F3FBC(s32 mode, s32 value) {
     long      flag;
 
     factor        = D_801F530C[mode];
-    D_1F800034[0] = ((COORD_INT(TASK(Actor)->pos.x) - 0x80) << 7) + mode * 0xC0 - 0x40 - TASK(Actor)->screen_y * factor;
-    D_1F800036    = ((COORD_INT(TASK(Actor)->pos.y) - 0x80) << 7) - 0x40;
+    D_1F800034[0] = (((FIX_INT(TASK(Actor)->pos.x.fixed) - 0x80) << 7) - 0x40) + mode * 0xC0 - (s16)TASK(Actor)->screen_y * factor;
+    D_1F800034[1] = ((FIX_INT(TASK(Actor)->pos.y.fixed) - 0x80) << 7) - 0x40;
 
     i = 0;
     do {
         tpage = getTPage(1, 0, 320, 256);
         SetDrawMode((DR_MODE*)g_GfxPrimCursor, 0, 0, tpage, 0);
         Area_CellAddPrim(TASK(Actor)->pos.x.fixed, TASK(Actor)->pos.y.fixed, (s8)value, sizeof(DR_MODE));
-
         prim = (POLY_FT4*)g_GfxPrimCursor;
         SetPolyFT4(prim);
         SetShadeTex(prim, 0);
         for (j = 0; j < 4; j++) {
-            setVector(&g_ScratchPadVectors[j], D_1F800034[0] + LOHU(D_801F5310[i * 24 + j * 6]), D_1F800034[1] + LOHU(D_801F5312[i * 24 + j * 6]), LOHU(D_801F5314[i * 24 + j * 6]));
+            g_ScratchPadVectors[j].vx = D_1F800034[0] + D_801F5310[i][j].x;
+            g_ScratchPadVectors[j].vy = D_1F800034[1] + D_801F5310[i][j].y;
+            g_ScratchPadVectors[j].vz = D_801F5310[i][j].z;
         }
         RotTransPers4(&g_ScratchPadVectors[0], &g_ScratchPadVectors[1], &g_ScratchPadVectors[2], &g_ScratchPadVectors[3], (long*)&prim->x0, (long*)&prim->x1, (long*)&prim->x2, (long*)&prim->x3, &p,
                       &flag);
-        Area_ApplyTileToQuad(D_801F5358[TASK(Actor)->param.unk_0B * 6 + mode * 3 + i], prim, 1);
+        Area_ApplyTileToQuad(D_801F5358[TASK(Actor)->param.unk_0B][mode][i], prim, 1);
         i++;
         Area_CellAddPrim(TASK(Actor)->pos.x.fixed, TASK(Actor)->pos.y.fixed, (s8)value, sizeof(POLY_FT4));
     } while (i < 3);
 }
-#else
-INCLUDE_ASM(func_801F3FBC);
-#endif
