@@ -19,17 +19,17 @@ MATCH void func_8019C954(void) {
     TASK(Actor)->draw_layer   = record->draw_layer;
     TASK(Actor)->unk_48       = 0;
     {
-        u8* work;
-        u8* next;
+        Actor* work;
+        Actor* next;
 
-        work                    = TASK(u8);
-        FIELD(s32, work, 0x34u) = record->pos.x.fixed;
-        FIELD(s32, work, 0x38u) = record->pos.y.fixed;
-        counter                 = COORD_INT(record->pos.z);
-        work[0x5D]              = 0;
-        next                    = TASK(u8);
-        FIELD(s16, work, 0x3Eu) = counter;
-        next[0x5E]              = 0;
+        work                   = TASK(Actor);
+        work->pos.x.fixed      = record->pos.x.fixed;
+        work->pos.y.fixed      = record->pos.y.fixed;
+        counter                = COORD_INT(record->pos.z);
+        work->tint.bytes.rgb.r = 0;
+        next                   = TASK(Actor);
+        COORD_INT(work->pos.z) = counter;
+        next->tint.bytes.rgb.g = 0;
     }
     TASK(Actor)->tint.bytes.rgb.b = 0;
     TASK(Actor)->tint.bytes.flags = 0;
