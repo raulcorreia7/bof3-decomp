@@ -1,0 +1,2 @@
+{"function": "emi/etc/start/08@0x801E2898", "tried": "measured the prologue-order row; retail saves s3 first at 0xA4, the draft saves s0 at 0x98", "first_diff": "90 rows; the frame and saved-register set differ before the first body block, so the declaration/first-use order is the next lever", "score": "90 rows"}
+{"function": "emi/etc/commu02/08@0x801D7234", "tried": "re-checked the unit-order block", "first_diff": "code before it in the unit has another size", "score": "-"}

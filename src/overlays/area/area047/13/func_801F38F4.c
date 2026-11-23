@@ -3,9 +3,9 @@
 MATCH void func_801F38F4(void) {
     TASK(Actor)->pos.x.fixed = TO_COORD(18);
     FAKE_ORDER_FENCE(); /* FAKE: the order fence keeps the actor store ahead of the target store. */
-    g_AreaScrollTargetX      = TO_COORD(18);
-    TASK(Actor)->pos.y.fixed = TO_COORD(36);
-    g_AreaScrollTargetY      = TO_COORD(36);
+    g_AreaCamera.scroll_x.fixed = TO_COORD(18);
+    TASK(Actor)->pos.y.fixed    = TO_COORD(36);
+    g_AreaCamera.scroll_y.fixed = TO_COORD(36);
     Area_InitMapRenderer();
     COORD_INT(TASK(Actor)->pos.z) = 0x1220;
     Area_ScrollAdvance(4640);
