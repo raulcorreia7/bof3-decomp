@@ -1,12 +1,7 @@
 #include "scena03_00.h"
 #include "area/map.h"
 
-#if BOF3_USE_ASM
-__asm__(".include \"include/match/macro.inc\"\n");
-#endif
-
-#ifdef NON_MATCHING
-NON_MATCHING void func_801FB268(void) {
+MATCH void func_801FB268(void) {
     u8  slot;
     s8  staged_index;
     s8  staged;
@@ -71,9 +66,13 @@ NON_MATCHING void func_801FB268(void) {
                     g_SpawnedActors[staged].header.flags      = ACTOR_FLAG_IN_USE;
                     staged_index                              = *staged_slot;
                     g_SpawnedActors[staged_index].type        = 0x22;
+                    staged_index                              = *staged_slot;
                     g_SpawnedActors[staged_index].pos.x.fixed = 0x230000;
+                    FAKE_BARRIER(); /* FAKE: retain the staged slot reload after x. */
                     staged_index                              = *staged_slot;
                     g_SpawnedActors[staged_index].pos.y.fixed = 0x4F0000;
+                    FAKE_BARRIER(); /* FAKE: retain the staged slot reload after y. */
+                    staged_index                              = *staged_slot;
                     g_SpawnedActors[staged_index].pos.z.fixed = TO_COORD(0x480);
                 }
                 g_ScenarioState.step = 7;
@@ -125,8 +124,8 @@ NON_MATCHING void func_801FB268(void) {
         case 13:
             if (g_ScriptVars[0] == 0x34) {
                 Game_ClearScriptActive();
+                g_ScriptVars[0] = 0;
                 SYS_SetFlag(g_SceneFlags, 0x1D);
-                g_ScriptVars[0]          = 0;
                 g_ScenarioState.state_04 = 0;
                 g_ScenarioState.step     = 0;
                 g_GameFlags &= ~0x80;
@@ -134,6 +133,3 @@ NON_MATCHING void func_801FB268(void) {
             break;
     }
 }
-#else
-INCLUDE_ASM(func_801FB268);
-#endif
