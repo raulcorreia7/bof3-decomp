@@ -13,7 +13,7 @@ MATCH void func_801F2CB0(s32 timer) {
     s32                   i;
     s32                   angle;
     s32                   next_angle;
-    /* FAKE: The retail register allocation requires the outer angle in s1. */
+    /* FAKE: The outer angle needs s1 to preserve the retail loop's saved-register allocation. */
     FAKE_REG(s32, outer_angle, "s1");
     register s32 rim_y;
     s32          shade;
