@@ -1,0 +1,1 @@
+{"function": "emi/scenario/scena10/00@0x801F7FA0", "tried": "Reused the slot only from the pitch store onward; s16 yaw grew to 366 instructions and s32 yaw hoisted into the index load delay at 363. A memory barrier after the pitch store puts the signed yaw read back in retail order.", "first_diff": "None with s32 yaw and the pitch-store barrier.", "score": 0}

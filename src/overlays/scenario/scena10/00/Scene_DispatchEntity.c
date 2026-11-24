@@ -300,8 +300,7 @@ MATCH void func_801F7F8C(void) {
     D_80146872 = 1;
 }
 
-#ifdef NON_MATCHING
-NON_MATCHING void func_801F7FA0(void) {
+MATCH void func_801F7FA0(void) {
     s32 actor_index;
     u16 updated_flags;
     u8  slot;
@@ -387,19 +386,23 @@ NON_MATCHING void func_801F7FA0(void) {
         actor_index                = slot & 0xFF;
         D_801FE9D8                 = slot;
         if (actor_index != 0xFF) {
-            g_SpawnedActors[actor_index].header.flags  = 1;
-            g_SpawnedActors[D_801FE9D8].type           = 0x13;
-            g_SpawnedActors[D_801FE9D8].camera_angle.x = -0x2AA;
-            g_SpawnedActors[D_801FE9D8].camera_angle.z = 0x200;
-            g_SpawnedActors[D_801FE9D8].layer          = 0x40;
-            g_SpawnedActors[D_801FE9D8].camera_angle.y = D_801492DA;
+            g_SpawnedActors[actor_index].header.flags = 1;
+            g_SpawnedActors[D_801FE9D8].type          = 0x13;
+            {
+                u8  spawn_slot = D_801FE9D8;
+                s32 yaw;
+
+                g_SpawnedActors[spawn_slot].camera_angle.x = -0x2AA;
+                FAKE_BARRIER(); /* FAKE: keep the yaw read after the pitch store. */
+                yaw                                        = D_801492DA;
+                g_SpawnedActors[spawn_slot].camera_angle.z = 0x200;
+                g_SpawnedActors[spawn_slot].layer          = 0x40;
+                g_SpawnedActors[spawn_slot].camera_angle.y = yaw;
+            }
         }
     }
     D_80146872 = 2;
 }
-#else
-INCLUDE_ASM(func_801F7FA0);
-#endif
 
 MATCH void func_801F8550(void) {
     Game_SetScriptActive();
