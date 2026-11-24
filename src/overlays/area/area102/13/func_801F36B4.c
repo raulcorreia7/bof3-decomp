@@ -5,29 +5,29 @@
  * velocity and swaying with the frame count. */
 NON_MATCHING void func_801F36B4(s32 steps) {
     POLY_FT4* prim;
-    SVECTOR*  corners;
-    s16*      out;
-    long      depth;
-    long      flag;
-    s32       height;
-    s32       i;
-    s32       order;
-    s32       phase;
-    s32       rise;
-    s32       spread;
-    s32       step;
-    s32       x;
-    s32       y;
-    s32       shade;
+    FAKE_REG(SVECTOR*, corners, "s7");
+    s16* out;
+    long depth;
+    long flag;
+    s32  height;
+    s32  i;
+    s32  order;
+    s32  phase;
+    s32  rise;
+    s32  spread;
+    s32  step;
+    s32  x;
+    s32  y;
+    s32  shade;
 
     phase   = (g_FrameCount * 4) & 7;
     step    = phase * steps;
     x       = (COORD_INT(TASK(Actor)->pos.x) - 0x80) << 7;
     y       = (COORD_INT(TASK(Actor)->pos.y) - 0x80) << 7;
     height  = (s16) - (COORD_INT(TASK(Actor)->pos.z) / 2);
+    i       = 0;
     corners = g_ScratchPadVectors;
     out     = D_1F800034;
-    i       = 0;
     order   = 0;
 loop:
     prim = g_GfxPrimCursor;
@@ -35,9 +35,9 @@ loop:
     SetShadeTex(prim, 0);
     rise        = step + (order << 3);
     corners->vx = x + rise * TASK(Actor)->vx;
-    D_1F800018  = height;
     D_1F800016  = y + rise * TASK(Actor)->vy;
-    RotTransPers(corners, (long*)&corners[4], &depth, &flag);
+    D_1F800018  = height;
+    RotTransPers(corners, (long*)D_1F800034, &depth, &flag);
     spread   = step / 16 + 4 + ((i < 4) ? order / 2 : steps * 2);
     shade    = (((7 - i) * 8 + 7 - phase) << 17) / (8 - steps);
     /* Not setXYWH: retail adds the radius to each corner and stores the far corners first. */

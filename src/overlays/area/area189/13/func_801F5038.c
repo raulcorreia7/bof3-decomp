@@ -2,18 +2,24 @@
 
 #ifdef NON_MATCHING
 NON_MATCHING void func_801F5038(void) {
+    /* FAKE: Pin the mask to a1 so the screen pointer reuses a1 after the transform. */
+    FAKE_REG(s32, mask, "a1");
     SVECTOR* vertex;
-    u16*     screen;
+    long*    screen;
     u8*      flags;
     long     depth;
     long     flag;
+    s16      actor_z_int;
 
+    mask              = 0xFFFFFF;
     vertex            = g_ScratchPadVectors;
-    screen            = D_1F800034;
-    vertex->vx        = (s16)(((((g_AreaScrollTargetX - 1) & 0xFFFFFF) + 1) >> 9) - 0x4000);
-    SP_REF(s16, 0x16) = (s16)(((((g_AreaScrollTargetY - 1) & 0xFFFFFF) + 1) >> 9) - 0x4000);
-    SP_REF(s16, 0x18) = (s16)(-COORD_INT(TASK(Actor)->pos.z) / 2);
-    RotTransPers(vertex, (long*)screen, &depth, &flag);
+    vertex->vx        = (s16)(((((g_AreaScrollTargetX - 1) & mask) + 1) >> 9) - 0x4000);
+    SP_REF(s16, 0x16) = (s16)(((((g_AreaScrollTargetY - 1) & mask) + 1) >> 9) - 0x4000);
+    actor_z_int       = COORD_INT(TASK(Actor)->pos.z);
+    /* FAKE: Keep screen setup between the z load and its arithmetic. */
+    FAKE_ORDER_LOCK(screen = D_1F800034);
+    SP_REF(s16, 0x18) = (s16)(-actor_z_int / 2);
+    RotTransPers(vertex, screen, &depth, &flag);
 
     flags                 = D_80144EF8;
     TASK(Actor)->screen_y = SP_REF(u16, 0x36);

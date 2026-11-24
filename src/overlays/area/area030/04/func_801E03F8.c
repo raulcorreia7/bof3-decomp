@@ -3,6 +3,12 @@
 /* Reflects the work velocity off the play-field bounds. */
 #ifdef NON_MATCHING
 NON_MATCHING void func_801E03F8(void) {
+    /* FAKE: Keep the 62-cell ceiling in a3 for the matching bounds. */
+    FAKE_REG(s32, max_y, "a3");
+    /* FAKE: Keep the 26-cell floor in a2 before the row loads. */
+    FAKE_REG(s32, upper_floor, "a2");
+    /* FAKE: Keep the 17-cell floor in v0 for the lower-bound test. */
+    FAKE_REG(s32, lower_floor, "v0");
     s32 upper_limit;
     s32 lower_limit;
     s32 value;
@@ -14,6 +20,9 @@ NON_MATCHING void func_801E03F8(void) {
     u8  direction;
     u8  entry_face;
     u8  row_facing;
+    /* FAKE: Keep the row offset in a0 for both bound calculations. */
+    FAKE_REG(s32, row_offset, "a0");
+    s32 lower_base;
 
     TASK(FishingState)->pos_x     = g_FacingOffsets[TASK(FishingState)->counter_08].x;
     TASK(FishingState)->cursor_10 = g_FacingOffsets[TASK(FishingState)->counter_08].y;
@@ -23,29 +32,35 @@ NON_MATCHING void func_801E03F8(void) {
         TASK(FishingState)->cursor_10 = TASK(FishingState)->cursor_10 * 2;
     }
     pos_x = TASK(FishingState)->motion.unk_34;
-    if (pos_x <= TO_COORD(8)) {
-        if (TASK(FishingState)->pos_x < 0) {
-            TASK(FishingState)->pos_x = -TASK(FishingState)->pos_x;
-        }
-    } else if (pos_x > 0x13FFFF && TASK(FishingState)->pos_x > 0) {
-        TASK(FishingState)->pos_x = -TASK(FishingState)->pos_x;
-    }
+    /* FAKE: Keep the x clamp before the y-bound constants like retail. */
+    FAKE_ORDER_LOCK(
+        if (pos_x <= TO_COORD(8)) {
+            if (TASK(FishingState)->pos_x < 0) {
+                TASK(FishingState)->pos_x = -TASK(FishingState)->pos_x;
+            }
+        } else if (pos_x > 0x13FFFF && TASK(FishingState)->pos_x > 0) { TASK(FishingState)->pos_x = -TASK(FishingState)->pos_x; });
+    upper_floor = 0x19FFFF;
     row_facing  = FISHING_ROW->fish_row;
-    upper_limit = TO_COORD(62) - row_facing * TO_COORD(12);
+    row_offset  = row_facing * TO_COORD(12);
+    max_y       = TO_COORD(62);
+    upper_limit = max_y - row_offset;
     entry_face  = D_801E2AD3[TASK(FishingState)->cue_index * sizeof(FishingSceneCue)];
     upper_limit += entry_face * TO_COORD(15);
-    lower_limit = TO_COORD(50) - row_facing * TO_COORD(12) - entry_face * TO_COORD(15);
-    /* Clamp the two bounds to 26..62 and 17..50 cells; the tests are > floor - 1. */
-    if (upper_limit > 0x19FFFF) {
-        value = TO_COORD(62);
-        if (upper_limit <= TO_COORD(62)) {
-            value = upper_limit;
-        }
-    } else {
-        value = TO_COORD(26);
-    }
+    lower_base  = TO_COORD(50) - row_offset;
+    lower_limit = lower_base - entry_face * TO_COORD(15);
+    /* FAKE: Keep the y-bound threshold setup after the x clamp like retail. */
+    FAKE_ORDER_LOCK(
+        if (upper_limit > upper_floor) {
+            value = max_y;
+            if (upper_limit <= max_y) {
+                value = upper_limit;
+            }
+        } else { value = TO_COORD(26); });
     upper_limit = value;
-    if (lower_limit > 0x10FFFF) {
+    /* FAKE: Keep the ceiling in a3 through the bound comparison. */
+    FAKE_USE(max_y);
+    lower_floor = 0x10FFFF;
+    if (lower_limit > lower_floor) {
         value = TO_COORD(50);
         if (lower_limit <= TO_COORD(50)) {
             value = lower_limit;
