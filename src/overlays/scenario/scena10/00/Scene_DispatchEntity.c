@@ -357,9 +357,9 @@ MATCH void func_801F7FA0(void) {
     }
     if (g_GameAreaId == 0x79) {
         if ((SYS_TestFlag(g_SceneFlags, 0x16) == 0) && (SYS_TestFlag(g_SceneFlags, 0x15) != 0)) {
-            g_AreaCameraAngle.vx       = -0x2EC;
-            FIELD(s16, &D_801492DA, 2) = 0x360;
-            g_AreaCameraOffsetZ        = 0x5DC;
+            g_AreaCameraAngle.vx = -0x2EC;
+            g_AreaCameraAngle.vz = 0x360;
+            g_AreaCameraOffsetZ  = 0x5DC;
             func_801C601C(0);
         }
         g_Game.members[0].param.unk_0B = 0;
@@ -380,11 +380,11 @@ MATCH void func_801F7FA0(void) {
     }
     if ((g_GameAreaId == 0x84) && (g_GameCellType == 1) && (SYS_TestFlag(g_SceneFlags, 0x14) == 0)) {
         SND_SEPlay(0x204);
-        D_801FE9DC                 = 1;
-        FIELD(s16, &D_801492DA, 2) = 0x302;
-        slot                       = func_8019601C();
-        actor_index                = slot & 0xFF;
-        D_801FE9D8                 = slot;
+        D_801FE9DC           = 1;
+        g_AreaCameraAngle.vz = 0x302;
+        slot                 = func_8019601C();
+        actor_index          = slot & 0xFF;
+        D_801FE9D8           = slot;
         if (actor_index != 0xFF) {
             g_SpawnedActors[actor_index].header.flags = 1;
             g_SpawnedActors[D_801FE9D8].type          = 0x13;
@@ -394,7 +394,7 @@ MATCH void func_801F7FA0(void) {
 
                 g_SpawnedActors[spawn_slot].camera_angle.x = -0x2AA;
                 FAKE_BARRIER(); /* FAKE: keep the yaw read after the pitch store. */
-                yaw                                        = D_801492DA;
+                yaw                                        = g_AreaCameraAngle.vy;
                 g_SpawnedActors[spawn_slot].camera_angle.z = 0x200;
                 g_SpawnedActors[spawn_slot].layer          = 0x40;
                 g_SpawnedActors[spawn_slot].camera_angle.y = yaw;
