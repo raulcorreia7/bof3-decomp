@@ -5,22 +5,23 @@
 __asm__(".include \"include/match/macro.inc\"\n");
 #endif
 
-MATCH void func_801EEC24(void) {
+/* func_801EEC24 */
+MATCH void BMagic_KaiserBreathUpdate(void) {
     Callback     handlers[8];
     PartyMember* saved_battler;
     s32          tpage;
     u8           i;
 
-    __builtin_memcpy(handlers, D_801EEC04, sizeof(handlers));
+    __builtin_memcpy(handlers, g_BMagicKaiserBreathModes, sizeof(handlers));
     SYS_DISPATCH_BYTE(handlers, TASK(PartyMember)->header.mode);
     tpage = getTPage(TPAGE_DEPTH_4BIT, TPAGE_ABR_SUB, 320, 256);
     GFX_ADD_DITHERED_DRAW_MODE(BMAGIC_LAYER_FOREGROUND, tpage);
-    for (i = 0; i < ARRAY_COUNT(D_801F1CA0); i++) {
-        if (D_801F1CA0[i].header.flags & BMAGIC_EFFECT_IN_USE) {
-            saved_battler         = g_BattleEffectBattler;
-            D_801F24E0            = &D_801F1CA0[i];
-            g_BattleEffectBattler = D_801F1CA0[i].battler;
-            func_801F10F4();
+    for (i = 0; i < ARRAY_COUNT(g_BMagicKaiserBreathParticles); i++) {
+        if (g_BMagicKaiserBreathParticles[i].header.flags & BMAGIC_EFFECT_IN_USE) {
+            saved_battler                = g_BattleEffectBattler;
+            g_BMagicKaiserBreathParticle = &g_BMagicKaiserBreathParticles[i];
+            g_BattleEffectBattler        = g_BMagicKaiserBreathParticles[i].battler;
+            BMagic_KaiserBreathRunParticle();
             g_BattleEffectBattler = saved_battler;
         }
     }
@@ -28,17 +29,18 @@ MATCH void func_801EEC24(void) {
     GFX_ADD_DITHERED_DRAW_MODE(BMAGIC_LAYER_FOREGROUND, tpage);
 }
 
-MATCH void func_801EEDEC(void) {
+/* func_801EEDEC */
+MATCH void BMagic_KaiserBreathInit(void) {
     PartyMember* target;
     u16*         src;
     u16*         dst;
     u16          i;
     u32          slot;
 
-    for (i = 0; i < ARRAY_COUNT(D_801F1CA0); i++) {
-        D_801F1CA0[i].header.flags = 0;
-        D_801F1CA0[i].header.mode  = 0;
-        D_801F1CA0[i].header.step  = 0;
+    for (i = 0; i < ARRAY_COUNT(g_BMagicKaiserBreathParticles); i++) {
+        g_BMagicKaiserBreathParticles[i].header.flags = 0;
+        g_BMagicKaiserBreathParticles[i].header.mode  = 0;
+        g_BMagicKaiserBreathParticles[i].header.step  = 0;
     }
     TASK(PartyMember)->facing = g_BattleEffectBattler->facing;
     Battle_CenterCamera();
@@ -48,7 +50,7 @@ MATCH void func_801EEDEC(void) {
     TASK(PartyMember)->header.mode += 1;
     slot                               = Battle_AllocEffect(1, 105) & BYTE_MASK;
     target                             = TASK(PartyMember);
-    g_BattleEffects[slot].header.mode  = 1;
+    g_BattleEffects[slot].header.mode  = KAISER_BREATH_EFFECT_FLASH;
     g_BattleEffects[slot].target.party = target;
     TASK(PartyMember)->param.unk_0B += 1;
     BMAGIC_BRIGHTEN_PALETTE_ROW(dst, src, i);
@@ -57,7 +59,8 @@ MATCH void func_801EEDEC(void) {
 }
 
 /* Loads the archive of the current dragon form once the step timer runs out. */
-MATCH void func_801EEF64(void) {
+/* func_801EEF64 */
+MATCH void BMagic_KaiserBreathLoadDragon(void) {
     u32 archive;
     u8  timer;
 
@@ -65,14 +68,14 @@ MATCH void func_801EEF64(void) {
     TASK(PartyMember)->unk_09 = timer;
     if (timer == 0) {
         switch (g_Battle.dragon_form) {
-            case 6:
+            case DRAGON_FORM_WILDFIRE:
             default:
                 archive = EMI_SLOT_KAIZAR_N;
                 break;
-            case 7:
+            case DRAGON_FORM_FAILURE_KAISER:
                 archive = EMI_SLOT_KAIZAR_F;
                 break;
-            case 8:
+            case DRAGON_FORM_BERSERK_KAISER:
                 archive = EMI_SLOT_KAIZAR_D;
                 break;
         }
@@ -81,7 +84,8 @@ MATCH void func_801EEF64(void) {
     }
 }
 
-MATCH void func_801EF000(void) {
+/* func_801EF000 */
+MATCH void BMagic_KaiserBreathStartDragon(void) {
     u16          i;
     u32          slot;
     PartyMember* work;
@@ -95,7 +99,7 @@ MATCH void func_801EF000(void) {
     slot                               = Battle_AllocEffect(1, 0x69) & BYTE_MASK;
     work                               = TASK(PartyMember);
     g_BattleEffects[slot].unk_04       = 0x21;
-    g_BattleEffects[slot].header.mode  = 0;
+    g_BattleEffects[slot].header.mode  = KAISER_BREATH_EFFECT_DRAGON;
     g_BattleEffects[slot].arg.unk_09   = 0x18;
     g_BattleEffects[slot].target.party = work;
     TASK(PartyMember)->param.unk_0B += 1;
@@ -106,14 +110,15 @@ MATCH void func_801EF000(void) {
     TASK(PartyMember)->header.mode += 1;
 }
 
-MATCH void func_801EF110(void) {
+/* func_801EF110 */
+MATCH void BMagic_KaiserBreathWaitDragon(void) {
     PartyMember* work;
     u32          slot;
 
     if (TASK(PartyMember)->param.unk_0B == 0) {
         slot                               = Battle_AllocEffect(1, 0x69) & BYTE_MASK;
         work                               = TASK(PartyMember);
-        g_BattleEffects[slot].header.mode  = 1;
+        g_BattleEffects[slot].header.mode  = KAISER_BREATH_EFFECT_FLASH;
         g_BattleEffects[slot].target.party = work;
         TASK(PartyMember)->param.unk_0B++;
         TASK(PartyMember)->unk_09 = 10;
@@ -121,7 +126,8 @@ MATCH void func_801EF110(void) {
     }
 }
 
-MATCH void func_801EF1C0(void) {
+/* func_801EF1C0 */
+MATCH void BMagic_KaiserBreathLoadCharacter(void) {
     u8 count;
     u8 found;
     u8 i;
@@ -164,7 +170,8 @@ MATCH void func_801EF1C0(void) {
     TASK(PartyMember)->header.mode += 1;
 }
 
-MATCH void func_801EF3D0(void) {
+/* func_801EF3D0 */
+MATCH void BMagic_KaiserBreathLoadCharacterForm(void) {
     if (!EMI_IsReady()) {
         return;
     }
@@ -176,7 +183,8 @@ MATCH void func_801EF3D0(void) {
     TASK(PartyMember)->header.mode += 1;
 }
 
-MATCH void func_801EF488(void) {
+/* func_801EF488 */
+MATCH void BMagic_KaiserBreathShowParty(void) {
     PartyMember* prev;
     PartyMember* battler;
     s32          i;
@@ -187,15 +195,15 @@ MATCH void func_801EF488(void) {
         if (g_Game.party_size != 0) {
             do {
                 slot                              = i & BYTE_MASK;
-                g_Game.members[slot].header.flags = 1;
+                g_Game.members[slot].header.flags = ACTOR_FLAG_IN_USE;
                 prev                              = TASK(PartyMember);
                 battler                           = &g_Game.members[slot];
                 g_Task                            = battler;
                 Script_Select((battler->facing + 4) & BYTE_MASK);
-                if (g_Game.members[slot].chr.status & 0x2080) {
+                if (g_Game.members[slot].chr.status & (STATUS_LOW_HP | STATUS_POISONED)) {
                     Script_Select((TASK(PartyMember)->facing + 0x18) & BYTE_MASK);
                 }
-                if (g_Game.members[slot].chr.status & 0x800) {
+                if (g_Game.members[slot].chr.status & STATUS_UNK_11) {
                     Script_Select((TASK(PartyMember)->facing + 0x30) & BYTE_MASK);
                 }
                 if (Battle_SlotIsBlocked(slot) & BYTE_MASK) {
@@ -216,13 +224,14 @@ MATCH void func_801EF488(void) {
 
 /* Runs the effect step with g_Scripts on the character sprites, then cycles nine colours of the
  * battle magic palette row every fourth frame. */
-MATCH void func_801EF6AC(void) {
+/* func_801EF6AC */
+MATCH void BMagic_KaiserBreathRunDragon(void) {
     u16* dst;
     u16* src;
     u8   i;
 
     g_Scripts = CHARACTER_SPRITES_BASE;
-    SYS_DISPATCH_BYTE(D_801F1BD4, TASK(PartyMember)->header.step);
+    SYS_DISPATCH_BYTE(g_BMagicKaiserBreathDragonSteps, TASK(PartyMember)->header.step);
     if (TASK(PartyMember)->header.flags != 0 && TASK(PartyMember)->header.step != 0) {
         Area_AddGridActor();
         if ((g_FrameCount & 3) == 0) {
@@ -242,7 +251,8 @@ MATCH void func_801EF6AC(void) {
     g_Scripts = AREA_SCRIPT_TABLE;
 }
 
-MATCH void func_801EF7FC(void) {
+/* func_801EF7FC */
+MATCH void BMagic_KaiserBreathDragonStart(void) {
     PartyMember* work;
     PartyMember* task;
     PartyMember* actor;
@@ -304,7 +314,8 @@ MATCH void func_801EF7FC(void) {
     TASK(PartyMember)->header.step += 1;
 }
 
-MATCH void func_801EFA68(void) {
+/* func_801EFA68 */
+MATCH void BMagic_KaiserBreathDragonFlyIn(void) {
     u8 count;
 
     TASK(PartyMember)->screen_x.value += TASK(PartyMember)->unk_0C;
@@ -331,7 +342,8 @@ MATCH void func_801EFA68(void) {
     TASK(PartyMember)->header.step++;
 }
 
-MATCH void func_801EFB64(void) {
+/* func_801EFB64 */
+MATCH void BMagic_KaiserBreathDragonSettle(void) {
     PartyMember* work  = TASK(PartyMember);
     u8           timer = work->unk_09 - 1;
     work->unk_0C += work->unk_18;
@@ -345,7 +357,8 @@ MATCH void func_801EFB64(void) {
     }
 }
 
-MATCH void func_801EFBF8(void) {
+/* func_801EFBF8 */
+MATCH void BMagic_KaiserBreathDragonHover(void) {
     u8 count;
 
     Script_AnimStepLoop();
@@ -358,7 +371,8 @@ MATCH void func_801EFBF8(void) {
     }
 }
 
-MATCH void func_801EFC74(void) {
+/* func_801EFC74 */
+MATCH void BMagic_KaiserBreathDragonBreathe(void) {
     PartyMember* battler;
     PartyMember* ring_battler;
     PartyMember* spark_battler;
@@ -376,50 +390,52 @@ MATCH void func_801EFC74(void) {
     func_800A9610(g_Battle.target_selector, 16);
     slot                               = Battle_AllocEffect(1, 0x69) & BYTE_MASK;
     battler                            = g_BattleEffectBattler;
-    g_BattleEffects[slot].header.mode  = 2;
+    g_BattleEffects[slot].header.mode  = KAISER_BREATH_EFFECT_RINGS;
     g_BattleEffects[slot].target.party = battler;
     g_BattleEffectBattler->param.unk_0B += 1;
     slot                               = Battle_AllocEffect(1, 0x69) & BYTE_MASK;
     battler                            = g_BattleEffectBattler;
-    g_BattleEffects[slot].header.mode  = 3;
+    g_BattleEffects[slot].header.mode  = KAISER_BREATH_EFFECT_BEAM;
     g_BattleEffects[slot].target.party = battler;
     g_BattleEffectBattler->param.unk_0B += 1;
-    for (i = 0; i < 8; i++) {
-        slot = func_801F1A58();
+    for (i = 0; i < KAISER_BREATH_ORB_COUNT; i++) {
+        slot = BMagic_KaiserBreathAllocParticle();
         if (slot == GAME_NONE) {
             continue;
         }
-        ring_battler                 = g_BattleEffectBattler;
-        D_801F1CA0[slot].header.mode = 0;
-        D_801F1CA0[slot].header.step = 0;
-        D_801F1CA0[slot].unk_07      = i;
-        D_801F1CA0[slot].battler     = ring_battler;
+        ring_battler                                    = g_BattleEffectBattler;
+        g_BMagicKaiserBreathParticles[slot].header.mode = KAISER_BREATH_PARTICLE_ORB;
+        g_BMagicKaiserBreathParticles[slot].header.step = 0;
+        g_BMagicKaiserBreathParticles[slot].unk_07      = i;
+        g_BMagicKaiserBreathParticles[slot].battler     = ring_battler;
         g_BattleEffectBattler->param.unk_0B += 1;
     }
-    for (i = 0; i < 28; i++) {
-        slot = func_801F1A58();
+    for (i = 0; i < KAISER_BREATH_SPARK_COUNT; i++) {
+        slot = BMagic_KaiserBreathAllocParticle();
         if (slot == GAME_NONE) {
             continue;
         }
-        spark_battler                = g_BattleEffectBattler;
-        D_801F1CA0[slot].header.mode = 1;
-        D_801F1CA0[slot].header.step = 0;
-        D_801F1CA0[slot].unk_07      = i;
-        D_801F1CA0[slot].battler     = spark_battler;
-        D_801F1CA0[slot].unk_26      = (i < 16) ? ((i & 0xF) >> 1) + 1 : (i & 0xF) + 1;
+        spark_battler                                   = g_BattleEffectBattler;
+        g_BMagicKaiserBreathParticles[slot].header.mode = KAISER_BREATH_PARTICLE_SPARK;
+        g_BMagicKaiserBreathParticles[slot].header.step = 0;
+        g_BMagicKaiserBreathParticles[slot].unk_07      = i;
+        g_BMagicKaiserBreathParticles[slot].battler     = spark_battler;
+        g_BMagicKaiserBreathParticles[slot].unk_26      = (i < 16) ? ((i & 0xF) >> 1) + 1 : (i & 0xF) + 1;
         g_BattleEffectBattler->param.unk_0B += 1;
     }
     TASK(PartyMember)->header.step++;
 }
 
-MATCH void func_801EFEF0(void) {
+/* func_801EFEF0 */
+MATCH void BMagic_KaiserBreathDragonBreatheEnd(void) {
     if (Script_AnimStepOnce() != 0u) {
         TASK(PartyMember)->unk_09      = 0xF;
         TASK(PartyMember)->header.step = TASK(PartyMember)->header.step + 1;
     }
 }
 
-MATCH void func_801EFF48(void) {
+/* func_801EFF48 */
+MATCH void BMagic_KaiserBreathDragonLeave(void) {
     u32 direction;
     u8  timer;
 
@@ -445,7 +461,8 @@ MATCH void func_801EFF48(void) {
     }
 }
 
-MATCH void func_801F0034(void) {
+/* func_801F0034 */
+MATCH void BMagic_KaiserBreathDragonEnd(void) {
     u8           timer;
     u8           count;
     PartyMember* work;
@@ -468,10 +485,11 @@ MATCH void func_801F0034(void) {
     }
 }
 
-MATCH void func_801F0100(void) {
-    SYS_DISPATCH_BYTE(D_801F1BF4, TASK(PartyMember)->header.step);
+/* func_801F0100 */
+MATCH void BMagic_KaiserBreathRunFlash(void) {
+    SYS_DISPATCH_BYTE(g_BMagicKaiserBreathFlashSteps, TASK(PartyMember)->header.step);
     if (TASK(PartyMember)->header.flags != 0 && TASK(PartyMember)->header.step != 0) {
-        func_801F030C();
+        BMagic_KaiserBreathDrawFlash();
     }
 }
 
@@ -479,7 +497,8 @@ MATCH void func_801F0100(void) {
 
 #include "overlays/bmagic/shared/Effect_CountUpByTwoAndStep.h"
 
-MATCH void func_801F01F8(void) {
+/* func_801F01F8 */
+MATCH void BMagic_KaiserBreathFlashHold(void) {
     if ((BATTLE_ACTIVE_WORK->unk_09 == 0) && (EMI_IsReady() != 0)) {
         TASK(PartyMember)->timer = 8;
         TASK(PartyMember)->header.step += 1;
@@ -492,7 +511,8 @@ MATCH void func_801F01F8(void) {
 
 #include "overlays/bmagic/shared/Effect_DrawFullScreenQuad.h"
 
-MATCH void func_801F030C(void) {
+/* func_801F030C */
+MATCH void BMagic_KaiserBreathDrawFlash(void) {
     POLY_F4* prim;
     s32      shade;
     s32      tpage;
@@ -500,11 +520,13 @@ MATCH void func_801F030C(void) {
     EFFECT_DRAW_FULL_SCREEN_QUAD(BMAGIC_LAYER_FOREGROUND);
 }
 
-MATCH void func_801F0438(void) {
-    BMAGIC_DISPATCH_AND_DRAW(D_801F1C08, func_801F06B4);
+/* func_801F0438 */
+MATCH void BMagic_KaiserBreathRunRings(void) {
+    BMAGIC_DISPATCH_AND_DRAW(g_BMagicKaiserBreathRingsSteps, BMagic_KaiserBreathDrawRings);
 }
 
-MATCH void func_801F04C0(void) {
+/* func_801F04C0 */
+MATCH void BMagic_KaiserBreathRingsStart(void) {
     PartyMember* work;
     PartyMember* active;
     s32          x;
@@ -525,11 +547,13 @@ MATCH void func_801F04C0(void) {
     TASK(PartyMember)->header.step = TASK(PartyMember)->header.step + 1;
 }
 
-MATCH void func_801F053C(void) {
+/* func_801F053C */
+MATCH void BMagic_KaiserBreathRingsGrow(void) {
     EFFECT_ADVANCE_AT_COUNT(4, 0x40);
 }
 
-MATCH void func_801F058C(void) {
+/* func_801F058C */
+MATCH void BMagic_KaiserBreathRingsEnd(void) {
     PartyMember* work;
     PartyMember* active;
     s8           count;
@@ -549,7 +573,8 @@ MATCH void func_801F058C(void) {
 #include "overlays/bmagic/shared/Effect_SetActorMatrix.h"
 
 /* Draws the effect as 8 rings of 16 textured quads around the party member. */
-MATCH void func_801F06B4(void) {
+/* func_801F06B4 */
+MATCH void BMagic_KaiserBreathDrawRings(void) {
     POLY_FT4* poly;
     long      depth;
     long      flag;
@@ -608,11 +633,13 @@ MATCH void func_801F06B4(void) {
     }
 }
 
-MATCH void func_801F0B44(void) {
-    BMAGIC_DISPATCH_AND_DRAW_IN_OWN_MATRIX(D_801F1C24, func_801F0D44, func_801F0DF4);
+/* func_801F0B44 */
+MATCH void BMagic_KaiserBreathRunBeam(void) {
+    BMAGIC_DISPATCH_AND_DRAW_IN_OWN_MATRIX(g_BMagicKaiserBreathBeamSteps, BMagic_KaiserBreathBeamSetMatrix, BMagic_KaiserBreathDrawBeam);
 }
 
-MATCH void func_801F0BCC(void) {
+/* func_801F0BCC */
+MATCH void BMagic_KaiserBreathBeamStart(void) {
     PartyMember* work;
     PartyMember* source;
 
@@ -630,22 +657,24 @@ MATCH void func_801F0BCC(void) {
     TASK(PartyMember)->header.step++;
 }
 
-MATCH void func_801F0C4C(void) {
-    s32 value;
+/* func_801F0C4C */
+MATCH void BMagic_KaiserBreathBeamGrow(void) {
+    s32 radius;
 
-    value                     = TASK(PartyMember)->unk_14 + 0x20;
-    TASK(PartyMember)->unk_14 = value;
-    if (value == 0x200) {
+    radius                    = TASK(PartyMember)->unk_14 + 0x20;
+    TASK(PartyMember)->unk_14 = radius;
+    if (radius == 0x200) {
         TASK(PartyMember)->param.unk_0B = 1;
         TASK(PartyMember)->header.step += 1;
     }
 }
 
-MATCH void Effect_CountDownAndStep2(void) {
+MATCH void BMagic_KaiserBreathBeamHold(void) {
     BMAGIC_COUNT_DOWN_AND_STEP();
 }
 
-MATCH void func_801F0CE4(void) {
+/* func_801F0CE4 */
+MATCH void BMagic_KaiserBreathBeamEnd(void) {
     PartyMember* work = TASK(PartyMember);
     u8           timer;
 
@@ -659,7 +688,7 @@ MATCH void func_801F0CE4(void) {
     }
 }
 
-MATCH void Effect_SetActorMatrix4(void) {
+MATCH void BMagic_KaiserBreathBeamSetMatrix(void) {
     SVECTOR pos;
     SVECTOR rot;
     MATRIX  matrix;
@@ -668,7 +697,8 @@ MATCH void Effect_SetActorMatrix4(void) {
     BMAGIC_SET_ACTOR_MATRIX();
 }
 
-MATCH void func_801F0DF4(void) {
+/* func_801F0DF4 */
+MATCH void BMagic_KaiserBreathDrawBeam(void) {
     POLY_FT4* prim;
     long      depth;
     long      flag;
@@ -713,111 +743,121 @@ MATCH void func_801F0DF4(void) {
     }
 }
 
-MATCH void func_801F10F4(void) {
-    SYS_DISPATCH_TASK((g_BMagicEffectModes + 27), 1, D_801F24E0);
+/* func_801F10F4 */
+MATCH void BMagic_KaiserBreathRunParticle(void) {
+    SYS_DISPATCH_TASK(g_BMagicKaiserBreathParticleModes, 1, g_BMagicKaiserBreathParticle);
 }
 
-MATCH void func_801F1138(void) {
-    SYS_DISPATCH_BYTE(D_801F1C48, D_801F24E0->header.step);
-    if (D_801F24E0->header.flags != 0 && D_801F24E0->header.step != 0) {
-        func_801F1B14();
-        func_801F1844();
+/* func_801F1138 */
+MATCH void BMagic_KaiserBreathRunOrb(void) {
+    SYS_DISPATCH_BYTE(g_BMagicKaiserBreathOrbSteps, g_BMagicKaiserBreathParticle->header.step);
+    if (g_BMagicKaiserBreathParticle->header.flags != 0 && g_BMagicKaiserBreathParticle->header.step != 0) {
+        BMagic_KaiserBreathProjectParticle();
+        BMagic_KaiserBreathDrawGlow();
     }
 }
 
-MATCH void func_801F11B8(void) {
+/* func_801F11B8 */
+MATCH void BMagic_KaiserBreathOrbStart(void) {
     s16* angle_cell;
     s32  z;
     u8   phase;
 
-    phase                   = D_801F1C38[D_801F24E0->unk_07];
-    angle_cell              = &D_1F800006;
-    *angle_cell             = phase << 7;
-    D_801F24E0->pos.x.fixed = g_AreaScrollTargetX + ((rsin(phase << 7) << 6) >> 3);
-    D_801F24E0->pos.y.fixed = g_AreaScrollTargetY + ((rcos(*angle_cell) << 6) >> 3);
-    z                       = g_BattleEffectBattler->pos.z.fixed;
-    D_801F24E0->pos.z.fixed = z;
-    D_801F24E0->phase_0C    = 0x40;
-    D_801F24E0->timer_05    = 16;
-    D_801F24E0->unk_06      = 20;
-    D_801F24E0->header.step++;
+    phase                                     = g_BMagicKaiserBreathOrbPhases[g_BMagicKaiserBreathParticle->unk_07];
+    angle_cell                                = &D_1F800006;
+    *angle_cell                               = phase << 7;
+    g_BMagicKaiserBreathParticle->pos.x.fixed = g_AreaScrollTargetX + ((rsin(phase << 7) << 6) >> 3);
+    g_BMagicKaiserBreathParticle->pos.y.fixed = g_AreaScrollTargetY + ((rcos(*angle_cell) << 6) >> 3);
+    z                                         = g_BattleEffectBattler->pos.z.fixed;
+    g_BMagicKaiserBreathParticle->pos.z.fixed = z;
+    g_BMagicKaiserBreathParticle->phase_0C    = 0x40;
+    g_BMagicKaiserBreathParticle->timer_05    = 16;
+    g_BMagicKaiserBreathParticle->unk_06      = 20;
+    g_BMagicKaiserBreathParticle->header.step++;
 }
 
-MATCH void func_801F12A0(void) {
+/* func_801F12A0 */
+MATCH void BMagic_KaiserBreathOrbGrow(void) {
     s16* angle_cell;
     u8   phase;
 
-    MAGIC131_ORBIT_GROW(D_801F1C38, 7);
+    BMAGIC_KAISER_BREATH_ORBIT_GROW(g_BMagicKaiserBreathOrbPhases, 7);
 }
 
-MATCH void func_801F13A4(void) {
+/* func_801F13A4 */
+MATCH void BMagic_KaiserBreathOrbEnd(void) {
     s16* angle_cell;
     u8   phase;
     u8   timer;
 
-    MAGIC131_ORBIT_CLOSE(D_801F1C38, 7);
+    BMAGIC_KAISER_BREATH_ORBIT_CLOSE(g_BMagicKaiserBreathOrbPhases, 7);
 }
 
-MATCH void func_801F14A0(void) {
+/* func_801F14A0 */
+MATCH void BMagic_KaiserBreathRunSpark(void) {
     s16 timer;
 
-    SYS_DISPATCH_BYTE(D_801F1C94, D_801F24E0->header.step);
-    timer = D_801F24E0->unk_26;
+    SYS_DISPATCH_BYTE(g_BMagicKaiserBreathSparkSteps, g_BMagicKaiserBreathParticle->header.step);
+    timer = g_BMagicKaiserBreathParticle->unk_26;
     if (timer != 0) {
-        D_801F24E0->unk_26 = timer - 1;
+        g_BMagicKaiserBreathParticle->unk_26 = timer - 1;
         return;
     }
-    if (D_801F24E0->header.flags != 0 && D_801F24E0->header.step != 0) {
-        func_801F1B14();
-        func_801F1844();
+    if (g_BMagicKaiserBreathParticle->header.flags != 0 && g_BMagicKaiserBreathParticle->header.step != 0) {
+        BMagic_KaiserBreathProjectParticle();
+        BMagic_KaiserBreathDrawGlow();
     }
 }
 
-MATCH void func_801F153C(void) {
+/* func_801F153C */
+MATCH void BMagic_KaiserBreathSparkStart(void) {
     s16* angle_cell;
     u8   phase;
 
-    phase                   = D_801F1C54[D_801F24E0->unk_07];
-    angle_cell              = &D_1F800006;
-    *angle_cell             = phase << 6;
-    D_801F24E0->pos.x.fixed = g_AreaScrollTargetX + ((rsin(phase << 6) << 6) >> 3);
-    D_801F24E0->pos.y.fixed = g_AreaScrollTargetY + ((rcos(*angle_cell) << 6) >> 3);
-    D_801F24E0->pos.z.fixed = g_BattleEffectBattler->pos.z.fixed;
-    COORD_INT(D_801F24E0->pos.z) += D_801F1C74[D_801F24E0->unk_07] << 6;
-    D_801F24E0->phase_0C = 0x40;
-    D_801F24E0->timer_05 = 16;
-    D_801F24E0->unk_06   = 8;
-    D_801F24E0->header.step += 1;
+    phase                                     = g_BMagicKaiserBreathSparkPhases[g_BMagicKaiserBreathParticle->unk_07];
+    angle_cell                                = &D_1F800006;
+    *angle_cell                               = phase << 6;
+    g_BMagicKaiserBreathParticle->pos.x.fixed = g_AreaScrollTargetX + ((rsin(phase << 6) << 6) >> 3);
+    g_BMagicKaiserBreathParticle->pos.y.fixed = g_AreaScrollTargetY + ((rcos(*angle_cell) << 6) >> 3);
+    g_BMagicKaiserBreathParticle->pos.z.fixed = g_BattleEffectBattler->pos.z.fixed;
+    COORD_INT(g_BMagicKaiserBreathParticle->pos.z) += g_BMagicKaiserBreathSparkDepths[g_BMagicKaiserBreathParticle->unk_07] << 6;
+    g_BMagicKaiserBreathParticle->phase_0C = 0x40;
+    g_BMagicKaiserBreathParticle->timer_05 = 16;
+    g_BMagicKaiserBreathParticle->unk_06   = 8;
+    g_BMagicKaiserBreathParticle->header.step += 1;
 }
 
-MATCH void func_801F1644(void) {
+/* func_801F1644 */
+MATCH void BMagic_KaiserBreathSparkGrow(void) {
     s16* angle_cell;
     u8   phase;
 
-    MAGIC131_ORBIT_GROW(D_801F1C54, 6);
+    BMAGIC_KAISER_BREATH_ORBIT_GROW(g_BMagicKaiserBreathSparkPhases, 6);
 }
 
-MATCH void func_801F1748(void) {
+/* func_801F1748 */
+MATCH void BMagic_KaiserBreathSparkEnd(void) {
     s16* angle_cell;
     u8   phase;
     u8   timer;
 
-    MAGIC131_ORBIT_CLOSE(D_801F1C54, 6);
+    BMAGIC_KAISER_BREATH_ORBIT_CLOSE(g_BMagicKaiserBreathSparkPhases, 6);
 }
 
-MATCH void func_801F1844(void) {
+/* func_801F1844 */
+MATCH void BMagic_KaiserBreathDrawGlow(void) {
     POLY_G3* prim;
     s32      shade;
     u8       i;
 
-    g_ScratchPad.cells.halves[0] = D_801F24E0->unk_06 + (rand() & 3);
-    if (D_801F24E0->header.mode != 0) {
-        shade = ((rand() & 3) + 4) * D_801F24E0->timer_05;
+    g_ScratchPad.cells.halves[0] = g_BMagicKaiserBreathParticle->unk_06 + (rand() & 3);
+    if (g_BMagicKaiserBreathParticle->header.mode != 0) {
+        shade = ((rand() & 3) + 4) * g_BMagicKaiserBreathParticle->timer_05;
     } else {
-        shade = D_801F24E0->timer_05 * 14;
+        shade = g_BMagicKaiserBreathParticle->timer_05 * 14;
     }
-    g_ScratchPad.cells.halves[6] = D_801F24E0->unk_20;
-    g_ScratchPad.cells.halves[7] = D_801F24E0->unk_22;
+    g_ScratchPad.cells.halves[6] = g_BMagicKaiserBreathParticle->unk_20;
+    g_ScratchPad.cells.halves[7] = g_BMagicKaiserBreathParticle->unk_22;
     for (i = 0; i < 8; i++) {
         prim = (POLY_G3*)g_GfxPrimCursor;
         SetPolyG3(prim);
@@ -836,38 +876,41 @@ MATCH void func_801F1844(void) {
     }
 }
 
-MATCH u8 func_801F1A58(void) {
+/* func_801F1A58 */
+MATCH u8 BMagic_KaiserBreathAllocParticle(void) {
     u8 i;
 
-    for (i = 0; i < 48; i++) {
-        if (!(D_801F1CA0[i].header.flags & 0x1)) {
-            D_801F1CA0[i].header.flags |= 1;
+    for (i = 0; i < KAISER_BREATH_PARTICLE_COUNT; i++) {
+        if (!(g_BMagicKaiserBreathParticles[i].header.flags & BMAGIC_EFFECT_IN_USE)) {
+            g_BMagicKaiserBreathParticles[i].header.flags |= BMAGIC_EFFECT_IN_USE;
             return i;
         }
     }
     return GAME_NONE;
 }
 
-MATCH void func_801F1AC4(void) {
-    D_801F24E0->header.flags = 0;
-    D_801F24E0->header.mode  = 0;
-    D_801F24E0->header.step  = 0;
-    D_801F24E0->unk_03       = 0;
-    D_801F24E0->unk_04       = 0;
+/* func_801F1AC4 */
+MATCH void BMagic_KaiserBreathFreeParticle(void) {
+    g_BMagicKaiserBreathParticle->header.flags = 0;
+    g_BMagicKaiserBreathParticle->header.mode  = 0;
+    g_BMagicKaiserBreathParticle->header.step  = 0;
+    g_BMagicKaiserBreathParticle->unk_03       = 0;
+    g_BMagicKaiserBreathParticle->unk_04       = 0;
 }
 
-MATCH void func_801F1B14(void) {
+/* func_801F1B14 */
+MATCH void BMagic_KaiserBreathProjectParticle(void) {
     BMagicEffect* work;
     s16           vec[3];
     TILE_1*       primitive;
 
-    work      = D_801F24E0;
+    work      = g_BMagicKaiserBreathParticle;
     vec[0]    = (work->pos.x.fixed >> 9) - AREA_CELL_ORIGIN;
     primitive = (TILE_1*)g_GfxPrimCursor;
     vec[1]    = (work->pos.y.fixed >> 9) - AREA_CELL_ORIGIN;
     vec[2]    = -(COORD_INT(work->pos.z) / 2);
     SetTile1(primitive);
     RotTransPers((SVECTOR*)vec, (long*)&primitive->x0, (long*)vec, (long*)&vec[2]);
-    D_801F24E0->unk_20 = primitive->x0;
-    D_801F24E0->unk_22 = primitive->y0;
+    g_BMagicKaiserBreathParticle->unk_20 = primitive->x0;
+    g_BMagicKaiserBreathParticle->unk_22 = primitive->y0;
 }
