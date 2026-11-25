@@ -72,18 +72,22 @@ MATCH void func_801F7640(void) {
     Actor_Clear();
 }
 
-#ifdef NON_MATCHING
-NON_MATCHING void func_801F7660(s32 x, s32 y, s32 z, u16 angle) {
-    u8       segment;
-    u16      next_radial;
+/* scales a unit-circle term to the ring radius */
+static inline s32 Ring_Radius(s32 unit) {
+    return unit * 3;
+}
+
+/* draws a ring of 16 shaded quads about (x, y, z), its rim and inner edge set by angle */
+MATCH void func_801F7660(s32 x, s32 y, s32 z, u16 angle) {
     u16      radial;
+    u16      next_radial;
+    u8       segment;
     s32      point[3];
     MATRIX   matrix;
-    s16      correction;
     s16      step;
     s16      inner_step;
     u32      difference;
-    s32      step_limit;
+    u16      step_limit;
     u16      inner_angle;
     u16      outer_angle;
     u32      step_low;
@@ -97,21 +101,17 @@ NON_MATCHING void func_801F7660(s32 x, s32 y, s32 z, u16 angle) {
     outer_color = 0x80;
     step_limit  = angle;
     step_low    = step_limit & 0xFFFF;
-    step        = angle - 0x100;
-    if (step_low >= 0x401U) {
+    if (step_low > 0x400) {
         difference  = 0x500 - step_low;
-        outer_color = (u32)(difference + (difference >> 31)) >> 1;
+        outer_color = (difference + (difference >> 31)) >> 1;
         step_limit  = 0x400;
-        step        = angle - 0x100;
     }
+    step        = angle - 0x100;
     inner_step  = step;
     inner_color = 0;
     if (step < 0) {
-        correction  = -step;
-        inner_color = (u32)(correction + ((u32)correction >> 31)) >> 1;
+        inner_color = (u32)(-step + ((u32)-step >> 31)) >> 1;
         inner_step  = 0;
-    } else {
-        inner_color = 0;
     }
     outer_angle = step_limit & 0xFFFF;
     inner_angle = inner_step & 0xFFFF;
@@ -123,38 +123,35 @@ NON_MATCHING void func_801F7660(s32 x, s32 y, s32 z, u16 angle) {
         SetPolyG4(primitive);
         SetSemiTrans(primitive, 1);
 
-        point[0] = x + (((rsin(outer_angle) * (rcos(radial) * 3)) >> 12) * 16);
-        point[1] = y + (((rsin(outer_angle) * (rsin(radial) * 3)) >> 12) * 16);
+        point[0] = x + (((rsin(outer_angle) * Ring_Radius(rcos(radial))) >> 12) * 16);
+        point[1] = y + (((rsin(outer_angle) * Ring_Radius(rsin(radial))) >> 12) * 16);
         point[2] = z + (rcos(outer_angle) * 0x3000);
         Camera_ProjectPoint(point, (DVECTOR*)&primitive->x0);
         setRGB0(primitive, outer_color, outer_color, outer_color);
 
-        point[0] = x + (((rsin(inner_angle) * (rcos(radial) * 3)) >> 12) * 16);
-        point[1] = y + (((rsin(inner_angle) * (rsin(radial) * 3)) >> 12) * 16);
+        point[0] = x + (((rsin(inner_angle) * Ring_Radius(rcos(radial))) >> 12) * 16);
+        point[1] = y + (((rsin(inner_angle) * Ring_Radius(rsin(radial))) >> 12) * 16);
         point[2] = z + (rcos(inner_angle) * 0x3000);
         Camera_ProjectPoint(point, (DVECTOR*)&primitive->x1);
         setRGB1(primitive, inner_color, inner_color, inner_color);
 
-        point[0] = x + (((rsin(outer_angle) * (rcos(next_radial) * 3)) >> 12) * 16);
-        point[1] = y + (((rsin(outer_angle) * (rsin(next_radial) * 3)) >> 12) * 16);
+        point[0] = x + (((rsin(outer_angle) * Ring_Radius(rcos(next_radial))) >> 12) * 16);
+        point[1] = y + (((rsin(outer_angle) * Ring_Radius(rsin(next_radial))) >> 12) * 16);
         point[2] = z + (rcos(outer_angle) * 0x3000);
         Camera_ProjectPoint(point, (DVECTOR*)&primitive->x2);
         setRGB2(primitive, outer_color, outer_color, outer_color);
 
+        point[0] = x + (((rsin(inner_angle) * Ring_Radius(rcos(next_radial))) >> 12) * 16);
+        point[1] = y + (((rsin(inner_angle) * Ring_Radius(rsin(next_radial))) >> 12) * 16);
         radial += 0x100;
         next_radial += 0x100;
         segment++;
-        point[0] = x + (((rsin(inner_angle) * (rcos(next_radial) * 3)) >> 12) * 16);
-        point[1] = y + (((rsin(inner_angle) * (rsin(next_radial) * 3)) >> 12) * 16);
         point[2] = z + (rcos(inner_angle) * 0x3000);
         Camera_ProjectPoint(point, (DVECTOR*)&primitive->x3);
         setRGB3(primitive, inner_color, inner_color, inner_color);
         GFX_AddPrim(GFX_LAYER_UI, sizeof(POLY_G4));
     } while (segment < 16);
 }
-#else
-INCLUDE_ASM(func_801F7660);
-#endif
 
 MATCH void func_801F7A78(void) {
     SYS_DISPATCH_BYTE(D_801FD5DC, D_80146872);
