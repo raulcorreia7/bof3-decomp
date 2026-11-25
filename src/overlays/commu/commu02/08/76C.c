@@ -2739,7 +2739,7 @@ NON_MATCHING s8 func_801DA114(void) {
             if ((s8)D_801DB0D8 < 0) {
                 D_801DB0D8 = 7;
             }
-        } while (page[(s8)D_801DB0D8 * 12 + col] == 0);
+        } while ((page + (s8)D_801DB0D8 * 12)[col] == 0);
     } else if (pressed & PADLdown) {
         SND_SEPlay(0x100);
         page = D_801DAAAC + D_801DAAA8 * 96;
@@ -2749,7 +2749,7 @@ NON_MATCHING s8 func_801DA114(void) {
             if ((s8)D_801DB0D8 >= 8) {
                 D_801DB0D8 = 0;
             }
-        } while (page[(s8)D_801DB0D8 * 12 + col] == 0);
+        } while ((page + (s8)D_801DB0D8 * 12)[col] == 0);
     } else if (pressed & PADLleft) {
         SND_SEPlay(0x100);
         if (*cell != 0 && *cell < 6) {
