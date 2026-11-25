@@ -13,13 +13,8 @@ void Menu_DrawPanelIcon(u16 x, u16 y, s32 u, s32 v, u16 clut, u8 color);
 
 #ifdef NON_MATCHING
 NON_MATCHING void func_801D136C(void) {
-<<<<<<< HEAD
     s32 x_step;
     s32 y_step;
-||||||| 275bf4450
-    NON_MATCHING void func_801D1394(void) {
-=======
->>>>>>> public/main
     s8  value;
 
     value      = D_801DB0C4 - 1;
