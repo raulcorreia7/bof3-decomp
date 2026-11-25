@@ -2,6 +2,6 @@
 
 /* XA state: idle; clears the wait frames and the sync result. */
 MATCH void SND_XAStateIdle(void) {
-    g_XAWaitFrames = 0;
-    g_XASyncResult = 0;
+    g_SndXAWaitFrames = 0;
+    g_SndXASyncResult = 0;
 }

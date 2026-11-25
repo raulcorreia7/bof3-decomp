@@ -33,7 +33,7 @@ typedef enum SceneEventMode {
     SCENE_EVENT_INN     = 10,
 } SceneEventMode;
 
-/* The rows of g_XAStates, the steps of one XA stream: seek, read, pause. */
+/* The rows of g_SndXAStates, the steps of one XA stream: seek, read, pause. */
 typedef enum XAState {
     SND_XA_STATE_IDLE          = 0,
     SND_XA_STATE_SEEK          = 1,

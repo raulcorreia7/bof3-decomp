@@ -55,7 +55,7 @@
 #define AREA_CODE_BASE             0x800F5000u          /* the area code base (AreaHandlerRecord.code_base) */
 #define SND_BANK_COUNT             7                    /* sound banks per layout row */
 #define SND_LAYOUT_COUNT           3                    /* layout rows of the bank tables */
-#define XA_STREAM_COUNT            3                    /* XA streams, each with a slot and a cue table */
+#define SND_XA_STREAM_COUNT        3                    /* XA streams, each with a slot and a cue table */
 #define WORD_SIGN_BIT              0x80000000u          /* the sign bit of a word */
 #define COPY_KERNEL_ENTRY          ((u32) & D_8016432C) /* resume entry of the stream copy kernel */
 #define MAP_ZONE_COUNT             666                  /* records in g_AreaEncounterZones */
@@ -100,12 +100,12 @@
 /* One alias arm of a record reader: the tone table and the record table of the bank `alias`. */
 #define SLUS_SE_ALIAS_ARM(alias, tones, se_records)                  \
     case alias:                                                      \
-        g_SndSeVoice0Note     = SE_TONE(tones)->min;                 \
-        g_SndSeVoice0Fine     = SE_TONE(tones)->shift;               \
-        g_SndSeVoice0Pan      = SE_TONE(tones)->pan;                 \
-        g_SndSeVoice0VolumeL  = SE_TONE(tones)->vol;                 \
-        g_SndSeVoice0VolumeR  = SE_TONE(tones)->vol;                 \
-        g_SndSeVoice0SpuVoice = (se_records)[g_SndSeRecord * 4 + 3]; \
+        g_SndSeLayer0Note     = SE_TONE(tones)->min;                 \
+        g_SndSeLayer0Fine     = SE_TONE(tones)->shift;               \
+        g_SndSeLayer0Pan      = SE_TONE(tones)->pan;                 \
+        g_SndSeLayer0VolumeL  = SE_TONE(tones)->vol;                 \
+        g_SndSeLayer0VolumeR  = SE_TONE(tones)->vol;                 \
+        g_SndSeLayer0SpuVoice = (se_records)[g_SndSeRecord * 4 + 3]; \
         break;
 
 /* Bank record reader: loads record g_SndSeRecord of the bank's record table into voice slot 0 and fills one more slot per layer on the next voices (wrapping at 24). The head is the one body of banks 0 to 6; the alias switch that follows lets another bank supply the tone and voice. */
@@ -119,61 +119,61 @@
     record                = g_SndSeRecord * 4;                                                                                            \
     g_SndSeAliasBank      = (se_records)[record];                                                                                         \
     program               = (se_records)[record + 1] & EMI_SE_PROGRAM_MASK;                                                               \
-    g_SndSeVoice0Program  = program;                                                                                                      \
+    g_SndSeLayer0Program  = program;                                                                                                      \
     g_SndSeUseVolume      = (se_records)[record + 1] & EMI_SE_USE_VOLUME_FLAG;                                                            \
     tone                  = (se_records)[record + 2] >> 4;                                                                                \
-    g_SndSeVoice0Tone     = tone;                                                                                                         \
+    g_SndSeLayer0Tone     = tone;                                                                                                         \
     g_SndSeRetrigger      = (se_records)[record + 2] & EMI_SE_COMPARE_MASK;                                                               \
     D_8018B40C            = g_VabProgramOffsets[program] + VAB_TONE_TABLE + g_VabToneOffsets[tone];                                       \
-    g_SndSeVoice0Note     = SE_TONE((tones))->min;                                                                                        \
-    g_SndSeVoice0Fine     = SE_TONE((tones))->shift;                                                                                      \
-    g_SndSeVoice0Pan      = SE_TONE((tones))->pan;                                                                                        \
-    g_SndSeVoice0VolumeL  = SE_TONE((tones))->vol;                                                                                        \
-    g_SndSeVoice0VolumeR  = SE_TONE((tones))->vol;                                                                                        \
+    g_SndSeLayer0Note     = SE_TONE((tones))->min;                                                                                        \
+    g_SndSeLayer0Fine     = SE_TONE((tones))->shift;                                                                                      \
+    g_SndSeLayer0Pan      = SE_TONE((tones))->pan;                                                                                        \
+    g_SndSeLayer0VolumeL  = SE_TONE((tones))->vol;                                                                                        \
+    g_SndSeLayer0VolumeR  = SE_TONE((tones))->vol;                                                                                        \
     voice                 = (se_records)[record + 3] & EMI_SE_VOICE_MASK;                                                                 \
-    g_SndSeVoice0SpuVoice = voice;                                                                                                        \
+    g_SndSeLayer0SpuVoice = voice;                                                                                                        \
     g_SndSeLayers         = (se_records)[record + 3] & EMI_SE_LAYER_MASK;                                                                 \
     if (g_SndSeLayers != 0) {                                                                                                             \
         g_SndSeLayers = g_SndSeLayers >> 5;                                                                                               \
         switch (g_SndSeLayers) {                                                                                                          \
             case 3:                                                                                                                       \
-                g_SndSeVoice3Program  = (se_records)[g_SndSeRecord * 4 + 1] & EMI_SE_PROGRAM_MASK;                                        \
-                g_SndSeVoice3Tone     = g_SndSeVoice0Tone + g_SndSeLayers;                                                                \
-                g_SndSeVoice3Note     = g_SndSeVoice0Note;                                                                                \
-                g_SndSeVoice3Fine     = g_SndSeVoice0Fine;                                                                                \
-                D_8018B40C            = g_VabProgramOffsets[g_SndSeVoice3Program] + VAB_TONE_TABLE + g_VabToneOffsets[g_SndSeVoice3Tone]; \
-                g_SndSeVoice3VolumeL  = SE_TONE((tones))->vol;                                                                            \
-                g_SndSeVoice3VolumeR  = SE_TONE((tones))->vol;                                                                            \
-                g_SndSeVoice3Pan      = SE_TONE((tones))->pan;                                                                            \
-                g_SndSeVoice3SpuVoice = g_SndSeVoice0SpuVoice + 3;                                                                        \
-                if (g_SndSeVoice3SpuVoice >= 24) {                                                                                        \
-                    g_SndSeVoice3SpuVoice = g_SndSeVoice0SpuVoice + 3 - 24;                                                               \
+                g_SndSeLayer3Program  = (se_records)[g_SndSeRecord * 4 + 1] & EMI_SE_PROGRAM_MASK;                                        \
+                g_SndSeLayer3Tone     = g_SndSeLayer0Tone + g_SndSeLayers;                                                                \
+                g_SndSeLayer3Note     = g_SndSeLayer0Note;                                                                                \
+                g_SndSeLayer3Fine     = g_SndSeLayer0Fine;                                                                                \
+                D_8018B40C            = g_VabProgramOffsets[g_SndSeLayer3Program] + VAB_TONE_TABLE + g_VabToneOffsets[g_SndSeLayer3Tone]; \
+                g_SndSeLayer3VolumeL  = SE_TONE((tones))->vol;                                                                            \
+                g_SndSeLayer3VolumeR  = SE_TONE((tones))->vol;                                                                            \
+                g_SndSeLayer3Pan      = SE_TONE((tones))->pan;                                                                            \
+                g_SndSeLayer3SpuVoice = g_SndSeLayer0SpuVoice + 3;                                                                        \
+                if (g_SndSeLayer3SpuVoice >= 24) {                                                                                        \
+                    g_SndSeLayer3SpuVoice = g_SndSeLayer0SpuVoice + 3 - 24;                                                               \
                 }                                                                                                                         \
             case 2:                                                                                                                       \
-                g_SndSeVoice2Program  = (se_records)[g_SndSeRecord * 4 + 1] & EMI_SE_PROGRAM_MASK;                                        \
-                g_SndSeVoice2Tone     = g_SndSeVoice0Tone + g_SndSeLayers;                                                                \
-                g_SndSeVoice2Note     = g_SndSeVoice0Note;                                                                                \
-                g_SndSeVoice2Fine     = g_SndSeVoice0Fine;                                                                                \
-                D_8018B40C            = g_VabProgramOffsets[g_SndSeVoice2Program] + VAB_TONE_TABLE + g_VabToneOffsets[g_SndSeVoice2Tone]; \
-                g_SndSeVoice2VolumeL  = SE_TONE((tones))->vol;                                                                            \
-                g_SndSeVoice2VolumeR  = SE_TONE((tones))->vol;                                                                            \
-                g_SndSeVoice2Pan      = SE_TONE((tones))->pan;                                                                            \
-                g_SndSeVoice2SpuVoice = g_SndSeVoice0SpuVoice + 2;                                                                        \
-                if (g_SndSeVoice2SpuVoice >= 24) {                                                                                        \
-                    g_SndSeVoice2SpuVoice = g_SndSeVoice0SpuVoice + 2 - 24;                                                               \
+                g_SndSeLayer2Program  = (se_records)[g_SndSeRecord * 4 + 1] & EMI_SE_PROGRAM_MASK;                                        \
+                g_SndSeLayer2Tone     = g_SndSeLayer0Tone + g_SndSeLayers;                                                                \
+                g_SndSeLayer2Note     = g_SndSeLayer0Note;                                                                                \
+                g_SndSeLayer2Fine     = g_SndSeLayer0Fine;                                                                                \
+                D_8018B40C            = g_VabProgramOffsets[g_SndSeLayer2Program] + VAB_TONE_TABLE + g_VabToneOffsets[g_SndSeLayer2Tone]; \
+                g_SndSeLayer2VolumeL  = SE_TONE((tones))->vol;                                                                            \
+                g_SndSeLayer2VolumeR  = SE_TONE((tones))->vol;                                                                            \
+                g_SndSeLayer2Pan      = SE_TONE((tones))->pan;                                                                            \
+                g_SndSeLayer2SpuVoice = g_SndSeLayer0SpuVoice + 2;                                                                        \
+                if (g_SndSeLayer2SpuVoice >= 24) {                                                                                        \
+                    g_SndSeLayer2SpuVoice = g_SndSeLayer0SpuVoice + 2 - 24;                                                               \
                 }                                                                                                                         \
             case 1:                                                                                                                       \
-                g_SndSeVoice1Program  = (se_records)[g_SndSeRecord * 4 + 1] & EMI_SE_PROGRAM_MASK;                                        \
-                g_SndSeVoice1Tone     = g_SndSeVoice0Tone + g_SndSeLayers;                                                                \
-                g_SndSeVoice1Note     = g_SndSeVoice0Note;                                                                                \
-                g_SndSeVoice1Fine     = g_SndSeVoice0Fine;                                                                                \
-                D_8018B40C            = g_VabProgramOffsets[g_SndSeVoice1Program] + VAB_TONE_TABLE + g_VabToneOffsets[g_SndSeVoice1Tone]; \
-                g_SndSeVoice1VolumeL  = SE_TONE((tones))->vol;                                                                            \
-                g_SndSeVoice1VolumeR  = SE_TONE((tones))->vol;                                                                            \
-                g_SndSeVoice1Pan      = SE_TONE((tones))->pan;                                                                            \
-                g_SndSeVoice1SpuVoice = g_SndSeVoice0SpuVoice + 1;                                                                        \
-                if (g_SndSeVoice1SpuVoice >= 24) {                                                                                        \
-                    g_SndSeVoice1SpuVoice = g_SndSeVoice0SpuVoice + 1 - 24;                                                               \
+                g_SndSeLayer1Program  = (se_records)[g_SndSeRecord * 4 + 1] & EMI_SE_PROGRAM_MASK;                                        \
+                g_SndSeLayer1Tone     = g_SndSeLayer0Tone + g_SndSeLayers;                                                                \
+                g_SndSeLayer1Note     = g_SndSeLayer0Note;                                                                                \
+                g_SndSeLayer1Fine     = g_SndSeLayer0Fine;                                                                                \
+                D_8018B40C            = g_VabProgramOffsets[g_SndSeLayer1Program] + VAB_TONE_TABLE + g_VabToneOffsets[g_SndSeLayer1Tone]; \
+                g_SndSeLayer1VolumeL  = SE_TONE((tones))->vol;                                                                            \
+                g_SndSeLayer1VolumeR  = SE_TONE((tones))->vol;                                                                            \
+                g_SndSeLayer1Pan      = SE_TONE((tones))->pan;                                                                            \
+                g_SndSeLayer1SpuVoice = g_SndSeLayer0SpuVoice + 1;                                                                        \
+                if (g_SndSeLayer1SpuVoice >= 24) {                                                                                        \
+                    g_SndSeLayer1SpuVoice = g_SndSeLayer0SpuVoice + 1 - 24;                                                               \
                 }                                                                                                                         \
                 break;                                                                                                                    \
         }                                                                                                                                 \
@@ -546,33 +546,33 @@ extern s32                   g_SndBank5Sequence;
 extern s32                   g_SndBank6Sequence;
 extern volatile u32          g_EmiSectorCursor;
 /* D_8014680C */
-extern s32                   g_XAStartSector;
+extern s32                   g_SndXAStartSector;
 /* D_80146810 */
-extern s32                   g_XAEndSector;
+extern s32                   g_SndXAEndSector;
 /* D_80146814 */
-extern s32                   g_XACurrentSector;
+extern s32                   g_SndXACurrentSector;
 extern s16                   D_80146818;
 /* D_8014681A */
-extern u16                   g_XAStreamKey;
+extern u16                   g_SndXAStreamId;
 /* D_8014681C */
-extern u16                   g_XAWaitFrames;
+extern u16                   g_SndXAWaitFrames;
 /* D_8014681E */
-extern u16                   g_XAStateFrame;
+extern u16                   g_SndXAStateFrame;
 /* D_80146820 */
-extern u16                   g_XARetryCount;
+extern u16                   g_SndXARetryCount;
 /* D_80146824 */
-extern u8                    g_XACdResult[];
+extern u8                    g_SndXACdResult[];
 /* D_8014682C */
-extern s8                    g_XAStopRequested;
+extern s8                    g_SndXAStopRequested;
 /* D_8014682E */
-extern s8                    g_XASyncResult;
+extern s8                    g_SndXASyncResult;
 extern s8                    D_8014682F;
 extern u8                    g_SndCDVolume;
 extern s8                    D_80146832;
 /* D_80146834 */
-extern u8                    g_XAFilter;
+extern u8                    g_SndXAFilterFile;
 /* D_80146835 */
-extern u8                    g_XAFilterChannel;
+extern u8                    g_SndXAFilterChannel;
 extern CdlATV                g_SndCDMix;
 extern u8                    g_EmiStreamMode;
 extern OverlaySlotCursor     D_80146844;
@@ -734,95 +734,95 @@ extern u32                         g_SndBankHeaderSize[SND_LAYOUT_COUNT][SND_BAN
 extern u32                         g_SndBankSequenceSize[SND_LAYOUT_COUNT][SND_BANK_COUNT];
 extern DiscLba                     g_EmiSlotLbas[EMI_SLOT_COUNT + 1];
 /* D_80183230 */
-extern u32                         g_XAStreamSlots[XA_STREAM_COUNT];
+extern u32                         g_SndXAStreamSlots[SND_XA_STREAM_COUNT];
 /* D_8018323C */
-extern u32                         g_XACues[XA_STREAM_COUNT];
+extern u32                         g_SndXACues[SND_XA_STREAM_COUNT];
 extern u32                         g_EmiEntryTypes[11];
-extern void (*g_XAStates[SND_XA_STATE_COUNT])(void);
-extern u16          g_XACueStream2[22];
-extern u16          g_XACueStream1[896];
-extern u16          g_XACueStream0[20];
+extern void (*g_SndXAStates[SND_XA_STATE_COUNT])(void);
+extern u16          g_SndXACueStream2[22];
+extern u16          g_SndXACueStream1[896];
+extern u16          g_SndXACueStream0[20];
 extern u32          D_801839EC[12];
 extern u32          D_80183A1C[17];
 extern u32          D_80183A60[4];
 extern u16          D_80183A70[];
 extern u32          g_SysStartupReturn; /* start of the BSS stup2 clears */
 extern u8           D_8018B2F4;
-/* The SPU voices an SE keys on, one block of 0x28 bytes each (voice 0 first, then one per layer); the bank reader fills them, SND_SEPlay keys them. */
+/* The four layers of the SE being played, one 0x28-byte block each: the bank reader fills them and SND_SEPlay keys each on with SsUtKeyOnV. The VAB id of every layer is g_SndSeVabId, in block 0. */
 /* D_8018B308 */
-extern s16          g_SndSeVoice0Program;
+extern s16          g_SndSeLayer0Program;
 /* D_8018B30C */
 extern s16          g_SndSeVabId;
 /* D_8018B310 */
-extern s16          g_SndSeVoice0Tone;
+extern s16          g_SndSeLayer0Tone;
 /* D_8018B314 */
-extern s16          g_SndSeVoice0Note;
+extern s16          g_SndSeLayer0Note;
 /* D_8018B318 */
-extern s16          g_SndSeVoice0SpuVoice;
+extern s16          g_SndSeLayer0SpuVoice;
 /* D_8018B31C */
-extern s16          g_SndSeVoice0KeyedVoice;
+extern s16          g_SndSeLayer0KeyedVoice;
 /* D_8018B320 */
-extern s16          g_SndSeVoice0Fine;
+extern s16          g_SndSeLayer0Fine;
 /* D_8018B324 */
-extern s16          g_SndSeVoice0VolumeL;
+extern s16          g_SndSeLayer0VolumeL;
 /* D_8018B328 */
-extern s16          g_SndSeVoice0VolumeR;
+extern s16          g_SndSeLayer0VolumeR;
 /* D_8018B32C */
-extern s16          g_SndSeVoice0Pan;
+extern s16          g_SndSeLayer0Pan;
 /* D_8018B330 */
-extern s16          g_SndSeVoice1Program;
+extern s16          g_SndSeLayer1Program;
 /* D_8018B338 */
-extern s16          g_SndSeVoice1Tone;
+extern s16          g_SndSeLayer1Tone;
 /* D_8018B33C */
-extern s16          g_SndSeVoice1Note;
+extern s16          g_SndSeLayer1Note;
 /* D_8018B340 */
-extern s16          g_SndSeVoice1SpuVoice;
+extern s16          g_SndSeLayer1SpuVoice;
 /* D_8018B344 */
-extern s16          g_SndSeVoice1KeyedVoice;
+extern s16          g_SndSeLayer1KeyedVoice;
 /* D_8018B348 */
-extern s16          g_SndSeVoice1Fine;
+extern s16          g_SndSeLayer1Fine;
 /* D_8018B34C */
-extern s16          g_SndSeVoice1VolumeL;
+extern s16          g_SndSeLayer1VolumeL;
 /* D_8018B350 */
-extern s16          g_SndSeVoice1VolumeR;
+extern s16          g_SndSeLayer1VolumeR;
 /* D_8018B354 */
-extern s16          g_SndSeVoice1Pan;
+extern s16          g_SndSeLayer1Pan;
 /* D_8018B358 */
-extern s16          g_SndSeVoice2Program;
+extern s16          g_SndSeLayer2Program;
 /* D_8018B360 */
-extern s16          g_SndSeVoice2Tone;
+extern s16          g_SndSeLayer2Tone;
 /* D_8018B364 */
-extern s16          g_SndSeVoice2Note;
+extern s16          g_SndSeLayer2Note;
 /* D_8018B368 */
-extern s16          g_SndSeVoice2SpuVoice;
+extern s16          g_SndSeLayer2SpuVoice;
 /* D_8018B36C */
-extern s16          g_SndSeVoice2KeyedVoice;
+extern s16          g_SndSeLayer2KeyedVoice;
 /* D_8018B370 */
-extern s16          g_SndSeVoice2Fine;
+extern s16          g_SndSeLayer2Fine;
 /* D_8018B374 */
-extern s16          g_SndSeVoice2VolumeL;
+extern s16          g_SndSeLayer2VolumeL;
 /* D_8018B378 */
-extern s16          g_SndSeVoice2VolumeR;
+extern s16          g_SndSeLayer2VolumeR;
 /* D_8018B37C */
-extern s16          g_SndSeVoice2Pan;
+extern s16          g_SndSeLayer2Pan;
 /* D_8018B380 */
-extern s16          g_SndSeVoice3Program;
+extern s16          g_SndSeLayer3Program;
 /* D_8018B388 */
-extern s16          g_SndSeVoice3Tone;
+extern s16          g_SndSeLayer3Tone;
 /* D_8018B38C */
-extern s16          g_SndSeVoice3Note;
+extern s16          g_SndSeLayer3Note;
 /* D_8018B390 */
-extern s16          g_SndSeVoice3SpuVoice;
+extern s16          g_SndSeLayer3SpuVoice;
 /* D_8018B394 */
-extern s16          g_SndSeVoice3KeyedVoice;
+extern s16          g_SndSeLayer3KeyedVoice;
 /* D_8018B398 */
-extern s16          g_SndSeVoice3Fine;
+extern s16          g_SndSeLayer3Fine;
 /* D_8018B39C */
-extern s16          g_SndSeVoice3VolumeL;
+extern s16          g_SndSeLayer3VolumeL;
 /* D_8018B3A0 */
-extern s16          g_SndSeVoice3VolumeR;
+extern s16          g_SndSeLayer3VolumeR;
 /* D_8018B3A4 */
-extern s16          g_SndSeVoice3Pan;
+extern s16          g_SndSeLayer3Pan;
 /* D_8018B3D8 */
 extern s16          g_SndSeVolumeL;
 /* D_8018B3DC */
