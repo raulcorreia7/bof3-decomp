@@ -14,10 +14,10 @@ MATCH void BMagic_ShadowBreathUpdate(void) {
     i = 0;
     do {
         if (g_BMagicShadowBreathMotes[(u8)i].header.flags & BMAGIC_EFFECT_IN_USE) {
-            saved_battler                 = g_BattleEffectBattler;
-            mote_battler                  = g_BMagicShadowBreathMotes[(u8)i].battler;
-            g_BMagicShadowBreathMote            = &g_BMagicShadowBreathMotes[(u8)i];
-            g_BattleEffectBattler = mote_battler;
+            saved_battler            = g_BattleEffectBattler;
+            mote_battler             = g_BMagicShadowBreathMotes[(u8)i].battler;
+            g_BMagicShadowBreathMote = &g_BMagicShadowBreathMotes[(u8)i];
+            g_BattleEffectBattler    = mote_battler;
             BMagic_ShadowBreathMoteDispatch();
             g_BattleEffectBattler = saved_battler;
         }
@@ -377,7 +377,7 @@ MATCH void BMagic_ShadowBreathOrbBurst(void) {
         g_BattleEffects[slot].arg.unk_09   = 46;
         g_BattleEffectBattler->param.unk_0B += 1;
         for (i = 0; i < BMAGIC_SHADOW_BREATH_BURST_MOTES; i++) {
-            slot                         = BMagic_AllocEffect();
+            slot                                        = BMagic_AllocEffect();
             g_BMagicShadowBreathMotes[slot].battler     = g_BattleEffectBattler;
             g_BMagicShadowBreathMotes[slot].header.mode = 0;
             g_BMagicShadowBreathMotes[slot].unk_04      = i;
@@ -442,18 +442,18 @@ MATCH void BMagic_ShadowBreathMoteStart(void) {
     u8   timer;
     s32  angle;
 
-    timer            = g_BMagicShadowBreathMote->slot - 1;
+    timer                          = g_BMagicShadowBreathMote->slot - 1;
     g_BMagicShadowBreathMote->slot = timer;
     if (timer != 0) {
         return;
     }
-    angle_cell            = &D_1F800004;
-    angle                 = g_BMagicShadowBreathMote->unk_04 & 0xF;
-    *angle_cell           = angle << 8;
-    g_ScratchPadHalves    = ((g_BMagicShadowBreathMote->unk_04 >> 4) + 1) << 3;
-    g_BMagicShadowBreathMote->unk_10    = g_BattleEffectBattler->pos.x.fixed + rsin(*angle_cell) * g_ScratchPadHalves;
-    g_BMagicShadowBreathMote->unk_14    = g_BattleEffectBattler->pos.y.fixed + rcos(*angle_cell) * g_ScratchPadHalves;
-    g_BMagicShadowBreathMote->unk_18    = g_BattleEffectBattler->pos.z.fixed + 0x800000;
+    angle_cell                       = &D_1F800004;
+    angle                            = g_BMagicShadowBreathMote->unk_04 & 0xF;
+    *angle_cell                      = angle << 8;
+    g_ScratchPadHalves               = ((g_BMagicShadowBreathMote->unk_04 >> 4) + 1) << 3;
+    g_BMagicShadowBreathMote->unk_10 = g_BattleEffectBattler->pos.x.fixed + rsin(*angle_cell) * g_ScratchPadHalves;
+    g_BMagicShadowBreathMote->unk_14 = g_BattleEffectBattler->pos.y.fixed + rcos(*angle_cell) * g_ScratchPadHalves;
+    g_BMagicShadowBreathMote->unk_18 = g_BattleEffectBattler->pos.z.fixed + 0x800000;
     MAGIC126_MOTE->unk_08 = g_BMagicShadowBreathMote->slot = 0;
     g_BMagicShadowBreathMote->pad_06                       = 0;
     g_BMagicShadowBreathMote->unk_07                       = (u16)g_ScratchPadHalves;
@@ -470,13 +470,13 @@ MATCH void BMagic_ShadowBreathMoteRise(void) {
         g_BMagicShadowBreathMote->slot += 1;
         g_BMagicShadowBreathMote->unk_07 += 1;
     }
-    angle              = g_BMagicShadowBreathMote->unk_04 & 0xF;
-    angle_cell         = &D_1F800004;
-    *angle_cell        = angle << 8;
+    angle                            = g_BMagicShadowBreathMote->unk_04 & 0xF;
+    angle_cell                       = &D_1F800004;
+    *angle_cell                      = angle << 8;
     g_BMagicShadowBreathMote->unk_10 = g_BattleEffectBattler->pos.x.fixed + rsin((s16)(angle << 8)) * g_BMagicShadowBreathMote->unk_07;
     g_BMagicShadowBreathMote->unk_14 = g_BattleEffectBattler->pos.y.fixed + rcos(*angle_cell) * g_BMagicShadowBreathMote->unk_07;
     g_BMagicShadowBreathMote->unk_18 += PARTY_MEMBER_WORD_08(g_BMagicShadowBreathMote);
-    frames              = g_BMagicShadowBreathMote->pad_06 + 1;
+    frames                           = g_BMagicShadowBreathMote->pad_06 + 1;
     g_BMagicShadowBreathMote->pad_06 = frames;
     if (frames == 16) {
         g_BMagicShadowBreathMote->header.step += 1;
@@ -492,9 +492,9 @@ MATCH void BMagic_ShadowBreathMoteAccelerate(void) {
         g_BMagicShadowBreathMote->unk_07 += 1;
     }
     PARTY_MEMBER_WORD_08(g_BMagicShadowBreathMote) += 0x80000;
-    angle              = g_BMagicShadowBreathMote->unk_04 & 0xF;
-    angle_cell         = &D_1F800004;
-    *angle_cell        = angle << 8;
+    angle                            = g_BMagicShadowBreathMote->unk_04 & 0xF;
+    angle_cell                       = &D_1F800004;
+    *angle_cell                      = angle << 8;
     g_BMagicShadowBreathMote->unk_10 = g_BattleEffectBattler->pos.x.fixed + rsin((s16)(angle << 8)) * g_BMagicShadowBreathMote->unk_07;
     g_BMagicShadowBreathMote->unk_14 = g_BattleEffectBattler->pos.y.fixed + rcos(*angle_cell) * g_BMagicShadowBreathMote->unk_07;
     g_BMagicShadowBreathMote->unk_18 += PARTY_MEMBER_WORD_08(g_BMagicShadowBreathMote);
@@ -512,13 +512,13 @@ MATCH void BMagic_ShadowBreathMoteEnd(void) {
     if (g_FrameCount & 0x1) {
         g_BMagicShadowBreathMote->unk_07 += 1;
     }
-    angle              = g_BMagicShadowBreathMote->unk_04 & 0xF;
-    angle_cell         = &D_1F800004;
-    *angle_cell        = angle << 8;
+    angle                            = g_BMagicShadowBreathMote->unk_04 & 0xF;
+    angle_cell                       = &D_1F800004;
+    *angle_cell                      = angle << 8;
     g_BMagicShadowBreathMote->unk_10 = g_BattleEffectBattler->pos.x.fixed + rsin((s16)(angle << 8)) * g_BMagicShadowBreathMote->unk_07;
     g_BMagicShadowBreathMote->unk_14 = g_BattleEffectBattler->pos.y.fixed + rcos(*angle_cell) * g_BMagicShadowBreathMote->unk_07;
     g_BMagicShadowBreathMote->unk_18 += PARTY_MEMBER_WORD_08(g_BMagicShadowBreathMote);
-    frames              = g_BMagicShadowBreathMote->pad_06 - 1;
+    frames                           = g_BMagicShadowBreathMote->pad_06 - 1;
     g_BMagicShadowBreathMote->pad_06 = frames;
     if (frames == 0) {
         g_BattleEffectBattler->param.unk_0B -= 1;

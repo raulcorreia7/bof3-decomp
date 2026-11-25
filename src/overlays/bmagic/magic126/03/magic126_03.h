@@ -16,7 +16,7 @@ typedef enum BMagicShadowBreathEffectMode {
 } BMagicShadowBreathEffectMode;
 
 /* The orbs the task starts, and the motes the burst starts. */
-#define BMAGIC_SHADOW_BREATH_ORB_COUNT  8
+#define BMAGIC_SHADOW_BREATH_ORB_COUNT   8
 #define BMAGIC_SHADOW_BREATH_BURST_MOTES 64
 
 /* One of the 128 records BMagic_AllocEffect claims: a task header, the spawn index and the battler it acts on;
@@ -68,21 +68,21 @@ void BMagic_ShadowBreathMoteFree(void);
 void BMagic_ShadowBreathMoteProject(void);
 
 /* D_801F1268 */
-extern Callback g_BMagicShadowBreathGlowSteps[];
+extern Callback         g_BMagicShadowBreathGlowSteps[];
 /* D_801F1278 */
-extern Callback g_BMagicShadowBreathPillarSteps[];
+extern Callback         g_BMagicShadowBreathPillarSteps[];
 /* D_801F1288 */
-extern Callback g_BMagicShadowBreathOrbSteps[];
+extern Callback         g_BMagicShadowBreathOrbSteps[];
 /* D_801F1298 */
-extern BMagicTint g_BMagicShadowBreathOrbTints[];
+extern BMagicTint       g_BMagicShadowBreathOrbTints[];
 /* D_801F12A8 */
-extern Callback g_BMagicShadowBreathMoteModes[];
+extern Callback         g_BMagicShadowBreathMoteModes[];
 /* D_801F12AC */
-extern Callback g_BMagicShadowBreathMoteSteps[];
+extern Callback         g_BMagicShadowBreathMoteSteps[];
 /* D_801F12BC */
 extern ShadowBreathMote g_BMagicShadowBreathMotes[];
 /* D_801F22BC */
-extern PartyMember* g_BMagicShadowBreathMote;
+extern PartyMember*     g_BMagicShadowBreathMote;
 /* The current record as a mote: g_BMagicShadowBreathMote points into g_BMagicShadowBreathMotes. */
 #define MAGIC126_MOTE ((ShadowBreathMote*)g_BMagicShadowBreathMote)
 
