@@ -7,7 +7,7 @@ __asm__(".include \"include/match/macro.inc\"\n");
 #ifdef NON_MATCHING
 /* The price row: the three digit cells, the row cursor, and the confirm and cancel steps.
  * The split row starts after the bin that holds the function's head. */
-NON_MATCHING void func_801D0FE0(void) {
+NON_MATCHING void func_801D0F88(void) {
     u16 input;
     s32 price;
 
@@ -81,5 +81,5 @@ draw:
     }
 }
 #else
-INCLUDE_ASM(func_801D0FE0);
+INCLUDE_ASM(func_801D0F88);
 #endif
