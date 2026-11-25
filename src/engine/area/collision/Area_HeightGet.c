@@ -111,14 +111,11 @@ NON_MATCHING s32 Area_HeightGet(s32 x, s32 y, u8 mode) {
         if (corner[side] < corner[(side + 1) & 3]) {
             top = corner[(side + 1) & 3];
         }
-        low  = corner[(side + 2) & 3];
-        high = (s8)top;
+        diff = (s8)top - corner[(side + 2) & 3];
     } else {
         facing = turn >> 1;
-        high   = corner[facing];
-        low    = corner[(facing + 2) & 3];
+        diff   = corner[facing] - corner[(facing + 2) & 3];
     }
-    diff = high - low;
     return (s16)(ABS(diff) * 32);
 }
 #else

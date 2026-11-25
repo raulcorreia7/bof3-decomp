@@ -7,20 +7,20 @@ MATCH void SND_XAStateReadProgress(void) {
     s32 wrap;
     s8* flag;
 
-    flag = &D_8014682E;
+    flag = &g_XASyncResult;
     if (*flag < 0) {
         g_EmiServiceState = SND_XA_STATE_READ;
-        if ((((s16)D_80146820++ < 6) == 0) || (SND_XAHasCDError() != 0)) {
+        if ((((s16)g_XARetryCount++ < 6) == 0) || (SND_XAHasCDError() != 0)) {
             g_EmiServiceState = SND_XA_STATE_WAIT_SYNC;
         }
     } else if (*flag != 0) {
         SND_FadeCDVolume(0x80);
-        wrap = D_8014681E < 6U;
-        D_8014681E += 1;
+        wrap = g_XAStateFrame < 6U;
+        g_XAStateFrame += 1;
         if (wrap == 0) {
             g_EmiServiceState = SND_XA_STATE_READ_RESULT;
-            D_8014681E        = 0;
-            D_8014681C        = 0;
+            g_XAStateFrame    = 0;
+            g_XAWaitFrames    = 0;
             *flag             = 0;
             D_8014682F        = 1;
         }

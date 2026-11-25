@@ -5,9 +5,9 @@
 MATCH void SND_XAStateWaitSync(void) {
     s16* base;
 
-    base  = &D_8014681C;
+    base  = &g_XAWaitFrames;
     *base = 0;
-    /* Result buffer is D_80146824; aggregate layout unrecovered. */
+    /* Result buffer is g_XACdResult; aggregate layout unrecovered. */
     if (CdSync(1, (u8*)base + 8) != CdlNoIntr) {
         g_EmiServiceState = SND_XA_STATE_PAUSE;
         *base             = 0;
