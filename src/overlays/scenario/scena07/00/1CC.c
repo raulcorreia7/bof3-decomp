@@ -237,16 +237,19 @@ MATCH void func_801F786C(void) {
 
 #ifdef NON_MATCHING
 NON_MATCHING void func_801F78B0(void) {
+    Scena07BurstBuffer* buffer;
+
     /* FAKE: the retail frame holds 0x10 bytes no statement explains. */
     FAKE_STACK_PADS(u8, 0x10);
 
     TASK(Actor)->pos.z.fixed = Area_HeightSample(TASK(Actor)->pos.x.fixed, TASK(Actor)->pos.y.fixed) << 16;
-    D_801FDFC0               = &D_800E4C24;
-    D_800E4C24.pos.vx        = TASK(Actor)->pos.x.fixed;
-    D_800E4C24.pos.vy        = TASK(Actor)->pos.y.fixed;
-    D_800E4C24.pos.vz        = TASK(Actor)->pos.z.fixed + TO_COORD(0x200);
-    D_800E4C24.angle         = 0;
-    func_801F90F4(&D_800E4C24);
+    buffer                   = MEM_PTR(Scena07BurstBuffer, AREA_WORK + 0x424);
+    D_801FDFC0               = buffer;
+    buffer->pos.vx           = TASK(Actor)->pos.x.fixed;
+    buffer->pos.vy           = TASK(Actor)->pos.y.fixed;
+    buffer->pos.vz           = TASK(Actor)->pos.z.fixed + TO_COORD(0x200);
+    buffer->angle            = 0;
+    func_801F90F4(MEM_PTR(Scena07BurstBuffer, AREA_WORK + 0x424));
     TASK(Actor)->vx = 0x28;
     TASK(Actor)->header.step++;
     SND_SEPlay(EMI_SE_ID(SND_BANK_AREA, 9));
