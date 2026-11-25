@@ -1,0 +1,1 @@
+{"function": "emi/scenario/scena07/00@0x801F78B0", "tried": "burst buffer through MEM_PTR(Scena07BurstBuffer, AREA_WORK + 0x424) as in func_801F7BE0, five store orders", "first_diff": "0x801F78B0: body matches; sched2 fills the g_Task load delay slot with addiu sp where retail puts sw ra there and the frame adjust first", "score": "3 rows (from 22)"}
