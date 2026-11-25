@@ -22,10 +22,10 @@ MATCH void func_801F4258(s32 mode) {
     cell_x                    = D_801F4E78[mode] << 16;
     cell_y                    = D_801F4E7C[mode] << 16;
     depth                     = RotTransPers(g_ScratchPadVectors, (long*)D_1F800034, &p, &flag);
-    if (((u32)(((u16*)D_1F800034)[0] + 0x3C) & HALF_MASK) >= 0x1B9) {
+    if (((u32)((u16)D_1F800034[0] + 0x3C) & HALF_MASK) >= 0x1B9) {
         return;
     }
-    if (((u32)(((u16*)D_1F800034)[1] + 0x96) & HALF_MASK) >= 0x1C3) {
+    if (((u32)((u16)D_1F800034[1] + 0x96) & HALF_MASK) >= 0x1C3) {
         return;
     }
     if (depth == 0) {
