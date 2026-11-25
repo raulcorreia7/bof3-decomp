@@ -157,37 +157,30 @@ MATCH void func_801D129C(s16 x, s16 y, u8 group) {
 }
 
 #ifdef NON_MATCHING
-NON_MATCHING void func_801D14C8(s32 x, s32 y, s32 group) {
+NON_MATCHING void func_801D14C8(s16 x, s16 y, s32 group) {
     s32 i;
     s32 j;
     s32 k;
-    u8  type;
-    u8  queue_row;
-    u16 text_offset;
+    u8 (*names)[5] = D_801457E8;
 
-    text_offset = MEM(u16, (u8*)AREA_MESSAGE_TABLE + 0x1D8);
-    UI_TextDraw((s16)(x + 0x52), (s16)y, 0, TEXT_LENGTH_MAX, (u8*)((u8*)AREA_MESSAGE_TABLE + text_offset));
-
-    i = group;
-    i &= 0xFF;
-    i *= 8;
+    UI_TextDraw((s16)(x + 0x52), (s16)y, 0, TEXT_LENGTH_MAX, MESSAGE_TABLE_TEXT(AREA_MESSAGE_TABLE, 0xEC));
+    i = (group & 0xFF) * 8;
     j = 0;
-    while (i < g_FairyVillageUpdateCount) {
-        type = ((u8*)&g_FairyVillageUpdateCount)[i * 2 + 3];
-        if (((u16*)((u8*)g_Commu05Steps + 0x2C))[type * 2 + 1] != 0) {
-            queue_row = ((u8*)&g_FairyVillageUpdateCount)[i * 2 + 4];
+next:
+    if (i < g_FairyVillageUpdateCount) {
+        if (D_801D197C[D_80145E60[i * 2]][1] != 0) {
             for (k = 0; k < 8; k++) {
-                g_TextVariables[0][k] = D_801457E8[queue_row][k];
+                g_TextVariables[0][k] = names[D_80145E61[i * 2]][k];
             }
             g_TextVariables[0][5] = 0;
         }
-        UI_TextDraw((s16)(x + 0x14), (s16)(y + j * 0x10 + 0x1C), 0, TEXT_LENGTH_MAX, (u8*)((u8*)AREA_MESSAGE_TABLE + (((u16*)((u8*)g_Commu05Steps + 0x2C))[type * 2] << 1)));
+        UI_TextDraw((s16)(x + 0x14), (s16)(j * 16 + 0x1C + y), 0, TEXT_LENGTH_MAX,
+                    MESSAGE_TABLE_TEXT(AREA_MESSAGE_TABLE, D_801D197C[D_80145E60[i * 2]][0]));
         i++;
         j++;
         if (j < 8) {
-            continue;
+            goto next;
         }
-        break;
     }
 }
 #else
