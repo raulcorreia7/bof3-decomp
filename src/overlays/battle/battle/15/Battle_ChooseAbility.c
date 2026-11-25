@@ -39,22 +39,18 @@ NON_MATCHING void Battle_ChooseAbility(void) {
     D_801485DC = 1u;
     D_801485E0 = g_UiPanelTasks[16].pos.x + 7u;
     D_801485E2 = g_UiPanelTasks[16].pos.y + ((g_UiPanelTasks[16].unk_0C - sel->scroll_base) * 13 + 0x1A);
-    trigger    = INPUT_GetRepeatedButtons((s32)(g_PadStates[0].pressed & (INPUT_DIRECTIONAL | PADL1 | PADR1)));
+    trigger    = INPUT_REPEATED(g_PadStates[0].pressed, INPUT_DIRECTIONAL | PADL1 | PADR1);
     if ((g_BattleActorTurn->action_flags.value & (BATTLER_ACTION_DRAGON_FORM | BATTLER_ACTION_DRAGON_FORM_CONTROLLED)) != (u32)BATTLER_ACTION_DRAGON_FORM) {
         if ((trigger & PADLleft) != 0) {
             SND_SEPlay(EMI_SE_ID(SND_BANK_COMMON, 1));
             g_UiPanelTasks[16].unk_09 = 0x32u;
-            cursor                    = g_UiPanelTasks[16].unk_0B - 1;
-            g_UiPanelTasks[16].unk_0B = cursor;
-            if ((s8)cursor < 0) {
+            if ((s8)--g_UiPanelTasks[16].unk_0B < 0) {
                 g_UiPanelTasks[16].unk_0B = 3u;
             }
         } else if ((trigger & PADLright) != 0) {
             SND_SEPlay(EMI_SE_ID(SND_BANK_COMMON, 1));
             g_UiPanelTasks[16].unk_09 = 0x31u;
-            cursor                    = g_UiPanelTasks[16].unk_0B + 1;
-            g_UiPanelTasks[16].unk_0B = cursor;
-            if ((u8)cursor >= 4u) {
+            if (++g_UiPanelTasks[16].unk_0B >= 4u) {
                 g_UiPanelTasks[16].unk_0B = 0u;
             }
         }
@@ -111,7 +107,7 @@ NON_MATCHING void Battle_ChooseAbility(void) {
     handle                            = UI_MessageGetText(*(u16*)(D_801CA71E + type * 0x14));
     ring_index                        = (D_801EC328 - 1) & 0xF;
     g_BattleMessages[ring_index].text = handle;
-    if (g_UiPanelTasks[16].u.addr.unk_12 != 0) {
+    if ((s16)g_UiPanelTasks[16].u.addr.unk_12 != 0) {
         return;
     }
     if ((g_PadStates[0].pressed & g_InputMasks[BATTLE_INPUT_CANCEL]) != 0u) {
@@ -137,11 +133,10 @@ NON_MATCHING void Battle_ChooseAbility(void) {
         D_801454F5[g_UiPanelTasks[16].unk_0A * 3]        = g_UiPanelTasks[16].u.addr.unk_10;
         D_801454F6[g_UiPanelTasks[16].unk_0A * 3]        = group->cursor;
         entry                                            = Party_GetAbilities(message[0], group->index, 1);
-        type                                             = entry[group->cursor];
         turn                                             = g_BattleActorTurn;
-        turn->command.id                                 = type;
-        g_BattleChoicePhase                              = 1u;
-        D_801485DC                                       = 0u;
+        turn->command.id                                 = entry[group->cursor];
+        g_BattleChoicePanel[3]                           = 1u;
+        g_BattleChoicePanel[0x6C]                        = 0u;
         if (turn->command.id == 0x97u) {
             g_BattleMessageState              = 2u;
             g_BattleActorTurn->command.target = g_BattleMessageSlot[5];

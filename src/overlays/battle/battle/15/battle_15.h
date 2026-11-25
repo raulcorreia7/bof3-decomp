@@ -913,6 +913,8 @@ extern u32  func_800AA874(u32 bit_index);
 bool        func_800AA8A4(s32 battler_index);
 bool        func_800AB470(u8 battler_index);
 bool        func_800AB4BC(s32 type_index);
+/* Battle_PickRandomTarget at its battle/15 address: the shared name resolves to both images' copies. */
+u8          func_800AB760(u8 excluded_slot);
 void        func_800AB570(s32 battler_index);
 u8          func_800AB68C(u8 excluded_slot);
 /* func_800ABBE0 */
