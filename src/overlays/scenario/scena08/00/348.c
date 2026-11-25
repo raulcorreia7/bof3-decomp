@@ -1076,14 +1076,14 @@ MATCH void func_801FA3E4(void) {
                     SYS_ThreadWait(1);
                 }
                 Scene_SetupParty(0);
-                    Area_ScrollAdvance(Area_HeightSample(g_AreaScrollTargetX = TO_COORD_HALF(41), g_AreaScrollTargetY = TO_COORD(13)));
+                Area_ScrollAdvance(Area_HeightSample(g_AreaScrollTargetX = TO_COORD_HALF(41), g_AreaScrollTargetY = TO_COORD(13)));
                 Area_InitMapRenderer();
                 SYS_SetFlag(g_SceneFlags, 17);
             }
             if (SYS_TestFlag(g_SceneFlags, 19) && !SYS_TestFlag(g_SceneFlags, 20)) {
                 Game_SetScriptActive();
                 Scene_SetupParty(2);
-                    Area_ScrollAdvance(Area_HeightSample(g_AreaScrollTargetX = TO_COORD_HALF(10), g_AreaScrollTargetY = TO_COORD(20)));
+                Area_ScrollAdvance(Area_HeightSample(g_AreaScrollTargetX = TO_COORD_HALF(10), g_AreaScrollTargetY = TO_COORD(20)));
                 Area_InitMapRenderer();
                 /* retail passes the flag array twice */
                 ((void (*)(void*, void*, u8))SYS_SetFlag)(g_SceneFlags, g_SceneFlags, 20);
