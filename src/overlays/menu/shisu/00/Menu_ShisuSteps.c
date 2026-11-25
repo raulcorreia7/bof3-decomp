@@ -622,13 +622,13 @@ typedef union PanelQuadPrim {
 #ifdef NON_MATCHING
 NON_MATCHING void func_801D2308(void* record) {
     CVECTOR        color;
+    VECTOR         unused;
     VECTOR         normal;
-    MATRIX         m;
     MATRIX         light;
+    MATRIX         m;
     MATRIX         light_mtx;
     long           depth;
     long           flag;
-    Actor*         saved;
     u8             abr;
     u16            count;
     u16            tpage;
@@ -636,8 +636,10 @@ NON_MATCHING void func_801D2308(void* record) {
     PanelQuadPrim* quad;
     u16            i;
 
-    saved = TASK(Actor);
-    TASK_SET(record);
+    /* Swaps the record into the task cell; record keeps the caller's task. */
+    record = (void*)((s32)record ^ (s32)g_Task);
+    g_Task = (void*)((s32)g_Task ^ (s32)record);
+    record = (void*)((s32)record ^ (s32)g_Task);
     PushMatrix();
     count = TASK(Actor)->range_54.table[0];
     Actor_BuildTransformMatrix(&m);
@@ -701,7 +703,7 @@ NON_MATCHING void func_801D2308(void* record) {
             quad->ft4.tpage = tpage;
             quad->ft4.clut  = GetClut(piece->clut * 16, STAGE_PALETTE_Y + 3);
             SetSemiTrans(&quad->ft4, (abr >> 6) & 1);
-            if (func_801AFF90((Pos2*)&quad->ft4.x0, (Pos2*)&quad->ft4.x1, (Pos2*)&quad->ft4.x2) > 0) {
+            if (((s32 (*)(Pos2*, Pos2*, Pos2*))func_801AFF90)((Pos2*)&quad->ft4.x0, (Pos2*)&quad->ft4.x1, (Pos2*)&quad->ft4.x2) > 0) {
                 GFX_AddPrim(GFX_LAYER_UI, sizeof(POLY_FT4));
             }
 
@@ -710,7 +712,7 @@ NON_MATCHING void func_801D2308(void* record) {
         } while ((u16)i < count);
     }
     PopMatrix();
-    TASK_SET(saved);
+    TASK_SET(record);
 }
 #else
 INCLUDE_ASM(func_801D2308);
