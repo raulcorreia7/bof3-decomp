@@ -17,8 +17,7 @@
 #ifdef NON_MATCHING
 NON_MATCHING void func_800A5330(void) {
     u8  row;
-    s32 col;
-    s32 entry;
+    u8  col;
     u8  gene_row;
     u8* cell;
     u8  gene;
@@ -56,7 +55,8 @@ NON_MATCHING void func_800A5330(void) {
 
     if (g_PadStates[0].pressed & g_InputMasks[BATTLE_INPUT_CONFIRM]) {
         if ((u8)g_Battle.cursor.gene.row != GAME_NONE) {
-            cell = &D_800B7070[(u8)g_Battle.cursor.gene.row][g_Battle.cursor.gene.column];
+            cell = &D_800B7070[(u8)g_Battle.cursor.gene.row][0];
+            cell += g_Battle.cursor.gene.column;
             if (*cell == 0) {
                 SND_SEPlay(EMI_SE_ID(SND_BANK_COMMON, 7));
                 return;
@@ -81,18 +81,18 @@ NON_MATCHING void func_800A5330(void) {
         }
     }
 
-    entry = g_Battle.cursor.gene.row;
-    if (entry == -1) {
+    if (g_Battle.cursor.gene.row == -1) {
         if (g_Battle.gene_count != 0) {
             text_id = GENE_HELP_CONFIRM_TEXT;
         } else {
             text_id = GENE_HELP_PICK_TEXT;
         }
     } else {
-        gene_row = entry;
+        gene_row = g_Battle.cursor.gene.row;
         col      = g_Battle.cursor.gene.column;
         if (D_800B7070[gene_row][col] != 0) {
-            text_id = col + (gene_row * GENE_GRID_COLUMNS + GENE_HELP_TEXT);
+            text_id = gene_row * GENE_GRID_COLUMNS + GENE_HELP_TEXT;
+            text_id += col;
         } else {
             text_id = BLANK_TEXT;
         }
