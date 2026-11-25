@@ -27,12 +27,11 @@ NON_MATCHING void func_801D2B58(void) {
     s8           dy;
 
     while (g_Battle.turn_cursor < g_Battle.turn_count) {
-        id = g_Battle.turn_order[g_Battle.turn_cursor];
-
-        if (id == 0xFF) {
+        if (g_Battle.turn_order[g_Battle.turn_cursor] == 0xFF) {
             g_Battle.turn_cursor++;
             continue;
         }
+        id = g_Battle.turn_order[g_Battle.turn_cursor];
 
         if (id < 3) {
             func_800AB0B8(id);
@@ -48,7 +47,7 @@ NON_MATCHING void func_801D2B58(void) {
             index                = g_Game.members[id].chr.character_id * 8 + actor->facing * 2;
             dx                   = g_BattlePanelOffsets[index];
             ACTIVE_X             = actor->screen_x.value + dx;
-            index                = g_Game.members[id].chr.character_id * 8 + actor->facing * 2;
+            index                = actor->facing * 2 + g_Game.members[id].chr.character_id * 8;
             dy                   = D_801EB0B1[index];
             ACTIVE_Y             = actor->screen_y.value + dy;
             ACTIVE_DEPTH         = actor->depth;
@@ -56,9 +55,9 @@ NON_MATCHING void func_801D2B58(void) {
         } else {
             ACTIVE_ACTION        = &ENEMY_COMBATANT(id).turn.command.target;
             ACTIVE_ACTOR         = (PartyMember*)&ENEMY_COMBATANT(id);
-            actor                = D_8014637C;
             enemy                = id - 3;
             dx                   = g_BattleEnemyBattlers[enemy].panel_offset_x;
+            actor                = D_8014637C;
             ACTIVE_X             = actor->screen_x.value + dx;
             dy                   = g_BattleEnemyBattlers[enemy].panel_offset_y;
             ACTIVE_Y             = actor->screen_y.value + dy;
