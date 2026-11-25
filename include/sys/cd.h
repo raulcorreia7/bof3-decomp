@@ -55,7 +55,7 @@ typedef struct EMIStream {
     /* 0x14 */ volatile u32 ring_base;
     /* 0x18 */ volatile u32 requested_slot;
     /* 0x1C */ u32          step;
-    /* 0x20 */ s32          upload_bytes_left; /* D_80146474 */
+    /* 0x20 */ s32          upload_bytes_left; /* g_EmiUploadBytesLeft */
     /* 0x24 */ volatile u32 upload_cursor;     /* D_80146478 */
     /* 0x28 */ u8           pad_28[0x08];
     /* 0x30 */ volatile u8  read_status;
@@ -66,16 +66,16 @@ typedef struct EMIStream {
     /* 0x35 */ volatile u8  source_index; /* D_80146485 */
     /* 0x36 */ volatile u8  unk_36;       /* D_80146486 */
     /* 0x37 */ u8           pad_37;
-    /* 0x38 */ s8           ring_index; /* D_80146488 */
+    /* 0x38 */ s8           ring_index; /* g_EmiRingIndex */
     /* 0x39 */ s8           ring_slot;
     /* 0x3A */ s8           cd_state; /* CdState */
     /* 0x3B */ s8           unk_3B;   /* D_8014648B: bit flags and the pre-start state */
     /* 0x3C */ s32          cd_sync_status;
     /* 0x40 */ u16          idle_frames;
-    /* 0x42 */ u16          seek_retries; /* D_80146492 */
+    /* 0x42 */ u16          seek_retries; /* g_EmiSeekRetries */
     /* 0x44 */ u8           state;
     /* 0x45 */ u8           pad_45[0x03];
-    /* 0x48 */ u8           sync_result[8]; /* D_80146498 */
+    /* 0x48 */ u8           sync_result[8]; /* g_EmiSyncResult */
 } EMIStream;
 
 ASSERT_OFFSET(EMIStream, start_sector, 0x00);

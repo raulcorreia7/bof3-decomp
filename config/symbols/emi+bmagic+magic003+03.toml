@@ -10,9 +10,49 @@ Effect_Reset = { addr = 0x801E5988, type = "func", source = "Clears every timer,
 g_BattleEffectBattler = { addr = 0x801EB4E0, source = "the battler the running effect acts on; Battle_UpdateEffects stores it for each effect step (emi/battle/battle/03 owns the cell)" }
 g_BattleEnemyBattlers = { addr = 0x801EB630, alias = true }
 g_BattleEffects = { addr = 0x801EC330, alias = true }
+BMagic_SuperComboUpdate = { addr = 0x801EEC28, type = "func", source = "Runs the combo's current mode, then steps every effect slot in use." }
+BMagic_SuperComboInit = { addr = 0x801EED14, type = "func", source = "Clears the effect slots and centers the combo prompts on the screen." }
+BMagic_SuperComboShowReady = { addr = 0x801EEDAC, type = "func", source = "Shows the READY label for 30 frames." }
+BMagic_SuperComboShowGo = { addr = 0x801EEE28, type = "func", source = "Shows the GO label for 30 frames." }
+BMagic_SuperComboPickButton = { addr = 0x801EEEA4, type = "func", source = "Waits out the delay, then picks the face button to press next and the time to press it." }
+BMagic_SuperComboReadButton = { addr = 0x801EEF4C, type = "func", source = "Draws the prompted face button and reads the pad: the right button scores a hit, a wrong button or the timeout ends the combo." }
+BMagic_SuperComboWaitResult = { addr = 0x801EF04C, type = "func", source = "Waits the 6 frames ReadButton set after the last prompt, then loads the 30 frames of the hit-count display." }
+BMagic_SuperComboShowHitCount = { addr = 0x801EF0A8, type = "func", source = "Shows the hit count and the HIT COMBO label until the delay ends." }
+BMagic_SuperComboStartAttack = { addr = 0x801EF12C, type = "func", source = "Copies the user's pose, hides the user, starts its attack script and spawns the strike and the images." }
+BMagic_SuperComboEndAttack = { addr = 0x801EF1FC, type = "func", source = "Shows the user again and returns it to its idle script once every effect it spawned has ended." }
+BMagic_SuperComboEnd = { addr = 0x801EF268, type = "func", source = "Stores the hit count, marks the targets damaged and ends the effect." }
+BMagic_SuperComboRunEffect = { addr = 0x801EF2CC, type = "func", source = "Runs the strike (mode 0) or the image (mode 1) the effect's mode selects." }
+BMagic_SuperComboStrikeUpdate = { addr = 0x801EF324, type = "func", source = "Runs the strike's current step and draws the effect's actor once the strike has started." }
+BMagic_SuperComboStrikeStart = { addr = 0x801EF3C8, type = "func", source = "Starts the strike's jump toward the target after the delay." }
+BMagic_SuperComboStrikeJump = { addr = 0x801EF478, type = "func", source = "Moves the user through the jump arc, applying the damage and spawning the hit images when the delay ends." }
+BMagic_SuperComboStrikeHit = { addr = 0x801EF578, type = "func", source = "Waits the delay, plays the hit sound and applies the damage, then starts the return." }
+BMagic_SuperComboStrikeReturn = { addr = 0x801EF644, type = "func", source = "Moves the strike back to where it started." }
+BMagic_SuperComboStrikeEnd = { addr = 0x801EF6CC, type = "func", source = "Counts the strike off the active battler's running effects and ends it." }
+BMagic_SuperComboAfterimageUpdate = { addr = 0x801EF708, type = "func", source = "Runs the image's current step and draws the effect's actor once the image has started." }
+BMagic_SuperComboAfterimageStart = { addr = 0x801EF7A8, type = "func", source = "Starts the image's jump after the delay and tints its palette by its index." }
+BMagic_SuperComboAfterimageJump = { addr = 0x801EF918, type = "func", source = "Moves the image through the jump arc." }
+BMagic_SuperComboAfterimageTurn = { addr = 0x801EF9AC, type = "func", source = "Sends the image back toward where it started." }
+BMagic_SuperComboAfterimageEnd = { addr = 0x801EF9FC, type = "func", source = "Moves the image back, then frees its palette fade and ends it." }
 BMagic_DispatchEffectMode = { addr = 0x801EFA9C, type = "func", source = "Runs the handler that header.mode (byte 0x01) selects from the effect handlers of magic003." }
+BMagic_SuperComboHitImageUpdate = { addr = 0x801EFAE0, type = "func", source = "Runs the hit image's current step with the battle scripts installed and draws its actor." }
+BMagic_SuperComboHitImageStart = { addr = 0x801EFB8C, type = "func", source = "Copies the selected actor's pose into the hit image and starts the animation script its index selects." }
+BMagic_SuperComboHitImagePlay = { addr = 0x801EFCF8, type = "func", source = "Plays the hit image's script and clears it when the script ends." }
+BMagic_SuperComboStrikeSpawn = { addr = 0x801EFD4C, type = "func", source = "Claims a battle effect slot for the strike." }
+BMagic_SuperComboAfterimageSpawn = { addr = 0x801EFEC8, type = "func", source = "Claims four battle effect slots for the images, each delayed longer than the one before." }
+BMagic_SuperComboHitImageSpawn = { addr = 0x801F0078, type = "func", source = "Spawns one hit image per hit of the combo." }
+BMagic_SuperComboDrawLabel = { addr = 0x801F0164, type = "func", source = "Draws the label string the index selects, centered on the effect's screen position." }
+BMagic_SuperComboDrawButton = { addr = 0x801F03F0, type = "func", source = "Draws the glyph of the face button the index selects at the effect's screen position." }
+BMagic_SuperComboDrawHitCount = { addr = 0x801F0550, type = "func", source = "Draws the two-digit hit count left of the effect's screen position." }
+BMagic_SuperComboDrawBox = { addr = 0x801F07B0, type = "func", source = "Draws the dark translucent box behind the label the index selects." }
 BMagic_AllocEffect = { addr = 0x801F09C4, type = "func", source = "Claims the first free slot of the effect table (bit 0 of header.flags) and returns its index, or 0xFF when all 32 slots are in use in magic003 (Super Combo)." }
 Actor_Clear = { addr = 0x801F0A28, type = "func", source = "Clears the effect work record: header flags, mode (byte 0x01), step (byte 0x02) and bytes 0x03 and 0x04." }
-D_801F0A84 = { addr = 0x801F0A84, source = "Timer reload per index of the magic003 effect: func_801EEEA4 reads it at the effect's byte 0x0A and reloads byte 0x09 from it." }
+g_BMagicSuperComboAfterimageTints = { addr = 0x801F0A78, source = "The palette fade colour of each image, by image index." }
+g_BMagicSuperComboPressTimes = { addr = 0x801F0A84, source = "Frames the next prompt waits, by hits scored so far." }
+g_BMagicSuperComboButtonMasks = { addr = 0x801F0A98, source = "The pad mask of each prompted face button." }
+g_BMagicSuperComboLabelLengths = { addr = 0x801F0A9C, source = "The letter count of each label, which centers it." }
+g_BMagicSuperComboLabels = { addr = 0x801F0AA0, source = "The glyph codes of the labels HIT COMBO, READY, GO and MISS, 0 at the end and 0xFF for a space." }
+g_BMagicSuperComboButtonCluts = { addr = 0x801F0AD4, source = "The clut column of each button glyph." }
+g_BMagicSuperComboModes = { addr = 0x801F0AD8, source = "The mode routines of the combo, run by header.mode." }
 g_BMagicEffectModes = { addr = 0x801F0B00, source = "Handlers of magic003 (Super Combo), run by header.mode (byte 0x01)." }
+g_BMagicSuperComboBoxes = { addr = 0x801F0B10, source = "The box each label is drawn in." }
 D_801F0B38 = { addr = 0x801F0B38, source = "Effect slot table of the magic003 effect, scanned by BMagic_AllocEffect and cleared by a loop over its 0x78-byte records." }

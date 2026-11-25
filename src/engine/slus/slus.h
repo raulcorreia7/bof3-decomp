@@ -55,7 +55,7 @@
 #define AREA_CODE_BASE             0x800F5000u          /* the area code base (AreaHandlerRecord.code_base) */
 #define SND_BANK_COUNT             7                    /* sound banks per layout row */
 #define SND_LAYOUT_COUNT           3                    /* layout rows of the bank tables */
-#define XA_STREAM_COUNT            3                    /* XA streams, each with a slot and a cue table */
+#define SND_XA_STREAM_COUNT        3                    /* XA streams, each with a slot and a cue table */
 #define WORD_SIGN_BIT              0x80000000u          /* the sign bit of a word */
 #define COPY_KERNEL_ENTRY          ((u32) & D_8016432C) /* resume entry of the stream copy kernel */
 #define MAP_ZONE_COUNT             666                  /* records in g_AreaEncounterZones */
@@ -98,93 +98,93 @@
     func_801576FC((u8*)MAP_BUNDLE_BASE + g_AreaMapBundle.object_list_28 * 4 + (word & HALF_MASK) * 4)
 
 /* One alias arm of a record reader: the tone table and the record table of the bank `alias`. */
-#define SLUS_SE_ALIAS_ARM(alias, tones, se_records)       \
-    case alias:                                           \
-        D_8018B314 = SE_TONE(tones)->min;                 \
-        D_8018B320 = SE_TONE(tones)->shift;               \
-        D_8018B32C = SE_TONE(tones)->pan;                 \
-        D_8018B324 = SE_TONE(tones)->vol;                 \
-        D_8018B328 = SE_TONE(tones)->vol;                 \
-        D_8018B318 = (se_records)[g_SndSeRecord * 4 + 3]; \
+#define SLUS_SE_ALIAS_ARM(alias, tones, se_records)                  \
+    case alias:                                                      \
+        g_SndSeLayer0Note     = SE_TONE(tones)->min;                 \
+        g_SndSeLayer0Fine     = SE_TONE(tones)->shift;               \
+        g_SndSeLayer0Pan      = SE_TONE(tones)->pan;                 \
+        g_SndSeLayer0VolumeL  = SE_TONE(tones)->vol;                 \
+        g_SndSeLayer0VolumeR  = SE_TONE(tones)->vol;                 \
+        g_SndSeLayer0SpuVoice = (se_records)[g_SndSeRecord * 4 + 3]; \
         break;
 
-/* Bank record reader: loads record g_SndSeRecord of the bank's record table into voice slot 0 and fills one more slot per layer on the next voices (wrapping at 24). The head is the one body of banks 0 to 6; the alias switch that follows lets another bank supply the tone and voice. */
-#define SLUS_READ_BANK_SE_HEAD(bank, se_records, tones)                                                       \
-    s32 record;                                                                                               \
-    s16 program;                                                                                              \
-    s16 tone;                                                                                                 \
-    s16 voice;                                                                                                \
-                                                                                                              \
-    D_8018B30C       = (bank);                                                                                \
-    record           = g_SndSeRecord * 4;                                                                     \
-    g_SndSeAliasBank = (se_records)[record];                                                                  \
-    program          = (se_records)[record + 1] & EMI_SE_PROGRAM_MASK;                                        \
-    D_8018B308       = program;                                                                               \
-    g_SndSeUseVolume = (se_records)[record + 1] & EMI_SE_USE_VOLUME_FLAG;                                     \
-    tone             = (se_records)[record + 2] >> 4;                                                         \
-    D_8018B310       = tone;                                                                                  \
-    g_SndSeRetrigger = (se_records)[record + 2] & EMI_SE_COMPARE_MASK;                                        \
-    D_8018B40C       = g_VabProgramOffsets[program] + VAB_TONE_TABLE + g_VabToneOffsets[tone];                \
-    D_8018B314       = SE_TONE((tones))->min;                                                                 \
-    D_8018B320       = SE_TONE((tones))->shift;                                                               \
-    D_8018B32C       = SE_TONE((tones))->pan;                                                                 \
-    D_8018B324       = SE_TONE((tones))->vol;                                                                 \
-    D_8018B328       = SE_TONE((tones))->vol;                                                                 \
-    voice            = (se_records)[record + 3] & EMI_SE_VOICE_MASK;                                          \
-    D_8018B318       = voice;                                                                                 \
-    g_SndSeLayers    = (se_records)[record + 3] & EMI_SE_LAYER_MASK;                                          \
-    if (g_SndSeLayers != 0) {                                                                                 \
-        g_SndSeLayers = g_SndSeLayers >> 5;                                                                   \
-        switch (g_SndSeLayers) {                                                                              \
-            case 3:                                                                                           \
-                D_8018B380 = (se_records)[g_SndSeRecord * 4 + 1] & EMI_SE_PROGRAM_MASK;                       \
-                D_8018B388 = D_8018B310 + g_SndSeLayers;                                                      \
-                D_8018B38C = D_8018B314;                                                                      \
-                D_8018B398 = D_8018B320;                                                                      \
-                D_8018B40C = g_VabProgramOffsets[D_8018B380] + VAB_TONE_TABLE + g_VabToneOffsets[D_8018B388]; \
-                D_8018B39C = SE_TONE((tones))->vol;                                                           \
-                D_8018B3A0 = SE_TONE((tones))->vol;                                                           \
-                D_8018B3A4 = SE_TONE((tones))->pan;                                                           \
-                D_8018B390 = D_8018B318 + 3;                                                                  \
-                if (D_8018B390 >= 24) {                                                                       \
-                    D_8018B390 = D_8018B318 + 3 - 24;                                                         \
-                }                                                                                             \
-            case 2:                                                                                           \
-                D_8018B358 = (se_records)[g_SndSeRecord * 4 + 1] & EMI_SE_PROGRAM_MASK;                       \
-                D_8018B360 = D_8018B310 + g_SndSeLayers;                                                      \
-                D_8018B364 = D_8018B314;                                                                      \
-                D_8018B370 = D_8018B320;                                                                      \
-                D_8018B40C = g_VabProgramOffsets[D_8018B358] + VAB_TONE_TABLE + g_VabToneOffsets[D_8018B360]; \
-                D_8018B374 = SE_TONE((tones))->vol;                                                           \
-                D_8018B378 = SE_TONE((tones))->vol;                                                           \
-                D_8018B37C = SE_TONE((tones))->pan;                                                           \
-                D_8018B368 = D_8018B318 + 2;                                                                  \
-                if (D_8018B368 >= 24) {                                                                       \
-                    D_8018B368 = D_8018B318 + 2 - 24;                                                         \
-                }                                                                                             \
-            case 1:                                                                                           \
-                D_8018B330 = (se_records)[g_SndSeRecord * 4 + 1] & EMI_SE_PROGRAM_MASK;                       \
-                D_8018B338 = D_8018B310 + g_SndSeLayers;                                                      \
-                D_8018B33C = D_8018B314;                                                                      \
-                D_8018B348 = D_8018B320;                                                                      \
-                D_8018B40C = g_VabProgramOffsets[D_8018B330] + VAB_TONE_TABLE + g_VabToneOffsets[D_8018B338]; \
-                D_8018B34C = SE_TONE((tones))->vol;                                                           \
-                D_8018B350 = SE_TONE((tones))->vol;                                                           \
-                D_8018B354 = SE_TONE((tones))->pan;                                                           \
-                D_8018B340 = D_8018B318 + 1;                                                                  \
-                if (D_8018B340 >= 24) {                                                                       \
-                    D_8018B340 = D_8018B318 + 1 - 24;                                                         \
-                }                                                                                             \
-                break;                                                                                        \
-        }                                                                                                     \
+/* Bank record reader: loads record g_SndSeRecord of the bank's record table into layer 0 and fills one more layer on each next voice (wrapping at 24). The head is the one body of banks 0 to 6; the alias switch that follows lets another bank supply the tone and voice. */
+#define SLUS_READ_BANK_SE_HEAD(bank, se_records, tones)                                                                                   \
+    s32 record;                                                                                                                           \
+    s16 program;                                                                                                                          \
+    s16 tone;                                                                                                                             \
+    s16 voice;                                                                                                                            \
+                                                                                                                                          \
+    g_SndSeVabId          = (bank);                                                                                                       \
+    record                = g_SndSeRecord * 4;                                                                                            \
+    g_SndSeAliasBank      = (se_records)[record];                                                                                         \
+    program               = (se_records)[record + 1] & EMI_SE_PROGRAM_MASK;                                                               \
+    g_SndSeLayer0Program  = program;                                                                                                      \
+    g_SndSeUseVolume      = (se_records)[record + 1] & EMI_SE_USE_VOLUME_FLAG;                                                            \
+    tone                  = (se_records)[record + 2] >> 4;                                                                                \
+    g_SndSeLayer0Tone     = tone;                                                                                                         \
+    g_SndSeRetrigger      = (se_records)[record + 2] & EMI_SE_COMPARE_MASK;                                                               \
+    D_8018B40C            = g_VabProgramOffsets[program] + VAB_TONE_TABLE + g_VabToneOffsets[tone];                                       \
+    g_SndSeLayer0Note     = SE_TONE((tones))->min;                                                                                        \
+    g_SndSeLayer0Fine     = SE_TONE((tones))->shift;                                                                                      \
+    g_SndSeLayer0Pan      = SE_TONE((tones))->pan;                                                                                        \
+    g_SndSeLayer0VolumeL  = SE_TONE((tones))->vol;                                                                                        \
+    g_SndSeLayer0VolumeR  = SE_TONE((tones))->vol;                                                                                        \
+    voice                 = (se_records)[record + 3] & EMI_SE_VOICE_MASK;                                                                 \
+    g_SndSeLayer0SpuVoice = voice;                                                                                                        \
+    g_SndSeLayers         = (se_records)[record + 3] & EMI_SE_LAYER_MASK;                                                                 \
+    if (g_SndSeLayers != 0) {                                                                                                             \
+        g_SndSeLayers = g_SndSeLayers >> 5;                                                                                               \
+        switch (g_SndSeLayers) {                                                                                                          \
+            case 3:                                                                                                                       \
+                g_SndSeLayer3Program  = (se_records)[g_SndSeRecord * 4 + 1] & EMI_SE_PROGRAM_MASK;                                        \
+                g_SndSeLayer3Tone     = g_SndSeLayer0Tone + g_SndSeLayers;                                                                \
+                g_SndSeLayer3Note     = g_SndSeLayer0Note;                                                                                \
+                g_SndSeLayer3Fine     = g_SndSeLayer0Fine;                                                                                \
+                D_8018B40C            = g_VabProgramOffsets[g_SndSeLayer3Program] + VAB_TONE_TABLE + g_VabToneOffsets[g_SndSeLayer3Tone]; \
+                g_SndSeLayer3VolumeL  = SE_TONE((tones))->vol;                                                                            \
+                g_SndSeLayer3VolumeR  = SE_TONE((tones))->vol;                                                                            \
+                g_SndSeLayer3Pan      = SE_TONE((tones))->pan;                                                                            \
+                g_SndSeLayer3SpuVoice = g_SndSeLayer0SpuVoice + 3;                                                                        \
+                if (g_SndSeLayer3SpuVoice >= 24) {                                                                                        \
+                    g_SndSeLayer3SpuVoice = g_SndSeLayer0SpuVoice + 3 - 24;                                                               \
+                }                                                                                                                         \
+            case 2:                                                                                                                       \
+                g_SndSeLayer2Program  = (se_records)[g_SndSeRecord * 4 + 1] & EMI_SE_PROGRAM_MASK;                                        \
+                g_SndSeLayer2Tone     = g_SndSeLayer0Tone + g_SndSeLayers;                                                                \
+                g_SndSeLayer2Note     = g_SndSeLayer0Note;                                                                                \
+                g_SndSeLayer2Fine     = g_SndSeLayer0Fine;                                                                                \
+                D_8018B40C            = g_VabProgramOffsets[g_SndSeLayer2Program] + VAB_TONE_TABLE + g_VabToneOffsets[g_SndSeLayer2Tone]; \
+                g_SndSeLayer2VolumeL  = SE_TONE((tones))->vol;                                                                            \
+                g_SndSeLayer2VolumeR  = SE_TONE((tones))->vol;                                                                            \
+                g_SndSeLayer2Pan      = SE_TONE((tones))->pan;                                                                            \
+                g_SndSeLayer2SpuVoice = g_SndSeLayer0SpuVoice + 2;                                                                        \
+                if (g_SndSeLayer2SpuVoice >= 24) {                                                                                        \
+                    g_SndSeLayer2SpuVoice = g_SndSeLayer0SpuVoice + 2 - 24;                                                               \
+                }                                                                                                                         \
+            case 1:                                                                                                                       \
+                g_SndSeLayer1Program  = (se_records)[g_SndSeRecord * 4 + 1] & EMI_SE_PROGRAM_MASK;                                        \
+                g_SndSeLayer1Tone     = g_SndSeLayer0Tone + g_SndSeLayers;                                                                \
+                g_SndSeLayer1Note     = g_SndSeLayer0Note;                                                                                \
+                g_SndSeLayer1Fine     = g_SndSeLayer0Fine;                                                                                \
+                D_8018B40C            = g_VabProgramOffsets[g_SndSeLayer1Program] + VAB_TONE_TABLE + g_VabToneOffsets[g_SndSeLayer1Tone]; \
+                g_SndSeLayer1VolumeL  = SE_TONE((tones))->vol;                                                                            \
+                g_SndSeLayer1VolumeR  = SE_TONE((tones))->vol;                                                                            \
+                g_SndSeLayer1Pan      = SE_TONE((tones))->pan;                                                                            \
+                g_SndSeLayer1SpuVoice = g_SndSeLayer0SpuVoice + 1;                                                                        \
+                if (g_SndSeLayer1SpuVoice >= 24) {                                                                                        \
+                    g_SndSeLayer1SpuVoice = g_SndSeLayer0SpuVoice + 1 - 24;                                                               \
+                }                                                                                                                         \
+                break;                                                                                                                    \
+        }                                                                                                                                 \
     }
 
 /* The record reader of banks 0, 4, 5 and 6, whose alias banks are 1 to 3. */
 #define SLUS_READ_BANK_SE(bank, se_records, tones)                    \
     SLUS_READ_BANK_SE_HEAD(bank, se_records, tones)                   \
     if (g_SndSeAliasBank != 0) {                                      \
-        D_8018B30C = g_SndSeAliasBank & EMI_SE_ALIAS_MASK;            \
-        switch (D_8018B30C) {                                         \
+        g_SndSeVabId = g_SndSeAliasBank & EMI_SE_ALIAS_MASK;          \
+        switch (g_SndSeVabId) {                                       \
             SLUS_SE_ALIAS_ARM(1, g_SndBankHeaders[1], g_SndBankSe[1]) \
             SLUS_SE_ALIAS_ARM(2, g_SndBankHeaders[2], g_SndBankSe[2]) \
             SLUS_SE_ALIAS_ARM(3, g_SndBankHeaders[3], g_SndBankSe[3]) \
@@ -409,7 +409,8 @@ extern volatile u32          g_EmiFirstWord;
 extern volatile u16          g_EmiEntryType;
 extern volatile u32          g_EmiRingBase;
 extern u32                   g_EmiStep;
-extern s32                   D_80146474;
+/* D_80146474 */
+extern s32                   g_EmiUploadBytesLeft;
 extern volatile u32          D_80146478;
 extern volatile u8           g_EmiReadStatus;
 extern volatile u8           g_EmiNextSlot;
@@ -420,7 +421,8 @@ extern u8                    g_EmiEntryBank;
 extern volatile u8           D_80146484;
 extern volatile u8           D_80146485;
 extern volatile u8           D_80146486;
-extern s8                    D_80146488;
+/* D_80146488 */
+extern s8                    g_EmiRingIndex;
 extern s8                    g_EmiRingSlot;
 /* D_8014648A */
 extern s8                    g_CdState;
@@ -428,49 +430,85 @@ extern s8                    D_8014648B;
 /* D_8014648C */
 extern s32                   g_CdSyncStatus;
 extern u16                   g_EmiStreamIdleFrames;
-extern u16                   D_80146492;
+/* D_80146492 */
+extern u16                   g_EmiSeekRetries;
 extern u8                    g_EmiStreamState;
-extern u8                    D_80146498[];
+/* D_80146498 */
+extern u8                    g_EmiSyncResult[];
 extern volatile u8           g_EmiRingStates[];
 extern s32                   D_80146518[];
 extern u32                   g_EmiSlotSectors[];
 extern EMIBank               g_EmiBanks[SND_BANK_COUNT];
-extern volatile EMIAudioLink D_80146780[];
+/* D_80146780 */
+extern volatile EMIAudioLink g_EmiBankLinks[];
 /* FAKE: SND_SetBankLayout stores the bank records, headers and SE tables through their own symbols;
  * the g_EmiBanks, g_SndBankHeaders and g_SndBankSe views share one base register and shrink it. */
-extern u8*                   D_80146784;
-extern u32                   D_80146788[];
-extern s16                   D_8014678C;
-extern s32                   D_80146790;
-extern s32                   D_80146794;
-extern u8*                   D_80146798;
-extern s32                   D_8014679C;
-extern u16                   D_801467A0;
-extern s32                   D_801467A4;
-extern s32                   D_801467A8;
-extern u8*                   D_801467AC;
-extern s32                   D_801467B0;
-extern u16                   D_801467B4;
-extern s32                   D_801467B8;
-extern s32                   D_801467BC;
-extern u8*                   D_801467C0;
-extern s32                   D_801467C4;
-extern u16                   D_801467C8;
-extern s32                   D_801467CC;
-extern s32                   D_801467D0;
-extern u8*                   D_801467D4;
-extern s32                   D_801467D8;
-extern u16                   D_801467DC;
-extern s32                   D_801467E0;
-extern s32                   D_801467E4;
-extern u8*                   D_801467E8;
-extern s32                   D_801467EC;
-extern u16                   D_801467F0;
-extern s32                   D_801467F4;
-extern s32                   D_801467F8;
-extern u8*                   D_801467FC;
-extern s32                   D_80146800;
-extern u16                   D_80146804;
+/* D_80146784 */
+extern u8*                   g_EmiBank0SeRecords;
+/* D_80146788 */
+extern u32                   g_EmiBank0SequenceBuffer[];
+/* D_8014678C */
+extern s16                   g_EmiBank0VabId;
+/* D_80146790 */
+extern s32                   g_EmiBank1SpuAddress;
+/* D_80146794 */
+extern s32                   g_EmiBank1VabHeader;
+/* D_80146798 */
+extern u8*                   g_EmiBank1SeRecords;
+/* D_8014679C */
+extern s32                   g_EmiBank1SequenceBuffer;
+/* D_801467A0 */
+extern u16                   g_EmiBank1VabId;
+/* D_801467A4 */
+extern s32                   g_EmiBank2SpuAddress;
+/* D_801467A8 */
+extern s32                   g_EmiBank2VabHeader;
+/* D_801467AC */
+extern u8*                   g_EmiBank2SeRecords;
+/* D_801467B0 */
+extern s32                   g_EmiBank2SequenceBuffer;
+/* D_801467B4 */
+extern u16                   g_EmiBank2VabId;
+/* D_801467B8 */
+extern s32                   g_EmiBank3SpuAddress;
+/* D_801467BC */
+extern s32                   g_EmiBank3VabHeader;
+/* D_801467C0 */
+extern u8*                   g_EmiBank3SeRecords;
+/* D_801467C4 */
+extern s32                   g_EmiBank3SequenceBuffer;
+/* D_801467C8 */
+extern u16                   g_EmiBank3VabId;
+/* D_801467CC */
+extern s32                   g_EmiBank4SpuAddress;
+/* D_801467D0 */
+extern s32                   g_EmiBank4VabHeader;
+/* D_801467D4 */
+extern u8*                   g_EmiBank4SeRecords;
+/* D_801467D8 */
+extern s32                   g_EmiBank4SequenceBuffer;
+/* D_801467DC */
+extern u16                   g_EmiBank4VabId;
+/* D_801467E0 */
+extern s32                   g_EmiBank5SpuAddress;
+/* D_801467E4 */
+extern s32                   g_EmiBank5VabHeader;
+/* D_801467E8 */
+extern u8*                   g_EmiBank5SeRecords;
+/* D_801467EC */
+extern s32                   g_EmiBank5SequenceBuffer;
+/* D_801467F0 */
+extern u16                   g_EmiBank5VabId;
+/* D_801467F4 */
+extern s32                   g_EmiBank6SpuAddress;
+/* D_801467F8 */
+extern s32                   g_EmiBank6VabHeader;
+/* D_801467FC */
+extern u8*                   g_EmiBank6SeRecords;
+/* D_80146800 */
+extern s32                   g_EmiBank6SequenceBuffer;
+/* D_80146804 */
+extern u16                   g_EmiBank6VabId;
 extern u8                    D_801486A0[];
 extern u8                    D_8014871C[];
 extern u8                    D_80148798[];
@@ -478,37 +516,63 @@ extern u8                    D_80148814[];
 extern u8                    D_80148890[];
 extern u8                    D_8014890C[];
 extern u8                    D_80148988[];
-extern s32                   D_80148A18;
-extern s32                   D_80148A1C;
-extern s32                   D_80148A20;
-extern s32                   D_80148A24;
-extern s32                   D_80148A28;
-extern s32                   D_80148A2C;
-extern s32                   D_80148A30;
-extern s32                   D_80148A34;
-extern s32                   D_80148A38;
-extern s32                   D_80148A3C;
-extern s32                   D_80148A40;
-extern s32                   D_80148A44;
-extern s32                   D_80148A48;
-extern s32                   D_80148A4C;
+/* D_80148A18 */
+extern s32                   g_SndBank0Header;
+/* D_80148A1C */
+extern s32                   g_SndBank1Header;
+/* D_80148A20 */
+extern s32                   g_SndBank2Header;
+/* D_80148A24 */
+extern s32                   g_SndBank3Header;
+/* D_80148A28 */
+extern s32                   g_SndBank4Header;
+/* D_80148A2C */
+extern s32                   g_SndBank5Header;
+/* D_80148A30 */
+extern s32                   g_SndBank6Header;
+/* D_80148A34 */
+extern s32                   g_SndBank0Sequence;
+/* D_80148A38 */
+extern s32                   g_SndBank1Sequence;
+/* D_80148A3C */
+extern s32                   g_SndBank2Sequence;
+/* D_80148A40 */
+extern s32                   g_SndBank3Sequence;
+/* D_80148A44 */
+extern s32                   g_SndBank4Sequence;
+/* D_80148A48 */
+extern s32                   g_SndBank5Sequence;
+/* D_80148A4C */
+extern s32                   g_SndBank6Sequence;
 extern volatile u32          g_EmiSectorCursor;
-extern s32                   D_8014680C;
-extern s32                   D_80146810;
-extern s32                   D_80146814;
+/* D_8014680C */
+extern s32                   g_SndXAStartSector;
+/* D_80146810 */
+extern s32                   g_SndXAEndSector;
+/* D_80146814 */
+extern s32                   g_SndXACurrentSector;
 extern s16                   D_80146818;
-extern u16                   D_8014681A;
-extern u16                   D_8014681C;
-extern u16                   D_8014681E;
-extern u16                   D_80146820;
-extern u8                    D_80146824[];
-extern s8                    D_8014682C;
-extern s8                    D_8014682E;
+/* D_8014681A */
+extern u16                   g_SndXAStreamId;
+/* D_8014681C */
+extern u16                   g_SndXAWaitFrames;
+/* D_8014681E */
+extern u16                   g_SndXAStateFrame;
+/* D_80146820 */
+extern u16                   g_SndXARetryCount;
+/* D_80146824 */
+extern u8                    g_SndXACdResult[];
+/* D_8014682C */
+extern s8                    g_SndXAStopRequested;
+/* D_8014682E */
+extern s8                    g_SndXASyncResult;
 extern s8                    D_8014682F;
 extern u8                    g_SndCDVolume;
 extern s8                    D_80146832;
-extern u8                    D_80146834;
-extern u8                    D_80146835;
+/* D_80146834 */
+extern u8                    g_SndXAFilterFile;
+/* D_80146835 */
+extern u8                    g_SndXAFilterChannel;
 extern CdlATV                g_SndCDMix;
 extern u8                    g_EmiStreamMode;
 extern OverlaySlotCursor     D_80146844;
@@ -543,9 +607,12 @@ extern u16                   D_80148A0C;
 extern u16                   D_80148A0E;
 extern s32                   g_SndBankHeaders[SND_BANK_COUNT];
 extern s32                   g_SndBankSequences[SND_BANK_COUNT];
-extern u16                   D_80149010[];
-extern u16                   D_80149040[];
-extern u16                   D_80149070[];
+/* D_80149010 */
+extern u16                   g_SndVoicePan[];
+/* D_80149040 */
+extern u16                   g_SndVoiceTargetPan[];
+/* D_80149070 */
+extern u16                   g_SndVoicePanPosition[];
 /* D_801490A3 */
 extern u8                    g_UiMessageChoiceStep;
 /* D_801490AC */
@@ -667,62 +734,95 @@ extern u32                         g_SndBankHeaderSize[SND_LAYOUT_COUNT][SND_BAN
 extern u32                         g_SndBankSequenceSize[SND_LAYOUT_COUNT][SND_BANK_COUNT];
 extern DiscLba                     g_EmiSlotLbas[EMI_SLOT_COUNT + 1];
 /* D_80183230 */
-extern u32                         g_XAStreamSlots[XA_STREAM_COUNT];
+extern u32                         g_SndXAStreamSlots[SND_XA_STREAM_COUNT];
 /* D_8018323C */
-extern u32                         g_XACues[XA_STREAM_COUNT];
+extern u32                         g_SndXACues[SND_XA_STREAM_COUNT];
 extern u32                         g_EmiEntryTypes[11];
-extern void (*g_XAStates[SND_XA_STATE_COUNT])(void);
-extern u16          g_XACueStream2[22];
-extern u16          g_XACueStream1[896];
-extern u16          g_XACueStream0[20];
+extern void (*g_SndXAStates[SND_XA_STATE_COUNT])(void);
+extern u16          g_SndXACueStream2[22];
+extern u16          g_SndXACueStream1[896];
+extern u16          g_SndXACueStream0[20];
 extern u32          D_801839EC[12];
 extern u32          D_80183A1C[17];
 extern u32          D_80183A60[4];
 extern u16          D_80183A70[];
 extern u32          g_SysStartupReturn; /* start of the BSS stup2 clears */
 extern u8           D_8018B2F4;
-extern s16          D_8018B308;
-extern s16          D_8018B30C;
-extern s16          D_8018B310;
-extern s16          D_8018B314;
-extern s16          D_8018B318;
-/* The four front-end selection voice slots sit in one 0x28-byte-strided block
- * (D_8018B308 + 0x28 * k, k = 0-3); +0x14 of a slot holds the voice number its
- * cue keys on, which is what the four symbols below name. The state word
- * func_8015D71C fills packs only that number's low byte, so the packing reads
- * take the halfword's low byte. */
-extern s16          D_8018B31C;
-extern s16          D_8018B320;
-extern s16          D_8018B324;
-extern s16          D_8018B328;
-extern s16          D_8018B32C;
-extern s16          D_8018B330;
-extern s16          D_8018B338;
-extern s16          D_8018B33C;
-extern s16          D_8018B340;
-extern s16          D_8018B344;
-extern s16          D_8018B348;
-extern s16          D_8018B34C;
-extern s16          D_8018B350;
-extern s16          D_8018B354;
-extern s16          D_8018B358;
-extern s16          D_8018B360;
-extern s16          D_8018B364;
-extern s16          D_8018B368;
-extern s16          D_8018B36C;
-extern s16          D_8018B370;
-extern s16          D_8018B374;
-extern s16          D_8018B378;
-extern s16          D_8018B37C;
-extern s16          D_8018B380;
-extern s16          D_8018B388;
-extern s16          D_8018B38C;
-extern s16          D_8018B390;
-extern s16          D_8018B394;
-extern s16          D_8018B398;
-extern s16          D_8018B39C;
-extern s16          D_8018B3A0;
-extern s16          D_8018B3A4;
+/* The four layers of the SE being played, one 0x28-byte block each: the bank readers fill them and SND_SEPlay keys each on with SsUtKeyOnV. The VAB id of every layer is g_SndSeVabId, in block 0. Kept as scalars: an array of records changes SND_SEPlay, SND_SEQueueSelection and SND_SEReadBank0 to 6. */
+/* D_8018B308 */
+extern s16          g_SndSeLayer0Program;
+/* D_8018B30C */
+extern s16          g_SndSeVabId;
+/* D_8018B310 */
+extern s16          g_SndSeLayer0Tone;
+/* D_8018B314 */
+extern s16          g_SndSeLayer0Note;
+/* D_8018B318 */
+extern s16          g_SndSeLayer0SpuVoice;
+/* D_8018B31C */
+extern s16          g_SndSeLayer0KeyedVoice;
+/* D_8018B320 */
+extern s16          g_SndSeLayer0Fine;
+/* D_8018B324 */
+extern s16          g_SndSeLayer0VolumeL;
+/* D_8018B328 */
+extern s16          g_SndSeLayer0VolumeR;
+/* D_8018B32C */
+extern s16          g_SndSeLayer0Pan;
+/* D_8018B330 */
+extern s16          g_SndSeLayer1Program;
+/* D_8018B338 */
+extern s16          g_SndSeLayer1Tone;
+/* D_8018B33C */
+extern s16          g_SndSeLayer1Note;
+/* D_8018B340 */
+extern s16          g_SndSeLayer1SpuVoice;
+/* D_8018B344 */
+extern s16          g_SndSeLayer1KeyedVoice;
+/* D_8018B348 */
+extern s16          g_SndSeLayer1Fine;
+/* D_8018B34C */
+extern s16          g_SndSeLayer1VolumeL;
+/* D_8018B350 */
+extern s16          g_SndSeLayer1VolumeR;
+/* D_8018B354 */
+extern s16          g_SndSeLayer1Pan;
+/* D_8018B358 */
+extern s16          g_SndSeLayer2Program;
+/* D_8018B360 */
+extern s16          g_SndSeLayer2Tone;
+/* D_8018B364 */
+extern s16          g_SndSeLayer2Note;
+/* D_8018B368 */
+extern s16          g_SndSeLayer2SpuVoice;
+/* D_8018B36C */
+extern s16          g_SndSeLayer2KeyedVoice;
+/* D_8018B370 */
+extern s16          g_SndSeLayer2Fine;
+/* D_8018B374 */
+extern s16          g_SndSeLayer2VolumeL;
+/* D_8018B378 */
+extern s16          g_SndSeLayer2VolumeR;
+/* D_8018B37C */
+extern s16          g_SndSeLayer2Pan;
+/* D_8018B380 */
+extern s16          g_SndSeLayer3Program;
+/* D_8018B388 */
+extern s16          g_SndSeLayer3Tone;
+/* D_8018B38C */
+extern s16          g_SndSeLayer3Note;
+/* D_8018B390 */
+extern s16          g_SndSeLayer3SpuVoice;
+/* D_8018B394 */
+extern s16          g_SndSeLayer3KeyedVoice;
+/* D_8018B398 */
+extern s16          g_SndSeLayer3Fine;
+/* D_8018B39C */
+extern s16          g_SndSeLayer3VolumeL;
+/* D_8018B3A0 */
+extern s16          g_SndSeLayer3VolumeR;
+/* D_8018B3A4 */
+extern s16          g_SndSeLayer3Pan;
 /* D_8018B3D8 */
 extern s16          g_SndSeVolumeL;
 /* D_8018B3DC */
@@ -748,11 +848,10 @@ extern s32          D_8018B410;
 extern s32          D_8018B414;
 extern u16          D_8018B418;
 extern u16          D_8018B41A;
-extern SpuVoiceAttr D_8018B450;
-extern s32          D_8018B454;
-extern u16          D_8018B458;
-extern u16          D_8018B45A;
-extern CdlLOC       D_8018B490;
+/* D_8018B450 */
+extern SpuVoiceAttr g_SndReservedVoiceAttr;
+/* D_8018B490 */
+extern CdlLOC       g_EmiSectorPosition;
 /* D_8018B4A0 */
 extern u8           g_EmiVramType;
 /* D_8018B4A4 */

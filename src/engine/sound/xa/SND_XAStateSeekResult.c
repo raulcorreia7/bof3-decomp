@@ -4,14 +4,14 @@
  */
 
 MATCH void SND_XAStateSeekResult(void) {
-    if (D_8014682E < 0) {
+    if (g_SndXASyncResult < 0) {
         g_EmiServiceState = SND_XA_STATE_SEEK;
-        if ((((s16)D_80146820++ < 6) == 0) || (SND_XAHasCDError() != 0)) {
+        if ((((s16)g_SndXARetryCount++ < 6) == 0) || (SND_XAHasCDError() != 0)) {
             g_EmiServiceState = SND_XA_STATE_WAIT_SYNC;
         }
-    } else if (D_8014682E != 0) {
+    } else if (g_SndXASyncResult != 0) {
         g_EmiServiceState = SND_XA_STATE_READ;
         D_80146832        = 1;
-        D_8014681C        = 0;
+        g_SndXAWaitFrames = 0;
     }
 }

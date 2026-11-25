@@ -27,18 +27,18 @@ MATCH void SND_Init(void) {
     g_SelectionEffectVoices[5] = -1;
     g_SelectionEffectVoices[6] = -1;
     SND_SeqInstallFuncs();
-    D_8018B410                           = 0xFFFF;
-    D_8018B414                           = 3;
-    D_80148A04                           = 0x7FF;
-    D_80148A06                           = 0x7FF;
-    D_8018B418                           = 0x7FF;
-    D_8018B41A                           = 0x7FF;
+    D_8018B410                                       = 0xFFFF;
+    D_8018B414                                       = 3;
+    D_80148A04                                       = 0x7FF;
+    D_80148A06                                       = 0x7FF;
+    D_8018B418                                       = 0x7FF;
+    D_8018B41A                                       = 0x7FF;
     /* FAKE: the volatile store keeps D_8018B414 ahead of the voice word. */
-    FAKE_VOLATILE(u32, D_8018B450.voice) = (SPU_16CH | SPU_17CH | SPU_18CH | SPU_19CH | SPU_20CH | SPU_21CH | SPU_22CH | SPU_23CH);
-    D_8018B454                           = SPU_VOICE_VOLL | SPU_VOICE_VOLR;
-    D_80148A0C                           = 0x3FFF;
-    D_80148A0E                           = 0x3FFF;
-    D_8018B458                           = 0x3FFF;
-    D_8018B45A                           = 0x3FFF;
-    SpuSetVoiceAttr(&D_8018B450);
+    FAKE_VOLATILE(u32, g_SndReservedVoiceAttr.voice) = (SPU_16CH | SPU_17CH | SPU_18CH | SPU_19CH | SPU_20CH | SPU_21CH | SPU_22CH | SPU_23CH);
+    g_SndReservedVoiceAttr.mask                      = SPU_VOICE_VOLL | SPU_VOICE_VOLR;
+    D_80148A0C                                       = 0x3FFF;
+    D_80148A0E                                       = 0x3FFF;
+    g_SndReservedVoiceAttr.volume.left               = 0x3FFF;
+    g_SndReservedVoiceAttr.volume.right              = 0x3FFF;
+    SpuSetVoiceAttr(&g_SndReservedVoiceAttr);
 }

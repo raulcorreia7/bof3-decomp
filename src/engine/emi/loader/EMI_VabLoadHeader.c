@@ -17,14 +17,14 @@ MATCH void EMI_VabLoadHeader(void) {
         word       = *table_word;
         D_80146484 = slot;
 
-        word           = D_80146780[word].index;
+        word           = g_EmiBankLinks[word].index;
         index          = word;
         g_EmiEntryBank = index;
         /* FAKE: barrier pins index store before entry lookup. */
         /* FAKE: barrier reproduces store then reload ordering. */
         FAKE_BARRIER();
-        *table_word                 = D_80146780[(u8)index].word;
-        D_80146780[(u8)index].state = 0;
+        *table_word                     = g_EmiBankLinks[(u8)index].word;
+        g_EmiBankLinks[(u8)index].state = 0;
         /* FAKE: keeps the owner-byte reload below both table stores. */
         FAKE_BARRIER();
 

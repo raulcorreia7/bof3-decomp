@@ -7,18 +7,18 @@
 MATCH void SND_XAStartStream(s32 key, s32 unused) {
     s16* req;
 
-    req               = &D_80146818;
-    *req              = 0;
-    g_EmiServiceState = SND_XA_STATE_SEEK;
-    D_8014681A        = key;
-    D_8014682F        = 0;
-    D_8014682C        = 0;
-    D_80146832        = 0;
-    D_80146820        = 0;
-    D_8014681C        = 0;
-    g_EmiStreamMode   = 2;
-    g_EmiStreamState  = 0;
+    req                  = &D_80146818;
+    *req                 = 0;
+    g_EmiServiceState    = SND_XA_STATE_SEEK;
+    g_SndXAStreamId      = key;
+    D_8014682F           = 0;
+    g_SndXAStopRequested = 0;
+    D_80146832           = 0;
+    g_SndXARetryCount    = 0;
+    g_SndXAWaitFrames    = 0;
+    g_EmiStreamMode      = 2;
+    g_EmiStreamState     = 0;
     SND_XAResolveStream(key);
-    CdIntToPos(D_8014680C, (CdlLOC*)((u8*)req + 0x20));
+    CdIntToPos(g_SndXAStartSector, (CdlLOC*)((u8*)req + 0x20));
     CdSyncCallback((CdlCB)SND_XASetSyncResult);
 }
