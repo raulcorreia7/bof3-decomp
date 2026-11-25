@@ -1112,7 +1112,7 @@ MATCH void func_801FA3E4(void) {
                 Scene_SetupParty(2);
                 Area_ScrollAdvance(Area_HeightSample(g_AreaScrollTargetX = TO_COORD_HALF(10), g_AreaScrollTargetY = TO_COORD(20)));
                 Area_InitMapRenderer();
-                /* retail passes the flag array twice */
+                /* retail bug: an extra flags argument shifts 20 out, so flag 20 is never set here */
                 ((void (*)(void*, void*, u8))SYS_SetFlag)(g_SceneFlags, g_SceneFlags, 20);
                 g_ScenarioState.state_04 = 10;
                 g_ScenarioState.step     = 10;
