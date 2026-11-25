@@ -1,8 +1,6 @@
 #include "battle_15.h"
 
 #ifdef NON_MATCHING
-extern u8 func_800AB760(u8 excluded_slot);
-
 /* Commits a party battler's queued command: retargets when the battler cannot act on it, then
  * fills g_Battle.action_type and g_Battle.target_selector for the action handler. */
 NON_MATCHING void func_800AB0B8(s32 battler) {
