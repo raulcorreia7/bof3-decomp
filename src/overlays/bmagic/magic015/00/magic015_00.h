@@ -5,6 +5,15 @@
 
 #include "overlays/bmagic/bmagic.h"
 
+/* The effects Charge starts: header.mode picks the routine g_BMagicEffectModes runs. */
+typedef enum BMagicChargeEffectMode {
+    BMAGIC_CHARGE_EFFECT_LEAD,
+    BMAGIC_CHARGE_EFFECT_TRAIL
+} BMagicChargeEffectMode;
+
+/* The effect Flying Kick starts; modes 1 and 2 belong to the other entries. */
+#define BMAGIC_FLYING_KICK_EFFECT_IMAGE 3
+
 #define MAGIC015_STEP_COUNT 4
 
 typedef struct Magic015Steps {
@@ -23,12 +32,15 @@ typedef struct Magic015SecondSteps {
     Callback steps[MAGIC015_SECOND_STEP_COUNT];
 } Magic015SecondSteps;
 
-extern Magic015Steps D_801EEC04;
-
+/* D_801EEC04 */
+extern Magic015Steps g_BMagicChargeTaskModes;
 extern Magic015Steps       D_801EEC14;
-extern Magic015Steps       D_801EEC24;
-extern Magic015SecondSteps D_801EEC34;
-extern Magic015ThirdSteps  D_801EEC54;
+/* D_801EEC24 */
+extern Magic015Steps       g_BMagicFlyingKickTaskModes;
+/* D_801EEC34 */
+extern Magic015SecondSteps g_BMagicChargeLeadSteps;
+/* D_801EEC54 */
+extern Magic015ThirdSteps  g_BMagicChargeTrailSteps;
 extern Callback            D_801EEC68[];
 /* Per-strength tint steps of the magic015 landing effect: the red step, then the green and blue step. */
 extern u8                  D_801F1640[][2];
@@ -37,12 +49,15 @@ extern u8                  D_801F1640[][2];
 u32                        Battle_CopyCellPalette(PartyMember* record);
 /* func_800AFAB8 */
 void                       Battle_ClearCellPaletteEntry(PartyMember* record);
-/* The seven step handlers of the magic015 landing effect (func_801F0C30). */
-extern Callback            D_801EEC84[];
+/* D_801EEC84 */
+extern Callback            g_BMagicFlyingKickImageSteps[];
 
-void func_801F1250(void);
-void func_801F131C(void);
-void func_801F13D4(void);
+/* func_801F1250 */
+void BMagic_PushGroundMatrix(void);
+/* func_801F131C */
+void BMagic_PushTargetMatrix(void);
+/* func_801F13D4 */
+void BMagic_DrawShadow(void);
 
 /* Fades the tint down to -0x80, then once the effect battler's param is 1 and the fade is done, moves the effect onto that battler and advances. Needs a local `s8 tint`. */
 #define EFFECT_APPEAR_AT_BATTLER()                                                                                                       \
