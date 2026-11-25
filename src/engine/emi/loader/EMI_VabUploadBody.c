@@ -12,7 +12,7 @@ MATCH void EMI_VabUploadBody(void) {
     s8            voice;
     s32           index;
 
-    slot  = &D_80146488;
+    slot  = &g_EmiRingIndex;
     index = *slot;
     slot += 0x30;
     state = (s32*)slot + index;
@@ -20,15 +20,15 @@ MATCH void EMI_VabUploadBody(void) {
         while ((s16)SsVabTransCompleted(SS_IMMEDIATE) == 0) {
         }
     } else {
-        g_EmiUploadBank = g_EmiEntryBank;
-        D_80146474      = D_80146478;
-        *state          = 0;
+        g_EmiUploadBank      = g_EmiEntryBank;
+        g_EmiUploadBytesLeft = D_80146478;
+        *state               = 0;
     }
     ring   = &g_EmiRingBase;
     sizes  = (s32*)&ring[45];
-    result = SsVabTransBodyPartly((u8*)(*ring + (D_80146488 << 11)), sizes[D_80146488], g_EmiBanks[g_EmiUploadBank].vab_id);
-    D_80146474 -= sizes[D_80146488];
-    if ((D_80146474 == 0) && (result == g_EmiBanks[g_EmiUploadBank].vab_id)) {
+    result = SsVabTransBodyPartly((u8*)(*ring + (g_EmiRingIndex << 11)), sizes[g_EmiRingIndex], g_EmiBanks[g_EmiUploadBank].vab_id);
+    g_EmiUploadBytesLeft -= sizes[g_EmiRingIndex];
+    if ((g_EmiUploadBytesLeft == 0) && (result == g_EmiBanks[g_EmiUploadBank].vab_id)) {
         D_80146486 = 0;
         while ((s16)SsVabTransCompleted(SS_IMMEDIATE) == 0) {
         }

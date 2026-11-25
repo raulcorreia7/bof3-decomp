@@ -26,7 +26,7 @@ MATCH void EMI_Init(void) {
     g_EmiStreamMode = 0;
     g_CdState       = CD_STATE_IDLE;
     g_CdSyncStatus  = 0;
-    g_XAStreamKey   = 0xFFFF;
+    g_SndXAStreamId = 0xFFFF;
 
     do {
         *slot_state = empty_state;
