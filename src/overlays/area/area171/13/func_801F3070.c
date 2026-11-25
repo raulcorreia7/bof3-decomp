@@ -11,7 +11,8 @@ NON_MATCHING void func_801F3070(s32 mode) {
     s32       y1;
     s32       tpage;
 
-    g_ScratchPadVectors[0].vx = g_ScratchPadVectors[1].vx = g_ScratchPadVectors[2].vx = g_ScratchPadVectors[3].vx = ((TASK(Actor)->pos.x.part.integer - 0x80) << 7) + 0x40;
+    x                         = ((TASK(Actor)->pos.x.part.integer - 0x80) << 7) + 0x40;
+    g_ScratchPadVectors[0].vx = g_ScratchPadVectors[1].vx = g_ScratchPadVectors[2].vx = g_ScratchPadVectors[3].vx = x;
 
     tpage = getTPage(1, 0, 320, 256);
     GFX_ADD_LAYER_DRAW_MODE(GFX_LAYER_FIELD_SCENE, tpage);
@@ -20,8 +21,10 @@ NON_MATCHING void func_801F3070(s32 mode) {
         prim = (POLY_FT4*)g_GfxPrimCursor;
         SetPolyFT4(prim);
         SetShadeTex(prim, 0);
-        g_ScratchPadVectors[0].vy = g_ScratchPadVectors[2].vy = ((TASK(Actor)->pos.y.part.integer - 0x7F) << 7) + (TASK(Actor)->screen_y * (s8)D_801F3F84[i] + 0x40);
-        g_ScratchPadVectors[1].vy = g_ScratchPadVectors[3].vy = ((TASK(Actor)->pos.y.part.integer - 0x80) << 7) + (TASK(Actor)->screen_y * (s8)D_801F3F84[i] - 0x40);
+        y                         = ((TASK(Actor)->pos.y.part.integer - 0x7F) << 7) + (TASK(Actor)->screen_y * (s8)D_801F3F84[i] + 0x40);
+        g_ScratchPadVectors[0].vy = g_ScratchPadVectors[2].vy = y;
+        y1                        = ((TASK(Actor)->pos.y.part.integer - 0x80) << 7) + (TASK(Actor)->screen_y * (s8)D_801F3F84[i] - 0x40);
+        g_ScratchPadVectors[1].vy = g_ScratchPadVectors[3].vy = y1;
 
         if (mode != 0) {
             x                         = (g_ScratchPadVectors[0].vx + 0x4000) << 9;
