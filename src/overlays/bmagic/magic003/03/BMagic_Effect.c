@@ -35,7 +35,7 @@ MATCH void BMagic_SuperComboInit(void) {
 MATCH void BMagic_SuperComboShowReady(void) {
     u8 timer;
 
-    BMagic_SuperComboDrawLabelBox(1);
+    BMagic_SuperComboDrawBox(1);
     BMagic_SuperComboDrawLabel(1);
     timer                     = TASK(PartyMember)->unk_09 - 1;
     TASK(PartyMember)->unk_09 = timer;
@@ -49,7 +49,7 @@ MATCH void BMagic_SuperComboShowReady(void) {
 MATCH void BMagic_SuperComboShowGo(void) {
     u8 timer;
 
-    BMagic_SuperComboDrawLabelBox(2);
+    BMagic_SuperComboDrawBox(2);
     BMagic_SuperComboDrawLabel(2);
     timer                     = TASK(PartyMember)->unk_09 - 1;
     TASK(PartyMember)->unk_09 = timer;
@@ -68,7 +68,7 @@ MATCH void BMagic_SuperComboPickButton(void) {
     if (delay == 0) {
         TASK(PartyMember)->param.unk_0B = RANDOM_MASK(3);
         if (TASK(PartyMember)->timer < 16) {
-            TASK(PartyMember)->unk_09 = g_BMagicSuperComboPromptDelays[TASK(PartyMember)->timer];
+            TASK(PartyMember)->unk_09 = g_BMagicSuperComboPressTimes[TASK(PartyMember)->timer];
         } else {
             TASK(PartyMember)->unk_09 = 3;
         }
@@ -79,30 +79,30 @@ MATCH void BMagic_SuperComboPickButton(void) {
 /* func_801EEF4C */
 MATCH void BMagic_SuperComboReadButton(void) {
     u8 hits;
-    u8 delay;
+    u8 time_left;
 
-    BMagic_SuperComboDrawLabelBox(4);
+    BMagic_SuperComboDrawBox(4);
     BMagic_SuperComboDrawButton(TASK(PartyMember)->param.unk_0B);
     if (g_PadStates[0].pressed & (PADRup | PADRdown | PADRleft | PADRright)) {
         if (g_PadStates[0].pressed != g_BMagicSuperComboButtonMasks[TASK(PartyMember)->param.unk_0B]) {
             TASK(PartyMember)->unk_09      = 6;
-            TASK(PartyMember)->header.mode = SUPER_COMBO_MODE_WAIT_RESULT;
+            TASK(PartyMember)->header.mode = BMAGIC_SUPER_COMBO_MODE_WAIT_RESULT;
         } else {
             TASK(PartyMember)->unk_09 = 6;
             hits                      = TASK(PartyMember)->timer + 1;
             TASK(PartyMember)->timer  = hits;
-            if (hits < SUPER_COMBO_HIT_MAX) {
-                TASK(PartyMember)->header.mode = SUPER_COMBO_MODE_PICK_BUTTON;
+            if (hits < BMAGIC_SUPER_COMBO_HIT_MAX) {
+                TASK(PartyMember)->header.mode = BMAGIC_SUPER_COMBO_MODE_PICK_BUTTON;
             } else {
-                TASK(PartyMember)->header.mode = SUPER_COMBO_MODE_WAIT_RESULT;
+                TASK(PartyMember)->header.mode = BMAGIC_SUPER_COMBO_MODE_WAIT_RESULT;
             }
         }
     } else {
-        delay                     = TASK(PartyMember)->unk_09 - 1;
-        TASK(PartyMember)->unk_09 = delay;
-        if (delay == 0) {
+        time_left                 = TASK(PartyMember)->unk_09 - 1;
+        TASK(PartyMember)->unk_09 = time_left;
+        if (time_left == 0) {
             TASK(PartyMember)->unk_09      = 6;
-            TASK(PartyMember)->header.mode = SUPER_COMBO_MODE_WAIT_RESULT;
+            TASK(PartyMember)->header.mode = BMAGIC_SUPER_COMBO_MODE_WAIT_RESULT;
         }
     }
 }
@@ -123,7 +123,7 @@ MATCH void BMagic_SuperComboWaitResult(void) {
 MATCH void BMagic_SuperComboShowHitCount(void) {
     u8 timer;
 
-    BMagic_SuperComboDrawLabelBox(0);
+    BMagic_SuperComboDrawBox(0);
     BMagic_SuperComboDrawHitCount(TASK(PartyMember)->timer);
     BMagic_SuperComboDrawLabel(0);
     timer                     = TASK(PartyMember)->unk_09 - 1;
@@ -142,8 +142,8 @@ MATCH void BMagic_SuperComboStartAttack(void) {
     TASK(PartyMember)->param.unk_0B = 0;
     TASK(PartyMember)->header.mode += 1;
     Battle_SelectActiveBattlerScript(0xC, 2);
-    BMagic_SuperComboSpawnStrike();
-    BMagic_SuperComboSpawnImages();
+    BMagic_SuperComboStrikeSpawn();
+    BMagic_SuperComboAfterimageSpawn();
     TASK(PartyMember)->unk_04 = TASK(PartyMember)->param.unk_0B;
     g_BattleEffectBattler->header.flags |= ACTOR_FLAG_HIDDEN;
     SND_SEQueueSelection(0x100);
@@ -169,13 +169,13 @@ MATCH void BMagic_SuperComboEnd(void) {
 
 /* func_801EF2CC */
 MATCH void BMagic_SuperComboRunEffect(void) {
-    Callback handlers[2] = {BMagic_SuperComboRunStrike, BMagic_SuperComboRunImage};
+    Callback handlers[2] = {BMagic_SuperComboStrikeUpdate, BMagic_SuperComboAfterimageUpdate};
 
     SYS_DISPATCH_TASK(handlers, 1, g_Task);
 }
 
 /* func_801EF324 */
-MATCH void BMagic_SuperComboRunStrike(void) {
+MATCH void BMagic_SuperComboStrikeUpdate(void) {
     Magic003Steps handlers;
 
     handlers = D_801EEC04;
@@ -213,19 +213,17 @@ MATCH void BMagic_SuperComboStrikeStart(void) {
 
 /* func_801EF478 */
 MATCH void BMagic_SuperComboStrikeJump(void) {
-    s32 frames_left;
-    u8  delay;
+    u8 timer;
 
-    delay       = TASK(PartyMember)->unk_09;
-    frames_left = delay & BYTE_MASK;
-    if (frames_left != 0) {
-        if (frames_left != 0xFF) {
-            TASK(PartyMember)->unk_09 = delay - 1;
+    timer = TASK(PartyMember)->unk_09;
+    if (timer != 0) {
+        if (timer != 0xFF) {
+            TASK(PartyMember)->unk_09 = timer - 1;
         }
     } else {
         SND_SEQueueSelection(0x101);
         Battle_PlayActiveBattlerSE(2, 0);
-        BMagic_SuperComboSpawnHitImages();
+        BMagic_SuperComboHitImageSpawn();
         Battle_ApplyDamageFlags(g_Battle.target_selector, 0x10U);
         TASK(PartyMember)->unk_09 = 0xFF;
     }
@@ -241,19 +239,17 @@ MATCH void BMagic_SuperComboStrikeJump(void) {
 
 /* func_801EF578 */
 MATCH void BMagic_SuperComboStrikeHit(void) {
-    s32 frames_left;
-    u8  delay;
+    u8 timer;
 
-    delay       = TASK(PartyMember)->unk_09;
-    frames_left = delay & BYTE_MASK;
-    if (frames_left != 0) {
-        if (frames_left != 0xFF) {
-            TASK(PartyMember)->unk_09 = delay - 1;
+    timer = TASK(PartyMember)->unk_09;
+    if (timer != 0) {
+        if (timer != 0xFF) {
+            TASK(PartyMember)->unk_09 = timer - 1;
         }
     } else {
         SND_SEQueueSelection(0x101);
         Battle_PlayActiveBattlerSE(2, 0);
-        BMagic_SuperComboSpawnHitImages();
+        BMagic_SuperComboHitImageSpawn();
         Battle_ApplyDamageFlags(g_Battle.target_selector, 0x10U);
         TASK(PartyMember)->unk_09 = 0xFF;
     }
@@ -290,7 +286,7 @@ MATCH void BMagic_SuperComboStrikeEnd(void) {
 }
 
 /* func_801EF708 */
-MATCH void BMagic_SuperComboRunImage(void) {
+MATCH void BMagic_SuperComboAfterimageUpdate(void) {
     Magic003SecondSteps handlers;
 
     handlers = D_801EEC18;
@@ -301,7 +297,7 @@ MATCH void BMagic_SuperComboRunImage(void) {
 }
 
 /* func_801EF7A8 */
-MATCH void BMagic_SuperComboImageStart(void) {
+MATCH void BMagic_SuperComboAfterimageStart(void) {
     s32 x;
     s32 y;
     u32 z;
@@ -326,14 +322,14 @@ MATCH void BMagic_SuperComboImageStart(void) {
         TASK(PartyMember)->unk_5D = -(TASK(PartyMember)->param.unk_0B << 4);
         TASK(PartyMember)->unk_5F = -(TASK(PartyMember)->param.unk_0B << 4);
         TASK(PartyMember)->unk_5E = -(TASK(PartyMember)->param.unk_0B << 4);
-        GFX_PaletteAllocFade(g_Task, g_BMagicSuperComboImageTints[TASK(PartyMember)->param.unk_0B].r, g_BMagicSuperComboImageTints[TASK(PartyMember)->param.unk_0B].g,
-                             g_BMagicSuperComboImageTints[TASK(PartyMember)->param.unk_0B].b, 1);
+        GFX_PaletteAllocFade(g_Task, g_BMagicSuperComboAfterimageTints[TASK(PartyMember)->param.unk_0B].r, g_BMagicSuperComboAfterimageTints[TASK(PartyMember)->param.unk_0B].g,
+                             g_BMagicSuperComboAfterimageTints[TASK(PartyMember)->param.unk_0B].b, 1);
         TASK(PartyMember)->header.step += 1;
     }
 }
 
 /* func_801EF918 */
-MATCH void BMagic_SuperComboImageJump(void) {
+MATCH void BMagic_SuperComboAfterimageJump(void) {
     TASK(PartyMember)->pos.x.fixed += TASK(PartyMember)->unk_0C;
     TASK(PartyMember)->pos.y.fixed += TASK(PartyMember)->unk_10;
     TASK(PartyMember)->pos.z.fixed += TASK(PartyMember)->unk_14;
@@ -345,7 +341,7 @@ MATCH void BMagic_SuperComboImageJump(void) {
 }
 
 /* func_801EF9AC */
-MATCH void BMagic_SuperComboImageTurn(void) {
+MATCH void BMagic_SuperComboAfterimageTurn(void) {
     TASK(PartyMember)->unk_0C = -0x2000;
     TASK(PartyMember)->unk_10 = 0;
     Effect_RotatePosition(g_Task);
@@ -354,7 +350,7 @@ MATCH void BMagic_SuperComboImageTurn(void) {
 }
 
 /* func_801EF9FC */
-MATCH void BMagic_SuperComboImageEnd(void) {
+MATCH void BMagic_SuperComboAfterimageEnd(void) {
     TASK(PartyMember)->pos.x.fixed += TASK(PartyMember)->unk_0C;
     TASK(PartyMember)->pos.y.fixed += TASK(PartyMember)->unk_10;
     Script_AnimStepOnce();
@@ -371,7 +367,7 @@ MATCH void BMagic_SuperComboImageEnd(void) {
 #include "overlays/bmagic/shared/BMagic_RunEffectStep.h"
 
 /* func_801EFAE0 */
-MATCH void BMagic_SuperComboRunHitImage(void) {
+MATCH void BMagic_SuperComboHitImageUpdate(void) {
     BMAGIC_RUN_EFFECT_STEP(BMagic_SuperComboHitImageStart, BMagic_SuperComboHitImagePlay);
 }
 
@@ -424,24 +420,24 @@ MATCH void BMagic_SuperComboHitImagePlay(void) {
 #include "overlays/bmagic/shared/Effect_CopyActiveBattlerToSlot.h"
 
 /* func_801EFD4C */
-MATCH void BMagic_SuperComboSpawnStrike(void) {
-    BattleEffect* image;
+MATCH void BMagic_SuperComboStrikeSpawn(void) {
+    BattleEffect* strike;
     u32           slot;
 
     slot = Battle_AllocEffect(1, 1);
     Effect_CopyActiveBattlerToSlot(slot);
     D_801EC3A4[slot & BYTE_MASK].target.party = TASK(PartyMember);
-    image                                     = &g_BattleEffects[slot & BYTE_MASK];
-    image->unk_06                             = 1;
-    image->step_index                         = 1;
-    image->header.mode                        = 0;
-    image->header.step                        = 0;
-    image->arg.unk_09                         = 1;
+    strike                                    = &g_BattleEffects[slot & BYTE_MASK];
+    strike->unk_06                            = 1;
+    strike->step_index                        = 1;
+    strike->header.mode                       = 0;
+    strike->header.step                       = 0;
+    strike->arg.unk_09                        = 1;
     TASK(PartyMember)->param.unk_0B += 1;
 }
 
 /* func_801EFEC8 */
-MATCH void BMagic_SuperComboSpawnImages(void) {
+MATCH void BMagic_SuperComboAfterimageSpawn(void) {
     BattleEffect* image;
     u32           slot;
     u8            i;
@@ -462,7 +458,7 @@ MATCH void BMagic_SuperComboSpawnImages(void) {
 }
 
 /* func_801F0078 */
-MATCH void BMagic_SuperComboSpawnHitImages(void) {
+MATCH void BMagic_SuperComboHitImageSpawn(void) {
     PartyMember* battler;
     u8           i;
     u8           slot;
@@ -582,7 +578,7 @@ MATCH void BMagic_SuperComboDrawHitCount(s32 hits) {
 }
 
 /* func_801F07B0 */
-MATCH void BMagic_SuperComboDrawLabelBox(s32 label_index) {
+MATCH void BMagic_SuperComboDrawBox(s32 box_index) {
     TILE* tile;
     s32   tpage;
 
@@ -591,17 +587,15 @@ MATCH void BMagic_SuperComboDrawLabelBox(s32 label_index) {
     tile = (TILE*)g_GfxPrimCursor;
     SetTile(tile);
     SetSemiTrans(tile, 1);
-    setXY0(tile, TASK(PartyMember)->screen_x.value - (g_BMagicSuperComboLabelBoxes[(u8)label_index].box.x + 4),
-           TASK(PartyMember)->screen_y.value - (g_BMagicSuperComboLabelBoxes[(u8)label_index].box.y + 4));
-    setWH(tile, g_BMagicSuperComboLabelBoxes[(u8)label_index].box.w + 8, g_BMagicSuperComboLabelBoxes[(u8)label_index].box.h + 8);
+    setXY0(tile, TASK(PartyMember)->screen_x.value - (g_BMagicSuperComboBoxes[(u8)box_index].box.x + 4), TASK(PartyMember)->screen_y.value - (g_BMagicSuperComboBoxes[(u8)box_index].box.y + 4));
+    setWH(tile, g_BMagicSuperComboBoxes[(u8)box_index].box.w + 8, g_BMagicSuperComboBoxes[(u8)box_index].box.h + 8);
     setRGB0(tile, 0x20, 0x20, 0x20);
     GFX_AddPrim(BMAGIC_LAYER_FOREGROUND, sizeof(TILE));
     tile = (TILE*)g_GfxPrimCursor;
     SetTile(tile);
     SetSemiTrans(tile, 1);
-    setXY0(tile, TASK(PartyMember)->screen_x.value - (g_BMagicSuperComboLabelBoxes[(u8)label_index].box.x + 6),
-           TASK(PartyMember)->screen_y.value - (g_BMagicSuperComboLabelBoxes[(u8)label_index].box.y + 6));
-    setWH(tile, g_BMagicSuperComboLabelBoxes[(u8)label_index].box.w + 12, g_BMagicSuperComboLabelBoxes[(u8)label_index].box.h + 12);
+    setXY0(tile, TASK(PartyMember)->screen_x.value - (g_BMagicSuperComboBoxes[(u8)box_index].box.x + 6), TASK(PartyMember)->screen_y.value - (g_BMagicSuperComboBoxes[(u8)box_index].box.y + 6));
+    setWH(tile, g_BMagicSuperComboBoxes[(u8)box_index].box.w + 12, g_BMagicSuperComboBoxes[(u8)box_index].box.h + 12);
     setRGB0(tile, 0x20, 0x20, 0x20);
     GFX_AddPrim(BMAGIC_LAYER_FOREGROUND, sizeof(TILE));
     tpage = getTPage(TPAGE_DEPTH_4BIT, TPAGE_ABR_HALF, 320, 256);
