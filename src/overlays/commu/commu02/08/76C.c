@@ -12,7 +12,7 @@ void func_801D2908(s16 x, s16 y, u8 mode);
 void Menu_DrawPanelIcon(u16 x, u16 y, s32 u, s32 v, u16 clut, u8 color);
 
 #ifdef NON_MATCHING
-NON_MATCHING void func_801D1394(void) {
+NON_MATCHING void func_801D136C(void) {
     s8 value;
 
     value      = D_801DB0C4 - 1;
@@ -25,7 +25,7 @@ NON_MATCHING void func_801D1394(void) {
     }
 }
 #else
-INCLUDE_ASM(func_801D1394);
+INCLUDE_ASM(func_801D136C);
 #endif
 
 MATCH void func_801D143C(void) {
