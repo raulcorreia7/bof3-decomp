@@ -13,10 +13,10 @@ NON_MATCHING void func_801D0F88(void) {
     u16 input;
     s32 price;
     s32 clamped;
-    s8 rest;
+    s8  rest;
 
     g_ScratchPad.cells.bytes[2] = (s8)D_801DB07C / 100;
-    rest            = (s8)D_801DB07C % 100;
+    rest                        = (s8)D_801DB07C % 100;
     g_ScratchPad.cells.bytes[1] = rest / 10;
     g_ScratchPad.cells.bytes[0] = rest % 10;
 

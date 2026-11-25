@@ -22,7 +22,7 @@ MATCH void CD_OnReady(u8 status, u8* result) {
     }
 
     if (CdReady(1, NULL) == callback_ready) {
-        current_pos = &D_8018B490;
+        current_pos = &g_EmiSectorPosition;
         CdGetSector(current_pos, 3);
         if (g_EmiSectorCursor != CdPosToInt(current_pos)) {
             goto fail; /* sector position mismatch */

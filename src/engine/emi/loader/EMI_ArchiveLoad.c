@@ -18,7 +18,7 @@ MATCH void EMI_ArchiveLoad(u32 emi_id) {
     g_EmiNextSlot        = 0;
     g_EmiUploadBank      = 0;
     D_80146486           = 0;
-    D_80146488           = 1;
+    g_EmiRingIndex       = 1;
     g_EmiRingSlot        = 0;
     g_EmiRingBase        = cd_base;
 
@@ -28,8 +28,8 @@ MATCH void EMI_ArchiveLoad(u32 emi_id) {
     } while (ring_index < EMI_CALLBACK_SLOT_COUNT);
 
     if (g_EmiStreamMode == 2) {
-        if (CdSync(1, D_80146498) != CdlNoIntr) {
-            if ((D_80146498[0] & (CdlStatPlay | CdlStatSeek | CdlStatRead)) != 0) {
+        if (CdSync(1, g_EmiSyncResult) != CdlNoIntr) {
+            if ((g_EmiSyncResult[0] & (CdlStatPlay | CdlStatSeek | CdlStatRead)) != 0) {
                 D_8014648B = 1;
             }
         }
