@@ -804,7 +804,7 @@ extern SpuVoiceAttr D_8018B450;
 extern s32          D_8018B454;
 extern u16          D_8018B458;
 extern u16          D_8018B45A;
-extern CdlLOC       D_8018B490;
+extern CdlLOC       g_EmiSectorPosition;
 /* D_8018B4A0 */
 extern u8           g_EmiVramType;
 /* D_8018B4A4 */
