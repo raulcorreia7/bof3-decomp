@@ -23,10 +23,10 @@ NON_MATCHING void func_8019B704(void) {
         TASK(Actor)->pos.x.fixed += TASK(Actor)->vx;
         delta = TASK(Actor)->pos.x.fixed - g_Game.members[0].pos.x.fixed;
     } else {
-        saved               = TASK(Actor)->vy;
-        acc                 = saved + TASK(Actor)->unk_1C;
-        TASK(Actor)->vy     = acc;
-        acc                 = ABS(acc);
+        saved           = TASK(Actor)->vy;
+        acc             = saved + TASK(Actor)->unk_1C;
+        TASK(Actor)->vy = acc;
+        acc             = ABS(acc);
         if (acc < ONE) {
             TASK(Actor)->vy     = saved;
             TASK(Actor)->unk_1C = 0;

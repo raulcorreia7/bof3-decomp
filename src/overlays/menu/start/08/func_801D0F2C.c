@@ -3,26 +3,26 @@
 /* Seeds the save image from one starting point of the D_801EBA44 table. */
 #ifdef NON_MATCHING
 NON_MATCHING void func_801D0F2C(u8 start) {
-    u8* stage;
-    u8* cell;
-    u8* src;
-    u8  member;
-    u16 item;
-    u8  kind;
-    u8  id;
-    u8  vital;
-    s32 i;
-    s32 j;
-    s32 idx;
+    u8*       stage;
+    u8*       cell;
+    u8*       src;
+    u8        member;
+    u16       item;
+    u8        kind;
+    u8        id;
+    u8        vital;
+    s32       i;
+    s32       j;
+    s32       idx;
     SaveData* save;
-    u8* row;
+    u8*       row;
 
-    g_SaveData.area_id    = D_801EBA44[start].area;
-    g_SaveData.entry_x    = D_801EBA44[start].entry_x;
-    stage             = g_PartyStage;
-    g_SaveData.entry_y    = D_801EBA44[start].entry_y;
+    g_SaveData.area_id      = D_801EBA44[start].area;
+    g_SaveData.entry_x      = D_801EBA44[start].entry_x;
+    stage                   = g_PartyStage;
+    g_SaveData.entry_y      = D_801EBA44[start].entry_y;
     g_SaveData.entry_facing = D_801EBA44[start].facing;
-    src               = D_801EBA44[start].party;
+    src                     = D_801EBA44[start].party;
     for (i = 0; i < 3; i++) {
         member = src[i];
         if (member != 0xFF) {
@@ -36,8 +36,8 @@ NON_MATCHING void func_801D0F2C(u8 start) {
         g_Characters[g_CharSlotView[7]].base.surprise_chance = 0x37;
         g_Characters[g_CharSlotView[7]].base.evasion         = 8;
         g_Characters[g_CharSlotView[7]].base.accuracy        = 0x64;
-        g_Characters[D_80181B18].character_id         = 8;
-        g_Characters[D_80181B18].base.evasion         = 0xC;
+        g_Characters[D_80181B18].character_id                = 8;
+        g_Characters[D_80181B18].base.evasion                = 0xC;
     }
     EMI_PartyLoadArchives(SP_REF(u8, 0), SP_REF(u8, 1), SP_REF(u8, 2), 0);
     g_PartySize = 0;
@@ -83,7 +83,7 @@ NON_MATCHING void func_801D0F2C(u8 start) {
         idx = i * 8;
         row = g_SaveData.scene_flag_words + idx;
         if (i < start) {
-            row[0] = D_801EC174[idx + 0];
+            row[0]                               = D_801EC174[idx + 0];
             g_SaveData.scene_flag_words[idx + 1] = D_801EC174[idx + 1];
             g_SaveData.scene_flag_words[idx + 2] = D_801EC174[idx + 2];
             g_SaveData.scene_flag_words[idx + 3] = D_801EC174[idx + 3];
@@ -99,7 +99,7 @@ NON_MATCHING void func_801D0F2C(u8 start) {
             save->scene_flag_words[idx + 3] = 0;
             save->scene_flag_words[idx + 2] = 0;
             save->scene_flag_words[idx + 1] = 0;
-            row[0] = 0;
+            row[0]                          = 0;
         }
     }
     for (i = 0; i < 6; i++) {
