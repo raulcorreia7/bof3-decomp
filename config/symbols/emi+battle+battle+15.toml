@@ -201,6 +201,7 @@ Menu_DrawEquipChoiceWindow = { addr = 0x800B3AE8, type = "func", source = "Draws
 g_BattleExamineSteps = { addr = 0x800B4418, source = "The Examine command's four step routines (start, pick enemy, confirm, cancel); Battle_RunExamineCommand and func_80097D1C index it." }
 g_BattleScrollDeltas = { addr = 0x800B44C0, source = "The camera scroll step of each scroll direction; the battle scroll routines add one entry indexed by g_Battle.scroll_dir." }
 g_BattleEscapeThresholds = { addr = 0x800B44F0, source = "Escape chances by party and enemy agility difference." }
+g_BattleAbilityEffectIds = { addr = 0x800B44F8, source = "The battle effect id of each ability: func_8009D198 reads the row the ability id selects and runs the handler of g_BattleItemEffects the id names." }
 g_BattleItemEffectIds = { addr = 0x800B45E0, source = "The battle effect id of each ITEM-category item: D_800B470C[0] reads the row the item id selects and D_800B471C runs the handler the id names. The Antidote row holds the cure-poison id, the Firecracker row the Inferno id." }
 g_BattleWeaponEffectIds = { addr = 0x800B4640, source = "The battle effect id of each weapon: D_800B470C[1] reads the row the weapon id selects. The Dragon Blade row holds the Fireblast id, the BlessedStaff row the Heal id." }
 g_BattleArmorEffectIds = { addr = 0x800B469C, source = "The battle effect id of each armor: D_800B470C[2] reads the row the armor id selects. The Force row holds the Barrier id, the Mind row the Drain AP id." }

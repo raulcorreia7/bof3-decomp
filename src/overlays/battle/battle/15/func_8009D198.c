@@ -34,7 +34,7 @@ NON_MATCHING void func_8009D198(void) {
     }
 
     if (g_Battle.action_type == BATTLE_ACTION_ABILITY) {
-        effect = ((u8*)BATTLE_ABILITY_CALL_TABLE)[(u16)g_Battle.action_id];
+        effect = g_BattleAbilityEffectIds[(u16)g_Battle.action_id];
     } else {
         action_word = g_Battle.action->unk_02;
         effect      = D_800B470C[action_word >> 8][(u8)action_word];

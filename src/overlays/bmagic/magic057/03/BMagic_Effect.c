@@ -111,24 +111,28 @@ MATCH void func_801EF08C(void) {
     g_Scripts = AREA_SCRIPT_TABLE;
 }
 
-#ifdef NON_MATCHING
-NON_MATCHING void func_801EF134(void) {
+/* Places the effect at a random offset on the battler's facing side, lifts it by 0x600 and starts its arc. */
+MATCH void func_801EF134(void) {
     PartyMember* work;
-    s32          dx;
-    s32          dy;
 
     if (TASK(PartyMember)->facing & 1) {
-        dx = (RANDOM_MOD(6) << 16) + 0x20000;
+        s32 offset = (RANDOM_MOD(6) << 16) + 0x20000;
+
+        TASK(PartyMember)->pos.x.fixed = g_BattleEffectBattler->pos.x.fixed + offset;
     } else {
-        dx = (RANDOM_MOD(6) << 16) - 0x30000;
+        s32 offset = (RANDOM_MOD(6) << 16) - 0x30000;
+
+        TASK(PartyMember)->pos.x.fixed = g_BattleEffectBattler->pos.x.fixed + offset;
     }
-    TASK(PartyMember)->pos.x.fixed = g_BattleEffectBattler->pos.x.fixed + dx;
     if (TASK(PartyMember)->facing & 1) {
-        dy = (RANDOM_MOD(6) << 16) + 0x30000;
+        s32 offset = (RANDOM_MOD(6) << 16) + 0x30000;
+
+        TASK(PartyMember)->pos.y.fixed = g_BattleEffectBattler->pos.y.fixed + offset;
     } else {
-        dy = (RANDOM_MOD(6) << 16) + 0x20000;
+        s32 offset = (RANDOM_MOD(6) << 16) + 0x20000;
+
+        TASK(PartyMember)->pos.y.fixed = g_BattleEffectBattler->pos.y.fixed + offset;
     }
-    TASK(PartyMember)->pos.y.fixed  = g_BattleEffectBattler->pos.y.fixed + dy;
     work                            = TASK(PartyMember);
     work->unk_14                    = -0x20;
     work->unk_20                    = -1;
@@ -150,9 +154,6 @@ NON_MATCHING void func_801EF134(void) {
     TASK(PartyMember)->unk_09 = 3;
     TASK(PartyMember)->header.step += 1;
 }
-#else
-INCLUDE_ASM(func_801EF134);
-#endif
 
 MATCH void func_801EF3C4(void) {
     s32 offset_x;
