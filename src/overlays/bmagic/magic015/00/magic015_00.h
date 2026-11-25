@@ -14,7 +14,7 @@ typedef enum BMagicChargeEffectMode {
 /* The effect Flying Kick starts; modes 1 and 2 belong to the other entries. */
 #define BMAGIC_FLYING_KICK_EFFECT_IMAGE 3
 
-#define MAGIC015_STEP_COUNT 4
+#define MAGIC015_STEP_COUNT             4
 
 typedef struct Magic015Steps {
     Callback steps[MAGIC015_STEP_COUNT];
@@ -33,7 +33,7 @@ typedef struct Magic015SecondSteps {
 } Magic015SecondSteps;
 
 /* D_801EEC04 */
-extern Magic015Steps g_BMagicChargeTaskModes;
+extern Magic015Steps       g_BMagicChargeTaskModes;
 extern Magic015Steps       D_801EEC14;
 /* D_801EEC24 */
 extern Magic015Steps       g_BMagicFlyingKickTaskModes;
