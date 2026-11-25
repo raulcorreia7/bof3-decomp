@@ -26,6 +26,7 @@ import struct
 import subprocess
 import sys
 from collections import Counter
+from collections.abc import Iterator
 from dataclasses import dataclass
 from datetime import UTC, datetime
 from pathlib import Path
@@ -81,6 +82,30 @@ ELF_SECTION = struct.Struct("<10I")
 ELF_SYMBOL = struct.Struct("<IIIBBH")
 SHT_SYMTAB = 2
 
+#: Retail name, linked name, address and size, scoped to the owning image and unit.
+REPORT_ALIASES = {
+    ("emi/bmagic/magic078/03", "overlays/bmagic/magic078/03/BMagic_Effect.c"): (
+        ("func_801F00EC", "Effect_PlayCueAtTick", 0x801F00EC, 0x60),
+        ("Effect_ApproachTarget", "func_801F014C", 0x801F014C, 0x84),
+        ("func_801F01D0", "Effect_PlayCueOnTimeout", 0x801F01D0, 0x60),
+    ),
+    ("emi/etc/commu02/08", "overlays/commu/commu02/08/794.c"): (
+        ("func_801D92F4", "Party_GetJoinedCharacter", 0x801D92F4, 0x54),
+    ),
+}
+ICON_HAND_UNIT = ("exe/slus_004_22", "engine/ui/text/UI_IconDrawCell.c")
+ICON_HAND_SOURCE = Path(ASM) / ICON_HAND_UNIT[0] / HAND_DIR / "func_801644D8.s"
+ICON_ADDRESS = 0x801644D8
+ICON_SIZE = 0x2EC
+SDK_TAIL_IMAGE = "exe/slus_004_22"
+SDK_TAIL_NAME = "func_801787FC"
+
+MAP_TEXT = re.compile(
+    r"^ \.text[ \t]+(0x[0-9a-f]+)[ \t]+(0x[0-9a-f]+)[ \t]+(\S+)[ \t]*\n"
+    r"((?:[ \t]+0x[0-9a-f]+[ \t]+\S+[ \t]*\n)*)",
+    re.MULTILINE,
+)
+
 
 @dataclass(frozen=True)
 class Project:
@@ -108,17 +133,25 @@ class Project:
         readable: dict[str, int] | None = None,
     ) -> Path:
         """Assemble one unit's split asm, reusing an object that is already current."""
+        icon_hand = sources == [self.root / ICON_HAND_SOURCE]
+        if icon_hand:
+            output = output.with_suffix(".hand.o")
         output.parent.mkdir(parents=True, exist_ok=True)
         inputs = [*sources, *symbol_files(self.root)]
-        if output.is_file() and all(
-            source.stat().st_mtime <= output.stat().st_mtime for source in inputs
+        if not output.is_file() or any(
+            source.stat().st_mtime > output.stat().st_mtime for source in inputs
         ):
-            return output
-        source = self._combine(sources, output)
-        self._assemble(source, output)
-        self._resolve_data(source, output, readable or {})
-        self._strip(source, output)
-        output.touch()
+            source = self._combine(sources, output, icon_hand=icon_hand)
+            self._assemble(source, output)
+            self._resolve_data(source, output, readable or {})
+            self._strip(source, output)
+            output.touch()
+        if icon_hand and (
+            _unique_function(_function_spans(output), "UI_IconDrawCell", ICON_SIZE) != 0
+        ):
+            raise SystemExit(
+                f"{sources[0]}: expected UI_IconDrawCell to span {ICON_SIZE:#x} bytes"
+            )
         return output
 
     def _assemble(
@@ -165,7 +198,7 @@ class Project:
             ]
             self.command(argv)
 
-    def _combine(self, sources: list[Path], output: Path) -> Path:
+    def _combine(self, sources: list[Path], output: Path, *, icon_hand: bool) -> Path:
         """Return one assembler input, hiding data labels that are not functions."""
         pieces = [
             source.read_text(encoding="utf-8", errors="replace") for source in sources
@@ -176,6 +209,10 @@ class Project:
         )
         if prelude:
             pieces.insert(0, '.include "macro.inc"\n')
+        if icon_hand:
+            # The link wrapper supplies these modes for the handwritten body.
+            pieces.insert(0, ".set noat\n.set noreorder\n")
+            prelude = True
         label = re.compile(rf"^\s*{re.escape(DATA_LABEL)}\s+(\S+)", re.M)
         hidden = sorted(
             {match.group(1) for piece in pieces for match in label.finditer(piece)}
@@ -195,6 +232,22 @@ class Project:
         hand = self.root / ASM / target / HAND_DIR / f"{stem}.s"
         if hand.is_file():
             return [hand], HAND_CATEGORY
+        relative = source.relative_to(self.root / SRC)
+        if (target, relative.as_posix()) == ICON_HAND_UNIT:
+            hand = self.root / ICON_HAND_SOURCE
+            linked_name = source_object(relative)
+            linked = self.build_dir / linked_name
+            if (
+                hand.is_file()
+                and self.hand_complete(source)
+                and linked.is_file()
+                and _linked_offset(
+                    self, target, linked_name, stem, ICON_ADDRESS, ICON_SIZE
+                )
+                == 0
+                and _unique_function(_function_spans(linked), stem, ICON_SIZE) == 0
+            ):
+                return [hand], HAND_CATEGORY
         directory = self.root / SPLIT / target
         found = [directory / f"{stem}.s"] if (directory / f"{stem}.s").is_file() else []
         data = directory / DATA_DIR
@@ -243,27 +296,134 @@ def _elf_sections(data: bytes, path: Path) -> list[tuple]:
     ]
 
 
-def _unlifted_ranges(data: bytes, suffix: str, path: Path) -> list[tuple[int, int]]:
-    """Return the file offset and size of every body the object marks with ``suffix``."""
+def _elf_symbols(
+    data: bytes, path: Path
+) -> Iterator[tuple[bytes, int, int, int, int, tuple]]:
+    """Yield defined symbols with their section indexes and section headers."""
     sections = _elf_sections(data, path)
-    tag = suffix.encode("ascii")
-    ranges: list[tuple[int, int]] = []
     for _, kind, _, _, offset, size, link, *_ in sections:
         strings = sections[link][4]
         for position in (
             range(offset, offset + size, ELF_SYMBOL.size) if kind == SHT_SYMTAB else ()
         ):
-            name, value, length, _, _, index = ELF_SYMBOL.unpack_from(data, position)
-            if not 0 < index < len(sections):
-                continue
-            if not data[strings + name : data.index(b"\0", strings + name)].endswith(
-                tag
-            ):
-                continue
+            name, value, length, info, _, index = ELF_SYMBOL.unpack_from(data, position)
+            if 0 < index < len(sections):
+                label = data[strings + name : data.index(b"\0", strings + name)]
+                yield label, value, length, info, index, sections[index]
+
+
+def _unlifted_ranges(data: bytes, suffix: str, path: Path) -> list[tuple[int, int]]:
+    """Return the file offset and size of every body the object marks with ``suffix``."""
+    tag = suffix.encode("ascii")
+    ranges = []
+    for label, value, length, _, _, section in _elf_symbols(data, path):
+        if label.endswith(tag):
             if not length:
                 raise SystemExit(f"{path}: a {suffix} marker has no size")
-            ranges.append((sections[index][4] + value, length))
+            ranges.append((section[4] + value, length))
     return ranges
+
+
+def _function_spans(path: Path) -> list[tuple[bytes, int, int, int]]:
+    return [
+        (name, offset, size, section)
+        for name, offset, size, info, section, header in _elf_symbols(
+            path.read_bytes(), path
+        )
+        if info & 0xF == 2 and header[2] & 4
+    ]
+
+
+def _unique_function(
+    spans: list[tuple[bytes, int, int, int]], name: str, size: int
+) -> int | None:
+    found = [span for span in spans if span[0] == name.encode()]
+    if len(found) != 1 or found[0][2] != size or not size:
+        return None
+    _, start, _, section = found[0]
+    for other in spans:
+        _, offset, length, index = other
+        if (
+            other != found[0]
+            and index == section
+            and (
+                offset == start
+                or (length and offset < start + size and start < offset + length)
+            )
+        ):
+            return None
+    return start
+
+
+def _linked_offset(
+    project: Project,
+    image: str,
+    object_name: str,
+    name: str,
+    address: int,
+    size: int,
+    *,
+    compiled: bool = False,
+) -> int | None:
+    path = project.build_dir / f"{image.replace('/', '+')}.map"
+    if not path.is_file():
+        return None
+    found = []
+    for match in MAP_TEXT.finditer(path.read_text(encoding="utf-8", errors="replace")):
+        start, length, obj, labels = match.groups()
+        if obj != object_name:
+            continue
+        offset = address - int(start, 16)
+        symbols = [
+            (int(value, 16), label)
+            for value, label in (line.split() for line in labels.splitlines())
+        ]
+        addresses = [value for value, label in symbols if label == name]
+        if compiled and (address, name + NONMATCHING_SUFFIX) in symbols:
+            continue
+        if addresses == [address] and 0 <= offset <= int(length, 16) - size:
+            found.append(offset)
+    return found[0] if len(found) == 1 else None
+
+
+def _report_aliases(
+    project: Project,
+    image: str,
+    source: Path,
+    relative: Path,
+    base: Path | None,
+    target: Path,
+) -> dict[str, str]:
+    rows = REPORT_ALIASES.get((image, relative.as_posix()))
+    if not rows or base is None:
+        return {}
+    linked_name = source_object(relative)
+    linked = _function_spans(project.build_dir / linked_name)
+    retail = _function_spans(target)
+    candidate = _function_spans(base)
+    text = source_text(source)
+    aliases = {}
+    for old, canonical, address, size in rows:
+        marker = rf"^[ \t]*MATCH\b[^\n]*\b{re.escape(canonical)}\s*\("
+        if not re.search(marker, text, re.M):
+            continue
+        offset = _linked_offset(
+            project, image, linked_name, canonical, address, size, compiled=True
+        )
+        if (
+            offset is not None
+            and _unique_function(linked, canonical, size) == offset
+            and _unique_function(retail, old, size) == offset
+            and _unique_function(candidate, canonical, size) is not None
+            and all(symbol[0] != canonical.encode() for symbol in retail)
+            and all(symbol[0] != old.encode() for symbol in candidate)
+        ):
+            aliases[old] = canonical
+    return aliases
+
+
+def _symbol_mapping_fields(aliases: dict[str, str]) -> dict[str, dict[str, str]]:
+    return {"symbol_mappings": aliases} if aliases else {}
 
 
 def _unique(paths: list[Path]) -> list[Path]:
@@ -344,7 +504,7 @@ def _game_unit(
     project: Project,
     target_id: str,
     source: Path,
-    asm: Path,
+    asm: list[Path],
     category: str,
     readable: dict[str, int],
 ) -> dict[str, Any]:
@@ -358,14 +518,17 @@ def _game_unit(
             "--reconfigure` so Meson builds its draft object"
         )
     broken = base.stat().st_size == 0
+    hand = category == HAND_CATEGORY
+    comparison = None
     unlifted = False
-    if not broken and category != HAND_CATEGORY:
-        base, unlifted = project.report_base(base)
-    target_object = project.build_dir / "objdiff/target" / relative.with_suffix(".o")
-    project.assemble(asm, target_object, readable)
+    if not (broken or hand):
+        comparison, unlifted = project.report_base(base)
+    target_object = project.assemble(
+        asm, project.build_dir / "objdiff/target" / relative.with_suffix(".o"), readable
+    )
     complete = (
         project.hand_complete(source)
-        if category == HAND_CATEGORY
+        if hand
         else project.marked(source) and not project.drafted(source)
     )
     metadata = {
@@ -377,8 +540,10 @@ def _game_unit(
         project,
         f"{target_id}/{source.stem}",
         target_object,
-        None if broken or category == HAND_CATEGORY else base,
+        comparison,
         metadata,
+    ) | _symbol_mapping_fields(
+        _report_aliases(project, target_id, source, relative, comparison, target_object)
     )
 
 
@@ -410,6 +575,7 @@ def _game_units(
     target: dict[str, Any],
     library_ids: set[str],
     library_symbols: set[tuple[str, str]],
+    library: list[dict[str, Any]],
 ) -> tuple[list[dict[str, Any]], int]:
     """Return one target's game units and its C sources with no split asm target."""
     target_id = str(target["id"])
@@ -448,6 +614,7 @@ def _game_units(
             target,
             {source.stem for source in sources} | _claimed_functions(sources),
             library_ids,
+            library,
         )
     )
     return units, skipped
@@ -461,11 +628,60 @@ def _linked_objects(project: Project, target_id: str) -> set[str] | None:
     return set(path.read_text(encoding="utf-8", errors="replace").split())
 
 
+def _entry_bytes(path: Path, name: str, offset: int, size: int) -> bytes | None:
+    data = path.read_bytes()
+    positions = [
+        section[4] + value + offset
+        for label, value, _, info, _, section in _elf_symbols(data, path)
+        if label == name.encode()
+        and info & 0xF == 2
+        and section[2] & 4
+        and value + offset + size <= section[5]
+    ]
+    if len(positions) != 1:
+        return None
+    start = positions[0]
+    return data[start : start + size]
+
+
+def _sdk_interior_alias(
+    project: Project, image: str, name: str, binary: Path, library: list[dict[str, Any]]
+) -> bool:
+    """Check the known split return label without adding a second SDK function."""
+    if (image, name) != (SDK_TAIL_IMAGE, SDK_TAIL_NAME):
+        return False
+    start, address, size = 0x80178778, 0x801787FC, 8
+    offset = address - start
+    sdk_path = "toolchains/psyq/3.7/libgte/msc02.o"
+    rows = [row for row in library if row["id"] == f"{image}@0x{start:08X}"]
+    if len(rows) != 1:
+        return False
+    row = rows[0]
+    member = project.root / sdk_path
+    if (
+        row.get("symbol") != "InvSquareRoot"
+        or row.get("object") != sdk_path
+        or int(str(row["size"]), 0) != offset + size
+        or not member.is_file()
+    ):
+        return False
+    owner = "src+engine+slus+func_80178764.c.o"
+    split = f"asm+{image.replace('/', '+')}+{name}.s.o"
+    return (
+        _linked_offset(project, image, owner, "InvSquareRoot", start, offset) == 0x14
+        and _linked_offset(project, image, split, name, address, size) == 0
+        and _unique_function(_function_spans(binary), name, size) == 0
+        and (tail := _entry_bytes(member, "InvSquareRoot", offset, size)) is not None
+        and tail == _entry_bytes(binary, name, 0, size)
+    )
+
+
 def _unlifted_units(
     project: Project,
     target: dict[str, Any],
     c_stems: set[str],
     library_ids: set[str],
+    library: list[dict[str, Any]] | None = None,
 ) -> list[dict[str, Any]]:
     """Return reviewed code with no C source: target-only and never complete."""
     target_id = str(target["id"])
@@ -485,6 +701,10 @@ def _unlifted_units(
             continue
         output = project.build_dir / "objdiff/target" / target_id / f"{source.stem}.o"
         project.assemble([source], output)
+        if library and _sdk_interior_alias(
+            project, target_id, source.stem, output, library
+        ):
+            continue
         units.append(
             _unit(
                 project,
@@ -686,7 +906,7 @@ def generate(root: Path | None, build_dir: Path) -> int:
     skipped = 0
     for target in targets:
         target_units, target_skipped = _game_units(
-            project, target, library_ids, library_symbols
+            project, target, library_ids, library_symbols, library
         )
         units.extend(target_units)
         skipped += target_skipped
