@@ -1,0 +1,1 @@
+{"function": "exe/slus_004_22@0x8016728C", "tried": "Use the incoming archive index directly in the family switch instead of pinning a local to a0; the compiler drops the argument copy and masks family earlier.", "first_diff": "0x80167294 move a2,a0 vs andi v1,a1,0xFF", "score": "0xB4 vs 0xB8; kept the pin"}

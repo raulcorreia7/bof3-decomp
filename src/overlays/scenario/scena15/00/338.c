@@ -845,7 +845,9 @@ NON_MATCHING void func_801F97CC(WorldPos* pos, s32* arg) {
     point[2] = (pos->z.fixed + arg[2]) + lift;
     asm __volatile__("" : : : "memory");
     Camera_ProjectPoint(point, (DVECTOR*)(&poly->x3));
-    setRGB0(poly, (((Actor*)g_Task)->unk_06 & 2) != 0 ? 0x80 : 0, (((Actor*)g_Task)->unk_06 & 2) == 0 ? 0x80 : 0, 0);
+    poly->r0 = (TASK(Actor)->unk_06 & 2) != 0 ? 0x80 : 0;
+    poly->b0 = 0;
+    poly->g0 = (TASK(Actor)->unk_06 & 2) == 0 ? 0x80 : 0;
     Area_CellAddPrim(pos->x.fixed, pos->y.fixed, 0, sizeof(POLY_F4));
 }
 #else

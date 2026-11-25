@@ -5,12 +5,9 @@
 #include "overlays/area/shared/Area_DrawDimQuad.h"
 #include "overlays/area/shared/Actor_SeedPartySlot.h"
 
-#if BOF3_USE_ASM
-__asm__(".include \"include/match/macro.inc\"\n");
-#endif
+MATCH void func_801FCEC0(void) {
+    s32 party_size;
 
-#ifdef NON_MATCHING
-NON_MATCHING void func_801FCEC0(void) {
     switch (g_ScenarioState.step) {
         case 0: {
             u8* vars = g_ScriptVars;
@@ -45,22 +42,22 @@ NON_MATCHING void func_801FCEC0(void) {
             }
             break;
         case 0x17:
-            if (g_PartySize == 2) {
+            party_size = g_PartySize;
+            if (party_size == 2) {
                 g_ScriptVars[2]      = 8;
                 g_ScenarioState.step = 0x18;
                 Game_RequestAreaChange(0xA, 0x500000, 0x50000, 0x88);
                 SND_BGMPlay(7, 0x64, 8);
-            } else if (g_PartySize == 3) {
-                g_ScriptVars[2]      = 8;
-                g_ScenarioState.step = 0x18;
-                Game_RequestAreaChange(0xA, 0x510000, 0x80000, 0x89);
-                SND_BGMPlay(7, 0x64, 8);
+            } else {
+                goto party_size_not_two;
             }
             break;
         case 0x18:
             if (g_ScriptVars[0] == 1) {
                 SCRIPT_VARS_CLEAR_EXCEPT_CHOICE();
-                goto clear_script;
+                Game_ClearScriptActive();
+                g_ScenarioState.step     = 0;
+                g_ScenarioState.state_04 = 0;
             }
             break;
         case 2:
@@ -82,7 +79,9 @@ NON_MATCHING void func_801FCEC0(void) {
             if (g_GameStateIndex == 0) {
                 g_ScriptVars[0] = 0;
                 SCRIPT_VARS_CLEAR_EXCEPT_CHOICE();
-                goto clear_script;
+                Game_ClearScriptActive();
+                g_ScenarioState.step     = 0;
+                g_ScenarioState.state_04 = 0;
             }
             break;
         case 5:
@@ -126,20 +125,26 @@ NON_MATCHING void func_801FCEC0(void) {
             }
             break;
         case 13:
-            if (g_PartySize == 2) {
-                g_ScriptVars[2]      = 8;
-                g_ScenarioState.step = 0x18;
-                Game_RequestAreaChange(0xA, 0x500000, 0x50000, 0x88);
-                SND_BGMPlay(7, 0x64, 8);
-            } else if (g_PartySize == 3) {
-                g_ScriptVars[2]      = 8;
-                g_ScenarioState.step = 0x18;
-                Game_RequestAreaChange(0xA, 0x510000, 0x80000, 0x89);
-                SND_BGMPlay(7, 0x64, 8);
+            party_size = g_PartySize;
+            if (party_size == 2) {
+                goto party_size_two;
             }
+        party_size_not_two:
+            if (party_size == 3) {
+                goto party_size_three;
+            }
+            break;
+        party_size_two:
+            g_ScriptVars[2]      = 8;
+            g_ScenarioState.step = 0x18;
+            Game_RequestAreaChange(0xA, 0x500000, 0x50000, 0x88);
+            SND_BGMPlay(7, 0x64, 8);
+            break;
+        party_size_three:
+            g_ScriptVars[2]      = 8;
+            g_ScenarioState.step = 0x18;
+            Game_RequestAreaChange(0xA, 0x510000, 0x80000, 0x89);
+            SND_BGMPlay(7, 0x64, 8);
             break;
     }
 }
-#else
-INCLUDE_ASM(func_801FCEC0);
-#endif
