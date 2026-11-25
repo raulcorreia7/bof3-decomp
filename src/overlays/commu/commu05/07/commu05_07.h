@@ -19,15 +19,15 @@ extern Commu05State D_801D19F0;
 /* The page shown, counted across the three lists. */
 extern s8           D_801D19F4;
 
-void      func_801D1048(s16 x, s16 y, u8 group);
-void      func_801D129C(s16 x, s16 y, u8 group);
-void      func_801D14C8(s16 x, s16 y, s32 group);
-void      func_801D1724(u16 x, u16 y);
-extern u8 D_801457E8[][5];
-extern u8 D_80145E60[];
-extern u8 D_80145E61[];
+void       func_801D1048(s16 x, s16 y, u8 group);
+void       func_801D129C(s16 x, s16 y, u8 group);
+void       func_801D14C8(s16 x, s16 y, s32 group);
+void       func_801D1724(u16 x, u16 y);
+extern u8  D_801457E8[][5];
+extern u8  D_80145E60[];
+extern u8  D_80145E61[];
 extern u16 D_801D197C[][2];
-extern u8 D_80145E30[];
+extern u8  D_80145E30[];
 
 /* The entry rows of the shared executable's fairy list (D_80145E48) and the
  * 5-byte icon cells each row byte selects (D_801457E8). */

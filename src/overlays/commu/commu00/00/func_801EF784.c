@@ -51,8 +51,8 @@ NON_MATCHING s32 func_801EF784(void) {
                             g_FairyJobs[index].record_state = 2;
                         }
                     }
-                    D_80145E60[g_FairyVillageUpdateCount * 2]     = 2;
-                    D_80145E61[g_FairyVillageUpdateCount * 2]     = index;
+                    D_80145E60[g_FairyVillageUpdateCount * 2] = 2;
+                    D_80145E61[g_FairyVillageUpdateCount * 2] = index;
                     g_FairyVillageUpdateCount++;
                 }
             } else {

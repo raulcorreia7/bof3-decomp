@@ -48,7 +48,6 @@ NON_MATCHING u8 func_801AF5B0(s32 item_category, s32 character_index, s32 abilit
                     return 1;
                 }
                 return 0;
-
         }
         return 1;
     }
