@@ -73,7 +73,7 @@ MATCH void func_801F7640(void) {
 }
 
 /* scales a unit-circle term to the ring radius */
-static inline s32 Ring_Radius(s32 unit) {
+static inline s32 Scene_RingRadius(s32 unit) {
     return unit * 3;
 }
 
@@ -123,26 +123,26 @@ MATCH void func_801F7660(s32 x, s32 y, s32 z, u16 angle) {
         SetPolyG4(primitive);
         SetSemiTrans(primitive, 1);
 
-        point[0] = x + (((rsin(outer_angle) * Ring_Radius(rcos(radial))) >> 12) * 16);
-        point[1] = y + (((rsin(outer_angle) * Ring_Radius(rsin(radial))) >> 12) * 16);
+        point[0] = x + (((rsin(outer_angle) * Scene_RingRadius(rcos(radial))) >> 12) * 16);
+        point[1] = y + (((rsin(outer_angle) * Scene_RingRadius(rsin(radial))) >> 12) * 16);
         point[2] = z + (rcos(outer_angle) * 0x3000);
         Camera_ProjectPoint(point, (DVECTOR*)&primitive->x0);
         setRGB0(primitive, outer_color, outer_color, outer_color);
 
-        point[0] = x + (((rsin(inner_angle) * Ring_Radius(rcos(radial))) >> 12) * 16);
-        point[1] = y + (((rsin(inner_angle) * Ring_Radius(rsin(radial))) >> 12) * 16);
+        point[0] = x + (((rsin(inner_angle) * Scene_RingRadius(rcos(radial))) >> 12) * 16);
+        point[1] = y + (((rsin(inner_angle) * Scene_RingRadius(rsin(radial))) >> 12) * 16);
         point[2] = z + (rcos(inner_angle) * 0x3000);
         Camera_ProjectPoint(point, (DVECTOR*)&primitive->x1);
         setRGB1(primitive, inner_color, inner_color, inner_color);
 
-        point[0] = x + (((rsin(outer_angle) * Ring_Radius(rcos(next_radial))) >> 12) * 16);
-        point[1] = y + (((rsin(outer_angle) * Ring_Radius(rsin(next_radial))) >> 12) * 16);
+        point[0] = x + (((rsin(outer_angle) * Scene_RingRadius(rcos(next_radial))) >> 12) * 16);
+        point[1] = y + (((rsin(outer_angle) * Scene_RingRadius(rsin(next_radial))) >> 12) * 16);
         point[2] = z + (rcos(outer_angle) * 0x3000);
         Camera_ProjectPoint(point, (DVECTOR*)&primitive->x2);
         setRGB2(primitive, outer_color, outer_color, outer_color);
 
-        point[0] = x + (((rsin(inner_angle) * Ring_Radius(rcos(next_radial))) >> 12) * 16);
-        point[1] = y + (((rsin(inner_angle) * Ring_Radius(rsin(next_radial))) >> 12) * 16);
+        point[0] = x + (((rsin(inner_angle) * Scene_RingRadius(rcos(next_radial))) >> 12) * 16);
+        point[1] = y + (((rsin(inner_angle) * Scene_RingRadius(rsin(next_radial))) >> 12) * 16);
         radial += 0x100;
         next_radial += 0x100;
         segment++;
