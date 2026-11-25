@@ -1,32 +1,26 @@
 #include "area048_13.h"
 
-#ifdef NON_MATCHING
 /* Draws the ground patch at one cell as four Gouraud triangles: the projected centre is the shared
  * vertex and the rim is a diamond whose extent follows the mode's radius byte and the camera angle. */
-NON_MATCHING void func_801F4258(s32 mode) {
+MATCH void func_801F4258(s32 mode) {
     POLY_G3* prim;
     s16*     screen;
     s16*     screen_loop;
     long     p;
     long     flag;
     s32      depth;
-    /* FAKE: Keep table loads and shifted cell coordinates in retail registers. */
-    FAKE_REG(s32, cell_x, "s5");
-    FAKE_REG(s32, cell_y, "s6");
-    FAKE_REG(u32, cell_x_raw, "v0");
-    FAKE_REG(u32, cell_y_raw, "v1");
-    s32 offset;
-    s32 radius;
-    s32 sway;
-    s32 i;
+    s32      cell_x;
+    s32      cell_y;
+    s32      offset;
+    s32      radius;
+    s32      sway;
+    s32      i;
 
     g_ScratchPadVectors[0].vx = (D_801F4E78[mode] - 0x80) << 7;
     g_ScratchPadVectors[0].vy = (D_801F4E7C[mode] - 0x80) << 7;
     g_ScratchPadVectors[0].vz = -(D_801F4E80[mode] << 3);
-    cell_x_raw                = D_801F4E78[mode];
-    cell_x                    = cell_x_raw << 16;
-    cell_y_raw                = D_801F4E7C[mode];
-    cell_y                    = cell_y_raw << 16;
+    cell_x                    = D_801F4E78[mode] << 16;
+    cell_y                    = D_801F4E7C[mode] << 16;
     depth                     = RotTransPers(g_ScratchPadVectors, (long*)D_1F800034, &p, &flag);
     if (((u32)(((u16*)D_1F800034)[0] + 0x3C) & HALF_MASK) >= 0x1B9) {
         return;
@@ -83,6 +77,3 @@ NON_MATCHING void func_801F4258(s32 mode) {
     SetDrawMode((DR_MODE*)g_GfxPrimCursor, 0, 0, getTPage(TPAGE_DEPTH_8BIT, TPAGE_ABR_ADD, 320, 256), 0);
     Area_CellAddPrim(cell_x, cell_y, 1, sizeof(DR_MODE));
 }
-#else
-INCLUDE_ASM(func_801F4258);
-#endif

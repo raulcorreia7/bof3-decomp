@@ -19,8 +19,9 @@ NON_MATCHING void func_801F37B8(s32 mode, s32 value) {
         SetShadeTex(prim, 0);
         j = 0;
         do {
-            setVector(&g_ScratchPadVectors[j], LOHU(D_801F5038[i * 24 + j * 6]) + lift - TASK(Actor)->screen_y * (s8)D_801F5034[half], LOHU(D_801F5038[i * 24 + j * 6 + 2]),
-                      LOHU(D_801F5038[i * 24 + j * 6 + 4]));
+            g_ScratchPadVectors[j].vx = LOHU(D_801F5038[i * 24 + j * 6]) + lift - TASK(Actor)->screen_y * (s8)D_801F5034[half];
+            g_ScratchPadVectors[j].vy = LOHU(D_801F5038[i * 24 + j * 6 + 2]);
+            g_ScratchPadVectors[j].vz = LOHU(D_801F5038[i * 24 + j * 6 + 4]);
             j++;
         } while (j < 4);
         RotTransPers4(&g_ScratchPadVectors[0], &g_ScratchPadVectors[1], &g_ScratchPadVectors[2], &g_ScratchPadVectors[3], (long*)&prim->x0, (long*)&prim->x1, (long*)&prim->x2, (long*)&prim->x3,
