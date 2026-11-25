@@ -119,8 +119,8 @@ ASSERT_OFFSET(NewGameStart, items, 0x38);
 ASSERT_OFFSET(NewGameStart, vitals, 0x48);
 ASSERT_OFFSET(NewGameStart, unk_58, 0x58);
 ASSERT_SIZE(NewGameStart, 0x5C);
-extern u8 g_PartyStage[];   /* 0x1F800000 */
-extern u8 g_CharSlotView[]; /* 0x80181B10 */
+extern u8 g_PartyStage[];
+extern u8 g_CharSlotView[];
 extern u8 D_80181B17;
 extern u8 D_80181B18;
 
@@ -271,7 +271,7 @@ extern s16             D_80148628; /* the computed bar length; func_801D8188 sto
 extern u16             D_8014862A; /* the second bar length; func_801D8188 stores it with sh at 0x801D8210 */
 extern u8              D_80148653;
 extern u8              D_80148654;
-extern u8              g_ConfigSelect[2]; /* 0x80148654 */
+extern u8              g_ConfigSelect[2];
 /* D_80148656, the party cursor, has no declaration here: its readers split between lb and lbu, so each unit keeps its own view. */
 extern s8              g_PartyCursor;
 extern s8              D_80148658[6];
