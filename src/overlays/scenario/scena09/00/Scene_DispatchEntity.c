@@ -116,8 +116,8 @@ MATCH void func_801F790C(void) {
     D_80146872 = 1;
 }
 
-#ifdef NON_MATCHING
-NON_MATCHING void func_801F7920(void) {
+/* starts the scene events of the area and cell the party enters */
+MATCH void func_801F7920(void) {
     if (g_GameAreaId == AREA_ID_WYNDIA_LOWER) {
         if (SYS_TestFlag(g_SceneFlags, 0x2E) && !SYS_TestFlag(g_SceneFlags, 0x2F)) {
             Game_SetScriptActive();
@@ -328,8 +328,6 @@ NON_MATCHING void func_801F7920(void) {
         }
     }
     if (g_GameAreaId == AREA_ID_HIDDEN_FACTORY_ROOMS && g_GameCellType == 4) {
-        s32* fraction = &g_Game.members[0].pos.z.part.fraction;
-
         if (!SYS_TestFlag(g_SceneFlags, 0x13)) {
             Game_SetScriptActive();
             g_ScenarioState.state_04    = 7;
@@ -343,20 +341,20 @@ NON_MATCHING void func_801F7920(void) {
                 g_SpawnedActors[g_ScratchPad.cells.bytes[0]].header.flags = 1;
                 g_SpawnedActors[g_ScratchPad.cells.bytes[0]].type         = 0x96;
             }
-            if (*fraction <= TO_COORD(0x200)) {
+            if (g_Game.members[0].pos.z.fixed <= TO_COORD(0x200)) {
                 g_ScratchPad.cells.bytes[0] = Actor_FindFreeSpawned();
                 if (g_ScratchPad.cells.bytes[0] != GAME_NONE) {
                     g_SpawnedActors[g_ScratchPad.cells.bytes[0]].header.flags = 1;
                     g_SpawnedActors[g_ScratchPad.cells.bytes[0]].type         = 0x95;
                 }
             }
-        } else if (*fraction <= TO_COORD(0x200)) {
+        } else if (g_Game.members[0].pos.z.fixed <= TO_COORD(0x200)) {
             g_ScratchPad.cells.bytes[0] = Actor_FindFreeSpawned();
             if (g_ScratchPad.cells.bytes[0] != GAME_NONE) {
                 g_SpawnedActors[g_ScratchPad.cells.bytes[0]].header.flags = 1;
                 g_SpawnedActors[g_ScratchPad.cells.bytes[0]].type         = 0x96;
             }
-            if (*fraction <= TO_COORD(0x200)) {
+            if (g_Game.members[0].pos.z.fixed <= TO_COORD(0x200)) {
                 g_ScratchPad.cells.bytes[0] = Actor_FindFreeSpawned();
                 if (g_ScratchPad.cells.bytes[0] != GAME_NONE) {
                     g_SpawnedActors[g_ScratchPad.cells.bytes[0]].header.flags = 1;
@@ -386,9 +384,6 @@ NON_MATCHING void func_801F7920(void) {
     }
     g_ScenarioState.mode_02 = 2;
 }
-#else
-INCLUDE_ASM(func_801F7920);
-#endif
 
 MATCH void func_801F83D8(void) {
     SYS_DISPATCH_BYTE(D_801FE3EC, g_ScenarioState.state_04);

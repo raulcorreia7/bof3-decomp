@@ -8,7 +8,8 @@ segments:
     section_order: [.data, .rodata, .text, .bss]
     subsegments:
       - [0x0, .data, D_801F6C00]
-      - [0x4, bin, D_801F6C04]
+      - [0x4, .rodata, Scene_DispatchEntity]
+      - [0x60, .rodata, D_801F6C60]
       - [0x64, .rodata, func_801F8504]
       - [0x94, .rodata, func_801F8770]
       - [0xCC, .rodata, func_801F8D30]
