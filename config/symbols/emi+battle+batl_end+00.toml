@@ -1,4 +1,5 @@
 ["emi/battle/batl_end/00"]
+Battle_SlotIsBlocked = { addr = 0x801DB524, type = "func", alias = true, source = "The victory overlay calls the resident battle/03 slot predicate at 0x801EEDD4 and 0x801EF6EC." }
 g_BattleEventSlots = { addr = 0x801EB4F0, type = "BattleEventSlot", size = 0x60, source = "Twelve-byte slots of the queued battle events; Battle_UpdateEvents runs the slot of each active event." }
 jtbl_801EEC0C = { addr = 0x801EEC0C, type = "Callback", size = 0x1C, source = "The switch table of func_801EF928: 7 jump targets of its jr dispatch." }
 D_801EEC40 = { addr = 0x801EEC40, size = 0x4, source = "The decimal number format." }
