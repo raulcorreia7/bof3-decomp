@@ -71,8 +71,8 @@ NON_MATCHING void func_801EED0C(void) {
     }
 
     i           = 0;
-    palette_dst = (u16*)0x8003AC00;
-    palette_src = (u16*)0x80036C00;
+    palette_dst = GAME_PALETTE_MIRROR_U16 + 0xB00;
+    palette_src = (u16*)GAME_PALETTE_STAGE + 0xB00;
     for (; i < 16; i++) {
         *palette_dst++ = *palette_src++ | 0x8000;
     }
