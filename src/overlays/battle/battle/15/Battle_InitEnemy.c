@@ -17,7 +17,7 @@ NON_MATCHING void Battle_InitEnemy(s32 enemy_slot, u16 enemy_index, s32 x, s32 y
     first = &g_BattleEnemyBattlers[enemy_slot & BYTE_MASK];
     TASK_SET(first);
     first->header.flags = 1;
-    unit_id             = MEM(u16, 0x800E405Eu + (enemy_index & HALF_MASK) * BATTLE_ENEMY_RECORD_SIZE);
+    unit_id             = FIELD(u16, &D_800E405E, (enemy_index & HALF_MASK) * BATTLE_ENEMY_RECORD_SIZE);
     if (unit_id == 717 || unit_id == 737) {
         TASK(EnemyBattler)->header.flags = 0x21;
     }
@@ -54,11 +54,11 @@ NON_MATCHING void Battle_InitEnemy(s32 enemy_slot, u16 enemy_index, s32 x, s32 y
     COORD_INT(TASK(EnemyBattler)->pos.z) = Area_HeightSample(enemy->pos.x.fixed, y);
     TASK(EnemyBattler)->unk_2B           = 0;
     unit_offset                          = (enemy_index & HALF_MASK) * BATTLE_ENEMY_RECORD_SIZE;
-    Area_SceneSelectRecord(MEM(u16, 0x800E405Eu + unit_offset));
-    g_BattleEnemyBattlers[enemy_slot & BYTE_MASK].unk_8A = MEM(u16, 0x800E405Eu + unit_offset);
+    Area_SceneSelectRecord(FIELD(u16, &D_800E405E, unit_offset));
+    g_BattleEnemyBattlers[enemy_slot & BYTE_MASK].unk_8A = FIELD(u16, &D_800E405E, unit_offset);
     Battle_LoadEnemyBattler(enemy_slot, enemy_index);
     func_800AD0A8(enemy_slot & BYTE_MASK, enemy_index & HALF_MASK);
-    g_BattleEnemyBattlers[enemy_slot & BYTE_MASK].unk_7F = Battle_IsEnemyDefeated(MEM(u8, 0x800E4050u + unit_offset));
+    g_BattleEnemyBattlers[enemy_slot & BYTE_MASK].unk_7F = Battle_IsEnemyDefeated(FIELD(u8, &D_800E4050, unit_offset));
     g_Battle.enemy_count += 1;
 }
 #else
