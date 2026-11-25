@@ -137,7 +137,7 @@ void        UI_ListDrawAbilityRow(s32 x, s32 y, u8 shade, u8 element, u8* name, 
 extern void func_801D1D1C(void);
 extern void func_801D1E34(void);
 void        func_801D4158(s16 x, s16 y, u8 index, u8 flag);
-extern s32  func_801D2978(void);
+extern void func_801D2978(void);
 extern void func_801D2ADC(void);
 extern void func_801D2C0C(void);
 extern void func_801D2DA8(void);
@@ -193,6 +193,9 @@ extern s32              D_801DA03C;
 extern s32              D_801DA040;
 extern s32              D_801DA044;
 extern u8               g_ShisuBase[3];
+extern u8               g_ShisuBaseR;
+extern u8               g_ShisuBaseG;
+extern u8               g_ShisuBaseB;
 extern u8               D_801DA04E;
 extern s32              D_801DA084;
 extern s32              g_ShisuBaseScale;

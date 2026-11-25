@@ -778,13 +778,11 @@ NON_MATCHING void func_801D27BC(void) {
 INCLUDE_ASM(func_801D27BC);
 #endif
 
-#ifdef NON_MATCHING
-NON_MATCHING s32 func_801D2978(void) {
-    s8  amount;
-    u8  saved[3];
-    u8* green;
-    u8* blue;
-    s8  shade;
+/* Draws the base model with its tint shifted by the vinegar used, then restores the tint. */
+MATCH void func_801D2978(void) {
+    s8 amount;
+    u8 saved[3];
+    s8 shade;
 
     amount = g_ShisuIngredients.used[1] - g_ShisuIngredients.rounds;
     if (amount <= 0) {
@@ -794,33 +792,38 @@ NON_MATCHING s32 func_801D2978(void) {
         amount = 20;
     }
     g_ShisuBaseScale = g_ShisuScales[amount];
-    saved[0]         = g_ShisuBase[0];
-    saved[1]         = g_ShisuBase[1];
-    saved[2]         = g_ShisuBase[2];
+    saved[0]         = g_ShisuBaseR;
+    saved[1]         = g_ShisuBaseG;
+    saved[2]         = g_ShisuBaseB;
     if (0xFF - saved[0] > g_ShisuIngredients.used[2] * 3) {
         shade = saved[0] + g_ShisuIngredients.used[2] * 3;
     } else {
         shade = -1;
     }
-    g_ShisuBase[0] = shade;
-    green          = &g_ShisuBase[1];
-    if (0xFF - *green > g_ShisuIngredients.used[2] * 3) {
-        shade = *green + g_ShisuIngredients.used[2] * 3;
-    } else {
-        shade = -1;
+    g_ShisuBaseR = shade;
+    FAKE_BARRIER(); /* FAKE: keeps the tint store ahead of the next color's address. */
+    {
+        u8* green = &g_ShisuBaseG;
+
+        if (0xFF - *green > g_ShisuIngredients.used[2] * 3) {
+            shade = *green + g_ShisuIngredients.used[2] * 3;
+        } else {
+            shade = -1;
+        }
+        *green = shade;
     }
-    *green = shade;
-    blue   = &g_ShisuBase[2];
-    if (*blue > g_ShisuIngredients.used[2] * 3) {
-        *blue -= g_ShisuIngredients.used[2] * 3;
-    } else {
-        *blue = 0;
+    FAKE_BARRIER(); /* FAKE: keeps the tint store ahead of the next color's address. */
+    {
+        u8* blue = &g_ShisuBaseB;
+
+        if (*blue > g_ShisuIngredients.used[2] * 3) {
+            *blue -= g_ShisuIngredients.used[2] * 3;
+        } else {
+            *blue = 0;
+        }
     }
     func_801D2308(&D_801DA048);
-    g_ShisuBase[0] = saved[0];
-    g_ShisuBase[1] = saved[1];
-    g_ShisuBase[2] = saved[2];
+    g_ShisuBaseR = saved[0];
+    g_ShisuBaseG = saved[1];
+    g_ShisuBaseB = saved[2];
 }
-#else
-INCLUDE_ASM(func_801D2978);
-#endif
