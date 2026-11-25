@@ -9,15 +9,15 @@ MATCH void SND_SEQueueSelection(s32 se_id) {
     u32    packed;
     Actor* work;
 
-    D_8018B31C = -1;
-    D_8018B344 = -1;
-    D_8018B36C = -1;
-    D_8018B394 = -1;
+    g_SndSeVoice0KeyedVoice = -1;
+    g_SndSeVoice1KeyedVoice = -1;
+    g_SndSeVoice2KeyedVoice = -1;
+    g_SndSeVoice3KeyedVoice = -1;
     SND_SEPlay(se_id);
-    packed = ((u8)D_8018B31C & 0x1F) << 8;
-    packed |= ((u8)D_8018B344 & 0x1F) << 13;
-    packed |= ((u8)D_8018B36C & 0x1F) << 18;
-    packed |= ((u8)D_8018B394 & 0x1F) << 23;
+    packed = ((u8)g_SndSeVoice0KeyedVoice & 0x1F) << 8;
+    packed |= ((u8)g_SndSeVoice1KeyedVoice & 0x1F) << 13;
+    packed |= ((u8)g_SndSeVoice2KeyedVoice & 0x1F) << 18;
+    packed |= ((u8)g_SndSeVoice3KeyedVoice & 0x1F) << 23;
     work                  = TASK(Actor);
     work->voice_flags.raw = work->voice_flags.raw | packed;
     work->header.flags    = (work->header.flags | ACTOR_FLAG_SELECTION_EFFECT);

@@ -25,7 +25,7 @@ MATCH void SND_XAResolveStream(s32 stream_id) {
 
     buffer_ptr = buffer;
     scale      = ((stream_id >> 12) != 0) ? 0x10 : 8;
-    counter    = &D_80146835;
+    counter    = &g_XAFilterChannel;
     *counter   = 0;
     entry      = (u16*)g_XACues[stream_id >> 12];
     count      = stream_id & 0xFFF;
@@ -41,12 +41,12 @@ MATCH void SND_XAResolveStream(s32 stream_id) {
             entry += 1;
         } while (index < limit);
     }
-    flag  = &D_80146834;
+    flag  = &g_XAFilter;
     *flag = 1;
     /* FAKE: force the flag base back into a2. */
     FAKE_CLOBBER("a2");
     base                 = g_EmiSlotLbas[g_XAStreamSlots[stream_id >> 12]];
-    D_80146810           = base;
+    g_XAEndSector        = base;
     *(s32*)(flag - 0x28) = base;
     extra                = flag[1];
     bound                = base + (((*entry & 0x7FFF) * scale) + extra);
@@ -54,5 +54,5 @@ MATCH void SND_XAResolveStream(s32 stream_id) {
     second_offset        = (((entry[1] & 0x7FFF) * scale) + extra);
     base -= 0x96;
     *(s32*)(flag - 0x20) = bound;
-    D_80146810           = base + second_offset;
+    g_XAEndSector        = base + second_offset;
 }

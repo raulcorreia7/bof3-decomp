@@ -1,8 +1,7 @@
 #include "engine/slus/slus.h"
 
-/* clears the halfword at 0x8014681C and the byte at 0x8014682E.
- */
+/* XA state: idle; clears the wait frames and the sync result. */
 MATCH void SND_XAStateIdle(void) {
-    D_8014681C = 0;
-    D_8014682E = 0;
+    g_XAWaitFrames = 0;
+    g_XASyncResult = 0;
 }

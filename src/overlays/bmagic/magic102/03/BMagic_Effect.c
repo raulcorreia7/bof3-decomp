@@ -488,11 +488,10 @@ MATCH void Area_SceneDrawGroundSprite(u8* record, s32 origin_x, s32 origin_y) {
     GFX_AddPrim(g_AreaDrawMode, sizeof(POLY_FT4));
 }
 
-#ifdef NON_MATCHING
-NON_MATCHING s32 func_801F0ADC(s32 x, s32 y) {
+/* The ground height under world point (x, y), read from the D_801F0DCC height grid. */
+MATCH s32 func_801F0ADC(s32 x, s32 y) {
     s32 col;
     s32 row;
-    s32 depth;
     /* FAKE: retail reserves 8 unused frame bytes. */
     FAKE_STACK_PADS(u8, 8);
 
@@ -507,16 +506,12 @@ NON_MATCHING s32 func_801F0ADC(s32 x, s32 y) {
         return 0;
     }
     if (((col | row) & 1) == 0) {
-        depth = (D_801F0DCC[(row >> 1) + 1][col >> 1] + D_801F0DCC[row >> 1][(col >> 1) + 1]) << 19;
+        return -((D_801F0DCC[(row >> 1) + 1][col >> 1] + D_801F0DCC[row >> 1][(col >> 1) + 1]) << 19) >> 16;
     } else if ((col & 1) && !(row & 1)) {
-        depth = (D_801F0DCC[(row >> 1) + 1][(col >> 1) + 1] + D_801F0DCC[row >> 1][(col >> 1) + 1]) << 19;
+        return -((D_801F0DCC[(row >> 1) + 1][(col >> 1) + 1] + D_801F0DCC[row >> 1][(col >> 1) + 1]) << 19) >> 16;
     } else if (!(col & 1) && (row & 1)) {
-        depth = (D_801F0DCC[(row >> 1) + 1][(col >> 1) + 1] + D_801F0DCC[(row >> 1) + 1][col >> 1]) << 19;
+        return -((D_801F0DCC[(row >> 1) + 1][(col >> 1) + 1] + D_801F0DCC[(row >> 1) + 1][col >> 1]) << 19) >> 16;
     } else {
-        depth = D_801F0DCC[(row >> 1) + 1][(col >> 1) + 1] << 20;
+        return -(D_801F0DCC[(row >> 1) + 1][(col >> 1) + 1] << 20) >> 16;
     }
-    return -depth >> 16;
 }
-#else
-INCLUDE_ASM(func_801F0ADC);
-#endif

@@ -10,15 +10,15 @@ MATCH void SND_XAStartStream(s32 key, s32 unused) {
     req               = &D_80146818;
     *req              = 0;
     g_EmiServiceState = SND_XA_STATE_SEEK;
-    D_8014681A        = key;
+    g_XAStreamKey     = key;
     D_8014682F        = 0;
-    D_8014682C        = 0;
+    g_XAStopRequested = 0;
     D_80146832        = 0;
-    D_80146820        = 0;
-    D_8014681C        = 0;
+    g_XARetryCount    = 0;
+    g_XAWaitFrames    = 0;
     g_EmiStreamMode   = 2;
     g_EmiStreamState  = 0;
     SND_XAResolveStream(key);
-    CdIntToPos(D_8014680C, (CdlLOC*)((u8*)req + 0x20));
+    CdIntToPos(g_XAStartSector, (CdlLOC*)((u8*)req + 0x20));
     CdSyncCallback((CdlCB)SND_XASetSyncResult);
 }

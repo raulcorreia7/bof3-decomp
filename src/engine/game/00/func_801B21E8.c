@@ -25,6 +25,7 @@ NON_MATCHING void func_801B21E8(void) {
     } else if (g_PartySize == 3 && g_Game.members[2].header.mode == 3) {
         Party_BattlersSwapRows(0, 2, 1);
     }
+    leader = g_Game.members;
     for (i = 0; i < g_PartySize; i++) {
         if (g_Game.members[i].header.mode == 3) {
             member = &g_Game.members[i];

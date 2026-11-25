@@ -7,8 +7,8 @@
 MATCH void SND_SEReadBank1(void) {
     SLUS_READ_BANK_SE_HEAD(1, g_SndBankSe[1], g_SndBankHeaders[1])
     if (g_SndSeAliasBank != 0) {
-        D_8018B30C = g_SndSeAliasBank & EMI_SE_ALIAS_MASK;
-        switch (D_8018B30C) {
+        g_SndSeVabId = g_SndSeAliasBank & EMI_SE_ALIAS_MASK;
+        switch (g_SndSeVabId) {
             SLUS_SE_ALIAS_ARM(2, g_SndBankHeaders[2], g_SndBankSe[2])
             SLUS_SE_ALIAS_ARM(3, g_SndBankHeaders[3], g_SndBankSe[3])
             SLUS_SE_ALIAS_ARM(4, g_SndBankHeaders[4], g_SndBankSe[4])
