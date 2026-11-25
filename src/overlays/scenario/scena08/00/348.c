@@ -539,8 +539,8 @@ MATCH void func_801F8534(void) {
     func_801F823C((s16)TASK(Actor)->screen_x, (s16)TASK(Actor)->screen_y, (s16)TASK(Actor)->unk_32, (s16)TASK(Actor)->unk_2C);
 }
 
-#ifdef NON_MATCHING
-NON_MATCHING void func_801F85F0(s16 x, s16 y, s16 radius) {
+/* Draw a 16-slice disc of blended quads around (x, y); the colours keep retail's store order, which setRGB0..3 change. */
+MATCH void func_801F85F0(s16 x, s16 y, s16 radius) {
     POLY_GT4* prim;
     u16       angle;
     s32       a;
@@ -556,8 +556,7 @@ NON_MATCHING void func_801F85F0(s16 x, s16 y, s16 radius) {
         a        = angle;
         prim->x0 = x - ((radius * rcos(a)) >> 12);
         prim->x1 = x;
-        angle += 128;
-        b        = angle;
+        b        = (u16)(angle + 128);
         prim->y0 = prim->y1 = y + ((radius * rsin(a)) >> 12);
         prim->x2            = x - ((radius * rcos(b)) >> 12);
         prim->x3            = x;
@@ -568,10 +567,18 @@ NON_MATCHING void func_801F85F0(s16 x, s16 y, s16 radius) {
         prim->u2            = 63 - ((rcos(b) << 5) >> 12);
         prim->u3            = 63;
         prim->v2 = prim->v3 = 64 + ((rsin(b) << 5) >> 12);
-        setRGB0(prim, 0x40, 0x40, 0x80);
-        setRGB1(prim, 0x60, 0x60, 0x60);
-        setRGB2(prim, 0x40, 0x40, 0x80);
-        setRGB3(prim, 0x60, 0x60, 0x60);
+        prim->b0 = 0x80;
+        prim->g0 = 0x40;
+        prim->r0 = 0x40;
+        prim->b1 = 0x60;
+        prim->g1 = 0x60;
+        prim->r1 = 0x60;
+        prim->g2 = 0x40;
+        prim->r2 = 0x40;
+        prim->b2 = 0x80;
+        prim->b3 = 0x60;
+        prim->g3 = 0x60;
+        prim->r3 = 0x60;
         setTPage(prim, TPAGE_DEPTH_15BIT, TPAGE_ABR_HALF, 0x340, 0x100);
         GFX_AddPrim(GFX_LAYER_EFFECT_FRONT, sizeof(POLY_GT4));
 
@@ -585,23 +592,29 @@ NON_MATCHING void func_801F85F0(s16 x, s16 y, s16 radius) {
         prim->x3            = x + ((radius * rcos(b)) >> 12);
         prim->y2 = prim->y3 = y + ((radius * rsin(b)) >> 12);
         count += 1;
+        angle += 128;
         prim->u0 = 0;
         prim->u1 = (rcos(a) << 5) >> 12;
         prim->v0 = prim->v1 = ((rsin(a) << 5) >> 12) - 64;
         prim->u2            = 0;
         prim->u3            = (rcos(b) << 5) >> 12;
         prim->v2 = prim->v3 = ((rsin(b) << 5) >> 12) - 64;
-        setRGB0(prim, 0x60, 0x60, 0x60);
-        setRGB1(prim, 0x80, 0x40, 0x40);
-        setRGB2(prim, 0x60, 0x60, 0x60);
-        setRGB3(prim, 0x80, 0x40, 0x40);
+        prim->b0 = 0x60;
+        prim->g0 = 0x60;
+        prim->r0 = 0x60;
+        prim->b1 = 0x40;
+        prim->g1 = 0x40;
+        prim->r1 = 0x80;
+        prim->b2 = 0x60;
+        prim->g2 = 0x60;
+        prim->r2 = 0x60;
+        prim->r3 = 0x80;
+        prim->b3 = 0x40;
+        prim->g3 = 0x40;
         setTPage(prim, TPAGE_DEPTH_15BIT, TPAGE_ABR_HALF, 0x340, 0x100);
         GFX_AddPrim(GFX_LAYER_EFFECT_FRONT, sizeof(POLY_GT4));
     } while (count < 16);
 }
-#else
-INCLUDE_ASM(func_801F85F0);
-#endif
 
 #include "shared/GFX_DrawProjectedDisc.h"
 
