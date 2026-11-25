@@ -520,86 +520,78 @@ MATCH s32 func_801D1E60(void) {
     return 16;
 }
 
-#ifdef NON_MATCHING
-NON_MATCHING u8 func_801D1EE8(void) {
-    s32 denominator;
-    s32 difference;
-    s32 numerator;
-    s32 scaled_difference;
-    s32 subtotal;
-    s32 total;
+/* Scores the mix: four ratios clamped at 0, then their weighted total in D_801DA044. */
+MATCH u8 func_801D1EE8(void) {
+    s32  denominator;
+    s32  numerator;
+    s32* score;
 
-    denominator       = g_ShisuIngredients.topping_size * 4;
-    difference        = g_ShisuIngredients.used[1] - g_ShisuIngredients.rounds;
-    scaled_difference = difference * 5;
+    denominator = g_ShisuIngredients.topping_size * 4;
+    numerator   = (g_ShisuIngredients.used[1] - g_ShisuIngredients.rounds) * 5;
     if (denominator == 0) {
         D_801DA034 = 0;
-    } else if (denominator - scaled_difference > 0) {
-        numerator  = scaled_difference * 100;
-        D_801DA034 = numerator / denominator;
+    } else if (denominator - numerator > 0) {
+        D_801DA034 = numerator * 100 / denominator;
     } else {
-        numerator  = scaled_difference * 100;
-        D_801DA034 = 200 - (numerator / denominator);
+        D_801DA034 = 200 - numerator * 100 / denominator;
     }
-    if (D_801DA034 < 0) {
-        D_801DA034 = 0;
-    }
-
-    denominator       = g_ShisuIngredients.used[1];
-    scaled_difference = g_ShisuIngredients.used[2] * 4;
-    if (denominator == 0) {
-        D_801DA038 = 0;
-    } else if (denominator - scaled_difference > 0) {
-        numerator  = scaled_difference * 100;
-        D_801DA038 = numerator / denominator;
-    } else {
-        numerator  = scaled_difference * 100;
-        D_801DA038 = 200 - (numerator / denominator);
-    }
-    if (D_801DA038 < 0) {
-        D_801DA038 = 0;
-    }
-
-    if ((2 - g_ShisuIngredients.rounds) > 0) {
-        D_801DA03C = (g_ShisuIngredients.rounds * 25) + 50;
-    } else {
-        D_801DA03C = 150 - (g_ShisuIngredients.rounds * 25);
-    }
-    if (D_801DA03C < 0) {
-        D_801DA03C = 0;
-    }
-
-    denominator = g_ShisuIngredients.topping_size + g_ShisuIngredients.used[2];
-    difference  = (g_ShisuIngredients.used[1] - g_ShisuIngredients.rounds) + g_ShisuIngredients.used[3];
-    if (denominator == 0) {
-        D_801DA040 = 0;
-    } else if ((denominator - difference) > 0) {
-        D_801DA040 = (difference * 100) / denominator;
-    } else {
-        D_801DA040 = 200 - ((difference * 100) / denominator);
-    }
-    /* Retail keeps the address in one register for the clamp's read and store. */
     {
-        s32* score = &D_801DA040;
+        s32* score = &D_801DA034;
         if (*score < 0) {
             *score = 0;
         }
     }
 
-    subtotal   = g_ShisuIngredients.topping_size * (D_801DA034 * 10);
-    total      = subtotal + (g_ShisuIngredients.used[1] * ((D_801DA038 * D_801DA03C) / 100));
+    denominator = g_ShisuIngredients.used[1];
+    numerator   = g_ShisuIngredients.used[2] * 4;
+    if (denominator == 0) {
+        D_801DA038 = 0;
+    } else if (denominator - numerator > 0) {
+        D_801DA038 = numerator * 100 / denominator;
+    } else {
+        D_801DA038 = 200 - numerator * 100 / denominator;
+    }
+    {
+        s32* score = &D_801DA038;
+        if (*score < 0) {
+            *score = 0;
+        }
+    }
+
+    denominator = 2;
+    numerator   = g_ShisuIngredients.rounds;
+    if (denominator - numerator > 0) {
+        D_801DA03C = numerator * 25 + 50;
+    } else {
+        D_801DA03C = 150 - numerator * 25;
+    }
+    {
+        s32* score = &D_801DA03C;
+        if (*score < 0) {
+            *score = 0;
+        }
+    }
+
+    denominator = g_ShisuIngredients.topping_size + g_ShisuIngredients.used[2];
+    numerator   = g_ShisuIngredients.used[1] - g_ShisuIngredients.rounds + g_ShisuIngredients.used[3];
+    if (denominator == 0) {
+        D_801DA040 = 0;
+    } else if (denominator - numerator > 0) {
+        D_801DA040 = numerator * 100 / denominator;
+    } else {
+        D_801DA040 = 200 - numerator * 100 / denominator;
+    }
+    score = &D_801DA040;
+    if (*score < 0) {
+        *score = 0;
+    }
+
     D_801DA044 = 0;
-    FAKE_BARRIER();
-    D_801DA044 = subtotal;
-    FAKE_BARRIER();
-    D_801DA044 = total;
-    total      = (total + (D_801DA040 * 0x10)) / 100;
-    D_801DA044 = total;
-    return total;
+    D_801DA044 = g_ShisuIngredients.topping_size * 10 * D_801DA034;
+    D_801DA044 += g_ShisuIngredients.used[1] * (D_801DA038 * D_801DA03C / 100);
+    D_801DA044 = (D_801DA044 + *score * 16) / 100;
+    return D_801DA044;
 }
-#else
-INCLUDE_ASM(func_801D1EE8);
-#endif
 
 /* One 0x28-byte textured-quad record of the table at TASK(Actor)->script: the clut
  * index, four vertices, the face normal and four packed uv pairs. */
