@@ -12,11 +12,12 @@ import tempfile
 from dataclasses import dataclass
 from pathlib import Path
 
-from bof3.adapters.config import image_layout, read_symbols
+from bof3.adapters.config import has_splat, image_layout, read_symbols
 from bof3.errors import SymbolError
+from bof3.link.symbols import link_owners
 from bof3.resolve.ids import source_folder
 from bof3.source import ctext
-from bof3.symbols.context import RESIDENT, Context, grep_files
+from bof3.symbols.context import Context, grep_files
 from bof3.symbols.probe import GLABEL, Row, locate, type_layout
 
 
@@ -76,8 +77,8 @@ def table_range(ctx: Context, table: str) -> tuple[int, int] | None:
     return result
 
 
-def foreign_visible(ctx: Context, table: str, image: str | None, addr: int) -> bool:
-    """Whether a table other than the image's own may own ``addr``."""
+def _can_infer_extent(ctx: Context, table: str, image: str | None, addr: int) -> bool:
+    """Do not infer ownership outside an imported image's payload."""
     if image is None or table == image:
         return True
     span = table_range(ctx, table)
@@ -172,16 +173,15 @@ def _diff_addresses(ctx: Context, base: str, image: str | None) -> list[int]:
     return sorted(found)
 
 
-def _visible_tables(data: dict[str, dict[str, dict]], image: str | None) -> list[str]:
-    """Return the image's own table and the resident ones, or every table."""
+def _visible_tables(
+    ctx: Context, data: dict[str, dict[str, dict]], image: str | None
+) -> list[str]:
+    """Return tables in link-owner order, or every table for an unscoped diff."""
     if image is None:
         return list(data)
-    tables = [image, *RESIDENT]
-    seen = []
-    for table in tables:
-        if table in data and table not in seen:
-            seen.append(table)
-    return seen
+    if not has_splat(ctx.root, image):
+        raise SymbolError(f"symbol: {image} is not a target")
+    return [table for table in link_owners(ctx.root, image) if table in data]
 
 
 def find_hits(
@@ -191,16 +191,23 @@ def find_hits(
     image: str | None,
     addr: int,
 ) -> list[tuple[Row, int]]:
-    """Return the rows that own an address, nearest first."""
+    """Return exact hits first, respecting link-owner order within each match class."""
     hits = []
     for table, table_rows_ in rows.items():
-        if not foreign_visible(ctx, table, image, addr):
-            continue
         for row in table_rows_:
+            if addr < row.addr or (
+                addr > row.addr
+                and row.size is None
+                and not _can_infer_extent(ctx, table, image, addr)
+            ):
+                continue
             span = row_span(ctx, row, following[table])
-            if addr == row.addr or row.addr < addr < row.addr + span:
+            if addr < row.addr + span or addr == row.addr:
                 hits.append((row, span))
     hits.sort(key=lambda item: (item[0].addr, item[0].name), reverse=True)
+    if image is not None:
+        order = {table: index for index, table in enumerate(rows)}
+        hits.sort(key=lambda item: (item[0].addr != addr, order[item[0].table]))
     return hits
 
 
@@ -237,6 +244,34 @@ def _owners(ctx: Context, hits: list[tuple[Row, int]], addr: int) -> list[Owner]
     return owners
 
 
+def _address_rows(
+    ctx: Context,
+    data: dict[str, dict[str, dict]],
+    image: str | None,
+    addresses: list[int],
+    limit: int,
+) -> list[tuple[AtRow, str | None]]:
+    tables = _visible_tables(ctx, data, image)
+    rows = {table: table_rows(data, table) for table in tables}
+    following = {table: next_addresses(entries) for table, entries in rows.items()}
+    aliases: dict[int, list[Owner]] = collections.defaultdict(list)
+    for table in tables:
+        for name, row in data[table].items():
+            if not isinstance(row, dict) or "addr" not in row or not row.get("alias"):
+                continue
+            details = f"alias, {row.get('type') or 'untyped'}"
+            if "size" in row:
+                details += f", {row['size']:#x}"
+            aliases[int(row["addr"])].append(Owner(name, 0, f"({details})", table))
+    result = []
+    for addr in addresses:
+        hits = find_hits(ctx, rows, following, image, addr)[:limit]
+        owners = _owners(ctx, hits, addr)
+        owners.extend(aliases.get(addr, ()))
+        result.append((AtRow(addr, owners), hits[0][0].name if hits else None))
+    return result
+
+
 def at(
     ctx: Context, image: str | None, addresses: list[str], diff: str | None
 ) -> AtResult:
@@ -251,18 +286,8 @@ def at(
         raise SymbolError("symbol: at needs IMAGE 0xADDR..., or --diff [BASE]")
     else:
         found = [_address(text) for text in addresses]
-    data = read_symbols(ctx.root)
-    tables = _visible_tables(data, image)
-    rows = {table: table_rows(data, table) for table in tables}
-    following = {table: next_addresses(rows[table]) for table in tables}
     return AtResult(
-        [
-            AtRow(
-                addr,
-                _owners(ctx, find_hits(ctx, rows, following, image, addr)[:3], addr),
-            )
-            for addr in found
-        ]
+        [row for row, _ in _address_rows(ctx, read_symbols(ctx.root), image, found, 3)]
     )
 
 
@@ -440,14 +465,7 @@ def uses(ctx: Context, spec: str) -> UsesResult:
         if not image or "/" not in image:
             raise SymbolError("symbol: uses takes NAME or IMAGE@0xADDR")
         addr = _address(address)
-        rows = {
-            table: table_rows(data, table) for table in _visible_tables(data, image)
-        }
-        following = {table: next_addresses(rows[table]) for table in rows}
-        hits = find_hits(ctx, rows, following, image, addr)
-        if hits:
-            name = hits[0][0].name
-        at_row = AtRow(addr, _owners(ctx, hits[:1], addr))
+        [(at_row, name)] = _address_rows(ctx, data, image, [addr], 1)
         queries.append((image, addr))
     else:
         name = spec

@@ -8,7 +8,7 @@ import subprocess
 import tempfile
 from dataclasses import dataclass
 
-from bof3.adapters.config import symbols_text, write_symbols
+from bof3.adapters.config import SPLIT, symbols_text, write_symbols
 from bof3.errors import SymbolError
 from bof3.link import symbols
 from bof3.source import symtab
@@ -86,7 +86,7 @@ def refs(ctx: Context, dirs: list[str]) -> Table:
 
 
 def mentioned(ctx: Context, names: set[str]) -> set[str]:
-    """Return the names that a tracked file under ``src``, ``include``, ``asm`` or ``config`` uses."""
+    """Find tracked mentions outside the symbol tables."""
     if not names:
         return set()
     with tempfile.NamedTemporaryFile("w", suffix=".names", encoding="utf-8") as handle:
@@ -106,7 +106,7 @@ def mentioned(ctx: Context, names: set[str]) -> set[str]:
                 "include",
                 "asm",
                 "config",
-                ":(exclude)config/symbols/<image>.toml",
+                f":(exclude){SPLIT}",
             ],
             cwd=ctx.root,
             capture_output=True,
