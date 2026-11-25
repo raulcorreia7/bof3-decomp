@@ -20,6 +20,7 @@ NON_MATCHING void func_800A5330(void) {
     u8  col;
     u8  gene_row;
     u8* cell;
+    u8* grid;
     u8  gene;
     s32 text_id;
     s32 buttons;
@@ -55,8 +56,8 @@ NON_MATCHING void func_800A5330(void) {
 
     if (g_PadStates[0].pressed & g_InputMasks[BATTLE_INPUT_CONFIRM]) {
         if ((u8)g_Battle.cursor.gene.row != GAME_NONE) {
-            cell = &D_800B7070[(u8)g_Battle.cursor.gene.row][0];
-            cell += g_Battle.cursor.gene.column;
+            grid = D_800B7070[0];
+            cell = grid + (u8)g_Battle.cursor.gene.row * GENE_GRID_COLUMNS + g_Battle.cursor.gene.column;
             if (*cell == 0) {
                 SND_SEPlay(EMI_SE_ID(SND_BANK_COMMON, 7));
                 return;
