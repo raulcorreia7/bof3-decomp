@@ -49,7 +49,7 @@ MATCH void func_801FCEC0(void) {
                 Game_RequestAreaChange(0xA, 0x500000, 0x50000, 0x88);
                 SND_BGMPlay(7, 0x64, 8);
             } else {
-                goto check_party_size_three;
+                goto party_size_not_two;
             }
             break;
         case 0x18:
@@ -129,7 +129,7 @@ MATCH void func_801FCEC0(void) {
             if (party_size == 2) {
                 goto party_size_two;
             }
-        check_party_size_three:
+        party_size_not_two:
             if (party_size == 3) {
                 goto party_size_three;
             }
