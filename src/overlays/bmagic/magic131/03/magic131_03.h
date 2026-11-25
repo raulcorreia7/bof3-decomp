@@ -6,24 +6,28 @@
 #include "overlays/bmagic/bmagic.h"
 
 /* The effects the task spawns: header.mode picks the routine g_BMagicEffectModes runs. */
-typedef enum KaiserBreathEffectMode {
-    KAISER_BREATH_EFFECT_DRAGON,
-    KAISER_BREATH_EFFECT_FLASH,
-    KAISER_BREATH_EFFECT_RINGS,
-    KAISER_BREATH_EFFECT_BEAM
-} KaiserBreathEffectMode;
+typedef enum BMagicKaiserBreathEffectMode {
+    BMAGIC_KAISER_BREATH_EFFECT_DRAGON,
+    BMAGIC_KAISER_BREATH_EFFECT_FLASH,
+    BMAGIC_KAISER_BREATH_EFFECT_RINGS,
+    BMAGIC_KAISER_BREATH_EFFECT_BEAM
+} BMagicKaiserBreathEffectMode;
 
 /* The particles of the breath: header.mode picks the routine g_BMagicKaiserBreathParticleModes runs. */
-typedef enum KaiserBreathParticleMode {
-    KAISER_BREATH_PARTICLE_ORB,
-    KAISER_BREATH_PARTICLE_SPARK
-} KaiserBreathParticleMode;
+typedef enum BMagicKaiserBreathParticleMode {
+    BMAGIC_KAISER_BREATH_PARTICLE_ORB,
+    BMAGIC_KAISER_BREATH_PARTICLE_SPARK
+} BMagicKaiserBreathParticleMode;
 
 /* The orbs and the sparks the breath spawns. */
-#define KAISER_BREATH_ORB_COUNT      8
-#define KAISER_BREATH_SPARK_COUNT    28
+#define BMAGIC_KAISER_BREATH_ORB_COUNT      8
+#define BMAGIC_KAISER_BREATH_SPARK_COUNT    28
 
-#define KAISER_BREATH_PARTICLE_COUNT 48
+#define BMAGIC_KAISER_BREATH_PARTICLE_COUNT 48
+
+/* Pointers to character-indexed archive ids, one row of two per g_Battle.dragon_form; the battle's
+ * scroll direction picks the row's first or second pointer and g_EmiLoadedCharacterIndex picks the id. */
+extern u16* D_800B499C[][2];
 
 /* D_801EEC04 */
 extern Callback g_BMagicKaiserBreathModes[];
@@ -51,7 +55,8 @@ void BMagic_KaiserBreathProjectParticle(void);
 extern Callback      g_BMagicKaiserBreathDragonSteps[];
 /* D_801F1BF4 */
 extern Callback      g_BMagicKaiserBreathFlashSteps[];
-/* The ring UV rows held in the table's first words, read by BMagic_KaiserBreathDrawRings. */
+/* The ring UV rows held in the table's first words, read by the ring draw. */
+/* D_801F1C08 */
 extern u8            g_BMagicRingUvRows[];
 /* D_801F1C08 */
 extern Callback      g_BMagicKaiserBreathRingsSteps[];
@@ -73,13 +78,9 @@ extern u8            g_BMagicKaiserBreathSparkDepths[];
 /* D_801F1C94 */
 extern Callback      g_BMagicKaiserBreathSparkSteps[];
 /* D_801F1CA0 */
-extern BMagicEffect  g_BMagicKaiserBreathParticles[KAISER_BREATH_PARTICLE_COUNT];
+extern BMagicEffect  g_BMagicKaiserBreathParticles[BMAGIC_KAISER_BREATH_PARTICLE_COUNT];
 /* D_801F24E0 */
 extern BMagicEffect* g_BMagicKaiserBreathParticle;
-
-/* Pointers to character-indexed archive ids, one row of two per g_Battle.dragon_form; the battle's
- * scroll direction picks the row's first or second pointer and g_EmiLoadedCharacterIndex picks the id. */
-extern u16* D_800B499C[][2];
 
 /* Places the orbit point of a KaiserBreath orb or spark: the angle TABLE[unk_07]
  * shifted SHIFT goes to the scratchpad cell, and the point follows the area

@@ -50,7 +50,7 @@ MATCH void BMagic_KaiserBreathInit(void) {
     TASK(PartyMember)->header.mode += 1;
     slot                               = Battle_AllocEffect(1, 105) & BYTE_MASK;
     target                             = TASK(PartyMember);
-    g_BattleEffects[slot].header.mode  = KAISER_BREATH_EFFECT_FLASH;
+    g_BattleEffects[slot].header.mode  = BMAGIC_KAISER_BREATH_EFFECT_FLASH;
     g_BattleEffects[slot].target.party = target;
     TASK(PartyMember)->param.unk_0B += 1;
     BMAGIC_BRIGHTEN_PALETTE_ROW(dst, src, i);
@@ -99,7 +99,7 @@ MATCH void BMagic_KaiserBreathStartDragon(void) {
     slot                               = Battle_AllocEffect(1, 0x69) & BYTE_MASK;
     work                               = TASK(PartyMember);
     g_BattleEffects[slot].unk_04       = 0x21;
-    g_BattleEffects[slot].header.mode  = KAISER_BREATH_EFFECT_DRAGON;
+    g_BattleEffects[slot].header.mode  = BMAGIC_KAISER_BREATH_EFFECT_DRAGON;
     g_BattleEffects[slot].arg.unk_09   = 0x18;
     g_BattleEffects[slot].target.party = work;
     TASK(PartyMember)->param.unk_0B += 1;
@@ -118,7 +118,7 @@ MATCH void BMagic_KaiserBreathWaitDragon(void) {
     if (TASK(PartyMember)->param.unk_0B == 0) {
         slot                               = Battle_AllocEffect(1, 0x69) & BYTE_MASK;
         work                               = TASK(PartyMember);
-        g_BattleEffects[slot].header.mode  = KAISER_BREATH_EFFECT_FLASH;
+        g_BattleEffects[slot].header.mode  = BMAGIC_KAISER_BREATH_EFFECT_FLASH;
         g_BattleEffects[slot].target.party = work;
         TASK(PartyMember)->param.unk_0B++;
         TASK(PartyMember)->unk_09 = 10;
@@ -390,33 +390,33 @@ MATCH void BMagic_KaiserBreathDragonBreathe(void) {
     func_800A9610(g_Battle.target_selector, 16);
     slot                               = Battle_AllocEffect(1, 0x69) & BYTE_MASK;
     battler                            = g_BattleEffectBattler;
-    g_BattleEffects[slot].header.mode  = KAISER_BREATH_EFFECT_RINGS;
+    g_BattleEffects[slot].header.mode  = BMAGIC_KAISER_BREATH_EFFECT_RINGS;
     g_BattleEffects[slot].target.party = battler;
     g_BattleEffectBattler->param.unk_0B += 1;
     slot                               = Battle_AllocEffect(1, 0x69) & BYTE_MASK;
     battler                            = g_BattleEffectBattler;
-    g_BattleEffects[slot].header.mode  = KAISER_BREATH_EFFECT_BEAM;
+    g_BattleEffects[slot].header.mode  = BMAGIC_KAISER_BREATH_EFFECT_BEAM;
     g_BattleEffects[slot].target.party = battler;
     g_BattleEffectBattler->param.unk_0B += 1;
-    for (i = 0; i < KAISER_BREATH_ORB_COUNT; i++) {
+    for (i = 0; i < BMAGIC_KAISER_BREATH_ORB_COUNT; i++) {
         slot = BMagic_KaiserBreathAllocParticle();
         if (slot == GAME_NONE) {
             continue;
         }
         ring_battler                                    = g_BattleEffectBattler;
-        g_BMagicKaiserBreathParticles[slot].header.mode = KAISER_BREATH_PARTICLE_ORB;
+        g_BMagicKaiserBreathParticles[slot].header.mode = BMAGIC_KAISER_BREATH_PARTICLE_ORB;
         g_BMagicKaiserBreathParticles[slot].header.step = 0;
         g_BMagicKaiserBreathParticles[slot].unk_07      = i;
         g_BMagicKaiserBreathParticles[slot].battler     = ring_battler;
         g_BattleEffectBattler->param.unk_0B += 1;
     }
-    for (i = 0; i < KAISER_BREATH_SPARK_COUNT; i++) {
+    for (i = 0; i < BMAGIC_KAISER_BREATH_SPARK_COUNT; i++) {
         slot = BMagic_KaiserBreathAllocParticle();
         if (slot == GAME_NONE) {
             continue;
         }
         spark_battler                                   = g_BattleEffectBattler;
-        g_BMagicKaiserBreathParticles[slot].header.mode = KAISER_BREATH_PARTICLE_SPARK;
+        g_BMagicKaiserBreathParticles[slot].header.mode = BMAGIC_KAISER_BREATH_PARTICLE_SPARK;
         g_BMagicKaiserBreathParticles[slot].header.step = 0;
         g_BMagicKaiserBreathParticles[slot].unk_07      = i;
         g_BMagicKaiserBreathParticles[slot].battler     = spark_battler;
@@ -880,7 +880,7 @@ MATCH void BMagic_KaiserBreathDrawGlow(void) {
 MATCH u8 BMagic_KaiserBreathAllocParticle(void) {
     u8 i;
 
-    for (i = 0; i < KAISER_BREATH_PARTICLE_COUNT; i++) {
+    for (i = 0; i < BMAGIC_KAISER_BREATH_PARTICLE_COUNT; i++) {
         if (!(g_BMagicKaiserBreathParticles[i].header.flags & BMAGIC_EFFECT_IN_USE)) {
             g_BMagicKaiserBreathParticles[i].header.flags |= BMAGIC_EFFECT_IN_USE;
             return i;
