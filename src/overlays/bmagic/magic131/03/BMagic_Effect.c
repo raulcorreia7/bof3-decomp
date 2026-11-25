@@ -781,7 +781,7 @@ MATCH void BMagic_KaiserBreathOrbGrow(void) {
     s16* angle_cell;
     u8   phase;
 
-    BMAGIC_KAISER_BREATH_ORBIT_GROW(g_BMagicKaiserBreathOrbPhases, 7);
+    MAGIC131_ORBIT_GROW(g_BMagicKaiserBreathOrbPhases, 7);
 }
 
 /* func_801F13A4 */
@@ -790,7 +790,7 @@ MATCH void BMagic_KaiserBreathOrbEnd(void) {
     u8   phase;
     u8   timer;
 
-    BMAGIC_KAISER_BREATH_ORBIT_CLOSE(g_BMagicKaiserBreathOrbPhases, 7);
+    MAGIC131_ORBIT_CLOSE(g_BMagicKaiserBreathOrbPhases, 7);
 }
 
 /* func_801F14A0 */
@@ -832,7 +832,7 @@ MATCH void BMagic_KaiserBreathSparkGrow(void) {
     s16* angle_cell;
     u8   phase;
 
-    BMAGIC_KAISER_BREATH_ORBIT_GROW(g_BMagicKaiserBreathSparkPhases, 6);
+    MAGIC131_ORBIT_GROW(g_BMagicKaiserBreathSparkPhases, 6);
 }
 
 /* func_801F1748 */
@@ -841,7 +841,7 @@ MATCH void BMagic_KaiserBreathSparkEnd(void) {
     u8   phase;
     u8   timer;
 
-    BMAGIC_KAISER_BREATH_ORBIT_CLOSE(g_BMagicKaiserBreathSparkPhases, 6);
+    MAGIC131_ORBIT_CLOSE(g_BMagicKaiserBreathSparkPhases, 6);
 }
 
 /* func_801F1844 */

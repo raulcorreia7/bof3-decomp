@@ -51,10 +51,10 @@ void BMagic_KaiserBreathProjectParticle(void);
 extern Callback      g_BMagicKaiserBreathDragonSteps[];
 /* D_801F1BF4 */
 extern Callback      g_BMagicKaiserBreathFlashSteps[];
-/* D_801F1C08 */
-extern Callback      g_BMagicKaiserBreathRingsSteps[];
 /* The ring UV rows held in the table's first words, read by BMagic_KaiserBreathDrawRings. */
 extern u8            g_BMagicRingUvRows[];
+/* D_801F1C08 */
+extern Callback      g_BMagicKaiserBreathRingsSteps[];
 /* D_801F1C24 */
 extern Callback      g_BMagicKaiserBreathBeamSteps[];
 /* D_801F1C30 */
@@ -85,7 +85,7 @@ extern u16* D_800B499C[][2];
  * shifted SHIFT goes to the scratchpad cell, and the point follows the area
  * scroll target at the radius phase_0C. A statement macro: the member declares
  * s16* angle_cell and u8 phase. */
-#define BMAGIC_KAISER_BREATH_ORBIT_PLACE(TABLE, SHIFT)                                                                                               \
+#define MAGIC131_ORBIT_PLACE(TABLE, SHIFT)                                                                                                           \
     phase                                     = TABLE[g_BMagicKaiserBreathParticle->unk_07];                                                         \
     angle_cell                                = &D_1F800006;                                                                                         \
     *angle_cell                               = phase << (SHIFT);                                                                                    \
@@ -95,10 +95,10 @@ extern u16* D_800B499C[][2];
 /* The grow step of a KaiserBreath orbit: unk_06 advances by two, phase_0C by
  * 0x20, the point follows at the placed angle, and the step advances at phase
  * 0x200. A statement macro: the member declares s16* angle_cell and u8 phase. */
-#define BMAGIC_KAISER_BREATH_ORBIT_GROW(TABLE, SHIFT)           \
+#define MAGIC131_ORBIT_GROW(TABLE, SHIFT)                       \
     g_BMagicKaiserBreathParticle->unk_06 += 2;                  \
     g_BMagicKaiserBreathParticle->phase_0C += 0x20;             \
-    BMAGIC_KAISER_BREATH_ORBIT_PLACE(TABLE, SHIFT);             \
+    MAGIC131_ORBIT_PLACE(TABLE, SHIFT);                         \
     if ((s16)g_BMagicKaiserBreathParticle->phase_0C == 0x200) { \
         g_BMagicKaiserBreathParticle->header.step++;            \
     }
@@ -107,9 +107,9 @@ extern u16* D_800B499C[][2];
  * point follows at the placed angle, and timer_05 counts down by two; at zero
  * the effect clears. A statement macro: the member declares s16* angle_cell,
  * u8 phase and u8 timer. */
-#define BMAGIC_KAISER_BREATH_ORBIT_CLOSE(TABLE, SHIFT)                                   \
+#define MAGIC131_ORBIT_CLOSE(TABLE, SHIFT)                                               \
     g_BMagicKaiserBreathParticle->phase_0C += 0x10;                                      \
-    BMAGIC_KAISER_BREATH_ORBIT_PLACE(TABLE, SHIFT);                                      \
+    MAGIC131_ORBIT_PLACE(TABLE, SHIFT);                                                  \
     timer                                  = g_BMagicKaiserBreathParticle->timer_05 - 2; \
     g_BMagicKaiserBreathParticle->timer_05 = timer;                                      \
     if (timer == 0) {                                                                    \
