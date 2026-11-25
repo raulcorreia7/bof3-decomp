@@ -1,6 +1,6 @@
 #include "engine/slus/slus.h"
 
-/* marks the four selection voice slots free (-1), queues SE se_id through SND_SEPlay (which keys the
+/* marks the keyed voice of each of the four SE layers free (-1), queues SE se_id through SND_SEPlay (which keys the
  * voices on), then packs the voice numbers' low five bits into the work record's state word at +0x70 (bits 8, 13, 18,
  * 23) and sets ACTOR_FLAG_SELECTION_EFFECT in its flag byte.
  */

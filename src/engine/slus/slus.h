@@ -108,7 +108,7 @@
         g_SndSeLayer0SpuVoice = (se_records)[g_SndSeRecord * 4 + 3]; \
         break;
 
-/* Bank record reader: loads record g_SndSeRecord of the bank's record table into voice slot 0 and fills one more slot per layer on the next voices (wrapping at 24). The head is the one body of banks 0 to 6; the alias switch that follows lets another bank supply the tone and voice. */
+/* Bank record reader: loads record g_SndSeRecord of the bank's record table into layer 0 and fills one more layer on each next voice (wrapping at 24). The head is the one body of banks 0 to 6; the alias switch that follows lets another bank supply the tone and voice. */
 #define SLUS_READ_BANK_SE_HEAD(bank, se_records, tones)                                                                                   \
     s32 record;                                                                                                                           \
     s16 program;                                                                                                                          \
@@ -748,7 +748,7 @@ extern u32          D_80183A60[4];
 extern u16          D_80183A70[];
 extern u32          g_SysStartupReturn; /* start of the BSS stup2 clears */
 extern u8           D_8018B2F4;
-/* The four layers of the SE being played, one 0x28-byte block each: the bank reader fills them and SND_SEPlay keys each on with SsUtKeyOnV. The VAB id of every layer is g_SndSeVabId, in block 0. */
+/* The four layers of the SE being played, one 0x28-byte block each: the bank readers fill them and SND_SEPlay keys each on with SsUtKeyOnV. The VAB id of every layer is g_SndSeVabId, in block 0. Kept as scalars: an array of records changes SND_SEPlay, SND_SEQueueSelection and SND_SEReadBank0 to 6. */
 /* D_8018B308 */
 extern s16          g_SndSeLayer0Program;
 /* D_8018B30C */
