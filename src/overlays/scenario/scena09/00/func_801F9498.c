@@ -4,8 +4,7 @@
 __asm__(".include \"include/match/macro.inc\"\n");
 #endif
 
-#ifdef NON_MATCHING
-NON_MATCHING void func_801F9498(void) {
+MATCH void func_801F9498(void) {
     u8* game_state_index;
     u8* script_vars;
 
@@ -165,6 +164,7 @@ NON_MATCHING void func_801F9498(void) {
         case 36:
             if (g_ScriptVars[0] == 2) {
                 g_AreaDrawFlags      = 0x1F;
+                g_ScriptVars[0]      = 0;
                 g_ScenarioState.step = 0x25;
                 Game_RequestAreaChange(0x75, 0x560000, 0x2B0000, 0x89);
             }
@@ -356,6 +356,3 @@ NON_MATCHING void func_801F9498(void) {
             break;
     }
 }
-#else
-INCLUDE_ASM(func_801F9498);
-#endif

@@ -35,7 +35,6 @@ NON_MATCHING s32 func_800AA368(void) {
         next_multi_candidate:;
         }
     } else {
-        count = 0;
         if (active < BATTLE_PARTY_CHARACTERS_COUNT) {
             if (mask != 0) {
                 if ((u8)func_800AA5F4(active) != 0) {
@@ -52,6 +51,7 @@ NON_MATCHING s32 func_800AA368(void) {
             return 1;
         }
     collect_fallback:
+        count = 0;
         for (slot = 0; slot < BATTLE_PARTY_CHARACTERS_COUNT; slot++) {
             if (mask != 0) {
                 if ((u8)func_800AA5F4(slot) != 0) {

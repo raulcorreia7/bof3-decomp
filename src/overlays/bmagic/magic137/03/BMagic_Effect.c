@@ -8,25 +8,26 @@ __asm__(".include \"include/match/macro.inc\"\n");
 
 #ifdef NON_MATCHING
 NON_MATCHING void func_801EEC7C(void) {
-    BattleEffect*    slot;
-    BattleWorkImage* image;
     u16*             dst;
     u16*             src;
-    u8               index;
-    s32              i;
+    s32              index;
+    u32              i;
+    u32              enemy;
+    BattleEffect*    effect;
+    BattleWorkImage* image;
 
     TASK(PartyMember)->param.unk_0B = 0;
     TASK(PartyMember)->unk_09       = 0x18;
     TASK(PartyMember)->header.mode += 1;
-    index                               = Battle_AllocEffect(1, 0x4B);
-    g_BattleEffects[index].header.mode  = 0;
+    index                               = (u8)Battle_AllocEffect(1, 0x4B);
     g_BattleEffects[index].target.party = g_Task;
+    g_BattleEffects[index].header.mode  = 0;
     g_BattleEffects[index].unk_08       = g_BattleEffectBattler->facing;
 
     TASK(PartyMember)->param.unk_0B += 1;
-    index                               = Battle_AllocEffect(1, 0x4B);
-    g_BattleEffects[index].header.mode  = 1;
+    index                               = (u8)Battle_AllocEffect(1, 0x4B);
     g_BattleEffects[index].target.party = g_Task;
+    g_BattleEffects[index].header.mode  = 1;
 
     TASK(PartyMember)->param.unk_0B += 1;
     BMAGIC_POINT_AT_PALETTE_ROW(dst, src, i);
@@ -35,17 +36,18 @@ NON_MATCHING void func_801EEC7C(void) {
     }
     g_GfxPalettePending = 1;
     if (g_Battle.encounter != 0) {
-        if (g_BattleEnemyBattlers[(u8)(g_Battle.active_battler - BATTLE_PARTY_CHARACTERS_COUNT)].unk_F0 == 0x29) {
-            index                   = Battle_AllocEffect(1, 0x4B);
-            slot                    = &g_BattleEffects[index];
-            image                   = (BattleWorkImage*)&g_BattleEnemyBattlers[(u8)(g_Battle.active_battler - BATTLE_PARTY_CHARACTERS_COUNT)];
-            *(BattleWorkImage*)slot = *image;
-            slot->header.mode       = 2;
-            slot->unk_06            = 1;
-            slot->step_index        = 0x4B;
-            slot->header.step       = 0;
-            slot->arg.unk_09        = 0;
-            slot->unk_29            = 3;
+        if (g_BattleEnemyBattlers[g_Battle.active_battler - BATTLE_PARTY_CHARACTERS_COUNT].unk_F0 == 0x29) {
+            index                              = (u8)Battle_AllocEffect(1, 0x4B);
+            effect                             = &g_BattleEffects[index];
+            enemy                              = g_Battle.active_battler - BATTLE_PARTY_CHARACTERS_COUNT;
+            image                              = (BattleWorkImage*)&g_BattleEnemyBattlers[enemy];
+            *(BattleWorkImage*)effect          = *image;
+            g_BattleEffects[index].header.mode = 2;
+            g_BattleEffects[index].unk_06      = 1;
+            g_BattleEffects[index].step_index  = 0x4B;
+            g_BattleEffects[index].header.step = 0;
+            g_BattleEffects[index].arg.unk_09  = 0;
+            g_BattleEffects[index].unk_29      = 3;
         }
     }
 }

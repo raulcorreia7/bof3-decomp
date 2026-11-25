@@ -310,6 +310,7 @@ extern u8*                   D_800B470C[4];
 /* D_800B471C */
 extern Callback              g_BattleItemEffects[130];
 extern u8                    g_BattleEscapeThresholds[];
+extern u8                    g_BattleAbilityEffectIds[];
 extern s8                    D_800B4924[];
 extern u16                   D_800B492C[16];
 /* Overlay data and routines the sources use; names are the retail addresses. */
