@@ -3,30 +3,30 @@
 const MessageStateSteps g_UiMessageStateSteps = {{
     UI_MessageRunScript,
     UI_MessageTickChoiceTimer,
-    func_80150E48,
-    func_80150F3C,
-    func_801510DC,
-    func_80151538,
-    func_80151820,
-    func_80151844,
+    UI_MessageRunEnd,
+    UI_MessageRunPage,
+    UI_MessageRunChoice,
+    UI_MessageRunScrollChoice,
+    UI_MessageResumeScript,
+    UI_MessageRunBoxEnd,
 }};
 
-const MessageStateSteps D_80149A7C = {{
-    func_80150F8C,
-    func_8015115C,
-    func_801511C8,
+const MessageStateSteps g_UiMessageChoiceStateSteps = {{
+    UI_MessageWaitInput,
+    UI_MessageOpenChoice,
+    UI_MessageWaitChoiceReady,
     UI_MessageUpdateChoiceInput,
     func_80151334,
     UI_MessageDispatchAnswerStep,
     UI_MessageRestartRequest,
-    func_80151480,
+    UI_MessageEndAfterChoice,
 }};
 
-const MessageChoiceSteps D_80149A9C = {{
+const MessageChoiceSteps g_UiMessageScrollStateSteps = {{
     UI_MessageClosePanel,
-    func_801515F4,
+    UI_MessageWaitChoiceOpen,
     UI_MessageScrollChoice,
-    func_80151710,
-    func_801517AC,
+    UI_MessageRunStepCloseChoice,
+    UI_MessageWaitChoiceClosed,
     func_8015102C,
 }};
