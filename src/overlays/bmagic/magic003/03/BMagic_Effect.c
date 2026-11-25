@@ -428,11 +428,11 @@ MATCH void BMagic_SuperComboStrikeSpawn(void) {
     Effect_CopyActiveBattlerToSlot(slot);
     D_801EC3A4[slot & BYTE_MASK].target.party = TASK(PartyMember);
     strike                                    = &g_BattleEffects[slot & BYTE_MASK];
-    strike->unk_06                             = 1;
-    strike->step_index                         = 1;
-    strike->header.mode                        = 0;
-    strike->header.step                        = 0;
-    strike->arg.unk_09                         = 1;
+    strike->unk_06                            = 1;
+    strike->step_index                        = 1;
+    strike->header.mode                       = 0;
+    strike->header.step                       = 0;
+    strike->arg.unk_09                        = 1;
     TASK(PartyMember)->param.unk_0B += 1;
 }
 
@@ -587,16 +587,14 @@ MATCH void BMagic_SuperComboDrawBox(s32 box_index) {
     tile = (TILE*)g_GfxPrimCursor;
     SetTile(tile);
     SetSemiTrans(tile, 1);
-    setXY0(tile, TASK(PartyMember)->screen_x.value - (g_BMagicSuperComboBoxes[(u8)box_index].box.x + 4),
-           TASK(PartyMember)->screen_y.value - (g_BMagicSuperComboBoxes[(u8)box_index].box.y + 4));
+    setXY0(tile, TASK(PartyMember)->screen_x.value - (g_BMagicSuperComboBoxes[(u8)box_index].box.x + 4), TASK(PartyMember)->screen_y.value - (g_BMagicSuperComboBoxes[(u8)box_index].box.y + 4));
     setWH(tile, g_BMagicSuperComboBoxes[(u8)box_index].box.w + 8, g_BMagicSuperComboBoxes[(u8)box_index].box.h + 8);
     setRGB0(tile, 0x20, 0x20, 0x20);
     GFX_AddPrim(BMAGIC_LAYER_FOREGROUND, sizeof(TILE));
     tile = (TILE*)g_GfxPrimCursor;
     SetTile(tile);
     SetSemiTrans(tile, 1);
-    setXY0(tile, TASK(PartyMember)->screen_x.value - (g_BMagicSuperComboBoxes[(u8)box_index].box.x + 6),
-           TASK(PartyMember)->screen_y.value - (g_BMagicSuperComboBoxes[(u8)box_index].box.y + 6));
+    setXY0(tile, TASK(PartyMember)->screen_x.value - (g_BMagicSuperComboBoxes[(u8)box_index].box.x + 6), TASK(PartyMember)->screen_y.value - (g_BMagicSuperComboBoxes[(u8)box_index].box.y + 6));
     setWH(tile, g_BMagicSuperComboBoxes[(u8)box_index].box.w + 12, g_BMagicSuperComboBoxes[(u8)box_index].box.h + 12);
     setRGB0(tile, 0x20, 0x20, 0x20);
     GFX_AddPrim(BMAGIC_LAYER_FOREGROUND, sizeof(TILE));

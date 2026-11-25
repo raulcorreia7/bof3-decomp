@@ -22,7 +22,7 @@ typedef enum BMagicSuperComboMode {
 /* The most prompts the combo gives. */
 #define BMAGIC_SUPER_COMBO_HIT_MAX 32
 
-#define MAGIC003_STEP_COUNT 5
+#define MAGIC003_STEP_COUNT        5
 
 typedef struct Magic003Steps {
     Callback steps[MAGIC003_STEP_COUNT];
