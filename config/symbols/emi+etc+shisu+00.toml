@@ -118,6 +118,7 @@ D_801DA090 = { addr = 0x801DA090, type = "u8", source = "Scratch byte cleared by
 D_801DA098 = { addr = 0x801DA098, type = "s32", source = "Scratch word assigned the record value read by func_801D27BC." }
 D_801DA09C = { addr = 0x801DA09C, type = "s32", source = "Scratch pointer assigned and reloaded by func_801D27BC during the first scroll-height setup." }
 g_ShisuBase = { addr = 0x801DA0A5, size = 3, source = "The base model's red, green and blue tint; vinegar used shifts it while drawing." }
+g_ShisuBaseR = { addr = 0x801DA0A5, alias = true, source = "The base model's red tint as its own global, for func_801D2978; the same byte as g_ShisuBase[0]." }
 g_ShisuBaseG = { addr = 0x801DA0A6, alias = true, source = "The base model's green tint; the same byte as g_ShisuBase[1]." }
 g_ShisuBaseB = { addr = 0x801DA0A7, alias = true, source = "The base model's blue tint; the same byte as g_ShisuBase[2]." }
 D_801DA0AC = { addr = 0x801DA0AC, type = "s32", source = "Scratch word cleared by func_801D27BC during the first scroll-height setup." }

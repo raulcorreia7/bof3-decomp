@@ -520,86 +520,78 @@ MATCH s32 func_801D1E60(void) {
     return 16;
 }
 
-#ifdef NON_MATCHING
-NON_MATCHING u8 func_801D1EE8(void) {
-    s32 denominator;
-    s32 difference;
-    s32 numerator;
-    s32 scaled_difference;
-    s32 subtotal;
-    s32 total;
+/* Scores the mix: four ratios clamped at 0, then their weighted total in D_801DA044. */
+MATCH u8 func_801D1EE8(void) {
+    s32  denominator;
+    s32  numerator;
+    s32* score;
 
-    denominator       = g_ShisuIngredients.topping_size * 4;
-    difference        = g_ShisuIngredients.used[1] - g_ShisuIngredients.rounds;
-    scaled_difference = difference * 5;
+    denominator = g_ShisuIngredients.topping_size * 4;
+    numerator   = (g_ShisuIngredients.used[1] - g_ShisuIngredients.rounds) * 5;
     if (denominator == 0) {
         D_801DA034 = 0;
-    } else if (denominator - scaled_difference > 0) {
-        numerator  = scaled_difference * 100;
-        D_801DA034 = numerator / denominator;
+    } else if (denominator - numerator > 0) {
+        D_801DA034 = numerator * 100 / denominator;
     } else {
-        numerator  = scaled_difference * 100;
-        D_801DA034 = 200 - (numerator / denominator);
+        D_801DA034 = 200 - numerator * 100 / denominator;
     }
-    if (D_801DA034 < 0) {
-        D_801DA034 = 0;
-    }
-
-    denominator       = g_ShisuIngredients.used[1];
-    scaled_difference = g_ShisuIngredients.used[2] * 4;
-    if (denominator == 0) {
-        D_801DA038 = 0;
-    } else if (denominator - scaled_difference > 0) {
-        numerator  = scaled_difference * 100;
-        D_801DA038 = numerator / denominator;
-    } else {
-        numerator  = scaled_difference * 100;
-        D_801DA038 = 200 - (numerator / denominator);
-    }
-    if (D_801DA038 < 0) {
-        D_801DA038 = 0;
-    }
-
-    if ((2 - g_ShisuIngredients.rounds) > 0) {
-        D_801DA03C = (g_ShisuIngredients.rounds * 25) + 50;
-    } else {
-        D_801DA03C = 150 - (g_ShisuIngredients.rounds * 25);
-    }
-    if (D_801DA03C < 0) {
-        D_801DA03C = 0;
-    }
-
-    denominator = g_ShisuIngredients.topping_size + g_ShisuIngredients.used[2];
-    difference  = (g_ShisuIngredients.used[1] - g_ShisuIngredients.rounds) + g_ShisuIngredients.used[3];
-    if (denominator == 0) {
-        D_801DA040 = 0;
-    } else if ((denominator - difference) > 0) {
-        D_801DA040 = (difference * 100) / denominator;
-    } else {
-        D_801DA040 = 200 - ((difference * 100) / denominator);
-    }
-    /* Retail keeps the address in one register for the clamp's read and store. */
     {
-        s32* score = &D_801DA040;
+        s32* score = &D_801DA034;
         if (*score < 0) {
             *score = 0;
         }
     }
 
-    subtotal   = g_ShisuIngredients.topping_size * (D_801DA034 * 10);
-    total      = subtotal + (g_ShisuIngredients.used[1] * ((D_801DA038 * D_801DA03C) / 100));
+    denominator = g_ShisuIngredients.used[1];
+    numerator   = g_ShisuIngredients.used[2] * 4;
+    if (denominator == 0) {
+        D_801DA038 = 0;
+    } else if (denominator - numerator > 0) {
+        D_801DA038 = numerator * 100 / denominator;
+    } else {
+        D_801DA038 = 200 - numerator * 100 / denominator;
+    }
+    {
+        s32* score = &D_801DA038;
+        if (*score < 0) {
+            *score = 0;
+        }
+    }
+
+    denominator = 2;
+    numerator   = g_ShisuIngredients.rounds;
+    if (denominator - numerator > 0) {
+        D_801DA03C = numerator * 25 + 50;
+    } else {
+        D_801DA03C = 150 - numerator * 25;
+    }
+    {
+        s32* score = &D_801DA03C;
+        if (*score < 0) {
+            *score = 0;
+        }
+    }
+
+    denominator = g_ShisuIngredients.topping_size + g_ShisuIngredients.used[2];
+    numerator   = g_ShisuIngredients.used[1] - g_ShisuIngredients.rounds + g_ShisuIngredients.used[3];
+    if (denominator == 0) {
+        D_801DA040 = 0;
+    } else if (denominator - numerator > 0) {
+        D_801DA040 = numerator * 100 / denominator;
+    } else {
+        D_801DA040 = 200 - numerator * 100 / denominator;
+    }
+    score = &D_801DA040;
+    if (*score < 0) {
+        *score = 0;
+    }
+
     D_801DA044 = 0;
-    FAKE_BARRIER();
-    D_801DA044 = subtotal;
-    FAKE_BARRIER();
-    D_801DA044 = total;
-    total      = (total + (D_801DA040 * 0x10)) / 100;
-    D_801DA044 = total;
-    return total;
+    D_801DA044 = g_ShisuIngredients.topping_size * 10 * D_801DA034;
+    D_801DA044 += g_ShisuIngredients.used[1] * (D_801DA038 * D_801DA03C / 100);
+    D_801DA044 = (D_801DA044 + *score * 16) / 100;
+    return D_801DA044;
 }
-#else
-INCLUDE_ASM(func_801D1EE8);
-#endif
 
 /* One 0x28-byte textured-quad record of the table at TASK(Actor)->script: the clut
  * index, four vertices, the face normal and four packed uv pairs. */
@@ -630,13 +622,13 @@ typedef union PanelQuadPrim {
 #ifdef NON_MATCHING
 NON_MATCHING void func_801D2308(void* record) {
     CVECTOR        color;
+    VECTOR         unused;
     VECTOR         normal;
-    MATRIX         m;
     MATRIX         light;
+    MATRIX         m;
     MATRIX         light_mtx;
     long           depth;
     long           flag;
-    Actor*         saved;
     u8             abr;
     u16            count;
     u16            tpage;
@@ -644,8 +636,10 @@ NON_MATCHING void func_801D2308(void* record) {
     PanelQuadPrim* quad;
     u16            i;
 
-    saved = TASK(Actor);
-    TASK_SET(record);
+    /* Swaps the record into the task cell; record keeps the caller's task. */
+    record = (void*)((s32)record ^ (s32)g_Task);
+    g_Task = (void*)((s32)g_Task ^ (s32)record);
+    record = (void*)((s32)record ^ (s32)g_Task);
     PushMatrix();
     count = TASK(Actor)->range_54.table[0];
     Actor_BuildTransformMatrix(&m);
@@ -709,7 +703,7 @@ NON_MATCHING void func_801D2308(void* record) {
             quad->ft4.tpage = tpage;
             quad->ft4.clut  = GetClut(piece->clut * 16, STAGE_PALETTE_Y + 3);
             SetSemiTrans(&quad->ft4, (abr >> 6) & 1);
-            if (func_801AFF90((Pos2*)&quad->ft4.x0, (Pos2*)&quad->ft4.x1, (Pos2*)&quad->ft4.x2) > 0) {
+            if (((s32 (*)(Pos2*, Pos2*, Pos2*))func_801AFF90)((Pos2*)&quad->ft4.x0, (Pos2*)&quad->ft4.x1, (Pos2*)&quad->ft4.x2) > 0) {
                 GFX_AddPrim(GFX_LAYER_UI, sizeof(POLY_FT4));
             }
 
@@ -718,7 +712,7 @@ NON_MATCHING void func_801D2308(void* record) {
         } while ((u16)i < count);
     }
     PopMatrix();
-    TASK_SET(saved);
+    TASK_SET(record);
 }
 #else
 INCLUDE_ASM(func_801D2308);
@@ -784,13 +778,11 @@ NON_MATCHING void func_801D27BC(void) {
 INCLUDE_ASM(func_801D27BC);
 #endif
 
-#ifdef NON_MATCHING
-NON_MATCHING s32 func_801D2978(void) {
-    s8  amount;
-    u8  saved[3];
-    u8* green;
-    u8* blue;
-    s8  shade;
+/* Draws the base model with its tint shifted by the vinegar used, then restores the tint. */
+MATCH void func_801D2978(void) {
+    s8 amount;
+    u8 saved[3];
+    s8 shade;
 
     amount = g_ShisuIngredients.used[1] - g_ShisuIngredients.rounds;
     if (amount <= 0) {
@@ -800,33 +792,38 @@ NON_MATCHING s32 func_801D2978(void) {
         amount = 20;
     }
     g_ShisuBaseScale = g_ShisuScales[amount];
-    saved[0]         = g_ShisuBase[0];
-    saved[1]         = g_ShisuBase[1];
-    saved[2]         = g_ShisuBase[2];
+    saved[0]         = g_ShisuBaseR;
+    saved[1]         = g_ShisuBaseG;
+    saved[2]         = g_ShisuBaseB;
     if (0xFF - saved[0] > g_ShisuIngredients.used[2] * 3) {
         shade = saved[0] + g_ShisuIngredients.used[2] * 3;
     } else {
         shade = -1;
     }
-    g_ShisuBase[0] = shade;
-    green          = &g_ShisuBase[1];
-    if (0xFF - *green > g_ShisuIngredients.used[2] * 3) {
-        shade = *green + g_ShisuIngredients.used[2] * 3;
-    } else {
-        shade = -1;
+    g_ShisuBaseR = shade;
+    FAKE_BARRIER(); /* FAKE: keeps the tint store ahead of the next color's address. */
+    {
+        u8* green = &g_ShisuBaseG;
+
+        if (0xFF - *green > g_ShisuIngredients.used[2] * 3) {
+            shade = *green + g_ShisuIngredients.used[2] * 3;
+        } else {
+            shade = -1;
+        }
+        *green = shade;
     }
-    *green = shade;
-    blue   = &g_ShisuBase[2];
-    if (*blue > g_ShisuIngredients.used[2] * 3) {
-        *blue -= g_ShisuIngredients.used[2] * 3;
-    } else {
-        *blue = 0;
+    FAKE_BARRIER(); /* FAKE: keeps the tint store ahead of the next color's address. */
+    {
+        u8* blue = &g_ShisuBaseB;
+
+        if (*blue > g_ShisuIngredients.used[2] * 3) {
+            *blue -= g_ShisuIngredients.used[2] * 3;
+        } else {
+            *blue = 0;
+        }
     }
     func_801D2308(&D_801DA048);
-    g_ShisuBase[0] = saved[0];
-    g_ShisuBase[1] = saved[1];
-    g_ShisuBase[2] = saved[2];
+    g_ShisuBaseR = saved[0];
+    g_ShisuBaseG = saved[1];
+    g_ShisuBaseB = saved[2];
 }
-#else
-INCLUDE_ASM(func_801D2978);
-#endif

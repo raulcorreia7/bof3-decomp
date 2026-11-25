@@ -750,14 +750,14 @@ NON_MATCHING void func_801F0FBC(void) {
             prim = (LINE_F2*)g_GfxPrimCursor;
             SetLineF2(prim);
             PSX_SET_SEMI_TRANSPARENT(prim);
-            g_ScratchPadVectors[0].vx = FIXED_MUL(rcos(i << 6) * 16, radius);
+            g_ScratchPadVectors[0].vx = FIXED_MUL(rcos(i << 6) << 4, radius);
             g_ScratchPadVectors[0].vz = 0;
-            g_ScratchPadVectors[0].vy = FIXED_MUL(rsin(i << 6) * 16, radius);
+            g_ScratchPadVectors[0].vy = FIXED_MUL(rsin(i << 6) << 4, radius);
             RotTransPers(&g_ScratchPadVectors[0], (long*)&prim->x0, &depth, rot_flag);
             i++;
-            g_ScratchPadVectors[0].vx = FIXED_MUL(rcos(i << 6) * 16, radius);
+            g_ScratchPadVectors[0].vx = FIXED_MUL(rcos(i << 6) << 4, radius);
             g_ScratchPadVectors[0].vz = 0;
-            g_ScratchPadVectors[0].vy = FIXED_MUL(rsin(i << 6) * 16, radius);
+            g_ScratchPadVectors[0].vy = FIXED_MUL(rsin(i << 6) << 4, radius);
             RotTransPers(&g_ScratchPadVectors[0], (long*)&prim->x1, &depth, rot_flag);
             setRGB0(prim, shade, shade, shade);
             Area_CellAddPrim(x, y, z, sizeof(LINE_F2));
