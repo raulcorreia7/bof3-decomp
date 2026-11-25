@@ -1,10 +1,9 @@
 #include "engine/slus/slus.h"
 
-/* tests bit 0x10 of the byte at 0x80146824.
- */
+/* true when the drive status of the last command has the shell-open bit. */
 
 MATCH bool SND_XAHasCDError(void) {
-    if ((D_80146824[0] & CdlStatShellOpen) == 0)
+    if ((g_XACdResult[0] & CdlStatShellOpen) == 0)
         return false;
     return true;
 }
