@@ -18,14 +18,14 @@ MATCH void func_801EED18(void) {
     Battle_ProjectRange();
     if (g_Battle.target_selector & BATTLE_TARGET_ENEMY_SIDE) {
         if (g_Battle.active_battler >= BATTLE_PARTY_CHARACTERS_COUNT) {
-            TASK(PartyMember)->facing = D_8014637C->facing;
+            TASK(PartyMember)->facing = g_BattleActiveActor->facing;
         } else {
-            TASK(PartyMember)->facing = D_8014637C->facing ^ 2;
+            TASK(PartyMember)->facing = g_BattleActiveActor->facing ^ 2;
         }
     } else if (g_Battle.active_battler < BATTLE_PARTY_CHARACTERS_COUNT) {
-        TASK(PartyMember)->facing = D_8014637C->facing;
+        TASK(PartyMember)->facing = g_BattleActiveActor->facing;
     } else {
-        TASK(PartyMember)->facing = D_8014637C->facing ^ 2;
+        TASK(PartyMember)->facing = g_BattleActiveActor->facing ^ 2;
     }
     TASK(PartyMember)->param.unk_0B = 0;
     TASK(PartyMember)->unk_09       = 0x10;

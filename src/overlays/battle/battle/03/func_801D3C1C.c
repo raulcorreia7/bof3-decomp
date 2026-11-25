@@ -5,7 +5,7 @@
  */
 MATCH void func_801D3C1C(void) {
     if (EMI_IsReady() != 0) {
-        Battle_AllocActionEffect(g_Battle.action->unk_02, D_8014637C);
+        Battle_AllocActionEffect(g_Battle.action->unk_02, g_BattleActiveActor);
         g_Battle.phase.mode     = BATTLE_MODE_TURNS;
         g_Battle.phase.step     = 2;
         g_Battle.phase.sub_step = 0;

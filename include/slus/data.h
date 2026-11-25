@@ -87,8 +87,8 @@ extern u8                  g_BattleStep;
 extern u8                  g_BattleSubStep;
 /* FAKE: g_Battle.flags as a global of its own; the sites that use it match only with a separate symbol. */
 extern u16                 g_BattleState;
-/* The party member the battle selected: the record its per-turn cells belong to. */
-extern struct PartyMember* D_8014637C;
+/* FAKE: g_Battle.active_actor as a global of its own; the sites that use it match only with a separate symbol. */
+extern struct PartyMember* g_BattleActiveActor;
 /* FAKE: g_Battle.target_selector as a global of its own; the sites that use it match only with a separate symbol. */
 extern volatile u8         g_BattleTargetSelector;
 /* D_80146854 */

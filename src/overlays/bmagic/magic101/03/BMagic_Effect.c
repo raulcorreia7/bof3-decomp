@@ -20,15 +20,15 @@ MATCH void func_801EECCC(void) {
 
     if (g_Battle.target_selector & BATTLE_TARGET_ENEMY_SIDE) {
         if (g_Battle.active_battler < BATTLE_PARTY_CHARACTERS_COUNT) {
-            TASK(PartyMember)->facing = D_8014637C->facing ^ 0x2;
+            TASK(PartyMember)->facing = g_BattleActiveActor->facing ^ 0x2;
         } else {
-            TASK(PartyMember)->facing = D_8014637C->facing;
+            TASK(PartyMember)->facing = g_BattleActiveActor->facing;
         }
     } else {
         if (g_Battle.active_battler < BATTLE_PARTY_CHARACTERS_COUNT) {
-            TASK(PartyMember)->facing = D_8014637C->facing;
+            TASK(PartyMember)->facing = g_BattleActiveActor->facing;
         } else {
-            TASK(PartyMember)->facing = D_8014637C->facing ^ 0x2;
+            TASK(PartyMember)->facing = g_BattleActiveActor->facing ^ 0x2;
         }
     }
     Battle_CenterCamera();

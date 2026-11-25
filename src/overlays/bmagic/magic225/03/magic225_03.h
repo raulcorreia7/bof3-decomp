@@ -30,8 +30,8 @@ void func_801EF7D4(s32 x, s32 y, s32 radius, s32 color);
  * party slots below BATTLE_PARTY_CHARACTERS_COUNT, enemy rows from it. A statement
  * macro: the member declares s32 i. */
 #define BMAGIC_MARK_SELECTED_SIDE(MARK)                                                                 \
-    D_8014637C->unk_29 = (MARK);                                                                        \
-    i                  = 0;                                                                             \
+    g_BattleActiveActor->unk_29 = (MARK);                                                               \
+    i                           = 0;                                                                    \
     if (g_Battle.target_selector & BATTLE_TARGET_ENEMY_SIDE) {                                          \
         do {                                                                                            \
             if (!(Battle_SlotIsBlocked((i + BATTLE_PARTY_CHARACTERS_COUNT) & BYTE_MASK) & BYTE_MASK)) { \

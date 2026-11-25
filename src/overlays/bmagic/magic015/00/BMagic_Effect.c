@@ -502,7 +502,7 @@ MATCH void func_801F0864(void) {
         TASK(PartyMember)->unk_09--;
     }
     Script_AnimStepOnce();
-    func_800AF4A0(D_8014637C, 0x2000, 0);
+    func_800AF4A0(g_BattleActiveActor, 0x2000, 0);
     speed                                 = TASK(PartyMember)->unk_14 + TASK(PartyMember)->unk_20;
     TASK(PartyMember)->unk_14             = speed;
     TASK(PartyMember)->pos.z.part.integer = (u16)TASK(PartyMember)->pos.z.part.integer + speed;
@@ -604,7 +604,7 @@ MATCH void func_801F0F2C(void) {
     u8  timer;
 
     Script_AnimStepOnce();
-    func_800AF4A0(D_8014637C, 0x2000, 0);
+    func_800AF4A0(g_BattleActiveActor, 0x2000, 0);
     speed                                 = TASK(PartyMember)->unk_14 + TASK(PartyMember)->unk_20;
     TASK(PartyMember)->unk_14             = speed;
     TASK(PartyMember)->pos.z.part.integer = (u16)TASK(PartyMember)->pos.z.part.integer + speed;
