@@ -468,51 +468,65 @@ void func_801F823C(s16 x, s16 y, s16 height, s16 width) {
     s16       row;
     s32       half;
     s32       skew;
-    s32       top;
-    u16       v;
+    s16       top;
     u8        i;
-    FAKE_STACK_PADS(u8, 8);
+
     row = height - 1;
-    for (i = 0; i < (height * 2); i++) {
-        half = SquareRoot0((height * height) - (row * row));
+    for (i = 0; i < height * 2; i++) {
+        half = SquareRoot0(height * height - row * row);
         skew = (width * rsin(D_801FE9EC[i])) >> 12;
         prim = (POLY_GT4*)g_GfxPrimCursor;
         row -= 1;
         SetPolyGT4(prim);
         SetSemiTrans(prim, 0);
-        prim->x0    = (prim->x2 = (x - half) + skew);
-        top         = i + (y - height);
-        prim->y0    = (prim->y1 = top);
-        prim->x1    = (prim->x3 = ((x - half) + skew) + half);
-        prim->y2    = (prim->y3 = top + 1);
-        prim->u0    = (prim->u2 = 0x40 - half);
-        prim->u1    = (prim->u3 = 0x40);
-        v           = (i + 0x40) - height;
-        prim->v0    = (prim->v1 = i - (height - 0x40));
-        prim->v2    = (prim->v3 = v + 1);
-        prim->tpage = GetTPage(TPAGE_DEPTH_15BIT, TPAGE_ABR_HALF, 0x340, 0x100);
-        prim->r0 = 0x40, prim->g0 = 0x40, prim->b0 = 0x80;
-        prim->r1 = 0x60, prim->g1 = 0x60, prim->b1 = 0x60;
-        prim->r2 = 0x40, prim->g2 = 0x40, prim->b2 = 0x80;
-        prim->r3 = 0x60, prim->g3 = 0x60, prim->b3 = 0x60;
+        top      = i + (y - height);
+        prim->x2 = prim->x0 = x - half + skew;
+        prim->y1 = prim->y0 = top;
+        prim->x3 = prim->x1 = x - half + skew + half;
+        prim->y3 = prim->y2 = top + 1;
+        prim->u2 = prim->u0 = 0x40 - half;
+        prim->u3 = prim->u1 = 0x40;
+        prim->v1 = prim->v0 = i - (height - 0x40);
+        prim->v3 = prim->v2 = i + 0x40 - height + 1;
+        prim->tpage         = GetTPage(TPAGE_DEPTH_15BIT, TPAGE_ABR_HALF, 0x340, 0x100);
+        prim->g0            = 0x40;
+        prim->r0            = 0x40;
+        prim->b0            = 0x80;
+        prim->b1            = 0x60;
+        prim->g1            = 0x60;
+        prim->r1            = 0x60;
+        prim->g2            = 0x40;
+        prim->r2            = 0x40;
+        prim->b2            = 0x80;
+        prim->b3            = 0x60;
+        prim->g3            = 0x60;
+        prim->r3            = 0x60;
         GFX_AddPrim(GFX_LAYER_EFFECT_FRONT, sizeof(POLY_GT4));
+
         prim = (POLY_GT4*)g_GfxPrimCursor;
         SetPolyGT4(prim);
         SetSemiTrans(prim, 0);
-        prim->y0    = (prim->y1 = top);
-        prim->y2    = (prim->y3 = top + 1);
-        prim->u0    = (prim->u2 = 0);
-        prim->x0    = (prim->x2 = skew);
-        prim->x1    = (prim->x3 = skew + half);
-        prim->v0    = (prim->v1 = ((i + 0x40) - height) - 0x80);
-        skew        = x + skew;
-        prim->u1    = (prim->u3 = half);
-        prim->v2    = (prim->v3 = ((i + 0x40) - height) - 0x7F);
-        prim->tpage = GetTPage(TPAGE_DEPTH_15BIT, TPAGE_ABR_HALF, 0x340, 0x100);
-        prim->r0 = 0x60, prim->g0 = 0x60, prim->b0 = 0x60;
-        prim->r1 = 0x80, prim->g1 = 0x40, prim->b1 = 0x40;
-        prim->r2 = 0x60, prim->g2 = 0x60, prim->b2 = 0x60;
-        prim->r3 = 0x80, prim->g3 = 0x40, prim->b3 = 0x40;
+        prim->y1 = prim->y0 = top;
+        prim->y3 = prim->y2 = top + 1;
+        prim->u2 = prim->u0 = 0;
+        prim->x2 = prim->x0 = x + skew;
+        prim->x3 = prim->x1 = x + skew + half;
+        prim->v1 = prim->v0 = i + 0x40 - height - 0x80;
+        prim->u3 = prim->u1 = half;
+        prim->v3 = prim->v2 = i + 0x40 - height - 0x7F;
+        prim->tpage         = GetTPage(TPAGE_DEPTH_15BIT, TPAGE_ABR_HALF, 0x340, 0x100);
+        prim->b0            = 0x60;
+        prim->g0            = 0x60;
+        prim->r0            = 0x60;
+        prim->r1            = 0x80;
+        prim->b1            = 0x40;
+        prim->g1            = 0x40;
+        prim->b2            = 0x60;
+        prim->g2            = 0x60;
+        prim->r2            = 0x60;
+        prim->r3            = 0x80;
+        prim->b3            = 0x40;
+        prim->g3            = 0x40;
         GFX_AddPrim(GFX_LAYER_EFFECT_FRONT, sizeof(POLY_GT4));
     }
 }
@@ -539,8 +553,8 @@ MATCH void func_801F8534(void) {
     func_801F823C((s16)TASK(Actor)->screen_x, (s16)TASK(Actor)->screen_y, (s16)TASK(Actor)->unk_32, (s16)TASK(Actor)->unk_2C);
 }
 
-#ifdef NON_MATCHING
-NON_MATCHING void func_801F85F0(s16 x, s16 y, s16 radius) {
+/* Draw a 16-slice disc of blended quads around (x, y); the colours keep retail's store order, which setRGB0..3 change. */
+MATCH void func_801F85F0(s16 x, s16 y, s16 radius) {
     POLY_GT4* prim;
     u16       angle;
     s32       a;
@@ -556,8 +570,7 @@ NON_MATCHING void func_801F85F0(s16 x, s16 y, s16 radius) {
         a        = angle;
         prim->x0 = x - ((radius * rcos(a)) >> 12);
         prim->x1 = x;
-        angle += 128;
-        b        = angle;
+        b        = (u16)(angle + 128);
         prim->y0 = prim->y1 = y + ((radius * rsin(a)) >> 12);
         prim->x2            = x - ((radius * rcos(b)) >> 12);
         prim->x3            = x;
@@ -568,10 +581,18 @@ NON_MATCHING void func_801F85F0(s16 x, s16 y, s16 radius) {
         prim->u2            = 63 - ((rcos(b) << 5) >> 12);
         prim->u3            = 63;
         prim->v2 = prim->v3 = 64 + ((rsin(b) << 5) >> 12);
-        setRGB0(prim, 0x40, 0x40, 0x80);
-        setRGB1(prim, 0x60, 0x60, 0x60);
-        setRGB2(prim, 0x40, 0x40, 0x80);
-        setRGB3(prim, 0x60, 0x60, 0x60);
+        prim->b0            = 0x80;
+        prim->g0            = 0x40;
+        prim->r0            = 0x40;
+        prim->b1            = 0x60;
+        prim->g1            = 0x60;
+        prim->r1            = 0x60;
+        prim->g2            = 0x40;
+        prim->r2            = 0x40;
+        prim->b2            = 0x80;
+        prim->b3            = 0x60;
+        prim->g3            = 0x60;
+        prim->r3            = 0x60;
         setTPage(prim, TPAGE_DEPTH_15BIT, TPAGE_ABR_HALF, 0x340, 0x100);
         GFX_AddPrim(GFX_LAYER_EFFECT_FRONT, sizeof(POLY_GT4));
 
@@ -585,23 +606,29 @@ NON_MATCHING void func_801F85F0(s16 x, s16 y, s16 radius) {
         prim->x3            = x + ((radius * rcos(b)) >> 12);
         prim->y2 = prim->y3 = y + ((radius * rsin(b)) >> 12);
         count += 1;
+        angle += 128;
         prim->u0 = 0;
         prim->u1 = (rcos(a) << 5) >> 12;
         prim->v0 = prim->v1 = ((rsin(a) << 5) >> 12) - 64;
         prim->u2            = 0;
         prim->u3            = (rcos(b) << 5) >> 12;
         prim->v2 = prim->v3 = ((rsin(b) << 5) >> 12) - 64;
-        setRGB0(prim, 0x60, 0x60, 0x60);
-        setRGB1(prim, 0x80, 0x40, 0x40);
-        setRGB2(prim, 0x60, 0x60, 0x60);
-        setRGB3(prim, 0x80, 0x40, 0x40);
+        prim->b0            = 0x60;
+        prim->g0            = 0x60;
+        prim->r0            = 0x60;
+        prim->b1            = 0x40;
+        prim->g1            = 0x40;
+        prim->r1            = 0x80;
+        prim->b2            = 0x60;
+        prim->g2            = 0x60;
+        prim->r2            = 0x60;
+        prim->r3            = 0x80;
+        prim->b3            = 0x40;
+        prim->g3            = 0x40;
         setTPage(prim, TPAGE_DEPTH_15BIT, TPAGE_ABR_HALF, 0x340, 0x100);
         GFX_AddPrim(GFX_LAYER_EFFECT_FRONT, sizeof(POLY_GT4));
     } while (count < 16);
 }
-#else
-INCLUDE_ASM(func_801F85F0);
-#endif
 
 #include "shared/GFX_DrawProjectedDisc.h"
 
@@ -1085,7 +1112,7 @@ MATCH void func_801FA3E4(void) {
                 Scene_SetupParty(2);
                 Area_ScrollAdvance(Area_HeightSample(g_AreaScrollTargetX = TO_COORD_HALF(10), g_AreaScrollTargetY = TO_COORD(20)));
                 Area_InitMapRenderer();
-                /* retail passes the flag array twice */
+                /* retail bug: an extra flags argument shifts 20 out, so flag 20 is never set here */
                 ((void (*)(void*, void*, u8))SYS_SetFlag)(g_SceneFlags, g_SceneFlags, 20);
                 g_ScenarioState.state_04 = 10;
                 g_ScenarioState.step     = 10;

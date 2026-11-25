@@ -14,52 +14,52 @@ MATCH void SND_SEPlay(u16 se_id) {
     if (g_SndSeUseVolume == 0x80) {
         switch (g_SndSeLayers) {
             case 3:
-                scaled = D_8018B39C * (g_SndSeUseVolume - D_8018B3A4);
+                scaled = g_SndSeVoice3VolumeL * (g_SndSeUseVolume - g_SndSeVoice3Pan);
                 if (scaled < 0) {
                     scaled += 0x7F;
                 }
-                next       = D_8018B3A0 * D_8018B3A4;
-                D_8018B39C = scaled >> 7;
+                next                 = g_SndSeVoice3VolumeR * g_SndSeVoice3Pan;
+                g_SndSeVoice3VolumeL = scaled >> 7;
                 if (next < 0) {
                     next += 0x7F;
                 }
-                D_8018B3A0 = next >> 7;
+                g_SndSeVoice3VolumeR = next >> 7;
                 /* fall through */
             case 2:
-                scaled = D_8018B374 * (0x80 - D_8018B37C);
+                scaled = g_SndSeVoice2VolumeL * (0x80 - g_SndSeVoice2Pan);
                 if (scaled < 0) {
                     scaled += 0x7F;
                 }
-                next       = D_8018B378 * D_8018B37C;
-                D_8018B374 = scaled >> 7;
+                next                 = g_SndSeVoice2VolumeR * g_SndSeVoice2Pan;
+                g_SndSeVoice2VolumeL = scaled >> 7;
                 if (next < 0) {
                     next += 0x7F;
                 }
-                D_8018B378 = next >> 7;
+                g_SndSeVoice2VolumeR = next >> 7;
                 /* fall through */
             case 1:
-                scaled = D_8018B34C * (0x80 - D_8018B354);
+                scaled = g_SndSeVoice1VolumeL * (0x80 - g_SndSeVoice1Pan);
                 if (scaled < 0) {
                     scaled += 0x7F;
                 }
-                next       = D_8018B350 * D_8018B354;
-                D_8018B34C = scaled >> 7;
+                next                 = g_SndSeVoice1VolumeR * g_SndSeVoice1Pan;
+                g_SndSeVoice1VolumeL = scaled >> 7;
                 if (next < 0) {
                     next += 0x7F;
                 }
-                D_8018B350 = next >> 7;
+                g_SndSeVoice1VolumeR = next >> 7;
                 /* fall through */
             case 0:
-                scaled = D_8018B324 * (0x80 - D_8018B32C);
+                scaled = g_SndSeVoice0VolumeL * (0x80 - g_SndSeVoice0Pan);
                 if (scaled < 0) {
                     scaled += 0x7F;
                 }
-                next       = D_8018B328 * D_8018B32C;
-                D_8018B324 = scaled >> 7;
+                next                 = g_SndSeVoice0VolumeR * g_SndSeVoice0Pan;
+                g_SndSeVoice0VolumeL = scaled >> 7;
                 if (next < 0) {
                     next += 0x7F;
                 }
-                D_8018B328 = next >> 7;
+                g_SndSeVoice0VolumeR = next >> 7;
                 break;
         }
 
@@ -83,32 +83,36 @@ MATCH void SND_SEPlay(u16 se_id) {
             return;
         }
     initial_mode3:
-        D_8018B394 = SsUtKeyOnV(D_8018B390, D_8018B30C, D_8018B380, D_8018B388, D_8018B38C, D_8018B398, D_8018B39C, D_8018B3A0);
+        g_SndSeVoice3KeyedVoice =
+            SsUtKeyOnV(g_SndSeVoice3SpuVoice, g_SndSeVabId, g_SndSeVoice3Program, g_SndSeVoice3Tone, g_SndSeVoice3Note, g_SndSeVoice3Fine, g_SndSeVoice3VolumeL, g_SndSeVoice3VolumeR);
         if (g_SndSeUseVolume == 0x80) {
-            SsUtSetDetVVol(D_8018B394, g_SndSeVolumeL, g_SndSeVolumeR);
+            SsUtSetDetVVol(g_SndSeVoice3KeyedVoice, g_SndSeVolumeL, g_SndSeVolumeR);
         }
     initial_mode2:
-        D_8018B36C = SsUtKeyOnV(D_8018B368, D_8018B30C, D_8018B358, D_8018B360, D_8018B364, D_8018B370, D_8018B374, D_8018B378);
+        g_SndSeVoice2KeyedVoice =
+            SsUtKeyOnV(g_SndSeVoice2SpuVoice, g_SndSeVabId, g_SndSeVoice2Program, g_SndSeVoice2Tone, g_SndSeVoice2Note, g_SndSeVoice2Fine, g_SndSeVoice2VolumeL, g_SndSeVoice2VolumeR);
         if (g_SndSeUseVolume == 0x80) {
-            SsUtSetDetVVol(D_8018B36C, g_SndSeVolumeL, g_SndSeVolumeR);
+            SsUtSetDetVVol(g_SndSeVoice2KeyedVoice, g_SndSeVolumeL, g_SndSeVolumeR);
         }
     initial_mode1:
-        D_8018B344 = SsUtKeyOnV(D_8018B340, D_8018B30C, D_8018B330, D_8018B338, D_8018B33C, D_8018B348, D_8018B34C, D_8018B350);
+        g_SndSeVoice1KeyedVoice =
+            SsUtKeyOnV(g_SndSeVoice1SpuVoice, g_SndSeVabId, g_SndSeVoice1Program, g_SndSeVoice1Tone, g_SndSeVoice1Note, g_SndSeVoice1Fine, g_SndSeVoice1VolumeL, g_SndSeVoice1VolumeR);
         if (g_SndSeUseVolume == 0x80) {
-            SsUtSetDetVVol(D_8018B344, g_SndSeVolumeL, g_SndSeVolumeR);
+            SsUtSetDetVVol(g_SndSeVoice1KeyedVoice, g_SndSeVolumeL, g_SndSeVolumeR);
         }
     initial_mode0:
-        D_8018B31C = SsUtKeyOnV(D_8018B318, D_8018B30C, D_8018B308, D_8018B310, D_8018B314, D_8018B320, D_8018B324, D_8018B328);
+        g_SndSeVoice0KeyedVoice =
+            SsUtKeyOnV(g_SndSeVoice0SpuVoice, g_SndSeVabId, g_SndSeVoice0Program, g_SndSeVoice0Tone, g_SndSeVoice0Note, g_SndSeVoice0Fine, g_SndSeVoice0VolumeL, g_SndSeVoice0VolumeR);
         if (g_SndSeUseVolume == 0x80) {
-            SsUtSetDetVVol(D_8018B31C, g_SndSeVolumeL, g_SndSeVolumeR);
+            SsUtSetDetVVol(g_SndSeVoice0KeyedVoice, g_SndSeVolumeL, g_SndSeVolumeR);
         }
     initial_done:
         D_8018232A           = -1;
-        g_SndSeLastVoice     = D_8018B318;
+        g_SndSeLastVoice     = g_SndSeVoice0SpuVoice;
         g_SndSeLastRetrigger = g_SndSeRetrigger;
         goto queue_done;
     } else {
-        if (g_SndSeLastVoice != D_8018B318) {
+        if (g_SndSeLastVoice != g_SndSeVoice0SpuVoice) {
             if (g_SndSeLayers == 1) {
                 goto queue_standard1;
             }
@@ -135,24 +139,28 @@ MATCH void SND_SEPlay(u16 se_id) {
     }
 
 queue_special3:
-    D_8018B394 = SsUtKeyOnV(D_8018B390, D_8018B30C, D_8018B380, D_8018B388, D_8018B38C, D_8018B398, D_8018B39C, D_8018B3A0);
+    g_SndSeVoice3KeyedVoice =
+        SsUtKeyOnV(g_SndSeVoice3SpuVoice, g_SndSeVabId, g_SndSeVoice3Program, g_SndSeVoice3Tone, g_SndSeVoice3Note, g_SndSeVoice3Fine, g_SndSeVoice3VolumeL, g_SndSeVoice3VolumeR);
     if (g_SndSeUseVolume == 0x80) {
-        SsUtSetDetVVol(D_8018B394, g_SndSeVolumeL, g_SndSeVolumeR);
+        SsUtSetDetVVol(g_SndSeVoice3KeyedVoice, g_SndSeVolumeL, g_SndSeVolumeR);
     }
 queue_special2:
-    D_8018B36C = SsUtKeyOnV(D_8018B368, D_8018B30C, D_8018B358, D_8018B360, D_8018B364, D_8018B370, D_8018B374, D_8018B378);
+    g_SndSeVoice2KeyedVoice =
+        SsUtKeyOnV(g_SndSeVoice2SpuVoice, g_SndSeVabId, g_SndSeVoice2Program, g_SndSeVoice2Tone, g_SndSeVoice2Note, g_SndSeVoice2Fine, g_SndSeVoice2VolumeL, g_SndSeVoice2VolumeR);
     if (g_SndSeUseVolume == 0x80) {
-        SsUtSetDetVVol(D_8018B36C, g_SndSeVolumeL, g_SndSeVolumeR);
+        SsUtSetDetVVol(g_SndSeVoice2KeyedVoice, g_SndSeVolumeL, g_SndSeVolumeR);
     }
 queue_special1:
-    D_8018B344 = SsUtKeyOnV(D_8018B340, D_8018B30C, D_8018B330, D_8018B338, D_8018B33C, D_8018B348, D_8018B34C, D_8018B350);
+    g_SndSeVoice1KeyedVoice =
+        SsUtKeyOnV(g_SndSeVoice1SpuVoice, g_SndSeVabId, g_SndSeVoice1Program, g_SndSeVoice1Tone, g_SndSeVoice1Note, g_SndSeVoice1Fine, g_SndSeVoice1VolumeL, g_SndSeVoice1VolumeR);
     if (g_SndSeUseVolume == 0x80) {
-        SsUtSetDetVVol(D_8018B344, g_SndSeVolumeL, g_SndSeVolumeR);
+        SsUtSetDetVVol(g_SndSeVoice1KeyedVoice, g_SndSeVolumeL, g_SndSeVolumeR);
     }
 queue_special0:
-    D_8018B31C = SsUtKeyOnV(D_8018B318, D_8018B30C, D_8018B308, D_8018B310, D_8018B314, D_8018B320, D_8018B324, D_8018B328);
+    g_SndSeVoice0KeyedVoice =
+        SsUtKeyOnV(g_SndSeVoice0SpuVoice, g_SndSeVabId, g_SndSeVoice0Program, g_SndSeVoice0Tone, g_SndSeVoice0Note, g_SndSeVoice0Fine, g_SndSeVoice0VolumeL, g_SndSeVoice0VolumeR);
     if (g_SndSeUseVolume == 0x80) {
-        SsUtSetDetVVol(D_8018B31C, g_SndSeVolumeR, g_SndSeVolumeR);
+        SsUtSetDetVVol(g_SndSeVoice0KeyedVoice, g_SndSeVolumeR, g_SndSeVolumeR);
     }
     goto queue_update; /* shared active-SE update */
 
@@ -186,27 +194,31 @@ queue_standard23:
         return;
     }
 queue_standard3:
-    D_8018B394 = SsUtKeyOnV(D_8018B390, D_8018B30C, D_8018B380, D_8018B388, D_8018B38C, D_8018B398, D_8018B39C, D_8018B3A0);
+    g_SndSeVoice3KeyedVoice =
+        SsUtKeyOnV(g_SndSeVoice3SpuVoice, g_SndSeVabId, g_SndSeVoice3Program, g_SndSeVoice3Tone, g_SndSeVoice3Note, g_SndSeVoice3Fine, g_SndSeVoice3VolumeL, g_SndSeVoice3VolumeR);
     if (g_SndSeUseVolume == 0x80) {
-        SsUtSetDetVVol(D_8018B394, g_SndSeVolumeL, g_SndSeVolumeR);
+        SsUtSetDetVVol(g_SndSeVoice3KeyedVoice, g_SndSeVolumeL, g_SndSeVolumeR);
     }
 queue_standard2:
-    D_8018B36C = SsUtKeyOnV(D_8018B368, D_8018B30C, D_8018B358, D_8018B360, D_8018B364, D_8018B370, D_8018B374, D_8018B378);
+    g_SndSeVoice2KeyedVoice =
+        SsUtKeyOnV(g_SndSeVoice2SpuVoice, g_SndSeVabId, g_SndSeVoice2Program, g_SndSeVoice2Tone, g_SndSeVoice2Note, g_SndSeVoice2Fine, g_SndSeVoice2VolumeL, g_SndSeVoice2VolumeR);
     if (g_SndSeUseVolume == 0x80) {
-        SsUtSetDetVVol(D_8018B36C, g_SndSeVolumeL, g_SndSeVolumeR);
+        SsUtSetDetVVol(g_SndSeVoice2KeyedVoice, g_SndSeVolumeL, g_SndSeVolumeR);
     }
 queue_standard1:
-    D_8018B344 = SsUtKeyOnV(D_8018B340, D_8018B30C, D_8018B330, D_8018B338, D_8018B33C, D_8018B348, D_8018B34C, D_8018B350);
+    g_SndSeVoice1KeyedVoice =
+        SsUtKeyOnV(g_SndSeVoice1SpuVoice, g_SndSeVabId, g_SndSeVoice1Program, g_SndSeVoice1Tone, g_SndSeVoice1Note, g_SndSeVoice1Fine, g_SndSeVoice1VolumeL, g_SndSeVoice1VolumeR);
     if (g_SndSeUseVolume == 0x80) {
-        SsUtSetDetVVol(D_8018B344, g_SndSeVolumeL, g_SndSeVolumeR);
+        SsUtSetDetVVol(g_SndSeVoice1KeyedVoice, g_SndSeVolumeL, g_SndSeVolumeR);
     }
 queue_standard0:
-    D_8018B31C = SsUtKeyOnV(D_8018B318, D_8018B30C, D_8018B308, D_8018B310, D_8018B314, D_8018B320, D_8018B324, D_8018B328);
+    g_SndSeVoice0KeyedVoice =
+        SsUtKeyOnV(g_SndSeVoice0SpuVoice, g_SndSeVabId, g_SndSeVoice0Program, g_SndSeVoice0Tone, g_SndSeVoice0Note, g_SndSeVoice0Fine, g_SndSeVoice0VolumeL, g_SndSeVoice0VolumeR);
     if (g_SndSeUseVolume == 0x80) {
-        SsUtSetDetVVol(D_8018B31C, g_SndSeVolumeL, g_SndSeVolumeR);
+        SsUtSetDetVVol(g_SndSeVoice0KeyedVoice, g_SndSeVolumeL, g_SndSeVolumeR);
     }
 queue_update:
-    g_SndSeLastVoice     = D_8018B318;
+    g_SndSeLastVoice     = g_SndSeVoice0SpuVoice;
     g_SndSeLastRetrigger = g_SndSeRetrigger;
 queue_done:;
 }
