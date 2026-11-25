@@ -631,7 +631,7 @@ void func_801D6EC4(void);
 void func_801D6F08(void);
 void func_801D6F34(void);
 void func_801D72E4(s16 panel_x, s16 panel_y);
-void func_801D7784(u16 list_x, u16 list_y);
+void func_801D7784(s16 list_x, s16 list_y);
 /* func_801D799C */
 void Fishing_DrawWindowFill(s16 x, s16 y, u8 height, u8 style);
 void func_801D7B64(void);

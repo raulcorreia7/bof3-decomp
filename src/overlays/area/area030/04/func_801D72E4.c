@@ -10,7 +10,8 @@ NON_MATCHING void func_801D72E4(s16 panel_x, s16 panel_y) {
     u8  bar_count;
     u8  bar_slot;
     s16 bar_y;
-    s16 bar_x;
+    s16 row_y;
+    s32 offset;
     s32 count;
     s32 scroll_pos;
     s32 member;
@@ -27,9 +28,7 @@ NON_MATCHING void func_801D72E4(s16 panel_x, s16 panel_y) {
                 TASK(FishingState)->bounce.half.key = (s16)TASK(FishingState)->bounce.half.unk_3C;
             }
             if ((s8)TASK(FishingState)->counter_08 > 0) {
-                scroll_pos                       = TASK(FishingState)->bounce_speed - 1;
-                TASK(FishingState)->bounce_speed = scroll_pos;
-                if (scroll_pos < 0) {
+                if (--TASK(FishingState)->bounce_speed < 0) {
                     TASK(FishingState)->bounce_speed = 0x35;
                 }
             }
@@ -47,10 +46,9 @@ NON_MATCHING void func_801D72E4(s16 panel_x, s16 panel_y) {
                 g_SpawnedActors[member].header.mode  = 0x10;
                 g_SpawnedActors[member].header.step  = (u8)TASK(FishingState)->bounce.half.key;
             } else {
-                scroll_pos = scroll_pos - 1;
                 if ((s8)TASK(FishingState)->counter_08 > 0) {
-                    TASK(FishingState)->bounce_speed = scroll_pos;
-                    if (scroll_pos < 0) {
+                    TASK(FishingState)->bounce_speed = scroll_pos - 1;
+                    if (TASK(FishingState)->bounce_speed < 0) {
                         TASK(FishingState)->bounce_speed = 0x35;
                     }
                 }
@@ -61,9 +59,7 @@ NON_MATCHING void func_801D72E4(s16 panel_x, s16 panel_y) {
             if (TASK(FishingState)->step_index == 4) {
                 TASK(FishingState)->step_index = 0U;
                 if ((s8)TASK(FishingState)->counter_08 < 0) {
-                    scroll_pos                       = TASK(FishingState)->bounce_speed + 1;
-                    TASK(FishingState)->bounce_speed = scroll_pos;
-                    if (scroll_pos >= 0x36) {
+                    if (++TASK(FishingState)->bounce_speed >= 0x36) {
                         TASK(FishingState)->bounce_speed = 0;
                     }
                 }
@@ -71,12 +67,14 @@ NON_MATCHING void func_801D72E4(s16 panel_x, s16 panel_y) {
         }
     }
     bar_slot = (u8)TASK(FishingState)->step_index;
-    bar_y    = panel_y + 25;
+    row_y    = panel_y + 25;
     if (bar_slot != 0) {
         if (TASK(FishingState)->counter_08 == 1) {
-            bar_y = (s16)(panel_y + ((bar_slot * 3) + 12));
+            offset = bar_slot * 3 + 12;
+            row_y  = panel_y + offset;
         } else {
-            bar_y = (s16)(panel_y - ((bar_slot * 3) - 25));
+            offset = bar_slot * 3 - 25;
+            row_y  = panel_y - offset;
         }
         bar_count = 10;
     } else {
@@ -85,11 +83,11 @@ NON_MATCHING void func_801D72E4(s16 panel_x, s16 panel_y) {
     bar_index = (u8)TASK(FishingState)->bounce_speed;
     count     = 0;
     if (bar_count != 0) {
-        bar_x = (s16)(panel_x + 6);
+        bar_y = row_y;
         do {
             value = D_801E2120[bar_index & BYTE_MASK];
             if (value != 0xFFFF) {
-                UI_TextDraw(bar_x, bar_y, 0, TEXT_LENGTH_MAX, MESSAGE_TABLE_TEXT(AREA_MESSAGE_TABLE, value));
+                UI_TextDraw(panel_x + 6, bar_y, 0, TEXT_LENGTH_MAX, MESSAGE_TABLE_TEXT(AREA_MESSAGE_TABLE, value));
             }
             bar_index += 1;
             if ((u32)(bar_index & BYTE_MASK) >= 0x36U) {
@@ -99,13 +97,12 @@ NON_MATCHING void func_801D72E4(s16 panel_x, s16 panel_y) {
             bar_y += 13;
         } while (count < bar_count);
     }
-    UI_WindowDraw(panel_x & HALF_MASK, (panel_y + 6) & HALF_MASK, 242, 14, 0, (s32)g_WindowStyle);
-    UI_WindowDraw(panel_x & HALF_MASK, (panel_y + 148) & HALF_MASK, 242, 11, UI_WINDOW_OPEN_BOTTOM_LEFT | UI_WINDOW_OPEN_BOTTOM_RIGHT, (s32)g_WindowStyle);
-    health = TASK(FishingState)->bounce.half.unk_3C;
-    UI_TextDraw((s16)(panel_x + 61), (s16)(panel_y + 6), 0, TEXT_LENGTH_MAX, MESSAGE_TABLE_TEXT(AREA_MESSAGE_TABLE, D_801E2114[health]));
-    func_801D7784((u16)panel_x, (u16)panel_y);
+    UI_WindowDraw(panel_x & HALF_MASK, (panel_y + 6) & HALF_MASK, 242, 14, 0, CHARACTER_BLOCK->window_style);
+    UI_WindowDraw(panel_x & HALF_MASK, (panel_y + 148) & HALF_MASK, 242, 11, UI_WINDOW_OPEN_BOTTOM_LEFT | UI_WINDOW_OPEN_BOTTOM_RIGHT, CHARACTER_BLOCK->window_style);
+    UI_TextDraw((s16)(panel_x + 61), (s16)(panel_y + 6), 0, TEXT_LENGTH_MAX, MESSAGE_TABLE_TEXT(AREA_MESSAGE_TABLE, D_801E2114[TASK(FishingState)->bounce.half.unk_3C]));
+    func_801D7784(panel_x, panel_y);
     text = (u8*)g_UiTextFormatBuffer;
-    TEXT_Format(text, D_801D0C08, health + 1);
+    TEXT_Format(text, D_801D0C08, TASK(FishingState)->bounce.half.unk_3C + 1);
     UI_TextDrawGlyphString((s16)(panel_x + 202), (s16)(panel_y + 146), 0U, text);
 }
 #else
