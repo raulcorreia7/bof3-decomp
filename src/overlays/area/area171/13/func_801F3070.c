@@ -23,7 +23,7 @@ NON_MATCHING void func_801F3070(s32 mode) {
         SetShadeTex(prim, 0);
         y                         = ((TASK(Actor)->pos.y.part.integer - 0x7F) << 7) + (TASK(Actor)->screen_y * (s8)D_801F3F84[i] + 0x40);
         g_ScratchPadVectors[0].vy = g_ScratchPadVectors[2].vy = y;
-        y1                        = ((TASK(Actor)->pos.y.part.integer - 0x80) << 7) + (TASK(Actor)->screen_y * (s8)D_801F3F84[i] - 0x40);
+        y1                                                    = ((TASK(Actor)->pos.y.part.integer - 0x80) << 7) + (TASK(Actor)->screen_y * (s8)D_801F3F84[i] - 0x40);
         g_ScratchPadVectors[1].vy = g_ScratchPadVectors[3].vy = y1;
 
         if (mode != 0) {
