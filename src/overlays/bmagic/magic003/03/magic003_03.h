@@ -16,7 +16,7 @@ typedef enum SuperComboMode {
     SUPER_COMBO_MODE_SHOW_HIT_COUNT,
     SUPER_COMBO_MODE_START_ATTACK,
     SUPER_COMBO_MODE_END_ATTACK,
-    SUPER_COMBO_MODE_FINISH
+    SUPER_COMBO_MODE_END
 } SuperComboMode;
 
 /* The most prompts the combo gives. */
@@ -68,7 +68,6 @@ extern u8                       D_801F0B04[];
 void                            BMagic_SuperComboDrawButton(s32 button);
 
 /* A palette fade colour per row: the signed red, green and blue steps. */
-/* g_BMagicSuperComboImageTints */
 /* D_801F0A78 */
 extern ColorDelta8 g_BMagicSuperComboImageTints[];
 
@@ -89,11 +88,11 @@ extern BattleEffect D_801F0B38[];
 #define BMAGIC_EFFECT_SLOTS D_801F0B38
 #define BMAGIC_EFFECT_COUNT 32
 
-/* func_801F0164 */
-void BMagic_SuperComboDrawLabel(s32 label_index);
-
 /* func_801F0078 */
 void BMagic_SuperComboSpawnHitImages(void);
+
+/* func_801F0164 */
+void BMagic_SuperComboDrawLabel(s32 label_index);
 /* func_801F0550 */
 void BMagic_SuperComboDrawHitCount(s32 hits);
 /* func_801F07B0 */

@@ -159,7 +159,7 @@ MATCH void BMagic_SuperComboEndAttack(void) {
 }
 
 /* func_801EF268 */
-MATCH void BMagic_SuperComboFinish(void) {
+MATCH void BMagic_SuperComboEnd(void) {
     SND_SEQueueSelection(258);
     g_Battle.unk_EF[7] = TASK(PartyMember)->timer;
     Battle_MarkDamaged(g_BattleTargetSelector);
