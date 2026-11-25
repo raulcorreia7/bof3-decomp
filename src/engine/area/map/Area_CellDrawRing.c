@@ -52,7 +52,6 @@ NON_MATCHING s32 Area_CellDrawRing(void) {
     s32       sword;
     s8*       below;
     u8*       low_min;
-    SVECTOR*  vert;
 
     Area_CellResetPacketLists();
     tilt                  = g_AreaCameraAngle.vz - 0x200;
@@ -90,7 +89,6 @@ NON_MATCHING s32 Area_CellDrawRing(void) {
     grid_row      = g_AreaGridRowCursor;
     D_80149341    = SCRATCH(s32, 0xC);
     low_min       = SCRATCH_AT(u8, 0);
-    vert          = g_ScratchPadVectors;
     do {
         next_row = 0;
         if (grid_row != 0x37) {
@@ -117,11 +115,11 @@ NON_MATCHING s32 Area_CellDrawRing(void) {
                     Area_CellReleasePrims(cell);
                     D_8014933A |= 1;
                 } else {
-                    vert->vx   = (cell->tile_x << 7) - (AREA_CELL_ORIGIN + AREA_CELL_HALF);
-                    vert->vy   = (cell->tile_y << 7) - (AREA_CELL_ORIGIN + AREA_CELL_HALF);
-                    rec        = (s8*)((MAP_BUNDLE_BASE + 0x30) + cell->tile_y * *map_width_ptr * 4 + cell->tile_x * 4);
-                    D_1F800010 = rec;
-                    vert->vz   = -(rec[0] * 0x10);
+                    g_ScratchPadVectors[0].vx = (cell->tile_x << 7) - (AREA_CELL_ORIGIN + AREA_CELL_HALF);
+                    g_ScratchPadVectors[0].vy = (cell->tile_y << 7) - (AREA_CELL_ORIGIN + AREA_CELL_HALF);
+                    rec                       = (s8*)((MAP_BUNDLE_BASE + 0x30) + cell->tile_y * *map_width_ptr * 4 + cell->tile_x * 4);
+                    D_1F800010                = rec;
+                    g_ScratchPadVectors[0].vz = -(rec[0] * 0x10);
                     gte_ldv0(&g_ScratchPadVectors[0]);
                     gte_rtps();
                     gte_stsxy(&D_1F800034[0]);
@@ -206,19 +204,19 @@ NON_MATCHING s32 Area_CellDrawRing(void) {
                             gte_stsxy3((s32*)&prim[g_GfxBufferIndex].x1, (s32*)&prim[g_GfxBufferIndex].x2, (s32*)&prim[g_GfxBufferIndex].x3);
                             v16 = g_AreaCellPrims[s2][1].pad1;
                             if (v16 != 0) {
-                                link             = &g_AreaCellPrims[v16][g_GfxBufferIndex];
-                                *(u32*)&link->x0 = *(u32*)&pkt2->x3;
-                                *(u32*)&link->x1 = *(u32*)&pkt2->x1;
-                                x                = (cell->tile_x << 7) - (AREA_CELL_ORIGIN - AREA_CELL_HALF);
-                                vert[0].vx       = x;
-                                y                = (cell->tile_y - 0x80) << 7;
-                                vert[0].vy       = y - AREA_CELL_HALF;
-                                rec              = (s8*)((MAP_BUNDLE_BASE + 0x34) + cell->tile_y * g_AreaMapBundle.width * 4 + cell->tile_x * 4);
-                                D_1F800010       = rec;
-                                vert[1].vx       = x;
-                                vert[1].vy       = y + AREA_CELL_HALF;
-                                vert[0].vz       = -(rec[0] * 0x10);
-                                vert[1].vz       = -((s8) * (u16*)(rec + 2) * 0x10);
+                                link                      = &g_AreaCellPrims[v16][g_GfxBufferIndex];
+                                *(u32*)&link->x0          = *(u32*)&pkt2->x3;
+                                *(u32*)&link->x1          = *(u32*)&pkt2->x1;
+                                x                         = (cell->tile_x << 7) - (AREA_CELL_ORIGIN - AREA_CELL_HALF);
+                                g_ScratchPadVectors[0].vx = x;
+                                y                         = (cell->tile_y - 0x80) << 7;
+                                g_ScratchPadVectors[0].vy = y - AREA_CELL_HALF;
+                                rec                       = (s8*)((MAP_BUNDLE_BASE + 0x34) + cell->tile_y * g_AreaMapBundle.width * 4 + cell->tile_x * 4);
+                                D_1F800010                = rec;
+                                g_ScratchPadVectors[1].vx = x;
+                                g_ScratchPadVectors[1].vy = y + AREA_CELL_HALF;
+                                g_ScratchPadVectors[0].vz = -(rec[0] * 0x10);
+                                g_ScratchPadVectors[1].vz = -((s8) * (u16*)(rec + 2) * 0x10);
                                 gte_ldv3c(&g_ScratchPadVectors[0]);
                                 LINK_PACKET(s6, g_GfxBufferIndex + (((cell->prim_slot >> 0xC) & 2) ^ 2), link);
                                 gte_rtpt();
@@ -230,14 +228,14 @@ NON_MATCHING s32 Area_CellDrawRing(void) {
                                 *(u32*)&link->x0           = *(u32*)&pkt2->x2;
                                 *(u32*)&link->x1           = *(u32*)&pkt2->x3;
                                 x                          = (cell->tile_x - 0x80) << 7;
-                                vert[0].vx                 = x - AREA_CELL_HALF;
+                                g_ScratchPadVectors[0].vx  = x - AREA_CELL_HALF;
                                 y                          = (cell->tile_y << 7) - (AREA_CELL_ORIGIN - AREA_CELL_HALF);
-                                vert[0].vy                 = y;
+                                g_ScratchPadVectors[0].vy  = y;
                                 rec                        = (s8*)((MAP_BUNDLE_BASE + 0x30) + (cell->tile_y + 1) * g_AreaMapBundle.width * 4 + cell->tile_x * 4);
                                 D_1F800010                 = rec;
-                                vert[1].vx                 = x + AREA_CELL_HALF;
+                                g_ScratchPadVectors[1].vx  = x + AREA_CELL_HALF;
                                 g_ScratchPad.vectors[1].vy = y;
-                                vert[0].vz                 = -(rec[0] * 0x10);
+                                g_ScratchPadVectors[0].vz  = -(rec[0] * 0x10);
                                 g_ScratchPad.vectors[1].vz = -(((*(s32*)rec << 0x10) >> 0x18) * 0x10);
                                 gte_ldv3c(&g_ScratchPadVectors[0]);
                                 LINK_PACKET(s6, g_GfxBufferIndex + (((cell->prim_slot >> 0xB) & 2) ^ 2), link);
