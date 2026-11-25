@@ -13,8 +13,8 @@ MATCH void EMI_ArchiveStart(void) {
     lba                   = g_EmiSectorCursor;
     g_EmiStreamIdleFrames = 0;
     CdIntToPos(lba, (CdlLOC*)(&g_EmiStreamState + 0x2E4));
-    D_80146492      = 3;
-    g_EmiReadStatus = 0;
-    state           = D_8014648B;
-    g_CdState       = state == 1 ? CD_STATE_PAUSE : CD_STATE_SET_SPEED;
+    g_EmiSeekRetries = 3;
+    g_EmiReadStatus  = 0;
+    state            = D_8014648B;
+    g_CdState        = state == 1 ? CD_STATE_PAUSE : CD_STATE_SET_SPEED;
 }
