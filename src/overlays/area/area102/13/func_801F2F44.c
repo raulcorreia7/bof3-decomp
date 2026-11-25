@@ -3,6 +3,7 @@
 /* Draws eight stacked, widening quads over the task's cell, swaying with the frame count. */
 MATCH void func_801F2F44(s32 steps) {
     POLY_FT4* prim;
+    /* FAKE: retail keeps the scratchpad vector base in s7; a plain pointer or direct members move every saved register. */
     FAKE_REG(SVECTOR*, corners, "s7");
     s16* out;
     long p;
