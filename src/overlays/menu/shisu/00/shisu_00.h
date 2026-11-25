@@ -136,11 +136,11 @@ void        UI_ListDrawAbilityRow(s32 x, s32 y, u8 shade, u8 element, u8* name, 
 /* func_801AF494 */
 extern void func_801D1D1C(void);
 extern void func_801D1E34(void);
-void        func_801D4158(s16 x, s16 y, u8 index, u8 flag);
 extern void func_801D2978(void);
 extern void func_801D2ADC(void);
 extern void func_801D2C0C(void);
 extern void func_801D2DA8(void);
+void        func_801D4158(s16 x, s16 y, u8 index, u8 flag);
 extern void Menu_DrawIcon(u16 sprite_x, u16 sprite_y, u8 icon_column, u8 shade_mode);
 extern void Menu_DrawCommandRow(s16 x, s16 y, u8 row, u8 selected, s32 unused);
 void        Menu_DrawHeaderBar(s32 x, s32 y, s32 width, s32 height, u8 window_style);
