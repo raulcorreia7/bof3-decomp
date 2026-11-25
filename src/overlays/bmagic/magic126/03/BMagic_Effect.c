@@ -4,49 +4,51 @@
 __asm__(".include \"include/match/macro.inc\"\n");
 #endif
 
-MATCH void func_801EEC04(void) {
-    PartyMember* saved;
-    PartyMember* swap;
-    s32          count;
+/* func_801EEC04 */
+MATCH void BMagic_ShadowBreathUpdate(void) {
+    PartyMember* saved_battler;
+    PartyMember* mote_battler;
+    s32          i;
 
-    BMagic_DispatchTaskPair(func_801EECE4, Effect_MarkDamagedOnZeroTick);
-    count = 0;
+    BMagic_DispatchTaskPair(BMagic_ShadowBreathInit, Effect_MarkDamagedOnZeroTick);
+    i = 0;
     do {
-        if (D_801F12BC[(u8)count].header.flags & 0x1) {
-            saved                 = g_BattleEffectBattler;
-            swap                  = D_801F12BC[(u8)count].battler;
-            D_801F22BC            = &D_801F12BC[(u8)count];
-            g_BattleEffectBattler = swap;
-            func_801F091C();
-            g_BattleEffectBattler = saved;
+        if (g_BMagicShadowBreathMotes[(u8)i].header.flags & BMAGIC_EFFECT_IN_USE) {
+            saved_battler            = g_BattleEffectBattler;
+            mote_battler             = g_BMagicShadowBreathMotes[(u8)i].battler;
+            g_BMagicShadowBreathMote = &g_BMagicShadowBreathMotes[(u8)i];
+            g_BattleEffectBattler    = mote_battler;
+            BMagic_ShadowBreathMoteDispatch();
+            g_BattleEffectBattler = saved_battler;
         }
-        count += 1;
-    } while ((u8)count < 128);
+        i += 1;
+    } while ((u8)i < BMAGIC_EFFECT_COUNT);
 }
 
-MATCH void func_801EECE4(void) {
+/* func_801EECE4 */
+MATCH void BMagic_ShadowBreathInit(void) {
     u16 i;
     u8  slot;
 
-    for (i = 0; i < 128; i++) {
-        D_801F12BC[i].header.flags = 0;
-        D_801F12BC[i].header.mode  = 0;
-        D_801F12BC[i].header.step  = 0;
+    for (i = 0; i < BMAGIC_EFFECT_COUNT; i++) {
+        g_BMagicShadowBreathMotes[i].header.flags = 0;
+        g_BMagicShadowBreathMotes[i].header.mode  = 0;
+        g_BMagicShadowBreathMotes[i].header.step  = 0;
     }
     Battle_CenterCamera();
     Battle_ProjectRange();
     TASK(PartyMember)->param.unk_0B = 0;
     TASK(PartyMember)->unk_09       = 0;
     TASK(PartyMember)->header.mode += 1;
-    for (i = 0; i < 8; i++) {
+    for (i = 0; i < BMAGIC_SHADOW_BREATH_ORB_COUNT; i++) {
         slot                               = Battle_AllocEffect(1, 78);
         g_BattleEffects[slot].target.party = TASK(PartyMember);
-        g_BattleEffects[slot].header.mode  = 2;
+        g_BattleEffects[slot].header.mode  = BMAGIC_SHADOW_BREATH_EFFECT_ORB;
         g_BattleEffects[slot].unk_0B       = i;
         g_BattleEffects[slot].arg.unk_09   = i + 1;
         TASK(PartyMember)->param.unk_0B += 1;
     }
-    SND_SEQueueSelection(0x102);
+    SND_SEQueueSelection(EMI_SE_ID(SND_BANK_COMMON, 0x02));
     for (i = 0; i < AREA_PALETTE_COLORS; i++) {
         MEM_PTR(u16, AREA_PALETTE_UPLOAD_ROW(AREA_PALETTE_BATL_OVR_ROW))[i] = MEM_PTR(u16, AREA_PALETTE_ARENA_ROW(AREA_PALETTE_BATL_OVR_ROW))[i] | PSX_COLOR_STP_BIT;
     }
@@ -58,20 +60,22 @@ MATCH void func_801EECE4(void) {
 /* func_801EEED0 */
 #include "overlays/bmagic/shared/BMagic_DispatchEffectMode.h"
 
-MATCH void func_801EEF14(void) {
-    SYS_DISPATCH_BYTE(D_801F1268, TASK(PartyMember)->header.step);
+/* func_801EEF14 */
+MATCH void BMagic_ShadowBreathGlowUpdate(void) {
+    SYS_DISPATCH_BYTE(g_BMagicShadowBreathGlowSteps, TASK(PartyMember)->header.step);
     if (TASK(PartyMember)->header.flags != 0 && TASK(PartyMember)->header.step != 0) {
         Effect_SetActorMatrix();
         BMagic_DrawGlowRingOuter();
         BMagic_DrawGlowRingInner();
-        func_801EF1C8();
+        BMagic_ShadowBreathDrawShadow();
         PopMatrix();
     }
 }
 
 #include "overlays/bmagic/shared/Effect_CopyBattlerCoords.h"
 
-MATCH void func_801EF00C(void) {
+/* func_801EF00C */
+MATCH void BMagic_ShadowBreathGlowGrow(void) {
     TASK(PartyMember)->unk_09 += 2;
     TASK(PartyMember)->timer += 24;
     if (TASK(PartyMember)->unk_09 == 0x10) {
@@ -92,7 +96,8 @@ MATCH void func_801EF00C(void) {
 #define GLOW_RING_GREEN g_ScratchPad.cells.halves[4]
 #define GLOW_RING_BLUE  g_ScratchPad.cells.halves[5]
 
-MATCH void func_801EF1C8(void) {
+/* func_801EF1C8 */
+MATCH void BMagic_ShadowBreathDrawShadow(void) {
     POLY_G3* prim;
     long     depth;
     long     flag;
@@ -200,15 +205,17 @@ MATCH void BMagic_DrawGlowRingInner(void) {
     }
 }
 
-MATCH void func_801EFAF4(void) {
-    SYS_DISPATCH_BYTE(D_801F1278, TASK(PartyMember)->header.step);
+/* func_801EFAF4 */
+MATCH void BMagic_ShadowBreathPillarUpdate(void) {
+    SYS_DISPATCH_BYTE(g_BMagicShadowBreathPillarSteps, TASK(PartyMember)->header.step);
     if (TASK(PartyMember)->header.flags != 0 && TASK(PartyMember)->header.step != 0) {
         Battle_ProjectRange();
-        func_801EFD5C();
+        BMagic_ShadowBreathDrawPillar();
     }
 }
 
-MATCH void func_801EFB74(void) {
+/* func_801EFB74 */
+MATCH void BMagic_ShadowBreathPillarStart(void) {
     u8           timer = TASK(PartyMember)->unk_09 - 1;
     PartyMember* work;
     PartyMember* actor;
@@ -216,7 +223,7 @@ MATCH void func_801EFB74(void) {
 
     TASK(PartyMember)->unk_09 = timer;
     if (timer == 0) {
-        SND_SEQueueSelection(0x100);
+        SND_SEQueueSelection(EMI_SE_ID(SND_BANK_COMMON, 0x00));
         work                      = TASK(PartyMember);
         actor                     = g_BattleEffectBattler;
         work->pos.x.fixed         = actor->pos.x.fixed;
@@ -232,18 +239,20 @@ MATCH void func_801EFB74(void) {
 
 #include "overlays/bmagic/shared/Effect_CountUpTimersAndStep.h"
 
-MATCH void func_801EFC94(void) {
+/* func_801EFC94 */
+MATCH void BMagic_ShadowBreathPillarRise(void) {
     u8 timer;
 
     BMAGIC_STEP_TIMER(unk_09, 2, 150);
 }
 
 /* func_801EFCE4 */
-MATCH void Effect_CountDownTimer(void) {
+MATCH void BMagic_ShadowBreathPillarEnd(void) {
     BMagic_CountDownEffectTimer(1);
 }
 
-MATCH void func_801EFD5C(void) {
+/* func_801EFD5C */
+MATCH void BMagic_ShadowBreathDrawPillar(void) {
     POLY_GT4* prim;
     s32       tpage;
 
@@ -283,15 +292,17 @@ MATCH void func_801EFD5C(void) {
     Area_CellAddPrim(TASK(PartyMember)->pos.x.fixed, TASK(PartyMember)->pos.y.fixed, 2, sizeof(POLY_GT4));
 }
 
-MATCH void func_801F01C0(void) {
-    SYS_DISPATCH_BYTE(D_801F1288, TASK(PartyMember)->header.step);
+/* func_801F01C0 */
+MATCH void BMagic_ShadowBreathOrbUpdate(void) {
+    SYS_DISPATCH_BYTE(g_BMagicShadowBreathOrbSteps, TASK(PartyMember)->header.step);
     if (TASK(PartyMember)->header.flags != 0 && TASK(PartyMember)->header.step != 0) {
         Battle_ProjectRange();
-        func_801F06AC();
+        BMagic_ShadowBreathDrawOrb();
     }
 }
 
-MATCH void func_801F0240(void) {
+/* func_801F0240 */
+MATCH void BMagic_ShadowBreathOrbStart(void) {
     PartyMember* work;
     u8           timer;
 
@@ -319,14 +330,15 @@ MATCH void func_801F0240(void) {
     }
 }
 
-MATCH void func_801F037C(void) {
+/* func_801F037C */
+MATCH void BMagic_ShadowBreathOrbSeek(void) {
     s32 diff;
-    u8  count;
+    u8  brightness;
     u8  scratch[16]; /* FAKE: unreferenced local pads the frame to 0x28. */
 
-    count = TASK(PartyMember)->unk_09;
-    if (count < 16) {
-        TASK(PartyMember)->unk_09 = count + 4;
+    brightness = TASK(PartyMember)->unk_09;
+    if (brightness < 16) {
+        TASK(PartyMember)->unk_09 = brightness + 4;
     }
 
     func_800AF2B4((BattleRange*)g_BattleEffectBattler, 0x60);
@@ -348,27 +360,28 @@ MATCH void func_801F037C(void) {
     }
 }
 
-MATCH void func_801F0494(void) {
+/* func_801F0494 */
+MATCH void BMagic_ShadowBreathOrbBurst(void) {
     u8 slot;
     u8 i;
 
     if (TASK(PartyMember)->param.unk_0B == 0) {
-        SND_SEQueueSelection(0x101);
+        SND_SEQueueSelection(EMI_SE_ID(SND_BANK_COMMON, 0x01));
         slot                               = Battle_AllocEffect(1, 78);
         g_BattleEffects[slot].target.party = g_BattleEffectBattler;
-        g_BattleEffects[slot].header.mode  = 0;
+        g_BattleEffects[slot].header.mode  = BMAGIC_SHADOW_BREATH_EFFECT_GLOW;
         g_BattleEffectBattler->param.unk_0B += 1;
         slot                               = Battle_AllocEffect(1, 78);
         g_BattleEffects[slot].target.party = g_BattleEffectBattler;
-        g_BattleEffects[slot].header.mode  = 1;
+        g_BattleEffects[slot].header.mode  = BMAGIC_SHADOW_BREATH_EFFECT_PILLAR;
         g_BattleEffects[slot].arg.unk_09   = 46;
         g_BattleEffectBattler->param.unk_0B += 1;
-        for (i = 0; i < 64; i++) {
-            slot                         = BMagic_AllocEffect();
-            D_801F12BC[slot].battler     = g_BattleEffectBattler;
-            D_801F12BC[slot].header.mode = 0;
-            D_801F12BC[slot].unk_04      = i;
-            D_801F12BC[slot].unk_05      = ((i & 1) << 4) + (rand() & 0xF) + 24;
+        for (i = 0; i < BMAGIC_SHADOW_BREATH_BURST_MOTES; i++) {
+            slot                                        = BMagic_AllocEffect();
+            g_BMagicShadowBreathMotes[slot].battler     = g_BattleEffectBattler;
+            g_BMagicShadowBreathMotes[slot].header.mode = 0;
+            g_BMagicShadowBreathMotes[slot].unk_04      = i;
+            g_BMagicShadowBreathMotes[slot].unk_05      = ((i & 1) << 4) + (rand() & 0xF) + 24;
             g_BattleEffectBattler->param.unk_0B += 1;
         }
         Battle_ApplyDamageFlags(g_Battle.target_selector, 0x10);
@@ -378,7 +391,8 @@ MATCH void func_801F0494(void) {
 
 #include "overlays/bmagic/shared/Effect_TickOnTimerNegative.h"
 
-MATCH void func_801F06AC(void) {
+/* func_801F06AC */
+MATCH void BMagic_ShadowBreathDrawOrb(void) {
     POLY_G3* prim;
     s32      i;
     s32      tpage;
@@ -389,9 +403,9 @@ MATCH void func_801F06AC(void) {
     g_ScratchPad.cells.halves[0] = 24;
     g_ScratchPad.cells.halves[6] = TASK(PartyMember)->screen_x.value;
     g_ScratchPad.cells.halves[7] = TASK(PartyMember)->screen_y.value;
-    g_ScratchPad.cells.halves[3] = TASK(PartyMember)->unk_09 * D_801F1298[TASK(PartyMember)->param.unk_0B].r;
+    g_ScratchPad.cells.halves[3] = TASK(PartyMember)->unk_09 * g_BMagicShadowBreathOrbTints[TASK(PartyMember)->param.unk_0B].r;
     g_ScratchPad.cells.halves[4] = TASK(PartyMember)->unk_09;
-    g_ScratchPad.cells.halves[5] = TASK(PartyMember)->unk_09 * D_801F1298[TASK(PartyMember)->param.unk_0B].b;
+    g_ScratchPad.cells.halves[5] = TASK(PartyMember)->unk_09 * g_BMagicShadowBreathOrbTints[TASK(PartyMember)->param.unk_0B].b;
     for (i = 0; i < 16; i++) {
         prim = (POLY_G3*)g_GfxPrimCursor;
         SetPolyG3(prim);
@@ -408,101 +422,107 @@ MATCH void func_801F06AC(void) {
     }
 }
 
-MATCH void func_801F091C(void) {
-    SYS_DISPATCH_TASK((g_BMagicEffectModes + 19), 1, D_801F22BC);
+/* func_801F091C */
+MATCH void BMagic_ShadowBreathMoteDispatch(void) {
+    SYS_DISPATCH_TASK(g_BMagicShadowBreathMoteModes, 1, g_BMagicShadowBreathMote);
 }
 
-MATCH void func_801F0960(void) {
-    SYS_DISPATCH_BYTE(D_801F12AC, D_801F22BC->header.step);
-    if (D_801F22BC->header.flags != 0 && D_801F22BC->header.step != 0) {
-        func_801F11AC();
+/* func_801F0960 */
+MATCH void BMagic_ShadowBreathMoteUpdate(void) {
+    SYS_DISPATCH_BYTE(g_BMagicShadowBreathMoteSteps, g_BMagicShadowBreathMote->header.step);
+    if (g_BMagicShadowBreathMote->header.flags != 0 && g_BMagicShadowBreathMote->header.step != 0) {
+        BMagic_ShadowBreathMoteProject();
         BMagic_DrawMote();
     }
 }
 
-MATCH void func_801F09E0(void) {
+/* func_801F09E0 */
+MATCH void BMagic_ShadowBreathMoteStart(void) {
     s16* angle_cell;
     u8   timer;
     s32  angle;
 
-    timer            = D_801F22BC->slot - 1;
-    D_801F22BC->slot = timer;
+    timer                          = g_BMagicShadowBreathMote->slot - 1;
+    g_BMagicShadowBreathMote->slot = timer;
     if (timer != 0) {
         return;
     }
-    angle_cell            = &D_1F800004;
-    angle                 = D_801F22BC->unk_04 & 0xF;
-    *angle_cell           = angle << 8;
-    g_ScratchPadHalves    = ((D_801F22BC->unk_04 >> 4) + 1) << 3;
-    D_801F22BC->unk_10    = g_BattleEffectBattler->pos.x.fixed + rsin(*angle_cell) * g_ScratchPadHalves;
-    D_801F22BC->unk_14    = g_BattleEffectBattler->pos.y.fixed + rcos(*angle_cell) * g_ScratchPadHalves;
-    D_801F22BC->unk_18    = g_BattleEffectBattler->pos.z.fixed + 0x800000;
-    MAGIC126_MOTE->unk_08 = D_801F22BC->slot = 0;
-    D_801F22BC->pad_06                       = 0;
-    D_801F22BC->unk_07                       = (u16)g_ScratchPadHalves;
-    D_801F22BC->header.step += 1;
+    angle_cell                       = &D_1F800004;
+    angle                            = g_BMagicShadowBreathMote->unk_04 & 0xF;
+    *angle_cell                      = angle << 8;
+    g_ScratchPadHalves               = ((g_BMagicShadowBreathMote->unk_04 >> 4) + 1) << 3;
+    g_BMagicShadowBreathMote->unk_10 = g_BattleEffectBattler->pos.x.fixed + rsin(*angle_cell) * g_ScratchPadHalves;
+    g_BMagicShadowBreathMote->unk_14 = g_BattleEffectBattler->pos.y.fixed + rcos(*angle_cell) * g_ScratchPadHalves;
+    g_BMagicShadowBreathMote->unk_18 = g_BattleEffectBattler->pos.z.fixed + 0x800000;
+    MAGIC126_MOTE->unk_08 = g_BMagicShadowBreathMote->slot = 0;
+    g_BMagicShadowBreathMote->pad_06                       = 0;
+    g_BMagicShadowBreathMote->unk_07                       = (u16)g_ScratchPadHalves;
+    g_BMagicShadowBreathMote->header.step += 1;
 }
 
-MATCH void func_801F0B34(void) {
+/* func_801F0B34 */
+MATCH void BMagic_ShadowBreathMoteRise(void) {
     s16* angle_cell;
     s32  angle;
-    u8   count;
+    u8   frames;
 
     if (g_FrameCount & 1) {
-        D_801F22BC->slot += 1;
-        D_801F22BC->unk_07 += 1;
+        g_BMagicShadowBreathMote->slot += 1;
+        g_BMagicShadowBreathMote->unk_07 += 1;
     }
-    angle              = D_801F22BC->unk_04 & 0xF;
-    angle_cell         = &D_1F800004;
-    *angle_cell        = angle << 8;
-    D_801F22BC->unk_10 = g_BattleEffectBattler->pos.x.fixed + rsin((s16)(angle << 8)) * D_801F22BC->unk_07;
-    D_801F22BC->unk_14 = g_BattleEffectBattler->pos.y.fixed + rcos(*angle_cell) * D_801F22BC->unk_07;
-    D_801F22BC->unk_18 += PARTY_MEMBER_WORD_08(D_801F22BC);
-    count              = D_801F22BC->pad_06 + 1;
-    D_801F22BC->pad_06 = count;
-    if (count == 16) {
-        D_801F22BC->header.step += 1;
+    angle                            = g_BMagicShadowBreathMote->unk_04 & 0xF;
+    angle_cell                       = &D_1F800004;
+    *angle_cell                      = angle << 8;
+    g_BMagicShadowBreathMote->unk_10 = g_BattleEffectBattler->pos.x.fixed + rsin((s16)(angle << 8)) * g_BMagicShadowBreathMote->unk_07;
+    g_BMagicShadowBreathMote->unk_14 = g_BattleEffectBattler->pos.y.fixed + rcos(*angle_cell) * g_BMagicShadowBreathMote->unk_07;
+    g_BMagicShadowBreathMote->unk_18 += PARTY_MEMBER_WORD_08(g_BMagicShadowBreathMote);
+    frames                           = g_BMagicShadowBreathMote->pad_06 + 1;
+    g_BMagicShadowBreathMote->pad_06 = frames;
+    if (frames == 16) {
+        g_BMagicShadowBreathMote->header.step += 1;
     }
 }
 
-MATCH void func_801F0C7C(void) {
+/* func_801F0C7C */
+MATCH void BMagic_ShadowBreathMoteAccelerate(void) {
     s16* angle_cell;
     s32  angle;
 
     if (g_FrameCount & 0x1) {
-        D_801F22BC->unk_07 += 1;
+        g_BMagicShadowBreathMote->unk_07 += 1;
     }
-    PARTY_MEMBER_WORD_08(D_801F22BC) += 0x80000;
-    angle              = D_801F22BC->unk_04 & 0xF;
-    angle_cell         = &D_1F800004;
-    *angle_cell        = angle << 8;
-    D_801F22BC->unk_10 = g_BattleEffectBattler->pos.x.fixed + rsin((s16)(angle << 8)) * D_801F22BC->unk_07;
-    D_801F22BC->unk_14 = g_BattleEffectBattler->pos.y.fixed + rcos(*angle_cell) * D_801F22BC->unk_07;
-    D_801F22BC->unk_18 += PARTY_MEMBER_WORD_08(D_801F22BC);
-    if ((s32)PARTY_MEMBER_WORD_08(D_801F22BC) > 0x7FFFFF) {
-        D_801F22BC->header.step += 1;
+    PARTY_MEMBER_WORD_08(g_BMagicShadowBreathMote) += 0x80000;
+    angle                            = g_BMagicShadowBreathMote->unk_04 & 0xF;
+    angle_cell                       = &D_1F800004;
+    *angle_cell                      = angle << 8;
+    g_BMagicShadowBreathMote->unk_10 = g_BattleEffectBattler->pos.x.fixed + rsin((s16)(angle << 8)) * g_BMagicShadowBreathMote->unk_07;
+    g_BMagicShadowBreathMote->unk_14 = g_BattleEffectBattler->pos.y.fixed + rcos(*angle_cell) * g_BMagicShadowBreathMote->unk_07;
+    g_BMagicShadowBreathMote->unk_18 += PARTY_MEMBER_WORD_08(g_BMagicShadowBreathMote);
+    if ((s32)PARTY_MEMBER_WORD_08(g_BMagicShadowBreathMote) > 0x7FFFFF) {
+        g_BMagicShadowBreathMote->header.step += 1;
     }
 }
 
-MATCH void func_801F0DA4(void) {
+/* func_801F0DA4 */
+MATCH void BMagic_ShadowBreathMoteEnd(void) {
     s16* angle_cell;
     s32  angle;
-    u8   count;
+    u8   frames;
 
     if (g_FrameCount & 0x1) {
-        D_801F22BC->unk_07 += 1;
+        g_BMagicShadowBreathMote->unk_07 += 1;
     }
-    angle              = D_801F22BC->unk_04 & 0xF;
-    angle_cell         = &D_1F800004;
-    *angle_cell        = angle << 8;
-    D_801F22BC->unk_10 = g_BattleEffectBattler->pos.x.fixed + rsin((s16)(angle << 8)) * D_801F22BC->unk_07;
-    D_801F22BC->unk_14 = g_BattleEffectBattler->pos.y.fixed + rcos(*angle_cell) * D_801F22BC->unk_07;
-    D_801F22BC->unk_18 += PARTY_MEMBER_WORD_08(D_801F22BC);
-    count              = D_801F22BC->pad_06 - 1;
-    D_801F22BC->pad_06 = count;
-    if (count == 0) {
+    angle                            = g_BMagicShadowBreathMote->unk_04 & 0xF;
+    angle_cell                       = &D_1F800004;
+    *angle_cell                      = angle << 8;
+    g_BMagicShadowBreathMote->unk_10 = g_BattleEffectBattler->pos.x.fixed + rsin((s16)(angle << 8)) * g_BMagicShadowBreathMote->unk_07;
+    g_BMagicShadowBreathMote->unk_14 = g_BattleEffectBattler->pos.y.fixed + rcos(*angle_cell) * g_BMagicShadowBreathMote->unk_07;
+    g_BMagicShadowBreathMote->unk_18 += PARTY_MEMBER_WORD_08(g_BMagicShadowBreathMote);
+    frames                           = g_BMagicShadowBreathMote->pad_06 - 1;
+    g_BMagicShadowBreathMote->pad_06 = frames;
+    if (frames == 0) {
         g_BattleEffectBattler->param.unk_0B -= 1;
-        func_801F116C();
+        BMagic_ShadowBreathMoteFree();
     }
 }
 
@@ -534,25 +554,27 @@ MATCH void BMagic_DrawMote(void) {
 /* func_801F1110 */
 #include "overlays/bmagic/shared/BMagic_AllocEffect.h"
 
-MATCH void func_801F116C(void) {
-    D_801F22BC->header.flags = 0;
-    D_801F22BC->header.mode  = 0;
-    D_801F22BC->header.step  = 0;
-    D_801F22BC->unk_03       = 0;
+/* func_801F116C */
+MATCH void BMagic_ShadowBreathMoteFree(void) {
+    g_BMagicShadowBreathMote->header.flags = 0;
+    g_BMagicShadowBreathMote->header.mode  = 0;
+    g_BMagicShadowBreathMote->header.step  = 0;
+    g_BMagicShadowBreathMote->unk_03       = 0;
 }
 
-MATCH void func_801F11AC(void) {
+/* func_801F11AC */
+MATCH void BMagic_ShadowBreathMoteProject(void) {
     PartyMember* work;
     s16          vec[3];
     TILE_1*      primitive;
 
-    work      = D_801F22BC;
+    work      = g_BMagicShadowBreathMote;
     vec[0]    = (work->unk_10 >> 9) - AREA_CELL_ORIGIN;
     primitive = (TILE_1*)g_GfxPrimCursor;
     vec[1]    = (work->unk_14 >> 9) - AREA_CELL_ORIGIN;
     vec[2]    = -((s16)(*(u16*)((u8*)work + 0x1A)) / 2);
     SetTile1(primitive);
     RotTransPers((SVECTOR*)vec, (long*)&primitive->x0, (long*)vec, (long*)&vec[2]);
-    ((s16*)&D_801F22BC->unk_0C)[0] = primitive->x0;
-    ((s16*)&D_801F22BC->unk_0C)[1] = primitive->y0;
+    ((s16*)&g_BMagicShadowBreathMote->unk_0C)[0] = primitive->x0;
+    ((s16*)&g_BMagicShadowBreathMote->unk_0C)[1] = primitive->y0;
 }
