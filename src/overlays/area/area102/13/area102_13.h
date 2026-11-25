@@ -16,7 +16,7 @@ extern u8 D_801F395C[];
 s32 func_801F3194();
 
 /* The texture page and colour bits of the cell quads' primitive code. */
-#define AREA_CELL_QUAD_CODE ((0xBAu << 16) | 0x9124u)
+#define AREA_CELL_QUAD_CODE ((0xBAu << 24) | 0x9124u)
 
 void func_801F2F44(s32 steps);
 

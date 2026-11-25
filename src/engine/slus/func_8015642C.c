@@ -29,7 +29,7 @@ NON_MATCHING void func_8015642C(u8* obj, s32 x, s32 y) {
     index                             = (FIELD(u8, obj, 3u) & 0xF) - 1;
     *(s32*)(g_ScratchPad.cells.bytes) = (x - 0x81) << 7;
     g_ScratchPad.cells.words[1]       = (y - 0x80) << 7;
-    z                                 = (s16)-((s16)Area_HeightSample((x - 1) << 0x10, y << 0x10) / 2);
+    z                                 = (s16) - ((s16)Area_HeightSample((x - 1) << 0x10, y << 0x10) / 2);
     screen                            = D_1F800034;
     g_ScratchPad.cells.words[2]       = z;
     g_ScratchPadVectors[2].vx = g_ScratchPadVectors[3].vx = *(s32*)(g_ScratchPad.cells.bytes);

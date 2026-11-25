@@ -1,10 +1,10 @@
 #include "area102_13.h"
 
-#ifdef NON_MATCHING
 /* Draws eight stacked quads over the task's cell, each row raised by the task's
  * velocity and swaying with the frame count. */
-NON_MATCHING void func_801F36B4(s32 steps) {
+MATCH void func_801F36B4(s32 steps) {
     POLY_FT4* prim;
+    /* FAKE: retail keeps the scratchpad vector base in s7; a plain pointer or direct members move every saved register. */
     FAKE_REG(SVECTOR*, corners, "s7");
     s16* out;
     long depth;
@@ -33,27 +33,25 @@ loop:
     prim = g_GfxPrimCursor;
     SetPolyFT4(prim);
     SetShadeTex(prim, 0);
-    rise        = step + (order << 3);
-    corners->vx = x + rise * TASK(Actor)->vx;
-    D_1F800016  = y + rise * TASK(Actor)->vy;
-    D_1F800018  = height;
+    rise                      = step + (order << 3);
+    corners->vx               = x + rise * TASK(Actor)->vx;
+    g_ScratchPadVectors[0].vy = y + rise * TASK(Actor)->vy;
+    g_ScratchPadVectors[0].vz = height;
     RotTransPers(corners, (long*)D_1F800034, &depth, &flag);
     spread   = step / 16 + 4 + ((i < 4) ? order / 2 : steps * 2);
-    shade    = (((7 - i) * 8 + 7 - phase) << 17) / (8 - steps);
+    shade    = (7 - i) * 8 + 7;
+    shade    = ((shade - phase) << 17) / (8 - steps);
     /* Not setXYWH: retail adds the radius to each corner and stores the far corners first. */
     prim->x0 = prim->x2 = out[0] - spread;
     prim->x1 = prim->x3 = out[0] + spread;
     prim->y0 = prim->y1 = out[1] - spread;
     prim->y2 = prim->y3 = out[1] + spread;
-    order += steps;
     Area_ApplyTileToQuad((shade & 0xF80000) | AREA_CELL_QUAD_CODE, prim, 1);
     prim->b0 = 0;
+    order += steps;
     Area_CellAddPrim(TASK(Actor)->pos.x.fixed, TASK(Actor)->pos.y.fixed, 3, sizeof(POLY_FT4));
     i++;
     if (i < 8) {
         goto loop;
     }
 }
-#else
-INCLUDE_ASM(func_801F36B4);
-#endif
