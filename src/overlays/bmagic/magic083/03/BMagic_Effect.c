@@ -7,6 +7,7 @@ __asm__(".include \"include/match/macro.inc\"\n");
 #include "overlays/bmagic/shared/Effect_RunSlotsWithSetup.h"
 
 /* Clears the effect slot table, then spawns one effect on each selectable battler of the targeted side at its position, and copies the first 32 colours of palette row 26 back from the arena. */
+/* func_801EED04 */
 MATCH void func_801EED04(void) {
     PartyMember* owner;
     u16*         dst;
@@ -18,7 +19,7 @@ MATCH void func_801EED04(void) {
 
     count = 0;
     BMAGIC_CLEAR_EFFECTS(i);
-    TASK(PartyMember)->unk_04       = func_801EF0CC();
+    TASK(PartyMember)->unk_04       = BMagic_ShieldVariant();
     TASK(PartyMember)->param.unk_0B = 0;
     TASK(PartyMember)->header.mode++;
     if (g_Battle.target_selector & BATTLE_TARGET_ENEMY_SIDE) {
@@ -70,7 +71,8 @@ MATCH void func_801EED04(void) {
 
 #include "overlays/bmagic/shared/Effect_StartOnZeroTick.h"
 
-MATCH s32 func_801EF0CC(void) {
+/* func_801EF0CC */
+MATCH s32 BMagic_ShieldVariant(void) {
     if (g_Battle.action_type != BATTLE_ACTION_ABILITY && g_Battle.action_id == 0x136) {
         g_Battle.action_id = ABILITY_SHIELD;
     }
@@ -80,17 +82,19 @@ MATCH s32 func_801EF0CC(void) {
 /* func_801EF108 */
 #include "overlays/bmagic/shared/BMagic_DispatchEffectMode.h"
 
-MATCH void func_801EF14C(void) {
-    SYS_DISPATCH_BYTE(D_801F0EF0, TASK(PartyMember)->header.step);
+/* func_801EF14C */
+MATCH void BMagic_ShieldBattlerUpdate(void) {
+    SYS_DISPATCH_BYTE(g_BMagicShieldBattlerSteps, TASK(PartyMember)->header.step);
     if (TASK(PartyMember)->header.flags != 0 && TASK(PartyMember)->header.step != 0) {
         Effect_SetActorMatrix();
-        func_801EFB24();
-        func_801EF844();
+        BMagic_ShieldDrawRing();
+        BMagic_ShieldDrawDisc();
         PopMatrix();
     }
 }
 
-MATCH void func_801EF1DC(void) {
+/* func_801EF1DC */
+MATCH void BMagic_ShieldBattlerStart(void) {
     void* battler;
     u8    count;
 
@@ -109,7 +113,8 @@ MATCH void func_801EF1DC(void) {
     }
 }
 
-MATCH void func_801EF2F8(void) {
+/* func_801EF2F8 */
+MATCH void BMagic_ShieldBattlerGlow(void) {
     PartyMember* owner;
     u8           slot;
     u8           base;
@@ -144,7 +149,8 @@ MATCH void func_801EF2F8(void) {
 
 #include "overlays/bmagic/shared/Effect_StepOnZeroTick.h"
 
-MATCH void func_801EF55C(void) {
+/* func_801EF55C */
+MATCH void BMagic_ShieldBattlerRestore(void) {
     PartyMember* battler;
     u8           slot;
 
@@ -173,7 +179,8 @@ MATCH void func_801EF55C(void) {
 
 #include "overlays/bmagic/shared/Effect_SetActorMatrix.h"
 
-MATCH void func_801EF844(void) {
+/* func_801EF844 */
+MATCH void BMagic_ShieldDrawDisc(void) {
     POLY_G3* poly;
     s32      tpage;
     s32      i;
@@ -183,9 +190,9 @@ MATCH void func_801EF844(void) {
     tpage = getTPage(TPAGE_DEPTH_4BIT, TPAGE_ABR_ADD, 320, 256);
     GFX_AddDitheredDrawMode(BMAGIC_LAYER_BEHIND_BATTLERS, tpage);
     g_ScratchPad.cells.halves[3] = TASK(PartyMember)->unk_09 * 5;
-    g_ScratchPad.cells.halves[4] = D_801F0ED4[TASK(PartyMember)->unk_04][0] * TASK(PartyMember)->unk_09;
-    g_ScratchPad.cells.halves[5] = D_801F0ED4[TASK(PartyMember)->unk_04][1] * TASK(PartyMember)->unk_09;
-    g_ScratchPad.cells.halves[6] = D_801F0ED4[TASK(PartyMember)->unk_04][2] * TASK(PartyMember)->unk_09;
+    g_ScratchPad.cells.halves[4] = g_BMagicShieldDiscTints[TASK(PartyMember)->unk_04][0] * TASK(PartyMember)->unk_09;
+    g_ScratchPad.cells.halves[5] = g_BMagicShieldDiscTints[TASK(PartyMember)->unk_04][1] * TASK(PartyMember)->unk_09;
+    g_ScratchPad.cells.halves[6] = g_BMagicShieldDiscTints[TASK(PartyMember)->unk_04][2] * TASK(PartyMember)->unk_09;
     g_ScratchPadVectors[2].vx    = (u32)rsin(0) >> 5;
     g_ScratchPadVectors[2].vy    = (u32)rcos(0) >> 5;
     for (i = 1; i < 17; i++) {
@@ -209,7 +216,8 @@ MATCH void func_801EF844(void) {
     GFX_AddDitheredDrawMode(BMAGIC_LAYER_BEHIND_BATTLERS, tpage);
 }
 
-MATCH void func_801EFB24(void) {
+/* func_801EFB24 */
+MATCH void BMagic_ShieldDrawRing(void) {
     POLY_G4* poly;
     s32      tpage;
     s32      i;
@@ -218,9 +226,9 @@ MATCH void func_801EFB24(void) {
 
     tpage = getTPage(TPAGE_DEPTH_4BIT, TPAGE_ABR_ADD, 320, 256);
     GFX_AddDitheredDrawMode(BMAGIC_LAYER_BEHIND_BATTLERS, tpage);
-    g_ScratchPad.cells.halves[4] = D_801F0EE0[TASK(PartyMember)->unk_04][0] * TASK(PartyMember)->unk_09;
-    g_ScratchPad.cells.halves[5] = D_801F0EE0[TASK(PartyMember)->unk_04][1] * TASK(PartyMember)->unk_09;
-    g_ScratchPad.cells.halves[6] = D_801F0EE0[TASK(PartyMember)->unk_04][2] * TASK(PartyMember)->unk_09;
+    g_ScratchPad.cells.halves[4] = g_BMagicShieldRingTints[TASK(PartyMember)->unk_04][0] * TASK(PartyMember)->unk_09;
+    g_ScratchPad.cells.halves[5] = g_BMagicShieldRingTints[TASK(PartyMember)->unk_04][1] * TASK(PartyMember)->unk_09;
+    g_ScratchPad.cells.halves[6] = g_BMagicShieldRingTints[TASK(PartyMember)->unk_04][2] * TASK(PartyMember)->unk_09;
     g_ScratchPadVectors[1].vx    = (u32)rsin(0) >> 5;
     g_ScratchPadVectors[1].vy    = (u32)rcos(0) >> 5;
     g_ScratchPadVectors[3].vx    = (u32)rsin(0) >> 4;
@@ -251,17 +259,20 @@ MATCH void func_801EFB24(void) {
     GFX_AddDitheredDrawMode(BMAGIC_LAYER_BEHIND_BATTLERS, tpage);
 }
 
-MATCH void func_801EFE54(void) {
+/* func_801EFE54 */
+MATCH void BMagic_ShieldGemDispatch(void) {
     SYS_DISPATCH_TASK((g_BMagicEffectModes + 6), 1, g_Task);
 }
 
-MATCH void func_801EFE98(void) {
+/* func_801EFE98 */
+MATCH void BMagic_ShieldGemUpdate(void) {
     SYS_DISPATCH_TASK((g_BMagicEffectModes + 7), 2, g_Task);
 }
 
 #include "overlays/bmagic/shared/Effect_LaunchFromRing.h"
 
-MATCH void func_801F0010(void) {
+/* func_801F0010 */
+MATCH void BMagic_ShieldGemRise(void) {
     s32          timer;
     s32          vel;
     PartyMember* task;
@@ -269,7 +280,7 @@ MATCH void func_801F0010(void) {
 
     Battle_ProjectRange();
     BMagic_SetXFixed((RANDOM_MASK(3)) | 0x18);
-    BMAGIC_DRAW_IN_ACTOR_MATRIX(func_801F050C);
+    BMAGIC_DRAW_IN_ACTOR_MATRIX(BMagic_ShieldDrawGem);
     if (g_FrameCount & 0x1) {
         TASK(PartyMember)->unk_09 += 1;
     }
@@ -288,14 +299,15 @@ MATCH void func_801F0010(void) {
     }
 }
 
-MATCH void func_801F0104(void) {
+/* func_801F0104 */
+MATCH void BMagic_ShieldGemFall(void) {
     s32          timer;
     s32          vel;
     PartyMember* task;
 
     Battle_ProjectRange();
     BMagic_SetXFixed((RANDOM_MASK(3)) | 0x18);
-    BMAGIC_DRAW_IN_ACTOR_MATRIX(func_801F050C);
+    BMAGIC_DRAW_IN_ACTOR_MATRIX(BMagic_ShieldDrawGem);
     if (g_FrameCount & 0x1) {
         TASK(PartyMember)->unk_09 += 1;
     }
@@ -311,40 +323,41 @@ MATCH void func_801F0104(void) {
     }
 }
 
-MATCH void func_801F01F8(void) {
-    s32 value;
-    s32 value2;
-    s32 value3;
-    u8  value4;
-    u8  value5;
+/* func_801F01F8 */
+MATCH void BMagic_ShieldGemSpinUp(void) {
+    s32 spin_ticks;
+    s32 radius;
+    s32 sound;
+    u8  remaining;
+    u8  battler_index;
 
     Battle_ProjectRange();
     if ((TASK(PartyMember)->unk_0C == 4) && (TASK(PartyMember)->timer < 5U)) {
-        value2 = (RANDOM_MASK(3)) | 0x40;
+        radius = (RANDOM_MASK(3)) | 0x40;
     } else {
-        value2 = (RANDOM_MASK(3)) | 0x18;
+        radius = (RANDOM_MASK(3)) | 0x18;
     }
-    BMagic_SetXFixed(value2);
-    BMAGIC_DRAW_IN_ACTOR_MATRIX(func_801F050C);
+    BMagic_SetXFixed(radius);
+    BMAGIC_DRAW_IN_ACTOR_MATRIX(BMagic_ShieldDrawGem);
     if (TASK(PartyMember)->unk_0C < 4) {
-        value                     = TASK(PartyMember)->unk_10 + 1;
-        TASK(PartyMember)->unk_10 = value;
-        if (!(value & 0x7)) {
+        spin_ticks                     = TASK(PartyMember)->unk_10 + 1;
+        TASK(PartyMember)->unk_10 = spin_ticks;
+        if (!(spin_ticks & 0x7)) {
             TASK(PartyMember)->unk_0C += 1;
         }
     }
     TASK(PartyMember)->unk_09 += TASK(PartyMember)->unk_0C;
     if (TASK(PartyMember)->unk_0C == 4) {
-        value4                   = TASK(PartyMember)->timer - 1;
-        TASK(PartyMember)->timer = value4;
-        if (!(value4 & BYTE_MASK)) {
-            value5 = TASK(PartyMember)->unk_03;
-            if (!(value5 & 0xF0)) {
-                value3 = 0x102;
-                if (value5 & 0x1) {
-                    value3 = 0x101;
+        remaining                   = TASK(PartyMember)->timer - 1;
+        TASK(PartyMember)->timer = remaining;
+        if (!(remaining & BYTE_MASK)) {
+            battler_index = TASK(PartyMember)->unk_03;
+            if (!(battler_index & 0xF0)) {
+                sound = EMI_SE_ID(SND_BANK_COMMON, 0x02);
+                if (battler_index & 0x1) {
+                    sound = EMI_SE_ID(SND_BANK_COMMON, 0x01);
                 }
-                SND_SEQueueSelection(value3);
+                SND_SEQueueSelection(sound);
             }
             TASK(PartyMember)->unk_10 = 8;
             TASK(PartyMember)->unk_14 = 8;
@@ -354,14 +367,15 @@ MATCH void func_801F01F8(void) {
     }
 }
 
-MATCH void func_801F038C(void) {
+/* func_801F038C */
+MATCH void BMagic_ShieldGemOrbit(void) {
     s16* angle;
     u16  phase;
     u8   count;
 
     Battle_ProjectRange();
     BMagic_SetXFixed(RANDOM_MASK(3) | 0x20);
-    BMAGIC_DRAW_IN_ACTOR_MATRIX(func_801F050C);
+    BMAGIC_DRAW_IN_ACTOR_MATRIX(BMagic_ShieldDrawGem);
     TASK(PartyMember)->unk_10 += 4;
     TASK(PartyMember)->unk_09 += TASK(PartyMember)->unk_0C;
     phase                           = TASK(PartyMember)->param.unk_0B + 2;
@@ -380,7 +394,8 @@ MATCH void func_801F038C(void) {
     }
 }
 
-MATCH void func_801F050C(void) {
+/* func_801F050C */
+MATCH void BMagic_ShieldDrawGem(void) {
     POLY_G3* prim;
     u8*      start;
     s32      depths[16];
@@ -400,9 +415,9 @@ MATCH void func_801F050C(void) {
         g_ScratchPad.cells.halves[1] = 0x50;
         g_ScratchPad.cells.halves[0] = 0x30;
         g_ScratchPad.cells.halves[7] = (i - TASK(PartyMember)->unk_09) / 8;
-        g_ScratchPad.cells.halves[4] = D_801F0E74[TASK(PartyMember)->unk_04][g_ScratchPad.cells.halves[7]][0];
-        g_ScratchPad.cells.halves[5] = D_801F0E74[TASK(PartyMember)->unk_04][g_ScratchPad.cells.halves[7]][1];
-        g_ScratchPad.cells.halves[6] = D_801F0E74[TASK(PartyMember)->unk_04][g_ScratchPad.cells.halves[7]][2];
+        g_ScratchPad.cells.halves[4] = g_BMagicShieldGemUpperShades[TASK(PartyMember)->unk_04][g_ScratchPad.cells.halves[7]][0];
+        g_ScratchPad.cells.halves[5] = g_BMagicShieldGemUpperShades[TASK(PartyMember)->unk_04][g_ScratchPad.cells.halves[7]][1];
+        g_ScratchPad.cells.halves[6] = g_BMagicShieldGemUpperShades[TASK(PartyMember)->unk_04][g_ScratchPad.cells.halves[7]][2];
         g_ScratchPadVectors[0].vx    = 0;
         g_ScratchPadVectors[0].vy    = 0;
         g_ScratchPadVectors[0].vz    = g_ScratchPad.cells.halves[1];
@@ -432,9 +447,9 @@ MATCH void func_801F050C(void) {
     start = g_GfxPrimCursor;
     for (i = TASK(PartyMember)->unk_09; i < TASK(PartyMember)->unk_09 + 32; i += 8) {
         g_ScratchPad.cells.halves[7] = (i - TASK(PartyMember)->unk_09) / 8;
-        g_ScratchPad.cells.halves[4] = D_801F0EA4[TASK(PartyMember)->unk_04][g_ScratchPad.cells.halves[7]][0];
-        g_ScratchPad.cells.halves[5] = D_801F0EA4[TASK(PartyMember)->unk_04][g_ScratchPad.cells.halves[7]][1];
-        g_ScratchPad.cells.halves[6] = D_801F0EA4[TASK(PartyMember)->unk_04][g_ScratchPad.cells.halves[7]][2];
+        g_ScratchPad.cells.halves[4] = g_BMagicShieldGemLowerShades[TASK(PartyMember)->unk_04][g_ScratchPad.cells.halves[7]][0];
+        g_ScratchPad.cells.halves[5] = g_BMagicShieldGemLowerShades[TASK(PartyMember)->unk_04][g_ScratchPad.cells.halves[7]][1];
+        g_ScratchPad.cells.halves[6] = g_BMagicShieldGemLowerShades[TASK(PartyMember)->unk_04][g_ScratchPad.cells.halves[7]][2];
         g_ScratchPadVectors[0].vx    = 0;
         g_ScratchPadVectors[0].vy    = 0;
         g_ScratchPadVectors[0].vz    = -g_ScratchPad.cells.halves[1];

@@ -8,29 +8,39 @@
 extern s16 g_ScratchPadHalves;
 extern s16 D_1F800004;
 
-extern Callback     D_801F0EF0[];
+/* D_801F0EF0 */
+extern Callback     g_BMagicShieldBattlerSteps[];
 /* The effect slot table BMagic_AllocEffect scans, and its row count. */
-extern BattleEffect D_801F0F1C[];
-#define BMAGIC_EFFECT_SLOTS         D_801F0F1C
+/* D_801F0F1C */
+extern BattleEffect g_BMagicShieldGems[];
+#define BMAGIC_EFFECT_SLOTS         g_BMagicShieldGems
 #define BMAGIC_EFFECT_COUNT         24
 #define BMAGIC_EFFECT_START_HANDLER Effect_StartOnZeroTick
-s32 func_801EF0CC(void);
-#define BMAGIC_EFFECT_SLOT_STEP func_801EFE54
-void func_801EF844(void);
-void func_801EFB24(void);
+/* func_801EF0CC */
+s32 BMagic_ShieldVariant(void);
+#define BMAGIC_EFFECT_SLOT_STEP BMagic_ShieldGemDispatch
+/* func_801EF844 */
+void BMagic_ShieldDrawDisc(void);
+/* func_801EFB24 */
+void BMagic_ShieldDrawRing(void);
 
 /* func_801F0BA8 */
 void BMagic_SetXFixed(s32 radius);
 
-void func_801F050C(void);
+/* func_801F050C */
+void BMagic_ShieldDrawGem(void);
 void func_800AF0F8(s32 pos_x, s32 pos_y, s32* values, u8* base, u8 count, u8 size, u8 seed);
 
-/* The func_801F050C fan shades: per effect variant (byte 0x04), four RGB rows for the upper fan and four for the lower. */
-extern u8 D_801F0E74[][4][3];
-extern u8 D_801F0EA4[][4][3];
+/* The BMagic_ShieldDrawGem fan shades: per effect variant (byte 0x04), four RGB rows for the upper fan and four for the lower. */
+/* D_801F0E74 */
+extern u8 g_BMagicShieldGemUpperShades[][4][3];
+/* D_801F0EA4 */
+extern u8 g_BMagicShieldGemLowerShades[][4][3];
 
 /* One RGB row per effect type, scaled by the effect timer. */
-extern u8 D_801F0ED4[][3];
-extern u8 D_801F0EE0[][3];
+/* D_801F0ED4 */
+extern u8 g_BMagicShieldDiscTints[][3];
+/* D_801F0EE0 */
+extern u8 g_BMagicShieldRingTints[][3];
 
 #endif

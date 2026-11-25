@@ -16,15 +16,15 @@ segments:
     vram: 0x801F0E74
     align: 4
     subsegments:
-      - [0x2274, bin, D_801F0E74]
-      - [0x22A4, bin, D_801F0EA4]
-      - [0x22D4, bin, D_801F0ED4]
-      - [0x22E0, bin, D_801F0EE0]
+      - [0x2274, bin, g_BMagicShieldGemUpperShades]
+      - [0x22A4, bin, g_BMagicShieldGemLowerShades]
+      - [0x22D4, bin, g_BMagicShieldDiscTints]
+      - [0x22E0, bin, g_BMagicShieldRingTints]
       - [0x22EC, bin, g_BMagicEffectModes]
-      - [0x22F0, bin, D_801F0EF0]
+      - [0x22F0, bin, g_BMagicShieldBattlerSteps]
       - [0x2304, bin, D_801F0F04]
       - [0x2308, bin, D_801F0F08]
-      - [0x231C, bin, D_801F0F1C]
+      - [0x231C, bin, g_BMagicShieldGems]
       - [0x2320, bin, D_801F0F20]
       - [0x2324, bin, D_801F0F24]
       - [0x2390, bin, D_801F0F90]
