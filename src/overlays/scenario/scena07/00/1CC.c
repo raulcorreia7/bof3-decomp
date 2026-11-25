@@ -872,88 +872,71 @@ MATCH u8 func_801F9EFC(void) {
 
 #ifdef NON_MATCHING
 NON_MATCHING void func_801FA01C(void) {
-    s16* vertex;
-    s16* depth;
-    u16* quad;
-    u16* tail;
-    u16* edge;
-    s32  row;
-    s32  below;
-    u8*  shade;
-    u16  ring;
-    u16  col;
-    u16  phase;
-    s32  angle;
-    s32  next;
-    s32  dot;
-    s32  root;
+    SVECTOR* vertex;
+    u16*     quad;
+    u8*      shade;
+    u16      ring;
+    u16      col;
+    u16      phase;
+    s32      angle;
+    u16      next;
+    s32      dot;
 
     D_800E595C = 0;
     D_800E595E = 0;
     D_800E5960 = 0x1000;
-    vertex     = MEM_PTR(s16, AREA_WORK + 0x1164);
+    vertex     = MEM_PTR(SVECTOR, AREA_WORK + 0x1164);
     angle      = 0;
     for (ring = 0; ring < 15; ring++) {
         angle += 0x80;
-        depth = vertex + 2;
-        for (col = 0, phase = 0; col < 32; col++, phase += 0x80) {
-            vertex[0] = (rsin((u16)angle) * rcos(phase)) >> 12;
-            depth[-1] = (rsin((u16)angle) * rsin(phase)) >> 12;
-            depth[0]  = rcos((u16)angle);
-            vertex += 4;
-            depth += 4;
+        for (phase = 0, col = 0; col < 32; phase += 0x80, col++) {
+            vertex->vx = (rsin((u16)angle) * rcos(phase)) >> 12;
+            vertex->vy = (rsin((u16)angle) * rsin(phase)) >> 12;
+            vertex->vz = rcos((u16)angle);
+            vertex++;
         }
     }
     angle -= 0x80;
-    vertex[0] = 0;
-    vertex[1] = 0;
-    vertex[2] = -0x1000;
+    vertex->vx = 0;
+    vertex->vy = 0;
+    vertex->vz = -0x1000;
 
     quad = MEM_PTR(u16, AREA_WORK + 0x27F4);
-    tail = MEM_PTR(u16, AREA_WORK + 0x27FA);
-    for (col = 0; col < 32;) {
-        next = col + 1;
-        if ((u16)col + 1 >= 32) {
+    for (col = 0; col < 32; col++) {
+        if (col + 1 < 32) {
+            next = col + 1;
+        } else {
             next = 0;
         }
-        tail[-2] = 0;
-        quad[0]  = 0;
-        tail[-1] = col + 1;
-        tail[0]  = next + 1;
-        tail += 4;
-        col = col + 1;
+        quad[1] = 0;
+        quad[0] = 0;
+        quad[2] = col + 1;
+        quad[3] = next + 1;
         quad += 4;
     }
-    for (ring = 0, col = 0; ring < 14; ring++) {
-        row   = ring * 32;
-        below = (ring + 1) * 32;
-        edge  = quad + 3;
-        for (; col < 32; col++) {
-            next = col + 1;
-            if ((u16)col + 1 >= 32) {
+    for (ring = 0; ring < 14; ring++) {
+        for (col = 0; col < 32; col++) {
+            if (col + 1 < 32) {
+                next = col + 1;
+            } else {
                 next = 0;
             }
-            quad[0]  = col + row + 1;
-            edge[-2] = next + row + 1;
-            edge[-1] = col + below + 1;
-            edge[0]  = next + below + 1;
-            edge += 4;
+            quad[0] = col + ring * 32 + 1;
+            quad[1] = next + ring * 32 + 1;
+            quad[2] = col + (ring + 1) * 32 + 1;
+            quad[3] = next + (ring + 1) * 32 + 1;
             quad += 4;
         }
-        col = 0;
     }
-    row  = ring * 32;
-    edge = quad + 2;
     for (col = 0; col < 32; col++) {
-        next = col + 1;
-        if ((u16)col + 1 >= 32) {
+        if (col + 1 < 32) {
+            next = col + 1;
+        } else {
             next = 0;
         }
-        quad[0]  = col + row + 1;
-        edge[-1] = next + row + 1;
-        edge[0]  = 0x1E1;
-        edge[1]  = 0x1E1;
-        edge += 4;
+        quad[0] = col + ring * 32 + 1;
+        quad[1] = next + ring * 32 + 1;
+        quad[2] = quad[3] = 0x1E1;
         quad += 4;
     }
 
@@ -962,21 +945,19 @@ NON_MATCHING void func_801FA01C(void) {
     D_800E81E0 = 0x1000;
     VectorNormal(MEM_PTR(s32, AREA_WORK + 0x39D8), MEM_PTR(s32, AREA_WORK + 0x39D8));
     shade  = MEM_PTR(u8, AREA_WORK + 0x37F4);
-    vertex = MEM_PTR(s16, AREA_WORK + 0x115C);
-    depth  = MEM_PTR(s16, AREA_WORK + 0x1160);
+    vertex = MEM_PTR(SVECTOR, AREA_WORK + 0x115C);
     for (col = 0; col < 482; col++) {
-        dot = D_800E81D8 * vertex[0] + D_800E81DC * depth[-1] + D_800E81E0 * depth[0];
+        dot = D_800E81D8 * vertex->vx + D_800E81DC * vertex->vy + D_800E81E0 * vertex->vz;
         if (dot <= 0) {
             *shade = 0;
         } else {
-            root = SquareRoot0(dot);
-            if (root >= 0x1000) {
-                root = 0xFFF;
+            dot = SquareRoot0(dot);
+            if (dot >= 0x1000) {
+                dot = 0xFFF;
             }
-            *shade = root >> 7;
+            *shade = dot >> 7;
         }
-        depth += 4;
-        vertex += 4;
+        vertex++;
         shade++;
     }
 }
