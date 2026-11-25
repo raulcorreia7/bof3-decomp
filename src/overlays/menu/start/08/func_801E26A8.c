@@ -1,27 +1,23 @@
 #include "start_08.h"
 
-#ifdef NON_MATCHING
-NON_MATCHING void func_801E26A8(s32 x, s32 y) {
-    u8  pairs[6][2] = {{0, g_MessageSpeed}, {1, g_WindowStyle}, {2, g_WindowClut}, {3, g_SndMono}, {4, g_AutoRun}, {5, 0}};
-    s16 i;
-    u8  marker;
+/* One config row's option and its current value. */
+typedef struct {
+    u8 option;
+    u8 value;
+} ConfigPair;
+
+/* Draws the config window: the frame and six option rows, the selected row with its value. */
+MATCH void func_801E26A8(s32 x, s32 y) {
+    ConfigPair pairs[6] = {{0, g_MessageSpeed}, {1, g_WindowStyle}, {2, g_WindowClut}, {3, g_SndMono}, {4, g_AutoRun}, {5, 0}};
+    u16        left;
+    s32        row;
+    s16        i;
 
     Menu_DrawWindowFrame((s16)x, (s16)y, 0x21, 0xD);
-    x = (x + 5) & HALF_MASK;
-    y += 9;
-    for (i = 0; i < 6; i++, y += 0xF) {
-        marker = 0;
-        if ((s8)D_80148655 - 2 == i) {
-            marker = D_80148654;
-        }
-        Menu_DrawConfigRow(x, y & HALF_MASK, i & BYTE_MASK, marker);
-        marker = 0;
-        if ((s8)D_80148655 - 2 == i) {
-            marker = D_80148654;
-        }
-        func_801E2C00(x, y & HALF_MASK, pairs[i][0], pairs[i][1], marker);
+    left = x + 5;
+    row  = y + 9;
+    for (i = 0; i < 6; i++, row += 0xF) {
+        Menu_DrawConfigRow(left, (u16)row, i & BYTE_MASK, (s8)g_ConfigSelect[1] - 2 == i ? g_ConfigSelect[0] : 0);
+        func_801E2C00(left, (u16)row, pairs[i].option, pairs[i].value, (s8)g_ConfigSelect[1] - 2 == i ? g_ConfigSelect[0] : 0);
     }
 }
-#else
-INCLUDE_ASM(func_801E26A8);
-#endif
