@@ -1,4 +1,5 @@
 #define FAKE_DECL_AREA_SCROLL_TARGET_VOLATILE
+#define FAKE_DECL_AREA_SCROLL_TARGET_Y_VOLATILE
 #include "scena08_00.h"
 #include "area/map.h"
 
@@ -995,8 +996,8 @@ MATCH void func_801FA32C(void) {
     }
 }
 
-#ifdef NON_MATCHING
-NON_MATCHING void func_801FA3E4(void) {
+/* starts the scene events of the area and cell the party enters */
+MATCH void func_801FA3E4(void) {
     u8  i;
     u8  slot;
     u8* flags;
@@ -1010,12 +1011,11 @@ NON_MATCHING void func_801FA3E4(void) {
         if (g_GameCellType == 2 && !SYS_TestFlag(g_SceneFlags, 6)) {
             Game_SetScriptActive();
             Scene_SetupParty(3);
-            /* FAKE: the volatile Y assignment forces the retail reload; plain split stores score 423 rows. */
-            Area_ScrollAdvance(Area_HeightSample(g_AreaScrollTargetX = TO_COORD_HALF(81), FAKE_VOLATILE(s32, g_AreaScrollTargetY) = TO_COORD_HALF(30)));
+            Area_ScrollAdvance(Area_HeightSample(g_AreaScrollTargetX = TO_COORD_HALF(81), g_AreaScrollTargetY = TO_COORD_HALF(30)));
             Area_InitMapRenderer();
+            g_Actors[0].header.mode  = 4;
             g_Actors[0].unk_77       = 13;
             g_Actors[1].unk_77       = 14;
-            D_80146889[0]            = 4;
             g_Actors[1].header.mode  = 4;
             g_ScenarioState.state_04 = 4;
             g_ScenarioState.step     = 10;
@@ -1076,18 +1076,17 @@ NON_MATCHING void func_801FA3E4(void) {
                     SYS_ThreadWait(1);
                 }
                 Scene_SetupParty(0);
-                /* FAKE: the volatile Y assignment forces the retail reload; plain split stores score 423 rows. */
-                Area_ScrollAdvance(Area_HeightSample(g_AreaScrollTargetX = TO_COORD_HALF(41), FAKE_VOLATILE(s32, g_AreaScrollTargetY) = TO_COORD(13)));
+                    Area_ScrollAdvance(Area_HeightSample(g_AreaScrollTargetX = TO_COORD_HALF(41), g_AreaScrollTargetY = TO_COORD(13)));
                 Area_InitMapRenderer();
                 SYS_SetFlag(g_SceneFlags, 17);
             }
             if (SYS_TestFlag(g_SceneFlags, 19) && !SYS_TestFlag(g_SceneFlags, 20)) {
                 Game_SetScriptActive();
                 Scene_SetupParty(2);
-                /* FAKE: the volatile Y assignment forces the retail reload; plain split stores score 423 rows. */
-                Area_ScrollAdvance(Area_HeightSample(g_AreaScrollTargetX = TO_COORD_HALF(10), FAKE_VOLATILE(s32, g_AreaScrollTargetY) = TO_COORD(20)));
+                    Area_ScrollAdvance(Area_HeightSample(g_AreaScrollTargetX = TO_COORD_HALF(10), g_AreaScrollTargetY = TO_COORD(20)));
                 Area_InitMapRenderer();
-                SYS_SetFlag(g_SceneFlags, 20);
+                /* retail passes the flag array twice */
+                ((void (*)(void*, void*, u8))SYS_SetFlag)(g_SceneFlags, g_SceneFlags, 20);
                 g_ScenarioState.state_04 = 10;
                 g_ScenarioState.step     = 10;
             }
@@ -1123,9 +1122,6 @@ NON_MATCHING void func_801FA3E4(void) {
     }
     D_80146872 = 2;
 }
-#else
-INCLUDE_ASM(func_801FA3E4);
-#endif
 
 MATCH void func_801FAB5C(void) {
     SYS_DISPATCH_BYTE(D_801FE970, g_ScenarioState.state_04);
