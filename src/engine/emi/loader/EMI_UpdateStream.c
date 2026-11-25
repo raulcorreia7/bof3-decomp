@@ -22,7 +22,7 @@ MATCH void EMI_UpdateStream(void) {
      * call's delay slot, where retail keeps the move. */
     FAKE_ORDER_LOCK(count = 0);
     CD_Update();
-    if ((g_EmiRingStates[D_80146488] & 0x80) == 0) {
+    if ((g_EmiRingStates[g_EmiRingIndex] & 0x80) == 0) {
         slot = (s8*)(head + 8);
         do {
             ((Callback)callbacks.steps[g_EmiRingStates[*slot] & 0x7F])();

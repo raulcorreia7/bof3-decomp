@@ -12,7 +12,7 @@ MATCH void EMI_SectorCopyToScratchpad(void) {
         u32* scratch;
 
         scratch    = (u32*)SCRATCH_PAD;
-        slot       = &D_80146488;
+        slot       = &g_EmiRingIndex;
         D_8018B4B0 = 0;
         do {
             i          = D_8018B4B0;
@@ -27,8 +27,8 @@ MATCH void EMI_SectorCopyToScratchpad(void) {
         s8*  guard;
         u32* scratch;
 
-        guard = &D_80146488;
-        if (*(u32*)(*guard * 4 + (u8*)&D_80146488 + 0x90) >= 0x401U) {
+        guard = &g_EmiRingIndex;
+        if (*(u32*)(*guard * 4 + (u8*)&g_EmiRingIndex + 0x90) >= 0x401U) {
             scratch    = (u32*)SCRATCH_PAD;
             D_8018B4B0 = 0;
             slot       = guard;
