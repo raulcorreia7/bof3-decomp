@@ -1378,6 +1378,43 @@ jtbl_8018B2EC = { addr = 0x8018B2EC, type = "Callback", source = "The switch tab
 jtbl_8018B2F4 = { addr = 0x8018B2F4, type = "Callback", source = "The switch table of EnablePAD: the jump targets of its jr dispatch." }
 jtbl_8018B2F8 = { addr = 0x8018B2F8, type = "Callback", source = "The switch table of DesablePAD: the jump targets of its jr dispatch." }
 g_SysHardwareInitialized = { addr = 0x8018B300, source = "SYS_Main clears it and SYS_InitHardware sets it after initialization" }
+g_SndSeVoice0Program = { addr = 0x8018B308, type = "s16", source = "The VAB program of the SE's first voice, as SsUtKeyOnV takes it." }
+g_SndSeVabId = { addr = 0x8018B30C, type = "s16", source = "The VAB id every voice of the current SE keys on: the bank the SE record belongs to, or its alias bank." }
+g_SndSeVoice0Tone = { addr = 0x8018B310, type = "s16", source = "The tone of the program of the SE's first voice, as SsUtKeyOnV takes it." }
+g_SndSeVoice0Note = { addr = 0x8018B314, type = "s16", source = "The lowest key of the tone of the SE's first voice, as SsUtKeyOnV takes it." }
+g_SndSeVoice0SpuVoice = { addr = 0x8018B318, type = "s16", source = "The SPU voice to key on of the SE's first voice, as SsUtKeyOnV takes it." }
+g_SndSeVoice0KeyedVoice = { addr = 0x8018B31C, type = "s16", source = "The SPU voice SsUtKeyOnV returned, -1 when none of the SE's first voice, as SsUtKeyOnV takes it." }
+g_SndSeVoice0Fine = { addr = 0x8018B320, type = "s16", source = "The fine tune of the tone of the SE's first voice, as SsUtKeyOnV takes it." }
+g_SndSeVoice0VolumeL = { addr = 0x8018B324, type = "s16", source = "The left volume of the SE's first voice, as SsUtKeyOnV takes it." }
+g_SndSeVoice0VolumeR = { addr = 0x8018B328, type = "s16", source = "The right volume of the SE's first voice, as SsUtKeyOnV takes it." }
+g_SndSeVoice0Pan = { addr = 0x8018B32C, type = "s16", source = "The pan of the tone, which weights the left volume against the right of the SE's first voice, as SsUtKeyOnV takes it." }
+g_SndSeVoice1Program = { addr = 0x8018B330, type = "s16", source = "The VAB program of the SE's second voice, as SsUtKeyOnV takes it." }
+g_SndSeVoice1Tone = { addr = 0x8018B338, type = "s16", source = "The tone of the program of the SE's second voice, as SsUtKeyOnV takes it." }
+g_SndSeVoice1Note = { addr = 0x8018B33C, type = "s16", source = "The lowest key of the tone of the SE's second voice, as SsUtKeyOnV takes it." }
+g_SndSeVoice1SpuVoice = { addr = 0x8018B340, type = "s16", source = "The SPU voice to key on of the SE's second voice, as SsUtKeyOnV takes it." }
+g_SndSeVoice1KeyedVoice = { addr = 0x8018B344, type = "s16", source = "The SPU voice SsUtKeyOnV returned, -1 when none of the SE's second voice, as SsUtKeyOnV takes it." }
+g_SndSeVoice1Fine = { addr = 0x8018B348, type = "s16", source = "The fine tune of the tone of the SE's second voice, as SsUtKeyOnV takes it." }
+g_SndSeVoice1VolumeL = { addr = 0x8018B34C, type = "s16", source = "The left volume of the SE's second voice, as SsUtKeyOnV takes it." }
+g_SndSeVoice1VolumeR = { addr = 0x8018B350, type = "s16", source = "The right volume of the SE's second voice, as SsUtKeyOnV takes it." }
+g_SndSeVoice1Pan = { addr = 0x8018B354, type = "s16", source = "The pan of the tone, which weights the left volume against the right of the SE's second voice, as SsUtKeyOnV takes it." }
+g_SndSeVoice2Program = { addr = 0x8018B358, type = "s16", source = "The VAB program of the SE's third voice, as SsUtKeyOnV takes it." }
+g_SndSeVoice2Tone = { addr = 0x8018B360, type = "s16", source = "The tone of the program of the SE's third voice, as SsUtKeyOnV takes it." }
+g_SndSeVoice2Note = { addr = 0x8018B364, type = "s16", source = "The lowest key of the tone of the SE's third voice, as SsUtKeyOnV takes it." }
+g_SndSeVoice2SpuVoice = { addr = 0x8018B368, type = "s16", source = "The SPU voice to key on of the SE's third voice, as SsUtKeyOnV takes it." }
+g_SndSeVoice2KeyedVoice = { addr = 0x8018B36C, type = "s16", source = "The SPU voice SsUtKeyOnV returned, -1 when none of the SE's third voice, as SsUtKeyOnV takes it." }
+g_SndSeVoice2Fine = { addr = 0x8018B370, type = "s16", source = "The fine tune of the tone of the SE's third voice, as SsUtKeyOnV takes it." }
+g_SndSeVoice2VolumeL = { addr = 0x8018B374, type = "s16", source = "The left volume of the SE's third voice, as SsUtKeyOnV takes it." }
+g_SndSeVoice2VolumeR = { addr = 0x8018B378, type = "s16", source = "The right volume of the SE's third voice, as SsUtKeyOnV takes it." }
+g_SndSeVoice2Pan = { addr = 0x8018B37C, type = "s16", source = "The pan of the tone, which weights the left volume against the right of the SE's third voice, as SsUtKeyOnV takes it." }
+g_SndSeVoice3Program = { addr = 0x8018B380, type = "s16", source = "The VAB program of the SE's fourth voice, as SsUtKeyOnV takes it." }
+g_SndSeVoice3Tone = { addr = 0x8018B388, type = "s16", source = "The tone of the program of the SE's fourth voice, as SsUtKeyOnV takes it." }
+g_SndSeVoice3Note = { addr = 0x8018B38C, type = "s16", source = "The lowest key of the tone of the SE's fourth voice, as SsUtKeyOnV takes it." }
+g_SndSeVoice3SpuVoice = { addr = 0x8018B390, type = "s16", source = "The SPU voice to key on of the SE's fourth voice, as SsUtKeyOnV takes it." }
+g_SndSeVoice3KeyedVoice = { addr = 0x8018B394, type = "s16", source = "The SPU voice SsUtKeyOnV returned, -1 when none of the SE's fourth voice, as SsUtKeyOnV takes it." }
+g_SndSeVoice3Fine = { addr = 0x8018B398, type = "s16", source = "The fine tune of the tone of the SE's fourth voice, as SsUtKeyOnV takes it." }
+g_SndSeVoice3VolumeL = { addr = 0x8018B39C, type = "s16", source = "The left volume of the SE's fourth voice, as SsUtKeyOnV takes it." }
+g_SndSeVoice3VolumeR = { addr = 0x8018B3A0, type = "s16", source = "The right volume of the SE's fourth voice, as SsUtKeyOnV takes it." }
+g_SndSeVoice3Pan = { addr = 0x8018B3A4, type = "s16", source = "The pan of the tone, which weights the left volume against the right of the SE's fourth voice, as SsUtKeyOnV takes it." }
 g_SndSeVolumeL = { addr = 0x8018B3D8, type = "s16", source = "The left volume the SE dispatcher passes to SsUtSetDetVVol when the SE record sets EMI_SE_USE_VOLUME_FLAG." }
 g_SndSeVolumeR = { addr = 0x8018B3DC, type = "s16", source = "The right volume the SE dispatcher passes to SsUtSetDetVVol when the SE record sets EMI_SE_USE_VOLUME_FLAG." }
 g_SndSeAliasBank = { addr = 0x8018B3E0, type = "s16", source = "The alias bank byte of the current SE record: nonzero selects the bank whose VAB supplies the tone and voice." }
