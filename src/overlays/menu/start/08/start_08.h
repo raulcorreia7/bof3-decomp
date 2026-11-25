@@ -119,13 +119,15 @@ ASSERT_OFFSET(NewGameStart, items, 0x38);
 ASSERT_OFFSET(NewGameStart, vitals, 0x48);
 ASSERT_OFFSET(NewGameStart, unk_58, 0x58);
 ASSERT_SIZE(NewGameStart, 0x5C);
+extern u8 g_PartyStage[]; /* 0x1F800000 */
+extern u8 g_CharSlotView[]; /* 0x80181B10 */
 extern u8 D_80181B17;
 extern u8 D_80181B18;
 
 /* The new game's starting points and the tables its start menu copies. */
 extern NewGameStart D_801EBA44[];
 extern u8           D_801EC174[];
-extern u8           D_801EC214[];
+extern u8           D_801EC214[][0x10];
 extern u8           g_BattleTargetRows[][4];
 extern u8           D_801454FF;
 extern u8           D_80145518[][4];
