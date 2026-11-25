@@ -57,34 +57,34 @@ NON_MATCHING void UI_MessageRunScript(void) {
                     CHAN_FLAGS(chan) &= ~FRONTEND_FLAG_TIMER_ACTIVE;
                     CHAN_CURSOR(chan) = CHAN_RETURN(chan);
                 } else {
-                    loop                   = 0;
+                    loop             = 0;
                     CHAN_STATE(chan) = 2;
                 }
                 break;
             case 0x16:
-                t                      = *(u8**)(s4 + 0xA);
-                loop                   = 0;
-                *(u8**)(s4 + 0xA)      = t + 1;
-                CHAN_STATE(chan) = 7;
-                s4[0]                  = t[1];
+                t                 = *(u8**)(s4 + 0xA);
+                loop              = 0;
+                *(u8**)(s4 + 0xA) = t + 1;
+                CHAN_STATE(chan)  = 7;
+                s4[0]             = t[1];
                 break;
             case 0xB:
-                loop                   = 0;
+                loop             = 0;
                 CHAN_STATE(chan) = 1;
                 chan[2] += 8;
                 break;
             case 2:
                 CHAN_STATE(chan) = 3;
-                loop                   = 0;
+                loop             = 0;
                 break;
             case 0x14:
-                t                      = *(u8**)(s2 - 0x14);
-                *(u8**)(s2 - 0x14)     = t + 3;
-                s2[0]                  = t[1];
-                s2[2]                  = (*D_801490B0 & 0xF) - 1;
-                loop                   = 0;
-                s2[1]                  = *D_801490B0 >> 4;
-                CHAN_STATE(chan) = (s2[1] == 0) ? 5 : 4;
+                t                  = *(u8**)(s2 - 0x14);
+                *(u8**)(s2 - 0x14) = t + 3;
+                s2[0]              = t[1];
+                s2[2]              = (*D_801490B0 & 0xF) - 1;
+                loop               = 0;
+                s2[1]              = *D_801490B0 >> 4;
+                CHAN_STATE(chan)   = (s2[1] == 0) ? 5 : 4;
                 break;
             case 7:
                 loop              = 0;
