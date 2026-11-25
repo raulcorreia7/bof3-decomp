@@ -4,17 +4,19 @@
 __asm__(".include \"include/match/macro.inc\"\n");
 #endif
 
-MATCH void func_801EEC28(void) {
+/* func_801EEC28 */
+MATCH void BMagic_SuperComboUpdate(void) {
     PartyMember* saved_task;
     PartyMember* saved_battler;
     u8           i;
 
-    SYS_DISPATCH_BYTE(D_801F0AD8, TASK(PartyMember)->header.mode);
+    SYS_DISPATCH_BYTE(g_BMagicSuperComboModes, TASK(PartyMember)->header.mode);
 
     BMAGIC_RUN_EFFECT_SLOTS(BMAGIC_EFFECT_SLOTS, BMagic_DispatchEffectMode);
 }
 
-MATCH void func_801EED14(void) {
+/* func_801EED14 */
+MATCH void BMagic_SuperComboInit(void) {
     u32 i;
     for (i = 0; i < BMAGIC_EFFECT_COUNT; i++) {
         BMAGIC_EFFECT_SLOTS[i].header.flags = 0;
@@ -29,11 +31,12 @@ MATCH void func_801EED14(void) {
     TASK(PartyMember)->header.mode += 1;
 }
 
-MATCH void func_801EEDAC(void) {
+/* func_801EEDAC */
+MATCH void BMagic_SuperComboShowReady(void) {
     u8 timer;
 
-    func_801F07B0(1);
-    func_801F0164(1);
+    BMagic_SuperComboDrawLabelBox(1);
+    BMagic_SuperComboDrawLabel(1);
     timer                     = TASK(PartyMember)->unk_09 - 1;
     TASK(PartyMember)->unk_09 = timer;
     if (!(timer & BYTE_MASK)) {
@@ -42,11 +45,12 @@ MATCH void func_801EEDAC(void) {
     }
 }
 
-MATCH void func_801EEE28(void) {
+/* func_801EEE28 */
+MATCH void BMagic_SuperComboShowGo(void) {
     u8 timer;
 
-    func_801F07B0(2);
-    func_801F0164(2);
+    BMagic_SuperComboDrawLabelBox(2);
+    BMagic_SuperComboDrawLabel(2);
     timer                     = TASK(PartyMember)->unk_09 - 1;
     TASK(PartyMember)->unk_09 = timer;
     if (!(timer & BYTE_MASK)) {
@@ -55,15 +59,16 @@ MATCH void func_801EEE28(void) {
     }
 }
 
-MATCH void func_801EEEA4(void) {
-    u8 count;
+/* func_801EEEA4 */
+MATCH void BMagic_SuperComboPickButton(void) {
+    u8 delay;
 
-    count                     = TASK(PartyMember)->unk_09 - 1;
-    TASK(PartyMember)->unk_09 = count;
-    if (count == 0) {
+    delay                     = TASK(PartyMember)->unk_09 - 1;
+    TASK(PartyMember)->unk_09 = delay;
+    if (delay == 0) {
         TASK(PartyMember)->param.unk_0B = RANDOM_MASK(3);
         if (TASK(PartyMember)->timer < 16) {
-            TASK(PartyMember)->unk_09 = D_801F0A84[TASK(PartyMember)->timer];
+            TASK(PartyMember)->unk_09 = g_BMagicSuperComboPromptDelays[TASK(PartyMember)->timer];
         } else {
             TASK(PartyMember)->unk_09 = 3;
         }
@@ -71,37 +76,39 @@ MATCH void func_801EEEA4(void) {
     }
 }
 
-MATCH void func_801EEF4C(void) {
-    u8 count;
-    u8 timer;
+/* func_801EEF4C */
+MATCH void BMagic_SuperComboReadButton(void) {
+    u8 hits;
+    u8 delay;
 
-    func_801F07B0(4);
-    func_801F03F0(TASK(PartyMember)->param.unk_0B);
+    BMagic_SuperComboDrawLabelBox(4);
+    BMagic_SuperComboDrawButton(TASK(PartyMember)->param.unk_0B);
     if (g_PadStates[0].pressed & (PADRup | PADRdown | PADRleft | PADRright)) {
-        if (g_PadStates[0].pressed != D_801F0A98[TASK(PartyMember)->param.unk_0B]) {
+        if (g_PadStates[0].pressed != g_BMagicSuperComboButtonMasks[TASK(PartyMember)->param.unk_0B]) {
             TASK(PartyMember)->unk_09      = 6;
-            TASK(PartyMember)->header.mode = 5;
+            TASK(PartyMember)->header.mode = SUPER_COMBO_MODE_WAIT_RESULT;
         } else {
             TASK(PartyMember)->unk_09 = 6;
-            count                     = TASK(PartyMember)->timer + 1;
-            TASK(PartyMember)->timer  = count;
-            if (count < 32) {
-                TASK(PartyMember)->header.mode = 3;
+            hits                      = TASK(PartyMember)->timer + 1;
+            TASK(PartyMember)->timer  = hits;
+            if (hits < SUPER_COMBO_HIT_MAX) {
+                TASK(PartyMember)->header.mode = SUPER_COMBO_MODE_PICK_BUTTON;
             } else {
-                TASK(PartyMember)->header.mode = 5;
+                TASK(PartyMember)->header.mode = SUPER_COMBO_MODE_WAIT_RESULT;
             }
         }
     } else {
-        timer                     = TASK(PartyMember)->unk_09 - 1;
-        TASK(PartyMember)->unk_09 = timer;
-        if (timer == 0) {
+        delay                     = TASK(PartyMember)->unk_09 - 1;
+        TASK(PartyMember)->unk_09 = delay;
+        if (delay == 0) {
             TASK(PartyMember)->unk_09      = 6;
-            TASK(PartyMember)->header.mode = 5;
+            TASK(PartyMember)->header.mode = SUPER_COMBO_MODE_WAIT_RESULT;
         }
     }
 }
 
-MATCH void func_801EF04C(void) {
+/* func_801EF04C */
+MATCH void BMagic_SuperComboWaitResult(void) {
     u8 timer;
 
     timer                     = TASK(PartyMember)->unk_09 - 1;
@@ -112,12 +119,13 @@ MATCH void func_801EF04C(void) {
     }
 }
 
-MATCH void func_801EF0A8(void) {
+/* func_801EF0A8 */
+MATCH void BMagic_SuperComboShowHitCount(void) {
     u8 timer;
 
-    func_801F07B0(0);
-    func_801F0550(TASK(PartyMember)->timer);
-    func_801F0164(0);
+    BMagic_SuperComboDrawLabelBox(0);
+    BMagic_SuperComboDrawHitCount(TASK(PartyMember)->timer);
+    BMagic_SuperComboDrawLabel(0);
     timer                     = TASK(PartyMember)->unk_09 - 1;
     TASK(PartyMember)->unk_09 = timer;
     if (!(timer & BYTE_MASK)) {
@@ -125,7 +133,8 @@ MATCH void func_801EF0A8(void) {
     }
 }
 
-MATCH void func_801EF12C(void) {
+/* func_801EF12C */
+MATCH void BMagic_SuperComboStartAttack(void) {
     TASK(PartyMember)->facing       = g_BattleEffectBattler->facing;
     TASK(PartyMember)->pos.x.fixed  = g_BattleEffectBattler->pos.x.fixed;
     TASK(PartyMember)->pos.y.fixed  = g_BattleEffectBattler->pos.y.fixed;
@@ -133,22 +142,24 @@ MATCH void func_801EF12C(void) {
     TASK(PartyMember)->param.unk_0B = 0;
     TASK(PartyMember)->header.mode += 1;
     Battle_SelectActiveBattlerScript(0xC, 2);
-    func_801EFD4C();
-    func_801EFEC8();
+    BMagic_SuperComboSpawnStrike();
+    BMagic_SuperComboSpawnImages();
     TASK(PartyMember)->unk_04 = TASK(PartyMember)->param.unk_0B;
     g_BattleEffectBattler->header.flags |= ACTOR_FLAG_HIDDEN;
     SND_SEQueueSelection(0x100);
 }
 
-MATCH void func_801EF1FC(void) {
+/* func_801EF1FC */
+MATCH void BMagic_SuperComboEndAttack(void) {
     if (TASK(PartyMember)->param.unk_0B == 0) {
-        D_8014637C->header.flags &= 0xBF;
+        D_8014637C->header.flags &= ~ACTOR_FLAG_HIDDEN;
         Battle_SelectActiveBattlerScript(4, 0);
         TASK(PartyMember)->header.mode += 1;
     }
 }
 
-MATCH void func_801EF268(void) {
+/* func_801EF268 */
+MATCH void BMagic_SuperComboFinish(void) {
     SND_SEQueueSelection(258);
     g_Battle.unk_EF[7] = TASK(PartyMember)->timer;
     Battle_MarkDamaged(g_BattleTargetSelector);
@@ -156,13 +167,15 @@ MATCH void func_801EF268(void) {
     Effect_Reset();
 }
 
-MATCH void func_801EF2CC(void) {
-    Callback handlers[2] = {func_801EF324, func_801EF708};
+/* func_801EF2CC */
+MATCH void BMagic_SuperComboRunEffect(void) {
+    Callback handlers[2] = {BMagic_SuperComboRunStrike, BMagic_SuperComboRunImage};
 
     SYS_DISPATCH_TASK(handlers, 1, g_Task);
 }
 
-MATCH void func_801EF324(void) {
+/* func_801EF324 */
+MATCH void BMagic_SuperComboRunStrike(void) {
     Magic003Steps handlers;
 
     handlers = D_801EEC04;
@@ -172,7 +185,8 @@ MATCH void func_801EF324(void) {
     }
 }
 
-MATCH void func_801EF3C8(void) {
+/* func_801EF3C8 */
+MATCH void BMagic_SuperComboStrikeStart(void) {
     s32 x;
     s32 y;
     u32 z;
@@ -197,20 +211,21 @@ MATCH void func_801EF3C8(void) {
     }
 }
 
-MATCH void func_801EF478(void) {
-    s32 value;
-    u8  value2;
+/* func_801EF478 */
+MATCH void BMagic_SuperComboStrikeJump(void) {
+    s32 frames_left;
+    u8  delay;
 
-    value2 = TASK(PartyMember)->unk_09;
-    value  = value2 & BYTE_MASK;
-    if (value != 0) {
-        if (value != 0xFF) {
-            TASK(PartyMember)->unk_09 = value2 - 1;
+    delay       = TASK(PartyMember)->unk_09;
+    frames_left = delay & BYTE_MASK;
+    if (frames_left != 0) {
+        if (frames_left != 0xFF) {
+            TASK(PartyMember)->unk_09 = delay - 1;
         }
     } else {
         SND_SEQueueSelection(0x101);
         Battle_PlayActiveBattlerSE(2, 0);
-        func_801F0078();
+        BMagic_SuperComboSpawnHitImages();
         Battle_ApplyDamageFlags(g_Battle.target_selector, 0x10U);
         TASK(PartyMember)->unk_09 = 0xFF;
     }
@@ -224,20 +239,21 @@ MATCH void func_801EF478(void) {
     }
 }
 
-MATCH void func_801EF578(void) {
-    s32 value;
-    u8  value2;
+/* func_801EF578 */
+MATCH void BMagic_SuperComboStrikeHit(void) {
+    s32 frames_left;
+    u8  delay;
 
-    value2 = TASK(PartyMember)->unk_09;
-    value  = value2 & BYTE_MASK;
-    if (value != 0) {
-        if (value != 0xFF) {
-            TASK(PartyMember)->unk_09 = value2 - 1;
+    delay       = TASK(PartyMember)->unk_09;
+    frames_left = delay & BYTE_MASK;
+    if (frames_left != 0) {
+        if (frames_left != 0xFF) {
+            TASK(PartyMember)->unk_09 = delay - 1;
         }
     } else {
         SND_SEQueueSelection(0x101);
         Battle_PlayActiveBattlerSE(2, 0);
-        func_801F0078();
+        BMagic_SuperComboSpawnHitImages();
         Battle_ApplyDamageFlags(g_Battle.target_selector, 0x10U);
         TASK(PartyMember)->unk_09 = 0xFF;
     }
@@ -250,7 +266,8 @@ MATCH void func_801EF578(void) {
     }
 }
 
-MATCH void func_801EF644(void) {
+/* func_801EF644 */
+MATCH void BMagic_SuperComboStrikeReturn(void) {
     TASK(PartyMember)->pos.x.fixed += TASK(PartyMember)->unk_0C;
     TASK(PartyMember)->pos.y.fixed += TASK(PartyMember)->unk_10;
     Script_AnimStepOnce();
@@ -259,7 +276,8 @@ MATCH void func_801EF644(void) {
     }
 }
 
-MATCH void func_801EF6CC(void) {
+/* func_801EF6CC */
+MATCH void BMagic_SuperComboStrikeEnd(void) {
     PartyMember* work;
     u8           step;
 
@@ -271,7 +289,8 @@ MATCH void func_801EF6CC(void) {
     }
 }
 
-MATCH void func_801EF708(void) {
+/* func_801EF708 */
+MATCH void BMagic_SuperComboRunImage(void) {
     Magic003SecondSteps handlers;
 
     handlers = D_801EEC18;
@@ -281,7 +300,8 @@ MATCH void func_801EF708(void) {
     }
 }
 
-MATCH void func_801EF7A8(void) {
+/* func_801EF7A8 */
+MATCH void BMagic_SuperComboImageStart(void) {
     s32 x;
     s32 y;
     u32 z;
@@ -306,12 +326,14 @@ MATCH void func_801EF7A8(void) {
         TASK(PartyMember)->unk_5D = -(TASK(PartyMember)->param.unk_0B << 4);
         TASK(PartyMember)->unk_5F = -(TASK(PartyMember)->param.unk_0B << 4);
         TASK(PartyMember)->unk_5E = -(TASK(PartyMember)->param.unk_0B << 4);
-        GFX_PaletteAllocFade(g_Task, D_801F0A78[TASK(PartyMember)->param.unk_0B].r, D_801F0A78[TASK(PartyMember)->param.unk_0B].g, D_801F0A78[TASK(PartyMember)->param.unk_0B].b, 1);
+        GFX_PaletteAllocFade(g_Task, g_BMagicSuperComboImageTints[TASK(PartyMember)->param.unk_0B].r, g_BMagicSuperComboImageTints[TASK(PartyMember)->param.unk_0B].g,
+                             g_BMagicSuperComboImageTints[TASK(PartyMember)->param.unk_0B].b, 1);
         TASK(PartyMember)->header.step += 1;
     }
 }
 
-MATCH void func_801EF918(void) {
+/* func_801EF918 */
+MATCH void BMagic_SuperComboImageJump(void) {
     TASK(PartyMember)->pos.x.fixed += TASK(PartyMember)->unk_0C;
     TASK(PartyMember)->pos.y.fixed += TASK(PartyMember)->unk_10;
     TASK(PartyMember)->pos.z.fixed += TASK(PartyMember)->unk_14;
@@ -322,7 +344,8 @@ MATCH void func_801EF918(void) {
     }
 }
 
-MATCH void func_801EF9AC(void) {
+/* func_801EF9AC */
+MATCH void BMagic_SuperComboImageTurn(void) {
     TASK(PartyMember)->unk_0C = -0x2000;
     TASK(PartyMember)->unk_10 = 0;
     Effect_RotatePosition(g_Task);
@@ -330,7 +353,8 @@ MATCH void func_801EF9AC(void) {
     TASK(PartyMember)->header.step += 1;
 }
 
-MATCH void func_801EF9FC(void) {
+/* func_801EF9FC */
+MATCH void BMagic_SuperComboImageEnd(void) {
     TASK(PartyMember)->pos.x.fixed += TASK(PartyMember)->unk_0C;
     TASK(PartyMember)->pos.y.fixed += TASK(PartyMember)->unk_10;
     Script_AnimStepOnce();
@@ -346,11 +370,13 @@ MATCH void func_801EF9FC(void) {
 
 #include "overlays/bmagic/shared/BMagic_RunEffectStep.h"
 
-MATCH void func_801EFAE0(void) {
-    BMAGIC_RUN_EFFECT_STEP(func_801EFB8C, func_801EFCF8);
+/* func_801EFAE0 */
+MATCH void BMagic_SuperComboRunHitImage(void) {
+    BMAGIC_RUN_EFFECT_STEP(BMagic_SuperComboHitImageStart, BMagic_SuperComboHitImagePlay);
 }
 
-MATCH void func_801EFB8C(void) {
+/* func_801EFB8C */
+MATCH void BMagic_SuperComboHitImageStart(void) {
     PartyMember* actor;
     PartyMember* work;
     u8           timer;
@@ -383,7 +409,8 @@ MATCH void func_801EFB8C(void) {
     }
 }
 
-MATCH void func_801EFCF8(void) {
+/* func_801EFCF8 */
+MATCH void BMagic_SuperComboHitImagePlay(void) {
     PartyMember* work;
 
     Script_AnimStepOnce();
@@ -396,7 +423,8 @@ MATCH void func_801EFCF8(void) {
 
 #include "overlays/bmagic/shared/Effect_CopyActiveBattlerToSlot.h"
 
-MATCH void func_801EFD4C(void) {
+/* func_801EFD4C */
+MATCH void BMagic_SuperComboSpawnStrike(void) {
     BattleEffect* image;
     u32           slot;
 
@@ -412,7 +440,8 @@ MATCH void func_801EFD4C(void) {
     TASK(PartyMember)->param.unk_0B += 1;
 }
 
-MATCH void func_801EFEC8(void) {
+/* func_801EFEC8 */
+MATCH void BMagic_SuperComboSpawnImages(void) {
     BattleEffect* image;
     u32           slot;
     u8            i;
@@ -432,7 +461,8 @@ MATCH void func_801EFEC8(void) {
     }
 }
 
-MATCH void func_801F0078(void) {
+/* func_801F0078 */
+MATCH void BMagic_SuperComboSpawnHitImages(void) {
     PartyMember* battler;
     u8           i;
     u8           slot;
@@ -450,7 +480,8 @@ MATCH void func_801F0078(void) {
     }
 }
 
-MATCH void func_801F0164(s32 index) {
+/* func_801F0164 */
+MATCH void BMagic_SuperComboDrawLabel(s32 label_index) {
     POLY_FT4* prim;
     s32       tpage;
     u16       x;
@@ -463,12 +494,12 @@ MATCH void func_801F0164(s32 index) {
 
     tpage = getTPage(TPAGE_DEPTH_4BIT, TPAGE_ABR_HALF, 320, 256);
     GFX_ADD_DITHERED_DRAW_MODE(BMAGIC_LAYER_FOREGROUND, tpage);
-    length = D_801F0A9C[(u8)index];
+    length = g_BMagicSuperComboLabelLengths[(u8)label_index];
     x      = TASK(PartyMember)->screen_x.value - ((length >> 1) * 12 + (length & 1) * 6);
     y      = TASK(PartyMember)->screen_y.value;
-    for (i = 0; D_801F0AA0[(u8)index][i] != 0; i++) {
-        glyph = D_801F0AA0[(u8)index][i] - 0x3F;
-        if (D_801F0AA0[(u8)index][i] != 0xFF) {
+    for (i = 0; g_BMagicSuperComboLabels[(u8)label_index][i] != 0; i++) {
+        glyph = g_BMagicSuperComboLabels[(u8)label_index][i] - 0x3F;
+        if (g_BMagicSuperComboLabels[(u8)label_index][i] != 0xFF) {
             prim = (POLY_FT4*)g_GfxPrimCursor;
             SetPolyFT4(prim);
             setXYWH(prim, x, y, 12, 12);
@@ -486,7 +517,8 @@ MATCH void func_801F0164(s32 index) {
     }
 }
 
-MATCH void func_801F03F0(s32 dir) {
+/* func_801F03F0 */
+MATCH void BMagic_SuperComboDrawButton(s32 button) {
     POLY_FT4* prim;
     s32       tpage;
     u16       x;
@@ -501,14 +533,15 @@ MATCH void func_801F03F0(s32 dir) {
     SetPolyFT4(prim);
     setXYWH(prim, x, y, 12, 12);
     prim->tpage = GetTPage(TPAGE_DEPTH_4BIT, TPAGE_ABR_HALF, FONT_TPAGE_X, FONT_TPAGE_Y);
-    prim->clut  = GetClut(D_801F0AD4[(u8)dir], 0x1E0);
-    u           = ((u8)dir + 15) * 12;
+    prim->clut  = GetClut(g_BMagicSuperComboButtonCluts[(u8)button], 0x1E0);
+    u           = ((u8)button + 15) * 12;
     setUV4(prim, u, 0x30, u + 12, 0x30, u, 0x3C, u + 12, 0x3C);
     setRGB0(prim, 0x80, 0x80, 0x80);
     GFX_AddPrim(BMAGIC_LAYER_FOREGROUND, sizeof(POLY_FT4));
 }
 
-MATCH void func_801F0550(s32 value) {
+/* func_801F0550 */
+MATCH void BMagic_SuperComboDrawHitCount(s32 hits) {
     POLY_FT4* prim;
     s32       tpage;
     u16       x;
@@ -520,8 +553,8 @@ MATCH void func_801F0550(s32 value) {
 
     tpage = getTPage(TPAGE_DEPTH_4BIT, TPAGE_ABR_HALF, 320, 256);
     GFX_ADD_DITHERED_DRAW_MODE(BMAGIC_LAYER_FOREGROUND, tpage);
-    tens = (u8)value / 10;
-    ones = (u8)value % 10;
+    tens = (u8)hits / 10;
+    ones = (u8)hits % 10;
     prim = (POLY_FT4*)g_GfxPrimCursor;
     x    = TASK(PartyMember)->screen_x.value;
     y    = TASK(PartyMember)->screen_y.value;
@@ -548,7 +581,8 @@ MATCH void func_801F0550(s32 value) {
     }
 }
 
-MATCH void func_801F07B0(s32 index) {
+/* func_801F07B0 */
+MATCH void BMagic_SuperComboDrawLabelBox(s32 label_index) {
     TILE* tile;
     s32   tpage;
 
@@ -557,15 +591,17 @@ MATCH void func_801F07B0(s32 index) {
     tile = (TILE*)g_GfxPrimCursor;
     SetTile(tile);
     SetSemiTrans(tile, 1);
-    setXY0(tile, TASK(PartyMember)->screen_x.value - (D_801F0B10[(u8)index].box.x + 4), TASK(PartyMember)->screen_y.value - (D_801F0B10[(u8)index].box.y + 4));
-    setWH(tile, D_801F0B10[(u8)index].box.w + 8, D_801F0B10[(u8)index].box.h + 8);
+    setXY0(tile, TASK(PartyMember)->screen_x.value - (g_BMagicSuperComboLabelBoxes[(u8)label_index].box.x + 4),
+           TASK(PartyMember)->screen_y.value - (g_BMagicSuperComboLabelBoxes[(u8)label_index].box.y + 4));
+    setWH(tile, g_BMagicSuperComboLabelBoxes[(u8)label_index].box.w + 8, g_BMagicSuperComboLabelBoxes[(u8)label_index].box.h + 8);
     setRGB0(tile, 0x20, 0x20, 0x20);
     GFX_AddPrim(BMAGIC_LAYER_FOREGROUND, sizeof(TILE));
     tile = (TILE*)g_GfxPrimCursor;
     SetTile(tile);
     SetSemiTrans(tile, 1);
-    setXY0(tile, TASK(PartyMember)->screen_x.value - (D_801F0B10[(u8)index].box.x + 6), TASK(PartyMember)->screen_y.value - (D_801F0B10[(u8)index].box.y + 6));
-    setWH(tile, D_801F0B10[(u8)index].box.w + 12, D_801F0B10[(u8)index].box.h + 12);
+    setXY0(tile, TASK(PartyMember)->screen_x.value - (g_BMagicSuperComboLabelBoxes[(u8)label_index].box.x + 6),
+           TASK(PartyMember)->screen_y.value - (g_BMagicSuperComboLabelBoxes[(u8)label_index].box.y + 6));
+    setWH(tile, g_BMagicSuperComboLabelBoxes[(u8)label_index].box.w + 12, g_BMagicSuperComboLabelBoxes[(u8)label_index].box.h + 12);
     setRGB0(tile, 0x20, 0x20, 0x20);
     GFX_AddPrim(BMAGIC_LAYER_FOREGROUND, sizeof(TILE));
     tpage = getTPage(TPAGE_DEPTH_4BIT, TPAGE_ABR_HALF, 320, 256);
