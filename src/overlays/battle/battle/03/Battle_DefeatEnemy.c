@@ -25,7 +25,7 @@ MATCH void Battle_DefeatEnemy(void) {
             g_Battle.flags &= ~BATTLE_STATE_OVER;
         }
         func_800AD074(g_BattleCurrentEnemy->enemy_id.byte.type);
-        GFX_PaletteFreeFadeTarget(g_Task);
+        GFX_PaletteFreeFadeTarget(TASK(void));
         g_BattleCurrentEnemy->turn.damage_flags.value &= ~(BATTLER_DAMAGE_UNK_4 | BATTLER_DAMAGE_UNK_5 | BATTLER_DAMAGE_TAKEN);
         Battle_ClearSlotPending(TASK(PartyMember)->slot);
         TASK(PartyMember)->header.mode = 2;

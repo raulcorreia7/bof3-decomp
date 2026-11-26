@@ -11,7 +11,7 @@ MATCH void func_800A87D4(void) {
     if ((index & BYTE_MASK) != GAME_NONE) {
         slot                                            = &g_BattleEffects[index & BYTE_MASK];
         /* one struct copy (the 16-byte block-move loop), read through the non-volatile cell */
-        *slot                                           = *(BattleWorkImage*)g_BattleWorkCell;
+        *slot                                           = *TASK(BattleWorkImage);
         g_BattleEffects[index & BYTE_MASK].unk_06       = 0;
         g_BattleEffects[index & BYTE_MASK].effect_type  = 0x12;
         g_BattleEffects[index & BYTE_MASK].header.mode  = 0;

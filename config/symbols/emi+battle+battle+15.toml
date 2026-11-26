@@ -1,5 +1,4 @@
 ["emi/battle/battle/15"]
-g_BattleWorkCell = { addr = 0x1F800044, alias = true, source = "The task cell at 0x1F800044 as one u32: the plain word Battle_CureStatus saves and restores without reloading g_Task." }
 jtbl_80096804 = { addr = 0x80096804, type = "Callback", source = "The switch table of Battle_TriggerEnemyEvents: the jump targets of its jr dispatch." }
 jtbl_8009689C = { addr = 0x8009689C, type = "Callback", source = "The switch table of Battle_RunEnemyEvents: the jump targets of its jr dispatch." }
 jtbl_80096914 = { addr = 0x80096914, type = "Callback", source = "The switch table of Battle_ApplyEnemyEvent: the jump targets of its jr dispatch." }

@@ -221,11 +221,6 @@ typedef struct BattleTemplateStats {
     u8  pad_0C[0x6C];
 } BattleTemplateStats;
 
-/* The same cell read without the reload is g_BattleWorkCell: Battle_CureStatus's
- * save/restore keeps the plain word. A second name is the only form that keeps
- * the retail `lui`/`sw` pairs; the address is an `alias:true` row of the image's table in config/symbols/<image>.toml. */
-extern u32 g_BattleWorkCell;
-
 #define BATTLE_EFFECT_STEP_COUNT 3
 
 typedef struct BattleEffectSteps {
