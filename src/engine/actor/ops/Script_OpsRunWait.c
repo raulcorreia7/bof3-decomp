@@ -65,9 +65,9 @@ NON_MATCHING u8 Script_OpsRunWait(ScriptState* state, u8* base, u8 value) {
             frames = (base + state->cursor)[7];
             if (frames != 0) {
                 g_ActorTurnRamps[g_ScratchPad.cells.bytes[1]].frames_z = g_ActorTurnRamps[g_ScratchPad.cells.bytes[1]].frames_xy = frames;
-                g_ActorTurnRamps[g_ScratchPad.cells.bytes[1]].delta_z                                      = (s16)((base + state->cursor)[5] << 8 | (base + state->cursor)[6]) / g_ActorTurnRamps[g_ScratchPad.cells.bytes[1]].frames_z;
-                g_ActorTurnRamps[g_ScratchPad.cells.bytes[1]].delta_y                                      = (s16)((base + state->cursor)[3] << 8 | (base + state->cursor)[4]) / g_ActorTurnRamps[g_ScratchPad.cells.bytes[1]].frames_z;
-                g_ActorTurnRamps[g_ScratchPad.cells.bytes[1]].delta_x                                      = (s16)((base + state->cursor)[1] << 8 | (base + state->cursor)[2]) / g_ActorTurnRamps[g_ScratchPad.cells.bytes[1]].frames_z;
+                g_ActorTurnRamps[g_ScratchPad.cells.bytes[1]].delta_z = (s16)((base + state->cursor)[5] << 8 | (base + state->cursor)[6]) / g_ActorTurnRamps[g_ScratchPad.cells.bytes[1]].frames_z;
+                g_ActorTurnRamps[g_ScratchPad.cells.bytes[1]].delta_y = (s16)((base + state->cursor)[3] << 8 | (base + state->cursor)[4]) / g_ActorTurnRamps[g_ScratchPad.cells.bytes[1]].frames_z;
+                g_ActorTurnRamps[g_ScratchPad.cells.bytes[1]].delta_x = (s16)((base + state->cursor)[1] << 8 | (base + state->cursor)[2]) / g_ActorTurnRamps[g_ScratchPad.cells.bytes[1]].frames_z;
             } else {
                 TASK(Actor)->angle_z = (s16)((base + state->cursor)[5] << 8 | (base + state->cursor)[6]);
                 TASK(Actor)->angle_y = (s16)((base + state->cursor)[3] << 8 | (base + state->cursor)[4]);

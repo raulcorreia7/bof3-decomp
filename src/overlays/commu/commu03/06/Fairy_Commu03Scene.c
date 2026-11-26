@@ -206,22 +206,22 @@ NON_MATCHING void func_801D1250(s32 scene, s32 mode) {
     for (i = 0; i < 2; i++) {
         prim = (POLY_FT4*)g_GfxPrimCursor;
         SetPolyFT4(prim);
-        bar_x = left + 0x49;
+        bar_x    = left + 0x49;
         prim->x0 = bar_x;
         prim->y1 = prim->y0 = top + 0x3F + i * 4;
-        prim->u0 = 0x98;
-        prim->u1 = 0x9C;
+        prim->u0            = 0x98;
+        prim->u1            = 0x9C;
         prim->v1 = prim->v0 = 0xD8;
-        prim->clut = getClut(176, 480);
-        prim->x2 = prim->x0;
-        prim->x1 = bar_x + sums[i];
+        prim->clut          = getClut(176, 480);
+        prim->x2            = prim->x0;
+        prim->x1            = bar_x + sums[i];
         prim->y3 = prim->y2 = prim->y0 + 4;
         setRGB0(prim, 0x80, 0x80, 0x80);
         prim->u3 = prim->u1;
         prim->u2 = prim->u0;
         prim->x3 = prim->x1;
         prim->v3 = prim->v2 = prim->v0 + 8;
-        prim->tpage = getTPage(0, 0, 960, 0);
+        prim->tpage         = getTPage(0, 0, 960, 0);
         GFX_AddPrim(GFX_LAYER_UI, sizeof(POLY_FT4));
     }
 }
@@ -251,13 +251,13 @@ NON_MATCHING void func_801D1714(s16 x, s16 y, u32 clut, u8* text) {
             poly->x1 = x + 0xC;
             poly->y1 = poly->y0 = y;
             poly->y3 = poly->y2 = poly->y0 + 8;
-            poly->x2 = poly->x0 - 4;
-            poly->x3 = poly->x1 - 4;
-            u        = ((*text - ' ') % 32) * 8;
-            poly->u0 = u;
-            poly->u1 = u + 7;
-            poly->u2 = poly->u0;
-            poly->u3 = poly->u1;
+            poly->x2            = poly->x0 - 4;
+            poly->x3            = poly->x1 - 4;
+            u                   = ((*text - ' ') % 32) * 8;
+            poly->u0            = u;
+            poly->u1            = u + 7;
+            poly->u2            = poly->u0;
+            poly->u3            = poly->u1;
             poly->v1 = poly->v0 = ((*text - ' ') / 32) * 8;
             setRGB0(poly, 0x80, 0x80, 0x80);
             poly->clut = color;

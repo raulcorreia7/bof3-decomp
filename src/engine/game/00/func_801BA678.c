@@ -21,10 +21,10 @@ NON_MATCHING s32 func_801BA678(void) {
     if (COORD_FRAC(TASK(Actor)->pos.x) == 0 && COORD_FRAC(TASK(Actor)->pos.y) == 0) {
         return 1;
     }
-    delta = D_80181B00[TASK(Actor)->direction * 2];
-    dx    = (delta == 1) ? 2 : delta;
-    delta = D_80181B01[TASK(Actor)->direction * 2];
-    dy    = (delta == 1) ? 2 : delta;
+    delta   = D_80181B00[TASK(Actor)->direction * 2];
+    dx      = (delta == 1) ? 2 : delta;
+    delta   = D_80181B01[TASK(Actor)->direction * 2];
+    dy      = (delta == 1) ? 2 : delta;
     near_x  = COORD_INT(TASK(Actor)->pos.x);
     ahead_x = COORD_INT(TASK(Actor)->pos.x) + dx;
     ahead_y = COORD_INT(TASK(Actor)->pos.y) + dy;
@@ -59,12 +59,10 @@ NON_MATCHING s32 func_801BA678(void) {
                 if (func_801BB1B8(2)) {
                     return 0;
                 }
-                if ((g_ScratchPad.cells.bytes[9] & 0xF0) == 0xA0 &&
-                    (TASK(Actor)->direction == FACING_UP || TASK(Actor)->direction == FACING_DOWN)) {
+                if ((g_ScratchPad.cells.bytes[9] & 0xF0) == 0xA0 && (TASK(Actor)->direction == FACING_UP || TASK(Actor)->direction == FACING_DOWN)) {
                     return (u8)func_801BB7B0(9);
                 }
-                if ((g_ScratchPad.cells.bytes[10] & 0xF0) == 0xA0 &&
-                    (TASK(Actor)->direction == FACING_RIGHT || TASK(Actor)->direction == FACING_LEFT)) {
+                if ((g_ScratchPad.cells.bytes[10] & 0xF0) == 0xA0 && (TASK(Actor)->direction == FACING_RIGHT || TASK(Actor)->direction == FACING_LEFT)) {
                     return (u8)func_801BB7B0(10);
                 }
                 if ((g_ScratchPad.cells.bytes[9] & 0xF0) == 0xA0) {

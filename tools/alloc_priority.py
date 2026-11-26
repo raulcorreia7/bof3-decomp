@@ -4,10 +4,12 @@
     tools/alloc_priority.py SOURCE.c FUNCTION
 
 Compiles the file with `tools/rtl_dump.sh` (`-dl -dg`) and prints one row per pseudo-register
-that crosses a call, highest priority first: the priority
-(`floor(log2(uses)) * uses * 10000 / live length`, the order GCC's global allocator takes),
-the uses, the live length, the register it got (`s0`..`s8`, or STACK) and the instruction that
-first sets it. Use it to see which value should take which saved register.
+that crosses a call, in the order GCC 2.7.2 places them: local allocation first (`b<N>`, a value
+that lives in one basic block, block by block), then global allocation (`all`). Within each, the
+priority `floor(log2(uses)) * uses * 10000 / live length` decides, highest first, and a tie goes to
+the lower pseudo number. Uses are already weighted by loop depth (a use inside one loop counts 2).
+A row shows the priority, scope, uses, live length, the register it got (`s0`..`s8`, or STACK) and
+the instruction that first sets it. Each value takes the lowest saved register free over its life.
 
     tools/alloc_priority.py src/engine/area/map/Area_CellDrawRing.c Area_CellDrawRing
 """
@@ -34,6 +36,25 @@ SAVED_REGISTERS = {
     30: "s8",
 }
 USAGE = re.compile(r"Register (\d+) used (\d+) times across (\d+) insns(.*?)\.\n", re.S)
+BLOCK = re.compile(r"^ in block (\d+)")
+
+
+def priority(uses, length):
+    """Return GCC 2.7.2's allocno priority, computed in double as global.c does."""
+    return int(float(int(math.log2(uses)) * uses) / length * 10000)
+
+
+def allocation_order(rows):
+    """Sort (pseudo, uses, length, block) rows into the order the allocators take them."""
+    return sorted(
+        rows,
+        key=lambda row: (
+            row[3] is None,
+            row[3] if row[3] is not None else 0,
+            -priority(row[1], row[2]),
+            row[0],
+        ),
+    )
 
 
 def dump_part(path, function):
@@ -84,14 +105,17 @@ def report(args, out):
         pseudo, uses, length, rest = found.groups()
         if "crosses" not in rest:
             continue
-        uses, length = int(uses), int(length)
-        priority = int(math.log2(uses)) * uses * 10000 // length
-        rows.append((priority, pseudo, uses, length, hard.get(pseudo)))
-    for priority, pseudo, uses, length, register in sorted(rows, reverse=True):
+        block = BLOCK.match(rest)
+        rows.append(
+            (int(pseudo), int(uses), int(length), int(block[1]) if block else None)
+        )
+    for pseudo, uses, length, block in allocation_order(rows):
+        register = hard.get(str(pseudo))
         place = SAVED_REGISTERS.get(int(register), register) if register else "STACK"
+        scope = f"b{block}" if block is not None else "all"
         print(
-            f"{priority:5d} r{pseudo:<4} uses {uses:3d} len {length:4d} -> {place:<5}"
-            f" {first_setter(insns, pseudo)}"
+            f"{priority(uses, length):5d} {scope:<4} r{pseudo:<4} uses {uses:3d} len {length:4d}"
+            f" -> {place:<5} {first_setter(insns, str(pseudo))}"
         )
 
 

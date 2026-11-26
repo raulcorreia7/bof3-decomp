@@ -55,7 +55,7 @@ MATCH void func_8009D198(void) {
     if (g_Battle.target_record->hp_change < -9999) {
         g_Battle.target_record->hp_change = -9999;
     }
-        if (g_Battle.target_record->hp_change != 0) {
+    if (g_Battle.target_record->hp_change != 0) {
         if (BATTLER_IS_PLAYER(g_Battle.target)) {
             if (g_Battle.target_record->hp_change > 0) {
                 if (g_Battle.target_record->hp_change < g_Game.members[g_Battle.target].chr.hp) {
@@ -99,7 +99,7 @@ MATCH void func_8009D198(void) {
     if (g_Battle.target_record->ap_change < -9999) {
         g_Battle.target_record->ap_change = -9999;
     }
-        if (g_Battle.target_record->ap_change != 0) {
+    if (g_Battle.target_record->ap_change != 0) {
         if (BATTLER_IS_PLAYER(g_Battle.target)) {
             if (g_Battle.target_record->ap_change > 0) {
                 if (g_Battle.target_record->ap_change < g_Game.members[g_Battle.target].chr.ap) {
