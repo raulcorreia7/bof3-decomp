@@ -4,6 +4,7 @@
 NON_MATCHING void func_801D55B0(void) {
     MenuPanelTask* task;
     u8*            sel;
+    MenuPanelTask* frame;
     s32            pressed;
     u8             count;
     u8             old;
@@ -49,18 +50,21 @@ NON_MATCHING void func_801D55B0(void) {
             for (i = 0; i < Party_CountOrder(PARTY_ORDER_FIELD); i++) {
                 g_UiPanelTasks[i + 4].state = 7;
             }
-            g_UiPanelTasks[MENU_START_PANEL_CURSOR_FRAME].active = 0;
-            g_UiPanelTasks[MENU_START_PANEL_ITEMS].state         = 3;
+            frame         = &g_CursorFramePanel;
+            frame->active = 0;
+            g_UiPanelTasks[MENU_START_PANEL_ITEMS].state = 3;
             g_UiPanelTasks[14].panel                             = 6;
             g_UiPanelTasks[14].mode                              = 0x12;
             g_UiPanelTasks[14].state                             = 4;
             g_UiPanelTasks[MENU_START_PANEL_ITEMS].unk_0A        = 0;
             g_UiPanelTasks[MENU_START_PANEL_ITEMS].unk_0B        = 0xFF;
-            g_UiPanelTasks[14].active                            = 1;
+            frame -= 5;
+            frame->active = 1;
             g_UiPanelTasks[14].pos.x                             = 320;
             g_UiPanelTasks[14].pos.y                             = 62;
             g_UiPanelTasks[14].unk_0B                            = 0xFF;
             g_UiPanelTasks[14].unk_0C                            = g_UiPanelTasks[MENU_START_PANEL_ITEMS].unk_0C;
+            g_UiPanelTasks[14].unk_0A = s_SkillOrderGroups[g_UiPanelTasks[MENU_START_PANEL_ITEMS].unk_0C][0];
             g_UiPanelTasks[14].unk_08                            = 0;
             g_UiPanelTasks[14].flags                             = 0;
             g_UiPanelTasks[14].unk_09                            = 0;
@@ -68,7 +72,6 @@ NON_MATCHING void func_801D55B0(void) {
             g_PartyCursor                                        = g_UiPanelTasks[MENU_START_PANEL_ITEMS].unk_0C;
             D_80148654                                           = 5;
             D_80148651 += 1;
-            g_UiPanelTasks[14].unk_0A = s_SkillOrderGroups[g_UiPanelTasks[MENU_START_PANEL_ITEMS].unk_0C][0];
         } else if (LOB(D_801ED620) == 3) {
             g_UiPanelTasks[MENU_START_PANEL_CURSOR_FRAME].unk_0B = 0;
             g_UiPanelTasks[MENU_START_PANEL_ITEMS].unk_0A        = 1;

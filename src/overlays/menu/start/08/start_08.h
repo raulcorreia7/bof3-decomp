@@ -264,6 +264,7 @@ extern s16             D_80148598;
 extern s16             D_8014859A;
 extern u16             D_801485BC;
 extern u16             D_801485BE;
+extern MenuPanelTask   g_CursorFramePanel; /* slot 19 of g_UiPanelTasks, the cursor frame */
 extern u8              D_801485DD;
 extern u8              D_801485DE;
 extern u8              D_801485E7;

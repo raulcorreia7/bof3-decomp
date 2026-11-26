@@ -4,6 +4,7 @@ g_SndMono_nv = { addr = 0x80144951, type = "u8", source = "The g_SndMono byte un
 g_ConfigSelect = { addr = 0x80148654, type = "u8", alias = true, source = "The config screen's selection: byte 0 the selected value, byte 1 the selected row plus two; func_801E26A8 reads both through one base." }
 g_PartyCursor = { addr = 0x80148656, type = "s8", size = 0x1, source = "Party slot the start menu's ability and skill lists read.", alias = true }
 g_CharSlotView = { addr = 0x80181B10, type = "u8", alias = true, source = "g_CharSlot without const: func_801D0F2C reloads g_CharSlot[7] through one base register after each store." }
+g_CursorFramePanel = { addr = 0x801485DC, type = "MenuPanelTask", alias = true, source = "Slot 19 of g_UiPanelTasks, the cursor frame, under a symbol of its own: func_801D55B0 clears it and steps five slots back to arm slot 14 through one pointer while its other g_UiPanelTasks stores stay absolute." }
 jtbl_801D0C04 = { addr = 0x801D0C04, type = "Callback", source = "The switch table of func_801D5A28: the jump targets of its jr dispatch." }
 jtbl_801D0C1C = { addr = 0x801D0C1C, type = "Callback", source = "The switch table of func_801D639C: the jump targets of its jr dispatch." }
 jtbl_801D0C34 = { addr = 0x801D0C34, type = "Callback", source = "The switch table of func_801D9274: the jump targets of its jr dispatch." }
