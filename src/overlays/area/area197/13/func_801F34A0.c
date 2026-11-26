@@ -1,11 +1,6 @@
 #include "area197_13.h"
 
-/* kept: area.h declares this with an empty parameter list, so the definition keeps the promoted form. */
-MATCH void func_801F34A0(start, end, from, to) u16 start;
-u16        end;
-Pos3*      from;
-Pos3*      to;
-{
+MATCH void func_801F34A0(u16 start, u16 end, Pos3* from, Pos3* to) {
     AreaDropParticle* particle;
     u16               slot;
 

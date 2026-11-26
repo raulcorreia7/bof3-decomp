@@ -3,15 +3,13 @@
 /* claims the free record slot reported by Actor_FindFreeSpawned and fills its
  * header, the two signed words, the id byte and the two halfword fields.
  */
-/* The head stays unprototyped: retail callers pass whole words and the callee narrows them itself. */
 /* func_8015CB18 */
-MATCH s32 Actor_ClaimSlot(id, vx, selection, x, y)
-u16       id;
-s8        vx;
-s8        selection;
-s16       x;
-u16       y;
-{
+MATCH s32 Actor_ClaimSlot(s32 raw_id, s32 raw_vx, s32 raw_selection, s32 raw_x, s32 raw_y) {
+    u16 id        = raw_id;
+    s8  vx        = raw_vx;
+    s8  selection = raw_selection;
+    s16 x         = raw_x;
+    u16 y         = raw_y;
     u8  byte_value;
     s16 half_value;
     s32 slot;

@@ -762,7 +762,7 @@ void        func_801EA9D4(void);
 extern void func_801EAA14(MenuPanelTask* task);
 void        func_801EAEC4(void);
 extern void func_801EAF98(MenuPanelTask* task);
-extern s8   SAVE_AccessFile(s32 port, s32 name, s32 mode, s32 size, s32 offset);
+extern s8   SAVE_AccessFile(u8 port, char* name, s32 mode, s32 size, s32 offset);
 extern s32  func_801EFCA8(char* prefix, u8 length);
 
 /* Slide the master panel in to x 320 and stop it there. */

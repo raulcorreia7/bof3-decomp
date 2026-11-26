@@ -4,7 +4,10 @@
 /* The world02/area077/14 overlay: one file per split function
  * and its data. Only this image includes the file. */
 
+/* The shared area.h gives this symbol no arguments; this image's function reads two. */
+#define func_801F31EC Area_SharedVoidProto
 #include "overlays/area/worlds/world02.h"
+#undef func_801F31EC
 
 #include "area/effects.h"
 
@@ -80,6 +83,7 @@ void       func_801F41B4(void);
 void       func_801F3B48(Pos2* pos, u8 shade);
 void       func_801F30E8(s16 x0, s16 y0, s16 x1, s16 y1);
 void       func_801F3BC4(s16 x, s16 y, s16 w, s16 h);
+void       func_801F31EC(s16 x, s16 y);
 
 /* func_801F529C */
 void Area_PaletteCopyRow(s32 src_x, s32 src_y, s32 dst_x, s32 dst_y);

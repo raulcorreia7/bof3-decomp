@@ -6,8 +6,7 @@ MATCH void func_801F2D0C(void) {
     u8  i;
     s16 count;
 
-    /* FAKE: func_801F31EC reads two arguments; the shared area prototype gives none. */
-    ((void (*)(s32, s32))func_801F31EC)(130, 10);
+    func_801F31EC(130, 10);
     i = 0;
     do {
         TASK(Actor)->screen_x++;

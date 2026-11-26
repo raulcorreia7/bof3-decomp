@@ -1,17 +1,13 @@
 #include "engine/game/00/game_00.h"
 
-/* K&R definition: the callers pass two arguments through the unprototyped
- * declaration, and the s16 parameters narrow here. stale_a3 arrives as the packed
+/* The callers pass two arguments through the unprototyped declaration; stale_a3 arrives as the packed
  * probe word whose high half takes the tile y. */
 /* FAKE: retail reads the row through a non-volatile pointer. */
 /* func_8019C4F0 */
 /* Returns whether one map cell stops the rock: off the map, a cliff, a drop or a solid cell code. */
-MATCH s32 Actor_RockIsCellBlocked(x, y, stale_a2, stale_a3)
-s16       x;
-s16       y;
-s32       stale_a2;
-s32       stale_a3;
-{
+MATCH s32 Actor_RockIsCellBlocked(s32 raw_x, s32 raw_y, s32 stale_a2, s32 stale_a3) {
+    s16   x = raw_x;
+    s16   y = raw_y;
     Coord org;
     u8*   map;
     s16   ix;

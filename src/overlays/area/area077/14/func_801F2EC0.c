@@ -8,8 +8,7 @@ MATCH void func_801F2EC0(void) {
     if ((COORD_INT(TASK(Actor)->pos.x) == 8) && ((s16)TASK(Actor)->screen_x == 0x20)) {
         TASK(Actor)->tint.steps.delta.r = -0x80;
     }
-    /* FAKE: func_801F31EC reads two arguments; the shared area prototype gives none. */
-    ((void (*)(s32, s32))func_801F31EC)(130, 10);
+    func_801F31EC(130, 10);
     i = 0;
     do {
         TASK(Actor)->screen_x++;

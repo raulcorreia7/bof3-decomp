@@ -79,9 +79,6 @@ ASSERT_OFFSET(MenuListPanel, selected, 0x0D);
 ASSERT_OFFSET(MenuListPanel, unk_10, 0x10);
 ASSERT_OFFSET(MenuListPanel, names, 0x20);
 
-/* SAVE_AccessFile read for its s8 result. */
-typedef s8 (*SaveAccessCallback)(s32, s32, s32, s32, s32);
-
 /* The scratchpad work row behind g_Task while func_801D62DC fills it from
  * the selection table at 0x801E537C (three words per row). */
 typedef struct ShopSelection {
@@ -705,7 +702,7 @@ void Menu_DrawCuePanel(MenuPanelTask* panel_task);
 void func_801E4E9C(MenuPanelTask* panel_task);
 void func_801E4FC8(s32 sprite_x, s32 sprite_y, u8 atlas_index, s32 shade_mode);
 /* Returns the save probe's signed byte result; its caller tests it against -1. */
-s8   SAVE_AccessFile(s32 port, s32 name, s32 mode, s32 size, s32 offset);
+s8   SAVE_AccessFile(u8 port, char* name, s32 mode, s32 size, s32 offset);
 u32  func_801EF200(void);
 s32  func_801EF27C(s32, s32, u8*);
 
