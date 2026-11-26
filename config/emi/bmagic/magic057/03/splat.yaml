@@ -9,5 +9,5 @@ segments:
     subsegments:
       - [0x0, bin, D_801EEC00]
       - [0x50, c, BMagic_Effect]
-  - [0xEDC, bin, D_801EFADC]
+  - [0xEDC, bin, g_BMagicBoneDanceShakeFrames]
   - [0xEDF]
