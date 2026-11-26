@@ -30,8 +30,12 @@ MATCH void Actor_SpawnSearchSpot(const volatile u8* data) {
 
     work                           = TASK(Actor);
     g_Actors[*counter].walk_dest_x = (work->pos.x.fixed = (data[5] << 16) | ((data[4] != 0) ? 0x8000 : 0));
+    /* FAKE: barrier pins the counter re-read before the shadow store. */
+    FAKE_BARRIER();
 
     g_Actors[*counter].walk_dest_y = (work->pos.y.fixed = (data[7] << 16) | ((data[6] != 0) ? 0x8000 : 0));
+    /* FAKE: barrier pins the counter re-read against merging. */
+    FAKE_BARRIER();
 
     g_Actors[*counter].unk_88 = 0;
 
@@ -41,6 +45,8 @@ MATCH void Actor_SpawnSearchSpot(const volatile u8* data) {
     w2->header.mode      = 6;
     COORD_INT(w2->pos.z) = (u16)dist;
     ACTOR_CLEAR_STEP();
+    /* FAKE: barrier pins the flags store before the route-index load. */
+    FAKE_BARRIER();
 
     TASK(Actor)->direction = data[0] & 0xF;
     TASK(Actor)->unk_06    = data[0] >> 4;

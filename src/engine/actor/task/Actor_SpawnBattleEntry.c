@@ -24,8 +24,12 @@ MATCH void Actor_SpawnBattleEntry(u8* script) {
 
     work                           = TASK(Actor);
     g_Actors[*counter].walk_dest_x = work->pos.x.fixed = (script[6] << 16) | (script[5] != 0 ? 0x8000 : 0);
+    /* FAKE: forces the counter re-read before the next shadow store. */
+    FAKE_BARRIER();
 
     g_Actors[*counter].walk_dest_y = work->pos.y.fixed = (script[8] << 16) | (script[7] != 0 ? 0x8000 : 0);
+    /* FAKE: forces the counter re-read before the next shadow store. */
+    FAKE_BARRIER();
 
     g_Actors[*counter].unk_88 = 0;
 
@@ -38,10 +42,12 @@ MATCH void Actor_SpawnBattleEntry(u8* script) {
     FIELD(u16, &D_80146914, *counter * ACTOR_SIZE) = script[3];
     FIELD(s16, &D_80146916, *counter * ACTOR_SIZE) = script[4];
     g_Actors[*counter].unk_7C                      = (script[0xE] | (script[0xD] << 8));
-    g_Actors[*counter].unk_77                      = script[0xF];
-    g_Actors[*counter].unk_78                      = script[0xA];
-    g_Actors[*counter].fish_row                    = script[0x10];
-    g_Actors[*counter].unk_94                      = 0x7F;
+    /* FAKE: forces the counter re-read before the next shadow store. */
+    FAKE_BARRIER();
+    g_Actors[*counter].unk_77   = script[0xF];
+    g_Actors[*counter].unk_78   = script[0xA];
+    g_Actors[*counter].fish_row = script[0x10];
+    g_Actors[*counter].unk_94   = 0x7F;
 
     Actor_SetOptionFlags(script + 0xC);
 

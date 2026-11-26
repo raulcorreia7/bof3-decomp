@@ -154,6 +154,8 @@ MATCH u8 Script_OpsRunMotion(ScriptState* state, const u8* table, u8 value) {
                 mode                = Actor_ReadState();
                 work                = TASK(Actor);
                 GAME_ENTITY_COUNTER = mode;
+                /* FAKE: counter store before work read. */
+                FAKE_BARRIER();
                 if ((work->script_pc != mode) && (mode == *(table + state->cursor + 2)))
                     SND_SEPlay((u16)(0x200u | *(table + state->cursor + 1)));
             }

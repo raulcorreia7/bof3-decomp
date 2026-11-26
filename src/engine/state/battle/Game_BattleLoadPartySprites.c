@@ -19,10 +19,11 @@ MATCH void Game_BattleLoadPartySprites(void) {
         SND_SetBankLayout(1);
         flags = &g_Battle.outcome.options;
         if ((*flags & 0x1) == 0) {
-            coord_a                 = (volatile u16*)&g_AreaTargetCellX;
-            index                   = g_Battle.scroll_dir;
-            *coord_a                = *coord_a + s_BattleScrollCellSteps[index].dx;
-            dy                      = s_BattleScrollCellSteps[index].dy;
+            coord_a  = (volatile u16*)&g_AreaTargetCellX;
+            index    = g_Battle.scroll_dir;
+            *coord_a = *coord_a + s_BattleScrollCellSteps[index].dx;
+            dy       = s_BattleScrollCellSteps[index].dy;
+            FAKE_BARRIER(); /* FAKE: keeps the delta load before the span math. */
             span                    = D_801CD954;
             g_AreaCameraSpeed       = 0x40;
             span                    = span - g_AreaCameraHeight;
