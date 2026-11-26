@@ -29,8 +29,13 @@ extern u8 D_80145E30[];
 /* The entry rows of the shared executable's fairy list (D_80145E48) and the
  * 5-byte icon cells each row byte selects (D_801457E8). */
 extern u8   D_80145E48[];
-extern u8   D_80145E60[];
-extern u8   D_80145E61[];
+/* One queued fairy village update: its room type and the fairy it names. */
+typedef struct FairyVillageUpdate {
+    u8 type;
+    u8 fairy;
+} FairyVillageUpdate;
+
+extern FairyVillageUpdate D_80145E60[];
 extern char D_801D0C04[];
 
 /* The background panel's cell origins, a u and a v byte per tile:
