@@ -735,7 +735,8 @@ void        func_801E9F04(void);
 void        Menu_InventoryPanel(void);
 void        func_801E9FB0(void);
 void        func_801E9FF0(void);
-void        func_801EA030(void);
+/* func_801EA030 */
+void        UI_PanelSlideOutOption_801EA030(void);
 /* func_801EA0B0 */
 void        Menu_CommandsPanel(void);
 void        func_801EA118(void);

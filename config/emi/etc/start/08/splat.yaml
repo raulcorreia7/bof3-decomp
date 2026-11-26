@@ -368,7 +368,7 @@ segments:
       - [0x1935C, c, Menu_InventoryPanel]
       - [0x193B0, c, func_801E9FB0]
       - [0x193F0, c, func_801E9FF0]
-      - [0x19430, c, func_801EA030]
+      - [0x19430, c, UI_PanelSlideOutOption_801EA030]
       - [0x19470, c, UI_PanelSlideLeft]
       - [0x194B0, c, Menu_CommandsPanel]
       - [0x19518, c, func_801EA118]

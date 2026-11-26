@@ -123,6 +123,7 @@ UI_PanelSlideOutOption_801E9974 = { addr = 0x801E9974, type = "func", source = "
 Menu_MessagePanel = { addr = 0x801E9BEC, type = "func", source = "panel mode 9 of the start menu: the full-width header bar with a message" }
 Menu_CursorFramePanel = { addr = 0x801E9D98, type = "func", source = "panel mode 10 of the start menu: the frame drawn around the selected entry" }
 Menu_InventoryPanel = { addr = 0x801E9F5C, type = "func", source = "panel mode 12 of the start menu: the inventory window" }
+UI_PanelSlideOutOption_801EA030 = { addr = 0x801EA030, type = "func", source = "same body as emi/etc/game/00@0x801996FC UI_PanelSlideOutOption" }
 UI_PanelSlideLeft = { addr = 0x801EA070, type = "func", source = "Moves the master panel 0x20 pixels left and clamps its x at 0x98." }
 Menu_CommandsPanel = { addr = 0x801EA0B0, type = "func", source = "panel mode 13 of the start menu: the command row" }
 Menu_AdvancePanelY = { addr = 0x801EA158, type = "func", source = "same body as emi/etc/shisu/00@0x801D320C Menu_AdvancePanelY" }
