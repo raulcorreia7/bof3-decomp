@@ -1,6 +1,8 @@
-#include "game_00.h"
+#include "engine/game/00/game_00.h"
 
-MATCH void func_8019AF1C(void) {
+/* func_8019AF1C */
+/* Loads the rise speed and gravity of its toss arc when on the ground, then moves by its speeds under gravity. */
+MATCH void Actor_TossLaunch(void) {
     Actor* work;
     s16    dist;
 

@@ -22,7 +22,7 @@ MATCH s32 func_801F4534(s32 x, s32 y) {
         return 0;
     }
     SYS_ToggleFlag(g_SceneEventFlags, D_801F55F3[i * 4]);
-    func_8019ABB0(0xF);
+    Scene_StartToggleLock(0xF);
     SND_SEPlay(EMI_SE_ID(SND_BANK_AREA, 3));
     return 1;
 }

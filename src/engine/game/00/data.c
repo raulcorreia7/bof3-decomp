@@ -73,7 +73,7 @@ Callback g_ActorTypes[187] = {WorldMap_StepWalk,
                               func_801F6DC0,
                               func_801D0C98,
                               func_801D1B10,
-                              func_8019AB5C,
+                              Scene_StepToggleLock,
                               func_801D20C8,
                               func_8019A3B8,
                               func_801F70F0,
@@ -88,7 +88,7 @@ Callback g_ActorTypes[187] = {WorldMap_StepWalk,
                               func_801F8D70,
                               func_801F71C0,
                               func_801F729C,
-                              func_8019A8B4,
+                              Camera_PanAngleRun,
                               func_801F6E70,
                               func_801F2C18,
                               WorldMap_StepFlock,
@@ -118,8 +118,8 @@ Callback g_ActorTypes[187] = {WorldMap_StepWalk,
                               func_801F7A84,
                               func_801F2C30,
                               func_8019CB94,
-                              func_8019AC34,
-                              func_8019ADA4,
+                              Camera_PanZoomRun,
+                              Actor_TossRun,
                               (Callback)func_801F2C04,
                               func_8019DDCC,
                               func_801F2C44,
@@ -281,11 +281,11 @@ Callback D_801C80BC[3] = {func_8019A3FC, func_8019A848, func_8019A7D4};
 
 Callback D_801C80C8[6] = {func_8019A580, func_8019A580, func_8019A580, func_8019A6AC, func_8019A580, func_8019A630};
 
-Callback D_801C80E0[3] = {func_8019A904, func_8019AA44, func_8019AAFC};
+Callback g_CameraAnglePanModes[3] = {Camera_PanAngleStart, Camera_PanAngleStep, Camera_PanAngleEnd};
 
-Callback D_801C80EC[3] = {func_8019AC84, func_8019ACF4, func_8019AD70};
+Callback g_CameraZoomPanModes[3] = {Camera_PanZoomStart, Camera_PanZoomStep, Camera_PanZoomEnd};
 
-Callback D_801C80F8[4] = {func_8019ADE8, func_8019AF1C, func_8019B024, func_8019B0EC};
+Callback g_ActorTossModes[4] = {Actor_TossStart, Actor_TossLaunch, Actor_TossFall, Actor_ClearSelf};
 
 ActorToss s_ActorTossArcs[3] = {
     {0x300000, 0x80000},
@@ -293,7 +293,7 @@ ActorToss s_ActorTossArcs[3] = {
     {0x100000, 0x80000},
 };
 
-Callback D_801C8120[3] = {func_8019B150, func_8019B1E8, func_8019B0EC};
+Callback D_801C8120[3] = {func_8019B150, func_8019B1E8, Actor_ClearSelf};
 
 Callback D_801C812C[6] = {func_8019B3A8, func_8019B4A0, func_8019B704, func_8019BBA4, func_8019BE28, func_8019BEFC};
 

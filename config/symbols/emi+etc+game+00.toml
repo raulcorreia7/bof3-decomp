@@ -106,6 +106,21 @@ UI_PanelSlideInTaskLow = { addr = 0x801999B8, type = "func", source = "Moves the
 Actor_DispatchAll = { addr = 0x8019A0E4, type = "func", source = "Runs g_ActorTypes[type] for each of the g_SpawnedActors entries whose header.flags is set." }
 WorldMap_FindRegion = { addr = 0x8019A194, type = "func", source = "Returns the index of the WorldMapRegion whose area id equals g_GameAreaId, or WORLD_MAP_REGION_COUNT (11) when none matches." }
 WorldMap_GetPoints = { addr = 0x8019A1D4, type = "func", source = "Returns map_points of the current world map region (g_WorldMapRegions indexed by WorldMap_FindRegion); func_801B690C searches those rows by actor cell." }
+Camera_PanAngleRun = { addr = 0x8019A8B4, type = "func", source = "Actor type 0x13 step: runs g_CameraAnglePanModes[mode] and asks for two camera refreshes." }
+Camera_PanAngleStart = { addr = 0x8019A904, type = "func", source = "Mode 0 of g_CameraAnglePanModes: sets the per-frame step from the camera angle to the actor's angle over its timer." }
+Camera_PanAngleStep = { addr = 0x8019AA44, type = "func", source = "Mode 1 of g_CameraAnglePanModes: adds the step to the camera angle each frame until the timer runs out." }
+Camera_PanAngleEnd = { addr = 0x8019AAFC, type = "func", source = "Mode 2 of g_CameraAnglePanModes: sets the camera angle to the target, clears the camera-moving flag and frees the actor." }
+Scene_StepToggleLock = { addr = 0x8019AB5C, type = "func", source = "Actor type 4 step: counts its timer down, then clears scene flag 28 and frees the actor." }
+Scene_StartToggleLock = { addr = 0x8019ABB0, type = "func", source = "Sets scene flag 28 and spawns the type 4 actor that clears it after its layer byte counts of frames; callers test flag 28 before toggling a scene flag." }
+Camera_PanZoomRun = { addr = 0x8019AC34, type = "func", source = "Actor type 0x31 step: runs g_CameraZoomPanModes[mode] and asks for two camera refreshes." }
+Camera_PanZoomStart = { addr = 0x8019AC84, type = "func", source = "Mode 0 of g_CameraZoomPanModes: starts the angle pan and sets the step of g_AreaCameraOffsetZ toward the actor's target." }
+Camera_PanZoomStep = { addr = 0x8019ACF4, type = "func", source = "Mode 1 of g_CameraZoomPanModes: steps the angle pan and moves g_AreaCameraOffsetZ toward its target without passing it." }
+Camera_PanZoomEnd = { addr = 0x8019AD70, type = "func", source = "Mode 2 of g_CameraZoomPanModes: sets g_AreaCameraOffsetZ to the target and ends the angle pan." }
+Actor_TossRun = { addr = 0x8019ADA4, type = "func", source = "Actor type 0x32 step: runs the toss mode table at header.mode." }
+Actor_TossStart = { addr = 0x8019ADE8, type = "func", source = "Mode 0 of the toss modes: places the actor on the source actor's position, faces it like the leader, starts its route move and launches it." }
+Actor_TossLaunch = { addr = 0x8019AF1C, type = "func", source = "Mode 1 of the toss modes: when on the ground, offscreen or in mode 0, loads the rise speed and gravity of s_ActorTossArcs[step] and advances; then moves by its speeds under gravity." }
+Actor_TossFall = { addr = 0x8019B024, type = "func", source = "Mode 2 of the toss modes: moves up by vz under gravity; past 0x80 above the ground or below it, plays a sound and advances." }
+Actor_ClearSelf = { addr = 0x8019B0EC, type = "func", source = "Frees the current actor: the last mode of the toss and prop tables." }
 Area_GetVx = { addr = 0x8019C344, type = "func", source = "the body returns g_Task->vx" }
 Actor_DrawValueDigits = { addr = 0x8019F5B8, type = "func", source = "Draws the actor's unk_06 value as 8x8 digit sprites starting at (x, y) in the actor's draw layer; three field effects call it with a party member's screen position." }
 Game_RequestAreaChange = { addr = 0x8019FA28, type = "func", source = "Requests an area change: stores the area id and entry position in g_GameEntryAreaId, g_GameEntryPosX and g_GameEntryPosY and sets g_GameStateIndex to 5." }
@@ -188,6 +203,7 @@ AreaAction_ShowFind = { addr = 0x801AD90C, type = "func", source = "Shows the ze
 AreaAction_WaitMessageFade = { addr = 0x801AD9C4, type = "func", source = "Waits for the find message to close, then starts the fade." }
 AreaAction_Fade = { addr = 0x801AD9F0, type = "func", source = "Brightens the actor's tint back, then ends the field action." }
 Actor_SpawnSceneActor = { addr = 0x801ADAC0, type = "func", source = "spawns the type-0x19 scene actor at the task position with its selection from func_801ADC98 and links it to the task" }
+Actor_SpawnToss = { addr = 0x801ADCF4, type = "func", source = "Spawns a type 0x32 actor that starts at the given actor; AreaAction_RollFade calls it after paying Zenny." }
 Char_ApplyLevelUps = { addr = 0x801ADDD4, type = "func", source = "Raises the character to the level its exp reaches: adds each gained level's growth to the base stats (capped at 999), grants its abilities and rebuilds the stats." }
 UI_CursorDrawName = { addr = 0x801AE214, type = "func", source = "The underline that marks the current letter of a name entry: a line at the cursor column, bright when the mode is 0 (the start menu and commu02 name entries call it)." }
 UI_WindowDraw = { addr = 0x801AE3F0, type = "func", source = "Draws a window from x with a left cap and a body stretched to width, height rows tall, with the palette column of the style argument; flags 0x80 and 0x20 trim the top and the bottom." }
@@ -356,12 +372,12 @@ s_SceneHandlerIds = { addr = 0x801C809C, size = 0x8, source = "Scene handler id 
 D_801C80A4 = { addr = 0x801C80A4, size = 0x18, source = "The six handlers func_8019A53C runs by g_Task->unk_06: five share func_8019A580, one is func_8019A6AC and one func_8019A630." }
 D_801C80BC = { addr = 0x801C80BC, size = 0xC, source = "The three mode handlers func_8019A3FC, func_8019A848 and func_8019A7D4 that func_8019A804 runs by g_Task->header.mode." }
 D_801C80C8 = { addr = 0x801C80C8, size = 0x18, source = "The six handlers func_8019A848 runs by g_Task->unk_06, the same set as D_801C80A4." }
-D_801C80E0 = { addr = 0x801C80E0, size = 0xC, source = "The three mode handlers func_8019A904, func_8019AA44 and func_8019AAFC that func_8019A8B4 runs by g_Task->header.mode." }
-D_801C80EC = { addr = 0x801C80EC, size = 0xC, source = "The three mode handlers func_8019AC84, func_8019ACF4 and func_8019AD70 that func_8019AC34 runs by g_Task->header.mode." }
-D_801C80F8 = { addr = 0x801C80F8, size = 0x10, source = "The four mode handlers func_8019ADE8, func_8019AF1C, func_8019B024 and func_8019B0EC that func_8019ADA4 runs by g_Task->header.mode." }
-s_ActorTossArcs = { addr = 0x801C8108, source = "func_8019AF1C starts a toss at step 0..2 with its vertical speed in the first member and gravity in the second", size = 0x18 }
+g_CameraAnglePanModes = { addr = 0x801C80E0, source = "Indexed by header.mode in Camera_PanAngleRun: start, step, end." }
+g_CameraZoomPanModes = { addr = 0x801C80EC, source = "Indexed by header.mode in Camera_PanZoomRun: start, step, end." }
+g_ActorTossModes = { addr = 0x801C80F8, source = "Indexed by header.mode in Actor_TossRun: start, launch, fall, clear." }
+s_ActorTossArcs = { addr = 0x801C8108, source = "Actor_TossLaunch starts a toss at step 0..2 with its vertical speed in the first member and gravity in the second", size = 0x18 }
 D_801C810C = { addr = 0x801C810C, alias = true, source = "s_ActorTossArcs +0x4, folded into that table in #400" }
-D_801C8120 = { addr = 0x801C8120, size = 0xC, source = "The three mode handlers func_8019B150, func_8019B1E8 and func_8019B0EC that func_8019B10C runs by g_Task->header.mode." }
+D_801C8120 = { addr = 0x801C8120, size = 0xC, source = "The three mode handlers func_8019B150, func_8019B1E8 and Actor_ClearSelf that func_8019B10C runs by g_Task->header.mode." }
 D_801C812C = { addr = 0x801C812C, size = 0x18, source = "The six mode handlers func_8019B3A8, func_8019B4A0, func_8019B704, func_8019BBA4, func_8019BE28 and func_8019BEFC that func_8019B364 runs by g_Task->header.mode." }
 D_801C8144 = { addr = 0x801C8144, size = 0x10, source = "The four mode handlers func_8019C664, func_8019C794, func_8019C910 and func_8019C954 that func_8019C620 runs by g_Task->header.mode." }
 D_801C8154 = { addr = 0x801C8154, size = 0x10, source = "The four mode handlers func_8019CBD8, func_8019CCB8, func_8019CEDC and func_8019CFCC that func_8019CB94 runs by g_Task->header.mode." }

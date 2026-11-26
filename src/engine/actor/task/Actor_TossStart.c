@@ -1,4 +1,4 @@
-#include "game_00.h"
+#include "engine/game/00/game_00.h"
 
 typedef struct GameRouteRequest {
     u8 flags;
@@ -7,7 +7,9 @@ typedef struct GameRouteRequest {
     u8 pad_05[0x0B];
 } GameRouteRequest;
 
-MATCH void func_8019ADE8(void) {
+/* func_8019ADE8 */
+/* Puts the actor on the position of its source actor, faces it like the leader, starts its route move and launches it. */
+MATCH void Actor_TossStart(void) {
     Actor*           work;
     Actor*           work2;
     s32              z;
@@ -32,5 +34,5 @@ MATCH void func_8019ADE8(void) {
     request.rate            = 3;
     request.flags           = 0;
     Area_MoveActorRoute(&request, TASK(Actor)->direction);
-    func_8019AF1C();
+    Actor_TossLaunch();
 }
