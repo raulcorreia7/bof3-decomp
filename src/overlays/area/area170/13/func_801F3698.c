@@ -1,6 +1,6 @@
 #include "area170_13.h"
 
-MATCH void func_801F3698(s16 x0, s16 y0, s16 x1, s16 y1, u16 x2, u16 y2, u8 r, u8 g, u8 b, u8 semi_trans) {
+MATCH void func_801F3698(s16 x0, s16 y0, s16 x1, s16 y1, s16 x2, s16 y2, u8 r, u8 g, u8 b, u8 semi_trans) {
     POLY_F3* prim;
 
     prim = (POLY_F3*)g_GfxPrimCursor;
