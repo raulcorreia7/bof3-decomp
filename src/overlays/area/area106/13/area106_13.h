@@ -27,9 +27,9 @@ typedef struct Area106Corner {
 } Area106Corner;
 
 extern Area106Corner D_801F3EE8[][4];
-extern u8  D_801F3F18[];
-extern u32 D_801F3F20[];
-extern s8  D_801F3F30[];
+extern u8            D_801F3F18[];
+extern u32           D_801F3F20[];
+extern s8            D_801F3F30[];
 
 /* The quad corner bytes: x, y and the signed depth of each corner. */
 extern u8 D_801F3F34[];

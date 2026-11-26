@@ -38,13 +38,13 @@ MATCH void func_801D0CF4(void) {
 
 /* The fairy job picker: the choice panel walks the item list and confirm stores the pick. */
 MATCH void func_801D0D4C(void) {
-    s32              buttons;
-    u32              row_limit;
-    u32              row_count;
-    u8               old_cursor;
-    u8               new_row;
-    u8               item_entry;
-    u8*              selection;
+    s32 buttons;
+    u32 row_limit;
+    u32 row_count;
+    u8  old_cursor;
+    u8  new_row;
+    u8  item_entry;
+    u8* selection;
 
     if (D_801D1774 != 0) {
         D_801D1774--;
@@ -104,7 +104,7 @@ MATCH void func_801D0D4C(void) {
         if (row_count == 119) {
             g_Commu04ItemPanel.group_cursor = 0x7FU;
         } else if (row_count >= 111U) {
-            new_row             = g_Commu04ItemPanel.group_cursor + 0x77;
+            new_row                         = g_Commu04ItemPanel.group_cursor + 0x77;
             g_Commu04ItemPanel.group_cursor = new_row - g_Commu04ItemPanel.group_first;
             g_Commu04ItemPanel.group_first  = 0x77;
         } else {
@@ -128,12 +128,12 @@ MATCH void func_801D0D4C(void) {
                 return;
             }
             SND_SEPlay(EMI_SE_ID(SND_BANK_COMMON, 5));
-            selection                       = &g_SceneEventSelection;
+            selection                            = &g_SceneEventSelection;
             g_FairyJobs[*selection].record_state = item_entry;
             g_FairyJobs[*selection].unk_03       = g_Commu04ItemPanel.group;
-            g_UiPanelTasks[0].state                         = 1;
-            g_UiPanelTasks[1].active                        = 0;
-            D_801F294D                                      = 4;
+            g_UiPanelTasks[0].state              = 1;
+            g_UiPanelTasks[1].active             = 0;
+            D_801F294D                           = 4;
         }
         item_entry = g_ItemCategoryIds[g_Commu04ItemPanel.group][g_Commu04ItemPanel.group_cursor];
         if (item_entry != 0) {

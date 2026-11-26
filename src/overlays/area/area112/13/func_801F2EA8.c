@@ -23,8 +23,8 @@ MATCH void func_801F2EA8(void) {
     } else {
         for (x = D_801F4218[COORD_INT(TASK(Actor)->pos.x)].x0; x < D_801F4218[COORD_INT(TASK(Actor)->pos.x)].x_end; x++) {
             for (y = D_801F4218[COORD_INT(TASK(Actor)->pos.x)].y0; y < D_801F4218[COORD_INT(TASK(Actor)->pos.x)].y_end; y++) {
-                shade = D_801F4228[flag][n++];
-                value = (shade << 24) | (shade << 16) | (shade << 8) | shade;
+                shade                                                                                              = D_801F4228[flag][n++];
+                value                                                                                              = (shade << 24) | (shade << 16) | (shade << 8) | shade;
                 ((AreaCellCorners*)((MAP_BUNDLE_BASE + 0x30) + (y * *(u8*)MAP_BUNDLE_BASE << 2) + (x << 2)))->word = value;
             }
         }
@@ -32,7 +32,7 @@ MATCH void func_801F2EA8(void) {
     for (x = D_801F4218[COORD_INT(TASK(Actor)->pos.x)].x0; x < D_801F4218[COORD_INT(TASK(Actor)->pos.x)].x_end; x++) {
         for (y = D_801F4218[COORD_INT(TASK(Actor)->pos.x)].y0; y < D_801F4218[COORD_INT(TASK(Actor)->pos.x)].y_end; y++) {
             height                                                                              = Area_HeightSample(x << 16, y << 16);
-            value = (-(COORD_INT(TASK(Actor)->pos.z) * 2) - height) / 32;
+            value                                                                               = (-(COORD_INT(TASK(Actor)->pos.z) * 2) - height) / 32;
             *(u8*)(g_AreaMapHeightOffset * 4 + x + y * *(u8*)MAP_BUNDLE_BASE + MAP_BUNDLE_BASE) = value;
         }
     }

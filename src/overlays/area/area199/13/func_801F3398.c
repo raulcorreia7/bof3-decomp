@@ -14,11 +14,11 @@ MATCH void func_801F3398(void) {
 
     for (member = 0; member < 2; member++) {
         if (g_Area199TrailCells[D_801F44B4[member]][member].x > (x = (g_Actors[member + 1].pos.x.fixed + 0x4000) >> 16)) {
-            slot                                  = (D_801F44B4[member] + 1) & 0x1F;
-            g_Area199TrailCells[slot][member].x = x;
-            g_Area199TrailCells[slot][member].y = COORD_INT(g_Actors[member + 1].pos.y);
+            slot                                   = (D_801F44B4[member] + 1) & 0x1F;
+            g_Area199TrailCells[slot][member].x    = x;
+            g_Area199TrailCells[slot][member].y    = COORD_INT(g_Actors[member + 1].pos.y);
             g_Area199TrailCells[slot][member].flag = (g_Area199TrailCells[D_801F44B4[member]][member].flag - 1) & 1;
-            D_801F44B4[member]                    = slot;
+            D_801F44B4[member]                     = slot;
         }
 
         for (i = 0; i < 0x20; i++) {

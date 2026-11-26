@@ -41,15 +41,17 @@ extern u8                D_801F4544[];
 extern u8                D_801F4545[];
 extern u8                D_801F4548[];
 extern u8                D_801F54D0[];
+
 /* A trail slot of one member: the cell and its tile flag. */
 typedef struct Area199TrailCell {
     u8 x;
     u8 y;
     u8 flag;
 } Area199TrailCell;
+
 extern Area199TrailCell g_Area199TrailCells[32][2]; /* D_801F54D0 */
-extern s8                D_801F54D2;
-extern s8                D_801F54D5;
+extern s8               D_801F54D2;
+extern s8               D_801F54D5;
 
 void func_801F2E14(void);
 void func_801F2E80(s32 y_offset);
