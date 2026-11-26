@@ -600,7 +600,7 @@ NON_MATCHING void func_801F8B10(s32 scale, s32 shade) {
     mode = getTPage(TPAGE_DEPTH_4BIT, TPAGE_ABR_SUB, 0, 0);
     GFX_ADD_DITHERED_DRAW_MODE(GFX_LAYER_EFFECT_FRONT, mode);
     for (i = 0; i < 32;) {
-        a = i << 7;
+        a                         = i << 7;
         g_ScratchPadVectors[0].vx = 0;
         g_ScratchPadVectors[0].vy = 0;
         g_ScratchPadVectors[0].vz = 0;

@@ -2,13 +2,13 @@
 
 #ifdef NON_MATCHING
 NON_MATCHING void func_801F3010(void) {
-    s32             point[3];
-    DVECTOR         screen;
-    u8              scratch[32];
-    u16*            pixels;
-    AreaRiseTile*   tile;
-    u8              row;
-    u8              col;
+    s32           point[3];
+    DVECTOR       screen;
+    u8            scratch[32];
+    u16*          pixels;
+    AreaRiseTile* tile;
+    u8            row;
+    u8            col;
 
     for (row = 0; row < 0x50; row++) {
         D_801F4F34[row] = 0;
