@@ -36,7 +36,7 @@ const u8 g_TextRowShades[20] = {
 
 const u8 D_8017F5B4[4] = {0, 0, 1, 2};
 
-const Rec_8017F5B8 D_8017F5B8[26] = {
+const Rec_8017F5B4 D_8017F5B8[26] = {
     {1, 0, 60},
     {1, 0, 120},
     {1, 0, -1},
