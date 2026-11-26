@@ -458,7 +458,7 @@ MATCH u8 Fishing_ShopTradeBlocked(s32 slot, s32 amount) {
             return false;
         }
         if ((Item_Count(ITEM_CATEGORY_ITEM, (need_item + ITEM_JELLYFISH), 0) & HALF_MASK) <
-            g_FishingTrades[g_FishingShopStock[g_GameEntryFacing][slot & BYTE_MASK]].need[FISHING_TRADE_NEED_AMOUNT][i] * (amount & BYTE_MASK)) {
+            g_FishingTrades[g_FishingShopStock[g_GameEntryFacing][slot & BYTE_MASK]].need[FISHING_TRADE_NEED_COUNT][i] * (amount & BYTE_MASK)) {
             return true;
         }
     }
@@ -498,10 +498,10 @@ MATCH void Fishing_ShopDrawNeeded(void) {
         }
         value = Item_GetRecord(ITEM_CATEGORY_ITEM, (u8)((g_FishingTrades[g_FishingShopStock[g_GameEntryFacing][slot]].need[FISHING_TRADE_NEED_FISH][i] + ITEM_JELLYFISH) & BYTE_MASK));
         UI_TextDraw(173, (0x58 + i * 13), 0, Game_ReadCommand((u8*)value) & BYTE_MASK, (u8*)value);
-        TEXT_Format(g_UiTextFormatBuffer, D_800F5000.format, g_FishingTrades[g_FishingShopStock[g_GameEntryFacing][slot]].need[FISHING_TRADE_NEED_AMOUNT][i] * (s8)s_ListItemId);
+        TEXT_Format(g_UiTextFormatBuffer, D_800F5000.format, g_FishingTrades[g_FishingShopStock[g_GameEntryFacing][slot]].need[FISHING_TRADE_NEED_COUNT][i] * (s8)s_ListItemId);
         UI_TextDrawGlyphString(272, (0x5C + i * 13), 0, g_UiTextFormatBuffer);
         cost = Item_Count(ITEM_CATEGORY_ITEM, (g_FishingTrades[g_FishingShopStock[g_GameEntryFacing][slot]].need[FISHING_TRADE_NEED_FISH][i] + ITEM_JELLYFISH) & BYTE_MASK, 0);
-        if (cost < g_FishingTrades[g_FishingShopStock[g_GameEntryFacing][slot]].need[FISHING_TRADE_NEED_AMOUNT][i]) {
+        if (cost < g_FishingTrades[g_FishingShopStock[g_GameEntryFacing][slot]].need[FISHING_TRADE_NEED_COUNT][i]) {
             UI_TextDraw(173, (0xA4 + i * 13), UI_TEXT_DIM, Game_ReadCommand((u8*)value) & BYTE_MASK, (u8*)value);
             TEXT_Format(g_UiTextFormatBuffer, D_800F5000.format, cost);
             UI_TextDrawGlyphString(272, (0xA8 + i * 13), UI_TEXT_DIM, g_UiTextFormatBuffer);
@@ -634,7 +634,7 @@ MATCH void Fishing_ShopTakeTradeItems(void) {
         if (g_FishingTrades[trade_id].need[FISHING_TRADE_NEED_FISH][i] == GAME_NONE) {
             break;
         }
-        count = g_FishingTrades[trade_id].need[FISHING_TRADE_NEED_AMOUNT][i] * ((s8)s_ListItemId);
+        count = g_FishingTrades[trade_id].need[FISHING_TRADE_NEED_COUNT][i] * ((s8)s_ListItemId);
         Item_Remove(ITEM_CATEGORY_ITEM, (g_FishingTrades[g_FishingShopStock[g_GameEntryFacing][s_ListCursor & FISHING_SHOP_CURSOR_ROW]].need[FISHING_TRADE_NEED_FISH][i] + ITEM_JELLYFISH) & BYTE_MASK,
                     count & BYTE_MASK, 0);
     }

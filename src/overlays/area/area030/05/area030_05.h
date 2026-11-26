@@ -36,7 +36,7 @@ typedef enum FishingTradeGive {
 /* The two runs of FishingTrade.need: the fish ids from ITEM_JELLYFISH (GAME_NONE after the last), then their counts. */
 typedef enum FishingTradeNeed {
     FISHING_TRADE_NEED_FISH,
-    FISHING_TRADE_NEED_AMOUNT,
+    FISHING_TRADE_NEED_COUNT,
 } FishingTradeNeed;
 
 typedef struct FishingTrade {
