@@ -68,8 +68,9 @@ void func_801A0514(void);
 void func_801A061C(void);
 /* func_801A18C8 */
 void func_801A18C8(Actor* record);
+/* Actor_IsAheadBlocked */
 /* func_801A1AE4 */
-bool func_801A1AE4(Actor* arg);
+bool Actor_IsAheadBlocked(Actor* arg);
 /* func_801A3A08 */
 void func_801A3A08(void);
 /* Actor_TurnRampStep */

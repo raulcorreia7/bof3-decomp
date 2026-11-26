@@ -9,7 +9,32 @@ g_BattleEnemies = { addr = 0x801EB2E8, alias = true, source = "The enemy battler
 g_BattleEffectBattler = { addr = 0x801EB4E0, source = "the battler the running effect acts on; Battle_UpdateEffects stores it for each effect step (emi/battle/battle/03 owns the cell)" }
 g_BattleEnemyBattlers = { addr = 0x801EB630, alias = true, source = "The enemy battlers of the battle, indexed by slot minus BATTLE_PARTY_CHARACTERS_COUNT; Battle_DrawEnemyNamePanel draws the name of each one whose unk_7F is 1." }
 g_BattleEffects = { addr = 0x801EC330, alias = true, source = "Battle effect work records (stride 0x78); Battle_AllocEffect claims a free one by setting bit 0 of header.flags." }
+BMagic_InfluenceUpdate = { addr = 0x801EEC04, type = "func", source = "The module entry: runs the init, then Effect_MarkDamagedOnZeroTick." }
+BMagic_InfluenceInit = { addr = 0x801EEC5C, type = "func", source = "Takes the selected actor's screen point, spawns 3 right rings and 3 left rings with delays of 1 to 3 frames, copies the palette and plays the sound." }
 Effect_MarkDamagedOnZeroTick = { addr = 0x801EEE30, type = "func", source = "When the effect ticker (byte 0x0B) is zero marks the battlers of the target selector damaged, raises BATTLE_STATE_EFFECT_PLAYING and resets the effect in magic069 (Influence)." }
 BMagic_DispatchEffectMode = { addr = 0x801EEE90, type = "func", source = "Runs the handler that header.mode (byte 0x01) selects from the effect handlers of magic069." }
+BMagic_InfluenceRightRingUpdate = { addr = 0x801EEED4, type = "func", source = "Runs the right ring step that header.step selects and draws its ring and fans, and from step 3 a cross." }
+BMagic_InfluenceRightRingStart = { addr = 0x801EF034, type = "func", source = "Right ring step 0: after its delay places the ring 0x37 right of the effect battler's screen point and sets its radius to 32." }
+BMagic_InfluenceRightRingApproach = { addr = 0x801EF0C4, type = "func", source = "Right ring step 1: moves the ring left over 11 frames; the first ring plays the sound and advances, the others end." }
+BMagic_InfluenceRightRingSpawnMarks = { addr = 0x801EF15C, type = "func", source = "Right ring step 2: after 16 frames spawns the marks and advances." }
+BMagic_InfluenceRightRingPulse = { addr = 0x801EF1D0, type = "func", source = "Right ring step 3: pulses its shade until the effect battler's count of live pieces is 1, then plays the sound and advances." }
+BMagic_InfluenceRightRingEnd = { addr = 0x801EF2AC, type = "func", source = "Right ring step 4: shrinks the radius by 2 per frame to 8, then lowers the count of live pieces and clears the effect." }
+BMagic_InfluenceLeftRingUpdate = { addr = 0x801EF30C, type = "func", source = "Runs the left ring step that header.step selects and draws its ring and fans." }
+BMagic_InfluenceLeftRingStart = { addr = 0x801EF430, type = "func", source = "Left ring step 0: after its delay places the ring 0x37 left of the effect battler's screen point and sets its radius to 32." }
+BMagic_InfluenceLeftRingApproach = { addr = 0x801EF4C0, type = "func", source = "Left ring step 1: moves the ring right over 11 frames, then lowers the count of live pieces and clears the effect." }
+BMagic_InfluenceMarkUpdate = { addr = 0x801EF520, type = "func", source = "Runs the mark step that header.step selects from g_BMagicInfluenceMarkSteps." }
+BMagic_InfluenceMarkStart = { addr = 0x801EF564, type = "func", source = "Mark step 0: starts a palette fade on the mark's battler and places the mark's quad at its upper left." }
+BMagic_InfluenceMarkFadeIn = { addr = 0x801EF724, type = "func", source = "Mark step 1: raises the battler's palette fade by 1 per frame to 16." }
+BMagic_InfluenceMarkFadeOut = { addr = 0x801EF834, type = "func", source = "Mark step 2: lowers the battler's palette fade to 0, plays the sound for the first mark, frees the fade and restores the battler's poison fade." }
+BMagic_InfluenceMarkGrow = { addr = 0x801EF9C4, type = "func", source = "Mark step 3: draws the mark's quad, which grows 4 per frame to 24 tall, for 20 frames." }
 Effect_TickDownAndClear = { addr = 0x801EFA50, type = "func", source = "Lowers the active battler's ticker (byte 0x0B) and clears the effect in magic069 (Influence)." }
-g_BMagicEffectModes = { addr = 0x801F04F8, source = "Handlers of magic069 (Influence), run by header.mode (byte 0x01) and by header.step (byte 0x02) in its sub-effects." }
+BMagic_InfluenceDrawMark = { addr = 0x801EFA84, type = "func", source = "Draws the mark: a 48 wide textured quad as tall as the effect's timer." }
+BMagic_InfluenceDrawFans = { addr = 0x801EFC00, type = "func", source = "Draws four fans of three shaded triangles round the effect's screen point, one per quarter turn." }
+BMagic_InfluenceDrawRing = { addr = 0x801EFF14, type = "func", source = "Draws a ring of 64 line segments round the effect's screen point, keeping the middle half of every sixteen." }
+BMagic_InfluenceDrawCross = { addr = 0x801F0104, type = "func", source = "Draws a cross of two 8 long lines at the effect's screen point." }
+BMagic_InfluenceSpawnMarks = { addr = 0x801F0274, type = "func", source = "Spawns a mark on every selectable battler other than the actor and the target that is confused, charging or has under 2 intelligence, and counts them in the effect battler's byte 0x0B." }
+g_BMagicEffectModes = { addr = 0x801F04F8, source = "Handlers of magic069 (Influence), run by header.mode (byte 0x01): right ring, left ring, mark." }
+g_BMagicInfluenceRightRingSteps = { addr = 0x801F0504, source = "The step routines of a right ring." }
+g_BMagicInfluenceLeftRingSteps = { addr = 0x801F0518, source = "The step routines of a left ring." }
+g_BMagicInfluenceMarkSteps = { addr = 0x801F0520, source = "The step routines of a mark." }
+g_BMagicInfluenceFanPhases = { addr = 0x801F0534, source = "The edge phases of the three triangles of each fan, in 64ths of a turn." }

@@ -393,7 +393,6 @@ MATCH void func_801F7FA0(void) {
                 s32 yaw;
 
                 g_SpawnedActors[spawn_slot].camera_angle.x = -0x2AA;
-                FAKE_BARRIER(); /* FAKE: keep the yaw read after the pitch store. */
                 yaw                                        = g_AreaCameraAngle.vy;
                 g_SpawnedActors[spawn_slot].camera_angle.z = 0x200;
                 g_SpawnedActors[spawn_slot].layer          = 0x40;

@@ -6,7 +6,9 @@ __asm__(".include \"include/match/macro.inc\"\n");
 
 #include "overlays/bmagic/shared/BMagic_DispatchMode.h"
 
-MATCH void func_801EEC70(void) {
+/* Spawns the stream and the actors, copies the battle palette row and advances the task mode. */
+/* func_801EEC70 */
+MATCH void BMagic_WhelpBreathInit(void) {
     u32          slot;
     u32          i;
     PartyMember* work;
@@ -14,23 +16,23 @@ MATCH void func_801EEC70(void) {
 
     TASK(PartyMember)->facing = g_BattleEffectBattler->facing;
     WorldPos_Copy(&TASK(PartyMember)->pos, &g_BattleEffectBattler->pos);
-    slot                               = Battle_AllocEffect(1, 15) & BYTE_MASK;
+    slot                               = Battle_AllocEffect(1, BMAGIC_EFFECT_WHELP_BREATH) & BYTE_MASK;
     work                               = TASK(PartyMember);
-    g_BattleEffects[slot].header.mode  = 0;
-    g_BattleEffects[slot].arg.unk_09   = 4;
+    g_BattleEffects[slot].header.mode  = BMAGIC_WHELP_BREATH_EFFECT_STREAM;
+    g_BattleEffects[slot].arg.unk_09   = BMAGIC_WHELP_BREATH_AIM_DELAY;
     g_BattleEffects[slot].target.party = work;
-    slot                               = Battle_AllocEffect(1, 15) & BYTE_MASK;
+    slot                               = Battle_AllocEffect(1, BMAGIC_EFFECT_WHELP_BREATH) & BYTE_MASK;
     battler                            = g_BattleEffectBattler;
-    g_BattleEffects[slot].header.mode  = 1;
-    g_BattleEffects[slot].unk_0B       = 0;
+    g_BattleEffects[slot].header.mode  = BMAGIC_WHELP_BREATH_EFFECT_ACTOR;
+    g_BattleEffects[slot].unk_0B       = BMAGIC_WHELP_BREATH_ACTOR_PLAY;
     g_BattleEffects[slot].target.party = battler;
     if (!(TASK(PartyMember)->facing & 2)) {
         PartyMember* owner;
 
-        slot                               = Battle_AllocEffect(1, 15) & BYTE_MASK;
+        slot                               = Battle_AllocEffect(1, BMAGIC_EFFECT_WHELP_BREATH) & BYTE_MASK;
         owner                              = g_BattleEffectBattler;
-        g_BattleEffects[slot].header.mode  = 1;
-        g_BattleEffects[slot].unk_0B       = 1;
+        g_BattleEffects[slot].header.mode  = BMAGIC_WHELP_BREATH_EFFECT_ACTOR;
+        g_BattleEffects[slot].unk_0B       = BMAGIC_WHELP_BREATH_ACTOR_LOOP;
         g_BattleEffects[slot].target.party = owner;
     }
     {
@@ -70,21 +72,23 @@ MATCH void func_801EEC70(void) {
     TASK(PartyMember)->header.mode += 1;
 }
 
-MATCH void func_801EEEC8(void) {
+/* Once the stream has grown (task byte 0x0B is 1), spawns the puff and shade actors. */
+/* func_801EEEC8 */
+MATCH void BMagic_WhelpBreathWaitGrown(void) {
     u32          slot;
     PartyMember* task;
     PartyMember* task2;
 
-    if (TASK(PartyMember)->param.unk_0B == 1) {
-        slot                               = Battle_AllocEffect(1, 15) & BYTE_MASK;
+    if (TASK(PartyMember)->param.unk_0B == BMAGIC_WHELP_BREATH_GROWN) {
+        slot                               = Battle_AllocEffect(1, BMAGIC_EFFECT_WHELP_BREATH) & BYTE_MASK;
         task                               = TASK(PartyMember);
-        g_BattleEffects[slot].header.mode  = 1;
-        g_BattleEffects[slot].unk_0B       = 2;
+        g_BattleEffects[slot].header.mode  = BMAGIC_WHELP_BREATH_EFFECT_ACTOR;
+        g_BattleEffects[slot].unk_0B       = BMAGIC_WHELP_BREATH_ACTOR_PUFFS;
         g_BattleEffects[slot].target.party = task;
-        slot                               = Battle_AllocEffect(1, 15) & BYTE_MASK;
+        slot                               = Battle_AllocEffect(1, BMAGIC_EFFECT_WHELP_BREATH) & BYTE_MASK;
         task2                              = TASK(PartyMember);
-        g_BattleEffects[slot].header.mode  = 1;
-        g_BattleEffects[slot].unk_0B       = 3;
+        g_BattleEffects[slot].header.mode  = BMAGIC_WHELP_BREATH_EFFECT_ACTOR;
+        g_BattleEffects[slot].unk_0B       = BMAGIC_WHELP_BREATH_ACTOR_SHADE;
         g_BattleEffects[slot].target.party = task2;
         TASK(PartyMember)->header.mode += 1;
     }
@@ -95,19 +99,21 @@ MATCH void func_801EEEC8(void) {
 /* func_801EF010 */
 #include "overlays/bmagic/shared/BMagic_DispatchEffectMode.h"
 
+/* Runs the stream step that header.step selects and draws the stream once it has started, until the task's byte 0x0B is 0xFF. */
 /* func_801EF054 */
-MATCH void BMagic_UpdateWhelpBreath(void) {
-    SYS_DISPATCH_BYTE(D_801F0CB0, TASK(PartyMember)->header.step);
+MATCH void BMagic_WhelpBreathStreamUpdate(void) {
+    SYS_DISPATCH_BYTE(g_BMagicWhelpBreathStreamSteps, TASK(PartyMember)->header.step);
     if (g_BattleEffectBattler->param.unk_0B != 0xFF) {
         if (TASK(PartyMember)->header.step != 0) {
-            BMagic_DrawWhelpBreath();
+            BMagic_WhelpBreathDrawStream();
         }
     }
 }
 
-/* Projects the effect from the camera centre to the battler, offset by unk_0C and unk_10 on screen, and
- * aims it along the screen line between the two points the scratchpad keeps. */
-MATCH void func_801EF0D8(void) {
+/* Stream step 0: after the aim delay, projects the stream from the camera centre to the battler, offset by unk_0C and
+ * unk_10 on screen, and aims it along the screen line between the two points the scratchpad keeps. */
+/* func_801EF0D8 */
+MATCH void BMagic_WhelpBreathStreamStart(void) {
     u8           timer;
     PartyMember* work;
     s32          angle;
@@ -139,13 +145,15 @@ MATCH void func_801EF0D8(void) {
     }
 }
 
-MATCH void func_801EF270(void) {
+/* Stream step 1: lengthens the stream by 3 segments per frame for 8 frames, then sets task byte 0x0B to 1. */
+/* func_801EF270 */
+MATCH void BMagic_WhelpBreathStreamGrow(void) {
     u8 counter;
     TASK(PartyMember)->timer += 3;
     counter                   = TASK(PartyMember)->unk_09 + 1;
     TASK(PartyMember)->unk_09 = counter;
     if ((counter & BYTE_MASK) == 8) {
-        g_BattleEffectBattler->param.unk_0B = 1;
+        g_BattleEffectBattler->param.unk_0B = BMAGIC_WHELP_BREATH_GROWN;
         TASK(PartyMember)->header.step += 1;
     }
 }
@@ -156,7 +164,9 @@ MATCH void func_801EF270(void) {
 
 #include "overlays/bmagic/shared/Effect_CountUpAndFinishAt136.h"
 
-MATCH void BMagic_DrawWhelpBreath(void) {
+/* Draws the stream as two bands of textured quads that sway along the stream's angle. */
+/* func_801EF44C */
+MATCH void BMagic_WhelpBreathDrawStream(void) {
     POLY_GT4* prim;
     s32       tpage;
     s32       i;
@@ -247,7 +257,9 @@ MATCH void BMagic_DrawWhelpBreath(void) {
 
 #include "overlays/bmagic/shared/BMagic_RunStep.h"
 
-MATCH void func_801EFDD4(void) {
+/* Actor step 0: sets the actor up and, by its role, picks its script and its next step. */
+/* func_801EFDD4 */
+MATCH void BMagic_WhelpBreathActorStart(void) {
     PartyMember* work;
     u32          i;
 
@@ -264,7 +276,7 @@ MATCH void func_801EFDD4(void) {
     work->unk_2B              = 0;
     work->unk_2C.value        = 0;
     switch (TASK(PartyMember)->param.unk_0B) {
-        case 0:
+        case BMAGIC_WHELP_BREATH_ACTOR_PLAY:
             TASK(PartyMember)->header.step += 1;
             if (TASK(PartyMember)->facing & 2) {
                 TASK(PartyMember)->unk_29 = 4;
@@ -274,19 +286,19 @@ MATCH void func_801EFDD4(void) {
                 Script_Select(0);
             }
             break;
-        case 1:
+        case BMAGIC_WHELP_BREATH_ACTOR_LOOP:
             TASK(PartyMember)->unk_09      = 120;
             TASK(PartyMember)->header.step = 2;
             Script_Select(1);
             break;
-        case 2:
+        case BMAGIC_WHELP_BREATH_ACTOR_PUFFS:
             for (i = 0; i < 6; i++) {
-                D_801F0D0C[i] = 0;
+                g_BMagicWhelpBreathPuffAges[i] = 0;
             }
             TASK(PartyMember)->unk_09      = 0;
             TASK(PartyMember)->header.step = 3;
             break;
-        case 3:
+        case BMAGIC_WHELP_BREATH_ACTOR_SHADE:
             TASK(PartyMember)->unk_09      = 0;
             TASK(PartyMember)->timer       = 80;
             TASK(PartyMember)->header.step = 5;
@@ -294,14 +306,18 @@ MATCH void func_801EFDD4(void) {
     }
 }
 
-MATCH void func_801F0008(void) {
+/* Actor step 1: draws the actor and plays its script once. */
+/* func_801F0008 */
+MATCH void BMagic_WhelpBreathActorPlay(void) {
     Area_AddGridActor();
     if (Script_AnimStepOnce() & BYTE_MASK) {
         Effect_Reset();
     }
 }
 
-MATCH void func_801F0044(void) {
+/* Actor step 2: draws the actor and loops its script for 120 frames. */
+/* func_801F0044 */
+MATCH void BMagic_WhelpBreathActorLoop(void) {
     u8 count;
 
     Script_AnimStepLoop();
@@ -313,10 +329,12 @@ MATCH void func_801F0044(void) {
     }
 }
 
-MATCH void func_801F009C(void) {
+/* Puffs step 3: draws the puffs, which wrap around, for 96 frames. */
+/* func_801F009C */
+MATCH void BMagic_WhelpBreathPuffsLoop(void) {
     u8 timer;
 
-    func_801F0274();
+    BMagic_WhelpBreathDrawPuffRows();
     timer                     = TASK(PartyMember)->unk_09 + 1;
     TASK(PartyMember)->unk_09 = timer;
     if (timer == 96) {
@@ -324,10 +342,12 @@ MATCH void func_801F009C(void) {
     }
 }
 
-MATCH void func_801F0104(void) {
+/* Puffs step 4: draws the puffs, which age out, for 16 frames. */
+/* func_801F0104 */
+MATCH void BMagic_WhelpBreathPuffsEnd(void) {
     u8 count;
 
-    func_801F0274();
+    BMagic_WhelpBreathDrawPuffRows();
     count                     = TASK(PartyMember)->unk_09 + 1;
     TASK(PartyMember)->unk_09 = count;
     if ((count & BYTE_MASK) == 0x70) {
@@ -335,10 +355,12 @@ MATCH void func_801F0104(void) {
     }
 }
 
-MATCH void func_801F0158(void) {
+/* Shade step 5: draws the shade, which brightens over 16 frames. */
+/* func_801F0158 */
+MATCH void BMagic_WhelpBreathShadeFadeIn(void) {
     u8 timer;
 
-    func_801F08AC();
+    BMagic_WhelpBreathDrawShade();
     timer                     = TASK(PartyMember)->unk_09 + 1;
     TASK(PartyMember)->unk_09 = timer;
     if (timer == 16) {
@@ -346,10 +368,12 @@ MATCH void func_801F0158(void) {
     }
 }
 
-MATCH void func_801F01C0(void) {
+/* Shade step 6: draws the shade for the 80 frames the actor start sets. */
+/* func_801F01C0 */
+MATCH void BMagic_WhelpBreathShadeHold(void) {
     u8 count;
 
-    func_801F08AC();
+    BMagic_WhelpBreathDrawShade();
     count                    = TASK(PartyMember)->timer - 1;
     TASK(PartyMember)->timer = count;
     if (count == 0) {
@@ -357,10 +381,12 @@ MATCH void func_801F01C0(void) {
     }
 }
 
-MATCH void func_801F0224(void) {
+/* Shade step 7: draws the shade, which dims over 16 frames. */
+/* func_801F0224 */
+MATCH void BMagic_WhelpBreathShadeFadeOut(void) {
     u8 count;
 
-    func_801F08AC();
+    BMagic_WhelpBreathDrawShade();
     count                     = TASK(PartyMember)->unk_09 - 1;
     TASK(PartyMember)->unk_09 = count;
     if (!(count & BYTE_MASK)) {
@@ -368,7 +394,9 @@ MATCH void func_801F0224(void) {
     }
 }
 
-MATCH void func_801F0274(void) {
+/* Draws the puffs in three rows over each selectable enemy, then ages them. */
+/* func_801F0274 */
+MATCH void BMagic_WhelpBreathDrawPuffRows(void) {
     PartyMember* work;
     s32          tpage;
     u32          j;
@@ -386,31 +414,32 @@ MATCH void func_801F0274(void) {
             TASK(PartyMember)->param.unk_0B = j;
             TASK(PartyMember)->timer        = enemy;
             work                            = TASK(PartyMember);
-            work->unk_0C                    = D_801F0CE4[j].x;
-            work->unk_10                    = D_801F0CE4[j].y;
+            work->unk_0C                    = g_BMagicWhelpBreathPuffOffsets[j].x;
+            work->unk_10                    = g_BMagicWhelpBreathPuffOffsets[j].y;
             Effect_RotatePosition(work);
             TASK(PartyMember)->pos.x.fixed = g_BattleEnemyBattlers[i].pos.x.fixed + TASK(PartyMember)->unk_0C;
             TASK(PartyMember)->pos.y.fixed = g_BattleEnemyBattlers[i].pos.y.fixed + TASK(PartyMember)->unk_10;
-            TASK(PartyMember)->pos.z.fixed = g_BattleEnemyBattlers[i].pos.z.fixed + D_801F0CE4[j].z;
+            TASK(PartyMember)->pos.z.fixed = g_BattleEnemyBattlers[i].pos.z.fixed + g_BMagicWhelpBreathPuffOffsets[j].z;
             TASK(PartyMember)->facing      = g_BattleEnemyBattlers[i].unk_08;
-            func_801F078C();
-            func_801F04B0();
+            BMagic_WhelpBreathSetEnemyMatrix();
+            BMagic_WhelpBreathDrawPuffs();
             PopMatrix();
         }
     }
     for (j = 0; j < 6; j++) {
         if (j * 3 < TASK(PartyMember)->unk_09) {
-            D_801F0D0C[j]++;
+            g_BMagicWhelpBreathPuffAges[j]++;
         }
         if (TASK(PartyMember)->header.step == 3) {
-            D_801F0D0C[j] &= 0xF;
+            g_BMagicWhelpBreathPuffAges[j] &= 0xF;
         }
     }
 }
 
-/* Draw a textured quad for each of the six breath puffs that has started and has not run out:
- * the quad widens and rises and its shade fades as the puff counter grows. */
-MATCH void func_801F04B0(void) {
+/* Draws a textured quad for each of the six puffs that has started and has not aged out:
+ * the quad widens and rises and its shade fades as the puff's age grows. */
+/* func_801F04B0 */
+MATCH void BMagic_WhelpBreathDrawPuffs(void) {
     POLY_FT4* prim;
     long      depth;
     long      flag;
@@ -418,12 +447,12 @@ MATCH void func_801F04B0(void) {
     s32       z;
 
     for (i = 0; i < 6; i++) {
-        if (i * 3 < TASK(PartyMember)->unk_09 && D_801F0D0C[i] < 16) {
+        if (i * 3 < TASK(PartyMember)->unk_09 && g_BMagicWhelpBreathPuffAges[i] < 16) {
             prim = (POLY_FT4*)g_GfxPrimCursor;
             SetPolyFT4(prim);
             SetSemiTrans(prim, 1);
-            g_ScratchPad.cells.halves[0] = D_801F0D0C[i] * 4 + 50;
-            z                            = D_801F0D0C[i] * 15;
+            g_ScratchPad.cells.halves[0] = g_BMagicWhelpBreathPuffAges[i] * 4 + 50;
+            z                            = g_BMagicWhelpBreathPuffAges[i] * 15;
             g_ScratchPadVectors[0].vx    = FIXED_MUL(rcos(512), g_ScratchPad.cells.halves[0]);
             g_ScratchPadVectors[0].vy    = FIXED_MUL(rsin(512), g_ScratchPad.cells.halves[0]);
             g_ScratchPadVectors[0].vz    = z;
@@ -433,7 +462,7 @@ MATCH void func_801F04B0(void) {
             prim->tpage = GetTPage(TPAGE_DEPTH_4BIT, TPAGE_ABR_ADD, 832, 256);
             prim->clut  = GetClut(32, 506);
             setUVWH(prim, 8, 64, 32, 32);
-            g_ScratchPad.cells.halves[3] = 97 - D_801F0D0C[i] * 6;
+            g_ScratchPad.cells.halves[3] = 97 - g_BMagicWhelpBreathPuffAges[i] * 6;
             setRGB0(prim, g_ScratchPad.cells.halves[3], g_ScratchPad.cells.halves[3], g_ScratchPad.cells.halves[3]);
             RotTransPers4(&g_ScratchPadVectors[0], &g_ScratchPadVectors[1], &g_ScratchPadVectors[2], &g_ScratchPadVectors[3], (long*)&prim->x0, (long*)&prim->x1, (long*)&prim->x2, (long*)&prim->x3,
                           &depth, &flag);
@@ -442,7 +471,9 @@ MATCH void func_801F04B0(void) {
     }
 }
 
-MATCH void func_801F078C(void) {
+/* Pushes the matrix that turns the puffs to the enemy's facing. */
+/* func_801F078C */
+MATCH void BMagic_WhelpBreathSetEnemyMatrix(void) {
     SVECTOR pos;
     SVECTOR rot;
     MATRIX  matrix;
@@ -469,7 +500,9 @@ MATCH void func_801F078C(void) {
     BMAGIC_PROJECT_ACTOR_MATRIX(TASK(PartyMember));
 }
 
-MATCH void func_801F08AC(void) {
+/* Draws the shade over each selectable enemy. */
+/* func_801F08AC */
+MATCH void BMagic_WhelpBreathDrawShade(void) {
     PartyMember* work;
     u32          i;
 
@@ -482,11 +515,13 @@ MATCH void func_801F08AC(void) {
         TASK(PartyMember)->pos.x.fixed      = g_BattleEnemyBattlers[i].pos.x.fixed;
         TASK(PartyMember)->pos.y.fixed      = g_BattleEnemyBattlers[i].pos.y.fixed;
         COORD_INT(TASK(PartyMember)->pos.z) = FIELD(u16, D_801EB66E, i * BATTLE_ENEMY_STRIDE);
-        BMAGIC_DRAW_IN_ACTOR_MATRIX(func_801F0974);
+        BMAGIC_DRAW_IN_ACTOR_MATRIX(BMagic_WhelpBreathDrawShadeWedge);
     }
 }
 
-MATCH void func_801F0974(void) {
+/* Draws the shade as a darkening wedge on the enemy's facing. */
+/* func_801F0974 */
+MATCH void BMagic_WhelpBreathDrawShadeWedge(void) {
     POLY_G3* prim;
     long     depth;
     long     flag;
@@ -498,9 +533,9 @@ MATCH void func_801F0974(void) {
     GFX_ADD_DITHERED_DRAW_MODE(BMAGIC_LAYER_BEHIND_BATTLERS, tpage);
     prim = GFX_BeginPolyG3(1);
     setVector(&g_ScratchPadVectors[0], 0, 0, 0);
-    phase = (D_801F0D08[TASK(PartyMember)->facing] - 6) & BMAGIC_PHASE_MASK;
+    phase = (g_BMagicWhelpBreathShadePhases[TASK(PartyMember)->facing] - 6) & BMAGIC_PHASE_MASK;
     setVector(&g_ScratchPadVectors[1], FIXED_MUL(rsin(BMAGIC_PHASE_ANGLE(phase)), g_ScratchPad.cells.halves[0]), FIXED_MUL(rcos(BMAGIC_PHASE_ANGLE(phase)), g_ScratchPad.cells.halves[0]), 0);
-    phase = (D_801F0D08[TASK(PartyMember)->facing] + 6) & BMAGIC_PHASE_MASK;
+    phase = (g_BMagicWhelpBreathShadePhases[TASK(PartyMember)->facing] + 6) & BMAGIC_PHASE_MASK;
     setVector(&g_ScratchPadVectors[2], FIXED_MUL(rsin(BMAGIC_PHASE_ANGLE(phase)), g_ScratchPad.cells.halves[0]), FIXED_MUL(rcos(BMAGIC_PHASE_ANGLE(phase)), g_ScratchPad.cells.halves[0]), 0);
     setRGB0(prim, TASK(PartyMember)->unk_09 * 10 + 1, TASK(PartyMember)->unk_09 * 10 + 1, TASK(PartyMember)->unk_09 * 10 + 1);
     setRGB1(prim, 1, 1, 1);

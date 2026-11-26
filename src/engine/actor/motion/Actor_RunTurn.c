@@ -1,6 +1,8 @@
-#include "game_00.h"
+#include "engine/game/00/game_00.h"
 
-MATCH void func_801A3B7C(Actor* entity) {
+/* func_801A3B7C */
+/* Mode 10: turns the actor one facing at a time toward its target facing, then resumes the saved mode. */
+MATCH void Actor_RunTurn(Actor* entity) {
     u8  target;
     u8  current;
     s32 sel;
@@ -19,7 +21,7 @@ MATCH void func_801A3B7C(Actor* entity) {
     if (target == current) {
         TASK(Actor)->header.mode = TASK(Actor)->unk_03;
         if (!(TASK(Actor)->option_flags & ACTOR_OPT_NO_TARGET)) {
-            if ((func_801A1AE4(entity) & BYTE_MASK) != 0u) {
+            if ((Actor_IsAheadBlocked(entity) & BYTE_MASK) != 0u) {
                 TASK(Actor)->direction &= 7u;
                 TASK(Actor)->unk_0A = 0u;
                 return;

@@ -1,6 +1,8 @@
-#include "game_00.h"
+#include "engine/game/00/game_00.h"
 
-MATCH s32 func_801A225C(s32 unused, s32 divisor, s32 flag_bits) {
+/* func_801A225C */
+/* Pace of steps 0 to 3: starts every move at once and sets its frame count from the speed. */
+MATCH s32 Actor_PaceFree(s32 unused, s32 divisor, s32 flag_bits) {
     Actor* work;
 
     if (flag_bits & 0x2) {

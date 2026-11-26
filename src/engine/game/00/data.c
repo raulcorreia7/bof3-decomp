@@ -342,15 +342,31 @@ u16 D_801C8384[28] = {0x0010, 0x0021, 0x002D, 0x0041, 0x0057, 0x0058, 0x0068, 0x
                       0x0098, 0x0000, 0x0004, 0x0003, 0x0002, 0x0001, 0x0000, 0x0101, 0x0102, 0x0103,
                       0x0004, 0x0006, 0x0002, 0x0005, 0x0000, 0x0105, 0x0102, 0x0106};
 
-ActorStepCallback D_801C83BC[7] = {(ActorStepCallback)func_801A225C, (ActorStepCallback)func_801A225C,
-                                 (ActorStepCallback)func_801A225C, (ActorStepCallback)func_801A225C,
-                                 (ActorStepCallback)func_801A22CC, (ActorStepCallback)func_801A239C,
-                                 (ActorStepCallback)func_801A246C};
+/* Move pace handlers by ActorPace, called by the Actor_Run handlers with header.step; 7 rows. */
+ActorStepCallback g_ActorPaceSteps[ACTOR_PACE_COUNT] = {
+    [ACTOR_PACE_FREE]             = (ActorStepCallback)Actor_PaceFree,
+    [ACTOR_PACE_FREE_1]           = (ActorStepCallback)Actor_PaceFree,
+    [ACTOR_PACE_FREE_2]           = (ActorStepCallback)Actor_PaceFree,
+    [ACTOR_PACE_FREE_3]           = (ActorStepCallback)Actor_PaceFree,
+    [ACTOR_PACE_PARTY_STEP]       = (ActorStepCallback)Actor_PaceByPartyStep,
+    [ACTOR_PACE_PARTY_STEP_DOUBLE] = (ActorStepCallback)Actor_PaceByPartyStepDouble,
+    [ACTOR_PACE_PARTY_STEP_BIT1]  = (ActorStepCallback)Actor_PaceByPartyStepBit1,
+};
 
-ActorModeCallback D_801C83D8[11] = {(ActorModeCallback)func_801A0AE4, (ActorModeCallback)func_801A0CFC, (ActorModeCallback)func_801A0F24,
-                             (ActorModeCallback)func_801A114C, (ActorModeCallback)func_801A1384, (ActorModeCallback)func_801A271C,
-                             (ActorModeCallback)func_801A1A24, (ActorModeCallback)func_801A3410, (ActorModeCallback)Game_FadeDispatchWhite,
-                             (ActorModeCallback)Game_FadeDispatchBlack, (ActorModeCallback)func_801A3B7C};
+/* Field actor mode handlers by ActorMode, run by Actor_RunInteractions with header.mode; 11 rows. */
+ActorModeCallback g_ActorModes[ACTOR_MODE_COUNT] = {
+    [ACTOR_MODE_WANDER]         = (ActorModeCallback)Actor_RunWander,
+    [ACTOR_MODE_FLEE]           = (ActorModeCallback)Actor_RunFlee,
+    [ACTOR_MODE_CHASE]          = (ActorModeCallback)Actor_RunChase,
+    [ACTOR_MODE_WANDER_HOME]    = (ActorModeCallback)Actor_RunWanderHome,
+    [ACTOR_MODE_ROUTE]          = (ActorModeCallback)Actor_RunRoute,
+    [ACTOR_MODE_ROUTE_WAIT]     = (ActorModeCallback)Actor_RunRouteWait,
+    [ACTOR_MODE_REQUEST_SCRIPT] = (ActorModeCallback)Actor_RunRequestScript,
+    [ACTOR_MODE_ATTACH]         = (ActorModeCallback)Actor_RunAttach,
+    [ACTOR_MODE_FADE_WHITE]     = (ActorModeCallback)Game_FadeDispatchWhite,
+    [ACTOR_MODE_FADE_BLACK]     = (ActorModeCallback)Game_FadeDispatchBlack,
+    [ACTOR_MODE_TURN]           = (ActorModeCallback)Actor_RunTurn,
+};
 
 u8 s_EntityRouteIndices[8][4] = {{0x03, 0x05, 0x07, 0x01}, {0x05, 0x01, 0x07, 0x03}, {0x07, 0x05, 0x03, 0x01},
                                  {0x01, 0x07, 0x05, 0x03}, {0x07, 0x01, 0x03, 0x05}, {0x03, 0x01, 0x07, 0x05},

@@ -1,6 +1,8 @@
-#include "game_00.h"
+#include "engine/game/00/game_00.h"
 
-MATCH void func_801A271C(void* record) {
+/* func_801A271C */
+/* Mode 5: counts down the wait the route script set, then returns to the saved mode. */
+MATCH void Actor_RunRouteWait(void* record) {
     u8 timer;
 
     timer = FIELD(u8, record, 0x75u);

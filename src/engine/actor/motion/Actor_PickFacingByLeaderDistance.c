@@ -1,6 +1,8 @@
-#include "game_00.h"
+#include "engine/game/00/game_00.h"
 
-MATCH u8 func_801A2ED4(Actor* entity, u8 route_step) {
+/* func_801A2ED4 */
+/* Returns the free facing of the odd or even four that is nearest to, or with the flag farthest from, the leader. */
+MATCH u8 Actor_PickFacingByLeaderDistance(Actor* entity, u8 route_step) {
     u32 target_x;
     u32 target_y;
     u8  best;
@@ -28,7 +30,7 @@ MATCH u8 func_801A2ED4(Actor* entity, u8 route_step) {
         entity->unk_88 = 0u;
     }
     for (i = 0; i < 4; i++) {
-        if ((func_801A1AE4(entity) & BYTE_MASK) == 0) {
+        if ((Actor_IsAheadBlocked(entity) & BYTE_MASK) == 0) {
             route = TASK(Actor)->direction;
             wx    = TASK(Actor)->pos.x.fixed;
             wy    = TASK(Actor)->pos.y.fixed;

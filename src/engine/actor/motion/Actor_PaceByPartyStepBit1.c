@@ -1,6 +1,8 @@
-#include "game_00.h"
+#include "engine/game/00/game_00.h"
 
-MATCH s32 func_801A246C(s32 value_a, s32 value_b, s32 flag_bits) {
+/* func_801A246C */
+/* Pace of step 6: adds one move to the move counter when bit 1 of the party step count changed. */
+MATCH s32 Actor_PaceByPartyStepBit1(s32 value_a, s32 value_b, s32 flag_bits) {
     /* FAKE: retail keeps the original flag_bits in a3 across the bit-0 test; the
      * allocator coalesces the copy without the pin. */
     u16 saved;

@@ -6,12 +6,12 @@ MATCH void func_801AC768(ScriptState* cursor_state, s32 mode_byte, s32 value_18,
 
     status = Actor_GetOwner();
     if (status != 1) {
-        if (TASK(Actor)->header.mode == 7) {
+        if (TASK(Actor)->header.mode == ACTOR_MODE_ATTACH) {
             func_801ABEE0();
         }
         TASK(Actor)->header.mode = mode_byte;
         slot                     = TASK(Actor);
-        if (slot->header.mode == 7) {
+        if (slot->header.mode == ACTOR_MODE_ATTACH) {
             slot->unk_18 = value_18 & BYTE_MASK;
             slot->unk_1C = value_1C & BYTE_MASK;
             if (cursor_state->move_mode != 0) {

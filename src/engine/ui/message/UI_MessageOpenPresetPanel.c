@@ -15,7 +15,7 @@ MATCH void UI_MessageOpenPresetPanel(void) {
     mode  = &D_801490CE;
     panel = g_UiPanelCurrent;
 
-    x            = *(u16*)((u8*)&D_8017F944 + (FAKE_VOLATILE(u8, *mode) * 4));
+    x            = *(u16*)((u8*)&D_8017F944 + (*mode * 4));
     panel->pos.x = ((x + 35) << 4);
 
     y                          = *(u16*)((u8*)&D_8017F946 + (FAKE_VOLATILE(u8, *mode) * 4));

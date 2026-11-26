@@ -23,9 +23,6 @@ MATCH void func_800C1B6C(void) {
         effect_base = (u8*)g_BattleEffects;
         dst         = (Cpy16*)(effect_base + effect_offset);
         enemy_base  = g_BattleEnemyBattlers;
-        /* FAKE: retail reads the enemy base before applying the party offset. */
-        FAKE_BARRIER();
-        FAKE_BARRIER();
         enemy_index -= BATTLE_PARTY_CHARACTERS_COUNT;
         src = (Cpy16*)&enemy_base[enemy_index];
         end = src + 7;
