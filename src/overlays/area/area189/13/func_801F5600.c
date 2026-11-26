@@ -94,11 +94,11 @@ MATCH void func_801F5600(void) {
                 if ((TASK(Actor)->pos.x.part.integer >> 8) == 0x14 && (TASK(Actor)->pos.y.part.integer >> 8) == 0x14) {
                     SYS_SetFlag(g_SceneEventFlags, 0x8E);
                 }
-                g_GameEntryAreaId = AREA_ID_DESERT_BATTLEFIELD;
-                g_GameEntryPosX   = TO_COORD(25);
-                g_GameEntryPosY   = TO_COORD(25);
-                g_GameEntryFacing = 4;
-                D_8014504B        = (TASK(Actor)->direction + D_801F62F0[rand() & 3]) & 0xF;
+                g_GameEntryAreaId              = AREA_ID_DESERT_BATTLEFIELD;
+                g_GameEntryPosX                = TO_COORD(25);
+                g_GameEntryPosY                = TO_COORD(25);
+                g_GameEntryFacing              = 4;
+                g_SaveData.return_point.facing = (TASK(Actor)->direction + D_801F62F0[rand() & 3]) & 0xF;
                 Game_RequestAreaChange(g_GameEntryAreaId, g_GameEntryPosX, g_GameEntryPosY, g_GameEntryFacing);
             } else if (!GAME_SCRIPT_ACTIVE()) {
                 if (!(g_Game.walk_flags & AREA_WALK_ENTRY_PENDING) && (g_Game.input & (g_InputMasks[FIELD_INPUT_INTERACT] | 0xB000)) != 0) {

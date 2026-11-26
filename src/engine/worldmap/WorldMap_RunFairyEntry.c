@@ -1,4 +1,5 @@
 #include "engine/game/00/game_00.h"
+#include "menu/save_data.h"
 
 /* FAKE: the step increment stays on the mode symbol; both spellings name the same byte. */
 /* func_801A852C */
@@ -37,9 +38,9 @@ MATCH void WorldMap_RunFairyEntry(void) {
                         break;
                     }
                 }
-                D_80145040 = g_Game.members[0].pos.x.fixed;
-                D_80145044 = g_Game.members[0].pos.y.fixed;
-                D_80145048 = g_GameAreaId;
+                g_SaveData.return_point.x       = g_Game.members[0].pos.x.fixed;
+                g_SaveData.return_point.y       = g_Game.members[0].pos.y.fixed;
+                g_SaveData.return_point.area_id = g_GameAreaId;
                 Game_RequestAreaChange(seed & HALF_MASK, TO_COORD(67), TO_COORD(22), FACING_DOWN_RIGHT);
                 g_AreaWalkFlags |= AREA_WALK_ENTRY_PENDING;
                 Game_ClearScriptActive();

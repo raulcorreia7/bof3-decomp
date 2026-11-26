@@ -204,9 +204,9 @@ MATCH void func_801F7FB8(void) {
             break;
         case 32:
             Game_RequestAreaChange(AREA_ID_DESERT_OF_DEATH_MAP, TO_COORD(0x1800), TO_COORD(0xC00), FACING_UP_RIGHT);
-            flags                   = &g_ScenarioState.flags_01;
-            D_8014504B              = 2;
-            g_SaveData.desert.clock = 0;
+            flags                          = &g_ScenarioState.flags_01;
+            g_SaveData.return_point.facing = 2;
+            g_SaveData.desert.clock        = 0;
             *flags |= 1;
             g_ScenarioState.step = 33;
             break;

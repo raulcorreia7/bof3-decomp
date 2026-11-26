@@ -20,6 +20,15 @@ typedef struct DesertCrossing {
     /* 0x3 */ u8  reserve; /* 0xF0 on the way in; each step spends 3 by day and 1 by night */
 } DesertCrossing;
 
+/* The world-map spot a field trip returns to: the start menu, the fairy entry and the desert keep it. */
+typedef struct ReturnPoint {
+    /* 0x0 */ u32 x; /* 16.16 */
+    /* 0x4 */ u32 y;
+    /* 0x8 */ u16 area_id;
+    /* 0xA */ u8  pending; /* nonzero while the trip is away from the spot */
+    /* 0xB */ u8  facing;
+} ReturnPoint;
+
 /* The persistent game state: SYS_StartFrontend clears it, SAVE_BuildSlotImage copies it to the memory card file
  * payload (file offset 0x200, so the frame-relative offsets of menu/save.h are these plus 0x200) and
  * SAVE_RunLoadRestore copies it back. */
@@ -57,7 +66,8 @@ typedef struct SaveData {
     /* 0x751 */ u8               snd_bgm_id;
     /* 0x752 */ u8               unk_752[2];
     /* 0x754 */ u32              battle_count;
-    /* 0x758 */ u8               unk_758[0x1C];
+    /* 0x758 */ u8               unk_758[0x10];
+    /* 0x768 */ ReturnPoint      return_point;
     /* 0x774 */ u8               inventory_ids[4][INV_SLOTS_PER_CATEGORY];
     /* 0x974 */ u8               inventory_counts[4][INV_SLOTS_PER_CATEGORY];
     /* 0xB74 */ u8               vital_item_ids[INV_VITAL_ITEM_SLOTS];
@@ -92,6 +102,7 @@ ASSERT_OFFSET(SaveData, emi_loaded_character_index, 0x74C);
 ASSERT_OFFSET(SaveData, fishing_equipment, 0x74E);
 ASSERT_OFFSET(SaveData, snd_bgm_id, 0x751);
 ASSERT_OFFSET(SaveData, battle_count, 0x754);
+ASSERT_OFFSET(SaveData, return_point, 0x768);
 ASSERT_OFFSET(SaveData, inventory_ids, 0x774);
 ASSERT_OFFSET(SaveData, inventory_counts, 0x974);
 ASSERT_OFFSET(SaveData, vital_item_ids, 0xB74);
