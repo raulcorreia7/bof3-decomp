@@ -95,7 +95,8 @@ def main() -> int:
     target_asm = work / "target.s"
     write_atomic(prelude, '.include "macro.inc"\n.set noat\n.set noreorder\n')
     compiler = (
-        f"{sys.executable} {ROOT}/tools/cc.py {compiler_flags} {PERMUTER_FLAGS} -c"
+        f"env BOF3_CC_CACHE=0 {sys.executable} {ROOT}/tools/cc.py {compiler_flags}"
+        f" {PERMUTER_FLAGS} -c"
     )
     write_atomic(
         settings,

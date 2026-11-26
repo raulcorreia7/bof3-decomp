@@ -124,7 +124,7 @@ if [ -n "${MATCH_SRC:-}" ]; then
 	co=$tmp/cand.o
 	cmd=$(ninja -C "$B" -t commands "$cand" | tail -n 1 | sed 's/ -MMD -MP -MF [^ ]*//')
 	cmd="${cmd% -c *} -c $(realpath "$MATCH_SRC") -o $co"
-	(cd "$B" && sh -c "$cmd") >"$log" 2>&1 || :
+	(cd "$B" && BOF3_CC_CACHE=0 sh -c "$cmd") >"$log" 2>&1 || :
 elif ! ninja -C "$B" "$cand" >"$log" 2>&1; then
 	sed -n '1,40p' "$log" >&2
 	die "ninja could not build $cand. Fix the compile error above; a new file or header needs: meson setup --reconfigure $B"

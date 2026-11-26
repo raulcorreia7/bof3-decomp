@@ -240,7 +240,10 @@ accepts.
 
 Objects are cached in `~/.cache/bof3-cc`, shared by every worktree and keyed on the preprocessed
 source, the arguments and the hashes of GCC, maspsx, DMPSX and `as`; `BOF3_CC_CACHE=0` turns it off,
-`BOF3_CC_CACHE_DIR` moves it.
+`BOF3_CC_CACHE_DIR` moves it. Each key is one file; the cache keeps at most 30,000 entries and 256 MiB (a full build is 7,300
+entries, 46 MB; `BOF3_CC_MAX_ENTRIES` and `BOF3_CC_MAX_BYTES` change that). `tools/cc.py --prune`
+removes the least recently used entries, `--stats` prints entries, bytes and inodes, and scratch
+measurements (`MATCH_SRC`, the permuter) bypass the cache.
 
 ## Inline functions and byte identity
 

@@ -11,7 +11,7 @@ split or two merged, one statement moved within its run of plain statements, a m
 beside a store to the same record, every width combination of the integer parameters as an
 old-style definition, a call argument passed straight or through a local, a value set in both arms
 or once before the `if`, a shared tail hoisted after an if/else or switch or copied into each arm
-or case. Each variant is compiled with `MATCH_SRC` into a private object and scored on the
+or case. Each variant is compiled with `MATCH_SRC` into a private object, past the object cache, and scored on the
 `tools/match.sh --diff` listing: the two instruction streams are aligned on their opcodes by a
 longest common subsequence (branch targets as labels, call targets by name), and the score is the
 instructions missing plus extra plus the aligned ones whose operands differ; 0 is a byte match.
@@ -40,6 +40,7 @@ import json
 import os
 import re
 import resource
+import signal
 import subprocess
 import sys
 import tempfile
@@ -1856,6 +1857,11 @@ def _job(ref: str, name: str | None, pairs: bool, classes=None, steps=0):
     return records
 
 
+def _exit_on_sigterm() -> None:
+    """Make SIGTERM unwind like an interrupt, so each worker removes its scratch directory."""
+    signal.signal(signal.SIGTERM, lambda *_: sys.exit(143))
+
+
 def main() -> int:
     parser = argparse.ArgumentParser(description=__doc__.split("\n\n")[0])
     parser.add_argument("refs", nargs="*", help="TARGET@0xADDRESS")
@@ -1883,28 +1889,37 @@ def main() -> int:
         for line in Path(args.worklist).read_text().splitlines():
             item = json.loads(line)
             rows.append((item["ref"], item.get("name")))
+    _exit_on_sigterm()
     with (
         open(
             args.out if args.out != "-" else os.devnull, "a", encoding="utf-8"
         ) as sink,
-        ProcessPoolExecutor(args.jobs) as pool,
+        ProcessPoolExecutor(args.jobs, initializer=_exit_on_sigterm) as pool,
     ):
         out = sys.stdout if args.out == "-" else sink
         futures = {
             pool.submit(_job, ref, name, args.pairs, args.classes, args.climb): ref
             for ref, name in rows
         }
-        for done in as_completed(futures):
-            for record in done.result():
-                out.write(json.dumps(record) + "\n")
-            out.flush()
-            summary = done.result()[-1]
-            print(
-                futures[done],
-                {k: v for k, v in summary.items() if k not in ("ref", "diff", "path")},
-                file=sys.stderr,
-                flush=True,
-            )
+        try:
+            for done in as_completed(futures):
+                for record in done.result():
+                    out.write(json.dumps(record) + "\n")
+                out.flush()
+                summary = done.result()[-1]
+                print(
+                    futures[done],
+                    {
+                        k: v
+                        for k, v in summary.items()
+                        if k not in ("ref", "diff", "path")
+                    },
+                    file=sys.stderr,
+                    flush=True,
+                )
+        except BaseException:  # an interrupt or SIGTERM: queued work must not run on
+            pool.shutdown(wait=False, cancel_futures=True)
+            raise
     return 0
 
 

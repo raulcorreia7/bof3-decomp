@@ -48,7 +48,7 @@ git ls-files 'src/*.c' | xargs -P "$jobs" -n 1 sh -c '
 	if [ -n "$2" ]; then
 		key=$( { printf "%s %s\n" "$3" "$1"; "$0/gcc" -B"$0/" -E $1 -I"$dir" "$src"; } 2>/dev/null |
 			sha1sum | cut -d" " -f1 )
-		[ -f "$2/$key" ] && exit 0
+		[ -f "$2/$key" ] && { : >"$2/$key"; exit 0; }
 	fi
 	if out=$("$0/gcc" -B"$0/" -S -o /dev/null $1 -I"$dir" "$src" 2>&1); then
 		[ -z "$key" ] || : >"$2/$key"

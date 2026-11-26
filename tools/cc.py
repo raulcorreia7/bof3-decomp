@@ -2,6 +2,7 @@
 """Compile one C file the way the retail build did: GCC 2.7.2 PSX, maspsx, DMPSX, GNU as.
 
     cc.py [--build-dir DIR] [--empty-on-failure] GCC_ARGUMENT... -c SOURCE -o OBJECT
+    cc.py --prune | --stats
 
 The arguments are GCC's. `-Wa,--aspsx-version=V` and `-Wa,--expand-div` go to maspsx and
 every other `-Wa,` item to the assembler. `-MMD -MP -MF FILE` writes a depfile that also
@@ -12,25 +13,38 @@ names the split assembly that `INCLUDE_ASM` pulls in. A source under `src/` also
                     depfile paths relative to DIR (Meson and Ninja)
 --empty-on-failure  hide the compiler's output; a source that does not compile leaves an
                     empty object and succeeds (draft objects for the report)
+--prune             remove stray files, then the least recently used entries until the cache
+                    is within its bounds, and print what went
+--stats             print the cache's entries, bytes and inodes
 
-Objects are cached in ~/.cache/bof3-cc/<first two key digits>/ (BOF3_CC_CACHE_DIR moves it),
-keyed on the preprocessed source, the arguments and the hashes of GCC, maspsx, DMPSX and the assembler, so every worktree
-shares them; the first compiler of a key writes it and the rest wait for its object.
-BOF3_CC_CACHE=0 turns the cache off.
+Objects are cached in ~/.cache/bof3-cc/<first two key digits>/<key>.obj, one file per key that
+holds the dependency paths and the object (BOF3_CC_CACHE_DIR moves it), keyed on the
+preprocessed source, the arguments and the hashes of GCC, maspsx, DMPSX and the assembler, so
+every worktree shares them; the first compiler of a key writes it and the rest wait on a lock
+file that is deleted when the compile ends. BOF3_CC_CACHE=0 turns the cache off; scratch
+measurements (`MATCH_SRC`, the permuter) set it, so one-off variants never enter the cache.
+
+The cache holds at most BOF3_CC_MAX_ENTRIES entries (default 30000) and BOF3_CC_MAX_BYTES
+bytes (default 256 MiB); a full build of every image is 7,300 entries and 46 MB. One write in
+500 prunes it, for at most a few seconds; `--prune` does the whole job by hand.
 
 PSX_GCC=<path> picks the compiler binary. Run it as a script: `python -m` would put the
 working directory, a build directory that changes with every object, on the import path.
 """
 
+import concurrent.futures
+import contextlib
 import fcntl
 import glob
 import hashlib
 import os
+import random
 import re
 import shutil
 import subprocess
 import sys
 import tempfile
+import time
 
 from bof3.resolve.ids import asm_dir
 
@@ -47,6 +61,15 @@ INLINE_INCLUDE = re.compile(r"\.(?:include|incbin)\s+")
 CACHE_DIR = os.environ.get("BOF3_CC_CACHE_DIR") or os.path.expanduser(
     "~/.cache/bof3-cc"
 )
+MAX_ENTRIES = int(os.environ.get("BOF3_CC_MAX_ENTRIES") or 30000)
+MAX_BYTES = int(os.environ.get("BOF3_CC_MAX_BYTES") or 256 << 20)
+#: One cache write in this many prunes the cache, for at most PRUNE_SECONDS.
+PRUNE_ONE_IN = 500
+PRUNE_SECONDS = 3.0
+#: A lock or temporary file this old (seconds) belongs to a compile that died.
+STALE = 3600
+#: A cache entry's file name: the key, with `.obj` in the object folders.
+ENTRY = re.compile(r"[0-9a-f]{40}(\.obj)?$")
 
 
 def _read_literal(text: str, i: int, joined: list[str]) -> tuple[int, bool]:
@@ -295,26 +318,52 @@ def cache_key(plan, gcc_args, env):
 
 
 def take_cached(plan, stored, build_dir):
-    """Copy the cached object and its depfile to the output; false when either is missing."""
-    if not (os.path.isfile(f"{stored}.o") and os.path.isfile(f"{stored}.dep")):
+    """Copy the cached object to the output and rewrite the depfile; false on a miss."""
+    try:
+        with open(stored, "rb") as handle:
+            head, data = handle.read().split(b"\n", 1)
+        size = int(head)
+    except (FileNotFoundError, ValueError):
         return False
     os.makedirs(os.path.dirname(plan["output"]) or ".", exist_ok=True)
-    shutil.copyfile(f"{stored}.o", plan["output"])
+    with open(plan["output"], "wb") as out:
+        out.write(data[size:])
     if plan["depfile"]:
-        with open(f"{stored}.dep", encoding="utf-8") as handle:
-            write_depfile(plan, handle.read().split("\n")[:-1], build_dir)
+        write_depfile(plan, data[:size].decode().splitlines(), build_dir)
+    with contextlib.suppress(OSError):
+        os.utime(stored)  # the prune evicts the entry used longest ago
     return True
 
 
 def store_cached(stored, plan, deps):
-    """Write one object and its depfile into the cache; a later writer replaces both."""
-    os.makedirs(os.path.dirname(stored), exist_ok=True)
-    unique = f"{os.getpid()}.tmp"
-    shutil.copyfile(plan["output"], f"{stored}.o{unique}")
-    with open(f"{stored}.dep{unique}", "w", encoding="utf-8") as out:
-        out.write("".join(f"{dep}\n" for dep in deps or []))
-    os.replace(f"{stored}.dep{unique}", f"{stored}.dep")
-    os.replace(f"{stored}.o{unique}", f"{stored}.o")
+    """Write the dependency paths and the object into one cache file; a later writer replaces it."""
+    text = "".join(f"{dep}\n" for dep in deps or []).encode()
+    with open(plan["output"], "rb") as handle:
+        data = b"%d\n" % len(text) + text + handle.read()
+    temp = f"{stored}.{os.getpid()}.tmp"
+    with open(temp, "wb") as out:
+        out.write(data)
+    os.replace(temp, stored)
+
+
+@contextlib.contextmanager
+def locked(path):
+    """Hold an exclusive lock on a file that is deleted when the block ends.
+
+    A waiter that gets the lock after the holder deleted the file opens the new one."""
+    while True:
+        handle = open(path, "a", encoding="utf-8")
+        fcntl.flock(handle, fcntl.LOCK_EX)
+        with contextlib.suppress(FileNotFoundError):
+            if os.fstat(handle.fileno()).st_ino == os.stat(path).st_ino:
+                break
+        handle.close()
+    try:
+        yield
+    finally:
+        with contextlib.suppress(FileNotFoundError):
+            os.unlink(path)
+        handle.close()
 
 
 def cached_compile(plan, gcc_args, env, tmp, build_dir):
@@ -328,12 +377,12 @@ def cached_compile(plan, gcc_args, env, tmp, build_dir):
             write_depfile(plan, deps, build_dir)
         return status
     # One subdirectory per two hex digits: a flat directory of millions of entries fills ext4's index.
-    stored = os.path.join(CACHE_DIR, key[:2], key)
+    folder = os.path.join(CACHE_DIR, key[:2])
+    stored = os.path.join(folder, f"{key}.obj")
     if take_cached(plan, stored, build_dir):
         return 0
-    os.makedirs(os.path.dirname(stored), exist_ok=True)
-    with open(f"{stored}.lock", "a") as lock:
-        fcntl.flock(lock, fcntl.LOCK_EX)
+    os.makedirs(folder, exist_ok=True)
+    with locked(os.path.join(folder, f"{key}.lock")):
         if take_cached(plan, stored, build_dir):
             return 0
         status, deps = compile_one(plan, gcc_args, env, tmp)
@@ -341,7 +390,107 @@ def cached_compile(plan, gcc_args, env, tmp, build_dir):
             store_cached(stored, plan, deps)
             if plan["depfile"]:
                 write_depfile(plan, deps, build_dir)
-        return status
+    if status == 0 and random.randrange(PRUNE_ONE_IN) == 0:
+        with contextlib.suppress(OSError):
+            prune(time.monotonic() + PRUNE_SECONDS)
+    return status
+
+
+def _folders():
+    """Return the cache's top folder, its two-digit object folders and the `plain` folder."""
+    objects, plain = [], None
+    with contextlib.suppress(FileNotFoundError), os.scandir(CACHE_DIR) as items:
+        for item in items:
+            if item.is_dir() and re.fullmatch(r"[0-9a-f]{2}", item.name):
+                objects.append(item.path)
+            elif item.is_dir() and item.name == "plain":
+                plain = item.path
+    return objects, plain
+
+
+def _scan(folder, deadline):
+    """Return a folder's entries as (mtime, bytes, path), the strays deleted and whether it ended.
+
+    A file is stray when it is not an entry: an object or depfile of the old two-file layout,
+    or a lock or temporary file older than STALE."""
+    entries, strays, now = [], 0, time.time()
+    with os.scandir(folder) as items:
+        for item in items:
+            if time.monotonic() > deadline:
+                return entries, strays, False
+            if item.name.startswith(".") or item.is_dir():
+                continue
+            if ENTRY.match(item.name):
+                info = item.stat()
+                entries.append((info.st_mtime, info.st_size, item.path))
+            elif not item.name.endswith((".lock", ".tmp")) or (
+                now - item.stat().st_mtime > STALE
+            ):
+                with contextlib.suppress(FileNotFoundError):
+                    os.unlink(item.path)
+                strays += 1
+    return entries, strays, True
+
+
+def _evict(entries, max_entries, max_bytes):
+    """Delete the least recently used entries down to 90% of the bounds; return (count, bytes)."""
+    count, size = len(entries), sum(entry[1] for entry in entries)
+    removed = freed = 0
+    if count > max_entries or size > max_bytes:
+        for _, length, path in sorted(entries):
+            if count <= max_entries * 0.9 and size <= max_bytes * 0.9:
+                break
+            with contextlib.suppress(FileNotFoundError):
+                os.unlink(path)
+            count, size = count - 1, size - length
+            removed, freed = removed + 1, freed + length
+    return removed, freed
+
+
+def prune(deadline=float("inf")):
+    """Remove stray files and the least recently used entries beyond the bounds.
+
+    Stops early at the deadline, and evicts only after a complete scan. One prune runs at a
+    time. Returns what it removed."""
+    os.makedirs(CACHE_DIR, exist_ok=True)
+    with open(os.path.join(CACHE_DIR, ".prune"), "a", encoding="utf-8") as lock:
+        try:
+            fcntl.flock(lock, fcntl.LOCK_EX | fcntl.LOCK_NB)
+        except BlockingIOError:
+            return "another prune is running"
+        objects, plain = _folders()
+        folders = [CACHE_DIR, *objects, *([plain] if plain else [])]
+        with concurrent.futures.ThreadPoolExecutor(8) as pool:
+            scans = list(pool.map(lambda f: _scan(f, deadline), folders))
+        strays = sum(scan[1] for scan in scans)
+        removed = freed = 0
+        if all(scan[2] for scan in scans):
+            groups = [(scans[: len(objects) + 1], MAX_BYTES)]
+            if plain:
+                groups.append((scans[-1:], 1 << 62))
+            for group, max_bytes in groups:
+                entries = [entry for scan in group for entry in scan[0]]
+                count, size = _evict(entries, MAX_ENTRIES, max_bytes)
+                removed, freed = removed + count, freed + size
+        done = "" if all(scan[2] for scan in scans) else " (stopped at the deadline)"
+        return (
+            f"removed {strays} stray files and {removed} entries ({freed} bytes){done}"
+        )
+
+
+def stats():
+    """Return the cache's entries, bytes and inodes (every file and folder in it)."""
+    objects, plain = _folders()
+    entries = size = keys = inodes = 0
+    for folder in [CACHE_DIR, *objects, *([plain] if plain else [])]:
+        with os.scandir(folder) as items:
+            for item in items:
+                inodes += 1
+                if folder == plain:
+                    keys += 1
+                elif ENTRY.match(item.name):
+                    entries, size = entries + 1, size + item.stat().st_size
+    return f"{entries} entries, {size} bytes, {keys} plain keys, {inodes} inodes in {CACHE_DIR}"
 
 
 def compiler_env(tmp: str) -> dict[str, str]:
@@ -363,6 +512,9 @@ def main(argv):
     if not argv or argv[0] in ("-h", "--help"):
         print(__doc__)
         return 0 if argv else 2
+    if argv in (["--prune"], ["--stats"]):
+        print(prune() if argv[0] == "--prune" else stats())
+        return 0
     build_dir = None
     empty = False
     while argv and argv[0] in ("--build-dir", "--empty-on-failure"):
