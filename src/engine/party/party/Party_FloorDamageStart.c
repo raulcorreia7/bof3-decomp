@@ -1,7 +1,7 @@
 #include "engine/game/00/game_00.h"
 
 /* func_801B9210 */
-/* Applies the floor cell effect, knocks the actor back a step and starts the blink. */
+/* Applies the floor damage, knocks the actor back a step and starts the blink. */
 MATCH void Party_FloorDamageStart(void) {
     u8  saved;
     u8  mode;
@@ -41,7 +41,7 @@ MATCH void Party_FloorDamageStart(void) {
     } else {
         Actor_ClearVelocity();
     }
-    Char_SetCharacterId(TASK(Actor)->param.unk_0B);
+    Party_FloorDamageApply(TASK(Actor)->param.unk_0B);
     TASK(Actor)->direction = saved;
     TASK(Actor)->unk_0A    = 8;
     Script_Request(TASK(Actor)->direction);

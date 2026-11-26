@@ -29,7 +29,7 @@ MATCH void func_801F3490(void) {
             if ((g_Characters[g_GameState->character_index].status & 0x20) == 0) {
                 Party_FlashDamage(PARTY_DAMAGE_COLOR_YELLOW);
             }
-            Char_SetCharacterId(5);
+            Party_FloorDamageApply(5);
         }
         TASK_SET(saved);
     }

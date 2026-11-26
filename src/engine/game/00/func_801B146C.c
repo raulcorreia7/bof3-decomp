@@ -37,7 +37,7 @@ MATCH void func_801B146C(void) {
         func_801C3828();
     }
     Party_TickConfusion();
-    func_801C2BEC();
+    Party_FloorDamageUpdate();
     if (!(func_801C3790(0) & BYTE_MASK) && !(func_801C37DC(0) & BYTE_MASK) && !(Party_StartCellWalk() & BYTE_MASK)) {
         if (Party_StartFallThrough() & BYTE_MASK) {
             work_b = TASK(Actor);

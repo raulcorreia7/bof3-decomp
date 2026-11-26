@@ -245,6 +245,21 @@ typedef enum PartyDamageColor {
     PARTY_DAMAGE_COLOR_BLUE   = 3,
 } PartyDamageColor;
 
+/* The floor damage kinds: the damage cell type 0x80 + n selects row n of g_PartyFloorDamages and g_PartyFloorDamageColors.
+ * The magnitude words order the rows by the size of the HP or AP loss. */
+typedef enum PartyFloorDamage {
+    PARTY_FLOOR_DAMAGE_HP_LIGHT,
+    PARTY_FLOOR_DAMAGE_HP_MEDIUM,
+    PARTY_FLOOR_DAMAGE_HP_HEAVY,
+    PARTY_FLOOR_DAMAGE_HP_SEVERE,
+    PARTY_FLOOR_DAMAGE_POISON,
+    PARTY_FLOOR_DAMAGE_CONFUSION,
+    PARTY_FLOOR_DAMAGE_AP_LIGHT,
+    PARTY_FLOOR_DAMAGE_AP_MEDIUM,
+    PARTY_FLOOR_DAMAGE_AP_HEAVY,
+    PARTY_FLOOR_DAMAGE_COUNT
+} PartyFloorDamage;
+
 /* g_Game.current->u.field.mode while the character field action runs. */
 #define GAME_PANEL_MODE_PERSONAL_ACTION 8
 

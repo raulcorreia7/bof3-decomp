@@ -251,19 +251,21 @@ typedef s32 (*RouteStepCallback)(u8* cursor);
 /* An area script call: the area load record names the routine. */
 typedef void (*AreaScriptCallback)(void* area);
 
-typedef struct CellPaletteIndices {
-    u8 cells[9];
-} CellPaletteIndices;
+/* What one damage floor takes from the party member that steps on it. */
+typedef struct FloorDamage {
+    u8 hp_loss; /* HP the step drains, never the last one */
+    u8 ap_loss; /* AP the step drains */
+    u8 status;  /* StatusFlags the step adds */
+} FloorDamage;
 
-typedef struct CellEffect {
-    u8 unk_00;
-    u8 unk_01;
-    u8 unk_02;
-} CellEffect;
+typedef struct FloorDamages {
+    FloorDamage damages[PARTY_FLOOR_DAMAGE_COUNT];
+} FloorDamages;
 
-typedef struct CellEffects {
-    CellEffect entries[9];
-} CellEffects;
+/* The PartyDamageColor each floor damage flashes the party member with. */
+typedef struct FloorDamageColors {
+    u8 colors[PARTY_FLOOR_DAMAGE_COUNT];
+} FloorDamageColors;
 
 typedef struct PaletteColors {
     u16 colors[4];
@@ -407,8 +409,9 @@ extern char                g_UiListAbilityRowFormat[]; /* 0x80195F98 */
 /* D_80195FBC */
 extern char                g_GameRewardZennyFormat[]; /* 0x80195FBC */
 /* D_80195FEC */
-extern CellPaletteIndices  g_PartyDamageCellColors;
-extern CellEffects         D_80195FF8;
+extern FloorDamageColors   g_PartyFloorDamageColors;
+/* D_80195FF8 */
+extern FloorDamages        g_PartyFloorDamages;
 /* D_80196014 */
 extern PaletteColors       g_PartyDamageColors;
 extern u8                  D_801F1294; /* 0x801F1294 */

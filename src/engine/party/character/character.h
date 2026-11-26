@@ -47,8 +47,6 @@ s32  Char_APSpend(s32 requested, s32 character_id);
 #if defined(ENGINE_LOCAL_DECLS) && !defined(OVERLAY_PARTY_CHARACTER_H_LOCAL)
 #define OVERLAY_PARTY_CHARACTER_H_LOCAL
 
-/* func_801C2E34 */
-void Char_SetCharacterId(u8 index);
 void Char_ApplyMaster(Character* character);
 /* Retail calls this executable makes into its own units and the overlays. */
 void Char_ApplyWeapon(Character* character);

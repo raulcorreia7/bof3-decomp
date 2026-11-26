@@ -5,7 +5,7 @@
     u16 value2;                                                                                                             \
     u8  value3;                                                                                                             \
     Party_TickConfusion();                                                                                                  \
-    func_801C2BEC();                                                                                                        \
+    Party_FloorDamageUpdate();                                                                                              \
     if (g_GameRequestFlags & AREA_LOAD_FLAG_WORLD_MAP) {                                                                    \
         if ((Area_CellGetCode((s32)COORD_INT(TASK(Actor)->pos.x), (s32)COORD_INT(TASK(Actor)->pos.y)) & 0xFF) == 0xAF) {    \
             Game_RequestAreaChange(g_GameEntryAreaId, g_GameEntryPosX, g_GameEntryPosY, g_GameEntryFacing);                 \
