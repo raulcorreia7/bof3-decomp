@@ -6,7 +6,7 @@ Battle_AllocEffect = { addr = 0x801E590C, alias = true, source = "Claims a free 
 Effect_Reset = { addr = 0x801E5988, type = "func", source = "Clears every timer, state and flag byte of the shared BattleEffect work record; every effect countdown calls it first. battle/03 owns the body.", alias = true }
 g_BattleEffectBattler = { addr = 0x801EB4E0, source = "the battler the running effect acts on; Battle_UpdateEffects stores it for each effect step (emi/battle/battle/03 owns the cell)" }
 g_BattleEffects = { addr = 0x801EC330, alias = true, source = "Battle effect work records (stride 0x78); Battle_AllocEffect claims a free one by setting bit 0 of header.flags." }
-g_BMagicRingModes = { addr = 0x801EEC04, source = "The routines of the task, run by header.mode: start, expand, finish." }
+g_BMagicRingModes = { addr = 0x801EEC04, type = "BMagicActorSteps", source = "The routines of the task, run by header.mode: start, expand, finish." }
 Effect_DrawActor = { addr = 0x801EEC10, type = "func", source = "The module entry: runs the task step that header.mode selects from g_BMagicRingModes, then, while the effect is flagged, draws the red disc, the actor matrix and the shade behind the battlers." }
 BMagic_RingStart = { addr = 0x801EECCC, type = "func", source = "Task mode 0: copies the selected actor's facing and position into the task, starts BMAGIC_RING_COUNT ring bands BMAGIC_RING_STAGGER frames apart, copies the battle palette with its high bit set, queues the selection sound and applies the damage flags." }
 BMagic_RingExpand = { addr = 0x801EEE3C, type = "func", source = "Task mode 1: raises the disc radius step (byte 0x09) and the shade level (byte 0x0A) by one per frame; at BMAGIC_RING_EXPAND_LIMIT advances header.mode." }

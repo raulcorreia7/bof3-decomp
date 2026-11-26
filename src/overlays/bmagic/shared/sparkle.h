@@ -1,5 +1,5 @@
-#ifndef OVERLAY_BMAGIC_SPARKLE_H
-#define OVERLAY_BMAGIC_SPARKLE_H
+#ifndef SHARED_BMAGIC_SPARKLE_H
+#define SHARED_BMAGIC_SPARKLE_H
 
 /* The sparkle pool and tables of magic070, magic071, magic072, magic162 and magic168. */
 

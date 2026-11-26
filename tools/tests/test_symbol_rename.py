@@ -133,6 +133,38 @@ def test_address_renames_keep_provenance_and_other_images(repo: Path) -> None:
     assert "func_80000000" in unrelated.read_text()
 
 
+def test_an_address_rename_keeps_the_row_type_and_size(repo: Path) -> None:
+    for name, content in snapshot(repo)[0].items():
+        (repo / name).write_bytes(content.replace(b"Old", b"D_80000000"))
+    (repo / "src/a/Old.c").rename(repo / "src/a/D_80000000.c")
+    put_symbols(
+        repo,
+        '["exe/a"]\nD_80000000 = { addr = 0x80000000, type = "u16", size = 0x10, source = "was" }\n',
+    )
+    git("add", ".", root=repo)
+    argv = [
+        "rename",
+        "D_80000000",
+        "New",
+        "--image",
+        "exe/a",
+        "--scope",
+        "src/a",
+        "include",
+        "config",
+        "--source",
+        "now",
+    ]
+    assert main(repo, argv) == 0
+    (row,) = tomllib.loads((repo / "config/symbols/exe+a.toml").read_text())[
+        "exe/a"
+    ].items()
+    assert row == (
+        "New",
+        {"addr": 0x80000000, "type": "u16", "size": 0x10, "source": "now"},
+    )
+
+
 LAYOUT = """sha1: 0
 segments:
   - name: main
