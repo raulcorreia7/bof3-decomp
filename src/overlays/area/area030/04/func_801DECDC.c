@@ -38,7 +38,7 @@ NON_MATCHING void func_801DECDC(void) {
             }
 
             lure = g_FishingLureRow->unk_0E & 0xF;
-            row  = D_801E2ACC[TASK(FishingState)->cue_index];
+            row  = FISHING_ENTRY(TASK(FishingState)->cue_index)->pad_04;
             size = g_SpawnedActors[0].unk_07 - row[lure];
             size = (size < -1) ? -1 : (size < 4) ? size : 3;
 
@@ -109,10 +109,10 @@ NON_MATCHING void func_801DECDC(void) {
                 g_SpawnedActors[0].vx            = 0;
                 g_SpawnedActors[0].selection     = 0;
                 g_SpawnedActors[0].unk_14        = 0;
-                TASK(FishingState)->timer        = 0;
                 TASK(FishingState)->pos_x        = 0;
                 TASK(FishingState)->cursor_10    = 0;
                 TASK(FishingState)->bounce_speed = 0;
+                TASK(FishingState)->timer        = 0;
                 TASK(FishingState)->step_index   = 0;
                 TASK(FishingState)->saved_index  = 0;
                 TASK(FishingState)->handler_index++;
