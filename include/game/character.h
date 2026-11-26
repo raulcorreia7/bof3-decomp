@@ -68,6 +68,13 @@ typedef enum EquipSlot {
 
 #define EQUIP_SLOT_COUNT 6
 
+/* The slot groups Char_CountEquipped counts an item id in: the weapon; the shield, helmet and armor; the accessories. */
+typedef enum EquipGroup {
+    EQUIP_GROUP_WEAPON    = 1,
+    EQUIP_GROUP_ARMOR     = 2,
+    EQUIP_GROUP_ACCESSORY = 3,
+} EquipGroup;
+
 /* The stats Char_PreviewEquip compares, in its order (not the order of Stats). */
 typedef enum EquipPreviewStat {
     EQUIP_PREVIEW_POWER        = 0,

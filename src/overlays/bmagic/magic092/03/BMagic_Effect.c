@@ -9,15 +9,16 @@ MATCH void func_801EEC04(void) {
     PartyMember* saved_battler;
     u8           i;
 
-    BMagic_DispatchTaskPair(func_801EED04, Effect_StartOnZeroTick);
+    BMagic_DispatchTaskPair(BMagic_FireblastInit, Effect_StartOnZeroTick);
 
-    BMAGIC_RUN_EFFECT_SLOTS(D_801F07F8, func_801EF7FC);
+    BMAGIC_RUN_EFFECT_SLOTS(BMAGIC_EFFECT_SLOTS, BMagic_FireblastSlotUpdate);
 }
 
 /* Clears the effect slot table and spawns one effect 0x28 at each selectable battler, the
  * enemies when the target selector holds 0x40 and the party otherwise, each starting 16
  * frames after the one before; then sets STP on colours 1 to 15 of work palette row 26. */
-MATCH void func_801EED04(void) {
+/* func_801EED04 */
+MATCH void BMagic_FireblastInit(void) {
     u32 i;
     u32 slot;
     u32 count;
@@ -27,7 +28,7 @@ MATCH void func_801EED04(void) {
     count = 0;
     BMAGIC_CLEAR_EFFECTS(i);
     TASK(PartyMember)->param.unk_0B = 0;
-    if (g_Battle.target_selector & 0x40) {
+    if (g_Battle.target_selector & BATTLE_TARGET_ENEMY_SIDE) {
         for (i = 0; i < 8; i++) {
             index   = i;
             battler = i + BATTLE_PARTY_CHARACTERS_COUNT;
@@ -38,7 +39,7 @@ MATCH void func_801EED04(void) {
                 g_BattleEffects[slot].pos.x.fixed  = g_BattleEnemyBattlers[i].pos.x.fixed;
                 g_BattleEffects[slot].pos.y.fixed  = g_BattleEnemyBattlers[i].pos.y.fixed;
                 g_BattleEffects[slot].pos.z.fixed  = g_BattleEnemyBattlers[i].pos.z.fixed;
-                g_BattleEffects[slot].arg.unk_09   = count * 16 + 1;
+                g_BattleEffects[slot].arg.unk_09   = count * BMAGIC_FIREBLAST_TARGET_DELAY + 1;
                 count++;
                 TASK(PartyMember)->param.unk_0B += 1;
             }
@@ -52,7 +53,7 @@ MATCH void func_801EED04(void) {
                 g_BattleEffects[slot].pos.x.fixed  = g_Game.members[i].pos.x.fixed;
                 g_BattleEffects[slot].pos.y.fixed  = g_Game.members[i].pos.y.fixed;
                 g_BattleEffects[slot].pos.z.fixed  = g_Game.members[i].pos.z.fixed;
-                g_BattleEffects[slot].arg.unk_09   = count * 16 + 1;
+                g_BattleEffects[slot].arg.unk_09   = count * BMAGIC_FIREBLAST_TARGET_DELAY + 1;
                 count++;
                 TASK(PartyMember)->param.unk_0B += 1;
             }
@@ -71,11 +72,13 @@ MATCH void func_801EED04(void) {
 /* func_801EF000 */
 #include "overlays/bmagic/shared/BMagic_DispatchEffectMode.h"
 
-MATCH void func_801EF044(void) {
-    BMAGIC_DISPATCH_AND_DRAW(D_801F07C0, func_801EF580);
+/* func_801EF044 */
+MATCH void BMagic_FireblastTargetUpdate(void) {
+    BMAGIC_DISPATCH_AND_DRAW(g_BMagicFireblastTargetSteps, BMagic_FireblastDrawShadow);
 }
 
-MATCH void func_801EF0CC(void) {
+/* func_801EF0CC */
+MATCH void BMagic_FireblastTargetSpawn(void) {
     PartyMember* work;
     u8           count;
     u8           i;
@@ -89,7 +92,7 @@ MATCH void func_801EF0CC(void) {
             slot = BMagic_AllocEffect();
             if (slot != GAME_NONE) {
                 work                                  = TASK(PartyMember);
-                BMAGIC_EFFECT_SLOTS[slot].header.mode = i != 0;
+                BMAGIC_EFFECT_SLOTS[slot].header.mode = (i != 0) ? BMAGIC_FIREBLAST_SLOT_GLOW : BMAGIC_FIREBLAST_SLOT_FLAME;
                 BMAGIC_EFFECT_SLOTS[slot].header.step = 0;
                 BMAGIC_EFFECT_SLOTS[slot].unk_0B      = i;
                 BMAGIC_EFFECT_SLOTS[slot].header.flags |= BMAGIC_EFFECT_IN_USE | ACTOR_FLAG_HIDDEN;
@@ -102,7 +105,8 @@ MATCH void func_801EF0CC(void) {
     }
 }
 
-MATCH void func_801EF1F0(void) {
+/* func_801EF1F0 */
+MATCH void BMagic_FireblastTargetHit(void) {
     void* battler;
     u8    count;
 
@@ -113,7 +117,7 @@ MATCH void func_801EF1F0(void) {
             battler = &g_BattleEnemyBattlers[TASK(PartyMember)->unk_03];
             GFX_PaletteFreeFadeTarget(battler);
             GFX_PaletteAllocFade(battler, -8, -8, -8, 1);
-            Battle_ApplyDamageFlags((TASK(PartyMember)->unk_03 + 3) & BYTE_MASK, 0x10);
+            Battle_ApplyDamageFlags((TASK(PartyMember)->unk_03 + BATTLE_PARTY_CHARACTERS_COUNT) & BYTE_MASK, 0x10);
         } else {
             battler = &g_Game.members[TASK(PartyMember)->unk_03];
             GFX_PaletteFreeFadeTarget(battler);
@@ -126,7 +130,8 @@ MATCH void func_801EF1F0(void) {
 
 #include "overlays/bmagic/shared/Effect_StepOnOwnTickFlag.h"
 
-MATCH void func_801EF388(void) {
+/* func_801EF388 */
+MATCH void BMagic_FireblastTargetEnd(void) {
     u8 count;
 
     count = TASK(PartyMember)->unk_09;
@@ -136,8 +141,8 @@ MATCH void func_801EF388(void) {
     if (TASK(PartyMember)->param.unk_0B == 0x80) {
         if (g_Battle.target_selector & BATTLE_TARGET_ENEMY_SIDE) {
             GFX_PaletteFreeFadeTarget(&g_BattleEnemyBattlers[TASK(PartyMember)->unk_03]);
-            Battle_FadePoisonedBattler((TASK(PartyMember)->unk_03 + 3) & BYTE_MASK);
-            Battle_MarkDamaged((TASK(PartyMember)->unk_03 + 3) & BYTE_MASK);
+            Battle_FadePoisonedBattler((TASK(PartyMember)->unk_03 + BATTLE_PARTY_CHARACTERS_COUNT) & BYTE_MASK);
+            Battle_MarkDamaged((TASK(PartyMember)->unk_03 + BATTLE_PARTY_CHARACTERS_COUNT) & BYTE_MASK);
         } else {
             GFX_PaletteFreeFadeTarget((EnemyBattler*)&g_Game.members[TASK(PartyMember)->unk_03]);
             Battle_FadePoisonedBattler(TASK(PartyMember)->unk_03);
@@ -150,7 +155,8 @@ MATCH void func_801EF388(void) {
 
 #include "overlays/bmagic/shared/Effect_SetActorMatrix.h"
 
-MATCH void func_801EF580(void) {
+/* func_801EF580 */
+MATCH void BMagic_FireblastDrawShadow(void) {
     POLY_G3* prim;
     long     depth;
     long     flag;
@@ -188,12 +194,14 @@ MATCH void func_801EF580(void) {
     GFX_ADD_DITHERED_DRAW_MODE(BMAGIC_LAYER_BEHIND_BATTLERS, tpage);
 }
 
-MATCH void func_801EF7FC(void) {
-    SYS_DISPATCH_TASK((g_BMagicEffectModes + 5), 1, g_Task);
+/* func_801EF7FC */
+MATCH void BMagic_FireblastSlotUpdate(void) {
+    SYS_DISPATCH_TASK(g_BMagicFireblastSlotModes, 1, g_Task);
 }
 
-MATCH void func_801EF840(void) {
-    SYS_DISPATCH_BYTE(D_801F07D8, TASK(PartyMember)->header.step);
+/* func_801EF840 */
+MATCH void BMagic_FireblastFlameUpdate(void) {
+    SYS_DISPATCH_BYTE(g_BMagicFireblastFlameSteps, TASK(PartyMember)->header.step);
     if (TASK(PartyMember)->header.flags != 0 && TASK(PartyMember)->header.step != 0) {
         Battle_ProjectRange();
         Effect_DrawFlameColumn();
@@ -202,7 +210,8 @@ MATCH void func_801EF840(void) {
 
 #include "overlays/bmagic/shared/Effect_StartAtTarget.h"
 
-MATCH void func_801EF940(void) {
+/* func_801EF940 */
+MATCH void BMagic_FireblastFlameGrow(void) {
     EFFECT_ADVANCE_AT_COUNT(4, 0x11);
 }
 
@@ -213,32 +222,34 @@ MATCH void func_801EF940(void) {
 /* func_801EFB04 */
 #include "overlays/bmagic/shared/Effect_DrawFlameColumn.h"
 
-MATCH void func_801F0260(void) {
+/* func_801F0260 */
+MATCH void BMagic_FireblastGlowUpdate(void) {
     PartyMember* work;
     u16          x;
     u16          y;
 
-    SYS_DISPATCH_BYTE(D_801F07E8, TASK(PartyMember)->header.step);
+    SYS_DISPATCH_BYTE(g_BMagicFireblastGlowSteps, TASK(PartyMember)->header.step);
     if (TASK(PartyMember)->header.flags != 0 && TASK(PartyMember)->header.step != 0) {
         Battle_ProjectRange();
         work = TASK(PartyMember);
         if (work->param.unk_0B == 1) {
-            x = work->screen_x.value - MAGIC092_STEP_X;
+            x = work->screen_x.value - BMAGIC_FIREBLAST_GLOW_DRIFT_X;
             y = work->screen_y.value;
         } else {
-            x = work->screen_x.value + MAGIC092_STEP_X;
+            x = work->screen_x.value + BMAGIC_FIREBLAST_GLOW_DRIFT_X;
             y = work->screen_y.value;
         }
-        y -= MAGIC092_RISE_Y;
+        y -= BMAGIC_FIREBLAST_GLOW_RISE_Y;
         work->screen_x.value = x;
         work->screen_y.value = y;
-        func_801F04BC();
+        BMagic_FireblastDrawGlow();
     }
 }
 
 #include "overlays/bmagic/shared/Effect_AppearAtTarget.h"
 
-MATCH void func_801F038C(void) {
+/* func_801F038C */
+MATCH void BMagic_FireblastGlowGrow(void) {
     EFFECT_ADVANCE_AT_COUNT(2, 0x10);
 }
 
@@ -249,7 +260,8 @@ MATCH void func_801F038C(void) {
 /* Draws the glow fan at the effect point: eight triangles of a radius 64 to 79 picked
  * once, red at the centre with a fifth of it in green and blue, redrawing the blend
  * mode for each. */
-MATCH void func_801F04BC(void) {
+/* func_801F04BC */
+MATCH void BMagic_FireblastDrawGlow(void) {
     POLY_G3* prim;
     s32      angle;
     s32      i;

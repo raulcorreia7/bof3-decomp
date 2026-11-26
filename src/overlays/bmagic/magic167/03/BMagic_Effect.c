@@ -249,20 +249,17 @@ NON_MATCHING void func_801EFC44(void) {
     s32      x;
     s32      y;
 
-    D_1F80000C                  = (TASK(PartyMember)->param.unk_0B & 0x1F) << 7;
+    g_ScratchPad.cells.words[3] = (TASK(PartyMember)->param.unk_0B & 0x1F) << 7;
     g_ScratchPad.cells.words[0] = 0xC0 - TASK(PartyMember)->unk_09 * 2;
-    D_1F800008                  = -(TASK(PartyMember)->unk_09 * 12);
-    rim.vx                      = FIXED_MUL(rsin(D_1F80000C), g_ScratchPad.cells.words[0]);
-    rim.vy                      = FIXED_MUL(rcos(D_1F80000C), g_ScratchPad.cells.words[0]);
-    rim.vz                      = D_1F800008;
+    g_ScratchPad.cells.words[2] = -(TASK(PartyMember)->unk_09 * 12);
     join                        = TASK(PartyMember)->timer * 2;
-    if (TASK(PartyMember)->timer <= 1) {
-        return;
-    }
+    rim.vx                      = FIXED_MUL(rsin(g_ScratchPad.cells.words[3]), g_ScratchPad.cells.words[0]);
+    rim.vy                      = FIXED_MUL(rcos(g_ScratchPad.cells.words[3]), g_ScratchPad.cells.words[0]);
+    rim.vz                      = g_ScratchPad.cells.words[2];
     for (i = 1; i < TASK(PartyMember)->timer; i++) {
-        D_1F80000C                  = ((TASK(PartyMember)->param.unk_0B - i) & 0x1F) << 7;
+        g_ScratchPad.cells.words[3] = ((TASK(PartyMember)->param.unk_0B - i) & 0x1F) << 7;
         g_ScratchPad.cells.words[0] = 0xC0 - (TASK(PartyMember)->unk_09 - i) * 2;
-        D_1F800008                  = -((TASK(PartyMember)->unk_09 - i) * 12);
+        g_ScratchPad.cells.words[2] = -((TASK(PartyMember)->unk_09 - i) * 12);
         span                        = TASK(PartyMember)->timer * 3 - i / 2;
 
         /* The join face: this tick's rim against the rim point the previous tick left. */
@@ -272,12 +269,12 @@ NON_MATCHING void func_801EFC44(void) {
         g_ScratchPadVectors[3].vy = rim.vy;
         g_ScratchPadVectors[1].vz = rim.vz - join;
         g_ScratchPadVectors[3].vz = rim.vz - join / 2;
-        g_ScratchPadVectors[0].vx = FIXED_MUL(rsin(D_1F80000C), D_1F800008);
-        g_ScratchPadVectors[0].vy = FIXED_MUL(rcos(D_1F80000C), D_1F800008);
-        g_ScratchPadVectors[0].vz = D_1F800008 - span;
+        g_ScratchPadVectors[0].vx = FIXED_MUL(rsin(g_ScratchPad.cells.words[3]), g_ScratchPad.cells.words[0]);
+        g_ScratchPadVectors[0].vy = FIXED_MUL(rcos(g_ScratchPad.cells.words[3]), g_ScratchPad.cells.words[0]);
+        g_ScratchPadVectors[0].vz = g_ScratchPad.cells.words[2] - span;
         g_ScratchPadVectors[2].vx = g_ScratchPadVectors[0].vx;
         g_ScratchPadVectors[2].vy = g_ScratchPadVectors[0].vy;
-        g_ScratchPadVectors[2].vz = D_1F800008 - span / 2;
+        g_ScratchPadVectors[2].vz = g_ScratchPad.cells.words[2] - span / 2;
         x                         = (g_ScratchPadVectors[3].vx << 9) + TASK(PartyMember)->pos.x.fixed;
         y                         = (g_ScratchPadVectors[3].vy << 9) + TASK(PartyMember)->pos.y.fixed;
         tpage                     = getTPage(TPAGE_DEPTH_4BIT, TPAGE_ABR_ADD, 320, 256);
@@ -290,25 +287,25 @@ NON_MATCHING void func_801EFC44(void) {
                       &depth, &flag);
         if (TASK(PartyMember)->header.step == 2) {
             /* The last tick darkens the join with the depth it has covered. */
-            fade       = TASK(PartyMember)->unk_09 + i - 24;
-            D_1F800004 = fade;
+            fade                        = TASK(PartyMember)->unk_09 + i - 24;
+            g_ScratchPad.cells.words[1] = fade;
             if (fade >= 17) {
-                fade       = 15;
-                D_1F800004 = fade;
+                fade                        = 15;
+                g_ScratchPad.cells.words[1] = fade;
             }
-            shade      = 0xC0 - fade * 12;
-            D_1F800004 = 0x30 - D_1F800004 * 3;
+            shade                       = 0xC0 - fade * 12;
+            g_ScratchPad.cells.words[1] = 0x30 - g_ScratchPad.cells.words[1] * 3;
         } else {
-            D_1F800004 = 0x30 - i * 3;
-            shade      = 0xC0 - i * 12;
+            g_ScratchPad.cells.words[1] = 0x30 - i * 3;
+            shade                       = 0xC0 - i * 12;
         }
         setRGB0(poly, 1, 1, 1);
         setRGB1(poly, 1, 1, 1);
-        setRGB2(poly, shade, D_1F800004, D_1F800004);
+        setRGB2(poly, shade, g_ScratchPad.cells.words[1], g_ScratchPad.cells.words[1]);
         if (i == 1) {
             setRGB3(poly, i, i, i);
         } else {
-            setRGB3(poly, shade, D_1F800004, D_1F800004);
+            setRGB3(poly, shade, g_ScratchPad.cells.words[1], g_ScratchPad.cells.words[1]);
         }
         Area_CellAddPrim(x, y, 0, sizeof(POLY_G4));
 
@@ -319,19 +316,19 @@ NON_MATCHING void func_801EFC44(void) {
         g_ScratchPadVectors[3].vy = rim.vy;
         g_ScratchPadVectors[1].vz = rim.vz - join / 2;
         g_ScratchPadVectors[3].vz = rim.vz;
-        g_ScratchPadVectors[0].vx = FIXED_MUL(rsin(D_1F80000C), D_1F800008);
-        g_ScratchPadVectors[0].vy = FIXED_MUL(rcos(D_1F80000C), D_1F800008);
-        g_ScratchPadVectors[0].vz = D_1F800008 - span / 2;
+        g_ScratchPadVectors[0].vx = FIXED_MUL(rsin(g_ScratchPad.cells.words[3]), g_ScratchPad.cells.words[0]);
+        g_ScratchPadVectors[0].vy = FIXED_MUL(rcos(g_ScratchPad.cells.words[3]), g_ScratchPad.cells.words[0]);
+        g_ScratchPadVectors[0].vz = g_ScratchPad.cells.words[2] - span / 2;
         g_ScratchPadVectors[2].vx = g_ScratchPadVectors[0].vx;
         g_ScratchPadVectors[2].vy = g_ScratchPadVectors[0].vy;
-        g_ScratchPadVectors[2].vz = D_1F800008;
+        g_ScratchPadVectors[2].vz = g_ScratchPad.cells.words[2];
         poly                      = (POLY_G4*)g_GfxPrimCursor;
         SetPolyG4(poly);
         SetSemiTrans(poly, 1);
         RotTransPers4(&g_ScratchPadVectors[0], &g_ScratchPadVectors[1], &g_ScratchPadVectors[2], &g_ScratchPadVectors[3], (long*)&poly->x0, (long*)&poly->x1, (long*)&poly->x2, (long*)&poly->x3,
                       &depth, &flag);
-        setRGB0(poly, shade, D_1F800004, D_1F800004);
-        setRGB1(poly, shade, D_1F800004, D_1F800004);
+        setRGB0(poly, shade, g_ScratchPad.cells.words[1], g_ScratchPad.cells.words[1]);
+        setRGB1(poly, shade, g_ScratchPad.cells.words[1], g_ScratchPad.cells.words[1]);
         setRGB2(poly, shade, shade, shade);
         setRGB3(poly, shade, shade, shade);
         Area_CellAddPrim(x, y, 0, sizeof(POLY_G4));
@@ -343,12 +340,12 @@ NON_MATCHING void func_801EFC44(void) {
         g_ScratchPadVectors[3].vy = rim.vy;
         g_ScratchPadVectors[1].vz = rim.vz;
         g_ScratchPadVectors[3].vz = rim.vz + join / 2;
-        g_ScratchPadVectors[0].vx = FIXED_MUL(rsin(D_1F80000C), g_ScratchPad.cells.words[0]);
-        g_ScratchPadVectors[0].vy = FIXED_MUL(rcos(D_1F80000C), g_ScratchPad.cells.words[0]);
-        g_ScratchPadVectors[0].vz = D_1F800008;
+        g_ScratchPadVectors[0].vx = FIXED_MUL(rsin(g_ScratchPad.cells.words[3]), g_ScratchPad.cells.words[0]);
+        g_ScratchPadVectors[0].vy = FIXED_MUL(rcos(g_ScratchPad.cells.words[3]), g_ScratchPad.cells.words[0]);
+        g_ScratchPadVectors[0].vz = g_ScratchPad.cells.words[2];
         g_ScratchPadVectors[2].vx = g_ScratchPadVectors[0].vx;
         g_ScratchPadVectors[2].vy = g_ScratchPadVectors[0].vy;
-        g_ScratchPadVectors[2].vz = D_1F800008 + span / 2;
+        g_ScratchPadVectors[2].vz = g_ScratchPad.cells.words[2] + span / 2;
         poly                      = (POLY_G4*)g_GfxPrimCursor;
         SetPolyG4(poly);
         SetSemiTrans(poly, 1);
@@ -356,8 +353,8 @@ NON_MATCHING void func_801EFC44(void) {
                       &depth, &flag);
         setRGB0(poly, shade, shade, shade);
         setRGB1(poly, shade, shade, shade);
-        setRGB2(poly, shade, D_1F800004, D_1F800004);
-        setRGB3(poly, shade, D_1F800004, D_1F800004);
+        setRGB2(poly, shade, g_ScratchPad.cells.words[1], g_ScratchPad.cells.words[1]);
+        setRGB3(poly, shade, g_ScratchPad.cells.words[1], g_ScratchPad.cells.words[1]);
         Area_CellAddPrim(x, y, 0, sizeof(POLY_G4));
 
         /* The outer face of the join, in a second packet, which leaves this tick's rim for the next tick. */
@@ -367,15 +364,15 @@ NON_MATCHING void func_801EFC44(void) {
         g_ScratchPadVectors[3].vy = rim.vy;
         g_ScratchPadVectors[1].vz = rim.vz + join / 2;
         g_ScratchPadVectors[3].vz = rim.vz + join;
-        g_ScratchPadVectors[0].vx = FIXED_MUL(rsin(D_1F80000C), g_ScratchPad.cells.words[0]);
-        g_ScratchPadVectors[0].vy = FIXED_MUL(rcos(D_1F80000C), g_ScratchPad.cells.words[0]);
-        g_ScratchPadVectors[0].vz = D_1F800008 + span / 2;
+        g_ScratchPadVectors[0].vx = FIXED_MUL(rsin(g_ScratchPad.cells.words[3]), g_ScratchPad.cells.words[0]);
+        g_ScratchPadVectors[0].vy = FIXED_MUL(rcos(g_ScratchPad.cells.words[3]), g_ScratchPad.cells.words[0]);
+        g_ScratchPadVectors[0].vz = g_ScratchPad.cells.words[2] + span / 2;
         g_ScratchPadVectors[2].vx = g_ScratchPadVectors[0].vx;
         g_ScratchPadVectors[2].vy = g_ScratchPadVectors[0].vy;
-        g_ScratchPadVectors[2].vz = D_1F800008 + span;
+        g_ScratchPadVectors[2].vz = g_ScratchPad.cells.words[2] + span;
         rim.vx                    = g_ScratchPadVectors[0].vx;
         rim.vy                    = g_ScratchPadVectors[0].vy;
-        rim.vz                    = D_1F800008;
+        rim.vz                    = g_ScratchPad.cells.words[2];
         tpage                     = getTPage(TPAGE_DEPTH_4BIT, TPAGE_ABR_ADD, 320, 256);
         SetDrawMode((DR_MODE*)g_GfxPrimCursor, 0, 1, tpage, 0);
         Area_CellAddPrim(x, y, 0, sizeof(DR_MODE));
@@ -384,11 +381,11 @@ NON_MATCHING void func_801EFC44(void) {
         SetSemiTrans(poly, 1);
         RotTransPers4(&g_ScratchPadVectors[0], &g_ScratchPadVectors[1], &g_ScratchPadVectors[2], &g_ScratchPadVectors[3], (long*)&poly->x0, (long*)&poly->x1, (long*)&poly->x2, (long*)&poly->x3,
                       &depth, &flag);
-        setRGB0(poly, shade, D_1F800004, D_1F800004);
+        setRGB0(poly, shade, g_ScratchPad.cells.words[1], g_ScratchPad.cells.words[1]);
         if (i == 1) {
             setRGB1(poly, i, i, i);
         } else {
-            setRGB1(poly, shade, D_1F800004, D_1F800004);
+            setRGB1(poly, shade, g_ScratchPad.cells.words[1], g_ScratchPad.cells.words[1]);
         }
         setRGB2(poly, 1, 1, 1);
         setRGB3(poly, 1, 1, 1);

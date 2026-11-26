@@ -6,7 +6,7 @@ MATCH void Party_RunFrame(void) {
     if (((g_GameFlags | g_AreaWalkFlags) & BIT(0)) == 0) {
         g_GameState = g_Game.members;
         TASK_SET(g_Game.members);
-        func_801B00F8();
+        Party_RunLeader();
     }
     if (g_PartySize < 2) {
         return;
@@ -14,11 +14,11 @@ MATCH void Party_RunFrame(void) {
     if (((g_GameFlags | g_AreaWalkFlags) & BIT(1)) == 0) {
         g_GameState = &g_Game.members[1];
         TASK_SET((u8*)&g_Game.members[1]);
-        func_801BBE48();
+        Party_RunFollower();
     }
     if (g_PartySize == 3 && ((g_GameFlags | g_AreaWalkFlags) & BIT(2)) == 0) {
         g_GameState = &g_Game.members[2];
         TASK_SET((u8*)&g_Game.members[2]);
-        func_801BBE48();
+        Party_RunFollower();
     }
 }

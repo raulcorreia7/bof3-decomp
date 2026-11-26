@@ -1,5 +1,10 @@
 #include "engine/slus/slus.h"
 
+#include "UI_MessageAnswerSet0.c"
+#include "UI_MessageAnswerSet1.c"
+#include "UI_MessageAnswerSet2.c"
+#include "UI_MessageAnswerSet3.c"
+#include "UI_MessageAnswerSet4.c"
 #include "UI_MessageAnswerSet5.c"
 #include "UI_MessageAnswerSet6.c"
 #include "UI_MessageAnswerSet7.c"

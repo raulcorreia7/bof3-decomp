@@ -42,7 +42,7 @@ MATCH void Area_EncounterRollThreshold(u32 keep_armed) {
         bound_a = limit;
         off     = 0;
         do {
-            if ((func_801C38F4((&g_Game.members[0].character_index)[off], 3, 0x15) & BYTE_MASK) != 0)
+            if ((Char_CountEquipped((&g_Game.members[0].character_index)[off], EQUIP_GROUP_ACCESSORY, 0x15) & BYTE_MASK) != 0)
                 break;
             match++;
             off += BATTLE_PARTY_STRIDE;
@@ -56,7 +56,7 @@ MATCH void Area_EncounterRollThreshold(u32 keep_armed) {
         bound_b = limit;
         off     = 0;
         do {
-            if ((func_801C38F4((&g_Game.members[0].character_index)[off], 3, 0x14) & BYTE_MASK) != 0)
+            if ((Char_CountEquipped((&g_Game.members[0].character_index)[off], EQUIP_GROUP_ACCESSORY, 0x14) & BYTE_MASK) != 0)
                 break;
             match++;
             off += BATTLE_PARTY_STRIDE;

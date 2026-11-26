@@ -9,18 +9,33 @@ Effect_Reset = { addr = 0x801E5988, type = "func", source = "Clears every timer,
 g_BattleEffectBattler = { addr = 0x801EB4E0, source = "the battler the running effect acts on; Battle_UpdateEffects stores it for each effect step (emi/battle/battle/03 owns the cell)" }
 g_BattleEnemyBattlers = { addr = 0x801EB630, type = "EnemyBattler", size = 0x8C0, source = "The enemy battlers of the battle, indexed by slot minus BATTLE_PARTY_CHARACTERS_COUNT; Battle_DrawEnemyNamePanel draws the name of each one whose unk_7F is 1." }
 g_BattleEffects = { addr = 0x801EC330, alias = true, source = "Battle effect work records (stride 0x78); Battle_AllocEffect claims a free one by setting bit 0 of header.flags." }
+BMagic_FireblastInit = { addr = 0x801EED04, type = "func", source = "Spawns an effect at each selectable battler, the enemies when the target selector holds the enemy side and the party otherwise, each starting 16 frames after the one before; sets STP on colours 1 to 15 of the battle overlay palette row and steps." }
 Effect_StartOnZeroTick = { addr = 0x801EEFB4, type = "func", source = "When the effect ticker (byte 0x0B) is zero raises BATTLE_STATE_EFFECT_PLAYING and clears the effect in magic092 (Fireblast)." }
 BMagic_DispatchEffectMode = { addr = 0x801EF000, type = "func", source = "Runs the handler that header.mode (byte 0x01) selects from the effect handlers of magic092." }
+BMagic_FireblastTargetUpdate = { addr = 0x801EF044, type = "func", source = "Runs the target effect's step and draws the shadow disc." }
+BMagic_FireblastTargetSpawn = { addr = 0x801EF0CC, type = "func", source = "Counts the delay down; at zero spawns the flame and two glow effects, plays the first sound and steps." }
+BMagic_FireblastTargetHit = { addr = 0x801EF1F0, type = "func", source = "Raises the timer by 2 per frame; at 16 starts the target's palette fade to dark, applies the damage flags to it and steps." }
 Effect_StepOnOwnTickFlag = { addr = 0x801EF350, type = "func", source = "Advances header.step (byte 0x02) while bit 0x80 of the effect ticker (byte 0x0B) is set in magic092 (Fireblast)." }
+BMagic_FireblastTargetEnd = { addr = 0x801EF388, type = "func", source = "Counts the timer down; once every effect it spawned has ended and the 0x80 mark is set on the task's live-effect count (byte 0x0B), frees the target's palette fade, fades it if poisoned, marks it damaged, lowers the active battler's live-effect count and resets the effect." }
 Effect_SetActorMatrix = { addr = 0x801EF4D0, type = "func", source = "Sets the actor's GTE matrix from its coordinates and half its vertical span, times the camera in magic092 (Fireblast)." }
+BMagic_FireblastDrawShadow = { addr = 0x801EF580, type = "func", source = "Draws the shadow as a disc of eight subtractive triangles of radius 0x180 whose centre colour follows the timer up to 0x80." }
+BMagic_FireblastSlotUpdate = { addr = 0x801EF7FC, type = "func", source = "Runs the handler header.mode selects for an effect of the slot table." }
+BMagic_FireblastFlameUpdate = { addr = 0x801EF840, type = "func", source = "Runs the flame's step and draws the flame column once it has started." }
 Effect_StartAtTarget = { addr = 0x801EF8C0, type = "func", source = "Copies the position of g_BattleEffectBattler into the effect, unhides it, sets the effect timer (byte 0x09) and counter (byte 0x0A) to 1 and advances header.step (byte 0x02) in magic092 (Fireblast)." }
+BMagic_FireblastFlameGrow = { addr = 0x801EF940, type = "func", source = "Raises the flame's timer by 4 per frame; at 17 steps." }
 Effect_CountUpAndMarkBattler = { addr = 0x801EF990, type = "func", source = "Counts the effect timer (byte 0x09) and counter (byte 0x0A) up; at 0x19 sets bit 0x80 of the active battler's ticker (byte 0x0B) and advances header.step (byte 0x02) in magic092 (Fireblast)." }
 Effect_CountDownByTwoFinishAtOne = { addr = 0x801EFA24, type = "func", source = "Counts the effect timer (byte 0x09) down by two and the counter (byte 0x0A) up on odd frames; when the timer reaches 1 lowers the active battler's ticker (byte 0x0B) and clears the effect in magic092 (Fireblast)." }
 Effect_DrawFlameColumn = { addr = 0x801EFB04, type = "func", source = "Draws the flame column of magic092 (Fireblast): 28 rows of four textured quads whose half widths follow a sine of the row, the outer pair fading to black, on page (832, 256) with clut 506." }
+BMagic_FireblastGlowUpdate = { addr = 0x801F0260, type = "func", source = "Runs the glow's step; once started moves its screen point 16 to the side its param picks and 12 up each frame and draws the glow." }
 Effect_AppearAtTarget = { addr = 0x801F0320, type = "func", source = "Copies the position of g_BattleEffectBattler into the effect, unhides it, clears the effect timer (byte 0x09) and advances header.step (byte 0x02) in magic092 (Fireblast)." }
+BMagic_FireblastGlowGrow = { addr = 0x801F038C, type = "func", source = "Raises the glow's timer by 2 per frame; at 16 steps." }
 Effect_StepOnTickFlag = { addr = 0x801F03DC, type = "func", source = "Advances header.step (byte 0x02) while bit 0x80 of the ticker (byte 0x0B) of g_BattleEffectBattler is set in magic092 (Fireblast)." }
 Effect_TickCounter = { addr = 0x801F0420, type = "func", source = "Counts the effect timer (byte 0x09) down; at zero lowers the active battler's ticker (byte 0x0B) and clears the effect in magic092 (Fireblast)." }
+BMagic_FireblastDrawGlow = { addr = 0x801F04BC, type = "func", source = "Draws the glow as a fan of eight additive triangles around the effect's screen point, radius 64 to 79 picked once per draw, red at the centre with a fifth of it in green and blue." }
 BMagic_AllocEffect = { addr = 0x801F0758, type = "func", source = "Claims the first free slot of the effect table (bit 0 of header.flags) and returns its index, or 0xFF when all effect slots are in use in magic092 (Fireblast)." }
 g_BMagicEffectModes = { addr = 0x801F07BC, source = "Handlers of magic092 (Fireblast), run by header.mode (byte 0x01)." }
-D_801F07C0 = { addr = 0x801F07C0, source = "First step handlers of the magic092 effect, run by header.step (byte 0x02) from func_801EF044." }
-D_801F07D8 = { addr = 0x801F07D8, source = "Second step handlers of the magic092 effect, run by header.step (byte 0x02) from func_801EF840." }
+g_BMagicFireblastTargetSteps = { addr = 0x801F07C0, source = "The steps of the target effect: spawn, hit, wait for the 0x80 mark, end." }
+g_BMagicFireblastSlotModes = { addr = 0x801F07D0, source = "The handlers of the effect records, run by header.mode: flame and glow." }
+g_BMagicFireblastFlameSteps = { addr = 0x801F07D8, source = "The steps of the flame: place, grow, hold, fade." }
+g_BMagicFireblastGlowSteps = { addr = 0x801F07E8, source = "The steps of a glow: place, grow, wait for the 0x80 mark, count down." }
+g_BMagicFireblastEffects = { addr = 0x801F07F8, source = "The effect records of the overlay (BATTLE_EFFECT_COUNT rows) that BMagic_AllocEffect claims and the module entry runs while in use." }

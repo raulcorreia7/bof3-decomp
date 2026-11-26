@@ -63,5 +63,7 @@ u8   Actor_TurnRandom(void* record);
 void Actor_SetOptionFlags(u8* script);
 void Actor_SpawnSceneActor(s8 actor_slot);
 void Actor_ReadValue(void);
+/* func_8019F5B8 */
+void Actor_DrawValueDigits(s16 x, s16 y, u8 unused, u8 palette);
 
 #endif

@@ -6,7 +6,8 @@ __asm__(".include \"include/match/macro.inc\"\n");
 
 #include "overlays/bmagic/shared/BMagic_DispatchMode.h"
 
-MATCH void func_801EEC70(void) {
+/* func_801EEC70 */
+MATCH void BMagic_SimoonInit(void) {
     u32  slot;
     u32  i;
     u16* dst;
@@ -14,19 +15,19 @@ MATCH void func_801EEC70(void) {
 
     slot                               = Battle_AllocEffect(1, 45) & BYTE_MASK;
     g_BattleEffects[slot].target.party = TASK(PartyMember);
-    g_BattleEffects[slot].header.mode  = 2;
+    g_BattleEffects[slot].header.mode  = BMAGIC_SIMOON_EFFECT_SHADOW;
     TASK(PartyMember)->param.unk_0B    = 1;
     for (i = 0; i < 2; i++) {
         slot                               = Battle_AllocEffect(1, 45) & BYTE_MASK;
         g_BattleEffects[slot].target.party = TASK(PartyMember);
-        g_BattleEffects[slot].header.mode  = 1;
+        g_BattleEffects[slot].header.mode  = BMAGIC_SIMOON_EFFECT_GLOW;
         g_BattleEffects[slot].unk_0B       = i;
         g_BattleEffects[slot].arg.unk_09   = i + 1;
         TASK(PartyMember)->param.unk_0B += 1;
     }
     slot                               = Battle_AllocEffect(1, 45) & BYTE_MASK;
     g_BattleEffects[slot].target.party = TASK(PartyMember);
-    g_BattleEffects[slot].header.mode  = 0;
+    g_BattleEffects[slot].header.mode  = BMAGIC_SIMOON_EFFECT_DOME;
     TASK(PartyMember)->param.unk_0B += 1;
     /* Copies the first two colour rows of arena palette 26 into the work copy with STP set, then clears colour 0 of each. */
     dst = g_AreaPaletteCopy->rows[AREA_PALETTE_BATL_OVR_ROW].colors;
@@ -49,11 +50,13 @@ MATCH void func_801EEC70(void) {
 /* func_801EEEC8 */
 #include "overlays/bmagic/shared/BMagic_DispatchEffectMode.h"
 
-MATCH void func_801EEF0C(void) {
-    BMAGIC_DISPATCH_AND_DRAW(D_801F07A0, func_801EF1D8);
+/* func_801EEF0C */
+MATCH void BMagic_SimoonDomeUpdate(void) {
+    BMAGIC_DISPATCH_AND_DRAW(g_BMagicSimoonDomeSteps, BMagic_SimoonDrawDome);
 }
 
-MATCH void func_801EEF94(void) {
+/* func_801EEF94 */
+MATCH void BMagic_SimoonDomePlace(void) {
     PartyMember* src;
 
     src                                 = g_Battle.selected_actor;
@@ -79,7 +82,8 @@ MATCH void func_801EEFF4(void) {
     }
 }
 
-MATCH void func_801EF094(void) {
+/* func_801EF094 */
+MATCH void BMagic_SimoonDomeEnd(void) {
     u8 count;
 
     SP_REF(s16, 0u) = (TASK(PartyMember)->unk_09 * 4) + 0xC0;
@@ -97,7 +101,8 @@ MATCH void func_801EF094(void) {
 /* Draws an eight-band textured dome: band 24 down to 17 is a ring of 32 semi-transparent GT4 quads between the
  * radii and heights that rcos and rsin of the band give for the scratch radius word 0, each quad placed in its area
  * cell; v scrolls with timer and the shades fade in by row as unk_09 grows. */
-MATCH void func_801EF1D8(void) {
+/* func_801EF1D8 */
+MATCH void BMagic_SimoonDrawDome(void) {
     POLY_GT4* prim;
     long      depth;
     long      flag;
@@ -205,14 +210,16 @@ MATCH void func_801EF7CC(void) {
     }
 }
 
-MATCH void func_801EFB10(void) {
-    SYS_DISPATCH_BYTE(D_801F07C4, TASK(PartyMember)->header.step);
+/* func_801EFB10 */
+MATCH void BMagic_SimoonGlowUpdate(void) {
+    SYS_DISPATCH_BYTE(g_BMagicSimoonGlowSteps, TASK(PartyMember)->header.step);
     if (TASK(PartyMember)->header.flags != 0 && TASK(PartyMember)->header.step != 0) {
-        func_801EFE20();
+        BMagic_SimoonDrawGlow();
     }
 }
 
-MATCH void func_801EFB88(void) {
+/* func_801EFB88 */
+MATCH void BMagic_SimoonGlowPlace(void) {
     PartyMember* work;
     u8           timer;
 
@@ -220,16 +227,17 @@ MATCH void func_801EFB88(void) {
     TASK(PartyMember)->unk_09 = timer;
     if (timer == 0) {
         work                     = TASK(PartyMember);
-        work->pos.x.fixed        = g_BattleSelectedActor->pos.x.fixed + D_801F07AC[work->param.unk_0B].x;
-        work->pos.y.fixed        = g_BattleSelectedActor->pos.y.fixed + D_801F07AC[work->param.unk_0B].y;
-        work->pos.z.fixed        = g_BattleSelectedActor->pos.z.fixed + D_801F07AC[work->param.unk_0B].z;
+        work->pos.x.fixed        = g_BattleSelectedActor->pos.x.fixed + g_BMagicSimoonGlowOffsets[work->param.unk_0B].x;
+        work->pos.y.fixed        = g_BattleSelectedActor->pos.y.fixed + g_BMagicSimoonGlowOffsets[work->param.unk_0B].y;
+        work->pos.z.fixed        = g_BattleSelectedActor->pos.z.fixed + g_BMagicSimoonGlowOffsets[work->param.unk_0B].z;
         work->unk_09             = 0;
         TASK(PartyMember)->timer = 0;
         TASK(PartyMember)->header.step += 1;
     }
 }
 
-MATCH void func_801EFC70(void) {
+/* func_801EFC70 */
+MATCH void BMagic_SimoonGlowGrow(void) {
     u8 count;
 
     Battle_ProjectRange();
@@ -241,7 +249,8 @@ MATCH void func_801EFC70(void) {
     }
 }
 
-MATCH void func_801EFCF4(void) {
+/* func_801EFCF4 */
+MATCH void BMagic_SimoonGlowRise(void) {
     PartyMember* work;
     u8           counter;
     s32          drop;
@@ -257,7 +266,8 @@ MATCH void func_801EFCF4(void) {
     }
 }
 
-MATCH void func_801EFD74(void) {
+/* func_801EFD74 */
+MATCH void BMagic_SimoonGlowEnd(void) {
     u8 counter;
 
     Battle_ProjectRange();
@@ -275,7 +285,8 @@ MATCH void func_801EFD74(void) {
 
 /* Draw the magic103 tinted glow quad, turning with the effect timer (byte 0x09) around the
  * effect screen point. */
-MATCH void func_801EFE20(void) {
+/* func_801EFE20 */
+MATCH void BMagic_SimoonDrawGlow(void) {
     POLY_GT4* prim;
     s32       tpage;
 
@@ -310,11 +321,13 @@ MATCH void func_801EFE20(void) {
     Area_CellAddPrim(TASK(PartyMember)->pos.x.fixed, TASK(PartyMember)->pos.y.fixed, 0, sizeof(POLY_GT4));
 }
 
-MATCH void func_801F02BC(void) {
-    BMAGIC_DISPATCH_AND_DRAW(D_801F07D4, func_801F04E0);
+/* func_801F02BC */
+MATCH void BMagic_SimoonShadowUpdate(void) {
+    BMAGIC_DISPATCH_AND_DRAW(g_BMagicSimoonShadowSteps, BMagic_SimoonDrawShadow);
 }
 
-MATCH void func_801F0344(void) {
+/* func_801F0344 */
+MATCH void BMagic_SimoonShadowPlace(void) {
     PartyMember* src;
 
     src                            = g_Battle.selected_actor;
@@ -326,7 +339,8 @@ MATCH void func_801F0344(void) {
     TASK(PartyMember)->header.step = TASK(PartyMember)->header.step + 1;
 }
 
-MATCH void func_801F03A4(void) {
+/* func_801F03A4 */
+MATCH void BMagic_SimoonShadowGrow(void) {
     PartyMember* work;
 
     work = TASK(PartyMember);
@@ -343,7 +357,8 @@ MATCH void func_801F03A4(void) {
 
 #include "overlays/bmagic/shared/Effect_CountDownTimerCapped.h"
 
-MATCH void func_801F04E0(void) {
+/* func_801F04E0 */
+MATCH void BMagic_SimoonDrawShadow(void) {
     POLY_G3* prim;
     long     depth;
     long     flag;
