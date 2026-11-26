@@ -86,9 +86,9 @@ NON_MATCHING void func_801EAA14(MenuPanelTask* task) {
         } else {
             color = UI_TEXT_DIM;
         }
-        count++;
         item++;
         TEXT_Format(g_UiTextFormatBuffer, D_801D0F1C, character->ap);
+        count++;
         UI_TextDrawGlyphString(stat_x, (s16)(y + 0x25), color, g_UiTextFormatBuffer);
         color = -(s32)shaded & UI_TEXT_DIM;
         TEXT_Format(g_UiTextFormatBuffer, D_801D0F24, character->stats.max_ap);
