@@ -11,14 +11,14 @@ MATCH void func_801F2D0C(void) {
             if (g_GameStateIndex != GAME_REQUEST_MESSAGE) {
                 Game_ClearScriptActive();
                 Game_RequestAreaChange(0xBD, TO_COORD(0x1780), TO_COORD(0xF00), 0xA);
-                D_8014504B                = 0xA;
-                g_SaveData.desert.reserve = 0xF0;
-                g_SaveData.desert.clock   = 0;
-                g_SaveData.desert.days    = 0;
-                D_80146880                = 0;
-                D_80146881                = 0;
-                g_SceneEventState.mode    = 0;
-                g_SceneEventState.step    = 0;
+                g_SaveData.return_point.facing = 0xA;
+                g_SaveData.desert.reserve      = 0xF0;
+                g_SaveData.desert.clock        = 0;
+                g_SaveData.desert.days         = 0;
+                D_80146880                     = 0;
+                D_80146881                     = 0;
+                g_SceneEventState.mode         = 0;
+                g_SceneEventState.step         = 0;
                 g_AreaWalkFlags |= AREA_WALK_ENTRY_PENDING;
                 g_ScenarioState.flags_01 |= 1;
             }

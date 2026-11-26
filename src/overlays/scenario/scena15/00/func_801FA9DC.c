@@ -20,11 +20,11 @@ MATCH void func_801FA9DC(void) {
 
                 SYS_SetFlag(&g_SceneFlagWords[14 * 8], 1);
                 func_8019FA28(0xBD, TO_COORD(0x1000), TO_COORD(0x1400), 2);
-                flags                   = &g_ScenarioState.flags_01;
-                D_8014504B              = 2;
-                g_SaveData.desert.clock = 0;
-                g_ScenarioState.step    = 2;
-                g_GamePrevSelection     = g_SndBGMId;
+                flags                          = &g_ScenarioState.flags_01;
+                g_SaveData.return_point.facing = 2;
+                g_SaveData.desert.clock        = 0;
+                g_ScenarioState.step           = 2;
+                g_GamePrevSelection            = g_SndBGMId;
                 *flags |= 1;
             }
             break;
@@ -79,7 +79,7 @@ MATCH void func_801FA9DC(void) {
             if (g_GameStateIndex != GAME_REQUEST_MESSAGE) {
                 if (g_ScenarioState.step == 20) {
                     SYS_ClearFlag(g_SceneEventFlags, 0x77);
-                    D_8014504A = 0;
+                    g_SaveData.return_point.pending = 0;
                     func_8019FA28(0xC1, 0x1A8000, 0x1C0000, 0x83);
                 } else {
                     SYS_SetFlag(&g_SceneFlagWords[14 * 8], 2);

@@ -274,7 +274,7 @@ typedef struct Enemy {
     u16          zenny;
     u16          exp;
     u16          level;
-    u8           unk_16[2];
+    u16          scene_record_id; /* +0x16: the scene record Area_SceneSelectRecord selects for the enemy */
     u8           initial_skills[ENEMY_SKILL_COUNT];
     u16          hp;
     u16          ap;

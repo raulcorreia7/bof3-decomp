@@ -1,4 +1,5 @@
 #include "start_08.h"
+#include "menu/save_data.h"
 
 MATCH s32 func_801E8BA0(void) {
     s32  bit_index;
@@ -27,8 +28,8 @@ MATCH s32 func_801E8BA0(void) {
         bit_index -= 1;
         *counter_byte -= 1;
     } while (bit_index >= 246);
-    D_80145040 = g_Game.members[0].pos.x.fixed;
-    D_80145044 = g_Game.members[0].pos.y.fixed;
-    D_80145048 = g_GameAreaId;
+    g_SaveData.return_point.x       = g_Game.members[0].pos.x.fixed;
+    g_SaveData.return_point.y       = g_Game.members[0].pos.y.fixed;
+    g_SaveData.return_point.area_id = g_GameAreaId;
     return 0;
 }

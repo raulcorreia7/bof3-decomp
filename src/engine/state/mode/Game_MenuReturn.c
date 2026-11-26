@@ -1,4 +1,5 @@
 #include "engine/game/00/game_00.h"
+#include "menu/save_data.h"
 
 MATCH void Game_MenuReturn(void) {
     u8  sep_index;
@@ -36,21 +37,19 @@ MATCH void Game_MenuReturn(void) {
     }
     request = &D_8014869C;
     if (*request != 0u) {
-        pending  = &D_8014504A;
+        pending  = &g_SaveData.return_point.pending;
         *request = 0u;
         if ((*pending == 0u) && ((g_GameRequestFlags & AREA_LOAD_FLAG_WORLD_MAP) || (LOHU(g_GameAreaId) == AREA_ID_DESERT_OF_DEATH_MAP))) {
-            *pending   = 1u;
-            D_80145040 = g_Game.members[0].pos.x.fixed;
-            D_80145044 = g_Game.members[0].pos.y.fixed;
-            D_80145048 = g_GameAreaId;
-            D_8014504B = (g_Game.members[0].facing + s_DirectionJitters[RANDOM_MASK(3)]) & 0xF;
+            *pending                        = 1u;
+            g_SaveData.return_point.x       = g_Game.members[0].pos.x.fixed;
+            g_SaveData.return_point.y       = g_Game.members[0].pos.y.fixed;
+            g_SaveData.return_point.area_id = g_GameAreaId;
+            g_SaveData.return_point.facing  = (g_Game.members[0].facing + s_DirectionJitters[RANDOM_MASK(3)]) & 0xF;
             Game_RequestAreaChange(g_GameEntryAreaId, g_GameEntryPosX, g_GameEntryPosY, g_GameEntryFacing);
         } else {
-            u8* clear = &D_8014504A;
-
-            *clear = 0u;
-            SYS_ClearFlag(clear - 0x122, 119u);
-            Game_RequestAreaChange(D_80145048, D_80145040, D_80145044, FACING_DOWN_RIGHT);
+            g_SaveData.return_point.pending = 0u;
+            SYS_ClearFlag(g_SaveData.scene_event_flags, 119u);
+            Game_RequestAreaChange(g_SaveData.return_point.area_id, g_SaveData.return_point.x, g_SaveData.return_point.y, FACING_DOWN_RIGHT);
         }
     } else if (D_8014869D != 0u) {
         Game_RequestAreaChange(D_8014869D, TO_COORD(67), TO_COORD(22), FACING_DOWN_RIGHT);
