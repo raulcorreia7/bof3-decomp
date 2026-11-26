@@ -39,8 +39,6 @@ MATCH u8 Actor_PickFacingByLeaderDistance(Actor* entity, u8 route_step) {
             py = &g_FacingStepY[route * 2];
             dx = wx + *px;
             dy = wy + *py;
-            /* FAKE: retail forms the y sum before the x subtraction. */
-            FAKE_USE(dy);
             dx -= target_x;
             dx = ABS(dx);
             dy -= target_y;
