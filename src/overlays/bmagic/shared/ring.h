@@ -1,5 +1,5 @@
-#ifndef OVERLAY_BMAGIC_RING_H
-#define OVERLAY_BMAGIC_RING_H
+#ifndef SHARED_BMAGIC_RING_H
+#define SHARED_BMAGIC_RING_H
 
 /* The ring effect of magic055 (Ebonfire) and magic091 (Flare). */
 

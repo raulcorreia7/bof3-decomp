@@ -4,7 +4,7 @@
 __asm__(".include \"include/match/macro.inc\"\n");
 #endif
 
-#include "overlays/bmagic/shared/BMagic_RingUpdate.h"
+#include "overlays/bmagic/shared/Effect_DrawActor.h"
 
 /* Task mode 0: copies the selected actor's facing and position into the task, starts BMAGIC_RING_COUNT ring bands, queues the selection sound and applies the damage flags. */
 /* func_801EECCC */
