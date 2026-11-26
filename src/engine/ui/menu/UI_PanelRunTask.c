@@ -1,6 +1,8 @@
-#include "game_00.h"
+#include "engine/game/00/game_00.h"
 
-MATCH void func_8019986C(void) {
+/* func_8019986C */
+/* Runs the task panel step of its state, then draws its window and message text. */
+MATCH void UI_PanelRunTask(void) {
     s16 value;
     u8* color;
 

@@ -52,7 +52,7 @@
 #define ENTITY_MAX             30
 #define GAME_WORK_AREA_PTR     (*(volatile Actor**)&g_CurrentActor)
 
-/* NOTE: retail reads the window style byte at 0x80144952 signed (`lb`) in func_8019986C and
+/* NOTE: retail reads the window style byte at 0x80144952 signed (`lb`) in UI_PanelRunTask and
  * UI_WindowDrawFrame and unsigned (`lbu`) in func_801999F8 and UI_WindowDrawOutline, so exports.h keeps u8 and only
  * the signed readers view it as s8. */
 #define GAME_WINDOW_STYLE      (*(s8*)&g_WindowStyle)
@@ -563,18 +563,6 @@ void    func_801981B4(void);
 void    func_80198F1C(void);
 void    func_80199230(void);
 void    func_80199398(void);
-void    func_8019959C(void);
-void    func_801995A4(void);
-void    func_801995F8(void);
-void    func_80199638(void);
-void    func_801996A8(void);
-void    func_801996FC(void);
-void    func_8019977C(void);
-void    func_801997EC(void);
-void    func_8019986C(void);
-void    func_80199938(void);
-void    func_80199978(void);
-void    func_801999B8(void);
 void    func_801999F8(MenuPanelTask* task);
 void    WorldMap_StepWalk(void);
 void    WorldMap_StepEntry(void);

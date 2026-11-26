@@ -1,6 +1,8 @@
-#include "game_00.h"
+#include "engine/game/00/game_00.h"
 
-MATCH void func_8019977C(void) {
+/* func_8019977C */
+/* Runs the action panel step of its state, then draws its item table. */
+MATCH void UI_PanelRunAction(void) {
     MenuPanelTask* task;
 
     g_MenuActionSteps[((MenuPanelTask*)g_UiPanelCurrent)->state]();
