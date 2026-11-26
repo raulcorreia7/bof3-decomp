@@ -4,25 +4,22 @@
 #define SP_SLOTS  ((u8*)&D_1F800004)
 #define SP_TAKEN  ((u8*)&D_1F800008)
 
-/* func_801BE1B0 */
-#ifdef NON_MATCHING
-NON_MATCHING s32 Scene_SetupParty(u32 scene) {
+/* Apply a scene's party setup: check or reorder the members, then lock the scroll or start its route. */
+MATCH s32 Scene_SetupParty(u32 scene) {
     u8** lists;
     u8*  ids;
     u8   command;
-    s32  cmds;
     u32  type;
     u8   count;
     u8   size;
     s32  i;
     s32  j;
 
-    lists   = FIELD(u8*, GAME_TILE_RUN(g_GameAreaId), 0x14);
+    lists   = GAME_TILE_RUN(g_GameAreaId)->party_setups;
     ids     = lists[(u8)scene];
-    cmds    = *ids++;
-    command = cmds;
+    count   = *ids & 0xF;
+    command = *ids++;
     type    = command & 0xC0;
-    count   = cmds & 0xF;
     if (type == 0) {
         size = g_PartySize;
         if (size != count)
@@ -52,12 +49,12 @@ NON_MATCHING s32 Scene_SetupParty(u32 scene) {
                 }
             }
         }
-        for (i = 0; i < (u8)count; i++)
+        for (i = 0; i < count; i++)
             g_PartyFieldOrder[i] = g_Game.members[SP_SLOTS[i]].chr.character_id;
-        for (i = 0; i < (u8)count - 1; i++) {
+        for (i = 0; i < count - 1; i++) {
             if (i != SP_SLOTS[i]) {
                 Party_MemberSwap((u8)i, SP_SLOTS[i], 0);
-                for (j = i; j < (u8)count; j++) {
+                for (j = i; j < count; j++) {
                     if (i == SP_SLOTS[j]) {
                         SP_SLOTS[j] = SP_SLOTS[i];
                         break;
@@ -81,6 +78,3 @@ NON_MATCHING s32 Scene_SetupParty(u32 scene) {
     g_AreaWalkFlags |= AREA_WALK_MAP_LOADING;
     return 0;
 }
-#else
-INCLUDE_ASM(Scene_SetupParty);
-#endif
