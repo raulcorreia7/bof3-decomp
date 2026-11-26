@@ -1937,15 +1937,14 @@ MATCH void func_801D708C(void) {
     func_801D9348(((D_801DB0B4 & 1) * 0x88) + 0x20, ((((s32)(D_801DB0B4 << 0x18) >> 0x19) * 0x38) + 0x2B) & HALF_MASK, 0, 6);
 }
 
-#ifdef NON_MATCHING
-NON_MATCHING void func_801D7234(void) {
+/* Slides the joined members apart: the picked one eases into its grid cell, the rest slide out to the sides. */
+MATCH void func_801D7234(void) {
     s32 drawn;
     s32 i;
     u8  step;
     u8  drawn_index;
     s32 remaining;
     s32 x;
-    s32 y;
 
     drawn      = 0;
     step       = D_801DB0C4 + 1;
@@ -1954,16 +1953,16 @@ NON_MATCHING void func_801D7234(void) {
     for (i = 0; i < 7; i++) {
         if (g_Characters[i].party_flags & PARTY_FLAG_JOINED) {
             drawn_index = drawn;
-            if (drawn_index == (s8)D_801DB0B4) {
-                remaining = 4 - D_801DB0C4;
-                x         = ((s8)D_801DB0B4 * 34 * remaining) + 32;
-                y         = ((drawn_index >> 1) * 14) & 0xFF;
-                y         = (y * remaining) + 43;
-                func_801D90D8((s16)x, (s16)y, (u8)i, 0);
-            } else if ((drawn & 1) == 0) {
-                func_801D90D8(32 - D_801DB0C4 * 40, ((drawn_index >> 1) * 56) + 43, (u8)i, 0);
+            if (drawn_index != (s8)D_801DB0B4) {
+                if ((drawn & 1) == 0) {
+                    func_801D90D8(32 - D_801DB0C4 * 40, ((drawn_index >> 1) * 56) + 43, (u8)i, 0);
+                } else {
+                    func_801D90D8(D_801DB0C4 * 40 + 168, ((drawn_index >> 1) * 56) + 43, (u8)i, 0);
+                }
             } else {
-                func_801D90D8(D_801DB0C4 * 40 + 168, ((drawn_index >> 1) * 56) + 43, (u8)i, 0);
+                x         = (drawn & 1) * 34;
+                remaining = 4 - D_801DB0C4;
+                func_801D90D8((s16)(x * remaining + 32), (s16)((((drawn_index >> 1) * 14) & 0xFF) * remaining + 43), (u8)i, 0);
             }
             drawn++;
         }
@@ -1973,9 +1972,6 @@ NON_MATCHING void func_801D7234(void) {
         D_801F294D = 7;
     }
 }
-#else
-INCLUDE_ASM(func_801D7234);
-#endif
 
 MATCH void func_801D73F8(void) {
     u8 value;
