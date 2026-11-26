@@ -13,11 +13,9 @@ MATCH void Area_CellSortPackets(void) {
         for (j = i + 1; j < g_AreaCellPacketCount; j++) {
             current = g_AreaCellPackets[i];
             if ((g_AreaCellPackets[j] >> 16) < (current >> 16)) {
-                /* FAKE_VOLATILE: retail keeps the store and reload of the scratchpad word; a plain access is optimised away (size 0xA4, not 0xB4). */
-                FAKE_VOLATILE(u32, D_1F80000C) = current;
-                g_AreaCellPackets[i]           = g_AreaCellPackets[j];
-                /* FAKE_VOLATILE: the reload reads the word back from the scratchpad, as retail does. */
-                g_AreaCellPackets[j]           = FAKE_VOLATILE(u32, D_1F80000C);
+                g_ScratchPad.cells.words[3] = current;
+                g_AreaCellPackets[i]        = g_AreaCellPackets[j];
+                g_AreaCellPackets[j]        = g_ScratchPad.cells.words[3];
             }
         }
     }
