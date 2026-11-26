@@ -5,11 +5,29 @@
 
 #include "overlays/bmagic/bmagic.h"
 
-/* The orbit radius the effect keeps in the scratchpad word; func_801EF944 scales its sin and cos by it. */
-#define s_Magic113OrbitRadius g_ScratchPad.cells.words[0]
-/* The three corners func_801EF4F0 projects for each ring triangle. */
+/* The orbit radius the effect keeps in the scratchpad word; BMagic_NotingDrawRing scales its sin and cos by it. */
+#define s_BMagicNotingRadius g_ScratchPad.cells.words[0]
+/* The three corners BMagic_NotingDrawShadow projects for each ring triangle. */
 
-/* Count the effect timer up and finish the effect at 12. */
+/* The stage byte (0x0B of the effect battler, which is the task) the effects use to cue one another. */
+typedef enum BMagicNotingStage {
+    BMAGIC_NOTING_STAGE_RINGS    = 3,
+    BMAGIC_NOTING_STAGE_STAR     = 4,
+    BMAGIC_NOTING_STAGE_WALL     = 5,
+    BMAGIC_NOTING_STAGE_ACTORS   = 6,
+    BMAGIC_NOTING_STAGE_RELEASED = 0x80,
+    BMAGIC_NOTING_STAGE_RELEASE  = 0x84
+} BMagicNotingStage;
+
+/* The effects the task starts: header.mode picks the routine g_BMagicEffectModes runs. */
+typedef enum BMagicNotingEffectMode {
+    BMAGIC_NOTING_EFFECT_RING  = 0,
+    BMAGIC_NOTING_EFFECT_STAR  = 1,
+    BMAGIC_NOTING_EFFECT_WALL  = 2,
+    BMAGIC_NOTING_EFFECT_ACTOR = 3
+} BMagicNotingEffectMode;
+
+/* Count the timer (byte 0x0A) up; at 12 lower the effect battler's stage and reset the effect. */
 static inline void Effect_CountUpTimer(void) {
     PartyMember* work;
     u8           next;
@@ -23,10 +41,10 @@ static inline void Effect_CountUpTimer(void) {
     }
 }
 
-/* Claims effect slot 3 for the effect's target, copies its coordinates into it
- * and advances the mode; MODE is the new effect's mode. A statement macro: the
- * member declares u32 slot, PartyMember* work and u8 facing. */
-#define MAGIC113_SPAWN_EFFECT(MODE)                                                \
+/* Starts an effect of id 3 on the task, copies the task's position into it and advances the
+ * mode; MODE is the new effect's mode. A statement macro: the member declares u32 slot,
+ * PartyMember* work and u8 facing. */
+#define BMAGIC_NOTING_SPAWN_EFFECT(MODE)                                           \
     slot                                   = Battle_AllocEffect(1, 3) & BYTE_MASK; \
     work                                   = g_Task;                               \
     g_BattleEffects[slot].header.mode      = (MODE);                               \
@@ -40,34 +58,39 @@ static inline void Effect_CountUpTimer(void) {
     COORD_INT(g_BattleEffects[slot].pos.z) = COORD_INT(TASK(PartyMember)->pos.z);  \
     TASK(PartyMember)->header.mode += 1
 
-#define MAGIC113_STEP_COUNT 8
+#define BMAGIC_NOTING_STEP_COUNT 8
 
-typedef struct Magic113Steps {
-    Callback steps[MAGIC113_STEP_COUNT];
-} Magic113Steps;
+typedef struct BMagicNotingSteps {
+    Callback steps[BMAGIC_NOTING_STEP_COUNT];
+} BMagicNotingSteps;
 
-extern Magic113Steps D_801EEC04;
+/* D_801EEC04 */
+extern BMagicNotingSteps g_BMagicNotingSteps;
 
-extern s32      D_801F0BA4[];
-extern Callback D_801F0BAC[];
+/* D_801F0BA4 */
+extern s32      g_BMagicNotingRingRadii[];
+/* D_801F0BAC */
+extern Callback g_BMagicNotingRingSteps[];
+/* D_801F0BB8: the corner angles of the star, in steps of 273 (a fifteenth of a turn). */
+extern s8       g_BMagicNotingStarCorners[];
+/* D_801F0BC0 */
+extern Callback g_BMagicNotingStarSteps[];
+/* D_801F0BCC */
+extern Callback g_BMagicNotingWallSteps[];
+/* D_801F0BD8 */
+extern Callback g_BMagicNotingActorSteps[];
+/* func_801EFDA0 */
+void            BMagic_NotingDrawStar(void);
+/* func_801F02CC */
+void            BMagic_NotingDrawWall(void);
 
-extern Callback D_801F0BC0[];
-void            func_801EFDA0(void);
-
-extern Callback D_801F0BCC[];
-extern Callback D_801F0BD8[];
-void            func_801F02CC(void);
-
-/* The corner angles of the outline, in steps of 273 (a fifteenth of a turn). */
-extern s8 D_801F0BB8[];
-
-/* Advance the effect mode when the active battler's parameter is `param_value`. A statement macro:
- * the member declares PartyMember* active and PartyMember* work. */
-#define MAGIC113_ADVANCE_AT_ACTIVE_PARAM(param_value) \
-    active = BATTLE_ACTIVE_WORK;                      \
-    if (active->param.unk_0B == (param_value)) {      \
-        work              = TASK(PartyMember);        \
-        work->header.step = work->header.step + 1;    \
+/* Advance the effect's step when the effect battler's stage (byte 0x0B) is `param_value`. A statement
+ * macro: the member declares PartyMember* active and PartyMember* work. */
+#define BMAGIC_NOTING_ADVANCE_AT_STAGE(param_value) \
+    active = BATTLE_ACTIVE_WORK;                    \
+    if (active->param.unk_0B == (param_value)) {    \
+        work              = TASK(PartyMember);      \
+        work->header.step = work->header.step + 1;  \
     }
 
 #endif
