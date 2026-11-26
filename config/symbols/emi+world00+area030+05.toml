@@ -31,3 +31,5 @@ Fishing_DrawWindowFill = { addr = 0x801D799C, type = "func", source = "Fills a f
 Fishing_DrawWindowFrame = { addr = 0x801D9534, type = "func", source = "Draws a fishing window frame and its inset shadow." }
 Fishing_SetDrawMode = { addr = 0x801E0C80, type = "func", source = "Sets the draw mode of one fishing graphic." }
 Fishing_DrawSprite = { addr = 0x801E0DCC, type = "func", source = "Draws a fishing panel sprite at the given position." }
+g_FishingTrades = { addr = 0x801E2F7C, source = "The fishing shop trades of every pond, eight bytes each: the item given, then the fish asked for and their counts; they start inside g_FishingSpawnCounts and run on into the table at 0x801E3044." }
+g_FishingShopStock = { addr = 0x801E3134, source = "The trade ids each pond offers: ten per g_GameEntryFacing, GAME_NONE after the last; the area image owns them." }
