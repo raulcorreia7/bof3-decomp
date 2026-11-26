@@ -1,4 +1,3 @@
-#define FAKE_DECL_TASK_VOLATILE
 #include "area135_14.h"
 
 MATCH void func_801F4270(void) {
