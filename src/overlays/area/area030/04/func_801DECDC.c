@@ -9,6 +9,7 @@ NON_MATCHING void func_801DECDC(void) {
     s32 dy;
     s32 roll;
     s8  size;
+    s32 lure;
 
     if (TASK(FishingState)->timer == 0) {
         if (!(Fishing_LureInRange() & BYTE_MASK)) {
@@ -35,7 +36,8 @@ NON_MATCHING void func_801DECDC(void) {
                 TASK(FishingState)->counter_08 = 7;
             }
 
-            size = g_SpawnedActors[0].unk_07 - D_801E2ACC[TASK(FishingState)->cue_index][g_FishingLureRow->unk_0E & 0xF];
+            lure = g_FishingLureRow->unk_0E & 0xF;
+            size = g_SpawnedActors[0].unk_07 - D_801E2ACC[TASK(FishingState)->cue_index][lure];
             size = (size < -1) ? -1 : (size < 4) ? size : 3;
 
             switch ((s8)(size + 1)) {
@@ -96,8 +98,8 @@ NON_MATCHING void func_801DECDC(void) {
             TASK(FishingState)->state_2A = D_801E2331[TASK(FishingState)->counter_08 * 2];
             Script_Request(D_801E2330[TASK(FishingState)->counter_08 * 2]);
 
-            if ((func_801E0770() & BYTE_MASK) && ((rand() & 0xF) < D_801E2AD4[TASK(FishingState)->cue_index][0] || (g_FishingLureRow->unk_0E & 0x80)) &&
-                (s8)D_801E2ACC[TASK(FishingState)->cue_index][g_FishingLureRow->unk_0E & 0xF] != 9) {
+            if ((func_801E0770() & BYTE_MASK) && (D_801E2AD4[TASK(FishingState)->cue_index][0] > (rand() & 0xF) || (g_FishingLureRow->unk_0E & 0x80)) &&
+                (s8)D_801E2ACC[TASK(FishingState)->cue_index][lure = g_FishingLureRow->unk_0E & 0xF] != 9) {
                 g_FishingHookedFish              = TASK(Actor)->unk_05;
                 D_80145E92[0]                    = 4;
                 D_80145E93[0]                    = 0;
@@ -113,18 +115,19 @@ NON_MATCHING void func_801DECDC(void) {
                 TASK(FishingState)->saved_index  = 0;
                 TASK(FishingState)->handler_index++;
                 TASK(FishingState)->counter_08 = 1;
-                TASK(FishingState)->state_2A   = D_801E2331[TASK(FishingState)->counter_08 * 2];
-                Script_Request(D_801E2330[TASK(FishingState)->counter_08 * 2]);
+                TASK(FishingState)->state_2A   = D_801E2331[TASK(FishingState)->counter_08 << 1];
+                Script_Request(D_801E2330[TASK(FishingState)->counter_08 << 1]);
                 Script_AnimStepLoop();
                 return;
             }
 
             TASK(FishingState)->timer = 0x10;
             if (size == 3 && (rand() & 0x3) == 0) {
-                TASK(FishingState)->timer        = 8;
-                TASK(FishingState)->pos_x        = TASK(FishingState)->pos_x << 1;
-                TASK(FishingState)->bounce_speed = TASK(FishingState)->bounce_speed << 1;
-                TASK(FishingState)->cursor_10    = TASK(FishingState)->cursor_10 << 1;
+                FishingState* work = TASK(FishingState);
+                work->timer        = 8;
+                work->pos_x        = work->pos_x << 1;
+                work->bounce_speed = work->bounce_speed << 1;
+                work->cursor_10    = work->cursor_10 << 1;
             }
         }
     }
