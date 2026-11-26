@@ -1,293 +1,138 @@
 #include "game_00.h"
 
-#ifdef NON_MATCHING
-NON_MATCHING u8 func_801B44DC(u8 wanted_code) {
-    s32*   val0;
-    s16    tmp0;
-    s16    tmp1;
-    s16    tmp2;
-    s16    val1;
-    s16    val2;
-    s16    val3;
-    s32    tmp3;
-    s32    tmp4;
-    s32    tmp5;
-    s32    tmp6;
-    s32    tmp7;
-    s32    tmp8;
-    s32    tmp9;
-    s32    tmp10;
-    s32    tmp11;
-    s32    tmp12;
-    s32    tmp13;
-    s32    val4;
-    s32    val5;
-    s8     val6;
-    u16    tmp14;
-    u16    tmp15;
-    u16    tmp16;
-    u8     tmp17;
-    u8     tmp18;
-    u8     tmp19;
-    u8     tmp20;
-    u8     tmp21;
-    u8     tmp22;
-    u8     val7;
-    void*  tmp23;
-    Actor* tmp24;
-    void*  tmp25;
-    void*  tmp26;
-    void*  tmp27;
-    Actor* tmp28;
-    void*  tmp29;
-    void*  tmp30;
-    void*  tmp31;
-    void*  tmp32;
-    Actor* tmp33;
-    void*  tmp34;
+/* Whether a cell beside the actor's step holds wanted_code; turns a diagonal facing onto it. */
+MATCH u8 func_801B44DC(u8 wanted_code) {
+    s32 i;
+    u8  dir;
+    s16 x;
+    s16 y;
 
-    tmp33 = g_Task;
-    val7  = wanted_code;
-    if ((tmp33->pos.x.part.fraction == 0) || (tmp33->pos.y.part.fraction == 0)) {
-        tmp27 = g_Task;
-        tmp17 = FIELD(u8, tmp27, 0x8u);
-        tmp16 = FIELD(u16, tmp27, 0x36u);
-        tmp11 = tmp17 * 2;
-        val1  = tmp16 + (s8) * (D_80181B00 + tmp11);
-        val3  = val1;
-        tmp0  = FIELD(u16, tmp27, 0x3Au) + (s8) * (D_80181B01 + tmp11);
-        val2  = tmp0;
-        if (FIELD(u16, tmp27, 0x34u) == 0) {
-            if (FIELD(u16, tmp27, 0x38u) == 0) {
-                val0                         = &g_ScratchPad;
-                val0                         = &g_ScratchPad;
-                g_ScratchPad.cells.halves[0] = tmp16;
-                g_ScratchPad.cells.halves[1] = val2;
-                val7 &= BYTE_MASK;
-                if ((Area_CellGetCode(FIELD(u16, tmp27, 0x36u), tmp0) & BYTE_MASK) == val7) {
-                    tmp31                        = g_Task;
-                    g_ScratchPad.cells.halves[1] = val2;
-                    g_ScratchPad.cells.halves[0] = FIELD(u16, tmp31, 0x36u);
-                    tmp22                        = FIELD(u8, tmp31, 0x8u);
-                    if (tmp22 & 1) {
-                        tmp12 = tmp22 & BYTE_MASK;
-                        if (tmp12 != 1) {
-                            if (tmp12 == 5) {
-                                return 1U;
-                            }
-                            return 0U;
-                        }
-                        goto block_23; /* retail branch */
-                    }
-                    tmp13 = tmp22 & BYTE_MASK;
-                    val6  = 1;
-                    if (tmp13 != 0) {
-                        if (tmp13 == 2) {
-                            val6 = 1;
-                        } else {
-                            val6 = 5;
-                        }
-                    }
-                    goto block_22; /* retail branch */
-                }
-                if ((Area_CellGetCode(val1, FIELD(u16, g_Task, 0x3Au)) & BYTE_MASK) == val7) {
-                    tmp23                        = g_Task;
-                    g_ScratchPad.cells.halves[0] = (u16)val3;
-                    g_ScratchPad.cells.halves[1] = FIELD(u16, tmp23, 0x3Au);
-                    tmp18                        = FIELD(u8, tmp23, 0x8u);
-                    if (tmp18 & 1) {
-                        tmp6 = tmp18 & BYTE_MASK;
-                        if (tmp6 != 7) {
-                            if (tmp6 == 3) {
-                                return 1U;
-                            }
-                            return 0U;
-                        }
-                        goto block_23; /* retail branch */
-                    }
-                    tmp7 = tmp18 & BYTE_MASK;
-                    val6 = 7;
-                    if (tmp7 != 0) {
-                        if (tmp7 == 6) {
-                            val6 = 7;
-                        } else {
-                            val6 = 3;
-                        }
-                    }
-                block_22:
-                    FIELD(s8, g_Task, 0x8u) = val6;
-                    goto block_23; /* retail branch */
-                }
-                tmp32 = g_Task;
-                tmp19 = FIELD(u8, tmp32, 0x8u);
-                if (tmp19 & 1) {
-                    val1                         = (tmp19 + 2) & 7;
-                    tmp8                         = val1 * 2;
-                    tmp14                        = FIELD(u16, tmp32, 0x36u) + (s8) * (D_80181B00 + tmp8);
-                    g_ScratchPad.cells.halves[0] = tmp14;
-                    tmp1                         = FIELD(u16, tmp32, 0x3Au) + (s8) * (D_80181B01 + tmp8);
-                    g_ScratchPad.cells.halves[1] = tmp1;
-                    if (((Area_CellGetCode((s16)tmp14, tmp1) & BYTE_MASK) == val7) ||
-                        (tmp34 = g_Task, val1 = (FIELD(u8, tmp34, 0x8u) - 2) & 7, tmp3 = val1 * 2, tmp15 = FIELD(u16, tmp34, 0x36u) + (s8) * (D_80181B00 + tmp3), g_ScratchPad.cells.halves[0] = tmp15,
-                         tmp2 = FIELD(u16, tmp34, 0x3Au) + (s8) * (D_80181B01 + tmp3), g_ScratchPad.cells.halves[1] = tmp2, ((Area_CellGetCode((s16)tmp15, tmp2) & BYTE_MASK) == val7))) {
-                        TASK(Actor)->direction = (u8)val1;
-                        return 1U;
-                    }
-                    return 0U;
-                }
-                goto block_73; /* retail branch */
+    if (COORD_FRAC(TASK(Actor)->pos.x) != 0 && COORD_FRAC(TASK(Actor)->pos.y) != 0)
+        return false;
+    dir = TASK(Actor)->direction;
+    x   = COORD_INT(TASK(Actor)->pos.x) + D_80181B00[dir << 1];
+    y   = COORD_INT(TASK(Actor)->pos.y) + D_80181B01[dir << 1];
+    if (COORD_FRAC(TASK(Actor)->pos.x) == 0 && COORD_FRAC(TASK(Actor)->pos.y) == 0) {
+        g_ScratchPad.cells.halves[0] = COORD_INT(TASK(Actor)->pos.x);
+        g_ScratchPad.cells.halves[1] = y;
+        if ((Area_CellGetCode(COORD_INT(TASK(Actor)->pos.x), y) & BYTE_MASK) == wanted_code) {
+            g_ScratchPad.cells.halves[0] = COORD_INT(TASK(Actor)->pos.x);
+            g_ScratchPad.cells.halves[1] = y;
+            dir                          = TASK(Actor)->direction;
+            if (dir & 1) {
+                if (dir == FACING_UP || dir == FACING_DOWN)
+                    return true;
+            } else {
+                TASK(Actor)->direction = (dir == FACING_UP_LEFT || dir == FACING_UP_RIGHT) ? FACING_UP : FACING_DOWN;
+                return true;
             }
-            if (tmp17 != 1) {
-                val1 = 0;
-                if (tmp17 != 5) {
-                    val5                         = 7;
-                    val4                         = 3;
-                    val0                         = &g_ScratchPad;
-                    g_ScratchPad.cells.halves[0] = (u16)val3;
-                    val2                         = (s16)(&g_ScratchPad + 2);
-                    GAME_ENTITY_ENTRY_DATA       = FIELD(u16, tmp27, 0x3Au);
-                loop_52:
-                    if ((Area_CellGetCode(g_ScratchPad.cells.halves[0], g_ScratchPad.cells.halves[1]) & BYTE_MASK) == (val7 & BYTE_MASK)) {
-                        tmp28 = g_Task;
-                        tmp21 = tmp28->direction;
-                        tmp5  = tmp21 & BYTE_MASK;
-                        if (tmp21 & 1) {
-                            if (tmp5 != 7) {
-                                if (tmp5 == 3) {
-                                    return 1U;
-                                }
-                                goto block_61; /* retail branch */
-                            }
-                            goto block_23; /* retail branch */
-                        }
-                        tmp10 = tmp21 & BYTE_MASK;
-                        if ((tmp10 == 0) || (tmp10 == 6)) {
-                            tmp28->direction = 7U;
-                        } else {
-                            tmp28->direction = 3U;
-                        }
-                        goto block_23; /* retail branch */
-                    }
-                block_61:
-                    val1 += 1;
-                    GAME_ENTITY_ENTRY_DATA = (u16)(GAME_ENTITY_ENTRY_DATA + 1);
-                    if (val1 >= 2) {
-                        return 0U;
-                    }
-                    goto loop_52; /* retail branch */
-                }
+        } else if ((Area_CellGetCode(x, COORD_INT(TASK(Actor)->pos.y)) & BYTE_MASK) == wanted_code) {
+            g_ScratchPad.cells.halves[0] = x;
+            g_ScratchPad.cells.halves[1] = COORD_INT(TASK(Actor)->pos.y);
+            dir                          = TASK(Actor)->direction;
+            if (dir & 1) {
+                if (dir == FACING_LEFT || dir == FACING_RIGHT)
+                    return true;
+            } else {
+                TASK(Actor)->direction = (dir == FACING_UP_LEFT || dir == FACING_DOWN_LEFT) ? FACING_LEFT : FACING_RIGHT;
+                return true;
             }
-            val1                         = 0;
-            tmp29                        = g_Task;
-            val0                         = &g_ScratchPad;
-            g_ScratchPad.cells.halves[0] = (u16)(FIELD(u16, tmp29, 0x36u) - 1);
-            val2                         = val7 & BYTE_MASK;
-            SP_REF(void*, 0x2)           = FIELD(u16, tmp29, 0x3Au);
-        loop_68:
-            val1 += 1;
-            if ((Area_CellGetCode(g_ScratchPad.cells.halves[0], g_ScratchPad.cells.halves[1]) & BYTE_MASK) != val2) {
-                g_ScratchPad.cells.halves[1] = (s16)(g_ScratchPad.cells.halves[1] + 1);
-                if (val1 >= 2) {
-                    val1                         = 0;
-                    tmp30                        = g_Task;
-                    val0                         = &g_ScratchPad;
-                    g_ScratchPad.cells.halves[0] = (u16)(FIELD(u16, tmp30, 0x36u) + 1);
-                    val2                         = val7 & BYTE_MASK;
-                    SP_REF(void*, 0x2)           = FIELD(u16, tmp30, 0x3Au);
-                loop_71:
-                    val1 += 1;
-                    if ((Area_CellGetCode(g_ScratchPad.cells.halves[0], g_ScratchPad.cells.halves[1]) & BYTE_MASK) != val2) {
-                        g_ScratchPad.cells.halves[1] = (s16)(g_ScratchPad.cells.halves[1] + 1);
-                        if (val1 >= 2) {
-                        block_73:
-                            return 0U;
-                        }
-                        goto loop_71; /* retail branch */
-                    }
-                    TASK(Actor)->direction = FACING_RIGHT;
-                    return 1U;
-                }
-                goto loop_68; /* retail branch */
+        } else if (TASK(Actor)->direction & 1) {
+            i                            = (TASK(Actor)->direction + 2) & 7;
+            g_ScratchPad.cells.halves[0] = COORD_INT(TASK(Actor)->pos.x) + D_80181B00[i << 1];
+            g_ScratchPad.cells.halves[1] = COORD_INT(TASK(Actor)->pos.y) + D_80181B01[i << 1];
+            if ((Area_CellGetCode(g_ScratchPad.cells.halves[0], g_ScratchPad.cells.halves[1]) & BYTE_MASK) != wanted_code) {
+                i                            = (TASK(Actor)->direction - 2) & 7;
+                g_ScratchPad.cells.halves[0] = COORD_INT(TASK(Actor)->pos.x) + D_80181B00[i << 1];
+                g_ScratchPad.cells.halves[1] = COORD_INT(TASK(Actor)->pos.y) + D_80181B01[i << 1];
+                if ((Area_CellGetCode(g_ScratchPad.cells.halves[0], g_ScratchPad.cells.halves[1]) & BYTE_MASK) != wanted_code)
+                    return false;
             }
-            TASK(Actor)->direction = FACING_LEFT;
-            return 1U;
+            TASK(Actor)->direction = i;
+            return true;
         }
-        if (tmp17 != 7) {
-            val1 = 0;
-            if (tmp17 != 3) {
-                val0                         = &g_ScratchPad;
-                val5                         = 1;
-                val4                         = 5;
-                g_ScratchPad.cells.halves[0] = tmp16;
-                SP_REF(void*, 0x2)           = (u16)val2;
-            loop_31:
-                if ((Area_CellGetCode(g_ScratchPad.cells.halves[0], g_ScratchPad.cells.halves[1]) & BYTE_MASK) == (val7 & BYTE_MASK)) {
-                    tmp24 = g_Task;
-                    tmp20 = tmp24->direction;
-                    tmp4  = tmp20 & BYTE_MASK;
-                    if (tmp20 & 1) {
-                        if (tmp4 != 1) {
-                            if (tmp4 == 5) {
-                                return 1U;
-                            }
-                            goto block_40; /* retail branch */
-                        }
-                        goto block_23; /* retail branch */
-                    }
-                    tmp9 = tmp20 & BYTE_MASK;
-                    if ((tmp9 == 0) || (tmp9 == 2)) {
-                        tmp24->direction = 1U;
-                    } else {
-                        tmp24->direction = 5U;
-                    }
-                block_23:
-                    return 1U;
-                }
-            block_40:
-                val1 += 1;
-                g_ScratchPad.cells.halves[0] = (u16)(g_ScratchPad.cells.halves[0] + 1);
-                if (val1 >= 2) {
-                    return 0U;
-                }
-                goto loop_31; /* retail branch */
-            }
-        }
-        val1                         = 0;
-        tmp25                        = g_Task;
-        val0                         = &g_ScratchPad;
-        g_ScratchPad.cells.halves[0] = FIELD(u16, tmp25, 0x36u);
-        val2                         = val7 & BYTE_MASK;
-        SP_REF(void*, 0x2)           = (u16)(FIELD(u16, tmp25, 0x3Au) - 1);
-    loop_43:
-        val1 += 1;
-        if ((Area_CellGetCode(g_ScratchPad.cells.halves[0], g_ScratchPad.cells.halves[1]) & BYTE_MASK) != val2) {
-            g_ScratchPad.cells.halves[0] = (u16)(g_ScratchPad.cells.halves[0] + 1);
-            if (val1 >= 2) {
-                val1                         = 0;
-                tmp26                        = g_Task;
-                val0                         = &g_ScratchPad;
-                g_ScratchPad.cells.halves[0] = FIELD(u16, tmp26, 0x36u);
-                val2                         = val7 & BYTE_MASK;
-                SP_REF(void*, 0x2)           = (u16)(FIELD(u16, tmp26, 0x3Au) + 1);
-            loop_46:
-                val1 += 1;
-                if ((Area_CellGetCode(g_ScratchPad.cells.halves[0], g_ScratchPad.cells.halves[1]) & BYTE_MASK) != val2) {
-                    g_ScratchPad.cells.halves[0] = (u16)(g_ScratchPad.cells.halves[0] + 1);
-                    if (val1 >= 2) {
-                        return 0U;
-                    }
-                    goto loop_46; /* retail branch */
-                }
-                TASK(Actor)->direction = FACING_DOWN;
-                return 1U;
-            }
-            goto loop_43; /* retail branch */
-        }
-        TASK(Actor)->direction = FACING_UP;
-        return 1U;
+        return false;
     }
-    return 0U;
+    if (COORD_FRAC(TASK(Actor)->pos.x) != 0) {
+        if (dir != FACING_LEFT && dir != FACING_RIGHT) {
+            g_ScratchPad.cells.halves[0] = COORD_INT(TASK(Actor)->pos.x);
+            g_ScratchPad.cells.halves[1] = y;
+            for (i = 0; i < 2; i++) {
+                if ((Area_CellGetCode(g_ScratchPad.cells.halves[0], g_ScratchPad.cells.halves[1]) & BYTE_MASK) == wanted_code) {
+                    dir = TASK(Actor)->direction;
+                    if (dir & 1) {
+                        if (dir == FACING_UP || dir == FACING_DOWN)
+                            return true;
+                    } else {
+                        if (dir == FACING_UP_LEFT || dir == FACING_UP_RIGHT)
+                            TASK(Actor)->direction = FACING_UP;
+                        else
+                            TASK(Actor)->direction = FACING_DOWN;
+                        return true;
+                    }
+                }
+                g_ScratchPad.cells.halves[0]++;
+            }
+            return false;
+        }
+        g_ScratchPad.cells.halves[0] = COORD_INT(TASK(Actor)->pos.x);
+        g_ScratchPad.cells.halves[1] = COORD_INT(TASK(Actor)->pos.y) - 1;
+        for (i = 0; i < 2; i++) {
+            if ((Area_CellGetCode(g_ScratchPad.cells.halves[0], g_ScratchPad.cells.halves[1]) & BYTE_MASK) == wanted_code) {
+                TASK(Actor)->direction = FACING_UP;
+                return true;
+            }
+            g_ScratchPad.cells.halves[0]++;
+        }
+        g_ScratchPad.cells.halves[0] = COORD_INT(TASK(Actor)->pos.x);
+        g_ScratchPad.cells.halves[1] = COORD_INT(TASK(Actor)->pos.y) + 1;
+        for (i = 0; i < 2; i++) {
+            if ((Area_CellGetCode(g_ScratchPad.cells.halves[0], g_ScratchPad.cells.halves[1]) & BYTE_MASK) == wanted_code) {
+                TASK(Actor)->direction = FACING_DOWN;
+                return true;
+            }
+            g_ScratchPad.cells.halves[0]++;
+        }
+        return false;
+    }
+    if (dir != FACING_UP && dir != FACING_DOWN) {
+        g_ScratchPad.cells.halves[0] = x;
+        g_ScratchPad.cells.halves[1] = COORD_INT(TASK(Actor)->pos.y);
+        for (i = 0; i < 2; i++) {
+            if ((Area_CellGetCode(g_ScratchPad.cells.halves[0], g_ScratchPad.cells.halves[1]) & BYTE_MASK) == wanted_code) {
+                dir = TASK(Actor)->direction;
+                if (dir & 1) {
+                    if (dir == FACING_LEFT || dir == FACING_RIGHT)
+                        return true;
+                } else {
+                    if (dir == FACING_UP_LEFT || dir == FACING_DOWN_LEFT)
+                        TASK(Actor)->direction = FACING_LEFT;
+                    else
+                        TASK(Actor)->direction = FACING_RIGHT;
+                    return true;
+                }
+            }
+            g_ScratchPad.cells.halves[1]++;
+        }
+        return false;
+    }
+    g_ScratchPad.cells.halves[0] = COORD_INT(TASK(Actor)->pos.x) - 1;
+    g_ScratchPad.cells.halves[1] = COORD_INT(TASK(Actor)->pos.y);
+    for (i = 0; i < 2; i++) {
+        if ((Area_CellGetCode(g_ScratchPad.cells.halves[0], g_ScratchPad.cells.halves[1]) & BYTE_MASK) == wanted_code) {
+            TASK(Actor)->direction = FACING_LEFT;
+            return true;
+        }
+        g_ScratchPad.cells.halves[1]++;
+    }
+    g_ScratchPad.cells.halves[0] = COORD_INT(TASK(Actor)->pos.x) + 1;
+    g_ScratchPad.cells.halves[1] = COORD_INT(TASK(Actor)->pos.y);
+    for (i = 0; i < 2; i++) {
+        if ((Area_CellGetCode(g_ScratchPad.cells.halves[0], g_ScratchPad.cells.halves[1]) & BYTE_MASK) == wanted_code) {
+            TASK(Actor)->direction = FACING_RIGHT;
+            return true;
+        }
+        g_ScratchPad.cells.halves[1]++;
+    }
+    return false;
 }
-#else
-INCLUDE_ASM(func_801B44DC);
-#endif

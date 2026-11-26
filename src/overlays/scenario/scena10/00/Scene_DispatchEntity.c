@@ -22,30 +22,28 @@ MATCH void func_801F6FAC(void) {
     TASK(Actor)->header.mode = 1;
 }
 
-#ifdef NON_MATCHING
-NON_MATCHING void func_801F7068(void) {
+/* Grows the three window outlines with the actor timer; mode 2 once all six sides are full. */
+MATCH void func_801F7068(void) {
     u8  i;
     u8  count;
     u32 limit;
-    u8  timer;
     u16 width;
     u16 height;
 
     i     = 0;
     count = 0;
     while (i < 3) {
-        width = D_801FE7CC[i].box.w;
-        timer = TASK(Actor)->timer;
-        limit = timer << 4;
-        if (limit < width) {
+        limit = TASK(Actor)->timer << 4;
+        if (limit < D_801FE7CC[i].box.w) {
             width = limit;
         } else {
+            width = D_801FE7CC[i].box.w;
             count++;
         }
-        height = D_801FE7CC[i].box.h;
-        if (limit < height) {
+        if (limit < D_801FE7CC[i].box.h) {
             height = limit;
         } else {
+            height = D_801FE7CC[i].box.h;
             count++;
         }
         if ((TASK(Actor)->option_flags & (1 << i)) == 0) {
@@ -58,9 +56,6 @@ NON_MATCHING void func_801F7068(void) {
         TASK(Actor)->header.mode = 2;
     }
 }
-#else
-INCLUDE_ASM(func_801F7068);
-#endif
 
 MATCH void func_801F719C(void) {
     u8 i;
