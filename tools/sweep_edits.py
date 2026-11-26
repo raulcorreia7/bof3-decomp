@@ -1,21 +1,27 @@
 #!/usr/bin/env python3
 """Try every single small source edit on open drafts and report the ones that match or come closer.
 
-    tools/sweep_edits.py [--worklist FILE | REF...] [--jobs N] [--out FILE] [--pairs]
+    tools/sweep_edits.py [--worklist FILE | REF...] [--jobs N] [--out FILE] [--pairs | --climb STEPS]
 
 REF is TARGET@0xADDRESS; `--worklist` reads `tools/worklist.py --jsonl` lines. For each draft the
 body is tokenized and each edit class (CLASSES) proposes variants: one retyped local or parameter,
 an increment or compound-assignment form, one cast, one swapped statement or declaration, one
 swapped operand or comparison, one loop or if/else or ternary form, `break` for `return`, one local
-split or two merged, one statement moved within its run of plain statements, every width
+split or two merged, one statement moved within its run of plain statements, a member store moved
+beside a store to the same record, every width
 combination of the integer parameters as an old-style definition. Each variant is
 compiled with `MATCH_SRC` into a private object and scored as `tools/match.sh --diff` scores it:
 differing rows. `--classes a-type,j-move` limits the classes. The tree is never written. One JSON line per
 variant that matches or has fewer rows than the draft goes to `--out`, with its class and diff;
 a summary line per function (`"class": "summary"`) counts the variants tried and failed.
-`--pairs` then tries pairs of a function's improving edits when none matched.
+`--pairs` then tries pairs of a function's improving edits when none matched. `--climb STEPS`
+instead applies the best improving edit, sweeps the new text again, and repeats until no edit
+improves or the row matches; one `"class": "climb"` line per function holds the path of edits with
+each step's rows. Edits that read a local before it is set are not generated; a merge of two locals
+whose names differ, or a store moved across a call, carries `[needs-review]`.
 
     tools/sweep_edits.py --worklist build/worklist.jsonl --jobs 20 --pairs
+    tools/sweep_edits.py --worklist build/worklist.jsonl --jobs 20 --climb 12
 """
 
 from __future__ import annotations
@@ -25,6 +31,7 @@ import difflib
 import json
 import os
 import re
+import resource
 import subprocess
 import sys
 import tempfile
@@ -164,6 +171,7 @@ class Function:
         self.name = t[self.paren - 1].text
         self.void = t[self.paren - 2].text == "void"
         self.close = matching(t, self.paren)
+        self.old_style = self.body > self.close + 1
         self.statements = self._statements()
         self.decls = [s for s in self.statements if s[2] == "decl"]
         self.locals = {}  # name -> (type token index, declaration)
@@ -254,7 +262,7 @@ class Function:
         return [i for i in range(self.body, self.end) if self.toks[i].text == name]
 
     def params(self) -> list[tuple[int, int]]:
-        """(first, last) token index of each parameter declaration."""
+        """(first, last) token index of each parameter declaration, old-style ones included."""
         t, out, a = self.toks, [], self.paren + 1
         depth = 0
         for k in range(self.paren + 1, self.close + 1):
@@ -266,7 +274,16 @@ class Function:
                 if k > a:
                     out.append((a, k - 1))
                 a = k + 1
-        return [p for p in out if self.span(*p) != "void"]
+        out = [p for p in out if self.span(*p) != "void"]
+        if self.old_style:
+            heads = {}
+            a = self.close + 1
+            for k in range(self.close + 1, self.body):
+                if t[k].text == ";":
+                    heads[t[k - 1].text] = (a, k - 1)
+                    a = k + 1
+            out = [heads.get(t[p[0]].text, p) for p in out]
+        return out
 
 
 def expression_end(t: list[Tok], i: int, stops: set[str]) -> int:
@@ -353,6 +370,8 @@ def g_retype(f: Function):
                 if new == t[p[0]].text:
                     continue
                 yield f"param {pname}: {new}", ((t[p[0]].start, t[p[0]].end, new),)
+                if f.old_style:
+                    continue
                 names = ", ".join(t[q[1]].text for q in params)
                 decls = "".join(
                     f"    {new if q is p else f.span(q[0], q[1] - 1)} {t[q[1]].text};\n"
@@ -383,6 +402,12 @@ def g_params(f: Function):
             for q in params
         )
         label = ", ".join(f"{t[p[1]].text}: {w}" for p, w in chosen.items())
+        if f.old_style:
+            yield (
+                f"old-style {label}",
+                tuple((t[p[0]].start, t[p[0]].end, w) for p, w in chosen.items()),
+            )
+            continue
         yield (
             f"old-style {label}",
             (
@@ -577,14 +602,8 @@ def _adjacent(f: Function, x, y) -> bool:
 
 def g_move(f: Function):
     """Move one plain statement two or more places within a run of plain statements."""
-    t, runs, run = f.toks, [], []
-    for s in (s for s in f.statements if s[2] == "expr"):
-        if run and _adjacent(f, run[-1], s) and run[-1][3] == s[3]:
-            run.append(s)
-        else:
-            run = [s]
-            runs.append(run)
-    for run in (r for r in runs if len(r) >= 3):
+    t = f.toks
+    for run in (r for r in _runs(f) if len(r) >= 3):
         texts = [f.span(s[0], s[1]) for s in run]
         for i, j in (
             (i, j) for i in range(len(run)) for j in range(len(run)) if abs(i - j) >= 2
@@ -599,6 +618,67 @@ def g_move(f: Function):
                     if new is not None
                 ),
             )
+
+
+def _runs(f: Function) -> list[list[tuple[int, int, str, int]]]:
+    runs, run = [], []
+    for s in (s for s in f.statements if s[2] == "expr"):
+        if run and _adjacent(f, run[-1], s) and run[-1][3] == s[3]:
+            run.append(s)
+        else:
+            run = [s]
+            runs.append(run)
+    return runs
+
+
+def _store(f: Function, s) -> tuple[str, str, str] | None:
+    """(record, whole target, value) of a member store `rec->m = v` or `rec.m = v`."""
+    t = f.toks
+    e = next((k for k in range(s[0], s[1]) if t[k].text == "="), None)
+    if e is None or e < s[0] + 2 or t[e - 2].text not in (".", "->"):
+        return None
+    return f.span(s[0], e - 3), f.span(s[0], e - 1), f.span(e + 1, s[1] - 1)
+
+
+def g_sibling(f: Function):
+    """Move a member store next to a store to the same record, across independent statements."""
+    t = f.toks
+    for run in _runs(f):
+        texts = [f.span(s[0], s[1]) for s in run]
+        stores = [_store(f, s) for s in run]
+        for i, x in enumerate(stores):
+            if not x:
+                continue
+            mine = {t[k].text for k in range(run[i][0], run[i][1])}
+            for j, y in enumerate(stores):
+                if not y or y[0] != x[0] or abs(i - j) < 2:
+                    continue
+                for to in (j, j + 1) if j < i else (j - 1, j):
+                    if to == i:
+                        continue
+                    crossed = range(to, i) if to < i else range(i + 1, to + 1)
+                    if any(
+                        x[1] in texts[k]
+                        or (stores[k] and stores[k][1] in texts[i])
+                        or (t[run[k][0] + 1].text == "=" and t[run[k][0]].text in mine)
+                        for k in crossed
+                    ):
+                        continue
+                    call = any(
+                        t[q].kind == "ident" and t[q + 1].text == "("
+                        for k in crossed
+                        for q in range(run[k][0], run[k][1])
+                    )
+                    order = texts[:i] + texts[i + 1 :]
+                    order.insert(to, texts[i])
+                    yield (
+                        f"move {texts[i][:40]} {'after' if to > j or (to == j and j > i) else 'before'} {texts[j][:30]}"
+                        + (" [needs-review]" if call else ""),
+                        tuple(
+                            (t[s[0]].start, t[s[1]].end, new)
+                            for s, new in zip(run, order, strict=True)
+                        ),
+                    )
 
 
 def g_swap_decls(f: Function):
@@ -812,6 +892,29 @@ def g_return(f: Function):
                     yield "break -> return", ((t[j].start, t[j].end, "return"),)
 
 
+def _same_meaning(x: str, y: str) -> bool:
+    """The two names differ only by a number or one is the other's prefix."""
+    a, b = (re.sub(r"[_\d]+$", "", n.lower()) for n in (x, y))
+    return a == b or (min(len(a), len(b)) >= 3 and (a.startswith(b) or b.startswith(a)))
+
+
+def unset_reads(f: Function) -> set[str]:
+    """Locals whose first use after the declarations reads them before any store."""
+    t, out = f.toks, set()
+    inside = {k for d in f.decls for k in range(d[0], d[1] + 1)}
+    for name, (_, d) in f.locals.items():
+        s = [z.text for z in t[d[0] : d[1] + 1]]
+        k = s.index(name)
+        if k + 1 < len(s) and s[k + 1] in ("=", "["):
+            continue  # initialized or an array
+        first = next((u for u in f.uses(name) if u not in inside), None)
+        if first is None or t[first - 1].text in ("&", ".", "->"):
+            continue
+        if t[first + 1].text not in ("=", ".", "["):
+            out.add(name)
+    return out
+
+
 def g_locals(f: Function):
     t = f.toks
     names = list(f.locals)
@@ -826,9 +929,14 @@ def g_locals(f: Function):
         ):
             continue
         d = dy[1]
+        ux = [u for u in f.uses(x) if u > dx[1][1]]
+        uy = [u for u in f.uses(y) if u > d[1]]
+        if not ux or not uy or (ux[0] < uy[-1] and uy[0] < ux[-1]):
+            continue  # both live at once: one local would hold two values
         edit = [(t[d[0]].start, t[d[1]].end, "")]
-        edit += [(t[u].start, t[u].end, x) for u in f.uses(y) if u > d[1]]
-        yield f"merge {y} into {x}", tuple(edit)
+        edit += [(t[u].start, t[u].end, x) for u in uy]
+        review = "" if _same_meaning(x, y) else " [needs-review]"
+        yield f"merge {y} into {x}{review}", tuple(edit)
     stmts = [s for s in f.statements if s[2] == "expr" and s[3] == 1]
     for x in names:
         d = f.locals[x][1]
@@ -860,12 +968,20 @@ CLASSES = {
     "i-locals": g_locals,
     "j-move": g_move,
     "k-params": g_params,
+    "l-sibling": g_sibling,
 }
 
 
 def variants(text: str, classes=None):
-    """(class, label, edit) for every single edit the classes propose on one definition."""
-    f = Function(text)
+    """(class, label, edit) for every single edit the classes propose on one definition.
+
+    An edit that makes a local read before it is set is dropped; a label that ends
+    `[needs-review]` marks an edit whose meaning a reader must confirm."""
+    try:
+        f = Function(text)
+        unset = unset_reads(f)
+    except (IndexError, KeyError, RuntimeError, StopIteration, ValueError):
+        return
     for cls, gen in CLASSES.items():
         if classes and cls not in classes:
             continue
@@ -877,6 +993,11 @@ def variants(text: str, classes=None):
                 seen.add(edit)
                 if len(seen) > (4**4 if cls == "k-params" else CAP):
                     break
+                try:
+                    if unset_reads(Function(apply(text, edit))) - unset:
+                        continue
+                except (IndexError, KeyError, RuntimeError, StopIteration, ValueError):
+                    pass
                 yield cls, label, edit
         except (IndexError, KeyError, RuntimeError, StopIteration, ValueError):
             continue
@@ -1001,12 +1122,67 @@ def sweep(
     return records
 
 
+def climb(ref, name, source, judge=measure, workdir=None, classes=None, steps=12):
+    """Apply the best improving edit, generate edits again from the new text, repeat.
+
+    Returns one record: the path of edits with each step's rows, the final rows and diff."""
+    base = source.read_text()
+    start, end = function_span(base, name)
+    text = orig = base[start:end]
+    path, tried, failed = [], 0, 0
+    with tempfile.TemporaryDirectory(dir=workdir) as tmp:
+        scratch = Path(tmp) / source.name
+
+        def score(body: str) -> int | None:
+            scratch.write_text(base[:start] + body + base[end:])
+            return judge(ref, scratch)
+
+        rows = base_rows = score(text)
+        while rows and len(path) < steps:
+            best = None
+            for cls, label, edit in variants(text, classes):
+                new = apply(text, edit)
+                got = score(new)
+                tried += 1
+                if got is None:
+                    failed += 1
+                elif got < rows and (best is None or got < best[0]):
+                    best = (got, cls, label, new)
+                    if got == 0:
+                        break
+            if best is None:
+                break
+            rows, cls, label, new = best
+            path.append(
+                {
+                    "class": cls,
+                    "edit": label,
+                    "rows": rows,
+                    "needs_review": label.endswith("[needs-review]"),
+                    "diff": _diff(text, new),
+                }
+            )
+            text = new
+    return {
+        "ref": ref,
+        "class": "climb",
+        "source": str(source.relative_to(ROOT)),
+        "base": base_rows,
+        "path": path,
+        "final": rows,
+        "match": rows == 0,
+        "tried": tried,
+        "failed": failed,
+        "diff": _diff(orig, text),
+    }
+
+
+def _diff(a: str, b: str) -> str:
+    return "".join(difflib.unified_diff(a.splitlines(True), b.splitlines(True), n=1))
+
+
 def _record(ref, base_rows, cls, label, text, edit, rows):
-    diff = "".join(
-        difflib.unified_diff(
-            text.splitlines(True), apply(text, edit).splitlines(True), n=1
-        )
-    )
+    diff = _diff(text, apply(text, edit))
     return {
         "ref": ref,
         "base": base_rows,
@@ -1018,15 +1194,24 @@ def _record(ref, base_rows, cls, label, text, edit, rows):
     }
 
 
-def _job(ref: str, name: str | None, pairs: bool, classes=None):
+def _job(ref: str, name: str | None, pairs: bool, classes=None, steps=0):
     name = name or symbol_name(ref)
     source = find_source(name) if name else None
     if source is None:
         return [{"ref": ref, "class": "summary", "error": f"no draft for {name}"}]
+    before = resource.getrusage(resource.RUSAGE_CHILDREN)
     try:
-        return sweep(ref, name, source, pairs, classes=classes)
+        if steps:
+            records = [climb(ref, name, source, classes=classes, steps=steps)]
+        else:
+            records = sweep(ref, name, source, pairs, classes=classes)
     except Exception as error:  # one bad draft must not stop the sweep
-        return [{"ref": ref, "class": "summary", "error": repr(error)[:200]}]
+        records = [{"ref": ref, "class": "summary", "error": repr(error)[:200]}]
+    after = resource.getrusage(resource.RUSAGE_CHILDREN)
+    records[-1]["cpu"] = round(
+        after.ru_utime + after.ru_stime - before.ru_utime - before.ru_stime, 1
+    )
+    return records
 
 
 def main() -> int:
@@ -1043,6 +1228,13 @@ def main() -> int:
     parser.add_argument(
         "--classes", type=lambda v: v.split(","), help="comma list of CLASSES keys"
     )
+    parser.add_argument(
+        "--climb",
+        type=int,
+        default=0,
+        metavar="STEPS",
+        help="hill-climb: apply the best edit and sweep again, up to STEPS edits",
+    )
     args = parser.parse_args()
     rows = [(r, None) for r in args.refs]
     if args.worklist:
@@ -1057,7 +1249,7 @@ def main() -> int:
     ):
         out = sys.stdout if args.out == "-" else sink
         futures = {
-            pool.submit(_job, ref, name, args.pairs, args.classes): ref
+            pool.submit(_job, ref, name, args.pairs, args.classes, args.climb): ref
             for ref, name in rows
         }
         for done in as_completed(futures):
@@ -1067,7 +1259,7 @@ def main() -> int:
             summary = done.result()[-1]
             print(
                 futures[done],
-                {k: v for k, v in summary.items() if k != "ref"},
+                {k: v for k, v in summary.items() if k not in ("ref", "diff", "path")},
                 file=sys.stderr,
                 flush=True,
             )
