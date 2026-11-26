@@ -221,7 +221,9 @@ def test_the_byte_view_definition_passes_and_a_new_use_fails(tmp_path: Path) -> 
 
 
 def test_a_use_renamed_by_a_commit_line_passes(tmp_path: Path) -> None:
-    old = "void f(void) {\n    g_Actor->slot = GFX_PaletteAllocFade(TASK_BYTES, 1U);\n}\n"
+    old = (
+        "void f(void) {\n    g_Actor->slot = GFX_PaletteAllocFade(TASK_BYTES, 1U);\n}\n"
+    )
     result = run_tree(
         tmp_path,
         {"src/overlays/test/arc/00/a.c": old},
