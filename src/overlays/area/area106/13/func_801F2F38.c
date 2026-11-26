@@ -35,7 +35,8 @@ NON_MATCHING void func_801F2F38(s32 index, s32 height) {
             g_ScratchPadVectors[j].vy = D_801F3EE8[*tile * 12 + j * 3 + 1] << 7;
             g_ScratchPadVectors[j].vz = -D_801F3EE8[*tile * 12 + j * 3 + 2] << 7;
         }
-        RotTransPers4(&g_ScratchPadVectors[0], &g_ScratchPadVectors[1], &g_ScratchPadVectors[2], &g_ScratchPadVectors[3], (s32*)&prim->x0, (s32*)&prim->x1, (s32*)&prim->x2, (s32*)&prim->x3, &depth, &flag);
+        RotTransPers4(&g_ScratchPadVectors[0], &g_ScratchPadVectors[1], &g_ScratchPadVectors[2], &g_ScratchPadVectors[3], (s32*)&prim->x0, (s32*)&prim->x1, (s32*)&prim->x2, (s32*)&prim->x3, &depth,
+                      &flag);
         Area_ApplyTileToQuad(D_801F3F20[*tile] + (((D_801F3F30[*tile] * height) << 8) & AREA106_TILE_WORD_MASK), prim, 1);
         GFX_AddPrim(GFX_LAYER_SCENE_BACK, sizeof(POLY_FT4));
         tile++;

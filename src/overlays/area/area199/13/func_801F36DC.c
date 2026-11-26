@@ -29,7 +29,7 @@ NON_MATCHING void func_801F36DC(void) {
     draw_shade = shade < 0x100 ? shade : 0xFF;
     func_801F3EA0(0x82, TASK(Actor)->timer + 0xA, draw_radius, draw_shade);
 
-    radius = TASK(Actor)->timer * 12;
+    radius      = TASK(Actor)->timer * 12;
     draw_radius = radius < 0x31 ? radius : 0x30;
 
     shade = rsin(0x100);

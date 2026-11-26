@@ -26,7 +26,8 @@ NON_MATCHING void func_801F31DC(s16 x, s16 y) {
     middle = (s16)(y + 0x2D);
     bottom = (s16)(y + 0x31);
     func_801F3698((s16)(x + TASK(Actor)->unk_06 * 100 + 7), top, (s16)(x + TASK(Actor)->unk_06 * 100 + 3), middle, (s16)(x + TASK(Actor)->unk_06 * 100 + 7), bottom, 0xC8, 0xC8, 0xC8, 0);
-    func_801F3698((s16)(x + (TASK(Actor)->unk_06 + 1) * 100 + 4), top, (s16)(x + (TASK(Actor)->unk_06 + 1) * 100 + 8), middle, (s16)(x + (TASK(Actor)->unk_06 + 1) * 100 + 4), bottom, 0xC8, 0xC8, 0xC8, 0);
+    func_801F3698((s16)(x + (TASK(Actor)->unk_06 + 1) * 100 + 4), top, (s16)(x + (TASK(Actor)->unk_06 + 1) * 100 + 8), middle, (s16)(x + (TASK(Actor)->unk_06 + 1) * 100 + 4), bottom, 0xC8, 0xC8, 0xC8,
+                  0);
     left   = (s16)(x + TASK(Actor)->unk_06 * 100 + 0xA);
     right  = (s16)(x + TASK(Actor)->unk_06 * 100 + 0x64);
     top    = (s16)(y + 5);

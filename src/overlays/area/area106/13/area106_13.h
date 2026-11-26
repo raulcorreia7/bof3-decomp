@@ -19,10 +19,10 @@ extern u8 D_801F3E90[];
 
 /* The corner x, y and signed depth bytes of the four tiles a quad call draws, the
  * tile ids it walks, and the part word and depth scale of each tile. */
-extern u8          D_801F3EE8[];
-extern u8          D_801F3F18[];
-extern u32         D_801F3F20[];
-extern s8          D_801F3F30[];
+extern u8  D_801F3EE8[];
+extern u8  D_801F3F18[];
+extern u32 D_801F3F20[];
+extern s8  D_801F3F30[];
 
 /* The quad corner bytes: x, y and the signed depth of each corner. */
 extern u8 D_801F3F34[];

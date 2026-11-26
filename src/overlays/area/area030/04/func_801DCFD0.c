@@ -124,7 +124,7 @@ MATCH void func_801DCFD0(void) {
                 g_SpawnedActors[6].selection += 1;
             }
         } else if (*pad_state & PADL1) {
-            old = g_SpawnedActors[6].pos.y.part.fraction;
+            old                                    = g_SpawnedActors[6].pos.y.part.fraction;
             g_SpawnedActors[6].pos.y.part.fraction = old - 9;
             if ((s16)g_SpawnedActors[6].pos.y.part.fraction >= 0) {
                 SND_SEPlay(EMI_SE_ID(SND_BANK_COMMON, 0));

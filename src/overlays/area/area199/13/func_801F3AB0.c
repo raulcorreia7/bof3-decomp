@@ -21,8 +21,8 @@ MATCH void func_801F3AB0(s32 x, s32 y, s32 radius, s32 shade) {
         quad = (POLY_G4*)g_GfxPrimCursor;
         SetPolyG4(quad);
         SetSemiTrans(quad, 1);
-        setXY4(quad, x + rsin(i * 64) * radius / ONE, y + rcos(i * 64) * radius / ONE, x + rsin((i + 1) * 64) * radius / ONE, y + rcos((i + 1) * 64) * radius / ONE, x + rsin(i * 64) * (radius - 8) / ONE,
-               y + rcos(i * 64) * (radius - 8) / ONE, x + rsin((i + 1) * 64) * (radius - 8) / ONE, y + rcos((i + 1) * 64) * (radius - 8) / ONE);
+        setXY4(quad, x + rsin(i * 64) * radius / ONE, y + rcos(i * 64) * radius / ONE, x + rsin((i + 1) * 64) * radius / ONE, y + rcos((i + 1) * 64) * radius / ONE,
+               x + rsin(i * 64) * (radius - 8) / ONE, y + rcos(i * 64) * (radius - 8) / ONE, x + rsin((i + 1) * 64) * (radius - 8) / ONE, y + rcos((i + 1) * 64) * (radius - 8) / ONE);
         setRGB0(quad, shade, shade, shade);
         setRGB1(quad, shade, shade, shade);
         setRGB2(quad, 0, 0, 0);
