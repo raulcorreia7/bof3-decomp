@@ -545,9 +545,10 @@ MATCH void func_801D2908(s16 x, s16 y, u8 mode) {
     }
 }
 
-#ifdef NON_MATCHING
-NON_MATCHING void func_801D2AC4(s16 x, s16 y, u8 column, u8 style) {
+/* Draws one fairy casino column panel: its window, frame piece and label, by highlight style. */
+MATCH void func_801D2AC4(s16 x, s16 y, u8 column, u8 style) {
     s32 left;
+    s16 text_x;
 
     UI_WindowDraw(x, y, 0x2A, 0x14, 0, g_WindowStyle);
     GFX_ADD_DRAW_MODE((GetGraphType() == 1 || GetGraphType() == 2) ? 0x2D : 0x1D);
@@ -555,23 +556,23 @@ NON_MATCHING void func_801D2AC4(s16 x, s16 y, u8 column, u8 style) {
         case 0:
             left = x;
             FairyCasino_DrawFramePiece(left, y, 0xA);
-            UI_TextDraw(column ? (s16)(left + 10) : (s16)(left + 6), y + 3, 0, 4, D_801DAC54[column]);
+            text_x = left + 6;
+            UI_TextDraw(column ? text_x + 4 : text_x, y + 3, 0, 4, D_801DAC54[column]);
             break;
         case 1:
             left = x;
             FairyCasino_DrawFramePiece(left, y, 9);
-            UI_TextDraw(column ? (s16)(left + 10) : (s16)(left + 6), y + 3, 0, 3, D_801DAC54[column]);
+            text_x = left + 6;
+            UI_TextDraw(column ? text_x + 4 : text_x, y + 3, 0, 3, D_801DAC54[column]);
             break;
         case 2:
             left = x;
             FairyCasino_DrawFramePiece(left, y, 0xA);
-            UI_TextDraw(column ? (s16)(left + 10) : (s16)(left + 6), y + 3, 7, 3, D_801DAC54[column]);
+            text_x = left + 6;
+            UI_TextDraw(column ? text_x + 4 : text_x, y + 3, 7, 3, D_801DAC54[column]);
             break;
     }
 }
-#else
-INCLUDE_ASM(func_801D2AC4);
-#endif
 
 MATCH void func_801D2CF8(s32 x, s32 y, s32 icon) {
     SPRT* sprite;

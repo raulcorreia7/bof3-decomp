@@ -157,6 +157,9 @@ NON_MATCHING void func_801D1250(s32 scene, s32 mode) {
     s32       i;
     s32       sums[2];
     POLY_FT4* prim;
+    s32       left;
+    s32       top;
+    s32       bar_x;
 
     x = scene;
     y = mode;
@@ -166,25 +169,27 @@ NON_MATCHING void func_801D1250(s32 scene, s32 mode) {
     func_801AED54(x + 8, y + 8, 0xCA, 0x5E, 0);
     func_801AED54(x + 0x10, y + 0x12, 0xBC, 0x22, 1);
 
+    left = scene;
+    top  = mode;
     if (g_SndBGMId == D_801D1918[D_801D1940]) {
         UI_TextDraw((s16)(scene + 0x14), (s16)(mode + 0x17), 2, TEXT_LENGTH_MAX, (u8*)AREA_MESSAGE_TABLE + D_800104E2[D_801D1940]);
     } else {
         UI_TextDraw((s16)(scene + 0x14), (s16)(mode + 0x17), 0, TEXT_LENGTH_MAX, (u8*)AREA_MESSAGE_TABLE + D_800104E2[D_801D1940]);
     }
 
-    func_801AE3F0((s16)scene + 0x48, (s16)mode + 0x3C, 0x7C, 0xE, 1, *(s8*)&g_WindowStyle);
-    func_801AED54((s16)scene + 0x48, (s16)mode + 0x3C, 0x7C, 0xE, 1);
+    func_801AE3F0((s16)left + 0x48, (s16)top + 0x3C, 0x7C, 0xE, 1, *(s8*)&g_WindowStyle);
+    func_801AED54((s16)left + 0x48, (s16)top + 0x3C, 0x7C, 0xE, 1);
 
     if (g_SndMono == 0) {
-        func_801D1714((s16)(scene + 0x10), (s16)(mode + 0x40), 0, D_801D1904);
+        func_801D1714((s16)(left + 0x10), (s16)(top + 0x40), 0, D_801D1904);
     } else {
-        func_801D1714((s16)(scene + 0x10), (s16)(mode + 0x40), 0, D_801D1908);
+        func_801D1714((s16)(left + 0x10), (s16)(top + 0x40), 0, D_801D1908);
     }
-    func_801D1714((s16)(scene + 0x20), (s16)(mode + 0x54), 0, D_801D190C);
-    UI_TextDrawString((s16)(scene + 0x44), (s16)(mode + 0x54), 0, 3, D_801D18F4);
-    UI_TextDrawString((s16)(scene + 0x5C), (s16)(mode + 0x54), 3, 1, D_801D18F8);
-    UI_TextDrawString((s16)(scene + 0x94), (s16)(mode + 0x54), 0, 3, D_801D18F4);
-    UI_TextDrawString((s16)(scene + 0xAC), (s16)(mode + 0x54), 3, 1, D_801D18FC);
+    func_801D1714((s16)(left + 0x20), (s16)(top + 0x54), 0, D_801D190C);
+    UI_TextDrawString((s16)(left + 0x44), (s16)(top + 0x54), 0, 3, D_801D18F4);
+    UI_TextDrawString((s16)(left + 0x5C), (s16)(top + 0x54), 3, 1, D_801D18F8);
+    UI_TextDrawString((s16)(left + 0x94), (s16)(top + 0x54), 0, 3, D_801D18F4);
+    UI_TextDrawString((s16)(left + 0xAC), (s16)(top + 0x54), 3, 1, D_801D18FC);
 
     sums[0] = 0;
     sums[1] = 0;
@@ -195,25 +200,28 @@ NON_MATCHING void func_801D1250(s32 scene, s32 mode) {
             sums[1] += (s16)(vol_r / 300);
         }
     }
-    if (sums[0] < 0) {
-        sums[0] = 0;
-    } else if (sums[0] >= 0x7B) {
-        sums[0] = 0x7A;
-    }
-    if (sums[1] < 0) {
-        sums[1] = 0;
-    } else if (sums[1] >= 0x7B) {
-        sums[1] = 0x7A;
-    }
+    sums[0] = sums[0] < 0 ? 0 : sums[0] >= 0x7B ? 0x7A : sums[0];
+    sums[1] = sums[1] < 0 ? 0 : sums[1] >= 0x7B ? 0x7A : sums[1];
 
     for (i = 0; i < 2; i++) {
         prim = (POLY_FT4*)g_GfxPrimCursor;
         SetPolyFT4(prim);
-        setXYWH(prim, scene + 0x49, mode + 0x3F + i * 4, sums[i], 4);
-        setUVWH(prim, 0x98, 0xD8, 4, 8);
+        bar_x    = left + 0x49;
+        prim->x0 = bar_x;
+        prim->y1 = prim->y0 = top + 0x3F + i * 4;
+        prim->u0            = 0x98;
+        prim->u1            = 0x9C;
+        prim->v1 = prim->v0 = 0xD8;
+        prim->clut          = getClut(176, 480);
+        prim->x2            = prim->x0;
+        prim->x1            = bar_x + sums[i];
+        prim->y3 = prim->y2 = prim->y0 + 4;
         setRGB0(prim, 0x80, 0x80, 0x80);
-        prim->clut  = getClut(176, 480);
-        prim->tpage = getTPage(0, 0, 960, 0);
+        prim->u3 = prim->u1;
+        prim->u2 = prim->u0;
+        prim->x3 = prim->x1;
+        prim->v3 = prim->v2 = prim->v0 + 8;
+        prim->tpage         = getTPage(0, 0, 960, 0);
         GFX_AddPrim(GFX_LAYER_UI, sizeof(POLY_FT4));
     }
 }
@@ -245,31 +253,15 @@ NON_MATCHING void func_801D1714(s16 x, s16 y, u32 clut, u8* text) {
             poly->y3 = poly->y2 = poly->y0 + 8;
             poly->x2            = poly->x0 - 4;
             poly->x3            = poly->x1 - 4;
-            c                   = *text;
-            t1                  = c - ' ';
-            if (t1 < 0) {
-                t2 = c - 1;
-            } else {
-                t2 = t1;
-            }
-            u        = (t1 - ((t2 >> 5) << 5)) << 3;
-            poly->u0 = u;
-            poly->u1 = u + 7;
-            poly->u2 = poly->u0;
-            poly->u3 = poly->u1;
-            c        = *text;
-            t1       = c - ' ';
-            if (t1 < 0) {
-                t2 = c - 1;
-            } else {
-                t2 = t1;
-            }
-            v        = (t2 >> 5) << 3;
-            poly->v0 = v;
-            poly->v1 = poly->v0;
+            u                   = ((*text - ' ') % 32) * 8;
+            poly->u0            = u;
+            poly->u1            = u + 7;
+            poly->u2            = poly->u0;
+            poly->u3            = poly->u1;
+            poly->v1 = poly->v0 = ((*text - ' ') / 32) * 8;
             setRGB0(poly, 0x80, 0x80, 0x80);
             poly->clut = color;
-            poly->v3 = poly->v2 = poly->v1 + 8;
+            poly->v3 = poly->v2 = poly->v0 + 8;
             poly->tpage         = getTPage(TPAGE_DEPTH_4BIT, TPAGE_ABR_HALF, FONT_TPAGE_X, FONT_TPAGE_Y);
             GFX_AddPrim(GFX_LAYER_UI, sizeof(POLY_FT4));
         }
