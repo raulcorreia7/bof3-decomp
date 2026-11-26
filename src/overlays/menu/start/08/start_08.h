@@ -713,7 +713,8 @@ void        func_801E9878(void);
 void        func_801E98B8(void);
 /* func_801E98F8 */
 void        Menu_EquipmentPanel(void);
-void        func_801E9974(void);
+/* func_801E9974 */
+void        UI_PanelSlideOutOption_801E9974(void);
 void        func_801E99B4(void);
 void        func_801E99F4(void);
 void        func_801E9A70(void);

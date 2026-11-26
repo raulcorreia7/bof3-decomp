@@ -119,6 +119,7 @@ Menu_TitlePanel = { addr = 0x801E9554, type = "func", source = "panel mode 4 of 
 Menu_StatsPanel = { addr = 0x801E96CC, type = "func", source = "panel mode 5 of the start menu: the character stat panel" }
 UI_PanelSlideOutOption_801E9748 = { addr = 0x801E9748, type = "func", source = "same body as emi/etc/game/00@0x801996FC UI_PanelSlideOutOption" }
 Menu_EquipmentPanel = { addr = 0x801E98F8, type = "func", source = "panel mode 6 of the start menu: the equipment window" }
+UI_PanelSlideOutOption_801E9974 = { addr = 0x801E9974, type = "func", source = "same body as emi/etc/game/00@0x801996FC UI_PanelSlideOutOption" }
 Menu_MessagePanel = { addr = 0x801E9BEC, type = "func", source = "panel mode 9 of the start menu: the full-width header bar with a message" }
 Menu_CursorFramePanel = { addr = 0x801E9D98, type = "func", source = "panel mode 10 of the start menu: the frame drawn around the selected entry" }
 Menu_InventoryPanel = { addr = 0x801E9F5C, type = "func", source = "panel mode 12 of the start menu: the inventory window" }

@@ -350,7 +350,7 @@ segments:
       - [0x18C78, c, func_801E9878]
       - [0x18CB8, c, func_801E98B8]
       - [0x18CF8, c, Menu_EquipmentPanel]
-      - [0x18D74, c, func_801E9974]
+      - [0x18D74, c, UI_PanelSlideOutOption_801E9974]
       - [0x18DB4, c, func_801E99B4]
       - [0x18DF4, c, func_801E99F4]
       - [0x18E70, c, func_801E9A70]
