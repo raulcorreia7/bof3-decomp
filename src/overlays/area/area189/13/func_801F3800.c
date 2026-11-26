@@ -9,8 +9,6 @@ NON_MATCHING void func_801F3800(void) {
     POLY_FT4* prim;
     TILE*     tile;
     POLY_G4*  quad;
-    u16*      left;
-    u16*      right;
     s32       shade;
     s32       scale;
     s32       dx;
@@ -80,7 +78,7 @@ NON_MATCHING void func_801F3800(void) {
         g_ScratchPadVectors[0].vx = 0x80 - shade * 12;
         g_ScratchPadVectors[0].vy = g_ScratchPadVectors[0].vz = 0x80 - phase * 8;
         g_ScratchPadVectors[1].vx = g_ScratchPadVectors[1].vy = g_ScratchPadVectors[1].vz = phase * 8;
-        Area_PaletteApplyTint(0, 6, D_801F6254[phase * 3], D_801F6255[phase * 3], D_801F6256[phase * 3]);
+        Area_PaletteApplyTint(0, 6, D_801F6254[phase][0], D_801F6254[phase][1], D_801F6254[phase][2]);
     }
 
     for (j = 0; j < 2; j++) {
@@ -104,21 +102,17 @@ NON_MATCHING void func_801F3800(void) {
     }
 
     for (j = 0; j < 2; j++) {
-        left  = D_801F6240;
-        right = D_801F6242;
         SetDrawMode(GFX_CURSOR(DR_MODE), 0, 1, getTPage(TPAGE_DEPTH_8BIT, j + 1, 320, 256), 0);
         func_801F497C(sizeof(DR_MODE));
         for (i = 0; i < 4; i++) {
             quad = GFX_CURSOR(POLY_G4);
             SetPolyG4(quad);
             SetSemiTrans(quad, 1);
-            setXY4(quad, left[0], 0x5A, right[0], 0x5A, left[0], D_801F624C[i], right[0], D_801F624D[i]);
+            setXY4(quad, D_801F6240[i], 0x5A, D_801F6240[i + 1], 0x5A, D_801F6240[i], D_801F624C[i], D_801F6240[i + 1], D_801F624C[i + 1]);
             setRGB0(quad, g_ScratchPadVectors[j].vx, g_ScratchPadVectors[j].vy, g_ScratchPadVectors[j].vz);
             setRGB1(quad, g_ScratchPadVectors[j].vx, g_ScratchPadVectors[j].vy, g_ScratchPadVectors[j].vz);
             setRGB2(quad, 0, 0, 0);
             setRGB3(quad, 0, 0, 0);
-            left++;
-            right++;
             func_801F497C(sizeof(POLY_G4));
         }
     }
