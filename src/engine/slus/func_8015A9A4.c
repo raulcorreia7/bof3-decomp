@@ -22,8 +22,8 @@ NON_MATCHING void func_8015A9A4(void) {
     s8      sstep;
 
     task = g_Task;
-    dy   = COORD_INT(task->pos.y) - g_AreaTileOriginY;
     dx   = COORD_INT(task->pos.x) - g_AreaTileOriginX;
+    dy   = COORD_INT(task->pos.y) - g_AreaTileOriginY;
     if (COORD_FRAC(task->pos.x) != 0) {
         dy += 1;
     }
