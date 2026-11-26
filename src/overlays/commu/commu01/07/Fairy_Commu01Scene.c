@@ -741,7 +741,7 @@ MATCH void func_801D3038(void) {
 
     for (i = 0; i < FAIRY_OVERVIEW_GROUP_COUNT; i++) {
         y = i * FAIRY_OVERVIEW_JOB_ROW_STEP;
-        UI_WindowDrawOutline(0xF2, y + 0x36, 0x30, 0x30, 1);
+        UI_WindowDrawOutline(0xF2, (s16)(y + 0x36), 0x30, 0x30, 1);
         func_801D4030(0xEF, y + 0x33, i + 3);
         active = Fairy_GetJobActive(i + 9);
         for (job = 0; job < active; job++) {
@@ -752,7 +752,7 @@ MATCH void func_801D3038(void) {
     }
 
     for (i = 0; i < FAIRY_OVERVIEW_ROOM_COUNT; i++) {
-        UI_WindowDrawOutline(FAIRY_OVERVIEW_ROOM_X(i) + 0x20, FAIRY_OVERVIEW_ROOM_Y(i) + 0x6B, 0x28, 0x28, 1);
+        UI_WindowDrawOutline((s16)(FAIRY_OVERVIEW_ROOM_X(i) + 0x20), (s16)(FAIRY_OVERVIEW_ROOM_Y(i) + 0x6B), 0x28, 0x28, 1);
         if (i >= D_801F286D[g_GameAreaId]) {
             UI_WindowDraw(FAIRY_OVERVIEW_ROOM_X(i) + 0x20, FAIRY_OVERVIEW_ROOM_Y(i) + 0x6B, 0x28, 0x28, 1, g_WindowStyle);
         } else {

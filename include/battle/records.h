@@ -200,7 +200,9 @@ typedef struct BattleEffect {
     u8                  pad_14[4];
     s32                 unk_18;
     s32                 unk_1C;
-    u8                  pad_20[7];
+    u8                  pad_20[4];
+    u8                  active_flags; /* +0x24 the task's ActorActiveFlags byte; magic064 sets 0x88 on the effects it queues */
+    u8                  pad_25[2];
     u8                  unk_27;
     u8                  unk_28;
     u8                  unk_29; /* +0x29 func_801DE1D4 stores an action step here */
@@ -226,6 +228,7 @@ typedef struct BattleEffect {
 
 ASSERT_OFFSET(BattleEffect, unk_07, 0x07);
 ASSERT_OFFSET(BattleEffect, unk_08, 0x08);
+ASSERT_OFFSET(BattleEffect, active_flags, 0x24);
 ASSERT_OFFSET(BattleEffect, screen_x, 0x2E);
 ASSERT_OFFSET(BattleEffect, screen_y, 0x30);
 ASSERT_OFFSET(BattleEffect, depth, 0x32);
