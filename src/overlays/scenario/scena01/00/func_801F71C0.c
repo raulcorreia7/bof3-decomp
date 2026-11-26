@@ -119,22 +119,22 @@ MATCH void func_801F7678(s32 shade_arg) {
 
     Camera_SetMatrix(&matrix);
     angle    = 0;
-    point[0] = TASK(Actor)->pos.x.fixed + ((FIELD(s16, g_Task, 0x2E) * rcos(0)) >> 4);
-    point[1] = TASK(Actor)->pos.y.fixed + ((FIELD(s16, g_Task, 0x2E) * rsin(0)) >> 4);
+    point[0] = TASK(Actor)->pos.x.fixed + (((s16)TASK(Actor)->screen_x * rcos(0)) >> 4);
+    point[1] = TASK(Actor)->pos.y.fixed + (((s16)TASK(Actor)->screen_x * rsin(0)) >> 4);
     point[2] = TASK(Actor)->pos.z.fixed;
     Camera_ProjectPoint(point, &inner);
-    point[2] = TASK(Actor)->pos.z.fixed + (FIELD(s16, g_Task, 0x30) << 16);
+    point[2] = TASK(Actor)->pos.z.fixed + ((s16)TASK(Actor)->screen_y << 16);
     Camera_ProjectPoint(point, &outer);
     shade = ((g_FrameCount & 1) << 2) | 0x40;
     for (i = 0; i < AREA_RING_POINTS; i++) {
         last_inner = inner;
         last_outer = outer;
         angle += AREA_RING_ANGLE_STEP;
-        point[0] = TASK(Actor)->pos.x.fixed + ((FIELD(s16, g_Task, 0x2E) * rcos((u16)angle)) >> 4);
-        point[1] = TASK(Actor)->pos.y.fixed + ((FIELD(s16, g_Task, 0x2E) * rsin((u16)angle)) >> 4);
+        point[0] = TASK(Actor)->pos.x.fixed + (((s16)TASK(Actor)->screen_x * rcos((u16)angle)) >> 4);
+        point[1] = TASK(Actor)->pos.y.fixed + (((s16)TASK(Actor)->screen_x * rsin((u16)angle)) >> 4);
         point[2] = TASK(Actor)->pos.z.fixed;
         Camera_ProjectPoint(point, &inner);
-        point[2] = TASK(Actor)->pos.z.fixed + (FIELD(s16, g_Task, 0x30) << 16);
+        point[2] = TASK(Actor)->pos.z.fixed + ((s16)TASK(Actor)->screen_y << 16);
         Camera_ProjectPoint(point, &outer);
 
         SetDrawMode((DR_MODE*)g_GfxPrimCursor, 0, 1, GetTPage(TPAGE_DEPTH_4BIT, TPAGE_ABR_ADD, FONT_TPAGE_X, FONT_TPAGE_Y), 0);
