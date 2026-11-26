@@ -46,7 +46,7 @@ NON_MATCHING void func_801EEC98(void) {
             D_801EC330[index & BYTE_MASK].unk_06       = 1;
             D_801EC330[index & BYTE_MASK].header.mode  = 0;
             D_801EC330[index & BYTE_MASK].header.step  = 0;
-            D_801EC330[index & BYTE_MASK].step_index   = 0x2C;
+            D_801EC330[index & BYTE_MASK].effect_type  = 0x2C;
             D_801EC330[index & BYTE_MASK].unk_0B       = i;
             D_801EC330[index & BYTE_MASK].target.party = work;
             TASK(PartyMember)->param.unk_0B++;
@@ -74,7 +74,7 @@ NON_MATCHING void func_801EEC98(void) {
             D_801EC330[index & BYTE_MASK].unk_06       = 1;
             D_801EC330[index & BYTE_MASK].header.mode  = 0;
             D_801EC330[index & BYTE_MASK].header.step  = 0;
-            D_801EC330[index & BYTE_MASK].step_index   = 0x2C;
+            D_801EC330[index & BYTE_MASK].effect_type  = 0x2C;
             D_801EC330[index & BYTE_MASK].unk_0B       = i;
             D_801EC330[index & BYTE_MASK].target.party = work;
             TASK(PartyMember)->param.unk_0B++;

@@ -13,19 +13,19 @@ MATCH void BMagic_SimoonInit(void) {
     u16* dst;
     u16* src;
 
-    slot                               = Battle_AllocEffect(1, 45) & BYTE_MASK;
+    slot                               = Battle_AllocEffect(1, BMAGIC_EFFECT_SIMOON) & BYTE_MASK;
     g_BattleEffects[slot].target.party = TASK(PartyMember);
     g_BattleEffects[slot].header.mode  = BMAGIC_SIMOON_EFFECT_SHADOW;
     TASK(PartyMember)->param.unk_0B    = 1;
     for (i = 0; i < 2; i++) {
-        slot                               = Battle_AllocEffect(1, 45) & BYTE_MASK;
+        slot                               = Battle_AllocEffect(1, BMAGIC_EFFECT_SIMOON) & BYTE_MASK;
         g_BattleEffects[slot].target.party = TASK(PartyMember);
         g_BattleEffects[slot].header.mode  = BMAGIC_SIMOON_EFFECT_GLOW;
         g_BattleEffects[slot].unk_0B       = i;
         g_BattleEffects[slot].arg.unk_09   = i + 1;
         TASK(PartyMember)->param.unk_0B += 1;
     }
-    slot                               = Battle_AllocEffect(1, 45) & BYTE_MASK;
+    slot                               = Battle_AllocEffect(1, BMAGIC_EFFECT_SIMOON) & BYTE_MASK;
     g_BattleEffects[slot].target.party = TASK(PartyMember);
     g_BattleEffects[slot].header.mode  = BMAGIC_SIMOON_EFFECT_DOME;
     TASK(PartyMember)->param.unk_0B += 1;

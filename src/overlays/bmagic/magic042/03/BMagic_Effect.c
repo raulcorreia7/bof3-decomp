@@ -19,7 +19,7 @@ MATCH void BMagic_BurstInit(void) {
     TASK(PartyMember)->pos.z.fixed  = g_BattleEffectBattler->pos.z.fixed;
     TASK(PartyMember)->param.unk_0B = 0;
     TASK(PartyMember)->header.mode += 1;
-    slot                               = Battle_AllocEffect(1, 62) & BYTE_MASK;
+    slot                               = Battle_AllocEffect(1, BMAGIC_EFFECT_BURST) & BYTE_MASK;
     g_BattleEffects[slot].target.party = TASK(PartyMember);
     g_BattleEffects[slot].header.mode  = 0;
     TASK(PartyMember)->param.unk_0B += 1;

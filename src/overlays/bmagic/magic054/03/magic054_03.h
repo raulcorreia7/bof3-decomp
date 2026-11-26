@@ -18,6 +18,6 @@ extern BMagicEffectSteps D_801EEC14;
 
 void func_800A9610(u8 target_mask, u16 damage_flags);
 u8   func_801DB524(u32 slot);
-u32  func_801E590C(u32 mode, u32 step_index);
+u32  func_801E590C(u32 mode, u32 effect_type);
 
 #endif

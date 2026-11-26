@@ -44,18 +44,18 @@ static inline void Effect_CountUpTimer(void) {
 /* Starts an effect of id 3 on the task, copies the task's position into it and advances the
  * mode; MODE is the new effect's mode. A statement macro: the member declares u32 slot,
  * PartyMember* work and u8 facing. */
-#define BMAGIC_NOTING_SPAWN_EFFECT(MODE)                                           \
-    slot                                   = Battle_AllocEffect(1, 3) & BYTE_MASK; \
-    work                                   = g_Task;                               \
-    g_BattleEffects[slot].header.mode      = (MODE);                               \
-    g_BattleEffects[slot].target.party     = work;                                 \
-    facing                                 = g_BattleEffectBattler->facing;        \
-    g_BattleEffects[slot].arg.unk_09       = 0;                                    \
-    g_BattleEffects[slot].unk_0A           = 0;                                    \
-    g_BattleEffects[slot].unk_08           = (facing + 2) & 3;                     \
-    g_BattleEffects[slot].pos.x            = TASK(PartyMember)->pos.x;             \
-    g_BattleEffects[slot].pos.y            = TASK(PartyMember)->pos.y;             \
-    COORD_INT(g_BattleEffects[slot].pos.z) = COORD_INT(TASK(PartyMember)->pos.z);  \
+#define BMAGIC_NOTING_SPAWN_EFFECT(MODE)                                                              \
+    slot                                   = Battle_AllocEffect(1, BMAGIC_EFFECT_NOTING) & BYTE_MASK; \
+    work                                   = g_Task;                                                  \
+    g_BattleEffects[slot].header.mode      = (MODE);                                                  \
+    g_BattleEffects[slot].target.party     = work;                                                    \
+    facing                                 = g_BattleEffectBattler->facing;                           \
+    g_BattleEffects[slot].arg.unk_09       = 0;                                                       \
+    g_BattleEffects[slot].unk_0A           = 0;                                                       \
+    g_BattleEffects[slot].unk_08           = (facing + 2) & 3;                                        \
+    g_BattleEffects[slot].pos.x            = TASK(PartyMember)->pos.x;                                \
+    g_BattleEffects[slot].pos.y            = TASK(PartyMember)->pos.y;                                \
+    COORD_INT(g_BattleEffects[slot].pos.z) = COORD_INT(TASK(PartyMember)->pos.z);                     \
     TASK(PartyMember)->header.mode += 1
 
 #define BMAGIC_NOTING_STEP_COUNT 8

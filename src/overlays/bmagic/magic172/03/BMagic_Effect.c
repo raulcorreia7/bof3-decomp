@@ -24,14 +24,14 @@ MATCH void BMagic_MagicBallInit(void) {
     TASK(PartyMember)->pos.z        = g_BattleEffectBattler->pos.z;
     TASK(PartyMember)->param.unk_0B = 0;
     TASK(PartyMember)->header.mode += 1;
-    first_slot                               = Battle_AllocEffect(1, 0x51) & BYTE_MASK;
+    first_slot                               = Battle_AllocEffect(1, BMAGIC_EFFECT_MAGIC_BALL) & BYTE_MASK;
     work                                     = TASK(PartyMember);
     g_BattleEffects[first_slot].header.mode  = 0;
     g_BattleEffects[first_slot].target.party = work;
     TASK(PartyMember)->param.unk_0B += 1;
     i = 0;
     do {
-        slot                               = Battle_AllocEffect(1, 0x51);
+        slot                               = Battle_AllocEffect(1, BMAGIC_EFFECT_MAGIC_BALL);
         target                             = TASK(PartyMember);
         g_BattleEffects[slot].header.mode  = 1;
         g_BattleEffects[slot].unk_04       = first_slot;

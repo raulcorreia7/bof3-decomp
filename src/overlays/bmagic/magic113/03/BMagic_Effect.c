@@ -48,7 +48,7 @@ MATCH void BMagic_NotingSpawnRings(void) {
     timer                     = TASK(PartyMember)->unk_09 + 1;
     TASK(PartyMember)->unk_09 = timer;
     if (timer == 16) {
-        slot                                   = Battle_AllocEffect(1, 3) & BYTE_MASK;
+        slot                                   = Battle_AllocEffect(1, BMAGIC_EFFECT_NOTING) & BYTE_MASK;
         work                                   = TASK(PartyMember);
         g_BattleEffects[slot].header.mode      = BMAGIC_NOTING_EFFECT_RING;
         g_BattleEffects[slot].unk_0B           = 0;
@@ -60,7 +60,7 @@ MATCH void BMagic_NotingSpawnRings(void) {
         g_BattleEffects[slot].pos.x            = TASK(PartyMember)->pos.x;
         g_BattleEffects[slot].pos.y            = TASK(PartyMember)->pos.y;
         COORD_INT(g_BattleEffects[slot].pos.z) = COORD_INT(TASK(PartyMember)->pos.z);
-        slot                                   = Battle_AllocEffect(1, 3) & BYTE_MASK;
+        slot                                   = Battle_AllocEffect(1, BMAGIC_EFFECT_NOTING) & BYTE_MASK;
         work                                   = TASK(PartyMember);
         g_BattleEffects[slot].header.mode      = BMAGIC_NOTING_EFFECT_RING;
         g_BattleEffects[slot].unk_0B           = 1;
@@ -113,7 +113,7 @@ MATCH void BMagic_NotingSpawnActors(void) {
     SND_StartVolumeSweep(20);
     if (TASK(PartyMember)->param.unk_0B == BMAGIC_NOTING_STAGE_WALL) {
         for (i = 0; i < 6; i++) {
-            slot                                   = Battle_AllocEffect(1, 3) & BYTE_MASK;
+            slot                                   = Battle_AllocEffect(1, BMAGIC_EFFECT_NOTING) & BYTE_MASK;
             work                                   = TASK(PartyMember);
             g_BattleEffects[slot].header.mode      = BMAGIC_NOTING_EFFECT_ACTOR;
             g_BattleEffects[slot].unk_04           = i & 1;

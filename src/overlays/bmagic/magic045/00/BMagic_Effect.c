@@ -24,10 +24,10 @@ MATCH void func_801EEC5C(void) {
         TASK(PartyMember)->pos.x                        = g_BattleEffectBattler->pos.x;
         TASK(PartyMember)->pos.y                        = g_BattleEffectBattler->pos.y;
         TASK(PartyMember)->pos.z                        = g_BattleEffectBattler->pos.z;
-        first                                           = Battle_AllocEffect(1, 0x31);
+        first                                           = Battle_AllocEffect(1, 49);
         g_BattleEffects[first & BYTE_MASK].target.party = TASK(PartyMember);
         g_BattleEffects[first & BYTE_MASK].header.mode  = 0;
-        slot                                            = Battle_AllocEffect(1, 0x31) & BYTE_MASK;
+        slot                                            = Battle_AllocEffect(1, 49) & BYTE_MASK;
         g_BattleEffects[slot].target.party              = TASK(PartyMember);
         g_BattleEffects[slot].unk_0B                    = first;
         g_BattleEffects[slot].header.mode               = 1;

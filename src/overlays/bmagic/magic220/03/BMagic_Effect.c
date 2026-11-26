@@ -21,7 +21,7 @@ MATCH void func_801EED18(void) {
     TASK(PartyMember)->unk_09       = 0x38;
     TASK(PartyMember)->header.mode += 1;
     SND_SEQueueSelection(EMI_SE_ID(SND_BANK_COMMON, 0));
-    slot                               = Battle_AllocEffect(1, 0x61) & BYTE_MASK;
+    slot                               = Battle_AllocEffect(1, 97) & BYTE_MASK;
     g_BattleEffects[slot].target.party = g_Task;
     g_BattleEffects[slot].header.mode  = 0;
     TASK(PartyMember)->param.unk_0B += 1;

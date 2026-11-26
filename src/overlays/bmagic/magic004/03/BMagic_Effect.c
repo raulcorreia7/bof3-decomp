@@ -33,7 +33,7 @@ MATCH void func_801EEC98(void) {
     g_BattleEffects[slot].header.mode  = 0;
     g_BattleEffects[slot].header.step  = 0;
     g_BattleEffects[slot].unk_06       = 1;
-    g_BattleEffects[slot].step_index   = 70;
+    g_BattleEffects[slot].effect_type  = 70;
     g_BattleEffects[slot].target.party = owner;
     TASK(PartyMember)->param.unk_0B++;
     slot                               = Battle_AllocEffect(1, 70) & BYTE_MASK;

@@ -4,5 +4,5 @@
 MATCH void Battle_RunBattlerEffect(void) {
     BattleBattlerEffectSteps table = g_BattleBattlerEffectSteps;
 
-    table.steps[D_801EC2E0->step_index]();
+    table.steps[D_801EC2E0->effect_type]();
 }
