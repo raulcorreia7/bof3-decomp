@@ -2,8 +2,8 @@
 
 MATCH void func_801F4464(void) {
     if (g_Task != &D_80143F48) {
-        LOW(TASK(Actor)->pos.x.fixed) = g_PartyActors[3].pos.x.fixed;
-        LOW(TASK(Actor)->pos.y.fixed) = g_PartyActors[3].pos.y.fixed;
+        TASK(Actor)->pos.x.fixed = g_PartyActors[3].pos.x.fixed;
+        TASK(Actor)->pos.y.fixed = g_PartyActors[3].pos.y.fixed;
         TASK(Actor)->pos.z.fixed      = g_PartyActors[3].pos.z.fixed;
     } else {
         g_AreaCameraSpeed   = 0x20;
