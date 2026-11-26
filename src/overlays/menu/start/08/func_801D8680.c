@@ -44,7 +44,6 @@ MATCH void func_801D8680(void) {
     if (g_PadStates[0].pressed & g_InputMasks[MENU_INPUT_CONFIRM]) {
         SND_SEPlay(EMI_SE_ID(SND_BANK_COMMON, 3));
         row_index = (u8)at_end;
-        FAKE_ORDER_FENCE();
         rows  = D_801EC4A4;
         entry = (rows + row_index * 6 + task->unk_0B)[1];
         if (entry != 0) {
