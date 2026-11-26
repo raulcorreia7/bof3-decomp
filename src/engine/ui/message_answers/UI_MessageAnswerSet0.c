@@ -1,9 +1,8 @@
 #include "engine/slus/slus.h"
 
-/* stores the g_AnswerMessages row entry selected by g_UiMessageChoice in g_UiMessageRequest and
- * latches the matching mode flag in D_8014865B.
- */
-MATCH void func_80152370(void) {
+/* func_80152370 */
+/* Stores the answer message of choice slot 0 (row 0) and latches the mode flag for choice 0 or 1. */
+MATCH void UI_MessageAnswerSet0(void) {
     g_UiMessageRequest = g_AnswerMessages[g_UiMessageWindow.selection_index];
     switch (g_UiMessageWindow.selection_index) {
         case 0:

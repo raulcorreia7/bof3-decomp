@@ -1,9 +1,8 @@
 #include "engine/slus/slus.h"
 
-/* sets bit 3 of g_UiWindowChannel and, when no request is pending, arms
- * g_UiMessageChoiceTimer and bumps g_UiMessageChoiceStep.
- */
-MATCH void func_80151B08(void) {
+/* func_80151B08 */
+/* Raises the request-pending flag and, with no request pending, arms the choice timer and moves to the ramp step. */
+MATCH void UI_MessageChoiceRampBegin(void) {
     u16* counter = (u16*)&g_UiWindowChannel;
 
     *counter |= FRONTEND_FLAG_REQUEST_PENDING;

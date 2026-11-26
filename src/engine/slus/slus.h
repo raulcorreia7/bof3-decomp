@@ -256,7 +256,7 @@ typedef struct SoundVoice {
     u8  pad_84[0x28]; /* +0x84 */
 } SoundVoice;
 
-/* Stack snapshots of the fixed dispatch tables the step handlers copy to the frame and index: UI_MessageDispatchState/UI_MessageRunChoice copy the eight-entry tables at g_UiMessageStateSteps/g_UiMessageChoiceStateSteps, UI_MessageRunScrollChoice/UI_MessageDispatchChoiceMode the six-entry tables at g_UiMessageScrollStateSteps/g_UiMessageChoiceModes, func_8015196C/func_80151A98 build the two-entry tables on the stack, and g_UiMessageSteps is the sixteen-entry handler table UI_MessageDispatchStep copies. */
+/* Stack snapshots of the fixed dispatch tables the step handlers copy to the frame and index: UI_MessageDispatchState/UI_MessageRunChoice copy the eight-entry tables at g_UiMessageStateSteps/g_UiMessageChoiceStateSteps, UI_MessageRunScrollChoice/UI_MessageDispatchChoiceMode the six-entry tables at g_UiMessageScrollStateSteps/g_UiMessageChoiceModes, func_8015196C/UI_MessageChoiceRampRun build the two-entry tables on the stack, and g_UiMessageSteps is the sixteen-entry handler table UI_MessageDispatchStep copies. */
 typedef struct {
     Callback steps[8];
 } MessageStateSteps;
@@ -1086,7 +1086,8 @@ void                              UI_MessageRunChoice(void);
 void                              UI_MessageOpenChoice(void);
 /* func_801511C8 */
 void                              UI_MessageWaitChoiceReady(void);
-void                              func_80151334(void);
+/* func_80151334 */
+void                              UI_MessageToggleChoiceWindow(void);
 /* func_80151480 */
 void                              UI_MessageEndAfterChoice(void);
 /* func_80151538 */
@@ -1105,17 +1106,28 @@ void                              UI_MessageRunBoxEnd(void);
 void                              UI_MessageTickBoxEnd(void);
 /* func_80151964 */
 void                              UI_MessageChoiceIdle(void);
-void                              func_80151A98(void);
-extern void                       func_80151B08(void);
-extern void                       func_80151B50(void);
-void                              func_80151D3C(void);
-void                              func_80151D8C(void);
-void                              func_80151DCC(void);
-void                              func_80152370(void);
-void                              func_801523D0(void);
-void                              func_80152420(void);
-void                              func_80152470(void);
-void                              func_801524C0(void);
+/* func_80151A98 */
+void                              UI_MessageChoiceRampRun(void);
+/* func_80151B08 */
+extern void                       UI_MessageChoiceRampBegin(void);
+/* func_80151B50 */
+extern void                       UI_MessageChoiceRampStep(void);
+/* func_80151D3C */
+void                              UI_MessageChoiceShiftRun(void);
+/* func_80151D8C */
+void                              UI_MessageChoiceShiftBegin(void);
+/* func_80151DCC */
+void                              UI_MessageChoiceShiftStep(void);
+/* func_80152370 */
+void                              UI_MessageAnswerSet0(void);
+/* func_801523D0 */
+void                              UI_MessageAnswerSet1(void);
+/* func_80152420 */
+void                              UI_MessageAnswerSet2(void);
+/* func_80152470 */
+void                              UI_MessageAnswerSet3(void);
+/* func_801524C0 */
+void                              UI_MessageAnswerSet4(void);
 void                              UI_MessageAnswerSet5(void);
 void                              UI_MessageAnswerSet6(void);
 void                              UI_MessageAnswerSet7(void);

@@ -1,10 +1,8 @@
 #include "engine/slus/slus.h"
 
-/* advances D_801490CA by D_801490C8 and steps D_801490BB by the
- * signed high byte of the old sum, clearing both counters when the byte stays
- * non-negative.
- */
-MATCH void func_80151DCC(void) {
+/* func_80151DCC */
+/* Advances the second cue word by the counter and the carry byte by its high byte; once the byte is non-negative it clears it and the choice mode. */
+MATCH void UI_MessageChoiceShiftStep(void) {
     u8* bb;
     s16 delta;
     u8  value;

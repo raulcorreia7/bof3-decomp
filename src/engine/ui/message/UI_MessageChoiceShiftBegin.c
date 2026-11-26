@@ -1,9 +1,8 @@
 #include "engine/slus/slus.h"
 
-/* shifts D_801490C8 left by four, copies g_UiMessageChoiceTimer into D_801490CA
- * and bumps g_UiMessageChoiceStep.
- */
-MATCH void func_80151D8C(void) {
+/* func_80151D8C */
+/* Shifts the cue counter left by four, copies the choice timer beside it and moves to the shift step. */
+MATCH void UI_MessageChoiceShiftBegin(void) {
     u16* counter;
     u16  value;
     u8   next;
