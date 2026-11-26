@@ -212,12 +212,12 @@ typedef struct MenuPanelRaw {
 #define UI_PANEL_ORIGIN_BANKS 2
 #define UI_PANEL_ORIGIN_COUNT 8
 
-typedef struct UiPanelOrigin {
+typedef struct UIPanelOrigin {
     u8 x;
     u8 y;
-} UiPanelOrigin;
+} UIPanelOrigin;
 
-ASSERT_SIZE(UiPanelOrigin, 2);
+ASSERT_SIZE(UIPanelOrigin, 2);
 
 /* One of the 22 panel task records: the panel's position, state, layer and
  * item-table base. The battle overlays read the first 0x0C bytes through
