@@ -461,9 +461,7 @@ MATCH void func_801F81F4(u16 value) {
 }
 
 #ifdef NON_MATCHING
-NON_MATCHING void func_801F823C(s16 x, s16 y, s16 half_height, s16 half_width);
-
-void func_801F823C(s16 x, s16 y, s16 height, s16 width) {
+NON_MATCHING void func_801F823C(s16 x, s16 y, s16 height, s16 width) {
     POLY_GT4* prim;
     s16       row;
     s32       half;
