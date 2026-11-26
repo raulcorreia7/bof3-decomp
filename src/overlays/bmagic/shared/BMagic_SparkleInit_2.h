@@ -1,6 +1,6 @@
-/* Clears the effect slots, copies the facing and position of the selected battler into the effect, queues the selection sound, and spawns the sparkles of EFFECT_SPARKLE_TYPE, each group of four with a longer launch delay. Each image header defines EFFECT_SPARKLE_TYPE and declares the type tables D_801F0194 and D_801F019C. */
+/* Task mode 0: clears the sparkle pool, copies the facing and position of the selected battler into the task, queues the selection sound and spawns the sparkles of EFFECT_SPARKLE_TYPE with a longer launch delay for each group of four. */
 /* func_801EED38 (magic162), func_801EED38 (magic168) */
-MATCH void func_801EED38(void) {
+MATCH void BMagic_SparkleInit(void) {
     PartyMember* battler;
     PartyMember* owner;
     u8           i;
@@ -24,7 +24,7 @@ MATCH void func_801EED38(void) {
     TASK(PartyMember)->header.mode++;
     SND_SEQueueSelection(EMI_SE_ID(SND_BANK_COMMON, 0));
 
-    for (i = 0; i < D_801F0194[TASK(PartyMember)->unk_04]; i++) {
+    for (i = 0; i < g_BMagicSparkleCounts[TASK(PartyMember)->unk_04]; i++) {
         sparkle_index = BMagic_AllocEffect();
         if (sparkle_index != GAME_NONE) {
             owner                                          = TASK(PartyMember);
@@ -34,7 +34,7 @@ MATCH void func_801EED38(void) {
             BMAGIC_EFFECT_SLOTS[sparkle_index].unk_03      = RANDOM_MASK(3);
             BMAGIC_EFFECT_SLOTS[sparkle_index].unk_04      = TASK(PartyMember)->unk_04;
             BMAGIC_EFFECT_SLOTS[sparkle_index].unk_07      = i;
-            BMAGIC_EFFECT_SLOTS[sparkle_index].timer_05    = D_801F019C[TASK(PartyMember)->unk_04] * (i >> 2) + 1;
+            BMAGIC_EFFECT_SLOTS[sparkle_index].timer_05    = g_BMagicSparkleDelays[TASK(PartyMember)->unk_04] * (i >> 2) + 1;
             TASK(PartyMember)->param.unk_0B++;
         }
     }

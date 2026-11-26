@@ -32,16 +32,7 @@ typedef struct BMagicActorSteps {
 
 ASSERT_SIZE(BMagicActorSteps, 0xC);
 
-/* The step routines of the effect work record func_801EF37C advances. */
-#define BMAGIC_TASK_STEP_COUNT 3
-
-typedef struct BMagicTaskSteps {
-    Callback steps[BMAGIC_TASK_STEP_COUNT];
-} BMagicTaskSteps;
-
-ASSERT_SIZE(BMagicTaskSteps, 0xC);
-
-/* The step routines of one sparkle of the sparkle pool. */
+/* The step routines of one sparkle of the sparkle pool (launch, grow, fade). */
 #define BMAGIC_SPARKLE_STEP_COUNT 3
 
 typedef struct BMagicSparkleSteps {
