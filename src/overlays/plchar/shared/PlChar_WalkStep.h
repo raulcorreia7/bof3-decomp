@@ -17,7 +17,7 @@ MATCH void PlChar_WalkStep(void) {
         }
     }
     x    = TASK(Actor)->pos.x.fixed + g_FacingSteps[TASK(Actor)->direction].x;
-    y    = TASK(Actor)->pos.y.fixed + g_FacingStepY[TASK(Actor)->direction * 2];
+    y    = TASK(Actor)->pos.y.fixed + g_FacingSteps[TASK(Actor)->direction].y;
     dist = Area_HeightRead(x, y) - COORD_INT(TASK(Actor)->pos.z);
     Area_HeightReadStep(x, y, TASK(Actor)->direction);
     if (SP_REF(u8, 0x0u) != 0 && dist >= 65) {

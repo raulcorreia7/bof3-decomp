@@ -9,6 +9,6 @@ MATCH s32 Actor_RockIsBlockedAhead(void) {
 
     work = TASK(Actor);
     x    = work->pos.x.fixed + g_FacingSteps[work->direction].x * 2;
-    y    = work->pos.y.fixed + g_FacingStepY[work->direction * 2] * 2;
+    y    = work->pos.y.fixed + g_FacingSteps[work->direction].y * 2;
     return Actor_RockIsPointBlocked(x, y) & BYTE_MASK;
 }
