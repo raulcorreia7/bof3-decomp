@@ -22,8 +22,7 @@ typedef enum ActorScriptWait {
 
 /* func_801AA470 */
 /* Runs one wait or camera opcode. */
-#ifdef NON_MATCHING
-NON_MATCHING u8 Script_OpsRunWait(ScriptState* state, u8* base, u8 value) {
+MATCH u8 Script_OpsRunWait(ScriptState* state, u8* base, u8 value) {
     u8*       cmd;
     u8        frames;
     u16       pc;
@@ -51,9 +50,9 @@ NON_MATCHING u8 Script_OpsRunWait(ScriptState* state, u8* base, u8 value) {
         case ACTOR_SCRIPT_WAIT_TOGGLE_ROUTE_STEP:
             TASK(Actor)->option_flags ^= 0x40;
             if (TASK(Actor)->option_flags & 0x40)
-                FIELD(s8, g_Task, 0x48u) = 0;
+                TASK(Actor)->unk_48 = 0;
             else
-                FIELD(s8, g_Task, 0x48u) = 1;
+                TASK(Actor)->unk_48 = 1;
             break;
         case ACTOR_SCRIPT_WAIT_TOGGLE_NO_TARGET:
             TASK(Actor)->option_flags ^= ACTOR_OPT_NO_TARGET;
@@ -90,7 +89,7 @@ NON_MATCHING u8 Script_OpsRunWait(ScriptState* state, u8* base, u8 value) {
             if ((s8)g_ScratchPad.cells.bytes[1] < 0)
                 g_ScratchPad.cells.bytes[1] = 4;
             g_ActorTurnRamps[(s8)g_ScratchPad.cells.bytes[1]].flags ^= 1;
-            return value;
+            break;
         case ACTOR_SCRIPT_WAIT_SET_UNK_06:
             state->pad_06 = (base + state->cursor)[1];
             state->cursor += 1;
@@ -133,6 +132,3 @@ NON_MATCHING u8 Script_OpsRunWait(ScriptState* state, u8* base, u8 value) {
     }
     return value;
 }
-#else
-INCLUDE_ASM(Script_OpsRunWait);
-#endif

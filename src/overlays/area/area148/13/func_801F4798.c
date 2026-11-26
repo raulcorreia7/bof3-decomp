@@ -19,7 +19,7 @@ MATCH void func_801F4798(void* first, void* second) {
         SetSemiTrans(line, 0);
         Camera_ProjectPoint(first, (DVECTOR*)&line->x0);
         Camera_ProjectPoint(second, (DVECTOR*)&line->x1);
-        setRGB0(line, D_801F6138[TASK(Actor)->unk_06 * 3], D_801F6139[TASK(Actor)->unk_06 * 3], D_801F613A[TASK(Actor)->unk_06 * 3]);
+        setRGB0(line, D_801F6138[TASK(Actor)->unk_06][0], D_801F6138[TASK(Actor)->unk_06][1], D_801F6138[TASK(Actor)->unk_06][2]);
         Area_CellAddPrim(TASK(Actor)->unk_18, TASK(Actor)->unk_1C, 0, sizeof(LINE_F2));
         angle   = ratan2(line->y1 - line->y0, line->x1 - line->x0);
         size[0] = 64;

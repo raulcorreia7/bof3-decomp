@@ -2,9 +2,8 @@
 
 #define AREA167_EFFECT_PART_WORD ((0xBB50u << 16) | 0x9100u)
 
-#ifdef NON_MATCHING
 /* Draws the falling effect as three widening quads, one per layer step. */
-NON_MATCHING void func_801F39BC(void) {
+MATCH void func_801F39BC(void) {
     POLY_FT4* prim;
     SVECTOR*  quad;
     long      depth;
@@ -25,9 +24,9 @@ NON_MATCHING void func_801F39BC(void) {
     if (TASK(Actor)->header.step == 0) {
         TASK(Actor)->vy       = ((layer * 3) << 9) + 0xC00 + (rand() & 0xFF);
         side                  = COORD_FRAC(TASK(Actor)->pos.x) == 0;
-        TASK(Actor)->screen_x = D_801F4AC4[side * 2];
+        TASK(Actor)->screen_x = D_801F4AC4[side][0];
         side                  = COORD_FRAC(TASK(Actor)->pos.x) == 0;
-        TASK(Actor)->screen_y = D_801F4AC5[side * 2];
+        TASK(Actor)->screen_y = D_801F4AC4[side][1];
         COORD_INT(TASK(Actor)->pos.y) += rand() & 7;
         TASK(Actor)->header.step++;
     }
@@ -61,14 +60,15 @@ NON_MATCHING void func_801F39BC(void) {
         quad[0].vx                = left;
         g_ScratchPadVectors[0].vy = top;
         g_ScratchPadVectors[0].vz = z;
+        quad[1].vx                = x + size + x_high;
         quad[1].vy                = top;
         quad[1].vz                = z;
         quad[2].vx                = left;
-        quad[3].vx = quad[1].vx = x + size + x_high;
-        quad[2].vz              = z;
-        quad[3].vz              = z;
-        quad[2].vy              = y + size + y_high;
-        quad[3].vy              = y + size + y_high;
+        quad[2].vy                = y + size + y_high;
+        quad[2].vz                = z;
+        quad[3].vx                = x + size + x_high;
+        quad[3].vz                = z;
+        quad[3].vy                = y + size + y_high;
         RotTransPers4(&quad[0], &quad[1], &quad[2], &quad[3], (long*)&prim->x0, (long*)&prim->x1, (long*)&prim->x2, (long*)&prim->x3, &depth, &flag);
         Area_ApplyTileToQuad(layer | AREA167_EFFECT_PART_WORD, prim, 1);
         GFX_AddPrim(GFX_LAYER_FIELD_SCENE, sizeof(POLY_FT4));
@@ -78,6 +78,3 @@ NON_MATCHING void func_801F39BC(void) {
         x_high += 0xA00;
     } while (row < 3);
 }
-#else
-INCLUDE_ASM(func_801F39BC);
-#endif

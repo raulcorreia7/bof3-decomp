@@ -11,28 +11,27 @@ void func_801D8058(s32 left, s32 top);
 void func_801D2908(s16 x, s16 y, u8 mode);
 void Menu_DrawPanelIcon(u16 x, u16 y, s32 u, s32 v, u16 clut, u8 color);
 
-#ifdef NON_MATCHING
-NON_MATCHING void func_801D136C(void) {
-    s32 x_step;
-    s32 y_step;
+/* Slides the zenny and value windows one step; the count reaching 0 ends the step. */
+MATCH void func_801D136C(void) {
+    s32 zenny_x_step;
+    s32 zenny_y_step;
+    s32 value_x_step;
+    s32 value_y_step;
     s8  value;
 
-    value      = D_801DB0C4 - 1;
-    D_801DB0C4 = value;
-    x_step     = -0x12;
-    y_step     = -0xE;
-    func_801D3184(0x26 - ((value & BYTE_MASK) * x_step), 0x10 - ((value & BYTE_MASK) * y_step));
-    x_step = 0xE;
-    y_step = -0x19;
-    func_801D32A0(0xA8 - ((u8)D_801DB0C4 * x_step), 0x10 - ((u8)D_801DB0C4 * y_step), 0);
+    value        = D_801DB0C4 - 1;
+    D_801DB0C4   = value;
+    zenny_x_step = -0x12;
+    zenny_y_step = -0xE;
+    func_801D3184(0x26 - ((value & BYTE_MASK) * zenny_x_step), 0x10 - ((value & BYTE_MASK) * zenny_y_step));
+    value_x_step = 0xE;
+    value_y_step = -0x19;
+    func_801D32A0(0xA8 - ((u8)D_801DB0C4 * value_x_step), 0x10 - ((u8)D_801DB0C4 * value_y_step), 0);
     if ((u8)D_801DB0C4 == 0) {
         D_801F294E = 0;
         D_801F294D += 1;
     }
 }
-#else
-INCLUDE_ASM(func_801D136C);
-#endif
 
 MATCH void func_801D143C(void) {
     s8 value;
