@@ -1,6 +1,8 @@
-#include "game_00.h"
+#include "engine/game/00/game_00.h"
 
-MATCH void func_8019BFD4(void) {
+/* func_8019BFD4 */
+/* Sends the camera back to the leader and reverses its height delta. */
+MATCH void Actor_RockReleaseCamera(void) {
     s32 neg;
 
     g_AreaCameraSpeed           = 0x40;

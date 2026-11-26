@@ -1,6 +1,8 @@
-#include "game_00.h"
+#include "engine/game/00/game_00.h"
 
-MATCH s32 func_8019C244(void) {
+/* func_8019C244 */
+/* Returns whether the cell at the rock's leading edge blocks it. */
+MATCH s32 Actor_RockIsBlockedAtEdge(void) {
     Actor* work;
     s32    x;
     s32    y;
@@ -43,5 +45,5 @@ MATCH s32 func_8019C244(void) {
             }
             break;
     }
-    return Area_GetVx(x, y) & BYTE_MASK;
+    return Actor_RockIsPointBlocked(x, y) & BYTE_MASK;
 }

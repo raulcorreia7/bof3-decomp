@@ -1,6 +1,8 @@
-#include "game_00.h"
+#include "engine/game/00/game_00.h"
 
-MATCH void func_8019B4A0(void) {
+/* func_8019B4A0 */
+/* Waits for a kick; sets the roll velocity from its strength and facing, or ends the rock when the way ahead is blocked. */
+MATCH void Actor_RockWait(void) {
     u16* state;
     s32  vx;
     s32  vy;
@@ -10,7 +12,7 @@ MATCH void func_8019B4A0(void) {
     state = (u16*)&g_SysThreads[0].tail.game_entry.state;
     if (*state != 1) {
         if (TASK(Actor)->unk_0A != 0) {
-            if ((func_8019C1E4() & BYTE_MASK) == 0) {
+            if ((Actor_RockIsBlockedAhead() & BYTE_MASK) == 0) {
                 Area_CellSetCode(COORD_INT(TASK(Actor)->pos.x), COORD_INT(TASK(Actor)->pos.y), TASK(Actor)->param.unk_0B);
                 TASK(Actor)->unk_0A = (u8)((TASK(Actor)->unk_0A + 1) >> 1);
                 vx                  = g_FacingOffsets[TASK(Actor)->direction].x;
@@ -51,7 +53,7 @@ MATCH void func_8019B4A0(void) {
             } else {
                 Area_CellSetCode(COORD_INT(TASK(Actor)->pos.x), COORD_INT(TASK(Actor)->pos.y), TASK(Actor)->param.unk_0B);
                 TASK(Actor)->timer       = 0;
-                TASK(Actor)->header.mode = 4;
+                TASK(Actor)->header.mode = ACTOR_ROCK_MODE_END;
             }
         } else if (g_SysThreads[0].tail.game_entry.request == GAME_REQUEST_AREA_CHANGE) {
             Area_CellSetCode(COORD_INT(TASK(Actor)->pos.x), COORD_INT(TASK(Actor)->pos.y), TASK(Actor)->param.unk_0B);

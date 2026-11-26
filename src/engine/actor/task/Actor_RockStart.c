@@ -1,10 +1,12 @@
-#include "game_00.h"
+#include "engine/game/00/game_00.h"
 
-MATCH void func_8019B3A8(void) {
+/* func_8019B3A8 */
+/* Starts a rock: blocks its cell, selects its sprite and clears its motion. */
+MATCH void Actor_RockStart(void) {
     Actor* work;
 
     Area_SceneSelectRecord(TASK(Actor)->param.scene_record_id);
-    func_8019BF78();
+    Actor_RockClaimCell();
     TASK(Actor)->draw_layer   = 6;
     TASK(Actor)->unk_48       = 1;
     TASK(Actor)->active_flags = 0;
