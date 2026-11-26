@@ -8,27 +8,43 @@
 /* The scratch angle cell the meteor arc sets and reads. */
 extern s16 D_1F800004;
 
-extern Callback D_801F0C44[];
+/* D_801F0C44 */
+extern Callback g_BMagicMeteorStrikeSteps[];
 
 /* The per-row bytes the meteor copies into each effect slot it spawns. */
-extern u8       D_801F0C58[];
+/* D_801F0C58 */
+extern u8       g_BMagicMeteorStrikeFragmentTints[];
 extern u8       D_801F0C5C[];
-extern Callback D_801F0C60[];
+/* D_801F0C60 */
+extern Callback g_BMagicMeteorStrikeSlotModes[];
 
 /* The four rise speeds (z velocity) the meteor's arc picks by param.unk_0B & 3. */
-extern s32 D_801F0C68[];
+/* D_801F0C68 */
+extern s32 g_BMagicMeteorStrikeFragmentRiseSpeeds[];
 
-extern Callback D_801F0C78[];
-void            func_801F01B8(void);
+/* D_801F0C78 */
+extern Callback g_BMagicMeteorStrikeFragmentSteps[];
+/* func_801F01B8 */
+void            BMagic_MeteorStrikeDrawFragment(void);
 
-extern Callback     D_801F0C84[];
+/* D_801F0C84 */
+extern Callback g_BMagicMeteorStrikeRingSteps[];
+
+/* The effects the slot table holds: header.mode picks the handler of g_BMagicMeteorStrikeSlotModes. */
+typedef enum BMagicMeteorStrikeSlotMode {
+    BMAGIC_METEOR_STRIKE_SLOT_FRAGMENT = 0,
+    BMAGIC_METEOR_STRIKE_SLOT_RING     = 1
+} BMagicMeteorStrikeSlotMode;
+
 /* The effect slot table BMagic_AllocEffect scans, and its row count. */
 extern BattleEffect D_801F0C90[];
 #define BMAGIC_EFFECT_SLOTS     D_801F0C90
 #define BMAGIC_EFFECT_COUNT     BATTLE_EFFECT_COUNT
-#define BMAGIC_EFFECT_SLOT_STEP func_801EFD84
+#define BMAGIC_EFFECT_SLOT_STEP BMagic_MeteorStrikeSlotUpdate
 extern Magic220Steps D_801EEC04;
-void                 func_801EFD84(void);
-void                 func_801F07D4(void);
+/* func_801EFD84 */
+void                 BMagic_MeteorStrikeSlotUpdate(void);
+/* func_801F07D4 */
+void                 BMagic_MeteorStrikeDrawRing(void);
 
 #endif
