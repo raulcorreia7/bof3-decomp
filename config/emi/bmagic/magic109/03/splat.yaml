@@ -18,12 +18,12 @@ segments:
     vram: 0x801EF9D8
     align: 4
     subsegments:
-      - [0xDD8, bin, D_801EF9D8]
+      - [0xDD8, bin, g_BMagicSwirlStartPoints]
       - [0xDDC, bin, D_801EF9DC]
-      - [0xDF8, bin, D_801EF9F8]
+      - [0xDF8, bin, g_BMagicSwirlOuter]
       - [0xDFC, bin, D_801EF9FC]
-      - [0xE78, bin, D_801EFA78]
+      - [0xE78, bin, g_BMagicSwirlInner]
       - [0xE7C, bin, D_801EFA7C]
-      - [0xEF8, bin, D_801EFAF8]
+      - [0xEF8, bin, g_BMagicSwirlTexOffsets]
       - [0xEFC, bin, D_801EFAFC]
   - [0x1378]

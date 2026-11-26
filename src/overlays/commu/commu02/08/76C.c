@@ -127,7 +127,7 @@ MATCH void func_801D1774(void) {
         if ((D_801DB0B8 >> i) & 1) {
             j = i + 1;
             x = (s16)(0x30 + i * 0x20);
-            func_801D2CF8(x, 0x6C, D_801DB080[j]);
+            func_801D2CF8(x, 0x6C, D_801DB080.bytes[j]);
         }
     }
     func_801D3184(0x26, 0x10);
@@ -146,7 +146,7 @@ MATCH void func_801D184C(void) {
         if ((D_801DB0B8 >> i) & 1) {
             j = i + 1;
             x = (s16)(0x30 + i * 0x20);
-            func_801D2CF8(x, 0x6C, D_801DB080[j]);
+            func_801D2CF8(x, 0x6C, D_801DB080.bytes[j]);
         }
     }
     func_801D3184(0x26, 0x10);
@@ -214,7 +214,7 @@ MATCH void func_801D1A50(void) {
             D_801DB0C4 = 0;
             D_801F294D++;
         } else if ((slot = LOB(D_801DB0B4)) < 8) {
-            D_801DB080[10 + slot] = (u8)D_801DB0B8;
+            D_801DB080.bytes[10 + slot] = (u8)D_801DB0B8;
             D_801DB0B4++;
             SND_SEPlay(0x103);
             if ((s8)D_801DB0B4 == 8) {
@@ -281,8 +281,8 @@ MATCH void func_801D1E98(void) {
     D_801DB0C4 -= 1;
     if (D_801DB0C4 == 0) {
         idx = (s8)D_801DB0BC;
-        lt  = D_801DB080[idx - 1] < D_801DB080[idx];
-        if (D_801DB080[idx + 9] == (lt ^ 1)) {
+        lt  = D_801DB080.bytes[idx - 1] < D_801DB080.bytes[idx];
+        if (D_801DB080.bytes[idx + 9] == (lt ^ 1)) {
             SND_SEPlay(0x104);
             old        = D_801DB0BC;
             D_801DB0BC = old + 1;
@@ -327,7 +327,7 @@ MATCH void func_801D2078(void) {
     i = 0;
     if ((s8)D_801DB0B4 >= 0) {
         do {
-            func_801D2CF8((i * 0x200000 + 0x100000) >> 16, D_801DB0C4 * 40 + 0x6C, D_801DB080[i]);
+            func_801D2CF8((i * 0x200000 + 0x100000) >> 16, D_801DB0C4 * 40 + 0x6C, D_801DB080.bytes[i]);
             i++;
         } while (i <= (s8)D_801DB0B4);
     }
@@ -488,7 +488,7 @@ MATCH void func_801D2794(s32 count, s32 shown, s32 chosen) {
             }
         }
         if (i < (u8)shown) {
-            func_801D2CF8((s16)(0x10 + i * 0x20), y, D_801DB080[i]);
+            func_801D2CF8((s16)(0x10 + i * 0x20), y, D_801DB080.bytes[i]);
         } else {
             func_801D2CF8((s16)(0x10 + i * 0x20), y, 0xFF);
         }
@@ -500,17 +500,17 @@ MATCH void func_801D2870(void) {
     s32 j;
     s32 value;
 
-    D_801DB080[0] = func_801D2750(9);
+    D_801DB080.bytes[0] = func_801D2750(9);
     for (i = 1; i < 9; i++) {
         do {
             value = func_801D2750(9);
             for (j = 0; j < i; j++) {
-                if ((u8)value == D_801DB080[j]) {
+                if ((u8)value == D_801DB080.bytes[j]) {
                     break;
                 }
             }
         } while (j != i);
-        D_801DB080[i] = value;
+        D_801DB080.bytes[i] = value;
     }
 }
 
@@ -783,7 +783,7 @@ MATCH void func_801D3864(void) {
     s32* zp;
 
     i          = 0;
-    p          = D_801DB080;
+    p          = D_801DB080.bytes;
     zp         = &g_Zenny;
     zenny      = *zp;
     D_801DB07C = 500;
@@ -796,7 +796,7 @@ MATCH void func_801D3864(void) {
                 break;
             }
             for (j = 0; j < i; j++) {
-                if (D_801DB080[j] == v) {
+                if (D_801DB080.bytes[j] == v) {
                     break;
                 }
             }
@@ -804,7 +804,7 @@ MATCH void func_801D3864(void) {
     }
     D_801DB0B4 = 0;
     for (i = 3; i < 0x2B; i++) {
-        D_801DB080[i] = 1;
+        D_801DB080.bytes[i] = 1;
     }
     func_801D4AE0(0x10, 0x18, 0);
     func_801D2CF8(0x68, 0x40, 0xFF);
@@ -870,16 +870,16 @@ MATCH void func_801D3C30(void) {
         k = (s8)D_801DB0B4 * 5 + 3;
         k += (u8)D_801DB0B8;
         if (buttons & PADLdown) {
-            val               = D_801DB080[(u8)k] - 1;
-            D_801DB080[(u8)k] = val;
+            val                     = D_801DB080.bytes[(u8)k] - 1;
+            D_801DB080.bytes[(u8)k] = val;
             if ((s8)val <= 0) {
-                D_801DB080[(u8)k] = 9;
+                D_801DB080.bytes[(u8)k] = 9;
             }
         } else if (buttons & PADLup) {
-            val               = D_801DB080[(u8)k] + 1;
-            D_801DB080[(u8)k] = val;
+            val                     = D_801DB080.bytes[(u8)k] + 1;
+            D_801DB080.bytes[(u8)k] = val;
             if (val >= 10) {
-                D_801DB080[(u8)k] = 1;
+                D_801DB080.bytes[(u8)k] = 1;
             }
         } else if (buttons & PADLright) {
             D_801DB0B8 += 1;
@@ -915,19 +915,19 @@ MATCH void func_801D3E44(void) {
     hits  = 0;
     blows = 0;
     for (i = 0; i < 3; i++) {
-        if (D_801DB080[i] == D_801DB080[(s8)D_801DB0B4 * 5 + 3 + i]) {
+        if (D_801DB080.bytes[i] == D_801DB080.bytes[(s8)D_801DB0B4 * 5 + 3 + i]) {
             hits++;
         }
     }
     for (i = 0; i < 3; i++) {
         for (j = 0; j < 3; j++) {
-            if (i != j && D_801DB080[(s8)D_801DB0B4 * 5 + 3 + i] == D_801DB080[j]) {
+            if (i != j && D_801DB080.bytes[(s8)D_801DB0B4 * 5 + 3 + i] == D_801DB080.bytes[j]) {
                 blows++;
             }
         }
     }
-    D_801DB080[(s8)D_801DB0B4 * 5 + 6] = hits;
-    D_801DB080[(s8)D_801DB0B4 * 5 + 7] = blows;
+    D_801DB080.bytes[(s8)D_801DB0B4 * 5 + 6] = hits;
+    D_801DB080.bytes[(s8)D_801DB0B4 * 5 + 7] = blows;
     if (hits != 3) {
         sprintf((char*)g_TextVariables[0], D_801D0C20, hits);
         sprintf((char*)&g_TextVariables[0][0x20], D_801D0C20, blows);
@@ -970,7 +970,7 @@ MATCH void func_801D4158(void) {
     if (*state != 2) {
         D_801DB0B4 += 1;
         if ((s8)D_801DB0B4 < 8) {
-            dst_base = &D_801DB080[3];
+            dst_base = &D_801DB080.bytes[3];
             src_base = dst_base - 5;
             i        = 0;
             do {
@@ -1070,12 +1070,12 @@ MATCH void FairyCasino_DrawNumbers(void) {
             right_x = 0xA8;
             mid_x   = 0x88;
             top_y   = 0x78;
-            func_801D2CF8(right_x - (u8)D_801DB0C4 * 16, top_y - (u8)D_801DB0C4 * 14, D_801DB080[row + 5]);
-            func_801D2CF8(mid_x - D_801DB0C4 * 8, top_y - D_801DB0C4 * 14, D_801DB080[row + 4]);
-            func_801D2CF8(0x68, top_y - D_801DB0C4 * 14, D_801DB080[row + 3]);
-            func_801D2CF8(right_x - D_801DB0C4 * 16, 0x40, D_801DB080[2]);
-            func_801D2CF8(mid_x - D_801DB0C4 * 8, 0x40, D_801DB080[1]);
-            func_801D2CF8(0x68, 0x40, D_801DB080[0]);
+            func_801D2CF8(right_x - (u8)D_801DB0C4 * 16, top_y - (u8)D_801DB0C4 * 14, D_801DB080.bytes[row + 5]);
+            func_801D2CF8(mid_x - D_801DB0C4 * 8, top_y - D_801DB0C4 * 14, D_801DB080.bytes[row + 4]);
+            func_801D2CF8(0x68, top_y - D_801DB0C4 * 14, D_801DB080.bytes[row + 3]);
+            func_801D2CF8(right_x - D_801DB0C4 * 16, 0x40, D_801DB080.bytes[2]);
+            func_801D2CF8(mid_x - D_801DB0C4 * 8, 0x40, D_801DB080.bytes[1]);
+            func_801D2CF8(0x68, 0x40, D_801DB080.bytes[0]);
             func_801D4AE0(0x10, 0x18, 1);
             func_801D3184(0xCC, 0x10);
             func_801D32A0(0xCC, 0x3C, 0);
@@ -1168,22 +1168,22 @@ NON_MATCHING void func_801D4AE0(s16 x, s16 y, u8 flag) {
                 UI_TextDrawAscii(x + 0x2F, ry, UI_TEXT_HIGHLIGHT, g_UiTextFormatBuffer);
                 UI_TextDrawAscii(x + 0x43, ry, 1, g_UiTextFormatBuffer);
             } else {
-                sprintf(g_UiTextFormatBuffer, D_801D0C24, D_801DB080[k], D_801DB080[k + 1], D_801DB080[k + 2]);
+                sprintf(g_UiTextFormatBuffer, D_801D0C24, D_801DB080.bytes[k], D_801DB080.bytes[k + 1], D_801DB080.bytes[k + 2]);
                 ry = (s16)(y + dy);
                 UI_TextDrawAscii(x + 6, ry, 0, g_UiTextFormatBuffer);
-                sprintf(g_UiTextFormatBuffer, D_801D0C20, D_801DB080[k + 3]);
+                sprintf(g_UiTextFormatBuffer, D_801D0C20, D_801DB080.bytes[k + 3]);
                 UI_TextDrawAscii(x + 0x2F, ry, UI_TEXT_HIGHLIGHT, g_UiTextFormatBuffer);
-                sprintf(g_UiTextFormatBuffer, D_801D0C20, D_801DB080[k + 4]);
+                sprintf(g_UiTextFormatBuffer, D_801D0C20, D_801DB080.bytes[k + 4]);
                 UI_TextDrawAscii(x + 0x43, ry, 1, g_UiTextFormatBuffer);
             }
             UI_TextDrawGlyphString(x + 0x39, y + gy, 0, D_801D0C2C);
         } else if (i < sel) {
-            sprintf(g_UiTextFormatBuffer, D_801D0C24, D_801DB080[k], D_801DB080[k + 1], D_801DB080[k + 2]);
+            sprintf(g_UiTextFormatBuffer, D_801D0C24, D_801DB080.bytes[k], D_801DB080.bytes[k + 1], D_801DB080.bytes[k + 2]);
             ry = (s16)(y + dy);
             UI_TextDrawAscii(x + 6, ry, 0, g_UiTextFormatBuffer);
-            sprintf(g_UiTextFormatBuffer, D_801D0C20, D_801DB080[k + 3]);
+            sprintf(g_UiTextFormatBuffer, D_801D0C20, D_801DB080.bytes[k + 3]);
             UI_TextDrawAscii(x + 0x2F, ry, UI_TEXT_HIGHLIGHT, g_UiTextFormatBuffer);
-            sprintf(g_UiTextFormatBuffer, D_801D0C20, D_801DB080[k + 4]);
+            sprintf(g_UiTextFormatBuffer, D_801D0C20, D_801DB080.bytes[k + 4]);
             UI_TextDrawAscii(x + 0x43, ry, 1, g_UiTextFormatBuffer);
             UI_TextDrawGlyphString(x + 0x39, y + gy, 0, D_801D0C2C);
         } else {
@@ -1210,9 +1210,9 @@ MATCH void func_801D4EA4(s16 left, s16 top, u8 icon_row, u8 raised) {
     icon = icon_row * 5 + 3;
     for (i = 0; i < 3; i++) {
         if (D_801DB0B8 == i && raised != 0) {
-            func_801D2CF8((s16)(left + i * 32), (s16)(top - 8), D_801DB080[icon + i]);
+            func_801D2CF8((s16)(left + i * 32), (s16)(top - 8), D_801DB080.bytes[icon + i]);
         } else {
-            func_801D2CF8((s16)(left + i * 32), (s16)top, D_801DB080[icon + i]);
+            func_801D2CF8((s16)(left + i * 32), (s16)top, D_801DB080.bytes[icon + i]);
         }
     }
 }
@@ -1227,7 +1227,7 @@ MATCH void func_801D4F88(s32 x, s32 y, s32 show_values) {
         draw_y = y << 16;
         draw_x = x;
         do {
-            func_801D2CF8((s16)draw_x, draw_y >> 16, D_801DB080[i]);
+            func_801D2CF8((s16)draw_x, draw_y >> 16, D_801DB080.bytes[i]);
             draw_x += 0x20;
             i++;
         } while (i < 3);
@@ -1296,12 +1296,12 @@ NON_MATCHING void func_801D51D0(void) {
     s32 value;
     u8  digit;
 
-    D_801DB0B4    = rand() & 0x7;
-    D_801DB0A8[0] = 0;
-    D_801DB0A8[1] = 0;
-    D_801DB0A8[2] = 0;
-    D_801DB0A8[3] = 0;
-    dst           = g_TextVariables[0];
+    D_801DB0B4                = rand() & 0x7;
+    D_801DB080.words.count[0] = 0;
+    D_801DB080.words.count[1] = 0;
+    D_801DB080.words.count[2] = 0;
+    D_801DB080.words.count[3] = 0;
+    dst                       = g_TextVariables[0];
     for (row = 0; row < 9; row++, dst += TEXT_VARIABLE_LENGTH) {
         digit = D_801DAD90[(s8)D_801DB0B4][row];
         if (digit == 9) {
@@ -1309,15 +1309,15 @@ NON_MATCHING void func_801D51D0(void) {
         }
         value = func_801D5AD0(D_801DADD8[digit][1]);
         for (;;) {
-            for (i = 0; i < D_801DB0A8[digit]; i++) {
-                if (D_801DB080[digit * 10 + i] != (u8)value) {
+            for (i = 0; i < D_801DB080.words.count[digit]; i++) {
+                if (D_801DB080.words.picked[digit * 10 + i] != (u8)value) {
                     break;
                 }
             }
-            if (i < D_801DB0A8[digit]) {
+            if (i < D_801DB080.words.count[digit]) {
                 break;
             }
-            if (D_801DB0A8[digit] == 0) {
+            if (D_801DB080.words.count[digit] == 0) {
                 break;
             }
             value++;
@@ -1325,8 +1325,8 @@ NON_MATCHING void func_801D51D0(void) {
                 value = 0;
             }
         }
-        D_801DB080[digit * 10 + D_801DB0A8[digit]] = value;
-        D_801DB0A8[digit]++;
+        D_801DB080.words.picked[digit * 10 + D_801DB080.words.count[digit]] = value;
+        D_801DB080.words.count[digit]++;
 
         src = MESSAGE_TABLE_TEXT(AREA_MESSAGE_TABLE, D_801DADD8[digit][0] + (u8)value + 0x100);
         p   = dst;
@@ -1354,15 +1354,15 @@ NON_MATCHING void func_801D51D0(void) {
 
     if (rand() & 1) {
         i = 0;
-        if (D_801DB0A8[D_801DADE0[digit][1]] - 1 > 0) {
+        if (D_801DB080.words.count[D_801DADE0[digit][1]] - 1 > 0) {
             do {
                 if (rand() & 1) {
                     break;
                 }
                 i++;
-            } while (i < D_801DB0A8[D_801DADE0[digit][1]] - 1);
+            } while (i < D_801DB080.words.count[D_801DADE0[digit][1]] - 1);
         }
-        D_801DB0AD = D_801DADD8[D_801DADE0[digit][1]][0] + D_801DB080[D_801DADE0[digit][1] * 10 + i];
+        D_801DB0AD = D_801DADD8[D_801DADE0[digit][1]][0] + D_801DB080.words.picked[D_801DADE0[digit][1] * 10 + i];
     } else {
         D_801DB0AD = D_801DADD8[D_801DADE0[digit][1]][0] + func_801D5AD0(D_801DADD8[D_801DADE0[digit][1]][1]);
     }
@@ -1371,15 +1371,15 @@ NON_MATCHING void func_801D51D0(void) {
         D_801DB0AE = 0xFF;
     } else if (rand() & 1) {
         i = 0;
-        if (D_801DB0A8[D_801DADE0[digit][2]] - 1 > 0) {
+        if (D_801DB080.words.count[D_801DADE0[digit][2]] - 1 > 0) {
             do {
                 if (rand() & 1) {
                     break;
                 }
                 i++;
-            } while (i < D_801DB0A8[D_801DADE0[digit][2]] - 1);
+            } while (i < D_801DB080.words.count[D_801DADE0[digit][2]] - 1);
         }
-        D_801DB0AE = D_801DADD8[D_801DADE0[digit][2]][0] + D_801DB080[D_801DADE0[digit][2] * 10 + i];
+        D_801DB0AE = D_801DADD8[D_801DADE0[digit][2]][0] + D_801DB080.words.picked[D_801DADE0[digit][2] * 10 + i];
     } else {
         D_801DB0AE = D_801DADD8[D_801DADE0[digit][2]][0] + func_801D5AD0(D_801DADD8[D_801DADE0[digit][2]][1]);
     }
@@ -1687,7 +1687,7 @@ MATCH void func_801D6448(void) {
 
     Fairy_GenerateName();
     for (i = 0; i < 6; i++) {
-        g_TextVariables[0][i] = D_801DB080[i];
+        g_TextVariables[0][i] = D_801DB080.bytes[i];
     }
     MESSAGE_START_WAIT(MSG_AREA175_CONFIRM_NICKNAME);
     D_801F294E++;
@@ -1732,7 +1732,7 @@ MATCH void func_801D6634(void) {
     D_801DB0C4 -= 1;
     if (D_801DB0C4 == 0) {
         tbl = D_801457E8;
-        dst = D_801DB080;
+        dst = D_801DB080.bytes;
         for (i = 0; i < 5; i++, dst++) {
             letter = tbl[Fairy_FindActiveJob(D_801DB0B4) & BYTE_MASK][i];
             if (letter == 0) {
@@ -1773,9 +1773,9 @@ MATCH void func_801D68AC(void) {
     func_801D94D0(D_801DAAA8, 0x18, (D_801DB0C4 * 0x1E) + 0x67, D_801DB0D4, D_801DB0D8);
     if (D_801DB0C4 == 4) {
         if (D_801DB0DC != 0) {
-            if (D_801DB080[0] == 0) {
+            if (D_801DB080.bytes[0] == 0) {
                 for (i = 0; i < 5; i++) {
-                    D_801DB080[i] = g_Fairies[Fairy_FindActiveJob(D_801DB0B4) & BYTE_MASK][i];
+                    D_801DB080.bytes[i] = g_Fairies[Fairy_FindActiveJob(D_801DB0B4) & BYTE_MASK][i];
                 }
             }
             MESSAGE_START_WAIT(MSG_AREA175_ASK_LIKE_NICKNAME);
@@ -1938,15 +1938,14 @@ MATCH void func_801D708C(void) {
     func_801D9348(((D_801DB0B4 & 1) * 0x88) + 0x20, ((((s32)(D_801DB0B4 << 0x18) >> 0x19) * 0x38) + 0x2B) & HALF_MASK, 0, 6);
 }
 
-#ifdef NON_MATCHING
-NON_MATCHING void func_801D7234(void) {
+/* Slides the joined members apart: the picked one eases into its grid cell, the rest slide out to the sides. */
+MATCH void func_801D7234(void) {
     s32 drawn;
     s32 i;
     u8  step;
     u8  drawn_index;
     s32 remaining;
     s32 x;
-    s32 y;
 
     drawn      = 0;
     step       = D_801DB0C4 + 1;
@@ -1955,16 +1954,16 @@ NON_MATCHING void func_801D7234(void) {
     for (i = 0; i < 7; i++) {
         if (g_Characters[i].party_flags & PARTY_FLAG_JOINED) {
             drawn_index = drawn;
-            if (drawn_index == (s8)D_801DB0B4) {
-                remaining = 4 - D_801DB0C4;
-                x         = ((s8)D_801DB0B4 * 34 * remaining) + 32;
-                y         = ((drawn_index >> 1) * 14) & 0xFF;
-                y         = (y * remaining) + 43;
-                func_801D90D8((s16)x, (s16)y, (u8)i, 0);
-            } else if ((drawn & 1) == 0) {
-                func_801D90D8(32 - D_801DB0C4 * 40, ((drawn_index >> 1) * 56) + 43, (u8)i, 0);
+            if (drawn_index != (s8)D_801DB0B4) {
+                if ((drawn & 1) == 0) {
+                    func_801D90D8(32 - D_801DB0C4 * 40, ((drawn_index >> 1) * 56) + 43, (u8)i, 0);
+                } else {
+                    func_801D90D8(D_801DB0C4 * 40 + 168, ((drawn_index >> 1) * 56) + 43, (u8)i, 0);
+                }
             } else {
-                func_801D90D8(D_801DB0C4 * 40 + 168, ((drawn_index >> 1) * 56) + 43, (u8)i, 0);
+                x         = (drawn & 1) * 34;
+                remaining = 4 - D_801DB0C4;
+                func_801D90D8((s16)(x * remaining + 32), (s16)((((drawn_index >> 1) * 14) & 0xFF) * remaining + 43), (u8)i, 0);
             }
             drawn++;
         }
@@ -1974,9 +1973,6 @@ NON_MATCHING void func_801D7234(void) {
         D_801F294D = 7;
     }
 }
-#else
-INCLUDE_ASM(func_801D7234);
-#endif
 
 MATCH void func_801D73F8(void) {
     u8 value;
@@ -2002,7 +1998,7 @@ MATCH void func_801D74B0(void) {
 
     Fairy_GenerateName();
     for (i = 0; i < 6; i++) {
-        g_TextVariables[0][i] = D_801DB080[i];
+        g_TextVariables[0][i] = D_801DB080.bytes[i];
     }
     MESSAGE_START_WAIT(MSG_AREA175_CONFIRM_NICKNAME);
     D_801F294E++;
@@ -2047,7 +2043,7 @@ MATCH void func_801D769C(void) {
     func_801D94D0(D_801DAAA8, 0x18, D_801DB0C4 * 30 + 0x67, D_801DB0D4, D_801DB0D8);
     if (D_801DB0C4 == 0) {
         chars = g_Characters;
-        dst   = D_801DB080;
+        dst   = D_801DB080.bytes;
         for (i = 0; i < 5; i++, dst++) {
             letter = chars[Party_GetJoinedCharacter(D_801DB0B4) & BYTE_MASK].name[i];
             if (letter == 0) {
@@ -2088,9 +2084,9 @@ MATCH void func_801D7934(void) {
     func_801D94D0(D_801DAAA8, 0x18, (D_801DB0C4 * 0x1E) + 0x67, D_801DB0D4, D_801DB0D8);
     if (D_801DB0C4 == 4) {
         if (D_801DB0DC != 0) {
-            if (D_801DB080[0] == 0) {
+            if (D_801DB080.bytes[0] == 0) {
                 for (i = 0; i < 5; i++) {
-                    D_801DB080[i] = D_801DB058[Party_GetJoinedCharacter(D_801DB0B4) & BYTE_MASK][i];
+                    D_801DB080.bytes[i] = D_801DB058[Party_GetJoinedCharacter(D_801DB0B4) & BYTE_MASK][i];
                 }
             }
             MESSAGE_START_WAIT(MSG_AREA175_ASK_LIKE_NICKNAME);
@@ -2256,7 +2252,7 @@ NON_MATCHING void func_801D830C(s32 x, s32 y, s32 kind, s32 mode) {
 
     UI_WindowDraw(x, y, 0x48, 0x26, 0x80, *(style = &g_WindowStyle));
     func_801D81A4(x, y);
-    UI_TextDraw(x + 6, y + 4, 0, 5, (mode & BYTE_MASK) ? D_801DB080 : style + 0xE96 + (kind & BYTE_MASK) * 5);
+    UI_TextDraw(x + 6, y + 4, 0, 5, (mode & BYTE_MASK) ? D_801DB080.bytes : style + 0xE96 + (kind & BYTE_MASK) * 5);
     tile = (TILE*)g_GfxPrimCursor;
     SetTile(tile);
     tile_x   = x + 6;
@@ -2355,7 +2351,7 @@ MATCH void Fairy_GenerateName(void) {
 
     count = 0;
     i     = 5;
-    dst   = &D_801DB080[i];
+    dst   = &D_801DB080.bytes[i];
     do {
         *dst = 0;
         i -= 1;
@@ -2370,7 +2366,7 @@ MATCH void Fairy_GenerateName(void) {
         if (ch == 0) {
             break;
         }
-        D_801DB080[count] = ch;
+        D_801DB080.bytes[count] = ch;
         count++;
         src++;
     }
@@ -2383,7 +2379,7 @@ MATCH void Fairy_GenerateName(void) {
         if (ch == 0) {
             break;
         }
-        D_801DB080[count] = ch;
+        D_801DB080.bytes[count] = ch;
         count++;
         src++;
     }
@@ -2407,7 +2403,7 @@ MATCH void func_801D90D8(s32 x, s32 y, s32 character, s32 frame_mode) {
     if ((u8)frame_mode == 0) {
         text = CHARACTER_BLOCK->records[slot];
     } else {
-        text = D_801DB080;
+        text = D_801DB080.bytes;
     }
     UI_TextDraw((s16)(x + 0x3B), (s16)(y + 0x19), 0, 5, text);
     func_801AF390((s16)frame_x, (s16)frame_y, g_MenuPortraitAtlas + 0x24, 0);
@@ -2792,7 +2788,7 @@ MATCH s8 func_801DA114(void) {
                 break;
             default:
                 SND_SEPlay(0x103);
-                D_801DB080[D_801DB0D0] = *cell;
+                D_801DB080.bytes[D_801DB0D0] = *cell;
                 if (D_801DB0D0 < 4) {
                     D_801DB0D0 += 1;
                 }
@@ -2828,26 +2824,26 @@ MATCH s8 func_801DA114(void) {
     if (g_PadStates[0].pressed & PADRup) {
         u8 slot = D_801DB0D0;
 
-        if (slot != 0 && (D_801DB080[slot] == 0xFF || D_801DB080[slot] == 0)) {
+        if (slot != 0 && (D_801DB080.bytes[slot] == 0xFF || D_801DB080.bytes[slot] == 0)) {
             D_801DB0D0 = slot - 1;
         }
         SND_SEPlay(0x106);
-        D_801DB080[D_801DB0D0] = 0xFF;
+        D_801DB080.bytes[D_801DB0D0] = 0xFF;
     } else if (g_PadStates[0].pressed & PADstart) {
         SND_SEPlay(0x104);
         count = 5;
         for (i = 4; i >= 0; i--) {
-            if (D_801DB080[i] != 0xFF) {
+            if (D_801DB080.bytes[i] != 0xFF) {
                 break;
             }
             count--;
         }
         if (count < 5) {
             for (i = 4; i >= 0; i--) {
-                if (D_801DB080[i] != 0xFF) {
+                if (D_801DB080.bytes[i] != 0xFF) {
                     break;
                 }
-                D_801DB080[i] = 0;
+                D_801DB080.bytes[i] = 0;
             }
         }
         D_801F294E += 1;
@@ -2864,10 +2860,10 @@ MATCH void func_801DA7A4(void) {
     }
     g_TextVariables[0][5] = 0;
     for (i = 0; i < 6; i++) {
-        D_801490F8[i] = D_801DB080[i];
+        D_801490F8[i] = D_801DB080.bytes[i];
     }
     for (i = 0; i < 5; i++) {
-        g_Characters[Party_GetJoinedCharacter(D_801DB0B4)].name[i] = D_801DB080[i];
+        g_Characters[Party_GetJoinedCharacter(D_801DB0B4)].name[i] = D_801DB080.bytes[i];
     }
     MESSAGE_START_WAIT(MSG_AREA175_NICKNAME_REMINDER);
     D_801F294C = 3;
@@ -2892,11 +2888,11 @@ MATCH void func_801DA8E8(void) {
     }
     g_TextVariables[0][5] = 0;
     for (i = 0; i < 6; i++) {
-        D_801490F8[i] = D_801DB080[i];
+        D_801490F8[i] = D_801DB080.bytes[i];
     }
     i    = 0;
     jobs = D_801457E8;
-    src  = D_801DB080;
+    src  = D_801DB080.bytes;
     for (; i < 5; i++, src++) {
         if (*src == 0) {
             jobs[Fairy_FindActiveJob(D_801DB0B4)][i] = 0xFF;

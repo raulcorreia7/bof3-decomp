@@ -2,6 +2,12 @@
 Battle_ApplyDamageFlags = { addr = 0x800A9610, type = "func", source = "Applies the damage flags to the selected battlers." }
 Battle_MarkDamaged = { addr = 0x800A9820, type = "func", source = "Marks the selected battlers as damaged." }
 Effect_Reset = { addr = 0x801E5988, type = "func", source = "Clears every timer, state and flag byte of the shared BattleEffect work record; every effect countdown calls it first. battle/03 owns the body." }
-D_801EF9F8 = { addr = 0x801EF9F8, type = "Offset2", size = 0x80, source = "Sixteen points of the effect." }
-D_801EFA78 = { addr = 0x801EFA78, type = "Offset2", size = 0x80, source = "Sixteen points of the effect." }
-D_801EFAF8 = { addr = 0x801EFAF8, type = "Offset2", size = 0x80, source = "Sixteen points of the effect." }
+BMagic_SwirlStart = { addr = 0x801EEC80, type = "func", source = "Task mode 0: ends the effect at once when it targets the caster's own side, otherwise copies the screen around the effect point into the swirl texture area, moves the effect point to the start point of the scroll direction and advances header.mode." }
+BMagic_SwirlGrow = { addr = 0x801EEEAC, type = "func", source = "Task mode 1: raises the swirl radius by 2 per frame while drawing the swirl; at 0x54 advances header.mode and starts the hold timer." }
+BMagic_SwirlHold = { addr = 0x801EEF30, type = "func", source = "Task mode 2: counts the hold timer down while drawing the swirl and sweeping its twist; at zero applies the damage flags and advances header.mode." }
+BMagic_SwirlShrink = { addr = 0x801EF008, type = "func", source = "Task mode 3: lowers the swirl radius by 2 per frame while drawing the swirl and sweeping its twist; at 2 marks the target damaged, raises BATTLE_STATE_EFFECT_PLAYING and resets the effect." }
+BMagic_SwirlDraw = { addr = 0x801EF0F8, type = "func", source = "Draws the swirl: copies the screen around the effect point into the texture area, then eight rings of 16 Gouraud quads textured from it, each ring twisted by the twist times its depth." }
+g_BMagicSwirlStartPoints = { addr = 0x801EF9D8, source = "The screen point the swirl starts from, by g_Battle.scroll_dir." }
+g_BMagicSwirlOuter = { addr = 0x801EF9F8, source = "The sixteen points of the outer edge of the band being drawn: the swirl rim, then each finished band inner edge." }
+g_BMagicSwirlInner = { addr = 0x801EFA78, source = "The sixteen points of the inner edge of the band being drawn, twisted by the ring angle." }
+g_BMagicSwirlTexOffsets = { addr = 0x801EFAF8, source = "The texture offsets of the nine rings of sixteen mesh points, from the centre out." }
