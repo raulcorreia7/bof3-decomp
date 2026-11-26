@@ -5,7 +5,7 @@ NON_MATCHING void func_801F3994(void) {
     u8*         bundle;
     u8*         cell_base;
     u32*        cell;
-    volatile u8 hidden;
+    u8          hidden;
     s32         row;
     s32         col;
     s32         k;
@@ -38,14 +38,14 @@ NON_MATCHING void func_801F3994(void) {
             }
             func_801A4BC0((u8)col + 0x16, (u8)row + 0x8E, D_801F584C[(u8)row][(u8)col] * (u8)sum);
             width      = *bundle;
-            cell_base  = bundle + ((width * D_80104001 + 1) / 2) * 4 + D_80104002 * 4;
-            cell_index = LOHU(D_8010402C[D_80104002 * 4 + ((u8)row + 0x8E) * width * 2 + (u8)col * 2]);
+            cell_base  = (u8*)(D_80104002 * 4 + (((width * D_80104001 + 1) / 2) * 4 + (u32)bundle));
+            cell_index = LOHU(D_8010402C[(u8)col * 2 + (((u8)row + 0x8E) * width * 2 + D_80104002 * 4)]);
             cell       = (u32*)(cell_base + cell_index * 4);
             *cell      = *cell & ~0xFF;
             *cell |= D_801F57CC[sum][(u8)row][(u8)col];
             cell_id = Area_CellGetId((u8)col + 0x16, (u8)row + 0x8E);
             if (cell_id != 0) {
-                Area_ApplyTileToQuad(*cell, &g_AreaCellPrims[cell_id * 80], 2);
+                Area_ApplyTileToQuad(*cell, &g_AreaCellPrims[cell_id][0], 2);
             }
             col++;
         } while ((u8)col < 9);
