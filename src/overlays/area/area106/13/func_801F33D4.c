@@ -29,10 +29,10 @@ MATCH void func_801F33D4(s32 size) {
         g_ScratchPadVectors[0].vy = ((radius << 12) >> 10) - 0x2CC0;
         RotTransPers(&g_ScratchPadVectors[0], (long*)&prim->x0, &depth, &flag);
         g_ScratchPadVectors[0].vx = -0x3640;
-        D_1F800016         = ((radius << 12) >> 10) - 0x2CC0;
+        D_1F800016                = ((radius << 12) >> 10) - 0x2CC0;
         RotTransPers(&g_ScratchPadVectors[0], (long*)&prim->x1, &depth, &flag);
         GFX_AddPrim(GFX_LAYER_SCENE_BACK, sizeof(LINE_F2));
-        rim               = shade / 2;
+        rim            = shade / 2;
         D_1F800034_S16 = -0x3640;
         D_1F800036_S16 = -0x2CC0;
         for (i = 0; i < 16; i++) {
@@ -44,7 +44,7 @@ MATCH void func_801F33D4(s32 size) {
             g_ScratchPadVectors[0].vy = (u16)D_1F800036_S16 + ((rcos(i * 64) * radius) >> 10);
             RotTransPers(&g_ScratchPadVectors[0], (long*)&prim->x0, &depth, &flag);
             g_ScratchPadVectors[0].vx = (u16)D_1F800034_S16 + ((rsin((i + 1) * 64) * radius) >> 10);
-            D_1F800016         = (u16)D_1F800036_S16 + ((rcos((i + 1) * 64) * radius) >> 10);
+            D_1F800016                = (u16)D_1F800036_S16 + ((rcos((i + 1) * 64) * radius) >> 10);
             RotTransPers(&g_ScratchPadVectors[0], (long*)&prim->x1, &depth, &flag);
             GFX_AddPrim(GFX_LAYER_SCENE_BACK, sizeof(LINE_F2));
         }
@@ -54,13 +54,13 @@ MATCH void func_801F33D4(s32 size) {
         SetSemiTrans(prim, 1);
         setRGB0(prim, shade / 2, shade / 2, shade);
         g_ScratchPadVectors[0].vx = ((radius << 12) >> 10) - 0x3640;
-        D_1F800016         = -0x2DC0;
+        D_1F800016                = -0x2DC0;
         RotTransPers(&g_ScratchPadVectors[0], (long*)&prim->x0, &depth, &flag);
         g_ScratchPadVectors[0].vx = ((radius << 12) >> 10) - 0x3640;
-        D_1F800016         = -0x2CC0;
+        D_1F800016                = -0x2CC0;
         RotTransPers(&g_ScratchPadVectors[0], (long*)&prim->x1, &depth, &flag);
         GFX_AddPrim(GFX_LAYER_SCENE_BACK, sizeof(LINE_F2));
-        fade              = shade / 2;
+        fade           = shade / 2;
         D_1F800034_S16 = -0x3640;
         D_1F800036_S16 = -0x2DC0;
         for (i = 16; i < 32; i++) {
@@ -72,7 +72,7 @@ MATCH void func_801F33D4(s32 size) {
             g_ScratchPadVectors[0].vy = (u16)D_1F800036_S16 + ((rcos(i * 64) * radius) >> 10);
             RotTransPers(&g_ScratchPadVectors[0], (long*)&prim->x0, &depth, &flag);
             g_ScratchPadVectors[0].vx = (u16)D_1F800034_S16 + ((rsin((i + 1) * 64) * radius) >> 10);
-            D_1F800016         = (u16)D_1F800036_S16 + ((rcos((i + 1) * 64) * radius) >> 10);
+            D_1F800016                = (u16)D_1F800036_S16 + ((rcos((i + 1) * 64) * radius) >> 10);
             RotTransPers(&g_ScratchPadVectors[0], (long*)&prim->x1, &depth, &flag);
             GFX_AddPrim(GFX_LAYER_SCENE_BACK, sizeof(LINE_F2));
         }
