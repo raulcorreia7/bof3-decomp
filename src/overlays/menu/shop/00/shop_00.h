@@ -700,7 +700,8 @@ void func_801E440C(void);
 void func_801E4460(void);
 void func_801E44A0(void);
 void func_801E44E0(void);
-void func_801E4540(void);
+/* func_801E4540 */
+void UI_PanelSlideOutOption_801E4540(void);
 void func_801E4580(void);
 void func_801E45C0(MenuPanelTask* task);
 s32  func_801E4C2C(s32 item_class);
