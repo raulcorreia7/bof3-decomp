@@ -106,27 +106,37 @@ extern const u8* volatile D_801DB054;
 extern u8  D_801DB058[][5];
 extern s32 D_801DB07C;
 extern u8  D_801DB07F;
-extern u8  D_801DB080[];
-extern u8  D_801DB089[];
+
+/* The overlay's work bytes: the Numbers row, the fairy name, and the words each category already gave. */
+typedef union Commu02Work {
+    u8 bytes[0x2C];
+
+    struct {
+        u8 picked[4 * 10]; /* ten words per category, in the order given */
+        u8 count[4];
+    } words;
+} Commu02Work;
+
+extern Commu02Work D_801DB080;
+extern u8          D_801DB089[];
 /* The overlay's state byte the guarded step advances. */
-extern s8  D_801DB093;
-extern u8  D_801DB0A8[];
-extern u8  D_801DB0AD;
-extern u8  D_801DB0AE;
-extern u8  D_801DB0B4;
-extern s8  D_801DB0B8;
-extern s8  D_801DB0BC;
-extern s8  D_801DB0C0;
-extern u8  D_801DB0C4;
-extern u16 D_801DB0C8;
-extern u8  D_801DB0CC;
-extern u8  D_801DB0D0;
-extern u8  D_801DB0D4;
-extern u8  D_801DB0D8;
-extern u8  D_801DB0DC;
-extern u8  D_801F2944;
-extern u8  D_801F2945;
-extern u8  D_801F294F;
+extern s8          D_801DB093;
+extern u8          D_801DB0AD;
+extern u8          D_801DB0AE;
+extern u8          D_801DB0B4;
+extern s8          D_801DB0B8;
+extern s8          D_801DB0BC;
+extern s8          D_801DB0C0;
+extern u8          D_801DB0C4;
+extern u16         D_801DB0C8;
+extern u8          D_801DB0CC;
+extern u8          D_801DB0D0;
+extern u8          D_801DB0D4;
+extern u8          D_801DB0D8;
+extern u8          D_801DB0DC;
+extern u8          D_801F2944;
+extern u8          D_801F2945;
+extern u8          D_801F294F;
 
 void func_801D2794(s32 count, s32 shown, s32 chosen);
 void func_801D2870(void);
