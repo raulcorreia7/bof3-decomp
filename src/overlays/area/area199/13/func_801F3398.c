@@ -15,14 +15,12 @@ NON_MATCHING void func_801F3398(void) {
     s32       x;
 
     for (member = 0; member < 2; member++) {
-        slot = D_801F44B4[member];
-        cell = member * 3 + slot * 6;
-        x    = (g_Actors[member + 1].pos.x.fixed + 0x4000) >> 16;
-        if (x < D_801F54D0[cell]) {
-            slot                                  = (slot + 1) & 0x1F;
+        x = (g_Actors[member + 1].pos.x.fixed + 0x4000) >> 16;
+        if (x < D_801F54D0[member * 3 + D_801F44B4[member] * 6]) {
+            slot                                  = (D_801F44B4[member] + 1) & 0x1F;
             D_801F54D0[member * 3 + slot * 6]     = x;
             D_801F54D0[member * 3 + slot * 6 + 1] = COORD_INT(g_Actors[member + 1].pos.y);
-            D_801F54D0[member * 3 + slot * 6 + 2] = (D_801F54D0[cell + 2] - 1) & 1;
+            D_801F54D0[member * 3 + slot * 6 + 2] = (D_801F54D0[member * 3 + D_801F44B4[member] * 6 + 2] - 1) & 1;
             D_801F44B4[member]                    = slot;
         }
 

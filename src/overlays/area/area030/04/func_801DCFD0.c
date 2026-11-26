@@ -12,8 +12,7 @@
 /* The rod and lure equip panels: the pad repeat walks the cursor row, the page
  * keys step the lure page, and the pick button swaps the selected accessory with
  * the equipped one through the item tables. */
-#ifdef NON_MATCHING
-NON_MATCHING void func_801DCFD0(void) {
+MATCH void func_801DCFD0(void) {
     u16* pad_state;
     s32  input;
     s32  item;
@@ -75,7 +74,7 @@ NON_MATCHING void func_801DCFD0(void) {
         if (*pad_state & g_InputMasks[FISHING_INPUT_CAST]) {
             item = FISHING_ACCESSORY_SLOT(g_SpawnedActors[6].pos.y.part.integer);
             if (g_Accessories[(u8)item].type == ITEM_TYPE_FISHING_LURE) {
-                if (g_FishingEquipment.lure_id != item) {
+                if (g_FishingEquipment.lure_id != (u8)item) {
                     saved = item;
                     Item_Remove(ITEM_CATEGORY_ACCESSORY, item, 1, 0);
                     if (g_FishingEquipment.lure_id != 0) {
@@ -83,8 +82,7 @@ NON_MATCHING void func_801DCFD0(void) {
                     }
                     g_FishingEquipment.lure_id    = saved;
                     g_FishingEquipment.lure_count = 1;
-                    count                         = 0;
-                    for (i = 0; i < FISHING_ACCESSORY_SLOT_COUNT; i++) {
+                    for (i = 0, count = 0; i < FISHING_ACCESSORY_SLOT_COUNT; i++) {
                         if (g_Accessories[FISHING_ACCESSORY_SLOT(i)].type == ITEM_TYPE_FISHING_LURE) {
                             count++;
                         }
@@ -102,14 +100,16 @@ NON_MATCHING void func_801DCFD0(void) {
             return;
         }
         if (input & PADLup) {
-            if (g_SpawnedActors[6].selection != 0) {
+            if (g_SpawnedActors[6].selection == 0) {
+                if (g_SpawnedActors[6].pos.y.part.fraction != 0) {
+                    SND_SEPlay(EMI_SE_ID(SND_BANK_COMMON, 0));
+                    g_SpawnedActors[6].unk_08 = 4;
+                    g_SpawnedActors[6].unk_0A = 3;
+                    g_SpawnedActors[6].pos.y.part.fraction -= 1;
+                }
+            } else {
                 SND_SEPlay(EMI_SE_ID(SND_BANK_COMMON, 0));
                 g_SpawnedActors[6].selection -= 1;
-            } else if (g_SpawnedActors[6].pos.y.part.fraction != 0) {
-                SND_SEPlay(EMI_SE_ID(SND_BANK_COMMON, 0));
-                g_SpawnedActors[6].unk_08 = 4;
-                g_SpawnedActors[6].unk_0A = 3;
-                g_SpawnedActors[6].pos.y.part.fraction -= 1;
             }
         } else if (input & PADLdown) {
             if (g_SpawnedActors[6].selection == 8) {
@@ -125,8 +125,8 @@ NON_MATCHING void func_801DCFD0(void) {
             }
         } else if (*pad_state & PADL1) {
             old = g_SpawnedActors[6].pos.y.part.fraction;
-            if (old >= 9) {
-                g_SpawnedActors[6].pos.y.part.fraction = old - 9;
+            g_SpawnedActors[6].pos.y.part.fraction = old - 9;
+            if ((s16)g_SpawnedActors[6].pos.y.part.fraction >= 0) {
                 SND_SEPlay(EMI_SE_ID(SND_BANK_COMMON, 0));
             } else {
                 g_SpawnedActors[6].pos.y.part.fraction = 0;
@@ -138,25 +138,25 @@ NON_MATCHING void func_801DCFD0(void) {
                 }
             }
         } else if (*pad_state & PADR1) {
-            old = g_SpawnedActors[6].pos.y.part.fraction;
-            if (g_SpawnedActors[6].counter_1C < 9) {
-                if (g_SpawnedActors[6].selection < g_SpawnedActors[6].counter_1C) {
-                    SND_SEPlay(EMI_SE_ID(SND_BANK_COMMON, 0));
-                    g_SpawnedActors[6].selection = g_SpawnedActors[6].counter_1C;
-                }
-            } else {
+            if (g_SpawnedActors[6].counter_1C >= 9) {
+                old                                    = g_SpawnedActors[6].pos.y.part.fraction;
                 g_SpawnedActors[6].pos.y.part.fraction = old + 9;
                 if (g_SpawnedActors[6].pos.y.part.fraction + 8 < g_SpawnedActors[6].counter_1C) {
                     SND_SEPlay(EMI_SE_ID(SND_BANK_COMMON, 0));
                 } else {
                     g_SpawnedActors[6].pos.y.part.fraction = g_SpawnedActors[6].counter_1C - 8;
-                    if (g_SpawnedActors[6].pos.y.part.fraction != old) {
+                    if (g_SpawnedActors[6].pos.y.part.fraction == old) {
+                        if (g_SpawnedActors[6].selection < 8) {
+                            SND_SEPlay(EMI_SE_ID(SND_BANK_COMMON, 0));
+                            g_SpawnedActors[6].selection = 8;
+                        }
+                    } else {
                         SND_SEPlay(EMI_SE_ID(SND_BANK_COMMON, 0));
-                    } else if (g_SpawnedActors[6].selection < 8) {
-                        SND_SEPlay(EMI_SE_ID(SND_BANK_COMMON, 0));
-                        g_SpawnedActors[6].selection = 8;
                     }
                 }
+            } else if (g_SpawnedActors[6].selection < g_SpawnedActors[6].counter_1C) {
+                SND_SEPlay(EMI_SE_ID(SND_BANK_COMMON, 0));
+                g_SpawnedActors[6].selection = g_SpawnedActors[6].counter_1C;
             }
         }
     }
@@ -169,6 +169,3 @@ NON_MATCHING void func_801DCFD0(void) {
     }
     UI_CursorDraw(0xA8, (u16)(g_SpawnedActors[6].selection * FISHING_ACCESSORY_ROW_HEIGHT + 0x5A), 0);
 }
-#else
-INCLUDE_ASM(func_801DCFD0);
-#endif
