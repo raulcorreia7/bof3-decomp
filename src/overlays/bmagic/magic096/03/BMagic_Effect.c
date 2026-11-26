@@ -303,7 +303,7 @@ MATCH void func_801F0164(void) {
     u8 i;
 
     MAGIC096_SUM_X = MAGIC096_SUM_Y = MAGIC096_SUM_Z = MAGIC096_SUM_COUNT = 0;
-    if (g_Battle.target_selector & 0x40) {
+    if (g_Battle.target_selector & BATTLE_TARGET_ENEMY_SIDE) {
         for (i = 0; i < 8; i++) {
             if (Battle_SlotIsBlocked((u8)(i + 3)) == 0) {
                 MAGIC096_SUM_X += (g_BattleEnemyBattlers[i].pos.x.fixed >> 9) - AREA_CELL_ORIGIN;

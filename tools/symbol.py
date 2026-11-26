@@ -27,7 +27,7 @@ prototype and use, `config/` references, and the unit file `OLD.c` (`git mv`). I
 `config/attempts.jsonl`: the history keeps the names it was written with. It writes the
 row of config/symbols/<image>.toml: a new row for an address name (`--source` describes the symbol), or the
 renamed key of an existing row. Naming an address replaces the row already keyed with its address
-name, so no key repeats. An address name (`func_<ADDR>`, `D_<ADDR>`) stays in a comment
+name and keeps its `type`, `size` and `alias` unless `--type` or `--size` set them. An address name (`func_<ADDR>`, `D_<ADDR>`) stays in a comment
 above its definition and declaration. A named symbol is one name in every image: with no
 `--image` its row is renamed in every table that has it. An address name is unique only per
 image, so give `--image` once per image that holds the twin; `--local` limits the files to those

@@ -10,7 +10,7 @@ constants and enums several records share; one block per record in table order (
 follow their struct: `ASSERT_OFFSET` in offset order, then `ASSERT_SIZE`.
 
 Every header that carries a guard names it from its target: `include/common/util.h` is
-`COMMON_UTIL_H`, a group-wide header `src/overlays/plchar/shared/Char_Foo.h` is `PLCHAR_CHAR_FOO_H`, and an image
+`COMMON_UTIL_H`, a group-wide header starts with `SHARED_`, so `src/overlays/plchar/shared/Char_Foo.h` is `SHARED_CHAR_FOO_H`, and an image
 header is `OVERLAY_<GROUP>_<ARCHIVE>_<SLOT>_H` from its target id, so `emi/world02/area104/14` is
 `OVERLAY_WORLD02_AREA104_14_H`. A shared body header has no guard.
 
@@ -305,13 +305,17 @@ Adjacent globals that form one record are [one struct or array](conventions.md#g
 
 One name per address per image. A second name for one address (a width or `volatile` view) is a cast
 macro, not a second `extern`. A cast macro that names the object itself keeps the bytes
-(`#define g_Task ((T *)g_Task)`); an address-taking view hoists the address and changes them.
+(`TASK(Type)` is `((Type*)g_Task)`); an address-taking view hoists the address and changes them.
 
-- `g_Task` is the pointer cell at `0x1F800044`: one `extern struct Task *g_Task;` in
-  `include/psx/mem.h`. `struct Task` is incomplete, so no member is reachable without a view. Each
-  mode header views the cell as its work record through a cast macro. Code with no record type reads
-  bytes through `TASK_BYTES[n]`, and assigns the cell with `(struct Task *)`. An image that reads
-  it as `volatile` defines `FAKE_DECL_TASK_VOLATILE` before the first include.
+- `g_Task` is the scratchpad cell at `0x1F800044`: the record whose handler is running. A dispatcher
+  sets it before each handler (`Actor_DispatchAll`, `Party_RunFrame`, `Battle_UpdateEffects`); code that
+  runs another record's handler saves it first and restores it after. The record's type follows the
+  mode (`Actor` on the field, `PartyMember` for a battler, the effect's own record in a spell effect,
+  `FishingState` while fishing), so `struct Task` in `include/psx/mem.h` is incomplete and no member is
+  reachable without a view. Read `TASK(Type)->member`; set `TASK_SET(record)`; save and restore through a
+  typed local or `TASK(void)`; read the bytes of a record with no type through `TASK_BYTES[n]`, which
+  `check-tree` rejects in new lines: a new record gets a type. An image that reads it as `volatile`
+  defines `FAKE_DECL_TASK_VOLATILE` before the first include.
 - Task header: every record the cell points at starts with the same three bytes: `flags` (0x00),
   `mode` (0x01) and `step` (0x02). A type with a `u8` there uses these names, not `unk_01` or
   `state_02`. Per-object scratch (fishing, a boss) is a union at the record's tail, one view per
