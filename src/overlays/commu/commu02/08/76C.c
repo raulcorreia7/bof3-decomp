@@ -2504,12 +2504,12 @@ MATCH void func_801D9348(u16 x, u16 y, s32 color, s32 frame_mode) {
 
 /* Draws one page of the name-entry letter grid in a window at (left, top) and its cursor. */
 // clang-format off
-MATCH void func_801D94D0(page, left, top, cursor_col_arg, cursor_row_arg)
+MATCH void func_801D94D0(page, left, top, cursor_col, cursor_row)
 u8 page;
 s16 left;
-s32 top;
-s32 cursor_col_arg;
-s32 cursor_row_arg;
+u16 top;
+u8 cursor_col;
+u8 cursor_row;
 // clang-format on
 {
     u8  tags[20];
@@ -2518,17 +2518,11 @@ s32 cursor_row_arg;
     u16 y;
     u16 row;
     u16 col;
-    u16 base_y;
-    u8  cursor_col;
-    u8  cursor_row;
 
-    base_y     = top;
-    cursor_col = cursor_col_arg;
-    cursor_row = cursor_row_arg;
     memcpy(tags, D_801D0C3C, 20);
-    UI_WindowDraw(left, base_y, 0x110, 123, 0, g_WindowStyle);
+    UI_WindowDraw(left, top, 0x110, 123, 0, g_WindowStyle);
     cell = D_801DAAAC[page][0];
-    y    = base_y + 6;
+    y    = top + 6;
     for (row = 0; row < 8; row++) {
         x = left + 4;
         for (col = 0; col < 12; col++) {
@@ -2560,7 +2554,7 @@ s32 cursor_row_arg;
         y += 14;
     }
     x = left + 6 + cursor_col * 20;
-    y = base_y + 8;
+    y = top + 8;
     y += cursor_row * 14;
     if (cursor_col >= 5) {
         x += 8;
