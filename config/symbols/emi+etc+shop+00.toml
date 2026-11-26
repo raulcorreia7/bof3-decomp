@@ -81,11 +81,17 @@ Menu_SortAbilityStockByCostDescending = { addr = 0x801E1C88, type = "func", sour
 Menu_SortAbilityStockByCostAscending = { addr = 0x801E1D84, type = "func", source = "packs the ability stock, then orders it by the ability cost, lowest first" }
 Menu_IdleStep = { addr = 0x801E2800, type = "func", source = "the empty step-0 handler every shop panel state table starts with" }
 Menu_MessagePanel = { addr = 0x801E2808, type = "func", source = "panel mode 0 of the shop: the full-width header bar with a message" }
+UI_PanelSlideOutTask_801E2948 = { addr = 0x801E2948, type = "func", source = "same body as emi/etc/game/00@0x80199938 UI_PanelSlideOutTask" }
+UI_PanelSlideInTaskTop_801E2988 = { addr = 0x801E2988, type = "func", source = "same body as emi/etc/game/00@0x80199978 UI_PanelSlideInTaskTop" }
 Menu_CommandsPanel = { addr = 0x801E29C8, type = "func", source = "panel mode 2 of the shop: the command row" }
+UI_PanelSlideOutTask_801E2A30 = { addr = 0x801E2A30, type = "func", source = "same body as emi/etc/game/00@0x80199938 UI_PanelSlideOutTask" }
+Menu_AdvancePanelY = { addr = 0x801E2A70, type = "func", source = "same body as emi/etc/shisu/00@0x801D320C Menu_AdvancePanelY" }
 Menu_ZennyPanel = { addr = 0x801E2AB0, type = "func", source = "panel mode 1 of the shop: the zenny window" }
+Menu_AdvancePanelY_801E2B54 = { addr = 0x801E2B54, type = "func", source = "same body as emi/etc/shisu/00@0x801D320C Menu_AdvancePanelY" }
 UI_CursorDrawPanel = { addr = 0x801E2B94, type = "func", source = "Draws the menu panel cursor at the x and y of the current task root through UI_CursorDraw." }
 Menu_CursorFramePanel = { addr = 0x801E2BC4, type = "func", source = "panel mode 4 of the shop: the frame drawn around the selected entry" }
 Menu_EquipStatPanel = { addr = 0x801E2C18, type = "func", source = "panel mode 5 of the shop: the equipment stat window" }
+Menu_RetreatPanelX_801E2C9C = { addr = 0x801E2C9C, type = "func", source = "same body as emi/etc/shop/00@0x801E2E30 Menu_RetreatPanelX" }
 Menu_EquipmentPanel = { addr = 0x801E2DB4, type = "func", source = "panel mode 6 of the shop: the equipment window" }
 Menu_RetreatPanelX = { addr = 0x801E2E30, type = "func", source = "Picks a random live target by formation weight." }
 Menu_ItemsPanel = { addr = 0x801E2EB0, type = "func", source = "panel mode 7 of the shop: the item list" }
@@ -96,6 +102,7 @@ UI_PanelSlideOutOption_801E3774 = { addr = 0x801E3774, type = "func", source = "
 UI_PanelSlideOutOption_801E3BF8 = { addr = 0x801E3BF8, type = "func", source = "same body as emi/etc/game/00@0x801996FC UI_PanelSlideOutOption" }
 UI_PanelSlideOutOption_801E3D4C = { addr = 0x801E3D4C, type = "func", source = "same body as emi/etc/game/00@0x801996FC UI_PanelSlideOutOption" }
 Menu_CharacterPanel = { addr = 0x801E3E4C, type = "func", source = "panel mode 13 of the shop: the character window" }
+Menu_RetreatPanelX_801E3EB4 = { addr = 0x801E3EB4, type = "func", source = "same body as emi/etc/shop/00@0x801E2E30 Menu_RetreatPanelX" }
 UI_PanelSlideOutOption_801E438C = { addr = 0x801E438C, type = "func", source = "same body as emi/etc/game/00@0x801996FC UI_PanelSlideOutOption" }
 UI_PanelSlideOutOption_801E4540 = { addr = 0x801E4540, type = "func", source = "same body as emi/etc/game/00@0x801996FC UI_PanelSlideOutOption" }
 Party_HasSkill = { addr = 0x801E4D4C, type = "func", source = "Returns whether item_id is in the seven character item rows or the 128-entry item list." }

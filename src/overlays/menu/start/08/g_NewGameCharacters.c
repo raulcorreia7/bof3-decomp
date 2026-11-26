@@ -419,18 +419,18 @@ Callback g_MenuStartPanelModes[MENU_START_MODE_COUNT] = {Menu_CharacterPanel, Me
 Callback g_MenuStartCharacterSteps[MENU_START_PANEL0_STATE_COUNT] = {Menu_PanelIdle, func_801E8EA8, func_801E8EE8, func_801E8F28, func_801E8F68, func_801E8FA8, func_801E8FE8, func_801E9040, func_801E9080, UI_PanelSlideOutOption_801E90C0, func_801E9100};
 Callback g_MenuStartZennySteps[MENU_START_PANEL1_STATE_COUNT] = {Menu_PanelIdle, UI_PanelSlideOutOption_801E91A4, func_801E91E4};
 Callback g_MenuStartPlayTimeSteps[MENU_START_PANEL2_STATE_COUNT] = {Menu_PanelIdle, func_801E9284, func_801E92C4};
-Callback g_MenuStartCampIconsSteps[MENU_START_PANEL3_STATE_COUNT] = {Menu_PanelIdle, func_801E94D4, func_801E9514};
-Callback g_MenuStartTitleSteps[MENU_START_PANEL4_STATE_COUNT] = {Menu_PanelIdle, func_801E964C, func_801E968C};
+Callback g_MenuStartCampIconsSteps[MENU_START_PANEL3_STATE_COUNT] = {Menu_PanelIdle, UI_PanelSlideOutTask_801E94D4, func_801E9514};
+Callback g_MenuStartTitleSteps[MENU_START_PANEL4_STATE_COUNT] = {Menu_PanelIdle, UI_PanelSlideOutTask_801E964C, UI_PanelSlideInTaskTop_801E968C};
 Callback g_MenuStartStatsSteps[MENU_START_PANEL5_STATE_COUNT] = {Menu_PanelIdle, UI_PanelSlideOutOption_801E9748, func_801E9788, func_801E97E0, func_801E9820, func_801E9878, func_801E98B8};
 Callback g_MenuStartEquipmentSteps[MENU_START_PANEL6_STATE_COUNT] = {Menu_PanelIdle, UI_PanelSlideOutOption_801E9974, func_801E99B4};
 Callback g_MenuStartPanel7Steps[MENU_START_PANEL7_STATE_COUNT] = {Menu_PanelIdle, func_801E9A70, func_801E9AB0};
 Callback g_MenuStartPanel8Steps[MENU_START_PANEL8_STATE_COUNT] = {Menu_PanelIdle, func_801E9B6C, func_801E9BAC};
-Callback g_MenuStartMessageSteps[MENU_START_PANEL9_STATE_COUNT] = {Menu_PanelIdle, func_801E9D18, func_801E9D58};
+Callback g_MenuStartMessageSteps[MENU_START_PANEL9_STATE_COUNT] = {Menu_PanelIdle, UI_PanelSlideOutTask_801E9D18, UI_PanelSlideInTaskTop_801E9D58};
 /* The width and height of the frame the cursor-frame panel draws, by its frame type (panel task byte 0x0A). */
 CursorFrameSize g_MenuStartCursorFrames[4] = {{0x0110, 0x34}, {0x80, 0x34}, {0x44, 0x34}, {0x80, 0x30}};
 Callback g_MenuStartPanel11Steps[MENU_START_PANEL11_STATE_COUNT] = {Menu_PanelIdle, func_801E9EAC, func_801E9F04};
 Callback g_MenuStartInventorySteps[MENU_START_PANEL12_STATE_COUNT] = {Menu_PanelIdle, func_801E9FB0, func_801E9FF0, UI_PanelSlideOutOption_801EA030, UI_PanelSlideLeft};
-Callback g_MenuStartCommandsSteps[MENU_START_PANEL13_STATE_COUNT] = {Menu_PanelIdle, func_801EA118, Menu_AdvancePanelY};
+Callback g_MenuStartCommandsSteps[MENU_START_PANEL13_STATE_COUNT] = {Menu_PanelIdle, UI_PanelSlideOutTask_801EA118, Menu_AdvancePanelY};
 static u8 s_gap_801ED468[292] = {
     0x00, 0x00, 0x0B, 0x01, 0x00, 0x0C, 0x04, 0x00, 0x01, 0x05, 0x00, 0x01, 0x06, 0x00, 0x01, 0x07,
     0x00, 0x01, 0x08, 0x00, 0x01, 0x09, 0x00, 0x01, 0x0A, 0x00, 0x09, 0x0C, 0x00, 0x0A, 0x0D, 0x00,
@@ -452,14 +452,14 @@ static u8 s_gap_801ED468[292] = {
     0x01, 0x01, 0x00, 0x00, 0x00, 0x00, 0x03, 0x01, 0x07, 0x08, 0x00, 0x00, 0x03, 0x01, 0x07, 0x08,
     0x00, 0x00, 0x00, 0x00,
 };
-Callback g_MenuStartEquipCompareSteps[MENU_START_PANEL16_STATE_COUNT] = {Menu_PanelIdle, func_801EA598, func_801EA5D8, func_801EA618, func_801EA658};
-Callback g_MenuStartAbilitiesSteps[MENU_START_PANEL17_STATE_COUNT] = {Menu_PanelIdle, func_801EA6EC, func_801EA72C, func_801EA76C, func_801EA7AC};
-Callback g_MenuStartPanel18Steps[MENU_START_PANEL18_STATE_COUNT] = {Menu_PanelIdle, func_801EA840, func_801EA880, func_801EA8C0, func_801EA900};
-Callback g_MenuStartPanel19Steps[MENU_START_PANEL19_STATE_COUNT] = {Menu_PanelIdle, func_801EA994, func_801EA9D4};
+Callback g_MenuStartEquipCompareSteps[MENU_START_PANEL16_STATE_COUNT] = {Menu_PanelIdle, UI_PanelSlideOutOption_801EA598, func_801EA5D8, func_801EA618, func_801EA658};
+Callback g_MenuStartAbilitiesSteps[MENU_START_PANEL17_STATE_COUNT] = {Menu_PanelIdle, UI_PanelSlideOutOption_801EA6EC, func_801EA72C, func_801EA76C, func_801EA7AC};
+Callback g_MenuStartPanel18Steps[MENU_START_PANEL18_STATE_COUNT] = {Menu_PanelIdle, func_801EA840, func_801EA880, UI_PanelSlideOutOption_801EA8C0, func_801EA900};
+Callback g_MenuStartPanel19Steps[MENU_START_PANEL19_STATE_COUNT] = {Menu_PanelIdle, UI_PanelSlideOutOption_801EA994, func_801EA9D4};
 static u8 s_gap_801ED5D4[16] = {
     0xFF, 0xFF, 0xA0, 0x62, 0x00, 0x00, 0x00, 0x00, 0x64, 0x88, 0x81, 0x88, 0x00, 0x00, 0x00, 0x00,
 };
-Callback g_MenuStartPanel20Steps[MENU_START_PANEL20_STATE_COUNT] = {Menu_PanelIdle, func_801EAF18, func_801EAF58};
+Callback g_MenuStartPanel20Steps[MENU_START_PANEL20_STATE_COUNT] = {Menu_PanelIdle, UI_PanelSlideOutOption_801EAF18, func_801EAF58};
 static u8 s_gap_801ED5F0[32] = {
     0x00, 0x00, 0x0B, 0x01, 0x00, 0x14, 0x02, 0x00, 0x0C, 0x00, 0x00, 0xFF, 0x0F, 0x00, 0x09, 0x11,
     0x00, 0x0A, 0x12, 0x00, 0x15, 0x00, 0x00, 0xFF, 0x47, 0x45, 0x4E, 0x45, 0x00, 0x66, 0x6C, 0x61,

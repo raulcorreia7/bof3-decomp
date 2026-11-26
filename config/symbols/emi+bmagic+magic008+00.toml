@@ -22,6 +22,7 @@ D_801EECAC = { addr = 0x801EECAC, type = "Magic008EarlySteps", source = "Seven s
 D_801EECC8 = { addr = 0x801EECC8, type = "Magic008Steps", source = "Ten step handlers of the magic008 effect, copied to the stack and run by header.step (byte 0x02) from func_801F1708." }
 Effect_StartPlaying = { addr = 0x801EEFDC, type = "func", source = "Raises BATTLE_STATE_EFFECT_PLAYING and clears the effect work record in magic008 (Gambit, Mind Flay, Blind…)." }
 Effect_PlayOnce = { addr = 0x801EF010, type = "func", source = "Plays the effect the target selector chose, raises BATTLE_STATE_EFFECT_PLAYING and clears the effect in magic008 (Gambit, Mind Flay, Blind…)." }
+BMagic_ChargeEnd = { addr = 0x801EF6AC, type = "func", source = "same body as emi/bmagic/magic015/00@0x801EF150 BMagic_ChargeEnd" }
 Effect_StartPlaying3 = { addr = 0x801EF728, type = "func", source = "Raises BATTLE_STATE_EFFECT_PLAYING and clears the effect work record in magic008 (Gambit, Mind Flay, Blind…)." }
 Effect_StartPlaying5 = { addr = 0x801EFA40, type = "func", source = "Raises BATTLE_STATE_EFFECT_PLAYING and clears the effect work record in magic008 (Gambit, Mind Flay, Blind…)." }
 Effect_StartPlaying7 = { addr = 0x801EFCFC, type = "func", source = "Raises BATTLE_STATE_EFFECT_PLAYING and clears the effect work record in magic008 (Gambit, Mind Flay, Blind…)." }

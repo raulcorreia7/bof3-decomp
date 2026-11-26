@@ -3,27 +3,27 @@
 // clang-format off
 void (*g_ShopMessageSteps[SHOP_PANEL0_STATE_COUNT])() = {
     Menu_IdleStep,
-    func_801E2948,
-    func_801E2988,
+    UI_PanelSlideOutTask_801E2948,
+    UI_PanelSlideInTaskTop_801E2988,
 };
 
 Callback g_ShopCommandsSteps[SHOP_PANEL2_STATE_COUNT] = {
     Menu_IdleStep,
-    func_801E2A30,
-    func_801E2A70,
+    UI_PanelSlideOutTask_801E2A30,
+    Menu_AdvancePanelY,
 };
 
 Callback g_ShopZennySteps[SHOP_PANEL1_STATE_COUNT] = {
     Menu_IdleStep,
     func_801E2B14,
-    func_801E2B54,
+    Menu_AdvancePanelY_801E2B54,
 };
 
 u16 D_801E5DD8[2] = { 0x0070, 0x0000 };
 
 Callback g_ShopEquipStatSteps[SHOP_PANEL5_STATE_COUNT] = {
     Menu_IdleStep,
-    func_801E2C9C,
+    Menu_RetreatPanelX_801E2C9C,
     func_801E2CDC,
     func_801E2D1C,
     func_801E2D5C,
@@ -81,7 +81,7 @@ Callback g_ShopPanel12Steps[SHOP_PANEL12_STATE_COUNT] = {
 
 Callback g_ShopCharacterSteps[SHOP_PANEL13_STATE_COUNT] = {
     Menu_IdleStep,
-    func_801E3EB4,
+    Menu_RetreatPanelX_801E3EB4,
     func_801E3EF4,
 };
 
