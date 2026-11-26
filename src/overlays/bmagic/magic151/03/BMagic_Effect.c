@@ -34,7 +34,7 @@ MATCH void BMagic_AccessionTransformUpdate(void) {
 }
 
 MATCH void func_801EEE38(void) {
-    Magic151Steps handlers;
+    BMagicAccessionStageSteps handlers;
 
     handlers = g_BMagicAccessionSoloSteps;
     SYS_DISPATCH_TASK(handlers.steps, 3, g_Task);
@@ -86,8 +86,8 @@ MATCH void BMagic_AccessionCastWait(void) {
     TASK(PartyMember)->unk_03 += 1;
 }
 
-/* Loads the character archive the active battler's facing selects from the dragon-form row when the effect
- * ticker is one, then advances byte 0x03. */
+/* Loads the character archive the active battler's facing selects from the dragon-form row once the sequence has
+ * marked the task ready (byte 0x0B is 1), then advances byte 0x03. */
 /* func_801EF070 */
 MATCH void BMagic_AccessionSoloLoad(void) {
     s32 archive_id;
@@ -144,14 +144,14 @@ MATCH void BMagic_AccessionTransformEnd(void) {
 }
 
 MATCH void func_801EF318(void) {
-    Magic151Steps handlers;
+    BMagicAccessionStageSteps handlers;
 
     handlers = g_BMagicAccessionMergeSteps;
     SYS_DISPATCH_TASK(handlers.steps, 3, g_Task);
 }
 
-/* When the effect ticker is one, marks every party member's handler busy and loads the dragon-form archive
- * the battler's facing selects. */
+/* Once the sequence has marked the task ready (byte 0x0B is 1), marks every party member's handler busy and loads the
+ * dragon-form archive the battler's facing selects. */
 /* func_801EF388 */
 MATCH void BMagic_AccessionMergeLoad(void) {
     s32 archive_id;
@@ -264,7 +264,7 @@ MATCH void BMagic_AccessionSequenceUpdate(void) {
 }
 
 /* func_801EFAAC */
-MATCH void BMagic_AccessionSequenceBands(void) {
+MATCH void BMagic_AccessionSequenceSpawnBand(void) {
     PartyMember* work;
     s32          y;
     u32          slot;
@@ -287,7 +287,7 @@ MATCH void BMagic_AccessionSequenceBands(void) {
 }
 
 /* func_801EFBAC */
-MATCH void BMagic_AccessionSequenceGlow(void) {
+MATCH void BMagic_AccessionSequenceSpawnGlow(void) {
     u8           count;
     u32          slot;
     PartyMember* work;
@@ -306,7 +306,7 @@ MATCH void BMagic_AccessionSequenceGlow(void) {
 }
 
 /* func_801EFC68 */
-MATCH void BMagic_AccessionSequenceDome(void) {
+MATCH void BMagic_AccessionSequenceSpawnDome(void) {
     PartyMember* work;
     PartyMember* task;
     u32          slot;
@@ -393,7 +393,7 @@ MATCH void func_801EFF44(void) {
 }
 
 /* func_801EFF94 */
-MATCH void BMagic_AccessionDomeRays(void) {
+MATCH void BMagic_AccessionDomeSpawnRays(void) {
     u32          slot;
     PartyMember* work;
 
@@ -554,8 +554,8 @@ MATCH void BMagic_AccessionDrawFlare(void) {
     }
 }
 
-/* Draws the glow ring step header.step selects: sets the actor matrix, advances the effect timers and
- * passes the slot's draw row to BMagic_AccessionDrawRay while the step is running. */
+/* Runs the ray's step; once it has started sets the actor matrix, advances the ray's angle by 2 and its phase by 1
+ * and draws it at its row of g_BMagicAccessionRayAngles. */
 /* func_801F0AC8 */
 MATCH void BMagic_AccessionRayUpdate(void) {
     PartyMember* work;
@@ -617,7 +617,7 @@ MATCH void BMagic_AccessionRayFade(void) {
 }
 
 /* func_801F0D0C */
-MATCH void BMagic_AccessionDrawRay(u8 angle0, u8 angle1) {
+MATCH void BMagic_AccessionDrawRay(u8 azimuth, u8 polar) {
     LINE_F2* prim;
     long     depth;
     long     flag;
@@ -628,21 +628,21 @@ MATCH void BMagic_AccessionDrawRay(u8 angle0, u8 angle1) {
 
     g_ScratchPad.cells.halves[5] = (s8)TASK(PartyMember)->unk_5D * 12;
     g_ScratchPad.cells.halves[0] = 0x200;
-    g_ScratchPad.cells.halves[1] = FIXED_MUL(rsin(angle1 << 4), g_ScratchPad.cells.halves[0]);
-    setVector(&g_ScratchPadVectors[1], FIXED_MUL(rsin(angle0 << 4), g_ScratchPad.cells.halves[1]), FIXED_MUL(rcos(angle0 << 4), g_ScratchPad.cells.halves[1]),
-              FIXED_MUL(rcos(angle1 << 4), g_ScratchPad.cells.halves[0]));
+    g_ScratchPad.cells.halves[1] = FIXED_MUL(rsin(polar << 4), g_ScratchPad.cells.halves[0]);
+    setVector(&g_ScratchPadVectors[1], FIXED_MUL(rsin(azimuth << 4), g_ScratchPad.cells.halves[1]), FIXED_MUL(rcos(azimuth << 4), g_ScratchPad.cells.halves[1]),
+              FIXED_MUL(rcos(polar << 4), g_ScratchPad.cells.halves[0]));
     for (i = 0; i < TASK(PartyMember)->timer; i++) {
         g_ScratchPadVectors[0].vx    = g_ScratchPadVectors[1].vx;
         g_ScratchPadVectors[0].vy    = g_ScratchPadVectors[1].vy;
         g_ScratchPadVectors[0].vz    = g_ScratchPadVectors[1].vz;
         g_ScratchPad.cells.halves[2] = RANDOM_MASK(3) + 4;
         g_ScratchPad.cells.halves[7] = ((TASK(PartyMember)->unk_0C + i) & 0x1F) * 128;
-        g_ScratchPad.cells.halves[7] = (angle1 + FIXED_MUL(rsin(g_ScratchPad.cells.halves[7]), g_ScratchPad.cells.halves[2])) << 4;
+        g_ScratchPad.cells.halves[7] = (polar + FIXED_MUL(rsin(g_ScratchPad.cells.halves[7]), g_ScratchPad.cells.halves[2])) << 4;
         g_ScratchPad.cells.halves[1] = FIXED_MUL(rsin(g_ScratchPad.cells.halves[7]), g_ScratchPad.cells.halves[0]);
         g_ScratchPadVectors[1].vz    = FIXED_MUL(rcos(g_ScratchPad.cells.halves[7]), g_ScratchPad.cells.halves[0]);
-        angle0 += RANDOM_MASK(7);
-        g_ScratchPadVectors[1].vx = FIXED_MUL(rsin(angle0 << 4), g_ScratchPad.cells.halves[1]);
-        g_ScratchPadVectors[1].vy = FIXED_MUL(rcos(angle0 << 4), g_ScratchPad.cells.halves[1]);
+        azimuth += RANDOM_MASK(7);
+        g_ScratchPadVectors[1].vx = FIXED_MUL(rsin(azimuth << 4), g_ScratchPad.cells.halves[1]);
+        g_ScratchPadVectors[1].vy = FIXED_MUL(rcos(azimuth << 4), g_ScratchPad.cells.halves[1]);
         x                         = (g_ScratchPadVectors[1].vx << 9) + TASK(PartyMember)->pos.x.fixed;
         y                         = (g_ScratchPadVectors[1].vy << 9) + TASK(PartyMember)->pos.y.fixed;
         tpage                     = getTPage(TPAGE_DEPTH_4BIT, TASK(PartyMember)->param.unk_0B, 320, 256);
@@ -709,7 +709,7 @@ MATCH void BMagic_AccessionBandGrow(void) {
 
 #include "overlays/bmagic/shared/Effect_SetActorMatrixQuarterRoll.h"
 
-/* Draws seventeen steps of four quads: the ring sways with the effect counter and its radius jitters by jitter_mask. */
+/* Draws seventeen steps of four quads: the ring sways with its phase (param byte 0x0B) and its radius jitters by jitter_mask. */
 /* func_801F14D0 */
 MATCH void BMagic_AccessionDrawBand(s16 band_height, s16 radius, u16 jitter_mask) {
     POLY_G4* prim;

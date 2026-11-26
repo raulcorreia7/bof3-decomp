@@ -18,27 +18,28 @@ typedef enum BMagicAccessionEffectMode {
     BMAGIC_ACCESSION_EFFECT_SEQUENCE
 } BMagicAccessionEffectMode;
 
-#define MAGIC151_STEP_COUNT 5
+/* The steps of a stage of the transformation. */
+#define BMAGIC_ACCESSION_STAGE_STEP_COUNT 5
 
-typedef struct Magic151Steps {
-    Callback steps[MAGIC151_STEP_COUNT];
-} Magic151Steps;
+typedef struct BMagicAccessionStageSteps {
+    Callback steps[BMAGIC_ACCESSION_STAGE_STEP_COUNT];
+} BMagicAccessionStageSteps;
 
 /* The palette row the battle load copies. */
-extern BattlePanel   D_80148332[];
+extern BattlePanel               D_80148332[];
 /* The panel x offsets by scroll direction. */
-extern s8            D_801EAEA4[];
+extern s8                        D_801EAEA4[];
 /* The panel x and y offsets of each battler facing, two bytes a facing. */
-extern s8            D_801EB0B0[];
-extern s8            D_801EB0B1[];
+extern s8                        D_801EB0B0[];
+extern s8                        D_801EB0B1[];
 /* The staged encounter origin and ground height. */
-extern s32           D_801EC364;
-extern s32           D_801EC368;
-extern s32           D_801EC36C;
+extern s32                       D_801EC364;
+extern s32                       D_801EC368;
+extern s32                       D_801EC36C;
 /* D_801EEC10 */
-extern Magic151Steps g_BMagicAccessionSoloSteps;
+extern BMagicAccessionStageSteps g_BMagicAccessionSoloSteps;
 /* D_801EEC24 */
-extern Magic151Steps g_BMagicAccessionMergeSteps;
+extern BMagicAccessionStageSteps g_BMagicAccessionMergeSteps;
 
 /* D_801EEC38 */
 extern BMagicEffectSteps g_BMagicAccessionSequenceSteps;
