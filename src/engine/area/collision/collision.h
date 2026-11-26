@@ -32,10 +32,32 @@ s32  Area_CellIsBlocked(s16 cell_x, s16 cell_y);
 void Area_Climb(void);
 /* func_801B32D0 */
 void Area_ClimbMount(void);
+/* func_801B3314 */
+void Area_ClimbMountApproachBeginStep(void);
+/* func_801B3388 */
+void Area_ClimbMountApproachStep(void);
+/* func_801B33C4 */
+void Area_ClimbMountTurnStep(void);
+/* func_801B3400 */
+void Area_ClimbMountTurnWaitStep(void);
+/* func_801B343C */
+void Area_ClimbMountLowerStep(void);
 /* func_801B3488 */
 void Area_ClimbLadder(void);
 /* func_801B3540 */
 void Area_ClimbDismount(void);
+/* func_801B3584 */
+void Area_ClimbDismountBeginStep(void);
+/* func_801B35B0 */
+void Area_ClimbDismountRiseStep(void);
+/* func_801B35EC */
+void Area_ClimbDismountExitBeginStep(void);
+/* func_801B3670 */
+void Area_ClimbDismountExitStep(void);
+/* func_801BD7F8 */
+void Area_ClimbFollower(void);
+/* func_801BD83C */
+void Area_ClimbFollowerLadder(void);
 /* func_801C4D1C */
 void Area_ClimbStartGrab(void);
 /* func_801C4D58 */
@@ -62,27 +84,5 @@ void Area_ClimbUp(void);
 void Area_ClimbDown(void);
 /* func_801C56E4 */
 void Area_ClimbJumpOff(void);
-/* func_801B3314 */
-void Area_ClimbMountApproachBeginStep(void);
-/* func_801B3388 */
-void Area_ClimbMountApproachStep(void);
-/* func_801B33C4 */
-void Area_ClimbMountTurnStep(void);
-/* func_801B3400 */
-void Area_ClimbMountTurnWaitStep(void);
-/* func_801B343C */
-void Area_ClimbMountLowerStep(void);
-/* func_801B3584 */
-void Area_ClimbDismountBeginStep(void);
-/* func_801B35B0 */
-void Area_ClimbDismountRiseStep(void);
-/* func_801B35EC */
-void Area_ClimbDismountExitBeginStep(void);
-/* func_801B3670 */
-void Area_ClimbDismountExitStep(void);
-/* func_801BD7F8 */
-void Area_ClimbFollower(void);
-/* func_801BD83C */
-void Area_ClimbFollowerLadder(void);
 
 #endif
