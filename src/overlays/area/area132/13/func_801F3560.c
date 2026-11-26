@@ -29,8 +29,7 @@ NON_MATCHING void func_801F3560(AreaSpawnSlot* slot) {
     size[1] = FAKE_VOLATILE(u16, slot->radius);
     Game_ProjectWorldPoint(object, size, size);
 
-    setXY4(primitive, screen.vx - ((s16)size[0] >> 1), screen.vy - ((s16)size[1] >> 1), (screen.vx - ((s16)size[0] >> 1)) + size[0], screen.vy - ((s16)size[1] >> 1), screen.vx - ((s16)size[0] >> 1),
-           (screen.vy - ((s16)size[1] >> 1)) + size[1], (screen.vx - ((s16)size[0] >> 1)) + size[0], (screen.vy - ((s16)size[1] >> 1)) + size[1]);
+    setXYWH(primitive, screen.vx - ((s16)size[0] >> 1), screen.vy - ((s16)size[1] >> 1), size[0], size[1]);
     setUV4(primitive, 224, 48, 255, 48, 224, 79, 255, 79);
     primitive->clut  = GetClut(160, STAGE_PALETTE_Y + 3);
     primitive->tpage = GetTPage(TPAGE_DEPTH_4BIT, TPAGE_ABR_SUB, 704, 256);
