@@ -27,7 +27,7 @@ void func_801F2CB0(void);
 void func_801F2D5C(void);
 void func_801F2DB4(void);
 void func_801F2DD8(void);
-void func_801F2DF8(const AreaSprite* sprite);
+void func_801F2DF8(AreaSprite* sprite);
 void func_801F2FD4(AreaSprite* sprite);
 void func_801F3080(void);
 s32  func_801F30EC(void);

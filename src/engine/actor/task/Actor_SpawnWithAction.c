@@ -5,11 +5,10 @@
 /* func_801A5EFC */
 /* Spawns an actor from a type 4 setup record: byte 0x10 is the area action index, not a route row. */
 MATCH void Actor_SpawnWithAction(u8* script) {
-    s16*   counter = (s16*)&g_ScratchPad;
     s16    slot;
     Actor* work;
 
-    slot = *counter;
+    slot = g_ScratchPad.cells.halves[0];
     if (slot >= ENTITY_MAX) {
         return;
     }
@@ -26,16 +25,12 @@ MATCH void Actor_SpawnWithAction(u8* script) {
 
     /* The outer shadow assignment forms the slot offset before the position
      * flag test, as retail schedules it. */
-    work                           = TASK(Actor);
-    g_Actors[*counter].walk_dest_x = work->pos.x.fixed = (script[7] << 16) | (script[6] != 0 ? 0x8000 : 0);
-    /* FAKE: forces the counter re-read before the next shadow store. */
-    FAKE_BARRIER();
+    work                                               = TASK(Actor);
+    g_Actors[g_ScratchPad.cells.halves[0]].walk_dest_x = work->pos.x.fixed = (script[7] << 16) | (script[6] != 0 ? 0x8000 : 0);
 
-    g_Actors[*counter].walk_dest_y = work->pos.y.fixed = (script[9] << 16) | (script[8] != 0 ? 0x8000 : 0);
-    /* FAKE: forces the counter re-read before the next shadow store. */
-    FAKE_BARRIER();
+    g_Actors[g_ScratchPad.cells.halves[0]].walk_dest_y = work->pos.y.fixed = (script[9] << 16) | (script[8] != 0 ? 0x8000 : 0);
 
-    g_Actors[*counter].unk_88 = 0;
+    g_Actors[g_ScratchPad.cells.halves[0]].unk_88 = 0;
 
     COORD_INT(TASK(Actor)->pos.z) = Area_HeightSample(work->pos.x.fixed, work->pos.y.fixed);
     TASK(Actor)->header.mode      = script[0xA];
@@ -44,13 +39,11 @@ MATCH void Actor_SpawnWithAction(u8* script) {
     TASK(Actor)->unk_06           = script[0] >> 4;
 
     /* The headers declare the per-slot columns D_80146914 and D_80146916 as scalars. */
-    FIELD(u16, &D_80146914, *counter * ACTOR_SIZE) = script[4];
-    FIELD(s16, &D_80146916, *counter * ACTOR_SIZE) = script[5];
-    g_Actors[*counter].unk_7C                      = script[0xF] | (script[0xE] << 8);
-    /* FAKE: forces the counter re-read before the next shadow store. */
-    FAKE_BARRIER();
-    g_Actors[*counter].unk_78 = script[0xB];
-    g_Actors[*counter].unk_94 = script[0x10];
+    FIELD(u16, &D_80146914, g_ScratchPad.cells.halves[0] * ACTOR_SIZE) = script[4];
+    FIELD(s16, &D_80146916, g_ScratchPad.cells.halves[0] * ACTOR_SIZE) = script[5];
+    g_Actors[g_ScratchPad.cells.halves[0]].unk_7C                      = script[0xF] | (script[0xE] << 8);
+    g_Actors[g_ScratchPad.cells.halves[0]].unk_78                      = script[0xB];
+    g_Actors[g_ScratchPad.cells.halves[0]].unk_94                      = script[0x10];
 
     Actor_SetOptionFlags(script + 0xD);
 
@@ -65,5 +58,5 @@ MATCH void Actor_SpawnWithAction(u8* script) {
 
     Actor_StartFacingScript();
 
-    (FAKE_VOLATILE(u16, g_ScratchPad)) = (FAKE_VOLATILE(u16, g_ScratchPad)) + 1;
+    g_ScratchPad.cells.halves[0]++;
 }

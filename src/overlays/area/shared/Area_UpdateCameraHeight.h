@@ -5,9 +5,9 @@ MATCH void Area_UpdateCameraHeight(void) {
 
     height = Area_HeightSample(g_Game.members[0].pos.x.fixed, g_Game.members[0].pos.y.fixed);
     if (g_AreaCameraHeight == height) {
-        height -= 0x20;
+        g_AreaCameraHeight = height - 0x20;
+    } else {
+        g_AreaCameraHeight = height;
     }
-    g_AreaCameraHeight = height;
-    FAKE_BARRIER(); /* FAKE: keeps the camera store above the refresh-count load */
     g_AreaCameraRefreshCount += 2;
 }

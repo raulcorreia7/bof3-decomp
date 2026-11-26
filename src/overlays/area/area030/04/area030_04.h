@@ -343,9 +343,6 @@ extern u8                    D_80144216;
 extern s32                   D_8014421C;
 /* The bite window's screen centre, a whole and a byte view of the same halfword. */
 extern s16                   D_8014423C;
-extern u8                    D_80144281;
-extern u8                    D_80144286;
-extern u8                    D_80144287;
 extern u8                    D_80144288;
 extern u8                    D_8014428A;
 extern u8                    D_8014428B;
