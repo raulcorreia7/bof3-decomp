@@ -31,10 +31,8 @@ extern u8            D_801F3F18[];
 extern u32           D_801F3F20[];
 extern s8            D_801F3F30[];
 
-/* The quad corner bytes: x, y and the signed depth of each corner. */
-extern u8 D_801F3F34[];
-extern u8 D_801F3F35[];
-extern u8 D_801F3F36[];
+/* The quad corner rows: four corners of x, y and depth bytes each. */
+extern u8 D_801F3F34[][4][3];
 
 /* The quad part word: the tag in the high half, the tile in the low half. */
 #define AREA106_QUAD_PART_WORD ((0xBB00u << 16) | 0x9120u)

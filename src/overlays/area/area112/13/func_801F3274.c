@@ -12,7 +12,11 @@ NON_MATCHING void func_801F3274(void) {
     AreaQuadPart* quad;
 
     part = D_801F4250[TASK(Actor)->pos.x.part.integer][0];
-    for (quad = &D_801F4294[part]; part < D_801F4250[TASK(Actor)->pos.x.part.integer][1]; part++, quad++) {
+    if (part >= D_801F4250[TASK(Actor)->pos.x.part.integer][1]) {
+        return;
+    }
+    while (part < D_801F4250[TASK(Actor)->pos.x.part.integer][1]) {
+        quad = &D_801F4294[part];
         prim = (POLY_FT4*)g_GfxPrimCursor;
         SetPolyFT4(prim);
         SetShadeTex(prim, 0);
@@ -33,6 +37,7 @@ NON_MATCHING void func_801F3274(void) {
         } else {
             Area_CellAddPrim(x.fixed, y.fixed, D_801F4240[quad->cell.packed & 0xFF][TASK(Actor)->header.step == 2], sizeof(POLY_FT4));
         }
+        part++;
     }
 }
 #else
