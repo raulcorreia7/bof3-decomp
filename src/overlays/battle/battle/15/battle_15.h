@@ -10,6 +10,7 @@
 #include "sys/exe.h"
 #include "menu/draw.h"
 #include "menu/clock.h"
+#include "menu/save_data.h"
 
 /* FAKE: the callers pass the counter as volatile and the delta as s32, which the real prototype (u16*, s16) lacks. */
 #define Char_AddStat                   ((s16 (*)(volatile u16*, s32))Char_AddStat)
@@ -220,6 +221,11 @@ typedef struct BattleTemplateStats {
     u32 defense[3]; /* 0x00 */
     u8  pad_0C[0x6C];
 } BattleTemplateStats;
+
+/* The same cell read without the reload is g_BattleWorkCell: Battle_CureStatus's
+ * save/restore keeps the plain word. A second name is the only form that keeps
+ * the retail `lui`/`sw` pairs; the address is an `alias:true` row of the image's table in config/symbols/<image>.toml. */
+extern u32 g_BattleWorkCell;
 
 #define BATTLE_EFFECT_STEP_COUNT 3
 
