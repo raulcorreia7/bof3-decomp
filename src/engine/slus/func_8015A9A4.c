@@ -9,6 +9,7 @@ NON_MATCHING void func_8015A9A4(void) {
     s16     sxy[2];
     Actor*  task;
     Actor*  actor;
+    Actor*  view;
     s32     dx;
     s32     dy;
     s32     sum;
@@ -48,8 +49,8 @@ NON_MATCHING void func_8015A9A4(void) {
     if (!(((u8*)TASK(Actor)->range_54.table)[3] & 0x10)) {
         Actor_ReadValue();
     }
-    actor = g_Task;
-    setVector(&vec, (actor->pos.x.fixed >> 9) - 0x4000, (actor->pos.y.fixed >> 9) - 0x4000, -COORD_INT(actor->pos.z) / 2);
+    view = g_Task;
+    setVector(&vec, (view->pos.x.fixed >> 9) - 0x4000, (view->pos.y.fixed >> 9) - 0x4000, -COORD_INT(view->pos.z) / 2);
     gte_ldv0(&vec);
     gte_rtps();
     gte_stsxy(sxy);

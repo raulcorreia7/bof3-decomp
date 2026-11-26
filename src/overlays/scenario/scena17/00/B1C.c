@@ -599,14 +599,13 @@ NON_MATCHING void func_801F8B10(s32 scale, s32 shade) {
     SetTransMatrix(&mtx);
     mode = getTPage(TPAGE_DEPTH_4BIT, TPAGE_ABR_SUB, 0, 0);
     GFX_ADD_DITHERED_DRAW_MODE(GFX_LAYER_EFFECT_FRONT, mode);
-    for (i = 0; i < 32;) {
+    for (i = 0; i < 32; i++) {
         a                         = i << 7;
         g_ScratchPadVectors[0].vx = 0;
         g_ScratchPadVectors[0].vy = 0;
         g_ScratchPadVectors[0].vz = 0;
         setVector(&g_ScratchPadVectors[1], (s16)FIXED_MUL(radius, rcos(a)), (s16)FIXED_MUL(radius, rsin(a)), 0);
-        i++;
-        b = i << 7;
+        b = (i + 1) << 7;
         setVector(&g_ScratchPadVectors[2], (s16)FIXED_MUL(radius, rcos(b)), (s16)FIXED_MUL(radius, rsin(b)), 0);
         tri = (POLY_G3*)g_GfxPrimCursor;
         setPolyG3(tri);
