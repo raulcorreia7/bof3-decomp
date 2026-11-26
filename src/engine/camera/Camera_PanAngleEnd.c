@@ -2,7 +2,7 @@
 
 /* func_8019AAFC */
 /* Sets the camera angle to the actor's angle, clears the camera-moving flag and frees the actor. */
-MATCH void Camera_PanAngleFinish(void) {
+MATCH void Camera_PanAngleEnd(void) {
     Actor* work;
     u8*    flags;
 

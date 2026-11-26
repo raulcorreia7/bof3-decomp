@@ -109,13 +109,13 @@ WorldMap_GetPoints = { addr = 0x8019A1D4, type = "func", source = "Returns map_p
 Camera_PanAngleRun = { addr = 0x8019A8B4, type = "func", source = "Actor type 0x13 step: runs g_CameraAnglePanModes[mode] and asks for two camera refreshes." }
 Camera_PanAngleStart = { addr = 0x8019A904, type = "func", source = "Mode 0 of g_CameraAnglePanModes: sets the per-frame step from the camera angle to the actor's angle over its timer." }
 Camera_PanAngleStep = { addr = 0x8019AA44, type = "func", source = "Mode 1 of g_CameraAnglePanModes: adds the step to the camera angle each frame until the timer runs out." }
-Camera_PanAngleFinish = { addr = 0x8019AAFC, type = "func", source = "Mode 2 of g_CameraAnglePanModes: sets the camera angle to the target, clears the camera-moving flag and frees the actor." }
+Camera_PanAngleEnd = { addr = 0x8019AAFC, type = "func", source = "Mode 2 of g_CameraAnglePanModes: sets the camera angle to the target, clears the camera-moving flag and frees the actor." }
 Scene_StepToggleLock = { addr = 0x8019AB5C, type = "func", source = "Actor type 4 step: counts its timer down, then clears scene flag 28 and frees the actor." }
 Scene_StartToggleLock = { addr = 0x8019ABB0, type = "func", source = "Sets scene flag 28 and spawns the type 4 actor that clears it after its layer byte counts of frames; callers test flag 28 before toggling a scene flag." }
 Camera_PanZoomRun = { addr = 0x8019AC34, type = "func", source = "Actor type 0x31 step: runs g_CameraZoomPanModes[mode] and asks for two camera refreshes." }
 Camera_PanZoomStart = { addr = 0x8019AC84, type = "func", source = "Mode 0 of g_CameraZoomPanModes: starts the angle pan and sets the step of g_AreaCameraOffsetZ toward the actor's target." }
 Camera_PanZoomStep = { addr = 0x8019ACF4, type = "func", source = "Mode 1 of g_CameraZoomPanModes: steps the angle pan and moves g_AreaCameraOffsetZ toward its target without passing it." }
-Camera_PanZoomFinish = { addr = 0x8019AD70, type = "func", source = "Mode 2 of g_CameraZoomPanModes: sets g_AreaCameraOffsetZ to the target and finishes the angle pan." }
+Camera_PanZoomEnd = { addr = 0x8019AD70, type = "func", source = "Mode 2 of g_CameraZoomPanModes: sets g_AreaCameraOffsetZ to the target and ends the angle pan." }
 Actor_TossRun = { addr = 0x8019ADA4, type = "func", source = "Actor type 0x32 step: runs the toss mode table at header.mode." }
 Actor_TossStart = { addr = 0x8019ADE8, type = "func", source = "Mode 0 of the toss modes: places the actor on the source actor's position, faces it like the leader, starts its route move and launches it." }
 Actor_TossLaunch = { addr = 0x8019AF1C, type = "func", source = "Mode 1 of the toss modes: when on the ground, offscreen or in mode 0, loads the rise speed and gravity of s_ActorTossArcs[step] and advances; then moves by its speeds under gravity." }
@@ -367,8 +367,8 @@ s_SceneHandlerIds = { addr = 0x801C809C, size = 0x8, source = "Scene handler id 
 D_801C80A4 = { addr = 0x801C80A4, size = 0x18, source = "The six handlers func_8019A53C runs by g_Task->unk_06: five share func_8019A580, one is func_8019A6AC and one func_8019A630." }
 D_801C80BC = { addr = 0x801C80BC, size = 0xC, source = "The three mode handlers func_8019A3FC, func_8019A848 and func_8019A7D4 that func_8019A804 runs by g_Task->header.mode." }
 D_801C80C8 = { addr = 0x801C80C8, size = 0x18, source = "The six handlers func_8019A848 runs by g_Task->unk_06, the same set as D_801C80A4." }
-g_CameraAnglePanModes = { addr = 0x801C80E0, source = "Indexed by header.mode in Camera_PanAngleRun: start, step, finish." }
-g_CameraZoomPanModes = { addr = 0x801C80EC, source = "Indexed by header.mode in Camera_PanZoomRun: start, step, finish." }
+g_CameraAnglePanModes = { addr = 0x801C80E0, source = "Indexed by header.mode in Camera_PanAngleRun: start, step, end." }
+g_CameraZoomPanModes = { addr = 0x801C80EC, source = "Indexed by header.mode in Camera_PanZoomRun: start, step, end." }
 g_ActorTossModes = { addr = 0x801C80F8, source = "Indexed by header.mode in Actor_TossRun: start, launch, fall, clear." }
 s_ActorTossArcs = { addr = 0x801C8108, source = "Actor_TossLaunch starts a toss at step 0..2 with its vertical speed in the first member and gravity in the second", size = 0x18 }
 D_801C810C = { addr = 0x801C810C, alias = true, source = "s_ActorTossArcs +0x4, folded into that table in #400" }

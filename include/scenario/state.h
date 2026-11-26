@@ -12,7 +12,7 @@
 /* g_ScenarioState.flags_01. Bit 0x01 is read by the script type 9 and by the Ryu pajama intro checks; its role is
  * not named. */
 typedef enum ScenarioStateFlags {
-    SCENARIO_STATE_CAMERA_MOVING   = 1 << 5, /* set when a camera move starts, cleared when it ends (Camera_PanAngleStart, Camera_PanAngleFinish) */
+    SCENARIO_STATE_CAMERA_MOVING   = 1 << 5, /* set when a camera move starts, cleared when it ends (Camera_PanAngleStart, Camera_PanAngleEnd) */
     SCENARIO_STATE_SCRIPT_ACTIVE   = 1 << 6, /* set with GAME_FLAG_SCRIPT_ACTIVE by Game_SetScriptActive */
     SCENARIO_STATE_CHAPTER_ADVANCE = 1 << 7, /* set by Scene_RequestChapterAdvance; Game_EnterArea steps the scenario */
 } ScenarioStateFlags;

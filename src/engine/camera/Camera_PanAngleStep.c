@@ -1,7 +1,7 @@
 #include "engine/game/00/game_00.h"
 
 /* func_8019AA44 */
-/* Adds the step to the camera angle for each of the timer frames, then moves to the finish mode. */
+/* Adds the step to the camera angle for each of the timer frames, then moves to the end mode. */
 MATCH void Camera_PanAngleStep(void) {
     Actor*  work;
     Angle3* angle;

@@ -281,9 +281,9 @@ Callback D_801C80BC[3] = {func_8019A3FC, func_8019A848, func_8019A7D4};
 
 Callback D_801C80C8[6] = {func_8019A580, func_8019A580, func_8019A580, func_8019A6AC, func_8019A580, func_8019A630};
 
-Callback g_CameraAnglePanModes[3] = {Camera_PanAngleStart, Camera_PanAngleStep, Camera_PanAngleFinish};
+Callback g_CameraAnglePanModes[3] = {Camera_PanAngleStart, Camera_PanAngleStep, Camera_PanAngleEnd};
 
-Callback g_CameraZoomPanModes[3] = {Camera_PanZoomStart, Camera_PanZoomStep, Camera_PanZoomFinish};
+Callback g_CameraZoomPanModes[3] = {Camera_PanZoomStart, Camera_PanZoomStep, Camera_PanZoomEnd};
 
 Callback g_ActorTossModes[4] = {Actor_TossStart, Actor_TossLaunch, Actor_TossFall, Actor_ClearSelf};
 
