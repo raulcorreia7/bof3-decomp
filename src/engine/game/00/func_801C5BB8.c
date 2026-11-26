@@ -1,7 +1,7 @@
 #include "game_00.h"
 
 MATCH void func_801C5BB8(void) {
-    u8* flags;
+    u8*  flags;
     s32* value;
 
     if (g_AreaCameraMoving == 0) {
