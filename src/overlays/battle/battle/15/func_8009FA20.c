@@ -19,12 +19,9 @@ MATCH void func_8009FA20(void) {
     D_801EC30C = value;
     /* FAKE: keeps the retail store before the scaled view's address setup. */
     FAKE_BARRIER();
-    LOHU(D_801EC30C) = LOHU(D_801EC30C) * 80 / 100;
-    battler_index    = g_Battle.active_battler;
-    selection_type   = g_Battle.target;
-    /* FAKE: keeps the whole-mask argument out of the load-delay path so
-     * it lands in the jal delay slot as retail has it. */
-    FAKE_BARRIER();
+    LOHU(D_801EC30C)                  = LOHU(D_801EC30C) * 80 / 100;
+    battler_index                     = g_Battle.active_battler;
+    selection_type                    = g_Battle.target;
     res                               = Battle_CalcDamage(battler_index, selection_type, BATTLE_ELEMENT_FROM_WEAPON);
     g_Battle.target_record->hp_change = res;
 }

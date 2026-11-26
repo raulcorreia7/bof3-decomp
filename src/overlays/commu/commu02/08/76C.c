@@ -1269,10 +1269,9 @@ MATCH void func_801D50E4(void) {
     if (g_SysThreads[2].state != 0) {
         return;
     }
-    bgm             = g_SndBGMId;
-    g_AreaDrawFlags = 0;
-    D_801DB0CC      = bgm;
-    FAKE_BARRIER(); /* FAKE: keeps the two flag stores ahead of the track table loads. */
+    bgm              = g_SndBGMId;
+    g_AreaDrawFlags  = 0;
+    D_801DB0CC       = bgm;
     selection_offset = bgm * BGM_TRACK_SIZE;
     SND_SeqStop(g_SelectionSepSlots[selection_offset], g_SelectionSequences[selection_offset]);
     SND_BGMRequest(0x67);

@@ -8,8 +8,6 @@ MATCH void func_801F3130(void) {
     work->interaction_flags &= ~ACTOR_INTERACTION_PENDING;
     work = g_CurrentActor;
     work->unk_7E++;
-    /* FAKE: retail keeps the request stores below the actor store. */
-    FAKE_BARRIER();
     g_ScenarioState.state_04 = 2;
     g_ScenarioState.step     = 0x19;
 }

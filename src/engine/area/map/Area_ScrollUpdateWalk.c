@@ -19,7 +19,5 @@ MATCH void Area_ScrollUpdateWalk(void) {
     g_AreaCameraSpeed           = product;
     g_AreaCamera.scroll_x.fixed = state->pos.x.fixed + state->vx * state->timer;
     g_AreaCamera.scroll_y.fixed = state->pos.y.fixed + state->vy * state->timer;
-    /* FAKE: barrier pins load after store. */
-    FAKE_BARRIER();
-    g_AreaCameraHeightDelta = state->vz;
+    g_AreaCameraHeightDelta     = state->vz;
 }
