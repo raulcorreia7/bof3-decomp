@@ -328,13 +328,13 @@ header reads the macro when it is first included; a later `#define` changes noth
 declarations has one name and gives a different qualifier or width, so a pair is not a duplicate to
 merge, and the macro is not a setting to move into a header.
 
-| Macro                                         | Header                  | Selects                                              |
-| --------------------------------------------- | ----------------------- | ---------------------------------------------------- |
-| `FAKE_DECL_TASK_VOLATILE`                     | `include/psx/mem.h`     | `volatile` view of `g_Task`                          |
-| `SCRIPT_VARS_VOLATILE`                        | `include/game/script.h` | `volatile u8 g_ScriptVars`                           |
-| `FAKE_DECL_GRAPHICS_PALETTE_PENDING_VOLATILE` | `include/slus/data.h`   | `volatile u8 g_GfxPalettePending`                    |
-| `FAKE_DECL_GAME_SCRATCH_BASE_WORD`            | `include/game/spawn.h`  | `s32 g_ScratchPad` in place of the `ScratchPad` view |
-| `ENGINE_LOCAL_DECLS`                          | engine module headers   | the prototypes only the executable and `game/00` see |
+| Macro                                         | Header                  | Selects                                               |
+| --------------------------------------------- | ----------------------- | ----------------------------------------------------- |
+| `FAKE_DECL_TASK_VOLATILE`                     | `include/psx/mem.h`     | `volatile` view of `g_Task`                           |
+| `SCRIPT_VARS_VOLATILE`                        | `include/game/script.h` | `volatile u8 g_ScriptVars`                            |
+| `FAKE_DECL_GRAPHICS_PALETTE_PENDING_VOLATILE` | `include/slus/data.h`   | `volatile u8 g_GfxPalettePending`                     |
+| `FAKE_DECL_GAME_SCRATCH_BASE_SCALAR`          | `include/game/spawn.h`  | `u8 g_ScratchPad[]` in place of the `ScratchPad` view |
+| `ENGINE_LOCAL_DECLS`                          | engine module headers   | the prototypes only the executable and `game/00` see  |
 
 ## Unit files
 
