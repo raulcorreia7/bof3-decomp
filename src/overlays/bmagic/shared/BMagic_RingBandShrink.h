@@ -1,13 +1,13 @@
-/* Raises the ticker and timer, lowers the counter by two and advances the step when it reaches 0x10. */
+/* Ring band mode 1: raises the phase (byte 0x0B) by 1 and the wave height (byte 0x0A) by 2 per frame while the radius step falls by 2; at BMAGIC_RING_BAND_SHRINK_LIMIT advances header.mode. */
 /* func_801EF09C (magic055), func_801EF09C (magic091) */
-MATCH void func_801EF09C(void) {
+MATCH void BMagic_RingBandShrink(void) {
     u8 counter;
 
     TASK(PartyMember)->param.unk_0B += 1;
     TASK(PartyMember)->timer += 2;
     counter                   = TASK(PartyMember)->unk_09 - 2;
     TASK(PartyMember)->unk_09 = counter;
-    if ((counter & BYTE_MASK) == 0x10) {
+    if ((counter & BYTE_MASK) == BMAGIC_RING_BAND_SHRINK_LIMIT) {
         TASK(PartyMember)->header.mode += 1;
     }
 }

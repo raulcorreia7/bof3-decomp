@@ -1,4 +1,4 @@
-/* Lowers the counter and raises the ticker and timer; when the timer reaches 0x10, sets the battler's ticker to 0xFF and runs the effect step. */
+/* Ring band mode that no mode reaches: lowers the radius step by 1 and raises the phase by 2 and the wave height by 1 per frame; at wave height 0x10 sets the live ring count of the task to 0xFF and resets the effect. */
 /* func_801EF1B8 (magic055), func_801EF1B8 (magic091) */
 MATCH void func_801EF1B8(void) {
     u8 timer;

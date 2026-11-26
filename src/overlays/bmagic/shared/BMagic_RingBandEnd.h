@@ -1,6 +1,6 @@
-/* Raises the effect ticker, drops the effect counter by three and counts the wait down by two; at zero it releases the battler's ticker and clears the effect. */
+/* Ring band mode 2: raises the phase by 1 and lowers the wave height by 3 per frame while the radius step falls by 2; at zero lowers the live ring count of the task and resets the effect. */
 /* func_801EF124 (magic055), func_801EF124 (magic091) */
-MATCH void func_801EF124(void) {
+MATCH void BMagic_RingBandEnd(void) {
     u8 count;
 
     TASK(PartyMember)->param.unk_0B += 1;
