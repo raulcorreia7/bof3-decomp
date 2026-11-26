@@ -48,7 +48,7 @@ MATCH u8* UI_TextDrawGlyphs(u8 palette, u8 byte_count, u8* text) {
                 glyph_y                      = ((*str + 0x5B) / 21) * 0xC;
                 ((SPRT*)g_GfxPrimCursor)->v0 = (shade + glyph_y);
                 setWH(((SPRT*)g_GfxPrimCursor), 8, height);
-                func_8014FB80(D_80145ACA, D_80145ACC, clut, shade);
+                UI_TextQueueGlyph(D_80145ACA, D_80145ACC, clut, shade);
                 D_80145ACA += 8;
                 break;
             case STRING_VAR:
@@ -65,7 +65,7 @@ MATCH u8* UI_TextDrawGlyphs(u8 palette, u8 byte_count, u8* text) {
                 glyph_y                      = (((*str - '0') / 31) * 0xC) + 0x48;
                 ((SPRT*)g_GfxPrimCursor)->v0 = (shade + glyph_y);
                 setWH(((SPRT*)g_GfxPrimCursor), 8, height);
-                func_8014FB80(D_80145ACA, D_80145ACC, clut, shade);
+                UI_TextQueueGlyph(D_80145ACA, D_80145ACC, clut, shade);
                 D_80145ACA += 8;
                 break;
         }
