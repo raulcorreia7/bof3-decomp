@@ -7,8 +7,8 @@ MATCH void Battle_StartFormRestore(void) {
     u8*          cells;
     u8           i;
 
-    saved                                               = TASK(PartyMember);
-    g_Task                                              = g_BattleEffectBattler;
+    saved = TASK(PartyMember);
+    TASK_SET(g_BattleEffectBattler);
     g_GameState                                         = &g_Game.members[TASK(PartyMember)->slot];
     TASK(PartyMember)->scale.x                          = 0;
     g_Game.members[TASK(PartyMember)->slot]             = s_BattleBattlerTemplates[TASK(PartyMember)->slot];
@@ -44,6 +44,6 @@ MATCH void Battle_StartFormRestore(void) {
     func_801DDAB4(g_Game.members[TASK(PartyMember)->slot].chr.status);
     GFX_PaletteUploadRows();
     TASK(PartyMember)->header.flags &= ~ACTOR_FLAG_HIDDEN;
-    g_Task = saved;
+    TASK_SET(saved);
     saved->header.mode++;
 }

@@ -29,7 +29,7 @@ MATCH VECTOR* func_801ABF30(VECTOR* out, s32 sel, s32 selector_type) {
     } else {
         work = &g_PartyActors[key];
     }
-    g_Task = work;
+    TASK_SET(work);
     /* FAKE: keeps the scratchpad store ahead of the call-argument setup. */
     FAKE_BARRIER();
     func_801AC1DC((s32*)&buf.vx, selector_type);
@@ -37,7 +37,7 @@ MATCH VECTOR* func_801ABF30(VECTOR* out, s32 sel, s32 selector_type) {
     buf.vx += cur->pos.x.fixed;
     buf.vy += cur->pos.y.fixed;
     buf.vz += (s16)COORD_INT(cur->pos.z);
-    g_Task = SAVE_SLOT;
-    *out   = buf;
+    TASK_SET(SAVE_SLOT);
+    *out = buf;
     return out;
 }

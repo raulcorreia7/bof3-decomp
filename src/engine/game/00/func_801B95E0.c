@@ -25,8 +25,8 @@ NON_MATCHING s32 func_801B95E0(void) {
     if (COORD_FRAC(TASK(Actor)->pos.x) != 0 && COORD_FRAC(TASK(Actor)->pos.y) != 0) {
         return 1;
     }
-    x     = FIELD(u16, g_Task, 0x36u) + (s8)D_80181B00[WDIR * 2];
-    y_arg = y = FIELD(u16, g_Task, 0x3Au) + (s8)D_80181B01[WDIR * 2];
+    x     = FIELD(u16, g_Task, 0x36u) + (s8)D_80181B00[WDIR][0];
+    y_arg = y = FIELD(u16, g_Task, 0x3Au) + (s8)D_80181B00[WDIR][1];
     Area_WalkProbeCells(x, y_arg);
 
     if (!(WDIR & AREA_LOAD_FLAG_WORLD_MAP)) {

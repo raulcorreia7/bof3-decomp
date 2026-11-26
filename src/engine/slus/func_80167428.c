@@ -57,9 +57,9 @@ NON_MATCHING void func_80167428(void) {
     if (!func_801B0E44()) {
         work = TASK(Actor);
         dx   = abs(g_Game.members[0].pos.x.fixed - (work->pos.x.fixed + g_FacingSteps[work->direction].x));
-        dy   = abs(g_Game.members[0].pos.y.fixed - (work->pos.y.fixed + g_FacingStepY[work->direction * 2]));
+        dy   = abs(g_Game.members[0].pos.y.fixed - (work->pos.y.fixed + g_FacingSteps[work->direction].y));
         if (dx > TO_COORD(6) || dy > TO_COORD(6) || g_GameStateIndex == GAME_REQUEST_AREA_CHANGE) {
-            work                     = (Actor*)g_Task;
+            work                     = TASK(Actor);
             work->timer              = 0;
             work->vx                 = 0;
             work->vy                 = 0;

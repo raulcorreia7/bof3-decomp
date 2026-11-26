@@ -10,6 +10,7 @@ NON_MATCHING void func_801F43E8(s32 scale) {
     s32     x;
     s16     y;
     s32     row_y;
+    s32     tile_y;
     s32     cy;
     s32     dx;
     s32     dy;
@@ -23,9 +24,8 @@ NON_MATCHING void func_801F43E8(s32 scale) {
     SetTile1(tile);
     SetSemiTrans(tile, 1);
     shade    = (scale << 8) - scale;
+    tile->x0 = (((g_AreaCameraAngle.vz + 0x200) & 0xFFFu) * 5) >> 4;
     tile->y0 = 0x2D;
-    angle    = g_AreaCameraAngle.vz + 0x200;
-    tile->x0 = ((angle & 0xFFF) * 5) >> 4;
     shade    = shade / 128;
     tile->r0 = shade;
     tile->g0 = (rand() & 0x7F) * scale / 128;
@@ -40,8 +40,7 @@ NON_MATCHING void func_801F43E8(s32 scale) {
     if ((u16)y < 0x5A) {
         SetTile1(tile);
         SetSemiTrans(tile, 1);
-        angle    = g_AreaCameraAngle.vz + 0x400;
-        tile->x0 = ((angle & 0xFFF) * 5) >> 4;
+        tile->x0 = (((g_AreaCameraAngle.vz + 0x400) & 0xFFFu) * 5) >> 4;
         tile->r0 = shade;
         tile->g0 = (rand() & 0x7F) * scale / 128;
         tile->b0 = (rand() & 0x7F) * scale / 128;
@@ -49,15 +48,12 @@ NON_MATCHING void func_801F43E8(s32 scale) {
         func_801F4B64(tile);
     }
 
-    dy = 0x1400 - g_AreaTargetCellY;
-    if (dy < 0) {
-        dy = -dy;
-    }
-    y      = dy * dy / 98304;
-    tile   = (TILE_1*)g_GfxPrimCursor;
-    cell_x = g_AreaTargetCellX;
-    if ((cell_x >> 8) >= 0xF) {
-        y = (cell_x - 0xF00) / 25 + (y + 8);
+    dy   = 0x1400 - g_AreaTargetCellY;
+    dy   = abs(dy);
+    tile = (TILE_1*)g_GfxPrimCursor;
+    y    = dy * dy / 98304;
+    if ((g_AreaTargetCellX >> 8) >= 0xF) {
+        y = (g_AreaTargetCellX - 0xF00) / 25 + (s16)(y + 8);
     } else {
         y = y + 8;
     }
@@ -89,10 +85,10 @@ NON_MATCHING void func_801F43E8(s32 scale) {
         cy = 0xF00;
     }
     cy = cy > 0x1800 ? 0x1800 : cy;
-    for (i = 0, step = 0; i < 3; i++) {
+    for (i = 0, step = 0, tile_y = row_y; i < 3; i++) {
         tile     = (TILE_1*)g_GfxPrimCursor;
-        tile->y0 = row_y;
-        if ((s16)row_y < 0x5A) {
+        tile->y0 = tile_y;
+        if ((s16)tile_y < 0x5A) {
             SetTile1(tile);
             SetSemiTrans(tile, 1);
             angle    = ratan2(cy - 0x1380, x - 0x1480) + g_AreaCameraAngle.vz + 0x633;
@@ -103,7 +99,7 @@ NON_MATCHING void func_801F43E8(s32 scale) {
             func_801F497C(sizeof(TILE_1));
         }
         step += 0xA;
-        row_y += 8;
+        tile_y += 8;
     }
 }
 #else

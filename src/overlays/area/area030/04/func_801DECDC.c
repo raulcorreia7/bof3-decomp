@@ -97,8 +97,8 @@ NON_MATCHING void func_801DECDC(void) {
                 }
             }
 
-            TASK(FishingState)->state_2A = D_801E2331[TASK(FishingState)->counter_08 * 2];
-            Script_Request(D_801E2330[TASK(FishingState)->counter_08 * 2]);
+            TASK(FishingState)->state_2A = D_801E2330[TASK(FishingState)->counter_08][1];
+            Script_Request(D_801E2330[TASK(FishingState)->counter_08][0]);
 
             if ((func_801E0770() & BYTE_MASK) && (D_801E2AD4[TASK(FishingState)->cue_index][0] > (rand() & 0xF) || (g_FishingLureRow->unk_0E & 0x80)) &&
                 (s8)D_801E2ACC[TASK(FishingState)->cue_index][lure = g_FishingLureRow->unk_0E & 0xF] != 9) {
@@ -117,8 +117,8 @@ NON_MATCHING void func_801DECDC(void) {
                 TASK(FishingState)->saved_index  = 0;
                 TASK(FishingState)->handler_index++;
                 TASK(FishingState)->counter_08 = 1;
-                TASK(FishingState)->state_2A   = D_801E2331[TASK(FishingState)->counter_08 << 1];
-                Script_Request(D_801E2330[TASK(FishingState)->counter_08 << 1]);
+                TASK(FishingState)->state_2A   = D_801E2330[TASK(FishingState)->counter_08][1];
+                Script_Request(D_801E2330[TASK(FishingState)->counter_08][0]);
                 Script_AnimStepLoop();
                 return;
             }

@@ -123,7 +123,7 @@ NON_MATCHING void Menu_UpdateFormation(void) {
         if (g_FormationCursorRow >= 3) {
             g_FormationCursorRow = 0;
         }
-    } while (g_FormationCells[g_FormationCursorRow * 3 + g_FormationCursorColumn] == 0);
+    } while (g_FormationCells[g_FormationCursorRow][g_FormationCursorColumn] == 0);
     if (g_FormationPickColumn != 0) {
         input = INPUT_GetRepeatedButtons(g_PadStates[0].pressed & (PADLright | PADLleft));
         if (input & PADLleft) {
@@ -141,7 +141,7 @@ NON_MATCHING void Menu_UpdateFormation(void) {
             if (g_FormationCursorColumn >= 3) {
                 g_FormationCursorColumn = 0;
             }
-        } while (g_FormationCells[g_FormationCursorRow * 3 + g_FormationCursorColumn] == 0);
+        } while (g_FormationCells[g_FormationCursorRow][g_FormationCursorColumn] == 0);
     }
     if (old_column != g_FormationCursorColumn || (s8)old_row != g_FormationCursorRow) {
         SND_SEPlay(EMI_SE_ID(SND_BANK_COMMON, 1));

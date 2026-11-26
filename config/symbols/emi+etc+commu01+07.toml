@@ -1,14 +1,70 @@
 ["emi/etc/commu01/07"]
 g_SceneEventStep_u8 = { addr = 0x801448EC, type = "u8", alias = true, source = "The scene event step byte as a u8 array; the commu01 menu steps read and step it." }
 g_EmiOverlayHeader = { addr = 0x801D0C00, source = "The overlay's payload prologue: the overlay id word the EMI loader compares with the archive's table of contents." }
-func_801D0C2C = { addr = 0x801D0C2C, type = "func", source = "Entry of the commu01 scene: dispatches on the step byte D_801F294C through g_Commu01Steps." }
+g_FairyChannelColors = { addr = 0x801D0C04, type = "u8", source = "The RGB colours of the four channel bars, one triple each." }
+Fairy_Commu01Run = { addr = 0x801D0C2C, type = "func", source = "Entry of the commu01 scene: runs the step handler the commu step byte selects from g_Commu01Steps." }
+Fairy_Commu01Start = { addr = 0x801D0C68, type = "func", source = "Step 0: puts the cell cursor on the idle fairies, shows the overview message and advances the step." }
+Fairy_Commu01PickCell = { addr = 0x801D0CAC, type = "func", source = "Step 1: moves the cell cursor over the idle fairies, rooms and job types; confirming a cell that has jobs, or an unlocked room, advances the step." }
+Fairy_Commu01DispatchMode = { addr = 0x801D0E44, type = "func", source = "Step 2: runs the handler the saved cursor zone selects from g_Commu01Step2Steps." }
+Fairy_Commu01DispatchMove = { addr = 0x801D0E80, type = "func", source = "Runs the move handler the sub-step byte selects from the move table." }
+Fairy_Commu01PickJob = { addr = 0x801D0EBC, type = "func", source = "Move sub-step 0: moves the cursor among the active jobs of the selected job type and draws the job box." }
+Fairy_Commu01PickTarget = { addr = 0x801D1158, type = "func", source = "Move sub-step 1: moves the cursor to the job type the job moves to and commits the move." }
+Fairy_Commu01DispatchRoom = { addr = 0x801D1328, type = "func", source = "Runs the room handler the sub-step byte selects from g_Commu01Step2Sub1Steps." }
+Fairy_Commu01PickRoomJob = { addr = 0x801D1364, type = "func", source = "Room sub-step 0: moves the cursor among the room and its jobs; confirming a job moves it, confirming the room opens its type list." }
+Fairy_Commu01PickRoomTarget = { addr = 0x801D1630, type = "func", source = "Room sub-step 1: moves the cursor to the job type the job moves to and commits the move." }
+Fairy_Commu01PickRoomType = { addr = 0x801D1778, type = "func", source = "Room sub-step 2: moves the cursor in the type list of the room and draws it." }
+Fairy_Commu01PickRoomLine = { addr = 0x801D1A94, type = "func", source = "Room sub-step 3: moves the cursor in the line list of the chosen room type and draws it." }
+Fairy_Commu01PickRoomPair = { addr = 0x801D1E48, type = "func", source = "Room sub-step 4: toggles the pair choice of the chosen room option and draws both lists." }
+Fairy_Commu01ConfirmRoom = { addr = 0x801D2110, type = "func", source = "Room sub-step 5: stores the chosen room type and options, or backs out, and redraws the lists." }
+Fairy_DrawChannelGrid = { addr = 0x801D273C, type = "func", source = "Draws the grid of the channel box of one fairy." }
+Fairy_DrawChannelBox = { addr = 0x801D28A4, type = "func", source = "Draws the box of one fairy: its name and the four channel bars, the one under the cursor blinking." }
+Fairy_DrawChannelBar = { addr = 0x801D2D98, type = "func", source = "Draws one channel bar of a fairy box as two shaded quads, pulsing when it blinks." }
+Fairy_DrawOverview = { addr = 0x801D3038, type = "func", source = "Draws the village overview: the message, the idle fairies, the job types and the room cells." }
+Fairy_DrawOverviewGrid = { addr = 0x801D3594, type = "func", source = "Draws the grid over the body of the overview window." }
+Fairy_DrawCellFrame = { addr = 0x801D36FC, type = "func", source = "Outlines one cell of the overview, yellow when selected and blinking otherwise." }
+Fairy_DrawCursor = { addr = 0x801D3984, type = "func", source = "Draws the blinking triangle cursor at a point of the overview." }
 Fairy_GetJobActive = { addr = 0x801D3A48, type = "func", source = "the body returns g_FairyJobs[i].active" }
-D_801D4BB8 = { addr = 0x801D4BB8, type = "u16", size = 0x14, source = "Halfword values indexed by the selection cursor in func_801D1778." }
+Fairy_FindJob = { addr = 0x801D3AA0, type = "func", source = "Returns the slot of the index-th active job of a job type, or GAME_NONE." }
+Fairy_MoveCursor = { addr = 0x801D3B0C, type = "func", source = "Steps the cell cursor over the idle fairies, the room grid and the job types by the pad direction and writes the job type under it." }
+Fairy_DrawRoomIcon = { addr = 0x801D3EFC, type = "func", source = "Draws the icon of a room type at a point of the overview." }
+Fairy_DrawPiece = { addr = 0x801D4030, type = "func", source = "Draws one piece of the fairy screens from the piece table: a window frame tile, a fairy or a room frame." }
+Fairy_DrawTypeMenu = { addr = 0x801D4178, type = "func", source = "Draws the room type list window with its row captions." }
+Fairy_DrawMenuFrame = { addr = 0x801D42DC, type = "func", source = "Draws the frame pieces around a list window of a given height." }
+Fairy_GetTypeMenuTop = { addr = 0x801D4474, type = "func", source = "Returns the top of the room type list window for the cursor row and the row count." }
+Fairy_DrawOptionMenu = { addr = 0x801D44E0, type = "func", source = "Draws the option list of a room type and returns its top." }
+Fairy_GetJobPos = { addr = 0x801D4694, type = "func", source = "Writes the screen position of the ordinal-th job of a job type through the two pointers." }
+Fairy_RestoreCursor = { addr = 0x801D47C4, type = "func", source = "Puts back the cursor the move started from, plays the cancel sound and steps back one sub-step." }
+Fairy_MoveJob = { addr = 0x801D482C, type = "func", source = "Moves the job at the cursor to the job type picked as the target and returns whether it went through." }
+Fairy_ShowTypeMessage = { addr = 0x801D49C4, type = "func", source = "Sets the top message from the selected job type: the idle, room or job description." }
+Fairy_ShowTargetMessage = { addr = 0x801D4AAC, type = "func", source = "Sets the top message from the job type the cursor points at as the target of a move." }
+Fairy_AskConfirm = { addr = 0x801D4B58, type = "func", source = "Starts the confirm question: keeps the sub-step and message to return to and shows the question." }
+g_FairyRoomMessages = { addr = 0x801D4BB0, type = "u16", source = "The message each room type shows on top, by room type." }
+g_FairyListMessages = { addr = 0x801D4BB8, source = "The message each row of the room type list shows on top." }
 g_Commu01Steps = { addr = 0x801D4BCC, source = "the 3 step handlers of the commu01 scene, called by func_801D0C2C (the overlay entry) and indexed by the commu step byte D_801F294C" }
 g_Commu01Step2Steps = { addr = 0x801D4BD8, source = "3 sub-step handlers of step 2 of the commu01 scene, called by func_801D0E44 (the step 2 handler) and indexed by the commu01 phase byte D_801D4E08" }
+g_Commu01MoveSteps = { addr = 0x801D4BE4, source = "The two handlers of the job move, run by the sub-step byte: pick the job, pick the target." }
 g_Commu01Step2Sub1Steps = { addr = 0x801D4BEC, source = "6 handlers of sub-step 1 of step 2 of the commu01 scene, called by func_801D1328 (the sub-step 1 handler of step 2) and indexed by the commu sub-step byte D_801F294D" }
-D_801D4C04 = { addr = 0x801D4C04, type = "u8", size = 0xC, source = "Byte values indexed by the selection cursor and used to select a halfword value in func_801D1778." }
-D_801D4C10 = { addr = 0x801D4C10, type = "u16", size = 0x8, source = "Halfword values selected by the index stored from D_801D4C04 in func_801D1778." }
-D_801D4C18 = { addr = 0x801D4C18, type = "CommuSelectionPair", size = 0x2C, source = "Twenty-two count/value pairs used by func_801D1A94 for row movement and confirmation." }
-D_801D4C44 = { addr = 0x801D4C44, type = "CommuCellFrame", size = 0x6C, source = "Nine CommuCellFrame records used to draw the commu01 cell outlines." }
+g_FairyListOptionTypes = { addr = 0x801D4C04, source = "The option list each row of the room type list opens; 0xFF for a row with none." }
+g_FairyOptionMessages = { addr = 0x801D4C10, source = "The message each option list shows on top, by option list." }
+g_FairyOptionLines = { addr = 0x801D4C18, source = "By option list: the number of lines and the option list of the next choice, 0xFF for none." }
+g_FairyBlinkChannels = { addr = 0x801D4C20, type = "u8", source = "The channel bar of the fairy box that blinks, by the type of the cell the job moves to." }
+g_FairyRoomIcons = { addr = 0x801D4C34, type = "u8", source = "The icon each room type draws in the overview." }
+g_FairyCellFrames = { addr = 0x801D4C44, source = "The outline points of the cells of the overview." }
+g_FairyIconCluts = { addr = 0x801D4CD4, type = "u8", source = "The palette row each room icon draws with, by icon." }
+g_FairyPieces = { addr = 0x801D4CE0, type = "u8", source = "The pieces the fairy screens draw: texture position, size and palette, six bytes each." }
+g_FairyMenuText = { addr = 0x801D4D34, type = "u8", source = "The eight-byte captions of the room type list, then of the option lists." }
+g_FairyOptionRows = { addr = 0x801D4DD4, source = "By option list: the first caption row and the number of rows." }
+g_FairyJobMessages = { addr = 0x801D4DDA, type = "u16", source = "The message each job type shows on top, by job type." }
+g_FairyJobSlots = { addr = 0x801D4DDC, type = "Pos2u", source = "The screen offsets of the job markers inside a room cell." }
+g_FairyCursorColumn = { addr = 0x801D4DF4, type = "u8", size = 0x1, source = "The column (1 to 4) of the cell cursor in a row of the room grid." }
+g_FairyCursorGridRow = { addr = 0x801D4DF8, type = "u8", size = 0x1, source = "The row (0 or 1) of the cell cursor in the room grid." }
+g_FairyCursorZone = { addr = 0x801D4DFC, type = "u8", size = 0x1, source = "Where the cell cursor is: 0 the idle fairies, 1 the room grid, 2 the job types hunt, clear and build." }
+g_FairySavedCursorColumn = { addr = 0x801D4E00, type = "u8", size = 0x1, source = "The cursor column kept when a move starts, restored when it is cancelled or done." }
+g_FairySavedCursorGridRow = { addr = 0x801D4E04, type = "u8", size = 0x1, source = "The cursor grid row kept when a move starts, restored when it is cancelled or done." }
+g_FairySavedCursorZone = { addr = 0x801D4E08, type = "u8", size = 0x1, source = "The cursor zone kept when a move starts; it also selects the handler of step 2." }
+g_FairyMessage = { addr = 0x801D4E0C, type = "u16", size = 0x2, source = "The id in the area message table of the line the overview window shows on top; 0xFFFF shows none." }
+g_FairyReturnStep = { addr = 0x801D4E10, type = "u8", size = 0x1, source = "The sub-step the confirm question returns to." }
+g_FairyReturnMessage = { addr = 0x801D4E14, type = "u16", size = 0x2, source = "The message the confirm question returns to." }
+g_FairyConfirmChoice = { addr = 0x801D4E18, type = "u8", size = 0x1, source = "The answer of the confirm question under the cursor, 0 yes and 1 no, toggled by left and right." }
+g_FairyJobOrdinal = { addr = 0x801D4E24, type = "u8", size = 0x1, source = "The cursor place among the active jobs of the selected job type; in the room list 0 is the room itself." }
 g_Fairies = { addr = 0x801F2700, alias = true, source = "the fairy roster: the channel bytes of each nine-byte row feed the commu01 record boxes" }

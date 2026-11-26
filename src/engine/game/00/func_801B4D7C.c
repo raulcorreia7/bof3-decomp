@@ -11,9 +11,9 @@ NON_MATCHING u8 func_801B4D7C(u8 wanted_code) {
     if ((TASK(Actor)->pos.x.part.fraction == 0) && (TASK(Actor)->pos.y.part.fraction == 0)) {
         return 0;
     }
-    delta = D_80181B00[TASK(Actor)->direction * 2];
+    delta = D_80181B00[TASK(Actor)->direction][0];
     x     = TASK(Actor)->pos.x.part.integer + ((delta == 1) ? 2 : delta);
-    delta = D_80181B01[TASK(Actor)->direction * 2];
+    delta = D_80181B00[TASK(Actor)->direction][1];
     y     = TASK(Actor)->pos.y.part.integer + ((delta == 1) ? 2 : delta);
 
     i = 0;

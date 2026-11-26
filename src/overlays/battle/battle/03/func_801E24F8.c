@@ -11,6 +11,6 @@ MATCH void func_801E24F8(u32 enemy_index, u32 script_index) {
     TASK_SET((enemy));
     g_BattleCurrentEnemy = (EnemyBattler*)enemy;
     Battle_RequestEnemyScript(script_index & BYTE_MASK);
-    g_Task               = saved_work;
+    TASK_SET(saved_work);
     g_BattleCurrentEnemy = (EnemyBattler*)saved_enemy;
 }

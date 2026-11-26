@@ -35,7 +35,7 @@ MATCH void Menu_OpenFormation(void) {
     for (row = 0; row < 3; row++) {
         for (col = 0; col < 3; col++) {
             has_member = row < count;
-            table      = g_FormationCells + row * 3;
+            table      = g_FormationCells[row];
             if (col == 0 && has_member) {
                 table[0] = 1;
             } else {
