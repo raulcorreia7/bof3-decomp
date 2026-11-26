@@ -2524,7 +2524,12 @@ MATCH void func_801D9348(u16 x, u16 y, s32 color, s32 frame_mode) {
 }
 
 #ifdef NON_MATCHING
-NON_MATCHING void func_801D94D0(s32 page, s32 left, s32 top, s32 cursor_col_arg, s32 cursor_row_arg) {
+NON_MATCHING void func_801D94D0(page, left, top, cursor_col_arg, cursor_row_arg) u8 page;
+s32               left;
+s32               top;
+s32               cursor_col_arg;
+s32               cursor_row_arg;
+{
     u8  tags[20];
     u8* cell;
     u16 x;
@@ -2540,7 +2545,7 @@ NON_MATCHING void func_801D94D0(s32 page, s32 left, s32 top, s32 cursor_col_arg,
     cursor_row = cursor_row_arg;
     memcpy(tags, D_801D0C3C, 20);
     UI_WindowDraw(left, base_y, 0x110, 123, 0, g_WindowStyle);
-    cell = D_801DAAAC[(u8)page][0];
+    cell = D_801DAAAC[page][0];
     y    = base_y + 6;
     for (row = 0; row < 8; row++) {
         x = left + 4;
