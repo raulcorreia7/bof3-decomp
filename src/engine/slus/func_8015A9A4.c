@@ -12,8 +12,7 @@ NON_MATCHING void func_8015A9A4(void) {
     s32     dx;
     s32     dy;
     s32     sum;
-    s32     key;
-    s32     low;
+    u16     key;
     s32     x;
     s32     y;
     s32     pad;
@@ -35,19 +34,17 @@ NON_MATCHING void func_8015A9A4(void) {
     }
     actor         = g_Task;
     task->unk_32  = key;
-    actor->unk_32 = (actor->unk_32 + (s8)((u8*)actor->range_54.table)[1]) << 8;
+    key           = (actor->unk_32 + (s8)((u8*)actor->range_54.table)[1]) << 8;
+    actor->unk_32 = key;
     if (g_AreaDrawMode == GFX_LAYER_BATTLE_SCENE) {
         if (D_8014933F != 0) {
-            low = actor->pos.x.fixed >> 15;
+            actor->unk_32 = key | ((actor->pos.x.fixed >> 15) & BYTE_MASK);
         } else {
-            low = actor->pos.y.fixed >> 15;
+            actor->unk_32 = key | ((actor->pos.y.fixed >> 15) & BYTE_MASK);
         }
-        low &= BYTE_MASK;
     } else {
-        low = (((u16)COORD_INT(actor->pos.z) >> 5) & BYTE_MASK) ^ 0x80;
+        actor->unk_32 = key | ((((u16)COORD_INT(actor->pos.z) >> 5) & BYTE_MASK) ^ 0x80);
     }
-    actor->unk_32 |= low;
-    FAKE_BARRIER();
     if (!(((u8*)TASK(Actor)->range_54.table)[3] & 0x10)) {
         Actor_ReadValue();
     }
