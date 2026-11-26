@@ -17,7 +17,7 @@ MATCH void func_801F2EA8(void) {
     if (COORD_INT(TASK(Actor)->pos.x) == 0) {
         for (x = D_801F4218[COORD_INT(TASK(Actor)->pos.x)].x0; x < D_801F4218[COORD_INT(TASK(Actor)->pos.x)].x_end; x++) {
             for (y = D_801F4218[COORD_INT(TASK(Actor)->pos.x)].y0; y < D_801F4218[COORD_INT(TASK(Actor)->pos.x)].y_end; y++) {
-                *(g_AreaCellCodes + y * AREA112_MAP_WIDTH + x) = TASK(Actor)->header.step != 2 ? 0x11 : 0;
+                *(g_AreaCellCodes + y * ((AreaMapBundle*)MAP_BUNDLE_BASE)->width + x) = TASK(Actor)->header.step != 2 ? 0x11 : 0;
             }
         }
     } else {
@@ -25,7 +25,8 @@ MATCH void func_801F2EA8(void) {
             for (y = D_801F4218[COORD_INT(TASK(Actor)->pos.x)].y0; y < D_801F4218[COORD_INT(TASK(Actor)->pos.x)].y_end; y++) {
                 shade                                                                                          = D_801F4228[flag][n++];
                 value                                                                                          = (shade << 24) | (shade << 16) | (shade << 8) | shade;
-                ((AreaCellCorners*)((MAP_BUNDLE_BASE + 0x30) + (y * AREA112_MAP_WIDTH << 2) + (x << 2)))->word = value;
+                /* FAKE: integer cell address; cells[y * width + x] folds both terms into one shift. */
+                ((AreaCellCorners*)((MAP_BUNDLE_BASE + AREA_MAP_BUNDLE_SIZE) + (y * ((AreaMapBundle*)MAP_BUNDLE_BASE)->width << 2) + (x << 2)))->word = value;
             }
         }
     }
@@ -33,7 +34,7 @@ MATCH void func_801F2EA8(void) {
         for (y = D_801F4218[COORD_INT(TASK(Actor)->pos.x)].y0; y < D_801F4218[COORD_INT(TASK(Actor)->pos.x)].y_end; y++) {
             height                                                                   = Area_HeightSample(x << 16, y << 16);
             value                                                                    = (-(COORD_INT(TASK(Actor)->pos.z) * 2) - height) / 32;
-            AREA112_MAP_BYTES[g_AreaMapHeightOffset * 4 + x + y * AREA112_MAP_WIDTH] = value;
+            ((AreaMapBundleBytes*)MAP_BUNDLE_BASE)->bytes[g_AreaMapHeightOffset * 4 + x + y * ((AreaMapBundle*)MAP_BUNDLE_BASE)->width] = value;
         }
     }
 }
