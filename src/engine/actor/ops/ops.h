@@ -18,7 +18,7 @@ u8   Script_OpsRunControl(void* sub, s32 target, u8 value);
 /* func_801A9DE8 */
 u8   Script_OpsRunMotion(ScriptState* state, const u8* table, u8 value);
 /* func_801AA470 */
-u8   Script_OpsRunWait(void* sub, s32 target, u8 value);
+u8   Script_OpsRunWait(ScriptState* state, u8* base, u8 value);
 /* func_801AAB00 */
 u8   Script_OpsRunAppearance(void* sub, s32 target, u8 value);
 /* func_801AB458 */
