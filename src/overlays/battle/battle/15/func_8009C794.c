@@ -1,6 +1,6 @@
 #include "battle_15.h"
 
-MATCH bool func_8009C794(s32 skip_slot, s32 enemy_slot) {
+MATCH u8 func_8009C794(s32 skip_slot, s32 enemy_slot) {
     u8* slot;
     u8* battler;
     s32 enemy;

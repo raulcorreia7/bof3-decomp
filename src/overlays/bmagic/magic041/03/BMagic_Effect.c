@@ -158,59 +158,59 @@ MATCH void func_801EF484(void) {
 
 #include "overlays/bmagic/shared/Effect_SetActorMatrix.h"
 
-#ifdef NON_MATCHING
-NON_MATCHING void func_801EF670(void) {
+/* Draws the effect's ring of 64 red quads, each joining the inner ring of jittered radius and height to the outer ring of radius 0x80. */
+MATCH void func_801EF670(void) {
     POLY_G4* prim;
     long     depth;
     long     flag;
     s32      i;
+    s32      start;
     s32      x;
     s32      y;
     s32      tpage;
 
-    g_ScratchPad.cells.halves[0] = TASK(PartyMember)->unk_09 * 24;
-    g_ScratchPad.cells.halves[1] = TASK(PartyMember)->unk_09 << 5;
-    g_ScratchPad.cells.halves[5] = TASK(PartyMember)->timer * 12;
-    g_ScratchPad.cells.halves[6] = TASK(PartyMember)->timer * 6;
-    g_ScratchPad.cells.halves[7] = TASK(PartyMember)->timer * 6;
-    g_ScratchPadVectors[0].vx    = FIXED_MUL(rsin(0), g_ScratchPad.cells.halves[1]);
-    g_ScratchPadVectors[0].vy    = FIXED_MUL(rcos(0), g_ScratchPad.cells.halves[1]);
-    g_ScratchPadVectors[1].vz    = -64;
-    g_ScratchPadVectors[0].vz    = -64;
-    g_ScratchPadVectors[2].vx    = FIXED_MUL(rsin(0), g_ScratchPad.cells.halves[0]);
-    g_ScratchPadVectors[2].vy    = FIXED_MUL(rcos(0), g_ScratchPad.cells.halves[0]);
-    g_ScratchPadVectors[3].vz    = 0;
-    g_ScratchPadVectors[2].vz    = 0;
-    for (i = 1; i <= 32; i++) {
-        g_ScratchPadVectors[1].vx = g_ScratchPadVectors[0].vx;
-        g_ScratchPadVectors[1].vy = g_ScratchPadVectors[0].vy;
-        g_ScratchPadVectors[0].vx = FIXED_MUL(rsin(i << 7), g_ScratchPad.cells.halves[1]);
-        g_ScratchPadVectors[0].vy = FIXED_MUL(rcos(i << 7), g_ScratchPad.cells.halves[1]);
-        g_ScratchPadVectors[3].vx = g_ScratchPadVectors[2].vx;
-        g_ScratchPadVectors[3].vy = g_ScratchPadVectors[2].vy;
-        g_ScratchPadVectors[2].vx = FIXED_MUL(rsin(i << 7), g_ScratchPad.cells.halves[0]);
-        g_ScratchPadVectors[2].vy = FIXED_MUL(rcos(i << 7), g_ScratchPad.cells.halves[0]);
-        x                         = (g_ScratchPadVectors[2].vx << 9) + TASK(PartyMember)->pos.x.fixed;
-        y                         = (g_ScratchPadVectors[2].vy << 9) + TASK(PartyMember)->pos.y.fixed;
+    g_ScratchPad.cells.halves[2] = (((rand() & 3) + TASK(PartyMember)->unk_09) & 0xF) * 256;
+    start                        = g_ScratchPad.cells.halves[2];
+    g_ScratchPad.cells.halves[0] = 0x80;
+    g_ScratchPad.cells.halves[1] = TASK(PartyMember)->unk_09 + 160 - FIXED_MUL(rsin(start), 16);
+    g_ScratchPad.cells.halves[4] = (TASK(PartyMember)->timer << 3) + 32 - FIXED_MUL(rsin(g_ScratchPad.cells.halves[2]), 8);
+    setVector(&g_ScratchPadVectors[1], FIXED_MUL(rcos(0), g_ScratchPad.cells.halves[1]), FIXED_MUL(rsin(0), g_ScratchPad.cells.halves[1]), -g_ScratchPad.cells.halves[4]);
+    g_ScratchPadVectors[3].vx = FIXED_MUL(rcos(0), g_ScratchPad.cells.halves[0]);
+    g_ScratchPadVectors[3].vy = FIXED_MUL(rsin(0), g_ScratchPad.cells.halves[0]);
+    g_ScratchPadVectors[2].vz = 0;
+    g_ScratchPadVectors[3].vz = 0;
+    for (i = 1; i <= 64; i++) {
+        g_ScratchPad.cells.halves[2] = (((rand() & 3) + i + TASK(PartyMember)->unk_09) & 0xF) * 256;
+        if (i == 64) {
+            g_ScratchPad.cells.halves[2] = start;
+        }
+        g_ScratchPad.cells.halves[1] = TASK(PartyMember)->unk_09 + 160 - FIXED_MUL(rsin(g_ScratchPad.cells.halves[2]), 16);
+        g_ScratchPad.cells.halves[4] = (TASK(PartyMember)->timer << 3) + 32 - FIXED_MUL(rsin(g_ScratchPad.cells.halves[2]), 8);
+        g_ScratchPadVectors[0].vx    = g_ScratchPadVectors[1].vx;
+        g_ScratchPadVectors[0].vy    = g_ScratchPadVectors[1].vy;
+        g_ScratchPadVectors[0].vz    = g_ScratchPadVectors[1].vz;
+        setVector(&g_ScratchPadVectors[1], FIXED_MUL(rcos(i << 6), g_ScratchPad.cells.halves[1]), FIXED_MUL(rsin(i << 6), g_ScratchPad.cells.halves[1]), -g_ScratchPad.cells.halves[4]);
+        g_ScratchPadVectors[2].vx = g_ScratchPadVectors[3].vx;
+        g_ScratchPadVectors[2].vy = g_ScratchPadVectors[3].vy;
+        g_ScratchPadVectors[3].vx = FIXED_MUL(rcos(i << 6), g_ScratchPad.cells.halves[0]);
+        g_ScratchPadVectors[3].vy = FIXED_MUL(rsin(i << 6), g_ScratchPad.cells.halves[0]);
+        x                         = (g_ScratchPadVectors[3].vx << 9) + TASK(PartyMember)->pos.x.fixed;
+        y                         = (g_ScratchPadVectors[3].vx << 9) + TASK(PartyMember)->pos.y.fixed;
         tpage                     = getTPage(TPAGE_DEPTH_4BIT, TPAGE_ABR_ADD, 320, 256);
         SetDrawMode((DR_MODE*)g_GfxPrimCursor, 0, 1, tpage, 0);
         Area_CellAddPrim(x, y, 0, sizeof(DR_MODE));
         prim = (POLY_G4*)g_GfxPrimCursor;
         SetPolyG4(prim);
         SetSemiTrans(prim, 1);
-        RotTransPers4(&g_ScratchPadVectors[0], &g_ScratchPadVectors[1], &g_ScratchPadVectors[2], &g_ScratchPadVectors[3], (long*)&prim->x0, (long*)&prim->x1, (long*)&prim->x2, (long*)&prim->x3,
-                      &depth, &flag);
         setRGB0(prim, 1, 1, 1);
         setRGB1(prim, 1, 1, 1);
-        setRGB2(prim, g_ScratchPad.cells.halves[5], g_ScratchPad.cells.halves[6], g_ScratchPad.cells.halves[7]);
-        setRGB3(prim, g_ScratchPad.cells.halves[5], g_ScratchPad.cells.halves[6], g_ScratchPad.cells.halves[7]);
-        /* Retail advances the cursor 40 bytes, a POLY_FT4, past this 36-byte POLY_G4. */
-        Area_CellAddPrim(x, y, 0, sizeof(POLY_FT4));
+        setRGB2(prim, 0xC0, 0x30, 0x30);
+        setRGB3(prim, 0xC0, 0x30, 0x30);
+        RotTransPers4(&g_ScratchPadVectors[0], &g_ScratchPadVectors[1], &g_ScratchPadVectors[2], &g_ScratchPadVectors[3], (long*)&prim->x0, (long*)&prim->x1, (long*)&prim->x2, (long*)&prim->x3,
+                      &depth, &flag);
+        Area_CellAddPrim(x, y, 0, sizeof(POLY_G4));
     }
 }
-#else
-INCLUDE_ASM(func_801EF670);
-#endif
 
 MATCH void func_801EFAB8(void) {
     POLY_G3* prim;
