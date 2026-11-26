@@ -1166,6 +1166,7 @@ NON_MATCHING void func_801D4AE0(s16 x, s16 y, u8 flag) {
                 UI_TextDrawAscii(x + 6, ry, 0, g_UiTextFormatBuffer);
                 sprintf(g_UiTextFormatBuffer, D_801DAD64);
                 UI_TextDrawAscii(x + 0x2F, ry, UI_TEXT_HIGHLIGHT, g_UiTextFormatBuffer);
+                UI_TextDrawAscii(x + 0x43, ry, 1, g_UiTextFormatBuffer);
             } else {
                 sprintf(g_UiTextFormatBuffer, D_801D0C24, D_801DB080.bytes[k], D_801DB080.bytes[k + 1], D_801DB080.bytes[k + 2]);
                 ry = (s16)(y + dy);
@@ -1173,8 +1174,8 @@ NON_MATCHING void func_801D4AE0(s16 x, s16 y, u8 flag) {
                 sprintf(g_UiTextFormatBuffer, D_801D0C20, D_801DB080.bytes[k + 3]);
                 UI_TextDrawAscii(x + 0x2F, ry, UI_TEXT_HIGHLIGHT, g_UiTextFormatBuffer);
                 sprintf(g_UiTextFormatBuffer, D_801D0C20, D_801DB080.bytes[k + 4]);
+                UI_TextDrawAscii(x + 0x43, ry, 1, g_UiTextFormatBuffer);
             }
-            UI_TextDrawAscii(x + 0x43, ry, 1, g_UiTextFormatBuffer);
             UI_TextDrawGlyphString(x + 0x39, y + gy, 0, D_801D0C2C);
         } else if (i < sel) {
             sprintf(g_UiTextFormatBuffer, D_801D0C24, D_801DB080.bytes[k], D_801DB080.bytes[k + 1], D_801DB080.bytes[k + 2]);

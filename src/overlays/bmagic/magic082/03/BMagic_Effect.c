@@ -73,12 +73,10 @@ MATCH void Effect_NextStep(void) {
 MATCH void func_801EF10C(void) {
     u8  timer;
     u32 slot;
-    /* FAKE: retail frame reserves 0x10 bytes no statement uses; pure C differs only in the frame (0x18 against 0x28). */
-    FAKE_STACK_PADS(u8, 0x10);
 
-    g_PaletteFades[TASK(PartyMember)->timer].offset.r -= 1;
-    g_PaletteFades[TASK(PartyMember)->timer].offset.g -= 1;
-    g_PaletteFades[TASK(PartyMember)->timer].offset.b -= 1;
+    g_PaletteFades[TASK(PartyMember)->timer].offset.r--;
+    g_PaletteFades[TASK(PartyMember)->timer].offset.g--;
+    g_PaletteFades[TASK(PartyMember)->timer].offset.b--;
     timer                     = TASK(PartyMember)->unk_09 - 1;
     TASK(PartyMember)->unk_09 = timer;
     if (timer == 0) {

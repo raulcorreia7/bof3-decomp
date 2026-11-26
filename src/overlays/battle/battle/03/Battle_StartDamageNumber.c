@@ -11,6 +11,7 @@ NON_MATCHING void Battle_StartDamageNumber(void) {
     s32           divisor;
     u8            digits;
     u8            offset;
+    u8            member;
 
     slot   = D_801EC2E0;
     source = slot->target.party;
@@ -42,11 +43,11 @@ NON_MATCHING void Battle_StartDamageNumber(void) {
         }
         divisor = (divisor & BYTE_MASK) / 10u;
     }
-    type = slot->target.party->slot;
-    if (type < BATTLE_PARTY_CHARACTERS_COUNT) {
-        g_Game.members[type].u.turn.damage_flags.value |= BATTLER_DAMAGE_NUMBER;
+    member = slot->target.party->slot;
+    if (member < BATTLE_PARTY_CHARACTERS_COUNT) {
+        g_Game.members[member].u.turn.damage_flags.value |= BATTLER_DAMAGE_NUMBER;
     } else {
-        ENEMY_COMBATANT(type).turn.damage_flags.value |= BATTLER_DAMAGE_NUMBER;
+        ENEMY_COMBATANT(member).turn.damage_flags.value |= BATTLER_DAMAGE_NUMBER;
     }
     /* The slot pointer is live, so each write reads the running slot again. */
     D_801EC2E0->unk_0A     = digits;

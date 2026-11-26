@@ -185,13 +185,10 @@ MATCH void func_801EF688(void) {
     u8           unk04;
     PartyMember* battler;
 
-    /* FAKE: retail frame reserves 0x10 bytes no statement uses. */
-    FAKE_STACK_PADS(u8, 0x10);
-
     unk04 = TASK(PartyMember)->unk_04;
-    g_PaletteFades[TASK(PartyMember)->timer].offset.r -= 1;
-    g_PaletteFades[TASK(PartyMember)->timer].offset.g -= 1;
-    g_PaletteFades[TASK(PartyMember)->timer].offset.b -= 1;
+    g_PaletteFades[TASK(PartyMember)->timer].offset.r--;
+    g_PaletteFades[TASK(PartyMember)->timer].offset.g--;
+    g_PaletteFades[TASK(PartyMember)->timer].offset.b--;
     count                     = TASK(PartyMember)->unk_09 - 1;
     TASK(PartyMember)->unk_09 = count;
     battler                   = &g_Game.members[unk04];
