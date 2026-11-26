@@ -12,7 +12,7 @@ NON_MATCHING void func_801F4640(s32 sample_height) {
 
     g_ScratchPadVectors[0].vx = g_ScratchPadVectors[2].vx = TASK(Actor)->screen_y - 0x3BC0;
     g_ScratchPadVectors[1].vx = g_ScratchPadVectors[3].vx = TASK(Actor)->screen_y - 0x3AC0;
-    far_z                     = &g_ScratchPadVectors[3].vz;
+    far_z                                                 = &g_ScratchPadVectors[3].vz;
     for (i = 0; i < 2; i++) {
         SetDrawMode((DR_MODE*)g_GfxPrimCursor, 0, 0, getTPage(TPAGE_DEPTH_8BIT, TPAGE_ABR_HALF, 320, 256), NULL);
         Area_CellAddPrim(TASK(Actor)->pos.x.fixed, TASK(Actor)->pos.y.fixed, 2, 0xC);
@@ -26,8 +26,8 @@ NON_MATCHING void func_801F4640(s32 sample_height) {
             x                         = (g_ScratchPadVectors[0].vx + 0x4000) << 9;
             g_ScratchPadVectors[0].vz = -Area_HeightSample(x, y) / 2;
             g_ScratchPadVectors[2].vz = -Area_HeightSample(x, y) / 2 + (i == 0 ? 0x180 : 0);
-            x                        = (g_ScratchPadVectors[1].vx + 0x4000) << 9;
-            y                        = (g_ScratchPadVectors[1].vy + 0x4000) << 9;
+            x                         = (g_ScratchPadVectors[1].vx + 0x4000) << 9;
+            y                         = (g_ScratchPadVectors[1].vy + 0x4000) << 9;
             g_ScratchPadVectors[1].vz = -Area_HeightSample(x, y) / 2;
             g_ScratchPadVectors[3].vz = -Area_HeightSample(x, y) / 2 + (i == 0 ? 0x180 : 0);
         } else {
