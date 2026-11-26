@@ -1109,7 +1109,9 @@ typedef struct BattleState {
     /* 0xE9 */ u8                dragon_form;
     /* 0xEA */ u8                unk_EA[4];
     /* 0xEE */ u8                action_lock;
-    /* 0xEF */ u8                unk_EF[9];
+    /* 0xEF */ u8                unk_EF;
+    /* 0xF0 */ u32               unk_F0;
+    /* 0xF4 */ u8                unk_F4[4];
     /* 0xF8 */ u16               pending_status;
     /* 0xFA */ u8                unk_FA[6];
 } BattleState;

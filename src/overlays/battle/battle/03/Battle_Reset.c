@@ -46,7 +46,7 @@ MATCH void Battle_Reset(void) {
     g_Battle.unk_EA[1]            = 0;
     g_Battle.unk_EA[0]            = 0;
     g_Battle.action_lock          = 0;
-    g_Battle.unk_EF[8]            = 0;
+    g_Battle.unk_F4[3]            = 0;
     g_Battle.selection_latch      = 0;
     g_Battle.dragon_form          = 0;
     g_AreaCameraHeightDelta       = 0;
