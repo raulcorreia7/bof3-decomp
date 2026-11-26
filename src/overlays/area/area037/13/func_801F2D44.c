@@ -53,7 +53,7 @@ NON_MATCHING void func_801F2D44(void) {
         g_ScratchPadVectors[1].vx = g_ScratchPadVectors[3].vx = -j * 12;
         angle                                                 = g_FrameCount * 512;
         shade                                                 = rsin(i == 0 ? angle & 0xFFF : (angle - (i - 1) * 512) & 0xFFF);
-        g_ScratchPadVectors[0].vy                             = i != 0 ? shade * (i - 1) >> 13 : 0;
+        g_ScratchPadVectors[0].vy                             = i == 0 ? (s16)i : shade * (i - 1) >> 13;
         g_ScratchPadVectors[1].vy = g_ScratchPadVectors[2].vy = (u32)(rsin(((g_FrameCount - i) * 512) & 0xE00) * i) >> 13;
         k                                                     = i + 1;
         g_ScratchPadVectors[3].vy                             = rsin(((g_FrameCount - k) * 512) & 0xE00) * k >> 13;
