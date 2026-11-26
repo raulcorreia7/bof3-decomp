@@ -1,6 +1,7 @@
 #include "area048_13.h"
 
 /* Draws the eight corner quads of the table turned by angle at pos; bit 0 of variant picks each quad's tile. */
+/* old-style definition: callers pass words and the function narrows them on entry */
 // clang-format off
 MATCH void func_801F3AE4(angle, pos, variant)
 u16 angle;

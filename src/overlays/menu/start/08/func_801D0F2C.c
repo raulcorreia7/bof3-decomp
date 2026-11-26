@@ -13,7 +13,6 @@ NON_MATCHING void func_801D0F2C(u8 start) {
     u8        vital;
     s32       i;
     s32       j;
-    s32       idx;
     SaveData* save;
     u8*       row;
 
@@ -79,27 +78,26 @@ NON_MATCHING void func_801D0F2C(u8 start) {
         g_SaveData.scene_event_flags[i] = D_801EC214[start][i];
     }
     save = &g_SaveData;
-    for (i = 0; i < 0x14; i++) {
-        idx = i * 8;
-        row = g_SaveData.scene_flag_words + idx;
+    for (i = 0; i < SCENARIO_COUNT; i++) {
+        row = g_SaveData.scene_flag_rows[i];
         if (i < start) {
-            row[0]                               = D_801EC174[idx + 0];
-            g_SaveData.scene_flag_words[idx + 1] = D_801EC174[idx + 1];
-            g_SaveData.scene_flag_words[idx + 2] = D_801EC174[idx + 2];
-            g_SaveData.scene_flag_words[idx + 3] = D_801EC174[idx + 3];
-            g_SaveData.scene_flag_words[idx + 4] = D_801EC174[idx + 4];
-            g_SaveData.scene_flag_words[idx + 5] = D_801EC174[idx + 5];
-            g_SaveData.scene_flag_words[idx + 6] = D_801EC174[idx + 6];
-            g_SaveData.scene_flag_words[idx + 7] = D_801EC174[idx + 7];
+            row[0]                           = D_801EC174[i][0];
+            g_SaveData.scene_flag_rows[i][1] = D_801EC174[i][1];
+            g_SaveData.scene_flag_rows[i][2] = D_801EC174[i][2];
+            g_SaveData.scene_flag_rows[i][3] = D_801EC174[i][3];
+            g_SaveData.scene_flag_rows[i][4] = D_801EC174[i][4];
+            g_SaveData.scene_flag_rows[i][5] = D_801EC174[i][5];
+            g_SaveData.scene_flag_rows[i][6] = D_801EC174[i][6];
+            g_SaveData.scene_flag_rows[i][7] = D_801EC174[i][7];
         } else {
-            save->scene_flag_words[idx + 7] = 0;
-            save->scene_flag_words[idx + 6] = 0;
-            save->scene_flag_words[idx + 5] = 0;
-            save->scene_flag_words[idx + 4] = 0;
-            save->scene_flag_words[idx + 3] = 0;
-            save->scene_flag_words[idx + 2] = 0;
-            save->scene_flag_words[idx + 1] = 0;
-            row[0]                          = 0;
+            save->scene_flag_rows[i][7] = 0;
+            save->scene_flag_rows[i][6] = 0;
+            save->scene_flag_rows[i][5] = 0;
+            save->scene_flag_rows[i][4] = 0;
+            save->scene_flag_rows[i][3] = 0;
+            save->scene_flag_rows[i][2] = 0;
+            save->scene_flag_rows[i][1] = 0;
+            row[0]                      = 0;
         }
     }
     for (i = 0; i < 6; i++) {

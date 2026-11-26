@@ -7,14 +7,7 @@
 /* Arms one enemy battler slot: installs the work pointer in the scratchpad, resets the slot record, copies the
  * enemy id, then queues the enemy's script and bit flag. */
 /* func_800ABCE0 */
-// clang-format off
-MATCH void Battle_InitEnemy(enemy_slot, enemy_index, x, y)
-u8 enemy_slot;
-u16 enemy_index;
-s32 x;
-s32 y;
-// clang-format on
-{
+MATCH void Battle_InitEnemy(u8 enemy_slot, u16 enemy_index, s32 x, s32 y) {
     EnemyBattler* enemy;
     EnemyBattler* first;
     EnemyBattler* motion;

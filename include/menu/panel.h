@@ -207,6 +207,18 @@ typedef struct MenuPanelRaw {
     u16 unk_1E;
 } MenuPanelRaw;
 
+/* Where a message panel opens: x and y in screen units, 16 per panel position step. Bank 0 is for the wide panels
+ * (UI_MessageOpenPanel gives them width 0xC8), bank 1 for the narrow ones (width 0x78, panel flags & 2). */
+#define UI_PANEL_ORIGIN_BANKS 2
+#define UI_PANEL_ORIGIN_COUNT 8
+
+typedef struct UIPanelOrigin {
+    u8 x;
+    u8 y;
+} UIPanelOrigin;
+
+ASSERT_SIZE(UIPanelOrigin, 2);
+
 /* One of the 22 panel task records: the panel's position, state, layer and
  * item-table base. The battle overlays read the first 0x0C bytes through
  * BattlePanelTask (battle/records.h). */

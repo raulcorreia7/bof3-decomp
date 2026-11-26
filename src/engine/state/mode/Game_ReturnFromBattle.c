@@ -22,9 +22,9 @@ MATCH void Game_ReturnFromBattle(void) {
                 D_80148A50[i] = D_8018E268[i];
             }
             sel = &g_SndBGMId;
-            SsSepReplay(g_SelectionEffectVoices[g_SelectionSepSlots[*sel << 2]], g_SelectionSequences[*sel << 2]);
-            SND_SeqSetVolume((u16)(s8)(u8)g_SelectionEffectVoices[g_SelectionSepSlots[*sel << 2]], g_SelectionSequences[*sel << 2], 0, 0);
-            SND_SeqFadeIn((u16)(s8)(u8)g_SelectionEffectVoices[g_SelectionSepSlots[*sel << 2]], g_SelectionSequences[*sel << 2], 0x64, 8);
+            SsSepReplay(g_SelectionEffectVoices[g_BGMTracks[*sel].sep_slot], g_BGMTracks[*sel].sequence);
+            SND_SeqSetVolume((u16)(s8)(u8)g_SelectionEffectVoices[g_BGMTracks[*sel].sep_slot], g_BGMTracks[*sel].sequence, 0, 0);
+            SND_SeqFadeIn((u16)(s8)(u8)g_SelectionEffectVoices[g_BGMTracks[*sel].sep_slot], g_BGMTracks[*sel].sequence, 0x64, 8);
         }
         g_Battle.outcome.options = 0;
         g_Battle.encounter       = 0;

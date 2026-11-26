@@ -2500,15 +2500,12 @@ MATCH void func_801D9348(u16 x, u16 y, s32 color, s32 frame_mode) {
 }
 
 /* Draws one page of the name-entry letter grid in a window at (left, top) and its cursor. */
-// clang-format off
-MATCH void func_801D94D0(page, left, top, cursor_col, cursor_row)
-u8 page;
-s16 left;
-u16 top;
-u8 cursor_col;
-u8 cursor_row;
-// clang-format on
-{
+MATCH void func_801D94D0(s32 raw_page, s32 raw_left, s32 raw_top, s32 raw_cursor_col, s32 raw_cursor_row) {
+    u8  page       = raw_page;
+    s16 left       = raw_left;
+    u16 top        = raw_top;
+    u8  cursor_col = raw_cursor_col;
+    u8  cursor_row = raw_cursor_row;
     u8  tags[20];
     u8* cell;
     u16 x;

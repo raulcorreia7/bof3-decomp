@@ -29,7 +29,7 @@ MATCH void UI_MessageReset(void) {
         *(u8**)(base + 0xC) = cursor + 2;
         base[0x2A]          = value;
     } else {
-        D_801490CE = 0;
+        g_UiPanelPlacement = 0;
     }
     g_UiMessageStateTimer[0] = 0;
     g_UiMessageState.index   = 0;
