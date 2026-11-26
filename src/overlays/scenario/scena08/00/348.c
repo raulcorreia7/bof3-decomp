@@ -468,9 +468,11 @@ NON_MATCHING void func_801F823C(s16 x, s16 y, s16 height, s16 width) {
     s32       skew;
     s16       top;
     u8        i;
+    u8        h;
 
     row = height - 1;
     for (i = 0; i < height * 2; i++) {
+        h    = height;
         half = SquareRoot0(height * height - row * row);
         skew = (width * rsin(D_801FE9EC[i])) >> 12;
         prim = (POLY_GT4*)g_GfxPrimCursor;
@@ -484,8 +486,8 @@ NON_MATCHING void func_801F823C(s16 x, s16 y, s16 height, s16 width) {
         prim->y3 = prim->y2 = top + 1;
         prim->u2 = prim->u0 = 0x40 - half;
         prim->u3 = prim->u1 = 0x40;
-        prim->v1 = prim->v0 = i - (height - 0x40);
-        prim->v3 = prim->v2 = i + 0x40 - height + 1;
+        prim->v1 = prim->v0 = i - (h - 0x40);
+        prim->v3 = prim->v2 = i + 0x40 - h + 1;
         prim->tpage         = GetTPage(TPAGE_DEPTH_15BIT, TPAGE_ABR_HALF, 0x340, 0x100);
         prim->g0            = 0x40;
         prim->r0            = 0x40;
@@ -509,9 +511,9 @@ NON_MATCHING void func_801F823C(s16 x, s16 y, s16 height, s16 width) {
         prim->u2 = prim->u0 = 0;
         prim->x2 = prim->x0 = x + skew;
         prim->x3 = prim->x1 = x + skew + half;
-        prim->v1 = prim->v0 = i + 0x40 - height - 0x80;
+        prim->v1 = prim->v0 = i + 0x40 - h - 0x80;
         prim->u3 = prim->u1 = half;
-        prim->v3 = prim->v2 = i + 0x40 - height - 0x7F;
+        prim->v3 = prim->v2 = i + 0x40 - h - 0x7F;
         prim->tpage         = GetTPage(TPAGE_DEPTH_15BIT, TPAGE_ABR_HALF, 0x340, 0x100);
         prim->b0            = 0x60;
         prim->g0            = 0x60;
