@@ -1,6 +1,7 @@
 #include "area189_13.h"
 
-MATCH void func_801F5600(void) {
+#ifdef NON_MATCHING
+NON_MATCHING void func_801F5600(void) {
     s32 i;
 
     Actor_ClearVelocity_801F5F20();
@@ -108,3 +109,6 @@ MATCH void func_801F5600(void) {
     }
     func_801F5D20();
 }
+#else
+INCLUDE_ASM(func_801F5600);
+#endif
