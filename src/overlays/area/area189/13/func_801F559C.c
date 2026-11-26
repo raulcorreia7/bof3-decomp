@@ -5,11 +5,9 @@ MATCH void func_801F559C(void) {
 
     work = TASK(Actor);
     work->pos.x.fixed += work->vx;
-    g_AreaScrollTargetX = work->pos.x.fixed;
-    FAKE_BARRIER(); /* FAKE: the y block starts after the x target store. */
+    g_AreaScrollTargetCoordX.fixed = work->pos.x.fixed;
     work->pos.y.fixed += work->vy;
-    g_AreaScrollTargetY = work->pos.y.fixed;
-    FAKE_BARRIER(); /* FAKE: the refresh request follows the y target store. */
-    g_AreaCameraRefreshCount = 2;
+    g_AreaScrollTargetCoordY.fixed = work->pos.y.fixed;
+    g_AreaCameraRefreshCount       = 2;
     work->pos.z.fixed += work->vz;
 }
