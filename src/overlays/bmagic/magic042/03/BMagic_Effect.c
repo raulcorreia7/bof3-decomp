@@ -4,11 +4,13 @@
 __asm__(".include \"include/match/macro.inc\"\n");
 #endif
 
-MATCH void func_801EEC18(void) {
-    BMagic_DispatchTaskPair(func_801EEC70, func_801EED44);
+/* func_801EEC18 */
+MATCH void BMagic_BurstUpdate(void) {
+    BMagic_DispatchTaskPair(BMagic_BurstInit, Effect_MarkDamagedOnZeroTick);
 }
 
-MATCH void func_801EEC70(void) {
+/* func_801EEC70 */
+MATCH void BMagic_BurstInit(void) {
     u32 slot;
 
     TASK(PartyMember)->facing       = g_BattleEffectBattler->facing;
@@ -29,17 +31,18 @@ MATCH void func_801EEC70(void) {
 /* func_801EEDA4 */
 #include "overlays/bmagic/shared/BMagic_DispatchEffectMode.h"
 
-MATCH void func_801EEDE8(void) {
-    Magic042Steps handlers;
+/* func_801EEDE8 */
+MATCH void BMagic_BurstFlareUpdate(void) {
+    BMagicBurstFlareSteps handlers;
 
-    handlers = D_801EEC04;
+    handlers = g_BMagicBurstFlareSteps;
     SYS_DISPATCH_TASK(handlers.steps, 2, g_Task);
     if (TASK(PartyMember)->header.flags & 0x1 && TASK(PartyMember)->header.step != 0) {
-        func_801EF920();
-        func_801EF380(0, TASK(PartyMember)->unk_09);
-        func_801EF71C(TASK(PartyMember)->param.unk_0B + 8, TASK(PartyMember)->timer);
-        func_801EF71C(TASK(PartyMember)->param.unk_0B + 0x10, TASK(PartyMember)->timer);
-        func_801EF71C(TASK(PartyMember)->param.unk_0B + 0x18, TASK(PartyMember)->timer);
+        BMagic_BurstDrawGlow();
+        BMagic_BurstDrawRays(0, TASK(PartyMember)->unk_09);
+        BMagic_BurstDrawSpokes(TASK(PartyMember)->param.unk_0B + 8, TASK(PartyMember)->timer);
+        BMagic_BurstDrawSpokes(TASK(PartyMember)->param.unk_0B + 0x10, TASK(PartyMember)->timer);
+        BMagic_BurstDrawSpokes(TASK(PartyMember)->param.unk_0B + 0x18, TASK(PartyMember)->timer);
     }
 }
 
@@ -55,7 +58,8 @@ MATCH void func_801EEF08(void) {
     TASK(PartyMember)->header.step += 1;
 }
 
-MATCH void func_801EEFB8(void) {
+/* func_801EEFB8 */
+MATCH void BMagic_BurstFlareOpen(void) {
     PartyMember* work;
 
     work = TASK(PartyMember);
@@ -68,7 +72,8 @@ MATCH void func_801EEFB8(void) {
     }
 }
 
-MATCH void func_801EF024(void) {
+/* func_801EF024 */
+MATCH void BMagic_BurstFlareLengthen(void) {
     PartyMember* work;
 
     work = TASK(PartyMember);
@@ -81,7 +86,8 @@ MATCH void func_801EF024(void) {
     }
 }
 
-MATCH void func_801EF090(void) {
+/* func_801EF090 */
+MATCH void BMagic_BurstFlareGrow(void) {
     u8 timer;
 
     TASK(PartyMember)->param.unk_0B += 1;
@@ -93,7 +99,8 @@ MATCH void func_801EF090(void) {
     }
 }
 
-MATCH void func_801EF118(void) {
+/* func_801EF118 */
+MATCH void BMagic_BurstFlareEnd(void) {
     u8 count;
     u8 timer_next;
 
@@ -117,11 +124,11 @@ MATCH void func_801EF1B0(void) {
     u32          slot;
     u8           type;
 
-    EFFECT_OFFSET_BY_TARGET_POSE(D_801EFC24, D_801EFBCC, D_801EFB74);
+    EFFECT_OFFSET_BY_TARGET_POSE(g_BMagicBurstFormTypes, g_BMagicBurstFormOffsets, g_BMagicBurstCharacterOffsets);
 }
 
-/* Draws rays out from the effect point at two angles, start and start + 16: a bright one of the full radius and a dimmer pair two thirds as long, one pixel above and below it. */
-MATCH void func_801EF380(u8 start, u16 radius) {
+/* func_801EF380 */
+MATCH void BMagic_BurstDrawRays(u8 start, u16 radius) {
     LINE_G2* line;
     s32      tpage;
     u8       i;
@@ -164,7 +171,8 @@ MATCH void func_801EF380(u8 start, u16 radius) {
     GFX_AddDitheredDrawMode(BMAGIC_LAYER_OVER_BATTLERS, tpage);
 }
 
-MATCH void func_801EF71C(u8 start, u16 radius) {
+/* func_801EF71C */
+MATCH void BMagic_BurstDrawSpokes(u8 start, u16 radius) {
     LINE_G2* line;
     s32      tpage;
     s16      i;
@@ -190,7 +198,8 @@ MATCH void func_801EF71C(u8 start, u16 radius) {
 
 #include "overlays/bmagic/shared/Effect_DrawGlowFan.h"
 
-MATCH void func_801EF920(void) {
+/* func_801EF920 */
+MATCH void BMagic_BurstDrawGlow(void) {
     POLY_G3* poly;
     s32      tpage;
     s32      i;
