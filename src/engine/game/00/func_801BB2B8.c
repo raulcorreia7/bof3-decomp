@@ -1,32 +1,42 @@
 #include "game_00.h"
 
+/* A coordinate word whose high half is written alone; retail masks the uninitialized low half. */
+typedef union {
+    s32 w;
+
+    struct {
+        u16 lo;
+        u16 hi;
+    } h;
+} GameCoordPack;
+
 #ifdef NON_MATCHING
 NON_MATCHING s32 func_801BB2B8(s32 x0, s32 y0, s32 x1, s32 y1) {
-    s32   hx0;
-    s32   hy0;
-    Coord to_x;
-    Coord to_y;
-    s32   code1;
-    s32   code2;
-    s32   key;
-    s32   bit;
+    s32           hx0;
+    s32           hy0;
+    GameCoordPack to_x;
+    GameCoordPack to_y;
+    s32           code1;
+    s32           code2;
+    s32           key;
+    s32           bit;
 
-    hx0             = x0 << 16;
-    hy0             = y0 << 16;
-    COORD_INT(to_x) = x1;
-    COORD_INT(to_y) = y1;
+    hx0       = x0 << 16;
+    hy0       = y0 << 16;
+    to_x.h.hi = x1;
+    to_y.h.hi = y1;
 
     if (COORD_FRAC(TASK(Actor)->pos.x) == 0) {
         if (TASK(Actor)->voice_flags.scene_flag == 0)
-            hx0 = (hx0 + (to_x.fixed & 0xFFFF0000)) / 2;
+            hx0 = (hx0 + (to_x.w & ~0xFFFFU)) / 2;
     } else if (TASK(Actor)->voice_flags.scene_flag != 0) {
-        hx0 = (hx0 + (to_x.fixed & 0xFFFF0000)) / 2;
+        hx0 = (hx0 + (to_x.w & ~0xFFFFU)) / 2;
     }
     if (COORD_FRAC(TASK(Actor)->pos.y) == 0) {
         if (TASK(Actor)->voice_flags.scene_flag == 0)
-            hy0 = (hy0 + (to_y.fixed & 0xFFFF0000)) / 2;
+            hy0 = (hy0 + (to_y.w & ~0xFFFFU)) / 2;
     } else if (TASK(Actor)->voice_flags.scene_flag != 0) {
-        hy0 = (hy0 + (to_y.fixed & 0xFFFF0000)) / 2;
+        hy0 = (hy0 + (to_y.w & ~0xFFFFU)) / 2;
     }
 
     code1 = AREA_CELL_CODE_S16(x0, y0);

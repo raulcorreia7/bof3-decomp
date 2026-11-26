@@ -27,12 +27,11 @@ typedef struct TalkMessageRow {
 /* func_801A8F94 */
 /* Runs flow opcodes until a movement or wait opcode; returns the facing selection. */
 MATCH u8 Script_OpsRunFlow(ScriptState* state, u8* base, s32 seed) {
-    s32                 left;
-    s32                 sel;
-    s8                  arg_size;
-    u8                  group;
-    void*               obj;
-    AreaScriptCallback* table;
+    s32       left;
+    s32       sel;
+    s8        arg_size;
+    u8        group;
+    AreaLoad* area;
 
     sel = seed;
     for (;;) {
@@ -98,9 +97,8 @@ MATCH u8 Script_OpsRunFlow(ScriptState* state, u8* base, s32 seed) {
                     state->cursor = Script_FindLabel(state, (u8)state->cursor, base);
                     break;
                 case ACTOR_SCRIPT_FLOW_CALL_AREA_SCRIPT:
-                    obj   = g_AreaLoads[g_GameAreaId];
-                    table = FIELD(AreaScriptCallback*, obj, 0x3Cu);
-                    table[(base + state->cursor)[1]](obj);
+                    area = g_AreaLoads[g_GameAreaId];
+                    ((AreaScriptCallback*)area->unk_3C)[(base + state->cursor)[1]](area);
                     sel = TASK(Actor)->direction;
                     state->cursor += 2;
                     break;

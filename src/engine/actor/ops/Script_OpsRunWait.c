@@ -24,13 +24,12 @@ typedef enum ActorScriptWait {
 /* Runs one wait or camera opcode. */
 #ifdef NON_MATCHING
 NON_MATCHING u8 Script_OpsRunWait(ScriptState* state, u8* base, u8 value) {
-    u8*                 cmd;
-    u8*                 slot;
-    u8                  frames;
-    u16                 pc;
-    u32                 index;
-    void*               obj;
-    AreaScriptCallback* table;
+    u8*       cmd;
+    u8*       slot;
+    u8        frames;
+    u16       pc;
+    u32       index;
+    AreaLoad* area;
 
     switch (base[state->cursor]) {
         case ACTOR_SCRIPT_WAIT_SNAP_PARTY_TO_SCROLL:
@@ -124,9 +123,8 @@ NON_MATCHING u8 Script_OpsRunWait(ScriptState* state, u8* base, u8 value) {
             Area_CellClearPalette(COORD_INT(TASK(Actor)->pos.x), COORD_INT(TASK(Actor)->pos.y));
             return value;
         case ACTOR_SCRIPT_WAIT_CALL_AREA_SCRIPT:
-            obj   = g_AreaLoads[g_GameAreaId];
-            table = FIELD(AreaScriptCallback*, obj, 0x3Cu);
-            table[(base + state->cursor)[1]](obj);
+            area = g_AreaLoads[g_GameAreaId];
+            ((AreaScriptCallback*)area->unk_3C)[(base + state->cursor)[1]](area);
             value = TASK(Actor)->direction;
             state->cursor += 1;
             break;
