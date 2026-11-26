@@ -29,10 +29,10 @@ MATCH void func_801F3398(void) {
             prim = (POLY_FT4*)g_GfxPrimCursor;
             SetPolyFT4(prim);
             SetShadeTex(prim, 1);
-            *(u32*)&prim->x0 = *(u32*)&quad->x0;
-            *(u32*)&prim->x1 = *(u32*)&quad->x1;
-            *(u32*)&prim->x2 = *(u32*)&quad->x2;
-            *(u32*)&prim->x3 = *(u32*)&quad->x3;
+            LOWU(prim->x0) = LOWU(quad->x0);
+            LOWU(prim->x1) = LOWU(quad->x1);
+            LOWU(prim->x2) = LOWU(quad->x2);
+            LOWU(prim->x3) = LOWU(quad->x3);
             Area_ApplyTileToQuad(AREA199_TRAIL_PART_WORD + D_801F4544[member * 2] + g_Area199TrailCells[i][member].flag, prim, 1);
             Area_CellAddPrim(g_Area199TrailCells[i][member].x << 16, g_Area199TrailCells[i][member].y << 16, 0, sizeof(POLY_FT4));
 
@@ -43,10 +43,10 @@ MATCH void func_801F3398(void) {
             prim = (POLY_FT4*)g_GfxPrimCursor;
             SetPolyFT4(prim);
             SetShadeTex(prim, 1);
-            *(u32*)&prim->x0 = *(u32*)&below->x0;
-            *(u32*)&prim->x1 = *(u32*)&below->x1;
-            *(u32*)&prim->x2 = *(u32*)&below->x2;
-            *(u32*)&prim->x3 = *(u32*)&below->x3;
+            LOWU(prim->x0) = LOWU(below->x0);
+            LOWU(prim->x1) = LOWU(below->x1);
+            LOWU(prim->x2) = LOWU(below->x2);
+            LOWU(prim->x3) = LOWU(below->x3);
             Area_ApplyTileToQuad(AREA199_TRAIL_PART_WORD + D_801F4545[member * 2] + g_Area199TrailCells[i][member].flag, prim, 1);
             Area_CellAddPrim(g_Area199TrailCells[i][member].x << 16, (g_Area199TrailCells[i][member].y + (s8)D_801F4548[member]) << 16, 0, sizeof(POLY_FT4));
         }
