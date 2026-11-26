@@ -10,7 +10,8 @@ __asm__(".include \"include/match/macro.inc\"\n");
  * 0x55 in mode 3, sets STP on colours 1 to 15 of the first two palettes of work row 26
  * and clears their colour 0, then fills bytes 0x24, 0x27 and 0x28 of the effect from the
  * effect battler and marks the battler busy. */
-MATCH void func_801EEC94(void) {
+/* func_801EEC94 */
+MATCH void BMagic_SacrificeInit(void) {
     PartyMember*     work;
     u16*             dst;
     u16*             src;
@@ -40,7 +41,7 @@ MATCH void func_801EEC94(void) {
         *slot = *image;
     }
     work                                = TASK(PartyMember);
-    g_BattleEffects[index].header.mode  = 3;
+    g_BattleEffects[index].header.mode  = BMAGIC_SACRIFICE_EFFECT_CASTER;
     g_BattleEffects[index].unk_06       = 1;
     g_BattleEffects[index].header.step  = 0;
     g_BattleEffects[index].step_index   = 0x55;
@@ -62,9 +63,10 @@ MATCH void func_801EEC94(void) {
     g_BattleEffectBattler->header.flags |= PARTY_MEMBER_FLAG_HANDLER_BUSY;
 }
 
-MATCH s32 func_801EEF3C(void) {
+/* func_801EEF3C */
+MATCH s32 BMagic_SacrificeEnd(void) {
     if (TASK(PartyMember)->param.unk_0B == 0) {
-        g_BattleEffectBattler->header.flags &= ~0x40;
+        g_BattleEffectBattler->header.flags &= ~PARTY_MEMBER_FLAG_HANDLER_BUSY;
         func_800AFC54();
         Battle_SelectActiveBattlerScript(0x1C, 0);
         Battle_MarkDamaged(g_Battle.target_selector);
@@ -90,13 +92,15 @@ MATCH s32 func_801EEF3C(void) {
 /* func_801EF1B0 */
 #include "overlays/bmagic/shared/BMagic_DispatchEffectMode.h"
 
-MATCH void func_801EF1F4(void) {
-    BMAGIC_DISPATCH_AND_DRAW(D_801F0754, BMagic_DrawDome);
+/* func_801EF1F4 */
+MATCH void BMagic_SacrificeDomeUpdate(void) {
+    BMAGIC_DISPATCH_AND_DRAW(g_BMagicSacrificeDomeSteps, BMagic_SacrificeDrawDome);
 }
 
 #include "overlays/bmagic/shared/Effect_CopyBattlerCoords.h"
 
-MATCH void func_801EF2DC(void) {
+/* func_801EF2DC */
+MATCH void BMagic_SacrificeDomeExpand(void) {
     u8 counter;
 
     if (TASK(PartyMember)->unk_09 == 4) {
@@ -110,7 +114,8 @@ MATCH void func_801EF2DC(void) {
     }
 }
 
-MATCH void func_801EF37C(void) {
+/* func_801EF37C */
+MATCH void BMagic_SacrificeDomeEnd(void) {
     u8 count;
 
     SP_REF(s16, 0u) = (TASK(PartyMember)->unk_09 * 4) + 0x120;
@@ -126,7 +131,7 @@ MATCH void func_801EF37C(void) {
 #include "overlays/bmagic/shared/Effect_SetActorMatrix.h"
 
 /* func_801EF4C0 */
-MATCH void BMagic_DrawDome(void) {
+MATCH void BMagic_SacrificeDrawDome(void) {
     POLY_GT4* prim;
     long      depth;
     long      flag;
@@ -193,15 +198,17 @@ MATCH void BMagic_DrawDome(void) {
     }
 }
 
-MATCH void func_801EFA50(void) {
-    BMAGIC_DISPATCH_AND_DRAW(D_801F0760, func_801EFC74);
+/* func_801EFA50 */
+MATCH void BMagic_SacrificeShadowUpdate(void) {
+    BMAGIC_DISPATCH_AND_DRAW(g_BMagicSacrificeShadowSteps, BMagic_SacrificeDrawShadow);
 }
 
 MATCH void Effect_CopyBattlerCoords2(void) {
     BMAGIC_COPY_BATTLER_COORDS();
 }
 
-MATCH void func_801EFB38(void) {
+/* func_801EFB38 */
+MATCH void BMagic_SacrificeShadowGrow(void) {
     PartyMember* work;
 
     work = TASK(PartyMember);
@@ -220,7 +227,8 @@ MATCH void func_801EFB38(void) {
 
 /* Draws the glow disc of sixteen shaded triangles round the effect point; the radius
  * follows byte 0x09 (a wider rule from step 2 on) and the centre colour the effect timer. */
-MATCH void func_801EFC74(void) {
+/* func_801EFC74 */
+MATCH void BMagic_SacrificeDrawShadow(void) {
     POLY_G3* prim;
     long     depth;
     long     flag;
@@ -250,24 +258,27 @@ MATCH void func_801EFC74(void) {
     }
 }
 
-MATCH void func_801EFF28(void) {
+/* func_801EFF28 */
+MATCH void BMagic_SacrificeCasterUpdate(void) {
     Magic056Steps handlers;
 
-    handlers = D_801EEC10;
+    handlers = g_BMagicSacrificeCasterSteps;
     SYS_DISPATCH_BYTE(handlers.steps, TASK(PartyMember)->header.step);
     if (TASK(PartyMember)->header.flags != 0 && TASK(PartyMember)->header.step != 0) {
         Area_AddGridActor();
     }
 }
 
-MATCH void func_801EFFE8(void) {
+/* func_801EFFE8 */
+MATCH void BMagic_SacrificeCasterStart(void) {
     TASK(PartyMember)->unk_27 = BATTLE_ACTIVE_WORK->unk_27;
     TASK(PartyMember)->header.step++;
 }
 
 #include "overlays/bmagic/shared/Effect_PrimeTintOnScriptReady.h"
 
-MATCH void func_801F00C8(void) {
+/* func_801F00C8 */
+MATCH void BMagic_SacrificeCasterHide(void) {
     PartyMember* work;
     PartyMember* source;
 
@@ -282,7 +293,8 @@ MATCH void func_801F00C8(void) {
     }
 }
 
-MATCH void func_801F0178(void) {
+/* func_801F0178 */
+MATCH void BMagic_SacrificeCasterShow(void) {
     TASK(PartyMember)->unk_5D += 0x10;
     TASK(PartyMember)->unk_5E += 0x10;
     TASK(PartyMember)->unk_5F += 0x10;
@@ -294,7 +306,8 @@ MATCH void func_801F0178(void) {
     }
 }
 
-MATCH void func_801F023C(void) {
+/* func_801F023C */
+MATCH void BMagic_SacrificeCasterCast(void) {
     PartyMember* saved;
     PartyMember* task;
     u8           slot;
@@ -305,11 +318,11 @@ MATCH void func_801F023C(void) {
     if (count == 0) {
         slot                               = Battle_AllocEffect(1, 0x55);
         g_BattleEffects[slot].target.party = g_BattleEffectBattler;
-        g_BattleEffects[slot].header.mode  = 0;
+        g_BattleEffects[slot].header.mode  = BMAGIC_SACRIFICE_EFFECT_DOME;
         g_BattleEffectBattler->param.unk_0B += 1;
         slot                               = Battle_AllocEffect(1, 0x55);
         g_BattleEffects[slot].target.party = g_BattleEffectBattler;
-        g_BattleEffects[slot].header.mode  = 2;
+        g_BattleEffects[slot].header.mode  = BMAGIC_SACRIFICE_EFFECT_SHADOW;
         g_BattleEffectBattler->param.unk_0B += 1;
         SND_SEQueueSelection(EMI_SE_ID(SND_BANK_COMMON, 0));
         if (g_Battle.active_battler < BATTLE_PARTY_CHARACTERS_COUNT) {
@@ -332,7 +345,8 @@ MATCH void func_801F023C(void) {
     }
 }
 
-MATCH void func_801F042C(void) {
+/* func_801F042C */
+MATCH void BMagic_SacrificeCasterHold(void) {
     u8 count;
 
     Script_AnimStepLoop();
@@ -348,7 +362,8 @@ MATCH void func_801F042C(void) {
     }
 }
 
-MATCH void func_801F04EC(void) {
+/* func_801F04EC */
+MATCH void BMagic_SacrificeCasterVanish(void) {
     PartyMember* member;
     PartyMember* work;
 
@@ -365,7 +380,7 @@ MATCH void func_801F04EC(void) {
         /* FAKE: retail re-reads the party cell for the next copy. */
         FAKE_BARRIER();
         work->pos.z.fixed = g_BattleActiveActor->pos.z.fixed;
-        if (g_Battle.active_battler < 3) {
+        if (g_Battle.active_battler < BATTLE_PARTY_CHARACTERS_COUNT) {
             member = &g_Game.members[g_Battle.active_battler];
             g_Task = member;
             Script_Select(member->facing + 0x1C);
@@ -378,7 +393,8 @@ MATCH void func_801F04EC(void) {
     }
 }
 
-MATCH void func_801F0658(void) {
+/* func_801F0658 */
+MATCH void BMagic_SacrificeCasterReturn(void) {
     if (g_BattleEffectBattler->param.unk_0B == 1) {
         TASK(PartyMember)->unk_5D += 0x10;
         TASK(PartyMember)->unk_5E += 0x10;
@@ -390,6 +406,7 @@ MATCH void func_801F0658(void) {
     }
 }
 
-MATCH void func_801F0724(void) {
+/* func_801F0724 */
+MATCH void BMagic_SacrificeCasterEnd(void) {
     Effect_Reset();
 }
