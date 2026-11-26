@@ -32,10 +32,8 @@ extern Callback D_801F5024[];
 extern u8                  D_801F5034[];
 extern u16                 D_801F5038[][4][3];
 extern u32                 D_801F5080[][3];
-/* The three colour bytes func_801F4DF0 reads for each task row. */
-extern u8                  D_801F6138[];
-extern u8                  D_801F6139[];
-extern u8                  D_801F613A[];
+/* The red, green and blue bytes of each task colour. */
+extern u8                  D_801F6138[][3];
 /* D_801F6144 */
 extern PartyMemberMessages g_PartyMemberMessages[2];
 extern Callback            D_801F6160[];
