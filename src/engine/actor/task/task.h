@@ -68,7 +68,7 @@ void Actor_StartFacingScript(void);
 /* func_801A4B80 */
 void Actor_TurnRampClear(s32 index);
 /* func_801A5B78 */
-void Actor_SpawnVoiced(u8* script);
+void func_801A5B78(u8* script);
 /* func_801A623C */
 void Actor_SpawnBattleEntry(u8* script);
 

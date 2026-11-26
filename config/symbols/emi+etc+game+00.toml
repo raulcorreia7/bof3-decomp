@@ -136,7 +136,6 @@ Actor_TurnRampClear = { addr = 0x801A4B80, type = "func", source = "Clears the t
 Area_CellSetCode = { addr = 0x801A4BC0, type = "func", source = "Writes the g_AreaCellCodes byte of the cell at (column, row); Area_CellGetCode reads the same index." }
 Area_RunSetupRecord = { addr = 0x801A4BF8, type = "func", source = "Runs one setup stream record of type 0x0 to 0xE and returns the next record." }
 Actor_SpawnFromRecord = { addr = 0x801A4D54, type = "func", source = "Spawns an actor in the next free slot from a 17-byte scene script record (scene record, position, mode, step)." }
-Actor_SpawnVoiced = { addr = 0x801A5B78, type = "func", source = "Spawns a map actor from a type 3 setup record, with its voice flags." }
 Actor_SpawnBattleEntry = { addr = 0x801A623C, type = "func", source = "Spawns a battle entry actor from a type 7 setup record; the entry id is the one Battle_FindActorEntry looks up." }
 Actor_SpawnPartyFromRecord = { addr = 0x801A65A0, type = "func", source = "Spawns a party member actor from a 16-byte scene script record; loads the member sprite." }
 Area_ScrollInitRoute = { addr = 0x801A72B0, type = "func", source = "Setup stream type 0xC: starts the scroll route its byte 1 selects." }

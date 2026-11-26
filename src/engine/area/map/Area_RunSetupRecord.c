@@ -54,7 +54,7 @@ MATCH u8* Area_RunSetupRecord(u8* script) {
             func_801A5EFC(script);
             break;
         case AREA_SETUP_TYPE_ENTITY_VOICED:
-            Actor_SpawnVoiced(script);
+            func_801A5B78(script);
             break;
         case AREA_SETUP_TYPE_ENTITY_2:
             func_801A57F0(script);

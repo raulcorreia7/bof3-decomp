@@ -709,6 +709,7 @@ void    func_801A3B7C(Actor* entity);
 void    func_801A50C0(u8* script);
 void    func_801A5400(u8* script);
 void    func_801A57F0(u8* script);
+void    func_801A5B78(u8* script);
 void    func_801A5EFC(u8* script);
 void    func_801A68C0(u8* script);
 void    func_801A6F58(u8* script);

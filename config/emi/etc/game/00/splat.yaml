@@ -461,7 +461,7 @@ segments:
       - [0xF8C0, c, func_801A50C0]
       - [0xFC00, c, func_801A5400]
       - [0xFFF0, c, func_801A57F0]
-      - [0x10378, c, ../../actor/task/Actor_SpawnVoiced]
+      - [0x10378, c, func_801A5B78]
       - [0x106FC, c, func_801A5EFC]
       - [0x10A3C, c, ../../actor/task/Actor_SpawnBattleEntry]
       - [0x10DA0, c, ../../actor/task/Actor_SpawnPartyFromRecord]
