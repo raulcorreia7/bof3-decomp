@@ -181,7 +181,7 @@ next:
             }
             g_TextVariables[0][5] = 0;
         }
-        UI_TextDraw((s16)(x + 0x14), (s16)(j * 16 + 0x1C + y), 0, TEXT_LENGTH_MAX, MESSAGE_TABLE_TEXT(AREA_MESSAGE_TABLE, D_801D197C[D_80145E60[i].type][0]));
+        UI_TextDraw((s16)(x + 0x14), (s16)(y + 0x1C + j * 16), 0, TEXT_LENGTH_MAX, MESSAGE_TABLE_TEXT(AREA_MESSAGE_TABLE, D_801D197C[D_80145E60[i].type][0]));
         i++;
         j++;
         if (j < 8) {
