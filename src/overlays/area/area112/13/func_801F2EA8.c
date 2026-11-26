@@ -17,23 +17,23 @@ MATCH void func_801F2EA8(void) {
     if (COORD_INT(TASK(Actor)->pos.x) == 0) {
         for (x = D_801F4218[COORD_INT(TASK(Actor)->pos.x)].x0; x < D_801F4218[COORD_INT(TASK(Actor)->pos.x)].x_end; x++) {
             for (y = D_801F4218[COORD_INT(TASK(Actor)->pos.x)].y0; y < D_801F4218[COORD_INT(TASK(Actor)->pos.x)].y_end; y++) {
-                *(g_AreaCellCodes + y * *(u8*)MAP_BUNDLE_BASE + x) = TASK(Actor)->header.step != 2 ? 0x11 : 0;
+                *(g_AreaCellCodes + y * AREA112_MAP_WIDTH + x) = TASK(Actor)->header.step != 2 ? 0x11 : 0;
             }
         }
     } else {
         for (x = D_801F4218[COORD_INT(TASK(Actor)->pos.x)].x0; x < D_801F4218[COORD_INT(TASK(Actor)->pos.x)].x_end; x++) {
             for (y = D_801F4218[COORD_INT(TASK(Actor)->pos.x)].y0; y < D_801F4218[COORD_INT(TASK(Actor)->pos.x)].y_end; y++) {
-                shade                                                                                              = D_801F4228[flag][n++];
-                value                                                                                              = (shade << 24) | (shade << 16) | (shade << 8) | shade;
-                ((AreaCellCorners*)((MAP_BUNDLE_BASE + 0x30) + (y * *(u8*)MAP_BUNDLE_BASE << 2) + (x << 2)))->word = value;
+                shade                                                                                          = D_801F4228[flag][n++];
+                value                                                                                          = (shade << 24) | (shade << 16) | (shade << 8) | shade;
+                ((AreaCellCorners*)((MAP_BUNDLE_BASE + 0x30) + (y * AREA112_MAP_WIDTH << 2) + (x << 2)))->word = value;
             }
         }
     }
     for (x = D_801F4218[COORD_INT(TASK(Actor)->pos.x)].x0; x < D_801F4218[COORD_INT(TASK(Actor)->pos.x)].x_end; x++) {
         for (y = D_801F4218[COORD_INT(TASK(Actor)->pos.x)].y0; y < D_801F4218[COORD_INT(TASK(Actor)->pos.x)].y_end; y++) {
-            height                                                                              = Area_HeightSample(x << 16, y << 16);
-            value                                                                               = (-(COORD_INT(TASK(Actor)->pos.z) * 2) - height) / 32;
-            *(u8*)(g_AreaMapHeightOffset * 4 + x + y * *(u8*)MAP_BUNDLE_BASE + MAP_BUNDLE_BASE) = value;
+            height                                                                   = Area_HeightSample(x << 16, y << 16);
+            value                                                                    = (-(COORD_INT(TASK(Actor)->pos.z) * 2) - height) / 32;
+            AREA112_MAP_BYTES[g_AreaMapHeightOffset * 4 + x + y * AREA112_MAP_WIDTH] = value;
         }
     }
 }

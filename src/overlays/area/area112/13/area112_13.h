@@ -27,6 +27,10 @@ void func_801F2EA8(void);
 void func_801F3274(void);
 void Area_DrawLightPillar(s32* pos);
 
+/* The map bundle as bytes, and its width byte read at the constant address. */
+#define AREA112_MAP_BYTES ((u8*)MAP_BUNDLE_BASE)
+#define AREA112_MAP_WIDTH (*AREA112_MAP_BYTES)
+
 /* The scene flag id of each cell the step handles, by cell column. */
 extern u8  D_801F420C[];
 /* The ground height of each cell, by cell column. */
