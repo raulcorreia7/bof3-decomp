@@ -12,7 +12,7 @@ NON_MATCHING void func_801F4640(s32 sample_height) {
     s32       y1;
     s16*      far_z;
 
-    far_z = &g_ScratchPadVectors[3].vz;
+    far_z                     = &g_ScratchPadVectors[3].vz;
     g_ScratchPadVectors[0].vx = g_ScratchPadVectors[2].vx = TASK(Actor)->screen_y - 0x3BC0;
     g_ScratchPadVectors[1].vx = g_ScratchPadVectors[3].vx = TASK(Actor)->screen_y - 0x3AC0;
     for (i = 0; i < 2; i++) {
