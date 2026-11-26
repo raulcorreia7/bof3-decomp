@@ -1,15 +1,15 @@
 #include "area125_13.h"
 
-MATCH void func_801F2FC4(const void* sprite) {
-    DVECTOR               screen;
-    u16                   size[2];
-    volatile s16          buf[8];
-    const AreaQuadSprite* work;
-    s32*                  object;
-    POLY_FT4*             primitive;
+MATCH void func_801F2FC4(void* sprite) {
+    DVECTOR         screen;
+    u16             size[2];
+    s16             buf[8];
+    AreaQuadSprite* work;
+    s32*            object;
+    POLY_FT4*       primitive;
 
-    work      = (const AreaQuadSprite*)sprite;
-    object    = (const void*)((const u8*)sprite + 8u);
+    work      = sprite;
+    object    = &work->origin.x;
     primitive = (POLY_FT4*)g_GfxPrimCursor;
 
     SetPolyFT4(primitive);

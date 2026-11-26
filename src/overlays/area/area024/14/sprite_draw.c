@@ -258,16 +258,16 @@ MATCH void func_801F2DD8(void) {
     Actor_Clear();
 }
 
-MATCH void func_801F2DF8(const AreaSprite* sprite) {
-    DVECTOR           screen;
-    u16               size[2];
-    volatile s16      buf[8];
-    const AreaSprite* work;
-    s32*              object;
-    POLY_FT4*         primitive;
+MATCH void func_801F2DF8(AreaSprite* sprite) {
+    DVECTOR     screen;
+    u16         size[2];
+    s16         buf[8];
+    AreaSprite* work;
+    s32*        object;
+    POLY_FT4*   primitive;
 
     work      = sprite;
-    object    = (s32*)&sprite->origin;
+    object    = &sprite->origin.x;
     primitive = (POLY_FT4*)g_GfxPrimCursor;
 
     SetPolyFT4(primitive);
@@ -449,18 +449,18 @@ MATCH void func_801F362C(void) {
 }
 
 MATCH void func_801F3708(void* vertices, const void* rotated, s16* transform) {
-    const AreaVertex* src;
-    AreaVertex*       dst;
-    AreaTransform*    state;
-    MATRIX            matrix;
-    SVECTOR           vec;
-    VECTOR            out;
-    long              flag;
-    long*             f;
-    VECTOR*           o;
-    SVECTOR*          v;
+    AreaVertex*    src;
+    AreaVertex*    dst;
+    AreaTransform* state;
+    MATRIX         matrix;
+    SVECTOR        vec;
+    VECTOR         out;
+    long           flag;
+    long*          f;
+    VECTOR*        o;
+    SVECTOR*       v;
 
-    src   = (const AreaVertex*)vertices;
+    src   = (AreaVertex*)vertices;
     dst   = (AreaVertex*)rotated;
     state = (AreaTransform*)transform;
 

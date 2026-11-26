@@ -1,15 +1,15 @@
 #include "area108_14.h"
 
-MATCH void func_801F2D40(const void* sprite) {
-    DVECTOR           screen;
-    u16               size[2];
-    volatile s16      buf[8];
-    const AreaSprite* work;
-    s32*              object;
-    POLY_FT4*         primitive;
+MATCH void func_801F2D40(void* sprite) {
+    DVECTOR     screen;
+    u16         size[2];
+    s16         buf[8];
+    AreaSprite* work;
+    s32*        object;
+    POLY_FT4*   primitive;
 
-    work      = (const AreaSprite*)sprite;
-    object    = (s32*)((const u8*)sprite + 4u);
+    work      = sprite;
+    object    = &work->origin.x;
     primitive = (POLY_FT4*)g_GfxPrimCursor;
 
     SetPolyFT4(primitive);

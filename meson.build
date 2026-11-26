@@ -30,7 +30,6 @@ touch = find_program('touch')
 compiler_tools = {
   '.venv/bin/python': 'run tools/setup.sh',
   'toolchains/gcc-2.7.2-psx/gcc': 'run tools/setup.sh',
-  'toolchains/gcc-2.7.2.1/gcc': 'run tools/setup.sh',
   'toolchains/psn00b_toolchain/bin/mipsel-none-elf-as': 'run tools/setup.sh',
   'third_party/maspsx/maspsx.py': 'run `git submodule update --init third_party/maspsx`',
 }
@@ -370,8 +369,6 @@ if have_compiler
   run_target('check-headers',
     command: [tools / 'check_configured.sh', 'headers', bld / 'headers.txt'],
     depends: probes)
-  run_target('check-unity',
-    command: [venv_python, tools / 'unity_check.py', '--build-dir', bld])
 endif
 
 if have_game

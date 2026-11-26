@@ -86,7 +86,6 @@ jobs:
         with:
           path: |
             toolchains/gcc-2.7.2-psx
-            toolchains/gcc-2.7.2.1
             toolchains/psyq-compilers
             toolchains/psn00b_toolchain
           key: toolchain-${{ runner.os }}-${{ hashFiles('tools/setup.sh') }}

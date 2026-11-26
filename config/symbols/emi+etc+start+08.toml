@@ -109,24 +109,40 @@ Item_CurePoisonParty = { addr = 0x801E8A70, type = "func", source = "clears pois
 Menu_PanelIdle = { addr = 0x801E8D58, type = "func", source = "The idle state of the start-menu panels; does nothing." }
 Menu_CharacterPanel = { addr = 0x801E8D60, type = "func", source = "panel mode 0 of the start menu: the character window with its portrait" }
 Menu_DrawCharacterPanel = { addr = 0x801E8DB4, type = "func", source = "Draws the character window and its icon." }
+UI_PanelSlideOutOption_801E90C0 = { addr = 0x801E90C0, type = "func", source = "same body as emi/etc/game/00@0x801996FC UI_PanelSlideOutOption" }
 Menu_ZennyPanel = { addr = 0x801E9140, type = "func", source = "panel mode 1 of the start menu: the zenny window" }
+UI_PanelSlideOutOption_801E91A4 = { addr = 0x801E91A4, type = "func", source = "same body as emi/etc/game/00@0x801996FC UI_PanelSlideOutOption" }
 Menu_PlayTimePanel = { addr = 0x801E9224, type = "func", source = "panel mode 2 of the start menu: the play time window" }
 Menu_CampIconsPanel = { addr = 0x801E9304, type = "func", source = "panel mode 3 of the start menu: the row of seven camp menu icons, the selected one grown" }
 Menu_DrawCampIcons = { addr = 0x801E9350, type = "func", source = "Draws the seven camp icons, the selected one enlarged." }
+UI_PanelSlideOutTask_801E94D4 = { addr = 0x801E94D4, type = "func", source = "same body as emi/etc/game/00@0x80199938 UI_PanelSlideOutTask" }
 Menu_TitlePanel = { addr = 0x801E9554, type = "func", source = "panel mode 4 of the start menu: the short header bar with a text label" }
+UI_PanelSlideOutTask_801E964C = { addr = 0x801E964C, type = "func", source = "same body as emi/etc/game/00@0x80199938 UI_PanelSlideOutTask" }
+UI_PanelSlideInTaskTop_801E968C = { addr = 0x801E968C, type = "func", source = "same body as emi/etc/game/00@0x80199978 UI_PanelSlideInTaskTop" }
 Menu_StatsPanel = { addr = 0x801E96CC, type = "func", source = "panel mode 5 of the start menu: the character stat panel" }
+UI_PanelSlideOutOption_801E9748 = { addr = 0x801E9748, type = "func", source = "same body as emi/etc/game/00@0x801996FC UI_PanelSlideOutOption" }
 Menu_EquipmentPanel = { addr = 0x801E98F8, type = "func", source = "panel mode 6 of the start menu: the equipment window" }
+UI_PanelSlideOutOption_801E9974 = { addr = 0x801E9974, type = "func", source = "same body as emi/etc/game/00@0x801996FC UI_PanelSlideOutOption" }
 Menu_MessagePanel = { addr = 0x801E9BEC, type = "func", source = "panel mode 9 of the start menu: the full-width header bar with a message" }
+UI_PanelSlideOutTask_801E9D18 = { addr = 0x801E9D18, type = "func", source = "same body as emi/etc/game/00@0x80199938 UI_PanelSlideOutTask" }
+UI_PanelSlideInTaskTop_801E9D58 = { addr = 0x801E9D58, type = "func", source = "same body as emi/etc/game/00@0x80199978 UI_PanelSlideInTaskTop" }
 Menu_CursorFramePanel = { addr = 0x801E9D98, type = "func", source = "panel mode 10 of the start menu: the frame drawn around the selected entry" }
 Menu_InventoryPanel = { addr = 0x801E9F5C, type = "func", source = "panel mode 12 of the start menu: the inventory window" }
+UI_PanelSlideOutOption_801EA030 = { addr = 0x801EA030, type = "func", source = "same body as emi/etc/game/00@0x801996FC UI_PanelSlideOutOption" }
 UI_PanelSlideLeft = { addr = 0x801EA070, type = "func", source = "Moves the master panel 0x20 pixels left and clamps its x at 0x98." }
 Menu_CommandsPanel = { addr = 0x801EA0B0, type = "func", source = "panel mode 13 of the start menu: the command row" }
+UI_PanelSlideOutTask_801EA118 = { addr = 0x801EA118, type = "func", source = "same body as emi/etc/game/00@0x80199938 UI_PanelSlideOutTask" }
 Menu_AdvancePanelY = { addr = 0x801EA158, type = "func", source = "same body as emi/etc/shisu/00@0x801D320C Menu_AdvancePanelY" }
 UI_CursorDrawPanel = { addr = 0x801EA198, type = "func", source = "Draws the menu panel cursor at the x and y of the current task root through UI_CursorDraw." }
 Menu_EquipComparePanel = { addr = 0x801EA50C, type = "func", source = "panel mode 16 of the start menu: the equipment compare window" }
+UI_PanelSlideOutOption_801EA598 = { addr = 0x801EA598, type = "func", source = "same body as emi/etc/game/00@0x801996FC UI_PanelSlideOutOption" }
 Menu_AbilitiesPanel = { addr = 0x801EA698, type = "func", source = "panel mode 17 of the start menu: the ten-row ability list" }
+UI_PanelSlideOutOption_801EA6EC = { addr = 0x801EA6EC, type = "func", source = "same body as emi/etc/game/00@0x801996FC UI_PanelSlideOutOption" }
 Menu_EquipChoicePanel = { addr = 0x801EA7EC, type = "func", source = "Panel mode handler in g_MenuStartPanelModes: runs the g_MenuStartPanel18Steps handler of the panel state and draws Menu_DrawEquipChoiceWindow." }
+UI_PanelSlideOutOption_801EA8C0 = { addr = 0x801EA8C0, type = "func", source = "same body as emi/etc/game/00@0x801996FC UI_PanelSlideOutOption" }
 UI_PanelSlideLeft2 = { addr = 0x801EA900, type = "func", source = "Moves the master panel 0x20 pixels left and clamps its x at 0x98; same bytes as UI_PanelSlideLeft at 0x801EA070." }
+UI_PanelSlideOutOption_801EA994 = { addr = 0x801EA994, type = "func", source = "same body as emi/etc/game/00@0x801996FC UI_PanelSlideOutOption" }
+UI_PanelSlideOutOption_801EAF18 = { addr = 0x801EAF18, type = "func", source = "same body as emi/etc/game/00@0x801996FC UI_PanelSlideOutOption" }
 g_NewGameCharacters = { addr = 0x801EB514, size = 0x520, source = "The eight base character records a new game starts with (Ryu, Nina, Garr, Teepo, Rei, Momo, Peco and Whelp); Party_InitDefaults copies them into g_Characters." }
 g_NewGameWillpowerCurves = { addr = 0x801EBA34, size = 0x10, source = "Per starting character, the level divisor and base of its starting willpower: Party_InitDefaults computes level * 16 / divisor + base." }
 s_CampMenuPanelIds = { addr = 0x801EC354, source = "Panel ids of the seven start menu panel slots that func_801E9350 draws." }

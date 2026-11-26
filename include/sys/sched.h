@@ -14,14 +14,11 @@
 #define SYS_THREAD_SIZE         0x80
 #define SYS_THREAD_COUNT        4
 
-/* The scheduler: 0x80-byte thread records, a cursor, and the entry points that
- * register, run and stop threads. */
+/* The scheduler: 0x80-byte thread records, a cursor, and the entry points that register, run and stop threads. */
 
 /* retail addresses */
 
-/* The thread state SYS_ThreadRun switches on: EMPTY and YIELD after a callback
- * returns, OPEN when SYS_ThreadRegister arms a slot, SWITCH for the forced switch, and
- * IDLE when the scheduler parks. */
+/* The thread state SYS_ThreadRun switches on. */
 typedef enum ThreadState {
     SYS_THREAD_EMPTY     = 0,
     SYS_THREAD_YIELD     = 1,
@@ -103,8 +100,7 @@ typedef struct ThreadScreenEffect {
 ASSERT_OFFSET(ThreadScreenEffect, mode, 0x08);
 ASSERT_SIZE(ThreadScreenEffect, 0x38);
 
-/* The 0x38-byte work area each thread slot overlays with the record of the entry SYS_ThreadRegister
- * armed for it. */
+/* The 0x38-byte work area each thread slot overlays with the record of the entry SYS_ThreadRegister armed for it. */
 typedef union ThreadTail {
     ThreadClear        clear;
     ThreadGameEntry    game_entry;

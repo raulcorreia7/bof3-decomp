@@ -12,8 +12,7 @@ typedef struct {
     s8  x;
 } PartVertex;
 
-/* One word of a scene part list: a packed cell, the record header (id and
- * run count), the four colour bytes of a part, or a run's frame pick. */
+/* One word of a scene part list: a packed cell, the record header (id and run count), the four colour bytes of a part, or a run's frame pick. */
 typedef union ScenePart {
     u32        raw;
     PartVertex vertex;

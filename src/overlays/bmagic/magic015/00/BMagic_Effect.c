@@ -104,7 +104,8 @@ MATCH void func_801EF2B4(void) {
     TASK(PartyMember)->header.mode++;
 }
 
-MATCH void func_801EF594(void) {
+/* func_801EF594 */
+MATCH void BMagic_ChargeEnd_801EF594(void) {
     EFFECT_RESTORE_PALETTE_AND_RELEASE_ACTIVE();
 }
 
@@ -540,7 +541,8 @@ MATCH void func_801F0864(void) {
     }
 }
 
-MATCH void func_801F0A94(void) {
+/* func_801F0A94 */
+MATCH void BMagic_FlyingKickImageRejoin_801F0A94(void) {
     s8 tint;
 
     EFFECT_APPEAR_AT_BATTLER();

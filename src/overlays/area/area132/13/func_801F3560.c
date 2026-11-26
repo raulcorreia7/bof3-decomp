@@ -25,8 +25,8 @@ NON_MATCHING void func_801F3560(AreaSpawnSlot* slot) {
 
     object = &slot->pos.x.fixed;
     Camera_ProjectPoint(object, &screen);
-    size[0] = FAKE_VOLATILE(u16, slot->radius);
-    size[1] = FAKE_VOLATILE(u16, slot->radius);
+    size[0] = slot->radius;
+    size[1] = slot->radius;
     Game_ProjectWorldPoint(object, size, size);
 
     setXYWH(primitive, screen.vx - ((s16)size[0] >> 1), screen.vy - ((s16)size[1] >> 1), size[0], size[1]);
@@ -36,15 +36,15 @@ NON_MATCHING void func_801F3560(AreaSpawnSlot* slot) {
     flags            = slot->core_shade;
     red              = 0;
     if ((flags & 4) != 0) {
-        red = FAKE_VOLATILE(u8, slot->unk_03);
+        red = slot->unk_03;
     }
     green = 0;
     if ((flags & 2) != 0) {
-        green = FAKE_VOLATILE(u8, slot->unk_03);
+        green = slot->unk_03;
     }
     blue = 0;
     if ((flags & 1) != 0) {
-        blue = FAKE_VOLATILE(u8, slot->unk_03);
+        blue = slot->unk_03;
     }
     setRGB0(primitive, red, green, blue);
     Area_CellAddPrim(slot->pos.x.fixed, slot->pos.y.fixed, 3, sizeof(POLY_FT4));

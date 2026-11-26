@@ -28,9 +28,7 @@ The cache holds at most BOF3_CC_MAX_ENTRIES entries (default 30000) and BOF3_CC_
 bytes (default 256 MiB); a full build of every image is 7,300 entries and 46 MB. One write in
 500 prunes it, for at most a few seconds; `--prune` does the whole job by hand.
 
-IMAGE_GCC names the images whose objects retail built with another GCC; the `-DASM_DIR` image
-picks it, so `MATCH_SRC` compiles and every other caller get the same compiler. PSX_GCC=<path>
-overrides both. Run it as a script: `python -m` would put the
+PSX_GCC=<path> picks the compiler binary. Run it as a script: `python -m` would put the
 working directory, a build directory that changes with every object, on the import path.
 """
 
@@ -53,13 +51,6 @@ from bof3.resolve.ids import asm_dir
 ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 GCC = os.environ.get("PSX_GCC") or f"{ROOT}/toolchains/gcc-2.7.2-psx/gcc"
 GCC_DIR = os.path.dirname(os.path.realpath(GCC))
-#: Images whose retail code is what GCC 2.7.2.1 makes of the plain C (docs/toolchain.md#compiler-chain).
-IMAGE_GCC = {
-    "emi/world00/area024/14": "gcc-2.7.2.1",
-    "emi/world02/area108/14": "gcc-2.7.2.1",
-    "emi/world03/area125/13": "gcc-2.7.2.1",
-    "emi/world03/area134/13": "gcc-2.7.2.1",
-}
 AS = f"{ROOT}/bin/internal/binutils/as"
 MASPSX = f"{ROOT}/third_party/maspsx/maspsx.py"
 #: INCLUDE_ASM pulls split assembly in through the assembler, which `gcc -MM` cannot see.
@@ -169,24 +160,6 @@ def parse(argv):
         sys.exit("cc: -c needs one C source and one -o output")
     plan.update(source=source, output=output, depfile=depfile if plan["dep"] else None)
     return plan
-
-
-def select_gcc(gcc_args):
-    """Point GCC at the image's compiler from IMAGE_GCC, unless PSX_GCC chose one."""
-    global GCC, GCC_DIR
-    if os.environ.get("PSX_GCC"):
-        return
-    image = next(
-        (
-            a[len('-DASM_DIR="build/asm/') : -1]
-            for a in gcc_args
-            if a.startswith('-DASM_DIR="build/asm/')
-        ),
-        None,
-    )
-    if image in IMAGE_GCC:
-        GCC = f"{ROOT}/toolchains/{IMAGE_GCC[image]}/gcc"
-        GCC_DIR = os.path.dirname(os.path.realpath(GCC))
 
 
 def run(argv, **kw):
@@ -556,15 +529,13 @@ def main(argv):
         if plan["depfile"]:
             plan["depfile"] = os.path.join(build_dir, plan["depfile"])
         os.chdir(ROOT)
-    gcc_args = gcc_arguments(plan)
-    select_gcc(gcc_args)
     tmp = tempfile.mkdtemp(prefix="bof3-cc-")
     env = compiler_env(tmp)
     stderr = os.dup(2)
     try:
         if empty:
             os.dup2(os.open(os.devnull, os.O_WRONLY), 2)
-        status = cached_compile(plan, gcc_args, env, tmp, build_dir)
+        status = cached_compile(plan, gcc_arguments(plan), env, tmp, build_dir)
     finally:
         os.dup2(stderr, 2)
         shutil.rmtree(tmp)

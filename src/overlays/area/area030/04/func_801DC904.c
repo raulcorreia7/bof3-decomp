@@ -1,14 +1,8 @@
 #include "area030_04.h"
 
-/* Increments the AREA030 scratchpad panel field at offset 3 when the
- * global flag D_80144281 equals 3; otherwise returns without modifying it. */
+/* Steps the fishing sub-index while slot 6's mode is 3. */
 MATCH void func_801DC904(void) {
-    volatile u8* scratch;
-    u8           flag;
-
-    flag = g_SpawnedActors[6].header.mode;
-    if (flag == 3u) {
-        scratch    = SP_REF(volatile u8*, 0x44u);
-        scratch[3] = (scratch[3] + 1u);
+    if (g_SpawnedActors[6].header.mode == 3) {
+        TASK(FishingState)->sub_index++;
     }
 }

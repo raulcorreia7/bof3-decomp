@@ -3,8 +3,7 @@
 
 #include "types.h"
 
-/* A 16.16 fixed-point coordinate: the whole word, or the fraction and integer
- * halves the world code reads alone. */
+/* A 16.16 fixed-point coordinate: the whole word, or the fraction and integer halves the world code reads alone. */
 typedef union Coord {
     s32 fixed;
 

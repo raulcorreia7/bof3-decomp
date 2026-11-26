@@ -14,8 +14,7 @@
 
 #define SHOP_ITEM_REF_SIZE 0x02
 
-/* Item flags: which lists offer a row, how the battle selector aims it, and whether it can be
- * sold. Bit 3 marks a row the shop cannot sell and the copy shop cannot copy. */
+/* Item flags: which lists offer a row, how the battle selector aims it, and whether it can be sold. */
 typedef enum ItemFlags {
     ITEM_TARGET_BOTH          = 1 << 0,
     ITEM_TARGET_SELECTABLE    = 1 << 1,

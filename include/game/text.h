@@ -81,8 +81,7 @@
  * (@source: wiki:data/text).
  */
 
-/* Control codes. Each name follows the effect of its case body; a code with no
- * known effect has a plain descriptive name. */
+/* Control codes. */
 typedef enum TextCommand {
     STRING_END       = 0x00,
     STRING_NEWLINE   = 0x01,

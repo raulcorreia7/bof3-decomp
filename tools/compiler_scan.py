@@ -11,7 +11,7 @@ flag added after -O2 (`-fno-schedule-insns`), `-O1`/`-O3`, `nog`/`-g`/`-ggdb` fo
 joined with `+`. Each compile runs the unit's recorded command with the variant applied, with the
 object cache off, and is scored with tools/sweep_edits.py's aligned-diff score (0 = byte match).
 One JSON line per (function, variant) goes to OUT; a rerun skips the lines OUT already has.
-Results and method: docs/toolchain.md#compiler-chain.
+The November 2026 trial: docs/toolchain.md#compiler-chain.
 """
 
 import argparse

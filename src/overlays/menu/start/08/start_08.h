@@ -682,11 +682,13 @@ void        func_801E8FA8(void);
 void        func_801E8FE8(void);
 void        func_801E9040(void);
 void        func_801E9080(void);
-void        func_801E90C0(void);
+/* func_801E90C0 */
+void        UI_PanelSlideOutOption_801E90C0(void);
 void        func_801E9100(void);
 /* func_801E9140 */
 void        Menu_ZennyPanel(void);
-void        func_801E91A4(void);
+/* func_801E91A4 */
+void        UI_PanelSlideOutOption_801E91A4(void);
 void        func_801E91E4(void);
 /* func_801E9224 */
 void        Menu_PlayTimePanel(void);
@@ -694,15 +696,19 @@ void        func_801E9284(void);
 void        func_801E92C4(void);
 /* func_801E9304 */
 void        Menu_CampIconsPanel(void);
-void        func_801E94D4(void);
+/* func_801E94D4 */
+void        UI_PanelSlideOutTask_801E94D4(void);
 void        func_801E9514(void);
 /* func_801E9554 */
 void        Menu_TitlePanel(void);
-void        func_801E964C(void);
-void        func_801E968C(void);
+/* func_801E964C */
+void        UI_PanelSlideOutTask_801E964C(void);
+/* func_801E968C */
+void        UI_PanelSlideInTaskTop_801E968C(void);
 /* func_801E96CC */
 void        Menu_StatsPanel(void);
-void        func_801E9748(void);
+/* func_801E9748 */
+void        UI_PanelSlideOutOption_801E9748(void);
 void        func_801E9788(void);
 void        func_801E97E0(void);
 void        func_801E9820(void);
@@ -710,7 +716,8 @@ void        func_801E9878(void);
 void        func_801E98B8(void);
 /* func_801E98F8 */
 void        Menu_EquipmentPanel(void);
-void        func_801E9974(void);
+/* func_801E9974 */
+void        UI_PanelSlideOutOption_801E9974(void);
 void        func_801E99B4(void);
 void        func_801E99F4(void);
 void        func_801E9A70(void);
@@ -720,8 +727,10 @@ void        func_801E9B6C(void);
 void        func_801E9BAC(void);
 /* func_801E9BEC */
 void        Menu_MessagePanel(void);
-void        func_801E9D18(void);
-void        func_801E9D58(void);
+/* func_801E9D18 */
+void        UI_PanelSlideOutTask_801E9D18(void);
+/* func_801E9D58 */
+void        UI_PanelSlideInTaskTop_801E9D58(void);
 /* func_801E9D98 */
 void        Menu_CursorFramePanel(void);
 void        func_801E9DF4(void);
@@ -731,22 +740,26 @@ void        func_801E9F04(void);
 void        Menu_InventoryPanel(void);
 void        func_801E9FB0(void);
 void        func_801E9FF0(void);
-void        func_801EA030(void);
+/* func_801EA030 */
+void        UI_PanelSlideOutOption_801EA030(void);
 /* func_801EA0B0 */
 void        Menu_CommandsPanel(void);
-void        func_801EA118(void);
+/* func_801EA118 */
+void        UI_PanelSlideOutTask_801EA118(void);
 /* func_801EA158 */
 void        Menu_AdvancePanelY(void);
 void        func_801EA1C8(void);
 /* func_801EA50C */
 void        Menu_EquipComparePanel(void);
-void        func_801EA598(void);
+/* func_801EA598 */
+void        UI_PanelSlideOutOption_801EA598(void);
 void        func_801EA5D8(void);
 void        func_801EA618(void);
 void        func_801EA658(void);
 /* func_801EA698 */
 void        Menu_AbilitiesPanel(void);
-void        func_801EA6EC(void);
+/* func_801EA6EC */
+void        UI_PanelSlideOutOption_801EA6EC(void);
 void        func_801EA72C(void);
 void        func_801EA76C(void);
 void        func_801EA7AC(void);
@@ -754,10 +767,12 @@ void        func_801EA7AC(void);
 void        Menu_EquipChoicePanel(void);
 void        func_801EA840(void);
 void        func_801EA880(void);
-void        func_801EA8C0(void);
+/* func_801EA8C0 */
+void        UI_PanelSlideOutOption_801EA8C0(void);
 void        func_801EA900(void);
 void        func_801EA940(void);
-void        func_801EA994(void);
+/* func_801EA994 */
+void        UI_PanelSlideOutOption_801EA994(void);
 void        func_801EA9D4(void);
 extern void func_801EAA14(MenuPanelTask* task);
 void        func_801EAEC4(void);
@@ -848,7 +863,8 @@ extern s32             func_801E7348(void);
 extern void            func_801E77F0(void);
 /* func_801E9350 */
 void                   Menu_DrawCampIcons(void);
-void                   func_801EAF18(void);
+/* func_801EAF18 */
+void                   UI_PanelSlideOutOption_801EAF18(void);
 void                   func_801EAF58(void);
 extern u8              D_801EC3E0[]; /* 6-byte rows: entry count, then up to five entries */
 extern s32             D_801EC488;

@@ -110,7 +110,6 @@ look as if it dropped what newer commits added. CI has no disc and runs no byte 
 | `check-<image>`   | The same for one image, for example `check-exe+slus_004_22`.                                                                                                                                                                                                                                                                                     |
 | `disc`            | Rebuild every EMI archive from the built images, patch a copy of your disc into `build/disc-rebuild/`, and compare every file, both tracks and the cue with `config/disc.toml`. One line per mismatch, else `disc: all N files and both tracks match`. Needs the disc and every image; not a push check, and CI skips it because CI has no disc. |
 | `check-headers`   | Compile every public header on its own.                                                                                                                                                                                                                                                                                                          |
-| `check-unity`     | Parse every image's sources as one unit, to find a type, prototype or macro that two files declare differently. A check, never linked.                                                                                                                                                                                                           |
 | `check-plain`     | Compile every C source as plain C, without `MATCHING`, so no source depends on a matching helper.                                                                                                                                                                                                                                                |
 | `check-tree`      | Reject what [pre-push](../tools/README.md#pre-push) lists for it.                                                                                                                                                                                                                                                                                |
 | `check-asm`       | Reject more `INCLUDE_ASM` lines than at the [base ref](#commands), in total or in any one image. An image is keyed by the last two folders of its source directory (`game/00`; `slus` and `logo` stand alone).                                                                                                                                   |
@@ -175,8 +174,7 @@ source whose match marker decides a placed section. The rest of `config/` (attem
 
 For a scratch on [decomp.me](https://decomp.me/), choose PlayStation and `gcc2.7.2-psx`. The project
 flags are in `build/meson/tools/build/emit/cflags.txt`; the base set is
-`-O2 -G0 -funsigned-char -msoft-float -gcoff -Wa,--aspsx-version=2.56,--expand-div` (GCC 2.7.2.1 for
-the images in `IMAGE_GCC`, see [compiler chain](#compiler-chain)). Define `MATCHING` and
+`-O2 -G0 -funsigned-char -msoft-float -gcoff -Wa,--aspsx-version=2.56,--expand-div`. Define `MATCHING` and
 supply the required declarations in the scratch context. A scratch is a comparison tool;
 `check` verifies the project build.
 
@@ -206,27 +204,21 @@ tab-separated, because Meson has no JSON parser.
 ## Compiler chain
 
 GCC 2.7.2 PSX (decompals/old-gcc 0.13), then maspsx with ASPSX 2.56, `-O2 -G0`, C89. One compiler
-serves every image except the four below. maspsx runs with `--aspsx-version=2.56 --expand-div` for every object. Retail
+serves every image. maspsx runs with `--aspsx-version=2.56 --expand-div` for every object. Retail
 expands each `div`/`divu` with the zero-divisor (`bnez`/`break 7`) and overflow (`break 6`) guards
 wherever the source divides, and code without a division is unchanged, so the flag is global.
 
-Every object compiles with the same flags. Four area images compile with GCC 2.7.2.1 (old-gcc
-0.17), listed in `IMAGE_GCC` in `tools/cc.py`: `area024/14`, `area108/14`, `area125/13` and
-`area134/13`. Their shared sprite body is retail code under 2.7.2.1 written plainly, and needs 32
-`FAKE_VOLATILE` reloads under 2.7.2; every other matched function of the four images compiles to the
-same bytes under both. `cc.py` picks the compiler from the `-DASM_DIR` image, so `match.sh` and
-`MATCH_SRC` follow it; `tools/rtl_dump.sh` and `check-plain` still run the pinned 2.7.2.
-
-Trial (November 2026, `~/.cache/bof3-swarm/flags/`): 25 GCC builds (old-gcc 2.5.7 to 2.95.2, plain
-and `-psx`, and PsyQ `CC1PSX` 4.0, 4.1 and 4.3), 46 flag settings and 14 maspsx settings on each of
-the 137 open drafts, 182 pairs on 103 of them, and the same settings on 334 matches with their
-helpers removed. No setting matched an open draft or brought one within 3 instructions. Every flag
-or other build that matched a helper-free function broke matched functions of its image (for
-example `-fno-schedule-insns2` keeps 3 of 84 in `scena02`), so a flag is never a unit setting.
-GCC 2.7.2.1, 2.7.2.2 and 2.7.2.3 give the same bytes on every function tried; 2.7.2.1 compiles
-8,666 of the 8,758 functions that `match.sh` covers to the same bytes as 2.7.2, and the 92 others lie in 11 images
-(76 in `commu01/07` and `commu02/08`). PsyQ 4.0 `CC1PSX` (`2.7.2.SN32.3.7.0002`), plain GCC 2.7.1
-and 2.7.2 give the pinned compiler's bytes on every open draft.
+Every object compiles with the same compiler and flags. A trial in November 2026
+(`tools/compiler_scan.py`) compiled the 137 open drafts under 22 old-gcc 0.17 builds (2.5.7 to
+2.95.2, plain and `-psx`), PsyQ `CC1PSX` 4.0, 4.1 and 4.3 through wibo, 46 flag settings and 14
+maspsx settings, then 182 pairs on 103 of them, and 334 matches with their helpers removed. No
+setting matched an open draft or brought one within 3 instructions. Every flag that matched a
+helper-free function broke other matched functions of its image (`-fno-schedule-insns2` keeps 3 of
+84 in `scena02`), so it steers and is no history. GCC 2.7.2.1 to 2.7.2.3 matched the area sprite
+body without its 32 `FAKE_VOLATILE` reads, but the plain body with a non-`const` record pointer
+matches under 2.7.2 too: a wrong type, not another compiler. PsyQ 4.0 `CC1PSX`
+(`2.7.2.SN32.3.7.0002`), plain GCC 2.7.1 and 2.7.2 give the pinned compiler's bytes on every open
+draft.
 
 The global `--expand-div` covers every division trap; C is never rewritten to fake an
 assembler expansion.

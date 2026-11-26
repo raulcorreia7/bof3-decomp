@@ -172,7 +172,8 @@ MATCH void func_801EFD94(void) {
     BMAGIC_DISPATCH_AND_DRAW(D_801F056C, func_801F01C0);
 }
 
-MATCH void func_801EFE1C(void) {
+/* func_801EFE1C */
+MATCH void BMagic_CombustionSparkPlace(void) {
     s32  r;
     s32  direction;
     s16* angle = &D_1F800004;
