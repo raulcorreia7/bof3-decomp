@@ -169,12 +169,12 @@ ASSERT_SIZE(GameLocale, 0x0C);
 
 /* One destination of an area link whose key is 0xFFFF: the first whose scene flag is set is taken. */
 typedef struct {
-    u16 area_id;    /* 0x00 */
-    u16 x;          /* 0x02 */
-    u16 y;          /* 0x04 */
-    u8  flag_block; /* 0x06: the 8-byte block of g_SceneFlagWords */
-    u8  flag_bit;   /* 0x07 */
-    u8  facing;     /* 0x08 */
+    u16 area_id;  /* 0x00 */
+    u16 x;        /* 0x02 */
+    u16 y;        /* 0x04 */
+    u8  flag_row; /* 0x06: the row of g_SceneFlagRows */
+    u8  flag_bit; /* 0x07 */
+    u8  facing;   /* 0x08 */
     u8  pad_09;
 } GameLocaleChoice;
 

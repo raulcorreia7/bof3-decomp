@@ -14,7 +14,7 @@ MATCH void Menu_StartNewGame(void) {
     if (count == 0) {
         D_801448EA[0] = 0;
         g_GameAreaId  = 0xFFFF;
-        Scene_Start(0);
+        Scene_Start(SCENARIO_NEW_GAME);
         i = 0x13;
         p = (u32*)(D_801448EA + 0x636);
         for (; i >= 0; i--) {

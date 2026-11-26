@@ -1035,7 +1035,7 @@ MATCH void func_801F9CFC(void) {
             }
         }
     }
-    if (g_GameAreaId == AREA_ID_DESERT_OF_DEATH_MAP && SYS_TestFlag(&g_SceneFlagWords[14 * 8], 1)) {
+    if (g_GameAreaId == AREA_ID_DESERT_OF_DEATH_MAP && SYS_TestFlag(g_SceneFlagRows[SCENARIO_DESERT_OF_DEATH], DESERT_FLAG_INTRO)) {
         g_SpawnedActors[0].header.flags |= 0x40;
     }
     if (g_GameAreaId == AREA_ID_MYRIA_STATION_MYRIA_FIGHT) {

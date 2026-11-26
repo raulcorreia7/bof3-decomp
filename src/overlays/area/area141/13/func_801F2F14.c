@@ -3,7 +3,7 @@
 MATCH void func_801F2F14(void) {
     switch (COORD_INT(TASK(Actor)->pos.x)) {
         case 0:
-            if (SYS_TestFlag(&g_SceneFlagWords[14 * 8], 20)) {
+            if (SYS_TestFlag(g_SceneFlagRows[SCENARIO_DESERT_OF_DEATH], 20)) {
                 TASK(Actor)->header.step++;
             }
             break;

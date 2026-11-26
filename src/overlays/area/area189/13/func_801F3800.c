@@ -138,7 +138,7 @@ NON_MATCHING void func_801F3800(void) {
         func_801F4150(shade, ((((g_AreaCameraAngle.vz + 0x800) & 0xFFF) - 0x400) * 5 >> 4) - 0x28);
     }
 
-    if (SYS_TestFlag(&g_SceneFlagWords[14 * 8], 4) != 0) {
+    if (SYS_TestFlag(g_SceneFlagRows[SCENARIO_DESERT_OF_DEATH], 4) != 0) {
         dx = g_AreaTargetCellX - 0x1780;
         if (dx < 0) {
             dx = -dx;

@@ -126,7 +126,7 @@ extern u8 D_80181B18;
 
 /* The new game's starting points and the tables its start menu copies. */
 extern NewGameStart D_801EBA44[];
-extern u8           D_801EC174[];
+extern u8           D_801EC174[SCENARIO_COUNT][SCENE_FLAG_ROW_BYTES];
 extern u8           D_801EC214[][0x10];
 extern u8           g_BattleTargetRows[][4];
 extern u8           D_801454FF;

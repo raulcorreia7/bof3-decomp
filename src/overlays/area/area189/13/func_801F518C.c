@@ -45,7 +45,7 @@ MATCH void func_801F518C(void) {
                 *state = GAME_REQUEST_MESSAGE;
                 func_801F5D20();
                 return;
-            } else if (SYS_TestFlag(&g_SceneFlagWords[14 * 8], 4) && (u32)((x >> 24) - 0x15) < 5 && (y >> 24) < 0xF) {
+            } else if (SYS_TestFlag(g_SceneFlagRows[SCENARIO_DESERT_OF_DEATH], 4) && (u32)((x >> 24) - 0x15) < 5 && (y >> 24) < 0xF) {
                 MESSAGE_START_WAIT(MSG_AREA189_ASK_RETURN_OASIS);
                 func_801F5D20();
                 return;
