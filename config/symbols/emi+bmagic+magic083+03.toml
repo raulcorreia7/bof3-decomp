@@ -10,12 +10,32 @@ g_BattleEffectBattler = { addr = 0x801EB4E0, source = "the battler the running e
 g_BattleEnemyBattlers = { addr = 0x801EB630, type = "EnemyBattler", size = 0x8C0, source = "Battle enemy battlers, one per enemy slot." }
 g_BattleEffects = { addr = 0x801EC330, alias = true, source = "Battle effect work records (stride 0x78); Battle_AllocEffect claims a free one by setting bit 0 of header.flags." }
 Effect_StartOnZeroTick = { addr = 0x801EF080, type = "func", source = "When the effect ticker (byte 0x0B) is zero raises BATTLE_STATE_EFFECT_PLAYING and clears the effect in magic083 (Shield)." }
+BMagic_ShieldVariant = { addr = 0x801EF0CC, type = "func", source = "Returns the effect variant that picks the colour rows; maps action id 0x136 to ABILITY_SHIELD." }
 BMagic_DispatchEffectMode = { addr = 0x801EF108, type = "func", source = "Runs the handler that header.mode (byte 0x01) selects from the effect handlers of magic083." }
+BMagic_ShieldBattlerUpdate = { addr = 0x801EF14C, type = "func", source = "Runs the battler effect's step, then draws its ring and disc in the actor matrix." }
+BMagic_ShieldBattlerStart = { addr = 0x801EF1DC, type = "func", source = "Waits out the delay, then starts the battler's palette fade." }
+BMagic_ShieldBattlerGlow = { addr = 0x801EF2F8, type = "func", source = "Brightens the battler's palette and, after 16 frames, starts three gems." }
 Effect_StepOnZeroTick = { addr = 0x801EF528, type = "func", source = "Advances header.step (byte 0x02) when the effect ticker (byte 0x0B) is zero in magic083 (Shield)." }
+BMagic_ShieldBattlerRestore = { addr = 0x801EF55C, type = "func", source = "Fades the battler's palette back, frees it and counts the effect as finished." }
 Effect_TickOnZeroTick = { addr = 0x801EF744, type = "func", source = "When the effect ticker (byte 0x0B) is zero lowers the ticker of g_BattleEffectBattler and clears the effect in magic083 (Shield)." }
 Effect_SetActorMatrix = { addr = 0x801EF794, type = "func", source = "Sets the actor's GTE matrix from its coordinates and half its vertical span, times the camera in magic083 (Shield)." }
+BMagic_ShieldDrawDisc = { addr = 0x801EF844, type = "func", source = "Draws the disc as 16 additive triangles tinted by the variant." }
+BMagic_ShieldDrawRing = { addr = 0x801EFB24, type = "func", source = "Draws the ring as 16 additive quads tinted by the variant." }
+BMagic_ShieldGemDispatch = { addr = 0x801EFE54, type = "func", source = "Runs the gem handler the mode selects." }
+BMagic_ShieldGemUpdate = { addr = 0x801EFE98, type = "func", source = "Runs the gem's step." }
 Effect_LaunchFromRing = { addr = 0x801EFEDC, type = "func", source = "Counts the effect down, then places it on a ring of 22 units around its battler at the angle stored in the work byte 0x0B and launches it upward (rise 0x40, gravity -4, 12-frame timer) in magic083." }
+BMagic_ShieldGemRise = { addr = 0x801F0010, type = "func", source = "Draws the gem and moves it up for a fixed time." }
+BMagic_ShieldGemFall = { addr = 0x801F0104, type = "func", source = "Draws the gem and moves it down for a fixed time." }
+BMagic_ShieldGemSpinUp = { addr = 0x801F01F8, type = "func", source = "Draws the gem and speeds up its spin; plays the sound when it is at full speed." }
+BMagic_ShieldGemOrbit = { addr = 0x801F038C, type = "func", source = "Draws the gem and circles it around the battler until it ends." }
+BMagic_ShieldDrawGem = { addr = 0x801F050C, type = "func", source = "Draws the gem as two depth-sorted fans of four triangles." }
 BMagic_SetXFixed = { addr = 0x801F0BA8, type = "func", source = "the body stores into g_Task->pos.x.fixed" }
 BMagic_AllocEffect = { addr = 0x801F0DC0, type = "func", source = "Claims the first free slot of the effect table (bit 0 of header.flags) and returns its index, or 0xFF when all 24 slots are in use in magic083 (Shield)." }
 Actor_Clear = { addr = 0x801F0E24, type = "func", source = "Clears the effect work record: header flags, mode (byte 0x01), step (byte 0x02) and bytes 0x03 and 0x04." }
+g_BMagicShieldGemUpperShades = { addr = 0x801F0E74, source = "The RGB shades of the gem's upper fan: per variant, four rows." }
+g_BMagicShieldGemLowerShades = { addr = 0x801F0EA4, source = "The RGB shades of the gem's lower fan: per variant, four rows." }
+g_BMagicShieldDiscTints = { addr = 0x801F0ED4, source = "One RGB row per variant, scaled by the battler effect timer, for the disc." }
+g_BMagicShieldRingTints = { addr = 0x801F0EE0, source = "One RGB row per variant, scaled by the battler effect timer, for the ring." }
 g_BMagicEffectModes = { addr = 0x801F0EEC, source = "Handlers of magic083 (Shield), run by header.mode (byte 0x01) and by header.step (byte 0x02) in its sub-effects." }
+g_BMagicShieldBattlerSteps = { addr = 0x801F0EF0, source = "The steps of a battler effect, run by header.step from BMagic_ShieldBattlerUpdate." }
+g_BMagicShieldGems = { addr = 0x801F0F1C, source = "The pool of 24 gems BMagic_AllocEffect claims." }

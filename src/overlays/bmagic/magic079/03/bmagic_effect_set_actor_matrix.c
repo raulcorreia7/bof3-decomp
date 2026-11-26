@@ -81,9 +81,9 @@ MATCH void func_801EF130(void) {
     timer                     = TASK(PartyMember)->unk_09 - 1;
     TASK(PartyMember)->unk_09 = timer;
     if (timer == 0) {
-        TASK(PartyMember)->pos.x.fixed  = D_8014637C->pos.x.fixed - 0x4000;
-        TASK(PartyMember)->pos.y.fixed  = D_8014637C->pos.y.fixed - 0x4000;
-        TASK(PartyMember)->pos.z.fixed  = D_8014637C->pos.z.fixed + 0x04000000;
+        TASK(PartyMember)->pos.x.fixed  = g_BattleActiveActor->pos.x.fixed - 0x4000;
+        TASK(PartyMember)->pos.y.fixed  = g_BattleActiveActor->pos.y.fixed - 0x4000;
+        TASK(PartyMember)->pos.z.fixed  = g_BattleActiveActor->pos.z.fixed + 0x04000000;
         TASK(PartyMember)->param.unk_0B = 0x10;
         TASK(PartyMember)->unk_09       = 0x10;
         TASK(PartyMember)->timer        = 0;
@@ -306,7 +306,7 @@ MATCH void func_801EFE88(void) {
     timer                     = TASK(PartyMember)->unk_09 - 1;
     TASK(PartyMember)->unk_09 = timer;
     if (!(timer & BYTE_MASK)) {
-        src                            = D_8014637C;
+        src                            = g_BattleActiveActor;
         TASK(PartyMember)->pos.x.fixed = src->pos.x.fixed;
         TASK(PartyMember)->pos.y.fixed = src->pos.y.fixed;
         TASK(PartyMember)->pos.z       = src->pos.z;

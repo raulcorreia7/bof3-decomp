@@ -5,7 +5,7 @@
  */
 MATCH void func_801D39BC(void) {
     if (EMI_IsReady() != 0) {
-        func_800AE108(g_Battle.action->unk_02, D_8014637C);
+        func_800AE108(g_Battle.action->unk_02, g_BattleActiveActor);
         g_Battle.phase.mode     = BATTLE_MODE_TURNS;
         g_Battle.phase.step     = 2;
         g_Battle.phase.sub_step = 0;

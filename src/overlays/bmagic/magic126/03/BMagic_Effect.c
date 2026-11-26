@@ -309,15 +309,15 @@ MATCH void BMagic_ShadowBreathOrbStart(void) {
     timer                     = TASK(PartyMember)->unk_09 - 1;
     TASK(PartyMember)->unk_09 = timer;
     if (timer == 0) {
-        TASK(PartyMember)->facing = D_8014637C->facing;
+        TASK(PartyMember)->facing = g_BattleActiveActor->facing;
         work                      = TASK(PartyMember);
-        work->pos.x.fixed         = D_8014637C->pos.x.fixed;
+        work->pos.x.fixed         = g_BattleActiveActor->pos.x.fixed;
         /* FAKE: retail re-reads the party cell for the next copy. */
         FAKE_BARRIER();
-        work->pos.y.fixed = D_8014637C->pos.y.fixed;
+        work->pos.y.fixed = g_BattleActiveActor->pos.y.fixed;
         /* FAKE: retail re-reads the party cell for the next copy. */
         FAKE_BARRIER();
-        work->pos.z.fixed = D_8014637C->pos.z.fixed;
+        work->pos.z.fixed = g_BattleActiveActor->pos.z.fixed;
         work->unk_0C      = 0x8000;
         work->unk_10      = 0;
         Effect_RotatePosition(work);

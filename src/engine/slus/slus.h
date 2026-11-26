@@ -441,8 +441,8 @@ extern u32                   g_EmiSlotSectors[];
 extern EMIBank               g_EmiBanks[SND_BANK_COUNT];
 /* D_80146780 */
 extern volatile EMIAudioLink g_EmiBankLinks[];
-/* FAKE: SND_SetBankLayout stores the bank records, headers and SE tables through their own symbols;
- * the g_EmiBanks, g_SndBankHeaders and g_SndBankSe views share one base register and shrink it. */
+/* FAKE: retail stores each bank field through its own symbol, one lui per store, and only SND_SetBankLayout
+ * does; the g_EmiBanks, g_SndBankHeaders and g_SndBankSequences views share one lui and give 0x314 bytes, not 0x31C. */
 /* D_80146784 */
 extern u8*                   g_EmiBank0SeRecords;
 /* D_80146788 */

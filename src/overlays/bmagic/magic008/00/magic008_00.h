@@ -5,8 +5,15 @@
 
 #include "overlays/bmagic/bmagic.h"
 
-#define MAGIC008_EARLY_STEP_COUNT 7
-#define MAGIC008_STEP_COUNT       10
+/* header.mode of the strike effect: g_BMagicEffectModes runs BMagic_SkillStrikeEffectUpdate. */
+#define BMAGIC_SKILL_STRIKE_EFFECT_STRIKE       2
+
+/* The follow-up effect id of the task: the strike of Mind Flay launches one at the target, the others none. */
+#define BMAGIC_SKILL_STRIKE_FOLLOW_UP_NONE      0xFF
+#define BMAGIC_SKILL_STRIKE_FOLLOW_UP_MIND_FLAY 7
+
+#define MAGIC008_EARLY_STEP_COUNT               7
+#define MAGIC008_STEP_COUNT                     10
 
 typedef struct Magic008EarlySteps {
     Callback steps[MAGIC008_EARLY_STEP_COUNT];
@@ -41,10 +48,12 @@ extern Magic008SecondSteps D_801EEC14;
 extern Magic008FirstSteps  D_801EEC20;
 extern Magic008FirstSteps  D_801EEC30;
 extern Magic008SecondSteps D_801EEC40;
-extern Magic008SecondSteps D_801EEC4C;
+/* D_801EEC4C */
+extern Magic008SecondSteps g_BMagicSkillStrikeModes;
 extern BMagicEffectSteps   D_801EEC58;
 extern Magic008ThirdSteps  D_801EEC70;
-extern Magic008FirstSteps  D_801EEC84;
+/* D_801EEC84 */
+extern Magic008FirstSteps  g_BMagicSkillStrikeSteps;
 
 extern BMagicEffectSteps  D_801EEC94;
 extern Magic008EarlySteps D_801EECAC;
@@ -109,7 +118,8 @@ extern BattleEffectByteColumn   D_801EC335[];
 extern BattleEffectByteColumn   D_801EC336[];
 extern BattleEffectTargetColumn D_801EC3A4[];
 /* Defined later in this image; the result lands in the effect work +0x04. */
-u32                             func_801F0230(void);
+/* func_801F0230 */
+u32                             BMagic_SkillStrikeFollowUp(void);
 
 /* Advance the effect animation, count the timer down and at zero play the given hit SE, mark the target
  * damaged and step. A statement macro: the member declares u8 timer. */

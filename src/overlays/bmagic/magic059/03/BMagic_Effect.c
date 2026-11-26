@@ -80,7 +80,7 @@ NON_MATCHING void func_801EED0C(void) {
     g_Battle.flags |= 0x200;
     g_GfxPalettePending = 1;
 
-    TASK(PartyMember)->facing = D_8014637C->facing;
+    TASK(PartyMember)->facing = g_Battle.active_actor->facing;
     TASK(PartyMember)->unk_0C = 0x40000;
     TASK(PartyMember)->unk_10 = 0;
     Effect_RotatePosition(g_Task);

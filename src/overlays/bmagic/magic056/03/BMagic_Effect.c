@@ -358,13 +358,13 @@ MATCH void func_801F04EC(void) {
     TASK(PartyMember)->unk_5F -= 0x10;
     if ((s8)TASK(PartyMember)->unk_5D == -0x80) {
         work              = TASK(PartyMember);
-        work->pos.x.fixed = D_8014637C->pos.x.fixed;
+        work->pos.x.fixed = g_BattleActiveActor->pos.x.fixed;
         /* FAKE: retail re-reads the party cell for the next copy. */
         FAKE_BARRIER();
-        work->pos.y.fixed = D_8014637C->pos.y.fixed;
+        work->pos.y.fixed = g_BattleActiveActor->pos.y.fixed;
         /* FAKE: retail re-reads the party cell for the next copy. */
         FAKE_BARRIER();
-        work->pos.z.fixed = D_8014637C->pos.z.fixed;
+        work->pos.z.fixed = g_BattleActiveActor->pos.z.fixed;
         if (g_Battle.active_battler < 3) {
             member = &g_Game.members[g_Battle.active_battler];
             g_Task = member;
