@@ -58,8 +58,7 @@ u8 func_801F4380(s32 x, s32 y);
 
 /* The x step of each facing in the resident facing table, and the y step as the
  * second byte. */
-extern u8 D_80181B00[];
-extern u8 D_80181B01[];
+extern u8 D_80181B00[][2];
 
 /* The script index and the mirror flag of each facing pair, read by func_801F3E30. */
 extern u8 D_801F4A6C[];

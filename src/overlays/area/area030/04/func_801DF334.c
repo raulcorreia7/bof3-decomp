@@ -55,8 +55,8 @@ NON_MATCHING void func_801DF334(void) {
         if (Script_AnimStepLoop() & BYTE_MASK) {
             Area_SceneSelectRecord(FISHING_ENTRY(TASK(FishingState)->cue_index)->scene_id);
             TASK(FishingState)->flags |= 0x20;
-            TASK(FishingState)->state_2A = D_801E2331[TASK(FishingState)->counter_08 * 2];
-            Script_Select(D_801E2330[TASK(FishingState)->counter_08 * 2]);
+            TASK(FishingState)->state_2A = D_801E2330[TASK(FishingState)->counter_08][1];
+            Script_Select(D_801E2330[TASK(FishingState)->counter_08][0]);
             TASK(FishingState)->bounce.half.key = -0x20;
             TASK(FishingState)->flag_04         = 0;
             TASK(FishingState)->counter_48      = 2;
@@ -115,7 +115,7 @@ NON_MATCHING void func_801DF334(void) {
             grade = 0;
         }
 
-        if ((rand() & 0xF) < odds[grade * 4] && TASK(FishingState)->bounce.half.key >= -0x3F && (s8)TASK(FishingState)->step_index > 0) {
+        if ((rand() & 0xF) < odds[grade << 2] && TASK(FishingState)->bounce.half.key >= -0x3F && (s8)TASK(FishingState)->step_index > 0) {
             g_SpawnedActors[0].header.flags |= 0x40;
             SND_SEPlay(EMI_SE_ID(SND_BANK_AREA, 6));
             Area_SceneSelectRecord(FISHING_ENTRY(TASK(FishingState)->cue_index)->hook_scene_id);
@@ -129,7 +129,7 @@ NON_MATCHING void func_801DF334(void) {
             TASK(FishingState)->flag_04 = 3;
             return;
         }
-        if ((rand() & 0xF) < odds[grade * 4 + 1]) {
+        if ((rand() & 0xF) < (&odds[grade << 2])[1]) {
             if ((s16)FISHING_ROW->ext.fishing.stamina > ((u16)FISHING_ROW->ext.fishing.stamina_max << 16 >> 20)) {
                 TASK(FishingState)->cursor_10 = (rand() & (D_801E2AD5[TASK(FishingState)->cue_index * sizeof(FishingSceneCue)] & 0x7)) + 1;
                 if ((s8)TASK(FishingState)->step_index < 0) {
@@ -171,7 +171,7 @@ NON_MATCHING void func_801DF334(void) {
             }
             TASK(FishingState)->counter_08 = 1;
             TASK(FishingState)->flag_04    = 0;
-        } else if ((rand() & 0xF) < odds[grade * 4 + 2]) {
+        } else if ((rand() & 0xF) < odds[(grade << 2) + 2]) {
             TASK(FishingState)->pos_x     = 0;
             TASK(FishingState)->cursor_10 = 0;
             FISHING_ROW->timer_75         = 1;
@@ -240,10 +240,10 @@ NON_MATCHING void func_801DF334(void) {
         rise               = 0x3E - work->y_38.slot.slot;
         drift              = 0xF0000 - work->motion.unk_34;
         if (rise != 0) {
-            sway        = (drift >> 4) / rise;
-            work->pos_x = sway;
-            sway_capped = (sway < -0x1000) ? -0x1000 : ((sway > 0x1000) ? 0x1000 : sway);
-            work->pos_x = sway_capped;
+            rise        = (drift >> 4) / rise;
+            work->pos_x = rise;
+            rise        = (rise < -0x1000) ? -0x1000 : ((rise > 0x1000) ? 0x1000 : rise);
+            work->pos_x = rise;
         } else {
             work->pos_x = 0;
         }
@@ -267,8 +267,8 @@ NON_MATCHING void func_801DF334(void) {
         }
     }
 
-    TASK(FishingState)->state_2A = D_801E2331[TASK(FishingState)->counter_08 * 2];
-    Script_Request(D_801E2330[TASK(FishingState)->counter_08 * 2]);
+    TASK(FishingState)->state_2A = D_801E2330[TASK(FishingState)->counter_08][1];
+    Script_Request(D_801E2330[TASK(FishingState)->counter_08][0]);
     Script_AnimStepLoop();
 }
 #else

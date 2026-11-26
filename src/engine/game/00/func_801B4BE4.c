@@ -8,11 +8,11 @@ MATCH u8 func_801B4BE4(u8 mode, u8 code) {
     s32 want;
     s8  delta;
 
-    delta                         = D_80181B00[mode * 2];
+    delta                         = D_80181B00[mode][0];
     /* FAKE: the scratchpad cell is stored through a volatile halfword view, as retail. */
     *(volatile s16*)&g_ScratchPad = (TASK(Actor)->pos.x.part.integer + ((delta == 1) ? 2 : delta));
 
-    delta      = D_80181B01[mode * 2];
+    delta      = D_80181B00[mode][1];
     D_1F800002 = (TASK(Actor)->pos.y.part.integer + ((delta == 1) ? 2 : delta));
 
     index = mode;
