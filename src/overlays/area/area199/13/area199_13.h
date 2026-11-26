@@ -35,12 +35,19 @@ ASSERT_SIZE(Area199CellSprite, 0xE);
 /* The step handler bank. */
 extern Callback          D_801F44B8[];
 extern Area199CellSprite D_801F44D4[];
-/* The two trail cell rows: a member's slots run six bytes apart (x, y, flag), two members
- * three bytes apart, in D_801F54D0. The part words and row offsets follow the same rows. */
+/* The trail part words and row offsets of the two members; their cells are in
+ * g_Area199TrailCells. */
 extern u8                D_801F4544[];
 extern u8                D_801F4545[];
 extern u8                D_801F4548[];
 extern u8                D_801F54D0[];
+/* A trail slot of one member: the cell and its tile flag. */
+typedef struct Area199TrailCell {
+    u8 x;
+    u8 y;
+    u8 flag;
+} Area199TrailCell;
+extern Area199TrailCell g_Area199TrailCells[32][2]; /* D_801F54D0 */
 extern s8                D_801F54D2;
 extern s8                D_801F54D5;
 
