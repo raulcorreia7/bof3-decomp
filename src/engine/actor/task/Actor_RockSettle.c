@@ -1,6 +1,8 @@
-#include "game_00.h"
+#include "engine/game/00/game_00.h"
 
-MATCH void func_8019BBA4(void) {
+/* func_8019BBA4 */
+/* Moves the rock on to its target cell edge, drops it to the ground and rests it; ends it when it lands blocked or too fast. */
+MATCH void Actor_RockSettle(void) {
     s32 x;
     s32 y;
     s32 limit;
@@ -46,7 +48,7 @@ MATCH void func_8019BBA4(void) {
     }
     TASK(Actor)->vz += TASK(Actor)->gravity;
     COORD_INT(TASK(Actor)->pos.z) += TASK(Actor)->vz;
-    if ((func_8019C028() & BYTE_MASK) == 0) {
+    if ((Actor_RockHit() & BYTE_MASK) == 0) {
         if ((s16)COORD_INT(TASK(Actor)->pos.z) < dist) {
             COORD_INT(TASK(Actor)->pos.z) = (u16)Area_HeightSample(x, y);
             TASK(Actor)->vz               = 0;
@@ -56,20 +58,20 @@ MATCH void func_8019BBA4(void) {
             limit = TASK(Actor)->vx;
             limit = ABS(limit);
             if (limit >= 16385) {
-                TASK(Actor)->header.mode = 4;
+                TASK(Actor)->header.mode = ACTOR_ROCK_MODE_END;
             } else {
                 limit = TASK(Actor)->vy;
                 limit = ABS(limit);
                 if (limit >= 16385) {
-                    TASK(Actor)->header.mode = 4;
-                } else if ((func_8019C4F0(COORD_INT(TASK(Actor)->pos.x), COORD_INT(TASK(Actor)->pos.y)) & BYTE_MASK) != 0) {
-                    TASK(Actor)->header.mode = 4;
+                    TASK(Actor)->header.mode = ACTOR_ROCK_MODE_END;
+                } else if ((Actor_RockIsCellBlocked(COORD_INT(TASK(Actor)->pos.x), COORD_INT(TASK(Actor)->pos.y)) & BYTE_MASK) != 0) {
+                    TASK(Actor)->header.mode = ACTOR_ROCK_MODE_END;
                 } else {
                     TASK(Actor)->option_flags = 0;
                     TASK(Actor)->unk_0A       = 0;
-                    func_8019BF78();
+                    Actor_RockClaimCell();
                     Script_Select(0);
-                    TASK(Actor)->header.mode = 5;
+                    TASK(Actor)->header.mode = ACTOR_ROCK_MODE_REST;
                 }
             }
         }

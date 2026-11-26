@@ -1,6 +1,8 @@
-#include "game_00.h"
+#include "engine/game/00/game_00.h"
 
-MATCH void func_8019BE28(void) {
+/* func_8019BE28 */
+/* Scales the rock up each frame and removes it once it has doubled and the camera is still. */
+MATCH void Actor_RockEnd(void) {
     Actor* work;
 
     TASK(Actor)->unk_48 = 2;
@@ -14,7 +16,7 @@ MATCH void func_8019BE28(void) {
     }
     if (TASK(Actor)->scale.x > 131071) {
         if ((g_AreaCameraMoving == 0) && (TASK(Actor)->timer == 0)) {
-            func_8019BFD4();
+            Actor_RockReleaseCamera();
             Actor_Clear();
         }
     } else {

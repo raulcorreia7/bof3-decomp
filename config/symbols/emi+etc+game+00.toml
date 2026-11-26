@@ -121,7 +121,20 @@ Actor_TossStart = { addr = 0x8019ADE8, type = "func", source = "Mode 0 of the to
 Actor_TossLaunch = { addr = 0x8019AF1C, type = "func", source = "Mode 1 of the toss modes: when on the ground, offscreen or in mode 0, loads the rise speed and gravity of s_ActorTossArcs[step] and advances; then moves by its speeds under gravity." }
 Actor_TossFall = { addr = 0x8019B024, type = "func", source = "Mode 2 of the toss modes: moves up by vz under gravity; past 0x80 above the ground or below it, plays a sound and advances." }
 Actor_ClearSelf = { addr = 0x8019B0EC, type = "func", source = "Frees the current actor: the last mode of the toss and prop tables." }
-Area_GetVx = { addr = 0x8019C344, type = "func", source = "the body returns g_Task->vx" }
+Actor_RockRun = { addr = 0x8019B364, type = "func", source = "Runs the mode handler of the current rock actor (type 0x17) by header.mode through g_ActorRockModes." }
+Actor_RockStart = { addr = 0x8019B3A8, type = "func", source = "Rock mode 0: selects the scene record, saves and blocks the cell under the rock, clears the velocity, selects script 0 and enters mode 1." }
+Actor_RockWait = { addr = 0x8019B4A0, type = "func", source = "Rock mode 1: once the kick count in unk_0A is set, frees the cell and either enters the roll mode (velocity from the facing, unk_0A and unk_18/unk_1C as the friction) or ends the rock when the way ahead is blocked." }
+Actor_RockSettle = { addr = 0x8019BBA4, type = "func", source = "Rock mode 3: moves to the edge in unk_18 along vx or vy, applies gravity, then enters rest mode 5 on a free cell or end mode 4 when it hits an actor, is too fast or the cell is blocked." }
+Actor_RockEnd = { addr = 0x8019BE28, type = "func", source = "Rock mode 4 (ACTOR_ROCK_MODE_END): adds 0x4000 to both scales per frame; at a scale above 0x1FFFF with the camera still, releases the camera and clears the actor." }
+Actor_RockRest = { addr = 0x8019BEFC, type = "func", source = "Rock mode 5: counts the timer down while the camera is still, then releases the camera and returns to mode 1." }
+Actor_RockClaimCell = { addr = 0x8019BF78, type = "func", source = "Stores the cell code under the rock in param.unk_0B and sets the cell code to 0x10." }
+Actor_RockReleaseCamera = { addr = 0x8019BFD4, type = "func", source = "Sets the camera to scroll to the leader at speed 0x40 and negates g_AreaCameraHeightDelta." }
+Actor_RockHit = { addr = 0x8019C028, type = "func", source = "Marks the field actor in range as pending interaction, or sets step 1 on the party member there, then enters end mode 4; returns 0 when nothing stands at the rock." }
+Actor_RockSetTarget = { addr = 0x8019C124, type = "func", source = "Sets unk_18 to the next or current cell edge along vx or vy (the step byte selects the next edge when moving forward) and enters mode 3." }
+Actor_RockIsBlockedAhead = { addr = 0x8019C1E4, type = "func", source = "Calls Actor_RockIsPointBlocked at two facing steps from the rock position." }
+Actor_RockIsBlockedAtEdge = { addr = 0x8019C244, type = "func", source = "Calls Actor_RockIsPointBlocked at the rock position moved to the cell edge it faces." }
+Actor_RockIsPointBlocked = { addr = 0x8019C344, type = "func", source = "the body returns g_Task->vx" }
+Actor_RockIsCellBlocked = { addr = 0x8019C4F0, type = "func", source = "Nonzero for an empty map grid cell, a cell code 0xF0 within 0x100 of the rock height, or at equal height a code 0x10, 0x2x or 0xAx, or a rock below the ground." }
 Actor_DrawValueDigits = { addr = 0x8019F5B8, type = "func", source = "Draws the actor's unk_06 value as 8x8 digit sprites starting at (x, y) in the actor's draw layer; three field effects call it with a party member's screen position." }
 Game_RequestAreaChange = { addr = 0x8019FA28, type = "func", source = "Requests an area change: stores the area id and entry position in g_GameEntryAreaId, g_GameEntryPosX and g_GameEntryPosY and sets g_GameStateIndex to 5." }
 Game_EnterArea = { addr = 0x8019FAA0, type = "func", source = "Enters an area: keeps the last position, starts its music, loads it when it changed, then sets up the view, party and entry walk; the one user passes the entry cell and facing." }
@@ -418,7 +431,7 @@ g_ActorTossModes = { addr = 0x801C80F8, source = "Indexed by header.mode in Acto
 s_ActorTossArcs = { addr = 0x801C8108, source = "Actor_TossLaunch starts a toss at step 0..2 with its vertical speed in the first member and gravity in the second", size = 0x18 }
 D_801C810C = { addr = 0x801C810C, alias = true, source = "s_ActorTossArcs +0x4, folded into that table in #400" }
 D_801C8120 = { addr = 0x801C8120, size = 0xC, source = "The three mode handlers func_8019B150, func_8019B1E8 and Actor_ClearSelf that func_8019B10C runs by g_Task->header.mode." }
-D_801C812C = { addr = 0x801C812C, size = 0x18, source = "The six mode handlers func_8019B3A8, func_8019B4A0, func_8019B704, func_8019BBA4, func_8019BE28 and func_8019BEFC that func_8019B364 runs by g_Task->header.mode." }
+g_ActorRockModes = { addr = 0x801C812C, source = "The six rock mode handlers (start, wait, roll, settle, end, rest) that Actor_RockRun runs by header.mode." }
 D_801C8144 = { addr = 0x801C8144, size = 0x10, source = "The four mode handlers func_8019C664, func_8019C794, func_8019C910 and func_8019C954 that func_8019C620 runs by g_Task->header.mode." }
 D_801C8154 = { addr = 0x801C8154, size = 0x10, source = "The four mode handlers func_8019CBD8, func_8019CCB8, func_8019CEDC and func_8019CFCC that func_8019CB94 runs by g_Task->header.mode." }
 D_801C8164 = { addr = 0x801C8164, size = 0x18, source = "The six mode handlers func_8019DE10, func_8019E264, func_8019E424, func_8019E780, func_8019E918 and func_8019EAD4 that func_8019DDCC runs by g_Task->header.mode." }

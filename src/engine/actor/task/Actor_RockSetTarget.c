@@ -1,6 +1,8 @@
-#include "game_00.h"
+#include "engine/game/00/game_00.h"
 
-MATCH void func_8019C124(s32 step_byte) {
+/* func_8019C124 */
+/* Sets the cell edge the rock rolls on to along its velocity and enters the settle mode. */
+MATCH void Actor_RockSetTarget(s32 step_byte) {
     Actor* work;
     s32    vel;
 
@@ -35,5 +37,5 @@ MATCH void func_8019C124(s32 step_byte) {
         return;
     }
 set_state:
-    TASK(Actor)->header.mode = 3;
+    TASK(Actor)->header.mode = ACTOR_ROCK_MODE_SETTLE;
 }

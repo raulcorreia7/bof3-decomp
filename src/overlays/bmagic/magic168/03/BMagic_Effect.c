@@ -4,9 +4,9 @@
 __asm__(".include \"include/match/macro.inc\"\n");
 #endif
 
-#include "overlays/bmagic/shared/BMagic_SparkleUpdate_2.h"
+#include "overlays/bmagic/shared/BMagic_SparkleUpdate.h"
 
-#include "overlays/bmagic/shared/BMagic_SparkleInit_2.h"
+#include "overlays/bmagic/shared/BMagic_SparkleInitQueueSound.h"
 
 #include "overlays/bmagic/shared/Effect_ReplacePaletteFade.h"
 
