@@ -544,7 +544,7 @@ segments:
       - [0x1BC38, c, func_800B2438]
       - [0x1BC78, c, func_800B2478]
       - [0x1BCCC, c, func_800B24CC]
-      - [0x1BD0C, c, func_800B250C]
+      - [0x1BD0C, c, UI_PanelSlideOutOption_800B250C]
       - [0x1BD4C, c, UI_PanelSlideLeft]
       - [0x1BD8C, c, func_800B258C]
       - [0x1BDC0, c, Menu_DrawInventoryWindow]

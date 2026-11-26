@@ -197,6 +197,7 @@ Battle_DrawInventoryPanel = { addr = 0x800B2104, type = "func", source = "runs t
 UI_PanelSlideOutOption_800B2218 = { addr = 0x800B2218, type = "func", source = "same body as emi/etc/game/00@0x801996FC UI_PanelSlideOutOption" }
 UI_PanelSlideOutOption_800B22AC = { addr = 0x800B22AC, type = "func", source = "same body as emi/etc/game/00@0x801996FC UI_PanelSlideOutOption" }
 Menu_SetPosX_800B23F8 = { addr = 0x800B23F8, type = "func", source = "same body as emi/etc/shisu/00@0x801D32E0 UI_PanelSetPosX" }
+UI_PanelSlideOutOption_800B250C = { addr = 0x800B250C, type = "func", source = "same body as emi/etc/game/00@0x801996FC UI_PanelSlideOutOption" }
 UI_PanelSlideLeft = { addr = 0x800B254C, type = "func", source = "Slides the menu panel to the left." }
 Menu_DrawInventoryWindow = { addr = 0x800B25C0, type = "func", source = "Draws the inventory panel of one item category: the item rows with their counts, dimmed when the party member cannot use them and raised on the cursor rows, the category title, the held count against the capacity, the two tab runs and the scroll bar." }
 Menu_DrawPanelIcon = { addr = 0x800B326C, type = "func", source = "Draws one MenuIconPrim from uv/clut." }
