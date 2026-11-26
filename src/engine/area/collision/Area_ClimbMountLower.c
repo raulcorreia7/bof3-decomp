@@ -17,10 +17,10 @@ MATCH s32 Area_ClimbMountLower(void) {
     work     = TASK(Actor);
     rise     = work->voice_flags.scene_flag + 2;
     ahead_x  = work->pos.x.fixed + g_FacingSteps[work->direction].x * rise;
-    target_x       = ahead_x;
+    target_x = ahead_x;
     ahead_y  = work->pos.y.fixed + g_FacingSteps[work->direction].y * rise;
-    target_y       = ahead_y;
-    z = COORD_INT(work->pos.z);
+    target_y = ahead_y;
+    z        = COORD_INT(work->pos.z);
     landed   = 0;
 
     ground = Area_HeightRead(target_x, target_y);

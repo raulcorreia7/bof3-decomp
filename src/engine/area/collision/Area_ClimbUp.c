@@ -17,8 +17,8 @@ MATCH void Area_ClimbUp(void) {
     facing                 = work->direction;
     COORD_INT(work->pos.z) = z;
 
-    work  = TASK(Actor);
-    reach = work->voice_flags.scene_flag + 2;
+    work    = TASK(Actor);
+    reach   = work->voice_flags.scene_flag + 2;
     /* FAKE: non-const view of the facing table on the first read keeps retail's store order. */
     ahead_x = (*(Offset2(*)[8])g_FacingSteps)[facing].x * reach;
     ahead_y = g_FacingSteps[facing].y * reach;

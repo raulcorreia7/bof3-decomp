@@ -8,11 +8,11 @@ MATCH void Area_ClimbDismountBegin(void) {
     u32    facing;
     s32    animation;
 
-    actor                                             = TASK(Actor);
+    actor                                           = TASK(Actor);
     slot                                            = actor->unk_05;
-    g_GfxPalettePending                              = 1;
+    g_GfxPalettePending                             = 1;
     *(u16*)(MEM_PTR(u8, 0x8003963Eu) + (slot << 6)) = 0;
-    facing                                            = actor->direction;
+    facing                                          = actor->direction;
     /* FAKE: barrier keeps saved ra from sinking below actor load. */
     FAKE_BARRIER();
     animation = 52;

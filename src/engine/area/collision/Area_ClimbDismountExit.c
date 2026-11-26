@@ -6,7 +6,7 @@ MATCH s32 Area_ClimbDismountExit(void) {
     Actor* actor;
     Actor* actor_b;
     u8     frames;
-    actor      = TASK(Actor);
+    actor  = TASK(Actor);
     frames = actor->timer;
     if (frames == 0) {
         Script_Request(actor->direction);

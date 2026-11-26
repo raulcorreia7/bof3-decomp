@@ -37,52 +37,52 @@ void Area_ClimbLadder(void);
 /* func_801B3540 */
 void Area_ClimbDismount(void);
 /* func_801C4D1C */
-void  Area_ClimbStartGrab(void);
+void Area_ClimbStartGrab(void);
 /* func_801C4D58 */
-void  Area_ClimbMountApproachBegin(void);
+void Area_ClimbMountApproachBegin(void);
 /* func_801C4E14 */
-s32   Area_ClimbMountApproach(void);
+s32  Area_ClimbMountApproach(void);
 /* func_801C4EC4 */
-bool  Area_ClimbMountTurn(void);
+bool Area_ClimbMountTurn(void);
 /* func_801C4F88 */
-bool  Area_ClimbMountTurnWait(void);
+bool Area_ClimbMountTurnWait(void);
 /* func_801C4FE0 */
-s32   Area_ClimbMountLower(void);
+s32  Area_ClimbMountLower(void);
 /* func_801C51B0 */
-void  Area_ClimbDismountBegin(void);
+void Area_ClimbDismountBegin(void);
 /* func_801C520C */
-s32   Area_ClimbDismountRise(void);
+s32  Area_ClimbDismountRise(void);
 /* func_801C539C */
-bool  Area_ClimbDismountExitBegin(void);
+bool Area_ClimbDismountExitBegin(void);
 /* func_801C5474 */
-s32   Area_ClimbDismountExit(void);
+s32  Area_ClimbDismountExit(void);
 /* func_801C5558 */
-void  Area_ClimbUp(void);
+void Area_ClimbUp(void);
 /* func_801C5620 */
-void  Area_ClimbDown(void);
+void Area_ClimbDown(void);
 /* func_801C56E4 */
-void  Area_ClimbJumpOff(void);
+void Area_ClimbJumpOff(void);
 /* func_801B3314 */
-void  Area_ClimbMountApproachBeginStep(void);
+void Area_ClimbMountApproachBeginStep(void);
 /* func_801B3388 */
-void  Area_ClimbMountApproachStep(void);
+void Area_ClimbMountApproachStep(void);
 /* func_801B33C4 */
-void  Area_ClimbMountTurnStep(void);
+void Area_ClimbMountTurnStep(void);
 /* func_801B3400 */
-void  Area_ClimbMountTurnWaitStep(void);
+void Area_ClimbMountTurnWaitStep(void);
 /* func_801B343C */
-void  Area_ClimbMountLowerStep(void);
+void Area_ClimbMountLowerStep(void);
 /* func_801B3584 */
-void  Area_ClimbDismountBeginStep(void);
+void Area_ClimbDismountBeginStep(void);
 /* func_801B35B0 */
-void  Area_ClimbDismountRiseStep(void);
+void Area_ClimbDismountRiseStep(void);
 /* func_801B35EC */
-void  Area_ClimbDismountExitBeginStep(void);
+void Area_ClimbDismountExitBeginStep(void);
 /* func_801B3670 */
-void  Area_ClimbDismountExitStep(void);
+void Area_ClimbDismountExitStep(void);
 /* func_801BD7F8 */
-void  Area_ClimbFollower(void);
+void Area_ClimbFollower(void);
 /* func_801BD83C */
-void  Area_ClimbFollowerLadder(void);
+void Area_ClimbFollowerLadder(void);
 
 #endif

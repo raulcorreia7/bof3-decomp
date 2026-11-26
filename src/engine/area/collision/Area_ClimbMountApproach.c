@@ -9,7 +9,7 @@ MATCH s32 Area_ClimbMountApproach(void) {
     u8     slot;
     s32    ended;
 
-    actor      = TASK(Actor);
+    actor  = TASK(Actor);
     frames = actor->timer;
     ended  = 0;
     if (frames != 0) {
@@ -18,7 +18,7 @@ MATCH s32 Area_ClimbMountApproach(void) {
         actor_b = TASK(Actor);
         if (actor_b->timer == actor_b->unk_0A) {
             slot                                            = actor_b->unk_05;
-            g_GfxPalettePending                               = 1;
+            g_GfxPalettePending                             = 1;
             *(u16*)(MEM_PTR(u8, 0x8003963Eu) + (slot << 6)) = 0;
         }
     } else {

@@ -8,9 +8,9 @@ MATCH void Area_ClimbDown(void) {
     s32 pos_y;
     s16 ground;
 
-    pos_x                             = TASK(Actor)->pos.x.fixed;
-    z                         = COORD_INT(TASK(Actor)->pos.z);
-    pos_y                             = TASK(Actor)->pos.y.fixed;
+    pos_x                         = TASK(Actor)->pos.x.fixed;
+    z                             = COORD_INT(TASK(Actor)->pos.z);
+    pos_y                         = TASK(Actor)->pos.y.fixed;
     COORD_INT(TASK(Actor)->pos.z) = z - 16;
     ground                        = Area_HeightRead(pos_x, pos_y);
 

@@ -6,7 +6,7 @@ MATCH bool Area_ClimbMountTurn(void) {
     u8 frames;
 
     TASK(Actor)->unk_0A = (TASK(Actor)->unk_0A - 1);
-    frames               = TASK(Actor)->unk_0A;
+    frames              = TASK(Actor)->unk_0A;
     if (frames == 0) {
         Script_Request(TASK(Actor)->direction == FACING_RIGHT ? 0x37 : 0x34);
         TASK(Actor)->direction ^= 4;
