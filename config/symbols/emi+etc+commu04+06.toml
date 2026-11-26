@@ -4,3 +4,4 @@ func_801D0C04 = { addr = 0x801D0C04, type = "func", source = "Entry of the commu
 Fairy_EndCommuScene = { addr = 0x801D1670, type = "func", source = "Last slot of g_Commu04Steps; adds 1 to g_SceneEventStep unless g_GameStateIndex is GAME_REQUEST_MESSAGE." }
 g_Commu04Steps = { addr = 0x801D1750, source = "the 2 step handlers of the commu04 scene, called by func_801D0C04 (the overlay entry) and indexed by the commu step byte D_801F294C" }
 g_Commu04Step0Steps = { addr = 0x801D1758, source = "7 sub-step handlers of step 0 of the commu04 scene, called by func_801D0C5C (the step 0 handler) and indexed by the commu sub-step byte D_801F294D" }
+g_Commu04ItemPanel = { addr = 0x80148330, type = "MenuChoicePanel", size = 0x40, alias = true, source = "g_UiPanelTasks[0] as the item choice panel func_801D0D4C steps: retail reads its members absolute." }

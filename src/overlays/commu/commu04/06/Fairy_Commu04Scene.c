@@ -36,16 +36,15 @@ MATCH void func_801D0CF4(void) {
     }
 }
 
-#ifdef NON_MATCHING
 /* The fairy job picker: the choice panel walks the item list and confirm stores the pick. */
-NON_MATCHING void func_801D0D4C(void) {
-    MenuChoicePanel* panel;
+MATCH void func_801D0D4C(void) {
     s32              buttons;
     u32              row_limit;
     u32              row_count;
     u8               old_cursor;
     u8               new_row;
     u8               item_entry;
+    u8*              selection;
 
     if (D_801D1774 != 0) {
         D_801D1774--;
@@ -55,97 +54,93 @@ NON_MATCHING void func_801D0D4C(void) {
     if (g_UiPanelTasks[0].state != 0) {
         return;
     }
-    panel                    = (MenuChoicePanel*)&g_UiPanelTasks[0];
     g_UiPanelTasks[1].active = 1;
     g_UiPanelTasks[1].pos.x  = g_UiPanelTasks[0].pos.x + 7;
-    g_UiPanelTasks[1].pos.y  = g_UiPanelTasks[0].pos.y + ((panel->group_cursor - panel->group_first) * 0xD + 0x1A);
+    g_UiPanelTasks[1].pos.y  = g_UiPanelTasks[0].pos.y + ((g_Commu04ItemPanel.group_cursor - g_Commu04ItemPanel.group_first) * 0xD + 0x1A);
     buttons                  = INPUT_REPEATED(g_PadStates[0].pressed, (INPUT_DIRECTIONAL | PADL1 | PADR1));
     if (buttons & PADLleft) {
         SND_SEPlay(EMI_SE_ID(SND_BANK_COMMON, 1));
-        panel->unk_10 = 0x32;
-        panel->group--;
-        if ((s8)panel->group < 0) {
-            panel->group = 3;
+        g_Commu04ItemPanel.unk_10 = 0x32;
+        g_Commu04ItemPanel.group--;
+        if ((s8)g_Commu04ItemPanel.group < 0) {
+            g_Commu04ItemPanel.group = 3;
         }
     } else if (buttons & PADLright) {
-        panel->unk_10 = 0x31;
+        g_Commu04ItemPanel.unk_10 = 0x31;
         SND_SEPlay(EMI_SE_ID(SND_BANK_COMMON, 1));
-        panel->group++;
-        if (panel->group >= 4U) {
-            panel->group = 0;
+        g_Commu04ItemPanel.group++;
+        if (g_Commu04ItemPanel.group >= 4U) {
+            g_Commu04ItemPanel.group = 0;
         }
     }
-    old_cursor = panel->group_cursor;
+    old_cursor = g_Commu04ItemPanel.group_cursor;
     if (buttons & PADLup) {
         if (old_cursor != 0) {
-            panel->group_cursor = (panel->group_cursor - 1);
+            g_Commu04ItemPanel.group_cursor = (g_Commu04ItemPanel.group_cursor - 1);
         }
-        if (panel->group_cursor < panel->group_first) {
-            panel->confirm_timer = 0xF0;
+        if (g_Commu04ItemPanel.group_cursor < g_Commu04ItemPanel.group_first) {
+            g_Commu04ItemPanel.confirm_timer = 0xF0;
         }
     } else if (buttons & PADLdown) {
         if (old_cursor < 0x7FU) {
-            panel->group_cursor = (panel->group_cursor + 1);
+            g_Commu04ItemPanel.group_cursor = (g_Commu04ItemPanel.group_cursor + 1);
         }
-        if (panel->group_cursor >= panel->group_first + 9) {
-            panel->confirm_timer = 0x10;
+        if (g_Commu04ItemPanel.group_cursor >= g_Commu04ItemPanel.group_first + 9) {
+            g_Commu04ItemPanel.confirm_timer = 0x10;
         }
     } else if (buttons & PADL1) {
-        row_limit = panel->group_first & BYTE_MASK;
+        row_limit = g_Commu04ItemPanel.group_first & BYTE_MASK;
         if (row_limit == 0) {
-            panel->group_cursor = 0U;
+            g_Commu04ItemPanel.group_cursor = 0U;
         } else if (row_limit < 9U) {
-            panel->group_cursor = (panel->group_cursor - panel->group_first);
-            panel->group_first  = 0U;
+            g_Commu04ItemPanel.group_cursor = (g_Commu04ItemPanel.group_cursor - g_Commu04ItemPanel.group_first);
+            g_Commu04ItemPanel.group_first  = 0U;
         } else {
-            panel->group_cursor = (panel->group_cursor - 9);
-            new_row             = panel->group_first - 9;
-            panel->group_first  = new_row;
+            g_Commu04ItemPanel.group_cursor = (g_Commu04ItemPanel.group_cursor - 9);
+            g_Commu04ItemPanel.group_first  = g_Commu04ItemPanel.group_first - 9;
         }
     } else if (buttons & PADR1) {
-        row_count = panel->group_first & BYTE_MASK;
+        row_count = g_Commu04ItemPanel.group_first & BYTE_MASK;
         if (row_count == 119) {
-            panel->group_cursor = 0x7FU;
+            g_Commu04ItemPanel.group_cursor = 0x7FU;
         } else if (row_count >= 111U) {
-            new_row             = panel->group_cursor + 0x77;
-            panel->group_cursor = new_row - panel->group_first;
-            panel->group_first  = 0x77;
+            new_row             = g_Commu04ItemPanel.group_cursor + 0x77;
+            g_Commu04ItemPanel.group_cursor = new_row - g_Commu04ItemPanel.group_first;
+            g_Commu04ItemPanel.group_first  = 0x77;
         } else {
-            panel->group_cursor = (panel->group_cursor + 9);
-            panel->group_first  = panel->group_first + 9;
+            g_Commu04ItemPanel.group_cursor = (g_Commu04ItemPanel.group_cursor + 9);
+            g_Commu04ItemPanel.group_first  = g_Commu04ItemPanel.group_first + 9;
         }
     }
-    if (old_cursor != panel->group_cursor) {
+    if (old_cursor != g_Commu04ItemPanel.group_cursor) {
         SND_SEPlay(EMI_SE_ID(SND_BANK_COMMON, 0));
     }
-    if (panel->confirm_timer == 0) {
+    if (g_Commu04ItemPanel.confirm_timer == 0) {
         if (g_PadStates[0].pressed & g_InputMasks[MENU_INPUT_CANCEL]) {
             g_UiPanelTasks[1].active = 0;
             g_UiPanelTasks[0].state  = 1;
             SND_SEPlay(EMI_SE_ID(SND_BANK_COMMON, 6));
             D_801F294D += 1;
         } else if (g_PadStates[0].pressed & g_InputMasks[MENU_INPUT_CONFIRM]) {
-            item_entry = g_ItemCategoryIds[panel->group][panel->group_cursor];
+            item_entry = g_ItemCategoryIds[g_Commu04ItemPanel.group][g_Commu04ItemPanel.group_cursor];
             if (item_entry == 0) {
                 SND_SEPlay(EMI_SE_ID(SND_BANK_COMMON, 7));
                 return;
             }
             SND_SEPlay(EMI_SE_ID(SND_BANK_COMMON, 5));
-            g_FairyJobs[g_SceneEventSelection].record_state = item_entry;
-            g_FairyJobs[g_SceneEventSelection].unk_03       = panel->group;
+            selection                       = &g_SceneEventSelection;
+            g_FairyJobs[*selection].record_state = item_entry;
+            g_FairyJobs[*selection].unk_03       = g_Commu04ItemPanel.group;
             g_UiPanelTasks[0].state                         = 1;
             g_UiPanelTasks[1].active                        = 0;
             D_801F294D                                      = 4;
         }
-        item_entry = g_ItemCategoryIds[panel->group][panel->group_cursor];
+        item_entry = g_ItemCategoryIds[g_Commu04ItemPanel.group][g_Commu04ItemPanel.group_cursor];
         if (item_entry != 0) {
-            UI_TextDraw(0x1D, 0x15, 0, 0xFF, UI_MessageGetText(Item_GetDescription(panel->group, item_entry) & HALF_MASK));
+            UI_TextDraw(0x1D, 0x15, 0, 0xFF, UI_MessageGetText(Item_GetDescription(g_Commu04ItemPanel.group, item_entry) & HALF_MASK));
         }
     }
 }
-#else
-INCLUDE_ASM(func_801D0D4C);
-#endif
 
 MATCH void func_801D11DC(void) {
     if (D_801D1774 < 4U) {

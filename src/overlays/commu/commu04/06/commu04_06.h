@@ -18,6 +18,7 @@ extern Callback g_Commu04Steps[COMMU04_STEP_COUNT];
 /* D_801D1758 */
 extern Callback g_Commu04Step0Steps[COMMU04_STEP0_COUNT];
 extern u8       D_801D1774;
+extern MenuChoicePanel g_Commu04ItemPanel; /* g_UiPanelTasks[0] */
 
 /* The overlay's state byte the guarded step advances. */
 
