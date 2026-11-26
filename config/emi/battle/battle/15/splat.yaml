@@ -536,7 +536,7 @@ segments:
       - [0x1B9D8, c, func_800B21D8]
       - [0x1BA18, c, UI_PanelSlideOutOption_800B2218]
       - [0x1BA58, c, func_800B2258]
-      - [0x1BAAC, c, func_800B22AC]
+      - [0x1BAAC, c, UI_PanelSlideOutOption_800B22AC]
       - [0x1BAEC, c, func_800B22EC]
       - [0x1BB2C, c, func_800B232C]
       - [0x1BBB8, c, func_800B23B8]
