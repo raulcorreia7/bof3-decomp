@@ -1,7 +1,9 @@
-#include "game_00.h"
+#include "engine/game/00/game_00.h"
 #include "area/map.h"
 
-MATCH void func_801A7E54(void) {
+/* func_801A7E54 */
+/* Sets up the party, then requests the Dauna Mine area the event selection picks. */
+MATCH void Scene_RunMineEntry(void) {
     u8* flag;
 
     switch (g_SceneEventState.step) {

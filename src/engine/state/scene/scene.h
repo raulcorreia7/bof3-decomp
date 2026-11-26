@@ -28,6 +28,12 @@ void Scene_RunScenario(s32 step_index);
 #if defined(ENGINE_LOCAL_DECLS) && !defined(OVERLAY_STATE_SCENE_H_LOCAL)
 #define OVERLAY_STATE_SCENE_H_LOCAL
 
+/* func_801A7CE8 */
+void Scene_StepIdle(void);
+/* func_801A7E54 */
+void Scene_RunMineEntry(void);
 void Scene_RunInn(void);
+/* func_801A83DC */
+void Scene_RunGeneFound(void);
 
 #endif

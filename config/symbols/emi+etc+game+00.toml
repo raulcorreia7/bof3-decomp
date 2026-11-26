@@ -7,8 +7,8 @@ jtbl_80195864 = { addr = 0x80195864, type = "Callback", source = "The switch tab
 jtbl_80195894 = { addr = 0x80195894, type = "Callback", source = "The switch table of func_801A44A4: the jump targets of its jr dispatch." }
 jtbl_80195954 = { addr = 0x80195954, type = "Callback", source = "The switch table of func_801A4BF8: the jump targets of its jr dispatch." }
 jtbl_80195990 = { addr = 0x80195990, type = "Callback", source = "The switch table of UI_PanelOpenMaster: the jump targets of its jr dispatch." }
-jtbl_801959A8 = { addr = 0x801959A8, type = "Callback", source = "The switch table of func_801A7E54: the jump targets of its jr dispatch." }
-jtbl_801959C0 = { addr = 0x801959C0, type = "Callback", source = "The switch table of func_801A7E54: the jump targets of its jr dispatch." }
+jtbl_801959A8 = { addr = 0x801959A8, type = "Callback", source = "The switch table of Scene_RunMineEntry: the jump targets of its jr dispatch." }
+jtbl_801959C0 = { addr = 0x801959C0, type = "Callback", source = "The switch table of Scene_RunMineEntry: the jump targets of its jr dispatch." }
 jtbl_801959D8 = { addr = 0x801959D8, type = "Callback", source = "The switch table of Scene_RunInn: the jump targets of its jr dispatch." }
 jtbl_80195A38 = { addr = 0x80195A38, type = "Callback", source = "The switch table of func_801A8728: the jump targets of its jr dispatch." }
 jtbl_80195CC0 = { addr = 0x80195CC0, type = "Callback", source = "The switch table of func_801A8F94: the jump targets of its jr dispatch." }
@@ -147,9 +147,14 @@ Game_ScenarioCall = { addr = 0x801A7A34, type = "func", source = "Calls entry_10
 Game_UpdateScene = { addr = 0x801A7BF0, type = "func", source = "Runs the g_SceneSteps callback selected by the scene state byte D_801448EA." }
 Scene_ResetEventState = { addr = 0x801A7C2C, type = "func", source = "Resets the scene state bytes and copies the 16-byte D_801C84AC table to g_SceneEventFlags." }
 Scene_UpdateEvent = { addr = 0x801A7CAC, type = "func", source = "Runs the g_SceneEvents callback selected by the scene event byte D_801448EB." }
+Scene_StepIdle = { addr = 0x801A7CE8, type = "func", source = "Does nothing: slot 0 (SCENE_EVENT_NONE) of g_SceneEvents." }
 UI_PanelOpenMaster = { addr = 0x801A7CF0, type = "func", source = "Scene event 4: loads SISYOU with EMI_ArchiveLoad(EMI_SLOT_SISYOU) and runs the master menu through func_801D25D8." }
+Scene_RunMineEntry = { addr = 0x801A7E54, type = "func", source = "Scene event 5 (SCENE_EVENT_MINE_ENTRY): waits for the script, sets up the party, then requests the Dauna Mine area picked by the event selection (zombie dragon, Bais or intro)." }
 Scene_RunInn = { addr = 0x801A802C, type = "func", source = "Scene event 10: calls UI_ModeSet, plays an XA stream and sets g_GameEntryState to 7, the shop entry state." }
 UI_MessageRunArea = { addr = 0x801A82F8, type = "func", source = "Starts area message 0xD8, waits until g_GameStateIndex leaves 2, then clears the script-active flag and the scene event byte D_801448EB." }
+WorldMap_RunLocationGuide = { addr = 0x801A839C, type = "func", source = "Scene event 27: runs the location guide handler of the world map region the leader stands in." }
+Scene_RunGeneFound = { addr = 0x801A83DC, type = "func", source = "Scene event 44: sets the found gene's flag, shows the found-gene message with its name and plays the XA stream with the BGM paused until both finish." }
+WorldMap_RunFairyEntry = { addr = 0x801A852C, type = "func", source = "Scene event 55: shows the entry message, then requests the Fairy Village area picked from the highest set progress flag (185 down)." }
 Scene_DispatchObject = { addr = 0x801A86D4, type = "func", source = "Runs the g_SceneObjects callback selected by unk_7A of the actor, with the actor and g_SceneEventFlags." }
 Game_CallArea = { addr = 0x801A8CB4, type = "func", source = "Finds the entry of g_GameAreaId in the 28-entry area handler table g_AreaHooks and calls its handler with the two coordinates; returns 0 when the area has none. Called by Game_ScenarioCall." }
 Script_Run = { addr = 0x801A8D38, type = "func", source = "Runs the actor script record at the cursor: flow ops first, then the group handler its high nibble selects; returns the facing selection." }
@@ -384,8 +389,8 @@ g_ScenarioHandlers = { addr = 0x801C8454, size = 0x50, source = "Step tables of 
 g_SceneSteps = { addr = 0x801C84A4, size = 0x8, source = "Scene update callbacks, indexed by the scene state byte D_801448EA by Game_UpdateScene." }
 s_EventFlagsReset = { addr = 0x801C84AC, size = 0x10, source = "Scene_ResetEventState copies these 16 mode bytes to g_SceneEventFlags" }
 g_SceneEvents = { addr = 0x801C84BC, size = 0x100, source = "Scene event callbacks, indexed by the scene event byte D_801448EB by Scene_UpdateEvent." }
-s_ScenarioStateStepArgs = { addr = 0x801C85BC, size = 0x8, source = "Argument of each scenario state step; func_801A7E54 passes the entry for D_801448ED to Scene_SetupParty." }
-D_801C85C4 = { addr = 0x801C85C4, size = 0x2C, source = "The 11 area handlers (Fishing_ShowLocation four times) that func_801A839C runs by the area handler index." }
+s_ScenarioStateStepArgs = { addr = 0x801C85BC, size = 0x8, source = "Argument of each scenario state step; Scene_RunMineEntry passes the entry for D_801448ED to Scene_SetupParty." }
+g_WorldMapGuides = { addr = 0x801C85C4, source = "Indexed by the world map region in WorldMap_RunLocationGuide: the guide handler of each region." }
 g_SceneObjects = { addr = 0x801C85F0, size = 0x108, source = "Scene object callbacks, indexed by the callback_index of the actor by Scene_DispatchObject." }
 g_AreaHooks = { addr = 0x801C86F8, type = "AreaHooks", size = 0xE0, source = "per-area callbacks selected by Game_CallArea" }
 s_TalkMessageIds = { addr = 0x801C87D8, size = 0x24, source = "Message id by talk id and party slot, read by func_801A8F94." }

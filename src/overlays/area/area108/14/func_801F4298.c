@@ -25,5 +25,5 @@ block_4:
     flag = 0x1F;
 block_5:
     SYS_SetFlag(flags, flag);
-    g_SceneEventState.mode = 5;
+    g_SceneEventState.mode = SCENE_EVENT_MINE_ENTRY;
 }
