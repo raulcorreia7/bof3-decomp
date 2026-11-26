@@ -340,7 +340,7 @@ MATCH void BMagic_ShieldGemSpinUp(void) {
     BMagic_SetXFixed(radius);
     BMAGIC_DRAW_IN_ACTOR_MATRIX(BMagic_ShieldDrawGem);
     if (TASK(PartyMember)->unk_0C < 4) {
-        spin_ticks                     = TASK(PartyMember)->unk_10 + 1;
+        spin_ticks                = TASK(PartyMember)->unk_10 + 1;
         TASK(PartyMember)->unk_10 = spin_ticks;
         if (!(spin_ticks & 0x7)) {
             TASK(PartyMember)->unk_0C += 1;
@@ -348,7 +348,7 @@ MATCH void BMagic_ShieldGemSpinUp(void) {
     }
     TASK(PartyMember)->unk_09 += TASK(PartyMember)->unk_0C;
     if (TASK(PartyMember)->unk_0C == 4) {
-        remaining                   = TASK(PartyMember)->timer - 1;
+        remaining                = TASK(PartyMember)->timer - 1;
         TASK(PartyMember)->timer = remaining;
         if (!(remaining & BYTE_MASK)) {
             battler_index = TASK(PartyMember)->unk_03;
