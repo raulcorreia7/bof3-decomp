@@ -7,7 +7,7 @@ draft, which must sit under ``#ifdef NON_MATCHING`` with its ``INCLUDE_ASM`` in 
 ``HAND_ASM`` marks the C equivalent of a function the original programmer wrote in assembly. It
 sits under ``#if HAND_ASM_MODEL`` (the model builds under ``NON_MATCHING`` or ``BOF3_PORT``), is
 required for every function in ``asm/*/hand/`` and is allowed nowhere else.
-``--diff REF`` lets a new draft land when ``config/attempts.jsonl`` holds an object for its function
+``--diff REF`` runs the same whole-tree marker scan and lets a new draft land only when ``config/attempts.jsonl`` holds an object for its function
 (``<image>@0x<ADDR>``), so every unmatched function keeps its closest draft with its record.
 Every row of that file is one JSON object per line with exactly ``function``, ``tried``,
 ``first_diff``, ``score``, in that order, which are the keys ``tools/worklist.py`` reads; a row
@@ -252,13 +252,17 @@ def tracked_sources() -> list[str]:
     return out.split()
 
 
-def hand_functions(hand_files: list[str]) -> set[str]:
-    return {Path(f).stem for f in hand_files}
+def hand_names(hand_file: str) -> set[str]:
+    """The names a hand file answers to: its stem and each symbol it exports."""
+    path = Path(hand_file)
+    text = path.read_text(errors="ignore") if path.exists() else ""
+    return {path.stem, *re.findall(r"^\s*\.globl\s+(\w+)", text, re.M)}
 
 
 def check_hand_units(hand_files: list[str], sources: dict[str, str]) -> list[Violation]:
     """HAND_ASM is required on every asm/*/hand/ function and allowed on no other."""
-    hand = hand_functions(hand_files)
+    names = {f: hand_names(f) for f in hand_files}
+    hand = set().union(*names.values())
     marked: set[str] = set()
     found: list[Violation] = []
     for path, text in sources.items():
@@ -274,7 +278,7 @@ def check_hand_units(hand_files: list[str], sources: dict[str, str]) -> list[Vio
                         "HAND_ASM on a function with no asm/*/hand/ file",
                     )
                 )
-    for name in sorted(hand - marked):
+    for name in sorted(Path(f).stem for f, n in names.items() if not n & marked):
         found.append(
             Violation("asm/hand", 1, name, "hand-written assembly without HAND_ASM")
         )
@@ -333,6 +337,24 @@ def report_attempts(problems: list[str]) -> bool:
     return bool(problems)
 
 
+def marker_problems(paths: list[str], whole_tree: bool) -> list[Violation]:
+    """Print and return every definition in `paths` without exactly one marker."""
+    sources = {p: Path(p).read_text(encoding="utf-8", errors="ignore") for p in paths}
+    problems: list[Violation] = []
+    if whole_tree:
+        problems += check_hand_units(tracked_hand_files(), sources)
+    for path, text in sources.items():
+        problems += check_text(text, path)
+    for problem in problems:
+        print(problem, file=sys.stderr)
+    if problems:
+        print(
+            f"check-markers: {len(problems)} definition(s) without exactly one marker",
+            file=sys.stderr,
+        )
+    return problems
+
+
 def main(argv: list[str]) -> int:
     if argv and argv[0] in ("-h", "--help"):
         print(__doc__.strip())
@@ -344,6 +366,8 @@ def main(argv: list[str]) -> int:
         if report_attempts(attempt_problems()):
             return 1
         bad, known = 0, attempted()
+        if marker_problems(tracked_sources(), whole_tree=True):
+            bad = 1
         for path, line, text in added_lines(argv[1]):
             if re.match(r"\s*#\s*if(?:def)?\s+NON_MATCHING\b", text):
                 rest = "\n".join(Path(path).read_text().splitlines()[line:])
@@ -358,34 +382,20 @@ def main(argv: list[str]) -> int:
                 )
                 bad = 1
         if bad:
-            print(f"check-markers: drafts landed against {argv[1]}", file=sys.stderr)
+            print(f"check-markers: markers or drafts fail against {argv[1]}", file=sys.stderr)
             return 1
-        print(f"check-markers: every draft landed against {argv[1]} has attempts")
+        print(
+            f"check-markers: every definition carries one marker; every draft landed "
+            f"against {argv[1]} has attempts"
+        )
         return 0
     paths = argv or tracked_sources()
-    problems: list[Violation] = []
-    if not argv:
-        sources = {
-            p: Path(p).read_text(encoding="utf-8", errors="ignore") for p in paths
-        }
-        problems += check_hand_units(tracked_hand_files(), sources)
-    for path in paths:
-        problems += check_text(
-            Path(path).read_text(encoding="utf-8", errors="ignore"), path
-        )
-    for problem in problems:
-        print(problem, file=sys.stderr)
+    problems = marker_problems(paths, whole_tree=not argv)
     malformed_rows = report_attempts(attempt_problems())
-    if problems:
-        print(
-            f"check-markers: {len(problems)} definition(s) without exactly one marker",
-            file=sys.stderr,
-        )
     if problems or malformed_rows:
         return 1
     print(f"check-markers: {len(paths)} files, every definition carries one marker")
     return 0
-
 
 if __name__ == "__main__":
     sys.exit(main(sys.argv[1:]))
