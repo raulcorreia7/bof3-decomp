@@ -459,7 +459,7 @@ segments:
       - [0x17A60, c, Battle_AllocActionEffect]
       - [0x17AD4, c, func_800AE2D4]
       - [0x17B4C, c, func_800AE34C]
-      - [0x17B90, c, Battle_StartScreenFade]
+      - [0x17B90, c, Battle_StartScreenFade_800AE390]
       - [0x17BC0, c, func_800AE3C0]
       - [0x17C38, c, func_800AE438]
       - [0x17C74, c, func_800AE474]
