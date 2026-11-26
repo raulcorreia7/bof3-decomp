@@ -264,11 +264,6 @@ typedef s32 (*RouteStepCallback)(u8* cursor);
 /* An area script call: the area load record names the routine. */
 typedef void (*AreaScriptCallback)(void* area);
 
-/* The PartyDamageColor each floor damage flashes the party member with. */
-typedef struct FloorDamageColors {
-    u8 colors[PARTY_FLOOR_DAMAGE_COUNT];
-} FloorDamageColors;
-
 /* What one damage floor takes from the party member that steps on it. */
 typedef struct FloorDamage {
     u8 hp_loss; /* HP the step drains, never the last one */
@@ -279,6 +274,11 @@ typedef struct FloorDamage {
 typedef struct FloorDamages {
     FloorDamage damages[PARTY_FLOOR_DAMAGE_COUNT];
 } FloorDamages;
+
+/* The PartyDamageColor each floor damage flashes the party member with. */
+typedef struct FloorDamageColors {
+    u8 colors[PARTY_FLOOR_DAMAGE_COUNT];
+} FloorDamageColors;
 
 typedef struct PaletteColors {
     u16 colors[4];
