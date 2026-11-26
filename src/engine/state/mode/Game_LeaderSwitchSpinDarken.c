@@ -1,6 +1,8 @@
-#include "game_00.h"
+#include "engine/game/00/game_00.h"
 
-MATCH void func_801B207C(void) {
+/* func_801B207C */
+/* Step 1: turns the leader one facing per frame while the timer rises and darkens the mode 3 members; advances when unk_09 is 4. */
+MATCH void Game_LeaderSwitchSpinDarken(void) {
     Actor* work;
     s32    limit;
     s32    awake; /* FAKE: constant local orders the loop-invariant hoist (owner-approved dummy). */

@@ -120,7 +120,7 @@ MATCH void func_801EF040(void) {
         prim->y3 = screen.vy;
         setRGB0(prim, 128, 0, 0);
         /* FAKE: retail tests the whole return register, as for a call with no prototype; the shared s16 prototype adds a sign extension. */
-        if (((s32 (*)(Pos2*, Pos2*, Pos2*))func_801AFF90)((Pos2*)&prim->x0, (Pos2*)&prim->x1, (Pos2*)&prim->x2) < 0) {
+        if (((s32 (*)(Pos2*, Pos2*, Pos2*))GFX_TriangleWinding)((Pos2*)&prim->x0, (Pos2*)&prim->x1, (Pos2*)&prim->x2) < 0) {
             GFX_AddPrim(GFX_LAYER_UI, sizeof(POLY_F4));
         }
     }

@@ -1,6 +1,8 @@
-#include "game_00.h"
+#include "engine/game/00/game_00.h"
 
-MATCH void func_801B26E0(void) {
+/* func_801B26E0 */
+/* Step 3: turns the leader one facing per frame while the timer falls and restores the mode 3 members; advances when unk_09 is 0. */
+MATCH void Game_LeaderSwitchSpinRestore(void) {
     u8 i;
     u8 level;
 

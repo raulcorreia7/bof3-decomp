@@ -1,7 +1,8 @@
-#include "game_00.h"
+#include "engine/game/00/game_00.h"
 
 /* Finds the area link at a map cell and makes its destination the pending area change; true when none. */
-MATCH bool func_801A0048(s32 cell_x, s32 cell_y) {
+/* func_801A0048 */
+MATCH bool Area_RequestLinkAtCell(s32 cell_x, s32 cell_y) {
     GameLocale*       link;
     GameLocaleChoice* choice;
     s32               n;

@@ -129,5 +129,13 @@ bool Game_RequestGarrPush(void);
 s32  Game_HasVitalItem(u8** cursor);
 /* func_8015B7F0 */
 s32  Game_HasPartyFlag(u8** cursor);
+/* func_801B1E24 */
+void Game_LeaderSwitchGather(void);
+/* func_801B207C */
+void Game_LeaderSwitchSpinDarken(void);
+/* func_801B26E0 */
+void Game_LeaderSwitchSpinRestore(void);
+/* func_8019FAA0 */
+void Game_EnterArea(u16 area_id, u32 entry_x, u32 entry_y, u8 entry_facing);
 
 #endif

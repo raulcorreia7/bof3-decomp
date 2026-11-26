@@ -39,7 +39,7 @@ MATCH void func_801C329C(void) {
         found = 0;
         if (g_Game.current->u.field.flags == 0) {
             g_Game.current->u.field.flags = 0x0A;
-            func_801C308C(1);
+            Party_FlashDamage(PARTY_DAMAGE_COLOR_PURPLE);
             if (g_GameRequestFlags & AREA_LOAD_FLAG_WORLD_MAP) {
                 index = 0;
                 if ((s16)total > 0) {

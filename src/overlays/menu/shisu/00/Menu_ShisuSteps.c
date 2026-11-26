@@ -703,7 +703,7 @@ NON_MATCHING void func_801D2308(void* record) {
             quad->ft4.tpage = tpage;
             quad->ft4.clut  = GetClut(piece->clut * 16, STAGE_PALETTE_Y + 3);
             SetSemiTrans(&quad->ft4, (abr >> 6) & 1);
-            if (((s32 (*)(Pos2*, Pos2*, Pos2*))func_801AFF90)((Pos2*)&quad->ft4.x0, (Pos2*)&quad->ft4.x1, (Pos2*)&quad->ft4.x2) > 0) {
+            if (((s32 (*)(Pos2*, Pos2*, Pos2*))GFX_TriangleWinding)((Pos2*)&quad->ft4.x0, (Pos2*)&quad->ft4.x1, (Pos2*)&quad->ft4.x2) > 0) {
                 GFX_AddPrim(GFX_LAYER_UI, sizeof(POLY_FT4));
             }
 

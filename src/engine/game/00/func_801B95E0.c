@@ -29,7 +29,7 @@ NON_MATCHING s32 func_801B95E0(void) {
     }
     x     = FIELD(u16, g_Task, 0x36u) + (s8)D_80181B00[WDIR * 2];
     y_arg = y = FIELD(u16, g_Task, 0x3Au) + (s8)D_80181B01[WDIR * 2];
-    func_801BBBC8(x, y_arg);
+    Area_WalkProbeCells(x, y_arg);
 
     if (!(WDIR & AREA_LOAD_FLAG_WORLD_MAP)) {
         if (COORD_FRAC(TASK(Actor)->pos.x) == 0) {

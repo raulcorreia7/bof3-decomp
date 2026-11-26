@@ -1,7 +1,8 @@
-#include "game_00.h"
+#include "engine/game/00/game_00.h"
 
 /* Gathers the party for a leader swap: each member takes its formation spot or the leader's, then the swap advances while one is moving. */
-MATCH void func_801B1E24(void) {
+/* func_801B1E24 */
+MATCH void Game_LeaderSwitchGather(void) {
     /* FAKE: retail frame reserves 8 bytes no statement uses. */
     FAKE_STACK_PADS(u8, 8);
     PartyMember* leader;

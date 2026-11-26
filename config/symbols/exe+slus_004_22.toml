@@ -51,11 +51,11 @@ g_SysDrawTime = { addr = 0x80143EFC, source = "The VSync(1) value SYS_CaptureDra
 g_GameAreaId = { addr = 0x80143F00, source = "The area to load." }
 g_GameArea = { addr = 0x80143F00, size = 0x20, alias = true, source = "The current area and the request to change it." }
 g_GameRequestFlags = { addr = 0x80143F02, source = "Flags of the game request." }
-g_GameCellType = { addr = 0x80143F03, source = "The cell type of the party's cell: func_8019FAA0 stores the type of the entry cell here; the previous type goes to last_cell_type." }
-g_GameLastAreaId = { addr = 0x80143F04, source = "The area the party came from: func_8019FAA0 stores the current area id here before it loads the next one." }
-g_GameLastCellType = { addr = 0x80143F06, source = "The cell type before the last area load: func_8019FAA0 copies it from the cell type." }
-g_GameLastX = { addr = 0x80143F08, source = "The scroll target x before the last area load: func_8019FAA0 stores it here." }
-g_GameLastY = { addr = 0x80143F0C, source = "The scroll target y before the last area load: func_8019FAA0 stores it here." }
+g_GameCellType = { addr = 0x80143F03, source = "The cell type of the party's cell: Game_EnterArea stores the type of the entry cell here; the previous type goes to last_cell_type." }
+g_GameLastAreaId = { addr = 0x80143F04, source = "The area the party came from: Game_EnterArea stores the current area id here before it loads the next one." }
+g_GameLastCellType = { addr = 0x80143F06, source = "The cell type before the last area load: Game_EnterArea copies it from the cell type." }
+g_GameLastX = { addr = 0x80143F08, source = "The scroll target x before the last area load: Game_EnterArea stores it here." }
+g_GameLastY = { addr = 0x80143F0C, source = "The scroll target y before the last area load: Game_EnterArea stores it here." }
 g_GameEntryAreaId = { addr = 0x80143F10, source = "The area id Game_RequestAreaChange enters." }
 g_GameEntryPosX = { addr = 0x80143F14, source = "Entry x position of the game." }
 g_GameEntryPosY = { addr = 0x80143F18, source = "Entry y position of the game." }
@@ -1560,3 +1560,4 @@ _svm_vab_start = { addr = 0x80190BD8, alias = true, source = "PsyQ 3.7 LIBSND da
 _svm_envx_hist = { addr = 0x80190C18, alias = true, source = "PsyQ 3.7 LIBSND data symbol kept so the split accounts for the library data the game never names." }
 _svm_okof1 = { addr = 0x80190C58, alias = true, source = "PsyQ 3.7 LIBSND data symbol kept so the split accounts for the library data the game never names." }
 _svm_okof2 = { addr = 0x80190C5A, alias = true, source = "PsyQ 3.7 LIBSND data symbol kept so the split accounts for the library data the game never names." }
+GFX_TriangleWinding = { addr = 0x801AFF90, type = "func", source = "Cross product of (first - origin) and (second - first) in screen space: its sign says which side of the line origin-first the point second is on; callers use it to cull polygons by winding." }

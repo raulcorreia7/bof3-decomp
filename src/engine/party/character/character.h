@@ -55,5 +55,7 @@ void Char_ApplyWeapon(Character* character);
 void Char_ApplyArmor(Character* character);
 void Char_ApplyAccessories(Character* character);
 s32  Char_AddResistance(u8* counter, s32 delta);
+/* func_801C38F4 */
+s32  Char_CountEquipped(s32 character_index, s32 equip_group, s32 item_id);
 
 #endif

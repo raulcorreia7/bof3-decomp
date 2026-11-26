@@ -1,7 +1,8 @@
-#include "game_00.h"
+#include "engine/game/00/game_00.h"
 
 /* Draws the formatted work-record byte as 8x8 digit sprites starting at (x, y). */
-MATCH void func_8019F5B8(s16 x, s16 y, u8 unused, u8 palette) {
+/* func_8019F5B8 */
+MATCH void Actor_DrawValueDigits(s16 x, s16 y, u8 unused, u8 palette) {
     SPRT* sprt;
     s32   index;
     s32   next;

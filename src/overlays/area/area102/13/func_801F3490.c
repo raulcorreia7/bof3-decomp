@@ -24,10 +24,10 @@ MATCH void func_801F3490(void) {
         saved       = TASK(Actor);
         g_GameState = member;
         TASK_SET(member);
-        result = func_801C38F4(g_GameState->character_index, 3, 8);
+        result = Char_CountEquipped(g_GameState->character_index, EQUIP_GROUP_ACCESSORY, 8);
         if (result == 0) {
             if ((g_Characters[g_GameState->character_index].status & 0x20) == 0) {
-                func_801C308C(2);
+                Party_FlashDamage(PARTY_DAMAGE_COLOR_YELLOW);
             }
             Char_SetCharacterId(5);
         }

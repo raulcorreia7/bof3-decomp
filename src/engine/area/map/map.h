@@ -202,5 +202,9 @@ void        Area_DrawPartAnimation(ScenePart* parts, s32 origin_x, s32 origin_y)
 void        Area_CellDrawAtPoint(u8* unit, s32 x, s32 y);
 void        Area_DrawGouraudQuads(ScenePart* parts, s32 shift_x, s32 shift_y);
 void        Area_CellDrawSides(u8* record, s32 cell_x, s32 cell_y);
+/* func_801BB9B4 */
+void        Area_WalkTurnFromHighStep(s16 probe_x, s16 probe_y);
+/* func_801BBBC8 */
+void        Area_WalkProbeCells(s16 from_x, s16 from_y);
 
 #endif

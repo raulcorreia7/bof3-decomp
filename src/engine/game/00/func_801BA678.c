@@ -114,7 +114,7 @@ NON_MATCHING s32 func_801BA678(void) {
                                 val9 = 0xA;
                                 goto block_109; /* retail branch */
                             }
-                            func_801BB9B4(val7, val8);
+                            Area_WalkTurnFromHighStep(val7, val8);
                             return 3;
                         }
                         goto block_109; /* retail branch */

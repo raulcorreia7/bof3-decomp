@@ -1,8 +1,9 @@
-#include "game_00.h"
+#include "engine/game/00/game_00.h"
 #include "common/copy.h"
 
 /* Enters an area: keeps the last position, starts its music, loads it when it changed, then sets up the view, party and entry walk. */
-MATCH void func_8019FAA0(u16 area_id, u32 entry_x, u32 entry_y, u8 entry_facing) {
+/* func_8019FAA0 */
+MATCH void Game_EnterArea(u16 area_id, u32 entry_x, u32 entry_y, u8 entry_facing) {
     AreaLoad* entry;
     u16       world_flags;
     u8        seed;
