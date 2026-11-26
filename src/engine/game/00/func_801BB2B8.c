@@ -26,17 +26,11 @@ NON_MATCHING s32 func_801BB2B8(s32 x0, s32 y0, s32 x1, s32 y1) {
     to_x.h.hi = x1;
     to_y.h.hi = y1;
 
-    if (COORD_FRAC(TASK(Actor)->pos.x) == 0) {
-        if (TASK(Actor)->voice_flags.scene_flag == 0)
-            hx0 = (hx0 + (to_x.w & ~0xFFFFU)) / 2;
-    } else if (TASK(Actor)->voice_flags.scene_flag != 0) {
-        hx0 = (hx0 + (to_x.w & ~0xFFFFU)) / 2;
+    if ((COORD_FRAC(TASK(Actor)->pos.x) == 0 && TASK(Actor)->voice_flags.scene_flag == 0) || (COORD_FRAC(TASK(Actor)->pos.x) != 0 && TASK(Actor)->voice_flags.scene_flag != 0)) {
+        hx0 = (hx0 + (to_x.w & ~0xFFFF)) / 2;
     }
-    if (COORD_FRAC(TASK(Actor)->pos.y) == 0) {
-        if (TASK(Actor)->voice_flags.scene_flag == 0)
-            hy0 = (hy0 + (to_y.w & ~0xFFFFU)) / 2;
-    } else if (TASK(Actor)->voice_flags.scene_flag != 0) {
-        hy0 = (hy0 + (to_y.w & ~0xFFFFU)) / 2;
+    if ((COORD_FRAC(TASK(Actor)->pos.y) == 0 && TASK(Actor)->voice_flags.scene_flag == 0) || (COORD_FRAC(TASK(Actor)->pos.y) != 0 && TASK(Actor)->voice_flags.scene_flag != 0)) {
+        hy0 = (hy0 + (to_y.w & ~0xFFFF)) / 2;
     }
 
     code1 = AREA_CELL_CODE_S16(x0, y0);

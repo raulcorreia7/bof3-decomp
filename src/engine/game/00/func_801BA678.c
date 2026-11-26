@@ -2,9 +2,8 @@
 
 #ifdef NON_MATCHING
 NON_MATCHING s32 func_801BA678(void) {
-    s8  delta;
-    s16 near_x;
-    s16 near_y;
+    s32 near_x;
+    s32 near_y;
     s32 ahead_x;
     s32 ahead_y;
     s32 dx;
@@ -21,10 +20,14 @@ NON_MATCHING s32 func_801BA678(void) {
     if (COORD_FRAC(TASK(Actor)->pos.x) == 0 && COORD_FRAC(TASK(Actor)->pos.y) == 0) {
         return 1;
     }
-    delta   = D_80181B00[TASK(Actor)->direction * 2];
-    dx      = (delta == 1) ? 2 : delta;
-    delta   = D_80181B01[TASK(Actor)->direction * 2];
-    dy      = (delta == 1) ? 2 : delta;
+    dx = D_80181B00[TASK(Actor)->direction * 2];
+    if (dx == 1) {
+        dx = 2;
+    }
+    dy = D_80181B01[TASK(Actor)->direction * 2];
+    if (dy == 1) {
+        dy = 2;
+    }
     near_x  = COORD_INT(TASK(Actor)->pos.x);
     ahead_x = COORD_INT(TASK(Actor)->pos.x) + dx;
     ahead_y = COORD_INT(TASK(Actor)->pos.y) + dy;

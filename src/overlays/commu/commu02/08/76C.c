@@ -2267,14 +2267,12 @@ MATCH void func_801D81A4(s16 x, s16 y) {
 #ifdef NON_MATCHING
 void func_801D851C(s16 x, s16 y, s32 width, u8 index);
 
-NON_MATCHING void func_801D830C(s32 arg_x, s32 arg_y, s32 kind, s32 mode) {
+NON_MATCHING void func_801D830C(s32 x, s32 y, s32 kind, s32 mode) {
     TILE* tile;
     s32   tile_x;
     s32   tile_y;
     s32   row;
     u8*   style;
-    s16   x = arg_x;
-    s16   y = arg_y;
 
     UI_WindowDraw(x, y, 0x48, 0x26, 0x80, *(style = &g_WindowStyle));
     func_801D81A4(x, y);
@@ -2308,8 +2306,15 @@ NON_MATCHING void func_801D851C(s16 x, s16 y, s32 width, u8 index) {
     memcpy(colors, D_801D0C30, sizeof(colors));
     prim = (POLY_G4*)g_GfxPrimCursor;
     SetPolyG4(prim);
-    setXYWH(prim, x, y, width, 2);
-    color = colors[index];
+    prim->x0 = x;
+    prim->x1 = x + width;
+    prim->y0 = y;
+    prim->y1 = y;
+    prim->y2 = y + 2;
+    prim->y3 = y + 2;
+    prim->x2 = prim->x0;
+    prim->x3 = prim->x1;
+    color    = colors[index];
     setRGB2(prim, color[0] << 7, color[1] << 7, color[2] << 7);
     setRGB0(prim, prim->r2 >> 2, prim->g2 >> 2, prim->b2 >> 2);
     setRGB3(prim, prim->r2, prim->g2, prim->b2);
@@ -2317,7 +2322,14 @@ NON_MATCHING void func_801D851C(s16 x, s16 y, s32 width, u8 index) {
     GFX_AddPrim(GFX_LAYER_UI, sizeof(POLY_G4));
     prim = (POLY_G4*)g_GfxPrimCursor;
     SetPolyG4(prim);
-    setXYWH(prim, x, y + 2, width, 2);
+    prim->x0 = x;
+    prim->x1 = x + width;
+    prim->y0 = y + 2;
+    prim->y1 = y + 2;
+    prim->y2 = y + 4;
+    prim->y3 = y + 4;
+    prim->x2 = prim->x0;
+    prim->x3 = prim->x1;
     setRGB0(prim, color[0] << 7, color[1] << 7, color[2] << 7);
     setRGB2(prim, prim->r0 >> 2, prim->g0 >> 2, prim->b0 >> 2);
     setRGB1(prim, prim->r0, prim->g0, prim->b0);
