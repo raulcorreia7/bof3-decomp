@@ -1,6 +1,6 @@
 /* Draws the four wedges of a sparkle from its point through the half radius to the radius, white at the centre and far points and tinted at the half radius. Every change must verify all member images. */
 /* func_801EFA44 (magic070), func_801EFA44 (magic071), func_801EFA44 (magic072), func_801EFE2C (magic073), func_801EFE18 (magic074), func_801EFA40 (magic162), func_801EFA40 (magic168) */
-MATCH void Effect_DrawSparkleWedges(u16 angle, u16 radius) {
+MATCH void Effect_SparkleDrawWedges(u16 angle, u16 radius) {
     LINE_G3* prim;
     s32      tpage;
     s32      i;

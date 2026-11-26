@@ -1,6 +1,8 @@
-#include "game_00.h"
+#include "engine/game/00/game_00.h"
 
-MATCH void func_8019BEFC(void) {
+/* func_8019BEFC */
+/* Counts the rest timer down and returns the camera and the rock to waiting. */
+MATCH void Actor_RockRest(void) {
     Actor* work;
     u8     count;
     work  = TASK(Actor);
@@ -11,8 +13,8 @@ MATCH void func_8019BEFC(void) {
     if (g_AreaCameraMoving == 0) {
         work = TASK(Actor);
         if (work->timer == 0) {
-            work->header.mode = 1;
-            func_8019BFD4();
+            work->header.mode = ACTOR_ROCK_MODE_WAIT;
+            Actor_RockReleaseCamera();
         }
     }
     Script_AnimStepLoop();

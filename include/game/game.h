@@ -219,9 +219,23 @@ typedef struct ActorToss {
 
 extern ActorToss s_ActorTossArcs[3];
 extern Callback  D_801C8120[3];
-extern Callback  D_801C812C[6];
-extern Callback  D_801C8144[4];
 
+/* D_801C812C */
+/* The modes of a rock actor (ACTOR_TYPE_ROCK), selected by header.mode. */
+typedef enum ActorRockMode {
+    ACTOR_ROCK_MODE_START,  /* blocks its cell and selects its sprite */
+    ACTOR_ROCK_MODE_WAIT,   /* waits for a kick */
+    ACTOR_ROCK_MODE_ROLL,   /* rolls on with the kick's velocity, slowed by friction */
+    ACTOR_ROCK_MODE_SETTLE, /* moves on to the target cell edge and lands */
+    ACTOR_ROCK_MODE_END,    /* grows and disappears */
+    ACTOR_ROCK_MODE_REST,   /* rests, then waits again */
+    ACTOR_ROCK_MODE_COUNT
+} ActorRockMode;
+
+extern Callback           g_ActorRockModes[ACTOR_ROCK_MODE_COUNT];
+extern Callback           D_801C8144[4];
+
+/* D_801C8154 */
 /* The modes of a block actor (ACTOR_TYPE_BLOCK), selected by header.mode. */
 typedef enum ActorBlockMode {
     ACTOR_BLOCK_MODE_START,   /* claims its cells */
@@ -232,7 +246,6 @@ typedef enum ActorBlockMode {
 } ActorBlockMode;
 
 extern Callback           g_ActorBlockModes[ACTOR_BLOCK_MODE_COUNT];
-/* D_801C8154 */
 extern Callback           D_801C8164[6];
 extern Callback           D_801C817C[4];
 /* D_801C818C */

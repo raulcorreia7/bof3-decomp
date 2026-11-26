@@ -98,6 +98,34 @@ void Actor_SpawnAttachedFixedFlags(u8* script);
 /* func_801ADCF4 */
 void Actor_SpawnToss(u8 source_slot);
 
+/* func_8019B364 */
+void Actor_RockRun(void);
+/* func_8019B3A8 */
+void Actor_RockStart(void);
+/* func_8019B4A0 */
+void Actor_RockWait(void);
+/* func_8019BBA4 */
+void Actor_RockSettle(void);
+/* func_8019BE28 */
+void Actor_RockEnd(void);
+/* func_8019BEFC */
+void Actor_RockRest(void);
+/* func_8019BF78 */
+void Actor_RockClaimCell(void);
+/* func_8019BFD4 */
+void Actor_RockReleaseCamera(void);
+/* func_8019C028 */
+bool Actor_RockHit(void);
+/* func_8019C124 */
+void Actor_RockSetTarget(s32 step_byte);
+/* func_8019C1E4 */
+s32  Actor_RockIsBlockedAhead(void);
+/* func_8019C244 */
+s32  Actor_RockIsBlockedAtEdge(void);
+/* func_8019C344 */
+s32  Actor_RockIsPointBlocked(s32 x, s32 y);
+/* func_8019C4F0 */
+s32  Actor_RockIsCellBlocked();
 /* One of the 24 shards of a broken model, at 0x800E4800 + n * 0x38: a centre, a random rotation and four corner offsets that
  * Actor_ShatterWriteShard rotates and writes out as vertices. */
 typedef struct ShatterShard {

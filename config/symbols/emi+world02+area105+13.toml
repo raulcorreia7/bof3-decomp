@@ -1,2 +1,3 @@
 ["emi/world02/area105/13"]
 g_AreaModuleId = { addr = 0x801F2C00, source = "Module id of the area: the first payload word of its overlay, 52 + the area number." }
+g_Area105CellRows = { addr = 0x801F3330, type = "Area105CellRow", size = 0xC, alias = true, source = "D_801F3320 + 0x10: the three cell rows func_801F2D9C draws, x, y, width and height in cells." }

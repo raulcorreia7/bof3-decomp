@@ -1,6 +1,6 @@
 /* Draws the disc of the current sparkle as eight POLY_G3 wedges around its screen point. */
-/* Effect_DrawSparkleDisc (magic070, magic071, magic072, magic073, magic074, magic162, magic168) */
-MATCH void Effect_DrawSparkleDisc(void) {
+/* Effect_SparkleDrawDisc (magic070, magic071, magic072, magic073, magic074, magic162, magic168) */
+MATCH void Effect_SparkleDrawDisc(void) {
     POLY_G3* prim;
     s32      i;
 

@@ -1,6 +1,6 @@
 /* Draws the four rays of a sparkle from its point out to the radius, tinted at the centre and white at the far end. Every change must verify all member images. */
 /* func_801EF810 (magic070), func_801EF810 (magic071), func_801EF810 (magic072), func_801EFBF8 (magic073), func_801EFBE4 (magic074), func_801EF80C (magic162), func_801EF80C (magic168) */
-MATCH void Effect_DrawSparkleRays(u16 angle, u16 radius) {
+MATCH void Effect_SparkleDrawRays(u16 angle, u16 radius) {
     LINE_G2* prim;
     s32      tpage;
     s32      i;

@@ -25,17 +25,17 @@ MATCH void Effect_NextStep(void) {
 
 #include "overlays/bmagic/shared/func_801EF37C.h"
 
-#include "overlays/bmagic/shared/Effect_LaunchSparkle.h"
+#include "overlays/bmagic/shared/Effect_SparkleLaunch.h"
 
 #include "overlays/bmagic/shared/func_801EF678.h"
 
 #include "overlays/bmagic/shared/func_801EF728.h"
 
-#include "overlays/bmagic/shared/Effect_DrawSparkleRays.h"
+#include "overlays/bmagic/shared/Effect_SparkleDrawRays.h"
 
-#include "overlays/bmagic/shared/Effect_DrawSparkleWedges.h"
+#include "overlays/bmagic/shared/Effect_SparkleDrawWedges.h"
 
-#include "overlays/bmagic/shared/Effect_DrawSparkleDisc.h"
+#include "overlays/bmagic/shared/Effect_SparkleDrawDisc.h"
 
 /* func_801EFFFC */
 #include "overlays/bmagic/shared/BMagic_AllocEffect.h"

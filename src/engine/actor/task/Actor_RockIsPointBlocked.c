@@ -1,7 +1,8 @@
 #include "engine/game/00/game_00.h"
 
 /* func_8019C344 */
-MATCH s32 Area_GetVx(s32 x, s32 y) {
+/* Returns whether the point blocks the rock: its own cell, the half cell it enters and any ground above the rock. */
+MATCH s32 Actor_RockIsPointBlocked(s32 x, s32 y) {
     /* FAKE: retail homes the x high half in $s4. */
     FAKE_REG(s32, xh, "s4");
     /* FAKE: retail homes the y high half in $s1. */
@@ -15,7 +16,7 @@ MATCH s32 Area_GetVx(s32 x, s32 y) {
 
     xh = x >> 16;
     yh = y >> 16;
-    if (func_8019C4F0(xh, yh) & BYTE_MASK) {
+    if (Actor_RockIsCellBlocked(xh, yh) & BYTE_MASK) {
         return 1;
     }
     if (TASK(Actor)->vx != 0) {
@@ -51,7 +52,7 @@ MATCH s32 Area_GetVx(s32 x, s32 y) {
         next_x = x >> 16;
         next_y = (s16)((y >> 16) + 1);
     }
-    if (func_8019C4F0(next_x, next_y) & BYTE_MASK) {
+    if (Actor_RockIsCellBlocked(next_x, next_y) & BYTE_MASK) {
         return 1;
     }
 fail:

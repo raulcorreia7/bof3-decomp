@@ -92,7 +92,7 @@ Callback g_ActorTypes[187] = {WorldMap_StepWalk,
                               func_801F6E70,
                               func_801F2C18,
                               WorldMap_StepFlock,
-                              func_8019B364,
+                              Actor_RockRun,
                               func_8019F98C,
                               func_8019A804,
                               func_801D42A0,
@@ -295,7 +295,15 @@ ActorToss s_ActorTossArcs[3] = {
 
 Callback D_801C8120[3] = {func_8019B150, func_8019B1E8, Actor_ClearSelf};
 
-Callback D_801C812C[6] = {func_8019B3A8, func_8019B4A0, func_8019B704, func_8019BBA4, func_8019BE28, func_8019BEFC};
+/* Rock mode handlers by ActorRockMode, run by Actor_RockRun with header.mode; 6 rows. */
+Callback g_ActorRockModes[ACTOR_ROCK_MODE_COUNT] = {
+    [ACTOR_ROCK_MODE_START]  = Actor_RockStart,
+    [ACTOR_ROCK_MODE_WAIT]   = Actor_RockWait,
+    [ACTOR_ROCK_MODE_ROLL]   = func_8019B704,
+    [ACTOR_ROCK_MODE_SETTLE] = Actor_RockSettle,
+    [ACTOR_ROCK_MODE_END]    = Actor_RockEnd,
+    [ACTOR_ROCK_MODE_REST]   = Actor_RockRest,
+};
 
 Callback D_801C8144[4] = {func_8019C664, func_8019C794, func_8019C910, func_8019C954};
 

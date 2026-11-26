@@ -5,6 +5,7 @@ __asm__(".include \"include/match/macro.inc\"\n");
 #endif
 
 MATCH void func_801F7300(void) {
+    /* FAKE: retail materializes the argument as li a0,2 in the dispatch delay slot; the a0 pin keeps a fresh constant instead of a copy of the switch value. */
     FAKE_REG(s32, arg, "a0");
     if (g_GameAreaId == AREA_ID_WYNDIA_CASTLE) {
         if (!SYS_TestFlag(g_SceneFlags, 3)) {
@@ -27,8 +28,6 @@ MATCH void func_801F7300(void) {
                     break;
                 case 2:
                     arg = 2;
-                    /* FAKE: retail materializes the argument as li a0,2 in the dispatch delay slot; the a0 pin and the opaque keep a fresh constant instead of a copy of the switch value. */
-                    FAKE_OPAQUE(arg);
                     g_Characters[g_CharSlot[2]].party_flags &= 0xFE;
                     /* FAKE: same pin as case 0. */
                     FAKE_BARRIER();
