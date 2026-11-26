@@ -362,7 +362,7 @@ extern volatile u8              D_801EAF2C[];
 extern volatile u8              D_801EAF2D[];
 extern volatile u8              D_801EAF2E[];
 extern volatile u8              D_801EAF2F[];
-extern volatile s8              D_801EAF48[64];
+extern volatile s8              D_801EAF48[4][16]; /* the enemy turn-order agility roll per level rank */
 /* D_801EAF94 */
 extern u8                       s_BattleDamageBandDivisors[12]; /* nine damage divisor bytes, then three pad bytes */
 extern s32                      D_801EAFA0[8];                  /* melee damage multipliers */
