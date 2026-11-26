@@ -1,8 +1,7 @@
 #include "area047_13.h"
 
-#ifdef NON_MATCHING
 /* Draws the animated ribbon around the actor. */
-NON_MATCHING void func_801F34A0(void) {
+MATCH void func_801F34A0(void) {
     SVECTOR   position;
     SVECTOR   rotation;
     MATRIX    matrix;
@@ -11,7 +10,6 @@ NON_MATCHING void func_801F34A0(void) {
     long      flag;
     s32       i;
     s32       angle;
-    s32       phase;
     s32       shade;
     s32       u;
     s32       next;
@@ -38,11 +36,11 @@ NON_MATCHING void func_801F34A0(void) {
         quad->tpage = getTPage(TPAGE_DEPTH_4BIT, TPAGE_ABR_HALF, 704, 256);
         setUV4(quad, u - i * 2 - i / 2, 112, u - i / 2 - i * 2 - ((i & 1) + 2), 112, u - i * 2 - i / 2, 144, u - i / 2 - i * 2 - ((i & 1) + 2), 144);
         quad->clut = getClut(240, 483);
-        phase      = g_FrameCount * 512;
+        shade      = g_FrameCount * 512;
         if (i == 0) {
-            angle = phase & 0xFFF;
+            angle = shade & 0xFFF;
         } else {
-            angle = (phase + (i - 1) * 512) & 0xFFF;
+            angle = (shade + (i - 1) * 512) & 0xFFF;
         }
         shade    = rcos(angle);
         quad->b0 = i == 0 ? (u32)i + 128 : (u32)(shade * (i - 1) >> 11) + 128;
@@ -53,11 +51,11 @@ NON_MATCHING void func_801F34A0(void) {
 
         g_ScratchPadVectors[0].vx = g_ScratchPadVectors[2].vx = i * 16;
         g_ScratchPadVectors[1].vx = g_ScratchPadVectors[3].vx = next * 16;
-        phase                                                 = g_FrameCount * 512;
+        angle                                                 = g_FrameCount * 512;
         if (i == 0) {
-            angle = phase & 0xFFF;
+            angle &= 0xFFF;
         } else {
-            angle = (phase - (i - 1) * 512) & 0xFFF;
+            angle = (angle - (i - 1) * 512) & 0xFFF;
         }
         shade                     = rsin(angle);
         g_ScratchPadVectors[0].vy = i == 0 ? (s16)i : shade * (i - 1) >> 12;
@@ -74,6 +72,3 @@ NON_MATCHING void func_801F34A0(void) {
     GFX_ADD_LAYER_DRAW_MODE(4, getTPage(TPAGE_DEPTH_8BIT, TPAGE_ABR_HALF, 320, 256));
     PopMatrix();
 }
-#else
-INCLUDE_ASM(func_801F34A0);
-#endif
