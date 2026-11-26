@@ -222,7 +222,7 @@ MATCH void func_801D32A0(void) {
 }
 
 /* func_801D32E0 */
-MATCH void UI_PanelSetPosX(void) {
+MATCH void UI_PanelSetPosX_801D32E0(void) {
     u16 next_pos;
 
     next_pos                = g_UiPanelCurrent->pos.x + 0x20;
