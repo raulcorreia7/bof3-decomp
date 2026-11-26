@@ -8,14 +8,14 @@ MATCH void func_801A27C4(Actor* entity) {
     mode            = entity->unk_78;
     entity->roll_90 = 0;
     if (mode != 0 && TASK(Actor)->header.mode != 6 && TASK(Actor)->header.mode != 4 && TASK(Actor)->unk_03 != 4) {
-        func_801A225C(entity, g_RouteSpeedScale[mode], 2);
+        Actor_PaceFree(entity, g_RouteSpeedScale[mode], 2);
         saved = TASK(Actor)->direction;
         for (i = 0; i < 4; i++) {
             TASK(Actor)->direction = s_EntityRouteIndices[g_Game.members[0].facing & 0x7][i];
-            if ((func_801A1AE4(entity) & BYTE_MASK) != 0) {
+            if ((Actor_IsAheadBlocked(entity) & BYTE_MASK) != 0) {
                 continue;
             }
-            if ((TASK(Actor)->header.mode == 3 || TASK(Actor)->unk_03 == 3) && (func_801A1A58(entity) & BYTE_MASK) == 0) {
+            if ((TASK(Actor)->header.mode == 3 || TASK(Actor)->unk_03 == 3) && (Actor_IsAheadInHomeBox(entity) & BYTE_MASK) == 0) {
                 continue;
             }
             break;

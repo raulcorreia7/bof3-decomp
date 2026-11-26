@@ -24,7 +24,7 @@ MATCH void Area_SetXFixed(Actor* entity) {
             if (mode - 1 < 3) {
                 entity->timer_75 = (mode & 0x3) * 30;
                 if ((entity->timer_75 & 0xFE) != 0) {
-                    func_801A275C(&entity->interaction_flags);
+                    Actor_StartRouteWait(&entity->interaction_flags);
                     if (!(TASK(Actor)->option_flags & ACTOR_OPT_ROUTE_LOCKED)) {
                         TASK(Actor)->direction &= 7;
                         entity->interaction_flags |= ACTOR_INTERACTION_MOVING;

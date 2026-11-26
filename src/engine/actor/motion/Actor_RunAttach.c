@@ -1,6 +1,8 @@
-#include "game_00.h"
+#include "engine/game/00/game_00.h"
 
-MATCH void func_801A3410(void* work_index) {
+/* func_801A3410 */
+/* Mode 7: copies the position of another actor plus an offset row, then runs the route. */
+MATCH void Actor_RunAttach(void* work_index) {
     Actor* work;
     Actor* tail;
     s32    delta[3];
@@ -25,7 +27,7 @@ MATCH void func_801A3410(void* work_index) {
         work->pos.y.fixed += delta[1];
         COORD_INT(work->pos.z) += delta[2];
     }
-    func_801A1384(work_index);
+    Actor_RunRoute(work_index);
     tail = TASK(Actor);
     tail->direction &= 7;
 }

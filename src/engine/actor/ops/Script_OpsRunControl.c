@@ -105,7 +105,7 @@ MATCH u8 Script_OpsRunControl(void* sub, s32 target, u8 value) {
         case ACTOR_SCRIPT_CONTROL_SELECT_ROUTE:
             next_cursor_e7 = state->cursor + 1;
             state->cursor  = next_cursor_e7;
-            func_801A2788(*(target_bytes + (next_cursor_e7 & HALF_MASK)));
+            Actor_RunMode(*(target_bytes + (next_cursor_e7 & HALF_MASK)));
             state->steps = 0;
             return 0xFFU;
         case ACTOR_SCRIPT_CONTROL_RUN_ACTOR:

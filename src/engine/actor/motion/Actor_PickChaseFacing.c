@@ -1,27 +1,27 @@
-#include "game_00.h"
+#include "engine/game/00/game_00.h"
 
-MATCH u8 func_801A2C94(Actor* actor) {
+/* func_801A2DB4 */
+/* Picks the free facing nearest to the leader while the leader is inside the actor's box, else a random one. */
+MATCH u8 Actor_PickChaseFacing(Actor* entity) {
     s32    dx;
     s32    dy;
-    Actor* entity;
     u8     status;
     s32    delta;
     u8     route;
     Actor* work;
 
-    entity = actor;
-    work   = TASK(Actor);
-    route  = work->direction;
-    delta  = work->pos.x.fixed;
-    dx     = g_Game.members[0].pos.x.fixed - delta;
-    dx     = ABS(dx);
+    work  = TASK(Actor);
+    route = work->direction;
+    delta = g_Game.members[0].pos.x.fixed;
+    dx    = work->pos.x.fixed - delta;
+    dx    = ABS(dx);
     if ((dx >> 0x10) < entity->ext.bounds.half_width) {
-        dy    = g_Game.members[0].pos.y.fixed;
-        delta = work->pos.y.fixed;
+        dy    = work->pos.y.fixed;
+        delta = g_Game.members[0].pos.y.fixed;
         dy -= delta;
         dy = ABS(dy);
         if ((dy >> 0x10) < entity->ext.bounds.half_height) {
-            status = func_801A2ED4(entity, 1U);
+            status = Actor_PickFacingByLeaderDistance(entity, 0U);
             if ((status & BYTE_MASK) == GAME_NONE) {
                 TASK(Actor)->timer = 0;
                 return 0xFFU;
@@ -38,5 +38,5 @@ MATCH u8 func_801A2C94(Actor* actor) {
     }
 block_11:
     Actor_TurnRandom(entity);
-    return func_801A2A04(entity) & BYTE_MASK;
+    return Actor_FindFreeFacing(entity) & BYTE_MASK;
 }
