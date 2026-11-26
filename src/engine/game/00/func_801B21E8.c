@@ -2,7 +2,6 @@
 
 #ifdef NON_MATCHING
 NON_MATCHING void func_801B21E8(void) {
-    PartyMember* leader;
     PartyMember* member;
     s32          i;
     s32          ok;
@@ -25,7 +24,6 @@ NON_MATCHING void func_801B21E8(void) {
     } else if (g_PartySize == 3 && g_Game.members[2].header.mode == 3) {
         Party_BattlersSwapRows(0, 2, 1);
     }
-    leader = g_Game.members;
     for (i = 0; i < g_PartySize; i++) {
         if (g_Game.members[i].header.mode == 3) {
             member = &g_Game.members[i];
@@ -45,9 +43,9 @@ NON_MATCHING void func_801B21E8(void) {
                 TASK(PartyMember)->unk_5C = 1;
                 TASK(PartyMember)->facing = g_Game.members[0].facing ^ 4;
             }
-            if (!(leader->status.field.flags.unsigned_value & 1) && i != 0) {
+            if (!(g_Game.members[0].status.field.flags.unsigned_value & 1) && i != 0) {
                 index  = (i - 1) * 2 + TASK(PartyMember)->facing * 4;
-                ok     = func_801B1B2C(leader->pos.x.fixed + (s_EntityPlacementOffsets[index] << 15), leader->pos.y.fixed + (s_EntityPlacementOffsets[index + 1] << 15), TASK(PartyMember)->facing,
+                ok     = func_801B1B2C(g_Game.members[0].pos.x.fixed + (s_EntityPlacementOffsets[index] << 15), g_Game.members[0].pos.y.fixed + (s_EntityPlacementOffsets[index + 1] << 15), TASK(PartyMember)->facing,
                                        TASK(PartyMember)->speed);
                 placed = (ok & BYTE_MASK) ? func_801B1C18(((s32*)&D_1F800008)[0], ((s32*)&D_1F800008)[1], TASK(PartyMember)->speed) : 0;
                 if ((ok & BYTE_MASK) && (placed & BYTE_MASK)) {
@@ -55,12 +53,12 @@ NON_MATCHING void func_801B21E8(void) {
                 }
                 func_801B1B2C(D_80145EC4, D_80145EC8, TASK(PartyMember)->facing, TASK(PartyMember)->speed);
             } else {
-                func_801B1B2C(leader->pos.x.fixed, leader->pos.y.fixed, TASK(PartyMember)->facing, TASK(PartyMember)->speed);
+                func_801B1B2C(g_Game.members[0].pos.x.fixed, g_Game.members[0].pos.y.fixed, TASK(PartyMember)->facing, TASK(PartyMember)->speed);
             }
         found:
             TASK(PartyMember)->pos.x.fixed        = ((s32*)&D_1F800008)[0];
             TASK(PartyMember)->pos.y.fixed        = ((s32*)&D_1F800008)[1];
-            TASK(PartyMember)->pos.z.part.integer = Area_HeightRead(TASK(PartyMember)->pos.x.fixed, ((s32*)&D_1F800008)[1]);
+            TASK(PartyMember)->pos.z.part.integer = Area_HeightRead(TASK(PartyMember)->pos.x.fixed, TASK(PartyMember)->pos.y.fixed);
             Script_Select(TASK(PartyMember)->facing);
         }
     }

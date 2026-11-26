@@ -4,10 +4,6 @@
  * the scene around the actor - script-active and fade flags, actor placement,
  * the area camera scroll, palette tints, the XA music stream, and spawning a
  * helper record. Named from the case bodies. */
-/* Opcodes 0x80 to 0x8C of the actor script table: the record group that drives
- * the scene around the actor - script-active and fade flags, actor placement,
- * the area camera scroll, palette tints, the XA music stream, and spawning a
- * helper record. Named from the case bodies. */
 typedef enum ActorScriptStage {
     ACTOR_SCRIPT_STAGE_SET_SCRIPT_ACTIVE   = 0x80, /* set GAME_FLAG_SCRIPT_ACTIVE */
     ACTOR_SCRIPT_STAGE_CLEAR_SCRIPT_ACTIVE = 0x81, /* clear GAME_FLAG_SCRIPT_ACTIVE */
@@ -58,13 +54,10 @@ NON_MATCHING u8 Script_OpsRunStage(ScriptState* state, const u8* table, u8 value
             state->flags |= ACTOR_INTERACTION_FADE_BLACK;
             break;
         case ACTOR_SCRIPT_STAGE_SET_TARGET_POS: {
-            volatile Actor* work;
-
             func_801ABF30(buf, table[state->cursor + 1], table[state->cursor + 2]);
-            work              = SCRATCH_WORK;
-            work->pos.x.fixed = buf[0];
-            work->pos.y.fixed = buf[1];
-            work->pos.z       = buf[2];
+            TASK(Actor)->pos.x.fixed = buf[0];
+            TASK(Actor)->pos.y.fixed = buf[1];
+            TASK(Actor)->pos.z       = buf[2];
             state->cursor += 2;
             break;
         }
@@ -136,12 +129,9 @@ NON_MATCHING u8 Script_OpsRunStage(ScriptState* state, const u8* table, u8 value
             state->cursor--;
             break;
         case ACTOR_SCRIPT_STAGE_SPAWN_HELPER: {
-            volatile Actor* work;
-
-            flag               = table[state->cursor + 1];
-            slot               = g_GameState->chr.character_id;
-            work               = SCRATCH_WORK;
-            work->param.unk_0B = Actor_SpawnHelper(flag - 0x90, -((flag ^ 0x94) == 0) & 0xA, D_80181B28[g_CharSlot[slot]], work->pos.x.fixed, work->pos.y.fixed, work->pos.z.fixed);
+            flag                      = table[state->cursor + 1];
+            slot                      = g_GameState->chr.character_id;
+            TASK(Actor)->param.unk_0B = Actor_SpawnHelper(flag - 0x90, -((flag ^ 0x94) == 0) & 0xA, D_80181B28[g_CharSlot[slot]], TASK(Actor)->pos.x.fixed, TASK(Actor)->pos.y.fixed, TASK(Actor)->pos.z.fixed);
             state->cursor += 1;
             break;
         }
