@@ -48,7 +48,7 @@ MATCH void BMagic_RingStart(void) {
 
 #include "overlays/bmagic/shared/BMagic_RingExpand.h"
 
-#include "overlays/bmagic/shared/BMagic_RingFinish.h"
+#include "overlays/bmagic/shared/BMagic_RingEnd.h"
 
 #include "overlays/bmagic/shared/BMagic_RingBandUpdate.h"
 
