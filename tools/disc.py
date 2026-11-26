@@ -186,7 +186,11 @@ def rebuild(args: argparse.Namespace) -> int:
         check=True,
     )  # fmt: skip
     cue = data["disc"]["cue"]
-    problems = disc.verify_tracks(data, sorted(patched.glob("*.bin")))
+    bins = sorted(patched.glob("*.bin"))
+    problems = disc.verify_tracks(data, bins)
+    for want, path in zip(data["disc"]["tracks"], bins, strict=False):
+        got = disc.file_digest(path, "sha1")
+        print(f"disc: track {want['number']} SHA-1 {got}, retail {want['sha1']}")
     if disc.file_digest(patched / cue["name"], "sha1") != cue["sha1"]:
         problems.append(f"{cue['name']}: SHA-1 differs")
     extracted = out / "files"
