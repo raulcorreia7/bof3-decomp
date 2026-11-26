@@ -11,8 +11,8 @@ MATCH void func_801F39E0(void) {
     y      = (g_PartyActors[LOBU(TASK(Actor)->unk_18)].pos.y.part.integer - 177) / 2;
     x      = (g_PartyActors[LOBU(TASK(Actor)->unk_18)].pos.x.part.integer - 11) / 2;
     facing = TASK(Actor)->direction & 7;
-    x += D_80181B00[facing * 2];
-    y += D_80181B01[facing * 2];
+    x += D_80181B00[facing][0];
+    y += D_80181B00[facing][1];
     if (x >= 7) {
         return;
     }

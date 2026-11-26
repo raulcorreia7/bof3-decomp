@@ -9,8 +9,8 @@ MATCH void func_801F3E30(void) {
 
     if (SYS_TestFlag(g_SceneEventFlags, 0x66) != 0) {
         TASK(Actor)->direction = g_Game.members[0].facing;
-        shift_x                = D_80181B00[TASK(Actor)->direction * 2];
-        shift_y                = D_80181B01[TASK(Actor)->direction * 2];
+        shift_x                = D_80181B00[TASK(Actor)->direction][0];
+        shift_y                = D_80181B00[TASK(Actor)->direction][1];
         x                      = COORD_INT(TASK(Actor)->pos.x) + (s8)shift_x;
         y                      = COORD_INT(TASK(Actor)->pos.y) + (s8)shift_y;
         if (g_Game.members[0].unk_09 != 0 && g_Game.members[0].u.field.mode.unsigned_value == 1) {

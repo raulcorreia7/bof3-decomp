@@ -12,8 +12,8 @@ MATCH u32 Actor_RunInteractions(void) {
     result = g_Game.walk_flags & AREA_WALK_LEADER_SWITCH_ACTIVE;
     if (result == 0) {
         for (i = 0; i < ENTITY_MAX; i++) {
-            actor          = &g_Actors[i];
-            g_Task         = actor;
+            actor = &g_Actors[i];
+            TASK_SET(actor);
             g_CurrentActor = actor;
             if (!ACTOR_IN_USE(*actor)) {
                 continue;

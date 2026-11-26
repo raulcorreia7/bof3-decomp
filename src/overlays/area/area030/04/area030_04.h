@@ -465,8 +465,7 @@ extern Callback              D_801E22F0[];
 extern Callback              D_801E22FC[];
 extern Callback              D_801E2304[];
 extern void (*g_FishingFishSteps[])(void);
-extern u8                    D_801E2330[];
-extern u8                    D_801E2331[];
+extern u8                    D_801E2330[][2]; /* the script and swim state of each swim heading */
 extern Callback              D_801E2340[];
 extern Callback              D_801E2348[];
 extern u16                   D_801E2354[];

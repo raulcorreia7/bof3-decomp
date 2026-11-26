@@ -13,7 +13,7 @@ MATCH void func_801A0514(void) {
 
         entity = (Actor*)((u8*)g_Actors + (slot_u8 * ACTOR_SIZE));
 
-        g_Task = entity;
+        TASK_SET(entity);
 
         if (ACTOR_IN_USE(*entity)) {
             if (entity->unk_06 != 9) {

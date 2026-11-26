@@ -236,7 +236,7 @@ MATCH void func_801FB8A4(void) {
             SND_BGMFadeOut(0x49, 100, 8);
             SND_BGMPlay(0x51, 100, 8);
             SYS_SetFlag(g_SceneFlags, 0x1E);
-            SYS_SetFlag(&D_80145548, 6);
+            SYS_SetFlag(&g_SaveData.found_genes, 6);
             Game_ClearScriptActive();
             g_ScriptVars[0]          = 0;
             g_ScenarioState.state_04 = 0;

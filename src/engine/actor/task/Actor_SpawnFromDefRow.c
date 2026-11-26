@@ -19,9 +19,9 @@ MATCH void Actor_SpawnFromDefRow(u8* script) {
         return;
     }
 
-    tile               = g_GameAreaId;
-    offset             = script[9] * 8;
-    g_Task             = &g_Actors[slot];
+    tile   = g_GameAreaId;
+    offset = script[9] * 8;
+    TASK_SET(&g_Actors[slot]);
     GAME_WORK_AREA_PTR = &g_Actors[slot];
     actors             = g_Actors;
 

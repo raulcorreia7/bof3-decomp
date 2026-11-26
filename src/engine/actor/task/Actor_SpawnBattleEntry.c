@@ -12,7 +12,7 @@ MATCH void Actor_SpawnBattleEntry(u8* script) {
         return;
     }
 
-    g_Task             = &g_Actors[slot];
+    TASK_SET(&g_Actors[slot]);
     GAME_WORK_AREA_PTR = &g_Actors[slot];
 
     g_ScratchPad.cells.ray.y = ((script[1] << 8) | script[2]);

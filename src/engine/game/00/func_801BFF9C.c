@@ -109,7 +109,7 @@ MATCH void func_801BFF9C(u32 work_type, u32 work_index, u32 work_mode) {
                     } else {
                         Party_MemberLoadSprite(*order, i & BYTE_MASK);
                         order++;
-                        GFX_PaletteFreeFadeTarget(g_Task);
+                        GFX_PaletteFreeFadeTarget(TASK(void));
                         TASK(Actor)->clut_select = (TASK(Actor)->unk_05 + 0x78);
                         GFX_PaletteLoad((TASK(Actor)->unk_05 << 6) + GAME_PALETTE_STAGE, 0);
                     }

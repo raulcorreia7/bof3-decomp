@@ -15,8 +15,8 @@ MATCH void func_801F3D3C(void) {
     target_y.fixed = g_PartyActors[TASK(Actor)->unk_18].pos.y.fixed;
     facing         = TASK(Actor)->direction & 7;
     /* The facing step bytes count half cells. */
-    target_x.part.integer += D_80181B00[facing * 2] << 1;
-    target_y.part.integer += D_80181B01[facing * 2] << 1;
+    target_x.part.integer += D_80181B00[facing][0] << 1;
+    target_y.part.integer += D_80181B00[facing][1] << 1;
     dx = target_x.fixed - TASK(Actor)->pos.x.fixed;
     dy = target_y.fixed - TASK(Actor)->pos.y.fixed;
     dz = Area_HeightSample(target_x.fixed, target_y.fixed) - LOHU(TASK(Actor)->pos.z.part.integer);

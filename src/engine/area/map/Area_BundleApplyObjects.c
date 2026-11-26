@@ -64,11 +64,11 @@ NON_MATCHING void Area_BundleApplyObjects(void) {
                             destination        = table_offset + base_offset + (map_value << 2) + shifted;
                             payload            = entry[2];
                             *(u32*)destination = payload;
-                        } while ((entry_index += 3) < FIELD(u16, record, 2));
+                        } while ((entry_index += 3) < ((u16*)record)[1]);
                     }
                 }
             }
-            record += FIELD(u16, record, 2) + 1;
+            record += ((u16*)record)[1] + 1;
         } while (*record != 0);
     }
 }

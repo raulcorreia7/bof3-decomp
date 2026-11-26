@@ -18,12 +18,12 @@ MATCH void func_801F3BC0(void) {
     offset = 0;
     x      = (u32)(TASK(Actor)->pos.x.part.integer - 11) >> 1;
     y      = (u32)(TASK(Actor)->pos.y.part.integer - 177) >> 1;
-    facing = (TASK(Actor)->direction & 7) * 2;
+    facing = TASK(Actor)->direction & 7;
     for (;;) {
-        if ((u8)(x += D_80181B00[facing]) >= 7) {
+        if ((u8)(x += D_80181B00[facing][0]) >= 7) {
             goto done;
         }
-        if ((u8)(y += D_80181B01[facing]) >= 7) {
+        if ((u8)(y += D_80181B00[facing][1]) >= 7) {
             goto done;
         }
         if (Area_SlideCell(x, y) == 0xF) {

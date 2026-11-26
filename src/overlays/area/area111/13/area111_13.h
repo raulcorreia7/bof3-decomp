@@ -7,8 +7,7 @@
 #include "overlays/area/worlds/world02.h"
 
 /* The facing step bytes the cell walk advances by: x and y, one byte per facing. */
-extern s8 D_80181B00[];
-extern s8 D_80181B01[];
+extern s8 D_80181B00[][2];
 extern u8 D_801F4890[];
 extern u8 D_801F489C[];
 /* One byte per cell of the 7x7 cell grid, read by func_801F46A8. */

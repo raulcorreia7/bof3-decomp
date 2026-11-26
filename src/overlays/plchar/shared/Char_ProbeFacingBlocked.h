@@ -26,7 +26,7 @@
         x     = pos_x + value;                                      \
         pos_x = x;                                                  \
         FAKE_USE(pos_x);                                            \
-        value = g_FacingStepY[direction * 2];                       \
+        value = g_FacingSteps[direction].y;                         \
         FAKE_USE(value);                                            \
         pos_y = task->pos.y.fixed;                                  \
         FAKE_USE(pos_y);                                            \

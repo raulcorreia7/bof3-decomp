@@ -34,7 +34,7 @@ MATCH void PlChar_RunPersonalAction(void) {
                 TASK(Actor)->unk_03++;
             } else {
                 x   = TASK(Actor)->pos.x.fixed + g_FacingSteps[TASK(Actor)->direction].x * 2;
-                y   = TASK(Actor)->pos.y.fixed + g_FacingStepY[TASK(Actor)->direction * 2] * 2;
+                y   = TASK(Actor)->pos.y.fixed + g_FacingSteps[TASK(Actor)->direction].y * 2;
                 hit = Actor_FindInRange(x, y, 0);
                 if (hit != slot) {
                     g_Actors[hit].interaction_flags |= ACTOR_INTERACTION_PENDING;

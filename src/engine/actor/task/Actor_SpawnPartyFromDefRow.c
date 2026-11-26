@@ -32,9 +32,9 @@ MATCH void Actor_SpawnPartyFromDefRow(u8* record) {
     Actor*       tail;
     Actor*       entry;
 
-    script                 = record;
-    off                    = script[9] * 8;
-    g_Task                 = &g_PartyActors[script[0xB]];
+    script = record;
+    off    = script[9] * 8;
+    TASK_SET(&g_PartyActors[script[0xB]]);
     g_CurrentActor         = &g_PartyActors[script[0xB]];
     src                    = *(u8**)((u8*)g_AreaLoads[g_GameAreaId] + 8) + off;
     TASK(Actor)->direction = script[0] & 0xF;
