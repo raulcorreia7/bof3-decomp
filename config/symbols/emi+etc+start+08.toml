@@ -109,6 +109,7 @@ Item_CurePoisonParty = { addr = 0x801E8A70, type = "func", source = "clears pois
 Menu_PanelIdle = { addr = 0x801E8D58, type = "func", source = "The idle state of the start-menu panels; does nothing." }
 Menu_CharacterPanel = { addr = 0x801E8D60, type = "func", source = "panel mode 0 of the start menu: the character window with its portrait" }
 Menu_DrawCharacterPanel = { addr = 0x801E8DB4, type = "func", source = "Draws the character window and its icon." }
+UI_PanelSlideOutOption_801E90C0 = { addr = 0x801E90C0, type = "func", source = "same body as emi/etc/game/00@0x801996FC UI_PanelSlideOutOption" }
 Menu_ZennyPanel = { addr = 0x801E9140, type = "func", source = "panel mode 1 of the start menu: the zenny window" }
 Menu_PlayTimePanel = { addr = 0x801E9224, type = "func", source = "panel mode 2 of the start menu: the play time window" }
 Menu_CampIconsPanel = { addr = 0x801E9304, type = "func", source = "panel mode 3 of the start menu: the row of seven camp menu icons, the selected one grown" }

@@ -327,7 +327,7 @@ segments:
       - [0x183E8, c, func_801E8FE8]
       - [0x18440, c, func_801E9040]
       - [0x18480, c, func_801E9080]
-      - [0x184C0, c, func_801E90C0]
+      - [0x184C0, c, UI_PanelSlideOutOption_801E90C0]
       - [0x18500, c, func_801E9100]
       - [0x18540, c, Menu_ZennyPanel]
       - [0x185A4, c, func_801E91A4]

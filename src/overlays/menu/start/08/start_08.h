@@ -682,7 +682,8 @@ void        func_801E8FA8(void);
 void        func_801E8FE8(void);
 void        func_801E9040(void);
 void        func_801E9080(void);
-void        func_801E90C0(void);
+/* func_801E90C0 */
+void        UI_PanelSlideOutOption_801E90C0(void);
 void        func_801E9100(void);
 /* func_801E9140 */
 void        Menu_ZennyPanel(void);
