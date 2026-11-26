@@ -1,2 +1,3 @@
 ["emi/world04/area199/13"]
 g_AreaModuleId = { addr = 0x801F2C00, source = "Module id of the area: the first payload word of its overlay, 52 + the area number." }
+g_Area199TrailCells = { addr = 0x801F54D0, type = "Area199TrailCell", size = 0xC0, alias = true, source = "D_801F54D0 as records: 32 trail slots of the two members, each x, y and the tile flag, that func_801F3398 stages and draws." }

@@ -17,7 +17,7 @@ segments:
     align: 4
     subsegments:
       - [0x1F74, bin, g_BMagicEffectModes]
-      - [0x1F7C, bin, D_801F0B7C]
-      - [0x1F90, bin, D_801F0B90]
-      - [0x1F9C, bin, D_801F0B9C]
+      - [0x1F7C, bin, g_BMagicMagicBallCoreSteps]
+      - [0x1F90, bin, g_BMagicMagicBallTrailSteps]
+      - [0x1F9C, bin, g_BMagicMagicBallTrailTints]
   - [0x1FAC]

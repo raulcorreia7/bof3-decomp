@@ -26,7 +26,7 @@ NON_MATCHING void func_801EAF98(MenuPanelTask* task) {
         count++;
     }
     UI_WindowDraw((task->pos.x + 3) & HALF_MASK, (task->pos.y + 3) & HALF_MASK, MENU_INVENTORY_WINDOW_WIDTH, MENU_INVENTORY_WINDOW_HEIGHT, 0, g_WindowStyle);
-    first = func_801AFD10(&task->unk_0A, &scroll_y, &scroll_rows, &task->unk_08);
+    first = UI_ScrollList(&task->unk_0A, &scroll_y, &scroll_rows, &task->unk_08);
     y     = (s8)scroll_y + task->pos.y + 0x1A;
     for (i = first; i < first + (scroll_rows + 9); i++) {
         if (D_801ED878[i] == 0) {

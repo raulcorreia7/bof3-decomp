@@ -28,7 +28,7 @@ MATCH void BMagic_SacrificeInit(void) {
     TASK(PartyMember)->unk_09       = 0;
     TASK(PartyMember)->header.mode += 1;
     Battle_SelectActiveBattlerScript(8, 0);
-    index  = Battle_AllocEffect(1, 0x55) & BYTE_MASK;
+    index  = Battle_AllocEffect(1, BMAGIC_EFFECT_SACRIFICE) & BYTE_MASK;
     active = g_Battle.active_battler;
     if (BATTLER_IS_PLAYER(active)) {
         slot   = (BattleWorkImage*)&g_BattleEffects[index];
@@ -44,7 +44,7 @@ MATCH void BMagic_SacrificeInit(void) {
     g_BattleEffects[index].header.mode  = BMAGIC_SACRIFICE_EFFECT_CLONE;
     g_BattleEffects[index].unk_06       = 1;
     g_BattleEffects[index].header.step  = 0;
-    g_BattleEffects[index].step_index   = 0x55;
+    g_BattleEffects[index].effect_type  = BMAGIC_EFFECT_SACRIFICE;
     g_BattleEffects[index].target.party = work;
     TASK(PartyMember)->param.unk_0B += 1;
     dst = MEM_PTR(u16, AREA_PALETTE_UPLOAD_ROW(AREA_PALETTE_BATL_OVR_ROW));
@@ -316,11 +316,11 @@ MATCH void BMagic_SacrificeCloneCast(void) {
     count                     = TASK(PartyMember)->unk_09 - 1;
     TASK(PartyMember)->unk_09 = count;
     if (count == 0) {
-        slot                               = Battle_AllocEffect(1, 0x55);
+        slot                               = Battle_AllocEffect(1, BMAGIC_EFFECT_SACRIFICE);
         g_BattleEffects[slot].target.party = g_BattleEffectBattler;
         g_BattleEffects[slot].header.mode  = BMAGIC_SACRIFICE_EFFECT_DOME;
         g_BattleEffectBattler->param.unk_0B += 1;
-        slot                               = Battle_AllocEffect(1, 0x55);
+        slot                               = Battle_AllocEffect(1, BMAGIC_EFFECT_SACRIFICE);
         g_BattleEffects[slot].target.party = g_BattleEffectBattler;
         g_BattleEffects[slot].header.mode  = BMAGIC_SACRIFICE_EFFECT_SHADOW;
         g_BattleEffectBattler->param.unk_0B += 1;

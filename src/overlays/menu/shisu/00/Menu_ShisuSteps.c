@@ -743,14 +743,12 @@ NON_MATCHING void func_801D27BC(void) {
     D_801DA0AC             = 0;
     D_801DA0B0             = 0;
     g_ShisuBaseAngle       = 0;
-    x                      = *scroll_x;
-    y                      = *scroll_y;
     initial                = -0x80;
     g_ShisuBase[0]         = initial;
     g_ShisuBase[1]         = initial;
     g_ShisuBase[2]         = initial;
-    D_801DA07C             = x;
-    D_801DA080             = y;
+    D_801DA07C             = *scroll_x;
+    D_801DA080             = *scroll_y;
     D_801DA098             = record[1];
     height                 = Area_HeightSample(g_AreaScrollTargetX, g_AreaScrollTargetY);
     D_801DA084             = (height << 16) - SHISU_HEIGHT_BIAS;

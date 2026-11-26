@@ -199,7 +199,7 @@ typedef Pos2 BMagicTrailPoint;
 /* Copy the active battler's work image into a free effect slot. A statement
  * macro: the member declares u32 index, u8 active and BattleEffect* slot. */
 #define BMAGIC_ALLOC_BATTLER_EFFECT()                                              \
-    index  = Battle_AllocEffect(1, 31);                                            \
+    index  = Battle_AllocEffect(1, BMAGIC_EFFECT_SKILL_STRIKE);                    \
     active = g_Battle.active_battler;                                              \
     if (BATTLER_IS_PLAYER(active)) {                                               \
         BattleWorkImage* image;                                                    \
@@ -385,6 +385,15 @@ ASSERT_OFFSET(BMagicEffect, unk_26, 0x26);
 ASSERT_OFFSET(BMagicEffect, battler, 0x28);
 ASSERT_SIZE(BMagicEffect, 0x2C);
 
+/* The sparkle types of the healing overlays: each picks the sparkle count, launch delay, rise and shade rows, and is stored in byte 0x04 of a sparkle record. */
+typedef enum BMagicSparkleType {
+    BMAGIC_SPARKLE_HEAL,
+    BMAGIC_SPARKLE_REJUVENATE,
+    BMAGIC_SPARKLE_RESTORE,
+    BMAGIC_SPARKLE_CURE,
+    BMAGIC_SPARKLE_TRANSFER
+} BMagicSparkleType;
+
 /* The record of an effect that orbits its battler: the angle advances every frame and the radius scales sin and cos. */
 typedef struct BMagicOrbit {
     /* 0x00 */ TaskHeader header;
@@ -495,18 +504,18 @@ void func_801F006C(void);
 u32  BMagic_AllocEffect(void);
 /* Defined in shared/Effect_DrawBolt.h, which a member includes after its first call. */
 void Effect_DrawBolt(void);
-/* Defined in Effect_DrawSparkleRays.h, which a member includes after its first call. */
-void Effect_DrawSparkleRays(u16 angle, u16 radius);
-/* Defined in Effect_DrawSparkleWedges.h, which a member includes after its first call. */
-void Effect_DrawSparkleWedges(u16 angle, u16 radius);
+/* Defined in Effect_SparkleDrawRays.h, which a member includes after its first call. */
+void Effect_SparkleDrawRays(u16 angle, u16 radius);
+/* Defined in Effect_SparkleDrawWedges.h, which a member includes after its first call. */
+void Effect_SparkleDrawWedges(u16 angle, u16 radius);
 /* Defined in Effect_SetActorMatrix.h, which a member includes after its first call. */
 void Effect_SetActorMatrix(void);
 /* Defined in Effect_SetActorMatrixQuarterRoll.h, which a member includes after its first call. */
 void Effect_SetActorMatrixQuarterRoll(void);
 /* Defined in Effect_DrawScreenFade.h, which a member includes after its first call. */
 void Effect_DrawScreenFade(void);
-/* Defined in Effect_DrawSparkleDisc.h, which a member includes after its first call. */
-void Effect_DrawSparkleDisc(void);
+/* Defined in Effect_SparkleDrawDisc.h, which a member includes after its first call. */
+void Effect_SparkleDrawDisc(void);
 /* Defined in Effect_DrawShadedDisc.h, which a member includes after its first call. */
 void Effect_DrawShadedDisc(void);
 /* Defined in Effect_DrawTexturedQuad.h, which a member includes after its first call. */

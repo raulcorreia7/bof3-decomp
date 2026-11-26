@@ -15,5 +15,9 @@ u8 WorldMap_FindRegion(void);
 
 /* func_8019A1D4 */
 WorldMapPoint* WorldMap_GetPoints(void);
+/* func_801A839C */
+void           WorldMap_RunLocationGuide(void);
+/* func_801A852C */
+void           WorldMap_RunFairyEntry(void);
 
 #endif

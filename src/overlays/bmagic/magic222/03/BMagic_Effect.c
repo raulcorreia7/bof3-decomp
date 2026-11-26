@@ -7,7 +7,8 @@ __asm__(".include \"include/match/macro.inc\"\n");
 
 #include "overlays/bmagic/shared/BMagic_DispatchMode.h"
 
-MATCH void func_801EEC70(void) {
+/* func_801EEC70 */
+MATCH void BMagic_CombustionInit(void) {
     u32  slot;
     s32  i;
     u16* dst;
@@ -18,12 +19,12 @@ MATCH void func_801EEC70(void) {
     TASK(PartyMember)->param.unk_0B = 0;
     TASK(PartyMember)->unk_09       = 16;
     TASK(PartyMember)->header.mode += 1;
-    slot                               = Battle_AllocEffect(1, 96) & BYTE_MASK;
+    slot                               = Battle_AllocEffect(1, BMAGIC_EFFECT_COMBUSTION) & BYTE_MASK;
     g_BattleEffects[slot].target.party = TASK(PartyMember);
     g_BattleEffects[slot].header.mode  = 1;
     g_BattleEffects[slot].arg.unk_09   = 16;
     TASK(PartyMember)->param.unk_0B += 1;
-    slot                               = Battle_AllocEffect(1, 96) & BYTE_MASK;
+    slot                               = Battle_AllocEffect(1, BMAGIC_EFFECT_COMBUSTION) & BYTE_MASK;
     g_BattleEffects[slot].target.party = TASK(PartyMember);
     g_BattleEffects[slot].header.mode  = 0;
     g_BattleEffects[slot].arg.unk_09   = 16;
@@ -52,9 +53,10 @@ MATCH void func_801EEC70(void) {
 /* func_801EEEE0 */
 #include "overlays/bmagic/shared/BMagic_DispatchEffectMode.h"
 
-MATCH void func_801EEF24(void) {
+/* func_801EEF24 */
+MATCH void BMagic_CombustionActorUpdate(void) {
     g_Scripts = BMAGIC_SCRIPT_TABLE;
-    SYS_DISPATCH_BYTE(D_801F0D64, TASK(PartyMember)->header.step);
+    SYS_DISPATCH_BYTE(g_BMagicCombustionActorSteps, TASK(PartyMember)->header.step);
     if ((TASK(PartyMember)->header.flags & 0x1) && TASK(PartyMember)->header.step != 0) {
         Battle_ProjectRange();
         Area_AddGridActor();
@@ -62,7 +64,8 @@ MATCH void func_801EEF24(void) {
     g_Scripts = AREA_SCRIPT_TABLE;
 }
 
-MATCH void func_801EEFC8(void) {
+/* func_801EEFC8 */
+MATCH void BMagic_CombustionActorPlace(void) {
     PartyMember* work;
 
     if (--TASK(PartyMember)->unk_09 == 0) {
@@ -94,9 +97,8 @@ MATCH void func_801EEFC8(void) {
     }
 }
 
-/* Lets the effect fall onto the battler's height and, at its timer's end, starts eight effect slots, lifts the
- * camera pitch and moves to the next step. */
-MATCH void func_801EF148(void) {
+/* func_801EF148 */
+MATCH void BMagic_CombustionActorFall(void) {
     u32 slot;
     u8  i;
 
@@ -105,7 +107,7 @@ MATCH void func_801EF148(void) {
     if (--TASK(PartyMember)->unk_09 == 0) {
         SND_SEQueueSelection(EMI_SE_ID(SND_BANK_COMMON, 1));
         for (i = 0; i < 8; i++) {
-            slot                               = Battle_AllocEffect(1, 0x60) & BYTE_MASK;
+            slot                               = Battle_AllocEffect(1, BMAGIC_EFFECT_COMBUSTION) & BYTE_MASK;
             g_BattleEffects[slot].target.party = g_BattleEffectBattler;
             g_BattleEffects[slot].header.mode  = 2;
             g_BattleEffects[slot].unk_0B       = i;
@@ -122,7 +124,8 @@ MATCH void Effect_SwingCameraAngle(void) {
     BMAGIC_SWING_CAMERA(22);
 }
 
-MATCH void func_801EF324(void) {
+/* func_801EF324 */
+MATCH void BMagic_CombustionActorSpawnWave(void) {
     u8           count;
     u32          slot;
     PartyMember* work;
@@ -131,7 +134,7 @@ MATCH void func_801EF324(void) {
     TASK(PartyMember)->unk_09 = count;
     if (!(count & BYTE_MASK)) {
         SND_SEQueueSelection(EMI_SE_ID(SND_BANK_COMMON, 0x02));
-        slot                               = Battle_AllocEffect(1, 96) & BYTE_MASK;
+        slot                               = Battle_AllocEffect(1, BMAGIC_EFFECT_COMBUSTION) & BYTE_MASK;
         work                               = g_BattleEffectBattler;
         g_BattleEffects[slot].header.mode  = 3;
         g_BattleEffects[slot].target.party = work;
@@ -148,7 +151,8 @@ MATCH void func_801EF324(void) {
 
 #include "overlays/bmagic/shared/Effect_StartTint.h"
 
-MATCH void func_801EF4F0(void) {
+/* func_801EF4F0 */
+MATCH void BMagic_CombustionActorFade(void) {
     TASK(PartyMember)->unk_5D -= 0x10;
     TASK(PartyMember)->unk_5E -= 0x10;
     TASK(PartyMember)->unk_5F -= 0x10;
@@ -159,17 +163,19 @@ MATCH void func_801EF4F0(void) {
     }
 }
 
-MATCH void func_801EF5A4(void) {
-    SYS_DISPATCH_BYTE(D_801F0D7C, TASK(PartyMember)->header.step);
+/* func_801EF5A4 */
+MATCH void BMagic_CombustionShadowUpdate(void) {
+    SYS_DISPATCH_BYTE(g_BMagicCombustionShadowSteps, TASK(PartyMember)->header.step);
     if (TASK(PartyMember)->header.flags != 0 && TASK(PartyMember)->header.step != 0) {
         Effect_SetActorMatrix();
-        func_801EF87C();
+        BMagic_CombustionDrawShadow();
         BMagic_DrawDarkRing();
         PopMatrix();
     }
 }
 
-MATCH void func_801EF634(void) {
+/* func_801EF634 */
+MATCH void BMagic_CombustionShadowPlace(void) {
     PartyMember* src;
     PartyMember* dst;
 
@@ -186,7 +192,8 @@ MATCH void func_801EF634(void) {
     }
 }
 
-MATCH void func_801EF6C8(void) {
+/* func_801EF6C8 */
+MATCH void BMagic_CombustionShadowGrow(void) {
     TASK(PartyMember)->unk_09 += 1;
     TASK(PartyMember)->unk_14 += 6;
     if (TASK(PartyMember)->unk_09 == 0x10) {
@@ -200,7 +207,8 @@ MATCH void func_801EF6C8(void) {
 
 #include "overlays/bmagic/shared/Effect_SetActorMatrix.h"
 
-MATCH void func_801EF87C(void) {
+/* func_801EF87C */
+MATCH void BMagic_CombustionDrawShadow(void) {
     POLY_G3* prim;
     long     depth;
     long     flag;
@@ -237,11 +245,13 @@ MATCH void BMagic_DrawDarkRing(void) {
     BMAGIC_DRAW_DARK_RING_QUADS(BMAGIC_LAYER_BEHIND_BATTLERS, 5);
 }
 
-MATCH void func_801EFDEC(void) {
-    BMAGIC_DISPATCH_AND_DRAW_IN_OWN_MATRIX(D_801F0D8C, func_801F0168, func_801F0218);
+/* func_801EFDEC */
+MATCH void BMagic_CombustionSparkUpdate(void) {
+    BMAGIC_DISPATCH_AND_DRAW_IN_OWN_MATRIX(g_BMagicCombustionSparkSteps, Effect_SetActorMatrix3, BMagic_CombustionDrawSpark);
 }
 
-MATCH void func_801EFE74(void) {
+/* func_801EFE74 */
+MATCH void BMagic_CombustionSparkPlace(void) {
     s32  r;
     s32  phase;
     s16* angle = &D_1F800004;
@@ -258,7 +268,8 @@ MATCH void func_801EFE74(void) {
     TASK(PartyMember)->header.step += 1;
 }
 
-MATCH void func_801EFF7C(void) {
+/* func_801EFF7C */
+MATCH void BMagic_CombustionSparkFly(void) {
     PartyMember* task;
     s16*         angle_cell;
     s32          direction;
@@ -278,7 +289,8 @@ MATCH void func_801EFF7C(void) {
     }
 }
 
-MATCH void func_801F0070(void) {
+/* func_801F0070 */
+MATCH void BMagic_CombustionSparkEnd(void) {
     s16* angle_cell;
     s32  phase;
     u8   count;
@@ -306,7 +318,8 @@ MATCH void Effect_SetActorMatrix3(void) {
     BMAGIC_SET_ACTOR_MATRIX();
 }
 
-MATCH void func_801F0218(void) {
+/* func_801F0218 */
+MATCH void BMagic_CombustionDrawSpark(void) {
     POLY_FT4* prim;
     long      depth;
     long      flag;
@@ -334,15 +347,17 @@ MATCH void func_801F0218(void) {
     Area_CellAddPrim(TASK(PartyMember)->pos.x.fixed, TASK(PartyMember)->pos.y.fixed, 2, sizeof(POLY_FT4));
 }
 
-MATCH void func_801F0504(void) {
-    SYS_DISPATCH_BYTE(D_801F0D98, TASK(PartyMember)->header.step);
+/* func_801F0504 */
+MATCH void BMagic_CombustionWaveUpdate(void) {
+    SYS_DISPATCH_BYTE(g_BMagicCombustionWaveSteps, TASK(PartyMember)->header.step);
     if (TASK(PartyMember)->header.flags != 0 && TASK(PartyMember)->header.step != 0) {
-        func_801F07A8();
-        func_801F07A8();
+        BMagic_CombustionDrawWave();
+        BMagic_CombustionDrawWave();
     }
 }
 
-MATCH void func_801F0584(void) {
+/* func_801F0584 */
+MATCH void BMagic_CombustionWavePlace(void) {
     PartyMember* src;
 
     src                               = g_BattleEffectBattler;
@@ -357,7 +372,8 @@ MATCH void func_801F0584(void) {
 
 #include "overlays/bmagic/shared/Effect_CountUpByTwoAndStep.h"
 
-MATCH void func_801F066C(void) {
+/* func_801F066C */
+MATCH void BMagic_CombustionWaveWait(void) {
     u8 timer;
 
     timer                    = TASK(PartyMember)->timer - 1;
@@ -368,7 +384,8 @@ MATCH void func_801F066C(void) {
     }
 }
 
-MATCH void func_801F06C8(void) {
+/* func_801F06C8 */
+MATCH void BMagic_CombustionWaveRise(void) {
     PartyMember* work;
 
     work = TASK(PartyMember);
@@ -381,7 +398,8 @@ MATCH void func_801F06C8(void) {
     }
 }
 
-MATCH void func_801F0730(void) {
+/* func_801F0730 */
+MATCH void BMagic_CombustionWaveEnd(void) {
     PartyMember* work;
     PartyMember* active;
     u8           count;
@@ -398,10 +416,8 @@ MATCH void func_801F0730(void) {
     }
 }
 
-/* Draws 32 columns, 16 wide, from 0x100 left of the effect position: per column two semi-transparent Gouraud quads
- * above the row and two mirrored below, their heights following rsin over the column with radii unk_0B and twice
- * unk_0B, shaded by unk_09. */
-MATCH void func_801F07A8(void) {
+/* func_801F07A8 */
+MATCH void BMagic_CombustionDrawWave(void) {
     POLY_G4*     prim;
     PartyMember* work;
     s32          tpage;

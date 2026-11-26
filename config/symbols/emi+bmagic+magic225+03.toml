@@ -10,15 +10,30 @@ Effect_Reset = { addr = 0x801E5988, type = "func", source = "Clears every timer,
 g_BattleEffectBattler = { addr = 0x801EB4E0, source = "the battler the running effect acts on; Battle_UpdateEffects stores it for each effect step (emi/battle/battle/03 owns the cell)" }
 g_BattleEnemyBattlers = { addr = 0x801EB630, type = "EnemyBattler", size = 0x8C0, source = "Battle enemy battlers, one per enemy slot." }
 g_BattleEffects = { addr = 0x801EC330, alias = true }
-Effect_MarkDamagedOnZeroTick = { addr = 0x801EF278, type = "func", source = "When the effect ticker (byte 0x0B) is zero marks the battlers of the target selector damaged, raises BATTLE_STATE_EFFECT_PLAYING and resets the effect in magic225 (Temptation)." }
+g_BMagicTemptationModes = { addr = 0x801EEC04, source = "The four handlers of the task by header.mode: init, spawn the actors, spawn the target effects, mark the targets damaged." }
+BMagic_TemptationUpdate = { addr = 0x801EEC14, type = "func", source = "Runs the task's handler that header.mode selects, then every effect slot in use through BMagic_TemptationSlotUpdate." }
+BMagic_TemptationInit = { addr = 0x801EED28, type = "func", source = "Clears the 32 effect slots, centres the camera, loads the counter with 24, starts the flash effect and counts it as live, copies palette rows 2 and 26 of the arena to the work copy, flags the palette and plays the sound." }
+BMagic_TemptationSpawnActors = { addr = 0x801EEE8C, type = "func", source = "Counts the counter (byte 0x09) down; at zero plays the sound for each of 16 actors started in the effect slots, each with its index in byte 0x0B and a delay of 8 plus 4 per index, counts each as live and advances header.mode." }
+BMagic_TemptationSpawnTargetEffects = { addr = 0x801EEF8C, type = "func", source = "Once no effect is live, starts three effects (id 2) on each unblocked battler of the selected side, of type 4 plus j where Battle_CanTarget accepts the battler for selector j of three and type 8 otherwise, with a delay of 1 plus 5 per j and a timer of 12 per j, counts each as live and advances header.mode." }
+Effect_MarkDamagedOnZeroTick = { addr = 0x801EF278, type = "func", source = "When the live-effect count (byte 0x0B) is zero marks the battlers of the target selector damaged, raises BATTLE_STATE_EFFECT_PLAYING and resets the effect in magic225 (Temptation)." }
 BMagic_DispatchEffectMode = { addr = 0x801EF2D8, type = "func", source = "Runs the handler that header.mode (byte 0x01) selects from the effect handlers of magic225." }
-Effect_CountUpAndStep = { addr = 0x801EF5D8, type = "func", source = "Counts the effect timer (byte 0x09) up and advances header.step (byte 0x02) at 16 in magic225 (Temptation)." }
-BMagic_StepEffect = { addr = 0x801F0140, type = "func", source = "the body returns g_Task->scale.x" }
-BMagic_SetScaleX = { addr = 0x801F021C, type = "func", source = "the body stores into g_Task->scale.x" }
+BMagic_TemptationFlashUpdate = { addr = 0x801EF31C, type = "func", source = "Runs the flash's step under the bmagic script table and, once started, draws the full-screen flash and the four corner glows." }
+BMagic_TemptationFlashStart = { addr = 0x801EF404, type = "func", source = "Marks the active battler and every unblocked battler of the selected side with draw layer 2, takes layer 3 (7 in encounter 55) for the flash, sets the blend byte (0x0B) to 1, clears the counter and timer and steps." }
+BMagic_TemptationFlashRise = { addr = 0x801EF578, type = "func", source = "Raises the timer (byte 0x0A) by 2 per frame; at 16 clears the blend byte, which makes the flash opaque, and steps." }
+Effect_CountUpAndStep = { addr = 0x801EF5D8, type = "func", source = "Counts the counter (byte 0x09) up and advances header.step (byte 0x02) at 16 in magic225 (Temptation)." }
+BMagic_TemptationFlashWait = { addr = 0x801EF628, type = "func", source = "Waits until the effect battler's live-effect count is below 2, that is until every other effect has ended, then sets the blend byte to 1 and steps." }
+BMagic_TemptationFlashEnd = { addr = 0x801EF67C, type = "func", source = "Lowers the counter by 2 while it is not zero and counts the timer down; at zero marks the selected side with draw layer 4, lowers the effect battler's live-effect count and resets the effect." }
+BMagic_TemptationDrawGlow = { addr = 0x801EF7D4, type = "func", source = "Draws one corner glow at screen point (x, y) in subtractive blend: a disc of 32 wedges of the radius, shaded by the counter times the colour row of g_BMagicTemptationGlowColors, then a ring of 32 quads out to one and a half times the radius fading to black." }
+BMagic_TemptationDrawFlash = { addr = 0x801EFCA0, type = "func", source = "Draws a full-screen (320 by 240) quad on the flash's layer, shaded by the timer times 15 plus 15, translucent while the blend byte is 1." }
+BMagic_TemptationSlotUpdate = { addr = 0x801EFE0C, type = "func", source = "Runs the handler that header.mode selects for the effect slot's record." }
+BMagic_TemptationActorUpdate = { addr = 0x801EFE50, type = "func", source = "Runs the actor's step under the bmagic script table and, once started, adds the grid actor." }
+BMagic_TemptationActorPlace = { addr = 0x801EFEE8, type = "func", source = "Counts the delay (counter) down; at zero places the actor beside the active battler at its height plus 256, turns it toward the effect battler with a random error of up to 0xFF (added for odd indices, taken off for even), sets up its script, scale 1.0 and speed 12, loads the counter with 16 and steps." }
+BMagic_TemptationActorFly = { addr = 0x801F0140, type = "func", source = "Steps the actor's script, grows it by 0x800 per frame and moves it along its heading at its speed, which drops by 1 on every odd frame; at speed 4 steps." }
+BMagic_TemptationActorEnd = { addr = 0x801F021C, type = "func", source = "Steps the actor's script, grows it by 0x800 per frame and moves it along its heading at speed 4; when the counter has run out lowers the effect battler's live-effect count and clears the effect." }
 BMagic_AllocEffect = { addr = 0x801F02D4, type = "func", source = "Claims the first free slot of the effect table (bit 0 of header.flags) and returns its index, or 0xFF when all 32 slots are in use in magic225 (Temptation)." }
 Actor_Clear = { addr = 0x801F0338, type = "func", source = "Clears the effect work record: header flags, mode (byte 0x01), step (byte 0x02) and bytes 0x03 and 0x04." }
 g_BMagicEffectModes = { addr = 0x801F0388, source = "Handlers of magic225 (Temptation), run by header.mode (byte 0x01)." }
-D_801F038C = { addr = 0x801F038C, source = "RGB of the four corner glows of magic225, three bytes each, scaled by the effect timer in func_801EF7D4." }
-D_801F0398 = { addr = 0x801F0398, source = "Step handlers of magic225, run by header.step (byte 0x02) from func_801EF31C." }
-D_801F03AC = { addr = 0x801F03AC, source = "Mode handlers of the magic225 effect, run by header.mode (byte 0x01) from func_801EFE0C; func_801EFE50 reads the same table one entry further along by header.step." }
-D_801F03BC = { addr = 0x801F03BC, source = "Effect slot table of the magic225 effect, scanned by BMagic_AllocEffect." }
+g_BMagicTemptationGlowColors = { addr = 0x801F038C, source = "The red, green and blue weights of each of the four corner glows." }
+g_BMagicTemptationFlashSteps = { addr = 0x801F0398, source = "The five steps of the flash: start, rise, count up, wait, end." }
+g_BMagicTemptationActorSteps = { addr = 0x801F03AC, source = "Entry 0 is the actor slot's mode 0 handler; entries 1 to 3 are its steps: place, fly, end." }
+g_BMagicTemptationActors = { addr = 0x801F03BC, source = "The 32 effect slots of the actors, scanned by BMagic_AllocEffect and run by BMagic_TemptationUpdate." }

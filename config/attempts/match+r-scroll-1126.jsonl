@@ -1,0 +1,1 @@
+{"function": "emi/bmagic/magic059/03@0x801EED0C", "tried": "scroll targets as g_AreaScrollTargetCoordX/Y.fixed (two Coord symbols): same size as retail, 84 rows as with the VECTOR cast", "first_diff": "andi a0 vs v0 at +0x70: register choice for the slot index", "score": null}

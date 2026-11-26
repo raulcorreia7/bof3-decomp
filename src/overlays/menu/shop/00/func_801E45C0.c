@@ -42,7 +42,7 @@ NON_MATCHING void func_801E45C0(MenuPanelTask* task) {
 
     UI_WindowDraw((task->pos.x + 3) & HALF_MASK, (task->pos.y + 3) & HALF_MASK, 0x71, 0x9A, 0, g_WindowStyle);
 
-    start = func_801AFD10(&task->unk_0A, &row_offset, &count, &task->unk_08);
+    start = UI_ScrollList(&task->unk_0A, &row_offset, &count, &task->unk_08);
     row_y = (s8)row_offset + (task->pos.y + 0x1A);
     for (i = start; (u8)i < (u8)start + count + 9; i++) {
         if (entries[i] != 0) {

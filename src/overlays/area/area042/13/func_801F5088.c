@@ -21,7 +21,7 @@ MATCH void func_801F5088(void) {
         field                        = Actor_FindFreeField();
         g_ScratchPad.cells.halves[0] = field;
         if (field != GAME_NONE) {
-            func_801A7330(&D_801F56D0[D_801F56F8 * 13]);
+            Actor_SpawnSearchSpot(&D_801F56D0[D_801F56F8 * 13]);
         }
     }
     if (g_GameCellType == 1) {

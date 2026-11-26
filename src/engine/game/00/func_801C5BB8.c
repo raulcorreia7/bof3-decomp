@@ -1,9 +1,8 @@
 #include "game_00.h"
 
 MATCH void func_801C5BB8(void) {
-    u8* flags;
-    /* FAKE: pin scroll cell pointer to v0. */
-    FAKE_REG(s32*, value, "$2");
+    u8*  flags;
+    s32* value;
 
     if (g_AreaCameraMoving == 0) {
         flags = &D_80143FBC;

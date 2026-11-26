@@ -4,13 +4,16 @@
 __asm__(".include \"include/match/macro.inc\"\n");
 #endif
 
-MATCH void func_801EEC04(void) {
-    Callback handlers[2] = {func_801EEC5C, func_801EED90};
+/* BMagic_IntimidateUpdate */
+/* func_801EEC04 */
+MATCH void BMagic_IntimidateUpdate(void) {
+    Callback handlers[2] = {BMagic_IntimidateInit, Effect_MarkDamagedOnZeroTick};
 
     SYS_DISPATCH_TASK(handlers, 1, g_Task);
 }
 
-MATCH void func_801EEC5C(void) {
+/* func_801EEC5C */
+MATCH void BMagic_IntimidateInit(void) {
     u32          i;
     u8           slot;
     PartyMember* task;
@@ -24,7 +27,7 @@ MATCH void func_801EEC5C(void) {
     task->param.unk_0B = 0;
     TASK(PartyMember)->header.mode += 1;
     for (i = 0; i < 2; i++) {
-        slot                               = Battle_AllocEffect(1, 24);
+        slot                               = Battle_AllocEffect(1, BMAGIC_EFFECT_INTIMIDATE);
         work                               = TASK(PartyMember);
         g_BattleEffects[slot].header.mode  = 0;
         g_BattleEffects[slot].unk_04       = i;
@@ -44,20 +47,22 @@ MATCH void func_801EEC5C(void) {
 /* func_801EEDF0 */
 #include "overlays/bmagic/shared/BMagic_DispatchEffectMode.h"
 
-MATCH void func_801EEE34(void) {
-    SYS_DISPATCH_BYTE(D_801F0990, TASK(PartyMember)->header.step);
+/* func_801EEE34 */
+MATCH void BMagic_IntimidateStreakUpdate(void) {
+    SYS_DISPATCH_BYTE(g_BMagicIntimidateStreakSteps, TASK(PartyMember)->header.step);
     if (TASK(PartyMember)->unk_04 != 0) {
         if (TASK(PartyMember)->header.flags != 0 && TASK(PartyMember)->header.step != 0) {
-            func_801EF4EC();
+            BMagic_IntimidateDrawStreakNarrow();
         }
     } else {
         if (TASK(PartyMember)->header.flags != 0 && TASK(PartyMember)->header.step != 0) {
-            func_801EFA34();
+            BMagic_IntimidateDrawStreakWide();
         }
     }
 }
 
-MATCH void func_801EEEEC(void) {
+/* func_801EEEEC */
+MATCH void BMagic_IntimidateStreakPlace(void) {
     PartyMember* target;
     u8           battler;
     u8           type;
@@ -112,7 +117,8 @@ MATCH void func_801EEEEC(void) {
     TASK(PartyMember)->header.step++;
 }
 
-MATCH void func_801EF148(void) {
+/* func_801EF148 */
+MATCH void BMagic_IntimidateStreakFly(void) {
     VECTOR       pos;
     PartyMember* target;
     PartyMember* battler;
@@ -151,7 +157,7 @@ MATCH void func_801EF148(void) {
         Battle_ApplyDamageFlags(g_Battle.target_selector, 0x10);
     }
     if (TASK(PartyMember)->header.step == 2) {
-        slot                               = Battle_AllocEffect(1, 24) & BYTE_MASK;
+        slot                               = Battle_AllocEffect(1, BMAGIC_EFFECT_INTIMIDATE) & BYTE_MASK;
         battler                            = g_BattleEffectBattler;
         g_BattleEffects[slot].header.mode  = 1;
         g_BattleEffects[slot].target.party = battler;
@@ -162,7 +168,8 @@ MATCH void func_801EF148(void) {
     }
 }
 
-MATCH void func_801EF3D8(void) {
+/* func_801EF3D8 */
+MATCH void BMagic_IntimidateStreakSlide(void) {
     u8 timer;
 
     if (TASK(PartyMember)->timer < 8U) {
@@ -181,9 +188,8 @@ MATCH void func_801EF3D8(void) {
 /* func_801EF484 */
 #include "overlays/bmagic/shared/Effect_EndTrail.h"
 
-/* Draws the trail as a ribbon of POLY_G4 quads two units wide either side of each segment heading, from the first
- * recorded point to the effect timer, the shade falling by 12 per segment. */
-MATCH void func_801EF4EC(void) {
+/* func_801EF4EC */
+MATCH void BMagic_IntimidateDrawStreakNarrow(void) {
     POLY_G4* prim;
     s32      tpage;
     s32      i;
@@ -237,9 +243,8 @@ MATCH void func_801EF4EC(void) {
     GFX_ADD_DITHERED_DRAW_MODE(BMAGIC_LAYER_OVER_BATTLERS, tpage);
 }
 
-/* Draws the trail as a ribbon twelve units wide in two passes, one side of the centreline each: the outer edge near
- * black, the centreline shaded 0x61 falling by 12 per segment on one side and 0x81 falling by 16 on the other. */
-MATCH void func_801EFA34(void) {
+/* func_801EFA34 */
+MATCH void BMagic_IntimidateDrawStreakWide(void) {
     POLY_G4* prim;
     s32      tpage;
     s32      i;
@@ -336,12 +341,13 @@ MATCH void func_801EFA34(void) {
 /* func_801F03A0 */
 #include "overlays/bmagic/shared/Effect_ClearTrail.h"
 
-MATCH void func_801F0488(void) {
+/* func_801F0488 */
+MATCH void BMagic_IntimidateImpactUpdate(void) {
     g_Scripts = BMAGIC_SCRIPT_TABLE;
-    SYS_DISPATCH_BYTE(D_801F09A0, TASK(PartyMember)->header.step);
+    SYS_DISPATCH_BYTE(g_BMagicIntimidateImpactSteps, TASK(PartyMember)->header.step);
     if (TASK(PartyMember)->header.flags != 0) {
         Battle_ProjectRange();
-        func_801F075C();
+        BMagic_IntimidateDrawImpactBurst();
         if (TASK(PartyMember)->header.step < 3) {
             Area_AddGridActor();
         }
@@ -349,7 +355,8 @@ MATCH void func_801F0488(void) {
     g_Scripts = AREA_SCRIPT_TABLE;
 }
 
-MATCH void func_801F0540(void) {
+/* func_801F0540 */
+MATCH void BMagic_IntimidateImpactPlace(void) {
     TASK(PartyMember)->unk_25       = 0x1D;
     TASK(PartyMember)->unk_26       = 0;
     TASK(PartyMember)->unk_27       = 0xA0;
@@ -368,7 +375,8 @@ MATCH void func_801F0540(void) {
     TASK(PartyMember)->header.step += 1;
 }
 
-MATCH void func_801F0648(void) {
+/* func_801F0648 */
+MATCH void BMagic_IntimidateImpactRise(void) {
     u8 timer;
 
     Script_AnimStepOnce();
@@ -379,7 +387,8 @@ MATCH void func_801F0648(void) {
     }
 }
 
-MATCH void func_801F06B0(void) {
+/* func_801F06B0 */
+MATCH void BMagic_IntimidateImpactPlay(void) {
     Script_AnimStepOnce();
     if (Script_AnimStepOnce() != 0u) {
         TASK(PartyMember)->header.step = TASK(PartyMember)->header.step + 1;
@@ -388,7 +397,8 @@ MATCH void func_801F06B0(void) {
 
 #include "overlays/bmagic/shared/Effect_TickOnTimerZero.h"
 
-MATCH void func_801F075C(void) {
+/* func_801F075C */
+MATCH void BMagic_IntimidateDrawImpactBurst(void) {
     POLY_G3* prim;
     s32      i;
     s32      tpage;

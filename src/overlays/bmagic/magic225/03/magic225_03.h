@@ -6,25 +6,31 @@
 #include "overlays/bmagic/bmagic.h"
 #include "overlays/battle/battle/15/battle_15.h"
 
-/* The step table the effect handler copies onto its stack by value, as retail does. */
-typedef struct Magic225Steps {
-    Callback steps[4];
-} Magic225Steps;
+/* The handlers of the task by header.mode, copied onto the stack by value as retail does. */
+#define BMAGIC_TEMPTATION_MODE_COUNT 4
 
-extern s32           D_1F80000C;
-extern Magic225Steps D_801EEC04;
-/* The scratchpad base as words: func_801EF7D4 stages its two radii and its shade there. */
-extern s32           D_1F800000_WORD[];
-/* The RGB of each of the four corner glows func_801EF7D4 draws. */
-extern u8            D_801F038C[][3];
-extern Callback      D_801F0398[];
-extern Callback      D_801F03AC[];
-/* The effect slot table BMagic_AllocEffect scans, and its row count. */
-extern BattleEffect  D_801F03BC[];
-#define BMAGIC_EFFECT_SLOTS D_801F03BC
+typedef struct BMagicTemptationModes {
+    Callback modes[BMAGIC_TEMPTATION_MODE_COUNT];
+} BMagicTemptationModes;
+
+extern s32                   D_1F80000C;
+/* D_801EEC04 */
+extern BMagicTemptationModes g_BMagicTemptationModes;
+/* The scratchpad base as words: BMagic_TemptationDrawGlow stages its two radii and its shade there. */
+extern s32                   D_1F800000_WORD[];
+/* D_801F038C */
+extern u8                    g_BMagicTemptationGlowColors[][3];
+/* D_801F0398 */
+extern Callback              g_BMagicTemptationFlashSteps[];
+/* D_801F03AC */
+extern Callback              g_BMagicTemptationActorSteps[];
+/* D_801F03BC: the effect slot table BMagic_AllocEffect scans, and its row count. */
+extern BattleEffect          g_BMagicTemptationActors[];
+#define BMAGIC_EFFECT_SLOTS g_BMagicTemptationActors
 #define BMAGIC_EFFECT_COUNT 32
 
-void func_801EF7D4(s32 x, s32 y, s32 radius, s32 color);
+/* func_801EF7D4 */
+void BMagic_TemptationDrawGlow(s32 x, s32 y, s32 radius, s32 color);
 
 /* Mark the target and every unblocked battler on the selected side with MARK:
  * party slots below BATTLE_PARTY_CHARACTERS_COUNT, enemy rows from it. A statement

@@ -13,9 +13,11 @@ Effect_StartPlaying = { addr = 0x801EEE94, type = "func", source = "Raises BATTL
 BMagic_DispatchEffectMode = { addr = 0x801EEEC8, type = "func", source = "Runs the handler that header.mode (byte 0x01) selects from the effect handlers of magic103." }
 BMagic_SimoonDomeUpdate = { addr = 0x801EEF0C, type = "func", source = "Runs the dome's step and draws the dome." }
 BMagic_SimoonDomePlace = { addr = 0x801EEF94, type = "func", source = "Moves the dome onto the selected battler, clears its counters and steps." }
+BMagic_SimoonDomeGrow = { addr = 0x801EEFF4, type = "func", source = "Dome step 1: applies the hit at counter 4, grows the dome by 0x1C per frame and steps at 8." }
 BMagic_SimoonDomeEnd = { addr = 0x801EF094, type = "func", source = "Widens the dome by 4 per frame for 40 frames, then lowers the battler's ticker and resets the effect." }
 Effect_SetActorMatrix = { addr = 0x801EF128, type = "func", source = "Sets the actor's GTE matrix from its coordinates and half its vertical span, times the camera in magic103 (Simoon)." }
 BMagic_SimoonDrawDome = { addr = 0x801EF1D8, type = "func", source = "Draws the textured dome as eight bands of 32 additive quads; the texture scrolls with the timer and each band lights in as the counter passes it." }
+BMagic_SimoonDrawRing = { addr = 0x801EF7CC, type = "func", source = "Draws a ring band of 32 additive quads behind the battlers between two radii: the first, -6 times (counter + 224), is grey by 0x29 less the counter (byte 0x09), the second is the stale scratch cell 1 and black. Nothing calls it." }
 BMagic_SimoonGlowUpdate = { addr = 0x801EFB10, type = "func", source = "Runs the glow's step and draws it once it has started." }
 BMagic_SimoonGlowPlace = { addr = 0x801EFB88, type = "func", source = "After the delay places the glow at its offset from the selected battler and steps." }
 BMagic_SimoonGlowGrow = { addr = 0x801EFC70, type = "func", source = "Raises the glow's timer by 2 per frame for 8 frames, then steps." }

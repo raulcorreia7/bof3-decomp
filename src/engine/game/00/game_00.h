@@ -245,19 +245,6 @@ typedef struct AreaActionFadeSteps {
     Callback steps[AREA_ACTION_FADE_STEP_COUNT];
 } AreaActionFadeSteps;
 
-/* A spinning quad at 0x800E4800 + n * 0x38: a centre, a random rotation and four corner offsets that
- * func_8019D8C0 rotates and writes out as screen vertices. */
-typedef struct SpinQuad {
-    Pos3s   pos;
-    u8      unk_06[0x0A];
-    SVECTOR rotation; /* 0x10 */
-    SVECTOR corners[4];
-} SpinQuad;
-
-ASSERT_OFFSET(SpinQuad, rotation, 0x10);
-ASSERT_OFFSET(SpinQuad, corners, 0x18);
-ASSERT_SIZE(SpinQuad, 0x38);
-
 /* Route step handler: advances one script cursor and reports a byte result. */
 typedef s32 (*RouteStepCallback)(u8* cursor);
 
@@ -291,7 +278,7 @@ extern u16 D_1F80000E; /* 0x1F80000E */
 extern s8  D_800E4D40; /* 0x800E4D40 */
 extern s16 D_800E4D42; /* 0x800E4D42 */
 extern u8  D_80143BB1;
-/* A unit that must keep the read where it is written (func_801A68C0) defines
+/* A unit that must keep the read where it is written (Actor_SpawnFromDefRow) defines
  * FAKE_DECL_GAME_AREA_ID_VOLATILE before its first include. */
 #ifdef FAKE_DECL_GAME_AREA_ID_VOLATILE
 extern volatile u16 g_GameAreaId;
@@ -369,7 +356,7 @@ extern s32                 D_801468C4;
  * The member form shares one slot offset between the stores and shortens each function by 0x34 bytes. */
 extern u8                  D_801468FF;
 extern u8                  D_80146900[ENTITY_MAX][ACTOR_SIZE]; /* 0x80146900 */
-/* FAKE: column views of g_Actors for Actor_SpawnPartyFromRecord and func_801A68C0, the only forms that match them. */
+/* FAKE: column views of g_Actors for Actor_SpawnPartyFromRecord and Actor_SpawnFromDefRow, the only forms that match them. */
 extern u16                 D_80146904[ENTITY_MAX][ACTOR_SIZE / 2];       /* Actor.unk_7C */
 extern s32                 g_ActorWalkDestX[ENTITY_MAX][ACTOR_SIZE / 4]; /* Actor.walk_dest_x */
 extern s32                 g_ActorWalkDestY[ENTITY_MAX][ACTOR_SIZE / 4]; /* Actor.walk_dest_y */
@@ -581,58 +568,17 @@ void    func_8019A6AC(void);
 void    func_8019A7D4(void);
 void    func_8019A804(void);
 void    func_8019A848(void);
-void    func_8019A8B4(void);
-void    func_8019A904(void);
-void    func_8019AA44(void);
-void    func_8019AAFC(void);
-void    func_8019AB5C(void);
-void    func_8019AC34(void);
-void    func_8019AC84(void);
-void    func_8019ACF4(void);
-void    func_8019AD70(void);
-void    func_8019ADA4(void);
-void    func_8019ADE8(void);
-void    func_8019AF1C(void);
-void    func_8019B024(void);
-void    func_8019B0EC(void);
 void    func_8019B10C(void);
 void    func_8019B150(void);
 void    func_8019B1E8(void);
 void    func_8019B284(void);
-void    func_8019B364(void);
-void    func_8019B3A8(void);
-void    func_8019B4A0(void);
 void    func_8019B704(void);
-void    func_8019BBA4(void);
-void    func_8019BE28(void);
-void    func_8019BEFC(void);
-void    func_8019BF78(void);
-void    func_8019BFD4(void);
-bool    func_8019C028(void);
-void    func_8019C124(s32 step_byte);
-s32     func_8019C1E4(void);
-s32     func_8019C4F0();
 void    func_8019C620(void);
 void    func_8019C664(void);
 void    func_8019C794(void);
 void    func_8019C910(void);
 void    func_8019C954(void);
 u8      func_8019CAB4(void);
-void    func_8019CB94(void);
-void    func_8019CBD8(void);
-void    func_8019CCB8(void);
-void    func_8019CEDC(void);
-void    func_8019CFCC(void);
-bool    func_8019D054(s32 point_x, s32 point_y);
-s32     func_8019D20C(s16 map_x, s16 map_y);
-void    func_8019D270(void);
-void    func_8019D4BC(void);
-void    func_8019D648(void);
-void    func_8019D800(void);
-void    func_8019D8C0(SpinQuad* quad, s16* out);
-void    func_8019D9C0(void);
-s32     func_8019DAA0(s32* spawn_record, s16 spawn_offset, u8 spawn_count);
-void    func_8019DC6C(void);
 void    func_8019DDCC(void);
 void    func_8019DE10(void);
 void    func_8019DE54(void);
@@ -672,60 +618,20 @@ void    func_8019FF88(s32 entry_mode, s32 entry_index, s32 entry_flags);
 void    func_801A02E8(void);
 u8      func_801A0348(s16 map_x, s16 map_y);
 void    func_801A0380(s16 x, s16 y, u16 type);
-void    func_801A0AE4(Actor* record);
-void    func_801A0CFC(Actor* entity);
-void    func_801A0F24(Actor* record);
-void    func_801A114C(Actor* record);
-void    func_801A1384(void* entity);
 s32     func_801A17A0(u8* entry_record);
-void    func_801A1A24(u8* record);
-bool    func_801A1A58(Actor* actor);
 s32     func_801A1BC0(Actor* record);
 s32     func_801A1C5C(s32 x, s32 y, s32 route, s32 unused);
 s32     func_801A1ED8(s32 x, s32 y, s32 route, s32 unused);
 s32     func_801A21EC(s32 x, s32 y);
 s32     func_801A223C(s32 x, s32 y);
-s32     func_801A225C(s32 unused, s32 divisor, s32 flag_bits);
-s32     func_801A22CC(Actor* value_a, s32 value_b, u8 flag_bits);
-s32     func_801A239C(Actor* value_a, s32 value_b, u8 flag_bits);
-s32     func_801A246C(s32 value_a, s32 value_b, s32 flag_bits);
-void    func_801A271C(void* record);
 /* Kept (): retail callers load $a0 in the jal delay slot (`addiu a0,s0,116`) and the callee never reads it; with (void)
- * that instruction is dropped (Area_SetXFixed) or the frame shrinks by 8 bytes (func_801A1384). */
-void    func_801A275C(void* unused);
-void    func_801A2788(s32 step_index);
+ * that instruction is dropped (Area_SetXFixed) or the frame shrinks by 8 bytes (Actor_RunRoute). */
 void    func_801A27C4(Actor* entity);
-u8      func_801A2A04(Actor* entity);
 void    func_801A2AE4(Actor* entity, u8 route_flag);
-u8      func_801A2C94(Actor* actor);
-u8      func_801A2DB4(Actor* entity);
-u8      func_801A2ED4(Actor* entity, u8 route_step);
 void    func_801A3080(Actor* actor, u8 facing);
-void    func_801A3410(void* work_index);
 void    func_801A3648(void);
 void    func_801A386C(void);
-bool    func_801A3AC8(Actor* record);
-void    func_801A3B7C(Actor* entity);
-u8*     func_801A42F0(u8* cursor, s8* flag, u8* counter);
-u8*     func_801A4374(u8* cursor, s8* flag, u8* counter);
-u8*     func_801A4640(u8* cursor);
-u8*     func_801A46E8(u8* cursor);
-void    func_801A4914(void);
-void    func_801A4B80(s32 index);
-void    func_801A50C0(u8* script);
-void    func_801A5400(u8* script);
-void    func_801A57F0(u8* script);
-void    func_801A5B78(u8* script);
-void    func_801A5EFC(u8* script);
-void    func_801A623C(u8* script);
-void    func_801A68C0(u8* script);
-void    func_801A6F58(u8* script);
 s8      func_801A79A4(s32 handler_x, s32 handler_y);
-void    func_801A7CE8(void);
-void    func_801A7E54(void);
-void    func_801A839C(void);
-void    func_801A83DC(void);
-void    func_801A852C(void);
 s32     func_801A8714(void);
 s8      func_801A8728(s32 entry_x, s32 entry_y);
 bool    func_801A8A98(s32 candidate_x, s32 candidate_y);
@@ -742,7 +648,6 @@ void    func_801ACBC4(void);
 void    func_801ACC08(void);
 void    func_801ACCD8(void);
 s8      func_801ADC98(void);
-void    func_801ADCF4(u8 actor_slot);
 /* func_801AF270 */
 /* func_801AF494 */
 
@@ -783,63 +688,9 @@ void  func_801B6418(void);
 /* No prototype: the retail callers pass leftover register values the callee ignores. */
 bool  func_801B6470();
 bool  func_801B6674(void);
-void  func_801B69C0(void);
-void  func_801B6A04(void);
-void  func_801B6AB0(void);
-void  func_801B6BC8(void);
-void  func_801B6F1C(void);
-void  func_801B6FDC(void);
-void  func_801B7024(void);
-void  func_801B707C(void);
-void  func_801B70D4(void);
-void  func_801B726C(void);
-void  func_801B72B0(void);
-void  func_801B7344(void);
-void  func_801B73B0(void);
-void  func_801B73F4(void);
-void  func_801B744C(void);
-void  func_801B7658(void);
-void  func_801B76F4(void);
-void  func_801B781C(void);
-void  func_801B78B4(void);
-void  func_801B790C(void);
-void  func_801B7950(void);
-void  func_801B7988(void);
-void  func_801B79F8(void);
-void  func_801B7B54(void);
-void  func_801B7C10(void);
-void  func_801B7C58(void);
-void  func_801B7CA0(void);
-void  func_801B7D00(void);
-void  func_801B7D44(void);
-void  func_801B7D84(void);
-void  func_801B7DC0(void);
-void  func_801B7DFC(void);
-void  func_801B7E38(void);
-void  func_801B7E74(void);
-void  func_801B7EF0(void);
-void  func_801B7FE0(void);
-void  func_801B80B4(void);
-void  func_801B81EC(void);
-void  func_801B8234(void);
-void  func_801B828C(void);
-void  func_801B830C(void);
-void  func_801B8394(void);
-void  func_801B8578(void);
-void  func_801B85C0(void);
-void  func_801B870C(void);
-void  func_801B876C(void);
-void  func_801B87B8(void);
-void  func_801B8A0C(void);
 void  func_801B8A9C(void);
 bool  func_801B8C64(s32 pos_x, s32 pos_y, s16* distance_out, s32 probe_mode);
 bool  func_801B8D18(void);
-void  func_801B9048(void);
-void  func_801B90A0(void);
-void  func_801B9100(void);
-void  func_801B91CC(void);
-void  func_801B9210(void);
-void  func_801B9478(void);
 s32   func_801B9598(void);
 s32   func_801B95E0(void);
 u8    func_801B9F08(u8 arg0, u8 arg1, s8 arg2);
@@ -888,11 +739,8 @@ void  func_801C2018(void);
 void  func_801C22D8(void);
 bool  func_801C27E0(s8 tuning_delta);
 bool  func_801C2894(s8 tuning_delta);
-s32   func_801C2AAC(void);
-s32   func_801C2B4C(void);
 void  func_801C3154(void);
 void  func_801C3204(void);
-s32   func_801C364C(s32 wanted_code, s32 cell_code, s32 find_facing);
 bool  func_801C3790(s32 mode_byte);
 bool  func_801C37DC(s32 mode_byte);
 void  func_801C3828(void);
@@ -1316,7 +1164,7 @@ static inline void GameRunMapLoadHandshake(void) {
     Area_RunFrame();
 }
 
-/* Add the flag-selected step to the shared counter byte. */
+/* Adds step moves to the actor's move counter when bit 0 of g_EncounterSteps changed since the last actor update; with bit 1 set it sets the move timer while the counter is not 0. */
 static inline s32 Game_AddStepByFlag(s32 step, Actor* actor, s32 value_b, u8 flag_bits) {
     s32 bit0;
     s32 flags;
@@ -1369,13 +1217,13 @@ static inline void AreaAction_Roll(s32 actor_slot) {
             case 6:
                 Actor_SpawnSceneActor(1);
                 Party_AddZenny(2, 0);
-                func_801ADCF4((u8)((s32)(-(((s32)GAME_WORK_AREA_PTR - (s32)g_Actors) * 0xD79435E5)) >> 3));
+                Actor_SpawnToss((u8)((s32)(-(((s32)GAME_WORK_AREA_PTR - (s32)g_Actors) * 0xD79435E5)) >> 3));
                 TASK(Actor)->unk_04 = 1;
                 break;
             case 7:
                 Actor_SpawnSceneActor(1);
                 Party_AddZenny(5, 0);
-                func_801ADCF4((u8)((s32)(-(((s32)GAME_WORK_AREA_PTR - (s32)g_Actors) * 0xD79435E5)) >> 3));
+                Actor_SpawnToss((u8)((s32)(-(((s32)GAME_WORK_AREA_PTR - (s32)g_Actors) * 0xD79435E5)) >> 3));
                 TASK(Actor)->unk_04 = 2;
                 break;
             default:

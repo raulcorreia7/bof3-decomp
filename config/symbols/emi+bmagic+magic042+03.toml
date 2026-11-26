@@ -5,7 +5,22 @@ Battle_AllocEffect = { addr = 0x801E590C, alias = true, source = "Claims a free 
 Effect_Reset = { addr = 0x801E5988, type = "func", source = "Clears every timer, state and flag byte of the shared BattleEffect work record; every effect countdown calls it first. battle/03 owns the body." }
 g_BattleEffectBattler = { addr = 0x801EB4E0, source = "the battler the running effect acts on; Battle_UpdateEffects stores it for each effect step (emi/battle/battle/03 owns the cell)" }
 g_BattleEffects = { addr = 0x801EC330, alias = true, source = "Battle effect work records (stride 0x78); Battle_AllocEffect claims a free one by setting bit 0 of header.flags." }
-D_801EEC04 = { addr = 0x801EEC04, type = "Magic042Steps", source = "Step handlers of magic042 (Counter), run by header.step (byte 0x02) from func_801EEDE8." }
-Effect_MarkDamagedOnZeroTick = { addr = 0x801EED44, type = "func", source = "When the effect ticker (byte 0x0B) is zero marks the battlers of the target selector damaged, raises BATTLE_STATE_EFFECT_PLAYING and resets the effect in magic042 (Counter, Minds Eye)." }
+g_BMagicBurstFlareSteps = { addr = 0x801EEC04, source = "The five steps of the flare: start, open, lengthen, grow, end." }
+BMagic_BurstUpdate = { addr = 0x801EEC18, type = "func", source = "Runs the task's mode: 0 the init, 1 the wait that ends the spell once the live-effect count is zero." }
+BMagic_BurstInit = { addr = 0x801EEC70, type = "func", source = "Takes the effect battler's facing and position, starts the flare effect on it, counts it as live and plays the sound." }
+Effect_MarkDamagedOnZeroTick = { addr = 0x801EED44, type = "func", source = "When the live-effect count (byte 0x0B) is zero marks the battlers of the target selector damaged, raises BATTLE_STATE_EFFECT_PLAYING and resets the effect in magic042 (Counter, Minds Eye)." }
 BMagic_DispatchEffectMode = { addr = 0x801EEDA4, type = "func", source = "Runs the handler that header.mode (byte 0x01) selects from the effect handlers of magic042." }
+BMagic_BurstFlareUpdate = { addr = 0x801EEDE8, type = "func", source = "Runs the flare's step and, once started, draws its rays with the counter as length, its spokes in three phases and its glow with the timer." }
+BMagic_BurstFlareStart = { addr = 0x801EEF08, type = "func", source = "Step 0 of g_BMagicBurstFlareSteps: takes the effect battler's facing and position, offsets the screen point by the target's pose, clears the counters." }
+BMagic_BurstFlareOpen = { addr = 0x801EEFB8, type = "func", source = "Raises the phase (byte 0x0B) and the timer by 1; once the timer reaches 4 steps." }
+BMagic_BurstFlareLengthen = { addr = 0x801EF024, type = "func", source = "Raises the phase by 1 and the counter (byte 0x09, the ray length) by 8; once the counter reaches 80 steps." }
+BMagic_BurstFlareGrow = { addr = 0x801EF090, type = "func", source = "Raises the phase by 1, the counter by 4 and the timer (the spoke and glow size) by 4; once the timer reaches 32 steps." }
+BMagic_BurstFlareEnd = { addr = 0x801EF118, type = "func", source = "Raises the phase by 1, lowers the counter by 12 while it is not zero and the timer by 4; at zero lowers the effect battler's live-effect count and resets the effect." }
+BMagic_BurstFlareOffset = { addr = 0x801EF1B0, type = "func", source = "Projects the range and shifts the flare's screen point by the offset the target's pose and facing give." }
+BMagic_BurstDrawRays = { addr = 0x801EF380, type = "func", source = "Draws a bright ray of the full radius at each of two opposite angles, start and start + 16 of 32 round the circle, with a dimmer pair two thirds as long one pixel above and below each." }
+BMagic_BurstDrawSpokes = { addr = 0x801EF71C, type = "func", source = "Draws four yellow rays from the effect point at quarter turns, the first at angle start of 128 round the circle." }
+BMagic_BurstDrawGlow = { addr = 0x801EF920, type = "func", source = "Draws a sixteen-part additive fan of grey 0x60 round the effect point, its radius half the timer plus a random 0 to 3." }
 g_BMagicEffectModes = { addr = 0x801EFB70, source = "Handlers of magic042 (Counter, Minds Eye), run by header.mode (byte 0x01)." }
+g_BMagicBurstCharacterOffsets = { addr = 0x801EFB74, source = "The screen offset of the flare by character, for the two facing pairs; the offset step indexes it by character id." }
+g_BMagicBurstFormOffsets = { addr = 0x801EFBCC, source = "The screen offset of the flare by dragon-form type, for the two facing pairs." }
+g_BMagicBurstFormTypes = { addr = 0x801EFC24, source = "The offset row of each dragon form (0 to 10), indexed by g_Battle.dragon_form." }

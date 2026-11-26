@@ -52,12 +52,13 @@
 void func_8019625C(void);
 /* func_80199440 */
 void func_80199440(void);
+/* Scene_StartToggleLock */
 /* func_8019ABB0 */
-void func_8019ABB0(s32 mode);
+void Scene_StartToggleLock(s32 frames);
 /* func_8019F75C */
-void func_8019F75C(void);
+void Actor_ShatterStart(void);
 /* func_8019F818 */
-void func_8019F818(Actor* actor);
+void Actor_ShatterRun(Actor* actor);
 /* Area_RequestLinkAtCell */
 /* func_801A0048 */
 bool Area_RequestLinkAtCell(s32 cell_x, s32 cell_y);
@@ -67,15 +68,19 @@ void func_801A0514(void);
 void func_801A061C(void);
 /* func_801A18C8 */
 void func_801A18C8(Actor* record);
+/* Actor_IsAheadBlocked */
 /* func_801A1AE4 */
-bool func_801A1AE4(Actor* arg);
+bool Actor_IsAheadBlocked(Actor* arg);
 /* func_801A3A08 */
 void func_801A3A08(void);
+/* Actor_TurnRampStep */
 /* func_801A3D1C */
-void func_801A3D1C(void* unused);
-void func_801A6C98(u8* record);
+void Actor_TurnRampStep(void* unused);
+/* func_801A6C98 */
+void Actor_SpawnPartyFromDefRow(u8* record);
+/* Actor_SpawnSearchSpot */
 /* func_801A7330 */
-void func_801A7330(const volatile u8* data);
+void Actor_SpawnSearchSpot(const volatile u8* data);
 u8   func_801ABD68(s32 pos_x, s32 pos_y, s32 step_count, void* deltas);
 /* func_801AC1DC */
 void func_801AC1DC(s32* out, u8 selector);
@@ -85,8 +90,9 @@ void UI_CursorDrawName(s32 line_x, s32 line_y, s32 line_length, s32 line_mode);
 s32  func_801AF390(s16 x, s16 y, u8* table, s32 flags);
 /* func_801AF5B0 */
 u8   func_801AF5B0(s32 item_category, s32 character_index, s32 ability_type);
+/* UI_ScrollList */
 /* func_801AFD10 */
-s32  func_801AFD10(u8* first_row, u8* scroll_y, u8* extra_rows, u8* scroll);
+s32  UI_ScrollList(u8* first_row, u8* scroll_y, u8* extra_rows, u8* scroll);
 /* MATH_TriangleWinding */
 /* func_801AFF90 */
 s16  MATH_TriangleWinding(Pos2* origin, Pos2* first_point, Pos2* second_point);

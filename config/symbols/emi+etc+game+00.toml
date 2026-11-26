@@ -7,8 +7,8 @@ jtbl_80195864 = { addr = 0x80195864, type = "Callback", source = "The switch tab
 jtbl_80195894 = { addr = 0x80195894, type = "Callback", source = "The switch table of func_801A44A4: the jump targets of its jr dispatch." }
 jtbl_80195954 = { addr = 0x80195954, type = "Callback", source = "The switch table of func_801A4BF8: the jump targets of its jr dispatch." }
 jtbl_80195990 = { addr = 0x80195990, type = "Callback", source = "The switch table of UI_PanelOpenMaster: the jump targets of its jr dispatch." }
-jtbl_801959A8 = { addr = 0x801959A8, type = "Callback", source = "The switch table of func_801A7E54: the jump targets of its jr dispatch." }
-jtbl_801959C0 = { addr = 0x801959C0, type = "Callback", source = "The switch table of func_801A7E54: the jump targets of its jr dispatch." }
+jtbl_801959A8 = { addr = 0x801959A8, type = "Callback", source = "The switch table of Scene_RunMineEntry: the jump targets of its jr dispatch." }
+jtbl_801959C0 = { addr = 0x801959C0, type = "Callback", source = "The switch table of Scene_RunMineEntry: the jump targets of its jr dispatch." }
 jtbl_801959D8 = { addr = 0x801959D8, type = "Callback", source = "The switch table of Scene_RunInn: the jump targets of its jr dispatch." }
 jtbl_80195A38 = { addr = 0x80195A38, type = "Callback", source = "The switch table of func_801A8728: the jump targets of its jr dispatch." }
 jtbl_80195CC0 = { addr = 0x80195CC0, type = "Callback", source = "The switch table of func_801A8F94: the jump targets of its jr dispatch." }
@@ -106,37 +106,121 @@ UI_PanelSlideInTaskLow = { addr = 0x801999B8, type = "func", source = "Moves the
 Actor_DispatchAll = { addr = 0x8019A0E4, type = "func", source = "Runs g_ActorTypes[type] for each of the g_SpawnedActors entries whose header.flags is set." }
 WorldMap_FindRegion = { addr = 0x8019A194, type = "func", source = "Returns the index of the WorldMapRegion whose area id equals g_GameAreaId, or WORLD_MAP_REGION_COUNT (11) when none matches." }
 WorldMap_GetPoints = { addr = 0x8019A1D4, type = "func", source = "Returns map_points of the current world map region (g_WorldMapRegions indexed by WorldMap_FindRegion); func_801B690C searches those rows by actor cell." }
-Area_GetVx = { addr = 0x8019C344, type = "func", source = "the body returns g_Task->vx" }
+Camera_PanAngleRun = { addr = 0x8019A8B4, type = "func", source = "Actor type 0x13 step: runs g_CameraAnglePanModes[mode] and asks for two camera refreshes." }
+Camera_PanAngleStart = { addr = 0x8019A904, type = "func", source = "Mode 0 of g_CameraAnglePanModes: sets the per-frame step from the camera angle to the actor's angle over its timer." }
+Camera_PanAngleStep = { addr = 0x8019AA44, type = "func", source = "Mode 1 of g_CameraAnglePanModes: adds the step to the camera angle each frame until the timer runs out." }
+Camera_PanAngleEnd = { addr = 0x8019AAFC, type = "func", source = "Mode 2 of g_CameraAnglePanModes: sets the camera angle to the target, clears the camera-moving flag and frees the actor." }
+Scene_StepToggleLock = { addr = 0x8019AB5C, type = "func", source = "Actor type 4 step: counts its timer down, then clears scene flag 28 and frees the actor." }
+Scene_StartToggleLock = { addr = 0x8019ABB0, type = "func", source = "Sets scene flag 28 and spawns the type 4 actor that clears it after its layer byte counts of frames; callers test flag 28 before toggling a scene flag." }
+Camera_PanZoomRun = { addr = 0x8019AC34, type = "func", source = "Actor type 0x31 step: runs g_CameraZoomPanModes[mode] and asks for two camera refreshes." }
+Camera_PanZoomStart = { addr = 0x8019AC84, type = "func", source = "Mode 0 of g_CameraZoomPanModes: starts the angle pan and sets the step of g_AreaCameraOffsetZ toward the actor's target." }
+Camera_PanZoomStep = { addr = 0x8019ACF4, type = "func", source = "Mode 1 of g_CameraZoomPanModes: steps the angle pan and moves g_AreaCameraOffsetZ toward its target without passing it." }
+Camera_PanZoomEnd = { addr = 0x8019AD70, type = "func", source = "Mode 2 of g_CameraZoomPanModes: sets g_AreaCameraOffsetZ to the target and ends the angle pan." }
+Actor_TossRun = { addr = 0x8019ADA4, type = "func", source = "Actor type 0x32 step: runs the toss mode table at header.mode." }
+Actor_TossStart = { addr = 0x8019ADE8, type = "func", source = "Mode 0 of the toss modes: places the actor on the source actor's position, faces it like the leader, starts its route move and launches it." }
+Actor_TossLaunch = { addr = 0x8019AF1C, type = "func", source = "Mode 1 of the toss modes: when on the ground, offscreen or in mode 0, loads the rise speed and gravity of s_ActorTossArcs[step] and advances; then moves by its speeds under gravity." }
+Actor_TossFall = { addr = 0x8019B024, type = "func", source = "Mode 2 of the toss modes: moves up by vz under gravity; past 0x80 above the ground or below it, plays a sound and advances." }
+Actor_ClearSelf = { addr = 0x8019B0EC, type = "func", source = "Frees the current actor: the last mode of the toss and prop tables." }
+Actor_RockRun = { addr = 0x8019B364, type = "func", source = "Runs the mode handler of the current rock actor (type 0x17) by header.mode through g_ActorRockModes." }
+Actor_RockStart = { addr = 0x8019B3A8, type = "func", source = "Rock mode 0: selects the scene record, saves and blocks the cell under the rock, clears the velocity, selects script 0 and enters mode 1." }
+Actor_RockWait = { addr = 0x8019B4A0, type = "func", source = "Rock mode 1: once the kick count in unk_0A is set, frees the cell and either enters the roll mode (velocity from the facing, unk_0A and unk_18/unk_1C as the friction) or ends the rock when the way ahead is blocked." }
+Actor_RockSettle = { addr = 0x8019BBA4, type = "func", source = "Rock mode 3: moves to the edge in unk_18 along vx or vy, applies gravity, then enters rest mode 5 on a free cell or end mode 4 when it hits an actor, is too fast or the cell is blocked." }
+Actor_RockEnd = { addr = 0x8019BE28, type = "func", source = "Rock mode 4 (ACTOR_ROCK_MODE_END): adds 0x4000 to both scales per frame; at a scale above 0x1FFFF with the camera still, releases the camera and clears the actor." }
+Actor_RockRest = { addr = 0x8019BEFC, type = "func", source = "Rock mode 5: counts the timer down while the camera is still, then releases the camera and returns to mode 1." }
+Actor_RockClaimCell = { addr = 0x8019BF78, type = "func", source = "Stores the cell code under the rock in param.unk_0B and sets the cell code to 0x10." }
+Actor_RockReleaseCamera = { addr = 0x8019BFD4, type = "func", source = "Sets the camera to scroll to the leader at speed 0x40 and negates g_AreaCameraHeightDelta." }
+Actor_RockHit = { addr = 0x8019C028, type = "func", source = "Marks the field actor in range as pending interaction, or sets step 1 on the party member there, then enters end mode 4; returns 0 when nothing stands at the rock." }
+Actor_RockSetTarget = { addr = 0x8019C124, type = "func", source = "Sets unk_18 to the next or current cell edge along vx or vy (the step byte selects the next edge when moving forward) and enters mode 3." }
+Actor_RockIsBlockedAhead = { addr = 0x8019C1E4, type = "func", source = "Calls Actor_RockIsPointBlocked at two facing steps from the rock position." }
+Actor_RockIsBlockedAtEdge = { addr = 0x8019C244, type = "func", source = "Calls Actor_RockIsPointBlocked at the rock position moved to the cell edge it faces." }
+Actor_RockIsPointBlocked = { addr = 0x8019C344, type = "func", source = "the body returns g_Task->vx" }
+Actor_RockIsCellBlocked = { addr = 0x8019C4F0, type = "func", source = "Nonzero for an empty map grid cell, a cell code 0xF0 within 0x100 of the rock height, or at equal height a code 0x10, 0x2x or 0xAx, or a rock below the ground." }
+Actor_BlockRun = { addr = 0x8019CB94, type = "func", source = "Runs the mode handler of the current block actor (type 0x30, the block Garr pushes) by header.mode through g_ActorBlockModes." }
+Actor_BlockStart = { addr = 0x8019CBD8, type = "func", source = "Block mode 0: faces up, sets the tint deltas to -0x80, claims the cells under the block, clears the push request and enters mode 1." }
+Actor_BlockWait = { addr = 0x8019CCB8, type = "func", source = "Block mode 1: on a push request (param, set by Garr's field task) takes Garr's facing and a 16-frame move; enters the slide mode when Actor_BlockIsPathBlocked is false, else builds the shards and enters the shatter mode." }
+Actor_BlockSlide = { addr = 0x8019CEDC, type = "func", source = "Block mode 2: adds the velocity for the 16 frames of the timer, sets scene flag 54 in the Angel Tower lower area when it rests on cell (17, 74) and clears it elsewhere, claims the cells and returns to mode 1." }
+Actor_BlockShatter = { addr = 0x8019CFCC, type = "func", source = "Block mode 3: counts the timer down, runs the shards and dust, and at zero sets scene flag 68 in the Container Yard and clears the actor." }
+Actor_BlockIsPathBlocked = { addr = 0x8019D054, type = "func", source = "Flags the field actor in range as pending interaction; returns true for a solid cell among the four around the point or when their ground heights differ." }
+Actor_BlockIsCellSolid = { addr = 0x8019D20C, type = "func", source = "Nonzero for a cell code other than 0, 0xC0, 0x20 and the 0x8x and 0xAx rows." }
+Actor_BlockClaimCells = { addr = 0x8019D270, type = "func", source = "Saves the code of each of the up to four cells under the block in its vz (a byte each), sets each cell code to 0x11 and its height-map value to 0x10." }
+Actor_BlockReleaseCells = { addr = 0x8019D4BC, type = "func", source = "Restores each cell code that Actor_BlockClaimCells saved and clears its height-map value." }
+Actor_ShatterBuildShards = { addr = 0x8019D648, type = "func", source = "For each of 24 quads of the actor's model, sets the shard centre as the mean of its four corners, the corner offsets from that centre and a direction away from the model origin." }
+Actor_ShatterSpinShards = { addr = 0x8019D800, type = "func", source = "Per frame moves each of the 24 shards by its velocity and rewrites its quad through Actor_ShatterWriteShard." }
+Actor_ShatterWriteShard = { addr = 0x8019D8C0, type = "func", source = "Sets a random rotation, rotates the four corner offsets and writes centre plus offset as the four vertices at out." }
+Actor_ShatterStartDust = { addr = 0x8019D9C0, type = "func", source = "Places eight puffs at the actor, each with a random velocity, and sets the shared puff brightness 0x40 and size 0." }
+Actor_ShatterDrawPuff = { addr = 0x8019DAA0, type = "func", source = "Draws a semi-transparent 32 by 32 texel quad centred on the projected puff." }
+Actor_ShatterRunDust = { addr = 0x8019DC6C, type = "func", source = "Draws each of the eight puffs and moves it by twice its velocity while the timer is 12 or more and the quad grows, then by its velocity while the brightness falls by 5 a frame." }
 Actor_DrawValueDigits = { addr = 0x8019F5B8, type = "func", source = "Draws the actor's unk_06 value as 8x8 digit sprites starting at (x, y) in the actor's draw layer; three field effects call it with a party member's screen position." }
+Actor_ShatterStart = { addr = 0x8019F75C, type = "func", source = "Copies the model quads to the work buffer, builds the shards, starts the dust and sets the timer to 16." }
+Actor_ShatterRun = { addr = 0x8019F818, type = "func", source = "Runs Actor_ShatterSpinShards and Actor_ShatterRunDust; the argument is unused." }
 Game_RequestAreaChange = { addr = 0x8019FA28, type = "func", source = "Requests an area change: stores the area id and entry position in g_GameEntryAreaId, g_GameEntryPosX and g_GameEntryPosY and sets g_GameStateIndex to 5." }
 Game_EnterArea = { addr = 0x8019FAA0, type = "func", source = "Enters an area: keeps the last position, starts its music, loads it when it changed, then sets up the view, party and entry walk; the one user passes the entry cell and facing." }
 Area_RequestLinkAtCell = { addr = 0x801A0048, type = "func", source = "Finds the area link at a map cell, or the first choice whose scene flag is set, and makes its destination the pending area change; returns true when no link is there." }
 Area_EncounterFindZoneOf = { addr = 0x801A0490, type = "func", source = "Returns the encounter zone entry of the given area table index whose bounds contain the cell." }
 Actor_RunInteractions = { addr = 0x801A06D8, type = "func", source = "Runs every actor's pending interaction: turns it to face the leader, dispatches its selector script and records the facing it came from." }
+Actor_RunWander = { addr = 0x801A0AE4, type = "func", source = "Mode 0 of g_ActorModes: counts the leg length in the move counter, picks a random facing at its end and turns to the first free one." }
+Actor_RunFlee = { addr = 0x801A0CFC, type = "func", source = "Mode 1 of g_ActorModes: walks as Actor_RunWander, but picks the facing farthest from the leader (Actor_PickFleeFacing) while the leader is inside the half extents of its box." }
+Actor_RunChase = { addr = 0x801A0F24, type = "func", source = "Mode 2 of g_ActorModes: walks as Actor_RunWander, but picks the facing nearest to the leader (Actor_PickChaseFacing) while the leader is inside the half extents of its box." }
+Actor_RunWanderHome = { addr = 0x801A114C, type = "func", source = "Mode 3 of g_ActorModes: walks as Actor_RunWander, but changes facing only where Actor_IsAheadInHomeBox holds for the cell ahead, else stands." }
+Actor_RunRoute = { addr = 0x801A1384, type = "func", source = "Mode 4 of g_ActorModes: runs Script_Run on row unk_77 of the area's route table; a script wait switches to mode 5, the fade flags to modes 8 and 9." }
+Actor_RunRequestScript = { addr = 0x801A1A24, type = "func", source = "Mode 6 of g_ActorModes: sets ACTOR_INTERACTION_SCRIPT_REQUEST each frame while unk_06 is not 8; Actor_SpawnSearchSpot sets this mode." }
+Actor_IsAheadInHomeBox = { addr = 0x801A1A58, type = "func", source = "Tests the cell ahead of the actor against the box of half_width and half_height around walk_dest_x and walk_dest_y." }
+Actor_IsAheadBlocked = { addr = 0x801A1AE4, type = "func", source = "True when the area cell test func_801A1BC0 rejects the cells ahead, or Actor_FindInRange or Game_GetPartySize finds an occupant there." }
 Area_CellIsBlocked = { addr = 0x801A20F8, type = "func", source = "Reports whether a map cell's terrain blocks movement." }
+Actor_PaceFree = { addr = 0x801A225C, type = "func", source = "Steps 0 to 3 of g_ActorPaceSteps: on a move request sets the timer to 0x20 over the speed and returns 1, so the actor never waits on the party." }
+Actor_PaceByPartyStep = { addr = 0x801A22CC, type = "func", source = "Step 4 of g_ActorPaceSteps: adds 1 to the move counter when bit 0 of g_EncounterSteps differs from the copy Actor_RunInteractions took." }
+Actor_PaceByPartyStepDouble = { addr = 0x801A239C, type = "func", source = "Step 5 of g_ActorPaceSteps: adds 2 to the move counter when bit 0 of g_EncounterSteps differs from the copy Actor_RunInteractions took." }
+Actor_PaceByPartyStepBit1 = { addr = 0x801A246C, type = "func", source = "Step 6 of g_ActorPaceSteps: adds 1 to the move counter when bit 1 of g_EncounterSteps differs from the copy Actor_RunInteractions took." }
 Area_SetXFixed = { addr = 0x801A253C, type = "func", source = "the body stores into g_Task->pos.x.fixed" }
+Actor_RunRouteWait = { addr = 0x801A271C, type = "func", source = "Mode 5 of g_ActorModes: counts byte 0x75 down (set by the script group SET_UNK_01), raising the script request bit each frame, then restores unk_03 as the mode." }
+Actor_StartRouteWait = { addr = 0x801A275C, type = "func", source = "Stores the mode in unk_03 and sets mode 5 (Actor_RunRouteWait); Actor_RunRoute calls it when the script left a wait in byte 0x75." }
+Actor_RunMode = { addr = 0x801A2788, type = "func", source = "Runs the g_ActorModes handler of the mode byte the script operand gives on g_CurrentActor; script control op SELECT_ROUTE calls it." }
+Actor_FindFreeFacing = { addr = 0x801A2A04, type = "func", source = "Rotates the actor's facing by 2 up to four times until Actor_IsAheadBlocked is clear; returns the facing, or 0xFF when all four are blocked." }
 Actor_TurnRandom = { addr = 0x801A2C10, type = "func", source = "Turns the current actor to a random diagonal or odd facing and flags the record." }
+Actor_PickFleeFacing = { addr = 0x801A2C94, type = "func", source = "Flee facing of Actor_RunFlee: inside the box takes Actor_PickFacingByLeaderDistance farthest, else Actor_TurnRandom and Actor_FindFreeFacing." }
+Actor_PickChaseFacing = { addr = 0x801A2DB4, type = "func", source = "Chase facing of Actor_RunChase: inside the box takes Actor_PickFacingByLeaderDistance nearest, else Actor_TurnRandom and Actor_FindFreeFacing." }
+Actor_PickFacingByLeaderDistance = { addr = 0x801A2ED4, type = "func", source = "Scores the four facings of one parity by the distance from the cell ahead to the leader's position plus its velocity; takes the smallest when route_step is 0, else the largest." }
+Actor_RunAttach = { addr = 0x801A3410, type = "func", source = "Mode 7 of g_ActorModes: copies position and angles of the actor slot Script_FindSlot(unk_18) and adds the offset row unk_1C, then runs Actor_RunRoute; script op 0xF8 writes unk_18 and unk_1C." }
 Game_FadeDispatchWhite = { addr = 0x801A3594, type = "func", source = "calls the fade-to-white step selected by the step byte" }
 Game_FadeStartWhite = { addr = 0x801A35D8, type = "func", source = "Step 0 of the D_801C8434 table, followed by func_801A3648: starts a white palette fade (GFX_PaletteAllocFade 0x1F, 0x1F, 0x1F) on the running task and clears ACTOR_FLAG_HIDDEN." }
 Game_FadeDispatchBlack = { addr = 0x801A37D4, type = "func", source = "calls the fade-to-black step selected by the step byte" }
 Game_FadeStartBlack = { addr = 0x801A3818, type = "func", source = "Step 0 of the D_801C843C table, followed by func_801A386C: starts a black palette fade (GFX_PaletteAllocFade 0, 0, 0) on the running task." }
+Actor_IsAheadOccupied = { addr = 0x801A3AC8, type = "func", source = "True when Actor_FindInRange finds an actor or Game_GetPartySize finds a party member on the cell one facing step ahead." }
+Actor_RunTurn = { addr = 0x801A3B7C, type = "func", source = "Mode 10 of g_ActorModes: waits unk_0A frames, then turns one facing toward unk_79 every 3 frames; on arrival restores unk_03 as the mode and starts the move." }
+Actor_TurnRampStep = { addr = 0x801A3D1C, type = "func", source = "Applies one frame of the current party actor's turn ramp to its angles." }
 Area_RunSetupStream = { addr = 0x801A3E50, type = "func", source = "Runs the area setup stream of an AreaLoad handler: clears the four g_PartyActors rows, runs Area_RunSetupRecords over the stream and clears the unused g_Actors entries." }
 Area_RunSetupRecords = { addr = 0x801A3F3C, type = "func", source = "the body stores into g_ScenarioState.scenario_id" }
 Area_RunSetupIf = { addr = 0x801A3FC0, type = "func", source = "Setup stream 0xF0: runs the records up to 0xFE when the area test holds, else its other branch." }
 Area_RunSetupIfNot = { addr = 0x801A4158, type = "func", source = "Setup stream 0xF1: runs the records up to 0xFE when the area test fails, else its other branch." }
+Area_RunSetupBlockStep = { addr = 0x801A42F0, type = "func", source = "Setup stream: runs the next control code or record of an if block." }
+Area_SkipSetupBlockStep = { addr = 0x801A4374, type = "func", source = "Setup stream: steps over the next control code or record of an if block without running it." }
 Area_RunSetupBranch = { addr = 0x801A4400, type = "func", source = "Runs one setup stream control record 0xF0 to 0xFA: conditional blocks and the scenario id store." }
 Area_SkipSetupBranch = { addr = 0x801A44A4, type = "func", source = "Steps over a setup stream control record without running it." }
 Area_RunSetupIfChain = { addr = 0x801A4518, type = "func", source = "Setup stream 0xF4: runs the branch of the first area test that holds; 0xF6 starts the next test, 0xF7 the default, 0xF5 ends." }
+Area_RunSetupChainBody = { addr = 0x801A4640, type = "func", source = "Setup stream: runs the records of one if-chain branch up to its 0xF8 end code." }
+Area_SkipSetupChainBody = { addr = 0x801A46E8, type = "func", source = "Setup stream: steps over the records of one if-chain branch." }
 Area_SkipSetupIf = { addr = 0x801A4798, type = "func", source = "Steps over a 0xF0 or 0xF1 setup block." }
 Area_SkipSetupIfChain = { addr = 0x801A4844, type = "func", source = "Steps over a 0xF4 setup chain." }
+Actor_StartFacingScript = { addr = 0x801A4914, type = "func", source = "Starts the animation script for the facing direction of a newly spawned map actor." }
 Actor_SetOptionFlags = { addr = 0x801A4990, type = "func", source = "the body stores into g_Task->option_flags" }
 Actor_ResetMotion = { addr = 0x801A4AA8, type = "func", source = "Clears a spawned actor's scale, roll and animation callback state." }
+Actor_TurnRampClear = { addr = 0x801A4B80, type = "func", source = "Clears the turn ramp of one party slot." }
 Area_CellSetCode = { addr = 0x801A4BC0, type = "func", source = "Writes the g_AreaCellCodes byte of the cell at (column, row); Area_CellGetCode reads the same index." }
 Area_RunSetupRecord = { addr = 0x801A4BF8, type = "func", source = "Runs one setup stream record of type 0x0 to 0xE and returns the next record." }
 Actor_SpawnFromRecord = { addr = 0x801A4D54, type = "func", source = "Spawns an actor in the next free slot from a 17-byte scene script record (scene record, position, mode, step)." }
+Actor_SpawnNoRoute = { addr = 0x801A50C0, type = "func", source = "Setup record type 1 (length 0x10): as Actor_SpawnFromRecord, but does not read byte 0x10, the route row, so the record is one byte shorter." }
+Actor_SpawnBlocker = { addr = 0x801A5400, type = "func", source = "Setup record type 8 (length 0x0C): no label, route row or extra byte pair; selects the facing script with Script_Select and sets cell code 0x10 on the cells its position covers." }
+Actor_SpawnAttached = { addr = 0x801A57F0, type = "func", source = "Setup record type 2 (length 0x13): as Actor_SpawnFromRecord, plus bytes 0x11 and 0x12 stored in unk_18 and unk_1C, the actor slot and offset row that the attach mode reads." }
+Actor_SpawnVoiced = { addr = 0x801A5B78, type = "func", source = "Setup record type 3 (length 0x12): as Actor_SpawnFromRecord, plus byte 0x11 stored in voice_flags." }
+Actor_SpawnWithAction = { addr = 0x801A5EFC, type = "func", source = "Setup record type 4 (length 0x11): as Actor_SpawnFromRecord, but byte 0x10 goes to unk_94, the handler index AreaAction_Run reads (0x7F for none), and no route row is stored." }
+Actor_SpawnBattleEntry = { addr = 0x801A623C, type = "func", source = "Spawns a battle entry actor from a type 7 setup record; the entry id is the one Battle_FindActorEntry looks up." }
 Actor_SpawnPartyFromRecord = { addr = 0x801A65A0, type = "func", source = "Spawns a party member actor from a 16-byte scene script record; loads the member sprite." }
+Actor_SpawnFromDefRow = { addr = 0x801A68C0, type = "func", source = "Setup record type 0xA (length 0x0E): takes the scene record from row script[9] of the 8-byte rows at AreaLoad offset 8 instead of searching by id; sets cell code 0x10 under the actor when its move mode is 0." }
+Actor_SpawnPartyFromDefRow = { addr = 0x801A6C98, type = "func", source = "Setup record type 0xB (length 0x0E): as Actor_SpawnFromDefRow for the g_PartyActors row script[0xB], with live flag 0xA." }
+Actor_SpawnAttachedFixedFlags = { addr = 0x801A6F58, type = "func", source = "Setup record type 5 (length 0x12): as Actor_SpawnAttached with every field after byte 2 one byte earlier; has no tint byte at 3, so it sets the tint flags to 2 and never the semi-transparent flag." }
 Area_ScrollInitRoute = { addr = 0x801A72B0, type = "func", source = "Setup stream type 0xC: starts the scroll route its byte 1 selects." }
 Area_SetEntityCallback = { addr = 0x801A72E8, type = "func", source = "Setup stream type 0xD: sets the current entity's callback index, or its word 0x7C when byte 1 is zero." }
+Actor_SpawnSearchSpot = { addr = 0x801A7330, type = "func", source = "Spawns a searchable object from a type 9 setup record: removed or opened when its searched flag is set." }
 Scene_Start = { addr = 0x801A7704, type = "func", source = "Scenario start: loads the overlay of g_ScenarioState.scenario_id, waits for its SCENA payload, then dispatches the scenario entry." }
 Scene_LoadOverlay = { addr = 0x801A7804, type = "func", source = "Streams the overlay slot 661 + scenario id and waits for the loader; Scene_Start calls it before the scenario handler runs." }
 Game_ScenarioUpdate = { addr = 0x801A782C, type = "func", source = "Calls entry_00 of the g_ScenarioHandlers handler table of the active scenario, then Game_UpdateScene." }
@@ -147,9 +231,14 @@ Game_ScenarioCall = { addr = 0x801A7A34, type = "func", source = "Calls entry_10
 Game_UpdateScene = { addr = 0x801A7BF0, type = "func", source = "Runs the g_SceneSteps callback selected by the scene state byte D_801448EA." }
 Scene_ResetEventState = { addr = 0x801A7C2C, type = "func", source = "Resets the scene state bytes and copies the 16-byte D_801C84AC table to g_SceneEventFlags." }
 Scene_UpdateEvent = { addr = 0x801A7CAC, type = "func", source = "Runs the g_SceneEvents callback selected by the scene event byte D_801448EB." }
+Scene_StepIdle = { addr = 0x801A7CE8, type = "func", source = "Does nothing: slot 0 (SCENE_EVENT_NONE) of g_SceneEvents." }
 UI_PanelOpenMaster = { addr = 0x801A7CF0, type = "func", source = "Scene event 4: loads SISYOU with EMI_ArchiveLoad(EMI_SLOT_SISYOU) and runs the master menu through func_801D25D8." }
+Scene_RunMineEntry = { addr = 0x801A7E54, type = "func", source = "Scene event 5 (SCENE_EVENT_MINE_ENTRY): waits for the script, sets up the party, then requests the Dauna Mine area picked by the event selection (zombie dragon, Bais or intro)." }
 Scene_RunInn = { addr = 0x801A802C, type = "func", source = "Scene event 10: calls UI_ModeSet, plays an XA stream and sets g_GameEntryState to 7, the shop entry state." }
 UI_MessageRunArea = { addr = 0x801A82F8, type = "func", source = "Starts area message 0xD8, waits until g_GameStateIndex leaves 2, then clears the script-active flag and the scene event byte D_801448EB." }
+WorldMap_RunLocationGuide = { addr = 0x801A839C, type = "func", source = "Scene event 27: runs the location guide handler of the world map region the leader stands in." }
+Scene_RunGeneFound = { addr = 0x801A83DC, type = "func", source = "Scene event 44: sets the found gene's flag, shows the found-gene message with its name and plays the XA stream with the BGM paused until both finish." }
+WorldMap_RunFairyEntry = { addr = 0x801A852C, type = "func", source = "Scene event 55: shows the entry message, then requests the Fairy Village area picked from the highest set progress flag (185 down)." }
 Scene_DispatchObject = { addr = 0x801A86D4, type = "func", source = "Runs the g_SceneObjects callback selected by unk_7A of the actor, with the actor and g_SceneEventFlags." }
 Game_CallArea = { addr = 0x801A8CB4, type = "func", source = "Finds the entry of g_GameAreaId in the 28-entry area handler table g_AreaHooks and calls its handler with the two coordinates; returns 0 when the area has none. Called by Game_ScenarioCall." }
 Script_Run = { addr = 0x801A8D38, type = "func", source = "Runs the actor script record at the cursor: flow ops first, then the group handler its high nibble selects; returns the facing selection." }
@@ -183,6 +272,7 @@ AreaAction_ShowFind = { addr = 0x801AD90C, type = "func", source = "Shows the ze
 AreaAction_WaitMessageFade = { addr = 0x801AD9C4, type = "func", source = "Waits for the find message to close, then starts the fade." }
 AreaAction_Fade = { addr = 0x801AD9F0, type = "func", source = "Brightens the actor's tint back, then ends the field action." }
 Actor_SpawnSceneActor = { addr = 0x801ADAC0, type = "func", source = "spawns the type-0x19 scene actor at the task position with its selection from func_801ADC98 and links it to the task" }
+Actor_SpawnToss = { addr = 0x801ADCF4, type = "func", source = "Spawns a type 0x32 actor that starts at the given actor; AreaAction_RollFade calls it after paying Zenny." }
 Char_ApplyLevelUps = { addr = 0x801ADDD4, type = "func", source = "Raises the character to the level its exp reaches: adds each gained level's growth to the base stats (capped at 999), grants its abilities and rebuilds the stats." }
 UI_CursorDrawName = { addr = 0x801AE214, type = "func", source = "The underline that marks the current letter of a name entry: a line at the cursor column, bright when the mode is 0 (the start menu and commu02 name entries call it)." }
 UI_WindowDraw = { addr = 0x801AE3F0, type = "func", source = "Draws a window from x with a left cap and a body stretched to width, height rows tall, with the palette column of the style argument; flags 0x80 and 0x20 trim the top and the bottom." }
@@ -198,6 +288,7 @@ Item_PassesTest = { addr = 0x801AF494, type = "func", source = "Tells whether an
 UI_ListDrawItemRow = { addr = 0x801AF800, type = "func", source = "Draws an item row: icon, name from the item record, and a count when it is two or more." }
 UI_ListDrawAbilityRow = { addr = 0x801AF930, type = "func", source = "Draws one row of an ability list: the element icon, the ability name from its text command stream and the cost as a two-digit number at the right, in the given text shade." }
 UI_ListDrawScrollbar = { addr = 0x801AFA1C, type = "func", source = "Draws a list scrollbar: a red mark per flagged row on the track and the thumb; menu list windows call it." }
+UI_ScrollList = { addr = 0x801AFD10, type = "func", source = "Advances a list window's row scroll by one frame and returns the first row to draw." }
 Camera_SetMatrix = { addr = 0x801AFE18, type = "func", source = "Sets the GTE rotation and translation from the camera angle, height and offsets, and returns out_matrix unchanged." }
 Camera_ProjectPoint = { addr = 0x801AFF04, type = "func", source = "Projects the 16.16 position pos through RotTransPers and writes the result to screen_xy." }
 MATH_SetIdentity = { addr = 0x801AFF64, type = "func", source = "Writes 4096 to the three diagonal cells of a 3x3 s16 matrix and 0 to the other six." }
@@ -242,6 +333,60 @@ Game_RewardZenny = { addr = 0x801B5E58, type = "func", source = "Plays common SE
 Game_RequestPersonalAction = { addr = 0x801B5EBC, type = "func", source = "Starts the lead character's personal action when FIELD_INPUT_PERSONAL_ACTION is pressed outside the world map, except for Garr, Rei, Ryu in pajamas and Whelp: sets FIELD_TASK_MODE_PERSONAL_ACTION, whose handler is picked from g_PersonalActions" }
 Game_RequestRockKick = { addr = 0x801B5F68, type = "func", source = "Starts the Teepo or Peco personal action when the leader runs (walk speed index 4) into a rock actor (a type 0x17 actor) on the facing cell: records its actor slot in the work byte +0x0B and sets FIELD_TASK_MODE_PERSONAL_ACTION at step 1 (Teepo Kick, Peco Bump)" }
 Game_RequestGarrPush = { addr = 0x801B6044, type = "func", source = "Starts Garr's personal action when the leader is Garr and has walked 16 frames against an object facing a cardinal direction: counts the frames in the work byte +0x0B, then sets FIELD_TASK_MODE_PERSONAL_ACTION at step 0 (Garr Push)" }
+Party_RunMoveStep = { addr = 0x801B69C0, type = "func", source = "Runs the g_PartyMoveSteps handler the actor's step selects: mode 2 of the leader and follower tables." }
+Party_ScriptWalkRun = { addr = 0x801B6A04, type = "func", source = "Step 0 of g_PartyMoveSteps: runs the g_PartyScriptWalkSteps sub-step the actor's unk_03 selects, then advances its animation." }
+Party_ScriptWalkAlign = { addr = 0x801B6AB0, type = "func", source = "Script walk sub-step 0: snaps the actor onto the half-cell grid, then starts reading its script." }
+Party_ScriptWalkRead = { addr = 0x801B6BC8, type = "func", source = "Script walk sub-step 1: waits out the record's delay, runs the next script record and picks the sub-step it asks for (move, message, fade, end)." }
+Party_ScriptWalkMove = { addr = 0x801B6F1C, type = "func", source = "Script walk sub-step 2: moves the actor for its remaining step frames, then reads the next script record." }
+Party_ScriptWalkWaitMessage = { addr = 0x801B6FDC, type = "func", source = "Script walk sub-step 3: waits until no message is requested, then clears the wait flag and restarts the walk." }
+Party_ScriptWalkFadeOut = { addr = 0x801B7024, type = "func", source = "Script walk sub-step 4: steps the actor's tint to the faded-out value, then clears the fade-out flag." }
+Party_ScriptWalkFadeIn = { addr = 0x801B707C, type = "func", source = "Script walk sub-step 5: fades the actor back in and restores its palette, then clears the fade-in flag." }
+Party_AttachRun = { addr = 0x801B70D4, type = "func", source = "Step 1 of g_PartyMoveSteps: on the first frame places the actor on the party actor unk_18 plus the offset row unk_1C, then runs the script walk." }
+Party_FadeInRun = { addr = 0x801B726C, type = "func", source = "Step 2 of g_PartyMoveSteps: runs the g_PartyFadeInSteps sub-step the actor's unk_03 selects." }
+Party_FadeInStart = { addr = 0x801B72B0, type = "func", source = "Fade-in sub-step 0: unhides the actor at the faded-out tint and starts the fade in." }
+Party_FadeInWait = { addr = 0x801B7344, type = "func", source = "Fade-in sub-step 1: waits for the fade in to end, then returns the actor to mode 1." }
+Party_JumpRun = { addr = 0x801B73B0, type = "func", source = "Step 3 of g_PartyMoveSteps: runs the g_PartyJumpSteps sub-step the actor's unk_03 selects." }
+Party_JumpStart = { addr = 0x801B73F4, type = "func", source = "Jump sub-step 0: requests the take-off animation for the actor's facing and sets the walk speed index." }
+Party_JumpLaunch = { addr = 0x801B744C, type = "func", source = "Jump sub-step 1: when the take-off animation ends, sets the jump velocity and gravity from the walk speed and plays the jump sound." }
+Party_JumpTravel = { addr = 0x801B7658, type = "func", source = "Jump sub-step 2: moves the actor with gravity for its remaining travel frames, then stops the horizontal motion." }
+Party_JumpFall = { addr = 0x801B76F4, type = "func", source = "Jump sub-step 3: applies gravity until the actor reaches the ground height, then starts the landing animation." }
+Party_JumpLand = { addr = 0x801B781C, type = "func", source = "Jump sub-step 4: waits for the landing animation to end and for the cell walk not to start, then returns the actor to mode 1." }
+Party_LadderTransitRun = { addr = 0x801B78B4, type = "func", source = "Step 4 of g_PartyMoveSteps: runs the g_PartyLadderTransits entry the actor's unk_03 selects (up or down)." }
+Party_LadderUpRun = { addr = 0x801B790C, type = "func", source = "Ladder up entry: runs the g_PartyLadderUpSteps sub-step the actor's unk_04 selects." }
+Party_LadderUpGrab = { addr = 0x801B7950, type = "func", source = "Ladder up sub-step 0: starts grabbing the ladder and advances to the climb out." }
+Party_LadderUpLeave = { addr = 0x801B7988, type = "func", source = "Ladder up sub-step 1: raises the actor until it is 0x200 above the ground, then requests the area change." }
+Party_LadderUpEnter = { addr = 0x801B79F8, type = "func", source = "Ladder up sub-step 2: places the actor 0x200 below the ground, a step back from the ladder, and starts the climb animation." }
+Party_LadderUpClimb = { addr = 0x801B7B54, type = "func", source = "Ladder up sub-step 4: raises the actor until it reaches the ladder top height, then begins the dismount." }
+Party_LadderUpDismount = { addr = 0x801B7C10, type = "func", source = "Ladder up sub-step 5: runs the dismount rise until it finishes." }
+Party_LadderUpExitBegin = { addr = 0x801B7C58, type = "func", source = "Ladder up sub-step 6: begins stepping off the ladder until it finishes." }
+Party_LadderUpExit = { addr = 0x801B7CA0, type = "func", source = "Ladder up sub-step 7: steps off the ladder, then clears the area entry flag." }
+Party_LadderDownRun = { addr = 0x801B7D00, type = "func", source = "Ladder down entry: runs the g_PartyLadderDownSteps sub-step the actor's unk_04 selects." }
+Party_LadderDownApproachBegin = { addr = 0x801B7D44, type = "func", source = "Ladder down sub-step 0: starts the approach to the ladder top and marks the area entry active." }
+Party_LadderDownApproach = { addr = 0x801B7D84, type = "func", source = "Ladder down sub-step 1: walks the actor to the ladder top until the approach ends." }
+Party_LadderDownTurn = { addr = 0x801B7DC0, type = "func", source = "Ladder down sub-step 2: turns the actor to face the ladder until the turn ends." }
+Party_LadderDownTurnWait = { addr = 0x801B7DFC, type = "func", source = "Ladder down sub-step 3: waits after the turn until it ends." }
+Party_LadderDownLower = { addr = 0x801B7E38, type = "func", source = "Ladder down sub-step 4: lowers the actor onto the ladder until it ends." }
+Party_LadderDownLeave = { addr = 0x801B7E74, type = "func", source = "Ladder down sub-step 5: lowers the actor until it is 0x200 below the ground, then requests the area change." }
+Party_LadderDownEnter = { addr = 0x801B7EF0, type = "func", source = "Ladder down sub-step 6: places the actor 0x200 above the ground and starts the climb animation." }
+Party_LadderDownDescend = { addr = 0x801B7FE0, type = "func", source = "Ladder down sub-step 8: lowers the actor until it reaches the ground, then starts the dismount frames." }
+Party_LadderDownDismount = { addr = 0x801B80B4, type = "func", source = "Ladder down sub-step 9: steps the four dismount frames, then clears the entry flag and returns the actor to mode 1." }
+Party_LadderWaitFadeIn = { addr = 0x801B81EC, type = "func", source = "Ladder sub-step shared by both directions: waits for the fade in to end, then advances the sub-step." }
+Party_WalkTransitRun = { addr = 0x801B8234, type = "func", source = "Step 5 of g_PartyMoveSteps: runs the g_PartyWalkTransitSteps sub-step the actor's unk_03 selects." }
+Party_WalkExitBegin = { addr = 0x801B828C, type = "func", source = "Walk transit sub-step 0: marks the area entry active and starts the walking animation." }
+Party_WalkExit = { addr = 0x801B830C, type = "func", source = "Walk transit sub-step 1: walks the actor forward and requests the area change on the third step." }
+Party_WalkEnterBegin = { addr = 0x801B8394, type = "func", source = "Walk transit sub-step 2: places the actor back from its spot along its facing and starts the walking animation." }
+Party_WalkEnterFadeWait = { addr = 0x801B8578, type = "func", source = "Walk transit sub-step 3: waits for the fade in to end, then advances the sub-step." }
+Party_WalkEnter = { addr = 0x801B85C0, type = "func", source = "Walk transit sub-step 4: walks the actor in to its spot, then clears the entry flag and returns it to mode 1." }
+Party_CellWalkRun = { addr = 0x801B870C, type = "func", source = "Step 6 of g_PartyMoveSteps: runs the g_PartyCellWalkSteps sub-step the actor's unk_03 selects, then advances the animation." }
+Party_CellWalkStart = { addr = 0x801B876C, type = "func", source = "Cell walk sub-step 0: stores the actor's facing as its walk direction and sets the run speed index." }
+Party_CellWalkMove = { addr = 0x801B87B8, type = "func", source = "Cell walk sub-step 1: walks the actor by the pad direction until its footprint is clear of the arming cell code, or hands over to the jump step." }
+Party_CellWalkEnd = { addr = 0x801B8A0C, type = "func", source = "Ends the cell walk: faces the actor along its stored walk direction and returns it to mode 1." }
+Party_FallThroughRun = { addr = 0x801B9048, type = "func", source = "Step 7 of g_PartyMoveSteps: runs the g_PartyFallThroughSteps sub-step the actor's unk_03 selects." }
+Party_FallThroughStart = { addr = 0x801B90A0, type = "func", source = "Fall sub-step 0: plays the fall sound and requests the area link of the cell the actor stands on." }
+Party_FallThroughSpin = { addr = 0x801B9100, type = "func", source = "Fall sub-step 1: turns the actor each frame while it sinks, then requests the area change 257 units below the ground." }
+Party_FloorDamageRun = { addr = 0x801B91CC, type = "func", source = "Step 8 of g_PartyMoveSteps: runs the g_PartyFloorDamageSteps sub-step the actor's unk_03 selects." }
+Party_FloorDamageStart = { addr = 0x801B9210, type = "func", source = "Floor damage sub-step 0: applies the cell effect row in the actor's param, knocks the actor back a step and starts the blink." }
+Party_FloorDamageBlink = { addr = 0x801B9478, type = "func", source = "Floor damage sub-step 1: finishes the knock back and blinks the actor for eight frames, then returns it to mode 1." }
 Area_IsStepTooHigh = { addr = 0x801BB86C, type = "func", source = "probes the step height at the midpoint of two edges and returns true above 64 units, the blocking step its callers turn away from" }
 Actor_SnapFacing = { addr = 0x801BB8E8, type = "func", source = "Turns the actor to a cardinal facing, choosing the opposite when neither source facing matches." }
 Area_WalkTurnFromHighStep = { addr = 0x801BB9B4, type = "func", source = "Probes the step height along the walking actor's tile on each axis with Area_IsStepTooHigh and turns the facing away from a step that is too high." }
@@ -281,9 +426,12 @@ Actor_SetSemiTransparent = { addr = 0x801C2438, type = "func", source = "Sets th
 Area_RunWalk = { addr = 0x801C24D0, type = "func", source = "Runs one frame of the field walk: the walk velocity and, unless the walk is held, the scroll update." }
 Area_SetWalkVelocity = { addr = 0x801C2538, type = "func", source = "Sets the task's walk timer and velocity from the route type and the shared speed scale, with the step heights along the way." }
 Area_ScrollUpdateWalk = { addr = 0x801C2710, type = "func", source = "Moves the area scroll with the walking actor: the camera step from the walk mode and speed scale, the scroll target from the actor's position and velocity." }
+Party_StartCellWalk = { addr = 0x801C2AAC, type = "func", source = "Switches the actor to mode 2 step 6 when it stands on a cell of code 0xD0; returns whether it did." }
+Party_StartFallThrough = { addr = 0x801C2B4C, type = "func", source = "Switches the actor to mode 2 step 7 when it stands on a cell of code 0xA4; returns whether it did." }
 Char_SetCharacterId = { addr = 0x801C2E34, type = "func", source = "the body stores into g_Game.current->chr.character_id" }
 Party_FlashDamage = { addr = 0x801C308C, type = "func", source = "Fills the field actor's palette row with one of the four damage colours of g_PartyDamageColors, plays the common sound effect 8 and sets bit 3 of the member's field flags; called for the caterpillar sting, poison steps and damage cells." }
 Party_TickConfusion = { addr = 0x801C3598, type = "func", source = "Counts down the confusion of the active character and clears the status at zero." }
+Party_StartFloorDamage = { addr = 0x801C364C, type = "func", source = "Switches the actor to mode 2 step 8 with the given effect row when a cell under it has the wanted code; returns whether it did." }
 Char_CountEquipped = { addr = 0x801C38F4, type = "func", source = "Counts how many of a character's equipment slots hold an item id: the weapon (mode 1), shield, helmet and armor (mode 2) or the accessories (mode 3)." }
 Game_TestMapCells = { addr = 0x801C39D8, type = "func", source = "Tests whether the map cells at a position carry a wanted code." }
 Game_TestPlacement = { addr = 0x801C3E40, type = "func", source = "Tests whether a position is free for placement at a given height." }
@@ -351,15 +499,15 @@ s_SceneHandlerIds = { addr = 0x801C809C, size = 0x8, source = "Scene handler id 
 D_801C80A4 = { addr = 0x801C80A4, size = 0x18, source = "The six handlers func_8019A53C runs by g_Task->unk_06: five share func_8019A580, one is func_8019A6AC and one func_8019A630." }
 D_801C80BC = { addr = 0x801C80BC, size = 0xC, source = "The three mode handlers func_8019A3FC, func_8019A848 and func_8019A7D4 that func_8019A804 runs by g_Task->header.mode." }
 D_801C80C8 = { addr = 0x801C80C8, size = 0x18, source = "The six handlers func_8019A848 runs by g_Task->unk_06, the same set as D_801C80A4." }
-D_801C80E0 = { addr = 0x801C80E0, size = 0xC, source = "The three mode handlers func_8019A904, func_8019AA44 and func_8019AAFC that func_8019A8B4 runs by g_Task->header.mode." }
-D_801C80EC = { addr = 0x801C80EC, size = 0xC, source = "The three mode handlers func_8019AC84, func_8019ACF4 and func_8019AD70 that func_8019AC34 runs by g_Task->header.mode." }
-D_801C80F8 = { addr = 0x801C80F8, size = 0x10, source = "The four mode handlers func_8019ADE8, func_8019AF1C, func_8019B024 and func_8019B0EC that func_8019ADA4 runs by g_Task->header.mode." }
-s_ActorTossArcs = { addr = 0x801C8108, source = "func_8019AF1C starts a toss at step 0..2 with its vertical speed in the first member and gravity in the second", size = 0x18 }
+g_CameraAnglePanModes = { addr = 0x801C80E0, source = "Indexed by header.mode in Camera_PanAngleRun: start, step, end." }
+g_CameraZoomPanModes = { addr = 0x801C80EC, source = "Indexed by header.mode in Camera_PanZoomRun: start, step, end." }
+g_ActorTossModes = { addr = 0x801C80F8, source = "Indexed by header.mode in Actor_TossRun: start, launch, fall, clear." }
+s_ActorTossArcs = { addr = 0x801C8108, source = "Actor_TossLaunch starts a toss at step 0..2 with its vertical speed in the first member and gravity in the second", size = 0x18 }
 D_801C810C = { addr = 0x801C810C, alias = true, source = "s_ActorTossArcs +0x4, folded into that table in #400" }
-D_801C8120 = { addr = 0x801C8120, size = 0xC, source = "The three mode handlers func_8019B150, func_8019B1E8 and func_8019B0EC that func_8019B10C runs by g_Task->header.mode." }
-D_801C812C = { addr = 0x801C812C, size = 0x18, source = "The six mode handlers func_8019B3A8, func_8019B4A0, func_8019B704, func_8019BBA4, func_8019BE28 and func_8019BEFC that func_8019B364 runs by g_Task->header.mode." }
+D_801C8120 = { addr = 0x801C8120, size = 0xC, source = "The three mode handlers func_8019B150, func_8019B1E8 and Actor_ClearSelf that func_8019B10C runs by g_Task->header.mode." }
+g_ActorRockModes = { addr = 0x801C812C, source = "The six rock mode handlers (start, wait, roll, settle, end, rest) that Actor_RockRun runs by header.mode." }
 D_801C8144 = { addr = 0x801C8144, size = 0x10, source = "The four mode handlers func_8019C664, func_8019C794, func_8019C910 and func_8019C954 that func_8019C620 runs by g_Task->header.mode." }
-D_801C8154 = { addr = 0x801C8154, size = 0x10, source = "The four mode handlers func_8019CBD8, func_8019CCB8, func_8019CEDC and func_8019CFCC that func_8019CB94 runs by g_Task->header.mode." }
+g_ActorBlockModes = { addr = 0x801C8154, source = "The four block mode handlers (start, wait, slide, shatter) that Actor_BlockRun runs by header.mode." }
 D_801C8164 = { addr = 0x801C8164, size = 0x18, source = "The six mode handlers func_8019DE10, func_8019E264, func_8019E424, func_8019E780, func_8019E918 and func_8019EAD4 that func_8019DDCC runs by g_Task->header.mode." }
 D_801C817C = { addr = 0x801C817C, size = 0x10, source = "The four step handlers func_8019DE54, func_8019DF8C, func_8019DFB4 and func_8019E1A0 that func_8019DE10 runs by g_Task->header.step." }
 s_AreaSeIds = { addr = 0x801C818C, size = 0xC, source = "Sound SE id per world id; func_8019DFB4 scans it from index 8 for the current world id." }
@@ -372,20 +520,20 @@ D_801C81CC = { addr = 0x801C81CC, size = 0x10, source = "The four mode handlers 
 g_TaskModes = { addr = 0x801C81DC, type = "Callback", size = 0x1A4, source = "callbacks selected by the current task mode" }
 s_EntityModes = { addr = 0x801C8380, size = 0x4, source = "Entity mode byte by scene entry mode, read by func_8019FF88." }
 D_801C8384 = { addr = 0x801C8384, size = 0x38, source = "The 28 entity seed values func_801A02E8 compares against the entity's seed byte." }
-D_801C83BC = { addr = 0x801C83BC, size = 0x1C, source = "The seven actor step handlers func_801A0AE4 and the rows it builds run by the actor's header.step; the first four share func_801A225C." }
-D_801C83D8 = { addr = 0x801C83D8, size = 0x2C, source = "The 11 object handlers func_801A06D8, func_801A2788 and the slus actor code run by g_Task->header.mode." }
+g_ActorPaceSteps = { addr = 0x801C83BC, source = "The pace handlers the mode handlers call with header.step before each move; rows 0 to 3 share Actor_PaceFree; one row per ActorPace." }
+g_ActorModes = { addr = 0x801C83D8, source = "The mode handlers of the field actor rows, run by header.mode: Actor_RunInteractions for g_Actors, func_8015A7E8 for g_PartyActors, and Actor_RunMode for the script op SELECT_ROUTE; one row per ActorMode." }
 s_EntityRouteIndices = { addr = 0x801C8404, size = 0x20, source = "The four route indices of each direction that func_801A27C4 walks." }
 g_ActorFacingAngles = { addr = 0x801C8424, size = 0x10, source = "The eight facing angles func_801A3080 picks by route type: 0x600 to 0xE00 in 0x200 steps, wrapping at the fifth entry; SYS_InitScratchpad seeds angle_z from it by direction." }
 D_801C842A = { addr = 0x801C842A, size = 0x1, alias = true, source = "The second half of the facing-angle table g_ActorFacingAngles from its fourth u16, used as an array by func_801A3080." }
 D_801C8434 = { addr = 0x801C8434, size = 0x8, source = "The two fade handlers Game_FadeStartWhite and func_801A3648 that func_801A3594 runs by g_Task->unk_04." }
 D_801C843C = { addr = 0x801C843C, size = 0x8, source = "The two fade handlers Game_FadeStartBlack and func_801A386C that func_801A37D4 runs by g_Task->unk_04." }
-s_ScriptOpcodeLengths = { addr = 0x801C8444, size = 0x10, source = "Length in bytes of each script opcode; the script walkers (func_801A4374, func_801A46E8, func_801A4798, func_801A4844, func_801A4BF8) advance the cursor by it." }
+s_ScriptOpcodeLengths = { addr = 0x801C8444, size = 0x10, source = "Length in bytes of each script opcode; the script walkers (Area_SkipSetupBlockStep, Area_SkipSetupChainBody, func_801A4798, func_801A4844, func_801A4BF8) advance the cursor by it." }
 g_ScenarioHandlers = { addr = 0x801C8454, size = 0x50, source = "Step tables of the scenarios, indexed by g_ScenarioState.scenario_id by Game_ScenarioUpdate." }
 g_SceneSteps = { addr = 0x801C84A4, size = 0x8, source = "Scene update callbacks, indexed by the scene state byte D_801448EA by Game_UpdateScene." }
 s_EventFlagsReset = { addr = 0x801C84AC, size = 0x10, source = "Scene_ResetEventState copies these 16 mode bytes to g_SceneEventFlags" }
 g_SceneEvents = { addr = 0x801C84BC, size = 0x100, source = "Scene event callbacks, indexed by the scene event byte D_801448EB by Scene_UpdateEvent." }
-s_ScenarioStateStepArgs = { addr = 0x801C85BC, size = 0x8, source = "Argument of each scenario state step; func_801A7E54 passes the entry for D_801448ED to Scene_SetupParty." }
-D_801C85C4 = { addr = 0x801C85C4, size = 0x2C, source = "The 11 area handlers (Fishing_ShowLocation four times) that func_801A839C runs by the area handler index." }
+s_ScenarioStateStepArgs = { addr = 0x801C85BC, size = 0x8, source = "Argument of each scenario state step; Scene_RunMineEntry passes the entry for D_801448ED to Scene_SetupParty." }
+g_WorldMapGuides = { addr = 0x801C85C4, source = "Indexed by the world map region in WorldMap_RunLocationGuide: the guide handler of each region." }
 g_SceneObjects = { addr = 0x801C85F0, size = 0x108, source = "Scene object callbacks, indexed by the callback_index of the actor by Scene_DispatchObject." }
 g_AreaHooks = { addr = 0x801C86F8, type = "AreaHooks", size = 0xE0, source = "per-area callbacks selected by Game_CallArea" }
 s_TalkMessageIds = { addr = 0x801C87D8, size = 0x24, source = "Message id by talk id and party slot, read by func_801A8F94." }
@@ -436,17 +584,17 @@ s_AreaScenePositions = { addr = 0x801CD29C, size = 0x8, source = "Map id and x, 
 D_801CD29D = { addr = 0x801CD29D, size = 0x1, alias = true, source = "View of a record member; the row names the address the link reads, not a second object." }
 D_801CD29E = { addr = 0x801CD29E, size = 0x1, alias = true, source = "View of a record member; the row names the address the link reads, not a second object." }
 s_AreaCellTypes = { addr = 0x801CD2A4, size = 0xC, source = "0xFF-terminated list of map types that func_801B6610 compares with the type from Area_CellGetCode." }
-D_801CD2B0 = { addr = 0x801CD2B0, size = 0x24, source = "The nine step handlers func_801B69C0 runs by g_Task->header.step." }
-D_801CD2D4 = { addr = 0x801CD2D4, size = 0x18, source = "The six handlers func_801B6A04 runs by g_Task->unk_03." }
-D_801CD2EC = { addr = 0x801CD2EC, size = 0x8, source = "The two handlers func_801B726C runs by g_Task->unk_03." }
-D_801CD2F4 = { addr = 0x801CD2F4, size = 0x14, source = "The five handlers func_801B73B0 runs by g_Task->unk_03." }
-D_801CD308 = { addr = 0x801CD308, size = 0x8, source = "The two handlers func_801B78B4 runs by g_Task->unk_03." }
-D_801CD310 = { addr = 0x801CD310, size = 0x20, source = "The eight handlers func_801B790C runs by g_Task->unk_04." }
-D_801CD330 = { addr = 0x801CD330, size = 0x28, source = "The ten handlers func_801B7D00 runs by g_Task->unk_04." }
-D_801CD358 = { addr = 0x801CD358, size = 0x14, source = "The five handlers func_801B8234 runs by g_Task->unk_03." }
-D_801CD36C = { addr = 0x801CD36C, size = 0x8, source = "The two handlers func_801B870C runs by g_Task->unk_03." }
-D_801CD374 = { addr = 0x801CD374, size = 0x8, source = "The two handlers func_801B9048 runs by g_Task->unk_03." }
-D_801CD37C = { addr = 0x801CD37C, size = 0x8, source = "The two handlers func_801B91CC runs by g_Task->unk_03." }
+g_PartyMoveSteps = { addr = 0x801CD2B0, source = "Step handlers of mode 2 of the leader and follower, indexed by PartyMoveStep by Party_RunMoveStep." }
+g_PartyScriptWalkSteps = { addr = 0x801CD2D4, source = "Sub-steps of the script walk step, indexed by the actor's unk_03 by Party_ScriptWalkRun." }
+g_PartyFadeInSteps = { addr = 0x801CD2EC, source = "Sub-steps of the fade-in step, indexed by the actor's unk_03 by Party_FadeInRun." }
+g_PartyJumpSteps = { addr = 0x801CD2F4, source = "Sub-steps of the jump step, indexed by the actor's unk_03 by Party_JumpRun." }
+g_PartyLadderTransits = { addr = 0x801CD308, source = "Up and down ladder transit of the ladder step, indexed by the actor's unk_03 by Party_LadderTransitRun." }
+g_PartyLadderUpSteps = { addr = 0x801CD310, source = "Sub-steps of the up ladder transit, indexed by the actor's unk_04 by Party_LadderUpRun." }
+g_PartyLadderDownSteps = { addr = 0x801CD330, source = "Sub-steps of the down ladder transit, indexed by the actor's unk_04 by Party_LadderDownRun." }
+g_PartyWalkTransitSteps = { addr = 0x801CD358, source = "Sub-steps of the walk transit step, indexed by the actor's unk_03 by Party_WalkTransitRun." }
+g_PartyCellWalkSteps = { addr = 0x801CD36C, source = "Sub-steps of the cell walk step, indexed by the actor's unk_03 by Party_CellWalkRun." }
+g_PartyFallThroughSteps = { addr = 0x801CD374, source = "Sub-steps of the fall step, indexed by the actor's unk_03 by Party_FallThroughRun." }
+g_PartyFloorDamageSteps = { addr = 0x801CD37C, source = "Sub-steps of the floor damage step, indexed by the actor's unk_03 by Party_FloorDamageRun." }
 D_801CD384 = { addr = 0x801CD384, size = 0x80, source = "The 128-byte route step table at 0x801CD384; no matched code reads it." }
 g_PartyFollowerModes = { addr = 0x801CD404, source = "The 15 field task mode handlers of a follower; Party_RunFollower runs the one header.mode selects." }
 D_801CD440 = { addr = 0x801CD440, size = 0x8, source = "The two step handlers func_801BBFB4 runs by g_Task->header.step." }

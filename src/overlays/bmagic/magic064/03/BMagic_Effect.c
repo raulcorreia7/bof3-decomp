@@ -124,7 +124,7 @@ MATCH void func_801EF0E0(void) {
     g_BattleEffects[effect_slot & BYTE_MASK].header.step  = 0;
     g_BattleEffects[effect_slot & BYTE_MASK].unk_03       = 0;
     g_BattleEffects[effect_slot & BYTE_MASK].unk_06       = 1;
-    g_BattleEffects[effect_slot & BYTE_MASK].step_index   = 58;
+    g_BattleEffects[effect_slot & BYTE_MASK].effect_type  = 58;
     TASK(PartyMember)->unk_09                             = 1;
     TASK(PartyMember)->header.step += 1;
 }
@@ -214,11 +214,9 @@ MATCH void func_801EF5FC(void) {
 
     work = TASK(PartyMember);
     if (!(work->param.unk_0B & 0x1)) {
-        g_AreaScrollTargetX = work->pos.x.fixed;
-        FAKE_BARRIER(); /* FAKE: retail reads each field after storing the previous target */
-        g_AreaScrollTargetY = work->pos.y.fixed;
-        FAKE_BARRIER();
-        g_AreaCameraHeight = COORD_INT(work->pos.z);
+        g_AreaScrollTargetCoordX.fixed = work->pos.x.fixed;
+        g_AreaScrollTargetCoordY.fixed = work->pos.y.fixed;
+        g_AreaCameraHeight             = COORD_INT(work->pos.z);
         func_801F103C();
         TASK(PartyMember)->unk_09      = 0x40;
         TASK(PartyMember)->timer       = 1;
@@ -295,7 +293,7 @@ NON_MATCHING void func_801EF8F4(void) {
     *(BattleWorkImage*)&g_BattleEffects[slot] = *(BattleWorkImage*)&BATTLE_ACTIVE_PARTY;
     g_BattleEffects[slot].header.mode         = 2;
     g_BattleEffects[slot].unk_06              = 1;
-    g_BattleEffects[slot].step_index          = 0x3A;
+    g_BattleEffects[slot].effect_type         = 0x3A;
     g_BattleEffects[slot].header.step         = 0;
     g_BattleEffects[slot].header.flags &= ~PARTY_MEMBER_FLAG_HANDLER_BUSY;
     g_BattleEffects[slot].target.party = TASK(PartyMember);
@@ -315,7 +313,7 @@ NON_MATCHING void func_801EF8F4(void) {
     *(BattleWorkImage*)&g_BattleEffects[slot] = *(BattleWorkImage*)&BATTLE_ACTIVE_PARTY;
     g_BattleEffects[slot].header.mode         = 2;
     g_BattleEffects[slot].unk_06              = 1;
-    g_BattleEffects[slot].step_index          = 0x3A;
+    g_BattleEffects[slot].effect_type         = 0x3A;
     g_BattleEffects[slot].header.step         = 0;
     g_BattleEffects[slot].header.flags &= ~PARTY_MEMBER_FLAG_HANDLER_BUSY;
     g_BattleEffects[slot].target.party = TASK(PartyMember);
@@ -329,7 +327,7 @@ NON_MATCHING void func_801EF8F4(void) {
     *(BattleWorkImage*)&g_BattleEffects[slot] = *(BattleWorkImage*)&BATTLE_ACTIVE_PARTY;
     g_BattleEffects[slot].header.mode         = 2;
     g_BattleEffects[slot].unk_06              = 1;
-    g_BattleEffects[slot].step_index          = 0x3A;
+    g_BattleEffects[slot].effect_type         = 0x3A;
     g_BattleEffects[slot].header.step         = 0;
     g_BattleEffects[slot].header.flags &= ~PARTY_MEMBER_FLAG_HANDLER_BUSY;
     g_BattleEffects[slot].target.party = TASK(PartyMember);
@@ -349,7 +347,7 @@ NON_MATCHING void func_801EF8F4(void) {
     *(BattleWorkImage*)&g_BattleEffects[slot] = *(BattleWorkImage*)&BATTLE_ACTIVE_PARTY;
     g_BattleEffects[slot].header.mode         = 2;
     g_BattleEffects[slot].unk_06              = 1;
-    g_BattleEffects[slot].step_index          = 0x3A;
+    g_BattleEffects[slot].effect_type         = 0x3A;
     g_BattleEffects[slot].header.step         = 0;
     g_BattleEffects[slot].header.flags &= ~PARTY_MEMBER_FLAG_HANDLER_BUSY;
     g_BattleEffects[slot].target.party = TASK(PartyMember);

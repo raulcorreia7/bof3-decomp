@@ -36,13 +36,9 @@ MATCH void func_801EECE4(void) {
         D_801EF9F8[(i << 5) + 1] = 0;
         D_801EF9F8[(i << 5) + 2] = 0;
     }
-    work              = TASK(PartyMember);
-    work->pos.x.fixed = g_Battle.selected_actor->pos.x.fixed;
-    /* FAKE: retail re-reads the selected actor for the next copy. */
-    FAKE_BARRIER();
-    work->pos.y.fixed = g_Battle.selected_actor->pos.y.fixed;
-    /* FAKE: retail re-reads the selected actor for the next copy. */
-    FAKE_BARRIER();
+    work                      = TASK(PartyMember);
+    work->pos.x.fixed         = g_Battle.selected_actor->pos.x.fixed;
+    work->pos.y.fixed         = g_Battle.selected_actor->pos.y.fixed;
     work->pos.z.fixed         = g_Battle.selected_actor->pos.z.fixed + TO_COORD(256);
     work->param.unk_0B        = 0;
     TASK(PartyMember)->unk_09 = 0;

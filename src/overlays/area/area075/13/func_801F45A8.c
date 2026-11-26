@@ -1,18 +1,12 @@
 #include "area075_13.h"
 
-#ifdef NON_MATCHING
-NON_MATCHING void func_801F45A8(void) {
+/* On a hit in the D_801F58A0 timing row: plays the sound, lowers the opponent gauge by 4 or 5 and steps its two actors. */
+void func_801F45A8(void) {
     Actor* actor;
-    u16    timer;
-    u16*   gauge;
-    s32    step;
 
-    timer = D_801F58C4;
-    if (D_801F58A0[D_801F58C9][timer % 15] != 0) {
+    if (D_801F58A0[D_801F58C9][D_801F58C4 % 15] != 0) {
         SND_SEPlay(EMI_SE_ID(SND_BANK_AREA, 2));
-        step  = rand() % 2 + 4;
-        gauge = &D_801F58CC;
-        *gauge -= step;
+        g_Area075OpponentGauge[0] = D_801F58CC - (rand() % 2 + 4);
         g_SpawnedActors[D_801F58CE[0]].vx -= 1;
         actor = &g_Actors[D_801F58CE[2]];
         TASK_SET(actor);
@@ -20,6 +14,3 @@ NON_MATCHING void func_801F45A8(void) {
         Script_AnimStepLoop();
     }
 }
-#else
-INCLUDE_ASM(func_801F45A8);
-#endif

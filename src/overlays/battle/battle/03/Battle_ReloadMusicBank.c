@@ -15,10 +15,8 @@ MATCH void Battle_ReloadMusicBank(void) {
             SND_SeqStopAll();
             action = g_SndBGMId;
             if (action != 0xFFu) {
-                unk_02 = g_BGMTracks[action].sep_slot;
-                state  = g_EmiStreamFlags;
-                /* FAKE: retail loads the state cell before the flags byte. */
-                FAKE_BARRIER();
+                unk_02           = g_BGMTracks[action].sep_slot;
+                state            = g_EmiStreamFlags;
                 flag             = g_Battle.outcome.result;
                 D_80146855       = unk_02;
                 unk_03           = g_BGMTracks[action].sequence;

@@ -1,8 +1,0 @@
-#include "game_00.h"
-
-MATCH void func_801B707C(void) {
-    if (func_801C27E0(4) & BYTE_MASK) {
-        g_Game.current->u.field.flags &= 0xFB;
-        TASK(Actor)->unk_03 = 1;
-    }
-}

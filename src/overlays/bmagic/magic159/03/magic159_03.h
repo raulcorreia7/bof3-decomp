@@ -5,8 +5,10 @@
 
 #include "overlays/bmagic/bmagic.h"
 
-extern Callback D_801EF424[];
+/* func_801EEC5C */
+void BMagic_GloomInit(void);
 
-void func_801EED84(void);
+/* D_801EF424 */
+extern Callback g_BMagicGloomFlareSteps[];
 
 #endif

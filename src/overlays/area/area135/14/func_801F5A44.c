@@ -3,7 +3,7 @@
 MATCH void func_801F5A44(void) {
     if (g_GameCellType == 4) {
         if (g_GameLastCellType == 1) {
-            func_801A6C98(D_801F6BB0);
+            Actor_SpawnPartyFromDefRow(D_801F6BB0);
             SYS_ClearFlag(g_SceneEventFlags, 0xC);
             g_SceneEventState.selection = 0;
         }

@@ -56,7 +56,7 @@ MATCH s32 func_801FC1D0(s32 member_index) {
     task3->tint.bytes.rgb.r = 0;
     task4                   = TASK(Actor);
     task4->tint.bytes.flags = 1;
-    func_801A4914();
+    Actor_StartFacingScript();
     return 1;
 }
 

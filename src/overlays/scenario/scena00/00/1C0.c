@@ -1106,8 +1106,8 @@ MATCH void func_801F9644(void) {
         if (SYS_TestFlag(g_SceneFlags, 10) == 0) {
             SYS_SetFlag(g_SceneFlags, 10U);
             Scene_SetupParty(0U);
-            g_AreaScrollTargetX    = TO_COORD(38);
-            g_AreaScrollTargetY[0] = TO_COORD(27) + COORD_HALF;
+            g_AreaScrollTargetX            = TO_COORD(38);
+            g_AreaScrollTargetCoordY.fixed = TO_COORD(27) + COORD_HALF;
         }
     }
 }
@@ -1332,7 +1332,7 @@ MATCH void func_801F9FB8(void) {
             } else if (g_AreaCameraY == 0x4400) {
                 g_AreaCameraY = 0x6200;
                 g_AreaTileOriginY -= 0x1E;
-                g_AreaScrollTargetY[0] += TO_COORD(-30);
+                g_AreaScrollTargetCoordY.fixed += TO_COORD(-30);
                 g_AreaFocus.y.fixed += TO_COORD(-30);
                 g_PartyPos.y.fixed += TO_COORD(-30);
                 Area_CellRefreshGrid();
@@ -1852,10 +1852,10 @@ MATCH void func_801FB204(void) {
                 g_ScriptVarsReq.byte = 0x1E;
                 g_AreaDrawFlags      = AREA_DRAW_ALL_FLAGS;
                 UI_ModeSet(UI_MODE_FAST_FADE_IN);
-                g_PartyPos.x.fixed     = TO_COORD(47);
-                g_AreaScrollTargetX    = TO_COORD(47);
-                g_PartyPos.y.fixed     = TO_COORD(29);
-                g_AreaScrollTargetY[0] = TO_COORD(29);
+                g_PartyPos.x.fixed             = TO_COORD(47);
+                g_AreaScrollTargetX            = TO_COORD(47);
+                g_PartyPos.y.fixed             = TO_COORD(29);
+                g_AreaScrollTargetCoordY.fixed = TO_COORD(29);
                 Area_InitMapRenderer();
                 g_PartyPos.z.fixed = TO_COORD(1408);
                 Area_ScrollAdvance(1408);
@@ -2030,7 +2030,7 @@ MATCH void func_801FB924(void) {
     if (g_ScriptVars[2] < 0x14 && g_AreaCameraY == 0x5000) {
         g_AreaCameraY = 0x3000;
         g_AreaTileOriginY += 0x20;
-        g_AreaScrollTargetY[0] += TO_COORD(32);
+        g_AreaScrollTargetCoordY.fixed += TO_COORD(32);
         base = &g_PartyPos.y.fixed;
         g_AreaFocus.y.fixed += TO_COORD(32);
         /* FAKE: barrier keeps the D_80147B28 load after the focus y store. */

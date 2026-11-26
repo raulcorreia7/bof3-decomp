@@ -204,9 +204,12 @@ extern u8       s_SceneHandlerIds[8];
 extern Callback D_801C80A4[6];
 extern Callback D_801C80BC[3];
 extern Callback D_801C80C8[6];
-extern Callback D_801C80E0[3];
-extern Callback D_801C80EC[3];
-extern Callback D_801C80F8[4];
+/* D_801C80E0 */
+extern Callback g_CameraAnglePanModes[3];
+/* D_801C80EC */
+extern Callback g_CameraZoomPanModes[3];
+/* D_801C80F8 */
+extern Callback g_ActorTossModes[4];
 
 /* Launch of a tossed actor: initial vertical speed and the gravity pulling it back, both 16.16. */
 typedef struct ActorToss {
@@ -214,11 +217,35 @@ typedef struct ActorToss {
     s32 gravity;
 } ActorToss;
 
-extern ActorToss          s_ActorTossArcs[3];
-extern Callback           D_801C8120[3];
-extern Callback           D_801C812C[6];
-extern Callback           D_801C8144[4];
-extern Callback           D_801C8154[4];
+extern ActorToss s_ActorTossArcs[3];
+extern Callback  D_801C8120[3];
+
+/* D_801C812C */
+/* The modes of a rock actor (ACTOR_TYPE_ROCK), selected by header.mode. */
+typedef enum ActorRockMode {
+    ACTOR_ROCK_MODE_START,  /* blocks its cell and selects its sprite */
+    ACTOR_ROCK_MODE_WAIT,   /* waits for a kick */
+    ACTOR_ROCK_MODE_ROLL,   /* rolls on with the kick's velocity, slowed by friction */
+    ACTOR_ROCK_MODE_SETTLE, /* moves on to the target cell edge and lands */
+    ACTOR_ROCK_MODE_END,    /* grows and disappears */
+    ACTOR_ROCK_MODE_REST,   /* rests, then waits again */
+    ACTOR_ROCK_MODE_COUNT
+} ActorRockMode;
+
+extern Callback g_ActorRockModes[ACTOR_ROCK_MODE_COUNT];
+extern Callback D_801C8144[4];
+
+/* D_801C8154 */
+/* The modes of a block actor (ACTOR_TYPE_BLOCK), selected by header.mode. */
+typedef enum ActorBlockMode {
+    ACTOR_BLOCK_MODE_START,   /* claims its cells */
+    ACTOR_BLOCK_MODE_WAIT,    /* waits for a push */
+    ACTOR_BLOCK_MODE_SLIDE,   /* moves on by one push */
+    ACTOR_BLOCK_MODE_SHATTER, /* breaks into shards and dust */
+    ACTOR_BLOCK_MODE_COUNT
+} ActorBlockMode;
+
+extern Callback           g_ActorBlockModes[ACTOR_BLOCK_MODE_COUNT];
 extern Callback           D_801C8164[6];
 extern Callback           D_801C817C[4];
 /* D_801C818C */
@@ -249,7 +276,8 @@ extern u8                 s_EventFlagsReset[16];
 extern Callback           g_SceneEvents[64];
 /* D_801C85BC */
 extern u8                 s_ScenarioStateStepArgs[8];
-extern Callback           D_801C85C4[11];
+/* D_801C85C4 */
+extern Callback           g_WorldMapGuides[11];
 /* D_801C85F0 */
 extern SceneActorCallback g_SceneObjects[66];
 /* D_801C87D8 */
@@ -302,54 +330,97 @@ extern u8                 D_801CD226[];
 extern u8                 s_AreaScenePositions[8];
 /* D_801CD2A4 */
 extern u8                 s_AreaCellTypes[12];
-extern Callback           D_801CD2B0[9];
-extern Callback           D_801CD2D4[6];
-extern Callback           D_801CD2EC[2];
-extern Callback           D_801CD2F4[5];
-extern Callback           D_801CD308[2];
-extern Callback           D_801CD310[8];
-extern Callback           D_801CD330[10];
-extern Callback           D_801CD358[5];
-extern Callback           D_801CD36C[2];
-extern Callback           D_801CD374[2];
-extern Callback           D_801CD37C[2];
-extern u8                 D_801CD384[128];
+
+/* The steps of mode 2 of the leader and follower (header.step), the rows of g_PartyMoveSteps. */
+typedef enum PartyMoveStep {
+    PARTY_MOVE_STEP_SCRIPT_WALK    = 0,
+    PARTY_MOVE_STEP_ATTACH         = 1,
+    PARTY_MOVE_STEP_FADE_IN        = 2,
+    PARTY_MOVE_STEP_JUMP           = 3,
+    PARTY_MOVE_STEP_LADDER_TRANSIT = 4,
+    PARTY_MOVE_STEP_WALK_TRANSIT   = 5,
+    PARTY_MOVE_STEP_CELL_WALK      = 6,
+    PARTY_MOVE_STEP_FALL_THROUGH   = 7,
+    PARTY_MOVE_STEP_FLOOR_DAMAGE   = 8,
+    PARTY_MOVE_STEP_COUNT
+} PartyMoveStep;
+
+/* The sub-steps of the jump step (unk_03), the rows of g_PartyJumpSteps. */
+typedef enum PartyJumpStep {
+    PARTY_JUMP_STEP_START,
+    PARTY_JUMP_STEP_LAUNCH,
+    PARTY_JUMP_STEP_TRAVEL,
+    PARTY_JUMP_STEP_FALL,
+    PARTY_JUMP_STEP_LAND,
+    PARTY_JUMP_STEP_COUNT
+} PartyJumpStep;
+
+/* The ladder transit of the ladder step (unk_03), the rows of g_PartyLadderTransits: up when the actor faces up or left. */
+typedef enum PartyLadderTransit {
+    PARTY_LADDER_TRANSIT_UP,
+    PARTY_LADDER_TRANSIT_DOWN,
+    PARTY_LADDER_TRANSIT_COUNT
+} PartyLadderTransit;
+
+/* D_801CD2B0 */
+extern Callback  g_PartyMoveSteps[PARTY_MOVE_STEP_COUNT];
+/* D_801CD2D4 */
+extern Callback  g_PartyScriptWalkSteps[6];
+/* D_801CD2EC */
+extern Callback  g_PartyFadeInSteps[2];
+/* D_801CD2F4 */
+extern Callback  g_PartyJumpSteps[PARTY_JUMP_STEP_COUNT];
+/* D_801CD308 */
+extern Callback  g_PartyLadderTransits[PARTY_LADDER_TRANSIT_COUNT];
+/* D_801CD310 */
+extern Callback  g_PartyLadderUpSteps[8];
+/* D_801CD330 */
+extern Callback  g_PartyLadderDownSteps[10];
+/* D_801CD358 */
+extern Callback  g_PartyWalkTransitSteps[5];
+/* D_801CD36C */
+extern Callback  g_PartyCellWalkSteps[2];
+/* D_801CD374 */
+extern Callback  g_PartyFallThroughSteps[2];
+/* D_801CD37C */
+extern Callback  g_PartyFloorDamageSteps[2];
+extern u8        D_801CD384[128];
 /* D_801CD404 */
-extern Callback           g_PartyFollowerModes[15];
-extern Callback           D_801CD440[2];
+extern Callback  g_PartyFollowerModes[15];
+extern Callback  D_801CD440[2];
 /* D_801CD448 */
-extern Callback           g_AreaClimbFollowerSteps[4];
+extern Callback  g_AreaClimbFollowerSteps[4];
 /* D_801CD458 */
 /* D_801CD460 */
-extern u8                 s_BattleStartOffsets[12][2];
+extern u8        s_BattleStartOffsets[12][2];
 /* D_801CD478 */
-extern u8                 s_RouteIndexByMode[4];
-extern s32                D_801CD47C[8];
-extern s32                D_801CD480;
-extern Callback           D_801CD49C[4];
-extern Callback*          D_801CD4C0[20];
-extern Callback*          D_801CD510[20];
+extern u8        s_RouteIndexByMode[4];
+extern s32       D_801CD47C[8];
+extern s32       D_801CD480;
+extern Callback  D_801CD49C[4];
+extern Callback* D_801CD4C0[20];
+extern Callback* D_801CD510[20];
 /* D_801CD560 */
-extern u8                 s_AreaProbeCellCodes[8];
-extern Callback           D_801CD568[2];
-extern Callback           D_801CD570[5];
-extern u8                 D_801CD584[56];
+extern u8        s_AreaProbeCellCodes[8];
+extern Callback  D_801CD568[2];
+extern Callback  D_801CD570[5];
+extern u8        D_801CD584[56];
 /* D_801CD5BC */
 /* D_801CD770 */
-extern u8                 s_EncounterSpawnChances[8];
+extern u8        s_EncounterSpawnChances[8];
 /* D_801CD78C */
-extern u8                 s_BattleModeRecords[224];
-extern u8                 D_801CD78D[];
-extern u8                 D_801CD78F[];
-extern u16                g_BossArchiveSlots[42];
-extern u8                 D_801CD8C0;
-extern u8                 D_801CD8C4;
-extern u8                 D_801CD8C8;
-extern s32                D_801CD8CC;
-extern u8                 D_801CD8D0[116];
+extern u8        s_BattleModeRecords[224];
+extern u8        D_801CD78D[];
+extern u8        D_801CD78F[];
+extern u16       g_BossArchiveSlots[42];
+extern u8        D_801CD8C0;
+extern u8        D_801CD8C4;
+extern u8        D_801CD8C8;
+extern s32       D_801CD8CC;
+extern u8        D_801CD8D0[116];
 /* D_801CD950 */
-extern u8                 s_PartySlotOrder[4];
-extern s32                D_801CD954;
+extern u8        s_PartySlotOrder[4];
+extern s32       D_801CD954;
 
 /* The game system: the records, text and script formats the frontend and every
  * overlay read. A game source reaches it through game.h. */

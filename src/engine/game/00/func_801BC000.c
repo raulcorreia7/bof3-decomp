@@ -104,7 +104,7 @@ MATCH void func_801BC000(void) {
                     g_Game.current->u.field.mode.value = 4;
                     TASK(Actor)->header.mode           = 2;
                     tmp8                               = TASK(Actor);
-                    tmp8->header.step                  = 3;
+                    tmp8->header.step                  = PARTY_MOVE_STEP_JUMP;
                     return;
                 case_6:
                     g_Game.current->u.field.counter.value = 3;

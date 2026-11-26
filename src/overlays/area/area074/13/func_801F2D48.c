@@ -15,7 +15,7 @@ MATCH void func_801F2D48(void) {
         return;
     }
     TASK(Actor)->direction = dir;
-    if (func_801A1AE4(g_CurrentActor)) {
+    if (Actor_IsAheadBlocked(g_CurrentActor)) {
         return;
     }
     g_CurrentActor->unk_7B = 3;

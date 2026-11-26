@@ -1,7 +1,7 @@
 #include "engine/game/00/game_00.h"
 
 /* func_801C56E4 */
-/* Jumps off the ladder: flips the facing, sets gravity -8 and enters mode 2 at the dismount exit step. */
+/* Jumps off the ladder: flips the facing, plays the jump animation, sets gravity -8 and enters the jump step at its fall sub-step. */
 MATCH void Area_ClimbJumpOff(void) {
     u8     animation;
     Actor* actor;
@@ -19,6 +19,6 @@ MATCH void Area_ClimbJumpOff(void) {
     actor_b                  = TASK(Actor);
     actor_b->gravity         = -8;
     actor_b->header.mode     = 2;
-    TASK(Actor)->header.step = 3;
-    TASK(Actor)->unk_03      = 3;
+    TASK(Actor)->header.step = PARTY_MOVE_STEP_JUMP;
+    TASK(Actor)->unk_03      = PARTY_JUMP_STEP_FALL;
 }

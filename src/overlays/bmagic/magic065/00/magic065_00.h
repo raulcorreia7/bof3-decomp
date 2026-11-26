@@ -34,7 +34,7 @@ typedef struct Magic065TaskSteps {
 extern Magic065TaskSteps D_801EEC14;
 
 void func_801DE8C0(s32 arg0, s32 arg1, s32 arg2);
-u32  func_801E590C(u32 mode, u32 step_index);
+u32  func_801E590C(u32 mode, u32 effect_type);
 void BMagic_SetTextItemName(u8 item_id, u8 category);
 
 #endif

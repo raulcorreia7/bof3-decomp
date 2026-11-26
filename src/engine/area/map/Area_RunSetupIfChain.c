@@ -24,14 +24,14 @@ MATCH u8* Area_RunSetupIfChain(u8* script) {
                 if ((*handler)(&script) != 0) {
                     flag = 0;
                     script += 1;
-                    script = func_801A4640(script);
+                    script = Area_RunSetupChainBody(script);
                 } else {
                     script += 1;
-                    script = func_801A46E8(script);
+                    script = Area_SkipSetupChainBody(script);
                 }
             } else {
                 script += 1;
-                script = func_801A46E8(script);
+                script = Area_SkipSetupChainBody(script);
             }
         }
         if (*script != 0xF7) {
@@ -40,9 +40,9 @@ MATCH u8* Area_RunSetupIfChain(u8* script) {
         script += 1;
         if (flag != 0) {
             flag   = 0;
-            script = func_801A4640(script);
+            script = Area_RunSetupChainBody(script);
         } else {
-            script = func_801A46E8(script);
+            script = Area_SkipSetupChainBody(script);
         }
     }
 done:

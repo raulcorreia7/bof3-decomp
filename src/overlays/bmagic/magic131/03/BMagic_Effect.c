@@ -48,7 +48,7 @@ MATCH void BMagic_KaiserBreathInit(void) {
     TASK(PartyMember)->unk_09       = 10;
     TASK(PartyMember)->timer        = 0;
     TASK(PartyMember)->header.mode += 1;
-    slot                               = Battle_AllocEffect(1, 105) & BYTE_MASK;
+    slot                               = Battle_AllocEffect(1, BMAGIC_EFFECT_KAISER_BREATH) & BYTE_MASK;
     target                             = TASK(PartyMember);
     g_BattleEffects[slot].header.mode  = BMAGIC_KAISER_BREATH_EFFECT_FLASH;
     g_BattleEffects[slot].target.party = target;
@@ -96,7 +96,7 @@ MATCH void BMagic_KaiserBreathStartDragon(void) {
     g_Game.members[0].header.flags     = 0;
     g_Game.members[1].header.flags     = 0;
     g_Game.members[2].header.flags     = 0;
-    slot                               = Battle_AllocEffect(1, 0x69) & BYTE_MASK;
+    slot                               = Battle_AllocEffect(1, BMAGIC_EFFECT_KAISER_BREATH) & BYTE_MASK;
     work                               = TASK(PartyMember);
     g_BattleEffects[slot].unk_04       = 0x21;
     g_BattleEffects[slot].header.mode  = BMAGIC_KAISER_BREATH_EFFECT_DRAGON;
@@ -116,7 +116,7 @@ MATCH void BMagic_KaiserBreathWaitDragon(void) {
     u32          slot;
 
     if (TASK(PartyMember)->param.unk_0B == 0) {
-        slot                               = Battle_AllocEffect(1, 0x69) & BYTE_MASK;
+        slot                               = Battle_AllocEffect(1, BMAGIC_EFFECT_KAISER_BREATH) & BYTE_MASK;
         work                               = TASK(PartyMember);
         g_BattleEffects[slot].header.mode  = BMAGIC_KAISER_BREATH_EFFECT_FLASH;
         g_BattleEffects[slot].target.party = work;
@@ -388,12 +388,12 @@ MATCH void BMagic_KaiserBreathDragonBreathe(void) {
     }
     SND_SEQueueSelection(EMI_SE_ID(SND_BANK_COMMON, 0x00));
     func_800A9610(g_Battle.target_selector, 16);
-    slot                               = Battle_AllocEffect(1, 0x69) & BYTE_MASK;
+    slot                               = Battle_AllocEffect(1, BMAGIC_EFFECT_KAISER_BREATH) & BYTE_MASK;
     battler                            = g_BattleEffectBattler;
     g_BattleEffects[slot].header.mode  = BMAGIC_KAISER_BREATH_EFFECT_RINGS;
     g_BattleEffects[slot].target.party = battler;
     g_BattleEffectBattler->param.unk_0B += 1;
-    slot                               = Battle_AllocEffect(1, 0x69) & BYTE_MASK;
+    slot                               = Battle_AllocEffect(1, BMAGIC_EFFECT_KAISER_BREATH) & BYTE_MASK;
     battler                            = g_BattleEffectBattler;
     g_BattleEffects[slot].header.mode  = BMAGIC_KAISER_BREATH_EFFECT_BEAM;
     g_BattleEffects[slot].target.party = battler;
@@ -532,13 +532,11 @@ MATCH void BMagic_KaiserBreathRingsStart(void) {
     s32          x;
     s32          z;
 
-    work              = TASK(PartyMember);
-    x                 = g_AreaScrollTargetX;
-    active            = g_BattleEffectBattler;
-    work->pos.x.fixed = x;
-    /* FAKE: Preserve the X write before the Y read. */
-    FAKE_BARRIER();
-    work->pos.y.fixed              = g_AreaScrollTargetY;
+    work                           = TASK(PartyMember);
+    x                              = g_AreaScrollTargetCoordX.fixed;
+    active                         = g_BattleEffectBattler;
+    work->pos.x.fixed              = x;
+    work->pos.y.fixed              = g_AreaScrollTargetCoordY.fixed;
     z                              = active->pos.z.fixed;
     work->unk_5D                   = 16;
     work->pos.z.fixed              = z;
@@ -643,12 +641,10 @@ MATCH void BMagic_KaiserBreathBeamStart(void) {
     PartyMember* work;
     PartyMember* source;
 
-    work              = TASK(PartyMember);
-    source            = g_BattleEffectBattler;
-    work->pos.x.fixed = g_AreaScrollTargetX;
-    /* FAKE: Keep the Y load after the X store; the scheduler hoists it (without it 0x7C vs 0x80 bytes). */
-    FAKE_BARRIER();
-    work->pos.y.fixed         = g_AreaScrollTargetY;
+    work                      = TASK(PartyMember);
+    source                    = g_BattleEffectBattler;
+    work->pos.x.fixed         = g_AreaScrollTargetCoordX.fixed;
+    work->pos.y.fixed         = g_AreaScrollTargetCoordY.fixed;
     work->pos.z.fixed         = source->pos.z.fixed;
     work->unk_14              = 0x40;
     work->param.unk_0B        = 0;

@@ -26,13 +26,13 @@ MATCH void AreaAction_RollFade(void) {
             case 6:
                 Actor_SpawnSceneActor(1);
                 Party_AddZenny(1, 0);
-                func_801ADCF4(((s32)(-(((s32)GAME_WORK_AREA_PTR - (s32)g_Actors) * 0xD79435E5)) >> 3));
+                Actor_SpawnToss(((s32)(-(((s32)GAME_WORK_AREA_PTR - (s32)g_Actors) * 0xD79435E5)) >> 3));
                 TASK(Actor)->unk_04 = 2;
                 break;
             case 7:
                 Actor_SpawnSceneActor(1);
                 Party_AddZenny(10, 0);
-                func_801ADCF4(((s32)(-(((s32)GAME_WORK_AREA_PTR - (s32)g_Actors) * 0xD79435E5)) >> 3));
+                Actor_SpawnToss(((s32)(-(((s32)GAME_WORK_AREA_PTR - (s32)g_Actors) * 0xD79435E5)) >> 3));
                 TASK(Actor)->unk_04 = 3;
                 break;
             default:

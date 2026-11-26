@@ -1,10 +1,11 @@
 #include "area075_13.h"
 
-#ifdef NON_MATCHING
-NON_MATCHING void func_801F4874(void) {
+/* Draws the two counter panels, D_801F58CA and D_801F58CC as two-digit pairs, blinking while bit 2 of D_801F58C6 is set and skipped while bit 0 is. */
+void func_801F4874(void) {
     u8  shown;
     u8  blink;
     u8* buffer;
+    u8* separator;
     u8  tens;
     u8  ones;
 
@@ -20,7 +21,8 @@ NON_MATCHING void func_801F4874(void) {
         UI_WindowDrawPanel(0x18, 0x20, 0x54, 0x11, 0);
         buffer = g_UiTextFormatBuffer;
         sprintf((char*)buffer, (char*)D_801F2C94, (u8)tens, (u8)ones);
-        buffer[2] = 0x3E;
+        separator  = &g_UiTextFormatBuffer[2];
+        *separator = 0x3E;
         if (shown) {
             UI_TextDraw(0x2A, 0x22, blink, 6, buffer);
         }
@@ -28,12 +30,10 @@ NON_MATCHING void func_801F4874(void) {
         ones = D_801F58CC % 100;
         UI_WindowDrawPanel(0x90, 0x20, 0x54, 0x11, 0);
         sprintf((char*)buffer, (char*)D_801F2C94, (u8)tens, (u8)ones);
-        g_UiTextFormatBuffer[2] = 0x3E;
+        separator  = &g_UiTextFormatBuffer[2];
+        *separator = 0x3E;
         if (shown) {
             UI_TextDraw(0xA2, 0x22, blink, 6, buffer);
         }
     }
 }
-#else
-INCLUDE_ASM(func_801F4874);
-#endif

@@ -7,7 +7,9 @@ __asm__(".include \"include/match/macro.inc\"\n");
 /* func_801EEC50 */
 #include "overlays/bmagic/shared/BMagic_DispatchMode.h"
 
-MATCH void func_801EECB0(void) {
+/* Places the task at the active battler, copies palette 26 and advances the task mode. */
+/* func_801EECB0 */
+MATCH void BMagic_BoneDanceInit(void) {
     TASK(PartyMember)->pos.x.fixed = BATTLE_ACTIVE_WORK->pos.x.fixed;
     TASK(PartyMember)->pos.y.fixed = BATTLE_ACTIVE_WORK->pos.y.fixed;
     TASK(PartyMember)->pos.z.fixed = BATTLE_ACTIVE_WORK->pos.z.fixed;
@@ -16,14 +18,18 @@ MATCH void func_801EECB0(void) {
     TASK(PartyMember)->header.mode += 1;
 }
 
-MATCH void func_801EED2C(void) {
+/* Runs the task step that header.step (byte 0x02) selects from g_BMagicBoneDanceTaskSteps. */
+/* func_801EED2C */
+MATCH void BMagic_BoneDanceTaskUpdate(void) {
     Magic057Steps table;
 
-    table = D_801EEC10;
+    table = g_BMagicBoneDanceTaskSteps;
     SYS_DISPATCH_TASK(table.steps, 2, g_Task);
 }
 
-MATCH void func_801EED98(void) {
+/* Task step 0: queues the two sounds, selects script 3 for the actor of the effect the task runs on and spawns the shake effect. */
+/* func_801EED98 */
+MATCH void BMagic_BoneDanceStart(void) {
     PartyMember* work;
     s32          slot;
 
@@ -33,14 +39,16 @@ MATCH void func_801EED98(void) {
     g_Task = D_801EC2E0->target.party;
     Script_Select(3U);
     g_Task                             = work;
-    slot                               = Battle_AllocEffect(1, 65) & BYTE_MASK;
-    g_BattleEffects[slot].header.mode  = 1;
+    slot                               = Battle_AllocEffect(1, BMAGIC_EFFECT_BONE_DANCE) & BYTE_MASK;
+    g_BattleEffects[slot].header.mode  = BMAGIC_BONE_DANCE_EFFECT_SHAKE;
     g_BattleEffects[slot].header.step  = 0;
     g_BattleEffects[slot].target.party = TASK(PartyMember);
     TASK(PartyMember)->header.step += 1;
 }
 
-MATCH void func_801EEE50(void) {
+/* Task step 1: plays the actor's script and zeroes the bone counts each frame until the shake effect advances the step. */
+/* func_801EEE50 */
+MATCH void BMagic_BoneDanceWaitShake(void) {
     PartyMember* work;
 
     work   = TASK(PartyMember);
@@ -51,16 +59,18 @@ MATCH void func_801EEE50(void) {
     TASK(PartyMember)->timer = 0;
 }
 
-MATCH void func_801EEEB0(void) {
+/* Task step 2: on odd frames spawns a bone effect at the effect battler, up to 32, then advances the step. */
+/* func_801EEEB0 */
+MATCH void BMagic_BoneDanceSpawnBones(void) {
     PartyMember* battler;
     s32          z;
     u32          slot;
 
     if (g_FrameCount & 1) {
-        if (TASK(PartyMember)->unk_09 < 0x20) {
-            slot = Battle_AllocEffect(1, 0x41) & BYTE_MASK;
+        if (TASK(PartyMember)->unk_09 < BMAGIC_BONE_DANCE_BONE_COUNT) {
+            slot = Battle_AllocEffect(1, BMAGIC_EFFECT_BONE_DANCE) & BYTE_MASK;
             if (slot != 0xFF) {
-                g_BattleEffects[slot].header.mode  = 0;
+                g_BattleEffects[slot].header.mode  = BMAGIC_BONE_DANCE_EFFECT_BONE;
                 g_BattleEffects[slot].header.step  = 0;
                 battler                            = g_BattleEffectBattler;
                 g_BattleEffects[slot].pos.x.fixed  = battler->pos.x.fixed;
@@ -76,14 +86,18 @@ MATCH void func_801EEEB0(void) {
     }
 }
 
-MATCH void func_801EEFA4(void) {
+/* Task step 3: once every bone has ended (the ended count in byte 0x0A equals the spawned count in byte 0x09), advances the task mode. */
+/* func_801EEFA4 */
+MATCH void BMagic_BoneDanceWaitBones(void) {
     if (TASK(PartyMember)->unk_09 == TASK(PartyMember)->timer) {
         TASK(PartyMember)->header.mode += 1;
         TASK(PartyMember)->header.step = 0;
     }
 }
 
-MATCH void func_801EEFEC(void) {
+/* Raises BATTLE_STATE_EFFECT_PLAYING, marks the selected battlers damaged and clears the effect. */
+/* func_801EEFEC */
+MATCH void BMagic_BoneDanceEnd(void) {
     u16* battle_flags;
 
     battle_flags = &g_BattleState;
@@ -92,17 +106,21 @@ MATCH void func_801EEFEC(void) {
     Effect_Reset();
 }
 
-MATCH void func_801EF02C(void) {
+/* Runs the effect routine that header.mode (byte 0x01) selects from g_BMagicBoneDanceEffectModes. */
+/* func_801EF02C */
+MATCH void BMagic_BoneDanceEffectUpdate(void) {
     Magic057SecondSteps handlers;
 
-    handlers = D_801EEC20;
+    handlers = g_BMagicBoneDanceEffectModes;
     SYS_DISPATCH_TASK(handlers.steps, 1, g_Task);
 }
 
-MATCH void func_801EF08C(void) {
+/* Runs the bone step that header.step selects with the battle script table set, and draws the bone while its effect is in use. */
+/* func_801EF08C */
+MATCH void BMagic_BoneDanceBoneUpdate(void) {
     Magic057SecondSteps handlers;
 
-    handlers  = D_801EEC2C;
+    handlers  = g_BMagicBoneDanceBoneSteps;
     g_Scripts = BMAGIC_SCRIPT_TABLE;
     SYS_DISPATCH_TASK(handlers.steps, 2, g_Task);
     if (TASK(PartyMember)->header.flags & 0x1) {
@@ -112,7 +130,8 @@ MATCH void func_801EF08C(void) {
 }
 
 /* Places the effect at a random offset on the battler's facing side, lifts it by 0x600 and starts its arc. */
-MATCH void func_801EF134(void) {
+/* func_801EF134 */
+MATCH void BMagic_BoneDanceBoneStart(void) {
     PartyMember* work;
 
     if (TASK(PartyMember)->facing & 1) {
@@ -151,11 +170,13 @@ MATCH void func_801EF134(void) {
     TASK(PartyMember)->unk_29       = 4;
     TASK(PartyMember)->unk_2C.value = 0;
     Script_Select(0);
-    TASK(PartyMember)->unk_09 = 3;
+    TASK(PartyMember)->unk_09 = BMAGIC_BONE_DANCE_BONE_BOUNCES;
     TASK(PartyMember)->header.step += 1;
 }
 
-MATCH void func_801EF3C4(void) {
+/* Bone step 1: moves the bone along its arc; each time it reaches the ground it jumps to a new random offset, and after 3 bounces it advances the step. */
+/* func_801EF3C4 */
+MATCH void BMagic_BoneDanceBoneBounce(void) {
     s32 offset_x;
     s32 offset_y;
     u8  count;
@@ -178,7 +199,9 @@ MATCH void func_801EF3C4(void) {
     }
 }
 
-MATCH void func_801EF528(void) {
+/* Bone step 2: counts the bone as ended on the task (byte 0x0A) and clears the effect. */
+/* func_801EF528 */
+MATCH void BMagic_BoneDanceBoneEnd(void) {
     PartyMember* work;
 
     work        = (PartyMember*)g_BattleEffectBattler;
@@ -186,23 +209,29 @@ MATCH void func_801EF528(void) {
     Effect_Reset();
 }
 
-MATCH void func_801EF55C(void) {
+/* Runs the shake step that header.step selects from g_BMagicBoneDanceShakeSteps. */
+/* func_801EF55C */
+MATCH void BMagic_BoneDanceShakeUpdate(void) {
     Magic057SecondSteps handlers;
 
-    handlers = D_801EEC38;
+    handlers = g_BMagicBoneDanceShakeSteps;
     SYS_DISPATCH_TASK(handlers.steps, 2, g_Task);
 }
 
-MATCH void func_801EF5BC(void) {
+/* Shake step 0: loads the length of the first shake and queues its sound. */
+/* func_801EF5BC */
+MATCH void BMagic_BoneDanceShakeStart(void) {
     TASK(PartyMember)->unk_09 = 0;
-    TASK(PartyMember)->timer  = D_801EFADC[TASK(PartyMember)->unk_09];
+    TASK(PartyMember)->timer  = g_BMagicBoneDanceShakeFrames[TASK(PartyMember)->unk_09];
     SND_SEQueueSelection(256);
     TASK(PartyMember)->unk_10 = 0;
     TASK(PartyMember)->header.step++;
 }
 
-MATCH void func_801EF620(void) {
-    Callback     handlers[2] = {func_801EF7A0, func_801EF7E0};
+/* Shake step 1: runs the shake phase, moves the camera by its offset, and at the end of each of 3 shakes queues the sound again; after the third it advances the task. */
+/* func_801EF620 */
+MATCH void BMagic_BoneDanceShakeRun(void) {
+    Callback     handlers[2] = {BMagic_BoneDanceShakeDown, BMagic_BoneDanceShakeUp};
     PartyMember* phase_record;
     PartyMember* tail_record;
     PartyMember* work;
@@ -214,9 +243,9 @@ MATCH void func_801EF620(void) {
         work         = TASK(PartyMember);
         stage        = work->unk_09 + 1;
         work->unk_09 = stage;
-        work->timer  = D_801EFADC[stage];
+        work->timer  = g_BMagicBoneDanceShakeFrames[stage];
         SND_SEQueueSelection(256);
-        if (TASK(PartyMember)->unk_09 == 3) {
+        if (TASK(PartyMember)->unk_09 == BMAGIC_BONE_DANCE_SHAKE_COUNT) {
             g_BattleEffectBattler->header.step++;
             TASK(PartyMember)->timer = 0xFF;
         } else {
@@ -235,7 +264,9 @@ MATCH void func_801EF620(void) {
     g_AreaCameraOffsetY      = ramp << 1;
 }
 
-MATCH void func_801EF7A0(void) {
+/* Shake phase 0: lowers the camera offset to -3, then switches to the rise phase. */
+/* func_801EF7A0 */
+MATCH void BMagic_BoneDanceShakeDown(void) {
     PartyMember* work;
 
     work = TASK(PartyMember);
@@ -246,7 +277,9 @@ MATCH void func_801EF7A0(void) {
     }
 }
 
-MATCH void func_801EF7E0(void) {
+/* Shake phase 1: raises the camera offset back to 0, then switches to the drop phase. */
+/* func_801EF7E0 */
+MATCH void BMagic_BoneDanceShakeUp(void) {
     PartyMember* work;
 
     work = TASK(PartyMember);
@@ -257,14 +290,18 @@ MATCH void func_801EF7E0(void) {
     }
 }
 
-MATCH void func_801EF81C(void) {
+/* Shake step 2: clears the effect. */
+/* func_801EF81C */
+MATCH void BMagic_BoneDanceShakeEnd(void) {
     Effect_Reset();
 }
 
-MATCH void func_801EF83C(void) {
+/* Runs the ground step that header.step selects with the battle script table set, and draws it until the first bone has ended (the task's byte 0x0A is 0). */
+/* func_801EF83C */
+MATCH void BMagic_BoneDanceGroundUpdate(void) {
     Magic057SecondSteps handlers;
 
-    handlers  = D_801EEC44;
+    handlers  = g_BMagicBoneDanceGroundSteps;
     g_Scripts = BMAGIC_SCRIPT_TABLE;
     SYS_DISPATCH_TASK(handlers.steps, 2, g_Task);
     if ((TASK(PartyMember)->header.flags & 0x1) && (g_BattleEffectBattler->timer == 0)) {
@@ -273,7 +310,9 @@ MATCH void func_801EF83C(void) {
     g_Scripts = AREA_SCRIPT_TABLE;
 }
 
-MATCH void func_801EF900(void) {
+/* Ground step 0: places the actor on the ground height at the effect battler and starts script 0 dark. */
+/* func_801EF900 */
+MATCH void BMagic_BoneDanceGroundStart(void) {
     PartyMember* work;
     s16          height;
     s32          x;
@@ -303,7 +342,9 @@ MATCH void func_801EF900(void) {
     TASK(PartyMember)->header.step += 1;
 }
 
-MATCH void func_801EFA38(void) {
+/* Ground step 1: keeps the actor on the ground height at the effect battler until that effect ends. */
+/* func_801EFA38 */
+MATCH void BMagic_BoneDanceGroundFollow(void) {
     s32 x;
 
     TASK(PartyMember)->pos.x.fixed      = g_BattleEffectBattler->pos.x.fixed - 1;
@@ -315,6 +356,8 @@ MATCH void func_801EFA38(void) {
     }
 }
 
-MATCH void func_801EFABC(void) {
+/* Ground step 2: clears the effect. */
+/* func_801EFABC */
+MATCH void BMagic_BoneDanceGroundEnd(void) {
     Effect_Reset();
 }

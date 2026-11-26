@@ -70,11 +70,11 @@ NON_MATCHING void func_801D3A24(void) {
                 }
                 break;
             default:
-                for (i = 0; i < 12; i += 2) {
-                    if (diff < ((u8(*)[12])g_MenuMasterSkills)[*sel][i]) {
+                for (i = 0; i < MASTER_SKILL_COUNT; i++) {
+                    if (diff < g_MenuMasterSkills[*sel][i].level) {
                         continue;
                     }
-                    skill = ((u8(*)[12])g_MenuMasterSkills)[*sel][i + 1];
+                    skill = g_MenuMasterSkills[*sel][i].ability;
                     if (BIT_ARRAY_TEST(g_LearnedAbilities, skill)) {
                         continue;
                     }
@@ -83,11 +83,11 @@ NON_MATCHING void func_801D3A24(void) {
                     }
                     func_801D39CC(g_Game.members[g_MenuMasterCursor].character_index);
                     for (k = 0; k < 12; k++) {
-                        D_801490F8[k] = ((const u8*)(g_Abilities))[((u8(*)[12])g_MenuMasterSkills)[*sel][i + 1] * 0x14 + k];
+                        D_801490F8[k] = ((const u8*)(g_Abilities))[g_MenuMasterSkills[*sel][i].ability * 0x14 + k];
                     }
                     done       = 1;
                     D_80149104 = 0;
-                    skill      = ((u8(*)[12])g_MenuMasterSkills)[*sel][i + 1];
+                    skill      = g_MenuMasterSkills[*sel][i].ability;
                     BIT_ARRAY_SET(g_LearnedAbilities, skill);
                     break;
                 }

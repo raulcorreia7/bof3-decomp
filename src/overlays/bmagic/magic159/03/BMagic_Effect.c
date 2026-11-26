@@ -4,13 +4,15 @@
 __asm__(".include \"include/match/macro.inc\"\n");
 #endif
 
-MATCH void func_801EEC04(void) {
-    Callback handlers[2] = {func_801EEC5C, func_801EED84};
+/* func_801EEC04 */
+MATCH void BMagic_GloomUpdate(void) {
+    Callback handlers[2] = {BMagic_GloomInit, Effect_MarkDamagedOnZeroTick};
 
     SYS_DISPATCH_TASK(handlers, 1, g_Task);
 }
 
-MATCH void func_801EEC5C(void) {
+/* func_801EEC5C */
+MATCH void BMagic_GloomInit(void) {
     PartyMember* work;
     PartyMember* target;
     u16*         src;
@@ -24,7 +26,7 @@ MATCH void func_801EEC5C(void) {
     work->pos.z.fixed  = g_BattleSelectedActor->pos.z.fixed;
     work->param.unk_0B = 0;
     TASK(PartyMember)->header.mode += 1;
-    slot                               = Battle_AllocEffect(1, 88) & BYTE_MASK;
+    slot                               = Battle_AllocEffect(1, BMAGIC_EFFECT_GLOOM) & BYTE_MASK;
     target                             = TASK(PartyMember);
     g_BattleEffects[slot].header.mode  = 0;
     g_BattleEffects[slot].arg.unk_09   = 8;
@@ -41,17 +43,19 @@ MATCH void func_801EEC5C(void) {
 /* func_801EEDE4 */
 #include "overlays/bmagic/shared/BMagic_DispatchEffectMode.h"
 
-MATCH void func_801EEE28(void) {
-    SYS_DISPATCH_BYTE(D_801EF424, TASK(PartyMember)->header.step);
+/* func_801EEE28 */
+MATCH void BMagic_GloomFlareUpdate(void) {
+    SYS_DISPATCH_BYTE(g_BMagicGloomFlareSteps, TASK(PartyMember)->header.step);
     if (TASK(PartyMember)->header.flags != 0 && TASK(PartyMember)->header.step != 0) {
         Battle_ProjectRange();
         TASK(PartyMember)->screen_x.value += 8;
         TASK(PartyMember)->screen_y.value -= 0x10;
-        func_801EF08C();
+        BMagic_GloomDrawFlare();
     }
 }
 
-MATCH void func_801EEEC8(void) {
+/* func_801EEEC8 */
+MATCH void BMagic_GloomFlareWait(void) {
     PartyMember* src;
     PartyMember* dst;
 
@@ -67,7 +71,8 @@ MATCH void func_801EEEC8(void) {
     }
 }
 
-MATCH void func_801EEF58(void) {
+/* func_801EEF58 */
+MATCH void BMagic_GloomFlareGrow(void) {
     PartyMember* work;
 
     work = TASK(PartyMember);
@@ -80,7 +85,8 @@ MATCH void func_801EEF58(void) {
     }
 }
 
-MATCH void func_801EEFC4(void) {
+/* func_801EEFC4 */
+MATCH void BMagic_GloomFlareHold(void) {
     u8 timer;
 
     timer                     = TASK(PartyMember)->unk_09 + 1;
@@ -90,7 +96,8 @@ MATCH void func_801EEFC4(void) {
     }
 }
 
-MATCH void func_801EF014(void) {
+/* func_801EF014 */
+MATCH void BMagic_GloomFlareEnd(void) {
     PartyMember* work;
     PartyMember* active;
     u8           count;
@@ -107,7 +114,8 @@ MATCH void func_801EF014(void) {
     }
 }
 
-MATCH void func_801EF08C(void) {
+/* func_801EF08C */
+MATCH void BMagic_GloomDrawFlare(void) {
     POLY_GT4* prim;
     s32       tpage;
 

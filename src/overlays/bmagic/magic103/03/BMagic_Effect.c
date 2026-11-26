@@ -13,19 +13,19 @@ MATCH void BMagic_SimoonInit(void) {
     u16* dst;
     u16* src;
 
-    slot                               = Battle_AllocEffect(1, 45) & BYTE_MASK;
+    slot                               = Battle_AllocEffect(1, BMAGIC_EFFECT_SIMOON) & BYTE_MASK;
     g_BattleEffects[slot].target.party = TASK(PartyMember);
     g_BattleEffects[slot].header.mode  = BMAGIC_SIMOON_EFFECT_SHADOW;
     TASK(PartyMember)->param.unk_0B    = 1;
     for (i = 0; i < 2; i++) {
-        slot                               = Battle_AllocEffect(1, 45) & BYTE_MASK;
+        slot                               = Battle_AllocEffect(1, BMAGIC_EFFECT_SIMOON) & BYTE_MASK;
         g_BattleEffects[slot].target.party = TASK(PartyMember);
         g_BattleEffects[slot].header.mode  = BMAGIC_SIMOON_EFFECT_GLOW;
         g_BattleEffects[slot].unk_0B       = i;
         g_BattleEffects[slot].arg.unk_09   = i + 1;
         TASK(PartyMember)->param.unk_0B += 1;
     }
-    slot                               = Battle_AllocEffect(1, 45) & BYTE_MASK;
+    slot                               = Battle_AllocEffect(1, BMAGIC_EFFECT_SIMOON) & BYTE_MASK;
     g_BattleEffects[slot].target.party = TASK(PartyMember);
     g_BattleEffects[slot].header.mode  = BMAGIC_SIMOON_EFFECT_DOME;
     TASK(PartyMember)->param.unk_0B += 1;
@@ -68,7 +68,8 @@ MATCH void BMagic_SimoonDomePlace(void) {
     TASK(PartyMember)->header.step      = TASK(PartyMember)->header.step + 1;
 }
 
-MATCH void func_801EEFF4(void) {
+/* func_801EEFF4 */
+MATCH void BMagic_SimoonDomeGrow(void) {
     u8 counter;
 
     if (TASK(PartyMember)->unk_09 == 4) {
@@ -170,9 +171,9 @@ MATCH void BMagic_SimoonDrawDome(void) {
     }
 }
 
-/* Draw the magic103 shaded ring band. Retail writes both radii to params[0], so the inner
- * edge uses whatever params[1] holds. */
-MATCH void func_801EF7CC(void) {
+/* func_801EF7CC */
+/* Retail writes both radii to params[0], so the inner edge uses whatever params[1] holds. */
+MATCH void BMagic_SimoonDrawRing(void) {
     POLY_G4* prim;
     long     depth;
     long     flag;

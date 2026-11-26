@@ -5,5 +5,5 @@ MATCH void Battle_RunBossEffect(void) {
     BattleBossEffectSteps handlers;
 
     handlers = g_BattleBossEffectSteps;
-    handlers.steps[D_801EC2E0->step_index]();
+    handlers.steps[D_801EC2E0->effect_type]();
 }

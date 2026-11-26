@@ -143,12 +143,15 @@ extern volatile s32 g_AreaScrollTargetX;
 #else
 extern s32 g_AreaScrollTargetX;
 #endif
+/* The targets as Coord members: a member read stays behind a pointer store, a plain s32 read moves ahead of it. */
+extern Coord g_AreaScrollTargetCoordX;
 /* D_8014930C */
 #ifdef FAKE_DECL_AREA_SCROLL_TARGET_Y_VOLATILE
 extern volatile s32 g_AreaScrollTargetY;
 #else
 extern s32 g_AreaScrollTargetY; /* 0x8014930C */
 #endif
+extern Coord       g_AreaScrollTargetCoordY;
 /* D_80149310 */
 extern s32         g_AreaCameraX;
 /* D_80149318 */

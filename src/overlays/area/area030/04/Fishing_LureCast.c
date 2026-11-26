@@ -8,10 +8,8 @@ MATCH void Fishing_LureCast(void) {
     s32           value;
     s32           index;
 
-    work                = TASK(FishingState);
-    work->motion.unk_34 = g_Game.members[0].pos.x.fixed;
-    /* FAKE: keeps the x store ahead of the y load; without it the loads are scheduled first. */
-    FAKE_BARRIER();
+    work                                = TASK(FishingState);
+    work->motion.unk_34                 = g_Game.members[0].pos.x.fixed;
     work->y_38.pos_y                    = g_Game.members[0].pos.y.fixed - COORD_HALF;
     TASK(FishingState)->bounce.half.key = Area_HeightSample(work->motion.unk_34, work->y_38.pos_y) + 0x100;
 
@@ -24,11 +22,11 @@ MATCH void Fishing_LureCast(void) {
     value                         = TASK(FishingState)->y_38.pos_y - (TASK(FishingState)->cursor_10 << 15);
     TASK(FishingState)->cursor_10 = value;
     if (value >= FISHING_CAMERA_Y_MAX) {
-        g_AreaScrollTargetY = FISHING_CAMERA_Y_MAX;
+        g_AreaScrollTargetCoordY.fixed = FISHING_CAMERA_Y_MAX;
     } else if (value < FISHING_CAMERA_Y_MIN) {
-        g_AreaScrollTargetY = FISHING_CAMERA_Y_MIN;
+        g_AreaScrollTargetCoordY.fixed = FISHING_CAMERA_Y_MIN;
     } else {
-        g_AreaScrollTargetY = value;
+        g_AreaScrollTargetCoordY.fixed = value;
     }
 
     g_AreaCameraSpeed                = 0;

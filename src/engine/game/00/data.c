@@ -73,7 +73,7 @@ Callback g_ActorTypes[187] = {WorldMap_StepWalk,
                               func_801F6DC0,
                               func_801D0C98,
                               func_801D1B10,
-                              func_8019AB5C,
+                              Scene_StepToggleLock,
                               func_801D20C8,
                               func_8019A3B8,
                               func_801F70F0,
@@ -88,11 +88,11 @@ Callback g_ActorTypes[187] = {WorldMap_StepWalk,
                               func_801F8D70,
                               func_801F71C0,
                               func_801F729C,
-                              func_8019A8B4,
+                              Camera_PanAngleRun,
                               func_801F6E70,
                               func_801F2C18,
                               WorldMap_StepFlock,
-                              func_8019B364,
+                              Actor_RockRun,
                               func_8019F98C,
                               func_8019A804,
                               func_801D42A0,
@@ -117,9 +117,9 @@ Callback g_ActorTypes[187] = {WorldMap_StepWalk,
                               (Callback)func_801F2C04,
                               func_801F7A84,
                               func_801F2C30,
-                              func_8019CB94,
-                              func_8019AC34,
-                              func_8019ADA4,
+                              Actor_BlockRun,
+                              Camera_PanZoomRun,
+                              Actor_TossRun,
                               (Callback)func_801F2C04,
                               func_8019DDCC,
                               func_801F2C44,
@@ -281,11 +281,11 @@ Callback D_801C80BC[3] = {func_8019A3FC, func_8019A848, func_8019A7D4};
 
 Callback D_801C80C8[6] = {func_8019A580, func_8019A580, func_8019A580, func_8019A6AC, func_8019A580, func_8019A630};
 
-Callback D_801C80E0[3] = {func_8019A904, func_8019AA44, func_8019AAFC};
+Callback g_CameraAnglePanModes[3] = {Camera_PanAngleStart, Camera_PanAngleStep, Camera_PanAngleEnd};
 
-Callback D_801C80EC[3] = {func_8019AC84, func_8019ACF4, func_8019AD70};
+Callback g_CameraZoomPanModes[3] = {Camera_PanZoomStart, Camera_PanZoomStep, Camera_PanZoomEnd};
 
-Callback D_801C80F8[4] = {func_8019ADE8, func_8019AF1C, func_8019B024, func_8019B0EC};
+Callback g_ActorTossModes[4] = {Actor_TossStart, Actor_TossLaunch, Actor_TossFall, Actor_ClearSelf};
 
 ActorToss s_ActorTossArcs[3] = {
     {0x300000, 0x80000},
@@ -293,13 +293,27 @@ ActorToss s_ActorTossArcs[3] = {
     {0x100000, 0x80000},
 };
 
-Callback D_801C8120[3] = {func_8019B150, func_8019B1E8, func_8019B0EC};
+Callback D_801C8120[3] = {func_8019B150, func_8019B1E8, Actor_ClearSelf};
 
-Callback D_801C812C[6] = {func_8019B3A8, func_8019B4A0, func_8019B704, func_8019BBA4, func_8019BE28, func_8019BEFC};
+/* Rock mode handlers by ActorRockMode, run by Actor_RockRun with header.mode; 6 rows. */
+Callback g_ActorRockModes[ACTOR_ROCK_MODE_COUNT] = {
+    [ACTOR_ROCK_MODE_START]  = Actor_RockStart,
+    [ACTOR_ROCK_MODE_WAIT]   = Actor_RockWait,
+    [ACTOR_ROCK_MODE_ROLL]   = func_8019B704,
+    [ACTOR_ROCK_MODE_SETTLE] = Actor_RockSettle,
+    [ACTOR_ROCK_MODE_END]    = Actor_RockEnd,
+    [ACTOR_ROCK_MODE_REST]   = Actor_RockRest,
+};
 
 Callback D_801C8144[4] = {func_8019C664, func_8019C794, func_8019C910, func_8019C954};
 
-Callback D_801C8154[4] = {func_8019CBD8, func_8019CCB8, func_8019CEDC, func_8019CFCC};
+/* Block mode handlers by ActorBlockMode, run by Actor_BlockRun with header.mode. */
+Callback g_ActorBlockModes[ACTOR_BLOCK_MODE_COUNT] = {
+    [ACTOR_BLOCK_MODE_START]   = Actor_BlockStart,
+    [ACTOR_BLOCK_MODE_WAIT]    = Actor_BlockWait,
+    [ACTOR_BLOCK_MODE_SLIDE]   = Actor_BlockSlide,
+    [ACTOR_BLOCK_MODE_SHATTER] = Actor_BlockShatter,
+};
 
 Callback D_801C8164[6] = {func_8019DE10, func_8019E264, func_8019E424, func_8019E780, func_8019E918, func_8019EAD4};
 
@@ -342,15 +356,31 @@ u16 D_801C8384[28] = {0x0010, 0x0021, 0x002D, 0x0041, 0x0057, 0x0058, 0x0068, 0x
                       0x0098, 0x0000, 0x0004, 0x0003, 0x0002, 0x0001, 0x0000, 0x0101, 0x0102, 0x0103,
                       0x0004, 0x0006, 0x0002, 0x0005, 0x0000, 0x0105, 0x0102, 0x0106};
 
-ActorStepCallback D_801C83BC[7] = {(ActorStepCallback)func_801A225C, (ActorStepCallback)func_801A225C,
-                                 (ActorStepCallback)func_801A225C, (ActorStepCallback)func_801A225C,
-                                 (ActorStepCallback)func_801A22CC, (ActorStepCallback)func_801A239C,
-                                 (ActorStepCallback)func_801A246C};
+/* Move pace handlers by ActorPace, called by the Actor_Run handlers with header.step; 7 rows. */
+ActorStepCallback g_ActorPaceSteps[ACTOR_PACE_COUNT] = {
+    [ACTOR_PACE_FREE]             = (ActorStepCallback)Actor_PaceFree,
+    [ACTOR_PACE_FREE_1]           = (ActorStepCallback)Actor_PaceFree,
+    [ACTOR_PACE_FREE_2]           = (ActorStepCallback)Actor_PaceFree,
+    [ACTOR_PACE_FREE_3]           = (ActorStepCallback)Actor_PaceFree,
+    [ACTOR_PACE_PARTY_STEP]       = (ActorStepCallback)Actor_PaceByPartyStep,
+    [ACTOR_PACE_PARTY_STEP_DOUBLE] = (ActorStepCallback)Actor_PaceByPartyStepDouble,
+    [ACTOR_PACE_PARTY_STEP_BIT1]  = (ActorStepCallback)Actor_PaceByPartyStepBit1,
+};
 
-ActorModeCallback D_801C83D8[11] = {(ActorModeCallback)func_801A0AE4, (ActorModeCallback)func_801A0CFC, (ActorModeCallback)func_801A0F24,
-                             (ActorModeCallback)func_801A114C, (ActorModeCallback)func_801A1384, (ActorModeCallback)func_801A271C,
-                             (ActorModeCallback)func_801A1A24, (ActorModeCallback)func_801A3410, (ActorModeCallback)Game_FadeDispatchWhite,
-                             (ActorModeCallback)Game_FadeDispatchBlack, (ActorModeCallback)func_801A3B7C};
+/* Field actor mode handlers by ActorMode, run by Actor_RunInteractions with header.mode; 11 rows. */
+ActorModeCallback g_ActorModes[ACTOR_MODE_COUNT] = {
+    [ACTOR_MODE_WANDER]         = (ActorModeCallback)Actor_RunWander,
+    [ACTOR_MODE_FLEE]           = (ActorModeCallback)Actor_RunFlee,
+    [ACTOR_MODE_CHASE]          = (ActorModeCallback)Actor_RunChase,
+    [ACTOR_MODE_WANDER_HOME]    = (ActorModeCallback)Actor_RunWanderHome,
+    [ACTOR_MODE_ROUTE]          = (ActorModeCallback)Actor_RunRoute,
+    [ACTOR_MODE_ROUTE_WAIT]     = (ActorModeCallback)Actor_RunRouteWait,
+    [ACTOR_MODE_REQUEST_SCRIPT] = (ActorModeCallback)Actor_RunRequestScript,
+    [ACTOR_MODE_ATTACH]         = (ActorModeCallback)Actor_RunAttach,
+    [ACTOR_MODE_FADE_WHITE]     = (ActorModeCallback)Game_FadeDispatchWhite,
+    [ACTOR_MODE_FADE_BLACK]     = (ActorModeCallback)Game_FadeDispatchBlack,
+    [ACTOR_MODE_TURN]           = (ActorModeCallback)Actor_RunTurn,
+};
 
 u8 s_EntityRouteIndices[8][4] = {{0x03, 0x05, 0x07, 0x01}, {0x05, 0x01, 0x07, 0x03}, {0x07, 0x05, 0x03, 0x01},
                                  {0x01, 0x07, 0x05, 0x03}, {0x07, 0x01, 0x03, 0x05}, {0x03, 0x01, 0x07, 0x05},
@@ -379,18 +409,18 @@ Callback g_SceneSteps[2] = {Scene_ResetEventState, Scene_UpdateEvent};
 u8 s_EventFlagsReset[16] = {0x08, 0x00, 0x00, 0x0A, 0x00, 0x00, 0x00, 0x00,
                             0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00};
 
-Callback g_SceneEvents[64] = {func_801A7CE8, func_801F37E4, func_801F394C,       func_801F4B60,           UI_PanelOpenMaster, func_801A7E54,           UI_MessageRunArea, func_801F4378,
+Callback g_SceneEvents[64] = {Scene_StepIdle, func_801F37E4, func_801F394C,       func_801F4B60,           UI_PanelOpenMaster, Scene_RunMineEntry,           UI_MessageRunArea, func_801F4378,
                               func_801F34A0, func_801F3740, Scene_RunInn, (Callback)func_801F2C04, func_801F50F0,   (Callback)func_801F2C04, Fairy_RunCommu01Scene,          func_801F3F34,
                               func_801F3254, func_801F3EE8, func_801F529C,       func_801F3198,           func_801F45EC,   Fairy_RunGiftScene,           Fairy_RunExploreReward,          Fairy_RunCommu02Scene,
-                              Fairy_RunCommu03Scene, Fairy_RunCommu04Scene, Fairy_RunCommu05Scene,       func_801A839C,           func_801F38D8,   func_801F2CDC,           func_801F37EC,          func_801F3C24,
+                              Fairy_RunCommu03Scene, Fairy_RunCommu04Scene, Fairy_RunCommu05Scene,       WorldMap_RunLocationGuide,           func_801F38D8,   func_801F2CDC,           func_801F37EC,          func_801F3C24,
                               func_801F4494, func_801F3460, func_801F2F54,       func_801F4BC0,           func_801F3B4C,   func_801F4B58,           func_801F4C84,          (Callback)func_801F2C04,
-                              func_801F5E4C, func_801F40C0, func_801F2C7C,       func_801F4B80,           func_801A83DC,   func_801F5E1C,           func_801F38DC,          func_801F390C,
-                              func_801F3B4C, func_801F4F9C, func_801F4D14,       func_801F4164,           func_801F3D28,   func_801F33C8,           func_801F2E98,          func_801A852C,
+                              func_801F5E4C, func_801F40C0, func_801F2C7C,       func_801F4B80,           Scene_RunGeneFound,   func_801F5E1C,           func_801F38DC,          func_801F390C,
+                              func_801F3B4C, func_801F4F9C, func_801F4D14,       func_801F4164,           func_801F3D28,   func_801F33C8,           func_801F2E98,          WorldMap_RunFairyEntry,
                               func_801F30BC, func_801F2EA0, func_801F2D0C,       func_801F4A0C,           func_801F23A4,   func_801F3180,           func_801F2CF0,          func_801F3CD0};
 
 u8 s_ScenarioStateStepArgs[8] = {0x00, 0x00, 0x04, 0x04, 0x00, 0x00, 0x00, 0x00};
 
-Callback D_801C85C4[11] = {Fishing_ShowLocation, func_801F2D18,        Fishing_ShowLocation, func_801F2C6C,        func_801F2C6C, func_801F3798,
+Callback g_WorldMapGuides[11] = {Fishing_ShowLocation, func_801F2D18,        Fishing_ShowLocation, func_801F2C6C,        func_801F2C6C, func_801F3798,
                            func_801F2F0C,        Fishing_ShowLocation, func_801F2E1C,        Fishing_ShowLocation, func_801F2CA8};
 
 SceneActorCallback g_SceneObjects[66] = {
@@ -2172,7 +2202,7 @@ s8 s_EntityPlacementOffsets[32] = {
     0x00, 0xFD, 0xFD, 0x00, 0x02, 0xFE, 0xFF, 0xFC, 0x03, 0x00, 0x00, 0xFD, 0x02, 0x02, 0x04, 0xFF,
 };
 
-Callback g_PartyLeaderModes[15] = {func_801B016C, func_801B0320, func_801B69C0, Game_LeaderSwitchRun, func_801B29BC, func_801B2A70, func_801B2C38, func_801B2D90,
+Callback g_PartyLeaderModes[15] = {func_801B016C, func_801B0320, Party_RunMoveStep, Game_LeaderSwitchRun, func_801B29BC, func_801B2A70, func_801B2C38, func_801B2D90,
                            Area_Climb,    func_801D9B14, func_801B3690, func_801B371C,        func_801B3BFC, func_801F4D9C, func_801C22D8};
 
 Callback D_801CD0E8[3] = {func_801B036C, func_801B0568, func_801B0DA0};
@@ -2225,27 +2255,57 @@ u8 s_AreaScenePositions[8] = {
 
 u8 s_AreaCellTypes[12] = {0xC0, 0xA0, 0xA1, 0xAE, 0xAF, 0x91, 0x26, 0x27, 0x28, 0x29, 0x2C, 0xFF};
 
-Callback D_801CD2B0[9] = {func_801B6A04, func_801B70D4, func_801B726C, func_801B73B0, func_801B78B4, func_801B8234, func_801B870C, func_801B9048, func_801B91CC};
+/* Mode 2 steps of the leader and follower by PartyMoveStep, run by Party_RunMoveStep; 9 rows. */
+Callback g_PartyMoveSteps[PARTY_MOVE_STEP_COUNT] = {
+    [PARTY_MOVE_STEP_SCRIPT_WALK]    = Party_ScriptWalkRun,
+    [PARTY_MOVE_STEP_ATTACH]         = Party_AttachRun,
+    [PARTY_MOVE_STEP_FADE_IN]        = Party_FadeInRun,
+    [PARTY_MOVE_STEP_JUMP]           = Party_JumpRun,
+    [PARTY_MOVE_STEP_LADDER_TRANSIT] = Party_LadderTransitRun,
+    [PARTY_MOVE_STEP_WALK_TRANSIT]   = Party_WalkTransitRun,
+    [PARTY_MOVE_STEP_CELL_WALK]      = Party_CellWalkRun,
+    [PARTY_MOVE_STEP_FALL_THROUGH]   = Party_FallThroughRun,
+    [PARTY_MOVE_STEP_FLOOR_DAMAGE]   = Party_FloorDamageRun,
+};
 
-Callback D_801CD2D4[6] = {func_801B6AB0, func_801B6BC8, func_801B6F1C, func_801B6FDC, func_801B7024, func_801B707C};
+/* Script walk sub-steps by unk_03, run by Party_ScriptWalkRun; 6 rows. */
+Callback g_PartyScriptWalkSteps[6] = {Party_ScriptWalkAlign, Party_ScriptWalkRead, Party_ScriptWalkMove, Party_ScriptWalkWaitMessage, Party_ScriptWalkFadeOut, Party_ScriptWalkFadeIn};
 
-Callback D_801CD2EC[2] = {func_801B72B0, func_801B7344};
+/* Fade-in sub-steps by unk_03, run by Party_FadeInRun; 2 rows. */
+Callback g_PartyFadeInSteps[2] = {Party_FadeInStart, Party_FadeInWait};
 
-Callback D_801CD2F4[5] = {func_801B73F4, func_801B744C, func_801B7658, func_801B76F4, func_801B781C};
+/* Jump sub-steps by PartyJumpStep, run by Party_JumpRun. */
+Callback g_PartyJumpSteps[PARTY_JUMP_STEP_COUNT] = {
+    [PARTY_JUMP_STEP_START]  = Party_JumpStart,
+    [PARTY_JUMP_STEP_LAUNCH] = Party_JumpLaunch,
+    [PARTY_JUMP_STEP_TRAVEL] = Party_JumpTravel,
+    [PARTY_JUMP_STEP_FALL]   = Party_JumpFall,
+    [PARTY_JUMP_STEP_LAND]   = Party_JumpLand,
+};
 
-Callback D_801CD308[2] = {func_801B790C, func_801B7D00};
+/* Ladder transits by PartyLadderTransit, run by Party_LadderTransitRun. */
+Callback g_PartyLadderTransits[PARTY_LADDER_TRANSIT_COUNT] = {
+    [PARTY_LADDER_TRANSIT_UP]   = Party_LadderUpRun,
+    [PARTY_LADDER_TRANSIT_DOWN] = Party_LadderDownRun,
+};
 
-Callback D_801CD310[8] = {func_801B7950, func_801B7988, func_801B79F8, func_801B81EC, func_801B7B54, func_801B7C10, func_801B7C58, func_801B7CA0};
+/* Up ladder sub-steps by unk_04, run by Party_LadderUpRun; 8 rows. */
+Callback g_PartyLadderUpSteps[8] = {Party_LadderUpGrab, Party_LadderUpLeave, Party_LadderUpEnter, Party_LadderWaitFadeIn, Party_LadderUpClimb, Party_LadderUpDismount, Party_LadderUpExitBegin, Party_LadderUpExit};
 
-Callback D_801CD330[10] = {func_801B7D44, func_801B7D84, func_801B7DC0, func_801B7DFC, func_801B7E38, func_801B7E74, func_801B7EF0, func_801B81EC, func_801B7FE0, func_801B80B4};
+/* Down ladder sub-steps by unk_04, run by Party_LadderDownRun; 10 rows. */
+Callback g_PartyLadderDownSteps[10] = {Party_LadderDownApproachBegin, Party_LadderDownApproach, Party_LadderDownTurn, Party_LadderDownTurnWait, Party_LadderDownLower, Party_LadderDownLeave, Party_LadderDownEnter, Party_LadderWaitFadeIn, Party_LadderDownDescend, Party_LadderDownDismount};
 
-Callback D_801CD358[5] = {func_801B828C, func_801B830C, func_801B8394, func_801B8578, func_801B85C0};
+/* Walk transit sub-steps by unk_03, run by Party_WalkTransitRun; 5 rows. */
+Callback g_PartyWalkTransitSteps[5] = {Party_WalkExitBegin, Party_WalkExit, Party_WalkEnterBegin, Party_WalkEnterFadeWait, Party_WalkEnter};
 
-Callback D_801CD36C[2] = {func_801B876C, func_801B87B8};
+/* Cell walk sub-steps by unk_03, run by Party_CellWalkRun; 2 rows. */
+Callback g_PartyCellWalkSteps[2] = {Party_CellWalkStart, Party_CellWalkMove};
 
-Callback D_801CD374[2] = {func_801B90A0, func_801B9100};
+/* Fall sub-steps by unk_03, run by Party_FallThroughRun; 2 rows. */
+Callback g_PartyFallThroughSteps[2] = {Party_FallThroughStart, Party_FallThroughSpin};
 
-Callback D_801CD37C[2] = {func_801B9210, func_801B9478};
+/* Floor damage sub-steps by unk_03, run by Party_FloorDamageRun; 2 rows. */
+Callback g_PartyFloorDamageSteps[2] = {Party_FloorDamageStart, Party_FloorDamageBlink};
 
 u8 D_801CD384[128] = {0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x02, 0x00, 0x00, 0x00, 0xFF, 0xFF, 0x00, 0x00, 0x02, 0x00,
                       0x00, 0x00, 0xFE, 0xFF, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0xFE, 0xFF, 0x00, 0x00, 0xFF, 0xFF,
@@ -2256,7 +2316,7 @@ u8 D_801CD384[128] = {0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x02, 0x00, 0x00, 0x00
                       0x00, 0x00, 0xFE, 0xFF, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0xFF, 0xFF, 0x00, 0x00, 0xFE, 0xFF,
                       0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0xFE, 0xFF, 0x00, 0x00, 0x02, 0x00, 0x00, 0x00, 0xFF, 0xFF};
 
-Callback g_PartyFollowerModes[15] = {func_801BBE98, func_801BBFB4, func_801B69C0, func_801BD32C, func_801BD35C, func_801BD38C, func_801BD394, func_801BD5A4,
+Callback g_PartyFollowerModes[15] = {func_801BBE98, func_801BBFB4, Party_RunMoveStep, func_801BD32C, func_801BD35C, func_801BD38C, func_801BD394, func_801BD5A4,
                            Area_ClimbFollower, (Callback)0,   (Callback)0,   (Callback)0,   (Callback)0,   (Callback)0,   func_801C22D8};
 
 Callback D_801CD440[2] = {func_801BC000, Area_SceneStepTimer};

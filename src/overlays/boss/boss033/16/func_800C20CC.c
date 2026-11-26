@@ -12,7 +12,7 @@ MATCH void func_800C20CC(void) {
         slot                                            = (BattleWorkImage*)&g_BattleEffects[index & BYTE_MASK];
         *slot                                           = *TASK(BattleWorkImage);
         g_BattleEffects[index & BYTE_MASK].unk_06       = 3;
-        g_BattleEffects[index & BYTE_MASK].step_index   = 6;
+        g_BattleEffects[index & BYTE_MASK].effect_type  = 6;
         g_BattleEffects[index & BYTE_MASK].header.mode  = 1;
         g_BattleEffects[index & BYTE_MASK].header.step  = 0;
         g_BattleEffects[index & BYTE_MASK].unk_03       = 0;

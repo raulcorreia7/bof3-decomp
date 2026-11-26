@@ -91,6 +91,37 @@ typedef enum ActorInteractionFlags {
     ACTOR_INTERACTION_SCRIPT_PENDING = 1 << 5,
 } ActorInteractionFlags;
 
+/* `header.mode` of a field actor row, the index of g_ActorModes. A wander, flee, chase or route mode
+ * that must turn sets mode TURN and keeps the old mode in unk_03; END_SCRIPT and the route wait
+ * restore it. */
+typedef enum ActorMode {
+    ACTOR_MODE_WANDER,         /* walks in short legs and turns at random */
+    ACTOR_MODE_FLEE,           /* walks away from the leader while it is inside the actor's box */
+    ACTOR_MODE_CHASE,          /* walks toward the leader while it is inside the actor's box */
+    ACTOR_MODE_WANDER_HOME,    /* wanders without leaving its box around the spawn position */
+    ACTOR_MODE_ROUTE,          /* runs a route script row of the area */
+    ACTOR_MODE_ROUTE_WAIT,     /* counts down the wait a route script set */
+    ACTOR_MODE_REQUEST_SCRIPT, /* raises the script request bit every frame */
+    ACTOR_MODE_ATTACH,         /* follows the position of another actor */
+    ACTOR_MODE_FADE_WHITE,     /* runs the fade to white */
+    ACTOR_MODE_FADE_BLACK,     /* runs the fade to black */
+    ACTOR_MODE_TURN,           /* turns toward unk_79 one facing at a time */
+    ACTOR_MODE_COUNT
+} ActorMode;
+
+/* `header.step` of a field actor row, the index of g_ActorPaceSteps: when a move may start. Rows 0
+ * to 3 run the same handler. */
+typedef enum ActorPace {
+    ACTOR_PACE_FREE,
+    ACTOR_PACE_FREE_1,
+    ACTOR_PACE_FREE_2,
+    ACTOR_PACE_FREE_3,
+    ACTOR_PACE_PARTY_STEP,        /* one move per change of bit 0 of the party step count */
+    ACTOR_PACE_PARTY_STEP_DOUBLE, /* two moves per change of bit 0 */
+    ACTOR_PACE_PARTY_STEP_BIT1,   /* one move per change of bit 1 */
+    ACTOR_PACE_COUNT
+} ActorPace;
+
 /* `option_flags`, the spawn record's option byte. Bit 0 hides the row at spawn; bit 1
  * keeps its own route instead of the opposite facing; bit 2 drops the script
  * arm; bit 3 skips re-applying the route; bit 5 skips the animation-stream
@@ -149,7 +180,7 @@ typedef union ActorVoiceFlags {
 ASSERT_SIZE(ActorVoiceFlags, 0x04);
 
 /* The role tail at +0x8C. Area code that tests the player's distance reads the half extents
- * of the box (func_801A1A58, func_801A2C94, func_801A2DB4); the pond fish rows keep the
+ * of the box (Actor_IsAheadInHomeBox, Actor_PickFleeFacing, Actor_PickChaseFacing); the pond fish rows keep the
  * stamina gauge there (area030/04 func_801E026C), the maximum first. */
 typedef union ActorTail {
     struct {
@@ -180,8 +211,8 @@ ASSERT_SIZE(ActorRole, 1);
 
 typedef struct Actor {
     TaskHeader      header;            /* 0x00 */
-    u8              unk_03;            /* 0x03 */
-    u8              unk_04;            /* 0x04 */
+    u8              unk_03;            /* 0x03 - the sub-step table row a party move step runs */
+    u8              unk_04;            /* 0x04 - the sub-step table row of a ladder transit */
     u8              unk_05;            /* 0x05 - region/scene index; commu00 calls it the
                                 *        source row the task came from; the script copy
                                 *        scales its staging offset by it; cleared at scene init */
@@ -190,13 +221,13 @@ typedef struct Actor {
     u8              option_flags;      /* 0x07 - ActorOptionFlags */
     u8              direction;         /* 0x08 - the 1-based direction the actor faces; walk and draw scripts index by it */
     u8              timer;             /* 0x09 - counted up or down by the area step handlers */
-    u8              unk_0A;            /* 0x0A */
+    u8              unk_0A;            /* 0x0A - party move steps count frames or steps left in it */
     ActorRole       param;             /* 0x0B */
     s32             vx;                /* 0x0C added to x each step */
     s32             vy;                /* 0x10 added to y each step */
     s32             vz;                /* 0x14 signed vertical speed */
-    s32             unk_18;            /* 0x18 - commu00 calls it variant_arg_0 */
-    s32             unk_1C;            /* 0x1C - commu00 calls it variant_arg_1 */
+    s32             unk_18;            /* 0x18 - commu00 calls it variant_arg_0; the attach step: the party actor to sit on */
+    s32             unk_1C;            /* 0x1C - commu00 calls it variant_arg_1; the attach step: the offset row from the area table */
     s32             gravity;           /* 0x20 added to vz each step */
     u8              active_flags;      /* 0x24 - ActorActiveFlags; bit 0x40 marks a usable row */
     u8              sheet_page;        /* 0x25 - sprite: texture page of the sheet (Party_MemberLoadSprite) */
@@ -284,7 +315,7 @@ ASSERT_OFFSET(Actor, ext, 0x8C);
 ASSERT_OFFSET(Actor, fish_row, 0x92);
 ASSERT_SIZE(Actor, ACTOR_SIZE);
 
-/* A party slot's turn ramp: each frame func_801A3D1C and func_801AC33C add the steps to Actor words 0x64..0x6C until the counts run out. */
+/* A party slot's turn ramp: each frame Actor_TurnRampStep and func_801AC33C add the steps to Actor words 0x64..0x6C until the counts run out. */
 typedef struct ActorTurnRamp {
     u8  flags;     /* 0x00 - bit 0 set: func_801A3080 leaves the ramp alone */
     s8  frames_xy; /* 0x01 */
