@@ -1,4 +1,5 @@
 #include "area192_13.h"
+#include "menu/save_data.h"
 
 MATCH void func_801F2E98(void) {
     switch (g_SceneEventState.step) {
@@ -27,10 +28,10 @@ MATCH void func_801F2E98(void) {
                 u8  flag_value;
 
                 SYS_SetFlag(g_SceneEventFlags, 0x82);
-                D_80144F54 = 0x1E0;
-                flag       = &g_ScenarioState.flags_01;
-                D_80146880 = 0;
-                D_80146881 = 0;
+                g_SaveData.desert.clock = 0x1E0;
+                flag                    = &g_ScenarioState.flags_01;
+                D_80146880              = 0;
+                D_80146881              = 0;
                 /* FAKE: barrier keeps the flag load below the zero stores. */
                 FAKE_BARRIER();
                 flag_value             = *flag;
@@ -44,10 +45,10 @@ MATCH void func_801F2E98(void) {
                 u16* area;
 
                 Game_ClearScriptActive();
-                area = &D_80145048;
-                Game_RequestAreaChange(*area, D_80145040, D_80145044, FACING_DOWN_RIGHT);
+                area = &g_SaveData.return_point.area_id;
+                Game_RequestAreaChange(*area, g_SaveData.return_point.x, g_SaveData.return_point.y, FACING_DOWN_RIGHT);
                 g_AreaWalkFlags |= AREA_WALK_ENTRY_PENDING;
-                D_8014504A = 0;
+                g_SaveData.return_point.pending = 0;
                 /* The scene-event flag block sits 0x120 bytes before the saved area id. */
                 SYS_ClearFlag((u8*)area - 0x120, 0x77);
                 g_SceneEventState.mode = SCENE_EVENT_NONE;
@@ -70,7 +71,7 @@ MATCH void func_801F2E98(void) {
                 Game_ClearScriptActive();
                 Game_RequestAreaChange(AREA_ID_OASIS, TO_COORD(24), TO_COORD(48), FACING_UP);
                 g_AreaWalkFlags |= AREA_WALK_ENTRY_PENDING;
-                word  = &D_8014504A;
+                word  = &g_SaveData.return_point.pending;
                 *word = 0;
                 /* The scene-event flag block sits 0x122 bytes before the saved area byte. */
                 SYS_ClearFlag((u8*)word - 0x122, 0x77);

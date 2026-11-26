@@ -5,8 +5,6 @@
  * and its data. Only this image includes the file. */
 
 #include "overlays/area/worlds/world04.h"
-/* The area counter and the area flag store the selection pass reads. */
-extern u8 D_80144F56;
 
 /* The selection record and its two step tables. */
 extern u8 D_801F380C[];

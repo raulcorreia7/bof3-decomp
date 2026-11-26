@@ -7,8 +7,10 @@ REF is TARGET@0xADDRESS; `--worklist` reads `tools/worklist.py --jsonl` lines. F
 body is tokenized and each edit class (CLASSES) proposes variants: one retyped local or parameter,
 an increment or compound-assignment form, one cast, one swapped statement or declaration, one
 swapped operand or comparison, one loop or if/else or ternary form, `break` for `return`, one local
-split or two merged. Each variant is compiled with `MATCH_SRC` into a private object and scored
-as `tools/match.sh --diff` scores it: differing rows. The tree is never written. One JSON line per
+split or two merged, one statement moved within its run of plain statements, every width
+combination of the integer parameters as an old-style definition. Each variant is
+compiled with `MATCH_SRC` into a private object and scored as `tools/match.sh --diff` scores it:
+differing rows. `--classes a-type,j-move` limits the classes. The tree is never written. One JSON line per
 variant that matches or has fewer rows than the draft goes to `--out`, with its class and diff;
 a summary line per function (`"class": "summary"`) counts the variants tried and failed.
 `--pairs` then tries pairs of a function's improving edits when none matched.
@@ -27,7 +29,7 @@ import subprocess
 import sys
 import tempfile
 from concurrent.futures import ProcessPoolExecutor, as_completed
-from itertools import combinations
+from itertools import combinations, product
 from pathlib import Path
 
 from bof3.core.paths import ROOT
@@ -365,6 +367,31 @@ def g_retype(f: Function):
                 )
 
 
+def g_params(f: Function):
+    """Every width combination of the integer parameters, as an old-style definition."""
+    t, params = f.toks, f.params()
+    ints = [p for p in params if t[p[0]].text in INTS and p[1] == p[0] + 1]
+    if not ints:
+        return
+    names = ", ".join(t[q[1]].text for q in params)
+    for widths in product(("s32", "u8", "s16", "u16"), repeat=len(ints)):
+        chosen = dict(zip(ints, widths, strict=True))
+        if all(chosen[p] == t[p[0]].text for p in ints):
+            continue
+        decls = "".join(
+            f"    {chosen.get(q) or f.span(q[0], q[1] - 1)} {t[q[1]].text};\n"
+            for q in params
+        )
+        label = ", ".join(f"{t[p[1]].text}: {w}" for p, w in chosen.items())
+        yield (
+            f"old-style {label}",
+            (
+                (t[f.paren].end, t[f.close].start, names),
+                (t[f.close].end, t[f.body].start, "\n" + decls),
+            ),
+        )
+
+
 def g_increment(f: Function):
     t = f.toks
     for a, b, kind, _ in f.statements:
@@ -546,6 +573,32 @@ def _adjacent(f: Function, x, y) -> bool:
         ):
             return False
     return True
+
+
+def g_move(f: Function):
+    """Move one plain statement two or more places within a run of plain statements."""
+    t, runs, run = f.toks, [], []
+    for s in (s for s in f.statements if s[2] == "expr"):
+        if run and _adjacent(f, run[-1], s) and run[-1][3] == s[3]:
+            run.append(s)
+        else:
+            run = [s]
+            runs.append(run)
+    for run in (r for r in runs if len(r) >= 3):
+        texts = [f.span(s[0], s[1]) for s in run]
+        for i, j in (
+            (i, j) for i in range(len(run)) for j in range(len(run)) if abs(i - j) >= 2
+        ):
+            order = texts[:i] + texts[i + 1 :]
+            order.insert(j, texts[i])
+            yield (
+                f"move {texts[i][:40]} to {j - i:+d}",
+                tuple(
+                    (t[s[0]].start, t[s[1]].end, new)
+                    for s, new in zip(run, order, strict=True)
+                    if new is not None
+                ),
+            )
 
 
 def g_swap_decls(f: Function):
@@ -805,20 +858,24 @@ CLASSES = {
     "g-control": g_control,
     "h-return": g_return,
     "i-locals": g_locals,
+    "j-move": g_move,
+    "k-params": g_params,
 }
 
 
-def variants(text: str):
+def variants(text: str, classes=None):
     """(class, label, edit) for every single edit the classes propose on one definition."""
     f = Function(text)
     for cls, gen in CLASSES.items():
+        if classes and cls not in classes:
+            continue
         seen = set()
         try:
             for label, edit in gen(f):
                 if edit in seen:
                     continue
                 seen.add(edit)
-                if len(seen) > CAP:
+                if len(seen) > (4**4 if cls == "k-params" else CAP):
                     break
                 yield cls, label, edit
         except (IndexError, KeyError, RuntimeError, StopIteration, ValueError):
@@ -866,7 +923,15 @@ def symbol_name(ref: str) -> str | None:
     return f"func_{want:08X}"
 
 
-def sweep(ref: str, name: str, source: Path, pairs: bool, judge=measure, workdir=None):
+def sweep(
+    ref: str,
+    name: str,
+    source: Path,
+    pairs: bool,
+    judge=measure,
+    workdir=None,
+    classes=None,
+):
     """Score every variant of one draft on private copies; return the result records."""
     base = source.read_text()
     start, end = function_span(base, name)
@@ -892,7 +957,7 @@ def sweep(ref: str, name: str, source: Path, pairs: bool, judge=measure, workdir
             ]
         tried = failed = 0
         better = []
-        for cls, label, edit in variants(text):
+        for cls, label, edit in variants(text, classes):
             rows = score(edit)
             tried += 1
             if rows is None:
@@ -953,13 +1018,13 @@ def _record(ref, base_rows, cls, label, text, edit, rows):
     }
 
 
-def _job(ref: str, name: str | None, pairs: bool):
+def _job(ref: str, name: str | None, pairs: bool, classes=None):
     name = name or symbol_name(ref)
     source = find_source(name) if name else None
     if source is None:
         return [{"ref": ref, "class": "summary", "error": f"no draft for {name}"}]
     try:
-        return sweep(ref, name, source, pairs)
+        return sweep(ref, name, source, pairs, classes=classes)
     except Exception as error:  # one bad draft must not stop the sweep
         return [{"ref": ref, "class": "summary", "error": repr(error)[:200]}]
 
@@ -975,6 +1040,9 @@ def main() -> int:
     parser.add_argument(
         "--pairs", action="store_true", help="also try pairs of improving edits"
     )
+    parser.add_argument(
+        "--classes", type=lambda v: v.split(","), help="comma list of CLASSES keys"
+    )
     args = parser.parse_args()
     rows = [(r, None) for r in args.refs]
     if args.worklist:
@@ -988,7 +1056,10 @@ def main() -> int:
         ProcessPoolExecutor(args.jobs) as pool,
     ):
         out = sys.stdout if args.out == "-" else sink
-        futures = {pool.submit(_job, ref, name, args.pairs): ref for ref, name in rows}
+        futures = {
+            pool.submit(_job, ref, name, args.pairs, args.classes): ref
+            for ref, name in rows
+        }
         for done in as_completed(futures):
             for record in done.result():
                 out.write(json.dumps(record) + "\n")

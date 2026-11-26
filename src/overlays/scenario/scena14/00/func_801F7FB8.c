@@ -1,4 +1,5 @@
 #include "scena14_00.h"
+#include "menu/save_data.h"
 #include "area/map.h"
 
 #if BOF3_USE_ASM
@@ -203,9 +204,9 @@ MATCH void func_801F7FB8(void) {
             break;
         case 32:
             Game_RequestAreaChange(AREA_ID_DESERT_OF_DEATH_MAP, TO_COORD(0x1800), TO_COORD(0xC00), FACING_UP_RIGHT);
-            flags      = &g_ScenarioState.flags_01;
-            D_8014504B = 2;
-            D_80144F54 = 0;
+            flags                          = &g_ScenarioState.flags_01;
+            g_SaveData.return_point.facing = 2;
+            g_SaveData.desert.clock        = 0;
             *flags |= 1;
             g_ScenarioState.step = 33;
             break;

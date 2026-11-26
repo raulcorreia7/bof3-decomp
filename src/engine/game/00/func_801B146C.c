@@ -1,4 +1,5 @@
 #include "game_00.h"
+#include "menu/save_data.h"
 
 MATCH void func_801B146C(void) {
     u8     state_flags;
@@ -85,8 +86,8 @@ MATCH void func_801B146C(void) {
         work_i = TASK(Actor);
         if (!(Area_CellTestCorners(work_i->pos.x.fixed, work_i->pos.y.fixed, work_i->voice_flags.scene_flag, 0xA6, 0U) & BYTE_MASK)) {
             Script_Request(TASK(Actor)->direction);
-            D_8014504A = 0;
-            Game_RequestAreaChange(D_80145048, D_80145040, D_80145044, FACING_DOWN_RIGHT);
+            g_SaveData.return_point.pending = 0;
+            Game_RequestAreaChange(g_SaveData.return_point.area_id, g_SaveData.return_point.x, g_SaveData.return_point.y, FACING_DOWN_RIGHT);
             return;
         }
         world_flags = g_AreaWalkFlags;

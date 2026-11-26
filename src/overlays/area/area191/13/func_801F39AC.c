@@ -1,4 +1,5 @@
 #include "area191_13.h"
+#include "menu/save_data.h"
 
 MATCH void func_801F39AC(void) {
     u8* flags;
@@ -16,7 +17,7 @@ MATCH void func_801F39AC(void) {
     if (!SYS_TestFlag(flags + 0x576, 0xA)) {
         if (fatigue < CHARACTER_FATIGUE_MAX) {
             if (fatigue < 5) {
-                mode = D_80144F56 >= 5;
+                mode = g_SaveData.desert.days >= 5;
             } else {
                 mode = 1;
             }
@@ -24,7 +25,7 @@ MATCH void func_801F39AC(void) {
             mode = 2;
         }
     } else if (fatigue < 5) {
-        mode = D_80144F56 >= 5;
+        mode = g_SaveData.desert.days >= 5;
     } else {
         mode = 2;
     }

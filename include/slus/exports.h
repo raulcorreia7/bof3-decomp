@@ -129,6 +129,7 @@ extern u8          D_80144955;
 /* D_80144E98 */
 extern u8          g_Scenario2Flags[];
 /* 0x80145xxx: pad state, shared text buffer and field words. */
+/* g_SaveData.return_point.area_id as a scalar. */
 extern u16         D_80145048;
 extern u8          D_801454F2;
 /* D_801459F4 */

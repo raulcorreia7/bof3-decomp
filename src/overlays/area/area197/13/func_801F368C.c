@@ -1,7 +1,7 @@
 #include "area197_13.h"
 
 MATCH void func_801F368C(void) {
-    if (SYS_TestFlag(D_80144EF8, 14)) {
+    if (SYS_TestFlag(&g_SceneFlagWords[14 * 8], 14)) {
         TASK(Actor)->timer = 0;
         TASK(Actor)->header.step += 1;
     }
