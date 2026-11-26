@@ -172,9 +172,9 @@ NON_MATCHING void func_801D1250(s32 scene, s32 mode) {
     left = scene;
     top  = mode;
     if (g_SndBGMId == D_801D1918[D_801D1940]) {
-        UI_TextDraw((s16)(scene + 0x14), (s16)(mode + 0x17), 2, TEXT_LENGTH_MAX, (u8*)AREA_MESSAGE_TABLE + D_800104E2[D_801D1940]);
+        UI_TextDraw((s16)(scene + 0x14), (s16)(mode + 0x17), 2, TEXT_LENGTH_MAX, MESSAGE_TABLE_TEXT(AREA_MESSAGE_TABLE, D_801D1940 + 0x271));
     } else {
-        UI_TextDraw((s16)(scene + 0x14), (s16)(mode + 0x17), 0, TEXT_LENGTH_MAX, (u8*)AREA_MESSAGE_TABLE + D_800104E2[D_801D1940]);
+        UI_TextDraw((s16)(scene + 0x14), (s16)(mode + 0x17), 0, TEXT_LENGTH_MAX, MESSAGE_TABLE_TEXT(AREA_MESSAGE_TABLE, D_801D1940 + 0x271));
     }
 
     func_801AE3F0((s16)left + 0x48, (s16)top + 0x3C, 0x7C, 0xE, 1, *(s8*)&g_WindowStyle);
