@@ -39,10 +39,9 @@ MATCH void func_801EED1C(void) {
     TASK(PartyMember)->unk_0C = -0x80000;
     TASK(PartyMember)->unk_10 = 0;
     Effect_RotatePosition(g_Task);
-    /* FAKE: retail reloads both scroll targets for the angle after storing the position; FAKE_DECL_AREA_SCROLL_TARGET_VOLATILE covers X only and moves the scratchpad base load. */
-    TASK(PartyMember)->pos.x.fixed  = FAKE_VOLATILE(s32, g_AreaScrollTargetX) + TASK(PartyMember)->unk_0C;
-    TASK(PartyMember)->pos.y.fixed  = FAKE_VOLATILE(s32, g_AreaScrollTargetY) + TASK(PartyMember)->unk_10;
-    TASK(PartyMember)->unk_0C       = ratan2(FAKE_VOLATILE(s32, g_AreaScrollTargetX) - TASK(PartyMember)->pos.x.fixed, FAKE_VOLATILE(s32, g_AreaScrollTargetY) - TASK(PartyMember)->pos.y.fixed);
+    TASK(PartyMember)->pos.x.fixed  = g_AreaScrollTargetCoordX.fixed + TASK(PartyMember)->unk_0C;
+    TASK(PartyMember)->pos.y.fixed  = g_AreaScrollTargetCoordY.fixed + TASK(PartyMember)->unk_10;
+    TASK(PartyMember)->unk_0C       = ratan2(g_AreaScrollTargetCoordX.fixed - TASK(PartyMember)->pos.x.fixed, g_AreaScrollTargetCoordY.fixed - TASK(PartyMember)->pos.y.fixed);
     TASK(PartyMember)->param.unk_0B = 0;
     for (i = 0; i < 7; i++) {
         slot                               = Battle_AllocEffect(1, 51);

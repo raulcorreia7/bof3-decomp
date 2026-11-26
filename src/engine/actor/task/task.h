@@ -65,5 +65,17 @@ void Actor_SpawnSceneActor(s8 actor_slot);
 void Actor_ReadValue(void);
 /* func_8019F5B8 */
 void Actor_DrawValueDigits(s16 x, s16 y, u8 unused, u8 palette);
+/* func_8019ADA4 */
+void Actor_TossRun(void);
+/* func_8019ADE8 */
+void Actor_TossStart(void);
+/* func_8019AF1C */
+void Actor_TossLaunch(void);
+/* func_8019B024 */
+void Actor_TossFall(void);
+/* func_8019B0EC */
+void Actor_ClearSelf(void);
+/* func_801ADCF4 */
+void Actor_SpawnToss(u8 source_slot);
 
 #endif

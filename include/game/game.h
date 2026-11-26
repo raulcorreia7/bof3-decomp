@@ -204,9 +204,12 @@ extern u8       s_SceneHandlerIds[8];
 extern Callback D_801C80A4[6];
 extern Callback D_801C80BC[3];
 extern Callback D_801C80C8[6];
-extern Callback D_801C80E0[3];
-extern Callback D_801C80EC[3];
-extern Callback D_801C80F8[4];
+/* D_801C80E0 */
+extern Callback g_CameraAnglePanModes[3];
+/* D_801C80EC */
+extern Callback g_CameraZoomPanModes[3];
+/* D_801C80F8 */
+extern Callback g_ActorTossModes[4];
 
 /* Launch of a tossed actor: initial vertical speed and the gravity pulling it back, both 16.16. */
 typedef struct ActorToss {
@@ -249,7 +252,8 @@ extern u8                 s_EventFlagsReset[16];
 extern Callback           g_SceneEvents[64];
 /* D_801C85BC */
 extern u8                 s_ScenarioStateStepArgs[8];
-extern Callback           D_801C85C4[11];
+/* D_801C85C4 */
+extern Callback           g_WorldMapGuides[11];
 /* D_801C85F0 */
 extern SceneActorCallback g_SceneObjects[66];
 /* D_801C87D8 */

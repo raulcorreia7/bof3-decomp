@@ -30,6 +30,6 @@ MATCH s32 func_801F5880(s32 x, s32 y) {
     }
     SYS_ToggleFlag(g_SceneEventFlags, D_801F6B17[i * 4]);
     SND_SEPlay(EMI_SE_ID(SND_BANK_AREA, 0x01));
-    func_8019ABB0(0xF);
+    Scene_StartToggleLock(0xF);
     return 1;
 }

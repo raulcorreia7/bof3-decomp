@@ -142,9 +142,8 @@ MATCH void func_801EF38C(void) {
     TASK(PartyMember)->unk_0C = -0x40000;
     TASK(PartyMember)->unk_10 = 0;
     Effect_RotatePosition(g_Task);
-    /* FAKE: the cast store keeps the y read behind the x store. */
-    LOW(TASK(PartyMember)->pos.x.fixed) = g_AreaScrollTargetX + TASK(PartyMember)->unk_0C;
-    TASK(PartyMember)->pos.y.fixed      = g_AreaScrollTargetY + TASK(PartyMember)->unk_10;
+    TASK(PartyMember)->pos.x.fixed = g_AreaScrollTargetCoordX.fixed + TASK(PartyMember)->unk_0C;
+    TASK(PartyMember)->pos.y.fixed = g_AreaScrollTargetCoordY.fixed + TASK(PartyMember)->unk_10;
     SND_SEPlay(EMI_SE_ID(SND_BANK_COMMON, 0));
     work                      = TASK(PartyMember);
     work->param.unk_0B        = 0x34;

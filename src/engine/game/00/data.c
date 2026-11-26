@@ -73,7 +73,7 @@ Callback g_ActorTypes[187] = {WorldMap_StepWalk,
                               func_801F6DC0,
                               func_801D0C98,
                               func_801D1B10,
-                              func_8019AB5C,
+                              Scene_StepToggleLock,
                               func_801D20C8,
                               func_8019A3B8,
                               func_801F70F0,
@@ -88,7 +88,7 @@ Callback g_ActorTypes[187] = {WorldMap_StepWalk,
                               func_801F8D70,
                               func_801F71C0,
                               func_801F729C,
-                              func_8019A8B4,
+                              Camera_PanAngleRun,
                               func_801F6E70,
                               func_801F2C18,
                               WorldMap_StepFlock,
@@ -118,8 +118,8 @@ Callback g_ActorTypes[187] = {WorldMap_StepWalk,
                               func_801F7A84,
                               func_801F2C30,
                               func_8019CB94,
-                              func_8019AC34,
-                              func_8019ADA4,
+                              Camera_PanZoomRun,
+                              Actor_TossRun,
                               (Callback)func_801F2C04,
                               func_8019DDCC,
                               func_801F2C44,
@@ -281,11 +281,11 @@ Callback D_801C80BC[3] = {func_8019A3FC, func_8019A848, func_8019A7D4};
 
 Callback D_801C80C8[6] = {func_8019A580, func_8019A580, func_8019A580, func_8019A6AC, func_8019A580, func_8019A630};
 
-Callback D_801C80E0[3] = {func_8019A904, func_8019AA44, func_8019AAFC};
+Callback g_CameraAnglePanModes[3] = {Camera_PanAngleStart, Camera_PanAngleStep, Camera_PanAngleEnd};
 
-Callback D_801C80EC[3] = {func_8019AC84, func_8019ACF4, func_8019AD70};
+Callback g_CameraZoomPanModes[3] = {Camera_PanZoomStart, Camera_PanZoomStep, Camera_PanZoomEnd};
 
-Callback D_801C80F8[4] = {func_8019ADE8, func_8019AF1C, func_8019B024, func_8019B0EC};
+Callback g_ActorTossModes[4] = {Actor_TossStart, Actor_TossLaunch, Actor_TossFall, Actor_ClearSelf};
 
 ActorToss s_ActorTossArcs[3] = {
     {0x300000, 0x80000},
@@ -293,7 +293,7 @@ ActorToss s_ActorTossArcs[3] = {
     {0x100000, 0x80000},
 };
 
-Callback D_801C8120[3] = {func_8019B150, func_8019B1E8, func_8019B0EC};
+Callback D_801C8120[3] = {func_8019B150, func_8019B1E8, Actor_ClearSelf};
 
 Callback D_801C812C[6] = {func_8019B3A8, func_8019B4A0, func_8019B704, func_8019BBA4, func_8019BE28, func_8019BEFC};
 
@@ -379,18 +379,18 @@ Callback g_SceneSteps[2] = {Scene_ResetEventState, Scene_UpdateEvent};
 u8 s_EventFlagsReset[16] = {0x08, 0x00, 0x00, 0x0A, 0x00, 0x00, 0x00, 0x00,
                             0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00};
 
-Callback g_SceneEvents[64] = {func_801A7CE8, func_801F37E4, func_801F394C,       func_801F4B60,           UI_PanelOpenMaster, func_801A7E54,           UI_MessageRunArea, func_801F4378,
+Callback g_SceneEvents[64] = {Scene_StepIdle, func_801F37E4, func_801F394C,       func_801F4B60,           UI_PanelOpenMaster, Scene_RunMineEntry,           UI_MessageRunArea, func_801F4378,
                               func_801F34A0, func_801F3740, Scene_RunInn, (Callback)func_801F2C04, func_801F50F0,   (Callback)func_801F2C04, Fairy_RunCommu01Scene,          func_801F3F34,
                               func_801F3254, func_801F3EE8, func_801F529C,       func_801F3198,           func_801F45EC,   Fairy_RunGiftScene,           Fairy_RunExploreReward,          Fairy_RunCommu02Scene,
-                              Fairy_RunCommu03Scene, Fairy_RunCommu04Scene, Fairy_RunCommu05Scene,       func_801A839C,           func_801F38D8,   func_801F2CDC,           func_801F37EC,          func_801F3C24,
+                              Fairy_RunCommu03Scene, Fairy_RunCommu04Scene, Fairy_RunCommu05Scene,       WorldMap_RunLocationGuide,           func_801F38D8,   func_801F2CDC,           func_801F37EC,          func_801F3C24,
                               func_801F4494, func_801F3460, func_801F2F54,       func_801F4BC0,           func_801F3B4C,   func_801F4B58,           func_801F4C84,          (Callback)func_801F2C04,
-                              func_801F5E4C, func_801F40C0, func_801F2C7C,       func_801F4B80,           func_801A83DC,   func_801F5E1C,           func_801F38DC,          func_801F390C,
-                              func_801F3B4C, func_801F4F9C, func_801F4D14,       func_801F4164,           func_801F3D28,   func_801F33C8,           func_801F2E98,          func_801A852C,
+                              func_801F5E4C, func_801F40C0, func_801F2C7C,       func_801F4B80,           Scene_RunGeneFound,   func_801F5E1C,           func_801F38DC,          func_801F390C,
+                              func_801F3B4C, func_801F4F9C, func_801F4D14,       func_801F4164,           func_801F3D28,   func_801F33C8,           func_801F2E98,          WorldMap_RunFairyEntry,
                               func_801F30BC, func_801F2EA0, func_801F2D0C,       func_801F4A0C,           func_801F23A4,   func_801F3180,           func_801F2CF0,          func_801F3CD0};
 
 u8 s_ScenarioStateStepArgs[8] = {0x00, 0x00, 0x04, 0x04, 0x00, 0x00, 0x00, 0x00};
 
-Callback D_801C85C4[11] = {Fishing_ShowLocation, func_801F2D18,        Fishing_ShowLocation, func_801F2C6C,        func_801F2C6C, func_801F3798,
+Callback g_WorldMapGuides[11] = {Fishing_ShowLocation, func_801F2D18,        Fishing_ShowLocation, func_801F2C6C,        func_801F2C6C, func_801F3798,
                            func_801F2F0C,        Fishing_ShowLocation, func_801F2E1C,        Fishing_ShowLocation, func_801F2CA8};
 
 SceneActorCallback g_SceneObjects[66] = {

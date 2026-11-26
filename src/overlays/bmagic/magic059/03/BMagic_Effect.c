@@ -84,9 +84,9 @@ NON_MATCHING void func_801EED0C(void) {
     TASK(PartyMember)->unk_0C = 0x40000;
     TASK(PartyMember)->unk_10 = 0;
     Effect_RotatePosition(g_Task);
-    /* Retail reads the scroll target as one record: the y read stays behind the x store. */
-    TASK(PartyMember)->unk_18      = ((VECTOR*)&g_AreaScrollTargetX)->vx + TASK(PartyMember)->unk_0C;
-    TASK(PartyMember)->unk_1C      = ((VECTOR*)&g_AreaScrollTargetX)->vy + TASK(PartyMember)->unk_10;
+    /* The Coord reads keep the y load behind the x store. */
+    TASK(PartyMember)->unk_18      = g_AreaScrollTargetCoordX.fixed + TASK(PartyMember)->unk_0C;
+    TASK(PartyMember)->unk_1C      = g_AreaScrollTargetCoordY.fixed + TASK(PartyMember)->unk_10;
     TASK(PartyMember)->pos.x.fixed = TASK(PartyMember)->unk_18 + (rsin(0) << 6);
     TASK(PartyMember)->pos.y.fixed = TASK(PartyMember)->unk_1C + (rcos(0) << 6);
     func_801F0544();

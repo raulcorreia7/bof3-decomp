@@ -1,11 +1,13 @@
-#include "game_00.h"
+#include "engine/game/00/game_00.h"
 
-MATCH void func_8019ACF4(void) {
+/* func_8019ACF4 */
+/* Steps the angle pan and moves the camera z offset toward the target, stopping at it. */
+MATCH void Camera_PanZoomStep(void) {
     Actor* work;
     s32    pos;
     s32    step;
 
-    func_8019AA44();
+    Camera_PanAngleStep();
     work                = TASK(Actor);
     pos                 = (g_AreaCameraOffsetZ << 16) + work->vy;
     /* FAKE: volatile re-read keeps the direction load before the store.

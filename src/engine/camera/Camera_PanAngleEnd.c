@@ -1,6 +1,8 @@
-#include "game_00.h"
+#include "engine/game/00/game_00.h"
 
-MATCH void func_8019AAFC(void) {
+/* func_8019AAFC */
+/* Sets the camera angle to the actor's angle, clears the camera-moving flag and frees the actor. */
+MATCH void Camera_PanAngleEnd(void) {
     Actor* work;
     u8*    flags;
 
