@@ -1,6 +1,8 @@
-#include "game_00.h"
+#include "engine/game/00/game_00.h"
 
-MATCH void func_801A6F58(u8* script) {
+/* func_801A6F58 */
+/* Spawns an actor from a type 5 setup record: attach bytes, no tint byte, tint flags fixed at 2. */
+MATCH void Actor_SpawnAttachedFixedFlags(u8* script) {
     s16*   counter = (s16*)&g_ScratchPad;
     s16    slot;
     Actor* work;
