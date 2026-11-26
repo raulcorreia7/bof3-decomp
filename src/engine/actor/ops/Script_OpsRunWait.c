@@ -23,113 +23,96 @@ typedef enum ActorScriptWait {
 /* func_801AA470 */
 /* Runs one wait or camera opcode. */
 #ifdef NON_MATCHING
-NON_MATCHING u8 Script_OpsRunWait(void* sub, s32 target, u8 value) {
-    u8* code;
-    u8* cmd;
-    u8  slot;
-    s32 tmp;
-    u16 hit;
-    u16 next;
-    u8* index;
+NON_MATCHING u8 Script_OpsRunWait(ScriptState* state, u8* base, u8 value) {
+    u8*                 cmd;
+    u8*                 slot;
+    u8                  frames;
+    u16                 pc;
+    u32                 index;
+    void*               obj;
+    AreaScriptCallback* table;
 
-    code = (u8*)target;
-    switch (code[FIELD(u16, sub, 0xAu)]) {
+    switch (base[state->cursor]) {
         case ACTOR_SCRIPT_WAIT_SNAP_PARTY_TO_SCROLL:
             g_PartyX       = g_AreaScrollTargetX;
             g_PartyY       = g_AreaScrollTargetY;
-            g_ScrollHeight = Area_HeightSample(g_AreaScrollTargetX, g_AreaScrollTargetY);
+            g_ScrollHeight = Area_HeightSample(g_PartyX, g_PartyY);
             return value;
         case ACTOR_SCRIPT_WAIT_PLAY_CUE_ON_SCRIPT:
             if (g_GameStateIndex != GAME_REQUEST_BATTLE) {
-                hit              = Actor_ReadState();
-                SP_REF(u16, 0x0) = hit;
-                if (TASK(Actor)->script_pc != hit) {
-                    cmd = code + FIELD(u16, sub, 0xAu);
-                    if (hit == cmd[3]) {
-                        Actor_PlayCueByDistance(cmd[2] | (cmd[1] << 8), cmd[4]);
-                    }
+                pc                        = Actor_ReadState();
+                SPAD(0u)->cells.halves[0] = pc;
+                if (TASK(Actor)->script_pc != pc) {
+                    cmd = base + state->cursor;
+                    if (pc == cmd[3])
+                        Actor_PlayCueByDistance(cmd[1] << 8 | cmd[2], cmd[4]);
                 }
             }
-            next = FIELD(u16, sub, 0xAu) + 4;
-        set_cursor:
-            FIELD(u16, sub, 0xAu) = next;
-        done:
-            return value;
+            state->cursor += 4;
+            break;
         case ACTOR_SCRIPT_WAIT_TOGGLE_ROUTE_STEP:
             TASK(Actor)->option_flags ^= 0x40;
-            if (TASK(Actor)->option_flags & 0x40) {
+            if (TASK(Actor)->option_flags & 0x40)
                 FIELD(s8, g_Task, 0x48u) = 0;
-            } else {
+            else
                 FIELD(s8, g_Task, 0x48u) = 1;
-            }
-            return value;
+            break;
         case ACTOR_SCRIPT_WAIT_TOGGLE_NO_TARGET:
             TASK(Actor)->option_flags ^= ACTOR_OPT_NO_TARGET;
-            return value;
+            break;
         case ACTOR_SCRIPT_WAIT_SET_PARTY_SLOT_MOVE:
-            index  = &D_1F800001;
-            tmp    = -(g_CurrentActor - g_PartyActors) >> 3;
-            *index = tmp;
-            if ((u8)tmp >= 5U) {
-                *index = 4;
-            }
-            cmd = code + FIELD(u16, sub, 0xAu);
-            if (cmd[7] != 0) {
-                slot                               = cmd[7];
-                g_ActorTurnRamps[*index].frames_xy = slot;
-                g_ActorTurnRamps[*index].frames_z  = slot;
-                cmd                                = code + FIELD(u16, sub, 0xAu);
-                g_ActorTurnRamps[*index].delta_z   = (s16)(cmd[6] | (cmd[5] << 8)) / g_ActorTurnRamps[*index].frames_z;
-                cmd                                = code + FIELD(u16, sub, 0xAu);
-                g_ActorTurnRamps[*index].delta_y   = (s16)(cmd[4] | (cmd[3] << 8)) / g_ActorTurnRamps[*index].frames_z;
-                cmd                                = code + FIELD(u16, sub, 0xAu);
-                g_ActorTurnRamps[*index].delta_x   = (s16)(cmd[2] | (cmd[1] << 8)) / g_ActorTurnRamps[*index].frames_z;
+            slot  = &D_1F800001;
+            *slot = g_CurrentActor - g_PartyActors;
+            if (*slot >= 5)
+                *slot = 4;
+            frames = (base + state->cursor)[7];
+            if (frames != 0) {
+                g_ActorTurnRamps[*slot].frames_z = g_ActorTurnRamps[*slot].frames_xy = frames;
+                g_ActorTurnRamps[*slot].delta_z                                      = (s16)((base + state->cursor)[5] << 8 | (base + state->cursor)[6]) / g_ActorTurnRamps[*slot].frames_z;
+                g_ActorTurnRamps[*slot].delta_y                                      = (s16)((base + state->cursor)[3] << 8 | (base + state->cursor)[4]) / g_ActorTurnRamps[*slot].frames_z;
+                g_ActorTurnRamps[*slot].delta_x                                      = (s16)((base + state->cursor)[1] << 8 | (base + state->cursor)[2]) / g_ActorTurnRamps[*slot].frames_z;
             } else {
-                TASK(Actor)->angle_z = (s16)(cmd[6] | (cmd[5] << 8));
-                cmd                  = code + FIELD(u16, sub, 0xAu);
-                TASK(Actor)->angle_y = (s16)(cmd[4] | (cmd[3] << 8));
-                cmd                  = code + FIELD(u16, sub, 0xAu);
-                TASK(Actor)->angle_x = (s16)(cmd[2] | (cmd[1] << 8));
+                TASK(Actor)->angle_z = (s16)((base + state->cursor)[5] << 8 | (base + state->cursor)[6]);
+                TASK(Actor)->angle_y = (s16)((base + state->cursor)[3] << 8 | (base + state->cursor)[4]);
+                TASK(Actor)->angle_x = (s16)((base + state->cursor)[1] << 8 | (base + state->cursor)[2]);
             }
-            *(u8*)sub |= 8;
-            FIELD(u16, sub, 0xAu) += 7;
-            goto done;
+            state->flags |= 8;
+            state->cursor += 7;
+            break;
         case ACTOR_SCRIPT_WAIT_WAIT_PARTY_SLOT_MOVE:
-            tmp             = -(g_CurrentActor - g_PartyActors) >> 3;
-            SP_REF(s8, 0x1) = tmp;
-            tmp &= BYTE_MASK;
-            if ((u32)tmp < 4U && (g_ActorTurnRamps[tmp].frames_z + g_ActorTurnRamps[tmp].frames_xy) != 0) {
-                goto back;
+            D_1F800001 = g_CurrentActor - g_PartyActors;
+            index      = D_1F800001;
+            if (index < 4) {
+                if (g_ActorTurnRamps[index].frames_z + g_ActorTurnRamps[index].frames_xy == 0)
+                    return value;
+                state->cursor--;
             }
-            return value;
+            break;
         case ACTOR_SCRIPT_WAIT_TOGGLE_PARTY_SLOT:
-            index  = &D_1F800001;
-            tmp    = -(g_CurrentActor - g_PartyActors) >> 3;
-            *index = tmp;
-            if (tmp & 0x80) {
-                *index = 4;
-            }
-            g_ActorTurnRamps[(s8)*index].flags ^= 1;
+            slot  = &D_1F800001;
+            *slot = g_CurrentActor - g_PartyActors;
+            if ((s8)*slot < 0)
+                *slot = 4;
+            g_ActorTurnRamps[(s8)*slot].flags ^= 1;
             return value;
         case ACTOR_SCRIPT_WAIT_SET_UNK_06:
-            slot = code[FIELD(u16, sub, 0xAu) + 1];
-            FIELD(u16, sub, 0xAu) += 1;
-            FIELD(u8, sub, 0x6u) = slot;
-            return value;
+            state->pad_06 = (base + state->cursor)[1];
+            state->cursor += 1;
+            break;
         case ACTOR_SCRIPT_WAIT_UNLOCK_SCROLL:
             g_GameFlags &= ~GAME_FLAG_SCROLL_LOCK;
-            *(u8*)sub |= 8;
-            return value;
+            state->flags |= 8;
+            break;
         case ACTOR_SCRIPT_WAIT_WAIT_MESSAGE:
-            if (g_GameStateIndex == GAME_REQUEST_MESSAGE) {
-                goto back;
-            }
-            return value;
+            if (g_GameStateIndex != GAME_REQUEST_MESSAGE)
+                return value;
+            state->cursor--;
+            break;
         case ACTOR_SCRIPT_WAIT_WAIT_WINDOW_EFFECT:
-            if (WINDOW_EFFECT_BUSY()) {
-                goto back;
-            }
-            return value;
+            if (!WINDOW_EFFECT_BUSY())
+                return value;
+            state->cursor--;
+            break;
         case ACTOR_SCRIPT_WAIT_MOVE_AND_SET_CELL_PALETTE:
             Actor_ApplyVelocity();
             COORD_INT(TASK(Actor)->pos.z) = Area_HeightSample(TASK(Actor)->pos.x.fixed, TASK(Actor)->pos.y.fixed);
@@ -140,24 +123,20 @@ NON_MATCHING u8 Script_OpsRunWait(void* sub, s32 target, u8 value) {
         case ACTOR_SCRIPT_WAIT_CLEAR_CELL_PALETTE:
             Area_CellClearPalette(COORD_INT(TASK(Actor)->pos.x), COORD_INT(TASK(Actor)->pos.y));
             return value;
-        case ACTOR_SCRIPT_WAIT_CALL_AREA_SCRIPT: {
-            Actor* obj = g_AreaLoads[g_GameAreaId];
-            (*(void (**)())((code[FIELD(u16, sub, 0xAu) + 1] * 4) + obj->pos.z.fixed))(obj);
+        case ACTOR_SCRIPT_WAIT_CALL_AREA_SCRIPT:
+            obj   = g_AreaLoads[g_GameAreaId];
+            table = FIELD(AreaScriptCallback*, obj, 0x3Cu);
+            table[(base + state->cursor)[1]](obj);
             value = TASK(Actor)->direction;
-            next  = FIELD(u16, sub, 0xAu) + 1;
-            goto set_cursor;
-        }
+            state->cursor += 1;
+            break;
         case ACTOR_SCRIPT_WAIT_WAIT_BATTLE:
-            if (g_GameStateIndex == GAME_REQUEST_BATTLE) {
-                goto back;
-            }
-            return value;
-        default:
-            goto done;
+            if (g_GameStateIndex != GAME_REQUEST_BATTLE)
+                return value;
+            state->cursor--;
+            break;
     }
-back:
-    next = FIELD(u16, sub, 0xAu) - 1;
-    goto set_cursor;
+    return value;
 }
 #else
 INCLUDE_ASM(Script_OpsRunWait);
