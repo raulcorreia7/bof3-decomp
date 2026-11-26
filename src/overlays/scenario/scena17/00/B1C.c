@@ -590,7 +590,7 @@ NON_MATCHING void func_801F8B10(s32 scale, s32 shade) {
     PushMatrix();
     setVector(&axis, 0, 0, 0);
     rot.vx = (g_AreaScrollTargetX >> 9) - 0x4000;
-    rot.vy = (g_AreaScrollTargetY >> 9) - 0x4000;
+    rot.vy = (g_AreaScrollTargetCoordY.fixed >> 9) - 0x4000;
     rot.vz = -Area_HeightSample(g_AreaScrollTargetX, g_AreaScrollTargetY) / 2;
     RotTransMatrix(&rot, mtx, &flag);
     RotMatrix(&axis, &mtx);
@@ -601,7 +601,9 @@ NON_MATCHING void func_801F8B10(s32 scale, s32 shade) {
     GFX_ADD_DITHERED_DRAW_MODE(GFX_LAYER_EFFECT_FRONT, mode);
     for (i = 0; i < 32;) {
         a = i << 7;
-        setVector(&g_ScratchPadVectors[0], 0, 0, 0);
+        g_ScratchPadVectors[0].vx = 0;
+        g_ScratchPadVectors[0].vy = 0;
+        g_ScratchPadVectors[0].vz = 0;
         setVector(&g_ScratchPadVectors[1], (s16)FIXED_MUL(radius, rcos(a)), (s16)FIXED_MUL(radius, rsin(a)), 0);
         i++;
         b = i << 7;
