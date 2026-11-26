@@ -14,8 +14,8 @@ MATCH void Area_CellSortPackets(void) {
             current = g_AreaCellPackets[i];
             if ((g_AreaCellPackets[j] >> 16) < (current >> 16)) {
                 g_ScratchPad.cells.words[3] = current;
-                g_AreaCellPackets[i]           = g_AreaCellPackets[j];
-                g_AreaCellPackets[j]           = g_ScratchPad.cells.words[3];
+                g_AreaCellPackets[i]        = g_AreaCellPackets[j];
+                g_AreaCellPackets[j]        = g_ScratchPad.cells.words[3];
             }
         }
     }
