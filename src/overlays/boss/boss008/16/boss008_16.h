@@ -52,6 +52,6 @@ typedef struct Boss008Color {
 } Boss008Color;
 
 extern Boss008Color D_800C2640[];
-void      func_801D9DBC(s16 x, s16 y, u8 template_index, u16 packed_color, u8 semi_trans);
+void                func_801D9DBC(s16 x, s16 y, u8 template_index, u16 packed_color, u8 semi_trans);
 
 #endif

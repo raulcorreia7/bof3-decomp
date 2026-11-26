@@ -164,8 +164,8 @@ NON_MATCHING void func_801D14C8(s16 x, s16 y, s32 group) {
     u8(*names)[5];
 
     UI_TextDraw((s16)(x + 0x52), (s16)y, 0, TEXT_LENGTH_MAX, MESSAGE_TABLE_TEXT(AREA_MESSAGE_TABLE, 0xEC));
-    i = (group & 0xFF) * 8;
-    j = 0;
+    i     = (group & 0xFF) * 8;
+    j     = 0;
     names = D_801457E8;
 next:
     if (i < g_FairyVillageUpdateCount) {

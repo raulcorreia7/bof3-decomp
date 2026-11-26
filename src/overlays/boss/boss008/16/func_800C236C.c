@@ -23,8 +23,8 @@ void func_800C236C(u8 phase) {
         setRGB0(prim, 0xFF, 0xFF, 0xFF);
         setRGB1(prim, D_800C2640[g_BattleCurrentEnemy->unk_F0 - 8].r, D_800C2640[g_BattleCurrentEnemy->unk_F0 - 8].g, D_800C2640[g_BattleCurrentEnemy->unk_F0 - 8].b);
         setRGB2(prim, D_800C2640[g_BattleCurrentEnemy->unk_F0 - 8].r, D_800C2640[g_BattleCurrentEnemy->unk_F0 - 8].g, D_800C2640[g_BattleCurrentEnemy->unk_F0 - 8].b);
-        enemy    = TASK(EnemyBattler);
-        next     = (i + 1) & 0x1F;
+        enemy = TASK(EnemyBattler);
+        next  = (i + 1) & 0x1F;
         setXY3(prim, enemy->screen_x, enemy->screen_y, enemy->screen_x + ring[i][0], enemy->screen_y + ring[i][1], enemy->screen_x + ring[next][0], enemy->screen_y + ring[next][1]);
         SetSemiTrans(prim, 1);
         GFX_AddPrim(3, sizeof(POLY_G3));
