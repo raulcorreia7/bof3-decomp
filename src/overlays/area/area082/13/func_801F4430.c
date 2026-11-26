@@ -1,8 +1,7 @@
 #include "area082_13.h"
 
 /* Draws the four tiled sections of the actor's rotating ground ring. */
-#ifdef NON_MATCHING
-NON_MATCHING void func_801F4430(void) {
+MATCH void func_801F4430(void) {
     SVECTOR   rot;
     SVECTOR   pos;
     MATRIX    matrix;
@@ -28,17 +27,16 @@ NON_MATCHING void func_801F4430(void) {
     SetRotMatrix(&matrix);
     SetTransMatrix(&matrix);
 
-    tile = (1U << 28) | (3U << 24) | (1U << 15) | (TPAGE_ABR_ADD << 12);
     if (TASK(Actor)->param.unk_0B != 0) {
+        tile = (1U << 28) | (3U << 24) | (1U << 15) | (TPAGE_ABR_ADD << 12) | 0x0F;
         SND_SEPlay(TASK(Actor)->param.unk_0B + 0x201);
         TASK(Actor)->param.unk_0B = 0;
-        tile |= 0x0F;
     } else {
-        tile |= (1U << 11) | 0x0C;
+        tile = (1U << 28) | (3U << 24) | (1U << 15) | (TPAGE_ABR_ADD << 12) | (1U << 11) | 0x0C;
     }
 
-    quad = g_ScratchPadVectors;
     i    = 0;
+    quad = g_ScratchPadVectors;
     do {
         prim = (POLY_FT4*)g_GfxPrimCursor;
         SetPolyFT4(prim);
@@ -52,9 +50,9 @@ NON_MATCHING void func_801F4430(void) {
         quad[2].vy = (D_801F5764[i].y * 3) << 7;
         next       = (i + 1) & 3;
         quad[3].vx = (D_801F5764[next].x * 3) << 7;
+        quad[3].vy = (D_801F5764[next].y * 3) << 7;
         quad[1].vz = -0x240;
         quad[0].vz = -0x240;
-        quad[3].vy = (D_801F5764[next].y * 3) << 7;
         quad[3].vz = 0;
         quad[2].vz = 0;
 
@@ -62,17 +60,15 @@ NON_MATCHING void func_801F4430(void) {
 
         screen_y = TASK(Actor)->screen_y;
         if (screen_y >= 0x41) {
-            y = (s16)TASK(Actor)->screen_y - ((rcos(TASK(Actor)->unk_32 + (i << 10)) >> 7) + 0x20);
+            y = (rcos(TASK(Actor)->unk_32 + (i << 10)) >> 7) + 0x20;
+            y = (s16)TASK(Actor)->screen_y - y;
         } else {
             y = screen_y;
         }
-        Area_ApplyTileToQuad(((u32)(y & -8) << 16) | tile, prim, 1);
+        Area_ApplyTileToQuad(tile | ((u32)(y & -8) << 16), prim, 1);
         GFX_AddPrim(GFX_LAYER_SCENE_BACK, 0x28);
         i++;
     } while (i < 4);
 
     PopMatrix();
 }
-#else
-INCLUDE_ASM(func_801F4430);
-#endif
