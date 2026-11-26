@@ -26,8 +26,7 @@
  * meanings stay separate.
  */
 
-/* Swap the bytes two pointers address, as the menu overlays swap two entries of a party order array or of the
- * standby list. */
+/* Swap the bytes two pointers address, as the menu overlays swap two entries of a party order array or of the standby list. */
 static inline void Menu_SwapEntries(u8* first, u8* second) {
     u8 temp;
 
@@ -73,8 +72,7 @@ ASSERT_SIZE(PartyOrders, 0x08);
 extern u32 g_Zenny;
 /* D_80144F5A */
 extern u8  g_PartyOrders[PARTY_ORDER_COUNT][PARTY_SLOT_COUNT];
-/* Stored character id -> character-record slot (Observed:
- * `sel = map[party_order[slot]]`). */
+/* Stored character id -> character-record slot (Observed: `sel = map[party_order[slot]]`). */
 
 extern FormationLayout g_MenuFormations[FORMATION_COUNT];
 extern FormationOrder  g_MenuFormationOrder;

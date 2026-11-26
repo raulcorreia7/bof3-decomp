@@ -60,8 +60,7 @@ extern u32         D_80145044;
 
 extern u8 D_8014546C[ABILITY_STOCK_SLOT_COUNT];
 extern u8 D_801454F4[][3];
-/* A unit that must re-read the cell after every store (etc/game/00) defines
- * FAKE_DECL_GRAPHICS_PALETTE_PENDING_VOLATILE before its first include. */
+/* A unit that must re-read the cell after every store (etc/game/00) defines FAKE_DECL_GRAPHICS_PALETTE_PENDING_VOLATILE before its first include. */
 #ifdef FAKE_DECL_GRAPHICS_PALETTE_PENDING_VOLATILE
 /* D_80145988 */
 extern volatile u8 g_GfxPalettePending; /* 0x80145988 */
@@ -102,10 +101,7 @@ extern s16                 D_80146916;
 /* D_80147A8C */
 extern Coord3              g_AreaFocus;
 extern s32                 D_80147A8C;
-/* Per-slot effect work arrays at a 0x30-byte stride: the accumulators at
- * D_801FD030, the seeded deltas at D_801FCA90 and the per-cell lifetimes at
- * D_801FD5D0.
- */
+/* Per-slot effect work arrays at a 0x30-byte stride. */
 /* D_80148208 */
 extern struct Actor*       g_ScriptWorkRecord;
 extern s16                 D_80148334;
@@ -125,8 +121,7 @@ extern AreaCamera          g_AreaCamera;
 /* D_801492E8 */
 extern MATRIX              g_CameraMatrix;
 
-/* Load the GTE with `matrix`, rotated by `rot` and viewed through the camera:
- * the model matrix a 3D effect or scene part draws with. */
+/* Load the GTE with `matrix`, rotated by `rot` and viewed through the camera: the model matrix a 3D effect or scene part draws with. */
 static inline void Camera_SetModelMatrix(SVECTOR* rot, MATRIX* matrix) {
     RotMatrix(rot, matrix);
     MulMatrix2(&g_CameraMatrix, matrix);
@@ -135,8 +130,7 @@ static inline void Camera_SetModelMatrix(SVECTOR* rot, MATRIX* matrix) {
 }
 
 /* D_80149308 */
-/* A unit that must re-read the target after storing it defines
- * FAKE_DECL_AREA_SCROLL_TARGET_VOLATILE before its first include. */
+/* A unit that must re-read the target after storing it defines FAKE_DECL_AREA_SCROLL_TARGET_VOLATILE before its first include. */
 #ifdef FAKE_DECL_AREA_SCROLL_TARGET_VOLATILE
 extern volatile s32 g_AreaScrollTargetX;
 #else

@@ -347,7 +347,8 @@ MATCH void func_801D20AC(void) {
     SYS_DISPATCH_BYTE(g_MenuBateStep3Sub0Steps, D_80148652);
 }
 
-MATCH void func_801D20E8(void) {
+/* func_801D20E8 */
+MATCH void Menu_StartFadeIn_801D20E8(void) {
     u8* count;
 
     UI_ModeSet(UI_MODE_FAST_FADE_IN);

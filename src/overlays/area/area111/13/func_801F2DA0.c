@@ -17,9 +17,9 @@ NON_MATCHING void func_801F2DA0(void* position, s32 radius1, s32 radius2) {
     u32      i;
     u16      angle;
 
-    pos = position;
     GFX_ADD_DITHERED_DRAW_MODE(GFX_LAYER_EFFECT_FRONT, GetTPage(TPAGE_DEPTH_4BIT, TPAGE_ABR_ADD, 0x380, 0x100));
     Camera_SetMatrix(&camera);
+    pos      = position;
     point.vx = pos[0];
     point.vy = pos[1] + (((s16)radius1 * rcos(0)) >> 4);
     point.vz = pos[2] + (((s16)radius1 * rsin(0)) << 4);

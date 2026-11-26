@@ -43,16 +43,14 @@
  * and Battle_AddEnemy) clears when it arms an enemy slot; their widths follow
  * those accesses. No reader names them yet, so they keep the address names. */
 
-/* Ask whether the battler's status word carries the flag, a STATUS_* value or a
- * mask. Pass the row itself or, for a pointer, its dereference. */
+/* Ask whether the battler's status word carries the flag, a STATUS_* value or a mask. */
 #define HAS_STATUS(battler, flag)    (((battler).chr.status & (flag)) != 0)
 
 /* The active battler's row. Each battle overlay declares the active-battler
  * byte itself, so the macro expands where it is used. */
 #define BATTLE_ACTIVE_PARTY          (g_Game.members[g_Battle.active_battler])
 
-/* The action a battler has queued: whom it targets, what type it is (examine 0, attack 1, defend 2, ability 4, item 5)
- * and the ability or item id. */
+/* The action a battler has queued: whom it targets, what type it is (examine 0, attack 1, defend 2, ability 4, item 5) and the ability or item id. */
 typedef enum BattleCommandType {
     BATTLE_COMMAND_EXAMINE = 0,
     BATTLE_COMMAND_ATTACK  = 1,
@@ -70,8 +68,7 @@ typedef struct BattleCommandSlot {
 
 ASSERT_SIZE(BattleCommandSlot, 0x04);
 
-/* The 0x74 bytes of a battler's work record that a queued effect slot copies;
- * GCC expands the copy into its 16-byte block-move loop. */
+/* The 0x74 bytes of a battler's work record that a queued effect slot copies; GCC expands the copy into its 16-byte block-move loop. */
 typedef struct BattleWorkImage {
     u32 words[29];
 } BattleWorkImage;
@@ -117,8 +114,7 @@ ASSERT_OFFSET(EncounterEnemy, id, 0x01);
 ASSERT_OFFSET(EncounterEnemy, pos, 0x04);
 ASSERT_SIZE(EncounterEnemy, 0x0C);
 
-/* One entry of the panel-owner table at 0x801ED9B0: the owner index, a second
- * byte, and the panel id. */
+/* One entry of the panel-owner table at 0x801ED9B0: the owner index, a second byte, and the panel id. */
 typedef struct PanelOwner {
     u8  owner_index;
     u8  unk_01;
@@ -141,8 +137,7 @@ ASSERT_OFFSET(BattleSelection, id, 0x00);
 ASSERT_OFFSET(BattleSelection, callback, 0x04);
 ASSERT_SIZE(BattleSelection, 0x08);
 
-/* One entry of the selection-type table at 0x801CA71C: a mask halfword and the
- * rest of the 0x14-byte row, which battle/battle/15 reads byte by byte. */
+/* One entry of the selection-type table at 0x801CA71C: a mask halfword and the rest of the 0x14-byte row, which battle/battle/15 reads byte by byte. */
 typedef struct BattleSelectionType {
     u16 mask;
     u8  unk_02[0x12];
@@ -169,8 +164,7 @@ typedef union BattleEffectTarget {
     u32                  address;
 } BattleEffectTarget;
 
-/* The byte a spawner sets for its effect (a start count, a grid row); on a
- * battler's home row it is the signed sway of a confused battler, -11 to 12. */
+/* The byte a spawner sets for its effect (a start count, a grid row); on a battler's home row it is the signed sway of a confused battler, -11 to 12. */
 typedef union BattleEffectArg {
     u8 unk_09;
     s8 sway;
@@ -178,12 +172,7 @@ typedef union BattleEffectArg {
 
 ASSERT_SIZE(BattleEffectArg, 1);
 
-/* One queued action slot of the table at 0x801EC330 (stride 0x78).
- *
- * Both overlays declare g_BattleEffects as BattleEffect and read the same
- * table, so this is one record. The two overlays name different halves of it:
- * battle/battle/03 names the head fields, battle/battle/15 the tail, and the merged record
- * names the union of both. */
+/* One queued action slot of the table at 0x801EC330 (stride 0x78). */
 typedef struct BattleEffect {
     TaskHeader          header; /* 0x00 */
     u8                  unk_03;
@@ -234,9 +223,7 @@ ASSERT_OFFSET(BattleEffect, screen_y, 0x30);
 ASSERT_OFFSET(BattleEffect, depth, 0x32);
 ASSERT_SIZE(BattleEffect, 0x78);
 
-/* The effect_type of a magic effect (slot mode 1): the index into g_BattleMagicEffectSteps of the routine that
- * runs it. Each constant is named for the spell whose overlay queues it; every entry runs that overlay's
- * BMagic_DispatchEffectMode, except SUPER_COMBO, which runs BMagic_SuperComboRunEffect. */
+/* The effect_type of a magic effect (slot mode 1): the index into g_BattleMagicEffectSteps of the routine that runs it. */
 typedef enum BMagicEffectType {
     BMAGIC_EFFECT_SUPER_COMBO        = 1,
     BMAGIC_EFFECT_NOTING             = 3,
@@ -286,10 +273,7 @@ typedef union BattlerFlags {
     volatile u32 volatile_value;
 } BattlerFlags;
 
-/* One battler's turn: the command it queued, the HP and AP the hit deals, the
- * target state bits and counter, and the damage and action flag words. Both
- * battler records embed it as `turn`; g_BattleActorTurn and g_Battle.target_record
- * point at it. */
+/* One battler's turn: the command it queued, the HP and AP the hit deals, the target state bits and counter, and the damage and action flag words. */
 typedef struct BattleTurn {
     BattleCommandSlot command;
     s16               hp_change; /* signed HP delta shown on the hit; negative heals */
@@ -317,8 +301,7 @@ typedef union ScreenCoord {
     s16 signed_value;
 } ScreenCoord;
 
-/* The cell at +0x90 of a local work record: battle/battle/03 reads the halfword, and
- * battle/battle/15 reads the low byte of it. */
+/* The cell at +0x90 of a local work record: battle/battle/03 reads the halfword, and battle/battle/15 reads the low byte of it. */
 typedef union BattleLocalCell {
     u16 half;
     u8  value;
@@ -558,8 +541,7 @@ typedef union PanelCounter {
     u8 unsigned_value;
 } PanelCounter;
 
-/* The field's view of the 0x14 bytes where a battle row keeps its queued turn: the menu and scene code reuse them
- * as panel and mode counters while no battle runs. */
+/* The field's view of the 0x14 bytes where a battle row keeps its queued turn. */
 typedef struct FieldMode {
     u8           flags;     /* 0x00 bit 0x80 restores the saved word */
     u8           countdown; /* 0x01 frame countdown, reloaded with 0x28 or 0x0A */
@@ -591,8 +573,7 @@ typedef struct FieldEntry {
 
 ASSERT_SIZE(FieldEntry, 0x08);
 
-/* One party member's live work record: the task header, a copy of the member's Character and the state the field and
- * the battle keep in it. */
+/* One party member's live work record: the task header, a copy of the member's Character and the state the field and the battle keep in it. */
 typedef struct PartyMember {
     TaskHeader          header; /* 0x00 */
     u8                  unk_03;
@@ -642,8 +623,7 @@ typedef struct PartyMember {
     u8                  pad_68[8];
     u8                  speed;
     u8                  pad_71[3];
-    /* +0x74..+0x117 is a Character copy: func_801DD08C copies a
-     * 0xA4-byte character record to this offset. */
+    /* +0x74..+0x117 is a Character copy: func_801DD08C copies a 0xA4-byte character record to this offset. */
     Character           chr;
 
     /* +0x118 battle keeps the action the player has queued and its outcome; the field reuses the bytes as counters */
@@ -926,8 +906,7 @@ typedef struct BattleDrops {
 ASSERT_OFFSET(BattleDrops, item_counts, 0x20);
 ASSERT_SIZE(BattleDrops, 0x30);
 
-/* How the battle went at 0x80146324: the surprise and option flags it started with, the escape attempts, the
- * result and event flags, and the experience, zenny and drops it pays out. */
+/* How the battle went at 0x80146324. */
 typedef struct BattleOutcome {
     u8          surprise;    /* 0x00 */
     u8          options;     /* 0x01 battle option flags */
@@ -946,8 +925,7 @@ ASSERT_OFFSET(BattleOutcome, reward_exp, 0x08);
 ASSERT_OFFSET(BattleOutcome, drops, 0x10);
 ASSERT_SIZE(BattleOutcome, BATTLE_OUTCOME_SIZE);
 
-/* The battle modes, the rows of g_BattlePhases: set-up and entrance once, then rounds of commands, turn order,
- * actions and round end, then the result. */
+/* The battle modes, the rows of g_BattlePhases: set-up and entrance once, then rounds of commands, turn order, actions and round end, then the result. */
 typedef enum BattleMode {
     BATTLE_MODE_ENTRANCE   = 0,
     BATTLE_MODE_COMMANDS   = 1,
@@ -1014,7 +992,7 @@ typedef enum BattleTargetFlags {
     BATTLE_TARGET_BOTH_SIDES = BATTLE_TARGET_ENEMY_SIDE | BATTLE_TARGET_PARTY_SIDE,
 } BattleTargetFlags;
 
-/* The battle result byte D_80146328. */
+/* The battle result byte g_BattleResult. */
 typedef enum BattleResultFlags {
     BATTLE_RESULT_DEFEAT  = 1 << 0,
     BATTLE_RESULT_VICTORY = 1 << 1,
@@ -1167,7 +1145,7 @@ enum {
 
 extern u16           D_80146386;
 extern u16           D_8014638A;
-/* The selected battler's row (D_8014638C), stored by func_801D3624. */
+/* The selected battler's row (g_BattleSelectedActor), stored by func_801D3624. */
 /* FAKE: g_Battle.selected_actor as a global of its own; the sites that use it match only with a separate symbol. */
 extern PartyMember*  g_BattleSelectedActor;
 extern void*         D_80146390;

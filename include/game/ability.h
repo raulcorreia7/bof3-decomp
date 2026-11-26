@@ -41,8 +41,7 @@ typedef enum AbilityTargetFlags {
 } AbilityTargetFlags;
 
 /* clang-format off */
-/* Who an ability can be aimed at: the ALL, OPPONENT, SELECT and BOTH_SIDES bits.
- * ENEMY means the cursor starts on the other side. */
+/* Who an ability can be aimed at: the ALL, OPPONENT, SELECT and BOTH_SIDES bits. */
 typedef enum AbilityAim {
     ABILITY_AIM_USER             = 0,
     ABILITY_AIM_ALL_ALLIES       = ABILITY_TARGET_FLAG_ALL,

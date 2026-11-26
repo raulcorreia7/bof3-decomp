@@ -131,7 +131,8 @@ MATCH void func_801EF3F0(void) {
 
 #include "overlays/bmagic/shared/Effect_RestorePaletteAndReleaseActive.h"
 
-MATCH void func_801EF6AC(void) {
+/* func_801EF6AC */
+MATCH void BMagic_ChargeEnd(void) {
     EFFECT_RESTORE_PALETTE_AND_RELEASE_ACTIVE();
 }
 
