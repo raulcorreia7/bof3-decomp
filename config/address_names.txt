@@ -7,9 +7,9 @@ src/engine/sys/boot/SYS_ShowException.c	g_ExceptionTitle
 src/engine/sys/boot/SYS_ShowException.c	g_ExceptionCauseNames
 src/engine/sys/boot/SYS_StartLogo.c	g_LogoExePath
 src/engine/slus/data_80149800.c	g_LogoExePath
-src/engine/slus/data_8017F53C.c	Rec_8017F5B4
+src/engine/slus/data_8017F53C.c	Rec_8017F5B8
 src/engine/slus/data_80181CA8.c	ScriptRefList
-src/engine/slus/slus.h	Rec_8017F5B4
+src/engine/slus/slus.h	Rec_8017F5B8
 src/overlays/area/area008/13/D_801F2C04.c	WORLD00_AREA008_D_801F2C04
 src/overlays/area/area008/13/D_801F2C04.c	WORLD00_AREA008_D_801F2C10
 src/overlays/area/area008/13/area008_13.h	WORLD00_AREA008_D_801F2C04
