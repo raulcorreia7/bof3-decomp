@@ -465,12 +465,12 @@ NON_MATCHING void func_801D1D1C(void) {
     panel->mode   = 1;
     panel->state  = 2;
     panel++;
-    panel->active = 1;
-    panel->panel  = 1;
-    panel->mode   = 2;
-    panel->state  = 2;
-    panel->unk_0B = 0xFF;
-    g_UiPanelTasks[3].pos.y      = 0x3F;
+    panel->active           = 1;
+    panel->panel            = 1;
+    panel->mode             = 2;
+    panel->state            = 2;
+    panel->unk_0B           = 0xFF;
+    g_UiPanelTasks[3].pos.y = 0x3F;
     panel++;
     panel->active     = 1;
     panel->panel      = 1;
