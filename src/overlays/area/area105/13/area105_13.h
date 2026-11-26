@@ -6,12 +6,12 @@
 
 #include "overlays/area/worlds/world02.h"
 
-extern u8 D_801F3320[];
-
 /* The scratchpad corner vectors 1 to 3, each its own symbol. */
 extern SVECTOR D_1F80001C;
 extern SVECTOR D_1F800024;
 extern SVECTOR D_1F80002C;
+
+extern u8 D_801F3320[];
 
 /* A cell row func_801F2D9C draws: its first cell and its size, in cells. */
 typedef struct Area105CellRow {
