@@ -228,6 +228,7 @@ NON_MATCHING void func_801EF8F0(s16 band_height, s16 radius, s16 jitter_mask) {
     SetDrawMode((DR_MODE*)g_GfxPrimCursor, 0, 1, tpage, 0);
     Area_CellAddPrim(TASK(PartyMember)->pos.x.fixed, TASK(PartyMember)->pos.y.fixed, 2, sizeof(DR_MODE));
     for (i = 1; i < 18; i++) {
+        scratch                 = (ScratchPad*)&g_ScratchPad;
         scratch->cells.words[1] = ((TASK(PartyMember)->param.unk_0B + i) & 0xF) << 8;
         if RANDOM_MASK (1) {
             scratch->cells.words[0] = radius + (rand() & jitter_mask);

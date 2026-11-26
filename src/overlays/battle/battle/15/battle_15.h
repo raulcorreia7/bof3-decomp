@@ -643,7 +643,7 @@ void        Battle_FailEscape(void);
 void        func_8009B964(void);
 /* func_8009BACC */
 u8          Battle_CalcEscapeChance(s32 diff);
-bool        func_8009C794(s32 skip_slot, s32 enemy_slot);
+u8          func_8009C794(s32 skip_slot, s32 enemy_slot);
 /* func_8009C8AC */
 u8          Battle_ActionHasElement(u16 required_mask);
 /* func_8009CCBC */

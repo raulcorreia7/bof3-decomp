@@ -4,33 +4,18 @@
 #ifdef NON_MATCHING
 NON_MATCHING void Battle_ReadCommandMenu(void) {
     PartyMember* temp_v0_66;
-    u8*          state;
-    u16*         pad;
     s32          temp_v1_80;
-    s32          var_s0;
-    s32          var_s1;
-    s32          var_v0_199;
-    s32          var_v0_210;
-    s8           temp_a0_239;
     s8           temp_v0_50;
-    u16*         var_s5;
-    u16          temp_v1_206;
-    u8*          var_s2;
-    u8*          var_s3;
-    u8*          var_s4;
-    u8*          var_s6;
-    u8           var_v0_215;
+    s8           i;
 
-    state = &g_Battle.selection;
-    pad   = &g_PadStates[0].pressed;
-    if (*state != 0) {
-        --*state;
+    if (g_Battle.selection != 0) {
+        g_Battle.selection--;
     }
-    if ((g_InputMasks[BATTLE_INPUT_CANCEL] & *pad) && ((s8)g_Battle.command_count != 0)) {
+    if ((g_PadStates[0].pressed & g_InputMasks[BATTLE_INPUT_CANCEL]) && ((s8)g_Battle.command_count != 0)) {
         SND_SEPlay(EMI_SE_ID(SND_BANK_COMMON, 6));
+        g_Battle.phase.step -= 1;
         temp_v0_50             = (u8)g_Battle.command_count - 1;
         g_Battle.command_count = temp_v0_50;
-        g_Battle.phase.step -= 1;
         temp_v0_66              = &g_Game.members[D_801462F6[temp_v0_50]];
         g_BattleMessageSlot     = &temp_v0_66->header.flags;
         temp_v0_66->header.mode = 2;
@@ -47,7 +32,7 @@ NON_MATCHING void Battle_ReadCommandMenu(void) {
         FIELD(u8, g_BattleMessageSlot, 0x119u)  = 0U;
         return;
     }
-    if (g_InputMasks[BATTLE_INPUT_CONFIRM] & *pad) {
+    if (g_PadStates[0].pressed & g_InputMasks[BATTLE_INPUT_CONFIRM]) {
         if (((u32)(g_Battle.panel_slot - 2) < 2U) && (g_BattleActorTurn->action_flags.value & BATTLER_ACTION_DRAGON_FORM)) {
             SND_SEPlay(EMI_SE_ID(SND_BANK_COMMON, 7));
             return;
@@ -70,61 +55,35 @@ NON_MATCHING void Battle_ReadCommandMenu(void) {
         g_Battle.phase.step += 1;
         return;
     }
-    var_s0 = 5;
     if (g_PadStates[0].held & (INPUT_DIRECTIONAL | PADL1 | PADR1)) {
-        var_s5     = pad - 4;
-        var_s6     = &g_UiPanelTasks[2].state;
-        var_s6     = &g_UiPanelTasks[2].state;
-        var_s3     = &g_Battle.cursor.panel_entry;
-        var_s3     = &g_Battle.cursor.panel_entry;
-        var_s2     = &g_Battle.cursor.panel_entry - 5;
-        var_s4     = &g_Battle.cursor.panel_entry - 1;
-        var_v0_199 = 5 << 0x18;
-    loop_18:
-        var_s1      = var_v0_199 >> 0x18;
-        temp_v1_206 = *(&D_801EABCC + (var_s1 * 2));
-        var_v0_210  = var_s0 - 1;
-        if (temp_v1_206 & var_s5[2]) {
-            var_v0_215 = var_s0 + 1;
-            if (temp_v1_206 & FIELD(u16, var_s5, 0x4u)) {
-                SND_SEPlay(EMI_SE_ID(SND_BANK_COMMON, 1));
-                if (g_Battle.cursor.panel_entry == (var_s1 + 1)) {
-                    if (*(u8*)((u8*)(&g_Battle.cursor.panel_entry) + -1) != 0) {
-                        if (((u32)((var_s0 - 1) & BYTE_MASK) >= 2U) || !(g_BattleActorTurn->action_flags.value & BATTLER_ACTION_DRAGON_FORM)) {
-                            temp_a0_239                                             = var_s0 + 1;
-                            FIELD(s8, var_s6, 0x24u)                                = 2;
-                            *var_s6                                                 = 2;
-                            FIELD(s8, (&(&g_Battle.cursor.panel_entry)[-5]), 0x13u) = temp_a0_239;
-                            FIELD(s8, (&(&g_Battle.cursor.panel_entry)[-5]), 0x1u)  = temp_a0_239;
-                            FIELD(s8, (&(&g_Battle.cursor.panel_entry)[-5]), 0x4u)  = 0;
-                            FIELD(s8, (&(&g_Battle.cursor.panel_entry)[-5]), 0x5u)  = 0;
-                            *(u8*)((u8*)(&g_Battle.cursor.panel_entry) + -5)        = (u8)(*(u8*)((u8*)(&g_Battle.cursor.panel_entry) + -5) + 2);
+        for (i = 5; i >= 0; i--) {
+            if (g_PadStates[0].held & D_801EABCC[i]) {
+                if (g_PadStates[0].pressed & D_801EABCC[i]) {
+                    SND_SEPlay(EMI_SE_ID(SND_BANK_COMMON, 1));
+                    if (g_Battle.cursor.panel_entry == i + 1) {
+                        if (g_Battle.selection != 0) {
+                            if ((u8)(i - 1) < 2 && (g_BattleActorTurn->action_flags.value & BATTLER_ACTION_DRAGON_FORM)) {
+                                g_Battle.selection          = 0;
+                                g_Battle.cursor.panel_entry = 0;
+                                return;
+                            }
+                            g_Battle.phase.step += 2;
+                            g_Battle.panel_slot              = i + 1;
+                            g_Battle.phase.sub_step          = i + 1;
+                            *(u8*)(&g_UiPanelTasks[2].state) = 2;
+                            g_UiPanelTasks[3].state          = 2;
+                            g_Battle.selection               = 0;
+                            g_Battle.cursor.panel_entry      = 0;
                             return;
                         }
-                        *(u8*)((u8*)(&g_Battle.cursor.panel_entry) + -1) = 0U;
-                        g_Battle.cursor.panel_entry                      = 0;
-                        return;
                     }
-                    goto block_26;
+                    g_Battle.selection          = 8;
+                    g_Battle.cursor.panel_entry = i + 1;
                 }
-            block_26:
-                *(u8*)((u8*)(&g_Battle.cursor.panel_entry) + -1) = 8U;
-                g_Battle.cursor.panel_entry                      = var_s0 + 1;
-                var_v0_215                                       = var_s0 + 1;
-                goto block_27;
+                g_Battle.panel_slot = i + 1;
             }
-        block_27:
-            g_Battle.panel_slot = var_v0_215;
-            var_v0_210          = var_s0 - 1;
-            goto block_28;
         }
-    block_28:
-        var_s0     = var_v0_210;
-        var_v0_199 = var_s0 << 0x18;
-        if (var_v0_210 & 0x80) {
-            return;
-        }
-        goto loop_18;
+        return;
     }
     if (g_Battle.panel_slot != 0) {
         g_Battle.panel_slot = 0;
