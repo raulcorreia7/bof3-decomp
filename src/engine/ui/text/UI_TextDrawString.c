@@ -44,7 +44,7 @@ MATCH const u8* UI_TextDrawString(s16 x, s16 y, s32 palette, u8 byte_count, cons
                 str++;
                 setUV0(((SPRT*)g_GfxPrimCursor), (((*str + 64) % 32) * 8), (shade + ((*str + 64) / 32) * 8));
                 setWH(((SPRT*)g_GfxPrimCursor), 8, 8 - trim);
-                func_8014FB80(x, y, clut, shade);
+                UI_TextQueueGlyph(x, y, clut, shade);
                 x += 8;
                 break;
             default:
@@ -52,7 +52,7 @@ MATCH const u8* UI_TextDrawString(s16 x, s16 y, s32 palette, u8 byte_count, cons
                 glyph_y                      = (((*str - 0x30) / 31) * 8) + 0x78;
                 ((SPRT*)g_GfxPrimCursor)->v0 = (shade + glyph_y);
                 setWH(((SPRT*)g_GfxPrimCursor), 8, 8 - trim);
-                func_8014FB80(x, y, clut, shade);
+                UI_TextQueueGlyph(x, y, clut, shade);
                 x += 8;
                 break;
         }

@@ -4,8 +4,11 @@
 A function counts as MATCH C in an image when a `MATCH` definition reaches the image's sources:
 a file in the image's folder under `src/` (or in an engine module folder) or a file such a file includes by path (function files,
 shared headers). Its address comes from `config/symbols/<image>.toml` by name; a `func_<ADDR>`
-name carries it. The comparison is per image by address, so a rename, a fold into a shared
-header, a regrouping and a move all pass; an `INCLUDE_ASM` or a `NON_MATCHING` draft in its place fails.
+name carries it. A file that two images share (an engine module folder) counts a `func_<ADDR>`
+function only for the image whose splat address range holds the address, so renaming an executable
+function away from its address name loses nothing in the other image. The comparison is per image
+by address, so a rename, a fold into a shared header, a regrouping and a move all pass; an
+`INCLUDE_ASM` or a `NON_MATCHING` draft in its place fails.
 
 A deliberate downgrade passes with a commit message line between the merge base and HEAD:
 
@@ -34,7 +37,15 @@ DEFINITION = re.compile(r"^MATCH\b[^;{}]*?\b(\w+)\s*\(", re.M)
 INCLUDE = re.compile(r'^\s*#\s*include\s+"([^"]+)"', re.M)
 ADDRESS_NAME = re.compile(r"func_([0-9A-Fa-f]{8})$")
 ENGINE_IMAGES = ("exe/slus_004_22", "emi/etc/game/00")
+VRAM = re.compile(r"^\s*vram:\s*(0x[0-9A-Fa-f]+)", re.M)
 REMOVED = re.compile(r"^Match-Removed:\s*(\S+@0x[0-9A-Fa-f]+)", re.M)
+
+
+def address_range(root: Path, rev: str, image: str) -> tuple[int, int] | None:
+    """The lowest and highest address the image's `splat.yaml` places, or None without one."""
+    text = git("show", f"{rev}:config/{image}/splat.yaml", root=root, check=False)
+    starts = [int(v, 16) for v in VRAM.findall(text)]
+    return (min(starts), max(starts)) if starts else None
 
 
 def lifted(root: Path, rev: str) -> dict[str, str]:
@@ -68,11 +79,20 @@ def lifted(root: Path, rev: str) -> dict[str, str]:
         return reach[path]
 
     found: dict[str, str] = {}
+    spans: dict[str, tuple[int, int] | None] = {}
 
-    def add(image: str, name: str, *, owned: bool) -> None:
+    def holds(image: str, addr: int) -> bool:
+        if image not in spans:
+            spans[image] = address_range(root, rev, image)
+        span = spans[image]
+        return span is None or span[0] <= addr < span[1]
+
+    def add(image: str, name: str, *, owned: bool, shared: bool) -> None:
         row = tables[image].get(name)
         if owned and (m := ADDRESS_NAME.match(name)):
             addr = int(m[1], 16)
+            if shared and not holds(image, addr):
+                return
         elif (
             isinstance(row, dict) and "addr" in row and (owned or not row.get("alias"))
         ):
@@ -92,8 +112,10 @@ def lifted(root: Path, rev: str) -> dict[str, str]:
                 owned.setdefault(file, set()).add(image)
     for path, body in text.items():
         for name in DEFINITION.findall(body):
-            for image in owned.get(path) or tables:
-                add(image, name, owned=path in owned)
+            images = owned.get(path) or tables
+            for image in images:
+                shared = image in ENGINE_IMAGES and len(images) > 1
+                add(image, name, owned=path in owned, shared=shared)
     return found
 
 

@@ -439,6 +439,8 @@ SYS_ThreadWait = { addr = 0x8014B87C, type = "func", source = "Arms the current 
 SYS_ThreadExit = { addr = 0x8014B8B0, type = "func", source = "Empties the current thread, closes it, switches away." }
 SYS_ThreadClose = { addr = 0x8014B900, type = "func", source = "Empties one thread and closes it." }
 SYS_ThreadReplace = { addr = 0x8014B954, type = "func", source = "Replaces the running callback." }
+SYS_ThreadSuspend = { addr = 0x8014B9AC, type = "func", source = "Sets SYS_THREAD_SUSPENDED in the state of thread thread_index; SYS_ThreadRun switches on exact state values, so the thread is skipped until it is cleared." }
+SYS_ThreadResume = { addr = 0x8014B9D8, type = "func", source = "Clears SYS_THREAD_SUSPENDED in the state of thread thread_index." }
 SYS_ClearCurrentThread = { addr = 0x8014BA04, type = "func", source = "Clears the current thread work area at offsets 0x60 through 0x7F." }
 Area_SceneDraw = { addr = 0x8014BA54, type = "func", source = "Draws the area scene." }
 Area_SwapGridActors = { addr = 0x8014BAB8, type = "func", source = "Swaps two objects of the draw list." }
@@ -511,6 +513,7 @@ GFX_FadeRunWhite = { addr = 0x8014F5F0, type = "func", source = "Fades the scree
 GFX_FadeUpdateScreen = { addr = 0x8014F704, type = "func", source = "Draws one step of a screen fade." }
 UI_TextDraw = { addr = 0x8014F800, type = "func", source = "Draws a text record." }
 UI_TextDrawGlyphs = { addr = 0x8014F84C, type = "func", source = "Draws a text record's control bytes and glyphs through the shared sprite cursor." }
+UI_TextQueueGlyph = { addr = 0x8014FB80, type = "func", source = "Queues the sprite UI_TextDrawString prepared at the primitive cursor: neutral colour, clut, position (x, y + shade), semi-transparent, on the UI layer." }
 UI_TextAddDrawMode = { addr = 0x8014FC00, type = "func", source = "Adds the draw mode used by the text and glyph renderers." }
 UI_TextDrawString = { addr = 0x8014FC90, type = "func", source = "Draws a glyph string." }
 UI_TextDrawAscii = { addr = 0x8014FF0C, type = "func", source = "Draws an ASCII string." }
@@ -525,13 +528,30 @@ UI_MessageDrawScript = { addr = 0x80150470, type = "func", source = "Draws a mes
 UI_MessageDispatchState = { addr = 0x801507BC, type = "func", source = "Runs the handler of the message window state." }
 UI_MessageRunScript = { addr = 0x8015083C, type = "func", source = "Runs the message script at the cursor until an opcode ends the step, and sets the next message state." }
 UI_MessageTickChoiceTimer = { addr = 0x80150E14, type = "func", source = "Counts the message state timer down and clears the state at zero." }
+UI_MessageRunEnd = { addr = 0x80150E48, type = "func", source = "State 2 of g_UiMessageStateSteps, entered by the end opcode: runs the end step g_UiMessageStep selects, UI_MessageWaitEndInput then UI_MessageConfirmWhenClosed." }
+UI_MessageWaitEndInput = { addr = 0x80150E98, type = "func", source = "Step 0 of the message end state: on a pad press or an advance or latch request, moves the message panel on to closing and sets FRONTEND_FLAG_SELECTION." }
+UI_MessageConfirmWhenClosed = { addr = 0x80150F08, type = "func", source = "Last step of the message end and box end states: once the message panel is closed (state 4), sets FRONTEND_FLAG_CONFIRM." }
+UI_MessageRunPage = { addr = 0x80150F3C, type = "func", source = "State 3 of g_UiMessageStateSteps, entered by the page opcode: runs UI_MessageWaitInput, then the phase ticker." }
+UI_MessageWaitInput = { addr = 0x80150F8C, type = "func", source = "Step 0 of the page state and of the choice state: draws the wait marker and steps on at a pad press or an advance request." }
+UI_MessageRunChoice = { addr = 0x801510DC, type = "func", source = "State 4 of g_UiMessageStateSteps: runs the step of g_UiMessageChoiceStateSteps that g_UiMessageStep selects, from the wait marker through the pick to the close." }
+UI_MessageOpenChoice = { addr = 0x8015115C, type = "func", source = "Step 1 of the choice state: opens the choice panel task, starts the message panel closing and steps on." }
+UI_MessageWaitChoiceReady = { addr = 0x801511C8, type = "func", source = "Step 2 of the choice state: steps on once the choice panel is open (state 2) and the message panel is closed (state 4)." }
 UI_MessageUpdateChoiceInput = { addr = 0x80151210, type = "func", source = "Handles the choice input and moves the choice cursor." }
 UI_MessageDispatchAnswerStep = { addr = 0x8015136C, type = "func", source = "Runs the current answer step of the message." }
-UI_MessageRestartRequest = { addr = 0x8015142C, type = "func", source = "Entry 6 of the message state table D_80149A7C, after UI_MessageDispatchAnswerStep: when the first menu panel task is in state 2, sets g_UiMessageStateTimer to 0x10, restarts the request with UI_MessageStartRequest and toggles FRONTEND_FLAG_SELECTION in g_UiWindowChannel." }
+UI_MessageRestartRequest = { addr = 0x8015142C, type = "func", source = "Entry 6 of the message state table g_UiMessageChoiceStateSteps, after UI_MessageDispatchAnswerStep: when the first menu panel task is in state 2, sets g_UiMessageStateTimer to 0x10, restarts the request with UI_MessageStartRequest and toggles FRONTEND_FLAG_SELECTION in g_UiWindowChannel." }
+UI_MessageEndAfterChoice = { addr = 0x80151480, type = "func", source = "Last step of the choice state: once the choice panel is closed (state 4), closes the message panel, sets the end state at its confirm step and sets FRONTEND_FLAG_MODE_LATCH." }
 UI_MessageStartRequest = { addr = 0x801514D0, type = "func", source = "Starts the requested message." }
+UI_MessageRunScrollChoice = { addr = 0x80151538, type = "func", source = "State 5 of g_UiMessageStateSteps: runs the step of g_UiMessageScrollStateSteps that g_UiMessageStep selects, around UI_MessageScrollChoice." }
 UI_MessageClosePanel = { addr = 0x801515A8, type = "func", source = "Clears the panel index - arms panel 1 mode 0 and advances the front-end step." }
+UI_MessageWaitChoiceOpen = { addr = 0x801515F4, type = "func", source = "Step 1 of the scrolling choice state: steps on once the choice panel is open (state 2)." }
 UI_MessageScrollChoice = { addr = 0x80151628, type = "func", source = "Moves the choice cursor." }
+UI_MessageRunStepCloseChoice = { addr = 0x80151710, type = "func", source = "Step 3 of the scrolling choice state: runs the step handler of g_UiMessageWindow.step_id (the area table below 0x80, else UI_MessageDispatchStep) and starts the choice panel closing." }
+UI_MessageWaitChoiceClosed = { addr = 0x801517AC, type = "func", source = "Step 4 of the scrolling choice state: once the choice panel is closed (state 4), ends the message when no request is pending, else steps on." }
+UI_MessageResumeScript = { addr = 0x80151820, type = "func", source = "State 6 of g_UiMessageStateSteps: returns the message state to script running once the message panel is open (state 2)." }
+UI_MessageRunBoxEnd = { addr = 0x80151844, type = "func", source = "State 7 of g_UiMessageStateSteps, entered by the box end opcode: runs UI_MessageTickBoxEnd, then UI_MessageConfirmWhenClosed." }
+UI_MessageTickBoxEnd = { addr = 0x80151894, type = "func", source = "Step 0 of the box end state: counts g_UiMessageStateTimer down, then moves the message panel on to closing and sets FRONTEND_FLAG_SELECTION." }
 UI_MessageDispatchChoiceMode = { addr = 0x801518F4, type = "func", source = "Runs the handler of the message choice mode." }
+UI_MessageChoiceIdle = { addr = 0x80151964, type = "func", source = "Entry 0 of g_UiMessageChoiceModes: the empty body of the mode with no choice effect." }
 UI_MessageUpdateChoice = { addr = 0x8015196C, type = "func", source = "Runs the current message choice step." }
 UI_MessageNextChoice = { addr = 0x801519F8, type = "func", source = "Moves the message choice list one entry on: advances g_UiMessageChoiceStep when the scroll countdown reaches -2, else steps the countdown by -2. Called by UI_MessageUpdateChoice." }
 UI_MessagePrevChoice = { addr = 0x80151A48, type = "func", source = "Moves the message choice list one entry back: lowers g_UiMessageChoiceStep when the scroll countdown reaches 2, else steps the countdown by 2. Called by UI_MessageUpdateChoice." }
