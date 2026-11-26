@@ -15,8 +15,8 @@ NON_MATCHING void func_801DF00C(s32 x, s32 y) {
     base_y    = y + 6;
     highlight = 0;
     for (row = 0; row < D_801E6250; row++) {
-        clut     = 0;
-        record   = &g_Characters[g_CharSlot[D_801E6244[row]]];
+        clut   = 0;
+        record = &g_Characters[g_CharSlot[D_801E6244[row]]];
         UI_WindowDraw(base_x, base_y, MENU_CHARACTER_WINDOW_WIDTH, MENU_CHARACTER_WINDOW_HEIGHT, UI_WINDOW_OPEN_TOP_LEFT, g_WindowStyle);
         Menu_DrawCharacterPortrait(x + 0x5D, base_y, record->character_id, highlight ? 1 : (record->status >> 6) & 2);
         index = clut & BYTE_MASK;
