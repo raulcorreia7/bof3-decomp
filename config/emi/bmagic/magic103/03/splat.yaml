@@ -17,10 +17,10 @@ segments:
     align: 4
     subsegments:
       - [0x1B94, bin, g_BMagicEffectModes]
-      - [0x1BA0, bin, D_801F07A0]
-      - [0x1BAC, bin, D_801F07AC]
+      - [0x1BA0, bin, g_BMagicSimoonDomeSteps]
+      - [0x1BAC, bin, g_BMagicSimoonGlowOffsets]
       - [0x1BB0, bin, D_801F07B0]
       - [0x1BB4, bin, D_801F07B4]
-      - [0x1BC4, bin, D_801F07C4]
-      - [0x1BD4, bin, D_801F07D4]
+      - [0x1BC4, bin, g_BMagicSimoonGlowSteps]
+      - [0x1BD4, bin, g_BMagicSimoonShadowSteps]
   - [0x1BE4]

@@ -5,15 +5,29 @@
 
 #include "overlays/bmagic/bmagic.h"
 
-extern Callback D_801F07A0[];
-extern Pos3     D_801F07AC[];
+/* The effects the task starts: header.mode picks the handler g_BMagicEffectModes runs. */
+typedef enum BMagicSimoonEffectMode {
+    BMAGIC_SIMOON_EFFECT_DOME   = 0,
+    BMAGIC_SIMOON_EFFECT_GLOW   = 1,
+    BMAGIC_SIMOON_EFFECT_SHADOW = 2
+} BMagicSimoonEffectMode;
 
-extern Callback D_801F07C4[];
-void            func_801EF1D8(void);
+/* D_801F07A0 */
+extern Callback g_BMagicSimoonDomeSteps[];
+/* D_801F07AC */
+extern Pos3     g_BMagicSimoonGlowOffsets[];
 
-void func_801EFE20(void);
+/* D_801F07C4 */
+extern Callback g_BMagicSimoonGlowSteps[];
+/* func_801EF1D8 */
+void            BMagic_SimoonDrawDome(void);
 
-extern Callback D_801F07D4[];
-void            func_801F04E0(void);
+/* func_801EFE20 */
+void BMagic_SimoonDrawGlow(void);
+
+/* D_801F07D4 */
+extern Callback g_BMagicSimoonShadowSteps[];
+/* func_801F04E0 */
+void            BMagic_SimoonDrawShadow(void);
 
 #endif
