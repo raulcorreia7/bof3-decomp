@@ -14,7 +14,7 @@ MATCH void func_801F36CC(void) {
         g_PartyActors[0].unk_7E    = 0;
         g_AreaFocus.z.part.integer = Area_HeightSample(x, y);
         g_AreaSceneMode            = 1;
-        if (SYS_TestFlag(D_80144EF8, 0x11) != 0) {
+        if (SYS_TestFlag(&g_SceneFlagWords[14 * 8], 0x11) != 0) {
             g_SceneEventMode = 0x21;
             g_SceneEventStep = 0;
             D_801448EE       = 0x5A;

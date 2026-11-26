@@ -9,8 +9,7 @@
 
 extern u8 D_80144908[];
 
-extern u16 D_80144F54;
-extern u8  D_80144F5F;
+extern u8 D_80144F5F;
 
 extern u8 D_80146134;
 

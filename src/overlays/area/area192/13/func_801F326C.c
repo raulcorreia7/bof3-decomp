@@ -1,4 +1,5 @@
 #include "area192_13.h"
+#include "menu/save_data.h"
 
 MATCH u16 func_801F326C(u8 character_id) {
     u8  area;
@@ -13,8 +14,7 @@ MATCH u16 func_801F326C(u8 character_id) {
             break;
         }
     }
-    /* FAKE: retail forms the flags address from the area byte's address. */
-    area = D_80144EF8[0x5E];
+    area = g_SaveData.desert.days;
     base = row * CAMP_MESSAGE_ROW_SIZE;
     row  = base;
     if (area >= CAMP_MESSAGE_ROW_SIZE) {
@@ -22,7 +22,7 @@ MATCH u16 func_801F326C(u8 character_id) {
     }
     slot    = g_CharSlot[character_id];
     fatigue = g_Characters[slot].fatigue;
-    if (SYS_TestFlag(D_80144EF8, 0xA) != 0) {
+    if (SYS_TestFlag(&g_SaveData.scene_flag_words[14 * 8], 0xA) != 0) {
         return func_801F33E4(row, character_id, area, fatigue);
     }
     if (fatigue < 8) {
