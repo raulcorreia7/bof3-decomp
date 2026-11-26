@@ -12,7 +12,7 @@ MATCH bool Actor_IsAheadBlocked(Actor* arg) {
     route = arg->direction & 0x7;
     pos_x = arg->pos.x.fixed + g_FacingSteps[route].x;
     x     = pos_x;
-    pos_y = arg->pos.y.fixed + g_FacingStepY[route * 2];
+    pos_y = arg->pos.y.fixed + g_FacingSteps[route].y;
     y     = pos_y;
 
     if ((func_801A1BC0(arg) & BYTE_MASK) != 0u) {

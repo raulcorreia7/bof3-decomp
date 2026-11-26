@@ -1006,8 +1006,8 @@ typedef enum BattleStateFlags {
     BATTLE_STATE_RELOAD_PARTY     = 1 << 15,
 } BattleStateFlags;
 
-/* The side mask Battle_MarkDamaged writes into D_80146384; the low values are one
- * battler slot (0-10). */
+/* The side mask held in BattleState.target_selector (and a command's target): the low values
+ * are one battler slot (0-10); an all-target action sets a side. */
 typedef enum BattleTargetFlags {
     BATTLE_TARGET_ENEMY_SIDE = 1 << 6,
     BATTLE_TARGET_PARTY_SIDE = 1 << 7,

@@ -1,14 +1,7 @@
 #include "area030_04.h"
 
 /* Draws one character in the fishing interface. */
-// clang-format off
-MATCH void func_801D9740(color, pixels, mask, value)
-u8 color;
-u8* pixels;
-u8 mask;
-s16 value;
-// clang-format on
-{
+MATCH void func_801D9740(u8 color, u8* pixels, u8 mask, s16 value) {
     POLY_FT4* quad;
     s16       top;
 

@@ -1,5 +1,5 @@
 /* Clears the effect slot table and spawns one palette fade per selectable battler: the enemy slots when the target
- * selector holds 0x40, the party slots otherwise, each fade starting 28 frames after the one before. */
+ * selector holds the enemy side, the party slots otherwise, each fade starting 28 frames after the one before. */
 /* func_801EED18 (magic073, magic074) */
 /* The statements of func_801EED18; each member declares u32 slot and u8 i, battler and count, and passes the handler
  * index of the fades and the value for byte 0x04 of the effect. */
@@ -13,7 +13,7 @@
     TASK(PartyMember)->unk_04       = (task_04);                                                   \
     TASK(PartyMember)->param.unk_0B = 0;                                                           \
     TASK(PartyMember)->header.mode += 1;                                                           \
-    if (g_Battle.target_selector & 0x40) {                                                         \
+    if (g_Battle.target_selector & BATTLE_TARGET_ENEMY_SIDE) {                                     \
         for (i = 0; i < 8; i++) {                                                                  \
             battler = i + BATTLE_PARTY_CHARACTERS_COUNT;                                           \
             if (!Battle_SlotIsBlocked(battler)) {                                                  \
