@@ -39,20 +39,12 @@ def snapshot(root: Path) -> tuple[dict[str, bytes], bytes]:
     return files, (root / ".git/index").read_bytes()
 
 
-@pytest.mark.parametrize("failure", ["destination"])
-def test_preflight_failure_leaves_files_and_index_unchanged(
-    repo: Path, failure: str
-) -> None:
-    if failure == "destination":
-        (repo / "src/a/New.c").write_text("untracked destination\n")
-    else:
-        (repo / ".git/index.lock").write_text("another process\n")
+def test_preflight_failure_leaves_files_and_index_unchanged(repo: Path) -> None:
+    (repo / "src/a/New.c").write_text("untracked destination\n")
     before = snapshot(repo)
     with pytest.raises((SymbolError, subprocess.CalledProcessError, OSError)):
         main(repo, ["rename", "Old", "New"])
     assert snapshot(repo) == before
-    if failure == "index-lock":
-        assert (repo / ".git/index.lock").read_text() == "another process\n"
 
 
 def test_a_failed_second_move_rolls_back_files_paths_and_index(

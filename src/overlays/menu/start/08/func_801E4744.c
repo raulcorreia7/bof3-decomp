@@ -2,76 +2,65 @@
 
 /* The name entry cursor: the page, row and column of the cell it sits on, and the
  * command cells the grid carries in its label column. */
-#ifdef NON_MATCHING
-NON_MATCHING void func_801E4744(void) {
+MATCH void func_801E4744(void) {
     u8  cell_index;
     u8  col;
     u8  row;
     u8* cell;
-    u8* page;
-    u8* row_base;
     s8  slot;
     u16 count;
     s32 input;
 
     func_801E7000();
-    input    = INPUT_REPEATED(g_PadStates[0].pressed, (INPUT_DIRECTIONAL | PADL1 | PADL2 | PADR1 | PADR2));
-    row_base = D_801ECDBC + (s8)D_801ED7E4 * 0xC;
-    cell     = D_801ED7E8 * 0x60 + row_base + (s8)D_801ED7E0;
+    input = INPUT_REPEATED(g_PadStates[0].pressed, (INPUT_DIRECTIONAL | PADL1 | PADL2 | PADR1 | PADR2));
+    cell  = &D_801ECDBC[D_801ED7E8][(s8)D_801ED7E4][(s8)D_801ED7E0];
     if (input & PADLup) {
         SND_SEPlay(EMI_SE_ID(SND_BANK_COMMON, 0));
-        page = D_801ECDBC + D_801ED7E8 * 0x60;
         do {
             row        = D_801ED7E4 - 1;
             D_801ED7E4 = row;
             if ((s8)row < 0) {
                 D_801ED7E4 = 7;
             }
-        } while (*(page + (s8)D_801ED7E4 * 0xC + (s8)D_801ED7E0) == 0);
+        } while (D_801ECDBC[D_801ED7E8][(s8)D_801ED7E4][(s8)D_801ED7E0] == 0);
     } else if (input & PADLdown) {
         SND_SEPlay(EMI_SE_ID(SND_BANK_COMMON, 0));
-        page = D_801ECDBC + D_801ED7E8 * 0x60;
         do {
             row        = D_801ED7E4 + 1;
             D_801ED7E4 = row;
             if ((s8)row >= 8) {
                 D_801ED7E4 = 0;
             }
-        } while (*(page + (s8)D_801ED7E4 * 0xC + (s8)D_801ED7E0) == 0);
+        } while (D_801ECDBC[D_801ED7E8][(s8)D_801ED7E4][(s8)D_801ED7E0] == 0);
     } else if (input & PADLleft) {
         SND_SEPlay(EMI_SE_ID(SND_BANK_COMMON, 0));
         if (*cell != 0 && *cell < 6) {
             D_801ED7E0 = 9;
         } else {
-            page = D_801ECDBC + D_801ED7E8 * 0x60;
-            page += (s8)D_801ED7E4 * 0xC;
             do {
                 col        = D_801ED7E0 - 1;
                 D_801ED7E0 = col;
                 if ((s8)col < 0) {
                     D_801ED7E0 = 0xB;
                 }
-            } while (*(page + (s8)D_801ED7E0) == 0);
+            } while (D_801ECDBC[D_801ED7E8][(s8)D_801ED7E4][(s8)D_801ED7E0] == 0);
         }
     } else if (input & PADLright) {
         SND_SEPlay(EMI_SE_ID(SND_BANK_COMMON, 0));
         if (*cell != 0 && *cell < 6) {
             D_801ED7E0 = 0;
         } else {
-            page = D_801ECDBC + D_801ED7E8 * 0x60;
-            page += (s8)D_801ED7E4 * 0xC;
             do {
                 col        = D_801ED7E0 + 1;
                 D_801ED7E0 = col;
                 if ((s8)col >= 0xC) {
                     D_801ED7E0 = 0;
                 }
-            } while (*(page + (s8)D_801ED7E0) == 0);
+            } while (D_801ECDBC[D_801ED7E8][(s8)D_801ED7E4][(s8)D_801ED7E0] == 0);
         }
     }
     if (g_PadStates[0].pressed & PADRdown) {
-        row_base = D_801ECDBC + (s8)D_801ED7E4 * 0xC;
-        cell     = D_801ED7E8 * 0x60 + row_base + (s8)D_801ED7E0;
+        cell = &D_801ECDBC[D_801ED7E8][(s8)D_801ED7E4][(s8)D_801ED7E0];
         switch (*cell) {
             case NAME_ENTRY_NEXT:
                 if (D_801ED7DC < 4) {
@@ -167,6 +156,3 @@ NON_MATCHING void func_801E4744(void) {
         }
     }
 }
-#else
-INCLUDE_ASM(func_801E4744);
-#endif

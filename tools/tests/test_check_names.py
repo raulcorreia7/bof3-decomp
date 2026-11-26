@@ -204,7 +204,7 @@ def test_a_unit_row_that_keeps_its_address_name_is_stale(
     assert "keeps the address name" in capsys.readouterr().err
 
 
-def rename_repo(root: Path, base_extra: dict[str, str] | None = None) -> None:
+def rename_repo(root: Path) -> None:
     """Commit one offender under ``src/a`` and stage a rename of it or another file."""
     subprocess.run(["git", "init", "-q"], cwd=root, check=True)
     for key, value in (("user.email", "t@t"), ("user.name", "t")):
@@ -213,9 +213,6 @@ def rename_repo(root: Path, base_extra: dict[str, str] | None = None) -> None:
     (root / "src/a/A.c").write_text("extern u8 Foo_801D933C;\n")
     (root / "config").mkdir()
     (root / "config/address_names.txt").write_text("src/a/A.c\tFoo_801D933C\n")
-    for name, text in (base_extra or {}).items():
-        (root / name).parent.mkdir(parents=True, exist_ok=True)
-        (root / name).write_text(text)
     subprocess.run(["git", "add", "."], cwd=root, check=True)
     subprocess.run(["git", "commit", "-qm", "base"], cwd=root, check=True)
 

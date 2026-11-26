@@ -2267,14 +2267,12 @@ MATCH void func_801D81A4(s16 x, s16 y) {
 #ifdef NON_MATCHING
 void func_801D851C(s16 x, s16 y, s32 width, u8 index);
 
-NON_MATCHING void func_801D830C(s32 arg_x, s32 arg_y, s32 kind, s32 mode) {
+NON_MATCHING void func_801D830C(s32 x, s32 y, s32 kind, s32 mode) {
     TILE* tile;
     s32   tile_x;
     s32   tile_y;
     s32   row;
     u8*   style;
-    s16   x = arg_x;
-    s16   y = arg_y;
 
     UI_WindowDraw(x, y, 0x48, 0x26, 0x80, *(style = &g_WindowStyle));
     func_801D81A4(x, y);
@@ -2308,8 +2306,15 @@ NON_MATCHING void func_801D851C(s16 x, s16 y, s32 width, u8 index) {
     memcpy(colors, D_801D0C30, sizeof(colors));
     prim = (POLY_G4*)g_GfxPrimCursor;
     SetPolyG4(prim);
-    setXYWH(prim, x, y, width, 2);
-    color = colors[index];
+    prim->x0 = x;
+    prim->x1 = x + width;
+    prim->y0 = y;
+    prim->y1 = y;
+    prim->y2 = y + 2;
+    prim->y3 = y + 2;
+    prim->x2 = prim->x0;
+    prim->x3 = prim->x1;
+    color    = colors[index];
     setRGB2(prim, color[0] << 7, color[1] << 7, color[2] << 7);
     setRGB0(prim, prim->r2 >> 2, prim->g2 >> 2, prim->b2 >> 2);
     setRGB3(prim, prim->r2, prim->g2, prim->b2);
@@ -2317,7 +2322,14 @@ NON_MATCHING void func_801D851C(s16 x, s16 y, s32 width, u8 index) {
     GFX_AddPrim(GFX_LAYER_UI, sizeof(POLY_G4));
     prim = (POLY_G4*)g_GfxPrimCursor;
     SetPolyG4(prim);
-    setXYWH(prim, x, y + 2, width, 2);
+    prim->x0 = x;
+    prim->x1 = x + width;
+    prim->y0 = y + 2;
+    prim->y1 = y + 2;
+    prim->y2 = y + 4;
+    prim->y3 = y + 4;
+    prim->x2 = prim->x0;
+    prim->x3 = prim->x1;
     setRGB0(prim, color[0] << 7, color[1] << 7, color[2] << 7);
     setRGB2(prim, prim->r0 >> 2, prim->g0 >> 2, prim->b0 >> 2);
     setRGB1(prim, prim->r0, prim->g0, prim->b0);
@@ -2528,7 +2540,7 @@ NON_MATCHING void func_801D94D0(s32 page, s32 left, s32 top, s32 cursor_col_arg,
     cursor_row = cursor_row_arg;
     memcpy(tags, D_801D0C3C, 20);
     UI_WindowDraw(left, base_y, 0x110, 123, 0, g_WindowStyle);
-    cell = D_801DAAAC + ((u8)page * 96);
+    cell = D_801DAAAC[(u8)page][0];
     y    = base_y + 6;
     for (row = 0; row < 8; row++) {
         x = left + 4;
@@ -2710,70 +2722,60 @@ NON_MATCHING void func_801D9B80(s32 x, s32 y, s32 width, s32 height) {
 INCLUDE_ASM(func_801D9B80);
 #endif
 
-#ifdef NON_MATCHING
-NON_MATCHING s8 func_801DA114(void) {
+MATCH s8 func_801DA114(void) {
     s32 pressed;
-    u8* page;
-    u8* row;
     u8* cell;
-    s32 col;
-    s32 i;
-    s32 count;
+    s8  i;
+    u16 count;
     u16 pad;
 
     pressed = INPUT_GetRepeatedButtons(g_PadStates[0].pressed & (INPUT_DIRECTIONAL | PADL1 | PADL2 | PADR1 | PADR2));
-    cell    = D_801DAAAC + D_801DAAA8 * 96 + (s8)D_801DB0D8 * 12 + (s8)D_801DB0D4;
+    cell    = &D_801DAAAC[D_801DAAA8][(s8)D_801DB0D8][(s8)D_801DB0D4];
     if (pressed & PADLup) {
         SND_SEPlay(0x100);
-        page = D_801DAAAC + D_801DAAA8 * 96;
-        col  = (s8)D_801DB0D4;
         do {
             D_801DB0D8 -= 1;
             if ((s8)D_801DB0D8 < 0) {
                 D_801DB0D8 = 7;
             }
-        } while ((page + (s8)D_801DB0D8 * 12)[col] == 0);
+        } while (D_801DAAAC[D_801DAAA8][(s8)D_801DB0D8][(s8)D_801DB0D4] == 0);
     } else if (pressed & PADLdown) {
         SND_SEPlay(0x100);
-        page = D_801DAAAC + D_801DAAA8 * 96;
-        col  = (s8)D_801DB0D4;
         do {
             D_801DB0D8 += 1;
             if ((s8)D_801DB0D8 >= 8) {
                 D_801DB0D8 = 0;
             }
-        } while ((page + (s8)D_801DB0D8 * 12)[col] == 0);
+        } while (D_801DAAAC[D_801DAAA8][(s8)D_801DB0D8][(s8)D_801DB0D4] == 0);
     } else if (pressed & PADLleft) {
         SND_SEPlay(0x100);
         if (*cell != 0 && *cell < 6) {
             D_801DB0D4 = 9;
         } else {
-            row = D_801DAAAC + D_801DAAA8 * 96 + (s8)D_801DB0D8 * 12;
             do {
                 D_801DB0D4 -= 1;
                 if ((s8)D_801DB0D4 < 0) {
                     D_801DB0D4 = 11;
                 }
-            } while (row[(s8)D_801DB0D4] == 0);
+            } while (D_801DAAAC[D_801DAAA8][(s8)D_801DB0D8][(s8)D_801DB0D4] == 0);
         }
     } else if (pressed & PADLright) {
         SND_SEPlay(0x100);
         if (*cell != 0 && *cell < 6) {
             D_801DB0D4 = 0;
         } else {
-            row = D_801DAAAC + D_801DAAA8 * 96 + (s8)D_801DB0D8 * 12;
             do {
                 D_801DB0D4 += 1;
                 if ((s8)D_801DB0D4 >= 12) {
                     D_801DB0D4 = 0;
                 }
-            } while (row[(s8)D_801DB0D4] == 0);
+            } while (D_801DAAAC[D_801DAAA8][(s8)D_801DB0D8][(s8)D_801DB0D4] == 0);
         }
     }
 
     pad = g_PadStates[0].pressed;
     if (pad & PADRdown) {
-        cell = D_801DAAAC + D_801DAAA8 * 96 + (s8)D_801DB0D8 * 12 + (s8)D_801DB0D4;
+        cell = &D_801DAAAC[D_801DAAA8][(s8)D_801DB0D8][(s8)D_801DB0D4];
         switch (*cell) {
             case 1:
                 if (D_801DB0D0 < 4) {
@@ -2808,19 +2810,28 @@ NON_MATCHING s8 func_801DA114(void) {
     }
 
     if ((g_PadStates[0].pressed & PADRright) || (pressed & (PADR1 | PADR2))) {
-        if (D_801DB0D0 >= 4) {
-            return 0;
+        if (D_801DB0D0 < 4) {
+            SND_SEPlay(0x101);
+            D_801DB0D0 += 1;
         }
-        SND_SEPlay(0x101);
-        D_801DB0D0 += 1;
         return 0;
-    }
-    if ((g_PadStates[0].pressed & PADRleft) || (pressed & PADL1) || (pressed & PADL2)) {
-        if (D_801DB0D0 == 0) {
-            return 0;
+    } else if (g_PadStates[0].pressed & PADRleft) {
+        if (D_801DB0D0 != 0) {
+            SND_SEPlay(0x101);
+            D_801DB0D0 -= 1;
         }
-        SND_SEPlay(0x101);
-        D_801DB0D0 -= 1;
+        return 0;
+    } else if (pressed & PADL1) {
+        if (D_801DB0D0 != 0) {
+            SND_SEPlay(0x101);
+            D_801DB0D0 -= 1;
+        }
+        return 0;
+    } else if (pressed & PADL2) {
+        if (D_801DB0D0 != 0) {
+            SND_SEPlay(0x101);
+            D_801DB0D0 -= 1;
+        }
         return 0;
     }
     if (g_PadStates[0].pressed & PADRup) {
@@ -2831,17 +2842,21 @@ NON_MATCHING s8 func_801DA114(void) {
         }
         SND_SEPlay(0x106);
         D_801DB080[D_801DB0D0] = 0xFF;
-        return 0;
-    }
-    if (g_PadStates[0].pressed & PADstart) {
+    } else if (g_PadStates[0].pressed & PADstart) {
         SND_SEPlay(0x104);
         count = 5;
-        for (i = 4; (s8)i >= 0 && D_801DB080[(s8)i] == 0xFF; i--) {
-            count -= 1;
+        for (i = 4; i >= 0; i--) {
+            if (D_801DB080[i] != 0xFF) {
+                break;
+            }
+            count--;
         }
-        if ((u16)count < 5) {
-            for (i = 4; (s8)i >= 0 && D_801DB080[(s8)i] == 0xFF; i--) {
-                D_801DB080[(s8)i] = 0;
+        if (count < 5) {
+            for (i = 4; i >= 0; i--) {
+                if (D_801DB080[i] != 0xFF) {
+                    break;
+                }
+                D_801DB080[i] = 0;
             }
         }
         D_801F294E += 1;
@@ -2849,9 +2864,6 @@ NON_MATCHING s8 func_801DA114(void) {
     }
     return 0;
 }
-#else
-INCLUDE_ASM(func_801DA114);
-#endif
 
 MATCH void func_801DA7A4(void) {
     s32 i;

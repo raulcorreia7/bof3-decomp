@@ -15,8 +15,6 @@ NON_MATCHING s32 func_801B95E0(void) {
     u8  dir;
     s32 probe;
     u8* pad;
-    s32 v;
-    s32 ret;
     /* FAKE: retail's frame is 8 bytes larger than the statements need. */
     FAKE_STACK_PADS(s32, 8);
 
@@ -34,7 +32,7 @@ NON_MATCHING s32 func_801B95E0(void) {
     if (!(WDIR & AREA_LOAD_FLAG_WORLD_MAP)) {
         if (COORD_FRAC(TASK(Actor)->pos.x) == 0) {
             if (COORD_FRAC(TASK(Actor)->pos.y) == 0) {
-                pad    = (u8*)&g_ScratchPad.cells.halves[4];
+                pad    = (u8*)&D_1F800008;
                 pad[0] = func_801B9F08(1, 2, 3);
                 pad[1] = func_801B9F08(2, 0, 0);
                 PAD_C  = func_801B9F08(3, 0, 0);
@@ -72,40 +70,32 @@ NON_MATCHING s32 func_801B95E0(void) {
                             return func_801BB7B0(0xA) & BYTE_MASK;
                         }
                     }
-                    ret = 3;
-                    if (WDIR & AREA_LOAD_FLAG_WORLD_MAP) {
-                        return ret;
+                    if (!(WDIR & AREA_LOAD_FLAG_WORLD_MAP)) {
+                        probe = Area_HeightReadStep(STEP_TILE_X(x), y << 0x10, 3) << 0x10;
+                        if (PAD_FLAG != 0 && (probe >> 0x10) >= 0x41) {
+                            Actor_SnapFacing(4, 6, 5);
+                            return 1;
+                        }
+                        if (!(WDIR & AREA_LOAD_FLAG_WORLD_MAP)) {
+                            probe = Area_HeightReadStep(x << 0x10, (((s16)FIELD(u16, g_Task, 0x3Au) + y) << 0x10) >> 1, 1) << 0x10;
+                            if (PAD_FLAG != 0 && (probe >> 0x10) >= 0x41) {
+                                Actor_SnapFacing(2, 4, 3);
+                                return 1;
+                            }
+                        }
                     }
-                    probe = Area_HeightReadStep(STEP_TILE_X(x), y << 0x10, 3) << 0x10;
-                    if (PAD_FLAG != 0 && (probe >> 0x10) >= 0x41) {
-                        Actor_SnapFacing(4, 6, 5);
-                        return 1;
-                    }
-                    ret = 3;
-                    if (WDIR & AREA_LOAD_FLAG_WORLD_MAP) {
-                        return ret;
-                    }
-                    probe = Area_HeightReadStep(x << 0x10, (((s16)FIELD(u16, g_Task, 0x3Au) + y) << 0x10) >> 1, 1) << 0x10;
-                    if (PAD_FLAG == 0) {
-                        return 3;
-                    }
-                    if ((probe >> 0x10) < 0x41) {
-                        return ret;
-                    }
-                    Actor_SnapFacing(2, 4, 3);
-                    return 1;
+                    return 3;
                 }
             }
             goto north_south;
         }
         if (COORD_FRAC(TASK(Actor)->pos.y) == 0) {
-            v     = func_801B9F08(2, 4, 0);
-            PAD_A = v;
-            if (v == 0x70) {
+            PAD_A = func_801B9F08(2, 4, 0);
+            if (PAD_A == 0x70) {
                 Actor_SnapFacing(4, 6, 5);
                 return 7;
             }
-            if (v == 0x10 || v == 0x20) {
+            if (PAD_A == 0x10 || PAD_A == 0x20) {
                 Actor_SnapFacing(2, 4, 3);
             }
             if ((PAD_A & 0xF0) != 0xA0) {
@@ -117,16 +107,15 @@ NON_MATCHING s32 func_801B95E0(void) {
             return func_801BB7B0(8) & BYTE_MASK;
         }
     north_south:
-        v     = func_801B9F08(3, 5, 0);
-        PAD_A = v;
-        if (v == 0x70) {
+        PAD_A = func_801B9F08(3, 5, 0);
+        if (PAD_A == 0x70) {
             Actor_SnapFacing(2, 4, 3);
             return 7;
         }
-        if (v == 0xB0) {
+        if (PAD_A == 0xB0) {
             return 6;
         }
-        if (v == 0x10 || v == 0x20) {
+        if (PAD_A == 0x10 || PAD_A == 0x20) {
             Actor_SnapFacing(4, 6, 5);
         }
         if ((PAD_A & 0xF0) != 0xA0) {
@@ -140,18 +129,17 @@ NON_MATCHING s32 func_801B95E0(void) {
 
     if (COORD_FRAC(TASK(Actor)->pos.x) == 0) {
         if (COORD_FRAC(TASK(Actor)->pos.y) == 0) {
-            v     = func_801B9F08(1, 0, 0);
-            PAD_A = v;
-            if (v == 0xB0) {
+            PAD_A = func_801B9F08(1, 0, 0);
+            if (PAD_A == 0xB0) {
                 return 6;
             }
-            if (v == 0x10) {
+            if (PAD_A == 0x10) {
                 return 0;
             }
-            if ((v & 0xF0) == 0xA0) {
-                return func_801BB7B0(8) & BYTE_MASK;
+            if ((PAD_A & 0xF0) != 0xA0) {
+                return 3;
             }
-            return 3;
+            return func_801BB7B0(8) & BYTE_MASK;
         }
         goto diag_south;
     }
@@ -159,18 +147,17 @@ NON_MATCHING s32 func_801B95E0(void) {
         if (TASK(Actor)->direction & 2) {
             return 3;
         }
-        v     = func_801B9F08(2, 4, 0);
-        PAD_A = v;
-        if (v == 0xB0) {
+        PAD_A = func_801B9F08(2, 4, 0);
+        if (PAD_A == 0xB0) {
             return 6;
         }
-        if (v == 0x70) {
+        if (PAD_A == 0x70) {
             return 7;
         }
-        if (v == 0x20) {
+        if (PAD_A == 0x20) {
             return 0;
         }
-        if (v == 0x10) {
+        if (PAD_A == 0x10) {
             if (func_801BB934(2, 4, 3, 0xFF) & BYTE_MASK) {
                 return 0;
             }
@@ -188,17 +175,13 @@ NON_MATCHING s32 func_801B95E0(void) {
             }
             return (func_801BB934(2, 4, 7, 0xA3) & BYTE_MASK) == 0;
         }
-        if ((v & 0xF0) == 0xA0) {
+        if ((PAD_A & 0xF0) == 0xA0) {
             return func_801BB7B0(8) & BYTE_MASK;
         }
         probe = Area_HeightReadStep(((((s16)FIELD(u16, g_Task, 0x36u) * 2) + 1) << 0x10) >> 1, y_arg << 0x10, 1) << 0x10;
-        if (PAD_FLAG != 0) {
-            ret = 3;
-            if ((probe >> 0x10) >= 0x41) {
-                WDIR = 7;
-                return 1;
-            }
-            return ret;
+        if (PAD_FLAG != 0 && (probe >> 0x10) >= 0x41) {
+            WDIR = 7;
+            return 1;
         }
         return 3;
     }
@@ -206,18 +189,17 @@ diag_south:
     if (!(WDIR & 2)) {
         return 3;
     }
-    v     = func_801B9F08(3, 5, 0);
-    PAD_A = v;
-    if (v == 0xB0) {
+    PAD_A = func_801B9F08(3, 5, 0);
+    if (PAD_A == 0xB0) {
         return 6;
     }
-    if (v == 0x70) {
+    if (PAD_A == 0x70) {
         return 7;
     }
-    if (v == 0x20) {
+    if (PAD_A == 0x20) {
         return 0;
     }
-    if (v == 0x10) {
+    if (PAD_A == 0x10) {
         if (func_801BB934(3, 5, 5, 0xFF) & BYTE_MASK) {
             return 0;
         }
@@ -235,17 +217,13 @@ diag_south:
         }
         return -((func_801BB934(3, 5, 1, 0xA3) & BYTE_MASK) == 0) & 3;
     }
-    if ((v & 0xF0) == 0xA0) {
+    if ((PAD_A & 0xF0) == 0xA0) {
         return func_801BB7B0(8) & BYTE_MASK;
     }
     probe = Area_HeightReadStep(x << 0x10, ((((s16)FIELD(u16, g_Task, 0x3Au) * 2) + 1) << 0x10) >> 1, 1) << 0x10;
-    if (PAD_FLAG != 0) {
-        ret = 3;
-        if ((probe >> 0x10) >= 0x41) {
-            WDIR = 1;
-            return 1;
-        }
-        return ret;
+    if (PAD_FLAG != 0 && (probe >> 0x10) >= 0x41) {
+        WDIR = 1;
+        return 1;
     }
     return 3;
 }
