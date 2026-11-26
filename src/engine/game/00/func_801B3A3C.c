@@ -18,7 +18,7 @@ MATCH void func_801B3A3C(void) {
             saved = TASK(Actor);
             TASK_SET(((u8*)g_Actors + off));
             Script_Select(0u);
-            g_Task = saved;
+            TASK_SET(saved);
         }
     } else {
         off = g_Game.current->status.field.slot * ACTOR_SIZE;

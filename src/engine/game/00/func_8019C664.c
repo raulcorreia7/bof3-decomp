@@ -21,7 +21,7 @@ MATCH void func_8019C664(void) {
     } else {
         work->unk_0A = 0x12;
     }
-    flags              = g_Task;
+    flags              = TASK(void);
     *(u8*)(flags)      = (u8)(*(u8*)(flags) | ACTOR_FLAG_SKIP_PALETTE_STAGE);
     state              = TASK(Actor);
     state->header.mode = (u8)(state->header.mode + 1);

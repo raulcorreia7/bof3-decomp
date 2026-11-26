@@ -31,7 +31,7 @@ MATCH void Party_MemberLoadSprite(s32 character_id, s32 party_slot) {
         index++;
     } while ((index & BYTE_MASK) < 3U);
 found:
-    GFX_PaletteFreeFadeTarget(g_Task);
+    GFX_PaletteFreeFadeTarget(TASK(void));
 
     first                         = TASK(Actor);
     masked                        = index & BYTE_MASK;

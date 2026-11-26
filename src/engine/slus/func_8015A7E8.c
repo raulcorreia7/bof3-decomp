@@ -13,7 +13,7 @@ MATCH void func_8015A7E8(void) {
     rec = (u8*)g_PartyActors;
     i   = 0;
     for (base = rec; (i & BYTE_MASK) < 4; i++, rec += ACTOR_SIZE) {
-        g_Task         = rec;
+        TASK_SET(rec);
         g_CurrentActor = rec;
         if ((rec[0] & 0x1) == 0) {
             continue;

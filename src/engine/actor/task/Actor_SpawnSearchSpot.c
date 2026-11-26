@@ -18,7 +18,7 @@ MATCH void Actor_SpawnSearchSpot(const volatile u8* data) {
         return;
     }
 
-    g_Task             = &g_Actors[slot];
+    TASK_SET(&g_Actors[slot]);
     GAME_WORK_AREA_PTR = &g_Actors[slot];
 
     g_ScratchPad.cells.ray.y = (u16)((data[1] << 8) | data[2]);

@@ -58,9 +58,9 @@ MATCH void func_801B3768(void) {
         actor_slot = g_Game.current->status.field.slot;
         if (!(g_Actors[actor_slot].param.unk_0B & 0x1)) {
             saved_work = TASK(Actor);
-            g_Task     = &g_Actors[actor_slot];
+            TASK_SET(&g_Actors[actor_slot]);
             Script_Select(1U);
-            g_Task = saved_work;
+            TASK_SET(saved_work);
         }
     }
     work              = TASK(Actor);

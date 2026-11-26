@@ -17,10 +17,10 @@ MATCH void func_801C5874(void) {
         *base -= 1;
         return;
     }
-    list       = FIELD(s32*, g_AreaLoads[g_GameAreaId], 0x1Cu);
-    target     = list[D_80143FBF];
+    list   = FIELD(s32*, g_AreaLoads[g_GameAreaId], 0x1Cu);
+    target = list[D_80143FBF];
     /* The cells at D_80143FBD are g_Task's interaction_flags and timer. */
-    g_Task     = (Actor*)(base - 0x75);
+    TASK_SET((Actor*)(base - 0x75));
     sel        = Script_Run(base - 1, target);
     D_80143F50 = sel;
     if (base[-1] & 0x8) {
