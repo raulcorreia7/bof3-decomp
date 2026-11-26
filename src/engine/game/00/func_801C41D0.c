@@ -2,8 +2,7 @@
 
 #define BLOCKED(px, py, dir) (Area_HeightReadStep((px), (py), (dir)) >= 0x41 && ((u8*)&g_ScratchPad)[0])
 
-#ifdef NON_MATCHING
-NON_MATCHING s32 func_801C41D0(s32 pos_x, s32 pos_y, s16 probe_range) {
+MATCH s32 func_801C41D0(s32 pos_x, s32 pos_y, s16 probe_range) {
     Coord a;
     Coord b;
 
@@ -29,8 +28,8 @@ NON_MATCHING s32 func_801C41D0(s32 pos_x, s32 pos_y, s16 probe_range) {
         return 1;
     if ((pos_x & 0xFFFF) == 0) {
         a.part.integer  = (pos_x >> 16) - 1;
-        a.part.fraction = 0x8000;
         b.part.fraction = 0;
+        a.part.fraction = 0x8000;
         b.part.integer  = (pos_y >> 16);
         if (BLOCKED(a.fixed, b.fixed, 7))
             return 1;
@@ -53,8 +52,8 @@ NON_MATCHING s32 func_801C41D0(s32 pos_x, s32 pos_y, s16 probe_range) {
     }
     if ((pos_y & 0xFFFF) == 0) {
         b.part.integer  = (pos_y >> 16) - 1;
-        b.part.fraction = 0x8000;
         a.part.fraction = 0;
+        b.part.fraction = 0x8000;
         a.part.integer  = (pos_x >> 16);
         if (BLOCKED(a.fixed, b.fixed, 1))
             return 1;
@@ -66,8 +65,8 @@ NON_MATCHING s32 func_801C41D0(s32 pos_x, s32 pos_y, s16 probe_range) {
         if (BLOCKED(a.fixed, b.fixed, 1))
             return 1;
         a.part.integer  = (pos_x >> 16);
-        a.part.fraction = 0x8000;
         b.part.fraction = 0;
+        a.part.fraction = 0x8000;
         b.part.integer  = (pos_y >> 16) - 1;
         if (BLOCKED(a.fixed, b.fixed, 3))
             return 1;
@@ -94,6 +93,3 @@ NON_MATCHING s32 func_801C41D0(s32 pos_x, s32 pos_y, s16 probe_range) {
     }
     return 1;
 }
-#else
-INCLUDE_ASM(func_801C41D0);
-#endif

@@ -12,12 +12,12 @@ MATCH void func_801F3460(void) {
     x      = (TASK(Actor)->pos.x.part.integer - 11) >> 1;
     y      = (TASK(Actor)->pos.y.part.integer - 177) >> 1;
     func_801F4604(x, y, 0x10);
-    facing = (TASK(Actor)->direction & 7) * 2;
+    facing = TASK(Actor)->direction & 7;
     for (;;) {
-        if ((u16)(x += D_80181B00[facing]) >= 7) {
+        if ((u16)(x += D_80181B00[facing][0]) >= 7) {
             goto done;
         }
-        if ((u16)(y += D_80181B01[facing]) >= 7) {
+        if ((u16)(y += D_80181B00[facing][1]) >= 7) {
             goto done;
         }
         if (x & 1) {

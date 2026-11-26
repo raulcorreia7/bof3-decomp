@@ -44,8 +44,7 @@ extern u8        D_80144EF0[];
 
 /* The work word the stage route reads. */
 /* The shared route steps the stage table indexes. */
-extern s8           D_80181B00[];
-extern s8           D_80181B01[];
+extern s8           D_80181B00[][2];
 extern SceneTrigger D_801F5CC0[];
 /* The stage table: the route index, the stage length and the next stage code. */
 extern u8           D_801F5CDC[];

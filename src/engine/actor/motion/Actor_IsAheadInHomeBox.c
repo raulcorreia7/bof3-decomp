@@ -21,7 +21,7 @@ MATCH bool Actor_IsAheadInHomeBox(Actor* actor) {
     dx = entity->pos.x.fixed;
     dx += g_FacingSteps[(route & 0x7)].x;
     dy_sum = entity->pos.y.fixed;
-    dy_sum += g_FacingSteps[(route & 0x7)].y;
+    dy_sum += g_FacingSteps[route & 0x7].y;
     dx = (dx >> 16) - FIELD(s16, entity, 0x82u);
     /* FAKE: retail loads the x bound after the delta. */
     FAKE_BARRIER();

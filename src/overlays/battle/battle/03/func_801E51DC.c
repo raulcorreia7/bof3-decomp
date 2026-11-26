@@ -15,7 +15,7 @@ MATCH void func_801E51DC(void) {
     if ((count & BYTE_MASK) == 0) {
         g_BattleResult |= BATTLE_RESULT_VICTORY;
     }
-    GFX_PaletteFreeFadeTarget((void*)g_Task);
+    GFX_PaletteFreeFadeTarget(TASK(void));
     Battle_ClearSlotPending(TASK(PartyMember)->slot);
     g_BattleMessageState = 2;
     func_801DE804();

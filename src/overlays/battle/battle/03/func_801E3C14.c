@@ -77,7 +77,7 @@ MATCH void func_801E3C14(void) {
         if (tail_work->hp == 0) {
             TASK(PartyMember)->unk_09 = 0;
             if (g_Battle.flags & BATTLE_STATE_CRITICAL) {
-                GFX_PaletteAllocFade(g_Task, 16, 16, 16, 0);
+                GFX_PaletteAllocFade(TASK(void), 16, 16, 16, 0);
             }
             g_BattleCurrentEnemy->status = STATUS_KO;
         } else if (BATTLE_IS_SCRIPTED()) {

@@ -11,7 +11,10 @@ split or two merged, one statement moved within its run of plain statements, a m
 beside a store to the same record, every width combination of the integer parameters as an
 old-style definition, a call argument passed straight or through a local, a value set in both arms
 or once before the `if`, a shared tail hoisted after an if/else or switch or copied into each arm
-or case. Each variant is compiled with `MATCH_SRC` into a private object, past the object cache, and scored on the
+or case, a local stored once with a constant or copy in its declaration, at the top of its block
+or just above its first use, one local reused for a second such value, an argument group
+`&X[0], &X[1]` or `&r.a, &r.b` through one pointer local and back, a separate local per loop that
+sets it first, `c ? M : 0` for `-(c) & M`. Each variant is compiled with `MATCH_SRC` into a private object, past the object cache, and scored on the
 `tools/match.sh --diff` listing: the two instruction streams are aligned on their opcodes by a
 longest common subsequence (branch targets as labels, call targets by name), and the score is the
 instructions missing plus extra plus the aligned ones whose operands differ; 0 is a byte match.
@@ -1360,6 +1363,412 @@ OFFSET = re.compile(
 )
 
 
+def _address_taken(f: Function, name: str) -> bool:
+    """`&name` appears with no member or index after it."""
+    t = f.toks
+    return any(
+        t[u - 1].text == "&" and t[u + 1].text not in ("[", ".", "->")
+        for u in f.uses(name)
+    )
+
+
+def _block_open(f: Function, k: int) -> int:
+    """Index of the `{` that opens the innermost block holding token k."""
+    t, depth = f.toks, 0
+    for j in range(k - 1, f.body, -1):
+        if t[j].text == "}":
+            depth += 1
+        elif t[j].text == "{":
+            if depth == 0:
+                return j
+            depth -= 1
+    return f.body
+
+
+def _decl_type(f: Function, name: str) -> tuple[str, bool] | None:
+    """(type text, is an array) of a single-declarator local or a parameter."""
+    t = f.toks
+    if name in f.locals:
+        d = f.locals[name][1]
+        if any(z.text == "," for z in t[d[0] : d[1]]):
+            return None
+        k = next(k for k in range(d[0], d[1]) if t[k].text == name)
+        return f.span(d[0], k - 1), t[k + 1].text == "["
+    for p in f.params():
+        if t[p[1]].text == name and p[1] > p[0]:
+            return f.span(p[0], p[1] - 1), False
+    return None
+
+
+GLOBAL_DECL = re.compile(
+    r"^\s*extern\s+((?:const\s+)?(?:struct\s+)?\w+(?:\s*\*)*)\s*(\w+)\s*(\[[^;]*\])?\s*;",
+    re.M,
+)
+_globals: dict[str, tuple[str, bool] | None] = {}
+
+
+def global_type(name: str) -> tuple[str, bool] | None:
+    """(type, is an array) of a global declared once in the tree's headers, else None."""
+    if not _globals:
+        for header in sorted(ROOT.glob("include/**/*.h")) + sorted(
+            ROOT.glob("src/**/*.h")
+        ):
+            for m in GLOBAL_DECL.finditer(header.read_text(errors="replace")):
+                got = (re.sub(r"\s+", " ", m[1]).strip(), bool(m[3]))
+                if _globals.get(m[2], got) != got:
+                    got = None
+                _globals[m[2]] = got
+        _globals.setdefault("", None)
+    return _globals.get(name)
+
+
+def _writes_name(f: Function, name: str, a: int, b: int) -> bool:
+    """A store to `name` (assignment, ++ or --) between tokens a and b, or its address taken."""
+    t = f.toks
+    if _address_taken(f, name):
+        return True
+    return any(
+        t[k].text == name
+        and (t[k + 1].text in ASSIGN | {"++", "--"} or t[k - 1].text in ("++", "--"))
+        for k in range(a, b)
+    )
+
+
+def _stable(f: Function, value: str, a: int, b: int) -> bool:
+    """A constant, or a local or parameter not stored between tokens a and b."""
+    if re.fullmatch(r"-?(0x[0-9A-Fa-f]+|\d+)[uUlL]*", value):
+        return True
+    params = {f.toks[p[1]].text for p in f.params()}
+    return (value in f.locals or value in params) and not _writes_name(f, value, a, b)
+
+
+def _single_assignment(f: Function, x: str):
+    """(statement, value) of a local stored once, by `x = value;` or its initialiser, the value
+    a constant or a plain copy; the statement is None for an initialiser."""
+    t = f.toks
+    d = f.locals[x][1]
+    if any(z.text == "," for z in t[d[0] : d[1]]) or _address_taken(f, x):
+        return None
+    k = next(k for k in range(d[0], d[1]) if t[k].text == x)
+    writes = [
+        u
+        for u in f.uses(x)
+        if u > d[1]
+        and (t[u + 1].text in ASSIGN | {"++", "--"} or t[u - 1].text in ("++", "--"))
+    ]
+    if t[k + 1].text == "=":
+        value = f.span(k + 2, d[1] - 1)
+        return (
+            (None, value)
+            if not writes
+            and d[1] == k + 3
+            or (not writes and d[1] == k + 4 and t[k + 2].text == "-")
+            else None
+        )
+    if len(writes) != 1:
+        return None
+    s = next((s for s in f.statements if s[0] == writes[0] and s[2] == "expr"), None)
+    if s is None or t[s[0] + 1].text != "=" or s[1] - s[0] not in (3, 4):
+        return None
+    value = f.span(s[0] + 2, s[1] - 1)
+    if s[1] - s[0] == 4 and t[s[0] + 2].text != "-":
+        return None
+    return s, value
+
+
+def _statement_at(f: Function, k: int):
+    return next((s for s in f.statements if s[0] <= k <= s[1]), None)
+
+
+def g_sched(f: Function):
+    """A local stored once with a constant or copy: its store in the declaration, as the first
+    statement of its block, or just above its first use; and one local reused for a second
+    such value in a disjoint range [needs-review]."""
+    t = f.toks
+    for x in list(f.locals):
+        got = _single_assignment(f, x)
+        if got is None or _decl_type(f, x) is None:
+            continue
+        s, value = got
+        d = f.locals[x][1]
+        blk = _block_open(f, d[0])
+        decls = [e for e in f.decls if _block_open(f, e[0]) == blk]
+        top = decls[-1][1]
+        reads = [
+            u for u in f.uses(x) if u > d[1] and (s is None or not s[0] <= u <= s[1])
+        ]
+        if not reads or any(e[0] <= reads[0] <= e[1] for e in f.decls):
+            continue
+        first = _statement_at(f, reads[0])
+        k = next(k for k in range(d[0], d[1]) if t[k].text == x)
+        plain = f.span(d[0], k) + ";" if s is None else None
+        here = s[0] if s else d[1]
+        targets = []
+        if s is not None:
+            if _block_open(f, s[0]) != blk or not _stable(f, value, d[1], s[0]):
+                continue
+            targets.append(("in its declaration", None))
+            if s[0] != top + 1:
+                targets.append(("at the top of its block", top))
+        elif top != d[1] and _stable(f, value, d[1], top):
+            targets.append(("at the top of its block", top))
+        if (
+            first is not None
+            and _block_open(f, first[0]) == blk
+            and (s is None or first[0] > s[1] + 1)
+            and _stable(f, value, here, first[0])
+        ):
+            targets.append(("just above its first use", first[0] - 1))
+        for where, after in targets:
+            edit = []
+            if s is not None:
+                edit.append((t[s[0]].start, t[s[1]].end, ""))
+            if after is None:
+                edit.append((t[d[1]].start, t[d[1]].start, f" = {value}"))
+            else:
+                if s is None:
+                    edit.append((t[d[0]].start, t[d[1]].end, plain))
+                edit.append((t[after].end, t[after].end, f"\n    {x} = {value};"))
+            yield f"store {x} = {value[:20]} {where}", tuple(edit)
+    for x, y in combinations(list(f.locals), 2):
+        for a, b in ((x, y), (y, x)):
+            got = _single_assignment(f, b)
+            ta, tb = _decl_type(f, a), _decl_type(f, b)
+            if got is None or got[0] is not None or not ta or ta != tb or ta[1]:
+                continue
+            da, db = f.locals[a][1], f.locals[b][1]
+            if _block_open(f, da[0]) != f.body or _address_taken(f, a):
+                continue
+            ua = [u for u in f.uses(a) if u > da[1]]
+            ub = [u for u in f.uses(b) if u > db[1]]
+            first = _statement_at(f, ub[0]) if ub else None
+            if (
+                not ua
+                or first is None
+                or ua[-1] >= first[0]
+                or _block_open(f, first[0]) != _block_open(f, db[0])
+                or not _stable(f, got[1], db[1], first[0])
+                or _in_loop_with(f, first[0], ua)
+            ):
+                continue
+            edit = [(t[db[0]].start, t[db[1]].end, "")]
+            edit.append(
+                (t[first[0]].start, t[first[0]].start, f"{a} = {got[1]};\n    ")
+            )
+            edit += [(t[u].start, t[u].end, a) for u in ub]
+            yield f"reuse {a} for {b} [needs-review]", tuple(edit)
+
+
+def _loops(f: Function) -> list[tuple[int, int, int]]:
+    """(keyword, body open, end) of each braced for, while and do loop."""
+    t, out = f.toks, []
+    for k in range(f.body + 1, f.end):
+        if t[k].text in ("for", "while") and t[k - 1].text != "}":
+            c = matching(t, k + 1)
+            if t[c + 1].text == "{":
+                out.append((k, c + 1, matching(t, c + 1)))
+        elif t[k].text == "do" and t[k + 1].text == "{":
+            b = matching(t, k + 1)
+            out.append((k, k + 1, expression_end(t, b + 1, {";"}) + 1))
+    return out
+
+
+def _in_loop_with(f: Function, k: int, uses: list[int]) -> bool:
+    """k sits in a loop that also holds one of uses."""
+    return any(a < k < e and any(a < u < e for u in uses) for _, a, e in _loops(f))
+
+
+NEG_MASK_BEFORE = {
+    "(",
+    ",",
+    "=",
+    "|",
+    "^",
+    "&",
+    "&&",
+    "||",
+    "?",
+    ":",
+    "return",
+} | ASSIGN
+NEG_MASK_AFTER = {")", ";", ",", "|", "^", "&", "&&", "||", "?", ":"}
+
+
+def g_alloc(f: Function):
+    """Allocation forms: an argument group `&X[0], &X[1]` or `&r.a, &r.b` taken through one
+    pointer local set before the call, and back; a separate local per loop for a value each loop
+    sets first; `c ? M : 0` for `-(c) & M`."""
+    t = f.toks
+    used = set(f.locals) | {t[p[1]].text for p in f.params()}
+    fresh = next(n for n in ("rec", "base", "ptr", "rec2", "base2") if n not in used)
+    for s in f.statements:
+        if s[2] != "expr" or not _plain(f, s):
+            continue
+        for k in range(s[0], s[1]):
+            if (
+                not (t[k].kind == "ident" and t[k + 1].text == "(")
+                or t[k].text in KEYWORDS
+            ):
+                continue
+            close, a, groups = matching(t, k + 1), k + 2, {}
+            while a < close:
+                e = expression_end(t, a, {","})
+                if (
+                    t[a].text == "&"
+                    and t[a + 1].kind == "ident"
+                    and t[a + 2].text in ("[", ".", "->")
+                ):
+                    groups.setdefault((t[a + 1].text, t[a + 2].text), []).append(a + 1)
+                a = e + 2
+            for (n, op), at in groups.items():
+                if len(at) < 2:
+                    continue
+                known = _decl_type(f, n) or global_type(n)
+                if not known:
+                    continue
+                kind, array = known
+                if op == "[" and (array or kind.endswith("*")):
+                    ptype, value = (kind if array else kind[:-1].rstrip()) + " *", n
+                elif op == "." and not array and not kind.endswith("*"):
+                    ptype, value, op = kind + " *", "&" + n, "->"
+                elif op == "->" and kind.endswith("*"):
+                    ptype, value = kind, n
+                else:
+                    continue
+                edit = [(t[f.body].end, t[f.body].end, f"\n    {ptype}{fresh};")]
+                edit.append((t[s[0]].start, t[s[0]].start, f"{fresh} = {value};\n    "))
+                for u in at:
+                    tail = "" if op == t[u + 1].text else op
+                    edit.append(
+                        (t[u].start, t[u + 1].end if tail else t[u].end, fresh + tail)
+                    )
+                yield f"argument group through {fresh} = {value}", tuple(edit)
+    for p in list(f.locals):
+        known = _decl_type(f, p)
+        if not known or not known[0].endswith("*") or known[1]:
+            continue
+        got = _single_assignment_any(f, p)
+        if got is None:
+            continue
+        s, value = got
+        uses = [u for u in f.uses(p) if u > s[1]]
+        stmt = _statement_at(f, uses[0]) if uses else None
+        if (
+            stmt is None
+            or any(not stmt[0] <= u <= stmt[1] for u in uses)
+            or any(
+                t[u - 1].text != "&" or t[u + 1].text not in ("->", "[") for u in uses
+            )
+            or not re.fullmatch(r"&?\w+", value)
+            or not _stable(f, value.lstrip("&"), s[1], stmt[0])
+            and value.lstrip("&") in used
+        ):
+            continue
+        name = value.lstrip("&")
+        edit = [(t[s[0]].start, t[s[1]].end, "")]
+        d = f.locals[p][1]
+        edit.append((t[d[0]].start, t[d[1]].end, ""))
+        ok = True
+        for u in uses:
+            if value.startswith("&"):
+                if t[u + 1].text != "->":
+                    ok = False
+                    break
+                edit.append((t[u].start, t[u + 1].end, name + "."))
+            else:
+                edit.append((t[u].start, t[u].end, name))
+        if ok:
+            yield f"argument group straight from {value}", tuple(edit)
+    loops = _loops(f)
+    for x in list(f.locals):
+        known = _decl_type(f, x)
+        if not known or known[1] or _address_taken(f, x):
+            continue
+        d = f.locals[x][1]
+        if any(t[k].text == "=" for k in range(d[0], d[1])):
+            continue
+        uses = [u for u in f.uses(x) if u > d[1]]
+        regions = []
+        for kw, open_, end in loops:
+            if t[open_ + 1].text == x and t[open_ + 2].text == "=":
+                regions.append((open_ + 1, end))
+            else:
+                prev = _statement_at(f, kw - 1)
+                if (
+                    prev
+                    and prev[1] == kw - 1
+                    and t[prev[0]].text == x
+                    and t[prev[0] + 1].text == "="
+                ):
+                    regions.append((prev[0], end))
+        regions = sorted(set(regions))
+        if (
+            len(regions) < 2
+            or any(not any(a <= u <= e for a, e in regions) for u in uses)
+            or any(r[1] >= q[0] for r, q in zip(regions, regions[1:], strict=False))
+        ):
+            continue
+        new = next(n for n in (f"{x}2", f"{x}_2", f"{x}3") if n not in used)
+        for a, e in regions[1:]:
+            edit = [
+                (
+                    t[f.body].end,
+                    t[f.body].end,
+                    f"\n    {known[0]}{'' if known[0].endswith('*') else ' '}{new};",
+                )
+            ]
+            edit += [(t[u].start, t[u].end, new) for u in uses if a <= u <= e]
+            yield (
+                f"local {new} for {x} in the loop at {f.span(a, a + 2)[:20]}",
+                tuple(edit),
+            )
+    for k in range(f.body + 1, f.end - 3):
+        if t[k].text != "-" or t[k - 1].text not in NEG_MASK_BEFORE:
+            continue
+        if t[k + 1].text == "(":
+            c = matching(t, k + 1)
+            cond = f.span(k + 2, c - 1)
+        elif t[k + 1].kind == "ident" and t[k + 2].text == "&":
+            c, cond = k + 1, t[k + 1].text
+        else:
+            continue
+        if t[c + 1].text != "&" or t[c + 2].kind not in ("ident", "number"):
+            continue
+        if t[c + 3].text not in NEG_MASK_AFTER:
+            continue
+        inner = t[k + 2 : c] if t[k + 1].text == "(" else []
+        boolean = any(
+            z.text in ("==", "!=", "<", ">", "<=", ">=", "&&", "||") for z in inner
+        ) or (inner and inner[0].text == "!")
+        review = "" if boolean else " [needs-review]"
+        yield (
+            f"({cond[:20]}) ? {t[c + 2].text} : 0 for the negate-and-mask{review}",
+            ((t[k].start, t[c + 2].end, f"(({cond}) ? {t[c + 2].text} : 0)"),),
+        )
+
+
+def _single_assignment_any(f: Function, x: str):
+    """(statement, value) of a local stored once by a `x = value;` statement, no initialiser."""
+    t = f.toks
+    d = f.locals[x][1]
+    if any(t[k].text == "=" for k in range(d[0], d[1])) or any(
+        z.text == "," for z in t[d[0] : d[1]]
+    ):
+        return None
+    writes = [
+        u
+        for u in f.uses(x)
+        if u > d[1]
+        and (t[u + 1].text in ASSIGN | {"++", "--"} or t[u - 1].text in ("++", "--"))
+    ]
+    if len(writes) != 1:
+        return None
+    s = next((s for s in f.statements if s[0] == writes[0] and s[2] == "expr"), None)
+    if s is None or t[s[0] + 1].text != "=":
+        return None
+    return s, f.span(s[0] + 2, s[1] - 1)
+
+
 def needs_type(text: str) -> list[str]:
     """Table reads on a global spelled as offset math: `G[i * N + k]` or `*(... G + off)`."""
     try:
@@ -1420,6 +1829,8 @@ CLASSES = {
     "n-both-arms": g_both_arms,
     "o-tail": g_tail,
     "p-switch-tail": g_switch_tail,
+    "s-sched": g_sched,
+    "t-alloc": g_alloc,
 }
 
 

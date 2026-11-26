@@ -50,7 +50,7 @@ MATCH void func_801E25E0(u8 battler) {
     if (BATTLE_IS_SCRIPTED()) {
         enemy                = &g_BattleEnemyBattlers[battler];
         g_BattleCurrentEnemy = enemy;
-        g_Task               = enemy;
+        TASK_SET(enemy);
         enemy->unk_E4(0);
     }
     if (g_Battle.target_selector == GAME_NONE) {

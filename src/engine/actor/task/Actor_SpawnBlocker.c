@@ -21,8 +21,8 @@ MATCH void Actor_SpawnBlocker(u8* script) {
     counter_words = (u16*)&g_ScratchPad;
     data          = script;
     if (*counter < 30) {
-        slot_record      = &g_Actors[*counter];
-        g_Task           = slot_record;
+        slot_record = &g_Actors[*counter];
+        TASK_SET(slot_record);
         g_CurrentActor   = slot_record;
         counter_words[1] = data[0x2] | (data[0x1] << 8);
         Actor_ResetMotion();

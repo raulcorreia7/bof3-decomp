@@ -38,9 +38,9 @@ MATCH s32 Area_EncounterCanStart(void) {
         }
     }
     if (!(g_GameRequestFlags & AREA_LOAD_FLAG_WORLD_MAP)) {
-        work   = TASK(Actor);
-        ok     = Area_EncounterBuild(4, 0);
-        g_Task = work;
+        work = TASK(Actor);
+        ok   = Area_EncounterBuild(4, 0);
+        TASK_SET(work);
         if (ok != 0) {
             for (i = 0; i < g_Game.party_size; i++) {
                 ok = Area_CellTestCorners(g_AreaEncounterPlacement.party[i].x.fixed, g_AreaEncounterPlacement.party[i].y.fixed, D_80181B1C[g_PartyBattleOrder[i]], 0x10, 1);

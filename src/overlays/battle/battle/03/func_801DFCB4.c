@@ -94,7 +94,7 @@ MATCH void func_801DFCB4(void) {
             if (!(g_Game.current->u.turn.action_flags.value & BATTLER_ACTION_DRAGON_FORM)) {
                 Battle_PlayEffectSE(1);
             }
-            GFX_PaletteFreeFadeTarget(g_Task);
+            GFX_PaletteFreeFadeTarget(TASK(void));
         } else {
             Battle_PlayEffectSE(0);
         }
