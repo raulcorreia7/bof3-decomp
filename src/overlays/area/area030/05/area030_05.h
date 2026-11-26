@@ -25,8 +25,29 @@ typedef enum FishingShopMessageId {
 } FishingShopMessageId;
 
 /* The trades the shop offers: the item the player gets for the fish it asks for. */
-#define FISHING_TRADE_NEED_COUNT   3
-/* The most of one item a trade can hold the player to. */
+#define FISHING_TRADE_FISH_COUNT 3
+
+/* The two bytes of FishingTrade.give. */
+typedef enum FishingTradeGive {
+    FISHING_TRADE_GIVE_ID,
+    FISHING_TRADE_GIVE_CATEGORY,
+} FishingTradeGive;
+
+/* The two runs of FishingTrade.need: the fish ids from ITEM_JELLYFISH (GAME_NONE after the last), then their counts. */
+typedef enum FishingTradeNeed {
+    FISHING_TRADE_NEED_FISH,
+    FISHING_TRADE_NEED_AMOUNT,
+} FishingTradeNeed;
+
+typedef struct FishingTrade {
+    /* 0x00 */ u8 give[2];
+    /* 0x02 */ u8 need[2][FISHING_TRADE_FISH_COUNT];
+} FishingTrade;
+
+ASSERT_OFFSET(FishingTrade, need, 0x02);
+ASSERT_SIZE(FishingTrade, 0x08);
+
+/* The most of one item the player can hold. */
 #define FISHING_SHOP_STACK_MAX     99
 /* The shop's list cursor: the row in the low bits, the flags above. CHOSEN while the quantity prompt is open,
  * LOCKED while the too-greedy notice or the confirm-all question holds the list. */
@@ -35,18 +56,6 @@ typedef enum FishingShopMessageId {
 #define FISHING_SHOP_CURSOR_LOCKED 0x80
 /* The trade ids one pond offers. */
 #define FISHING_SHOP_STOCK_COUNT   10
-
-typedef struct FishingTrade {
-    /* 0x00 */ u8 give_id;
-    /* 0x01 */ u8 give_category;
-    /* 0x02 */ u8 need_item[FISHING_TRADE_NEED_COUNT]; /* fish ids from ITEM_JELLYFISH, GAME_NONE after the last */
-    /* 0x05 */ u8 need_count[FISHING_TRADE_NEED_COUNT];
-} FishingTrade;
-
-ASSERT_OFFSET(FishingTrade, give_category, 0x01);
-ASSERT_OFFSET(FishingTrade, need_item, 0x02);
-ASSERT_OFFSET(FishingTrade, need_count, 0x05);
-ASSERT_SIZE(FishingTrade, 0x08);
 
 /* Payload prologue: the loader-verified module id and the "*%2d" format the
  * cost printers pass to sprintf. */
