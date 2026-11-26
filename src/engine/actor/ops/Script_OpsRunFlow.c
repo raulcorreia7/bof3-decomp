@@ -19,161 +19,152 @@ typedef enum ActorScriptFlow {
     ACTOR_SCRIPT_FLOW_RUN_TALK_SCRIPT  = 15, /* args: [talk] [flags] [route] ...; start the script of the talk for the leading character */
 } ActorScriptFlow;
 
+/* The message ids of one talk, one per character. */
+typedef struct TalkMessageRow {
+    u8 ids[11];
+} TalkMessageRow;
+
 /* func_801A8F94 */
 /* Runs flow opcodes until a movement or wait opcode; returns the facing selection. */
-#ifdef NON_MATCHING
-NON_MATCHING u8 Script_OpsRunFlow(ScriptState* state, u8* base, s32 seed) {
+MATCH u8 Script_OpsRunFlow(ScriptState* state, u8* base, s32 seed) {
     s32                 left;
     s32                 sel;
     s8                  arg_size;
+    u8                  group;
     void*               obj;
     AreaScriptCallback* table;
 
     sel = seed;
     for (;;) {
-        switch (base[state->cursor] & 0xF0) {
-            case 0x00:
-                switch (base[state->cursor]) {
-                    case ACTOR_SCRIPT_FLOW_JUMP:
-                        if ((base[state->cursor + 1] & 0xC0) == 0x40) {
-                            state->cursor = (u16)(base[state->cursor + 2] | (base[state->cursor + 1] << 8));
-                            state->cursor = Script_FindLabel(state, (u8)state->cursor, base);
-                        } else {
-                            state->cursor = (u16)(state->cursor + base[state->cursor + 2] + (base[state->cursor + 1] << 8));
-                        }
-                        break;
-                    case ACTOR_SCRIPT_FLOW_LOOP:
-                        if (state->count == 0) {
-                            state->count = base[state->cursor + 2];
-                        } else if (--state->count == 0) {
+        group = base[state->cursor] & 0xF0;
+        if (!(group < 0x10 || group == 0xA0 || group == 0xB0))
+            break;
+        if (group < 0x10) {
+            switch (base[state->cursor]) {
+                case ACTOR_SCRIPT_FLOW_JUMP:
+                    if ((base[state->cursor + 1] & 0xC0) == 0x40) {
+                        state->cursor = (u16)(base[state->cursor + 1] << 8 | base[state->cursor + 2]);
+                        state->cursor = Script_FindLabel(state, (u8)state->cursor, base);
+                    } else {
+                        state->cursor += (u16)(base[state->cursor + 1] << 8 | base[state->cursor + 2]);
+                    }
+                    break;
+                case ACTOR_SCRIPT_FLOW_LOOP:
+                    if (state->count != 0) {
+                        if (--state->count == 0) {
                             state->cursor += 3;
                             break;
                         }
-                        state->cursor = (u16)(state->cursor + (s8)base[state->cursor + 1]);
-                        break;
-                    case ACTOR_SCRIPT_FLOW_CALL_AREA_SCRIPT:
-                        obj   = g_AreaLoads[g_GameAreaId];
-                        table = FIELD(AreaScriptCallback*, obj, 0x3Cu);
-                        table[base[state->cursor + 1]](obj);
-                        sel = TASK(Actor)->direction;
-                        state->cursor += 2;
-                        break;
-                    case ACTOR_SCRIPT_FLOW_IF_VAR_EQUALS:
-                        left = base[state->cursor + 1];
-                        if (Script_ReadValue(base[state->cursor + 2]) == left)
-                            state->cursor = (u16)(base[state->cursor + 3] | (base[state->cursor + 4] << 8));
-                        else
-                            state->cursor = (u16)(base[state->cursor + 5] | (base[state->cursor + 6] << 8));
-                        state->cursor = Script_FindLabel(state, (u8)state->cursor, base);
-                        break;
-                    case ACTOR_SCRIPT_FLOW_IF_VARS_EQUAL:
-                        left = Script_ReadValue(base[state->cursor + 1]);
-                        if (Script_ReadValue(base[state->cursor + 2]) == left)
-                            state->cursor = (u16)(base[state->cursor + 3] | (base[state->cursor + 4] << 8));
-                        else
-                            state->cursor = (u16)(base[state->cursor + 5] | (base[state->cursor + 6] << 8));
-                        state->cursor = Script_FindLabel(state, (u8)state->cursor, base);
-                        break;
-                    case ACTOR_SCRIPT_FLOW_IF_VAR_LESS:
-                        left = base[state->cursor + 1];
-                        if (Script_ReadValue(base[state->cursor + 2]) < left)
-                            state->cursor = (u16)(base[state->cursor + 3] | (base[state->cursor + 4] << 8));
-                        else
-                            state->cursor = (u16)(base[state->cursor + 5] | (base[state->cursor + 6] << 8));
-                        state->cursor = Script_FindLabel(state, (u8)state->cursor, base);
-                        break;
-                    case ACTOR_SCRIPT_FLOW_IF_VARS_LESS:
-                        left = Script_ReadValue(base[state->cursor + 1]);
-                        if (Script_ReadValue(base[state->cursor + 2]) < left)
-                            state->cursor = (u16)(base[state->cursor + 3] | (base[state->cursor + 4] << 8));
-                        else
-                            state->cursor = (u16)(base[state->cursor + 5] | (base[state->cursor + 6] << 8));
-                        state->cursor = Script_FindLabel(state, (u8)state->cursor, base);
-                        break;
-                    case ACTOR_SCRIPT_FLOW_IF_VAR_MASK:
-                        left = base[state->cursor + 1];
-                        if ((Script_ReadValue(base[state->cursor + 2]) & left) != 0)
-                            state->cursor = (u16)(base[state->cursor + 3] | (base[state->cursor + 4] << 8));
-                        else
-                            state->cursor = (u16)(base[state->cursor + 5] | (base[state->cursor + 6] << 8));
-                        state->cursor = Script_FindLabel(state, (u8)state->cursor, base);
-                        break;
-                    case ACTOR_SCRIPT_FLOW_IF_VARS_MASK:
-                        left = Script_ReadValue(base[state->cursor + 1]);
-                        if ((Script_ReadValue(base[state->cursor + 2]) & left) != 0)
-                            state->cursor = (u16)(base[state->cursor + 3] | (base[state->cursor + 4] << 8));
-                        else
-                            state->cursor = (u16)(base[state->cursor + 5] | (base[state->cursor + 6] << 8));
-                        state->cursor = Script_FindLabel(state, (u8)state->cursor, base);
-                        break;
-                    case ACTOR_SCRIPT_FLOW_SKIP:
-                        state->cursor += 2;
-                        break;
-                    case ACTOR_SCRIPT_FLOW_END:
-                        state->cursor = 0;
-                        break;
-                    case ACTOR_SCRIPT_FLOW_SHOW_BATTLERS:
-                        if (base[state->cursor + 1] != 0)
-                            Party_BattlersShow();
-                        else
-                            Party_BattlersHide();
-                        state->cursor += 2;
-                        break;
-                    case ACTOR_SCRIPT_FLOW_SET_POSITION:
-                        if (Actor_GetOwner() == 2) {
-                            HIH(g_PartyX)  = base[state->cursor + 1];
-                            LOH(g_PartyX)  = (base[state->cursor + 2] != 0) << 0xF;
-                            HIH(g_PartyY)  = base[state->cursor + 3];
-                            LOH(g_PartyY)  = (base[state->cursor + 4] != 0) << 0xF;
-                            g_ScrollHeight = Area_HeightSample(g_PartyX, g_PartyY);
-                            sel            = 0xFF;
-                        } else {
-                            COORD_INT(TASK(Actor)->pos.x)  = base[state->cursor + 1];
-                            COORD_FRAC(TASK(Actor)->pos.x) = (base[state->cursor + 2] != 0) << 0xF;
-                            COORD_INT(TASK(Actor)->pos.y)  = base[state->cursor + 3];
-                            COORD_FRAC(TASK(Actor)->pos.y) = (base[state->cursor + 4] != 0) << 0xF;
-                            COORD_INT(TASK(Actor)->pos.z)  = Area_HeightSample(TASK(Actor)->pos.x.fixed, TASK(Actor)->pos.y.fixed);
-                        }
-                        state->cursor += 5;
-                        break;
-                    case ACTOR_SCRIPT_FLOW_RUN_SCRIPT:
-                        left = base[state->cursor + 1];
-                        goto run_script;
-                    case ACTOR_SCRIPT_FLOW_RUN_TALK_SCRIPT:
-                        left = s_TalkMessageIds[base[state->cursor + 1] * 11 + g_Game.current->chr.character_id];
-                    run_script:
-                        state->flags |= 0x40;
-                        TASK(Actor)->option_flags |= ACTOR_OPT_ROUTE_LOCKED;
-                        if ((base[state->cursor + 3] & 1) != 0)
-                            TASK(Actor)->header.flags |= ACTOR_FLAG_STEP_MOVE;
-                        else
-                            TASK(Actor)->header.flags &= ~ACTOR_FLAG_STEP_MOVE;
-                        TASK(Actor)->mirror = base[state->cursor + 2];
-                        if ((base[state->cursor + 3] & 2) != 0) {
-                            Script_Begin((u8)(left & BYTE_MASK), base[state->cursor + 4]);
-                            state->cursor += 1;
-                        } else {
-                            Script_Select((u8)(left & BYTE_MASK));
-                        }
-                        state->cursor += 4;
-                        break;
-                }
+                        state->cursor += (s8)base[state->cursor + 1];
+                    } else {
+                        state->count = base[state->cursor + 2];
+                        state->cursor += (s8)base[state->cursor + 1];
+                    }
+                    break;
+                case ACTOR_SCRIPT_FLOW_IF_VAR_EQUALS:
+                    left = base[state->cursor + 1];
+                    goto if_equal;
+                case ACTOR_SCRIPT_FLOW_IF_VARS_EQUAL:
+                    left = Script_ReadValue(base[state->cursor + 1]);
+                if_equal:
+                    if (Script_ReadValue(base[state->cursor + 2]) == left)
+                        state->cursor = (u16)((base + state->cursor)[3] << 8 | (base + state->cursor)[4]);
+                    else
+                        state->cursor = (u16)((base + state->cursor)[5] << 8 | (base + state->cursor)[6]);
+                    state->cursor = Script_FindLabel(state, (u8)state->cursor, base);
+                    break;
+                case ACTOR_SCRIPT_FLOW_IF_VAR_LESS:
+                    left = base[state->cursor + 1];
+                    goto if_less;
+                case ACTOR_SCRIPT_FLOW_IF_VARS_LESS:
+                    left = Script_ReadValue(base[state->cursor + 1]);
+                if_less:
+                    if (Script_ReadValue(base[state->cursor + 2]) < left)
+                        state->cursor = (u16)((base + state->cursor)[3] << 8 | (base + state->cursor)[4]);
+                    else
+                        state->cursor = (u16)((base + state->cursor)[5] << 8 | (base + state->cursor)[6]);
+                    state->cursor = Script_FindLabel(state, (u8)state->cursor, base);
+                    break;
+                case ACTOR_SCRIPT_FLOW_IF_VAR_MASK:
+                    left = base[state->cursor + 1];
+                    goto if_mask;
+                case ACTOR_SCRIPT_FLOW_IF_VARS_MASK:
+                    left = Script_ReadValue(base[state->cursor + 1]);
+                if_mask:
+                    if (Script_ReadValue(base[state->cursor + 2]) & left)
+                        state->cursor = (u16)((base + state->cursor)[3] << 8 | (base + state->cursor)[4]);
+                    else
+                        state->cursor = (u16)((base + state->cursor)[5] << 8 | (base + state->cursor)[6]);
+                    state->cursor = Script_FindLabel(state, (u8)state->cursor, base);
+                    break;
+                case ACTOR_SCRIPT_FLOW_CALL_AREA_SCRIPT:
+                    obj   = g_AreaLoads[g_GameAreaId];
+                    table = FIELD(AreaScriptCallback*, obj, 0x3Cu);
+                    table[(base + state->cursor)[1]](obj);
+                    sel = TASK(Actor)->direction;
+                    state->cursor += 2;
+                    break;
+                case ACTOR_SCRIPT_FLOW_SKIP:
+                    state->cursor += 2;
+                    break;
+                case ACTOR_SCRIPT_FLOW_END:
+                    state->cursor = 0;
+                    break;
+                case ACTOR_SCRIPT_FLOW_SHOW_BATTLERS:
+                    if (base[state->cursor + 1] != 0)
+                        Party_BattlersShow();
+                    else
+                        Party_BattlersHide();
+                    state->cursor += 2;
+                    break;
+                case ACTOR_SCRIPT_FLOW_SET_POSITION:
+                    if (Actor_GetOwner() == 2) {
+                        COORD_INT(g_PartyPos.x)  = (base + state->cursor)[1];
+                        COORD_FRAC(g_PartyPos.x) = ((base + state->cursor)[2] != 0) << 0xF;
+                        COORD_INT(g_PartyPos.y)  = (base + state->cursor)[3];
+                        COORD_FRAC(g_PartyPos.y) = ((base + state->cursor)[4] != 0) << 0xF;
+                        g_ScrollHeight           = Area_HeightSample(g_PartyPos.x.fixed, g_PartyPos.y.fixed);
+                        sel                      = 0xFF;
+                    } else {
+                        COORD_INT(TASK(Actor)->pos.x)  = (base + state->cursor)[1];
+                        COORD_FRAC(TASK(Actor)->pos.x) = ((base + state->cursor)[2] != 0) << 0xF;
+                        COORD_INT(TASK(Actor)->pos.y)  = (base + state->cursor)[3];
+                        COORD_FRAC(TASK(Actor)->pos.y) = ((base + state->cursor)[4] != 0) << 0xF;
+                        COORD_INT(TASK(Actor)->pos.z)  = Area_HeightSample(TASK(Actor)->pos.x.fixed, TASK(Actor)->pos.y.fixed);
+                    }
+                    state->cursor += 5;
+                    break;
+                case ACTOR_SCRIPT_FLOW_RUN_SCRIPT:
+                    left = base[state->cursor + 1];
+                    goto run_script;
+                case ACTOR_SCRIPT_FLOW_RUN_TALK_SCRIPT:
+                    left = ((TalkMessageRow*)s_TalkMessageIds)[base[state->cursor + 1]].ids[g_GameState->chr.character_id];
+                run_script:
+                    state->flags |= 0x40;
+                    TASK(Actor)->option_flags |= ACTOR_OPT_ROUTE_LOCKED;
+                    if ((base[state->cursor + 3] & 1) != 0)
+                        TASK(Actor)->header.flags |= ACTOR_FLAG_STEP_MOVE;
+                    else
+                        TASK(Actor)->header.flags &= ~ACTOR_FLAG_STEP_MOVE;
+                    TASK(Actor)->mirror = base[state->cursor + 2];
+                    if ((base[state->cursor + 3] & 2) != 0) {
+                        Script_Begin((u8)(left & BYTE_MASK), base[state->cursor + 4]);
+                        state->cursor += 1;
+                    } else {
+                        Script_Select((u8)(left & BYTE_MASK));
+                    }
+                    state->cursor += 4;
+                    break;
+            }
+        } else if (group == 0xA0) {
+            arg_size = D_801821C0[base[state->cursor] & 3](base + state->cursor);
+            if (arg_size < 0)
                 break;
-            case 0xA0:
-                arg_size = (s8)D_801821C0[base[state->cursor] & 3](base + state->cursor);
-                if (arg_size < 0)
-                    return (u8)(sel & BYTE_MASK);
-                state->cursor = (u16)(state->cursor + arg_size + 1);
-                break;
-            case 0xB0:
-                Script_OpsRunSound(state, base);
-                state->cursor += 1;
-                break;
-            default:
-                return (u8)(sel & BYTE_MASK);
+            state->cursor += arg_size + 1;
+        } else {
+            Script_OpsRunSound(state, base);
+            state->cursor += 1;
         }
     }
+    return sel;
 }
-#else
-INCLUDE_ASM(Script_OpsRunFlow);
-#endif
