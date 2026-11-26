@@ -8,10 +8,13 @@
  * enemy id, then queues the enemy's script and bit flag. */
 /* func_800ABCE0 */
 #ifdef NON_MATCHING
-NON_MATCHING void Battle_InitEnemy(enemy_slot, enemy_index, x, y) u8 enemy_slot;
-u16               enemy_index;
-s32               x;
-s32               y;
+// clang-format off
+NON_MATCHING void Battle_InitEnemy(enemy_slot, enemy_index, x, y)
+u8 enemy_slot;
+u16 enemy_index;
+s32 x;
+s32 y;
+// clang-format on
 {
     EnemyBattler* enemy;
     EnemyBattler* first;

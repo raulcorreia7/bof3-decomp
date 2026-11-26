@@ -2524,11 +2524,14 @@ MATCH void func_801D9348(u16 x, u16 y, s32 color, s32 frame_mode) {
 }
 
 #ifdef NON_MATCHING
-NON_MATCHING void func_801D94D0(page, left, top, cursor_col_arg, cursor_row_arg) u8 page;
-s32               left;
-s32               top;
-s32               cursor_col_arg;
-s32               cursor_row_arg;
+// clang-format off
+NON_MATCHING void func_801D94D0(page, left, top, cursor_col_arg, cursor_row_arg)
+u8 page;
+s32 left;
+s32 top;
+s32 cursor_col_arg;
+s32 cursor_row_arg;
+// clang-format on
 {
     u8  tags[20];
     u8* cell;
