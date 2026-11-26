@@ -44,9 +44,14 @@ void func_800C236C(u8 phase);
     TASK(PartyMember)->unk_58 = g_BattleEnemyBattlers[0].unk_58; \
     TASK(PartyMember)->unk_5A = g_BattleEnemyBattlers[0].unk_5A
 
-extern u8 D_800C2640[];
-extern u8 D_800C2641[];
-extern u8 D_800C2642[];
+/* One enemy kind's colour, from kind 8 up. */
+typedef struct Boss008Color {
+    u8 r;
+    u8 g;
+    u8 b;
+} Boss008Color;
+
+extern Boss008Color D_800C2640[];
 void      func_801D9DBC(s16 x, s16 y, u8 template_index, u16 packed_color, u8 semi_trans);
 
 #endif

@@ -1,16 +1,12 @@
 #include "boss008_16.h"
 
-#ifdef NON_MATCHING
-static inline u8* EnemyColor(u8 kind) {
-    return &D_800C2640[(kind - 8) * 3];
-}
-
-NON_MATCHING void func_800C236C(u8 phase) {
+/* Draws a 64-triangle ring of radius phase around the current enemy, white at its centre and the enemy kind's D_800C2640 colour at the rim. */
+void func_800C236C(u8 phase) {
     s32           ring[64][2];
     EnemyBattler* enemy;
     POLY_G3*      prim;
     u8            i;
-    u8            next;
+    s32           next;
 
     i = 0;
     do {
@@ -25,12 +21,8 @@ NON_MATCHING void func_800C236C(u8 phase) {
         prim = (POLY_G3*)g_GfxPrimCursor;
         SetPolyG3(prim);
         setRGB0(prim, 0xFF, 0xFF, 0xFF);
-        prim->r1 = EnemyColor(g_BattleCurrentEnemy->unk_F0)[0];
-        prim->g1 = EnemyColor(g_BattleCurrentEnemy->unk_F0)[1];
-        prim->b1 = EnemyColor(g_BattleCurrentEnemy->unk_F0)[2];
-        prim->r2 = EnemyColor(g_BattleCurrentEnemy->unk_F0)[0];
-        prim->g2 = EnemyColor(g_BattleCurrentEnemy->unk_F0)[1];
-        prim->b2 = EnemyColor(g_BattleCurrentEnemy->unk_F0)[2];
+        setRGB1(prim, D_800C2640[g_BattleCurrentEnemy->unk_F0 - 8].r, D_800C2640[g_BattleCurrentEnemy->unk_F0 - 8].g, D_800C2640[g_BattleCurrentEnemy->unk_F0 - 8].b);
+        setRGB2(prim, D_800C2640[g_BattleCurrentEnemy->unk_F0 - 8].r, D_800C2640[g_BattleCurrentEnemy->unk_F0 - 8].g, D_800C2640[g_BattleCurrentEnemy->unk_F0 - 8].b);
         enemy    = TASK(EnemyBattler);
         next     = (i + 1) & 0x1F;
         setXY3(prim, enemy->screen_x, enemy->screen_y, enemy->screen_x + ring[i][0], enemy->screen_y + ring[i][1], enemy->screen_x + ring[next][0], enemy->screen_y + ring[next][1]);
@@ -39,6 +31,3 @@ NON_MATCHING void func_800C236C(u8 phase) {
         i++;
     } while (i < 64);
 }
-#else
-INCLUDE_ASM(func_800C236C);
-#endif
