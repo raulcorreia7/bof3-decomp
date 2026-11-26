@@ -39,8 +39,8 @@ NON_MATCHING void func_800B3324(u8 index, s32 x, s32 y, s32 patch, u8 hide_chang
         shade = CHARACTER_NAME_LENGTH;
     }
     UI_TextDraw((s16)(x + (0x3E - shade * 6)), (s16)(y + 7), UI_TEXT_NORMAL, CHARACTER_NAME_LENGTH, (u8*)chr);
-    for (i = 0, label_y = y + 0x1A; i < 4; i++) {
-        UI_TextDraw((s16)(x + 5), (s16)(label_y + i * 13), UI_TEXT_NORMAL, 4, s_BattlePanelEquipTables.stat_labels[i]);
+    for (i = 0; i < 4; i++) {
+        UI_TextDraw((s16)(x + 5), (s16)(y + (i * 13 + 0x1A)), UI_TEXT_NORMAL, 4, s_BattlePanelEquipTables.stat_labels[i]);
     }
 
     Char_RebuildStats(chr);
