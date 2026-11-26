@@ -123,8 +123,9 @@ MATCH void func_801D15E4(void) {
 
 #ifdef NON_MATCHING
 /* Draws the equip menu's four stat rows, the six slot icons and the two equipped item names. */
-NON_MATCHING void func_801D165C(u16 panel_x, u16 panel_y, u8 category, u8 item_id) {
+NON_MATCHING void func_801D165C(s32 panel_x, s32 panel_y, u8 category, u8 item_id) {
     Character* character;
+    u8*        name;
     u16        base[EQUIP_PREVIEW_STAT_COUNT];
     u16        current[EQUIP_PREVIEW_STAT_COUNT];
     u8         change[EQUIP_PREVIEW_STAT_COUNT];
@@ -151,11 +152,11 @@ NON_MATCHING void func_801D165C(u16 panel_x, u16 panel_y, u8 category, u8 item_i
     equipped[1]                         = character->equip.armor;
     func_801D1AB8(base, current, D_801D8ECC, change, equipped, category, item_id);
     for (i = 0; i < EQUIP_PREVIEW_STAT_COUNT; i++) {
-        value_y = panel_y + i * 13 + 0x13;
+        value_y = panel_y + (u8)(i * 13 + 0x13);
         UI_TextDraw(label_x, value_y, UI_TEXT_NORMAL, TEXT_LENGTH_MAX, D_801D8744[i]);
         sprintf(g_UiTextFormatBuffer, D_801D0C04, current[i]);
-        trial_y = value_y + 2;
-        UI_TextDrawGlyphString((s16)(label_x + 0x24), trial_y, UI_TEXT_NORMAL, g_UiTextFormatBuffer);
+        trial_y = panel_y + (u8)(i * 13 + 0x15);
+        UI_TextDrawGlyphString((s16)(panel_x + 0x29), trial_y, UI_TEXT_NORMAL, g_UiTextFormatBuffer);
         if (Item_CanEquip(0, (category == 1) ? EQUIP_SLOT_WEAPON : EQUIP_SLOT_ARMOR, category, item_id)) {
             sprintf(g_UiTextFormatBuffer, D_801D0C04, D_801D8ECC[i]);
             UI_TextDrawGlyphString((s16)(panel_x + 0x59), trial_y, change[i], g_UiTextFormatBuffer);
@@ -169,11 +170,13 @@ NON_MATCHING void func_801D165C(u16 panel_x, u16 panel_y, u8 category, u8 item_i
     for (i = 0; i < EQUIP_SLOT_COUNT; i++) {
         UI_IconDraw((u16)(panel_x + 6), (u16)(panel_y + 0x51 + i * 13), D_801D8754[i], 0);
         if (i != EQUIP_SLOT_WEAPON && i != EQUIP_SLOT_ARMOR) {
-            UI_TextDrawAscii((s16)(panel_x + 0x11), (s16)(panel_y + i * 13 + 0x4F), UI_TEXT_NORMAL, g_UiTextFormatBuffer);
+            UI_TextDrawAscii((s16)(panel_x + 0x11), (s16)(panel_y + (i * 13 + 0x4F)), UI_TEXT_NORMAL, g_UiTextFormatBuffer);
         }
     }
-    UI_TextDraw((s16)(panel_x + 0x11), (s16)(panel_y + 0x4F), UI_TEXT_NORMAL, Game_ReadCommand((u8*)&g_Weapons[equipped[0]]) & BYTE_MASK, (u8*)&g_Weapons[equipped[0]]);
-    UI_TextDraw((s16)(panel_x + 0x11), (s16)(panel_y + 0x76), UI_TEXT_NORMAL, Game_ReadCommand((u8*)&g_Armors[equipped[1]]) & BYTE_MASK, (u8*)&g_Armors[equipped[1]]);
+    name = (u8*)&g_Weapons[character->equip.weapon];
+    UI_TextDraw((s16)(panel_x + 0x11), (s16)(panel_y + 0x4F), UI_TEXT_NORMAL, Game_ReadCommand(name) & BYTE_MASK, name);
+    name = (u8*)&g_Armors[character->equip.armor];
+    UI_TextDraw((s16)(panel_x + 0x11), (s16)(panel_y + 0x76), UI_TEXT_NORMAL, Game_ReadCommand(name) & BYTE_MASK, name);
 }
 #else
 INCLUDE_ASM(func_801D165C);

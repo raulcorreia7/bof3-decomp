@@ -58,9 +58,11 @@ def allocation_order(rows):
 
 
 def dump_part(path, function):
-    """Return a dump's text from the start of one function."""
+    """Return one function's part of a dump."""
     text = Path(path).read_text()
-    return text[text.index(f";; Function {function}") :]
+    part = text[text.index(f";; Function {function}\n") :]
+    end = part.find("\n;; Function ", 1)
+    return part if end < 0 else part[:end]
 
 
 def first_setter(insns, register):

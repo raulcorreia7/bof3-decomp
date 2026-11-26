@@ -719,7 +719,6 @@ NON_MATCHING void func_801F0FBC(void) {
     LINE_F2* prim;
     long     depth;
     long     flag;
-    long*    rot_flag;
     u32      frame;
     u32      phase;
     u32      i;
@@ -729,16 +728,16 @@ NON_MATCHING void func_801F0FBC(void) {
     u32      radius;
     u32      shade;
     s32      tpage;
+    s32      angle;
 
     if (TASK(PartyMember)->unk_09 >= 0x19) {
         func_801F0E90();
-        i        = 0;
-        x        = TASK(PartyMember)->pos.x.fixed;
-        y        = TASK(PartyMember)->pos.y.fixed;
-        z        = (TASK(PartyMember)->facing >= 2) ? -2 : 0;
-        radius   = ~TASK(PartyMember)->unk_09 & 0x1F;
-        shade    = 0x80 - radius * 16;
-        rot_flag = &flag;
+        i      = 0;
+        x      = TASK(PartyMember)->pos.x.fixed;
+        y      = TASK(PartyMember)->pos.y.fixed;
+        z      = (TASK(PartyMember)->facing >= 2) ? -2 : 0;
+        radius = ~TASK(PartyMember)->unk_09 & 0x1F;
+        shade  = 0x80 - radius * 16;
         do {
             tpage = (GetGraphType() == 1 || GetGraphType() == 2) ? 0x2A5 : 0xB5;
             SetDrawMode((DR_MODE*)g_GfxPrimCursor, 0, 1, tpage, 0);
@@ -746,15 +745,17 @@ NON_MATCHING void func_801F0FBC(void) {
             prim = (LINE_F2*)g_GfxPrimCursor;
             SetLineF2(prim);
             PSX_SET_SEMI_TRANSPARENT(prim);
-            g_ScratchPadVectors[0].vx = FIXED_MUL(rcos(i << 6) << 4, radius);
+            angle                     = i << 6;
+            g_ScratchPadVectors[0].vx = FIXED_MUL(rcos(angle) << 4, radius);
+            g_ScratchPadVectors[0].vy = FIXED_MUL(rsin(angle) << 4, radius);
             g_ScratchPadVectors[0].vz = 0;
-            g_ScratchPadVectors[0].vy = FIXED_MUL(rsin(i << 6) << 4, radius);
-            RotTransPers(&g_ScratchPadVectors[0], (long*)&prim->x0, &depth, rot_flag);
+            RotTransPers(&g_ScratchPadVectors[0], (long*)&prim->x0, &depth, &flag);
             i++;
-            g_ScratchPadVectors[0].vx = FIXED_MUL(rcos(i << 6) << 4, radius);
+            angle                     = i << 6;
+            g_ScratchPadVectors[0].vx = FIXED_MUL(rcos(angle) << 4, radius);
+            g_ScratchPadVectors[0].vy = FIXED_MUL(rsin(angle) << 4, radius);
             g_ScratchPadVectors[0].vz = 0;
-            g_ScratchPadVectors[0].vy = FIXED_MUL(rsin(i << 6) << 4, radius);
-            RotTransPers(&g_ScratchPadVectors[0], (long*)&prim->x1, &depth, rot_flag);
+            RotTransPers(&g_ScratchPadVectors[0], (long*)&prim->x1, &depth, &flag);
             setRGB0(prim, shade, shade, shade);
             Area_CellAddPrim(x, y, z, sizeof(LINE_F2));
         } while (i < 0x40);
