@@ -14,7 +14,7 @@
 #include "scenario/runtime.h"
 #include "sys/cd.h"
 
-extern const BGMTrack g_BGMTracks[BGM_TRACK_COUNT]; /* 0x80181EB8 */
+extern const BGMTrack g_BGMTracks[BGM_TRACK_COUNT];
 
 /* sig-kept: the retail callers narrow x and y to u16; the callee masks them to u8. */
 s8 func_801A7AD8(u8* entry, u8 count, u16 x, u16 y);
