@@ -330,7 +330,7 @@ segments:
       - [0x184C0, c, UI_PanelSlideOutOption_801E90C0]
       - [0x18500, c, func_801E9100]
       - [0x18540, c, Menu_ZennyPanel]
-      - [0x185A4, c, func_801E91A4]
+      - [0x185A4, c, UI_PanelSlideOutOption_801E91A4]
       - [0x185E4, c, func_801E91E4]
       - [0x18624, c, Menu_PlayTimePanel]
       - [0x18684, c, func_801E9284]

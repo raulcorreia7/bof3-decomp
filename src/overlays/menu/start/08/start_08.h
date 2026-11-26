@@ -687,7 +687,8 @@ void        UI_PanelSlideOutOption_801E90C0(void);
 void        func_801E9100(void);
 /* func_801E9140 */
 void        Menu_ZennyPanel(void);
-void        func_801E91A4(void);
+/* func_801E91A4 */
+void        UI_PanelSlideOutOption_801E91A4(void);
 void        func_801E91E4(void);
 /* func_801E9224 */
 void        Menu_PlayTimePanel(void);
