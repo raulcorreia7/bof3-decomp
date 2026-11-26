@@ -78,7 +78,7 @@ NON_MATCHING s32 func_801EFA50(void) {
             if (roll >= 0x65) {
                 chance = roll - 0x1C;
             }
-            if ((s16)chance < (s16)value) {
+            if ((s16)value > (s16)chance) {
                 g_FairyJobs[job].unk_03 |= 0x20;
                 goto queue;
             }
