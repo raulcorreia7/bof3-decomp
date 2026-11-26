@@ -175,8 +175,8 @@ source whose match marker decides a placed section. The rest of `config/` (attem
 
 For a scratch on [decomp.me](https://decomp.me/), choose PlayStation and `gcc2.7.2-psx`. The project
 flags are in `build/meson/tools/build/emit/cflags.txt`; the base set is
-`-O2 -G0 -funsigned-char -msoft-float -gcoff -Wa,--aspsx-version=2.56,--expand-div`, and the
-scenario `sce10eff/00` adds `-fno-cse-follow-jumps -fno-cse-skip-blocks`. Define `MATCHING` and
+`-O2 -G0 -funsigned-char -msoft-float -gcoff -Wa,--aspsx-version=2.56,--expand-div` (GCC 2.7.2.1 for
+the images in `IMAGE_GCC`, see [compiler chain](#compiler-chain)). Define `MATCHING` and
 supply the required declarations in the scratch context. A scratch is a comparison tool;
 `check` verifies the project build.
 
@@ -206,13 +206,29 @@ tab-separated, because Meson has no JSON parser.
 ## Compiler chain
 
 GCC 2.7.2 PSX (decompals/old-gcc 0.13), then maspsx with ASPSX 2.56, `-O2 -G0`, C89. One compiler
-serves every image. maspsx runs with `--aspsx-version=2.56 --expand-div` for every object. Retail
+serves every image except the four below. maspsx runs with `--aspsx-version=2.56 --expand-div` for every object. Retail
 expands each `div`/`divu` with the zero-divisor (`bnez`/`break 7`) and overflow (`break 6`) guards
 wherever the source divides, and code without a division is unchanged, so the flag is global.
 
-A per-unit flag override is a path-prefix rule in `meson.build` (`sce10eff_opt` is the only one).
-Add one for a clean-C exact match, with authorization, after a flag-profile trial reproduces the
-retail code. The global `--expand-div` covers every division trap; C is never rewritten to fake an
+Every object compiles with the same flags. Four area images compile with GCC 2.7.2.1 (old-gcc
+0.17), listed in `IMAGE_GCC` in `tools/cc.py`: `area024/14`, `area108/14`, `area125/13` and
+`area134/13`. Their shared sprite body is retail code under 2.7.2.1 written plainly, and needs 32
+`FAKE_VOLATILE` reloads under 2.7.2; every other matched function of the four images compiles to the
+same bytes under both. `cc.py` picks the compiler from the `-DASM_DIR` image, so `match.sh` and
+`MATCH_SRC` follow it; `tools/rtl_dump.sh` and `check-plain` still run the pinned 2.7.2.
+
+Trial (November 2026, `~/.cache/bof3-swarm/flags/`): 25 GCC builds (old-gcc 2.5.7 to 2.95.2, plain
+and `-psx`, and PsyQ `CC1PSX` 4.0, 4.1 and 4.3), 46 flag settings and 14 maspsx settings on each of
+the 137 open drafts, 182 pairs on 103 of them, and the same settings on 334 matches with their
+helpers removed. No setting matched an open draft or brought one within 3 instructions. Every flag
+or other build that matched a helper-free function broke matched functions of its image (for
+example `-fno-schedule-insns2` keeps 3 of 84 in `scena02`), so a flag is never a unit setting.
+GCC 2.7.2.1, 2.7.2.2 and 2.7.2.3 give the same bytes on every function tried; 2.7.2.1 compiles
+8,666 of the 8,758 functions that `match.sh` covers to the same bytes as 2.7.2, and the 92 others lie in 11 images
+(76 in `commu01/07` and `commu02/08`). PsyQ 4.0 `CC1PSX` (`2.7.2.SN32.3.7.0002`), plain GCC 2.7.1
+and 2.7.2 give the pinned compiler's bytes on every open draft.
+
+The global `--expand-div` covers every division trap; C is never rewritten to fake an
 assembler expansion.
 
 Known compiler residuals:

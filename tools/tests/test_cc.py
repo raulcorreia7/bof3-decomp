@@ -26,3 +26,17 @@ def test_authored_assembly_selects_the_hand_folder(tmp_path: Path) -> None:
         asm_dir(tmp_path / "src/engine/slus/b.c", tmp_path)
         == "build/asm/exe/slus_004_22"
     )
+
+
+def test_an_image_in_image_gcc_selects_its_compiler(monkeypatch) -> None:
+    import cc
+
+    monkeypatch.delenv("PSX_GCC", raising=False)
+    monkeypatch.setattr(cc, "GCC_DIR", cc.GCC_DIR)
+    monkeypatch.setattr(cc, "GCC", "pinned")
+    image = next(iter(cc.IMAGE_GCC))
+    cc.select_gcc([f'-DASM_DIR="build/asm/{image}"'])
+    assert cc.GCC == f"{cc.ROOT}/toolchains/{cc.IMAGE_GCC[image]}/gcc"
+    monkeypatch.setattr(cc, "GCC", "pinned")
+    cc.select_gcc(['-DASM_DIR="build/asm/exe/slus_004_22"'])
+    assert cc.GCC == "pinned"

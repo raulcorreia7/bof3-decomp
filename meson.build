@@ -30,6 +30,7 @@ touch = find_program('touch')
 compiler_tools = {
   '.venv/bin/python': 'run tools/setup.sh',
   'toolchains/gcc-2.7.2-psx/gcc': 'run tools/setup.sh',
+  'toolchains/gcc-2.7.2.1/gcc': 'run tools/setup.sh',
   'toolchains/psn00b_toolchain/bin/mipsel-none-elf-as': 'run tools/setup.sh',
   'third_party/maspsx/maspsx.py': 'run `git submodule update --init third_party/maspsx`',
 }
@@ -148,11 +149,6 @@ if have_compiler
   cflags = cpp_defines + cpp_includes + cc_target + as_maspsx + as_target + as_includes
   asflags = ['-G0', '-EL', '-mips1', '-Iinclude/match']
 
-  # sce10eff reloads a scratchpad value after a branch; these flags stop the compiler
-  # reusing it across jumps.
-  sce10eff_dir = 'src/overlays/scenario/sce10eff/00/'
-  sce10eff_opt = ['-O2', '-fno-cse-follow-jumps', '-fno-cse-skip-blocks']
-
   dep_flags = ['-MMD', '-MP', '-MF', '@DEPFILE@']
 
   # The flags `check-plain` compiles with: the C flags without MATCHING and without the
@@ -210,21 +206,19 @@ if have_compiler
   # One compile_commands.json entry: ASM_DIR, include directory, optimization, source.
   cdb_entry = '{"directory": "' + cdb_root + '", "arguments": ["clang", ' + ', '.join(cdb_flags) + ', "-DASM_DIR=\\"@0@\\"", "-I@1@", @2@, "-c", "@3@"], "file": "@3@"}'
   cdb_opt = '"' + '", "'.join(cc_opt) + '"'
-  cdb_sce10eff_opt = '"' + '", "'.join(sce10eff_opt) + '"'
 
   as_cmd = [env, '-C', root, as, asflags]
 
   # A draft compiles its source with -DNON_MATCHING, for the progress report.
   draft_targets = []
   foreach row : drafts
-    draft_opt = row[1].startswith(sce10eff_dir) ? sce10eff_opt : cc_opt
     draft_targets += custom_target(row[0],
       input: row[1],
       output: row[0],
       depfile: row[0] + '.d',
       depend_files: cc_deps,
       command: [cc, '--empty-on-failure', cflags, '-DNON_MATCHING',
-                '-DASM_DIR="' + row[2] + '"', '-I' + fs.parent(row[1]), draft_opt, dep_flags,
+                '-DASM_DIR="' + row[2] + '"', '-I' + fs.parent(row[1]), cc_opt, dep_flags,
                 '-c', row[1], '-o', '@OUTPUT@'])
   endforeach
 
@@ -236,16 +230,15 @@ if have_compiler
       if kind == 'c'
         src = row[2]
         include_dir = fs.parent(src)
-        sce10eff = src.startswith(sce10eff_dir)
         objs += custom_target(row[1],
           input: src,
           output: row[1],
           depfile: row[1] + '.d',
           depend_files: cc_deps,
           command: [cc, cflags, '-DASM_DIR="@0@"'.format(row[3]), '-I' + include_dir,
-                    sce10eff ? sce10eff_opt : cc_opt, dep_flags, '-c', src, '-o', '@OUTPUT@'])
+                    cc_opt, dep_flags, '-c', src, '-o', '@OUTPUT@'])
         cdb_entries += cdb_entry.format(row[3], include_dir,
-          sce10eff ? cdb_sce10eff_opt : cdb_opt, src)
+          cdb_opt, src)
       elif kind == 's'
         # A placement wrapper includes the retail payload, which no depfile names.
         extra = row[2].startswith('build/p2/') ? [root / unit['payload']] : []

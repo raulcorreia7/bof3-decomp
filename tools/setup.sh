@@ -37,6 +37,9 @@ done
 # Pinned downloads (SHA-256 checked before use).
 GCC_URL=https://github.com/decompals/old-gcc/releases/download/0.13/gcc-2.7.2-psx.tar.gz
 GCC_SHA256=aca64479041aa2d645dc52ebcaace276c0aa06f258c0e3f190ccf6d76701ffbc
+# The images in tools/cc.py IMAGE_GCC compile with GCC 2.7.2.1.
+GCC2721_URL=https://github.com/decompals/old-gcc/releases/download/0.17/gcc-2.7.2.1.tar.gz
+GCC2721_SHA256=8fdfcd95768eca36c1b373f16f57f78ab90877a71e2886f0a07422332d759755
 PARSER_URL=https://github.com/mkst/maspsx/releases/download/aspsx/psyq-obj-parser
 PARSER_SHA256=cadce246ea12f7419890f0a92835abae5c12ddc78c6b21ff66b2844a8eed2d83
 BINUTILS_URL=https://github.com/Lameguy64/PSn00bSDK/releases/download/v0.24/gcc-mipsel-none-elf-12.3.0-linux.zip
@@ -113,6 +116,13 @@ if [ ! -x "$gcc_root/gcc" ]; then
 	sh tools/fetch_verified.sh "$GCC_URL" "$GCC_SHA256" toolchains/downloads/gcc-2.7.2-psx.tar.gz
 	mkdir -p "$gcc_root"
 	tar -xzf toolchains/downloads/gcc-2.7.2-psx.tar.gz -C "$gcc_root"
+fi
+gcc2721_root=toolchains/gcc-2.7.2.1
+if [ ! -x "$gcc2721_root/gcc" ]; then
+	step "GCC 2.7.2.1"
+	sh tools/fetch_verified.sh "$GCC2721_URL" "$GCC2721_SHA256" toolchains/downloads/gcc-2.7.2.1.tar.gz
+	mkdir -p "$gcc2721_root"
+	tar -xzf toolchains/downloads/gcc-2.7.2.1.tar.gz -C "$gcc2721_root"
 fi
 parser=toolchains/psyq-compilers/psyq-obj-parser-cadce246
 if [ ! -x "$parser" ]; then

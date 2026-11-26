@@ -17,7 +17,7 @@ MATCH void func_801F46EC(const void* sprite) {
 
     Camera_ProjectPoint(object, &screen);
     size[0] = work->half_size;
-    size[1] = FAKE_VOLATILE(u16, work->half_size);
+    size[1] = work->half_size;
     Game_ProjectWorldPoint(object, size, size);
 
     setXY4(primitive, screen.vx - ((s16)size[0] >> 1), screen.vy - ((s16)size[1] >> 1), (screen.vx - ((s16)size[0] >> 1)) + size[0], screen.vy - ((s16)size[1] >> 1), screen.vx - ((s16)size[0] >> 1),
@@ -25,7 +25,7 @@ MATCH void func_801F46EC(const void* sprite) {
     setUV4(primitive, 224u, 48u, 255u, 48u, 224u, 79u, 255u, 79u);
     setClut(primitive, 160, STAGE_PALETTE_Y + 3);
     primitive->tpage = GetTPage(TPAGE_DEPTH_4BIT, TPAGE_ABR_ADD, 704, 256);
-    shade            = FAKE_VOLATILE(u8, work->shade);
+    shade            = work->shade;
     primitive->b0    = shade;
     primitive->g0    = shade;
     primitive->r0    = shade;

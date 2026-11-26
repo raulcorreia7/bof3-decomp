@@ -10,10 +10,8 @@ MATCH void Scene_StartToggleLock(s32 frames) {
     index = Actor_FindFreeSpawned() & BYTE_MASK;
     if (index != GAME_NONE) {
         g_SpawnedActors[index].header.flags = 1;
-        /* FAKE: block boundary holds the SYS_SetFlag address load between the stores. */
-        FAKE_ORDER_FENCE();
-        g_SpawnedActors[index].type  = 4;
-        g_SpawnedActors[index].layer = frames;
+        g_SpawnedActors[index].type         = 4;
+        g_SpawnedActors[index].layer        = frames;
         SYS_SetFlag(g_SceneEventFlags, 28);
     }
 }
