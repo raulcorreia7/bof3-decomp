@@ -335,9 +335,8 @@ MATCH void func_801D1910(void) {
     }
 }
 
-#ifdef NON_MATCHING
 /* Copies the equipped item's status values onto the equip list's title row. */
-NON_MATCHING void func_801D1964(void) {
+MATCH void func_801D1964(void) {
     if ((D_801DA0C6 != 0) && (D_801DA04E != 0)) {
         D_801DA0C0.header.mode = 4;
         D_801DA048.header.mode = 4;
@@ -348,12 +347,9 @@ NON_MATCHING void func_801D1964(void) {
         D_801D9EF4[0]          = g_ShisuBase[0];
         D_801D9EF4[1]          = g_ShisuBase[1];
         D_801D9EF4[2]          = g_ShisuBase[2];
-        D_80148652 += 1;
+        D_80148652++;
     }
 }
-#else
-INCLUDE_ASM(func_801D1964);
-#endif
 
 /* Fades the six tint channels up to the fade level. */
 MATCH void func_801D1A20(void) {
