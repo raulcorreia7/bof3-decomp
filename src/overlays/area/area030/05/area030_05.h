@@ -1,7 +1,7 @@
 #ifndef OVERLAY_WORLD00_FISHING_05_H
 #define OVERLAY_WORLD00_FISHING_05_H
 
-/* The world00/area030/05 world overlay's local declarations: the work-cost rows, the
+/* The world00/area030/05 world overlay's local declarations: the trade rows, the
  * payload prologue and the area data symbols. Only this image includes the
  * file. */
 
@@ -24,11 +24,38 @@ typedef enum FishingShopMessageId {
     FISHING_SHOP_MESSAGE_COUNT_PROMPT     = 78,
 } FishingShopMessageId;
 
-/* Work-cost row: two cost bytes followed by two three-byte runs. */
-typedef struct AreaCost {
-    u8 cost[2];
-    u8 run[2][3];
-} AreaCost;
+/* The trades the shop offers: the item the player gets for the fish it asks for. */
+#define FISHING_TRADE_FISH_COUNT 3
+
+/* The two bytes of FishingTrade.give. */
+typedef enum FishingTradeGive {
+    FISHING_TRADE_GIVE_ID,
+    FISHING_TRADE_GIVE_CATEGORY,
+} FishingTradeGive;
+
+/* The two runs of FishingTrade.need: the fish ids from ITEM_JELLYFISH (GAME_NONE after the last), then their counts. */
+typedef enum FishingTradeNeed {
+    FISHING_TRADE_NEED_FISH,
+    FISHING_TRADE_NEED_COUNT,
+} FishingTradeNeed;
+
+typedef struct FishingTrade {
+    /* 0x00 */ u8 give[2];
+    /* 0x02 */ u8 need[2][FISHING_TRADE_FISH_COUNT];
+} FishingTrade;
+
+ASSERT_OFFSET(FishingTrade, need, 0x02);
+ASSERT_SIZE(FishingTrade, 0x08);
+
+/* The most of one item the player can hold. */
+#define FISHING_SHOP_STACK_MAX     99
+/* The shop's list cursor: the row in the low bits, the flags above. CHOSEN while the quantity prompt is open,
+ * LOCKED while the too-greedy notice or the confirm-all question holds the list. */
+#define FISHING_SHOP_CURSOR_ROW    0x0F
+#define FISHING_SHOP_CURSOR_CHOSEN 0x40
+#define FISHING_SHOP_CURSOR_LOCKED 0x80
+/* The trade ids one pond offers. */
+#define FISHING_SHOP_STOCK_COUNT   10
 
 /* Payload prologue: the loader-verified module id and the "*%2d" format the
  * cost printers pass to sprintf. */
@@ -40,11 +67,10 @@ typedef struct FishingShopOverlayHeader {
 
 /* Data, in address order. */
 extern FishingShopOverlayHeader D_800F5000;
-extern AreaCost                 D_801E2F7C[];
-extern u8                       D_801E2F7D[];
-extern u8                       D_801E2F7E[][8];
-extern u8                       D_801E2F81[][8];
-extern u8                       D_801E3134[][10];
+/* The trades of every pond, indexed by the ids of g_FishingShopStock; the area image owns them. */
+extern FishingTrade             g_FishingTrades[];
+/* The trade ids each pond offers, by g_GameEntryFacing, GAME_NONE after the last; the area image owns them. */
+extern u8                       g_FishingShopStock[][FISHING_SHOP_STOCK_COUNT];
 
 /* func_800F5048 */
 void Fishing_ShopOpen(void);
