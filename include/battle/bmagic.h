@@ -32,6 +32,15 @@ typedef struct BMagicActorSteps {
 
 ASSERT_SIZE(BMagicActorSteps, 0xC);
 
+/* The same three step routines as BMagicSparkleSteps; no source uses this record. */
+#define BMAGIC_TASK_STEP_COUNT 3
+
+typedef struct BMagicTaskSteps {
+    Callback steps[BMAGIC_TASK_STEP_COUNT];
+} BMagicTaskSteps;
+
+ASSERT_SIZE(BMagicTaskSteps, 0xC);
+
 /* The step routines of one sparkle of the sparkle pool (launch, grow, fade). */
 #define BMAGIC_SPARKLE_STEP_COUNT 3
 
