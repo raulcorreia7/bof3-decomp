@@ -63,7 +63,7 @@ MATCH void func_801DA9DC(void) {
             Script_Request(5);
         } else if (g_PadStates[0].held & PADRdown) {
             actor->vx = 0;
-            if (SP_REF(u8, 0x0) != 0) {
+            if (g_ScratchPad.cells.bytes[0] != 0) {
                 actor->selection = 0x2000;
                 D_801E31F8       = 2;
                 actor->unk_14    = g_FishingLureRow->unk_08;
@@ -74,7 +74,7 @@ MATCH void func_801DA9DC(void) {
                 actor->unk_14    = g_FishingLureRow->unk_04;
                 Script_Request(3);
             }
-        } else if (SP_REF(u8, 0x0) != 0) {
+        } else if (g_ScratchPad.cells.bytes[0] != 0) {
             actor->vx        = 0;
             actor->selection = ONE;
             D_801E31F8       = 2;
