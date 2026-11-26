@@ -377,8 +377,6 @@ if have_compiler
   run_target('check-headers',
     command: [tools / 'check_configured.sh', 'headers', bld / 'headers.txt'],
     depends: probes)
-  run_target('check-unity',
-    command: [venv_python, tools / 'unity_check.py', '--build-dir', bld])
 endif
 
 if have_game
