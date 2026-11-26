@@ -38,8 +38,8 @@ NON_MATCHING void func_801EEC7C(void) {
     if (g_Battle.encounter != 0) {
         if (g_BattleEnemyBattlers[g_Battle.active_battler - BATTLE_PARTY_CHARACTERS_COUNT].unk_F0 == 0x29) {
             index                              = (u8)Battle_AllocEffect(1, 0x4B);
-            effect                             = &g_BattleEffects[index];
             enemy                              = g_Battle.active_battler - BATTLE_PARTY_CHARACTERS_COUNT;
+            effect                             = &g_BattleEffects[index];
             image                              = (BattleWorkImage*)&g_BattleEnemyBattlers[enemy];
             *(BattleWorkImage*)effect          = *image;
             g_BattleEffects[index].header.mode = 2;

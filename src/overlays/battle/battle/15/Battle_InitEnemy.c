@@ -8,13 +8,17 @@
  * enemy id, then queues the enemy's script and bit flag. */
 /* func_800ABCE0 */
 #ifdef NON_MATCHING
-NON_MATCHING void Battle_InitEnemy(s32 enemy_slot, u16 enemy_index, s32 x, s32 y) {
+NON_MATCHING void Battle_InitEnemy(enemy_slot, enemy_index, x, y) u8 enemy_slot;
+u16               enemy_index;
+s32               x;
+s32               y;
+{
     EnemyBattler* enemy;
     EnemyBattler* first;
     u16           unit_id;
     s32           unit_offset;
 
-    first = &g_BattleEnemyBattlers[enemy_slot & BYTE_MASK];
+    first = &g_BattleEnemyBattlers[enemy_slot];
     TASK_SET(first);
     first->header.flags = 1;
     unit_id             = FIELD(u16, &D_800E405E, (enemy_index & HALF_MASK) * BATTLE_ENEMY_RECORD_SIZE);
@@ -55,10 +59,10 @@ NON_MATCHING void Battle_InitEnemy(s32 enemy_slot, u16 enemy_index, s32 x, s32 y
     TASK(EnemyBattler)->unk_2B           = 0;
     unit_offset                          = (enemy_index & HALF_MASK) * BATTLE_ENEMY_RECORD_SIZE;
     Area_SceneSelectRecord(FIELD(u16, &D_800E405E, unit_offset));
-    g_BattleEnemyBattlers[enemy_slot & BYTE_MASK].unk_8A = FIELD(u16, &D_800E405E, unit_offset);
+    g_BattleEnemyBattlers[enemy_slot].unk_8A = FIELD(u16, &D_800E405E, unit_offset);
     Battle_LoadEnemyBattler(enemy_slot, enemy_index);
-    func_800AD0A8(enemy_slot & BYTE_MASK, enemy_index & HALF_MASK);
-    g_BattleEnemyBattlers[enemy_slot & BYTE_MASK].unk_7F = Battle_IsEnemyDefeated(FIELD(u8, &D_800E4050, unit_offset));
+    func_800AD0A8(enemy_slot, enemy_index & HALF_MASK);
+    g_BattleEnemyBattlers[enemy_slot].unk_7F = Battle_IsEnemyDefeated(FIELD(u8, &D_800E4050, unit_offset));
     g_Battle.enemy_count += 1;
 }
 #else

@@ -208,13 +208,13 @@ NON_MATCHING void func_801D1250(s32 scene, s32 mode) {
         SetPolyFT4(prim);
         bar_x    = left + 0x49;
         prim->x0 = bar_x;
+        prim->x1 = bar_x + sums[i];
         prim->y1 = prim->y0 = top + 0x3F + i * 4;
         prim->u0            = 0x98;
         prim->u1            = 0x9C;
         prim->v1 = prim->v0 = 0xD8;
         prim->clut          = getClut(176, 480);
         prim->x2            = prim->x0;
-        prim->x1            = bar_x + sums[i];
         prim->y3 = prim->y2 = prim->y0 + 4;
         setRGB0(prim, 0x80, 0x80, 0x80);
         prim->u3 = prim->u1;

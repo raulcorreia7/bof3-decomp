@@ -234,12 +234,12 @@ extern u8              D_801484EB;
 extern u8*             D_80148500;
 extern MenuChoicePanel D_80148504;
 extern NameEntryLabels D_801D0F00;
-extern u8              D_801ECDBC[];
-extern s16             D_80148508; /* signed scalar view of the panel's x */
-extern u8              D_8014850E; /* the panel's group */
-extern u8              D_8014850F; /* the panel's group first entry */
-extern u8              D_80148510; /* the panel's group cursor */
-extern s8              D_80148511; /* signed scalar view of the panel's drawn cursor */
+extern u8              D_801ECDBC[][8][12]; /* name entry grid: pages of 8 rows by 12 cells */
+extern s16             D_80148508;          /* signed scalar view of the panel's x */
+extern u8              D_8014850E;          /* the panel's group */
+extern u8              D_8014850F;          /* the panel's group first entry */
+extern u8              D_80148510;          /* the panel's group cursor */
+extern s8              D_80148511;          /* signed scalar view of the panel's drawn cursor */
 extern u8*             D_80148524;
 extern u8              D_80148531;
 extern u8              D_80148532;

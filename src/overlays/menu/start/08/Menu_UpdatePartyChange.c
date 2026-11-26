@@ -33,8 +33,8 @@ NON_MATCHING void Menu_UpdatePartyChange(void) {
         y2                        = D_801EC548[(s8)D_8014865D][(s8)D_8014865A].y;
         D_80148600                = 1;
         g_UiPanelTasks[20].pos.y  = y2;
-        g_UiPanelTasks[20].unk_0A = D_801EC548[(s8)D_8014865D][(s8)D_8014865A].value;
         g_UiPanelTasks[20].unk_0B = 0;
+        g_UiPanelTasks[20].unk_0A = D_801EC548[(s8)D_8014865D][(s8)D_8014865A].value;
     }
     if (D_801ED69C == GAME_NONE) {
         D_801484CC = 0x60;

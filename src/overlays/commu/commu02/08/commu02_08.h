@@ -77,7 +77,7 @@ extern char     D_801D0C24[];
 extern char     D_801D0C2C[];
 extern u8       D_801D0C30[12];
 extern u8       D_801D0C3C[];
-extern u8       D_801DAAAC[];
+extern u8       D_801DAAAC[][8][12]; /* name entry grid: pages of 8 rows by 12 cells */
 extern u16      D_801DAC34[2][8];
 /* The three 4-byte column labels drawn by func_801D2AC4. */
 extern u8       D_801DAC54[3][4];
