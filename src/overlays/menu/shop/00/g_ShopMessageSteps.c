@@ -54,7 +54,7 @@ u8 D_801E5E1C[0x10] = {
 
 Callback g_ShopInventorySteps[SHOP_PANEL9_STATE_COUNT] = {
     Menu_IdleStep,
-    func_801E3774,
+    UI_PanelSlideOutOption_801E3774,
     func_801E37B4,
 };
 

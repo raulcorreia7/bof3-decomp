@@ -665,7 +665,8 @@ void func_801E3284(MenuPanelTask* task);
 void func_801E36F8(void);
 /* func_801E3720 */
 void Menu_InventoryPanel(void);
-void func_801E3774(void);
+/* func_801E3774 */
+void UI_PanelSlideOutOption_801E3774(void);
 void func_801E37B4(void);
 void func_801E37F4(MenuPanelTask* task);
 void func_801E3B7C(void);

@@ -92,6 +92,7 @@ Menu_ItemsPanel = { addr = 0x801E2EB0, type = "func", source = "panel mode 7 of 
 Shop_DrawItems = { addr = 0x801E2F04, type = "func", source = "Draws the shop item rows with price, icon and name, shaded when the item is not affordable and when it is selected." }
 UI_PanelSlideOutOption_801E31C4 = { addr = 0x801E31C4, type = "func", source = "same body as emi/etc/game/00@0x801996FC UI_PanelSlideOutOption" }
 Menu_InventoryPanel = { addr = 0x801E3720, type = "func", source = "panel mode 9 of the shop: the inventory window" }
+UI_PanelSlideOutOption_801E3774 = { addr = 0x801E3774, type = "func", source = "same body as emi/etc/game/00@0x801996FC UI_PanelSlideOutOption" }
 Menu_CharacterPanel = { addr = 0x801E3E4C, type = "func", source = "panel mode 13 of the shop: the character window" }
 Party_HasSkill = { addr = 0x801E4D4C, type = "func", source = "Returns whether item_id is in the seven character item rows or the 128-entry item list." }
 Menu_DrawCuePanel = { addr = 0x801E4DF4, type = "func", source = "draws the shop cue text panel window and frame" }

@@ -290,7 +290,7 @@ segments:
       - [0x12684, c, func_801E3284]
       - [0x12AF8, c, func_801E36F8]
       - [0x12B20, c, Menu_InventoryPanel]
-      - [0x12B74, c, func_801E3774]
+      - [0x12B74, c, UI_PanelSlideOutOption_801E3774]
       - [0x12BB4, c, func_801E37B4]
       - [0x12BF4, c, func_801E37F4]
       - [0x12F7C, c, func_801E3B7C]
