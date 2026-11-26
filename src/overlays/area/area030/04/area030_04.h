@@ -499,7 +499,7 @@ extern u8                    D_801E2ADA[];
 /* D_801E2DF4 */
 extern s8                    g_FishingSpawnCounts[];
 extern u8                    D_801E3044[30][8];
-extern FishingCompanionCells D_801E3134;
+extern FishingCompanionCells g_FishingShopStock;
 extern u8                    D_801E31E0[];
 extern u8                    D_801E31E3;
 extern u8                    D_801E31E4[];
