@@ -1,8 +1,14 @@
 #include "area030_04.h"
 
-#ifdef NON_MATCHING
 /* Draws one character in the fishing interface. */
-NON_MATCHING void func_801D9740(s32 color, u8* pixels, s32 mask, s32 value) {
+// clang-format off
+MATCH void func_801D9740(color, pixels, mask, value)
+u8 color;
+u8* pixels;
+u8 mask;
+s16 value;
+// clang-format on
+{
     POLY_FT4* quad;
     s16       top;
 
@@ -39,12 +45,12 @@ NON_MATCHING void func_801D9740(s32 color, u8* pixels, s32 mask, s32 value) {
     /* setUVWH would also store u0 and v0, which the original does not. */
     quad->u1 = quad->u0 + (mask & 0x7F);
     quad->u2 = quad->u0;
+    quad->u3 = quad->u1;
     quad->v1 = quad->v0;
     quad->v2 = quad->v0 + 12;
     quad->v3 = quad->v2;
     quad->x2 = quad->x0;
     quad->x3 = quad->x1;
-    quad->u3 = quad->u1;
     top      = g_SpawnedActors[3].screen_y + 3;
     PSX_SET_NEUTRAL_RGB(quad);
     quad->y0   = top;
@@ -54,6 +60,3 @@ NON_MATCHING void func_801D9740(s32 color, u8* pixels, s32 mask, s32 value) {
     quad->y3   = quad->y2;
     GFX_AddPrim(GFX_LAYER_UI, sizeof(POLY_FT4));
 }
-#else
-INCLUDE_ASM(func_801D9740);
-#endif

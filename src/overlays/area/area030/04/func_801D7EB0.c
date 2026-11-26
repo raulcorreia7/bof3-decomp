@@ -19,21 +19,21 @@ u16 y;
     FishingState* work;
     u8*           buffer;
     u8*           slot_list;
-    s32           icon_y;
+    s16           icon_y;
     s32           row_offset;
     s32           row;
     s32           slot;
     u8            qty;
     u8*           style;
 
+    style = (u8*)&g_WindowStyle;
+    UI_WindowDraw(x, (y + 1) & HALF_MASK, 139, 158, UI_WINDOW_OPEN_ALL, *style);
     row        = 0;
-    /* the accessory rows step down from the panel's first icon row */
-    icon_y     = y + 25;
     row_offset = 0;
     buffer     = g_UiTextFormatBuffer;
-    style      = (u8*)&g_WindowStyle;
     slot_list  = style + FISHING_ACCESSORY_SLOT_OFFSET;
-    UI_WindowDraw(x, (y + 1) & HALF_MASK, 139, 158, UI_WINDOW_OPEN_ALL, *style);
+    /* the accessory rows step down from the panel's first icon row */
+    icon_y     = y + 25;
     for (slot = 0; slot < FISHING_ACCESSORY_SLOT_COUNT; slot++, slot_list++) {
         if (g_Accessories[*slot_list].type != ITEM_TYPE_FISHING_ROD) {
             continue;
@@ -66,7 +66,11 @@ u16 y;
     work             = TASK(FishingState);
     work->step_delta = row;
     if (work->pos_x >= row) {
-        work->pos_x = row == 0 ? 0 : row - 1;
+        if (row == 0) {
+            work->pos_x = 0;
+        } else {
+            work->pos_x = row - 1;
+        }
     }
     func_801D90FC(x, y);
     func_801D8248(x + 128, y + 28, 114);

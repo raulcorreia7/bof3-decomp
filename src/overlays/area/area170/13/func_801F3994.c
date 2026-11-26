@@ -11,7 +11,7 @@ NON_MATCHING void func_801F3994(void) {
     s32         k;
     u8          sum;
     s32         index;
-    s32         wrapped;
+    u8          wrapped;
     s32         cell_index;
     s32         cell_id;
     s32         width;
@@ -27,10 +27,10 @@ NON_MATCHING void func_801F3994(void) {
                 for (k = 0; (u8)k < 3; k++) {
                     index   = D_801F5990[(u8)k] + col;
                     wrapped = index;
-                    if ((u8)wrapped >= 9) {
+                    if (wrapped >= 9) {
                         wrapped = index - 9;
                     }
-                    sum += (u8)D_801F58D0[(u8)k][(u8)row][(u8)wrapped];
+                    sum += (u8)D_801F58D0[(u8)k][(u8)row][wrapped];
                 }
                 if ((u8)sum != 0) {
                     sum = 1;

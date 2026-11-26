@@ -937,8 +937,8 @@ MATCH void func_801F9F6C(void) {
     Actor_Clear();
 }
 
-#ifdef NON_MATCHING
-NON_MATCHING void func_801F9F8C(WorldPos* pos, s32 unused, s32 jitter, s32 layer) {
+/* Draws a dark half-transparent disc of line rows at the position, each row shifted by a random wobble. */
+MATCH void func_801F9F8C(WorldPos* pos, s32 unused, s16 jitter, s32 layer) {
     LINE_F2* line;
     DVECTOR  screen;
     DVECTOR  size;
@@ -973,9 +973,6 @@ NON_MATCHING void func_801F9F8C(WorldPos* pos, s32 unused, s32 jitter, s32 layer
         angle += rand() & 0xFF;
     }
 }
-#else
-INCLUDE_ASM(func_801F9F8C);
-#endif
 
 MATCH void func_801FA19C(WorldPos* pos, s32* vx) {
     LINE_G2* prim;
