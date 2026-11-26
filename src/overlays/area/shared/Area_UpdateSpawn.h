@@ -15,12 +15,12 @@ MATCH void Area_UpdateSpawn(void) {
     timer              = TASK(Actor)->timer - 1;
     TASK(Actor)->timer = timer;
     if (!(timer & 0xFF)) {
-        work               = TASK(Actor);
-        work->vx           = -0x1000;
-        work->vy           = -0x400;
-        work->unk_18       = work->angle_x;
-        work->unk_1C       = work->angle_y;
-        work->gravity      = work->angle_z;
+        work          = TASK(Actor);
+        work->vx      = -0x1000;
+        work->vy      = -0x400;
+        work->unk_18  = work->angle_x;
+        work->unk_1C  = work->angle_y;
+        work->gravity = work->angle_z;
         work->header.mode++;
     }
 }
