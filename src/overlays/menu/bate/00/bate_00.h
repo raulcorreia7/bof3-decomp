@@ -158,7 +158,7 @@ void Menu_DrawAbilityList(MenuListPanel* panel);
 void Menu_DrawPanelFrame(s16 x, s16 y, s32 width, s32 height);
 
 /* func_801D165C */
-void func_801D165C(u16 panel_x, u16 panel_y, u8 category, u8 item_id);
+void func_801D165C(s32 panel_x, s32 panel_y, u8 category, u8 item_id);
 /* func_801D1AB8 */
 void func_801D1AB8(u16* base, u16* current, u16* trial, u8* change, u8* equipped, u8 swap, u8 slot);
 

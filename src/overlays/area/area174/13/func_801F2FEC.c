@@ -10,7 +10,6 @@ NON_MATCHING void func_801F2FEC(s32* pos, s16 radius_x, s16 radius_y, u16 rotati
     POLY_G3* prim;
     u16      angle;
     s16      ellipse[2];
-    MATRIX   unused;
     u8       i;
     s16      rot;
     u16      tpage;

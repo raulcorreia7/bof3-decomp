@@ -298,7 +298,7 @@ NON_MATCHING void func_801EF8F4(void) {
     g_BattleEffects[slot].header.flags &= ~PARTY_MEMBER_FLAG_HANDLER_BUSY;
     g_BattleEffects[slot].target.party = TASK(PartyMember);
     g_BattleEffects[slot].screen_x     = 0x20;
-    FIELD(u8, &g_BattleEffects[slot], 0x24) |= 0x88;
+    g_BattleEffects[slot].active_flags |= 0x88;
     g_BattleEffects[slot].screen_y = 0x40;
     g_BattleEffects[slot].unk_27   = 0x7B;
     g_BattleEffects[slot].unk_0B   = TASK(PartyMember)->facing + 0x38;
@@ -318,7 +318,7 @@ NON_MATCHING void func_801EF8F4(void) {
     g_BattleEffects[slot].header.flags &= ~PARTY_MEMBER_FLAG_HANDLER_BUSY;
     g_BattleEffects[slot].target.party = TASK(PartyMember);
     g_BattleEffects[slot].screen_x     = 0x20;
-    FIELD(u8, &g_BattleEffects[slot], 0x24) |= 0x88;
+    g_BattleEffects[slot].active_flags |= 0x88;
     g_BattleEffects[slot].screen_y = 0x90;
     g_BattleEffects[slot].unk_27   = 0x7D;
     g_BattleEffects[slot].unk_0B   = TASK(PartyMember)->facing + 0x38;
@@ -332,7 +332,7 @@ NON_MATCHING void func_801EF8F4(void) {
     g_BattleEffects[slot].header.flags &= ~PARTY_MEMBER_FLAG_HANDLER_BUSY;
     g_BattleEffects[slot].target.party = TASK(PartyMember);
     g_BattleEffects[slot].screen_x     = 0x80;
-    FIELD(u8, &g_BattleEffects[slot], 0x24) |= 0x88;
+    g_BattleEffects[slot].active_flags |= 0x88;
     g_BattleEffects[slot].screen_y = 0x40;
     g_BattleEffects[slot].unk_27   = 0x7C;
     g_BattleEffects[slot].unk_0B   = TASK(PartyMember)->facing + 0x3C;
@@ -352,7 +352,7 @@ NON_MATCHING void func_801EF8F4(void) {
     g_BattleEffects[slot].header.flags &= ~PARTY_MEMBER_FLAG_HANDLER_BUSY;
     g_BattleEffects[slot].target.party = TASK(PartyMember);
     g_BattleEffects[slot].screen_x     = 0x80;
-    FIELD(u8, &g_BattleEffects[slot], 0x24) |= 0x88;
+    g_BattleEffects[slot].active_flags |= 0x88;
     g_BattleEffects[slot].unk_27   = 0x7D;
     g_BattleEffects[slot].unk_0B   = TASK(PartyMember)->facing + 0x3C;
     g_BattleEffects[slot].screen_y = 0x90;

@@ -28,6 +28,7 @@ as `+`. Run each Python tool with `.venv/bin/python tools/<name>.py` or directly
 | Show GCC's register-allocation dumps     | `tools/rtl_dump.sh <file.c> [letters] [func]`                            | same                                                      |
 | Rank the values that live across a call  | `tools/alloc_priority.py <file.c> <func>`                                | same                                                      |
 | Try several full bodies, stop at a match | `tools/try_variants.py <target>@0x<ADDR> <file.c> variants.py`           | same                                                      |
+| Try every single small edit on drafts    | `tools/sweep_edits.py --worklist FILE --jobs N --pairs --out FILE`       | same                                                      |
 | Print assembly, attempts and C file      | `tools/match_context.sh <target>@0x<ADDR>`                               | same                                                      |
 | Append an attempts row                   | `tools/attempts.py add --function <target>@0x<ADDR> --tried TEXT`        | `--help`                                                  |
 | Try one C body for an assembly function  | `tools/try_body.py <target>@<func> body.c`                               | [try body](#try-body)                                     |
@@ -112,6 +113,10 @@ Helpers for one function against the retail bytes; each prints its usage with `-
   (`floor(log2(uses)) * uses * 10000 / live length`), its register or `STACK` and the insn that sets it.
 - `try_variants.py` builds each body of a `variants.py` (`NAME` and a dict `V` of tag to function
   text) in place of the function, stops at the first `match:` and otherwise restores the file.
+- `sweep_edits.py` proposes single edits per draft (a local's or parameter's width, `++` or `+= 1`,
+  one cast, one swapped statement, declaration or operand, a loop or if/else form, `break` for
+  `return`, a local split or merged), scores each with `MATCH_SRC` in a private copy and writes the
+  ones that match or have fewer differing rows as JSON lines; `--pairs` combines improving edits.
 - `match_context.sh` prints the assembly, the last three rows of `config/attempts.jsonl` and the C
   file that holds the function's `INCLUDE_ASM`.
 

@@ -7,37 +7,6 @@ import pytest
 import gen_body
 
 HEADER = """
-typedef struct Header {
-    u8 flags;
-    u8 mode;
-    u8 step;
-} Header;
-
-typedef union Coord {
-    s32 fixed;
-
-    struct {
-        u16 fraction;
-        s16 integer;
-    } part;
-} Coord;
-
-typedef struct Vec {
-    Coord x;
-    Coord y;
-} Vec;
-
-typedef Vec Pos;
-
-typedef struct Work {
-    Header header;   /* 0x00 */
-    u8     unk_03;   /* 0x03 */
-    u8*    script;   /* 0x04 */
-    Pos    pos;      /* 0x08 */
-    Mystery other;   /* 0x14 */
-    u16    unk_18;   /* 0x18 */
-} Work;
-
 typedef struct State {
     s32 first;
     struct {

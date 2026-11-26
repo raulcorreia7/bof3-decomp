@@ -6,7 +6,7 @@ NON_MATCHING void func_801F4DF0(s32 x, s32 y, s16 radius, u16 angle) {
     FAKE_STACK_PADS(u8, 0x10);
 
     POLY_G3* prim;
-    u8       i;
+    s32      i;
 
     i = 0;
     do {
@@ -16,7 +16,7 @@ NON_MATCHING void func_801F4DF0(s32 x, s32 y, s16 radius, u16 angle) {
         prim->x2 = x + FIXED_MUL(radius, rcos(angle));
         i += 1;
         prim->y2 = y + FIXED_MUL(radius, rsin(angle));
-        setRGB0(prim, D_801F6138[TASK(Actor)->unk_06 * 3], D_801F6139[TASK(Actor)->unk_06 * 3], D_801F613A[TASK(Actor)->unk_06 * 3]);
+        setRGB0(prim, D_801F6138[TASK(Actor)->unk_06][0], D_801F6138[TASK(Actor)->unk_06][1], D_801F6138[TASK(Actor)->unk_06][2]);
         setRGB1(prim, 0, 0, 0);
         setRGB2(prim, 0, 0, 0);
         Area_CellAddPrim(TASK(Actor)->unk_18, TASK(Actor)->unk_1C, 0, sizeof(POLY_G3));

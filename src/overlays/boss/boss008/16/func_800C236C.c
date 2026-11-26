@@ -1,7 +1,7 @@
 #include "boss008_16.h"
 
 /* Draws a 64-triangle ring of radius phase around the current enemy, white at its centre and the enemy kind's D_800C2640 colour at the rim. */
-void func_800C236C(u8 phase) {
+MATCH void func_800C236C(u8 phase) {
     s32           ring[64][2];
     EnemyBattler* enemy;
     POLY_G3*      prim;

@@ -21,11 +21,11 @@ MATCH void func_801DE944(void) {
     FAKE_STACK_PADS(u8, 8);
 
     func_801DF90C();
-    party = g_PartyFieldOrder;
+    party = g_SaveData.party.order[0];
     actor = &g_Game.members[0].chr.character_id;
     mode  = actor[0];
     EMI_PartyLoadArchives(party[0], g_PartyFieldOrder[1], g_PartyFieldOrder[2], 0);
-    if (D_8014504A == 0 || (SYS_TestFlag(party - 0x32, 119) != 0 && g_GameAreaId != AREA_ID_ADULT_CAMP) || g_GameAreaId == AREA_ID_BOAT_AFTER_BLACK_SHIP) {
+    if (g_SaveData.return_point.pending == 0 || (SYS_TestFlag(g_SaveData.scene_event_flags, 119) != 0 && g_GameAreaId != AREA_ID_ADULT_CAMP) || g_GameAreaId == AREA_ID_BOAT_AFTER_BLACK_SHIP) {
         g_PartySize = Party_CountOrder(PARTY_ORDER_FIELD);
         Party_BattlersBuild(PARTY_ORDER_FIELD);
         i = 0;
@@ -35,7 +35,7 @@ MATCH void func_801DE944(void) {
                 TASK_SET(((u8*)g_Game.members + row));
                 Party_MemberLoadSprite(((PartyMember*)((u8*)&g_Game.members[0] + row))->chr.character_id, (u8)i);
                 Script_Select(TASK(Actor)->direction);
-                if (D_8014504A != 0) {
+                if (g_SaveData.return_point.pending != 0) {
                     ACTOR_SET_MODE(0);
                     TASK(Actor)->header.step = 0;
                     TASK(Actor)->unk_03      = 0;
@@ -58,7 +58,7 @@ MATCH void func_801DE944(void) {
         TASK_SET((actor - 0x79));
         g_Game.party_size        = 1;
         g_Game.members[0].slot   = 0;
-        *(Character*)(actor - 5) = *(Character*)(party - 0x5F2);
+        *(Character*)(actor - 5) = g_SaveData.characters[0];
         TASK(Actor)->unk_48      = 0;
         Party_MemberLoadSprite(g_Game.members[0].chr.character_id, 0);
         Script_Select(TASK(Actor)->direction);

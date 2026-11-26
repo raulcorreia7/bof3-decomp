@@ -28,10 +28,6 @@ def file(tmp_path: Path, *lines: str, name: str = "attempts.jsonl") -> Path:
     return path
 
 
-def rows(path: Path) -> list[dict]:
-    return [json.loads(line) for line in path.read_text(encoding="utf-8").splitlines()]
-
-
 def test_the_row_keeps_the_spelling_of_the_last_row(tmp_path) -> None:
     compact = file(tmp_path, row("a@0x00000001", "one", compact=True), name="c.jsonl")
     attempts.add(compact, "a@0x00000001", "two", "", None)

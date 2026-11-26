@@ -1,4 +1,5 @@
 #include "game_00.h"
+#include "menu/save_data.h"
 
 #ifdef NON_MATCHING
 NON_MATCHING bool func_801B6674(void) {
@@ -51,11 +52,11 @@ NON_MATCHING bool func_801B6674(void) {
             u32 y      = g_GameEntryPosY;
             u8  facing = g_GameEntryFacing;
 
-            D_80145040 = TASK(Actor)->pos.x.fixed;
-            D_8014504A += 1;
+            g_SaveData.return_point.x = TASK(Actor)->pos.x.fixed;
+            g_SaveData.return_point.pending += 1;
             g_AreaWalkFlags &= ~AREA_WALK_TRANSITION;
-            D_80145048 = g_GameAreaId;
-            D_80145044 = TASK(Actor)->pos.y.fixed;
+            g_SaveData.return_point.y       = TASK(Actor)->pos.y.fixed;
+            g_SaveData.return_point.area_id = g_GameAreaId;
             Game_RequestAreaChange(area, x, y, facing);
         }
         return 1;

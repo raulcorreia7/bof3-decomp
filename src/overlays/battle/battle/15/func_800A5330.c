@@ -14,8 +14,7 @@
 
 /* The Accession gene picker: moves the cursor over the gene grid, adds or removes up to GENE_PICK_MAX genes and
  * confirms when the party member has the AP. */
-#ifdef NON_MATCHING
-NON_MATCHING void func_800A5330(void) {
+MATCH void func_800A5330(void) {
     u8  row;
     u8  col;
     u8  gene_row;
@@ -55,21 +54,21 @@ NON_MATCHING void func_800A5330(void) {
     }
 
     if (g_PadStates[0].pressed & g_InputMasks[BATTLE_INPUT_CONFIRM]) {
-        if ((u8)g_Battle.cursor.gene.row != GAME_NONE) {
+        if (g_Battle.cursor.gene.row != GAME_NONE) {
             grid = D_800B7070[0];
-            cell = grid + (u8)g_Battle.cursor.gene.row * GENE_GRID_COLUMNS + g_Battle.cursor.gene.column;
+            cell = grid + g_Battle.cursor.gene.row * GENE_GRID_COLUMNS + g_Battle.cursor.gene.column;
             if (*cell == 0) {
                 SND_SEPlay(EMI_SE_ID(SND_BANK_COMMON, 7));
                 return;
             }
             if (g_Battle.gene_count < GENE_PICK_MAX) {
                 *cell                               = 0;
-                g_Battle.genes[g_Battle.gene_count] = (u8)g_Battle.cursor.gene.row * GENE_GRID_COLUMNS + g_Battle.cursor.gene.column;
+                g_Battle.genes[g_Battle.gene_count] = g_Battle.cursor.gene.row * GENE_GRID_COLUMNS + g_Battle.cursor.gene.column;
                 g_Battle.gene_count++;
                 Battle_SetGeneCount();
                 SND_SEPlay(EMI_SE_ID(SND_BANK_COMMON, 3));
                 if (g_Battle.gene_count == GENE_PICK_MAX) {
-                    g_Battle.cursor.gene.row = -1;
+                    g_Battle.cursor.gene.row = GAME_NONE;
                 }
             } else {
                 SND_SEPlay(EMI_SE_ID(SND_BANK_COMMON, 6));
@@ -82,7 +81,7 @@ NON_MATCHING void func_800A5330(void) {
         }
     }
 
-    if (g_Battle.cursor.gene.row == -1) {
+    if ((s8)g_Battle.cursor.gene.row == -1) {
         if (g_Battle.gene_count != 0) {
             text_id = GENE_HELP_CONFIRM_TEXT;
         } else {
@@ -93,7 +92,7 @@ NON_MATCHING void func_800A5330(void) {
         col      = g_Battle.cursor.gene.column;
         if (D_800B7070[gene_row][col] != 0) {
             text_id = gene_row * GENE_GRID_COLUMNS + GENE_HELP_TEXT;
-            text_id += col;
+            text_id += (s16)col;
         } else {
             text_id = BLANK_TEXT;
         }
@@ -101,15 +100,15 @@ NON_MATCHING void func_800A5330(void) {
     g_BattleMessages[((D_801EC328 - 1) & 0xF)].text = UI_MessageGetText(text_id);
 
     buttons = INPUT_REPEATED(g_PadStates[0].pressed, INPUT_DIRECTIONAL);
-    if ((buttons & PADLup) && g_Battle.cursor.gene.row >= 0) {
+    if ((buttons & PADLup) && (s8)g_Battle.cursor.gene.row >= 0) {
         SND_SEPlay(EMI_SE_ID(SND_BANK_COMMON, 1));
         g_Battle.cursor.gene.row--;
     }
-    if ((buttons & PADLdown) && g_Battle.cursor.gene.row < GENE_GRID_ROWS - 1) {
+    if ((buttons & PADLdown) && (s8)g_Battle.cursor.gene.row < GENE_GRID_ROWS - 1) {
         SND_SEPlay(EMI_SE_ID(SND_BANK_COMMON, 1));
         g_Battle.cursor.gene.row++;
     }
-    if (g_Battle.cursor.gene.row != -1) {
+    if ((s8)g_Battle.cursor.gene.row != -1) {
         if ((buttons & PADLright) && g_Battle.cursor.gene.column < GENE_GRID_COLUMNS - 1) {
             SND_SEPlay(EMI_SE_ID(SND_BANK_COMMON, 1));
             g_Battle.cursor.gene.column++;
@@ -120,6 +119,3 @@ NON_MATCHING void func_800A5330(void) {
         }
     }
 }
-#else
-INCLUDE_ASM(func_800A5330);
-#endif

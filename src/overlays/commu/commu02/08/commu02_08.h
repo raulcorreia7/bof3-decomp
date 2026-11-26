@@ -77,7 +77,7 @@ extern char     D_801D0C24[];
 extern char     D_801D0C2C[];
 extern u8       D_801D0C30[12];
 extern u8       D_801D0C3C[];
-extern u8       D_801DAAAC[];
+extern u8       D_801DAAAC[][8][12]; /* name entry grid: pages of 8 rows by 12 cells */
 extern u16      D_801DAC34[2][8];
 /* The three 4-byte column labels drawn by func_801D2AC4. */
 extern u8       D_801DAC54[3][4];
@@ -89,10 +89,11 @@ extern u8       D_801DACB4[];
 extern u8       D_801DAD00[48][2];
 extern u8       D_801DAD60[];
 extern u8       D_801DAD64[];
-extern u8       D_801DAD90[0x48];
+/* The eight board layouts: up to nine digit rows each, a 9 ends the layout. */
+extern u8       D_801DAD90[8][9];
 /* The numbers board's four digits, a message-run base byte then the limit the
  * round picks under. */
-extern u8       D_801DADD8[8];
+extern u8       D_801DADD8[4][2];
 /* The four board rounds: the weight the random pick compares, then the two digit
  * rows the round shows. 0xFF in the second row means the round shows one digit. */
 extern u8       D_801DADE0[4][3];
@@ -160,7 +161,7 @@ void func_801D830C(s32 arg0, s32 arg1, s32 arg2, s32 arg3);
 void Fairy_GenerateName(void);
 void func_801D90D8(s32 x, s32 y, s32 character, s32 frame_mode);
 void func_801D9348(u16 x, u16 y, s32 color, s32 frame_mode);
-void func_801D94D0(s32 page, s32 left, s32 top, s32 cursor_col_arg, s32 cursor_row_arg);
+void func_801D94D0(s32 page, s32 left, s32 top, s32 cursor_col, s32 cursor_row);
 void func_801D97C8(s32 unused, s32 x, s32 y);
 void func_801D9B80(s32 x, s32 y, s32 width, s32 height);
 void func_801DA7A4(void);

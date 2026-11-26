@@ -13,7 +13,6 @@ NON_MATCHING void func_801F2D20(void) {
     u16       x2;
     s32       y;
     s32       shade;
-    s32       semi_trans;
 
     work    = g_Task;
     adopted = &g_PartyActors[work->unk_18];
@@ -41,17 +40,16 @@ NON_MATCHING void func_801F2D20(void) {
     work->unk_60 = RotTransPers(&projection, (long*)&poly->x3, &depth, &flag);
 
     x2       = poly->x3;
-    x        = poly->x3;
-    y        = poly->y3;
     poly->y0 = 0;
+    x        = poly->x3;
     poly->y1 = 0;
     poly->x1 = x + 8;
     poly->x3 = x + 8;
+    y        = poly->y3;
     poly->x0 = x2 - 8;
     poly->x2 = x2 - 8;
     if (y >= 240) {
-        poly->y3 = 240;
-        y        = 240;
+        poly->y3 = y = 240;
     }
     poly->y2 = y;
     g_Task   = work;
@@ -63,19 +61,15 @@ NON_MATCHING void func_801F2D20(void) {
     SetShadeTex(poly, 0);
 
     if (TASK(Actor)->unk_60 >= 0x221) {
-        shade      = 128;
-        semi_trans = 0;
+        setRGB0(poly, 128, 128, 128);
+        SetSemiTrans(poly, 0);
+        Area_CellAddPrim(TASK(Actor)->pos.x.fixed, TASK(Actor)->pos.y.fixed, 0, sizeof(POLY_FT4));
     } else if (TASK(Actor)->unk_60 >= 0x1E1) {
-        shade      = ((TASK(Actor)->unk_60 & 0xFF) - 0x1E0) << 1;
-        semi_trans = 1;
-    } else {
-        goto done;
+        shade = ((TASK(Actor)->unk_60 & 0xFF) - 0x1E0) << 1;
+        setRGB0(poly, shade, shade, shade);
+        SetSemiTrans(poly, 1);
+        Area_CellAddPrim(TASK(Actor)->pos.x.fixed, TASK(Actor)->pos.y.fixed, 0, sizeof(POLY_FT4));
     }
-    setRGB0(poly, shade, shade, shade);
-    SetSemiTrans(poly, semi_trans);
-    Area_CellAddPrim(TASK(Actor)->pos.x.fixed, TASK(Actor)->pos.y.fixed, 0, sizeof(POLY_FT4));
-
-done:
     func_801F3004(0, 0, 256, 256);
 }
 #else

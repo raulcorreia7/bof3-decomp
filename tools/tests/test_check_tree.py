@@ -115,15 +115,12 @@ def test_source_rules_on_added_lines(
     name: str,
     base: dict[str, str],
     change: dict[str, str],
-    message: str | None,
+    message: str,
 ) -> None:
     result = run_tree(tmp_path, base, change)
     output = result.stdout + result.stderr
-    if message is None:
-        assert result.returncode == 0, output
-    else:
-        assert result.returncode == 1, output
-        assert message in output, output
+    assert result.returncode == 1, output
+    assert message in output, output
 
 
 RENAMED_BODY = (

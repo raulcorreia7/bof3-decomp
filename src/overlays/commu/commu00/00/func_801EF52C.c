@@ -3,15 +3,13 @@
 #ifdef NON_MATCHING
 NON_MATCHING void func_801EF52C(void) {
     s32 more_group_rows;
-    s32 queue_scan_offset;
     s32 active_job_count;
     /* FAKE: the group byte offset stays in a3 so the table bases stay direct; the plain form is 139 rows off. */
     FAKE_REG(s32, group_byte_offset, "a3");
     s32  group_number;
-    s32  fairy_offset;
+    s32  job;
     s32  queue_record_index;
     s32  record_group_number;
-    s32  active_job_offset;
     u32* battle_count_ptr;
     u32* timer_ptr;
     s16  weighted_progress;
@@ -20,7 +18,7 @@ NON_MATCHING void func_801EF52C(void) {
     u32  updated_progress;
     u32  queue_offset;
     u32  queue_entry_offset;
-    s32  progress_cap;
+    s16  progress_cap;
 
     group_number      = 1;
     battle_count_ptr  = &g_BattleCount;
@@ -35,10 +33,10 @@ NON_MATCHING void func_801EF52C(void) {
                 *timer_ptr                    = *battle_count_ptr;
             } else if (current_progress < 11) {
                 record_group_number = group_number;
-                for (fairy_offset = 0, active_job_offset = 0; active_job_offset < FAIRY_JOB_COUNT * FAIRY_JOB_STRIDE; active_job_offset += FAIRY_JOB_STRIDE, fairy_offset += FAIRY_STRIDE) {
-                    if (((u8*)g_FairyJobs)[active_job_offset] != 0 && ((u8*)g_FairyJobs)[active_job_offset + 1] == record_group_number) {
+                for (job = 0; job < FAIRY_JOB_COUNT; job++) {
+                    if (g_FairyJobs[job].active != 0 && g_FairyJobs[job].type == record_group_number) {
                         active_job_count += 1;
-                        weighted_progress += D_801F2707[fairy_offset];
+                        weighted_progress += D_801F24FC_Data.fairies[job].stats[2];
                     }
                 }
                 if ((u8)active_job_count != 0) {
@@ -56,16 +54,14 @@ NON_MATCHING void func_801EF52C(void) {
                             D_801457AB[group_byte_offset] = progress_cap;
                         }
                         *(u32*)((u8*)&D_801457AC + group_byte_offset) = *battle_count_ptr;
-                        queue_scan_offset                             = 0;
                         queue_record_index                            = 0;
                         queue_offset                                  = g_FairyVillageUpdateCount * 2;
                         D_80145E60[queue_offset]                      = 0;
                         while (queue_record_index < FAIRY_VILLAGE_COUNT) {
-                            if (((u8*)g_FairyJobs)[queue_scan_offset] != 0 && ((u8*)g_FairyJobs)[queue_scan_offset + 1] == group_number) {
+                            if (g_FairyJobs[queue_record_index].active != 0 && g_FairyJobs[queue_record_index].type == group_number) {
                                 break;
                             }
                             queue_record_index += 1;
-                            queue_scan_offset += FAIRY_JOB_STRIDE;
                         }
                         queue_entry_offset                 = g_FairyVillageUpdateCount * 2;
                         D_80145E60[queue_entry_offset + 1] = queue_record_index;

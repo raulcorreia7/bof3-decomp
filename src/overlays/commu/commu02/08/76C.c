@@ -11,28 +11,27 @@ void func_801D8058(s32 left, s32 top);
 void func_801D2908(s16 x, s16 y, u8 mode);
 void Menu_DrawPanelIcon(u16 x, u16 y, s32 u, s32 v, u16 clut, u8 color);
 
-#ifdef NON_MATCHING
-NON_MATCHING void func_801D136C(void) {
-    s32 x_step;
-    s32 y_step;
+/* Slides the zenny and value windows one step; the count reaching 0 ends the step. */
+MATCH void func_801D136C(void) {
+    s32 zenny_x_step;
+    s32 zenny_y_step;
+    s32 value_x_step;
+    s32 value_y_step;
     s8  value;
 
-    value      = D_801DB0C4 - 1;
-    D_801DB0C4 = value;
-    x_step     = -0x12;
-    y_step     = -0xE;
-    func_801D3184(0x26 - ((value & BYTE_MASK) * x_step), 0x10 - ((value & BYTE_MASK) * y_step));
-    x_step = 0xE;
-    y_step = -0x19;
-    func_801D32A0(0xA8 - ((u8)D_801DB0C4 * x_step), 0x10 - ((u8)D_801DB0C4 * y_step), 0);
+    value        = D_801DB0C4 - 1;
+    D_801DB0C4   = value;
+    zenny_x_step = -0x12;
+    zenny_y_step = -0xE;
+    func_801D3184(0x26 - ((value & BYTE_MASK) * zenny_x_step), 0x10 - ((value & BYTE_MASK) * zenny_y_step));
+    value_x_step = 0xE;
+    value_y_step = -0x19;
+    func_801D32A0(0xA8 - ((u8)D_801DB0C4 * value_x_step), 0x10 - ((u8)D_801DB0C4 * value_y_step), 0);
     if ((u8)D_801DB0C4 == 0) {
         D_801F294E = 0;
         D_801F294D += 1;
     }
 }
-#else
-INCLUDE_ASM(func_801D136C);
-#endif
 
 MATCH void func_801D143C(void) {
     s8 value;
@@ -545,9 +544,10 @@ MATCH void func_801D2908(s16 x, s16 y, u8 mode) {
     }
 }
 
-#ifdef NON_MATCHING
-NON_MATCHING void func_801D2AC4(s16 x, s16 y, u8 column, u8 style) {
+/* Draws one fairy casino column panel: its window, frame piece and label, by highlight style. */
+MATCH void func_801D2AC4(s16 x, s16 y, u8 column, u8 style) {
     s32 left;
+    s16 text_x;
 
     UI_WindowDraw(x, y, 0x2A, 0x14, 0, g_WindowStyle);
     GFX_ADD_DRAW_MODE((GetGraphType() == 1 || GetGraphType() == 2) ? 0x2D : 0x1D);
@@ -555,23 +555,23 @@ NON_MATCHING void func_801D2AC4(s16 x, s16 y, u8 column, u8 style) {
         case 0:
             left = x;
             FairyCasino_DrawFramePiece(left, y, 0xA);
-            UI_TextDraw(column ? (s16)(left + 10) : (s16)(left + 6), y + 3, 0, 4, D_801DAC54[column]);
+            text_x = left + 6;
+            UI_TextDraw(column ? text_x + 4 : text_x, y + 3, 0, 4, D_801DAC54[column]);
             break;
         case 1:
             left = x;
             FairyCasino_DrawFramePiece(left, y, 9);
-            UI_TextDraw(column ? (s16)(left + 10) : (s16)(left + 6), y + 3, 0, 3, D_801DAC54[column]);
+            text_x = left + 6;
+            UI_TextDraw(column ? text_x + 4 : text_x, y + 3, 0, 3, D_801DAC54[column]);
             break;
         case 2:
             left = x;
             FairyCasino_DrawFramePiece(left, y, 0xA);
-            UI_TextDraw(column ? (s16)(left + 10) : (s16)(left + 6), y + 3, 7, 3, D_801DAC54[column]);
+            text_x = left + 6;
+            UI_TextDraw(column ? text_x + 4 : text_x, y + 3, 7, 3, D_801DAC54[column]);
             break;
     }
 }
-#else
-INCLUDE_ASM(func_801D2AC4);
-#endif
 
 MATCH void func_801D2CF8(s32 x, s32 y, s32 icon) {
     SPRT* sprite;
@@ -1145,19 +1145,13 @@ MATCH void func_801D4910(s32 x, s32 y) {
 }
 #ifdef NON_MATCHING
 NON_MATCHING void func_801D4AE0(s16 x, s16 y, u8 flag) {
-    s32 left_x;
-    s32 middle_x;
-    s32 right_x;
     s32 i;
-    s32 dy;
-    s32 gy;
-    s16 ry;
+    s16 dy;
+    s16 gy;
+    s32 ry;
     u8  k;
     s8  sel;
 
-    left_x   = x + 6;
-    middle_x = x + 0x2F;
-    right_x  = x + 0x43;
     UI_WindowDraw(x, y, 0x52, 0x7A, 0, g_WindowStyle);
     func_801D4910(x, y);
     dy = 7;
@@ -1168,36 +1162,36 @@ NON_MATCHING void func_801D4AE0(s16 x, s16 y, u8 flag) {
         if (i == sel) {
             if (flag == 0) {
                 sprintf(g_UiTextFormatBuffer, D_801DAD60);
-                ry = y + dy;
-                UI_TextDrawAscii(left_x, ry, 0, g_UiTextFormatBuffer);
+                ry = (s16)(y + dy);
+                UI_TextDrawAscii(x + 6, ry, 0, g_UiTextFormatBuffer);
                 sprintf(g_UiTextFormatBuffer, D_801DAD64);
-                UI_TextDrawAscii(middle_x, ry, UI_TEXT_HIGHLIGHT, g_UiTextFormatBuffer);
+                UI_TextDrawAscii(x + 0x2F, ry, UI_TEXT_HIGHLIGHT, g_UiTextFormatBuffer);
             } else {
                 sprintf(g_UiTextFormatBuffer, D_801D0C24, D_801DB080[k], D_801DB080[k + 1], D_801DB080[k + 2]);
-                ry = y + dy;
-                UI_TextDrawAscii(left_x, ry, 0, g_UiTextFormatBuffer);
+                ry = (s16)(y + dy);
+                UI_TextDrawAscii(x + 6, ry, 0, g_UiTextFormatBuffer);
                 sprintf(g_UiTextFormatBuffer, D_801D0C20, D_801DB080[k + 3]);
-                UI_TextDrawAscii(middle_x, ry, UI_TEXT_HIGHLIGHT, g_UiTextFormatBuffer);
+                UI_TextDrawAscii(x + 0x2F, ry, UI_TEXT_HIGHLIGHT, g_UiTextFormatBuffer);
                 sprintf(g_UiTextFormatBuffer, D_801D0C20, D_801DB080[k + 4]);
             }
-            UI_TextDrawAscii(right_x, ry, 1, g_UiTextFormatBuffer);
+            UI_TextDrawAscii(x + 0x43, ry, 1, g_UiTextFormatBuffer);
             UI_TextDrawGlyphString(x + 0x39, y + gy, 0, D_801D0C2C);
         } else if (i < sel) {
             sprintf(g_UiTextFormatBuffer, D_801D0C24, D_801DB080[k], D_801DB080[k + 1], D_801DB080[k + 2]);
-            ry = y + dy;
-            UI_TextDrawAscii(left_x, ry, 0, g_UiTextFormatBuffer);
+            ry = (s16)(y + dy);
+            UI_TextDrawAscii(x + 6, ry, 0, g_UiTextFormatBuffer);
             sprintf(g_UiTextFormatBuffer, D_801D0C20, D_801DB080[k + 3]);
-            UI_TextDrawAscii(middle_x, ry, UI_TEXT_HIGHLIGHT, g_UiTextFormatBuffer);
+            UI_TextDrawAscii(x + 0x2F, ry, UI_TEXT_HIGHLIGHT, g_UiTextFormatBuffer);
             sprintf(g_UiTextFormatBuffer, D_801D0C20, D_801DB080[k + 4]);
-            UI_TextDrawAscii(right_x, ry, 1, g_UiTextFormatBuffer);
+            UI_TextDrawAscii(x + 0x43, ry, 1, g_UiTextFormatBuffer);
             UI_TextDrawGlyphString(x + 0x39, y + gy, 0, D_801D0C2C);
         } else {
             sprintf(g_UiTextFormatBuffer, D_801DAD60);
-            ry = y + dy;
-            UI_TextDrawAscii(left_x, ry, UI_TEXT_DIM, g_UiTextFormatBuffer);
+            ry = (s16)(y + dy);
+            UI_TextDrawAscii(x + 6, ry, UI_TEXT_DIM, g_UiTextFormatBuffer);
             sprintf(g_UiTextFormatBuffer, D_801DAD64);
-            UI_TextDrawAscii(middle_x, ry, UI_TEXT_DIM, g_UiTextFormatBuffer);
-            UI_TextDrawAscii(right_x, ry, UI_TEXT_DIM, g_UiTextFormatBuffer);
+            UI_TextDrawAscii(x + 0x2F, ry, UI_TEXT_DIM, g_UiTextFormatBuffer);
+            UI_TextDrawAscii(x + 0x43, ry, UI_TEXT_DIM, g_UiTextFormatBuffer);
             UI_TextDrawGlyphString(x + 0x39, y + gy, UI_TEXT_DIM, D_801D0C2C);
         }
         gy += 14;
@@ -1293,101 +1287,83 @@ MATCH void func_801D5194(void) {
  * round shows. */
 #ifdef NON_MATCHING
 NON_MATCHING void func_801D51D0(void) {
-    u8  ch;
-    u8  digit;
     u8* dst;
     u8* src;
     u8* p;
     s32 i;
     s32 row;
     s32 value;
+    u8  digit;
 
     D_801DB0B4    = rand() & 0x7;
-    row           = 0;
-    dst           = g_TextVariables[0];
     D_801DB0A8[0] = 0;
     D_801DB0A8[1] = 0;
     D_801DB0A8[2] = 0;
     D_801DB0A8[3] = 0;
-    for (;;) {
-        digit = D_801DAD90[D_801DB0B4 * 9 + row];
+    dst           = g_TextVariables[0];
+    for (row = 0; row < 9; row++, dst += TEXT_VARIABLE_LENGTH) {
+        digit = D_801DAD90[(s8)D_801DB0B4][row];
         if (digit == 9) {
             break;
         }
-        value = func_801D5AD0(D_801DADD8[digit * 2 + 1]);
+        value = func_801D5AD0(D_801DADD8[digit][1]);
         for (;;) {
-            i = 0;
-            while (i < D_801DB0A8[digit] && D_801DB080[digit * 10 + i] == (u8)value) {
-                i++;
+            for (i = 0; i < D_801DB0A8[digit]; i++) {
+                if (D_801DB080[digit * 10 + i] != (u8)value) {
+                    break;
+                }
             }
-            if (i < D_801DB0A8[digit] || D_801DB0A8[digit] == 0) {
+            if (i < D_801DB0A8[digit]) {
+                break;
+            }
+            if (D_801DB0A8[digit] == 0) {
                 break;
             }
             value++;
-            if ((u8)value >= D_801DADD8[digit * 2 + 1]) {
+            if ((u8)value >= D_801DADD8[digit][1]) {
                 value = 0;
             }
         }
         D_801DB080[digit * 10 + D_801DB0A8[digit]] = value;
-        D_801DB0A8[digit] += 1;
+        D_801DB0A8[digit]++;
 
-        src = MESSAGE_TABLE_TEXT(AREA_MESSAGE_TABLE, D_801DADD8[digit * 2] + (u8)value);
+        src = MESSAGE_TABLE_TEXT(AREA_MESSAGE_TABLE, D_801DADD8[digit][0] + (u8)value + 0x100);
         p   = dst;
-        i   = 0;
-        for (;;) {
-            ch = *src;
-            *p = ch;
-            if (ch == STRING_END && (u8)(src[-1] - STRING_SKIP) >= 2) {
+        for (i = 0; i < TEXT_VARIABLE_LENGTH; i++) {
+            *p = *src;
+            if (*src == STRING_END && src[-1] != STRING_SKIP && src[-1] != STRING_SKIP_ALT) {
                 break;
             }
             src++;
-            i++;
-            if (i >= TEXT_VARIABLE_LENGTH) {
-                break;
-            }
             p++;
         }
-        row++;
-        if (row >= 9) {
-            break;
-        }
-        dst += TEXT_VARIABLE_LENGTH;
     }
 
     value = rand() & 0x7;
-    digit = 0;
-    while ((u32)value < D_801DADE0[digit][0]) {
-        digit++;
-        if (digit >= 3) {
+    for (digit = 0; digit < 3; digit++) {
+        if ((u32)value >= D_801DADE0[digit][0]) {
             break;
         }
     }
-    if (D_801DB0B4 == 6) {
-        if (digit == 2) {
-            digit = 3;
-        }
-    } else if (D_801DB0B4 == 7) {
-        if (digit == 3) {
-            digit = 2;
-        }
+    if ((s8)D_801DB0B4 == 6 && digit == 2) {
+        digit = 3;
+    } else if ((s8)D_801DB0B4 == 7 && digit == 3) {
+        digit = 2;
     }
 
     if (rand() & 1) {
         i = 0;
         if (D_801DB0A8[D_801DADE0[digit][1]] - 1 > 0) {
-            for (;;) {
+            do {
                 if (rand() & 1) {
                     break;
                 }
                 i++;
-                if (i >= D_801DB0A8[D_801DADE0[digit][1]] - 1) {
-                    break;
-                }
-            }
+            } while (i < D_801DB0A8[D_801DADE0[digit][1]] - 1);
         }
-        D_801DB0AD = D_801DADD8[D_801DADE0[digit][1] * 2] + D_801DB080[D_801DADE0[digit][1] * 10 + i];
+        D_801DB0AD = D_801DADD8[D_801DADE0[digit][1]][0] + D_801DB080[D_801DADE0[digit][1] * 10 + i];
     } else {
-        D_801DB0AD = D_801DADD8[D_801DADE0[digit][1] * 2] + func_801D5AD0(D_801DADD8[D_801DADE0[digit][1] * 2 + 1]);
+        D_801DB0AD = D_801DADD8[D_801DADE0[digit][1]][0] + func_801D5AD0(D_801DADD8[D_801DADE0[digit][1]][1]);
     }
 
     if (D_801DADE0[digit][2] == 0xFF) {
@@ -1395,19 +1371,16 @@ NON_MATCHING void func_801D51D0(void) {
     } else if (rand() & 1) {
         i = 0;
         if (D_801DB0A8[D_801DADE0[digit][2]] - 1 > 0) {
-            for (;;) {
+            do {
                 if (rand() & 1) {
                     break;
                 }
                 i++;
-                if (i >= D_801DB0A8[D_801DADE0[digit][2]] - 1) {
-                    break;
-                }
-            }
+            } while (i < D_801DB0A8[D_801DADE0[digit][2]] - 1);
         }
-        D_801DB0AE = D_801DADD8[D_801DADE0[digit][2] * 2] + D_801DB080[D_801DADE0[digit][2] * 10 + i];
+        D_801DB0AE = D_801DADD8[D_801DADE0[digit][2]][0] + D_801DB080[D_801DADE0[digit][2] * 10 + i];
     } else {
-        D_801DB0AE = D_801DADD8[D_801DADE0[digit][2] * 2] + func_801D5AD0(D_801DADD8[D_801DADE0[digit][2] * 2 + 1]);
+        D_801DB0AE = D_801DADD8[D_801DADE0[digit][2]][0] + func_801D5AD0(D_801DADD8[D_801DADE0[digit][2]][1]);
     }
 
     D_801DB0C4 = 0;
@@ -2233,8 +2206,8 @@ NON_MATCHING void func_801D8058(s32 left, s32 top) {
     x      = left;
     y      = top;
     base_x = x;
-    i      = 0;
     UI_WindowDraw(base_x, y, 172, 26, UI_WINDOW_OPEN_TOP_LEFT, g_WindowStyle);
+    i      = 0;
     grid_x = x << 16;
     func_801D7EF0(grid_x >> 16, y);
     count = Fairy_CountFairies() & BYTE_MASK;
@@ -2273,14 +2246,12 @@ MATCH void func_801D81A4(s16 x, s16 y) {
 #ifdef NON_MATCHING
 void func_801D851C(s16 x, s16 y, s32 width, u8 index);
 
-NON_MATCHING void func_801D830C(s32 arg_x, s32 arg_y, s32 kind, s32 mode) {
+NON_MATCHING void func_801D830C(s32 x, s32 y, s32 kind, s32 mode) {
     TILE* tile;
     s32   tile_x;
     s32   tile_y;
     s32   row;
     u8*   style;
-    s16   x = arg_x;
-    s16   y = arg_y;
 
     UI_WindowDraw(x, y, 0x48, 0x26, 0x80, *(style = &g_WindowStyle));
     func_801D81A4(x, y);
@@ -2314,8 +2285,15 @@ NON_MATCHING void func_801D851C(s16 x, s16 y, s32 width, u8 index) {
     memcpy(colors, D_801D0C30, sizeof(colors));
     prim = (POLY_G4*)g_GfxPrimCursor;
     SetPolyG4(prim);
-    setXYWH(prim, x, y, width, 2);
-    color = colors[index];
+    prim->x0 = x;
+    prim->x1 = x + width;
+    prim->y1 = y;
+    prim->y0 = y;
+    prim->y2 = y + 2;
+    prim->y3 = y + 2;
+    prim->x2 = prim->x0;
+    prim->x3 = prim->x1;
+    color    = colors[index];
     setRGB2(prim, color[0] << 7, color[1] << 7, color[2] << 7);
     setRGB0(prim, prim->r2 >> 2, prim->g2 >> 2, prim->b2 >> 2);
     setRGB3(prim, prim->r2, prim->g2, prim->b2);
@@ -2323,7 +2301,14 @@ NON_MATCHING void func_801D851C(s16 x, s16 y, s32 width, u8 index) {
     GFX_AddPrim(GFX_LAYER_UI, sizeof(POLY_G4));
     prim = (POLY_G4*)g_GfxPrimCursor;
     SetPolyG4(prim);
-    setXYWH(prim, x, y + 2, width, 2);
+    prim->x0 = x;
+    prim->x1 = x + width;
+    prim->y0 = y + 2;
+    prim->y1 = y + 2;
+    prim->y2 = y + 4;
+    prim->y3 = y + 4;
+    prim->x2 = prim->x0;
+    prim->x3 = prim->x1;
     setRGB0(prim, color[0] << 7, color[1] << 7, color[2] << 7);
     setRGB2(prim, prim->r0 >> 2, prim->g0 >> 2, prim->b0 >> 2);
     setRGB1(prim, prim->r0, prim->g0, prim->b0);
@@ -2517,25 +2502,27 @@ MATCH void func_801D9348(u16 x, u16 y, s32 color, s32 frame_mode) {
     GFX_AddPrim(GFX_LAYER_UI, sizeof(LINE_F4));
 }
 
-#ifdef NON_MATCHING
-NON_MATCHING void func_801D94D0(s32 page, s32 left, s32 top, s32 cursor_col_arg, s32 cursor_row_arg) {
+/* Draws one page of the name-entry letter grid in a window at (left, top) and its cursor. */
+// clang-format off
+MATCH void func_801D94D0(page, left, top, cursor_col, cursor_row)
+u8 page;
+s16 left;
+u16 top;
+u8 cursor_col;
+u8 cursor_row;
+// clang-format on
+{
     u8  tags[20];
     u8* cell;
     u16 x;
     u16 y;
     u16 row;
     u16 col;
-    u16 base_y;
-    u8  cursor_col;
-    u8  cursor_row;
 
-    base_y     = top;
-    cursor_col = cursor_col_arg;
-    cursor_row = cursor_row_arg;
     memcpy(tags, D_801D0C3C, 20);
-    UI_WindowDraw(left, base_y, 0x110, 123, 0, g_WindowStyle);
-    cell = D_801DAAAC + ((u8)page * 96);
-    y    = base_y + 6;
+    UI_WindowDraw(left, top, 0x110, 123, 0, g_WindowStyle);
+    cell = D_801DAAAC[page][0];
+    y    = top + 6;
     for (row = 0; row < 8; row++) {
         x = left + 4;
         for (col = 0; col < 12; col++) {
@@ -2567,7 +2554,7 @@ NON_MATCHING void func_801D94D0(s32 page, s32 left, s32 top, s32 cursor_col_arg,
         y += 14;
     }
     x = left + 6 + cursor_col * 20;
-    y = base_y + 8;
+    y = top + 8;
     y += cursor_row * 14;
     if (cursor_col >= 5) {
         x += 8;
@@ -2580,9 +2567,6 @@ NON_MATCHING void func_801D94D0(s32 page, s32 left, s32 top, s32 cursor_col_arg,
     }
     UI_CursorDraw(x, y, 0);
 }
-#else
-INCLUDE_ASM(func_801D94D0);
-#endif
 
 /* Draws the stat legend panel at (x, y): five labels, their dot leaders, the four stat icons and the two arrows. */
 MATCH void func_801D97C8(s32 unused, s32 x, s32 y) {
@@ -2635,9 +2619,12 @@ NON_MATCHING void func_801D9B80(s32 x, s32 y, s32 width, s32 height) {
     SPRT* sprite;
     s32   columns;
     s32   rows;
-    s32   edge;
+    u8    edge;
 
-    setRECT(&window, 112, 152, 8, 8);
+    /* not setRECT: retail stores h before w */
+    window.x = 112;
+    window.y = 152;
+    window.w = window.h = 8;
     SetDrawMode((DR_MODE*)g_GfxPrimCursor, 0, 0, getTPage(TPAGE_DEPTH_4BIT, TPAGE_ABR_HALF, 832, 256), &window);
     GFX_AddPrim(GFX_LAYER_UI, sizeof(DR_MODE));
     sprite = (SPRT*)g_GfxPrimCursor;
@@ -2650,7 +2637,9 @@ NON_MATCHING void func_801D9B80(s32 x, s32 y, s32 width, s32 height) {
     setRGB0(sprite, 0x80, 0x80, 0x80);
     GFX_AddPrim(GFX_LAYER_UI, sizeof(SPRT));
 
-    setRECT(&window, 152, 160, edge, edge);
+    window.x = 152;
+    window.y = 160;
+    window.w = window.h = edge;
     SetDrawMode((DR_MODE*)g_GfxPrimCursor, 0, 0, getTPage(TPAGE_DEPTH_4BIT, TPAGE_ABR_HALF, 832, 256), &window);
     GFX_AddPrim(GFX_LAYER_UI, sizeof(DR_MODE));
     sprite = (SPRT*)g_GfxPrimCursor;
@@ -2663,7 +2652,9 @@ NON_MATCHING void func_801D9B80(s32 x, s32 y, s32 width, s32 height) {
     setRGB0(sprite, 0x80, 0x80, 0x80);
     GFX_AddPrim(GFX_LAYER_UI, sizeof(SPRT));
 
-    setRECT(&window, 176, 152, edge, edge);
+    window.x = 176;
+    window.y = 152;
+    window.w = window.h = edge;
     SetDrawMode((DR_MODE*)g_GfxPrimCursor, 0, 0, getTPage(TPAGE_DEPTH_4BIT, TPAGE_ABR_HALF, 832, 256), &window);
     GFX_AddPrim(GFX_LAYER_UI, sizeof(DR_MODE));
     sprite = (SPRT*)g_GfxPrimCursor;
@@ -2676,7 +2667,9 @@ NON_MATCHING void func_801D9B80(s32 x, s32 y, s32 width, s32 height) {
     setRGB0(sprite, 0x80, 0x80, 0x80);
     GFX_AddPrim(GFX_LAYER_UI, sizeof(SPRT));
 
-    setRECT(&window, 176, 160, edge, edge);
+    window.x = 176;
+    window.y = 160;
+    window.w = window.h = edge;
     SetDrawMode((DR_MODE*)g_GfxPrimCursor, 0, 0, getTPage(TPAGE_DEPTH_4BIT, TPAGE_ABR_HALF, 832, 256), &window);
     GFX_AddPrim(GFX_LAYER_UI, sizeof(DR_MODE));
     sprite = (SPRT*)g_GfxPrimCursor;
@@ -2689,7 +2682,9 @@ NON_MATCHING void func_801D9B80(s32 x, s32 y, s32 width, s32 height) {
     setRGB0(sprite, 0x80, 0x80, 0x80);
     GFX_AddPrim(GFX_LAYER_UI, sizeof(SPRT));
 
-    setRECT(&window, 112, 160, edge, edge);
+    window.x = 112;
+    window.y = 160;
+    window.w = window.h = edge;
     SetDrawMode((DR_MODE*)g_GfxPrimCursor, 0, 0, getTPage(TPAGE_DEPTH_4BIT, TPAGE_ABR_HALF, 832, 256), &window);
     GFX_AddPrim(GFX_LAYER_UI, sizeof(DR_MODE));
     sprite = (SPRT*)g_GfxPrimCursor;
@@ -2701,7 +2696,8 @@ NON_MATCHING void func_801D9B80(s32 x, s32 y, s32 width, s32 height) {
     setRGB0(sprite, 0x80, 0x80, 0x80);
     GFX_AddPrim(GFX_LAYER_UI, sizeof(SPRT));
 
-    setRECT(&window, 0, 0, 256, 256);
+    window.x = window.y = 0;
+    window.w = window.h = 256;
     SetDrawMode((DR_MODE*)g_GfxPrimCursor, 0, 0, getTPage(TPAGE_DEPTH_4BIT, TPAGE_ABR_HALF, 832, 256), &window);
     GFX_AddPrim(GFX_LAYER_UI, sizeof(DR_MODE));
 
@@ -2716,70 +2712,60 @@ NON_MATCHING void func_801D9B80(s32 x, s32 y, s32 width, s32 height) {
 INCLUDE_ASM(func_801D9B80);
 #endif
 
-#ifdef NON_MATCHING
-NON_MATCHING s8 func_801DA114(void) {
+MATCH s8 func_801DA114(void) {
     s32 pressed;
-    u8* page;
-    u8* row;
     u8* cell;
-    s32 col;
-    s32 i;
-    s32 count;
+    s8  i;
+    u16 count;
     u16 pad;
 
     pressed = INPUT_GetRepeatedButtons(g_PadStates[0].pressed & (INPUT_DIRECTIONAL | PADL1 | PADL2 | PADR1 | PADR2));
-    cell    = D_801DAAAC + D_801DAAA8 * 96 + (s8)D_801DB0D8 * 12 + (s8)D_801DB0D4;
+    cell    = &D_801DAAAC[D_801DAAA8][(s8)D_801DB0D8][(s8)D_801DB0D4];
     if (pressed & PADLup) {
         SND_SEPlay(0x100);
-        page = D_801DAAAC + D_801DAAA8 * 96;
-        col  = (s8)D_801DB0D4;
         do {
             D_801DB0D8 -= 1;
             if ((s8)D_801DB0D8 < 0) {
                 D_801DB0D8 = 7;
             }
-        } while ((page + (s8)D_801DB0D8 * 12)[col] == 0);
+        } while (D_801DAAAC[D_801DAAA8][(s8)D_801DB0D8][(s8)D_801DB0D4] == 0);
     } else if (pressed & PADLdown) {
         SND_SEPlay(0x100);
-        page = D_801DAAAC + D_801DAAA8 * 96;
-        col  = (s8)D_801DB0D4;
         do {
             D_801DB0D8 += 1;
             if ((s8)D_801DB0D8 >= 8) {
                 D_801DB0D8 = 0;
             }
-        } while ((page + (s8)D_801DB0D8 * 12)[col] == 0);
+        } while (D_801DAAAC[D_801DAAA8][(s8)D_801DB0D8][(s8)D_801DB0D4] == 0);
     } else if (pressed & PADLleft) {
         SND_SEPlay(0x100);
         if (*cell != 0 && *cell < 6) {
             D_801DB0D4 = 9;
         } else {
-            row = D_801DAAAC + D_801DAAA8 * 96 + (s8)D_801DB0D8 * 12;
             do {
                 D_801DB0D4 -= 1;
                 if ((s8)D_801DB0D4 < 0) {
                     D_801DB0D4 = 11;
                 }
-            } while (row[(s8)D_801DB0D4] == 0);
+            } while (D_801DAAAC[D_801DAAA8][(s8)D_801DB0D8][(s8)D_801DB0D4] == 0);
         }
     } else if (pressed & PADLright) {
         SND_SEPlay(0x100);
         if (*cell != 0 && *cell < 6) {
             D_801DB0D4 = 0;
         } else {
-            row = D_801DAAAC + D_801DAAA8 * 96 + (s8)D_801DB0D8 * 12;
             do {
                 D_801DB0D4 += 1;
                 if ((s8)D_801DB0D4 >= 12) {
                     D_801DB0D4 = 0;
                 }
-            } while (row[(s8)D_801DB0D4] == 0);
+            } while (D_801DAAAC[D_801DAAA8][(s8)D_801DB0D8][(s8)D_801DB0D4] == 0);
         }
     }
 
     pad = g_PadStates[0].pressed;
     if (pad & PADRdown) {
-        cell = D_801DAAAC + D_801DAAA8 * 96 + (s8)D_801DB0D8 * 12 + (s8)D_801DB0D4;
+        cell = &D_801DAAAC[D_801DAAA8][(s8)D_801DB0D8][(s8)D_801DB0D4];
         switch (*cell) {
             case 1:
                 if (D_801DB0D0 < 4) {
@@ -2814,19 +2800,28 @@ NON_MATCHING s8 func_801DA114(void) {
     }
 
     if ((g_PadStates[0].pressed & PADRright) || (pressed & (PADR1 | PADR2))) {
-        if (D_801DB0D0 >= 4) {
-            return 0;
+        if (D_801DB0D0 < 4) {
+            SND_SEPlay(0x101);
+            D_801DB0D0 += 1;
         }
-        SND_SEPlay(0x101);
-        D_801DB0D0 += 1;
         return 0;
-    }
-    if ((g_PadStates[0].pressed & PADRleft) || (pressed & PADL1) || (pressed & PADL2)) {
-        if (D_801DB0D0 == 0) {
-            return 0;
+    } else if (g_PadStates[0].pressed & PADRleft) {
+        if (D_801DB0D0 != 0) {
+            SND_SEPlay(0x101);
+            D_801DB0D0 -= 1;
         }
-        SND_SEPlay(0x101);
-        D_801DB0D0 -= 1;
+        return 0;
+    } else if (pressed & PADL1) {
+        if (D_801DB0D0 != 0) {
+            SND_SEPlay(0x101);
+            D_801DB0D0 -= 1;
+        }
+        return 0;
+    } else if (pressed & PADL2) {
+        if (D_801DB0D0 != 0) {
+            SND_SEPlay(0x101);
+            D_801DB0D0 -= 1;
+        }
         return 0;
     }
     if (g_PadStates[0].pressed & PADRup) {
@@ -2837,17 +2832,21 @@ NON_MATCHING s8 func_801DA114(void) {
         }
         SND_SEPlay(0x106);
         D_801DB080[D_801DB0D0] = 0xFF;
-        return 0;
-    }
-    if (g_PadStates[0].pressed & PADstart) {
+    } else if (g_PadStates[0].pressed & PADstart) {
         SND_SEPlay(0x104);
         count = 5;
-        for (i = 4; (s8)i >= 0 && D_801DB080[(s8)i] == 0xFF; i--) {
-            count -= 1;
+        for (i = 4; i >= 0; i--) {
+            if (D_801DB080[i] != 0xFF) {
+                break;
+            }
+            count--;
         }
-        if ((u16)count < 5) {
-            for (i = 4; (s8)i >= 0 && D_801DB080[(s8)i] == 0xFF; i--) {
-                D_801DB080[(s8)i] = 0;
+        if (count < 5) {
+            for (i = 4; i >= 0; i--) {
+                if (D_801DB080[i] != 0xFF) {
+                    break;
+                }
+                D_801DB080[i] = 0;
             }
         }
         D_801F294E += 1;
@@ -2855,9 +2854,6 @@ NON_MATCHING s8 func_801DA114(void) {
     }
     return 0;
 }
-#else
-INCLUDE_ASM(func_801DA114);
-#endif
 
 MATCH void func_801DA7A4(void) {
     s32 i;

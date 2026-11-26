@@ -1,8 +1,8 @@
 #include "engine/game/00/game_00.h"
 
 /* func_801C364C */
-/* Starts the floor damage step when a cell under the actor has the wanted code. */
-MATCH s32 Party_StartFloorDamage(s32 wanted_code, s32 effect_row, s32 find_facing) {
+/* Starts the floor damage step with a damage row unless a cell under the actor has the wanted code. */
+MATCH s32 Party_StartFloorDamage(s32 wanted_code, s32 damage_index, s32 find_facing) {
     s32 i;
     s32 route;
     s32 result;
@@ -35,6 +35,6 @@ MATCH s32 Party_StartFloorDamage(s32 wanted_code, s32 effect_row, s32 find_facin
     TASK(Actor)->header.step  = PARTY_MOVE_STEP_FLOOR_DAMAGE;
     TASK(Actor)->unk_03       = 0;
     TASK(Actor)->unk_04       = 0;
-    TASK(Actor)->param.unk_0B = effect_row;
+    TASK(Actor)->param.unk_0B = damage_index;
     return 1;
 }

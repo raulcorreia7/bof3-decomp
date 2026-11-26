@@ -14,10 +14,9 @@
 #define SCRATCH_COLUMN_OFFSET 0
 #define SCRATCH_COLUMN_STRIDE 0x18
 
+/* g_SaveData.desert.clock and .days, and g_SaveData.return_point.pending and .facing, as scalars. */
 extern u16 D_80144F54;
-/* The area state bytes the request paths write. */
 extern u8  D_80144F56;
-extern u8  D_80144F57;
 extern s8  D_8014504A;
 extern s8  D_8014504B;
 extern u8  D_801455C7;

@@ -2,19 +2,29 @@
 
 u8 s_FairyConstructionThresholds[12] = {0x14, 0x14, 0x14, 0x28, 0x14, 0x14, 0x3C, 0x14, 0x14, 0x14, 0x0D, 0x00};
 
-CellPaletteIndices g_PartyDamageCellColors = {{0x00, 0x00, 0x00, 0x00, 0x01, 0x02, 0x03, 0x03, 0x03}};
+FloorDamageColors g_PartyFloorDamageColors = {{
+    PARTY_DAMAGE_COLOR_RED,
+    PARTY_DAMAGE_COLOR_RED,
+    PARTY_DAMAGE_COLOR_RED,
+    PARTY_DAMAGE_COLOR_RED,
+    PARTY_DAMAGE_COLOR_PURPLE,
+    PARTY_DAMAGE_COLOR_YELLOW,
+    PARTY_DAMAGE_COLOR_BLUE,
+    PARTY_DAMAGE_COLOR_BLUE,
+    PARTY_DAMAGE_COLOR_BLUE,
+}};
 
-CellEffects D_80195FF8 = {
+FloorDamages g_PartyFloorDamages = {
     {
-        {0x04, 0x00, 0x00},
-        {0x08, 0x00, 0x00},
-        {0x10, 0x00, 0x00},
-        {0x20, 0x00, 0x00},
-        {0x02, 0x00, 0x80},
-        {0x00, 0x00, 0x20},
-        {0x00, 0x04, 0x00},
-        {0x00, 0x08, 0x00},
-        {0x00, 0x20, 0x00},
+        {4, 0, 0},
+        {8, 0, 0},
+        {16, 0, 0},
+        {32, 0, 0},
+        {2, 0, STATUS_POISONED},
+        {0, 0, STATUS_CONFUSED},
+        {0, 4, 0},
+        {0, 8, 0},
+        {0, 32, 0},
     },
 };
 

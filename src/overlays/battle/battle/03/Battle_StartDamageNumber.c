@@ -6,7 +6,7 @@ NON_MATCHING void Battle_StartDamageNumber(void) {
     BattleEffect* slot;
     BattleEffect* work;
     PartyMember*  source;
-    u32           type;
+    s16           type;
     u32           index;
     s32           divisor;
     u8            digits;

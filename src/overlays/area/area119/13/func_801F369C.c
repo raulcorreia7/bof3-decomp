@@ -30,7 +30,7 @@ NON_MATCHING void func_801F369C(s32 level) {
             SetSemiTrans(prim, 1);
 
             /* the row's quad widens as the phase advances and leans with the band */
-            size = row * 2 + 0x18;
+            size = phase * 2 + j * 16 + 0x18;
             tilt = rsin(row * 16) >> 5;
             x_lo = -0x1F40 - size + tilt;
             x_hi = -0x1F40 + size + tilt;
@@ -47,7 +47,7 @@ NON_MATCHING void func_801F369C(s32 level) {
             prim->tpage = getTPage(TPAGE_DEPTH_4BIT, TPAGE_ABR_ADD, 704, 256);
             prim->clut  = getClut(160, 483);
             /* the band fades from its bottom row toward the top of the pillar */
-            setRGB0(prim, (0x3F - row) * level * 2 / 0x80, (0x3F - row) * level / 0x80, (0x3F - row) * level * 2 / 0x80);
+            setRGB0(prim, (0x3F - row) * (level * 2) / 0x80, (0x3F - row) * level / 0x80, (0x3F - row) * (level * 2) / 0x80);
             GFX_AddPrim(4, sizeof(POLY_FT4));
 
             row += 8;

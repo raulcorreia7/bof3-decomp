@@ -4,17 +4,18 @@
 /* Draws the sixteen-cell light pillar around the actor: the corner heights come from the ground
  * sample and the cell's four depth scales. */
 NON_MATCHING void func_801F49A0(s32 phase) {
-    POLY_FT4* prim;
-    s16       x;
-    s16       y;
-    s16       height;
-    s32       i;
-    s32       cell_x;
-    s32       cell_y;
-    s32       part;
-    u8        tile;
-    long      depth;
-    long      flag;
+    POLY_FT4*        prim;
+    s16              x;
+    s16              y;
+    s16              height;
+    s32              i;
+    s32              cell_x;
+    s32              cell_y;
+    s32              part;
+    u8               tile;
+    LightPillarQuad* quad;
+    long             depth;
+    long             flag;
 
     if ((g_AreaDrawFlags & AREA_DRAW_CELL_LAYERS) == 0) {
         return;
@@ -22,9 +23,9 @@ NON_MATCHING void func_801F49A0(s32 phase) {
     D_1F800034_U16[0] = (TASK(Actor)->pos.x.fixed >> 9) - 0x4000;
     D_1F800034_U16[1] = (TASK(Actor)->pos.y.fixed >> 9) - 0x4000;
     for (i = 0; i < 16; i++) {
-        GFX_ADD_LAYER_DRAW_MODE(GFX_LAYER_EFFECT, getTPage(TPAGE_DEPTH_8BIT, TPAGE_ABR_HALF, 320, 256));
-        cell_x = i & 3;
+        GFX_SET_DRAW_MODE(getTPage(TPAGE_DEPTH_8BIT, TPAGE_ABR_HALF, 320, 256));
         cell_y = i >> 2;
+        cell_x = i & 3;
         Area_CellAddPrim(TASK(Actor)->pos.x.fixed, TASK(Actor)->pos.y.fixed, (s8)(cell_y + cell_x - 1), 0xC);
 
         prim = (POLY_FT4*)g_GfxPrimCursor;
@@ -66,10 +67,14 @@ NON_MATCHING void func_801F49A0(s32 phase) {
             RotTransPers4(&g_ScratchPadVectors[0], &g_ScratchPadVectors[1], &g_ScratchPadVectors[2], &g_ScratchPadVectors[3], (long*)&prim->x0, (long*)&prim->x1, (long*)&prim->x2, (long*)&prim->x3,
                           &depth, &flag);
         }
-        tile = D_801F5994[i].tile[phase];
-        part = D_801F5994[i].page | (phase != 0 ? 0x2580 : 0x2180);
+        quad = &D_801F5994[i];
+        tile = quad->tile[phase];
+        part = D_801F5994[i].page | 0x2580;
+        if (phase == 0) {
+            part = D_801F5994[i].page | 0x2180;
+        }
         Area_ApplyTileToQuad((part << 16) | tile, prim, 1);
-        Area_CellAddPrim(TASK(Actor)->pos.x.fixed, TASK(Actor)->pos.y.fixed, (s8)(cell_y + cell_x - 1), 0x28);
+        Area_CellAddPrim(TASK(Actor)->pos.x.fixed, TASK(Actor)->pos.y.fixed, (s8)((i >> 2) + (i & 3) - 1), 0x28);
     }
 }
 #else

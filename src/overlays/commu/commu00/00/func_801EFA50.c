@@ -1,8 +1,7 @@
 #include "commu00_00.h"
 
-#ifdef NON_MATCHING
 /* Queues every copy job the village can afford; unk_03's high nibble is the state: 1 waiting, 2/3/4 result. */
-NON_MATCHING s32 func_801EFA50(void) {
+MATCH s32 func_801EFA50(void) {
     s32 room;
     s32 room_offset;
     s32 job;
@@ -10,9 +9,9 @@ NON_MATCHING s32 func_801EFA50(void) {
     u32 price;
     u32 wait;
     u8  flags;
-    s32 value;
+    s16 value;
     s32 roll;
-    s32 clamped;
+    s16 clamped;
     s16 chance;
 
     for (room = 0; room < 8; room++) {
@@ -62,11 +61,10 @@ NON_MATCHING s32 func_801EFA50(void) {
                 g_FairyJobs[job].unk_03 |= 0x30;
                 goto queue;
             }
-            value = D_801F24FC_Data.copy_class[type_index][2];
-            value += (value * g_Fairies[job][8]) / 20;
-            if ((s16)value >= 0) {
+            value = D_801F24FC_Data.copy_class[type_index][2] + (D_801F24FC_Data.copy_class[type_index][2] * g_Fairies[job][8]) / 20;
+            if (value >= 0) {
                 clamped = value;
-                if ((s16)value >= 0x65) {
+                if (value >= 0x65) {
                     clamped = 0x64;
                 }
             } else {
@@ -78,7 +76,7 @@ NON_MATCHING s32 func_801EFA50(void) {
             if (roll >= 0x65) {
                 chance = roll - 0x1C;
             }
-            if ((s16)chance < (s16)value) {
+            if (value > chance) {
                 g_FairyJobs[job].unk_03 |= 0x20;
                 goto queue;
             }
@@ -88,7 +86,7 @@ NON_MATCHING s32 func_801EFA50(void) {
             if (roll >= 0x65) {
                 chance = roll - 0x1C;
             }
-            if ((s16)chance >= value) {
+            if (chance >= value) {
                 g_FairyJobs[job].unk_03 |= 0x30;
             } else {
                 g_FairyJobs[job].unk_03       = 0x40;
@@ -101,6 +99,3 @@ NON_MATCHING s32 func_801EFA50(void) {
         }
     }
 }
-#else
-INCLUDE_ASM(func_801EFA50);
-#endif

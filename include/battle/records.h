@@ -200,7 +200,9 @@ typedef struct BattleEffect {
     u8                  pad_14[4];
     s32                 unk_18;
     s32                 unk_1C;
-    u8                  pad_20[7];
+    u8                  pad_20[4];
+    u8                  active_flags; /* +0x24 the task's ActorActiveFlags byte; magic064 sets 0x88 on the effects it queues */
+    u8                  pad_25[2];
     u8                  unk_27;
     u8                  unk_28;
     u8                  unk_29; /* +0x29 func_801DE1D4 stores an action step here */
@@ -226,6 +228,7 @@ typedef struct BattleEffect {
 
 ASSERT_OFFSET(BattleEffect, unk_07, 0x07);
 ASSERT_OFFSET(BattleEffect, unk_08, 0x08);
+ASSERT_OFFSET(BattleEffect, active_flags, 0x24);
 ASSERT_OFFSET(BattleEffect, screen_x, 0x2E);
 ASSERT_OFFSET(BattleEffect, screen_y, 0x30);
 ASSERT_OFFSET(BattleEffect, depth, 0x32);
@@ -1039,9 +1042,9 @@ extern u8           g_BattlePartyCount;
 /* FAKE: g_Battle.living_party_count as a global of its own; the sites that use it match only with a separate symbol. */
 extern u8           g_BattleLivingPartyCount;
 
-/* The Accession gene picker's cursor: row (-1 on the confirm line) and column. */
+/* The Accession gene picker's cursor: row (GAME_NONE on the confirm line) and column. */
 typedef struct GeneCursor {
-    s8 row;
+    u8 row;
     u8 column;
 } GeneCursor;
 
@@ -1108,7 +1111,9 @@ typedef struct BattleState {
     /* 0xE9 */ u8                dragon_form;
     /* 0xEA */ u8                unk_EA[4];
     /* 0xEE */ u8                action_lock;
-    /* 0xEF */ u8                unk_EF[9];
+    /* 0xEF */ u8                unk_EF;
+    /* 0xF0 */ u32               unk_F0;
+    /* 0xF4 */ u8                unk_F4[4];
     /* 0xF8 */ u16               pending_status;
     /* 0xFA */ u8                unk_FA[6];
 } BattleState;

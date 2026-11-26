@@ -71,6 +71,16 @@ def test_every_hand_file_needs_hand_asm_and_nothing_else_may_have_it() -> None:
     ]
 
 
+def test_a_hand_file_answers_to_the_symbol_it_exports(tmp_path) -> None:
+    hand = tmp_path / "asm/exe/x/hand/func_80001000.s"
+    hand.parent.mkdir(parents=True)
+    hand.write_text(".globl f\nf:\n")
+    assert check_hand_units([str(hand)], {"a.c": DRAFT}) == []
+    assert [
+        v.problem for v in check_hand_units([str(hand)], {"a.c": "INCLUDE_ASM(f);\n"})
+    ] == ["hand-written assembly without HAND_ASM"]
+
+
 def test_attempt_notes_are_rejected() -> None:
     assert problems("/* blocker */\nINCLUDE_ASM(f);\n") == [
         "comment above INCLUDE_ASM; record attempts in config/attempts.jsonl"
@@ -95,18 +105,47 @@ def _tree(tmp_path, attempts: str):
     return tmp_path
 
 
-def _land(monkeypatch, tmp_path, attempts: str, capsys) -> int:
+def _land(monkeypatch, tmp_path, attempts: str, capsys, other: str = "") -> int:
     root = _tree(tmp_path, attempts)
     src = root / "src/overlays/bmagic/magic058/03/a.c"
     src.parent.mkdir(parents=True)
     src.write_text(
-        DRAFT.replace("HAND_ASM", "NON_MATCHING").replace("f(", "func_801EFDD4(")
+        DRAFT.replace("#if HAND_ASM_MODEL", "#ifdef NON_MATCHING")
+        .replace("HAND_ASM", "NON_MATCHING")
+        .replace("f(", "func_801EFDD4(")
     )
-    added = [(str(src.relative_to(root)), 1, "#ifdef NON_MATCHING")]
+    sources = [str(src.relative_to(root))]
+    if other:
+        (root / "src/b.c").write_text(other)
+        sources.append("src/b.c")
+    added = [(sources[0], 1, "#ifdef NON_MATCHING")]
     monkeypatch.chdir(root)
     monkeypatch.setattr(check_markers, "ROOT", root)
     monkeypatch.setattr(check_markers, "added_lines", lambda ref: added)
+    monkeypatch.setattr(check_markers, "tracked_sources", lambda: sources)
+    monkeypatch.setattr(check_markers, "tracked_hand_files", lambda: [])
     return check_markers.main(["--diff", "REF"])
+
+
+ATTEMPT = (
+    '{"function": "emi/bmagic/magic058/03@0x801EFDD4", "tried": "t", '
+    '"first_diff": "d", "score": null}\n'
+)
+
+
+def test_the_diff_gate_fails_an_unmarked_definition_in_any_file(
+    monkeypatch, tmp_path, capsys
+) -> None:
+    assert _land(monkeypatch, tmp_path, ATTEMPT, capsys, "void g(void) {\n}\n") == 1
+    assert "src/b.c:1: g: no marker" in capsys.readouterr().err
+
+
+def test_the_diff_gate_passes_a_marked_definition_in_any_file(
+    monkeypatch, tmp_path, capsys
+) -> None:
+    assert (
+        _land(monkeypatch, tmp_path, ATTEMPT, capsys, "MATCH void g(void) {\n}\n") == 0
+    )
 
 
 def test_a_draft_without_an_attempts_object_fails(

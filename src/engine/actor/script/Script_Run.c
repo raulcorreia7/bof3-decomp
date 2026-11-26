@@ -62,7 +62,7 @@ MATCH u8 Script_Run(void* sub, s32 target) {
             sel = Script_OpsRunAppearance(sub, target, sel);
             break;
         case ACTOR_SCRIPT_GROUP_WAIT:
-            sel = Script_OpsRunWait(sub, target, sel);
+            sel = Script_OpsRunWait(sub, (u8*)target, sel);
             break;
         case ACTOR_SCRIPT_GROUP_CONTROL:
             sel = Script_OpsRunControl(sub, target, sel);

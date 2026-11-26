@@ -49,7 +49,7 @@ void        UI_IconDraw(s32 sprite_x, s32 sprite_y, s32 icon_id, s32 dimmed);
 /* func_801AEBA0 */
 void        UI_WindowDrawFrame(s16 frame_x, s16 frame_y, s16 frame_width, s16 frame_height, s32 mode_pair_flag);
 /* func_801AED54 */
-void        UI_WindowDrawOutline(s16 x, s16 y, s16 width, s32 height, s32 flags);
+void        UI_WindowDrawOutline(s32 x, s32 y, s32 width, s32 height, s32 flags);
 /* UI_SpriteGetRect */
 /* func_801AF270 */
 UvRect*     UI_SpriteGetRect(u8 sprite_id, u8 flags);

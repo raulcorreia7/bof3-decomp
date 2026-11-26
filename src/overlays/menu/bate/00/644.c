@@ -123,8 +123,9 @@ MATCH void func_801D15E4(void) {
 
 #ifdef NON_MATCHING
 /* Draws the equip menu's four stat rows, the six slot icons and the two equipped item names. */
-NON_MATCHING void func_801D165C(u16 panel_x, u16 panel_y, u8 category, u8 item_id) {
+NON_MATCHING void func_801D165C(s32 panel_x, s32 panel_y, u8 category, u8 item_id) {
     Character* character;
+    u8*        name;
     u16        base[EQUIP_PREVIEW_STAT_COUNT];
     u16        current[EQUIP_PREVIEW_STAT_COUNT];
     u8         change[EQUIP_PREVIEW_STAT_COUNT];
@@ -151,11 +152,11 @@ NON_MATCHING void func_801D165C(u16 panel_x, u16 panel_y, u8 category, u8 item_i
     equipped[1]                         = character->equip.armor;
     func_801D1AB8(base, current, D_801D8ECC, change, equipped, category, item_id);
     for (i = 0; i < EQUIP_PREVIEW_STAT_COUNT; i++) {
-        value_y = panel_y + i * 13 + 0x13;
+        value_y = panel_y + (u8)(i * 13 + 0x13);
         UI_TextDraw(label_x, value_y, UI_TEXT_NORMAL, TEXT_LENGTH_MAX, D_801D8744[i]);
         sprintf(g_UiTextFormatBuffer, D_801D0C04, current[i]);
-        trial_y = value_y + 2;
-        UI_TextDrawGlyphString((s16)(label_x + 0x24), trial_y, UI_TEXT_NORMAL, g_UiTextFormatBuffer);
+        trial_y = panel_y + (u8)(i * 13 + 0x15);
+        UI_TextDrawGlyphString((s16)(panel_x + 0x29), trial_y, UI_TEXT_NORMAL, g_UiTextFormatBuffer);
         if (Item_CanEquip(0, (category == 1) ? EQUIP_SLOT_WEAPON : EQUIP_SLOT_ARMOR, category, item_id)) {
             sprintf(g_UiTextFormatBuffer, D_801D0C04, D_801D8ECC[i]);
             UI_TextDrawGlyphString((s16)(panel_x + 0x59), trial_y, change[i], g_UiTextFormatBuffer);
@@ -169,11 +170,13 @@ NON_MATCHING void func_801D165C(u16 panel_x, u16 panel_y, u8 category, u8 item_i
     for (i = 0; i < EQUIP_SLOT_COUNT; i++) {
         UI_IconDraw((u16)(panel_x + 6), (u16)(panel_y + 0x51 + i * 13), D_801D8754[i], 0);
         if (i != EQUIP_SLOT_WEAPON && i != EQUIP_SLOT_ARMOR) {
-            UI_TextDrawAscii((s16)(panel_x + 0x11), (s16)(panel_y + i * 13 + 0x4F), UI_TEXT_NORMAL, g_UiTextFormatBuffer);
+            UI_TextDrawAscii((s16)(panel_x + 0x11), (s16)(panel_y + (i * 13 + 0x4F)), UI_TEXT_NORMAL, g_UiTextFormatBuffer);
         }
     }
-    UI_TextDraw((s16)(panel_x + 0x11), (s16)(panel_y + 0x4F), UI_TEXT_NORMAL, Game_ReadCommand((u8*)&g_Weapons[equipped[0]]) & BYTE_MASK, (u8*)&g_Weapons[equipped[0]]);
-    UI_TextDraw((s16)(panel_x + 0x11), (s16)(panel_y + 0x76), UI_TEXT_NORMAL, Game_ReadCommand((u8*)&g_Armors[equipped[1]]) & BYTE_MASK, (u8*)&g_Armors[equipped[1]]);
+    name = (u8*)&g_Weapons[character->equip.weapon];
+    UI_TextDraw((s16)(panel_x + 0x11), (s16)(panel_y + 0x4F), UI_TEXT_NORMAL, Game_ReadCommand(name) & BYTE_MASK, name);
+    name = (u8*)&g_Armors[character->equip.armor];
+    UI_TextDraw((s16)(panel_x + 0x11), (s16)(panel_y + 0x76), UI_TEXT_NORMAL, Game_ReadCommand(name) & BYTE_MASK, name);
 }
 #else
 INCLUDE_ASM(func_801D165C);
@@ -246,15 +249,11 @@ NON_MATCHING void func_801D1C90(void) {
         }
         i++;
     } while (i < 3);
+    g_UiPanelTasks[0].item_table    = (s32)D_801D8EE0;
+    g_UiPanelTasks[1].unk_0B        = 0xFF;
     g_UiPanelTasks[1].pos.x         = -0xAA;
     g_UiPanelTasks[1].pos.y         = 0x3E;
     g_UiPanelTasks[1].unk_0C        = 7;
-    g_UiPanelTasks[1].unk_0B        = 0xFF;
-    g_UiPanelTasks[0].item_table    = (s32)D_801D8EE0;
-    g_UiPanelTasks[1].item_table    = (s32)D_801D8EE0;
-    g_UiPanelTasks[2].pos.x         = 0x14;
-    g_UiPanelTasks[2].u.addr.unk_12 = 0x118;
-    g_UiPanelTasks[3].pos.x         = 0xA4;
     g_UiPanelTasks[0].unk_09        = 0;
     g_UiPanelTasks[0].unk_0B        = 0;
     g_UiPanelTasks[0].unk_0A        = 0;
@@ -265,19 +264,23 @@ NON_MATCHING void func_801D1C90(void) {
     g_UiPanelTasks[1].mode          = 3;
     g_UiPanelTasks[1].state         = 2;
     g_UiPanelTasks[1].active        = 1;
+    g_UiPanelTasks[1].item_table    = (s32)D_801D8EE0;
     g_UiPanelTasks[1].unk_0A        = 0;
     g_UiPanelTasks[1].flags         = 1;
     g_UiPanelTasks[2].panel         = 2;
     g_UiPanelTasks[2].mode          = 4;
     g_UiPanelTasks[2].state         = 2;
     g_UiPanelTasks[2].active        = 1;
+    g_UiPanelTasks[2].pos.x         = 0x14;
     g_UiPanelTasks[2].pos.y         = -0x14;
+    g_UiPanelTasks[2].u.addr.unk_12 = 0x118;
     g_UiPanelTasks[2].u.addr.unk_10 = 0;
     g_UiPanelTasks[3].panel         = 2;
     g_UiPanelTasks[3].mode          = 4;
     g_UiPanelTasks[3].state         = 3;
     g_UiPanelTasks[3].active        = 1;
     g_UiPanelTasks[3].pos.y         = -0x14;
+    g_UiPanelTasks[3].pos.x         = 0xA4;
     g_UiPanelTasks[3].u.addr.unk_10 = 0;
     g_UiPanelTasks[3].u.addr.unk_12 = 0x80;
     g_UiPanelTasks[4].panel         = 2;
@@ -400,7 +403,7 @@ MATCH void func_801D2298(void) {
 }
 
 #ifdef NON_MATCHING
-/* The stat tables are indexed through a register-base pointer, as retail materializes it. */
+/* Draws the stats panel: three rows of label, counter and record. */
 NON_MATCHING void func_801D2304(s32 x, s32 y) {
     u16 left;
     u16 top;
@@ -413,13 +416,13 @@ NON_MATCHING void func_801D2304(s32 x, s32 y) {
     UI_TextDraw((s16)(x + 0x51), (s16)(y + 6), 0, TEXT_LENGTH_MAX, UI_MessageGetText(0xE7));
     i = 0;
     do {
-        UI_TextDraw((s16)(left + 6), (s16)(top + (i << 5) + 0x1E), 0, TEXT_LENGTH_MAX, UI_MessageGetText(0xE8 + i));
-        UI_TextDraw((s16)(left + 0x94), (s16)(top + (i << 5) + 0x1E), 0, TEXT_LENGTH_MAX, UI_MessageGetText(0xEB + i));
-        sprintf(g_UiTextFormatBuffer, D_801D0C18, FAKE_VOLATILE_PTR(s32, D_801D8F00)[i]);
-        UI_TextDrawAscii((s16)(left + 0x1E), (s16)(top + (i << 5) + 0x2B), 0, g_UiTextFormatBuffer);
-        sprintf(g_UiTextFormatBuffer, D_801D0C1C, FAKE_VOLATILE_PTR(s32, D_801D8F0C)[i]);
-        UI_TextDrawAscii((s16)(left + 0x94), (s16)(top + (i << 5) + 0x2B), 0, g_UiTextFormatBuffer);
-        func_801D26E0((s16)(left + 0x94), (s16)(top + (i << 5) + 0x2B));
+        UI_TextDraw((s16)(left + 6), (s16)(top + ((i << 5) + 0x1E)), 0, TEXT_LENGTH_MAX, UI_MessageGetText(0xE8 + i));
+        UI_TextDraw((s16)(left + 0x94), (s16)(top + ((i << 5) + 0x1E)), 0, TEXT_LENGTH_MAX, UI_MessageGetText(0xEB + i));
+        sprintf(g_UiTextFormatBuffer, D_801D0C18, D_801D8F00[i]);
+        UI_TextDrawAscii((s16)(left + 0x1E), (s16)(top + ((i << 5) + 0x2B)), 0, g_UiTextFormatBuffer);
+        sprintf(g_UiTextFormatBuffer, D_801D0C1C, D_801D8F00[i + 3]);
+        UI_TextDrawAscii((s16)(left + 0x94), (s16)(top + ((i << 5) + 0x2B)), 0, g_UiTextFormatBuffer);
+        func_801D26E0((s16)(left + 0x94), (s16)(top + ((i << 5) + 0x2B)));
         i++;
     } while (i < 3);
     UI_TextDraw((s16)(left + 0x5A), (s16)(top + 0x2B), 0, TEXT_LENGTH_MAX, UI_MessageGetText(0xF0));

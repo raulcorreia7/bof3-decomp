@@ -461,18 +461,18 @@ MATCH void func_801F81F4(u16 value) {
 }
 
 #ifdef NON_MATCHING
-NON_MATCHING void func_801F823C(s16 x, s16 y, s16 half_height, s16 half_width);
-
-void func_801F823C(s16 x, s16 y, s16 height, s16 width) {
+NON_MATCHING void func_801F823C(s16 x, s16 y, s16 height, s16 width) {
     POLY_GT4* prim;
     s16       row;
     s32       half;
     s32       skew;
     s16       top;
     u8        i;
+    u8        h;
 
     row = height - 1;
     for (i = 0; i < height * 2; i++) {
+        h    = height;
         half = SquareRoot0(height * height - row * row);
         skew = (width * rsin(D_801FE9EC[i])) >> 12;
         prim = (POLY_GT4*)g_GfxPrimCursor;
@@ -486,8 +486,8 @@ void func_801F823C(s16 x, s16 y, s16 height, s16 width) {
         prim->y3 = prim->y2 = top + 1;
         prim->u2 = prim->u0 = 0x40 - half;
         prim->u3 = prim->u1 = 0x40;
-        prim->v1 = prim->v0 = i - (height - 0x40);
-        prim->v3 = prim->v2 = i + 0x40 - height + 1;
+        prim->v1 = prim->v0 = i - (h - 0x40);
+        prim->v3 = prim->v2 = i + 0x40 - h + 1;
         prim->tpage         = GetTPage(TPAGE_DEPTH_15BIT, TPAGE_ABR_HALF, 0x340, 0x100);
         prim->g0            = 0x40;
         prim->r0            = 0x40;
@@ -511,9 +511,9 @@ void func_801F823C(s16 x, s16 y, s16 height, s16 width) {
         prim->u2 = prim->u0 = 0;
         prim->x2 = prim->x0 = x + skew;
         prim->x3 = prim->x1 = x + skew + half;
-        prim->v1 = prim->v0 = i + 0x40 - height - 0x80;
+        prim->v1 = prim->v0 = i + 0x40 - h - 0x80;
         prim->u3 = prim->u1 = half;
-        prim->v3 = prim->v2 = i + 0x40 - height - 0x7F;
+        prim->v3 = prim->v2 = i + 0x40 - h - 0x7F;
         prim->tpage         = GetTPage(TPAGE_DEPTH_15BIT, TPAGE_ABR_HALF, 0x340, 0x100);
         prim->b0            = 0x60;
         prim->g0            = 0x60;
@@ -937,8 +937,8 @@ MATCH void func_801F9F6C(void) {
     Actor_Clear();
 }
 
-#ifdef NON_MATCHING
-NON_MATCHING void func_801F9F8C(WorldPos* pos, s32 unused, s32 jitter, s32 layer) {
+/* Draws a dark half-transparent disc of line rows at the position, each row shifted by a random wobble. */
+MATCH void func_801F9F8C(WorldPos* pos, s32 unused, s16 jitter, s32 layer) {
     LINE_F2* line;
     DVECTOR  screen;
     DVECTOR  size;
@@ -973,9 +973,6 @@ NON_MATCHING void func_801F9F8C(WorldPos* pos, s32 unused, s32 jitter, s32 layer
         angle += rand() & 0xFF;
     }
 }
-#else
-INCLUDE_ASM(func_801F9F8C);
-#endif
 
 MATCH void func_801FA19C(WorldPos* pos, s32* vx) {
     LINE_G2* prim;

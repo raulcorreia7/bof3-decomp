@@ -1,7 +1,7 @@
 #include "start_08.h"
 
-#ifdef NON_MATCHING
-NON_MATCHING void func_801D55B0(void) {
+/* Moves the start menu's party-member cursor and opens the chosen command for that member. */
+MATCH void func_801D55B0(void) {
     MenuPanelTask* task;
     u8*            sel;
     MenuPanelTask* frame;
@@ -52,12 +52,12 @@ NON_MATCHING void func_801D55B0(void) {
             }
             frame                                         = &g_CursorFramePanel;
             frame->active                                 = 0;
+            g_UiPanelTasks[MENU_START_PANEL_ITEMS].unk_0A = 0;
             g_UiPanelTasks[MENU_START_PANEL_ITEMS].state  = 3;
+            g_UiPanelTasks[MENU_START_PANEL_ITEMS].unk_0B = 0xFF;
             g_UiPanelTasks[14].panel                      = 6;
             g_UiPanelTasks[14].mode                       = 0x12;
             g_UiPanelTasks[14].state                      = 4;
-            g_UiPanelTasks[MENU_START_PANEL_ITEMS].unk_0A = 0;
-            g_UiPanelTasks[MENU_START_PANEL_ITEMS].unk_0B = 0xFF;
             frame -= 5;
             frame->active                    = 1;
             g_UiPanelTasks[14].pos.x         = 320;
@@ -71,7 +71,7 @@ NON_MATCHING void func_801D55B0(void) {
             g_UiPanelTasks[14].u.addr.unk_10 = 0;
             g_PartyCursor                    = g_UiPanelTasks[MENU_START_PANEL_ITEMS].unk_0C;
             D_80148654                       = 5;
-            D_80148651 += 1;
+            D_80148651++;
         } else if (LOB(D_801ED620) == 3) {
             g_UiPanelTasks[MENU_START_PANEL_CURSOR_FRAME].unk_0B = 0;
             g_UiPanelTasks[MENU_START_PANEL_ITEMS].unk_0A        = 1;
@@ -88,6 +88,3 @@ NON_MATCHING void func_801D55B0(void) {
         D_80148651 -= 1;
     }
 }
-#else
-INCLUDE_ASM(func_801D55B0);
-#endif

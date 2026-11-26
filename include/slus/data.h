@@ -51,6 +51,7 @@ extern u8          g_PartyBattleOrder[PARTY_SLOT_COUNT];
 extern u32         g_LearnedAbilities[BIT_ARRAY_WORDS(BYTE_VALUE_COUNT)];
 /* One bit per enemy type byte: set once Identify has examined that type. */
 extern u32         g_IdentifiedEnemies[BIT_ARRAY_WORDS(BYTE_VALUE_COUNT)];
+/* g_SaveData.return_point.x and .y as scalars. */
 extern u32         D_80145040;
 extern u32         D_80145044;
 /* The abilities the shop offers, packed to the front. */
