@@ -1,14 +1,13 @@
-#include "game_00.h"
+#include "engine/game/00/game_00.h"
 
-MATCH bool func_801C539C(void) {
+/* func_801C4D58 */
+/* Starts the mount approach: sets the walk velocity and the move timer, requests the animation of the facing plus 8 and moves one frame. */
+MATCH void Area_ClimbMountApproachBegin(void) {
     Actor* work;
     Actor* state;
     Actor* reload;
     s32    doubled;
 
-    if (!(Script_AnimStepOnce() & BYTE_MASK)) {
-        return false;
-    }
     g_Game.current->u.field.counter.value = (TASK(Actor)->voice_flags.raw + 2);
     Area_SetWalkVelocity();
     work          = TASK(Actor);
@@ -21,5 +20,4 @@ MATCH bool func_801C539C(void) {
     Actor_Move();
     reload        = TASK(Actor);
     reload->timer = (reload->timer - 1);
-    return true;
 }

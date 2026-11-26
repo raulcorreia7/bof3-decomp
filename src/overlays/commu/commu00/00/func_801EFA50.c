@@ -12,6 +12,8 @@ NON_MATCHING s32 func_801EFA50(void) {
     u8  flags;
     s32 value;
     s32 roll;
+    s32 clamped;
+    s16 chance;
 
     for (room = 0; room < 8; room++) {
         room_offset = room * 8;
@@ -62,28 +64,35 @@ NON_MATCHING s32 func_801EFA50(void) {
             }
             value = D_801F24FC_Data.copy_class[type_index][2];
             value += (value * g_Fairies[job][8]) / 20;
-            if ((s16)value < 0) {
-                value = 0;
-            } else if ((s16)value >= 0x65) {
-                value = 0x64;
+            if ((s16)value >= 0) {
+                clamped = value;
+                if ((s16)value >= 0x65) {
+                    clamped = 0x64;
+                }
+            } else {
+                clamped = 0;
             }
-            roll = RANDOM_MASK(0x7F);
+            value  = clamped;
+            roll   = RANDOM_MASK(0x7F);
+            chance = roll;
             if (roll >= 0x65) {
-                roll -= 0x1C;
+                chance = roll - 0x1C;
             }
-            if ((s16)roll < (s16)value) {
+            if ((s16)chance < (s16)value) {
                 g_FairyJobs[job].unk_03 |= 0x20;
                 goto queue;
             }
-            roll = RANDOM_MASK(0x7F);
+            value  = 30 - g_Fairies[job][8] * 2;
+            roll   = RANDOM_MASK(0x7F);
+            chance = roll;
             if (roll >= 0x65) {
-                roll -= 0x1C;
+                chance = roll - 0x1C;
             }
-            if ((s16)roll < 30 - g_Fairies[job][8] * 2) {
+            if ((s16)chance >= value) {
+                g_FairyJobs[job].unk_03 |= 0x30;
+            } else {
                 g_FairyJobs[job].unk_03       = 0x40;
                 g_FairyJobs[job].record_state = 0x37;
-            } else {
-                g_FairyJobs[job].unk_03 |= 0x30;
             }
         queue:
             D_80145E60[g_FairyVillageUpdateCount * 2] = 3;

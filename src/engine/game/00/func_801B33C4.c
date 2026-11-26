@@ -1,7 +1,0 @@
-#include "game_00.h"
-
-MATCH void func_801B33C4(void) {
-    if (func_801C4EC4() & BYTE_MASK) {
-        TASK(Actor)->unk_03 = 3;
-    }
-}
