@@ -12,13 +12,15 @@
 # instruction prints for retail and for the candidate. Exit 2: nothing was compared (the
 # message says why and the next step).
 #
+# MATCH_SRC=FILE compiles FILE with the unit's command instead of the unit's source, into a
+# private object, so several copies can be measured at once without touching the tree.
 # MATCH_CAND_OUT=FILE also writes the candidate's bytes there (try_body.py counts differences).
 # Only .text is compared, with the unit's own .rodata (jump table, string) placed at its retail
 # address; own .data/.bss and gp-relative code are not covered. `check-<image>` stays the
 # acceptance gate. Method and limits: docs/toolchain.md#matchsh.
 set -eu
 case "${1:-}" in
--h | --help) sed -n '2,18p' "$0" | sed 's/^# \{0,1\}//'; exit 0 ;;
+-h | --help) sed -n '2,20p' "$0" | sed 's/^# \{0,1\}//'; exit 0 ;;
 esac
 cd "$(dirname "$0")/.."
 
@@ -104,6 +106,10 @@ rel=$((0x$addr - 0x$base))
 src=$(printf %s "$obj" | sed 's/\.o$//; s/+/\//g')
 [ -f "$src" ] || die "no source $src for $obj"
 cand=$obj
+if [ -n "${MATCH_SRC:-}" ]; then
+	[ -f "$MATCH_SRC" ] || die "no file MATCH_SRC=$MATCH_SRC"
+	src=$MATCH_SRC
+fi
 if grep -Eq "^NON_MATCHING[^(]*[ *]$fname\(" "$src"; then
 	cand=draft+${obj#src+}
 	draft=1
@@ -113,15 +119,22 @@ fi
 log=$(mktemp "${TMPDIR:-/tmp}/match.XXXXXX")
 tmp=$(mktemp -d "${TMPDIR:-/tmp}/match.XXXXXX")
 trap 'rm -rf "$log" "$tmp"' EXIT
-if ! ninja -C "$B" "$cand" >"$log" 2>&1; then
+if [ -n "${MATCH_SRC:-}" ]; then
+	# The unit's recorded command on another source, into a private object: no tree file changes.
+	co=$tmp/cand.o
+	cmd=$(ninja -C "$B" -t commands "$cand" | tail -n 1 | sed 's/ -MMD -MP -MF [^ ]*//')
+	cmd="${cmd% -c *} -c $(realpath "$MATCH_SRC") -o $co"
+	(cd "$B" && sh -c "$cmd") >"$log" 2>&1 || :
+elif ! ninja -C "$B" "$cand" >"$log" 2>&1; then
 	sed -n '1,40p' "$log" >&2
 	die "ninja could not build $cand. Fix the compile error above; a new file or header needs: meson setup --reconfigure $B"
+else
+	co=$B/$cand
 fi
-co=$B/$cand
 if [ ! -s "$co" ]; then
 	# A draft object is empty when the draft does not compile; run its command to show why.
-	cmd=$(ninja -C "$B" -t commands "$cand" | tail -n 1 | sed 's/ --empty-on-failure//')
-	(cd "$B" && sh -c "$cmd") 2>&1 | sed -n '1,10p' >&2 || :
+	[ -n "${MATCH_SRC:-}" ] || cmd=$(ninja -C "$B" -t commands "$cand" | tail -n 1)
+	(cd "$B" && sh -c "$(printf %s "$cmd" | sed 's/ --empty-on-failure//')") 2>&1 | sed -n '1,10p' >&2 || :
 	die "the draft in $src does not compile (error above). Fix it and run again."
 fi
 

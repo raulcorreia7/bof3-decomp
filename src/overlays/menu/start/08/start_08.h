@@ -234,12 +234,12 @@ extern u8              D_801484EB;
 extern u8*             D_80148500;
 extern MenuChoicePanel D_80148504;
 extern NameEntryLabels D_801D0F00;
-extern u8              D_801ECDBC[];
-extern s16             D_80148508; /* signed scalar view of the panel's x */
-extern u8              D_8014850E; /* the panel's group */
-extern u8              D_8014850F; /* the panel's group first entry */
-extern u8              D_80148510; /* the panel's group cursor */
-extern s8              D_80148511; /* signed scalar view of the panel's drawn cursor */
+extern u8              D_801ECDBC[][8][12]; /* name entry grid: pages of 8 rows by 12 cells */
+extern s16             D_80148508;          /* signed scalar view of the panel's x */
+extern u8              D_8014850E;          /* the panel's group */
+extern u8              D_8014850F;          /* the panel's group first entry */
+extern u8              D_80148510;          /* the panel's group cursor */
+extern s8              D_80148511;          /* signed scalar view of the panel's drawn cursor */
 extern u8*             D_80148524;
 extern u8              D_80148531;
 extern u8              D_80148532;
@@ -627,7 +627,7 @@ void        func_801E2408(void);
 extern void func_801E2668(s32 icon_type, s32 icon_x, s32 icon_y);
 extern void func_801E26A8(s32 x, s32 y);
 void        Menu_DrawConfigRow(s32 x, s32 y, s32 option_index, s32 select_step);
-u8*         Menu_DrawGlyphAt(s16 x, s16 y, s32 color, u8* cursor, s32 glyph_left, s32 glyph_right);
+u8*         Menu_DrawGlyphAt(s16 x, s16 y, s32 color, u8* cursor, u8 glyph_left, u8 glyph_right);
 void        func_801E3EC4(void);
 void        func_801E4024(void);
 void        func_801E4060(void);

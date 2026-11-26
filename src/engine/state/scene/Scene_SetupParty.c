@@ -12,8 +12,8 @@ NON_MATCHING s32 Scene_SetupParty(u32 scene) {
     u8   command;
     s32  cmds;
     u32  type;
-    s32  count;
-    s32  size;
+    u8   count;
+    u8   size;
     s32  i;
     s32  j;
 
@@ -52,8 +52,8 @@ NON_MATCHING s32 Scene_SetupParty(u32 scene) {
                 }
             }
         }
-        for (j = 0; j < (u8)count; j++)
-            g_PartyFieldOrder[j] = g_Game.members[SP_SLOTS[j]].chr.character_id;
+        for (i = 0; i < (u8)count; i++)
+            g_PartyFieldOrder[i] = g_Game.members[SP_SLOTS[i]].chr.character_id;
         for (i = 0; i < (u8)count - 1; i++) {
             if (i != SP_SLOTS[i]) {
                 Party_MemberSwap((u8)i, SP_SLOTS[i], 0);

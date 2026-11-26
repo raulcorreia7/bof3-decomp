@@ -34,8 +34,8 @@ NON_MATCHING void func_801D9740(s32 color, u8* pixels, s32 mask, s32 value) {
         quad->u0 += 8;
         quad->u0 -= (mask & 0x7F);
     }
-    quad->x1 = value + (mask & 0x7F);
     quad->x0 = value;
+    quad->x1 = value + (mask & 0x7F);
     /* setUVWH would also store u0 and v0, which the original does not. */
     quad->u1 = quad->u0 + (mask & 0x7F);
     quad->u2 = quad->u0;
@@ -45,8 +45,8 @@ NON_MATCHING void func_801D9740(s32 color, u8* pixels, s32 mask, s32 value) {
     quad->x2 = quad->x0;
     quad->x3 = quad->x1;
     quad->u3 = quad->u1;
+    top      = g_SpawnedActors[3].screen_y + 3;
     PSX_SET_NEUTRAL_RGB(quad);
-    top        = g_SpawnedActors[3].screen_y + 3;
     quad->y0   = top;
     quad->clut = getClut((color & 0xF) * 16, 480);
     quad->y1   = top;
