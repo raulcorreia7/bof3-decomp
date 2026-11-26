@@ -73,7 +73,7 @@ Callback g_ShopPanel11Steps[SHOP_PANEL11_STATE_COUNT] = {
 
 Callback g_ShopPanel12Steps[SHOP_PANEL12_STATE_COUNT] = {
     Menu_IdleStep,
-    func_801E3D4C,
+    UI_PanelSlideOutOption_801E3D4C,
     func_801E3D8C,
     func_801E3DCC,
     func_801E3E0C,

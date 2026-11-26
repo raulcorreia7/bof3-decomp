@@ -300,7 +300,7 @@ segments:
       - [0x13078, c, func_801E3C78]
       - [0x130B8, c, func_801E3CB8]
       - [0x130F8, c, func_801E3CF8]
-      - [0x1314C, c, func_801E3D4C]
+      - [0x1314C, c, UI_PanelSlideOutOption_801E3D4C]
       - [0x1318C, c, func_801E3D8C]
       - [0x131CC, c, func_801E3DCC]
       - [0x1320C, c, func_801E3E0C]

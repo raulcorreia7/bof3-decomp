@@ -1,5 +1,6 @@
 #include "shop_00.h"
 
-MATCH void func_801E3D4C(void) {
+/* func_801E3D4C */
+MATCH void UI_PanelSlideOutOption_801E3D4C(void) {
     MENU_ADVANCE_PANEL(pos.x, MENU_PANEL_STEP_X, 320);
 }

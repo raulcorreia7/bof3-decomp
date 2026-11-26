@@ -677,7 +677,8 @@ void func_801E3C38(void);
 void func_801E3C78(void);
 void func_801E3CB8(void);
 void func_801E3CF8(void);
-void func_801E3D4C(void);
+/* func_801E3D4C */
+void UI_PanelSlideOutOption_801E3D4C(void);
 void func_801E3D8C(void);
 void func_801E3DCC(void);
 void func_801E3E0C(void);
