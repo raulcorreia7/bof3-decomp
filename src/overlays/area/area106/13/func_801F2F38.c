@@ -11,6 +11,7 @@ NON_MATCHING void func_801F2F38(s32 index, s32 height) {
     u8*       tiles;
     s32       i;
     s32       j;
+    SVECTOR*  corner;
 
     GFX_ADD_LAYER_DRAW_MODE(GFX_LAYER_SCENE_BACK, getTPage(TPAGE_DEPTH_8BIT, TPAGE_ABR_HALF, 320, 256));
 
@@ -35,8 +36,8 @@ NON_MATCHING void func_801F2F38(s32 index, s32 height) {
             g_ScratchPadVectors[j].vy = D_801F3EE8[tiles[i]][j].y << 7;
             g_ScratchPadVectors[j].vz = -D_801F3EE8[tiles[i]][j].depth << 7;
         }
-        RotTransPers4(&g_ScratchPadVectors[0], &g_ScratchPadVectors[1], &g_ScratchPadVectors[2], &g_ScratchPadVectors[3], (s32*)&prim->x0, (s32*)&prim->x1, (s32*)&prim->x2, (s32*)&prim->x3, &depth,
-                      &flag);
+        corner = SPAD(0u)->vectors;
+        RotTransPers4(corner, &corner[1], &corner[2], &corner[3], (s32*)&prim->x0, (s32*)&prim->x1, (s32*)&prim->x2, (s32*)&prim->x3, &depth, &flag);
         Area_ApplyTileToQuad(D_801F3F20[tiles[i]] + (((D_801F3F30[tiles[i]] * height) << 8) & AREA106_TILE_WORD_MASK), prim, 1);
         GFX_AddPrim(GFX_LAYER_SCENE_BACK, sizeof(POLY_FT4));
         i++;
