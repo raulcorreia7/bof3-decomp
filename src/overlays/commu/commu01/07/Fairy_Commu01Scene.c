@@ -11,6 +11,7 @@ MATCH void Fairy_Commu01Run(void) {
     SYS_DISPATCH_BYTE(g_Commu01Steps, D_801F294C);
 }
 
+/* Puts the cell cursor on the idle fairies and shows the overview message. */
 /* func_801D0C68 */
 MATCH void Fairy_Commu01Start(void) {
     g_FairyCursorColumn  = 1;
@@ -70,11 +71,13 @@ MATCH void Fairy_Commu01PickCell(void) {
     Fairy_DrawCellFrame(g_SceneEventState.selection, 0);
 }
 
+/* Runs the handler the saved cursor zone selects. */
 /* func_801D0E44 */
 MATCH void Fairy_Commu01DispatchMode(void) {
     SYS_DISPATCH_BYTE(g_Commu01Step2Steps, g_FairySavedCursorZone);
 }
 
+/* Runs the move handler the sub-step selects. */
 /* func_801D0E80 */
 MATCH void Fairy_Commu01DispatchMove(void) {
     SYS_DISPATCH_BYTE(g_Commu01MoveSteps, D_801F294D);
@@ -188,6 +191,7 @@ MATCH void Fairy_Commu01PickTarget(void) {
     }
 }
 
+/* Runs the room handler the sub-step selects. */
 /* func_801D1328 */
 MATCH void Fairy_Commu01DispatchRoom(void) {
     SYS_DISPATCH_BYTE(g_Commu01Step2Sub1Steps, D_801F294D);
@@ -262,6 +266,7 @@ MATCH void Fairy_Commu01PickRoomJob(void) {
     }
 }
 
+/* Moves the target job type of a room job and commits the move, then draws both cells. */
 /* func_801D1630 */
 MATCH void Fairy_Commu01PickRoomTarget(void) {
     u16 x;
@@ -563,6 +568,7 @@ MATCH void Fairy_Commu01ConfirmRoom(void) {
 
 #include "overlays/commu/shared/Commu_CellGrid.h"
 
+/* Draws the grid of a fairy box. */
 /* func_801D273C */
 MATCH void Fairy_DrawChannelGrid(s16 x, s16 y) {
     s32 i;
@@ -798,6 +804,7 @@ MATCH void Fairy_DrawOverview(void) {
     UI_TextDrawAscii(0xB8, 0x4C, 0, buffer);
 }
 
+/* Draws the grid over the body of the overview window. */
 /* func_801D3594 */
 MATCH void Fairy_DrawOverviewGrid(s16 x, s16 y) {
     s32 i;
@@ -857,6 +864,7 @@ MATCH void Fairy_DrawCellFrame(s32 cell, s32 selected) {
     GFX_AddPrim(GFX_LAYER_UI, sizeof(LINE_F3));
 }
 
+/* Draws the blinking triangle cursor at a point. */
 /* func_801D3984 */
 MATCH void Fairy_DrawCursor(s32 x, s32 y, s32 bright) {
     POLY_F3* poly;
@@ -865,6 +873,7 @@ MATCH void Fairy_DrawCursor(s32 x, s32 y, s32 bright) {
     COMMU_DRAW_CURSOR_TRIANGLE(x, y, bright);
 }
 
+/* Returns how many active jobs have the job type. */
 /* func_801D3A48 */
 MATCH u8 Fairy_GetJobActive(u8 job_type) {
     s32 count = 0;
@@ -880,6 +889,7 @@ MATCH u8 Fairy_GetJobActive(u8 job_type) {
     return count;
 }
 
+/* Returns the slot of the index-th active job of a job type, or GAME_NONE. */
 /* func_801D3AA0 */
 MATCH u8 Fairy_FindJob(u8 type, u8 index) {
     u8  count;
@@ -1075,6 +1085,7 @@ MATCH void Fairy_DrawTypeMenu(s16 x, s16 y, u8 mode) {
     }
 }
 
+/* Draws the frame around a list window of the given height. */
 /* func_801D42DC */
 MATCH void Fairy_DrawMenuFrame(s16 x, s16 y, u8 height) {
     /* FAKE: retail frame reserves 8 bytes no statement uses. */
@@ -1104,6 +1115,7 @@ MATCH void Fairy_DrawMenuFrame(s16 x, s16 y, u8 height) {
     Fairy_DrawPiece((s16)(x + 0x48), (s16)(y + height), 0xD);
 }
 
+/* Returns the top of the room type list window. */
 /* func_801D4474 */
 MATCH s32 Fairy_GetTypeMenuTop(void) {
     s32 val;
@@ -1192,6 +1204,7 @@ MATCH void Fairy_GetJobPos(s16* out_x, s16* out_y, s32 type, s32 ordinal) {
     }
 }
 
+/* Puts back the cursor the move started from and steps back one sub-step. */
 /* func_801D47C4 */
 MATCH void Fairy_RestoreCursor(void) {
     g_FairyCursorColumn  = g_FairySavedCursorColumn;
@@ -1311,6 +1324,7 @@ MATCH void Fairy_ShowTargetMessage(u8* target) {
     g_FairyMessage = text_id;
 }
 
+/* Shows the confirm question, keeping the sub-step and message to return to. */
 /* func_801D4B58 */
 MATCH void Fairy_AskConfirm(void) {
     g_FairyReturnStep    = D_801F294D;

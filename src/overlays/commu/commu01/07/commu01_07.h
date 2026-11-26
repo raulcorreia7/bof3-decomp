@@ -95,10 +95,9 @@ extern u8             g_FairyListOptionTypes[12];
 extern u16            g_FairyOptionMessages[4];
 /* D_801D4C18 */
 extern u8             g_FairyOptionLines[12][2];
-/* The channel each commu record type blinks. */
 /* D_801D4C20 */
 extern u8             g_FairyBlinkChannels[];
-/* The overview's separator text and the icon each room type draws; the shop's icon steps with its stock row. */
+/* The separator text of the overview. */
 extern u8             D_801D4C30[];
 /* D_801D4C34 */
 extern u8             g_FairyRoomIcons[];
