@@ -6,7 +6,6 @@
 #define CHAN_RETURN(base) (*(u8**)((base) + 0x10))
 #define CHAN_FLAGS(base)  (*(u16*)(base))
 #define CHAN_STATE(base)  ((base)[-4])
-#define STEP_TABLE        ((u8*)D_8017F5B4)
 
 /* runs the channel script at the cursor until an opcode ends the step: 0 returns or ends the step in state 2, 2 ends
  * it in state 3, 3/4/7/8 call a sub-script (with its return cursor kept), 0xA queues a cue, 0xB ends the step in
@@ -15,26 +14,28 @@
 /* func_8015083C */
 #ifdef NON_MATCHING
 NON_MATCHING void UI_MessageRunScript(void) {
-    u8  loop;
-    u8* chan;
-    u8* s2;
-    u8* s3;
-    u8* s4;
-    u8* t;
-    u8  count;
-    s32 v;
+    u8   loop;
+    u8*  chan;
+    u8*  s2;
+    u8*  s3;
+    u8*  s4;
+    u8** s5;
+    u8*  t;
+    u8   count;
+    s32  v;
+    u16  flags;
 
     loop = 1;
     chan = (u8*)&g_UiWindowChannel;
+    s5   = (u8**)(chan + 0xC);
     s4   = chan + 2;
     s2   = chan + 0x20;
     s3   = chan - 2;
     do {
-        if (CHAN_FLAGS(chan) & FRONTEND_FLAG_TIMER_ACTIVE) {
-            count   = chan[3] - 1;
-            chan[3] = count;
-            if (count == 0) {
-                CHAN_FLAGS(chan) &= ~FRONTEND_FLAG_TIMER_ACTIVE;
+        flags = CHAN_FLAGS(chan);
+        if (flags & FRONTEND_FLAG_TIMER_ACTIVE) {
+            if (--chan[3] == 0) {
+                CHAN_FLAGS(chan)  = flags & ~FRONTEND_FLAG_TIMER_ACTIVE;
                 CHAN_CURSOR(chan) = CHAN_RETURN(chan) + 1;
             }
         }
@@ -49,7 +50,7 @@ NON_MATCHING void UI_MessageRunScript(void) {
                 CHAN_FLAGS(chan) |= 0x100;
                 break;
             case 0xA:
-                CHAN_CURSOR(chan) += 1;
+                *s5 += 1;
                 SND_SEPlay(*D_801490B0 | 0x200);
                 break;
             case 0:
@@ -65,7 +66,7 @@ NON_MATCHING void UI_MessageRunScript(void) {
                 t                 = *(u8**)(s4 + 0xA);
                 loop              = 0;
                 *(u8**)(s4 + 0xA) = t + 1;
-                CHAN_STATE(chan)  = 7;
+                s4[-6]            = 7;
                 s4[0]             = t[1];
                 break;
             case 0xB:
@@ -74,17 +75,24 @@ NON_MATCHING void UI_MessageRunScript(void) {
                 chan[2] += 8;
                 break;
             case 2:
-                CHAN_STATE(chan) = 3;
-                loop             = 0;
+                g_UiMessageState.state = 3;
+                loop                   = 0;
                 break;
             case 0x14:
                 t                  = *(u8**)(s2 - 0x14);
+                *(u8**)(s2 - 0x14) = t + 1;
+                count              = t[1];
                 *(u8**)(s2 - 0x14) = t + 3;
-                s2[0]              = t[1];
+                s2[0]              = count;
                 s2[2]              = (*D_801490B0 & 0xF) - 1;
                 loop               = 0;
-                s2[1]              = *D_801490B0 >> 4;
-                CHAN_STATE(chan)   = (s2[1] == 0) ? 5 : 4;
+                count              = *D_801490B0 >> 4;
+                s2[1]              = count;
+                if (count == 0) {
+                    s2[-0x24] = 5;
+                } else {
+                    s2[-0x24] = 4;
+                }
                 break;
             case 7:
                 loop              = 0;
@@ -96,12 +104,11 @@ NON_MATCHING void UI_MessageRunScript(void) {
                 CHAN_CURSOR(chan) = (u8*)&D_801490D7 + (*D_801490B0 << 5);
                 break;
             case 3:
+                loop = 0;
                 CHAN_FLAGS(chan) |= FRONTEND_FLAG_TIMER_ACTIVE;
                 CHAN_RETURN(chan) = CHAN_CURSOR(chan);
-                v                 = g_CharSlot[g_Game.members[0].chr.character_id];
-                loop              = 0;
                 chan[3]           = 6;
-                CHAN_CURSOR(chan) = (u8*)&D_80144967 + v * PARTY_RECORD_STRIDE;
+                CHAN_CURSOR(chan) = (u8*)&D_80144967 + g_CharSlot[g_Game.members[0].chr.character_id] * PARTY_RECORD_STRIDE;
                 break;
             case 4:
                 loop              = 0;
@@ -109,28 +116,26 @@ NON_MATCHING void UI_MessageRunScript(void) {
                 CHAN_CURSOR(chan) = t;
                 CHAN_FLAGS(chan) |= FRONTEND_FLAG_TIMER_ACTIVE;
                 CHAN_RETURN(chan) = t;
-                v                 = *D_801490B0;
                 chan[3]           = 6;
-                CHAN_CURSOR(chan) = (u8*)&D_80144967 + v * PARTY_RECORD_STRIDE;
+                CHAN_CURSOR(chan) = (u8*)&D_80144967 + *D_801490B0 * PARTY_RECORD_STRIDE;
                 break;
             case 0xF:
                 t                  = *(u8**)(s3 + 0xE);
                 *(u8**)(s3 + 0xE)  = t + 1;
                 s3[1]              = 0;
                 s3[-1]             = 0;
-                s3[0]              = STEP_TABLE[t[1] * 4 + 4];
-                *(u16*)(s3 + 8)    = *(u16*)&STEP_TABLE[*D_801490B0 * 4 + 6];
-                *(s16*)(s3 + 0x26) = (s8)STEP_TABLE[*D_801490B0 * 4 + 5];
+                s3[0]              = D_8017F5B8[t[1]].unk_00;
+                *(u16*)(s3 + 8)    = D_8017F5B8[*D_801490B0].unk_02;
+                *(s16*)(s3 + 0x26) = (s8)D_8017F5B8[*D_801490B0].unk_01;
                 break;
             case 5:
             case 0xC:
-                CHAN_CURSOR(chan) += 1;
+                *s5 += 1;
                 break;
             case 8:
-                t = CHAN_CURSOR(chan) + 1;
                 CHAN_FLAGS(chan) |= FRONTEND_FLAG_TIMER_ACTIVE;
-                CHAN_CURSOR(chan) = t;
-                CHAN_RETURN(chan) = t;
+                CHAN_CURSOR(chan) += 1;
+                CHAN_RETURN(chan) = CHAN_CURSOR(chan);
                 v                 = *D_801490B0;
                 t                 = (u8*)D_80010004 + SLUS_LOAD_ADDRESS;
                 CHAN_CURSOR(chan) = t;
@@ -144,14 +149,14 @@ NON_MATCHING void UI_MessageRunScript(void) {
             case 0x12:
             case 0x13:
             case 0x15:
-                CHAN_CURSOR(chan) += 1;
+                *s5 += 1;
                 /* fallthrough */
             default:
                 if (!(CHAN_FLAGS(chan) & FRONTEND_FLAG_NO_INPUT_WAIT)) {
                     if (g_InputMasks[MESSAGE_INPUT_SPEED_UP] & g_PadStates[0].held) {
-                        chan[2] = STEP_TABLE[g_MessageSpeed * 4];
+                        chan[2] = D_8017F5B4[g_MessageSpeed];
                     } else {
-                        chan[2] = STEP_TABLE[g_MessageSpeed * 4 + 1];
+                        chan[2] = D_8017F5B4[g_MessageSpeed + 1];
                     }
                     if (CHAN_FLAGS(chan) & FRONTEND_FLAG_FORCE_STEP) {
                         chan[2] = 3;

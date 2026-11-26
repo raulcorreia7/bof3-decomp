@@ -300,7 +300,7 @@ ASSERT_SIZE(EmiRingSteps, 0x18);
 typedef void (*BundleOpcodeCallback)(void* record);
 typedef void (*CellDrawCallback)(u8* record, s32 cell_x, s32 cell_y);
 
-/* Record of the D_8017F5B4 table; no field meaning is proven. */
+/* Record of the D_8017F5B8 step table; no field meaning is proven. */
 typedef struct {
     u8  unk_00;
     u8  unk_01;
@@ -677,7 +677,8 @@ extern const char                  D_8017F44C[];
 extern const void* const           g_ExceptionNames[];
 /* Retail data D_80170000-D_8017FFFF (one declaration each). */
 extern const u16                   s_DefaultInputMasks[10];
-extern const Rec_8017F5B4          D_8017F5B4[27];
+extern const u8                    D_8017F5B4[4];
+extern const Rec_8017F5B4          D_8017F5B8[26];
 /* D_8017F628 */
 extern const u16                   g_AnswerMessages[32];
 extern const CellDrawCallback      D_8017F668[77];
