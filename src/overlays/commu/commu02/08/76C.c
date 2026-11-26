@@ -2502,11 +2502,11 @@ MATCH void func_801D9348(u16 x, u16 y, s32 color, s32 frame_mode) {
     GFX_AddPrim(GFX_LAYER_UI, sizeof(LINE_F4));
 }
 
-#ifdef NON_MATCHING
+/* Draws one page of the name-entry letter grid in a window at (left, top) and its cursor. */
 // clang-format off
-NON_MATCHING void func_801D94D0(page, left, top, cursor_col_arg, cursor_row_arg)
+MATCH void func_801D94D0(page, left, top, cursor_col_arg, cursor_row_arg)
 u8 page;
-s32 left;
+s16 left;
 s32 top;
 s32 cursor_col_arg;
 s32 cursor_row_arg;
@@ -2573,9 +2573,6 @@ s32 cursor_row_arg;
     }
     UI_CursorDraw(x, y, 0);
 }
-#else
-INCLUDE_ASM(func_801D94D0);
-#endif
 
 /* Draws the stat legend panel at (x, y): five labels, their dot leaders, the four stat icons and the two arrows. */
 MATCH void func_801D97C8(s32 unused, s32 x, s32 y) {
