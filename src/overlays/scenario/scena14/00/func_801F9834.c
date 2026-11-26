@@ -171,7 +171,7 @@ MATCH void func_801F9834(void) {
             }
             SND_SeqStop(g_SelectionSepSlots[g_SndBGMId * 4], g_SelectionSequences[g_SndBGMId * 4]);
             g_AreaDrawFlags = 0;
-            SCENARIO_MESSAGE_WAIT(0x30, 0x14);
+            SCENARIO_MESSAGE_WAIT(MSG_SCENA14_048, 0x14);
             break;
         case 20:
             if (g_GameStateIndex == GAME_REQUEST_MESSAGE) {
@@ -226,7 +226,7 @@ MATCH void func_801F9834(void) {
                 break;
             }
             g_AreaDrawFlags = 0;
-            SCENARIO_MESSAGE_WAIT(0x27, 0x1A);
+            SCENARIO_MESSAGE_WAIT(MSG_SCENA14_039, 0x1A);
             break;
         case 26:
         case 32:
@@ -249,7 +249,7 @@ MATCH void func_801F9834(void) {
                 break;
             }
             g_AreaDrawFlags = 0;
-            SCENARIO_MESSAGE_WAIT(0x41, 0x20);
+            SCENARIO_MESSAGE_WAIT(MSG_SCENA14_065, 0x20);
             break;
         case 33:
             SCENE_AREA_CHANGE(AREA_ID_ANGEL_TOWER_GARR_FIGHT, TO_COORD_HALF(38), TO_COORD_HALF(67), AREA_ENTRY_MAP_LOADING | FACING_RIGHT);
@@ -260,7 +260,7 @@ MATCH void func_801F9834(void) {
                 break;
             }
             g_AreaDrawFlags = 0;
-            SCENARIO_MESSAGE_WAIT(0x14, 0x26);
+            SCENARIO_MESSAGE_WAIT(MSG_SCENA14_020, 0x26);
             break;
         case 39:
             SCENE_AREA_CHANGE(AREA_ID_MIKBA_CHECKPOINT, TO_COORD(17), TO_COORD(25), 0);
@@ -271,7 +271,7 @@ MATCH void func_801F9834(void) {
                 break;
             }
             g_AreaDrawFlags = 0;
-            SCENARIO_MESSAGE_WAIT(0x27, 0x2C);
+            SCENARIO_MESSAGE_WAIT(MSG_SCENA14_039, 0x2C);
             break;
         case 45:
             SCENE_AREA_CHANGE(AREA_ID_MOUNT_ZUBLO_GISSHAN, TO_COORD(76), TO_COORD(31), 0);
@@ -289,7 +289,7 @@ MATCH void func_801F9834(void) {
                 break;
             }
             g_AreaDrawFlags = 0;
-            SCENARIO_MESSAGE_WAIT(0xA, 0x32);
+            SCENARIO_MESSAGE_WAIT(MSG_SCENA14_010, 0x32);
             break;
         case 51:
             SCENE_AREA_CHANGE(AREA_ID_CLIFF_GAIST, TO_COORD_HALF(31), TO_COORD_HALF(116), 0);
@@ -307,7 +307,7 @@ MATCH void func_801F9834(void) {
                 break;
             }
             g_AreaDrawFlags = 0;
-            SCENARIO_MESSAGE_WAIT(0x49, 0x38);
+            SCENARIO_MESSAGE_WAIT(MSG_SCENA14_073, 0x38);
             break;
         case 57:
             SCENE_AREA_CHANGE(AREA_ID_DRAGNIER_ELDER_FIGHT, TO_COORD(35), TO_COORD_HALF(29), 0);
@@ -325,7 +325,7 @@ MATCH void func_801F9834(void) {
                 break;
             }
             g_AreaDrawFlags = 0;
-            SCENARIO_MESSAGE_WAIT(0x49, 0x3E);
+            SCENARIO_MESSAGE_WAIT(MSG_SCENA14_073, 0x3E);
             break;
         case 63:
             Game_RequestAreaChange(AREA_ID_EDEN_TEEPO_FIGHT, TO_COORD_HALF(6), TO_COORD_HALF(44), 0);
