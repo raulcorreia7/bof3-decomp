@@ -34,7 +34,7 @@
  * members diverge (the limit moves to $a0 and a label is added).
  *
  * Usage:
- *   MATCH void func_800B2218(void) { MENU_ADVANCE_PANEL(pos.x, MENU_PANEL_STEP_X, 320); }
+ *   MATCH void UI_PanelSlideOutOption_800B2218(void) { MENU_ADVANCE_PANEL(pos.x, MENU_PANEL_STEP_X, 320); }
  *   MATCH void func_801E3CB8(void) { MENU_RETREAT_PANEL(pos.x, MENU_PANEL_STEP_X, MENU_PANEL_FLOOR_X); }
  */
 #define MENU_ADVANCE_PANEL(member, step, limit) \

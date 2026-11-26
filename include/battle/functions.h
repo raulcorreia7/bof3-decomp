@@ -53,7 +53,8 @@ u8          Battle_SlotIsBlocked(u32 slot);
 /* func_800AFD9C */
 void        Battle_CenterCamera(void);
 u8          func_800AFF98(void);
-void        func_800B2218(void);
+/* func_800B2218 */
+void        UI_PanelSlideOutOption_800B2218(void);
 void        func_800B22AC(void);
 u8          Battle_PickRandomTarget(u8 excluded_slot);
 void        func_800B23B8(void);
