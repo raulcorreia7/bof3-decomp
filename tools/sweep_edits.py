@@ -8,17 +8,25 @@ body is tokenized and each edit class (CLASSES) proposes variants: one retyped l
 an increment or compound-assignment form, one cast, one swapped statement or declaration, one
 swapped operand or comparison, one loop or if/else or ternary form, `break` for `return`, one local
 split or two merged, one statement moved within its run of plain statements, a member store moved
-beside a store to the same record, every width
-combination of the integer parameters as an old-style definition. Each variant is
-compiled with `MATCH_SRC` into a private object and scored as `tools/match.sh --diff` scores it:
-differing rows. `--classes a-type,j-move` limits the classes. The tree is never written. One JSON line per
-variant that matches or has fewer rows than the draft goes to `--out`, with its class and diff;
-a summary line per function (`"class": "summary"`) counts the variants tried and failed.
-`--pairs` then tries pairs of a function's improving edits when none matched. `--climb STEPS`
-instead applies the best improving edit, sweeps the new text again, and repeats until no edit
-improves or the row matches; one `"class": "climb"` line per function holds the path of edits with
-each step's rows. Edits that read a local before it is set are not generated; a merge of two locals
-whose names differ, or a store moved across a call, carries `[needs-review]`.
+beside a store to the same record, every width combination of the integer parameters as an
+old-style definition, a call argument passed straight or through a local, a value set in both arms
+or once before the `if`, a shared tail hoisted after an if/else or switch or copied into each arm
+or case. Each variant is compiled with `MATCH_SRC` into a private object and scored on the
+`tools/match.sh --diff` listing: the two instruction streams are aligned on their opcodes by a
+longest common subsequence (branch targets as labels, call targets by name), and the score is the
+instructions missing plus extra plus the aligned ones whose operands differ; 0 is a byte match.
+`--classes a-type,j-move` limits the classes. The tree is never written. One JSON line per variant
+that matches or scores lower than the draft goes to `--out`, with its class and diff; a summary
+line per function (`"class": "summary"`) counts the variants tried and failed and lists the
+`needs_type` sites (a global read as `G[i * N + k]` or `*(... G + off)`, which a typed table would
+spell `G[i][k]`). `--pairs` then tries pairs of a function's improving edits when none matched.
+`--climb STEPS` instead applies the best improving edit, sweeps the new text again, and repeats
+until no edit improves or the row matches; one `"class": "climb"` line per function holds the path
+of edits with each step's score. Only the climb tries class r-header: an s8/u8/s16/u16 global or
+member of the image's own header, kept only while every other MATCH function that names it still
+matches. No statement moves across one that stores what it reads or reads what it stores, and
+edits that read a local before it is set are not generated; a merge of two locals whose names
+differ, or a store moved across a call, carries `[needs-review]`.
 
     tools/sweep_edits.py --worklist build/worklist.jsonl --jobs 20 --pairs
     tools/sweep_edits.py --worklist build/worklist.jsonl --jobs 20 --climb 12
@@ -40,7 +48,7 @@ from itertools import combinations, product
 from pathlib import Path
 
 from bof3.core.paths import ROOT
-from bof3.match import MatchResult
+from bof3.match import MatchResult, side_by_side
 from check_markers import TOKEN
 from try_variants import function_span
 
@@ -531,7 +539,12 @@ def g_cast(f: Function):
 def g_swap_statements(f: Function):
     t, st = f.toks, f.statements
     for x, y in zip(st, st[1:], strict=False):
-        if x[2] == y[2] == "expr" and x[3] == y[3] and _adjacent(f, x, y):
+        if (
+            x[2] == y[2] == "expr"
+            and x[3] == y[3]
+            and _adjacent(f, x, y)
+            and not _depends(f, x, y)
+        ):
             yield (
                 f"swap {f.span(x[0], x[1])[:30]} / {f.span(y[0], y[1])[:30]}",
                 (
@@ -608,6 +621,9 @@ def g_move(f: Function):
         for i, j in (
             (i, j) for i in range(len(run)) for j in range(len(run)) if abs(i - j) >= 2
         ):
+            crossed = range(j, i) if j < i else range(i + 1, j + 1)
+            if any(_depends(f, run[i], run[k]) for k in crossed):
+                continue
             order = texts[:i] + texts[i + 1 :]
             order.insert(j, texts[i])
             yield (
@@ -956,6 +972,436 @@ def g_locals(f: Function):
             yield f"split {x} at {f.span(s[0], s[1])[:30]}", tuple(edit)
 
 
+ASSIGN = {"=", "+=", "-=", "*=", "/=", "%=", "&=", "|=", "^=", "<<=", ">>="}
+
+
+def _writes(f: Function, s) -> list[list[str]]:
+    """Token lists of what one statement stores: assignment targets and ++/-- operands."""
+    t, out = f.toks, []
+    for k in range(s[0], s[1]):
+        if t[k].text in ASSIGN:
+            a = k - 1
+            while a > s[0] and t[a - 1].text not in ASSIGN | {",", "(", ";"}:
+                a -= 1
+            out.append([z.text for z in t[a:k]])
+        elif t[k].text in ("++", "--"):
+            side = operand(t, k - 1, False) if t[k - 1].kind == "ident" else None
+            side = side or operand(t, k + 1, True)
+            if side:
+                out.append([z.text for z in t[side[0] : side[1] + 1]])
+    return out
+
+
+def _contains(toks: list[str], part: list[str]) -> bool:
+    n = len(part)
+    return any(toks[i : i + n] == part for i in range(len(toks) - n + 1))
+
+
+def _depends(f: Function, x, y) -> bool:
+    """x and y cannot trade places: one stores what the other reads or stores, through a name,
+    a member, a pointer or an index, or both call."""
+    t = f.toks
+    tx = [z.text for z in t[x[0] : x[1] + 1]]
+    ty = [z.text for z in t[y[0] : y[1] + 1]]
+
+    def hits(writes, other):
+        for w in writes:
+            name = next((z for z in w if z not in ("*", "(", ")")), None)
+            if _contains(other, w) or (
+                name and ("*" in w or "[" in w) and name in other
+            ):
+                return True
+        return False
+
+    def calls(s):
+        return any(
+            t[k].kind == "ident" and t[k + 1].text == "(" and t[k].text not in KEYWORDS
+            for k in range(s[0], s[1])
+        )
+
+    return (
+        hits(_writes(f, x), ty)
+        or hits(_writes(f, y), tx)
+        or (calls(x) and (calls(y) or _writes(f, y)))
+        or (calls(y) and _writes(f, x))
+    )
+
+
+def _block_statements(f: Function, a: int, b: int) -> list[tuple[int, int]]:
+    """(first, last) token of each top-level statement in toks[a..b]; a compound is one."""
+    t, out, k = f.toks, [], a
+    while k <= b:
+        start = k
+        if t[k].text == "{":
+            k = matching(t, k)
+        elif t[k].text in ("if", "while", "for", "switch"):
+            k = matching(t, k + 1) + 1
+            k = matching(t, k) if t[k].text == "{" else expression_end(t, k, {";"}) + 1
+            while t[k].text != "}" and k + 1 <= b and t[k + 1].text == "else":
+                k += 2
+                if t[k].text == "if":
+                    k = matching(t, k + 1) + 1
+                k = (
+                    matching(t, k)
+                    if t[k].text == "{"
+                    else expression_end(t, k, {";"}) + 1
+                )
+        elif t[k].text == "do":
+            k = matching(t, k + 1)
+            k = expression_end(t, k + 1, {";"}) + 1
+        else:
+            k = expression_end(t, k, {";"}) + 1
+        out.append((start, k))
+        k += 1
+    return out
+
+
+def _arms(f: Function, k: int):
+    """For `if` at k with braced arms: (cond close, then {..}, else {..} or None)."""
+    t = f.toks
+    c = matching(t, k + 1)
+    if t[c + 1].text != "{":
+        return None
+    b1 = matching(t, c + 1)
+    if t[b1 + 1].text == "else" and t[b1 + 2].text == "{":
+        return c, (c + 1, b1), (b1 + 2, matching(t, b1 + 2))
+    if t[b1 + 1].text == "else":
+        return None
+    return c, (c + 1, b1), None
+
+
+def _plain(f: Function, s) -> bool:
+    """A statement with no braces, labels, gotos or returns."""
+    words = {z.text for z in f.toks[s[0] : s[1] + 1]}
+    return (
+        f.toks[s[1]].text == ";"
+        and not words & {"{", "}", "goto", "return", "break", "continue", "case"}
+        and f.toks[s[0]].text not in KEYWORDS
+    )
+
+
+def _set_only(f: Function, s, name: str) -> str | None:
+    """The value of `name = value;` when value does not read name and calls nothing."""
+    t = f.toks
+    if not (t[s[0]].text == name and t[s[0] + 1].text == "=" and t[s[1]].text == ";"):
+        return None
+    value = t[s[0] + 2 : s[1]]
+    if any(z.text == name or z.text in ASSIGN | {"++", "--"} for z in value) or any(
+        value[q].kind == "ident" and value[q + 1].text == "("
+        for q in range(len(value) - 1)
+    ):
+        return None
+    return f.span(s[0] + 2, s[1] - 1)
+
+
+def g_argument(f: Function):
+    """A local set once and read once as a call argument becomes the argument, and back."""
+    t = f.toks
+    for x, y in zip(f.statements, f.statements[1:], strict=False):
+        if x[2] != "expr" or x[3] != y[3] or not _adjacent(f, x, y):
+            continue
+        name = t[x[0]].text
+        if name not in f.locals or t[x[0] + 1].text != "=":
+            continue
+        value = _set_only(f, x, name)
+        uses = [u for u in f.uses(name) if u > f.locals[name][1][1]]
+        if (
+            value is None
+            or len(uses) != 2
+            or uses[0] != x[0]
+            or not (y[0] < uses[1] < y[1])
+        ):
+            continue
+        u = uses[1]
+        if t[u - 1].text not in ("(", ",") or t[u + 1].text not in (")", ","):
+            continue
+        d = f.locals[name][1]
+        edit = [(t[x[0]].start, t[x[1]].end, ""), (t[u].start, t[u].end, value)]
+        if not any(z.text in (",", "=") for z in t[d[0] : d[1]]):
+            edit.append((t[d[0]].start, t[d[1]].end, ""))
+        yield f"pass {value[:30]} straight to the call", tuple(edit)
+    used = set(f.locals) | {t[p[1]].text for p in f.params()}
+    for s in f.statements:
+        if s[2] != "expr" or s[3] != 1 or not _plain(f, s):
+            continue
+        for k in range(s[0], s[1]):
+            if (
+                not (t[k].kind == "ident" and t[k + 1].text == "(")
+                or t[k].text in KEYWORDS
+            ):
+                continue
+            if MACRO.match(t[k].text):
+                continue
+            close, a = matching(t, k + 1), k + 2
+            while a < close:
+                e = expression_end(t, a, {","})
+                arg = t[a : e + 1]
+                if (
+                    len(arg) > 1
+                    and not any(z.text in ASSIGN | {"++", "--", "&"} for z in arg)
+                    and not any(
+                        arg[q].kind == "ident" and arg[q + 1].text == "("
+                        for q in range(len(arg) - 1)
+                    )
+                ):
+                    new = next(
+                        n for n in (f"arg{i}" for i in range(9)) if n not in used
+                    )
+                    text = f.span(a, e)
+                    yield (
+                        f"local {new} for argument {text[:30]}",
+                        (
+                            (t[f.body].end, t[f.body].end, f"\n    s32 {new};"),
+                            (t[s[0]].start, t[s[0]].start, f"{new} = {text};\n    "),
+                            (t[a].start, t[e].end, new),
+                        ),
+                    )
+                a = e + 2
+
+
+def g_both_arms(f: Function):
+    """`x = a; if (c) { x = b; }` and `if (c) { x = b; } else { x = a; }`, both ways."""
+    t = f.toks
+    for x in f.statements:
+        if x[2] != "expr" or not _plain(f, x):
+            continue
+        k = x[1] + 1
+        if k >= f.end or t[k].text != "if":
+            continue
+        arms = _arms(f, k)
+        if not arms or arms[2]:
+            continue
+        c, then, _ = arms
+        name = t[x[0]].text
+        value = _set_only(f, x, name)
+        inner = _block_statements(f, then[0] + 1, then[1] - 1)
+        if value is None or not inner or any(t[q].text == name for q in range(k, c)):
+            continue
+        if _set_only(f, inner[0], name) is None:
+            continue
+        yield (
+            f"set {name} in both arms",
+            (
+                (t[x[0]].start, t[x[1]].end, ""),
+                (t[then[1]].end, t[then[1]].end, f" else {{\n{name} = {value};\n}}"),
+            ),
+        )
+    for k in range(f.body + 1, f.end):
+        if t[k].text != "if" or t[k - 1].text == "else":
+            continue
+        arms = _arms(f, k)
+        if not arms or not arms[2]:
+            continue
+        c, then, other = arms
+        a = _block_statements(f, then[0] + 1, then[1] - 1)
+        b = _block_statements(f, other[0] + 1, other[1] - 1)
+        cond = f.span(k + 2, c - 1)
+        for keep, drop, test in ((a, b, cond), (b, a, f"!({cond})")):
+            if len(drop) != 1 or not keep:
+                continue
+            name = t[drop[0][0]].text
+            value = _set_only(f, drop[0], name)
+            if value is None or _set_only(f, keep[0], name) is None:
+                continue
+            if any(t[q].text == name for q in range(k, c)):
+                continue
+            body = f.span(keep[0][0], keep[-1][1])
+            yield (
+                f"set {name} once before the if",
+                (
+                    (
+                        t[k].start,
+                        t[other[1]].end,
+                        f"{name} = {value};\n    if ({test}) {{\n{body}\n}}",
+                    ),
+                ),
+            )
+
+
+def g_tail(f: Function):
+    """A statement both arms end with moves after the if/else, and back."""
+    t = f.toks
+    for k in range(f.body + 1, f.end):
+        if t[k].text != "if" or t[k - 1].text == "else":
+            continue
+        arms = _arms(f, k)
+        if not arms:
+            continue
+        c, then, other = arms
+        last = other[1] if other else then[1]
+        a = _block_statements(f, then[0] + 1, then[1] - 1)
+        if other:
+            b = _block_statements(f, other[0] + 1, other[1] - 1)
+            if (
+                len(a) > 1
+                and b
+                and _plain(f, a[-1])
+                and f.span(*a[-1]) == f.span(*b[-1])
+            ):
+                tail = f.span(*a[-1])
+                edit = [
+                    (t[a[-1][0]].start, t[a[-1][1]].end, ""),
+                    (t[last].end, t[last].end, f"\n    {tail}"),
+                ]
+                if len(b) > 1:
+                    edit.append((t[b[-1][0]].start, t[b[-1][1]].end, ""))
+                else:
+                    edit.append((t[then[1]].end, t[other[1]].end, ""))
+                yield f"hoist {tail[:30]} after the if/else", tuple(edit)
+        nxt = last + 1
+        if nxt >= f.end:
+            continue
+        s = _block_statements(f, nxt, f.end - 1)[0]
+        if not _plain(f, s) or t[nxt - 1].text == ":":
+            continue
+        ends = [a[-1] if a else None]
+        if other:
+            b = _block_statements(f, other[0] + 1, other[1] - 1)
+            ends.append(b[-1] if b else None)
+        if any(
+            e and t[e[0]].text in ("return", "break", "continue", "goto") for e in ends
+        ):
+            continue
+        tail = f.span(*s)
+        edit = [
+            (t[s[0]].start, t[s[1]].end, ""),
+            (t[then[1]].start, t[then[1]].start, f"{tail}\n"),
+        ]
+        if other:
+            edit.append((t[other[1]].start, t[other[1]].start, f"{tail}\n"))
+        else:
+            edit.append((t[then[1]].end, t[then[1]].end, f" else {{\n{tail}\n}}"))
+        yield f"duplicate {tail[:30]} into both arms", tuple(edit)
+
+
+def _switch_breaks(f: Function, open_: int, close: int) -> list[int]:
+    """`break` tokens that leave this switch (not a nested loop or switch)."""
+    t, out, k = f.toks, [], open_ + 1
+    while k < close:
+        if t[k].text in ("for", "while", "switch", "do"):
+            k = matching(t, k + 1) if t[k].text != "do" else matching(t, k + 1)
+            if t[k].text == ")" and t[k + 1].text == "{":
+                k = matching(t, k + 1)
+        elif t[k].text == "break":
+            out.append(k)
+        k += 1
+    return out
+
+
+def g_switch_tail(f: Function):
+    """The statements after a switch copied into each case before its break, and back."""
+    t = f.toks
+    for k in range(f.body + 1, f.end):
+        if t[k].text != "switch":
+            continue
+        c = matching(t, k + 1)
+        if t[c + 1].text != "{":
+            continue
+        close = matching(t, c + 1)
+        breaks = _switch_breaks(f, c + 1, close)
+        block_end = next(
+            (j for j in range(close + 1, f.end + 1) if t[j].text == "}"), f.end
+        )
+        rest = t[close + 1 : block_end]
+        words = {z.text for z in rest}
+        has_default = any(t[j].text == "default" for j in range(c, close))
+        if (
+            rest
+            and not words & {"{", "goto", "case", ":", "if", "for", "while", "switch"}
+            and sum(z.text == ";" for z in rest) <= 3
+            and breaks
+            and not any(t[j].text == "}" for j in range(close + 1, block_end))
+        ):
+            tail = f.span(close + 1, block_end - 1)
+            ends = any(z.text == "return" for z in rest)
+            edit = [
+                (t[b].start, t[b + 1].end, tail if ends else f"{tail}\nbreak;")
+                for b in breaks
+            ]
+            end = "" if t[close - 2].text == "break" else f"{tail}\n"
+            if not has_default:
+                end += f"default:\n{tail}\n"
+            if end:
+                edit.append((t[close].start, t[close].start, end))
+            edit.append((t[close + 1].start, t[block_end - 1].end, ""))
+            yield f"copy {tail[:30]} into each case", tuple(edit)
+        if breaks and has_default:
+            stmts = []
+            for b in breaks:
+                prev = b - 1
+                if t[prev].text != ";":
+                    break
+                a = prev - 1
+                while t[a].text not in (";", ":", "{", "}"):
+                    a -= 1
+                s = (a + 1, prev)
+                if not _plain(f, s):
+                    break
+                stmts.append(s)
+            else:
+                texts = {f.span(*s) for s in stmts}
+                if (
+                    len(texts) == 1
+                    and t[close - 1].text == ";"
+                    and t[close - 2].text == "break"
+                ):
+                    tail = texts.pop()
+                    edit = [(t[s[0]].start, t[s[1]].end, "") for s in stmts]
+                    edit.append((t[close].end, t[close].end, f"\n    {tail}"))
+                    yield f"hoist {tail[:30]} after the switch", tuple(edit)
+
+
+TABLE = re.compile(
+    r"\b([A-Za-z_]\w*)\s*\[([^\[\]]*\*\s*(?:0x[0-9A-Fa-f]+|\d+)[^\[\]]*)\]"
+)
+OFFSET = re.compile(
+    r"\*\s*\([^;]*?\b([A-Za-z_]\w*)\s*\)?\s*\+\s*(0x[0-9A-Fa-f]+|\d+)\s*\)"
+)
+
+
+def needs_type(text: str) -> list[str]:
+    """Table reads on a global spelled as offset math: `G[i * N + k]` or `*(... G + off)`."""
+    try:
+        f = Function(text)
+    except (IndexError, KeyError, RuntimeError, StopIteration, ValueError):
+        return []
+    mine = set(f.locals) | {f.toks[p[1]].text for p in f.params()}
+    body = text[f.toks[f.body].start :]
+    out = []
+    for m in list(TABLE.finditer(body)) + list(OFFSET.finditer(body)):
+        if m[1] not in mine and m[1] not in TYPES:
+            out.append(re.sub(r"\s+", " ", m[0])[:80])
+    return sorted(set(out))
+
+
+HEADER_INT = re.compile(
+    r"^(\s*(?:extern\s+)?)(s8|u8|s16|u16)(\s+)(\w+)(\s*(?:\[[^;]*\])?;)", re.M
+)
+
+
+def header_variants(source: Path, text: str):
+    """(label, header, new header text, other users) for each s8/u8/s16/u16 global or member of
+    the image's own header that the function names; users are the other files that name it."""
+    folder = source.parent
+    names = {x.text for x in tokenize(text) if x.kind == "ident"}
+    for m in re.finditer(r'^#include "([^"/]+\.h)"', source.read_text(), re.M):
+        header = folder / m[1]
+        if not header.exists():
+            continue
+        body = header.read_text()
+        siblings = [p for p in sorted(folder.glob("*.c"))]
+        for h in HEADER_INT.finditer(body):
+            if h[4] not in names:
+                continue
+            word = re.compile(rf"\b{re.escape(h[4])}\b")
+            users = [p for p in siblings if word.search(p.read_text())]
+            for new in ("s8", "u8", "s16", "u16"):
+                if new == h[2]:
+                    continue
+                changed = body[: h.start(2)] + new + body[h.end(2) :]
+                yield f"header {h[4]}: {new}", header, changed, users
+
+
 CLASSES = {
     "a-type": g_retype,
     "b-increment": g_increment,
@@ -969,6 +1415,10 @@ CLASSES = {
     "j-move": g_move,
     "k-params": g_params,
     "l-sibling": g_sibling,
+    "m-argument": g_argument,
+    "n-both-arms": g_both_arms,
+    "o-tail": g_tail,
+    "p-switch-tail": g_switch_tail,
 }
 
 
@@ -1006,8 +1456,120 @@ def variants(text: str, classes=None):
 # --- measuring ----------------------------------------------------------------------------
 
 
-def measure(ref: str, scratch: Path) -> int | None:
-    """Differing rows of `match.sh --diff` on the scratch source: 0 match, None no compile."""
+class Score(int):
+    """Instructions missing from and extra in the candidate plus operand-only differences.
+
+    0 only when the bytes match."""
+
+    missing = extra = operands = 0
+
+    def __new__(cls, missing: int, extra: int, operands: int, matched: bool = False):
+        total = 0 if matched else max(1, missing + extra + operands)
+        self = super().__new__(cls, total)
+        self.missing, self.extra, self.operands = missing, extra, operands
+        return self
+
+
+BRANCH = re.compile(r"^(b|j$|jal$)")
+ADDRESS = re.compile(r"0x([0-9a-f]{8})\b")
+
+
+def _normalise(listing, names: dict[int, str], shift: int) -> list[tuple[str, str]]:
+    """(mnemonic, operands) with branch targets as labels and call targets as names."""
+    if not listing:
+        return []
+    base = int(listing[0][0], 16)
+    out = []
+    for _, mnemonic, ops in listing:
+        if BRANCH.match(mnemonic):
+
+            def label(m, call=mnemonic == "jal"):
+                address = int(m[1], 16)
+                if base <= address < base + 4 * len(listing) and not call:
+                    return f"L{(address - base) // 4}"
+                name = names.get(address) or names.get(address - shift)
+                return name or m[0]
+
+            ops = ADDRESS.sub(label, ops)
+        out.append((mnemonic, ops))
+    return out
+
+
+def _lcs_pairs(a: list[str], b: list[str]) -> list[tuple[int, int]]:
+    """Index pairs of a longest common subsequence of a and b."""
+    head = 0
+    while head < min(len(a), len(b)) and a[head] == b[head]:
+        head += 1
+    tail = 0
+    while (
+        tail < min(len(a), len(b)) - head
+        and a[len(a) - 1 - tail] == b[len(b) - 1 - tail]
+    ):
+        tail += 1
+    pairs = [(k, k) for k in range(head)]
+    ma, mb = a[head : len(a) - tail], b[head : len(b) - tail]
+    if len(ma) * len(mb) <= 4_000_000:
+        n, m = len(ma), len(mb)
+        table = [[0] * (m + 1) for _ in range(n + 1)]
+        for i in range(n - 1, -1, -1):
+            row, below = table[i], table[i + 1]
+            for j in range(m - 1, -1, -1):
+                row[j] = (
+                    below[j + 1] + 1 if ma[i] == mb[j] else max(below[j], row[j + 1])
+                )
+        i = j = 0
+        while i < n and j < m:
+            if ma[i] == mb[j]:
+                pairs.append((head + i, head + j))
+                i += 1
+                j += 1
+            elif table[i + 1][j] >= table[i][j + 1]:
+                i += 1
+            else:
+                j += 1
+    else:  # too large for the table: difflib's matching blocks
+        matcher = difflib.SequenceMatcher(None, ma, mb, autojunk=False)
+        for block in matcher.get_matching_blocks():
+            pairs += [
+                (head + block.a + k, head + block.b + k) for k in range(block.size)
+            ]
+    pairs += [(len(a) - tail + k, len(b) - tail + k) for k in range(tail)]
+    return pairs
+
+
+def lcs_score(retail, candidate, names=None, shift=0, matched=False) -> Score:
+    """Align the two listings on their opcodes; count the unpaired and the operand differences."""
+    r = _normalise(retail, names or {}, shift)
+    c = _normalise(candidate, names or {}, shift)
+    pairs = _lcs_pairs([x[0] for x in r], [x[0] for x in c])
+    operands = sum(r[i][1] != c[j][1] for i, j in pairs)
+    return Score(len(r) - len(pairs), len(c) - len(pairs), operands, matched)
+
+
+_NAMES: dict[str, dict[int, str]] = {}
+
+
+def link_names(target: str) -> dict[int, str]:
+    """Address to symbol name from the image's link map."""
+    if target not in _NAMES:
+        link = ROOT / "build/symbols" / (target.replace("/", "+") + ".link")
+        names = {}
+        if link.exists():
+            for line in link.read_text().splitlines():
+                parts = line.split()
+                if len(parts) == 2 and parts[1].startswith("0x"):
+                    names[int(parts[1], 16)] = parts[0]
+        _NAMES[target] = names
+    return _NAMES[target]
+
+
+SHIFT = re.compile(
+    r"starts at \+0x([0-9A-F]+) in the candidate, retail \+0x([0-9A-F]+)"
+)
+
+
+def measure(ref: str, scratch: Path) -> Score | None:
+    """The LCS score of `match.sh --diff` on the scratch source: 0 match, None no compile."""
     env = {**os.environ, "MATCH_SRC": str(scratch)}
     run = subprocess.run(
         ["sh", "tools/match.sh", "--diff", ref],
@@ -1020,8 +1582,21 @@ def measure(ref: str, scratch: Path) -> int | None:
     )
     result = MatchResult(run.returncode, run.stdout)
     if result.matched:
-        return 0
-    return len(result.differing) or None
+        return Score(0, 0, 0, True)
+    retail, candidate = side_by_side(result)
+    if not candidate:
+        return None
+    moved = SHIFT.search(result.output)
+    shift = int(moved[1], 16) - int(moved[2], 16) if moved else 0
+    return lcs_score(retail, candidate, link_names(ref.split("@")[0]), shift)
+
+
+def _parts(score) -> dict:
+    return {
+        "missing": getattr(score, "missing", None),
+        "extra": getattr(score, "extra", None),
+        "operands": getattr(score, "operands", None),
+    }
 
 
 def find_source(name: str) -> Path | None:
@@ -1071,7 +1646,7 @@ def sweep(
                 {
                     "ref": ref,
                     "class": "summary",
-                    "base": base_rows,
+                    "base": base_rows if base_rows is None else int(base_rows),
                     "tried": 0,
                     "failed": 0,
                 }
@@ -1113,29 +1688,65 @@ def sweep(
             {
                 "ref": ref,
                 "class": "summary",
-                "base": base_rows,
+                "base": int(base_rows),
                 "tried": tried,
                 "failed": failed,
                 "source": str(source.relative_to(ROOT)),
+                "base_parts": _parts(base_rows),
+                "needs_type": needs_type(text),
             }
         )
     return records
 
 
+def _header_safe(ref, name, header, changed, users, own, workdir, judge) -> bool:
+    """Every other MATCH function that names the retyped symbol still matches."""
+    target = ref.split("@")[0]
+    by_name = {v: k for k, v in link_names(target).items()}
+    word = re.compile(rf"\b{re.escape(changed[1])}\b")
+    with tempfile.TemporaryDirectory(dir=workdir) as tmp:
+        (Path(tmp) / header.name).write_text(changed[0])
+        for user in users:
+            text = own[1] if user == own[0] else user.read_text()
+            copy = Path(tmp) / user.name
+            copy.write_text(text)
+            for m in re.finditer(r"^MATCH [^(\n]*?[ *](\w+)\(", text, re.M):
+                other = m[1]
+                if other == name or other not in by_name:
+                    continue
+                start, end = function_span(text, other)
+                if word.search(text[start:end]) and judge(
+                    f"{target}@0x{by_name[other]:08X}", copy
+                ):
+                    return False
+    return True
+
+
 def climb(ref, name, source, judge=measure, workdir=None, classes=None, steps=12):
     """Apply the best improving edit, generate edits again from the new text, repeat.
 
-    Returns one record: the path of edits with each step's rows, the final rows and diff."""
+    Class r-header retypes an s8/u8/s16/u16 global or member of the image's own header and is
+    kept only while every other MATCH user of the symbol still matches. Returns one record: the
+    path of edits with each step's score, the final score, the diff and the needs-type sites."""
     base = source.read_text()
     start, end = function_span(base, name)
     text = orig = base[start:end]
     path, tried, failed = [], 0, 0
+    headers: dict[Path, str] = {}  # header path -> retyped text, kept across steps
     with tempfile.TemporaryDirectory(dir=workdir) as tmp:
         scratch = Path(tmp) / source.name
 
-        def score(body: str) -> int | None:
+        def score(body: str, header=None) -> int | None:
+            files = dict(headers)
+            if header:
+                files[header[0]] = header[1]
+            for p, content in files.items():
+                (Path(tmp) / p.name).write_text(content)
             scratch.write_text(base[:start] + body + base[end:])
-            return judge(ref, scratch)
+            got = judge(ref, scratch)
+            if header and header[0] not in headers:
+                (Path(tmp) / header[0].name).unlink()
+            return got
 
         rows = base_rows = score(text)
         while rows and len(path) < steps:
@@ -1147,33 +1758,62 @@ def climb(ref, name, source, judge=measure, workdir=None, classes=None, steps=12
                 if got is None:
                     failed += 1
                 elif got < rows and (best is None or got < best[0]):
-                    best = (got, cls, label, new)
+                    best = (got, cls, label, new, None)
                     if got == 0:
                         break
+            if (not classes or "r-header" in classes) and (best is None or best[0]):
+                for label, header, changed, users in header_variants(source, text):
+                    if header in headers:
+                        continue
+                    got = score(text, (header, changed))
+                    tried += 1
+                    if got is None:
+                        failed += 1
+                    elif got < rows and (best is None or got < best[0]):
+                        whole = base[:start] + text + base[end:]
+                        symbol = label.split()[1].rstrip(":")
+                        if _header_safe(
+                            ref,
+                            name,
+                            header,
+                            (changed, symbol),
+                            users,
+                            (source, whole),
+                            workdir,
+                            judge,
+                        ):
+                            best = (got, "r-header", label, text, (header, changed))
             if best is None:
                 break
-            rows, cls, label, new = best
-            path.append(
-                {
-                    "class": cls,
-                    "edit": label,
-                    "rows": rows,
-                    "needs_review": label.endswith("[needs-review]"),
-                    "diff": _diff(text, new),
-                }
-            )
+            rows, cls, label, new, header = best
+            step = {
+                "class": cls,
+                "edit": label,
+                "score": int(rows),
+                **_parts(rows),
+                "needs_review": label.endswith("[needs-review]"),
+                "diff": _diff(text, new),
+            }
+            if header:
+                headers[header[0]] = header[1]
+                step["diff"] = _diff(header[0].read_text(), header[1])
+                step["header"] = str(header[0].relative_to(ROOT))
+            path.append(step)
             text = new
     return {
         "ref": ref,
         "class": "climb",
         "source": str(source.relative_to(ROOT)),
-        "base": base_rows,
+        "base": int(base_rows) if base_rows is not None else None,
+        "base_parts": _parts(base_rows),
         "path": path,
-        "final": rows,
+        "final": int(rows) if rows is not None else None,
+        **_parts(rows),
         "match": rows == 0,
         "tried": tried,
         "failed": failed,
         "diff": _diff(orig, text),
+        "needs_type": needs_type(text),
     }
 
 
@@ -1185,11 +1825,12 @@ def _record(ref, base_rows, cls, label, text, edit, rows):
     diff = _diff(text, apply(text, edit))
     return {
         "ref": ref,
-        "base": base_rows,
+        "base": int(base_rows),
         "class": cls,
         "edit": label,
         "diff": diff,
-        "rows": rows,
+        "score": int(rows),
+        **_parts(rows),
         "match": rows == 0,
     }
 
