@@ -30,10 +30,10 @@ extern void func_801F3994(void);
 extern u8 D_801F57BC[];
 
 /* The per-cell tile bytes and the cell primitives. */
-extern u8  D_801F57CC[];
-extern u8  D_801F584C[];
+extern u8  D_801F57CC[2][7][9];
+extern u8  D_801F584C[7][9];
 extern u32 D_801F58C8[];
-extern s8  D_801F58D0[];
+extern s8  D_801F58D0[3][7][9];
 extern u8  D_801F5990[];
 
 extern u8 D_801F64B8[];
