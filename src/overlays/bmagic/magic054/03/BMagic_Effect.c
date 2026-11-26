@@ -11,13 +11,11 @@ MATCH void func_801EEC2C(void) {
     SYS_DISPATCH_TASK(table.steps, 1, g_Task);
 }
 
-#ifdef NON_MATCHING
 /* Spawns one effect slot per living battler on the selected side, marks each slot busy, and
  * otherwise applies the encounter 0x37 damage flags and advances the local work. */
-NON_MATCHING void func_801EEC98(void) {
+MATCH void func_801EEC98(void) {
     PartyMember* member;
     PartyMember* saved;
-    PartyMember* work;
     u32          index;
     u8           i;
 
@@ -33,6 +31,7 @@ NON_MATCHING void func_801EEC98(void) {
         for (i = 0; i < 8; i++) {
             BattleWorkImage* image;
             BattleWorkImage* slot;
+            PartyMember*     work;
 
             if (func_801DB524((u8)(i + 3)) != 0) {
                 continue;
@@ -56,6 +55,7 @@ NON_MATCHING void func_801EEC98(void) {
         for (i = 0; i < 3; i++) {
             BattleWorkImage* image;
             BattleWorkImage* slot;
+            PartyMember*     work;
 
             if (func_801DB524(i) != 0) {
                 continue;
@@ -83,9 +83,6 @@ NON_MATCHING void func_801EEC98(void) {
     }
     SND_SEQueueSelection(0x100);
 }
-#else
-INCLUDE_ASM(func_801EEC98);
-#endif
 
 #include "overlays/bmagic/shared/Effect_Hit.h"
 
