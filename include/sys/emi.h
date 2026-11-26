@@ -23,9 +23,7 @@
 #define EMI_HEADER_FILL           0x2e   /* fill from the TOC end up to EMI_SECTOR_SIZE */
 #define EMI_PAYLOAD_FILL          0x5f   /* fill from a payload end to the next EMI_SECTOR_SIZE boundary */
 
-/* Entry slots inside one archive (disc names; @source: wiki:formats/emi). The archive types BENEMY, BGM,
- * BPLCHAR and PLCHAR start with the same three entries: the VAB header, the SE table or the sequence
- * (slot 1, by type) and the VAB body. The bank selectors are the load_arg of the VAB entries. */
+/* Entry slots inside one archive (disc names; @source: wiki:formats/emi). */
 typedef enum EMISoundSlot {
     EMI_SOUND_SLOT_VAB_HEADER = 0,
     EMI_SOUND_SLOT_SE         = 1, /* BENEMY, BPLCHAR and PLCHAR: the SE table */
@@ -36,8 +34,7 @@ typedef enum EMISoundSlot {
 #define EMI_BENEMY_BANK            6
 #define EMI_BGM_BANK               0
 
-/* A whole bank holds three VAB triples around a zero filler and the LZ77 container;
- * a one-section bank holds the first triple and one section. */
+/* A whole bank holds three VAB triples around a zero filler and the LZ77 container; a one-section bank holds the first triple and one section. */
 #define EMI_BPLCHAR_SLOT_SECTION   3 /* one-section bank */
 #define EMI_BPLCHAR_SLOT_FILLER    3 /* whole bank */
 #define EMI_BPLCHAR_SLOT_CONTAINER 7 /* whole bank */
@@ -46,8 +43,7 @@ typedef enum EMISoundSlot {
 #define EMI_PLCHAR_SLOT_PROGRAM    0 /* PLPxxx: the character program */
 #define EMI_PLCHAR_BANK            1
 
-/* Entry type ids (@source: wiki:formats/emi#entry-types): what the loader does with a payload.
- * EMILoaderState holds the two internal loader states. */
+/* Entry type ids (@source: wiki:formats/emi#entry-types): what the loader does with a payload. */
 typedef enum EMIEntryType {
     EMI_ENTRY_COPY          = 0,  /* RAM payload copied to load_arg; may hold code or data */
     EMI_ENTRY_PACKED        = 1,  /* LZ77 payload (include/sys/lz77.h) decoded to load_arg */
@@ -69,23 +65,19 @@ typedef enum EMIEntryType {
  * its source's id. */
 typedef u32 EMIModuleId;
 
-/* The prologue every module payload starts with; an overlay whose prologue
- * carries more data nests this as its first member. */
+/* The prologue every module payload starts with; an overlay whose prologue carries more data nests this as its first member. */
 typedef struct OverlayHeader {
     EMIModuleId id; /* 0x00 the TOC's cached first payload word */
 } OverlayHeader;
 
 ASSERT_SIZE(OverlayHeader, 0x4);
 
-/* States the loader keeps in the type cell besides the entry types. EMI_NextEntry sets
- * EMI_LOADER_STATE_ARCHIVE_HEADER while it reads the archive's first sector; EMI_ReadToc
- * handles it. */
+/* States the loader keeps in the type cell besides the entry types. */
 typedef enum EMILoaderState {
     EMI_LOADER_STATE_ARCHIVE_HEADER = 5,
 } EMILoaderState;
 
-/* Never executable: EMI is a sector-aligned data container, so an entry is classified by type alone
- * (@source: wiki:formats/emi#entry-types). */
+/* Never executable: EMI is a sector-aligned data container, so an entry is classified by type alone (@source: wiki:formats/emi#entry-types). */
 typedef struct EMIArchiveHeader {
     u32 entry_count;           /* 0x00 */
     u32 version;               /* 0x04; 1 in all 880 US Breath of Fire III (USA) archives */

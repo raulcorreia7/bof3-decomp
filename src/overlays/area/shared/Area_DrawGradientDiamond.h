@@ -3,18 +3,10 @@
    (area087), func_801F4A30 (area088), func_801F3F90 (area104), func_801F3ED0 (area115), func_801F3EE4 (area121),
    func_801F3E3C (area151), func_801F3D90 (area152) */
 MATCH void Area_DrawGradientDiamond(s16 x, s16 y) {
-    MATRIX matrix;
-    long   depth;
-    long   flag;
-    /* FAKE: FAKE_REG pins the scratch base to the retail s1 load. */
-    FAKE_REG(SVECTOR*, scratch, "s1");
-    SVECTOR* q1;
-    SVECTOR* q2;
-    SVECTOR* q3;
-    s16      vx0;
-    /* FAKE: pins the hoisted first-pair loads to the retail v1/v0. */
-    FAKE_REG(s16, vy0, "v0");
-    u32 primitive;
+    MATRIX   matrix;
+    long     depth;
+    long     flag;
+    POLY_G4* prim;
 
     PushMatrix();
     RotMatrix(&g_AreaCameraAngle, &matrix);
@@ -24,61 +16,27 @@ MATCH void Area_DrawGradientDiamond(s16 x, s16 y) {
     SetRotMatrix(&matrix);
     SetTransMatrix(&matrix);
 
-    scratch   = g_ScratchPadVectors;
-    primitive = (u32)g_GfxPrimCursor;
+    prim = (POLY_G4*)g_GfxPrimCursor;
+    setVector(&g_ScratchPadVectors[0], -10, 0, 0);
+    setVector(&g_ScratchPadVectors[1], 0, -4, 0);
+    setVector(&g_ScratchPadVectors[2], 0, 4, 0);
+    setVector(&g_ScratchPadVectors[3], 10, 0, 0);
 
-    q1 = scratch + 1;
-    q2 = scratch + 2;
-    q3 = scratch + 3;
-
-    scratch[0].vx                     = -10;
-    FAKE_VOLATILE(s16, scratch[0].vy) = 0;
-    FAKE_VOLATILE(s16, scratch[0].vz) = 0;
-    FAKE_VOLATILE(s16, q1->vx)        = 0;
-    FAKE_VOLATILE(s16, q1->vy)        = -4;
-    FAKE_VOLATILE(s16, q1->vz)        = 0;
-    FAKE_VOLATILE(s16, q2->vx)        = 0;
-    FAKE_VOLATILE(s16, q2->vy)        = 4;
-    FAKE_VOLATILE(s16, q2->vz)        = 0;
-    FAKE_VOLATILE(s16, q3->vx)        = 10;
-    FAKE_VOLATILE(s16, q3->vy)        = 0;
-    FAKE_VOLATILE(s16, q3->vz)        = 0;
-
-    SetPolyG4((POLY_G4*)primitive);
-    RotTransPers4(scratch, scratch + 1, scratch + 2, scratch + 3, (long*)(primitive + 8), (long*)(primitive + 0x10), (long*)(primitive + 0x18), (long*)(primitive + 0x20), &depth, &flag);
-
-    vx0 = *FAKE_VOLATILE_PTR(s16, (primitive + 8));
-
-    /* FAKE: volatile-drop keeps the original load and store order. */
-    *FAKE_VOLATILE_PTR(u8, (primitive + 0xC))  = 0x80u;
-    /* FAKE: volatile-drop keeps the original load and store order. */
-    *FAKE_VOLATILE_PTR(u8, (primitive + 0xE))  = 0x80u;
-    /* FAKE: volatile-drop keeps the original load and store order. */
-    *FAKE_VOLATILE_PTR(u8, (primitive + 0x14)) = 0x80u;
-    /* FAKE: volatile-drop keeps the original load and store order. */
-    *FAKE_VOLATILE_PTR(u8, (primitive + 0x16)) = 0x80u;
-    vy0                                        = *FAKE_VOLATILE_PTR(s16, (primitive + 10));
-
-    /* FAKE: volatile-drop keeps the original load and store order. */
-    *FAKE_VOLATILE_PTR(u8, (primitive + 4))    = 0xFFu;
-    /* FAKE: volatile-drop keeps the original load and store order. */
-    *FAKE_VOLATILE_PTR(u8, (primitive + 5))    = 0u;
-    /* FAKE: volatile-drop keeps the original load and store order. */
-    *FAKE_VOLATILE_PTR(u8, (primitive + 6))    = 0u;
-    /* FAKE: volatile-drop keeps the original load and store order. */
-    *FAKE_VOLATILE_PTR(u8, (primitive + 0xD))  = 0u;
-    /* FAKE: volatile-drop keeps the original load and store order. */
-    *FAKE_VOLATILE_PTR(u8, (primitive + 0x15)) = 0u;
-    /* FAKE: volatile-drop keeps the original load and store order. */
-    *FAKE_VOLATILE_PTR(u8, (primitive + 0x1C)) = 0u;
-    /* FAKE: volatile-drop keeps the original load and store order. */
-    *FAKE_VOLATILE_PTR(u8, (primitive + 0x1D)) = 0u;
-    /* FAKE: volatile-drop keeps the original load and store order. */
-    *FAKE_VOLATILE_PTR(u8, (primitive + 0x1E)) = 0xFFu;
-
-    setXY4(((POLY_G4*)primitive), (s16)(vx0 - 0x9E) + x, (s16)(vy0 - 0x76) + y, (s16)((s16)((POLY_G4*)primitive)->x1 - 0x9E) + x, (s16)((s16)((POLY_G4*)primitive)->y1 - 0x76) + y,
-           (s16)((s16)((POLY_G4*)primitive)->x2 - 0x9E) + x, (s16)((s16)((POLY_G4*)primitive)->y2 - 0x76) + y, (s16)((s16)((POLY_G4*)primitive)->x3 - 0x9E) + x,
-           (s16)((s16)((POLY_G4*)primitive)->y3 - 0x76) + y);
+    SetPolyG4(prim);
+    RotTransPers4(&g_ScratchPadVectors[0], &g_ScratchPadVectors[1], &g_ScratchPadVectors[2], &g_ScratchPadVectors[3], (long*)&prim->x0, (long*)&prim->x1, (long*)&prim->x2, (long*)&prim->x3, &depth,
+                  &flag);
+    setRGB0(prim, 0xFF, 0, 0);
+    setRGB1(prim, 0x80, 0, 0x80);
+    setRGB2(prim, 0x80, 0, 0x80);
+    setRGB3(prim, 0, 0, 0xFF);
+    prim->x0 += x - 0x9E;
+    prim->y0 += y - 0x76;
+    prim->x1 += x - 0x9E;
+    prim->y1 += y - 0x76;
+    prim->x2 += x - 0x9E;
+    prim->y2 += y - 0x76;
+    prim->x3 += x - 0x9E;
+    prim->y3 += y - 0x76;
 
     GFX_AddPrim(GFX_LAYER_UI, sizeof(POLY_G4));
     PopMatrix();

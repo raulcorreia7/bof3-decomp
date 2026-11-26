@@ -44,7 +44,8 @@ MATCH void func_801CF338(void) {
 
 #include "overlays/plchar/shared/PlChar_ClaimHelperSlotStep.h"
 
-MATCH void func_801CF37C(void) {
+/* func_801CF37C */
+MATCH void PlChar_StartSpawnedActorTurn(void) {
     PlChar_ClaimHelperSlotStep();
 }
 

@@ -165,11 +165,13 @@ MATCH void func_801D3018(void) {
     }
 }
 
-MATCH void func_801D30E4(void) {
+/* func_801D30E4 */
+MATCH void UI_PanelSlideOutTask_801D30E4(void) {
     Menu_SlidePanelUp();
 }
 
-MATCH void func_801D3124(void) {
+/* func_801D3124 */
+MATCH void UI_PanelSlideInTaskTop_801D3124(void) {
     u16 next_pos;
 
     next_pos                = g_UiPanelCurrent->pos.y + 0x10;
@@ -186,7 +188,8 @@ MATCH void Shisu_UpdateCommandPanel(void) {
     Menu_DrawCommandRow(g_UiPanelCurrent->pos.x, g_UiPanelCurrent->pos.y, g_UiPanelCurrent->unk_0A, g_UiPanelCurrent->unk_0B, 0);
 }
 
-MATCH void func_801D31CC(void) {
+/* func_801D31CC */
+MATCH void UI_PanelSlideOutTask_801D31CC(void) {
     Menu_SlidePanelUp();
 }
 
@@ -219,7 +222,7 @@ MATCH void func_801D32A0(void) {
 }
 
 /* func_801D32E0 */
-MATCH void UI_PanelSetPosX(void) {
+MATCH void UI_PanelSetPosX_801D32E0(void) {
     u16 next_pos;
 
     next_pos                = g_UiPanelCurrent->pos.x + 0x20;

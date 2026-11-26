@@ -11,8 +11,8 @@ NON_MATCHING void func_801F37B8(s32 mode, s32 value) {
     long      flag;
 
     half = mode & 1;
-    lift = half << 7;
     i    = 0;
+    lift = half << 7;
     do {
         prim = (POLY_FT4*)g_GfxPrimCursor;
         SetPolyFT4(prim);

@@ -62,7 +62,7 @@ extern u8       D_801F5718[];
 extern u8       D_801F63C4[];
 extern u8*      D_801F63EC;
 
-void func_801F2D40(const void* sprite);
+void func_801F2D40(void* sprite);
 void func_801F2F1C(void* sprite);
 void func_801F2FC8(void);
 void func_801F321C(void);

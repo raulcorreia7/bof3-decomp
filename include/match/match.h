@@ -133,10 +133,7 @@
 #define FAKE_ORDER_LOCK(stmt) stmt
 #endif
 
-/*
- * An empty boundary: splits the schedule at this point without holding any
- * statement. Same rules as FAKE_ORDER_LOCK.
- */
+/* An empty boundary: splits the schedule at this point without holding any statement. */
 #if defined(MATCHING)
 #define FAKE_ORDER_FENCE() \
     do {                   \

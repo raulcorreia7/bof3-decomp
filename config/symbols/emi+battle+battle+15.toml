@@ -87,6 +87,7 @@ Battle_Heal40Hp = { addr = 0x8009DE64, type = "func", source = "Sets the action 
 Battle_Heal100Hp = { addr = 0x8009DE78, type = "func", source = "Sets the action target's hp change to -100, a heal of 100." }
 Battle_HealFullHp = { addr = 0x8009DE8C, type = "func", source = "Sets the action target's hp change to its negated max HP." }
 Battle_CureStatusChance = { addr = 0x8009DF70, type = "func", source = "The Croc Tear and Vinegar effect: heals 5 and on a roll under 0x27 cures the blind, confused and sleeping mask; the retail description reads Chance of restoring status." }
+Battle_CurePoison_8009DFBC = { addr = 0x8009DFBC, type = "func", source = "same body as emi/battle/battle/15@0x8009DD20 Battle_CurePoison" }
 Battle_CureBlindness = { addr = 0x8009DFEC, type = "func", source = "Cures STATUS_BLIND on the action target and marks the damage applied." }
 Battle_CurePetrification = { addr = 0x8009E01C, type = "func", source = "THE MOCHI effect: cures status 0x100; the retail description reads Cures petrification." }
 Battle_CureAilments = { addr = 0x8009E04C, type = "func", source = "Cures the ailment status mask on the action target and marks the damage applied." }
@@ -175,7 +176,7 @@ Battle_IsEnemyDefeated = { addr = 0x800AD044, type = "func", source = "Tests the
 Battle_SetEnemyDefeated = { addr = 0x800AD074, type = "func", source = "Sets the bit of an enemy type in the bit set D_80144F60; Battle_DefeatEnemy calls it and Battle_IsEnemyDefeated reads it." }
 Battle_LoadSelectionEffect = { addr = 0x800AE1F8, type = "func", source = "Loads the effect module of a battle selection: the row of g_BattleSelections that the action selects gives the EMI slot, which the loader streams in." }
 Battle_AllocActionEffect = { addr = 0x800AE260, type = "func", source = "sets the action id, allocates a battle action effect from the action table and stores its target" }
-Battle_StartScreenFade = { addr = 0x800AE390, type = "func", source = "same body as emi/battle/battle/03@0x801E6990 Battle_StartScreenFade" }
+Battle_StartScreenFade_800AE390 = { addr = 0x800AE390, type = "func", source = "same body as emi/battle/battle/03@0x801E6990 Battle_StartScreenFade. Same body as emi/battle/battle/03@0x801E6990 Battle_StartScreenFade." }
 Battle_CanTarget = { addr = 0x800AED5C, type = "func", source = "Tells whether the battler can be a target of the selector: it makes the battler the current target, runs the selector's target test and restores the target; true when the test passes." }
 Battle_SelectActiveBattlerScript = { addr = 0x800AEF98, type = "func", source = "Selects the active battler's actor script for a step and payload; a party member's facing offsets the step." }
 Battle_MoveRangeToward = { addr = 0x800AF2B4, type = "func", source = "moves the range work toward the target along a normalized vector by the step" }

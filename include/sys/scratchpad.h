@@ -9,8 +9,7 @@
 #include "psx/psyq.h"
 #include "types.h"
 
-/* The sparkle ray: the screen point it leaves, the sweep angle of its rays and the shade they fade
- * to. A reading of ScratchPad.cells.halves. */
+/* The sparkle ray: the screen point it leaves, the sweep angle of its rays and the shade they fade to. */
 typedef struct ScratchPadRay {
     u16        x; /* 0x00 */
     u16        y; /* 0x02 */
@@ -37,9 +36,7 @@ typedef union ScratchPadCells {
 #define SCRATCH_PAD_CELLS_SIZE 0x10
 ASSERT_SIZE(ScratchPadCells, SCRATCH_PAD_CELLS_SIZE);
 
-/* One scratchpad object for every mode: the base cells, the halfword-pointer cell a
- * draw pass walks, the four RotTransPers4 corner vectors, and the cell each overlay leaves its task
- * in. */
+/* One scratchpad object for every mode. */
 typedef struct ScratchPad {
     /* 0x000 */ ScratchPadCells cells;
     /* 0x010 */ s16*            unk_10; /* the pointer cell a scene or draw pass walks */
@@ -68,7 +65,6 @@ ASSERT_SIZE(ScratchPad, SCRATCH_PAD_SIZE);
 #define SPAD(byte_offset) SP_PTR(ScratchPad, byte_offset)
 
 /* ScratchPad.vectors as the symbol the area, bmagic and scenario code names directly. */
-/* g_ScratchPadVectors */
 extern SVECTOR g_ScratchPadVectors[4];
 /* The same four vectors read a halfword at a time. */
 extern s16     g_ScratchPadVectorHalves[];
@@ -85,8 +81,7 @@ extern s16     g_ScratchPadVectorHalves[];
 
 /* Scratchpad base + 1; battle/battle/03 and etc/game/00 write it directly. */
 extern u8  D_1F800001;
-/* ScratchPad.cells.halves[3]: the staged y coordinate that func_801B13BC writes, and the phase angle
- * the KaiserBreath steps store before rcos loads it back. */
+/* ScratchPad.cells.halves[3]. */
 extern s16 D_1F800006;
 extern s16 D_1F800016;
 extern s16 D_1F800018;

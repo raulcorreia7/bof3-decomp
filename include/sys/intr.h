@@ -4,8 +4,7 @@
 #include "types.h"
 #include "common/callback.h"
 
-/* The interrupt-callback pair SetPatchPad enqueues (SLUS_004.22 and LOGO.EXE):
- * two callback slots and the trailing word it clears. */
+/* The interrupt-callback pair SetPatchPad enqueues (SLUS_004.22 and LOGO.EXE): two callback slots and the trailing word it clears. */
 typedef Callback InterruptCallbacks[2];
 
 typedef struct InterruptHooks {

@@ -10,7 +10,8 @@ MATCH void func_801CFA64(void) {
 
 #include "overlays/plchar/shared/PlChar_ClaimHelperSlotStep.h"
 
-MATCH void func_801CFAA8(void) {
+/* func_801CFAA8 */
+MATCH void PlChar_StartSpawnedActorTurn(void) {
     PlChar_ClaimHelperSlotStep();
 }
 

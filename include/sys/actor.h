@@ -31,8 +31,7 @@
 #define ACTOR_SIZE           0x98
 #define ACTOR_COUNT          30
 
-/* Ask whether a work row is live: the update walks only rows with the in-use
- * bit set. Pass the row itself or, for a pointer, its dereference. */
+/* Ask whether a work row is live: the update walks only rows with the in-use bit set. */
 #define ACTOR_IN_USE(actor)  (((actor).header.flags & ACTOR_FLAG_IN_USE) != 0)
 
 /* Set the scratchpad actor's mode: the byte SYS_DISPATCH_TASK dispatches on. */
@@ -109,8 +108,7 @@ typedef enum ActorMode {
     ACTOR_MODE_COUNT
 } ActorMode;
 
-/* `header.step` of a field actor row, the index of g_ActorPaceSteps: when a move may start. Rows 0
- * to 3 run the same handler. */
+/* `header.step` of a field actor row, the index of g_ActorPaceSteps: when a move may start. */
 typedef enum ActorPace {
     ACTOR_PACE_FREE,
     ACTOR_PACE_FREE_1,
@@ -135,8 +133,7 @@ typedef enum ActorOptionFlags {
     ACTOR_OPT_NO_TARGET       = 1 << 7,
 } ActorOptionFlags;
 
-/* The word at +0x54: the range table pointer, or the same word copied as an
- * integer. */
+/* The word at +0x54: the range table pointer, or the same word copied as an integer. */
 typedef union ActorRange {
     s8* table;
     u32 raw;

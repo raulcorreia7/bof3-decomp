@@ -631,21 +631,27 @@ void func_801E27BC(void);
 void Menu_IdleStep(void);
 /* func_801E2808 */
 void Menu_MessagePanel(void);
-void func_801E2948(void);
-void func_801E2988(void);
+/* func_801E2948 */
+void UI_PanelSlideOutTask_801E2948(void);
+/* func_801E2988 */
+void UI_PanelSlideInTaskTop_801E2988(void);
 /* func_801E29C8 */
 void Menu_CommandsPanel(void);
-void func_801E2A30(void);
-void func_801E2A70(void);
+/* func_801E2A30 */
+void UI_PanelSlideOutTask_801E2A30(void);
+/* func_801E2A70 */
+void Menu_AdvancePanelY(void);
 /* func_801E2AB0 */
 void Menu_ZennyPanel(void);
 void func_801E2B14(void);
-void func_801E2B54(void);
+/* func_801E2B54 */
+void Menu_AdvancePanelY_801E2B54(void);
 /* func_801E2BC4 */
 void Menu_CursorFramePanel(void);
 /* func_801E2C18 */
 void Menu_EquipStatPanel(void);
-void func_801E2C9C(void);
+/* func_801E2C9C */
+void Menu_RetreatPanelX_801E2C9C(void);
 void func_801E2CDC(void);
 void func_801E2D1C(void);
 void func_801E2D5C(void);
@@ -657,30 +663,35 @@ void func_801E2E70(void);
 /* func_801E2EB0 */
 void Menu_ItemsPanel(void);
 void Shop_DrawItems(MenuListPanel* panel);
-void func_801E31C4(void);
+/* func_801E31C4 */
+void UI_PanelSlideOutOption_801E31C4(void);
 void func_801E3204(void);
 void func_801E3244(void);
 void func_801E3284(MenuPanelTask* task);
 void func_801E36F8(void);
 /* func_801E3720 */
 void Menu_InventoryPanel(void);
-void func_801E3774(void);
+/* func_801E3774 */
+void UI_PanelSlideOutOption_801E3774(void);
 void func_801E37B4(void);
 void func_801E37F4(MenuPanelTask* task);
 void func_801E3B7C(void);
 void func_801E3BA4(void);
-void func_801E3BF8(void);
+/* func_801E3BF8 */
+void UI_PanelSlideOutOption_801E3BF8(void);
 void func_801E3C38(void);
 void func_801E3C78(void);
 void func_801E3CB8(void);
 void func_801E3CF8(void);
-void func_801E3D4C(void);
+/* func_801E3D4C */
+void UI_PanelSlideOutOption_801E3D4C(void);
 void func_801E3D8C(void);
 void func_801E3DCC(void);
 void func_801E3E0C(void);
 /* func_801E3E4C */
 void Menu_CharacterPanel(void);
-void func_801E3EB4(void);
+/* func_801E3EB4 */
+void Menu_RetreatPanelX_801E3EB4(void);
 void func_801E3EF4(void);
 void func_801E3F34(void);
 void func_801E3F5C(void* panel);
@@ -689,13 +700,15 @@ void func_801E4278(void);
 void func_801E42B8(void);
 void func_801E42F8(void);
 void func_801E4338(void);
-void func_801E438C(void);
+/* func_801E438C */
+void UI_PanelSlideOutOption_801E438C(void);
 void func_801E43CC(void);
 void func_801E440C(void);
 void func_801E4460(void);
 void func_801E44A0(void);
 void func_801E44E0(void);
-void func_801E4540(void);
+/* func_801E4540 */
+void UI_PanelSlideOutOption_801E4540(void);
 void func_801E4580(void);
 void func_801E45C0(MenuPanelTask* task);
 s32  func_801E4C2C(s32 item_class);
