@@ -4,8 +4,8 @@
 /* Plays the fall sound and requests the area link of the cell. */
 MATCH void Party_FallThroughStart(void) {
     SND_SEPlay(EMI_SE_ID(SND_BANK_COMMON, 7));
-    Area_RequestLinkAtCell(COORD_INT(TASK(Actor)->pos.x), COORD_INT(TASK(Actor)->pos.y));
-    TASK(Actor)->vz = 0;
-    Script_Request(TASK(Actor)->direction);
-    TASK(Actor)->unk_03 = 1;
+    Area_RequestLinkAtCell(COORD_INT(SELF(Actor)->pos.x), COORD_INT(SELF(Actor)->pos.y));
+    SELF(Actor)->vz = 0;
+    Script_Request(SELF(Actor)->direction);
+    SELF(Actor)->unk_03 = 1;
 }

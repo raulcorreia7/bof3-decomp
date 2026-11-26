@@ -14,17 +14,17 @@ MATCH void Actor_RunWanderHome(Actor* record) {
     Actor* spad_a;
     Actor* spad_b;
 
-    spad_a = TASK(Actor);
+    spad_a = SELF(Actor);
     saved  = spad_a->direction;
     g_ActorPaceSteps[spad_a->header.step](record, 0, 1);
-    spad_b = TASK(Actor);
+    spad_b = SELF(Actor);
     if (spad_b->timer == 0) {
         mode  = record->unk_78;
         param = g_RouteSpeedScale[mode];
         if (record->unk_7B == 0) {
             if ((mode != 0) && (g_ActorPaceSteps[spad_b->header.step](record, param, 2) & BYTE_MASK)) {
                 Actor_TurnRandom(record);
-                if (TASK(Actor)->timer != 0) {
+                if (SELF(Actor)->timer != 0) {
                     timer = RANDOM_MASK(3) + 3;
                     goto block_7;
                 }
@@ -36,25 +36,25 @@ MATCH void Actor_RunWanderHome(Actor* record) {
             record->unk_7B = timer;
         }
         result = Actor_FindFreeFacing(record);
-        if (((result & BYTE_MASK) != GAME_NONE) && (TASK(Actor)->timer != 0) && (Actor_IsAheadInHomeBox(record) & BYTE_MASK)) {
-            spad_c                   = TASK(Actor);
+        if (((result & BYTE_MASK) != GAME_NONE) && (SELF(Actor)->timer != 0) && (Actor_IsAheadInHomeBox(record) & BYTE_MASK)) {
+            spad_c                   = SELF(Actor);
             spad_c->unk_03           = spad_c->header.mode;
-            TASK(Actor)->header.mode = ACTOR_MODE_TURN;
+            SELF(Actor)->header.mode = ACTOR_MODE_TURN;
             record->unk_79           = result;
-            TASK(Actor)->direction   = (saved & 0x7);
-            spad_d                   = TASK(Actor);
+            SELF(Actor)->direction   = (saved & 0x7);
+            spad_d                   = SELF(Actor);
             spad_d->unk_0A           = 0;
             spad_d->timer            = 0U;
             Actor_RunTurn(record);
-            spad_e = TASK(Actor);
+            spad_e = SELF(Actor);
             if (spad_e->header.mode != ACTOR_MODE_TURN) {
                 spad_e->direction = saved;
                 /* Shared tail: resume the route and run the step. */
                 goto block_14;
             }
         } else {
-            TASK(Actor)->timer     = 0U;
-            TASK(Actor)->direction = saved;
+            SELF(Actor)->timer     = 0U;
+            SELF(Actor)->direction = saved;
         block_14:
             func_801A2AE4(record, saved);
             goto block_15; /* the two paths share the exit */

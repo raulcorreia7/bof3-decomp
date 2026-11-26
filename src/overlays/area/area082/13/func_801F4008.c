@@ -21,15 +21,15 @@ MATCH void func_801F4008(void) {
         g_ScratchPadVectors[0].vy = y - AREA_CELL_ORIGIN;
         g_ScratchPadVectors[1].vz = (g_FrameCount << 5) + (i << 10);
 
-        func_801F46C8((TASK(Actor)->timer - 8) << 2, 0x1E, i << 10, 0x10);
+        func_801F46C8((SELF(Actor)->timer - 8) << 2, 0x1E, i << 10, 0x10);
         i++;
     } while (i < 4);
 
     func_801F4430();
-    TASK(Actor)->timer++;
-    if (TASK(Actor)->timer >= 0x10) {
+    SELF(Actor)->timer++;
+    if (SELF(Actor)->timer >= 0x10) {
         g_ScriptVars[0]++;
-        TASK(Actor)->timer = 0;
-        TASK(Actor)->header.step++;
+        SELF(Actor)->timer = 0;
+        SELF(Actor)->header.step++;
     }
 }

@@ -3,7 +3,7 @@
 MATCH void Actor_SlideScreenOffBottom(void) {
     Actor* work;
 
-    work = TASK(Actor);
+    work = SELF(Actor);
     work->screen_y -= 0x20;
     if ((s16)work->screen_y < -0xFF) {
         work->header.step++;

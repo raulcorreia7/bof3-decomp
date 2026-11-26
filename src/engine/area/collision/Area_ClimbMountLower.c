@@ -14,7 +14,7 @@ MATCH s32 Area_ClimbMountLower(void) {
     u8     slot;
     s32    landed;
 
-    work     = TASK(Actor);
+    work     = SELF(Actor);
     rise     = work->voice_flags.scene_flag + 2;
     ahead_x  = work->pos.x.fixed + g_FacingSteps[work->direction].x * rise;
     target_x = ahead_x;
@@ -26,10 +26,10 @@ MATCH s32 Area_ClimbMountLower(void) {
     ground = Area_HeightRead(target_x, target_y);
     slot   = g_Game.current->chr.character_id;
     if (ground - g_AreaClimbHeightOffsets[slot] < z) {
-        COORD_INT(TASK(Actor)->pos.z) -= g_AreaClimbRiseSteps[slot];
+        COORD_INT(SELF(Actor)->pos.z) -= g_AreaClimbRiseSteps[slot];
     } else {
-        COORD_INT(TASK(Actor)->pos.z) = Area_HeightRead(target_x, target_y) - g_AreaClimbHeightOffsets[g_Game.current->chr.character_id];
-        if (TASK(Actor)->direction == FACING_LEFT) {
+        COORD_INT(SELF(Actor)->pos.z) = Area_HeightRead(target_x, target_y) - g_AreaClimbHeightOffsets[g_Game.current->chr.character_id];
+        if (SELF(Actor)->direction == FACING_LEFT) {
             Script_Request(0x3C);
         } else {
             Script_Request(0x3D);
@@ -37,8 +37,8 @@ MATCH s32 Area_ClimbMountLower(void) {
         landed = 1;
     }
 
-    if (TASK(Actor)->unk_05 == 0 && !((g_Game.flags | g_Game.walk_flags) & (GAME_FLAG_SCROLL_LOCK | AREA_WALK_ENTRY_ACTIVE))) {
-        Area_ScrollAdvance((s16)COORD_INT(TASK(Actor)->pos.z));
+    if (SELF(Actor)->unk_05 == 0 && !((g_Game.flags | g_Game.walk_flags) & (GAME_FLAG_SCROLL_LOCK | AREA_WALK_ENTRY_ACTIVE))) {
+        Area_ScrollAdvance((s16)COORD_INT(SELF(Actor)->pos.z));
     }
     if (!(g_FrameCount & 0x3)) {
         Script_AnimStepOnce();

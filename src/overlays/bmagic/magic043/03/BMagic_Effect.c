@@ -11,7 +11,7 @@ MATCH void func_801EEC18(void) {
     u8            i;
 
     handlers = D_801EEC04;
-    SYS_DISPATCH_TASK(handlers.steps, 1, g_Task);
+    SYS_DISPATCH_TASK(handlers.steps, 1, g_Self);
 
     BMAGIC_RUN_EFFECT_SLOTS(BMAGIC_EFFECT_SLOTS, BMagic_DispatchEffectMode);
 }
@@ -26,21 +26,21 @@ MATCH void func_801EED30(void) {
 
     BMAGIC_CLEAR_EFFECTS(i);
     actor                           = g_BattleSelectedActor;
-    TASK(PartyMember)->facing       = actor->facing;
-    TASK(PartyMember)->pos.x.fixed  = actor->pos.x.fixed;
-    TASK(PartyMember)->pos.y.fixed  = actor->pos.y.fixed;
-    TASK(PartyMember)->pos.z.fixed  = actor->pos.z.fixed;
-    TASK(PartyMember)->param.unk_0B = 0;
-    TASK(PartyMember)->unk_09       = 9;
-    TASK(PartyMember)->header.mode += 1;
+    SELF(PartyMember)->facing       = actor->facing;
+    SELF(PartyMember)->pos.x.fixed  = actor->pos.x.fixed;
+    SELF(PartyMember)->pos.y.fixed  = actor->pos.y.fixed;
+    SELF(PartyMember)->pos.z.fixed  = actor->pos.z.fixed;
+    SELF(PartyMember)->param.unk_0B = 0;
+    SELF(PartyMember)->unk_09       = 9;
+    SELF(PartyMember)->header.mode += 1;
     for (i = 0; i < 8; i++) {
         slot = BMagic_AllocEffect();
         if (slot != 0xFF) {
-            work                                   = TASK(PartyMember);
+            work                                   = SELF(PartyMember);
             BMAGIC_EFFECT_SLOTS[slot].unk_0B       = i;
             BMAGIC_EFFECT_SLOTS[slot].arg.unk_09   = i * 8 + 1;
             BMAGIC_EFFECT_SLOTS[slot].target.party = work;
-            TASK(PartyMember)->param.unk_0B += 1;
+            SELF(PartyMember)->param.unk_0B += 1;
         }
     }
     BMAGIC_POINT_AT_PALETTE_ROW(dst, src, i);
@@ -57,27 +57,27 @@ MATCH void func_801EEEF0(void) {
     u8           value;
 
     battler                   = g_Battle.selected_actor;
-    value                     = TASK(PartyMember)->unk_09 - 1;
-    TASK(PartyMember)->unk_09 = value;
+    value                     = SELF(PartyMember)->unk_09 - 1;
+    SELF(PartyMember)->unk_09 = value;
     if (!(value & BYTE_MASK)) {
         GFX_PaletteFreeFadeTarget(battler);
-        TASK(PartyMember)->timer  = GFX_PaletteAllocFade(battler, 0, 0, 0, 1);
-        TASK(PartyMember)->unk_09 = 4;
-        TASK(PartyMember)->header.mode += 1;
+        SELF(PartyMember)->timer  = GFX_PaletteAllocFade(battler, 0, 0, 0, 1);
+        SELF(PartyMember)->unk_09 = 4;
+        SELF(PartyMember)->header.mode += 1;
     }
 }
 
 MATCH void func_801EEF98(void) {
     u8 count;
 
-    g_PaletteFades[TASK(PartyMember)->timer].offset.r += 2;
-    g_PaletteFades[TASK(PartyMember)->timer].offset.g += 2;
-    g_PaletteFades[TASK(PartyMember)->timer].offset.b += 2;
-    count                     = TASK(PartyMember)->unk_09 - 1;
-    TASK(PartyMember)->unk_09 = count;
+    g_PaletteFades[SELF(PartyMember)->timer].offset.r += 2;
+    g_PaletteFades[SELF(PartyMember)->timer].offset.g += 2;
+    g_PaletteFades[SELF(PartyMember)->timer].offset.b += 2;
+    count                     = SELF(PartyMember)->unk_09 - 1;
+    SELF(PartyMember)->unk_09 = count;
     if (count == 0) {
-        TASK(PartyMember)->unk_09 = 4;
-        TASK(PartyMember)->header.mode += 1;
+        SELF(PartyMember)->unk_09 = 4;
+        SELF(PartyMember)->header.mode += 1;
     }
 }
 
@@ -87,40 +87,40 @@ MATCH void func_801EF0B4(void) {
     PartyMember* work;
     u8           count;
 
-    g_PaletteFades[TASK(PartyMember)->timer].offset.r -= 2;
-    g_PaletteFades[TASK(PartyMember)->timer].offset.g -= 2;
-    g_PaletteFades[TASK(PartyMember)->timer].offset.b -= 2;
-    count                     = TASK(PartyMember)->unk_09 - 1;
-    TASK(PartyMember)->unk_09 = count;
+    g_PaletteFades[SELF(PartyMember)->timer].offset.r -= 2;
+    g_PaletteFades[SELF(PartyMember)->timer].offset.g -= 2;
+    g_PaletteFades[SELF(PartyMember)->timer].offset.b -= 2;
+    count                     = SELF(PartyMember)->unk_09 - 1;
+    SELF(PartyMember)->unk_09 = count;
     if (count != 0) {
         return;
     }
-    if (TASK(PartyMember)->param.unk_0B < 2) {
-        GFX_PaletteFreeFade(TASK(PartyMember)->timer);
+    if (SELF(PartyMember)->param.unk_0B < 2) {
+        GFX_PaletteFreeFade(SELF(PartyMember)->timer);
         selector = (u8*)&g_Battle.target_selector;
         Battle_FadePoisonedBattler(*selector);
         if (g_Battle.action_id == ABILITY_WARDOFLIGHT) {
             if (Battle_CanTarget(1, *selector) & BYTE_MASK) {
                 slot                               = Battle_AllocEffect(1, 72);
-                work                               = TASK(PartyMember);
+                work                               = SELF(PartyMember);
                 g_BattleEffects[slot].unk_04       = 0;
                 g_BattleEffects[slot].arg.unk_09   = 1;
                 g_BattleEffects[slot].unk_0A       = 0;
                 g_BattleEffects[slot].target.party = work;
-                TASK(PartyMember)->param.unk_0B += 1;
+                SELF(PartyMember)->param.unk_0B += 1;
             } else {
                 slot                               = Battle_AllocEffect(1, 72);
-                work                               = TASK(PartyMember);
+                work                               = SELF(PartyMember);
                 g_BattleEffects[slot].unk_04       = 8;
                 g_BattleEffects[slot].arg.unk_09   = 1;
                 g_BattleEffects[slot].unk_0A       = 0;
                 g_BattleEffects[slot].target.party = work;
-                TASK(PartyMember)->param.unk_0B += 1;
+                SELF(PartyMember)->param.unk_0B += 1;
             }
         }
-        TASK(PartyMember)->header.mode += 1;
+        SELF(PartyMember)->header.mode += 1;
     } else {
-        TASK(PartyMember)->unk_09 = 4;
-        TASK(PartyMember)->header.mode -= 1;
+        SELF(PartyMember)->unk_09 = 4;
+        SELF(PartyMember)->header.mode -= 1;
     }
 }

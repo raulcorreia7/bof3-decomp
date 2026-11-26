@@ -14,7 +14,7 @@ MATCH void func_801F2DAC(void) {
     u32  value;
 
     SYS_SetFlag(g_SceneEventFlags, 0x80);
-    TASK(Actor)->timer = 0;
+    SELF(Actor)->timer = 0;
     func_801F3324(0xC0, 0);
     for (i = 0; i < 2; i++) {
         map         = (AreaMapBundle*)MAP_BUNDLE_BASE;
@@ -32,5 +32,5 @@ MATCH void func_801F2DAC(void) {
             Area_ApplyTileToQuad(*entry, &g_AreaCellPrims[id][0], 2);
         }
     }
-    TASK(Actor)->header.step++;
+    SELF(Actor)->header.step++;
 }

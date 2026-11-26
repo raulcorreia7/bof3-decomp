@@ -14,7 +14,7 @@
         FAKE_REG(s32, sentinel, "v1");                              \
         s32 cell;                                                   \
                                                                     \
-        task = g_Task;                                              \
+        task = g_Self;                                              \
         FAKE_USE(task);                                             \
         direction = task->direction;                                \
         FAKE_USE(direction);                                        \

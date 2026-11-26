@@ -21,7 +21,7 @@ MATCH void Menu_SelectScreen(void) {
         pond            = ((u8*)g_Actors) + (index * ACTOR_SIZE);
         g_MenuStep.step = *(s32*)(pond + 0x18) + 2;
         D_80148699      = *(s32*)(pond + 0x1C);
-        TASK_SET(pond);
+        SELF_SET(pond);
     }
     count = 0;
 

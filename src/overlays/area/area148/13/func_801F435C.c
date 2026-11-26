@@ -4,23 +4,23 @@ MATCH void func_801F435C(void) {
     Actor* actor;
 
     if (g_GameStateIndex != 0) {
-        func_801F4798(&TASK(Actor)->pos, &TASK(Actor)->unk_18);
+        func_801F4798(&SELF(Actor)->pos, &SELF(Actor)->unk_18);
         return;
     }
-    actor = TASK(Actor);
+    actor = SELF(Actor);
     actor->unk_18 += actor->vx;
     actor->timer -= 1;
     actor->unk_1C += actor->vy;
-    func_801F4798(&TASK(Actor)->pos, &TASK(Actor)->unk_18);
+    func_801F4798(&SELF(Actor)->pos, &SELF(Actor)->unk_18);
     func_801F4614();
-    if (TASK(Actor)->timer == 0) {
-        TASK(Actor)->direction = (TASK(Actor)->direction + 2) & 0x7;
+    if (SELF(Actor)->timer == 0) {
+        SELF(Actor)->direction = (SELF(Actor)->direction + 2) & 0x7;
         func_801F45C8();
-        TASK(Actor)->timer  = 80;
-        TASK(Actor)->unk_0A = RANDOM_MOD(45);
-        if (TASK(Actor)->unk_0A != 0) {
-            TASK(Actor)->timer -= 1;
-            TASK(Actor)->header.mode = 2;
+        SELF(Actor)->timer  = 80;
+        SELF(Actor)->unk_0A = RANDOM_MOD(45);
+        if (SELF(Actor)->unk_0A != 0) {
+            SELF(Actor)->timer -= 1;
+            SELF(Actor)->header.mode = 2;
         }
     }
 }

@@ -3,16 +3,16 @@
 MATCH void func_801F3828(void) {
     Actor* scratch;
 
-    scratch = TASK(Actor);
+    scratch = SELF(Actor);
     if (scratch->param.unk_0B == 0) {
         scratch->timer++;
-        scratch = TASK(Actor);
+        scratch = SELF(Actor);
         if (scratch->timer >= 0x5A) {
             scratch->param.unk_0B++;
         }
     }
 
-    if (D_801454F2 != 0 && TASK(Actor)->param.unk_0B != 0) {
+    if (D_801454F2 != 0 && SELF(Actor)->param.unk_0B != 0) {
         goto bump; /* skips the 0x100 test: advance state byte 0x03 */
     }
     if (g_GameStateIndex == GAME_REQUEST_MESSAGE) {
@@ -22,7 +22,7 @@ MATCH void func_801F3828(void) {
         goto done; /* skips the advance: panel `0x5C` draws next */
     }
 bump:
-    TASK(Actor)->unk_03++;
+    SELF(Actor)->unk_03++;
 done:
-    func_801F40C4(0x5C, TASK(Actor)->screen_y);
+    func_801F40C4(0x5C, SELF(Actor)->screen_y);
 }

@@ -11,22 +11,22 @@ MATCH void func_801D39B8(void) {
     s32 column;
     s32 value;
 
-    record         = TASK(FishingState);
+    record         = SELF(FishingState);
     table          = g_FishingPromptSets;
     column         = record->column;
     row            = table[record->cue_index];
     record->row_4B = row[column];
 
-    panel             = TASK(FishingState);
+    panel             = SELF(FishingState);
     value             = D_801E1E7C[panel->row_4B * 3];
     panel->counter_49 = 0;
 
-    state           = TASK(FishingState);
+    state           = SELF(FishingState);
     panel->flags_58 = 0;
     panel->item.raw = value;
     state->timer    = 4;
 
-    panel                = TASK(FishingState);
+    panel                = SELF(FishingState);
     panel->origin_x      = 0x125;
     panel->handler_index = (panel->handler_index + 1);
 }

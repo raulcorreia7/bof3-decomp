@@ -11,6 +11,6 @@ MATCH void Battle_StartFormChange(void) {
     selection = g_BattleEffectBattler->slot;
     g_Game.members[selection].u.turn.damage_flags.value |= BATTLER_DAMAGE_FORM_EFFECT_PLAYING;
     g_BattleEffectBattler->unk_48 = 2u;
-    work                          = TASK(PartyMember);
+    work                          = SELF(PartyMember);
     work->header.mode++;
 }

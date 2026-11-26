@@ -12,25 +12,25 @@ MATCH void func_80167E00(void) {
     u8 j;
 
     for (i = 0; i < 30; i++) {
-        TASK_SET(&g_Actors[i]);
-        if (!(TASK(Actor)->header.flags & ACTOR_FLAG_IN_USE)) {
+        SELF_SET(&g_Actors[i]);
+        if (!(SELF(Actor)->header.flags & ACTOR_FLAG_IN_USE)) {
             continue;
         }
-        if (TASK(Actor)->unk_06 != 9) {
-            if (TASK(Actor)->active_flags & 0x10) {
-                TASK(Actor)->draw_layer = 4;
+        if (SELF(Actor)->unk_06 != 9) {
+            if (SELF(Actor)->active_flags & 0x10) {
+                SELF(Actor)->draw_layer = 4;
             } else {
-                TASK(Actor)->draw_layer = g_AreaDrawMode;
+                SELF(Actor)->draw_layer = g_AreaDrawMode;
             }
         } else if (g_AreaDrawMode == GFX_LAYER_BATTLE_SCENE) {
             continue;
         }
-        if (TASK(Actor)->unk_06 == 10) {
+        if (SELF(Actor)->unk_06 == 10) {
             Actor_ProjectForDraw();
             continue;
         }
         for (slot = 0; slot < MEM(u8, SCENE_TABLE_BASE); slot++) {
-            if (SCENE_SLOTS[slot].script_section == TASK(Actor)->unk_2C) {
+            if (SCENE_SLOTS[slot].script_section == SELF(Actor)->unk_2C) {
                 break;
             }
         }

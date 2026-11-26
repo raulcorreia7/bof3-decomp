@@ -3,10 +3,10 @@
 MATCH void func_801F2C48(void) {
     u8* work;
 
-    work            = TASK(u8);
+    work            = SELF(u8);
     work[6]         = g_AreaDrawFlags;
     g_AreaDrawFlags = AREA_DRAW_SORTED_RECORDS | 0x2 | AREA_DRAW_APPEND_ACTOR_PRIMITIVES | AREA_DRAW_APPEND_AREA_PRIMITIVES;
     func_801F2E18();
     D_801F4960 = 0;
-    TASK(Actor)->header.mode++;
+    SELF(Actor)->header.mode++;
 }

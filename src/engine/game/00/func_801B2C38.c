@@ -7,11 +7,11 @@ MATCH void func_801B2C38(void) {
         D_801CD1D8[g_EmiLoadedCharacterIndex & EMI_LOADED_INDEX_MASK]();
     }
     if (g_Game.current->u.field.mode.unsigned_value == 0) {
-        Script_Request(TASK(Actor)->direction);
-        TASK(Actor)->timer = 0;
+        Script_Request(SELF(Actor)->direction);
+        SELF(Actor)->timer = 0;
         Party_BattlersClearState(CHAR_INDEX_RYU);
-        TASK(Actor)->header.mode  = 1;
-        TASK(Actor)->param.unk_0B = 0;
+        SELF(Actor)->header.mode  = 1;
+        SELF(Actor)->param.unk_0B = 0;
         func_801B036C();
     }
 }

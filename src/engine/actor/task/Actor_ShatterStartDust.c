@@ -14,7 +14,7 @@ MATCH void Actor_ShatterStartDust(void) {
     D_800E4D40 = 0x40;
     D_800E4D42 = 0;
 loop:
-    work        = TASK(Actor);
+    work        = SELF(Actor);
     *dst        = work->pos.x.fixed;
     *(dst2 - 5) = work->pos.y.fixed;
     /* Third coord word follows y.fixed with no named field. */

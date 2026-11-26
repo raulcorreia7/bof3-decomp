@@ -4,7 +4,7 @@ MATCH void func_800C1BA8(void) {
     u32 slot;
 
     slot                               = Battle_AllocEffect(1, 93) & BYTE_MASK;
-    g_BattleEffects[slot].target.party = TASK(PartyMember);
-    TASK(PartyMember)->timer += 1;
-    TASK(PartyMember)->header.mode += 1;
+    g_BattleEffects[slot].target.party = SELF(PartyMember);
+    SELF(PartyMember)->timer += 1;
+    SELF(PartyMember)->header.mode += 1;
 }

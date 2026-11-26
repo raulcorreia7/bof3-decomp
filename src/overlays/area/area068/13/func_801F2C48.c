@@ -7,6 +7,6 @@ MATCH void func_801F2C48(void) {
     scratchpad        = SP_PTR(void*, 0u);
     work              = scratchpad[0x44u / sizeof(void*)];
     work->timer       = 0xB4;
-    work              = TASK(Actor);
+    work              = SELF(Actor);
     work->header.mode = 1;
 }

@@ -7,6 +7,6 @@ MATCH void func_801DAE3C(void) {
     if (g_AreaCameraMoving == 0) {
         g_AreaCameraSpeed              = 0x40;
         g_AreaScrollTargetCoordY.fixed = TO_COORD(60);
-        TASK(Actor)->unk_03 += 1;
+        SELF(Actor)->unk_03 += 1;
     }
 }

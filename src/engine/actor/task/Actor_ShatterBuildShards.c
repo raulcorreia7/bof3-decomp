@@ -18,7 +18,7 @@ MATCH void Actor_ShatterBuildShards(void) {
 
     dst  = MEM_PTR(u16, AREA_WORK);
     row  = 0;
-    base = (u16*)TASK(Actor)->script;
+    base = (u16*)SELF(Actor)->script;
     aux  = MEM_PTR(u16, 0x800E4814u);
     src  = (s16*)(base + 12);
     do {

@@ -2,10 +2,10 @@
 
 /* Shapes the bytes prove: the pair handed to Area_HeightSample is read through the
  * D_801468BC/D_801468C0 byte views of the slot's packed fields (a
- * g_Task-relative read emits a materialized base plus zero-displacement
+ * g_Self-relative read emits a materialized base plus zero-displacement
  * loads instead); variant_state and the distance pair go through the
  * g_Actors array expression while mode, state, unk_34/36/38/3a/3e,
- * source_index and resource_id go through the g_Task scratch pointer; the
+ * source_index and resource_id go through the g_Self scratch pointer; the
  * unk_3A store precedes unk_38 and the unk3E store precedes source_index. No
  * .rodata table is involved, so the jump-table alignment residual of
  * Fairy_SpawnWorker cannot apply here. */
@@ -17,26 +17,26 @@
 MATCH void func_801F0718(u8 source_index, u8 task_index) {
     s16 distance;
 
-    g_Task              = &g_Actors[task_index];
-    TASK(Actor)->unk_06 = 1;
+    g_Self              = &g_Actors[task_index];
+    SELF(Actor)->unk_06 = 1;
 
     if (D_801F2568[task_index][2] != 0) {
-        TASK(Actor)->header.mode    = 0;
+        SELF(Actor)->header.mode    = 0;
         g_Actors[task_index].unk_78 = 2;
-        TASK(Actor)->header.step    = 1;
+        SELF(Actor)->header.step    = 1;
     } else {
-        TASK(Actor)->header.mode    = 6;
+        SELF(Actor)->header.mode    = 6;
         g_Actors[task_index].unk_78 = 0;
         ACTOR_CLEAR_STEP();
     }
 
-    COORD_INT(TASK(Actor)->pos.x)  = D_801F2568[task_index][0];
-    COORD_FRAC(TASK(Actor)->pos.x) = 0;
-    COORD_INT(TASK(Actor)->pos.y)  = D_801F2568[task_index][1];
-    COORD_FRAC(TASK(Actor)->pos.y) = 0;
+    COORD_INT(SELF(Actor)->pos.x)  = D_801F2568[task_index][0];
+    COORD_FRAC(SELF(Actor)->pos.x) = 0;
+    COORD_INT(SELF(Actor)->pos.y)  = D_801F2568[task_index][1];
+    COORD_FRAC(SELF(Actor)->pos.y) = 0;
     distance                       = Area_HeightSample(g_Actors[task_index & BYTE_MASK].pos.x.fixed, g_Actors[task_index & BYTE_MASK].pos.y.fixed);
-    COORD_INT(TASK(Actor)->pos.z)  = distance;
-    TASK(Actor)->unk_05            = source_index;
-    Area_SceneSelectRecord(D_801F24FC[TASK(Actor)->unk_05 % 6]);
-    Script_DispatchSelector(TASK(Actor)->direction);
+    COORD_INT(SELF(Actor)->pos.z)  = distance;
+    SELF(Actor)->unk_05            = source_index;
+    Area_SceneSelectRecord(D_801F24FC[SELF(Actor)->unk_05 % 6]);
+    Script_DispatchSelector(SELF(Actor)->direction);
 }

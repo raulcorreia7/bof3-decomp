@@ -99,12 +99,12 @@ MATCH void func_801F9AA0(void) {
         case 18:
             if (g_ScriptVars[3] & 0x80) {
                 g_GameState = &g_Game.members[0];
-                TASK_SET(&g_Game.members[0]);
+                SELF_SET(&g_Game.members[0]);
                 g_ScenarioState.step = 0x14;
                 D_80145FA8 &= 0xBF;
             } else if (g_ScriptVars[1] != 2 && g_PadStates[0].pressed == 0x10) {
                 g_GameState = &g_Game.members[0];
-                TASK_SET(&g_Game.members[0]);
+                SELF_SET(&g_Game.members[0]);
                 D_80145FA8 |= 0x40;
                 SND_SEPlay(0x20F);
                 Script_Select(0x44);
@@ -114,7 +114,7 @@ MATCH void func_801F9AA0(void) {
             break;
         case 19:
             g_GameState = &g_Game.members[0];
-            TASK_SET(&g_Game.members[0]);
+            SELF_SET(&g_Game.members[0]);
             if (g_Game.members[0].unk_58 == 0xC && g_Game.members[0].unk_4A == 1) {
                 Script_Select(5);
                 g_ScenarioState.step = 0x12;
@@ -150,9 +150,9 @@ MATCH void func_801F9AA0(void) {
                     g_SpawnedActors[g_ScratchPad.cells.bytes[0]].type = 0x55;
                 }
                 g_GameState = &g_Game.members[0];
-                TASK_SET(&g_Game.members[0]);
+                SELF_SET(&g_Game.members[0]);
                 g_GameState = &g_Game.members[1];
-                TASK_SET(&g_Game.members[1]);
+                SELF_SET(&g_Game.members[1]);
                 D_80145FA8 |= 0x40;
                 D_801460E8 |= 0x40;
                 func_801BE1B0(5);

@@ -4,10 +4,10 @@
 MATCH void Effect_RequestTargetOnTimerZero(void) {
     u8 timer;
 
-    timer                     = TASK(PartyMember)->unk_09 - 1;
-    TASK(PartyMember)->unk_09 = timer;
+    timer                     = SELF(PartyMember)->unk_09 - 1;
+    SELF(PartyMember)->unk_09 = timer;
     if (timer == 0) {
         Battle_ApplyDamageFlags(g_Battle.target_selector, 0x10);
-        TASK(PartyMember)->header.mode = TASK(PartyMember)->header.mode + 1;
+        SELF(PartyMember)->header.mode = SELF(PartyMember)->header.mode + 1;
     }
 }

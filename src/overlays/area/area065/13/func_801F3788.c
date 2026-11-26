@@ -3,13 +3,13 @@
 MATCH void func_801F3788(void) {
     Actor* scratch;
 
-    scratch = TASK(Actor);
+    scratch = SELF(Actor);
     scratch->screen_y -= 0xA;
     if ((s16)scratch->screen_y < 0xC9) {
         scratch->unk_03++;
     }
 
-    if (D_801454F2 != 0 && TASK(Actor)->param.unk_0B != 0) {
+    if (D_801454F2 != 0 && SELF(Actor)->param.unk_0B != 0) {
         goto force; /* skips the 0x100 test: force state byte 0x03 */
     }
     if (g_GameStateIndex == GAME_REQUEST_MESSAGE) {
@@ -19,7 +19,7 @@ MATCH void func_801F3788(void) {
         goto done; /* skips the forced write: panel `0x5C` draws next */
     }
 force:
-    TASK(Actor)->unk_03 = 3;
+    SELF(Actor)->unk_03 = 3;
 done:
-    func_801F40FC(92, TASK(Actor)->screen_y);
+    func_801F40FC(92, SELF(Actor)->screen_y);
 }

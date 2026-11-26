@@ -16,7 +16,7 @@ MATCH void Party_FlashDamage(s32 color_index) {
 
     seed     = g_PartyDamageColors;
     index    = 1;
-    work     = TASK(Actor);
+    work     = SELF(Actor);
     /* CLUT block base as a literal keeps the lui+ori codegen. */
     base_dst = AREA_PALETTE_WORK;
     do {

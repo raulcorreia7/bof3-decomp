@@ -7,11 +7,11 @@ MATCH void Fishing_ReelGaugeInit(void) {
     FishingState* record;
     FishingState* retired;
 
-    record                          = TASK(FishingState);
+    record                          = SELF(FishingState);
     record->timer                   = 0;
-    retired                         = TASK(FishingState);
+    retired                         = SELF(FishingState);
     record->origin_y                = 0;
     retired->step_index             = 0;
-    TASK(FishingState)->saved_index = 0;
-    TASK(FishingState)->handler_index += 1;
+    SELF(FishingState)->saved_index = 0;
+    SELF(FishingState)->handler_index += 1;
 }

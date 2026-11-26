@@ -1,10 +1,10 @@
 #include "area042_13.h"
 
 MATCH void func_801F3A88(void) {
-    Area_SetPosX(D_801F534C[TASK(Actor)->timer >> 1]);
-    TASK(Actor)->timer += 1;
-    if (TASK(Actor)->timer >= 5U) {
-        TASK(Actor)->timer = 0;
-        TASK(Actor)->header.step += 1;
+    Area_SetPosX(D_801F534C[SELF(Actor)->timer >> 1]);
+    SELF(Actor)->timer += 1;
+    if (SELF(Actor)->timer >= 5U) {
+        SELF(Actor)->timer = 0;
+        SELF(Actor)->header.step += 1;
     }
 }

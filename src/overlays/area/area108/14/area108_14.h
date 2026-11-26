@@ -48,10 +48,10 @@ ASSERT_SIZE(AreaPosEntry, 0x04);
     do {                                                                 \
         u32 i = (u8)(g_PartyActors[1].unk_77 - 1);                       \
                                                                          \
-        COORD_INT(TASK(Actor)->pos.x)  = (table)[i].x;                   \
-        COORD_FRAC(TASK(Actor)->pos.x) = ((table)[i].x_half != 0) << 15; \
-        COORD_INT(TASK(Actor)->pos.y)  = (table)[i].y;                   \
-        COORD_FRAC(TASK(Actor)->pos.y) = ((table)[i].y_half != 0) << 15; \
+        COORD_INT(SELF(Actor)->pos.x)  = (table)[i].x;                   \
+        COORD_FRAC(SELF(Actor)->pos.x) = ((table)[i].x_half != 0) << 15; \
+        COORD_INT(SELF(Actor)->pos.y)  = (table)[i].y;                   \
+        COORD_FRAC(SELF(Actor)->pos.y) = ((table)[i].y_half != 0) << 15; \
     } while (0)
 
 /* The game-overlay state bytes the cancel path resets. */

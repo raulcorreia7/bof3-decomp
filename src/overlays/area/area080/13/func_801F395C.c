@@ -15,15 +15,15 @@ MATCH void func_801F395C(void) {
     if (D_801F44A4 == NULL) {
         return;
     }
-    D_801F44A4->origin.x.fixed = TASK(Actor)->pos.x.fixed;
-    D_801F44A4->origin.y.fixed = TASK(Actor)->pos.y.fixed;
-    D_801F44A4->origin.z.fixed = TASK(Actor)->pos.z.fixed + TO_COORD(1536);
+    D_801F44A4->origin.x.fixed = SELF(Actor)->pos.x.fixed;
+    D_801F44A4->origin.y.fixed = SELF(Actor)->pos.y.fixed;
+    D_801F44A4->origin.z.fixed = SELF(Actor)->pos.z.fixed + TO_COORD(1536);
 
     angle  = rand() & 0xFFF;
     spread = (rand() & 0x1FF) - 0x100;
 
-    D_801F44A4->pos.x.fixed = TASK(Actor)->pos.x.fixed + (rcos(angle) << 8);
-    D_801F44A4->pos.y.fixed = TASK(Actor)->pos.y.fixed + (rsin(angle) << 8);
+    D_801F44A4->pos.x.fixed = SELF(Actor)->pos.x.fixed + (rcos(angle) << 8);
+    D_801F44A4->pos.y.fixed = SELF(Actor)->pos.y.fixed + (rsin(angle) << 8);
     D_801F44A4->pos.z.fixed = Area_HeightSample(D_801F44A4->pos.x.fixed, D_801F44A4->pos.y.fixed) << 16;
 
     turn                   = angle + spread + 0x800;

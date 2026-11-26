@@ -6,5 +6,5 @@ MATCH void func_801F2C7C(void) {
     for (i = 0; i < 6; i++) {
         func_801A4BC0(16, D_801F4B30[i], 0x89);
     }
-    TASK(Actor)->header.mode = 1;
+    SELF(Actor)->header.mode = 1;
 }

@@ -12,14 +12,14 @@ MATCH bool Game_BattleIsPartyInPlace(void) {
     for (i = 0; i < g_Game.party_size; i++) {
         work        = (u8*)g_Game.members + i * BATTLE_PARTY_STRIDE;
         g_GameState = work;
-        TASK_SET(work);
+        SELF_SET(work);
         for (j = 0; j < BATTLE_PARTY_CHARACTERS_COUNT; j++) {
             if (g_PartyFieldOrder[j] == work[0x79]) {
                 break;
             }
         }
-        if (TASK(Actor)->param.unk_0B == 0 && (Script_AnimStepOnce() & BYTE_MASK) != 0) {
-            TASK(Actor)->param.unk_0B = 1;
+        if (SELF(Actor)->param.unk_0B == 0 && (Script_AnimStepOnce() & BYTE_MASK) != 0) {
+            SELF(Actor)->param.unk_0B = 1;
         }
     }
     for (i = 0; i < g_Game.party_size; i++) {

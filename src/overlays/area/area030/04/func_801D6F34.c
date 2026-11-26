@@ -8,16 +8,16 @@ MATCH void func_801D6F34(void) {
     u8 slot;
     s8 direction;
 
-    steps = TASK(FishingState)->timer;
+    steps = SELF(FishingState)->timer;
     if (steps == 0) {
-        if (D_801E20CC[TASK(FishingState)->step_index].animation_id == -1) {
-            TASK(FishingState)->step_index  = D_801E20CC[TASK(FishingState)->step_index].next_step;
-            TASK(FishingState)->saved_index = 0x37;
-            TASK(FishingState)->pos_x       = 0x6A;
-            TASK(FishingState)->cursor_10   = 0x6A;
+        if (D_801E20CC[SELF(FishingState)->step_index].animation_id == -1) {
+            SELF(FishingState)->step_index  = D_801E20CC[SELF(FishingState)->step_index].next_step;
+            SELF(FishingState)->saved_index = 0x37;
+            SELF(FishingState)->pos_x       = 0x6A;
+            SELF(FishingState)->cursor_10   = 0x6A;
         }
-        Script_Request(D_801E20CC[TASK(FishingState)->step_index].animation_id & 0x7F);
-        if ((D_801E20CC[TASK(FishingState)->step_index].animation_id & 0x7F) == 9) {
+        Script_Request(D_801E20CC[SELF(FishingState)->step_index].animation_id & 0x7F);
+        if ((D_801E20CC[SELF(FishingState)->step_index].animation_id & 0x7F) == 9) {
             slot = Actor_FindFreeSpawned();
             if (slot != GAME_NONE) {
                 g_SpawnedActors[slot].header.flags = 1;
@@ -29,33 +29,33 @@ MATCH void func_801D6F34(void) {
                 g_SpawnedActors[slot].screen_y     = 0x9E;
             }
         }
-        TASK(FishingState)->timer      = D_801E20CC[TASK(FishingState)->step_index].next_step;
-        TASK(FishingState)->step_index = TASK(FishingState)->step_index + 1;
+        SELF(FishingState)->timer      = D_801E20CC[SELF(FishingState)->step_index].next_step;
+        SELF(FishingState)->step_index = SELF(FishingState)->step_index + 1;
     } else {
-        TASK(FishingState)->timer = steps - 1;
-        if (!(D_801E20CC[TASK(FishingState)->step_index - 1].animation_id & 0x80)) {
+        SELF(FishingState)->timer = steps - 1;
+        if (!(D_801E20CC[SELF(FishingState)->step_index - 1].animation_id & 0x80)) {
             Script_AnimStepLoop();
         }
     }
-    TASK(FishingState)->pos_x += D_801E20CC[TASK(FishingState)->step_index - 1].delta_x;
-    TASK(FishingState)->cursor_10 += D_801E20CC[TASK(FishingState)->step_index - 1].delta_y;
-    TASK(FishingState)->cue_index -= D_801E20CC[TASK(FishingState)->step_index - 1].delta_x;
+    SELF(FishingState)->pos_x += D_801E20CC[SELF(FishingState)->step_index - 1].delta_x;
+    SELF(FishingState)->cursor_10 += D_801E20CC[SELF(FishingState)->step_index - 1].delta_y;
+    SELF(FishingState)->cue_index -= D_801E20CC[SELF(FishingState)->step_index - 1].delta_x;
     direction = 1;
-    if (D_801E20CC[TASK(FishingState)->step_index - 1].delta_y < 0) {
+    if (D_801E20CC[SELF(FishingState)->step_index - 1].delta_y < 0) {
         /* FAKE: keeps GCC from turning the flag into sge (nor/srl); 7 pure-C spellings stayed at 96.24%. */
         FAKE_BARRIER();
         direction = 0;
     }
     func_801D6B28(direction);
     if (!(g_FrameCount & 0xF)) {
-        if (D_801E20CC[TASK(FishingState)->step_index - 1].delta_y > 0) {
-            TASK(FishingState)->saved_index = TASK(FishingState)->saved_index + 1;
-            if (TASK(FishingState)->saved_index >= 0x3D) {
-                TASK(FishingState)->saved_index = 0x3C;
+        if (D_801E20CC[SELF(FishingState)->step_index - 1].delta_y > 0) {
+            SELF(FishingState)->saved_index = SELF(FishingState)->saved_index + 1;
+            if (SELF(FishingState)->saved_index >= 0x3D) {
+                SELF(FishingState)->saved_index = 0x3C;
             }
         }
     }
-    TEXT_Format(g_UiTextFormatBuffer, D_801D0C04, TASK(FishingState)->saved_index);
+    TEXT_Format(g_UiTextFormatBuffer, D_801D0C04, SELF(FishingState)->saved_index);
     if (g_FrameCount & 0x4) {
         UI_TextDrawAscii(172, 176, UI_TEXT_HIGHLIGHT, g_UiTextFormatBuffer);
     } else {

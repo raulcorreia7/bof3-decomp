@@ -4,7 +4,7 @@ MATCH void func_801F5708(void) {
     Actor* work;
     s32    request;
 
-    work = TASK(Actor);
+    work = SELF(Actor);
     if (SYS_TestFlag(g_SceneEventFlags, 121) != 0) {
         request = 1;
     } else if (Item_Add(ITEM_CATEGORY_WEAPON, WEAPON_HE_SHELLS, 1, 0) == 0) {
@@ -20,5 +20,5 @@ MATCH void func_801F5708(void) {
 done:
     Scene_SetupParty(13);
     g_GameStateIndex = GAME_REQUEST_MESSAGE;
-    TASK_SET(work);
+    SELF_SET(work);
 }

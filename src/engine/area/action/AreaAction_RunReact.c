@@ -2,7 +2,7 @@
 
 /* func_801AD35C */
 MATCH void AreaAction_RunReact(void) {
-    Actor*   work        = TASK(Actor);
+    Actor*   work        = SELF(Actor);
     Callback handlers[2] = {AreaAction_React, AreaAction_End};
 
     handlers[work->unk_04]();

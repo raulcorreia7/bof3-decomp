@@ -100,7 +100,7 @@ void Boss_EndBattle3(void);
 #define BOSS_SEND_PARTY_TO_ENDING_POSE(n)                                                             \
     if (g_Game.members[n].header.flags & 1) {                                                         \
         Battle_CancelTurn(g_Game.members[n].slot);                                                    \
-        TASK_SET(&g_Game.members[n]);                                                                 \
+        SELF_SET(&g_Game.members[n]);                                                                 \
         if (g_Game.members[n].chr.status & STATUS_KO) {                                               \
             Script_Switch(g_Game.members[n].facing + 0x1C, MEM_PTR(u8, BATTLE_SCRIPT_TABLE), 0x1800); \
         } else {                                                                                      \
@@ -118,10 +118,10 @@ void Boss_EndBattle3(void);
         Battle_DefeatEnemy();                                             \
         work = g_BattleCurrentEnemy;                                      \
         work->turn.damage_flags.value |= BATTLER_DAMAGE_SKIP_ACTION_STEP; \
-        TASK(Actor)->header.flags &= ~ACTOR_FLAG_HIDDEN;                  \
+        SELF(Actor)->header.flags &= ~ACTOR_FLAG_HIDDEN;                  \
         ACTOR_SET_MODE(3);                                                \
-        TASK(Actor)->header.step = 0;                                     \
-        TASK(Actor)->unk_03      = 0;                                     \
+        SELF(Actor)->header.step = 0;                                     \
+        SELF(Actor)->unk_03      = 0;                                     \
     } while (0)
 
 /* Prototypes the images of this group share. */

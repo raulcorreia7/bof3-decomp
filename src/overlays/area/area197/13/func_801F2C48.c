@@ -35,6 +35,6 @@ MATCH void func_801F2C48(void) {
     func_801F34A0(96, 128, &from, &to);
 
     SND_SEPlay(EMI_SE_ID(SND_BANK_AREA, 7));
-    TASK(Actor)->header.step = 0;
-    TASK(Actor)->header.mode++;
+    SELF(Actor)->header.step = 0;
+    SELF(Actor)->header.mode++;
 }

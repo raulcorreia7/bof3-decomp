@@ -13,26 +13,26 @@ NON_MATCHING u8 func_801B0E44(void) {
     /* FAKE: retail's frame is 16 bytes larger than the statements need. */
     FAKE_STACK_PADS(s32, 16);
 
-    saved_dir = TASK(Actor)->direction;
+    saved_dir = SELF(Actor)->direction;
     result    = func_801B9598();
-    if ((TASK(Actor)->direction == FACING_UP_RIGHT) || (TASK(Actor)->direction == FACING_DOWN_LEFT)) {
-        TASK(Actor)->timer = 32;
+    if ((SELF(Actor)->direction == FACING_UP_RIGHT) || (SELF(Actor)->direction == FACING_DOWN_LEFT)) {
+        SELF(Actor)->timer = 32;
     } else {
-        TASK(Actor)->timer = 16;
+        SELF(Actor)->timer = 16;
     }
     divisor            = g_RouteSpeedScale[g_Game.current->u.field.counter.unsigned_value];
-    TASK(Actor)->timer = (u8)(TASK(Actor)->timer / (u32)(divisor & BYTE_MASK));
-    if (TASK(Actor)->voice_flags.scene_flag == 0) {
-        SP_REF(s32, 0x8) = TASK(Actor)->pos.x.fixed + g_FacingOffsets[TASK(Actor)->direction].x * divisor * TASK(Actor)->timer;
-        SP_REF(s32, 0xC) = TASK(Actor)->pos.y.fixed + g_FacingOffsets[TASK(Actor)->direction].y * divisor * TASK(Actor)->timer;
+    SELF(Actor)->timer = (u8)(SELF(Actor)->timer / (u32)(divisor & BYTE_MASK));
+    if (SELF(Actor)->voice_flags.scene_flag == 0) {
+        SP_REF(s32, 0x8) = SELF(Actor)->pos.x.fixed + g_FacingOffsets[SELF(Actor)->direction].x * divisor * SELF(Actor)->timer;
+        SP_REF(s32, 0xC) = SELF(Actor)->pos.y.fixed + g_FacingOffsets[SELF(Actor)->direction].y * divisor * SELF(Actor)->timer;
     } else {
-        SP_REF(s32, 0x8) = TASK(Actor)->pos.x.fixed + g_FacingOffsets[TASK(Actor)->direction].x * divisor * TASK(Actor)->timer * 2;
-        SP_REF(s32, 0xC) = TASK(Actor)->pos.y.fixed + g_FacingOffsets[TASK(Actor)->direction].y * divisor * TASK(Actor)->timer * 2;
+        SP_REF(s32, 0x8) = SELF(Actor)->pos.x.fixed + g_FacingOffsets[SELF(Actor)->direction].x * divisor * SELF(Actor)->timer * 2;
+        SP_REF(s32, 0xC) = SELF(Actor)->pos.y.fixed + g_FacingOffsets[SELF(Actor)->direction].y * divisor * SELF(Actor)->timer * 2;
     }
     if (g_GameStateIndex != GAME_REQUEST_SCENE_CAMERA) {
         if (((s32 (*)(s32, s32))Area_IsStepBlocked)(SP_REF(s32, 0x8), SP_REF(s32, 0xC)) != 0) {
             result = 0;
-            if (TASK(Actor)->header.mode == 2) {
+            if (SELF(Actor)->header.mode == 2) {
                 return 0xFF;
             }
         }
@@ -40,16 +40,16 @@ NON_MATCHING u8 func_801B0E44(void) {
     switch (result & BYTE_MASK) {
         case 2:
             pos2   = (s32*)&g_ScratchPad.cells.halves[4];
-            result = ((s32 (*)(s32, s32, s32))Area_HeightReadStep)(*(s32*)&g_ScratchPad.cells.halves[4], SP_REF(s32, 0xC), TASK(Actor)->direction);
+            result = ((s32 (*)(s32, s32, s32))Area_HeightReadStep)(*(s32*)&g_ScratchPad.cells.halves[4], SP_REF(s32, 0xC), SELF(Actor)->direction);
             func_801B13BC();
             if (((u8*)pos2)[-8] != 0) {
                 if ((s16)result >= 0x41) {
-                    if (!(Area_RequestLinkAtCell(SP_REF(s16, 0x4), SP_REF(s16, 0x6)) & BYTE_MASK) && (g_Task == (void*)g_Game.members)) {
+                    if (!(Area_RequestLinkAtCell(SP_REF(s16, 0x4), SP_REF(s16, 0x6)) & BYTE_MASK) && (g_Self == (void*)g_Game.members)) {
                         if (Area_CellSetPalette(g_Game.members[0].pos.x.part.integer, g_Game.members[0].pos.y.part.integer) & BYTE_MASK) {
                             SND_SEPlay(D_801CD0F4[((u8*)pos2)[-7]]);
-                            Script_Request((TASK(Actor)->direction >> 1) + 0x10);
+                            Script_Request((SELF(Actor)->direction >> 1) + 0x10);
                         } else {
-                            Script_Request(TASK(Actor)->direction);
+                            Script_Request(SELF(Actor)->direction);
                         }
                         g_GameStateIndex = GAME_REQUEST_AREA_CHANGE;
                     }
@@ -59,7 +59,7 @@ NON_MATCHING u8 func_801B0E44(void) {
                 x = ((s16*)pos2)[-2];
                 y = ((s16*)pos2)[-1];
             } else {
-                diff = COORD_INT(TASK(Actor)->pos.z) - (s16)result;
+                diff = COORD_INT(SELF(Actor)->pos.z) - (s16)result;
                 diff = ABS(diff);
                 if (diff >= 0x81) {
                     if (!(Area_RequestLinkAtCell(SP_REF(s16, 0x4), SP_REF(s16, 0x6)) & BYTE_MASK)) {
@@ -79,11 +79,11 @@ NON_MATCHING u8 func_801B0E44(void) {
             return 0;
         case 3:
             pos3   = (s32*)&g_ScratchPad.cells.halves[4];
-            result = ((s32 (*)(s32, s32, s32))Area_HeightReadStep)(pos3[0], pos3[1], TASK(Actor)->direction);
+            result = ((s32 (*)(s32, s32, s32))Area_HeightReadStep)(pos3[0], pos3[1], SELF(Actor)->direction);
             if (SP_REF(u8, 0x0) != 0) {
                 if ((s16)result >= 0x41) {
                     g_AreaCameraSpeed      = 0;
-                    TASK(Actor)->direction = saved_dir;
+                    SELF(Actor)->direction = saved_dir;
                     return 1;
                 }
                 Area_HeightRead(pos3[0], pos3[1]);

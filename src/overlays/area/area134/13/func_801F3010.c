@@ -5,5 +5,5 @@ MATCH void func_801F3010(void) {
 
     work    = Area_AdvanceRow(0);
     work[1] = 9;
-    g_Task  = work;
+    g_Self  = work;
 }

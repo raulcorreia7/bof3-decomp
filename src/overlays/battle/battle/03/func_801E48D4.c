@@ -7,7 +7,7 @@ MATCH void func_801E48D4(void) {
     PartyMember* work;
     s32          timer;
 
-    work = TASK(PartyMember);
+    work = SELF(PartyMember);
     work->scale.y += work->unk_10;
     work->unk_10 += work->unk_1C;
     timer = work->scale.y;

@@ -14,10 +14,10 @@ MATCH void func_801D1B60(void) {
     u8   value;
 
     Menu_DrawClutStrip(g_WindowClut);
-    saved_work               = TASK_BYTES;
+    saved_work               = SELF_BYTES;
     g_UiPanelTasks[9].unk_0A = (s8)D_80148655;
     type                     = D_801EC38C[(s8)D_80148655];
-    TASK_SET(g_Game.members);
+    SELF_SET(g_Game.members);
     g_UiPanelTasks[10].u.addr.unk_10 = (s16)type;
     if ((g_SaveData.return_point.pending == 0 && ((g_GameRequestFlags & AREA_LOAD_FLAG_WORLD_MAP) || g_GameAreaId == AREA_ID_DESERT_OF_DEATH_MAP) && (func_801B6470(type) & BYTE_MASK)) ||
         (g_SaveData.return_point.pending != 0 && (func_801D2190() & BYTE_MASK))) {
@@ -25,7 +25,7 @@ MATCH void func_801D1B60(void) {
     } else {
         g_UiPanelTasks[9].unk_0C = 1;
     }
-    TASK_SET(saved_work);
+    SELF_SET(saved_work);
     input = INPUT_GetRepeatedButtons(g_PadStates[0].pressed & (PADLright | PADLleft));
     if (input & PADLleft) {
         SND_SEPlay(EMI_SE_ID(SND_BANK_COMMON, 1));

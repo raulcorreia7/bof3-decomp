@@ -7,11 +7,11 @@ MATCH void func_801F2C04(void) {
     s32 row;
     s32 col;
 
-    step = TASK(Actor)->header.step;
+    step = SELF(Actor)->header.step;
     if (step != func_801F2D04()) {
-        TASK(Actor)->header.step      = func_801F2D04();
-        height                        = g_AreaVariantHeights[TASK(Actor)->header.step];
-        COORD_INT(TASK(Actor)->pos.z) = height;
+        SELF(Actor)->header.step      = func_801F2D04();
+        height                        = g_AreaVariantHeights[SELF(Actor)->header.step];
+        COORD_INT(SELF(Actor)->pos.z) = height;
         shade                         = ((s16)height != -0x80) << 4;
         for (row = 3; row < 7; row++) {
             for (col = 0x42; col < 0x45; col++) {
@@ -19,5 +19,5 @@ MATCH void func_801F2C04(void) {
             }
         }
     }
-    g_AreaSceneMode = g_AreaVariantModes[TASK(Actor)->header.step];
+    g_AreaSceneMode = g_AreaVariantModes[SELF(Actor)->header.step];
 }

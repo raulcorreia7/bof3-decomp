@@ -8,12 +8,12 @@ MATCH void Well_RaiseRepeat(void) {
     g_WellRaiseTimer = timer;
     if (timer == 0) {
         g_WellRaiseTimer         = 0;
-        TASK(Actor)->header.mode = WELL_MODE_RAISE_CHECK;
+        SELF(Actor)->header.mode = WELL_MODE_RAISE_CHECK;
     } else if (g_PadStates[0].pressed == PADRdown) {
         g_WellIdleFrames = 0;
         g_WellPressCount++;
-        TASK(Actor)->header.mode = WELL_MODE_RAISE_READY;
+        SELF(Actor)->header.mode = WELL_MODE_RAISE_READY;
     } else {
-        TASK(Actor)->header.mode = WELL_MODE_RAISE_COUNT;
+        SELF(Actor)->header.mode = WELL_MODE_RAISE_COUNT;
     }
 }

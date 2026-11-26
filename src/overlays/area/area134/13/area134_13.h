@@ -41,8 +41,8 @@ static inline u8* Area_AdvanceRow(s32 actor_index) {
     s32    i;
 
     i    = 0;
-    work = TASK(u8);
-    TASK_SET(&g_Actors[actor_index]);
+    work = SELF(u8);
+    SELF_SET(&g_Actors[actor_index]);
     actor = &g_Actors[actor_index];
     do {
         actor->pos.x.fixed += 0x4000;
@@ -63,7 +63,7 @@ static inline void World_SpawnActorAtFocus(void) {
         slot->header.flags = 1;
         slot->type         = 0x90;
         slot->header.mode  = 0;
-        work               = TASK(Actor);
+        work               = SELF(Actor);
         WorldPos_Copy(&slot->pos, &work->pos);
     }
 }
@@ -86,23 +86,23 @@ void func_801F4B6C(void);
 
 /* Returns the area task to the first step of mode 1. */
 static inline void Area_EnterMode1(void) {
-    TASK(Actor)->timer       = 0;
-    TASK(Actor)->header.mode = 1;
+    SELF(Actor)->timer       = 0;
+    SELF(Actor)->header.mode = 1;
     ACTOR_CLEAR_STEP();
 }
 
 /* Takes mode 0xD once the party leader's x has reached `bound`, else the given mode; `actor` is the task the
  * dispatch visits. A statement macro: the member declares Actor* work. */
 #define AREA_SET_MODE_OR_END(actor, bound, next_mode) \
-    work        = g_Task;                             \
-    g_Task      = (actor);                            \
+    work        = g_Self;                             \
+    g_Self      = (actor);                            \
     g_GameState = g_Game.members;                     \
-    g_Task      = work;                               \
-    TASK_SET(g_Game.members);                         \
-    g_Task = work;                                    \
+    g_Self      = work;                               \
+    SELF_SET(g_Game.members);                         \
+    g_Self = work;                                    \
     if ((bound) >= g_Game.members[0].pos.x.fixed) {   \
         work->header.mode  = 0xD;                     \
-        TASK(Actor)->timer = 0;                       \
+        SELF(Actor)->timer = 0;                       \
         return;                                       \
     }                                                 \
     work->header.mode = (next_mode)
@@ -111,25 +111,25 @@ static inline void Area_EnterMode1(void) {
  * claimed slot in the task's byte 0x0B unless none is free. A statement macro: the member declares u8* work,
  * u8 index, s16 y, s16 x, u8 selection and s32 result. */
 #define AREA_CLAIM_MEMBER_SLOT(member, kind)                  \
-    TASK_SET((u8*)&g_Game.members[member]);                   \
+    SELF_SET((u8*)&g_Game.members[member]);                   \
     index     = g_PartyFieldOrder[member];                    \
     y         = g_Game.members[member].screen_y.signed_value; \
     x         = g_Game.members[member].screen_x.signed_value; \
     selection = D_801F5724[0x144u + index];                   \
     result    = Actor_ClaimSlot(kind, 0, selection, x, y);    \
     if ((u8)result != 0xFF) {                                 \
-        work      = TASK(u8);                                 \
+        work      = SELF(u8);                                 \
         work[0xB] = result;                                   \
     }
 
 /* Counts the work byte 0x09 down and takes the given mode when it reaches zero.
  * The member declares work and timer. */
 #define AREA_TICK_MODE_CHANGE(next_mode)        \
-    work    = TASK(u8);                         \
+    work    = SELF(u8);                         \
     timer   = work[9];                          \
     work[9] = timer + 0xFF;                     \
     if (timer == 0) {                           \
-        TASK(Actor)->header.mode = (next_mode); \
+        SELF(Actor)->header.mode = (next_mode); \
     }
 
 #endif

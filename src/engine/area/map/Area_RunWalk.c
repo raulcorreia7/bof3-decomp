@@ -5,7 +5,7 @@
 /* func_801C24D0 */
 MATCH void Area_RunWalk(void) {
     Area_SetWalkVelocity();
-    if ((TASK(Actor)->unk_05 == 0) && !((g_Game.flags | g_Game.walk_flags) & (GAME_FLAG_SCROLL_LOCK | AREA_WALK_ENTRY_ACTIVE))) {
+    if ((SELF(Actor)->unk_05 == 0) && !((g_Game.flags | g_Game.walk_flags) & (GAME_FLAG_SCROLL_LOCK | AREA_WALK_ENTRY_ACTIVE))) {
         Area_ScrollUpdateWalk();
     }
 }

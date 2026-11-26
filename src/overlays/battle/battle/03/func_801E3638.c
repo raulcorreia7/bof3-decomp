@@ -7,18 +7,18 @@
 MATCH void func_801E3638(void) {
     PartyMember* work;
 
-    D_801EB3FC[TASK(PartyMember)->header.step]();
+    D_801EB3FC[SELF(PartyMember)->header.step]();
     if (g_BattleCurrentEnemy->status & STATUS_CONFUSED) {
         if (g_BattleCurrentEnemy->turn.damage_flags.value & BATTLER_DAMAGE_UNK_11) {
-            if (++g_BattleEffects[TASK(PartyMember)->slot].arg.sway >= 12) {
+            if (++g_BattleEffects[SELF(PartyMember)->slot].arg.sway >= 12) {
                 g_BattleCurrentEnemy->turn.damage_flags.value ^= 0x800;
             }
         } else {
-            if (--g_BattleEffects[TASK(PartyMember)->slot].arg.sway < -11) {
+            if (--g_BattleEffects[SELF(PartyMember)->slot].arg.sway < -11) {
                 g_BattleCurrentEnemy->turn.damage_flags.value ^= 0x800;
             }
         }
-        work = TASK(PartyMember);
+        work = SELF(PartyMember);
         if (work->facing == FACING_UP || work->facing == FACING_RIGHT) {
             work->pos.x.fixed = g_BattleEffects[work->slot].pos.x.fixed + (g_BattleEffects[work->slot].arg.sway << 9);
         } else {

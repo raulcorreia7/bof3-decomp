@@ -5,7 +5,7 @@ MATCH void AreaAction_End(void) {
     Actor*          work;
     volatile Actor* area;
 
-    work = TASK(Actor);
+    work = SELF(Actor);
     if (ACTOR_IN_USE(g_SpawnedActors[work->param.actor_slot])) {
         return;
     }
@@ -15,6 +15,6 @@ MATCH void AreaAction_End(void) {
     area = GAME_WORK_AREA_PTR;
     area->interaction_flags &= ~ACTOR_INTERACTION_PENDING;
     g_GameFlags &= ~GAME_FLAG_SCRIPT_ACTIVE;
-    area         = TASK(Actor);
+    area         = SELF(Actor);
     area->unk_04 = 0;
 }

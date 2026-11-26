@@ -2,5 +2,5 @@
 
 /* Dispatch the scratchpad state byte through the overlay's handler table. */
 MATCH void func_801F41F0(void) {
-    SYS_DISPATCH_BYTE(D_801F61CC, TASK(Actor)->unk_03);
+    SYS_DISPATCH_BYTE(D_801F61CC, SELF(Actor)->unk_03);
 }

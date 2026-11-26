@@ -5,7 +5,7 @@ MATCH void AreaAction_RunSteps(void) {
     Actor*          work;
     AreaActionSteps table;
 
-    work  = TASK(Actor);
+    work  = SELF(Actor);
     table = g_AreaActionSteps;
     table.steps[work->unk_04]();
 }

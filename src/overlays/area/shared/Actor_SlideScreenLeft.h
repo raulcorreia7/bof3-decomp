@@ -7,7 +7,7 @@ MATCH void Actor_SlideScreenLeft(void) {
     s16    origin;
 
     if (D_801454F2 != 2 && GAME_SCRIPT_ACTIVE() == 0) {
-        work           = TASK(Actor);
+        work           = SELF(Actor);
         origin         = -0x30;
         work->screen_x = origin;
         work->header.step++;

@@ -8,7 +8,7 @@ MATCH void func_801EEC34(void) {
     Magic060Steps handlers;
 
     handlers = D_801EEC04;
-    SYS_DISPATCH_TASK(handlers.steps, 1, g_Task);
+    SYS_DISPATCH_TASK(handlers.steps, 1, g_Self);
 }
 
 MATCH void func_801EECA4(void) {
@@ -17,29 +17,29 @@ MATCH void func_801EECA4(void) {
     u32          slot;
 
     slot                               = Battle_AllocEffect(1, 18) & BYTE_MASK;
-    work                               = TASK(PartyMember);
+    work                               = SELF(PartyMember);
     g_BattleEffects[slot].header.mode  = 0;
     g_BattleEffects[slot].target.party = work;
     slot                               = Battle_AllocEffect(1, 18) & BYTE_MASK;
-    work2                              = TASK(PartyMember);
+    work2                              = SELF(PartyMember);
     g_BattleEffects[slot].header.mode  = 1;
     g_BattleEffects[slot].target.party = work2;
     func_801EEF50();
-    TASK(PartyMember)->param.unk_0B = 0;
-    TASK(PartyMember)->header.mode += 1;
+    SELF(PartyMember)->param.unk_0B = 0;
+    SELF(PartyMember)->header.mode += 1;
 }
 
 MATCH void func_801EED68(void) {
     u32          slot;
     PartyMember* work;
 
-    if (TASK(PartyMember)->param.unk_0B == 2) {
+    if (SELF(PartyMember)->param.unk_0B == 2) {
         slot                               = Battle_AllocEffect(1, 18) & BYTE_MASK;
-        work                               = TASK(PartyMember);
+        work                               = SELF(PartyMember);
         g_BattleEffects[slot].header.mode  = 2;
         g_BattleEffects[slot].target.party = work;
-        TASK(PartyMember)->unk_09          = 0x10;
-        TASK(PartyMember)->header.mode     = TASK(PartyMember)->header.mode + 1;
+        SELF(PartyMember)->unk_09          = 0x10;
+        SELF(PartyMember)->header.mode     = SELF(PartyMember)->header.mode + 1;
     }
 }
 
@@ -51,10 +51,10 @@ MATCH void func_801EEE00(void) {
     } else {
         func_801EF2DC();
     }
-    timer                     = TASK(PartyMember)->unk_09 - 1;
-    TASK(PartyMember)->unk_09 = timer;
+    timer                     = SELF(PartyMember)->unk_09 - 1;
+    SELF(PartyMember)->unk_09 = timer;
     if (!(timer & BYTE_MASK)) {
-        TASK(PartyMember)->header.mode += 1;
+        SELF(PartyMember)->header.mode += 1;
     }
 }
 
@@ -65,15 +65,15 @@ MATCH void func_801EEE84(void) {
         func_801EF2DC();
     }
     if (g_PadStates[0].pressed != 0) {
-        TASK(PartyMember)->param.unk_0B = 0x83;
-        TASK(PartyMember)->header.mode++;
+        SELF(PartyMember)->param.unk_0B = 0x83;
+        SELF(PartyMember)->header.mode++;
     }
 }
 
 MATCH void func_801EEF04(void) {
     u16* flags;
 
-    if (TASK(PartyMember)->param.unk_0B == 0x80) {
+    if (SELF(PartyMember)->param.unk_0B == 0x80) {
         BATTLE_RAISE_STATE(BATTLE_STATE_EFFECT_PLAYING);
         Effect_Reset();
     }
@@ -110,12 +110,12 @@ MATCH void func_801EEF50(void) {
     value      = threshold > (rand() & 0xF);
     identified = Effect_TargetIsIdentified();
     if (identified != 0) {
-        TASK(PartyMember)->unk_04 = 1;
+        SELF(PartyMember)->unk_04 = 1;
     } else if (value != 0 && ENEMY_COMBATANT(g_Battle.target_selector).unk_7F != 0) {
         Effect_MarkTargetIdentified();
-        TASK(PartyMember)->unk_04 = 1;
+        SELF(PartyMember)->unk_04 = 1;
     } else {
-        TASK(PartyMember)->unk_04 = 0;
+        SELF(PartyMember)->unk_04 = 0;
     }
 }
 
@@ -180,7 +180,7 @@ MATCH void func_801EF470(u8 item_id, u8 category, s32 y) {
     /* FAKE: the record pointer must stay in s0 through the switch; an unpinned local scales the table index in v1, and the best pure-C body differs in 11 instructions at the same 0x120-byte size. */
     FAKE_REG(u8*, record, "s0");
 
-    if (TASK(PartyMember)->unk_04 != 0) {
+    if (SELF(PartyMember)->unk_04 != 0) {
         switch (category) {
             case ITEM_CATEGORY_ITEM:
             default:

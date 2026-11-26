@@ -24,7 +24,7 @@
         if (g_GameStateIndex != GAME_REQUEST_IDLE) {                                                                                                  \
             return;                                                                                                                                   \
         }                                                                                                                                             \
-        if (TASK(Actor)->unk_0A != 0) {                                                                                                               \
+        if (SELF(Actor)->unk_0A != 0) {                                                                                                               \
             return;                                                                                                                                   \
         }                                                                                                                                             \
         if (g_Game.input != 0 && !(g_Characters[g_Game.current->character_index].status & STATUS_CONFUSED)) {                                         \
@@ -42,9 +42,9 @@
         if (is_interrupted() & 0xFF) {                                                                                                                \
             return;                                                                                                                                   \
         }                                                                                                                                             \
-        saved_facing = TASK(Actor)->direction;                                                                                                        \
-        if ((!(Actor_TurnByPad() & 0xFF) && !(g_PadStates[0].held & g_InputMasks[WORLD_INPUT_RUN])) || (task = g_Task, task->param.unk_0B == 0x40)) { \
-            TASK(Actor)->direction             = saved_facing;                                                                                        \
+        saved_facing = SELF(Actor)->direction;                                                                                                        \
+        if ((!(Actor_TurnByPad() & 0xFF) && !(g_PadStates[0].held & g_InputMasks[WORLD_INPUT_RUN])) || (task = g_Self, task->param.unk_0B == 0x40)) { \
+            SELF(Actor)->direction             = saved_facing;                                                                                        \
             g_Game.current->u.field.mode.value = 0;                                                                                                   \
             Actor_StopMoving();                                                                                                                       \
             goto stop;                                                                                                                                \
@@ -52,7 +52,7 @@
         if (g_PadStates[0].held & g_InputMasks[WORLD_INPUT_RUN]) {                                                                                    \
             task->direction = saved_facing;                                                                                                           \
         }                                                                                                                                             \
-        current_facing = TASK(Actor)->direction;                                                                                                      \
+        current_facing = SELF(Actor)->direction;                                                                                                      \
         if (current_facing != saved_facing) {                                                                                                         \
             adjusted_facing  = current_facing;                                                                                                        \
             candidate_facing = saved_facing;                                                                                                          \
@@ -65,45 +65,45 @@
             }                                                                                                                                         \
             if (abs((s8)candidate_facing - (s8)adjusted_facing) == 2) {                                                                               \
                 if ((s8)adjusted_facing < (s8)candidate_facing) {                                                                                     \
-                    TASK(Actor)->direction = saved_facing - 1;                                                                                        \
+                    SELF(Actor)->direction = saved_facing - 1;                                                                                        \
                 } else {                                                                                                                              \
-                    TASK(Actor)->direction = saved_facing + 1;                                                                                        \
+                    SELF(Actor)->direction = saved_facing + 1;                                                                                        \
                 }                                                                                                                                     \
             }                                                                                                                                         \
-            TASK(Actor)->direction &= 7;                                                                                                              \
+            SELF(Actor)->direction &= 7;                                                                                                              \
         }                                                                                                                                             \
         switch (func_801B0E44() & 0xFF) {                                                                                                             \
             case 0:                                                                                                                                   \
                 if ((s8)func_801BDF08() != 0) {                                                                                                       \
                     g_Game.current->u.field.mode.value = 0;                                                                                           \
-                    TASK(Actor)->header.step           = 0;                                                                                           \
+                    SELF(Actor)->header.step           = 0;                                                                                           \
                     on_blocked();                                                                                                                     \
                     return;                                                                                                                           \
                 }                                                                                                                                     \
                 Area_UpdatePanelRun();                                                                                                                \
-                if (g_Game.current->u.field.counter.unsigned_value == 4 && (panel_task = g_Task, panel_task->direction != saved_facing)) {            \
+                if (g_Game.current->u.field.counter.unsigned_value == 4 && (panel_task = g_Self, panel_task->direction != saved_facing)) {            \
                     panel_task->direction              = saved_facing;                                                                                \
                     g_Game.current->u.field.mode.value = 0;                                                                                           \
                     break;                                                                                                                            \
                 }                                                                                                                                     \
                 Area_RunWalk();                                                                                                                       \
                 func_801C4C48();                                                                                                                      \
-                moving_task = g_Task;                                                                                                                 \
+                moving_task = g_Self;                                                                                                                 \
                 moving_task->timer--;                                                                                                                 \
                 func_801B0DFC();                                                                                                                      \
                 g_Game.current->u.field.mode.value = 1;                                                                                               \
-                TASK(Actor)->header.step           = 1;                                                                                               \
+                SELF(Actor)->header.step           = 1;                                                                                               \
                 return;                                                                                                                               \
             case 1:                                                                                                                                   \
             case 0xFF:                                                                                                                                \
-                TASK(Actor)->direction                         = saved_facing;                                                                        \
+                SELF(Actor)->direction                         = saved_facing;                                                                        \
                 g_Game.current->u.field.mode.value             = 0;                                                                                   \
                 g_Game.current->u.field.counter.unsigned_value = 3;                                                                                   \
             stop:                                                                                                                                     \
-                TASK(Actor)->timer = 0;                                                                                                               \
+                SELF(Actor)->timer = 0;                                                                                                               \
                 break;                                                                                                                                \
             default:                                                                                                                                  \
                 return;                                                                                                                               \
         }                                                                                                                                             \
-        TASK(Actor)->header.step = 0;                                                                                                                 \
+        SELF(Actor)->header.step = 0;                                                                                                                 \
     }

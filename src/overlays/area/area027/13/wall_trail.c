@@ -159,7 +159,7 @@ u8 D_801F3ACC[4760] = {
 };
 
 MATCH void func_801F2C30(void) {
-    SYS_DISPATCH_BYTE(s_WallTrailModes, TASK(Actor)->header.mode);
+    SYS_DISPATCH_BYTE(s_WallTrailModes, SELF(Actor)->header.mode);
 }
 
 MATCH void func_801F2C74(void) {
@@ -181,8 +181,8 @@ MATCH void func_801F2C74(void) {
         i++;
     } while ((i & BYTE_MASK) < 3u);
     SND_SEPlay(EMI_SE_ID(SND_BANK_AREA, 6));
-    TASK(Actor)->timer = 64;
-    TASK(Actor)->header.mode++;
+    SELF(Actor)->timer = 64;
+    SELF(Actor)->header.mode++;
 }
 
 MATCH void func_801F2D5C(void) {
@@ -218,8 +218,8 @@ MATCH void func_801F2D5C(void) {
         outer++;
         arg += 0x26;
     } while ((outer & BYTE_MASK) < 3u);
-    v                  = (TASK(Actor)->timer - 1);
-    TASK(Actor)->timer = v;
+    v                  = (SELF(Actor)->timer - 1);
+    SELF(Actor)->timer = v;
     if ((v & BYTE_MASK) == 0) {
         Actor_Clear();
     }
@@ -292,15 +292,15 @@ MATCH void func_801F304C(AreaTrail* trail) {
 }
 
 MATCH void func_801F3120(void) {
-    SYS_DISPATCH_BYTE(D_801F3ABC, TASK(Actor)->header.step);
+    SYS_DISPATCH_BYTE(D_801F3ABC, SELF(Actor)->header.step);
 }
 
 MATCH void func_801F3164(void) {
     if (SYS_TestFlag(g_Scenario2Flags, 23) != 0) {
-        TASK(Actor)->header.step = 3u;
+        SELF(Actor)->header.step = 3u;
         func_801F33A8();
     } else {
-        TASK(Actor)->header.step += 1u;
+        SELF(Actor)->header.step += 1u;
         func_801F31CC();
     }
 }
@@ -309,8 +309,8 @@ MATCH void func_801F31CC(void) {
     s16 point[3];
 
     if (SYS_TestFlag(g_Scenario2Flags, 23) != 0) {
-        TASK(Actor)->header.step += 1u;
-        TASK(Actor)->vx = 0u;
+        SELF(Actor)->header.step += 1u;
+        SELF(Actor)->vx = 0u;
     }
 
     point[0] = 0xE340u;
@@ -330,21 +330,21 @@ MATCH void func_801F31CC(void) {
 MATCH void func_801F32B0(void) {
     s16 point[3];
 
-    if (TASK(Actor)->vx >= ONE / 4) {
-        TASK(Actor)->header.step += 1u;
+    if (SELF(Actor)->vx >= ONE / 4) {
+        SELF(Actor)->header.step += 1u;
     }
-    TASK(Actor)->vx += 32;
+    SELF(Actor)->vx += 32;
 
     point[0] = 0xE340u;
     point[1] = 0xE3C0u;
     point[2] = 0;
-    func_801F3480((const Pos3s*)point, *(s16*)&TASK(Actor)->vx, 0x13500126u);
+    func_801F3480((const Pos3s*)point, *(s16*)&SELF(Actor)->vx, 0x13500126u);
     Area_CellAddPrim(TO_COORD(70) + COORD_HALF, TO_COORD(71) + COORD_HALF, -1, 0x28);
 
     point[0] = 0xE340u;
     point[1] = 0xE4C0u;
     point[2] = 0;
-    func_801F3480((const Pos3s*)point, (s16)(ONE / 2 - TASK(Actor)->vx), 0x13510125u);
+    func_801F3480((const Pos3s*)point, (s16)(ONE / 2 - SELF(Actor)->vx), 0x13510125u);
     Area_CellAddPrim(TO_COORD(70) + COORD_HALF, TO_COORD(73) + COORD_HALF, -1, 0x28);
 }
 

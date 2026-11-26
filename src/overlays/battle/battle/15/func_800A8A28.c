@@ -11,7 +11,7 @@ MATCH void func_800A8A28(void) {
     if ((func_801DEE4C() & BYTE_MASK) != 0) {
         battler = &g_Battle.active_battler;
         index   = *battler;
-        work    = TASK(PartyMember);
+        work    = SELF(PartyMember);
         delta_x = g_Game.members[index].pos.x.fixed - work->pos.x.fixed;
         if (delta_x < 0) {
             delta_x += 0xF;

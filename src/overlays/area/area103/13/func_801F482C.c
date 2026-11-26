@@ -6,8 +6,8 @@ MATCH void func_801F482C(void) {
     s32  x;
     s32  y;
 
-    x = (((TASK(Actor)->pos.x.fixed >> 12) & 0x1F) ^ 0x10) >> 1;
-    y = (TASK(Actor)->pos.y.fixed >> 12) & 0x1F;
+    x = (((SELF(Actor)->pos.x.fixed >> 12) & 0x1F) ^ 0x10) >> 1;
+    y = (SELF(Actor)->pos.y.fixed >> 12) & 0x1F;
 
     setRECT(&rect, 368, 416, x, y);
     SetDrawMove((DR_MOVE*)g_GfxPrimCursor, &rect, 624 - x, 288 - y);

@@ -3,12 +3,12 @@
 MATCH void func_801F2D90(void) {
     u16 remaining;
 
-    remaining           = TASK(Actor)->unk_2C - 1;
-    TASK(Actor)->unk_2C = remaining;
-    TASK(Actor)->angle_x += 3;
-    TASK(Actor)->angle_y -= 3;
+    remaining           = SELF(Actor)->unk_2C - 1;
+    SELF(Actor)->unk_2C = remaining;
+    SELF(Actor)->angle_x += 3;
+    SELF(Actor)->angle_y -= 3;
     if (!(remaining & HALF_MASK)) {
-        TASK(Actor)->unk_2C = 0x10;
-        TASK(Actor)->header.mode += 1;
+        SELF(Actor)->unk_2C = 0x10;
+        SELF(Actor)->header.mode += 1;
     }
 }

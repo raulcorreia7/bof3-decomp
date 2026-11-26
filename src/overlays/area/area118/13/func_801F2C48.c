@@ -2,5 +2,5 @@
 
 MATCH void func_801F2C48(void) {
     D_801F59E4 = 0;
-    TASK(Actor)->header.mode += 1;
+    SELF(Actor)->header.mode += 1;
 }

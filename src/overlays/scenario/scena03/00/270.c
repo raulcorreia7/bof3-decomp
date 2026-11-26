@@ -15,57 +15,57 @@ MATCH void func_801F6EB4(void) {
     u32  cell3;
     s16* scratch;
 
-    TASK(Actor)->unk_03 = Actor_FindFreeField();
-    if (TASK(Actor)->unk_03 == GAME_NONE) {
+    SELF(Actor)->unk_03 = Actor_FindFreeField();
+    if (SELF(Actor)->unk_03 == GAME_NONE) {
         return;
     }
 
-    g_Actors[TASK(Actor)->unk_03].header.flags = 1;
-    TASK(Actor)->unk_04                        = Actor_FindFreeField();
-    if (TASK(Actor)->unk_04 == GAME_NONE) {
-        g_Actors[TASK(Actor)->unk_03].header.flags = 0;
+    g_Actors[SELF(Actor)->unk_03].header.flags = 1;
+    SELF(Actor)->unk_04                        = Actor_FindFreeField();
+    if (SELF(Actor)->unk_04 == GAME_NONE) {
+        g_Actors[SELF(Actor)->unk_03].header.flags = 0;
         return;
     }
 
     scratch                                    = (s16*)g_ScratchPad.cells.bytes;
     data                                       = (u8*)D_801FCF30;
-    g_Actors[TASK(Actor)->unk_04].header.flags = 1;
-    work                                       = TASK(u8);
+    g_Actors[SELF(Actor)->unk_04].header.flags = 1;
+    work                                       = SELF(u8);
     *scratch                                   = work[3];
     Actor_SpawnPartyFromRecord(data);
     Script_Begin(0x61, 0xC);
     *scratch = work[4];
     Actor_SpawnPartyFromRecord(data);
     Script_Begin(0x61, 0xC);
-    TASK_SET(work);
+    SELF_SET(work);
 
     g_Actors[work[3]].pos.x.fixed += ONE;
     g_Actors[work[3]].pos.y.fixed -= ONE;
     g_Actors[work[4]].pos.x.fixed -= ONE;
     g_Actors[work[4]].pos.y.fixed += ONE;
     g_Actors[work[3]].header.flags |= ACTOR_FLAG_SEMI_TRANSPARENT;
-    g_Actors[TASK(Actor)->unk_04].header.flags |= ACTOR_FLAG_SEMI_TRANSPARENT;
-    cell                           = TASK(u8);
+    g_Actors[SELF(Actor)->unk_04].header.flags |= ACTOR_FLAG_SEMI_TRANSPARENT;
+    cell                           = SELF(u8);
     cell4                          = cell[4];
     cell3                          = cell[3];
     D_801468E4[cell4 * ACTOR_SIZE] = 0;
     D_801468E4[cell3 * ACTOR_SIZE] = 0;
     GFX_PaletteAllocFade(&g_Actors[work[3]], 15, 0, 0, 1);
     GFX_PaletteAllocFade(&g_Actors[work[4]], 0, 0, 15, 1);
-    TASK(Actor)->timer       = 4;
-    TASK(Actor)->header.mode = 1;
+    SELF(Actor)->timer       = 4;
+    SELF(Actor)->header.mode = 1;
 }
 
 MATCH void func_801F7260(void) {
-    if (TASK(Actor)->timer != 0) {
+    if (SELF(Actor)->timer != 0) {
         g_Game.members->header.flags |= 0x40;
-        TASK(Actor)->timer -= 1;
+        SELF(Actor)->timer -= 1;
         return;
     }
     g_Game.members->header.flags &= ~PARTY_MEMBER_FLAG_HANDLER_BUSY;
-    g_Actors[TASK(Actor)->unk_03].header.flags = 0;
-    g_Actors[TASK(Actor)->unk_04].header.flags = 0;
-    TASK(Actor)->header.mode                   = 2;
+    g_Actors[SELF(Actor)->unk_03].header.flags = 0;
+    g_Actors[SELF(Actor)->unk_04].header.flags = 0;
+    SELF(Actor)->header.mode                   = 2;
 }
 
 #include "shared/Actor_FreePaletteFades.h"
@@ -74,24 +74,24 @@ MATCH void func_801F73BC(void) {
     RECT     rect;
     DR_MOVE* prim;
 
-    if (TASK(Actor)->timer == 0) {
+    if (SELF(Actor)->timer == 0) {
         prim = (DR_MOVE*)g_GfxPrimCursor;
-        setRECT(&rect, *(&D_801FCF40 + TASK(Actor)->header.mode * 2) / 4 + 0x2C0, *(&D_801FCF42 + TASK(Actor)->header.mode * 2) + 0x100, 0x10, 0x28);
+        setRECT(&rect, *(&D_801FCF40 + SELF(Actor)->header.mode * 2) / 4 + 0x2C0, *(&D_801FCF42 + SELF(Actor)->header.mode * 2) + 0x100, 0x10, 0x28);
         SetDrawMove(prim, &rect, D_801FCF40 / 4 + 0x2C0, D_801FCF42 + 0x100);
-        TASK(Actor)->header.mode++;
-        TASK(Actor)->draw_layer = 0;
-        TASK(Actor)->timer      = TASK(Actor)->header.mode;
-        GFX_AddPrim(TASK(Actor)->draw_layer, sizeof(DR_MOVE));
-        if (TASK(Actor)->header.mode == 4) {
+        SELF(Actor)->header.mode++;
+        SELF(Actor)->draw_layer = 0;
+        SELF(Actor)->timer      = SELF(Actor)->header.mode;
+        GFX_AddPrim(SELF(Actor)->draw_layer, sizeof(DR_MOVE));
+        if (SELF(Actor)->header.mode == 4) {
             Actor_Clear();
         }
     } else {
-        TASK(Actor)->timer--;
+        SELF(Actor)->timer--;
     }
 }
 
 MATCH void func_801F7508(void) {
-    SYS_DISPATCH_TASK(D_801FCF50, 1, g_Task);
+    SYS_DISPATCH_TASK(D_801FCF50, 1, g_Self);
 }
 
 #include "overlays/Actor_StartFadePair.h"
@@ -107,15 +107,15 @@ MATCH void Actor_FreePaletteFades2(void) {
 }
 
 MATCH void func_801F7A9C(void) {
-    SYS_DISPATCH_TASK(D_801FCF70, 1, g_Task);
+    SYS_DISPATCH_TASK(D_801FCF70, 1, g_Self);
 }
 
 MATCH void func_801F7AE0(void) {
     u8* work;
 
-    work    = TASK(u8);
+    work    = SELF(u8);
     work[9] = 0xF;
-    work    = TASK(u8);
+    work    = SELF(u8);
     work[1]++;
 }
 
@@ -124,16 +124,16 @@ MATCH void func_801F7B10(void) {
     s32*   ptr;
     u8     value;
 
-    actor = TASK(Actor);
+    actor = SELF(Actor);
     ptr   = &actor->vx;
     func_801F7FFC((Scena03Quad*)ptr);
     func_801F8170(ptr);
     actor->tint.halves.unk_5E += 1;
-    value              = TASK(Actor)->timer - 1;
-    TASK(Actor)->timer = value;
+    value              = SELF(Actor)->timer - 1;
+    SELF(Actor)->timer = value;
     if (!(value & BYTE_MASK)) {
-        TASK(Actor)->timer = 8;
-        TASK(Actor)->header.mode += 1;
+        SELF(Actor)->timer = 8;
+        SELF(Actor)->header.mode += 1;
     }
 }
 
@@ -142,16 +142,16 @@ MATCH void func_801F7BB0(void) {
     s32*   ptr;
     u8     value;
 
-    actor = TASK(Actor);
+    actor = SELF(Actor);
     ptr   = &actor->vx;
     func_801F7FFC((Scena03Quad*)ptr);
     func_801F8170(ptr);
     actor->script_pc += 4;
-    value              = TASK(Actor)->timer - 1;
-    TASK(Actor)->timer = value;
+    value              = SELF(Actor)->timer - 1;
+    SELF(Actor)->timer = value;
     if (!(value & BYTE_MASK)) {
-        TASK(Actor)->timer = 8;
-        TASK(Actor)->header.mode += 1;
+        SELF(Actor)->timer = 8;
+        SELF(Actor)->header.mode += 1;
     }
 }
 
@@ -159,14 +159,14 @@ MATCH void func_801F7C50(void) {
     s32* ptr;
     u8   value;
 
-    ptr = &TASK(Actor)->vx;
+    ptr = &SELF(Actor)->vx;
     func_801F7FFC((Scena03Quad*)ptr);
     func_801F8170(ptr);
-    value              = TASK(Actor)->timer - 1;
-    TASK(Actor)->timer = value;
+    value              = SELF(Actor)->timer - 1;
+    SELF(Actor)->timer = value;
     if (!(value & BYTE_MASK)) {
-        TASK(Actor)->timer = 128;
-        TASK(Actor)->header.mode += 1;
+        SELF(Actor)->timer = 128;
+        SELF(Actor)->header.mode += 1;
     }
 }
 
@@ -175,16 +175,16 @@ MATCH void func_801F7CE0(void) {
     s32*   pos;
     u8     remaining;
 
-    work = TASK(Actor);
+    work = SELF(Actor);
     pos  = &work->vx;
     func_801F7FFC((Scena03Quad*)pos);
     func_801F8170(pos);
     work->frame_cells -= 8;
     work->tint.halves.unk_5C -= 0x40;
-    remaining          = TASK(Actor)->timer - 1;
-    TASK(Actor)->timer = remaining;
+    remaining          = SELF(Actor)->timer - 1;
+    SELF(Actor)->timer = remaining;
     if (!(remaining & BYTE_MASK)) {
-        TASK(Actor)->header.mode += 1;
+        SELF(Actor)->header.mode += 1;
     }
 }
 
@@ -193,20 +193,20 @@ MATCH void func_801F7D80(void) {
     s32*   pos;
     s16    script_pc;
 
-    work = TASK(Actor);
+    work = SELF(Actor);
     pos  = &work->vx;
     func_801F7FFC((Scena03Quad*)pos);
     func_801F8170(pos);
     script_pc       = work->script_pc - 8;
     work->script_pc = script_pc;
     if (script_pc < 0) {
-        TASK(Actor)->unk_06 = 1;
+        SELF(Actor)->unk_06 = 1;
         Actor_Clear();
     }
 }
 
 MATCH void func_801F7DF0(void) {
-    SYS_DISPATCH_TASK(D_801FCF88, 1, g_Task);
+    SYS_DISPATCH_TASK(D_801FCF88, 1, g_Self);
 }
 
 MATCH void func_801F7E34(void) {
@@ -225,7 +225,7 @@ MATCH void func_801F7E6C(void) {
     u8             i;
     u8             slot;
 
-    effects = (SpawnedActor**)&TASK(Actor)->vx;
+    effects = (SpawnedActor**)&SELF(Actor)->vx;
     for (i = 0; i < 5; i++) {
         slot = Actor_FindFreeSpawned();
         if (slot != GAME_NONE) {
@@ -234,7 +234,7 @@ MATCH void func_801F7E6C(void) {
             spawned->header.flags      = 1;
             spawned->unk_06            = 0;
             spawned->type              = 0x21;
-            actor                      = TASK(Actor);
+            actor                      = SELF(Actor);
             spawned->vx                = actor->pos.x.fixed;
             spawned->selection         = actor->pos.y.fixed;
             spawned->unk_14            = actor->pos.z.fixed;
@@ -245,14 +245,14 @@ MATCH void func_801F7E6C(void) {
             record->tint.halves.unk_5E = 0;
         }
     }
-    TASK(Actor)->header.mode += 1;
+    SELF(Actor)->header.mode += 1;
 }
 
 MATCH void func_801F7F84(void) {
     SpawnedActor** effects; /* the five effect slots spawned at +0x0C */
     u8             i;
 
-    effects = (SpawnedActor**)&TASK(Actor)->vx;
+    effects = (SpawnedActor**)&SELF(Actor)->vx;
     for (i = 0; i < 5; i++) {
         if (effects[i]->unk_06 == 0) {
             return;
@@ -335,12 +335,12 @@ MATCH void func_801F8200(s32* vertices, s32 v0, s32 v1, s32 v2) {
 }
 
 MATCH void func_801F82E4(void) {
-    SYS_DISPATCH_TASK(D_801FCF94, 1, g_Task);
+    SYS_DISPATCH_TASK(D_801FCF94, 1, g_Self);
 }
 
 MATCH void func_801F8328(void) {
-    TASK(Actor)->timer = 96;
-    TASK(Actor)->header.mode++;
+    SELF(Actor)->timer = 96;
+    SELF(Actor)->header.mode++;
     SND_SEPlay(EMI_SE_ID(SND_BANK_AREA, 4));
 }
 
@@ -349,7 +349,7 @@ MATCH void func_801F8370(void) {
     s32           actor_index;
     u8            remaining;
 
-    if (TASK(Actor)->timer & 0x4) {
+    if (SELF(Actor)->timer & 0x4) {
         actor_index = func_8019601C() & BYTE_MASK;
         if (actor_index != 0xFF) {
             actor               = &g_SpawnedActors[actor_index];
@@ -357,10 +357,10 @@ MATCH void func_801F8370(void) {
             actor->type         = 0x24;
         }
     }
-    remaining          = TASK(Actor)->timer - 1;
-    TASK(Actor)->timer = remaining;
+    remaining          = SELF(Actor)->timer - 1;
+    SELF(Actor)->timer = remaining;
     if (!(remaining & BYTE_MASK)) {
-        TASK(Actor)->header.mode += 1;
+        SELF(Actor)->header.mode += 1;
     }
 }
 
@@ -369,13 +369,13 @@ MATCH void func_801F842C(void) {
 }
 
 MATCH void func_801F844C(void) {
-    SYS_DISPATCH_TASK(D_801FCFA0, 1, g_Task);
+    SYS_DISPATCH_TASK(D_801FCFA0, 1, g_Self);
 }
 
 MATCH void func_801F8490(void) {
     Scena03Work* work;
 
-    work                   = TASK(Scena03Work);
+    work                   = SELF(Scena03Work);
     work->line.radius      = 0x600;
     work->line.start_scale = 0x100;
     work->line.end_scale   = 0x100;
@@ -390,14 +390,14 @@ MATCH void func_801F8490(void) {
     if (rand() & 1) {
         work->line.color.b = 0;
     }
-    TASK(Actor)->header.mode++;
+    SELF(Actor)->header.mode++;
 }
 
 MATCH void func_801F853C(void) {
     Scena03Work* work;
     s16          value;
 
-    work = TASK(Scena03Work);
+    work = SELF(Scena03Work);
     func_801F88FC(&work->line);
     value                  = work->line.start_scale - 0x10;
     work->line.start_scale = value;
@@ -409,7 +409,7 @@ MATCH void func_801F853C(void) {
     }
     if (work->line.end_scale < 0) {
         work->line.start_scale = 0;
-        TASK(Actor)->header.mode += 1;
+        SELF(Actor)->header.mode += 1;
     }
 }
 
@@ -418,42 +418,42 @@ MATCH void func_801F85DC(void) {
 }
 
 MATCH void func_801F85FC(void) {
-    SYS_DISPATCH_TASK(D_801FCFAC, 1, g_Task);
+    SYS_DISPATCH_TASK(D_801FCFAC, 1, g_Self);
 }
 
 #include "shared/Actor_TrackFocus.h"
 
 MATCH void func_801F8710(void) {
-    GFX_DrawShadedDisc((s16)TASK(Actor)->screen_x, (s16)TASK(Actor)->screen_y, TASK(Actor)->timer, 0x80, 0);
-    TASK(Actor)->timer += 15;
-    if (TASK(Actor)->timer >= 61) {
-        TASK(Actor)->timer = 255;
-        TASK(Actor)->header.mode += 1;
+    GFX_DrawShadedDisc((s16)SELF(Actor)->screen_x, (s16)SELF(Actor)->screen_y, SELF(Actor)->timer, 0x80, 0);
+    SELF(Actor)->timer += 15;
+    if (SELF(Actor)->timer >= 61) {
+        SELF(Actor)->timer = 255;
+        SELF(Actor)->header.mode += 1;
     }
 }
 
 MATCH void func_801F87A4(void) {
     u8 count;
 
-    GFX_DrawShadedDisc((s16)TASK(Actor)->screen_x, (s16)TASK(Actor)->screen_y, (TASK(Actor)->timer & 0x1) | 0x3C, 0x80, 0);
-    if (TASK(Actor)->timer == 215) {
+    GFX_DrawShadedDisc((s16)SELF(Actor)->screen_x, (s16)SELF(Actor)->screen_y, (SELF(Actor)->timer & 0x1) | 0x3C, 0x80, 0);
+    if (SELF(Actor)->timer == 215) {
         SND_SEPlay(EMI_SE_ID(SND_BANK_AREA, 8));
     }
-    count              = TASK(Actor)->timer - 1;
-    TASK(Actor)->timer = count;
+    count              = SELF(Actor)->timer - 1;
+    SELF(Actor)->timer = count;
     if (count == 0) {
-        TASK(Actor)->timer = 60;
-        TASK(Actor)->header.mode += 1;
+        SELF(Actor)->timer = 60;
+        SELF(Actor)->header.mode += 1;
     }
 }
 
 /* Shrinks the disc effect. */
 /* func_801F885C */
 MATCH void Area_ShrinkDisc(void) {
-    GFX_DrawShadedDisc((s16)TASK(Actor)->screen_x, (s16)TASK(Actor)->screen_y, TASK(Actor)->timer, 0x80, 0);
-    TASK(Actor)->timer -= 1;
-    if ((s8)TASK(Actor)->timer < 0) {
-        TASK(Actor)->header.mode += 1;
+    GFX_DrawShadedDisc((s16)SELF(Actor)->screen_x, (s16)SELF(Actor)->screen_y, SELF(Actor)->timer, 0x80, 0);
+    SELF(Actor)->timer -= 1;
+    if ((s8)SELF(Actor)->timer < 0) {
+        SELF(Actor)->header.mode += 1;
     }
 }
 

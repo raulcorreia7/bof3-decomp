@@ -20,7 +20,7 @@ MATCH void Scene_UpdateEffect(void) { /* func_801D0C10 */
     SceneEffect10Steps handlers;
 
     handlers = D_801D0C04;
-    handlers.steps[TASK_BYTES[1]]();
+    handlers.steps[SELF_BYTES[1]]();
 }
 
 /* func_801D0C70 */
@@ -28,7 +28,7 @@ MATCH void Scene_EffectBegin(void) { /* func_801D0C70 */
     u8 i;
     u8 slot;
 
-    D_801D2744 = TASK(SceneBandEffect);
+    D_801D2744 = SELF(SceneBandEffect);
 
     slot                               = Actor_FindFreeSpawned();
     g_SpawnedActors[slot].header.flags = 1;
@@ -61,21 +61,21 @@ MATCH void Scene_EffectBegin(void) { /* func_801D0C70 */
         g_SpawnedActors[slot].unk_03       = 0;
     } while (i < 4);
 
-    TASK(SceneBandEffect)->ticker = 0;
-    TASK(SceneBandEffect)->unk_01++;
+    SELF(SceneBandEffect)->ticker = 0;
+    SELF(SceneBandEffect)->unk_01++;
     SND_SEPlay(EMI_SE_ID(SND_BANK_AREA, 3));
 }
 
 /* func_801D0E64 */
 MATCH void Scene_EffectEnd(void) { /* func_801D0E64 */
-    if (TASK(SceneBandEffect)->ticker == 9) {
+    if (SELF(SceneBandEffect)->ticker == 9) {
         Actor_Clear();
     }
 }
 
 /* func_801D0E9C */
 MATCH void Scene_UpdateEffectState(void) { /* func_801D0E9C */
-    D_801D2708[TASK(SceneBandEffect)->state]();
+    D_801D2708[SELF(SceneBandEffect)->state]();
 }
 
 /* func_801D0EE0 */
@@ -88,7 +88,7 @@ MATCH void Scene_EffectSetMatrix(void) { /* func_801D0EE0 */
 
     PushMatrix();
 
-    scratch = TASK(SceneBandEffect);
+    scratch = SELF(SceneBandEffect);
 
     setVector(&rotation, 0, 0, ONE / 4);
     if ((scratch->flags & 0x1u) != 0u) {
@@ -102,9 +102,9 @@ MATCH void Scene_EffectSetMatrix(void) { /* func_801D0EE0 */
 }
 
 MATCH void func_801D0FAC(void) {
-    D_801D2714[TASK(SceneBandEffect)->step_index]();
+    D_801D2714[SELF(SceneBandEffect)->step_index]();
     func_801D2658();
-    if (TASK(SceneBandEffect)->step_index != 0) {
+    if (SELF(SceneBandEffect)->step_index != 0) {
         Scene_EffectSetMatrix();
         Scene_DrawBands(0x60, 32, 7);
         PopMatrix();
@@ -118,18 +118,18 @@ MATCH void func_801D1034(void) {
     s32              coord_y;
     s16              distance;
 
-    TASK(SceneBandEffect)->ticker = RANDOM_MASK(0xF);
-    TASK(SceneBandEffect)->timer  = 0;
-    TASK(SceneBandEffect)->band   = 0;
+    SELF(SceneBandEffect)->ticker = RANDOM_MASK(0xF);
+    SELF(SceneBandEffect)->timer  = 0;
+    SELF(SceneBandEffect)->band   = 0;
 
     source       = D_801D2744;
-    work         = TASK(SceneBandEffect);
+    work         = SELF(SceneBandEffect);
     work->proj.x = source->proj.x;
     coord_y      = source->proj.y;
     work->proj.y = coord_y;
     distance     = Area_HeightSample(work->proj.x, coord_y);
 
-    scratch = TASK(SceneBandEffect);
+    scratch = SELF(SceneBandEffect);
     scratch->step_index++;
     scratch->proj_z = distance;
 }
@@ -143,12 +143,12 @@ MATCH void func_801D1138(void) {
 
     /* A store through the pointer may alias the cell, so each step reloads
      * it. */
-    work = TASK(SceneBandEffect);
+    work = SELF(SceneBandEffect);
     work->ticker++;
-    work = TASK(SceneBandEffect);
+    work = SELF(SceneBandEffect);
     work->timer--;
     if (work->timer == 0) {
-        work = TASK(SceneBandEffect);
+        work = SELF(SceneBandEffect);
         work->step_index++;
     }
 }
@@ -159,9 +159,9 @@ MATCH void func_801D11A0(void) {
 
     /* A store through the pointer may alias the cell, so each step reloads
      * it. */
-    work = TASK(SceneBandEffect);
+    work = SELF(SceneBandEffect);
     work->ticker++;
-    work       = TASK(SceneBandEffect);
+    work       = SELF(SceneBandEffect);
     count      = work->band - 1;
     work->band = count;
     if (count == 0) {
@@ -173,10 +173,10 @@ MATCH void func_801D11A0(void) {
 MATCH void func_801D1218(void) {
     SceneBandEffect* work;
 
-    work = TASK(SceneBandEffect);
+    work = SELF(SceneBandEffect);
     D_801D2724[work->step_index]();
     func_801D2658();
-    if (TASK(SceneBandEffect)->step_index != 0) {
+    if (SELF(SceneBandEffect)->step_index != 0) {
         Scene_EffectSetMatrix();
         Scene_DrawBands(0x20, 80, 0x1F);
         func_801D240C();
@@ -193,11 +193,11 @@ MATCH void func_801D12A8(void) {
     s32*             angle_cell;
     s32              velocity;
 
-    TASK(SceneBandEffect)->ticker = RANDOM_MASK(0xF);
-    TASK(SceneBandEffect)->timer  = 0;
-    TASK(SceneBandEffect)->band   = 0;
+    SELF(SceneBandEffect)->ticker = RANDOM_MASK(0xF);
+    SELF(SceneBandEffect)->timer  = 0;
+    SELF(SceneBandEffect)->band   = 0;
 
-    work                                    = TASK(SceneBandEffect);
+    work                                    = SELF(SceneBandEffect);
     counter                                 = work->orbit_seed << 5;
     FAKE_VOLATILE(s32, work->orbit_counter) = counter;
     angle                                   = SCE10EFF_ORBIT_ANGLE(counter);
@@ -206,12 +206,12 @@ MATCH void func_801D12A8(void) {
     g_ScratchPad                            = 0x20;
 
     velocity     = rcos(angle) * g_ScratchPad;
-    work         = TASK(SceneBandEffect);
+    work         = SELF(SceneBandEffect);
     work->proj.x = D_801D2744->proj.x + velocity;
 
     velocity        = rsin(*angle_cell) * g_ScratchPad;
     source          = D_801D2744;
-    scratch         = TASK(SceneBandEffect);
+    scratch         = SELF(SceneBandEffect);
     scratch->proj.y = source->proj.y + velocity;
     scratch->proj_z = source->proj_z;
     scratch->step_index++;
@@ -238,9 +238,9 @@ MATCH void func_801D1544(void) {
     s32*             angle_cell;
     s32              velocity;
 
-    TASK(SceneBandEffect)->ticker++;
+    SELF(SceneBandEffect)->ticker++;
 
-    work                                    = TASK(SceneBandEffect);
+    work                                    = SELF(SceneBandEffect);
     counter                                 = work->orbit_counter + 1;
     FAKE_VOLATILE(s32, work->orbit_counter) = counter;
     angle                                   = SCE10EFF_ORBIT_ANGLE(counter);
@@ -249,13 +249,13 @@ MATCH void func_801D1544(void) {
     g_ScratchPad                            = 0x20;
 
     velocity     = rcos(angle) * g_ScratchPad;
-    work         = TASK(SceneBandEffect);
+    work         = SELF(SceneBandEffect);
     work->proj.x = D_801D2744->proj.x + velocity;
 
     velocity                      = rsin(*angle_cell) * g_ScratchPad;
-    TASK(SceneBandEffect)->proj.y = D_801D2744->proj.y + velocity;
+    SELF(SceneBandEffect)->proj.y = D_801D2744->proj.y + velocity;
 
-    if (TIMER_EXPIRED(TASK(SceneBandEffect)->band)) {
+    if (TIMER_EXPIRED(SELF(SceneBandEffect)->band)) {
         D_801D2744->ticker++;
         Actor_Clear();
     }
@@ -278,9 +278,9 @@ NON_MATCHING void Scene_DrawBands(s16 band_height, u16 radius, u16 jitter_mask) 
 
     radius_cell               = &g_ScratchPad;
     *radius_cell              = 0x10;
-    D_1F800004                = (TASK(SceneBandEffect)->ticker & 0xF) << 8;
-    D_1F800008                = TASK(SceneBandEffect)->band * 7;
-    shade                     = TASK(SceneBandEffect)->band * 13;
+    D_1F800004                = (SELF(SceneBandEffect)->ticker & 0xF) << 8;
+    D_1F800008                = SELF(SceneBandEffect)->band * 7;
+    shade                     = SELF(SceneBandEffect)->band * 13;
     g_ScratchPadVectors[0].vy = FIXED_MUL(rsin(D_1F800004), *radius_cell);
     g_ScratchPadVectors[0].vz = 0;
     tpage                     = getTPage(TPAGE_DEPTH_4BIT, TPAGE_ABR_ADD, 320, 256);
@@ -292,7 +292,7 @@ NON_MATCHING void Scene_DrawBands(s16 band_height, u16 radius, u16 jitter_mask) 
     ramp        = cell + 1;
     radius_base = (s16)radius;
     for (i = 1; i < 18; i++) {
-        cell[0] = ((TASK(SceneBandEffect)->ticker + i) & 0xF) << 8;
+        cell[0] = ((SELF(SceneBandEffect)->ticker + i) & 0xF) << 8;
         if RANDOM_MASK (1) {
             cell[-1] = radius_base + RANDOM_MASK((s16)jitter_mask);
         } else {
@@ -388,9 +388,9 @@ INCLUDE_ASM(Scene_DrawBands);
 #endif
 
 MATCH void func_801D1D58(void) {
-    D_801D2734[TASK(SceneBandEffect)->step_index]();
+    D_801D2734[SELF(SceneBandEffect)->step_index]();
     func_801D2658();
-    if (TASK(SceneBandEffect)->step_index != 0) {
+    if (SELF(SceneBandEffect)->step_index != 0) {
         Scene_EffectSetMatrix();
         func_801D218C();
         func_801D240C();
@@ -405,11 +405,11 @@ MATCH void func_801D1DE0(void) {
     s32*             angle_cell;
     s32              velocity;
 
-    TASK(SceneBandEffect)->ticker = RANDOM_MASK(0xF);
-    TASK(SceneBandEffect)->timer  = 0;
-    TASK(SceneBandEffect)->band   = 0;
+    SELF(SceneBandEffect)->ticker = RANDOM_MASK(0xF);
+    SELF(SceneBandEffect)->timer  = 0;
+    SELF(SceneBandEffect)->band   = 0;
 
-    work                                    = TASK(SceneBandEffect);
+    work                                    = SELF(SceneBandEffect);
     counter                                 = (work->orbit_seed << 5) + 0x10;
     angle                                   = SCE10EFF_ORBIT_ANGLE(counter);
     FAKE_VOLATILE(s32, work->orbit_counter) = counter;
@@ -418,11 +418,11 @@ MATCH void func_801D1DE0(void) {
     g_ScratchPad                            = 0x18;
 
     velocity                      = rcos(angle) * g_ScratchPad;
-    TASK(SceneBandEffect)->proj.x = D_801D2744->proj.x + velocity;
+    SELF(SceneBandEffect)->proj.x = D_801D2744->proj.x + velocity;
 
     velocity                      = rsin(*angle_cell) * g_ScratchPad;
-    TASK(SceneBandEffect)->proj.y = D_801D2744->proj.y + velocity;
+    SELF(SceneBandEffect)->proj.y = D_801D2744->proj.y + velocity;
 
-    TASK(SceneBandEffect)->proj_z = D_801D2744->proj_z;
-    TASK(SceneBandEffect)->step_index++;
+    SELF(SceneBandEffect)->proj_z = D_801D2744->proj_z;
+    SELF(SceneBandEffect)->step_index++;
 }

@@ -7,16 +7,16 @@
 MATCH void Fishing_CautionSlideOut(void) {
     FishingState* record;
 
-    record        = TASK(FishingState);
+    record        = SELF(FishingState);
     record->timer = (record->timer + 1);
 
-    Fishing_DrawCautionBox((s16)(68 - TASK(FishingState)->timer * 80), 78);
+    Fishing_DrawCautionBox((s16)(68 - SELF(FishingState)->timer * 80), 78);
 
-    if (TASK(FishingState)->timer == 4) {
+    if (SELF(FishingState)->timer == 4) {
         SND_SEPlay(EMI_SE_ID(SND_BANK_COMMON, 2));
-        record            = TASK(FishingState);
+        record            = SELF(FishingState);
         record->cue_index = 1;
-        record            = TASK(FishingState);
+        record            = SELF(FishingState);
         record->sub_index = 4;
     }
 

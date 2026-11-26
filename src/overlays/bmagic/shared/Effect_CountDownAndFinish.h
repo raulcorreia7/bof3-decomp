@@ -3,7 +3,7 @@
 MATCH void Effect_CountDownAndFinish(void) {
     PartyMember* work;
 
-    work        = TASK(PartyMember);
+    work        = SELF(PartyMember);
     work->timer = work->timer - 1;
     if (work->timer == 0) {
         work               = BATTLE_ACTIVE_WORK;

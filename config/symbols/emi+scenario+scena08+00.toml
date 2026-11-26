@@ -8,7 +8,7 @@ jtbl_801F6D24 = { addr = 0x801F6D24, type = "Callback", source = "The switch tab
 jtbl_801F6D94 = { addr = 0x801F6D94, type = "Callback", source = "The switch table of func_801FD1A4: the jump targets of its jr dispatch." }
 jtbl_801F6DB4 = { addr = 0x801F6DB4, type = "Callback", source = "The switch table of func_801FD704: the jump targets of its jr dispatch." }
 Scene_DispatchEntity = { addr = 0x801F6F48, type = "func", source = "dispatches a scene entity by its callback index" }
-func_801F6F50 = { addr = 0x801F6F50, alias = true, source = "Scene_DispatchEntity+0x8, after its g_Task load; the start the split used before the function was moved back to that load" }
+func_801F6F50 = { addr = 0x801F6F50, alias = true, source = "Scene_DispatchEntity+0x8, after its g_Self load; the start the split used before the function was moved back to that load" }
 Scene_InitSpark = { addr = 0x801F8B50, type = "func", source = "Starts one spark at a random point near the actor position, falling from rest; one body shared by scena07, scena08 and area088." }
 Actor_Wait = { addr = 0x801F8D18, type = "func", source = "Counts the actor wait byte down reloads it at zero and advances the handler index." }
 Trail_Update = { addr = 0x801F8D98, type = "func", source = "Pushes the task position onto a chain of 32 points, projects every point to the screen with its width, and sets each point's angle from the headings to its neighbours." }

@@ -7,15 +7,15 @@
 MATCH void Fishing_CautionSlideIn(void) {
     FishingState* record;
 
-    record        = TASK(FishingState);
+    record        = SELF(FishingState);
     record->timer = (record->timer - 1);
 
-    Fishing_DrawCautionBox((s16)(TASK(FishingState)->timer * 80 + 68), 78);
+    Fishing_DrawCautionBox((s16)(SELF(FishingState)->timer * 80 + 68), 78);
 
-    record = TASK(FishingState);
+    record = SELF(FishingState);
     if (record->timer == 0) {
         record->cue_index = 1;
-        record            = TASK(FishingState);
+        record            = SELF(FishingState);
         record->sub_index = (record->sub_index + 1);
     }
 

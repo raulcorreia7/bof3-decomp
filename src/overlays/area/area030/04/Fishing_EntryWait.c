@@ -11,6 +11,6 @@ MATCH void Fishing_EntryWait(void) {
         D_8014419E = 0;
         p          = &D_80144199;
         *p         = (*p + 1);
-        TASK(FishingState)->sub_index += 1;
+        SELF(FishingState)->sub_index += 1;
     }
 }

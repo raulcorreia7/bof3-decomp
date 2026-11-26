@@ -18,7 +18,7 @@ MATCH void Trail_Update(Trail* trail) {
     for (i = 30; i >= 0; i--) {
         trail->point[i + 1] = trail->point[i];
     }
-    setVector(&trail->point[0].pos, TASK(Actor)->pos.x.fixed, TASK(Actor)->pos.y.fixed, TASK(Actor)->pos.z.fixed);
+    setVector(&trail->point[0].pos, SELF(Actor)->pos.x.fixed, SELF(Actor)->pos.y.fixed, SELF(Actor)->pos.z.fixed);
     Camera_SetMatrix(&camera);
     for (i = 0; i < 32; i++) {
         Camera_ProjectPoint(&trail->point[i].pos.vx, &trail->point[i].screen);

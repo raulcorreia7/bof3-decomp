@@ -5,7 +5,7 @@ MATCH void func_801F2F98(void) {
     u8* effect;
 
     i = 0;
-    if (TASK(Actor)->param.unk_0B != 0) {
+    if (SELF(Actor)->param.unk_0B != 0) {
         func_801F385C();
     }
     do {
@@ -18,5 +18,5 @@ MATCH void func_801F2F98(void) {
         i++;
     } while (i < 0x10);
     SND_SEPlay(0x206);
-    TASK(Actor)->header.step++;
+    SELF(Actor)->header.step++;
 }

@@ -12,7 +12,7 @@ MATCH void func_801F2FD4(void) {
     s32 vy;
     s32 vz;
 
-    actor = g_Task;
+    actor = g_Self;
     x     = actor->pos.x.fixed;
     mode  = actor->unk_0A;
     /* FAKE: the barrier keeps the mode load above the vx load. */
@@ -26,10 +26,10 @@ MATCH void func_801F2FD4(void) {
     actor->pos.y.fixed = y + vy;
     COORD_INT(actor->pos.z) += actor->vz >> 8;
     actor->vz = vz - 0x700;
-    if (vz > 0 && TASK(Actor)->vz < 0) {
+    if (vz > 0 && SELF(Actor)->vz < 0) {
         Script_Request(0x51);
     }
-    task = g_Task;
+    task = g_Self;
     if (task->unk_0A == 0) {
         task->unk_04 = 0;
     } else {

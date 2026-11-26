@@ -6,9 +6,9 @@ MATCH void func_801DDAF0(void) {
     u32                   index;
 
     index                               = Battle_AllocEffect(0u, 6u) & BYTE_MASK;
-    work_a                              = TASK(PartyMember);
+    work_a                              = SELF(PartyMember);
     g_BattleEffects[index].arg.unk_09   = 0u;
-    work_b                              = TASK(PartyMember);
+    work_b                              = SELF(PartyMember);
     g_BattleEffects[index].target.party = work_a;
     g_BattleEffects[index].pos.x        = work_b->pos.x;
     g_BattleEffects[index].pos.y        = work_b->pos.y;

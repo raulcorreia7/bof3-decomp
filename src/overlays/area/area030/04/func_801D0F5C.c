@@ -33,18 +33,18 @@ MATCH void func_801D0F5C(void) {
     D_800396C0                 = 0;
     D_800396FE                 = 0;
     g_GfxPalettePending        = 1;
-    TASK(FishingState)->unk_5C = 1;
+    SELF(FishingState)->unk_5C = 1;
 
     if (g_AreaCamera.scroll_y.part.integer >= 0x39) {
-        TASK(FishingState)->mode_index = 3;
-        TASK(FishingState)->sub_index  = 2;
+        SELF(FishingState)->mode_index = 3;
+        SELF(FishingState)->sub_index  = 2;
     } else {
-        TASK(FishingState)->saved_index = TASK(FishingState)->saved_value_27;
-        TASK(FishingState)->flags |= ACTOR_FLAG_SEMI_TRANSPARENT;
-        TASK(FishingState)->saved_value_27 = 0x7B;
-        TASK(FishingState)->tint_5D        = -0x80;
-        TASK(FishingState)->tint_5E        = -0x80;
-        TASK(FishingState)->tint_5F        = -0x80;
-        TASK(FishingState)->sub_index      = (TASK(FishingState)->sub_index + 1);
+        SELF(FishingState)->saved_index = SELF(FishingState)->saved_value_27;
+        SELF(FishingState)->flags |= ACTOR_FLAG_SEMI_TRANSPARENT;
+        SELF(FishingState)->saved_value_27 = 0x7B;
+        SELF(FishingState)->tint_5D        = -0x80;
+        SELF(FishingState)->tint_5E        = -0x80;
+        SELF(FishingState)->tint_5F        = -0x80;
+        SELF(FishingState)->sub_index      = (SELF(FishingState)->sub_index + 1);
     }
 }

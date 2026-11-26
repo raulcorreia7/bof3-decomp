@@ -12,24 +12,24 @@ __asm__(".include \"include/match/macro.inc\"\n");
 MATCH void Scene_InitTaskArea(void) {
     Actor* work;
 
-    work           = TASK(Actor);
+    work           = SELF(Actor);
     work->screen_x = 640;
     work->screen_y = 1536;
     work->timer    = 0;
     Area_ClearWorkColumn();
-    TASK(Actor)->header.mode = TASK(Actor)->header.mode + 1;
+    SELF(Actor)->header.mode = SELF(Actor)->header.mode + 1;
 }
 
 MATCH void func_801F6FCC(void) {
-    Scene_DrawLightPillar(TASK(Actor)->timer);
+    Scene_DrawLightPillar(SELF(Actor)->timer);
     if (g_FrameCount & 0x1) {
         Area_AddSpark();
     }
     Scene_DrawSparks();
-    TASK(Actor)->timer = TASK(Actor)->timer + 4;
-    if (TASK(Actor)->timer == 0) {
-        TASK(Actor)->timer       = 32;
-        TASK(Actor)->header.mode = TASK(Actor)->header.mode + 1;
+    SELF(Actor)->timer = SELF(Actor)->timer + 4;
+    if (SELF(Actor)->timer == 0) {
+        SELF(Actor)->timer       = 32;
+        SELF(Actor)->header.mode = SELF(Actor)->header.mode + 1;
     }
 }
 
@@ -40,17 +40,17 @@ MATCH void func_801F7078(void) {
     }
     Scene_DrawSparks();
     if (g_ScriptVars[0] == 0x1F) {
-        TASK(Actor)->timer       = 252;
-        TASK(Actor)->header.mode = TASK(Actor)->header.mode + 1;
+        SELF(Actor)->timer       = 252;
+        SELF(Actor)->header.mode = SELF(Actor)->header.mode + 1;
     }
 }
 
 MATCH void func_801F7100(void) {
-    Scene_DrawLightPillar(TASK(Actor)->timer);
+    Scene_DrawLightPillar(SELF(Actor)->timer);
     Scene_DrawSparks();
-    TASK(Actor)->timer = TASK(Actor)->timer - 4;
-    if (TASK(Actor)->timer == 0) {
-        TASK(Actor)->header.mode = TASK(Actor)->header.mode + 1;
+    SELF(Actor)->timer = SELF(Actor)->timer - 4;
+    if (SELF(Actor)->timer == 0) {
+        SELF(Actor)->header.mode = SELF(Actor)->header.mode + 1;
     }
 }
 
@@ -78,22 +78,22 @@ MATCH void Scene_DrawLightPillar(u8 fade) {
 
     Camera_SetMatrix(&matrix);
     angle    = 0;
-    point[0] = TASK(Actor)->pos.x.fixed + (((s16)TASK(Actor)->screen_x * rcos(0)) >> 4);
-    point[1] = TASK(Actor)->pos.y.fixed + (((s16)TASK(Actor)->screen_x * rsin(0)) >> 4);
-    point[2] = TASK(Actor)->pos.z.fixed;
+    point[0] = SELF(Actor)->pos.x.fixed + (((s16)SELF(Actor)->screen_x * rcos(0)) >> 4);
+    point[1] = SELF(Actor)->pos.y.fixed + (((s16)SELF(Actor)->screen_x * rsin(0)) >> 4);
+    point[2] = SELF(Actor)->pos.z.fixed;
     Camera_ProjectPoint(point, &inner);
-    point[2] = TASK(Actor)->pos.z.fixed + TO_COORD((s16)TASK(Actor)->screen_y);
+    point[2] = SELF(Actor)->pos.z.fixed + TO_COORD((s16)SELF(Actor)->screen_y);
     Camera_ProjectPoint(point, &outer);
     shade = ((g_FrameCount & 1) << 2) | 0x40;
     for (i = 0; i < 32; i++) {
         last_inner = inner;
         last_outer = outer;
         angle += 0x80;
-        point[0] = TASK(Actor)->pos.x.fixed + (((s16)TASK(Actor)->screen_x * rcos((u16)angle)) >> 4);
-        point[1] = TASK(Actor)->pos.y.fixed + (((s16)TASK(Actor)->screen_x * rsin((u16)angle)) >> 4);
-        point[2] = TASK(Actor)->pos.z.fixed;
+        point[0] = SELF(Actor)->pos.x.fixed + (((s16)SELF(Actor)->screen_x * rcos((u16)angle)) >> 4);
+        point[1] = SELF(Actor)->pos.y.fixed + (((s16)SELF(Actor)->screen_x * rsin((u16)angle)) >> 4);
+        point[2] = SELF(Actor)->pos.z.fixed;
         Camera_ProjectPoint(point, &inner);
-        point[2] = TASK(Actor)->pos.z.fixed + TO_COORD((s16)TASK(Actor)->screen_y);
+        point[2] = SELF(Actor)->pos.z.fixed + TO_COORD((s16)SELF(Actor)->screen_y);
         Camera_ProjectPoint(point, &outer);
 
         SetDrawMode((DR_MODE*)g_GfxPrimCursor, 0, 1, GetTPage(TPAGE_DEPTH_4BIT, TPAGE_ABR_ADD, FONT_TPAGE_X, FONT_TPAGE_Y), 0);
@@ -153,7 +153,7 @@ MATCH bool Scene_DrawSparks(void) {
         if (spark->active != 0) {
             spark->pos.vz -= spark->fall_speed << 8;
             func_801F752C(spark);
-            if (spark->pos.vz < TASK(Actor)->pos.z.fixed) {
+            if (spark->pos.vz < SELF(Actor)->pos.z.fixed) {
                 spark->active = 0;
             }
             alive = true;
@@ -165,7 +165,7 @@ MATCH bool Scene_DrawSparks(void) {
 }
 
 MATCH void func_801F77F8(void) {
-    SYS_DISPATCH_TASK(D_801FE590, 1, g_Task);
+    SYS_DISPATCH_TASK(D_801FE590, 1, g_Self);
 }
 
 MATCH void func_801F783C(void) {
@@ -174,23 +174,23 @@ MATCH void func_801F783C(void) {
     s32          i;
     s8           tint;
 
-    work = TASK(Actor);
+    work = SELF(Actor);
     i    = 0;
     if (g_PartySize != 0) {
         do {
             battler = &g_Game.members[i & BYTE_MASK];
-            TASK_SET(battler);
+            SELF_SET(battler);
             battler->unk_29 = 3;
             Area_AddGridActor();
             i += 1;
         } while ((u32)(i & BYTE_MASK) < g_PartySize);
     }
-    g_Task                   = work;
+    g_Self                   = work;
     tint                     = -0x80;
     work->tint.bytes.rgb.b   = tint;
     work->tint.bytes.rgb.g   = tint;
     work->tint.bytes.rgb.r   = tint;
-    TASK(Actor)->header.mode = 1;
+    SELF(Actor)->header.mode = 1;
 }
 
 MATCH void func_801F7900(void) {
@@ -201,11 +201,11 @@ MATCH void func_801F7920(void) {
     Actor* work;
     u8*    counter;
 
-    work = TASK(Actor);
+    work = SELF(Actor);
     if (work->tint.steps.delta.r != 0) {
         work->tint.steps.delta.r -= 2;
-        TASK(Actor)->tint.bytes.rgb.g -= 2;
-        TASK(Actor)->tint.bytes.rgb.b -= 2;
+        SELF(Actor)->tint.bytes.rgb.g -= 2;
+        SELF(Actor)->tint.bytes.rgb.b -= 2;
     } else {
         counter           = &g_ScenarioState.step;
         *counter          = *counter + 1;
@@ -222,7 +222,7 @@ MATCH void func_801F79C4(void) {
 }
 
 MATCH void func_801F7AA8(void) {
-    SYS_DISPATCH_TASK(D_801FE5A0, 1, g_Task);
+    SYS_DISPATCH_TASK(D_801FE5A0, 1, g_Self);
 }
 
 void func_801F7D1C(void);
@@ -236,14 +236,14 @@ MATCH void func_801F7AEC(void) {
         return;
     }
 
-    idx = TASK(Actor)->param.unk_0B;
+    idx = SELF(Actor)->param.unk_0B;
     g_Actors[idx].active_flags |= 8;
     {
         Actor* task;
         s32    px;
         s32    pz;
 
-        task                   = TASK(Actor);
+        task                   = SELF(Actor);
         px                     = g_Actors[idx].pos.x.fixed;
         g_Actors[idx].screen_x = task->screen_x;
         g_Actors[idx].screen_y = task->screen_y;
@@ -270,7 +270,7 @@ MATCH void func_801F7AEC(void) {
     {
         Actor* task;
 
-        task = TASK(Actor);
+        task = SELF(Actor);
         setXY0(tile, task->screen_x + 0x334, (u16)(task->screen_y + (((g_GfxBufferIndex ^ 1) * 0xF0) - 0x15)));
     }
     setWH(tile, 0x18, 0x30);
@@ -283,11 +283,11 @@ MATCH void func_801F7AEC(void) {
     SetDrawArea((DR_AREA*)g_GfxPrimCursor, (RECT*)cursor);
     GFX_AddPrim(GFX_LAYER_BACKDROP, sizeof(DR_AREA));
 
-    if (TASK(Actor)->unk_06 == 0) {
+    if (SELF(Actor)->unk_06 == 0) {
         func_801F7D1C();
-        TASK(Actor)->header.mode = 1;
+        SELF(Actor)->header.mode = 1;
     } else {
-        TASK(Actor)->header.mode = 2;
+        SELF(Actor)->header.mode = 2;
     }
 }
 
@@ -295,13 +295,13 @@ MATCH void func_801F7D1C(void) {
     Pos2u pos;
 
     if (g_GameStateIndex == 3 || g_GameStateIndex == 1) {
-        g_Actors[TASK(Actor)->param.actor_slot].active_flags &= 0xF7;
-        TASK(Actor)->header.mode = 0;
+        g_Actors[SELF(Actor)->param.actor_slot].active_flags &= 0xF7;
+        SELF(Actor)->header.mode = 0;
     } else {
         func_801F83AC(&pos);
-        TASK(Actor)->timer += 8;
-        TASK(Actor)->tint.steps.delta.r = rsin(TASK(Actor)->timer << 4) >> 7;
-        TASK(Actor)->tint.steps.delta.g = rcos(TASK(Actor)->timer << 4) >> 7;
+        SELF(Actor)->timer += 8;
+        SELF(Actor)->tint.steps.delta.r = rsin(SELF(Actor)->timer << 4) >> 7;
+        SELF(Actor)->tint.steps.delta.g = rcos(SELF(Actor)->timer << 4) >> 7;
         func_801F7FFC(pos.x, pos.y);
     }
 }
@@ -310,20 +310,20 @@ MATCH void func_801F7E2C(void) {
     Pos2u pos;
 
     func_801F83AC(&pos);
-    if (TASK(Actor)->tint.steps.delta.r < 0x70) {
-        TASK(Actor)->tint.steps.delta.r += 2;
+    if (SELF(Actor)->tint.steps.delta.r < 0x70) {
+        SELF(Actor)->tint.steps.delta.r += 2;
     }
-    if (TASK(Actor)->tint.steps.delta.g < 0x30) {
-        TASK(Actor)->tint.steps.delta.g += 1;
+    if (SELF(Actor)->tint.steps.delta.g < 0x30) {
+        SELF(Actor)->tint.steps.delta.g += 1;
     }
     func_801F81D8(pos.x, pos.y);
     if (g_GameStateIndex == 3 || g_GameStateIndex == 1) {
-        g_Actors[TASK(Actor)->param.actor_slot].active_flags &= 0xF7;
-        TASK(Actor)->header.mode = 0;
+        g_Actors[SELF(Actor)->param.actor_slot].active_flags &= 0xF7;
+        SELF(Actor)->header.mode = 0;
     }
-    if ((TASK(Actor)->tint.raw & 0xFFFF00) == 0x307000) {
-        TASK(Actor)->unk_06      = 0;
-        TASK(Actor)->header.mode = 1;
+    if ((SELF(Actor)->tint.raw & 0xFFFF00) == 0x307000) {
+        SELF(Actor)->unk_06      = 0;
+        SELF(Actor)->header.mode = 1;
     }
 }
 
@@ -331,14 +331,14 @@ MATCH void func_801F7F5C(void) {
     Pos2u pos;
 
     func_801F83AC(&pos);
-    if (TASK(Actor)->tint.steps.delta.r != 0) {
-        TASK(Actor)->tint.steps.delta.r -= 2;
+    if (SELF(Actor)->tint.steps.delta.r != 0) {
+        SELF(Actor)->tint.steps.delta.r -= 2;
     }
-    if (TASK(Actor)->tint.steps.delta.g != 0) {
-        TASK(Actor)->tint.steps.delta.g -= 1;
+    if (SELF(Actor)->tint.steps.delta.g != 0) {
+        SELF(Actor)->tint.steps.delta.g -= 1;
     }
     func_801F81D8(pos.x, pos.y);
-    if ((TASK(Actor)->tint.raw & 0xFFFF00) == 0) {
+    if ((SELF(Actor)->tint.raw & 0xFFFF00) == 0) {
         Actor_Clear();
     }
 }
@@ -350,8 +350,8 @@ MATCH void func_801F7FFC(s16 x, s16 y) {
     u8        green;
 
     prim  = (POLY_GT4*)g_GfxPrimCursor;
-    red   = TASK(Actor)->tint.bytes.rgb.r + 0x20;
-    green = TASK(Actor)->tint.bytes.rgb.g + 0x20;
+    red   = SELF(Actor)->tint.bytes.rgb.r + 0x20;
+    green = SELF(Actor)->tint.bytes.rgb.g + 0x20;
     SetPolyGT4(prim);
     SCENA15_SPRITE_GEOMETRY(prim, x, y);
     setRGB0(prim, 0x90, 0x90, 0x90);
@@ -368,8 +368,8 @@ MATCH void func_801F81D8(s16 x, s16 y) {
     u8        green;
 
     prim  = (POLY_GT4*)g_GfxPrimCursor;
-    red   = TASK(Actor)->tint.bytes.rgb.r;
-    green = TASK(Actor)->tint.bytes.rgb.g;
+    red   = SELF(Actor)->tint.bytes.rgb.r;
+    green = SELF(Actor)->tint.bytes.rgb.g;
     SetPolyGT4(prim);
     SCENA15_SPRITE_GEOMETRY(prim, x, y);
     setRGB0(prim, red, red, red);
@@ -385,30 +385,30 @@ MATCH void func_801F83AC(Pos2u* out) {
     long    flag;
     u8      slot;
 
-    slot                    = TASK(Actor)->param.actor_slot;
-    g_Actors[slot].screen_x = TASK(Actor)->screen_x;
-    g_Actors[slot].screen_y = TASK(Actor)->screen_y;
-    setVector(&vec, (TASK(Actor)->pos.x.fixed >> 9) - AREA_CELL_ORIGIN, (TASK(Actor)->pos.y.fixed >> 9) - AREA_CELL_ORIGIN, -COORD_INT(TASK(Actor)->pos.z) / 2);
-    TASK(Actor)->unk_60 = RotTransPers(&vec, (long*)out, &depth, &flag);
+    slot                    = SELF(Actor)->param.actor_slot;
+    g_Actors[slot].screen_x = SELF(Actor)->screen_x;
+    g_Actors[slot].screen_y = SELF(Actor)->screen_y;
+    setVector(&vec, (SELF(Actor)->pos.x.fixed >> 9) - AREA_CELL_ORIGIN, (SELF(Actor)->pos.y.fixed >> 9) - AREA_CELL_ORIGIN, -COORD_INT(SELF(Actor)->pos.z) / 2);
+    SELF(Actor)->unk_60 = RotTransPers(&vec, (long*)out, &depth, &flag);
     out->x -= 12;
     out->y -= 37;
 }
 
 MATCH void func_801F8488(void) {
-    SYS_DISPATCH_TASK(D_801FE5B0, 1, g_Task);
+    SYS_DISPATCH_TASK(D_801FE5B0, 1, g_Self);
 }
 
 /* The statements of func_801F84CC and func_801F87F8, byte-identical twins: set +0x29 of every party battler row to 3, clear the three tint bytes of the current work and move it to step 1. Each member declares work and i. */
 #define SCENA15_PARTY_SETUP()           \
-    work = g_Task;                      \
+    work = g_Self;                      \
     for (i = 0; i < g_PartySize; i++) { \
         g_Game.members[i].unk_29 = 3;   \
     }                                   \
-    g_Task                   = work;    \
+    g_Self                   = work;    \
     work->tint.bytes.rgb.b   = 0;       \
     work->tint.bytes.rgb.g   = 0;       \
     work->tint.bytes.rgb.r   = 0;       \
-    TASK(Actor)->header.mode = 1
+    SELF(Actor)->header.mode = 1
 
 MATCH void func_801F84CC(void) {
     Actor* work;
@@ -421,11 +421,11 @@ MATCH void func_801F8548(void) {
     Actor* work;
     u8*    counter;
 
-    work = TASK(Actor);
+    work = SELF(Actor);
     if (work->tint.steps.delta.r < 0x7C) {
         work->tint.steps.delta.r += 4;
-        TASK(Actor)->tint.bytes.rgb.g += 4;
-        TASK(Actor)->tint.bytes.rgb.b += 4;
+        SELF(Actor)->tint.bytes.rgb.g += 4;
+        SELF(Actor)->tint.bytes.rgb.b += 4;
     } else {
         counter           = g_ScriptVars;
         *counter          = *counter + 1;
@@ -443,10 +443,10 @@ MATCH void func_801F85F0(void) {
 MATCH void func_801F8618(void) {
     u8 i;
 
-    if (TASK(Actor)->tint.steps.delta.r != 0) {
-        TASK(Actor)->tint.steps.delta.r -= 2;
-        TASK(Actor)->tint.bytes.rgb.g -= 2;
-        TASK(Actor)->tint.bytes.rgb.b -= 2;
+    if (SELF(Actor)->tint.steps.delta.r != 0) {
+        SELF(Actor)->tint.steps.delta.r -= 2;
+        SELF(Actor)->tint.bytes.rgb.g -= 2;
+        SELF(Actor)->tint.bytes.rgb.b -= 2;
     } else {
         for (i = 0; i < g_PartySize; i++) {
             g_Game.members[i].unk_29 = g_AreaDrawMode;
@@ -464,7 +464,7 @@ MATCH void func_801F8704(void) {
     s32          shade;
     u8           i;
 
-    actor = TASK(Actor);
+    actor = SELF(Actor);
     shade = -((s8)actor->tint.bytes.rgb.r / 2); /* kept: retail sign-extends the u8 load (lbu, sll, sra); steps emits lb. */
     for (i = 0; i < g_PartySize; i++) {
         if (g_Game.members[i].chr.character_id != CHAR_ID_RYU_ADULT) {
@@ -474,11 +474,11 @@ MATCH void func_801F8704(void) {
             g_Game.members[i].unk_5D = shade;
         }
     }
-    TASK_SET(actor);
+    SELF_SET(actor);
 }
 
 MATCH void func_801F87B4(void) {
-    SYS_DISPATCH_TASK(D_801FE5C0, 1, g_Task);
+    SYS_DISPATCH_TASK(D_801FE5C0, 1, g_Self);
 }
 
 MATCH void func_801F87F8(void) {
@@ -492,18 +492,18 @@ MATCH void func_801F8874(void) {
     Actor* work;
     u8*    counter;
 
-    work = TASK(Actor);
+    work = SELF(Actor);
     if (work->tint.bytes.rgb.r < 0xF8) {
         work->tint.bytes.rgb.r += 8;
-        TASK(Actor)->tint.bytes.rgb.g += 8;
-        TASK(Actor)->tint.bytes.rgb.b += 8;
+        SELF(Actor)->tint.bytes.rgb.g += 8;
+        SELF(Actor)->tint.bytes.rgb.b += 8;
     } else {
         work->tint.steps.delta.b = -1;
         work->tint.steps.delta.g = -1;
         work->tint.steps.delta.r = -1;
         counter                  = &g_ScenarioState.step;
         *counter                 = *counter + 1;
-        TASK(Actor)->header.mode = 2;
+        SELF(Actor)->header.mode = 2;
     }
     func_801F79C4();
     func_801F8958();
@@ -519,52 +519,52 @@ MATCH void func_801F8958(void) {
     Actor* work;
     u8     i;
 
-    actor = TASK(Actor);
+    actor = SELF(Actor);
     for (i = 0; i < ACTOR_COUNT; i++) {
         if (func_801ACE9C(g_Actors[i].unk_2C) == 0x261) {
             work             = &g_Actors[i];
-            g_Task           = work;
+            g_Self           = work;
             work->draw_layer = 3;
             Area_AddGridActor();
         }
         if (func_801ACE9C(g_Actors[i].unk_2C) == 0x308 && SYS_TestFlag(g_SceneFlags, 0x11)) {
             work             = &g_Actors[i];
-            g_Task           = work;
+            g_Self           = work;
             work->draw_layer = 3;
             Area_AddGridActor();
         }
     }
-    g_Task = actor;
+    g_Self = actor;
 }
 
 MATCH void func_801F8A5C(void) {
-    SYS_DISPATCH_TASK(D_801FE5CC, 1, g_Task);
+    SYS_DISPATCH_TASK(D_801FE5CC, 1, g_Self);
 }
 
 MATCH void func_801F8AA0(void) {
     s32 cue;
 
-    setVector(TASK(Actor), 0, 0, 0);
-    if (!(TASK(Actor)->unk_06 & 0x1)) {
-        TASK(Actor)->unk_18 = 0x3000;
-        TASK(Actor)->unk_1C = 0;
+    setVector(SELF(Actor), 0, 0, 0);
+    if (!(SELF(Actor)->unk_06 & 0x1)) {
+        SELF(Actor)->unk_18 = 0x3000;
+        SELF(Actor)->unk_1C = 0;
     } else {
-        TASK(Actor)->unk_18 = 0;
-        TASK(Actor)->unk_1C = 0x3000;
+        SELF(Actor)->unk_18 = 0;
+        SELF(Actor)->unk_1C = 0x3000;
     }
-    TASK(Actor)->gravity = 0x200000;
-    if (TASK(Actor)->unk_06 & 0x8) {
-        TASK(Actor)->vx += TASK(Actor)->unk_18 << 3;
-        TASK(Actor)->vy += TASK(Actor)->unk_1C << 3;
-        TASK(Actor)->vz += TASK(Actor)->gravity << 3;
-        TASK(Actor)->header.mode += 3;
+    SELF(Actor)->gravity = 0x200000;
+    if (SELF(Actor)->unk_06 & 0x8) {
+        SELF(Actor)->vx += SELF(Actor)->unk_18 << 3;
+        SELF(Actor)->vy += SELF(Actor)->unk_1C << 3;
+        SELF(Actor)->vz += SELF(Actor)->gravity << 3;
+        SELF(Actor)->header.mode += 3;
     } else {
-        TASK(Actor)->timer       = 8;
-        TASK(Actor)->header.mode = TASK(Actor)->header.mode + 1;
+        SELF(Actor)->timer       = 8;
+        SELF(Actor)->header.mode = SELF(Actor)->header.mode + 1;
     }
-    if (!(TASK(Actor)->param.unk_0B & 0x1)) {
+    if (!(SELF(Actor)->param.unk_0B & 0x1)) {
         cue = 0x202;
-        if (!(TASK(Actor)->unk_06 & 0x4)) {
+        if (!(SELF(Actor)->unk_06 & 0x4)) {
             cue = 0x207;
         }
         SND_SEPlay(cue);
@@ -582,14 +582,14 @@ MATCH void func_801F8C78(void) {
     Actor* work;
 
     Camera_SetMatrix(&matrix);
-    func_801F9020(&TASK(Actor)->pos.x, &TASK(Actor)->vx);
-    func_801F92F0(&TASK(Actor)->pos.x, &TASK(Actor)->vx);
-    work         = TASK(Actor);
+    func_801F9020(&SELF(Actor)->pos.x, &SELF(Actor)->vx);
+    func_801F92F0(&SELF(Actor)->pos.x, &SELF(Actor)->vx);
+    work         = SELF(Actor);
     D_801FE738.x = -work->vx;
     D_801FE738.y = -work->vy;
     D_801FE738.z = -work->vz;
     work->timer  = 128;
-    TASK(Actor)->header.mode++;
+    SELF(Actor)->header.mode++;
 }
 
 /* Spin the actor's sweep value, shift its position on alternate frames, and advance when the script variable equals its option. */
@@ -598,29 +598,29 @@ MATCH void func_801F8D30(void) {
     s32*   cell;
 
     cell = &D_801FE740;
-    *cell += TASK(Actor)->gravity >> 1;
-    if (*cell == TASK(Actor)->vz) {
+    *cell += SELF(Actor)->gravity >> 1;
+    if (*cell == SELF(Actor)->vz) {
         *cell = -*cell;
     }
     Camera_SetMatrix(&camera);
     if (g_FrameCount & 1) {
-        func_801F9A20(&TASK(Actor)->pos, &TASK(Actor)->vx);
-        if (!(TASK(Actor)->unk_06 & 1)) {
-            TASK(Actor)->pos.x.fixed += 0x4000;
+        func_801F9A20(&SELF(Actor)->pos, &SELF(Actor)->vx);
+        if (!(SELF(Actor)->unk_06 & 1)) {
+            SELF(Actor)->pos.x.fixed += 0x4000;
         } else {
-            TASK(Actor)->pos.y.fixed += 0x4000;
+            SELF(Actor)->pos.y.fixed += 0x4000;
         }
-        func_801F9500(&TASK(Actor)->pos, &TASK(Actor)->vx);
-        if (!(TASK(Actor)->unk_06 & 1)) {
-            TASK(Actor)->pos.x.fixed -= 0x4000;
+        func_801F9500(&SELF(Actor)->pos, &SELF(Actor)->vx);
+        if (!(SELF(Actor)->unk_06 & 1)) {
+            SELF(Actor)->pos.x.fixed -= 0x4000;
         } else {
-            TASK(Actor)->pos.y.fixed -= 0x4000;
+            SELF(Actor)->pos.y.fixed -= 0x4000;
         }
     } else {
-        func_801F97CC(&TASK(Actor)->pos, cell - 2);
+        func_801F97CC(&SELF(Actor)->pos, cell - 2);
     }
-    if (g_ScriptVarsReq.byte == TASK(Actor)->option_flags) {
-        TASK(Actor)->header.mode++;
+    if (g_ScriptVarsReq.byte == SELF(Actor)->option_flags) {
+        SELF(Actor)->header.mode++;
     }
 }
 
@@ -630,13 +630,13 @@ MATCH void func_801F8EA8(void) {
     s32    cue;
 
     Camera_SetMatrix(&matrix);
-    work = TASK(Actor);
+    work = SELF(Actor);
     func_801F92F0(&work->pos.x, &work->vx);
-    TASK(Actor)->timer       = 8;
-    TASK(Actor)->header.mode = TASK(Actor)->header.mode + 1;
-    if (!(TASK(Actor)->param.unk_0B & 0x2)) {
+    SELF(Actor)->timer       = 8;
+    SELF(Actor)->header.mode = SELF(Actor)->header.mode + 1;
+    if (!(SELF(Actor)->param.unk_0B & 0x2)) {
         cue = 0x203;
-        if (!(TASK(Actor)->unk_06 & 0x4)) {
+        if (!(SELF(Actor)->unk_06 & 0x4)) {
             cue = 0x208;
         }
         SND_SEPlay(cue);
@@ -665,7 +665,7 @@ MATCH void func_801F9020(Coord* position, s32* step) {
     point[2] = position[2].fixed + step[2];
     Camera_ProjectPoint(point, &screen[0]);
 
-    if (!(TASK(Actor)->unk_06 & 1)) {
+    if (!(SELF(Actor)->unk_06 & 1)) {
         point[0] = position[0].fixed - step[0];
         point[1] = position[1].fixed + step[1];
     } else {
@@ -676,7 +676,7 @@ MATCH void func_801F9020(Coord* position, s32* step) {
     FAKE_BARRIER(); /* FAKE: keep the point stores before the call setup. */
     Camera_ProjectPoint(point, &screen[1]);
 
-    if (!(TASK(Actor)->unk_06 & 1)) {
+    if (!(SELF(Actor)->unk_06 & 1)) {
         point[0] = position[0].fixed + step[0];
         point[1] = position[1].fixed - step[1];
     } else {
@@ -725,7 +725,7 @@ MATCH void func_801F92F0(Coord* position, s32* step) {
     point[1] = origin[1].fixed + delta[1];
     point[2] = origin[2].fixed + delta[2];
     Camera_ProjectPoint(point, (DVECTOR*)&poly->x0);
-    if (!(TASK(Actor)->unk_06 & 1)) {
+    if (!(SELF(Actor)->unk_06 & 1)) {
         point[0] = origin[0].fixed - delta[0];
         point[1] = origin[1].fixed + delta[1];
     } else {
@@ -735,7 +735,7 @@ MATCH void func_801F92F0(Coord* position, s32* step) {
     point[2] = origin[2].fixed + delta[2];
     FAKE_BARRIER(); /* FAKE: keep the second projected point stores before its call setup. */
     Camera_ProjectPoint(point, (DVECTOR*)&poly->x1);
-    if (!(TASK(Actor)->unk_06 & 1)) {
+    if (!(SELF(Actor)->unk_06 & 1)) {
         point[0] = origin[0].fixed + delta[0];
         point[1] = origin[1].fixed - delta[1];
     } else {
@@ -762,14 +762,14 @@ MATCH void func_801F9500(WorldPos* pos, s32* vx) {
     FAKE_STACK_PADS(u8, 0x10); /* FAKE: retail keeps the point row in a 72-byte frame. */
 
     cell = D_801FE5E8;
-    if (TASK(Actor)->unk_06 & 0x4) {
+    if (SELF(Actor)->unk_06 & 0x4) {
         cell++;
     }
     prim = (POLY_FT4*)g_GfxPrimCursor;
     SetPolyFT4(prim);
     SetSemiTrans(prim, 1);
 
-    if (!(TASK(Actor)->unk_06 & 1)) {
+    if (!(SELF(Actor)->unk_06 & 1)) {
         point[0] = pos->x.fixed - vx[0];
         point[1] = pos->y.fixed + vx[1];
     } else {
@@ -790,7 +790,7 @@ MATCH void func_801F9500(WorldPos* pos, s32* vx) {
     point[2] = pos->z.fixed - vx[2];
     Camera_ProjectPoint(point, (DVECTOR*)&prim->x2);
 
-    if (!(TASK(Actor)->unk_06 & 1)) {
+    if (!(SELF(Actor)->unk_06 & 1)) {
         point[0] = pos->x.fixed + vx[0];
         point[1] = pos->y.fixed - vx[1];
     } else {
@@ -820,7 +820,7 @@ NON_MATCHING void func_801F97CC(WorldPos* pos, s32* arg) {
     point[1] = pos->y.fixed + arg[1];
     point[2] = pos->z.fixed + arg[2];
     Camera_ProjectPoint(point, (DVECTOR*)(&poly->x0));
-    if (!(((Actor*)g_Task)->unk_06 & 1)) {
+    if (!(((Actor*)g_Self)->unk_06 & 1)) {
         point[0] = pos->x.fixed - arg[0];
         point[1] = pos->y.fixed + arg[1];
     } else {
@@ -835,7 +835,7 @@ NON_MATCHING void func_801F97CC(WorldPos* pos, s32* arg) {
     lift     = 0x100000;
     point[2] = (pos->z.fixed + arg[2]) + lift;
     Camera_ProjectPoint(point, (DVECTOR*)(&poly->x2));
-    if (!(((Actor*)g_Task)->unk_06 & 1)) {
+    if (!(((Actor*)g_Self)->unk_06 & 1)) {
         point[0] = pos->x.fixed - arg[0];
         point[1] = pos->y.fixed + arg[1];
     } else {
@@ -845,9 +845,9 @@ NON_MATCHING void func_801F97CC(WorldPos* pos, s32* arg) {
     point[2] = (pos->z.fixed + arg[2]) + lift;
     asm __volatile__("" : : : "memory");
     Camera_ProjectPoint(point, (DVECTOR*)(&poly->x3));
-    poly->r0 = (TASK(Actor)->unk_06 & 2) != 0 ? 0x80 : 0;
+    poly->r0 = (SELF(Actor)->unk_06 & 2) != 0 ? 0x80 : 0;
     poly->b0 = 0;
-    poly->g0 = (TASK(Actor)->unk_06 & 2) == 0 ? 0x80 : 0;
+    poly->g0 = (SELF(Actor)->unk_06 & 2) == 0 ? 0x80 : 0;
     Area_CellAddPrim(pos->x.fixed, pos->y.fixed, 0, sizeof(POLY_F4));
 }
 #else
@@ -871,7 +871,7 @@ MATCH void func_801F9A20(WorldPos* pos, s32* vx) {
     point[2] = pos->z.fixed + vx[2];
     Camera_ProjectPoint(point, (DVECTOR*)&poly->x0);
 
-    if (!(TASK(Actor)->unk_06 & 1)) {
+    if (!(SELF(Actor)->unk_06 & 1)) {
         point[0] = pos->x.fixed - vx[0];
         point[1] = pos->y.fixed + vx[1];
     } else {
@@ -882,7 +882,7 @@ MATCH void func_801F9A20(WorldPos* pos, s32* vx) {
     FAKE_BARRIER(); /* FAKE: keep the point stores before the call setup. */
     Camera_ProjectPoint(point, (DVECTOR*)&poly->x1);
 
-    if (!(TASK(Actor)->unk_06 & 1)) {
+    if (!(SELF(Actor)->unk_06 & 1)) {
         point[0] = pos->x.fixed + vx[0];
         point[1] = pos->y.fixed - vx[1];
     } else {
@@ -898,7 +898,7 @@ MATCH void func_801F9A20(WorldPos* pos, s32* vx) {
     point[2] = pos->z.fixed - vx[2];
     Camera_ProjectPoint(point, (DVECTOR*)&poly->x3);
 
-    setRGB0(poly, (TASK(Actor)->unk_06 & 2) != 0 ? 0x80 : 0, (TASK(Actor)->unk_06 & 2) == 0 ? 0x80 : 0, 0);
+    setRGB0(poly, (SELF(Actor)->unk_06 & 2) != 0 ? 0x80 : 0, (SELF(Actor)->unk_06 & 2) == 0 ? 0x80 : 0, 0);
     Area_CellAddPrim(pos->x.fixed, pos->y.fixed, 0, sizeof(POLY_F4));
 }
 

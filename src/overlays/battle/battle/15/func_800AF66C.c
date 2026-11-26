@@ -12,7 +12,7 @@ MATCH u32 func_800AF66C(BattleRange* range, u32 extent) {
     value      = extent;
     result     = 0;
     half_value = value >> 1;
-    work       = TASK(BattleRange);
+    work       = SELF(BattleRange);
     first      = work->range_x + half_value - range->range_x;
     second     = work->range_y + half_value - range->range_y;
     if (value >= first) {

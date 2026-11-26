@@ -8,7 +8,7 @@ MATCH s32 Actor_RockIsBlockedAtEdge(void) {
     s32    y;
     s32    hi;
 
-    work = TASK(Actor);
+    work = SELF(Actor);
     x    = work->pos.x.fixed;
     y    = work->pos.y.fixed;
     switch (work->direction) {

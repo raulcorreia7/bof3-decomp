@@ -5,7 +5,7 @@
  * func_8014D6B8 and reports 0.
  */
 MATCH u32 Script_Request(u8 script_index) {
-    if (TASK(Actor)->script_record == script_index) {
+    if (SELF(Actor)->script_record == script_index) {
         return 1;
     }
     Script_Select(script_index);

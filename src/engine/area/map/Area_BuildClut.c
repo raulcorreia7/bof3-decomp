@@ -8,30 +8,30 @@ MATCH void Area_BuildClut(u16* dst) {
     s32 base;
     u32 sel;
 
-    base = ((TASK(Actor)->active_flags & 0x4) != 0) ? STAGE_PALETTE_Y + 16 : STAGE_PALETTE_Y;
-    switch (TASK(Actor)->palette_8bit) {
+    base = ((SELF(Actor)->active_flags & 0x4) != 0) ? STAGE_PALETTE_Y + 16 : STAGE_PALETTE_Y;
+    switch (SELF(Actor)->palette_8bit) {
         case PALETTE_TYPE_CELL:
-            sel  = TASK(Actor)->clut_select;
+            sel  = SELF(Actor)->clut_select;
             *dst = (((base + (sel >> 4)) << 6) | (sel & 0xF));
             break;
         case PALETTE_TYPE_ROW: {
             u32 n;
 
-            n    = TASK(Actor)->clut_select;
+            n    = SELF(Actor)->clut_select;
             *dst = ((base + n) << 6);
             break;
         }
         case PALETTE_TYPE_CELLS_2:
-            sel  = TASK(Actor)->clut_select;
+            sel  = SELF(Actor)->clut_select;
             *dst = (((base + (sel >> 3)) << 6) | ((sel & 0x7) * 2));
             break;
         case PALETTE_TYPE_CELLS_4:
-            sel  = TASK(Actor)->clut_select;
+            sel  = SELF(Actor)->clut_select;
             *dst = (((base + (sel >> 2)) << 6) | ((sel & 0x3) * 4));
             break;
         case PALETTE_TYPE_CELLS_8:
         default:
-            sel  = TASK(Actor)->clut_select;
+            sel  = SELF(Actor)->clut_select;
             *dst = (((base + (sel >> 0x1)) << 6) | ((sel & 1) * 8));
             break;
     }

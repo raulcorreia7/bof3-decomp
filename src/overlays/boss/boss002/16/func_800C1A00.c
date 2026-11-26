@@ -6,7 +6,7 @@ MATCH void func_800C1A00(void) {
     work = g_BattleCurrentEnemy;
     if (work->hp == 65535) {
         g_Battle.action_type = 3;
-        TASK(Actor)->unk_04  = 0;
+        SELF(Actor)->unk_04  = 0;
         SND_SEQueueSelection(EMI_SE_ID(SND_BANK_ENEMY, 2));
     }
 }

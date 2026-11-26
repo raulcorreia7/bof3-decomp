@@ -6,6 +6,6 @@
 
 /* func_801DAED4 */
 MATCH void Fishing_HookedRun(void) {
-    Callback handler = g_FishingHookedSteps[TASK(Actor)->unk_03];
+    Callback handler = g_FishingHookedSteps[SELF(Actor)->unk_03];
     handler();
 }

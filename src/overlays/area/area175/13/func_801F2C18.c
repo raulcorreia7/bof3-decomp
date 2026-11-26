@@ -1,5 +1,5 @@
 #include "area175_13.h"
 
 MATCH void func_801F2C18(void) {
-    SYS_DISPATCH_BYTE(D_801F45EC, TASK(Actor)->header.mode);
+    SYS_DISPATCH_BYTE(D_801F45EC, SELF(Actor)->header.mode);
 }

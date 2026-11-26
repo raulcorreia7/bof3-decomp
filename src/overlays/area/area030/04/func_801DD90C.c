@@ -5,7 +5,7 @@
 MATCH void func_801DD90C(void) {
     if (g_SpawnedActors[6].header.mode == 0) {
         g_SpawnedActors[1].header.mode += 1;
-        TASK(FishingState)->mode_index = 1;
-        TASK(FishingState)->sub_index  = 0;
+        SELF(FishingState)->mode_index = 1;
+        SELF(FishingState)->sub_index  = 0;
     }
 }

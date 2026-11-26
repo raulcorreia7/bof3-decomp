@@ -4,5 +4,5 @@
  * jump table. */
 /* func_801D1B10 */
 MATCH void Fishing_CastGaugeRun(void) {
-    g_FishingCastGaugeSteps[TASK(FishingState)->handler_index]();
+    g_FishingCastGaugeSteps[SELF(FishingState)->handler_index]();
 }

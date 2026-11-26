@@ -6,7 +6,7 @@ MATCH void Area_InitSpin(SpinEffect* spin) {
     s16         rot[3];
 
     work           = spin;
-    scratch        = TASK(Actor);
+    scratch        = SELF(Actor);
     work->origin.x = scratch->pos.x.fixed;
     work->origin.y = scratch->pos.y.fixed;
     work->origin.z = scratch->pos.z.fixed;

@@ -10,12 +10,12 @@ MATCH void PlChar_RunPersonalAction(void) {
     /* FAKE: retail keeps the slot byte in $s0 and its sign-extended index in $s1; pure C swaps the pair (best 10 of 147 rows differ). */
     FAKE_REG(s8, slot, "s0");
 
-    if (TASK(Actor)->unk_0A != 0) {
-        TASK(Actor)->unk_0A--;
-        if (TASK(Actor)->unk_0A == 0) {
+    if (SELF(Actor)->unk_0A != 0) {
+        SELF(Actor)->unk_0A--;
+        if (SELF(Actor)->unk_0A == 0) {
             if (CHAR_PERSONAL_ACTION_HAS_CUE) {
                 /* FAKE: retail reads SND_SEPlay as void(s32). */
-                ((void (*)(s32))SND_SEPlay)(TASK(Actor)->unk_2C + 0x100);
+                ((void (*)(s32))SND_SEPlay)(SELF(Actor)->unk_2C + 0x100);
             }
             slot = ((s8 (*)(void))Game_FindRockAhead)();
             if (slot != -1) {
@@ -24,17 +24,17 @@ MATCH void PlChar_RunPersonalAction(void) {
                 if (CHAR_PERSONAL_ACTION_HAS_CUE) {
                     SND_SEPlay(EMI_SE_ID(SND_BANK_COMMON, 11));
                 }
-                direction                    = TASK(Actor)->direction;
+                direction                    = SELF(Actor)->direction;
                 g_SpawnedActors[slot].unk_0A = 1;
                 g_SpawnedActors[slot].unk_08 = direction;
                 if (!CHAR_PERSONAL_ACTION_HAS_CUE) {
                     SND_SEPlay(EMI_SE_ID(SND_BANK_COMMON, 11));
                 }
-                TASK(Actor)->unk_06 = slot;
-                TASK(Actor)->unk_03++;
+                SELF(Actor)->unk_06 = slot;
+                SELF(Actor)->unk_03++;
             } else {
-                x   = TASK(Actor)->pos.x.fixed + g_FacingSteps[TASK(Actor)->direction].x * 2;
-                y   = TASK(Actor)->pos.y.fixed + g_FacingSteps[TASK(Actor)->direction].y * 2;
+                x   = SELF(Actor)->pos.x.fixed + g_FacingSteps[SELF(Actor)->direction].x * 2;
+                y   = SELF(Actor)->pos.y.fixed + g_FacingSteps[SELF(Actor)->direction].y * 2;
                 hit = Actor_FindInRange(x, y, 0);
                 if (hit != slot) {
                     g_Actors[hit].interaction_flags |= ACTOR_INTERACTION_PENDING;
@@ -54,7 +54,7 @@ MATCH void PlChar_RunPersonalAction(void) {
                     }
                 }
             }
-            TASK(Actor)->unk_03++;
+            SELF(Actor)->unk_03++;
         }
     }
     Script_AnimStepOnce();

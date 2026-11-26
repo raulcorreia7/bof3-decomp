@@ -11,10 +11,10 @@ MATCH u8 Script_AnimStepLoop(void) {
     u16    index;
     u8     result;
 
-    first_work = TASK(Actor);
+    first_work = SELF(Actor);
     result     = 0;
     if (--first_work->unk_4A == 0) {
-        work  = TASK(Actor);
+        work  = SELF(Actor);
         index = work->script_pc;
         if ((index >> 1) == work->unk_49) {
             work->script_pc = 0;

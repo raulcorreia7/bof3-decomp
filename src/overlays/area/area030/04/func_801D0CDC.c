@@ -7,24 +7,24 @@ MATCH void func_801D0CDC(void) {
     FishingState* blank;
     FishingState* state;
 
-    TASK(FishingState)->saved_25       = g_Game.members[0].unk_25;
-    TASK(FishingState)->saved_26       = g_Game.members[0].unk_26;
-    TASK(FishingState)->saved_value_27 = g_Game.members[0].unk_27;
-    TASK(FishingState)->saved_value_28 = g_Game.members[0].unk_28;
-    TASK(FishingState)->state_29       = 2;
-    TASK(FishingState)->active_flags   = 0x80;
+    SELF(FishingState)->saved_25       = g_Game.members[0].unk_25;
+    SELF(FishingState)->saved_26       = g_Game.members[0].unk_26;
+    SELF(FishingState)->saved_value_27 = g_Game.members[0].unk_27;
+    SELF(FishingState)->saved_value_28 = g_Game.members[0].unk_28;
+    SELF(FishingState)->state_29       = 2;
+    SELF(FishingState)->active_flags   = 0x80;
 
-    panel                       = TASK(FishingState);
+    panel                       = SELF(FishingState);
     panel->counter_48           = 0;
-    blank                       = TASK(FishingState);
+    blank                       = SELF(FishingState);
     panel->origin_x             = 0x39;
     panel->origin_y             = 0xC8;
     blank->unk_5C               = 0;
-    TASK(FishingState)->tint_5D = 0;
-    TASK(FishingState)->tint_5E = 0;
-    TASK(FishingState)->tint_5F = 0;
+    SELF(FishingState)->tint_5D = 0;
+    SELF(FishingState)->tint_5E = 0;
+    SELF(FishingState)->tint_5F = 0;
 
-    state                = TASK(FishingState);
+    state                = SELF(FishingState);
     state->cursor_10     = 0xF0;
     state->handler_index = (state->handler_index + 1);
 }

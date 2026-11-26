@@ -31,9 +31,9 @@ def _pointer_target(value: str) -> str | None:
 
 
 def _task_types(ctx: Context) -> dict[str, str]:
-    """Return image -> the record type its g_Task macro reads the scratchpad cell as."""
+    """Return image -> the record type its g_Self macro reads the scratchpad cell as."""
     pattern = re.compile(
-        r"#\s*define\s+g_Task\s+\(\(\s*(?:volatile\s+)?(\w+)\s*\*\s*\)\s*g_Task\s*\)"
+        r"#\s*define\s+g_Self\s+\(\(\s*(?:volatile\s+)?(\w+)\s*\*\s*\)\s*g_Self\s*\)"
     )
     headers = []
     for path in (ctx.root / "src").rglob("*.h"):

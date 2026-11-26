@@ -1,13 +1,13 @@
 #include "area030_04.h"
 
 /* Panel cursor fields of the scratchpad work record. */
-#define FISHING_CURSOR_TIMER    (TASK(FishingState)->timer)
-#define FISHING_CURSOR_ROW_Y    (TASK(FishingState)->origin_x)
-#define FISHING_CURSOR_ITEM_PTR (TASK(FishingState)->item.pointer)
-#define FISHING_CURSOR_COUNT    (TASK(FishingState)->counter_49)
-#define FISHING_CURSOR_CATEGORY (TASK(FishingState)->row_4B)
-#define FISHING_CURSOR_FLAG     (TASK(FishingState)->step_index)
-#define FISHING_CURSOR_STEP     (TASK(FishingState)->handler_index)
+#define FISHING_CURSOR_TIMER    (SELF(FishingState)->timer)
+#define FISHING_CURSOR_ROW_Y    (SELF(FishingState)->origin_x)
+#define FISHING_CURSOR_ITEM_PTR (SELF(FishingState)->item.pointer)
+#define FISHING_CURSOR_COUNT    (SELF(FishingState)->counter_49)
+#define FISHING_CURSOR_CATEGORY (SELF(FishingState)->row_4B)
+#define FISHING_CURSOR_FLAG     (SELF(FishingState)->step_index)
+#define FISHING_CURSOR_STEP     (SELF(FishingState)->handler_index)
 
 /* Ticks the AREA030 panel item cursor: counts the entry timer down and draws the shrinking row, or on expiry
  * skips a two-byte item code, advances the item pointer and entry count, clamps the count to the category table and
@@ -19,7 +19,7 @@ MATCH void func_801D3A54(void) {
     u8            entry_count;
     u8*           item_next;
 
-    work = TASK(FishingState);
+    work = SELF(FishingState);
     work->timer -= 1;
     work->origin_x -= 2;
     if (FISHING_CURSOR_TIMER == 0) {

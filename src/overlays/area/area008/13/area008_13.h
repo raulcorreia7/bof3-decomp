@@ -66,11 +66,11 @@ void func_801F461C(void);
  * else mode 5 when the second byte is 3. */
 static inline void FieldSelectDrawMode(void) {
     if ((g_ScriptVars[3] & 0x80u) != 0u) {
-        TASK(Actor)->header.mode = 9;
+        SELF(Actor)->header.mode = 9;
         return;
     }
     if (g_ScriptVars[2] == 3) {
-        TASK(Actor)->header.mode = 5;
+        SELF(Actor)->header.mode = 5;
     }
 }
 
@@ -82,19 +82,19 @@ static inline void FieldActivateActor(void) {
     s32    index;
 
     if ((g_ScriptVars[3] & 0x80u) != 0u) {
-        TASK(Actor)->header.mode = 0x0E;
+        SELF(Actor)->header.mode = 0x0E;
         return;
     }
-    s = &g_Actors[TASK(Actor)->param.unk_0B];
+    s = &g_Actors[SELF(Actor)->param.unk_0B];
     s->header.flags |= 0x40;
-    s               = TASK(Actor);
+    s               = SELF(Actor);
     index           = s->param.unk_0B;
     g_ScriptVars[2] = 3;
     e               = &g_Actors[index];
-    g_Task          = e;
+    g_Self          = e;
     Script_Select(1);
     s->header.mode = 1;
-    g_Task         = s;
+    g_Self         = s;
 }
 
 #endif

@@ -5,9 +5,9 @@
 MATCH void Scene_EndScan(void) {
     Actor* work;
 
-    work           = TASK(Actor);
+    work           = SELF(Actor);
     work->screen_x = 300;
     work->timer    = 0;
     Scene_ClearScanBars();
-    TASK(Actor)->header.mode = TASK(Actor)->header.mode + 1;
+    SELF(Actor)->header.mode = SELF(Actor)->header.mode + 1;
 }

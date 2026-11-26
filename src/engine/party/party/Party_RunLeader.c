@@ -11,5 +11,5 @@ MATCH void Party_RunLeader(void) {
         D_80146256 = countdown - 1;
     }
     func_801BDBC4();
-    g_PartyLeaderModes[TASK(Actor)->header.mode]();
+    g_PartyLeaderModes[SELF(Actor)->header.mode]();
 }

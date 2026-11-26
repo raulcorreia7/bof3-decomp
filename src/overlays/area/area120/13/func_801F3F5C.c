@@ -18,20 +18,20 @@ MATCH void func_801F3F5C(s32 part, s32 span, s32 phase_step, s32 offset) {
     s32       tpage;
     s32       i;
 
-    TASK(Actor)->unk_0A += phase_step;
-    TASK(Actor)->unk_0A = (TASK(Actor)->unk_0A < 12) ? TASK(Actor)->unk_0A : TASK(Actor)->unk_0A - 12;
-    part_words[0]       = TASK(Actor)->unk_0A >> 1;
+    SELF(Actor)->unk_0A += phase_step;
+    SELF(Actor)->unk_0A = (SELF(Actor)->unk_0A < 12) ? SELF(Actor)->unk_0A : SELF(Actor)->unk_0A - 12;
+    part_words[0]       = SELF(Actor)->unk_0A >> 1;
     part_words[1]       = (part_words[0] + 2 < 6U) ? part_words[0] + 2 : part_words[0] - 4;
     for (i = 0; i < 2; i++) {
         part_words[i] = (((u32)part << 16) | AREA_EFFECT_PART_WORD) + part_words[i];
     }
 
-    y = ((TASK(Actor)->pos.y.part.integer - 0x80) << 7) + 0x10;
-    x = ((TASK(Actor)->pos.x.part.integer - 0x80) << 7) + 0x10;
+    y = ((SELF(Actor)->pos.y.part.integer - 0x80) << 7) + 0x10;
+    x = ((SELF(Actor)->pos.x.part.integer - 0x80) << 7) + 0x10;
     for (i = 0; i < 2; i++) {
         tpage = getTPage(1, 0, 320, 256);
         GFX_SET_DRAW_MODE(tpage);
-        Area_CellAddPrim(TASK(Actor)->pos.x.fixed, TASK(Actor)->pos.y.fixed, 1, 0xC);
+        Area_CellAddPrim(SELF(Actor)->pos.x.fixed, SELF(Actor)->pos.y.fixed, 1, 0xC);
         prim = (POLY_FT4*)g_GfxPrimCursor;
         SetPolyFT4(prim);
         SetShadeTex(prim, 0);
@@ -42,12 +42,12 @@ MATCH void func_801F3F5C(s32 part, s32 span, s32 phase_step, s32 offset) {
         g_ScratchPadVectors[2].vy                             = (i == 0) ? y + span : y;
         g_ScratchPadVectors[1].vy                             = (i == 0) ? y - span - offset : y - offset;
         g_ScratchPadVectors[3].vy                             = (i == 0) ? y - span : y;
-        g_ScratchPadVectors[0].vz = g_ScratchPadVectors[1].vz = -(s16)Area_HeightSample(TASK(Actor)->pos.x.fixed, TASK(Actor)->pos.y.fixed) / 2 - (s16)(span * 2 + 0xC0);
-        g_ScratchPadVectors[2].vz = g_ScratchPadVectors[3].vz = -(s16)Area_HeightSample(TASK(Actor)->pos.x.fixed, TASK(Actor)->pos.y.fixed) / 2 - 0xC0;
+        g_ScratchPadVectors[0].vz = g_ScratchPadVectors[1].vz = -(s16)Area_HeightSample(SELF(Actor)->pos.x.fixed, SELF(Actor)->pos.y.fixed) / 2 - (s16)(span * 2 + 0xC0);
+        g_ScratchPadVectors[2].vz = g_ScratchPadVectors[3].vz = -(s16)Area_HeightSample(SELF(Actor)->pos.x.fixed, SELF(Actor)->pos.y.fixed) / 2 - 0xC0;
 
         RotTransPers4(&g_ScratchPadVectors[0], &g_ScratchPadVectors[1], &g_ScratchPadVectors[2], &g_ScratchPadVectors[3], (long*)&prim->x0, (long*)&prim->x1, (long*)&prim->x2, (long*)&prim->x3,
                       &depth, &flag);
         Area_ApplyTileToQuad(part_words[i], prim, 1);
-        Area_CellAddPrim(TASK(Actor)->pos.x.fixed, TASK(Actor)->pos.y.fixed, 1, 0x28);
+        Area_CellAddPrim(SELF(Actor)->pos.x.fixed, SELF(Actor)->pos.y.fixed, 1, 0x28);
     }
 }

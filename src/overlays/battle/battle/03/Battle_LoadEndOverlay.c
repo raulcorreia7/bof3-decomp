@@ -28,7 +28,7 @@ MATCH void Battle_LoadEndOverlay(void) {
             do {
                 PartyMember* work = &g_Game.members[i];
 
-                TASK_SET(work);
+                SELF_SET(work);
                 if (HAS_STATUS(g_Game.members[i], 0x800u)) {
                     g_Game.members[i].chr.hp        = g_Game.members[i].chr.stats.max_hp;
                     g_Game.members[i].chr.ap        = g_Game.members[i].chr.stats.max_ap;

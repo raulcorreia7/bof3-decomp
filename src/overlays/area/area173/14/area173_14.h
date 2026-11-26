@@ -79,10 +79,10 @@ void func_801F3324(s32 source_y, s32 dest_y);
 
 /* Steps the cycling frame timer and copies the frame row at table offset to dest_y every sixth tick. */
 #define AREA_CYCLE_FRAME(offset, dest_y)                                         \
-    TASK(Actor)->timer++;                                                        \
-    if (TASK(Actor)->timer % 6 == 0) {                                           \
-        TASK(Actor)->timer = (TASK(Actor)->timer < 24) ? TASK(Actor)->timer : 0; \
-        func_801F3324(D_801F4ED4[(offset) + TASK(Actor)->timer / 6], dest_y);    \
+    SELF(Actor)->timer++;                                                        \
+    if (SELF(Actor)->timer % 6 == 0) {                                           \
+        SELF(Actor)->timer = (SELF(Actor)->timer < 24) ? SELF(Actor)->timer : 0; \
+        func_801F3324(D_801F4ED4[(offset) + SELF(Actor)->timer / 6], dest_y);    \
     }
 
 /* Sweeps the three func_801F3954 frames by the step timer and moves to the next step after limit ticks. */
@@ -91,18 +91,18 @@ void func_801F3324(s32 source_y, s32 dest_y);
     u8   x;                              \
                                          \
     slot       = &D_1F800038;            \
-    x          = TASK(Actor)->timer;     \
+    x          = SELF(Actor)->timer;     \
     D_1F80003A = 0;                      \
     *slot      = -(x * 8);               \
     func_801F3954(0);                    \
-    *slot = TASK(Actor)->timer * 8;      \
+    *slot = SELF(Actor)->timer * 8;      \
     func_801F3954(1);                    \
     *slot = 0;                           \
     func_801F3954(2);                    \
-    TASK(Actor)->timer += 1;             \
-    if (TASK(Actor)->timer >= (limit)) { \
-        TASK(Actor)->timer = 0;          \
-        TASK(Actor)->header.step += 1;   \
+    SELF(Actor)->timer += 1;             \
+    if (SELF(Actor)->timer >= (limit)) { \
+        SELF(Actor)->timer = 0;          \
+        SELF(Actor)->header.step += 1;   \
     }
 
 #endif

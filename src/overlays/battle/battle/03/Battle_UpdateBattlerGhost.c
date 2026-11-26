@@ -5,5 +5,5 @@ MATCH void Battle_UpdateBattlerGhost(void) {
     Callback handlers[2];
 
     handlers[0] = Battle_CopyBattlerGhost;
-    handlers[TASK(PartyMember)->header.mode]();
+    handlers[SELF(PartyMember)->header.mode]();
 }

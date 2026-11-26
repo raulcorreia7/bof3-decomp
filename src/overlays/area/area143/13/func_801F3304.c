@@ -15,9 +15,9 @@ MATCH void func_801F3304(void) {
     s32 point7;
     s32 point8;
 
-    current                  = TASK(Actor)->pos.z.fixed;
+    current                  = SELF(Actor)->pos.z.fixed;
     height                   = current + 8;
-    TASK(Actor)->pos.z.fixed = height;
+    SELF(Actor)->pos.z.fixed = height;
     if (height < 0x100) {
         top = height;
     } else {
@@ -69,7 +69,7 @@ MATCH void func_801F3304(void) {
         value = point5;
     }
     point5 = value;
-    point6 = TASK(Actor)->pos.z.fixed - 0xC0;
+    point6 = SELF(Actor)->pos.z.fixed - 0xC0;
     if (point6 < 0) {
         point6 = 0;
     }
@@ -78,7 +78,7 @@ MATCH void func_801F3304(void) {
         value = point6;
     }
     point6 = value;
-    point7 = TASK(Actor)->pos.z.fixed - 0xE0;
+    point7 = SELF(Actor)->pos.z.fixed - 0xE0;
     if (point7 < 0) {
         point7 = 0;
     }
@@ -87,7 +87,7 @@ MATCH void func_801F3304(void) {
         value = point7;
     }
     point7 = value;
-    point8 = TASK(Actor)->pos.z.fixed - 0x100;
+    point8 = SELF(Actor)->pos.z.fixed - 0x100;
     if (point8 < 0) {
         point8 = 0;
     }
@@ -106,9 +106,9 @@ MATCH void func_801F3304(void) {
     func_801F3584(point6, point7, 1);
     func_801F3584(point7, point8, 0);
 
-    if (top >= 0x100 && TASK(Actor)->param.unk_0B == 0) {
+    if (top >= 0x100 && SELF(Actor)->param.unk_0B == 0) {
         Area_CellSetPalette(0xB, 0x22);
-        TASK(Actor)->param.unk_0B = 1;
+        SELF(Actor)->param.unk_0B = 1;
     }
     if (point8 >= 0x100) {
         g_AreaSceneMode = 2;

@@ -9,8 +9,8 @@ MATCH void Well_TestRaiseCount(void) {
     raise = g_WellPressCount;
     if (raise >= lower - 1 && raise <= lower + 1) {
         g_WellIdleFrames         = 0;
-        TASK(Actor)->header.mode = WELL_MODE_SUCCESS;
+        SELF(Actor)->header.mode = WELL_MODE_SUCCESS;
     } else {
-        TASK(Actor)->header.mode = WELL_MODE_FAIL;
+        SELF(Actor)->header.mode = WELL_MODE_FAIL;
     }
 }

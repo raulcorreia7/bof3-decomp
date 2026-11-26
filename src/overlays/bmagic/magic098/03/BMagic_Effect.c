@@ -24,21 +24,21 @@ MATCH void func_801EEC5C(void) {
 #include "overlays/bmagic/shared/BMagic_DispatchEffectMode.h"
 
 MATCH void func_801EEFC8(void) {
-    SYS_DISPATCH_BYTE((g_BMagicEffectModes + 1), TASK(PartyMember)->header.step);
+    SYS_DISPATCH_BYTE((g_BMagicEffectModes + 1), SELF(PartyMember)->header.step);
     func_800AF764();
-    if (TASK(PartyMember)->header.step != 0 && TASK(PartyMember)->header.flags != 0) {
+    if (SELF(PartyMember)->header.step != 0 && SELF(PartyMember)->header.flags != 0) {
         Effect_SetActorMatrixRolled();
         func_801EF5D4(24, 32, 3);
-        TASK(PartyMember)->param.unk_0B += 8;
+        SELF(PartyMember)->param.unk_0B += 8;
         func_801EF5D4(16, 80, 0xF);
-        TASK(PartyMember)->param.unk_0B += 2;
+        SELF(PartyMember)->param.unk_0B += 2;
         func_801EFE24();
-        TASK(PartyMember)->param.unk_0B += 6;
+        SELF(PartyMember)->param.unk_0B += 6;
         func_801EF5D4(16, 128, 0x1F);
-        TASK(PartyMember)->param.unk_0B -= 16;
-        TASK(PartyMember)->screen_x.value += 24;
+        SELF(PartyMember)->param.unk_0B -= 16;
+        SELF(PartyMember)->screen_x.value += 24;
         func_801F00C4();
-        TASK(PartyMember)->screen_x.value -= 48;
+        SELF(PartyMember)->screen_x.value -= 48;
         func_801F00C4();
         PopMatrix();
     }
@@ -51,22 +51,22 @@ MATCH void func_801EEFC8(void) {
 MATCH void func_801EF1B4(void) {
     PartyMember* battler;
 
-    TASK(PartyMember)->timer = TASK(PartyMember)->timer + 4;
-    TASK(PartyMember)->param.unk_0B += 1;
-    if (TASK(PartyMember)->timer == 16) {
+    SELF(PartyMember)->timer = SELF(PartyMember)->timer + 4;
+    SELF(PartyMember)->param.unk_0B += 1;
+    if (SELF(PartyMember)->timer == 16) {
         if (g_Battle.target_selector & BATTLE_TARGET_ENEMY_SIDE) {
-            battler = (PartyMember*)&g_BattleEnemyBattlers[TASK(PartyMember)->unk_03];
+            battler = (PartyMember*)&g_BattleEnemyBattlers[SELF(PartyMember)->unk_03];
             GFX_PaletteFreeFadeTarget(battler);
             GFX_PaletteAllocFade(battler, -8, -8, -8, 1);
-            func_800A9610((u8)(TASK(PartyMember)->unk_03 + 3), 0x10);
+            func_800A9610((u8)(SELF(PartyMember)->unk_03 + 3), 0x10);
         } else {
-            battler = &g_Game.members[TASK(PartyMember)->unk_03];
+            battler = &g_Game.members[SELF(PartyMember)->unk_03];
             GFX_PaletteFreeFadeTarget(battler);
             GFX_PaletteAllocFade(battler, -8, -8, -8, 1);
-            func_800A9610(TASK(PartyMember)->unk_03, 0x10);
+            func_800A9610(SELF(PartyMember)->unk_03, 0x10);
         }
-        TASK(PartyMember)->unk_09 = 8;
-        TASK(PartyMember)->header.step += 1;
+        SELF(PartyMember)->unk_09 = 8;
+        SELF(PartyMember)->header.step += 1;
     }
 }
 

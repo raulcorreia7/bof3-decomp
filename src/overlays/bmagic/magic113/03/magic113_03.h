@@ -32,7 +32,7 @@ static inline void Effect_CountUpTimer(void) {
     PartyMember* work;
     u8           next;
 
-    work        = TASK(PartyMember);
+    work        = SELF(PartyMember);
     next        = work->timer + 1;
     work->timer = next;
     if (next == 0xC) {
@@ -46,17 +46,17 @@ static inline void Effect_CountUpTimer(void) {
  * PartyMember* work and u8 facing. */
 #define BMAGIC_NOTING_SPAWN_EFFECT(MODE)                                                              \
     slot                                   = Battle_AllocEffect(1, BMAGIC_EFFECT_NOTING) & BYTE_MASK; \
-    work                                   = g_Task;                                                  \
+    work                                   = g_Self;                                                  \
     g_BattleEffects[slot].header.mode      = (MODE);                                                  \
     g_BattleEffects[slot].target.party     = work;                                                    \
     facing                                 = g_BattleEffectBattler->facing;                           \
     g_BattleEffects[slot].arg.unk_09       = 0;                                                       \
     g_BattleEffects[slot].unk_0A           = 0;                                                       \
     g_BattleEffects[slot].unk_08           = (facing + 2) & 3;                                        \
-    g_BattleEffects[slot].pos.x            = TASK(PartyMember)->pos.x;                                \
-    g_BattleEffects[slot].pos.y            = TASK(PartyMember)->pos.y;                                \
-    COORD_INT(g_BattleEffects[slot].pos.z) = COORD_INT(TASK(PartyMember)->pos.z);                     \
-    TASK(PartyMember)->header.mode += 1
+    g_BattleEffects[slot].pos.x            = SELF(PartyMember)->pos.x;                                \
+    g_BattleEffects[slot].pos.y            = SELF(PartyMember)->pos.y;                                \
+    COORD_INT(g_BattleEffects[slot].pos.z) = COORD_INT(SELF(PartyMember)->pos.z);                     \
+    SELF(PartyMember)->header.mode += 1
 
 #define BMAGIC_NOTING_STEP_COUNT 8
 
@@ -89,7 +89,7 @@ void            BMagic_NotingDrawWall(void);
 #define BMAGIC_NOTING_ADVANCE_AT_STAGE(param_value) \
     active = BATTLE_ACTIVE_WORK;                    \
     if (active->param.unk_0B == (param_value)) {    \
-        work              = TASK(PartyMember);      \
+        work              = SELF(PartyMember);      \
         work->header.step = work->header.step + 1;  \
     }
 

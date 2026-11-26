@@ -13,7 +13,7 @@ MATCH void Fishing_LureHooked(void) {
         Script_Request(3);
     }
 
-    work                  = TASK(FishingState);
+    work                  = SELF(FishingState);
     work->motion.unk_34   = g_Actors[g_FishingHookedFish].pos.x.fixed;
     work->y_38.pos_y      = g_Actors[g_FishingHookedFish].pos.y.fixed;
     work->bounce.half.key = COORD_INT(g_Actors[g_FishingHookedFish].pos.z);

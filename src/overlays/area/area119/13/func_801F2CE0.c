@@ -4,10 +4,10 @@ MATCH void func_801F2CE0(void) {
     u8* work;
     u8  value;
 
-    work    = TASK(u8);
+    work    = SELF(u8);
     value   = work[9];
     work[9] = value + 0xFF;
     if (value == 0) {
-        TASK(Actor)->header.mode = 3;
+        SELF(Actor)->header.mode = 3;
     }
 }

@@ -12,20 +12,20 @@ MATCH void func_801D5958(void) {
     FishingState* cur;
     s32           index;
 
-    work = TASK(FishingState);
+    work = SELF(FishingState);
     if (work->timer == 0) {
         index = work->step_index * 2;
         if (D_801E1FE8[index] == GAME_NONE) {
             work->step_index = D_801E1FE9[index];
         }
 
-        next = TASK(FishingState);
+        next = SELF(FishingState);
         Script_Select(D_801E1FE8[next->step_index * 2]);
 
-        cur        = TASK(FishingState);
+        cur        = SELF(FishingState);
         cur->timer = D_801E1FE9[cur->step_index * 2];
 
-        cur             = TASK(FishingState);
+        cur             = SELF(FishingState);
         cur->step_index = (cur->step_index + 1);
     } else {
         work->timer = (work->timer - 1);

@@ -2,5 +2,5 @@
 
 MATCH void func_800C1BB0(void) {
     Battle_MarkDamaged(g_Battle.target_selector);
-    TASK(PartyMember)->header.step++;
+    SELF(PartyMember)->header.step++;
 }

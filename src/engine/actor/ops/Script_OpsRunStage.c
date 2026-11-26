@@ -55,9 +55,9 @@ NON_MATCHING u8 Script_OpsRunStage(ScriptState* state, const u8* table, u8 value
             break;
         case ACTOR_SCRIPT_STAGE_SET_TARGET_POS: {
             func_801ABF30(buf, table[state->cursor + 1], table[state->cursor + 2]);
-            TASK(Actor)->pos.x.fixed = buf[0];
-            TASK(Actor)->pos.y.fixed = buf[1];
-            TASK(Actor)->pos.z       = buf[2];
+            SELF(Actor)->pos.x.fixed = buf[0];
+            SELF(Actor)->pos.y.fixed = buf[1];
+            SELF(Actor)->pos.z       = buf[2];
             state->cursor += 2;
             break;
         }
@@ -131,8 +131,8 @@ NON_MATCHING u8 Script_OpsRunStage(ScriptState* state, const u8* table, u8 value
         case ACTOR_SCRIPT_STAGE_SPAWN_HELPER: {
             flag = table[state->cursor + 1];
             slot = g_GameState->chr.character_id;
-            TASK(Actor)->param.unk_0B =
-                Actor_SpawnHelper(flag - 0x90, -((flag ^ 0x94) == 0) & 0xA, D_80181B28[g_CharSlot[slot]], TASK(Actor)->pos.x.fixed, TASK(Actor)->pos.y.fixed, TASK(Actor)->pos.z.fixed);
+            SELF(Actor)->param.unk_0B =
+                Actor_SpawnHelper(flag - 0x90, -((flag ^ 0x94) == 0) & 0xA, D_80181B28[g_CharSlot[slot]], SELF(Actor)->pos.x.fixed, SELF(Actor)->pos.y.fixed, SELF(Actor)->pos.z.fixed);
             state->cursor += 1;
             break;
         }

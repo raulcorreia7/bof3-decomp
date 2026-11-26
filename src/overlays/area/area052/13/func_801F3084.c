@@ -11,9 +11,9 @@ MATCH void func_801F3084(void) {
         if (row != NULL) {
             row->active      = 1;
             row->unk_16      = 8;
-            row->pos.x.fixed = TASK(Actor)->pos.x.fixed + (rcos(angle) << 4);
-            row->pos.y.fixed = TASK(Actor)->pos.y.fixed + (rsin(angle) << 4);
-            row->pos.z.fixed = TASK(Actor)->pos.z.fixed;
+            row->pos.x.fixed = SELF(Actor)->pos.x.fixed + (rcos(angle) << 4);
+            row->pos.y.fixed = SELF(Actor)->pos.y.fixed + (rsin(angle) << 4);
+            row->pos.z.fixed = SELF(Actor)->pos.z.fixed;
             row->unk_10      = 0x1800;
             row->unk_14      = 0xC0;
         }

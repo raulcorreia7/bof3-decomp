@@ -6,7 +6,7 @@
 MATCH void func_801E47E0(void) {
     PartyMember* work;
 
-    work = TASK(PartyMember);
+    work = SELF(PartyMember);
     if ((s32)work->scale.x <= 0x13FFF) {
         work->scale.x += work->unk_0C;
         work->scale.y += work->unk_0C;

@@ -3,10 +3,10 @@
 MATCH void func_801F2D28(void) {
     u8 mode;
 
-    mode = TASK(Actor)->timer;
+    mode = SELF(Actor)->timer;
     func_801F3060(mode >> 3, (mode >> 2) & 0x1);
-    TASK(Actor)->timer += 1;
-    if (TASK(Actor)->timer >= 208U) {
-        TASK(Actor)->header.step += 1;
+    SELF(Actor)->timer += 1;
+    if (SELF(Actor)->timer >= 208U) {
+        SELF(Actor)->header.step += 1;
     }
 }

@@ -9,16 +9,16 @@ MATCH void func_801F3FBC(void) {
         if (g_Game.members[i].header.flags == 0) {
             continue;
         }
-        if (abs(g_Game.members[i].pos.y.fixed - ((s32)COORD_INT(TASK(Actor)->pos.y) << 16)) > TO_COORD_HALF(2)) {
+        if (abs(g_Game.members[i].pos.y.fixed - ((s32)COORD_INT(SELF(Actor)->pos.y) << 16)) > TO_COORD_HALF(2)) {
             continue;
         }
-        if (abs(g_Game.members[i].pos.x.fixed - ((s32)COORD_INT(TASK(Actor)->pos.x) << 16)) <= TO_COORD(2) ||
-            abs(g_Game.members[i].pos.x.fixed - (((s32)COORD_INT(TASK(Actor)->pos.x) + 1) << 16)) <= TO_COORD(2)) {
+        if (abs(g_Game.members[i].pos.x.fixed - ((s32)COORD_INT(SELF(Actor)->pos.x) << 16)) <= TO_COORD(2) ||
+            abs(g_Game.members[i].pos.x.fixed - (((s32)COORD_INT(SELF(Actor)->pos.x) + 1) << 16)) <= TO_COORD(2)) {
             found = true;
         }
     }
     if (!found) {
-        TASK(Actor)->header.step += 1;
+        SELF(Actor)->header.step += 1;
     }
     func_801F4158_area168(0, 0);
     func_801F4158_area168(1, 3);

@@ -10,7 +10,7 @@ MATCH void func_801F48DC(void) {
         s32 off = i * 2;
         x       = (D_801F6B2C[off] << 16) | 0x8000;
         y       = (D_801F6B2D[off] << 16) | 0x8000;
-        if (TASK(Actor)->pos.x.fixed == x && TASK(Actor)->pos.y.fixed == y && func_801F5C60(TASK(Actor)->pos.x.fixed, TASK(Actor)->pos.y.fixed) != none) {
+        if (SELF(Actor)->pos.x.fixed == x && SELF(Actor)->pos.y.fixed == y && func_801F5C60(SELF(Actor)->pos.x.fixed, SELF(Actor)->pos.y.fixed) != none) {
             break;
         }
     }

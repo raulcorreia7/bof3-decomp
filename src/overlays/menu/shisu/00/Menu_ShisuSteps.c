@@ -589,7 +589,7 @@ MATCH u8 func_801D1EE8(void) {
     return D_801DA044;
 }
 
-/* One 0x28-byte textured-quad record of the table at TASK(Actor)->script: the clut
+/* One 0x28-byte textured-quad record of the table at SELF(Actor)->script: the clut
  * index, four vertices, the face normal and four packed uv pairs. */
 typedef struct PanelPiece {
     s16 clut;           /* 0x00 */
@@ -633,28 +633,28 @@ NON_MATCHING void func_801D2308(void* record) {
     u16            i;
 
     /* Swaps the record into the task cell; record keeps the caller's task. */
-    record = (void*)((s32)record ^ (s32)g_Task);
-    g_Task = (void*)((s32)g_Task ^ (s32)record);
-    record = (void*)((s32)record ^ (s32)g_Task);
+    record = (void*)((s32)record ^ (s32)g_Self);
+    g_Self = (void*)((s32)g_Self ^ (s32)record);
+    record = (void*)((s32)record ^ (s32)g_Self);
     PushMatrix();
-    count = TASK(Actor)->range_54.table[0];
+    count = SELF(Actor)->range_54.table[0];
     Actor_BuildTransformMatrix(&m);
     SetRotMatrix(&m);
     SetTransMatrix(&m);
-    if (TASK(Actor)->unk_48 == 0) {
-        normal.vx = normal.vy = normal.vz = TASK(Actor)->scale.x;
+    if (SELF(Actor)->unk_48 == 0) {
+        normal.vx = normal.vy = normal.vz = SELF(Actor)->scale.x;
         ScaleMatrix(&m, &normal);
     }
     light = m;
-    func_8015B2AC(light_mtx.m[0], &TASK(Actor)->angle_x);
+    func_8015B2AC(light_mtx.m[0], &SELF(Actor)->angle_x);
     Camera_ApplyMatrix(&light);
     SetLightMatrix(&light_mtx);
 
-    abr = TASK(Actor)->range_54.table[3];
+    abr = SELF(Actor)->range_54.table[3];
     if ((abr & 0x40) == 0) {
         abr = 2;
     }
-    piece = (PanelPiece*)TASK(Actor)->script;
+    piece = (PanelPiece*)SELF(Actor)->script;
     tpage = GetTPage(TPAGE_DEPTH_4BIT, abr & 0x3, 704, 256);
     i     = 0;
     if (count != 0) {
@@ -686,12 +686,12 @@ NON_MATCHING void func_801D2308(void* record) {
             quad->ft4.y2 += 40;
             quad->ft4.y3 += 40;
 
-            setRGB0(&quad->ft4, TASK(Actor)->tint.bytes.rgb.r, TASK(Actor)->tint.bytes.rgb.g, TASK(Actor)->tint.bytes.rgb.b);
-            if ((TASK(Actor)->range_54.table[3] & 0x80) != 0) {
+            setRGB0(&quad->ft4, SELF(Actor)->tint.bytes.rgb.r, SELF(Actor)->tint.bytes.rgb.g, SELF(Actor)->tint.bytes.rgb.b);
+            if ((SELF(Actor)->range_54.table[3] & 0x80) != 0) {
                 VectorNormalS(&normal, g_ScratchPadVectors);
-                color.r  = TASK(Actor)->tint.bytes.rgb.r;
-                color.g  = TASK(Actor)->tint.bytes.rgb.g;
-                color.b  = TASK(Actor)->tint.bytes.rgb.b;
+                color.r  = SELF(Actor)->tint.bytes.rgb.r;
+                color.g  = SELF(Actor)->tint.bytes.rgb.g;
+                color.b  = SELF(Actor)->tint.bytes.rgb.b;
                 color.cd = quad->ft4.code;
                 NormalColorCol(g_ScratchPadVectors, &color, (CVECTOR*)&quad->ft4.r0);
             }
@@ -708,7 +708,7 @@ NON_MATCHING void func_801D2308(void* record) {
         } while ((u16)i < count);
     }
     PopMatrix();
-    TASK_SET(record);
+    SELF_SET(record);
 }
 #else
 INCLUDE_ASM(func_801D2308);

@@ -6,8 +6,8 @@ MATCH void func_801F2C7C(void) {
 
     source = g_CurrentActor;
     source -= 10;
-    TASK(Actor)->pos.x.fixed      = source->pos.x.fixed;
+    SELF(Actor)->pos.x.fixed      = source->pos.x.fixed;
     y                             = source->pos.y.fixed;
-    TASK(Actor)->pos.y.fixed      = y;
-    COORD_INT(TASK(Actor)->pos.z) = Area_HeightSample(TASK(Actor)->pos.x.fixed, y) - 0x40;
+    SELF(Actor)->pos.y.fixed      = y;
+    COORD_INT(SELF(Actor)->pos.z) = Area_HeightSample(SELF(Actor)->pos.x.fixed, y) - 0x40;
 }

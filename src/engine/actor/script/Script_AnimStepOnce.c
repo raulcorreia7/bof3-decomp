@@ -10,16 +10,16 @@ MATCH u8 Script_AnimStepOnce(void) {
     u16 index;
 
     result              = 0;
-    count               = TASK(Actor)->unk_4A - 1;
-    TASK(Actor)->unk_4A = count;
+    count               = SELF(Actor)->unk_4A - 1;
+    SELF(Actor)->unk_4A = count;
     if ((count & BYTE_MASK) == 0) {
-        index = TASK(Actor)->script_pc;
-        if ((index >> 1) == TASK(Actor)->unk_49) {
-            TASK(Actor)->unk_4A = 1;
+        index = SELF(Actor)->script_pc;
+        if ((index >> 1) == SELF(Actor)->unk_49) {
+            SELF(Actor)->unk_4A = 1;
             return 1;
         }
-        if (*(u8*)(TASK(Actor)->script + index) >= 0x80) {
-            TASK(Actor)->script_pc = *(u8*)(TASK(Actor)->script + index + 1) << 1;
+        if (*(u8*)(SELF(Actor)->script + index) >= 0x80) {
+            SELF(Actor)->script_pc = *(u8*)(SELF(Actor)->script + index + 1) << 1;
             result                 = 1;
         }
         Script_AnimStageStep();

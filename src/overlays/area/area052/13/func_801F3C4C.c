@@ -10,9 +10,9 @@ MATCH void func_801F3C4C(s32 x, s32 y) {
     row    = FIX_INT(y);
     do {
         Area_HeightSet(column + i, row, 0);
-        Area_CellSetCode(column + i, row, (TASK(Actor)->unk_18 >> (i * 8)) & 0xFF);
+        Area_CellSetCode(column + i, row, (SELF(Actor)->unk_18 >> (i * 8)) & 0xFF);
         Area_HeightSet(column + i, row + 1, 0);
-        Area_CellSetCode(column + i, row + 1, (TASK(Actor)->unk_1C >> (i * 8)) & 0xFF);
+        Area_CellSetCode(column + i, row + 1, (SELF(Actor)->unk_1C >> (i * 8)) & 0xFF);
         i++;
     } while (i < 2);
 }

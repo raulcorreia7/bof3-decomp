@@ -3,7 +3,7 @@
 MATCH void Effect_Pause(void) {
     PartyMember* work;
 
-    work = TASK(PartyMember);
+    work = SELF(PartyMember);
     if (work->param.unk_0B < 2) {
         work->header.mode++;
     }

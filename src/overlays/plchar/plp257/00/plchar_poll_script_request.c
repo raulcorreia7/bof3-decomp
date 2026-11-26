@@ -7,7 +7,7 @@ __asm__(".include \"include/match/macro.inc\"\n");
 #include "overlays/plchar/shared/PlChar_PollScriptRequest.h"
 
 MATCH void func_801CF1F8(void) {
-    SYS_DISPATCH_TASK(D_801CFF08, 2, g_Task);
+    SYS_DISPATCH_TASK(D_801CFF08, 2, g_Self);
 }
 
 #include "overlays/plchar/shared/PlChar_StartNearestFacingTurn.h"
@@ -15,7 +15,7 @@ MATCH void func_801CF1F8(void) {
 #include "overlays/plchar/shared/PlChar_RunStepScript.h"
 
 MATCH void func_801CF42C(void) {
-    SYS_DISPATCH_TASK(D_801CFF14, 2, g_Task);
+    SYS_DISPATCH_TASK(D_801CFF14, 2, g_Self);
 }
 
 #include "overlays/plchar/shared/PlChar_WalkStep.h"

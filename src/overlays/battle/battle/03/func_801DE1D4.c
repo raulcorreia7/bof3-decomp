@@ -19,7 +19,7 @@ MATCH void func_801DE1D4(void) {
             slot                                          = Battle_AllocEffect(0, 7);
             *(BattleWorkImage*)&g_BattleEffects[(u8)slot] = *(BattleWorkImage*)&g_Game.members[index];
             (&g_BattleEffects[(u8)slot])->target.party    = &g_Game.members[index];
-            TASK_SET(&g_Game.members[index]);
+            SELF_SET(&g_Game.members[index]);
         } else {
             if (Battle_SlotIsBlocked(index)) {
                 continue;
@@ -31,7 +31,7 @@ MATCH void func_801DE1D4(void) {
             slot                                          = Battle_AllocEffect(0, 7);
             *(BattleWorkImage*)&g_BattleEffects[(u8)slot] = *(BattleWorkImage*)&g_BattleEnemyBattlers[enemy];
             (&g_BattleEffects[(u8)slot])->target.enemy    = (EnemyBattler*)g_BattleEnemies + index;
-            TASK_SET((EnemyBattler*)g_BattleEnemies + index);
+            SELF_SET((EnemyBattler*)g_BattleEnemies + index);
         }
         (&g_BattleEffects[(u8)slot])->effect_type = 7;
         (&g_BattleEffects[(u8)slot])->unk_06      = 0;

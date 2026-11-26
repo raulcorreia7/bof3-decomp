@@ -4,6 +4,6 @@
 /* Lowers the actor onto the ladder. */
 MATCH void Party_LadderDownLower(void) {
     if (Area_ClimbMountLower() & BYTE_MASK) {
-        TASK(Actor)->unk_04 = 5;
+        SELF(Actor)->unk_04 = 5;
     }
 }

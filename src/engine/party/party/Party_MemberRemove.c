@@ -24,14 +24,14 @@ MATCH void Party_MemberRemove(s32 character_id) {
     g_PartyFieldOrder[slot] = 0xFF;
     for (slot = 0; slot < g_PartySize - 1; slot++) {
         if (g_PartyFieldOrder[slot] == 0xFF) {
-            TASK_SET(&g_Game.members[slot]);
+            SELF_SET(&g_Game.members[slot]);
             g_PartyFieldOrder[slot]              = g_PartyFieldOrder[slot + 1];
             g_PartyFieldOrder[slot + 1]          = 0xFF;
             g_Game.members[slot]                 = g_Game.members[slot + 1];
-            TASK(Actor)->unk_05                  = slot;
-            TASK(Actor)->sheet_row               = slot * 0x50;
-            TASK(Actor)->clut_select             = slot + 0x78;
-            TASK(Actor)->script_record           = 0xFF;
+            SELF(Actor)->unk_05                  = slot;
+            SELF(Actor)->sheet_row               = slot * 0x50;
+            SELF(Actor)->clut_select             = slot + 0x78;
+            SELF(Actor)->script_record           = 0xFF;
             g_Game.members[slot].character_index = g_CharSlot[g_Game.members[slot].chr.character_id];
         }
     }

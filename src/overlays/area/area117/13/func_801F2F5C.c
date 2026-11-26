@@ -11,10 +11,10 @@ MATCH void func_801F2F5C(void) {
         goto done;
     }
 set:
-    TASK(Actor)->header.step = 4;
+    SELF(Actor)->header.step = 4;
 done:
     if (g_AreaSceneMode != 0) {
-        TASK(Actor)->header.step = 3;
+        SELF(Actor)->header.step = 3;
     }
     func_801F314C();
 }

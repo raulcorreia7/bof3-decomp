@@ -28,35 +28,35 @@ MATCH void BMagic_FireblastInit(void) {
 
     count = 0;
     BMAGIC_CLEAR_EFFECTS(i);
-    TASK(PartyMember)->param.unk_0B = 0;
+    SELF(PartyMember)->param.unk_0B = 0;
     if (g_Battle.target_selector & BATTLE_TARGET_ENEMY_SIDE) {
         for (i = 0; i < 8; i++) {
             index   = i;
             battler = i + BATTLE_PARTY_CHARACTERS_COUNT;
             if (!Battle_SlotIsBlocked(battler)) {
                 slot                               = Battle_AllocEffect(1, BMAGIC_EFFECT_FIREBLAST) & BYTE_MASK;
-                g_BattleEffects[slot].target.party = TASK(PartyMember);
+                g_BattleEffects[slot].target.party = SELF(PartyMember);
                 g_BattleEffects[slot].unk_03       = index;
                 g_BattleEffects[slot].pos.x.fixed  = g_BattleEnemyBattlers[i].pos.x.fixed;
                 g_BattleEffects[slot].pos.y.fixed  = g_BattleEnemyBattlers[i].pos.y.fixed;
                 g_BattleEffects[slot].pos.z.fixed  = g_BattleEnemyBattlers[i].pos.z.fixed;
                 g_BattleEffects[slot].arg.unk_09   = count * BMAGIC_FIREBLAST_TARGET_DELAY + 1;
                 count++;
-                TASK(PartyMember)->param.unk_0B += 1;
+                SELF(PartyMember)->param.unk_0B += 1;
             }
         }
     } else {
         for (i = 0; i < BATTLE_PARTY_CHARACTERS_COUNT; i++) {
             if (!Battle_SlotIsBlocked(i & BYTE_MASK)) {
                 slot                               = Battle_AllocEffect(1, BMAGIC_EFFECT_FIREBLAST) & BYTE_MASK;
-                g_BattleEffects[slot].target.party = TASK(PartyMember);
+                g_BattleEffects[slot].target.party = SELF(PartyMember);
                 g_BattleEffects[slot].unk_03       = i;
                 g_BattleEffects[slot].pos.x.fixed  = g_Game.members[i].pos.x.fixed;
                 g_BattleEffects[slot].pos.y.fixed  = g_Game.members[i].pos.y.fixed;
                 g_BattleEffects[slot].pos.z.fixed  = g_Game.members[i].pos.z.fixed;
                 g_BattleEffects[slot].arg.unk_09   = count * BMAGIC_FIREBLAST_TARGET_DELAY + 1;
                 count++;
-                TASK(PartyMember)->param.unk_0B += 1;
+                SELF(PartyMember)->param.unk_0B += 1;
             }
         }
     }
@@ -65,7 +65,7 @@ MATCH void BMagic_FireblastInit(void) {
         MEM_PTR(u16, AREA_PALETTE_UPLOAD_ROW(AREA_PALETTE_BATL_OVR_ROW))[i] = MEM_PTR(u16, AREA_PALETTE_ARENA_ROW(AREA_PALETTE_BATL_OVR_ROW))[i] | PSX_COLOR_STP_BIT;
     }
     g_GfxPalettePending = 1;
-    TASK(PartyMember)->header.mode += 1;
+    SELF(PartyMember)->header.mode += 1;
 }
 
 #include "overlays/bmagic/shared/Effect_StartOnZeroTick.h"
@@ -85,24 +85,24 @@ MATCH void BMagic_FireblastTargetSpawn(void) {
     u8           i;
     u8           slot;
 
-    count                     = TASK(PartyMember)->unk_09 - 1;
-    TASK(PartyMember)->unk_09 = count;
+    count                     = SELF(PartyMember)->unk_09 - 1;
+    SELF(PartyMember)->unk_09 = count;
     if (count == 0) {
-        TASK(PartyMember)->param.unk_0B = 0;
+        SELF(PartyMember)->param.unk_0B = 0;
         for (i = 0; i < 3; i++) {
             slot = BMagic_AllocEffect();
             if (slot != GAME_NONE) {
-                work                                  = TASK(PartyMember);
+                work                                  = SELF(PartyMember);
                 BMAGIC_EFFECT_SLOTS[slot].header.mode = (i != 0) ? BMAGIC_FIREBLAST_SLOT_GLOW : BMAGIC_FIREBLAST_SLOT_FLAME;
                 BMAGIC_EFFECT_SLOTS[slot].header.step = 0;
                 BMAGIC_EFFECT_SLOTS[slot].unk_0B      = i;
                 BMAGIC_EFFECT_SLOTS[slot].header.flags |= BMAGIC_EFFECT_IN_USE | ACTOR_FLAG_HIDDEN;
                 BMAGIC_EFFECT_SLOTS[slot].target.party = work;
-                TASK(PartyMember)->param.unk_0B += 1;
+                SELF(PartyMember)->param.unk_0B += 1;
             }
         }
         SND_SEQueueSelection(EMI_SE_ID(SND_BANK_COMMON, 0x00));
-        TASK(PartyMember)->header.step += 1;
+        SELF(PartyMember)->header.step += 1;
     }
 }
 
@@ -111,21 +111,21 @@ MATCH void BMagic_FireblastTargetHit(void) {
     void* battler;
     u8    count;
 
-    count                     = TASK(PartyMember)->unk_09 + 2;
-    TASK(PartyMember)->unk_09 = count;
+    count                     = SELF(PartyMember)->unk_09 + 2;
+    SELF(PartyMember)->unk_09 = count;
     if (count == 0x10) {
         if (g_Battle.target_selector & BATTLE_TARGET_ENEMY_SIDE) {
-            battler = &g_BattleEnemyBattlers[TASK(PartyMember)->unk_03];
+            battler = &g_BattleEnemyBattlers[SELF(PartyMember)->unk_03];
             GFX_PaletteFreeFadeTarget(battler);
             GFX_PaletteAllocFade(battler, -8, -8, -8, 1);
-            Battle_ApplyDamageFlags((TASK(PartyMember)->unk_03 + BATTLE_PARTY_CHARACTERS_COUNT) & BYTE_MASK, 0x10);
+            Battle_ApplyDamageFlags((SELF(PartyMember)->unk_03 + BATTLE_PARTY_CHARACTERS_COUNT) & BYTE_MASK, 0x10);
         } else {
-            battler = &g_Game.members[TASK(PartyMember)->unk_03];
+            battler = &g_Game.members[SELF(PartyMember)->unk_03];
             GFX_PaletteFreeFadeTarget(battler);
             GFX_PaletteAllocFade(battler, -8, -8, -8, 1);
-            Battle_ApplyDamageFlags(TASK(PartyMember)->unk_03, 0x10);
+            Battle_ApplyDamageFlags(SELF(PartyMember)->unk_03, 0x10);
         }
-        TASK(PartyMember)->header.step += 1;
+        SELF(PartyMember)->header.step += 1;
     }
 }
 
@@ -135,19 +135,19 @@ MATCH void BMagic_FireblastTargetHit(void) {
 MATCH void BMagic_FireblastTargetEnd(void) {
     u8 count;
 
-    count = TASK(PartyMember)->unk_09;
+    count = SELF(PartyMember)->unk_09;
     if (count != 0) {
-        TASK(PartyMember)->unk_09 = count - 1;
+        SELF(PartyMember)->unk_09 = count - 1;
     }
-    if (TASK(PartyMember)->param.unk_0B == 0x80) {
+    if (SELF(PartyMember)->param.unk_0B == 0x80) {
         if (g_Battle.target_selector & BATTLE_TARGET_ENEMY_SIDE) {
-            GFX_PaletteFreeFadeTarget(&g_BattleEnemyBattlers[TASK(PartyMember)->unk_03]);
-            Battle_FadePoisonedBattler((TASK(PartyMember)->unk_03 + BATTLE_PARTY_CHARACTERS_COUNT) & BYTE_MASK);
-            Battle_MarkDamaged((TASK(PartyMember)->unk_03 + BATTLE_PARTY_CHARACTERS_COUNT) & BYTE_MASK);
+            GFX_PaletteFreeFadeTarget(&g_BattleEnemyBattlers[SELF(PartyMember)->unk_03]);
+            Battle_FadePoisonedBattler((SELF(PartyMember)->unk_03 + BATTLE_PARTY_CHARACTERS_COUNT) & BYTE_MASK);
+            Battle_MarkDamaged((SELF(PartyMember)->unk_03 + BATTLE_PARTY_CHARACTERS_COUNT) & BYTE_MASK);
         } else {
-            GFX_PaletteFreeFadeTarget((EnemyBattler*)&g_Game.members[TASK(PartyMember)->unk_03]);
-            Battle_FadePoisonedBattler(TASK(PartyMember)->unk_03);
-            Battle_MarkDamaged(TASK(PartyMember)->unk_03);
+            GFX_PaletteFreeFadeTarget((EnemyBattler*)&g_Game.members[SELF(PartyMember)->unk_03]);
+            Battle_FadePoisonedBattler(SELF(PartyMember)->unk_03);
+            Battle_MarkDamaged(SELF(PartyMember)->unk_03);
         }
         g_BattleEffectBattler->param.unk_0B -= 1;
         Effect_Reset();
@@ -169,8 +169,8 @@ MATCH void BMagic_FireblastDrawShadow(void) {
     g_ScratchPad.cells.halves[0] = 0x180;
     g_ScratchPadVectors[2].vx    = FIXED_MUL(rsin(0), g_ScratchPad.cells.halves[0]);
     g_ScratchPadVectors[2].vy    = FIXED_MUL(rcos(0), g_ScratchPad.cells.halves[0]);
-    if (TASK(PartyMember)->unk_09 < 16) {
-        g_ScratchPad.cells.halves[7] = TASK(PartyMember)->unk_09 * 8;
+    if (SELF(PartyMember)->unk_09 < 16) {
+        g_ScratchPad.cells.halves[7] = SELF(PartyMember)->unk_09 * 8;
     } else {
         g_ScratchPad.cells.halves[7] = 0x80;
     }
@@ -197,13 +197,13 @@ MATCH void BMagic_FireblastDrawShadow(void) {
 
 /* func_801EF7FC */
 MATCH void BMagic_FireblastSlotUpdate(void) {
-    SYS_DISPATCH_TASK(g_BMagicFireblastSlotModes, 1, g_Task);
+    SYS_DISPATCH_TASK(g_BMagicFireblastSlotModes, 1, g_Self);
 }
 
 /* func_801EF840 */
 MATCH void BMagic_FireblastFlameUpdate(void) {
-    SYS_DISPATCH_BYTE(g_BMagicFireblastFlameSteps, TASK(PartyMember)->header.step);
-    if (TASK(PartyMember)->header.flags != 0 && TASK(PartyMember)->header.step != 0) {
+    SYS_DISPATCH_BYTE(g_BMagicFireblastFlameSteps, SELF(PartyMember)->header.step);
+    if (SELF(PartyMember)->header.flags != 0 && SELF(PartyMember)->header.step != 0) {
         Battle_ProjectRange();
         Effect_DrawFlameColumn();
     }
@@ -229,10 +229,10 @@ MATCH void BMagic_FireblastGlowUpdate(void) {
     u16          x;
     u16          y;
 
-    SYS_DISPATCH_BYTE(g_BMagicFireblastGlowSteps, TASK(PartyMember)->header.step);
-    if (TASK(PartyMember)->header.flags != 0 && TASK(PartyMember)->header.step != 0) {
+    SYS_DISPATCH_BYTE(g_BMagicFireblastGlowSteps, SELF(PartyMember)->header.step);
+    if (SELF(PartyMember)->header.flags != 0 && SELF(PartyMember)->header.step != 0) {
         Battle_ProjectRange();
-        work = TASK(PartyMember);
+        work = SELF(PartyMember);
         if (work->param.unk_0B == 1) {
             x = work->screen_x.value - BMAGIC_FIREBLAST_GLOW_DRIFT_X;
             y = work->screen_y.value;
@@ -269,23 +269,23 @@ MATCH void BMagic_FireblastDrawGlow(void) {
 
     g_ScratchPad.cells.halves[0] = RANDOM_MASK(0xF) + 0x40;
     i                            = 0;
-    g_ScratchPad.cells.halves[7] = TASK(PartyMember)->unk_09 * 10;
+    g_ScratchPad.cells.halves[7] = SELF(PartyMember)->unk_09 * 10;
     do {
         SetDrawMode((DR_MODE*)g_GfxPrimCursor, 0, 1, getTPage(TPAGE_DEPTH_4BIT, TPAGE_ABR_ADD, 320, 256), 0);
-        Area_CellAddPrim(TASK(PartyMember)->pos.x.fixed, TASK(PartyMember)->pos.y.fixed, 2, sizeof(DR_MODE));
+        Area_CellAddPrim(SELF(PartyMember)->pos.x.fixed, SELF(PartyMember)->pos.y.fixed, 2, sizeof(DR_MODE));
         prim = GFX_BeginPolyG3(1);
-        setXY0(prim, TASK(PartyMember)->screen_x.value, TASK(PartyMember)->screen_y.value);
+        setXY0(prim, SELF(PartyMember)->screen_x.value, SELF(PartyMember)->screen_y.value);
         angle    = i << 9;
-        prim->x1 = TASK(PartyMember)->screen_x.value + FIXED_MUL(rsin(angle), g_ScratchPad.cells.halves[0]);
-        prim->y1 = TASK(PartyMember)->screen_y.value + FIXED_MUL(rcos(angle), g_ScratchPad.cells.halves[0]);
+        prim->x1 = SELF(PartyMember)->screen_x.value + FIXED_MUL(rsin(angle), g_ScratchPad.cells.halves[0]);
+        prim->y1 = SELF(PartyMember)->screen_y.value + FIXED_MUL(rcos(angle), g_ScratchPad.cells.halves[0]);
         i++;
         angle    = i << 9;
-        prim->x2 = TASK(PartyMember)->screen_x.value + FIXED_MUL(rsin(angle), g_ScratchPad.cells.halves[0]);
-        prim->y2 = TASK(PartyMember)->screen_y.value + FIXED_MUL(rcos(angle), g_ScratchPad.cells.halves[0]);
+        prim->x2 = SELF(PartyMember)->screen_x.value + FIXED_MUL(rsin(angle), g_ScratchPad.cells.halves[0]);
+        prim->y2 = SELF(PartyMember)->screen_y.value + FIXED_MUL(rcos(angle), g_ScratchPad.cells.halves[0]);
         setRGB0(prim, g_ScratchPad.cells.halves[7], g_ScratchPad.cells.halves[7] / 5, g_ScratchPad.cells.halves[7] / 5);
         setRGB1(prim, 1, 1, 1);
         setRGB2(prim, 1, 1, 1);
-        Area_CellAddPrim(TASK(PartyMember)->pos.x.fixed, TASK(PartyMember)->pos.y.fixed, 2, sizeof(POLY_G3));
+        Area_CellAddPrim(SELF(PartyMember)->pos.x.fixed, SELF(PartyMember)->pos.y.fixed, 2, sizeof(POLY_G3));
     } while (i < 8);
 }
 

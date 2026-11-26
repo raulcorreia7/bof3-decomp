@@ -11,10 +11,10 @@ MATCH void func_801F46AC(void) {
     u8  selection;
 
     highest = -0x8000;
-    y       = TASK(Actor)->pos.y.fixed - 0x8000;
+    y       = SELF(Actor)->pos.y.fixed - 0x8000;
     row     = 0;
     do {
-        x   = TASK(Actor)->pos.x.fixed + 0xFFFE8000;
+        x   = SELF(Actor)->pos.x.fixed + 0xFFFE8000;
         col = 0;
         do {
             g_AreaHeightOffsetEnabled = 1;
@@ -32,10 +32,10 @@ MATCH void func_801F46AC(void) {
         y &= 65535;
         y |= (hi + 1) << 16;
     } while (row < 2);
-    selection                   = func_801F5C60(TASK(Actor)->pos.x.fixed, TASK(Actor)->pos.y.fixed);
+    selection                   = func_801F5C60(SELF(Actor)->pos.x.fixed, SELF(Actor)->pos.y.fixed);
     g_SceneEventState.selection = selection;
     if (selection != 0xFF) {
-        func_801F5BCC(Area_HeightSample(TASK(Actor)->pos.x.fixed, TASK(Actor)->pos.y.fixed) + 0x280);
+        func_801F5BCC(Area_HeightSample(SELF(Actor)->pos.x.fixed, SELF(Actor)->pos.y.fixed) + 0x280);
     } else {
         func_801F5BCC(highest + 0x180);
     }

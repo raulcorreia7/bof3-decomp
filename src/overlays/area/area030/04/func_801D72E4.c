@@ -19,56 +19,56 @@ NON_MATCHING void func_801D72E4(s16 panel_x, s16 panel_y) {
     FAKE_STACK_PADS(u8, 8);
 
     UI_WindowDraw(panel_x & HALF_MASK, panel_y & HALF_MASK, 242, 159, UI_WINDOW_OPEN_ALL, (s32)g_WindowStyle);
-    if (TASK(FishingState)->counter_08 != 0) {
-        if (TASK(FishingState)->timer == 0) {
-            health = TASK(FishingState)->bounce.half.unk_3C;
-            if (TASK(FishingState)->bounce.half.key != health) {
-                TASK(FishingState)->bounce_accel    = (s32)(health * 9);
-                TASK(FishingState)->bounce.half.key = (s16)TASK(FishingState)->bounce.half.unk_3C;
+    if (SELF(FishingState)->counter_08 != 0) {
+        if (SELF(FishingState)->timer == 0) {
+            health = SELF(FishingState)->bounce.half.unk_3C;
+            if (SELF(FishingState)->bounce.half.key != health) {
+                SELF(FishingState)->bounce_accel    = (s32)(health * 9);
+                SELF(FishingState)->bounce.half.key = (s16)SELF(FishingState)->bounce.half.unk_3C;
             }
-            if ((s8)TASK(FishingState)->counter_08 > 0) {
-                if (--TASK(FishingState)->bounce_speed < 0) {
-                    TASK(FishingState)->bounce_speed = 0x35;
+            if ((s8)SELF(FishingState)->counter_08 > 0) {
+                if (--SELF(FishingState)->bounce_speed < 0) {
+                    SELF(FishingState)->bounce_speed = 0x35;
                 }
             }
-            TASK(FishingState)->timer      = (u8)(TASK(FishingState)->timer + 1);
-            TASK(FishingState)->step_index = (u8)(TASK(FishingState)->step_index + 1);
+            SELF(FishingState)->timer      = (u8)(SELF(FishingState)->timer + 1);
+            SELF(FishingState)->step_index = (u8)(SELF(FishingState)->step_index + 1);
         }
-        if (TASK(FishingState)->step_index == 0) {
-            scroll_pos = TASK(FishingState)->bounce_speed;
-            if (scroll_pos == TASK(FishingState)->bounce_accel) {
-                TASK(FishingState)->timer            = 0U;
-                TASK(FishingState)->counter_08       = 0U;
+        if (SELF(FishingState)->step_index == 0) {
+            scroll_pos = SELF(FishingState)->bounce_speed;
+            if (scroll_pos == SELF(FishingState)->bounce_accel) {
+                SELF(FishingState)->timer            = 0U;
+                SELF(FishingState)->counter_08       = 0U;
                 member                               = Actor_FindFreeSpawned() & BYTE_MASK;
                 g_SpawnedActors[member].header.flags = 1;
                 g_SpawnedActors[member].type         = 0x1A;
                 g_SpawnedActors[member].header.mode  = 0x10;
-                g_SpawnedActors[member].header.step  = (u8)TASK(FishingState)->bounce.half.key;
+                g_SpawnedActors[member].header.step  = (u8)SELF(FishingState)->bounce.half.key;
             } else {
-                if ((s8)TASK(FishingState)->counter_08 > 0) {
-                    TASK(FishingState)->bounce_speed = scroll_pos - 1;
-                    if (TASK(FishingState)->bounce_speed < 0) {
-                        TASK(FishingState)->bounce_speed = 0x35;
+                if ((s8)SELF(FishingState)->counter_08 > 0) {
+                    SELF(FishingState)->bounce_speed = scroll_pos - 1;
+                    if (SELF(FishingState)->bounce_speed < 0) {
+                        SELF(FishingState)->bounce_speed = 0x35;
                     }
                 }
-                TASK(FishingState)->step_index = (u8)(TASK(FishingState)->step_index + 1);
+                SELF(FishingState)->step_index = (u8)(SELF(FishingState)->step_index + 1);
             }
         } else {
-            TASK(FishingState)->step_index = (u8)(TASK(FishingState)->step_index + 1);
-            if (TASK(FishingState)->step_index == 4) {
-                TASK(FishingState)->step_index = 0U;
-                if ((s8)TASK(FishingState)->counter_08 < 0) {
-                    if (++TASK(FishingState)->bounce_speed >= 0x36) {
-                        TASK(FishingState)->bounce_speed = 0;
+            SELF(FishingState)->step_index = (u8)(SELF(FishingState)->step_index + 1);
+            if (SELF(FishingState)->step_index == 4) {
+                SELF(FishingState)->step_index = 0U;
+                if ((s8)SELF(FishingState)->counter_08 < 0) {
+                    if (++SELF(FishingState)->bounce_speed >= 0x36) {
+                        SELF(FishingState)->bounce_speed = 0;
                     }
                 }
             }
         }
     }
-    bar_slot = (u8)TASK(FishingState)->step_index;
+    bar_slot = (u8)SELF(FishingState)->step_index;
     row_y    = panel_y + 25;
     if (bar_slot != 0) {
-        if (TASK(FishingState)->counter_08 == 1) {
+        if (SELF(FishingState)->counter_08 == 1) {
             offset = bar_slot * 3 + 12;
             row_y  = panel_y + offset;
         } else {
@@ -79,7 +79,7 @@ NON_MATCHING void func_801D72E4(s16 panel_x, s16 panel_y) {
     } else {
         bar_count = 9;
     }
-    bar_index = (u8)TASK(FishingState)->bounce_speed;
+    bar_index = (u8)SELF(FishingState)->bounce_speed;
     if (bar_count != 0) {
         count = 0;
         do {
@@ -96,10 +96,10 @@ NON_MATCHING void func_801D72E4(s16 panel_x, s16 panel_y) {
     }
     UI_WindowDraw(panel_x & HALF_MASK, (panel_y + 6) & HALF_MASK, 242, 14, 0, CHARACTER_BLOCK->window_style);
     UI_WindowDraw(panel_x & HALF_MASK, (panel_y + 148) & HALF_MASK, 242, 11, UI_WINDOW_OPEN_BOTTOM_LEFT | UI_WINDOW_OPEN_BOTTOM_RIGHT, CHARACTER_BLOCK->window_style);
-    UI_TextDraw((s16)(panel_x + 61), (s16)(panel_y + 6), 0, TEXT_LENGTH_MAX, MESSAGE_TABLE_TEXT(AREA_MESSAGE_TABLE, D_801E2114[TASK(FishingState)->bounce.half.unk_3C]));
+    UI_TextDraw((s16)(panel_x + 61), (s16)(panel_y + 6), 0, TEXT_LENGTH_MAX, MESSAGE_TABLE_TEXT(AREA_MESSAGE_TABLE, D_801E2114[SELF(FishingState)->bounce.half.unk_3C]));
     func_801D7784(panel_x, panel_y);
     text = (u8*)g_UiTextFormatBuffer;
-    TEXT_Format(text, D_801D0C08, TASK(FishingState)->bounce.half.unk_3C + 1);
+    TEXT_Format(text, D_801D0C08, SELF(FishingState)->bounce.half.unk_3C + 1);
     UI_TextDrawGlyphString((s16)(panel_x + 202), (s16)(panel_y + 146), 0U, text);
 }
 #else

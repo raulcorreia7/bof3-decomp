@@ -31,30 +31,30 @@ MATCH void Party_MemberLoadSprite(s32 character_id, s32 party_slot) {
         index++;
     } while ((index & BYTE_MASK) < 3U);
 found:
-    GFX_PaletteFreeFadeTarget(TASK(void));
+    GFX_PaletteFreeFadeTarget(SELF(void));
 
-    first                         = TASK(Actor);
+    first                         = SELF(Actor);
     masked                        = index & BYTE_MASK;
     first->unk_2C                 = masked;
     value                         = MEM(s32, 0x8003B800u + masked * 4);
     first->active_flags           = 1;
-    next                          = TASK(u8) + 0x27u;
+    next                          = SELF(u8) + 0x27u;
     first->unk_4C                 = value + (s32)MEM_PTR(s32, 0x8003B800u);
     next[0]                       = (party_slot + 0x78);
     slot                          = party_slot & BYTE_MASK;
-    TASK(Actor)->palette_8bit     = PALETTE_TYPE_CELLS_2;
-    TASK(Actor)->sheet_page       = 5;
-    TASK(Actor)->sheet_row        = (slot * 0x50);
-    TASK(Actor)->unk_2B           = D_80181B1C[key];
-    work                          = TASK(Actor);
+    SELF(Actor)->palette_8bit     = PALETTE_TYPE_CELLS_2;
+    SELF(Actor)->sheet_page       = 5;
+    SELF(Actor)->sheet_row        = (slot * 0x50);
+    SELF(Actor)->unk_2B           = D_80181B1C[key];
+    work                          = SELF(Actor);
     work->draw_layer              = g_AreaDrawMode;
     value                         = FIELD(s32, work, 0x70u) & ~0xFF;
     FIELD(s32, work, 0x70u)       = value;
-    next_5d                       = TASK(Actor);
+    next_5d                       = SELF(Actor);
     FIELD(s32, work, 0x70u)       = value | (work->unk_2B != 0);
     next_5d->tint.bytes.rgb.r     = 0;
-    TASK(Actor)->tint.bytes.rgb.g = 0;
-    TASK(Actor)->tint.bytes.rgb.b = 0;
-    TASK(Actor)->tint.bytes.flags = 0;
+    SELF(Actor)->tint.bytes.rgb.g = 0;
+    SELF(Actor)->tint.bytes.rgb.b = 0;
+    SELF(Actor)->tint.bytes.flags = 0;
     GFX_PaletteLoad((slot * 0x40) + GAME_PALETTE_STAGE, 0);
 }

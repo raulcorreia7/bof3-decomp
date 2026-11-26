@@ -8,7 +8,7 @@ MATCH void Battle_UpdateEnemies(void) {
     for (i = 0; (i & BYTE_MASK) < 8u; i++) {
         if (g_BattleEnemyBattlers[(u8)i].header.flags != 0u) {
             enemy = &g_BattleEnemyBattlers[(u8)i];
-            TASK_SET((PartyMember*)enemy);
+            SELF_SET((PartyMember*)enemy);
             g_BattleCurrentEnemy = (EnemyBattler*)enemy;
             if (BATTLE_IS_SCRIPTED()) {
                 if (enemy->header.mode != 0u) {

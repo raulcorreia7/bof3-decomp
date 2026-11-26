@@ -6,14 +6,14 @@ MATCH void func_801F2DFC(void) {
     s32 i;
 
     i      = 0;
-    work   = TASK(u8);
-    g_Task = D_80146920;
+    work   = SELF(u8);
+    g_Self = D_80146920;
     actor  = D_80146920;
     do {
         FIELD(s32, actor, 0x34u) -= 0x400;
         i++;
     } while ((u8)i < 4);
     work[1] = 7;
-    g_Task  = work;
+    g_Self  = work;
     work[9] = 0;
 }

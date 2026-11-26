@@ -2,5 +2,5 @@
 
 MATCH void func_801F2D88(void) {
     g_ScriptVars[1]          = 0;
-    TASK(Actor)->header.mode = 1;
+    SELF(Actor)->header.mode = 1;
 }

@@ -6,10 +6,10 @@ MATCH void func_801F345C(void) {
     s32    index;
     s16    screen_y;
 
-    scratch                = TASK(Actor);
+    scratch                = SELF(Actor);
     index                  = COORD_INT(scratch->pos.x);
     scratch->direction     = (COORD_INT(scratch->pos.y) == 0);
-    work                   = TASK(Actor);
+    work                   = SELF(Actor);
     COORD_INT(work->pos.x) = D_801F3748[index][0];
     COORD_INT(work->pos.y) = D_801F3748[index][1];
     COORD_INT(work->pos.z) = -128;
@@ -26,6 +26,6 @@ MATCH void func_801F345C(void) {
     return;
 
 reset:
-    TASK(Actor)->screen_y    = 0;
-    TASK(Actor)->header.step = 3;
+    SELF(Actor)->screen_y    = 0;
+    SELF(Actor)->header.step = 3;
 }

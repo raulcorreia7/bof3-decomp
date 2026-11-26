@@ -4,13 +4,13 @@ MATCH void func_801F2C78(void) {
     Actor* work;
     s16    screen_y;
 
-    COORD_INT(TASK(Actor)->pos.z) = -1472;
-    TASK(Actor)->screen_y         = 0;
-    TASK(Actor)->header.step++;
+    COORD_INT(SELF(Actor)->pos.z) = -1472;
+    SELF(Actor)->screen_y         = 0;
+    SELF(Actor)->header.step++;
     if (!SYS_TestFlag(g_SceneEventFlags, 84)) {
-        TASK(Actor)->header.step = 5;
+        SELF(Actor)->header.step = 5;
     } else {
-        work = TASK(Actor);
+        work = SELF(Actor);
         if (abs(g_Game.members[0].pos.x.fixed - (TO_COORD(COORD_INT(work->pos.x) + 1) | COORD_HALF)) > COORD_HALF) {
             goto call;
         }

@@ -8,7 +8,7 @@
     slot = LOBU(g_Battle.target_selector);                                                 \
     if (slot < BATTLE_PARTY_CHARACTERS_COUNT) {                                            \
         if (g_Game.members[slot].u.turn.action_flags.value & BATTLER_ACTION_DRAGON_FORM) { \
-            work = g_Task;                                                                 \
+            work = g_Self;                                                                 \
             type = FORM_TYPES[g_Battle.dragon_form];                                       \
             if (work->facing == 0 || work->facing == 3) {                                  \
                 work->screen_x.value += FORM_OFFSETS[type][work->facing >> 1].vx;          \
@@ -18,7 +18,7 @@
                 work->screen_y.value += FORM_OFFSETS[type][work->facing >> 1].vy;          \
             }                                                                              \
         } else {                                                                           \
-            work = g_Task;                                                                 \
+            work = g_Self;                                                                 \
             type = g_Game.members[slot].chr.character_id;                                  \
             if (work->facing == 0 || work->facing == 3) {                                  \
                 work->screen_x.value += CHARACTER_OFFSETS[type][work->facing >> 1].vx;     \

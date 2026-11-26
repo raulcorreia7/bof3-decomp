@@ -13,20 +13,20 @@ s32 PlChar_FollowerInReach(u8 index);
         if ((PlChar_FollowerInReach(actor_slot) & BYTE_MASK) == 0 && (check_actor(actor_slot) & BYTE_MASK) == 0) { \
             g_SpawnedActors[actor_slot].link = 1;                                                                  \
             /* FAKE: retail reads SND_SEPlay as void(s32). */                                                      \
-            ((void (*)(s32))SND_SEPlay)(TASK(Actor)->unk_2C + 0x100);                                              \
-            Script_Request(TASK(Actor)->direction + 8);                                                            \
+            ((void (*)(s32))SND_SEPlay)(SELF(Actor)->unk_2C + 0x100);                                              \
+            Script_Request(SELF(Actor)->direction + 8);                                                            \
             g_GameState->u.field.counter.unsigned_value = 2;                                                       \
             g_GameFlags |= 0x1000;                                                                                 \
             Area_RunWalk();                                                                                        \
-            TASK(Actor)->timer--;                                                                                  \
+            SELF(Actor)->timer--;                                                                                  \
             Actor_MovementUpdate();                                                                                \
             g_GameState->u.field.mode.unsigned_value = 1;                                                          \
-            TASK(Actor)->header.step++;                                                                            \
+            SELF(Actor)->header.step++;                                                                            \
             return;                                                                                                \
         }                                                                                                          \
     } else {                                                                                                       \
-        pos_x = TASK(Actor)->pos.x.fixed + g_FacingSteps[TASK(Actor)->direction].x * 2;                            \
-        pos_y = TASK(Actor)->pos.y.fixed + g_FacingSteps[TASK(Actor)->direction].y * 2;                            \
+        pos_x = SELF(Actor)->pos.x.fixed + g_FacingSteps[SELF(Actor)->direction].x * 2;                            \
+        pos_y = SELF(Actor)->pos.y.fixed + g_FacingSteps[SELF(Actor)->direction].y * 2;                            \
         if ((g_GameState->status.field.flags.unsigned_value & 0x01) == 0) {                                        \
             other_slot = (u8)Actor_FindInRange(pos_x, pos_y, 1);                                                   \
             if (other_slot != actor_slot) {                                                                        \

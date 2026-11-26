@@ -9,5 +9,5 @@ MATCH void Party_ScriptWalkFadeOut(void) {
         return;
     flags                         = g_Game.current->u.field.flags;
     g_Game.current->u.field.flags = (flags & 0xFD);
-    TASK(Actor)->unk_03           = 1;
+    SELF(Actor)->unk_03           = 1;
 }

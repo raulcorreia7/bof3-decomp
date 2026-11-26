@@ -3,12 +3,12 @@
 MATCH void func_801F4288(void) {
     u8 timer;
 
-    if (!(TASK(Actor)->timer & 0x3)) {
+    if (!(SELF(Actor)->timer & 0x3)) {
         func_801F48B0();
     }
-    ACTOR_COUNT_DOWN(TASK(Actor), timer, timer);
+    ACTOR_COUNT_DOWN(SELF(Actor), timer, timer);
     if (!(timer & BYTE_MASK)) {
-        TASK(Actor)->header.mode += 1;
+        SELF(Actor)->header.mode += 1;
     }
     func_801F49A0();
 }

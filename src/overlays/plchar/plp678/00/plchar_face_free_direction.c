@@ -10,11 +10,11 @@ MATCH void func_801CE610(void) {
 }
 
 MATCH void func_801CE630(void) {
-    SYS_DISPATCH_TASK(D_801D0570, 2, g_Task);
+    SYS_DISPATCH_TASK(D_801D0570, 2, g_Self);
 }
 
 MATCH void func_801CE674(void) {
-    SYS_DISPATCH_TASK(D_801D0578, 3, g_Task);
+    SYS_DISPATCH_TASK(D_801D0578, 3, g_Self);
 }
 
 /* func_801CE6B8 */

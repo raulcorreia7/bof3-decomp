@@ -10,7 +10,7 @@ MATCH void Area_RequestRestartOnEntryChange(void) {
 
     Actor_SetScreenOrigin();
     if (g_GameEntryState != 1) {
-        work = TASK(Actor);
+        work = SELF(Actor);
         step = work->param.unk_0B;
         if (step == work->option_flags && g_GameStateIndex != GAME_REQUEST_AREA_CHANGE) {
             if (step != 1) {
@@ -20,9 +20,9 @@ MATCH void Area_RequestRestartOnEntryChange(void) {
                 goto tail; /* skips the arming stores: run the step only */
             }
         }
-        TASK(Actor)->unk_48      = 2;
-        TASK(Actor)->timer       = 8;
-        TASK(Actor)->header.mode = 4;
+        SELF(Actor)->unk_48      = 2;
+        SELF(Actor)->timer       = 8;
+        SELF(Actor)->header.mode = 4;
     }
 tail:
     Area_AddActor();

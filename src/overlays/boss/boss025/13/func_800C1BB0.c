@@ -9,9 +9,9 @@ MATCH void func_800C1BB0(void) {
     enemy->unk_E4 = func_800C1D2C;
     enemy->unk_E8 = D_800C318C;
 
-    TASK(PartyMember)->header.mode = 2;
+    SELF(PartyMember)->header.mode = 2;
     Script_AnimStepLoop();
-    TASK(PartyMember)->facing = 1;
+    SELF(PartyMember)->facing = 1;
 
     g_BattleCurrentEnemy->unk_7F = 1;
 

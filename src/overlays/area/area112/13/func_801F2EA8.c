@@ -13,16 +13,16 @@ MATCH void func_801F2EA8(void) {
     s16 height;
 
     n    = 0;
-    flag = SYS_TestFlag(g_SceneEventFlags, COORD_FRAC(TASK(Actor)->pos.x));
-    if (COORD_INT(TASK(Actor)->pos.x) == 0) {
-        for (x = D_801F4218[COORD_INT(TASK(Actor)->pos.x)].x0; x < D_801F4218[COORD_INT(TASK(Actor)->pos.x)].x_end; x++) {
-            for (y = D_801F4218[COORD_INT(TASK(Actor)->pos.x)].y0; y < D_801F4218[COORD_INT(TASK(Actor)->pos.x)].y_end; y++) {
-                *(g_AreaCellCodes + y * ((AreaMapBundle*)MAP_BUNDLE_BASE)->width + x) = TASK(Actor)->header.step != 2 ? 0x11 : 0;
+    flag = SYS_TestFlag(g_SceneEventFlags, COORD_FRAC(SELF(Actor)->pos.x));
+    if (COORD_INT(SELF(Actor)->pos.x) == 0) {
+        for (x = D_801F4218[COORD_INT(SELF(Actor)->pos.x)].x0; x < D_801F4218[COORD_INT(SELF(Actor)->pos.x)].x_end; x++) {
+            for (y = D_801F4218[COORD_INT(SELF(Actor)->pos.x)].y0; y < D_801F4218[COORD_INT(SELF(Actor)->pos.x)].y_end; y++) {
+                *(g_AreaCellCodes + y * ((AreaMapBundle*)MAP_BUNDLE_BASE)->width + x) = SELF(Actor)->header.step != 2 ? 0x11 : 0;
             }
         }
     } else {
-        for (x = D_801F4218[COORD_INT(TASK(Actor)->pos.x)].x0; x < D_801F4218[COORD_INT(TASK(Actor)->pos.x)].x_end; x++) {
-            for (y = D_801F4218[COORD_INT(TASK(Actor)->pos.x)].y0; y < D_801F4218[COORD_INT(TASK(Actor)->pos.x)].y_end; y++) {
+        for (x = D_801F4218[COORD_INT(SELF(Actor)->pos.x)].x0; x < D_801F4218[COORD_INT(SELF(Actor)->pos.x)].x_end; x++) {
+            for (y = D_801F4218[COORD_INT(SELF(Actor)->pos.x)].y0; y < D_801F4218[COORD_INT(SELF(Actor)->pos.x)].y_end; y++) {
                 shade = D_801F4228[flag][n++];
                 value = (shade << 24) | (shade << 16) | (shade << 8) | shade;
                 /* FAKE: integer cell address; cells[y * width + x] folds both terms into one shift. */
@@ -30,10 +30,10 @@ MATCH void func_801F2EA8(void) {
             }
         }
     }
-    for (x = D_801F4218[COORD_INT(TASK(Actor)->pos.x)].x0; x < D_801F4218[COORD_INT(TASK(Actor)->pos.x)].x_end; x++) {
-        for (y = D_801F4218[COORD_INT(TASK(Actor)->pos.x)].y0; y < D_801F4218[COORD_INT(TASK(Actor)->pos.x)].y_end; y++) {
+    for (x = D_801F4218[COORD_INT(SELF(Actor)->pos.x)].x0; x < D_801F4218[COORD_INT(SELF(Actor)->pos.x)].x_end; x++) {
+        for (y = D_801F4218[COORD_INT(SELF(Actor)->pos.x)].y0; y < D_801F4218[COORD_INT(SELF(Actor)->pos.x)].y_end; y++) {
             height                                                                                                                      = Area_HeightSample(x << 16, y << 16);
-            value                                                                                                                       = (-(COORD_INT(TASK(Actor)->pos.z) * 2) - height) / 32;
+            value                                                                                                                       = (-(COORD_INT(SELF(Actor)->pos.z) * 2) - height) / 32;
             ((AreaMapBundleBytes*)MAP_BUNDLE_BASE)->bytes[g_AreaMapHeightOffset * 4 + x + y * ((AreaMapBundle*)MAP_BUNDLE_BASE)->width] = value;
         }
     }

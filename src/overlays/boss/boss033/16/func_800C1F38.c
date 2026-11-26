@@ -3,6 +3,6 @@
 MATCH void func_800C1F38(void) {
     if (Script_AnimStepOnce() != 0) {
         Script_Select(3);
-        TASK(Actor)->header.step++;
+        SELF(Actor)->header.step++;
     }
 }

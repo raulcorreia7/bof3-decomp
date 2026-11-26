@@ -1,5 +1,5 @@
 #include "battle_03.h"
 
 MATCH void func_801DFC70(void) {
-    D_801EB1D4[TASK(PartyMember)->unk_03]();
+    D_801EB1D4[SELF(PartyMember)->unk_03]();
 }

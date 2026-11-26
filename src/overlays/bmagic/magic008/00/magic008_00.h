@@ -78,37 +78,37 @@ extern u16                D_80145A54[];
         if (g_Battle.target_selector < BATTLE_PARTY_CHARACTERS_COUNT) {                                             \
             if (g_Game.members[g_Battle.target_selector].header.mode != 6) {                                        \
                 if (g_Battle.active_battler < BATTLE_PARTY_CHARACTERS_COUNT) {                                      \
-                    Script_Select(TASK(PartyMember)->facing + 12);                                                  \
+                    Script_Select(SELF(PartyMember)->facing + 12);                                                  \
                     count                = --g_GfxTransferCount;                                                    \
                     (&D_80145A04)[count] = 0;                                                                       \
                     D_80145A54[count]    = 0;                                                                       \
                     (&D_80145A7C)[count] = 0;                                                                       \
                 } else {                                                                                            \
-                    TASK(PartyMember)->unk_4B = 0xFF;                                                               \
+                    SELF(PartyMember)->unk_4B = 0xFF;                                                               \
                     func_801E257C(g_Battle.active_battler, 2);                                                      \
                 }                                                                                                   \
-                TASK(PartyMember)->unk_09 = func_800AFF98();                                                        \
-                TASK(PartyMember)->header.step++;                                                                   \
+                SELF(PartyMember)->unk_09 = func_800AFF98();                                                        \
+                SELF(PartyMember)->header.step++;                                                                   \
             }                                                                                                       \
         } else {                                                                                                    \
             if (g_BattleEnemyBattlers[g_Battle.target_selector - BATTLE_PARTY_CHARACTERS_COUNT].header.mode != 6) { \
                 if (g_Battle.active_battler < BATTLE_PARTY_CHARACTERS_COUNT) {                                      \
-                    Script_Select(TASK(PartyMember)->facing + 12);                                                  \
+                    Script_Select(SELF(PartyMember)->facing + 12);                                                  \
                     count                = --g_GfxTransferCount;                                                    \
                     (&D_80145A04)[count] = 0;                                                                       \
                     D_80145A54[count]    = 0;                                                                       \
                     (&D_80145A7C)[count] = 0;                                                                       \
                 } else {                                                                                            \
-                    TASK(PartyMember)->unk_4B = 0xFF;                                                               \
+                    SELF(PartyMember)->unk_4B = 0xFF;                                                               \
                     func_801E257C(g_Battle.active_battler, 2);                                                      \
                 }                                                                                                   \
-                TASK(PartyMember)->unk_09 = func_800AFF98();                                                        \
-                TASK(PartyMember)->header.step++;                                                                   \
+                SELF(PartyMember)->unk_09 = func_800AFF98();                                                        \
+                SELF(PartyMember)->header.step++;                                                                   \
             }                                                                                                       \
         }                                                                                                           \
     } else {                                                                                                        \
         g_BattleEffectBattler->param.unk_0B = 0xFF;                                                                 \
-        TASK(PartyMember)->header.step      = (ABORT_STEP);                                                         \
+        SELF(PartyMember)->header.step      = (ABORT_STEP);                                                         \
     }
 
 /* The columns of g_BattleEffects: the retail code forms one slot base per store. */
@@ -125,20 +125,20 @@ u32                             BMagic_SkillStrikeFollowUp(void);
  * damaged and step. A statement macro: the member declares u8 timer. */
 #define MAGIC008_COUNT_DOWN_MARK_DAMAGED(se_id)                \
     Script_AnimStepOnce();                                     \
-    timer                     = TASK(PartyMember)->unk_09 - 1; \
-    TASK(PartyMember)->unk_09 = timer;                         \
+    timer                     = SELF(PartyMember)->unk_09 - 1; \
+    SELF(PartyMember)->unk_09 = timer;                         \
     if (!(timer & BYTE_MASK)) {                                \
         Battle_PlayActiveBattlerSE((se_id), 0);                \
         Battle_MarkDamaged(g_Battle.target_selector);          \
-        TASK(PartyMember)->header.step += 1;                   \
+        SELF(PartyMember)->header.step += 1;                   \
     }
 
 /* Release the active battler and advance the effect mode once the effect target's byte 0x0B is 0xFF. */
 #define MAGIC008_RELEASE_ACTIVE_AT_END()                                     \
-    if (TASK(PartyMember)->param.unk_0B == 0xFF) {                           \
+    if (SELF(PartyMember)->param.unk_0B == 0xFF) {                           \
         BATTLE_ACTIVE_WORK->header.flags &= ~PARTY_MEMBER_FLAG_HANDLER_BUSY; \
         Battle_SelectActiveBattlerScript(4, 0);                              \
-        TASK(PartyMember)->header.mode += 1;                                 \
+        SELF(PartyMember)->header.mode += 1;                                 \
     }
 
 #endif

@@ -8,7 +8,7 @@ MATCH void Actor_ProjectForDraw(void) {
     Actor* work;
     u8     state;
 
-    work = TASK(Actor);
+    work = SELF(Actor);
     if ((work->active_flags & 0x10) != 0) {
         state = 4;
     } else if ((work->range_54.table[3] & 0x20) != 0) {

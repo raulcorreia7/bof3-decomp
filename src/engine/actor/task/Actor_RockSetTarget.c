@@ -6,7 +6,7 @@ MATCH void Actor_RockSetTarget(s32 step_byte) {
     Actor* work;
     s32    vel;
 
-    work = TASK(Actor);
+    work = SELF(Actor);
     if (COORD_FRAC(work->pos.x) != 0) {
         vel = work->vx;
         if (vel > 0) {
@@ -37,5 +37,5 @@ MATCH void Actor_RockSetTarget(s32 step_byte) {
         return;
     }
 set_state:
-    TASK(Actor)->header.mode = ACTOR_ROCK_MODE_SETTLE;
+    SELF(Actor)->header.mode = ACTOR_ROCK_MODE_SETTLE;
 }

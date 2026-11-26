@@ -1,12 +1,12 @@
 /* The direction store re-reads the scratchpad cell. */
-#define FAKE_DECL_TASK_VOLATILE
+#define FAKE_DECL_SELF_VOLATILE
 #include "area173_14.h"
 
 MATCH void func_801F4A4C(void) {
     Actor*       work;
     PartyMember* current;
 
-    work              = TASK(Actor);
+    work              = SELF(Actor);
     current           = g_Game.current;
     work->pos.x.fixed = TO_COORD(22) + COORD_HALF;
     work->pos.z.fixed = TO_COORD(1280);
@@ -15,5 +15,5 @@ MATCH void func_801F4A4C(void) {
     } else {
         work->pos.y.fixed = TO_COORD(122);
     }
-    TASK(Actor)->direction = FACING_UP;
+    SELF(Actor)->direction = FACING_UP;
 }

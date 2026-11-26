@@ -1,7 +1,7 @@
 #include "area082_13.h"
 
 MATCH void func_801F2EC8(void) {
-    Actor* work = TASK(Actor);
+    Actor* work = SELF(Actor);
 
     work->vy += 8192;
     work->pos.y.fixed += work->vy;
@@ -9,8 +9,8 @@ MATCH void func_801F2EC8(void) {
     if (work->angle_x < 8) {
         work->angle_x = 8;
     }
-    TASK(Actor)->angle_y += 6;
-    if (--TASK(Actor)->unk_2C == 0) {
+    SELF(Actor)->angle_y += 6;
+    if (--SELF(Actor)->unk_2C == 0) {
         Actor_Clear();
     }
 }

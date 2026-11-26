@@ -12,15 +12,15 @@ MATCH void Actor_SetSemiTransparent(void) {
 
     i    = 0;
     base = GAME_PALETTE_MIRROR;
-    work = TASK(Actor);
+    work = SELF(Actor);
     do {
         table = (u16*)(i * 2 + ((work->unk_05 << 6) + base));
         value = *table;
         i += 1;
         *table = (value | 0x8000);
     } while (i < 31);
-    TASK(Actor)->header.flags |= ACTOR_FLAG_SEMI_TRANSPARENT;
-    field                                                            = TASK(Actor)->unk_05;
+    SELF(Actor)->header.flags |= ACTOR_FLAG_SEMI_TRANSPARENT;
+    field                                                            = SELF(Actor)->unk_05;
     g_GfxPalettePending                                              = 1;
     *(u16*)(MEM_PTR(u8, GAME_PALETTE_MIRROR) + (field << 6) + 0x3Eu) = 0;
 }

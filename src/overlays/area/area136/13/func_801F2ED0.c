@@ -8,14 +8,14 @@ MATCH void func_801F2ED0(void) {
     u8  selection;
     s32 result;
 
-    TASK_SET((u8*)&g_Game.members[2]);
+    SELF_SET((u8*)&g_Game.members[2]);
     index     = g_PartyFieldOrder[2];
     y         = g_Game.members[2].screen_y.signed_value;
     x         = g_Game.members[2].screen_x.signed_value;
     selection = D_801F3424[index];
     result    = Actor_ClaimSlot(2, 0, selection, x, y);
     if ((u8)result != 0xFF) {
-        work      = TASK(Actor);
+        work      = SELF(Actor);
         work[0xB] = result;
     }
 }

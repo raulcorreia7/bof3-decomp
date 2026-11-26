@@ -7,7 +7,7 @@ MATCH void func_801DFA60(void) {
     u8           chance;
 
     Battle_IsPartyMemberBlocked();
-    work         = TASK(PartyMember);
+    work         = SELF(PartyMember);
     count        = work->unk_09 - 1;
     work->unk_09 = count;
     if (count == 0) {
@@ -24,6 +24,6 @@ MATCH void func_801DFA60(void) {
             Battle_PlayEffectSE(3);
         }
         Battle_PlayEffectSE(4);
-        TASK(PartyMember)->header.step = TASK(PartyMember)->header.step + 1;
+        SELF(PartyMember)->header.step = SELF(PartyMember)->header.step + 1;
     }
 }

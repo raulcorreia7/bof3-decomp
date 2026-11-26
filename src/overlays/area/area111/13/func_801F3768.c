@@ -3,6 +3,6 @@
 MATCH void func_801F3768(void) {
     void* state;
 
-    state           = g_Task;
+    state           = g_Self;
     g_ScriptVars[3] = 0x10 << FIELD(u32, state, 0x18u);
 }

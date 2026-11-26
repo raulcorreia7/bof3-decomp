@@ -8,7 +8,7 @@ MATCH void Area_ClimbDismountBegin(void) {
     u32    facing;
     s32    animation;
 
-    actor                                           = TASK(Actor);
+    actor                                           = SELF(Actor);
     slot                                            = actor->unk_05;
     g_GfxPalettePending                             = 1;
     *(u16*)(MEM_PTR(u8, 0x8003963Eu) + (slot << 6)) = 0;

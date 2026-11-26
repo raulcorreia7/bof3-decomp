@@ -29,7 +29,7 @@
         prim->x2 = x + FIXED_MUL(radius, rcos(angle));                                                              \
         prim->y2 = y + FIXED_MUL(radius, rsin(angle));                                                              \
         /* The row's unk_06 selects one colour triplet of the table. */                                             \
-        setRGB0(prim, red[TASK(Actor)->unk_06 * 3], green[TASK(Actor)->unk_06 * 3], blue[TASK(Actor)->unk_06 * 3]); \
+        setRGB0(prim, red[SELF(Actor)->unk_06 * 3], green[SELF(Actor)->unk_06 * 3], blue[SELF(Actor)->unk_06 * 3]); \
         setRGB1(prim, 0, 0, 0);                                                                                     \
         setRGB2(prim, 0, 0, 0);                                                                                     \
         i += 1;                                                                                                     \

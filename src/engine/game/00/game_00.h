@@ -93,11 +93,11 @@
 
 /* Run the scenario dispatch entry. A bare statement macro: the member declares
  * `saved` and `result`, runs its fallback when `result` is 0 and restores
- * g_Task. Kept: `entry` is a member name of the scenario handler record, so it
+ * g_Self. Kept: `entry` is a member name of the scenario handler record, so it
  * cannot be an argument without an indirect call; the do/while form moves
  * bytes. */
 #define GAME_RUN_SCENARIO_ENTRY(entry)                                                         \
-    saved  = g_Task;                                                                           \
+    saved  = g_Self;                                                                           \
     result = g_ScenarioHandlers[(s32)g_ScenarioState.scenario_id]->entry(handler_x, handler_y)
 
 /* Run the gated cell test and arm the work record on a hit. Kept: it returns
@@ -105,11 +105,11 @@
  * the bytes move. */
 #define GAME_ARM_WORK_ON_CELL_HIT(code, new_step)                                                                                                     \
     if ((g_Game.flags & 0x400) == 0) {                                                                                                                \
-        if ((Game_TestMapCells(TASK(Actor)->pos.x.fixed, TASK(Actor)->pos.y.fixed, TASK(Actor)->voice_flags.scene_flag, code, 0) & BYTE_MASK) != 0) { \
-            TASK(Actor)->header.mode = 2;                                                                                                             \
-            TASK(Actor)->header.step = new_step;                                                                                                      \
-            TASK(Actor)->unk_03      = 0;                                                                                                             \
-            TASK(Actor)->unk_04      = 0;                                                                                                             \
+        if ((Game_TestMapCells(SELF(Actor)->pos.x.fixed, SELF(Actor)->pos.y.fixed, SELF(Actor)->voice_flags.scene_flag, code, 0) & BYTE_MASK) != 0) { \
+            SELF(Actor)->header.mode = 2;                                                                                                             \
+            SELF(Actor)->header.step = new_step;                                                                                                      \
+            SELF(Actor)->unk_03      = 0;                                                                                                             \
+            SELF(Actor)->unk_04      = 0;                                                                                                             \
             return 1;                                                                                                                                 \
         }                                                                                                                                             \
     }                                                                                                                                                 \
@@ -1191,9 +1191,9 @@ static inline s32 Game_AddStepByFlag(s32 step, Actor* actor, s32 value_b, u8 fla
     flags = flag_bits & 0x2;
     if (flags != 0) {
         if (actor->unk_7B != 0u) {
-            work      = TASK(u8);
+            work      = SELF(u8);
             work[9]   = (u8)(0x20 / (s32)(value_b & BYTE_MASK));
-            work      = TASK(u8);
+            work      = SELF(u8);
             work[0xA] = (u8)(work[9] >> 1);
         }
     }
@@ -1205,7 +1205,7 @@ static inline void AreaAction_Roll(s32 actor_slot) {
     u32 choice;
 
     choice = (u32)RANDOM_MASK(0xF);
-    if ((TASK(Actor)->option_flags & ACTOR_OPT_ROUTE_LOCKED) == 0) {
+    if ((SELF(Actor)->option_flags & ACTOR_OPT_ROUTE_LOCKED) == 0) {
         Script_DispatchSelector((u8)((g_Game.members[0].facing ^ 4) & 7));
     }
     g_Game.flags |= GAME_FLAG_SCRIPT_ACTIVE;
@@ -1217,7 +1217,7 @@ static inline void AreaAction_Roll(s32 actor_slot) {
             case 2:
             case 3:
                 Actor_SpawnSceneActor(1);
-                TASK(Actor)->unk_04 = 3;
+                SELF(Actor)->unk_04 = 3;
                 break;
             case 4:
             case 5:
@@ -1225,17 +1225,17 @@ static inline void AreaAction_Roll(s32 actor_slot) {
                 Actor_SpawnSceneActor(1);
                 Party_AddZenny(2, 0);
                 Actor_SpawnToss((u8)((s32)(-(((s32)GAME_WORK_AREA_PTR - (s32)g_Actors) * 0xD79435E5)) >> 3));
-                TASK(Actor)->unk_04 = 1;
+                SELF(Actor)->unk_04 = 1;
                 break;
             case 7:
                 Actor_SpawnSceneActor(1);
                 Party_AddZenny(5, 0);
                 Actor_SpawnToss((u8)((s32)(-(((s32)GAME_WORK_AREA_PTR - (s32)g_Actors) * 0xD79435E5)) >> 3));
-                TASK(Actor)->unk_04 = 2;
+                SELF(Actor)->unk_04 = 2;
                 break;
             default:
                 Actor_SpawnSceneActor(actor_slot);
-                TASK(Actor)->unk_04 = 3;
+                SELF(Actor)->unk_04 = 3;
                 break;
         }
     } else {
@@ -1244,7 +1244,7 @@ static inline void AreaAction_Roll(s32 actor_slot) {
         } else {
             Actor_SpawnSceneActor(actor_slot);
         }
-        TASK(Actor)->unk_04 = 3;
+        SELF(Actor)->unk_04 = 3;
     }
 }
 

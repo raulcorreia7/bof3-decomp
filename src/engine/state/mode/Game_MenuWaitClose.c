@@ -4,7 +4,7 @@
 MATCH void Game_MenuWaitClose(void) {
     if (g_GameStateIndex != GAME_REQUEST_MENU) {
         g_AreaWalkFlags &= ~AREA_WALK_MENU_ACTIVE;
-        TASK(Actor)->header.mode = 1;
+        SELF(Actor)->header.mode = 1;
         ACTOR_CLEAR_STEP();
     }
 }

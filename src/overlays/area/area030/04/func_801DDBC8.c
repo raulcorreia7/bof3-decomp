@@ -6,6 +6,6 @@
 MATCH void func_801DDBC8(void) {
     Callback handler;
 
-    handler = D_801E2304[TASK(Actor)->unk_03];
+    handler = D_801E2304[SELF(Actor)->unk_03];
     handler();
 }

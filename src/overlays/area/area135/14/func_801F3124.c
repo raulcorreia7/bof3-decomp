@@ -11,19 +11,19 @@ MATCH void func_801F3124(void) {
     GFX_AddDitheredDrawMode(3, tpage);
     func_801F32A0(0);
     jitter                        = (g_FrameCount & 0xF) << 20;
-    TASK(Actor)->tint.bytes.rgb.r = 0;
-    height                        = TASK(Actor)->pos.z.fixed - jitter;
-    while (TASK(Actor)->vz < height) {
-        func_801F3308(TASK(Actor)->pos.x.fixed, TASK(Actor)->pos.y.fixed, height, 1);
-        TASK(Actor)->tint.bytes.rgb.r += 0x2A;
-        if (TASK(Actor)->tint.bytes.rgb.r > 0x80) {
-            TASK(Actor)->tint.steps.delta.r = -0x80;
+    SELF(Actor)->tint.bytes.rgb.r = 0;
+    height                        = SELF(Actor)->pos.z.fixed - jitter;
+    while (SELF(Actor)->vz < height) {
+        func_801F3308(SELF(Actor)->pos.x.fixed, SELF(Actor)->pos.y.fixed, height, 1);
+        SELF(Actor)->tint.bytes.rgb.r += 0x2A;
+        if (SELF(Actor)->tint.bytes.rgb.r > 0x80) {
+            SELF(Actor)->tint.steps.delta.r = -0x80;
         }
         height -= TO_COORD(256);
     }
-    TASK(Actor)->tint.steps.delta.r = -1;
-    func_801F3308(TASK(Actor)->pos.x.fixed, TASK(Actor)->pos.y.fixed, TASK(Actor)->vz, 0);
+    SELF(Actor)->tint.steps.delta.r = -1;
+    func_801F3308(SELF(Actor)->pos.x.fixed, SELF(Actor)->pos.y.fixed, SELF(Actor)->vz, 0);
     if (g_ScriptVars[3] == 0xE) {
-        TASK(Actor)->header.mode = 1;
+        SELF(Actor)->header.mode = 1;
     }
 }

@@ -6,7 +6,7 @@
 MATCH void Effect_StartOnZeroTick(void) {
     u16* flags;
 
-    if (TASK(PartyMember)->param.unk_0B == 0) {
+    if (SELF(PartyMember)->param.unk_0B == 0) {
         BATTLE_RAISE_STATE(BATTLE_STATE_EFFECT_PLAYING);
         Effect_Reset();
     }

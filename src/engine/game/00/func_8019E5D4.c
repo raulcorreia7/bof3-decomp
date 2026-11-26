@@ -6,19 +6,19 @@ MATCH void func_8019E5D4(void) {
 
     Area_SceneSelectRecord(0x18);
 
-    TASK(Actor)->active_flags = 0;
-    TASK(Actor)->mirror       = 0;
-    TASK(Actor)->unk_2B++;
-    TASK(Actor)->unk_48 = 0;
+    SELF(Actor)->active_flags = 0;
+    SELF(Actor)->mirror       = 0;
+    SELF(Actor)->unk_2B++;
+    SELF(Actor)->unk_48 = 0;
 
     value = rand();
     {
-        Actor* coord = TASK(Actor);
+        Actor* coord = SELF(Actor);
         coord->pos.x.fixed += value & HALF_MASK;
     }
     value = rand();
     {
-        Actor* record   = TASK(Actor);
+        Actor* record   = SELF(Actor);
         record->gravity = -8;
         record->vz      = 0;
         record->pos.y.fixed += value & HALF_MASK;
@@ -36,5 +36,5 @@ MATCH void func_8019E5D4(void) {
 
     ACTOR_CLEAR_TINT();
     Script_Select(sel + 0xB);
-    TASK(Actor)->header.step++;
+    SELF(Actor)->header.step++;
 }

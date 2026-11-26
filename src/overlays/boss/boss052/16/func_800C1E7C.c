@@ -4,12 +4,12 @@ MATCH void func_800C1E7C(void) {
     Actor* work;
     u8     delay;
 
-    work  = TASK(Actor);
+    work  = SELF(Actor);
     delay = work->timer;
     if (delay != 0xFF) {
         if (delay == 0) {
             SND_SEPlay(EMI_SE_ID(SND_BANK_ENEMY, 3));
-            TASK(Actor)->timer = 255;
+            SELF(Actor)->timer = 255;
         } else {
             work->timer = delay - 1;
         }
@@ -17,6 +17,6 @@ MATCH void func_800C1E7C(void) {
     Script_AnimStepLoop();
     Area_AddActor();
     if (g_Battle.flags & BATTLE_STATE_EFFECT_PLAYING) {
-        TASK(Actor)->header.step++;
+        SELF(Actor)->header.step++;
     }
 }

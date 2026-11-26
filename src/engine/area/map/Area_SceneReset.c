@@ -8,7 +8,7 @@ MATCH void Area_SceneReset(void) {
     Actor*       work;
     PartyMember* mode_work;
 
-    work                    = TASK(Actor);
+    work                    = SELF(Actor);
     mode_work               = g_Game.current;
     g_AreaCameraSpeed       = 0;
     g_AreaCameraHeightDelta = 0;
@@ -17,6 +17,6 @@ MATCH void Area_SceneReset(void) {
     if (g_Game.input & INPUT_DIRECTIONAL) {
         func_80167428();
     } else {
-        TASK(Actor)->header.mode = 1;
+        SELF(Actor)->header.mode = 1;
     }
 }

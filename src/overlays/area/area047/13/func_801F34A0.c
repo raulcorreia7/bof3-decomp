@@ -18,9 +18,9 @@ MATCH void func_801F34A0(void) {
     PushMatrix();
     GFX_ADD_DITHERED_DRAW_MODE(4, getTPage(TPAGE_DEPTH_8BIT, TPAGE_ABR_HALF, 320, 256));
     rotation.vx = rotation.vy = rotation.vz = 0;
-    position.vx                             = TASK(Actor)->pos.x.fixed;
-    position.vy                             = TASK(Actor)->pos.y.fixed;
-    position.vz                             = TASK(Actor)->pos.z.fixed;
+    position.vx                             = SELF(Actor)->pos.x.fixed;
+    position.vy                             = SELF(Actor)->pos.y.fixed;
+    position.vz                             = SELF(Actor)->pos.z.fixed;
     RotTransMatrix(&position, matrix, &flag);
     RotMatrix(&rotation, &matrix);
     MulMatrix2(&g_CameraMatrix, &matrix);

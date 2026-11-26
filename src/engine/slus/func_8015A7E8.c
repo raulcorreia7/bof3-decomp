@@ -13,7 +13,7 @@ MATCH void func_8015A7E8(void) {
     rec = (u8*)g_PartyActors;
     i   = 0;
     for (base = rec; (i & BYTE_MASK) < 4; i++, rec += ACTOR_SIZE) {
-        TASK_SET(rec);
+        SELF_SET(rec);
         g_CurrentActor = rec;
         if ((rec[0] & 0x1) == 0) {
             continue;
@@ -34,6 +34,6 @@ MATCH void func_8015A7E8(void) {
             func_801A3A08();
             continue;
         }
-        g_ActorModes[TASK(Actor)->header.mode]((u8*)((i & BYTE_MASK) * ACTOR_SIZE + (u32)base));
+        g_ActorModes[SELF(Actor)->header.mode]((u8*)((i & BYTE_MASK) * ACTOR_SIZE + (u32)base));
     }
 }

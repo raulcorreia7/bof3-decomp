@@ -5,12 +5,12 @@ MATCH void func_8019E36C(void) {
     s16 dist;
     s16 limit;
 
-    add             = TASK(Actor)->vz + TASK(Actor)->gravity;
-    TASK(Actor)->vz = add;
-    COORD_INT(TASK(Actor)->pos.z) += add;
+    add             = SELF(Actor)->vz + SELF(Actor)->gravity;
+    SELF(Actor)->vz = add;
+    COORD_INT(SELF(Actor)->pos.z) += add;
     Script_AnimStepLoop();
-    dist  = Area_HeightSample(TASK(Actor)->pos.x.fixed, TASK(Actor)->pos.y.fixed);
-    limit = COORD_INT(TASK(Actor)->pos.z);
+    dist  = Area_HeightSample(SELF(Actor)->pos.x.fixed, SELF(Actor)->pos.y.fixed);
+    limit = COORD_INT(SELF(Actor)->pos.z);
     if (dist >= limit) {
         Actor_Clear();
         return;

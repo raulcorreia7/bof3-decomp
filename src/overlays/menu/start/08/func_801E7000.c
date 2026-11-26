@@ -14,11 +14,11 @@ MATCH void func_801E7000(void) {
     Menu_DrawNameEntryControls(D_801ED7E8, 0xA8, 0x2B);
     Menu_DrawWindowFrame(18, 97, 36, 17);
     Menu_DrawNameEntryGrid(D_801ED7E8, 0x18, 0x67);
-    TASK(Actor)->timer = TASK(Actor)->timer + 1;
-    if (TASK(Actor)->timer >= 10) {
-        TASK(Actor)->timer  = 0;
-        TASK(Actor)->unk_06 = (TASK(Actor)->unk_06 + 1) & 0x7;
-        Script_Select((TASK(Actor)->unk_06 + 8) & BYTE_MASK);
+    SELF(Actor)->timer = SELF(Actor)->timer + 1;
+    if (SELF(Actor)->timer >= 10) {
+        SELF(Actor)->timer  = 0;
+        SELF(Actor)->unk_06 = (SELF(Actor)->unk_06 + 1) & 0x7;
+        Script_Select((SELF(Actor)->unk_06 + 8) & BYTE_MASK);
     }
     Area_AddActor();
     Script_AnimStepLoop();

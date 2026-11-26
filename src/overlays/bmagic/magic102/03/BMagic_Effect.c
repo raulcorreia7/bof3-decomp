@@ -37,8 +37,8 @@ MATCH void func_801EEC80(void) {
     offset                          = D_801F0CBC * 2;
     D_801F0CC4                      = g_AreaTargetCellX + D_801F0C94[offset];
     D_801F0CC8                      = g_AreaTargetCellY + D_801F0C94[offset + 1];
-    TASK(PartyMember)->param.unk_0B = 0;
-    TASK(PartyMember)->unk_09       = 0;
+    SELF(PartyMember)->param.unk_0B = 0;
+    SELF(PartyMember)->unk_09       = 0;
     for (i = 0; i < BATTLE_PARTY_CHARACTERS_COUNT; i++) {
         if (g_Game.members[i].header.flags) {
             D_801F0ECC[i] = COORD_INT(g_Game.members[i].pos.z) - Area_HeightSample(g_BattleEffects[i].pos.x.fixed, g_BattleEffects[i].pos.y.fixed);
@@ -108,7 +108,7 @@ MATCH void func_801EEC80(void) {
             break;
     }
     SND_SEQueueSelection(0x100);
-    TASK(PartyMember)->header.mode += 1;
+    SELF(PartyMember)->header.mode += 1;
 }
 
 /* Counts this effect's steps; at the tick limit it re-arms the counter, steps
@@ -117,14 +117,14 @@ MATCH void func_801EF218(void) {
     PartyMember* work;
     u8           tick;
 
-    work         = TASK(PartyMember);
+    work         = SELF(PartyMember);
     tick         = work->unk_09 + EFFECT_TICK_INCREMENT;
     work->unk_09 = tick;
     if (tick >= EFFECT_TICK_LIMIT) {
-        TASK(PartyMember)->unk_09 = 0;
-        TASK(PartyMember)->header.mode += 1;
+        SELF(PartyMember)->unk_09 = 0;
+        SELF(PartyMember)->header.mode += 1;
     }
-    g_AreaCameraOffsetY      = (((g_FrameCount & 0x1) * 2) - 1) * (TASK(PartyMember)->unk_09 >> 1);
+    g_AreaCameraOffsetY      = (((g_FrameCount & 0x1) * 2) - 1) * (SELF(PartyMember)->unk_09 >> 1);
     g_AreaCameraRefreshCount = 2;
 }
 
@@ -139,8 +139,8 @@ MATCH void func_801EF2B8(void) {
     s32 fall;
 
     for (i = 0; i < 16; i++) {
-        rise = (rsin(((TASK(PartyMember)->unk_09 << 7) + (i << 8)) & ANGLE_MASK) >> 8) - (rsin((((TASK(PartyMember)->unk_09 - 1) << 7) + (i << 8)) & ANGLE_MASK) >> 8);
-        fall = (rsin(((TASK(PartyMember)->unk_09 << 7) + ((i + 1) << 8)) & ANGLE_MASK) >> 8) - (rsin((((TASK(PartyMember)->unk_09 - 1) << 7) + ((i + 1) << 8)) & ANGLE_MASK) >> 8);
+        rise = (rsin(((SELF(PartyMember)->unk_09 << 7) + (i << 8)) & ANGLE_MASK) >> 8) - (rsin((((SELF(PartyMember)->unk_09 - 1) << 7) + (i << 8)) & ANGLE_MASK) >> 8);
+        fall = (rsin(((SELF(PartyMember)->unk_09 << 7) + ((i + 1) << 8)) & ANGLE_MASK) >> 8) - (rsin((((SELF(PartyMember)->unk_09 - 1) << 7) + ((i + 1) << 8)) & ANGLE_MASK) >> 8);
         if (i == 0) {
             rise = 0;
         }
@@ -203,7 +203,7 @@ MATCH void func_801EF2B8(void) {
     }
     g_AreaCameraRefreshCount = 2;
     g_AreaCameraOffsetY      = (((g_FrameCount & 1) * 2) - 1) * 8;
-    TASK(PartyMember)->unk_09++;
+    SELF(PartyMember)->unk_09++;
     for (i = 0; i < 16; i++) {
         for (j = 0; j < 14; j++) {
             if (D_801F0CCC[i][j] != 0) {
@@ -211,8 +211,8 @@ MATCH void func_801EF2B8(void) {
             }
         }
     }
-    if (TASK(PartyMember)->unk_09 >= 0x5B) {
-        TASK(PartyMember)->header.mode++;
+    if (SELF(PartyMember)->unk_09 >= 0x5B) {
+        SELF(PartyMember)->header.mode++;
     }
 }
 

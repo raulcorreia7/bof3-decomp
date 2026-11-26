@@ -4,5 +4,5 @@
  * jump table. */
 /* func_801D2978 */
 MATCH void Fishing_ActorRun(void) {
-    g_FishingActorRunHandlers[TASK(FishingState)->handler_index]();
+    g_FishingActorRunHandlers[SELF(FishingState)->handler_index]();
 }

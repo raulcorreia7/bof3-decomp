@@ -4,5 +4,5 @@
 MATCH void Battle_UpdateFormChange(void) {
     BattleFormChangeSteps table = g_BattleFormChangeSteps;
 
-    table.modes[TASK(PartyMember)->header.mode]();
+    table.modes[SELF(PartyMember)->header.mode]();
 }

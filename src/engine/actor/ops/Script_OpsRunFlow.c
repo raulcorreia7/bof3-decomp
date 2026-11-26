@@ -99,7 +99,7 @@ MATCH u8 Script_OpsRunFlow(ScriptState* state, u8* base, s32 seed) {
                 case ACTOR_SCRIPT_FLOW_CALL_AREA_SCRIPT:
                     area = g_AreaLoads[g_GameAreaId];
                     ((AreaScriptCallback*)area->unk_3C)[(base + state->cursor)[1]](area);
-                    sel = TASK(Actor)->direction;
+                    sel = SELF(Actor)->direction;
                     state->cursor += 2;
                     break;
                 case ACTOR_SCRIPT_FLOW_SKIP:
@@ -124,11 +124,11 @@ MATCH u8 Script_OpsRunFlow(ScriptState* state, u8* base, s32 seed) {
                         g_ScrollHeight           = Area_HeightSample(g_PartyPos.x.fixed, g_PartyPos.y.fixed);
                         sel                      = 0xFF;
                     } else {
-                        COORD_INT(TASK(Actor)->pos.x)  = (base + state->cursor)[1];
-                        COORD_FRAC(TASK(Actor)->pos.x) = ((base + state->cursor)[2] != 0) << 0xF;
-                        COORD_INT(TASK(Actor)->pos.y)  = (base + state->cursor)[3];
-                        COORD_FRAC(TASK(Actor)->pos.y) = ((base + state->cursor)[4] != 0) << 0xF;
-                        COORD_INT(TASK(Actor)->pos.z)  = Area_HeightSample(TASK(Actor)->pos.x.fixed, TASK(Actor)->pos.y.fixed);
+                        COORD_INT(SELF(Actor)->pos.x)  = (base + state->cursor)[1];
+                        COORD_FRAC(SELF(Actor)->pos.x) = ((base + state->cursor)[2] != 0) << 0xF;
+                        COORD_INT(SELF(Actor)->pos.y)  = (base + state->cursor)[3];
+                        COORD_FRAC(SELF(Actor)->pos.y) = ((base + state->cursor)[4] != 0) << 0xF;
+                        COORD_INT(SELF(Actor)->pos.z)  = Area_HeightSample(SELF(Actor)->pos.x.fixed, SELF(Actor)->pos.y.fixed);
                     }
                     state->cursor += 5;
                     break;
@@ -139,12 +139,12 @@ MATCH u8 Script_OpsRunFlow(ScriptState* state, u8* base, s32 seed) {
                     left = ((TalkMessageRow*)s_TalkMessageIds)[base[state->cursor + 1]].ids[g_GameState->chr.character_id];
                 run_script:
                     state->flags |= 0x40;
-                    TASK(Actor)->option_flags |= ACTOR_OPT_ROUTE_LOCKED;
+                    SELF(Actor)->option_flags |= ACTOR_OPT_ROUTE_LOCKED;
                     if ((base[state->cursor + 3] & 1) != 0)
-                        TASK(Actor)->header.flags |= ACTOR_FLAG_STEP_MOVE;
+                        SELF(Actor)->header.flags |= ACTOR_FLAG_STEP_MOVE;
                     else
-                        TASK(Actor)->header.flags &= ~ACTOR_FLAG_STEP_MOVE;
-                    TASK(Actor)->mirror = base[state->cursor + 2];
+                        SELF(Actor)->header.flags &= ~ACTOR_FLAG_STEP_MOVE;
+                    SELF(Actor)->mirror = base[state->cursor + 2];
                     if ((base[state->cursor + 3] & 2) != 0) {
                         Script_Begin((u8)(left & BYTE_MASK), base[state->cursor + 4]);
                         state->cursor += 1;

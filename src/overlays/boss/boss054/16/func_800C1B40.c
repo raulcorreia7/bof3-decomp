@@ -3,11 +3,11 @@
 MATCH void func_800C1B40(void) {
     PartyMember* saved;
 
-    saved = TASK(PartyMember);
-    TASK_SET((D_801EC2E0->target.bytes));
+    saved = SELF(PartyMember);
+    SELF_SET((D_801EC2E0->target.bytes));
     if (Script_AnimStepOnce() & BYTE_MASK) {
         saved->timer = 0;
         saved->header.mode++;
     }
-    TASK_SET(saved);
+    SELF_SET(saved);
 }

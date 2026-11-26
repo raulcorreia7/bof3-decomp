@@ -2,7 +2,7 @@
 /* func_801EEE5C (magic066), func_801EEE84 (magic078), func_801EF168 (magic086), func_801EED40 (magic107), func_801EED1C
    (magic108), func_801EEFB0 (magic120), func_801EEE08 (magic121), func_801EEDFC (magic122) */
 MATCH void Effect_PlayOnIdleTick(void) {
-    if (TASK(PartyMember)->param.unk_0B == 0xFF) {
+    if (SELF(PartyMember)->param.unk_0B == 0xFF) {
         Battle_MarkDamaged(g_Battle.target_selector);
         g_Battle.flags |= BATTLE_STATE_EFFECT_PLAYING;
         Effect_Reset();

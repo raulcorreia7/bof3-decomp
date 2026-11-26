@@ -37,16 +37,16 @@ MATCH void BMagic_ShadowBreathInit(void) {
     }
     Battle_CenterCamera();
     Battle_ProjectRange();
-    TASK(PartyMember)->param.unk_0B = 0;
-    TASK(PartyMember)->unk_09       = 0;
-    TASK(PartyMember)->header.mode += 1;
+    SELF(PartyMember)->param.unk_0B = 0;
+    SELF(PartyMember)->unk_09       = 0;
+    SELF(PartyMember)->header.mode += 1;
     for (i = 0; i < BMAGIC_SHADOW_BREATH_ORB_COUNT; i++) {
         slot                               = Battle_AllocEffect(1, BMAGIC_EFFECT_SHADOW_BREATH);
-        g_BattleEffects[slot].target.party = TASK(PartyMember);
+        g_BattleEffects[slot].target.party = SELF(PartyMember);
         g_BattleEffects[slot].header.mode  = BMAGIC_SHADOW_BREATH_EFFECT_ORB;
         g_BattleEffects[slot].unk_0B       = i;
         g_BattleEffects[slot].arg.unk_09   = i + 1;
-        TASK(PartyMember)->param.unk_0B += 1;
+        SELF(PartyMember)->param.unk_0B += 1;
     }
     SND_SEQueueSelection(EMI_SE_ID(SND_BANK_COMMON, 0x02));
     for (i = 0; i < AREA_PALETTE_COLORS; i++) {
@@ -62,8 +62,8 @@ MATCH void BMagic_ShadowBreathInit(void) {
 
 /* func_801EEF14 */
 MATCH void BMagic_ShadowBreathGlowUpdate(void) {
-    SYS_DISPATCH_BYTE(g_BMagicShadowBreathGlowSteps, TASK(PartyMember)->header.step);
-    if (TASK(PartyMember)->header.flags != 0 && TASK(PartyMember)->header.step != 0) {
+    SYS_DISPATCH_BYTE(g_BMagicShadowBreathGlowSteps, SELF(PartyMember)->header.step);
+    if (SELF(PartyMember)->header.flags != 0 && SELF(PartyMember)->header.step != 0) {
         Effect_SetActorMatrix();
         BMagic_DrawGlowRingOuter();
         BMagic_DrawGlowRingInner();
@@ -76,9 +76,9 @@ MATCH void BMagic_ShadowBreathGlowUpdate(void) {
 
 /* func_801EF00C */
 MATCH void BMagic_ShadowBreathGlowGrow(void) {
-    TASK(PartyMember)->unk_09 += 2;
-    TASK(PartyMember)->timer += 24;
-    if (TASK(PartyMember)->unk_09 == 0x10) {
+    SELF(PartyMember)->unk_09 += 2;
+    SELF(PartyMember)->timer += 24;
+    if (SELF(PartyMember)->unk_09 == 0x10) {
         BMagic_NextStep();
     }
 }
@@ -106,10 +106,10 @@ MATCH void BMagic_ShadowBreathDrawShadow(void) {
 
     tpage = getTPage(TPAGE_DEPTH_4BIT, TPAGE_ABR_SUB, 320, 256);
     GFX_ADD_DITHERED_DRAW_MODE(BMAGIC_LAYER_BEHIND_BATTLERS, tpage);
-    GLOW_RING_INNER = TASK(PartyMember)->timer * 2;
-    GLOW_RING_RED   = TASK(PartyMember)->unk_09 * 12;
-    GLOW_RING_GREEN = TASK(PartyMember)->unk_09 * 12;
-    GLOW_RING_BLUE  = TASK(PartyMember)->unk_09 * 12;
+    GLOW_RING_INNER = SELF(PartyMember)->timer * 2;
+    GLOW_RING_RED   = SELF(PartyMember)->unk_09 * 12;
+    GLOW_RING_GREEN = SELF(PartyMember)->unk_09 * 12;
+    GLOW_RING_BLUE  = SELF(PartyMember)->unk_09 * 12;
     setVector(&g_ScratchPadVectors[2], FIXED_MUL(rsin(0), GLOW_RING_INNER), FIXED_MUL(rcos(0), GLOW_RING_INNER), 0);
     g_ScratchPadVectors[1].vz = 0;
     g_ScratchPadVectors[0].vz = 0;
@@ -135,11 +135,11 @@ MATCH void BMagic_DrawGlowRingOuter(void) {
     s32      i;
 
     GFX_AddDitheredDrawMode(BMAGIC_LAYER_BEHIND_BATTLERS, getTPage(TPAGE_DEPTH_4BIT, TPAGE_ABR_ADD, 320, 256));
-    GLOW_RING_INNER           = TASK(PartyMember)->timer * 2;
-    GLOW_RING_OUTER           = TASK(PartyMember)->timer * 3 + (RANDOM_MASK(3));
-    GLOW_RING_RED             = TASK(PartyMember)->unk_09 * 15;
-    GLOW_RING_GREEN           = TASK(PartyMember)->unk_09 * 4;
-    GLOW_RING_BLUE            = TASK(PartyMember)->unk_09 * 15;
+    GLOW_RING_INNER           = SELF(PartyMember)->timer * 2;
+    GLOW_RING_OUTER           = SELF(PartyMember)->timer * 3 + (RANDOM_MASK(3));
+    GLOW_RING_RED             = SELF(PartyMember)->unk_09 * 15;
+    GLOW_RING_GREEN           = SELF(PartyMember)->unk_09 * 4;
+    GLOW_RING_BLUE            = SELF(PartyMember)->unk_09 * 15;
     g_ScratchPadVectors[1].vx = FIXED_MUL(rsin(0), GLOW_RING_OUTER);
     g_ScratchPadVectors[1].vy = FIXED_MUL(rcos(0), GLOW_RING_OUTER);
     setVector(&g_ScratchPadVectors[3], FIXED_MUL(rsin(0), GLOW_RING_INNER), FIXED_MUL(rcos(0), GLOW_RING_INNER), 0);
@@ -174,11 +174,11 @@ MATCH void BMagic_DrawGlowRingInner(void) {
     s32      i;
 
     GFX_AddDitheredDrawMode(BMAGIC_LAYER_BEHIND_BATTLERS, getTPage(TPAGE_DEPTH_4BIT, TPAGE_ABR_ADD, 320, 256));
-    GLOW_RING_INNER           = TASK(PartyMember)->timer;
-    GLOW_RING_OUTER           = TASK(PartyMember)->timer * 2;
-    GLOW_RING_RED             = TASK(PartyMember)->unk_09 * 15;
-    GLOW_RING_GREEN           = TASK(PartyMember)->unk_09 * 4;
-    GLOW_RING_BLUE            = TASK(PartyMember)->unk_09 * 15;
+    GLOW_RING_INNER           = SELF(PartyMember)->timer;
+    GLOW_RING_OUTER           = SELF(PartyMember)->timer * 2;
+    GLOW_RING_RED             = SELF(PartyMember)->unk_09 * 15;
+    GLOW_RING_GREEN           = SELF(PartyMember)->unk_09 * 4;
+    GLOW_RING_BLUE            = SELF(PartyMember)->unk_09 * 15;
     g_ScratchPadVectors[1].vx = FIXED_MUL(rsin(0), GLOW_RING_OUTER);
     g_ScratchPadVectors[1].vy = FIXED_MUL(rcos(0), GLOW_RING_OUTER);
     setVector(&g_ScratchPadVectors[3], FIXED_MUL(rsin(0), GLOW_RING_INNER), FIXED_MUL(rcos(0), GLOW_RING_INNER), 0);
@@ -207,8 +207,8 @@ MATCH void BMagic_DrawGlowRingInner(void) {
 
 /* func_801EFAF4 */
 MATCH void BMagic_ShadowBreathPillarUpdate(void) {
-    SYS_DISPATCH_BYTE(g_BMagicShadowBreathPillarSteps, TASK(PartyMember)->header.step);
-    if (TASK(PartyMember)->header.flags != 0 && TASK(PartyMember)->header.step != 0) {
+    SYS_DISPATCH_BYTE(g_BMagicShadowBreathPillarSteps, SELF(PartyMember)->header.step);
+    if (SELF(PartyMember)->header.flags != 0 && SELF(PartyMember)->header.step != 0) {
         Battle_ProjectRange();
         BMagic_ShadowBreathDrawPillar();
     }
@@ -216,24 +216,24 @@ MATCH void BMagic_ShadowBreathPillarUpdate(void) {
 
 /* func_801EFB74 */
 MATCH void BMagic_ShadowBreathPillarStart(void) {
-    u8           timer = TASK(PartyMember)->unk_09 - 1;
+    u8           timer = SELF(PartyMember)->unk_09 - 1;
     PartyMember* work;
     PartyMember* actor;
     s32          z;
 
-    TASK(PartyMember)->unk_09 = timer;
+    SELF(PartyMember)->unk_09 = timer;
     if (timer == 0) {
         SND_SEQueueSelection(EMI_SE_ID(SND_BANK_COMMON, 0x00));
-        work                      = TASK(PartyMember);
+        work                      = SELF(PartyMember);
         actor                     = g_BattleEffectBattler;
         work->pos.x.fixed         = actor->pos.x.fixed;
         work->pos.y.fixed         = actor->pos.y.fixed;
         z                         = actor->pos.z.fixed;
         work->param.unk_0B        = 0;
         work->pos.z.fixed         = z;
-        TASK(PartyMember)->unk_09 = 0x14;
-        TASK(PartyMember)->timer  = 0;
-        TASK(PartyMember)->header.step += 1;
+        SELF(PartyMember)->unk_09 = 0x14;
+        SELF(PartyMember)->timer  = 0;
+        SELF(PartyMember)->header.step += 1;
     }
 }
 
@@ -257,13 +257,13 @@ MATCH void BMagic_ShadowBreathDrawPillar(void) {
     s32       tpage;
 
     g_ScratchPad.cells.halves[0] = 40;
-    g_ScratchPad.cells.halves[1] = TASK(PartyMember)->unk_09;
-    g_ScratchPad.cells.halves[2] = TASK(PartyMember)->timer * 8;
-    g_ScratchPad.cells.halves[6] = TASK(PartyMember)->screen_x.value;
-    g_ScratchPad.cells.halves[7] = TASK(PartyMember)->screen_y.value;
+    g_ScratchPad.cells.halves[1] = SELF(PartyMember)->unk_09;
+    g_ScratchPad.cells.halves[2] = SELF(PartyMember)->timer * 8;
+    g_ScratchPad.cells.halves[6] = SELF(PartyMember)->screen_x.value;
+    g_ScratchPad.cells.halves[7] = SELF(PartyMember)->screen_y.value;
     tpage                        = getTPage(TPAGE_DEPTH_8BIT, TPAGE_ABR_ADD, 320, 256);
     SetDrawMode((DR_MODE*)g_GfxPrimCursor, 0, 1, tpage, 0);
-    Area_CellAddPrim(TASK(PartyMember)->pos.x.fixed, TASK(PartyMember)->pos.y.fixed, 2, sizeof(DR_MODE));
+    Area_CellAddPrim(SELF(PartyMember)->pos.x.fixed, SELF(PartyMember)->pos.y.fixed, 2, sizeof(DR_MODE));
     prim = (POLY_GT4*)g_GfxPrimCursor;
     SetPolyGT4(prim);
     SetSemiTrans(prim, 1);
@@ -275,7 +275,7 @@ MATCH void BMagic_ShadowBreathDrawPillar(void) {
     setClut(prim, 0, 506);
     setUV4(prim, 8, 8, 87, 8, 8, g_ScratchPad.cells.halves[1] + 8, 87, g_ScratchPad.cells.halves[1] + 8);
     GFX_SET_RGB_ALL(prim, g_ScratchPad.cells.halves[2], g_ScratchPad.cells.halves[2], g_ScratchPad.cells.halves[2]);
-    Area_CellAddPrim(TASK(PartyMember)->pos.x.fixed, TASK(PartyMember)->pos.y.fixed, 2, sizeof(POLY_GT4));
+    Area_CellAddPrim(SELF(PartyMember)->pos.x.fixed, SELF(PartyMember)->pos.y.fixed, 2, sizeof(POLY_GT4));
     prim = (POLY_GT4*)g_GfxPrimCursor;
     SetPolyGT4(prim);
     SetSemiTrans(prim, 1);
@@ -289,13 +289,13 @@ MATCH void BMagic_ShadowBreathDrawPillar(void) {
     setRGB1(prim, g_ScratchPad.cells.halves[2], g_ScratchPad.cells.halves[2], g_ScratchPad.cells.halves[2]);
     setRGB2(prim, 1, 1, 1);
     setRGB3(prim, 1, 1, 1);
-    Area_CellAddPrim(TASK(PartyMember)->pos.x.fixed, TASK(PartyMember)->pos.y.fixed, 2, sizeof(POLY_GT4));
+    Area_CellAddPrim(SELF(PartyMember)->pos.x.fixed, SELF(PartyMember)->pos.y.fixed, 2, sizeof(POLY_GT4));
 }
 
 /* func_801F01C0 */
 MATCH void BMagic_ShadowBreathOrbUpdate(void) {
-    SYS_DISPATCH_BYTE(g_BMagicShadowBreathOrbSteps, TASK(PartyMember)->header.step);
-    if (TASK(PartyMember)->header.flags != 0 && TASK(PartyMember)->header.step != 0) {
+    SYS_DISPATCH_BYTE(g_BMagicShadowBreathOrbSteps, SELF(PartyMember)->header.step);
+    if (SELF(PartyMember)->header.flags != 0 && SELF(PartyMember)->header.step != 0) {
         Battle_ProjectRange();
         BMagic_ShadowBreathDrawOrb();
     }
@@ -306,11 +306,11 @@ MATCH void BMagic_ShadowBreathOrbStart(void) {
     PartyMember* work;
     u8           timer;
 
-    timer                     = TASK(PartyMember)->unk_09 - 1;
-    TASK(PartyMember)->unk_09 = timer;
+    timer                     = SELF(PartyMember)->unk_09 - 1;
+    SELF(PartyMember)->unk_09 = timer;
     if (timer == 0) {
-        TASK(PartyMember)->facing = g_BattleActiveActor->facing;
-        work                      = TASK(PartyMember);
+        SELF(PartyMember)->facing = g_BattleActiveActor->facing;
+        work                      = SELF(PartyMember);
         work->pos.x.fixed         = g_BattleActiveActor->pos.x.fixed;
         /* FAKE: retail re-reads the party cell for the next copy. */
         FAKE_BARRIER();
@@ -321,12 +321,12 @@ MATCH void BMagic_ShadowBreathOrbStart(void) {
         work->unk_0C      = 0x8000;
         work->unk_10      = 0;
         Effect_RotatePosition(work);
-        TASK(PartyMember)->pos.x.fixed += TASK(PartyMember)->unk_0C;
-        TASK(PartyMember)->pos.y.fixed += TASK(PartyMember)->unk_10;
-        TASK(PartyMember)->pos.z.fixed += 0x800000;
-        TASK(PartyMember)->unk_0C = ratan2(g_BattleEffectBattler->pos.x.fixed - TASK(PartyMember)->pos.x.fixed, g_BattleEffectBattler->pos.y.fixed - TASK(PartyMember)->pos.y.fixed);
-        TASK(PartyMember)->unk_09 = 0;
-        TASK(PartyMember)->header.step += 1;
+        SELF(PartyMember)->pos.x.fixed += SELF(PartyMember)->unk_0C;
+        SELF(PartyMember)->pos.y.fixed += SELF(PartyMember)->unk_10;
+        SELF(PartyMember)->pos.z.fixed += 0x800000;
+        SELF(PartyMember)->unk_0C = ratan2(g_BattleEffectBattler->pos.x.fixed - SELF(PartyMember)->pos.x.fixed, g_BattleEffectBattler->pos.y.fixed - SELF(PartyMember)->pos.y.fixed);
+        SELF(PartyMember)->unk_09 = 0;
+        SELF(PartyMember)->header.step += 1;
     }
 }
 
@@ -336,27 +336,27 @@ MATCH void BMagic_ShadowBreathOrbSeek(void) {
     u8  brightness;
     u8  scratch[16]; /* FAKE: unreferenced local pads the frame to 0x28. */
 
-    brightness = TASK(PartyMember)->unk_09;
+    brightness = SELF(PartyMember)->unk_09;
     if (brightness < 16) {
-        TASK(PartyMember)->unk_09 = brightness + 4;
+        SELF(PartyMember)->unk_09 = brightness + 4;
     }
 
     func_800AF2B4((BattleRange*)g_BattleEffectBattler, 0x60);
-    TASK(PartyMember)->unk_10 = TASK(PartyMember)->unk_0C;
-    TASK(PartyMember)->unk_0C = ratan2(g_BattleEffectBattler->pos.x.fixed - TASK(PartyMember)->pos.x.fixed, g_BattleEffectBattler->pos.y.fixed - TASK(PartyMember)->pos.y.fixed);
+    SELF(PartyMember)->unk_10 = SELF(PartyMember)->unk_0C;
+    SELF(PartyMember)->unk_0C = ratan2(g_BattleEffectBattler->pos.x.fixed - SELF(PartyMember)->pos.x.fixed, g_BattleEffectBattler->pos.y.fixed - SELF(PartyMember)->pos.y.fixed);
 
     if (func_800AF66C((BattleRange*)g_BattleEffectBattler, 0xC000) != 0) {
-        TASK(PartyMember)->header.step += 1;
+        SELF(PartyMember)->header.step += 1;
         return;
     }
 
-    diff                      = (TASK(PartyMember)->unk_10 & ANGLE_MASK) - (TASK(PartyMember)->unk_0C & ANGLE_MASK);
-    TASK(PartyMember)->unk_10 = diff;
+    diff                      = (SELF(PartyMember)->unk_10 & ANGLE_MASK) - (SELF(PartyMember)->unk_0C & ANGLE_MASK);
+    SELF(PartyMember)->unk_10 = diff;
     if (diff < 0) {
-        TASK(PartyMember)->unk_10 = ~diff + 1;
+        SELF(PartyMember)->unk_10 = ~diff + 1;
     }
-    if ((u32)(TASK(PartyMember)->unk_10 - 0x601) < 0x3FF) {
-        TASK(PartyMember)->header.step += 1;
+    if ((u32)(SELF(PartyMember)->unk_10 - 0x601) < 0x3FF) {
+        SELF(PartyMember)->header.step += 1;
     }
 }
 
@@ -365,7 +365,7 @@ MATCH void BMagic_ShadowBreathOrbBurst(void) {
     u8 slot;
     u8 i;
 
-    if (TASK(PartyMember)->param.unk_0B == 0) {
+    if (SELF(PartyMember)->param.unk_0B == 0) {
         SND_SEQueueSelection(EMI_SE_ID(SND_BANK_COMMON, 0x01));
         slot                               = Battle_AllocEffect(1, BMAGIC_EFFECT_SHADOW_BREATH);
         g_BattleEffects[slot].target.party = g_BattleEffectBattler;
@@ -386,7 +386,7 @@ MATCH void BMagic_ShadowBreathOrbBurst(void) {
         }
         Battle_ApplyDamageFlags(g_Battle.target_selector, 0x10);
     }
-    TASK(PartyMember)->header.step += 1;
+    SELF(PartyMember)->header.step += 1;
 }
 
 #include "overlays/bmagic/shared/Effect_TickOnTimerNegative.h"
@@ -401,11 +401,11 @@ MATCH void BMagic_ShadowBreathDrawOrb(void) {
     GFX_ADD_DITHERED_DRAW_MODE(BMAGIC_LAYER_OVER_BATTLERS, tpage);
     g_ScratchPad.cells.halves[2] = 0;
     g_ScratchPad.cells.halves[0] = 24;
-    g_ScratchPad.cells.halves[6] = TASK(PartyMember)->screen_x.value;
-    g_ScratchPad.cells.halves[7] = TASK(PartyMember)->screen_y.value;
-    g_ScratchPad.cells.halves[3] = TASK(PartyMember)->unk_09 * g_BMagicShadowBreathOrbTints[TASK(PartyMember)->param.unk_0B].r;
-    g_ScratchPad.cells.halves[4] = TASK(PartyMember)->unk_09;
-    g_ScratchPad.cells.halves[5] = TASK(PartyMember)->unk_09 * g_BMagicShadowBreathOrbTints[TASK(PartyMember)->param.unk_0B].b;
+    g_ScratchPad.cells.halves[6] = SELF(PartyMember)->screen_x.value;
+    g_ScratchPad.cells.halves[7] = SELF(PartyMember)->screen_y.value;
+    g_ScratchPad.cells.halves[3] = SELF(PartyMember)->unk_09 * g_BMagicShadowBreathOrbTints[SELF(PartyMember)->param.unk_0B].r;
+    g_ScratchPad.cells.halves[4] = SELF(PartyMember)->unk_09;
+    g_ScratchPad.cells.halves[5] = SELF(PartyMember)->unk_09 * g_BMagicShadowBreathOrbTints[SELF(PartyMember)->param.unk_0B].b;
     for (i = 0; i < 16; i++) {
         prim = (POLY_G3*)g_GfxPrimCursor;
         SetPolyG3(prim);

@@ -9,11 +9,11 @@ MATCH void func_801F3AD0(void) {
     s32    pair;
     s16    screen_y;
 
-    work                     = TASK(Actor);
+    work                     = SELF(Actor);
     entry                    = work->pos.x.part.integer;
     pair                     = entry * 2;
     work->direction          = work->pos.y.part.integer == 0;
-    cell                     = TASK(Actor);
+    cell                     = SELF(Actor);
     cell->pos.x.part.integer = AREA_PAYLOAD_FIELD(D_801F442C, u8, 0x38, pair);
     cell->pos.y.part.integer = AREA_PAYLOAD_FIELD(D_801F442C, u8, 0x39, pair);
     cell->pos.z.part.integer = AREA_PAYLOAD_FIELD(D_801F442C, u16, 0x30, pair);

@@ -13,24 +13,24 @@ MATCH void Party_FloorDamageUpdate(void) {
     if (flags & 0x400) {
         index = GAME_NONE;
     } else {
-        if (Game_TestMapCells(TASK(Actor)->pos.x.fixed, TASK(Actor)->pos.y.fixed, TASK(Actor)->voice_flags.scene_flag, 0x80, 0) & BYTE_MASK) {
+        if (Game_TestMapCells(SELF(Actor)->pos.x.fixed, SELF(Actor)->pos.y.fixed, SELF(Actor)->voice_flags.scene_flag, 0x80, 0) & BYTE_MASK) {
             index = PARTY_FLOOR_DAMAGE_HP_LIGHT;
-        } else if (Game_TestMapCells(TASK(Actor)->pos.x.fixed, TASK(Actor)->pos.y.fixed, TASK(Actor)->voice_flags.scene_flag, 0x81, 0) & BYTE_MASK) {
+        } else if (Game_TestMapCells(SELF(Actor)->pos.x.fixed, SELF(Actor)->pos.y.fixed, SELF(Actor)->voice_flags.scene_flag, 0x81, 0) & BYTE_MASK) {
             index = PARTY_FLOOR_DAMAGE_HP_MEDIUM;
-        } else if (Game_TestMapCells(TASK(Actor)->pos.x.fixed, TASK(Actor)->pos.y.fixed, TASK(Actor)->voice_flags.scene_flag, 0x82, 0) & BYTE_MASK) {
+        } else if (Game_TestMapCells(SELF(Actor)->pos.x.fixed, SELF(Actor)->pos.y.fixed, SELF(Actor)->voice_flags.scene_flag, 0x82, 0) & BYTE_MASK) {
             index = PARTY_FLOOR_DAMAGE_HP_HEAVY;
-        } else if (Game_TestMapCells(TASK(Actor)->pos.x.fixed, TASK(Actor)->pos.y.fixed, TASK(Actor)->voice_flags.scene_flag, 0x83, 0) & BYTE_MASK) {
+        } else if (Game_TestMapCells(SELF(Actor)->pos.x.fixed, SELF(Actor)->pos.y.fixed, SELF(Actor)->voice_flags.scene_flag, 0x83, 0) & BYTE_MASK) {
             index = PARTY_FLOOR_DAMAGE_HP_SEVERE;
-        } else if (Game_TestMapCells(TASK(Actor)->pos.x.fixed, TASK(Actor)->pos.y.fixed, TASK(Actor)->voice_flags.scene_flag, 0x84, 0) & BYTE_MASK) {
+        } else if (Game_TestMapCells(SELF(Actor)->pos.x.fixed, SELF(Actor)->pos.y.fixed, SELF(Actor)->voice_flags.scene_flag, 0x84, 0) & BYTE_MASK) {
             index = PARTY_FLOOR_DAMAGE_POISON;
-        } else if (Game_TestMapCells(TASK(Actor)->pos.x.fixed, TASK(Actor)->pos.y.fixed, TASK(Actor)->voice_flags.scene_flag, 0x85, 0) & BYTE_MASK) {
+        } else if (Game_TestMapCells(SELF(Actor)->pos.x.fixed, SELF(Actor)->pos.y.fixed, SELF(Actor)->voice_flags.scene_flag, 0x85, 0) & BYTE_MASK) {
             index = PARTY_FLOOR_DAMAGE_CONFUSION;
-        } else if (Game_TestMapCells(TASK(Actor)->pos.x.fixed, TASK(Actor)->pos.y.fixed, TASK(Actor)->voice_flags.scene_flag, 0x86, 0) & BYTE_MASK) {
+        } else if (Game_TestMapCells(SELF(Actor)->pos.x.fixed, SELF(Actor)->pos.y.fixed, SELF(Actor)->voice_flags.scene_flag, 0x86, 0) & BYTE_MASK) {
             index = PARTY_FLOOR_DAMAGE_AP_LIGHT;
-        } else if (Game_TestMapCells(TASK(Actor)->pos.x.fixed, TASK(Actor)->pos.y.fixed, TASK(Actor)->voice_flags.scene_flag, 0x87, 0) & BYTE_MASK) {
+        } else if (Game_TestMapCells(SELF(Actor)->pos.x.fixed, SELF(Actor)->pos.y.fixed, SELF(Actor)->voice_flags.scene_flag, 0x87, 0) & BYTE_MASK) {
             index = PARTY_FLOOR_DAMAGE_AP_MEDIUM;
         } else {
-            index = (Game_TestMapCells(TASK(Actor)->pos.x.fixed, TASK(Actor)->pos.y.fixed, TASK(Actor)->voice_flags.scene_flag, 0x88, 0) & BYTE_MASK) ? PARTY_FLOOR_DAMAGE_AP_HEAVY : GAME_NONE;
+            index = (Game_TestMapCells(SELF(Actor)->pos.x.fixed, SELF(Actor)->pos.y.fixed, SELF(Actor)->voice_flags.scene_flag, 0x88, 0) & BYTE_MASK) ? PARTY_FLOOR_DAMAGE_AP_HEAVY : GAME_NONE;
         }
     }
     if (index != GAME_NONE) {

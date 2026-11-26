@@ -1,7 +1,7 @@
 #include "game_00.h"
 
 MATCH void func_801BBFB4(void) {
-    Callback handler = D_801CD440[TASK(Actor)->header.step];
+    Callback handler = D_801CD440[SELF(Actor)->header.step];
     handler();
     Script_AnimStepLoop();
 }

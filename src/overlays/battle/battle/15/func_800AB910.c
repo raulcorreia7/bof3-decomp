@@ -9,7 +9,7 @@ MATCH void func_800AB910(void) {
     s32          panel_index;
 
     slot                               = Battle_AllocEffect(0, 3);
-    g_BattleEffects[slot].target.party = TASK(PartyMember);
+    g_BattleEffects[slot].target.party = SELF(PartyMember);
     target                             = g_Battle.active_battler;
     if ((u32)target < 3) {
         if (((BattleTurn*)D_80146390)->damage_flags.value & 2) {
@@ -24,7 +24,7 @@ MATCH void func_800AB910(void) {
             g_BattleEffects[slot].unk_07 = ENEMY_COMBATANT(target).unk_F1;
         }
     }
-    work = TASK(PartyMember);
+    work = SELF(PartyMember);
     if ((u32)work->slot < 3) {
         current                        = g_Game.current;
         g_BattleEffects[slot].screen_x = work->screen_x.value + (s8)g_BattlePanelOffsets[current->chr.character_id * 8 + work->facing * 2];

@@ -4,5 +4,5 @@
  * jump table. */
 /* func_801D42A0 */
 MATCH void Fishing_CatchPageRun(void) {
-    g_FishingSteps[TASK(FishingState)->handler_index]();
+    g_FishingSteps[SELF(FishingState)->handler_index]();
 }

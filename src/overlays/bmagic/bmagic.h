@@ -44,8 +44,8 @@ ASSERT_SIZE(BattleEffectTargetColumn, BATTLE_EFFECT_STRIDE);
  * member declares pos, rot, matrix and flags. SPAN_WORK is the work record
  * whose vertical span halves into the depth. */
 #define BMAGIC_PROJECT_ACTOR_MATRIX(SPAN_WORK)               \
-    pos.vx = (TASK(PartyMember)->pos.x.fixed >> 9) - 0x4000; \
-    pos.vy = (TASK(PartyMember)->pos.y.fixed >> 9) - 0x4000; \
+    pos.vx = (SELF(PartyMember)->pos.x.fixed >> 9) - 0x4000; \
+    pos.vy = (SELF(PartyMember)->pos.y.fixed >> 9) - 0x4000; \
     pos.vz = -COORD_INT((SPAN_WORK)->pos.z) / 2;             \
     RotTransMatrix(&pos, matrix, &flags);                    \
     Camera_SetModelMatrix(&rot, &matrix)
@@ -58,7 +58,7 @@ ASSERT_SIZE(BattleEffectTargetColumn, BATTLE_EFFECT_STRIDE);
     rot.vz = 0;                                 \
     BMAGIC_PROJECT_ACTOR_MATRIX(SPAN_WORK)
 
-#define BMAGIC_SET_ACTOR_MATRIX() BMAGIC_SET_ACTOR_MATRIX_SPAN(TASK(PartyMember))
+#define BMAGIC_SET_ACTOR_MATRIX() BMAGIC_SET_ACTOR_MATRIX_SPAN(SELF(PartyMember))
 
 /* Draw one part of an effect inside its actor matrix: set it, draw, restore. */
 #define BMAGIC_DRAW_IN_ACTOR_MATRIX(draw) \
@@ -68,25 +68,25 @@ ASSERT_SIZE(BattleEffectTargetColumn, BATTLE_EFFECT_STRIDE);
 
 /* Draw while the effect task is in use. */
 #define BMAGIC_DRAW_IF_ALIVE(draw)              \
-    if (TASK(PartyMember)->header.flags != 0) { \
+    if (SELF(PartyMember)->header.flags != 0) { \
         BMAGIC_DRAW_IN_ACTOR_MATRIX(draw);      \
     }
 
 /* Draw while the effect task is in use and past its setup step. */
 #define BMAGIC_DRAW_IF_RUNNING(draw)                                                   \
-    if (TASK(PartyMember)->header.flags != 0 && TASK(PartyMember)->header.step != 0) { \
+    if (SELF(PartyMember)->header.flags != 0 && SELF(PartyMember)->header.step != 0) { \
         BMAGIC_DRAW_IN_ACTOR_MATRIX(draw);                                             \
     }
 
 /* Run the step handler the table gives, then draw the effect while it is running. */
 #define BMAGIC_DISPATCH_AND_DRAW(table, draw)                 \
-    SYS_DISPATCH_BYTE(table, TASK(PartyMember)->header.step); \
+    SYS_DISPATCH_BYTE(table, SELF(PartyMember)->header.step); \
     BMAGIC_DRAW_IF_RUNNING(draw)
 
 /* Draw while the effect task is in use and past its setup step, in a matrix the
  * effect builds itself: set_matrix pushes it and PopMatrix restores. */
 #define BMAGIC_DRAW_IF_RUNNING_IN_OWN_MATRIX(set_matrix, draw)                         \
-    if (TASK(PartyMember)->header.flags != 0 && TASK(PartyMember)->header.step != 0) { \
+    if (SELF(PartyMember)->header.flags != 0 && SELF(PartyMember)->header.step != 0) { \
         set_matrix();                                                                  \
         draw();                                                                        \
         PopMatrix();                                                                   \
@@ -94,7 +94,7 @@ ASSERT_SIZE(BattleEffectTargetColumn, BATTLE_EFFECT_STRIDE);
 
 /* Run the step handler the table gives, then draw the running effect in its own matrix. */
 #define BMAGIC_DISPATCH_AND_DRAW_IN_OWN_MATRIX(table, set_matrix, draw) \
-    SYS_DISPATCH_BYTE(table, TASK(PartyMember)->header.step);           \
+    SYS_DISPATCH_BYTE(table, SELF(PartyMember)->header.step);           \
     BMAGIC_DRAW_IF_RUNNING_IN_OWN_MATRIX(set_matrix, draw)
 
 /* The battler the target selector names: a party member below
@@ -179,10 +179,10 @@ typedef Pos2 BMagicTrailPoint;
  * place toward the end, freeing the point at unk_0B. A statement macro: the
  * member declares s32 i. */
 #define BMAGIC_SHIFT_TRAIL(TRAIL)                                                                \
-    i = TASK(PartyMember)->timer - 1;                                                            \
-    while (i >= TASK(PartyMember)->param.unk_0B) {                                               \
-        (TRAIL)[TASK(PartyMember)->unk_04][i + 1].vx = (TRAIL)[TASK(PartyMember)->unk_04][i].vx; \
-        (TRAIL)[TASK(PartyMember)->unk_04][i + 1].vy = (TRAIL)[TASK(PartyMember)->unk_04][i].vy; \
+    i = SELF(PartyMember)->timer - 1;                                                            \
+    while (i >= SELF(PartyMember)->param.unk_0B) {                                               \
+        (TRAIL)[SELF(PartyMember)->unk_04][i + 1].vx = (TRAIL)[SELF(PartyMember)->unk_04][i].vx; \
+        (TRAIL)[SELF(PartyMember)->unk_04][i + 1].vy = (TRAIL)[SELF(PartyMember)->unk_04][i].vy; \
         i -= 1;                                                                                  \
     }
 
@@ -194,7 +194,7 @@ typedef Pos2 BMagicTrailPoint;
  * the frame is 56 bytes where retail has 48 (func_801EEC1C in magic086). */
 #define BMAGIC_DISPATCH_STEP_HANDLERS(table, field) \
     handlers = (table);                             \
-    handlers.steps[TASK(PartyMember)->field]()
+    handlers.steps[SELF(PartyMember)->field]()
 
 /* Copy the active battler's work image into a free effect slot. A statement
  * macro: the member declares u32 index, u8 active and BattleEffect* slot. */
@@ -219,18 +219,18 @@ typedef Pos2 BMagicTrailPoint;
 
 /* Go to the effect's next step. */
 static inline void BMagic_NextStep(void) {
-    PartyMember* work = TASK(PartyMember);
+    PartyMember* work = SELF(PartyMember);
 
     work->header.step = (u8)(work->header.step + 1);
 }
 
 /* Clear the local effect work. */
 static inline void BMagic_ResetLocalWork(void) {
-    TASK(PartyMember)->header.flags = 0;
-    TASK(PartyMember)->header.mode  = 0;
-    TASK(PartyMember)->header.step  = 0;
-    TASK(PartyMember)->unk_03       = 0;
-    TASK(PartyMember)->unk_04       = 0;
+    SELF(PartyMember)->header.flags = 0;
+    SELF(PartyMember)->header.mode  = 0;
+    SELF(PartyMember)->header.step  = 0;
+    SELF(PartyMember)->unk_03       = 0;
+    SELF(PartyMember)->unk_04       = 0;
 }
 
 /* Free every row of the image's effect slot table, counting with `i`. */
@@ -246,13 +246,13 @@ static inline void BMagic_ResetLocalWork(void) {
 #define BMAGIC_RUN_EFFECT_SLOTS(slots, handler)                \
     for (i = 0; i < BMAGIC_EFFECT_COUNT; i++) {                \
         if ((slots)[i].header.flags & BMAGIC_EFFECT_IN_USE) {  \
-            saved_task            = g_Task;                    \
+            saved_task            = g_Self;                    \
             saved_battler         = g_BattleEffectBattler;     \
-            g_Task                = (PartyMember*)&(slots)[i]; \
+            g_Self                = (PartyMember*)&(slots)[i]; \
             g_BattleEffectBattler = (slots)[i].target.party;   \
             handler();                                         \
             g_BattleEffectBattler = saved_battler;             \
-            g_Task                = saved_task;                \
+            g_Self                = saved_task;                \
         }                                                      \
     }
 
@@ -260,7 +260,7 @@ static inline void BMagic_ResetLocalWork(void) {
 static inline void BMagic_DispatchTaskPair(Callback first, Callback second) {
     Callback handlers[2] = {first, second};
 
-    handlers[TASK(PartyMember)->header.mode]();
+    handlers[SELF(PartyMember)->header.mode]();
 }
 
 /* Add `step` to the work counter, count the effect timer down and finish the
@@ -270,9 +270,9 @@ static inline void BMagic_CountDownEffectTimer(u8 step) {
     PartyMember* active;
     u8           count;
 
-    work = TASK(PartyMember);
+    work = SELF(PartyMember);
     work->unk_09 += step;
-    work        = TASK(PartyMember);
+    work        = SELF(PartyMember);
     count       = work->timer - 1;
     work->timer = count;
     if (count == 0) {
@@ -287,10 +287,10 @@ static inline void BMagic_CountDownEffectTimer(u8 step) {
 static inline void BMagic_AdvanceEffectStep(u8 limit) {
     PartyMember* work;
 
-    work = TASK(PartyMember);
+    work = SELF(PartyMember);
     if (work->param.unk_0B < limit) {
         work->unk_09      = 8;
-        work              = TASK(PartyMember);
+        work              = SELF(PartyMember);
         work->header.mode = work->header.mode + 1;
     }
 }
@@ -316,15 +316,15 @@ static inline void BMagic_AdvanceEffectStep(u8 limit) {
  * function is two instructions longer. */
 #define BMAGIC_SWING_CAMERA(settle_ticks)               \
     do {                                                \
-        if ((TASK(PartyMember)->unk_09 & 1) != 0) {     \
+        if ((SELF(PartyMember)->unk_09 & 1) != 0) {     \
             g_AreaCameraAngle.vx += 20;                 \
         } else {                                        \
             g_AreaCameraAngle.vx -= 20;                 \
         }                                               \
-        if (--TASK(PartyMember)->unk_09 == 0) {         \
+        if (--SELF(PartyMember)->unk_09 == 0) {         \
             g_AreaCameraAngle.vx      = -DEG(60);       \
-            TASK(PartyMember)->unk_09 = (settle_ticks); \
-            TASK(PartyMember)->header.step++;           \
+            SELF(PartyMember)->unk_09 = (settle_ticks); \
+            SELF(PartyMember)->header.step++;           \
         }                                               \
     } while (0)
 
@@ -526,17 +526,17 @@ void BMagic_DispatchEffectMode(void);
 /* Count the task timer up by `increment` and advance the step at `limit`. A statement macro: the member
  * declares u8 timer; `field` is the task's timer member in the image's task type. */
 #define BMAGIC_STEP_TIMER(field, increment, limit)                           \
-    timer                    = TASK(PartyMember)->field + (increment);       \
-    TASK(PartyMember)->field = timer;                                        \
+    timer                    = SELF(PartyMember)->field + (increment);       \
+    SELF(PartyMember)->field = timer;                                        \
     if (timer == (limit)) {                                                  \
-        TASK(PartyMember)->header.step = TASK(PartyMember)->header.step + 1; \
+        SELF(PartyMember)->header.step = SELF(PartyMember)->header.step + 1; \
     }
 
 #define EFFECT_ADVANCE_AT_COUNT(increment, limit)   \
     do {                                            \
-        TASK(PartyMember)->unk_09 += (increment);   \
-        if (TASK(PartyMember)->unk_09 == (limit)) { \
-            TASK(PartyMember)->header.step += 1;    \
+        SELF(PartyMember)->unk_09 += (increment);   \
+        if (SELF(PartyMember)->unk_09 == (limit)) { \
+            SELF(PartyMember)->header.step += 1;    \
         }                                           \
     } while (0)
 

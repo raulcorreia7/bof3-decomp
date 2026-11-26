@@ -8,14 +8,14 @@ __asm__(".include \"include/match/macro.inc\"\n");
 #include "overlays/scenario/shared/Scene_DispatchEntity.h"
 
 MATCH void func_801F71B8(void) {
-    SYS_DISPATCH_TASK(D_801FD184, 2, g_Task);
+    SYS_DISPATCH_TASK(D_801FD184, 2, g_Self);
 }
 
 MATCH void func_801F71FC(void) {
     Actor* actor;
 
     D_801FD288.half    = (RANDOM_MASK(1)) << 15;
-    actor              = TASK(Actor);
+    actor              = SELF(Actor);
     actor->header.step = actor->header.step + 1;
 }
 
@@ -33,7 +33,7 @@ MATCH void func_801F71FC(void) {
         }                                                                                           \
         high = (u16)D_801FD288.half >> 0xF;                                                         \
         if ((u32)(D_801FD288.half & BYTE_MASK) >= 0xC8U) {                                          \
-            actor = g_Task;                                                                         \
+            actor = g_Self;                                                                         \
             actor->header.step += 1;                                                                \
             return;                                                                                 \
         }                                                                                           \
@@ -69,7 +69,7 @@ MATCH void func_801F7348(void) {
 }
 
 MATCH void func_801F73CC(void) {
-    SYS_DISPATCH_TASK(D_801FD190, 2, g_Task);
+    SYS_DISPATCH_TASK(D_801FD190, 2, g_Self);
 }
 
 MATCH void func_801F7410(void) {
@@ -103,13 +103,13 @@ MATCH void func_801F75EC(void) {
 #include "shared/Menu_DrawHeaderBar.h"
 
 MATCH void func_801F7BA8(void) {
-    SYS_DISPATCH_TASK(D_801FD198, 1, g_Task);
+    SYS_DISPATCH_TASK(D_801FD198, 1, g_Self);
 }
 
 MATCH void func_801F7BEC(void) {
     Actor* actor;
 
-    actor              = TASK(Actor);
+    actor              = SELF(Actor);
     actor->screen_x    = 0;
     actor->header.mode = actor->header.mode + 1;
     SND_SEPlay(EMI_SE_ID(SND_BANK_AREA, 21));
@@ -122,20 +122,20 @@ MATCH void func_801F7C24(void) {
     s32    cos;
 
     setVector(&from, -0x6000, -0x12000, 1 << 24);
-    cos                      = rcos(TASK(Actor)->angle_z);
-    to.vx                    = (from.vx * cos - from.vy * rsin(TASK(Actor)->angle_z)) >> 12;
-    cos                      = rsin(TASK(Actor)->angle_z);
-    to.vy                    = (from.vx * cos + from.vy * rcos(TASK(Actor)->angle_z)) >> 12;
+    cos                      = rcos(SELF(Actor)->angle_z);
+    to.vx                    = (from.vx * cos - from.vy * rsin(SELF(Actor)->angle_z)) >> 12;
+    cos                      = rsin(SELF(Actor)->angle_z);
+    to.vy                    = (from.vx * cos + from.vy * rcos(SELF(Actor)->angle_z)) >> 12;
     to.vz                    = from.vz;
-    TASK(Actor)->pos.x.fixed = g_PartyActors[1].pos.x.fixed + to.vx;
-    TASK(Actor)->pos.y.fixed = g_PartyActors[1].pos.y.fixed + to.vy;
-    TASK(Actor)->pos.z.fixed = g_PartyActors[1].pos.z.fixed + to.vz;
-    setVector(TASK(Actor), g_PartyActors[1].pos.x.fixed + to.vx - ((s16)TASK(Actor)->screen_x << 15), g_PartyActors[1].pos.y.fixed + to.vy, g_PartyActors[1].pos.z.fixed + to.vz);
-    func_801F7E34(&TASK(Actor)->pos.x.fixed, &TASK(Actor)->vx, 0x40);
-    TASK(Actor)->screen_x += 1;
-    if ((s16)TASK(Actor)->screen_x == 330) {
+    SELF(Actor)->pos.x.fixed = g_PartyActors[1].pos.x.fixed + to.vx;
+    SELF(Actor)->pos.y.fixed = g_PartyActors[1].pos.y.fixed + to.vy;
+    SELF(Actor)->pos.z.fixed = g_PartyActors[1].pos.z.fixed + to.vz;
+    setVector(SELF(Actor), g_PartyActors[1].pos.x.fixed + to.vx - ((s16)SELF(Actor)->screen_x << 15), g_PartyActors[1].pos.y.fixed + to.vy, g_PartyActors[1].pos.z.fixed + to.vz);
+    func_801F7E34(&SELF(Actor)->pos.x.fixed, &SELF(Actor)->vx, 0x40);
+    SELF(Actor)->screen_x += 1;
+    if ((s16)SELF(Actor)->screen_x == 330) {
         SND_SEPlay(EMI_SE_ID(SND_BANK_AREA, 22));
-        TASK(Actor)->header.mode += 1;
+        SELF(Actor)->header.mode += 1;
     }
 }
 

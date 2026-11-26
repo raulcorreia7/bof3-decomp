@@ -111,7 +111,7 @@ typedef struct BattleStatDisplayTemplate {
 ASSERT_SIZE(BattleStatDisplayTemplate, 0x18);
 
 /* Battle-local work record (stride 0x140 at g_Game.members). Offsets 0x24..0x4B
- * are the g_Task stores in func_800ADD44 (retail asm byte/half/word
+ * are the g_Self stores in func_800ADD44 (retail asm byte/half/word
  * widths, matching its exact twin func_800ADA4C). +0x120/+0x124/+0x128 alias
  * D_80145FB0 (u8), D_80145FB4[i].flags (u32) and D_80145FB8[i].flags
  * (u32); 0x9F..0xA3 is the element-slot byte run Battle_GetFireResistance reads. */
@@ -1104,7 +1104,7 @@ static inline void Battle_DispatchEffect(BattleEffectSteps* table) {
     PartyMember*      work;
 
     handlers  = *table;
-    work      = TASK(PartyMember);
+    work      = SELF(PartyMember);
     g_Scripts = BATTLE_SCRIPT_TABLE;
     ((Callback*)&handlers)[work->header.mode]();
     g_Scripts = AREA_SCRIPT_TABLE;
@@ -1215,8 +1215,8 @@ static inline void BattleRunHandlerQuad(s32 offset) {
     PartyMember*    work;
 
     handlers = *(BattleTaskModes*)((Callback*)&D_800969B8 + offset);
-    handlers.modes[TASK(PartyMember)->header.mode]();
-    work = TASK(PartyMember);
+    handlers.modes[SELF(PartyMember)->header.mode]();
+    work = SELF(PartyMember);
     if ((work->header.flags != 0u) && (work->header.mode != 0u)) {
         func_800AE9C4(work->unk_04);
     }

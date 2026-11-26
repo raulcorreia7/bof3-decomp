@@ -10,5 +10,5 @@ MATCH void func_800C2158(void) {
     state = &g_Battle.flags;
     *state |= 0x800;
     g_BattleCurrentEnemy->turn.command.type = 0;
-    TASK(PartyMember)->header.step += 1;
+    SELF(PartyMember)->header.step += 1;
 }

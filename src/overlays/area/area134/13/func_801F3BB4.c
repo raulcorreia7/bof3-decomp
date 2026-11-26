@@ -6,14 +6,14 @@ MATCH void func_801F3BB4(void) {
     s32    i;
 
     i    = 0;
-    work = TASK(u8);
-    TASK_SET(&g_Actors[1]);
+    work = SELF(u8);
+    SELF_SET(&g_Actors[1]);
     actor = &g_Actors[1];
     do {
         actor->pos.y.fixed += -0x4000;
         i++;
     } while ((u8)i < 4);
     work[1] = 0x10;
-    g_Task  = work;
+    g_Self  = work;
     work[9] = 8;
 }

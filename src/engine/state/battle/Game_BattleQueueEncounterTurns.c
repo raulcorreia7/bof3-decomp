@@ -13,8 +13,8 @@ MATCH void Game_BattleQueueEncounterTurns(void) {
     }
     work = (u8*)g_Game.members + index * BATTLE_PARTY_STRIDE;
     do {
-        TASK_SET(work);
-        TASK(Actor)->param.unk_0B = Actor_GetTurnStep(s_RouteIndexByMode[g_Battle.scroll_dir]);
+        SELF_SET(work);
+        SELF(Actor)->param.unk_0B = Actor_GetTurnStep(s_RouteIndexByMode[g_Battle.scroll_dir]);
         work += BATTLE_PARTY_STRIDE;
         index += 1;
     } while (index < g_Game.party_size);

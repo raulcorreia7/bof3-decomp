@@ -22,7 +22,7 @@ MATCH u8 Script_Run(void* sub, s32 target) {
     u8 value;
     u8 sel;
 
-    sel           = TASK(Actor)->direction;
+    sel           = SELF(Actor)->direction;
     g_ScriptState = (void*)sub;
     sel           = Script_OpsRunFlow(sub, (u8*)target, sel);
     script        = ((u8*)target)[((ScriptState*)sub)->cursor];

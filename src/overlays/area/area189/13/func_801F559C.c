@@ -3,7 +3,7 @@
 MATCH void func_801F559C(void) {
     Actor* work;
 
-    work = TASK(Actor);
+    work = SELF(Actor);
     work->pos.x.fixed += work->vx;
     g_AreaScrollTargetCoordX.fixed = work->pos.x.fixed;
     work->pos.y.fixed += work->vy;

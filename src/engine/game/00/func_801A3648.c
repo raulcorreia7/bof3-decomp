@@ -19,7 +19,7 @@ MATCH void func_801A3648(void) {
     if ((g_PaletteFades[index].offset.b + g_PaletteFades[index].offset.g + g_PaletteFades[index].offset.r) == 0) {
         GFX_PaletteFreeFade(index);
         g_CurrentActor->interaction_flags &= ~ACTOR_INTERACTION_FADE_WHITE;
-        TASK(Actor)->header.mode = TASK(Actor)->unk_03;
-        TASK(Actor)->unk_04      = 0;
+        SELF(Actor)->header.mode = SELF(Actor)->unk_03;
+        SELF(Actor)->unk_04      = 0;
     }
 }

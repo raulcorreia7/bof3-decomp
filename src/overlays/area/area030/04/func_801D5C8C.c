@@ -9,26 +9,26 @@ MATCH void func_801D5C8C(void) {
     FishingState* state;
 
     Area_SceneSelectRecord(0x47);
-    TASK(FishingState)->active_flags = 0x80;
-    TASK(FishingState)->state_29     = 1;
-    TASK(FishingState)->state_2A     = 0;
+    SELF(FishingState)->active_flags = 0x80;
+    SELF(FishingState)->state_29     = 1;
+    SELF(FishingState)->state_2A     = 0;
 
-    record             = TASK(FishingState);
+    record             = SELF(FishingState);
     record->counter_48 = 0;
-    retired            = TASK(FishingState);
+    retired            = SELF(FishingState);
     record->origin_x   = 0xEC;
     record->origin_y   = 0xA2;
     retired->tint_5D   = 0;
 
-    TASK(FishingState)->tint_5E    = 0;
-    TASK(FishingState)->tint_5F    = 0;
-    TASK(FishingState)->timer      = 0;
-    TASK(FishingState)->step_index = 0;
-    TASK(FishingState)->cue_index  = 0;
+    SELF(FishingState)->tint_5E    = 0;
+    SELF(FishingState)->tint_5F    = 0;
+    SELF(FishingState)->timer      = 0;
+    SELF(FishingState)->step_index = 0;
+    SELF(FishingState)->cue_index  = 0;
 
-    tail             = TASK(FishingState);
+    tail             = SELF(FishingState);
     tail->cue_index  = 0;
-    state            = TASK(FishingState);
+    state            = SELF(FishingState);
     tail->pos_x      = 0;
     tail->step_delta = 4;
     state->sub_index = (state->sub_index + 1);

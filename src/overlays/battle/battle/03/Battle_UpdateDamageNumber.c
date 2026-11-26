@@ -8,7 +8,7 @@ MATCH void Battle_UpdateDamageNumber(void) {
 
     handlers = g_BattleDamageNumberSteps;
     handlers.steps[D_801EC2E0->header.mode]();
-    if (ACTOR_IN_USE(*TASK(PartyMember))) {
+    if (ACTOR_IN_USE(*SELF(PartyMember))) {
         switch (D_801EC2E0->unk_07) {
             case 0:
                 slot = D_801EC2E0;

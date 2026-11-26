@@ -25,22 +25,22 @@ MATCH void func_801D57B0(void) {
     }
 
     Area_SceneSelectRecord(0x47);
-    TASK(FishingState)->active_flags = 0x80;
-    TASK(FishingState)->state_29     = 1;
-    TASK(FishingState)->state_2A     = 0;
+    SELF(FishingState)->active_flags = 0x80;
+    SELF(FishingState)->state_29     = 1;
+    SELF(FishingState)->state_2A     = 0;
 
-    panel             = TASK(FishingState);
+    panel             = SELF(FishingState);
     panel->counter_48 = 0;
-    other             = TASK(FishingState);
+    other             = SELF(FishingState);
     panel->origin_x   = 0x5E;
     panel->origin_y   = 0xC2;
     other->timer      = 0;
 
-    TASK(FishingState)->step_index = 0;
-    TASK(FishingState)->tint_5D    = 0;
-    TASK(FishingState)->tint_5E    = 0;
-    TASK(FishingState)->tint_5F    = 0;
+    SELF(FishingState)->step_index = 0;
+    SELF(FishingState)->tint_5D    = 0;
+    SELF(FishingState)->tint_5E    = 0;
+    SELF(FishingState)->tint_5F    = 0;
 
-    work            = TASK(FishingState);
+    work            = SELF(FishingState);
     work->sub_index = (work->sub_index + 1);
 }

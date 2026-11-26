@@ -3,7 +3,7 @@
 MATCH void Actor_PlaceAtFocus(void) {
     u8* work;
 
-    work                   = TASK(u8);
+    work                   = SELF(u8);
     FIELD(s32, work, 0x34) = g_AreaFocus.x.fixed;
     FIELD(s32, work, 0x38) = g_AreaFocus.y.fixed;
     FIELD(s32, work, 0x3C) = g_AreaFocus.z.fixed;

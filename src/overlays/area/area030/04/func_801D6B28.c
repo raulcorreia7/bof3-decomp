@@ -18,17 +18,17 @@ MATCH void func_801D6B28(s8 panel_type) {
         FishingState* pair;
         s32           value;
 
-        work   = TASK(FishingState);
+        work   = SELF(FishingState);
         value  = work->pos_x;
         left_x = (value < 57) ? 57 : ((value >= 122) ? 121 : value);
 
-        shown       = TASK(FishingState);
+        shown       = SELF(FishingState);
         work->pos_x = left_x;
 
         value   = shown->cursor_10;
         right_x = (value < 65) ? 65 : ((value >= 149) ? 148 : value);
 
-        pair             = TASK(FishingState);
+        pair             = SELF(FishingState);
         shown->cursor_10 = right_x;
 
         if ((pair->cursor_10 < pair->pos_x) || (pair->pos_x + 0x20 < pair->cursor_10)) {
@@ -39,8 +39,8 @@ MATCH void func_801D6B28(s8 panel_type) {
     }
 
     if ((panel_type & BYTE_MASK) == 0) {
-        Fishing_DrawFishArrow(*(s16*)(TASK_BYTES + 0x10u), 0xB3, 0, 1u);
+        Fishing_DrawFishArrow(*(s16*)(SELF_BYTES + 0x10u), 0xB3, 0, 1u);
     } else {
-        Fishing_DrawFishArrow(*(s16*)(TASK_BYTES + 0x10u), 0xB3, 1, 1u);
+        Fishing_DrawFishArrow(*(s16*)(SELF_BYTES + 0x10u), 0xB3, 1, 1u);
     }
 }

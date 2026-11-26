@@ -4,7 +4,7 @@ MATCH s32 Actor_GetTurnStep(s32 target_facing) {
     s32 field;
     s32 value;
 
-    field = TASK(Actor)->direction;
+    field = SELF(Actor)->direction;
     target_facing &= BYTE_MASK;
     value = field & BYTE_MASK;
     if ((u32)field < target_facing) {

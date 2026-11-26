@@ -3,10 +3,10 @@
 MATCH void func_800C1A54(void) {
     PartyMember* saved;
 
-    saved  = TASK(PartyMember);
-    g_Task = D_801EC2E0->target.party;
+    saved  = SELF(PartyMember);
+    g_Self = D_801EC2E0->target.party;
     Script_Select(2);
-    g_Task        = saved;
+    g_Self        = saved;
     saved->unk_0C = 8;
     saved->header.mode++;
 }

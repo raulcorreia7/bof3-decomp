@@ -935,7 +935,7 @@ def _value_views_for(ctx: Context, image: str | None) -> dict[str, str]:
             found[macro] = ctype
     task = _task_types(ctx).get(image)
     if task is not None:
-        found["g_Task"] = task
+        found["g_Self"] = task
     return found
 
 

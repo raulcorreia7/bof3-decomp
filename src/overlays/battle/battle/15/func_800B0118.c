@@ -4,7 +4,7 @@ MATCH void func_800B0118(void) {
     BattleRange* work;
     u8           table_index;
 
-    work         = TASK(BattleRange);
+    work         = SELF(BattleRange);
     table_index  = D_800B6D00[g_Battle.dragon_form];
     work->unk_0C = D_800B6C90[table_index].values[work->unk_08 & 0x3][0];
     work->unk_10 = D_800B6C90[table_index].values[work->unk_08 & 0x3][1];

@@ -9,7 +9,7 @@ __asm__(".include \"include/match/macro.inc\"\n");
 #include "overlays/plchar/shared/PlChar_SpawnLinkedActor.h"
 
 MATCH void func_801CF13C(void) {
-    SYS_DISPATCH_TASK(D_801D03E0, 3, g_Task);
+    SYS_DISPATCH_TASK(D_801D03E0, 3, g_Self);
 }
 
 MATCH void func_801CF180(void) {

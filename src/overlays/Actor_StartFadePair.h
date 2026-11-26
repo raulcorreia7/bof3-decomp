@@ -7,20 +7,20 @@
     u8     cell4;                                                              \
     u32    cell3;                                                              \
     s16*   scratch;                                                            \
-    TASK(Actor)->unk_03 = Actor_FindFreeField();                               \
-    if (TASK(Actor)->unk_03 == GAME_NONE) {                                    \
+    SELF(Actor)->unk_03 = Actor_FindFreeField();                               \
+    if (SELF(Actor)->unk_03 == GAME_NONE) {                                    \
         return;                                                                \
     }                                                                          \
-    g_Actors[TASK(Actor)->unk_03].header.flags = 1;                            \
-    TASK(Actor)->unk_04                        = Actor_FindFreeField();        \
-    if (TASK(Actor)->unk_04 == GAME_NONE) {                                    \
-        g_Actors[TASK(Actor)->unk_03].header.flags = 0;                        \
+    g_Actors[SELF(Actor)->unk_03].header.flags = 1;                            \
+    SELF(Actor)->unk_04                        = Actor_FindFreeField();        \
+    if (SELF(Actor)->unk_04 == GAME_NONE) {                                    \
+        g_Actors[SELF(Actor)->unk_03].header.flags = 0;                        \
         return;                                                                \
     }                                                                          \
     scratch                                    = g_ScratchPad.cells.halves;    \
     data                                       = (u8*)DATA;                    \
-    g_Actors[TASK(Actor)->unk_04].header.flags = 1;                            \
-    work                                       = g_Task;                       \
+    g_Actors[SELF(Actor)->unk_04].header.flags = 1;                            \
+    work                                       = g_Self;                       \
     *scratch                                   = work->unk_03;                 \
     Actor_SpawnFromRecord(data);                                               \
     *scratch = work->unk_04;                                                   \
@@ -31,13 +31,13 @@
     g_Actors[work->unk_04].pos.x.fixed += ONE;                                 \
     g_Actors[work->unk_04].pos.y.fixed -= ONE;                                 \
     g_Actors[work->unk_03].header.flags |= ACTOR_FLAG_SEMI_TRANSPARENT;        \
-    g_Actors[TASK(Actor)->unk_04].header.flags |= ACTOR_FLAG_SEMI_TRANSPARENT; \
-    cell                                     = g_Task;                         \
+    g_Actors[SELF(Actor)->unk_04].header.flags |= ACTOR_FLAG_SEMI_TRANSPARENT; \
+    cell                                     = g_Self;                         \
     cell4                                    = cell->unk_04;                   \
     cell3                                    = cell->unk_03;                   \
     FIELD(u8, D_801468E4, cell4* ACTOR_SIZE) = 0;                              \
     FIELD(u8, D_801468E4, cell3* ACTOR_SIZE) = 0;                              \
     GFX_PaletteAllocFade(&g_Actors[work->unk_03], 15, 0, 0, 1);                \
     GFX_PaletteAllocFade(&g_Actors[work->unk_04], 0, 0, 15, 1);                \
-    TASK(Actor)->timer       = 4;                                              \
-    TASK(Actor)->header.mode = 1;
+    SELF(Actor)->timer       = 4;                                              \
+    SELF(Actor)->header.mode = 1;

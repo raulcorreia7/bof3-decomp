@@ -34,10 +34,10 @@ void func_801F0164(void);
 #define MAGIC013_DRAW_WAVE_BAND(lift)                                                                                                                                                             \
     tpage = getTPage(TPAGE_DEPTH_4BIT, TPAGE_ABR_ADD, 320, 256);                                                                                                                                  \
     SetDrawMode((DR_MODE*)g_GfxPrimCursor, 0, 1, tpage, 0);                                                                                                                                       \
-    Area_CellAddPrim(TASK(PartyMember)->pos.x.fixed, TASK(PartyMember)->pos.y.fixed, 2, sizeof(DR_MODE));                                                                                         \
-    WAVE_SHADE                = TASK(PartyMember)->unk_04 * 12;                                                                                                                                   \
+    Area_CellAddPrim(SELF(PartyMember)->pos.x.fixed, SELF(PartyMember)->pos.y.fixed, 2, sizeof(DR_MODE));                                                                                         \
+    WAVE_SHADE                = SELF(PartyMember)->unk_04 * 12;                                                                                                                                   \
     WAVE_HEIGHT               = FIXED_MUL(rsin(0), 64);                                                                                                                                           \
-    WAVE_ANGLE                = D_801F03D4[TASK(PartyMember)->facing] << 7;                                                                                                                       \
+    WAVE_ANGLE                = D_801F03D4[SELF(PartyMember)->facing] << 7;                                                                                                                       \
     g_ScratchPadVectors[3].vx = (u32)rsin(WAVE_ANGLE) >> 5;                                                                                                                                       \
     g_ScratchPadVectors[3].vy = (u32)rcos(WAVE_ANGLE) >> 5;                                                                                                                                       \
     g_ScratchPadVectors[3].vz = FIXED_MUL(rsin(0), WAVE_HEIGHT);                                                                                                                                  \
@@ -46,7 +46,7 @@ void func_801F0164(void);
         SetPolyG4(prim);                                                                                                                                                                          \
         SetSemiTrans(prim, 1);                                                                                                                                                                    \
         WAVE_HEIGHT               = FIXED_MUL(rsin(i << 7), 64);                                                                                                                                  \
-        WAVE_ANGLE                = ((D_801F03D4[TASK(PartyMember)->facing] + i) & 0x1F) << 7;                                                                                                    \
+        WAVE_ANGLE                = ((D_801F03D4[SELF(PartyMember)->facing] + i) & 0x1F) << 7;                                                                                                    \
         g_ScratchPadVectors[0].vx = g_ScratchPadVectors[3].vx;                                                                                                                                    \
         g_ScratchPadVectors[0].vy = g_ScratchPadVectors[3].vy;                                                                                                                                    \
         g_ScratchPadVectors[0].vz = g_ScratchPadVectors[3].vz + (lift);                                                                                                                           \
@@ -65,7 +65,7 @@ void func_801F0164(void);
         setRGB1(prim, 1, 1, 1);                                                                                                                                                                   \
         setRGB2(prim, WAVE_SHADE, WAVE_SHADE, WAVE_SHADE);                                                                                                                                        \
         setRGB3(prim, WAVE_SHADE, WAVE_SHADE, WAVE_SHADE);                                                                                                                                        \
-        Area_CellAddPrim(TASK(PartyMember)->pos.x.fixed, TASK(PartyMember)->pos.y.fixed, 2, sizeof(POLY_G4));                                                                                     \
+        Area_CellAddPrim(SELF(PartyMember)->pos.x.fixed, SELF(PartyMember)->pos.y.fixed, 2, sizeof(POLY_G4));                                                                                     \
     }
 
 #endif

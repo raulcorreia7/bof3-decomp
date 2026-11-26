@@ -20,27 +20,27 @@ MATCH void func_801F39BC(void) {
     s32       left;
     s32       top;
 
-    layer = TASK(Actor)->param.unk_0B - 0x4B;
-    if (TASK(Actor)->header.step == 0) {
-        TASK(Actor)->vy       = ((layer * 3) << 9) + 0xC00 + (rand() & 0xFF);
-        side                  = COORD_FRAC(TASK(Actor)->pos.x) == 0;
-        TASK(Actor)->screen_x = D_801F4AC4[side][0];
-        side                  = COORD_FRAC(TASK(Actor)->pos.x) == 0;
-        TASK(Actor)->screen_y = D_801F4AC4[side][1];
-        COORD_INT(TASK(Actor)->pos.y) += rand() & 7;
-        TASK(Actor)->header.step++;
+    layer = SELF(Actor)->param.unk_0B - 0x4B;
+    if (SELF(Actor)->header.step == 0) {
+        SELF(Actor)->vy       = ((layer * 3) << 9) + 0xC00 + (rand() & 0xFF);
+        side                  = COORD_FRAC(SELF(Actor)->pos.x) == 0;
+        SELF(Actor)->screen_x = D_801F4AC4[side][0];
+        side                  = COORD_FRAC(SELF(Actor)->pos.x) == 0;
+        SELF(Actor)->screen_y = D_801F4AC4[side][1];
+        COORD_INT(SELF(Actor)->pos.y) += rand() & 7;
+        SELF(Actor)->header.step++;
     }
     if ((g_AreaDrawFlags & AREA_DRAW_CELL_LAYERS) == 0) {
         return;
     }
 
-    TASK(Actor)->pos.y.fixed += TASK(Actor)->vy;
-    if (COORD_INT(TASK(Actor)->pos.y) > (s16)TASK(Actor)->screen_y) {
-        COORD_INT(TASK(Actor)->pos.y) = TASK(Actor)->screen_x;
+    SELF(Actor)->pos.y.fixed += SELF(Actor)->vy;
+    if (COORD_INT(SELF(Actor)->pos.y) > (s16)SELF(Actor)->screen_y) {
+        COORD_INT(SELF(Actor)->pos.y) = SELF(Actor)->screen_x;
     }
 
-    x    = (TASK(Actor)->pos.x.fixed >> 9) - 0x4EC0;
-    y    = (TASK(Actor)->pos.y.fixed >> 9) - (AREA_CELL_ORIGIN - AREA_CELL_HALF);
+    x    = (SELF(Actor)->pos.x.fixed >> 9) - 0x4EC0;
+    y    = (SELF(Actor)->pos.y.fixed >> 9) - (AREA_CELL_ORIGIN - AREA_CELL_HALF);
     size = ((2 - layer) << 8) + abs(0xF - (g_FrameCount & 0x1F));
 
     GFX_ADD_LAYER_DRAW_MODE(GFX_LAYER_FIELD_SCENE, getTPage(TPAGE_DEPTH_8BIT, TPAGE_ABR_HALF, 320, 256));

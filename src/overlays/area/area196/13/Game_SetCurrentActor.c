@@ -22,8 +22,8 @@ NON_MATCHING void Game_SetCurrentActor(s32 tint) {
     cell    = (u16*)D_1F800034;
     angle   = 0;
     angle2  = 0x100;
-    cell[0] = (TASK(PartyMember)->pos.x.fixed >> 9) - 0x4000;
-    cell[1] = (TASK(PartyMember)->pos.y.fixed >> 9) - 0x4000;
+    cell[0] = (SELF(PartyMember)->pos.x.fixed >> 9) - 0x4000;
+    cell[1] = (SELF(PartyMember)->pos.y.fixed >> 9) - 0x4000;
 
     for (row = 0; row < 16; row++) {
         /* The payload rows one band walks: radii at +0x24/+0x25, twist scales at +0x30/+0x31, shade bytes from +0x00. */
@@ -52,7 +52,7 @@ NON_MATCHING void Game_SetCurrentActor(s32 tint) {
             setRGB1(quad, D_801F412C[band], D_801F412C[band], D_801F412C[band]);
             setRGB2(quad, D_801F412C[band + 1], D_801F412C[band + 1], D_801F412C[band + 1]);
             setRGB3(quad, D_801F412C[band + 1], D_801F412C[band + 1], D_801F412C[band + 1]);
-            Area_CellAddPrim(TASK(PartyMember)->pos.x.fixed, TASK(PartyMember)->pos.y.fixed, (s8)D_801F412C[0x3C + row], sizeof(POLY_GT4));
+            Area_CellAddPrim(SELF(PartyMember)->pos.x.fixed, SELF(PartyMember)->pos.y.fixed, (s8)D_801F412C[0x3C + row], sizeof(POLY_GT4));
 
             /* The back quad reuses the projected corners and texture with its own palette and blend mode. */
             back = (POLY_GT4*)g_GfxPrimCursor;
@@ -70,7 +70,7 @@ NON_MATCHING void Game_SetCurrentActor(s32 tint) {
             setRGB1(back, D_801F412C[band], D_801F412C[band], D_801F412C[band]);
             setRGB2(back, D_801F412C[band + 1], D_801F412C[band + 1], D_801F412C[band + 1]);
             setRGB3(back, D_801F412C[band + 1], D_801F412C[band + 1], D_801F412C[band + 1]);
-            Area_CellAddPrim(TASK(PartyMember)->pos.x.fixed, TASK(PartyMember)->pos.y.fixed, (s8)D_801F412C[0x3C + row], sizeof(POLY_GT4));
+            Area_CellAddPrim(SELF(PartyMember)->pos.x.fixed, SELF(PartyMember)->pos.y.fixed, (s8)D_801F412C[0x3C + row], sizeof(POLY_GT4));
         }
 
         /* Two sprites ride the rim of the copy, their size scaled by the camera depth. */
@@ -92,7 +92,7 @@ NON_MATCHING void Game_SetCurrentActor(s32 tint) {
             sprite->tpage = (GetGraphType() == 1 || GetGraphType() == 2) ? 0xAB : 0x3B;
             setRGB0(sprite, tint, tint, tint / 2);
             sprite->clut = getClut(160, 483);
-            Area_CellAddPrim(TASK(PartyMember)->pos.x.fixed, TASK(PartyMember)->pos.y.fixed, (s8)(D_801F412C[0x3C + row] + 1), sizeof(POLY_FT4));
+            Area_CellAddPrim(SELF(PartyMember)->pos.x.fixed, SELF(PartyMember)->pos.y.fixed, (s8)(D_801F412C[0x3C + row] + 1), sizeof(POLY_FT4));
         }
 
         angle += 0x100;

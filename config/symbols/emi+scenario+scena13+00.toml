@@ -8,7 +8,7 @@ jtbl_801F6D7C = { addr = 0x801F6D7C, type = "Callback", source = "The switch tab
 jtbl_801F6DFC = { addr = 0x801F6DFC, type = "Callback", source = "The switch table of func_801FA844: the jump targets of its jr dispatch." }
 jtbl_801F6E74 = { addr = 0x801F6E74, type = "Callback", source = "The switch table of func_801FB1B4: the jump targets of its jr dispatch." }
 Scene_DispatchEntity = { addr = 0x801F6EA4, type = "func", source = "dispatches a scene entity by its callback index" }
-func_801F6EAC = { addr = 0x801F6EAC, alias = true, source = "Scene_DispatchEntity+0x8, after its g_Task load; the start the split used before the function was moved back to that load" }
+func_801F6EAC = { addr = 0x801F6EAC, alias = true, source = "Scene_DispatchEntity+0x8, after its g_Self load; the start the split used before the function was moved back to that load" }
 Area_DrawScreenTint = { addr = 0x801F6FF8, type = "func", source = "Draws a semi-transparent tile over the whole screen in the colour of the task tint." }
 Scene_DrawScreenTint = { addr = 0x801F7484, type = "func", source = "draws the scene screen tint layer through Screen_DrawTintLayer" }
 Scene_ReleaseActors = { addr = 0x801F7C24, type = "func", source = "clears two task-linked actor slots, frees their palette fade targets and clears the actor" }

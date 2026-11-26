@@ -5,19 +5,19 @@
 MATCH void func_801E0124(void) {
     FishingState* record;
 
-    TASK(FishingState)->bounce.unk_3C = 0;
+    SELF(FishingState)->bounce.unk_3C = 0;
     SND_SEPlay(EMI_SE_ID(SND_BANK_AREA, 6));
 
-    Area_SceneSelectRecord(*(u16*)(D_801E2ACA + TASK(FishingState)->cue_index * 36));
+    Area_SceneSelectRecord(*(u16*)(D_801E2ACA + SELF(FishingState)->cue_index * 36));
 
-    record        = TASK(FishingState);
+    record        = SELF(FishingState);
     record->flags = (record->flags & ~ACTOR_FLAG_SEMI_TRANSPARENT);
 
-    TASK(FishingState)->state_2A = 0;
+    SELF(FishingState)->state_2A = 0;
 
-    TASK(FishingState)->counter_48 = 0;
+    SELF(FishingState)->counter_48 = 0;
     Script_Select(0);
 
-    record             = TASK(FishingState);
+    record             = SELF(FishingState);
     record->mode_index = (record->mode_index + 1);
 }

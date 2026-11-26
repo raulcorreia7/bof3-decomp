@@ -47,20 +47,20 @@ void func_801F4258(s32 mode);
  * route the event byte and the actor type pick. Every change must verify
  * func_801F48DC and func_801F49C8. */
 static inline void Area_StartScriptedMove(u8 facing) {
-    TASK(Actor)->direction = facing;
+    SELF(Actor)->direction = facing;
     g_ScriptState->steps   = D_8014686B * 4;
     if (g_ScriptState->steps != 0) {
         if (Actor_GetOwner() != 2) {
-            Area_MoveActorRoute(g_ScriptState, TASK(Actor)->direction);
+            Area_MoveActorRoute(g_ScriptState, SELF(Actor)->direction);
             g_ScriptState->flags |= 0x80;
         } else {
-            Area_SetFacingOffsetX(TASK(Actor)->direction);
+            Area_SetFacingOffsetX(SELF(Actor)->direction);
             g_AreaCameraHeightDelta = 0;
             g_ScriptState->flags |= 0x40;
         }
     }
-    TASK(Actor)->vz               = 0;
-    COORD_INT(TASK(Actor)->pos.z) = 1152;
+    SELF(Actor)->vz               = 0;
+    COORD_INT(SELF(Actor)->pos.z) = 1152;
 }
 
 #endif

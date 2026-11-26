@@ -7,9 +7,9 @@ __asm__(".include \"include/match/macro.inc\"\n");
 #include "overlays/plchar/shared/PlChar_PollScriptRequest.h"
 
 MATCH void func_801CFAFC(void) {
-    D_801CFBC8[TASK(Actor)->unk_2C]();
+    D_801CFBC8[SELF(Actor)->unk_2C]();
 }
 
 MATCH void func_801CFB40(void) {
-    D_801CFBD4[TASK(Actor)->unk_2C]();
+    D_801CFBD4[SELF(Actor)->unk_2C]();
 }

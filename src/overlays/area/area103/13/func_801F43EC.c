@@ -6,7 +6,7 @@ MATCH void func_801F43EC(void) {
     if (*g_ScriptVars == 0xF && (g_FrameCount / 5) % 4 == 3) {
         func_801F4E70(4);
         Area_CellSetPalette(67, 26);
-        TASK(Actor)->header.step++;
+        SELF(Actor)->header.step++;
         return;
     }
     beat = g_FrameCount / 5;

@@ -16,11 +16,11 @@
     u16       n;                                                                                                                                \
                                                                                                                                                 \
     Camera_SetMatrix(&matrix);                                                                                                                  \
-    pos[0] = ((Actor*)TASK(Actor)->unk_4C)->pos.x.fixed;                                                                                        \
-    pos[1] = ((Actor*)TASK(Actor)->unk_4C)->pos.y.fixed;                                                                                        \
-    pos[2] = ((Actor*)TASK(Actor)->unk_4C)->pos.z.fixed;                                                                                        \
+    pos[0] = ((Actor*)SELF(Actor)->unk_4C)->pos.x.fixed;                                                                                        \
+    pos[1] = ((Actor*)SELF(Actor)->unk_4C)->pos.y.fixed;                                                                                        \
+    pos[2] = ((Actor*)SELF(Actor)->unk_4C)->pos.z.fixed;                                                                                        \
     Camera_ProjectPoint(pos, &screen);                                                                                                          \
-    for (row = (D_801D393C[D_801D40AC].h >> 1) * TASK(Actor)->timer; row < (D_801D393C[D_801D40AC].h >> 1) * (TASK(Actor)->timer + 1); row++) { \
+    for (row = (D_801D393C[D_801D40AC].h >> 1) * SELF(Actor)->timer; row < (D_801D393C[D_801D40AC].h >> 1) * (SELF(Actor)->timer + 1); row++) { \
         for (col = 0; col < D_801D393C[D_801D40AC].w; col++) {                                                                                  \
             if (*D_801D40B0 != 0) {                                                                                                             \
                 dot        = D_801D40B4;                                                                                                        \
@@ -34,10 +34,10 @@
             D_801D40B0++;                                                                                                                       \
         }                                                                                                                                       \
     }                                                                                                                                           \
-    step               = TASK(Actor)->timer + 1;                                                                                                \
-    TASK(Actor)->timer = step;                                                                                                                  \
+    step               = SELF(Actor)->timer + 1;                                                                                                \
+    SELF(Actor)->timer = step;                                                                                                                  \
     if (step == 2) {                                                                                                                            \
-        TASK(Actor)->header.mode += 1;                                                                                                          \
+        SELF(Actor)->header.mode += 1;                                                                                                          \
     }
 
 #endif

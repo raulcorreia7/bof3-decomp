@@ -10,7 +10,7 @@ MATCH void func_800AD8D8(void) {
     flag = *MEM_PTR(u8, &g_Battle.cursor.panel_entry);
     if (flag == GAME_NONE) {
         Script_Select(0x13);
-        work = TASK(PartyMember);
+        work = SELF(PartyMember);
         work->header.step++;
     }
 }

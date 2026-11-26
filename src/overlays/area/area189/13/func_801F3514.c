@@ -13,47 +13,47 @@ MATCH void func_801F3514(void) {
     s16*     out;
 
     script = &g_Game.members[0].unk_4B;
-    if (TASK(Actor)->script_record != *script) {
+    if (SELF(Actor)->script_record != *script) {
         Script_Request(*script);
-        TASK(Actor)->script_record = *script;
+        SELF(Actor)->script_record = *script;
     }
     if (D_80145E92[0] == 3) {
         Script_AnimStepLoop();
     }
 
     if (g_AreaSceneMode == 1) {
-        TASK(Actor)->tint.steps.delta.r = 0x7F;
-        TASK(Actor)->tint.steps.delta.g = -0x80;
-        TASK(Actor)->tint.steps.delta.b = -0x80;
+        SELF(Actor)->tint.steps.delta.r = 0x7F;
+        SELF(Actor)->tint.steps.delta.g = -0x80;
+        SELF(Actor)->tint.steps.delta.b = -0x80;
         g_AreaSceneMode                 = 0;
     } else {
-        TASK(Actor)->tint.steps.delta.r = 0;
-        TASK(Actor)->tint.steps.delta.g = 0;
-        TASK(Actor)->tint.steps.delta.b = 0;
+        SELF(Actor)->tint.steps.delta.r = 0;
+        SELF(Actor)->tint.steps.delta.g = 0;
+        SELF(Actor)->tint.steps.delta.b = 0;
     }
 
     vertex                    = g_ScratchPadVectors;
     screen                    = D_1F800034;
     /* Stored through a pointer: a member store lets the scroll loads move above it. */
-    out                       = &TASK(Actor)->unk_32;
+    out                       = &SELF(Actor)->unk_32;
     *out                      = 0x3200;
     vertex->vx                = (s16)(((((g_AreaScrollTargetX - 1) & 0xFFFFFF) + 1) >> 9) - 0x4000);
     g_ScratchPadVectors[0].vy = (s16)(((((g_AreaScrollTargetY - 1) & 0xFFFFFF) + 1) >> 9) - 0x4000);
     g_ScratchPadVectors[0].vz = (s16)(-g_Game.members[0].pos.z.part.integer / 2);
     RotTransPers(vertex, (long*)screen, &depth, &flag);
 
-    TASK(Actor)->screen_x = 0xA0;
+    SELF(Actor)->screen_x = 0xA0;
     if (g_Game.members[0].unk_14 != 0) {
-        TASK(Actor)->screen_y                   = D_1F800034[1];
+        SELF(Actor)->screen_y                   = D_1F800034[1];
         g_Game.members[0].screen_y.signed_value = D_1F800034[1];
     } else {
-        TASK(Actor)->screen_y = g_Game.members[0].screen_y.signed_value;
+        SELF(Actor)->screen_y = g_Game.members[0].screen_y.signed_value;
     }
 
     if (g_AreaGridActorCount < 0x28) {
         count                   = g_AreaGridActorCount;
         g_AreaGridActorCount    = count + 1;
-        g_AreaGridActors[count] = (s32)g_Task;
+        g_AreaGridActors[count] = (s32)g_Self;
     }
 
     if (g_AreaSceneMode == 2) {

@@ -4,7 +4,7 @@ MATCH void Effect_DrawScreenFade(void) {
 
     GFX_AddDitheredDrawMode(GFX_LAYER_UI, getTPage(TPAGE_DEPTH_4BIT, TPAGE_ABR_ADD, 320, 256));
     prim  = (POLY_G4*)g_GfxPrimCursor;
-    shade = TASK(PartyMember)->unk_09 * 0x10;
+    shade = SELF(PartyMember)->unk_09 * 0x10;
     SetPolyG4(prim);
     PSX_SET_SEMI_TRANSPARENT(prim);
     setXY4(prim, 0, 0, 0x13F, 0, 0, 0x78, 0x13F, 0x78);

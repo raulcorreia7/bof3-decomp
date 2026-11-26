@@ -9,18 +9,18 @@ MATCH void func_801F35D8(void) {
 
     PushMatrix();
     Camera_SetMatrix(&camera);
-    pos[0] = TASK(Actor)->pos.x.fixed;
-    pos[1] = TASK(Actor)->pos.y.fixed;
-    pos[2] = TASK(Actor)->pos.z.fixed;
+    pos[0] = SELF(Actor)->pos.x.fixed;
+    pos[1] = SELF(Actor)->pos.y.fixed;
+    pos[2] = SELF(Actor)->pos.z.fixed;
     Camera_ProjectPoint(pos, &screen);
     PopMatrix();
-    work           = TASK(Actor);
+    work           = SELF(Actor);
     work->screen_x = screen.vx;
     work->screen_y = screen.vy;
     work->vx -= 16;
     work->unk_32 -= 20;
     func_801F4138((s16)work->screen_x, (s16)work->screen_y, (s16)work->unk_32, (s16)work->vx, (s16)work->vy);
-    ACTOR_COUNT_DOWN(TASK(Actor), remaining, timer);
+    ACTOR_COUNT_DOWN(SELF(Actor), remaining, timer);
     if (!(remaining & BYTE_MASK)) {
         Actor_Clear();
     }

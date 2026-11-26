@@ -6,10 +6,10 @@
     do {                                                                         \
         u8 count;                                                                \
                                                                                  \
-        count                    = TASK(PartyMember)->timer - 1;                 \
-        TASK(PartyMember)->timer = count;                                        \
+        count                    = SELF(PartyMember)->timer - 1;                 \
+        SELF(PartyMember)->timer = count;                                        \
         if (count == 0) {                                                        \
-            TASK(PartyMember)->header.step = TASK(PartyMember)->header.step + 1; \
+            SELF(PartyMember)->header.step = SELF(PartyMember)->header.step + 1; \
         }                                                                        \
     } while (0)
 

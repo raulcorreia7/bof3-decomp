@@ -13,13 +13,13 @@ MATCH void func_801DA78C(void) {
 
     record = g_SpawnedActors;
     if (g_SpawnedActors[0].header.mode == 3) {
-        TASK(FishingState)->mode_index = 3;
-        TASK(FishingState)->sub_index  = 0;
+        SELF(FishingState)->mode_index = 3;
+        SELF(FishingState)->sub_index  = 0;
     } else {
         if ((g_SpawnedActors[0].unk_14 == 0) && (g_PadStates[0].pressed & PADRdown) && (g_SpawnedActors[0].selection > 0x110000)) {
             g_SpawnedActors[0].selection -= 0x4000;
         }
-        work = TASK(FishingState);
+        work = SELF(FishingState);
         if (work->saved_index == 0) {
             if (work->counter_07 == 0) {
                 direction = g_PadStates[0].held & (PADLright | PADLleft);
@@ -30,7 +30,7 @@ MATCH void func_801DA78C(void) {
                     } else {
                         record->vx = 0x800;
                     }
-                    TASK(FishingState)->counter_07 = 1;
+                    SELF(FishingState)->counter_07 = 1;
                 }
             } else if (!(g_PadStates[0].held & work->pos_x) || ((record->pos.x.fixed + 0xFFF9FFFF) > 0xEFFFEU)) {
                 record->vx        = 0;

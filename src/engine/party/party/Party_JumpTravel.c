@@ -5,18 +5,18 @@
 MATCH void Party_JumpTravel(void) {
     u8 count;
 
-    count = TASK(Actor)->timer;
+    count = SELF(Actor)->timer;
     if (count == 0) {
-        TASK(Actor)->vx     = 0;
-        TASK(Actor)->vy     = 0;
-        TASK(Actor)->unk_03 = PARTY_JUMP_STEP_FALL;
+        SELF(Actor)->vx     = 0;
+        SELF(Actor)->vy     = 0;
+        SELF(Actor)->unk_03 = PARTY_JUMP_STEP_FALL;
     } else {
-        TASK(Actor)->timer = (count - 1);
+        SELF(Actor)->timer = (count - 1);
     }
-    TASK(Actor)->vz += TASK(Actor)->gravity;
+    SELF(Actor)->vz += SELF(Actor)->gravity;
     Actor_MovementUpdate();
-    if (TASK(Actor)->unk_05 == 0) {
-        Area_ScrollAdvance(COORD_INT(TASK(Actor)->pos.z));
+    if (SELF(Actor)->unk_05 == 0) {
+        Area_ScrollAdvance(COORD_INT(SELF(Actor)->pos.z));
     }
     Script_AnimStepLoop();
 }

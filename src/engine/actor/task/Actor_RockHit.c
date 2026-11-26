@@ -6,11 +6,11 @@ MATCH bool Actor_RockHit(void) {
     s8 slot;
     s8 other;
 
-    slot = Actor_FindInRange(TASK(Actor)->pos.x.fixed, TASK(Actor)->pos.y.fixed, 0);
+    slot = Actor_FindInRange(SELF(Actor)->pos.x.fixed, SELF(Actor)->pos.y.fixed, 0);
     if (slot != -1) {
         g_Actors[slot].interaction_flags |= ACTOR_INTERACTION_PENDING;
     } else {
-        other = Game_GetPartySize(TASK(Actor)->pos.x.fixed, TASK(Actor)->pos.y.fixed, 0);
+        other = Game_GetPartySize(SELF(Actor)->pos.x.fixed, SELF(Actor)->pos.y.fixed, 0);
         if (other == slot) {
             goto fail; /* the other slot is the same slot */
         }
@@ -18,7 +18,7 @@ MATCH bool Actor_RockHit(void) {
             g_Game.members[other].header.step = 1;
         }
     }
-    TASK(Actor)->header.mode = ACTOR_ROCK_MODE_END;
+    SELF(Actor)->header.mode = ACTOR_ROCK_MODE_END;
     Script_AnimStepLoop();
     Area_SetDrawMode();
     return 1;

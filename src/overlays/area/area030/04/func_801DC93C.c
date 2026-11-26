@@ -28,7 +28,7 @@ MATCH void func_801DC93C(void) {
             g_SpawnedActors[6].header.mode = 0xF;
         }
         g_SpawnedActors[6].link = 0;
-        TASK(Actor)->unk_03     = 4;
+        SELF(Actor)->unk_03     = 4;
     } else if (g_PadStates[0].pressed & g_InputMasks[FISHING_INPUT_CAST]) {
         SND_SEPlay(EMI_SE_ID(SND_BANK_COMMON, 3));
         if (g_SpawnedActors[6].unk_06 == 0) {
@@ -56,9 +56,9 @@ MATCH void func_801DC93C(void) {
                 g_SpawnedActors[6].header.mode = 0xB;
             }
         }
-        TASK(Actor)->unk_03++;
+        SELF(Actor)->unk_03++;
     }
-    if (TASK(Actor)->unk_03 == 2) {
+    if (SELF(Actor)->unk_03 == 2) {
         switch (g_SpawnedActors[6].unk_06 & 3) {
             case 0:
                 UI_TextDraw(29, 20, 0, TEXT_LENGTH_MAX, MESSAGE_TABLE_TEXT(AREA_MESSAGE_TABLE, FISHING_MESSAGE_EQUIP_ROD_LURE));

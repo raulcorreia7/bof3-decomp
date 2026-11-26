@@ -116,7 +116,7 @@ NON_MATCHING void Area_DrawGridActors(void) {
                         break;
                     }
                 }
-                TASK_SET(obj);
+                SELF_SET(obj);
                 if (obj[0x24] & 0x40) {
                     rows += func_8015AD00(&D_80147D08[rows]);
                 } else {
@@ -146,13 +146,13 @@ NON_MATCHING void Area_DrawGridActors(void) {
                 do {
                     if (D_80147D0C[row].depth < 0) {
                         if (g_AreaDrawFlags & AREA_DRAW_NEGATIVE_DEPTH) {
-                            TASK_SET(D_80147D08[row].primitive);
+                            SELF_SET(D_80147D08[row].primitive);
                             Area_DrawObjectSprite();
                         }
                     } else if (g_AreaDrawFlags & AREA_DRAW_APPEND_ACTOR_PRIMITIVES) {
-                        TASK_SET(D_80147D08[row].work);
-                        CatPrim(g_GfxOtHeads[TASK(Actor)->draw_layer], D_80147D08[row].primitive);
-                        g_GfxOtHeads[TASK(Actor)->draw_layer] = (u32*)D_80147D08[row].primitive;
+                        SELF_SET(D_80147D08[row].work);
+                        CatPrim(g_GfxOtHeads[SELF(Actor)->draw_layer], D_80147D08[row].primitive);
+                        g_GfxOtHeads[SELF(Actor)->draw_layer] = (u32*)D_80147D08[row].primitive;
                     }
                     row++;
                 } while (row < limit);

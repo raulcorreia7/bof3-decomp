@@ -2,7 +2,7 @@
 
 MATCH void func_801F5374(void) {
     if (g_AreaSceneMode != 0) {
-        TASK(Actor)->header.step++;
+        SELF(Actor)->header.step++;
     }
     func_801F54B8();
 }

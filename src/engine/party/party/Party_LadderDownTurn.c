@@ -4,6 +4,6 @@
 /* Turns the actor to the ladder. */
 MATCH void Party_LadderDownTurn(void) {
     if (Area_ClimbMountTurn() & BYTE_MASK) {
-        TASK(Actor)->unk_04 = 3;
+        SELF(Actor)->unk_04 = 3;
     }
 }

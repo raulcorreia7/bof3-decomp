@@ -4,6 +4,6 @@
 /* Walks the actor to the ladder top. */
 MATCH void Party_LadderDownApproach(void) {
     if (Area_ClimbMountApproach() & BYTE_MASK) {
-        TASK(Actor)->unk_04 = 2;
+        SELF(Actor)->unk_04 = 2;
     }
 }

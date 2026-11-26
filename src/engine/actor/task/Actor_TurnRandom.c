@@ -6,11 +6,11 @@ MATCH u8 Actor_TurnRandom(void* record) {
     u8  value;
     s16 next;
 
-    value = TASK(Actor)->direction & 0x7;
+    value = SELF(Actor)->direction & 0x7;
     next  = (((s32 (*)(s32))rand)(0x80) & 0x7) | 0x1;
     if (value != next) {
-        TASK(Actor)->direction = next;
+        SELF(Actor)->direction = next;
         FIELD(u8, record, 0x74u) |= 8;
     }
-    return TASK(Actor)->direction;
+    return SELF(Actor)->direction;
 }

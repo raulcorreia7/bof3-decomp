@@ -3,7 +3,7 @@
 MATCH void func_801F3760(void) {
     Actor* work;
 
-    work = TASK(Actor);
+    work = SELF(Actor);
     if (work->direction != FACING_UP_LEFT) {
         if (abs(g_Game.members[0].pos.y.fixed - ((((s32)COORD_INT(work->pos.y) - 2) << 16) | 0x8000)) > COORD_HALF) {
             goto advance;

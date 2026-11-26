@@ -2,17 +2,17 @@
 MATCH void PlChar_StartSpawnedActorTurn(void) {
     u8 slot;
 
-    if (!(TASK(Actor)->direction & 1)) {
-        TASK(Actor)->direction = (TASK(Actor)->direction - 1) & 7;
+    if (!(SELF(Actor)->direction & 1)) {
+        SELF(Actor)->direction = (SELF(Actor)->direction - 1) & 7;
     }
     slot                          = func_8019601C();
-    TASK(Actor)->param.actor_slot = slot;
-    if (TASK(Actor)->param.actor_slot != GAME_NONE) {
-        g_SpawnedActors[TASK(Actor)->param.actor_slot].header.flags = 1;
-        g_SpawnedActors[TASK(Actor)->param.actor_slot].type         = 0x1B;
+    SELF(Actor)->param.actor_slot = slot;
+    if (SELF(Actor)->param.actor_slot != GAME_NONE) {
+        g_SpawnedActors[SELF(Actor)->param.actor_slot].header.flags = 1;
+        g_SpawnedActors[SELF(Actor)->param.actor_slot].type         = 0x1B;
     }
-    Script_Request((TASK(Actor)->direction >> 1) + 0x42);
+    Script_Request((SELF(Actor)->direction >> 1) + 0x42);
     /* FAKE: retail reads SND_SEPlay as void(s32). */
-    ((void (*)(s32))SND_SEPlay)(TASK(Actor)->unk_2C + 0x100);
-    TASK(Actor)->header.step++;
+    ((void (*)(s32))SND_SEPlay)(SELF(Actor)->unk_2C + 0x100);
+    SELF(Actor)->header.step++;
 }

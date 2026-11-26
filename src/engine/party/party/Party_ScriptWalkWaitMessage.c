@@ -7,5 +7,5 @@ MATCH void Party_ScriptWalkWaitMessage(void) {
         return;
     }
     g_Game.current->u.field.flags &= 0xDFu;
-    TASK(Actor)->unk_03 = 0;
+    SELF(Actor)->unk_03 = 0;
 }

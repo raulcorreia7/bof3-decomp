@@ -27,9 +27,9 @@ MATCH void func_800C18E4(void) {
     g_BattleEffects[slot & BYTE_MASK].unk_03       = 0;
     g_BattleEffects[slot & BYTE_MASK].unk_04       = 0;
     g_BattleEffects[slot & BYTE_MASK].unk_0B       = slot;
-    g_BattleEffects[slot & BYTE_MASK].target.party = TASK(PartyMember);
-    TASK(PartyMember)->unk_09                      = slot;
-    TASK(PartyMember)->timer                       = 16;
-    TASK(PartyMember)->header.flags |= 0x40;
-    TASK(PartyMember)->header.step++;
+    g_BattleEffects[slot & BYTE_MASK].target.party = SELF(PartyMember);
+    SELF(PartyMember)->unk_09                      = slot;
+    SELF(PartyMember)->timer                       = 16;
+    SELF(PartyMember)->header.flags |= 0x40;
+    SELF(PartyMember)->header.step++;
 }

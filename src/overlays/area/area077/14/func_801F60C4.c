@@ -23,8 +23,8 @@ MATCH void func_801F60C4(void) {
         value  = record->cursor - 2;
     } else {
         if (index == 4) {
-            distance                      = Area_HeightSample(TASK(Actor)->pos.x.fixed, TASK(Actor)->pos.y.fixed);
-            COORD_INT(TASK(Actor)->pos.z) = distance;
+            distance                      = Area_HeightSample(SELF(Actor)->pos.x.fixed, SELF(Actor)->pos.y.fixed);
+            COORD_INT(SELF(Actor)->pos.z) = distance;
             Script_Select(0);
         }
         record = g_ScriptState;

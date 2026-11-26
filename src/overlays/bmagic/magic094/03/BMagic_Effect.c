@@ -13,19 +13,19 @@ MATCH void func_801EEC5C(void) {
     u32          effect_slot;
 
     actor                                     = g_Battle.selected_actor;
-    TASK(PartyMember)->pos.x.fixed            = actor->pos.x.fixed;
-    TASK(PartyMember)->pos.y.fixed            = actor->pos.y.fixed;
-    TASK(PartyMember)->pos.z.fixed            = actor->pos.z.fixed;
-    TASK(PartyMember)->screen_x.value         = actor->screen_x.value;
-    TASK(PartyMember)->screen_y.value         = actor->screen_y.value - 16;
+    SELF(PartyMember)->pos.x.fixed            = actor->pos.x.fixed;
+    SELF(PartyMember)->pos.y.fixed            = actor->pos.y.fixed;
+    SELF(PartyMember)->pos.z.fixed            = actor->pos.z.fixed;
+    SELF(PartyMember)->screen_x.value         = actor->screen_x.value;
+    SELF(PartyMember)->screen_y.value         = actor->screen_y.value - 16;
     effect_slot                               = Battle_AllocEffect(1, 21) & BYTE_MASK;
-    g_BattleEffects[effect_slot].target.party = TASK(PartyMember);
+    g_BattleEffects[effect_slot].target.party = SELF(PartyMember);
     g_BattleEffects[effect_slot].unk_08       = actor->facing;
     g_BattleEffects[effect_slot].pos.x.fixed  = actor->pos.x.fixed;
     g_BattleEffects[effect_slot].pos.y.fixed  = actor->pos.y.fixed;
     g_BattleEffects[effect_slot].pos.z.fixed  = actor->pos.z.fixed;
-    TASK(PartyMember)->param.unk_0B           = 0;
-    TASK(PartyMember)->header.mode++;
+    SELF(PartyMember)->param.unk_0B           = 0;
+    SELF(PartyMember)->header.mode++;
     SND_SEQueueSelection(0x100);
 }
 
@@ -35,15 +35,15 @@ MATCH void func_801EED60(void) {
     u8*          selector;
     PartyMember* battler;
 
-    TASK(PartyMember)->screen_x.value = g_BattleSelectedActor->screen_x.value;
-    TASK(PartyMember)->screen_y.value = g_BattleSelectedActor->screen_y.value - 0x10;
-    if (TASK(PartyMember)->param.unk_0B == 0xFF) {
+    SELF(PartyMember)->screen_x.value = g_BattleSelectedActor->screen_x.value;
+    SELF(PartyMember)->screen_y.value = g_BattleSelectedActor->screen_y.value - 0x10;
+    if (SELF(PartyMember)->param.unk_0B == 0xFF) {
         BMAGIC_RELEASE_TARGET_AND_PLAY();
     }
 }
 
 MATCH void func_801EEE4C(void) {
-    SYS_DISPATCH_BYTE(D_801EF988, TASK(PartyMember)->header.mode);
+    SYS_DISPATCH_BYTE(D_801EF988, SELF(PartyMember)->header.mode);
     if (g_BattleEffectBattler->param.unk_0B != 0xFF) {
         func_801EF654();
         func_801EF14C();
@@ -55,9 +55,9 @@ MATCH void func_801EEE4C(void) {
 
 MATCH void func_801EEF1C(void) {
     Battle_ApplyDamageFlags(g_Battle.target_selector, 32);
-    TASK(PartyMember)->unk_09 = 0;
-    TASK(PartyMember)->timer  = 0;
-    TASK(PartyMember)->header.mode++;
+    SELF(PartyMember)->unk_09 = 0;
+    SELF(PartyMember)->timer  = 0;
+    SELF(PartyMember)->header.mode++;
 }
 
 MATCH void func_801EEF7C(void) {
@@ -65,9 +65,9 @@ MATCH void func_801EEF7C(void) {
     u8           step;
     PartyMember* battler;
 
-    TASK(PartyMember)->timer++;
-    step                      = TASK(PartyMember)->unk_09 + 1;
-    TASK(PartyMember)->unk_09 = step;
+    SELF(PartyMember)->timer++;
+    step                      = SELF(PartyMember)->unk_09 + 1;
+    SELF(PartyMember)->unk_09 = step;
     if (step == 0x10) {
         slot = LOBU(g_Battle.target_selector);
         if (slot < BATTLE_PARTY_CHARACTERS_COUNT) {
@@ -77,8 +77,8 @@ MATCH void func_801EEF7C(void) {
         }
         func_80196718(battler);
         func_8019651C(battler, 6, 4, 8, 0);
-        TASK(PartyMember)->unk_09 = 0;
-        TASK(PartyMember)->header.mode++;
+        SELF(PartyMember)->unk_09 = 0;
+        SELF(PartyMember)->header.mode++;
     }
 }
 
@@ -86,23 +86,23 @@ MATCH void func_801EF078(void) {
     u8 timer;
     u8 count;
 
-    timer = TASK(PartyMember)->timer;
+    timer = SELF(PartyMember)->timer;
     if (timer < 16U) {
-        TASK(PartyMember)->timer = timer + 1;
+        SELF(PartyMember)->timer = timer + 1;
     }
-    count                     = TASK(PartyMember)->unk_09 + 1;
-    TASK(PartyMember)->unk_09 = count;
+    count                     = SELF(PartyMember)->unk_09 + 1;
+    SELF(PartyMember)->unk_09 = count;
     if ((count & BYTE_MASK) == 0x10) {
-        TASK(PartyMember)->unk_09 = 0;
-        TASK(PartyMember)->header.mode += 1;
+        SELF(PartyMember)->unk_09 = 0;
+        SELF(PartyMember)->header.mode += 1;
     }
 }
 
 MATCH void func_801EF0FC(void) {
     u8 count;
 
-    count                     = TASK(PartyMember)->unk_09 + 1;
-    TASK(PartyMember)->unk_09 = count;
+    count                     = SELF(PartyMember)->unk_09 + 1;
+    SELF(PartyMember)->unk_09 = count;
     if ((count & BYTE_MASK) == 0x20) {
         g_BattleEffectBattler->param.unk_0B = 0xFF;
         Effect_Reset();
@@ -125,13 +125,13 @@ MATCH void func_801EF14C(void) {
     s32      depth_step;
 
     for (ring = 0; ring < 6; ring++) {
-        switch (TASK(PartyMember)->header.mode) {
+        switch (SELF(PartyMember)->header.mode) {
             case 1:
             default:
                 D_1F800000_WORD[0] = (ring + 1) * 16;
-                D_1F800000_WORD[1] = ((ring + 1) << 2) * TASK(PartyMember)->unk_09;
+                D_1F800000_WORD[1] = ((ring + 1) << 2) * SELF(PartyMember)->unk_09;
                 depth_step         = ((ring ^ 7) + 1) * 5;
-                D_1F800000_WORD[2] = -(depth_step * TASK(PartyMember)->unk_09);
+                D_1F800000_WORD[2] = -(depth_step * SELF(PartyMember)->unk_09);
                 break;
             case 2:
                 D_1F800000_WORD[0] = (ring + 1) * 16;
@@ -140,8 +140,8 @@ MATCH void func_801EF14C(void) {
                 break;
             case 3:
                 D_1F800000_WORD[0] = (ring + 1) * 16;
-                D_1F800000_WORD[1] = (ring + 1) * 64 - TASK(PartyMember)->unk_09;
-                D_1F800000_WORD[2] = (TASK(PartyMember)->unk_09 << 1) - (((ring ^ 7) + 1) * 5 << 4);
+                D_1F800000_WORD[1] = (ring + 1) * 64 - SELF(PartyMember)->unk_09;
+                D_1F800000_WORD[2] = (SELF(PartyMember)->unk_09 << 1) - (((ring ^ 7) + 1) * 5 << 4);
                 break;
         }
         g_ScratchPadVectors[2].vx = FIXED_MUL(rcos(0), D_1F800000_WORD[0]);
@@ -159,22 +159,22 @@ MATCH void func_801EF14C(void) {
             g_ScratchPadVectors[2].vx = FIXED_MUL(rcos(angle), D_1F800000_WORD[0]);
             g_ScratchPadVectors[2].vy = FIXED_MUL(rsin(angle), D_1F800000_WORD[0]);
             g_ScratchPadVectors[2].vz = 0;
-            x                         = (g_ScratchPadVectors[2].vx << 9) + TASK(PartyMember)->pos.x.fixed;
-            y                         = ((g_ScratchPadVectors[2].vy << 16) >> 7) + TASK(PartyMember)->pos.y.fixed;
+            x                         = (g_ScratchPadVectors[2].vx << 9) + SELF(PartyMember)->pos.x.fixed;
+            y                         = ((g_ScratchPadVectors[2].vy << 16) >> 7) + SELF(PartyMember)->pos.y.fixed;
             tpage                     = getTPage(TPAGE_DEPTH_4BIT, TPAGE_ABR_ADD, 320, 256);
             SetDrawMode((DR_MODE*)g_GfxPrimCursor, 0, 1, tpage, NULL);
             Area_CellAddPrim(x, y, 2, sizeof(DR_MODE));
             prim = (POLY_G3*)g_GfxPrimCursor;
             SetPolyG3(prim);
             PSX_SET_SEMI_TRANSPARENT(prim);
-            if (TASK(PartyMember)->header.mode == 3) {
+            if (SELF(PartyMember)->header.mode == 3) {
                 D_1F800000_WORD[3] = (ring + 1) * 16;
-                D_1F800000_WORD[3] = D_1F800000_WORD[3] - (D_1F800000_WORD[3] / 16) * (TASK(PartyMember)->unk_09 >> 1);
+                D_1F800000_WORD[3] = D_1F800000_WORD[3] - (D_1F800000_WORD[3] / 16) * (SELF(PartyMember)->unk_09 >> 1);
                 if (D_1F800000_WORD[3] < 0) {
                     D_1F800000_WORD[3] = 1;
                 }
                 setRGB0(prim, 1, 1, 1);
-                setRGB1(prim, D_1F800000_WORD[3], D_1F800000_WORD[3], 0xC1 - TASK(PartyMember)->unk_09 * 6);
+                setRGB1(prim, D_1F800000_WORD[3], D_1F800000_WORD[3], 0xC1 - SELF(PartyMember)->unk_09 * 6);
                 setRGB2(prim, prim->r1, prim->g1, prim->b1);
             } else {
                 D_1F800000_WORD[3] = (ring + 1) * 16;
@@ -196,8 +196,8 @@ MATCH void func_801EF654(void) {
     long    flags;
 
     PushMatrix();
-    setVector(&rot, 0, 0, TASK(PartyMember)->timer << 4);
-    BMAGIC_PROJECT_ACTOR_MATRIX(TASK(PartyMember));
+    setVector(&rot, 0, 0, SELF(PartyMember)->timer << 4);
+    BMAGIC_PROJECT_ACTOR_MATRIX(SELF(PartyMember));
 }
 
 MATCH void func_801EF710(void) {
@@ -207,24 +207,24 @@ MATCH void func_801EF710(void) {
     s32      angle;
     s32      next;
 
-    switch (TASK(PartyMember)->header.mode) {
+    switch (SELF(PartyMember)->header.mode) {
         /* FAKE: retail compare tree needs a third case below 2 on the default body; the bytes do not say which mode. */
         case 1:
         default:
-            D_1F800000_WORD[0] = TASK(PartyMember)->unk_09 * 3 + 16;
+            D_1F800000_WORD[0] = SELF(PartyMember)->unk_09 * 3 + 16;
             break;
         case 2:
             D_1F800000_WORD[0] = 64;
             break;
         case 3:
-            D_1F800000_WORD[0] = 64 - TASK(PartyMember)->unk_09 * 2;
+            D_1F800000_WORD[0] = 64 - SELF(PartyMember)->unk_09 * 2;
             break;
     }
     i = 0;
     do {
         tpage = getTPage(TPAGE_DEPTH_4BIT, TPAGE_ABR_ADD, 320, 256);
         SetDrawMode((DR_MODE*)g_GfxPrimCursor, 0, 1, tpage, 0);
-        Area_CellAddPrim(TASK(PartyMember)->pos.x.fixed, TASK(PartyMember)->pos.y.fixed, 2, sizeof(DR_MODE));
+        Area_CellAddPrim(SELF(PartyMember)->pos.x.fixed, SELF(PartyMember)->pos.y.fixed, 2, sizeof(DR_MODE));
         prim = (POLY_G3*)g_GfxPrimCursor;
         SetPolyG3(prim);
         PSX_SET_SEMI_TRANSPARENT(prim);
@@ -238,7 +238,7 @@ MATCH void func_801EF710(void) {
         setRGB0(prim, 0x20, 0x20, 0xC0);
         setRGB1(prim, 1, 1, 1);
         setRGB2(prim, 1, 1, 1);
-        Area_CellAddPrim(TASK(PartyMember)->pos.x.fixed, TASK(PartyMember)->pos.y.fixed, 2, sizeof(POLY_G3));
+        Area_CellAddPrim(SELF(PartyMember)->pos.x.fixed, SELF(PartyMember)->pos.y.fixed, 2, sizeof(POLY_G3));
         i++;
     } while (i < 32);
 }

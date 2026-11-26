@@ -7,21 +7,21 @@ MATCH s32 func_801BC4D0(void) {
     s32 result;
 
     FAKE_STACK_PADS(u8, 0x20); /* FAKE: retail frame reserves 32 unused bytes. */
-    saved = TASK(Actor)->direction;
+    saved = SELF(Actor)->direction;
     type  = func_801B9598();
-    if ((TASK(Actor)->direction == FACING_UP_RIGHT) || (TASK(Actor)->direction == FACING_DOWN_LEFT)) {
-        TASK(Actor)->timer = 32;
+    if ((SELF(Actor)->direction == FACING_UP_RIGHT) || (SELF(Actor)->direction == FACING_DOWN_LEFT)) {
+        SELF(Actor)->timer = 32;
     } else {
-        TASK(Actor)->timer = 16;
+        SELF(Actor)->timer = 16;
     }
     rate               = g_RouteSpeedScale[g_Game.current->u.field.counter.unsigned_value];
-    TASK(Actor)->timer = (TASK(Actor)->timer / (rate & BYTE_MASK));
-    if (TASK(Actor)->voice_flags.scene_flag == 0) {
-        SP_REF(s32, 0x8) = TASK(Actor)->pos.x.fixed + g_FacingOffsets[TASK(Actor)->direction].x * rate * TASK(Actor)->timer;
-        SP_REF(s32, 0xC) = TASK(Actor)->pos.y.fixed + g_FacingOffsets[TASK(Actor)->direction].y * rate * TASK(Actor)->timer;
+    SELF(Actor)->timer = (SELF(Actor)->timer / (rate & BYTE_MASK));
+    if (SELF(Actor)->voice_flags.scene_flag == 0) {
+        SP_REF(s32, 0x8) = SELF(Actor)->pos.x.fixed + g_FacingOffsets[SELF(Actor)->direction].x * rate * SELF(Actor)->timer;
+        SP_REF(s32, 0xC) = SELF(Actor)->pos.y.fixed + g_FacingOffsets[SELF(Actor)->direction].y * rate * SELF(Actor)->timer;
     } else {
-        SP_REF(s32, 0x8) = TASK(Actor)->pos.x.fixed + g_FacingOffsets[TASK(Actor)->direction].x * rate * TASK(Actor)->timer * 2;
-        SP_REF(s32, 0xC) = TASK(Actor)->pos.y.fixed + g_FacingOffsets[TASK(Actor)->direction].y * rate * TASK(Actor)->timer * 2;
+        SP_REF(s32, 0x8) = SELF(Actor)->pos.x.fixed + g_FacingOffsets[SELF(Actor)->direction].x * rate * SELF(Actor)->timer * 2;
+        SP_REF(s32, 0xC) = SELF(Actor)->pos.y.fixed + g_FacingOffsets[SELF(Actor)->direction].y * rate * SELF(Actor)->timer * 2;
     }
     switch (type & BYTE_MASK) {
         case 0:
@@ -30,10 +30,10 @@ MATCH s32 func_801BC4D0(void) {
         case 5:
             return 1;
         case 3:
-            result = ((s32 (*)(s32, s32, u8))Area_HeightReadStep)(*(s32*)&g_ScratchPad.cells.halves[4], FIELD(s32, (&g_ScratchPad.cells.halves[4]), 0x4u), TASK(Actor)->direction);
+            result = ((s32 (*)(s32, s32, u8))Area_HeightReadStep)(*(s32*)&g_ScratchPad.cells.halves[4], FIELD(s32, (&g_ScratchPad.cells.halves[4]), 0x4u), SELF(Actor)->direction);
             if (SP_REF(u8, 0) != 0) {
                 if ((s16)result >= 0x41) {
-                    TASK(Actor)->direction = saved;
+                    SELF(Actor)->direction = saved;
                     return 1;
                 }
                 Area_HeightRead(*(s32*)&g_ScratchPad.cells.halves[4], FIELD(s32, (&g_ScratchPad.cells.halves[4]), 0x4u));

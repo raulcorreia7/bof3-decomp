@@ -8,7 +8,7 @@ MATCH void func_800AD4D4(void) {
     u8                    remainder;
     u8                    index;
 
-    work                 = TASK(PartyMember);
+    work                 = SELF(PartyMember);
     first                = work->param.unk_0B;
     second               = work->param.unk_0B;
     remainder            = (u8)first % 6;
@@ -17,7 +17,7 @@ MATCH void func_800AD4D4(void) {
     index                = 0;
     if (g_Battle.gene_count != 0) {
         do {
-            ptr = TASK(PartyMember);
+            ptr = SELF(PartyMember);
             if (g_Battle.genes[index] == ptr->param.unk_0B) {
                 ptr->header.step += 1;
             }

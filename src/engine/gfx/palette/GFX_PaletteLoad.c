@@ -13,7 +13,7 @@ MATCH void GFX_PaletteLoad(u8* dst, s32 field) {
     s32 index;
     u16 value;
 
-    record = (u8*)TASK(Actor)->unk_4C;
+    record = (u8*)SELF(Actor)->unk_4C;
     table  = record + *(u32*)(record + 4);
     src    = table + *(u32*)(table + (field & BYTE_MASK) * 4);
     second = dst + 0x4000;

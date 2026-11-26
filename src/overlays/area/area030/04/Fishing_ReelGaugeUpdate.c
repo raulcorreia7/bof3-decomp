@@ -23,7 +23,7 @@ NON_MATCHING void Fishing_ReelGaugeUpdate(void) {
 
     Fishing_SetDrawMode(0, 2);
     Fishing_DrawSprite(0x11, 2, 135, 180);
-    work = TASK(FishingState);
+    work = SELF(FishingState);
     if (work->cursor_10 == 0) {
         limit  = (s8)g_Actors[g_FishingHookedFish].unk_0A;
         origin = work->origin_y;
@@ -44,7 +44,7 @@ NON_MATCHING void Fishing_ReelGaugeUpdate(void) {
     }
     work->timer = 0;
 moved:
-    work = TASK(FishingState);
+    work = SELF(FishingState);
     work->origin_y += work->cursor_10;
     cursor = work->origin_y;
     step   = g_FishingRodRow->reel_cursor_size * 4;
@@ -66,7 +66,7 @@ moved:
     GFX_AddPrim(GFX_LAYER_EFFECT_FRONT, sizeof(LINE_F2));
 
     size     = g_FishingRodRow->reel_cursor_size;
-    work     = TASK(FishingState);
+    work     = SELF(FishingState);
     band     = size * 8 + 24;
     line     = work->origin_y - size * 4 + 173;
     marker_y = line + size * 8 + 24;

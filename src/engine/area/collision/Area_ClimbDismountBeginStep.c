@@ -4,5 +4,5 @@
 /* Dismount phase 0: begins the dismount and moves to phase 1. */
 MATCH void Area_ClimbDismountBeginStep(void) {
     Area_ClimbDismountBegin();
-    TASK(Actor)->unk_03 = 1;
+    SELF(Actor)->unk_03 = 1;
 }

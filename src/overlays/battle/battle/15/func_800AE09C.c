@@ -5,12 +5,12 @@
 MATCH void func_800AE09C(void) {
     u8 count;
 
-    count = TASK(Actor)->timer;
+    count = SELF(Actor)->timer;
     if (count == 0) {
         Battle_MarkDamaged(g_Battle.target_selector);
         g_Battle.flags |= BATTLE_STATE_EFFECT_PLAYING;
         Effect_Reset();
     } else {
-        TASK(Actor)->timer = count - 1;
+        SELF(Actor)->timer = count - 1;
     }
 }

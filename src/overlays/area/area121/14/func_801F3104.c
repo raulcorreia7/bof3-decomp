@@ -1,5 +1,5 @@
 /* Every step re-reads the scratchpad cell. */
-#define FAKE_DECL_TASK_VOLATILE
+#define FAKE_DECL_SELF_VOLATILE
 #include "area121_14.h"
 #include "overlays/area/shared/WorldMap_SelectKeyScript.h"
 

@@ -7,24 +7,24 @@
     Party_TickConfusion();                                                                                                  \
     Party_FloorDamageUpdate();                                                                                              \
     if (g_GameRequestFlags & AREA_LOAD_FLAG_WORLD_MAP) {                                                                    \
-        if ((Area_CellGetCode((s32)COORD_INT(TASK(Actor)->pos.x), (s32)COORD_INT(TASK(Actor)->pos.y)) & 0xFF) == 0xAF) {    \
+        if ((Area_CellGetCode((s32)COORD_INT(SELF(Actor)->pos.x), (s32)COORD_INT(SELF(Actor)->pos.y)) & 0xFF) == 0xAF) {    \
             Game_RequestAreaChange(g_GameEntryAreaId, g_GameEntryPosX, g_GameEntryPosY, g_GameEntryFacing);                 \
             g_GameEntryMode   = 0;                                                                                          \
             g_GameRequestType = 0xC;                                                                                        \
             return;                                                                                                         \
         }                                                                                                                   \
-        if ((Area_CellGetCode((s32)COORD_INT(TASK(Actor)->pos.x), (s32)COORD_INT(TASK(Actor)->pos.y)) & 0xFF) == 0xC0) {    \
-            Area_RequestLinkAtCell(COORD_INT(TASK(Actor)->pos.x), COORD_INT(TASK(Actor)->pos.y));                           \
+        if ((Area_CellGetCode((s32)COORD_INT(SELF(Actor)->pos.x), (s32)COORD_INT(SELF(Actor)->pos.y)) & 0xFF) == 0xC0) {    \
+            Area_RequestLinkAtCell(COORD_INT(SELF(Actor)->pos.x), COORD_INT(SELF(Actor)->pos.y));                           \
         }                                                                                                                   \
     }                                                                                                                       \
     value2           = g_EncounterSteps;                                                                                    \
     g_EncounterSteps = value2 + 1;                                                                                          \
-    value3           = TASK(Actor)->direction;                                                                              \
+    value3           = SELF(Actor)->direction;                                                                              \
     if ((value3 == 2) || (value3 == 6)) {                                                                                   \
         g_EncounterSteps = value2 + 2;                                                                                      \
     }                                                                                                                       \
     Actor_StopMoving();                                                                                                     \
-    if (func_801A79A4(TASK(Actor)->pos.x.fixed, TASK(Actor)->pos.y.fixed) == 0) {                                           \
+    if (func_801A79A4(SELF(Actor)->pos.x.fixed, SELF(Actor)->pos.y.fixed) == 0) {                                           \
         func_801C329C();                                                                                                    \
         if (!(g_Game.flags & GAME_FLAG_SCRIPT_ACTIVE) && !(g_AreaWalkFlags & AREA_WALK_ENTRY_PENDING)) {                    \
             value = g_Game.input & (g_InputMasks[WORLD_INPUT_RUN] | (g_InputMasks[WORLD_INPUT_ENTER] | INPUT_DIRECTIONAL)); \
@@ -35,4 +35,4 @@
         }                                                                                                                   \
         g_Game.current->u.field.mode.value = 0;                                                                             \
     }                                                                                                                       \
-    TASK(Actor)->header.step = 0;
+    SELF(Actor)->header.step = 0;

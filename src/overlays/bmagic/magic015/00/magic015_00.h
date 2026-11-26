@@ -61,17 +61,17 @@ void BMagic_DrawShadow(void);
 
 /* Fades the tint down to -0x80, then once the effect battler's param is 1 and the fade is done, moves the effect onto that battler and advances. Needs a local `s8 tint`. */
 #define EFFECT_APPEAR_AT_BATTLER()                                                                                                       \
-    tint = (s8)TASK(PartyMember)->unk_5D;                                                                                                \
+    tint = (s8)SELF(PartyMember)->unk_5D;                                                                                                \
     if (tint != -0x80) {                                                                                                                 \
-        TASK(PartyMember)->unk_5D = tint - 0x10;                                                                                         \
-        TASK(PartyMember)->unk_5E -= 0x10;                                                                                               \
-        TASK(PartyMember)->unk_5F -= 0x10;                                                                                               \
+        SELF(PartyMember)->unk_5D = tint - 0x10;                                                                                         \
+        SELF(PartyMember)->unk_5E -= 0x10;                                                                                               \
+        SELF(PartyMember)->unk_5F -= 0x10;                                                                                               \
     }                                                                                                                                    \
-    if ((g_BattleEffectBattler->param.unk_0B == 1) && ((s8)TASK(PartyMember)->unk_5D == -0x80) && (Script_AnimStepOnce() & BYTE_MASK)) { \
-        TASK(PartyMember)->pos.x.fixed = g_BattleEffectBattler->pos.x.fixed;                                                             \
-        TASK(PartyMember)->pos.y.fixed = g_BattleEffectBattler->pos.y.fixed;                                                             \
-        TASK(PartyMember)->pos.z.fixed = g_BattleEffectBattler->pos.z.fixed;                                                             \
-        TASK(PartyMember)->header.step++;                                                                                                \
+    if ((g_BattleEffectBattler->param.unk_0B == 1) && ((s8)SELF(PartyMember)->unk_5D == -0x80) && (Script_AnimStepOnce() & BYTE_MASK)) { \
+        SELF(PartyMember)->pos.x.fixed = g_BattleEffectBattler->pos.x.fixed;                                                             \
+        SELF(PartyMember)->pos.y.fixed = g_BattleEffectBattler->pos.y.fixed;                                                             \
+        SELF(PartyMember)->pos.z.fixed = g_BattleEffectBattler->pos.z.fixed;                                                             \
+        SELF(PartyMember)->header.step++;                                                                                                \
     }
 
 #endif

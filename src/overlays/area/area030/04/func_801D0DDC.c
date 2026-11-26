@@ -7,7 +7,7 @@ MATCH void func_801D0DDC(void) {
     u8            state;
     s32           position;
 
-    work            = TASK(FishingState);
+    work            = SELF(FishingState);
     position        = work->cursor_10 - 8;
     work->cursor_10 = position;
     if (position < 174) {
@@ -15,5 +15,5 @@ MATCH void func_801D0DDC(void) {
         work->cursor_10     = 0xAE;
         work->handler_index = state + 1;
     }
-    Fishing_DrawHud(12, TASK(FishingState)->cursor_10);
+    Fishing_DrawHud(12, SELF(FishingState)->cursor_10);
 }

@@ -3,10 +3,10 @@
 MATCH void BMagic_RingBandEnd(void) {
     u8 count;
 
-    TASK(PartyMember)->param.unk_0B += 1;
-    TASK(PartyMember)->timer -= 3;
-    count                     = TASK(PartyMember)->unk_09 - 2;
-    TASK(PartyMember)->unk_09 = count;
+    SELF(PartyMember)->param.unk_0B += 1;
+    SELF(PartyMember)->timer -= 3;
+    count                     = SELF(PartyMember)->unk_09 - 2;
+    SELF(PartyMember)->unk_09 = count;
     if (!(count & BYTE_MASK)) {
         g_BattleEffectBattler->param.unk_0B -= 1;
         Effect_Reset();

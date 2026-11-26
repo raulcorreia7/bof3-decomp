@@ -15,15 +15,15 @@ MATCH void Area_AddSpark(void) {
         }
         spark->active = 1;
         spark->unk_01 = 0x40;
-        if ((s16)TASK(Actor)->screen_x != 0) {
-            radius = RANDOM_MOD((s16)TASK(Actor)->screen_x);
+        if ((s16)SELF(Actor)->screen_x != 0) {
+            radius = RANDOM_MOD((s16)SELF(Actor)->screen_x);
         } else {
             radius = 0;
         }
         angle             = RANDOM_MASK(0xFFF);
-        spark->pos.vx     = TASK(Actor)->pos.x.fixed + ((radius * rcos(angle)) >> 4);
-        spark->pos.vy     = TASK(Actor)->pos.y.fixed + ((radius * rsin(angle)) >> 4);
-        spark->pos.vz     = TASK(Actor)->pos.z.fixed + ((s16)TASK(Actor)->screen_y << 16);
+        spark->pos.vx     = SELF(Actor)->pos.x.fixed + ((radius * rcos(angle)) >> 4);
+        spark->pos.vy     = SELF(Actor)->pos.y.fixed + ((radius * rsin(angle)) >> 4);
+        spark->pos.vz     = SELF(Actor)->pos.z.fixed + ((s16)SELF(Actor)->screen_y << 16);
         spark->fall_speed = RANDOM_MASK(0xFFF) + 0x1000;
         return;
     }

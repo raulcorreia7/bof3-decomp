@@ -8,7 +8,7 @@ MATCH void func_801F3018(void) {
     func_801F31A0(D_801F44A0);
     func_801F33DC(D_801F44A0);
     func_801F3870();
-    ACTOR_COUNT_DOWN(TASK(Actor), remaining, timer);
+    ACTOR_COUNT_DOWN(SELF(Actor), remaining, timer);
     if (!(remaining & BYTE_MASK)) {
         func_80196070();
     }

@@ -6,16 +6,16 @@ MATCH void func_801F2C04(void) {
     s32    dy;
     u8     cell_index;
 
-    if (TASK(Actor)->header.step == 0) {
-        TASK(Actor)->param.unk_0B = COORD_INT(TASK(Actor)->pos.x);
-        work                      = TASK(Actor);
+    if (SELF(Actor)->header.step == 0) {
+        SELF(Actor)->param.unk_0B = COORD_INT(SELF(Actor)->pos.x);
+        work                      = SELF(Actor);
         work->pos.x.fixed         = ((D_801F3B34[work->param.unk_0B] - 0x80) << 7) + 0x38;
         work->pos.y.fixed         = (D_801F3B38[work->param.unk_0B] - 0x80) << 7;
         work->pos.z.fixed         = D_801F3B3C[work->param.unk_0B];
         work->header.step += 1;
     }
     if (g_AreaDrawFlags & 0x4) {
-        cell_index = TASK(Actor)->param.unk_0B;
+        cell_index = SELF(Actor)->param.unk_0B;
         dx         = g_AreaCamera.scroll_x.part.integer + 6;
         dx -= D_801F3B34[cell_index];
         if (ABS(dx) < 0xB) {

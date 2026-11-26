@@ -6,17 +6,17 @@ MATCH void func_801F38AC(void) {
     u8   mode;
 
     slot       = &D_1F800038;
-    x          = TASK(Actor)->timer;
+    x          = SELF(Actor)->timer;
     D_1F80003A = 0;
     *slot      = -(x * 4);
     func_801F3954(0);
-    *slot = TASK(Actor)->timer * 4;
+    *slot = SELF(Actor)->timer * 4;
     func_801F3954(1);
     *slot      = 0;
     D_1F80003A = 0x180;
     func_801F3954(2);
-    mode = TASK(Actor)->timer;
+    mode = SELF(Actor)->timer;
     if (mode != 0) {
-        TASK(Actor)->timer = mode - 1;
+        SELF(Actor)->timer = mode - 1;
     }
 }

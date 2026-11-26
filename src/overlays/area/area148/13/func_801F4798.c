@@ -12,15 +12,15 @@ MATCH void func_801F4798(void* first, void* second) {
 
     if (g_AreaDrawFlags != 0 && SYS_TestFlag(g_SceneEventFlags, 0x6A) != 0) {
         SetDrawMode((DR_MODE*)g_GfxPrimCursor, 0, 1, GetTPage(TPAGE_DEPTH_4BIT, TPAGE_ABR_ADD, FONT_TPAGE_X, FONT_TPAGE_Y), 0);
-        Area_CellAddPrim(TASK(Actor)->unk_18, TASK(Actor)->unk_1C, 0, sizeof(DR_MODE));
+        Area_CellAddPrim(SELF(Actor)->unk_18, SELF(Actor)->unk_1C, 0, sizeof(DR_MODE));
         ((void (*)(void))Camera_SetMatrix)();
         line = (LINE_F2*)g_GfxPrimCursor;
         SetLineF2(line);
         SetSemiTrans(line, 0);
         Camera_ProjectPoint(first, (DVECTOR*)&line->x0);
         Camera_ProjectPoint(second, (DVECTOR*)&line->x1);
-        setRGB0(line, D_801F6138[TASK(Actor)->unk_06][0], D_801F6138[TASK(Actor)->unk_06][1], D_801F6138[TASK(Actor)->unk_06][2]);
-        Area_CellAddPrim(TASK(Actor)->unk_18, TASK(Actor)->unk_1C, 0, sizeof(LINE_F2));
+        setRGB0(line, D_801F6138[SELF(Actor)->unk_06][0], D_801F6138[SELF(Actor)->unk_06][1], D_801F6138[SELF(Actor)->unk_06][2]);
+        Area_CellAddPrim(SELF(Actor)->unk_18, SELF(Actor)->unk_1C, 0, sizeof(LINE_F2));
         angle   = ratan2(line->y1 - line->y0, line->x1 - line->x0);
         size[0] = 64;
         size[1] = 0;
@@ -31,6 +31,6 @@ MATCH void func_801F4798(void* first, void* second) {
         func_801F4DF0(line->x1, line->y1, radius2, angle + ANGLE_270);
         func_801F4A50(line->x0, line->y0, radius1, angle + ANGLE_90, line->x1, line->y1, radius2, angle + ANGLE_270);
         SetDrawMode((DR_MODE*)g_GfxPrimCursor, 0, 0, GetTPage(TPAGE_DEPTH_4BIT, TPAGE_ABR_ADD, FONT_TPAGE_X, FONT_TPAGE_Y), 0);
-        Area_CellAddPrim(TASK(Actor)->unk_18, TASK(Actor)->unk_1C, 0, sizeof(DR_MODE));
+        Area_CellAddPrim(SELF(Actor)->unk_18, SELF(Actor)->unk_1C, 0, sizeof(DR_MODE));
     }
 }

@@ -14,11 +14,11 @@ MATCH void func_801F4140(void) {
         }
         if (SYS_TestFlag(g_SceneEventFlags, 72) == 0) {
             if (SYS_TestFlag(g_SceneEventFlags, 73) == 0) {
-                COORD_INT(TASK(Actor)->pos.z) = 2496;
+                COORD_INT(SELF(Actor)->pos.z) = 2496;
             } else {
-                COORD_INT(TASK(Actor)->pos.z) = -0x240;
+                COORD_INT(SELF(Actor)->pos.z) = -0x240;
             }
-            TASK(Actor)->header.flags |= 0x40;
+            SELF(Actor)->header.flags |= 0x40;
             return;
         }
     }
@@ -31,11 +31,11 @@ MATCH void func_801F4140(void) {
             return;
         }
         if (SYS_TestFlag(g_SceneEventFlags, 73) == 0) {
-            COORD_INT(TASK(Actor)->pos.z) = 2496;
-            TASK(Actor)->header.flags |= 0x40;
+            COORD_INT(SELF(Actor)->pos.z) = 2496;
+            SELF(Actor)->header.flags |= 0x40;
             return;
         }
     }
 
-    COORD_INT(TASK(Actor)->pos.z) = 960;
+    COORD_INT(SELF(Actor)->pos.z) = 960;
 }

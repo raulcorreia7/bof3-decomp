@@ -22,9 +22,9 @@ MATCH s32 Scene_EventBegin(void) {
         }
         for (i = 0; i < ACTOR_COUNT; i++) {
             if ((g_Actors[i].header.flags & ACTOR_FLAG_IN_USE) && g_Actors[i].unk_06 == 9 && (u8)(g_Actors[i].unk_05 - 0x5C) < 3 && SYS_TestFlag(D_80144FC4, D_801F56F8 + 0x5C)) {
-                g_Task = &g_Actors[i];
+                g_Self = &g_Actors[i];
                 Script_Select(1);
-                g_Task = g_CurrentActor;
+                g_Self = g_CurrentActor;
                 break;
             }
         }

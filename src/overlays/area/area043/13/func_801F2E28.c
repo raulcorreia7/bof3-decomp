@@ -13,8 +13,8 @@ MATCH void func_801F2E28(void) {
         g_SpawnedActors[g_ScratchPad.cells.bytes[0]].unk_2C      = 0x64;
         g_SpawnedActors[g_ScratchPad.cells.bytes[0]].layer       = 1;
         g_SpawnedActors[g_ScratchPad.cells.bytes[0]].unk_06      = 0;
-        g_SpawnedActors[g_ScratchPad.cells.bytes[0]].pos.x.fixed = TASK(Actor)->pos.x.fixed;
-        g_SpawnedActors[g_ScratchPad.cells.bytes[0]].pos.y.fixed = TASK(Actor)->pos.y.fixed;
-        g_SpawnedActors[g_ScratchPad.cells.bytes[0]].pos.z.fixed = TASK(Actor)->pos.z.fixed + TO_COORD(128);
+        g_SpawnedActors[g_ScratchPad.cells.bytes[0]].pos.x.fixed = SELF(Actor)->pos.x.fixed;
+        g_SpawnedActors[g_ScratchPad.cells.bytes[0]].pos.y.fixed = SELF(Actor)->pos.y.fixed;
+        g_SpawnedActors[g_ScratchPad.cells.bytes[0]].pos.z.fixed = SELF(Actor)->pos.z.fixed + TO_COORD(128);
     }
 }

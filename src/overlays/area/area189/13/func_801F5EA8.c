@@ -9,6 +9,6 @@ MATCH bool func_801F5EA8(void) {
     }
     SND_SEPlay(EMI_SE_ID(SND_BANK_COMMON, 5));
     g_GameStateIndex         = GAME_REQUEST_MENU;
-    TASK(Actor)->header.step = 2;
+    SELF(Actor)->header.step = 2;
     return 1;
 }

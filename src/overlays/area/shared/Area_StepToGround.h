@@ -5,11 +5,11 @@
 #define AREA_STEP_TO_GROUND()                                                           \
     g_ScriptState->steps = 1;                                                           \
     Area_MoveActorRoute(g_ScriptState, 5);                                              \
-    steps                         = TASK(Actor)->timer;                                 \
-    x                             = TASK(Actor)->pos.x.fixed + TASK(Actor)->vx * steps; \
-    y                             = TASK(Actor)->pos.y.fixed + TASK(Actor)->vy * steps; \
+    steps                         = SELF(Actor)->timer;                                 \
+    x                             = SELF(Actor)->pos.x.fixed + SELF(Actor)->vx * steps; \
+    y                             = SELF(Actor)->pos.y.fixed + SELF(Actor)->vy * steps; \
     ground                        = Area_HeightSample(x, y);                            \
-    work                          = g_Task;                                             \
+    work                          = g_Self;                                             \
     floor_height                  = COORD_INT(work->pos.z) - 224;                       \
     work->vz                      = (ground - floor_height) / work->timer;              \
     g_ActorTurnRamps[0].frames_xy = work->timer;                                        \

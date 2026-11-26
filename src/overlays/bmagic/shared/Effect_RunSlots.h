@@ -6,17 +6,17 @@ MATCH void func_801EEC10(void) {
     PartyMember*  saved_battler;
     u8            i;
 
-    SYS_DISPATCH_BYTE(handlers.steps, TASK(PartyMember)->header.mode);
+    SYS_DISPATCH_BYTE(handlers.steps, SELF(PartyMember)->header.mode);
 
     for (i = 0; i < BMAGIC_EFFECT_COUNT; i++) {
         if (BMAGIC_EFFECT_SLOTS[i].header.flags & BMAGIC_EFFECT_IN_USE) {
-            saved_task            = TASK(PartyMember);
+            saved_task            = SELF(PartyMember);
             saved_battler         = g_BattleEffectBattler;
-            g_Task                = (PartyMember*)&BMAGIC_EFFECT_SLOTS[i];
+            g_Self                = (PartyMember*)&BMAGIC_EFFECT_SLOTS[i];
             g_BattleEffectBattler = BMAGIC_EFFECT_SLOTS[i].target.party;
             BMAGIC_EFFECT_SLOT_STEP();
             g_BattleEffectBattler = saved_battler;
-            g_Task                = saved_task;
+            g_Self                = saved_task;
         }
     }
 }

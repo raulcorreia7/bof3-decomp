@@ -8,7 +8,7 @@ __asm__(".include \"include/match/macro.inc\"\n");
 #include "overlays/plchar/shared/PlChar_PollScriptRequest.h"
 
 MATCH void func_801CF728(void) {
-    SYS_DISPATCH_TASK(D_801D0888, 2, g_Task);
+    SYS_DISPATCH_TASK(D_801D0888, 2, g_Self);
 }
 
 #include "overlays/plchar/shared/PlChar_StartTurnPeco.h"

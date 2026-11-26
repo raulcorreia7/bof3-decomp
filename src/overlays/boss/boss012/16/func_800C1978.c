@@ -5,12 +5,12 @@ MATCH void func_800C1978(s32 mode) {
     Script_AnimStepOnce();
     GFX_ClearRect(832, 256, 128, 256);
     SND_SEQueueSelection(EMI_SE_ID(SND_BANK_ENEMY, 1));
-    TASK(Actor)->unk_18   = (s16)TASK(Actor)->screen_x;
-    TASK(Actor)->unk_1C   = (s16)TASK(Actor)->screen_y;
-    TASK(Actor)->screen_x = 50;
-    TASK(Actor)->screen_y = 65;
-    TASK(Actor)->gravity  = 0;
-    TASK(Actor)->active_flags |= 0x88;
-    func_800C1C08(LOHU(TASK(Actor)->gravity));
-    TASK(Actor)->unk_03 = 2;
+    SELF(Actor)->unk_18   = (s16)SELF(Actor)->screen_x;
+    SELF(Actor)->unk_1C   = (s16)SELF(Actor)->screen_y;
+    SELF(Actor)->screen_x = 50;
+    SELF(Actor)->screen_y = 65;
+    SELF(Actor)->gravity  = 0;
+    SELF(Actor)->active_flags |= 0x88;
+    func_800C1C08(LOHU(SELF(Actor)->gravity));
+    SELF(Actor)->unk_03 = 2;
 }

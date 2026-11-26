@@ -6,5 +6,5 @@ MATCH void AreaAction_WaitMessageFade(void) {
         return;
     }
 
-    TASK(Actor)->unk_04 = 5;
+    SELF(Actor)->unk_04 = 5;
 }

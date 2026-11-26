@@ -3,5 +3,5 @@
 /* Dispatches the AREA030 scratchpad mode byte through the overlay's
  * jump table. */
 MATCH void func_801D12C8(void) {
-    D_801E1D00[TASK(FishingState)->sub_index]();
+    D_801E1D00[SELF(FishingState)->sub_index]();
 }

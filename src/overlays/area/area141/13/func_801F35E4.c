@@ -3,14 +3,14 @@
 MATCH void func_801F35E4(void) {
     s32 scale;
 
-    scale = (TASK(Actor)->pos.x.fixed - 0x450000) >> 15;
+    scale = (SELF(Actor)->pos.x.fixed - 0x450000) >> 15;
     if (scale != 0) {
         g_ScriptState->steps   = ABS(scale);
-        TASK(Actor)->direction = 7;
-        if (g_Task == &D_80143F48) {
+        SELF(Actor)->direction = 7;
+        if (g_Self == &D_80143F48) {
             Area_SetFacingOffsetX(D_80143F48.direction);
         } else {
-            Area_MoveActorRoute(g_ScriptState, TASK(Actor)->direction);
+            Area_MoveActorRoute(g_ScriptState, SELF(Actor)->direction);
         }
     }
 }

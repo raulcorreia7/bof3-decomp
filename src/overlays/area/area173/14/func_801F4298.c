@@ -3,10 +3,10 @@
 MATCH void func_801F4298(void) {
     Actor* work;
 
-    COORD_INT(TASK(Actor)->pos.z) = -128;
-    TASK(Actor)->screen_y         = 0;
-    TASK(Actor)->header.step++;
-    work = TASK(Actor);
+    COORD_INT(SELF(Actor)->pos.z) = -128;
+    SELF(Actor)->screen_y         = 0;
+    SELF(Actor)->header.step++;
+    work = SELF(Actor);
     if (abs(g_Game.members[0].pos.y.fixed - (TO_COORD(COORD_INT(work->pos.y) + 1) | COORD_HALF)) > COORD_HALF) {
         goto call;
     }

@@ -7,16 +7,16 @@
 MATCH void Area_CountHudBannerHold(void) {
     Actor* work;
 
-    work = TASK(Actor);
+    work = SELF(Actor);
     if (work->param.unk_0B == 0) {
         work->timer++;
-        work = TASK(Actor);
+        work = SELF(Actor);
         if (work->timer >= 90) {
             work->param.unk_0B++;
         }
     }
 
-    if (D_801454F2 != 0 && TASK(Actor)->param.unk_0B != 0) {
+    if (D_801454F2 != 0 && SELF(Actor)->param.unk_0B != 0) {
         goto bump;
     }
     if (g_GameStateIndex == GAME_REQUEST_MESSAGE) {
@@ -26,7 +26,7 @@ MATCH void Area_CountHudBannerHold(void) {
         goto done;
     }
 bump:
-    TASK(Actor)->unk_03++;
+    SELF(Actor)->unk_03++;
 done:
-    Area_DrawHudBanner(0x5C, TASK(Actor)->screen_y);
+    Area_DrawHudBanner(0x5C, SELF(Actor)->screen_y);
 }

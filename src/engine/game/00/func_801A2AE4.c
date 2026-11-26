@@ -3,23 +3,23 @@
 MATCH void func_801A2AE4(Actor* entity, u8 route_flag) {
     u8* flag;
 
-    if (TASK(Actor)->unk_06 == 0x0A) {
-        if (TASK(Actor)->timer != 0 && (GAME_WORK_AREA_PTR->interaction_flags & ACTOR_INTERACTION_MOVING) != 0) {
-            func_801A3080(entity, TASK(Actor)->direction & 0x7);
+    if (SELF(Actor)->unk_06 == 0x0A) {
+        if (SELF(Actor)->timer != 0 && (GAME_WORK_AREA_PTR->interaction_flags & ACTOR_INTERACTION_MOVING) != 0) {
+            func_801A3080(entity, SELF(Actor)->direction & 0x7);
             entity->interaction_flags &= ~ACTOR_INTERACTION_MOVING;
         }
-    } else if ((TASK(Actor)->option_flags & ACTOR_OPT_ROUTE_LOCKED) != 0) {
+    } else if ((SELF(Actor)->option_flags & ACTOR_OPT_ROUTE_LOCKED) != 0) {
         entity->interaction_flags &= ~ACTOR_INTERACTION_MOVING;
     } else {
         entity->interaction_flags |= ACTOR_INTERACTION_MOVING;
-        if (TASK(Actor)->timer != 0) {
-            TASK(Actor)->direction |= 8;
+        if (SELF(Actor)->timer != 0) {
+            SELF(Actor)->direction |= 8;
         } else {
-            TASK(Actor)->direction &= 7;
+            SELF(Actor)->direction &= 7;
         }
         flag = &g_ScratchPad.cells.bytes[3];
         if (*flag != GAME_NONE) {
-            if ((route_flag & BYTE_MASK) == TASK(Actor)->direction) {
+            if ((route_flag & BYTE_MASK) == SELF(Actor)->direction) {
                 entity->interaction_flags &= ~ACTOR_INTERACTION_MOVING;
             }
         } else {

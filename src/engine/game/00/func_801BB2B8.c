@@ -26,10 +26,10 @@ NON_MATCHING s32 func_801BB2B8(s32 x0, s32 y0, s32 x1, s32 y1) {
     to_x.h.hi = x1;
     to_y.h.hi = y1;
 
-    if ((COORD_FRAC(TASK(Actor)->pos.x) == 0 && TASK(Actor)->voice_flags.scene_flag == 0) || (COORD_FRAC(TASK(Actor)->pos.x) != 0 && TASK(Actor)->voice_flags.scene_flag != 0)) {
+    if ((COORD_FRAC(SELF(Actor)->pos.x) == 0 && SELF(Actor)->voice_flags.scene_flag == 0) || (COORD_FRAC(SELF(Actor)->pos.x) != 0 && SELF(Actor)->voice_flags.scene_flag != 0)) {
         hx0 = (hx0 + (to_x.w & ~0xFFFF)) / 2;
     }
-    if ((COORD_FRAC(TASK(Actor)->pos.y) == 0 && TASK(Actor)->voice_flags.scene_flag == 0) || (COORD_FRAC(TASK(Actor)->pos.y) != 0 && TASK(Actor)->voice_flags.scene_flag != 0)) {
+    if ((COORD_FRAC(SELF(Actor)->pos.y) == 0 && SELF(Actor)->voice_flags.scene_flag == 0) || (COORD_FRAC(SELF(Actor)->pos.y) != 0 && SELF(Actor)->voice_flags.scene_flag != 0)) {
         hy0 = (hy0 + (to_y.w & ~0xFFFF)) / 2;
     }
 
@@ -39,7 +39,7 @@ NON_MATCHING s32 func_801BB2B8(s32 x0, s32 y0, s32 x1, s32 y1) {
 
     switch (key) {
         case 0x80:
-            if (TASK(Actor)->unk_05 != 0)
+            if (SELF(Actor)->unk_05 != 0)
                 return 0xFF;
         case 0x00:
         case 0x60:
@@ -55,7 +55,7 @@ NON_MATCHING s32 func_801BB2B8(s32 x0, s32 y0, s32 x1, s32 y1) {
             return code1 & 0xFF;
         case 0x10:
             if ((code1 & 0xFF) == 0x11) {
-                if (g_Task == (void*)&D_8014626C)
+                if (g_Self == (void*)&D_8014626C)
                     bit = g_Game.unk_3E7 & 1;
                 else
                     bit = g_GameState->status.field.flags.unsigned_value & 1;
@@ -88,7 +88,7 @@ NON_MATCHING s32 func_801BB2B8(s32 x0, s32 y0, s32 x1, s32 y1) {
                 }
                 if ((code1 & 0xFF) == 0xAF)
                     return 0xA1;
-                if (TASK(Actor)->unk_05 == 0)
+                if (SELF(Actor)->unk_05 == 0)
                     return code1 & 0xFF;
                 return 0xFF;
             }

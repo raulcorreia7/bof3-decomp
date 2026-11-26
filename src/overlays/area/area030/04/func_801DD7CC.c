@@ -8,8 +8,8 @@ MATCH void func_801DD7CC(void) {
     if ((g_SpawnedActors[6].header.mode == 0xE) && (g_SpawnedActors[6].unk_08 == 0)) {
         if (g_PadStates[0].pressed & g_InputMasks[FISHING_INPUT_CANCEL]) {
             SND_SEPlay(EMI_SE_ID(SND_BANK_COMMON, 6));
-            TASK(FishingState)->flag_04   = 0;
-            TASK(FishingState)->sub_index = (TASK(FishingState)->sub_index - 1);
+            SELF(FishingState)->flag_04   = 0;
+            SELF(FishingState)->sub_index = (SELF(FishingState)->sub_index - 1);
             return;
         }
         if (g_PadStates[0].pressed & PADLdown) {

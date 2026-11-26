@@ -12,17 +12,17 @@ MATCH void func_801DEFE4(void) {
     if (g_Battle.outcome.options & 0x20) {
         if ((g_Battle.phase.mode == BATTLE_MODE_RESULT) && BATTLE_IS_VICTORY()) {
             if (HAS_STATUS(*g_Game.current, STATUS_KO)) {
-                Script_Switch(TASK(PartyMember)->facing + 0x1C, MEM_PTR(u8, BATTLE_SCRIPT_TABLE), 0x1800);
+                Script_Switch(SELF(PartyMember)->facing + 0x1C, MEM_PTR(u8, BATTLE_SCRIPT_TABLE), 0x1800);
             } else {
-                Script_Switch(TASK(PartyMember)->unk_4B, MEM_PTR(u8, BATTLE_SCRIPT_TABLE), 0x1800);
+                Script_Switch(SELF(PartyMember)->unk_4B, MEM_PTR(u8, BATTLE_SCRIPT_TABLE), 0x1800);
             }
             return;
         }
     } else if ((g_Battle.phase.mode == BATTLE_MODE_RESULT) && BATTLE_IS_VICTORY()) {
         if (HAS_STATUS(*g_Game.current, STATUS_KO)) {
-            Script_Switch(TASK(PartyMember)->facing + 0x1C, MEM_PTR(u8, BATTLE_SCRIPT_TABLE), 0x1800);
+            Script_Switch(SELF(PartyMember)->facing + 0x1C, MEM_PTR(u8, BATTLE_SCRIPT_TABLE), 0x1800);
         } else {
-            Script_Switch(TASK(PartyMember)->facing + 0x20, MEM_PTR(u8, BATTLE_SCRIPT_TABLE), 0x1800);
+            Script_Switch(SELF(PartyMember)->facing + 0x20, MEM_PTR(u8, BATTLE_SCRIPT_TABLE), 0x1800);
         }
         return;
     }
@@ -30,27 +30,27 @@ MATCH void func_801DEFE4(void) {
     work  = g_Game.current;
     flags = work->chr.status;
     if (flags & STATUS_KO) {
-        Script_Request(TASK(PartyMember)->facing + 0x1C);
+        Script_Request(SELF(PartyMember)->facing + 0x1C);
         return;
     }
     if (flags & 0x800) {
-        Script_Request(TASK(PartyMember)->facing + 0x30);
+        Script_Request(SELF(PartyMember)->facing + 0x30);
         return;
     }
     if (g_Battle.flags & BATTLE_STATE_COMMAND_ARMED) {
         if (flags & STATUS_PARALYZED) {
-            Script_Request(TASK(PartyMember)->facing + 0x4);
+            Script_Request(SELF(PartyMember)->facing + 0x4);
             return;
         }
         if (flags & 0x20C0) {
-            Script_Request(TASK(PartyMember)->facing + 0x18);
+            Script_Request(SELF(PartyMember)->facing + 0x18);
         } else {
-            Script_Request(TASK(PartyMember)->facing + 0x8);
+            Script_Request(SELF(PartyMember)->facing + 0x8);
         }
         return;
     }
     if (work->u.turn.damage_flags.value & BATTLER_DAMAGE_DEFENDING) {
-        Script_Request(TASK(PartyMember)->facing + 0x14);
+        Script_Request(SELF(PartyMember)->facing + 0x14);
         return;
     }
 
@@ -58,29 +58,29 @@ MATCH void func_801DEFE4(void) {
     switch (state) {
         case 0:
             if (HAS_STATUS(*g_Game.current, 0x20C0)) {
-                Script_Request(TASK(PartyMember)->facing + 0x18);
+                Script_Request(SELF(PartyMember)->facing + 0x18);
             } else {
-                Script_Request(TASK(PartyMember)->facing + 0x4);
+                Script_Request(SELF(PartyMember)->facing + 0x4);
             }
             return;
         case 1:
-            Script_Request(TASK(PartyMember)->facing + 0x8);
+            Script_Request(SELF(PartyMember)->facing + 0x8);
             return;
         case 2:
-            Script_Request(TASK(PartyMember)->facing + 0x14);
+            Script_Request(SELF(PartyMember)->facing + 0x14);
             return;
         case 4:
             battler = g_Game.current;
             if (battler->u.turn.action_flags.value & BATTLER_ACTION_ABILITY_ALT_POSE) {
-                Script_Request(TASK(PartyMember)->facing + 0x38);
+                Script_Request(SELF(PartyMember)->facing + 0x38);
             } else if (D_801CA71C[battler->u.turn.command.id].mask & 0x800) {
-                Script_Request(TASK(PartyMember)->facing + 0x8);
+                Script_Request(SELF(PartyMember)->facing + 0x8);
             } else {
-                Script_Request(TASK(PartyMember)->facing + 0x28);
+                Script_Request(SELF(PartyMember)->facing + 0x28);
             }
             return;
         case 5:
-            Script_Request(TASK(PartyMember)->facing + 0x4);
+            Script_Request(SELF(PartyMember)->facing + 0x4);
             return;
         default:
             return;

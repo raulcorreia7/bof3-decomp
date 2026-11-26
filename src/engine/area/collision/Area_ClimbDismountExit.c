@@ -6,21 +6,21 @@ MATCH s32 Area_ClimbDismountExit(void) {
     Actor* actor;
     Actor* actor_b;
     u8     frames;
-    actor  = TASK(Actor);
+    actor  = SELF(Actor);
     frames = actor->timer;
     if (frames == 0) {
         Script_Request(actor->direction);
         Actor_ClearVelocity();
         g_Game.current->u.field.mode.unsigned_value = 0;
-        TASK(Actor)->header.mode                    = 1;
+        SELF(Actor)->header.mode                    = 1;
         ACTOR_CLEAR_STEP();
-        TASK(Actor)->unk_03 = 0;
-        TASK(Actor)->unk_04 = 0;
+        SELF(Actor)->unk_03 = 0;
+        SELF(Actor)->unk_04 = 0;
         return 1;
     }
     actor->timer = (frames - 1);
     Actor_Move();
-    actor_b = TASK(Actor);
+    actor_b = SELF(Actor);
     if (actor_b->timer == actor_b->unk_0A) {
         GFX_PaletteLoad(((actor_b->unk_05 << 6) + GAME_PALETTE_STAGE), 0);
     }

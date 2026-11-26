@@ -6,7 +6,7 @@ MATCH void func_801F2CBC(void) {
         g_ScriptState->cursor -= 2;
     } else {
         g_AreaCameraOffsetZ = 0x5DC;
-        TASK(Actor)->unk_04 = 0;
+        SELF(Actor)->unk_04 = 0;
     }
     g_AreaCameraRefreshCount = 2;
 }

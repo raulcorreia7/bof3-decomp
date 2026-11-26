@@ -30,25 +30,25 @@ MATCH u8 Script_OpsRunFace(void* sub, s32 target, u8 value) {
     action = ((u8*)target)[FIELD(u16, sub, 0xAu)];
     switch (action) {
         case ACTOR_SCRIPT_FACE_SELECT_BASE_14:
-            result = (TASK(Actor)->direction & 0x7) + 0x14;
+            result = (SELF(Actor)->direction & 0x7) + 0x14;
             break;
         case ACTOR_SCRIPT_FACE_SELECT_BASE_1C:
-            result = (TASK(Actor)->direction & 0x7) + 0x1C;
+            result = (SELF(Actor)->direction & 0x7) + 0x1C;
             break;
         case ACTOR_SCRIPT_FACE_SELECT_BASE_24:
-            result = (TASK(Actor)->direction & 0x7) + 0x24;
+            result = (SELF(Actor)->direction & 0x7) + 0x24;
             break;
         case ACTOR_SCRIPT_FACE_SELECT_BASE_2C:
-            result = (TASK(Actor)->direction & 0x7) + 0x2C;
+            result = (SELF(Actor)->direction & 0x7) + 0x2C;
             break;
         case ACTOR_SCRIPT_FACE_AXIS_BASE_34:
-            work   = TASK(Actor);
+            work   = SELF(Actor);
             mode   = work->direction;
             result = ((mode >> 1) & 0x3) | 0x34;
             /* 0x65 and 0x66 share the route update at set_route. */
             goto set_route;
         case ACTOR_SCRIPT_FACE_AXIS_BASE_10:
-            work   = TASK(Actor);
+            work   = SELF(Actor);
             mode   = work->direction;
             result = ((mode >> 1) & 0x3) | 0x10;
         set_route:
@@ -58,11 +58,11 @@ MATCH u8 Script_OpsRunFace(void* sub, s32 target, u8 value) {
             break;
         case ACTOR_SCRIPT_FACE_SELECT_FACING:
         default:
-            result = TASK(Actor)->direction & 0x7;
+            result = SELF(Actor)->direction & 0x7;
             break;
     }
     FIELD(u8, sub, 0x0u) |= 0x40;
-    TASK(Actor)->option_flags |= ACTOR_OPT_ROUTE_LOCKED;
+    SELF(Actor)->option_flags |= ACTOR_OPT_ROUTE_LOCKED;
     Script_Select(result);
-    return TASK(Actor)->direction;
+    return SELF(Actor)->direction;
 }

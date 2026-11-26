@@ -7,16 +7,16 @@
  * func_801FCB80 (scena06), func_801F2C94 and func_801F2E60 (area038) */
 #define ACTOR_SEED_PARTY_SLOT(member, table, actor_type, unk06)                                           \
     {                                                                                                     \
-        TASK_SET(&g_Game.members[member]);                                                                \
-        TASK(Actor)->param.actor_slot = Actor_FindFreeSpawned();                                          \
-        if (TASK(Actor)->param.actor_slot == GAME_NONE) {                                                 \
+        SELF_SET(&g_Game.members[member]);                                                                \
+        SELF(Actor)->param.actor_slot = Actor_FindFreeSpawned();                                          \
+        if (SELF(Actor)->param.actor_slot == GAME_NONE) {                                                 \
             return;                                                                                       \
         }                                                                                                 \
-        g_SpawnedActors[TASK(Actor)->param.actor_slot].header.flags = 1;                                  \
-        g_SpawnedActors[TASK(Actor)->param.actor_slot].type         = actor_type;                         \
-        g_SpawnedActors[TASK(Actor)->param.actor_slot].unk_06       = unk06;                              \
-        g_SpawnedActors[TASK(Actor)->param.actor_slot].vx           = 0;                                  \
-        g_SpawnedActors[TASK(Actor)->param.actor_slot].selection    = (table)[g_PartyFieldOrder[member]]; \
-        g_SpawnedActors[TASK(Actor)->param.actor_slot].screen_x     = TASK(Actor)->screen_x;              \
-        g_SpawnedActors[TASK(Actor)->param.actor_slot].screen_y     = TASK(Actor)->screen_y;              \
+        g_SpawnedActors[SELF(Actor)->param.actor_slot].header.flags = 1;                                  \
+        g_SpawnedActors[SELF(Actor)->param.actor_slot].type         = actor_type;                         \
+        g_SpawnedActors[SELF(Actor)->param.actor_slot].unk_06       = unk06;                              \
+        g_SpawnedActors[SELF(Actor)->param.actor_slot].vx           = 0;                                  \
+        g_SpawnedActors[SELF(Actor)->param.actor_slot].selection    = (table)[g_PartyFieldOrder[member]]; \
+        g_SpawnedActors[SELF(Actor)->param.actor_slot].screen_x     = SELF(Actor)->screen_x;              \
+        g_SpawnedActors[SELF(Actor)->param.actor_slot].screen_y     = SELF(Actor)->screen_y;              \
     }

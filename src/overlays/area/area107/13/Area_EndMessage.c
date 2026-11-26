@@ -5,6 +5,6 @@ MATCH void Area_EndMessage(void) {
     if (g_GameStateIndex != GAME_REQUEST_MESSAGE) {
         Game_ClearScriptActive();
         SND_SEPlay(EMI_SE_ID(SND_BANK_AREA, 6));
-        TASK(Actor)->header.mode = 0;
+        SELF(Actor)->header.mode = 0;
     }
 }

@@ -427,7 +427,7 @@ class Tree:
     """The headers of the C tree: member tables of work structs, declared names and arrays."""
 
     VIEW = re.compile(
-        r"#\s*define\s+g_Task\s+\(\((?:volatile\s+)?(\w+)\s*\*\)\s*g_Task\)"
+        r"#\s*define\s+g_Self\s+\(\((?:volatile\s+)?(\w+)\s*\*\)\s*g_Self\)"
     )
     INCLUDE = re.compile(r'^\s*#\s*include\s+"([^"]+)"', re.M)
     SCALAR = {
@@ -849,7 +849,7 @@ def member(offset: int, width: int, ctx: dict) -> str:
     row = next((r for r in ctx["members"].get(offset, []) if r[1] == width), None)
     if not row:
         raise Unsupported(f"no {width}-byte member at 0x{offset:X}")
-    return f"g_Task->{row[0]}"
+    return f"g_Self->{row[0]}"
 
 
 WIDTH = {"u8": 1, "u16": 2, "u32": 4}
@@ -979,7 +979,7 @@ def body_for(f: Func, tree: Tree, names: Names) -> tuple[str, list[tuple[str, in
     if "spad" in lifted.flags:
         work = tree.work_type(files)
         if not work:
-            raise Unsupported("no g_Task view in this image")
+            raise Unsupported("no g_Self view in this image")
         ctx["members"] = tree.members(work, files)
     lines = statements(lifted, ctx)
     externs = [

@@ -5,6 +5,6 @@ MATCH void func_801F2C88(void) {
 
     func_801F2FC8();
     func_801F321C();
-    work = TASK(u8);
+    work = SELF(u8);
     work[1] += 1;
 }

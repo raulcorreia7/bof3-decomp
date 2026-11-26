@@ -90,7 +90,7 @@ static u8 D_801F34B4[2380] = {
 static AreaSlotWork* D_801F3E00 = 0;
 
 MATCH s32 func_801F2C04(void) {
-    SYS_DISPATCH_BYTE(s_PositionRingModes, TASK(Actor)->header.mode);
+    SYS_DISPATCH_BYTE(s_PositionRingModes, SELF(Actor)->header.mode);
 }
 
 MATCH void func_801F2C48(void) {
@@ -98,7 +98,7 @@ MATCH void func_801F2C48(void) {
 
     func_801F2F5C();
 
-    work = TASK(u8);
+    work = SELF(u8);
 
     work[1] += 1u;
     FIELD(u16, work, 0x2Eu) = 0;
@@ -108,15 +108,15 @@ MATCH void func_801F2C80(void) {
     u16 next;
 
     if (g_ScriptVars[0] == 0x19) {
-        TASK(Actor)->header.mode += 1u;
+        SELF(Actor)->header.mode += 1u;
         return;
     }
-    func_801F318C(TASK(Actor)->screen_x);
+    func_801F318C(SELF(Actor)->screen_x);
     func_801F3060();
-    next                  = (TASK(Actor)->screen_x + 0x40u);
-    TASK(Actor)->screen_x = next;
+    next                  = (SELF(Actor)->screen_x + 0x40u);
+    SELF(Actor)->screen_x = next;
     if ((s16)next >= 0x400) {
-        TASK(Actor)->screen_x = 0x400;
+        SELF(Actor)->screen_x = 0x400;
     }
 }
 
@@ -264,16 +264,16 @@ MATCH void func_801F318C(s16 radius) {
     GFX_AddDitheredDrawMode(3u, GetTPage(TPAGE_DEPTH_4BIT, TPAGE_ABR_SUB, FONT_TPAGE_X, FONT_TPAGE_Y) & HALF_MASK);
     Camera_SetMatrix(scratch);
 
-    pos[0] = TASK(Actor)->pos.x.fixed;
-    pos[1] = TASK(Actor)->pos.y.fixed;
-    pos[2] = TASK(Actor)->pos.z.fixed;
+    pos[0] = SELF(Actor)->pos.x.fixed;
+    pos[1] = SELF(Actor)->pos.y.fixed;
+    pos[2] = SELF(Actor)->pos.z.fixed;
     Camera_ProjectPoint(pos, &center);
     D_800E4A00 = center;
 
     ring   = MEM_PTR(DVECTOR, 0x800E4A00u);
-    pos[0] = TASK(Actor)->pos.x.fixed + ((radius * rcos(65408)) >> 4);
-    pos[1] = TASK(Actor)->pos.y.fixed + ((radius * rsin(65408)) >> 4);
-    pos[2] = TASK(Actor)->pos.z.fixed;
+    pos[0] = SELF(Actor)->pos.x.fixed + ((radius * rcos(65408)) >> 4);
+    pos[1] = SELF(Actor)->pos.y.fixed + ((radius * rsin(65408)) >> 4);
+    pos[2] = SELF(Actor)->pos.z.fixed;
     Camera_ProjectPoint(pos, &point);
 
     do {
@@ -281,9 +281,9 @@ MATCH void func_801F318C(s16 radius) {
         setXY2(primitive, (u16)center.vx, (u16)center.vy, (u16)point.vx, (u16)point.vy);
 
         angle += 128;
-        pos[0] = TASK(Actor)->pos.x.fixed + ((radius * rcos((u16)angle)) >> 4);
-        pos[1] = TASK(Actor)->pos.y.fixed + ((radius * rsin((u16)angle)) >> 4);
-        pos[2] = TASK(Actor)->pos.z.fixed;
+        pos[0] = SELF(Actor)->pos.x.fixed + ((radius * rcos((u16)angle)) >> 4);
+        pos[1] = SELF(Actor)->pos.y.fixed + ((radius * rsin((u16)angle)) >> 4);
+        pos[2] = SELF(Actor)->pos.z.fixed;
         Camera_ProjectPoint(pos, &point);
 
         primitive->x2 = (u16)point.vx;

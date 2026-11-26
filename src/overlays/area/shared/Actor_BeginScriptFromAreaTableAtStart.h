@@ -10,7 +10,7 @@ MATCH void Actor_BeginScriptFromAreaTableAtStart(void) {
     u8  step;
     u8  arg;
 
-    pc = TASK(Actor)->script_pc;
+    pc = SELF(Actor)->script_pc;
     if (pc == 2) {
         bank  = g_AreaLoads[g_GameAreaId];
         table = FIELD(u8*, bank, 0x10);
@@ -19,7 +19,7 @@ MATCH void Actor_BeginScriptFromAreaTableAtStart(void) {
         step = row[2];
         arg  = row[3];
         Script_Begin(step, (u16)(pc - 2));
-        TASK(Actor)->mirror = arg;
+        SELF(Actor)->mirror = arg;
         g_ScriptState->cursor += 2;
     } else {
         g_ScriptState->cursor -= 2;

@@ -5,7 +5,7 @@ __asm__(".include \"include/match/macro.inc\"\n");
 #endif
 
 MATCH void func_801CE404(void) {
-    D_801CFFA8[TASK(Actor)->header.step]();
+    D_801CFFA8[SELF(Actor)->header.step]();
 }
 
 #include "overlays/plchar/shared/func_801CE448.h"
@@ -13,7 +13,7 @@ MATCH void func_801CE404(void) {
 #include "overlays/plchar/shared/func_801CE628.h"
 
 MATCH void func_801CE72C(void) {
-    SYS_DISPATCH_TASK(D_801CFFB4, 2, g_Task);
+    SYS_DISPATCH_TASK(D_801CFFB4, 2, g_Self);
 }
 
 #include "overlays/plchar/shared/func_801CE770.h"
@@ -30,7 +30,7 @@ MATCH void func_801CEA94(void){CHAR_RUN_FACING_PROBE()}
 #include "overlays/plchar/shared/PlChar_ProbeFacingCell.h"
 
 MATCH void func_801CF12C(void) {
-    SYS_DISPATCH_TASK(D_801CFFC0, 2, g_Task);
+    SYS_DISPATCH_TASK(D_801CFFC0, 2, g_Self);
 }
 
 #include "overlays/plchar/shared/PlChar_StartTurn.h"
@@ -40,7 +40,7 @@ MATCH void PlChar_RunStepScript(void) {
 }
 
 MATCH void func_801CF338(void) {
-    SYS_DISPATCH_TASK(D_801CFFCC, 2, g_Task);
+    SYS_DISPATCH_TASK(D_801CFFCC, 2, g_Self);
 }
 
 /* func_801CF37C */
@@ -61,7 +61,7 @@ MATCH void PlChar_RunGarrFieldTask(void) {
 #include "overlays/plchar/shared/PlChar_ProbeFacingFollower.h"
 
 MATCH void func_801CF924(void) {
-    SYS_DISPATCH_TASK(D_801CFFD4, 2, g_Task);
+    SYS_DISPATCH_TASK(D_801CFFD4, 2, g_Self);
 }
 
 #include "overlays/plchar/shared/PlChar_StartTurnMomo.h"

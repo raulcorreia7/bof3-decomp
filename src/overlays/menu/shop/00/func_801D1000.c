@@ -14,10 +14,10 @@ MATCH void func_801D1000(void) {
     index = D_8014865C;
     if (index >= 0) {
         slot = (u8*)g_Actors + index * ACTOR_SIZE;
-        TASK_SET(slot);
+        SELF_SET(slot);
         if ((slot[7] & 0x8) == 0) {
             slot[8] = slot[0x79];
-            Script_DispatchSelector(TASK(Actor)->direction);
+            Script_DispatchSelector(SELF(Actor)->direction);
             slot[0x74] |= 8;
         }
         slot[0x74] &= 0xDF;

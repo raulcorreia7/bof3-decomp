@@ -6,8 +6,8 @@ MATCH void Actor_BlockSlide(void) {
     Actor* work;
     s32    moved;
 
-    TASK(Actor)->timer = (TASK(Actor)->timer - 1);
-    work               = TASK(Actor);
+    SELF(Actor)->timer = (SELF(Actor)->timer - 1);
+    work               = SELF(Actor);
     work->pos.x.fixed += work->vx;
     moved             = work->pos.y.fixed + work->vy;
     work->pos.y.fixed = moved;
@@ -20,8 +20,8 @@ MATCH void Actor_BlockSlide(void) {
             }
         }
         Actor_BlockClaimCells();
-        TASK(Actor)->param.unk_0B = 0;
-        TASK(Actor)->header.mode  = ACTOR_BLOCK_MODE_WAIT;
+        SELF(Actor)->param.unk_0B = 0;
+        SELF(Actor)->header.mode  = ACTOR_BLOCK_MODE_WAIT;
     }
     Actor_ProjectForDraw();
 }

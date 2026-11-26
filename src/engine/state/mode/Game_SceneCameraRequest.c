@@ -5,10 +5,10 @@
 MATCH bool Game_SceneCameraRequest(void) {
     if (!(g_Game.flags & 0x2000)) {
         if (!(g_GameRequestFlags & (AREA_LOAD_FLAG_WORLD_MAP | AREA_LOAD_FLAG_FISHING | AREA_LOAD_FLAG_NO_ACTOR_SCRIPT | AREA_LOAD_FLAG_SHOP)) && (g_PadStates[0].pressed & PADstart)) {
-            Actor_RequestRoute(TASK(Actor)->direction);
+            Actor_RequestRoute(SELF(Actor)->direction);
             g_GameStateIndex         = GAME_REQUEST_SCENE_CAMERA;
-            TASK(Actor)->header.mode = 0xE;
-            TASK(Actor)->header.step = 0;
+            SELF(Actor)->header.mode = 0xE;
+            SELF(Actor)->header.step = 0;
             return 1;
         }
         return 0;

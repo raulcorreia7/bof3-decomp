@@ -4,9 +4,9 @@ MATCH void func_800C1900(void) {
     u8           slot;
     PartyMember* work;
 
-    TASK(PartyMember)->unk_09          = ENCOUNTER_ENEMIES[g_BattleCurrentEnemy->type].unk_84[2];
+    SELF(PartyMember)->unk_09          = ENCOUNTER_ENEMIES[g_BattleCurrentEnemy->type].unk_84[2];
     slot                               = Battle_AllocEffect(3, 7);
-    work                               = TASK(PartyMember);
+    work                               = SELF(PartyMember);
     g_BattleEffects[slot].target.party = work;
     work->header.step++;
 }

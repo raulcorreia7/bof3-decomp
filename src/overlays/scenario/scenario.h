@@ -41,13 +41,13 @@ s8 func_801A7AD8(u8* entry, u8 count, u16 x, u16 y);
 
 /* The red-gradient fade step of the sce15ef images: draw the gradient at full strength on the peak tick, else scaled from the countdown, and leave the scene when it ends. The members differ only in peak and shift; the caller declares the u8 `timer`. */
 #define SCENE_RED_GRADIENT_FADE(timer, peak, shift)              \
-    (timer) = TASK(Actor)->timer;                                \
+    (timer) = SELF(Actor)->timer;                                \
     if ((timer) == (peak)) {                                     \
         Scene_DrawRedGradient(0xFF);                             \
     } else {                                                     \
         Scene_DrawRedGradient(((timer) << (shift)) & BYTE_MASK); \
     }                                                            \
-    if (--TASK(Actor)->timer == 0) {                             \
+    if (--SELF(Actor)->timer == 0) {                             \
         func_80196070();                                         \
     }
 

@@ -4,14 +4,14 @@ MATCH void func_801F385C(void) {
     Actor* scratch;
     s32    armed;
 
-    scratch = TASK(Actor);
+    scratch = SELF(Actor);
     scratch->screen_y += 0xA;
     if ((s16)scratch->screen_y >= 0xF0) {
         scratch->unk_03 = 0;
     }
     if (D_801454F2 == 0 && g_GameStateIndex != GAME_REQUEST_MESSAGE && (g_Game.flags & GAME_FLAG_SCRIPT_ACTIVE) == 0) {
         armed               = 1;
-        TASK(Actor)->unk_03 = armed;
+        SELF(Actor)->unk_03 = armed;
     }
-    func_801F3FF8(0x5C, TASK(Actor)->screen_y);
+    func_801F3FF8(0x5C, SELF(Actor)->screen_y);
 }

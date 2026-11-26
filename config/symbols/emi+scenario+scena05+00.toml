@@ -33,7 +33,7 @@ jtbl_801F7314 = { addr = 0x801F7314, type = "Callback", source = "The switch tab
 jtbl_801F7394 = { addr = 0x801F7394, type = "Callback", source = "The switch table of func_801FBDBC: the jump targets of its jr dispatch." }
 jtbl_801F73DC = { addr = 0x801F73DC, type = "Callback", source = "The switch table of func_801FC380: the jump targets of its jr dispatch." }
 Scene_DispatchEntity = { addr = 0x801F73F8, type = "func", source = "dispatches a scene entity by its callback index" }
-func_801F7400 = { addr = 0x801F7400, alias = true, source = "Scene_DispatchEntity+0x8, after its g_Task load; the start the split used before the function was moved back to that load" }
+func_801F7400 = { addr = 0x801F7400, alias = true, source = "Scene_DispatchEntity+0x8, after its g_Self load; the start the split used before the function was moved back to that load" }
 Scene_DispatchActor = { addr = 0x801FCA58, type = "func", source = "dispatches a scenario actor to its callback handler" }
 Scene_JoinMomoNinaPeco = { addr = 0x801FD298, type = "func", source = "builds battlers and joins Momo, young Nina and Peco to the party for the scene" }
 Party_JoinNinaYoung = { addr = 0x801FD30C, type = "func", source = "Adds Nina Young to the party." }

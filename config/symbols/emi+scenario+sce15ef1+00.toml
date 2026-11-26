@@ -1,6 +1,6 @@
 ["emi/scenario/sce15ef1/00"]
 Scene_DispatchEntity = { addr = 0x801D0C04, type = "func", source = "dispatches a scene entity by its callback index" }
-func_801D0C0C = { addr = 0x801D0C0C, alias = true, source = "Scene_DispatchEntity+0x8, after its g_Task load; the start the split used before the function was moved back to that load" }
+func_801D0C0C = { addr = 0x801D0C0C, alias = true, source = "Scene_DispatchEntity+0x8, after its g_Self load; the start the split used before the function was moved back to that load" }
 GFX_DrawColorFan = { addr = 0x801D147C, type = "func", source = "same body as emi/scenario/sce15ef0/00@0x801D1A20 GFX_DrawColorFan" }
 Area_DrawSpawnSlot = { addr = 0x801D1B10, type = "func", source = "Draws one spawn slot as a 32-segment fan of semi-transparent Gouraud triangles around the projected slot position (its +0x14 halfword is the radius, +0x16 the centre shade, +0x17 the rim shade)." }
 Area_InitSpin = { addr = 0x801D1F68, type = "func", source = "Starts one spin-effect record: copies the actor position to the origin, rotates two opposite unit vertices by a random rotation and picks the scale; the retail sprite pass reads these fields." }

@@ -11,14 +11,14 @@ MATCH void func_801E020C(void) {
     PartyMember* work;
 
     Battle_IsPartyMemberBlocked();
-    work = TASK(PartyMember);
+    work = SELF(PartyMember);
     if ((work->header.step != 3) && (HAS_STATUS(*g_Game.current, STATUS_KO))) {
         /* FAKE: half pointer; the direct global scores 97.37%. */
         u16* half;
         half = &g_Battle.flags;
         *half &= ~BATTLE_STATE_REPRISAL_PENDING;
-        TASK(PartyMember)->header.mode = 6;
-        TASK(PartyMember)->header.step = 4;
+        SELF(PartyMember)->header.mode = 6;
+        SELF(PartyMember)->header.step = 4;
     } else {
         /* FAKE: half pointer; the direct global scores 82.24%. */
         u16* half;
@@ -38,7 +38,7 @@ MATCH void func_801E020C(void) {
         } else {
             *half = (*half & ~BATTLE_STATE_REPRISAL_PENDING) | BATTLE_STATE_REPRISAL_DONE;
         }
-        Battle_ClearSlotPending(TASK(PartyMember)->slot);
+        Battle_ClearSlotPending(SELF(PartyMember)->slot);
         g_Game.current->u.turn.damage_flags.value &= ~(BATTLER_DAMAGE_UNK_4 | BATTLER_DAMAGE_UNK_5 | BATTLER_DAMAGE_TAKEN);
         if ((func_801E0E0C() & BYTE_MASK) != 0) {
             /* FAKE: flag pointer; the direct store scores 97.37%. */
@@ -47,8 +47,8 @@ MATCH void func_801E020C(void) {
             *flag |= 1;
         }
         g_Game.current->u.turn.damage_flags.value &= ~BATTLER_DAMAGE_ROW_PRESENT;
-        TASK(PartyMember)->header.mode = 2;
-        TASK(PartyMember)->header.step = 0;
+        SELF(PartyMember)->header.mode = 2;
+        SELF(PartyMember)->header.step = 0;
     }
-    TASK(PartyMember)->unk_03 = 0;
+    SELF(PartyMember)->unk_03 = 0;
 }

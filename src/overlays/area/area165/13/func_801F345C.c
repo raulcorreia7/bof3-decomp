@@ -8,10 +8,10 @@ MATCH void func_801F345C(void) {
     s32    next_y;
     u8     state;
 
-    scratch                 = TASK(Actor);
+    scratch                 = SELF(Actor);
     scratch->direction      = COORD_INT(scratch->pos.y) == 0;
     index                   = COORD_INT(scratch->pos.x) * 2;
-    check                   = TASK(Actor);
+    check                   = SELF(Actor);
     next_x                  = D_801F35C0[index];
     COORD_INT(check->pos.x) = next_x;
     next_y                  = D_801F35C1[index];

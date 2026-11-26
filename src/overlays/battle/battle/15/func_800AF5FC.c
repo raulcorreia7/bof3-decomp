@@ -10,7 +10,7 @@ MATCH s32 func_800AF5FC(BattleRange* target, u32 extent) {
     u32          second;
 
     result     = 0;
-    work       = TASK(BattleRange);
+    work       = SELF(BattleRange);
     span       = (work->unk3E + (extent >> 9)) - target->unk3E;
     half_value = extent >> 1;
     first      = work->range_x + half_value - target->range_x;

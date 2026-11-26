@@ -4,8 +4,8 @@ MATCH void func_801F4DC8(void) {
     SpawnedActor* slot;
     u8            index;
 
-    TASK(Actor)->param.actor_slot = Actor_FindFreeSpawned();
-    index                         = TASK(Actor)->param.actor_slot;
+    SELF(Actor)->param.actor_slot = Actor_FindFreeSpawned();
+    index                         = SELF(Actor)->param.actor_slot;
     if (index != GAME_NONE) {
         slot               = &g_SpawnedActors[index];
         slot->pos.x.fixed  = TO_COORD(21) + COORD_HALF;

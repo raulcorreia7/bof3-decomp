@@ -6,6 +6,6 @@ MATCH void Party_LadderUpGrab(void) {
     Actor* work;
 
     Area_ClimbStartGrab();
-    work = TASK(Actor);
+    work = SELF(Actor);
     work->unk_04++;
 }

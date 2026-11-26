@@ -7,10 +7,10 @@ MATCH void func_801F3C84(void) {
     u8           i;
     u8           j;
 
-    saved = TASK(PartyMember);
+    saved = SELF(PartyMember);
     for (i = 0; i < ACTOR_COUNT; i++) {
         actor = &g_Actors[i];
-        TASK_SET(actor);
+        SELF_SET(actor);
         if (actor->header.flags & 0x1) {
             actor->draw_layer = 5;
             Area_AddGridActor();
@@ -18,9 +18,9 @@ MATCH void func_801F3C84(void) {
     }
     for (j = 0; j < g_PartySize; j++) {
         battler = &g_Game.members[j];
-        TASK_SET(battler);
+        SELF_SET(battler);
         battler->unk_29 = 5;
         Area_AddGridActor();
     }
-    TASK_SET(saved);
+    SELF_SET(saved);
 }

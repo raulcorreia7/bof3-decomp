@@ -2,7 +2,7 @@
 
 MATCH void func_801F319C(void) {
     if (SYS_TestFlag(g_SceneEventFlags, 40)) {
-        TASK(Actor)->header.step++;
+        SELF(Actor)->header.step++;
     }
     func_801F3244();
 }

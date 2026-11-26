@@ -2,5 +2,5 @@
 
 MATCH void func_801F2C48(void) {
     Area_ClearWorkColumn();
-    TASK(Actor)->header.mode++;
+    SELF(Actor)->header.mode++;
 }

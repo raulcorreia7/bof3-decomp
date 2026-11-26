@@ -6,19 +6,19 @@ MATCH void Effect_SpreadAlongAngleAndClear(void) {
     u8   count;
 
     angle_cell = &D_1F800004;
-    phase      = TASK(PartyMember)->param.unk_0B & 0xF;
-    TASK(PartyMember)->unk_0C += 1;
+    phase      = SELF(PartyMember)->param.unk_0B & 0xF;
+    SELF(PartyMember)->unk_0C += 1;
     *angle_cell                    = phase << 8;
-    TASK(PartyMember)->pos.x.fixed = g_BattleEffectBattler->pos.x.fixed + rsin(*angle_cell) * TASK(PartyMember)->unk_0C;
-    TASK(PartyMember)->pos.y.fixed = g_BattleEffectBattler->pos.y.fixed + rcos(*angle_cell) * TASK(PartyMember)->unk_0C;
-    if (TASK(PartyMember)->unk_20 < TASK(PartyMember)->unk_14) {
-        b                         = TASK(PartyMember)->unk_14 - TASK(PartyMember)->unk_20;
-        TASK(PartyMember)->unk_14 = b;
-        TASK(PartyMember)->pos.z.fixed += b;
+    SELF(PartyMember)->pos.x.fixed = g_BattleEffectBattler->pos.x.fixed + rsin(*angle_cell) * SELF(PartyMember)->unk_0C;
+    SELF(PartyMember)->pos.y.fixed = g_BattleEffectBattler->pos.y.fixed + rcos(*angle_cell) * SELF(PartyMember)->unk_0C;
+    if (SELF(PartyMember)->unk_20 < SELF(PartyMember)->unk_14) {
+        b                         = SELF(PartyMember)->unk_14 - SELF(PartyMember)->unk_20;
+        SELF(PartyMember)->unk_14 = b;
+        SELF(PartyMember)->pos.z.fixed += b;
     }
     if (g_FrameCount & 0x1) {
-        count                     = TASK(PartyMember)->unk_09 - 1;
-        TASK(PartyMember)->unk_09 = count;
+        count                     = SELF(PartyMember)->unk_09 - 1;
+        SELF(PartyMember)->unk_09 = count;
         if (count == 0) {
             g_BattleEffectBattler->param.unk_0B -= 1;
             Actor_Clear();

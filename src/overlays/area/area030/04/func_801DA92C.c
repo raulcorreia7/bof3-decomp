@@ -17,7 +17,7 @@ MATCH void func_801DA92C(void) {
     g_SpawnedActors[4].unk_06 = 1;
     (*counter)++;
     g_SpawnedActors[4].header.mode++;
-    TASK(FishingState)->cue_index = 1;
+    SELF(FishingState)->cue_index = 1;
 
     do {
         *flags = 0;
@@ -25,13 +25,13 @@ MATCH void func_801DA92C(void) {
         flags--;
     } while (i >= 0);
 
-    state             = TASK(FishingState);
+    state             = SELF(FishingState);
     state->counter_07 = 0;
 
-    work              = TASK(FishingState);
+    work              = SELF(FishingState);
     work->saved_index = 0;
     Script_Request(3);
 
-    tail            = TASK(FishingState);
+    tail            = SELF(FishingState);
     tail->sub_index = (tail->sub_index + 1);
 }

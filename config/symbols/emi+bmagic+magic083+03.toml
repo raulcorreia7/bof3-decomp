@@ -29,7 +29,7 @@ BMagic_ShieldGemFall = { addr = 0x801F0104, type = "func", source = "Draws the g
 BMagic_ShieldGemSpinUp = { addr = 0x801F01F8, type = "func", source = "Draws the gem and speeds up its spin; plays the sound when it is at full speed." }
 BMagic_ShieldGemOrbit = { addr = 0x801F038C, type = "func", source = "Draws the gem and circles it around the battler until it ends." }
 BMagic_ShieldDrawGem = { addr = 0x801F050C, type = "func", source = "Draws the gem as two depth-sorted fans of four triangles." }
-BMagic_SetXFixed = { addr = 0x801F0BA8, type = "func", source = "the body stores into g_Task->pos.x.fixed" }
+BMagic_SetXFixed = { addr = 0x801F0BA8, type = "func", source = "the body stores into g_Self->pos.x.fixed" }
 BMagic_AllocEffect = { addr = 0x801F0DC0, type = "func", source = "Claims the first free slot of the effect table (bit 0 of header.flags) and returns its index, or 0xFF when all 24 slots are in use in magic083 (Shield)." }
 Actor_Clear = { addr = 0x801F0E24, type = "func", source = "Clears the effect work record: header flags, mode (byte 0x01), step (byte 0x02) and bytes 0x03 and 0x04." }
 g_BMagicShieldGemUpperShades = { addr = 0x801F0E74, source = "The RGB shades of the gem's upper fan: per variant, four rows." }

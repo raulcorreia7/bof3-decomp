@@ -5,6 +5,6 @@
 MATCH void func_801DDC0C(void) {
     if (g_SpawnedActors[3].header.mode == 0) {
         UI_ModeSet(0);
-        TASK(Actor)->unk_03 += 1;
+        SELF(Actor)->unk_03 += 1;
     }
 }

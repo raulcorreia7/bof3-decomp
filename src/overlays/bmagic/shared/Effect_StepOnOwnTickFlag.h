@@ -3,7 +3,7 @@
 MATCH void Effect_StepOnOwnTickFlag(void) {
     PartyMember* work;
 
-    work = TASK(PartyMember);
+    work = SELF(PartyMember);
     if (work->param.unk_0B & 0x80) {
         work->header.step++;
     }

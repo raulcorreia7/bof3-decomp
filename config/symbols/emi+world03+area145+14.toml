@@ -1,7 +1,7 @@
 ["emi/world03/area145/14"]
 jtbl_801F2C04 = { addr = 0x801F2C04, type = "Callback", size = 0x8C, source = "The switch table of func_801F45EC: 35 jump targets of its jr dispatch." }
 Area_DrawMatrixLightPillar = { addr = 0x801F3980, type = "func", source = "Draws a pillar of light at pos like Area_DrawLightPillar, with the camera matrix in a local of its own; one body shared by area100 and area145." }
-Actor_RunAreaStep = { addr = 0x801F4008, type = "func", source = "Clears the work byte 0x48 and frees the palette fade target of the current g_Task." }
+Actor_RunAreaStep = { addr = 0x801F4008, type = "func", source = "Clears the work byte 0x48 and frees the palette fade target of the current g_Self." }
 UI_MessageShowParty = { addr = 0x801F403C, type = "func", source = "Looks through the tags of g_PartyMemberMessages[0] for the first one matching a party member's tag byte (D_80145F09[j][0]), starts its area message and sets g_GameStateIndex to GAME_REQUEST_MESSAGE." }
 Area_SkipIfHasKey = { addr = 0x801F4304, type = "func", source = "Script branch: skips the next 3 script bytes when Item_VitalHas(VITAL_ITEM_KEY) reports the key; no C caller, it is reached through the area145 script tables." }
 Area_PauseBGM = { addr = 0x801F434C, type = "func", source = "Pauses the BGM of g_SndBGMId through SND_BGMPause; the same body as Area_PauseBGM in area039, area057 and area108." }

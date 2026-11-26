@@ -24,7 +24,7 @@ MATCH void func_801F35F4(void) {
         func_801AC768(g_ScriptState, 7, actor_index, slot, 16);
         g_ScriptState->cursor  = cursor;
         cell                   = g_PartyActors[actor_index].direction & 7;
-        TASK(Actor)->direction = cell;
+        SELF(Actor)->direction = cell;
         D_80143F50             = cell;
     }
 }

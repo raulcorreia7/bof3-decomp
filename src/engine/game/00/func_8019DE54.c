@@ -14,17 +14,17 @@ MATCH void func_8019DE54(void) {
             g_SpawnedActors[index].type         = 0x34;
             g_SpawnedActors[index].header.step  = 2;
             g_SpawnedActors[index].unk_06       = i;
-            work                                = TASK(Actor);
+            work                                = SELF(Actor);
             g_SpawnedActors[index].pos.x.fixed  = work->pos.x.fixed;
             g_SpawnedActors[index].pos.y.fixed  = work->pos.y.fixed;
             g_SpawnedActors[index].pos.z.fixed  = work->pos.z.fixed;
         }
     }
     SND_SEPlay(EMI_SE_ID(SND_BANK_COMMON, 12));
-    if (TASK(Actor)->param.unk_0B != 0) {
+    if (SELF(Actor)->param.unk_0B != 0) {
         g_AreaCameraRefreshCount = 3;
         g_AreaCameraOffsetZ      = (g_AreaCameraOffsetZ - 0x80);
-        TASK(Actor)->header.step = (TASK(Actor)->header.step + 1);
+        SELF(Actor)->header.step = (SELF(Actor)->header.step + 1);
         return;
     }
     Actor_Clear();

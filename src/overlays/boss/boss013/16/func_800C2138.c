@@ -25,12 +25,12 @@ MATCH u8 func_800C2138(u32 mode) {
             SYS_CopyString(*g_TextVariables, g_Characters[D_80181B11].name, 8);
             func_801DE560(2, 0, 0, 0x2D, UI_MessageGetText(0x25U));
             D_800C26E0 = 0;
-            TASK_SET(&D_801EB860);
+            SELF_SET(&D_801EB860);
             g_BattleCurrentEnemy = (EnemyBattler*)&D_801EB860;
             Party_MemberLoadSprite(1, 1);
             g_BattleCurrentEnemy->script = &D_800C25FC;
-            TASK(PartyMember)->unk_29    = 4;
-            Script_Select((TASK(PartyMember)->facing + 4) & BYTE_MASK);
+            SELF(PartyMember)->unk_29    = 4;
+            Script_Select((SELF(PartyMember)->facing + 4) & BYTE_MASK);
             *flags |= 0x40;
             break;
         case BOSS_EVENT_TICK:

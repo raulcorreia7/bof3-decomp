@@ -8,8 +8,8 @@
 #define BMAGIC_RUN_EFFECT_STEP(FIRST, SECOND)                                          \
     Callback table[2] = {FIRST, SECOND};                                               \
     g_Scripts         = BATTLE_SCRIPT_TABLE;                                           \
-    table[TASK(PartyMember)->header.step]();                                           \
-    if (TASK(PartyMember)->header.flags != 0 && TASK(PartyMember)->header.step != 0) { \
+    table[SELF(PartyMember)->header.step]();                                           \
+    if (SELF(PartyMember)->header.flags != 0 && SELF(PartyMember)->header.step != 0) { \
         Area_AddActor();                                                               \
     }                                                                                  \
     g_Scripts = AREA_SCRIPT_TABLE

@@ -5,8 +5,8 @@
 MATCH void func_801D64E8(void) {
     u8 count;
 
-    TASK(Actor)->timer -= 1;
-    count = TASK(Actor)->timer;
+    SELF(Actor)->timer -= 1;
+    count = SELF(Actor)->timer;
     if (count == 0) {
         Actor_Clear();
         return;

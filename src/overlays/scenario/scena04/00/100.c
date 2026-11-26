@@ -11,7 +11,7 @@ MATCH void func_801F6D44(void) {
     SceneBox* box;
     Actor*    work;
 
-    work              = TASK(Actor);
+    work              = SELF(Actor);
     box               = (SceneBox*)&work->vx;
     work->vz          = TO_COORD(256);
     box->far.pos.vz   = TO_COORD(256);
@@ -24,8 +24,8 @@ MATCH void func_801F6D44(void) {
     work->pos.x.fixed = 0x4000;
     work->pos.y.fixed = TO_COORD(544);
     func_801F747C();
-    TASK(Actor)->timer = 8;
-    TASK(Actor)->header.mode += 1;
+    SELF(Actor)->timer = 8;
+    SELF(Actor)->header.mode += 1;
 }
 
 MATCH void func_801F6DD4(void) {
@@ -33,7 +33,7 @@ MATCH void func_801F6DD4(void) {
     SceneBox* box;
     s32       fraction;
 
-    work     = TASK(Actor);
+    work     = SELF(Actor);
     box      = (SceneBox*)&work->vx;
     fraction = (0x10 - work->timer * 2) & 0xFE;
     box->far.pos.vx += 0x10000;
@@ -41,9 +41,9 @@ MATCH void func_801F6DD4(void) {
     work->pos.y.fixed += 0x220000;
     func_801F75BC(fraction, 0xFF);
     func_801F7084(box);
-    if (--TASK(Actor)->timer == 0) {
-        TASK(Actor)->timer = 0x40;
-        TASK(Actor)->header.mode++;
+    if (--SELF(Actor)->timer == 0) {
+        SELF(Actor)->timer = 0x40;
+        SELF(Actor)->header.mode++;
     }
 }
 
@@ -52,15 +52,15 @@ MATCH void func_801F6EA4(void) {
     Actor* actor;
     u8     mode;
 
-    work = TASK(Actor);
+    work = SELF(Actor);
     func_801F7084((SceneBox*)&work->vx);
     func_801F75BC(0x10, 0xFF);
-    actor        = TASK(Actor);
+    actor        = SELF(Actor);
     mode         = actor->timer - 1;
     actor->timer = mode;
     if (mode == 0) {
-        TASK(Actor)->timer = 4;
-        TASK(Actor)->header.mode += 1;
+        SELF(Actor)->timer = 4;
+        SELF(Actor)->header.mode += 1;
     }
 }
 
@@ -71,29 +71,29 @@ MATCH void func_801F6F2C(void) {
     u8     mode;
     u8     level;
 
-    work              = TASK(Actor);
+    work              = SELF(Actor);
     work->unk_1C      = work->unk_1C + 0x4000;
     work->pos.x.fixed = work->pos.x.fixed + TO_COORD(1);
     func_801F7084(&work->vx);
-    level = TASK(Actor)->timer;
+    level = SELF(Actor)->timer;
     func_801F75BC(0x10, (level == 8) ? 0xFF : level << 5);
-    actor        = TASK(Actor);
+    actor        = SELF(Actor);
     mode         = actor->timer - 1;
     actor->timer = mode;
     if (mode == 0) {
-        TASK(Actor)->timer = 32;
-        TASK(Actor)->header.mode += 1;
+        SELF(Actor)->timer = 32;
+        SELF(Actor)->header.mode += 1;
     }
 }
 
 MATCH void func_801F6FF8(void) {
     Actor* work;
 
-    func_801F7084((SceneBox*)&TASK(Actor)->vx);
-    work = TASK(Actor);
+    func_801F7084((SceneBox*)&SELF(Actor)->vx);
+    work = SELF(Actor);
     work->timer--;
     if (work->timer == 0) {
-        TASK(Actor)->header.mode++;
+        SELF(Actor)->header.mode++;
     }
 }
 
@@ -227,7 +227,7 @@ MATCH void func_801F75BC(u8 weight, u8 shade) {
 }
 
 MATCH void func_801F77A8(void) {
-    SYS_DISPATCH_TASK(D_801FA198, 1, g_Task);
+    SYS_DISPATCH_TASK(D_801FA198, 1, g_Self);
 }
 
 MATCH void func_801F77EC(void) {
@@ -247,8 +247,8 @@ MATCH void func_801F77EC(void) {
         i++;
     } while (i < ARRAY_COUNT(work->points));
     func_801F7FCC();
-    TASK(Actor)->vx = 512;
-    TASK(Actor)->header.mode++;
+    SELF(Actor)->vx = 512;
+    SELF(Actor)->header.mode++;
 }
 
 /* Every 16 ticks, spawn a particle from the path origin toward each path point; then follow the focus and leave on the last tick. */
@@ -260,7 +260,7 @@ MATCH void func_801F78F4(void) {
     u8             i;
 
     work = MEM_PTR(ScenePath, AREA_WORK + 0x1400);
-    if ((TASK(Actor)->vx & 0xF) == 0) {
+    if ((SELF(Actor)->vx & 0xF) == 0) {
         i = 0;
         do {
             particle = (SceneParticle*)func_801F7FF8();
@@ -279,8 +279,8 @@ MATCH void func_801F78F4(void) {
     }
     setVector(&work->focus, g_PartyActors[0].pos.x.fixed, g_AreaFocus.y.fixed, g_PartyActors[0].pos.z.fixed >> 8);
     func_801F7EC0();
-    if (--TASK(Actor)->vx == 0) {
-        TASK(Actor)->header.mode++;
+    if (--SELF(Actor)->vx == 0) {
+        SELF(Actor)->header.mode++;
     }
 }
 
@@ -289,14 +289,14 @@ MATCH void func_801F7A64(void) {
 }
 
 MATCH void func_801F7A84(void) {
-    SYS_DISPATCH_TASK(D_801FA1E4, 1, g_Task);
+    SYS_DISPATCH_TASK(D_801FA1E4, 1, g_Self);
 }
 
 MATCH void func_801F7AC8(void) {
     Actor* work;
 
     func_801F7FCC();
-    work = TASK(Actor);
+    work = SELF(Actor);
     work->header.mode += 1;
 }
 
@@ -354,13 +354,13 @@ MATCH void func_801F7BC0(void) {
         }
     }
     func_801F7EC0();
-    TASK(Actor)->vx = 0x40;
+    SELF(Actor)->vx = 0x40;
 }
 
 MATCH void func_801F7CA8(void) {
     func_801F7EC0();
-    TASK(Actor)->vx = TASK(Actor)->vx - 1;
-    if (TASK(Actor)->vx == 0) {
+    SELF(Actor)->vx = SELF(Actor)->vx - 1;
+    if (SELF(Actor)->vx == 0) {
         func_80196070();
     }
 }

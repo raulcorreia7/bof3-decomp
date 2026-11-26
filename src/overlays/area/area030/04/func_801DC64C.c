@@ -5,6 +5,6 @@
 #include "area030_04.h"
 
 MATCH void func_801DC64C(void) {
-    Callback handler = D_801E22BC[TASK(Actor)->unk_03];
+    Callback handler = D_801E22BC[SELF(Actor)->unk_03];
     handler();
 }

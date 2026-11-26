@@ -11,17 +11,17 @@ MATCH void func_801D52D4(void) {
 
     mask = 0;
     if (D_80145E93[0] >= 3) {
-        mask = (1u << TASK(Actor)->unk_06) & BYTE_MASK;
+        mask = (1u << SELF(Actor)->unk_06) & BYTE_MASK;
     }
     func_801D7C10(FISHING_SHOP_COLUMNS_X, FISHING_SHOP_COLUMNS_Y, mask);
 
-    TASK(Actor)->direction   = FACING_UP_LEFT;
-    work                     = TASK(FishingState);
+    SELF(Actor)->direction   = FACING_UP_LEFT;
+    work                     = SELF(FishingState);
     work->step_index         = 0;
-    stepped                  = TASK(FishingState);
+    stepped                  = SELF(FishingState);
     work->bounce.unk_3C      = 0;
     work->bounce_speed       = 0;
     work->bounce_accel       = 0;
     stepped->timer           = 4;
-    TASK(Actor)->header.mode = (u8)(TASK(Actor)->header.mode + 1);
+    SELF(Actor)->header.mode = (u8)(SELF(Actor)->header.mode + 1);
 }

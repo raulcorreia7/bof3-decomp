@@ -3,12 +3,12 @@
 MATCH void func_801D1EFC(void) {
     SceneBandEffect* work;
 
-    work = TASK(SceneBandEffect);
+    work = SELF(SceneBandEffect);
     if (work->band < 16) {
         work->band += 2;
     } else {
         work->timer = 60;
-        work        = TASK(SceneBandEffect);
+        work        = SELF(SceneBandEffect);
         work->step_index++;
     }
 }

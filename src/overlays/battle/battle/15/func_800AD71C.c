@@ -5,23 +5,23 @@ MATCH void func_800AD71C(void) {
     s16                   label;
     u8                    count;
 
-    TASK(PartyMember)->unk_29 = 1;
-    TASK(PartyMember)->unk_25 = 0x1E;
-    TASK(PartyMember)->unk_26 = 0;
-    TASK(PartyMember)->unk_24 = 0x80;
-    TASK(PartyMember)->unk_27 = 0x1B;
-    TASK(PartyMember)->unk_28 = 1;
+    SELF(PartyMember)->unk_29 = 1;
+    SELF(PartyMember)->unk_25 = 0x1E;
+    SELF(PartyMember)->unk_26 = 0;
+    SELF(PartyMember)->unk_24 = 0x80;
+    SELF(PartyMember)->unk_27 = 0x1B;
+    SELF(PartyMember)->unk_28 = 1;
     {
         PartyMember* record;
         PartyMember* other;
 
-        record                      = TASK(PartyMember);
+        record                      = SELF(PartyMember);
         record->unk_2B              = 0;
-        other                       = TASK(PartyMember);
+        other                       = SELF(PartyMember);
         record->unk_2C.signed_value = 2;
         other->unk_2A               = 0;
     }
-    record                 = TASK(PartyMember);
+    record                 = SELF(PartyMember);
     record->pos.z.fixed    = 0;
     record->screen_x.value = D_80148628 + 0x14;
     count                  = record->header.mode;

@@ -10,10 +10,10 @@ MATCH void func_800AE640(void) {
     u16 sum;
     u8  count;
 
-    work = TASK_BYTES;
+    work = SELF_BYTES;
     if (((PartyMember*)work)->timer < 8) {
         ((PartyMember*)work)->timer++;
-        work = TASK_BYTES;
+        work = SELF_BYTES;
     }
     step                 = work[9] + 1;
     counter              = *(u32*)(work + 0x10) + 2;
@@ -22,7 +22,7 @@ MATCH void func_800AE640(void) {
     *(u32*)(work + 0x10) = counter;
     *(u16*)(work + 0x30) = sum;
     if (step == 12) {
-        tail                              = TASK_BYTES;
+        tail                              = SELF_BYTES;
         count                             = ((PartyMember*)tail)->header.mode;
         *(s32*)(tail + 0x10)              = -6;
         ((PartyMember*)tail)->header.mode = count + 1;

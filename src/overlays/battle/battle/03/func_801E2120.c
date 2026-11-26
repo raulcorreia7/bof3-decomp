@@ -5,7 +5,7 @@ MATCH void func_801E2120(void) {
     volatile u16*         gate;
     u16                   half;
 
-    work = TASK(PartyMember);
+    work = SELF(PartyMember);
     if ((work->header.flags & ACTOR_FLAG_HIDDEN) == 0u) {
         gate        = &g_Battle.flags;
         half        = (*gate | BATTLE_STATE_EFFECT_PLAYING);

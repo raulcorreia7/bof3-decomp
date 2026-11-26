@@ -1,8 +1,8 @@
 #include "area157_13.h"
 
 MATCH void func_801F3718(void) {
-    TASK(Actor)->screen_y += 0x20;
-    if ((s16)TASK(Actor)->screen_y >= 0x100) {
-        TASK(Actor)->header.step++;
+    SELF(Actor)->screen_y += 0x20;
+    if ((s16)SELF(Actor)->screen_y >= 0x100) {
+        SELF(Actor)->header.step++;
     }
 }

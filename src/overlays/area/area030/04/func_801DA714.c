@@ -6,11 +6,11 @@ MATCH void func_801DA714(void) {
     FishingState* record;
 
     Script_AnimStepLoop();
-    record = TASK(FishingState);
+    record = SELF(FishingState);
     if (record->flags_58 == 6) {
         g_SpawnedActors[0].header.mode = (g_SpawnedActors[0].header.mode + 1);
         record->saved_index            = 0;
-        TASK(FishingState)->counter_07 = 0;
-        TASK(FishingState)->sub_index  = 3;
+        SELF(FishingState)->counter_07 = 0;
+        SELF(FishingState)->sub_index  = 3;
     }
 }

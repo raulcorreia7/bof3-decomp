@@ -9,8 +9,8 @@ MATCH void Actor_DrawValueDigits(s16 x, s16 y, u8 unused, u8 palette) {
     u8    ch;
 
     index = 0;
-    TEXT_Format(g_UiTextFormatBuffer, D_80195860, TASK(Actor)->unk_06);
-    GFX_ADD_LAYER_DRAW_MODE(TASK(Actor)->draw_layer, getTPage(TPAGE_DEPTH_4BIT, TPAGE_ABR_HALF, FONT_TPAGE_X, FONT_TPAGE_Y));
+    TEXT_Format(g_UiTextFormatBuffer, D_80195860, SELF(Actor)->unk_06);
+    GFX_ADD_LAYER_DRAW_MODE(SELF(Actor)->draw_layer, getTPage(TPAGE_DEPTH_4BIT, TPAGE_ABR_HALF, FONT_TPAGE_X, FONT_TPAGE_Y));
     do {
         ch = g_UiTextFormatBuffer[index & BYTE_MASK];
         if (ch != ' ') {
@@ -22,7 +22,7 @@ MATCH void Actor_DrawValueDigits(s16 x, s16 y, u8 unused, u8 palette) {
             setUV0(sprt, g_UiTextFormatBuffer[index & BYTE_MASK] * 8 - 80, 208);
             setWH(sprt, 8, 8);
             SetSprt(sprt);
-            GFX_AddPrim(TASK(Actor)->draw_layer, sizeof(SPRT));
+            GFX_AddPrim(SELF(Actor)->draw_layer, sizeof(SPRT));
         }
         x += 8;
         next  = index + 1;

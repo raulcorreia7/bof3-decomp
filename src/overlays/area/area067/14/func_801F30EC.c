@@ -4,13 +4,13 @@ MATCH void func_801F30EC(void) {
     AreaRippleQuad* quad;
     u8              timer;
 
-    quad = (AreaRippleQuad*)&TASK(Actor)->vx;
+    quad = (AreaRippleQuad*)&SELF(Actor)->vx;
     func_801F3AD8(quad);
     quad->height += 2;
     quad->y -= quad->height;
     func_801F3AD8(quad);
-    ACTOR_COUNT_DOWN(TASK(Actor), timer, timer);
+    ACTOR_COUNT_DOWN(SELF(Actor), timer, timer);
     if (timer == 0) {
-        TASK(Actor)->header.mode += 1;
+        SELF(Actor)->header.mode += 1;
     }
 }

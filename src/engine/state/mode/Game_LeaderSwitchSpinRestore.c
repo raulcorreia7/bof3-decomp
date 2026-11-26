@@ -6,40 +6,40 @@ MATCH void Game_LeaderSwitchSpinRestore(void) {
     u8 i;
     u8 level;
 
-    TASK(Actor)->timer -= 1;
-    TASK(Actor)->direction = (TASK(Actor)->direction + 1) & 0x7;
-    Script_Select(TASK(Actor)->direction);
+    SELF(Actor)->timer -= 1;
+    SELF(Actor)->direction = (SELF(Actor)->direction + 1) & 0x7;
+    Script_Select(SELF(Actor)->direction);
     i     = 1;
-    level = TASK(Actor)->timer;
+    level = SELF(Actor)->timer;
     if (i < g_PartySize) {
         do {
-            TASK_SET(&g_Game.members[i]);
-            if (TASK(Actor)->header.mode == 3) {
-                TASK(Actor)->tint.bytes.rgb.r = -(level << 5);
-                TASK(Actor)->tint.bytes.rgb.g = TASK(Actor)->tint.bytes.rgb.r;
-                TASK(Actor)->tint.bytes.rgb.b = TASK(Actor)->tint.bytes.rgb.r;
+            SELF_SET(&g_Game.members[i]);
+            if (SELF(Actor)->header.mode == 3) {
+                SELF(Actor)->tint.bytes.rgb.r = -(level << 5);
+                SELF(Actor)->tint.bytes.rgb.g = SELF(Actor)->tint.bytes.rgb.r;
+                SELF(Actor)->tint.bytes.rgb.b = SELF(Actor)->tint.bytes.rgb.r;
             }
             i++;
         } while (i < g_PartySize);
     }
     g_GameState = g_Game.members;
-    TASK_SET(g_Game.members);
+    SELF_SET(g_Game.members);
     if (g_Game.members[0].unk_09 == 0) {
         for (i = 1; i < g_PartySize; i++) {
-            TASK_SET(&g_Game.members[i]);
-            if (TASK(Actor)->header.mode == 3) {
-                GFX_PaletteLoad(GAME_PALETTE_STAGE + (TASK(Actor)->unk_05 << 6), 0);
-                TASK(Actor)->header.flags &= ~ACTOR_FLAG_SEMI_TRANSPARENT;
+            SELF_SET(&g_Game.members[i]);
+            if (SELF(Actor)->header.mode == 3) {
+                GFX_PaletteLoad(GAME_PALETTE_STAGE + (SELF(Actor)->unk_05 << 6), 0);
+                SELF(Actor)->header.flags &= ~ACTOR_FLAG_SEMI_TRANSPARENT;
                 ACTOR_CLEAR_TINT();
-                TASK(Actor)->tint.bytes.flags = 0;
-                TASK(Actor)->timer            = 0;
+                SELF(Actor)->tint.bytes.flags = 0;
+                SELF(Actor)->timer            = 0;
                 Actor_ClearVelocity();
-                TASK(Actor)->unk_18  = 0;
-                TASK(Actor)->unk_1C  = 0;
-                TASK(Actor)->gravity = 0;
+                SELF(Actor)->unk_18  = 0;
+                SELF(Actor)->unk_1C  = 0;
+                SELF(Actor)->gravity = 0;
             }
         }
-        TASK_SET(g_Game.members);
+        SELF_SET(g_Game.members);
         g_Game.members[0].header.step += 1;
     }
 }

@@ -3,7 +3,7 @@
 MATCH s32 func_801F4A18(void) {
     s32    x_offset = TO_COORD(35) + COORD_HALF;
     s32    y_offset = TO_COORD(27) + COORD_HALF;
-    Actor* work     = TASK(Actor);
+    Actor* work     = SELF(Actor);
     s32    x;
     s32    y;
     u8     state;

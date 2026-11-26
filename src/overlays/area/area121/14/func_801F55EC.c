@@ -8,6 +8,6 @@ MATCH bool func_801F55EC(void) {
         return 0;
     }
     g_GameStateIndex         = 4;
-    TASK(Actor)->header.step = 0;
+    SELF(Actor)->header.step = 0;
     return 1;
 }

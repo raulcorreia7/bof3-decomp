@@ -18,21 +18,21 @@ MATCH void func_801F4768(void) {
     s32       x_high;
     s32       y_high;
 
-    if (TASK(Actor)->header.step == 0) {
-        COORD_INT(TASK(Actor)->pos.y) += g_FrameCount & 0xF;
-        TASK(Actor)->header.step++;
+    if (SELF(Actor)->header.step == 0) {
+        COORD_INT(SELF(Actor)->pos.y) += g_FrameCount & 0xF;
+        SELF(Actor)->header.step++;
     }
     if ((g_AreaDrawFlags & AREA_DRAW_CELL_LAYERS) == 0) {
         return;
     }
 
-    width = TASK(Actor)->param.cloud_layer - 2;
-    TASK(Actor)->pos.y.fixed += 0x800 + (width << 10);
-    if (g_AreaMapBundle.height + 8 < COORD_INT(TASK(Actor)->pos.y)) {
-        COORD_INT(TASK(Actor)->pos.y) = -8;
+    width = SELF(Actor)->param.cloud_layer - 2;
+    SELF(Actor)->pos.y.fixed += 0x800 + (width << 10);
+    if (g_AreaMapBundle.height + 8 < COORD_INT(SELF(Actor)->pos.y)) {
+        COORD_INT(SELF(Actor)->pos.y) = -8;
     }
 
-    if (abs(g_AreaCamera.scroll_x.part.integer - COORD_INT(TASK(Actor)->pos.x)) >= 0x1A && abs(g_AreaCamera.scroll_y.part.integer - COORD_INT(TASK(Actor)->pos.y)) >= 0x1A) {
+    if (abs(g_AreaCamera.scroll_x.part.integer - COORD_INT(SELF(Actor)->pos.x)) >= 0x1A && abs(g_AreaCamera.scroll_y.part.integer - COORD_INT(SELF(Actor)->pos.y)) >= 0x1A) {
         return;
     }
 
@@ -44,8 +44,8 @@ MATCH void func_801F4768(void) {
     q2       = quad + 2;
     q3       = quad + 3;
     size     = ((2 - width) << 8) + abs(0xF - (g_FrameCount & 0x1F));
-    x_high   = (TASK(Actor)->pos.x.fixed >> 9) - (AREA_CELL_ORIGIN - AREA_CELL_HALF);
-    y_high   = (TASK(Actor)->pos.y.fixed >> 9) - (AREA_CELL_ORIGIN - AREA_CELL_HALF);
+    x_high   = (SELF(Actor)->pos.x.fixed >> 9) - (AREA_CELL_ORIGIN - AREA_CELL_HALF);
+    y_high   = (SELF(Actor)->pos.y.fixed >> 9) - (AREA_CELL_ORIGIN - AREA_CELL_HALF);
     quad->vz = WORLD_CLOUD_DEPTH;
     q1->vz   = WORLD_CLOUD_DEPTH;
     q2->vz   = WORLD_CLOUD_DEPTH;
@@ -64,7 +64,7 @@ MATCH void func_801F4768(void) {
 
     for (row = 0; row < (2 - width) * 4 + 1; row++) {
         for (col = 0; col < (2 - width) * 4; col++) {
-            cell = Area_CellFindQuad(COORD_INT(TASK(Actor)->pos.x) - (2 - width) + col, COORD_INT(TASK(Actor)->pos.y) - (2 - width) + row);
+            cell = Area_CellFindQuad(COORD_INT(SELF(Actor)->pos.x) - (2 - width) + col, COORD_INT(SELF(Actor)->pos.y) - (2 - width) + row);
             if (cell == NULL) {
                 continue;
             }
@@ -79,12 +79,12 @@ MATCH void func_801F4768(void) {
             prim->clut       = getClut(176, 483);
             prim->tpage      = getTPage(TPAGE_DEPTH_4BIT, TPAGE_ABR_SUB, 704, 256);
             setRGB0(prim, 40, 40, 40);
-            setUV4(prim, D_801F51D8[width] + col * D_801F51E0[width], D_801F51DC[width] + row * D_801F51E0[width] - D_801F51E0[width] * COORD_FRAC(TASK(Actor)->pos.y) / 0x10000,
-                   D_801F51E0[width] + (D_801F51D8[width] + D_801F51E0[width] * col), D_801F51DC[width] + row * D_801F51E0[width] - D_801F51E0[width] * COORD_FRAC(TASK(Actor)->pos.y) / 0x10000,
-                   D_801F51D8[width] + col * D_801F51E0[width], D_801F51E0[width] + (u8)(D_801F51DC[width] + row * D_801F51E0[width] - D_801F51E0[width] * COORD_FRAC(TASK(Actor)->pos.y) / 0x10000),
+            setUV4(prim, D_801F51D8[width] + col * D_801F51E0[width], D_801F51DC[width] + row * D_801F51E0[width] - D_801F51E0[width] * COORD_FRAC(SELF(Actor)->pos.y) / 0x10000,
+                   D_801F51E0[width] + (D_801F51D8[width] + D_801F51E0[width] * col), D_801F51DC[width] + row * D_801F51E0[width] - D_801F51E0[width] * COORD_FRAC(SELF(Actor)->pos.y) / 0x10000,
+                   D_801F51D8[width] + col * D_801F51E0[width], D_801F51E0[width] + (u8)(D_801F51DC[width] + row * D_801F51E0[width] - D_801F51E0[width] * COORD_FRAC(SELF(Actor)->pos.y) / 0x10000),
                    D_801F51E0[width] + (D_801F51D8[width] + D_801F51E0[width] * col),
-                   D_801F51E0[width] + (u8)(D_801F51DC[width] + row * D_801F51E0[width] - D_801F51E0[width] * COORD_FRAC(TASK(Actor)->pos.y) / 0x10000));
-            Area_CellAddPrim((COORD_INT(TASK(Actor)->pos.x) - (2 - width) + col) << 16, (COORD_INT(TASK(Actor)->pos.y) - (2 - width) + row) << 16, 1, 0x28);
+                   D_801F51E0[width] + (u8)(D_801F51DC[width] + row * D_801F51E0[width] - D_801F51E0[width] * COORD_FRAC(SELF(Actor)->pos.y) / 0x10000));
+            Area_CellAddPrim((COORD_INT(SELF(Actor)->pos.x) - (2 - width) + col) << 16, (COORD_INT(SELF(Actor)->pos.y) - (2 - width) + row) << 16, 1, 0x28);
         }
     }
 }

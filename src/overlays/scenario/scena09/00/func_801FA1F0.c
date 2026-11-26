@@ -99,15 +99,15 @@ MATCH void func_801FA1F0(void) {
                 if (g_PartyFieldOrder[i] != 7) {
                     continue;
                 }
-                g_Task                        = (Actor*)&g_Game.members[i];
-                TASK(Actor)->param.actor_slot = Actor_FindFreeSpawned();
-                if (TASK(Actor)->param.actor_slot == GAME_NONE) {
+                g_Self                        = (Actor*)&g_Game.members[i];
+                SELF(Actor)->param.actor_slot = Actor_FindFreeSpawned();
+                if (SELF(Actor)->param.actor_slot == GAME_NONE) {
                     continue;
                 }
-                g_SpawnedActors[TASK(Actor)->param.actor_slot].header.flags = ACTOR_FLAG_IN_USE;
-                g_SpawnedActors[TASK(Actor)->param.actor_slot].type         = 6;
-                g_SpawnedActors[TASK(Actor)->param.actor_slot].unk_06       = 2;
-                work                                                        = TASK(Actor);
+                g_SpawnedActors[SELF(Actor)->param.actor_slot].header.flags = ACTOR_FLAG_IN_USE;
+                g_SpawnedActors[SELF(Actor)->param.actor_slot].type         = 6;
+                g_SpawnedActors[SELF(Actor)->param.actor_slot].unk_06       = 2;
+                work                                                        = SELF(Actor);
                 g_SpawnedActors[work->param.actor_slot].vx                  = 0;
                 g_SpawnedActors[work->param.actor_slot].selection           = 0x24;
                 g_SpawnedActors[work->param.actor_slot].screen_x            = work->screen_x;

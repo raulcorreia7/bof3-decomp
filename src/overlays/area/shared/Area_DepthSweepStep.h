@@ -2,10 +2,10 @@
 /* AREA_DEPTH_SWEEP_STEP (area095 0x801F2EC0, area096 0x801F2E50) */
 #define AREA_DEPTH_SWEEP_STEP(DRAW)                                   \
     Actor* work;                                                      \
-    DRAW(TASK(Actor)->pos.z.fixed, TASK(Actor)->param.unk_0B & 0xF8); \
-    work = g_Task;                                                    \
+    DRAW(SELF(Actor)->pos.z.fixed, SELF(Actor)->param.unk_0B & 0xF8); \
+    work = g_Self;                                                    \
     work->param.unk_0B -= 2;                                          \
     work->pos.z.fixed += 1;                                           \
-    if (TASK(Actor)->pos.z.fixed >= -0xBF) {                          \
+    if (SELF(Actor)->pos.z.fixed >= -0xBF) {                          \
         Actor_Clear();                                                \
     }

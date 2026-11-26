@@ -9,5 +9,5 @@ __asm__(".include \"include/match/macro.inc\"\n");
 #include "overlays/plchar/shared/PlChar_ProbeFacingCell.h"
 
 MATCH void func_801CF65C(void) {
-    SYS_DISPATCH_TASK(D_801CFAE8, 2, g_Task);
+    SYS_DISPATCH_TASK(D_801CFAE8, 2, g_Self);
 }

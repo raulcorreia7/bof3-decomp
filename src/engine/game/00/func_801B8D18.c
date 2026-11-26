@@ -9,18 +9,18 @@ MATCH bool func_801B8D18(void) {
     s32 x;
     s32 y;
 
-    if (TASK(Actor)->voice_flags.scene_flag == 0) {
-        if (TASK(Actor)->direction == FACING_RIGHT) {
-            if (COORD_FRAC(TASK(Actor)->pos.x) != 0) {
+    if (SELF(Actor)->voice_flags.scene_flag == 0) {
+        if (SELF(Actor)->direction == FACING_RIGHT) {
+            if (COORD_FRAC(SELF(Actor)->pos.x) != 0) {
                 return false;
             }
-            x     = TASK(Actor)->pos.x.fixed + COORD_HALF;
-            y     = TASK(Actor)->pos.y.fixed & 0xFFFF0000;
+            x     = SELF(Actor)->pos.x.fixed + COORD_HALF;
+            y     = SELF(Actor)->pos.y.fixed & 0xFFFF0000;
             value = Area_HeightReadStep(x, y, 3);
             if (FAKE_VOLATILE(u8, g_ScratchPad) == 0 || value < 0x41) {
                 return false;
             }
-            if (COORD_FRAC(TASK(Actor)->pos.y) != 0) {
+            if (COORD_FRAC(SELF(Actor)->pos.y) != 0) {
                 value = Area_HeightReadStep(x, y + 0x8000, 3);
                 if (FAKE_VOLATILE(u8, g_ScratchPad) == 0 || value < 0x41) {
                     return false;
@@ -28,17 +28,17 @@ MATCH bool func_801B8D18(void) {
             }
             return true;
         }
-        if (TASK(Actor)->direction == FACING_DOWN) {
-            if (COORD_FRAC(TASK(Actor)->pos.y) != 0) {
+        if (SELF(Actor)->direction == FACING_DOWN) {
+            if (COORD_FRAC(SELF(Actor)->pos.y) != 0) {
                 return false;
             }
-            x     = TASK(Actor)->pos.x.fixed & 0xFFFF0000;
-            y     = TASK(Actor)->pos.y.fixed + COORD_HALF;
+            x     = SELF(Actor)->pos.x.fixed & 0xFFFF0000;
+            y     = SELF(Actor)->pos.y.fixed + COORD_HALF;
             value = Area_HeightReadStep(x, y, 5);
             if (FAKE_VOLATILE(u8, g_ScratchPad) == 0 || value < 0x41) {
                 return false;
             }
-            if (COORD_FRAC(TASK(Actor)->pos.x) != 0) {
+            if (COORD_FRAC(SELF(Actor)->pos.x) != 0) {
                 value = Area_HeightReadStep(x + 0x8000, y, 5);
                 if (FAKE_VOLATILE(u8, g_ScratchPad) == 0 || value < 0x41) {
                     return false;
@@ -49,12 +49,12 @@ MATCH bool func_801B8D18(void) {
         return false;
     }
 
-    if (TASK(Actor)->direction == FACING_RIGHT) {
-        if (COORD_FRAC(TASK(Actor)->pos.x) == 0) {
+    if (SELF(Actor)->direction == FACING_RIGHT) {
+        if (COORD_FRAC(SELF(Actor)->pos.x) == 0) {
             return false;
         }
-        x     = TASK(Actor)->pos.x.fixed + TO_COORD(1);
-        y     = TASK(Actor)->pos.y.fixed & 0xFFFF0000;
+        x     = SELF(Actor)->pos.x.fixed + TO_COORD(1);
+        y     = SELF(Actor)->pos.y.fixed & 0xFFFF0000;
         value = Area_HeightReadStep(x, y, 3);
         if (FAKE_VOLATILE(u8, g_ScratchPad) == 0 || value < 0x41) {
             return false;
@@ -64,7 +64,7 @@ MATCH bool func_801B8D18(void) {
         if (FAKE_VOLATILE(u8, g_ScratchPad) == 0 || value < 0x41) {
             return false;
         }
-        if (COORD_FRAC(TASK(Actor)->pos.y) == 0) {
+        if (COORD_FRAC(SELF(Actor)->pos.y) == 0) {
             value = Area_HeightReadStep(x, y - TO_COORD(1), 3);
             if (FAKE_VOLATILE(u8, g_ScratchPad) == 0 || value < 0x41) {
                 return false;
@@ -72,12 +72,12 @@ MATCH bool func_801B8D18(void) {
         }
         return true;
     }
-    if (TASK(Actor)->direction == FACING_DOWN) {
-        if (COORD_FRAC(TASK(Actor)->pos.y) == 0) {
+    if (SELF(Actor)->direction == FACING_DOWN) {
+        if (COORD_FRAC(SELF(Actor)->pos.y) == 0) {
             return false;
         }
-        x     = TASK(Actor)->pos.x.fixed & 0xFFFF0000;
-        y     = TASK(Actor)->pos.y.fixed + TO_COORD(1);
+        x     = SELF(Actor)->pos.x.fixed & 0xFFFF0000;
+        y     = SELF(Actor)->pos.y.fixed + TO_COORD(1);
         value = Area_HeightReadStep(x, y, 5);
         if (FAKE_VOLATILE(u8, g_ScratchPad) == 0 || value < 0x41) {
             return false;
@@ -87,7 +87,7 @@ MATCH bool func_801B8D18(void) {
         if (FAKE_VOLATILE(u8, g_ScratchPad) == 0 || value < 0x41) {
             return false;
         }
-        if (COORD_FRAC(TASK(Actor)->pos.x) == 0) {
+        if (COORD_FRAC(SELF(Actor)->pos.x) == 0) {
             value = Area_HeightReadStep(x - TO_COORD(1), y, 3);
             if (FAKE_VOLATILE(u8, g_ScratchPad) == 0 || value < 0x41) {
                 return false;

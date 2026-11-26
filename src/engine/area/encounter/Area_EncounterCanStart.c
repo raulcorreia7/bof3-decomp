@@ -38,9 +38,9 @@ MATCH s32 Area_EncounterCanStart(void) {
         }
     }
     if (!(g_GameRequestFlags & AREA_LOAD_FLAG_WORLD_MAP)) {
-        work = TASK(Actor);
+        work = SELF(Actor);
         ok   = Area_EncounterBuild(4, 0);
-        TASK_SET(work);
+        SELF_SET(work);
         if (ok != 0) {
             for (i = 0; i < g_Game.party_size; i++) {
                 ok = Area_CellTestCorners(g_AreaEncounterPlacement.party[i].x.fixed, g_AreaEncounterPlacement.party[i].y.fixed, D_80181B1C[g_PartyBattleOrder[i]], 0x10, 1);
@@ -51,7 +51,7 @@ MATCH s32 Area_EncounterCanStart(void) {
         }
         return ok;
     }
-    rec   = TASK(Actor);
+    rec   = SELF(Actor);
     value = rec->pos.y.fixed;
     /* x holds the step count, then the x sum */
     x     = rec->timer;

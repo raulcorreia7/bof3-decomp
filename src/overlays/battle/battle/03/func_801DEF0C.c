@@ -9,9 +9,9 @@ MATCH void func_801DEF0C(void) {
     volatile PartyMember* out;
     volatile PartyMember* tail;
 
-    work                                = TASK(PartyMember);
+    work                                = SELF(PartyMember);
     work->unk_29                        = 4;
-    out                                 = TASK(PartyMember);
+    out                                 = SELF(PartyMember);
     work->unk_0C                        = 0;
     work->unk_10                        = 0;
     work->unk_14                        = 0;
@@ -19,12 +19,12 @@ MATCH void func_801DEF0C(void) {
     work->unk_1C                        = 0;
     work->unk_20                        = 0;
     out->facing                         = g_Battle.scroll_dir;
-    TASK(PartyMember)->unk_48           = 0;
-    tail                                = TASK(PartyMember);
-    COORD_INT(TASK(PartyMember)->pos.z) = Area_HeightSample(tail->pos.x.fixed, tail->pos.y.fixed);
-    TASK(PartyMember)->unk_2B           = 0;
-    TASK(PartyMember)->header.mode      = 2;
-    TASK(PartyMember)->header.step      = 0;
-    TASK(PartyMember)->unk_03           = 0;
-    TASK(PartyMember)->unk_04           = 0;
+    SELF(PartyMember)->unk_48           = 0;
+    tail                                = SELF(PartyMember);
+    COORD_INT(SELF(PartyMember)->pos.z) = Area_HeightSample(tail->pos.x.fixed, tail->pos.y.fixed);
+    SELF(PartyMember)->unk_2B           = 0;
+    SELF(PartyMember)->header.mode      = 2;
+    SELF(PartyMember)->header.step      = 0;
+    SELF(PartyMember)->unk_03           = 0;
+    SELF(PartyMember)->unk_04           = 0;
 }

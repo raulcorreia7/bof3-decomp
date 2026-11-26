@@ -6,12 +6,12 @@ MATCH void Actor_StartFacingScript(void) {
     Actor* work;
     u8     flags;
 
-    TASK(Actor)->script_record = 0xFF;
-    work                       = TASK(Actor);
+    SELF(Actor)->script_record = 0xFF;
+    work                       = SELF(Actor);
     flags                      = work->option_flags;
     if (flags & ACTOR_OPT_ROUTE_LOCKED) {
         work->mirror = (flags >> 4) & 0x1;
-        Script_Select(TASK(Actor)->direction);
+        Script_Select(SELF(Actor)->direction);
         return;
     }
     Script_DispatchSelector(work->direction);

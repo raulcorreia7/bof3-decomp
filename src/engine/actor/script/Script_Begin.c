@@ -16,34 +16,34 @@ MATCH void Script_Begin(s32 script_index, s32 position) {
     selector = script_index;
     code     = position;
     if (script_index & 0x80) {
-        if (!(TASK(Actor)->active_flags & 0x2)) {
+        if (!(SELF(Actor)->active_flags & 0x2)) {
             modes                = (u8(*)[3])D_80181B34;
             hint                 = g_EmiLoadedCharacterIndex & EMI_LOADED_INDEX_MASK;
-            TASK(Actor)->angle_x = modes[hint][TASK(Actor)->unk_2C];
-            TASK(Actor)->angle_y = TASK(Actor)->sheet_row;
-            TASK(Actor)->active_flags ^= 3;
+            SELF(Actor)->angle_x = modes[hint][SELF(Actor)->unk_2C];
+            SELF(Actor)->angle_y = SELF(Actor)->sheet_row;
+            SELF(Actor)->active_flags ^= 3;
         }
-        entry = ((s32*)&D_80181C7C)[TASK(Actor)->angle_x];
+        entry = ((s32*)&D_80181C7C)[SELF(Actor)->angle_x];
         entry += (script_index & 0x7F) * 4;
         Area_SceneSelectRecord(*(u16*)entry);
-        TASK(Actor)->script_record = *(u8*)(entry + 2);
-        TASK(Actor)->mirror        = *(u8*)(entry + 3);
+        SELF(Actor)->script_record = *(u8*)(entry + 2);
+        SELF(Actor)->mirror        = *(u8*)(entry + 3);
     } else {
-        flags = TASK(Actor)->active_flags;
+        flags = SELF(Actor)->active_flags;
         if (flags & 0x2) {
             flags &= 0xFC;
             /* FAKE: the retail call passes script_index as a third argument the real prototype lacks. */
-            ((void (*)(s32, s32, s32))Party_MemberLoadSprite)((u8)TASK(Actor)->angle_x, (TASK(Actor)->angle_y / 80) & BYTE_MASK, script_index);
-            TASK(Actor)->active_flags = TASK(Actor)->active_flags | flags;
+            ((void (*)(s32, s32, s32))Party_MemberLoadSprite)((u8)SELF(Actor)->angle_x, (SELF(Actor)->angle_y / 80) & BYTE_MASK, script_index);
+            SELF(Actor)->active_flags = SELF(Actor)->active_flags | flags;
         }
-        TASK(Actor)->script_record = selector;
+        SELF(Actor)->script_record = selector;
     }
-    if (TASK(Actor)->active_flags & 0x1) {
-        Actor_SelectSprite(TASK(Actor)->script_record);
+    if (SELF(Actor)->active_flags & 0x1) {
+        Actor_SelectSprite(SELF(Actor)->script_record);
     } else {
         table = (u8*)g_Scripts;
-        table += ((s32*)table)[TASK(Actor)->unk_2C];
-        TASK(Actor)->script = table + ((u16*)table)[TASK(Actor)->script_record];
+        table += ((s32*)table)[SELF(Actor)->unk_2C];
+        SELF(Actor)->script = table + ((u16*)table)[SELF(Actor)->script_record];
     }
     Script_Seek(code);
 }

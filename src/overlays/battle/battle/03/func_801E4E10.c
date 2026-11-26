@@ -16,5 +16,5 @@ MATCH void func_801E4E10(void) {
     if ((D_801CA71C[g_Battle.action_id].mask & 0x800u) == 0u) {
         Battle_IsEnemyBlockedOnce();
     }
-    TASK(PartyMember)->header.step += 1;
+    SELF(PartyMember)->header.step += 1;
 }

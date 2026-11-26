@@ -6,11 +6,11 @@ MATCH void func_800AD930(void) {
 
     flag = *MEM_PTR(u8, &g_Battle.cursor.panel_entry);
     if (flag != GAME_NONE) {
-        work = TASK(PartyMember);
+        work = SELF(PartyMember);
         work->header.step--;
     }
     if (!(g_UiPanelTasks[21].active & 0x1)) {
-        TASK(PartyMember)->header.mode++;
-        TASK(PartyMember)->header.step = 0;
+        SELF(PartyMember)->header.mode++;
+        SELF(PartyMember)->header.step = 0;
     }
 }

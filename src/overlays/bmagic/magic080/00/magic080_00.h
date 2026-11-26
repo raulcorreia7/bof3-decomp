@@ -23,8 +23,8 @@ extern Magic080Cell D_801EF13C[];
     for (i = 0; i < COUNT; i++) {                                                                                                                                                             \
         prim = (POLY_FT4*)g_GfxPrimCursor;                                                                                                                                                    \
         SetPolyFT4(prim);                                                                                                                                                                     \
-        setXY4(prim, TASK(PartyMember)->screen_x.value + i * 12, TASK(PartyMember)->screen_y.value, TASK(PartyMember)->screen_x.value + (i + 1) * 12, TASK(PartyMember)->screen_y.value,      \
-               TASK(PartyMember)->screen_x.value + i * 12, TASK(PartyMember)->screen_y.value + 12, TASK(PartyMember)->screen_x.value + (i + 1) * 12, TASK(PartyMember)->screen_y.value + 12); \
+        setXY4(prim, SELF(PartyMember)->screen_x.value + i * 12, SELF(PartyMember)->screen_y.value, SELF(PartyMember)->screen_x.value + (i + 1) * 12, SELF(PartyMember)->screen_y.value,      \
+               SELF(PartyMember)->screen_x.value + i * 12, SELF(PartyMember)->screen_y.value + 12, SELF(PartyMember)->screen_x.value + (i + 1) * 12, SELF(PartyMember)->screen_y.value + 12); \
         setRGB0(prim, 0x80, 0x80, 0x80);                                                                                                                                                      \
         prim->tpage = GetTPage(TPAGE_DEPTH_4BIT, TPAGE_ABR_ADD, 0x3C0, PAGE_Y);                                                                                                               \
         prim->clut  = GetClut(0, 0x1E0);                                                                                                                                                      \

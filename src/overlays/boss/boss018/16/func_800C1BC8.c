@@ -10,6 +10,6 @@ MATCH void func_800C1BC8(void) {
     g_BattleCurrentEnemy->script   = &D_800C2C50;
     g_BattleCurrentEnemy->unk_E4   = func_800C1C6C;
     g_BattleCurrentEnemy->unk_E8   = &D_800C2C9C;
-    TASK(PartyMember)->header.mode = 2;
+    SELF(PartyMember)->header.mode = 2;
     Script_AnimStepLoop();
 }

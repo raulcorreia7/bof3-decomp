@@ -3,9 +3,9 @@
 MATCH void func_801F2EA0(void) {
     POLY_G4* prim;
 
-    if (TASK(Actor)->timer++ >= 16) {
+    if (SELF(Actor)->timer++ >= 16) {
         D_801F59EC         = D_801F511C[D_801F59E8];
-        TASK(Actor)->timer = 0;
+        SELF(Actor)->timer = 0;
         if (D_801F59E8++ >= 7) {
             D_801F59E8 = 0;
         }

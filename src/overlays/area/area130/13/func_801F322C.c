@@ -4,10 +4,10 @@ MATCH void func_801F322C(void) {
     Actor* work;
     Actor* next;
 
-    work           = TASK(Actor);
+    work           = SELF(Actor);
     work->unk_32   = g_Actors[2].unk_32;
     work->timer    = 20;
-    next           = TASK(Actor);
+    next           = SELF(Actor);
     next->vx       = 0;
     next->vy       = 0;
     next->screen_x = g_Actors[2].screen_x;

@@ -7,10 +7,10 @@
 MATCH void Fishing_PromptRun(void) {
     FishingState* record;
 
-    record = TASK(FishingState);
+    record = SELF(FishingState);
     if (((u8*)record != &g_SpawnedActors[3].header.flags) && (g_SpawnedActors[3].header.mode < 4u)) {
         Actor_Clear();
         return;
     }
-    g_FishingPromptSteps[TASK(FishingState)->handler_index]();
+    g_FishingPromptSteps[SELF(FishingState)->handler_index]();
 }

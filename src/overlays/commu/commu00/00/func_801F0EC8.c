@@ -1,6 +1,6 @@
 #include "commu00_00.h"
 
 MATCH void func_801F0EC8(u8 task_index) {
-    TASK(Actor)->unk_06                     = 1;
+    SELF(Actor)->unk_06                     = 1;
     g_Actors[task_index & BYTE_MASK].unk_7C = 0xC003;
 }

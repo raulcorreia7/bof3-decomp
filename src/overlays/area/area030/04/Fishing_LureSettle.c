@@ -8,7 +8,7 @@ MATCH void Fishing_LureSettle(void) {
 
     if (Script_AnimStepOnce() != 0u) {
         Script_Select(3);
-        record                = TASK(FishingState);
+        record                = SELF(FishingState);
         record->handler_index = (record->handler_index + 1);
     }
 

@@ -31,7 +31,7 @@ MATCH void func_801F3124(void) {
         dot->active = order[j++];
         dot->dx     = (rand() & 0x1F) - 16;
         dot->dy     = (rand() & 0x1F) - 16;
-        if (TASK(Actor)->unk_06 == 0) {
+        if (SELF(Actor)->unk_06 == 0) {
             dot->life = (rand() & 0x1E) + 10;
             dot->x -= dot->dx * dot->life;
             dot->y -= dot->dy * dot->life;
@@ -41,7 +41,7 @@ MATCH void func_801F3124(void) {
         dot++;
     }
 
-    TASK(Actor)->timer = 80;
-    TASK(Actor)->header.mode++;
+    SELF(Actor)->timer = 80;
+    SELF(Actor)->header.mode++;
     SND_SEPlay(EMI_SE_ID(SND_BANK_AREA, 2));
 }

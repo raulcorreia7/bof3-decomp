@@ -2,6 +2,6 @@
 
 MATCH void func_801F2E2C(void) {
     if (g_GameStateIndex != GAME_REQUEST_AREA_CHANGE) {
-        TASK(Actor)->header.step = 1;
+        SELF(Actor)->header.step = 1;
     }
 }

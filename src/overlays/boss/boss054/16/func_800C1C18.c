@@ -5,10 +5,10 @@ MATCH void func_800C1C18(void) {
     u32 slot;
     u32 step;
 
-    if (TASK(PartyMember)->timer == 0) {
+    if (SELF(PartyMember)->timer == 0) {
         selector = (u8*)&g_Battle.target_selector;
         if (Battle_SlotIsBlocked(*selector) & BYTE_MASK) {
-            TASK(PartyMember)->header.mode = 9;
+            SELF(PartyMember)->header.mode = 9;
             return;
         }
         slot = *selector;
@@ -18,7 +18,7 @@ MATCH void func_800C1C18(void) {
             step = ENEMY_COMBATANT(slot).header.mode;
         }
         if (step != 6) {
-            TASK(PartyMember)->header.mode += 1;
+            SELF(PartyMember)->header.mode += 1;
         }
     }
 }

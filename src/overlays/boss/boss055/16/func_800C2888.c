@@ -3,5 +3,5 @@
 MATCH void func_800C2888(void) {
     Callback steps[2] = {func_800C28E0, func_800C2948};
 
-    steps[TASK(PartyMember)->header.step]();
+    steps[SELF(PartyMember)->header.step]();
 }

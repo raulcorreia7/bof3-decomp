@@ -7,7 +7,7 @@ MATCH void AreaAction_RollFade(void) {
     s8     value;
 
     choice = RANDOM_MASK(0xF);
-    if ((TASK(Actor)->option_flags & ACTOR_OPT_ROUTE_LOCKED) == 0) {
+    if ((SELF(Actor)->option_flags & ACTOR_OPT_ROUTE_LOCKED) == 0) {
         Script_DispatchSelector(((g_Game.members[0].facing ^ 0x4) & 0x7));
     }
     g_GameFlags |= GAME_FLAG_SCRIPT_ACTIVE;
@@ -19,7 +19,7 @@ MATCH void AreaAction_RollFade(void) {
             case 2:
             case 3:
                 Actor_SpawnSceneActor(1);
-                TASK(Actor)->unk_04 = 1;
+                SELF(Actor)->unk_04 = 1;
                 break;
             case 4:
             case 5:
@@ -27,17 +27,17 @@ MATCH void AreaAction_RollFade(void) {
                 Actor_SpawnSceneActor(1);
                 Party_AddZenny(1, 0);
                 Actor_SpawnToss(((s32)(-(((s32)GAME_WORK_AREA_PTR - (s32)g_Actors) * 0xD79435E5)) >> 3));
-                TASK(Actor)->unk_04 = 2;
+                SELF(Actor)->unk_04 = 2;
                 break;
             case 7:
                 Actor_SpawnSceneActor(1);
                 Party_AddZenny(10, 0);
                 Actor_SpawnToss(((s32)(-(((s32)GAME_WORK_AREA_PTR - (s32)g_Actors) * 0xD79435E5)) >> 3));
-                TASK(Actor)->unk_04 = 3;
+                SELF(Actor)->unk_04 = 3;
                 break;
             default:
                 Actor_SpawnSceneActor(3);
-                TASK(Actor)->unk_04 = 1;
+                SELF(Actor)->unk_04 = 1;
                 break;
         }
     } else {
@@ -46,10 +46,10 @@ MATCH void AreaAction_RollFade(void) {
         } else {
             Actor_SpawnSceneActor(3);
         }
-        TASK(Actor)->unk_04 = 1;
+        SELF(Actor)->unk_04 = 1;
     }
     value                  = -0x50;
-    work                   = TASK(Actor);
+    work                   = SELF(Actor);
     work->tint.bytes.rgb.g = value;
     work->tint.bytes.rgb.b = value;
     work->tint.bytes.rgb.r = value;

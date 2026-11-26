@@ -14,22 +14,22 @@ MATCH void Area_MoveActorRoute(void* sub, s32 route) {
     slot   = route & BYTE_MASK;
     rate   = g_RouteSpeedScale[((u8*)sub)[4]];
     if ((masked == 2) || (masked == 6)) {
-        TASK(Actor)->timer = 32;
+        SELF(Actor)->timer = 32;
     } else {
-        TASK(Actor)->timer = 16;
+        SELF(Actor)->timer = 16;
     }
-    TASK(Actor)->timer = (TASK(Actor)->timer / (rate & BYTE_MASK));
-    TASK(Actor)->vx    = g_FacingOffsets[slot].x * rate;
+    SELF(Actor)->timer = (SELF(Actor)->timer / (rate & BYTE_MASK));
+    SELF(Actor)->vx    = g_FacingOffsets[slot].x * rate;
     high               = g_FacingOffsets[slot].y * rate;
-    TASK(Actor)->vy    = high;
-    pos_x              = TASK(Actor)->pos.x.fixed + TASK(Actor)->vx * TASK(Actor)->timer;
-    pos_y              = TASK(Actor)->pos.y.fixed + high * TASK(Actor)->timer;
+    SELF(Actor)->vy    = high;
+    pos_x              = SELF(Actor)->pos.x.fixed + SELF(Actor)->vx * SELF(Actor)->timer;
+    pos_y              = SELF(Actor)->pos.y.fixed + high * SELF(Actor)->timer;
     if ((((u8*)sub)[0] & 0x80) == 0) {
         result = Area_HeightGet(pos_x, pos_y, slot);
         if (SP_REF(volatile u8, 0x0u) != 0) {
             result = Area_HeightSample(pos_x, pos_y);
         }
-        TASK(Actor)->vz = (result - COORD_INT(TASK(Actor)->pos.z)) / TASK(Actor)->timer;
+        SELF(Actor)->vz = (result - COORD_INT(SELF(Actor)->pos.z)) / SELF(Actor)->timer;
     }
-    TASK(Actor)->header.flags |= ACTOR_FLAG_STEP_MOVE;
+    SELF(Actor)->header.flags |= ACTOR_FLAG_STEP_MOVE;
 }

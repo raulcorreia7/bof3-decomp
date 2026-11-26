@@ -8,7 +8,7 @@ MATCH void func_8019B284(void) {
     Actor* work;
     u8     index;
 
-    work  = TASK(Actor);
+    work  = SELF(Actor);
     index = work->param.unk_0B;
     if ((work->header.flags & ACTOR_FLAG_HIDDEN) == 0) {
         g_Actors[index].screen_x += work->screen_x;

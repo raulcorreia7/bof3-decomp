@@ -59,7 +59,7 @@ static Scene00Tables D_801FC980_Tables = {
 };
 
 MATCH void func_801F6DC0(void) {
-    D_801FC980[TASK(Actor)->header.mode]();
+    D_801FC980[SELF(Actor)->header.mode]();
 }
 
 MATCH void func_801F6E04(void) {
@@ -67,7 +67,7 @@ MATCH void func_801F6E04(void) {
     u32          value;
     u32          index;
 
-    work  = TASK(SceneEffect);
+    work  = SELF(SceneEffect);
     index = work->channel_18;
     value = g_PartyActors[index].range_54.raw;
 
@@ -89,7 +89,7 @@ MATCH void func_801F6E48(void) {
     u16          x2;
     u16          y;
 
-    work      = TASK(u8);
+    work      = SELF(u8);
     prim      = g_GfxPrimCursor;
     work_cell = (SceneEffect*)work;
     adopted   = &g_PartyActors[work_cell->channel_18];
@@ -98,19 +98,19 @@ MATCH void func_801F6E48(void) {
     work_cell->pos.y       = adopted->pos.y.fixed;
     work_cell->pos.z.fixed = adopted->pos.z.fixed;
     g_GfxPrimCursor        = prim + 8;
-    TASK_SET(adopted);
+    SELF_SET(adopted);
     ((RECT*)prim)->x = 0;
     ((RECT*)prim)->y = 240;
     setWH(((RECT*)prim), 16, 16);
     SetTexWindow((DR_TWIN*)(prim + 8), (RECT*)prim);
-    Area_CellAddPrim(TASK(Actor)->pos.x.fixed, TASK(Actor)->pos.y.fixed, 0x11, 0x0C);
+    Area_CellAddPrim(SELF(Actor)->pos.x.fixed, SELF(Actor)->pos.y.fixed, 0x11, 0x0C);
 
     poly = (POLY_FT4*)g_GfxPrimCursor;
     SetPolyFT4(poly);
 
     func_801AC1DC(origin, work_cell->channel_1C);
 
-    setVector(&projection, ((origin[0] + TASK(Actor)->pos.x.fixed) >> 9) - 0x4000, ((origin[1] + TASK(Actor)->pos.y.fixed) >> 9) - 0x4000, -(origin[2] + COORD_INT(TASK(Actor)->pos.z)) / 2);
+    setVector(&projection, ((origin[0] + SELF(Actor)->pos.x.fixed) >> 9) - 0x4000, ((origin[1] + SELF(Actor)->pos.y.fixed) >> 9) - 0x4000, -(origin[2] + COORD_INT(SELF(Actor)->pos.z)) / 2);
 
     work_cell->projected = RotTransPers(&projection, (long*)&poly->x0, &depth, &flag);
 
@@ -118,7 +118,7 @@ MATCH void func_801F6E48(void) {
     x        = poly->x0;
     poly->y1 = 0;
     poly->y0 = 0;
-    g_Task   = work;
+    g_Self   = work;
     x2       = poly->x0;
     poly->x1 = x + 8;
     poly->x3 = x + 8;
@@ -135,7 +135,7 @@ MATCH void func_801F6E48(void) {
 
     SetShadeTex(poly, 1);
 
-    Area_CellAddPrim(TASK(Actor)->pos.x.fixed, TASK(Actor)->pos.y.fixed, 0x11, sizeof(POLY_FT4));
+    Area_CellAddPrim(SELF(Actor)->pos.x.fixed, SELF(Actor)->pos.y.fixed, 0x11, sizeof(POLY_FT4));
 
     prim             = g_GfxPrimCursor;
     g_GfxPrimCursor  = prim + 8;
@@ -144,13 +144,13 @@ MATCH void func_801F6E48(void) {
     setWH(((RECT*)prim), 256, 256);
     SetTexWindow((DR_TWIN*)(prim + 8), (RECT*)prim);
 
-    Area_CellAddPrim(TASK(Actor)->pos.x.fixed, TASK(Actor)->pos.y.fixed, 0x11, 0x0C);
+    Area_CellAddPrim(SELF(Actor)->pos.x.fixed, SELF(Actor)->pos.y.fixed, 0x11, 0x0C);
 }
 
 MATCH void func_801F70F0(void) {
     SceneEffect* work;
 
-    work = TASK(SceneEffect);
+    work = SELF(SceneEffect);
     D_801FC988[work->step]();
 }
 
@@ -160,7 +160,7 @@ MATCH void func_801F7134(s32 chapter_id) {
 
     tpage = getTPage(TPAGE_DEPTH_8BIT, TPAGE_ABR_SUB, 832, 256);
     GFX_SET_DRAW_MODE(tpage);
-    GFX_AddPrim(TASK(Actor)->draw_layer, sizeof(DR_MODE));
+    GFX_AddPrim(SELF(Actor)->draw_layer, sizeof(DR_MODE));
 
     prim = (SPRT*)g_GfxPrimCursor;
     SetSprt(prim);
@@ -168,10 +168,10 @@ MATCH void func_801F7134(s32 chapter_id) {
     setUV0(prim, 0, 32);
     setWH(prim, 256, 1768);
     prim->clut = getClut(0, 490);
-    setRGB0(prim, TASK(Actor)->tint.bytes.rgb.r, TASK(Actor)->tint.bytes.rgb.g, TASK(Actor)->tint.bytes.rgb.b);
+    setRGB0(prim, SELF(Actor)->tint.bytes.rgb.r, SELF(Actor)->tint.bytes.rgb.g, SELF(Actor)->tint.bytes.rgb.b);
     SetShadeTex(prim, 0);
     SetSemiTrans(prim, chapter_id & BYTE_MASK);
-    GFX_AddPrim(TASK(Actor)->draw_layer, sizeof(SPRT));
+    GFX_AddPrim(SELF(Actor)->draw_layer, sizeof(SPRT));
 }
 
 MATCH void func_801F7264(void) {
@@ -179,15 +179,15 @@ MATCH void func_801F7264(void) {
     u8* second;
     u8* third;
 
-    first       = TASK(u8);
+    first       = SELF(u8);
     first[0x5F] = 0;
     first[0x5E] = 0;
     first[0x5D] = 0;
 
-    second    = TASK(u8);
+    second    = SELF(u8);
     second[9] = 0xF0;
 
-    third    = TASK(u8);
+    third    = SELF(u8);
     third[1] = 1;
 }
 
@@ -196,15 +196,15 @@ MATCH void func_801F72A0(void) {
 
     func_801F7134(1);
 
-    TASK(Actor)->tint.bytes.rgb.r += 2;
-    TASK(Actor)->tint.bytes.rgb.g += 2;
-    TASK(Actor)->tint.bytes.rgb.b += 2;
+    SELF(Actor)->tint.bytes.rgb.r += 2;
+    SELF(Actor)->tint.bytes.rgb.g += 2;
+    SELF(Actor)->tint.bytes.rgb.b += 2;
 
-    work = TASK(SceneEffect);
+    work = SELF(SceneEffect);
     if (work->color.r == 0x80) {
         g_ScriptVarsReq.byte = 0x14;
         work->step           = 2;
-        TASK(Actor)->timer   = 255;
+        SELF(Actor)->timer   = 255;
     }
 }
 
@@ -214,11 +214,11 @@ MATCH void func_801F7350(void) {
 
     func_801F7134(1);
 
-    work  = TASK(u8);
+    work  = SELF(u8);
     timer = work[9];
     if (timer == 0) {
         work[1]++;
-        work = TASK(u8);
+        work = SELF(u8);
     }
     work[9] = timer ? timer - 1 : 0xFF;
 }
@@ -228,14 +228,14 @@ MATCH void func_801F73A8(void) {
 
     func_801F7134(1);
 
-    work = TASK(SceneEffect);
+    work = SELF(SceneEffect);
     work->color.r -= 2;
-    work = TASK(SceneEffect);
+    work = SELF(SceneEffect);
     work->color.g -= 2;
-    work = TASK(SceneEffect);
+    work = SELF(SceneEffect);
     work->color.b -= 2;
 
-    work = TASK(SceneEffect);
+    work = SELF(SceneEffect);
     if (work->color.r == 0) {
         work->counter_09 = 0;
         Actor_Clear();
@@ -245,19 +245,19 @@ MATCH void func_801F73A8(void) {
 MATCH void func_801F7440(void) {
     SceneEffect* work;
 
-    work = TASK(SceneEffect);
+    work = SELF(SceneEffect);
     D_801FC99C[work->step]();
 }
 
 MATCH void func_801F7484(void) {
     s16 distance;
 
-    TASK(SceneEffect)->pos.x              = TO_COORD(11);
-    TASK(SceneEffect)->pos.y              = TO_COORD(15) + COORD_HALF;
-    distance                              = Area_HeightSample(TASK(SceneEffect)->pos.x, TO_COORD(15) + COORD_HALF);
-    TASK(SceneEffect)->pos.z.part.integer = distance;
-    TASK(SceneEffect)->ot_index           = 5;
-    TASK(SceneEffect)->step               = 1;
+    SELF(SceneEffect)->pos.x              = TO_COORD(11);
+    SELF(SceneEffect)->pos.y              = TO_COORD(15) + COORD_HALF;
+    distance                              = Area_HeightSample(SELF(SceneEffect)->pos.x, TO_COORD(15) + COORD_HALF);
+    SELF(SceneEffect)->pos.z.part.integer = distance;
+    SELF(SceneEffect)->ot_index           = 5;
+    SELF(SceneEffect)->step               = 1;
 }
 
 /* Draws the forward scenario line from the active work point toward the actor point in 0x8000 steps. */
@@ -270,7 +270,7 @@ MATCH void func_801F74EC(void) {
     SceneLineColor color;
     s16            stop;
 
-    work                = TASK(SceneEffect);
+    work                = SELF(SceneEffect);
     color               = D_801F6C04;
     actor               = (Actor*)&g_Actors[work->channel_06];
     point.x             = work->pos.x;
@@ -298,7 +298,7 @@ MATCH void func_801F74EC(void) {
     } while (stop);
 
     if (g_ScriptVars[2] == 0x32) {
-        TASK(SceneEffect)->step = 2;
+        SELF(SceneEffect)->step = 2;
     }
 }
 
@@ -315,7 +315,7 @@ MATCH void func_801F7670(void) {
     SceneLineColor color;
     s16            stop;
 
-    work                = TASK(SceneEffect);
+    work                = SELF(SceneEffect);
     color               = D_801F6C04;
     actor               = (Actor*)&g_Actors[work->channel_06];
     point.x             = work->pos.x;
@@ -361,7 +361,7 @@ MATCH void func_801F7670(void) {
     } while (stop);
 
     if (g_ScriptVars[2] == 0x34) {
-        TASK(SceneEffect)->step = 3;
+        SELF(SceneEffect)->step = 3;
     }
 }
 
@@ -396,13 +396,13 @@ MATCH void func_801F78EC(volatile SceneLinePoint to, volatile SceneLinePoint fro
 
     setRGB0(prim, color.r, color.g, color.b);
 
-    GFX_AddPrim((u8)TASK(SceneEffect)->ot_index, sizeof(*prim));
+    GFX_AddPrim((u8)SELF(SceneEffect)->ot_index, sizeof(*prim));
 }
 
 MATCH void func_801F7A18(void) {
     SceneEffect* work;
 
-    work = TASK(SceneEffect);
+    work = SELF(SceneEffect);
     D_801FC9AC[work->step]();
 }
 
@@ -411,19 +411,19 @@ MATCH void func_801F7A5C(void) {
     SceneEffect* work_tail;
     SceneEffect* work_state;
 
-    work_pos                     = TASK(SceneEffect);
+    work_pos                     = SELF(SceneEffect);
     work_pos->pos.x              = TO_COORD(99) + COORD_HALF;
     work_pos->pos.y              = TO_COORD(13);
     work_pos->pos.z.part.integer = 0x300;
     work_pos->counter_09         = 0x78;
-    work_tail                    = TASK(SceneEffect);
+    work_tail                    = SELF(SceneEffect);
     work_pos->angle.x            = 0;
     work_pos->angle.y            = 0;
     work_pos->angle.z            = 0;
     *(s8*)&work_tail->color.b    = -1;
     *(s8*)&work_tail->color.g    = -1;
     *(s8*)&work_tail->color.r    = -1;
-    work_state                   = TASK(SceneEffect);
+    work_state                   = SELF(SceneEffect);
     work_state->counter_0C       = 1;
     work_state->counter_10       = 0;
     work_state->channel_20       = 0;
@@ -435,20 +435,20 @@ MATCH void func_801F7A5C(void) {
     work_state->channel_07       = 0;
     work_state->channel_06       = 0;
     SND_SEPlay(EMI_SE_ID(SND_BANK_AREA, 14));
-    TASK(SceneEffect)->step = 1;
+    SELF(SceneEffect)->step = 1;
 }
 
 MATCH void func_801F7B0C(void) {
     s32          step;
     SceneEffect* work;
 
-    Scene_DrawTriangle(TASK(SceneEffect)->channel_18, 0x200, 0, 0);
-    work             = TASK(SceneEffect);
+    Scene_DrawTriangle(SELF(SceneEffect)->channel_18, 0x200, 0, 0);
+    work             = SELF(SceneEffect);
     step             = work->channel_18 + 8;
     work->channel_18 = step;
     if (step == 96) {
         SND_SEPlay(EMI_SE_ID(SND_BANK_AREA, 14));
-        TASK(SceneEffect)->step = 2;
+        SELF(SceneEffect)->step = 2;
     }
 }
 
@@ -456,103 +456,103 @@ MATCH void func_801F7B80(void) {
     s32          channel;
     SceneEffect* work;
 
-    Scene_DrawTriangle(TASK(SceneEffect)->channel_18, 0x200, 0, 0);
-    Scene_DrawTriangle(TASK(SceneEffect)->channel_1C, 0x71, 0, 0x8E3);
-    work             = TASK(SceneEffect);
+    Scene_DrawTriangle(SELF(SceneEffect)->channel_18, 0x200, 0, 0);
+    Scene_DrawTriangle(SELF(SceneEffect)->channel_1C, 0x71, 0, 0x8E3);
+    work             = SELF(SceneEffect);
     channel          = work->channel_1C + 0x10;
     work->channel_1C = channel;
     if (channel == 0x20) {
         SND_SEPlay(EMI_SE_ID(SND_BANK_AREA, 14));
     }
-    if (TASK(SceneEffect)->channel_1C == 0xA0) {
+    if (SELF(SceneEffect)->channel_1C == 0xA0) {
         SND_SEPlay(EMI_SE_ID(SND_BANK_AREA, 14));
-        TASK(SceneEffect)->step = 3;
+        SELF(SceneEffect)->step = 3;
     }
 }
 
 MATCH void func_801F7C34(void) {
     SceneEffect* work;
 
-    Scene_DrawTriangle(TASK(SceneEffect)->channel_18, 0x200, 0, 0);
-    Scene_DrawTriangle(TASK(SceneEffect)->channel_1C, 0x71, 0, 0x8E3);
-    Scene_DrawTriangle(TASK(SceneEffect)->channel_0B, 0x155, 0, 0x200);
-    work             = TASK(SceneEffect);
+    Scene_DrawTriangle(SELF(SceneEffect)->channel_18, 0x200, 0, 0);
+    Scene_DrawTriangle(SELF(SceneEffect)->channel_1C, 0x71, 0, 0x8E3);
+    Scene_DrawTriangle(SELF(SceneEffect)->channel_0B, 0x155, 0, 0x200);
+    work             = SELF(SceneEffect);
     work->channel_0B = (work->channel_0B + 0x10);
-    if (TASK(SceneEffect)->channel_0B == 0x60) {
+    if (SELF(SceneEffect)->channel_0B == 0x60) {
         SND_SEPlay(EMI_SE_ID(SND_BANK_AREA, 14));
-        TASK(SceneEffect)->step = 4;
+        SELF(SceneEffect)->step = 4;
     }
 }
 
 MATCH void func_801F7CF0(void) {
     SceneEffect* work;
 
-    Scene_DrawTriangle(TASK(SceneEffect)->channel_18, 0x200, 0, 0);
-    Scene_DrawTriangle(TASK(SceneEffect)->channel_1C, 0x71, 0, 0x8E3);
-    Scene_DrawTriangle(TASK(SceneEffect)->channel_0B, 0x155, 0, 0x200);
-    Scene_DrawTriangle(TASK(SceneEffect)->channel_08, 0xE3, 0, 0xE38);
-    work             = TASK(SceneEffect);
+    Scene_DrawTriangle(SELF(SceneEffect)->channel_18, 0x200, 0, 0);
+    Scene_DrawTriangle(SELF(SceneEffect)->channel_1C, 0x71, 0, 0x8E3);
+    Scene_DrawTriangle(SELF(SceneEffect)->channel_0B, 0x155, 0, 0x200);
+    Scene_DrawTriangle(SELF(SceneEffect)->channel_08, 0xE3, 0, 0xE38);
+    work             = SELF(SceneEffect);
     work->channel_08 = (work->channel_08 + 8);
-    if (TASK(SceneEffect)->channel_08 == 0x60) {
+    if (SELF(SceneEffect)->channel_08 == 0x60) {
         SND_SEPlay(EMI_SE_ID(SND_BANK_AREA, 14));
-        TASK(SceneEffect)->step = 5;
+        SELF(SceneEffect)->step = 5;
     }
 }
 
 MATCH void func_801F7DC8(void) {
     SceneEffect* work;
 
-    Scene_DrawTriangle(TASK(SceneEffect)->channel_18, 0x200, 0, 0);
-    Scene_DrawTriangle(TASK(SceneEffect)->channel_1C, 0x71, 0, 0x8E3);
-    Scene_DrawTriangle(TASK(SceneEffect)->channel_0B, 0x155, 0, 0x200);
-    Scene_DrawTriangle(TASK(SceneEffect)->channel_08, 0xE3, 0, 0xE38);
-    Scene_DrawTriangle(TASK(SceneEffect)->channel_0A, 0x31C, 0, 0x555);
-    work             = TASK(SceneEffect);
+    Scene_DrawTriangle(SELF(SceneEffect)->channel_18, 0x200, 0, 0);
+    Scene_DrawTriangle(SELF(SceneEffect)->channel_1C, 0x71, 0, 0x8E3);
+    Scene_DrawTriangle(SELF(SceneEffect)->channel_0B, 0x155, 0, 0x200);
+    Scene_DrawTriangle(SELF(SceneEffect)->channel_08, 0xE3, 0, 0xE38);
+    Scene_DrawTriangle(SELF(SceneEffect)->channel_0A, 0x31C, 0, 0x555);
+    work             = SELF(SceneEffect);
     work->channel_0A = (work->channel_0A + 8);
-    if (TASK(SceneEffect)->channel_0A == 0x10) {
+    if (SELF(SceneEffect)->channel_0A == 0x10) {
         SND_SEPlay(EMI_SE_ID(SND_BANK_AREA, 14));
     }
-    if (TASK(SceneEffect)->channel_0A == 0x60) {
+    if (SELF(SceneEffect)->channel_0A == 0x60) {
         SND_SEPlay(EMI_SE_ID(SND_BANK_AREA, 14));
-        TASK(SceneEffect)->step = 6;
+        SELF(SceneEffect)->step = 6;
     }
 }
 
 MATCH void func_801F7EE0(void) {
     SceneEffect* work;
 
-    Scene_DrawTriangle(TASK(SceneEffect)->channel_18, 0x200, 0, 0);
-    Scene_DrawTriangle(TASK(SceneEffect)->channel_1C, 0x71, 0, 0x8E3);
-    Scene_DrawTriangle(TASK(SceneEffect)->channel_0B, 0x155, 0, 0x200);
-    Scene_DrawTriangle(TASK(SceneEffect)->channel_08, 0xE3, 0, 0xE38);
-    Scene_DrawTriangle(TASK(SceneEffect)->channel_0A, 0x31C, 0, 0x555);
-    Scene_DrawTriangle(TASK(SceneEffect)->channel_06, 0x238, 0, 0xAAA);
-    work             = TASK(SceneEffect);
+    Scene_DrawTriangle(SELF(SceneEffect)->channel_18, 0x200, 0, 0);
+    Scene_DrawTriangle(SELF(SceneEffect)->channel_1C, 0x71, 0, 0x8E3);
+    Scene_DrawTriangle(SELF(SceneEffect)->channel_0B, 0x155, 0, 0x200);
+    Scene_DrawTriangle(SELF(SceneEffect)->channel_08, 0xE3, 0, 0xE38);
+    Scene_DrawTriangle(SELF(SceneEffect)->channel_0A, 0x31C, 0, 0x555);
+    Scene_DrawTriangle(SELF(SceneEffect)->channel_06, 0x238, 0, 0xAAA);
+    work             = SELF(SceneEffect);
     work->channel_06 = (work->channel_06 + 8);
-    if (TASK(SceneEffect)->channel_06 == 0x10) {
+    if (SELF(SceneEffect)->channel_06 == 0x10) {
         SND_SEPlay(EMI_SE_ID(SND_BANK_AREA, 14));
     }
-    if (TASK(SceneEffect)->channel_06 == 0x60) {
+    if (SELF(SceneEffect)->channel_06 == 0x60) {
         SND_SEPlay(EMI_SE_ID(SND_BANK_AREA, 14));
-        TASK(SceneEffect)->step = 7;
+        SELF(SceneEffect)->step = 7;
     }
 }
 
 MATCH void func_801F8014(void) {
     SceneEffect* work;
 
-    Scene_DrawTriangle(TASK(SceneEffect)->channel_18, 0x200, 0, 0);
-    Scene_DrawTriangle(TASK(SceneEffect)->channel_1C, 0x71, 0, 0x8E3);
-    Scene_DrawTriangle(TASK(SceneEffect)->channel_0B, 0x155, 0, 0x200);
-    Scene_DrawTriangle(TASK(SceneEffect)->channel_08, 0xE3, 0, 0xE38);
-    Scene_DrawTriangle(TASK(SceneEffect)->channel_0A, 0x31C, 0, 0x555);
-    Scene_DrawTriangle(TASK(SceneEffect)->channel_06, 0x238, 0, 0xAAA);
-    Scene_DrawTriangle(TASK(SceneEffect)->channel_07, 0, 0, 0x71C);
-    work             = TASK(SceneEffect);
+    Scene_DrawTriangle(SELF(SceneEffect)->channel_18, 0x200, 0, 0);
+    Scene_DrawTriangle(SELF(SceneEffect)->channel_1C, 0x71, 0, 0x8E3);
+    Scene_DrawTriangle(SELF(SceneEffect)->channel_0B, 0x155, 0, 0x200);
+    Scene_DrawTriangle(SELF(SceneEffect)->channel_08, 0xE3, 0, 0xE38);
+    Scene_DrawTriangle(SELF(SceneEffect)->channel_0A, 0x31C, 0, 0x555);
+    Scene_DrawTriangle(SELF(SceneEffect)->channel_06, 0x238, 0, 0xAAA);
+    Scene_DrawTriangle(SELF(SceneEffect)->channel_07, 0, 0, 0x71C);
+    work             = SELF(SceneEffect);
     work->channel_07 = (work->channel_07 + 8);
-    if (TASK(SceneEffect)->channel_07 == 0x60) {
+    if (SELF(SceneEffect)->channel_07 == 0x60) {
         SND_SEPlay(EMI_SE_ID(SND_BANK_AREA, 14));
-        TASK(SceneEffect)->step = 8;
+        SELF(SceneEffect)->step = 8;
     }
 }
 
@@ -560,45 +560,45 @@ MATCH void func_801F8140(void) {
     s32          channel;
     SceneEffect* work;
 
-    Scene_DrawTriangle(TASK(SceneEffect)->channel_18, 0x200, 0, 0);
-    Scene_DrawTriangle(TASK(SceneEffect)->channel_1C, 0x71, 0, 0x8E3);
-    Scene_DrawTriangle(TASK(SceneEffect)->channel_0B, 0x155, 0, 0x200);
-    Scene_DrawTriangle(TASK(SceneEffect)->channel_08, 0xE3, 0, 0xE38);
-    Scene_DrawTriangle(TASK(SceneEffect)->channel_0A, 0x31C, 0, 0x555);
-    Scene_DrawTriangle(TASK(SceneEffect)->channel_06, 0x238, 0, 0xAAA);
-    Scene_DrawTriangle(TASK(SceneEffect)->channel_07, 0, 0, 0x71C);
-    Scene_DrawTriangle(TASK(SceneEffect)->channel_20, 0, 0, 0xC00);
-    work             = TASK(SceneEffect);
+    Scene_DrawTriangle(SELF(SceneEffect)->channel_18, 0x200, 0, 0);
+    Scene_DrawTriangle(SELF(SceneEffect)->channel_1C, 0x71, 0, 0x8E3);
+    Scene_DrawTriangle(SELF(SceneEffect)->channel_0B, 0x155, 0, 0x200);
+    Scene_DrawTriangle(SELF(SceneEffect)->channel_08, 0xE3, 0, 0xE38);
+    Scene_DrawTriangle(SELF(SceneEffect)->channel_0A, 0x31C, 0, 0x555);
+    Scene_DrawTriangle(SELF(SceneEffect)->channel_06, 0x238, 0, 0xAAA);
+    Scene_DrawTriangle(SELF(SceneEffect)->channel_07, 0, 0, 0x71C);
+    Scene_DrawTriangle(SELF(SceneEffect)->channel_20, 0, 0, 0xC00);
+    work             = SELF(SceneEffect);
     channel          = work->channel_20 + 8;
     work->channel_20 = channel;
     if (channel == 0x10) {
         SND_SEPlay(EMI_SE_ID(SND_BANK_AREA, 14));
     }
-    if (TASK(SceneEffect)->channel_20 == 0x60) {
+    if (SELF(SceneEffect)->channel_20 == 0x60) {
         u8* counter;
 
         SND_SEPlay(EMI_SE_ID(SND_BANK_AREA, 3));
         counter = &g_ScriptVarsReq.byte;
         (*counter) += 1;
-        TASK(SceneEffect)->step = 9;
+        SELF(SceneEffect)->step = 9;
     }
 }
 
 MATCH void func_801F82B4(void) {
-    if (TASK(Actor)->timer != 0) {
+    if (SELF(Actor)->timer != 0) {
         func_801F8360();
 
-        if (TASK(SceneEffect)->counter_0C < 0x80) {
-            TASK(SceneEffect)->counter_0C += 4;
+        if (SELF(SceneEffect)->counter_0C < 0x80) {
+            SELF(SceneEffect)->counter_0C += 4;
         }
 
-        if (TASK(SceneEffect)->counter_10 < 0xB6) {
-            TASK(SceneEffect)->counter_10 += 2;
+        if (SELF(SceneEffect)->counter_10 < 0xB6) {
+            SELF(SceneEffect)->counter_10 += 2;
         } else {
-            TASK(SceneEffect)->counter_10 = 0xB6;
+            SELF(SceneEffect)->counter_10 = 0xB6;
         }
 
-        TASK(Actor)->timer--;
+        SELF(Actor)->timer--;
     } else {
         Actor_Clear();
     }
@@ -618,7 +618,7 @@ MATCH void func_801F8360(void) {
     SceneEffect* work;
     POLY_G3*     prim;
 
-    work          = TASK(SceneEffect);
+    work          = SELF(SceneEffect);
     work->angle.z = (work->counter_09 << 12) / 360;
     angle         = work->counter_10;
     size          = work->counter_0C;
@@ -649,15 +649,15 @@ MATCH void func_801F8360(void) {
         } else {
             RotTransPers3(&v[3], &v[4], &v[5], (long*)&prim->x0, (long*)&prim->x1, (long*)&prim->x2, &depth, &flag);
         }
-        shade = -(TASK(Actor)->timer << 1);
-        setRGB0(prim, TASK(Actor)->tint.bytes.rgb.r, TASK(Actor)->tint.bytes.rgb.g, TASK(Actor)->tint.bytes.rgb.b);
+        shade = -(SELF(Actor)->timer << 1);
+        setRGB0(prim, SELF(Actor)->tint.bytes.rgb.r, SELF(Actor)->tint.bytes.rgb.g, SELF(Actor)->tint.bytes.rgb.b);
         setRGB1(prim, shade, shade, shade);
         setRGB2(prim, shade, shade, shade);
         SetSemiTrans(prim, 1);
-        GFX_AddPrim(TASK(Actor)->draw_layer, sizeof(POLY_G3));
+        GFX_AddPrim(SELF(Actor)->draw_layer, sizeof(POLY_G3));
         PopMatrix();
         i = i + 1;
-        TASK(SceneEffect)->angle.z += 170;
+        SELF(SceneEffect)->angle.z += 170;
     } while (i < 24);
 }
 
@@ -686,8 +686,8 @@ MATCH void Scene_DrawTriangle(s32 size, s32 angle_x, s32 angle_y, s32 angle_z) {
     s32           v2x;
     s32           v2y;
 
-    saved         = *(SceneRotation*)&TASK(Actor)->angle_x;
-    work          = TASK(SceneEffect);
+    saved         = *(SceneRotation*)&SELF(Actor)->angle_x;
+    work          = SELF(SceneEffect);
     work->angle.x = angle_x;
     work->angle.y = angle_y;
     work->angle.z = angle_z;
@@ -710,14 +710,14 @@ MATCH void Scene_DrawTriangle(s32 size, s32 angle_x, s32 angle_y, s32 angle_z) {
     setRGB1(prim, SCN_TRI_SHADE_V1, SCN_TRI_SHADE_V1, SCN_TRI_SHADE_V1);
     setRGB2(prim, SCN_TRI_SHADE_V2, SCN_TRI_SHADE_V2, SCN_TRI_SHADE_V2);
     SetSemiTrans(prim, 1);
-    GFX_AddPrim(TASK(Actor)->draw_layer, sizeof(POLY_G3));
+    GFX_AddPrim(SELF(Actor)->draw_layer, sizeof(POLY_G3));
     PopMatrix();
 
-    *(SceneRotation*)&TASK(Actor)->angle_x = saved;
+    *(SceneRotation*)&SELF(Actor)->angle_x = saved;
 }
 
 MATCH void func_801F8748(void) {
-    D_801FC9D4[TASK(Actor)->header.mode]();
+    D_801FC9D4[SELF(Actor)->header.mode]();
 }
 
 MATCH void func_801F878C(void) {
@@ -725,17 +725,17 @@ MATCH void func_801F878C(void) {
     SceneEffect* tail;
     SceneEffect* late;
 
-    work                          = TASK(SceneEffect);
+    work                          = SELF(SceneEffect);
     FIELD(s16, work, 0x2Eu)       = (g_PartyActors[0].screen_x + D_801FC9E8);
     work->origin.y                = (g_PartyActors[0].screen_y + D_801FC9E9);
     work->counter_09              = 0;
-    TASK(SceneEffect)->channel_06 = 0x20;
-    tail                          = TASK(SceneEffect);
+    SELF(SceneEffect)->channel_06 = 0x20;
+    tail                          = SELF(SceneEffect);
     *(s8*)&tail->color.b          = -0x80;
     *(s8*)&tail->color.g          = -0x80;
     *(s8*)&tail->color.r          = -0x80;
     func_801F8BCC();
-    late       = TASK(SceneEffect);
+    late       = SELF(SceneEffect);
     late->step = late->channel_07;
 }
 
@@ -744,20 +744,20 @@ MATCH void func_801F882C(void) {
     SceneEffect* tail;
     s8           shade;
 
-    work = TASK(SceneEffect);
+    work = SELF(SceneEffect);
     work->origin.x -= 4;
     work->origin.y += D_801FC9EC[work->counter_09 >> 2];
     shade = *(s8*)&work->color.r;
 
     if (shade != 0) {
         work->color.r = shade - 2;
-        tail          = TASK(SceneEffect);
+        tail          = SELF(SceneEffect);
         tail->color.b -= 2;
-        tail = TASK(SceneEffect);
+        tail = SELF(SceneEffect);
         tail->color.g -= 2;
-        tail = TASK(SceneEffect);
+        tail = SELF(SceneEffect);
         tail->counter_09 += 1;
-        tail = TASK(SceneEffect);
+        tail = SELF(SceneEffect);
         if ((tail->counter_09 & 0x3) == 0) {
             tail->channel_06 += 1;
         }
@@ -772,17 +772,17 @@ MATCH void func_801F8930(void) {
     SceneEffect* tail;
     s8           shade;
 
-    work = TASK(SceneEffect);
+    work = SELF(SceneEffect);
     work->origin.y -= 2;
     shade = *(s8*)&work->color.r;
 
     if (shade != 0) {
         work->color.r = shade - 4;
-        tail          = TASK(SceneEffect);
+        tail          = SELF(SceneEffect);
         tail->color.b -= 4;
-        tail = TASK(SceneEffect);
+        tail = SELF(SceneEffect);
         tail->color.g -= 4;
-        tail = TASK(SceneEffect);
+        tail = SELF(SceneEffect);
         if ((tail->counter_09 & 0x7) == 0) {
             tail->channel_06 += 1;
         }
@@ -797,7 +797,7 @@ MATCH void func_801F89F0(void) {
     SceneEffect* update_work;
     SceneEffect* setup_work;
 
-    setup_work                    = TASK(SceneEffect);
+    setup_work                    = SELF(SceneEffect);
     setup_work->pos.x             = g_PartyActors[0].pos.x.fixed;
     setup_work->pos.y             = g_AreaFocus.y.fixed;
     FIELD(s32, setup_work, 0x3Cu) = g_PartyActors[0].pos.z.fixed;
@@ -805,7 +805,7 @@ MATCH void func_801F89F0(void) {
     setup_work->angle.y           = g_PartyActors[0].angle_y;
     setup_work->angle.z           = g_PartyActors[0].angle_z;
     func_801AC1DC(deltas, FIELD(u8, setup_work, 0x1Cu));
-    update_work                     = TASK(SceneEffect);
+    update_work                     = SELF(SceneEffect);
     update_work->pos.x              = (update_work->pos.x + deltas[0]);
     update_work->pos.y              = (update_work->pos.y + deltas[1]);
     update_work->pos.z.part.integer = (update_work->pos.z.part.integer + deltas[2]);
@@ -821,25 +821,25 @@ MATCH void func_801F8AB8(void) {
     s32          point[3];
 
     screen = (DVECTOR*)D_1F800034;
-    work   = TASK(SceneEffect);
+    work   = SELF(SceneEffect);
     work->pos.z.part.integer += 0x20;
     point[0] = work->pos.x;
     point[1] = work->pos.y;
     point[2] = work->pos.z.fixed;
     Camera_ProjectPoint(point, screen);
 
-    current                               = TASK(SceneEffect);
+    current                               = SELF(SceneEffect);
     FAKE_VOLATILE(u16, current->origin.x) = (u16)screen->vx;
     current->origin.y                     = SP_REF(u16, 0x36u);
     shade                                 = *(s8*)&current->color.r;
 
     if (shade != 0) {
         current->color.r = shade - 4;
-        tail             = TASK(SceneEffect);
+        tail             = SELF(SceneEffect);
         tail->color.b -= 4;
-        tail = TASK(SceneEffect);
+        tail = SELF(SceneEffect);
         tail->color.g -= 4;
-        tail = TASK(SceneEffect);
+        tail = SELF(SceneEffect);
         if ((tail->counter_09 & 0x7) == 0) {
             tail->channel_06 += 1;
         }
@@ -854,11 +854,11 @@ MATCH void func_801F8BCC(void) {
     u8        half;
 
     prim = (POLY_FT4*)g_GfxPrimCursor;
-    half = TASK(SceneEffect)->channel_06 >> 1;
+    half = SELF(SceneEffect)->channel_06 >> 1;
     SetPolyFT4(prim);
-    setXYWH(prim, TASK(SceneEffect)->origin.x - half, TASK(SceneEffect)->origin.y - half, TASK(SceneEffect)->channel_06, TASK(SceneEffect)->channel_06);
+    setXYWH(prim, SELF(SceneEffect)->origin.x - half, SELF(SceneEffect)->origin.y - half, SELF(SceneEffect)->channel_06, SELF(SceneEffect)->channel_06);
     setUVWH(prim, 0xE0, 0x30, 0x1F, 0x20);
-    setRGB0(prim, TASK(SceneEffect)->color.r, TASK(SceneEffect)->color.g, TASK(SceneEffect)->color.b);
+    setRGB0(prim, SELF(SceneEffect)->color.r, SELF(SceneEffect)->color.g, SELF(SceneEffect)->color.b);
     setClut(prim, 160, STAGE_PALETTE_Y + 3);
     prim->tpage = GetTPage(TPAGE_DEPTH_4BIT, TPAGE_ABR_ADD, 704, 256);
     SetShadeTex(prim, 0);
@@ -884,7 +884,7 @@ MATCH void func_801F8D90(void) {
     long         depth;
     long         flag;
 
-    work      = TASK(u8);
+    work      = SELF(u8);
     prim      = g_GfxPrimCursor;
     work_cell = (SceneEffect*)work;
     first     = &g_PartyActors[work_cell->counter_0C];
@@ -893,19 +893,19 @@ MATCH void func_801F8D90(void) {
     work_cell->pos.y       = first->pos.y.fixed;
     work_cell->pos.z.fixed = first->pos.z.fixed;
     g_GfxPrimCursor        = prim + 8;
-    TASK_SET(first);
+    SELF_SET(first);
     ((RECT*)prim)->x = 0;
     ((RECT*)prim)->y = 240;
     setWH(((RECT*)prim), 16, 16);
     SetTexWindow((DR_TWIN*)(prim + 8), (RECT*)prim);
-    Area_CellAddPrim(TASK(Actor)->pos.x.fixed, TASK(Actor)->pos.y.fixed, 0x11, 0x0C);
+    Area_CellAddPrim(SELF(Actor)->pos.x.fixed, SELF(Actor)->pos.y.fixed, 0x11, 0x0C);
 
     poly = (POLY_FT4*)g_GfxPrimCursor;
     SetPolyFT4(poly);
 
     func_801AC1DC(origin, work[0x10]);
 
-    setVector(&projection, ((origin[0] + TASK(Actor)->pos.x.fixed) >> 9) - 0x4000, ((origin[1] + TASK(Actor)->pos.y.fixed) >> 9) - 0x4000, -(origin[2] + COORD_INT(TASK(Actor)->pos.z)) / 2);
+    setVector(&projection, ((origin[0] + SELF(Actor)->pos.x.fixed) >> 9) - 0x4000, ((origin[1] + SELF(Actor)->pos.y.fixed) >> 9) - 0x4000, -(origin[2] + COORD_INT(SELF(Actor)->pos.z)) / 2);
 
     work_cell->projected = RotTransPers(&projection, (long*)&poly->x0, &depth, &flag);
 
@@ -914,17 +914,17 @@ MATCH void func_801F8D90(void) {
     poly->y1 = poly->y0;
 
     second = &g_PartyActors[work_cell->channel_18];
-    TASK_SET(second);
+    SELF_SET(second);
     func_801AC1DC(origin, work[0x1C]);
 
-    setVector(&projection, ((origin[0] + TASK(Actor)->pos.x.fixed) >> 9) - 0x4000, ((origin[1] + TASK(Actor)->pos.y.fixed) >> 9) - 0x4000, -(origin[2] + COORD_INT(TASK(Actor)->pos.z)) / 2);
+    setVector(&projection, ((origin[0] + SELF(Actor)->pos.x.fixed) >> 9) - 0x4000, ((origin[1] + SELF(Actor)->pos.y.fixed) >> 9) - 0x4000, -(origin[2] + COORD_INT(SELF(Actor)->pos.z)) / 2);
 
     work_cell->projected = RotTransPers(&projection, (long*)&poly->x2, &depth, &flag);
 
     poly->x3 = poly->x2 + 8;
     poly->x2 = poly->x2 - 8;
     poly->y3 = poly->y2;
-    g_Task   = work;
+    g_Self   = work;
 
     setClut(poly, 176, STAGE_PALETTE_Y + 3);
     poly->tpage = GetTPage(TPAGE_DEPTH_4BIT, TPAGE_ABR_HALF, 704, 256);
@@ -936,7 +936,7 @@ MATCH void func_801F8D90(void) {
 
     SetShadeTex(poly, 1);
 
-    Area_CellAddPrim(TASK(Actor)->pos.x.fixed, TASK(Actor)->pos.y.fixed, 0x11, sizeof(POLY_FT4));
+    Area_CellAddPrim(SELF(Actor)->pos.x.fixed, SELF(Actor)->pos.y.fixed, 0x11, sizeof(POLY_FT4));
 
     prim             = g_GfxPrimCursor;
     g_GfxPrimCursor  = prim + 8;
@@ -945,7 +945,7 @@ MATCH void func_801F8D90(void) {
     setWH(((RECT*)prim), 256, 256);
     SetTexWindow((DR_TWIN*)(prim + 8), (RECT*)prim);
 
-    Area_CellAddPrim(TASK(Actor)->pos.x.fixed, TASK(Actor)->pos.y.fixed, 0x11, 0x0C);
+    Area_CellAddPrim(SELF(Actor)->pos.x.fixed, SELF(Actor)->pos.y.fixed, 0x11, 0x0C);
 }
 
 MATCH void func_801F913C(void) {
@@ -2104,7 +2104,7 @@ MATCH void func_801FB924(void) {
                 func_801FBE88();
                 index = *counter >> 12;
                 if (D_801FCA64[index * 2] != 0) {
-                    TASK_SET((u8*)g_Actors);
+                    SELF_SET((u8*)g_Actors);
                     g_Actors[0].direction = D_801FCA65[index * 2];
                     Script_Request(g_Actors[0].direction);
                 }
@@ -2143,7 +2143,7 @@ MATCH void func_801FB924(void) {
             counter[0]                = (camera[0] >= 0) ? 0x40 : -magnitude;
             counter[1]                = (camera[1] >= 0) ? 0x40 : -magnitude;
             if ((g_FrameCount & 0x3) == 0) {
-                TASK_SET((u8*)g_Actors);
+                SELF_SET((u8*)g_Actors);
                 g_Actors[0].direction = (g_Actors[0].direction + 1) & 0x3;
                 Script_Request(g_Actors[0].direction);
             }

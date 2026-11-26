@@ -7,104 +7,104 @@ __asm__(".include \"include/match/macro.inc\"\n");
 #include "overlays/scenario/shared/Scene_DispatchEntity.h"
 
 MATCH void func_801D0C48(void) {
-    TASK(Actor)->pos.x.fixed = TO_COORD(48) + COORD_HALF;
-    TASK(Actor)->pos.y.fixed = TO_COORD(116);
-    TASK(Actor)->pos.z.fixed = Area_HeightSample(TASK(Actor)->pos.x.fixed, TO_COORD(116)) << 16;
-    setVector(TASK(Actor), 0x308000, 0x718000, 0xFEC00000);
-    TASK(Actor)->screen_x         = 0;
-    TASK(Actor)->tint.bytes.rgb.r = 0;
-    TASK(Actor)->timer            = 8;
-    TASK(Actor)->header.mode += 1;
+    SELF(Actor)->pos.x.fixed = TO_COORD(48) + COORD_HALF;
+    SELF(Actor)->pos.y.fixed = TO_COORD(116);
+    SELF(Actor)->pos.z.fixed = Area_HeightSample(SELF(Actor)->pos.x.fixed, TO_COORD(116)) << 16;
+    setVector(SELF(Actor), 0x308000, 0x718000, 0xFEC00000);
+    SELF(Actor)->screen_x         = 0;
+    SELF(Actor)->tint.bytes.rgb.r = 0;
+    SELF(Actor)->timer            = 8;
+    SELF(Actor)->header.mode += 1;
 }
 
 MATCH void func_801D0CEC(void) {
-    Actor* work = TASK(Actor);
+    Actor* work = SELF(Actor);
 
     work->tint.bytes.rgb.r += 8;
     work->screen_x += 0x10;
-    func_801D1C1C(&TASK(Actor)->pos.x.fixed, &TASK(Actor)->vx, TASK(Actor)->tint.bytes.rgb.r);
-    GFX_DrawColorFan(&TASK(Actor)->pos.x.fixed, TASK(Actor)->screen_x, 2);
+    func_801D1C1C(&SELF(Actor)->pos.x.fixed, &SELF(Actor)->vx, SELF(Actor)->tint.bytes.rgb.r);
+    GFX_DrawColorFan(&SELF(Actor)->pos.x.fixed, SELF(Actor)->screen_x, 2);
 
-    if (TIMER_EXPIRED(TASK(Actor)->timer)) {
-        TASK(Actor)->timer = 60;
-        TASK(Actor)->header.mode += 1;
+    if (TIMER_EXPIRED(SELF(Actor)->timer)) {
+        SELF(Actor)->timer = 60;
+        SELF(Actor)->header.mode += 1;
         SND_SEPlay(EMI_SE_ID(SND_BANK_AREA, 13));
     }
 }
 
 MATCH void func_801D0DB0(void) {
-    func_801D1C1C(&TASK(Actor)->pos.x.fixed, &TASK(Actor)->vx, TASK(Actor)->tint.bytes.rgb.r);
-    GFX_DrawColorFan(&TASK(Actor)->pos.x.fixed, TASK(Actor)->screen_x, 2);
+    func_801D1C1C(&SELF(Actor)->pos.x.fixed, &SELF(Actor)->vx, SELF(Actor)->tint.bytes.rgb.r);
+    GFX_DrawColorFan(&SELF(Actor)->pos.x.fixed, SELF(Actor)->screen_x, 2);
 
-    if (TIMER_EXPIRED(TASK(Actor)->timer)) {
-        TASK(Actor)->tint.bytes.rgb.g = 0;
-        TASK(Actor)->timer            = 4;
-        TASK(Actor)->header.mode += 1;
+    if (TIMER_EXPIRED(SELF(Actor)->timer)) {
+        SELF(Actor)->tint.bytes.rgb.g = 0;
+        SELF(Actor)->timer            = 4;
+        SELF(Actor)->header.mode += 1;
     }
 }
 
 MATCH void func_801D0E5C(void) {
-    TASK(Actor)->tint.bytes.rgb.g += 0x40;
-    if ((s8)TASK(Actor)->tint.bytes.rgb.g != 0) {
-        func_801D1220((u8)TASK(Actor)->tint.bytes.rgb.g);
+    SELF(Actor)->tint.bytes.rgb.g += 0x40;
+    if ((s8)SELF(Actor)->tint.bytes.rgb.g != 0) {
+        func_801D1220((u8)SELF(Actor)->tint.bytes.rgb.g);
     } else {
         func_801D1220(0xFF);
     }
-    func_801D1C1C(&TASK(Actor)->pos.x.fixed, &TASK(Actor)->vx, TASK(Actor)->tint.bytes.rgb.r);
-    GFX_DrawColorFan(&TASK(Actor)->pos.x.fixed, TASK(Actor)->screen_x, 2);
-    if (TIMER_EXPIRED(TASK(Actor)->timer)) {
-        TASK(Actor)->timer = 4;
-        TASK(Actor)->header.mode += 1;
+    func_801D1C1C(&SELF(Actor)->pos.x.fixed, &SELF(Actor)->vx, SELF(Actor)->tint.bytes.rgb.r);
+    GFX_DrawColorFan(&SELF(Actor)->pos.x.fixed, SELF(Actor)->screen_x, 2);
+    if (TIMER_EXPIRED(SELF(Actor)->timer)) {
+        SELF(Actor)->timer = 4;
+        SELF(Actor)->header.mode += 1;
     }
 }
 
 MATCH void func_801D0F44(void) {
-    TASK(Actor)->tint.bytes.rgb.g -= 0x40;
-    func_801D1220(TASK(Actor)->tint.bytes.rgb.g);
-    func_801D1C1C(&TASK(Actor)->pos.x.fixed, &TASK(Actor)->vx, TASK(Actor)->tint.bytes.rgb.r);
-    GFX_DrawColorFan(&TASK(Actor)->pos.x.fixed, TASK(Actor)->screen_x, 2);
+    SELF(Actor)->tint.bytes.rgb.g -= 0x40;
+    func_801D1220(SELF(Actor)->tint.bytes.rgb.g);
+    func_801D1C1C(&SELF(Actor)->pos.x.fixed, &SELF(Actor)->vx, SELF(Actor)->tint.bytes.rgb.r);
+    GFX_DrawColorFan(&SELF(Actor)->pos.x.fixed, SELF(Actor)->screen_x, 2);
     func_801D1914(64);
 
-    if (TIMER_EXPIRED(TASK(Actor)->timer)) {
-        TASK(Actor)->timer = 60;
-        TASK(Actor)->header.mode += 1;
+    if (TIMER_EXPIRED(SELF(Actor)->timer)) {
+        SELF(Actor)->timer = 60;
+        SELF(Actor)->header.mode += 1;
     }
 }
 
 MATCH void func_801D101C(void) {
-    func_801D1C1C(&TASK(Actor)->pos.x.fixed, &TASK(Actor)->vx, TASK(Actor)->tint.bytes.rgb.r);
-    GFX_DrawColorFan(&TASK(Actor)->pos.x.fixed, TASK(Actor)->screen_x, 2);
+    func_801D1C1C(&SELF(Actor)->pos.x.fixed, &SELF(Actor)->vx, SELF(Actor)->tint.bytes.rgb.r);
+    GFX_DrawColorFan(&SELF(Actor)->pos.x.fixed, SELF(Actor)->screen_x, 2);
     func_801D1914(64);
 
-    if (TIMER_EXPIRED(TASK(Actor)->timer)) {
-        TASK(Actor)->timer = 60;
-        TASK(Actor)->header.mode += 1;
+    if (TIMER_EXPIRED(SELF(Actor)->timer)) {
+        SELF(Actor)->timer = 60;
+        SELF(Actor)->header.mode += 1;
         SND_SEPlay(EMI_SE_ID(SND_BANK_AREA, 14));
     }
 }
 
 MATCH void func_801D10C4(void) {
-    if ((s16)TASK(Actor)->screen_x > 0) {
-        TASK(Actor)->screen_x -= 0x10;
+    if ((s16)SELF(Actor)->screen_x > 0) {
+        SELF(Actor)->screen_x -= 0x10;
     }
-    if ((s8)TASK(Actor)->tint.bytes.rgb.r > 0) {
-        TASK(Actor)->tint.bytes.rgb.r -= 8;
+    if ((s8)SELF(Actor)->tint.bytes.rgb.r > 0) {
+        SELF(Actor)->tint.bytes.rgb.r -= 8;
     }
-    func_801D1C1C(&TASK(Actor)->pos.x.fixed, &TASK(Actor)->vx, TASK(Actor)->tint.bytes.rgb.r);
-    GFX_DrawColorFan(&TASK(Actor)->pos.x.fixed, TASK(Actor)->screen_x, 2);
+    func_801D1C1C(&SELF(Actor)->pos.x.fixed, &SELF(Actor)->vx, SELF(Actor)->tint.bytes.rgb.r);
+    GFX_DrawColorFan(&SELF(Actor)->pos.x.fixed, SELF(Actor)->screen_x, 2);
     func_801D1914(64);
 
-    if (TIMER_EXPIRED(TASK(Actor)->timer)) {
-        TASK(Actor)->timer    = 16;
-        TASK(Actor)->screen_x = 0x40;
-        TASK(Actor)->header.mode += 1;
+    if (TIMER_EXPIRED(SELF(Actor)->timer)) {
+        SELF(Actor)->timer    = 16;
+        SELF(Actor)->screen_x = 0x40;
+        SELF(Actor)->header.mode += 1;
     }
 }
 
 MATCH void func_801D11B4(void) {
-    func_801D1914(TASK(Actor)->screen_x -= 4);
+    func_801D1914(SELF(Actor)->screen_x -= 4);
 
-    if (TIMER_EXPIRED(TASK(Actor)->timer)) {
+    if (TIMER_EXPIRED(SELF(Actor)->timer)) {
         Actor_Clear();
     }
 }

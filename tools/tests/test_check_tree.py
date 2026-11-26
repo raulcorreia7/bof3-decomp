@@ -103,7 +103,7 @@ CASES = [
     (
         "task offset",
         {},
-        {"src/overlays/test/arc/00/a.c": "u8 *p = ((u8 *)g_Task);\n"},
+        {"src/overlays/test/arc/00/a.c": "u8 *p = ((u8 *)g_Self);\n"},
         "task read by offset",
     ),
 ]
@@ -127,7 +127,7 @@ RENAMED_BODY = (
     '#include "battle_03.h"\n'
     "MATCH void func_801D9C80(void) {\n"
     "    s16 var_s0 = 1;\n"
-    "    FIELD(g_Task, 0x10) = var_s0;\n"
+    "    FIELD(g_Self, 0x10) = var_s0;\n"
     "    Battle_DrawWindowTile(var_s0, 2, 8U, 1U);\n"
     "}\n"
 )
@@ -153,7 +153,7 @@ def test_renamed_file_gaining_a_local_fails(tmp_path: Path) -> None:
     assert "decompiler local" in output and "var_s1" in output, output
 
 
-MOVED_LITERAL = '#include "battle_03.h"\nMATCH void func_801D9C80(void) {\n    g_Task->pos.z.fixed = 0x04000000;\n}\n'
+MOVED_LITERAL = '#include "battle_03.h"\nMATCH void func_801D9C80(void) {\n    g_Self->pos.z.fixed = 0x04000000;\n}\n'
 
 
 def test_literal_moved_to_another_file_passes(tmp_path: Path) -> None:
@@ -181,7 +181,7 @@ def test_new_literal_in_another_file_fails(tmp_path: Path) -> None:
 
 
 RENAMED_CALL = (
-    "MATCH void func_801D9C80(void) {\n    g_Actor->slot = %s(TASK_BYTES, 0U);\n}\n"
+    "MATCH void func_801D9C80(void) {\n    g_Actor->slot = %s(SELF_BYTES, 0U);\n}\n"
 )
 
 
@@ -200,7 +200,7 @@ def test_new_task_use_fails(tmp_path: Path) -> None:
         {"src/overlays/test/arc/00/a.c": RENAMED_CALL % "GFX_AllocPaletteFade"},
         {
             "src/overlays/test/arc/00/a.c": RENAMED_CALL % "GFX_AllocPaletteFade"
-            + "void f(void) {\n    g_Actor->slot = GFX_PaletteAllocFade(TASK_BYTES, 1U);\n}\n"
+            + "void f(void) {\n    g_Actor->slot = GFX_PaletteAllocFade(SELF_BYTES, 1U);\n}\n"
         },
     )
     assert (

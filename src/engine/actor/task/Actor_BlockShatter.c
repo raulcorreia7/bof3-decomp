@@ -5,7 +5,7 @@
 MATCH void Actor_BlockShatter(void) {
     u8 value;
 
-    ACTOR_COUNT_DOWN(TASK(Actor), value, timer);
+    ACTOR_COUNT_DOWN(SELF(Actor), value, timer);
     if ((value & BYTE_MASK) == 0) {
         if (LOHU(g_GameAreaId) == AREA_ID_CONTAINER_YARD) {
             SYS_SetFlag(g_SceneEventFlags, 68);

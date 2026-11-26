@@ -9,7 +9,7 @@ MATCH void func_801A061C(void) {
 
     do {
         entity = (Actor*)((u8*)g_Actors + ((index & BYTE_MASK) * ACTOR_SIZE));
-        TASK_SET(entity);
+        SELF_SET(entity);
         type = entity->unk_06;
 
         if (type >= 8 || type == 7) {

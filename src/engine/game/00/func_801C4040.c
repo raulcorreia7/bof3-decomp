@@ -33,10 +33,10 @@ MATCH s32 func_801C4040(s32 pos_x, s32 pos_y, s16 probe_range) {
     dist = Area_HeightRead(pos_x, pos_y) - probe_range;
     dist = ABS(dist);
     if (dist < 193) {
-        saved                         = COORD_INT(TASK(Actor)->pos.z);
-        COORD_INT(TASK(Actor)->pos.z) = (u16)probe_range;
+        saved                         = COORD_INT(SELF(Actor)->pos.z);
+        COORD_INT(SELF(Actor)->pos.z) = (u16)probe_range;
         found                         = ~Actor_FindInRange(pos_x, pos_y, 0) != 0;
-        COORD_INT(TASK(Actor)->pos.z) = saved;
+        COORD_INT(SELF(Actor)->pos.z) = saved;
         return found;
     }
     return 1;

@@ -17,7 +17,7 @@ jtbl_801F7064 = { addr = 0x801F7064, type = "Callback", source = "The switch tab
 jtbl_801F7084 = { addr = 0x801F7084, type = "Callback", source = "The switch table of func_801FAE04: the jump targets of its jr dispatch." }
 jtbl_801F70B4 = { addr = 0x801F70B4, type = "Callback", source = "The switch table of func_801FB864: the jump targets of its jr dispatch." }
 Scene_DispatchEntity = { addr = 0x801F7174, type = "func", source = "dispatches a scene entity by its callback index" }
-func_801F717C = { addr = 0x801F717C, alias = true, source = "Scene_DispatchEntity+0x8, after its g_Task load; the start the split used before the function was moved back to that load" }
+func_801F717C = { addr = 0x801F717C, alias = true, source = "Scene_DispatchEntity+0x8, after its g_Self load; the start the split used before the function was moved back to that load" }
 Menu_DrawHeaderBar = { addr = 0x801F765C, type = "func", source = "Draws the header bar window from x, y, width and height with window_style (the callers pass the master menu frame rect and D_80144952)." }
 Scene_DispatchActor = { addr = 0x801FC574, type = "func", source = "dispatches a scenario actor to its callback handler" }
 Scene_JoinAdultNinaMomo = { addr = 0x801FCDE0, type = "func", source = "Streams the party resource family through EMI_PartyLoadArchives, rebuilds the battlers with Party_BattlersBuild, joins character 8 (CHAR_ID_NINA_ADULT) then character 5 (CHAR_ID_MOMO) with Party_MemberJoin and restages every party palette through Party_LoadPalettes." }

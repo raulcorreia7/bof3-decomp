@@ -7,12 +7,12 @@ MATCH bool func_801BB6F0(s32 command) {
     if ((command & 0xF0) == 0xB0) {
         value = command & 0xF;
         if (value < 6U) {
-            route = TASK(Actor)->direction;
+            route = SELF(Actor)->direction;
             if (value == route) {
                 return 1;
             }
         } else if (value == 8) {
-            route = TASK(Actor)->direction;
+            route = SELF(Actor)->direction;
             if ((route == FACING_RIGHT) || (route == FACING_DOWN)) {
                 return 1;
             }

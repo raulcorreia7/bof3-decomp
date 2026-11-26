@@ -3,14 +3,14 @@
 MATCH void func_801F2D00(void) {
     u8 mode;
 
-    ACTOR_COUNT_DOWN(TASK(Actor), mode, timer);
+    ACTOR_COUNT_DOWN(SELF(Actor), mode, timer);
     if (mode & BYTE_MASK) {
-        TASK(Actor)->tint.bytes.rgb.r += 1;
-        TASK(Actor)->tint.bytes.rgb.g += 1;
-        TASK(Actor)->tint.bytes.rgb.b += 1;
+        SELF(Actor)->tint.bytes.rgb.r += 1;
+        SELF(Actor)->tint.bytes.rgb.g += 1;
+        SELF(Actor)->tint.bytes.rgb.b += 1;
     } else {
         MESSAGE_START_WAIT(MSG_AREA191_RAKDA_SACRIFICE);
-        TASK(Actor)->header.mode = 2;
+        SELF(Actor)->header.mode = 2;
     }
     Area_DrawScreenTint();
 }

@@ -10,15 +10,15 @@ MATCH void Area_WidenActor(void) {
 
     Actor_SetScreenOrigin();
 
-    work        = TASK(Actor);
+    work        = SELF(Actor);
     timer       = work->timer;
     work->timer = timer - 1;
-    reload      = TASK(Actor);
+    reload      = SELF(Actor);
     work->scale.x += 8192;
 
     if (reload->timer == 0) {
         reload->unk_48           = 0;
-        TASK(Actor)->header.mode = 3;
+        SELF(Actor)->header.mode = 3;
     }
 
     Area_AddActor();

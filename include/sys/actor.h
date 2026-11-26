@@ -36,16 +36,16 @@
 #define ACTOR_IN_USE(actor)  (((actor).header.flags & ACTOR_FLAG_IN_USE) != 0)
 
 /* Set the scratchpad actor's mode: the byte SYS_DISPATCH_TASK dispatches on. */
-#define ACTOR_SET_MODE(mode) (TASK_BYTES[1] = (mode))
+#define ACTOR_SET_MODE(mode) (SELF_BYTES[1] = (mode))
 
 /* Run the scratchpad actor's handler for its mode, the first or the second of two. A statement macro: the
  * inline form does not match. Use it as the first statement of a function body. */
 #define ACTOR_RUN_MODE_HANDLER(first, second) \
     Callback table[2] = {first, second};      \
-    table[TASK(TaskHeader)->mode]()
+    table[SELF(TaskHeader)->mode]()
 
 /* Clear the actor's step: the current mode starts again at step 0. */
-#define ACTOR_CLEAR_STEP() (TASK(TaskHeader)->step = 0)
+#define ACTOR_CLEAR_STEP() (SELF(TaskHeader)->step = 0)
 
 /* Count the `field` of a task record down by one and keep the new value in `remaining`; the caller tests it. */
 #define ACTOR_COUNT_DOWN(task, remaining, field) \
@@ -55,9 +55,9 @@
 /* Clear the actor's three tint bytes: the row draws untinted. A bare statement
  * macro: use it as a whole statement, never under an unbraced `if`. */
 #define ACTOR_CLEAR_TINT()             \
-    TASK(Actor)->tint.bytes.rgb.r = 0; \
-    TASK(Actor)->tint.bytes.rgb.g = 0; \
-    TASK(Actor)->tint.bytes.rgb.b = 0
+    SELF(Actor)->tint.bytes.rgb.r = 0; \
+    SELF(Actor)->tint.bytes.rgb.g = 0; \
+    SELF(Actor)->tint.bytes.rgb.b = 0
 
 /* `flags` bits. Bit 0 marks a row the update walks; bit 1 skips queuing the row's palette pair; bit 3 marks selection
  * voices queued on the row (@source: write:SND_SEQueueSelection@0x8015D71C, read:Area_AddActor@0x8014D4E0); bit 4 takes

@@ -4,5 +4,5 @@ MATCH void func_801E74B8(void) {
     BattleEffect4Steps handlers;
 
     handlers = D_801D0F58;
-    handlers.steps[TASK(PartyMember)->header.mode]();
+    handlers.steps[SELF(PartyMember)->header.mode]();
 }

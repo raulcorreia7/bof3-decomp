@@ -10,18 +10,18 @@ MATCH void func_801E05EC(void) {
     PartyMember* increment_work;
     PartyMember* battle;
 
-    work = TASK(PartyMember);
+    work = SELF(PartyMember);
     if (work->timer == 0) {
         battle = g_Game.current;
         if (battle->u.turn.target_flags & BATTLE_HIT_HP_LANDED) {
             Battle_QueueAction(battle->u.turn.hp_change, work->slot);
         } else {
             slot                               = Battle_AllocEffect(0U, 1U) & BYTE_MASK;
-            g_BattleEffects[slot].target.party = TASK(PartyMember);
+            g_BattleEffects[slot].target.party = SELF(PartyMember);
             g_BattleEffects[slot].unk_07       = 3;
             g_BattleEffects[slot].unk_27       = 0;
         }
-        increment_work         = TASK(PartyMember);
+        increment_work         = SELF(PartyMember);
         increment_work->unk_03 = increment_work->unk_03 + 1;
         return;
     }

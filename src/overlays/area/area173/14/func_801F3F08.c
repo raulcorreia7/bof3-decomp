@@ -4,17 +4,17 @@ MATCH void func_801F3F08(void) {
     Actor* scratch;
     s32    delta;
 
-    scratch = TASK(Actor);
+    scratch = SELF(Actor);
     scratch->screen_y -= 0x10;
     if ((s16)scratch->screen_y <= 0) {
         SYS_SetFlag(g_SceneEventFlags, scratch->direction);
         if (g_GameStateIndex == GAME_REQUEST_IDLE) {
             SND_SEPlay(EMI_SE_ID(SND_BANK_AREA, 1));
         }
-        scratch              = TASK(Actor);
+        scratch              = SELF(Actor);
         scratch->header.step = 1;
     }
-    if ((s16)TASK(Actor)->screen_y >= 0x80) {
+    if ((s16)SELF(Actor)->screen_y >= 0x80) {
         delta = -2;
     } else {
         delta = -1;

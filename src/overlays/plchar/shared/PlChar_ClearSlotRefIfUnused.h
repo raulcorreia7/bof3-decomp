@@ -2,10 +2,10 @@
 /* func_801CFC90 (plp016), func_801D00B4 (plp026), func_801CF8AC (plp034), func_801CFEB8 (plp056), func_801CF38C
    (plp267), func_801CEB84 (plp349), func_801CEDB0 (plp467), func_801CF190 (plp567), func_801CEB94 (plp678) */
 MATCH void PlChar_ClearSlotRefIfUnused(void) {
-    Actor* work = TASK(Actor);
+    Actor* work = SELF(Actor);
 
     if ((g_SpawnedActors[work->unk_06].header.flags == 0 || g_SpawnedActors[work->unk_06].header.mode == 1) && g_AreaCameraMoving == 0) {
         work->unk_06 = 0;
-        TASK(Actor)->unk_03 -= 2;
+        SELF(Actor)->unk_03 -= 2;
     }
 }

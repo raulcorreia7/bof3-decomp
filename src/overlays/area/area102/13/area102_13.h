@@ -26,9 +26,9 @@ void func_801F36B4(s32 steps);
  * and plays the area SE when the gate reports ready. */
 #define AREA_TICK_TASK_TIMER()                              \
     if (g_GameStateIndex == GAME_REQUEST_IDLE) {            \
-        TASK(Actor)->timer -= 1;                            \
-        if (TASK(Actor)->timer == 0) {                      \
-            TASK(Actor)->header.step += 1;                  \
+        SELF(Actor)->timer -= 1;                            \
+        if (SELF(Actor)->timer == 0) {                      \
+            SELF(Actor)->header.step += 1;                  \
             if (func_801F3194() != 0) {                     \
                 SND_SEPlay(EMI_SE_ID(SND_BANK_AREA, 0x00)); \
             }                                               \

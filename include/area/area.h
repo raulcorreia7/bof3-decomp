@@ -229,7 +229,7 @@ typedef enum AreaWalkFlags {
     AREA_WALK_MAP_LOADING          = 1 << 15,
 } AreaWalkFlags;
 
-/* Modes of the field task (TASK(Actor)->header.mode) that the pad requests start. */
+/* Modes of the field task (SELF(Actor)->header.mode) that the pad requests start. */
 typedef enum FieldTaskMode {
     FIELD_TASK_MODE_LEADER_SWITCH   = 3,
     FIELD_TASK_MODE_MENU            = 4,

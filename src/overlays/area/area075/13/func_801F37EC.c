@@ -48,9 +48,9 @@ MATCH void func_801F37EC(void) {
                 D_801F58C3 = 0;
                 D_801F58C9 = 0;
                 *flags |= 8;
-                g_Task = &g_Actors[D_801F58D0];
+                g_Self = &g_Actors[D_801F58D0];
                 Script_Request(2);
-                TASK(Actor)->mirror = 1;
+                SELF(Actor)->mirror = 1;
                 g_SceneEventStep    = 6;
             }
             break;
@@ -90,9 +90,9 @@ MATCH void func_801F37EC(void) {
                 D_801F58C0 = 2;
                 D_801F58C3 = 0;
                 D_801F58C9 = 0;
-                g_Task     = &g_Actors[D_801F58D0];
+                g_Self     = &g_Actors[D_801F58D0];
                 Script_Request(2);
-                TASK(Actor)->mirror = 1;
+                SELF(Actor)->mirror = 1;
                 g_SceneEventStep    = 0xB;
             }
             break;
@@ -128,12 +128,12 @@ MATCH void func_801F37EC(void) {
                 D_801F58C0 = 2;
                 D_801F58C3 = 0;
                 D_801F58C4 = 0x78;
-                g_Task     = &g_Actors[D_801F58D0];
+                g_Self     = &g_Actors[D_801F58D0];
                 Script_Request(2);
-                TASK(Actor)->mirror = 1;
-                g_Task              = &g_Actors[D_801F58D1];
+                SELF(Actor)->mirror = 1;
+                g_Self              = &g_Actors[D_801F58D1];
                 Script_Request(2);
-                TASK(Actor)->mirror = 0;
+                SELF(Actor)->mirror = 0;
                 SND_SEPlay(EMI_SE_ID(SND_BANK_AREA, 1));
                 g_SceneEventStep = 0x15;
             }

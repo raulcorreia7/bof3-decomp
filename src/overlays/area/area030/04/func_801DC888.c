@@ -7,7 +7,7 @@ MATCH void func_801DC888(void) {
         SND_StartDecrescendo(0, 0, 0x14, 0x10);
         SND_SEPlay(EMI_SE_ID(SND_BANK_COMMON, 2));
         g_SpawnedActors[6].header.mode += 1;
-        TASK(FishingState)->cue_index = 0;
-        TASK(FishingState)->sub_index += 1;
+        SELF(FishingState)->cue_index = 0;
+        SELF(FishingState)->sub_index += 1;
     }
 }

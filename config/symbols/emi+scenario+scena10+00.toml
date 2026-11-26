@@ -10,7 +10,7 @@ jtbl_801F6E90 = { addr = 0x801F6E90, type = "Callback", source = "The switch tab
 jtbl_801F6EE8 = { addr = 0x801F6EE8, type = "Callback", source = "The switch table of func_801FC900: the jump targets of its jr dispatch." }
 jtbl_801F6F00 = { addr = 0x801F6F00, type = "Callback", source = "The switch table of func_801FCD80: the jump targets of its jr dispatch." }
 Scene_DispatchEntity = { addr = 0x801F6F68, type = "func", source = "dispatches a scene entity by its callback index" }
-func_801F6F70 = { addr = 0x801F6F70, alias = true, source = "Scene_DispatchEntity+0x8, after its g_Task load; the start the split used before the function was moved back to that load" }
+func_801F6F70 = { addr = 0x801F6F70, alias = true, source = "Scene_DispatchEntity+0x8, after its g_Self load; the start the split used before the function was moved back to that load" }
 Scene_DispatchActor = { addr = 0x801FD464, type = "func", source = "dispatches a scenario actor to its callback handler" }
 Scene_JoinPartyRyuAdultGarrNinaAdult = { addr = 0x801FE314, type = "func", source = "Streams the EMI family for adult Ryu, Garr and adult Nina, empties g_Game.party_size and joins the three in that order with Party_MemberJoin, without the palette restage of Scene_SetPartyRyuAdultGarrNinaAdult." }
 Party_JoinNinaAdult = { addr = 0x801FE3F8, type = "func", source = "Adds Nina Adult to the party." }

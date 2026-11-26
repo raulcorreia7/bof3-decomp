@@ -2,7 +2,7 @@
 g_AreaModuleId = { addr = 0x801F2C00, source = "Module id of the area: the first payload word of its overlay, 52 + the area number." }
 Actor_BeginScriptFromAreaTable = { addr = 0x801F2E5C, type = "func", source = "Starts an actor script from the area table." }
 Actor_BeginScriptFromAreaTableAtStart = { addr = 0x801F2F04, type = "func", source = "Starts the area script step at the cursor once the task script_pc is 2, otherwise moves the cursor back 2 to repeat the command." }
-Actor_FreePalette = { addr = 0x801F2FD4, type = "func", source = "Frees the palette slots owned by the running task g_Task through GFX_PaletteFreeSlotOwner; the same body is Actor_FreePalette in area085." }
+Actor_FreePalette = { addr = 0x801F2FD4, type = "func", source = "Frees the palette slots owned by the running task g_Self through GFX_PaletteFreeSlotOwner; the same body is Actor_FreePalette in area085." }
 Area_PaletteFreeOnChange = { addr = 0x801F35A4, type = "func", source = "Frees the task's palette slot on area change, otherwise rewinds the script cursor to wait." }
 Area_RoundSpriteCoordinate = { addr = 0x801F3DCC, type = "func", source = "Returns pair >> 16, rounded up by 1 when step is not negative and the low halfword of pair is nonzero." }
 Area_RoundSpriteCoordinate_801F3DCC = { addr = 0x801F3DCC, source = "Link-only name for the area198 copy of Area_RoundSpriteCoordinate; the same body at 0x8014CE48 is visible to the area198 link.", alias = true }

@@ -1,6 +1,6 @@
 ["emi/world03/area146/13"]
 g_AreaModuleId = { addr = 0x801F2C00, source = "Module id of the area: the first payload word of its overlay, 52 + the area number." }
-Actor_RunAreaStep = { addr = 0x801F2C34, type = "func", source = "Clears the work byte 0x48 and frees the palette fade target of the current g_Task." }
+Actor_RunAreaStep = { addr = 0x801F2C34, type = "func", source = "Clears the work byte 0x48 and frees the palette fade target of the current g_Self." }
 Actor_SnapToGround = { addr = 0x801F2DD4, type = "func", source = "Stores the ground height Area_HeightSample returns at the actor position, shifted left 16, at byte 0x3C and adds 1 to header.mode (byte 0x01)." }
 Area_DrawActorLightPillar = { addr = 0x801F2E20, type = "func", source = "draws a light pillar at the actor's position" }
 Area_DrawLightPillar = { addr = 0x801F2E68, type = "func", source = "Draws a pillar of light at pos: sixteen semi-transparent Gouraud quads from a ring of radius 32 at pos to the same ring 0x800 units higher, shaded 0x20 or 0x24 by the frame parity and stepped by 4 per segment." }

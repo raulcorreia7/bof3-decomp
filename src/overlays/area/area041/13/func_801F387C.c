@@ -12,7 +12,7 @@ MATCH void func_801F387C(s32 angle) {
     rot.vy = -angle;
     rot.vz = 0;
     rot.vx = 0;
-    setVector(&pos, TASK(Actor)->pos.x.fixed, TASK(Actor)->pos.y.fixed, COORD_INT(TASK(Actor)->pos.z));
+    setVector(&pos, SELF(Actor)->pos.x.fixed, SELF(Actor)->pos.y.fixed, COORD_INT(SELF(Actor)->pos.z));
 
     PushMatrix();
     RotTransMatrix(&pos, matrix, &flag);
@@ -33,7 +33,7 @@ MATCH void func_801F387C(s32 angle) {
         RotTransPers4(&g_ScratchPadVectors[0], &g_ScratchPadVectors[1], &g_ScratchPadVectors[2], &g_ScratchPadVectors[3], (long*)&prim->x0, (long*)&prim->x1, (long*)&prim->x2, (long*)&prim->x3,
                       &depth, &flag);
         Area_ApplyTileToQuad(D_801F42D4[i], prim, 1);
-        Area_CellAddPrim((TASK(Actor)->pos.x.fixed + AREA_CELL_ORIGIN) << 9, (TASK(Actor)->pos.y.fixed + (i << 7) + (AREA_CELL_ORIGIN + AREA_CELL_HALF)) << 9, 2, sizeof(POLY_FT4));
+        Area_CellAddPrim((SELF(Actor)->pos.x.fixed + AREA_CELL_ORIGIN) << 9, (SELF(Actor)->pos.y.fixed + (i << 7) + (AREA_CELL_ORIGIN + AREA_CELL_HALF)) << 9, 2, sizeof(POLY_FT4));
     }
     PopMatrix();
 }

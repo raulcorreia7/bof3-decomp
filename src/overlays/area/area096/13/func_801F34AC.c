@@ -1,7 +1,7 @@
 #include "area096_13.h"
 
 MATCH void func_801F34AC(void) {
-    Actor* actor = TASK(Actor);
+    Actor* actor = SELF(Actor);
 
     if (COORD_INT(actor->pos.y) == 58) {
         switch ((u16)(COORD_INT(actor->pos.x) - 0x40)) {

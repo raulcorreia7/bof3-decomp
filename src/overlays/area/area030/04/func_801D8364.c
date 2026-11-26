@@ -24,21 +24,21 @@ NON_MATCHING void func_801D8364(s16 panel_x, s16 panel_y) {
     u8* text;
 
     UI_WindowDraw(panel_x, panel_y + 1, 139, 158, UI_WINDOW_OPEN_TOP_LEFT, g_WindowStyle);
-    if (TASK(FishingState)->step_index != 0) {
-        TASK(FishingState)->step_index--;
-        if (TASK(FishingState)->counter_08 != 0) {
-            max_rows = TASK(FishingState)->y_38.slot.low.unk_38;
+    if (SELF(FishingState)->step_index != 0) {
+        SELF(FishingState)->step_index--;
+        if (SELF(FishingState)->counter_08 != 0) {
+            max_rows = SELF(FishingState)->y_38.slot.low.unk_38;
         } else {
-            max_rows = TASK(FishingState)->y_38.slot.low.unk_38 - 1;
+            max_rows = SELF(FishingState)->y_38.slot.low.unk_38 - 1;
         }
         max_count = 10;
-        if (TASK(FishingState)->counter_08 != 0) {
-            offset_y = 25 - TASK(FishingState)->step_index * 4;
+        if (SELF(FishingState)->counter_08 != 0) {
+            offset_y = 25 - SELF(FishingState)->step_index * 4;
         } else {
-            offset_y = 25 - (3 - TASK(FishingState)->step_index) * 4;
+            offset_y = 25 - (3 - SELF(FishingState)->step_index) * 4;
         }
     } else {
-        max_rows  = TASK(FishingState)->y_38.slot.low.unk_38;
+        max_rows  = SELF(FishingState)->y_38.slot.low.unk_38;
         max_count = 9;
         offset_y  = 25;
     }
@@ -56,7 +56,7 @@ NON_MATCHING void func_801D8364(s16 panel_x, s16 panel_y) {
         accessory = *cursor;
         if (g_Accessories[accessory].type == ITEM_TYPE_FISHING_LURE) {
             if (row >= max_rows && index < max_count) {
-                if (*D_80145E94 == 2 && (TASK(FishingState)->counter_07 & 1) && TASK(FishingState)->cursor_10 == index) {
+                if (*D_80145E94 == 2 && (SELF(FishingState)->counter_07 & 1) && SELF(FishingState)->cursor_10 == index) {
                     UI_TextDraw(x, bar_y, UI_TEXT_DIM, ITEM_NAME_LENGTH, (u8*)&g_Accessories[accessory]);
                     UI_TextDraw(x, base_y + shadow_y, 0, ITEM_NAME_LENGTH, (u8*)&g_Accessories[*cursor]);
                     if (g_InventoryCounts[3][slot] >= 2) {
@@ -71,8 +71,8 @@ NON_MATCHING void func_801D8364(s16 panel_x, s16 panel_y) {
                         UI_TextDrawGlyphString(panel_x + 104, base_y + (row_offset + 4), 0, text);
                     }
                 }
-                if (TASK(FishingState)->cursor_10 == index) {
-                    TASK(FishingState)->y_38.slot.slot = slot;
+                if (SELF(FishingState)->cursor_10 == index) {
+                    SELF(FishingState)->y_38.slot.slot = slot;
                 }
                 bar_y += 13;
                 row_offset += 13;
@@ -84,12 +84,12 @@ NON_MATCHING void func_801D8364(s16 panel_x, s16 panel_y) {
         slot++;
         cursor++;
     } while (slot < 128);
-    TASK(FishingState)->unk_1C = row - 1;
-    if (TASK(FishingState)->cursor_10 >= index) {
+    SELF(FishingState)->unk_1C = row - 1;
+    if (SELF(FishingState)->cursor_10 >= index) {
         if (row - 1 != 0 && index != 0) {
-            TASK(FishingState)->cursor_10 = index - 1;
+            SELF(FishingState)->cursor_10 = index - 1;
         } else {
-            TASK(FishingState)->cursor_10 = 0;
+            SELF(FishingState)->cursor_10 = 0;
         }
     }
     func_801D90FC(panel_x, panel_y);
@@ -107,12 +107,12 @@ NON_MATCHING void func_801D8364(s16 panel_x, s16 panel_y) {
     } else {
         index -= 9;
         height   = 114 - index * 6;
-        y_offset = TASK(FishingState)->y_38.slot.low.pos_low * 6 + 28;
-        if (TASK(FishingState)->step_index != 0) {
-            if (TASK(FishingState)->counter_08 != 0) {
-                y_offset += TASK(FishingState)->step_index * 2;
+        y_offset = SELF(FishingState)->y_38.slot.low.pos_low * 6 + 28;
+        if (SELF(FishingState)->step_index != 0) {
+            if (SELF(FishingState)->counter_08 != 0) {
+                y_offset += SELF(FishingState)->step_index * 2;
             } else {
-                y_offset -= TASK(FishingState)->step_index * 2;
+                y_offset -= SELF(FishingState)->step_index * 2;
             }
         }
     }

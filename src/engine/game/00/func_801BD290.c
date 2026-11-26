@@ -6,7 +6,7 @@ MATCH void func_801BD290(s32 pos_x, s32 pos_y, s8* direction_out) {
     s32    dy;
     s8     direction;
 
-    work = TASK(Actor);
+    work = SELF(Actor);
     dx   = pos_x - work->pos.x.fixed;
     dy   = pos_y - work->pos.y.fixed;
     if (dx < 0 && dy < 0) {

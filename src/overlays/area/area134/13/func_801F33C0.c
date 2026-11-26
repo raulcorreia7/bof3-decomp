@@ -5,11 +5,11 @@ MATCH void func_801F33C0(void) {
     FAKE_REG(Actor*, work, "v0");
 
     if (g_ScriptVars[1] == GAME_NONE || g_ScriptVars[2] == 0x80) {
-        work              = TASK(Actor);
+        work              = SELF(Actor);
         work->header.mode = 0x17;
     } else {
         g_ScriptVars[1] = 0;
         ACTOR_SET_MODE(0);
     }
-    TASK(Actor)->header.step = 0;
+    SELF(Actor)->header.step = 0;
 }

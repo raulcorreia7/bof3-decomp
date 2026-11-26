@@ -3,7 +3,7 @@
 MATCH void func_800C1F2C(void) {
     PartyMember* task;
 
-    task = TASK(PartyMember);
+    task = SELF(PartyMember);
     COORD_INT(task->pos.z) += task->unk_14;
     task->unk_14 += task->unk_20;
     /* FAKE: the s16 return is read as s32; retail adds 0x1000 to the raw register. */

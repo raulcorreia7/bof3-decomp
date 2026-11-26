@@ -67,14 +67,14 @@ MATCH void func_801F31EC(s16 x, s16 y) {
         func_801F30E8(x + step, y + 4, x + step, y + 0x44);
     }
     D_801F6B6C = 0x80;
-    tint       = TASK(Actor)->tint.bytes.rgb.r;
+    tint       = SELF(Actor)->tint.bytes.rgb.r;
     D_801F6B74 = tint;
     D_801F6B70 = tint;
     func_801F30E8(x + 4, y + 0x24, x + 0xA, y + 0x24);
     func_801F30E8(x + 0x3E, y + 0x24, x + 0x44, y + 0x24);
     func_801F30E8(x + 0x21, y + 0xC, x + 0x27, y + 0xC);
     func_801F30E8(x + 0x21, y + 0x3C, x + 0x27, y + 0x3C);
-    if (TASK(Actor)->tint.bytes.rgb.r != 0) {
-        TASK(Actor)->tint.bytes.rgb.r -= 0x10;
+    if (SELF(Actor)->tint.bytes.rgb.r != 0) {
+        SELF(Actor)->tint.bytes.rgb.r -= 0x10;
     }
 }

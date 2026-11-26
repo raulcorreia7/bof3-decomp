@@ -7,9 +7,9 @@ MATCH void func_801F349C(void) {
     FAKE_STACK_PADS(u8, 16);
 
     for (i = 0; i < 3; i++) {
-        effect->pos.x  = TASK(Actor)->pos.x.fixed;
-        effect->pos.y  = TASK(Actor)->pos.y.fixed;
-        effect->pos.z  = TASK(Actor)->pos.z.fixed + 0x03800000;
+        effect->pos.x  = SELF(Actor)->pos.x.fixed;
+        effect->pos.y  = SELF(Actor)->pos.y.fixed;
+        effect->pos.z  = SELF(Actor)->pos.z.fixed + 0x03800000;
         effect->angle  = (i << 12) / 3;
         effect->scale  = 0xC00;
         effect->unk_14 = 0;

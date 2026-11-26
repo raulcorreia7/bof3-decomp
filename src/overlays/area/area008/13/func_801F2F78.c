@@ -5,7 +5,7 @@ MATCH void func_801F2F78(void) {
     u16* halfword;
 
     if ((g_ScriptVars[3] & 0x80u) != 0u) {
-        TASK(Actor)->header.mode = 9;
+        SELF(Actor)->header.mode = 9;
         return;
     }
     halfword        = D_80146876;
@@ -18,6 +18,6 @@ MATCH void func_801F2F78(void) {
     D_801F53F4 = tmp;
     if (tmp < 2) {
         g_ScriptVars[1]          = 0;
-        TASK(Actor)->header.mode = 1;
+        SELF(Actor)->header.mode = 1;
     }
 }

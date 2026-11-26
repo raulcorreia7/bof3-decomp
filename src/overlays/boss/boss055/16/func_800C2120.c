@@ -2,5 +2,5 @@
 
 MATCH void func_800C2120(void) {
     func_801E3160();
-    TASK(PartyMember)->header.step++;
+    SELF(PartyMember)->header.step++;
 }

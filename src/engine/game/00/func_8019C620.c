@@ -1,5 +1,5 @@
 #include "game_00.h"
 
 MATCH void func_8019C620(void) {
-    D_801C8144[TASK(Actor)->header.mode]();
+    D_801C8144[SELF(Actor)->header.mode]();
 }

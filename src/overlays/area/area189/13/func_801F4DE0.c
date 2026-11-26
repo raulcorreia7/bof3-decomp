@@ -13,18 +13,18 @@ MATCH void func_801F4DE0(void) {
     SetGeomOffset(0xA0, 0xB9);
     SetGeomScreen(0x12C);
     g_AreaCameraAngle.vx     = -0x2EE;
-    TASK(Actor)->direction   = g_SaveData.return_point.facing;
+    SELF(Actor)->direction   = g_SaveData.return_point.facing;
     D_801492DC               = ((0x12 - g_SaveData.return_point.facing) & 0xF) << 8;
-    g_AreaScrollTargetX      = LOW(TASK(Actor)->pos.x.fixed);
-    g_AreaScrollTargetY      = LOW(TASK(Actor)->pos.y.fixed);
+    g_AreaScrollTargetX      = LOW(SELF(Actor)->pos.x.fixed);
+    g_AreaScrollTargetY      = LOW(SELF(Actor)->pos.y.fixed);
     g_AreaCameraOffsetZ      = -0xD80;
-    x                        = LOW(TASK(Actor)->pos.x.fixed);
-    y                        = LOW(TASK(Actor)->pos.y.fixed);
+    x                        = LOW(SELF(Actor)->pos.x.fixed);
+    y                        = LOW(SELF(Actor)->pos.y.fixed);
     g_AreaCameraRefreshCount = 4;
-    TASK(Actor)->pos.z.fixed = func_801F4A04(x, y) << 16;
+    SELF(Actor)->pos.z.fixed = func_801F4A04(x, y) << 16;
     Actor_ClearVelocity_801F5F20();
-    TASK(Actor)->active_flags  = 0;
-    TASK(Actor)->script_record = 0;
+    SELF(Actor)->active_flags  = 0;
+    SELF(Actor)->script_record = 0;
     g_EncounterSteps           = 0;
 
     value = (rand() & 0x1F) + 0x96;
@@ -57,5 +57,5 @@ MATCH void func_801F4DE0(void) {
     SYS_ClearFlag(flags, 0x8C);
     SYS_ClearFlag(flags, 0x8D);
     SYS_ClearFlag(flags, 0x8E);
-    TASK(Actor)->header.step += 1;
+    SELF(Actor)->header.step += 1;
 }

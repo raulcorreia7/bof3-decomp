@@ -14,7 +14,7 @@ MATCH void Area_UpdateSpin(void) {
     do {
         Area_DrawSpinTriangle(spin);
         spin->spin_angle += 0x10;
-        if (TASK(Actor)->timer < 4) {
+        if (SELF(Actor)->timer < 4) {
             spin->fade += 0x20;
         } else {
             spin->fade -= 2;
@@ -23,9 +23,9 @@ MATCH void Area_UpdateSpin(void) {
         index += 1;
     } while (index < 0x20);
 
-    timer              = TASK(Actor)->timer + 1;
-    TASK(Actor)->timer = timer;
+    timer              = SELF(Actor)->timer + 1;
+    SELF(Actor)->timer = timer;
     if (timer >= 0x45) {
-        TASK(Actor)->header.mode += 1;
+        SELF(Actor)->header.mode += 1;
     }
 }

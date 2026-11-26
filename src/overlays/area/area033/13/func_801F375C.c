@@ -3,16 +3,16 @@
 MATCH void func_801F375C(void) {
     u8* scratch;
 
-    scratch = TASK(u8);
+    scratch = SELF(u8);
     if (scratch[0x0B] == 0) {
         scratch[9]++;
-        scratch = TASK(u8);
+        scratch = SELF(u8);
         if (scratch[9] >= 0x5A) {
             scratch[0x0B]++;
         }
     }
 
-    if (D_801454F2 != 0 && TASK(Actor)->param.unk_0B != 0) {
+    if (D_801454F2 != 0 && SELF(Actor)->param.unk_0B != 0) {
         goto bump;
     }
     if (g_GameStateIndex == GAME_REQUEST_MESSAGE) {
@@ -22,7 +22,7 @@ MATCH void func_801F375C(void) {
         goto done;
     }
 bump:
-    TASK(Actor)->unk_03++;
+    SELF(Actor)->unk_03++;
 done:
-    func_801F3FF8(0x5C, TASK(Actor)->screen_y);
+    func_801F3FF8(0x5C, SELF(Actor)->screen_y);
 }

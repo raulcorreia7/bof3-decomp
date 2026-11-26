@@ -7,13 +7,13 @@ MATCH void func_801F48B0(void) {
     if (record == NULL) {
         return;
     }
-    record->unk_00[0] = TASK(Actor)->unk_06;
+    record->unk_00[0] = SELF(Actor)->unk_06;
     record->unk_00[1] = 0;
     record->unk_00[2] = 0;
     record->shade     = 0x80;
     record->half_size = 0x80;
-    record->origin.x  = TASK(Actor)->pos.x.fixed;
-    record->origin.y  = TASK(Actor)->pos.y.fixed;
+    record->origin.x  = SELF(Actor)->pos.x.fixed;
+    record->origin.y  = SELF(Actor)->pos.y.fixed;
     record->unk_10    = 0;
     record->unk_18    = 0x1800;
     record->unk_1C    = 0;

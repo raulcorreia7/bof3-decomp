@@ -13,15 +13,15 @@ MATCH void func_801EEC5C(void) {
     s32*         channel;
     s32          y;
 
-    work                                  = TASK(PartyMember);
+    work                                  = SELF(PartyMember);
     channel                               = &g_AreaScrollTargetX;
     work->pos.x.fixed                     = channel[0];
     y                                     = channel[1];
     work->pos.y.fixed                     = y;
-    TASK(PartyMember)->pos.z.part.integer = Area_HeightSample(work->pos.x.fixed, y);
-    TASK(PartyMember)->param.unk_0B       = rand() & 0x3F;
-    TASK(PartyMember)->unk_09             = 0x30;
-    TASK(PartyMember)->header.mode += 1;
+    SELF(PartyMember)->pos.z.part.integer = Area_HeightSample(work->pos.x.fixed, y);
+    SELF(PartyMember)->param.unk_0B       = rand() & 0x3F;
+    SELF(PartyMember)->unk_09             = 0x30;
+    SELF(PartyMember)->header.mode += 1;
 }
 
 /* The two handlers read the variant byte already loaded in a0, so the calls pass no argument: a
@@ -31,15 +31,15 @@ MATCH void func_801EECE4(void) {
     u8 count;
 
     Battle_ProjectRange();
-    ticks = TASK(PartyMember)->param.unk_0B;
-    TASK(PartyMember)->screen_x.value -= 0x24;
+    ticks = SELF(PartyMember)->param.unk_0B;
+    SELF(PartyMember)->screen_x.value -= 0x24;
     if (ticks != 0) {
         func_801EEF5C();
     } else {
         func_801EED94();
     }
-    count                     = TASK(PartyMember)->unk_09 - 1;
-    TASK(PartyMember)->unk_09 = count;
+    count                     = SELF(PartyMember)->unk_09 - 1;
+    SELF(PartyMember)->unk_09 = count;
     if (!(count & BYTE_MASK)) {
         Battle_MarkDamaged(g_Battle.target_selector);
         g_Battle.flags |= BATTLE_STATE_EFFECT_PLAYING;

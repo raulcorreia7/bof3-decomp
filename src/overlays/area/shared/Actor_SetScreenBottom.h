@@ -5,9 +5,9 @@
 MATCH void Actor_SetScreenBottom(void) {
     Actor* work;
 
-    if (D_801454F2 == 0 || TASK(Actor)->param.unk_0B == 0) {
+    if (D_801454F2 == 0 || SELF(Actor)->param.unk_0B == 0) {
         if (g_GameStateIndex != GAME_REQUEST_MESSAGE && GAME_SCRIPT_ACTIVE() == 0) {
-            work           = TASK(Actor);
+            work           = SELF(Actor);
             work->screen_y = 240;
             work->unk_03++;
         }

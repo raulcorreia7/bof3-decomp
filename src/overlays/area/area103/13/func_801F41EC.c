@@ -3,18 +3,18 @@
 MATCH void func_801F41EC(void) {
     s16 remaining;
 
-    if (TASK(Actor)->timer == 15) {
-        TASK(Actor)->timer = 0;
+    if (SELF(Actor)->timer == 15) {
+        SELF(Actor)->timer = 0;
     }
-    remaining = TASK(Actor)->unk_32;
+    remaining = SELF(Actor)->unk_32;
     if (remaining > 0) {
-        TASK(Actor)->unk_32 = remaining - 1;
-    } else if (!((TASK(Actor)->timer / 5) & BYTE_MASK)) {
-        TASK(Actor)->header.step += 1;
+        SELF(Actor)->unk_32 = remaining - 1;
+    } else if (!((SELF(Actor)->timer / 5) & BYTE_MASK)) {
+        SELF(Actor)->header.step += 1;
     }
-    if (!((TASK(Actor)->timer % 5) & BYTE_MASK)) {
-        func_801F4E70(((TASK(Actor)->timer / 5) & BYTE_MASK) + 7);
+    if (!((SELF(Actor)->timer % 5) & BYTE_MASK)) {
+        func_801F4E70(((SELF(Actor)->timer / 5) & BYTE_MASK) + 7);
     }
-    TASK(Actor)->timer += 1;
+    SELF(Actor)->timer += 1;
     func_801F49A0(1);
 }

@@ -8,15 +8,15 @@ MATCH void func_801E51DC(void) {
     volatile u8* timer;
     u8           count;
 
-    Battle_CancelTurn(TASK(PartyMember)->slot);
+    Battle_CancelTurn(SELF(PartyMember)->slot);
     timer  = &g_Battle.living_enemy_count;
     count  = *timer - 1;
     *timer = count;
     if ((count & BYTE_MASK) == 0) {
         g_BattleResult |= BATTLE_RESULT_VICTORY;
     }
-    GFX_PaletteFreeFadeTarget(TASK(void));
-    Battle_ClearSlotPending(TASK(PartyMember)->slot);
+    GFX_PaletteFreeFadeTarget(SELF(void));
+    Battle_ClearSlotPending(SELF(PartyMember)->slot);
     g_BattleMessageState = 2;
     func_801DE804();
     func_800ACFF4();

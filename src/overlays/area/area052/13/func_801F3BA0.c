@@ -9,10 +9,10 @@ MATCH void func_801F3BA0(s32 x, s32 y) {
     column      = FIX_INT(x) + 1;
     row         = row_integer;
     Area_HeightSet(column, row, 0);
-    func_801A4BC0(column, row, (u8)(TASK(Actor)->unk_18 >> 8));
+    func_801A4BC0(column, row, (u8)(SELF(Actor)->unk_18 >> 8));
     row++;
     Area_HeightSet(column, row, 0);
-    func_801A4BC0(column, row, (u8)(TASK(Actor)->unk_1C >> 8));
-    TASK(Actor)->unk_18 <<= 8;
-    TASK(Actor)->unk_1C <<= 8;
+    func_801A4BC0(column, row, (u8)(SELF(Actor)->unk_1C >> 8));
+    SELF(Actor)->unk_18 <<= 8;
+    SELF(Actor)->unk_1C <<= 8;
 }

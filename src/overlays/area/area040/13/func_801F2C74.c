@@ -4,7 +4,7 @@ MATCH void func_801F2C74(void) {
     Actor* actor;
 
     if (g_Game.current->chr.character_id == CHAR_ID_GARR) {
-        actor = TASK(Actor);
+        actor = SELF(Actor);
         actor->pos.x.fixed += COORD_HALF;
     }
 }

@@ -4,7 +4,7 @@ MATCH void func_801F2D30(void) {
     Actor* work;
     u16    timer;
 
-    work         = TASK(Actor);
+    work         = SELF(Actor);
     work->unk_2C = timer = work->unk_2C - 1;
     work->pos.z.fixed += TO_COORD(64);
     work->angle_x -= 6;

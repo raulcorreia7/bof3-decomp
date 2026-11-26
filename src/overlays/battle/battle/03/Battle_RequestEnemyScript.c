@@ -5,14 +5,14 @@
 /* func_801E2314 */
 MATCH void Battle_RequestEnemyScript(u32 script_index) {
     /* FAKE: volatile-drop cast steers switch codegen. */
-    switch (TASK(PartyMember)->facing) {
+    switch (SELF(PartyMember)->facing) {
         case 0: {
             s32 index = script_index & BYTE_MASK;
             Script_Request(ENEMY_SCRIPT_PTR(index)[0] & 0x7F);
             if (ENEMY_SCRIPT_PTR(index)[0] & 0x80u) {
-                TASK(PartyMember)->unk_2A = 1u;
+                SELF(PartyMember)->unk_2A = 1u;
             } else {
-                TASK(PartyMember)->unk_2A = 0u;
+                SELF(PartyMember)->unk_2A = 0u;
             }
             break;
         }
@@ -20,9 +20,9 @@ MATCH void Battle_RequestEnemyScript(u32 script_index) {
             s32 index = script_index & BYTE_MASK;
             Script_Request(ENEMY_SCRIPT_PTR(index)[0] & 0x7F);
             if (ENEMY_SCRIPT_PTR(index)[0] & 0x80u) {
-                TASK(PartyMember)->unk_2A = 0u;
+                SELF(PartyMember)->unk_2A = 0u;
             } else {
-                TASK(PartyMember)->unk_2A = 1u;
+                SELF(PartyMember)->unk_2A = 1u;
             }
             break;
         }
@@ -30,9 +30,9 @@ MATCH void Battle_RequestEnemyScript(u32 script_index) {
             s32 index = script_index & BYTE_MASK;
             Script_Request(ENEMY_SCRIPT_PTR(index)[1] & 0x7F);
             if (ENEMY_SCRIPT_PTR(index)[1] & 0x80u) {
-                TASK(PartyMember)->unk_2A = 1u;
+                SELF(PartyMember)->unk_2A = 1u;
             } else {
-                TASK(PartyMember)->unk_2A = 0u;
+                SELF(PartyMember)->unk_2A = 0u;
             }
             break;
         }
@@ -41,9 +41,9 @@ MATCH void Battle_RequestEnemyScript(u32 script_index) {
             Script_Request(ENEMY_SCRIPT_PTR(index)[1] & 0x7F);
             if (ENEMY_SCRIPT_PTR(index)[1] & 0x80u) {
                 /* FAKE: non-volatile store fills merged-tail delay slot. */
-                TASK(PartyMember)->unk_2A = 0u;
+                SELF(PartyMember)->unk_2A = 0u;
             } else {
-                TASK(PartyMember)->unk_2A = 1u;
+                SELF(PartyMember)->unk_2A = 1u;
             }
             break;
         }

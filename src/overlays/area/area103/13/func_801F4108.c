@@ -9,15 +9,15 @@ MATCH void func_801F4108(void) {
     /* g_GameEntryState and the entry substate, read as one word. */
     state = (u32*)&g_GameEntryState;
     if (*state == 0x50005 && (*FIELD_PTR(u16, D_801EB6B2, 0) & 0x4000) != 0) {
-        TASK(Actor)->header.step++;
+        SELF(Actor)->header.step++;
     }
-    if (TASK(Actor)->timer == 15) {
-        TASK(Actor)->timer = 0;
+    if (SELF(Actor)->timer == 15) {
+        SELF(Actor)->timer = 0;
     }
-    ticks = TASK(Actor)->timer;
+    ticks = SELF(Actor)->timer;
     if ((u8)(ticks % 5) == 0) {
         func_801F4E70((u8)(ticks / 5) + 7);
     }
-    TASK(Actor)->timer++;
+    SELF(Actor)->timer++;
     func_801F49A0(1);
 }

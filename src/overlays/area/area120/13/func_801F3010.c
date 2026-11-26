@@ -41,7 +41,7 @@ NON_MATCHING void func_801F3010(void) {
             pixels++;
         }
     }
-    TASK(Actor)->header.mode++;
+    SELF(Actor)->header.mode++;
 }
 #else
 INCLUDE_ASM(func_801F3010);

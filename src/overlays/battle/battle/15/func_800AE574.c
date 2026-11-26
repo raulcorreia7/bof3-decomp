@@ -12,18 +12,18 @@ MATCH void func_800AE574(void) {
     u16          height;
     u16          base;
 
-    first = TASK(PartyMember);
+    first = SELF(PartyMember);
     first->unk_09--;
     if (first->unk_09 != 0) {
         return;
     }
 
     source = g_BattleEffectBattler;
-    second = TASK(PartyMember);
+    second = SELF(PartyMember);
     WorldPos_Copy(&second->pos, &source->pos);
     Battle_ProjectRange();
 
-    third                   = TASK_BYTES;
+    third                   = SELF_BYTES;
     FIELD(u32, third, 0x10) = -0xE;
     /* FAKE: holds the work store ahead of the field reloads. */
     FAKE_BARRIER();
@@ -35,11 +35,11 @@ MATCH void func_800AE574(void) {
     third[9] = 0;
     height -= 24;
     FIELD(u16, third, 0x2E) = height;
-    flag                    = TASK(PartyMember);
+    flag                    = SELF(PartyMember);
     base -= next;
     FIELD(u16, third, 0x30) = base;
     flag->timer             = 1;
 
-    last              = TASK(PartyMember);
+    last              = SELF(PartyMember);
     last->header.mode = (last->header.mode + 1);
 }

@@ -2,5 +2,5 @@
 
 MATCH void func_801F2C48(void) {
     func_801F2D28(0);
-    TASK(Actor)->header.step += 1;
+    SELF(Actor)->header.step += 1;
 }

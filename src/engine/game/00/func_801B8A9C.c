@@ -20,27 +20,27 @@ MATCH void func_801B8A9C(void) {
 
     count = 0;
 loop_top:
-    work  = TASK(Actor);
+    work  = SELF(Actor);
     route = count;
     route = (work->direction + route) & 0x7;
     word  = FIELD(u32, work, 0x70u);
     pos_x = work->pos.x.fixed + g_FacingSteps[route].x * (steps = (word & BYTE_MASK) + 1);
     pos_y = work->pos.y.fixed + g_FacingSteps[route].y * steps;
-    if ((Game_TestPlacement(pos_x, pos_y, (u8)word, COORD_INT(TASK(Actor)->pos.z)) & BYTE_MASK) != 0u ||
-        (Area_CellTestCorners(pos_x, pos_y, TASK(Actor)->voice_flags.scene_flag, 0xD0, 0) & BYTE_MASK) == 0u) {
+    if ((Game_TestPlacement(pos_x, pos_y, (u8)word, COORD_INT(SELF(Actor)->pos.z)) & BYTE_MASK) != 0u ||
+        (Area_CellTestCorners(pos_x, pos_y, SELF(Actor)->voice_flags.scene_flag, 0xD0, 0) & BYTE_MASK) == 0u) {
         count++;
         if (count < 8) {
             /* Retry the probe from the next direction. */
             goto loop_top;
         }
         found   = 1;
-        route   = TASK(Actor)->direction;
-        vals[0] = COORD_INT(TASK(Actor)->pos.z);
+        route   = SELF(Actor)->direction;
+        vals[0] = COORD_INT(SELF(Actor)->pos.z);
         for (iter = 0; iter < 4; iter++) {
             index_copy = iter * 2 + 1;
             px         = &g_FacingSteps[(index_copy & BYTE_MASK)].x;
             py         = &g_FacingStepY[(index_copy & BYTE_MASK) * 2];
-            if ((func_801B8C64(TASK(Actor)->pos.x.fixed + *px, TASK(Actor)->pos.y.fixed + *py, &vals[found], 1) & BYTE_MASK) != 0u) {
+            if ((func_801B8C64(SELF(Actor)->pos.x.fixed + *px, SELF(Actor)->pos.y.fixed + *py, &vals[found], 1) & BYTE_MASK) != 0u) {
                 found++;
             }
             if (found == 2) {
@@ -55,5 +55,5 @@ loop_top:
             }
         }
     }
-    TASK(Actor)->direction = route;
+    SELF(Actor)->direction = route;
 }

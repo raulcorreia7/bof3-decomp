@@ -11,7 +11,7 @@ MATCH void Fishing_CastGaugeSweep(void) {
     FishingState* back;
     s32           speed;
 
-    work  = TASK(FishingState);
+    work  = SELF(FishingState);
     speed = work->step_delta;
     if (speed != 0) {
         switch (g_FishingRodRow->cast_sweep_direction) {
@@ -21,7 +21,7 @@ MATCH void Fishing_CastGaugeSweep(void) {
                     work->pos_x      = 0xFF;
                     work->step_delta = -work->step_delta;
                 } else {
-                    back = TASK(FishingState);
+                    back = SELF(FishingState);
                     if ((s32)back->step_delta < 0 && back->pos_x <= 0) {
                         back->pos_x      = 0;
                         back->step_delta = -back->step_delta;
@@ -47,7 +47,7 @@ MATCH void Fishing_CastGaugeSweep(void) {
                 } else {
                     work->cursor_10 = work->cursor_10 + speed;
                 }
-                fresh        = TASK(FishingState);
+                fresh        = SELF(FishingState);
                 fresh->pos_x = fresh->pos_x + fresh->cursor_10;
                 if (fresh->cursor_10 > 0) {
                     if (fresh->pos_x >= 0xFF) {
@@ -63,10 +63,10 @@ MATCH void Fishing_CastGaugeSweep(void) {
     }
     Fishing_SetDrawMode(0, 2);
     Fishing_DrawSprite(16, 2, 135, 180);
-    Fishing_DrawGaugeFill(136, 203, ((TASK(FishingState)->pos_x * 96) / 255), 2);
+    Fishing_DrawGaugeFill(136, 203, ((SELF(FishingState)->pos_x * 96) / 255), 2);
     if (D_80145E92[0] == 3) {
-        TASK(FishingState)->origin_x = 0xB8;
-        TASK(FishingState)->origin_y = 0xD1;
-        TASK(FishingState)->handler_index += 1;
+        SELF(FishingState)->origin_x = 0xB8;
+        SELF(FishingState)->origin_y = 0xD1;
+        SELF(FishingState)->handler_index += 1;
     }
 }

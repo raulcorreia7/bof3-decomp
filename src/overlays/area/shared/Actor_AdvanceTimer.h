@@ -3,10 +3,10 @@
 MATCH void Actor_AdvanceTimer(void) {
     Actor* work;
 
-    work = TASK(Actor);
+    work = SELF(Actor);
     if (work->timer >= 8) {
         work->header.step++;
     }
-    work = TASK(Actor);
+    work = SELF(Actor);
     work->timer++;
 }

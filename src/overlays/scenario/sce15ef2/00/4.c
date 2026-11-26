@@ -5,9 +5,9 @@ __asm__(".include \"include/match/macro.inc\"\n");
 #endif
 
 MATCH void func_801D0C04(void) {
-    D_801D1B1C[TASK(Actor)->header.mode]();
-    if (TASK(Actor)->header.mode != 0) {
-        func_801D1218(&TASK(Actor)->pos, (s16)TASK(Actor)->vx, 7);
+    D_801D1B1C[SELF(Actor)->header.mode]();
+    if (SELF(Actor)->header.mode != 0) {
+        func_801D1218(&SELF(Actor)->pos, (s16)SELF(Actor)->vx, 7);
     }
 }
 
@@ -15,9 +15,9 @@ MATCH void func_801D0C70(void) {
     u8* work;
     u8* step;
 
-    work                  = TASK(u8);
+    work                  = SELF(u8);
     work[9]               = 0x10;
-    step                  = TASK(u8);
+    step                  = SELF(u8);
     FIELD(s32, work, 0xC) = 0;
     step[1]++;
 }
@@ -26,24 +26,24 @@ MATCH void func_801D0CA0(void) {
     Actor* work;
     u8     timer;
 
-    work        = TASK(Actor);
+    work        = SELF(Actor);
     timer       = work->timer - 1;
     work->vx    = work->vx + 0x10;
     work->timer = timer;
     if (timer == 0) {
-        TASK(Actor)->timer       = 32;
-        TASK(Actor)->header.mode = TASK(Actor)->header.mode + 1;
+        SELF(Actor)->timer       = 32;
+        SELF(Actor)->header.mode = SELF(Actor)->header.mode + 1;
     }
 }
 
 MATCH void func_801D0D00(void) {
     u8 timer;
 
-    timer              = TASK(Actor)->timer - 1;
-    TASK(Actor)->timer = timer;
+    timer              = SELF(Actor)->timer - 1;
+    SELF(Actor)->timer = timer;
     if (timer == 0) {
-        TASK(Actor)->timer       = 16;
-        TASK(Actor)->header.mode = TASK(Actor)->header.mode + 1;
+        SELF(Actor)->timer       = 16;
+        SELF(Actor)->header.mode = SELF(Actor)->header.mode + 1;
     }
 }
 
@@ -51,7 +51,7 @@ MATCH void func_801D0D5C(void) {
     Actor* work;
     u8     timer;
 
-    work        = TASK(Actor);
+    work        = SELF(Actor);
     timer       = work->timer - 1;
     work->vx    = work->vx - 0x10;
     work->timer = timer;
@@ -61,7 +61,7 @@ MATCH void func_801D0D5C(void) {
 }
 
 MATCH void func_801D0DA4(void) {
-    SYS_DISPATCH_TASK(D_801D1B2C, 1, g_Task);
+    SYS_DISPATCH_TASK(D_801D1B2C, 1, g_Self);
 }
 
 #include "overlays/scenario/shared/Scene_EndScan.h"
@@ -69,16 +69,16 @@ MATCH void func_801D0DA4(void) {
 MATCH void func_801D0E30(void) {
     u8 timer;
 
-    timer = TASK(Actor)->timer;
+    timer = SELF(Actor)->timer;
     if (timer == 0) {
         Scene_ClaimScanBar();
-        TASK(Actor)->timer = RANDOM_MASK(0xF) + 24;
+        SELF(Actor)->timer = RANDOM_MASK(0xF) + 24;
     } else {
-        TASK(Actor)->timer = timer - 1;
+        SELF(Actor)->timer = timer - 1;
     }
     Scene_UpdateScanBars(240);
     if (g_ScriptVars[0] == 14) {
-        TASK(Actor)->header.mode += 1;
+        SELF(Actor)->header.mode += 1;
     }
 }
 
@@ -89,41 +89,41 @@ MATCH void func_801D0EC4(void) {
 }
 
 MATCH void func_801D0EF8(void) {
-    SYS_DISPATCH_TASK(D_801D1B38, 1, g_Task);
-    if (TASK(Actor)->header.mode != 0) {
-        func_801D17A0((s16)TASK(Actor)->screen_x, (s16)TASK(Actor)->screen_y, 0x80);
+    SYS_DISPATCH_TASK(D_801D1B38, 1, g_Self);
+    if (SELF(Actor)->header.mode != 0) {
+        func_801D17A0((s16)SELF(Actor)->screen_x, (s16)SELF(Actor)->screen_y, 0x80);
     }
 }
 
 MATCH void func_801D0F68(void) {
     Actor* work;
 
-    work                     = TASK(Actor);
+    work                     = SELF(Actor);
     work->timer              = 10;
     work->screen_x           = 0;
     work->screen_y           = 0;
-    TASK(Actor)->header.mode = TASK(Actor)->header.mode + 1;
+    SELF(Actor)->header.mode = SELF(Actor)->header.mode + 1;
 }
 
 MATCH void func_801D0F9C(void) {
     Actor* work;
     u8     timer;
 
-    work           = TASK(Actor);
+    work           = SELF(Actor);
     timer          = work->timer - 1;
     work->timer    = timer;
     work->screen_x = work->screen_x + 0x15;
     work->screen_y = work->screen_y + 9;
     if (timer == 0) {
-        TASK(Actor)->timer       = 90;
-        TASK(Actor)->header.mode = TASK(Actor)->header.mode + 1;
+        SELF(Actor)->timer       = 90;
+        SELF(Actor)->header.mode = SELF(Actor)->header.mode + 1;
     }
 }
 
 MATCH void func_801D1008(void) {
     if (g_ScriptVars[0] == 9) {
-        TASK(Actor)->timer       = 30;
-        TASK(Actor)->header.mode = TASK(Actor)->header.mode + 1;
+        SELF(Actor)->timer       = 30;
+        SELF(Actor)->header.mode = SELF(Actor)->header.mode + 1;
     }
 }
 
@@ -131,7 +131,7 @@ MATCH void func_801D1050(void) {
     Actor* work;
     u8     timer;
 
-    work           = TASK(Actor);
+    work           = SELF(Actor);
     timer          = work->timer - 1;
     work->timer    = timer;
     work->screen_x = work->screen_x - 7;
@@ -142,23 +142,23 @@ MATCH void func_801D1050(void) {
 }
 
 MATCH void func_801D10A4(void) {
-    SYS_DISPATCH_TASK(D_801D1B48, 1, g_Task);
+    SYS_DISPATCH_TASK(D_801D1B48, 1, g_Self);
 }
 
 MATCH void func_801D10E8(void) {
     u8* work;
 
-    work    = TASK(u8);
+    work    = SELF(u8);
     work[9] = 0x10;
-    work    = TASK(u8);
+    work    = SELF(u8);
     work[1]++;
 }
 
 MATCH void func_801D1118(void) {
-    Scene_DrawRedGradient(-(TASK(Actor)->timer << 4) & BYTE_MASK);
-    if (--TASK(Actor)->timer == 0) {
-        TASK(Actor)->timer = 16;
-        TASK(Actor)->header.mode += 1;
+    Scene_DrawRedGradient(-(SELF(Actor)->timer << 4) & BYTE_MASK);
+    if (--SELF(Actor)->timer == 0) {
+        SELF(Actor)->timer = 16;
+        SELF(Actor)->header.mode += 1;
     }
 }
 

@@ -24,8 +24,8 @@
 /* The same step with the two switch cases written in the given order: a member whose
  * retail switch tests the 0x41 facing first passes the 0x41 case first. */
 #define CHAR_RUN_STEP_CASES(FIRST_FACING, FIRST_SCRIPT, SECOND_FACING, SECOND_SCRIPT)        \
-    if (TASK(Actor)->direction == TASK(Actor)->unk_03) {                                     \
-        switch (TASK(Actor)->direction) {                                                    \
+    if (SELF(Actor)->direction == SELF(Actor)->unk_03) {                                     \
+        switch (SELF(Actor)->direction) {                                                    \
             case FIRST_FACING:                                                               \
                 Script_Request(FIRST_SCRIPT);                                                \
                 break;                                                                       \
@@ -33,35 +33,35 @@
                 Script_Request(SECOND_SCRIPT);                                               \
                 break;                                                                       \
         }                                                                                    \
-        TASK(Actor)->header.step++;                                                          \
+        SELF(Actor)->header.step++;                                                          \
     } else {                                                                                 \
-        TASK(Actor)->timer--;                                                                \
-        if (TASK(Actor)->timer == 0) {                                                       \
-            TASK(Actor)->timer     = 2;                                                      \
-            TASK(Actor)->direction = TASK(Actor)->direction + TASK(Actor)->param.turn_delta; \
-            TASK(Actor)->direction &= 7;                                                     \
-            Script_Request(TASK(Actor)->direction);                                          \
+        SELF(Actor)->timer--;                                                                \
+        if (SELF(Actor)->timer == 0) {                                                       \
+            SELF(Actor)->timer     = 2;                                                      \
+            SELF(Actor)->direction = SELF(Actor)->direction + SELF(Actor)->param.turn_delta; \
+            SELF(Actor)->direction &= 7;                                                     \
+            Script_Request(SELF(Actor)->direction);                                          \
         }                                                                                    \
     }
 
 /* Starts the character's walk route: picks the direction away from the work record's current route index with the resident selector (Actor_GetTurnStep), stores it in the direction byte at +0x03, arms the step timer at +0x09 and advances the task state at +0x02. The body of every PlChar_StartTurn member; each passes the two facing values it turns between. */
 #define CHAR_START_TURN(FACING_BACK, FACING_AWAY)                                                \
-    if (abs(TASK(Actor)->direction - FACING_BACK) > abs(TASK(Actor)->direction - FACING_AWAY)) { \
-        TASK(Actor)->param.turn_delta = Actor_GetTurnStep(FACING_AWAY);                          \
-        TASK(Actor)->unk_03           = FACING_AWAY;                                             \
+    if (abs(SELF(Actor)->direction - FACING_BACK) > abs(SELF(Actor)->direction - FACING_AWAY)) { \
+        SELF(Actor)->param.turn_delta = Actor_GetTurnStep(FACING_AWAY);                          \
+        SELF(Actor)->unk_03           = FACING_AWAY;                                             \
     } else {                                                                                     \
-        TASK(Actor)->param.turn_delta = Actor_GetTurnStep(FACING_BACK);                          \
-        TASK(Actor)->unk_03           = FACING_BACK;                                             \
+        SELF(Actor)->param.turn_delta = Actor_GetTurnStep(FACING_BACK);                          \
+        SELF(Actor)->unk_03           = FACING_BACK;                                             \
     }                                                                                            \
-    TASK(Actor)->timer = 2;                                                                      \
-    TASK(Actor)->header.step++
+    SELF(Actor)->timer = 2;                                                                      \
+    SELF(Actor)->header.step++
 
 /* Runs this image's turn preparation, requests the script of the character's current facing and sets the task to state 0xB, step 1. The body of every character's facing-turn start; each passes its preparation function. */
 #define CHAR_START_FACING_TURN(PREPARE)                      \
     PREPARE();                                               \
-    Script_Request((TASK(Actor)->direction - 1) / 2 + 0x42); \
-    TASK(Actor)->unk_0A = 0xB;                               \
-    TASK(Actor)->unk_03 = 1
+    Script_Request((SELF(Actor)->direction - 1) / 2 + 0x42); \
+    SELF(Actor)->unk_0A = 0xB;                               \
+    SELF(Actor)->unk_03 = 1
 
 /* Chooses a direction and requests its script: steps direction to a free neighbouring facing when it is even (CHECK reports whether the facing is free), then runs this image's turn preparation PREPARE and starts the facing script. The body of every PlChar_FaceFreeDirection; each passes its two functions. */
 /* PlChar_FaceFreeDirection (plp016 0x801CF7B4, plp026 0x801CFBD8, plp056 0x801CF9DC, plp267 0x801CEEB0, plp467
@@ -69,37 +69,37 @@
 #define CHAR_FACE_FREE_DIRECTION(CHECK, PREPARE)                             \
     u8 direction;                                                            \
                                                                              \
-    direction = TASK(Actor)->direction;                                      \
+    direction = SELF(Actor)->direction;                                      \
     if (!(direction & 1)) {                                                  \
-        TASK(Actor)->direction = (direction - 1) & 7;                        \
+        SELF(Actor)->direction = (direction - 1) & 7;                        \
         if (!(CHECK() & 0xFF)) {                                             \
-            TASK(Actor)->direction = (TASK(Actor)->direction + 2) & 7;       \
+            SELF(Actor)->direction = (SELF(Actor)->direction + 2) & 7;       \
             if (!(CHECK() & 0xFF)) {                                         \
-                TASK(Actor)->direction = (TASK(Actor)->direction - 2) & 7;   \
+                SELF(Actor)->direction = (SELF(Actor)->direction - 2) & 7;   \
             }                                                                \
         }                                                                    \
     }                                                                        \
     PREPARE();                                                               \
-    Script_Request((((s32)(TASK(Actor)->direction - 1) / 2) + 0x42) & 0xFF); \
-    TASK(Actor)->param.unk_0B = 0;                                           \
-    TASK(Actor)->unk_0A       = 0xB;                                         \
-    TASK(Actor)->unk_03       = 1
+    Script_Request((((s32)(SELF(Actor)->direction - 1) / 2) + 0x42) & 0xFF); \
+    SELF(Actor)->param.unk_0B = 0;                                           \
+    SELF(Actor)->unk_0A       = 0xB;                                         \
+    SELF(Actor)->unk_03       = 1
 
-/* Probes facing clearance for the character's free-direction choice; sets TASK(Actor)->unk_2B to 0 when blocked. */
+/* Probes facing clearance for the character's free-direction choice; sets SELF(Actor)->unk_2B to 0 when blocked. */
 #define CHAR_PROBE_FACING_CLEARANCE(dist, x, y)                                                             \
     {                                                                                                       \
-        TASK(Actor)->unk_2B = 1;                                                                            \
-        x                   = TASK(Actor)->pos.x.fixed + g_FacingSteps[FACING_RIGHT].x;                     \
-        y                   = TASK(Actor)->pos.y.fixed + g_FacingSteps[FACING_RIGHT].y;                     \
+        SELF(Actor)->unk_2B = 1;                                                                            \
+        x                   = SELF(Actor)->pos.x.fixed + g_FacingSteps[FACING_RIGHT].x;                     \
+        y                   = SELF(Actor)->pos.y.fixed + g_FacingSteps[FACING_RIGHT].y;                     \
         dist                = Area_HeightReadStep(x, y, FACING_RIGHT);                                      \
-        if (SP_REF(u8, 0x0u) != 0 && dist >= 65 && COORD_INT(TASK(Actor)->pos.z) < Area_HeightRead(x, y)) { \
-            TASK(Actor)->unk_2B = 0;                                                                        \
+        if (SP_REF(u8, 0x0u) != 0 && dist >= 65 && COORD_INT(SELF(Actor)->pos.z) < Area_HeightRead(x, y)) { \
+            SELF(Actor)->unk_2B = 0;                                                                        \
         }                                                                                                   \
-        x    = TASK(Actor)->pos.x.fixed + g_FacingSteps[FACING_DOWN].x;                                     \
-        y    = TASK(Actor)->pos.y.fixed + g_FacingSteps[FACING_DOWN].y;                                     \
+        x    = SELF(Actor)->pos.x.fixed + g_FacingSteps[FACING_DOWN].x;                                     \
+        y    = SELF(Actor)->pos.y.fixed + g_FacingSteps[FACING_DOWN].y;                                     \
         dist = Area_HeightReadStep(x, y, FACING_DOWN);                                                      \
-        if (SP_REF(u8, 0x0u) != 0 && dist >= 65 && COORD_INT(TASK(Actor)->pos.z) < Area_HeightRead(x, y)) { \
-            TASK(Actor)->unk_2B = 0;                                                                        \
+        if (SP_REF(u8, 0x0u) != 0 && dist >= 65 && COORD_INT(SELF(Actor)->pos.z) < Area_HeightRead(x, y)) { \
+            SELF(Actor)->unk_2B = 0;                                                                        \
         }                                                                                                   \
     }
 
@@ -112,13 +112,13 @@
     s32 y;                                                \
     u8  direction;                                        \
                                                           \
-    direction = TASK(Actor)->direction;                   \
+    direction = SELF(Actor)->direction;                   \
     if (!(direction & 1)) {                               \
-        TASK(Actor)->direction = (direction - 1) & 7;     \
+        SELF(Actor)->direction = (direction - 1) & 7;     \
     }                                                     \
     CHAR_PROBE_FACING_CLEARANCE(dist, x, y)               \
-    Script_Request((TASK(Actor)->direction >> 1) + 0x42); \
-    TASK(Actor)->header.step++
+    Script_Request((SELF(Actor)->direction >> 1) + 0x42); \
+    SELF(Actor)->header.step++
 
 void PlChar_SpawnActor(s32 spawn_type, s32 vx, s32 spawn_y);
 void PlChar_SpawnLinkedActor(s32 spawn_type, s32 vx, s32 spawn_y, s32 code);
@@ -157,14 +157,14 @@ void PlChar_SpawnLinkedActor(s32 spawn_type, s32 vx, s32 spawn_y, s32 code);
             } else {                                                            \
                 UI_MessageRequest(MSG_SYSTEM_FOUND_ITEM_NO_ROOM);               \
             }                                                                   \
-            TASK(Actor)->param.unk_0B = 2;                                      \
+            SELF(Actor)->param.unk_0B = 2;                                      \
         } else if (roll >= 12) {                                                \
             CALLEE(2, x, y, cell & BYTE_MASK);                                  \
             Party_FlashDamage(PARTY_DAMAGE_COLOR_RED);                          \
             Char_HPLose(1, g_Game.current->chr.character_id);                   \
             UI_MessageRequest(MSG_SYSTEM_STUNG_BY_CATERPILLAR);                 \
             g_GameStateIndex          = GAME_REQUEST_MESSAGE;                   \
-            TASK(Actor)->param.unk_0B = 1;                                      \
+            SELF(Actor)->param.unk_0B = 1;                                      \
         }                                                                       \
         g_GameStateIndex = GAME_REQUEST_MESSAGE;                                \
         return 1;                                                               \
@@ -189,8 +189,8 @@ s32 PlChar_ProbeCellSpawn(s16 x, s16 y);
 #define PLCHAR_PROBE_FACING_FOLLOWER(index)                                                                                  \
     {                                                                                                                        \
         s32 i;                                                                                                               \
-        s32 x = g_SpawnedActors[index].pos.x.fixed + g_FacingSteps[TASK(Actor)->direction].x * 2;                            \
-        s32 y = g_SpawnedActors[index].pos.y.fixed + g_FacingSteps[TASK(Actor)->direction].y * 2;                            \
+        s32 x = g_SpawnedActors[index].pos.x.fixed + g_FacingSteps[SELF(Actor)->direction].x * 2;                            \
+        s32 y = g_SpawnedActors[index].pos.y.fixed + g_FacingSteps[SELF(Actor)->direction].y * 2;                            \
         for (i = 1; i < g_PartySize; i++) {                                                                                  \
             if (Actor_IsInRange(x, y, COORD_INT(g_SpawnedActors[index].pos.z), 1, (Actor*)&g_Game.members[i]) & BYTE_MASK) { \
                 return 1;                                                                                                    \

@@ -3,6 +3,6 @@
 /* Dispatches the per-slot handler selected by scratchpad work byte
  * 0x02, then opens dialog 0xC at the work area's halfword 0x10. */
 MATCH void func_801D0E40(void) {
-    D_801E1CE8[TASK(FishingState)->mode_index]();
-    Fishing_DrawHud(12, TASK(FishingState)->cursor_10);
+    D_801E1CE8[SELF(FishingState)->mode_index]();
+    Fishing_DrawHud(12, SELF(FishingState)->cursor_10);
 }

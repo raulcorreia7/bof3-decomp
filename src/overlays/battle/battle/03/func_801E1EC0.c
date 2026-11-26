@@ -25,10 +25,10 @@ MATCH void func_801E1EC0(void) {
     g_BattleEffects[effect_slot & BYTE_MASK].unk_03       = 0;
     g_BattleEffects[effect_slot & BYTE_MASK].unk_04       = 0;
     g_BattleEffects[effect_slot & BYTE_MASK].unk_0B       = effect_slot;
-    g_BattleEffects[effect_slot & BYTE_MASK].target.party = TASK(PartyMember);
-    TASK(PartyMember)->header.flags |= ACTOR_FLAG_HIDDEN;
-    TASK(PartyMember)->unk_09         = 0x10;
-    TASK(PartyMember)->timer          = 16;
-    work                              = TASK(PartyMember);
+    g_BattleEffects[effect_slot & BYTE_MASK].target.party = SELF(PartyMember);
+    SELF(PartyMember)->header.flags |= ACTOR_FLAG_HIDDEN;
+    SELF(PartyMember)->unk_09         = 0x10;
+    SELF(PartyMember)->timer          = 16;
+    work                              = SELF(PartyMember);
     ((PartyMember*)work)->header.step = (((PartyMember*)work)->header.step + 1);
 }

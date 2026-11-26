@@ -4,7 +4,7 @@ MATCH void func_801A3A08(void) {
     Actor* work;
     u16    mode;
 
-    work = TASK(Actor);
+    work = SELF(Actor);
     if (!(work->header.flags & ACTOR_FLAG_HIDDEN)) {
         mode = work->unk_06;
         /* Retail shares one dispatch tail for both mode tests. */

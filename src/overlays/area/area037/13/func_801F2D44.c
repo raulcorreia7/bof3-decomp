@@ -19,9 +19,9 @@ MATCH void func_801F2D44(void) {
     GFX_ADD_DITHERED_DRAW_MODE(GFX_LAYER_BATTLE_SCENE, getTPage(TPAGE_DEPTH_8BIT, TPAGE_ABR_HALF, 320, 256));
     rotation.vx = rotation.vy = 0;
     rotation.vz               = 0x40 - abs(0x80 - (s32)((g_FrameCount * 2) & 0xFF));
-    position.vx               = TASK(Actor)->pos.x.fixed;
-    position.vy               = TASK(Actor)->pos.y.fixed;
-    position.vz               = TASK(Actor)->pos.z.fixed;
+    position.vx               = SELF(Actor)->pos.x.fixed;
+    position.vy               = SELF(Actor)->pos.y.fixed;
+    position.vz               = SELF(Actor)->pos.z.fixed;
     RotTrans(&position, (VECTOR*)matrix.t, &flag);
     RotMatrix(&rotation, &matrix);
     MulMatrix2(&g_CameraMatrix, &matrix);

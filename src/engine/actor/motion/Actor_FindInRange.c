@@ -12,7 +12,7 @@ MATCH s8 Actor_FindInRange(s32 pos_x, s32 pos_y, s32 range_mode) {
     off   = 0;
     do {
         slot = (u8*)g_Actors + off;
-        if ((slot != TASK(u8)) && (((u8*)g_Actors)[off] != 0) && ((((u8*)g_Actors + 7)[off] & 0x80) == 0)) {
+        if ((slot != SELF(u8)) && (((u8*)g_Actors)[off] != 0) && ((((u8*)g_Actors + 7)[off] & 0x80) == 0)) {
             if (((Actor_IsInRange(pos_x, pos_y, type, range_mode, (Actor*)slot)) & BYTE_MASK) != 0) {
                 return index;
             }

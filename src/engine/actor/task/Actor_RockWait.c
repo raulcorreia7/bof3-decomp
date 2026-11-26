@@ -11,52 +11,52 @@ MATCH void Actor_RockWait(void) {
     /* Non-volatile view of the shared state word (see func_80196FFC). */
     state = (u16*)&g_SysThreads[0].tail.game_entry.state;
     if (*state != 1) {
-        if (TASK(Actor)->unk_0A != 0) {
+        if (SELF(Actor)->unk_0A != 0) {
             if ((Actor_RockIsBlockedAhead() & BYTE_MASK) == 0) {
-                Area_CellSetCode(COORD_INT(TASK(Actor)->pos.x), COORD_INT(TASK(Actor)->pos.y), TASK(Actor)->param.unk_0B);
-                TASK(Actor)->unk_0A = (u8)((TASK(Actor)->unk_0A + 1) >> 1);
-                vx                  = g_FacingOffsets[TASK(Actor)->direction].x;
-                span                = (TASK(Actor)->unk_0A - 1) * 0xC00;
-                TASK(Actor)->vx     = vx * 4;
+                Area_CellSetCode(COORD_INT(SELF(Actor)->pos.x), COORD_INT(SELF(Actor)->pos.y), SELF(Actor)->param.unk_0B);
+                SELF(Actor)->unk_0A = (u8)((SELF(Actor)->unk_0A + 1) >> 1);
+                vx                  = g_FacingOffsets[SELF(Actor)->direction].x;
+                span                = (SELF(Actor)->unk_0A - 1) * 0xC00;
+                SELF(Actor)->vx     = vx * 4;
                 if ((vx * 4) > 0) {
-                    TASK(Actor)->vx = vx * 4 + span;
+                    SELF(Actor)->vx = vx * 4 + span;
                 } else if ((vx * 4) < 0) {
-                    TASK(Actor)->vx = vx * 4 - span;
+                    SELF(Actor)->vx = vx * 4 - span;
                 }
-                vy              = g_FacingOffsets[TASK(Actor)->direction].y;
-                TASK(Actor)->vy = vy * 4;
+                vy              = g_FacingOffsets[SELF(Actor)->direction].y;
+                SELF(Actor)->vy = vy * 4;
                 if ((vy * 4) > 0) {
-                    TASK(Actor)->vy = vy * 4 + span;
+                    SELF(Actor)->vy = vy * 4 + span;
                 } else if ((vy * 4) < 0) {
-                    TASK(Actor)->vy = vy * 4 - span;
+                    SELF(Actor)->vy = vy * 4 - span;
                 }
-                TASK(Actor)->gravity = 0;
-                TASK(Actor)->vz      = 0;
-                if (TASK(Actor)->vx > 0) {
-                    TASK(Actor)->unk_18 = -0x400;
-                } else if (TASK(Actor)->vx < 0) {
-                    TASK(Actor)->unk_18 = 0x400;
+                SELF(Actor)->gravity = 0;
+                SELF(Actor)->vz      = 0;
+                if (SELF(Actor)->vx > 0) {
+                    SELF(Actor)->unk_18 = -0x400;
+                } else if (SELF(Actor)->vx < 0) {
+                    SELF(Actor)->unk_18 = 0x400;
                 } else {
-                    TASK(Actor)->unk_18 = 0;
+                    SELF(Actor)->unk_18 = 0;
                 }
-                if (TASK(Actor)->vy > 0) {
-                    TASK(Actor)->unk_1C = -0x400;
-                } else if (TASK(Actor)->vy < 0) {
-                    TASK(Actor)->unk_1C = 0x400;
+                if (SELF(Actor)->vy > 0) {
+                    SELF(Actor)->unk_1C = -0x400;
+                } else if (SELF(Actor)->vy < 0) {
+                    SELF(Actor)->unk_1C = 0x400;
                 } else {
-                    TASK(Actor)->unk_1C = 0;
+                    SELF(Actor)->unk_1C = 0;
                 }
-                TASK(Actor)->gravity = 0;
+                SELF(Actor)->gravity = 0;
                 Script_Select(1);
-                TASK(Actor)->timer       = 0;
-                TASK(Actor)->header.mode = TASK(Actor)->header.mode + 1;
+                SELF(Actor)->timer       = 0;
+                SELF(Actor)->header.mode = SELF(Actor)->header.mode + 1;
             } else {
-                Area_CellSetCode(COORD_INT(TASK(Actor)->pos.x), COORD_INT(TASK(Actor)->pos.y), TASK(Actor)->param.unk_0B);
-                TASK(Actor)->timer       = 0;
-                TASK(Actor)->header.mode = ACTOR_ROCK_MODE_END;
+                Area_CellSetCode(COORD_INT(SELF(Actor)->pos.x), COORD_INT(SELF(Actor)->pos.y), SELF(Actor)->param.unk_0B);
+                SELF(Actor)->timer       = 0;
+                SELF(Actor)->header.mode = ACTOR_ROCK_MODE_END;
             }
         } else if (g_SysThreads[0].tail.game_entry.request == GAME_REQUEST_AREA_CHANGE) {
-            Area_CellSetCode(COORD_INT(TASK(Actor)->pos.x), COORD_INT(TASK(Actor)->pos.y), TASK(Actor)->param.unk_0B);
+            Area_CellSetCode(COORD_INT(SELF(Actor)->pos.x), COORD_INT(SELF(Actor)->pos.y), SELF(Actor)->param.unk_0B);
         }
     }
     Area_SetDrawMode();

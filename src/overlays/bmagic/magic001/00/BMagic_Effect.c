@@ -12,9 +12,9 @@ MATCH void func_801EECC4(void) {
     u32           index;
     u8            active;
 
-    TASK(PartyMember)->facing = g_BattleEffectBattler->facing;
-    WorldPos_Copy(&TASK(PartyMember)->pos, &g_BattleEffectBattler->pos);
-    TASK(PartyMember)->param.unk_0B = 1;
+    SELF(PartyMember)->facing = g_BattleEffectBattler->facing;
+    WorldPos_Copy(&SELF(PartyMember)->pos, &g_BattleEffectBattler->pos);
+    SELF(PartyMember)->param.unk_0B = 1;
     index                           = Battle_AllocEffect(1, 73);
     active                          = g_Battle.active_battler;
     if (BATTLER_IS_PLAYER(active)) {
@@ -32,19 +32,19 @@ MATCH void func_801EECC4(void) {
         image                   = (BattleWorkImage*)&g_BattleEnemyBattlers[enemy];
         *(BattleWorkImage*)slot = *image;
     }
-    work                                            = TASK(PartyMember);
+    work                                            = SELF(PartyMember);
     g_BattleEffects[index & BYTE_MASK].unk_06       = 1;
     g_BattleEffects[index & BYTE_MASK].header.mode  = 0;
     g_BattleEffects[index & BYTE_MASK].header.step  = 0;
     g_BattleEffects[index & BYTE_MASK].effect_type  = 73;
     g_BattleEffects[index & BYTE_MASK].arg.unk_09   = 0;
     g_BattleEffects[index & BYTE_MASK].target.party = work;
-    TASK(PartyMember)->unk_27                       = Battle_CopyCellPalette(g_BattleEffectBattler);
-    TASK(PartyMember)->unk_28                       = g_BattleEffectBattler->unk_28;
-    TASK(PartyMember)->unk_24                       = g_BattleEffectBattler->unk_24;
-    Battle_SetCellPaletteStp(TASK(PartyMember));
+    SELF(PartyMember)->unk_27                       = Battle_CopyCellPalette(g_BattleEffectBattler);
+    SELF(PartyMember)->unk_28                       = g_BattleEffectBattler->unk_28;
+    SELF(PartyMember)->unk_24                       = g_BattleEffectBattler->unk_24;
+    Battle_SetCellPaletteStp(SELF(PartyMember));
     g_BattleEffectBattler->header.flags |= PARTY_MEMBER_FLAG_HANDLER_BUSY;
-    TASK(PartyMember)->header.mode += 1;
+    SELF(PartyMember)->header.mode += 1;
 }
 
 MATCH void func_801EEF34(void) {
@@ -60,39 +60,39 @@ MATCH void func_801EF01C(void) {
     Magic001Steps handlers;
 
     handlers = D_801EEC10;
-    SYS_DISPATCH_BYTE(handlers.steps, TASK(PartyMember)->header.step);
-    if (TASK(PartyMember)->header.flags != 0 && TASK(PartyMember)->header.step != 0) {
+    SYS_DISPATCH_BYTE(handlers.steps, SELF(PartyMember)->header.step);
+    if (SELF(PartyMember)->header.flags != 0 && SELF(PartyMember)->header.step != 0) {
         Area_AddGridActor();
     }
 }
 
 MATCH void func_801EF0E8(void) {
     func_801E257C(g_Battle.active_battler, 10U);
-    TASK(PartyMember)->unk_27 = g_BattleEffectBattler->unk_27;
-    TASK(PartyMember)->unk_09 = 0;
-    TASK(PartyMember)->timer  = 0;
-    TASK(PartyMember)->header.step += 1;
+    SELF(PartyMember)->unk_27 = g_BattleEffectBattler->unk_27;
+    SELF(PartyMember)->unk_09 = 0;
+    SELF(PartyMember)->timer  = 0;
+    SELF(PartyMember)->header.step += 1;
 }
 
 MATCH void func_801EF164(void) {
     if (Script_AnimStepOnce() & BYTE_MASK) {
         Battle_PlayActiveBattlerSE(2, 0);
         func_801E257C(g_Battle.active_battler, 11U);
-        TASK(PartyMember)->unk_14 = 0x100;
-        TASK(PartyMember)->unk_20 = -8;
-        TASK(PartyMember)->header.step += 1;
+        SELF(PartyMember)->unk_14 = 0x100;
+        SELF(PartyMember)->unk_20 = -8;
+        SELF(PartyMember)->header.step += 1;
     }
 }
 
 MATCH void func_801EF1CC(void) {
-    TASK(PartyMember)->unk_14 += TASK(PartyMember)->unk_20;
-    TASK(PartyMember)->pos.z.part.integer += TASK(PartyMember)->unk_14;
-    if (TASK(PartyMember)->unk_14 == 0) {
-        TASK(PartyMember)->pos.x.fixed = g_Battle.selected_actor->pos.x.fixed;
-        TASK(PartyMember)->pos.y.fixed = g_Battle.selected_actor->pos.y.fixed;
-        TASK(PartyMember)->pos.z.fixed -= g_BattleEffectBattler->pos.z.fixed - g_Battle.selected_actor->pos.z.fixed;
-        TASK(PartyMember)->unk_09 = 0x1F;
-        TASK(PartyMember)->header.step += 1;
+    SELF(PartyMember)->unk_14 += SELF(PartyMember)->unk_20;
+    SELF(PartyMember)->pos.z.part.integer += SELF(PartyMember)->unk_14;
+    if (SELF(PartyMember)->unk_14 == 0) {
+        SELF(PartyMember)->pos.x.fixed = g_Battle.selected_actor->pos.x.fixed;
+        SELF(PartyMember)->pos.y.fixed = g_Battle.selected_actor->pos.y.fixed;
+        SELF(PartyMember)->pos.z.fixed -= g_BattleEffectBattler->pos.z.fixed - g_Battle.selected_actor->pos.z.fixed;
+        SELF(PartyMember)->unk_09 = 0x1F;
+        SELF(PartyMember)->header.step += 1;
     }
 }
 
@@ -100,7 +100,7 @@ MATCH void func_801EF280(void) {
     PartyMember* work;
     u8           timer;
 
-    work         = TASK(PartyMember);
+    work         = SELF(PartyMember);
     timer        = work->unk_09 - 1;
     work->unk_09 = timer;
     work->unk_14 += work->unk_20;
@@ -109,15 +109,15 @@ MATCH void func_801EF280(void) {
         SND_SEQueueSelection(0x203);
         func_801E257C(g_Battle.active_battler, 12);
         Battle_ApplyDamageFlags(g_Battle.target_selector, 0x10);
-        TASK(PartyMember)->unk_09 = 3;
-        TASK(PartyMember)->header.step++;
+        SELF(PartyMember)->unk_09 = 3;
+        SELF(PartyMember)->header.step++;
     }
 }
 
 MATCH void func_801EF324(void) {
     if (Script_AnimStepOnce() != 0u) {
         func_801E257C(g_Battle.active_battler, 10);
-        TASK(PartyMember)->header.step = TASK(PartyMember)->header.step + 1;
+        SELF(PartyMember)->header.step = SELF(PartyMember)->header.step + 1;
     }
 }
 
@@ -129,23 +129,23 @@ MATCH void func_801EF37C(void) {
     if (Script_AnimStepOnce() & BYTE_MASK) {
         Battle_PlayActiveBattlerSE(2, 0);
         func_801E257C(g_Battle.active_battler, 11);
-        work         = TASK(PartyMember);
+        work         = SELF(PartyMember);
         work->unk_14 = 0x140;
         work->timer  = 9;
         work->unk_20 = -0x40;
-        TASK(PartyMember)->header.step++;
+        SELF(PartyMember)->header.step++;
     }
 }
 
 MATCH void func_801EF408(void) {
-    PartyMember* work  = TASK(PartyMember);
+    PartyMember* work  = SELF(PartyMember);
     u8           timer = work->timer - 1;
     s32          value = work->unk_14 + work->unk_20;
     work->timer        = timer;
     work->unk_14       = value;
     COORD_INT(work->pos.z) += value;
     if (timer == 0) {
-        TASK(PartyMember)->header.step += 1;
+        SELF(PartyMember)->header.step += 1;
     }
 }
 
@@ -157,12 +157,12 @@ MATCH void func_801EF468(void) {
     if (Script_AnimStepOnce() & BYTE_MASK) {
         SND_SEQueueSelection(0x203);
         func_801E257C(g_Battle.active_battler, 12);
-        timer                     = TASK(PartyMember)->unk_09 - 1;
-        TASK(PartyMember)->unk_09 = timer;
+        timer                     = SELF(PartyMember)->unk_09 - 1;
+        SELF(PartyMember)->unk_09 = timer;
         if (timer != 0) {
-            TASK(PartyMember)->header.step -= 3;
+            SELF(PartyMember)->header.step -= 3;
         } else {
-            TASK(PartyMember)->header.step++;
+            SELF(PartyMember)->header.step++;
         }
     }
 }
@@ -170,12 +170,12 @@ MATCH void func_801EF468(void) {
 MATCH void func_801EF518(void) {
     if (Script_AnimStepOnce() & BYTE_MASK) {
         Battle_MarkDamaged(g_Battle.target_selector);
-        TASK(PartyMember)->header.flags |= ACTOR_FLAG_SEMI_TRANSPARENT;
-        TASK(PartyMember)->unk_5C = 1;
-        TASK(PartyMember)->unk_5D = 0;
-        TASK(PartyMember)->unk_5E = 0;
-        TASK(PartyMember)->unk_5F = 0;
-        TASK(PartyMember)->header.step += 1;
+        SELF(PartyMember)->header.flags |= ACTOR_FLAG_SEMI_TRANSPARENT;
+        SELF(PartyMember)->unk_5C = 1;
+        SELF(PartyMember)->unk_5D = 0;
+        SELF(PartyMember)->unk_5E = 0;
+        SELF(PartyMember)->unk_5F = 0;
+        SELF(PartyMember)->header.step += 1;
     }
 }
 
@@ -184,14 +184,14 @@ MATCH void func_801EF5CC(void) {
     PartyMember* source;
     s8           count;
 
-    count = TASK(PartyMember)->unk_5D;
+    count = SELF(PartyMember)->unk_5D;
     if (count != -0x80) {
-        TASK(PartyMember)->unk_5D = count - 0x10;
-        TASK(PartyMember)->unk_5E -= 16;
-        TASK(PartyMember)->unk_5F -= 16;
+        SELF(PartyMember)->unk_5D = count - 0x10;
+        SELF(PartyMember)->unk_5E -= 16;
+        SELF(PartyMember)->unk_5F -= 16;
     }
-    if ((s8)TASK(PartyMember)->unk_5D == -128) {
-        work   = TASK(PartyMember);
+    if ((s8)SELF(PartyMember)->unk_5D == -128) {
+        work   = SELF(PartyMember);
         source = BATTLE_ACTIVE_WORK;
         WorldPos_Copy(&work->pos, &source->pos);
         work->header.step += 1;
@@ -208,7 +208,7 @@ MATCH void func_801EF72C(void) {
     Magic001SecondSteps handlers;
 
     handlers = D_801EEC3C;
-    SYS_DISPATCH_TASK(handlers.steps, 1, g_Task);
+    SYS_DISPATCH_TASK(handlers.steps, 1, g_Self);
 }
 
 /* Copy the active battler into a new effect as func_801EECC4 does, then take the battler sprite
@@ -219,9 +219,9 @@ MATCH void func_801EF78C(void) {
     u32           index;
     u8            active;
 
-    TASK(PartyMember)->facing = g_BattleEffectBattler->facing;
-    WorldPos_Copy(&TASK(PartyMember)->pos, &g_BattleEffectBattler->pos);
-    TASK(PartyMember)->param.unk_0B = 1;
+    SELF(PartyMember)->facing = g_BattleEffectBattler->facing;
+    WorldPos_Copy(&SELF(PartyMember)->pos, &g_BattleEffectBattler->pos);
+    SELF(PartyMember)->param.unk_0B = 1;
     Battle_SelectActiveBattlerScript(8, 0);
     index  = Battle_AllocEffect(1, 79);
     active = g_Battle.active_battler;
@@ -240,20 +240,20 @@ MATCH void func_801EF78C(void) {
         image                   = (BattleWorkImage*)&g_BattleEnemyBattlers[enemy];
         *(BattleWorkImage*)slot = *image;
     }
-    work                                            = TASK(PartyMember);
+    work                                            = SELF(PartyMember);
     g_BattleEffects[index & BYTE_MASK].unk_06       = 1;
     g_BattleEffects[index & BYTE_MASK].header.mode  = 0;
     g_BattleEffects[index & BYTE_MASK].header.step  = 0;
     g_BattleEffects[index & BYTE_MASK].effect_type  = 79;
     g_BattleEffects[index & BYTE_MASK].arg.unk_09   = 0;
     g_BattleEffects[index & BYTE_MASK].target.party = work;
-    TASK(PartyMember)->unk_27                       = Battle_CopyCellPalette(g_BattleEffectBattler);
-    TASK(PartyMember)->unk_28                       = g_BattleEffectBattler->unk_28;
-    TASK(PartyMember)->unk_24                       = g_BattleEffectBattler->unk_24;
-    Battle_SetCellPaletteStp(TASK(PartyMember));
-    Battle_ClearCellPaletteEntry(g_Task);
+    SELF(PartyMember)->unk_27                       = Battle_CopyCellPalette(g_BattleEffectBattler);
+    SELF(PartyMember)->unk_28                       = g_BattleEffectBattler->unk_28;
+    SELF(PartyMember)->unk_24                       = g_BattleEffectBattler->unk_24;
+    Battle_SetCellPaletteStp(SELF(PartyMember));
+    Battle_ClearCellPaletteEntry(g_Self);
     g_BattleEffectBattler->header.flags |= PARTY_MEMBER_FLAG_HANDLER_BUSY;
-    TASK(PartyMember)->header.mode += 1;
+    SELF(PartyMember)->header.mode += 1;
 }
 
 MATCH void func_801EFA14(void) {
@@ -267,17 +267,17 @@ MATCH void Effect_StartPlaying6(void) {
 }
 
 MATCH void func_801EFAB8(void) {
-    SYS_DISPATCH_TASK((g_BMagicEffectModes + 1), 1, g_Task);
+    SYS_DISPATCH_TASK((g_BMagicEffectModes + 1), 1, g_Self);
 }
 
 MATCH void func_801EFAFC(void) {
     Callback handlers[7];
 
     memcpy(handlers, D_801EEC48, sizeof(handlers));
-    SYS_DISPATCH_BYTE(handlers, TASK(PartyMember)->header.step);
-    if (TASK(PartyMember)->header.flags != 0 && TASK(PartyMember)->header.step != 0) {
+    SYS_DISPATCH_BYTE(handlers, SELF(PartyMember)->header.step);
+    if (SELF(PartyMember)->header.flags != 0 && SELF(PartyMember)->header.step != 0) {
         Area_AddGridActor();
-        if (TASK(PartyMember)->header.step < 5) {
+        if (SELF(PartyMember)->header.step < 5) {
             func_801F014C();
             func_801F0238();
             PopMatrix();
@@ -286,26 +286,26 @@ MATCH void func_801EFAFC(void) {
 }
 
 MATCH void func_801EFBEC(void) {
-    TASK(PartyMember)->unk_27 = g_BattleEffectBattler->unk_27;
-    TASK(PartyMember)->unk_14 = 0x100;
-    TASK(PartyMember)->unk_20 = -0x10;
-    TASK(PartyMember)->unk_09 = 0;
-    TASK(PartyMember)->timer  = 16;
-    TASK(PartyMember)->header.step += 1;
+    SELF(PartyMember)->unk_27 = g_BattleEffectBattler->unk_27;
+    SELF(PartyMember)->unk_14 = 0x100;
+    SELF(PartyMember)->unk_20 = -0x10;
+    SELF(PartyMember)->unk_09 = 0;
+    SELF(PartyMember)->timer  = 16;
+    SELF(PartyMember)->header.step += 1;
 }
 
 MATCH void func_801EFC54(void) {
-    TASK(PartyMember)->unk_14 += TASK(PartyMember)->unk_20;
-    TASK(PartyMember)->pos.z.part.integer += TASK(PartyMember)->unk_14;
-    if (TASK(PartyMember)->timer != 0) {
-        TASK(PartyMember)->timer -= 1;
+    SELF(PartyMember)->unk_14 += SELF(PartyMember)->unk_20;
+    SELF(PartyMember)->pos.z.part.integer += SELF(PartyMember)->unk_14;
+    if (SELF(PartyMember)->timer != 0) {
+        SELF(PartyMember)->timer -= 1;
     }
-    if (TASK(PartyMember)->unk_14 == 0) {
-        TASK(PartyMember)->pos.x.fixed = g_Battle.selected_actor->pos.x.fixed;
-        TASK(PartyMember)->pos.y.fixed = g_Battle.selected_actor->pos.y.fixed;
-        TASK(PartyMember)->pos.z.fixed -= g_BattleEffectBattler->pos.z.fixed - g_Battle.selected_actor->pos.z.fixed;
-        TASK(PartyMember)->unk_09 = 0x0F;
-        TASK(PartyMember)->header.step += 1;
+    if (SELF(PartyMember)->unk_14 == 0) {
+        SELF(PartyMember)->pos.x.fixed = g_Battle.selected_actor->pos.x.fixed;
+        SELF(PartyMember)->pos.y.fixed = g_Battle.selected_actor->pos.y.fixed;
+        SELF(PartyMember)->pos.z.fixed -= g_BattleEffectBattler->pos.z.fixed - g_Battle.selected_actor->pos.z.fixed;
+        SELF(PartyMember)->unk_09 = 0x0F;
+        SELF(PartyMember)->header.step += 1;
     }
 }
 
@@ -314,24 +314,24 @@ MATCH void func_801EFD28(void) {
     u8  timer;
     u8  next;
 
-    timer                               = TASK(PartyMember)->timer;
-    value                               = TASK(PartyMember)->unk_14 + TASK(PartyMember)->unk_20;
-    TASK(PartyMember)->unk_14           = value;
-    COORD_INT(TASK(PartyMember)->pos.z) = COORD_INT(TASK(PartyMember)->pos.z) + value;
+    timer                               = SELF(PartyMember)->timer;
+    value                               = SELF(PartyMember)->unk_14 + SELF(PartyMember)->unk_20;
+    SELF(PartyMember)->unk_14           = value;
+    COORD_INT(SELF(PartyMember)->pos.z) = COORD_INT(SELF(PartyMember)->pos.z) + value;
     if (timer < 8U) {
-        TASK(PartyMember)->timer = timer + 1;
+        SELF(PartyMember)->timer = timer + 1;
     }
-    next                      = TASK(PartyMember)->unk_09 - 1;
-    TASK(PartyMember)->unk_09 = next;
+    next                      = SELF(PartyMember)->unk_09 - 1;
+    SELF(PartyMember)->unk_09 = next;
     if (!(next & BYTE_MASK)) {
         Battle_PlayActiveBattlerSE(2, 0);
         SND_SEQueueSelection(0x203);
-        TASK(PartyMember)->unk_14 = 0x40;
-        TASK(PartyMember)->unk_20 = -8;
-        TASK(PartyMember)->unk_0C = ratan2(g_BattleEffectBattler->pos.x.fixed - TASK(PartyMember)->pos.x.fixed, g_BattleEffectBattler->pos.y.fixed - TASK(PartyMember)->pos.y.fixed);
+        SELF(PartyMember)->unk_14 = 0x40;
+        SELF(PartyMember)->unk_20 = -8;
+        SELF(PartyMember)->unk_0C = ratan2(g_BattleEffectBattler->pos.x.fixed - SELF(PartyMember)->pos.x.fixed, g_BattleEffectBattler->pos.y.fixed - SELF(PartyMember)->pos.y.fixed);
         Battle_MarkDamaged(g_Battle.target_selector);
-        TASK(PartyMember)->unk_09 = 0x10;
-        TASK(PartyMember)->header.step += 1;
+        SELF(PartyMember)->unk_09 = 0x10;
+        SELF(PartyMember)->header.step += 1;
     }
 }
 
@@ -340,21 +340,21 @@ MATCH void func_801EFE38(void) {
     u8  value2;
     u8  value3;
 
-    TASK(PartyMember)->pos.x.fixed += (rsin(TASK(PartyMember)->unk_0C) << 0xD) >> 0xC;
-    TASK(PartyMember)->pos.y.fixed += (rcos(TASK(PartyMember)->unk_0C) << 0xD) >> 0xC;
-    value                               = TASK(PartyMember)->unk_14 + TASK(PartyMember)->unk_20;
-    TASK(PartyMember)->unk_14           = value;
-    COORD_INT(TASK(PartyMember)->pos.z) = COORD_INT(TASK(PartyMember)->pos.z) + value;
-    if (TASK(PartyMember)->unk_09 < 8U) {
-        value3 = TASK(PartyMember)->timer;
+    SELF(PartyMember)->pos.x.fixed += (rsin(SELF(PartyMember)->unk_0C) << 0xD) >> 0xC;
+    SELF(PartyMember)->pos.y.fixed += (rcos(SELF(PartyMember)->unk_0C) << 0xD) >> 0xC;
+    value                               = SELF(PartyMember)->unk_14 + SELF(PartyMember)->unk_20;
+    SELF(PartyMember)->unk_14           = value;
+    COORD_INT(SELF(PartyMember)->pos.z) = COORD_INT(SELF(PartyMember)->pos.z) + value;
+    if (SELF(PartyMember)->unk_09 < 8U) {
+        value3 = SELF(PartyMember)->timer;
         if (value3 < 0x10U) {
-            TASK(PartyMember)->timer = value3 + 1;
+            SELF(PartyMember)->timer = value3 + 1;
         }
     }
-    value2                    = TASK(PartyMember)->unk_09 - 1;
-    TASK(PartyMember)->unk_09 = value2;
+    value2                    = SELF(PartyMember)->unk_09 - 1;
+    SELF(PartyMember)->unk_09 = value2;
     if (!(value2 & BYTE_MASK)) {
-        TASK(PartyMember)->header.step += 1;
+        SELF(PartyMember)->header.step += 1;
     }
 }
 
@@ -366,18 +366,18 @@ MATCH void func_801EFFCC(void) {
     s8           count;
     u8           timer;
 
-    count = TASK(PartyMember)->unk_5D;
+    count = SELF(PartyMember)->unk_5D;
     if (count != -0x80) {
-        TASK(PartyMember)->unk_5D = count - 0x10;
-        TASK(PartyMember)->unk_5E -= 16;
-        TASK(PartyMember)->unk_5F -= 16;
+        SELF(PartyMember)->unk_5D = count - 0x10;
+        SELF(PartyMember)->unk_5E -= 16;
+        SELF(PartyMember)->unk_5F -= 16;
     }
-    timer = TASK(PartyMember)->timer;
+    timer = SELF(PartyMember)->timer;
     if (timer != 0) {
-        TASK(PartyMember)->timer = timer - 2;
+        SELF(PartyMember)->timer = timer - 2;
     }
-    if ((s8)TASK(PartyMember)->unk_5D == -128) {
-        work   = TASK(PartyMember);
+    if ((s8)SELF(PartyMember)->unk_5D == -128) {
+        work   = SELF(PartyMember);
         source = BATTLE_ACTIVE_WORK;
         WorldPos_Copy(&work->pos, &source->pos);
         work->header.step += 1;
@@ -398,9 +398,9 @@ MATCH void func_801F014C(void) {
     rot.vz = 0;
     rot.vy = 0;
     rot.vx = 0;
-    pos.vx = (TASK(PartyMember)->pos.x.fixed >> 9) - AREA_CELL_ORIGIN;
-    pos.vy = (TASK(PartyMember)->pos.y.fixed >> 9) - AREA_CELL_ORIGIN;
-    if (TASK(PartyMember)->header.step < 2) {
+    pos.vx = (SELF(PartyMember)->pos.x.fixed >> 9) - AREA_CELL_ORIGIN;
+    pos.vy = (SELF(PartyMember)->pos.y.fixed >> 9) - AREA_CELL_ORIGIN;
+    if (SELF(PartyMember)->header.step < 2) {
         pos.vz = -COORD_INT(g_BattleEffectBattler->pos.z) / 2;
     } else {
         pos.vz = -COORD_INT(g_BattleSelectedActor->pos.z) / 2;
@@ -421,8 +421,8 @@ MATCH void func_801F0238(void) {
 
     tpage = getTPage(TPAGE_DEPTH_4BIT, TPAGE_ABR_SUB, 320, 256);
     GFX_ADD_DITHERED_DRAW_MODE(BMAGIC_LAYER_BEHIND_BATTLERS, tpage);
-    g_ScratchPad.cells.halves[1] = TASK(PartyMember)->timer << 3;
-    g_ScratchPad.cells.halves[0] = TASK(PartyMember)->timer << 3;
+    g_ScratchPad.cells.halves[1] = SELF(PartyMember)->timer << 3;
+    g_ScratchPad.cells.halves[0] = SELF(PartyMember)->timer << 3;
     g_ScratchPadVectors[2].vx    = FIXED_MUL(rsin(0), g_ScratchPad.cells.halves[0]);
     g_ScratchPadVectors[2].vy    = FIXED_MUL(rcos(0), g_ScratchPad.cells.halves[0]);
 

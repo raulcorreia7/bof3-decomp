@@ -14,7 +14,7 @@ MATCH void Actor_SpawnWithAction(u8* script) {
         return;
     }
 
-    TASK_SET(&g_Actors[slot]);
+    SELF_SET(&g_Actors[slot]);
     GAME_WORK_AREA_PTR = &g_Actors[slot];
 
     g_ScratchPad.cells.ray.y = (script[1] << 8) | script[2];
@@ -22,11 +22,11 @@ MATCH void Actor_SpawnWithAction(u8* script) {
     Actor_ResetMotion();
     Area_SceneSelectRecord(g_ScratchPad.cells.ray.y);
 
-    TASK(Actor)->header.flags = ACTOR_FLAG_IN_USE;
+    SELF(Actor)->header.flags = ACTOR_FLAG_IN_USE;
 
     /* The outer shadow assignment forms the slot offset before the position
      * flag test, as retail schedules it. */
-    work                           = TASK(Actor);
+    work                           = SELF(Actor);
     g_Actors[*counter].walk_dest_x = work->pos.x.fixed = (script[7] << 16) | (script[6] != 0 ? 0x8000 : 0);
     /* FAKE: forces the counter re-read before the next shadow store. */
     FAKE_BARRIER();
@@ -37,11 +37,11 @@ MATCH void Actor_SpawnWithAction(u8* script) {
 
     g_Actors[*counter].unk_88 = 0;
 
-    COORD_INT(TASK(Actor)->pos.z) = Area_HeightSample(work->pos.x.fixed, work->pos.y.fixed);
-    TASK(Actor)->header.mode      = script[0xA];
-    TASK(Actor)->header.step      = script[0xC];
-    TASK(Actor)->direction        = script[0] & 0xF;
-    TASK(Actor)->unk_06           = script[0] >> 4;
+    COORD_INT(SELF(Actor)->pos.z) = Area_HeightSample(work->pos.x.fixed, work->pos.y.fixed);
+    SELF(Actor)->header.mode      = script[0xA];
+    SELF(Actor)->header.step      = script[0xC];
+    SELF(Actor)->direction        = script[0] & 0xF;
+    SELF(Actor)->unk_06           = script[0] >> 4;
 
     /* The headers declare the per-slot columns D_80146914 and D_80146916 as scalars. */
     FIELD(u16, &D_80146914, *counter * ACTOR_SIZE) = script[4];
@@ -55,13 +55,13 @@ MATCH void Actor_SpawnWithAction(u8* script) {
     Actor_SetOptionFlags(script + 0xD);
 
     if (script[3] & 0x80) {
-        TASK(Actor)->header.flags |= ACTOR_FLAG_SEMI_TRANSPARENT;
+        SELF(Actor)->header.flags |= ACTOR_FLAG_SEMI_TRANSPARENT;
     }
 
-    TASK(Actor)->tint.bytes.rgb.r = 0;
-    TASK(Actor)->tint.bytes.rgb.b = 0;
-    TASK(Actor)->tint.bytes.rgb.g = 0;
-    TASK(Actor)->tint.bytes.flags = script[3] & 0xF;
+    SELF(Actor)->tint.bytes.rgb.r = 0;
+    SELF(Actor)->tint.bytes.rgb.b = 0;
+    SELF(Actor)->tint.bytes.rgb.g = 0;
+    SELF(Actor)->tint.bytes.flags = script[3] & 0xF;
 
     Actor_StartFacingScript();
 

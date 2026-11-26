@@ -4,7 +4,7 @@ MATCH void func_801F2D7C(void) {
     Actor* scratch;
 
     FAKE_ORDER_LOCK_BEGIN
-        scratch              = TASK(Actor);
+        scratch              = SELF(Actor);
         g_AreaSceneMode      = 0;
         scratch->pos.x.fixed = 0x54;
         scratch->pos.y.fixed = 0;

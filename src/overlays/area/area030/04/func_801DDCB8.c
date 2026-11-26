@@ -6,5 +6,5 @@
 MATCH void func_801DDCB8(void) {
     UI_ModeSet(1);
     g_AreaDrawFlags     = AREA_DRAW_SORTED_RECORDS | 0x2 | AREA_DRAW_CELL_LAYERS | AREA_DRAW_APPEND_ACTOR_PRIMITIVES | AREA_DRAW_APPEND_AREA_PRIMITIVES;
-    TASK(Actor)->unk_03 = (TASK(Actor)->unk_03 + 1u);
+    SELF(Actor)->unk_03 = (SELF(Actor)->unk_03 + 1u);
 }

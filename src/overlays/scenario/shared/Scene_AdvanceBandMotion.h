@@ -12,18 +12,18 @@
     Actor* actor;                                                                                      \
     u8     timer;                                                                                      \
                                                                                                        \
-    work = g_Task;                                                                                     \
+    work = g_Self;                                                                                     \
     setVector(work, work->vx ADD work->unk_18, work->vy ADD work->unk_1C, work->vz ADD work->gravity); \
                                                                                                        \
     Camera_SetMatrix(&matrix);                                                                         \
                                                                                                        \
-    actor = g_Task;                                                                                    \
+    actor = g_Self;                                                                                    \
     PROJECT(&actor->pos.x, &actor->vx);                                                                \
                                                                                                        \
-    timer              = TASK(Actor)->timer - 1;                                                       \
-    TASK(Actor)->timer = timer;                                                                        \
+    timer              = SELF(Actor)->timer - 1;                                                       \
+    SELF(Actor)->timer = timer;                                                                        \
     if (timer == 0) {                                                                                  \
-        TASK(Actor)->header.mode++;                                                                    \
+        SELF(Actor)->header.mode++;                                                                    \
     }
 
 #endif

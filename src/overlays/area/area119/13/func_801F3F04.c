@@ -15,8 +15,8 @@ NON_MATCHING void func_801F3F04(s32 steps) {
 
     phase = (g_FrameCount * 4) & 7;
     step  = phase * steps;
-    x     = (TASK(Actor)->pos.x.fixed >> 9) - 0x4000;
-    y     = (TASK(Actor)->pos.y.fixed >> 9) - 0x4000;
+    x     = (SELF(Actor)->pos.x.fixed >> 9) - 0x4000;
+    y     = (SELF(Actor)->pos.y.fixed >> 9) - 0x4000;
     i     = 0;
     do {
         prim = (POLY_FT4*)g_GfxPrimCursor;
@@ -36,7 +36,7 @@ NON_MATCHING void func_801F3F04(s32 steps) {
         Area_ApplyTileToQuad((shade & 0xF80000) | (0xBAu << 24) | 0x9124u, prim, 1);
         prim->g0 >>= 1;
         i++;
-        Area_CellAddPrim(TASK(Actor)->pos.x.fixed, TASK(Actor)->pos.y.fixed, 1, sizeof(POLY_FT4));
+        Area_CellAddPrim(SELF(Actor)->pos.x.fixed, SELF(Actor)->pos.y.fixed, 1, sizeof(POLY_FT4));
     } while (i < 8);
 }
 #else

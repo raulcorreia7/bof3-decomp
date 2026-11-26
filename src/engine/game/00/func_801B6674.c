@@ -7,7 +7,7 @@ NON_MATCHING bool func_801B6674(void) {
     u8  flags;
     u16 pressed;
 
-    cell  = Area_CellGetCode(COORD_INT(TASK(Actor)->pos.x), COORD_INT(TASK(Actor)->pos.y));
+    cell  = Area_CellGetCode(COORD_INT(SELF(Actor)->pos.x), COORD_INT(SELF(Actor)->pos.y));
     flags = g_GameRequestFlags;
     if (!(flags & AREA_LOAD_FLAG_WORLD_MAP)) {
         return 0;
@@ -19,7 +19,7 @@ NON_MATCHING bool func_801B6674(void) {
                 return 0;
             }
             if (!(flags & AREA_LOAD_FLAG_NO_ACTOR_SCRIPT)) {
-                Actor_RequestRoute(TASK(Actor)->direction);
+                Actor_RequestRoute(SELF(Actor)->direction);
             }
             func_801B690C();
             g_AreaWalkFlags &= ~AREA_WALK_TRANSITION;
@@ -44,7 +44,7 @@ NON_MATCHING bool func_801B6674(void) {
             return 0;
         }
         if (!(g_GameRequestFlags & AREA_LOAD_FLAG_NO_ACTOR_SCRIPT)) {
-            Actor_RequestRoute(TASK(Actor)->direction);
+            Actor_RequestRoute(SELF(Actor)->direction);
         }
         {
             u16 area   = g_GameEntryAreaId;
@@ -52,10 +52,10 @@ NON_MATCHING bool func_801B6674(void) {
             u32 y      = g_GameEntryPosY;
             u8  facing = g_GameEntryFacing;
 
-            g_SaveData.return_point.x = TASK(Actor)->pos.x.fixed;
+            g_SaveData.return_point.x = SELF(Actor)->pos.x.fixed;
             g_SaveData.return_point.pending += 1;
             g_AreaWalkFlags &= ~AREA_WALK_TRANSITION;
-            g_SaveData.return_point.y       = TASK(Actor)->pos.y.fixed;
+            g_SaveData.return_point.y       = SELF(Actor)->pos.y.fixed;
             g_SaveData.return_point.area_id = g_GameAreaId;
             Game_RequestAreaChange(area, x, y, facing);
         }
@@ -64,7 +64,7 @@ NON_MATCHING bool func_801B6674(void) {
     if ((pressed & g_InputMasks[WORLD_INPUT_LOCATION_GUIDE]) && (u8)(cell + 0x60) < 2) {
         g_SceneEventState.mode = 0x1B;
         if (!(flags & AREA_LOAD_FLAG_NO_ACTOR_SCRIPT)) {
-            Actor_RequestRoute(TASK(Actor)->direction);
+            Actor_RequestRoute(SELF(Actor)->direction);
         }
         ACTOR_CLEAR_STEP();
         return 1;

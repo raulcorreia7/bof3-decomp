@@ -6,13 +6,13 @@ MATCH void BMagic_DrawRingQuads(void) {
     s16      x;
     s16      y;
 
-    x                            = TASK(PartyMember)->screen_x.value;
-    y                            = TASK(PartyMember)->screen_y.value;
+    x                            = SELF(PartyMember)->screen_x.value;
+    y                            = SELF(PartyMember)->screen_y.value;
     g_ScratchPad.cells.halves[0] = 8;
     g_ScratchPad.cells.halves[1] = 20;
-    g_ScratchPad.cells.halves[4] = (s8)TASK(PartyMember)->unk_5D * TASK(PartyMember)->unk_09;
-    g_ScratchPad.cells.halves[5] = (s8)TASK(PartyMember)->unk_5E * TASK(PartyMember)->unk_09;
-    g_ScratchPad.cells.halves[6] = (s8)TASK(PartyMember)->unk_5F * TASK(PartyMember)->unk_09;
+    g_ScratchPad.cells.halves[4] = (s8)SELF(PartyMember)->unk_5D * SELF(PartyMember)->unk_09;
+    g_ScratchPad.cells.halves[5] = (s8)SELF(PartyMember)->unk_5E * SELF(PartyMember)->unk_09;
+    g_ScratchPad.cells.halves[6] = (s8)SELF(PartyMember)->unk_5F * SELF(PartyMember)->unk_09;
     for (i = 0; i < 8; i++) {
         prim = (POLY_G4*)g_GfxPrimCursor;
         SetPolyG4(prim);
@@ -28,6 +28,6 @@ MATCH void BMagic_DrawRingQuads(void) {
         setRGB1(prim, 1, 1, 1);
         setRGB2(prim, g_ScratchPad.cells.halves[4], g_ScratchPad.cells.halves[5], g_ScratchPad.cells.halves[6]);
         setRGB3(prim, g_ScratchPad.cells.halves[4], g_ScratchPad.cells.halves[5], g_ScratchPad.cells.halves[6]);
-        Area_CellAddPrim(TASK(PartyMember)->pos.x.fixed, TASK(PartyMember)->pos.y.fixed, 2, sizeof(POLY_G4));
+        Area_CellAddPrim(SELF(PartyMember)->pos.x.fixed, SELF(PartyMember)->pos.y.fixed, 2, sizeof(POLY_G4));
     }
 }

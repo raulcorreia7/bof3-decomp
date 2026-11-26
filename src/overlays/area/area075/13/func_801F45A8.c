@@ -9,7 +9,7 @@ MATCH void func_801F45A8(void) {
         g_Area075OpponentGauge[0] = D_801F58CC - (rand() % 2 + 4);
         g_SpawnedActors[D_801F58CE[0]].vx -= 1;
         actor = &g_Actors[D_801F58CE[2]];
-        TASK_SET(actor);
+        SELF_SET(actor);
         actor->unk_4A = 1;
         Script_AnimStepLoop();
     }

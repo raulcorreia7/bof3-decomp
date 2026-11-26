@@ -4,6 +4,6 @@ MATCH void func_801F3B28(void) {
     g_AreaSceneMode = 1;
     if (SYS_TestFlag(g_SceneEventFlags, 42) != 0) {
         SND_SEPlay(EMI_SE_ID(SND_BANK_AREA, 2));
-        TASK(Actor)->header.step++;
+        SELF(Actor)->header.step++;
     }
 }

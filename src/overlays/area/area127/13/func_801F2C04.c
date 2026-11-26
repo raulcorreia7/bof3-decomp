@@ -8,6 +8,6 @@ MATCH s32 func_801F2C04(void) {
     if (g_Game.members[0].chr.character_id == CHAR_ID_MOMO) {
         SYS_SetFlag(g_SceneEventFlags, 50);
         Area_CellSetPalette(78, 51);
-        TASK(Actor)->header.flags = 0;
+        SELF(Actor)->header.flags = 0;
     }
 }

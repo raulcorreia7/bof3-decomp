@@ -5,22 +5,22 @@ MATCH void func_801F4334(void) {
     u16    x;
     s16    y;
 
-    task         = TASK(Actor);
+    task         = SELF(Actor);
     task->unk_32 = (task->unk_32 - (task->vz / 10000)) & 0xFFD;
 
-    TASK(Actor)->vx = rand() & 0x2000;
-    TASK(Actor)->vy = rand() & 0x2000;
+    SELF(Actor)->vx = rand() & 0x2000;
+    SELF(Actor)->vy = rand() & 0x2000;
 
-    if ((TASK(Actor)->screen_x & 0x800) != (TASK(Actor)->unk_32 & 0x800)) {
-        if ((s16)TASK(Actor)->screen_y >= 0x41) {
-            TASK(Actor)->param.facing = ((s16)TASK(Actor)->unk_32 >> 11) + 1;
+    if ((SELF(Actor)->screen_x & 0x800) != (SELF(Actor)->unk_32 & 0x800)) {
+        if ((s16)SELF(Actor)->screen_y >= 0x41) {
+            SELF(Actor)->param.facing = ((s16)SELF(Actor)->unk_32 >> 11) + 1;
         }
     }
 
-    y                     = TASK(Actor)->screen_y - 2;
-    x                     = TASK(Actor)->unk_32;
-    TASK(Actor)->screen_y = y;
-    TASK(Actor)->screen_x = x;
+    y                     = SELF(Actor)->screen_y - 2;
+    x                     = SELF(Actor)->unk_32;
+    SELF(Actor)->screen_y = y;
+    SELF(Actor)->screen_x = x;
     if (y == 0) {
         g_ScriptVars[0] += 1;
         func_80196070();

@@ -37,14 +37,14 @@ MATCH void func_801BFF9C(u32 work_type, u32 work_index, u32 work_mode) {
                 break;
             }
         }
-        TASK_SET(g_BattlePartyBattlers);
+        SELF_SET(g_BattlePartyBattlers);
         g_Game.party_size                              = 1;
         g_Game.members[0].slot                         = 0;
         g_BattlePartyBattlers[0].chr                   = g_Characters[0];
         g_Game.members[CHAR_INDEX_RYU].character_index = CHAR_INDEX_RYU;
         /* D_80145FBC stays an address symbol: FAKE_VOLATILE takes a plain lvalue and the member view changes the code. */
         FAKE_VOLATILE(u8, D_80145FBC) &= 0xFE;
-        TASK(Actor)->unk_48 = 0;
+        SELF(Actor)->unk_48 = 0;
         if (LOBU(g_GameRequestFlags) & 0x1) {
             if (g_Characters[CHAR_INDEX_RYU].character_id == CHAR_ID_RYU_YOUNG) {
                 id = 0x52;
@@ -59,7 +59,7 @@ MATCH void func_801BFF9C(u32 work_type, u32 work_index, u32 work_mode) {
             set_mode:
                 Area_SceneSelectRecord(id);
             }
-            TASK(Actor)->active_flags = 0;
+            SELF(Actor)->active_flags = 0;
             g_GameFlags |= 0x1000;
         } else if (LOBU(g_GameRequestFlags) & 0x8) {
             id = 0x1FD;
@@ -67,8 +67,8 @@ MATCH void func_801BFF9C(u32 work_type, u32 work_index, u32 work_mode) {
                 id = 0x47;
             }
             Area_SceneSelectRecord(id);
-            TASK(Actor)->mirror       = 0;
-            TASK(Actor)->active_flags = 0;
+            SELF(Actor)->mirror       = 0;
+            SELF(Actor)->active_flags = 0;
         } else if (LOBU(g_GameRequestFlags) & 0x40) {
             Party_MemberLoadSprite(g_Game.members[0].chr.character_id, 0);
         } else if (LOHU(g_GameAreaId) == AREA_ID_DESERT_OF_DEATH_MAP) {
@@ -89,12 +89,12 @@ MATCH void func_801BFF9C(u32 work_type, u32 work_index, u32 work_mode) {
                 work  = (u8*)addr;
                 off   = 0;
                 do {
-                    TASK_SET(work);
+                    SELF_SET(work);
                     *work |= 1;
                     *mask &= 0xFE;
-                    TASK(Actor)->pos.x.fixed                  = 0;
-                    TASK(Actor)->pos.y.fixed                  = 0;
-                    TASK(Actor)->pos.z.fixed                  = 0;
+                    SELF(Actor)->pos.x.fixed                  = 0;
+                    SELF(Actor)->pos.y.fixed                  = 0;
+                    SELF(Actor)->pos.z.fixed                  = 0;
                     type                                      = g_CharSlot[*order];
                     feed                                      = D_80145F04;
                     dst                                       = feed + off;
@@ -102,16 +102,16 @@ MATCH void func_801BFF9C(u32 work_type, u32 work_index, u32 work_mode) {
                     rec                                       = (Character*)(koff + (u32)base);
                     (&g_Game.members[0].character_index)[off] = type;
                     *(Character*)dst                          = *rec;
-                    if (!(TASK(Actor)->active_flags & 0x1)) {
+                    if (!(SELF(Actor)->active_flags & 0x1)) {
                         Party_MemberLoadSprite(*order, i & BYTE_MASK);
                         FAKE_BARRIER(); /* FAKE: keeps order++ past the call. */
                         order++;
                     } else {
                         Party_MemberLoadSprite(*order, i & BYTE_MASK);
                         order++;
-                        GFX_PaletteFreeFadeTarget(TASK(void));
-                        TASK(Actor)->clut_select = (TASK(Actor)->unk_05 + 0x78);
-                        GFX_PaletteLoad((TASK(Actor)->unk_05 << 6) + GAME_PALETTE_STAGE, 0);
+                        GFX_PaletteFreeFadeTarget(SELF(void));
+                        SELF(Actor)->clut_select = (SELF(Actor)->unk_05 + 0x78);
+                        GFX_PaletteLoad((SELF(Actor)->unk_05 << 6) + GAME_PALETTE_STAGE, 0);
                     }
                     mask += BATTLE_PARTY_STRIDE;
                     work += BATTLE_PARTY_STRIDE;

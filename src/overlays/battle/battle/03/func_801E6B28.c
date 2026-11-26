@@ -5,8 +5,8 @@ MATCH void func_801E6B28(void) {
     u32          type;
 
     Area_SceneSelectRecord(0x18);
-    TASK(PartyMember)->unk_24 = 0x80;
-    TASK(PartyMember)->unk_2A = 0;
+    SELF(PartyMember)->unk_24 = 0x80;
+    SELF(PartyMember)->unk_2A = 0;
     global                    = (u8*)(PARTY_STATE_PTR);
     type                      = *(u16*)((*(u32*)((global + 0x6380u)) + 2u));
     if ((D_801CA71C[type].mask & 0x200u) != 0u) {
@@ -14,5 +14,5 @@ MATCH void func_801E6B28(void) {
     } else {
         Script_Select(2);
     }
-    TASK(PartyMember)->header.mode += 1;
+    SELF(PartyMember)->header.mode += 1;
 }

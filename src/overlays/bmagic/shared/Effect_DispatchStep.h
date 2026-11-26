@@ -6,5 +6,5 @@ MATCH void Effect_DispatchStep(void) {
     EffectDispatchSteps handlers;
 
     handlers = D_801EEC10;
-    SYS_DISPATCH_TASK(handlers.steps, 2, g_Task);
+    SYS_DISPATCH_TASK(handlers.steps, 2, g_Self);
 }

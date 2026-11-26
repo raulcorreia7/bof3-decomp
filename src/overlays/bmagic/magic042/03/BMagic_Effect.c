@@ -13,16 +13,16 @@ MATCH void BMagic_BurstUpdate(void) {
 MATCH void BMagic_BurstInit(void) {
     u32 slot;
 
-    TASK(PartyMember)->facing       = g_BattleEffectBattler->facing;
-    TASK(PartyMember)->pos.x.fixed  = g_BattleEffectBattler->pos.x.fixed;
-    TASK(PartyMember)->pos.y.fixed  = g_BattleEffectBattler->pos.y.fixed;
-    TASK(PartyMember)->pos.z.fixed  = g_BattleEffectBattler->pos.z.fixed;
-    TASK(PartyMember)->param.unk_0B = 0;
-    TASK(PartyMember)->header.mode += 1;
+    SELF(PartyMember)->facing       = g_BattleEffectBattler->facing;
+    SELF(PartyMember)->pos.x.fixed  = g_BattleEffectBattler->pos.x.fixed;
+    SELF(PartyMember)->pos.y.fixed  = g_BattleEffectBattler->pos.y.fixed;
+    SELF(PartyMember)->pos.z.fixed  = g_BattleEffectBattler->pos.z.fixed;
+    SELF(PartyMember)->param.unk_0B = 0;
+    SELF(PartyMember)->header.mode += 1;
     slot                               = Battle_AllocEffect(1, BMAGIC_EFFECT_BURST) & BYTE_MASK;
-    g_BattleEffects[slot].target.party = TASK(PartyMember);
+    g_BattleEffects[slot].target.party = SELF(PartyMember);
     g_BattleEffects[slot].header.mode  = 0;
-    TASK(PartyMember)->param.unk_0B += 1;
+    SELF(PartyMember)->param.unk_0B += 1;
     SND_SEQueueSelection(0x100);
 }
 
@@ -36,39 +36,39 @@ MATCH void BMagic_BurstFlareUpdate(void) {
     BMagicBurstFlareSteps handlers;
 
     handlers = g_BMagicBurstFlareSteps;
-    SYS_DISPATCH_TASK(handlers.steps, 2, g_Task);
-    if (TASK(PartyMember)->header.flags & 0x1 && TASK(PartyMember)->header.step != 0) {
+    SYS_DISPATCH_TASK(handlers.steps, 2, g_Self);
+    if (SELF(PartyMember)->header.flags & 0x1 && SELF(PartyMember)->header.step != 0) {
         BMagic_BurstDrawGlow();
-        BMagic_BurstDrawRays(0, TASK(PartyMember)->unk_09);
-        BMagic_BurstDrawSpokes(TASK(PartyMember)->param.unk_0B + 8, TASK(PartyMember)->timer);
-        BMagic_BurstDrawSpokes(TASK(PartyMember)->param.unk_0B + 0x10, TASK(PartyMember)->timer);
-        BMagic_BurstDrawSpokes(TASK(PartyMember)->param.unk_0B + 0x18, TASK(PartyMember)->timer);
+        BMagic_BurstDrawRays(0, SELF(PartyMember)->unk_09);
+        BMagic_BurstDrawSpokes(SELF(PartyMember)->param.unk_0B + 8, SELF(PartyMember)->timer);
+        BMagic_BurstDrawSpokes(SELF(PartyMember)->param.unk_0B + 0x10, SELF(PartyMember)->timer);
+        BMagic_BurstDrawSpokes(SELF(PartyMember)->param.unk_0B + 0x18, SELF(PartyMember)->timer);
     }
 }
 
 /* func_801EEF08 */
 MATCH void BMagic_BurstFlareStart(void) {
-    TASK(PartyMember)->facing      = g_BattleEffectBattler->facing;
-    TASK(PartyMember)->pos.x.fixed = g_BattleEffectBattler->pos.x.fixed;
-    TASK(PartyMember)->pos.y.fixed = g_BattleEffectBattler->pos.y.fixed;
-    TASK(PartyMember)->pos.z.fixed = g_BattleEffectBattler->pos.z.fixed;
+    SELF(PartyMember)->facing      = g_BattleEffectBattler->facing;
+    SELF(PartyMember)->pos.x.fixed = g_BattleEffectBattler->pos.x.fixed;
+    SELF(PartyMember)->pos.y.fixed = g_BattleEffectBattler->pos.y.fixed;
+    SELF(PartyMember)->pos.z.fixed = g_BattleEffectBattler->pos.z.fixed;
     BMagic_BurstFlareOffset();
-    TASK(PartyMember)->param.unk_0B = 0;
-    TASK(PartyMember)->unk_09       = 0;
-    TASK(PartyMember)->timer        = 0;
-    TASK(PartyMember)->header.step += 1;
+    SELF(PartyMember)->param.unk_0B = 0;
+    SELF(PartyMember)->unk_09       = 0;
+    SELF(PartyMember)->timer        = 0;
+    SELF(PartyMember)->header.step += 1;
 }
 
 /* func_801EEFB8 */
 MATCH void BMagic_BurstFlareOpen(void) {
     PartyMember* work;
 
-    work = TASK(PartyMember);
+    work = SELF(PartyMember);
     work->param.unk_0B++;
-    work = TASK(PartyMember);
+    work = SELF(PartyMember);
     work->timer++;
     if (work->timer == 4) {
-        work = TASK(PartyMember);
+        work = SELF(PartyMember);
         work->header.step++;
     }
 }
@@ -77,12 +77,12 @@ MATCH void BMagic_BurstFlareOpen(void) {
 MATCH void BMagic_BurstFlareLengthen(void) {
     PartyMember* work;
 
-    work = TASK(PartyMember);
+    work = SELF(PartyMember);
     work->param.unk_0B++;
-    work = TASK(PartyMember);
+    work = SELF(PartyMember);
     work->unk_09 += 8;
     if (work->unk_09 == 80) {
-        work = TASK(PartyMember);
+        work = SELF(PartyMember);
         work->header.step++;
     }
 }
@@ -91,12 +91,12 @@ MATCH void BMagic_BurstFlareLengthen(void) {
 MATCH void BMagic_BurstFlareGrow(void) {
     u8 timer;
 
-    TASK(PartyMember)->param.unk_0B += 1;
-    TASK(PartyMember)->unk_09 += 4;
-    timer                    = TASK(PartyMember)->timer + 4;
-    TASK(PartyMember)->timer = timer;
+    SELF(PartyMember)->param.unk_0B += 1;
+    SELF(PartyMember)->unk_09 += 4;
+    timer                    = SELF(PartyMember)->timer + 4;
+    SELF(PartyMember)->timer = timer;
     if ((timer & BYTE_MASK) == 32) {
-        TASK(PartyMember)->header.step += 1;
+        SELF(PartyMember)->header.step += 1;
     }
 }
 
@@ -105,13 +105,13 @@ MATCH void BMagic_BurstFlareEnd(void) {
     u8 count;
     u8 timer_next;
 
-    TASK(PartyMember)->param.unk_0B += 1;
-    count = TASK(PartyMember)->unk_09;
+    SELF(PartyMember)->param.unk_0B += 1;
+    count = SELF(PartyMember)->unk_09;
     if (count != 0) {
-        TASK(PartyMember)->unk_09 = count - 0xC;
+        SELF(PartyMember)->unk_09 = count - 0xC;
     }
-    timer_next               = TASK(PartyMember)->timer - 4;
-    TASK(PartyMember)->timer = timer_next;
+    timer_next               = SELF(PartyMember)->timer - 4;
+    SELF(PartyMember)->timer = timer_next;
     if (!(timer_next & BYTE_MASK)) {
         g_BattleEffectBattler->param.unk_0B -= 1;
         Effect_Reset();
@@ -135,8 +135,8 @@ MATCH void BMagic_BurstDrawRays(u8 start, u16 radius) {
     s32      tpage;
     u8       i;
 
-    g_ScratchPad.cells.halves[0] = TASK(PartyMember)->screen_x.value;
-    g_ScratchPad.cells.halves[1] = TASK(PartyMember)->screen_y.value;
+    g_ScratchPad.cells.halves[0] = SELF(PartyMember)->screen_x.value;
+    g_ScratchPad.cells.halves[1] = SELF(PartyMember)->screen_y.value;
     tpage                        = getTPage(TPAGE_DEPTH_4BIT, TPAGE_ABR_ADD, 320, 256);
     GFX_AddDitheredDrawMode(BMAGIC_LAYER_OVER_BATTLERS, tpage);
     for (i = start; i < start + 32; i += 16) {
@@ -179,8 +179,8 @@ MATCH void BMagic_BurstDrawSpokes(u8 start, u16 radius) {
     s32      tpage;
     s16      i;
 
-    g_ScratchPad.cells.halves[0] = TASK(PartyMember)->screen_x.value;
-    g_ScratchPad.cells.halves[1] = TASK(PartyMember)->screen_y.value;
+    g_ScratchPad.cells.halves[0] = SELF(PartyMember)->screen_x.value;
+    g_ScratchPad.cells.halves[1] = SELF(PartyMember)->screen_y.value;
     tpage                        = getTPage(TPAGE_DEPTH_4BIT, TPAGE_ABR_ADD, 320, 256);
     GFX_AddDitheredDrawMode(BMAGIC_LAYER_OVER_BATTLERS, tpage);
     for (i = start; i < start + 128; i += 32) {
@@ -206,5 +206,5 @@ MATCH void BMagic_BurstDrawGlow(void) {
     s32      tpage;
     s32      i;
 
-    EFFECT_DRAW_GLOW_FAN((TASK(PartyMember)->timer >> 1) + (rand() & 3), 0x60);
+    EFFECT_DRAW_GLOW_FAN((SELF(PartyMember)->timer >> 1) + (rand() & 3), 0x60);
 }

@@ -10,10 +10,10 @@ MATCH void SYS_InitScratchpad(u8* panel) {
     s32    value;
     u8     index;
 
-    TASK(Actor)->header.flags = ACTOR_FLAG_IN_USE;
-    TASK(Actor)->active_flags = ACTOR_ACTIVE_READY;
-    TASK(Actor)->unk_48       = 1;
-    work                      = TASK(Actor);
+    SELF(Actor)->header.flags = ACTOR_FLAG_IN_USE;
+    SELF(Actor)->active_flags = ACTOR_ACTIVE_READY;
+    SELF(Actor)->unk_48       = 1;
+    work                      = SELF(Actor);
     work->scale.x             = ONE;
     work->scale.y             = ONE;
     value                     = FIELD(s32, panel, 0x4u);

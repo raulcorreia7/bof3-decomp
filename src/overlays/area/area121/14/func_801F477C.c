@@ -18,28 +18,28 @@ MATCH void func_801F477C(void) {
     s32       x_high;
     s32       y_high;
 
-    if (TASK(Actor)->header.step == 0) {
-        COORD_INT(TASK(Actor)->pos.y) += g_FrameCount & 0xF;
-        TASK(Actor)->header.step++;
+    if (SELF(Actor)->header.step == 0) {
+        COORD_INT(SELF(Actor)->pos.y) += g_FrameCount & 0xF;
+        SELF(Actor)->header.step++;
     }
     if ((g_AreaDrawFlags & AREA_DRAW_CELL_LAYERS) == 0) {
         return;
     }
 
-    width = TASK(Actor)->param.cloud_layer - 2;
-    TASK(Actor)->pos.y.fixed += 0x800 + (width << 10);
-    if (g_AreaMapBundle.height + 8 < COORD_INT(TASK(Actor)->pos.y)) {
-        COORD_INT(TASK(Actor)->pos.y) = -8;
+    width = SELF(Actor)->param.cloud_layer - 2;
+    SELF(Actor)->pos.y.fixed += 0x800 + (width << 10);
+    if (g_AreaMapBundle.height + 8 < COORD_INT(SELF(Actor)->pos.y)) {
+        COORD_INT(SELF(Actor)->pos.y) = -8;
     }
 
-    if (abs(g_AreaCamera.scroll_x.part.integer - COORD_INT(TASK(Actor)->pos.x)) >= WORLDMAP_CLOUD_DRAW_RANGE &&
-        abs(g_AreaCamera.scroll_y.part.integer - COORD_INT(TASK(Actor)->pos.y)) >= WORLDMAP_CLOUD_DRAW_RANGE) {
+    if (abs(g_AreaCamera.scroll_x.part.integer - COORD_INT(SELF(Actor)->pos.x)) >= WORLDMAP_CLOUD_DRAW_RANGE &&
+        abs(g_AreaCamera.scroll_y.part.integer - COORD_INT(SELF(Actor)->pos.y)) >= WORLDMAP_CLOUD_DRAW_RANGE) {
         return;
     }
 
     prim   = (POLY_FT4*)g_GfxPrimCursor;
-    x_high = (TASK(Actor)->pos.x.fixed >> 9) - (AREA_CELL_ORIGIN - AREA_CELL_HALF);
-    y_high = (TASK(Actor)->pos.y.fixed >> 9) - (AREA_CELL_ORIGIN - AREA_CELL_HALF);
+    x_high = (SELF(Actor)->pos.x.fixed >> 9) - (AREA_CELL_ORIGIN - AREA_CELL_HALF);
+    y_high = (SELF(Actor)->pos.y.fixed >> 9) - (AREA_CELL_ORIGIN - AREA_CELL_HALF);
     SetPolyFT4(prim);
     SetShadeTex(prim, 0);
     quad      = g_ScratchPadVectors;

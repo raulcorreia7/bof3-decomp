@@ -4,17 +4,17 @@
  * one wraps to -0x80, clears them and the scratch flags before advancing the
  * scratch state byte; any other value defers to the AREA030 handler. */
 MATCH void func_801D1434(void) {
-    TASK(FishingState)->tint_5D -= 0x10;
-    TASK(FishingState)->tint_5E -= 0x10;
-    TASK(FishingState)->tint_5F -= 0x10;
+    SELF(FishingState)->tint_5D -= 0x10;
+    SELF(FishingState)->tint_5E -= 0x10;
+    SELF(FishingState)->tint_5F -= 0x10;
 
-    if (TASK(FishingState)->tint_5D == -0x80) {
-        TASK(FishingState)->tint_5D = 0;
-        TASK(FishingState)->tint_5E = 0;
-        TASK(FishingState)->tint_5F = 0;
-        TASK(FishingState)->flags &= ~ACTOR_FLAG_SEMI_TRANSPARENT;
-        TASK(FishingState)->saved_value_27 = TASK(FishingState)->saved_index;
-        TASK(FishingState)->sub_index++;
+    if (SELF(FishingState)->tint_5D == -0x80) {
+        SELF(FishingState)->tint_5D = 0;
+        SELF(FishingState)->tint_5E = 0;
+        SELF(FishingState)->tint_5F = 0;
+        SELF(FishingState)->flags &= ~ACTOR_FLAG_SEMI_TRANSPARENT;
+        SELF(FishingState)->saved_value_27 = SELF(FishingState)->saved_index;
+        SELF(FishingState)->sub_index++;
     } else {
         func_801D11C0();
     }

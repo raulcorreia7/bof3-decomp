@@ -2,6 +2,6 @@
 
 MATCH void func_800C193C(void) {
     if (Script_AnimStepLoop() != 0) {
-        TASK(Actor)->unk_03 = 1;
+        SELF(Actor)->unk_03 = 1;
     }
 }

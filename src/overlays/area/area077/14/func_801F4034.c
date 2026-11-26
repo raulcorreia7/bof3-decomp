@@ -1,5 +1,5 @@
 #include "area077_14.h"
 
 MATCH void func_801F4034(void) {
-    SYS_DISPATCH_BYTE(D_801F6250 + 0x20, TASK(Actor)->header.mode);
+    SYS_DISPATCH_BYTE(D_801F6250 + 0x20, SELF(Actor)->header.mode);
 }

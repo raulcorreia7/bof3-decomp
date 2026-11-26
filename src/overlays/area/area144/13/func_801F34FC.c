@@ -38,10 +38,10 @@ MATCH u8 func_801F34FC(void) {
                 record[0x14] -= 0x10;
                 record[0x16] -= 0x10;
                 if (record[0x19] == 10) {
-                    task   = TASK(Actor);
-                    g_Task = (Actor*)&g_Game;
+                    task   = SELF(Actor);
+                    g_Self = (Actor*)&g_Game;
                     Script_Select(record[0x1A]);
-                    g_Task = task;
+                    g_Self = task;
                 }
                 if (--record[0x19] == 0) {
                     record[0x19] = 15;

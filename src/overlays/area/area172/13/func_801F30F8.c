@@ -4,7 +4,7 @@ MATCH void func_801F30F8(void) {
     s32 i;
     s32 value;
 
-    func_801F36C0(&TASK(Actor)->pos.x, (s16)TASK(Actor)->screen_x, 7);
+    func_801F36C0(&SELF(Actor)->pos.x, (s16)SELF(Actor)->screen_x, 7);
     if (*g_ScriptVars == 0xA) {
         Area_ClearWorkColumn();
         value = 0x800E48C0;
@@ -16,9 +16,9 @@ MATCH void func_801F30F8(void) {
             value += 0x2C;
         } while ((i & BYTE_MASK) < 0x20U);
         PopMatrix();
-        TASK(Actor)->unk_06           = 0;
-        TASK(Actor)->tint.bytes.rgb.r = 8;
-        TASK(Actor)->timer            = 120;
-        TASK(Actor)->header.mode += 1;
+        SELF(Actor)->unk_06           = 0;
+        SELF(Actor)->tint.bytes.rgb.r = 8;
+        SELF(Actor)->timer            = 120;
+        SELF(Actor)->header.mode += 1;
     }
 }

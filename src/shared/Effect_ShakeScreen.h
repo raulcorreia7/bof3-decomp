@@ -4,11 +4,11 @@ MATCH void Effect_ShakeScreen(void) {
     {
         PartyMember* work;
 
-        work         = TASK(PartyMember);
+        work         = SELF(PartyMember);
         work->unk_5D = -(work->param.unk_0B * 16);
-        work         = TASK(PartyMember);
+        work         = SELF(PartyMember);
         work->unk_5F = -(work->param.unk_0B * 16);
-        work         = TASK(PartyMember);
+        work         = SELF(PartyMember);
         work->unk_5E = -(work->param.unk_0B * 16);
     }
     Script_AnimStepOnce();
@@ -16,7 +16,7 @@ MATCH void Effect_ShakeScreen(void) {
         PartyMember* work;
         u8           old;
 
-        work         = TASK(PartyMember);
+        work         = SELF(PartyMember);
         old          = work->unk_09;
         work->unk_09 = old + 255;
         if (old == 0) {

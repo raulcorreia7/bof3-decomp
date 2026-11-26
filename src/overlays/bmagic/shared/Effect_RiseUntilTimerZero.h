@@ -1,6 +1,6 @@
 /* Raises the effect and clears the actor when the counter ends; verify every image after a change. */
 MATCH void Effect_RiseUntilTimerZero(void) {
-    PartyMember* work = TASK(PartyMember);
+    PartyMember* work = SELF(PartyMember);
     u8           timer;
 
     work->unk_14 += 0x20;

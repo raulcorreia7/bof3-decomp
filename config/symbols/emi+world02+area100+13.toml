@@ -2,7 +2,7 @@
 jtbl_801F2C04 = { addr = 0x801F2C04, type = "Callback", size = 0x14, source = "The switch table of func_801F37AC: 5 jump targets of its jr dispatch." }
 jtbl_801F2C1C = { addr = 0x801F2C1C, type = "Callback", size = 0x14, source = "The switch table of func_801F38D8: 5 jump targets of its jr dispatch." }
 Area_DrawMatrixLightPillar = { addr = 0x801F2D60, type = "func", source = "Draws a pillar of light at pos like Area_DrawLightPillar, with the camera matrix in a local of its own; one body shared by area100 and area145." }
-Actor_RunAreaStep = { addr = 0x801F35D4, type = "func", source = "Clears the work byte 0x48 and frees the palette fade target of the current g_Task." }
+Actor_RunAreaStep = { addr = 0x801F35D4, type = "func", source = "Clears the work byte 0x48 and frees the palette fade target of the current g_Self." }
 Area_AddCameraOffsetY4 = { addr = 0x801F3630, type = "func", source = "Adds 4 to g_AreaCameraOffsetY, the Y shift Camera_SetMatrix adds to the projected camera translation, and sets g_AreaCameraRefreshCount to 2 so the camera refreshes for two frames." }
 Area_SubCameraOffsetY4 = { addr = 0x801F3658, type = "func", source = "Subtracts 4 from g_AreaCameraOffsetY, the Y shift Camera_SetMatrix adds to the projected camera translation, and sets g_AreaCameraRefreshCount to 2 so the camera refreshes for two frames." }
 Area_ResetCameraOffsetY = { addr = 0x801F3680, type = "func", source = "Zeroes g_AreaCameraOffsetY, the Y shift of the camera, and sets g_AreaCameraRefreshCount to 2 so the camera refreshes for two frames." }

@@ -15,18 +15,18 @@ MATCH void func_801F35B0(void) {
 
     i = 0;
     do {
-        column = COORD_INT(TASK(Actor)->pos.x) + TASK(Actor)->direction;
-        if (TASK(Actor)->direction == 0) {
+        column = COORD_INT(SELF(Actor)->pos.x) + SELF(Actor)->direction;
+        if (SELF(Actor)->direction == 0) {
             column += i;
         }
         row_adjustment = 1;
-        y              = COORD_INT(TASK(Actor)->pos.y);
-        offset         = i * TASK(Actor)->direction;
-        row            = y + (TASK(Actor)->direction != 0 ? offset : offset + row_adjustment);
+        y              = COORD_INT(SELF(Actor)->pos.y);
+        offset         = i * SELF(Actor)->direction;
+        row            = y + (SELF(Actor)->direction != 0 ? offset : offset + row_adjustment);
         map            = (AreaMapBundle*)MAP_BUNDLE_BASE;
         entry          = (u8*)(map->grid_offset * 4 + (((map->width * map->height + 1) / 2) * 4 + (u32)map) + *(u16*)(column * 2 + (row * map->width * 2 + map->grid_offset * 4) + (u32)map) * 4);
         id             = Area_CellGetId(column, row);
-        if (TASK(Actor)->direction != 0) {
+        if (SELF(Actor)->direction != 0) {
             prim = g_AreaCellPrims[id][1].pad1;
             if (prim == 0) {
                 prim                        = Area_CellAllocPrimSlot();
@@ -46,6 +46,6 @@ MATCH void func_801F35B0(void) {
         i++;
     } while (i < 2);
     g_AreaCameraRefreshCount = 2;
-    TASK(Actor)->header.step++;
-    func_801F3950(TASK(Actor)->direction, COORD_INT(TASK(Actor)->pos.z));
+    SELF(Actor)->header.step++;
+    func_801F3950(SELF(Actor)->direction, COORD_INT(SELF(Actor)->pos.z));
 }

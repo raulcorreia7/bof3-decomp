@@ -37,7 +37,7 @@ g_PartyFloorDamageColors = { addr = 0x80195FEC, source = "The damage colour inde
 g_PartyFloorDamages = { addr = 0x80195FF8, source = "The floor damage rows, indexed by the damage cell type 0x80 + n: HP loss, AP loss and the ailment of each." }
 g_PartyDamageColors = { addr = 0x80196014, source = "The four 15-bit colours Party_FlashDamage floods the palette row with: red, purple, yellow, blue." }
 Actor_FindFreeSpawned = { addr = 0x8019601C, type = "func", source = "Returns the index of the first g_SpawnedActors entry whose header.flags is 0, or 0xFF when all ACTOR_SLOT_COUNT are in use (the other array is searched by Actor_FindFreeField)." }
-Actor_Clear = { addr = 0x80196070, type = "func", source = "Frees the current g_Task actor: clears header.flags, header.mode (byte 0x01), the step (byte 0x02) and bytes 0x03 and 0x04." }
+Actor_Clear = { addr = 0x80196070, type = "func", source = "Frees the current g_Self actor: clears header.flags, header.mode (byte 0x01), the step (byte 0x02) and bytes 0x03 and 0x04." }
 Actor_Free = { addr = 0x801960C0, type = "func", source = "Frees g_SpawnedActors[record_index]: clears header.flags, header.mode (byte 0x01), the step (byte 0x02) and bytes 0x03 and 0x04." }
 Actor_ClearAll = { addr = 0x8019611C, type = "func", source = "Frees every one of the ACTOR_SLOT_COUNT g_SpawnedActors entries; Title_StartSelectedGame calls it before the next game." }
 Actor_Create = { addr = 0x8019615C, type = "func", source = "Claims a free g_SpawnedActors entry for a spawn request: sets header.flags to 1 and fills type, x and y (whole part and half cell), z from Area_HeightSample and link from the request bytes 1 to 6; does nothing when no slot is free." }
@@ -135,7 +135,7 @@ Actor_RockHit = { addr = 0x8019C028, type = "func", source = "Marks the field ac
 Actor_RockSetTarget = { addr = 0x8019C124, type = "func", source = "Sets unk_18 to the next or current cell edge along vx or vy (the step byte selects the next edge when moving forward) and enters mode 3." }
 Actor_RockIsBlockedAhead = { addr = 0x8019C1E4, type = "func", source = "Calls Actor_RockIsPointBlocked at two facing steps from the rock position." }
 Actor_RockIsBlockedAtEdge = { addr = 0x8019C244, type = "func", source = "Calls Actor_RockIsPointBlocked at the rock position moved to the cell edge it faces." }
-Actor_RockIsPointBlocked = { addr = 0x8019C344, type = "func", source = "the body returns g_Task->vx" }
+Actor_RockIsPointBlocked = { addr = 0x8019C344, type = "func", source = "the body returns g_Self->vx" }
 Actor_RockIsCellBlocked = { addr = 0x8019C4F0, type = "func", source = "Nonzero for an empty map grid cell, a cell code 0xF0 within 0x100 of the rock height, or at equal height a code 0x10, 0x2x or 0xAx, or a rock below the ground." }
 Actor_BlockRun = { addr = 0x8019CB94, type = "func", source = "Runs the mode handler of the current block actor (type 0x30, the block Garr pushes) by header.mode through g_ActorBlockModes." }
 Actor_BlockStart = { addr = 0x8019CBD8, type = "func", source = "Block mode 0: faces up, sets the tint deltas to -0x80, claims the cells under the block, clears the push request and enters mode 1." }
@@ -173,7 +173,7 @@ Actor_PaceFree = { addr = 0x801A225C, type = "func", source = "Steps 0 to 3 of g
 Actor_PaceByPartyStep = { addr = 0x801A22CC, type = "func", source = "Step 4 of g_ActorPaceSteps: adds 1 to the move counter when bit 0 of g_EncounterSteps differs from the copy Actor_RunInteractions took." }
 Actor_PaceByPartyStepDouble = { addr = 0x801A239C, type = "func", source = "Step 5 of g_ActorPaceSteps: adds 2 to the move counter when bit 0 of g_EncounterSteps differs from the copy Actor_RunInteractions took." }
 Actor_PaceByPartyStepBit1 = { addr = 0x801A246C, type = "func", source = "Step 6 of g_ActorPaceSteps: adds 1 to the move counter when bit 1 of g_EncounterSteps differs from the copy Actor_RunInteractions took." }
-Area_SetXFixed = { addr = 0x801A253C, type = "func", source = "the body stores into g_Task->pos.x.fixed" }
+Area_SetXFixed = { addr = 0x801A253C, type = "func", source = "the body stores into g_Self->pos.x.fixed" }
 Actor_RunRouteWait = { addr = 0x801A271C, type = "func", source = "Mode 5 of g_ActorModes: counts byte 0x75 down (set by the script group SET_UNK_01), raising the script request bit each frame, then restores unk_03 as the mode." }
 Actor_StartRouteWait = { addr = 0x801A275C, type = "func", source = "Stores the mode in unk_03 and sets mode 5 (Actor_RunRouteWait); Actor_RunRoute calls it when the script left a wait in byte 0x75." }
 Actor_RunMode = { addr = 0x801A2788, type = "func", source = "Runs the g_ActorModes handler of the mode byte the script operand gives on g_CurrentActor; script control op SELECT_ROUTE calls it." }
@@ -204,7 +204,7 @@ Area_SkipSetupChainBody = { addr = 0x801A46E8, type = "func", source = "Setup st
 Area_SkipSetupIf = { addr = 0x801A4798, type = "func", source = "Steps over a 0xF0 or 0xF1 setup block." }
 Area_SkipSetupIfChain = { addr = 0x801A4844, type = "func", source = "Steps over a 0xF4 setup chain." }
 Actor_StartFacingScript = { addr = 0x801A4914, type = "func", source = "Starts the animation script for the facing direction of a newly spawned map actor." }
-Actor_SetOptionFlags = { addr = 0x801A4990, type = "func", source = "the body stores into g_Task->option_flags" }
+Actor_SetOptionFlags = { addr = 0x801A4990, type = "func", source = "the body stores into g_Self->option_flags" }
 Actor_ResetMotion = { addr = 0x801A4AA8, type = "func", source = "Clears a spawned actor's scale, roll and animation callback state." }
 Actor_TurnRampClear = { addr = 0x801A4B80, type = "func", source = "Clears the turn ramp of one party slot." }
 Area_CellSetCode = { addr = 0x801A4BC0, type = "func", source = "Writes the g_AreaCellCodes byte of the cell at (column, row); Area_CellGetCode reads the same index." }
@@ -452,7 +452,7 @@ Area_ClimbDismountExit = { addr = 0x801C5474, type = "func", source = "Counts th
 Area_ClimbUp = { addr = 0x801C5558, type = "func", source = "Raises the actor 16 units; once it reaches the height of the ground ahead it enters the dismount step." }
 Area_ClimbDown = { addr = 0x801C5620, type = "func", source = "Lowers the actor 16 units; at the ground height it selects the facing's animation and returns the member to the walk mode." }
 Area_ClimbJumpOff = { addr = 0x801C56E4, type = "func", source = "Jumps off the ladder: flips the facing, requests the jump animation, clears the velocity, sets gravity -8 and enters mode 2 at the dismount exit." }
-Actor_ClearVelocity = { addr = 0x801C5798, type = "func", source = "Zeroes the velocity members of the current g_Task (+0x0C, +0x10 and vz) that Actor_ApplyVelocity integrates into x and y." }
+Actor_ClearVelocity = { addr = 0x801C5798, type = "func", source = "Zeroes the velocity members of the current g_Self (+0x0C, +0x10 and vz) that Actor_ApplyVelocity integrates into x and y." }
 Actor_Move = { addr = 0x801C57B4, type = "func", source = "Adds the running task's velocity (vx, vy, vz) to its position; the field actor step bodies call it every frame." }
 Area_SetFacingOffsetX = { addr = 0x801C5DFC, type = "func", source = "the body stores into g_FacingOffsets[route_index].x" }
 Area_ScrollStartRoute = { addr = 0x801C601C, type = "func", source = "writes the route record at D_80143FBC, copies the party position and scroll target and calls Area_ScrollAdvance" }
@@ -497,29 +497,29 @@ D_801C7C5C = { addr = 0x801C7C5C, size = 0x14, source = "Pointers to the five me
 g_ActorTypes = { addr = 0x801C7C70, size = 0x2EC, source = "187 actor handlers, indexed by the type of each active g_SpawnedActors entry by Actor_DispatchAll; they live in the resident image and in the shared, area and scenario windows." }
 g_WorldMapRegions = { addr = 0x801C7F5C, type = "WorldMapRegion", size = 0x134, source = "world map region steps and map points selected by WorldMap_FindRegion" }
 D_801C7F74 = { addr = 0x801C7F74, size = 0x1, alias = true, source = "The first byte of g_WorldMapRegions, the area id WorldMap_FindRegion compares as it scans the region rows." }
-D_801C8090 = { addr = 0x801C8090, size = 0xC, source = "The three mode handlers func_8019A3FC, func_8019A53C and func_8019A7D4 that func_8019A3B8 runs by g_Task->header.mode." }
-s_SceneHandlerIds = { addr = 0x801C809C, size = 0x8, source = "Scene handler id by entry; func_8019A3FC passes the entry for g_Task->unk_06 to the scene handler dispatcher." }
-D_801C80A4 = { addr = 0x801C80A4, size = 0x18, source = "The six handlers func_8019A53C runs by g_Task->unk_06: five share func_8019A580, one is func_8019A6AC and one func_8019A630." }
-D_801C80BC = { addr = 0x801C80BC, size = 0xC, source = "The three mode handlers func_8019A3FC, func_8019A848 and func_8019A7D4 that func_8019A804 runs by g_Task->header.mode." }
-D_801C80C8 = { addr = 0x801C80C8, size = 0x18, source = "The six handlers func_8019A848 runs by g_Task->unk_06, the same set as D_801C80A4." }
+D_801C8090 = { addr = 0x801C8090, size = 0xC, source = "The three mode handlers func_8019A3FC, func_8019A53C and func_8019A7D4 that func_8019A3B8 runs by g_Self->header.mode." }
+s_SceneHandlerIds = { addr = 0x801C809C, size = 0x8, source = "Scene handler id by entry; func_8019A3FC passes the entry for g_Self->unk_06 to the scene handler dispatcher." }
+D_801C80A4 = { addr = 0x801C80A4, size = 0x18, source = "The six handlers func_8019A53C runs by g_Self->unk_06: five share func_8019A580, one is func_8019A6AC and one func_8019A630." }
+D_801C80BC = { addr = 0x801C80BC, size = 0xC, source = "The three mode handlers func_8019A3FC, func_8019A848 and func_8019A7D4 that func_8019A804 runs by g_Self->header.mode." }
+D_801C80C8 = { addr = 0x801C80C8, size = 0x18, source = "The six handlers func_8019A848 runs by g_Self->unk_06, the same set as D_801C80A4." }
 g_CameraAnglePanModes = { addr = 0x801C80E0, source = "Indexed by header.mode in Camera_PanAngleRun: start, step, end." }
 g_CameraZoomPanModes = { addr = 0x801C80EC, source = "Indexed by header.mode in Camera_PanZoomRun: start, step, end." }
 g_ActorTossModes = { addr = 0x801C80F8, source = "Indexed by header.mode in Actor_TossRun: start, launch, fall, clear." }
 s_ActorTossArcs = { addr = 0x801C8108, source = "Actor_TossLaunch starts a toss at step 0..2 with its vertical speed in the first member and gravity in the second", size = 0x18 }
 D_801C810C = { addr = 0x801C810C, alias = true, source = "s_ActorTossArcs +0x4, folded into that table in #400" }
-D_801C8120 = { addr = 0x801C8120, size = 0xC, source = "The three mode handlers func_8019B150, func_8019B1E8 and Actor_ClearSelf that func_8019B10C runs by g_Task->header.mode." }
+D_801C8120 = { addr = 0x801C8120, size = 0xC, source = "The three mode handlers func_8019B150, func_8019B1E8 and Actor_ClearSelf that func_8019B10C runs by g_Self->header.mode." }
 g_ActorRockModes = { addr = 0x801C812C, source = "The six rock mode handlers (start, wait, roll, settle, end, rest) that Actor_RockRun runs by header.mode." }
-D_801C8144 = { addr = 0x801C8144, size = 0x10, source = "The four mode handlers func_8019C664, func_8019C794, func_8019C910 and func_8019C954 that func_8019C620 runs by g_Task->header.mode." }
+D_801C8144 = { addr = 0x801C8144, size = 0x10, source = "The four mode handlers func_8019C664, func_8019C794, func_8019C910 and func_8019C954 that func_8019C620 runs by g_Self->header.mode." }
 g_ActorBlockModes = { addr = 0x801C8154, source = "The four block mode handlers (start, wait, slide, shatter) that Actor_BlockRun runs by header.mode." }
-D_801C8164 = { addr = 0x801C8164, size = 0x18, source = "The six mode handlers func_8019DE10, func_8019E264, func_8019E424, func_8019E780, func_8019E918 and func_8019EAD4 that func_8019DDCC runs by g_Task->header.mode." }
-D_801C817C = { addr = 0x801C817C, size = 0x10, source = "The four step handlers func_8019DE54, func_8019DF8C, func_8019DFB4 and func_8019E1A0 that func_8019DE10 runs by g_Task->header.step." }
+D_801C8164 = { addr = 0x801C8164, size = 0x18, source = "The six mode handlers func_8019DE10, func_8019E264, func_8019E424, func_8019E780, func_8019E918 and func_8019EAD4 that func_8019DDCC runs by g_Self->header.mode." }
+D_801C817C = { addr = 0x801C817C, size = 0x10, source = "The four step handlers func_8019DE54, func_8019DF8C, func_8019DFB4 and func_8019E1A0 that func_8019DE10 runs by g_Self->header.step." }
 s_AreaSeIds = { addr = 0x801C818C, size = 0xC, source = "Sound SE id per world id; func_8019DFB4 scans it from index 8 for the current world id." }
-D_801C8198 = { addr = 0x801C8198, size = 0x8, source = "The two step handlers func_8019E2A8 and func_8019E36C that func_8019E264 runs by g_Task->header.step." }
-D_801C81A0 = { addr = 0x801C81A0, size = 0x10, source = "The four step handlers func_8019E468, func_8019E4A8, func_8019E5D4 and func_8019E6F8 that func_8019E424 runs by g_Task->header.step." }
-D_801C81B0 = { addr = 0x801C81B0, size = 0x8, source = "The two step handlers func_8019E7C4 and func_8019E884 that func_8019E780 runs by g_Task->header.step." }
-D_801C81B8 = { addr = 0x801C81B8, size = 0x8, source = "The two step handlers func_8019E95C and func_8019EA60 that func_8019E918 runs by g_Task->header.step." }
-D_801C81C0 = { addr = 0x801C81C0, size = 0xC, source = "The three mode handlers func_8019EB38, func_8019EC20 and func_8019ED40 that func_8019EAF4 runs by g_Task->header.mode." }
-D_801C81CC = { addr = 0x801C81CC, size = 0x10, source = "The four mode handlers func_8019F310, func_8019F384, func_8019F430 and func_8019F4F8 that func_8019F2CC runs by g_Task->header.mode." }
+D_801C8198 = { addr = 0x801C8198, size = 0x8, source = "The two step handlers func_8019E2A8 and func_8019E36C that func_8019E264 runs by g_Self->header.step." }
+D_801C81A0 = { addr = 0x801C81A0, size = 0x10, source = "The four step handlers func_8019E468, func_8019E4A8, func_8019E5D4 and func_8019E6F8 that func_8019E424 runs by g_Self->header.step." }
+D_801C81B0 = { addr = 0x801C81B0, size = 0x8, source = "The two step handlers func_8019E7C4 and func_8019E884 that func_8019E780 runs by g_Self->header.step." }
+D_801C81B8 = { addr = 0x801C81B8, size = 0x8, source = "The two step handlers func_8019E95C and func_8019EA60 that func_8019E918 runs by g_Self->header.step." }
+D_801C81C0 = { addr = 0x801C81C0, size = 0xC, source = "The three mode handlers func_8019EB38, func_8019EC20 and func_8019ED40 that func_8019EAF4 runs by g_Self->header.mode." }
+D_801C81CC = { addr = 0x801C81CC, size = 0x10, source = "The four mode handlers func_8019F310, func_8019F384, func_8019F430 and func_8019F4F8 that func_8019F2CC runs by g_Self->header.mode." }
 g_TaskModes = { addr = 0x801C81DC, type = "Callback", size = 0x1A4, source = "callbacks selected by the current task mode" }
 s_EntityModes = { addr = 0x801C8380, size = 0x4, source = "Entity mode byte by scene entry mode, read by func_8019FF88." }
 D_801C8384 = { addr = 0x801C8384, size = 0x38, source = "The 28 entity seed values func_801A02E8 compares against the entity's seed byte." }
@@ -528,8 +528,8 @@ g_ActorModes = { addr = 0x801C83D8, source = "The mode handlers of the field act
 s_EntityRouteIndices = { addr = 0x801C8404, size = 0x20, source = "The four route indices of each direction that func_801A27C4 walks." }
 g_ActorFacingAngles = { addr = 0x801C8424, size = 0x10, source = "The eight facing angles func_801A3080 picks by route type: 0x600 to 0xE00 in 0x200 steps, wrapping at the fifth entry; SYS_InitScratchpad seeds angle_z from it by direction." }
 D_801C842A = { addr = 0x801C842A, size = 0x1, alias = true, source = "The second half of the facing-angle table g_ActorFacingAngles from its fourth u16, used as an array by func_801A3080." }
-D_801C8434 = { addr = 0x801C8434, size = 0x8, source = "The two fade handlers Game_FadeStartWhite and func_801A3648 that func_801A3594 runs by g_Task->unk_04." }
-D_801C843C = { addr = 0x801C843C, size = 0x8, source = "The two fade handlers Game_FadeStartBlack and func_801A386C that func_801A37D4 runs by g_Task->unk_04." }
+D_801C8434 = { addr = 0x801C8434, size = 0x8, source = "The two fade handlers Game_FadeStartWhite and func_801A3648 that func_801A3594 runs by g_Self->unk_04." }
+D_801C843C = { addr = 0x801C843C, size = 0x8, source = "The two fade handlers Game_FadeStartBlack and func_801A386C that func_801A37D4 runs by g_Self->unk_04." }
 s_ScriptOpcodeLengths = { addr = 0x801C8444, size = 0x10, source = "Length in bytes of each script opcode; the script walkers (Area_SkipSetupBlockStep, Area_SkipSetupChainBody, func_801A4798, func_801A4844, func_801A4BF8) advance the cursor by it." }
 g_ScenarioHandlers = { addr = 0x801C8454, size = 0x50, source = "Step tables of the scenarios, indexed by g_ScenarioState.scenario_id by Game_ScenarioUpdate." }
 g_SceneSteps = { addr = 0x801C84A4, size = 0x8, source = "Scene update callbacks, indexed by the scene state byte D_801448EA by Game_UpdateScene." }
@@ -564,17 +564,17 @@ s_RouteStepScratch = { addr = 0x801CD06C, size = 0x20, source = "Actor_RequestRo
 s_EntityPlacementOffsets = { addr = 0x801CD08C, size = 0x20, source = "s8 x, y pairs that Game_LeaderSwitchGather and func_801B21E8 search for an entity position." }
 D_801CD08D = { addr = 0x801CD08D, size = 0x1, alias = true, source = "The first byte of s_EntityPlacementOffsets, which Game_LeaderSwitchGather and func_801B21E8 read as an array by entity index." }
 g_PartyLeaderModes = { addr = 0x801CD0AC, source = "The 15 field task mode handlers of the leader; Party_RunLeader runs the one header.mode selects." }
-D_801CD0E8 = { addr = 0x801CD0E8, size = 0xC, source = "The three step handlers func_801B0320 runs by g_Task->header.step." }
+D_801CD0E8 = { addr = 0x801CD0E8, size = 0xC, source = "The three step handlers func_801B0320 runs by g_Self->header.step." }
 D_801CD0F4 = { addr = 0x801CD0F4, size = 0x8, source = "The four sound SE func_801B0E44 plays by the route byte: 0x103, 0x109, 0x10A and the silent 0." }
 g_GameLeaderSwitchSteps = { addr = 0x801CD0FC, source = "The five steps of the leader switch; Game_LeaderSwitchRun runs the one header.step selects." }
-D_801CD110 = { addr = 0x801CD110, size = 0x8, source = "The two step handlers func_801B29BC runs by g_Task->header.step." }
-D_801CD118 = { addr = 0x801CD118, size = 0x8, source = "The two step handlers func_801B2A70 runs by g_Task->header.step." }
-D_801CD120 = { addr = 0x801CD120, size = 0x10, source = "The four step handlers func_801B2D90 runs by g_Task->header.step." }
+D_801CD110 = { addr = 0x801CD110, size = 0x8, source = "The two step handlers func_801B29BC runs by g_Self->header.step." }
+D_801CD118 = { addr = 0x801CD118, size = 0x8, source = "The two step handlers func_801B2A70 runs by g_Self->header.step." }
+D_801CD120 = { addr = 0x801CD120, size = 0x10, source = "The four step handlers func_801B2D90 runs by g_Self->header.step." }
 g_AreaClimbSteps = { addr = 0x801CD130, size = 0x10, source = "the four step handlers of field task mode 8 (Area_Climb) indexed by header.step: grab, mount (Area_ClimbMount), climb with up, down and Interact, dismount (Area_ClimbDismount)" }
 g_AreaClimbMountSteps = { addr = 0x801CD140, size = 0x14, source = "the five unk_03 steps of Area_ClimbMount, walking the actor onto the ladder before step 2 of g_AreaClimbSteps" }
 g_AreaClimbDismountSteps = { addr = 0x801CD154, size = 0x10, source = "the four unk_03 steps of Area_ClimbDismount, walking the actor off the ladder" }
 g_PersonalActions = { addr = 0x801CD164, size = 0x4C, source = "The personal action dispatcher of each party combination module (plchar/plp*), indexed by the loaded party row &0x7F; it picks the leader's member position in the row (work byte unk_2C). FIELD_TASK_MODE_PERSONAL_ACTION calls it; started by Game_RequestPersonalAction, Game_RequestGarrPush and Game_RequestRockKick" }
-D_801CD1B0 = { addr = 0x801CD1B0, size = 0x8, source = "The two step handlers func_801B371C runs by g_Task->header.step." }
+D_801CD1B0 = { addr = 0x801CD1B0, size = 0x8, source = "The two step handlers func_801B371C runs by g_Self->header.step." }
 s_EncounterStepThresholds = { addr = 0x801CD1B8, size = 0x10, source = "Pairs of total steps and random cap per menu entry, read by Area_EncounterRollThreshold." }
 D_801CD1B9 = { addr = 0x801CD1B9, size = 0x1, alias = true, source = "The encounter caps Area_EncounterRollThreshold reads by the entry's fifth byte times two." }
 s_MenuBattlerTypes = { addr = 0x801CD1C8, size = 0x4, source = "The three battler types Party_CanSwitchLeader accepts; it rejects a party whose status byte is none of them." }
@@ -600,7 +600,7 @@ g_PartyFallThroughSteps = { addr = 0x801CD374, source = "Sub-steps of the fall s
 g_PartyFloorDamageSteps = { addr = 0x801CD37C, source = "Sub-steps of the floor damage step, indexed by the actor's unk_03 by Party_FloorDamageRun." }
 D_801CD384 = { addr = 0x801CD384, size = 0x80, source = "The 128-byte route step table at 0x801CD384; no matched code reads it." }
 g_PartyFollowerModes = { addr = 0x801CD404, source = "The 15 field task mode handlers of a follower; Party_RunFollower runs the one header.mode selects." }
-D_801CD440 = { addr = 0x801CD440, size = 0x8, source = "The two step handlers func_801BBFB4 runs by g_Task->header.step." }
+D_801CD440 = { addr = 0x801CD440, size = 0x8, source = "The two step handlers func_801BBFB4 runs by g_Self->header.step." }
 g_AreaClimbFollowerSteps = { addr = 0x801CD448, source = "The four ladder step handlers of a follower (grab, mount, follow the ladder, dismount): Area_ClimbFollower runs the one header.step selects." }
 s_CameraScrollDeltas = { addr = 0x801CD458, size = 0x8, source = "x, y pair per g_BattleScrollDir added to the camera work record by func_801BF11C and func_801BF5A8." }
 D_801CD459 = { addr = 0x801CD459, alias = true, source = "s_CameraScrollDeltas +0x1, the y half of the first GameDelta pair (#379)" }
@@ -632,7 +632,7 @@ D_801CD8C0 = { addr = 0x801CD8C0, size = 0x4, source = "The number of enemies Ar
 D_801CD8C4 = { addr = 0x801CD8C4, size = 0x4, source = "The index of the next enemy slot Area_EncounterPlaceEnemies fills." }
 D_801CD8C8 = { addr = 0x801CD8C8, size = 0x4, source = "The scroll direction of the current battle, which Area_EncounterBuild stores in g_Battle.scroll_dir." }
 D_801CD8CC = { addr = 0x801CD8CC, size = 0x4, source = "The encounter table row Area_EncounterBuild rolled: ENCOUNTER_TABLE_BASE plus the pick times nine." }
-D_801CD8D0 = { addr = 0x801CD8D0, size = 0x74, source = "The task block Area_EncounterBuild passes to TASK_SET." }
+D_801CD8D0 = { addr = 0x801CD8D0, size = 0x74, source = "The task block Area_EncounterBuild passes to SELF_SET." }
 D_801CD944 = { addr = 0x801CD944, size = 0xC, source = "The three party slot records (key and active) Area_EncounterPlaceParty sorts and Area_EncounterPlaceEnemies fills." }
 s_PartySlotOrder = { addr = 0x801CD950, size = 0x4, source = "Order Area_EncounterPlaceParty uses to shuffle the three party slots." }
 D_801CD954 = { addr = 0x801CD954, size = 0x4, source = "The average height Camera_SetEncounter computes for the encounter camera." }

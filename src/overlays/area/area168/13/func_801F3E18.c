@@ -9,11 +9,11 @@ MATCH void func_801F3E18(void) {
         if (g_Game.members[i].header.flags == 0) {
             continue;
         }
-        if (abs(g_Game.members[i].pos.y.fixed - ((s32)COORD_INT(TASK(Actor)->pos.y) << 16)) > TO_COORD_HALF(1)) {
+        if (abs(g_Game.members[i].pos.y.fixed - ((s32)COORD_INT(SELF(Actor)->pos.y) << 16)) > TO_COORD_HALF(1)) {
             continue;
         }
-        if (abs(g_Game.members[i].pos.x.fixed - ((s32)COORD_INT(TASK(Actor)->pos.x) << 16)) <= TO_COORD(1) ||
-            abs(g_Game.members[i].pos.x.fixed - (((s32)COORD_INT(TASK(Actor)->pos.x) + 1) << 16)) <= TO_COORD(1)) {
+        if (abs(g_Game.members[i].pos.x.fixed - ((s32)COORD_INT(SELF(Actor)->pos.x) << 16)) <= TO_COORD(1) ||
+            abs(g_Game.members[i].pos.x.fixed - (((s32)COORD_INT(SELF(Actor)->pos.x) + 1) << 16)) <= TO_COORD(1)) {
             found = true;
         }
     }
@@ -21,7 +21,7 @@ MATCH void func_801F3E18(void) {
         if (g_GameStateIndex == 0) {
             SND_SEPlay(EMI_SE_ID(SND_BANK_AREA, 2));
         }
-        TASK(Actor)->header.step += 1;
+        SELF(Actor)->header.step += 1;
     }
     func_801F4158_area168(0, 1);
     func_801F4158_area168(1, 2);

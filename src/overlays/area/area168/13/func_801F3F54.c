@@ -3,7 +3,7 @@
 MATCH void func_801F3F54(void) {
     Actor* scratch;
 
-    scratch = TASK(Actor);
+    scratch = SELF(Actor);
     scratch->screen_y += 0x10;
     if ((s16)scratch->screen_y >= 0x80) {
         scratch->header.step++;

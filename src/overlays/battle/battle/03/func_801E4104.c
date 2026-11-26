@@ -2,6 +2,6 @@
 
 MATCH void func_801E4104(void) {
     if ((Battle_IsEnemyBlockedOnce() & BYTE_MASK) != 0u) {
-        TASK(PartyMember)->unk_03 += 1u;
+        SELF(PartyMember)->unk_03 += 1u;
     }
 }

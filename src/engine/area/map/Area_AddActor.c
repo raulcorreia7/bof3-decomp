@@ -8,7 +8,7 @@ MATCH void Area_AddActor(void) {
     byte  = D_8014832C;
     index = byte;
     if (index < 30) {
-        work              = TASK(Actor);
+        work              = SELF(Actor);
         D_8014832C        = byte + 1;
         D_80148214[index] = work;
         if (work->header.flags & ACTOR_FLAG_SELECTION_EFFECT) {

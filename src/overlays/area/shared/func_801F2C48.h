@@ -1,7 +1,7 @@
 /* Lifts the HUD banner and starts the away step when the party already stands in the work's entry cell; `edge`
  * is the cell offset of the far side. The caller declares `actor` and `screen_y`. */
 #define AREA_ENTRY_CELL_AWAY_STEP(screen_y_value, edge)                                                                      \
-    actor = g_Task;                                                                                                          \
+    actor = g_Self;                                                                                                          \
     if (actor->direction != 0) {                                                                                             \
         if (abs(g_Game.members[0].pos.y.fixed - ((((s32)COORD_INT(actor->pos.y) + (edge)) << 16) | 0x8000)) <= COORD_HALF) { \
             if (abs(g_Game.members[0].pos.x.fixed - ((s32)COORD_INT(actor->pos.x) << 16)) <= TO_COORD(1) ||                  \
@@ -33,11 +33,11 @@
     s32    entry;                                                           \
     s32    pair;                                                            \
     s16    screen_y;                                                        \
-    work                     = g_Task;                                      \
+    work                     = g_Self;                                      \
     entry                    = work->pos.x.part.integer;                    \
     pair                     = entry * 2;                                   \
     work->direction          = work->pos.y.part.integer == 0;               \
-    cell                     = g_Task;                                      \
+    cell                     = g_Self;                                      \
     cell->pos.x.part.integer = AREA_PAYLOAD_FIELD(payload, u8, 0x14, pair); \
     cell->pos.y.part.integer = AREA_PAYLOAD_FIELD(payload, u8, 0x15, pair); \
     cell->screen_y           = 0;                                           \

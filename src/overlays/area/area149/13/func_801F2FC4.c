@@ -4,7 +4,7 @@ MATCH void func_801F2FC4(void) {
     if (g_AreaCameraOffsetZ < 0x680) {
         *g_ScriptVars = 0xF;
         SND_SEPlay(0U);
-        TASK(Actor)->unk_04 += 1;
+        SELF(Actor)->unk_04 += 1;
     }
     if (g_PartyActors[0].pos.x.fixed < (g_AreaScrollTargetX + TO_COORD(2))) {
         g_PartyActors[0].unk_78 = 3;

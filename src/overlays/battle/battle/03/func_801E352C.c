@@ -7,18 +7,18 @@ MATCH void func_801E352C(void) {
     s16          value;
 
     Battle_IsEnemyBlocked();
-    work = TASK(PartyMember);
+    work = SELF(PartyMember);
     work->pos.x.fixed += work->unk_0C;
     y                       = work->pos.y.fixed + work->unk_10;
     work->pos.y.fixed       = y;
     value                   = Area_HeightSample(work->pos.x.fixed, y);
-    work2                   = TASK(PartyMember);
+    work2                   = SELF(PartyMember);
     COORD_INT(work2->pos.z) = value;
     if (work2->pos.x.fixed == work2->unk_18) {
         if (work2->pos.y.fixed == work2->unk_1C) {
             work2->header.mode             = 3;
-            TASK(PartyMember)->header.step = 0;
-            TASK(PartyMember)->unk_03      = 0;
+            SELF(PartyMember)->header.step = 0;
+            SELF(PartyMember)->unk_03      = 0;
         }
     }
 }

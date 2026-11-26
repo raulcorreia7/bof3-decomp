@@ -9,9 +9,9 @@ MATCH void Actor_RunFlee(Actor* entity) {
     u8     mode;
     u8     param;
 
-    saved = TASK(Actor)->direction;
-    g_ActorPaceSteps[TASK(Actor)->header.step](entity, 0, 1);
-    if (TASK(Actor)->timer != 0) {
+    saved = SELF(Actor)->direction;
+    g_ActorPaceSteps[SELF(Actor)->header.step](entity, 0, 1);
+    if (SELF(Actor)->timer != 0) {
         Area_SetXFixed(entity);
         return;
     }
@@ -21,35 +21,35 @@ MATCH void Actor_RunFlee(Actor* entity) {
         if (mode == 0) {
             return;
         }
-        if (g_ActorPaceSteps[TASK(Actor)->header.step](entity, param, 2) != 0) {
+        if (g_ActorPaceSteps[SELF(Actor)->header.step](entity, param, 2) != 0) {
             value = ((s32 (*)(Actor*))Actor_PickFleeFacing)(entity);
-            if (TASK(Actor)->timer != 0) {
+            if (SELF(Actor)->timer != 0) {
                 entity->unk_7B = (RANDOM_MASK(3) + 3);
             }
         } else {
             value = 0xFF;
         }
     } else {
-        g_ActorPaceSteps[TASK(Actor)->header.step](entity, param, 2);
+        g_ActorPaceSteps[SELF(Actor)->header.step](entity, param, 2);
         value = ((s32 (*)(Actor*, s32))Actor_PickFacingByLeaderDistance)(entity, 1);
         entity->unk_7B -= 1;
     }
-    if (((value & BYTE_MASK) != GAME_NONE) && (TASK(Actor)->timer != 0)) {
-        TASK(Actor)->unk_03      = TASK(Actor)->header.mode;
-        TASK(Actor)->header.mode = ACTOR_MODE_TURN;
+    if (((value & BYTE_MASK) != GAME_NONE) && (SELF(Actor)->timer != 0)) {
+        SELF(Actor)->unk_03      = SELF(Actor)->header.mode;
+        SELF(Actor)->header.mode = ACTOR_MODE_TURN;
         entity->unk_79           = (value & 0x7);
-        TASK(Actor)->direction   = (saved & 0x7);
-        work                     = TASK(Actor);
+        SELF(Actor)->direction   = (saved & 0x7);
+        work                     = SELF(Actor);
         work->unk_0A             = 0;
         work->timer              = 0;
         Actor_RunTurn(entity);
-        if (TASK(Actor)->header.mode == ACTOR_MODE_TURN) {
+        if (SELF(Actor)->header.mode == ACTOR_MODE_TURN) {
             return;
         }
-        TASK(Actor)->direction = saved;
+        SELF(Actor)->direction = saved;
     } else {
-        TASK(Actor)->timer     = 0;
-        TASK(Actor)->direction = saved;
+        SELF(Actor)->timer     = 0;
+        SELF(Actor)->direction = saved;
     }
     func_801A2AE4(entity, saved);
     Area_SetXFixed(entity);

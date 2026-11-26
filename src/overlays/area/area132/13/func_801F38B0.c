@@ -11,7 +11,7 @@ MATCH u8 func_801F38B0(void) {
     index      = 0;
     do {
         if (D_801F4A88[0] != 0u) {
-            if (TASK(Actor)->header.mode == 0) {
+            if (SELF(Actor)->header.mode == 0) {
                 ((AreaSpawnSlot*)D_801F4A88)->pos.x.fixed += 8192;
                 ((AreaSpawnSlot*)D_801F4A88)->radius += 8;
                 D_801F4A88[3] -= 2;

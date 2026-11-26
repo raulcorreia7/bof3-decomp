@@ -5,7 +5,7 @@
 MATCH s32 Actor_GetOwner(void) {
     void* work;
 
-    work = TASK(void);
+    work = SELF(void);
     if (work == D_80143F48) {
         return 2;
     }

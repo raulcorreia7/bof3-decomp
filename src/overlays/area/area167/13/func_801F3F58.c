@@ -9,8 +9,8 @@ MATCH void func_801F3F58(void) {
             return;
         }
         if (!SYS_TestFlag(g_SceneEventFlags, 75)) {
-            COORD_INT(TASK(Actor)->pos.z) = -0x240;
-            TASK(Actor)->header.flags |= ACTOR_FLAG_HIDDEN;
+            COORD_INT(SELF(Actor)->pos.z) = -0x240;
+            SELF(Actor)->header.flags |= ACTOR_FLAG_HIDDEN;
             return;
         }
     }
@@ -22,10 +22,10 @@ MATCH void func_801F3F58(void) {
             return;
         }
         if (SYS_TestFlag(g_SceneEventFlags, 75)) {
-            COORD_INT(TASK(Actor)->pos.z) = 2496;
-            TASK(Actor)->header.flags |= ACTOR_FLAG_HIDDEN;
+            COORD_INT(SELF(Actor)->pos.z) = 2496;
+            SELF(Actor)->header.flags |= ACTOR_FLAG_HIDDEN;
             return;
         }
     }
-    COORD_INT(TASK(Actor)->pos.z) = 960;
+    COORD_INT(SELF(Actor)->pos.z) = 960;
 }

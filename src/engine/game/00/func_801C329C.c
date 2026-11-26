@@ -63,13 +63,13 @@ MATCH void func_801C329C(void) {
             if (slot != GAME_NONE) {
                 g_SpawnedActors[slot].header.flags     = 1;
                 g_SpawnedActors[slot].type             = 0x41;
-                g_SpawnedActors[slot].unk_08           = TASK(Actor)->direction;
-                COORD_INT(g_SpawnedActors[slot].pos.x) = TASK(Actor)->screen_x;
-                value30                                = TASK(Actor)->screen_y;
+                g_SpawnedActors[slot].unk_08           = SELF(Actor)->direction;
+                COORD_INT(g_SpawnedActors[slot].pos.x) = SELF(Actor)->screen_x;
+                value30                                = SELF(Actor)->screen_y;
                 g_SpawnedActors[slot].unk_27           = 0;
                 g_SpawnedActors[slot].unk_06           = 1;
                 record                                 = g_SpawnedActors;
-                work                                   = TASK(Actor);
+                work                                   = SELF(Actor);
                 COORD_INT(record[slot].pos.y)          = value30;
                 g_SpawnedActors[slot].link             = work->unk_05;
             }

@@ -6,8 +6,8 @@ MATCH void Party_ScriptWalkRun(void) {
     Actor* work;
 
     g_Game.current->status.field.flags.unsigned_value |= 4;
-    g_PartyScriptWalkSteps[TASK(Actor)->unk_03]();
-    work = TASK(Actor);
+    g_PartyScriptWalkSteps[SELF(Actor)->unk_03]();
+    work = SELF(Actor);
     if ((work->option_flags & ACTOR_OPT_WAIT_STREAM) == 0) {
         if (work->header.flags & ACTOR_FLAG_STEP_MOVE) {
             Script_AnimStepLoop();

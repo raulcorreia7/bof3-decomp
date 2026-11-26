@@ -2,5 +2,5 @@
 
 MATCH void func_800C26D4(void) {
     g_BattleCurrentEnemy = g_BattleEnemyBattlers;
-    D_800C35F8[TASK(PartyMember)->header.mode]();
+    D_800C35F8[SELF(PartyMember)->header.mode]();
 }

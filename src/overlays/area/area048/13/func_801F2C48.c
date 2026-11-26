@@ -5,13 +5,13 @@ MATCH void func_801F2C48(void) {
     u8     step;
 
     if (!SYS_TestFlag(g_SceneEventFlags, 13)) {
-        work = TASK(Actor);
+        work = SELF(Actor);
         step = 2;
     } else {
-        work = TASK(Actor);
+        work = SELF(Actor);
         step = 1;
     }
     work->header.mode = step;
-    work              = TASK(Actor);
+    work              = SELF(Actor);
     work->pos.z.fixed = TO_COORD(256);
 }

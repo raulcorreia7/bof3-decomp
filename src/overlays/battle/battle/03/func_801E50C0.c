@@ -6,7 +6,7 @@ MATCH void func_801E50C0(void) {
     {
         PartyMember* work;
 
-        work      = TASK(PartyMember);
+        work      = SELF(PartyMember);
         countdown = work->unk_09;
         if (countdown != 0) {
             work->unk_09 = countdown - 1;
@@ -14,14 +14,14 @@ MATCH void func_801E50C0(void) {
             countdown   = work->timer - 1;
             work->timer = countdown;
             if (countdown != 0) {
-                TASK(PartyMember)->unk_5D -= 0x10;
-                TASK(PartyMember)->unk_5E -= 0x10;
-                TASK(PartyMember)->unk_5F -= 0x10;
+                SELF(PartyMember)->unk_5D -= 0x10;
+                SELF(PartyMember)->unk_5E -= 0x10;
+                SELF(PartyMember)->unk_5F -= 0x10;
 
                 {
                     PartyMember* motion_work;
 
-                    motion_work = TASK(PartyMember);
+                    motion_work = SELF(PartyMember);
                     motion_work->unk_0C += motion_work->unk_18;
                     motion_work->unk_10 += motion_work->unk_1C;
                     motion_work->pos.x.fixed += motion_work->unk_0C;
@@ -29,7 +29,7 @@ MATCH void func_801E50C0(void) {
                 }
                 Battle_IsEnemyBlocked();
             } else {
-                TASK(PartyMember)->header.step += 1;
+                SELF(PartyMember)->header.step += 1;
             }
         }
     }

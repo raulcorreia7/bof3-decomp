@@ -3,6 +3,6 @@
 MATCH void func_801F3BCC(void) {
     Actor* actor;
 
-    actor = TASK(Actor);
+    actor = SELF(Actor);
     COORD_INT(actor->pos.z) += 24;
 }

@@ -38,9 +38,9 @@ NON_MATCHING u8 Script_OpsRunAppearance(void* sub, s32 target, u8 value) {
     switch (code[CUR(sub)]) {
         case ACTOR_SCRIPT_APPEARANCE_START_PALETTE_FADE:
             if (Actor_GetOwner() != 1) {
-                g_CurrentActor->unk_93 = GFX_PaletteAllocFade(TASK(void), (code + CUR(sub))[1], (code + CUR(sub))[2], (code + CUR(sub))[3], (code + CUR(sub))[4]);
+                g_CurrentActor->unk_93 = GFX_PaletteAllocFade(SELF(void), (code + CUR(sub))[1], (code + CUR(sub))[2], (code + CUR(sub))[3], (code + CUR(sub))[4]);
             } else {
-                g_Game.current->palette_fade = GFX_PaletteAllocFade(TASK(void), (code + CUR(sub))[1], (code + CUR(sub))[2], (code + CUR(sub))[3], (code + CUR(sub))[4]);
+                g_Game.current->palette_fade = GFX_PaletteAllocFade(SELF(void), (code + CUR(sub))[1], (code + CUR(sub))[2], (code + CUR(sub))[3], (code + CUR(sub))[4]);
             }
             CUR(sub) += 4;
             break;
@@ -77,65 +77,65 @@ NON_MATCHING u8 Script_OpsRunAppearance(void* sub, s32 target, u8 value) {
             CUR(sub) += 3;
             break;
         case ACTOR_SCRIPT_APPEARANCE_ADD_SCALE:
-            LOBU(TASK(Actor)->vx) = (code + CUR(sub))[1];
-            TASK(Actor)->scale.x += PACK24(code + CUR(sub), 2);
-            TASK(Actor)->scale.y += PACK24(code + CUR(sub), 4);
+            LOBU(SELF(Actor)->vx) = (code + CUR(sub))[1];
+            SELF(Actor)->scale.x += PACK24(code + CUR(sub), 2);
+            SELF(Actor)->scale.y += PACK24(code + CUR(sub), 4);
             CUR(sub) += 5;
             break;
         case ACTOR_SCRIPT_APPEARANCE_SUB_SCALE:
-            LOBU(TASK(Actor)->vx) = (code + CUR(sub))[1];
-            TASK(Actor)->scale.x -= PACK24(code + CUR(sub), 2);
-            TASK(Actor)->scale.y -= PACK24(code + CUR(sub), 4);
+            LOBU(SELF(Actor)->vx) = (code + CUR(sub))[1];
+            SELF(Actor)->scale.x -= PACK24(code + CUR(sub), 2);
+            SELF(Actor)->scale.y -= PACK24(code + CUR(sub), 4);
             CUR(sub) += 5;
             break;
         case ACTOR_SCRIPT_APPEARANCE_SET_TRANSPARENCY:
             if ((code + CUR(sub))[1] & 0x80) {
-                *TASK(u8) |= ACTOR_FLAG_SEMI_TRANSPARENT;
+                *SELF(u8) |= ACTOR_FLAG_SEMI_TRANSPARENT;
             } else {
-                *TASK(u8) &= ~ACTOR_FLAG_SEMI_TRANSPARENT;
+                *SELF(u8) &= ~ACTOR_FLAG_SEMI_TRANSPARENT;
             }
-            TASK(Actor)->tint.steps.flags = (code + CUR(sub))[1] & 3;
+            SELF(Actor)->tint.steps.flags = (code + CUR(sub))[1] & 3;
             CUR(sub) += 1;
             break;
         case ACTOR_SCRIPT_APPEARANCE_ADD_TINT:
-            TASK(Actor)->tint.bytes.rgb.r += (code + CUR(sub))[1];
-            TASK(Actor)->tint.bytes.rgb.g += (code + CUR(sub))[2];
-            TASK(Actor)->tint.bytes.rgb.b += (code + CUR(sub))[3];
+            SELF(Actor)->tint.bytes.rgb.r += (code + CUR(sub))[1];
+            SELF(Actor)->tint.bytes.rgb.g += (code + CUR(sub))[2];
+            SELF(Actor)->tint.bytes.rgb.b += (code + CUR(sub))[3];
             CUR(sub) += 3;
             break;
         case ACTOR_SCRIPT_APPEARANCE_ADD_SCALE_AND_MOVE:
-            LOBU(TASK(Actor)->vx) = 2;
-            TASK(Actor)->scale.x += PACK24(code + CUR(sub), 1);
-            TASK(Actor)->scale.y += PACK24(code + CUR(sub), 3);
-            TASK(Actor)->pos.x.fixed += PACK24(code + CUR(sub), 5);
-            TASK(Actor)->pos.y.fixed += PACK24(code + CUR(sub), 7);
-            TASK(Actor)->pos.z.fixed += PACK24(code + CUR(sub), 9);
+            LOBU(SELF(Actor)->vx) = 2;
+            SELF(Actor)->scale.x += PACK24(code + CUR(sub), 1);
+            SELF(Actor)->scale.y += PACK24(code + CUR(sub), 3);
+            SELF(Actor)->pos.x.fixed += PACK24(code + CUR(sub), 5);
+            SELF(Actor)->pos.y.fixed += PACK24(code + CUR(sub), 7);
+            SELF(Actor)->pos.z.fixed += PACK24(code + CUR(sub), 9);
             CUR(sub) += 0xA;
             break;
         case ACTOR_SCRIPT_APPEARANCE_TURN_TO:
             next = CUR(sub) + 2;
             cmd  = code + CUR(sub);
-            slot = TASK(Actor)->direction;
+            slot = SELF(Actor)->direction;
             if (slot != cmd[1]) {
                 target = cmd[2];
                 want   = slot + 1;
                 if (!(target & 0x80)) {
                     want = slot - 1;
                 }
-                TASK(Actor)->direction = want & 7;
+                SELF(Actor)->direction = want & 7;
                 if (Actor_GetOwner() != 1) {
-                    Script_DispatchSelector(TASK(Actor)->direction);
+                    Script_DispatchSelector(SELF(Actor)->direction);
                 } else {
-                    Script_Select(TASK(Actor)->direction);
+                    Script_Select(SELF(Actor)->direction);
                 }
                 FIELD(s8, sub, 0x1u) = target & 0xF;
                 next                 = CUR(sub) - 1;
             }
             CUR(sub) = next;
-            value    = TASK(Actor)->direction;
+            value    = SELF(Actor)->direction;
             break;
         case ACTOR_SCRIPT_APPEARANCE_SET_UNK_2B:
-            TASK(Actor)->unk_2B = (code + CUR(sub))[1];
+            SELF(Actor)->unk_2B = (code + CUR(sub))[1];
             CUR(sub) += 1;
             break;
         case ACTOR_SCRIPT_APPEARANCE_SET_UNK_94:
@@ -146,7 +146,7 @@ NON_MATCHING u8 Script_OpsRunAppearance(void* sub, s32 target, u8 value) {
             cmd = code + CUR(sub);
             Area_SceneSelectRecord(cmd[2] | (cmd[1] << 8));
             Script_Select((code + CUR(sub))[3]);
-            FIELD(s8, g_Task, 0x2Au) = (code + CUR(sub))[4] & 1;
+            FIELD(s8, g_Self, 0x2Au) = (code + CUR(sub))[4] & 1;
             CUR(sub) += 4;
             break;
         case ACTOR_SCRIPT_APPEARANCE_WAIT_UNTIL_MOVE_ENDS:
@@ -155,26 +155,26 @@ NON_MATCHING u8 Script_OpsRunAppearance(void* sub, s32 target, u8 value) {
             }
             break;
         case ACTOR_SCRIPT_APPEARANCE_FREE_PALETTE_FADE:
-            GFX_PaletteFreeFadeTarget(TASK(void));
+            GFX_PaletteFreeFadeTarget(SELF(void));
             break;
         case ACTOR_SCRIPT_APPEARANCE_TURN_TO_PARTY:
-            cur  = TASK(Actor)->direction & 7;
+            cur  = SELF(Actor)->direction & 7;
             want = g_Game.members[0].facing ^ 4;
             if (cur != want) {
                 val = cur + 1;
                 if (((want - cur) << 0x18) <= 0) {
                     val = cur - 1;
                 }
-                TASK(Actor)->direction = val & 7;
+                SELF(Actor)->direction = val & 7;
                 if (Actor_GetOwner() != 1) {
-                    Script_DispatchSelector(TASK(Actor)->direction);
+                    Script_DispatchSelector(SELF(Actor)->direction);
                 } else {
-                    Script_Select(TASK(Actor)->direction);
+                    Script_Select(SELF(Actor)->direction);
                 }
                 FIELD(s8, sub, 0x1u) = 2;
                 CUR(sub) -= 1;
             }
-            value = TASK(Actor)->direction;
+            value = SELF(Actor)->direction;
             break;
     }
     return value;

@@ -20,8 +20,8 @@ MATCH u8 Actor_PickFacingByLeaderDistance(Actor* entity, u8 route_step) {
 
     target_x = g_Game.members[0].pos.x.fixed + g_Game.members[0].unk_0C * g_Game.members[0].unk_09;
     target_y = g_Game.members[0].pos.y.fixed + g_Game.members[0].unk_10 * g_Game.members[0].unk_09;
-    if ((TASK(Actor)->direction & 0x1) == 0) {
-        TASK(Actor)->direction++;
+    if ((SELF(Actor)->direction & 0x1) == 0) {
+        SELF(Actor)->direction++;
     }
     best = 0xFF;
     if ((route_step & BYTE_MASK) == 0u) {
@@ -31,9 +31,9 @@ MATCH u8 Actor_PickFacingByLeaderDistance(Actor* entity, u8 route_step) {
     }
     for (i = 0; i < 4; i++) {
         if ((Actor_IsAheadBlocked(entity) & BYTE_MASK) == 0) {
-            route = TASK(Actor)->direction;
-            wx    = TASK(Actor)->pos.x.fixed;
-            wy    = TASK(Actor)->pos.y.fixed;
+            route = SELF(Actor)->direction;
+            wx    = SELF(Actor)->pos.x.fixed;
+            wy    = SELF(Actor)->pos.y.fixed;
             route &= 7;
             px = &g_FacingSteps[route].x;
             py = &g_FacingStepY[route * 2];
@@ -47,14 +47,14 @@ MATCH u8 Actor_PickFacingByLeaderDistance(Actor* entity, u8 route_step) {
             if ((route_step & BYTE_MASK) != 0u) {
                 if (entity->unk_88 < dist) {
                     entity->unk_88 = dist;
-                    best           = TASK(Actor)->direction;
+                    best           = SELF(Actor)->direction;
                 }
             } else if (dist < entity->unk_88) {
                 entity->unk_88 = dist;
-                best           = TASK(Actor)->direction;
+                best           = SELF(Actor)->direction;
             }
         }
-        TASK(Actor)->direction = (TASK(Actor)->direction + 2) & 0x7;
+        SELF(Actor)->direction = (SELF(Actor)->direction + 2) & 0x7;
     }
     return best;
 }

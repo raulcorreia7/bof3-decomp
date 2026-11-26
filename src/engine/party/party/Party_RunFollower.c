@@ -4,5 +4,5 @@
 /* Runs a follower's frame: the per-frame helper, then the mode handler. */
 MATCH void Party_RunFollower(void) {
     func_801C3154();
-    g_PartyFollowerModes[TASK(Actor)->header.mode]();
+    g_PartyFollowerModes[SELF(Actor)->header.mode]();
 }

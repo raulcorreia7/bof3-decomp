@@ -13,7 +13,7 @@ MATCH void func_801A18C8(Actor* record) {
             Game_ScenarioDispatchRecord(record);
         }
         if (*game_state != state) {
-            if (TASK(Actor)->unk_06 == 5) {
+            if (SELF(Actor)->unk_06 == 5) {
                 D_8014865C          = ((s32)(-(((s32)work - (s32)g_Actors) * 0xD79435E5)) >> 3);
                 g_MenuStep.step     = 0;
                 g_MenuStep.sub_step = 0;
@@ -21,8 +21,8 @@ MATCH void func_801A18C8(Actor* record) {
                 return;
             }
             if ((g_ScenarioState.flags_01 & SCENARIO_STATE_SCRIPT_ACTIVE) == 0) {
-                if ((TASK(Actor)->option_flags & ACTOR_OPT_ROUTE_LOCKED) == 0) {
-                    TASK(Actor)->direction = work->unk_79;
+                if ((SELF(Actor)->option_flags & ACTOR_OPT_ROUTE_LOCKED) == 0) {
+                    SELF(Actor)->direction = work->unk_79;
                     work->interaction_flags |= ACTOR_INTERACTION_MOVING;
                 }
                 g_GameFlags &= ~GAME_FLAG_SCRIPT_ACTIVE;

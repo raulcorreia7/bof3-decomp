@@ -25,9 +25,9 @@ MATCH s32 func_801FC1D0(s32 member_index) {
     g_CurrentActor = actor;
     Actor_ResetMotion();
     Area_SceneSelectRecord(0x67);
-    TASK(Actor)->header.flags = 1;
+    SELF(Actor)->header.flags = 1;
 
-    task                              = TASK(Actor);
+    task                              = SELF(Actor);
     task->pos.x.fixed                 = COORD_HALF + g_Game.members[(u8)member_index].pos.x.fixed;
     g_Actors[actor_index].walk_dest_x = task->pos.x.fixed;
     task->pos.y.fixed                 = g_Game.members[(u8)member_index].pos.y.fixed;
@@ -35,12 +35,12 @@ MATCH s32 func_801FC1D0(s32 member_index) {
     g_Actors[actor_index].unk_88      = 0;
 
     height                        = Area_HeightSample(task->pos.x.fixed, task->pos.y.fixed);
-    task2                         = TASK(Actor);
+    task2                         = SELF(Actor);
     task2->header.mode            = 4;
     task2->pos.z.part.integer     = height;
-    TASK(Actor)->header.step      = 0;
-    TASK(Actor)->direction        = 0;
-    TASK(Actor)->unk_06           = 0;
+    SELF(Actor)->header.step      = 0;
+    SELF(Actor)->direction        = 0;
+    SELF(Actor)->unk_06           = 0;
     actor->ext.bounds.half_height = 0;
     g_Actors[actor_index].unk_77  = 2;
     g_Actors[actor_index].unk_78  = 2;
@@ -49,12 +49,12 @@ MATCH s32 func_801FC1D0(s32 member_index) {
     g_Actors[actor_index].unk_7C                = 0;
     option_flags                                = 0x88;
     Actor_SetOptionFlags(&option_flags);
-    TASK(Actor)->header.flags |= ACTOR_FLAG_SEMI_TRANSPARENT;
-    task3                   = TASK(Actor);
+    SELF(Actor)->header.flags |= ACTOR_FLAG_SEMI_TRANSPARENT;
+    task3                   = SELF(Actor);
     task3->tint.bytes.rgb.b = 0;
     task3->tint.bytes.rgb.g = 0;
     task3->tint.bytes.rgb.r = 0;
-    task4                   = TASK(Actor);
+    task4                   = SELF(Actor);
     task4->tint.bytes.flags = 1;
     Actor_StartFacingScript();
     return 1;

@@ -14,9 +14,9 @@ MATCH void func_801B2DDC(void) {
 
     sel = func_801B5C54();
     if (g_GameRequestFlags & AREA_LOAD_FLAG_WORLD_MAP) {
-        Actor_RequestRoute(TASK(Actor)->direction);
+        Actor_RequestRoute(SELF(Actor)->direction);
     } else {
-        work = TASK(Actor);
+        work = SELF(Actor);
         Script_Request(((work->direction >> 1) + 0x10));
     }
     value = FIELD(s16, sel, 0x4u);
@@ -40,14 +40,14 @@ MATCH void func_801B2DDC(void) {
                     UI_MessageStartArea(result & 0xFFF);
                 }
                 g_Game.current->u.field.type  = g_CurrentActor->callback_index;
-                state                         = TASK(Actor);
+                state                         = SELF(Actor);
                 g_Game.current->u.field.value = FIELD(u16, sel, 0x4u);
                 state->header.step++;
         }
-        TASK(Actor)->header.step++;
+        SELF(Actor)->header.step++;
     } else {
         UI_MessageRequest(MSG_SYSTEM_000);
     }
     g_GameStateIndex = GAME_REQUEST_MESSAGE;
-    TASK(Actor)->header.step++;
+    SELF(Actor)->header.step++;
 }

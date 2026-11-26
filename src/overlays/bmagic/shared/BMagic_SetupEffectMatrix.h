@@ -20,7 +20,7 @@
     s32          roll;                                                         \
                                                                                \
     PushMatrix();                                                              \
-    work   = g_Task;                                                           \
+    work   = g_Self;                                                           \
     rot.vx = 0x400;                                                            \
     rot.vy = 0xE00;                                                            \
     if (work->param.unk_0B & 1) {                                              \
@@ -30,9 +30,9 @@
     }                                                                          \
     rot.vz = (roll & 0x1F) << 7;                                               \
     FAKE_BARRIER(); /* FAKE: keeps the roll store before the position load. */ \
-    pos.vx = (TASK(PartyMember)->pos.x.fixed >> 9) - 0x4000;                   \
-    pos.vy = (TASK(PartyMember)->pos.y.fixed >> 9) - 0x4000;                   \
-    pos.vz = -COORD_INT(TASK(PartyMember)->pos.z) / 2;                         \
+    pos.vx = (SELF(PartyMember)->pos.x.fixed >> 9) - 0x4000;                   \
+    pos.vy = (SELF(PartyMember)->pos.y.fixed >> 9) - 0x4000;                   \
+    pos.vz = -COORD_INT(SELF(PartyMember)->pos.z) / 2;                         \
     RotTrans(&pos, (VECTOR*)matrix.t, &flags);                                 \
     RotMatrix(&rot, &matrix);                                                  \
     MulMatrix2(&g_CameraMatrix, &matrix);                                      \

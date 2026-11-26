@@ -36,26 +36,26 @@ loop_1: /* scan the world-id table down from index 8 */
         return;
     }
     jitter                    = rand();
-    work_a                    = TASK(Actor);
+    work_a                    = SELF(Actor);
     counter                   = COORD_INT(work_a->pos.z);
     work_a->active_flags      = 0;
-    work_b                    = TASK(Actor);
+    work_b                    = SELF(Actor);
     COORD_FRAC(work_a->pos.z) = 0;
     COORD_INT(work_a->pos.z)  = (u16)(counter + (jitter & 0x7F));
     work_b->mirror            = 0;
-    work_c                    = TASK(Actor);
+    work_c                    = SELF(Actor);
     work_c->unk_2B            = (u8)(work_c->unk_2B + 1);
-    TASK(Actor)->unk_48       = 0;
+    SELF(Actor)->unk_48       = 0;
     step_x                    = RANDOM_MASK(0x7FFF);
-    work_d                    = TASK(Actor);
+    work_d                    = SELF(Actor);
     work_d->pos.x.fixed += step_x;
     step_y     = rand();
-    work_e     = TASK(Actor);
+    work_e     = SELF(Actor);
     work_e->vz = 0xFFF80000;
     work_e->pos.y.fixed += (step_y & 0x7FFF);
-    TASK(Actor)->vx = (s32)RANDOM_MASK(0xFFF);
+    SELF(Actor)->vx = (s32)RANDOM_MASK(0xFFF);
     value           = RANDOM_MASK(0xFFF);
-    work_f          = TASK(Actor);
+    work_f          = SELF(Actor);
     work_f->vy      = value;
     if (work_f->vx >= 2049) {
         active = 1;
@@ -67,8 +67,8 @@ loop_1: /* scan the world-id table down from index 8 */
     }
     Script_Select(active);
     ACTOR_CLEAR_TINT();
-    TASK(Actor)->timer  = 16;
-    TASK(Actor)->unk_0A = 8;
-    work_g              = TASK(Actor);
+    SELF(Actor)->timer  = 16;
+    SELF(Actor)->unk_0A = 8;
+    work_g              = SELF(Actor);
     work_g->header.step = (u8)(work_g->header.step + 1);
 }

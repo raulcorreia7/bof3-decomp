@@ -1,7 +1,7 @@
 #include "area132_13.h"
 
 MATCH void func_801F37A4(u8* effect) {
-    Actor* work = TASK(Actor);
+    Actor* work = SELF(Actor);
 
     /* FAKE: the effect record has no proven type yet. */
     FIELD(s32, effect, 0x04) = work->pos.x.fixed;

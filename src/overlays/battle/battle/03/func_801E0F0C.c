@@ -15,7 +15,7 @@ MATCH void func_801E0F0C(void) {
     /* FAKE: retail materializes the +0x124 mask in a3. */
     FAKE_REG(s32, mask, "a3");
 
-    ACTOR_COUNT_DOWN(TASK(PartyMember), count, unk_09);
+    ACTOR_COUNT_DOWN(SELF(PartyMember), count, unk_09);
     if ((count & BYTE_MASK) == 0) {
         work         = g_Game.current;
         one          = 1;
@@ -25,19 +25,19 @@ MATCH void func_801E0F0C(void) {
         work->chr.willpower >>= 1;
         work->u.turn.damage_flags.value &= mask;
         slot                               = Battle_AllocEffect(0, 1) & BYTE_MASK;
-        spad                               = TASK(PartyMember);
+        spad                               = SELF(PartyMember);
         g_BattleEffects[slot].unk_07       = 1;
         g_BattleEffects[slot].unk_27       = 6;
-        spad2                              = TASK(PartyMember);
+        spad2                              = SELF(PartyMember);
         g_BattleEffects[slot].target.party = spad;
         Script_Select((spad2->facing + 4) & BYTE_MASK);
         SND_SEQueueSelection(0x206);
         if (g_Battle.outcome.event_flags == 0) {
             Battle_OpenPanel();
-            Battle_SetTextPartyName(TASK(PartyMember)->slot);
+            Battle_SetTextPartyName(SELF(PartyMember)->slot);
             func_801DEBC4(0, g_Game.current->chr.character_id);
         }
-        TASK(PartyMember)->unk_03 = 2;
+        SELF(PartyMember)->unk_03 = 2;
         func_801DEDE4();
     }
 }

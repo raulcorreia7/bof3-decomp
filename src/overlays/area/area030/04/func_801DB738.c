@@ -5,16 +5,16 @@
 MATCH void func_801DB738(void) {
     FishingState* record;
 
-    record        = TASK(FishingState);
+    record        = SELF(FishingState);
     record->timer = (record->timer - 1);
     Fishing_DrawCatchBar(0, FISHING_CATCH_BAR_Y);
 
-    Fishing_DrawCatchIcon((TASK(FishingState)->timer * FISHING_CATCH_ICON_STEP) + FISHING_CATCH_ICON_X, FISHING_CATCH_ICON_Y, g_Actors[g_FishingHookedFish].unk_06);
+    Fishing_DrawCatchIcon((SELF(FishingState)->timer * FISHING_CATCH_ICON_STEP) + FISHING_CATCH_ICON_X, FISHING_CATCH_ICON_Y, g_Actors[g_FishingHookedFish].unk_06);
 
-    record = TASK(FishingState);
+    record = SELF(FishingState);
     if (record->timer == 0) {
         record->timer     = 4;
-        record            = TASK(FishingState);
+        record            = SELF(FishingState);
         record->sub_index = (record->sub_index + 1);
     }
 

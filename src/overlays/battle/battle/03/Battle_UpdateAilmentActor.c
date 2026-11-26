@@ -7,7 +7,7 @@ MATCH void Battle_UpdateAilmentActor(void) {
     handlers = g_BattleAilmentActorSteps;
     if (g_Battle.phase.mode != BATTLE_MODE_RESULT) {
         g_Scripts = BATTLE_SCRIPT_TABLE;
-        handlers.steps[TASK(PartyMember)->header.mode]();
+        handlers.steps[SELF(PartyMember)->header.mode]();
         g_Scripts = AREA_SCRIPT_TABLE;
     }
 }

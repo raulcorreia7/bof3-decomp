@@ -8,7 +8,7 @@ MATCH void func_801EEC2C(void) {
     Magic054Steps table;
 
     table = D_801EEC04;
-    SYS_DISPATCH_TASK(table.steps, 1, g_Task);
+    SYS_DISPATCH_TASK(table.steps, 1, g_Self);
 }
 
 /* Spawns one effect slot per living battler on the selected side, marks each slot busy, and
@@ -21,12 +21,12 @@ MATCH void func_801EEC98(void) {
 
     if (g_Battle.encounter == 0x37) {
         func_800A9610(g_Battle.target_selector, 0x10);
-        TASK(PartyMember)->header.mode = 3;
-        TASK(PartyMember)->unk_09      = 0x1E;
+        SELF(PartyMember)->header.mode = 3;
+        SELF(PartyMember)->unk_09      = 0x1E;
         return;
     }
-    TASK(PartyMember)->param.unk_0B = 0;
-    TASK(PartyMember)->header.mode += 1;
+    SELF(PartyMember)->param.unk_0B = 0;
+    SELF(PartyMember)->header.mode += 1;
     if (g_Battle.target_selector & BATTLE_TARGET_ENEMY_SIDE) {
         for (i = 0; i < 8; i++) {
             BattleWorkImage* image;
@@ -41,14 +41,14 @@ MATCH void func_801EEC98(void) {
             image                                      = (BattleWorkImage*)&g_BattleEnemyBattlers[i];
             slot                                       = (BattleWorkImage*)&D_801EC330[index & BYTE_MASK];
             *slot                                      = *image;
-            work                                       = TASK(PartyMember);
+            work                                       = SELF(PartyMember);
             D_801EC330[index & BYTE_MASK].unk_06       = 1;
             D_801EC330[index & BYTE_MASK].header.mode  = 0;
             D_801EC330[index & BYTE_MASK].header.step  = 0;
             D_801EC330[index & BYTE_MASK].effect_type  = 0x2C;
             D_801EC330[index & BYTE_MASK].unk_0B       = i;
             D_801EC330[index & BYTE_MASK].target.party = work;
-            TASK(PartyMember)->param.unk_0B++;
+            SELF(PartyMember)->param.unk_0B++;
             g_BattleEnemyBattlers[i].header.flags |= PARTY_MEMBER_FLAG_HANDLER_BUSY;
         }
     } else {
@@ -61,23 +61,23 @@ MATCH void func_801EEC98(void) {
                 continue;
             }
             member = &g_Game.members[i];
-            saved  = TASK(PartyMember);
-            TASK_SET(member);
+            saved  = SELF(PartyMember);
+            SELF_SET(member);
             Script_Select((u8)(member->facing + 0x10));
-            TASK_SET(saved);
+            SELF_SET(saved);
 
             index                                      = func_801E590C(1, 0x2C);
             image                                      = (BattleWorkImage*)member;
             slot                                       = (BattleWorkImage*)&D_801EC330[index & BYTE_MASK];
             *slot                                      = *image;
-            work                                       = TASK(PartyMember);
+            work                                       = SELF(PartyMember);
             D_801EC330[index & BYTE_MASK].unk_06       = 1;
             D_801EC330[index & BYTE_MASK].header.mode  = 0;
             D_801EC330[index & BYTE_MASK].header.step  = 0;
             D_801EC330[index & BYTE_MASK].effect_type  = 0x2C;
             D_801EC330[index & BYTE_MASK].unk_0B       = i;
             D_801EC330[index & BYTE_MASK].target.party = work;
-            TASK(PartyMember)->param.unk_0B++;
+            SELF(PartyMember)->param.unk_0B++;
             g_Game.members[i].header.flags |= PARTY_MEMBER_FLAG_HANDLER_BUSY;
         }
     }
@@ -97,41 +97,41 @@ MATCH void func_801EF19C(void) {
     BMagicEffectSteps handlers;
 
     handlers = D_801EEC14;
-    SYS_DISPATCH_BYTE(handlers.steps, TASK(PartyMember)->header.step);
-    if (TASK(PartyMember)->header.flags != 0) {
+    SYS_DISPATCH_BYTE(handlers.steps, SELF(PartyMember)->header.step);
+    if (SELF(PartyMember)->header.flags != 0) {
         Area_AddGridActor();
     }
 }
 
 MATCH void func_801EF238(void) {
     if (g_Battle.target_selector & BATTLE_TARGET_ENEMY_SIDE) {
-        TASK(PartyMember)->pos.x.fixed = g_BattleEnemyBattlers[TASK(PartyMember)->param.unk_0B].pos.x.fixed;
-        TASK(PartyMember)->pos.y.fixed = g_BattleEnemyBattlers[TASK(PartyMember)->param.unk_0B].pos.y.fixed;
-        TASK(PartyMember)->pos.z.fixed = g_BattleEnemyBattlers[TASK(PartyMember)->param.unk_0B].pos.z.fixed;
+        SELF(PartyMember)->pos.x.fixed = g_BattleEnemyBattlers[SELF(PartyMember)->param.unk_0B].pos.x.fixed;
+        SELF(PartyMember)->pos.y.fixed = g_BattleEnemyBattlers[SELF(PartyMember)->param.unk_0B].pos.y.fixed;
+        SELF(PartyMember)->pos.z.fixed = g_BattleEnemyBattlers[SELF(PartyMember)->param.unk_0B].pos.z.fixed;
     } else {
-        TASK(PartyMember)->pos.x.fixed = g_Game.members[TASK(PartyMember)->param.unk_0B].pos.x.fixed;
-        TASK(PartyMember)->pos.y.fixed = g_Game.members[TASK(PartyMember)->param.unk_0B].pos.y.fixed;
-        TASK(PartyMember)->pos.z.fixed = g_Game.members[TASK(PartyMember)->param.unk_0B].pos.z.fixed;
+        SELF(PartyMember)->pos.x.fixed = g_Game.members[SELF(PartyMember)->param.unk_0B].pos.x.fixed;
+        SELF(PartyMember)->pos.y.fixed = g_Game.members[SELF(PartyMember)->param.unk_0B].pos.y.fixed;
+        SELF(PartyMember)->pos.z.fixed = g_Game.members[SELF(PartyMember)->param.unk_0B].pos.z.fixed;
     }
-    TASK(PartyMember)->scale.x = 0x10000;
-    TASK(PartyMember)->scale.y = 0x10000;
-    TASK(PartyMember)->unk_48  = 2;
-    TASK(PartyMember)->unk_0C  = -0xC60;
-    TASK(PartyMember)->unk_10  = 0x1080;
-    TASK(PartyMember)->unk_18  = 0x60;
-    TASK(PartyMember)->unk_1C  = -0x80;
-    TASK(PartyMember)->header.step++;
+    SELF(PartyMember)->scale.x = 0x10000;
+    SELF(PartyMember)->scale.y = 0x10000;
+    SELF(PartyMember)->unk_48  = 2;
+    SELF(PartyMember)->unk_0C  = -0xC60;
+    SELF(PartyMember)->unk_10  = 0x1080;
+    SELF(PartyMember)->unk_18  = 0x60;
+    SELF(PartyMember)->unk_1C  = -0x80;
+    SELF(PartyMember)->header.step++;
 }
 
 MATCH void func_801EF3A4(void) {
     Script_AnimStepLoop();
-    TASK(PartyMember)->unk_0C += TASK(PartyMember)->unk_18;
-    TASK(PartyMember)->unk_10 += TASK(PartyMember)->unk_1C;
-    TASK(PartyMember)->scale.x += TASK(PartyMember)->unk_0C;
-    TASK(PartyMember)->scale.y += TASK(PartyMember)->unk_10;
-    if (TASK(PartyMember)->unk_0C == 0) {
-        TASK(PartyMember)->unk_09 = 0x10;
-        TASK(PartyMember)->header.step += 1;
+    SELF(PartyMember)->unk_0C += SELF(PartyMember)->unk_18;
+    SELF(PartyMember)->unk_10 += SELF(PartyMember)->unk_1C;
+    SELF(PartyMember)->scale.x += SELF(PartyMember)->unk_0C;
+    SELF(PartyMember)->scale.y += SELF(PartyMember)->unk_10;
+    if (SELF(PartyMember)->unk_0C == 0) {
+        SELF(PartyMember)->unk_09 = 0x10;
+        SELF(PartyMember)->header.step += 1;
     }
 }
 
@@ -139,12 +139,12 @@ MATCH void func_801EF43C(void) {
     u8 timer;
 
     Script_AnimStepLoop();
-    timer                     = TASK(PartyMember)->unk_09 - 1;
-    TASK(PartyMember)->unk_09 = timer;
+    timer                     = SELF(PartyMember)->unk_09 - 1;
+    SELF(PartyMember)->unk_09 = timer;
     if (!(timer & BYTE_MASK)) {
-        TASK(PartyMember)->unk_18 = 0x60;
-        TASK(PartyMember)->unk_1C = -0x80;
-        TASK(PartyMember)->header.step += 1;
+        SELF(PartyMember)->unk_18 = 0x60;
+        SELF(PartyMember)->unk_1C = -0x80;
+        SELF(PartyMember)->header.step += 1;
     }
 }
 
@@ -152,7 +152,7 @@ MATCH void func_801EF4A8(void) {
     PartyMember* work;
 
     Script_AnimStepLoop();
-    work = TASK(PartyMember);
+    work = SELF(PartyMember);
     work->unk_0C += work->unk_18;
     work->unk_10 += work->unk_1C;
     work->scale.x += work->unk_0C;
@@ -168,13 +168,13 @@ MATCH void func_801EF534(void) {
 
     if (Script_AnimStepOnce() & BYTE_MASK) {
         if (g_Battle.target_selector & BATTLE_TARGET_ENEMY_SIDE) {
-            value2                                     = TASK(PartyMember)->param.unk_0B;
+            value2                                     = SELF(PartyMember)->param.unk_0B;
             g_BattleEnemyBattlers[value2].header.flags = g_BattleEnemyBattlers[value2].header.flags & 0xBF;
         } else {
-            value                              = TASK(PartyMember)->param.unk_0B;
+            value                              = SELF(PartyMember)->param.unk_0B;
             g_Game.members[value].header.flags = g_Game.members[value].header.flags & ~PARTY_MEMBER_FLAG_HANDLER_BUSY;
         }
-        TASK(PartyMember)->header.step += 1;
+        SELF(PartyMember)->header.step += 1;
     }
 }
 

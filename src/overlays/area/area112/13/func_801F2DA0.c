@@ -1,14 +1,14 @@
 #include "area112_13.h"
 
 MATCH void func_801F2DA0(void) {
-    Actor* work  = TASK(Actor);
+    Actor* work  = SELF(Actor);
     u8     timer = work->timer + 1;
     u16    y     = COORD_INT(work->pos.y);
 
     work->timer = timer;
     COORD_INT(work->pos.z) += y;
-    if (TASK(Actor)->timer >= 16) {
-        TASK(Actor)->header.step++;
+    if (SELF(Actor)->timer >= 16) {
+        SELF(Actor)->header.step++;
         func_801F2EA8();
     }
     func_801F3274();

@@ -48,7 +48,7 @@ typedef struct ScratchPad {
     /* 0x038 */ s16             unk_38; /* the area emit pair extent */
     /* 0x03A */ s16             unk_3A; /* the area emit pair mode */
     /* 0x03C */ u8              unk_3C[8];
-    /* 0x044 */ struct Task*    task;
+    /* 0x044 */ struct Self*    task;
     /* 0x048 */ u8              unk_48[0x3B8];
 } ScratchPad;
 
