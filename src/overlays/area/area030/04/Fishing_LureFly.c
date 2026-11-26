@@ -18,11 +18,11 @@ MATCH void Fishing_LureFly(void) {
 
     height = TASK(FishingState)->cursor_10;
     if (height >= FISHING_CAMERA_Y_MAX) {
-        g_AreaScrollTargetY = FISHING_CAMERA_Y_MAX;
+        g_AreaScrollTargetCoordY.fixed = FISHING_CAMERA_Y_MAX;
     } else if (height < FISHING_CAMERA_Y_MIN) {
-        g_AreaScrollTargetY = FISHING_CAMERA_Y_MIN;
+        g_AreaScrollTargetCoordY.fixed = FISHING_CAMERA_Y_MIN;
     } else {
-        g_AreaScrollTargetY = height;
+        g_AreaScrollTargetCoordY.fixed = height;
     }
     work_a    = TASK(FishingState);
     current_y = work_a->y_38.pos_y;

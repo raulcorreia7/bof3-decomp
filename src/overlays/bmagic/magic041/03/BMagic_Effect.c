@@ -22,13 +22,13 @@ MATCH void func_801EECB0(void) {
     TASK(PartyMember)->header.mode += 1;
 
     for (count = 0; count < 8; count++) {
-        slot                               = Battle_AllocEffect(1, 0x3D);
+        slot                               = Battle_AllocEffect(1, 61);
         g_BattleEffects[slot].target.party = TASK(PartyMember);
         g_BattleEffects[slot].header.mode  = 0;
         g_BattleEffects[slot].arg.unk_09   = count * 8 + 1;
         TASK(PartyMember)->param.unk_0B++;
     }
-    slot                               = Battle_AllocEffect(1, 0x3D);
+    slot                               = Battle_AllocEffect(1, 61);
     g_BattleEffects[slot].target.party = TASK(PartyMember);
     g_BattleEffects[slot].header.mode  = 1;
     TASK(PartyMember)->param.unk_0B++;

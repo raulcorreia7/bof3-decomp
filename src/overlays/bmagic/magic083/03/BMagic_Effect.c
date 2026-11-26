@@ -26,7 +26,7 @@ MATCH void func_801EED04(void) {
         for (i = 0; i < 8; i++) {
             index = i + 3;
             if (!(Battle_SlotIsBlocked(index) & BYTE_MASK)) {
-                slot                               = Battle_AllocEffect(1, 34) & BYTE_MASK;
+                slot                               = Battle_AllocEffect(1, BMAGIC_EFFECT_SHIELD) & BYTE_MASK;
                 owner                              = TASK(PartyMember);
                 g_BattleEffects[slot].header.mode  = 0;
                 g_BattleEffects[slot].unk_03       = i;
@@ -44,7 +44,7 @@ MATCH void func_801EED04(void) {
     } else {
         for (i = 0; i < 3; i++) {
             if (!(Battle_SlotIsBlocked(i) & BYTE_MASK)) {
-                slot                               = Battle_AllocEffect(1, 34) & BYTE_MASK;
+                slot                               = Battle_AllocEffect(1, BMAGIC_EFFECT_SHIELD) & BYTE_MASK;
                 owner                              = TASK(PartyMember);
                 g_BattleEffects[slot].header.mode  = 0;
                 g_BattleEffects[slot].unk_03       = i;

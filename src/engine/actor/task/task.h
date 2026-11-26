@@ -79,9 +79,51 @@ void Actor_DrawValueDigits(s16 x, s16 y, u8 unused, u8 palette);
 void Actor_StartFacingScript(void);
 /* func_801A4B80 */
 void Actor_TurnRampClear(s32 index);
+/* func_801A50C0 */
+void Actor_SpawnNoRoute(u8* script);
+/* func_801A5400 */
+void Actor_SpawnBlocker(u8* script);
+/* func_801A57F0 */
+void Actor_SpawnAttached(u8* script);
+/* func_801A5B78 */
+void Actor_SpawnVoiced(u8* script);
+/* func_801A5EFC */
+void Actor_SpawnWithAction(u8* script);
 /* func_801A623C */
 void Actor_SpawnBattleEntry(u8* script);
+/* func_801A68C0 */
+void Actor_SpawnFromDefRow(u8* script);
+/* func_801A6F58 */
+void Actor_SpawnAttachedFixedFlags(u8* script);
 /* func_801ADCF4 */
 void Actor_SpawnToss(u8 source_slot);
 
+/* func_8019B364 */
+void Actor_RockRun(void);
+/* func_8019B3A8 */
+void Actor_RockStart(void);
+/* func_8019B4A0 */
+void Actor_RockWait(void);
+/* func_8019BBA4 */
+void Actor_RockSettle(void);
+/* func_8019BE28 */
+void Actor_RockEnd(void);
+/* func_8019BEFC */
+void Actor_RockRest(void);
+/* func_8019BF78 */
+void Actor_RockClaimCell(void);
+/* func_8019BFD4 */
+void Actor_RockReleaseCamera(void);
+/* func_8019C028 */
+bool Actor_RockHit(void);
+/* func_8019C124 */
+void Actor_RockSetTarget(s32 step_byte);
+/* func_8019C1E4 */
+s32  Actor_RockIsBlockedAhead(void);
+/* func_8019C244 */
+s32  Actor_RockIsBlockedAtEdge(void);
+/* func_8019C344 */
+s32  Actor_RockIsPointBlocked(s32 x, s32 y);
+/* func_8019C4F0 */
+s32  Actor_RockIsCellBlocked();
 #endif

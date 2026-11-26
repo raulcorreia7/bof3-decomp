@@ -24,7 +24,7 @@ MATCH void func_801EEC98(void) {
         Effect_CopyActiveBattlerToSlot(index);
         work                                            = TASK(PartyMember);
         g_BattleEffects[index & BYTE_MASK].unk_06       = 1;
-        g_BattleEffects[index & BYTE_MASK].step_index   = 33;
+        g_BattleEffects[index & BYTE_MASK].effect_type  = 33;
         g_BattleEffects[index & BYTE_MASK].header.mode  = 0;
         g_BattleEffects[index & BYTE_MASK].header.step  = 0;
         g_BattleEffects[index & BYTE_MASK].unk_0B       = i;

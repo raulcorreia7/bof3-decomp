@@ -16,7 +16,7 @@ MATCH void func_801F2D40(const void* sprite) {
     SetSemiTrans(primitive, 1);
 
     Camera_ProjectPoint(object, &screen);
-    size[0] = FAKE_VOLATILE(u16, work->half_size);
+    size[0] = work->half_size;
     size[1] = FAKE_VOLATILE(u16, work->half_size);
     Game_ProjectWorldPoint(object, size, size);
 

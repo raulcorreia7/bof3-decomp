@@ -70,11 +70,11 @@ NON_MATCHING void func_8019B704(void) {
         TASK(Actor)->gravity          = 0;
         COORD_INT(TASK(Actor)->pos.z) = (u16)dist;
     }
-    if ((func_8019C028() & 0xFF) == 0) {
-        if ((Area_GetVx(TASK(Actor)->pos.x.fixed, TASK(Actor)->pos.y.fixed) & 0xFF) != 0) {
+    if ((Actor_RockHit() & 0xFF) == 0) {
+        if ((Actor_RockIsPointBlocked(TASK(Actor)->pos.x.fixed, TASK(Actor)->pos.y.fixed) & 0xFF) != 0) {
             TASK(Actor)->unk_06       = 1;
             TASK(Actor)->option_flags = 2;
-        } else if ((func_8019C1E4() & 0xFF) != 0) {
+        } else if ((Actor_RockIsBlockedAhead() & 0xFF) != 0) {
             TASK(Actor)->unk_06       = 1;
             TASK(Actor)->option_flags = 1;
         }
@@ -85,16 +85,16 @@ NON_MATCHING void func_8019B704(void) {
                         TASK(Actor)->option_flags = 0;
                         TASK(Actor)->unk_0A       = 0;
                         Script_Select(0);
-                        TASK(Actor)->header.mode = 5;
+                        TASK(Actor)->header.mode = ACTOR_ROCK_MODE_REST;
                     } else {
-                        func_8019C124(0);
+                        Actor_RockSetTarget(0);
                     }
                     break;
                 case 1:
-                    func_8019C124(0);
+                    Actor_RockSetTarget(0);
                     break;
                 case 2:
-                    func_8019C124(1);
+                    Actor_RockSetTarget(1);
                     break;
             }
         }

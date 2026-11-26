@@ -29,7 +29,7 @@ MATCH void func_801EEC5C(void) {
         for (i = 0; i < 8; i++) {
             side = i + BATTLE_PARTY_CHARACTERS_COUNT;
             if (!(Battle_SlotIsBlocked(side) & BYTE_MASK)) {
-                slot                               = Battle_AllocEffect(1, 0x37);
+                slot                               = Battle_AllocEffect(1, 55);
                 g_BattleEffects[slot].target.party = TASK(PartyMember);
                 g_BattleEffects[slot].unk_03       = side;
                 g_BattleEffects[slot].unk_04       = i;
@@ -41,7 +41,7 @@ MATCH void func_801EEC5C(void) {
     } else {
         for (i = 0; i < BATTLE_PARTY_CHARACTERS_COUNT; i++) {
             if (!(Battle_SlotIsBlocked((u8)i) & BYTE_MASK)) {
-                slot                               = Battle_AllocEffect(1, 0x37);
+                slot                               = Battle_AllocEffect(1, 55);
                 g_BattleEffects[slot].target.party = TASK(PartyMember);
                 g_BattleEffects[slot].unk_03       = i;
                 g_BattleEffects[slot].unk_04       = i;

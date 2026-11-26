@@ -123,7 +123,7 @@ void UI_WindowDrawBoxOutline();
  * overlay. */
 
 extern SceneTrigger D_801F6BA8[];
-/* The party spawn record func_801A6C98 places when the area request returns. */
+/* The party spawn record Actor_SpawnPartyFromDefRow places when the area request returns. */
 extern u8           D_801F6BB0[];
 
 #endif

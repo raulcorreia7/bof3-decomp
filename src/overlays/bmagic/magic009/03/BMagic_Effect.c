@@ -45,7 +45,7 @@ MATCH void func_801EEC98(void) {
     g_BattleEffects[index & BYTE_MASK].header.mode  = 1;
     g_BattleEffects[index & BYTE_MASK].unk_06       = 1;
     g_BattleEffects[index & BYTE_MASK].header.step  = 0;
-    g_BattleEffects[index & BYTE_MASK].step_index   = 42;
+    g_BattleEffects[index & BYTE_MASK].effect_type  = 42;
     g_BattleEffects[index & BYTE_MASK].target.party = work;
     TASK(PartyMember)->param.unk_0B += 1;
     i   = 1;

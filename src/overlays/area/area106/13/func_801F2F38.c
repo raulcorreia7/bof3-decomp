@@ -31,9 +31,9 @@ NON_MATCHING void func_801F2F38(s32 index, s32 height) {
         SetPolyFT4(prim);
         SetShadeTex(prim, 0);
         for (j = 0; j < 4; j++) {
-            g_ScratchPadVectors[j].vx = D_801F3EE8[*tile * 12 + j * 3] << 7;
-            g_ScratchPadVectors[j].vy = D_801F3EE8[*tile * 12 + j * 3 + 1] << 7;
-            g_ScratchPadVectors[j].vz = -D_801F3EE8[*tile * 12 + j * 3 + 2] << 7;
+            g_ScratchPadVectors[j].vx = D_801F3EE8[*tile][j].x << 7;
+            g_ScratchPadVectors[j].vy = D_801F3EE8[*tile][j].y << 7;
+            g_ScratchPadVectors[j].vz = -D_801F3EE8[*tile][j].depth << 7;
         }
         RotTransPers4(&g_ScratchPadVectors[0], &g_ScratchPadVectors[1], &g_ScratchPadVectors[2], &g_ScratchPadVectors[3], (s32*)&prim->x0, (s32*)&prim->x1, (s32*)&prim->x2, (s32*)&prim->x3, &depth,
                       &flag);

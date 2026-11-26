@@ -14,9 +14,7 @@ MATCH void func_801F2FD4(void) {
 
     actor = g_Task;
     x     = actor->pos.x.fixed;
-    /* FAKE: the barrier keeps the x load above the mode and vx loads. */
-    FAKE_BARRIER();
-    mode = actor->unk_0A;
+    mode  = actor->unk_0A;
     /* FAKE: the barrier keeps the mode load above the vx load. */
     FAKE_BARRIER();
     vx                 = actor->vx;

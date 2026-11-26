@@ -27,11 +27,8 @@ MATCH void func_801F3C24(void) {
             selection  = &g_SceneEventSelection;
             *selection = slot;
             if (slot != GAME_NONE) {
-                g_SpawnedActors[*selection].header.flags = ACTOR_FLAG_IN_USE;
-                /* FAKE: every slot store reloads the cell; plain C measured 260 of 313 instructions. */
-                FAKE_BARRIER();
-                g_SpawnedActors[*selection].type = 19;
-                FAKE_BARRIER();
+                g_SpawnedActors[*selection].header.flags   = ACTOR_FLAG_IN_USE;
+                g_SpawnedActors[*selection].type           = 19;
                 g_SpawnedActors[*selection].camera_angle.x = -922;
                 FAKE_BARRIER();
                 g_SpawnedActors[*selection].camera_angle.y = g_AreaCameraAngle.vy;
@@ -64,10 +61,8 @@ MATCH void func_801F3C24(void) {
                 slot                  = func_8019601C();
                 g_SceneEventSelection = slot;
                 if (slot != GAME_NONE) {
-                    g_SpawnedActors[slot].header.flags = ACTOR_FLAG_IN_USE;
-                    FAKE_BARRIER();
-                    g_SpawnedActors[g_SceneEventSelection].type = 19;
-                    FAKE_BARRIER();
+                    g_SpawnedActors[slot].header.flags                    = ACTOR_FLAG_IN_USE;
+                    g_SpawnedActors[g_SceneEventSelection].type           = 19;
                     g_SpawnedActors[g_SceneEventSelection].camera_angle.x = -682;
                     FAKE_BARRIER();
                     g_SpawnedActors[g_SceneEventSelection].camera_angle.y = g_AreaCameraAngle.vy;

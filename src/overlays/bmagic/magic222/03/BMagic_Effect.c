@@ -19,12 +19,12 @@ MATCH void BMagic_CombustionInit(void) {
     TASK(PartyMember)->param.unk_0B = 0;
     TASK(PartyMember)->unk_09       = 16;
     TASK(PartyMember)->header.mode += 1;
-    slot                               = Battle_AllocEffect(1, 96) & BYTE_MASK;
+    slot                               = Battle_AllocEffect(1, BMAGIC_EFFECT_COMBUSTION) & BYTE_MASK;
     g_BattleEffects[slot].target.party = TASK(PartyMember);
     g_BattleEffects[slot].header.mode  = 1;
     g_BattleEffects[slot].arg.unk_09   = 16;
     TASK(PartyMember)->param.unk_0B += 1;
-    slot                               = Battle_AllocEffect(1, 96) & BYTE_MASK;
+    slot                               = Battle_AllocEffect(1, BMAGIC_EFFECT_COMBUSTION) & BYTE_MASK;
     g_BattleEffects[slot].target.party = TASK(PartyMember);
     g_BattleEffects[slot].header.mode  = 0;
     g_BattleEffects[slot].arg.unk_09   = 16;
@@ -107,7 +107,7 @@ MATCH void BMagic_CombustionActorFall(void) {
     if (--TASK(PartyMember)->unk_09 == 0) {
         SND_SEQueueSelection(EMI_SE_ID(SND_BANK_COMMON, 1));
         for (i = 0; i < 8; i++) {
-            slot                               = Battle_AllocEffect(1, 0x60) & BYTE_MASK;
+            slot                               = Battle_AllocEffect(1, BMAGIC_EFFECT_COMBUSTION) & BYTE_MASK;
             g_BattleEffects[slot].target.party = g_BattleEffectBattler;
             g_BattleEffects[slot].header.mode  = 2;
             g_BattleEffects[slot].unk_0B       = i;
@@ -134,7 +134,7 @@ MATCH void BMagic_CombustionActorSpawnWave(void) {
     TASK(PartyMember)->unk_09 = count;
     if (!(count & BYTE_MASK)) {
         SND_SEQueueSelection(EMI_SE_ID(SND_BANK_COMMON, 0x02));
-        slot                               = Battle_AllocEffect(1, 96) & BYTE_MASK;
+        slot                               = Battle_AllocEffect(1, BMAGIC_EFFECT_COMBUSTION) & BYTE_MASK;
         work                               = g_BattleEffectBattler;
         g_BattleEffects[slot].header.mode  = 3;
         g_BattleEffects[slot].target.party = work;

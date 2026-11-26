@@ -48,7 +48,7 @@ MATCH void BMagic_KaiserBreathInit(void) {
     TASK(PartyMember)->unk_09       = 10;
     TASK(PartyMember)->timer        = 0;
     TASK(PartyMember)->header.mode += 1;
-    slot                               = Battle_AllocEffect(1, 105) & BYTE_MASK;
+    slot                               = Battle_AllocEffect(1, BMAGIC_EFFECT_KAISER_BREATH) & BYTE_MASK;
     target                             = TASK(PartyMember);
     g_BattleEffects[slot].header.mode  = BMAGIC_KAISER_BREATH_EFFECT_FLASH;
     g_BattleEffects[slot].target.party = target;
@@ -96,7 +96,7 @@ MATCH void BMagic_KaiserBreathStartDragon(void) {
     g_Game.members[0].header.flags     = 0;
     g_Game.members[1].header.flags     = 0;
     g_Game.members[2].header.flags     = 0;
-    slot                               = Battle_AllocEffect(1, 0x69) & BYTE_MASK;
+    slot                               = Battle_AllocEffect(1, BMAGIC_EFFECT_KAISER_BREATH) & BYTE_MASK;
     work                               = TASK(PartyMember);
     g_BattleEffects[slot].unk_04       = 0x21;
     g_BattleEffects[slot].header.mode  = BMAGIC_KAISER_BREATH_EFFECT_DRAGON;
@@ -116,7 +116,7 @@ MATCH void BMagic_KaiserBreathWaitDragon(void) {
     u32          slot;
 
     if (TASK(PartyMember)->param.unk_0B == 0) {
-        slot                               = Battle_AllocEffect(1, 0x69) & BYTE_MASK;
+        slot                               = Battle_AllocEffect(1, BMAGIC_EFFECT_KAISER_BREATH) & BYTE_MASK;
         work                               = TASK(PartyMember);
         g_BattleEffects[slot].header.mode  = BMAGIC_KAISER_BREATH_EFFECT_FLASH;
         g_BattleEffects[slot].target.party = work;
@@ -388,12 +388,12 @@ MATCH void BMagic_KaiserBreathDragonBreathe(void) {
     }
     SND_SEQueueSelection(EMI_SE_ID(SND_BANK_COMMON, 0x00));
     func_800A9610(g_Battle.target_selector, 16);
-    slot                               = Battle_AllocEffect(1, 0x69) & BYTE_MASK;
+    slot                               = Battle_AllocEffect(1, BMAGIC_EFFECT_KAISER_BREATH) & BYTE_MASK;
     battler                            = g_BattleEffectBattler;
     g_BattleEffects[slot].header.mode  = BMAGIC_KAISER_BREATH_EFFECT_RINGS;
     g_BattleEffects[slot].target.party = battler;
     g_BattleEffectBattler->param.unk_0B += 1;
-    slot                               = Battle_AllocEffect(1, 0x69) & BYTE_MASK;
+    slot                               = Battle_AllocEffect(1, BMAGIC_EFFECT_KAISER_BREATH) & BYTE_MASK;
     battler                            = g_BattleEffectBattler;
     g_BattleEffects[slot].header.mode  = BMAGIC_KAISER_BREATH_EFFECT_BEAM;
     g_BattleEffects[slot].target.party = battler;

@@ -13,7 +13,7 @@ MATCH void func_800A87D4(void) {
         /* one struct copy (the 16-byte block-move loop), read through the non-volatile cell */
         *slot                                           = *(BattleWorkImage*)g_BattleWorkCell;
         g_BattleEffects[index & BYTE_MASK].unk_06       = 0;
-        g_BattleEffects[index & BYTE_MASK].step_index   = 0x12;
+        g_BattleEffects[index & BYTE_MASK].effect_type  = 0x12;
         g_BattleEffects[index & BYTE_MASK].header.mode  = 0;
         g_BattleEffects[index & BYTE_MASK].header.step  = 0;
         g_BattleEffects[index & BYTE_MASK].unk_03       = 0;

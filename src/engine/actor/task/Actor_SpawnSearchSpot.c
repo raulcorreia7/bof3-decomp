@@ -42,7 +42,7 @@ MATCH void Actor_SpawnSearchSpot(const volatile u8* data) {
     dist = Area_HeightSample(work->pos.x.fixed, work->pos.y.fixed);
 
     w2                   = TASK(Actor);
-    w2->header.mode      = 6;
+    w2->header.mode      = ACTOR_MODE_REQUEST_SCRIPT;
     COORD_INT(w2->pos.z) = (u16)dist;
     ACTOR_CLEAR_STEP();
     /* FAKE: barrier pins the flags store before the route-index load. */

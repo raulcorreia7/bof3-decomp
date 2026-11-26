@@ -53,9 +53,7 @@ MATCH void func_801FB5A8(void* entity) {
     Game_SetScriptActive();
     g_ScenarioState.state_04 = 5;
     g_ScenarioState.step     = 30;
-    /* FAKE: preserve the store order. */
-    FAKE_BARRIER();
-    actor->unk_7E = actor->unk_7E + 1;
+    actor->unk_7E            = actor->unk_7E + 1;
 }
 
 MATCH void func_801FB5F8(void* entity) {
@@ -65,9 +63,7 @@ MATCH void func_801FB5F8(void* entity) {
     Game_SetScriptActive();
     g_ScenarioState.state_04 = 7;
     g_ScenarioState.step     = 30;
-    /* FAKE: preserve the store order. */
-    FAKE_BARRIER();
-    actor->unk_7E = actor->unk_7E + 1;
+    actor->unk_7E            = actor->unk_7E + 1;
 }
 
 MATCH s32 func_801FB648(s32 x, s32 y) {

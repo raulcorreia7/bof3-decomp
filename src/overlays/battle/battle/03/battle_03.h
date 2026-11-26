@@ -53,14 +53,14 @@ typedef struct {
     Callback modes[8];
 } BattlePanelModes;
 
-/* The queued slot's type (+0x05) selects one of these eight handlers in slot
+/* The queued slot's effect_type (+0x05) selects one of these eight handlers in slot
  * mode 3 (`g_BattleEffectModes` row 3); Battle_RunBossEffect copies the
  * table and dispatches. */
 typedef struct {
     Callback steps[8];
 } BattleBossEffectSteps;
 
-/* The queued slot's type (+0x05) selects one of these 110 handlers in slot
+/* The queued slot's effect_type (+0x05) selects one of these 110 handlers in slot
  * mode 1 (`g_BattleEffectModes` row 1); Battle_RunMagicEffect copies the
  * table and dispatches. */
 typedef struct {
@@ -114,7 +114,7 @@ typedef struct BattleRank {
     u16 index;
 } BattleRank;
 
-/* The queued slot's type (+0x05) selects one of these 19 handlers in slot mode
+/* The queued slot's effect_type (+0x05) selects one of these 19 handlers in slot mode
  * 0 (`g_BattleEffectModes` row 0); Battle_RunBattlerEffect copies the table
  * and dispatches. */
 typedef struct {

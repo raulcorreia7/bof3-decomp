@@ -424,12 +424,12 @@ MATCH void BMagic_SuperComboStrikeSpawn(void) {
     BattleEffect* strike;
     u32           slot;
 
-    slot = Battle_AllocEffect(1, 1);
+    slot = Battle_AllocEffect(1, BMAGIC_EFFECT_SUPER_COMBO);
     Effect_CopyActiveBattlerToSlot(slot);
     D_801EC3A4[slot & BYTE_MASK].target.party = TASK(PartyMember);
     strike                                    = &g_BattleEffects[slot & BYTE_MASK];
     strike->unk_06                            = 1;
-    strike->step_index                        = 1;
+    strike->effect_type                       = BMAGIC_EFFECT_SUPER_COMBO;
     strike->header.mode                       = 0;
     strike->header.step                       = 0;
     strike->arg.unk_09                        = 1;
@@ -443,12 +443,12 @@ MATCH void BMagic_SuperComboAfterimageSpawn(void) {
     u8            i;
 
     for (i = 0; i < 4; i++) {
-        slot = Battle_AllocEffect(1, 1);
+        slot = Battle_AllocEffect(1, BMAGIC_EFFECT_SUPER_COMBO);
         Effect_CopyActiveBattlerToSlot(slot);
         D_801EC3A4[slot & BYTE_MASK].target.party = TASK(PartyMember);
         image                                     = &g_BattleEffects[slot & BYTE_MASK];
         image->unk_06                             = 1;
-        image->step_index                         = 1;
+        image->effect_type                        = BMAGIC_EFFECT_SUPER_COMBO;
         image->header.mode                        = 1;
         image->header.step                        = 0;
         image->unk_0B                             = i;

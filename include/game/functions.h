@@ -68,14 +68,16 @@ void func_801A0514(void);
 void func_801A061C(void);
 /* func_801A18C8 */
 void func_801A18C8(Actor* record);
+/* Actor_IsAheadBlocked */
 /* func_801A1AE4 */
-bool func_801A1AE4(Actor* arg);
+bool Actor_IsAheadBlocked(Actor* arg);
 /* func_801A3A08 */
 void func_801A3A08(void);
 /* Actor_TurnRampStep */
 /* func_801A3D1C */
 void Actor_TurnRampStep(void* unused);
-void func_801A6C98(u8* record);
+/* func_801A6C98 */
+void Actor_SpawnPartyFromDefRow(u8* record);
 /* Actor_SpawnSearchSpot */
 /* func_801A7330 */
 void Actor_SpawnSearchSpot(const volatile u8* data);

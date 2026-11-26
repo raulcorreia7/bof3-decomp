@@ -20,23 +20,23 @@ MATCH void func_801EECC0(void) {
     TASK(PartyMember)->header.mode += 1;
     Battle_SelectActiveBattlerScript(0xC, 2);
     for (i = 0; (u32)(i & BYTE_MASK) < 4; i++) {
-        index = Battle_AllocEffect(1, 0x2E);
+        index = Battle_AllocEffect(1, 46);
         Effect_CopyActiveBattlerToSlot(index);
         g_BattleEffects[index & BYTE_MASK].target.party = TASK(PartyMember);
         g_BattleEffects[index & BYTE_MASK].header.mode  = 1;
-        g_BattleEffects[index & BYTE_MASK].step_index   = 0x2E;
+        g_BattleEffects[index & BYTE_MASK].effect_type  = 46;
         g_BattleEffects[index & BYTE_MASK].header.step  = 0;
         g_BattleEffects[index & BYTE_MASK].unk_06       = 1;
         g_BattleEffects[index & BYTE_MASK].arg.unk_09   = (i ^ 3) + 1;
         g_BattleEffects[index & BYTE_MASK].unk_0B       = i ^ 3;
     }
-    index = Battle_AllocEffect(1, 0x2E);
+    index = Battle_AllocEffect(1, 46);
     Effect_CopyActiveBattlerToSlot(index);
     g_BattleEffects[index & BYTE_MASK].target.party = TASK(PartyMember);
     g_BattleEffects[index & BYTE_MASK].unk_06       = 1;
     g_BattleEffects[index & BYTE_MASK].header.mode  = 0;
     g_BattleEffects[index & BYTE_MASK].header.step  = 0;
-    g_BattleEffects[index & BYTE_MASK].step_index   = 0x2E;
+    g_BattleEffects[index & BYTE_MASK].effect_type  = 46;
     TASK(PartyMember)->unk_27                       = Battle_CopyCellPalette(g_BattleEffectBattler);
     TASK(PartyMember)->unk_28                       = g_BattleEffectBattler->unk_28;
     TASK(PartyMember)->unk_24                       = g_BattleEffectBattler->unk_24;

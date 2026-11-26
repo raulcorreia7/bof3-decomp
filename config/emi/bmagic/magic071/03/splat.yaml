@@ -16,14 +16,14 @@ segments:
     vram: 0x801F00BC
     align: 4
     subsegments:
-      - [0x14BC, bin, D_801F00BC]
-      - [0x155C, bin, D_801F015C]
-      - [0x1598, bin, D_801F0198]
-      - [0x15A0, bin, D_801F01A0]
-      - [0x15A8, bin, D_801F01A8]
-      - [0x15B0, bin, D_801F01B0]
-      - [0x15B4, bin, D_801F01B4]
+      - [0x14BC, bin, g_BMagicSparkleOffsets]
+      - [0x155C, bin, g_BMagicSparkleColors]
+      - [0x1598, bin, g_BMagicSparkleCounts]
+      - [0x15A0, bin, g_BMagicSparkleDelays]
+      - [0x15A8, bin, g_BMagicSparkleRises]
+      - [0x15B0, bin, g_BMagicSparkleRecordModes]
+      - [0x15B4, bin, g_BMagicSparkles]
       - [0x15B8, bin, D_801F01B8]
       - [0x15DC, bin, D_801F01DC]
-      - [0x2BB4, bin, D_801F17B4]
+      - [0x2BB4, bin, g_BMagicSparkle]
   - [0x2BB8]

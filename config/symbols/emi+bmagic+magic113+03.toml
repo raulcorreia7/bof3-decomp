@@ -4,12 +4,42 @@ Battle_AllocEffect = { addr = 0x801E590C, alias = true, source = "Claims a free 
 Effect_Reset = { addr = 0x801E5988, type = "func", source = "Clears every timer, state and flag byte of the shared BattleEffect work record; every effect countdown calls it first. battle/03 owns the body." }
 g_BattleEffectBattler = { addr = 0x801EB4E0, source = "the battler the running effect acts on; Battle_UpdateEffects stores it for each effect step (emi/battle/battle/03 owns the cell)" }
 g_BattleEffects = { addr = 0x801EC330, alias = true, source = "Battle effect work records (stride 0x78); Battle_AllocEffect claims a free one by setting bit 0 of header.flags." }
-Effect_CountDownAndMarkDamaged = { addr = 0x801EF3D4, type = "func", source = "Counts the effect timer (byte 0x09) down; at zero marks the battlers of the target selector damaged, raises BATTLE_STATE_EFFECT_PLAYING and resets the effect in magic113 (Noting)." }
+g_BMagicNotingSteps = { addr = 0x801EEC04, source = "The eight handlers of the task by header.mode: init, spawn the rings, spawn the star, spawn the wall, spawn the actors, release, wait, mark the targets damaged." }
+BMagic_NotingUpdate = { addr = 0x801EEC24, type = "func", source = "Runs the task's handler that header.mode selects and, while it is alive, draws the shadow disc." }
+BMagic_NotingInit = { addr = 0x801EECE0, type = "func", source = "When the active battler and the target are on the same side marks the target damaged, raises BATTLE_STATE_EFFECT_PLAYING and resets the effect; otherwise copies the selected actor's position, sets STP on the battle overlay palette row, clears the stage (byte 0x0B) and the counter (byte 0x09) and advances header.mode." }
+BMagic_NotingSpawnRings = { addr = 0x801EEE24, type = "func", source = "Counts the counter up; at 16 starts two ring effects (id 3, mode 0, index 0 and 1 in byte 0x0B) at the task's position facing away from the effect battler, plays the sound and advances header.mode." }
+BMagic_NotingSpawnStar = { addr = 0x801EF000, type = "func", source = "Task mode 2: when the stage byte is 3 starts the star effect and advances the mode." }
+BMagic_NotingSpawnWall = { addr = 0x801EF0F0, type = "func", source = "When the stage is 4 (the star drawn) starts the wall effect (id 3, mode 2), plays the sound, sets voice 20's target volume to 0x7F and its volume to 0, and advances header.mode." }
+BMagic_NotingSpawnActors = { addr = 0x801EF1F8, type = "func", source = "Sweeps voice 20's volume; when the stage is 5 (the wall up) starts six actor effects (id 3, mode 3: the script index i / 2 in byte 0x0B, the mirror flag i % 2 in byte 0x04, a delay of 1 plus 8 per script index), clears the stage and advances header.mode." }
+BMagic_NotingRelease = { addr = 0x801EF35C, type = "func", source = "When the stage is 6 (all six actors done) sets it to 0x84 so the rings, the star and the wall may end, and advances header.mode." }
+BMagic_NotingWait = { addr = 0x801EF3A0, type = "func", source = "Advances header.mode once the stage is 0x80, that is once the two rings, the star and the wall have each lowered 0x84 by one." }
+Effect_CountDownAndMarkDamaged = { addr = 0x801EF3D4, type = "func", source = "Counts the counter (byte 0x09) down; at zero marks the battlers of the target selector damaged, raises BATTLE_STATE_EFFECT_PLAYING and resets the effect in magic113 (Noting)." }
 Effect_SetActorMatrix = { addr = 0x801EF440, type = "func", source = "Sets the actor's GTE matrix from its coordinates and half its vertical span, times the camera in magic113 (Noting)." }
+BMagic_NotingDrawShadow = { addr = 0x801EF4F0, type = "func", source = "Draws a disc of 32 subtractive triangles of radius 0x1C0 behind the battlers, its centre shaded by the counter times 12." }
 BMagic_DispatchEffectMode = { addr = 0x801EF75C, type = "func", source = "Runs the handler that header.mode (byte 0x01) selects from the effect handlers of magic113." }
-Effect_CountDownTimerStep = { addr = 0x801F0868, type = "func", source = "Counts the effect timer (byte 0x09) down and advances header.step (byte 0x02) at zero in magic113 (Noting)." }
+BMagic_NotingRingUpdate = { addr = 0x801EF7A0, type = "func", source = "Runs the ring's step and, once it is alive, sets the actor matrix, takes the radius of its index from g_BMagicNotingRingRadii and draws the ring." }
+BMagic_NotingRingGrow = { addr = 0x801EF844, type = "func", source = "Counts the counter up; at 33 sets the stage to 3 and steps." }
+BMagic_NotingRingHold = { addr = 0x801EF8A4, type = "func", source = "Steps once the effect battler's stage is 0x84." }
+BMagic_NotingRingFade = { addr = 0x801EF8E4, type = "func", source = "Counts the timer (byte 0x0A) up; at 12 lowers the effect battler's stage by one and resets the effect." }
+BMagic_NotingDrawRing = { addr = 0x801EF944, type = "func", source = "Draws the ring as up to 32 line segments round the radius in the scratchpad, as many as the counter has reached; in step 2 the lines turn semi-transparent and fade with the timer." }
+BMagic_NotingStarUpdate = { addr = 0x801EFC28, type = "func", source = "Runs the star's step and, while it is alive, draws the star." }
+BMagic_NotingStarGrow = { addr = 0x801EFCA0, type = "func", source = "Counts the counter up; at 40 sets the stage to 4 and steps." }
+BMagic_NotingStarHold = { addr = 0x801EFD00, type = "func", source = "Steps once the effect battler's stage is 0x84." }
+BMagic_NotingStarFade = { addr = 0x801EFD40, type = "func", source = "Counts the timer up; at 12 lowers the effect battler's stage by one and resets the effect." }
+BMagic_NotingDrawStar = { addr = 0x801EFDA0, type = "func", source = "Draws a five-pointed star of radius 288 as five lines between the corner angles of g_BMagicNotingStarCorners (15 corners to the circle), line i starting once the counter passes 8 times i and growing over eight counts; in step 2 the lines turn semi-transparent and fade with the timer." }
+BMagic_NotingWallUpdate = { addr = 0x801F0140, type = "func", source = "Runs the wall's step and, while it is alive, draws the wall." }
+BMagic_NotingWallRise = { addr = 0x801F01B8, type = "func", source = "Counts the counter up; at 49 sets the stage to 5 and steps." }
+BMagic_NotingWallHold = { addr = 0x801F0218, type = "func", source = "Once the effect battler's stage is 0x84 plays the sound and steps." }
+BMagic_NotingWallFade = { addr = 0x801F026C, type = "func", source = "Counts the timer up; at 16 lowers the effect battler's stage by one and resets the effect." }
+BMagic_NotingDrawWall = { addr = 0x801F02CC, type = "func", source = "Draws a wall of up to 32 additive quads standing on the ring of radius 304, column i showing once the counter passes i; each column rises by 32 per count to 0x200 with a random flicker and the timer lowers it and dims it." }
+BMagic_NotingActorUpdate = { addr = 0x801F0764, type = "func", source = "Runs the actor's step under the bmagic script table between two additive draw modes." }
+Effect_CountDownTimerStep = { addr = 0x801F0868, type = "func", source = "Counts the counter (byte 0x09) down and advances header.step (byte 0x02) at zero in magic113 (Noting)." }
+BMagic_NotingActorPlace = { addr = 0x801F08B4, type = "func", source = "Places the actor at the task's position (0x1800000 higher for script 2, 0x2000000 more when mirrored), sets it semi-transparent with a tint of -0x40, mirrored by byte 0x04, selects the script of its index and plays the sound for script 0." }
+BMagic_NotingActorPlay = { addr = 0x801F0A80, type = "func", source = "Steps the script; at the end of each run counts the counter up and, below 3, flips the mirror flag and restarts the script with a sound for script 0; at 3 raises the effect battler's stage by one and resets the effect." }
 g_BMagicEffectModes = { addr = 0x801F0B94, source = "Handlers of magic113 (Noting), run by header.mode (byte 0x01)." }
-D_801F0BA4 = { addr = 0x801F0BA4, type = "s32", source = "Per-level orbit radius values of magic113, indexed by the effect's level byte (param 0x0B); func_801EF7A0 copies one into the scratchpad radius word." }
-D_801F0BAC = { addr = 0x801F0BAC, source = "Step handlers of magic113, run by header.step (byte 0x02) from func_801EF7A0." }
-D_801F0BC0 = { addr = 0x801F0BC0, source = "Step handlers of the bmagic/magic113/03 effect, run by header.step from func_801EFC28." }
-D_801F0BCC = { addr = 0x801F0BCC, source = "Step handlers of the bmagic/magic113/03 effect, run by header.step from func_801F0140." }
+g_BMagicNotingRingRadii = { addr = 0x801F0BA4, source = "The radius of each of the two rings, 288 and 304, by ring index." }
+g_BMagicNotingRingSteps = { addr = 0x801F0BAC, source = "The three steps of a ring: grow, hold, fade." }
+g_BMagicNotingStarCorners = { addr = 0x801F0BB8, source = "The six corner indices of the star, in drawing order, 15 to the circle." }
+g_BMagicNotingStarSteps = { addr = 0x801F0BC0, source = "The three steps of the star: grow, hold, fade." }
+g_BMagicNotingWallSteps = { addr = 0x801F0BCC, source = "The three steps of the wall: rise, hold, fade." }
+g_BMagicNotingActorSteps = { addr = 0x801F0BD8, source = "The three steps of an actor: wait, place, play." }

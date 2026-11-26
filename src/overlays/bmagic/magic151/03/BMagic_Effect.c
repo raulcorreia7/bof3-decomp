@@ -28,12 +28,13 @@ MATCH void BMagic_AccessionInit(void) {
 
 /* func_801EEDE0 */
 MATCH void BMagic_AccessionTransformUpdate(void) {
-    Callback handlers[2] = {func_801EEE38, func_801EF318};
+    Callback handlers[2] = {BMagic_AccessionSoloUpdate, BMagic_AccessionMergeUpdate};
 
     SYS_DISPATCH_TASK(handlers, 2, g_Task);
 }
 
-MATCH void func_801EEE38(void) {
+/* func_801EEE38 */
+MATCH void BMagic_AccessionSoloUpdate(void) {
     BMagicAccessionStageSteps handlers;
 
     handlers = g_BMagicAccessionSoloSteps;
@@ -79,7 +80,7 @@ MATCH void BMagic_AccessionCastWait(void) {
     TASK(PartyMember)->header.flags |= PARTY_MEMBER_FLAG_HANDLER_BUSY;
     g_Task                             = saved;
     TASK(PartyMember)->param.unk_0B    = 0;
-    slot                               = Battle_AllocEffect(1, 68) & BYTE_MASK;
+    slot                               = Battle_AllocEffect(1, BMAGIC_EFFECT_ACCESSION) & BYTE_MASK;
     work                               = TASK(PartyMember);
     g_BattleEffects[slot].header.mode  = BMAGIC_ACCESSION_EFFECT_SEQUENCE;
     g_BattleEffects[slot].target.party = work;
@@ -143,7 +144,8 @@ MATCH void BMagic_AccessionTransformEnd(void) {
     TASK(PartyMember)->unk_03      = 0;
 }
 
-MATCH void func_801EF318(void) {
+/* func_801EF318 */
+MATCH void BMagic_AccessionMergeUpdate(void) {
     BMagicAccessionStageSteps handlers;
 
     handlers = g_BMagicAccessionMergeSteps;
@@ -277,7 +279,7 @@ MATCH void BMagic_AccessionSequenceSpawnBand(void) {
     TASK(PartyMember)->param.unk_0B     = 0;
     TASK(PartyMember)->unk_09           = 4;
     TASK(PartyMember)->header.step += 1;
-    slot                               = Battle_AllocEffect(1, 68) & BYTE_MASK;
+    slot                               = Battle_AllocEffect(1, BMAGIC_EFFECT_ACCESSION) & BYTE_MASK;
     work                               = TASK(PartyMember);
     g_BattleEffects[slot].header.mode  = BMAGIC_ACCESSION_EFFECT_BAND;
     g_BattleEffects[slot].arg.unk_09   = 1;
@@ -295,7 +297,7 @@ MATCH void BMagic_AccessionSequenceSpawnGlow(void) {
     count                     = TASK(PartyMember)->unk_09 - 1;
     TASK(PartyMember)->unk_09 = count;
     if (count == 0) {
-        slot                               = Battle_AllocEffect(1, 68) & BYTE_MASK;
+        slot                               = Battle_AllocEffect(1, BMAGIC_EFFECT_ACCESSION) & BYTE_MASK;
         work                               = TASK(PartyMember);
         g_BattleEffects[slot].header.mode  = BMAGIC_ACCESSION_EFFECT_GLOW;
         g_BattleEffects[slot].target.party = work;
@@ -312,7 +314,7 @@ MATCH void BMagic_AccessionSequenceSpawnDome(void) {
     u32          slot;
 
     if (--TASK(PartyMember)->unk_09 == 0) {
-        slot                               = Battle_AllocEffect(1, 68) & BYTE_MASK;
+        slot                               = Battle_AllocEffect(1, BMAGIC_EFFECT_ACCESSION) & BYTE_MASK;
         work                               = TASK(PartyMember);
         g_BattleEffects[slot].header.mode  = BMAGIC_ACCESSION_EFFECT_DOME;
         task                               = TASK(PartyMember);
@@ -336,6 +338,8 @@ MATCH void BMagic_AccessionSequenceWait(void) {
     }
 }
 
+/* Steps the sequence once the effect battler's mode is 2. */
+/* func_801EFD80 */
 MATCH void func_801EFD80(void) {
     PartyMember* active;
     PartyMember* work;
@@ -386,7 +390,8 @@ MATCH void BMagic_AccessionDomeStart(void) {
     TASK(PartyMember)->header.step += 1;
 }
 
-MATCH void func_801EFF44(void) {
+/* func_801EFF44 */
+MATCH void BMagic_AccessionDomeGrow(void) {
     u8 timer;
 
     BMAGIC_STEP_TIMER(unk_09, 2, 32);
@@ -398,7 +403,7 @@ MATCH void BMagic_AccessionDomeSpawnRays(void) {
     PartyMember* work;
 
     if ((g_FrameCount & 0x3) == 0) {
-        slot                               = Battle_AllocEffect(1, 68) & BYTE_MASK;
+        slot                               = Battle_AllocEffect(1, BMAGIC_EFFECT_ACCESSION) & BYTE_MASK;
         work                               = TASK(PartyMember);
         g_BattleEffects[slot].header.mode  = BMAGIC_ACCESSION_EFFECT_RAY;
         g_BattleEffects[slot].target.party = work;

@@ -132,13 +132,11 @@ MATCH void func_801F529C(void) {
                 if (*selection != GAME_NONE) {
                     /* FAKE: each actor write reloads the selection byte; plain C measures 474 of 490 instructions. */
                     g_Actors[*selection].header.mode = 7;
-                    FAKE_BARRIER();
-                    g_Actors[*selection].unk_18 = 0;
+                    g_Actors[*selection].unk_18      = 0;
                     FAKE_BARRIER();
                     g_Actors[*selection].unk_1C = 5;
                     FAKE_BARRIER();
                     g_Actors[*selection].unk_7E += 3;
-                    FAKE_BARRIER();
                     g_SceneEventState.step = 28;
                 } else {
                     func_801F61A8(143);

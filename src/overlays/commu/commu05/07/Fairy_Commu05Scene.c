@@ -161,20 +161,21 @@ NON_MATCHING void func_801D14C8(s16 x, s16 y, s32 group) {
     s32 i;
     s32 j;
     s32 k;
-    u8(*names)[5] = D_801457E8;
+    u8(*names)[5];
 
     UI_TextDraw((s16)(x + 0x52), (s16)y, 0, TEXT_LENGTH_MAX, MESSAGE_TABLE_TEXT(AREA_MESSAGE_TABLE, 0xEC));
-    i = (group & 0xFF) * 8;
-    j = 0;
+    i     = (group & 0xFF) * 8;
+    j     = 0;
+    names = D_801457E8;
 next:
     if (i < g_FairyVillageUpdateCount) {
-        if (D_801D197C[D_80145E60[i * 2]][1] != 0) {
+        if (D_801D197C[D_80145E60[i].type][1] != 0) {
             for (k = 0; k < 8; k++) {
-                g_TextVariables[0][k] = names[D_80145E61[i * 2]][k];
+                g_TextVariables[0][k] = names[D_80145E60[i].fairy][k];
             }
             g_TextVariables[0][5] = 0;
         }
-        UI_TextDraw((s16)(x + 0x14), (s16)(j * 16 + 0x1C + y), 0, TEXT_LENGTH_MAX, MESSAGE_TABLE_TEXT(AREA_MESSAGE_TABLE, D_801D197C[D_80145E60[i * 2]][0]));
+        UI_TextDraw((s16)(x + 0x14), (s16)(j * 16 + 0x1C + y), 0, TEXT_LENGTH_MAX, MESSAGE_TABLE_TEXT(AREA_MESSAGE_TABLE, D_801D197C[D_80145E60[i].type][0]));
         i++;
         j++;
         if (j < 8) {

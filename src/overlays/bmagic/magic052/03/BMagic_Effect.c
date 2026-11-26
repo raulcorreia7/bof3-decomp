@@ -24,7 +24,7 @@ MATCH void func_801EECBC(void) {
         return;
     }
 
-    index                               = Battle_AllocEffect(1, 0x50) & BYTE_MASK;
+    index                               = Battle_AllocEffect(1, 80) & BYTE_MASK;
     target                              = TASK(PartyMember);
     g_BattleEffects[index].header.mode  = 0;
     g_BattleEffects[index].header.step  = 0;

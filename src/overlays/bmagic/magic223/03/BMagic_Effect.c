@@ -30,7 +30,7 @@ MATCH void func_801EED18(void) {
     TASK(PartyMember)->param.unk_0B = 0;
     TASK(PartyMember)->header.mode++;
 
-    slot                               = Battle_AllocEffect(1, 0x63) & BYTE_MASK;
+    slot                               = Battle_AllocEffect(1, 99) & BYTE_MASK;
     target                             = g_Task;
     g_BattleEffects[slot].header.mode  = 0;
     g_BattleEffects[slot].target.party = target;

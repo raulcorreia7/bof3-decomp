@@ -43,6 +43,7 @@ extern u8                  D_801F58C8;
 extern u8                  D_801F58C9;
 extern u16                 D_801F58CA;
 extern u16                 D_801F58CC;
+extern u16                 g_Area075OpponentGauge[1]; /* D_801F58CC, the gauge func_801F45A8 lowers on its timing table */
 extern u8                  D_801F58CE[2];
 extern u8                  D_801F58D0;
 extern u8                  D_801F58D1;

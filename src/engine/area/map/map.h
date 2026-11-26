@@ -143,8 +143,6 @@ void        Area_BundleApplyObjects(void);
 void        Area_WaitWindowEffect(u32 wait_steps);
 void        Area_RunFrame(void);
 void        Area_RunLoadingFrame(void);
-/* func_8019C344 */
-s32         Area_GetVx(s32 x, s32 y);
 /* func_801A253C */
 void        Area_SetXFixed(Actor* entity);
 /* func_801A3F3C */

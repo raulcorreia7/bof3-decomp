@@ -44,7 +44,7 @@ NON_MATCHING void func_801EEC7C(void) {
             *(BattleWorkImage*)effect          = *image;
             g_BattleEffects[index].header.mode = 2;
             g_BattleEffects[index].unk_06      = 1;
-            g_BattleEffects[index].step_index  = 0x4B;
+            g_BattleEffects[index].effect_type = 0x4B;
             g_BattleEffects[index].header.step = 0;
             g_BattleEffects[index].arg.unk_09  = 0;
             g_BattleEffects[index].unk_29      = 3;

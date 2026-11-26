@@ -12,7 +12,7 @@ MATCH void func_801E5A38(void) {
         n = index;
         index += 1u;
         g_BattleEffects[n].header.flags = 0u;
-        g_BattleEffects[n].step_index   = 0u;
+        g_BattleEffects[n].effect_type  = 0u;
         g_BattleEffects[n].unk_06       = 0u;
         g_BattleEffects[n].header.mode  = 0u;
         g_BattleEffects[n].header.step  = 0u;

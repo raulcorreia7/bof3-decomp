@@ -8,7 +8,7 @@ MATCH void Battle_SucceedEscape(void) {
 
     if (g_AreaCameraMoving == 0) {
         count = 0;
-        Area_ScrollAdvance(Area_HeightSample(g_AreaScrollTargetX, g_AreaScrollTargetY));
+        Area_ScrollAdvance(Area_HeightSample(g_AreaScrollTargetCoordX.fixed, g_AreaScrollTargetCoordY.fixed));
         do {
             index = (count & BYTE_MASK);
             GFX_PaletteFreeFadeTarget(&g_BattleEnemyBattlers[index]);

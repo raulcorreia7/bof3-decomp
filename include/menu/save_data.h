@@ -57,7 +57,9 @@ typedef struct SaveData {
     /* 0xB94 */ u8               unk_B94[0xE8];
     /* 0xC7C */ GameClock        celerity_timer;
     /* 0xC80 */ GameClock        bonebreak_timer;
-    /* 0xC84 */ u8               unk_C84[0x6C];
+    /* 0xC84 */ u8               unk_C84[0x66];
+    /* 0xCEA */ s8               fairy_count; /* fairies living in the village */
+    /* 0xCEB */ u8               unk_CEB[0x5];
     /* 0xCF0 */ FairyJob         fairy_jobs[FAIRY_JOB_COUNT];
     /* 0xED0 */ u8               unk_ED0[0x1E0];
 } SaveData;

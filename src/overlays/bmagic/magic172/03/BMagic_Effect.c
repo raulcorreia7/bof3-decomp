@@ -4,7 +4,8 @@
 __asm__(".include \"include/match/macro.inc\"\n");
 #endif
 
-MATCH void func_801EEC04(void) {
+/* func_801EEC04 */
+MATCH void BMagic_MagicBallUpdate(void) {
     Callback handlers[2] = {BMagic_MagicBallInit, Effect_MarkDamagedOnZeroTick};
 
     SYS_DISPATCH_TASK(handlers, 1, g_Task);
@@ -24,14 +25,14 @@ MATCH void BMagic_MagicBallInit(void) {
     TASK(PartyMember)->pos.z        = g_BattleEffectBattler->pos.z;
     TASK(PartyMember)->param.unk_0B = 0;
     TASK(PartyMember)->header.mode += 1;
-    first_slot                               = Battle_AllocEffect(1, 0x51) & BYTE_MASK;
+    first_slot                               = Battle_AllocEffect(1, BMAGIC_EFFECT_MAGIC_BALL) & BYTE_MASK;
     work                                     = TASK(PartyMember);
     g_BattleEffects[first_slot].header.mode  = 0;
     g_BattleEffects[first_slot].target.party = work;
     TASK(PartyMember)->param.unk_0B += 1;
     i = 0;
     do {
-        slot                               = Battle_AllocEffect(1, 0x51);
+        slot                               = Battle_AllocEffect(1, BMAGIC_EFFECT_MAGIC_BALL);
         target                             = TASK(PartyMember);
         g_BattleEffects[slot].header.mode  = 1;
         g_BattleEffects[slot].unk_04       = first_slot;
@@ -101,7 +102,8 @@ MATCH void BMagic_MagicBallCoreUpdate(void) {
     }
 }
 
-MATCH void func_801EF158(void) {
+/* func_801EF158 */
+MATCH void BMagic_MagicBallCorePlace(void) {
     PartyMember* actor;
     PartyMember* work;
     s32          angle;
@@ -119,7 +121,8 @@ MATCH void func_801EF158(void) {
     TASK(PartyMember)->header.step += 1;
 }
 
-MATCH void func_801EF210(void) {
+/* func_801EF210 */
+MATCH void BMagic_MagicBallCoreFly(void) {
     VECTOR       pos;
     PartyMember* actor;
     s32          diff;

@@ -56,18 +56,20 @@ NON_MATCHING void func_801E206C(void) {
     }
     keys = INPUT_REPEATED(g_PadStates[0].pressed, INPUT_DIRECTIONAL);
     if (keys & PADLup) {
+        cursor = &D_80148655;
         SND_SEPlay(EMI_SE_ID(SND_BANK_COMMON, 0));
-        D_80148655 = D_80148655 - 1;
-        if ((s8)D_80148655 < 8) {
+        *cursor = *cursor - 1;
+        if ((s8)*cursor < 8) {
             SND_SEPlay(EMI_SE_ID(SND_BANK_COMMON, 0));
-            D_80148655 = 0xD;
+            *cursor = 0xD;
         }
     } else if (keys & PADLdown) {
+        cursor = &D_80148655;
         SND_SEPlay(EMI_SE_ID(SND_BANK_COMMON, 0));
-        D_80148655 = D_80148655 + 1;
-        if ((s8)D_80148655 >= 0xE) {
+        *cursor = *cursor + 1;
+        if ((s8)*cursor >= 0xE) {
             SND_SEPlay(EMI_SE_ID(SND_BANK_COMMON, 0));
-            D_80148655 = 8;
+            *cursor = 8;
         }
     } else if (g_PadStates[0].pressed & (PADLright | PADLleft)) {
         SND_SEPlay(EMI_SE_ID(SND_BANK_COMMON, 1));

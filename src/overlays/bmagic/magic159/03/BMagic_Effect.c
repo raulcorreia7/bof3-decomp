@@ -4,7 +4,8 @@
 __asm__(".include \"include/match/macro.inc\"\n");
 #endif
 
-MATCH void func_801EEC04(void) {
+/* func_801EEC04 */
+MATCH void BMagic_GloomUpdate(void) {
     Callback handlers[2] = {BMagic_GloomInit, Effect_MarkDamagedOnZeroTick};
 
     SYS_DISPATCH_TASK(handlers, 1, g_Task);
@@ -25,7 +26,7 @@ MATCH void BMagic_GloomInit(void) {
     work->pos.z.fixed  = g_BattleSelectedActor->pos.z.fixed;
     work->param.unk_0B = 0;
     TASK(PartyMember)->header.mode += 1;
-    slot                               = Battle_AllocEffect(1, 88) & BYTE_MASK;
+    slot                               = Battle_AllocEffect(1, BMAGIC_EFFECT_GLOOM) & BYTE_MASK;
     target                             = TASK(PartyMember);
     g_BattleEffects[slot].header.mode  = 0;
     g_BattleEffects[slot].arg.unk_09   = 8;
@@ -53,7 +54,8 @@ MATCH void BMagic_GloomFlareUpdate(void) {
     }
 }
 
-MATCH void func_801EEEC8(void) {
+/* func_801EEEC8 */
+MATCH void BMagic_GloomFlareWait(void) {
     PartyMember* src;
     PartyMember* dst;
 
@@ -94,7 +96,8 @@ MATCH void BMagic_GloomFlareHold(void) {
     }
 }
 
-MATCH void func_801EF014(void) {
+/* func_801EF014 */
+MATCH void BMagic_GloomFlareEnd(void) {
     PartyMember* work;
     PartyMember* active;
     u8           count;

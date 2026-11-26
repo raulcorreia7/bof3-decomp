@@ -291,7 +291,7 @@ extern u16 D_1F80000E; /* 0x1F80000E */
 extern s8  D_800E4D40; /* 0x800E4D40 */
 extern s16 D_800E4D42; /* 0x800E4D42 */
 extern u8  D_80143BB1;
-/* A unit that must keep the read where it is written (func_801A68C0) defines
+/* A unit that must keep the read where it is written (Actor_SpawnFromDefRow) defines
  * FAKE_DECL_GAME_AREA_ID_VOLATILE before its first include. */
 #ifdef FAKE_DECL_GAME_AREA_ID_VOLATILE
 extern volatile u16 g_GameAreaId;
@@ -369,7 +369,7 @@ extern s32                 D_801468C4;
  * The member form shares one slot offset between the stores and shortens each function by 0x34 bytes. */
 extern u8                  D_801468FF;
 extern u8                  D_80146900[ENTITY_MAX][ACTOR_SIZE]; /* 0x80146900 */
-/* FAKE: column views of g_Actors for Actor_SpawnPartyFromRecord and func_801A68C0, the only forms that match them. */
+/* FAKE: column views of g_Actors for Actor_SpawnPartyFromRecord and Actor_SpawnFromDefRow, the only forms that match them. */
 extern u16                 D_80146904[ENTITY_MAX][ACTOR_SIZE / 2];       /* Actor.unk_7C */
 extern s32                 g_ActorWalkDestX[ENTITY_MAX][ACTOR_SIZE / 4]; /* Actor.walk_dest_x */
 extern s32                 g_ActorWalkDestY[ENTITY_MAX][ACTOR_SIZE / 4]; /* Actor.walk_dest_y */
@@ -585,19 +585,7 @@ void    func_8019B10C(void);
 void    func_8019B150(void);
 void    func_8019B1E8(void);
 void    func_8019B284(void);
-void    func_8019B364(void);
-void    func_8019B3A8(void);
-void    func_8019B4A0(void);
 void    func_8019B704(void);
-void    func_8019BBA4(void);
-void    func_8019BE28(void);
-void    func_8019BEFC(void);
-void    func_8019BF78(void);
-void    func_8019BFD4(void);
-bool    func_8019C028(void);
-void    func_8019C124(s32 step_byte);
-s32     func_8019C1E4(void);
-s32     func_8019C4F0();
 void    func_8019C620(void);
 void    func_8019C664(void);
 void    func_8019C794(void);
@@ -658,47 +646,19 @@ void    func_8019FF88(s32 entry_mode, s32 entry_index, s32 entry_flags);
 void    func_801A02E8(void);
 u8      func_801A0348(s16 map_x, s16 map_y);
 void    func_801A0380(s16 x, s16 y, u16 type);
-void    func_801A0AE4(Actor* record);
-void    func_801A0CFC(Actor* entity);
-void    func_801A0F24(Actor* record);
-void    func_801A114C(Actor* record);
-void    func_801A1384(void* entity);
 s32     func_801A17A0(u8* entry_record);
-void    func_801A1A24(u8* record);
-bool    func_801A1A58(Actor* actor);
 s32     func_801A1BC0(Actor* record);
 s32     func_801A1C5C(s32 x, s32 y, s32 route, s32 unused);
 s32     func_801A1ED8(s32 x, s32 y, s32 route, s32 unused);
 s32     func_801A21EC(s32 x, s32 y);
 s32     func_801A223C(s32 x, s32 y);
-s32     func_801A225C(s32 unused, s32 divisor, s32 flag_bits);
-s32     func_801A22CC(Actor* value_a, s32 value_b, u8 flag_bits);
-s32     func_801A239C(Actor* value_a, s32 value_b, u8 flag_bits);
-s32     func_801A246C(s32 value_a, s32 value_b, s32 flag_bits);
-void    func_801A271C(void* record);
 /* Kept (): retail callers load $a0 in the jal delay slot (`addiu a0,s0,116`) and the callee never reads it; with (void)
- * that instruction is dropped (Area_SetXFixed) or the frame shrinks by 8 bytes (func_801A1384). */
-void    func_801A275C(void* unused);
-void    func_801A2788(s32 step_index);
+ * that instruction is dropped (Area_SetXFixed) or the frame shrinks by 8 bytes (Actor_RunRoute). */
 void    func_801A27C4(Actor* entity);
-u8      func_801A2A04(Actor* entity);
 void    func_801A2AE4(Actor* entity, u8 route_flag);
-u8      func_801A2C94(Actor* actor);
-u8      func_801A2DB4(Actor* entity);
-u8      func_801A2ED4(Actor* entity, u8 route_step);
 void    func_801A3080(Actor* actor, u8 facing);
-void    func_801A3410(void* work_index);
 void    func_801A3648(void);
 void    func_801A386C(void);
-bool    func_801A3AC8(Actor* record);
-void    func_801A3B7C(Actor* entity);
-void    func_801A50C0(u8* script);
-void    func_801A5400(u8* script);
-void    func_801A57F0(u8* script);
-void    func_801A5B78(u8* script);
-void    func_801A5EFC(u8* script);
-void    func_801A68C0(u8* script);
-void    func_801A6F58(u8* script);
 s8      func_801A79A4(s32 handler_x, s32 handler_y);
 s32     func_801A8714(void);
 s8      func_801A8728(s32 entry_x, s32 entry_y);
@@ -1232,7 +1192,7 @@ static inline void GameRunMapLoadHandshake(void) {
     Area_RunFrame();
 }
 
-/* Add the flag-selected step to the shared counter byte. */
+/* Adds step moves to the actor's move counter when bit 0 of g_EncounterSteps changed since the last actor update; with bit 1 set it sets the move timer while the counter is not 0. */
 static inline s32 Game_AddStepByFlag(s32 step, Actor* actor, s32 value_b, u8 flag_bits) {
     s32 bit0;
     s32 flags;

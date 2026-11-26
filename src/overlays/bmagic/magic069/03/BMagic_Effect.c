@@ -4,11 +4,15 @@
 __asm__(".include \"include/match/macro.inc\"\n");
 #endif
 
-MATCH void func_801EEC04(void) {
-    ACTOR_RUN_MODE_HANDLER(func_801EEC5C, func_801EEE30);
+/* The module entry: runs the init, then Effect_MarkDamagedOnZeroTick. */
+/* func_801EEC04 */
+MATCH void BMagic_InfluenceUpdate(void) {
+    ACTOR_RUN_MODE_HANDLER(BMagic_InfluenceInit, Effect_MarkDamagedOnZeroTick);
 }
 
-MATCH void func_801EEC5C(void) {
+/* Takes the selected actor's screen point, spawns 3 right rings and 3 left rings with delays of 1 to 3 frames, copies the palette and plays the sound. */
+/* func_801EEC5C */
+MATCH void BMagic_InfluenceInit(void) {
     u8           i;
     u8           slot;
     PartyMember* actor;
@@ -20,23 +24,23 @@ MATCH void func_801EEC5C(void) {
     TASK(PartyMember)->screen_y.value = actor->screen_y.value;
     TASK(PartyMember)->param.unk_0B   = 0;
     TASK(PartyMember)->header.mode += 1;
-    for (i = 0; i < 3; i++) {
+    for (i = 0; i < BMAGIC_INFLUENCE_RING_COUNT; i++) {
         PartyMember* work;
 
-        slot                               = Battle_AllocEffect(1, 57);
+        slot                               = Battle_AllocEffect(1, BMAGIC_EFFECT_INFLUENCE);
         work                               = TASK(PartyMember);
-        g_BattleEffects[slot].header.mode  = 0;
+        g_BattleEffects[slot].header.mode  = BMAGIC_INFLUENCE_EFFECT_RIGHT_RING;
         g_BattleEffects[slot].unk_0B       = i;
         g_BattleEffects[slot].arg.unk_09   = i + 1;
         g_BattleEffects[slot].target.party = work;
         TASK(PartyMember)->param.unk_0B += 1;
     }
-    for (i = 0; i < 3; i++) {
+    for (i = 0; i < BMAGIC_INFLUENCE_RING_COUNT; i++) {
         PartyMember* work;
 
-        slot                               = Battle_AllocEffect(1, 57);
+        slot                               = Battle_AllocEffect(1, BMAGIC_EFFECT_INFLUENCE);
         work                               = TASK(PartyMember);
-        g_BattleEffects[slot].header.mode  = 1;
+        g_BattleEffects[slot].header.mode  = BMAGIC_INFLUENCE_EFFECT_LEFT_RING;
         g_BattleEffects[slot].unk_0B       = i;
         g_BattleEffects[slot].arg.unk_09   = i + 1;
         g_BattleEffects[slot].target.party = work;
@@ -58,28 +62,32 @@ MATCH void func_801EEC5C(void) {
 /* func_801EEE90 */
 #include "overlays/bmagic/shared/BMagic_DispatchEffectMode.h"
 
-MATCH void func_801EEED4(void) {
+/* Runs the right ring step that header.step selects and draws its ring and fans, and from step 3 a cross. */
+/* func_801EEED4 */
+MATCH void BMagic_InfluenceRightRingUpdate(void) {
     s32 tpage;
 
-    SYS_DISPATCH_BYTE(D_801F0504, TASK(PartyMember)->header.step);
+    SYS_DISPATCH_BYTE(g_BMagicInfluenceRightRingSteps, TASK(PartyMember)->header.step);
     tpage = getTPage(TPAGE_DEPTH_4BIT, TPAGE_ABR_ADD, 320, 256);
     GFX_ADD_DITHERED_DRAW_MODE(BMAGIC_LAYER_OVER_BATTLERS, tpage);
     if (TASK(PartyMember)->header.flags & 0x1) {
         if (TASK(PartyMember)->header.step != 0) {
-            func_801EFF14();
-            func_801EFC00();
+            BMagic_InfluenceDrawRing();
+            BMagic_InfluenceDrawFans();
         }
     }
     if (TASK(PartyMember)->header.flags & 0x1) {
         if (TASK(PartyMember)->header.step >= 3) {
-            func_801F0104();
+            BMagic_InfluenceDrawCross();
         }
     }
     tpage = getTPage(TPAGE_DEPTH_4BIT, TPAGE_ABR_HALF, 320, 256);
     GFX_ADD_DITHERED_DRAW_MODE(BMAGIC_LAYER_OVER_BATTLERS, tpage);
 }
 
-MATCH void func_801EF034(void) {
+/* Right ring step 0: after its delay places the ring 0x37 right of the effect battler's screen point and sets its radius to 32. */
+/* func_801EF034 */
+MATCH void BMagic_InfluenceRightRingStart(void) {
     PartyMember* src;
     PartyMember* dst;
 
@@ -95,7 +103,9 @@ MATCH void func_801EF034(void) {
     }
 }
 
-MATCH void func_801EF0C4(void) {
+/* Right ring step 1: moves the ring left over 11 frames; the first ring plays the sound and advances, the others end. */
+/* func_801EF0C4 */
+MATCH void BMagic_InfluenceRightRingApproach(void) {
     s32 step_next;
 
     step_next                 = TASK(PartyMember)->unk_0C - 1;
@@ -112,19 +122,23 @@ MATCH void func_801EF0C4(void) {
     }
 }
 
-MATCH void func_801EF15C(void) {
+/* Right ring step 2: after 16 frames spawns the marks and advances. */
+/* func_801EF15C */
+MATCH void BMagic_InfluenceRightRingSpawnMarks(void) {
     u8 count;
 
     count                     = TASK(PartyMember)->unk_09 + 1;
     TASK(PartyMember)->unk_09 = count;
     if ((count & BYTE_MASK) == 0x10) {
-        func_801F0274();
+        BMagic_InfluenceSpawnMarks();
         TASK(PartyMember)->param.unk_0B = 0;
         TASK(PartyMember)->header.step += 1;
     }
 }
 
-MATCH void func_801EF1D0(void) {
+/* Right ring step 3: pulses its shade until the effect battler's count of live pieces is 1, then plays the sound and advances. */
+/* func_801EF1D0 */
+MATCH void BMagic_InfluenceRightRingPulse(void) {
     u8 value;
     u8 value2;
 
@@ -148,7 +162,9 @@ MATCH void func_801EF1D0(void) {
     }
 }
 
-MATCH void func_801EF2AC(void) {
+/* Right ring step 4: shrinks the radius by 2 per frame to 8, then lowers the count of live pieces and clears the effect. */
+/* func_801EF2AC */
+MATCH void BMagic_InfluenceRightRingEnd(void) {
     PartyMember* work;
     u8           next;
 
@@ -161,17 +177,21 @@ MATCH void func_801EF2AC(void) {
     }
 }
 
-MATCH void func_801EF30C(void) {
-    SYS_DISPATCH_BYTE(D_801F0518, TASK(PartyMember)->header.step);
+/* Runs the left ring step that header.step selects and draws its ring and fans. */
+/* func_801EF30C */
+MATCH void BMagic_InfluenceLeftRingUpdate(void) {
+    SYS_DISPATCH_BYTE(g_BMagicInfluenceLeftRingSteps, TASK(PartyMember)->header.step);
     GFX_AddDitheredDrawMode(BMAGIC_LAYER_OVER_BATTLERS, getTPage(TPAGE_DEPTH_4BIT, TPAGE_ABR_ADD, 320, 256));
     if (TASK(PartyMember)->header.flags & 0x1 && TASK(PartyMember)->header.step != 0) {
-        func_801EFF14();
-        func_801EFC00();
+        BMagic_InfluenceDrawRing();
+        BMagic_InfluenceDrawFans();
     }
     GFX_AddDitheredDrawMode(BMAGIC_LAYER_OVER_BATTLERS, getTPage(TPAGE_DEPTH_4BIT, TPAGE_ABR_HALF, 320, 256));
 }
 
-MATCH void func_801EF430(void) {
+/* Left ring step 0: after its delay places the ring 0x37 left of the effect battler's screen point and sets its radius to 32. */
+/* func_801EF430 */
+MATCH void BMagic_InfluenceLeftRingStart(void) {
     PartyMember* src;
     PartyMember* dst;
 
@@ -187,7 +207,9 @@ MATCH void func_801EF430(void) {
     }
 }
 
-MATCH void func_801EF4C0(void) {
+/* Left ring step 1: moves the ring right over 11 frames, then lowers the count of live pieces and clears the effect. */
+/* func_801EF4C0 */
+MATCH void BMagic_InfluenceLeftRingApproach(void) {
     s32 count;
 
     count                     = TASK(PartyMember)->unk_0C - 1;
@@ -199,11 +221,15 @@ MATCH void func_801EF4C0(void) {
     }
 }
 
-MATCH void func_801EF520(void) {
-    SYS_DISPATCH_TASK(g_BMagicEffectModes + 10, 2, g_Task);
+/* Runs the mark step that header.step selects from g_BMagicInfluenceMarkSteps. */
+/* func_801EF520 */
+MATCH void BMagic_InfluenceMarkUpdate(void) {
+    SYS_DISPATCH_TASK(g_BMagicInfluenceMarkSteps, 2, g_Task);
 }
 
-MATCH void func_801EF564(void) {
+/* Mark step 0: starts a palette fade on the mark's battler and places the mark's quad at its upper left. */
+/* func_801EF564 */
+MATCH void BMagic_InfluenceMarkStart(void) {
     PartyMember* battler;
     u8           slot;
     u16          y;
@@ -232,7 +258,9 @@ MATCH void func_801EF564(void) {
     TASK(PartyMember)->header.step += 1;
 }
 
-MATCH void func_801EF724(void) {
+/* Mark step 1: raises the battler's palette fade by 1 per frame to 16. */
+/* func_801EF724 */
+MATCH void BMagic_InfluenceMarkFadeIn(void) {
     g_PaletteFades[TASK(PartyMember)->timer].offset.r += 1;
     g_PaletteFades[TASK(PartyMember)->timer].offset.g += 1;
     g_PaletteFades[TASK(PartyMember)->timer].offset.b += 1;
@@ -241,7 +269,9 @@ MATCH void func_801EF724(void) {
     }
 }
 
-MATCH void func_801EF834(void) {
+/* Mark step 2: lowers the battler's palette fade to 0, plays the sound for the first mark, frees the fade and restores the battler's poison fade. */
+/* func_801EF834 */
+MATCH void BMagic_InfluenceMarkFadeOut(void) {
     g_PaletteFades[TASK(PartyMember)->timer].offset.r -= 1;
     g_PaletteFades[TASK(PartyMember)->timer].offset.g -= 1;
     g_PaletteFades[TASK(PartyMember)->timer].offset.b -= 1;
@@ -257,11 +287,13 @@ MATCH void func_801EF834(void) {
     }
 }
 
-MATCH void func_801EF9C4(void) {
+/* Mark step 3: draws the mark's quad, which grows 4 per frame to 24 tall, for 20 frames. */
+/* func_801EF9C4 */
+MATCH void BMagic_InfluenceMarkGrow(void) {
     u8 timer;
     u8 counter;
 
-    func_801EFA84();
+    BMagic_InfluenceDrawMark();
     timer = TASK(PartyMember)->timer;
     if ((timer & BYTE_MASK) != 24) {
         TASK(PartyMember)->timer = timer + 4;
@@ -275,8 +307,9 @@ MATCH void func_801EF9C4(void) {
 
 #include "overlays/bmagic/shared/Effect_TickDownAndClear.h"
 
-/* The effect's screen-cell quad: 48 wide, the timer tall, its texture page chosen by graph type. */
-MATCH void func_801EFA84(void) {
+/* Draws the mark: a 48 wide textured quad as tall as the effect's timer. */
+/* func_801EFA84 */
+MATCH void BMagic_InfluenceDrawMark(void) {
     POLY_FT4* prim;
     s32       tpage;
 
@@ -293,9 +326,9 @@ MATCH void func_801EFA84(void) {
     GFX_AddPrim(BMAGIC_LAYER_FOREGROUND, sizeof(POLY_FT4));
 }
 
-/* Draw four fans of three shaded triangles round the effect screen point, one per quarter turn
- * at the timer radius; their red and green shades fade in by step. */
-MATCH void func_801EFC00(void) {
+/* Draws four fans of three shaded triangles round the effect's screen point, one per quarter turn at the timer radius; their red and green shades change with the step. */
+/* func_801EFC00 */
+MATCH void BMagic_InfluenceDrawFans(void) {
     POLY_G3* prim;
     s32      i;
     s32      j;
@@ -317,10 +350,10 @@ MATCH void func_801EFC00(void) {
             SetPolyG3(prim);
             SetSemiTrans(prim, 1);
             setXY0(prim, g_ScratchPad.cells.halves[6], g_ScratchPad.cells.halves[7]);
-            g_ScratchPad.cells.halves[2] = ((D_801F0534[j] + i * 16) & 0x3F) << 6;
+            g_ScratchPad.cells.halves[2] = ((g_BMagicInfluenceFanPhases[j] + i * 16) & 0x3F) << 6;
             prim->x1                     = g_ScratchPad.cells.halves[6] + FIXED_MUL(rsin(g_ScratchPad.cells.halves[2]), g_ScratchPad.cells.halves[1]);
             prim->y1                     = g_ScratchPad.cells.halves[7] + FIXED_MUL(rcos(g_ScratchPad.cells.halves[2]), g_ScratchPad.cells.halves[1]);
-            g_ScratchPad.cells.halves[2] = ((D_801F0534[j + 1] + i * 16) & 0x3F) << 6;
+            g_ScratchPad.cells.halves[2] = ((g_BMagicInfluenceFanPhases[j + 1] + i * 16) & 0x3F) << 6;
             prim->x2                     = g_ScratchPad.cells.halves[6] + FIXED_MUL(rsin(g_ScratchPad.cells.halves[2]), g_ScratchPad.cells.halves[1]);
             prim->y2                     = g_ScratchPad.cells.halves[7] + FIXED_MUL(rcos(g_ScratchPad.cells.halves[2]), g_ScratchPad.cells.halves[1]);
             setRGB0(prim, g_ScratchPad.cells.halves[3], g_ScratchPad.cells.halves[4], 1);
@@ -331,9 +364,9 @@ MATCH void func_801EFC00(void) {
     }
 }
 
-/* Draws a ring of the timer radius round the effect's screen point as 64 line segments, keeping
- * the middle half of every sixteen; the scratchpad holds the radius, angle, shade and centre. */
-MATCH void func_801EFF14(void) {
+/* Draws a ring of 64 line segments round the effect's screen point, keeping the middle half of every sixteen, at the timer radius. */
+/* func_801EFF14 */
+MATCH void BMagic_InfluenceDrawRing(void) {
     LINE_F2* prim;
     s32      i;
     s32      segment;
@@ -363,7 +396,9 @@ MATCH void func_801EFF14(void) {
     }
 }
 
-MATCH void func_801F0104(void) {
+/* Draws a cross of two 8 long lines at the effect's screen point. */
+/* func_801F0104 */
+MATCH void BMagic_InfluenceDrawCross(void) {
     LINE_F2*      line;
     volatile u16* shade;
 
@@ -402,9 +437,9 @@ MATCH void func_801F0104(void) {
     GFX_AddPrim(BMAGIC_LAYER_OVER_BATTLERS, sizeof(LINE_F2));
 }
 
-/* Spawn a piece on every selectable battler other than the actor and the target that is
- * confused, charging or under 2 intelligence, counting the pieces in the effect battler ticker. */
-MATCH void func_801F0274(void) {
+/* Spawns a mark on every selectable battler other than the actor and the target that is confused, charging or has under 2 intelligence, and counts them in the effect battler's byte 0x0B. */
+/* func_801F0274 */
+MATCH void BMagic_InfluenceSpawnMarks(void) {
     s32          i;
     s32          count;
     s32          slot;
@@ -416,9 +451,9 @@ MATCH void func_801F0274(void) {
             g_Battle.target_selector != i + BATTLE_PARTY_CHARACTERS_COUNT) {
             if (g_BattleEnemyBattlers[i].stats.intelligence < 2 || (g_BattleEnemyBattlers[i].status & STATUS_CONFUSED) ||
                 (g_BattleEnemyBattlers[i].turn.action_flags.value & BATTLER_ACTION_CHARGING)) {
-                slot                               = Battle_AllocEffect(1, 57) & BYTE_MASK;
+                slot                               = Battle_AllocEffect(1, BMAGIC_EFFECT_INFLUENCE) & BYTE_MASK;
                 work                               = g_BattleEffectBattler;
-                g_BattleEffects[slot].header.mode  = 2;
+                g_BattleEffects[slot].header.mode  = BMAGIC_INFLUENCE_EFFECT_MARK;
                 g_BattleEffects[slot].unk_04       = count;
                 g_BattleEffects[slot].unk_0B       = i + BATTLE_PARTY_CHARACTERS_COUNT;
                 g_BattleEffects[slot].target.party = work;
@@ -431,9 +466,9 @@ MATCH void func_801F0274(void) {
         if (Battle_SlotIsBlocked((u8)i) == 0 && g_Battle.active_battler != i && g_Battle.target_selector != i) {
             if (g_Game.members[i].chr.stats.intelligence < 2 || (g_Game.members[i].chr.status & STATUS_CONFUSED) || (g_Game.members[i].u.turn.action_flags.value & BATTLER_ACTION_CHARGING) ||
                 (g_Game.members[i].u.turn.action_flags.value & BATTLER_ACTION_DRAGON_FORM_QUEUED)) {
-                slot                               = Battle_AllocEffect(1, 57) & BYTE_MASK;
+                slot                               = Battle_AllocEffect(1, BMAGIC_EFFECT_INFLUENCE) & BYTE_MASK;
                 work                               = g_BattleEffectBattler;
-                g_BattleEffects[slot].header.mode  = 2;
+                g_BattleEffects[slot].header.mode  = BMAGIC_INFLUENCE_EFFECT_MARK;
                 g_BattleEffects[slot].unk_04       = count;
                 g_BattleEffects[slot].unk_0B       = i;
                 g_BattleEffects[slot].target.party = work;

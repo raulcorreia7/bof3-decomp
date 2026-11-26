@@ -30,7 +30,7 @@ MATCH void func_801EEC90(void) {
     D_801EC330[slot & BYTE_MASK].unk_06              = 1;
     D_801EC330[slot & BYTE_MASK].header.mode         = 0;
     D_801EC330[slot & BYTE_MASK].header.step         = 0;
-    D_801EC330[slot & BYTE_MASK].step_index          = 0x45;
+    D_801EC330[slot & BYTE_MASK].effect_type         = 69;
     TASK(PartyMember)->param.unk_0B++;
     g_BattleEffectBattler->header.flags |= ACTOR_FLAG_HIDDEN;
 

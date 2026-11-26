@@ -1,3 +1,4 @@
 ["emi/world01/area075/13"]
 jtbl_801F2C04 = { addr = 0x801F2C04, type = "Callback", size = 0x90, source = "The switch table of func_801F37EC: 36 jump targets of its jr dispatch." }
 UI_WindowDrawPanel = { addr = 0x801F4A50, type = "func", source = "Draws a window panel at (x, y) as four textured quads (the left edge, two halves of the middle, the right edge) between two texture-window draw modes, then its frame with UI_WindowDrawFrame; mode selects the bright shade, the additive page and the clut row." }
+g_Area075OpponentGauge = { addr = 0x801F58CC, type = "u16", size = 0x2, alias = true, source = "D_801F58CC, the gauge func_801F45A8 lowers on its timing table (func_801F46D4 lowers D_801F58CA on the pad), as a one-element array: func_801F45A8 stores the lowered gauge through it so the store stays an in-record access ordered before the effect-counter step." }

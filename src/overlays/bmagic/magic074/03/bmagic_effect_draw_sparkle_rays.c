@@ -1,10 +1,10 @@
 #include "magic074_03.h"
 
-#include "overlays/bmagic/shared/Effect_DrawSparkleRays.h"
+#include "overlays/bmagic/shared/Effect_SparkleDrawRays.h"
 
-#include "overlays/bmagic/shared/Effect_DrawSparkleWedges.h"
+#include "overlays/bmagic/shared/Effect_SparkleDrawWedges.h"
 
-#include "overlays/bmagic/shared/Effect_DrawSparkleDisc.h"
+#include "overlays/bmagic/shared/Effect_SparkleDrawDisc.h"
 
 /* func_801F03D4 */
 #include "overlays/bmagic/shared/BMagic_AllocEffect.h"

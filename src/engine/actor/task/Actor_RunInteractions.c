@@ -29,7 +29,7 @@ MATCH u32 Actor_RunInteractions(void) {
                         } else {
                             Script_DispatchSelector(TASK(Actor)->direction & 0x7);
                         }
-                        if (TASK(Actor)->header.mode == 0xA) {
+                        if (TASK(Actor)->header.mode == ACTOR_MODE_TURN) {
                             g_Actors[i].unk_79 |= 1;
                         }
                     }
@@ -42,7 +42,7 @@ MATCH u32 Actor_RunInteractions(void) {
             } else if (g_Actors[i].roll_90 >= 0x1F && TASK(Actor)->timer == 0) {
                 func_801A27C4(&g_Actors[i]);
             } else {
-                D_801C83D8[TASK(Actor)->header.mode](&g_Actors[i]);
+                g_ActorModes[TASK(Actor)->header.mode](&g_Actors[i]);
             }
             if (TASK(Actor)->unk_06 == 0xA) {
                 continue;

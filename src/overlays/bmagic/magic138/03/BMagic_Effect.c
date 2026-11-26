@@ -37,7 +37,7 @@ MATCH void func_801EED60(void) {
     u8           slot;
 
     if ((g_FrameCount & 7) == 0) {
-        slot = Battle_AllocEffect(1, 0x56);
+        slot = Battle_AllocEffect(1, 86);
         if (slot != 0xFF) {
             g_BattleEffects[slot].header.mode = 0;
             g_BattleEffects[slot].header.step = 0;
@@ -144,7 +144,7 @@ MATCH void func_801EF3A0(void) {
     TASK(PartyMember)->unk_1C += TASK(PartyMember)->unk_10;
     if (g_Battle.active_battler < 3) {
         if (TASK(PartyMember)->screen_y.signed_value < g_Game.members[g_Battle.active_battler].screen_y.signed_value - 20) {
-            slot                               = Battle_AllocEffect(1, 0x56);
+            slot                               = Battle_AllocEffect(1, 86);
             g_BattleEffects[slot].header.mode  = 1;
             g_BattleEffects[slot].header.step  = 0;
             g_BattleEffects[slot].screen_x     = TASK(PartyMember)->screen_x.value;
@@ -155,7 +155,7 @@ MATCH void func_801EF3A0(void) {
         }
     } else {
         if (TASK(PartyMember)->screen_y.signed_value < g_BattleEnemyBattlers[g_Battle.active_battler - 3].screen_y - 40) {
-            slot                               = Battle_AllocEffect(1, 0x56);
+            slot                               = Battle_AllocEffect(1, 86);
             g_BattleEffects[slot].header.mode  = 1;
             g_BattleEffects[slot].header.step  = 0;
             g_BattleEffects[slot].screen_x     = TASK(PartyMember)->screen_x.value;

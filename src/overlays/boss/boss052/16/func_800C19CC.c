@@ -25,7 +25,7 @@ MATCH void func_800C19CC(void) {
     g_BattleEffects[effect_slot & BYTE_MASK].header.mode = 0;
     g_BattleEffects[effect_slot & BYTE_MASK].header.step = 0;
     g_BattleEffects[effect_slot & BYTE_MASK].unk_06      = 3;
-    g_BattleEffects[effect_slot & BYTE_MASK].step_index  = 4;
+    g_BattleEffects[effect_slot & BYTE_MASK].effect_type = 4;
     g_BattleEffects[effect_slot & BYTE_MASK].arg.unk_09  = 0;
     g_BattleEffects[effect_slot & BYTE_MASK].unk_29      = 3;
 }

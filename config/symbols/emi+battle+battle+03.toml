@@ -31,9 +31,9 @@ s_BattleSeIds = { addr = 0x801D0C98, source = "Picks a random battle SE id for t
 jtbl_801D0CA0 = { addr = 0x801D0CA0, type = "Callback", source = "The switch table of func_801DEFE4: the jump targets of its jr dispatch." }
 g_BattleDropChances = { addr = 0x801D0CB8, source = "Enemy item drop chances." }
 g_BattleEffectModes = { addr = 0x801D0CC0, source = "Battle effect mode handlers, indexed by the slot mode." }
-g_BattleBattlerEffectSteps = { addr = 0x801D0CD0, source = "Battle effect handlers for the battler effects (damage number, pose, ghost, form change), one per slot type." }
-g_BattleMagicEffectSteps = { addr = 0x801D0D1C, source = "Battle effect handlers for the magic effects the bmagic overlays queue, one per slot type." }
-g_BattleBossEffectSteps = { addr = 0x801D0ED4, source = "Battle effect handlers for the boss effects the boss overlays queue, one per slot type." }
+g_BattleBattlerEffectSteps = { addr = 0x801D0CD0, source = "Battle effect handlers for the battler effects (damage number, pose, ghost, form change), one per effect type." }
+g_BattleMagicEffectSteps = { addr = 0x801D0D1C, source = "Battle effect handlers for the magic effects the bmagic overlays queue, one per effect type." }
+g_BattleBossEffectSteps = { addr = 0x801D0ED4, source = "Battle effect handlers for the boss effects the boss overlays queue, one per effect type." }
 g_BattleDamageNumberSteps = { addr = 0x801D0EF4, source = "The damage number effect's five step routines" }
 jtbl_801D0F0C = { addr = 0x801D0F0C, type = "Callback", source = "The switch table of func_801E5CA4: the jump targets of its jr dispatch." }
 g_BattleScreenFlashSteps = { addr = 0x801D0F20, source = "The screen flash effect's three step routines" }
