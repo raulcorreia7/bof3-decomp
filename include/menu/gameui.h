@@ -363,8 +363,8 @@ extern u8       D_801490CF[];
 /* D_80181D98 */
 extern const u8 s_LoaderRecordBytes[168];
 extern u8       D_80181D99;
-/* 0x80181EBA / 0x80181EBB: byte tables the selection paths read with a 4-byte
- * row stride. */
+/* 0x80181EBA / 0x80181EBB: the sep_slot and sequence bytes of g_BGMTracks. Only the sites that share one
+ * `id * 4` between calls or walk a byte offset keep them; typing those moves their bytes. */
 /* D_80181EBA */
 extern u8       g_SelectionSepSlots[];
 /* D_80181EBB */

@@ -470,7 +470,7 @@ MATCH void func_801F8664(void) {
     s8* state;
 
     if ((g_PadStates[0].pressed & PADRdown) || D_801F9DD8 != 0) {
-        SND_StartDecrescendo(g_SelectionSepSlots[g_SndBGMId * 4], g_SelectionSequences[g_SndBGMId * 4], 100, 16);
+        SND_StartDecrescendo(g_BGMTracks[g_SndBGMId].sep_slot, g_BGMTracks[g_SndBGMId].sequence, 100, 16);
         UI_ModeSet(UI_MODE_LONG_FADE_OUT);
         state = &g_ScenarioState.state_04;
         (*state)++;
@@ -485,7 +485,7 @@ MATCH void func_801F8710(void) {
 
     if (g_SysThreads[2].state == 0) {
         bgm = &g_SndBGMId;
-        SND_SeqStop(g_SelectionSepSlots[*bgm * 4], g_SelectionSequences[*bgm * 4]);
+        SND_SeqStop(g_BGMTracks[*bgm].sep_slot, g_BGMTracks[*bgm].sequence);
         *bgm = GAME_NONE;
         SND_SetBankLayout(0);
         g_AreaDrawFlags = 0;
@@ -599,14 +599,13 @@ NON_MATCHING void func_801F8B10(s32 scale, s32 shade) {
     SetTransMatrix(&mtx);
     mode = getTPage(TPAGE_DEPTH_4BIT, TPAGE_ABR_SUB, 0, 0);
     GFX_ADD_DITHERED_DRAW_MODE(GFX_LAYER_EFFECT_FRONT, mode);
-    for (i = 0; i < 32;) {
+    for (i = 0; i < 32; i++) {
         a                         = i << 7;
         g_ScratchPadVectors[0].vx = 0;
         g_ScratchPadVectors[0].vy = 0;
         g_ScratchPadVectors[0].vz = 0;
         setVector(&g_ScratchPadVectors[1], (s16)FIXED_MUL(radius, rcos(a)), (s16)FIXED_MUL(radius, rsin(a)), 0);
-        i++;
-        b = i << 7;
+        b = (i + 1) << 7;
         setVector(&g_ScratchPadVectors[2], (s16)FIXED_MUL(radius, rcos(b)), (s16)FIXED_MUL(radius, rsin(b)), 0);
         tri = (POLY_G3*)g_GfxPrimCursor;
         setPolyG3(tri);

@@ -332,7 +332,8 @@ Coord z;                        /* a member named z whose role is a frame counte
 ## Types
 
 Types are PascalCase with no tag. A game concept that shares a layout gets its own typedef of the
-shared type, with its comment, so the meaning stays when the layout is reused.
+shared type, with its comment, so the meaning stays when the layout is reused. A two-letter acronym in a type name is
+written in capitals (`UIPanelOrigin`), matching its function tag.
 
 **Do**
 

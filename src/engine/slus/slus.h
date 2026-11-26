@@ -634,7 +634,8 @@ extern u8                          D_801490BB[];
 extern MenuState                   g_UiMessageWindow;
 extern s16                         D_801490C8; /* cue counter; reads sign at the < 9 test and zero-extends elsewhere */
 extern s16                         D_801490CA;
-extern u8                          D_801490CE;
+/* D_801490CE */
+extern u8                          g_UiPanelPlacement;
 extern s32                         D_801490D7;
 extern s32                         D_801492FC;
 extern s32                         D_80149300;
@@ -1171,7 +1172,7 @@ extern s32                        func_801F2C04(void);
 /* Pause or replay the sequence player for the selected sound entry. */
 static inline void Snd_ToggleSequencePlayer(void (*action)(short, short), s32 cue_id) {
     if ((cue_id & BYTE_MASK) != 0xFF) {
-        action(g_SelectionEffectVoices[g_SelectionSepSlots[(cue_id & BYTE_MASK) * 4]], g_SelectionSequences[(cue_id & BYTE_MASK) * 4]);
+        action(g_SelectionEffectVoices[g_BGMTracks[cue_id & BYTE_MASK].sep_slot], g_BGMTracks[cue_id & BYTE_MASK].sequence);
     }
 }
 

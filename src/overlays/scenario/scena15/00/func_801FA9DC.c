@@ -18,7 +18,7 @@ MATCH void func_801FA9DC(void) {
             if (g_ScriptVars[0] == 1) {
                 u8* flags;
 
-                SYS_SetFlag(&g_SceneFlagWords[14 * 8], 1);
+                SYS_SetFlag(g_SceneFlagRows[SCENARIO_DESERT_OF_DEATH], DESERT_FLAG_INTRO);
                 func_8019FA28(0xBD, TO_COORD(0x1000), TO_COORD(0x1400), 2);
                 flags                          = &g_ScenarioState.flags_01;
                 g_SaveData.return_point.facing = 2;
@@ -64,7 +64,7 @@ MATCH void func_801FA9DC(void) {
                 u8* flags;
 
                 Game_ClearScriptActive();
-                SYS_ClearFlag(&g_SceneFlagWords[14 * 8], 1);
+                SYS_ClearFlag(g_SceneFlagRows[SCENARIO_DESERT_OF_DEATH], DESERT_FLAG_INTRO);
                 func_8019FA28(0xC1, 0x1A8000, 0x1C0000, 0x82);
                 flags                    = &g_ScenarioState.flags_01;
                 g_ScenarioState.state_04 = 0;
@@ -82,8 +82,8 @@ MATCH void func_801FA9DC(void) {
                     g_SaveData.return_point.pending = 0;
                     func_8019FA28(0xC1, 0x1A8000, 0x1C0000, 0x83);
                 } else {
-                    SYS_SetFlag(&g_SceneFlagWords[14 * 8], 2);
-                    SYS_SetFlag(&g_SceneFlagWords[14 * 8], 3);
+                    SYS_SetFlag(g_SceneFlagRows[SCENARIO_DESERT_OF_DEATH], 2);
+                    SYS_SetFlag(g_SceneFlagRows[SCENARIO_DESERT_OF_DEATH], 3);
                     func_8019FA28(0xC1, 0x1A8000, 0x1C0000, 0x84);
                     g_GameEntryMode = 0xFF;
                 }

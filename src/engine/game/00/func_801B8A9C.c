@@ -8,7 +8,6 @@ MATCH void func_801B8A9C(void) {
     /* FAKE: retail keeps the step count in v1. */
     FAKE_REG(s32, steps, "v1");
     s32 word;
-    s32 offset;
     /* FAKE: retail keeps the work-area pointer in a1. */
     FAKE_REG(Actor*, work, "a1");
     s32        pos_x;
@@ -21,13 +20,12 @@ MATCH void func_801B8A9C(void) {
 
     count = 0;
 loop_top:
-    work   = TASK(Actor);
-    route  = count;
-    route  = (work->direction + route) & 0x7;
-    word   = FIELD(u32, work, 0x70u);
-    offset = route * 2;
-    pos_x  = work->pos.x.fixed + g_FacingSteps[route].x * (steps = (word & BYTE_MASK) + 1);
-    pos_y  = work->pos.y.fixed + g_FacingStepY[offset] * steps;
+    work  = TASK(Actor);
+    route = count;
+    route = (work->direction + route) & 0x7;
+    word  = FIELD(u32, work, 0x70u);
+    pos_x = work->pos.x.fixed + g_FacingSteps[route].x * (steps = (word & BYTE_MASK) + 1);
+    pos_y = work->pos.y.fixed + g_FacingSteps[route].y * steps;
     if ((Game_TestPlacement(pos_x, pos_y, (u8)word, COORD_INT(TASK(Actor)->pos.z)) & BYTE_MASK) != 0u ||
         (Area_CellTestCorners(pos_x, pos_y, TASK(Actor)->voice_flags.scene_flag, 0xD0, 0) & BYTE_MASK) == 0u) {
         count++;

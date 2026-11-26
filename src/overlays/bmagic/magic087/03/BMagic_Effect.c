@@ -17,7 +17,7 @@ MATCH void func_801EED04(void) {
 
     TASK(PartyMember)->param.unk_0B = 0;
     BMAGIC_CLEAR_EFFECTS(i);
-    if (g_Battle.target_selector & 0x40) {
+    if (g_Battle.target_selector & BATTLE_TARGET_ENEMY_SIDE) {
         for (i = 0; i < 8; i++) {
             battler = i + BATTLE_PARTY_CHARACTERS_COUNT;
             if (!Battle_SlotIsBlocked(battler)) {

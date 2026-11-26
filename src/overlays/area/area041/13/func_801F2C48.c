@@ -5,7 +5,7 @@ MATCH void func_801F2C48(void) {
 
     TASK(Actor)->param.unk_0B = TASK(Actor)->pos.x.part.integer;
     idx                       = TASK(Actor)->param.unk_0B;
-    if (SYS_TestFlag(&g_SceneFlagWords[D_801F42CC[idx] * 8], D_801F42D0[idx])) {
+    if (SYS_TestFlag(g_SceneFlagRows[D_801F42CC[idx]], D_801F42D0[idx])) {
         TASK(Actor)->header.step = 3;
         TASK(Actor)->pos.y.fixed = D_801F42C8[TASK(Actor)->param.unk_0B] + 2;
     } else {
