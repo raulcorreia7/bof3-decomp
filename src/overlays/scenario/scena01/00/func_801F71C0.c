@@ -102,8 +102,7 @@ MATCH void func_801F7644(void) {
 }
 
 /* func_801F7678 */
-#ifdef NON_MATCHING
-NON_MATCHING void func_801F7678(s32 shade_arg) {
+MATCH void func_801F7678(s32 shade_arg) {
     DVECTOR  last_inner;
     DVECTOR  last_outer;
     DVECTOR  inner;
@@ -115,6 +114,7 @@ NON_MATCHING void func_801F7678(s32 shade_arg) {
     s32      angle;
     u32      shade;
     u32      color;
+    u32      level;
     u8       i;
 
     Camera_SetMatrix(&matrix);
@@ -141,7 +141,8 @@ NON_MATCHING void func_801F7678(s32 shade_arg) {
         Area_CellAddPrim(point[0], point[1], 0, sizeof(DR_MODE));
         prim = GFX_BeginPolyG4(1);
         setXY4(prim, last_inner.vx, last_inner.vy, last_outer.vx, last_outer.vy, inner.vx, inner.vy, outer.vx, outer.vy);
-        color = ((u32)shade_arg & BYTE_MASK) * (shade & BYTE_MASK) >> 8;
+        level = shade_arg & BYTE_MASK;
+        color = level * (shade & BYTE_MASK) >> 8;
         setRGB0(prim, color, color, color);
         setRGB1(prim, color, color, color);
         if ((u8)(i - 4) >= 8) {
@@ -149,7 +150,8 @@ NON_MATCHING void func_801F7678(s32 shade_arg) {
         } else {
             shade -= 8;
         }
-        color = (shade & BYTE_MASK) * shade_arg >> 8;
+        level = shade_arg & BYTE_MASK;
+        color = level * (shade & BYTE_MASK) >> 8;
         setRGB2(prim, color, color, color);
         setRGB3(prim, color, color, color);
         Area_CellAddPrim(point[0], point[1], 0, sizeof(POLY_G4));
@@ -157,9 +159,6 @@ NON_MATCHING void func_801F7678(s32 shade_arg) {
         Area_CellAddPrim(point[0], point[1], 0, sizeof(DR_MODE));
     }
 }
-#else
-INCLUDE_ASM(func_801F7678);
-#endif
 
 #include "shared/Area_DrawSparkCell.h"
 
