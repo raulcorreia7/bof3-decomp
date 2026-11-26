@@ -284,7 +284,7 @@ segments:
       - [0x12270, c, func_801E2E70]
       - [0x122B0, c, Menu_ItemsPanel]
       - [0x12304, c, Shop_DrawItems]
-      - [0x125C4, c, func_801E31C4]
+      - [0x125C4, c, UI_PanelSlideOutOption_801E31C4]
       - [0x12604, c, func_801E3204]
       - [0x12644, c, func_801E3244]
       - [0x12684, c, func_801E3284]

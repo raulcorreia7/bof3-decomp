@@ -657,7 +657,8 @@ void func_801E2E70(void);
 /* func_801E2EB0 */
 void Menu_ItemsPanel(void);
 void Shop_DrawItems(MenuListPanel* panel);
-void func_801E31C4(void);
+/* func_801E31C4 */
+void UI_PanelSlideOutOption_801E31C4(void);
 void func_801E3204(void);
 void func_801E3244(void);
 void func_801E3284(MenuPanelTask* task);
