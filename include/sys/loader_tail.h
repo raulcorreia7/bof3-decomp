@@ -24,7 +24,7 @@ typedef struct ScriptEntry {
 
 ASSERT_SIZE(ScriptEntry, 0x04);
 
-/* Entry of D_80181E40: a record list inside D_80181D98 and a count. */
+/* Entry of D_80181E40: a record list inside s_LoaderRecordBytes and a count. */
 typedef struct ScriptList {
     const u8* list;
     u32       count;

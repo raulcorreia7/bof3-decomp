@@ -1,9 +1,7 @@
 #ifndef SLUS_EXPORTS_H
 #define SLUS_EXPORTS_H
 
-/* The main executable's exports to the overlays, in address order. Symbols
- * owned by a subsystem header are declared there; this file declares the
- * remaining SLUS_004.22 symbols the overlays read or call. */
+/* The main executable's exports to the overlays, in address order. */
 
 #include "types.h"
 #include "common/fixed.h"
@@ -16,8 +14,7 @@
 #include "sys/sched.h"
 #include <rand.h>
 
-/* The menu, shop and start overlays dispatch on the step, then the sub-step and
- * the state within it. */
+/* The menu, shop and start overlays dispatch on the step, then the sub-step and the state within it. */
 typedef struct MenuStep {
     u8 step;
     u8 sub_step;
@@ -83,8 +80,7 @@ extern Thread*      g_SysCurrentThread;
 /* D_80143D44 */
 extern u8           g_GfxBufferIndex;
 
-/* The double-buffered display record: the display and draw environments and
- * the eight ordering-table heads, 0x90 bytes per buffer. */
+/* The double-buffered display record: the display and draw environments and the eight ordering-table heads, 0x90 bytes per buffer. */
 typedef struct GfxFrame {
     DISPENV disp;  /* 0x00 */
     DRAWENV draw;  /* 0x14 */
@@ -289,10 +285,7 @@ extern u8                  g_SysHardwareInitialized;
 /* D_8018E140 */
 extern s32                 g_SndVoiceStatus[];
 
-/* Card event result codes, in event order: the software events
- * (EvSpIOE, EvSpTIMOUT, EvSpNEW, EvSpERROR) and the hardware events that
- * follow them. A poll starts at CARD_EVENT_PENDING, and a directory that would
- * outgrow the card returns CARD_EVENT_CAPACITY. */
+/* Card event result codes, in event order: the software events (EvSpIOE, EvSpTIMOUT, EvSpNEW, EvSpERROR) and the hardware events that follow them. */
 typedef enum CardEvent {
     CARD_EVENT_PENDING  = -1,
     CARD_EVENT_OK       = 0,

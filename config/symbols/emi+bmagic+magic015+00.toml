@@ -20,6 +20,7 @@ BMagic_ChargeInit = { addr = 0x801EED0C, type = "func", source = "Starts the lea
 BMagic_ChargeEnd = { addr = 0x801EF150, type = "func", source = "Restores the palette and releases the active battler." }
 Effect_StartPlaying = { addr = 0x801EF1CC, type = "func", source = "Raises BATTLE_STATE_EFFECT_PLAYING and clears the effect work record in magic015 (Flying Kick, Charge)." }
 Effect_PlayOnce = { addr = 0x801EF200, type = "func", source = "Plays the effect the target selector chose, raises BATTLE_STATE_EFFECT_PLAYING and clears the effect in magic015 (Flying Kick, Charge)." }
+BMagic_ChargeEnd_801EF594 = { addr = 0x801EF594, type = "func", source = "same body as emi/bmagic/magic015/00@0x801EF150 BMagic_ChargeEnd" }
 Effect_StartPlaying2 = { addr = 0x801EF610, type = "func", source = "Raises BATTLE_STATE_EFFECT_PLAYING and clears the effect work record in magic015 (Flying Kick, Charge)." }
 BMagic_FlyingKickUpdate = { addr = 0x801EF644, type = "func", source = "Runs the task mode of Flying Kick, the callback of g_BattleSelections row 55." }
 BMagic_FlyingKickInit = { addr = 0x801EF6B0, type = "func", source = "Starts the kicker image at the active battler and waits." }
@@ -41,6 +42,7 @@ BMagic_ChargeTrailWaitAnim = { addr = 0x801F014C, type = "func", source = "Waits
 BMagic_ChargeTrailApproach = { addr = 0x801F0194, type = "func", source = "Closes on the target and, in range, turns back toward the battler." }
 BMagic_ChargeTrailReturn = { addr = 0x801F0248, type = "func", source = "Arcs back toward the battler for a fixed time." }
 Effect_TickDownAndClear = { addr = 0x801F0300, type = "func", source = "Lowers the active battler's ticker (byte 0x0B) and clears the effect in magic015 (Flying Kick, Charge)." }
+BMagic_FlyingKickImageRejoin_801F0A94 = { addr = 0x801F0A94, type = "func", source = "same body as emi/bmagic/magic015/00@0x801F1088 BMagic_FlyingKickImageRejoin" }
 BMagic_FlyingKickImageUpdate = { addr = 0x801F0C30, type = "func", source = "Runs the kicker image's step, adds it to the grid and draws its shadow." }
 BMagic_FlyingKickImageStart = { addr = 0x801F0D48, type = "func", source = "Starts the jump." }
 BMagic_FlyingKickImageRise = { addr = 0x801F0DB4, type = "func", source = "Rises toward the target for a fixed time." }

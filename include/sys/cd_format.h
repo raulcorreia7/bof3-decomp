@@ -33,11 +33,8 @@ typedef enum EMIDir {
     EMI_DIR_SLUS     = 886,
 } EMIDir;
 
-/* A loader slot id indexes the disc file table at 0x80182444. A family base
- * is the slot of its first file; the file at base + n is the n-th of its
- * numbered series (ENEMY000, BGM000, PL012, AREA000, ...). */
+/* A loader slot id indexes the disc file table at 0x80182444. */
 typedef enum EMISlotId {
-    /* BATTLE */
     EMI_SLOT_BATL_DRA   = EMI_DIR_BATTLE,
     EMI_SLOT_BATL_END   = EMI_DIR_BATTLE + 1,
     EMI_SLOT_BATL_OVR   = EMI_DIR_BATTLE + 2,
@@ -74,7 +71,6 @@ typedef enum EMISlotId {
     EMI_SLOT_RTD01      = EMI_DIR_BPLCHAR + 102,
     EMI_SLOT_RTU00      = EMI_DIR_BPLCHAR + 103,
     EMI_SLOT_RTU01      = EMI_DIR_BPLCHAR + 104,
-    /* ETC */
     EMI_SLOT_A085SE2    = EMI_DIR_ETC,
     EMI_SLOT_A108SE2    = EMI_DIR_ETC + 1,
     EMI_SLOT_AFLDKWA    = EMI_DIR_ETC + 2,
@@ -109,8 +105,7 @@ typedef enum EMISlotId {
     EMI_SLOT_COUNT      = 887,
 } EMISlotId;
 
-/* The family argument of EMI_ArchiveLoadFamily selects the numbered series that the
- * index counts into. */
+/* The family argument of EMI_ArchiveLoadFamily selects the numbered series that the index counts into. */
 typedef enum EMIFamily {
     EMI_FAMILY_PL   = 0,
     EMI_FAMILY_BPLD = 1,

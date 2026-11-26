@@ -28,8 +28,7 @@
 #define EMI_SE_VOICE_MASK   0x1F
 #define EMI_SE_LAYER_MASK   0x60
 
-/* The sound banks, by what each holds. Banks 3 to 5 hold the party character
- * forms and have no SE site. */
+/* The sound banks, by what each holds. */
 typedef enum SndBank {
     SND_BANK_BGM    = 0,
     SND_BANK_COMMON = 1,

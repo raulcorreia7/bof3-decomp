@@ -92,9 +92,7 @@ typedef enum EquipStatRow {
     EQUIP_STAT_ROW_AGILITY = 2,
 } EquipStatRow;
 
-/* A message table (the wiki calls this a message bank): u16 byte offsets from
- * the table start, then the records. An area loads its table at
- * AREA_MESSAGE_TABLE; a message id is the offset index. */
+/* A message table (the wiki calls this a message bank): u16 byte offsets from the table start, then the records. */
 typedef struct MessageTable {
     u16 offsets[1];
 } MessageTable;
@@ -142,16 +140,12 @@ typedef struct MessageTable {
 #define MENU_EXPERIENCE_VALUE_X       0x15
 #define MENU_EXPERIENCE_VALUE_Y       0x1A
 
-/* The requested message id: 0xFFFF means no message. ResourceRequestMessage
- * stores a message index in the slot and UI_MessageStartRequest reads the slot as that
- * index; the player's menu choice at g_UiMessageChoice decides the index. */
+/* The requested message id: 0xFFFF means no message. */
 #define MESSAGE_NONE                  0xFFFF
 #define MESSAGE_REQUEST_CLEAR()       (g_UiMessageRequest = MESSAGE_NONE)
 
-/* The player's menu choice at 0x801490C7 (MenuState.selection_index): zero
- * while no answer is selected, nonzero once the player picks one. */
-/* An alias byte of g_UiMessageWindow.selection_index: the area overlays read it as a plain byte, and the
- * member access changes their code. */
+/* The player's menu choice at 0x801490C7 (MenuState.selection_index): zero while no answer is selected, nonzero once the player picks one. */
+/* An alias byte of g_UiMessageWindow.selection_index: the area overlays read it as a plain byte, and the member access changes their code. */
 /* D_801490C7 */
 extern s8 g_UiMessageChoice;
 #define MENU_SELECTION_IDLE()  (g_UiMessageChoice == 0)
@@ -163,8 +157,7 @@ extern s8 g_UiMessageChoice;
 
 /* A countdown timer expires when the decrement reaches zero. */
 #define TIMER_EXPIRED(timer)   (--(timer) == 0)
-/* EMI_ArchiveLoadFamily packs the loaded archive's index (low 7 bits) with
- * the family-0 (PL) marker bit; readers mask the index off. */
+/* EMI_ArchiveLoadFamily packs the loaded archive's index (low 7 bits) with the family-0 (PL) marker bit; readers mask the index off. */
 #define EMI_LOADED_INDEX_MASK  0x7F
 #define EMI_LOADED_PL          0x80
 
@@ -174,8 +167,7 @@ extern s8 g_UiMessageChoice;
  * words; the shared calls resolve resources, decode pad input and queue cues.
  * Format: @source: wiki:data/text. */
 
-/* The work-list draw flags in D_8014832E: the draw pass sorts the work table
- * by its key, then walks the records the set bits ask for. */
+/* The work-list draw flags in g_AreaDrawFlags: the draw pass sorts the work table by its key, then walks the records the set bits ask for. */
 typedef enum AreaDrawFlags {
     AREA_DRAW_SORTED_RECORDS          = 1 << 0,
     AREA_DRAW_NEGATIVE_DEPTH          = 1 << 1,
@@ -185,8 +177,7 @@ typedef enum AreaDrawFlags {
     AREA_DRAW_ALL_FLAGS               = AREA_DRAW_SORTED_RECORDS | AREA_DRAW_NEGATIVE_DEPTH | AREA_DRAW_CELL_LAYERS | AREA_DRAW_APPEND_ACTOR_PRIMITIVES | AREA_DRAW_APPEND_AREA_PRIMITIVES,
 } AreaDrawFlags;
 
-/* The frontend channel word D_801490A4: the window script machine, the
- * selection passes and the shop/start overlays share it. */
+/* The frontend channel word g_UiWindowChannel: the window script machine, the selection passes and the shop/start overlays share it. */
 typedef enum FrontendFlags {
     FRONTEND_FLAG_TIMER_ACTIVE    = 1 << 0,
     FRONTEND_FLAG_CONFIRM         = 1 << 1,
@@ -201,8 +192,7 @@ typedef enum FrontendFlags {
 extern s32 D_80143B4C;
 extern s32 D_80143B50;
 
-/* The request code that field code writes to g_GameStateIndex. Game_UpdateField reads it after the per-frame
- * update and enters the state named in the comment. Codes 0 to 9 are all it handles. */
+/* The request code that field code writes to g_GameStateIndex. */
 typedef enum GameRequest {
     GAME_REQUEST_IDLE         = 0,
     GAME_REQUEST_MENU         = 1, /* state 3 */

@@ -30,8 +30,7 @@ typedef enum CdState {
 
 #define CD_STATE_COUNT  9
 
-/* The loader's step counter, a word in the bank mapped at 0x80140000 (EMI_LdrLoadVabBody, EMI_LdrLoadVabCues,
- * EMI_LdrLoadSequence). */
+/* The loader's step counter, a word in the bank mapped at 0x80140000 (EMI_LdrLoadVabBody, EMI_LdrLoadVabCues, EMI_LdrLoadSequence). */
 #define EMI_LOADER_STEP (*(volatile u32*)(D_80140000 + 0x646C))
 
 /* The load in flight: the disc sector it reads from, then its TOC row with `size` counting down. */
@@ -43,8 +42,7 @@ typedef struct EMIActiveLoad {
 ASSERT_OFFSET(EMIActiveLoad, entry, 0x04);
 ASSERT_SIZE(EMIActiveLoad, 0x14);
 
-/* The CD/EMI stream: the entry being transferred, its ring cursor, the CD callback state and the
- * last sync result. The individual g_Emi* and g_Cd* globals are access views of its members. */
+/* The CD/EMI stream: the entry being transferred, its ring cursor, the CD callback state and the last sync result. */
 typedef struct EMIStream {
     /* 0x00 */ volatile u32 start_sector;
     /* 0x04 */ volatile u32 bytes_left;

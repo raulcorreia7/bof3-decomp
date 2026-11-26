@@ -209,14 +209,12 @@ typedef enum AreaId {
     AREA_ID_END_GAME_SAVE                        = 199,
 } AreaId;
 
-/* Or-ed into the facing of an area request: only the scroll target is placed
- * (func_801BFF9C) and the map-loading walk flag is set (Game_EnterArea). */
+/* Or-ed into the facing of an area request: only the scroll target is placed (func_801BFF9C) and the map-loading walk flag is set (Game_EnterArea). */
 #define AREA_ENTRY_MAP_LOADING 0x80
 
 #define GAME_TABLE_ENTRY_SIZE  0x44
 
-/* AreaLoad.flags, the behaviors the area runs in place of the ordinary field
- * code. The game copies it to g_GameRequestFlags at area entry. */
+/* AreaLoad.flags, the behaviors the area runs in place of the ordinary field code. */
 typedef enum AreaLoadFlags {
     AREA_LOAD_FLAG_WORLD_MAP       = 1 << 0, /* the area runs the world map */
     AREA_LOAD_FLAG_FISHING         = 1 << 3, /* the area runs the fishing minigame */
@@ -271,9 +269,7 @@ ASSERT_SIZE(EncounterZone, MAP_ZONE_SIZE);
 /* One party member's start position in a field battle, 16.16. */
 typedef Coord2 FormationPos;
 
-/* Field-battle placement: the formation origin and one start position per party order slot.
- * Area_EncounterBuild and Game_BattleStartEncounter fill it; the placement, camera and battle
- * start code read it. The origin's integer halves are D_80143F26 and D_80143F2A. */
+/* Field-battle placement: the formation origin and one start position per party order slot. */
 typedef struct AreaEncounterPlacement {
     /* 0x00 */ Coord2       origin;
     /* 0x08 */ FormationPos party[3];
@@ -292,9 +288,7 @@ extern s32                    g_EncounterOriginX;
 /* D_80143F28 */
 extern s32                    g_EncounterOriginY;
 
-/* One 4-byte world map point: the cell x and y, then the destination area id
- * (func_801B690C stores it in g_GameEntryAreaId) and the location type (the
- * Fishing_ShowLocation tables select their message set by it). */
+/* One 4-byte world map point. */
 typedef struct WorldMapPoint {
     u8 x;       /* 0x00 */
     u8 y;       /* 0x01 */
