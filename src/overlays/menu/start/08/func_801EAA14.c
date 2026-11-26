@@ -10,9 +10,9 @@ NON_MATCHING void func_801EAA14(MenuPanelTask* task) {
     u16        portrait_x;
     s16        label_x;
     s16        stat_x;
-    s32        x;
-    s32        y;
-    s32        color;
+    u16        x;
+    u16        y;
+    u8         color;
     u8         text_color;
     u8         shaded;
 
@@ -36,9 +36,9 @@ NON_MATCHING void func_801EAA14(MenuPanelTask* task) {
             shaded = 0;
             color  = 0;
         }
-        UI_WindowDraw(x & HALF_MASK, y & HALF_MASK, MENU_CHARACTER_WINDOW_WIDTH, MENU_CHARACTER_WINDOW_HEIGHT, (shaded + 0x80) & BYTE_MASK, g_WindowStyle);
-        Menu_DrawCharacterPortrait(portrait_x, y & HALF_MASK, character->character_id, shaded == 0 ? (character->status >> 6) & 2 : 1);
-        text_color = color & BYTE_MASK;
+        UI_WindowDraw(x, y, MENU_CHARACTER_WINDOW_WIDTH, MENU_CHARACTER_WINDOW_HEIGHT, (u8)(shaded + 0x80), g_WindowStyle);
+        Menu_DrawCharacterPortrait(portrait_x, y, character->character_id, shaded == 0 ? (character->status >> 6) & 2 : 1);
+        text_color = color;
         UI_TextDraw((s16)(x + 20), (s16)(y + 1), text_color, CHARACTER_NAME_LENGTH, (u8*)character);
         Menu_DrawIcon((x + 2) & HALF_MASK, (y + 0x15) & HALF_MASK, 3, shaded);
         TEXT_Format(g_UiTextFormatBuffer, D_801D0F18, character->level);
@@ -86,8 +86,8 @@ NON_MATCHING void func_801EAA14(MenuPanelTask* task) {
         } else {
             color = UI_TEXT_DIM;
         }
-        item++;
         count++;
+        item++;
         TEXT_Format(g_UiTextFormatBuffer, D_801D0F1C, character->ap);
         UI_TextDrawGlyphString(stat_x, (s16)(y + 0x25), color, g_UiTextFormatBuffer);
         color = -(s32)shaded & UI_TEXT_DIM;

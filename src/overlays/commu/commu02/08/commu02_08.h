@@ -89,10 +89,11 @@ extern u8       D_801DACB4[];
 extern u8       D_801DAD00[48][2];
 extern u8       D_801DAD60[];
 extern u8       D_801DAD64[];
-extern u8       D_801DAD90[0x48];
+/* The eight board layouts: up to nine digit rows each, a 9 ends the layout. */
+extern u8       D_801DAD90[8][9];
 /* The numbers board's four digits, a message-run base byte then the limit the
  * round picks under. */
-extern u8       D_801DADD8[8];
+extern u8       D_801DADD8[4][2];
 /* The four board rounds: the weight the random pick compares, then the two digit
  * rows the round shows. 0xFF in the second row means the round shows one digit. */
 extern u8       D_801DADE0[4][3];

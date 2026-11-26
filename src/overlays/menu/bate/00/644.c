@@ -403,7 +403,7 @@ MATCH void func_801D2298(void) {
 }
 
 #ifdef NON_MATCHING
-/* The stat tables are indexed through a register-base pointer, as retail materializes it. */
+/* Draws the stats panel: three rows of label, counter and record. */
 NON_MATCHING void func_801D2304(s32 x, s32 y) {
     u16 left;
     u16 top;
@@ -416,13 +416,13 @@ NON_MATCHING void func_801D2304(s32 x, s32 y) {
     UI_TextDraw((s16)(x + 0x51), (s16)(y + 6), 0, TEXT_LENGTH_MAX, UI_MessageGetText(0xE7));
     i = 0;
     do {
-        UI_TextDraw((s16)(left + 6), (s16)(top + (i << 5) + 0x1E), 0, TEXT_LENGTH_MAX, UI_MessageGetText(0xE8 + i));
-        UI_TextDraw((s16)(left + 0x94), (s16)(top + (i << 5) + 0x1E), 0, TEXT_LENGTH_MAX, UI_MessageGetText(0xEB + i));
-        sprintf(g_UiTextFormatBuffer, D_801D0C18, FAKE_VOLATILE_PTR(s32, D_801D8F00)[i]);
-        UI_TextDrawAscii((s16)(left + 0x1E), (s16)(top + (i << 5) + 0x2B), 0, g_UiTextFormatBuffer);
-        sprintf(g_UiTextFormatBuffer, D_801D0C1C, FAKE_VOLATILE_PTR(s32, D_801D8F0C)[i]);
-        UI_TextDrawAscii((s16)(left + 0x94), (s16)(top + (i << 5) + 0x2B), 0, g_UiTextFormatBuffer);
-        func_801D26E0((s16)(left + 0x94), (s16)(top + (i << 5) + 0x2B));
+        UI_TextDraw((s16)(left + 6), (s16)(top + ((i << 5) + 0x1E)), 0, TEXT_LENGTH_MAX, UI_MessageGetText(0xE8 + i));
+        UI_TextDraw((s16)(left + 0x94), (s16)(top + ((i << 5) + 0x1E)), 0, TEXT_LENGTH_MAX, UI_MessageGetText(0xEB + i));
+        sprintf(g_UiTextFormatBuffer, D_801D0C18, D_801D8F00[i]);
+        UI_TextDrawAscii((s16)(left + 0x1E), (s16)(top + ((i << 5) + 0x2B)), 0, g_UiTextFormatBuffer);
+        sprintf(g_UiTextFormatBuffer, D_801D0C1C, D_801D8F00[i + 3]);
+        UI_TextDrawAscii((s16)(left + 0x94), (s16)(top + ((i << 5) + 0x2B)), 0, g_UiTextFormatBuffer);
+        func_801D26E0((s16)(left + 0x94), (s16)(top + ((i << 5) + 0x2B)));
         i++;
     } while (i < 3);
     UI_TextDraw((s16)(left + 0x5A), (s16)(top + 0x2B), 0, TEXT_LENGTH_MAX, UI_MessageGetText(0xF0));
