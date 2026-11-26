@@ -28,8 +28,8 @@ MATCH void Battle_RebuildFormBattler(void) {
         }
     }
 
-    saved       = TASK(PartyMember);
-    g_Task      = g_BattleEffectBattler;
+    saved = TASK(PartyMember);
+    TASK_SET(g_BattleEffectBattler);
     g_GameState = &g_Game.members[TASK(PartyMember)->slot];
     if (g_Game.members[TASK(PartyMember)->slot].chr.character_id == CHAR_ID_RYU_ADULT || g_Game.members[TASK(PartyMember)->slot].chr.character_id == CHAR_ID_RYU_YOUNG) {
         D_801EB4C8 = g_Game.members[TASK(PartyMember)->slot].chr.ap;
@@ -83,7 +83,7 @@ MATCH void Battle_RebuildFormBattler(void) {
         D_801454F5[TASK(PartyMember)->slot * 3] = g_Battle.unk_F4[0];
         D_801454F6[TASK(PartyMember)->slot * 3] = g_Battle.unk_F4[1];
     }
-    g_Task = saved;
+    TASK_SET(saved);
     g_Battle.flags &= ~BATTLE_STATE_RELOAD_PARTY;
     saved->header.mode++;
 }

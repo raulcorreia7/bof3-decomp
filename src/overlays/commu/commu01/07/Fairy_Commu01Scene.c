@@ -5,54 +5,58 @@
 __asm__(".include \"include/match/macro.inc\"\n");
 #endif
 
-/* The commu01 overlay entry: the shared commu step byte selects the handler. */
-MATCH void func_801D0C2C(void) {
+/* The scene entry: the commu step byte selects the step handler. */
+/* func_801D0C2C */
+MATCH void Fairy_Commu01Run(void) {
     SYS_DISPATCH_BYTE(g_Commu01Steps, D_801F294C);
 }
 
-MATCH void func_801D0C68(void) {
-    D_801D4DF4 = 1;
-    D_801D4DF8 = 0;
-    D_801D4DFC = 0;
-    D_801D4E0C = 181;
+/* Puts the cell cursor on the idle fairies and shows the overview message. */
+/* func_801D0C68 */
+MATCH void Fairy_Commu01Start(void) {
+    g_FairyCursorColumn  = 1;
+    g_FairyCursorGridRow = 0;
+    g_FairyCursorZone    = FAIRY_CURSOR_IDLE;
+    g_FairyMessage       = 181;
     D_801F294C++;
 }
 
-/* Confirms the commu entry request of the selected row, or moves the row. */
-MATCH void func_801D0CAC(void) {
+/* Confirms the selected cell, or moves the cell cursor. */
+/* func_801D0CAC */
+MATCH void Fairy_Commu01PickCell(void) {
     u16 pad;
     u8* counter;
     u8  mode;
 
     pad = g_PadStates[0].pressed;
     if (pad & g_InputMasks[MENU_INPUT_CANCEL]) {
-        counter    = (u8*)&g_SceneEventState.step;
-        D_801D4E0C = 0xFFFF;
+        counter        = (u8*)&g_SceneEventState.step;
+        g_FairyMessage = 0xFFFF;
         *counter += 1;
     } else if (pad & g_InputMasks[MENU_INPUT_CONFIRM]) {
-        D_801F294D = 0;
-        D_801D4E24 = 0;
-        D_801D4E00 = D_801D4DF4;
-        D_801D4E04 = D_801D4DF8;
-        mode       = D_801D4DFC;
-        D_801D4E08 = mode;
+        D_801F294D                = 0;
+        g_FairyJobOrdinal         = 0;
+        g_FairySavedCursorColumn  = g_FairyCursorColumn;
+        g_FairySavedCursorGridRow = g_FairyCursorGridRow;
+        mode                      = g_FairyCursorZone;
+        g_FairySavedCursorZone    = mode;
         switch (mode) {
-            case 0:
-            case 2:
+            case FAIRY_CURSOR_IDLE:
+            case FAIRY_CURSOR_JOBS:
                 if (Fairy_GetJobActive(g_SceneEventState.selection) != 0) {
                     SND_SEPlay(EMI_SE_ID(SND_BANK_COMMON, 4));
-                    func_801D49C4();
+                    Fairy_ShowTypeMessage();
                     D_801F294C++;
                 } else {
                     SND_SEPlay(EMI_SE_ID(SND_BANK_COMMON, 7));
                 }
                 break;
-            case 1:
+            case FAIRY_CURSOR_ROOMS:
                 if (D_801F286D[g_GameAreaId] < g_SceneEventState.selection) {
                     SND_SEPlay(EMI_SE_ID(SND_BANK_COMMON, 7));
                 } else {
                     SND_SEPlay(EMI_SE_ID(SND_BANK_COMMON, 4));
-                    func_801D49C4();
+                    Fairy_ShowTypeMessage();
                     D_801F294C++;
                 }
                 break;
@@ -61,22 +65,27 @@ MATCH void func_801D0CAC(void) {
                 break;
         }
     } else {
-        func_801D3B0C(&g_SceneEventState.selection);
+        Fairy_MoveCursor(&g_SceneEventState.selection);
     }
-    func_801D3038();
-    func_801D36FC(g_SceneEventState.selection, 0);
+    Fairy_DrawOverview();
+    Fairy_DrawCellFrame(g_SceneEventState.selection, 0);
 }
 
-MATCH void func_801D0E44(void) {
-    SYS_DISPATCH_BYTE(g_Commu01Step2Steps, D_801D4E08);
+/* Runs the handler the saved cursor zone selects. */
+/* func_801D0E44 */
+MATCH void Fairy_Commu01DispatchMode(void) {
+    SYS_DISPATCH_BYTE(g_Commu01Step2Steps, g_FairySavedCursorZone);
 }
 
-MATCH void func_801D0E80(void) {
-    SYS_DISPATCH_BYTE(D_801D4BE4, D_801F294D);
+/* Runs the move handler the sub-step selects. */
+/* func_801D0E80 */
+MATCH void Fairy_Commu01DispatchMove(void) {
+    SYS_DISPATCH_BYTE(g_Commu01MoveSteps, D_801F294D);
 }
 
-/* Moves the ordinal of the selected record type and draws its cell. */
-MATCH void func_801D0EBC(void) {
+/* Moves the cursor among the active jobs of the selected job type and draws the job box. */
+/* func_801D0EBC */
+MATCH void Fairy_Commu01PickJob(void) {
     u16  pad;
     u16* pad_word;
     s32  direction;
@@ -93,53 +102,53 @@ MATCH void func_801D0EBC(void) {
     pad      = *pad_word;
     if (pad & g_InputMasks[MENU_INPUT_CANCEL]) {
         SND_SEPlay(EMI_SE_ID(SND_BANK_COMMON, 6));
-        D_801D4E0C = 0xB5;
+        g_FairyMessage = 0xB5;
         D_801F294C--;
     } else if (pad & g_InputMasks[MENU_INPUT_CONFIRM]) {
         SND_SEPlay(EMI_SE_ID(SND_BANK_COMMON, 4));
-        D_801D4E0C = 0x44;
-        D_801D4E28 = g_SceneEventState.selection;
+        g_FairyMessage = 0x44;
+        D_801D4E28     = g_SceneEventState.selection;
         D_801F294D++;
     } else {
         count     = Fairy_GetJobActive(g_SceneEventState.selection);
         direction = INPUT_REPEATED(*pad_word, (PADLleft | PADLright));
-        ordinal   = D_801D4E24;
+        ordinal   = g_FairyJobOrdinal;
         if (direction & PADLright) {
-            D_801D4E24 = ordinal + 1;
+            g_FairyJobOrdinal = ordinal + 1;
             if ((s8)(ordinal + 1) == count) {
-                D_801D4E24 = 0;
+                g_FairyJobOrdinal = 0;
             }
         } else if (direction & PADLleft) {
-            D_801D4E24 = ordinal - 1;
+            g_FairyJobOrdinal = ordinal - 1;
             if ((s8)(ordinal - 1) < 0) {
-                D_801D4E24 = count - 1;
+                g_FairyJobOrdinal = count - 1;
             }
         }
-        if (ordinal != D_801D4E24) {
+        if (ordinal != g_FairyJobOrdinal) {
             SND_SEPlay(EMI_SE_ID(SND_BANK_COMMON, 0));
         }
     }
-    func_801D3038();
+    Fairy_DrawOverview();
     row = &g_SceneEventState.selection;
-    func_801D36FC(*row, 1);
+    Fairy_DrawCellFrame(*row, 1);
     if (*row == 0) {
-        ordinal = D_801D4E24;
-        /* Eight pixels a row, sign extended before the scale. */
+        ordinal = g_FairyJobOrdinal;
         offset  = ((s32)ordinal << 24) >> 21;
-        func_801D3984(offset + 0x28, 0x39, 0);
-        func_801D28A4(offset + 0x30, 0x42, func_801D3AA0(*row, D_801D4E24), 0);
+        Fairy_DrawCursor(offset + 0x28, 0x39, 0);
+        Fairy_DrawChannelBox(offset + 0x30, 0x42, Fairy_FindJob(*row, g_FairyJobOrdinal), 0);
     } else {
-        col  = (s8)D_801D4E24 % 5;
-        line = (s8)D_801D4E24 / 5;
+        col  = (s8)g_FairyJobOrdinal % 5;
+        line = (s8)g_FairyJobOrdinal / 5;
         x    = col * 8;
-        y    = (*row - 9) * 54 + line * 7;
-        func_801D3984(x + 0xFA, (s16)(y + 0x44), 0);
-        func_801D28A4(x + 0xA8, (s16)(y + 0x4C), func_801D3AA0(*row, D_801D4E24), 0);
+        y    = (*row - FAIRY_JOB_HUNT) * 54 + line * 7;
+        Fairy_DrawCursor(x + 0xFA, (s16)(y + 0x44), 0);
+        Fairy_DrawChannelBox(x + 0xA8, (s16)(y + 0x4C), Fairy_FindJob(*row, g_FairyJobOrdinal), 0);
     }
 }
 
-/* Commits the request row or moves it, then draws the row and its cell. */
-MATCH void func_801D1158(void) {
+/* Moves the target of the job's move or commits it, then draws both cells. */
+/* func_801D1158 */
+MATCH void Fairy_Commu01PickTarget(void) {
     u16 pad;
     s32 committed;
     u8* row;
@@ -152,43 +161,45 @@ MATCH void func_801D1158(void) {
     committed = 0;
     if (pad & g_InputMasks[MENU_INPUT_CANCEL]) {
         SND_SEPlay(EMI_SE_ID(SND_BANK_COMMON, 6));
-        func_801D49C4();
-        func_801D47C4();
+        Fairy_ShowTypeMessage();
+        Fairy_RestoreCursor();
     } else if (pad & g_InputMasks[MENU_INPUT_CONFIRM]) {
-        committed = func_801D482C(0);
+        committed = Fairy_MoveJob(0);
         if (committed & BYTE_MASK) {
-            D_801D4E0C = 0xB5;
+            g_FairyMessage = 0xB5;
         }
     } else {
         row = &D_801D4E28;
-        func_801D3B0C(row);
-        func_801D4AAC(row);
+        Fairy_MoveCursor(row);
+        Fairy_ShowTargetMessage(row);
     }
-    func_801D3038();
+    Fairy_DrawOverview();
     row = &g_SceneEventState.selection;
-    func_801D36FC(*row, 1);
-    func_801D36FC(D_801D4E28, 0);
+    Fairy_DrawCellFrame(*row, 1);
+    Fairy_DrawCellFrame(D_801D4E28, 0);
     if ((committed & BYTE_MASK) == 0) {
         if (*row == 0) {
-            func_801D3984((s8)D_801D4E24 * 8 + 0x28, 0x39, 1);
+            Fairy_DrawCursor((s8)g_FairyJobOrdinal * 8 + 0x28, 0x39, 1);
         } else {
-            /* The inset stays a value of its own: folded, it lands one slot early. */
             line_inset = 0x44;
-            col        = (s8)D_801D4E24 % 5;
-            line       = (s8)D_801D4E24 / 5;
-            y          = (*row - 9) * 54 + (line * 7 + line_inset);
-            func_801D3984(col * 8 + 0xFA, (s16)y, 1);
+            col        = (s8)g_FairyJobOrdinal % 5;
+            line       = (s8)g_FairyJobOrdinal / 5;
+            y          = (*row - FAIRY_JOB_HUNT) * 54 + (line * 7 + line_inset);
+            Fairy_DrawCursor(col * 8 + 0xFA, (s16)y, 1);
         }
-        func_801D28A4(0xA0, 0x3E, func_801D3AA0(g_SceneEventState.selection, D_801D4E24), 1);
+        Fairy_DrawChannelBox(0xA0, 0x3E, Fairy_FindJob(g_SceneEventState.selection, g_FairyJobOrdinal), 1);
     }
 }
 
-MATCH void func_801D1328(void) {
+/* Runs the room handler the sub-step selects. */
+/* func_801D1328 */
+MATCH void Fairy_Commu01DispatchRoom(void) {
     SYS_DISPATCH_BYTE(g_Commu01Step2Sub1Steps, D_801F294D);
 }
 
-/* Reads the fairy room list input and draws the selected room. */
-MATCH void func_801D1364(void) {
+/* Moves the cursor among a room and its jobs; confirming a job starts its move, confirming the room opens its type list. */
+/* func_801D1364 */
+MATCH void Fairy_Commu01PickRoomJob(void) {
     s16 x;
     s16 y;
     u8* selection;
@@ -200,14 +211,14 @@ MATCH void func_801D1364(void) {
 
     if (g_PadStates[0].pressed & g_InputMasks[MENU_INPUT_CANCEL]) {
         SND_SEPlay(EMI_SE_ID(SND_BANK_COMMON, 6));
-        D_801D4E0C = 181;
+        g_FairyMessage = 181;
         D_801F294C--;
     } else if (g_PadStates[0].pressed & g_InputMasks[MENU_INPUT_CONFIRM]) {
         SND_SEPlay(EMI_SE_ID(SND_BANK_COMMON, 3));
-        row = D_801D4E24;
+        row = g_FairyJobOrdinal;
         if (row != 0) {
-            D_801D4E0C = 68;
-            D_801D4E28 = g_SceneEventState.selection;
+            g_FairyMessage = 68;
+            D_801D4E28     = g_SceneEventState.selection;
             D_801F294D++;
         } else {
             room = g_SceneEventState.selection - 1;
@@ -224,38 +235,40 @@ MATCH void func_801D1364(void) {
         }
     } else {
         buttons = INPUT_REPEATED(g_PadStates[0].pressed, (PADLright | PADLleft));
-        old_row = D_801D4E24;
+        old_row = g_FairyJobOrdinal;
         count   = Fairy_GetJobActive(g_SceneEventState.selection);
         if (buttons & PADLleft) {
-            D_801D4E24--;
-            if ((s8)D_801D4E24 < 0) {
-                D_801D4E24 = count;
+            g_FairyJobOrdinal--;
+            if ((s8)g_FairyJobOrdinal < 0) {
+                g_FairyJobOrdinal = count;
             }
         } else if (buttons & PADLright) {
-            D_801D4E24++;
-            if ((count & BYTE_MASK) < (s8)D_801D4E24) {
-                D_801D4E24 = 0;
+            g_FairyJobOrdinal++;
+            if ((count & BYTE_MASK) < (s8)g_FairyJobOrdinal) {
+                g_FairyJobOrdinal = 0;
             }
         }
-        if (old_row != D_801D4E24) {
+        if (old_row != g_FairyJobOrdinal) {
             SND_SEPlay(EMI_SE_ID(SND_BANK_COMMON, 0));
         }
     }
 
-    func_801D3038();
+    Fairy_DrawOverview();
     selection = &g_SceneEventState.selection;
-    func_801D36FC(*selection, 1);
-    func_801D4694(&x, &y, *selection, D_801D4E24);
-    row = D_801D4E24;
+    Fairy_DrawCellFrame(*selection, 1);
+    Fairy_GetJobPos(&x, &y, *selection, g_FairyJobOrdinal);
+    row = g_FairyJobOrdinal;
     if (row == 0) {
-        func_801D3984((s16)x, y, 0);
+        Fairy_DrawCursor((s16)x, y, 0);
     } else {
-        func_801D3984((s16)(x + 4), y, 0);
-        func_801D28A4((s16)(x + 0x10), (s16)(y - 8), func_801D3AA0(*selection, (D_801D4E24 - 1) & BYTE_MASK) & BYTE_MASK, 0);
+        Fairy_DrawCursor((s16)(x + 4), y, 0);
+        Fairy_DrawChannelBox((s16)(x + 0x10), (s16)(y - 8), Fairy_FindJob(*selection, (g_FairyJobOrdinal - 1) & BYTE_MASK) & BYTE_MASK, 0);
     }
 }
 
-MATCH void func_801D1630(void) {
+/* Moves the target job type of a room job and commits the move, then draws both cells. */
+/* func_801D1630 */
+MATCH void Fairy_Commu01PickRoomTarget(void) {
     u16 x;
     s16 y;
     s32 result;
@@ -263,30 +276,31 @@ MATCH void func_801D1630(void) {
 
     result = 0;
     if (g_PadStates[0].pressed & g_InputMasks[MENU_INPUT_CANCEL]) {
-        func_801D47C4();
-        func_801D49C4();
+        Fairy_RestoreCursor();
+        Fairy_ShowTypeMessage();
     } else if (g_PadStates[0].pressed & g_InputMasks[MENU_INPUT_CONFIRM]) {
-        result = func_801D482C(1);
+        result = Fairy_MoveJob(1);
         if (result & BYTE_MASK) {
-            D_801D4E0C = 181;
+            g_FairyMessage = 181;
         }
     } else {
-        func_801D3B0C(&D_801D4E28);
-        func_801D4AAC(&D_801D4E28);
+        Fairy_MoveCursor(&D_801D4E28);
+        Fairy_ShowTargetMessage(&D_801D4E28);
     }
-    func_801D3038();
+    Fairy_DrawOverview();
     selection = &g_SceneEventState.selection;
-    func_801D36FC(*selection, 1);
-    func_801D36FC(D_801D4E28, 0);
+    Fairy_DrawCellFrame(*selection, 1);
+    Fairy_DrawCellFrame(D_801D4E28, 0);
     if (!(result & BYTE_MASK)) {
-        func_801D4694(&x, &y, *selection, D_801D4E24);
-        func_801D3984((s16)(x + 4), y, 1);
-        func_801D28A4(0xA0, 0x3E, func_801D3AA0(*selection, (D_801D4E24 - 1) & BYTE_MASK) & BYTE_MASK, 1);
+        Fairy_GetJobPos(&x, &y, *selection, g_FairyJobOrdinal);
+        Fairy_DrawCursor((s16)(x + 4), y, 1);
+        Fairy_DrawChannelBox(0xA0, 0x3E, Fairy_FindJob(*selection, (g_FairyJobOrdinal - 1) & BYTE_MASK) & BYTE_MASK, 1);
     }
 }
 
-/* Moves the request row between types and draws the chosen type. */
-MATCH void func_801D1778(void) {
+/* Moves the cursor in the room type list and draws the list. */
+/* func_801D1778 */
+MATCH void Fairy_Commu01PickRoomType(void) {
     u16 pad;
     s32 direction;
     u8  row;
@@ -301,13 +315,13 @@ MATCH void func_801D1778(void) {
     pad = g_PadStates[0].pressed;
     if (pad & g_InputMasks[MENU_INPUT_CANCEL]) {
         SND_SEPlay(EMI_SE_ID(SND_BANK_COMMON, 6));
-        func_801D49C4();
+        Fairy_ShowTypeMessage();
         D_801F294D = 0;
     } else if (pad & g_InputMasks[MENU_INPUT_CONFIRM]) {
         srow = D_801D4E28;
-        type = D_801D4C04[srow];
+        type = g_FairyListOptionTypes[srow];
         if (type == 0xFF) {
-            func_801D4B58();
+            Fairy_AskConfirm();
         } else {
             rooms_offset = (g_SceneEventState.selection - 1) * 8;
             if (srow == g_FairyRooms[rooms_offset] - 4) {
@@ -316,9 +330,9 @@ MATCH void func_801D1778(void) {
                 D_801D4E2C = 0;
             }
             srow       = D_801D4E28;
-            D_801D4E1C = D_801D4C04[srow];
+            D_801D4E1C = g_FairyListOptionTypes[srow];
             SND_SEPlay(EMI_SE_ID(SND_BANK_COMMON, 3));
-            D_801D4E0C = D_801D4C10[D_801D4E1C];
+            g_FairyMessage = g_FairyOptionMessages[D_801D4E1C];
             D_801F294D++;
         }
     } else {
@@ -340,21 +354,22 @@ MATCH void func_801D1778(void) {
         if (row != D_801D4E28) {
             SND_SEPlay(EMI_SE_ID(SND_BANK_COMMON, 0));
         }
-        srow       = D_801D4E28;
-        D_801D4E0C = D_801D4BB8[srow];
+        srow           = D_801D4E28;
+        g_FairyMessage = g_FairyListMessages[srow];
     }
-    func_801D3038();
+    Fairy_DrawOverview();
     cursor = &g_SceneEventState.selection;
-    func_801D36FC(*cursor, 1);
-    func_801D4694(&x, &y, *cursor, 0);
-    func_801D3984(x, y, 1);
-    y = func_801D4474();
-    func_801D4178((s16)(52 * ((*cursor - 1) % 4) + 0x42), y, 0);
+    Fairy_DrawCellFrame(*cursor, 1);
+    Fairy_GetJobPos(&x, &y, *cursor, 0);
+    Fairy_DrawCursor(x, y, 1);
+    y = Fairy_GetTypeMenuTop();
+    Fairy_DrawTypeMenu((s16)(52 * ((*cursor - 1) % 4) + 0x42), y, 0);
     UI_CursorDraw((u16)((52 * ((*cursor - 1) % 4) + 0x44) & 0xFFFC), (u16)(y + 4 + (s8)D_801D4E28 * 16), 0);
 }
 
-/* Moves the request line inside the chosen type and draws its grid. */
-MATCH void func_801D1A94(void) {
+/* Moves the cursor in the option list of the chosen room type and draws the lists. */
+/* func_801D1A94 */
+MATCH void Fairy_Commu01PickRoomLine(void) {
     u16 pad;
     s32 direction;
     u8* cursor;
@@ -371,8 +386,8 @@ MATCH void func_801D1A94(void) {
         D_801D4E1C = 0xFF;
         D_801F294D--;
     } else if (pad & g_InputMasks[MENU_INPUT_CONFIRM]) {
-        if (D_801D4C18[D_801D4E1C][1] == 0xFF) {
-            func_801D4B58();
+        if (g_FairyOptionLines[D_801D4E1C][1] == 0xFF) {
+            Fairy_AskConfirm();
         } else {
             srow         = D_801D4E28;
             rooms_offset = (g_SceneEventState.selection - 1) * 8;
@@ -381,9 +396,9 @@ MATCH void func_801D1A94(void) {
             } else {
                 D_801D4E30 = 0;
             }
-            D_801D4E20 = D_801D4C18[D_801D4E1C][1];
+            D_801D4E20 = g_FairyOptionLines[D_801D4E1C][1];
             SND_SEPlay(EMI_SE_ID(SND_BANK_COMMON, 3));
-            D_801D4E0C = 0x46;
+            g_FairyMessage = 0x46;
             D_801F294D++;
         }
     } else {
@@ -393,12 +408,12 @@ MATCH void func_801D1A94(void) {
             next       = D_801D4E2C - 1;
             D_801D4E2C = next;
             if ((s8)next < 0) {
-                D_801D4E2C = D_801D4C18[D_801D4E1C][0] - 1;
+                D_801D4E2C = g_FairyOptionLines[D_801D4E1C][0] - 1;
             }
         } else if (direction & PADLdown) {
             next       = D_801D4E2C + 1;
             D_801D4E2C = next;
-            if ((s8)next >= D_801D4C18[D_801D4E1C][0]) {
+            if ((s8)next >= g_FairyOptionLines[D_801D4E1C][0]) {
                 D_801D4E2C = 0;
             }
         }
@@ -406,22 +421,23 @@ MATCH void func_801D1A94(void) {
             SND_SEPlay(EMI_SE_ID(SND_BANK_COMMON, 0));
         }
     }
-    func_801D3038();
+    Fairy_DrawOverview();
     cursor = &g_SceneEventState.selection;
-    func_801D36FC(*cursor, 1);
-    func_801D4694(&x, &y, *cursor, 0);
-    func_801D3984(x, y, 1);
-    y = func_801D4474();
-    func_801D4178((s16)(52 * ((*cursor - 1) % 4) + 0x42), y, 1);
+    Fairy_DrawCellFrame(*cursor, 1);
+    Fairy_GetJobPos(&x, &y, *cursor, 0);
+    Fairy_DrawCursor(x, y, 1);
+    y = Fairy_GetTypeMenuTop();
+    Fairy_DrawTypeMenu((s16)(52 * ((*cursor - 1) % 4) + 0x42), y, 1);
     if (D_801D4E1C != 0xFF) {
         y = y + (12 + 16 * (s8)D_801D4E28);
-        y = func_801D44E0((s16)(52 * ((*cursor - 1) % 4) + 0x4A), y, D_801D4E1C, 0);
+        y = Fairy_DrawOptionMenu((s16)(52 * ((*cursor - 1) % 4) + 0x4A), y, D_801D4E1C, 0);
         UI_CursorDraw((u16)((52 * ((*cursor - 1) % 4) + 0x4C) & 0xFFFC), (u16)(y + 4 + (s8)D_801D4E2C * 16), 0);
     }
 }
 
-/* Toggles the request pair and draws both type grids. */
-MATCH void func_801D1E48(void) {
+/* Toggles the choice of the last option list and draws the lists. */
+/* func_801D1E48 */
+MATCH void Fairy_Commu01PickRoomPair(void) {
     u16 pad;
     s32 direction;
     u8* row;
@@ -431,11 +447,11 @@ MATCH void func_801D1E48(void) {
     pad = g_PadStates[0].pressed;
     if (pad & g_InputMasks[MENU_INPUT_CANCEL]) {
         SND_SEPlay(EMI_SE_ID(SND_BANK_COMMON, 6));
-        D_801D4E0C = 0x45;
-        D_801D4E20 = 0xFF;
+        g_FairyMessage = 0x45;
+        D_801D4E20     = 0xFF;
         D_801F294D--;
     } else if (pad & g_InputMasks[MENU_INPUT_CONFIRM]) {
-        func_801D4B58();
+        Fairy_AskConfirm();
     } else {
         direction = INPUT_REPEATED(pad, (PADLup | PADLdown));
         if (direction & (PADLup | PADLdown)) {
@@ -443,24 +459,25 @@ MATCH void func_801D1E48(void) {
             D_801D4E30 ^= 1;
         }
     }
-    func_801D3038();
+    Fairy_DrawOverview();
     row = &g_SceneEventState.selection;
-    func_801D36FC(*row, 1);
-    func_801D4694(&x, &y, *row, 0);
-    func_801D3984(x, y, 1);
-    y = func_801D4474();
-    func_801D4178((s16)(52 * ((*row - 1) % 4) + 0x42), y, 1);
+    Fairy_DrawCellFrame(*row, 1);
+    Fairy_GetJobPos(&x, &y, *row, 0);
+    Fairy_DrawCursor(x, y, 1);
+    y = Fairy_GetTypeMenuTop();
+    Fairy_DrawTypeMenu((s16)(52 * ((*row - 1) % 4) + 0x42), y, 1);
     y = y + (12 + 16 * (s8)D_801D4E28);
-    y = func_801D44E0((s16)(52 * ((*row - 1) % 4) + 0x4A), y, D_801D4E1C, 1);
+    y = Fairy_DrawOptionMenu((s16)(52 * ((*row - 1) % 4) + 0x4A), y, D_801D4E1C, 1);
     if (D_801D4E20 != 0xFF) {
         y = y + (12 + 16 * (s8)D_801D4E2C);
-        y = func_801D44E0((s16)(52 * ((*row - 1) % 4) + 0x52), y, D_801D4E20, 0);
+        y = Fairy_DrawOptionMenu((s16)(52 * ((*row - 1) % 4) + 0x52), y, D_801D4E20, 0);
         UI_CursorDraw((u16)((52 * ((*row - 1) % 4) + 0x54) & 0xFFFC), (u16)(y + 4 + (s8)D_801D4E30 * 16), 0);
     }
 }
 
-/* Commits the request pair the pad input selects, then redraws both type grids. */
-MATCH void func_801D2110(void) {
+/* Answers whether to keep the room settings: yes stores them in the room record, no returns; redraws the lists. */
+/* func_801D2110 */
+MATCH void Fairy_Commu01ConfirmRoom(void) {
     u16 pad;
     u32 anchor;
     s32 direction;
@@ -477,10 +494,10 @@ MATCH void func_801D2110(void) {
     pad   = g_PadStates[0].pressed;
     stale = 0;
     if (pad & g_InputMasks[MENU_INPUT_CONFIRM]) {
-        if (D_801D4E18 != 0) {
+        if (g_FairyConfirmChoice != 0) {
             SND_SEPlay(EMI_SE_ID(SND_BANK_COMMON, 6));
-            D_801D4E0C = D_801D4E14;
-            D_801F294D = D_801D4E10;
+            g_FairyMessage = g_FairyReturnMessage;
+            D_801F294D     = g_FairyReturnStep;
         } else {
             index = g_SceneEventSelection - 1;
             if (g_FairyRooms[index * 8] != (s8)D_801D4E28 + 4 || D_801457A9[index][0] != (s8)D_801D4E2C || D_801457AA[index][0] != (s8)D_801D4E30) {
@@ -507,43 +524,43 @@ MATCH void func_801D2110(void) {
             D_801457A9[*cursor - 1][-1] = D_801D4E28 + 4;
             D_801457A9[*cursor - 1][0]  = D_801D4E2C;
             D_801457AA[*cursor - 1][0]  = D_801D4E30;
-            D_801D4DF4                  = D_801D4E00;
-            D_801D4DF8                  = D_801D4E04;
-            D_801D4DFC                  = D_801D4E08;
+            g_FairyCursorColumn         = g_FairySavedCursorColumn;
+            g_FairyCursorGridRow        = g_FairySavedCursorGridRow;
+            g_FairyCursorZone           = g_FairySavedCursorZone;
             SND_SEPlay(EMI_SE_ID(SND_BANK_COMMON, 4));
-            D_801D4E0C = 0xB5;
-            D_801F294C = D_801F294C - 1;
+            g_FairyMessage = 0xB5;
+            D_801F294C     = D_801F294C - 1;
         }
     } else if (pad & g_InputMasks[MENU_INPUT_CANCEL]) {
         SND_SEPlay(EMI_SE_ID(SND_BANK_COMMON, 6));
-        D_801D4E0C = D_801D4E14;
-        D_801F294D = D_801D4E10;
+        g_FairyMessage = g_FairyReturnMessage;
+        D_801F294D     = g_FairyReturnStep;
     } else {
         direction = INPUT_REPEATED(pad, (PADLleft | PADLright));
         if (direction & (PADLleft | PADLright)) {
             SND_SEPlay(EMI_SE_ID(SND_BANK_COMMON, 0));
-            D_801D4E18 ^= 1;
+            g_FairyConfirmChoice ^= 1;
         }
     }
-    func_801D3038();
+    Fairy_DrawOverview();
     row = &g_SceneEventSelection;
-    func_801D36FC(*row, 1);
-    func_801D4694(&x, &y, *row, 0);
-    func_801D3984(x, y, 1);
-    y = func_801D4474();
+    Fairy_DrawCellFrame(*row, 1);
+    Fairy_GetJobPos(&x, &y, *row, 0);
+    Fairy_DrawCursor(x, y, 1);
+    y = Fairy_GetTypeMenuTop();
     if (D_801D4E1C == 0xFF) {
-        func_801D4178((s16)(52 * ((*row - 1) % 4) + 0x42), y, 0);
+        Fairy_DrawTypeMenu((s16)(52 * ((*row - 1) % 4) + 0x42), y, 0);
         UI_CursorDraw((u16)((52 * ((*row - 1) % 4) + 0x44) & 0xFFFC), (u16)(y + 4 + (s8)D_801D4E28 * 16), 0);
     } else {
-        func_801D4178((s16)(52 * ((*row - 1) % 4) + 0x42), y, 1);
+        Fairy_DrawTypeMenu((s16)(52 * ((*row - 1) % 4) + 0x42), y, 1);
         y = y + (12 + 16 * (s8)D_801D4E28);
         if (D_801D4E20 == 0xFF) {
-            y = func_801D44E0((s16)(52 * ((*row - 1) % 4) + 0x4A), y, D_801D4E1C, 0);
+            y = Fairy_DrawOptionMenu((s16)(52 * ((*row - 1) % 4) + 0x4A), y, D_801D4E1C, 0);
             UI_CursorDraw((u16)((52 * ((*row - 1) % 4) + 0x4C) & 0xFFFC), (u16)(y + 4 + (s8)D_801D4E2C * 16), 0);
         } else {
-            y = func_801D44E0((s16)(52 * ((*row - 1) % 4) + 0x4A), y, D_801D4E1C, 1);
+            y = Fairy_DrawOptionMenu((s16)(52 * ((*row - 1) % 4) + 0x4A), y, D_801D4E1C, 1);
             y = y + (12 + 16 * (s8)D_801D4E2C);
-            y = func_801D44E0((s16)(52 * ((*row - 1) % 4) + 0x52), y, D_801D4E20, 0);
+            y = Fairy_DrawOptionMenu((s16)(52 * ((*row - 1) % 4) + 0x52), y, D_801D4E20, 0);
             UI_CursorDraw((u16)((52 * ((*row - 1) % 4) + 0x54) & 0xFFFC), (u16)(y + 4 + (s8)D_801D4E30 * 16), 0);
         }
     }
@@ -551,15 +568,18 @@ MATCH void func_801D2110(void) {
 
 #include "overlays/commu/shared/Commu_CellGrid.h"
 
-MATCH void func_801D273C(s16 x, s16 y) {
+/* Draws the grid of a fairy box. */
+/* func_801D273C */
+MATCH void Fairy_DrawChannelGrid(s16 x, s16 y) {
     s32 i;
     s32 offset;
 
-    COMMU_DRAW_CELL_GRID(func_801D4030, 0x22, 7, 4, 6);
+    COMMU_DRAW_CELL_GRID(Fairy_DrawPiece, 0x22, 7, 4, 6);
 }
 
-/* Draws the channel box of one commu record slot. */
-MATCH void func_801D28A4(s16 x, s16 y, u8 slot, s32 selected) {
+/* Draws the box of one fairy: its name and four channel bars. */
+/* func_801D28A4 */
+MATCH void Fairy_DrawChannelBox(s16 x, s16 y, u8 slot, s32 selected) {
     TILE* prim;
     u8*   block;
     u8*   names;
@@ -573,7 +593,7 @@ MATCH void func_801D28A4(s16 x, s16 y, u8 slot, s32 selected) {
     block = &g_WindowStyle;
     func_801AE3F0((u16)(x + 4), (u16)(y + 4), 0x48, 0x28, 0x81, block[0]);
     func_801AE3F0((u16)x, (u16)y, 0x48, 0x26, 0x80, block[0]);
-    func_801D273C(x, y);
+    Fairy_DrawChannelGrid(x, y);
     offset = slot * 5;
     names  = block + 0xE96;
     func_8014F800((s16)(x + 6), (s16)(y + 4), 0, 5, (u32)&names[offset]);
@@ -585,10 +605,10 @@ MATCH void func_801D28A4(s16 x, s16 y, u8 slot, s32 selected) {
     GFX_AddPrim(GFX_LAYER_UI, sizeof(TILE));
     sel = selected;
     if (sel == 0) {
-        func_801D2D98((s16)(x + 6), (s16)(y + 0x12), g_Fairies[slot][5] * 12, 0, 0);
-        func_801D2D98((s16)(x + 6), (s16)(y + 0x16), g_Fairies[slot][6] * 12, 1, 0);
-        func_801D2D98((s16)(x + 6), (s16)(y + 0x1A), g_Fairies[slot][7] * 12, 2, 0);
-        func_801D2D98((s16)(x + 6), (s16)(y + 0x1E), g_Fairies[slot][8] * 12, 3, 0);
+        Fairy_DrawChannelBar((s16)(x + 6), (s16)(y + 0x12), g_Fairies[slot][5] * 12, 0, 0);
+        Fairy_DrawChannelBar((s16)(x + 6), (s16)(y + 0x16), g_Fairies[slot][6] * 12, 1, 0);
+        Fairy_DrawChannelBar((s16)(x + 6), (s16)(y + 0x1A), g_Fairies[slot][7] * 12, 2, 0);
+        Fairy_DrawChannelBar((s16)(x + 6), (s16)(y + 0x1E), g_Fairies[slot][8] * 12, 3, 0);
     } else {
         row = D_801D4E28;
         if (row == 0) {
@@ -599,43 +619,44 @@ MATCH void func_801D28A4(s16 x, s16 y, u8 slot, s32 selected) {
             index = row - 1;
             type  = g_FairyRooms[index * 8];
         }
-        if (D_801D4C20[type] == 0) {
-            func_801D2D98((s16)(x + 6), (s16)(y + 0x12), g_Fairies[slot][5] * 12, 0, 1);
+        if (g_FairyBlinkChannels[type] == 0) {
+            Fairy_DrawChannelBar((s16)(x + 6), (s16)(y + 0x12), g_Fairies[slot][5] * 12, 0, 1);
         } else {
-            func_801D2D98((s16)(x + 6), (s16)(y + 0x12), g_Fairies[slot][5] * 12, 0, 0);
+            Fairy_DrawChannelBar((s16)(x + 6), (s16)(y + 0x12), g_Fairies[slot][5] * 12, 0, 0);
         }
-        if (D_801D4C20[type] == 1) {
-            func_801D2D98((s16)(x + 6), (s16)(y + 0x16), g_Fairies[slot][6] * 12, 1, 1);
+        if (g_FairyBlinkChannels[type] == 1) {
+            Fairy_DrawChannelBar((s16)(x + 6), (s16)(y + 0x16), g_Fairies[slot][6] * 12, 1, 1);
         } else {
-            func_801D2D98((s16)(x + 6), (s16)(y + 0x16), g_Fairies[slot][6] * 12, 1, 0);
+            Fairy_DrawChannelBar((s16)(x + 6), (s16)(y + 0x16), g_Fairies[slot][6] * 12, 1, 0);
         }
-        if (D_801D4C20[type] == 2) {
-            func_801D2D98((s16)(x + 6), (s16)(y + 0x1A), g_Fairies[slot][7] * 12, 2, 1);
+        if (g_FairyBlinkChannels[type] == 2) {
+            Fairy_DrawChannelBar((s16)(x + 6), (s16)(y + 0x1A), g_Fairies[slot][7] * 12, 2, 1);
         } else {
-            func_801D2D98((s16)(x + 6), (s16)(y + 0x1A), g_Fairies[slot][7] * 12, 2, 0);
+            Fairy_DrawChannelBar((s16)(x + 6), (s16)(y + 0x1A), g_Fairies[slot][7] * 12, 2, 0);
         }
-        if (D_801D4C20[type] == 3) {
-            func_801D2D98((s16)(x + 6), (s16)(y + 0x1E), g_Fairies[slot][8] * 12, 3, 1);
+        if (g_FairyBlinkChannels[type] == 3) {
+            Fairy_DrawChannelBar((s16)(x + 6), (s16)(y + 0x1E), g_Fairies[slot][8] * 12, 3, 1);
         } else {
-            func_801D2D98((s16)(x + 6), (s16)(y + 0x1E), g_Fairies[slot][8] * 12, 3, 0);
+            Fairy_DrawChannelBar((s16)(x + 6), (s16)(y + 0x1E), g_Fairies[slot][8] * 12, 3, 0);
         }
     }
 }
 
-/* The four stat bar colours D_801D0C04 holds, one RGB triple per bar. */
+/* The four channel bar colours g_FairyChannelColors holds, one RGB triple per bar. */
 typedef struct {
     u8 rgb[4][3];
 } FairyBarColors;
 
-/* Draws one stat bar as two shaded quads that meet on the middle row; a blinking bar pulses with the frame count. */
-MATCH void func_801D2D98(s16 x, s16 y, s16 width, u8 channel, u8 blink) {
+/* Draws one channel bar as two shaded quads that meet on the middle row; a blinking bar pulses with the frame count. */
+/* func_801D2D98 */
+MATCH void Fairy_DrawChannelBar(s16 x, s16 y, s16 width, u8 channel, u8 blink) {
     FairyBarColors colors;
     u8*            rgb;
     s32            scale;
     POLY_G4*       poly;
     s16            middle;
 
-    colors = *(FairyBarColors*)D_801D0C04;
+    colors = *(FairyBarColors*)g_FairyChannelColors;
     if (blink) {
         if (g_FrameCount & 8) {
             scale = (g_FrameCount & 6) << 5 | 0x3F;
@@ -681,7 +702,7 @@ MATCH void func_801D2D98(s16 x, s16 y, s16 width, u8 channel, u8 blink) {
     GFX_AddPrim(GFX_LAYER_UI, sizeof(POLY_G4));
 }
 
-#define FAIRY_OVERVIEW_GROUP_COUNT     3
+#define FAIRY_OVERVIEW_JOB_TYPE_COUNT  3
 #define FAIRY_OVERVIEW_ROOM_COUNT      8
 #define FAIRY_OVERVIEW_ROOM_COLUMNS    4
 #define FAIRY_OVERVIEW_JOB_COLUMNS     5
@@ -693,7 +714,8 @@ MATCH void func_801D2D98(s16 x, s16 y, s16 width, u8 channel, u8 blink) {
 #define FAIRY_OVERVIEW_ROOM_Y(room)    (((room) / FAIRY_OVERVIEW_ROOM_COLUMNS) * FAIRY_OVERVIEW_ROW_STEP)
 
 /* Draws the fairy job overview and the unlocked room cells. */
-MATCH void func_801D3038(void) {
+/* func_801D3038 */
+MATCH void Fairy_DrawOverview(void) {
     TILE* tile;
     u8*   buffer;
     s16   marker_x;
@@ -711,16 +733,16 @@ MATCH void func_801D3038(void) {
 
     UI_WindowDraw(0x14, 0x12, 0x118, 0x13, 0xF2, g_WindowStyle);
     UI_WindowDrawOutline(0x16, 0x14, 0x113, 0x0F, 0);
-    if (D_801D4E0C != 0xFFFF) {
-        UI_TextDraw(0x1D, 0x15, 0, 0xFF, MESSAGE_TABLE_TEXT(AREA_MESSAGE_TABLE, D_801D4E0C));
+    if (g_FairyMessage != 0xFFFF) {
+        UI_TextDraw(0x1D, 0x15, 0, 0xFF, MESSAGE_TABLE_TEXT(AREA_MESSAGE_TABLE, g_FairyMessage));
 
-        if (D_801D4E0C == 0x3D) {
+        if (g_FairyMessage == 0x3D) {
             GFX_ADD_DRAW_MODE(getTPage(0, 0, 0, 0));
             shade = ((g_FrameCount & 8) ? (g_FrameCount & 6) : (~g_FrameCount & 6)) << 5 | 0x3F;
             tile  = GFX_CURSOR(TILE);
             SetTile(tile);
             SetSemiTrans(tile, 1);
-            entry_row = D_801D4E18;
+            entry_row = g_FairyConfirmChoice;
             tile->y0  = 0x16;
             tile->h   = 0x0C;
             setRGB0(tile, shade, shade, 0);
@@ -731,23 +753,23 @@ MATCH void func_801D3038(void) {
     }
 
     UI_WindowDraw(0x15, 0x2E, 0x114, 0xAA, 0x80, g_WindowStyle);
-    func_801D3594(0x14, 0x2D);
+    Fairy_DrawOverviewGrid(0x14, 0x2D);
     UI_WindowDrawOutline(0x20, 0x38, 0xA8, 0x10, 1);
 
-    count = Fairy_GetJobActive(0);
+    count = Fairy_GetJobActive(FAIRY_JOB_IDLE);
     for (i = 0; i < count; i++) {
-        func_801D4030(0x24 + i * FAIRY_OVERVIEW_JOB_COLUMN_STEP, 0x3A, 1);
+        Fairy_DrawPiece(0x24 + i * FAIRY_OVERVIEW_JOB_COLUMN_STEP, 0x3A, 1);
     }
 
-    for (i = 0; i < FAIRY_OVERVIEW_GROUP_COUNT; i++) {
+    for (i = 0; i < FAIRY_OVERVIEW_JOB_TYPE_COUNT; i++) {
         y = i * FAIRY_OVERVIEW_JOB_ROW_STEP;
         UI_WindowDrawOutline(0xF2, (s16)(y + 0x36), 0x30, 0x30, 1);
-        func_801D4030(0xEF, y + 0x33, i + 3);
-        active = Fairy_GetJobActive(i + 9);
+        Fairy_DrawPiece(0xEF, y + 0x33, i + 3);
+        active = Fairy_GetJobActive(FAIRY_JOB_HUNT + i);
         for (job = 0; job < active; job++) {
             column = job % FAIRY_OVERVIEW_JOB_COLUMNS;
             row    = job / FAIRY_OVERVIEW_JOB_COLUMNS;
-            func_801D4030(0xF6 + column * FAIRY_OVERVIEW_JOB_COLUMN_STEP, y + 0x44 + row * 7, 1);
+            Fairy_DrawPiece(0xF6 + column * FAIRY_OVERVIEW_JOB_COLUMN_STEP, y + 0x44 + row * 7, 1);
         }
     }
 
@@ -756,24 +778,24 @@ MATCH void func_801D3038(void) {
         if (i >= D_801F286D[g_GameAreaId]) {
             UI_WindowDraw(FAIRY_OVERVIEW_ROOM_X(i) + 0x20, FAIRY_OVERVIEW_ROOM_Y(i) + 0x6B, 0x28, 0x28, 1, g_WindowStyle);
         } else {
-            func_801D4030(FAIRY_OVERVIEW_ROOM_X(i) + 0x1A, FAIRY_OVERVIEW_ROOM_Y(i) + 0x5B, 0);
+            Fairy_DrawPiece(FAIRY_OVERVIEW_ROOM_X(i) + 0x1A, FAIRY_OVERVIEW_ROOM_Y(i) + 0x5B, 0);
             room_type = g_FairyRooms[i * 8];
             if (room_type != 0) {
                 if (room_type != 5) {
-                    func_801D3EFC(FAIRY_OVERVIEW_ROOM_X(i) + 0x22, FAIRY_OVERVIEW_ROOM_Y(i) + 0x6C, D_801D4C34[room_type]);
+                    Fairy_DrawRoomIcon(FAIRY_OVERVIEW_ROOM_X(i) + 0x22, FAIRY_OVERVIEW_ROOM_Y(i) + 0x6C, g_FairyRoomIcons[room_type]);
                 } else {
-                    func_801D3EFC(FAIRY_OVERVIEW_ROOM_X(i) + 0x22, FAIRY_OVERVIEW_ROOM_Y(i) + 0x6C, D_801D4C34[5] + D_801457A9[i][0]);
+                    Fairy_DrawRoomIcon(FAIRY_OVERVIEW_ROOM_X(i) + 0x22, FAIRY_OVERVIEW_ROOM_Y(i) + 0x6C, g_FairyRoomIcons[5] + D_801457A9[i][0]);
                 }
             }
             active = Fairy_GetJobActive(i + 1);
             for (job = 1; job <= active; job++) {
-                func_801D4694(&marker_x, &marker_y, (u8)(i + 1), job);
-                func_801D4030(marker_x, marker_y, 1);
+                Fairy_GetJobPos(&marker_x, &marker_y, (u8)(i + 1), job);
+                Fairy_DrawPiece(marker_x, marker_y, 1);
             }
         }
     }
 
-    func_801D4030(0x30, 0x4C, 2);
+    Fairy_DrawPiece(0x30, 0x4C, 2);
     buffer = g_UiTextFormatBuffer;
     sprintf((char*)buffer, D_801D0C10, D_801455C2);
     UI_TextDrawAscii(0x50, 0x4C, 0, buffer);
@@ -782,15 +804,18 @@ MATCH void func_801D3038(void) {
     UI_TextDrawAscii(0xB8, 0x4C, 0, buffer);
 }
 
-MATCH void func_801D3594(s16 x, s16 y) {
+/* Draws the grid over the body of the overview window. */
+/* func_801D3594 */
+MATCH void Fairy_DrawOverviewGrid(s16 x, s16 y) {
     s32 i;
     s32 offset;
 
-    COMMU_DRAW_CELL_GRID(func_801D4030, 0xA8, 33, 20, 8);
+    COMMU_DRAW_CELL_GRID(Fairy_DrawPiece, 0xA8, 33, 20, 8);
 }
 
 /* Outlines the cell with its top and right edges, then its left and bottom, yellow when selected and blinking with the frame count otherwise. */
-MATCH void func_801D36FC(s32 cell, s32 selected) {
+/* func_801D36FC */
+MATCH void Fairy_DrawCellFrame(s32 cell, s32 selected) {
     LINE_F3* prim;
     s32      shade;
     s32      state;
@@ -811,49 +836,52 @@ MATCH void func_801D36FC(s32 cell, s32 selected) {
     prim = (LINE_F3*)g_GfxPrimCursor;
     SetLineF3(prim);
     if (cell_index != 0 && cell_index < COMMU_CELL_FRAME_COUNT && D_801F286D[g_GameAreaId] < cell_index) {
-        prim->x0 = D_801D4C44[cell_index].points[1][0];
+        prim->x0 = g_FairyCellFrames[cell_index].points[1][0];
     } else {
-        prim->x0 = D_801D4C44[cell_index].points[0][0];
+        prim->x0 = g_FairyCellFrames[cell_index].points[0][0];
     }
-    prim->y0 = D_801D4C44[cell_index].points[0][1];
-    prim->x1 = D_801D4C44[cell_index].points[2][0];
-    prim->y1 = D_801D4C44[cell_index].points[0][1];
-    prim->x2 = D_801D4C44[cell_index].points[2][0];
-    prim->y2 = D_801D4C44[cell_index].points[2][1];
+    prim->y0 = g_FairyCellFrames[cell_index].points[0][1];
+    prim->x1 = g_FairyCellFrames[cell_index].points[2][0];
+    prim->y1 = g_FairyCellFrames[cell_index].points[0][1];
+    prim->x2 = g_FairyCellFrames[cell_index].points[2][0];
+    prim->y2 = g_FairyCellFrames[cell_index].points[2][1];
     setRGB0(prim, shade, shade, 0);
     GFX_AddPrim(GFX_LAYER_UI, sizeof(LINE_F3));
 
     prim = (LINE_F3*)g_GfxPrimCursor;
     SetLineF3(prim);
     if (cell_index != 0 && cell_index < COMMU_CELL_FRAME_COUNT && D_801F286D[g_GameAreaId] < cell_index) {
-        prim->y0 = D_801D4C44[cell_index].points[0][1];
+        prim->y0 = g_FairyCellFrames[cell_index].points[0][1];
     } else {
-        prim->y0 = D_801D4C44[cell_index].points[1][1];
+        prim->y0 = g_FairyCellFrames[cell_index].points[1][1];
     }
-    prim->x0 = D_801D4C44[cell_index].points[1][0];
-    prim->x1 = D_801D4C44[cell_index].points[1][0];
-    prim->y1 = D_801D4C44[cell_index].points[2][1];
-    prim->x2 = D_801D4C44[cell_index].points[2][0];
-    prim->y2 = D_801D4C44[cell_index].points[2][1];
+    prim->x0 = g_FairyCellFrames[cell_index].points[1][0];
+    prim->x1 = g_FairyCellFrames[cell_index].points[1][0];
+    prim->y1 = g_FairyCellFrames[cell_index].points[2][1];
+    prim->x2 = g_FairyCellFrames[cell_index].points[2][0];
+    prim->y2 = g_FairyCellFrames[cell_index].points[2][1];
     setRGB0(prim, shade, shade, 0);
     GFX_AddPrim(GFX_LAYER_UI, sizeof(LINE_F3));
 }
 
-MATCH void func_801D3984(s32 x, s32 y, s32 bright) {
+/* Draws the blinking triangle cursor at a point. */
+/* func_801D3984 */
+MATCH void Fairy_DrawCursor(s32 x, s32 y, s32 bright) {
     POLY_F3* poly;
     u8       colour;
 
     COMMU_DRAW_CURSOR_TRIANGLE(x, y, bright);
 }
 
+/* Returns how many active jobs have the job type. */
 /* func_801D3A48 */
-MATCH u8 Fairy_GetJobActive(u8 arg) {
+MATCH u8 Fairy_GetJobActive(u8 job_type) {
     s32 count = 0;
     s32 i;
 
     for (i = 0; i < FAIRY_JOB_COUNT; i++) {
         if (g_FairyJobs[i].active != 0) {
-            if (g_FairyJobs[i].type == arg) {
+            if (g_FairyJobs[i].type == job_type) {
                 count++;
             }
         }
@@ -861,7 +889,9 @@ MATCH u8 Fairy_GetJobActive(u8 arg) {
     return count;
 }
 
-MATCH u8 func_801D3AA0(u8 type, u8 index) {
+/* Returns the slot of the index-th active job of a job type, or GAME_NONE. */
+/* func_801D3AA0 */
+MATCH u8 Fairy_FindJob(u8 type, u8 index) {
     u8  count;
     s32 i;
 
@@ -879,108 +909,109 @@ MATCH u8 func_801D3AA0(u8 type, u8 index) {
     return GAME_NONE;
 }
 
-/* Steps the commu row cursor by the pad direction, holding the press state. */
-MATCH void func_801D3B0C(u8* row) {
+/* Steps the cell cursor over the idle fairies, the room grid and the job types by the pad direction and writes the cell under it. */
+/* func_801D3B0C */
+MATCH void Fairy_MoveCursor(u8* cell) {
     s32 direction;
 
     direction = INPUT_REPEATED(g_PadStates[0].pressed, (PADLup | PADLdown | PADLleft | PADLright));
     if (direction & PADLup) {
-        switch (D_801D4DFC) {
-            case 0:
-                D_801D4DF8 = 1;
-                D_801D4DFC = 1;
-                *row       = D_801D4DF4 + 4;
+        switch (g_FairyCursorZone) {
+            case FAIRY_CURSOR_IDLE:
+                g_FairyCursorGridRow = 1;
+                g_FairyCursorZone    = FAIRY_CURSOR_ROOMS;
+                *cell                = g_FairyCursorColumn + 4;
                 break;
-            case 1:
-                if (D_801D4DF8 == 0) {
-                    D_801D4DFC = 0;
-                    *row       = 0;
+            case FAIRY_CURSOR_ROOMS:
+                if (g_FairyCursorGridRow == 0) {
+                    g_FairyCursorZone = FAIRY_CURSOR_IDLE;
+                    *cell             = 0;
                 } else {
-                    D_801D4DF8 = 0;
-                    *row       = *row - 4;
+                    g_FairyCursorGridRow = 0;
+                    *cell                = *cell - 4;
                 }
                 break;
-            case 2:
-                *row = *row - 1;
-                if (*row < 9) {
-                    *row = 0xB;
+            case FAIRY_CURSOR_JOBS:
+                *cell = *cell - 1;
+                if (*cell < FAIRY_JOB_HUNT) {
+                    *cell = FAIRY_JOB_BUILD;
                 }
                 break;
         }
     } else if (direction & PADLdown) {
-        switch (D_801D4DFC) {
-            case 0:
-                D_801D4DF8 = 0;
-                D_801D4DFC = 1;
-                *row       = D_801D4DF4;
+        switch (g_FairyCursorZone) {
+            case FAIRY_CURSOR_IDLE:
+                g_FairyCursorGridRow = 0;
+                g_FairyCursorZone    = FAIRY_CURSOR_ROOMS;
+                *cell                = g_FairyCursorColumn;
                 break;
-            case 1:
-                if (D_801D4DF8 != 0) {
-                    D_801D4DFC = 0;
-                    *row       = 0;
+            case FAIRY_CURSOR_ROOMS:
+                if (g_FairyCursorGridRow != 0) {
+                    g_FairyCursorZone = FAIRY_CURSOR_IDLE;
+                    *cell             = 0;
                 } else {
-                    D_801D4DF8 = 1;
-                    *row       = *row + 4;
+                    g_FairyCursorGridRow = 1;
+                    *cell                = *cell + 4;
                 }
                 break;
-            case 2:
-                *row = *row + 1;
-                if (*row >= 0xC) {
-                    *row = 9;
+            case FAIRY_CURSOR_JOBS:
+                *cell = *cell + 1;
+                if (*cell > FAIRY_JOB_BUILD) {
+                    *cell = FAIRY_JOB_HUNT;
                 }
                 break;
         }
     } else if (direction & PADLleft) {
-        switch (D_801D4DFC) {
-            case 0:
-                D_801D4DFC = 2;
-                *row       = 9;
+        switch (g_FairyCursorZone) {
+            case FAIRY_CURSOR_IDLE:
+                g_FairyCursorZone = FAIRY_CURSOR_JOBS;
+                *cell             = 9;
                 break;
-            case 1:
-                D_801D4DF4 = D_801D4DF4 - 1;
-                *row       = *row - 1;
-                if (D_801D4DF4 == 0) {
-                    D_801D4DF4 = 1;
-                    D_801D4DFC = 2;
-                    *row       = D_801D4DF8 + 0xA;
+            case FAIRY_CURSOR_ROOMS:
+                g_FairyCursorColumn = g_FairyCursorColumn - 1;
+                *cell               = *cell - 1;
+                if (g_FairyCursorColumn == 0) {
+                    g_FairyCursorColumn = 1;
+                    g_FairyCursorZone   = FAIRY_CURSOR_JOBS;
+                    *cell               = g_FairyCursorGridRow + FAIRY_JOB_CLEAR;
                 }
                 break;
-            case 2:
-                if (*row == 9) {
-                    D_801D4DFC = 0;
-                    *row       = 0;
+            case FAIRY_CURSOR_JOBS:
+                if (*cell == FAIRY_JOB_HUNT) {
+                    g_FairyCursorZone = FAIRY_CURSOR_IDLE;
+                    *cell             = 0;
                 } else {
-                    D_801D4DFC = 1;
-                    D_801D4DF8 = *row - 0xA;
-                    *row       = (*row << 2) - 0x24;
-                    D_801D4DF4 = 4;
+                    g_FairyCursorZone    = FAIRY_CURSOR_ROOMS;
+                    g_FairyCursorGridRow = *cell - FAIRY_JOB_CLEAR;
+                    *cell                = (*cell << 2) - 0x24;
+                    g_FairyCursorColumn  = 4;
                 }
                 break;
         }
     } else if (direction & PADLright) {
-        switch (D_801D4DFC) {
-            case 0:
-                D_801D4DFC = 2;
-                *row       = 9;
+        switch (g_FairyCursorZone) {
+            case FAIRY_CURSOR_IDLE:
+                g_FairyCursorZone = FAIRY_CURSOR_JOBS;
+                *cell             = 9;
                 break;
-            case 1:
-                D_801D4DF4 = D_801D4DF4 + 1;
-                *row       = *row + 1;
-                if (D_801D4DF4 >= 5) {
-                    D_801D4DF4 = 4;
-                    D_801D4DFC = 2;
-                    *row       = D_801D4DF8 + 0xA;
+            case FAIRY_CURSOR_ROOMS:
+                g_FairyCursorColumn = g_FairyCursorColumn + 1;
+                *cell               = *cell + 1;
+                if (g_FairyCursorColumn >= 5) {
+                    g_FairyCursorColumn = 4;
+                    g_FairyCursorZone   = FAIRY_CURSOR_JOBS;
+                    *cell               = g_FairyCursorGridRow + FAIRY_JOB_CLEAR;
                 }
                 break;
-            case 2:
-                if (*row == 9) {
-                    D_801D4DFC = 0;
-                    *row       = 0;
+            case FAIRY_CURSOR_JOBS:
+                if (*cell == FAIRY_JOB_HUNT) {
+                    g_FairyCursorZone = FAIRY_CURSOR_IDLE;
+                    *cell             = 0;
                 } else {
-                    D_801D4DFC = 1;
-                    D_801D4DF4 = 1;
-                    D_801D4DF8 = *row - 0xA;
-                    *row       = (*row - 0xA) * 4 + 1;
+                    g_FairyCursorZone    = FAIRY_CURSOR_ROOMS;
+                    g_FairyCursorColumn  = 1;
+                    g_FairyCursorGridRow = *cell - FAIRY_JOB_CLEAR;
+                    *cell                = (*cell - FAIRY_JOB_CLEAR) * 4 + 1;
                 }
                 break;
         }
@@ -990,11 +1021,11 @@ MATCH void func_801D3B0C(u8* row) {
     }
 }
 
-/* Draws one type icon of the entry list. */
-MATCH void func_801D3EFC(s16 x, s16 y, u8 ordinal) {
+/* Draws the icon of a room type. */
+/* func_801D3EFC */
+MATCH void Fairy_DrawRoomIcon(s16 x, s16 y, u8 icon) {
     s32      page;
     SPRT_16* sprite;
-    u8       icon;
 
     page = getTPage(TPAGE_DEPTH_4BIT, TPAGE_ABR_HALF, 896, 256);
     GFX_SET_DRAW_MODE(page);
@@ -1003,16 +1034,15 @@ MATCH void func_801D3EFC(s16 x, s16 y, u8 ordinal) {
     sprite = GFX_CURSOR(SPRT_16);
     SetSprt16(sprite);
     setXY0(sprite, x, y);
-    icon = ordinal;
     setUV0(sprite, (icon % 10) * 16 + 0x50 - (icon / 10) * 0x30, (icon / 10) * 16 - 0x20);
-    sprite->clut = (D_801D4CD4[icon] >> 4) | 0x7840;
+    sprite->clut = (g_FairyIconCluts[icon] >> 4) | 0x7840;
     setRGB0(sprite, GFX_COLOR_NEUTRAL, GFX_COLOR_NEUTRAL, GFX_COLOR_NEUTRAL);
     GFX_AddPrim(GFX_LAYER_UI, sizeof(SPRT_16));
 }
 
-/* Draws one tile of the entry screen's window frames. */
-MATCH void func_801D4030(s16 x, s16 y, u8 piece) {
-    s32   offset;
+/* Draws one piece of the piece table at a point: a window frame tile, a fairy or a marker. */
+/* func_801D4030 */
+MATCH void Fairy_DrawPiece(s16 x, s16 y, u8 piece) {
     s32   page;
     SPRT* sprite;
 
@@ -1022,17 +1052,17 @@ MATCH void func_801D4030(s16 x, s16 y, u8 piece) {
 
     sprite = GFX_CURSOR(SPRT);
     SetSprt(sprite);
-    offset = piece * 6;
     setXY0(sprite, x, y);
-    setUV0(sprite, D_801D4CE0[offset], D_801D4CE0[offset + 1]);
-    setWH(sprite, D_801D4CE0[offset + 2], D_801D4CE0[offset + 3]);
-    sprite->clut = getClut(D_801D4CE0[offset + 4], D_801D4CE0[offset + 5] + 0x1E0);
+    setUV0(sprite, g_FairyPieces[piece].u, g_FairyPieces[piece].v);
+    setWH(sprite, g_FairyPieces[piece].w, g_FairyPieces[piece].h);
+    sprite->clut = getClut(g_FairyPieces[piece].clut_x, g_FairyPieces[piece].clut_y + 0x1E0);
     setRGB0(sprite, GFX_COLOR_NEUTRAL, GFX_COLOR_NEUTRAL, GFX_COLOR_NEUTRAL);
     GFX_AddPrim(GFX_LAYER_UI, sizeof(SPRT));
 }
 
-/* Draws the entry list panel and its captions. */
-MATCH void func_801D4178(s16 x, s16 y, u8 mode) {
+/* Draws the room type list window with its captions. */
+/* func_801D4178 */
+MATCH void Fairy_DrawTypeMenu(s16 x, s16 y, u8 mode) {
     s32 i;
     u16 height;
     s32 span;
@@ -1045,49 +1075,53 @@ MATCH void func_801D4178(s16 x, s16 y, u8 mode) {
         UI_WindowDraw((u16)(x + 4), (u16)(y + 5), 0x30, span, UI_WINDOW_OPEN_TOP_LEFT | UI_WINDOW_STYLE_DARK, g_WindowStyle);
     }
     UI_WindowDraw((u16)x, (u16)y, 0x50, height | 1, UI_WINDOW_OPEN_TOP_LEFT, g_WindowStyle);
-    func_801D42DC((s16)x, (s16)(y - 1), span & 0xF0);
+    Fairy_DrawMenuFrame((s16)x, (s16)(y - 1), span & 0xF0);
     i = 0;
     if (i < *count) {
         do {
-            UI_TextDraw((s16)(x + 8), (s16)(y + 2 + i * 16), (mode * 7) & BYTE_MASK, 8, &D_801D4D34[i * 8]);
+            UI_TextDraw((s16)(x + 8), (s16)(y + 2 + i * 16), (mode * 7) & BYTE_MASK, 8, g_FairyMenuText[i]);
             i++;
         } while (i < D_801455C3);
     }
 }
 
-MATCH void func_801D42DC(s16 x, s16 y, u8 rows) {
+/* Draws the frame around a list window of the given height. */
+/* func_801D42DC */
+MATCH void Fairy_DrawMenuFrame(s16 x, s16 y, u8 height) {
     /* FAKE: retail frame reserves 8 bytes no statement uses. */
     FAKE_STACK_PADS(u8, 8);
     s32 i;
     s32 offset;
     u8  count;
 
-    func_801D4030(x, y, 6);
+    Fairy_DrawPiece(x, y, 6);
     for (i = 0; i < 8; i++) {
         offset = i * 8 + 8;
-        func_801D4030((s16)(x + offset), y, 7);
-        func_801D4030((s16)(x + offset), (s16)(y + rows), 0xC);
+        Fairy_DrawPiece((s16)(x + offset), y, 7);
+        Fairy_DrawPiece((s16)(x + offset), (s16)(y + height), 0xC);
     }
-    func_801D4030((s16)(x + 0x48), y, 8);
-    count = (rows >> 3) - 1;
+    Fairy_DrawPiece((s16)(x + 0x48), y, 8);
+    count = (height >> 3) - 1;
     i     = 0;
     if (count != 0) {
         do {
             offset = i * 8 + 8;
-            func_801D4030(x, (s16)(y + offset), 9);
-            func_801D4030((s16)(x + 0x48), (s16)(y + offset), 0xA);
+            Fairy_DrawPiece(x, (s16)(y + offset), 9);
+            Fairy_DrawPiece((s16)(x + 0x48), (s16)(y + offset), 0xA);
             i++;
         } while (i < count);
     }
-    func_801D4030(x, (s16)(y + rows), 0xB);
-    func_801D4030((s16)(x + 0x48), (s16)(y + rows), 0xD);
+    Fairy_DrawPiece(x, (s16)(y + height), 0xB);
+    Fairy_DrawPiece((s16)(x + 0x48), (s16)(y + height), 0xD);
 }
 
-MATCH s32 func_801D4474(void) {
+/* Returns the top of the room type list window. */
+/* func_801D4474 */
+MATCH s32 Fairy_GetTypeMenuTop(void) {
     s32 val;
     u32 v;
 
-    if (D_801D4DF8 == 0) {
+    if (g_FairyCursorGridRow == 0) {
         v   = D_801455C3;
         val = 0x6A;
         if (v >= 5) {
@@ -1100,15 +1134,16 @@ MATCH s32 func_801D4474(void) {
     return (s16)val;
 }
 
-/* Draws the panel of one commu type and returns its top. */
-MATCH s16 func_801D44E0(s16 x, s16 y, u8 type, u8 mode) {
+/* Draws the option list of a room type and returns its top. */
+/* func_801D44E0 */
+MATCH s16 Fairy_DrawOptionMenu(s16 x, s16 y, u8 type, u8 mode) {
     s32 i;
     s32 height;
     s32 bottom;
     u16 span;
     u8  rows;
 
-    rows   = D_801D4DD4[type].count;
+    rows   = g_FairyOptionRows[type].count;
     height = rows << 4;
     span   = height;
     bottom = span + 4;
@@ -1119,19 +1154,20 @@ MATCH s16 func_801D44E0(s16 x, s16 y, u8 type, u8 mode) {
         UI_WindowDraw((u16)(x + 4), (u16)(y + 6), 0x30, span, UI_WINDOW_OPEN_TOP_LEFT | UI_WINDOW_STYLE_DARK, g_WindowStyle);
     }
     UI_WindowDraw((u16)x, (u16)y, 0x50, height | 1, UI_WINDOW_OPEN_TOP_LEFT, g_WindowStyle);
-    func_801D42DC((s16)x, (s16)(y - 1), span & 0xF0);
+    Fairy_DrawMenuFrame((s16)x, (s16)(y - 1), span & 0xF0);
     i = 0;
-    if (i < D_801D4DD4[type].count) {
+    if (i < g_FairyOptionRows[type].count) {
         do {
-            UI_TextDraw((s16)(x + 8), (s16)(y + 2 + i * 16), (mode * 7) & BYTE_MASK, 8, &D_801D4D34[0x50 + (D_801D4DD4[type].first + i) * 8]);
+            UI_TextDraw((s16)(x + 8), (s16)(y + 2 + i * 16), (mode * 7) & BYTE_MASK, 8, g_FairyMenuText[g_FairyOptionRows[type].first + i + FAIRY_TYPE_LIST_ROWS]);
             i++;
-        } while (i < D_801D4DD4[type].count);
+        } while (i < g_FairyOptionRows[type].count);
     }
     return y;
 }
 
-/* Writes the screen origin of one entry-grid slot through the two pointers. */
-MATCH void func_801D4694(s16* out_x, s16* out_y, s32 type, s32 ordinal) {
+/* Writes the screen position of the ordinal-th job of a job type (0 is the cell itself) through the two pointers. */
+/* func_801D4694 */
+MATCH void Fairy_GetJobPos(s16* out_x, s16* out_y, s32 type, s32 ordinal) {
     s32 base;
     s32 row;
     s32 slot;
@@ -1158,9 +1194,9 @@ MATCH void func_801D4694(s16* out_x, s16* out_y, s32 type, s32 ordinal) {
     }
     if (ordinal & BYTE_MASK) {
         ordinal--;
-        sum_x  = x + D_801D4DDC[slot + (ordinal & BYTE_MASK)].x;
+        sum_x  = x + g_FairyJobSlots[slot + (ordinal & BYTE_MASK)].x;
         *out_x = sum_x;
-        sum_y  = y + D_801D4DDC[slot + (ordinal & BYTE_MASK)].y;
+        sum_y  = y + g_FairyJobSlots[slot + (ordinal & BYTE_MASK)].y;
         *out_y = sum_y;
     } else {
         *out_x = x + 0xA;
@@ -1168,39 +1204,42 @@ MATCH void func_801D4694(s16* out_x, s16* out_y, s32 type, s32 ordinal) {
     }
 }
 
-MATCH void func_801D47C4(void) {
-    D_801D4DF4 = D_801D4E00;
-    D_801D4DF8 = D_801D4E04;
-    D_801D4DFC = D_801D4E08;
+/* Puts back the cursor the move started from and steps back one sub-step. */
+/* func_801D47C4 */
+MATCH void Fairy_RestoreCursor(void) {
+    g_FairyCursorColumn  = g_FairySavedCursorColumn;
+    g_FairyCursorGridRow = g_FairySavedCursorGridRow;
+    g_FairyCursorZone    = g_FairySavedCursorZone;
     SND_SEPlay(EMI_SE_ID(SND_BANK_COMMON, 6));
     D_801F294D--;
 }
 
-/* Commits the pending request into the fairy jobs and reports whether it went through. */
-MATCH s32 func_801D482C(s32 ordinal_offset) {
+/* Moves the job at the cursor to the picked job type and returns whether it went through. */
+/* func_801D482C */
+MATCH s32 Fairy_MoveJob(s32 ordinal_offset) {
     s32 committed;
     u8  slot;
     u8  step;
     u32 anchor;
 
     committed = 0;
-    switch (D_801D4DFC) {
-        case 1:
+    switch (g_FairyCursorZone) {
+        case FAIRY_CURSOR_ROOMS:
             if (Fairy_GetJobActive(D_801D4E28) == 3) {
                 break;
             }
             if (D_801F286D[g_GameAreaId] < (s8)D_801D4E28) {
                 break;
             }
-        case 0:
-        case 2:
+        case FAIRY_CURSOR_IDLE:
+        case FAIRY_CURSOR_JOBS:
             if ((s8)D_801D4E28 == g_SceneEventState.selection) {
                 break;
             }
-            D_801D4DF4                        = D_801D4E00;
-            D_801D4DF8                        = D_801D4E04;
-            D_801D4DFC                        = D_801D4E08;
-            slot                              = func_801D3AA0(g_SceneEventState.selection, D_801D4E24 - ordinal_offset);
+            g_FairyCursorColumn               = g_FairySavedCursorColumn;
+            g_FairyCursorGridRow              = g_FairySavedCursorGridRow;
+            g_FairyCursorZone                 = g_FairySavedCursorZone;
+            slot                              = Fairy_FindJob(g_SceneEventState.selection, g_FairyJobOrdinal - ordinal_offset);
             g_FairyJobs[slot].type            = D_801D4E28;
             anchor                            = g_BattleCount;
             g_FairyJobs[slot].record_state    = 0;
@@ -1215,8 +1254,9 @@ MATCH s32 func_801D482C(s32 ordinal_offset) {
     return committed;
 }
 
-/* Publishes the text id of the row at the commu list cursor. */
-MATCH void func_801D49C4(void) {
+/* Sets the top message from the selected cell. */
+/* func_801D49C4 */
+MATCH void Fairy_ShowTypeMessage(void) {
     u16 text_ids[9];
     u32 row;
     u8  room_type;
@@ -1229,7 +1269,7 @@ MATCH void func_801D49C4(void) {
     row = g_SceneEventState.selection;
     if ((row & BYTE_MASK) == 0) {
         text_id = 0x6A;
-    } else if ((row & BYTE_MASK) >= 9) {
+    } else if ((row & BYTE_MASK) >= FAIRY_JOB_HUNT) {
         text_id = row * 2 + 0x2C;
     } else {
         room_offset = ((row & BYTE_MASK) - 1) * 8;
@@ -1246,11 +1286,12 @@ MATCH void func_801D49C4(void) {
         }
         text_id = room_text_id;
     }
-    D_801D4E0C = text_id;
+    g_FairyMessage = text_id;
 }
 
-/* Publishes the text id of the request row byte that room points at. */
-MATCH void func_801D4AAC(u8* room) {
+/* Sets the top message from the cell the target cursor is on. */
+/* func_801D4AAC */
+MATCH void Fairy_ShowTargetMessage(u8* target) {
     u32 row;
     u32 limit;
     u8  room_type;
@@ -1258,13 +1299,13 @@ MATCH void func_801D4AAC(u8* room) {
     u16 text_id;
     u16 row_text_id;
 
-    row = *room;
+    row = *target;
     if (row == g_SceneEventState.selection) {
         text_id = 0x44;
     } else if (row == 0) {
         text_id = 0x69;
-    } else if (row >= 9) {
-        text_id = D_801D4DDA[row];
+    } else if (row >= FAIRY_JOB_HUNT) {
+        text_id = g_FairyJobMessages[row];
     } else {
         limit = D_801F286D[g_GameAreaId];
         if (limit < row) {
@@ -1275,19 +1316,21 @@ MATCH void func_801D4AAC(u8* room) {
             if (room_type == 0) {
                 row_text_id = 0x69;
             } else {
-                row_text_id = D_801D4BB0[room_type];
+                row_text_id = g_FairyRoomMessages[room_type];
             }
         }
         text_id = row_text_id;
     }
-    D_801D4E0C = text_id;
+    g_FairyMessage = text_id;
 }
 
-MATCH void func_801D4B58(void) {
-    D_801D4E10 = D_801F294D;
-    D_801D4E14 = D_801D4E0C;
+/* Shows the confirm question, keeping the sub-step and message to return to. */
+/* func_801D4B58 */
+MATCH void Fairy_AskConfirm(void) {
+    g_FairyReturnStep    = D_801F294D;
+    g_FairyReturnMessage = g_FairyMessage;
     SND_SEPlay(EMI_SE_ID(SND_BANK_COMMON, 3));
-    D_801D4E0C = 61;
-    D_801D4E18 = 0;
-    D_801F294D = 5;
+    g_FairyMessage       = 61;
+    g_FairyConfirmChoice = 0;
+    D_801F294D           = 5;
 }

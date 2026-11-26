@@ -10,8 +10,8 @@ MATCH void func_801E7634(void) {
     PartyMember* saved;
 
     if (EMI_IsReady() != 0) {
-        saved       = TASK(PartyMember);
-        g_Task      = g_BattleEffectBattler;
+        saved = TASK(PartyMember);
+        TASK_SET(g_BattleEffectBattler);
         g_GameState = &g_Game.members[g_BattleEffectBattler->slot];
         Script_Select((g_BattleEffectBattler->facing + 4) & BYTE_MASK);
         GFX_PaletteFreeFadeTarget(&g_Game.members[TASK(PartyMember)->slot]);
@@ -20,7 +20,7 @@ MATCH void func_801E7634(void) {
         GFX_PaletteUploadRows();
         g_Game.current->u.turn.action_flags.value &= ~BATTLER_ACTION_DRAGON_FORM_QUEUED;
         func_801E0B64();
-        g_Task = saved;
+        TASK_SET(saved);
         saved->header.mode++;
     }
 }

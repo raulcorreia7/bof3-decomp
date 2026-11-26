@@ -63,7 +63,7 @@ NON_MATCHING void Battle_BuildTurnOrder(void) {
         if (D_801463BA == 0 || (g_BattleEnemyBattlers[index - 3].turn.action_flags.value & BATTLER_ACTION_PREEMPTIVE_TURN)) {
             if (func_801DB9E4(index)) {
                 rank                    = func_801DB434(g_BattleEnemyBattlers[index - 3].level, 0);
-                D_801EB550[count].value = g_BattleEnemyBattlers[index - 3].stats.agility + D_801EAF48[rank * 16 + (rand() & 0xF)];
+                D_801EB550[count].value = g_BattleEnemyBattlers[index - 3].stats.agility + D_801EAF48[rank][rand() & 0xF];
                 D_801EB550[count].index = index;
                 count++;
             }

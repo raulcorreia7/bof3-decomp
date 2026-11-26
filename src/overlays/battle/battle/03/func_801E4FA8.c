@@ -5,7 +5,7 @@ MATCH void func_801E4FA8(void) {
 
     TASK(PartyMember)->unk_18 = -ONE;
     TASK(PartyMember)->unk_1C = 0;
-    func_801DD3CC(g_Task);
+    func_801DD3CC(TASK(void));
     work                     = TASK(PartyMember);
     work->facing             = work->facing ^ 0x2;
     work                     = TASK(PartyMember);
@@ -14,7 +14,7 @@ MATCH void func_801E4FA8(void) {
     work->unk_09             = 0x10;
     TASK(PartyMember)->timer = 8;
     Battle_RequestEnemyScript(0);
-    GFX_PaletteAllocFade(g_Task, -4, -4, -4, 1);
+    GFX_PaletteAllocFade(TASK(void), -4, -4, -4, 1);
     work                      = TASK(PartyMember);
     work->header.flags        = work->header.flags | ACTOR_FLAG_SEMI_TRANSPARENT;
     TASK(PartyMember)->unk_5C = 2;

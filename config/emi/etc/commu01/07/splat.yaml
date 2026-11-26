@@ -8,7 +8,7 @@ segments:
     section_order: [.data, .text, .rodata, .bss]
     subsegments:
       - [0x0, .data, g_EmiOverlayHeader]
-      - [0x4, bin, D_801D0C04]
+      - [0x4, bin, g_FairyChannelColors]
       - [0x2C, c, Fairy_Commu01Scene]
   # Placement: .data resumes after another section in the retail bytes; one segment would group both .data runs.
   - name: data
@@ -17,5 +17,5 @@ segments:
     vram: 0x801D4BB8
     align: 4
     subsegments:
-      - [0x3FB8, bin, D_801D4BB8]
+      - [0x3FB8, bin, g_FairyListMessages]
   - [0x4234]
