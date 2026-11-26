@@ -1475,7 +1475,8 @@ ADDRESS = re.compile(r"0x([0-9a-f]{8})\b")
 
 
 def _normalise(listing, names: dict[int, str], shift: int) -> list[tuple[str, str]]:
-    """(mnemonic, operands) with branch targets as labels and call targets as names."""
+    """(mnemonic, operands) with branch targets as labels and call targets as names; shift is
+    how far the listing's code was linked from where it is shown (absolute targets carry it)."""
     if not listing:
         return []
     base = int(listing[0][0], 16)
@@ -1483,12 +1484,12 @@ def _normalise(listing, names: dict[int, str], shift: int) -> list[tuple[str, st
     for _, mnemonic, ops in listing:
         if BRANCH.match(mnemonic):
 
-            def label(m, call=mnemonic == "jal"):
+            def label(m, absolute=mnemonic in ("j", "jal"), call=mnemonic == "jal"):
                 address = int(m[1], 16)
-                if base <= address < base + 4 * len(listing) and not call:
-                    return f"L{(address - base) // 4}"
-                name = names.get(address) or names.get(address - shift)
-                return name or m[0]
+                local = address - shift if absolute else address
+                if base <= local < base + 4 * len(listing) and not call:
+                    return f"L{(local - base) // 4}"
+                return names.get(address) or names.get(address - shift) or m[0]
 
             ops = ADDRESS.sub(label, ops)
         out.append((mnemonic, ops))
@@ -1539,7 +1540,7 @@ def _lcs_pairs(a: list[str], b: list[str]) -> list[tuple[int, int]]:
 
 def lcs_score(retail, candidate, names=None, shift=0, matched=False) -> Score:
     """Align the two listings on their opcodes; count the unpaired and the operand differences."""
-    r = _normalise(retail, names or {}, shift)
+    r = _normalise(retail, names or {}, 0)
     c = _normalise(candidate, names or {}, shift)
     pairs = _lcs_pairs([x[0] for x in r], [x[0] for x in c])
     operands = sum(r[i][1] != c[j][1] for i, j in pairs)
