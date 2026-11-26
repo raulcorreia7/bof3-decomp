@@ -5,21 +5,29 @@
 
 #include "overlays/bmagic/bmagic.h"
 
-void func_801EEC70(void);
-void func_801EED44(void);
+/* func_801EEC70 */
+void BMagic_BurstInit(void);
 
-#define MAGIC042_STEP_COUNT 5
+/* The steps of the flare effect. */
+#define BMAGIC_BURST_FLARE_STEP_COUNT 5
 
-typedef struct Magic042Steps {
-    Callback steps[MAGIC042_STEP_COUNT];
-} Magic042Steps;
+typedef struct BMagicBurstFlareSteps {
+    Callback steps[BMAGIC_BURST_FLARE_STEP_COUNT];
+} BMagicBurstFlareSteps;
 
-extern Magic042Steps D_801EEC04;
-extern Pos2          D_801EFB74[][2];
-extern Pos2          D_801EFBCC[][2];
-extern u8            D_801EFC24[];
-void                 func_801EF920(void);
-void                 func_801EF380(u8 start, u16 radius);
-void                 func_801EF71C(u8 start, u16 radius);
+/* D_801EEC04 */
+extern BMagicBurstFlareSteps g_BMagicBurstFlareSteps;
+/* D_801EFB74 */
+extern Pos2                  g_BMagicBurstCharacterOffsets[][2];
+/* D_801EFBCC */
+extern Pos2                  g_BMagicBurstFormOffsets[][2];
+/* D_801EFC24 */
+extern u8                    g_BMagicBurstFormTypes[];
+/* func_801EF380 */
+void                         BMagic_BurstDrawRays(u8 start, u16 radius);
+/* func_801EF71C */
+void                         BMagic_BurstDrawSpokes(u8 start, u16 radius);
+/* func_801EF920 */
+void                         BMagic_BurstDrawGlow(void);
 
 #endif

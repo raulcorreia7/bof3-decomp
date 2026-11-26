@@ -17,8 +17,8 @@ segments:
     align: 4
     subsegments:
       - [0xF70, bin, g_BMagicEffectModes]
-      - [0xF74, bin, D_801EFB74]
-      - [0xFCC, bin, D_801EFBCC]
-      - [0x1024, bin, D_801EFC24]
+      - [0xF74, bin, g_BMagicBurstCharacterOffsets]
+      - [0xFCC, bin, g_BMagicBurstFormOffsets]
+      - [0x1024, bin, g_BMagicBurstFormTypes]
   - [0x103C, bin, D_801EFC3C]
   - [0x103D]
