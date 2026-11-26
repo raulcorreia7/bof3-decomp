@@ -2,18 +2,18 @@
 
 /* Runs the village upkeep for one row count: Fairy_JoinVillage per 10 battles or func_801F01F4 per 20 since the D_801455AC and D_801455B0 stamps. */
 void func_801EEEF0(u32 row) {
-    s8* fairy_count;
-    s32 slots;
-    s32 fairies;
-    s32 count;
-    s32 i;
-    u32 first;
-    u32 battles;
+    s8*  fairy_count;
+    s32  slots;
+    s32  fairies;
+    s32  count;
+    s32  i;
+    u32  first;
+    u32  battles;
     u32* battle_count;
 
     fairy_count = (s8*)&g_SaveData.unk_C84[0x66];
     row &= BYTE_MASK;
-    fairies     = *fairy_count;
+    fairies = *fairy_count;
     if ((s32)(row * 4) < fairies) {
         battle_count = &g_SaveData.battle_count;
         battles      = *battle_count;

@@ -5,7 +5,7 @@ void func_801F4874(void) {
     u8  shown;
     u8  blink;
     u8* buffer;
-    u8*  separator;
+    u8* separator;
     u8  tens;
     u8  ones;
 
