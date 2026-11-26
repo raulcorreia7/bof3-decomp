@@ -27,15 +27,6 @@ s8   Actor_FindInRange(s32 pos_x, s32 pos_y, s32 range_mode);
 #if defined(ENGINE_LOCAL_DECLS) && !defined(OVERLAY_ACTOR_MOTION_H_LOCAL)
 #define OVERLAY_ACTOR_MOTION_H_LOCAL
 
-/* func_801A4AA8 */
-void Actor_ResetMotion(void);
-/* func_801B5BDC */
-void Actor_RequestRoute(u8 route_index);
-/* func_801BB8E8 */
-void Actor_SnapFacing(u8 arg_a, u8 arg_b, u8 arg_c);
-/* func_801C57B4 */
-void Actor_Move(void);
-
 /* func_801A0AE4 */
 void Actor_RunWander(Actor* record);
 /* func_801A0CFC */
@@ -46,14 +37,10 @@ void Actor_RunChase(Actor* record);
 void Actor_RunWanderHome(Actor* record);
 /* func_801A1384 */
 void Actor_RunRoute(void* entity);
-/* func_801A271C */
-void Actor_RunRouteWait(void* record);
 /* func_801A1A24 */
 void Actor_RunRequestScript(u8* record);
-/* func_801A3410 */
-void Actor_RunAttach(void* work_index);
-/* func_801A3B7C */
-void Actor_RunTurn(Actor* entity);
+/* func_801A1A58 */
+bool Actor_IsAheadInHomeBox(Actor* actor);
 /* func_801A225C */
 s32  Actor_PaceFree(s32 unused, s32 divisor, s32 flag_bits);
 /* func_801A22CC */
@@ -62,6 +49,10 @@ s32  Actor_PaceByPartyStep(Actor* value_a, s32 value_b, u8 flag_bits);
 s32  Actor_PaceByPartyStepDouble(Actor* value_a, s32 value_b, u8 flag_bits);
 /* func_801A246C */
 s32  Actor_PaceByPartyStepBit1(s32 value_a, s32 value_b, s32 flag_bits);
+/* func_801A271C */
+void Actor_RunRouteWait(void* record);
+/* func_801A275C */
+void Actor_StartRouteWait(void* unused);
 /* func_801A2788 */
 void Actor_RunMode(s32 step_index);
 /* func_801A2A04 */
@@ -72,10 +63,19 @@ u8   Actor_PickFleeFacing(Actor* actor);
 u8   Actor_PickChaseFacing(Actor* entity);
 /* func_801A2ED4 */
 u8   Actor_PickFacingByLeaderDistance(Actor* entity, u8 route_step);
-/* func_801A1A58 */
-bool Actor_IsAheadInHomeBox(Actor* actor);
-/* func_801A275C */
-void Actor_StartRouteWait(void* unused);
+/* func_801A3410 */
+void Actor_RunAttach(void* work_index);
 /* func_801A3AC8 */
 bool Actor_IsAheadOccupied(Actor* record);
+/* func_801A3B7C */
+void Actor_RunTurn(Actor* entity);
+
+/* func_801A4AA8 */
+void Actor_ResetMotion(void);
+/* func_801B5BDC */
+void Actor_RequestRoute(u8 route_index);
+/* func_801BB8E8 */
+void Actor_SnapFacing(u8 arg_a, u8 arg_b, u8 arg_c);
+/* func_801C57B4 */
+void Actor_Move(void);
 #endif
