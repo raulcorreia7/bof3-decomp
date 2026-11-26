@@ -16,8 +16,6 @@ NON_MATCHING s32 Scene_SetupParty(u32 scene) {
     s32  size;
     s32  i;
     s32  j;
-    /* FAKE: unused frame, 8 bytes. */
-    FAKE_STACK_PADS(u8, 8);
 
     lists   = FIELD(u8*, GAME_TILE_RUN(g_GameAreaId), 0x14);
     ids     = lists[(u8)scene];
@@ -54,13 +52,8 @@ NON_MATCHING s32 Scene_SetupParty(u32 scene) {
                 }
             }
         }
-        if ((count & 0xFF) > 0) {
-            i = 0;
-            do {
-                g_PartyFieldOrder[i] = g_Game.members[SP_SLOTS[i]].chr.character_id;
-                i++;
-            } while (i < (u8)count);
-        }
+        for (j = 0; j < (u8)count; j++)
+            g_PartyFieldOrder[j] = g_Game.members[SP_SLOTS[j]].chr.character_id;
         for (i = 0; i < (u8)count - 1; i++) {
             if (i != SP_SLOTS[i]) {
                 Party_MemberSwap((u8)i, SP_SLOTS[i], 0);

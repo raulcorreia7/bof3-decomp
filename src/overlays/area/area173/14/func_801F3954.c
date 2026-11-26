@@ -2,55 +2,34 @@
 
 /* Draws one sweep frame: each cell row builds an FT4 quad from the four vertex cells around its
  * cell pair, projects the quad and stages the cell origin for the sprite pass. */
-#ifdef NON_MATCHING
-NON_MATCHING void func_801F3954(s32 frame) {
+MATCH void func_801F3954(s32 frame) {
     POLY_FT4* prim;
     u16*      slot;
-    u8*       cell_x;
-    u8*       cell_y;
-    s32       start;
-    s32       row;
-    s32       entry;
-    s32       offset;
+    s32       part;
     s32       i;
     long      depth;
     long      flag;
 
-    start = D_801F52E8[frame][0];
-    if (start >= D_801F52E9[frame][0]) {
+    part = D_801F52E8[frame][0];
+    if (part >= D_801F52E9[frame][0]) {
         return;
     }
-    slot   = D_1F800034_U16;
-    cell_y = D_801F4F15 + start * 20;
-    cell_x = D_801F4F15 + start * 20 - 1;
-    row    = start * 20;
-    while (start < D_801F52E9[frame][0]) {
+    slot = D_1F800034_U16;
+    while (part < D_801F52E9[frame][0]) {
         prim = (POLY_FT4*)g_GfxPrimCursor;
         SetPolyFT4(prim);
         SetShadeTex(prim, 0);
-        slot[0] = ((*cell_x) << 7) - (AREA_CELL_ORIGIN + AREA_CELL_HALF);
-        slot[1] = ((*cell_y) << 7) - (AREA_CELL_ORIGIN + AREA_CELL_HALF);
-        i       = 0;
-        entry   = row;
-        offset  = 0;
-        do {
-            i++;
-            FIELD(u16, g_ScratchPadVectors, offset)     = (slot[0] + D_801F4F16[entry] * 64) + slot[2];
-            FIELD(u16, g_ScratchPadVectors, offset + 2) = slot[1] + D_801F4F17[entry] * 64;
-            FIELD(u16, g_ScratchPadVectors, offset + 4) = (u16)(slot[3] + 0x180) - D_801F4F18[entry] * 64;
-            offset += 8;
-            entry += 3;
-        } while (i < 4);
+        slot[0] = (D_801F4F14[part].x << 7) - (AREA_CELL_ORIGIN + AREA_CELL_HALF);
+        slot[1] = (D_801F4F14[part].y << 7) - (AREA_CELL_ORIGIN + AREA_CELL_HALF);
+        for (i = 0; i < 4; i++) {
+            g_ScratchPadVectors[i].vx = (slot[0] + D_801F4F14[part].cells[i][0] * 64) + slot[2];
+            g_ScratchPadVectors[i].vy = slot[1] + D_801F4F14[part].cells[i][1] * 64;
+            g_ScratchPadVectors[i].vz = slot[3] + 0x180 - D_801F4F14[part].cells[i][2] * 64;
+        }
         RotTransPers4(&g_ScratchPadVectors[0], &g_ScratchPadVectors[1], &g_ScratchPadVectors[2], &g_ScratchPadVectors[3], (long*)&prim->x0, (long*)&prim->x1, (long*)&prim->x2, (long*)&prim->x3,
                       &depth, &flag);
-        Area_ApplyTileToQuad(LOWU(D_801F4F24[row]), prim, 1);
-        row += 20;
-        Area_CellAddPrim(((*cell_x) << 16) + (D_1F800038 << 9), (*cell_y) << 16, 0, sizeof(POLY_FT4));
-        cell_y += 20;
-        cell_x += 20;
-        start++;
+        Area_ApplyTileToQuad(D_801F4F14[part].cell, prim, 1);
+        Area_CellAddPrim((D_801F4F14[part].x << 16) + (D_1F800038 << 9), D_801F4F14[part].y << 16, 0, sizeof(POLY_FT4));
+        part++;
     }
 }
-#else
-INCLUDE_ASM(func_801F3954);
-#endif
