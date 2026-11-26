@@ -25,7 +25,6 @@ typedef enum ActorScriptWait {
 #ifdef NON_MATCHING
 NON_MATCHING u8 Script_OpsRunWait(ScriptState* state, u8* base, u8 value) {
     u8*       cmd;
-    u8*       slot;
     u8        frames;
     u16       pc;
     u32       index;
@@ -60,16 +59,15 @@ NON_MATCHING u8 Script_OpsRunWait(ScriptState* state, u8* base, u8 value) {
             TASK(Actor)->option_flags ^= ACTOR_OPT_NO_TARGET;
             break;
         case ACTOR_SCRIPT_WAIT_SET_PARTY_SLOT_MOVE:
-            slot  = &D_1F800001;
-            *slot = g_CurrentActor - g_PartyActors;
-            if (*slot >= 5)
-                *slot = 4;
+            g_ScratchPad.cells.bytes[1] = g_CurrentActor - g_PartyActors;
+            if (g_ScratchPad.cells.bytes[1] >= 5)
+                g_ScratchPad.cells.bytes[1] = 4;
             frames = (base + state->cursor)[7];
             if (frames != 0) {
-                g_ActorTurnRamps[*slot].frames_z = g_ActorTurnRamps[*slot].frames_xy = frames;
-                g_ActorTurnRamps[*slot].delta_z                                      = (s16)((base + state->cursor)[5] << 8 | (base + state->cursor)[6]) / g_ActorTurnRamps[*slot].frames_z;
-                g_ActorTurnRamps[*slot].delta_y                                      = (s16)((base + state->cursor)[3] << 8 | (base + state->cursor)[4]) / g_ActorTurnRamps[*slot].frames_z;
-                g_ActorTurnRamps[*slot].delta_x                                      = (s16)((base + state->cursor)[1] << 8 | (base + state->cursor)[2]) / g_ActorTurnRamps[*slot].frames_z;
+                g_ActorTurnRamps[g_ScratchPad.cells.bytes[1]].frames_z = g_ActorTurnRamps[g_ScratchPad.cells.bytes[1]].frames_xy = frames;
+                g_ActorTurnRamps[g_ScratchPad.cells.bytes[1]].delta_z                                      = (s16)((base + state->cursor)[5] << 8 | (base + state->cursor)[6]) / g_ActorTurnRamps[g_ScratchPad.cells.bytes[1]].frames_z;
+                g_ActorTurnRamps[g_ScratchPad.cells.bytes[1]].delta_y                                      = (s16)((base + state->cursor)[3] << 8 | (base + state->cursor)[4]) / g_ActorTurnRamps[g_ScratchPad.cells.bytes[1]].frames_z;
+                g_ActorTurnRamps[g_ScratchPad.cells.bytes[1]].delta_x                                      = (s16)((base + state->cursor)[1] << 8 | (base + state->cursor)[2]) / g_ActorTurnRamps[g_ScratchPad.cells.bytes[1]].frames_z;
             } else {
                 TASK(Actor)->angle_z = (s16)((base + state->cursor)[5] << 8 | (base + state->cursor)[6]);
                 TASK(Actor)->angle_y = (s16)((base + state->cursor)[3] << 8 | (base + state->cursor)[4]);
@@ -88,11 +86,10 @@ NON_MATCHING u8 Script_OpsRunWait(ScriptState* state, u8* base, u8 value) {
             }
             break;
         case ACTOR_SCRIPT_WAIT_TOGGLE_PARTY_SLOT:
-            slot  = &D_1F800001;
-            *slot = g_CurrentActor - g_PartyActors;
-            if ((s8)*slot < 0)
-                *slot = 4;
-            g_ActorTurnRamps[(s8)*slot].flags ^= 1;
+            g_ScratchPad.cells.bytes[1] = g_CurrentActor - g_PartyActors;
+            if ((s8)g_ScratchPad.cells.bytes[1] < 0)
+                g_ScratchPad.cells.bytes[1] = 4;
+            g_ActorTurnRamps[(s8)g_ScratchPad.cells.bytes[1]].flags ^= 1;
             return value;
         case ACTOR_SCRIPT_WAIT_SET_UNK_06:
             state->pad_06 = (base + state->cursor)[1];
