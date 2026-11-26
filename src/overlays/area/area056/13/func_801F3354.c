@@ -2,8 +2,7 @@
 
 MATCH void func_801F3354(void) {
     s16 height;
-    /* FAKE: the copy keeps retail's move a1,v0 and the compare's sll v0,v0,0x10; the plain forms leave 1 of 59 rows. */
-    FAKE_REG(s16, landing_height, "a1");
+    s16 landing_height;
 
     TASK(Actor)->vz += TASK(Actor)->gravity;
     Actor_MovementUpdate();

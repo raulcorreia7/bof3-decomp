@@ -5,12 +5,9 @@ MATCH void func_801D40D8(void) {
     /* FAKE: the merged pad read stays in v1; the best pure form (s32 local) puts it in s0 (2 rows). */
     FAKE_REG(u16, pressed, "v1");
     u8* step;
-    /* FAKE: retail keeps the slot pointer in s0; the best pure form (no pins) scores 16 rows. */
-    FAKE_REG(u8*, slot, "s0");
-    /* FAKE: retail keeps the table in s2; the best pure form (no pins) scores 16 rows. */
-    FAKE_REG(u8**, records, "s2");
-    /* FAKE: retail keeps the pad pointer in s3; the best pure form (no pins) scores 16 rows. */
-    FAKE_REG(u16*, pad, "s3");
+    u8* slot;
+    u8** records;
+    u16* pad;
     /* FAKE: retail keeps the toggle in s1; the best pure form (no pins) scores 16 rows. */
     FAKE_REG(s8*, toggle, "s1");
 
