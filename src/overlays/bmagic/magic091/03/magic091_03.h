@@ -4,11 +4,8 @@
 /* The bmagic/magic091/03 overlay. Only this image includes the file. */
 
 #include "area/area.h"
-#include "overlays/bmagic/bmagic.h"
+#include "overlays/bmagic/shared/ring.h"
 
 extern u16 g_BattleEffectPalette[];
-
-extern BMagicActorSteps D_801EEC04;
-extern Callback         D_801EFC64[];
 
 #endif

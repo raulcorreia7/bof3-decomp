@@ -1,7 +1,7 @@
-/* The textured ring band of magic055 (func_801EF240) and magic091 (func_801EF240): 32 GT4 quads around the
- * effect cell, each under its own draw mode, the outer edge rising and falling with the phase (byte 0x0B) and
- * the inner edge shaded by it. ABR is the blend rate of the quads and of their draw mode. The caller declares prim, depth, flag, i, tpage, x, y and
- * phase. Every change must verify both member images. */
+/* Draws the ring band: 32 textured quads around the effect cell, each under its own draw mode, the outer edge rising
+ * and falling with the phase (byte 0x0B) and the inner edge shaded by it. ABR is the blend rate of the quads and of their
+ * draw mode. The caller declares prim, depth, flag, i, tpage, x, y and phase. Every change must verify both member images. */
+/* func_801EF240 (magic055), func_801EF240 (magic091) */
 #define BMAGIC_DRAW_RING_BAND(ABR)                                                                                                                                                                \
     g_ScratchPad.cells.halves[0] = TASK(PartyMember)->unk_09 * 4;                                                                                                                                 \
     g_ScratchPad.cells.halves[2] = TASK(PartyMember)->unk_09 * 3;                                                                                                                                 \

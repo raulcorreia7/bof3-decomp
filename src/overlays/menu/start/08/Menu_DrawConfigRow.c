@@ -25,20 +25,19 @@ typedef union {
     s32             words[32];
 } ConfigRow;
 
-#ifdef NON_MATCHING
-NON_MATCHING void Menu_DrawConfigRow(s32 x, s32 y, s32 option_index, s32 select_step) {
+/* Draws one config-menu row: its window, the chosen setting's text, the cursor and a line. */
+// clang-format off
+MATCH void Menu_DrawConfigRow(x, y, option_index, select_step)
+s16 x;
+s16 y;
+u8 option_index;
+s32 select_step;
+// clang-format on
+{
     ConfigRow work;
-    s16       tmp0;
+    s16       line_x;
     LINE_F2*  line;
-    s32       val1;
-    s32       val2;
-    s32       val3;
-    s32       val4;
-    s32       val5;
-    s32       val6;
 
-    val2                    = x;
-    val1                    = y;
     work.fields.unk_00      = D_801D0DE0;
     work.fields.unk_10      = D_801D0DEC;
     work.fields.unk_20      = D_801D0DF8;
@@ -52,30 +51,21 @@ NON_MATCHING void Menu_DrawConfigRow(s32 x, s32 y, s32 option_index, s32 select_
     work.fields.all.text[4] = (char*)&work.fields.unk_38;
     work.fields.all.text[5] = (char*)&work.fields.unk_40;
     work.fields.chosen      = work.fields.all;
-    val5                    = val2;
-    val4                    = select_step;
-    val6                    = option_index;
-    UI_WindowDraw(val5 & HALF_MASK, (val1 - (val4 & BYTE_MASK)) & HALF_MASK, 249, ((val4 & BYTE_MASK) * 2) + 11, 0, CHARACTER_BLOCK->window_style);
-    val3 = val1;
-    if ((u8)val4 == 3) {
-        val6 &= BYTE_MASK;
-        UI_TextDraw((s16)(val2 + 58) - (strlen(work.fields.chosen.text[val6]) * 4), (s16)(val1 - 1), 0, TEXT_LENGTH_MAX, work.fields.chosen.text[val6]);
+    UI_WindowDraw(x & HALF_MASK, (y - (select_step & BYTE_MASK)) & HALF_MASK, 249, ((select_step & BYTE_MASK) * 2) + 11, 0, CHARACTER_BLOCK->window_style);
+    if ((u8)select_step == 3) {
+        UI_TextDraw((s16)(x + 58) - (strlen(work.fields.chosen.text[option_index]) * 4), (s16)(y - 1), 0, TEXT_LENGTH_MAX, work.fields.chosen.text[option_index]);
         if (g_MenuStep.state != 1) {
-            UI_CursorDraw((val2 + 4) & HALF_MASK, val3 & HALF_MASK, 0);
+            UI_CursorDraw((x + 4) & HALF_MASK, y & HALF_MASK, 0);
         }
     } else {
-        val6 &= BYTE_MASK;
-        UI_TextDrawString((s16)(val2 + 58) - (strlen(work.fields.chosen.text[val6]) * 4), (s16)(val1 + 2), 0, TEXT_LENGTH_MAX, work.fields.chosen.text[val6]);
+        UI_TextDrawString((s16)(x + 58) - (strlen(work.fields.chosen.text[option_index]) * 4), (s16)(y + 2), 0, TEXT_LENGTH_MAX, work.fields.chosen.text[option_index]);
     }
     line = (LINE_F2*)g_GfxPrimCursor;
     SetLineF2(line);
-    tmp0     = val5 + 0x74;
-    line->x1 = tmp0;
-    setXY0(line, tmp0, (s16)(val3 + 1) - (val4 & BYTE_MASK));
-    line->y1 = (s16)(val3 + (val4 & BYTE_MASK) + 9);
+    line_x   = x + 0x74;
+    line->x1 = line_x;
+    setXY0(line, line_x, (s16)(y + 1) - (select_step & BYTE_MASK));
+    line->y1 = (s16)(y + (select_step & BYTE_MASK) + 9);
     setRGB0(line, GFX_COLOR_NEUTRAL, GFX_COLOR_NEUTRAL, GFX_COLOR_NEUTRAL);
     GFX_AddPrim(GFX_LAYER_UI, sizeof(LINE_F2));
 }
-#else
-INCLUDE_ASM(Menu_DrawConfigRow);
-#endif

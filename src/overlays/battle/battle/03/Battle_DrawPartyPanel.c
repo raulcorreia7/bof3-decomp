@@ -1,11 +1,10 @@
 #include "battle_03.h"
 
-#ifdef NON_MATCHING
 /* Draws one battle panel per party member: the frame, the member's name and
  * status glyph, the HP and AP values and the rails around the row. */
-NON_MATCHING void Battle_DrawPartyPanel(s16 x, s16 y) {
+MATCH void Battle_DrawPartyPanel(s16 x, s16 y) {
     s16 column_x;
-    s32 clut;
+    s8  clut;
     u16 color;
     u8  i;
     u8  r;
@@ -16,7 +15,7 @@ NON_MATCHING void Battle_DrawPartyPanel(s16 x, s16 y) {
     Battle_DrawPanelShape(x, y, ((g_Battle.party_count * 2) + 0xA) & 0xFE, 1);
     Battle_DrawPanelShape(x, (s16)(y + 0x18), ((g_Battle.party_count * 2) + 0xB) & BYTE_MASK, 1);
     Battle_DrawWindowTile(x, (s16)(y + 2), (g_Battle.party_count + 0xD) & BYTE_MASK, 1);
-    color = *(u16*)(BATTLE_GLOBAL_BYTES_3A08 + (((*(s8*)&g_WindowStyle) << 6) | 0x20));
+    color = BATTLE_WINDOW_COLORS[((s8)g_WindowStyle << 5) | 0x10];
     r     = PSX_COLOR_R(color) << 3;
     g     = PSX_COLOR_G(color) << 3;
     b     = PSX_COLOR_B(color) << 3;
@@ -45,8 +44,9 @@ NON_MATCHING void Battle_DrawPartyPanel(s16 x, s16 y) {
             clut = (g_Game.members[i].chr.status >> 0xB) & 4;
         }
         func_801D94D4((s16)(x + 0x48), (s16)(y + 0xF), clut, g_Game.members[i].chr.hp);
-        clut = 2;
-        if (g_Game.members[i].chr.ap != 0 && !(g_Game.members[i].chr.status & 0x4000)) {
+        if (g_Game.members[i].chr.ap == 0 || (g_Game.members[i].chr.status & 0x4000)) {
+            clut = 2;
+        } else {
             clut = (g_Game.members[i].chr.ap < (g_Game.members[i].chr.stats.max_ap >> 2)) << 2;
         }
         func_801D94D4((s16)(x + 0x48), (s16)(y + 8), clut, g_Game.members[i].chr.ap);
@@ -57,6 +57,3 @@ NON_MATCHING void Battle_DrawPartyPanel(s16 x, s16 y) {
         x += 0x5E;
     }
 }
-#else
-INCLUDE_ASM(Battle_DrawPartyPanel);
-#endif

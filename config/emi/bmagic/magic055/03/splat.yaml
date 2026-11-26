@@ -16,5 +16,5 @@ segments:
     vram: 0x801EFC64
     align: 4
     subsegments:
-      - [0x1064, bin, D_801EFC64]
+      - [0x1064, bin, g_BMagicRingBandModes]
   - [0x1074]

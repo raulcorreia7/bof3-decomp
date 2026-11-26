@@ -28,7 +28,7 @@ NON_MATCHING void func_801F3010(void) {
             if (*pixels != 0) {
                 tile->color = *pixels;
                 tile->x     = (col + (screen.vx - rect->box.x)) << 4;
-                tile->y     = (row + screen.vy - rect->box.y) << 4;
+                tile->y     = (screen.vy - rect->box.y + row) << 4;
                 if (D_801F4F34[col] < (s16)tile->y) {
                     D_801F4F34[col] = tile->y;
                 }

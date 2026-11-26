@@ -476,7 +476,7 @@ NON_MATCHING void func_801F823C(s16 x, s16 y, s16 height, s16 width) {
         half = SquareRoot0(height * height - row * row);
         skew = (width * rsin(D_801FE9EC[i])) >> 12;
         prim = (POLY_GT4*)g_GfxPrimCursor;
-        row -= 1;
+        row--;
         SetPolyGT4(prim);
         SetSemiTrans(prim, 0);
         top      = i + (y - height);

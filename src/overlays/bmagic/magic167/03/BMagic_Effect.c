@@ -59,12 +59,9 @@ MATCH void func_801EEC94(void) {
 /* Darkens the palette fade row the effect timer indexes and, when its red reaches zero, releases the selected
  * battler's fades and advances the mode. */
 MATCH void func_801EF080(void) {
-    /* FAKE: retail frame reserves 0x10 bytes no statement uses. */
-    FAKE_STACK_PADS(u8, 0x10);
-
-    g_PaletteFades[TASK(PartyMember)->timer].offset.r -= 1;
-    g_PaletteFades[TASK(PartyMember)->timer].offset.g -= 1;
-    g_PaletteFades[TASK(PartyMember)->timer].offset.b -= 1;
+    g_PaletteFades[TASK(PartyMember)->timer].offset.r--;
+    g_PaletteFades[TASK(PartyMember)->timer].offset.g--;
+    g_PaletteFades[TASK(PartyMember)->timer].offset.b--;
     if (g_PaletteFades[TASK(PartyMember)->timer].offset.r == 0) {
         GFX_PaletteFreeFadeTarget(g_Battle.selected_actor);
         Battle_FadePoisonedBattler(g_Battle.target_selector);

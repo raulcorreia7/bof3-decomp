@@ -1,7 +1,6 @@
-/* The triangle fan of magic055 (func_801EF9E4) and magic091 (func_801EF9E4): eight segments of
- * a semi-transparent G3 ring around the effect centre, its radius a fixed 0x120 and its first corner
- * colour the effect timer times 12. Every change must verify both member images. */
-MATCH void func_801EF9E4(void) {
+/* Draws the shade behind the battlers: 8 subtractive triangles of radius 0x120, the centre shaded by the shade level (byte 0x0A) times 12. */
+/* func_801EF9E4 (magic055), func_801EF9E4 (magic091) */
+MATCH void BMagic_RingDrawShade(void) {
     POLY_G3* prim;
     long     depth;
     long     flag;

@@ -115,8 +115,10 @@ Helpers for one function against the retail bytes; each prints its usage with `-
   text) in place of the function, stops at the first `match:` and otherwise restores the file.
 - `sweep_edits.py` proposes single edits per draft (a local's or parameter's width, `++` or `+= 1`,
   one cast, one swapped statement, declaration or operand, a loop or if/else form, `break` for
-  `return`, a local split or merged), scores each with `MATCH_SRC` in a private copy and writes the
-  ones that match or have fewer differing rows as JSON lines; `--pairs` combines improving edits.
+  `return`, a local split or merged, a call argument or a shared tail moved), scores each with
+  `MATCH_SRC` in a private copy by an opcode-aligned diff (missing, extra and operand-only
+  instructions) and writes the ones that match or score lower as JSON lines; `--pairs` combines
+  improving edits, `--climb` chains them.
 - `match_context.sh` prints the assembly, the last three rows of `config/attempts.jsonl` and the C
   file that holds the function's `INCLUDE_ASM`.
 

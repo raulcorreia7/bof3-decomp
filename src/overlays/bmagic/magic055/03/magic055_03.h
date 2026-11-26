@@ -3,9 +3,6 @@
 
 /* The bmagic/magic055/03 overlay. Only this image includes the file. */
 
-#include "overlays/bmagic/bmagic.h"
-
-extern BMagicActorSteps D_801EEC04;
-extern Callback         D_801EFC64[];
+#include "overlays/bmagic/shared/ring.h"
 
 #endif

@@ -1,7 +1,6 @@
-/* The ring fan of magic055 (func_801EF7B0) and magic091 (func_801EF7B0): eight semi-transparent G3 segments
- * around the effect cell, each under its own draw mode, the radius twice the effect timer plus 32 and the centre
- * colour the timer times 10. Every change must verify both member images. */
-MATCH void func_801EF7B0(void) {
+/* Draws the disc of 8 semi-transparent triangles around the task's screen point, its radius twice the radius step plus 32 and its centre red by the radius step times 10. */
+/* func_801EF7B0 (magic055), func_801EF7B0 (magic091) */
+MATCH void BMagic_RingDrawDisc(void) {
     POLY_G3* prim;
     s32      i;
     s32      tpage;
