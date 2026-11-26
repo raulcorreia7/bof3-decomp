@@ -28,13 +28,14 @@ u16 y;
 
     style = (u8*)&g_WindowStyle;
     UI_WindowDraw(x, (y + 1) & HALF_MASK, 139, 158, UI_WINDOW_OPEN_ALL, *style);
+    slot       = 0;
     row        = 0;
-    row_offset = 0;
     buffer     = g_UiTextFormatBuffer;
     slot_list  = style + FISHING_ACCESSORY_SLOT_OFFSET;
     /* the accessory rows step down from the panel's first icon row */
+    row_offset = 0;
     icon_y     = y + 25;
-    for (slot = 0; slot < FISHING_ACCESSORY_SLOT_COUNT; slot++, slot_list++) {
+    for (; slot < FISHING_ACCESSORY_SLOT_COUNT; slot++, slot_list++) {
         if (g_Accessories[*slot_list].type != ITEM_TYPE_FISHING_ROD) {
             continue;
         }

@@ -1,11 +1,12 @@
 #include "battle_03.h"
 
 /* func_801D1E8C */
-#ifdef NON_MATCHING
-NON_MATCHING void Battle_ReadCommandMenu(void) {
-    PartyMember* temp_v0_66;
-    s32          temp_v1_80;
-    s8           temp_v0_50;
+/* Reads the pad on the command menu: cancel steps back to the previous member's command,
+ * confirm or a second press of the same entry opens it, select opens the party panels. */
+MATCH void Battle_ReadCommandMenu(void) {
+    PartyMember* member;
+    u32          damage_flags;
+    s8           count;
     s8           i;
 
     if (g_Battle.selection != 0) {
@@ -14,22 +15,22 @@ NON_MATCHING void Battle_ReadCommandMenu(void) {
     if ((g_PadStates[0].pressed & g_InputMasks[BATTLE_INPUT_CANCEL]) && ((s8)g_Battle.command_count != 0)) {
         SND_SEPlay(EMI_SE_ID(SND_BANK_COMMON, 6));
         g_Battle.phase.step -= 1;
-        temp_v0_50              = (u8)g_Battle.command_count - 1;
-        g_Battle.command_count  = temp_v0_50;
-        temp_v0_66              = &g_Game.members[D_801462F6[temp_v0_50]];
-        g_BattleMessageSlot     = &temp_v0_66->header.flags;
-        temp_v0_66->header.mode = 2;
-        temp_v0_66->u.turn.action_flags.value &= ~BATTLER_ACTION_ABILITY_ALT_POSE;
-        if (FIELD(u8, g_BattleMessageSlot, 0x119u) == 5) {
-            temp_v1_80 = FIELD(s32, g_BattleMessageSlot, 0x124u);
-            if (!(temp_v1_80 & 0x4000)) {
-                func_801DDE7C((u32)FIELD(u8, g_BattleMessageSlot, 0x122u), (u32)FIELD(u16, g_BattleMessageSlot, 0x11Au));
+        count                  = g_Battle.command_count - 1;
+        g_Battle.command_count = count;
+        member                 = &g_Game.members[D_801462F6[count]];
+        g_BattleMessageSlot    = &member->header.flags;
+        member->header.mode    = 2;
+        member->u.turn.action_flags.value &= ~BATTLER_ACTION_ABILITY_ALT_POSE;
+        if (((PartyMember*)g_BattleMessageSlot)->u.turn.command.type == BATTLE_COMMAND_ITEM) {
+            damage_flags = ((PartyMember*)g_BattleMessageSlot)->u.turn.damage_flags.value;
+            if (!(damage_flags & 0x4000)) {
+                func_801DDE7C(((PartyMember*)g_BattleMessageSlot)->u.turn.choice, ((PartyMember*)g_BattleMessageSlot)->u.turn.command.id);
             } else {
-                FIELD(s32, g_BattleMessageSlot, 0x124u) = (s32)(temp_v1_80 & ~0x4000);
+                ((PartyMember*)g_BattleMessageSlot)->u.turn.damage_flags.value = damage_flags & ~0x4000;
             }
         }
-        FIELD(s32, g_BattleMessageSlot, 0x124u) = 0;
-        FIELD(u8, g_BattleMessageSlot, 0x119u)  = 0U;
+        ((PartyMember*)g_BattleMessageSlot)->u.turn.damage_flags.value = 0;
+        ((PartyMember*)g_BattleMessageSlot)->u.turn.command.type       = 0;
         return;
     }
     if (g_PadStates[0].pressed & g_InputMasks[BATTLE_INPUT_CONFIRM]) {
@@ -67,13 +68,11 @@ NON_MATCHING void Battle_ReadCommandMenu(void) {
                                 g_Battle.cursor.panel_entry = 0;
                                 return;
                             }
+                            g_UiPanelTasks[2].state = g_UiPanelTasks[3].state = 2;
                             g_Battle.phase.step += 2;
-                            g_Battle.panel_slot         = i + 1;
-                            g_UiPanelTasks[2].state     = 2;
-                            g_UiPanelTasks[3].state     = 2;
-                            g_Battle.phase.sub_step     = i + 1;
-                            g_Battle.selection          = 0;
-                            g_Battle.cursor.panel_entry = 0;
+                            g_Battle.phase.sub_step = g_Battle.panel_slot = i + 1;
+                            g_Battle.selection                            = 0;
+                            g_Battle.cursor.panel_entry                   = 0;
                             return;
                         }
                     }
@@ -89,6 +88,3 @@ NON_MATCHING void Battle_ReadCommandMenu(void) {
         g_Battle.panel_slot = 0;
     }
 }
-#else
-INCLUDE_ASM(Battle_ReadCommandMenu);
-#endif
