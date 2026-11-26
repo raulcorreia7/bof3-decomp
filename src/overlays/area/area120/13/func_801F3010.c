@@ -15,16 +15,16 @@ NON_MATCHING void func_801F3010(void) {
         D_801F4F34[row] = 0;
     }
     Camera_SetMatrix(scratch);
-    pixels   = MEM_PTR(u16, AREA_WORK);
-    tile     = MEM_PTR(AreaRiseTile, AREA_WORK + 0x2D00u);
     point[0] = g_Actors[2].pos.x.fixed;
     point[1] = g_Actors[2].pos.y.fixed;
     point[2] = g_Actors[2].pos.z.fixed;
     Camera_ProjectPoint(point, &screen);
+    pixels     = MEM_PTR(u16, AREA_WORK);
+    tile       = MEM_PTR(AreaRiseTile, AREA_WORK + 0x2D00u);
     D_801F4FD4 = 0;
     for (row = 0; row < (s16)AREA120_IMAGE_RECT->box.h; row++) {
         rect = AREA120_IMAGE_RECT;
-        for (col = 0; col < (s16)AREA120_IMAGE_RECT->box.w; col++) {
+        for (col = 0; (s16)col < (s16)AREA120_IMAGE_RECT->box.w; col++) {
             if (*pixels != 0) {
                 tile->color = *pixels;
                 tile->x     = (col + (screen.vx - rect->box.x)) << 4;
