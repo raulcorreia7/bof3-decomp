@@ -2,14 +2,14 @@
 #define BMAGIC_SPAWN_AT_TARGETS_H
 
 /* Clears the effect count, then spawns one effect of type PART at each target the target check passes on the
- * selected side (the enemies when target selector bit 0x40 is set, else the party), each one 10 ticks after
+ * selected side (the enemies when target selector has the enemy side, else the party), each one 10 ticks after
  * the last, and moves the effect onto the last one spawned. A statement macro: the member declares u32 i,
  * u32 slot and PartyMember* work. */
 /* func_801EEC5C (magic097), func_801EEC5C (magic098) */
 #define BMAGIC_SPAWN_AT_TARGETS(PART)                                                           \
     slot                            = 0;                                                        \
     TASK(PartyMember)->param.unk_0B = 0;                                                        \
-    if (g_Battle.target_selector & 0x40) {                                                      \
+    if (g_Battle.target_selector & BATTLE_TARGET_ENEMY_SIDE) {                                                      \
         for (i = 0; i < 8; i++) {                                                               \
             if (!(Battle_SlotIsBlocked((u8)(i + BATTLE_PARTY_CHARACTERS_COUNT)) & BYTE_MASK)) { \
                 slot                               = Battle_AllocEffect(1, (PART)) & BYTE_MASK; \
