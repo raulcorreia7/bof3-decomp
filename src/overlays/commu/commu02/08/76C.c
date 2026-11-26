@@ -2629,7 +2629,7 @@ NON_MATCHING void func_801D9B80(s32 x, s32 y, s32 width, s32 height) {
     SPRT* sprite;
     s32   columns;
     s32   rows;
-    s32   edge;
+    u8    edge;
 
     setRECT(&window, 112, 152, 8, 8);
     SetDrawMode((DR_MODE*)g_GfxPrimCursor, 0, 0, getTPage(TPAGE_DEPTH_4BIT, TPAGE_ABR_HALF, 832, 256), &window);
