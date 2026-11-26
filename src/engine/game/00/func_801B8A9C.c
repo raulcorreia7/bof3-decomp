@@ -24,7 +24,7 @@ loop_top:
     work   = TASK(Actor);
     route  = count;
     route  = (work->direction + route) & 0x7;
-    word   = FAKE_VOLATILE(u32, FIELD(u32, work, 0x70u));
+    word   = FIELD(u32, work, 0x70u);
     offset = route * 2;
     pos_x  = work->pos.x.fixed + g_FacingSteps[route].x * (steps = (word & BYTE_MASK) + 1);
     pos_y  = work->pos.y.fixed + g_FacingStepY[offset] * steps;

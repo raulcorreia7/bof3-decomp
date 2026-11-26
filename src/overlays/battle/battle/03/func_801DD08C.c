@@ -8,7 +8,7 @@ MATCH void func_801DD08C(void) {
     u8 index;
 
     index = 0u;
-    while (index < FAKE_VOLATILE(u8, g_Battle.party_count)) {
+    while (index < g_Battle.party_count) {
         u32    work_offset;
         u8     template_index;
         Cpy16* src;
