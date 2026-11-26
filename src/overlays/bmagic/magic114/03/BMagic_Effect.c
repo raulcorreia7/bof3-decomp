@@ -376,16 +376,12 @@ MATCH void func_801EFE70(void) {
     timer_task->unk_09 = timer;
     if (timer == 0) {
         SND_SEQueueSelection(EMI_SE_ID(SND_BANK_COMMON, 2));
-        position_task              = TASK(PartyMember);
-        x                          = g_AreaScrollTargetX;
-        x_offset                   = position_task->unk_0C;
-        position_task->pos.x.fixed = x + x_offset;
-        /* FAKE: Preserve the X write before the Y reads. */
-        FAKE_BARRIER();
-        y        = g_AreaScrollTargetY;
-        y_offset = position_task->unk_10;
-        /* FAKE: Preserve the Y reads before clearing the field. */
-        FAKE_BARRIER();
+        position_task               = TASK(PartyMember);
+        x                           = g_AreaScrollTargetCoordX.fixed;
+        x_offset                    = position_task->unk_0C;
+        position_task->pos.x.fixed  = x + x_offset;
+        y                           = g_AreaScrollTargetCoordY.fixed;
+        y_offset                    = position_task->unk_10;
         position_task->param.unk_0B = 0;
         position_task->pos.y.fixed  = y + y_offset;
         TASK(PartyMember)->unk_09   = 16;

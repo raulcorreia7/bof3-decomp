@@ -15,11 +15,10 @@ MATCH void func_801EED18(void) {
 
     BMAGIC_CLEAR_EFFECTS(i);
     Battle_CenterCamera();
-    /* FAKE: the cast store keeps the y read behind the x store. */
-    LOW(TASK(PartyMember)->pos.x.fixed) = g_AreaScrollTargetX;
-    TASK(PartyMember)->pos.y.fixed      = g_AreaScrollTargetY;
-    TASK(PartyMember)->param.unk_0B     = 0;
-    TASK(PartyMember)->unk_09           = 0x38;
+    TASK(PartyMember)->pos.x.fixed  = g_AreaScrollTargetCoordX.fixed;
+    TASK(PartyMember)->pos.y.fixed  = g_AreaScrollTargetCoordY.fixed;
+    TASK(PartyMember)->param.unk_0B = 0;
+    TASK(PartyMember)->unk_09       = 0x38;
     TASK(PartyMember)->header.mode += 1;
     SND_SEQueueSelection(EMI_SE_ID(SND_BANK_COMMON, 0));
     slot                               = Battle_AllocEffect(1, 0x61) & BYTE_MASK;

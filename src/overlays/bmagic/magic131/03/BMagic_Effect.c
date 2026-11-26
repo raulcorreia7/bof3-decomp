@@ -532,13 +532,11 @@ MATCH void BMagic_KaiserBreathRingsStart(void) {
     s32          x;
     s32          z;
 
-    work              = TASK(PartyMember);
-    x                 = g_AreaScrollTargetX;
-    active            = g_BattleEffectBattler;
-    work->pos.x.fixed = x;
-    /* FAKE: Preserve the X write before the Y read. */
-    FAKE_BARRIER();
-    work->pos.y.fixed              = g_AreaScrollTargetY;
+    work                           = TASK(PartyMember);
+    x                              = g_AreaScrollTargetCoordX.fixed;
+    active                         = g_BattleEffectBattler;
+    work->pos.x.fixed              = x;
+    work->pos.y.fixed              = g_AreaScrollTargetCoordY.fixed;
     z                              = active->pos.z.fixed;
     work->unk_5D                   = 16;
     work->pos.z.fixed              = z;
@@ -643,12 +641,10 @@ MATCH void BMagic_KaiserBreathBeamStart(void) {
     PartyMember* work;
     PartyMember* source;
 
-    work              = TASK(PartyMember);
-    source            = g_BattleEffectBattler;
-    work->pos.x.fixed = g_AreaScrollTargetX;
-    /* FAKE: Keep the Y load after the X store; the scheduler hoists it (without it 0x7C vs 0x80 bytes). */
-    FAKE_BARRIER();
-    work->pos.y.fixed         = g_AreaScrollTargetY;
+    work                      = TASK(PartyMember);
+    source                    = g_BattleEffectBattler;
+    work->pos.x.fixed         = g_AreaScrollTargetCoordX.fixed;
+    work->pos.y.fixed         = g_AreaScrollTargetCoordY.fixed;
     work->pos.z.fixed         = source->pos.z.fixed;
     work->unk_14              = 0x40;
     work->param.unk_0B        = 0;

@@ -84,9 +84,9 @@ MATCH void func_801EF090(void) {
     TASK(PartyMember)->unk_0C = -TO_COORD_HALF(2);
     TASK(PartyMember)->unk_10 = 0;
     Effect_RotatePosition(g_Task);
-    TASK(PartyMember)->pos.x.fixed        = FAKE_VOLATILE(s32, g_AreaScrollTargetX) + TASK(PartyMember)->unk_0C;
-    TASK(PartyMember)->pos.y.fixed        = FAKE_VOLATILE(s32, g_AreaScrollTargetY) + TASK(PartyMember)->unk_10;
-    TASK(PartyMember)->pos.z.part.integer = Area_HeightSample(FAKE_VOLATILE(s32, g_AreaScrollTargetX), FAKE_VOLATILE(s32, g_AreaScrollTargetY)) + 0x200;
+    TASK(PartyMember)->pos.x.fixed        = g_AreaScrollTargetCoordX.fixed + TASK(PartyMember)->unk_0C;
+    TASK(PartyMember)->pos.y.fixed        = g_AreaScrollTargetCoordY.fixed + TASK(PartyMember)->unk_10;
+    TASK(PartyMember)->pos.z.part.integer = Area_HeightSample(g_AreaScrollTargetCoordX.fixed, g_AreaScrollTargetCoordY.fixed) + 0x200;
     SND_SEPlay(EMI_SE_ID(SND_BANK_COMMON, 0));
     work                      = TASK(PartyMember);
     work->param.unk_0B        = 0x34;

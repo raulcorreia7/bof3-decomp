@@ -354,8 +354,10 @@ g_AreaCamera = { addr = 0x801492D8, alias = true, source = "The area view: camer
 g_AreaPreviousCameraAngle = { addr = 0x801492E0, type = "SVECTOR", size = 0x8, source = "The previous frame camera angle copied from g_AreaCameraAngle when it changes." }
 g_CameraMatrix = { addr = 0x801492E8, type = "MATRIX", source = "View matrix of the camera." }
 g_AreaScrollTargetX = { addr = 0x80149308, type = "s32", source = "X scroll target of the area." }
+g_AreaScrollTargetCoordX = { addr = 0x80149308, type = "Coord", alias = true, source = "g_AreaScrollTargetX as a Coord: its fixed value and cell half." }
 g_AreaTargetCellX = { addr = 0x8014930A, source = "Cell x of the area scroll target." }
 g_AreaScrollTargetY = { addr = 0x8014930C, type = "s32", source = "Y scroll target of the area." }
+g_AreaScrollTargetCoordY = { addr = 0x8014930C, type = "Coord", alias = true, source = "g_AreaScrollTargetY as a Coord: its fixed value and cell half." }
 g_AreaTargetCellY = { addr = 0x8014930E, source = "Cell y of the area scroll target." }
 g_AreaCameraX = { addr = 0x80149310, source = "X of the camera position." }
 g_AreaCameraY = { addr = 0x80149314, source = "Y of the camera position." }
