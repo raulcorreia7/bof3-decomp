@@ -9,6 +9,7 @@
 #include "common/fixed.h"
 #include "common/vector.h"
 #include "menu/gameui.h"
+#include "menu/panel.h"
 #include "slus/functions.h"
 #include "battle/records.h"
 #include "common/callback.h"
@@ -140,153 +141,153 @@ extern u8*         g_SceneActorDefs;
 #define PALETTE_MAP_COLUMNS 16
 /* The palette cell map: which palette cells are in use. */
 /* D_80145D54 */
-extern u8             g_PaletteCells[PALETTE_MAP_ROWS][PALETTE_MAP_COLUMNS];
+extern u8                  g_PaletteCells[PALETTE_MAP_ROWS][PALETTE_MAP_COLUMNS];
 /* D_80145E14 */
-extern s32            g_SysCardSoftwareIoEvent;
+extern s32                 g_SysCardSoftwareIoEvent;
 /* D_80145E18 */
-extern s32            g_SysCardSoftwareTimeoutEvent;
+extern s32                 g_SysCardSoftwareTimeoutEvent;
 /* D_80145E1C */
-extern s32            g_SysCardSoftwareNewEvent;
+extern s32                 g_SysCardSoftwareNewEvent;
 /* D_80145E20 */
-extern s32            g_SysCardSoftwareErrorEvent;
+extern s32                 g_SysCardSoftwareErrorEvent;
 /* D_80145E24 */
-extern s32            g_SysCardHardwareIoEvent;
+extern s32                 g_SysCardHardwareIoEvent;
 /* D_80145E28 */
-extern s32            g_SysCardHardwareTimeoutEvent;
+extern s32                 g_SysCardHardwareTimeoutEvent;
 /* D_80145E2C */
-extern s32            g_SysCardHardwareErrorEvent;
+extern s32                 g_SysCardHardwareErrorEvent;
 /* D_80145E5C */
-extern u8             g_FairyVillagePendingQueueCount;
+extern u8                  g_FairyVillagePendingQueueCount;
 /* D_80145E5D */
-extern u8             g_FairyVillageUpdateCount;
-extern u8             D_80145E94[];
-extern u8             D_80145F1E[];
+extern u8                  g_FairyVillageUpdateCount;
+extern u8                  D_80145E94[];
+extern u8                  D_80145F1E[];
 /* 0x80146xxx-0x80149xxx: UI buffers, area queries and shared tables. */
-extern u16            D_8014625C;
-extern u8             D_8014626D;
+extern u16                 D_8014625C;
+extern u8                  D_8014626D;
 /* FAKE: g_Battle.choose_ending_hook as a global of its own; the sites that use it match only with a separate symbol. */
-extern Callback       g_BattleChooseEndingHook;
-extern EncounterEnemy D_801463DC[];
+extern Callback            g_BattleChooseEndingHook;
+extern EncounterEnemy      D_801463DC[];
 /* D_8014682D */
-extern s8             g_EmiServiceState;
-extern volatile u8    D_80146880;
-extern volatile u8    D_80146881;
-extern u8             D_80146889[];
-extern u16            D_801481DC;
-extern u8             D_80148356;
-extern s16            D_80148358;
-extern s16            D_8014835A;
-extern u8             D_8014835C;
-extern u8             D_8014835E;
-extern u8             D_80148378[];
-extern s16            D_8014837C;
-extern s16            D_8014837E;
-extern u8             D_801483C0;
-extern s16            D_80148574;
-extern u8             D_80148578;
-extern u8             D_80148579;
-extern u8             D_8014857A;
-extern u8             D_8014857B;
-extern u8             D_8014857C;
-extern u8             D_8014857D;
-extern s16            D_80148580;
-extern u8             D_8014859C;
-extern u8             D_8014859E;
+extern s8                  g_EmiServiceState;
+extern volatile u8         D_80146880;
+extern volatile u8         D_80146881;
+extern u8                  D_80146889[];
+extern u16                 D_801481DC;
+extern u8                  D_80148356;
+extern s16                 D_80148358;
+extern s16                 D_8014835A;
+extern u8                  D_8014835C;
+extern u8                  D_8014835E;
+extern u8                  D_80148378[];
+extern s16                 D_8014837C;
+extern s16                 D_8014837E;
+extern u8                  D_801483C0;
+extern s16                 D_80148574;
+extern u8                  D_80148578;
+extern u8                  D_80148579;
+extern u8                  D_8014857A;
+extern u8                  D_8014857B;
+extern u8                  D_8014857C;
+extern u8                  D_8014857D;
+extern s16                 D_80148580;
+extern u8                  D_8014859C;
+extern u8                  D_8014859E;
 /* D_8014859F */
-extern u8             g_BattleListCursor;
-extern u8             D_801485A0;
+extern u8                  g_BattleListCursor;
+extern u8                  D_801485A0;
 /* D_801485BB */
-extern volatile u8    g_BattlePanelMode;
+extern volatile u8         g_BattlePanelMode;
 /* D_801485C2 */
-extern u8             g_BattleEquipSlot;
-extern u8             D_801485C3;
-extern u8             D_801485C4;
+extern u8                  g_BattleEquipSlot;
+extern u8                  D_801485C3;
+extern u8                  D_801485C4;
 /* D_801485C8 */
-extern s16            g_BattleTargetCursorCol;
-extern volatile u8    D_801485DC;
-extern volatile u16   D_801485E0;
-extern volatile u16   D_801485E2;
-extern volatile u8    D_8014862E;
+extern s16                 g_BattleTargetCursorCol;
+extern volatile u8         D_801485DC;
+extern volatile u16        D_801485E0;
+extern volatile u16        D_801485E2;
+extern volatile u8         D_8014862E;
 /* D_8014864C */
-extern u8             g_UiPanelMode;
-extern MenuStep       g_MenuStep;
+extern u8                  g_UiPanelMode;
+extern MenuStep            g_MenuStep;
 /* FAKE: retail reads the three bytes as separate symbols; where the shared base
  * of g_MenuStep changes the code, the shop and start overlays keep these. */
-extern u8             D_80148650;
-extern u8             D_80148651;
-extern u8             D_80148652;
-extern u8             D_8014866C[];
-extern u8             D_80148A50[];
+extern u8                  D_80148650;
+extern u8                  D_80148651;
+extern u8                  D_80148652;
+extern u8                  D_8014866C[];
+extern u8                  D_80148A50[];
 /* D_80148FC0 */
-extern s8             g_SelectionEffectVoices[SND_SLOT_COUNT];
+extern s8                  g_SelectionEffectVoices[SND_SLOT_COUNT];
 /* D_801490A1 */
-extern u8             g_UiMessageStep;
+extern u8                  g_UiMessageStep;
 /* D_801490D8 */
-extern u8             g_TextVariables[16][0x20];
-extern u8             D_801490E4[];
-extern u8             D_801490F8[];
-extern u8             D_80149104;
+extern u8                  g_TextVariables[16][0x20];
+extern u8                  D_801490E4[];
+extern u8                  D_801490F8[];
+extern u8                  D_80149104;
 /* D_8014930A */
-extern s16            g_AreaTargetCellX;
+extern s16                 g_AreaTargetCellX;
 /* D_8014930E */
-extern s16            g_AreaTargetCellY;
+extern s16                 g_AreaTargetCellY;
 /* D_80149314 */
-extern u32            g_AreaCameraY;
+extern u32                 g_AreaCameraY;
 /* D_8014931C */
-extern u8*            g_AreaCellCodes;
+extern u8*                 g_AreaCellCodes;
 /* D_80149338 */
-extern u16            g_AreaTileRemainderY;
+extern u16                 g_AreaTileRemainderY;
 /* D_8014933E */
-extern u8             g_AreaDrawMode;
-extern u8             D_8014933F;
-extern const char     g_LogoExePath[];
-extern const char     D_80149814[];
+extern u8                  g_AreaDrawMode;
+extern u8                  D_8014933F;
+extern const char          g_LogoExePath[];
+extern const char          D_80149814[];
 /* D_8017F504 */
-extern const void*    g_ExceptionTitle; /* 0x8017F504 */
+extern const void*         g_ExceptionTitle; /* 0x8017F504 */
 /* D_8017F508 */
-extern const void*    g_ExceptionCauseNames[]; /* 0x8017F508 */
+extern const void*         g_ExceptionCauseNames[]; /* 0x8017F508 */
 /* D_8017F53C */
-extern const u8       g_SpriteSizes[16][2];
+extern const u8            g_SpriteSizes[16][2];
 /* D_8017F55C */
-extern const s8       g_SpriteCellRotations[16];
+extern const s8            g_SpriteCellRotations[16];
 /* D_8017F580 */
-extern const u8       g_NumberRowShades[32];
+extern const u8            g_NumberRowShades[32];
 /* D_8017F5A0 */
-extern const u8       g_TextRowShades[20];
+extern const u8            g_TextRowShades[20];
 /* D_8017F620 */
-extern const u8       g_TextRowOffsets[8];
+extern const u8            g_TextRowOffsets[8];
 /* D_8017F79C */
-extern const u8       g_SpriteCellPartCounts[12];
+extern const u8            g_SpriteCellPartCounts[12];
 /* D_8017F894 */
-extern const u8       g_SpriteCellTopV[20];
+extern const u8            g_SpriteCellTopV[20];
 /* D_8017F8A8 */
-extern const u8       g_SpriteCellBottomV[20];
+extern const u8            g_SpriteCellBottomV[20];
 /* D_8017F8BC */
-extern const u8       g_SpriteCellLeftU[12];
+extern const u8            g_SpriteCellLeftU[12];
 /* D_8017F8C8 */
-extern const u8       g_SpriteCellRightU[12];
+extern const u8            g_SpriteCellRightU[12];
 /* D_8017F8D4 */
-extern const u8       g_SpriteCellCluts[12];
+extern const u8            g_SpriteCellCluts[12];
 /* D_8017F90C */
-extern const u8       g_UiPanelOrigins[32];
+extern const UiPanelOrigin g_UiPanelOrigins[UI_PANEL_ORIGIN_BANKS][UI_PANEL_ORIGIN_COUNT];
 /* The other tables of the tail 0x80181484..0x801821D0 are defined by g_SceneFlagPairs.c, data_80181AC0.c, D_80181C7C.c,
  * data_80181CA8.c, g_BGMTracks.c and data_8018214C.c without slus.h; their consumers keep the interior or scalar
  * views they declare (gameui.h, local externs) because one merged base symbol moves the generated bytes. */
 /* D_80181B98 */
-extern s32            g_FacingStepY[];
+extern s32                 g_FacingStepY[];
 /* D_80183224 */
-extern char           g_EmiHeaderTag[12];
-extern u8             D_801839F4;
-extern u8             D_801839F8;
-extern u8             D_80183A00;
-extern u8             D_80183A04;
-extern u8             D_80183A0C;
-extern u8             D_80183A10;
-extern u8             D_80183A18;
+extern char                g_EmiHeaderTag[12];
+extern u8                  D_801839F4;
+extern u8                  D_801839F8;
+extern u8                  D_80183A00;
+extern u8                  D_80183A04;
+extern u8                  D_80183A0C;
+extern u8                  D_80183A10;
+extern u8                  D_80183A18;
 /* D_8018B300 */
-extern u8             g_SysHardwareInitialized;
+extern u8                  g_SysHardwareInitialized;
 /* D_8018E140 */
-extern s32            g_SndVoiceStatus[];
+extern s32                 g_SndVoiceStatus[];
 
 /* Card event result codes, in event order: the software events
  * (EvSpIOE, EvSpTIMOUT, EvSpNEW, EvSpERROR) and the hardware events that

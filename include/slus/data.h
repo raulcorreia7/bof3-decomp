@@ -72,9 +72,7 @@ extern u8 g_GfxPalettePending; /* 0x80145988 */
 extern u8                  D_80145E91[];
 extern u8                  D_80145E92[];
 extern u8                  D_80145E93[];
-extern s16                 D_80145EC6;
 extern s32                 D_80145EC8;
-extern s16                 D_80145ECA;
 /* Player battle-record copies (stride 0x140), selected by g_Battle.active_battler. */
 extern u8                  D_80145F04[];
 extern u8                  D_80145F10[];

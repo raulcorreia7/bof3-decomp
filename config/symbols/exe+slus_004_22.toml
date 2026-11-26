@@ -348,6 +348,7 @@ g_UiMessageChoiceTimer = { addr = 0x801490AA, source = "Timer of the message cho
 g_UiMessageScript = { addr = 0x801490AC, source = "The message script being shown." }
 g_UiMessageWindow = { addr = 0x801490BC, source = "MenuState block the text, panel and cue handlers share: text_x/text_y cursor, origin_x/origin_y window origin, selection_index choice; UI_TextDrawGlyph draws at its text_x/text_y" }
 g_UiMessageChoice = { addr = 0x801490C7, source = "The player's choice in the message window." }
+g_UiPanelPlacement = { addr = 0x801490CE, source = "Placement request of the next message panel: the low bits index g_UiPanelOrigins and the preset position table, bit 0x80 and 0x40 ask UI_MessageOpenPanel for panel flags 1 and 2." }
 g_TextVariables = { addr = 0x801490D8, type = "u8", size = 0x200, source = "Text variables." }
 g_AreaCameraAngle = { addr = 0x801492D8, size = 0x8, source = "Angle of the area camera." }
 g_AreaCamera = { addr = 0x801492D8, alias = true, source = "The area view: camera angle, matrix, scroll targets, position and height." }
@@ -735,7 +736,7 @@ SND_SeqStopAll = { addr = 0x8015D5D8, type = "func", source = "Stops all four vo
 SND_VoiceTestEffectsBusy = { addr = 0x8015D660, type = "func", source = "Returns 1 when no effect voice is free; otherwise returns 0 and writes the entry index and seq of the first voice of the sep table whose seq slot reports end-of-sequence." }
 SND_SEQueueSelection = { addr = 0x8015D71C, type = "func", source = "Marks the four effect voice slots free and queues the SE through SND_SEPlay." }
 SND_SEQueueVolume = { addr = 0x8015D7C8, type = "func", source = "Queues a sound SE with its volume." }
-Actor_PlayCueByDistance = { addr = 0x8015D820, type = "func", source = "Plays the cue and sets the sound level when the point D_80145EC6/D_80145ECA lies within a range band of the actor; script op caller passes the cue and actor index." }
+Actor_PlayCueByDistance = { addr = 0x8015D820, type = "func", source = "Plays the cue and sets the sound level when the leader (g_Game.members[0]) lies within a range band of the actor; script op caller passes the cue and actor index." }
 SND_SEQueueProximity = { addr = 0x8015DC08, type = "func", source = "Plays the proximity SE of the area." }
 SND_SEPlay = { addr = 0x8015DF18, type = "func", source = "Dispatches a SE's bank and record, updates the interpolated channel values and keys the requested voices." }
 SND_SEReadBank0 = { addr = 0x8015E994, type = "func", source = "Reads a SE of sound bank 0 into voice slots (entry 0 of g_SndSeReaders)." }

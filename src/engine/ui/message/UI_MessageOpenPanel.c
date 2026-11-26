@@ -13,7 +13,7 @@ MATCH void UI_MessageOpenPanel(void) {
     u8  flag_byte;
     s32 next_y;
 
-    flags = &D_801490CE;
+    flags = &g_UiPanelPlacement;
 
     g_UiPanelCurrent->flags = 0;
     flag_byte               = *flags;

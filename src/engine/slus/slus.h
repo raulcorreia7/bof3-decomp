@@ -634,7 +634,8 @@ extern u8                          D_801490BB[];
 extern MenuState                   g_UiMessageWindow;
 extern s16                         D_801490C8; /* cue counter; reads sign at the < 9 test and zero-extends elsewhere */
 extern s16                         D_801490CA;
-extern u8                          D_801490CE;
+/* D_801490CE */
+extern u8                          g_UiPanelPlacement;
 extern s32                         D_801490D7;
 extern s32                         D_801492FC;
 extern s32                         D_80149300;
