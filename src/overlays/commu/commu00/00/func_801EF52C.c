@@ -20,7 +20,7 @@ NON_MATCHING void func_801EF52C(void) {
     u32  updated_progress;
     u32  queue_offset;
     u32  queue_entry_offset;
-    s32  progress_cap;
+    s16  progress_cap;
 
     group_number      = 1;
     battle_count_ptr  = &g_BattleCount;
