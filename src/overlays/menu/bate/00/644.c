@@ -423,7 +423,7 @@ NON_MATCHING void func_801D2304(s32 x, s32 y) {
         sprintf(g_UiTextFormatBuffer, D_801D0C1C, D_801D8F00[i + 3]);
         UI_TextDrawAscii((s16)(left + 0x94), (s16)(top + ((i << 5) + 0x2B)), 0, g_UiTextFormatBuffer);
         func_801D26E0((s16)(left + 0x94), (s16)(top + ((i << 5) + 0x2B)));
-        i++;
+        i += 1;
     } while (i < 3);
     UI_TextDraw((s16)(left + 0x5A), (s16)(top + 0x2B), 0, TEXT_LENGTH_MAX, UI_MessageGetText(0xF0));
     UI_TextDraw((s16)(left + 0x5A), (s16)(top + 0x4B), 0, TEXT_LENGTH_MAX, UI_MessageGetText(0xEF));

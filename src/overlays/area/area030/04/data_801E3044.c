@@ -16,7 +16,7 @@ u8 D_801E3044[30][8] = {
 
 /* 0x801E3134: 17 rows of ten index bytes used by companion overlay 05.
  * Two zero bytes align the next table, D_801E31E0, on a word boundary. */
-FishingCompanionCells D_801E3134 = {
+FishingCompanionCells g_FishingShopStock = {
     {
         {0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff},
         {0x02, 0x01, 0x00, 0x19, 0x1a, 0x1b, 0x1c, 0x2d, 0x36, 0x10},
