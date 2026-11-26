@@ -19,6 +19,7 @@ def run_tree(
     base_files: dict[str, str],
     change_files: dict[str, str],
     removed: tuple[str, ...] = (),
+    message: str = "change",
 ) -> subprocess.CompletedProcess[str]:
     (repo / "tools").mkdir()
     (repo / "tools/check_tree.sh").write_text(SCRIPT.read_text())
@@ -59,7 +60,7 @@ def run_tree(
         path.parent.mkdir(parents=True, exist_ok=True)
         path.write_text(text)
     git("add", "-A")
-    git("commit", "-qm", "change")
+    git("commit", "-qm", message)
     return subprocess.run(
         ["sh", "tools/check_tree.sh", "HEAD~1"],
         cwd=repo,
@@ -215,5 +216,16 @@ def test_the_byte_view_definition_passes_and_a_new_use_fails(tmp_path: Path) -> 
         tmp_path,
         {"include/psx/mem.h": "#define A 1\n"},
         {"include/psx/mem.h": "#define A 1\n" + define},
+    )
+    assert result.returncode == 0, result.stdout + result.stderr
+
+
+def test_a_use_renamed_by_a_commit_line_passes(tmp_path: Path) -> None:
+    old = "void f(void) {\n    g_Actor->slot = GFX_PaletteAllocFade(TASK_BYTES, 1U);\n}\n"
+    result = run_tree(
+        tmp_path,
+        {"src/overlays/test/arc/00/a.c": old},
+        {"src/overlays/test/arc/00/a.c": old.replace("TASK_BYTES", "SELF_BYTES")},
+        message="rename\n\nRenamed: TASK_BYTES -> SELF_BYTES",
     )
     assert result.returncode == 0, result.stdout + result.stderr
