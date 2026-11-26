@@ -9,7 +9,7 @@
 #define BMAGIC_SPAWN_AT_TARGETS(PART)                                                           \
     slot                            = 0;                                                        \
     TASK(PartyMember)->param.unk_0B = 0;                                                        \
-    if (g_Battle.target_selector & BATTLE_TARGET_ENEMY_SIDE) {                                                      \
+    if (g_Battle.target_selector & BATTLE_TARGET_ENEMY_SIDE) {                                  \
         for (i = 0; i < 8; i++) {                                                               \
             if (!(Battle_SlotIsBlocked((u8)(i + BATTLE_PARTY_CHARACTERS_COUNT)) & BYTE_MASK)) { \
                 slot                               = Battle_AllocEffect(1, (PART)) & BYTE_MASK; \
