@@ -1,11 +1,11 @@
 #include "slus.h"
 
 const MessageSteps g_UiMessageSteps = {{
-    func_80152370,
-    func_801523D0,
-    func_80152420,
-    func_80152470,
-    func_801524C0,
+    UI_MessageAnswerSet0,
+    UI_MessageAnswerSet1,
+    UI_MessageAnswerSet2,
+    UI_MessageAnswerSet3,
+    UI_MessageAnswerSet4,
     UI_MessageAnswerSet5,
     UI_MessageAnswerSet6,
     UI_MessageAnswerSet7,

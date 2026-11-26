@@ -2189,9 +2189,9 @@ Callback D_801CD120[4] = {func_801B2DDC, func_801B2FC8, func_801B315C, func_801B
 
 Callback g_AreaClimbSteps[4] = {Area_GrabLadder, Area_ClimbMount, Area_ClimbLadder, Area_ClimbDismount};
 
-Callback g_AreaClimbMountSteps[5] = {func_801B3314, func_801B3388, func_801B33C4, func_801B3400, func_801B343C};
+Callback g_AreaClimbMountSteps[5] = {Area_ClimbMountApproachBeginStep, Area_ClimbMountApproachStep, Area_ClimbMountTurnStep, Area_ClimbMountTurnWaitStep, Area_ClimbMountLowerStep};
 
-Callback g_AreaClimbDismountSteps[4] = {func_801B3584, func_801B35B0, func_801B35EC, func_801B3670};
+Callback g_AreaClimbDismountSteps[4] = {Area_ClimbDismountBeginStep, Area_ClimbDismountRiseStep, Area_ClimbDismountExitBeginStep, Area_ClimbDismountExitStep};
 
 Callback g_PersonalActions[19] = {func_801CFD3C, func_801CFB40, func_801D05EC, func_801CFF64, func_801D0A10, func_801D02B0, func_801D0814, func_801CFAB8, func_801CFE98, func_801D0944,
                                   func_801CFC70, func_801CF8BC, func_801CF5A8, func_801CF8BC, func_801D0368, func_801CF694, func_801D0748, func_801CFA74, func_801D0520};
@@ -2257,11 +2257,11 @@ u8 D_801CD384[128] = {0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x02, 0x00, 0x00, 0x00
                       0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0xFE, 0xFF, 0x00, 0x00, 0x02, 0x00, 0x00, 0x00, 0xFF, 0xFF};
 
 Callback g_PartyFollowerModes[15] = {func_801BBE98, func_801BBFB4, func_801B69C0, func_801BD32C, func_801BD35C, func_801BD38C, func_801BD394, func_801BD5A4,
-                           func_801BD7F8, (Callback)0,   (Callback)0,   (Callback)0,   (Callback)0,   (Callback)0,   func_801C22D8};
+                           Area_ClimbFollower, (Callback)0,   (Callback)0,   (Callback)0,   (Callback)0,   (Callback)0,   func_801C22D8};
 
 Callback D_801CD440[2] = {func_801BC000, Area_SceneStepTimer};
 
-Callback D_801CD448[4] = {Area_GrabLadder, Area_ClimbMount, func_801BD83C, Area_ClimbDismount};
+Callback g_AreaClimbFollowerSteps[4] = {Area_GrabLadder, Area_ClimbMount, Area_ClimbFollowerLadder, Area_ClimbDismount};
 
 Step2 s_CameraScrollDeltas[CAMERA_DIR_COUNT] = {
     {-CAMERA_SCROLL_STEP, 0},

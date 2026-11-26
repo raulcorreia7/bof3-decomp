@@ -8,20 +8,37 @@ Battle_AllocEffect = { addr = 0x801E590C, alias = true }
 Effect_Reset = { addr = 0x801E5988, type = "func", source = "Clears every timer, state and flag byte of the shared BattleEffect work record; every effect countdown calls it first. battle/03 owns the body." }
 g_BattleEffectBattler = { addr = 0x801EB4E0, source = "the battler the running effect acts on; Battle_UpdateEffects stores it for each effect step (emi/battle/battle/03 owns the cell)" }
 g_BattleEffects = { addr = 0x801EC330, alias = true }
+BMagic_MeteorStrikeInit = { addr = 0x801EED18, type = "func", source = "Centres the camera, faces the effect by the side the target selector picks, starts the meteor effect, sets STP on the palette rows the effect uses and plays the first sound." }
 Effect_RequestTargetOnTimerZero = { addr = 0x801EEF3C, type = "func", source = "Counts the effect timer (byte 0x09) down; at zero asks the target selector for targets (Battle_ApplyDamageFlags with 0x10) and advances header.mode (byte 0x01) in magic226 (MeteorStrike)." }
 Effect_MarkDamagedOnZeroTick = { addr = 0x801EEFA4, type = "func", source = "When the effect ticker (byte 0x0B) is zero marks the battlers of the target selector damaged, raises BATTLE_STATE_EFFECT_PLAYING and resets the effect in magic226 (MeteorStrike)." }
 BMagic_DispatchEffectMode = { addr = 0x801EF004, type = "func", source = "Runs the handler that header.mode (byte 0x01) selects from the effect handlers of magic226." }
+BMagic_MeteorStrikeUpdate = { addr = 0x801EF048, type = "func", source = "Runs the meteor's step and, once it has started, draws the shaded disc and the dark ring under it." }
+BMagic_MeteorStrikeStart = { addr = 0x801EF10C, type = "func", source = "Places the meteor above the battler, sets its drift, tint, scale, timer and script, and steps." }
 Effect_SwingCameraAngle = { addr = 0x801EF540, type = "func", source = "Swings the area camera pitch by 20 per frame, up on odd effect timer (byte 0x09) values and down on even ones; at zero resets the pitch, reloads the timer with the image's swing ticks and advances header.step (byte 0x02) in magic226 (MeteorStrike)." }
 Effect_StartTint = { addr = 0x801EF5F0, type = "func", source = "Counts the effect timer (byte 0x09) down; at zero sets ACTOR_FLAG_SEMI_TRANSPARENT in header.flags, loads the tint selector (byte 0x5C) with 1, clears the tint colours (bytes 0x5D to 0x5F) and advances header.step (byte 0x02) in magic226 (MeteorStrike)." }
+BMagic_MeteorStrikeEnd = { addr = 0x801EF698, type = "func", source = "Fades the meteor's tint by 8 per frame and its timer by 2; when it is dark lowers the battler's ticker and resets the effect." }
 Effect_SetActiveActorMatrix = { addr = 0x801EF75C, type = "func", source = "Sets the actor's GTE matrix from its coordinates and half the vertical span of the active battler, times the camera in magic226 (MeteorStrike)." }
 Effect_DrawShadedDisc = { addr = 0x801EF814, type = "func", source = "Draws a disc of 64 shaded triangles around the effect cell, its shade the timer times 4, in magic226 (MeteorStrike)." }
 BMagic_DrawDarkRing = { addr = 0x801EFA64, type = "func", source = "draws 64 subtractive POLY_G4 quads in a flat ring; the inner edge subtracts four times the shade byte, the outer edge nothing" }
+BMagic_MeteorStrikeSlotUpdate = { addr = 0x801EFD84, type = "func", source = "Runs the handler header.mode selects for an effect of the slot table." }
+BMagic_MeteorStrikeFragmentUpdate = { addr = 0x801EFDC8, type = "func", source = "Runs the fragment's step and draws it once it has started." }
+BMagic_MeteorStrikeFragmentLaunch = { addr = 0x801EFE48, type = "func", source = "After the delay places the fragment on a radius-24 ring around the battler at its angle, picks its rise speed from the ticker and waits 32 frames." }
+BMagic_MeteorStrikeFragmentRise = { addr = 0x801EFF88, type = "func", source = "Moves the fragment in a circle of radius 2, arcs it in z by its velocity, and after 16 frames relaunches it with a stronger fall rate." }
+BMagic_MeteorStrikeFragmentFall = { addr = 0x801F00B0, type = "func", source = "Drifts the fragment along z by its velocity and shrinks its glow; when the counter runs out lowers the battler's ticker and clears it." }
+BMagic_MeteorStrikeDrawFragment = { addr = 0x801F01B8, type = "func", source = "Draws the fragment's glow as one additive textured quad whose size follows the timer and whose colour follows the glow counter." }
+BMagic_MeteorStrikeRingUpdate = { addr = 0x801F04D4, type = "func", source = "Runs the ring's step and draws the ring." }
+BMagic_MeteorStrikeRingPlace = { addr = 0x801F055C, type = "func", source = "After the delay moves the ring below the active battler, sets its rise speed and steps." }
+BMagic_MeteorStrikeRingRise = { addr = 0x801F061C, type = "func", source = "Follows the battler in x and y, raises the ring in z by its speed and steps after 24 frames." }
+BMagic_MeteorStrikeRingFade = { addr = 0x801F068C, type = "func", source = "Keeps rising while the ring's timer drops by 2; at zero lowers the battler's ticker and clears the ring." }
 Effect_SetActorMatrix = { addr = 0x801F0724, type = "func", source = "Sets the actor's GTE matrix from its coordinates and half its vertical span, times the camera in magic226 (MeteorStrike)." }
+BMagic_MeteorStrikeDrawRing = { addr = 0x801F07D4, type = "func", source = "Draws a ring of 32 additive quads whose inner and outer radius follow the effect counter and whose outer colour follows the timer." }
 BMagic_AllocEffect = { addr = 0x801F0B8C, type = "func", source = "Claims the first free slot of the 48-entry effect table (bit 0 of header.flags) and returns its index, or 0xFF when every slot is in use in magic226 (MeteorStrike)." }
 Actor_Clear = { addr = 0x801F0BF0, type = "func", source = "Clears the effect work record: header flags, mode (byte 0x01), step (byte 0x02) and bytes 0x03 and 0x04." }
 g_BMagicEffectModes = { addr = 0x801F0C40, source = "Handlers of magic226 (MeteorStrike), run by header.mode (byte 0x01)." }
-D_801F0C44 = { addr = 0x801F0C44, source = "Step handlers of magic226, run by header.step (byte 0x02) from func_801EF048." }
-D_801F0C60 = { addr = 0x801F0C60, source = "Mode handlers of the bmagic/magic226/03 effect, run by header.mode from func_801EFD84." }
-D_801F0C78 = { addr = 0x801F0C78, source = "Step handlers of the bmagic/magic226/03 effect, run by header.step from func_801EFDC8." }
-D_801F0C84 = { addr = 0x801F0C84, source = "Step handlers of the bmagic/magic226/03 effect, run by header.step from func_801F04D4." }
+g_BMagicMeteorStrikeSteps = { addr = 0x801F0C44, source = "The steps of the meteor effect: start, fall, swing the camera, start the tint, end." }
+g_BMagicMeteorStrikeFragmentTints = { addr = 0x801F0C58, source = "The tint byte each group of eight fragments starts with." }
+g_BMagicMeteorStrikeSlotModes = { addr = 0x801F0C60, source = "The handlers of the slot table, run by header.mode: fragment and ring." }
+g_BMagicMeteorStrikeFragmentRiseSpeeds = { addr = 0x801F0C68, source = "The four rise speeds (z velocity) a fragment's arc picks by its ticker." }
+g_BMagicMeteorStrikeFragmentSteps = { addr = 0x801F0C78, source = "The steps of a fragment: launch, rise, fall." }
+g_BMagicMeteorStrikeRingSteps = { addr = 0x801F0C84, source = "The steps of the ring: place, rise, fade." }
 D_801F0C90 = { addr = 0x801F0C90, source = "Effect slot table of the magic226 effect, scanned by BMagic_AllocEffect." }

@@ -2,6 +2,6 @@
 
 /* func_801B32A4 */
 MATCH void Area_GrabLadder(void) {
-    func_801C4D1C();
+    Area_ClimbStartGrab();
     TASK(Actor)->header.step = 2;
 }

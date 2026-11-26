@@ -317,7 +317,8 @@ extern u8                 D_801CD384[128];
 /* D_801CD404 */
 extern Callback           g_PartyFollowerModes[15];
 extern Callback           D_801CD440[2];
-extern Callback           D_801CD448[4];
+/* D_801CD448 */
+extern Callback           g_AreaClimbFollowerSteps[4];
 /* D_801CD458 */
 /* D_801CD460 */
 extern u8                 s_BattleStartOffsets[12][2];

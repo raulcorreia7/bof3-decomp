@@ -537,6 +537,7 @@ UI_MessageRunChoice = { addr = 0x801510DC, type = "func", source = "State 4 of g
 UI_MessageOpenChoice = { addr = 0x8015115C, type = "func", source = "Step 1 of the choice state: opens the choice panel task, starts the message panel closing and steps on." }
 UI_MessageWaitChoiceReady = { addr = 0x801511C8, type = "func", source = "Step 2 of the choice state: steps on once the choice panel is open (state 2) and the message panel is closed (state 4)." }
 UI_MessageUpdateChoiceInput = { addr = 0x80151210, type = "func", source = "Handles the choice input and moves the choice cursor." }
+UI_MessageToggleChoiceWindow = { addr = 0x80151334, type = "func", source = "Slot 4 of g_UiMessageChoiceStateSteps: when the message panel task is in state 2, clears the message step and toggles FRONTEND_FLAG_SELECTION of g_UiWindowChannel." }
 UI_MessageDispatchAnswerStep = { addr = 0x8015136C, type = "func", source = "Runs the current answer step of the message." }
 UI_MessageRestartRequest = { addr = 0x8015142C, type = "func", source = "Entry 6 of the message state table g_UiMessageChoiceStateSteps, after UI_MessageDispatchAnswerStep: when the first menu panel task is in state 2, sets g_UiMessageStateTimer to 0x10, restarts the request with UI_MessageStartRequest and toggles FRONTEND_FLAG_SELECTION in g_UiWindowChannel." }
 UI_MessageEndAfterChoice = { addr = 0x80151480, type = "func", source = "Last step of the choice state: once the choice panel is closed (state 4), closes the message panel, sets the end state at its confirm step and sets FRONTEND_FLAG_MODE_LATCH." }
@@ -555,8 +556,19 @@ UI_MessageChoiceIdle = { addr = 0x80151964, type = "func", source = "Entry 0 of 
 UI_MessageUpdateChoice = { addr = 0x8015196C, type = "func", source = "Runs the current message choice step." }
 UI_MessageNextChoice = { addr = 0x801519F8, type = "func", source = "Moves the message choice list one entry on: advances g_UiMessageChoiceStep when the scroll countdown reaches -2, else steps the countdown by -2. Called by UI_MessageUpdateChoice." }
 UI_MessagePrevChoice = { addr = 0x80151A48, type = "func", source = "Moves the message choice list one entry back: lowers g_UiMessageChoiceStep when the scroll countdown reaches 2, else steps the countdown by 2. Called by UI_MessageUpdateChoice." }
+UI_MessageChoiceRampRun = { addr = 0x80151A98, type = "func", source = "Slots 2 and 3 of g_UiMessageChoiceModes: runs the begin or step handler that g_UiMessageChoiceStep selects, then counts g_UiMessageChoiceTimer down." }
+UI_MessageChoiceRampBegin = { addr = 0x80151B08, type = "func", source = "Raises FRONTEND_FLAG_REQUEST_PENDING of g_UiWindowChannel and, with no request pending, arms g_UiMessageChoiceTimer and moves to the step handler." }
+UI_MessageChoiceRampStep = { addr = 0x80151B50, type = "func", source = "Moves the cue counter D_801490C8 by -2 in choice mode 2 and +2 otherwise; when it crosses zero it clamps it, clears the mode and the pending flag." }
+UI_MessageChoiceShiftRun = { addr = 0x80151D3C, type = "func", source = "Slot 5 of g_UiMessageChoiceModes: runs the begin or step handler that g_UiMessageChoiceStep selects." }
+UI_MessageChoiceShiftBegin = { addr = 0x80151D8C, type = "func", source = "Shifts the cue counter D_801490C8 left by four, copies g_UiMessageChoiceTimer into D_801490CA and moves to the step handler." }
+UI_MessageChoiceShiftStep = { addr = 0x80151DCC, type = "func", source = "Adds the counter D_801490C8 to D_801490CA and the carry byte to D_801490BB; once that byte is non-negative it clears it and the choice mode." }
 UI_TextDrawGlyph = { addr = 0x80151E24, type = "func", source = "Draws one text glyph." }
 UI_MessageDispatchStep = { addr = 0x801522F8, type = "func", source = "Runs a step of the message answer table." }
+UI_MessageAnswerSet0 = { addr = 0x80152370, type = "func", source = "Sets the message that answers the menu choice: slot 0 of g_UiMessageSteps, row 0 of g_AnswerMessages, and latches mode flag D_8014865B for choice 0 or 1." }
+UI_MessageAnswerSet1 = { addr = 0x801523D0, type = "func", source = "Sets the message that answers the menu choice: slot 1 of g_UiMessageSteps, row 2 of g_AnswerMessages." }
+UI_MessageAnswerSet2 = { addr = 0x80152420, type = "func", source = "Sets the message that answers the menu choice: slot 2 of g_UiMessageSteps, row 4 of g_AnswerMessages." }
+UI_MessageAnswerSet3 = { addr = 0x80152470, type = "func", source = "Sets the message that answers the menu choice: slot 3 of g_UiMessageSteps, row 6 of g_AnswerMessages." }
+UI_MessageAnswerSet4 = { addr = 0x801524C0, type = "func", source = "Sets the message that answers the menu choice: slot 4 of g_UiMessageSteps, row 8 of g_AnswerMessages." }
 UI_MessageAnswerSet5 = { addr = 0x80152510, type = "func", source = "Sets the message that answers the menu choice." }
 UI_MessageAnswerSet6 = { addr = 0x8015253C, type = "func", source = "Sets the message that answers the menu choice." }
 UI_MessageAnswerSet7 = { addr = 0x80152568, type = "func", source = "Sets the message that answers the menu choice." }
@@ -1391,6 +1403,8 @@ g_EncounterZones = { addr = 0x80181164, source = "Encounter zone lists, one per 
 g_SceneFlagPairs = { addr = 0x80181484, source = "Two flag bytes per scene id; Area_SceneSelectRecord copies the pair of the matched scene id into the task." }
 g_FacingOffsets = { addr = 0x80181AC0, type = "Offset2", source = "8 facing offsets of two words each, added to a position by the plchar route walkers" }
 g_CharSlot = { addr = 0x80181B10, size = 12, source = "Character slot map." }
+g_AreaClimbHeightOffsets = { addr = 0x80181B70, source = "Per character id: how far the climbing actor's z sits from the ground height at the ladder; Area_ClimbMountLower holds that z and Area_ClimbUp ends the climb there." }
+g_AreaClimbRiseSteps = { addr = 0x80181B88, source = "Per character id: the z step per frame of the ladder mount and dismount rise." }
 g_FacingSteps = { addr = 0x80181B94, type = "Offset2", source = "8 facing steps, PlChar_ProbeFacingCell adds step x and y to a position" }
 g_FacingStepY = { addr = 0x80181B98, source = "Y steps of the facing directions." }
 g_RouteSpeedScale = { addr = 0x80181BD4, source = "8 speed scales the route walkers multiply a step by" }

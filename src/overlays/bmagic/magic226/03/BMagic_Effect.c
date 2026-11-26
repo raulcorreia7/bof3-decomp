@@ -7,7 +7,8 @@ __asm__(".include \"include/match/macro.inc\"\n");
 
 #include "overlays/bmagic/shared/Effect_RunSlots.h"
 
-MATCH void func_801EED18(void) {
+/* func_801EED18 */
+MATCH void BMagic_MeteorStrikeInit(void) {
     u16* dst;
     u16* src;
     u32  slot;
@@ -57,9 +58,10 @@ MATCH void func_801EED18(void) {
 /* func_801EF004 */
 #include "overlays/bmagic/shared/BMagic_DispatchEffectMode.h"
 
-MATCH void func_801EF048(void) {
+/* func_801EF048 */
+MATCH void BMagic_MeteorStrikeUpdate(void) {
     g_Scripts = BMAGIC_SCRIPT_TABLE;
-    SYS_DISPATCH_BYTE(D_801F0C44, TASK(PartyMember)->header.step);
+    SYS_DISPATCH_BYTE(g_BMagicMeteorStrikeSteps, TASK(PartyMember)->header.step);
     if ((TASK(PartyMember)->header.flags & BMAGIC_EFFECT_IN_USE) != 0 && TASK(PartyMember)->header.step != 0) {
         Battle_ProjectRange();
         Area_AddGridActor();
@@ -74,7 +76,8 @@ MATCH void func_801EF048(void) {
 /* Starts the meteor above the battler: copies its pose, rotates the unk_0C/unk_10 pair by the
  * facing and adds it to x and y, puts z at the battler's z plus 2304, then sets the drift, tint,
  * scale, timer and script. */
-MATCH void func_801EF10C(void) {
+/* func_801EF10C */
+MATCH void BMagic_MeteorStrikeStart(void) {
     TASK(PartyMember)->pos.x.fixed = g_BattleEffectBattler->pos.x.fixed;
     TASK(PartyMember)->pos.y.fixed = g_BattleEffectBattler->pos.y.fixed;
     TASK(PartyMember)->facing      = g_BattleEffectBattler->facing;
@@ -133,7 +136,7 @@ MATCH void func_801EF310(void) {
         slot = BMagic_AllocEffect();
         if (slot != GAME_NONE) {
             owner                                  = TASK(PartyMember);
-            BMAGIC_EFFECT_SLOTS[slot].header.mode  = 1;
+            BMAGIC_EFFECT_SLOTS[slot].header.mode  = BMAGIC_METEOR_STRIKE_SLOT_RING;
             BMAGIC_EFFECT_SLOTS[slot].arg.unk_09   = 1;
             BMAGIC_EFFECT_SLOTS[slot].target.party = owner;
             TASK(PartyMember)->unk_04 += 1;
@@ -149,10 +152,10 @@ MATCH void func_801EF310(void) {
         slot = BMagic_AllocEffect();
         if (slot != GAME_NONE) {
             battler                                = g_BattleEffectBattler;
-            BMAGIC_EFFECT_SLOTS[slot].header.mode  = 0;
+            BMAGIC_EFFECT_SLOTS[slot].header.mode  = BMAGIC_METEOR_STRIKE_SLOT_FRAGMENT;
             BMAGIC_EFFECT_SLOTS[slot].target.party = battler;
             index                                  = i;
-            shade                                  = D_801F0C58[index >> 3];
+            shade                                  = g_BMagicMeteorStrikeFragmentTints[index >> 3];
             BMAGIC_EFFECT_SLOTS[slot].unk_0B       = index & 7;
             BMAGIC_EFFECT_SLOTS[slot].arg.unk_09   = (index >> 3) * 3 + 1;
             BMAGIC_EFFECT_SLOTS[slot].unk_5D       = shade;
@@ -174,7 +177,8 @@ MATCH void Effect_SwingCameraAngle(void) {
 
 #include "overlays/bmagic/shared/Effect_StartTint.h"
 
-MATCH void func_801EF698(void) {
+/* func_801EF698 */
+MATCH void BMagic_MeteorStrikeEnd(void) {
     u8 timer_next;
 
     timer_next = TASK(PartyMember)->timer;
@@ -197,21 +201,24 @@ MATCH void func_801EF698(void) {
 
 #include "overlays/bmagic/shared/BMagic_DrawDarkRing.h"
 
-MATCH void func_801EFD84(void) {
-    SYS_DISPATCH_TASK(D_801F0C60, 1, g_Task);
+/* func_801EFD84 */
+MATCH void BMagic_MeteorStrikeSlotUpdate(void) {
+    SYS_DISPATCH_TASK(g_BMagicMeteorStrikeSlotModes, 1, g_Task);
 }
 
-MATCH void func_801EFDC8(void) {
-    SYS_DISPATCH_BYTE(D_801F0C78, TASK(PartyMember)->header.step);
+/* func_801EFDC8 */
+MATCH void BMagic_MeteorStrikeFragmentUpdate(void) {
+    SYS_DISPATCH_BYTE(g_BMagicMeteorStrikeFragmentSteps, TASK(PartyMember)->header.step);
     if (TASK(PartyMember)->header.flags != 0 && TASK(PartyMember)->header.step != 0) {
         Battle_ProjectRange();
-        func_801F01B8();
+        BMagic_MeteorStrikeDrawFragment();
     }
 }
 
 /* Starts the meteor's arc: places it on a radius-24 ring at the ticker's angle, picks the rise speed and its fall
  * rate, then waits 32 frames. */
-MATCH void func_801EFE48(void) {
+/* func_801EFE48 */
+MATCH void BMagic_MeteorStrikeFragmentLaunch(void) {
     s16* angle_cell;
     s32  phase;
 
@@ -222,7 +229,7 @@ MATCH void func_801EFE48(void) {
         TASK(PartyMember)->pos.x.fixed = g_BattleEffectBattler->pos.x.fixed + rsin((s16)(phase << 8)) * 24;
         TASK(PartyMember)->pos.y.fixed = g_BattleEffectBattler->pos.y.fixed + rcos(*angle_cell) * 24;
         TASK(PartyMember)->pos.z.fixed = g_BattleEffectBattler->pos.z.fixed;
-        TASK(PartyMember)->unk_14      = D_801F0C68[TASK(PartyMember)->param.unk_0B & 0x3];
+        TASK(PartyMember)->unk_14      = g_BMagicMeteorStrikeFragmentRiseSpeeds[TASK(PartyMember)->param.unk_0B & 0x3];
         TASK(PartyMember)->unk_20      = -(TASK(PartyMember)->unk_14 / 16);
         TASK(PartyMember)->unk_5E      = 16;
         TASK(PartyMember)->unk_09      = 32;
@@ -232,7 +239,8 @@ MATCH void func_801EFE48(void) {
 
 /* Moves the effect in a circle of radius 2 around its origin by the angle byte 0x0B, arcs it in z with its
  * velocity, and relaunches the arc every 16 frames from the rise speed the ticker picks. */
-MATCH void func_801EFF88(void) {
+/* func_801EFF88 */
+MATCH void BMagic_MeteorStrikeFragmentRise(void) {
     s16* angle_cell;
     s32  phase;
     u8   count;
@@ -248,7 +256,7 @@ MATCH void func_801EFF88(void) {
     count                     = TASK(PartyMember)->unk_09 - 1;
     TASK(PartyMember)->unk_09 = count;
     if (count == 0) {
-        TASK(PartyMember)->unk_14 = D_801F0C68[TASK(PartyMember)->param.unk_0B & 0x3];
+        TASK(PartyMember)->unk_14 = g_BMagicMeteorStrikeFragmentRiseSpeeds[TASK(PartyMember)->param.unk_0B & 0x3];
         TASK(PartyMember)->unk_20 = -(TASK(PartyMember)->unk_14 / 8);
         TASK(PartyMember)->unk_09 = 16;
         TASK(PartyMember)->header.step += 1;
@@ -257,7 +265,8 @@ MATCH void func_801EFF88(void) {
 
 /* Rocks the effect by the angle its ticker selects, drifts it along z by its velocity, and clears it when its
  * counter runs out. */
-MATCH void func_801F00B0(void) {
+/* func_801F00B0 */
+MATCH void BMagic_MeteorStrikeFragmentFall(void) {
     s16* angle_cell;
     s32  angle;
     s8   timer;
@@ -279,7 +288,8 @@ MATCH void func_801F00B0(void) {
     }
 }
 
-MATCH void func_801F01B8(void) {
+/* func_801F01B8 */
+MATCH void BMagic_MeteorStrikeDrawFragment(void) {
     POLY_FT4* prim;
 
     SetDrawMode((DR_MODE*)g_GfxPrimCursor, 0, 1, getTPage(TPAGE_DEPTH_4BIT, TPAGE_ABR_ADD, 320, 256), 0);
@@ -300,11 +310,13 @@ MATCH void func_801F01B8(void) {
     Area_CellAddPrim(TASK(PartyMember)->pos.x.fixed, TASK(PartyMember)->pos.y.fixed, 2, sizeof(POLY_FT4));
 }
 
-MATCH void func_801F04D4(void) {
-    BMAGIC_DISPATCH_AND_DRAW(D_801F0C84, func_801F07D4);
+/* func_801F04D4 */
+MATCH void BMagic_MeteorStrikeRingUpdate(void) {
+    BMAGIC_DISPATCH_AND_DRAW(g_BMagicMeteorStrikeRingSteps, BMagic_MeteorStrikeDrawRing);
 }
 
-MATCH void func_801F055C(void) {
+/* func_801F055C */
+MATCH void BMagic_MeteorStrikeRingPlace(void) {
     PartyMember* src;
     PartyMember* dst;
     s32          z;
@@ -324,7 +336,8 @@ MATCH void func_801F055C(void) {
     }
 }
 
-MATCH void func_801F061C(void) {
+/* func_801F061C */
+MATCH void BMagic_MeteorStrikeRingRise(void) {
     PartyMember* src;
     PartyMember* work;
     u8           count;
@@ -341,7 +354,8 @@ MATCH void func_801F061C(void) {
     }
 }
 
-MATCH void func_801F068C(void) {
+/* func_801F068C */
+MATCH void BMagic_MeteorStrikeRingFade(void) {
     PartyMember* battler;
     PartyMember* task;
 
@@ -360,7 +374,8 @@ MATCH void func_801F068C(void) {
 
 #include "overlays/bmagic/shared/Effect_SetActorMatrix.h"
 
-MATCH void func_801F07D4(void) {
+/* func_801F07D4 */
+MATCH void BMagic_MeteorStrikeDrawRing(void) {
     POLY_G4* prim;
     long     depth;
     long     flag;

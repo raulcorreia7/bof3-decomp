@@ -392,7 +392,8 @@ extern s8                  D_80181B00[];
 extern s8                  D_80181B01[];
 extern u8                  D_80181B1C[]; /* 0x80181B1C */
 extern u8                  D_80181B28[]; /* 0x80181B28 */
-extern s16                 D_80181B70[]; /* 0x80181B70 */
+/* D_80181B70 */
+extern s16                 g_AreaClimbHeightOffsets[]; /* 0x80181B70 */
 extern const s32           D_80181CA8[30][2];
 extern u8                  D_80181E40[];          /* 0x80181E40 */
 extern u8                  D_80181E44[];          /* 0x80181E44 */
@@ -776,15 +777,6 @@ void  func_801B2DDC(void);
 void  func_801B2FC8(void);
 void  func_801B315C(void);
 void  func_801B31F0(void);
-void  func_801B3314(void);
-void  func_801B3388(void);
-void  func_801B33C4(void);
-void  func_801B3400(void);
-void  func_801B343C(void);
-void  func_801B3584(void);
-void  func_801B35B0(void);
-void  func_801B35EC(void);
-void  func_801B3670(void);
 void  func_801B3690(void);
 void  func_801B371C(void);
 void  func_801B3768(void);
@@ -883,8 +875,6 @@ void  func_801BD35C(void);
 void  func_801BD38C(void);
 void  func_801BD394(void);
 void  func_801BD5A4(void);
-void  func_801BD7F8(void);
-void  func_801BD83C(void);
 bool  func_801BD938(void);
 void  func_801BDBC4(void);
 s16   func_801BDCF8(s32 x, s32 y);
@@ -925,19 +915,6 @@ s32   func_801C4040(s32 pos_x, s32 pos_y, s16 probe_range);
 s32   func_801C41D0(s32 pos_x, s32 pos_y, s16 probe_range);
 u8    func_801C476C(s32 pos_x, s32 pos_y, u8 wanted_code, u8 mask_cells);
 u8    func_801C48FC(s32 pos_x, s32 pos_y, u8 wanted_code, u8 mask_cells);
-void  func_801C4D1C(void);
-void  func_801C4D58(void);
-s32   func_801C4E14(void);
-bool  func_801C4EC4(void);
-bool  func_801C4F88(void);
-s32   func_801C4FE0(void);
-void  func_801C51B0(void);
-s32   func_801C520C(void);
-bool  func_801C539C(void);
-s32   func_801C5474(void);
-void  func_801C5558(void);
-void  func_801C5620(void);
-void  func_801C56E4(void);
 void  func_801C57F4(void);
 void  func_801C5830(void);
 void  func_801C5838(void);

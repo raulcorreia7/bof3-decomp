@@ -88,10 +88,10 @@ NON_MATCHING u8 Script_OpsRunStage(ScriptState* state, const u8* table, u8 value
                 span                = Area_HeightSample(base[0], base[1]);
                 g_AreaCameraSpeed   = 0x20;
                 step                = sel & BYTE_MASK;
-                if (step == 0) {
-                    g_AreaCameraHeightDelta = 0;
-                } else {
+                if (step != 0) {
                     g_AreaCameraHeightDelta = (s16)(((s16)span - (s32)g_AreaCameraHeight) / (step * 4));
+                } else {
+                    g_AreaCameraHeightDelta = 0;
                 }
                 state->cursor--;
                 break;
