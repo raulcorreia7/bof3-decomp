@@ -85,13 +85,13 @@ MATCH void func_801EF768(void) {
     handlers = D_801EEC1C;
     handlers.steps[D_801F21F0->header.step]();
     if ((D_801F21F0->header.flags & BMAGIC_EFFECT_IN_USE) && D_801F21F0->header.step != 0) {
-        Effect_DrawSparkleDisc();
+        Effect_SparkleDrawDisc();
         if (D_801F21F0->phase_0C & 0x3) {
-            Effect_DrawSparkleRays(g_FrameCount >> 1, D_801F21F0->unk_06);
+            Effect_SparkleDrawRays(g_FrameCount >> 1, D_801F21F0->unk_06);
             radius = D_801F21F0->unk_06;
-            Effect_DrawSparkleWedges((g_FrameCount >> 1) + 4, radius + (radius >> 1));
+            Effect_SparkleDrawWedges((g_FrameCount >> 1) + 4, radius + (radius >> 1));
         }
     }
 }
 
-#include "overlays/bmagic/shared/Effect_LaunchSparkle.h"
+#include "overlays/bmagic/shared/Effect_SparkleLaunch.h"

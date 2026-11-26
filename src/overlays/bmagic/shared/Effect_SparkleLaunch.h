@@ -3,8 +3,8 @@
 #define EFFECT_SPARKLE_OFFSET() (EFFECT_SPARKLE_OFFSETS[EFFECT_SPARKLE_TASK->unk_07 & EFFECT_SPARKLE_ROW_MASK])
 
 /* Waits out the launch delay of the current sparkle, then places it at a random offset from the screen point of its battler, picks its drift, sway phase and rise, and goes to the rise step. */
-/* Effect_LaunchSparkle (magic070, magic071, magic072, magic073, magic074, magic162, magic168) */
-MATCH void Effect_LaunchSparkle(void) {
+/* Effect_SparkleLaunch (magic070, magic071, magic072, magic073, magic074, magic162, magic168) */
+MATCH void Effect_SparkleLaunch(void) {
     PartyMember* battler;
 
     if (--EFFECT_SPARKLE_TASK->timer_05 == 0) {

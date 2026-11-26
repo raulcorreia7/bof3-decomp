@@ -4,39 +4,40 @@
 __asm__(".include \"include/match/macro.inc\"\n");
 #endif
 
-#include "overlays/bmagic/shared/func_801EEC28_2.h"
+#include "overlays/bmagic/shared/BMagic_SparkleUpdate.h"
 
-#include "overlays/bmagic/shared/func_801EED38.h"
+#include "overlays/bmagic/shared/BMagic_SparkleInit.h"
 
 #include "overlays/bmagic/shared/Effect_ReplacePaletteFade.h"
 
 #include "overlays/bmagic/shared/Effect_BrightenPalette.h"
 
+/* Task mode 3: once fewer than EFFECT_SPARKLE_FEW_LEFT sparkles are alive, reloads the timer with 8 and advances header.mode. */
 /* func_801EF15C */
-MATCH void Effect_NextStep(void) {
-    BMagic_AdvanceEffectStep(5);
+MATCH void Effect_SparkleWait(void) {
+    BMagic_AdvanceEffectStep(EFFECT_SPARKLE_FEW_LEFT);
 }
 
 #include "overlays/bmagic/shared/Effect_FadePaletteOut.h"
 
 #include "overlays/bmagic/shared/Effect_MarkDamagedOnZeroTick.h"
 
-#include "overlays/bmagic/shared/func_801EF33C.h"
+#include "overlays/bmagic/shared/Effect_SparkleRunMode.h"
 
-#include "overlays/bmagic/shared/func_801EF380.h"
+#include "overlays/bmagic/shared/Effect_SparkleStep.h"
 
-#include "overlays/bmagic/shared/Effect_LaunchSparkle.h"
+#include "overlays/bmagic/shared/Effect_SparkleLaunch.h"
 
-#include "overlays/bmagic/shared/func_801EF67C.h"
+#include "overlays/bmagic/shared/Effect_SparkleGrow.h"
 
-#include "overlays/bmagic/shared/func_801EF72C.h"
+#include "overlays/bmagic/shared/Effect_SparkleFade.h"
 
-#include "overlays/bmagic/shared/Effect_DrawSparkleRays.h"
+#include "overlays/bmagic/shared/Effect_SparkleDrawRays.h"
 
-#include "overlays/bmagic/shared/Effect_DrawSparkleWedges.h"
+#include "overlays/bmagic/shared/Effect_SparkleDrawWedges.h"
 
-#include "overlays/bmagic/shared/Effect_DrawSparkleDisc.h"
+#include "overlays/bmagic/shared/Effect_SparkleDrawDisc.h"
 
-#include "overlays/bmagic/shared/func_801F0000.h"
+#include "overlays/bmagic/shared/Effect_SparkleAlloc.h"
 
-#include "overlays/bmagic/shared/func_801F006C.h"
+#include "overlays/bmagic/shared/Effect_SparkleClear.h"
