@@ -258,16 +258,16 @@ MATCH void func_801F2DD8(void) {
     Actor_Clear();
 }
 
-MATCH void func_801F2DF8(const AreaSprite* sprite) {
+MATCH void func_801F2DF8(AreaSprite* sprite) {
     DVECTOR           screen;
     u16               size[2];
-    volatile s16      buf[8];
-    const AreaSprite* work;
+    s16               buf[8];
+    AreaSprite*       work;
     s32*              object;
     POLY_FT4*         primitive;
 
     work      = sprite;
-    object    = (s32*)&sprite->origin;
+    object    = &sprite->origin.x;
     primitive = (POLY_FT4*)g_GfxPrimCursor;
 
     SetPolyFT4(primitive);
@@ -275,7 +275,7 @@ MATCH void func_801F2DF8(const AreaSprite* sprite) {
 
     Camera_ProjectPoint(object, &screen);
     size[0] = work->half_size;
-    size[1] = FAKE_VOLATILE(u16, work->half_size);
+    size[1] = work->half_size;
     Game_ProjectWorldPoint(object, size, size);
 
     setXY4(primitive, screen.vx - ((s16)size[0] >> 1), screen.vy - ((s16)size[1] >> 1), (screen.vx - ((s16)size[0] >> 1)) + size[0], screen.vy - ((s16)size[1] >> 1), screen.vx - ((s16)size[0] >> 1),
@@ -283,9 +283,9 @@ MATCH void func_801F2DF8(const AreaSprite* sprite) {
     setUV4(primitive, 224u, 48u, 255u, 48u, 224u, 79u, 255u, 79u);
     setClut(primitive, 160, STAGE_PALETTE_Y + 3);
     primitive->tpage = GetTPage(TPAGE_DEPTH_4BIT, TPAGE_ABR_ADD, 704, 256);
-    setRGB0(primitive, FAKE_VOLATILE(u8, work->tick), FAKE_VOLATILE(u8, work->tick), FAKE_VOLATILE(u8, work->tick));
+    setRGB0(primitive, work->tick, work->tick, work->tick);
 
-    Area_CellAddPrim(FAKE_VOLATILE(s32, work->origin.x), FAKE_VOLATILE(s32, work->origin.y), 2, sizeof(POLY_FT4));
+    Area_CellAddPrim(work->origin.x, work->origin.y, 2, sizeof(POLY_FT4));
 }
 
 MATCH void func_801F2FD4(AreaSprite* sprite) {
@@ -449,7 +449,7 @@ MATCH void func_801F362C(void) {
 }
 
 MATCH void func_801F3708(void* vertices, const void* rotated, s16* transform) {
-    const AreaVertex* src;
+    AreaVertex*       src;
     AreaVertex*       dst;
     AreaTransform*    state;
     MATRIX            matrix;
@@ -460,7 +460,7 @@ MATCH void func_801F3708(void* vertices, const void* rotated, s16* transform) {
     VECTOR*           o;
     SVECTOR*          v;
 
-    src   = (const AreaVertex*)vertices;
+    src   = (AreaVertex*)vertices;
     dst   = (AreaVertex*)rotated;
     state = (AreaTransform*)transform;
 
@@ -475,25 +475,25 @@ MATCH void func_801F3708(void* vertices, const void* rotated, s16* transform) {
     o = &out;
     f = &flag;
 
-    setVector(&vec, FAKE_VOLATILE(u16, src->points[0].x), FAKE_VOLATILE(u16, src->points[0].y), FAKE_VOLATILE(u16, src->points[0].z));
+    setVector(&vec, src->points[0].x, src->points[0].y, src->points[0].z);
     RotTrans(v, o, f);
     dst->points[0].x = (state->base_x + out.vx);
     dst->points[0].y = (state->base_y + out.vy);
     dst->points[0].z = (state->base_z + out.vz);
 
-    setVector(&vec, FAKE_VOLATILE(u16, src->points[1].x), FAKE_VOLATILE(u16, src->points[1].y), FAKE_VOLATILE(u16, src->points[1].z));
+    setVector(&vec, src->points[1].x, src->points[1].y, src->points[1].z);
     RotTrans(v, o, f);
     dst->points[1].x = (state->base_x + out.vx);
     dst->points[1].y = (state->base_y + out.vy);
     dst->points[1].z = (state->base_z + out.vz);
 
-    setVector(&vec, FAKE_VOLATILE(u16, src->points[2].x), FAKE_VOLATILE(u16, src->points[2].y), FAKE_VOLATILE(u16, src->points[2].z));
+    setVector(&vec, src->points[2].x, src->points[2].y, src->points[2].z);
     RotTrans(v, o, f);
     dst->points[2].x = (state->base_x + out.vx);
     dst->points[2].y = (state->base_y + out.vy);
     dst->points[2].z = (state->base_z + out.vz);
 
-    setVector(&vec, FAKE_VOLATILE(u16, src->points[3].x), FAKE_VOLATILE(u16, src->points[3].y), FAKE_VOLATILE(u16, src->points[3].z));
+    setVector(&vec, src->points[3].x, src->points[3].y, src->points[3].z);
     RotTrans(v, o, f);
     dst->points[3].x = (state->base_x + out.vx);
     dst->points[3].y = (state->base_y + out.vy);
