@@ -25,14 +25,16 @@ NON_MATCHING void func_801D3A24(void) {
     s32 i;
     u8  skill;
     s32 k;
+    u8* sel;
 
     done = 0;
     if (g_GameStateIndex == GAME_REQUEST_MESSAGE) {
         return;
     }
+    sel        = &g_SceneEventSelection;
     rec        = g_Game.members[g_MenuMasterCursor].character_index;
     chr_master = g_Characters[rec].master_id;
-    if (chr_master == g_SceneEventSelection) {
+    if (chr_master == *sel) {
         diff = g_Characters[rec].level - g_Characters[rec].master_level;
         switch (chr_master) {
             case MASTER_BAIS:
@@ -44,9 +46,9 @@ NON_MATCHING void func_801D3A24(void) {
                 break;
             case MASTER_LANG:
                 if (diff >= 3) {
-                    if (SYS_TestFlag(&g_SceneEventSelection + 0x63B, 0x6C) == 0) {
+                    if (SYS_TestFlag(sel + 0x63B, 0x6C) == 0) {
                         if (Item_Add(ITEM_CATEGORY_ACCESSORY, ACCESSORY_CUPIDS_LYRE, 1, 0) & BYTE_MASK) {
-                            SYS_SetFlag(&g_SceneEventSelection + 0x63B, 0x6C);
+                            SYS_SetFlag(sel + 0x63B, 0x6C);
                             func_801D39CC(g_Game.members[g_MenuMasterCursor].character_index);
                             done = 1;
                         }
@@ -69,10 +71,10 @@ NON_MATCHING void func_801D3A24(void) {
                 break;
             default:
                 for (i = 0; i < 12; i += 2) {
-                    if (diff < g_MenuMasterSkills[g_SceneEventSelection][i / 2].level) {
+                    if (diff < ((u8(*)[12])g_MenuMasterSkills)[*sel][i]) {
                         continue;
                     }
-                    skill = g_MenuMasterSkills[g_SceneEventSelection][i / 2].ability;
+                    skill = ((u8(*)[12])g_MenuMasterSkills)[*sel][i + 1];
                     if (BIT_ARRAY_TEST(g_LearnedAbilities, skill)) {
                         continue;
                     }
@@ -81,11 +83,11 @@ NON_MATCHING void func_801D3A24(void) {
                     }
                     func_801D39CC(g_Game.members[g_MenuMasterCursor].character_index);
                     for (k = 0; k < 12; k++) {
-                        D_801490F8[k] = ((const u8*)(g_Abilities))[g_MenuMasterSkills[g_SceneEventSelection][i / 2].ability * 0x14 + k];
+                        D_801490F8[k] = ((const u8*)(g_Abilities))[((u8(*)[12])g_MenuMasterSkills)[*sel][i + 1] * 0x14 + k];
                     }
                     done       = 1;
                     D_80149104 = 0;
-                    skill      = g_MenuMasterSkills[g_SceneEventSelection][i / 2].ability;
+                    skill      = ((u8(*)[12])g_MenuMasterSkills)[*sel][i + 1];
                     BIT_ARRAY_SET(g_LearnedAbilities, skill);
                     break;
                 }
@@ -93,7 +95,7 @@ NON_MATCHING void func_801D3A24(void) {
         }
     }
     if (done) {
-        MESSAGE_START_WAIT((s16)(g_MenuMasterMessageIds[g_SceneEventSelection] + MASTER_MESSAGE_SKILL_LEARNED));
+        MESSAGE_START_WAIT((s16)(g_MenuMasterMessageIds[*sel] + MASTER_MESSAGE_SKILL_LEARNED));
     }
     g_MenuMasterSubStep += 1;
 }
