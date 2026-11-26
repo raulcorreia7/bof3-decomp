@@ -65,12 +65,10 @@ MATCH void func_801EEEF4(void) {
 }
 
 MATCH void func_801EEFA0(void) {
-    /* FAKE: retail keeps an 8-byte frame that no statement explains. */
-    FAKE_STACK_PADS(u8, 8);
     u8 timer;
 
-    g_PaletteFades[TASK(PartyMember)->timer].offset.r -= 1;
-    g_PaletteFades[TASK(PartyMember)->timer].offset.g -= 1;
+    g_PaletteFades[TASK(PartyMember)->timer].offset.r--;
+    g_PaletteFades[TASK(PartyMember)->timer].offset.g--;
     timer                     = TASK(PartyMember)->unk_09 - 1;
     TASK(PartyMember)->unk_09 = timer;
     if (timer == 0) {
@@ -82,12 +80,10 @@ MATCH void func_801EEFA0(void) {
 
 MATCH void func_801EF0A8(void) {
     PartyMember* actor;
-    /* FAKE: unused frame, 8 bytes; pure C differs in 4 rows (frame 24 against 32). */
-    FAKE_STACK_PADS(u8, 8);
 
     actor = g_Battle.selected_actor;
-    g_PaletteFades[TASK(PartyMember)->timer].offset.r += 1;
-    g_PaletteFades[TASK(PartyMember)->timer].offset.g += 1;
+    g_PaletteFades[TASK(PartyMember)->timer].offset.r++;
+    g_PaletteFades[TASK(PartyMember)->timer].offset.g++;
     if (g_PaletteFades[TASK(PartyMember)->timer].offset.r != 0) {
         return;
     }

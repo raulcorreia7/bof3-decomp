@@ -2,8 +2,7 @@
 
 /* Picks the spawn row, randomises the work record's facing and position from its cue row and the
  * play clock, then bumps the step counter. */
-#ifdef NON_MATCHING
-NON_MATCHING void Fishing_FishAppear(void) {
+MATCH void Fishing_FishAppear(void) {
     s16 limit;
     s32 coord;
 
@@ -14,8 +13,8 @@ NON_MATCHING void Fishing_FishAppear(void) {
     TASK(FishingState)->timer        = 0;
     TASK(FishingState)->saved_index  = 0;
     FISHING_ROW->fish_row            = (u8)RANDOM_MASK(3);
-    if ((u32)FISHING_ROW->fish_row < (u32)FISHING_ENTRY(TASK(FishingState)->cue_index)->count) {
-        FISHING_ROW->fish_row = FISHING_ENTRY(TASK(FishingState)->cue_index)->count;
+    if ((u32)FISHING_ROW->fish_row < (u32)D_801E2AD2[TASK(FishingState)->cue_index * sizeof(FishingSceneCue)]) {
+        FISHING_ROW->fish_row = D_801E2AD2[TASK(FishingState)->cue_index * sizeof(FishingSceneCue)];
     }
     FISHING_ROW->fish_row &= 3;
     coord                             = TO_COORD(20);
@@ -24,7 +23,7 @@ NON_MATCHING void Fishing_FishAppear(void) {
     coord -= FISHING_ROW->fish_row * TO_COORD(12);
     coord -= RANDOM_MASK(0xF) << 0x10;
     TASK(FishingState)->y_38.pos_y      = coord;
-    coord                               = -(D_801E2AD2[TASK(FishingState)->cue_index * sizeof(FishingSceneCue)] << 0x18);
+    coord                               = -(D_801E2AD2[(s16)(TASK(FishingState)->cue_index * sizeof(FishingSceneCue))] << 0x18);
     TASK(FishingState)->bounce.half.key = (s16)((coord >> 0x10) - (RANDOM_MASK(7) << 5));
     limit                               = Area_HeightSample(TASK(FishingState)->motion.unk_34, TASK(FishingState)->y_38.pos_y);
     if (TASK(FishingState)->bounce.half.key == 0) {
@@ -37,6 +36,3 @@ NON_MATCHING void Fishing_FishAppear(void) {
     Script_Select(0);
     TASK(FishingState)->handler_index += 1;
 }
-#else
-INCLUDE_ASM(Fishing_FishAppear);
-#endif
