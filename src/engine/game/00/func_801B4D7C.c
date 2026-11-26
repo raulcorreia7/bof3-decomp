@@ -82,26 +82,26 @@ NON_MATCHING u8 func_801B4D7C(u8 wanted_code) {
             g_ScratchPad.cells.halves[0] = g_ScratchPad.cells.halves[0] + 1;
         }
         if ((TASK(Actor)->direction == FACING_LEFT) || (TASK(Actor)->direction == FACING_RIGHT)) {
-        i                            = 0;
-        g_ScratchPad.cells.halves[0] = TASK(Actor)->pos.x.part.integer - 1;
-        D_1F800002                   = TASK(Actor)->pos.y.part.integer - 1;
-        for (; i < 3; i++) {
-            if ((Area_CellGetCode(g_ScratchPad.cells.halves[0], g_ScratchPad.cells.halves[1]) & BYTE_MASK) == wanted_code) {
-                TASK(Actor)->direction = FACING_UP;
-                return 1;
+            i                            = 0;
+            g_ScratchPad.cells.halves[0] = TASK(Actor)->pos.x.part.integer - 1;
+            D_1F800002                   = TASK(Actor)->pos.y.part.integer - 1;
+            for (; i < 3; i++) {
+                if ((Area_CellGetCode(g_ScratchPad.cells.halves[0], g_ScratchPad.cells.halves[1]) & BYTE_MASK) == wanted_code) {
+                    TASK(Actor)->direction = FACING_UP;
+                    return 1;
+                }
+                g_ScratchPad.cells.halves[0] = g_ScratchPad.cells.halves[0] + 1;
             }
-            g_ScratchPad.cells.halves[0] = g_ScratchPad.cells.halves[0] + 1;
-        }
-        i                            = 0;
-        g_ScratchPad.cells.halves[0] = TASK(Actor)->pos.x.part.integer - 1;
-        D_1F800002                   = TASK(Actor)->pos.y.part.integer + 2;
-        for (; i < 3; i++) {
-            if ((Area_CellGetCode(g_ScratchPad.cells.halves[0], g_ScratchPad.cells.halves[1]) & BYTE_MASK) == wanted_code) {
-                TASK(Actor)->direction = FACING_DOWN;
-                return 1;
+            i                            = 0;
+            g_ScratchPad.cells.halves[0] = TASK(Actor)->pos.x.part.integer - 1;
+            D_1F800002                   = TASK(Actor)->pos.y.part.integer + 2;
+            for (; i < 3; i++) {
+                if ((Area_CellGetCode(g_ScratchPad.cells.halves[0], g_ScratchPad.cells.halves[1]) & BYTE_MASK) == wanted_code) {
+                    TASK(Actor)->direction = FACING_DOWN;
+                    return 1;
+                }
+                g_ScratchPad.cells.halves[0] = g_ScratchPad.cells.halves[0] + 1;
             }
-            g_ScratchPad.cells.halves[0] = g_ScratchPad.cells.halves[0] + 1;
-        }
         }
         return 0;
     } else {
@@ -128,26 +128,26 @@ NON_MATCHING u8 func_801B4D7C(u8 wanted_code) {
             g_ScratchPad.cells.ray.y = g_ScratchPad.cells.ray.y + 1;
         }
         if ((TASK(Actor)->direction == FACING_UP) || (TASK(Actor)->direction == FACING_DOWN)) {
-        i                            = 0;
-        g_ScratchPad.cells.halves[0] = TASK(Actor)->pos.x.part.integer - 1;
-        D_1F800002                   = TASK(Actor)->pos.y.part.integer - 1;
-        for (; i < 3; i++) {
-            if ((Area_CellGetCode(g_ScratchPad.cells.halves[0], g_ScratchPad.cells.halves[1]) & BYTE_MASK) == wanted_code) {
-                TASK(Actor)->direction = FACING_LEFT;
-                return 1;
+            i                            = 0;
+            g_ScratchPad.cells.halves[0] = TASK(Actor)->pos.x.part.integer - 1;
+            D_1F800002                   = TASK(Actor)->pos.y.part.integer - 1;
+            for (; i < 3; i++) {
+                if ((Area_CellGetCode(g_ScratchPad.cells.halves[0], g_ScratchPad.cells.halves[1]) & BYTE_MASK) == wanted_code) {
+                    TASK(Actor)->direction = FACING_LEFT;
+                    return 1;
+                }
+                g_ScratchPad.cells.halves[1] = g_ScratchPad.cells.halves[1] + 1;
             }
-            g_ScratchPad.cells.halves[1] = g_ScratchPad.cells.halves[1] + 1;
-        }
-        i                            = 0;
-        g_ScratchPad.cells.halves[0] = TASK(Actor)->pos.x.part.integer + 2;
-        D_1F800002                   = TASK(Actor)->pos.y.part.integer - 1;
-        for (; i < 3; i++) {
-            if ((Area_CellGetCode(g_ScratchPad.cells.halves[0], g_ScratchPad.cells.halves[1]) & BYTE_MASK) == wanted_code) {
-                TASK(Actor)->direction = FACING_RIGHT;
-                return 1;
+            i                            = 0;
+            g_ScratchPad.cells.halves[0] = TASK(Actor)->pos.x.part.integer + 2;
+            D_1F800002                   = TASK(Actor)->pos.y.part.integer - 1;
+            for (; i < 3; i++) {
+                if ((Area_CellGetCode(g_ScratchPad.cells.halves[0], g_ScratchPad.cells.halves[1]) & BYTE_MASK) == wanted_code) {
+                    TASK(Actor)->direction = FACING_RIGHT;
+                    return 1;
+                }
+                g_ScratchPad.cells.halves[1] = g_ScratchPad.cells.halves[1] + 1;
             }
-            g_ScratchPad.cells.halves[1] = g_ScratchPad.cells.halves[1] + 1;
-        }
         }
         return 0;
     }

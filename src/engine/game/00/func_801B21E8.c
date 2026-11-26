@@ -45,8 +45,8 @@ NON_MATCHING void func_801B21E8(void) {
             }
             if (!(g_Game.members[0].status.field.flags.unsigned_value & 1) && i != 0) {
                 index  = (i - 1) * 2 + TASK(PartyMember)->facing * 4;
-                ok     = func_801B1B2C(g_Game.members[0].pos.x.fixed + (s_EntityPlacementOffsets[index] << 15), g_Game.members[0].pos.y.fixed + (s_EntityPlacementOffsets[index + 1] << 15), TASK(PartyMember)->facing,
-                                       TASK(PartyMember)->speed);
+                ok     = func_801B1B2C(g_Game.members[0].pos.x.fixed + (s_EntityPlacementOffsets[index] << 15), g_Game.members[0].pos.y.fixed + (s_EntityPlacementOffsets[index + 1] << 15),
+                                       TASK(PartyMember)->facing, TASK(PartyMember)->speed);
                 placed = (ok & BYTE_MASK) ? func_801B1C18(((s32*)&D_1F800008)[0], ((s32*)&D_1F800008)[1], TASK(PartyMember)->speed) : 0;
                 if ((ok & BYTE_MASK) && (placed & BYTE_MASK)) {
                     goto found;

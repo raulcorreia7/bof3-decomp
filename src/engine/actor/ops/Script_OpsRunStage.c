@@ -129,9 +129,10 @@ NON_MATCHING u8 Script_OpsRunStage(ScriptState* state, const u8* table, u8 value
             state->cursor--;
             break;
         case ACTOR_SCRIPT_STAGE_SPAWN_HELPER: {
-            flag                      = table[state->cursor + 1];
-            slot                      = g_GameState->chr.character_id;
-            TASK(Actor)->param.unk_0B = Actor_SpawnHelper(flag - 0x90, -((flag ^ 0x94) == 0) & 0xA, D_80181B28[g_CharSlot[slot]], TASK(Actor)->pos.x.fixed, TASK(Actor)->pos.y.fixed, TASK(Actor)->pos.z.fixed);
+            flag = table[state->cursor + 1];
+            slot = g_GameState->chr.character_id;
+            TASK(Actor)->param.unk_0B =
+                Actor_SpawnHelper(flag - 0x90, -((flag ^ 0x94) == 0) & 0xA, D_80181B28[g_CharSlot[slot]], TASK(Actor)->pos.x.fixed, TASK(Actor)->pos.y.fixed, TASK(Actor)->pos.z.fixed);
             state->cursor += 1;
             break;
         }
