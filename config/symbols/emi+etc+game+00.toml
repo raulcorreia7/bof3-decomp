@@ -1,6 +1,7 @@
 ["emi/etc/game/00"]
 g_AreaClimbHeightOffsets = { addr = 0x80181B70, source = "Per character id: how far the climbing actor's z sits from the ground height at the ladder; Area_ClimbMountLower holds that z and Area_ClimbUp ends the climb there." }
 g_AreaClimbRiseSteps = { addr = 0x80181B88, source = "Per character id: the z step per frame of the ladder mount and dismount rise." }
+g_BGMTracks = { addr = 0x80181EB8, size = 0x294, source = "Music tracks: the BGM archive slot, SEP package and sequence of each track id." }
 jtbl_80195804 = { addr = 0x80195804, type = "Callback", source = "The switch table of GFX_PaletteMarkCells: the jump targets of its jr dispatch." }
 jtbl_80195830 = { addr = 0x80195830, type = "Callback", source = "The switch table of Game_UpdateField: the jump targets of its jr dispatch." }
 jtbl_80195864 = { addr = 0x80195864, type = "Callback", source = "The switch table of func_801A4400: the jump targets of its jr dispatch." }
