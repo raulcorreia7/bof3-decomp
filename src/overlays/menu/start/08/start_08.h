@@ -704,7 +704,8 @@ void        func_801E964C(void);
 void        func_801E968C(void);
 /* func_801E96CC */
 void        Menu_StatsPanel(void);
-void        func_801E9748(void);
+/* func_801E9748 */
+void        UI_PanelSlideOutOption_801E9748(void);
 void        func_801E9788(void);
 void        func_801E97E0(void);
 void        func_801E9820(void);

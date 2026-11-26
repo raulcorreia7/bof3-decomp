@@ -343,7 +343,7 @@ segments:
       - [0x18A4C, c, func_801E964C]
       - [0x18A8C, c, func_801E968C]
       - [0x18ACC, c, Menu_StatsPanel]
-      - [0x18B48, c, func_801E9748]
+      - [0x18B48, c, UI_PanelSlideOutOption_801E9748]
       - [0x18B88, c, func_801E9788]
       - [0x18BE0, c, func_801E97E0]
       - [0x18C20, c, func_801E9820]

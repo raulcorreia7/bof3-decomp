@@ -117,6 +117,7 @@ Menu_CampIconsPanel = { addr = 0x801E9304, type = "func", source = "panel mode 3
 Menu_DrawCampIcons = { addr = 0x801E9350, type = "func", source = "Draws the seven camp icons, the selected one enlarged." }
 Menu_TitlePanel = { addr = 0x801E9554, type = "func", source = "panel mode 4 of the start menu: the short header bar with a text label" }
 Menu_StatsPanel = { addr = 0x801E96CC, type = "func", source = "panel mode 5 of the start menu: the character stat panel" }
+UI_PanelSlideOutOption_801E9748 = { addr = 0x801E9748, type = "func", source = "same body as emi/etc/game/00@0x801996FC UI_PanelSlideOutOption" }
 Menu_EquipmentPanel = { addr = 0x801E98F8, type = "func", source = "panel mode 6 of the start menu: the equipment window" }
 Menu_MessagePanel = { addr = 0x801E9BEC, type = "func", source = "panel mode 9 of the start menu: the full-width header bar with a message" }
 Menu_CursorFramePanel = { addr = 0x801E9D98, type = "func", source = "panel mode 10 of the start menu: the frame drawn around the selected entry" }
