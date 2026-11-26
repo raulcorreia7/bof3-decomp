@@ -24,11 +24,11 @@ MATCH void Fishing_LureCast(void) {
     value                         = TASK(FishingState)->y_38.pos_y - (TASK(FishingState)->cursor_10 << 15);
     TASK(FishingState)->cursor_10 = value;
     if (value >= FISHING_CAMERA_Y_MAX) {
-        g_AreaScrollTargetY = FISHING_CAMERA_Y_MAX;
+        g_AreaScrollTargetCoordY.fixed = FISHING_CAMERA_Y_MAX;
     } else if (value < FISHING_CAMERA_Y_MIN) {
-        g_AreaScrollTargetY = FISHING_CAMERA_Y_MIN;
+        g_AreaScrollTargetCoordY.fixed = FISHING_CAMERA_Y_MIN;
     } else {
-        g_AreaScrollTargetY = value;
+        g_AreaScrollTargetCoordY.fixed = value;
     }
 
     g_AreaCameraSpeed                = 0;

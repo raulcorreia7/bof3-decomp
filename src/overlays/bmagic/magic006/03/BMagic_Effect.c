@@ -131,7 +131,7 @@ MATCH void func_801EF298(void) {
     if (TASK(PartyMember)->param.unk_0B == 0) {
         i = 0;
         do {
-            slot                               = Battle_AllocEffect(1, 0x53);
+            slot                               = Battle_AllocEffect(1, 83);
             g_BattleEffects[slot].target.party = g_BattleEffectBattler;
             g_BattleEffects[slot].header.mode  = 1;
             g_BattleEffects[slot].unk_0B       = i;
@@ -139,7 +139,7 @@ MATCH void func_801EF298(void) {
             g_BattleEffects[slot].arg.unk_09 = (rand() & 0xF) + 1;
             g_BattleEffectBattler->param.unk_0B += 1;
         } while (i < 8);
-        slot                               = Battle_AllocEffect(1, 0x53);
+        slot                               = Battle_AllocEffect(1, 83);
         g_BattleEffects[slot].target.party = g_BattleEffectBattler;
         g_BattleEffects[slot].header.mode  = 2;
         g_BattleEffectBattler->param.unk_0B += 1;

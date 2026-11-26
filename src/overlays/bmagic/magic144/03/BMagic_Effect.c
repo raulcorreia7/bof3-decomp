@@ -26,7 +26,7 @@ MATCH void BMagic_WallOfFireInit(void) {
     TASK(PartyMember)->param.unk_0B = 0;
     BMAGIC_CLEAR_EFFECTS(i);
     actor                              = g_Battle.selected_actor;
-    slot                               = Battle_AllocEffect(1, 0x36) & BYTE_MASK;
+    slot                               = Battle_AllocEffect(1, BMAGIC_EFFECT_WALL_OF_FIRE) & BYTE_MASK;
     i                                  = 1;
     dst                                = BATTLE_EFFECT_PALETTE_COLORS;
     src                                = BATTLE_PALETTE_SOURCE_COLORS;

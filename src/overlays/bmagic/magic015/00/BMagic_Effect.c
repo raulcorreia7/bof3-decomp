@@ -27,10 +27,10 @@ MATCH void BMagic_ChargeInit(void) {
     TASK(PartyMember)->header.mode += 1;
     Battle_SelectActiveBattlerScript(8, 2);
     for (i = 0; i < 4; i++) {
-        index = Battle_AllocEffect(1, 35);
+        index = Battle_AllocEffect(1, BMAGIC_EFFECT_CHARGE_FLYING_KICK);
         Effect_CopyActiveBattlerToSlot(index);
         work                                            = TASK(PartyMember);
-        g_BattleEffects[index & BYTE_MASK].step_index   = 35;
+        g_BattleEffects[index & BYTE_MASK].effect_type  = BMAGIC_EFFECT_CHARGE_FLYING_KICK;
         g_BattleEffects[index & BYTE_MASK].header.mode  = BMAGIC_CHARGE_EFFECT_TRAIL;
         g_BattleEffects[index & BYTE_MASK].header.step  = 0;
         g_BattleEffects[index & BYTE_MASK].unk_06       = 1;
@@ -39,13 +39,13 @@ MATCH void BMagic_ChargeInit(void) {
         g_BattleEffects[index & BYTE_MASK].target.party = work;
         TASK(PartyMember)->param.unk_0B++;
     }
-    index = Battle_AllocEffect(1, 35);
+    index = Battle_AllocEffect(1, BMAGIC_EFFECT_CHARGE_FLYING_KICK);
     Effect_CopyActiveBattlerToSlot(index);
     owner                                           = TASK(PartyMember);
     g_BattleEffects[index & BYTE_MASK].unk_06       = 1;
     g_BattleEffects[index & BYTE_MASK].header.mode  = BMAGIC_CHARGE_EFFECT_LEAD;
     g_BattleEffects[index & BYTE_MASK].header.step  = 0;
-    g_BattleEffects[index & BYTE_MASK].step_index   = 35;
+    g_BattleEffects[index & BYTE_MASK].effect_type  = BMAGIC_EFFECT_CHARGE_FLYING_KICK;
     g_BattleEffects[index & BYTE_MASK].target.party = owner;
     TASK(PartyMember)->param.unk_0B++;
     g_BattleEffectBattler->header.flags |= PARTY_MEMBER_FLAG_HANDLER_BUSY;
@@ -87,12 +87,12 @@ MATCH void func_801EF2B4(void) {
     Battle_SelectActiveBattlerScript(8, 2);
     TASK(PartyMember)->param.unk_0B = 0;
     for (i = 0; i < 3; i++) {
-        index = Battle_AllocEffect(1, 35);
+        index = Battle_AllocEffect(1, BMAGIC_EFFECT_CHARGE_FLYING_KICK);
         Effect_CopyActiveBattlerToSlot(index);
         work                                            = TASK(PartyMember);
         g_BattleEffects[index & BYTE_MASK].header.mode  = 2;
         g_BattleEffects[index & BYTE_MASK].unk_06       = 1;
-        g_BattleEffects[index & BYTE_MASK].step_index   = 35;
+        g_BattleEffects[index & BYTE_MASK].effect_type  = BMAGIC_EFFECT_CHARGE_FLYING_KICK;
         g_BattleEffects[index & BYTE_MASK].header.step  = 0;
         g_BattleEffects[index & BYTE_MASK].unk_0B       = i;
         g_BattleEffects[index & BYTE_MASK].arg.unk_09   = i * 2 + 1;
@@ -132,13 +132,13 @@ MATCH void BMagic_FlyingKickInit(void) {
     TASK(PartyMember)->pos.z.part.integer = g_BattleEffectBattler->pos.z.part.integer;
     TASK(PartyMember)->param.unk_0B       = 1;
     Battle_SelectActiveBattlerScript(8, 0);
-    index = Battle_AllocEffect(1, 35);
+    index = Battle_AllocEffect(1, BMAGIC_EFFECT_CHARGE_FLYING_KICK);
     Effect_CopyActiveBattlerToSlot(index);
     work                                            = TASK(PartyMember);
     g_BattleEffects[index & BYTE_MASK].header.mode  = BMAGIC_FLYING_KICK_EFFECT_IMAGE;
     g_BattleEffects[index & BYTE_MASK].unk_06       = 1;
     g_BattleEffects[index & BYTE_MASK].header.step  = 0;
-    g_BattleEffects[index & BYTE_MASK].step_index   = 35;
+    g_BattleEffects[index & BYTE_MASK].effect_type  = BMAGIC_EFFECT_CHARGE_FLYING_KICK;
     g_BattleEffects[index & BYTE_MASK].arg.unk_09   = 0;
     g_BattleEffects[index & BYTE_MASK].target.party = work;
     TASK(PartyMember)->unk_27                       = Battle_CopyCellPalette(g_BattleEffectBattler);

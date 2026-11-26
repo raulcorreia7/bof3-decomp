@@ -59,7 +59,7 @@ NON_MATCHING void func_801EEC94(void) {
             g_BattleEffects[slot].header.mode = 3;
             g_BattleEffects[slot].unk_06      = 1;
             g_BattleEffects[slot].header.step = 0;
-            g_BattleEffects[slot].step_index  = 0x13;
+            g_BattleEffects[slot].effect_type = 0x13;
             g_BattleEffects[slot].arg.unk_09  = 0;
         }
     }

@@ -188,7 +188,7 @@ typedef struct BattleEffect {
     TaskHeader          header; /* 0x00 */
     u8                  unk_03;
     u8                  unk_04;
-    u8                  step_index; /* +0x05 indexes a mode's handler table; Battle_AllocEffect stores it */
+    u8                  effect_type; /* +0x05 the effect's type: picks its routine in the mode's effect table; Battle_AllocEffect stores it */
     u8                  unk_06;
     u8                  unk_07;
     u8                  unk_08;
@@ -231,10 +231,34 @@ ASSERT_OFFSET(BattleEffect, screen_y, 0x30);
 ASSERT_OFFSET(BattleEffect, depth, 0x32);
 ASSERT_SIZE(BattleEffect, 0x78);
 
+/* The effect_type of a magic effect (slot mode 1): the index into g_BattleMagicEffectSteps of the routine that
+ * runs it. Each constant is named for the spell whose overlay queues it; every entry runs that overlay's
+ * BMagic_DispatchEffectMode, except SUPER_COMBO, which runs BMagic_SuperComboRunEffect. */
+typedef enum BMagicEffectType {
+    BMAGIC_EFFECT_SUPER_COMBO        = 1,
+    BMAGIC_EFFECT_NOTING             = 3,
+    BMAGIC_EFFECT_SKILL_STRIKE       = 31,
+    BMAGIC_EFFECT_SHIELD             = 34,
+    BMAGIC_EFFECT_CHARGE_FLYING_KICK = 35,
+    BMAGIC_EFFECT_FIREBLAST          = 40,
+    BMAGIC_EFFECT_SIMOON             = 45,
+    BMAGIC_EFFECT_WALL_OF_FIRE       = 54,
+    BMAGIC_EFFECT_BURST              = 62,
+    BMAGIC_EFFECT_ACCESSION          = 68,
+    BMAGIC_EFFECT_SHADOW_BREATH      = 78,
+    BMAGIC_EFFECT_MAGIC_BALL         = 81,
+    BMAGIC_EFFECT_SACRIFICE          = 85,
+    BMAGIC_EFFECT_GLOOM              = 88,
+    BMAGIC_EFFECT_METEOR_STRIKE      = 95,
+    BMAGIC_EFFECT_COMBUSTION         = 96,
+    BMAGIC_EFFECT_TEMPTATION         = 101,
+    BMAGIC_EFFECT_KAISER_BREATH      = 105
+} BMagicEffectType;
+
 /* Battle effect work records (stride 0x78). */
 extern BattleEffect g_BattleEffects[];
 
-ASSERT_OFFSET(BattleEffect, step_index, 0x05);
+ASSERT_OFFSET(BattleEffect, effect_type, 0x05);
 ASSERT_OFFSET(BattleEffect, unk_27, 0x27);
 ASSERT_OFFSET(BattleEffect, unk_29, 0x29);
 ASSERT_OFFSET(BattleEffect, unk_4B, 0x4B);

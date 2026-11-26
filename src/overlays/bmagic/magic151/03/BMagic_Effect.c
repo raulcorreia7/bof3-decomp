@@ -79,7 +79,7 @@ MATCH void BMagic_AccessionCastWait(void) {
     TASK(PartyMember)->header.flags |= PARTY_MEMBER_FLAG_HANDLER_BUSY;
     g_Task                             = saved;
     TASK(PartyMember)->param.unk_0B    = 0;
-    slot                               = Battle_AllocEffect(1, 68) & BYTE_MASK;
+    slot                               = Battle_AllocEffect(1, BMAGIC_EFFECT_ACCESSION) & BYTE_MASK;
     work                               = TASK(PartyMember);
     g_BattleEffects[slot].header.mode  = BMAGIC_ACCESSION_EFFECT_SEQUENCE;
     g_BattleEffects[slot].target.party = work;
@@ -277,7 +277,7 @@ MATCH void BMagic_AccessionSequenceSpawnBand(void) {
     TASK(PartyMember)->param.unk_0B     = 0;
     TASK(PartyMember)->unk_09           = 4;
     TASK(PartyMember)->header.step += 1;
-    slot                               = Battle_AllocEffect(1, 68) & BYTE_MASK;
+    slot                               = Battle_AllocEffect(1, BMAGIC_EFFECT_ACCESSION) & BYTE_MASK;
     work                               = TASK(PartyMember);
     g_BattleEffects[slot].header.mode  = BMAGIC_ACCESSION_EFFECT_BAND;
     g_BattleEffects[slot].arg.unk_09   = 1;
@@ -295,7 +295,7 @@ MATCH void BMagic_AccessionSequenceSpawnGlow(void) {
     count                     = TASK(PartyMember)->unk_09 - 1;
     TASK(PartyMember)->unk_09 = count;
     if (count == 0) {
-        slot                               = Battle_AllocEffect(1, 68) & BYTE_MASK;
+        slot                               = Battle_AllocEffect(1, BMAGIC_EFFECT_ACCESSION) & BYTE_MASK;
         work                               = TASK(PartyMember);
         g_BattleEffects[slot].header.mode  = BMAGIC_ACCESSION_EFFECT_GLOW;
         g_BattleEffects[slot].target.party = work;
@@ -312,7 +312,7 @@ MATCH void BMagic_AccessionSequenceSpawnDome(void) {
     u32          slot;
 
     if (--TASK(PartyMember)->unk_09 == 0) {
-        slot                               = Battle_AllocEffect(1, 68) & BYTE_MASK;
+        slot                               = Battle_AllocEffect(1, BMAGIC_EFFECT_ACCESSION) & BYTE_MASK;
         work                               = TASK(PartyMember);
         g_BattleEffects[slot].header.mode  = BMAGIC_ACCESSION_EFFECT_DOME;
         task                               = TASK(PartyMember);
@@ -398,7 +398,7 @@ MATCH void BMagic_AccessionDomeSpawnRays(void) {
     PartyMember* work;
 
     if ((g_FrameCount & 0x3) == 0) {
-        slot                               = Battle_AllocEffect(1, 68) & BYTE_MASK;
+        slot                               = Battle_AllocEffect(1, BMAGIC_EFFECT_ACCESSION) & BYTE_MASK;
         work                               = TASK(PartyMember);
         g_BattleEffects[slot].header.mode  = BMAGIC_ACCESSION_EFFECT_RAY;
         g_BattleEffects[slot].target.party = work;

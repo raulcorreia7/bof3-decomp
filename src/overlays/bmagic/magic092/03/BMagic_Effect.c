@@ -33,7 +33,7 @@ MATCH void BMagic_FireblastInit(void) {
             index   = i;
             battler = i + BATTLE_PARTY_CHARACTERS_COUNT;
             if (!Battle_SlotIsBlocked(battler)) {
-                slot                               = Battle_AllocEffect(1, 0x28) & BYTE_MASK;
+                slot                               = Battle_AllocEffect(1, BMAGIC_EFFECT_FIREBLAST) & BYTE_MASK;
                 g_BattleEffects[slot].target.party = TASK(PartyMember);
                 g_BattleEffects[slot].unk_03       = index;
                 g_BattleEffects[slot].pos.x.fixed  = g_BattleEnemyBattlers[i].pos.x.fixed;
@@ -47,7 +47,7 @@ MATCH void BMagic_FireblastInit(void) {
     } else {
         for (i = 0; i < BATTLE_PARTY_CHARACTERS_COUNT; i++) {
             if (!Battle_SlotIsBlocked(i & BYTE_MASK)) {
-                slot                               = Battle_AllocEffect(1, 0x28) & BYTE_MASK;
+                slot                               = Battle_AllocEffect(1, BMAGIC_EFFECT_FIREBLAST) & BYTE_MASK;
                 g_BattleEffects[slot].target.party = TASK(PartyMember);
                 g_BattleEffects[slot].unk_03       = i;
                 g_BattleEffects[slot].pos.x.fixed  = g_Game.members[i].pos.x.fixed;

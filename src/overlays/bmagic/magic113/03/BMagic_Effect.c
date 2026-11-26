@@ -4,14 +4,16 @@
 __asm__(".include \"include/match/macro.inc\"\n");
 #endif
 
-MATCH void func_801EEC24(void) {
-    Magic113Steps handlers;
+/* func_801EEC24 */
+MATCH void BMagic_NotingUpdate(void) {
+    BMagicNotingSteps handlers;
 
-    BMAGIC_DISPATCH_STEP_HANDLERS(D_801EEC04, header.mode);
-    BMAGIC_DRAW_IF_ALIVE(func_801EF4F0);
+    BMAGIC_DISPATCH_STEP_HANDLERS(g_BMagicNotingSteps, header.mode);
+    BMAGIC_DRAW_IF_ALIVE(BMagic_NotingDrawShadow);
 }
 
-MATCH void func_801EECE0(void) {
+/* func_801EECE0 */
+MATCH void BMagic_NotingInit(void) {
     u8   i;
     u16* dst;
     u16* src;
@@ -36,7 +38,8 @@ MATCH void func_801EECE0(void) {
     }
 }
 
-MATCH void func_801EEE24(void) {
+/* func_801EEE24 */
+MATCH void BMagic_NotingSpawnRings(void) {
     u8           timer;
     u32          slot;
     PartyMember* work;
@@ -45,9 +48,9 @@ MATCH void func_801EEE24(void) {
     timer                     = TASK(PartyMember)->unk_09 + 1;
     TASK(PartyMember)->unk_09 = timer;
     if (timer == 16) {
-        slot                                   = Battle_AllocEffect(1, 3) & BYTE_MASK;
+        slot                                   = Battle_AllocEffect(1, BMAGIC_EFFECT_NOTING) & BYTE_MASK;
         work                                   = TASK(PartyMember);
-        g_BattleEffects[slot].header.mode      = 0;
+        g_BattleEffects[slot].header.mode      = BMAGIC_NOTING_EFFECT_RING;
         g_BattleEffects[slot].unk_0B           = 0;
         g_BattleEffects[slot].target.party     = work;
         facing                                 = g_BattleEffectBattler->facing;
@@ -57,9 +60,9 @@ MATCH void func_801EEE24(void) {
         g_BattleEffects[slot].pos.x            = TASK(PartyMember)->pos.x;
         g_BattleEffects[slot].pos.y            = TASK(PartyMember)->pos.y;
         COORD_INT(g_BattleEffects[slot].pos.z) = COORD_INT(TASK(PartyMember)->pos.z);
-        slot                                   = Battle_AllocEffect(1, 3) & BYTE_MASK;
+        slot                                   = Battle_AllocEffect(1, BMAGIC_EFFECT_NOTING) & BYTE_MASK;
         work                                   = TASK(PartyMember);
-        g_BattleEffects[slot].header.mode      = 0;
+        g_BattleEffects[slot].header.mode      = BMAGIC_NOTING_EFFECT_RING;
         g_BattleEffects[slot].unk_0B           = 1;
         g_BattleEffects[slot].target.party     = work;
         facing                                 = g_BattleEffectBattler->facing;
@@ -74,30 +77,33 @@ MATCH void func_801EEE24(void) {
     }
 }
 
+/* func_801EF000 */
 MATCH void func_801EF000(void) {
     u32          slot;
     PartyMember* work;
     u8           facing;
 
-    if (TASK(PartyMember)->param.unk_0B == 3) {
-        MAGIC113_SPAWN_EFFECT(1);
+    if (TASK(PartyMember)->param.unk_0B == BMAGIC_NOTING_STAGE_RINGS) {
+        BMAGIC_NOTING_SPAWN_EFFECT(BMAGIC_NOTING_EFFECT_STAR);
     }
 }
 
-MATCH void func_801EF0F0(void) {
+/* func_801EF0F0 */
+MATCH void BMagic_NotingSpawnWall(void) {
     u32          slot;
     PartyMember* work;
     u8           facing;
 
-    if (TASK(PartyMember)->param.unk_0B == 4) {
-        MAGIC113_SPAWN_EFFECT(2);
+    if (TASK(PartyMember)->param.unk_0B == BMAGIC_NOTING_STAGE_STAR) {
+        BMAGIC_NOTING_SPAWN_EFFECT(BMAGIC_NOTING_EFFECT_WALL);
         SND_SEPlay(EMI_SE_ID(SND_BANK_COMMON, 0x02));
         g_SndVoiceTargetVolume[20] = 0x7F;
         g_SndVoiceVolume[20]       = 0;
     }
 }
 
-MATCH void func_801EF1F8(void) {
+/* func_801EF1F8 */
+MATCH void BMagic_NotingSpawnActors(void) {
     u8           i;
     u32          slot;
     PartyMember* work;
@@ -105,11 +111,11 @@ MATCH void func_801EF1F8(void) {
 
     SND_VoiceDecreaseTargetVolume(20, 16);
     SND_StartVolumeSweep(20);
-    if (TASK(PartyMember)->param.unk_0B == 5) {
+    if (TASK(PartyMember)->param.unk_0B == BMAGIC_NOTING_STAGE_WALL) {
         for (i = 0; i < 6; i++) {
-            slot                                   = Battle_AllocEffect(1, 3) & BYTE_MASK;
+            slot                                   = Battle_AllocEffect(1, BMAGIC_EFFECT_NOTING) & BYTE_MASK;
             work                                   = TASK(PartyMember);
-            g_BattleEffects[slot].header.mode      = 3;
+            g_BattleEffects[slot].header.mode      = BMAGIC_NOTING_EFFECT_ACTOR;
             g_BattleEffects[slot].unk_04           = i & 1;
             g_BattleEffects[slot].target.party     = work;
             facing                                 = g_BattleEffectBattler->facing;
@@ -126,18 +132,20 @@ MATCH void func_801EF1F8(void) {
     }
 }
 
-MATCH void func_801EF35C(void) {
-    if (TASK(PartyMember)->param.unk_0B == 6) {
-        TASK(PartyMember)->param.unk_0B = 0x84;
+/* func_801EF35C */
+MATCH void BMagic_NotingRelease(void) {
+    if (TASK(PartyMember)->param.unk_0B == BMAGIC_NOTING_STAGE_ACTORS) {
+        TASK(PartyMember)->param.unk_0B = BMAGIC_NOTING_STAGE_RELEASE;
         TASK(PartyMember)->header.mode += 1;
     }
 }
 
-MATCH void func_801EF3A0(void) {
+/* func_801EF3A0 */
+MATCH void BMagic_NotingWait(void) {
     PartyMember* work;
 
     work = TASK(PartyMember);
-    if (work->param.unk_0B == 0x80) {
+    if (work->param.unk_0B == BMAGIC_NOTING_STAGE_RELEASED) {
         work->header.mode = (work->header.mode + 1);
     }
 }
@@ -146,7 +154,8 @@ MATCH void func_801EF3A0(void) {
 
 #include "overlays/bmagic/shared/Effect_SetActorMatrix.h"
 
-MATCH void func_801EF4F0(void) {
+/* func_801EF4F0 */
+MATCH void BMagic_NotingDrawShadow(void) {
     POLY_G3* prim;
     long     depth;
     long     flag;
@@ -155,16 +164,16 @@ MATCH void func_801EF4F0(void) {
 
     tpage = getTPage(TPAGE_DEPTH_4BIT, TPAGE_ABR_SUB, 320, 256);
     GFX_ADD_DITHERED_DRAW_MODE(BMAGIC_LAYER_BEHIND_BATTLERS, tpage);
-    s_Magic113OrbitRadius     = 0x1C0;
-    g_ScratchPadVectors[2].vx = FIXED_MUL(rsin(0), s_Magic113OrbitRadius);
-    g_ScratchPadVectors[2].vy = FIXED_MUL(rcos(0), s_Magic113OrbitRadius);
+    s_BMagicNotingRadius      = 0x1C0;
+    g_ScratchPadVectors[2].vx = FIXED_MUL(rsin(0), s_BMagicNotingRadius);
+    g_ScratchPadVectors[2].vy = FIXED_MUL(rcos(0), s_BMagicNotingRadius);
     for (i = 1; i <= 32; i++) {
         prim                      = GFX_BeginPolyG3(1);
         g_ScratchPadVectors[0].vx = 0;
         g_ScratchPadVectors[0].vy = 0;
         g_ScratchPadVectors[1].vx = g_ScratchPadVectors[2].vx;
         g_ScratchPadVectors[1].vy = g_ScratchPadVectors[2].vy;
-        setVector(&g_ScratchPadVectors[2], FIXED_MUL(rsin(i << 7), s_Magic113OrbitRadius), FIXED_MUL(rcos(i << 7), s_Magic113OrbitRadius), 0);
+        setVector(&g_ScratchPadVectors[2], FIXED_MUL(rsin(i << 7), s_BMagicNotingRadius), FIXED_MUL(rcos(i << 7), s_BMagicNotingRadius), 0);
         g_ScratchPadVectors[1].vz = 0;
         g_ScratchPadVectors[0].vz = 0;
         RotTransPers3(&g_ScratchPadVectors[0], &g_ScratchPadVectors[1], &g_ScratchPadVectors[2], (long*)&prim->x0, (long*)&prim->x1, (long*)&prim->x2, &depth, &flag);
@@ -181,41 +190,44 @@ MATCH void func_801EF4F0(void) {
 /* func_801EF75C */
 #include "overlays/bmagic/shared/BMagic_DispatchEffectMode.h"
 
-MATCH void func_801EF7A0(void) {
-    SYS_DISPATCH_BYTE(D_801F0BAC, TASK(PartyMember)->header.step);
+/* func_801EF7A0 */
+MATCH void BMagic_NotingRingUpdate(void) {
+    SYS_DISPATCH_BYTE(g_BMagicNotingRingSteps, TASK(PartyMember)->header.step);
     if (TASK(PartyMember)->header.flags != 0) {
         Effect_SetActorMatrix();
-        s_Magic113OrbitRadius = D_801F0BA4[TASK(PartyMember)->param.unk_0B];
-        func_801EF944();
+        s_BMagicNotingRadius = g_BMagicNotingRingRadii[TASK(PartyMember)->param.unk_0B];
+        BMagic_NotingDrawRing();
         PopMatrix();
     }
 }
 
-MATCH void func_801EF844(void) {
+/* func_801EF844 */
+MATCH void BMagic_NotingRingGrow(void) {
     u8 count;
 
     count                     = TASK(PartyMember)->unk_09 + 1;
     TASK(PartyMember)->unk_09 = count;
     if ((count & BYTE_MASK) == 0x21) {
-        g_BattleEffectBattler->param.unk_0B = 3;
+        g_BattleEffectBattler->param.unk_0B = BMAGIC_NOTING_STAGE_RINGS;
         TASK(PartyMember)->header.step += 1;
     }
 }
 
-MATCH void func_801EF8A4(void) {
+/* func_801EF8A4 */
+MATCH void BMagic_NotingRingHold(void) {
     PartyMember* active;
     PartyMember* work;
 
-    MAGIC113_ADVANCE_AT_ACTIVE_PARAM(132);
+    BMAGIC_NOTING_ADVANCE_AT_STAGE(BMAGIC_NOTING_STAGE_RELEASE);
 }
 
-MATCH void func_801EF8E4(void) {
+/* func_801EF8E4 */
+MATCH void BMagic_NotingRingFade(void) {
     Effect_CountUpTimer();
 }
 
-/* Draw the magic113 orbit as up to 32 projected line segments; in step 2 the lines turn
- * semi-transparent and fade with the effect timer. */
-MATCH void func_801EF944(void) {
+/* func_801EF944 */
+MATCH void BMagic_NotingDrawRing(void) {
     LINE_F2* prim;
     long     depth;
     long     flag;
@@ -224,7 +236,7 @@ MATCH void func_801EF944(void) {
 
     tpage = getTPage(TPAGE_DEPTH_4BIT, TPAGE_ABR_ADD, 320, 256);
     GFX_ADD_DITHERED_DRAW_MODE(BMAGIC_LAYER_BEHIND_BATTLERS, tpage);
-    setVector(&g_ScratchPadVectors[0], FIXED_MUL(rsin(0), s_Magic113OrbitRadius), FIXED_MUL(rcos(0), s_Magic113OrbitRadius), 0);
+    setVector(&g_ScratchPadVectors[0], FIXED_MUL(rsin(0), s_BMagicNotingRadius), FIXED_MUL(rcos(0), s_BMagicNotingRadius), 0);
     for (i = 1; i <= 32; i++) {
         if (i < TASK(PartyMember)->unk_09) {
             prim = (LINE_F2*)g_GfxPrimCursor;
@@ -233,7 +245,7 @@ MATCH void func_801EF944(void) {
                 SetSemiTrans(prim, 1);
             }
             RotTransPers(&g_ScratchPadVectors[0], (long*)&prim->x0, &depth, &flag);
-            setVector(&g_ScratchPadVectors[0], FIXED_MUL(rsin(i << 7), s_Magic113OrbitRadius), FIXED_MUL(rcos(i << 7), s_Magic113OrbitRadius), 0);
+            setVector(&g_ScratchPadVectors[0], FIXED_MUL(rsin(i << 7), s_BMagicNotingRadius), FIXED_MUL(rcos(i << 7), s_BMagicNotingRadius), 0);
             RotTransPers(&g_ScratchPadVectors[0], (long*)&prim->x1, &depth, &flag);
             setRGB0(prim, 240, 170, 200);
             if (TASK(PartyMember)->header.step == 2) {
@@ -246,36 +258,39 @@ MATCH void func_801EF944(void) {
     GFX_ADD_DITHERED_DRAW_MODE(BMAGIC_LAYER_BEHIND_BATTLERS, tpage);
 }
 
-MATCH void func_801EFC28(void) {
-    SYS_DISPATCH_BYTE(D_801F0BC0, TASK(PartyMember)->header.step);
-    BMAGIC_DRAW_IF_ALIVE(func_801EFDA0);
+/* func_801EFC28 */
+MATCH void BMagic_NotingStarUpdate(void) {
+    SYS_DISPATCH_BYTE(g_BMagicNotingStarSteps, TASK(PartyMember)->header.step);
+    BMAGIC_DRAW_IF_ALIVE(BMagic_NotingDrawStar);
 }
 
-MATCH void func_801EFCA0(void) {
+/* func_801EFCA0 */
+MATCH void BMagic_NotingStarGrow(void) {
     u8 count;
 
     count                     = TASK(PartyMember)->unk_09 + 1;
     TASK(PartyMember)->unk_09 = count;
     if ((count & BYTE_MASK) == 0x28) {
-        g_BattleEffectBattler->param.unk_0B = 4;
+        g_BattleEffectBattler->param.unk_0B = BMAGIC_NOTING_STAGE_STAR;
         TASK(PartyMember)->header.step += 1;
     }
 }
 
-MATCH void func_801EFD00(void) {
+/* func_801EFD00 */
+MATCH void BMagic_NotingStarHold(void) {
     PartyMember* active;
     PartyMember* work;
 
-    MAGIC113_ADVANCE_AT_ACTIVE_PARAM(132);
+    BMAGIC_NOTING_ADVANCE_AT_STAGE(BMAGIC_NOTING_STAGE_RELEASE);
 }
 
-MATCH void func_801EFD40(void) {
+/* func_801EFD40 */
+MATCH void BMagic_NotingStarFade(void) {
     Effect_CountUpTimer();
 }
 
-/* Draw the magic113 outline as five line segments between the corner angles of D_801F0BB8, each
- * growing over eight steps of the effect size; in step 2 they turn semi-transparent and fade. */
-MATCH void func_801EFDA0(void) {
+/* func_801EFDA0 */
+MATCH void BMagic_NotingDrawStar(void) {
     LINE_F2* prim;
     long     depth;
     long     flag;
@@ -298,12 +313,12 @@ MATCH void func_801EFDA0(void) {
             if (TASK(PartyMember)->header.step == 2) {
                 SetSemiTrans(prim, 1);
             }
-            g_ScratchPadVectors[0].vx = FIXED_MUL(rsin(D_801F0BB8[i] * 273), 288);
-            g_ScratchPadVectors[0].vy = FIXED_MUL(rcos(D_801F0BB8[i] * 273), 288);
+            g_ScratchPadVectors[0].vx = FIXED_MUL(rsin(g_BMagicNotingStarCorners[i] * 273), 288);
+            g_ScratchPadVectors[0].vy = FIXED_MUL(rcos(g_BMagicNotingStarCorners[i] * 273), 288);
             g_ScratchPadVectors[0].vz = 0;
             RotTransPers(&g_ScratchPadVectors[0], (long*)&prim->x0, &depth, &flag);
-            g_ScratchPadVectors[1].vx = FIXED_MUL(rsin(D_801F0BB8[i + 1] * 273), 288);
-            g_ScratchPadVectors[1].vy = FIXED_MUL(rcos(D_801F0BB8[i + 1] * 273), 288);
+            g_ScratchPadVectors[1].vx = FIXED_MUL(rsin(g_BMagicNotingStarCorners[i + 1] * 273), 288);
+            g_ScratchPadVectors[1].vy = FIXED_MUL(rcos(g_BMagicNotingStarCorners[i + 1] * 273), 288);
             setVector(&g_ScratchPadVectors[1], g_ScratchPadVectors[0].vx + ((g_ScratchPadVectors[1].vx - g_ScratchPadVectors[0].vx) / 8) * length,
                       g_ScratchPadVectors[0].vy + ((g_ScratchPadVectors[1].vy - g_ScratchPadVectors[0].vy) / 8) * length, 0);
             RotTransPers(&g_ScratchPadVectors[1], (long*)&prim->x1, &depth, &flag);
@@ -318,30 +333,34 @@ MATCH void func_801EFDA0(void) {
     GFX_ADD_DITHERED_DRAW_MODE(BMAGIC_LAYER_BEHIND_BATTLERS, tpage);
 }
 
-MATCH void func_801F0140(void) {
-    SYS_DISPATCH_BYTE(D_801F0BCC, TASK(PartyMember)->header.step);
-    BMAGIC_DRAW_IF_ALIVE(func_801F02CC);
+/* func_801F0140 */
+MATCH void BMagic_NotingWallUpdate(void) {
+    SYS_DISPATCH_BYTE(g_BMagicNotingWallSteps, TASK(PartyMember)->header.step);
+    BMAGIC_DRAW_IF_ALIVE(BMagic_NotingDrawWall);
 }
 
-MATCH void func_801F01B8(void) {
+/* func_801F01B8 */
+MATCH void BMagic_NotingWallRise(void) {
     u8 count;
 
     count                     = TASK(PartyMember)->unk_09 + 1;
     TASK(PartyMember)->unk_09 = count;
     if ((count & BYTE_MASK) == 0x31) {
-        g_BattleEffectBattler->param.unk_0B = 5;
+        g_BattleEffectBattler->param.unk_0B = BMAGIC_NOTING_STAGE_WALL;
         TASK(PartyMember)->header.step += 1;
     }
 }
 
-MATCH void func_801F0218(void) {
-    if (g_BattleEffectBattler->param.unk_0B == 0x84) {
+/* func_801F0218 */
+MATCH void BMagic_NotingWallHold(void) {
+    if (g_BattleEffectBattler->param.unk_0B == BMAGIC_NOTING_STAGE_RELEASE) {
         SND_SEPlay(EMI_SE_ID(SND_BANK_COMMON, 0x03));
         TASK(PartyMember)->header.step += 1;
     }
 }
 
-MATCH void func_801F026C(void) {
+/* func_801F026C */
+MATCH void BMagic_NotingWallFade(void) {
     PartyMember* work;
     u8           next;
 
@@ -354,9 +373,8 @@ MATCH void func_801F026C(void) {
     }
 }
 
-/* Draw the magic113 wall as up to 32 shaded quads rising from the ring, each one cell-sorted at
- * its own outer corner; the height falls off over the last 16 and flickers while it is full. */
-MATCH void func_801F02CC(void) {
+/* func_801F02CC */
+MATCH void BMagic_NotingDrawWall(void) {
     POLY_G4* prim;
     long     depth;
     long     flag;
@@ -414,17 +432,19 @@ MATCH void func_801F02CC(void) {
     GFX_ADD_DITHERED_DRAW_MODE(BMAGIC_LAYER_OVER_BATTLERS, tpage);
 }
 
-MATCH void func_801F0764(void) {
+/* func_801F0764 */
+MATCH void BMagic_NotingActorUpdate(void) {
     GFX_AddDitheredDrawMode(BMAGIC_LAYER_OVER_BATTLERS, getTPage(TPAGE_DEPTH_8BIT, TPAGE_ABR_ADD, 320, 256));
     g_Scripts = BMAGIC_SCRIPT_TABLE;
-    SYS_DISPATCH_BYTE(D_801F0BD8, TASK(PartyMember)->header.step);
+    SYS_DISPATCH_BYTE(g_BMagicNotingActorSteps, TASK(PartyMember)->header.step);
     g_Scripts = AREA_SCRIPT_TABLE;
     GFX_AddDitheredDrawMode(BMAGIC_LAYER_OVER_BATTLERS, getTPage(TPAGE_DEPTH_8BIT, TPAGE_ABR_HALF, 320, 256));
 }
 
 #include "overlays/bmagic/shared/Effect_CountDownTimerStep.h"
 
-MATCH void func_801F08B4(void) {
+/* func_801F08B4 */
+MATCH void BMagic_NotingActorPlace(void) {
     PartyMember* task;
     s8           tint;
 
@@ -461,7 +481,8 @@ MATCH void func_801F08B4(void) {
     Script_Select(TASK(PartyMember)->param.unk_0B);
 }
 
-MATCH void func_801F0A80(void) {
+/* func_801F0A80 */
+MATCH void BMagic_NotingActorPlay(void) {
     u8 value;
 
     if (Script_AnimStepOnce() & BYTE_MASK) {

@@ -25,7 +25,7 @@ MATCH void BMagic_GloomInit(void) {
     work->pos.z.fixed  = g_BattleSelectedActor->pos.z.fixed;
     work->param.unk_0B = 0;
     TASK(PartyMember)->header.mode += 1;
-    slot                               = Battle_AllocEffect(1, 88) & BYTE_MASK;
+    slot                               = Battle_AllocEffect(1, BMAGIC_EFFECT_GLOOM) & BYTE_MASK;
     target                             = TASK(PartyMember);
     g_BattleEffects[slot].header.mode  = 0;
     g_BattleEffects[slot].arg.unk_09   = 8;

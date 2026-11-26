@@ -31,7 +31,7 @@ MATCH void BMagic_MeteorStrikeInit(void) {
     TASK(PartyMember)->param.unk_0B = 0;
     TASK(PartyMember)->unk_09       = 0x10;
     TASK(PartyMember)->header.mode += 1;
-    slot                               = Battle_AllocEffect(1, 0x5F) & BYTE_MASK;
+    slot                               = Battle_AllocEffect(1, BMAGIC_EFFECT_METEOR_STRIKE) & BYTE_MASK;
     g_BattleEffects[slot].target.party = TASK(PartyMember);
     g_BattleEffects[slot].header.mode  = 0;
     TASK(PartyMember)->param.unk_0B += 1;

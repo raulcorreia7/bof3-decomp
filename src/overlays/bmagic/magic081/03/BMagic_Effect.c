@@ -66,7 +66,7 @@ MATCH void func_801EEEDC(void) {
     PartyMember* saved;
     u8           index;
 
-    index                               = Battle_AllocEffect(1, 0x42);
+    index                               = Battle_AllocEffect(1, 66);
     published                           = TASK(PartyMember);
     g_BattleEffects[index].header.mode  = 0;
     saved                               = TASK(PartyMember);
