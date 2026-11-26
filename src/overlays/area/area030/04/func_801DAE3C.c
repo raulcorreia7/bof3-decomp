@@ -5,8 +5,8 @@
  * byte 0x03 of the scratchpad work object. */
 MATCH void func_801DAE3C(void) {
     if (g_AreaCameraMoving == 0) {
-        g_AreaCameraSpeed   = 0x40;
-        g_AreaScrollTargetY = TO_COORD(60);
+        g_AreaCameraSpeed              = 0x40;
+        g_AreaScrollTargetCoordY.fixed = TO_COORD(60);
         TASK(Actor)->unk_03 += 1;
     }
 }

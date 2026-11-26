@@ -38,7 +38,7 @@ MATCH void func_801EEC84(void) {
     g_BattleEffects[index & BYTE_MASK].unk_06       = 1;
     g_BattleEffects[index & BYTE_MASK].header.mode  = 0;
     g_BattleEffects[index & BYTE_MASK].header.step  = 0;
-    g_BattleEffects[index & BYTE_MASK].step_index   = 84;
+    g_BattleEffects[index & BYTE_MASK].effect_type  = 84;
     g_BattleEffects[index & BYTE_MASK].target.party = work;
     TASK(PartyMember)->param.unk_0B += 1;
     g_BattleEffectBattler->header.flags |= PARTY_MEMBER_FLAG_HANDLER_BUSY;

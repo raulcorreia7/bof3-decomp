@@ -23,7 +23,7 @@ MATCH void Battle_StartEscapeScroll(void) {
     value = ((u8*)g_BattleScrollDeltas)[speed_offset + 1];
     *(u16*)&g_AreaTargetCellY += (s8)value;
     if (g_Battle.ui_step == 2) {
-        g_AreaCameraHeightDelta = (((((s32 (*)(s32, s32))Area_HeightSample)(g_AreaScrollTargetX, g_AreaScrollTargetY) - g_AreaCameraHeight) << 16) >> 21);
+        g_AreaCameraHeightDelta = (((((s32 (*)(s32, s32))Area_HeightSample)(g_AreaScrollTargetCoordX.fixed, g_AreaScrollTargetCoordY.fixed) - g_AreaCameraHeight) << 16) >> 21);
     } else {
         g_AreaCameraHeightDelta = 0;
     }

@@ -32,7 +32,7 @@ MATCH void BMagic_SpawnBurnFlames(void) {
     WorldPos_Copy(&task->pos, &actor->pos);
     task->param.unk_0B = 0;
     for (i = 0; i < 8; i++) {
-        slot                               = Battle_AllocEffect(1, 0x2F);
+        slot                               = Battle_AllocEffect(1, 47);
         work                               = TASK(PartyMember);
         g_BattleEffects[slot].arg.unk_09   = (i + 1) * 4;
         g_BattleEffects[slot].target.party = work;

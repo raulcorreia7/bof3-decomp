@@ -26,16 +26,21 @@ typedef struct BMagicAccessionStageSteps {
 } BMagicAccessionStageSteps;
 
 /* The palette row the battle load copies. */
-extern BattlePanel               D_80148332[];
+extern BattlePanel D_80148332[];
 /* The panel x offsets by scroll direction. */
-extern s8                        D_801EAEA4[];
+extern s8          D_801EAEA4[];
 /* The panel x and y offsets of each battler facing, two bytes a facing. */
-extern s8                        D_801EB0B0[];
-extern s8                        D_801EB0B1[];
+extern s8          D_801EB0B0[];
+extern s8          D_801EB0B1[];
 /* The staged encounter origin and ground height. */
-extern s32                       D_801EC364;
-extern s32                       D_801EC368;
-extern s32                       D_801EC36C;
+extern s32         D_801EC364;
+extern s32         D_801EC368;
+extern s32         D_801EC36C;
+/* func_801EEE38 */
+void               BMagic_AccessionSoloUpdate(void);
+/* func_801EF318 */
+void               BMagic_AccessionMergeUpdate(void);
+
 /* D_801EEC10 */
 extern BMagicAccessionStageSteps g_BMagicAccessionSoloSteps;
 /* D_801EEC24 */

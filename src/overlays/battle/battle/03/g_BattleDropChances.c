@@ -21,7 +21,7 @@ BattleEffectModes g_BattleEffectModes = {
 };
 
 /* 0x801D0CD0: mode 0 handler (Battle_RunBattlerEffect) dispatches the queued
- * slot's handler index (+0x05) here; 19 handlers, indices 0..0x12. */
+ * slot's effect_type (+0x05) here; 19 handlers, indices 0..0x12. */
 /* D_801D0CD0 */
 BattleBattlerEffectSteps g_BattleBattlerEffectSteps = {
     (Callback)func_801E5AEC,
@@ -46,7 +46,7 @@ BattleBattlerEffectSteps g_BattleBattlerEffectSteps = {
 };
 
 /* 0x801D0D1C: mode 1 handler (Battle_RunMagicEffect) dispatches the queued
- * slot's handler index (+0x05) here; 110 handlers. */
+ * slot's effect_type (+0x05) here; 110 handlers; BMagicEffectType names the used indices. */
 /* D_801D0D1C */
 BattleMagicEffectSteps g_BattleMagicEffectSteps = {
     (Callback)func_801E5AEC, (Callback)func_801EF2CC,       (Callback)func_800AE788, (Callback)func_801EF75C, (Callback)func_801EEF08, (Callback)func_801EF56C, (Callback)func_801EEE00,
@@ -68,7 +68,7 @@ BattleMagicEffectSteps g_BattleMagicEffectSteps = {
 };
 
 /* 0x801D0ED4: mode 3 handler (Battle_RunBossEffect) dispatches the queued
- * slot's handler index (+0x05) here; eight handlers. */
+ * slot's effect_type (+0x05) here; eight handlers. */
 /* D_801D0ED4 */
 BattleBossEffectSteps g_BattleBossEffectSteps = {
     (Callback)func_801E5AEC, (Callback)func_801EEE64, (Callback)func_800C1BEC, (Callback)func_800C1EA0,

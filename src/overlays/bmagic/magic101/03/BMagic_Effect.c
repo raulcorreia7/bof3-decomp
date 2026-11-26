@@ -38,7 +38,7 @@ MATCH void func_801EECCC(void) {
     TASK(PartyMember)->header.mode += 1;
     counter = 0;
     do {
-        slot                               = Battle_AllocEffect(1, 0x1B) & BYTE_MASK;
+        slot                               = Battle_AllocEffect(1, 27) & BYTE_MASK;
         g_BattleEffects[slot].target.party = TASK(PartyMember);
         g_BattleEffects[slot].header.mode  = 0;
         g_BattleEffects[slot].unk_04       = counter;

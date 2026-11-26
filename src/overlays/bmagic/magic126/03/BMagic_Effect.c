@@ -41,7 +41,7 @@ MATCH void BMagic_ShadowBreathInit(void) {
     TASK(PartyMember)->unk_09       = 0;
     TASK(PartyMember)->header.mode += 1;
     for (i = 0; i < BMAGIC_SHADOW_BREATH_ORB_COUNT; i++) {
-        slot                               = Battle_AllocEffect(1, 78);
+        slot                               = Battle_AllocEffect(1, BMAGIC_EFFECT_SHADOW_BREATH);
         g_BattleEffects[slot].target.party = TASK(PartyMember);
         g_BattleEffects[slot].header.mode  = BMAGIC_SHADOW_BREATH_EFFECT_ORB;
         g_BattleEffects[slot].unk_0B       = i;
@@ -367,11 +367,11 @@ MATCH void BMagic_ShadowBreathOrbBurst(void) {
 
     if (TASK(PartyMember)->param.unk_0B == 0) {
         SND_SEQueueSelection(EMI_SE_ID(SND_BANK_COMMON, 0x01));
-        slot                               = Battle_AllocEffect(1, 78);
+        slot                               = Battle_AllocEffect(1, BMAGIC_EFFECT_SHADOW_BREATH);
         g_BattleEffects[slot].target.party = g_BattleEffectBattler;
         g_BattleEffects[slot].header.mode  = BMAGIC_SHADOW_BREATH_EFFECT_GLOW;
         g_BattleEffectBattler->param.unk_0B += 1;
-        slot                               = Battle_AllocEffect(1, 78);
+        slot                               = Battle_AllocEffect(1, BMAGIC_EFFECT_SHADOW_BREATH);
         g_BattleEffects[slot].target.party = g_BattleEffectBattler;
         g_BattleEffects[slot].header.mode  = BMAGIC_SHADOW_BREATH_EFFECT_PILLAR;
         g_BattleEffects[slot].arg.unk_09   = 46;

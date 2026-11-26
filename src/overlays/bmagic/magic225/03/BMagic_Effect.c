@@ -31,7 +31,7 @@ MATCH void BMagic_TemptationInit(void) {
     TASK(PartyMember)->param.unk_0B = 0;
     TASK(PartyMember)->unk_09       = 24;
     TASK(PartyMember)->header.mode += 1;
-    slot                               = Battle_AllocEffect(1, 101) & BYTE_MASK;
+    slot                               = Battle_AllocEffect(1, BMAGIC_EFFECT_TEMPTATION) & BYTE_MASK;
     work                               = TASK(PartyMember);
     g_BattleEffects[slot].header.mode  = 0;
     g_BattleEffects[slot].target.party = work;

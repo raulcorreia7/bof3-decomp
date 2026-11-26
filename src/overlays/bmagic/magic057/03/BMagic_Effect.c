@@ -58,7 +58,7 @@ MATCH void func_801EEEB0(void) {
 
     if (g_FrameCount & 1) {
         if (TASK(PartyMember)->unk_09 < 0x20) {
-            slot = Battle_AllocEffect(1, 0x41) & BYTE_MASK;
+            slot = Battle_AllocEffect(1, 65) & BYTE_MASK;
             if (slot != 0xFF) {
                 g_BattleEffects[slot].header.mode  = 0;
                 g_BattleEffects[slot].header.step  = 0;

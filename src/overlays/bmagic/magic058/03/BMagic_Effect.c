@@ -35,7 +35,7 @@ MATCH void func_801EED30(void) {
     work->param.unk_0B        = 0;
     work->pos.z.fixed         = z;
     TASK(PartyMember)->header.mode += 1;
-    slot                                           = Battle_AllocEffect(1, 0x3F);
+    slot                                           = Battle_AllocEffect(1, 63);
     g_BattleEffects[slot & BYTE_MASK].target.party = TASK(PartyMember);
     g_BattleEffects[slot & BYTE_MASK].header.mode  = 0;
     TASK(PartyMember)->param.unk_0B += 1;
