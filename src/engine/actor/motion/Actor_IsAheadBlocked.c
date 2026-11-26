@@ -1,6 +1,8 @@
-#include "game_00.h"
+#include "engine/game/00/game_00.h"
 
-MATCH bool func_801A1AE4(Actor* arg) {
+/* func_801A1AE4 */
+/* Returns whether the area cell test rejects the cells ahead or an actor or party member stands there. */
+MATCH bool Actor_IsAheadBlocked(Actor* arg) {
     u8  route;
     s32 pos_x;
     s32 pos_y;

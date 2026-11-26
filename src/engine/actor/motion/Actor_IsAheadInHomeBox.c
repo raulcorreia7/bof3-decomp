@@ -1,6 +1,8 @@
-#include "game_00.h"
+#include "engine/game/00/game_00.h"
 
-MATCH bool func_801A1A58(Actor* actor) {
+/* func_801A1A58 */
+/* Returns whether the cell ahead lies inside the actor's half extents around its spawn position. */
+MATCH bool Actor_IsAheadInHomeBox(Actor* actor) {
     /* FAKE: entity base in a2. */
     FAKE_REG(Actor*, entity, "a2");
     /* FAKE: x delta in v0. */

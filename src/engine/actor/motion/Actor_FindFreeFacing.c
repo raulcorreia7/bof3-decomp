@@ -1,6 +1,8 @@
-#include "game_00.h"
+#include "engine/game/00/game_00.h"
 
-MATCH u8 func_801A2A04(Actor* entity) {
+/* func_801A2A04 */
+/* Turns by two facings up to four times to the first one with a free cell ahead; returns it or 0xFF. */
+MATCH u8 Actor_FindFreeFacing(Actor* entity) {
     u8 saved;
     u8 i;
 
@@ -8,7 +10,7 @@ MATCH u8 func_801A2A04(Actor* entity) {
     i     = 0;
 
     while (i < 4u) {
-        if ((func_801A1AE4(entity) & BYTE_MASK) == 0u) {
+        if ((Actor_IsAheadBlocked(entity) & BYTE_MASK) == 0u) {
             break;
         }
         TASK(Actor)->direction = (TASK(Actor)->direction + 2) & 0x7;

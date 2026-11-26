@@ -1,6 +1,8 @@
-#include "game_00.h"
+#include "engine/game/00/game_00.h"
 
-MATCH void func_801A1384(void* entity) {
+/* func_801A1384 */
+/* Mode 4: runs the route script row of the area, starting its moves and fades. */
+MATCH void Actor_RunRoute(void* entity) {
     u8* rec;
     u8* sub;
     u8  sel;
@@ -24,7 +26,7 @@ MATCH void func_801A1384(void* entity) {
         if (mode != 0) {
             sel = Script_Run(sub, (*(s32**)((u8*)g_AreaLoads[g_GameAreaId] + 0x10))[rec[0x77]]);
             if (rec[0x75] != 0) {
-                func_801A275C(sub);
+                Actor_StartRouteWait(sub);
             }
             if (sel == GAME_NONE) {
                 return;
@@ -37,7 +39,7 @@ MATCH void func_801A1384(void* entity) {
                 Actor* spad;
                 TASK(Actor)->unk_0A = (0x10 / rate);
                 rec[0x7B]--;
-                if (((TASK(Actor)->option_flags & ACTOR_OPT_NO_TARGET) == 0) && ((func_801A3AC8((Actor*)rec) << 0x18) != 0)) {
+                if (((TASK(Actor)->option_flags & ACTOR_OPT_NO_TARGET) == 0) && ((Actor_IsAheadOccupied((Actor*)rec) << 0x18) != 0)) {
                     TASK(Actor)->direction &= 7;
                     rec[0x76] = savedFlag;
                     rec[0x7B] = 0;
@@ -55,17 +57,17 @@ MATCH void func_801A1384(void* entity) {
             }
             if ((rec[0x74] & ACTOR_INTERACTION_FADE_WHITE) != 0) {
                 TASK(Actor)->unk_03      = TASK(Actor)->header.mode;
-                TASK(Actor)->header.mode = 8;
+                TASK(Actor)->header.mode = ACTOR_MODE_FADE_WHITE;
                 TASK(Actor)->unk_04      = 0;
             }
             if ((rec[0x74] & ACTOR_INTERACTION_FADE_BLACK) != 0) {
                 TASK(Actor)->unk_03      = TASK(Actor)->header.mode;
-                TASK(Actor)->header.mode = 9;
+                TASK(Actor)->header.mode = ACTOR_MODE_FADE_BLACK;
                 TASK(Actor)->unk_04      = 0;
             }
         }
     } else {
-        if (((TASK(Actor)->option_flags & ACTOR_OPT_NO_TARGET) == 0) && ((func_801A3AC8((Actor*)rec) << 0x18) != 0)) {
+        if (((TASK(Actor)->option_flags & ACTOR_OPT_NO_TARGET) == 0) && ((Actor_IsAheadOccupied((Actor*)rec) << 0x18) != 0)) {
             TASK(Actor)->direction &= 7;
             rec[0x74]          = rec[0x74] | ACTOR_INTERACTION_MOVING | ACTOR_INTERACTION_SCRIPT_REQUEST;
             TASK(Actor)->timer = 0;

@@ -128,13 +128,35 @@ Game_EnterArea = { addr = 0x8019FAA0, type = "func", source = "Enters an area: k
 Area_RequestLinkAtCell = { addr = 0x801A0048, type = "func", source = "Finds the area link at a map cell, or the first choice whose scene flag is set, and makes its destination the pending area change; returns true when no link is there." }
 Area_EncounterFindZoneOf = { addr = 0x801A0490, type = "func", source = "Returns the encounter zone entry of the given area table index whose bounds contain the cell." }
 Actor_RunInteractions = { addr = 0x801A06D8, type = "func", source = "Runs every actor's pending interaction: turns it to face the leader, dispatches its selector script and records the facing it came from." }
+Actor_RunWander = { addr = 0x801A0AE4, type = "func", source = "Mode 0 of g_ActorModes: counts the leg length in the move counter, picks a random facing at its end and turns to the first free one." }
+Actor_RunFlee = { addr = 0x801A0CFC, type = "func", source = "Mode 1 of g_ActorModes: walks as Actor_RunWander, but picks the facing farthest from the leader (Actor_PickFleeFacing) while the leader is inside the half extents of its box." }
+Actor_RunChase = { addr = 0x801A0F24, type = "func", source = "Mode 2 of g_ActorModes: walks as Actor_RunWander, but picks the facing nearest to the leader (Actor_PickChaseFacing) while the leader is inside the half extents of its box." }
+Actor_RunWanderHome = { addr = 0x801A114C, type = "func", source = "Mode 3 of g_ActorModes: walks as Actor_RunWander, but changes facing only where Actor_IsAheadInHomeBox holds for the cell ahead, else stands." }
+Actor_RunRoute = { addr = 0x801A1384, type = "func", source = "Mode 4 of g_ActorModes: runs Script_Run on row unk_77 of the area's route table; a script wait switches to mode 5, the fade flags to modes 8 and 9." }
+Actor_RunRequestScript = { addr = 0x801A1A24, type = "func", source = "Mode 6 of g_ActorModes: sets ACTOR_INTERACTION_SCRIPT_REQUEST each frame while unk_06 is not 8; Actor_SpawnSearchSpot sets this mode." }
+Actor_IsAheadInHomeBox = { addr = 0x801A1A58, type = "func", source = "Tests the cell ahead of the actor against the box of half_width and half_height around walk_dest_x and walk_dest_y." }
+Actor_IsAheadBlocked = { addr = 0x801A1AE4, type = "func", source = "True when the area cell test func_801A1BC0 rejects the cells ahead, or Actor_FindInRange or Game_GetPartySize finds an occupant there." }
 Area_CellIsBlocked = { addr = 0x801A20F8, type = "func", source = "Reports whether a map cell's terrain blocks movement." }
+Actor_PaceFree = { addr = 0x801A225C, type = "func", source = "Steps 0 to 3 of g_ActorPaceSteps: on a move request sets the timer to 0x20 over the speed and returns 1, so the actor never waits on the party." }
+Actor_PaceByPartyStep = { addr = 0x801A22CC, type = "func", source = "Step 4 of g_ActorPaceSteps: adds 1 to the move counter when bit 0 of g_EncounterSteps differs from the copy Actor_RunInteractions took." }
+Actor_PaceByPartyStepDouble = { addr = 0x801A239C, type = "func", source = "Step 5 of g_ActorPaceSteps: adds 2 to the move counter when bit 0 of g_EncounterSteps differs from the copy Actor_RunInteractions took." }
+Actor_PaceByPartyStepBit1 = { addr = 0x801A246C, type = "func", source = "Step 6 of g_ActorPaceSteps: adds 1 to the move counter when bit 1 of g_EncounterSteps differs from the copy Actor_RunInteractions took." }
 Area_SetXFixed = { addr = 0x801A253C, type = "func", source = "the body stores into g_Task->pos.x.fixed" }
+Actor_RunRouteWait = { addr = 0x801A271C, type = "func", source = "Mode 5 of g_ActorModes: counts byte 0x75 down (set by the script group SET_UNK_01), raising the script request bit each frame, then restores unk_03 as the mode." }
+Actor_StartRouteWait = { addr = 0x801A275C, type = "func", source = "Stores the mode in unk_03 and sets mode 5 (Actor_RunRouteWait); Actor_RunRoute calls it when the script left a wait in byte 0x75." }
+Actor_RunMode = { addr = 0x801A2788, type = "func", source = "Runs the g_ActorModes handler of the mode byte the script operand gives on g_CurrentActor; script control op SELECT_ROUTE calls it." }
+Actor_FindFreeFacing = { addr = 0x801A2A04, type = "func", source = "Rotates the actor's facing by 2 up to four times until Actor_IsAheadBlocked is clear; returns the facing, or 0xFF when all four are blocked." }
 Actor_TurnRandom = { addr = 0x801A2C10, type = "func", source = "Turns the current actor to a random diagonal or odd facing and flags the record." }
+Actor_PickFleeFacing = { addr = 0x801A2C94, type = "func", source = "Flee facing of Actor_RunFlee: inside the box takes Actor_PickFacingByLeaderDistance farthest, else Actor_TurnRandom and Actor_FindFreeFacing." }
+Actor_PickChaseFacing = { addr = 0x801A2DB4, type = "func", source = "Chase facing of Actor_RunChase: inside the box takes Actor_PickFacingByLeaderDistance nearest, else Actor_TurnRandom and Actor_FindFreeFacing." }
+Actor_PickFacingByLeaderDistance = { addr = 0x801A2ED4, type = "func", source = "Scores the four facings of one parity by the distance from the cell ahead to the leader's position plus its velocity; takes the smallest when route_step is 0, else the largest." }
+Actor_RunAttach = { addr = 0x801A3410, type = "func", source = "Mode 7 of g_ActorModes: copies position and angles of the actor slot Script_FindSlot(unk_18) and adds the offset row unk_1C, then runs Actor_RunRoute; script op 0xF8 writes unk_18 and unk_1C." }
 Game_FadeDispatchWhite = { addr = 0x801A3594, type = "func", source = "calls the fade-to-white step selected by the step byte" }
 Game_FadeStartWhite = { addr = 0x801A35D8, type = "func", source = "Step 0 of the D_801C8434 table, followed by func_801A3648: starts a white palette fade (GFX_PaletteAllocFade 0x1F, 0x1F, 0x1F) on the running task and clears ACTOR_FLAG_HIDDEN." }
 Game_FadeDispatchBlack = { addr = 0x801A37D4, type = "func", source = "calls the fade-to-black step selected by the step byte" }
 Game_FadeStartBlack = { addr = 0x801A3818, type = "func", source = "Step 0 of the D_801C843C table, followed by func_801A386C: starts a black palette fade (GFX_PaletteAllocFade 0, 0, 0) on the running task." }
+Actor_IsAheadOccupied = { addr = 0x801A3AC8, type = "func", source = "True when Actor_FindInRange finds an actor or Game_GetPartySize finds a party member on the cell one facing step ahead." }
+Actor_RunTurn = { addr = 0x801A3B7C, type = "func", source = "Mode 10 of g_ActorModes: waits unk_0A frames, then turns one facing toward unk_79 every 3 frames; on arrival restores unk_03 as the mode and starts the move." }
 Actor_TurnRampStep = { addr = 0x801A3D1C, type = "func", source = "Applies one frame of the current party actor's turn ramp to its angles." }
 Area_RunSetupStream = { addr = 0x801A3E50, type = "func", source = "Runs the area setup stream of an AreaLoad handler: clears the four g_PartyActors rows, runs Area_RunSetupRecords over the stream and clears the unused g_Actors entries." }
 Area_RunSetupRecords = { addr = 0x801A3F3C, type = "func", source = "the body stores into g_ScenarioState.scenario_id" }
@@ -411,8 +433,8 @@ D_801C81CC = { addr = 0x801C81CC, size = 0x10, source = "The four mode handlers 
 g_TaskModes = { addr = 0x801C81DC, type = "Callback", size = 0x1A4, source = "callbacks selected by the current task mode" }
 s_EntityModes = { addr = 0x801C8380, size = 0x4, source = "Entity mode byte by scene entry mode, read by func_8019FF88." }
 D_801C8384 = { addr = 0x801C8384, size = 0x38, source = "The 28 entity seed values func_801A02E8 compares against the entity's seed byte." }
-D_801C83BC = { addr = 0x801C83BC, size = 0x1C, source = "The seven actor step handlers func_801A0AE4 and the rows it builds run by the actor's header.step; the first four share func_801A225C." }
-D_801C83D8 = { addr = 0x801C83D8, size = 0x2C, source = "The 11 object handlers func_801A06D8, func_801A2788 and the slus actor code run by g_Task->header.mode." }
+g_ActorPaceSteps = { addr = 0x801C83BC, source = "The pace handlers the mode handlers call with header.step before each move; rows 0 to 3 share Actor_PaceFree; one row per ActorPace." }
+g_ActorModes = { addr = 0x801C83D8, source = "The mode handlers of the field actor rows, run by header.mode: Actor_RunInteractions for g_Actors, func_8015A7E8 for g_PartyActors, and Actor_RunMode for the script op SELECT_ROUTE; one row per ActorMode." }
 s_EntityRouteIndices = { addr = 0x801C8404, size = 0x20, source = "The four route indices of each direction that func_801A27C4 walks." }
 g_ActorFacingAngles = { addr = 0x801C8424, size = 0x10, source = "The eight facing angles func_801A3080 picks by route type: 0x600 to 0xE00 in 0x200 steps, wrapping at the fifth entry; SYS_InitScratchpad seeds angle_z from it by direction." }
 D_801C842A = { addr = 0x801C842A, size = 0x1, alias = true, source = "The second half of the facing-angle table g_ActorFacingAngles from its fourth u16, used as an array by func_801A3080." }

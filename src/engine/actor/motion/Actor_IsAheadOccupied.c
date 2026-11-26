@@ -1,6 +1,8 @@
-#include "game_00.h"
+#include "engine/game/00/game_00.h"
 
-MATCH bool func_801A3AC8(Actor* record) {
+/* func_801A3AC8 */
+/* Returns whether another actor or a party member stands on the cell ahead. */
+MATCH bool Actor_IsAheadOccupied(Actor* record) {
     Actor* rec;
     u8     route;
     s32    x;

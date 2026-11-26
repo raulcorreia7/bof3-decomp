@@ -11,7 +11,7 @@ void func_801EEEF0(u32 row) {
     u32  battles;
     u32* battle_count;
 
-    fairy_count = (s8*)&g_SaveData.unk_C84[0x66];
+    fairy_count = &g_SaveData.fairy_count;
     row &= BYTE_MASK;
     fairies = *fairy_count;
     if ((s32)(row * 4) < fairies) {

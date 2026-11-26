@@ -113,8 +113,10 @@ typedef void (*AreaActionCallback)(s32 character_id, s32 index);
 /* D_801C7B74 */
 extern Step2                s_BattleScrollCellSteps[4];
 extern WorldMapRegion       g_WorldMapRegions[WORLD_MAP_REGION_COUNT];
-extern ActorStepCallback    D_801C83BC[7];
-extern ActorModeCallback    D_801C83D8[11];
+/* D_801C83BC */
+extern ActorStepCallback    g_ActorPaceSteps[ACTOR_PACE_COUNT];
+/* D_801C83D8 */
+extern ActorModeCallback    g_ActorModes[ACTOR_MODE_COUNT];
 extern ScenarioHandlers*    g_ScenarioHandlers[20];
 extern AreaHooks            g_AreaHooks;
 /* D_801C890C */

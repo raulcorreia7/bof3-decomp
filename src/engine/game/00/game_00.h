@@ -658,40 +658,19 @@ void    func_8019FF88(s32 entry_mode, s32 entry_index, s32 entry_flags);
 void    func_801A02E8(void);
 u8      func_801A0348(s16 map_x, s16 map_y);
 void    func_801A0380(s16 x, s16 y, u16 type);
-void    func_801A0AE4(Actor* record);
-void    func_801A0CFC(Actor* entity);
-void    func_801A0F24(Actor* record);
-void    func_801A114C(Actor* record);
-void    func_801A1384(void* entity);
 s32     func_801A17A0(u8* entry_record);
-void    func_801A1A24(u8* record);
-bool    func_801A1A58(Actor* actor);
 s32     func_801A1BC0(Actor* record);
 s32     func_801A1C5C(s32 x, s32 y, s32 route, s32 unused);
 s32     func_801A1ED8(s32 x, s32 y, s32 route, s32 unused);
 s32     func_801A21EC(s32 x, s32 y);
 s32     func_801A223C(s32 x, s32 y);
-s32     func_801A225C(s32 unused, s32 divisor, s32 flag_bits);
-s32     func_801A22CC(Actor* value_a, s32 value_b, u8 flag_bits);
-s32     func_801A239C(Actor* value_a, s32 value_b, u8 flag_bits);
-s32     func_801A246C(s32 value_a, s32 value_b, s32 flag_bits);
-void    func_801A271C(void* record);
 /* Kept (): retail callers load $a0 in the jal delay slot (`addiu a0,s0,116`) and the callee never reads it; with (void)
- * that instruction is dropped (Area_SetXFixed) or the frame shrinks by 8 bytes (func_801A1384). */
-void    func_801A275C(void* unused);
-void    func_801A2788(s32 step_index);
+ * that instruction is dropped (Area_SetXFixed) or the frame shrinks by 8 bytes (Actor_RunRoute). */
 void    func_801A27C4(Actor* entity);
-u8      func_801A2A04(Actor* entity);
 void    func_801A2AE4(Actor* entity, u8 route_flag);
-u8      func_801A2C94(Actor* actor);
-u8      func_801A2DB4(Actor* entity);
-u8      func_801A2ED4(Actor* entity, u8 route_step);
 void    func_801A3080(Actor* actor, u8 facing);
-void    func_801A3410(void* work_index);
 void    func_801A3648(void);
 void    func_801A386C(void);
-bool    func_801A3AC8(Actor* record);
-void    func_801A3B7C(Actor* entity);
 s8      func_801A79A4(s32 handler_x, s32 handler_y);
 s32     func_801A8714(void);
 s8      func_801A8728(s32 entry_x, s32 entry_y);
@@ -1282,7 +1261,7 @@ static inline void GameRunMapLoadHandshake(void) {
     Area_RunFrame();
 }
 
-/* Add the flag-selected step to the shared counter byte. */
+/* Adds step moves to the actor's move counter when bit 0 of g_EncounterSteps changed since the last actor update; with bit 1 set it sets the move timer while the counter is not 0. */
 static inline s32 Game_AddStepByFlag(s32 step, Actor* actor, s32 value_b, u8 flag_bits) {
     s32 bit0;
     s32 flags;
