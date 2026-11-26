@@ -36,13 +36,13 @@ MATCH void* func_801B5C54(void) {
                 if (COORD_FRAC(work->pos.x) == 0)
                     limit = (COORD_FRAC(work->pos.y) != 0);
             } else {
-                delta  = D_80181B00[work->direction * 2];
+                delta  = D_80181B00[work->direction][0];
                 origin = COORD_INT(work->pos.x);
                 if (delta == 1)
                     x = origin + 2;
                 else
                     x = origin + delta;
-                delta  = D_80181B01[work->direction * 2];
+                delta  = D_80181B00[work->direction][1];
                 origin = COORD_INT(work->pos.y);
                 if (delta == 1)
                     y = origin + 2;

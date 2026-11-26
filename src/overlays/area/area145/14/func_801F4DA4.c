@@ -16,13 +16,13 @@ MATCH u8 func_801F4DA4(u32 frame) {
     t       = elapsed;
     off     = ((s32)g_PartyActors[0].angle_z >> 7) & 0xC;
     limit   = D_801F5CDD[off];
-    dx      = D_80181B00[D_801F5CDC[off] * 2] << 16;
+    dx      = D_80181B00[D_801F5CDC[off]][0] << 16;
     mx      = elapsed;
     if (limit < t) {
         mx = limit;
     }
     x  = g_PartyActors[0].pos.x.fixed + dx * (u16)mx;
-    dy = D_80181B01[D_801F5CDC[off] * 2] << 16;
+    dy = D_80181B00[D_801F5CDC[off]][1] << 16;
     my = elapsed;
     if (limit < t) {
         my = limit;

@@ -38,9 +38,9 @@ NON_MATCHING u8 Script_OpsRunAppearance(void* sub, s32 target, u8 value) {
     switch (code[CUR(sub)]) {
         case ACTOR_SCRIPT_APPEARANCE_START_PALETTE_FADE:
             if (Actor_GetOwner() != 1) {
-                g_CurrentActor->unk_93 = GFX_PaletteAllocFade(g_Task, (code + CUR(sub))[1], (code + CUR(sub))[2], (code + CUR(sub))[3], (code + CUR(sub))[4]);
+                g_CurrentActor->unk_93 = GFX_PaletteAllocFade(TASK(void), (code + CUR(sub))[1], (code + CUR(sub))[2], (code + CUR(sub))[3], (code + CUR(sub))[4]);
             } else {
-                g_Game.current->palette_fade = GFX_PaletteAllocFade(g_Task, (code + CUR(sub))[1], (code + CUR(sub))[2], (code + CUR(sub))[3], (code + CUR(sub))[4]);
+                g_Game.current->palette_fade = GFX_PaletteAllocFade(TASK(void), (code + CUR(sub))[1], (code + CUR(sub))[2], (code + CUR(sub))[3], (code + CUR(sub))[4]);
             }
             CUR(sub) += 4;
             break;
@@ -155,7 +155,7 @@ NON_MATCHING u8 Script_OpsRunAppearance(void* sub, s32 target, u8 value) {
             }
             break;
         case ACTOR_SCRIPT_APPEARANCE_FREE_PALETTE_FADE:
-            GFX_PaletteFreeFadeTarget(g_Task);
+            GFX_PaletteFreeFadeTarget(TASK(void));
             break;
         case ACTOR_SCRIPT_APPEARANCE_TURN_TO_PARTY:
             cur  = TASK(Actor)->direction & 7;

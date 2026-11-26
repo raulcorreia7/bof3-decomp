@@ -381,10 +381,10 @@ extern s8                  D_80148656;         /* 0x80148656 */
 extern s8                  D_801490E0;         /* 0x801490E0 */
 extern u8*                 g_EncounterZones[]; /* the exe declares it as const EncounterZone lists; these units walk the bytes */
 extern Offset2             g_FacingOffsets[];  /* 0x80181AC0 */
-extern s8                  D_80181B00[];
-extern s8                  D_80181B01[];
-extern u8                  D_80181B1C[]; /* 0x80181B1C */
-extern u8                  D_80181B28[]; /* 0x80181B28 */
+extern s8                  D_80181B00[][2];    /* the x and y cell step of each facing */
+extern s8                  D_80181B01[];       /* the y column of D_80181B00, read flat by func_801B5C54 */
+extern u8                  D_80181B1C[];       /* 0x80181B1C */
+extern u8                  D_80181B28[];       /* 0x80181B28 */
 /* D_80181B70 */
 extern s16                 g_AreaClimbHeightOffsets[]; /* 0x80181B70 */
 extern const s32           D_80181CA8[30][2];

@@ -41,8 +41,8 @@ MATCH void Fishing_FishSwim(void) {
                 }
             }
             func_801E03F8();
-            TASK(FishingState)->state_2A = D_801E2331[TASK(FishingState)->counter_08 * 2];
-            Script_Request(D_801E2330[TASK(FishingState)->counter_08 * 2]);
+            TASK(FishingState)->state_2A = D_801E2330[TASK(FishingState)->counter_08][1];
+            Script_Request(D_801E2330[TASK(FishingState)->counter_08][0]);
             turn = Area_HeightSample(TASK(FishingState)->motion.unk_34 + TASK(FishingState)->pos_x * 0x10, TASK(FishingState)->y_38.pos_y + TASK(FishingState)->cursor_10 * 0x10);
             work = TASK(FishingState);
             if (work->bounce.half.key < turn) {

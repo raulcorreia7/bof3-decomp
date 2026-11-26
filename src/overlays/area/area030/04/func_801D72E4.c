@@ -9,7 +9,6 @@ NON_MATCHING void func_801D72E4(s16 panel_x, s16 panel_y) {
     u8  bar_index;
     u8  bar_count;
     u8  bar_slot;
-    s16 bar_y;
     s16 row_y;
     s32 offset;
     s32 count;
@@ -82,19 +81,17 @@ NON_MATCHING void func_801D72E4(s16 panel_x, s16 panel_y) {
     }
     bar_index = (u8)TASK(FishingState)->bounce_speed;
     if (bar_count != 0) {
-        bar_y = row_y;
         count = 0;
         do {
             value = D_801E2120[bar_index & BYTE_MASK];
             if (value != 0xFFFF) {
-                UI_TextDraw(panel_x + 6, bar_y, 0, TEXT_LENGTH_MAX, MESSAGE_TABLE_TEXT(AREA_MESSAGE_TABLE, value));
+                UI_TextDraw(panel_x + 6, row_y + count * 13, 0, TEXT_LENGTH_MAX, MESSAGE_TABLE_TEXT(AREA_MESSAGE_TABLE, value));
             }
             bar_index += 1;
             if ((u32)(bar_index & BYTE_MASK) >= 0x36U) {
                 bar_index = 0;
             }
             count += 1;
-            bar_y += 13;
         } while (count < bar_count);
     }
     UI_WindowDraw(panel_x & HALF_MASK, (panel_y + 6) & HALF_MASK, 242, 14, 0, CHARACTER_BLOCK->window_style);

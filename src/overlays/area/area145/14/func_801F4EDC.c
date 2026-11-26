@@ -24,12 +24,12 @@ MATCH u8 func_801F4EDC(s32 t, u32 stage) {
     actor    = &g_PartyActors[(u8)stage]; /* Unused: retail forms the actor index here. */
     elapsed  = t;
     duration = step->duration;
-    dx       = D_80181B00[step->heading * 2] << 16;
+    dx       = D_80181B00[step->heading][0] << 16;
     if (duration < elapsed) {
         moved_x = duration;
     }
     x       = g_PartyActors[(u8)stage].pos.x.fixed + dx * (u16)moved_x;
-    dy      = D_80181B01[step->heading * 2] << 16;
+    dy      = D_80181B00[step->heading][1] << 16;
     moved_y = t;
     if (duration < elapsed) {
         moved_y = duration;
