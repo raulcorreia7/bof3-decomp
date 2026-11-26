@@ -7,7 +7,8 @@ REF is TARGET@0xADDRESS; `--worklist` reads `tools/worklist.py --jsonl` lines. F
 body is tokenized and each edit class (CLASSES) proposes variants: one retyped local or parameter,
 an increment or compound-assignment form, one cast, one swapped statement or declaration, one
 swapped operand or comparison, one loop or if/else or ternary form, `break` for `return`, one local
-split or two merged, one statement moved within its run of plain statements. Each variant is
+split or two merged, one statement moved within its run of plain statements, every width
+combination of the integer parameters as an old-style definition. Each variant is
 compiled with `MATCH_SRC` into a private object and scored as `tools/match.sh --diff` scores it:
 differing rows. `--classes a-type,j-move` limits the classes. The tree is never written. One JSON line per
 variant that matches or has fewer rows than the draft goes to `--out`, with its class and diff;
@@ -28,7 +29,7 @@ import subprocess
 import sys
 import tempfile
 from concurrent.futures import ProcessPoolExecutor, as_completed
-from itertools import combinations
+from itertools import combinations, product
 from pathlib import Path
 
 from bof3.core.paths import ROOT
@@ -364,6 +365,31 @@ def g_retype(f: Function):
                         (t[f.close].end, t[f.body].start, "\n" + decls),
                     ),
                 )
+
+
+def g_params(f: Function):
+    """Every width combination of the integer parameters, as an old-style definition."""
+    t, params = f.toks, f.params()
+    ints = [p for p in params if t[p[0]].text in INTS and p[1] == p[0] + 1]
+    if not ints:
+        return
+    names = ", ".join(t[q[1]].text for q in params)
+    for widths in product(("s32", "u8", "s16", "u16"), repeat=len(ints)):
+        chosen = dict(zip(ints, widths, strict=True))
+        if all(chosen[p] == t[p[0]].text for p in ints):
+            continue
+        decls = "".join(
+            f"    {chosen.get(q) or f.span(q[0], q[1] - 1)} {t[q[1]].text};\n"
+            for q in params
+        )
+        label = ", ".join(f"{t[p[1]].text}: {w}" for p, w in chosen.items())
+        yield (
+            f"old-style {label}",
+            (
+                (t[f.paren].end, t[f.close].start, names),
+                (t[f.close].end, t[f.body].start, "\n" + decls),
+            ),
+        )
 
 
 def g_increment(f: Function):
@@ -833,6 +859,7 @@ CLASSES = {
     "h-return": g_return,
     "i-locals": g_locals,
     "j-move": g_move,
+    "k-params": g_params,
 }
 
 
@@ -848,7 +875,7 @@ def variants(text: str, classes=None):
                 if edit in seen:
                     continue
                 seen.add(edit)
-                if len(seen) > CAP:
+                if len(seen) > (4**4 if cls == "k-params" else CAP):
                     break
                 yield cls, label, edit
         except (IndexError, KeyError, RuntimeError, StopIteration, ValueError):
