@@ -10,7 +10,7 @@ constants and enums several records share; one block per record in table order (
 follow their struct: `ASSERT_OFFSET` in offset order, then `ASSERT_SIZE`.
 
 Every header that carries a guard names it from its target: `include/common/util.h` is
-`COMMON_UTIL_H`, a group-wide header `src/overlays/plchar/shared/Char_Foo.h` is `PLCHAR_CHAR_FOO_H`, and an image
+`COMMON_UTIL_H`, a group-wide header starts with `SHARED_`, so `src/overlays/plchar/shared/Char_Foo.h` is `SHARED_CHAR_FOO_H`, and an image
 header is `OVERLAY_<GROUP>_<ARCHIVE>_<SLOT>_H` from its target id, so `emi/world02/area104/14` is
 `OVERLAY_WORLD02_AREA104_14_H`. A shared body header has no guard.
 
