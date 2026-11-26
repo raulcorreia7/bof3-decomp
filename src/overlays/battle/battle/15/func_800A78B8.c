@@ -18,7 +18,7 @@ MATCH void func_800A78B8(void) {
         FIELD(u8, dst + count, 0x70u) = value;
         count++;
     }
-    if (D_800B6F60 > 0) {
+    if (D_800B6F60[0] > 0) {
         count = Battle_AppendComboIds(0, count);
         if (D_800B6F69 > 0) {
             count = Battle_AppendComboIds(5, count);
