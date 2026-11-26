@@ -52,11 +52,12 @@ local_locals() {
 base=${1:-}
 if [ -n "$base" ]; then
 	bad=0
-	# An added line that a removed line matches once the called names are dropped is a renamed call, not new.
+	# An added line that a removed line matches once the called names are dropped is a renamed call, not new
+	# (the byte view's rename from TASK_BYTES to SELF_BYTES is the one name change it also absorbs).
 	words_file=$(mktemp)
 	git diff -w -U0 "$base...HEAD" -- src include >"$words_file"
 	added=$(awk '
-		function key(s) { gsub(/[A-Za-z_][A-Za-z0-9_]*\(/, "(", s); gsub(/[ \t]+/, "", s); return s }
+		function key(s) { gsub(/[A-Za-z_][A-Za-z0-9_]*\(/, "(", s); gsub(/TASK_BYTES/, "SELF_BYTES", s); gsub(/[ \t]+/, "", s); return s }
 		NR == FNR { if ($0 ~ /^-[^-]/) pool[key(substr($0, 2))]++; next }
 		$0 ~ /^\+[^+]/ { k = key(substr($0, 2)); if (pool[k] > 0) pool[k]--; else print }
 	' "$words_file" "$words_file" || true)
