@@ -352,18 +352,19 @@ def locked(path):
 
     A waiter that gets the lock after the holder deleted the file opens the new one."""
     while True:
-        handle = open(path, "a", encoding="utf-8")
-        fcntl.flock(handle, fcntl.LOCK_EX)
-        with contextlib.suppress(FileNotFoundError):
-            if os.fstat(handle.fileno()).st_ino == os.stat(path).st_ino:
-                break
-        handle.close()
-    try:
-        yield
-    finally:
-        with contextlib.suppress(FileNotFoundError):
-            os.unlink(path)
-        handle.close()
+        with open(path, "a", encoding="utf-8") as handle:
+            fcntl.flock(handle, fcntl.LOCK_EX)
+            try:
+                mine = os.fstat(handle.fileno()).st_ino == os.stat(path).st_ino
+            except FileNotFoundError:
+                mine = False
+            if mine:
+                try:
+                    yield
+                finally:
+                    with contextlib.suppress(FileNotFoundError):
+                        os.unlink(path)
+                return
 
 
 def cached_compile(plan, gcc_args, env, tmp, build_dir):
