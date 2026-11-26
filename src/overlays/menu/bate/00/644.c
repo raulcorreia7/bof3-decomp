@@ -251,7 +251,7 @@ NON_MATCHING void func_801D1C90(void) {
     } while (i < 3);
     g_UiPanelTasks[0].item_table    = (s32)D_801D8EE0;
     g_UiPanelTasks[1].unk_0B        = 0xFF;
-    g_UiPanelTasks[1].pos.x         = -0xAA;
+    LOH(g_UiPanelTasks[1].pos.x)    = -0xAA;
     g_UiPanelTasks[1].pos.y         = 0x3E;
     g_UiPanelTasks[1].unk_0C        = 7;
     g_UiPanelTasks[0].unk_09        = 0;
@@ -272,14 +272,14 @@ NON_MATCHING void func_801D1C90(void) {
     g_UiPanelTasks[2].state         = 2;
     g_UiPanelTasks[2].active        = 1;
     g_UiPanelTasks[2].pos.x         = 0x14;
-    g_UiPanelTasks[2].pos.y         = -0x14;
+    LOH(g_UiPanelTasks[2].pos.y)    = -0x14;
     g_UiPanelTasks[2].u.addr.unk_12 = 0x118;
     g_UiPanelTasks[2].u.addr.unk_10 = 0;
     g_UiPanelTasks[3].panel         = 2;
     g_UiPanelTasks[3].mode          = 4;
     g_UiPanelTasks[3].state         = 3;
     g_UiPanelTasks[3].active        = 1;
-    g_UiPanelTasks[3].pos.y         = -0x14;
+    LOH(g_UiPanelTasks[3].pos.y)    = -0x14;
     g_UiPanelTasks[3].pos.x         = 0xA4;
     g_UiPanelTasks[3].u.addr.unk_10 = 0;
     g_UiPanelTasks[3].u.addr.unk_12 = 0x80;
