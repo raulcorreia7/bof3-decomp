@@ -17,11 +17,11 @@ segments:
     align: 4
     subsegments:
       - [0x20A8, bin, g_BMagicEffectModes]
-      - [0x20B0, bin, D_801F0CB0]
+      - [0x20B0, bin, g_BMagicWhelpBreathStreamSteps]
       - [0x20C4, bin, BMagic_Steps]
-      - [0x20E4, bin, D_801F0CE4]
+      - [0x20E4, bin, g_BMagicWhelpBreathPuffOffsets]
       - [0x20E8, bin, D_801F0CE8]
       - [0x20EC, bin, D_801F0CEC]
-      - [0x2108, bin, D_801F0D08]
-      - [0x210C, bin, D_801F0D0C]
+      - [0x2108, bin, g_BMagicWhelpBreathShadePhases]
+      - [0x210C, bin, g_BMagicWhelpBreathPuffAges]
   - [0x2114]
