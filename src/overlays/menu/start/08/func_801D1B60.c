@@ -1,4 +1,5 @@
 #include "start_08.h"
+#include "menu/save_data.h"
 #include "area/map.h"
 
 MATCH void func_801D1B60(void) {
@@ -18,8 +19,8 @@ MATCH void func_801D1B60(void) {
     type                     = D_801EC38C[(s8)D_80148655];
     TASK_SET(g_Game.members);
     g_UiPanelTasks[10].u.addr.unk_10 = (s16)type;
-    if ((D_8014504A == 0 && ((g_GameRequestFlags & AREA_LOAD_FLAG_WORLD_MAP) || g_GameAreaId == AREA_ID_DESERT_OF_DEATH_MAP) && (func_801B6470(type) & BYTE_MASK)) ||
-        (D_8014504A != 0 && (func_801D2190() & BYTE_MASK))) {
+    if ((g_SaveData.return_point.pending == 0 && ((g_GameRequestFlags & AREA_LOAD_FLAG_WORLD_MAP) || g_GameAreaId == AREA_ID_DESERT_OF_DEATH_MAP) && (func_801B6470(type) & BYTE_MASK)) ||
+        (g_SaveData.return_point.pending != 0 && (func_801D2190() & BYTE_MASK))) {
         g_UiPanelTasks[9].unk_0C = 0;
     } else {
         g_UiPanelTasks[9].unk_0C = 1;

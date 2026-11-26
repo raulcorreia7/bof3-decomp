@@ -24,7 +24,7 @@ from bof3.core.paths import ROOT
 def function_span(source, name):
     """Return the start and end of the definition to replace, else of the INCLUDE_ASM line."""
     found = re.search(
-        rf"^(?:MATCH|NON_MATCHING)[^\n]*\b{name}\([^\n]*\{{\n.*?^\}}\n",
+        rf"^(?:MATCH|NON_MATCHING)[^\n]*\b{name}\([^{{]*\{{\n.*?^\}}\n",
         source,
         re.S | re.M,
     )

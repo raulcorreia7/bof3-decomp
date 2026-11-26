@@ -4,108 +4,71 @@
  * and advances the page row when the timer expires. */
 #ifdef NON_MATCHING
 NON_MATCHING void func_801D6684(void) {
-    s32*   word_ptr;
-    s32    type;
-    s32    x;
-    s32    y;
-    s32    color;
-    s32    page;
-    s32    x_fixed;
-    s32    col;
-    s32    y_sel;
-    s32    row;
-    s32    y_other;
-    u8*    cell_ptr;
-    u8*    cell_table;
-    u8     cell;
-    u8     timer;
-    void*  spad5;
-    Actor* spad6;
-    Actor* spad1;
-    void*  spad0;
-    void*  spad2;
-    void*  spad3;
-    Actor* spad4;
+    u8(*cells)[8];
+    u8* cell_ptr;
+    u8(*glyphs)[2];
+    s32 row;
+    s32 col;
+    s32 x;
+    s32 y;
+    s32 y_page;
+    u8  page;
+    u8  cell;
 
-    spad0 = g_Task;
-    if (FIELD(u8, spad0, 0xAu) != 0) {
-        func_801D2034(0xD4, 0x8A, 0U, (FIELD(u8, spad0, 0xBu) + 1) & BYTE_MASK);
-        page = TASK(Actor)->timer / 12;
+    if (TASK(FishingState)->step_index != 0) {
+        func_801D2034(0xD4, 0x8A, 0, (u8)(TASK(FishingState)->saved_index + 1));
+        page = TASK(FishingState)->timer / 12;
     } else {
-        FIELD(u8, spad0, 0x9u) = (u8)(FIELD(u8, spad0, 0x9u) + 1);
-        spad5                  = g_Task;
-        page                   = FIELD(u8, spad5, 0x9u) / 12;
-        if (*((FIELD(u8, spad5, 0xBu) * 8) + &D_801E2050 + (page & BYTE_MASK)) == GAME_NONE) {
-            FIELD(u8, spad5, 0xAu) = 0x32U;
+        TASK(FishingState)->timer++;
+        page = TASK(FishingState)->timer / 12;
+        if (D_801E2050[TASK(FishingState)->saved_index][page] == 0xFF) {
+            TASK(FishingState)->step_index = 50;
         }
     }
     row = 0;
-    if ((TASK(Actor)->unk_0A == 0) && (*((TASK(Actor)->param.unk_0B * 8) + &D_801E2050 + (page & BYTE_MASK)) == 1) && ((u32)((TASK(Actor)->timer % 12) & BYTE_MASK) < 0xAU)) {
+    if (TASK(FishingState)->step_index == 0 && D_801E2050[TASK(FishingState)->saved_index][page] == 1 && (u8)(TASK(FishingState)->timer % 12) < 10) {
         Script_AnimStepLoop();
     }
-    word_ptr   = &D_801E2070;
-    word_ptr   = &D_801E2070;
-    y_sel      = TO_COORD(158);
-    y_other    = TO_COORD(155);
-    cell_table = &D_801E2050;
-    cell_table = &D_801E2050;
+    glyphs = D_801E2070;
+    y      = TO_COORD(158);
+    y_page = TO_COORD(155);
+    cells  = D_801E2050;
     do {
         col      = 0;
-        x_fixed  = TO_COORD(132);
-        cell_ptr = cell_table;
-    loop_11:
+        x        = TO_COORD(132);
+        cell_ptr = *cells;
+    next_cell:
         cell = *cell_ptr;
-        type = cell & BYTE_MASK;
-        if (type != GAME_NONE) {
-            spad1 = g_Task;
-            if (row == spad1->param.cloud_layer) {
-                if ((u32)((spad1->timer % 12) & BYTE_MASK) < 0xAU) {
-                    x = x_fixed >> 0x10;
-                    if (col == (page & BYTE_MASK)) {
-                        UI_TextDraw((s16)x, (s16)(y_other >> 0x10), type, 1U, ((type * 2) + &D_801E2070));
-                    } else {
-                        goto block_17; /* shared cell/row draw join */
-                    }
+        if (cell != 0xFF) {
+            if (row == TASK(FishingState)->saved_index) {
+                if ((u8)(TASK(FishingState)->timer % 12) < 10 && col == page) {
+                    UI_TextDraw(x >> 16, y_page >> 16, cell, 1, glyphs[cell]);
                 } else {
-                    x = x_fixed >> 0x10;
-                block_17:
-                    y     = y_sel >> 0x10;
-                    color = (*cell_ptr * 3) & BYTE_MASK;
-                    goto block_19; /* shared cell/row draw join */
+                    UI_TextDrawString(x >> 16, y >> 16, (u8)(*cell_ptr * 3), 1, glyphs[*cell_ptr]);
                 }
             } else {
-                x     = x_fixed >> 0x10;
-                y     = y_sel >> 0x10;
-                color = (7 - cell) & BYTE_MASK;
-            block_19:
-                UI_TextDrawString((s16)x, (s16)y, color, 1, (u32)((type * 2) + &D_801E2070));
+                UI_TextDrawString(x >> 16, y >> 16, (u8)(7 - cell), 1, glyphs[cell]);
             }
-            x_fixed += TO_COORD(12);
-            col += 1;
-            cell_ptr += 1;
-            if (col >= 8) {
-            } else {
-                goto loop_11; /* shared cell/row draw join */
+            x += TO_COORD(12);
+            col++;
+            cell_ptr++;
+            if (col < 8) {
+                goto next_cell;
             }
         }
-        y_sel += TO_COORD(13);
-        y_other += TO_COORD(13);
-        row += 1;
-        cell_table += 8;
+        y += TO_COORD(13);
+        y_page += TO_COORD(13);
+        row++;
+        cells++;
     } while (row < 4);
     Area_AddActor();
-    spad2 = g_Task;
-    timer = FIELD(u8, spad2, 0xAu);
-    if (timer != 0) {
-        FIELD(u8, spad2, 0xAu) = (u8)(timer - 1);
-        spad3                  = g_Task;
-        if (FIELD(u8, spad3, 0xAu) == 0) {
-            FIELD(u8, spad3, 0x9u)   = 0U;
-            spad6                    = g_Task;
-            spad6->param.cloud_layer = (u8)(spad6->param.cloud_layer + 1);
-            spad4                    = g_Task;
-            if (spad4->param.cloud_layer >= 4U) {
-                spad4->param.cloud_layer = 0U;
+    if (TASK(FishingState)->step_index != 0) {
+        TASK(FishingState)->step_index--;
+        if (TASK(FishingState)->step_index == 0) {
+            TASK(FishingState)->timer = 0;
+            TASK(FishingState)->saved_index++;
+            if (TASK(FishingState)->saved_index >= 4) {
+                TASK(FishingState)->saved_index = 0;
             }
         }
     }

@@ -14,7 +14,7 @@ MATCH void func_800A0C68(void) {
     /* FAKE: pin the divided increment to retail v0. */
     FAKE_REG(s32, value, "v0");
 
-    p     = (u8*)&g_Battle.unk_EF[7];
+    p     = (u8*)&g_Battle.unk_F4[2];
     i     = 0;
     total = 0;
     if (*p != 0) {

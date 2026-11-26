@@ -1,4 +1,5 @@
 #include "area189_13.h"
+#include "menu/save_data.h"
 
 #ifdef NON_MATCHING
 /* Draws the area 189 backdrop: the title strip, the palette column of cells, the rain sheet when the
@@ -59,19 +60,19 @@ NON_MATCHING void func_801F3800(void) {
     setRGB0(tile, 0xFF, 0xFF, 0xFF);
     func_801F497C(sizeof(TILE));
 
-    if (D_80144F54 < 0x1B0) {
+    if (g_SaveData.desert.clock < 0x1B0) {
         g_ScratchPadVectors[0].vx = g_ScratchPadVectors[0].vy = g_ScratchPadVectors[0].vz = 0;
         g_ScratchPadVectors[1].vx = g_ScratchPadVectors[1].vy = g_ScratchPadVectors[1].vz = 0x80;
-    } else if (D_80144F54 < 0x1E0) {
-        phase                     = (D_80144F54 - 0x1B0) / 3;
+    } else if (g_SaveData.desert.clock < 0x1E0) {
+        phase                     = (g_SaveData.desert.clock - 0x1B0) / 3;
         g_ScratchPadVectors[0].vx = g_ScratchPadVectors[0].vy = g_ScratchPadVectors[0].vz = phase * 8;
         g_ScratchPadVectors[1].vx = g_ScratchPadVectors[1].vy = g_ScratchPadVectors[1].vz = 0x80 - phase * 8;
         Area_PaletteApplyTint(0, 6, phase * 4 / 10 - 6, phase / 8 - 2, 0);
-    } else if (D_80144F54 < 0x390) {
+    } else if (g_SaveData.desert.clock < 0x390) {
         g_ScratchPadVectors[0].vx = g_ScratchPadVectors[0].vy = g_ScratchPadVectors[0].vz = 0x80;
         g_ScratchPadVectors[1].vx = g_ScratchPadVectors[1].vy = g_ScratchPadVectors[1].vz = 0;
     } else {
-        phase = (D_80144F54 - 0x390) / 3;
+        phase = (g_SaveData.desert.clock - 0x390) / 3;
         shade = phase - 6;
         if (shade < 0) {
             shade = 0;
@@ -137,7 +138,7 @@ NON_MATCHING void func_801F3800(void) {
         func_801F4150(shade, ((((g_AreaCameraAngle.vz + 0x800) & 0xFFF) - 0x400) * 5 >> 4) - 0x28);
     }
 
-    if (SYS_TestFlag(D_80144EF8, 4) != 0) {
+    if (SYS_TestFlag(&g_SceneFlagWords[14 * 8], 4) != 0) {
         dx = g_AreaTargetCellX - 0x1780;
         if (dx < 0) {
             dx = -dx;

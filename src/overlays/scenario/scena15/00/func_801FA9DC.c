@@ -1,4 +1,5 @@
 #include "scena15_00.h"
+#include "menu/save_data.h"
 
 #if BOF3_USE_ASM
 __asm__(".include \"include/match/macro.inc\"\n");
@@ -17,13 +18,13 @@ MATCH void func_801FA9DC(void) {
             if (g_ScriptVars[0] == 1) {
                 u8* flags;
 
-                SYS_SetFlag(D_80144EF8, 1);
+                SYS_SetFlag(&g_SceneFlagWords[14 * 8], 1);
                 func_8019FA28(0xBD, TO_COORD(0x1000), TO_COORD(0x1400), 2);
-                flags                = &g_ScenarioState.flags_01;
-                D_8014504B           = 2;
-                D_80144F54           = 0;
-                g_ScenarioState.step = 2;
-                g_GamePrevSelection  = g_SndBGMId;
+                flags                          = &g_ScenarioState.flags_01;
+                g_SaveData.return_point.facing = 2;
+                g_SaveData.desert.clock        = 0;
+                g_ScenarioState.step           = 2;
+                g_GamePrevSelection            = g_SndBGMId;
                 *flags |= 1;
             }
             break;
@@ -63,7 +64,7 @@ MATCH void func_801FA9DC(void) {
                 u8* flags;
 
                 Game_ClearScriptActive();
-                SYS_ClearFlag(D_80144EF8, 1);
+                SYS_ClearFlag(&g_SceneFlagWords[14 * 8], 1);
                 func_8019FA28(0xC1, 0x1A8000, 0x1C0000, 0x82);
                 flags                    = &g_ScenarioState.flags_01;
                 g_ScenarioState.state_04 = 0;
@@ -78,11 +79,11 @@ MATCH void func_801FA9DC(void) {
             if (g_GameStateIndex != GAME_REQUEST_MESSAGE) {
                 if (g_ScenarioState.step == 20) {
                     SYS_ClearFlag(g_SceneEventFlags, 0x77);
-                    D_8014504A = 0;
+                    g_SaveData.return_point.pending = 0;
                     func_8019FA28(0xC1, 0x1A8000, 0x1C0000, 0x83);
                 } else {
-                    SYS_SetFlag(D_80144EF8, 2);
-                    SYS_SetFlag(D_80144EF8, 3);
+                    SYS_SetFlag(&g_SceneFlagWords[14 * 8], 2);
+                    SYS_SetFlag(&g_SceneFlagWords[14 * 8], 3);
                     func_8019FA28(0xC1, 0x1A8000, 0x1C0000, 0x84);
                     g_GameEntryMode = 0xFF;
                 }

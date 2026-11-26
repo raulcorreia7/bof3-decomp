@@ -4,12 +4,34 @@
  * next jerk and walks the depth-and-direction steps that raise or lower the
  * lure against it. */
 #ifdef NON_MATCHING
+/* The fish's depth against the reel window, held to -0x30..0x30. */
+static inline u8 Fishing_ClampDepth(s8 depth) {
+    u8 clamped;
+
+    if (depth >= -0x30) {
+        if (depth <= 0x30) {
+            clamped = depth;
+        } else {
+            clamped = 0x30;
+        }
+    } else {
+        clamped = -0x30;
+    }
+    return clamped;
+}
+
 NON_MATCHING void func_801DF334(void) {
-    s32 amount;
-    s32 grade;
-    s32 scaled;
+    u8  grade;
     s32 span;
     s32 value;
+    s32 height;
+    s32 gap;
+    s32 rise;
+    s32 drift;
+    s32 sway;
+    s32 sway_capped;
+    s32 speed;
+    s32 capped;
     u8  center;
     u8  lower;
     u8  upper;
@@ -43,13 +65,10 @@ NON_MATCHING void func_801DF334(void) {
         }
         if (TASK(FishingState)->flags_58 >= 0x15) {
             TASK(FishingState)->step_index += TASK(FishingState)->cursor_10;
-            value = (s8)TASK(FishingState)->step_index;
-            if (value < -0x30) {
-                value = -0x30;
-            } else if (value >= 0x31) {
-                value = 0x30;
+            {
+                FishingState* work = TASK(FishingState);
+                work->step_index   = Fishing_ClampDepth(work->step_index);
             }
-            TASK(FishingState)->step_index = value;
         }
         return;
     }
@@ -69,8 +88,6 @@ NON_MATCHING void func_801DF334(void) {
                 }
             }
         } else if ((s8)TASK(FishingState)->step_index < (s8)lower) {
-            TASK(FishingState)->saved_index = 0;
-        } else {
             TASK(FishingState)->saved_index += 1;
             if (TASK(FishingState)->saved_index >= g_FishingRodRow->snap_right_tension) {
                 TASK(FishingState)->saved_index = 0;
@@ -82,17 +99,20 @@ NON_MATCHING void func_801DF334(void) {
                     return;
                 }
             }
+        } else {
+            TASK(FishingState)->saved_index = 0;
         }
     }
 
     if (TASK(FishingState)->timer == 0) {
-        scaled = FISHING_ROW->ext.fishing.stamina_max << 16;
-        if ((s16)FISHING_ROW->ext.fishing.stamina < (scaled >> 18)) {
+        if ((s16)FISHING_ROW->ext.fishing.stamina < ((u16)FISHING_ROW->ext.fishing.stamina_max << 16 >> 18)) {
             grade = 3;
-        } else if ((s16)FISHING_ROW->ext.fishing.stamina < (scaled >> 17)) {
+        } else if ((s16)FISHING_ROW->ext.fishing.stamina < ((u16)FISHING_ROW->ext.fishing.stamina_max << 16 >> 17)) {
             grade = 2;
+        } else if ((s16)FISHING_ROW->ext.fishing.stamina < ((u16)FISHING_ROW->ext.fishing.stamina_max << 16 >> 18) * 3) {
+            grade = 1;
         } else {
-            grade = (s16)FISHING_ROW->ext.fishing.stamina < (scaled >> 18) * 3;
+            grade = 0;
         }
 
         if ((rand() & 0xF) < odds[grade * 4] && TASK(FishingState)->bounce.half.key >= -0x3F && (s8)TASK(FishingState)->step_index > 0) {
@@ -110,22 +130,22 @@ NON_MATCHING void func_801DF334(void) {
             return;
         }
         if ((rand() & 0xF) < odds[grade * 4 + 1]) {
-            scaled = FISHING_ROW->ext.fishing.stamina_max << 16;
-            if ((s16)FISHING_ROW->ext.fishing.stamina > (scaled >> 20)) {
+            if ((s16)FISHING_ROW->ext.fishing.stamina > ((u16)FISHING_ROW->ext.fishing.stamina_max << 16 >> 20)) {
                 TASK(FishingState)->cursor_10 = (rand() & (D_801E2AD5[TASK(FishingState)->cue_index * sizeof(FishingSceneCue)] & 0x7)) + 1;
                 if ((s8)TASK(FishingState)->step_index < 0) {
                     TASK(FishingState)->cursor_10 += rand() & 1;
                 }
-                if (TASK(FishingState)->cursor_10 < 0) {
-                    TASK(FishingState)->cursor_10 = 0;
-                } else if (TASK(FishingState)->cursor_10 >= 6) {
-                    TASK(FishingState)->cursor_10 = 5;
+                {
+                    FishingState* work = TASK(FishingState);
+                    speed              = work->cursor_10;
+                    capped             = (speed < 0) ? 0 : ((speed > 5) ? 5 : speed);
+                    work->cursor_10    = capped;
                 }
                 if (g_SpawnedActors[5].selection < 0) {
-                    value = (s8)TASK(FishingState)->step_index - g_SpawnedActors[5].screen_y;
-                    if (value < -0x30) {
+                    gap = (s8)TASK(FishingState)->step_index - g_SpawnedActors[5].screen_y;
+                    if (gap < -0x30) {
                         FISHING_ROW->timer_75 = 0xFD;
-                    } else if (value < -0x18) {
+                    } else if (gap < -0x18) {
                         FISHING_ROW->timer_75 = 0xFE;
                     } else {
                         FISHING_ROW->timer_75 = 0xFF;
@@ -165,25 +185,20 @@ NON_MATCHING void func_801DF334(void) {
         TASK(FishingState)->timer = (8 - grade) * ((rand() & 3) + 1);
     } else {
         TASK(FishingState)->timer -= 1;
-        value  = (s8)FISHING_ROW->timer_75;
-        scaled = FISHING_ROW->ext.fishing.stamina_max << 16;
-        if (value > 0) {
-            if ((g_FrameCount & 0xF) == 0 && TASK(FishingState)->cursor_10 >= 0 && (s16)FISHING_ROW->ext.fishing.stamina < (scaled >> 17)) {
-                Fishing_FishStaminaAdd(value);
+        if ((s8)FISHING_ROW->timer_75 > 0) {
+            if ((g_FrameCount & 0xF) == 0 && TASK(FishingState)->cursor_10 >= 0 && (s16)FISHING_ROW->ext.fishing.stamina < ((u16)FISHING_ROW->ext.fishing.stamina_max << 16 >> 17)) {
+                Fishing_FishStaminaAdd(FISHING_ROW->timer_75);
             }
         } else if ((g_FrameCount & 1) != 0) {
-            Fishing_FishStaminaAdd(value);
+            Fishing_FishStaminaAdd(FISHING_ROW->timer_75);
         }
+        TASK(FishingState)->step_index += TASK(FishingState)->cursor_10 + TASK(FishingState)->unk_1C;
     }
 
-    TASK(FishingState)->step_index += TASK(FishingState)->cursor_10 + TASK(FishingState)->unk_1C;
-    value = (s8)TASK(FishingState)->step_index;
-    if (value < -0x30) {
-        value = -0x30;
-    } else if (value >= 0x31) {
-        value = 0x30;
+    {
+        FishingState* work = TASK(FishingState);
+        work->step_index   = Fishing_ClampDepth(work->step_index);
     }
-    TASK(FishingState)->step_index = value;
 
     if (g_AreaCameraMoving == 0) {
         g_AreaCameraSpeed = 0;
@@ -193,10 +208,11 @@ NON_MATCHING void func_801DF334(void) {
         if (TASK(FishingState)->bounce.half.key < 0) {
             TASK(FishingState)->bounce.half.key += 8;
         }
-        if (TASK(FishingState)->y_38.pos_y > 0x150000) {
+        height = TASK(FishingState)->y_38.pos_y;
+        if (height > 0x150000) {
             g_AreaCameraSpeed   = 0x10;
-            g_AreaScrollTargetY = TASK(FishingState)->y_38.pos_y;
-            if (TASK(FishingState)->y_38.pos_y > 0x3C0000) {
+            g_AreaScrollTargetY = height;
+            if (height > 0x3C0000) {
                 g_AreaScrollTargetY = 0x3C0000;
             }
         }
@@ -214,32 +230,33 @@ NON_MATCHING void func_801DF334(void) {
         TASK(FishingState)->motion.unk_34 += TASK(FishingState)->pos_x;
         if (TASK(FishingState)->pos_x < -0x800) {
             TASK(FishingState)->counter_08 = 0;
-        } else if (TASK(FishingState)->pos_x < 0x801) {
-            TASK(FishingState)->counter_08 = 1;
-        } else {
+        } else if (TASK(FishingState)->pos_x > 0x800) {
             TASK(FishingState)->counter_08 = 2;
+        } else {
+            TASK(FishingState)->counter_08 = 1;
         }
     } else if ((s8)TASK(FishingState)->step_index < g_SpawnedActors[5].screen_y && g_SpawnedActors[5].selection < 0) {
-        amount = 0x3E - TASK(FishingState)->y_38.slot.slot;
-        if (amount != 0) {
-            TASK(FishingState)->pos_x = ((0xF0000 - TASK(FishingState)->motion.unk_34) >> 4) / amount;
-            if (TASK(FishingState)->pos_x < -0x1000) {
-                TASK(FishingState)->pos_x = -0x1000;
-            } else if (TASK(FishingState)->pos_x >= 0x1001) {
-                TASK(FishingState)->pos_x = 0x1000;
-            }
+        FishingState* work = TASK(FishingState);
+        rise               = 0x3E - work->y_38.slot.slot;
+        drift              = 0xF0000 - work->motion.unk_34;
+        if (rise != 0) {
+            sway        = (drift >> 4) / rise;
+            work->pos_x = sway;
+            sway_capped = (sway < -0x1000) ? -0x1000 : ((sway > 0x1000) ? 0x1000 : sway);
+            work->pos_x = sway_capped;
         } else {
-            TASK(FishingState)->pos_x = 0;
+            work->pos_x = 0;
         }
         TASK(FishingState)->motion.unk_34 += TASK(FishingState)->pos_x;
         if (TASK(FishingState)->bounce.half.key < 0) {
             TASK(FishingState)->bounce.half.key += 8;
         }
-        TASK(FishingState)->y_38.pos_y += 0x1000;
-        if (TASK(FishingState)->y_38.pos_y > 0x150000) {
+        value                          = TASK(FishingState)->y_38.pos_y + 0x1000;
+        TASK(FishingState)->y_38.pos_y = value;
+        if (value > 0x150000) {
             g_AreaCameraSpeed   = 0x10;
-            g_AreaScrollTargetY = TASK(FishingState)->y_38.pos_y;
-            if (TASK(FishingState)->y_38.pos_y > 0x3C0000) {
+            g_AreaScrollTargetY = value;
+            if (value > 0x3C0000) {
                 g_AreaScrollTargetY = 0x3C0000;
             }
         }

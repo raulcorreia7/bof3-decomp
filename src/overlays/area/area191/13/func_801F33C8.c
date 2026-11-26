@@ -1,4 +1,5 @@
 #include "area191_13.h"
+#include "menu/save_data.h"
 
 MATCH void func_801F33C8(void) {
     switch (g_SceneEventState.step) {
@@ -49,10 +50,10 @@ MATCH void func_801F33C8(void) {
                 u16* area;
 
                 Game_ClearScriptActive();
-                area = &D_80145048;
-                Game_RequestAreaChange(*area, D_80145040, D_80145044, FACING_DOWN_RIGHT);
+                area = &g_SaveData.return_point.area_id;
+                Game_RequestAreaChange(*area, g_SaveData.return_point.x, g_SaveData.return_point.y, FACING_DOWN_RIGHT);
                 g_AreaWalkFlags |= AREA_WALK_ENTRY_PENDING;
-                D_8014504A = 0;
+                g_SaveData.return_point.pending = 0;
                 /* The scene-event flag block sits 0x120 bytes before the saved area id. */
                 SYS_ClearFlag((u8*)area - 0x120, 0x77);
                 g_SceneEventState.mode = SCENE_EVENT_NONE;
@@ -75,7 +76,7 @@ MATCH void func_801F33C8(void) {
                 Game_ClearScriptActive();
                 Game_RequestAreaChange(AREA_ID_OASIS, TO_COORD(24), TO_COORD(48), FACING_UP);
                 g_AreaWalkFlags |= AREA_WALK_ENTRY_PENDING;
-                word  = &D_8014504A;
+                word  = &g_SaveData.return_point.pending;
                 *word = 0;
                 /* The scene-event flag block sits 0x122 bytes before the saved area byte. */
                 SYS_ClearFlag((u8*)word - 0x122, 0x77);

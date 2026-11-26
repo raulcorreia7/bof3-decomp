@@ -13,14 +13,14 @@ NON_MATCHING void func_800B2C90(MenuPanelTask* task) {
     u8       ability_id;
     s16      line_y;
     u16      selection;
-    u16      icon;
+    s8       icon;
     s32      icon_x;
     u8       index;
     s32      has_icon;
     char*    text_table;
 
-    index = 0;
     UI_WindowDraw((task->pos.x + 3) & HALF_MASK, (task->pos.y + 3) & HALF_MASK, 153, 130, 0, (s32)g_WindowStyle);
+    index     = 0;
     selection = UI_ScrollList(&task->u.battle.cursor, &scroll_y, &count, &task->u.battle.row_base);
     types     = Party_GetAbilities((u32)task->unk_0A, (u32)task->unk_0B, 1U) + (u8)selection;
     line_y    = task->pos.y + (s8)scroll_y;
@@ -28,7 +28,7 @@ NON_MATCHING void func_800B2C90(MenuPanelTask* task) {
         do {
             if (*types != 0) {
                 has_icon = (func_801AF5B0(task->unk_08, D_80148656, *types) & BYTE_MASK) == 0;
-                icon     = (u16)(-has_icon & 7);
+                icon     = -has_icon & 7;
                 if (index == task->flags) {
                     icon = 2;
                 }
@@ -76,14 +76,14 @@ NON_MATCHING void func_800B2C90(MenuPanelTask* task) {
         UI_SpriteDraw((s16)task->pos.x, (s16)(task->pos.y + ((index + 3) * 8)), 4, UI_SPRITE_ALT_PAGE);
         index++;
     } while (index < 12);
-    index = 0;
     UI_SpriteDraw((s16)(task->pos.x + 144), (s16)(task->pos.y + 24), 0x16, UI_SPRITE_ALT_PAGE);
+    index = 0;
     do {
         UI_SpriteDraw((s16)(task->pos.x + 144), (s16)(task->pos.y + ((index + 5) * 8)), 0x17, UI_SPRITE_ALT_PAGE);
         index++;
     } while (index < 9);
-    index = 0;
     UI_SpriteDraw((s16)(task->pos.x + 144), (s16)(task->pos.y + 112), 0x18, UI_SPRITE_ALT_PAGE);
+    index = 0;
     UI_SpriteDraw((s16)task->pos.x, (s16)(task->pos.y + 120), 0x19, UI_SPRITE_ALT_PAGE);
     do {
         UI_SpriteDraw((s16)(task->pos.x + ((index + 1) * 8)), (s16)(task->pos.y + 120), 0x1A, UI_SPRITE_ALT_PAGE);

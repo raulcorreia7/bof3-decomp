@@ -32,7 +32,8 @@ NON_MATCHING void func_801E03F8(void) {
     }
     row_offset  = FISHING_ROW->fish_row * TO_COORD(12);
     face_offset = D_801E2AD3[TASK(FishingState)->cue_index * sizeof(FishingSceneCue)] * TO_COORD(15);
-    upper_limit = TO_COORD(62) - row_offset + face_offset;
+    upper_limit = TO_COORD(62) - row_offset;
+    upper_limit += face_offset;
     lower_limit = TO_COORD(50) - row_offset - face_offset;
     upper_limit = upper_limit >= TO_COORD(26) ? (upper_limit > TO_COORD(62) ? TO_COORD(62) : upper_limit) : TO_COORD(26);
     lower_limit = lower_limit >= TO_COORD(17) ? (lower_limit > TO_COORD(50) ? TO_COORD(50) : lower_limit) : TO_COORD(17);
