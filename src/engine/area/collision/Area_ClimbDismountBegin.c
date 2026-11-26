@@ -13,9 +13,7 @@ MATCH void Area_ClimbDismountBegin(void) {
     g_GfxPalettePending                             = 1;
     *(u16*)(MEM_PTR(u8, 0x8003963Eu) + (slot << 6)) = 0;
     facing                                          = actor->direction;
-    /* FAKE: barrier keeps saved ra from sinking below actor load. */
-    FAKE_BARRIER();
-    animation = 52;
+    animation                                       = 52;
     if (facing == FACING_LEFT) {
         animation = 55;
     }

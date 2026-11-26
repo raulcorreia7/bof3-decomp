@@ -29,8 +29,6 @@ MATCH void Party_FlashDamage(s32 color_index) {
         *(u16*)(off + (row + addr_dst)) = seed.colors[color_index & BYTE_MASK];
     } while (index < 32);
     g_GfxPalettePending = 1;
-    /* FAKE: hold cue arg after store. */
-    FAKE_BARRIER();
     SND_SEPlay(EMI_SE_ID(SND_BANK_COMMON, 8));
     g_Game.current->status.field.flags.unsigned_value |= 8;
 }

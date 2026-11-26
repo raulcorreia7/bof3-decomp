@@ -11,9 +11,6 @@ MATCH u8* Area_SkipSetupIfChain(u8* script) {
 
     active = 1u;
     value  = script[1];
-    /* FAKE: barrier keeps the script[1] load apart from the u8 copy, so the
-     * raw word stays in v0 and the copy masks into s1. */
-    FAKE_BARRIER();
     cursor = script + 2;
     param  = (u8)value;
     while (active != 0u) {

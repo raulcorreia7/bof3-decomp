@@ -27,16 +27,12 @@ MATCH void Actor_SpawnPartyFromRecord(u8* script) {
         }
         work->pos.x.fixed             = coord_x;
         g_ActorWalkDestX[*counter][0] = coord_x;
-        /* FAKE: barrier pins the x store before the y loads. */
-        FAKE_BARRIER();
         g_ActorWalkDestY[*counter][0] = work->pos.y.fixed = (script[7] << 16) | (script[6] != 0 ? 0x8000 : 0);
-        /* FAKE: forces the counter re-read before the next shadow store. */
-        FAKE_BARRIER();
-        D_80146910[*counter][0]  = 0;
-        dist                     = Area_HeightSample(work->pos.x.fixed, work->pos.y.fixed);
-        record                   = TASK(Actor);
-        COORD_INT(record->pos.z) = (u16)dist;
-        record->header.mode      = script[8];
+        D_80146910[*counter][0]                           = 0;
+        dist                                              = Area_HeightSample(work->pos.x.fixed, work->pos.y.fixed);
+        record                                            = TASK(Actor);
+        COORD_INT(record->pos.z)                          = (u16)dist;
+        record->header.mode                               = script[8];
 
         TASK(Actor)->header.step                       = script[0xA];
         TASK(Actor)->direction                         = script[0] & 0xF;

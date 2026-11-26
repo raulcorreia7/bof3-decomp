@@ -25,7 +25,6 @@ MATCH s32 func_801F3400(s32 x, s32 y) {
         return 0;
     }
     func_801F369C();
-    FAKE_BARRIER(); /* FAKE: the retail bytes keep the cell shifts below this call. */
     test_x = x >> 16;
     test_y = y >> 16;
     if ((u32)(test_x - 0x94) < 4U && (u32)(test_y - 0x20) < 4U) {
