@@ -1037,9 +1037,9 @@ extern u8           g_BattlePartyCount;
 /* FAKE: g_Battle.living_party_count as a global of its own; the sites that use it match only with a separate symbol. */
 extern u8           g_BattleLivingPartyCount;
 
-/* The Accession gene picker's cursor: row (-1 on the confirm line) and column. */
+/* The Accession gene picker's cursor: row (GAME_NONE on the confirm line) and column. */
 typedef struct GeneCursor {
-    s8 row;
+    u8 row;
     u8 column;
 } GeneCursor;
 
