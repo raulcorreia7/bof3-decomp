@@ -1,7 +1,7 @@
 #include "area085_13.h"
 
-#ifdef NON_MATCHING
-NON_MATCHING void func_801F30E0(void) {
+/* Spawns two actors from D_801F3D4C and starts the script D_801F3D70 picks for the party's selector. */
+void func_801F30E0(void) {
     Actor* work;
     u8     selector;
     u8     index;
@@ -27,7 +27,7 @@ NON_MATCHING void func_801F30E0(void) {
         selector = g_Actors[2].script_record;
     }
     for (index = 0; index < 5; index++) {
-        if (D_801F3D70[index * 3] == selector) {
+        if (selector == D_801F3D70[index].selector) {
             break;
         }
     }
@@ -35,10 +35,10 @@ NON_MATCHING void func_801F30E0(void) {
     scratch  = (s16*)&g_ScratchPad;
     *scratch = work->unk_03;
     Actor_SpawnFromRecord(D_801F3D4C + work->param.unk_0B * 17);
-    Script_Begin(D_801F3D70[index * 3 + 1], D_801F3D70[index * 3 + 2]);
+    Script_Begin(D_801F3D70[index].script_index, D_801F3D70[index].position);
     *scratch = work->unk_04;
     Actor_SpawnFromRecord(D_801F3D4C + work->param.unk_0B * 17);
-    Script_Begin(D_801F3D70[index * 3 + 1], D_801F3D70[index * 3 + 2]);
+    Script_Begin(D_801F3D70[index].script_index, D_801F3D70[index].position);
     TASK_SET(work);
 
     g_Actors[work->unk_03].pos.x.fixed -= ONE;
@@ -54,6 +54,3 @@ NON_MATCHING void func_801F30E0(void) {
     TASK(Actor)->timer       = 4;
     TASK(Actor)->header.mode = 1;
 }
-#else
-INCLUDE_ASM(func_801F30E0);
-#endif
