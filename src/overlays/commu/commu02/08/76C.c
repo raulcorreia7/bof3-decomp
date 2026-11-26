@@ -19,10 +19,10 @@ MATCH void func_801D136C(void) {
     s32 value_y_step;
     s8  value;
 
-    value      = D_801DB0C4 - 1;
-    D_801DB0C4 = value;
-    zenny_x_step     = -0x12;
-    zenny_y_step     = -0xE;
+    value        = D_801DB0C4 - 1;
+    D_801DB0C4   = value;
+    zenny_x_step = -0x12;
+    zenny_y_step = -0xE;
     func_801D3184(0x26 - ((value & BYTE_MASK) * zenny_x_step), 0x10 - ((value & BYTE_MASK) * zenny_y_step));
     value_x_step = 0xE;
     value_y_step = -0x19;
