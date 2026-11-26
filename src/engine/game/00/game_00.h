@@ -581,20 +581,6 @@ void    func_8019A6AC(void);
 void    func_8019A7D4(void);
 void    func_8019A804(void);
 void    func_8019A848(void);
-void    func_8019A8B4(void);
-void    func_8019A904(void);
-void    func_8019AA44(void);
-void    func_8019AAFC(void);
-void    func_8019AB5C(void);
-void    func_8019AC34(void);
-void    func_8019AC84(void);
-void    func_8019ACF4(void);
-void    func_8019AD70(void);
-void    func_8019ADA4(void);
-void    func_8019ADE8(void);
-void    func_8019AF1C(void);
-void    func_8019B024(void);
-void    func_8019B0EC(void);
 void    func_8019B10C(void);
 void    func_8019B150(void);
 void    func_8019B1E8(void);
@@ -742,7 +728,6 @@ void    func_801ACBC4(void);
 void    func_801ACC08(void);
 void    func_801ACCD8(void);
 s8      func_801ADC98(void);
-void    func_801ADCF4(u8 actor_slot);
 /* func_801AF270 */
 /* func_801AF494 */
 
@@ -1369,13 +1354,13 @@ static inline void AreaAction_Roll(s32 actor_slot) {
             case 6:
                 Actor_SpawnSceneActor(1);
                 Party_AddZenny(2, 0);
-                func_801ADCF4((u8)((s32)(-(((s32)GAME_WORK_AREA_PTR - (s32)g_Actors) * 0xD79435E5)) >> 3));
+                Actor_SpawnToss((u8)((s32)(-(((s32)GAME_WORK_AREA_PTR - (s32)g_Actors) * 0xD79435E5)) >> 3));
                 TASK(Actor)->unk_04 = 1;
                 break;
             case 7:
                 Actor_SpawnSceneActor(1);
                 Party_AddZenny(5, 0);
-                func_801ADCF4((u8)((s32)(-(((s32)GAME_WORK_AREA_PTR - (s32)g_Actors) * 0xD79435E5)) >> 3));
+                Actor_SpawnToss((u8)((s32)(-(((s32)GAME_WORK_AREA_PTR - (s32)g_Actors) * 0xD79435E5)) >> 3));
                 TASK(Actor)->unk_04 = 2;
                 break;
             default:

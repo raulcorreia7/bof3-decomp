@@ -1,6 +1,8 @@
-#include "game_00.h"
+#include "engine/game/00/game_00.h"
 
-MATCH void func_8019B024(void) {
+/* func_8019B024 */
+/* Moves the actor up by its vertical speed under gravity until it is 0x80 above the ground or below it, with a sound. */
+MATCH void Actor_TossFall(void) {
     Actor* work;
     s16    dist;
     s16    counter;

@@ -52,8 +52,9 @@
 void func_8019625C(void);
 /* func_80199440 */
 void func_80199440(void);
+/* Scene_StartToggleLock */
 /* func_8019ABB0 */
-void func_8019ABB0(s32 mode);
+void Scene_StartToggleLock(s32 frames);
 /* func_8019F75C */
 void func_8019F75C(void);
 /* func_8019F818 */

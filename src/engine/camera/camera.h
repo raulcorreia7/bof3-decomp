@@ -29,5 +29,21 @@ void  Camera_ProjectPoint(s32* pos, DVECTOR* screen_xy);
 
 /* func_801C7244 */
 void Camera_SetEncounter(s32 mode);
+/* func_8019A8B4 */
+void Camera_PanAngleRun(void);
+/* func_8019A904 */
+void Camera_PanAngleStart(void);
+/* func_8019AA44 */
+void Camera_PanAngleStep(void);
+/* func_8019AAFC */
+void Camera_PanAngleFinish(void);
+/* func_8019AC34 */
+void Camera_PanZoomRun(void);
+/* func_8019AC84 */
+void Camera_PanZoomStart(void);
+/* func_8019ACF4 */
+void Camera_PanZoomStep(void);
+/* func_8019AD70 */
+void Camera_PanZoomFinish(void);
 
 #endif
