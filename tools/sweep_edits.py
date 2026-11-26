@@ -821,7 +821,7 @@ def variants(text: str):
                 if len(seen) > CAP:
                     break
                 yield cls, label, edit
-        except (IndexError, StopIteration, ValueError):
+        except (IndexError, KeyError, RuntimeError, StopIteration, ValueError):
             continue
 
 
