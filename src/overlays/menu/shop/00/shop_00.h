@@ -671,7 +671,8 @@ void func_801E37B4(void);
 void func_801E37F4(MenuPanelTask* task);
 void func_801E3B7C(void);
 void func_801E3BA4(void);
-void func_801E3BF8(void);
+/* func_801E3BF8 */
+void UI_PanelSlideOutOption_801E3BF8(void);
 void func_801E3C38(void);
 void func_801E3C78(void);
 void func_801E3CB8(void);
