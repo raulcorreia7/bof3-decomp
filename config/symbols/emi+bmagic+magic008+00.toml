@@ -14,8 +14,10 @@ Effect_Reset = { addr = 0x801E5988, type = "func", source = "Clears every timer,
 g_BattleEffectBattler = { addr = 0x801EB4E0, source = "the battler the running effect acts on; Battle_UpdateEffects stores it for each effect step (emi/battle/battle/03 owns the cell)" }
 g_BattleEnemyBattlers = { addr = 0x801EB630, alias = true }
 g_BattleEffects = { addr = 0x801EC330, alias = true }
+g_BMagicSkillStrikeModes = { addr = 0x801EEC4C, source = "The mode routines of the skill strike task: Init, the wait for the strike effect and the follow-up launch, then the start-on-zero-tick end." }
 D_801EEC58 = { addr = 0x801EEC58, source = "Six step handlers of the magic008 effect, copied to the stack and run by header.step (byte 0x02) from func_801F0294." }
 D_801EEC70 = { addr = 0x801EEC70, type = "Magic008ThirdSteps", source = "Five step handlers of the magic008 effect, copied to the stack and run by header.step (byte 0x02) from func_801F0568." }
+g_BMagicSkillStrikeSteps = { addr = 0x801EEC84, source = "The step routines of the strike effect: Start, Swing, Hit, End." }
 D_801EECAC = { addr = 0x801EECAC, type = "Magic008EarlySteps", source = "Seven step handlers of the magic008 effect, run by header.step (byte 0x02) from func_801F1294." }
 D_801EECC8 = { addr = 0x801EECC8, type = "Magic008Steps", source = "Ten step handlers of the magic008 effect, copied to the stack and run by header.step (byte 0x02) from func_801F1708." }
 Effect_StartPlaying = { addr = 0x801EEFDC, type = "func", source = "Raises BATTLE_STATE_EFFECT_PLAYING and clears the effect work record in magic008 (Gambit, Mind Flay, Blind…)." }
@@ -23,8 +25,16 @@ Effect_PlayOnce = { addr = 0x801EF010, type = "func", source = "Plays the effect
 Effect_StartPlaying3 = { addr = 0x801EF728, type = "func", source = "Raises BATTLE_STATE_EFFECT_PLAYING and clears the effect work record in magic008 (Gambit, Mind Flay, Blind…)." }
 Effect_StartPlaying5 = { addr = 0x801EFA40, type = "func", source = "Raises BATTLE_STATE_EFFECT_PLAYING and clears the effect work record in magic008 (Gambit, Mind Flay, Blind…)." }
 Effect_StartPlaying7 = { addr = 0x801EFCFC, type = "func", source = "Raises BATTLE_STATE_EFFECT_PLAYING and clears the effect work record in magic008 (Gambit, Mind Flay, Blind…)." }
+BMagic_SkillStrikeUpdate = { addr = 0x801EFD30, type = "func", source = "Runs the task's current mode: start the strike, wait for it, then launch the follow-up effect (magic008, the strike of Gambit, Mind Flay, Blind, Devour, Target, Syphon, Feign Swing, Backhand and Risky Blow)." }
+BMagic_SkillStrikeInit = { addr = 0x801EFD90, type = "func", source = "Places the task at the battler, starts the strike effect on a copy of the battler, flags the battler busy and copies the battle overlay palette row from the arena palette." }
 Effect_StartOnZeroTick = { addr = 0x801F01E4, type = "func", source = "When the effect ticker (byte 0x0B) is zero raises BATTLE_STATE_EFFECT_PLAYING and clears the effect in magic008 (Gambit, Mind Flay, Blind…)." }
+BMagic_SkillStrikeFollowUp = { addr = 0x801F0230, type = "func", source = "Returns the follow-up effect id of the strike: the Mind Flay id when the action is Mind Flay, else none." }
 BMagic_DispatchEffectMode = { addr = 0x801F0250, type = "func", source = "Runs the handler that header.mode (byte 0x01) selects from the effect handlers of magic008." }
+BMagic_SkillStrikeEffectUpdate = { addr = 0x801F0964, type = "func", source = "Runs the strike effect's current step." }
+BMagic_SkillStrikeEffectStart = { addr = 0x801F09D0, type = "func", source = "Loads the strike's duration timer and draws the strike effect's actor." }
+BMagic_SkillStrikeEffectSwing = { addr = 0x801F0A20, type = "func", source = "Plays the strike animation until the timer runs out or the animation ends, then the attack sound." }
+BMagic_SkillStrikeEffectHit = { addr = 0x801F0AC8, type = "func", source = "Once the strike animation ends, marks the target damaged and lowers the battler's ticker." }
+BMagic_SkillStrikeEffectEnd = { addr = 0x801F0B44, type = "func", source = "Draws the growing screen fade for three frames, except for Feign Swing, then ends the effect." }
 Effect_DrawScreenFade = { addr = 0x801F0BBC, type = "func", source = "Draws the two-part screen fade whose shade is the effect timer (byte 0x09) times 16 in magic008 (Gambit, Mind Flay, Blind…)." }
 Effect_SetDuration = { addr = 0x801F133C, type = "func", source = "Reloads the effect timer (byte 0x09) with the value func_800AFF98 returns and advances header.step (byte 0x02) in magic008 (Gambit, Mind Flay, Blind…)." }
 Effect_ReloadTimerAndStep2 = { addr = 0x801F17BC, type = "func", source = "Reloads the effect timer (byte 0x09) with the value func_800AFF98 returns and advances header.step (byte 0x02) in magic008 (Gambit, Mind Flay, Blind…)." }
