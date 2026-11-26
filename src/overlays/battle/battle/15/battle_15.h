@@ -983,8 +983,7 @@ void        func_800B22EC(void);
 void        func_800B232C(void);
 void        func_800B2438(void);
 void        func_800B2478(void);
-/* func_800B250C */
-void        UI_PanelSlideOutOption_800B250C(void);
+void        func_800B250C(void);
 void        func_800B258C(void);
 /* func_800B25C0 */
 void        Menu_DrawInventoryWindow(MenuPanelTask* task);
