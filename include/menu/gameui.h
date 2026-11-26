@@ -260,7 +260,7 @@ extern u16 g_UiWindowEffectBusy;
  * effect comes as an out/in pair: out takes the screen to black or white, in
  * brings it back. The indexes not named here run camera spins and distance
  * resets. */
-typedef enum UIMode {
+typedef enum UiMode {
     UI_MODE_FADE_OUT       = 0,
     UI_MODE_FADE_IN        = 1,
     UI_MODE_FAST_FADE_OUT  = 2,
@@ -275,7 +275,7 @@ typedef enum UIMode {
     UI_MODE_LONG_FADE_IN   = 14,
     UI_MODE_LONG_WHITE_OUT = 15,
     UI_MODE_LONG_WHITE_IN  = 16,
-} UIMode;
+} UiMode;
 
 /* D_80143C90 */
 extern u16 g_UiModeLocal;
