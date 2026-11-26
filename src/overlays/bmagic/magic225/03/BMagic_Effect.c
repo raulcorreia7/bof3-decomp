@@ -4,20 +4,20 @@
 __asm__(".include \"include/match/macro.inc\"\n");
 #endif
 
-MATCH void func_801EEC14(void) {
-    Magic225Steps handlers = D_801EEC04;
-    PartyMember*  saved_task;
-    PartyMember*  saved_battler;
-    u8            i;
+/* func_801EEC14 */
+MATCH void BMagic_TemptationUpdate(void) {
+    BMagicTemptationModes handlers = g_BMagicTemptationModes;
+    PartyMember*          saved_task;
+    PartyMember*          saved_battler;
+    u8                    i;
 
-    SYS_DISPATCH_BYTE(handlers.steps, TASK(PartyMember)->header.mode);
+    SYS_DISPATCH_BYTE(handlers.modes, TASK(PartyMember)->header.mode);
 
-    BMAGIC_RUN_EFFECT_SLOTS(D_801F03BC, func_801EFE0C);
+    BMAGIC_RUN_EFFECT_SLOTS(g_BMagicTemptationActors, BMagic_TemptationSlotUpdate);
 }
 
-/* Clears the effect slots, centers the camera, claims the first effect slot and reloads palette rows 2 and 26 of
- * the work copy. */
-MATCH void func_801EED28(void) {
+/* func_801EED28 */
+MATCH void BMagic_TemptationInit(void) {
     u16*         dst;
     u16*         src;
     u16*         row_dst;
@@ -49,7 +49,8 @@ MATCH void func_801EED28(void) {
     SND_SEQueueSelection(EMI_SE_ID(SND_BANK_COMMON, 1));
 }
 
-MATCH void func_801EEE8C(void) {
+/* func_801EEE8C */
+MATCH void BMagic_TemptationSpawnActors(void) {
     u8           count;
     u8           i;
     u8           slot;
@@ -76,9 +77,8 @@ MATCH void func_801EEE8C(void) {
     }
 }
 
-/* Spawn three effects on each unblocked battler of the selected side: type j + 4 where
- * Battle_CanTarget accepts the battler for selector j, type 8 otherwise. */
-MATCH void func_801EEF8C(void) {
+/* func_801EEF8C */
+MATCH void BMagic_TemptationSpawnTargetEffects(void) {
     s32 i;
     s32 j;
     u8  slot;
@@ -160,20 +160,22 @@ MATCH void func_801EEF8C(void) {
 /* func_801EF2D8 */
 #include "overlays/bmagic/shared/BMagic_DispatchEffectMode.h"
 
-MATCH void func_801EF31C(void) {
+/* func_801EF31C */
+MATCH void BMagic_TemptationFlashUpdate(void) {
     g_Scripts = BMAGIC_SCRIPT_TABLE;
-    SYS_DISPATCH_BYTE(D_801F0398, TASK(PartyMember)->header.step);
+    SYS_DISPATCH_BYTE(g_BMagicTemptationFlashSteps, TASK(PartyMember)->header.step);
     if (TASK(PartyMember)->header.flags != 0 && TASK(PartyMember)->header.step != 0) {
-        func_801EFCA0();
-        func_801EF7D4(0x30, 0x10, 0x52, 0);
-        func_801EF7D4(0x12C, 0, 0x80, 1);
-        func_801EF7D4(0x40, 0xF0, 0x6C, 2);
-        func_801EF7D4(0x140, 0xF0, 0x5C, 3);
+        BMagic_TemptationDrawFlash();
+        BMagic_TemptationDrawGlow(0x30, 0x10, 0x52, 0);
+        BMagic_TemptationDrawGlow(0x12C, 0, 0x80, 1);
+        BMagic_TemptationDrawGlow(0x40, 0xF0, 0x6C, 2);
+        BMagic_TemptationDrawGlow(0x140, 0xF0, 0x5C, 3);
     }
     g_Scripts = AREA_SCRIPT_TABLE;
 }
 
-MATCH void func_801EF404(void) {
+/* func_801EF404 */
+MATCH void BMagic_TemptationFlashStart(void) {
     s32 i;
 
     BMAGIC_MARK_SELECTED_SIDE(2);
@@ -188,7 +190,8 @@ MATCH void func_801EF404(void) {
     TASK(PartyMember)->header.step += 1;
 }
 
-MATCH void func_801EF578(void) {
+/* func_801EF578 */
+MATCH void BMagic_TemptationFlashRise(void) {
     u8 timer_next;
 
     timer_next               = TASK(PartyMember)->timer + 2;
@@ -201,14 +204,16 @@ MATCH void func_801EF578(void) {
 
 #include "overlays/bmagic/shared/Effect_CountUpAndStep.h"
 
-MATCH void func_801EF628(void) {
+/* func_801EF628 */
+MATCH void BMagic_TemptationFlashWait(void) {
     if (g_BattleEffectBattler->param.unk_0B < 2U) {
         TASK(PartyMember)->param.unk_0B = 1;
         TASK(PartyMember)->header.step += 1;
     }
 }
 
-MATCH void func_801EF67C(void) {
+/* func_801EF67C */
+MATCH void BMagic_TemptationFlashEnd(void) {
     s32 i;
 
     if (TASK(PartyMember)->unk_09 != 0) {
@@ -221,9 +226,8 @@ MATCH void func_801EF67C(void) {
     }
 }
 
-/* Draw one corner glow of magic225 at the screen point (x, y): a disc of 32 wedges in the
- * colour row, then a ring of 32 quads fading out to half the radius again. */
-MATCH void func_801EF7D4(s32 x, s32 y, s32 radius, s32 color) {
+/* func_801EF7D4 */
+MATCH void BMagic_TemptationDrawGlow(s32 x, s32 y, s32 radius, s32 color) {
     POLY_G3* prim;
     POLY_G4* quad;
     s32      tpage;
@@ -234,9 +238,9 @@ MATCH void func_801EF7D4(s32 x, s32 y, s32 radius, s32 color) {
     D_1F800000_WORD[0] = (s16)radius;
     D_1F800000_WORD[1] = (s16)radius + (s16)radius / 2;
     D_1F800000_WORD[3] = TASK(PartyMember)->unk_09 * 4;
-    D_1F800000_WORD[4] = D_801F038C[color & BYTE_MASK][0] * TASK(PartyMember)->unk_09;
-    D_1F800000_WORD[5] = D_801F038C[color & BYTE_MASK][1] * TASK(PartyMember)->unk_09;
-    D_1F800000_WORD[6] = D_801F038C[color & BYTE_MASK][2] * TASK(PartyMember)->unk_09;
+    D_1F800000_WORD[4] = g_BMagicTemptationGlowColors[color & BYTE_MASK][0] * TASK(PartyMember)->unk_09;
+    D_1F800000_WORD[5] = g_BMagicTemptationGlowColors[color & BYTE_MASK][1] * TASK(PartyMember)->unk_09;
+    D_1F800000_WORD[6] = g_BMagicTemptationGlowColors[color & BYTE_MASK][2] * TASK(PartyMember)->unk_09;
     for (i = 0; (u32)(i & BYTE_MASK) < 32; i++) {
         prim = GFX_BeginPolyG3(1);
         setXY3(prim, x, y, x + FIXED_MUL(rsin((i & BYTE_MASK) << 7), D_1F800000_WORD[0]), y + FIXED_MUL(rcos((i & BYTE_MASK) << 7), D_1F800000_WORD[0]),
@@ -260,7 +264,8 @@ MATCH void func_801EF7D4(s32 x, s32 y, s32 radius, s32 color) {
     }
 }
 
-MATCH void func_801EFCA0(void) {
+/* func_801EFCA0 */
+MATCH void BMagic_TemptationDrawFlash(void) {
     POLY_F4*      prim;
     s32           tpage;
     volatile s32* shade;
@@ -277,20 +282,23 @@ MATCH void func_801EFCA0(void) {
     GFX_AddPrim((u8)TASK(PartyMember)->unk_29, sizeof(POLY_F4));
 }
 
-MATCH void func_801EFE0C(void) {
-    SYS_DISPATCH_TASK(D_801F03AC, 1, g_Task);
+/* func_801EFE0C */
+MATCH void BMagic_TemptationSlotUpdate(void) {
+    SYS_DISPATCH_TASK(g_BMagicTemptationActorSteps, 1, g_Task);
 }
 
-MATCH void func_801EFE50(void) {
+/* func_801EFE50 */
+MATCH void BMagic_TemptationActorUpdate(void) {
     g_Scripts = BMAGIC_SCRIPT_TABLE;
-    SYS_DISPATCH_BYTE(D_801F03AC + 1, TASK(PartyMember)->header.step);
+    SYS_DISPATCH_BYTE(g_BMagicTemptationActorSteps + 1, TASK(PartyMember)->header.step);
     if (TASK(PartyMember)->header.flags != 0 && TASK(PartyMember)->header.step != 0) {
         Area_AddGridActor();
     }
     g_Scripts = AREA_SCRIPT_TABLE;
 }
 
-MATCH void func_801EFEE8(void) {
+/* func_801EFEE8 */
+MATCH void BMagic_TemptationActorPlace(void) {
     PartyMember* caster;
     PartyMember* work;
     PartyMember* battler;
@@ -341,7 +349,7 @@ MATCH void func_801EFEE8(void) {
 }
 
 /* func_801F0140 */
-MATCH void BMagic_StepEffect(void) {
+MATCH void BMagic_TemptationActorFly(void) {
     s32 value;
 
     Script_AnimStepLoop();
@@ -360,7 +368,7 @@ MATCH void BMagic_StepEffect(void) {
 }
 
 /* func_801F021C */
-MATCH void BMagic_SetScaleX(void) {
+MATCH void BMagic_TemptationActorEnd(void) {
     Script_AnimStepLoop();
     TASK(PartyMember)->scale.x += 0x800;
     TASK(PartyMember)->scale.y += 0x800;

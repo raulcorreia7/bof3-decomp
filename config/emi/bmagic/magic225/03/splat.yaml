@@ -18,5 +18,5 @@ segments:
     align: 4
     subsegments:
       - [0x1788, bin, g_BMagicEffectModes]
-      - [0x17BC, bin, D_801F03BC]
+      - [0x17BC, bin, g_BMagicTemptationActors]
   - [0x26BC]
