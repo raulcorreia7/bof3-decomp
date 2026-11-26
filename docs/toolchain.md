@@ -174,8 +174,7 @@ source whose match marker decides a placed section. The rest of `config/` (attem
 
 For a scratch on [decomp.me](https://decomp.me/), choose PlayStation and `gcc2.7.2-psx`. The project
 flags are in `build/meson/tools/build/emit/cflags.txt`; the base set is
-`-O2 -G0 -funsigned-char -msoft-float -gcoff -Wa,--aspsx-version=2.56,--expand-div`, and the
-scenario `sce10eff/00` adds `-fno-cse-follow-jumps -fno-cse-skip-blocks`. Define `MATCHING` and
+`-O2 -G0 -funsigned-char -msoft-float -gcoff -Wa,--aspsx-version=2.56,--expand-div`. Define `MATCHING` and
 supply the required declarations in the scratch context. A scratch is a comparison tool;
 `check` verifies the project build.
 
@@ -209,9 +208,19 @@ serves every image. maspsx runs with `--aspsx-version=2.56 --expand-div` for eve
 expands each `div`/`divu` with the zero-divisor (`bnez`/`break 7`) and overflow (`break 6`) guards
 wherever the source divides, and code without a division is unchanged, so the flag is global.
 
-A per-unit flag override is a path-prefix rule in `meson.build` (`sce10eff_opt` is the only one).
-Add one for a clean-C exact match, with authorization, after a flag-profile trial reproduces the
-retail code. The global `--expand-div` covers every division trap; C is never rewritten to fake an
+Every object compiles with the same compiler and flags. A trial in November 2026
+(`tools/compiler_scan.py`) compiled the 137 open drafts under 22 old-gcc 0.17 builds (2.5.7 to
+2.95.2, plain and `-psx`), PsyQ `CC1PSX` 4.0, 4.1 and 4.3 through wibo, 46 flag settings and 14
+maspsx settings, then 182 pairs on 103 of them, and 334 matches with their helpers removed. No
+setting matched an open draft or brought one within 3 instructions. Every flag that matched a
+helper-free function broke other matched functions of its image (`-fno-schedule-insns2` keeps 3 of
+84 in `scena02`), so it steers and is no history. GCC 2.7.2.1 to 2.7.2.3 matched the area sprite
+body without its 32 `FAKE_VOLATILE` reads, but the plain body with a non-`const` record pointer
+matches under 2.7.2 too: a wrong type, not another compiler. PsyQ 4.0 `CC1PSX`
+(`2.7.2.SN32.3.7.0002`), plain GCC 2.7.1 and 2.7.2 give the pinned compiler's bytes on every open
+draft.
+
+The global `--expand-div` covers every division trap; C is never rewritten to fake an
 assembler expansion.
 
 Known compiler residuals:
