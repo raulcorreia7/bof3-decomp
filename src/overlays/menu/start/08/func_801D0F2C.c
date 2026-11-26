@@ -112,7 +112,7 @@ NON_MATCHING void func_801D0F2C(u8 start) {
             D_80145518[i][j] = 0xFF;
         }
     }
-    D_80145548 = D_801EBA44[start].unk_58;
+    g_SaveData.found_genes = D_801EBA44[start].unk_58;
     if (D_801EBA44[start].unk_58 != 0) {
         Char_AbilityAdd(0x97, D_80181B17, 0, 0);
     }

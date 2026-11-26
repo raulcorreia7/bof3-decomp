@@ -64,7 +64,7 @@ MATCH void func_801F9338(void) {
         case 4:
             if (g_ScriptVars[0] == 0x32) {
                 Char_AbilityAdd(0x97, g_CharSlot[0], 0, 0);
-                SYS_SetFlag(&D_80145548, 0);
+                SYS_SetFlag(&g_SaveData.found_genes, 0);
                 SYS_SetFlag(g_SceneFlags, 1);
                 Game_RequestAreaChange(AREA_ID_WYNDIA_WORLD_MAP, TO_COORD(0x28), TO_COORD(0x35), 0x86);
                 g_GamePrevSelection  = 0x2F;

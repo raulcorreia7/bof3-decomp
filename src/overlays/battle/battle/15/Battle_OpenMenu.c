@@ -2,10 +2,7 @@
 
 /* FAKE: a second symbol forces the separate %hi/%lo load retail has. */
 
-/* opens the battle menu pair, primes the shared timers and request
- * word, then unpacks the 18-bit panel flag mask into the 3x6 flag table and
- * advances the battle frame step.
- */
+/* Opens the gene menu and unpacks the found-genes mask into the 3x6 picker flags. */
 /* func_800A47AC */
 MATCH void Battle_OpenMenu(void) {
     u8 row;
@@ -31,7 +28,7 @@ MATCH void Battle_OpenMenu(void) {
     SND_SEPlay(EMI_SE_ID(SND_BANK_COMMON, 2));
     row   = 0;
     flags = D_800B7070;
-    mask  = &D_80145548;
+    mask  = &g_SaveData.found_genes;
     for (; row < 3U; row++) {
         for (col = 0; col < 6U; col++) {
             shifted_mask    = (*mask) >> (row * 6 + col);

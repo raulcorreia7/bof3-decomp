@@ -12,9 +12,7 @@ MATCH void Scene_RunGeneFound(void) {
             game_state = &g_GameStateIndex;
 
             if (*game_state != GAME_REQUEST_MESSAGE) {
-                /* Dest is the bit buffer at 0x80145548 (ahead of the celerity and
-                 * bonebreak timers); base+offset keeps the s0-reuse addiu, absolute form regresses
-                 * bytes. */
+                /* kept as step + 0xC5C = g_SaveData.found_genes: the member's absolute address lengthens the function */
                 SYS_SetFlag(state + 0xC5C, g_SceneEventState.selection);
                 strncpy((char*)g_TextVariables[0], (char*)UI_MessageGetText((g_SceneEventState.selection + 0x4172)), 8);
                 D_801490E0 = 0;

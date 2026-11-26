@@ -57,9 +57,8 @@ extern u32         D_80145044;
 /* The abilities the shop offers, packed to the front. */
 #define ABILITY_STOCK_SLOT_COUNT 128
 
-extern u8  D_8014546C[ABILITY_STOCK_SLOT_COUNT];
-extern u8  D_801454F4[][3];
-extern u32 D_80145548;
+extern u8 D_8014546C[ABILITY_STOCK_SLOT_COUNT];
+extern u8 D_801454F4[][3];
 /* A unit that must re-read the cell after every store (etc/game/00) defines
  * FAKE_DECL_GRAPHICS_PALETTE_PENDING_VOLATILE before its first include. */
 #ifdef FAKE_DECL_GRAPHICS_PALETTE_PENDING_VOLATILE

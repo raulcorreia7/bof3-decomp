@@ -10,6 +10,7 @@
 #include "sys/exe.h"
 #include "menu/draw.h"
 #include "menu/clock.h"
+#include "menu/save_data.h"
 
 /* FAKE: the callers pass the counter as volatile and the delta as s32, which the real prototype (u16*, s16) lacks. */
 #define Char_AddStat                   ((s16 (*)(volatile u16*, s32))Char_AddStat)

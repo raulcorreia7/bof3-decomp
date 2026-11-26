@@ -71,7 +71,9 @@ typedef struct SaveData {
     /* 0x774 */ u8               inventory_ids[4][INV_SLOTS_PER_CATEGORY];
     /* 0x974 */ u8               inventory_counts[4][INV_SLOTS_PER_CATEGORY];
     /* 0xB74 */ u8               vital_item_ids[INV_VITAL_ITEM_SLOTS];
-    /* 0xB94 */ u8               unk_B94[0xE8];
+    /* 0xB94 */ u8               unk_B94[0xDC];
+    /* 0xC70 */ u32              found_genes; /* bit n set: the dragon gene of picker cell n is found (18 genes) */
+    /* 0xC74 */ u8               unk_C74[8];
     /* 0xC7C */ GameClock        celerity_timer;
     /* 0xC80 */ GameClock        bonebreak_timer;
     /* 0xC84 */ u8               unk_C84[0x66];
@@ -106,6 +108,7 @@ ASSERT_OFFSET(SaveData, return_point, 0x768);
 ASSERT_OFFSET(SaveData, inventory_ids, 0x774);
 ASSERT_OFFSET(SaveData, inventory_counts, 0x974);
 ASSERT_OFFSET(SaveData, vital_item_ids, 0xB74);
+ASSERT_OFFSET(SaveData, found_genes, 0xC70);
 ASSERT_OFFSET(SaveData, celerity_timer, 0xC7C);
 ASSERT_OFFSET(SaveData, bonebreak_timer, 0xC80);
 ASSERT_OFFSET(SaveData, fairy_jobs, 0xCF0);

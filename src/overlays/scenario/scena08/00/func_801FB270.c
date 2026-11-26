@@ -172,8 +172,8 @@ MATCH void func_801FB270(void) {
             if (g_ScriptVars[0] != 0) {
                 break;
             }
-            SYS_SetFlag((u8*)&D_80145548, 3);
-            SYS_SetFlag((u8*)&D_80145548, 0x10);
+            SYS_SetFlag((u8*)&g_SaveData.found_genes, 3);
+            SYS_SetFlag((u8*)&g_SaveData.found_genes, 0x10);
             SYS_SetFlag(g_SceneFlags, 4);
             D_80146258 &= ~GAME_FLAG_SCROLL_LOCK;
             Game_ClearScriptActive();
