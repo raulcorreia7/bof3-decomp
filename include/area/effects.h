@@ -7,8 +7,7 @@
 #include "area/area.h"
 #include "psx/psyq.h"
 
-/* One of the 128 falling sparks at AREA_WORK: the walkers fall it by its speed
- * each frame and clear it below the actor's ground height. */
+/* One of the 128 falling sparks at AREA_WORK: the walkers fall it by its speed each frame and clear it below the actor's ground height. */
 typedef struct AreaSpark {
     u8     active;     /* 0x00 - 0 marks a free spark */
     u8     unk_01;     /* 0x01 */
@@ -115,8 +114,7 @@ ASSERT_SIZE(TrailPoint, 0x18);
 #define TRAIL_LENGTH        32
 #define TRAIL_HEADING_UNSET 0x1000
 
-/* The record of the last 32 positions the glowing ribbon behind a moving object is drawn from:
- * Trail_Update pushes the newest at the front and drops the oldest. */
+/* The record of the last 32 positions the glowing ribbon behind a moving object is drawn from. */
 typedef struct Trail {
     TrailPoint point[TRAIL_LENGTH];
     u16        heading[TRAIL_LENGTH - 1]; /* screen heading from each point to the next */
@@ -141,8 +139,7 @@ ASSERT_OFFSET(SparkParticle, velocity, 0x08);
 ASSERT_OFFSET(SparkParticle, pos, 0x18);
 ASSERT_SIZE(SparkParticle, 0x28);
 
-/* The second and third vertex of a spark triangle relative to its projected first
- * vertex, in screen space. */
+/* The second and third vertex of a spark triangle relative to its projected first vertex, in screen space. */
 typedef struct TriangleOffset {
     u16 dx1;
     u16 dy1;
@@ -155,8 +152,7 @@ ASSERT_OFFSET(TriangleOffset, dx2, 0x04);
 ASSERT_OFFSET(TriangleOffset, dy2, 0x06);
 ASSERT_SIZE(TriangleOffset, 8);
 
-/* One 10-byte point of a dot trail (area098 at AREA_WORK + 0x2000, sce15ef1 at
- * AREA_WORK + 0x5A00). */
+/* One 10-byte point of a dot trail (area098 at AREA_WORK + 0x2000, sce15ef1 at AREA_WORK + 0x5A00). */
 typedef struct TrailDot {
     u8  active; /* 0x00 - flips every frame it is processed */
     u8  life;   /* 0x01 */

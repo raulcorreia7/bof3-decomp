@@ -227,9 +227,9 @@ Meson, setup or another tool calls these. A contributor does not run them.
 | -------------------------------------------- | ----------------------------------------------------------------------- |
 | `setup.py`, `setup.sh`, `psyq.sh`, `psyq_lib.py`, `fetch_verified.sh` | Install the toolchain and extract the disc                |
 | `split.py`, `link_symbols.py`                | Split an image and write its link script                                |
-| `cc.py`, `psxdecomp/dmpsx.py`                | The compiler wrapper (it caches objects in `~/.cache/bof3-cc`; `BOF3_CC_CACHE=0` turns that off) and the DMPSX rewrite |
+| `cc.py`, `psxdecomp/dmpsx.py`                | The compiler wrapper (it caches objects in `~/.cache/bof3-cc`, bounded, `--prune` and `--stats` run by hand; `BOF3_CC_CACHE=0` turns that off) and the DMPSX rewrite |
 | `objdiff_config.py`, `rzproject.py`          | Build the objdiff project and the Rizin projects                        |
-| `unity_check.py`, `check_addrs.py`, `check_kept.py`, `check_matches.py`, `check_markers.py`, `check_names.py`, `check_asm.sh`, `check_externs.sh`, `check_configured.sh`, `check_plain.sh`, `check_tree.sh`, `check_enum_members.py`, `check_signatures.py` | The bodies of the `addrs`, `kept`, `matches`, `markers`, `names`, `check-asm`, `externs`, `check-headers`, `check-plain` and `check-tree` gates |
+| `check_addrs.py`, `check_kept.py`, `check_matches.py`, `check_markers.py`, `check_names.py`, `check_asm.sh`, `check_externs.sh`, `check_configured.sh`, `check_plain.sh`, `check_tree.sh`, `check_enum_members.py`, `check_signatures.py` | The bodies of the `addrs`, `kept`, `matches`, `markers`, `names`, `check-asm`, `externs`, `check-headers`, `check-plain` and `check-tree` gates |
 | `format.sh`                                  | The body of `format` and `format-check`                                 |
 
 `decomp_yaml.py` writes coddog's manifest and is called by `bin/coddog`, not by the build.

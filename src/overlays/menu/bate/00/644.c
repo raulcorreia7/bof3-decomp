@@ -250,10 +250,10 @@ NON_MATCHING void func_801D1C90(void) {
         i++;
     } while (i < 3);
     g_UiPanelTasks[0].item_table    = (s32)D_801D8EE0;
-    g_UiPanelTasks[1].unk_0B        = 0xFF;
     g_UiPanelTasks[1].pos.x         = -0xAA;
     g_UiPanelTasks[1].pos.y         = 0x3E;
     g_UiPanelTasks[1].unk_0C        = 7;
+    g_UiPanelTasks[1].unk_0B        = 0xFF;
     g_UiPanelTasks[0].unk_09        = 0;
     g_UiPanelTasks[0].unk_0B        = 0;
     g_UiPanelTasks[0].unk_0A        = 0;

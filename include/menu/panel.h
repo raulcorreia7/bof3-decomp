@@ -15,9 +15,7 @@
 /* retail addresses */
 #define MENU_PANEL_COUNT       22
 
-/* Shared panel-animation quantities. Steps and clamps are human quantities, so
- * they are decimal (handbook: addresses/masks/encodings hex, pixel steps/clamps
- * decimal). */
+/* Shared panel-animation quantities. */
 #define MENU_PANEL_STEP_X      32
 #define MENU_PANEL_STEP_Y      16
 #define MENU_PANEL_FLOOR_X     (-170)
@@ -121,8 +119,7 @@ ASSERT_SIZE(MenuListParams, 2);
 /* The widest menu label or title, in glyphs. */
 #define MENU_LABEL_LENGTH 16
 
-/* The frame sprites of a panel border: the top edge and its corners, the side edges, and the flat bottom edge
- * that closes the short panels. */
+/* The frame sprites of a panel border: the top edge and its corners, the side edges, and the flat bottom edge that closes the short panels. */
 enum {
     MENU_FRAME_SPRITE_TOP_LEFT          = 0x28,
     MENU_FRAME_SPRITE_TOP               = 0x29,
@@ -134,8 +131,7 @@ enum {
     MENU_FRAME_SPRITE_FLAT_BOTTOM_RIGHT = 0x3C,
 };
 
-/* MenuListPanel.flags: two cursor-tab bits, and a frame countdown in the high
- * nibble that the drawer steps down once per draw. */
+/* MenuListPanel.flags: two cursor-tab bits, and a frame countdown in the high nibble that the drawer steps down once per draw. */
 #define MENU_LIST_FLAG_TAB_1 0x01
 #define MENU_LIST_FLAG_TAB_2 0x02
 #define MENU_LIST_FRAME_MASK 0xF0
@@ -240,8 +236,7 @@ typedef struct MenuPanelTask {
     u8    unk_0E;
     u8    layer; /* panel layer, tested against the dispatch mode */
 
-    /* The cells 0x10..0x1F mean different things to each panel mode; each user
-     * reads the view that names what the mode keeps there. */
+    /* The cells 0x10..0x1F mean different things to each panel mode; each user reads the view that names what the mode keeps there. */
     union {
         MenuPanelGrow    grow;    /* the window-grow animation (slus) */
         MenuPanelMessage message; /* the header bar that shows a message */

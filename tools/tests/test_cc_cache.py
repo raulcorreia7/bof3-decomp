@@ -48,5 +48,5 @@ def test_a_hit_copies_the_object_and_rewrites_the_depfile(
         assert cc.main(["--build-dir", str(tmp_path / name), *args, "-o", "a.o"]) == 0
         out.append(tmp_path / name)
     assert (out[0] / "a.o").read_bytes() == (out[1] / "a.o").read_bytes()
-    assert len(list((tmp_path / "cache").glob("*/*.o"))) == 1
+    assert len(list((tmp_path / "cache").glob("*/*.obj"))) == 1
     assert (out[1] / "a.d").read_text().startswith("a.o:")

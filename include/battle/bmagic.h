@@ -102,8 +102,7 @@ typedef struct MagicModule {
 
 ASSERT_SIZE(MagicModule, 0x10);
 
-/* The effect-module entry points, in address order: battle/battle/03 runs a
- * module through these steps. */
+/* The effect-module entry points, in address order: battle/battle/03 runs a module through these steps. */
 void func_801EEC04(void);
 void func_801EEC58(void);
 void func_801EED70(void);

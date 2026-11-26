@@ -110,7 +110,6 @@ look as if it dropped what newer commits added. CI has no disc and runs no byte 
 | `check-<image>`   | The same for one image, for example `check-exe+slus_004_22`.                                                                                                                                                                                                                                                                                     |
 | `disc`            | Rebuild every EMI archive from the built images, patch a copy of your disc into `build/disc-rebuild/`, and compare every file, both tracks and the cue with `config/disc.toml`. One line per mismatch, else `disc: all N files and both tracks match`. Needs the disc and every image; not a push check, and CI skips it because CI has no disc. |
 | `check-headers`   | Compile every public header on its own.                                                                                                                                                                                                                                                                                                          |
-| `check-unity`     | Parse every image's sources as one unit, to find a type, prototype or macro that two files declare differently. A check, never linked.                                                                                                                                                                                                           |
 | `check-plain`     | Compile every C source as plain C, without `MATCHING`, so no source depends on a matching helper.                                                                                                                                                                                                                                                |
 | `check-tree`      | Reject what [pre-push](../tools/README.md#pre-push) lists for it.                                                                                                                                                                                                                                                                                |
 | `check-asm`       | Reject more `INCLUDE_ASM` lines than at the [base ref](#commands), in total or in any one image. An image is keyed by the last two folders of its source directory (`game/00`; `slus` and `logo` stand alone).                                                                                                                                   |
@@ -240,7 +239,10 @@ accepts.
 
 Objects are cached in `~/.cache/bof3-cc`, shared by every worktree and keyed on the preprocessed
 source, the arguments and the hashes of GCC, maspsx, DMPSX and `as`; `BOF3_CC_CACHE=0` turns it off,
-`BOF3_CC_CACHE_DIR` moves it.
+`BOF3_CC_CACHE_DIR` moves it. Each key is one file; the cache keeps at most 30,000 entries and 256 MiB (a full build is 7,300
+entries, 46 MB; `BOF3_CC_MAX_ENTRIES` and `BOF3_CC_MAX_BYTES` change that). `tools/cc.py --prune`
+removes the least recently used entries, `--stats` prints entries, bytes and inodes, and scratch
+measurements (`MATCH_SRC`, the permuter) bypass the cache.
 
 ## Inline functions and byte identity
 

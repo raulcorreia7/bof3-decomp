@@ -25,8 +25,8 @@ NON_MATCHING void func_801F2F38(s32 index, s32 height) {
     SetRotMatrix(&matrix);
     SetTransMatrix(&matrix);
 
-    tiles = &D_801F3F18[index * 4];
     i     = 0;
+    tiles = &D_801F3F18[index * 4];
     do {
         prim = (POLY_FT4*)g_GfxPrimCursor;
         SetPolyFT4(prim);
@@ -38,7 +38,7 @@ NON_MATCHING void func_801F2F38(s32 index, s32 height) {
         }
         corner = SPAD(0u)->vectors;
         RotTransPers4(corner, &corner[1], &corner[2], &corner[3], (s32*)&prim->x0, (s32*)&prim->x1, (s32*)&prim->x2, (s32*)&prim->x3, &depth, &flag);
-        Area_ApplyTileToQuad(D_801F3F20[tiles[i]] + (((D_801F3F30[tiles[i]] * height) << 8) & AREA106_TILE_WORD_MASK), prim, 1);
+        Area_ApplyTileToQuad(D_801F3F20[tiles[i]] + (((height * D_801F3F30[tiles[i]]) << 8) & AREA106_TILE_WORD_MASK), prim, 1);
         GFX_AddPrim(GFX_LAYER_SCENE_BACK, sizeof(POLY_FT4));
         i++;
     } while (i < 4);

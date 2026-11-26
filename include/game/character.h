@@ -42,8 +42,7 @@
  * immediate (andi) in Battle_ReloadPartySprites's schedule. */
 #define STATUS_CURE_MASK                                                                  ((u16) ~(STATUS_KO | STATUS_POISONED | STATUS_CONFUSED))
 
-/* Equipment bits: the characters that may use a weapon or armor record
- * (Item.equipability). */
+/* Equipment bits: the characters that may use a weapon or armor record (Item.equipability). */
 typedef enum EquipCharacterFlags {
     EQUIP_RYU   = 1 << 0,
     EQUIP_NINA  = 1 << 1,
@@ -55,8 +54,7 @@ typedef enum EquipCharacterFlags {
     EQUIP_WHELP = 1 << 7,
 } EquipCharacterFlags;
 
-/* Equipment slot: the order of the Character members weapon, shield, helmet,
- * armor and accessories[]. */
+/* Equipment slot: the order of the Character members weapon, shield, helmet, armor and accessories[]. */
 typedef enum EquipSlot {
     EQUIP_SLOT_WEAPON      = 0,
     EQUIP_SLOT_SHIELD      = 1,
@@ -176,8 +174,7 @@ typedef enum MasterId {
     MASTER_MERYLEEP  = 16,
 } MasterId;
 
-/* The operations of a master's stat modifier script, one (operation, amount) pair each, applied by
- * Char_ApplyMaster. Operations 0 to 8 add to the resistance of that RES_INDEX_*. */
+/* The operations of a master's stat modifier script, one (operation, amount) pair each, applied by Char_ApplyMaster. */
 typedef enum MasterModifier {
     MASTER_MOD_SURPRISE_CHANCE = 9,
     MASTER_MOD_REPRISAL_CHANCE = 10,
@@ -187,8 +184,7 @@ typedef enum MasterModifier {
     MASTER_MOD_END             = 14,
 } MasterModifier;
 
-/* The 0x20-byte stat block: the live copy at +0x1C holds the equipment and
- * buffs a battle reads; the permanent copy at +0x3C is what level-ups raise. */
+/* The 0x20-byte stat block: the live copy at +0x1C holds the equipment and buffs a battle reads; the permanent copy at +0x3C is what level-ups raise. */
 typedef struct Stats {
     u16 max_hp;
     u16 max_ap;
@@ -330,8 +326,7 @@ typedef struct CharacterSpritesSection {
 ASSERT_SIZE(CharacterSprites, 0x0C);
 ASSERT_OFFSET(CharacterSpritesSection, palette_offset, 0x04);
 
-/* The party's character records, one per CHAR_INDEX_*. Every field/menu reader
- * indexes it through the g_CharSlot slot of a stored character id. */
+/* The party's character records, one per CHAR_INDEX_*. */
 /* D_80144968 */
 extern Character   g_Characters[CHAR_INDEX_COUNT];
 /* D_801CB8DC */
