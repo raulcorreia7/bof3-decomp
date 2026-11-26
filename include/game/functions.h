@@ -111,7 +111,7 @@ void func_801C2710(void);
 /* func_801C29A0 */
 bool func_801C29A0(s8 tuning_delta);
 /* func_801C2BEC */
-void func_801C2BEC(void);
+void Party_FloorDamageUpdate(void);
 /* func_801C329C */
 void func_801C329C(void);
 /* func_801C4C48 */

@@ -32,7 +32,8 @@ jtbl_80195F9C = { addr = 0x80195F9C, type = "Callback", source = "The switch tab
 g_GameRewardZennyFormat = { addr = 0x80195FBC, source = "The %d format Game_RewardZenny prints the amount with." }
 jtbl_80195FC0 = { addr = 0x80195FC0, type = "Callback", source = "The switch table of func_801BC4D0: the jump targets of its jr dispatch." }
 s_FairyConstructionThresholds = { addr = 0x80195FE0, source = "Row of s8 thresholds func_801C2018 indexes by bit_index - 0xF6 to decide when the fairy village construction stage is reached." }
-g_PartyDamageCellColors = { addr = 0x80195FEC, source = "The damage colour index of each of the nine damage cell types 0x80 to 0x88." }
+g_PartyFloorDamageColors = { addr = 0x80195FEC, source = "The damage colour index of each of the nine damage cell types 0x80 to 0x88." }
+g_PartyFloorDamages = { addr = 0x80195FF8, source = "The floor damage rows, indexed by the damage cell type 0x80 + n: HP loss, AP loss and the ailment of each." }
 g_PartyDamageColors = { addr = 0x80196014, source = "The four 15-bit colours Party_FlashDamage floods the palette row with: red, purple, yellow, blue." }
 Actor_FindFreeSpawned = { addr = 0x8019601C, type = "func", source = "Returns the index of the first g_SpawnedActors entry whose header.flags is 0, or 0xFF when all ACTOR_SLOT_COUNT are in use (the other array is searched by Actor_FindFreeField)." }
 Actor_Clear = { addr = 0x80196070, type = "func", source = "Frees the current g_Task actor: clears header.flags, header.mode (byte 0x01), the step (byte 0x02) and bytes 0x03 and 0x04." }
@@ -411,7 +412,8 @@ Area_SetWalkVelocity = { addr = 0x801C2538, type = "func", source = "Sets the ta
 Area_ScrollUpdateWalk = { addr = 0x801C2710, type = "func", source = "Moves the area scroll with the walking actor: the camera step from the walk mode and speed scale, the scroll target from the actor's position and velocity." }
 Party_StartCellWalk = { addr = 0x801C2AAC, type = "func", source = "Switches the actor to mode 2 step 6 when it stands on a cell of code 0xD0; returns whether it did." }
 Party_StartFallThrough = { addr = 0x801C2B4C, type = "func", source = "Switches the actor to mode 2 step 7 when it stands on a cell of code 0xA4; returns whether it did." }
-Char_SetCharacterId = { addr = 0x801C2E34, type = "func", source = "the body stores into g_Game.current->chr.character_id" }
+Party_FloorDamageUpdate = { addr = 0x801C2BEC, type = "func", source = "Finds the damage cell under the party member, applies its floor damage row and flashes the party member's colour." }
+Party_FloorDamageApply = { addr = 0x801C2E34, type = "func", source = "the body stores into g_Game.current->chr.character_id" }
 Party_FlashDamage = { addr = 0x801C308C, type = "func", source = "Fills the field actor's palette row with one of the four damage colours of g_PartyDamageColors, plays the common sound effect 8 and sets bit 3 of the member's field flags; called for the caterpillar sting, poison steps and damage cells." }
 Party_TickConfusion = { addr = 0x801C3598, type = "func", source = "Counts down the confusion of the active character and clears the status at zero." }
 Party_StartFloorDamage = { addr = 0x801C364C, type = "func", source = "Switches the actor to mode 2 step 8 with the given effect row when a cell under it has the wanted code; returns whether it did." }

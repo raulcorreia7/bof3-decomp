@@ -164,8 +164,10 @@ void Party_RunFollower(void);
 s32  Party_StartCellWalk(void);
 /* func_801C2B4C */
 s32  Party_StartFallThrough(void);
+/* func_801C2E34 */
+void Party_FloorDamageApply(u8 damage_index);
 /* func_801C308C */
 void Party_FlashDamage(s32 color_index);
 /* func_801C364C */
-s32  Party_StartFloorDamage(s32 wanted_code, s32 effect_row, s32 find_facing);
+s32  Party_StartFloorDamage(s32 wanted_code, s32 damage_index, s32 find_facing);
 #endif
