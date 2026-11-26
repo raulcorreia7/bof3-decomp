@@ -170,9 +170,9 @@ MATCH void BMagic_SimoonDrawDome(void) {
     }
 }
 
-/* Draw the magic103 shaded ring band. Retail writes both radii to params[0], so the inner
- * edge uses whatever params[1] holds. */
-MATCH void func_801EF7CC(void) {
+/* func_801EF7CC */
+/* Retail writes both radii to params[0], so the inner edge uses whatever params[1] holds. */
+MATCH void BMagic_SimoonDrawRing(void) {
     POLY_G4* prim;
     long     depth;
     long     flag;
