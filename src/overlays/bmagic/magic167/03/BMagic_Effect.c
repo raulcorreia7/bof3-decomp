@@ -249,17 +249,17 @@ NON_MATCHING void func_801EFC44(void) {
     s32      x;
     s32      y;
 
-    g_ScratchPad.cells.words[3]                  = (TASK(PartyMember)->param.unk_0B & 0x1F) << 7;
+    g_ScratchPad.cells.words[3] = (TASK(PartyMember)->param.unk_0B & 0x1F) << 7;
     g_ScratchPad.cells.words[0] = 0xC0 - TASK(PartyMember)->unk_09 * 2;
-    g_ScratchPad.cells.words[2]                  = -(TASK(PartyMember)->unk_09 * 12);
+    g_ScratchPad.cells.words[2] = -(TASK(PartyMember)->unk_09 * 12);
     join                        = TASK(PartyMember)->timer * 2;
     rim.vx                      = FIXED_MUL(rsin(g_ScratchPad.cells.words[3]), g_ScratchPad.cells.words[0]);
     rim.vy                      = FIXED_MUL(rcos(g_ScratchPad.cells.words[3]), g_ScratchPad.cells.words[0]);
     rim.vz                      = g_ScratchPad.cells.words[2];
     for (i = 1; i < TASK(PartyMember)->timer; i++) {
-        g_ScratchPad.cells.words[3]                  = ((TASK(PartyMember)->param.unk_0B - i) & 0x1F) << 7;
+        g_ScratchPad.cells.words[3] = ((TASK(PartyMember)->param.unk_0B - i) & 0x1F) << 7;
         g_ScratchPad.cells.words[0] = 0xC0 - (TASK(PartyMember)->unk_09 - i) * 2;
-        g_ScratchPad.cells.words[2]                  = -((TASK(PartyMember)->unk_09 - i) * 12);
+        g_ScratchPad.cells.words[2] = -((TASK(PartyMember)->unk_09 - i) * 12);
         span                        = TASK(PartyMember)->timer * 3 - i / 2;
 
         /* The join face: this tick's rim against the rim point the previous tick left. */
@@ -287,17 +287,17 @@ NON_MATCHING void func_801EFC44(void) {
                       &depth, &flag);
         if (TASK(PartyMember)->header.step == 2) {
             /* The last tick darkens the join with the depth it has covered. */
-            fade       = TASK(PartyMember)->unk_09 + i - 24;
+            fade                        = TASK(PartyMember)->unk_09 + i - 24;
             g_ScratchPad.cells.words[1] = fade;
             if (fade >= 17) {
-                fade       = 15;
+                fade                        = 15;
                 g_ScratchPad.cells.words[1] = fade;
             }
-            shade      = 0xC0 - fade * 12;
+            shade                       = 0xC0 - fade * 12;
             g_ScratchPad.cells.words[1] = 0x30 - g_ScratchPad.cells.words[1] * 3;
         } else {
             g_ScratchPad.cells.words[1] = 0x30 - i * 3;
-            shade      = 0xC0 - i * 12;
+            shade                       = 0xC0 - i * 12;
         }
         setRGB0(poly, 1, 1, 1);
         setRGB1(poly, 1, 1, 1);

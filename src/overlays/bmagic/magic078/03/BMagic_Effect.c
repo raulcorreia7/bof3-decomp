@@ -204,7 +204,7 @@ NON_MATCHING void func_801EF318(void) {
             func_801EFE14(line, &line_values[seg - 1 + ring * 6], g_ScratchPadVectors[0], g_ScratchPadVectors[1], g_ScratchPadVectors[3], g_ScratchPadVectors[2]);
             line++;
             values[ring * 6 + seg - 1] = RotAverage4(&g_ScratchPadVectors[0], &g_ScratchPadVectors[1], &g_ScratchPadVectors[2], &g_ScratchPadVectors[3], (long*)&prim->x0, (long*)&prim->x1,
-                                                      (long*)&prim->x2, (long*)&prim->x3, &depth, &flag);
+                                                     (long*)&prim->x2, (long*)&prim->x3, &depth, &flag);
 
             setRGB0(prim, 0x10, 0x10, 0x80);
             /* The flash brightens one segment per frame; from step 5 the segment fades with the timer. */

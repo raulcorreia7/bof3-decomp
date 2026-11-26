@@ -14,8 +14,8 @@ NON_MATCHING void Battle_ReadCommandMenu(void) {
     if ((g_PadStates[0].pressed & g_InputMasks[BATTLE_INPUT_CANCEL]) && ((s8)g_Battle.command_count != 0)) {
         SND_SEPlay(EMI_SE_ID(SND_BANK_COMMON, 6));
         g_Battle.phase.step -= 1;
-        temp_v0_50             = (u8)g_Battle.command_count - 1;
-        g_Battle.command_count = temp_v0_50;
+        temp_v0_50              = (u8)g_Battle.command_count - 1;
+        g_Battle.command_count  = temp_v0_50;
         temp_v0_66              = &g_Game.members[D_801462F6[temp_v0_50]];
         g_BattleMessageSlot     = &temp_v0_66->header.flags;
         temp_v0_66->header.mode = 2;

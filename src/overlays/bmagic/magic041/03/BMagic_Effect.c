@@ -175,10 +175,10 @@ MATCH void func_801EF670(void) {
     g_ScratchPad.cells.halves[1] = TASK(PartyMember)->unk_09 + 160 - FIXED_MUL(rsin(start), 16);
     g_ScratchPad.cells.halves[4] = (TASK(PartyMember)->timer << 3) + 32 - FIXED_MUL(rsin(g_ScratchPad.cells.halves[2]), 8);
     setVector(&g_ScratchPadVectors[1], FIXED_MUL(rcos(0), g_ScratchPad.cells.halves[1]), FIXED_MUL(rsin(0), g_ScratchPad.cells.halves[1]), -g_ScratchPad.cells.halves[4]);
-    g_ScratchPadVectors[3].vx    = FIXED_MUL(rcos(0), g_ScratchPad.cells.halves[0]);
-    g_ScratchPadVectors[3].vy    = FIXED_MUL(rsin(0), g_ScratchPad.cells.halves[0]);
-    g_ScratchPadVectors[2].vz    = 0;
-    g_ScratchPadVectors[3].vz    = 0;
+    g_ScratchPadVectors[3].vx = FIXED_MUL(rcos(0), g_ScratchPad.cells.halves[0]);
+    g_ScratchPadVectors[3].vy = FIXED_MUL(rsin(0), g_ScratchPad.cells.halves[0]);
+    g_ScratchPadVectors[2].vz = 0;
+    g_ScratchPadVectors[3].vz = 0;
     for (i = 1; i <= 64; i++) {
         g_ScratchPad.cells.halves[2] = (((rand() & 3) + i + TASK(PartyMember)->unk_09) & 0xF) * 256;
         if (i == 64) {
@@ -190,13 +190,13 @@ MATCH void func_801EF670(void) {
         g_ScratchPadVectors[0].vy    = g_ScratchPadVectors[1].vy;
         g_ScratchPadVectors[0].vz    = g_ScratchPadVectors[1].vz;
         setVector(&g_ScratchPadVectors[1], FIXED_MUL(rcos(i << 6), g_ScratchPad.cells.halves[1]), FIXED_MUL(rsin(i << 6), g_ScratchPad.cells.halves[1]), -g_ScratchPad.cells.halves[4]);
-        g_ScratchPadVectors[2].vx    = g_ScratchPadVectors[3].vx;
-        g_ScratchPadVectors[2].vy    = g_ScratchPadVectors[3].vy;
-        g_ScratchPadVectors[3].vx    = FIXED_MUL(rcos(i << 6), g_ScratchPad.cells.halves[0]);
-        g_ScratchPadVectors[3].vy    = FIXED_MUL(rsin(i << 6), g_ScratchPad.cells.halves[0]);
-        x                            = (g_ScratchPadVectors[3].vx << 9) + TASK(PartyMember)->pos.x.fixed;
-        y                            = (g_ScratchPadVectors[3].vx << 9) + TASK(PartyMember)->pos.y.fixed;
-        tpage                        = getTPage(TPAGE_DEPTH_4BIT, TPAGE_ABR_ADD, 320, 256);
+        g_ScratchPadVectors[2].vx = g_ScratchPadVectors[3].vx;
+        g_ScratchPadVectors[2].vy = g_ScratchPadVectors[3].vy;
+        g_ScratchPadVectors[3].vx = FIXED_MUL(rcos(i << 6), g_ScratchPad.cells.halves[0]);
+        g_ScratchPadVectors[3].vy = FIXED_MUL(rsin(i << 6), g_ScratchPad.cells.halves[0]);
+        x                         = (g_ScratchPadVectors[3].vx << 9) + TASK(PartyMember)->pos.x.fixed;
+        y                         = (g_ScratchPadVectors[3].vx << 9) + TASK(PartyMember)->pos.y.fixed;
+        tpage                     = getTPage(TPAGE_DEPTH_4BIT, TPAGE_ABR_ADD, 320, 256);
         SetDrawMode((DR_MODE*)g_GfxPrimCursor, 0, 1, tpage, 0);
         Area_CellAddPrim(x, y, 0, sizeof(DR_MODE));
         prim = (POLY_G4*)g_GfxPrimCursor;

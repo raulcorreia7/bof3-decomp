@@ -291,12 +291,12 @@ NON_MATCHING void func_801EF8F4(void) {
     g_GfxPalettePending = 1;
     GFX_ClearRect(0x340, 0x100, 0xC0, 0x100);
 
-    slot = Battle_AllocEffect(1, 0x3A);
+    slot                                      = Battle_AllocEffect(1, 0x3A);
     *(BattleWorkImage*)&g_BattleEffects[slot] = *(BattleWorkImage*)&BATTLE_ACTIVE_PARTY;
-    g_BattleEffects[slot].header.mode        = 2;
-    g_BattleEffects[slot].unk_06             = 1;
-    g_BattleEffects[slot].step_index         = 0x3A;
-    g_BattleEffects[slot].header.step        = 0;
+    g_BattleEffects[slot].header.mode         = 2;
+    g_BattleEffects[slot].unk_06              = 1;
+    g_BattleEffects[slot].step_index          = 0x3A;
+    g_BattleEffects[slot].header.step         = 0;
     g_BattleEffects[slot].header.flags &= ~PARTY_MEMBER_FLAG_HANDLER_BUSY;
     g_BattleEffects[slot].target.party = TASK(PartyMember);
     g_BattleEffects[slot].screen_x     = 0x20;
@@ -304,19 +304,19 @@ NON_MATCHING void func_801EF8F4(void) {
     g_BattleEffects[slot].screen_y = 0x40;
     g_BattleEffects[slot].unk_27   = 0x7B;
     g_BattleEffects[slot].unk_0B   = TASK(PartyMember)->facing + 0x38;
-    saved = TASK(PartyMember);
+    saved                          = TASK(PartyMember);
     TASK_SET(&g_BattleEffects[slot]);
     GFX_PaletteLoad(GAME_PALETTE_STAGE + 3 * 0x40, 0);
     func_801DDAB4(BATTLE_ACTIVE_PARTY.chr.status);
     GFX_PaletteUploadRows();
     TASK_SET(saved);
 
-    slot = Battle_AllocEffect(1, 0x3A);
+    slot                                      = Battle_AllocEffect(1, 0x3A);
     *(BattleWorkImage*)&g_BattleEffects[slot] = *(BattleWorkImage*)&BATTLE_ACTIVE_PARTY;
-    g_BattleEffects[slot].header.mode        = 2;
-    g_BattleEffects[slot].unk_06             = 1;
-    g_BattleEffects[slot].step_index         = 0x3A;
-    g_BattleEffects[slot].header.step        = 0;
+    g_BattleEffects[slot].header.mode         = 2;
+    g_BattleEffects[slot].unk_06              = 1;
+    g_BattleEffects[slot].step_index          = 0x3A;
+    g_BattleEffects[slot].header.step         = 0;
     g_BattleEffects[slot].header.flags &= ~PARTY_MEMBER_FLAG_HANDLER_BUSY;
     g_BattleEffects[slot].target.party = TASK(PartyMember);
     g_BattleEffects[slot].screen_x     = 0x20;
@@ -325,12 +325,12 @@ NON_MATCHING void func_801EF8F4(void) {
     g_BattleEffects[slot].unk_27   = 0x7D;
     g_BattleEffects[slot].unk_0B   = TASK(PartyMember)->facing + 0x38;
 
-    slot = Battle_AllocEffect(1, 0x3A);
+    slot                                      = Battle_AllocEffect(1, 0x3A);
     *(BattleWorkImage*)&g_BattleEffects[slot] = *(BattleWorkImage*)&BATTLE_ACTIVE_PARTY;
-    g_BattleEffects[slot].header.mode        = 2;
-    g_BattleEffects[slot].unk_06             = 1;
-    g_BattleEffects[slot].step_index         = 0x3A;
-    g_BattleEffects[slot].header.step        = 0;
+    g_BattleEffects[slot].header.mode         = 2;
+    g_BattleEffects[slot].unk_06              = 1;
+    g_BattleEffects[slot].step_index          = 0x3A;
+    g_BattleEffects[slot].header.step         = 0;
     g_BattleEffects[slot].header.flags &= ~PARTY_MEMBER_FLAG_HANDLER_BUSY;
     g_BattleEffects[slot].target.party = TASK(PartyMember);
     g_BattleEffects[slot].screen_x     = 0x80;
@@ -338,19 +338,19 @@ NON_MATCHING void func_801EF8F4(void) {
     g_BattleEffects[slot].screen_y = 0x40;
     g_BattleEffects[slot].unk_27   = 0x7C;
     g_BattleEffects[slot].unk_0B   = TASK(PartyMember)->facing + 0x3C;
-    saved = TASK(PartyMember);
+    saved                          = TASK(PartyMember);
     TASK_SET(&g_BattleEffects[slot]);
     GFX_PaletteLoad(GAME_PALETTE_STAGE + 4 * 0x40, 0);
     func_801DDAB4(BATTLE_ACTIVE_PARTY.chr.status);
     GFX_PaletteUploadRows();
     TASK_SET(saved);
 
-    slot = Battle_AllocEffect(1, 0x3A);
+    slot                                      = Battle_AllocEffect(1, 0x3A);
     *(BattleWorkImage*)&g_BattleEffects[slot] = *(BattleWorkImage*)&BATTLE_ACTIVE_PARTY;
-    g_BattleEffects[slot].header.mode        = 2;
-    g_BattleEffects[slot].unk_06             = 1;
-    g_BattleEffects[slot].step_index         = 0x3A;
-    g_BattleEffects[slot].header.step        = 0;
+    g_BattleEffects[slot].header.mode         = 2;
+    g_BattleEffects[slot].unk_06              = 1;
+    g_BattleEffects[slot].step_index          = 0x3A;
+    g_BattleEffects[slot].header.step         = 0;
     g_BattleEffects[slot].header.flags &= ~PARTY_MEMBER_FLAG_HANDLER_BUSY;
     g_BattleEffects[slot].target.party = TASK(PartyMember);
     g_BattleEffects[slot].screen_x     = 0x80;
