@@ -30,7 +30,7 @@ MATCH bool Area_RequestLinkAtCell(s32 cell_x, s32 cell_y) {
                 choice = bank->keys[link->index];
                 count  = bank->counts[link->index];
                 for (n = 0; n < count; n++, choice++) {
-                    if (SYS_TestFlag(g_SceneFlagWords + choice->flag_block * 8, choice->flag_bit) != 0) {
+                    if (SYS_TestFlag(g_SceneFlagRows[choice->flag_row], choice->flag_bit) != 0) {
                         break;
                     }
                 }

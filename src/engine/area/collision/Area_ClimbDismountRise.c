@@ -4,7 +4,6 @@
 /* Moves the actor's z up by the character's rise step; at the ground ahead it requests script 0x3E facing left, 0x3F otherwise, and returns nonzero. */
 MATCH s32 Area_ClimbDismountRise(void) {
     Actor* actor;
-    s32    index;
     s32    step;
     s32    sum_x;
     s32    sum_y;
@@ -14,12 +13,11 @@ MATCH s32 Area_ClimbDismountRise(void) {
     u8     animation;
 
     actor    = TASK(Actor);
-    index    = actor->direction * 2;
     step     = actor->voice_flags.scene_flag + 2;
     done     = 0;
     sum_x    = actor->pos.x.fixed + (g_FacingSteps[actor->direction].x * step);
     target_x = sum_x;
-    sum_y    = actor->pos.y.fixed + (g_FacingStepY[index] * step);
+    sum_y    = actor->pos.y.fixed + (g_FacingSteps[actor->direction].y * step);
     target_y = sum_y;
     if (COORD_INT(actor->pos.z) < Area_HeightRead(sum_x, sum_y)) {
         COORD_INT(TASK(Actor)->pos.z) = (s16)((u16)COORD_INT(TASK(Actor)->pos.z) + g_AreaClimbRiseSteps[g_Game.current->chr.character_id]);

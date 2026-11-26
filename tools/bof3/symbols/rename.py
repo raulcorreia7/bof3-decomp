@@ -403,17 +403,6 @@ def _name_address(
     """The symbol table with the address name replaced by ``new`` in every image."""
     addr = int(address["addr"], 16)
     kind = req.type or ("func" if old.startswith("func_") else None)
-    row = (
-        symtab.format_row(
-            new,
-            addr,
-            type=kind,
-            size=int(req.size, 0) if req.size else None,
-            source=req.source,
-        )
-        if req.source
-        else None
-    )
     document = parse(text)
     for image in images:
         named = document.get(image, {}).get(new)
@@ -425,10 +414,21 @@ def _name_address(
                 )
             text = symtab.remove_row(text, image, old) or text
             continue
-        if row is None:
+        if not req.source:
             raise RenameError(
                 f"symbol: naming {old} needs --source, a description of the symbol"
             )
+        # The row keeps the type, size and alias it had under the address name unless the request sets them.
+        was = document.get(image, {}).get(old)
+        was = was if isinstance(was, dict) else {}
+        row = symtab.format_row(
+            new,
+            addr,
+            type=kind or was.get("type"),
+            size=int(req.size, 0) if req.size else was.get("size"),
+            source=req.source,
+            alias=bool(was.get("alias")),
+        )
         # A row already keyed with the address name would be rewritten by the source
         # substitution below and repeat the new key.
         text = symtab.remove_row(text, image, old) or text

@@ -14,6 +14,7 @@
 
 #include "game/character.h"
 #include "common/vector.h"
+#include "audio/bgm.h"
 #include "menu/gameui.h"
 #include <string.h>
 
@@ -169,12 +170,12 @@ ASSERT_SIZE(GameLocale, 0x0C);
 
 /* One destination of an area link whose key is 0xFFFF: the first whose scene flag is set is taken. */
 typedef struct {
-    u16 area_id;    /* 0x00 */
-    u16 x;          /* 0x02 */
-    u16 y;          /* 0x04 */
-    u8  flag_block; /* 0x06: the 8-byte block of g_SceneFlagWords */
-    u8  flag_bit;   /* 0x07 */
-    u8  facing;     /* 0x08 */
+    u16 area_id;  /* 0x00 */
+    u16 x;        /* 0x02 */
+    u16 y;        /* 0x04 */
+    u8  flag_row; /* 0x06: the row of g_SceneFlagRows */
+    u8  flag_bit; /* 0x07 */
+    u8  facing;   /* 0x08 */
     u8  pad_09;
 } GameLocaleChoice;
 
@@ -371,9 +372,10 @@ extern u8                  D_8014691C[ENTITY_MAX][ACTOR_SIZE]; /* 0x8014691C */
 /* D_80147A58 */
 extern u16                 D_801481D8;
 extern u16                 D_801481E0;
-extern Pos3                D_801481E8;         /* scene angle, 16.16 fixed point */
-extern Pos3                D_801481F8;         /* per-frame step of D_801481E8 */
-extern s16                 D_8014820C;         /* 0x8014820C */
+extern Pos3                D_801481E8; /* scene angle, 16.16 fixed point */
+extern Pos3                D_801481F8; /* per-frame step of D_801481E8 */
+extern s16                 D_8014820C; /* 0x8014820C */
+extern const BGMTrack      g_BGMTracks[BGM_TRACK_COUNT];
 extern s8                  D_80148654;         /* 0x80148654 */
 extern s8                  D_80148656;         /* 0x80148656 */
 extern s8                  D_801490E0;         /* 0x801490E0 */

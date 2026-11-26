@@ -647,7 +647,7 @@ void func_801D934C(u16 x, u16 y, u16 width, u16 height);
 /* func_801D9534 */
 s32  Fishing_DrawWindowFrame(s16 frame_x, u16 frame_y, s16 frame_width, s16 frame_height, u8 frame_mode);
 void func_801D95C4(u16 x, u16 y, u16 w, u16 h, u8 shade);
-void func_801D9740(s32 color, u8* pixels, s32 mask, s32 value);
+void func_801D9740(u8 color, u8* pixels, u8 mask, s16 value);
 /* func_801D9B58 */
 void Fishing_EntryRun(void);
 /* func_801D9B9C */

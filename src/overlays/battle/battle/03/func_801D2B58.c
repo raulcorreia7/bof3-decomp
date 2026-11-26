@@ -22,6 +22,7 @@ NON_MATCHING void func_801D2B58(void) {
     u8            target;
     s32           index;
     s32           enemy;
+    s32           target_enemy;
     s8            dx;
     s8            dy;
 
@@ -80,11 +81,11 @@ NON_MATCHING void func_801D2B58(void) {
         } else {
             TARGET_ACTOR  = (PartyMember*)(g_BattleEnemies + target * BATTLE_ENEMY_STRIDE);
             TARGET_ACTION = &ENEMY_COMBATANT(target).turn.command.target;
-            enemy         = target - 3;
-            dx            = g_BattleEnemyBattlers[enemy].panel_offset_x;
+            target_enemy  = target - 3;
+            dx            = g_BattleEnemyBattlers[target_enemy].panel_offset_x;
             actor         = g_BattleSelectedActor;
             TARGET_X      = actor->screen_x.value + dx;
-            dy            = g_BattleEnemyBattlers[enemy].panel_offset_y;
+            dy            = g_BattleEnemyBattlers[target_enemy].panel_offset_y;
             TARGET_Y      = actor->screen_y.value + dy;
             TARGET_DEPTH  = actor->depth;
         }

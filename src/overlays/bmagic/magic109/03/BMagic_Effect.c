@@ -11,10 +11,10 @@ MATCH void BMagic_SwirlStart(void) {
     RECT          rect;
     Magic109Task* work;
 
-    if (g_Battle.target_selector == 0x80 && g_Battle.active_battler < BATTLE_PARTY_CHARACTERS_COUNT) {
+    if (g_Battle.target_selector == BATTLE_TARGET_PARTY_SIDE && g_Battle.active_battler < BATTLE_PARTY_CHARACTERS_COUNT) {
         TASK(Magic109Task)->header.mode = 1;
     }
-    if (g_Battle.target_selector == 0x40 && !(g_Battle.active_battler < BATTLE_PARTY_CHARACTERS_COUNT)) {
+    if (g_Battle.target_selector == BATTLE_TARGET_ENEMY_SIDE && !(g_Battle.active_battler < BATTLE_PARTY_CHARACTERS_COUNT)) {
         TASK(Magic109Task)->header.mode = 1;
     }
     if (TASK(Magic109Task)->header.mode != 0) {
@@ -31,7 +31,7 @@ MATCH void BMagic_SwirlStart(void) {
     rect.h = rect.w = work->radius * 2;
     SetDrawMove((DR_MOVE*)g_GfxPrimCursor, &rect, BMAGIC_SWIRL_TEXTURE_X, BMAGIC_SWIRL_TEXTURE_Y);
     GFX_AddPrim(BMAGIC_LAYER_OVER_BATTLERS, sizeof(DR_MOVE));
-    if (g_Battle.target_selector & 0x40) {
+    if (g_Battle.target_selector & BATTLE_TARGET_ENEMY_SIDE) {
         TASK(Magic109Task)->screen_x.value = g_BMagicSwirlStartPoints[g_Battle.scroll_dir].x;
         TASK(Magic109Task)->screen_y.value = g_BMagicSwirlStartPoints[g_Battle.scroll_dir].y;
     } else {

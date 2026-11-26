@@ -1238,6 +1238,9 @@ volatile u8* Battle_FindActorEntry(u8 entry_id);
 void         Battle_MoveRangeToward(BattleRange* target, s32 step);
 u8           Battle_SelectStepRule(void);
 
+/* func_800ABCE0 */
+void Battle_InitEnemy(u8 enemy_slot, u16 enemy_index, s32 x, s32 y);
+
 /* Add the queued text message and advance the battle UI state. The member declares temp. */
 #define BATTLE_ADD_MESSAGE_AND_STEP() \
     temp = UI_MessageGetText(0x4000); \

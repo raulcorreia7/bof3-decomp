@@ -5,13 +5,7 @@
 
 /* Draws the village panel at (x, y): the two blended fills, the raised and lowered edge rows, the
  * eight-pixel grid with the bright centre row, and the tinted marks; then the actor tint steps down. */
-/* An old-style definition: retail takes int arguments and reads them back as s16. */
-// clang-format off
-MATCH void func_801F31EC(x, y)
-s16 x;
-s16 y;
-// clang-format on
-{
+MATCH void func_801F31EC(s16 x, s16 y) {
     s16 left;
     s16 top;
     s16 right;

@@ -8,14 +8,14 @@ MATCH void func_801FA6BC(void) {
     switch (g_ScenarioState.step) {
         case 0:
             if (g_ScriptVars[0] == 0x1F) {
-                SND_StartDecrescendo(g_SelectionSepSlots[g_SndBGMId * 4], g_SelectionSequences[g_SndBGMId * 4], 0x64, 0x20);
+                SND_StartDecrescendo(g_BGMTracks[g_SndBGMId].sep_slot, g_BGMTracks[g_SndBGMId].sequence, 0x64, 0x20);
                 g_ScenarioState.step = 1;
             }
             break;
         case 1:
             g_AreaCameraOffsetZ -= 5;
             if (g_AreaCameraOffsetZ == -0x280) {
-                SND_SeqStop(g_SelectionSepSlots[g_SndBGMId * 4], g_SelectionSequences[g_SndBGMId * 4]);
+                SND_SeqStop(g_BGMTracks[g_SndBGMId].sep_slot, g_BGMTracks[g_SndBGMId].sequence);
                 g_AreaDrawMode           = GFX_LAYER_BATTLE_SCENE;
                 D_8014933F               = 0;
                 g_AreaCameraRefreshCount = 2;

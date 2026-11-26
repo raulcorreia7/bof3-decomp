@@ -4,7 +4,6 @@
 NON_MATCHING void func_8019B704(void) {
     s32 saved;
     s32 acc;
-    s32 delta;
     s32 gap;
     s16 dist;
     s16 temp;
@@ -21,7 +20,7 @@ NON_MATCHING void func_8019B704(void) {
             TASK(Actor)->unk_18 = 0;
         }
         TASK(Actor)->pos.x.fixed += TASK(Actor)->vx;
-        delta = TASK(Actor)->pos.x.fixed - g_Game.members[0].pos.x.fixed;
+        gap = TASK(Actor)->pos.x.fixed - g_Game.members[0].pos.x.fixed;
     } else {
         saved           = TASK(Actor)->vy;
         acc             = saved + TASK(Actor)->unk_1C;
@@ -32,9 +31,8 @@ NON_MATCHING void func_8019B704(void) {
             TASK(Actor)->unk_1C = 0;
         }
         TASK(Actor)->pos.y.fixed += TASK(Actor)->vy;
-        delta = TASK(Actor)->pos.y.fixed - g_Game.members[0].pos.y.fixed;
+        gap = TASK(Actor)->pos.y.fixed - g_Game.members[0].pos.y.fixed;
     }
-    gap = delta;
     if (gap < 0) {
         gap = -gap;
     }

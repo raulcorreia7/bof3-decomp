@@ -12,11 +12,11 @@ MATCH void Game_BattleLoadArchive(void) {
     Area_RunLoadingFrame();
     if ((g_Battle.outcome.options & BATTLE_OPT_KEEP_BGM) == 0) {
         if (g_SndBGMId != GAME_NONE) {
-            SsSepPause(g_SelectionEffectVoices[g_SelectionSepSlots[g_SndBGMId * 4]], g_SelectionSequences[g_SndBGMId * 4]);
+            SsSepPause(g_SelectionEffectVoices[g_BGMTracks[g_SndBGMId].sep_slot], g_BGMTracks[g_SndBGMId].sequence);
             for (i = 0; i < 1376; i++) {
                 D_8018E268[i] = D_80148A50[i];
             }
-            SND_SeqStop(g_SelectionSepSlots[g_SndBGMId * 4], g_SelectionSequences[g_SndBGMId * 4]);
+            SND_SeqStop(g_BGMTracks[g_SndBGMId].sep_slot, g_BGMTracks[g_SndBGMId].sequence);
         }
         g_EmiStreamFlags |= 0x40;
     }
