@@ -7,10 +7,13 @@ Battle_AllocEffect = { addr = 0x801E590C, alias = true }
 Effect_Reset = { addr = 0x801E5988, type = "func", source = "Clears every timer, state and flag byte of the shared BattleEffect work record; every effect countdown calls it first. battle/03 owns the body.", alias = true }
 g_BattleEffectBattler = { addr = 0x801EB4E0, source = "the battler the running effect acts on; Battle_UpdateEffects stores it for each effect step (emi/battle/battle/03 owns the cell)" }
 g_BattleEffects = { addr = 0x801EC330, alias = true }
+BMagic_MagicBallUpdate = { addr = 0x801EEC04, type = "func", source = "The module entry: runs the init (mode 0) or Effect_MarkDamagedOnZeroTick (mode 1)." }
 BMagic_MagicBallInit = { addr = 0x801EEC5C, type = "func", source = "Takes the effect battler's facing and position, starts the core effect and eight trail effects (a trail's index is its delay of 1 to 8 frames and its tint row), counts all nine as live and plays the sound." }
 Effect_MarkDamagedOnZeroTick = { addr = 0x801EEDD8, type = "func", source = "When the live-effect count (byte 0x0B) is zero marks the battlers of the target selector damaged, raises BATTLE_STATE_EFFECT_PLAYING and resets the effect in magic172 (Magic Ball)." }
 BMagic_DispatchEffectMode = { addr = 0x801EEE38, type = "func", source = "Runs the handler that header.mode (byte 0x01) selects from the effect handlers of magic172." }
 BMagic_MagicBallCoreUpdate = { addr = 0x801EEE7C, type = "func", source = "Runs the core's step and draws it by step: bolts, disc and ring in steps 0 and 1; more and wider bolts, disc, ring and both wave rings in step 2; the wave rings in step 3; bolts only in step 4." }
+BMagic_MagicBallCorePlace = { addr = 0x801EF158, type = "func", source = "Core step 0: places the core above the effect battler, aims it at the selected actor and clears the counters." }
+BMagic_MagicBallCoreFly = { addr = 0x801EF210, type = "func", source = "Core step 1: steps the core toward the selected actor and, when it arrives, applies the hit and sounds the impact." }
 BMagic_MagicBallCoreBurst = { addr = 0x801EF3A4, type = "func", source = "Raises the wave radius (byte 0x0B) by 2 per frame and the timer (byte 0x0A) by 2 up to 16, counts the counter (byte 0x09) down from 16 and steps at zero." }
 BMagic_MagicBallCoreFade = { addr = 0x801EF430, type = "func", source = "Raises the wave radius by 4 and lowers the timer by 2 per frame; at zero plays the end sound, loads the counter with 16 and steps." }
 Effect_TickOnTimerZero = { addr = 0x801EF4BC, type = "func", source = "Counts the counter (byte 0x09) down by 2 per frame; at zero lowers the live-effect count (byte 0x0B) of battler g_BattleEffectBattler and clears the effect in magic172 (Magic Ball)." }

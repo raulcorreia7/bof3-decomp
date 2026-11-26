@@ -28,12 +28,13 @@ MATCH void BMagic_AccessionInit(void) {
 
 /* func_801EEDE0 */
 MATCH void BMagic_AccessionTransformUpdate(void) {
-    Callback handlers[2] = {func_801EEE38, func_801EF318};
+    Callback handlers[2] = {BMagic_AccessionSoloUpdate, BMagic_AccessionMergeUpdate};
 
     SYS_DISPATCH_TASK(handlers, 2, g_Task);
 }
 
-MATCH void func_801EEE38(void) {
+/* func_801EEE38 */
+MATCH void BMagic_AccessionSoloUpdate(void) {
     BMagicAccessionStageSteps handlers;
 
     handlers = g_BMagicAccessionSoloSteps;
@@ -143,7 +144,8 @@ MATCH void BMagic_AccessionTransformEnd(void) {
     TASK(PartyMember)->unk_03      = 0;
 }
 
-MATCH void func_801EF318(void) {
+/* func_801EF318 */
+MATCH void BMagic_AccessionMergeUpdate(void) {
     BMagicAccessionStageSteps handlers;
 
     handlers = g_BMagicAccessionMergeSteps;
@@ -336,6 +338,8 @@ MATCH void BMagic_AccessionSequenceWait(void) {
     }
 }
 
+/* Steps the sequence once the effect battler's mode is 2. */
+/* func_801EFD80 */
 MATCH void func_801EFD80(void) {
     PartyMember* active;
     PartyMember* work;
@@ -386,7 +390,8 @@ MATCH void BMagic_AccessionDomeStart(void) {
     TASK(PartyMember)->header.step += 1;
 }
 
-MATCH void func_801EFF44(void) {
+/* func_801EFF44 */
+MATCH void BMagic_AccessionDomeGrow(void) {
     u8 timer;
 
     BMAGIC_STEP_TIMER(unk_09, 2, 32);

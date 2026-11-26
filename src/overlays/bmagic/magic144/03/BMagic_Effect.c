@@ -4,7 +4,8 @@
 __asm__(".include \"include/match/macro.inc\"\n");
 #endif
 
-MATCH void func_801EEC04(void) {
+/* func_801EEC04 */
+MATCH void BMagic_WallOfFireUpdate(void) {
     PartyMember* saved_task;
     PartyMember* saved_battler;
     u8           i;
@@ -50,7 +51,8 @@ MATCH void BMagic_WallOfFireInit(void) {
 /* func_801EEE9C */
 #include "overlays/bmagic/shared/BMagic_DispatchEffectMode.h"
 
-MATCH void func_801EEEE0(void) {
+/* func_801EEEE0 */
+MATCH void BMagic_WallOfFireTargetUpdate(void) {
     BMAGIC_DISPATCH_AND_DRAW(g_BMagicWallOfFireTargetSteps, BMagic_WallOfFireDrawShadow);
 }
 

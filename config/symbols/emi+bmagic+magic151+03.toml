@@ -12,11 +12,13 @@ g_BMagicAccessionSequenceSteps = { addr = 0x801EEC38, source = "The steps of the
 BMagic_DispatchMode = { addr = 0x801EEC50, type = "func", source = "Runs the handler that header.mode (byte 0x01) selects from the module head's three callbacks in magic151 (Accession)." }
 BMagic_AccessionInit = { addr = 0x801EECB0, type = "func", source = "Shows the dragon form's name, picks the merge stage for the forms that rebuild the party, and loads the start delay (3 when the target is the young Ryu, else 30)." }
 BMagic_AccessionTransformUpdate = { addr = 0x801EEDE0, type = "func", source = "Runs the transform stage header.step selects: the solo stage, or the merge stage." }
+BMagic_AccessionSoloUpdate = { addr = 0x801EEE38, type = "func", source = "Runs the step of the solo stage that byte 0x03 of the task selects, from g_BMagicAccessionSoloSteps." }
 BMagic_AccessionCastStart = { addr = 0x801EEEA8, type = "func", source = "Requests the active battler's cast script and steps the stage." }
 BMagic_AccessionCastWait = { addr = 0x801EEF24, type = "func", source = "Counts the start delay down and plays the cue; once the active battler's script ends, starts the sequence effect and steps the stage." }
 BMagic_AccessionSoloLoad = { addr = 0x801EF070, type = "func", source = "Loads the dragon-form archive of the caster's character, by facing, once the sequence has marked the task ready (byte 0x0B is 1)." }
 BMagic_AccessionSoloShow = { addr = 0x801EF138, type = "func", source = "Once the archive is ready, sets up the active battler's palette, status and facing script from it and steps the stage." }
 BMagic_AccessionTransformEnd = { addr = 0x801EF2A0, type = "func", source = "Releases the active battler and goes to the next task mode." }
+BMagic_AccessionMergeUpdate = { addr = 0x801EF318, type = "func", source = "Runs the step of the merge stage that byte 0x03 of the task selects, from g_BMagicAccessionMergeSteps." }
 BMagic_AccessionMergeLoad = { addr = 0x801EF388, type = "func", source = "Marks every party member busy and loads the dragon-form archive the battler's facing selects, once the sequence has marked the task ready (byte 0x0B is 1)." }
 BMagic_AccessionMerge = { addr = 0x801EF484, type = "func", source = "Once the archive is ready, rebuilds the party as the active battler alone at the encounter origin and reopens the member panels." }
 BMagic_AccessionEnd = { addr = 0x801EF938, type = "func", source = "When the sequence has marked the task done (byte 0x0B is 2), raises BATTLE_STATE_EFFECT_PLAYING, updates the active battler's action flags and resets the task." }
@@ -29,6 +31,7 @@ BMagic_AccessionSequenceWait = { addr = 0x801EFD24, type = "func", source = "Cou
 BMagic_AccessionSequenceEnd = { addr = 0x801EFDC0, type = "func", source = "Once its live-effect count (byte 0x0B) is zero, marks the task done (sets the effect battler's byte 0x0B to 2) and resets the effect." }
 BMagic_AccessionDomeUpdate = { addr = 0x801EFE00, type = "func", source = "Runs the dome's step and, once started, draws the dome and its flare." }
 BMagic_AccessionDomeStart = { addr = 0x801EFE90, type = "func", source = "Places the dome at the battler and sets its shade, flare, ray index and the hold of 30 (timer, byte 0x0A)." }
+BMagic_AccessionDomeGrow = { addr = 0x801EFF44, type = "func", source = "Widens the dome by 2 per frame (the draw scales unk_09 by 16) and steps at 32." }
 BMagic_AccessionDomeSpawnRays = { addr = 0x801EFF94, type = "func", source = "Starts one ray every fourth frame; once the battler reaches step 5 counts the dome's hold (timer, byte 0x0A) down." }
 Effect_StepOnZeroTick = { addr = 0x801F00B4, type = "func", source = "Advances header.step (byte 0x02) when the effect ticker (byte 0x0B) is zero in magic151 (Accession)." }
 BMagic_AccessionDomeDim = { addr = 0x801F00E8, type = "func", source = "Dims the dome until its shade reaches 8." }

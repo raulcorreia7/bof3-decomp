@@ -8,6 +8,9 @@
 /* func_801EEC70 */
 void BMagic_BurstInit(void);
 
+/* func_801EF1B0 */
+void BMagic_BurstFlareOffset(void);
+
 /* The steps of the flare effect. */
 #define BMAGIC_BURST_FLARE_STEP_COUNT 5
 

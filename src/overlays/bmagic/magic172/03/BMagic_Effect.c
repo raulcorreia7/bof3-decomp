@@ -4,7 +4,8 @@
 __asm__(".include \"include/match/macro.inc\"\n");
 #endif
 
-MATCH void func_801EEC04(void) {
+/* func_801EEC04 */
+MATCH void BMagic_MagicBallUpdate(void) {
     Callback handlers[2] = {BMagic_MagicBallInit, Effect_MarkDamagedOnZeroTick};
 
     SYS_DISPATCH_TASK(handlers, 1, g_Task);
@@ -101,7 +102,8 @@ MATCH void BMagic_MagicBallCoreUpdate(void) {
     }
 }
 
-MATCH void func_801EF158(void) {
+/* func_801EF158 */
+MATCH void BMagic_MagicBallCorePlace(void) {
     PartyMember* actor;
     PartyMember* work;
     s32          angle;
@@ -119,7 +121,8 @@ MATCH void func_801EF158(void) {
     TASK(PartyMember)->header.step += 1;
 }
 
-MATCH void func_801EF210(void) {
+/* func_801EF210 */
+MATCH void BMagic_MagicBallCoreFly(void) {
     VECTOR       pos;
     PartyMember* actor;
     s32          diff;

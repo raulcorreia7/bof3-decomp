@@ -116,7 +116,8 @@ MATCH void BMagic_MeteorStrikeStart(void) {
     TASK(PartyMember)->header.step += 1;
 }
 
-MATCH void func_801EF310(void) {
+/* func_801EF310 */
+MATCH void BMagic_MeteorStrikeFall(void) {
     PartyMember* work;
     PartyMember* owner;
     PartyMember* battler;

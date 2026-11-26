@@ -6,9 +6,11 @@ Battle_AllocEffect = { addr = 0x801E590C, alias = true, source = "Claims a free 
 Effect_Reset = { addr = 0x801E5988, type = "func", source = "Clears every timer, state and flag byte of the shared BattleEffect work record; every effect countdown calls it first. battle/03 owns the body." }
 g_BattleEffectBattler = { addr = 0x801EB4E0, source = "the battler the running effect acts on; Battle_UpdateEffects stores it for each effect step (emi/battle/battle/03 owns the cell)" }
 g_BattleEffects = { addr = 0x801EC330, alias = true, source = "Battle effect work records (stride 0x78); Battle_AllocEffect claims a free one by setting bit 0 of header.flags." }
+BMagic_WallOfFireUpdate = { addr = 0x801EEC04, type = "func", source = "The module entry: runs the init, then Effect_StartOnZeroTick, then every effect slot in use through BMagic_WallOfFireSlotUpdate." }
 BMagic_WallOfFireInit = { addr = 0x801EED04, type = "func", source = "Starts one target effect at the selected battler, sets STP on colours 1 to 15 of the battle overlay palette row and steps." }
 Effect_StartOnZeroTick = { addr = 0x801EEE50, type = "func", source = "When the effect ticker (byte 0x0B) is zero raises BATTLE_STATE_EFFECT_PLAYING and clears the effect in magic144 (Wall of Fire)." }
 BMagic_DispatchEffectMode = { addr = 0x801EEE9C, type = "func", source = "Runs the handler that header.mode (byte 0x01) selects from the effect handlers of magic144." }
+BMagic_WallOfFireTargetUpdate = { addr = 0x801EEEE0, type = "func", source = "Runs the step of the target effect that g_BMagicWallOfFireTargetSteps selects and draws the shadow disc." }
 BMagic_WallOfFireTargetSpawn = { addr = 0x801EEF68, type = "func", source = "Spawns the flame and two glow effects, plays the first sound and steps." }
 BMagic_WallOfFireTargetHit = { addr = 0x801EF078, type = "func", source = "Raises the timer by 2 per frame; at 16 starts the selected battler's palette fade to dark, marks the targets damaged and steps." }
 Effect_StepOnOwnTickFlag = { addr = 0x801EF11C, type = "func", source = "Advances header.step (byte 0x02) while bit 0x80 of the effect ticker (byte 0x0B) is set in magic144 (Wall of Fire)." }

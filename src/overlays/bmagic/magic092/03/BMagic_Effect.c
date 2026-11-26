@@ -4,7 +4,8 @@
 __asm__(".include \"include/match/macro.inc\"\n");
 #endif
 
-MATCH void func_801EEC04(void) {
+/* func_801EEC04 */
+MATCH void BMagic_FireblastUpdate(void) {
     PartyMember* saved_task;
     PartyMember* saved_battler;
     u8           i;

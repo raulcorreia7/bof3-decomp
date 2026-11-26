@@ -46,12 +46,13 @@ MATCH void BMagic_BurstFlareUpdate(void) {
     }
 }
 
-MATCH void func_801EEF08(void) {
+/* func_801EEF08 */
+MATCH void BMagic_BurstFlareStart(void) {
     TASK(PartyMember)->facing      = g_BattleEffectBattler->facing;
     TASK(PartyMember)->pos.x.fixed = g_BattleEffectBattler->pos.x.fixed;
     TASK(PartyMember)->pos.y.fixed = g_BattleEffectBattler->pos.y.fixed;
     TASK(PartyMember)->pos.z.fixed = g_BattleEffectBattler->pos.z.fixed;
-    func_801EF1B0();
+    BMagic_BurstFlareOffset();
     TASK(PartyMember)->param.unk_0B = 0;
     TASK(PartyMember)->unk_09       = 0;
     TASK(PartyMember)->timer        = 0;
@@ -119,7 +120,8 @@ MATCH void BMagic_BurstFlareEnd(void) {
 
 #include "overlays/bmagic/shared/Effect_OffsetByTargetPose.h"
 
-MATCH void func_801EF1B0(void) {
+/* func_801EF1B0 */
+MATCH void BMagic_BurstFlareOffset(void) {
     PartyMember* work;
     u32          slot;
     u8           type;

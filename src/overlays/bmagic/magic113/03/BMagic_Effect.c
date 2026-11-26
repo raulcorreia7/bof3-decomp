@@ -77,8 +77,9 @@ MATCH void BMagic_NotingSpawnRings(void) {
     }
 }
 
+/* BMagic_NotingSpawnStar */
 /* func_801EF000 */
-MATCH void func_801EF000(void) {
+MATCH void BMagic_NotingSpawnStar(void) {
     u32          slot;
     PartyMember* work;
     u8           facing;

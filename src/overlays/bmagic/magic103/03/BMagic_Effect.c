@@ -68,7 +68,8 @@ MATCH void BMagic_SimoonDomePlace(void) {
     TASK(PartyMember)->header.step      = TASK(PartyMember)->header.step + 1;
 }
 
-MATCH void func_801EEFF4(void) {
+/* func_801EEFF4 */
+MATCH void BMagic_SimoonDomeGrow(void) {
     u8 counter;
 
     if (TASK(PartyMember)->unk_09 == 4) {

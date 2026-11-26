@@ -264,7 +264,8 @@ MATCH void BMagic_SkillStrikeInit(void) {
     g_GfxPalettePending = 1;
 }
 
-MATCH void func_801F0018(void) {
+/* func_801F0018 */
+MATCH void BMagic_SkillStrikeSpawnFollowUp(void) {
     PartyMember* actor;
     PartyMember* work;
     u8           slot;
