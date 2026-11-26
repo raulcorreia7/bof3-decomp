@@ -1,11 +1,16 @@
-#include "game_00.h"
+#include "engine/game/00/game_00.h"
 
-MATCH void func_801C4D58(void) {
+/* func_801C539C */
+/* Once the dismount animation ends, starts the exit approach as the mount does and returns true. */
+MATCH bool Area_ClimbDismountExitBegin(void) {
     Actor* work;
     Actor* state;
     Actor* reload;
     s32    doubled;
 
+    if (!(Script_AnimStepOnce() & BYTE_MASK)) {
+        return false;
+    }
     g_Game.current->u.field.counter.value = (TASK(Actor)->voice_flags.raw + 2);
     Area_SetWalkVelocity();
     work          = TASK(Actor);
@@ -18,4 +23,5 @@ MATCH void func_801C4D58(void) {
     Actor_Move();
     reload        = TASK(Actor);
     reload->timer = (reload->timer - 1);
+    return true;
 }

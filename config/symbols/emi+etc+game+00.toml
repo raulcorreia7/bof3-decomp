@@ -1,4 +1,6 @@
 ["emi/etc/game/00"]
+g_AreaClimbHeightOffsets = { addr = 0x80181B70, source = "Per character id: how far the climbing actor's z sits from the ground height at the ladder; Area_ClimbMountLower holds that z and Area_ClimbUp ends the climb there." }
+g_AreaClimbRiseSteps = { addr = 0x80181B88, source = "Per character id: the z step per frame of the ladder mount and dismount rise." }
 jtbl_80195804 = { addr = 0x80195804, type = "Callback", source = "The switch table of GFX_PaletteMarkCells: the jump targets of its jr dispatch." }
 jtbl_80195830 = { addr = 0x80195830, type = "Callback", source = "The switch table of Game_UpdateField: the jump targets of its jr dispatch." }
 jtbl_80195864 = { addr = 0x80195864, type = "Callback", source = "The switch table of func_801A4400: the jump targets of its jr dispatch." }
@@ -191,8 +193,17 @@ Actor_GetTurnStep = { addr = 0x801B2D00, type = "func", source = "Returns -1 whe
 Area_Climb = { addr = 0x801B3260, type = "func", source = "runs g_AreaClimbSteps[header.step] in field task mode 8 (FIELD_TASK_MODE_CLIMB, entered from cell code 6 by func_801B0568 and func_801BC000); in that mode the up and down pad move the actor 16 units and Interact turns it round and drops it to mode 2, the field ladder" }
 Area_GrabLadder = { addr = 0x801B32A4, type = "func", source = "Step 0 of g_AreaClimbSteps: runs the grab move and hands the task straight to the climbing step." }
 Area_ClimbMount = { addr = 0x801B32D0, type = "func", source = "runs g_AreaClimbMountSteps[unk_03], the approach to the ladder; its last step hands over to step 2 of g_AreaClimbSteps" }
+Area_ClimbMountApproachBeginStep = { addr = 0x801B3314, type = "func", source = "Mount phase 0: Area_ClimbMountApproachBegin, scrolls the area for the leader, then phase 1." }
+Area_ClimbMountApproachStep = { addr = 0x801B3388, type = "func", source = "Mount phase 1: Area_ClimbMountApproach; phase 2 once it ends." }
+Area_ClimbMountTurnStep = { addr = 0x801B33C4, type = "func", source = "Mount phase 2: Area_ClimbMountTurn; phase 3 once it ends." }
+Area_ClimbMountTurnWaitStep = { addr = 0x801B3400, type = "func", source = "Mount phase 3: Area_ClimbMountTurnWait; phase 4 once it ends." }
+Area_ClimbMountLowerStep = { addr = 0x801B343C, type = "func", source = "Mount phase 4: Area_ClimbMountLower; at the top sets the climb step (2) and phase 0." }
 Area_ClimbLadder = { addr = 0x801B3488, type = "func", source = "Step 2 of g_AreaClimbSteps: the ladder climb itself: up and down move the actor through the climb helpers, Interact turns it around, and the scroll follows." }
 Area_ClimbDismount = { addr = 0x801B3540, type = "func", source = "runs g_AreaClimbDismountSteps[unk_03], the walk off the ladder; step 3 of g_AreaClimbSteps calls it" }
+Area_ClimbDismountBeginStep = { addr = 0x801B3584, type = "func", source = "Dismount phase 0: Area_ClimbDismountBegin, then phase 1." }
+Area_ClimbDismountRiseStep = { addr = 0x801B35B0, type = "func", source = "Dismount phase 1: Area_ClimbDismountRise; phase 2 once it ends." }
+Area_ClimbDismountExitBeginStep = { addr = 0x801B35EC, type = "func", source = "Dismount phase 2: Area_ClimbDismountExitBegin, scrolls the area for the leader, then phase 3." }
+Area_ClimbDismountExitStep = { addr = 0x801B3670, type = "func", source = "Dismount phase 3: Area_ClimbDismountExit." }
 Area_EncounterFindZone = { addr = 0x801B3C3C, type = "func", source = "Returns the encounter zone entry of the current area whose bounds contain the cell; Area_EncounterRollThreshold and Area_EncounterCanStart read it." }
 Area_EncounterRollThreshold = { addr = 0x801B3CCC, type = "func", source = "Rolls the steps until the next encounter: s_EncounterStepThresholds[entry[4] * 2] plus a random roll capped at D_801CD1B9, stored in D_80145FB8." }
 Area_EncounterCanStart = { addr = 0x801B3EB0, type = "func", source = "Returns 0 when D_80145FB8 is 0 or above the limit; otherwise starts an encounter with Area_EncounterBuild(4, 0)." }
@@ -212,6 +223,8 @@ Area_IsStepTooHigh = { addr = 0x801BB86C, type = "func", source = "probes the st
 Actor_SnapFacing = { addr = 0x801BB8E8, type = "func", source = "Turns the actor to a cardinal facing, choosing the opposite when neither source facing matches." }
 Area_SceneStepTimer = { addr = 0x801BC3B8, type = "func", source = "Counts the scene timer down each frame and calls Area_UpdateIdleActor when it expires." }
 Area_UpdateIdleActor = { addr = 0x801BC400, type = "func", source = "Per-frame upkeep of the idle field actor, run when the scene timer expires: applies the regen and confusion upkeep and the cell-hit checks and, when none fires, stops the actor, sets byte 0x11C of the mode work area to 3, runs func_801BC000 and returns an actor at rest in mode 1 to step 0." }
+Area_ClimbFollower = { addr = 0x801BD7F8, type = "func", source = "Field task mode FIELD_TASK_MODE_CLIMB of a follower (slot 8 of D_801CD404): runs the g_AreaClimbFollowerSteps step selected by header.step, the follower twin of Area_Climb." }
+Area_ClimbFollowerLadder = { addr = 0x801BD83C, type = "func", source = "Follower climb step 2: compares the height of the member it follows with its own and climbs up, climbs down or jumps off." }
 Party_CountOrder = { addr = 0x801BDB7C, type = "func", source = "Returns the number of leading entries of the field order (mode 0) or battle order (mode 1), three bytes each at D_80144F5A, that are not 0xFF." }
 Actor_IsInRange = { addr = 0x801BDD58, type = "func", source = "True when the point lies within reach of the actor record; Actor_FindInRange loops it over the actors." }
 Actor_FindInRange = { addr = 0x801BDE14, type = "func", source = "walks the g_Actors rows and returns the first actor the range test accepts, else -1" }
@@ -247,6 +260,19 @@ Party_TickConfusion = { addr = 0x801C3598, type = "func", source = "Counts down 
 Game_TestMapCells = { addr = 0x801C39D8, type = "func", source = "Tests whether the map cells at a position carry a wanted code." }
 Game_TestPlacement = { addr = 0x801C3E40, type = "func", source = "Tests whether a position is free for placement at a given height." }
 Area_CellTestCorners = { addr = 0x801C472C, type = "func", source = "tests the four map-cell codes around a position against a wanted code through the flagged or unflagged variant" }
+Area_ClimbStartGrab = { addr = 0x801C4D1C, type = "func", source = "Requests the grab animation of the actor's facing (script 0x3C left, 0x3D right); Area_GrabLadder calls it before the climb step." }
+Area_ClimbMountApproachBegin = { addr = 0x801C4D58, type = "func", source = "Starts the mount approach: sets the walk velocity and the move timer from the walker's step and requests the animation of the facing plus 8." }
+Area_ClimbMountApproach = { addr = 0x801C4E14, type = "func", source = "Counts the mount approach timer down while moving the actor; at the timer midpoint it clears the actor's palette row, and at zero it requests the facing animation and returns nonzero." }
+Area_ClimbMountTurn = { addr = 0x801C4EC4, type = "func", source = "Turns the actor to face the ladder over four animation requests, then flips its facing by 4 and returns true." }
+Area_ClimbMountTurnWait = { addr = 0x801C4F88, type = "func", source = "Waits for the turn animation to end, then requests the climb animation of the facing (script 0x3E left, 0x3F right) and returns true." }
+Area_ClimbMountLower = { addr = 0x801C4FE0, type = "func", source = "Raises the actor along the ladder by its character's rise step until the ladder height is reached, scrolling the area with the leader; returns nonzero at the top." }
+Area_ClimbDismountBegin = { addr = 0x801C51B0, type = "func", source = "Starts the dismount: marks the palette dirty, clears the actor's palette row and requests the dismount animation of the facing (script 52 right, 55 left)." }
+Area_ClimbDismountRise = { addr = 0x801C520C, type = "func", source = "Raises the actor by its character's rise step until the ladder top height is passed, then requests the climb animation of the facing and returns nonzero." }
+Area_ClimbDismountExitBegin = { addr = 0x801C539C, type = "func", source = "Once the animation ends, sets the walk velocity and move timer as Area_ClimbMountApproachBegin does and moves one frame; returns true when it started." }
+Area_ClimbDismountExit = { addr = 0x801C5474, type = "func", source = "Counts the exit timer down while moving; at zero it clears the velocity, returns the member to the walk mode and field step and returns 1." }
+Area_ClimbUp = { addr = 0x801C5558, type = "func", source = "Raises the actor 16 units; once it reaches the height of the ground ahead it enters the dismount step." }
+Area_ClimbDown = { addr = 0x801C5620, type = "func", source = "Lowers the actor 16 units; at the ground height it selects the facing's animation and returns the member to the walk mode." }
+Area_ClimbJumpOff = { addr = 0x801C56E4, type = "func", source = "Jumps off the ladder: flips the facing, requests the jump animation, clears the velocity, sets gravity -8 and enters mode 2 at the dismount exit." }
 Actor_ClearVelocity = { addr = 0x801C5798, type = "func", source = "Zeroes the velocity members of the current g_Task (+0x0C, +0x10 and vz) that Actor_ApplyVelocity integrates into x and y." }
 Actor_Move = { addr = 0x801C57B4, type = "func", source = "Adds the running task's velocity (vx, vy, vz) to its position; the field actor step bodies call it every frame." }
 Area_SetFacingOffsetX = { addr = 0x801C5DFC, type = "func", source = "the body stores into g_FacingOffsets[route_index].x" }
@@ -396,7 +422,7 @@ D_801CD37C = { addr = 0x801CD37C, size = 0x8, source = "The two handlers func_80
 D_801CD384 = { addr = 0x801CD384, size = 0x80, source = "The 128-byte route step table at 0x801CD384; no matched code reads it." }
 D_801CD404 = { addr = 0x801CD404, size = 0x3C, source = "The 15 mode handlers func_801BBE48 runs by g_Task->header.mode." }
 D_801CD440 = { addr = 0x801CD440, size = 0x8, source = "The two step handlers func_801BBFB4 runs by g_Task->header.step." }
-D_801CD448 = { addr = 0x801CD448, size = 0x10, source = "The four step handlers func_801BD7F8 runs by g_Task->header.step." }
+g_AreaClimbFollowerSteps = { addr = 0x801CD448, source = "The four ladder step handlers of a follower (grab, mount, follow the ladder, dismount): Area_ClimbFollower runs the one header.step selects." }
 s_CameraScrollDeltas = { addr = 0x801CD458, size = 0x8, source = "x, y pair per g_BattleScrollDir added to the camera work record by func_801BF11C and func_801BF5A8." }
 D_801CD459 = { addr = 0x801CD459, alias = true, source = "s_CameraScrollDeltas +0x1, the y half of the first GameDelta pair (#379)" }
 s_BattleStartOffsets = { addr = 0x801CD460, size = 0x18, source = "x, y pair per battle record row id, stored by func_801BEBB0." }

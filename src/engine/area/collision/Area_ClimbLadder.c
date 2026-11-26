@@ -4,11 +4,11 @@
 /* func_801B3488 */
 MATCH void Area_ClimbLadder(void) {
     if (g_Game.input & PADLup) {
-        func_801C5558();
+        Area_ClimbUp();
     } else if (g_Game.input & PADLdown) {
-        func_801C5620();
+        Area_ClimbDown();
     } else if (g_Game.input & g_InputMasks[FIELD_INPUT_INTERACT]) {
-        func_801C56E4();
+        Area_ClimbJumpOff();
     }
     if (!((g_Game.flags | g_Game.walk_flags) & (GAME_FLAG_SCROLL_LOCK | AREA_WALK_ENTRY_ACTIVE))) {
         Area_ScrollAdvance(COORD_INT(TASK(Actor)->pos.z));

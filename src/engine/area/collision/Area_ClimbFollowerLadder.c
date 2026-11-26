@@ -1,6 +1,8 @@
-#include "game_00.h"
+#include "engine/game/00/game_00.h"
 
-MATCH void func_801BD83C(void) {
+/* func_801BD83C */
+/* Compares the height of the member being followed with the actor's own and climbs up, climbs down or jumps off. */
+MATCH void Area_ClimbFollowerLadder(void) {
     s32 alt;
     s32 diff;
     s32 result;
@@ -29,13 +31,13 @@ MATCH void func_801BD83C(void) {
     type = result & BYTE_MASK;
     switch (type) {
         case 0:
-            func_801C5558();
+            Area_ClimbUp();
             break;
         case 1:
-            func_801C5620();
+            Area_ClimbDown();
             break;
         case 2:
-            func_801C56E4();
+            Area_ClimbJumpOff();
             break;
     }
 }
