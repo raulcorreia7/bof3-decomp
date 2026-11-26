@@ -1,6 +1,8 @@
-#include "game_00.h"
+#include "engine/game/00/game_00.h"
 
-MATCH void func_801A83DC(void) {
+/* func_801A83DC */
+/* Sets the found gene's flag, shows the found-gene message and plays the XA stream with the BGM paused. */
+MATCH void Scene_RunGeneFound(void) {
     s8* state;
 
     state = &g_SceneEventState.step;

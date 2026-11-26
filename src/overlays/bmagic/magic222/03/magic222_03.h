@@ -7,13 +7,19 @@
 
 extern s16      D_1F800004;
 extern u16      D_1F80000A;
-extern Callback D_801F0D64[];
-extern Callback D_801F0D7C[];
+/* D_801F0D64 */
+extern Callback g_BMagicCombustionActorSteps[];
+/* D_801F0D7C */
+extern Callback g_BMagicCombustionShadowSteps[];
 
-extern Callback D_801F0D8C[];
-void            func_801F0168(void);
-void            func_801F0218(void);
+/* D_801F0D8C */
+extern Callback g_BMagicCombustionSparkSteps[];
+/* func_801F0168 */
+void            Effect_SetActorMatrix3(void);
+/* func_801F0218 */
+void            BMagic_CombustionDrawSpark(void);
 
-extern Callback D_801F0D98[];
+/* D_801F0D98 */
+extern Callback g_BMagicCombustionWaveSteps[];
 
 #endif

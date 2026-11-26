@@ -1,7 +1,9 @@
-#include "game_00.h"
+#include "engine/game/00/game_00.h"
 
 /* FAKE: the step increment stays on the mode symbol; both spellings name the same byte. */
-MATCH void func_801A852C(void) {
+/* func_801A852C */
+/* Shows the entry message, then requests the Fairy Village area picked by the highest set flag of 246 to 255. */
+MATCH void WorldMap_RunFairyEntry(void) {
     s8* state;
     s32 bit_index;
     s32 seed;

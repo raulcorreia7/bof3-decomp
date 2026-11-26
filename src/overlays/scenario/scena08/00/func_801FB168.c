@@ -24,7 +24,7 @@ MATCH void func_801FB168(void) {
             if (g_ScenarioState.timer_06-- == 0) {
                 SYS_SetFlag(g_SceneFlags, 3);
                 D_801448EE               = 1;
-                g_SceneEventState.mode   = 5;
+                g_SceneEventState.mode   = SCENE_EVENT_MINE_ENTRY;
                 g_SceneEventState.step   = 3;
                 g_ScenarioState.state_04 = 0;
                 *step                    = 0;

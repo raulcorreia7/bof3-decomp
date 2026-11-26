@@ -252,7 +252,8 @@ extern u8                 s_EventFlagsReset[16];
 extern Callback           g_SceneEvents[64];
 /* D_801C85BC */
 extern u8                 s_ScenarioStateStepArgs[8];
-extern Callback           D_801C85C4[11];
+/* D_801C85C4 */
+extern Callback           g_WorldMapGuides[11];
 /* D_801C85F0 */
 extern SceneActorCallback g_SceneObjects[66];
 /* D_801C87D8 */
