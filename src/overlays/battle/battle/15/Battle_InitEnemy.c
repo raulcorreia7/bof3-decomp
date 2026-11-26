@@ -1,6 +1,9 @@
 #define TASK_VOLATILE
 #include "battle_15.h"
 
+/* The enemy record the enemy id is read from. */
+#define BATTLE_ENEMY_RECORD_SIZE 0x88
+
 /* Arms one enemy battler slot: installs the work pointer in the scratchpad, resets the slot record, copies the
  * enemy id, then queues the enemy's script and bit flag. */
 /* func_800ABCE0 */
@@ -14,6 +17,7 @@ s32        y;
     EnemyBattler* motion;
     EnemyBattler* spawn;
     u16           record_id;
+    s32           record_offset;
 
     first = &g_BattleEnemyBattlers[enemy_slot];
     TASK_SET(first);
@@ -54,10 +58,11 @@ s32        y;
     spawn->pos.y.fixed                   = y;
     COORD_INT(TASK(EnemyBattler)->pos.z) = Area_HeightSample(spawn->pos.x.fixed, y);
     TASK(EnemyBattler)->unk_2B           = 0;
-    Area_SceneSelectRecord(ENCOUNTER_ENEMIES[enemy_index & HALF_MASK].scene_record_id);
-    g_BattleEnemyBattlers[enemy_slot].unk_8A = ENCOUNTER_ENEMIES[enemy_index & HALF_MASK].scene_record_id;
+    record_offset                        = (enemy_index & HALF_MASK) * BATTLE_ENEMY_RECORD_SIZE;
+    Area_SceneSelectRecord(ENCOUNTER_ENEMY_AT(record_offset)->scene_record_id);
+    g_BattleEnemyBattlers[enemy_slot].unk_8A = ENCOUNTER_ENEMY_AT(record_offset)->scene_record_id;
     Battle_LoadEnemyBattler(enemy_slot, enemy_index);
     func_800AD0A8(enemy_slot, enemy_index & HALF_MASK);
-    g_BattleEnemyBattlers[enemy_slot].unk_7F = Battle_IsEnemyDefeated(ENCOUNTER_ENEMIES[enemy_index & HALF_MASK].enemy_id.byte.type);
+    g_BattleEnemyBattlers[enemy_slot].unk_7F = Battle_IsEnemyDefeated(ENCOUNTER_ENEMY_AT(record_offset)->enemy_id.byte.type);
     g_Battle.enemy_count += 1;
 }
