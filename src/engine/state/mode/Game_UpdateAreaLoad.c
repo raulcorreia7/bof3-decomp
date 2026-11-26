@@ -16,7 +16,7 @@ MATCH void Game_UpdateAreaLoad(void) {
     entry_y           = g_GameEntryPosY;
     entry_facing      = g_GameEntryFacing;
     g_Game.walk_flags = world_flags & ~AREA_WALK_ENTRY_ACTIVE;
-    func_8019FAA0(area_id, entry_x, entry_y, entry_facing);
+    Game_EnterArea(area_id, entry_x, entry_y, entry_facing);
 
     if (g_GameRequestFlags & AREA_LOAD_FLAG_FISHING) {
         g_GameEntryState = GAME_MODE_FISHING;
@@ -28,7 +28,7 @@ MATCH void Game_UpdateAreaLoad(void) {
         UI_ModeSet(ui_mode);
         Area_WaitWindowEffect(1u);
         if (LOBU(g_GameRequestFlags) & 0x1u) {
-            func_801A0048(g_AreaCamera.scroll_x.part.integer, g_AreaCamera.scroll_y.part.integer);
+            Area_RequestLinkAtCell(g_AreaCamera.scroll_x.part.integer, g_AreaCamera.scroll_y.part.integer);
         }
     } else if (ui_mode == 0xFEu) {
         g_AreaDrawFlags = 0u;

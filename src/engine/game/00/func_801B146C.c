@@ -62,7 +62,7 @@ MATCH void func_801B146C(void) {
             work_d = TASK(Actor);
             if ((Area_CellGetCode(COORD_INT(work_d->pos.x), COORD_INT(work_d->pos.y)) & BYTE_MASK) == 0xC0) {
                 work_e = TASK(Actor);
-                func_801A0048(COORD_INT(work_e->pos.x), COORD_INT(work_e->pos.y));
+                Area_RequestLinkAtCell(COORD_INT(work_e->pos.x), COORD_INT(work_e->pos.y));
             }
             goto block_24; /* continue with the front request */
         }
@@ -77,7 +77,7 @@ MATCH void func_801B146C(void) {
         work_g = TASK(Actor);
         if (Game_TestMapCells(work_g->pos.x.fixed, work_g->pos.y.fixed, work_g->voice_flags.scene_flag, 0xA7, 0U) & BYTE_MASK) {
             work_h = TASK(Actor);
-            func_801A0048(COORD_INT(work_h->pos.x), COORD_INT(work_h->pos.y));
+            Area_RequestLinkAtCell(COORD_INT(work_h->pos.x), COORD_INT(work_h->pos.y));
             g_GameStateIndex = GAME_REQUEST_AREA_CHANGE;
             Script_Request(TASK(Actor)->direction);
             goto block_46; /* re-arm the frame flags */

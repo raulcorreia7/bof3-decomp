@@ -63,13 +63,25 @@ u8   Actor_TurnRandom(void* record);
 void Actor_SetOptionFlags(u8* script);
 void Actor_SpawnSceneActor(s8 actor_slot);
 void Actor_ReadValue(void);
+/* func_8019ADA4 */
+void Actor_TossRun(void);
+/* func_8019ADE8 */
+void Actor_TossStart(void);
+/* func_8019AF1C */
+void Actor_TossLaunch(void);
+/* func_8019B024 */
+void Actor_TossFall(void);
+/* func_8019B0EC */
+void Actor_ClearSelf(void);
+/* func_8019F5B8 */
+void Actor_DrawValueDigits(s16 x, s16 y, u8 unused, u8 palette);
 /* func_801A4914 */
 void Actor_StartFacingScript(void);
 /* func_801A4B80 */
 void Actor_TurnRampClear(s32 index);
-/* func_801A5B78 */
-void func_801A5B78(u8* script);
 /* func_801A623C */
 void Actor_SpawnBattleEntry(u8* script);
+/* func_801ADCF4 */
+void Actor_SpawnToss(u8 source_slot);
 
 #endif

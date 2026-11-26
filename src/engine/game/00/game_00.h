@@ -419,9 +419,11 @@ extern char                g_UiListAbilityRowFormat[]; /* 0x80195F98 */
 /* The format that prints the zenny reward. */
 /* D_80195FBC */
 extern char                g_GameRewardZennyFormat[]; /* 0x80195FBC */
-extern CellPaletteIndices  D_80195FEC;
+/* D_80195FEC */
+extern CellPaletteIndices  g_PartyDamageCellColors;
 extern CellEffects         D_80195FF8;
-extern PaletteColors       D_80196014;
+/* D_80196014 */
+extern PaletteColors       g_PartyDamageColors;
 extern u8                  D_801F1294; /* 0x801F1294 */
 extern u8                  D_801F12C8; /* 0x801F12C8 */
 extern u8                  D_801F1318; /* 0x801F1318 */
@@ -579,20 +581,6 @@ void    func_8019A6AC(void);
 void    func_8019A7D4(void);
 void    func_8019A804(void);
 void    func_8019A848(void);
-void    func_8019A8B4(void);
-void    func_8019A904(void);
-void    func_8019AA44(void);
-void    func_8019AAFC(void);
-void    func_8019AB5C(void);
-void    func_8019AC34(void);
-void    func_8019AC84(void);
-void    func_8019ACF4(void);
-void    func_8019AD70(void);
-void    func_8019ADA4(void);
-void    func_8019ADE8(void);
-void    func_8019AF1C(void);
-void    func_8019B024(void);
-void    func_8019B0EC(void);
 void    func_8019B10C(void);
 void    func_8019B150(void);
 void    func_8019B1E8(void);
@@ -663,11 +651,9 @@ void    func_8019F310(void);
 void    func_8019F384(void);
 void    func_8019F430(void);
 void    func_8019F4F8(void);
-void    func_8019F5B8(s16 x, s16 y, u8 unused, u8 palette);
 void    func_8019F840(void);
 void    func_8019F98C(void);
 void    func_8019F9D0(void);
-void    func_8019FAA0(u16 area_id, u32 entry_x, u32 entry_y, u8 entry_facing);
 void    func_8019FF88(s32 entry_mode, s32 entry_index, s32 entry_flags);
 void    func_801A02E8(void);
 u8      func_801A0348(s16 map_x, s16 map_y);
@@ -735,11 +721,9 @@ void    func_801ACBC4(void);
 void    func_801ACC08(void);
 void    func_801ACCD8(void);
 s8      func_801ADC98(void);
-void    func_801ADCF4(u8 actor_slot);
 /* func_801AF270 */
 /* func_801AF494 */
 
-void  func_801B00F8(void);
 void  func_801B016C(void);
 void  func_801B0320(void);
 void  func_801B036C(void);
@@ -748,10 +732,7 @@ void  func_801B0C88(void);
 void  func_801B0DA0(void);
 void  func_801B13BC(void);
 void  func_801B146C(void);
-void  func_801B1E24(void);
-void  func_801B207C(void);
 void  func_801B21E8(void);
-void  func_801B26E0(void);
 void  func_801B29BC(void);
 void  func_801B2A70(void);
 void  func_801B2AB4(void);
@@ -848,8 +829,6 @@ bool  func_801BB6F0(s32 command);
 s32   func_801BB760(s32 x, s32 y);
 s32   func_801BB7B0(s32 selector);
 bool  func_801BB934(s32 first_index, s32 second_index, s8 route_value, s32 expected_value);
-void  func_801BBBC8(s16 from_x, s16 from_y);
-void  func_801BBE48(void);
 void  func_801BBE98(void);
 void  func_801BBFB4(void);
 void  func_801BC000(void);
@@ -889,14 +868,12 @@ bool  func_801C27E0(s8 tuning_delta);
 bool  func_801C2894(s8 tuning_delta);
 s32   func_801C2AAC(void);
 s32   func_801C2B4C(void);
-void  func_801C308C(s32 arg);
 void  func_801C3154(void);
 void  func_801C3204(void);
 s32   func_801C364C(s32 wanted_code, s32 cell_code, s32 find_facing);
 bool  func_801C3790(s32 mode_byte);
 bool  func_801C37DC(s32 mode_byte);
 void  func_801C3828(void);
-s32   func_801C38F4(s32 record_index, s32 field_mode, s32 wanted_id);
 u8    func_801C3A18(s32 pos_x, s32 pos_y, u8 wanted_code, u8 mask_cells);
 s32   func_801C3B78(s32 pos_x, s32 pos_y, s32 wanted_code, s32 mask_cells);
 bool  func_801C3E80(s32 pos_x, s32 pos_y, s32 probe_flag);
@@ -1370,13 +1347,13 @@ static inline void AreaAction_Roll(s32 actor_slot) {
             case 6:
                 Actor_SpawnSceneActor(1);
                 Party_AddZenny(2, 0);
-                func_801ADCF4((u8)((s32)(-(((s32)GAME_WORK_AREA_PTR - (s32)g_Actors) * 0xD79435E5)) >> 3));
+                Actor_SpawnToss((u8)((s32)(-(((s32)GAME_WORK_AREA_PTR - (s32)g_Actors) * 0xD79435E5)) >> 3));
                 TASK(Actor)->unk_04 = 1;
                 break;
             case 7:
                 Actor_SpawnSceneActor(1);
                 Party_AddZenny(5, 0);
-                func_801ADCF4((u8)((s32)(-(((s32)GAME_WORK_AREA_PTR - (s32)g_Actors) * 0xD79435E5)) >> 3));
+                Actor_SpawnToss((u8)((s32)(-(((s32)GAME_WORK_AREA_PTR - (s32)g_Actors) * 0xD79435E5)) >> 3));
                 TASK(Actor)->unk_04 = 2;
                 break;
             default:
@@ -1403,8 +1380,6 @@ u8 func_801B4BE4(u8 mode, u8 code);
 void func_801B690C(void);
 
 s32 func_801BA278(u8 cell0, u8 cell1, u8 cell2, u8 cell3, u8 cell4);
-
-void func_801BB9B4(s16 probe_x, s16 probe_y);
 
 void func_801BBCCC(s16 from_x, s16 from_y, s16 to_x, s16 to_y);
 

@@ -73,7 +73,7 @@ Callback g_ActorTypes[187] = {WorldMap_StepWalk,
                               func_801F6DC0,
                               func_801D0C98,
                               func_801D1B10,
-                              func_8019AB5C,
+                              Scene_StepToggleLock,
                               func_801D20C8,
                               func_8019A3B8,
                               func_801F70F0,
@@ -88,7 +88,7 @@ Callback g_ActorTypes[187] = {WorldMap_StepWalk,
                               func_801F8D70,
                               func_801F71C0,
                               func_801F729C,
-                              func_8019A8B4,
+                              Camera_PanAngleRun,
                               func_801F6E70,
                               func_801F2C18,
                               WorldMap_StepFlock,
@@ -118,8 +118,8 @@ Callback g_ActorTypes[187] = {WorldMap_StepWalk,
                               func_801F7A84,
                               func_801F2C30,
                               func_8019CB94,
-                              func_8019AC34,
-                              func_8019ADA4,
+                              Camera_PanZoomRun,
+                              Actor_TossRun,
                               (Callback)func_801F2C04,
                               func_8019DDCC,
                               func_801F2C44,
@@ -281,11 +281,11 @@ Callback D_801C80BC[3] = {func_8019A3FC, func_8019A848, func_8019A7D4};
 
 Callback D_801C80C8[6] = {func_8019A580, func_8019A580, func_8019A580, func_8019A6AC, func_8019A580, func_8019A630};
 
-Callback D_801C80E0[3] = {func_8019A904, func_8019AA44, func_8019AAFC};
+Callback g_CameraAnglePanModes[3] = {Camera_PanAngleStart, Camera_PanAngleStep, Camera_PanAngleEnd};
 
-Callback D_801C80EC[3] = {func_8019AC84, func_8019ACF4, func_8019AD70};
+Callback g_CameraZoomPanModes[3] = {Camera_PanZoomStart, Camera_PanZoomStep, Camera_PanZoomEnd};
 
-Callback D_801C80F8[4] = {func_8019ADE8, func_8019AF1C, func_8019B024, func_8019B0EC};
+Callback g_ActorTossModes[4] = {Actor_TossStart, Actor_TossLaunch, Actor_TossFall, Actor_ClearSelf};
 
 ActorToss s_ActorTossArcs[3] = {
     {0x300000, 0x80000},
@@ -293,7 +293,7 @@ ActorToss s_ActorTossArcs[3] = {
     {0x100000, 0x80000},
 };
 
-Callback D_801C8120[3] = {func_8019B150, func_8019B1E8, func_8019B0EC};
+Callback D_801C8120[3] = {func_8019B150, func_8019B1E8, Actor_ClearSelf};
 
 Callback D_801C812C[6] = {func_8019B3A8, func_8019B4A0, func_8019B704, func_8019BBA4, func_8019BE28, func_8019BEFC};
 
@@ -2165,21 +2165,21 @@ u8 s_RouteStepScratch[32] = {0x04, 0x00, 0x03, 0x00, 0x02, 0x00, 0x01, 0x00, 0x0
                              0x01, 0x02, 0x01, 0x03, 0x01, 0x09, 0x00, 0x08, 0x00, 0x07, 0x00,
                              0x06, 0x00, 0x05, 0x00, 0x06, 0x01, 0x07, 0x01, 0x08, 0x01};
 
-/* Read as s8 [index] by func_801B1E24 and as an s32 at [index * 4] by func_801B21E8: eight 4-byte rows.
+/* Read as s8 [index] by Game_LeaderSwitchGather and as an s32 at [index * 4] by func_801B21E8: eight 4-byte rows.
  * needs: type, the row width (s8 or s32). */
 s8 s_EntityPlacementOffsets[32] = {
     0x00, 0x03, 0x03, 0x00, 0xFE, 0x02, 0x01, 0x04, 0xFD, 0x00, 0x00, 0x03, 0xFE, 0xFE, 0xFC, 0x01,
     0x00, 0xFD, 0xFD, 0x00, 0x02, 0xFE, 0xFF, 0xFC, 0x03, 0x00, 0x00, 0xFD, 0x02, 0x02, 0x04, 0xFF,
 };
 
-Callback D_801CD0AC[15] = {func_801B016C, func_801B0320, func_801B69C0, Game_LeaderSwitchRun, func_801B29BC, func_801B2A70, func_801B2C38, func_801B2D90,
+Callback g_PartyLeaderModes[15] = {func_801B016C, func_801B0320, func_801B69C0, Game_LeaderSwitchRun, func_801B29BC, func_801B2A70, func_801B2C38, func_801B2D90,
                            Area_Climb,    func_801D9B14, func_801B3690, func_801B371C,        func_801B3BFC, func_801F4D9C, func_801C22D8};
 
 Callback D_801CD0E8[3] = {func_801B036C, func_801B0568, func_801B0DA0};
 
 u16 D_801CD0F4[4] = {0x0103, 0x0109, 0x010A, 0x0000};
 
-Callback D_801CD0FC[5] = {func_801B1E24, func_801B207C, func_801B21E8, func_801B26E0, Game_LeaderSwitchEnd};
+Callback g_GameLeaderSwitchSteps[5] = {Game_LeaderSwitchGather, Game_LeaderSwitchSpinDarken, func_801B21E8, Game_LeaderSwitchSpinRestore, Game_LeaderSwitchEnd};
 
 Callback D_801CD110[2] = {Game_MenuRequest, Game_MenuWaitClose};
 
@@ -2256,7 +2256,7 @@ u8 D_801CD384[128] = {0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x02, 0x00, 0x00, 0x00
                       0x00, 0x00, 0xFE, 0xFF, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0xFF, 0xFF, 0x00, 0x00, 0xFE, 0xFF,
                       0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0xFE, 0xFF, 0x00, 0x00, 0x02, 0x00, 0x00, 0x00, 0xFF, 0xFF};
 
-Callback D_801CD404[15] = {func_801BBE98, func_801BBFB4, func_801B69C0, func_801BD32C, func_801BD35C, func_801BD38C, func_801BD394, func_801BD5A4,
+Callback g_PartyFollowerModes[15] = {func_801BBE98, func_801BBFB4, func_801B69C0, func_801BD32C, func_801BD35C, func_801BD38C, func_801BD394, func_801BD5A4,
                            Area_ClimbFollower, (Callback)0,   (Callback)0,   (Callback)0,   (Callback)0,   (Callback)0,   func_801C22D8};
 
 Callback D_801CD440[2] = {func_801BC000, Area_SceneStepTimer};

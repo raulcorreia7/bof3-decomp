@@ -29,5 +29,7 @@ void Scene_RunScenario(s32 step_index);
 #define OVERLAY_STATE_SCENE_H_LOCAL
 
 void Scene_RunInn(void);
+/* func_8019AB5C */
+void Scene_StepToggleLock(void);
 
 #endif

@@ -87,7 +87,7 @@ extern PaletteFade              g_PaletteFades[PALETTE_FADE_COUNT];
 extern GraphicsPaletteAnimation g_PaletteAnimations[8];
 
 /* The game's area state at 0x80143F00: the area being run, the area to return to and the pending area request.
- * func_8019FAA0 stores the current area, its cell type and the scroll target into last_*, and func_801B146C hands
+ * Game_EnterArea stores the current area, its cell type and the scroll target into last_*, and func_801B146C hands
  * them back to Game_RequestAreaChange; Game_RequestAreaChange stores the request fields in the order of its
  * arguments. The members keep their own globals (several images read them with a different width or volatile). */
 typedef struct GameAreaState {
@@ -204,9 +204,12 @@ extern u8       s_SceneHandlerIds[8];
 extern Callback D_801C80A4[6];
 extern Callback D_801C80BC[3];
 extern Callback D_801C80C8[6];
-extern Callback D_801C80E0[3];
-extern Callback D_801C80EC[3];
-extern Callback D_801C80F8[4];
+/* D_801C80E0 */
+extern Callback g_CameraAnglePanModes[3];
+/* D_801C80EC */
+extern Callback g_CameraZoomPanModes[3];
+/* D_801C80F8 */
+extern Callback g_ActorTossModes[4];
 
 /* Launch of a tossed actor: initial vertical speed and the gravity pulling it back, both 16.16. */
 typedef struct ActorToss {
@@ -271,10 +274,12 @@ extern u8                 s_RouteStepScratch[32];
 /* D_801CD08C */
 extern s8                 s_EntityPlacementOffsets[32];
 extern s8                 D_801CD08D[];
-extern Callback           D_801CD0AC[15];
+/* D_801CD0AC */
+extern Callback           g_PartyLeaderModes[15];
 extern Callback           D_801CD0E8[3];
 extern u16                D_801CD0F4[4];
-extern Callback           D_801CD0FC[5];
+/* D_801CD0FC */
+extern Callback           g_GameLeaderSwitchSteps[5];
 extern Callback           D_801CD110[2];
 extern Callback           D_801CD118[2];
 extern Callback           D_801CD120[4];
@@ -312,7 +317,8 @@ extern Callback           D_801CD36C[2];
 extern Callback           D_801CD374[2];
 extern Callback           D_801CD37C[2];
 extern u8                 D_801CD384[128];
-extern Callback           D_801CD404[15];
+/* D_801CD404 */
+extern Callback           g_PartyFollowerModes[15];
 extern Callback           D_801CD440[2];
 /* D_801CD448 */
 extern Callback           g_AreaClimbFollowerSteps[4];

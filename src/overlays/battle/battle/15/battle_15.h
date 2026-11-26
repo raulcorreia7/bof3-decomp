@@ -397,8 +397,8 @@ extern Callback              D_800B6E20[5];
 extern Callback              D_800B6E34[3];
 extern Callback              D_800B6E40[4];
 extern Callback              D_800B6E50[];
-extern s32                   D_800B6EC4;
-extern s32                   D_800B6ED4;
+extern char*                 D_800B6EC4[];
+extern char*                 D_800B6ED4;
 
 /* The stat labels, slot icons and slot categories inside the panel data block, then the
  * second label block. */
@@ -419,7 +419,7 @@ extern char                              s_BattlePanelEquipLabel[5];
 extern u8                                s_BattleEquipment[6];
 extern u8                                D_800B6F58;
 extern u8                                D_800B6F5C;
-extern s8                                D_800B6F60;
+extern s8                                D_800B6F60[];
 extern s8                                D_800B6F61;
 extern s8                                D_800B6F62;
 extern s8                                D_800B6F63;

@@ -5,12 +5,13 @@ __asm__(".include \"include/match/macro.inc\"\n");
 #endif
 
 MATCH void func_801EEC04(void) {
-    Callback handlers[2] = {func_801EEC5C, func_801EEDD8};
+    Callback handlers[2] = {BMagic_MagicBallInit, Effect_MarkDamagedOnZeroTick};
 
     SYS_DISPATCH_TASK(handlers, 1, g_Task);
 }
 
-MATCH void func_801EEC5C(void) {
+/* func_801EEC5C */
+MATCH void BMagic_MagicBallInit(void) {
     PartyMember* work;
     PartyMember* target;
     u8           slot;
@@ -48,52 +49,53 @@ MATCH void func_801EEC5C(void) {
 /* func_801EEE38 */
 #include "overlays/bmagic/shared/BMagic_DispatchEffectMode.h"
 
-MATCH void func_801EEE7C(void) {
-    SYS_DISPATCH_BYTE(D_801F0B7C, TASK(PartyMember)->header.step);
+/* func_801EEE7C */
+MATCH void BMagic_MagicBallCoreUpdate(void) {
+    SYS_DISPATCH_BYTE(g_BMagicMagicBallCoreSteps, TASK(PartyMember)->header.step);
     if (TASK(PartyMember)->header.flags != 0) {
         switch (TASK(PartyMember)->header.step) {
             /* FAKE: retail compare tree needs a third case below 2 on the default body; the bytes do not say which step. */
             case 1:
             default:
                 Battle_ProjectRange();
-                func_801F02C8(rand() & 0x1FF, 3);
-                func_801F05E8((rand() & 0x1FF) + 0x333, 3);
-                func_801F02C8((rand() & 0x1FF) + 0x666, 3);
-                func_801F05E8((rand() & 0x1FF) + 0x999, 3);
-                func_801F02C8((rand() & 0x1FF) + 0xCCC, 3);
-                func_801EF7CC();
-                func_801EFA2C();
+                BMagic_MagicBallDrawBoltWide(rand() & 0x1FF, 3);
+                BMagic_MagicBallDrawBoltNarrow((rand() & 0x1FF) + 0x333, 3);
+                BMagic_MagicBallDrawBoltWide((rand() & 0x1FF) + 0x666, 3);
+                BMagic_MagicBallDrawBoltNarrow((rand() & 0x1FF) + 0x999, 3);
+                BMagic_MagicBallDrawBoltWide((rand() & 0x1FF) + 0xCCC, 3);
+                BMagic_MagicBallDrawDisc();
+                BMagic_MagicBallDrawRing();
                 break;
             case 2:
                 Battle_ProjectRange();
-                func_801F02C8(rand() & 0x1FF, 7);
-                func_801F05E8((rand() & 0x1FF) + 0x333, 7);
-                func_801F02C8((rand() & 0x1FF) + 0x666, 7);
-                func_801F05E8((rand() & 0x1FF) + 0x999, 7);
-                func_801F02C8((rand() & 0x1FF) + 0xCCC, 7);
-                func_801F02C8((rand() & 0x1FF) + 0x400, 15);
-                func_801F02C8((rand() & 0x1FF) + 0x800, 15);
-                func_801F02C8((rand() & 0x1FF) + 0xC14, 15);
-                func_801EF7CC();
-                func_801EFA2C();
-                func_801EFD04();
-                func_801EFFE8();
+                BMagic_MagicBallDrawBoltWide(rand() & 0x1FF, 7);
+                BMagic_MagicBallDrawBoltNarrow((rand() & 0x1FF) + 0x333, 7);
+                BMagic_MagicBallDrawBoltWide((rand() & 0x1FF) + 0x666, 7);
+                BMagic_MagicBallDrawBoltNarrow((rand() & 0x1FF) + 0x999, 7);
+                BMagic_MagicBallDrawBoltWide((rand() & 0x1FF) + 0xCCC, 7);
+                BMagic_MagicBallDrawBoltWide((rand() & 0x1FF) + 0x400, 15);
+                BMagic_MagicBallDrawBoltWide((rand() & 0x1FF) + 0x800, 15);
+                BMagic_MagicBallDrawBoltWide((rand() & 0x1FF) + 0xC14, 15);
+                BMagic_MagicBallDrawDisc();
+                BMagic_MagicBallDrawRing();
+                BMagic_MagicBallDrawWaveInner();
+                BMagic_MagicBallDrawWaveOuter();
                 break;
             case 3:
                 Battle_ProjectRange();
-                func_801EFD04();
-                func_801EFFE8();
+                BMagic_MagicBallDrawWaveInner();
+                BMagic_MagicBallDrawWaveOuter();
                 break;
             case 4:
                 Battle_ProjectRange();
-                func_801F02C8(rand() & 0x1FF, 3);
-                func_801F05E8((rand() & 0x1FF) + 0x333, 3);
-                func_801F02C8((rand() & 0x1FF) + 0x666, 3);
-                func_801F05E8((rand() & 0x1FF) + 0x999, 3);
-                func_801F02C8((rand() & 0x1FF) + 0xCCC, 3);
-                func_801F02C8((rand() & 0x1FF) + 0x400, 7);
-                func_801F02C8((rand() & 0x1FF) + 0x800, 7);
-                func_801F02C8((rand() & 0x1FF) + 0xC14, 7);
+                BMagic_MagicBallDrawBoltWide(rand() & 0x1FF, 3);
+                BMagic_MagicBallDrawBoltNarrow((rand() & 0x1FF) + 0x333, 3);
+                BMagic_MagicBallDrawBoltWide((rand() & 0x1FF) + 0x666, 3);
+                BMagic_MagicBallDrawBoltNarrow((rand() & 0x1FF) + 0x999, 3);
+                BMagic_MagicBallDrawBoltWide((rand() & 0x1FF) + 0xCCC, 3);
+                BMagic_MagicBallDrawBoltWide((rand() & 0x1FF) + 0x400, 7);
+                BMagic_MagicBallDrawBoltWide((rand() & 0x1FF) + 0x800, 7);
+                BMagic_MagicBallDrawBoltWide((rand() & 0x1FF) + 0xC14, 7);
                 break;
         }
     }
@@ -148,7 +150,8 @@ MATCH void func_801EF210(void) {
     TASK(PartyMember)->header.step += 1;
 }
 
-MATCH void func_801EF3A4(void) {
+/* func_801EF3A4 */
+MATCH void BMagic_MagicBallCoreBurst(void) {
     u8 counter;
     u8 timer;
 
@@ -164,7 +167,8 @@ MATCH void func_801EF3A4(void) {
     }
 }
 
-MATCH void func_801EF430(void) {
+/* func_801EF430 */
+MATCH void BMagic_MagicBallCoreFade(void) {
     u8 timer_next;
 
     TASK(PartyMember)->param.unk_0B += 4;
@@ -179,15 +183,17 @@ MATCH void func_801EF430(void) {
 
 #include "overlays/bmagic/shared/Effect_TickOnTimerZero.h"
 
-MATCH void func_801EF518(void) {
-    D_801F0B90[TASK(PartyMember)->header.step]();
+/* func_801EF518 */
+MATCH void BMagic_MagicBallTrailUpdate(void) {
+    g_BMagicMagicBallTrailSteps[TASK(PartyMember)->header.step]();
     if (TASK(PartyMember)->header.flags & TASK(PartyMember)->header.step) {
         Battle_ProjectRange();
-        func_801F0908();
+        BMagic_MagicBallDrawTrail();
     }
 }
 
-MATCH void func_801EF590(void) {
+/* func_801EF590 */
+MATCH void BMagic_MagicBallTrailPlace(void) {
     PartyMember* actor;
     PartyMember* work;
     s32          angle;
@@ -205,9 +211,8 @@ MATCH void func_801EF590(void) {
     }
 }
 
-/* Aims the effect at the selected actor, projects its screen point as the effect's range, and advances once the
- * effect record's step is two. */
-MATCH void func_801EF650(void) {
+/* func_801EF650 */
+MATCH void BMagic_MagicBallTrailFly(void) {
     PartyMember* actor;
     VECTOR       pos;
 
@@ -226,7 +231,8 @@ MATCH void func_801EF650(void) {
 
 #include "overlays/bmagic/shared/Effect_TickOnTimerNegative.h"
 
-MATCH void func_801EF7CC(void) {
+/* func_801EF7CC */
+MATCH void BMagic_MagicBallDrawDisc(void) {
     POLY_G3* prim;
     u16      x;
     u16      y;
@@ -258,7 +264,8 @@ MATCH void func_801EF7CC(void) {
     }
 }
 
-MATCH void func_801EFA2C(void) {
+/* func_801EFA2C */
+MATCH void BMagic_MagicBallDrawRing(void) {
     POLY_G4* prim;
     u16      x;
     u16      y;
@@ -295,7 +302,8 @@ MATCH void func_801EFA2C(void) {
     }
 }
 
-MATCH void func_801EFD04(void) {
+/* func_801EFD04 */
+MATCH void BMagic_MagicBallDrawWaveInner(void) {
     POLY_G4* prim;
     u16      x;
     u16      y;
@@ -332,7 +340,8 @@ MATCH void func_801EFD04(void) {
     }
 }
 
-MATCH void func_801EFFE8(void) {
+/* func_801EFFE8 */
+MATCH void BMagic_MagicBallDrawWaveOuter(void) {
     POLY_G4* prim;
     u16      x;
     u16      y;
@@ -369,7 +378,8 @@ MATCH void func_801EFFE8(void) {
     }
 }
 
-MATCH void func_801F02C8(s32 angle, s32 spread) {
+/* func_801F02C8 */
+MATCH void BMagic_MagicBallDrawBoltWide(s32 angle, s32 spread) {
     LINE_G2* prim;
     u16      x;
     u16      y;
@@ -380,7 +390,8 @@ MATCH void func_801F02C8(s32 angle, s32 spread) {
     MAGIC172_DRAW_JAGGED_LINE(angle, spread, 0x7F, 12, 16);
 }
 
-MATCH void func_801F05E8(s32 angle, s32 spread) {
+/* func_801F05E8 */
+MATCH void BMagic_MagicBallDrawBoltNarrow(s32 angle, s32 spread) {
     LINE_G2* prim;
     u16      x;
     u16      y;
@@ -391,7 +402,8 @@ MATCH void func_801F05E8(s32 angle, s32 spread) {
     MAGIC172_DRAW_JAGGED_LINE(angle, spread, 0x3F, 8, 12);
 }
 
-MATCH void func_801F0908(void) {
+/* func_801F0908 */
+MATCH void BMagic_MagicBallDrawTrail(void) {
     POLY_G3* prim;
     u16      x;
     u16      y;
@@ -405,9 +417,9 @@ MATCH void func_801F0908(void) {
     x                            = TASK(PartyMember)->screen_x.value;
     y                            = TASK(PartyMember)->screen_y.value;
     g_ScratchPad.cells.halves[3] = TASK(PartyMember)->unk_09 * TASK(PartyMember)->param.unk_0B;
-    g_ScratchPad.cells.halves[4] = TASK(PartyMember)->unk_09 * D_801F0B9C[TASK(PartyMember)->param.unk_0B].r;
+    g_ScratchPad.cells.halves[4] = TASK(PartyMember)->unk_09 * g_BMagicMagicBallTrailTints[TASK(PartyMember)->param.unk_0B].r;
     g_ScratchPad.cells.halves[5] = TASK(PartyMember)->unk_09;
-    g_ScratchPad.cells.halves[6] = TASK(PartyMember)->unk_09 * D_801F0B9C[TASK(PartyMember)->param.unk_0B].b;
+    g_ScratchPad.cells.halves[6] = TASK(PartyMember)->unk_09 * g_BMagicMagicBallTrailTints[TASK(PartyMember)->param.unk_0B].b;
     for (i = 0; i < 16; i++) {
         prim = (POLY_G3*)g_GfxPrimCursor;
         SetPolyG3(prim);

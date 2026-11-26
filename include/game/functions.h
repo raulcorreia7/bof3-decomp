@@ -52,14 +52,16 @@
 void func_8019625C(void);
 /* func_80199440 */
 void func_80199440(void);
+/* Scene_StartToggleLock */
 /* func_8019ABB0 */
-void func_8019ABB0(s32 mode);
+void Scene_StartToggleLock(s32 frames);
 /* func_8019F75C */
 void func_8019F75C(void);
 /* func_8019F818 */
 void func_8019F818(Actor* actor);
+/* Area_RequestLinkAtCell */
 /* func_801A0048 */
-bool func_801A0048(s32 cell_x, s32 cell_y);
+bool Area_RequestLinkAtCell(s32 cell_x, s32 cell_y);
 /* func_801A0514 */
 void func_801A0514(void);
 /* func_801A061C */
@@ -89,8 +91,9 @@ u8   func_801AF5B0(s32 item_category, s32 character_index, s32 ability_type);
 /* UI_ScrollList */
 /* func_801AFD10 */
 s32  UI_ScrollList(u8* first_row, u8* scroll_y, u8* extra_rows, u8* scroll);
+/* MATH_TriangleWinding */
 /* func_801AFF90 */
-s16  func_801AFF90(Pos2* origin, Pos2* first_point, Pos2* second_point);
+s16  MATH_TriangleWinding(Pos2* origin, Pos2* first_point, Pos2* second_point);
 /* func_801B0E44 */
 u8   func_801B0E44(void);
 /* func_801B6610 */

@@ -9,12 +9,13 @@ MATCH void func_801EEC04(void) {
     PartyMember* saved_battler;
     u8           i;
 
-    BMagic_DispatchTaskPair(func_801EED04, Effect_StartOnZeroTick);
+    BMagic_DispatchTaskPair(BMagic_WallOfFireInit, Effect_StartOnZeroTick);
 
-    BMAGIC_RUN_EFFECT_SLOTS(D_801F050C, func_801EF510);
+    BMAGIC_RUN_EFFECT_SLOTS(BMAGIC_EFFECT_SLOTS, BMagic_WallOfFireSlotUpdate);
 }
 
-MATCH void func_801EED04(void) {
+/* func_801EED04 */
+MATCH void BMagic_WallOfFireInit(void) {
     PartyMember* actor;
     PartyMember* task;
     u32          i;
@@ -30,7 +31,7 @@ MATCH void func_801EED04(void) {
     dst                                = BATTLE_EFFECT_PALETTE_COLORS;
     src                                = BATTLE_PALETTE_SOURCE_COLORS;
     task                               = TASK(PartyMember);
-    g_BattleEffects[slot].header.mode  = 0;
+    g_BattleEffects[slot].header.mode  = BMAGIC_WALL_OF_FIRE_EFFECT_TARGET;
     g_BattleEffects[slot].target.party = task;
     g_BattleEffects[slot].pos.x.fixed  = actor->pos.x.fixed;
     g_BattleEffects[slot].pos.y.fixed  = actor->pos.y.fixed;
@@ -50,10 +51,11 @@ MATCH void func_801EED04(void) {
 #include "overlays/bmagic/shared/BMagic_DispatchEffectMode.h"
 
 MATCH void func_801EEEE0(void) {
-    BMAGIC_DISPATCH_AND_DRAW(D_801F04D4, func_801EF294);
+    BMAGIC_DISPATCH_AND_DRAW(g_BMagicWallOfFireTargetSteps, BMagic_WallOfFireDrawShadow);
 }
 
-MATCH void func_801EEF68(void) {
+/* func_801EEF68 */
+MATCH void BMagic_WallOfFireTargetSpawn(void) {
     PartyMember* work;
     u8           i;
     u8           slot;
@@ -64,7 +66,7 @@ MATCH void func_801EEF68(void) {
         slot = BMagic_AllocEffect();
         if (slot != GAME_NONE) {
             work                                  = TASK(PartyMember);
-            BMAGIC_EFFECT_SLOTS[slot].header.mode = i != 0;
+            BMAGIC_EFFECT_SLOTS[slot].header.mode = (i != 0) ? BMAGIC_WALL_OF_FIRE_SLOT_GLOW : BMAGIC_WALL_OF_FIRE_SLOT_FLAME;
             BMAGIC_EFFECT_SLOTS[slot].header.step = 0;
             BMAGIC_EFFECT_SLOTS[slot].unk_0B      = i;
             BMAGIC_EFFECT_SLOTS[slot].header.flags |= BMAGIC_EFFECT_IN_USE | ACTOR_FLAG_HIDDEN;
@@ -76,7 +78,8 @@ MATCH void func_801EEF68(void) {
     TASK(PartyMember)->header.step += 1;
 }
 
-MATCH void func_801EF078(void) {
+/* func_801EF078 */
+MATCH void BMagic_WallOfFireTargetHit(void) {
     u8            timer;
     PartyMember** actor;
     timer                     = TASK(PartyMember)->unk_09 + 2;
@@ -92,7 +95,8 @@ MATCH void func_801EF078(void) {
 
 #include "overlays/bmagic/shared/Effect_StepOnOwnTickFlag.h"
 
-MATCH void func_801EF154(void) {
+/* func_801EF154 */
+MATCH void BMagic_WallOfFireTargetEnd(void) {
     u8 count;
 
     count = TASK(PartyMember)->unk_09;
@@ -109,7 +113,8 @@ MATCH void func_801EF154(void) {
 
 #include "overlays/bmagic/shared/Effect_SetActorMatrix.h"
 
-MATCH void func_801EF294(void) {
+/* func_801EF294 */
+MATCH void BMagic_WallOfFireDrawShadow(void) {
     POLY_G3* prim;
     long     depth;
     long     flag;
@@ -147,12 +152,14 @@ MATCH void func_801EF294(void) {
     GFX_ADD_DITHERED_DRAW_MODE(BMAGIC_LAYER_BEHIND_BATTLERS, tpage);
 }
 
-MATCH void func_801EF510(void) {
-    SYS_DISPATCH_TASK(D_801F04E4, 1, g_Task);
+/* func_801EF510 */
+MATCH void BMagic_WallOfFireSlotUpdate(void) {
+    SYS_DISPATCH_TASK(g_BMagicWallOfFireSlotModes, 1, g_Task);
 }
 
-MATCH void func_801EF554(void) {
-    SYS_DISPATCH_BYTE(D_801F04EC, TASK(PartyMember)->header.step);
+/* func_801EF554 */
+MATCH void BMagic_WallOfFireFlameUpdate(void) {
+    SYS_DISPATCH_BYTE(g_BMagicWallOfFireFlameSteps, TASK(PartyMember)->header.step);
     if (TASK(PartyMember)->header.flags != 0 && TASK(PartyMember)->header.step != 0) {
         Battle_ProjectRange();
         Effect_DrawFlameColumn();
@@ -161,7 +168,8 @@ MATCH void func_801EF554(void) {
 
 #include "overlays/bmagic/shared/Effect_StartAtTarget.h"
 
-MATCH void func_801EF654(void) {
+/* func_801EF654 */
+MATCH void BMagic_WallOfFireFlameGrow(void) {
     EFFECT_ADVANCE_AT_COUNT(4, 0x11);
 }
 
@@ -172,32 +180,34 @@ MATCH void func_801EF654(void) {
 /* func_801EF818 */
 #include "overlays/bmagic/shared/Effect_DrawFlameColumn.h"
 
-MATCH void func_801EFF74(void) {
+/* func_801EFF74 */
+MATCH void BMagic_WallOfFireGlowUpdate(void) {
     PartyMember* work;
     u16          x;
     u16          y;
 
-    SYS_DISPATCH_BYTE(D_801F04FC, TASK(PartyMember)->header.step);
+    SYS_DISPATCH_BYTE(g_BMagicWallOfFireGlowSteps, TASK(PartyMember)->header.step);
     if (TASK(PartyMember)->header.flags != 0 && TASK(PartyMember)->header.step != 0) {
         Battle_ProjectRange();
         work = TASK(PartyMember);
         if (work->param.unk_0B == 1) {
-            x = work->screen_x.value - MAGIC092_STEP_X;
+            x = work->screen_x.value - BMAGIC_WALL_OF_FIRE_GLOW_DRIFT_X;
             y = work->screen_y.value;
         } else {
-            x = work->screen_x.value + MAGIC092_STEP_X;
+            x = work->screen_x.value + BMAGIC_WALL_OF_FIRE_GLOW_DRIFT_X;
             y = work->screen_y.value;
         }
-        y -= MAGIC092_RISE_Y;
+        y -= BMAGIC_WALL_OF_FIRE_GLOW_RISE_Y;
         work->screen_x.value = x;
         work->screen_y.value = y;
-        func_801F01D0();
+        BMagic_WallOfFireDrawGlow();
     }
 }
 
 #include "overlays/bmagic/shared/Effect_AppearAtTarget.h"
 
-MATCH void func_801F00A0(void) {
+/* func_801F00A0 */
+MATCH void BMagic_WallOfFireGlowGrow(void) {
     EFFECT_ADVANCE_AT_COUNT(2, 0x10);
 }
 
@@ -205,7 +215,8 @@ MATCH void func_801F00A0(void) {
 
 #include "overlays/bmagic/shared/Effect_TickCounter.h"
 
-MATCH void func_801F01D0(void) {
+/* func_801F01D0 */
+MATCH void BMagic_WallOfFireDrawGlow(void) {
     POLY_G3* prim;
     s32      i;
     s32      tpage;

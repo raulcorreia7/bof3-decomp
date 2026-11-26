@@ -1,8 +1,10 @@
-#include "game_00.h"
+#include "engine/game/00/game_00.h"
 
-/* K&R call keeps a0 undisturbed; the callee ignores its mode argument. */
+/* K&R call keeps a0 undisturbed; the callee ignores the argument. */
 
-MATCH void func_8019ABB0(s32 mode) {
+/* func_8019ABB0 */
+/* Sets scene flag 28 and spawns the actor that clears it after the given frames. */
+MATCH void Scene_StartToggleLock(s32 frames) {
     u8 index;
 
     index = Actor_FindFreeSpawned() & BYTE_MASK;
@@ -11,7 +13,7 @@ MATCH void func_8019ABB0(s32 mode) {
         /* FAKE: block boundary holds the SYS_SetFlag address load between the stores. */
         FAKE_ORDER_FENCE();
         g_SpawnedActors[index].type  = 4;
-        g_SpawnedActors[index].layer = mode;
+        g_SpawnedActors[index].layer = frames;
         SYS_SetFlag(g_SceneEventFlags, 28);
     }
 }

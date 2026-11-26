@@ -41,7 +41,7 @@ MATCH void BMagic_SacrificeInit(void) {
         *slot = *image;
     }
     work                                = TASK(PartyMember);
-    g_BattleEffects[index].header.mode  = BMAGIC_SACRIFICE_EFFECT_CASTER;
+    g_BattleEffects[index].header.mode  = BMAGIC_SACRIFICE_EFFECT_CLONE;
     g_BattleEffects[index].unk_06       = 1;
     g_BattleEffects[index].header.step  = 0;
     g_BattleEffects[index].step_index   = 0x55;
@@ -225,8 +225,8 @@ MATCH void BMagic_SacrificeShadowGrow(void) {
 
 #include "overlays/bmagic/shared/Effect_CountDownTimerCapped.h"
 
-/* Draws the glow disc of sixteen shaded triangles round the effect point; the radius
- * follows byte 0x09 (a wider rule from step 2 on) and the centre colour the effect timer. */
+/* Draws the shadow disc of sixteen subtractive triangles behind the battlers round the effect point; the radius
+ * follows the counter (a wider rule from step 2 on) and the centre colour the timer. */
 /* func_801EFC74 */
 MATCH void BMagic_SacrificeDrawShadow(void) {
     POLY_G3* prim;
@@ -259,10 +259,10 @@ MATCH void BMagic_SacrificeDrawShadow(void) {
 }
 
 /* func_801EFF28 */
-MATCH void BMagic_SacrificeCasterUpdate(void) {
-    Magic056Steps handlers;
+MATCH void BMagic_SacrificeCloneUpdate(void) {
+    BMagicSacrificeCloneSteps handlers;
 
-    handlers = g_BMagicSacrificeCasterSteps;
+    handlers = g_BMagicSacrificeCloneSteps;
     SYS_DISPATCH_BYTE(handlers.steps, TASK(PartyMember)->header.step);
     if (TASK(PartyMember)->header.flags != 0 && TASK(PartyMember)->header.step != 0) {
         Area_AddGridActor();
@@ -270,7 +270,7 @@ MATCH void BMagic_SacrificeCasterUpdate(void) {
 }
 
 /* func_801EFFE8 */
-MATCH void BMagic_SacrificeCasterStart(void) {
+MATCH void BMagic_SacrificeCloneStart(void) {
     TASK(PartyMember)->unk_27 = BATTLE_ACTIVE_WORK->unk_27;
     TASK(PartyMember)->header.step++;
 }
@@ -278,7 +278,7 @@ MATCH void BMagic_SacrificeCasterStart(void) {
 #include "overlays/bmagic/shared/Effect_PrimeTintOnScriptReady.h"
 
 /* func_801F00C8 */
-MATCH void BMagic_SacrificeCasterHide(void) {
+MATCH void BMagic_SacrificeCloneHide(void) {
     PartyMember* work;
     PartyMember* source;
 
@@ -294,7 +294,7 @@ MATCH void BMagic_SacrificeCasterHide(void) {
 }
 
 /* func_801F0178 */
-MATCH void BMagic_SacrificeCasterShow(void) {
+MATCH void BMagic_SacrificeCloneShow(void) {
     TASK(PartyMember)->unk_5D += 0x10;
     TASK(PartyMember)->unk_5E += 0x10;
     TASK(PartyMember)->unk_5F += 0x10;
@@ -307,7 +307,7 @@ MATCH void BMagic_SacrificeCasterShow(void) {
 }
 
 /* func_801F023C */
-MATCH void BMagic_SacrificeCasterCast(void) {
+MATCH void BMagic_SacrificeCloneCast(void) {
     PartyMember* saved;
     PartyMember* task;
     u8           slot;
@@ -346,7 +346,7 @@ MATCH void BMagic_SacrificeCasterCast(void) {
 }
 
 /* func_801F042C */
-MATCH void BMagic_SacrificeCasterHold(void) {
+MATCH void BMagic_SacrificeCloneHold(void) {
     u8 count;
 
     Script_AnimStepLoop();
@@ -363,7 +363,7 @@ MATCH void BMagic_SacrificeCasterHold(void) {
 }
 
 /* func_801F04EC */
-MATCH void BMagic_SacrificeCasterVanish(void) {
+MATCH void BMagic_SacrificeCloneVanish(void) {
     PartyMember* member;
     PartyMember* work;
 
@@ -394,7 +394,7 @@ MATCH void BMagic_SacrificeCasterVanish(void) {
 }
 
 /* func_801F0658 */
-MATCH void BMagic_SacrificeCasterReturn(void) {
+MATCH void BMagic_SacrificeCloneReturn(void) {
     if (g_BattleEffectBattler->param.unk_0B == 1) {
         TASK(PartyMember)->unk_5D += 0x10;
         TASK(PartyMember)->unk_5E += 0x10;
@@ -407,6 +407,6 @@ MATCH void BMagic_SacrificeCasterReturn(void) {
 }
 
 /* func_801F0724 */
-MATCH void BMagic_SacrificeCasterEnd(void) {
+MATCH void BMagic_SacrificeCloneEnd(void) {
     Effect_Reset();
 }

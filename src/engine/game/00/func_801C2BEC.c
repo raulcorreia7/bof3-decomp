@@ -7,7 +7,7 @@ MATCH void func_801C2BEC(void) {
 
     flags = g_Game.flags;
 
-    table = D_80195FEC;
+    table = g_PartyDamageCellColors;
     if (flags & 0x400) {
         index = GAME_NONE;
     } else {
@@ -33,6 +33,6 @@ MATCH void func_801C2BEC(void) {
     }
     if (index != GAME_NONE) {
         Char_SetCharacterId(index);
-        func_801C308C(table.cells[index]);
+        Party_FlashDamage(table.cells[index]);
     }
 }

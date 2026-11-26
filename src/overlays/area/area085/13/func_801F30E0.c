@@ -32,7 +32,7 @@ NON_MATCHING void func_801F30E0(void) {
         }
     }
 
-    scratch  = SP_PTR(s16, 0u);
+    scratch  = (s16*)&g_ScratchPad;
     *scratch = work->unk_03;
     Actor_SpawnFromRecord(D_801F3D4C + work->param.unk_0B * 17);
     Script_Begin(D_801F3D70[index * 3 + 1], D_801F3D70[index * 3 + 2]);
@@ -45,12 +45,10 @@ NON_MATCHING void func_801F30E0(void) {
     g_Actors[work->unk_03].pos.y.fixed += ONE;
     g_Actors[work->unk_04].pos.x.fixed += ONE;
     g_Actors[work->unk_04].pos.y.fixed -= ONE;
-    g_Actors[work->unk_03].pos.z.fixed = g_Game.members[0].pos.z.fixed;
-    g_Actors[work->unk_04].pos.z.fixed = g_Game.members[0].pos.z.fixed;
+    g_Actors[work->unk_03].pos.z.fixed = g_Actors[work->unk_04].pos.z.fixed = g_Game.members[0].pos.z.fixed;
     g_Actors[work->unk_03].header.flags |= ACTOR_FLAG_SEMI_TRANSPARENT;
-    g_Actors[work->unk_04].header.flags |= ACTOR_FLAG_SEMI_TRANSPARENT;
-    g_Actors[work->unk_04].tint.bytes.flags = 0;
-    g_Actors[work->unk_03].tint.bytes.flags = 0;
+    g_Actors[TASK(Actor)->unk_04].header.flags |= ACTOR_FLAG_SEMI_TRANSPARENT;
+    g_Actors[TASK(Actor)->unk_03].tint.bytes.flags = g_Actors[TASK(Actor)->unk_04].tint.bytes.flags = 0;
     GFX_PaletteAllocFade(&g_Actors[work->unk_03], 15, 0, 0, 1);
     GFX_PaletteAllocFade(&g_Actors[work->unk_04], 0, 0, 15, 1);
     TASK(Actor)->timer       = 4;
