@@ -1,39 +1,40 @@
 #include "area189_13.h"
+#include "menu/save_data.h"
 
-#ifdef NON_MATCHING
-NON_MATCHING void func_801F5600(void) {
+/* The desert walk step: the day clock, the reserve, the random encounters and the step flags. */
+MATCH void func_801F5600(void) {
     s32 i;
 
     Actor_ClearVelocity_801F5F20();
     g_EncounterSteps++;
-    ((u16*)D_80144EF8)[0x2E]++;
-    if (((u16*)D_80144EF8)[0x2E] == 0x1E0) {
-        if (D_80144EF8[0x5F] != 0) {
-            D_80144EF8[0x5F] += 8;
+    g_SaveData.desert.clock++;
+    if (g_SaveData.desert.clock == 0x1E0) {
+        if (g_SaveData.desert.reserve != 0) {
+            g_SaveData.desert.reserve += 8;
         }
         D_8014933C = 0;
         g_ScenarioState.flags_01 &= 0xFE;
         MESSAGE_START_WAIT(5);
     }
-    if (((u16*)D_80144EF8)[0x2E] == 0x3C0) {
-        if (D_80144EF8[0x5F] != 0) {
-            D_80144EF8[0x5F] += 8;
+    if (g_SaveData.desert.clock == 0x3C0) {
+        if (g_SaveData.desert.reserve != 0) {
+            g_SaveData.desert.reserve += 8;
         }
-        ((u16*)D_80144EF8)[0x2E] = 0;
-        D_8014933C               = 1;
+        g_SaveData.desert.clock = 0;
+        D_8014933C              = 1;
         g_ScenarioState.flags_01 |= 1;
-        D_80144EF8[0x5E]++;
+        g_SaveData.desert.days++;
         MESSAGE_START_WAIT(6);
     }
-    if (D_80144EF8[0x5F] != 0) {
+    if (g_SaveData.desert.reserve != 0) {
         for (i = 0; i < (D_8014933C == 0 ? 3 : 1); i++) {
-            if (D_80144EF8[0x5F] != 0) {
-                D_80144EF8[0x5F]--;
+            if (g_SaveData.desert.reserve != 0) {
+                g_SaveData.desert.reserve--;
             }
         }
         D_80146880 = 0;
         D_80146881 = 0;
-        if (D_80144EF8[0x5F] == 0) {
+        if (g_SaveData.desert.reserve == 0) {
             MESSAGE_START_WAIT(1);
         }
     } else {
@@ -55,7 +56,7 @@ NON_MATCHING void func_801F5600(void) {
         }
     }
     if (g_GameStateIndex != GAME_REQUEST_MESSAGE) {
-        if (SYS_TestFlag(D_80144EF8, 4) == 0 && (u32)((TASK(Actor)->pos.x.part.integer >> 8) - 0x16) < 2 && (TASK(Actor)->pos.y.part.integer >> 8) < 0x11) {
+        if (SYS_TestFlag(&g_SceneFlagWords[14 * 8], 4) == 0 && (u32)((TASK(Actor)->pos.x.part.integer >> 8) - 0x16) < 2 && (TASK(Actor)->pos.y.part.integer >> 8) < 0x11) {
             func_801F8850();
         } else if (func_801A79A4(TASK(Actor)->pos.x.fixed, TASK(Actor)->pos.y.fixed) == 0) {
             if ((TASK(Actor)->pos.x.part.integer >> 8) < 10) {
@@ -109,6 +110,3 @@ NON_MATCHING void func_801F5600(void) {
     }
     func_801F5D20();
 }
-#else
-INCLUDE_ASM(func_801F5600);
-#endif

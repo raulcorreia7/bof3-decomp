@@ -17,7 +17,6 @@
 extern u16 D_80144F54;
 /* The area state bytes the request paths write. */
 extern u8  D_80144F56;
-extern u8  D_80144F57;
 extern s8  D_8014504A;
 extern s8  D_8014504B;
 extern u8  D_801455C7;

@@ -9,11 +9,8 @@
 /* FAKE: the call passes the count as s32, the width the real prototype (u8) lacks. */
 #define Item_Add ((bool (*)(s32, s32, s32, s32))Item_Add)
 
-/* The scenario flag bytes the step tests, sets and clears. */
-extern u16 D_80144F54;
-extern u8  D_80144F56;
-extern u8  D_80144F57;
-extern u8  D_8014504B;
+/* The return byte the desert entry sets. */
+extern u8 D_8014504B;
 
 /* The scenario state byte the hit path sets. */
 

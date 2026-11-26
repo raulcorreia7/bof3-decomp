@@ -1,4 +1,5 @@
 #include "area150_13.h"
+#include "menu/save_data.h"
 
 MATCH void func_801F2D0C(void) {
     switch (g_SceneEventState.step) {
@@ -10,14 +11,14 @@ MATCH void func_801F2D0C(void) {
             if (g_GameStateIndex != GAME_REQUEST_MESSAGE) {
                 Game_ClearScriptActive();
                 Game_RequestAreaChange(0xBD, TO_COORD(0x1780), TO_COORD(0xF00), 0xA);
-                D_8014504B             = 0xA;
-                D_80144F57             = 0xF0;
-                D_80144F54             = 0;
-                D_80144F56             = 0;
-                D_80146880             = 0;
-                D_80146881             = 0;
-                g_SceneEventState.mode = 0;
-                g_SceneEventState.step = 0;
+                D_8014504B                = 0xA;
+                g_SaveData.desert.reserve = 0xF0;
+                g_SaveData.desert.clock   = 0;
+                g_SaveData.desert.days    = 0;
+                D_80146880                = 0;
+                D_80146881                = 0;
+                g_SceneEventState.mode    = 0;
+                g_SceneEventState.step    = 0;
                 g_AreaWalkFlags |= AREA_WALK_ENTRY_PENDING;
                 g_ScenarioState.flags_01 |= 1;
             }
@@ -31,7 +32,7 @@ MATCH void func_801F2D0C(void) {
             break;
         case 20:
             if (g_GameStateIndex == GAME_REQUEST_IDLE) {
-                if (SYS_TestFlag(D_80144EF8, 3)) {
+                if (SYS_TestFlag(&g_SaveData.scene_flag_words[14 * 8], 3)) {
                     UI_MessageStartArea(MSG_AREA150_037);
                 } else {
                     UI_MessageStartArea(MSG_AREA150_032);
@@ -53,8 +54,8 @@ MATCH void func_801F2D0C(void) {
                 SND_BGMStart(0x95, 100, 0x10);
                 UI_ModeSet(UI_MODE_FADE_IN);
                 g_AreaDrawFlags = AREA_DRAW_ALL_FLAGS;
-                SYS_ClearFlag(D_80144EF8, 3);
-                SYS_ClearFlag(D_80144EF8 + 0x30, 0x8A);
+                SYS_ClearFlag(&g_SaveData.scene_flag_words[14 * 8], 3);
+                SYS_ClearFlag(g_SaveData.scene_event_flags, 0x8A);
                 g_SceneEventState.mode = 0;
                 g_SceneEventState.step = 0;
             }

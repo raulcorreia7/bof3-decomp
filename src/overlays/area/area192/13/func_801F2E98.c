@@ -1,4 +1,5 @@
 #include "area192_13.h"
+#include "menu/save_data.h"
 
 MATCH void func_801F2E98(void) {
     switch (g_SceneEventState.step) {
@@ -27,10 +28,10 @@ MATCH void func_801F2E98(void) {
                 u8  flag_value;
 
                 SYS_SetFlag(g_SceneEventFlags, 0x82);
-                D_80144F54 = 0x1E0;
-                flag       = &g_ScenarioState.flags_01;
-                D_80146880 = 0;
-                D_80146881 = 0;
+                g_SaveData.desert.clock = 0x1E0;
+                flag                    = &g_ScenarioState.flags_01;
+                D_80146880              = 0;
+                D_80146881              = 0;
                 /* FAKE: barrier keeps the flag load below the zero stores. */
                 FAKE_BARRIER();
                 flag_value             = *flag;

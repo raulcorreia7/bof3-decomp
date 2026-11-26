@@ -13,6 +13,13 @@
 /* The persistent block: 4,272 bytes. */
 #define SAVE_BLOCK_SIZE 0x10B0u
 
+/* The Desert of Death crossing: area150 resets it on the way in, area189 runs it on every step. */
+typedef struct DesertCrossing {
+    /* 0x0 */ u16 clock;   /* walk ticks into the day: dusk at 480, the next day at 960 */
+    /* 0x2 */ u8  days;    /* days the crossing has taken */
+    /* 0x3 */ u8  reserve; /* 0xF0 on the way in; each step spends 3 by day and 1 by night */
+} DesertCrossing;
+
 /* The persistent game state: SYS_StartFrontend clears it, SAVE_BuildSlotImage copies it to the memory card file
  * payload (file offset 0x200, so the frame-relative offsets of menu/save.h are these plus 0x200) and
  * SAVE_RunLoadRestore copies it back. */
@@ -37,7 +44,7 @@ typedef struct SaveData {
     /* 0x5B0 */ u8               scene_flag_words[160]; /* eight bytes per scenario */
     /* 0x650 */ u8               scene_event_flags[40];
     /* 0x678 */ u32              zenny;
-    /* 0x67C */ u8               unk_67C[4];
+    /* 0x67C */ DesertCrossing   desert;
     /* 0x680 */ PartyOrders      party;
     /* 0x688 */ u8               unk_688[0x60];
     /* 0x6E8 */ GameClock        play_clock;
@@ -77,6 +84,7 @@ ASSERT_OFFSET(SaveData, characters, 0x090);
 ASSERT_OFFSET(SaveData, scene_flag_words, 0x5B0);
 ASSERT_OFFSET(SaveData, scene_event_flags, 0x650);
 ASSERT_OFFSET(SaveData, zenny, 0x678);
+ASSERT_OFFSET(SaveData, desert, 0x67C);
 ASSERT_OFFSET(SaveData, party, 0x680);
 ASSERT_OFFSET(SaveData, play_clock, 0x6E8);
 ASSERT_OFFSET(SaveData, fish_best_catch, 0x70C);
