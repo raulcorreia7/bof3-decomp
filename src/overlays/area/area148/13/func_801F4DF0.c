@@ -6,7 +6,7 @@ NON_MATCHING void func_801F4DF0(s32 x, s32 y, s16 radius, u16 angle) {
     FAKE_STACK_PADS(u8, 0x10);
 
     POLY_G3* prim;
-    u8       i;
+    s32      i;
 
     i = 0;
     do {

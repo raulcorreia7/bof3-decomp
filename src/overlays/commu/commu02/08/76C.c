@@ -2206,8 +2206,8 @@ NON_MATCHING void func_801D8058(s32 left, s32 top) {
     x      = left;
     y      = top;
     base_x = x;
-    i      = 0;
     UI_WindowDraw(base_x, y, 172, 26, UI_WINDOW_OPEN_TOP_LEFT, g_WindowStyle);
+    i      = 0;
     grid_x = x << 16;
     func_801D7EF0(grid_x >> 16, y);
     count = Fairy_CountFairies() & BYTE_MASK;
@@ -2287,8 +2287,8 @@ NON_MATCHING void func_801D851C(s16 x, s16 y, s32 width, u8 index) {
     SetPolyG4(prim);
     prim->x0 = x;
     prim->x1 = x + width;
-    prim->y0 = y;
     prim->y1 = y;
+    prim->y0 = y;
     prim->y2 = y + 2;
     prim->y3 = y + 2;
     prim->x2 = prim->x0;
