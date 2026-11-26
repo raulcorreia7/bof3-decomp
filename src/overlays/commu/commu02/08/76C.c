@@ -1287,101 +1287,83 @@ MATCH void func_801D5194(void) {
  * round shows. */
 #ifdef NON_MATCHING
 NON_MATCHING void func_801D51D0(void) {
-    u8  ch;
-    u8  digit;
     u8* dst;
     u8* src;
     u8* p;
     s32 i;
     s32 row;
     s32 value;
+    u8  digit;
 
     D_801DB0B4    = rand() & 0x7;
-    row           = 0;
-    dst           = g_TextVariables[0];
     D_801DB0A8[0] = 0;
     D_801DB0A8[1] = 0;
     D_801DB0A8[2] = 0;
     D_801DB0A8[3] = 0;
-    for (;;) {
-        digit = D_801DAD90[D_801DB0B4 * 9 + row];
+    dst           = g_TextVariables[0];
+    for (row = 0; row < 9; row++, dst += TEXT_VARIABLE_LENGTH) {
+        digit = D_801DAD90[(s8)D_801DB0B4][row];
         if (digit == 9) {
             break;
         }
-        value = func_801D5AD0(D_801DADD8[digit * 2 + 1]);
+        value = func_801D5AD0(D_801DADD8[digit][1]);
         for (;;) {
-            i = 0;
-            while (i < D_801DB0A8[digit] && D_801DB080[digit * 10 + i] == (u8)value) {
-                i++;
+            for (i = 0; i < D_801DB0A8[digit]; i++) {
+                if (D_801DB080[digit * 10 + i] != (u8)value) {
+                    break;
+                }
             }
-            if (i < D_801DB0A8[digit] || D_801DB0A8[digit] == 0) {
+            if (i < D_801DB0A8[digit]) {
+                break;
+            }
+            if (D_801DB0A8[digit] == 0) {
                 break;
             }
             value++;
-            if ((u8)value >= D_801DADD8[digit * 2 + 1]) {
+            if ((u8)value >= D_801DADD8[digit][1]) {
                 value = 0;
             }
         }
         D_801DB080[digit * 10 + D_801DB0A8[digit]] = value;
-        D_801DB0A8[digit] += 1;
+        D_801DB0A8[digit]++;
 
-        src = MESSAGE_TABLE_TEXT(AREA_MESSAGE_TABLE, D_801DADD8[digit * 2] + (u8)value);
+        src = MESSAGE_TABLE_TEXT(AREA_MESSAGE_TABLE, D_801DADD8[digit][0] + (u8)value + 0x100);
         p   = dst;
-        i   = 0;
-        for (;;) {
-            ch = *src;
-            *p = ch;
-            if (ch == STRING_END && (u8)(src[-1] - STRING_SKIP) >= 2) {
+        for (i = 0; i < TEXT_VARIABLE_LENGTH; i++) {
+            *p = *src;
+            if (*src == STRING_END && src[-1] != STRING_SKIP && src[-1] != STRING_SKIP_ALT) {
                 break;
             }
             src++;
-            i++;
-            if (i >= TEXT_VARIABLE_LENGTH) {
-                break;
-            }
             p++;
         }
-        row++;
-        if (row >= 9) {
-            break;
-        }
-        dst += TEXT_VARIABLE_LENGTH;
     }
 
     value = rand() & 0x7;
-    digit = 0;
-    while ((u32)value < D_801DADE0[digit][0]) {
-        digit++;
-        if (digit >= 3) {
+    for (digit = 0; digit < 3; digit++) {
+        if ((u32)value >= D_801DADE0[digit][0]) {
             break;
         }
     }
-    if (D_801DB0B4 == 6) {
-        if (digit == 2) {
-            digit = 3;
-        }
-    } else if (D_801DB0B4 == 7) {
-        if (digit == 3) {
-            digit = 2;
-        }
+    if ((s8)D_801DB0B4 == 6 && digit == 2) {
+        digit = 3;
+    } else if ((s8)D_801DB0B4 == 7 && digit == 3) {
+        digit = 2;
     }
 
     if (rand() & 1) {
         i = 0;
         if (D_801DB0A8[D_801DADE0[digit][1]] - 1 > 0) {
-            for (;;) {
+            do {
                 if (rand() & 1) {
                     break;
                 }
                 i++;
-                if (i >= D_801DB0A8[D_801DADE0[digit][1]] - 1) {
-                    break;
-                }
-            }
+            } while (i < D_801DB0A8[D_801DADE0[digit][1]] - 1);
         }
-        D_801DB0AD = D_801DADD8[D_801DADE0[digit][1] * 2] + D_801DB080[D_801DADE0[digit][1] * 10 + i];
+        D_801DB0AD = D_801DADD8[D_801DADE0[digit][1]][0] + D_801DB080[D_801DADE0[digit][1] * 10 + i];
     } else {
-        D_801DB0AD = D_801DADD8[D_801DADE0[digit][1] * 2] + func_801D5AD0(D_801DADD8[D_801DADE0[digit][1] * 2 + 1]);
+        D_801DB0AD = D_801DADD8[D_801DADE0[digit][1]][0] + func_801D5AD0(D_801DADD8[D_801DADE0[digit][1]][1]);
     }
 
     if (D_801DADE0[digit][2] == 0xFF) {
@@ -1389,19 +1371,16 @@ NON_MATCHING void func_801D51D0(void) {
     } else if (rand() & 1) {
         i = 0;
         if (D_801DB0A8[D_801DADE0[digit][2]] - 1 > 0) {
-            for (;;) {
+            do {
                 if (rand() & 1) {
                     break;
                 }
                 i++;
-                if (i >= D_801DB0A8[D_801DADE0[digit][2]] - 1) {
-                    break;
-                }
-            }
+            } while (i < D_801DB0A8[D_801DADE0[digit][2]] - 1);
         }
-        D_801DB0AE = D_801DADD8[D_801DADE0[digit][2] * 2] + D_801DB080[D_801DADE0[digit][2] * 10 + i];
+        D_801DB0AE = D_801DADD8[D_801DADE0[digit][2]][0] + D_801DB080[D_801DADE0[digit][2] * 10 + i];
     } else {
-        D_801DB0AE = D_801DADD8[D_801DADE0[digit][2] * 2] + func_801D5AD0(D_801DADD8[D_801DADE0[digit][2] * 2 + 1]);
+        D_801DB0AE = D_801DADD8[D_801DADE0[digit][2]][0] + func_801D5AD0(D_801DADD8[D_801DADE0[digit][2]][1]);
     }
 
     D_801DB0C4 = 0;
@@ -2524,7 +2503,15 @@ MATCH void func_801D9348(u16 x, u16 y, s32 color, s32 frame_mode) {
 }
 
 #ifdef NON_MATCHING
-NON_MATCHING void func_801D94D0(s32 page, s32 left, s32 top, s32 cursor_col_arg, s32 cursor_row_arg) {
+// clang-format off
+NON_MATCHING void func_801D94D0(page, left, top, cursor_col_arg, cursor_row_arg)
+u8 page;
+s32 left;
+s32 top;
+s32 cursor_col_arg;
+s32 cursor_row_arg;
+// clang-format on
+{
     u8  tags[20];
     u8* cell;
     u16 x;
@@ -2540,7 +2527,7 @@ NON_MATCHING void func_801D94D0(s32 page, s32 left, s32 top, s32 cursor_col_arg,
     cursor_row = cursor_row_arg;
     memcpy(tags, D_801D0C3C, 20);
     UI_WindowDraw(left, base_y, 0x110, 123, 0, g_WindowStyle);
-    cell = D_801DAAAC[(u8)page][0];
+    cell = D_801DAAAC[page][0];
     y    = base_y + 6;
     for (row = 0; row < 8; row++) {
         x = left + 4;
@@ -2641,7 +2628,7 @@ NON_MATCHING void func_801D9B80(s32 x, s32 y, s32 width, s32 height) {
     SPRT* sprite;
     s32   columns;
     s32   rows;
-    s32   edge;
+    u8    edge;
 
     setRECT(&window, 112, 152, 8, 8);
     SetDrawMode((DR_MODE*)g_GfxPrimCursor, 0, 0, getTPage(TPAGE_DEPTH_4BIT, TPAGE_ABR_HALF, 832, 256), &window);

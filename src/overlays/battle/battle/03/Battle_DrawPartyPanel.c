@@ -4,7 +4,7 @@
 /* Draws one battle panel per party member: the frame, the member's name and
  * status glyph, the HP and AP values and the rails around the row. */
 NON_MATCHING void Battle_DrawPartyPanel(s16 x, s16 y) {
-    s32 column_x;
+    s16 column_x;
     s32 clut;
     u16 color;
     u8  i;
@@ -22,10 +22,10 @@ NON_MATCHING void Battle_DrawPartyPanel(s16 x, s16 y) {
     b     = PSX_COLOR_B(color) << 3;
     for (i = 0; i < g_Battle.party_count; i++) {
         column_x = x + 0x14;
-        func_801D9DBC((s16)column_x, (s16)(y + 0xE), 9, 0, 0);
-        func_801D9E9C((s16)column_x, (s16)(y + 0xE), g_UiPanelTasks[i + MENU_PANEL_BATTLER_FIRST].unk_0B, g_UiPanelTasks[i + MENU_PANEL_BATTLER_FIRST].flags, 0);
+        func_801D9DBC(column_x, (s16)(y + 0xE), 9, 0, 0);
+        func_801D9E9C(column_x, (s16)(y + 0xE), g_UiPanelTasks[i + MENU_PANEL_BATTLER_FIRST].unk_0B, g_UiPanelTasks[i + MENU_PANEL_BATTLER_FIRST].flags, 0);
         if (g_Game.members[i].chr.stats.max_ap != 0) {
-            Battle_DrawPanelLine((s16)column_x, (s16)(y + 0xE), (s16)(x + (g_UiPanelTasks[i + MENU_PANEL_BATTLER_FIRST].unk_0C + 0x14)), (s16)(y + 0xE), 100, 0, 200);
+            Battle_DrawPanelLine(column_x, (s16)(y + 0xE), (s16)(x + (g_UiPanelTasks[i + MENU_PANEL_BATTLER_FIRST].unk_0C + 0x14)), (s16)(y + 0xE), 100, 0, 200);
             if (g_UiPanelTasks[i + MENU_PANEL_BATTLER_FIRST].unk_0E != 0) {
                 Battle_DrawPanelLine((s16)(x + (g_UiPanelTasks[i + MENU_PANEL_BATTLER_FIRST].unk_0C + 0x14)), (s16)(y + 0xE),
                                      (s16)(g_UiPanelTasks[i + MENU_PANEL_BATTLER_FIRST].unk_0E + (g_UiPanelTasks[i + MENU_PANEL_BATTLER_FIRST].unk_0C + column_x)), (s16)(y + 0xE), 200, 0, 0);

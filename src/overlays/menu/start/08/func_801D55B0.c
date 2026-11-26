@@ -71,7 +71,7 @@ NON_MATCHING void func_801D55B0(void) {
             g_UiPanelTasks[14].u.addr.unk_10 = 0;
             g_PartyCursor                    = g_UiPanelTasks[MENU_START_PANEL_ITEMS].unk_0C;
             D_80148654                       = 5;
-            D_80148651 += 1;
+            D_80148651++;
         } else if (LOB(D_801ED620) == 3) {
             g_UiPanelTasks[MENU_START_PANEL_CURSOR_FRAME].unk_0B = 0;
             g_UiPanelTasks[MENU_START_PANEL_ITEMS].unk_0A        = 1;
