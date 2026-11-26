@@ -20,7 +20,7 @@ NON_MATCHING void func_801A3080(Actor* actor, u8 facing) {
         return;
     }
     if (work->vx + work->vy != 0) {
-        rise = Area_HeightSample(work->pos.x.fixed + g_FacingSteps[(u8)facing].x, work->pos.y.fixed + g_FacingStepY[(u8)facing * 2]) - COORD_INT(TASK(Actor)->pos.z);
+        rise = Area_HeightSample(work->pos.x.fixed + g_FacingSteps[(u8)facing].x, work->pos.y.fixed + g_FacingSteps[(u8)facing].y) - COORD_INT(TASK(Actor)->pos.z);
         if (facing & 2) {
             {
                 s32 slope = rise;

@@ -1,7 +1,7 @@
 #include "start_08.h"
 
 /* Draws the inventory panel of the character menu: its item list from the
- * D_80145548 flag word, the title, the corner and edge frame sprites. */
+ * g_SaveData.found_genes flag word, the title, the corner and edge frame sprites. */
 #ifdef NON_MATCHING
 NON_MATCHING void func_801EAF98(MenuPanelTask* task) {
     u8   scroll_y;
@@ -14,7 +14,7 @@ NON_MATCHING void func_801EAF98(MenuPanelTask* task) {
     u8*  title;
     u32* flags;
 
-    flags = &D_80145548;
+    flags = &g_SaveData.found_genes;
     count = 0;
     for (i = 0; i < 0x12; i++) {
         if (*flags & (1 << i)) {

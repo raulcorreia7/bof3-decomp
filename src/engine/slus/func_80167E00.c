@@ -12,7 +12,7 @@ MATCH void func_80167E00(void) {
     u8 j;
 
     for (i = 0; i < 30; i++) {
-        g_Task = &g_Actors[i];
+        TASK_SET(&g_Actors[i]);
         if (!(TASK(Actor)->header.flags & ACTOR_FLAG_IN_USE)) {
             continue;
         }

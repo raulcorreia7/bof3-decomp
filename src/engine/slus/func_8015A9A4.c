@@ -22,7 +22,7 @@ NON_MATCHING void func_8015A9A4(void) {
     u8      step;
     s8      sstep;
 
-    task = g_Task;
+    task = TASK(Actor);
     dx   = COORD_INT(task->pos.x) - g_AreaTileOriginX;
     dy   = COORD_INT(task->pos.y) - g_AreaTileOriginY;
     if (COORD_FRAC(task->pos.x) != 0) {
@@ -33,7 +33,7 @@ NON_MATCHING void func_8015A9A4(void) {
     if (COORD_FRAC(TASK(Actor)->pos.y) == 0) {
         key = sum;
     }
-    actor         = g_Task;
+    actor         = TASK(Actor);
     task->unk_32  = key;
     key           = (actor->unk_32 + (s8)((u8*)actor->range_54.table)[1]) << 8;
     actor->unk_32 = key;
@@ -49,13 +49,13 @@ NON_MATCHING void func_8015A9A4(void) {
     if (!(((u8*)TASK(Actor)->range_54.table)[3] & 0x10)) {
         Actor_ReadValue();
     }
-    view = g_Task;
+    view = TASK(Actor);
     setVector(&vec, (view->pos.x.fixed >> 9) - 0x4000, (view->pos.y.fixed >> 9) - 0x4000, -COORD_INT(view->pos.z) / 2);
     gte_ldv0(&vec);
     gte_rtps();
     gte_stsxy(sxy);
     gte_stszotz(&TASK(Actor)->unk_60);
-    actor           = g_Task;
+    actor           = TASK(Actor);
     actor->screen_x = sxy[0];
     sy              = sxy[1];
     actor->screen_y = sy;

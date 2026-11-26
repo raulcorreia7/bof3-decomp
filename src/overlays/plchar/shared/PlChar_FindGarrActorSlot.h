@@ -16,7 +16,7 @@ MATCH s8 PlChar_FindGarrActorSlot(void) {
 
     direction = TASK(Actor)->direction;
     pos_x     = TASK(Actor)->pos.x.fixed + g_FacingSteps[direction].x;
-    pos_y     = TASK(Actor)->pos.y.fixed + g_FacingStepY[direction * 2];
+    pos_y     = TASK(Actor)->pos.y.fixed + g_FacingSteps[direction].y;
 
     for (i = 0; i < ACTOR_SLOT_COUNT; i++) {
         if (g_SpawnedActors[i].header.flags != 0 && g_SpawnedActors[i].type == ACTOR_TYPE_BLOCK) {

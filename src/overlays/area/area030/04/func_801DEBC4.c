@@ -18,10 +18,10 @@ MATCH void func_801DEBC4(void) {
         work->flags = (work->flags | ACTOR_FLAG_SEMI_TRANSPARENT);
 
         panel                          = TASK(FishingState);
-        panel->state_2A                = D_801E2331[panel->counter_08 * 2];
+        panel->state_2A                = D_801E2330[panel->counter_08][1];
         TASK(FishingState)->counter_48 = 2;
 
-        Script_Select(D_801E2330[TASK(FishingState)->counter_08 * 2]);
+        Script_Select(D_801E2330[TASK(FishingState)->counter_08][0]);
 
         state                             = TASK(FishingState);
         state->bounce_speed               = -2;
