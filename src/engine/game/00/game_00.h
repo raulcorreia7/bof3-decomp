@@ -291,7 +291,7 @@ extern u16 D_1F80000E; /* 0x1F80000E */
 extern s8  D_800E4D40; /* 0x800E4D40 */
 extern s16 D_800E4D42; /* 0x800E4D42 */
 extern u8  D_80143BB1;
-/* A unit that must keep the read where it is written (func_801A68C0) defines
+/* A unit that must keep the read where it is written (Actor_SpawnFromDefRow) defines
  * FAKE_DECL_GAME_AREA_ID_VOLATILE before its first include. */
 #ifdef FAKE_DECL_GAME_AREA_ID_VOLATILE
 extern volatile u16 g_GameAreaId;
@@ -369,7 +369,7 @@ extern s32                 D_801468C4;
  * The member form shares one slot offset between the stores and shortens each function by 0x34 bytes. */
 extern u8                  D_801468FF;
 extern u8                  D_80146900[ENTITY_MAX][ACTOR_SIZE]; /* 0x80146900 */
-/* FAKE: column views of g_Actors for Actor_SpawnPartyFromRecord and func_801A68C0, the only forms that match them. */
+/* FAKE: column views of g_Actors for Actor_SpawnPartyFromRecord and Actor_SpawnFromDefRow, the only forms that match them. */
 extern u16                 D_80146904[ENTITY_MAX][ACTOR_SIZE / 2];       /* Actor.unk_7C */
 extern s32                 g_ActorWalkDestX[ENTITY_MAX][ACTOR_SIZE / 4]; /* Actor.walk_dest_x */
 extern s32                 g_ActorWalkDestY[ENTITY_MAX][ACTOR_SIZE / 4]; /* Actor.walk_dest_y */
@@ -671,13 +671,6 @@ void    func_801A2AE4(Actor* entity, u8 route_flag);
 void    func_801A3080(Actor* actor, u8 facing);
 void    func_801A3648(void);
 void    func_801A386C(void);
-void    func_801A50C0(u8* script);
-void    func_801A5400(u8* script);
-void    func_801A57F0(u8* script);
-void    func_801A5B78(u8* script);
-void    func_801A5EFC(u8* script);
-void    func_801A68C0(u8* script);
-void    func_801A6F58(u8* script);
 s8      func_801A79A4(s32 handler_x, s32 handler_y);
 s32     func_801A8714(void);
 s8      func_801A8728(s32 entry_x, s32 entry_y);

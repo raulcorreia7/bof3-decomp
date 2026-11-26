@@ -1,7 +1,9 @@
-#include "game_00.h"
+#include "engine/game/00/game_00.h"
 
+/* Actor_SpawnBlocker */
 /* func_801A5400 */
-MATCH void func_801A5400(u8* script) {
+/* Spawns an actor from a short type 8 setup record and marks the cells under it with code 0x10. */
+MATCH void Actor_SpawnBlocker(u8* script) {
     Actor* coord_record;
     Actor* cell_record_a;
     Actor* slot_record;

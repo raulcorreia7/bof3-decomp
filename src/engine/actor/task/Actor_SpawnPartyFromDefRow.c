@@ -1,4 +1,4 @@
-#include "game_00.h"
+#include "engine/game/00/game_00.h"
 
 typedef struct SpawnScript {
     u8 unk_00;
@@ -17,7 +17,9 @@ typedef struct SpawnScript {
     u8 unk_0D;
 } SpawnScript;
 
-MATCH void func_801A6C98(u8* record) {
+/* func_801A6C98 */
+/* Spawns a party actor row from a type 11 setup record that names its scene record by row index. */
+MATCH void Actor_SpawnPartyFromDefRow(u8* record) {
     u8*          script;
     SpawnScript* data;
     u8*          src;

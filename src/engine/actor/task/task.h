@@ -79,8 +79,22 @@ void Actor_DrawValueDigits(s16 x, s16 y, u8 unused, u8 palette);
 void Actor_StartFacingScript(void);
 /* func_801A4B80 */
 void Actor_TurnRampClear(s32 index);
+/* func_801A50C0 */
+void Actor_SpawnNoRoute(u8* script);
+/* func_801A5400 */
+void Actor_SpawnBlocker(u8* script);
+/* func_801A57F0 */
+void Actor_SpawnAttached(u8* script);
+/* func_801A5B78 */
+void Actor_SpawnVoiced(u8* script);
+/* func_801A5EFC */
+void Actor_SpawnWithAction(u8* script);
 /* func_801A623C */
 void Actor_SpawnBattleEntry(u8* script);
+/* func_801A68C0 */
+void Actor_SpawnFromDefRow(u8* script);
+/* func_801A6F58 */
+void Actor_SpawnAttachedFixedFlags(u8* script);
 /* func_801ADCF4 */
 void Actor_SpawnToss(u8 source_slot);
 

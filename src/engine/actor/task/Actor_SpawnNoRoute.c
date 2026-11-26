@@ -1,9 +1,11 @@
-#include "game_00.h"
+#include "engine/game/00/game_00.h"
 
 /* The scalars D_80146914 and D_80146916 are per-slot columns too,
  * addressed through byte offsets because the headers declare them as scalars. */
 
-MATCH void func_801A50C0(u8* script) {
+/* func_801A50C0 */
+/* Spawns an actor from a type 1 setup record: Actor_SpawnFromRecord without the route row byte. */
+MATCH void Actor_SpawnNoRoute(u8* script) {
     s16*   counter = (s16*)&g_ScratchPad;
     s16    slot;
     Actor* work;

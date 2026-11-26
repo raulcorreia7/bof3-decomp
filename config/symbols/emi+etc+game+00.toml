@@ -178,8 +178,16 @@ Actor_TurnRampClear = { addr = 0x801A4B80, type = "func", source = "Clears the t
 Area_CellSetCode = { addr = 0x801A4BC0, type = "func", source = "Writes the g_AreaCellCodes byte of the cell at (column, row); Area_CellGetCode reads the same index." }
 Area_RunSetupRecord = { addr = 0x801A4BF8, type = "func", source = "Runs one setup stream record of type 0x0 to 0xE and returns the next record." }
 Actor_SpawnFromRecord = { addr = 0x801A4D54, type = "func", source = "Spawns an actor in the next free slot from a 17-byte scene script record (scene record, position, mode, step)." }
+Actor_SpawnNoRoute = { addr = 0x801A50C0, type = "func", source = "Setup record type 1 (length 0x10): as Actor_SpawnFromRecord, but does not read byte 0x10, the route row, so the record is one byte shorter." }
+Actor_SpawnBlocker = { addr = 0x801A5400, type = "func", source = "Setup record type 8 (length 0x0C): no label, route row or extra byte pair; selects the facing script with Script_Select and sets cell code 0x10 on the cells its position covers." }
+Actor_SpawnAttached = { addr = 0x801A57F0, type = "func", source = "Setup record type 2 (length 0x13): as Actor_SpawnFromRecord, plus bytes 0x11 and 0x12 stored in unk_18 and unk_1C, the actor slot and offset row that the attach mode reads." }
+Actor_SpawnVoiced = { addr = 0x801A5B78, type = "func", source = "Setup record type 3 (length 0x12): as Actor_SpawnFromRecord, plus byte 0x11 stored in voice_flags." }
+Actor_SpawnWithAction = { addr = 0x801A5EFC, type = "func", source = "Setup record type 4 (length 0x11): as Actor_SpawnFromRecord, but byte 0x10 goes to unk_94, the handler index AreaAction_Run reads (0x7F for none), and no route row is stored." }
 Actor_SpawnBattleEntry = { addr = 0x801A623C, type = "func", source = "Spawns a battle entry actor from a type 7 setup record; the entry id is the one Battle_FindActorEntry looks up." }
 Actor_SpawnPartyFromRecord = { addr = 0x801A65A0, type = "func", source = "Spawns a party member actor from a 16-byte scene script record; loads the member sprite." }
+Actor_SpawnFromDefRow = { addr = 0x801A68C0, type = "func", source = "Setup record type 0xA (length 0x0E): takes the scene record from row script[9] of the 8-byte rows at AreaLoad offset 8 instead of searching by id; sets cell code 0x10 under the actor when its move mode is 0." }
+Actor_SpawnPartyFromDefRow = { addr = 0x801A6C98, type = "func", source = "Setup record type 0xB (length 0x0E): as Actor_SpawnFromDefRow for the g_PartyActors row script[0xB], with live flag 0xA." }
+Actor_SpawnAttachedFixedFlags = { addr = 0x801A6F58, type = "func", source = "Setup record type 5 (length 0x12): as Actor_SpawnAttached with every field after byte 2 one byte earlier; has no tint byte at 3, so it sets the tint flags to 2 and never the semi-transparent flag." }
 Area_ScrollInitRoute = { addr = 0x801A72B0, type = "func", source = "Setup stream type 0xC: starts the scroll route its byte 1 selects." }
 Area_SetEntityCallback = { addr = 0x801A72E8, type = "func", source = "Setup stream type 0xD: sets the current entity's callback index, or its word 0x7C when byte 1 is zero." }
 Actor_SpawnSearchSpot = { addr = 0x801A7330, type = "func", source = "Spawns a searchable object from a type 9 setup record: removed or opened when its searched flag is set." }

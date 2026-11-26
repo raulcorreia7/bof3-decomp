@@ -1,13 +1,11 @@
-#include "game_00.h"
+#include "engine/game/00/game_00.h"
 
 /* Entity spawn counter in scratchpad (signed 16-bit slot index). */
 
-/* Packed spawn record staging halfword in scratchpad. */
-
-MATCH void func_801A57F0(u8* script) {
+/* func_801A5EFC */
+/* Spawns an actor from a type 4 setup record: byte 0x10 is the area action index, not a route row. */
+MATCH void Actor_SpawnWithAction(u8* script) {
     s16*   counter = (s16*)&g_ScratchPad;
-    s32    coord_x;
-    s32    coord_y;
     s16    slot;
     Actor* work;
 
@@ -19,7 +17,7 @@ MATCH void func_801A57F0(u8* script) {
     g_Task             = &g_Actors[slot];
     GAME_WORK_AREA_PTR = &g_Actors[slot];
 
-    g_ScratchPad.cells.ray.y = ((script[1] << 8) | script[2]);
+    g_ScratchPad.cells.ray.y = (script[1] << 8) | script[2];
 
     Actor_ResetMotion();
     Area_SceneSelectRecord(g_ScratchPad.cells.ray.y);
@@ -42,19 +40,17 @@ MATCH void func_801A57F0(u8* script) {
     COORD_INT(TASK(Actor)->pos.z) = Area_HeightSample(work->pos.x.fixed, work->pos.y.fixed);
     TASK(Actor)->header.mode      = script[0xA];
     TASK(Actor)->header.step      = script[0xC];
-    TASK(Actor)->unk_18           = script[0x11];
-    TASK(Actor)->unk_1C           = script[0x12];
     TASK(Actor)->direction        = script[0] & 0xF;
     TASK(Actor)->unk_06           = script[0] >> 4;
 
+    /* The headers declare the per-slot columns D_80146914 and D_80146916 as scalars. */
     FIELD(u16, &D_80146914, *counter * ACTOR_SIZE) = script[4];
     FIELD(s16, &D_80146916, *counter * ACTOR_SIZE) = script[5];
-    g_Actors[*counter].unk_7C                      = (script[0xF] | (script[0xE] << 8));
+    g_Actors[*counter].unk_7C                      = script[0xF] | (script[0xE] << 8);
     /* FAKE: forces the counter re-read before the next shadow store. */
     FAKE_BARRIER();
     g_Actors[*counter].unk_78 = script[0xB];
-    g_Actors[*counter].unk_77 = script[0x10];
-    g_Actors[*counter].unk_94 = 0x7F;
+    g_Actors[*counter].unk_94 = script[0x10];
 
     Actor_SetOptionFlags(script + 0xD);
 

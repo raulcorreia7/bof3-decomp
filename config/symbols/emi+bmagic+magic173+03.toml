@@ -9,6 +9,7 @@ Effect_Reset = { addr = 0x801E5988, type = "func", source = "Clears every timer,
 g_BattleEffectBattler = { addr = 0x801EB4E0, source = "the battler the running effect acts on; Battle_UpdateEffects stores it for each effect step (emi/battle/battle/03 owns the cell)" }
 g_BattleEnemyBattlers = { addr = 0x801EB630, alias = true }
 g_BattleEffects = { addr = 0x801EC330, alias = true, source = "Battle effect work records (stride 0x78); Battle_AllocEffect claims a free one by setting bit 0 of header.flags." }
+BMagic_IntimidateUpdate = { addr = 0x801EEC04, type = "func", source = "The module entry: runs the init (mode 0) or Effect_MarkDamagedOnZeroTick (mode 1)." }
 BMagic_IntimidateInit = { addr = 0x801EEC5C, type = "func", source = "Copies the effect battler's facing and position into the task, starts two streak effects (id 24, mode 0, index 0 and 1 in unk_04), sets the live-effect count (byte 0x0B) to 2, copies the battle overlay palette row from the area's palette arena into its copy, flags the palette pending, plays the sound and advances header.mode." }
 Effect_MarkDamagedOnZeroTick = { addr = 0x801EED90, type = "func", source = "When the live-effect count (byte 0x0B) is zero marks the battlers of the target selector damaged, raises BATTLE_STATE_EFFECT_PLAYING and resets the effect in magic173 (Intimidate)." }
 BMagic_DispatchEffectMode = { addr = 0x801EEDF0, type = "func", source = "Runs the handler that header.mode (byte 0x01) selects from the effect handlers of magic173." }
