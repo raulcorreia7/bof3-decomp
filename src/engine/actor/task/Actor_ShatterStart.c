@@ -1,6 +1,8 @@
-#include "game_00.h"
+#include "engine/game/00/game_00.h"
 
-MATCH void func_8019F75C(void) {
+/* func_8019F75C */
+/* Copies the actor's model, builds its shards and starts the dust with a 16-frame timer. */
+MATCH void Actor_ShatterStart(void) {
     /* FAKE: unused frame, 8 bytes. */
     FAKE_STACK_PADS(u8, 8);
     u8* dst;
@@ -19,7 +21,7 @@ MATCH void func_8019F75C(void) {
         } while (index < limit);
     }
     TASK(Actor)->script = MEM_PTR(u8, BATTLE_SCRIPT_TABLE);
-    func_8019D648();
-    func_8019D9C0();
+    Actor_ShatterBuildShards();
+    Actor_ShatterStartDust();
     TASK(Actor)->timer = 16;
 }

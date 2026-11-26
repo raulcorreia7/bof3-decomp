@@ -245,19 +245,6 @@ typedef struct AreaActionFadeSteps {
     Callback steps[AREA_ACTION_FADE_STEP_COUNT];
 } AreaActionFadeSteps;
 
-/* A spinning quad at 0x800E4800 + n * 0x38: a centre, a random rotation and four corner offsets that
- * func_8019D8C0 rotates and writes out as screen vertices. */
-typedef struct SpinQuad {
-    Pos3s   pos;
-    u8      unk_06[0x0A];
-    SVECTOR rotation; /* 0x10 */
-    SVECTOR corners[4];
-} SpinQuad;
-
-ASSERT_OFFSET(SpinQuad, rotation, 0x10);
-ASSERT_OFFSET(SpinQuad, corners, 0x18);
-ASSERT_SIZE(SpinQuad, 0x38);
-
 /* Route step handler: advances one script cursor and reports a byte result. */
 typedef s32 (*RouteStepCallback)(u8* cursor);
 
@@ -592,21 +579,6 @@ void    func_8019C794(void);
 void    func_8019C910(void);
 void    func_8019C954(void);
 u8      func_8019CAB4(void);
-void    func_8019CB94(void);
-void    func_8019CBD8(void);
-void    func_8019CCB8(void);
-void    func_8019CEDC(void);
-void    func_8019CFCC(void);
-bool    func_8019D054(s32 point_x, s32 point_y);
-s32     func_8019D20C(s16 map_x, s16 map_y);
-void    func_8019D270(void);
-void    func_8019D4BC(void);
-void    func_8019D648(void);
-void    func_8019D800(void);
-void    func_8019D8C0(SpinQuad* quad, s16* out);
-void    func_8019D9C0(void);
-s32     func_8019DAA0(s32* spawn_record, s16 spawn_offset, u8 spawn_count);
-void    func_8019DC6C(void);
 void    func_8019DDCC(void);
 void    func_8019DE10(void);
 void    func_8019DE54(void);

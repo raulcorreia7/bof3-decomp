@@ -13,7 +13,7 @@ MATCH void func_801F5020(void) {
         TASK(Actor)->unk_04       = 0;
     } else {
         TASK(Actor)->timer = TASK(Actor)->unk_0A;
-        func_8019F818(work);
+        Actor_ShatterRun(work);
         TASK(Actor)->timer = 0;
     }
 }

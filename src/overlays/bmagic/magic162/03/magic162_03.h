@@ -1,36 +1,15 @@
 #ifndef OVERLAY_BMAGIC_MAGIC162_03_H
 #define OVERLAY_BMAGIC_MAGIC162_03_H
 
-/* The bmagic/magic162/03 overlay. Only this image includes the file. */
+/* The bmagic/magic162/03 overlay (Transfer). Only this image includes the file. */
 
-#include "overlays/bmagic/bmagic.h"
+/* The sparkle type this image spawns. */
+#define EFFECT_SPARKLE_TYPE BMAGIC_SPARKLE_TRANSFER
 
-extern void (*D_801F01AC[])(void);
+#include "overlays/bmagic/shared/sparkle.h"
 
 /* The effect slot table BMagic_AllocEffect scans, and its row count. */
-extern BMagicEffect D_801F01B0[];
-#define BMAGIC_EFFECT_SLOTS D_801F01B0
-#define BMAGIC_EFFECT_COUNT 128
-
-/* The sparkle type this image spawns: it picks the count and the launch delay. */
-#define EFFECT_SPARKLE_TYPE 4
-
-/* The number of sparkles each type spawns. */
-extern u8 D_801F0194[];
-/* The launch delay between each group of four sparkles, per type. */
-extern u8 D_801F019C[];
-/* The colour rows of each type. */
-#define EFFECT_SPARKLE_COLORS D_801F0158
-extern BMagicEffectSteps D_801EEC04;
-
-extern BMagicTaskSteps D_801EEC1C;
-extern u8              D_801F0158[][4][3];
-
-/* The sparkle record being updated, its launch offset row and the shortest rise per type. */
-#define EFFECT_SPARKLE_TASK    D_801F17B0
-#define EFFECT_SPARKLE_OFFSETS D_801F00B8
-#define EFFECT_SPARKLE_RISE    D_801F01A4
-extern Pos2 D_801F00B8[];
-extern u8   D_801F01A4[];
+#define BMAGIC_EFFECT_SLOTS g_BMagicSparkles
+#define BMAGIC_EFFECT_COUNT EFFECT_SPARKLE_COUNT
 
 #endif

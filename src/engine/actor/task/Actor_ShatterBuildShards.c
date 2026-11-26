@@ -1,6 +1,8 @@
-#include "game_00.h"
+#include "engine/game/00/game_00.h"
 
-MATCH void func_8019D648(void) {
+/* func_8019D648 */
+/* Builds the 24 shards of a broken model from its quads. */
+MATCH void Actor_ShatterBuildShards(void) {
     s32 args[3];
     s32 count;
     /* FAKE: retail keeps the source row in s1. */

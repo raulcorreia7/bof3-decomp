@@ -1,6 +1,8 @@
-#include "game_00.h"
+#include "engine/game/00/game_00.h"
 
-MATCH void func_8019CEDC(void) {
+/* func_8019CEDC */
+/* Moves the block on by its velocity each frame and claims its new cells when it stops. */
+MATCH void Actor_BlockSlide(void) {
     Actor* work;
     s32    moved;
 
@@ -17,9 +19,9 @@ MATCH void func_8019CEDC(void) {
                 SYS_ClearFlag(g_SceneEventFlags, 54);
             }
         }
-        func_8019D270();
+        Actor_BlockClaimCells();
         TASK(Actor)->param.unk_0B = 0;
-        TASK(Actor)->header.mode  = 1;
+        TASK(Actor)->header.mode  = ACTOR_BLOCK_MODE_WAIT;
     }
     Actor_ProjectForDraw();
 }

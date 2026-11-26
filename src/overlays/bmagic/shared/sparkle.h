@@ -1,7 +1,7 @@
 #ifndef OVERLAY_BMAGIC_SPARKLE_H
 #define OVERLAY_BMAGIC_SPARKLE_H
 
-/* The sparkle pool of magic070, magic071 and magic072. */
+/* The sparkle pool and tables of magic070, magic071, magic072, magic162 and magic168. */
 
 #include "overlays/bmagic/bmagic.h"
 
@@ -23,20 +23,22 @@
 extern BMagicEffectSteps  g_BMagicSparkleModes;
 /* D_801EEC1C */
 extern BMagicSparkleSteps g_BMagicSparkleSteps;
-/* D_801F00BC: the launch offset of each sparkle row from the screen point of the battler. */
-extern Pos2               g_BMagicSparkleOffsets[];
-/* D_801F015C: the four colour rows of each type. */
-extern u8                 g_BMagicSparkleColors[][4][3];
-/* D_801F0198: the number of sparkles each type spawns. */
-extern u8                 g_BMagicSparkleCounts[];
-/* D_801F01A0: the launch delay between each group of four sparkles, per type. */
-extern u8                 g_BMagicSparkleDelays[];
-/* D_801F01A8: the shortest rise of each type. */
-extern u8                 g_BMagicSparkleRises[];
-/* D_801F01B4 */
-extern BMagicEffect       g_BMagicSparkles[EFFECT_SPARKLE_COUNT];
-/* D_801F17B4 */
-extern BMagicEffect*      g_BMagicSparkle;
+/* D_801F01B0 (magic070, magic071, magic072), D_801F01AC (magic162, magic168) */
+extern void (*g_BMagicSparkleRecordModes[])(void);
+/* D_801F00BC (magic070, magic071, magic072), D_801F00B8 (magic162, magic168): the launch offset of each sparkle row from the screen point of the battler. */
+extern Pos2          g_BMagicSparkleOffsets[];
+/* D_801F015C (magic070, magic071, magic072), D_801F0158 (magic162, magic168): the four colour rows of each type. */
+extern u8            g_BMagicSparkleColors[][4][3];
+/* D_801F0198 (magic070, magic071, magic072), D_801F0194 (magic162, magic168): the number of sparkles each type spawns. */
+extern u8            g_BMagicSparkleCounts[];
+/* D_801F01A0 (magic070, magic071, magic072), D_801F019C (magic162, magic168): the launch delay between each group of four sparkles, per type. */
+extern u8            g_BMagicSparkleDelays[];
+/* D_801F01A8 (magic070, magic071, magic072), D_801F01A4 (magic162, magic168): the shortest rise of each type. */
+extern u8            g_BMagicSparkleRises[];
+/* D_801F01B4 (magic070, magic071, magic072), D_801F01B0 (magic162, magic168) */
+extern BMagicEffect  g_BMagicSparkles[EFFECT_SPARKLE_COUNT];
+/* D_801F17B4 (magic070, magic071, magic072), D_801F17B0 (magic162, magic168) */
+extern BMagicEffect* g_BMagicSparkle;
 
 /* func_801EF33C */
 void Effect_SparkleRunMode(void);

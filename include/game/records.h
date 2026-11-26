@@ -91,6 +91,7 @@
 /* The SpawnedActor.type values that have a named handler in g_ActorTypes. */
 typedef enum ActorType {
     ACTOR_TYPE_ROCK         = 0x17, /* a rock the personal action kicks */
+    ACTOR_TYPE_BLOCK        = 0x30, /* a block Garr pushes */
     ACTOR_TYPE_FACING_PROBE = 0x3A,
 } ActorType;
 

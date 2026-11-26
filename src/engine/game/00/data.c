@@ -117,7 +117,7 @@ Callback g_ActorTypes[187] = {WorldMap_StepWalk,
                               (Callback)func_801F2C04,
                               func_801F7A84,
                               func_801F2C30,
-                              func_8019CB94,
+                              Actor_BlockRun,
                               Camera_PanZoomRun,
                               Actor_TossRun,
                               (Callback)func_801F2C04,
@@ -307,7 +307,13 @@ Callback g_ActorRockModes[ACTOR_ROCK_MODE_COUNT] = {
 
 Callback D_801C8144[4] = {func_8019C664, func_8019C794, func_8019C910, func_8019C954};
 
-Callback D_801C8154[4] = {func_8019CBD8, func_8019CCB8, func_8019CEDC, func_8019CFCC};
+/* Block mode handlers by ActorBlockMode, run by Actor_BlockRun with header.mode. */
+Callback g_ActorBlockModes[ACTOR_BLOCK_MODE_COUNT] = {
+    [ACTOR_BLOCK_MODE_START]   = Actor_BlockStart,
+    [ACTOR_BLOCK_MODE_WAIT]    = Actor_BlockWait,
+    [ACTOR_BLOCK_MODE_SLIDE]   = Actor_BlockSlide,
+    [ACTOR_BLOCK_MODE_SHATTER] = Actor_BlockShatter,
+};
 
 Callback D_801C8164[6] = {func_8019DE10, func_8019E264, func_8019E424, func_8019E780, func_8019E918, func_8019EAD4};
 

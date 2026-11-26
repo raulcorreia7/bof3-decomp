@@ -1,6 +1,8 @@
-#include "game_00.h"
+#include "engine/game/00/game_00.h"
 
-MATCH void func_8019D800(void) {
+/* func_8019D800 */
+/* Moves the 24 shards and writes their vertices. */
+MATCH void Actor_ShatterSpinShards(void) {
     s16*          src;
     volatile u16* dst;
     volatile u16* work;
@@ -27,7 +29,7 @@ MATCH void func_8019D800(void) {
         t2                     = work[4];
         work[-1]               = (t0 + tmp);
         *(u16*)(void*)&work[0] = (t1 + t2);
-        func_8019D8C0((SpinQuad*)dst, src);
+        Actor_ShatterWriteShard((ShatterShard*)dst, src);
         dst += 0x1C;
         src += 0x14;
         count += 1;
