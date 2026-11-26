@@ -149,10 +149,9 @@ MATCH void func_801EF2CC(void) {
     }
 }
 
-#ifdef NON_MATCHING
 /* Draws the two leech rings and the centre quads and links both primitive runs into the map cell
  * by depth. */
-NON_MATCHING void func_801EF318(void) {
+MATCH void func_801EF318(void) {
     POLY_F4* prim;
     s32      ring;
     u8*      base;
@@ -164,6 +163,8 @@ NON_MATCHING void func_801EF318(void) {
     LINE_F4* line;
     s32      seg;
     s32      tpage;
+    s32      x;
+    s32      y;
 
     tpage = getTPage(TPAGE_DEPTH_8BIT, TPAGE_ABR_ADD, 320, 256);
     SetDrawMode((DR_MODE*)g_GfxPrimCursor, 0, 1, tpage, 0);
@@ -201,7 +202,7 @@ NON_MATCHING void func_801EF318(void) {
             g_ScratchPadVectors[3].vy = FIXED_MUL(rcos(D_801F089C[seg]), FIXED_MUL(rsin(D_801F08B8[ring + 1]), g_ScratchPad.cells.words[0]));
             g_ScratchPadVectors[3].vz = FIXED_MUL(rsin(D_801F089C[seg]), FIXED_MUL(rsin(D_801F08B8[ring + 1]), g_ScratchPad.cells.words[0]));
 
-            func_801EFE14(line, &line_values[seg - 1 + ring * 6], g_ScratchPadVectors[0], g_ScratchPadVectors[1], g_ScratchPadVectors[3], g_ScratchPadVectors[2]);
+            func_801EFE14(line, &line_values[ring * 6 + (seg - 1)], g_ScratchPadVectors[0], g_ScratchPadVectors[1], g_ScratchPadVectors[3], g_ScratchPadVectors[2]);
             line++;
             values[ring * 6 + seg - 1] = RotAverage4(&g_ScratchPadVectors[0], &g_ScratchPadVectors[1], &g_ScratchPadVectors[2], &g_ScratchPadVectors[3], (long*)&prim->x0, (long*)&prim->x1,
                                                      (long*)&prim->x2, (long*)&prim->x3, &depth, &flag);
@@ -251,13 +252,14 @@ NON_MATCHING void func_801EF318(void) {
         }
     }
 
-    func_800AF0F8(TASK(PartyMember)->pos.x.fixed, TASK(PartyMember)->pos.y.fixed, values, base, 16, sizeof(POLY_F4), 2);
-    func_800AF0F8(TASK(PartyMember)->pos.x.fixed, TASK(PartyMember)->pos.y.fixed, line_values, line_base, 12, sizeof(LINE_F4), 2);
+    x = TASK(PartyMember)->pos.x.fixed;
+    y = TASK(PartyMember)->pos.y.fixed;
+    func_800AF0F8(x, y, values, base, 16, sizeof(POLY_F4), 2);
+    x = TASK(PartyMember)->pos.x.fixed;
+    y = TASK(PartyMember)->pos.y.fixed;
+    func_800AF0F8(x, y, line_values, line_base, 12, sizeof(LINE_F4), 2);
     g_GfxPrimCursor = (u8*)line;
 }
-#else
-INCLUDE_ASM(func_801EF318);
-#endif
 
 MATCH void func_801EFE14(LINE_F4* prim, s32* out, SVECTOR v0, SVECTOR v1, SVECTOR v2, SVECTOR v3) {
     long p;
