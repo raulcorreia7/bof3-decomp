@@ -47,7 +47,7 @@ MATCH void func_801F7F08(void) {
         case 1:
             TASK_SET(&g_Game.members[0]);
             g_GameState = &g_Game.members[0];
-            func_801C308C(0);
+            Party_FlashDamage(PARTY_DAMAGE_COLOR_RED);
             Char_HPLose(1, 6);
             UI_MessageRequest(MSG_SYSTEM_STUNG_BY_CATERPILLAR);
             g_GameStateIndex     = 2;

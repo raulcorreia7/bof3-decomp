@@ -323,7 +323,7 @@ extern BattleEventPanelSteps    g_BattleEventPanelSteps;
 extern BattleMessagePanelSteps  g_BattleMessagePanelSteps;
 /* D_801EABB8 */
 extern Callback                 g_BattleCommandSteps[];
-extern s32                      D_801EABCC;
+extern u16                      D_801EABCC[];
 /* D_801EABD8 */
 extern Callback                 g_BattleCommandPanelSteps[];
 /* D_801EABE4 */

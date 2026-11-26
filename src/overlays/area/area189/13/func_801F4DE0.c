@@ -29,7 +29,7 @@ MATCH void func_801F4DE0(void) {
     value = (rand() & 0x1F) + 0x96;
     count = Party_CountOrder(PARTY_ORDER_FIELD);
     for (i = 0; i < count; i++) {
-        if ((func_801C38F4(g_Game.members[i].character_index, 3, 0x15) & BYTE_MASK) != 0) {
+        if ((Char_CountEquipped(g_Game.members[i].character_index, EQUIP_GROUP_ACCESSORY, 0x15) & BYTE_MASK) != 0) {
             break;
         }
     }
@@ -37,7 +37,7 @@ MATCH void func_801F4DE0(void) {
         value <<= 1;
     }
     for (i = 0; i < count; i++) {
-        if ((func_801C38F4(g_Game.members[i].character_index, 3, 0x14) & BYTE_MASK) != 0) {
+        if ((Char_CountEquipped(g_Game.members[i].character_index, EQUIP_GROUP_ACCESSORY, 0x14) & BYTE_MASK) != 0) {
             break;
         }
     }

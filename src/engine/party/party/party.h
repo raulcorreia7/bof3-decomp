@@ -48,5 +48,11 @@ void Party_BattlersClearActive(void);
 bool Party_CanSwitchLeader(void);
 void Party_MemberSwap(u32 slot_a, u32 slot_b, u32 skip_state);
 void Party_BattlersSwapRows(s32 slot_a, s32 slot_b, s32 skip_state);
+/* func_801B00F8 */
+void Party_RunLeader(void);
+/* func_801BBE48 */
+void Party_RunFollower(void);
+/* func_801C308C */
+void Party_FlashDamage(s32 color_index);
 
 #endif

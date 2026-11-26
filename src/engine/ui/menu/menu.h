@@ -65,5 +65,29 @@ extern void UI_MessageDrawPresetCursor(void);
 extern void UI_MessageDrawChoiceCursor(void);
 /* func_8015A554 */
 void        UI_MessageLayoutChoicePanel(void);
+/* func_8019959C */
+void        UI_PanelStepIdle(void);
+/* func_801995A4 */
+void        UI_PanelRunMenu(void);
+/* func_801995F8 */
+void        UI_PanelSlideOutMenu(void);
+/* func_80199638 */
+void        UI_PanelSlideInMenu(void);
+/* func_801996A8 */
+void        UI_PanelRunOption(void);
+/* func_801996FC */
+void        UI_PanelSlideOutOption(void);
+/* func_8019977C */
+void        UI_PanelRunAction(void);
+/* func_801997EC */
+void        UI_PanelSlideOutAction(void);
+/* func_8019986C */
+void        UI_PanelRunTask(void);
+/* func_80199938 */
+void        UI_PanelSlideOutTask(void);
+/* func_80199978 */
+void        UI_PanelSlideInTaskTop(void);
+/* func_801999B8 */
+void        UI_PanelSlideInTaskLow(void);
 
 #endif

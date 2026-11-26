@@ -2,5 +2,5 @@
 
 /* func_801B1AE8 */
 MATCH void Game_LeaderSwitchRun(void) {
-    D_801CD0FC[TASK(Actor)->header.step]();
+    g_GameLeaderSwitchSteps[TASK(Actor)->header.step]();
 }

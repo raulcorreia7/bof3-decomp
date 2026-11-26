@@ -51,11 +51,11 @@ g_SysDrawTime = { addr = 0x80143EFC, source = "The VSync(1) value SYS_CaptureDra
 g_GameAreaId = { addr = 0x80143F00, source = "The area to load." }
 g_GameArea = { addr = 0x80143F00, size = 0x20, alias = true, source = "The current area and the request to change it." }
 g_GameRequestFlags = { addr = 0x80143F02, source = "Flags of the game request." }
-g_GameCellType = { addr = 0x80143F03, source = "The cell type of the party's cell: func_8019FAA0 stores the type of the entry cell here; the previous type goes to last_cell_type." }
-g_GameLastAreaId = { addr = 0x80143F04, source = "The area the party came from: func_8019FAA0 stores the current area id here before it loads the next one." }
-g_GameLastCellType = { addr = 0x80143F06, source = "The cell type before the last area load: func_8019FAA0 copies it from the cell type." }
-g_GameLastX = { addr = 0x80143F08, source = "The scroll target x before the last area load: func_8019FAA0 stores it here." }
-g_GameLastY = { addr = 0x80143F0C, source = "The scroll target y before the last area load: func_8019FAA0 stores it here." }
+g_GameCellType = { addr = 0x80143F03, source = "The cell type of the party's cell: Game_EnterArea stores the type of the entry cell here; the previous type goes to last_cell_type." }
+g_GameLastAreaId = { addr = 0x80143F04, source = "The area the party came from: Game_EnterArea stores the current area id here before it loads the next one." }
+g_GameLastCellType = { addr = 0x80143F06, source = "The cell type before the last area load: Game_EnterArea copies it from the cell type." }
+g_GameLastX = { addr = 0x80143F08, source = "The scroll target x before the last area load: Game_EnterArea stores it here." }
+g_GameLastY = { addr = 0x80143F0C, source = "The scroll target y before the last area load: Game_EnterArea stores it here." }
 g_GameEntryAreaId = { addr = 0x80143F10, source = "The area id Game_RequestAreaChange enters." }
 g_GameEntryPosX = { addr = 0x80143F14, source = "Entry x position of the game." }
 g_GameEntryPosY = { addr = 0x80143F18, source = "Entry y position of the game." }
@@ -537,6 +537,7 @@ UI_MessageRunChoice = { addr = 0x801510DC, type = "func", source = "State 4 of g
 UI_MessageOpenChoice = { addr = 0x8015115C, type = "func", source = "Step 1 of the choice state: opens the choice panel task, starts the message panel closing and steps on." }
 UI_MessageWaitChoiceReady = { addr = 0x801511C8, type = "func", source = "Step 2 of the choice state: steps on once the choice panel is open (state 2) and the message panel is closed (state 4)." }
 UI_MessageUpdateChoiceInput = { addr = 0x80151210, type = "func", source = "Handles the choice input and moves the choice cursor." }
+UI_MessageToggleChoiceWindow = { addr = 0x80151334, type = "func", source = "Slot 4 of g_UiMessageChoiceStateSteps: when the message panel task is in state 2, clears the message step and toggles FRONTEND_FLAG_SELECTION of g_UiWindowChannel." }
 UI_MessageDispatchAnswerStep = { addr = 0x8015136C, type = "func", source = "Runs the current answer step of the message." }
 UI_MessageRestartRequest = { addr = 0x8015142C, type = "func", source = "Entry 6 of the message state table g_UiMessageChoiceStateSteps, after UI_MessageDispatchAnswerStep: when the first menu panel task is in state 2, sets g_UiMessageStateTimer to 0x10, restarts the request with UI_MessageStartRequest and toggles FRONTEND_FLAG_SELECTION in g_UiWindowChannel." }
 UI_MessageEndAfterChoice = { addr = 0x80151480, type = "func", source = "Last step of the choice state: once the choice panel is closed (state 4), closes the message panel, sets the end state at its confirm step and sets FRONTEND_FLAG_MODE_LATCH." }
@@ -555,8 +556,19 @@ UI_MessageChoiceIdle = { addr = 0x80151964, type = "func", source = "Entry 0 of 
 UI_MessageUpdateChoice = { addr = 0x8015196C, type = "func", source = "Runs the current message choice step." }
 UI_MessageNextChoice = { addr = 0x801519F8, type = "func", source = "Moves the message choice list one entry on: advances g_UiMessageChoiceStep when the scroll countdown reaches -2, else steps the countdown by -2. Called by UI_MessageUpdateChoice." }
 UI_MessagePrevChoice = { addr = 0x80151A48, type = "func", source = "Moves the message choice list one entry back: lowers g_UiMessageChoiceStep when the scroll countdown reaches 2, else steps the countdown by 2. Called by UI_MessageUpdateChoice." }
+UI_MessageChoiceRampRun = { addr = 0x80151A98, type = "func", source = "Slots 2 and 3 of g_UiMessageChoiceModes: runs the begin or step handler that g_UiMessageChoiceStep selects, then counts g_UiMessageChoiceTimer down." }
+UI_MessageChoiceRampBegin = { addr = 0x80151B08, type = "func", source = "Raises FRONTEND_FLAG_REQUEST_PENDING of g_UiWindowChannel and, with no request pending, arms g_UiMessageChoiceTimer and moves to the step handler." }
+UI_MessageChoiceRampStep = { addr = 0x80151B50, type = "func", source = "Moves the cue counter D_801490C8 by -2 in choice mode 2 and +2 otherwise; when it crosses zero it clamps it, clears the mode and the pending flag." }
+UI_MessageChoiceShiftRun = { addr = 0x80151D3C, type = "func", source = "Slot 5 of g_UiMessageChoiceModes: runs the begin or step handler that g_UiMessageChoiceStep selects." }
+UI_MessageChoiceShiftBegin = { addr = 0x80151D8C, type = "func", source = "Shifts the cue counter D_801490C8 left by four, copies g_UiMessageChoiceTimer into D_801490CA and moves to the step handler." }
+UI_MessageChoiceShiftStep = { addr = 0x80151DCC, type = "func", source = "Adds the counter D_801490C8 to D_801490CA and the carry byte to D_801490BB; once that byte is non-negative it clears it and the choice mode." }
 UI_TextDrawGlyph = { addr = 0x80151E24, type = "func", source = "Draws one text glyph." }
 UI_MessageDispatchStep = { addr = 0x801522F8, type = "func", source = "Runs a step of the message answer table." }
+UI_MessageAnswerSet0 = { addr = 0x80152370, type = "func", source = "Sets the message that answers the menu choice: slot 0 of g_UiMessageSteps, row 0 of g_AnswerMessages, and latches mode flag D_8014865B for choice 0 or 1." }
+UI_MessageAnswerSet1 = { addr = 0x801523D0, type = "func", source = "Sets the message that answers the menu choice: slot 1 of g_UiMessageSteps, row 2 of g_AnswerMessages." }
+UI_MessageAnswerSet2 = { addr = 0x80152420, type = "func", source = "Sets the message that answers the menu choice: slot 2 of g_UiMessageSteps, row 4 of g_AnswerMessages." }
+UI_MessageAnswerSet3 = { addr = 0x80152470, type = "func", source = "Sets the message that answers the menu choice: slot 3 of g_UiMessageSteps, row 6 of g_AnswerMessages." }
+UI_MessageAnswerSet4 = { addr = 0x801524C0, type = "func", source = "Sets the message that answers the menu choice: slot 4 of g_UiMessageSteps, row 8 of g_AnswerMessages." }
 UI_MessageAnswerSet5 = { addr = 0x80152510, type = "func", source = "Sets the message that answers the menu choice." }
 UI_MessageAnswerSet6 = { addr = 0x8015253C, type = "func", source = "Sets the message that answers the menu choice." }
 UI_MessageAnswerSet7 = { addr = 0x80152568, type = "func", source = "Sets the message that answers the menu choice." }

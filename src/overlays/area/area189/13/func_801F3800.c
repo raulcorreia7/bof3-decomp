@@ -102,9 +102,9 @@ NON_MATCHING void func_801F3800(void) {
         func_801F43E8(scale);
     }
 
-    left  = D_801F6240;
-    right = D_801F6242;
     for (j = 0; j < 2; j++) {
+        left  = D_801F6240;
+        right = D_801F6242;
         SetDrawMode(GFX_CURSOR(DR_MODE), 0, 1, getTPage(TPAGE_DEPTH_8BIT, j + 1, 320, 256), 0);
         func_801F497C(sizeof(DR_MODE));
         for (i = 0; i < 4; i++) {

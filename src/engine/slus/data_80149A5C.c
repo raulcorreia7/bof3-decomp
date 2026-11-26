@@ -16,7 +16,7 @@ const MessageStateSteps g_UiMessageChoiceStateSteps = {{
     UI_MessageOpenChoice,
     UI_MessageWaitChoiceReady,
     UI_MessageUpdateChoiceInput,
-    func_80151334,
+    UI_MessageToggleChoiceWindow,
     UI_MessageDispatchAnswerStep,
     UI_MessageRestartRequest,
     UI_MessageEndAfterChoice,

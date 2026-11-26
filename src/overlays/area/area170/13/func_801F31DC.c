@@ -9,30 +9,27 @@ NON_MATCHING void func_801F31DC(s16 x, s16 y) {
     s16 top;
     s16 middle;
     s16 bottom;
-    u8  row;
 
     func_801F3838(0);
     func_801F3594(x, (s16)(y + 5), (s16)(x + 5), y, x, (s16)(y + 0x55), (s16)(x + 5), (s16)(y + 0x5A), 0, 0x80, 0, 1);
     func_801F3594((s16)(x + 5), y, (s16)(x + 0x131), y, (s16)(x + 5), (s16)(y + 0x5A), (s16)(x + 0x131), (s16)(y + 0x5A), 0, 0x80, 0, 1);
     func_801F3594((s16)(x + 0x131), y, (s16)(x + 0x136), (s16)(y + 5), (s16)(x + 0x131), (s16)(y + 0x5A), (s16)(x + 0x136), (s16)(y + 0x55), 0, 0x80, 0, 1);
-    func_801F2FA0((s16)(x + 9), (s16)(y + 0xA), D_801F58D0, D_801F5990[0]);
-    func_801F2FA0((s16)(x + 0x6D), (s16)(y + 0xA), D_801F58D0 + 0x3F, D_801F5990[1]);
-    func_801F2FA0((s16)(x + 0xD1), (s16)(y + 0xA), D_801F58D0 + 0x7E, D_801F5990[2]);
+    func_801F2FA0((s16)(x + 9), (s16)(y + 0xA), D_801F58D0[0][0], D_801F5990[0]);
+    func_801F2FA0((s16)(x + 0x6D), (s16)(y + 0xA), D_801F58D0[1][0], D_801F5990[1]);
+    func_801F2FA0((s16)(x + 0xD1), (s16)(y + 0xA), D_801F58D0[2][0], D_801F5990[2]);
 
     x -= 1;
     if (((g_FrameCount >> 4) & 1) == 0) {
         return;
     }
-    row    = TASK(Actor)->unk_06;
     top    = (s16)(y + 0x29);
     middle = (s16)(y + 0x2D);
     bottom = (s16)(y + 0x31);
-    left   = (s16)(x + row * 20);
-    func_801F3698((s16)(left + 7), top, (s16)(left + 3), middle, (s16)(left + 7), bottom, 0xC8, 0xC8, 0xC8, 0);
-    right = (s16)(x + row * 20 + 0x64);
-    func_801F3698((s16)(right + 4), top, (s16)(right + 8), middle, (s16)(right + 4), bottom, 0xC8, 0xC8, 0xC8, 0);
-    left   = (s16)(x + row * 20 + 0xA);
-    right  = (s16)(left + 0x5A);
+    func_801F3698((s16)(x + TASK(Actor)->unk_06 * 100 + 7), top, (s16)(x + TASK(Actor)->unk_06 * 100 + 3), middle, (s16)(x + TASK(Actor)->unk_06 * 100 + 7), bottom, 0xC8, 0xC8, 0xC8, 0);
+    func_801F3698((s16)(x + (TASK(Actor)->unk_06 + 1) * 100 + 4), top, (s16)(x + (TASK(Actor)->unk_06 + 1) * 100 + 8), middle, (s16)(x + (TASK(Actor)->unk_06 + 1) * 100 + 4), bottom, 0xC8, 0xC8, 0xC8,
+                  0);
+    left   = (s16)(x + TASK(Actor)->unk_06 * 100 + 0xA);
+    right  = (s16)(x + TASK(Actor)->unk_06 * 100 + 0x64);
     top    = (s16)(y + 5);
     bottom = (s16)(y + 0x50);
     func_801F3774(left, top, right, top, 0xC8, 0xC8, 0xC8, 0);

@@ -149,7 +149,7 @@ file, or joins its neighbour where the bytes need it (`emi/loader/emi.c` holds t
 `cd/drive`, which interleave with the loader). A function with `INCLUDE_ASM` stays out of a unit: the
 split assembly is named for the row; `actor/ops`, `area/action` and `gfx/palette` of `game/00` also stay per function, because
 their jump-table `.rodata` alternates with `.data` rows of other objects, which one unit cannot hold. `game/00` is never one unit: `"%d"` is pooled twice in its
-`.rodata`, so `func_8019F5B8` and `AreaAction_FindSmall` lie in different objects.
+`.rodata`, so `Actor_DrawValueDigits` and `AreaAction_FindSmall` lie in different objects.
 
 ### Definitions
 

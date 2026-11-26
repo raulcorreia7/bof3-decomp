@@ -3,8 +3,8 @@
 const MessageChoiceSteps g_UiMessageChoiceModes = {{
     UI_MessageChoiceIdle,
     UI_MessageUpdateChoice,
-    func_80151A98,
-    func_80151A98,
+    UI_MessageChoiceRampRun,
+    UI_MessageChoiceRampRun,
     (Callback)0x80151C00u,
-    func_80151D3C,
+    UI_MessageChoiceShiftRun,
 }};

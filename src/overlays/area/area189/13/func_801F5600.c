@@ -6,8 +6,8 @@ NON_MATCHING void func_801F5600(void) {
     u16 frames;
 
     Actor_ClearVelocity_801F5F20();
-    (*(u16*)&D_80144EF8[0x5C])++;
     g_EncounterSteps++;
+    (*(u16*)&D_80144EF8[0x5C])++;
     if ((*(u16*)&D_80144EF8[0x5C]) == 0x1E0) {
         if (D_80144EF8[0x5F] != 0) {
             D_80144EF8[0x5F] += 8;
@@ -22,8 +22,8 @@ NON_MATCHING void func_801F5600(void) {
         }
         (*(u16*)&D_80144EF8[0x5C]) = 0;
         D_8014933C                 = 1;
-        D_80144EF8[0x5E]++;
         g_ScenarioState.flags_01 |= 1;
+        D_80144EF8[0x5E]++;
         MESSAGE_START_WAIT(6);
     }
     if (D_80144EF8[0x5F] != 0) {

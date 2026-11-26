@@ -23,13 +23,13 @@ NON_MATCHING void Battle_RunEnemyEvents(void) {
     u8                 count;
 
     for (enemy_slot = 0; enemy_slot < 8; enemy_slot++) {
-        if (Battle_SlotIsBlocked(enemy_slot + 3) != 0) {
+        if (Battle_SlotIsBlocked((u8)(enemy_slot + 3)) != 0) {
             continue;
         }
 
         enemy = &g_BattleEnemyBattlers[enemy_slot];
         for (i = 0; i < ENEMY_AI_COUNT; i++) {
-            packet = &BATTLE_ENEMY_EVENTS[enemy->type].packets[i];
+            packet = &BATTLE_ENEMY_EVENTS[g_BattleEnemyBattlers[enemy_slot].type].packets[i];
             switch (packet->type) {
                 case 11:
                     BATTLE_UPDATE_ENEMY_EVENT(enemy->hp <= enemy->stats.max_hp / 4);
@@ -43,7 +43,7 @@ NON_MATCHING void Battle_RunEnemyEvents(void) {
                 case 14:
                     count = 0;
                     for (other_enemy = 0; other_enemy < 8; other_enemy++) {
-                        if (Battle_SlotIsBlocked(other_enemy + 3) == 0 && (g_BattleEnemyBattlers[other_enemy].status & STATUS_LOW_HP) != 0) {
+                        if (Battle_SlotIsBlocked((u8)(other_enemy + 3)) == 0 && (g_BattleEnemyBattlers[other_enemy].status & STATUS_LOW_HP) != 0) {
                             count++;
                         }
                     }
@@ -59,7 +59,7 @@ NON_MATCHING void Battle_RunEnemyEvents(void) {
                     BATTLE_UPDATE_ENEMY_EVENT(enemy->hp > enemy->stats.max_hp / 2);
                     break;
                 case 18:
-                    BATTLE_UPDATE_ENEMY_EVENT(enemy->ap <= enemy->stats.max_ap / 2);
+                    BATTLE_UPDATE_ENEMY_EVENT(enemy->ap > enemy->stats.max_ap / 2);
                     break;
                 case 19:
                     BATTLE_UPDATE_ENEMY_EVENT(*(u32*)&g_Battle.unk_EF[1] == 2);

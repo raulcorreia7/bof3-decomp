@@ -237,6 +237,14 @@ typedef enum FieldTaskMode {
     FIELD_TASK_MODE_PERSONAL_ACTION = 0x0A,
 } FieldTaskMode;
 
+/* The colours of g_PartyDamageColors that Party_FlashDamage floods the party member's palette row with. */
+typedef enum PartyDamageColor {
+    PARTY_DAMAGE_COLOR_RED    = 0,
+    PARTY_DAMAGE_COLOR_PURPLE = 1,
+    PARTY_DAMAGE_COLOR_YELLOW = 2,
+    PARTY_DAMAGE_COLOR_BLUE   = 3,
+} PartyDamageColor;
+
 /* g_Game.current->u.field.mode while the character field action runs. */
 #define GAME_PANEL_MODE_PERSONAL_ACTION 8
 

@@ -9,23 +9,24 @@
 typedef enum BMagicSacrificeEffectMode {
     BMAGIC_SACRIFICE_EFFECT_DOME   = 0,
     BMAGIC_SACRIFICE_EFFECT_SHADOW = 2,
-    BMAGIC_SACRIFICE_EFFECT_CASTER = 3
+    BMAGIC_SACRIFICE_EFFECT_CLONE  = 3
 } BMagicSacrificeEffectMode;
 
-#define MAGIC056_STEP_COUNT 9
+/* The steps of the clone effect. */
+#define BMAGIC_SACRIFICE_CLONE_STEP_COUNT 9
 
-typedef struct Magic056Steps {
-    Callback steps[MAGIC056_STEP_COUNT];
-} Magic056Steps;
+typedef struct BMagicSacrificeCloneSteps {
+    Callback steps[BMAGIC_SACRIFICE_CLONE_STEP_COUNT];
+} BMagicSacrificeCloneSteps;
 
 /* D_801EEC10 */
-extern Magic056Steps g_BMagicSacrificeCasterSteps;
+extern BMagicSacrificeCloneSteps g_BMagicSacrificeCloneSteps;
 /* D_801F0754 */
-extern Callback      g_BMagicSacrificeDomeSteps[];
+extern Callback                  g_BMagicSacrificeDomeSteps[];
 /* func_801EF4C0 */
-void                 BMagic_SacrificeDrawDome(void);
+void                             BMagic_SacrificeDrawDome(void);
 /* func_800AFB48 */
-u8                   Battle_CopyCellPalette(PartyMember* battler);
+u8                               Battle_CopyCellPalette(PartyMember* battler);
 
 /* D_801F0760 */
 extern Callback g_BMagicSacrificeShadowSteps[];

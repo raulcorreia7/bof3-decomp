@@ -14,7 +14,7 @@
             return;                                                                                                         \
         }                                                                                                                   \
         if ((Area_CellGetCode((s32)COORD_INT(TASK(Actor)->pos.x), (s32)COORD_INT(TASK(Actor)->pos.y)) & 0xFF) == 0xC0) {    \
-            func_801A0048(COORD_INT(TASK(Actor)->pos.x), COORD_INT(TASK(Actor)->pos.y));                                    \
+            Area_RequestLinkAtCell(COORD_INT(TASK(Actor)->pos.x), COORD_INT(TASK(Actor)->pos.y));                           \
         }                                                                                                                   \
     }                                                                                                                       \
     value2           = g_EncounterSteps;                                                                                    \
