@@ -10,6 +10,7 @@ NON_MATCHING void func_801DECDC(void) {
     s32 roll;
     s8  size;
     s32 lure;
+    u8* row;
 
     if (TASK(FishingState)->timer == 0) {
         if (!(Fishing_LureInRange() & BYTE_MASK)) {
@@ -37,7 +38,8 @@ NON_MATCHING void func_801DECDC(void) {
             }
 
             lure = g_FishingLureRow->unk_0E & 0xF;
-            size = g_SpawnedActors[0].unk_07 - D_801E2ACC[TASK(FishingState)->cue_index][lure];
+            row  = FISHING_ENTRY(TASK(FishingState)->cue_index)->pad_04;
+            size = g_SpawnedActors[0].unk_07 - row[lure];
             size = (size < -1) ? -1 : (size < 4) ? size : 3;
 
             switch ((s8)(size + 1)) {
@@ -107,10 +109,10 @@ NON_MATCHING void func_801DECDC(void) {
                 g_SpawnedActors[0].vx            = 0;
                 g_SpawnedActors[0].selection     = 0;
                 g_SpawnedActors[0].unk_14        = 0;
-                TASK(FishingState)->timer        = 0;
                 TASK(FishingState)->pos_x        = 0;
                 TASK(FishingState)->cursor_10    = 0;
                 TASK(FishingState)->bounce_speed = 0;
+                TASK(FishingState)->timer        = 0;
                 TASK(FishingState)->step_index   = 0;
                 TASK(FishingState)->saved_index  = 0;
                 TASK(FishingState)->handler_index++;
@@ -126,8 +128,8 @@ NON_MATCHING void func_801DECDC(void) {
                 FishingState* work = TASK(FishingState);
                 work->timer        = 8;
                 work->pos_x        = work->pos_x << 1;
-                work->bounce_speed = work->bounce_speed << 1;
                 work->cursor_10    = work->cursor_10 << 1;
+                work->bounce_speed = work->bounce_speed << 1;
             }
         }
     }

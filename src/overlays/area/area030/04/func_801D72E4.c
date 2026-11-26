@@ -81,9 +81,9 @@ NON_MATCHING void func_801D72E4(s16 panel_x, s16 panel_y) {
         bar_count = 9;
     }
     bar_index = (u8)TASK(FishingState)->bounce_speed;
-    count     = 0;
     if (bar_count != 0) {
         bar_y = row_y;
+        count = 0;
         do {
             value = D_801E2120[bar_index & BYTE_MASK];
             if (value != 0xFFFF) {

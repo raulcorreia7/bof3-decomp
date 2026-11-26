@@ -209,7 +209,7 @@ MATCH void BMagic_AccessionMerge(void) {
     g_Game.members[2].header.flags       = 0;
     g_Battle.active_battler              = 0;
     g_Battle.flags |= BATTLE_STATE_RELOAD_PARTY;
-    g_Battle.unk_EF[0]          = g_Battle.party_count;
+    g_Battle.unk_EF             = g_Battle.party_count;
     g_Battle.party_count        = 1;
     g_Battle.living_party_count = 1;
     for (i = 0; i < BATTLE_PARTY_CHARACTERS_COUNT; i++) {

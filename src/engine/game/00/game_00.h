@@ -200,12 +200,15 @@ typedef struct TileRun {
 ASSERT_SIZE(TileRun, TILE_RUN_SIZE);
 
 typedef struct TileRuns {
-    u8       pad_00[0x2C];
+    u8       pad_00[0x14];
+    u8**     party_setups; /* 0x14; per scene: a command byte, then member ids */
+    u8       pad_18[0x14];
     TileRun* runs; /* 0x2C */
     u8       pad_30;
     u8       last_run; /* 0x31 */
 } TileRuns;
 
+ASSERT_OFFSET(TileRuns, party_setups, 0x14);
 ASSERT_OFFSET(TileRuns, runs, 0x2C);
 ASSERT_OFFSET(TileRuns, last_run, 0x31);
 

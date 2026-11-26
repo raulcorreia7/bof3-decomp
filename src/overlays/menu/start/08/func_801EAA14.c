@@ -2,8 +2,7 @@
 
 /* Draws the party summary rows of the character panel: each listed slot's window,
  * portrait, name, level, status label and HP/AP values. */
-#ifdef NON_MATCHING
-NON_MATCHING void func_801EAA14(MenuPanelTask* task) {
+MATCH void func_801EAA14(MenuPanelTask* task) {
     Character* character;
     u8*        item;
     u8         count;
@@ -75,7 +74,7 @@ NON_MATCHING void func_801EAA14(MenuPanelTask* task) {
         TEXT_Format(g_UiTextFormatBuffer, D_801D0F24, character->stats.max_hp);
         UI_TextDrawGlyphString(stat_x, (s16)(y + 0x1D), color, g_UiTextFormatBuffer);
         Menu_DrawIcon((x + 2) & HALF_MASK, (y + 0x25) & HALF_MASK, 1, shaded);
-        color = -(s32)shaded & UI_TEXT_DIM;
+        color = shaded ? UI_TEXT_DIM : 0;
         if (shaded == 0) {
             if ((character->stats.max_ap >> 2) >= character->ap) {
                 color = 4;
@@ -86,16 +85,13 @@ NON_MATCHING void func_801EAA14(MenuPanelTask* task) {
         } else {
             color = UI_TEXT_DIM;
         }
-        count++;
         item++;
         TEXT_Format(g_UiTextFormatBuffer, D_801D0F1C, character->ap);
+        count++;
         UI_TextDrawGlyphString(stat_x, (s16)(y + 0x25), color, g_UiTextFormatBuffer);
-        color = -(s32)shaded & UI_TEXT_DIM;
+        color = shaded ? UI_TEXT_DIM : 0;
         TEXT_Format(g_UiTextFormatBuffer, D_801D0F24, character->stats.max_ap);
         UI_TextDrawGlyphString(stat_x, (s16)(y + 0x25), color, g_UiTextFormatBuffer);
         y += 0x34;
     } while (count < task->unk_0A);
 }
-#else
-INCLUDE_ASM(func_801EAA14);
-#endif
