@@ -1,4 +1,7 @@
+/* The shared area.h gives this symbol no arguments; this image's function reads four. */
+#define func_801F34A0 Area_SharedVoidProto
 #include "area197_13.h"
+#undef func_801F34A0
 
 MATCH void func_801F34A0(u16 start, u16 end, Pos3* from, Pos3* to) {
     AreaDropParticle* particle;

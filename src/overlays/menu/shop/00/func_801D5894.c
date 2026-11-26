@@ -1,5 +1,7 @@
 #include "shop_00.h"
 
+/* shop_00.h declares SAVE_AccessFile void; this unit reads its s8 result. */
+
 MATCH void func_801D5894(void) {
     char date_label[24];
     char save_name[64];
@@ -15,14 +17,14 @@ MATCH void func_801D5894(void) {
         strcpy(save_name, (char*)g_UiTextFormatBuffer);
         TEXT_Format(g_UiTextFormatBuffer, D_801D0C20, g_SaveSlotFirst);
         strcpy(date_label, (char*)g_UiTextFormatBuffer);
-        if (SAVE_AccessFile(1, date_label, 0x200, 0, 0) != -1) {
+        if (((SaveAccessCallback)SAVE_AccessFile)(1, date_label, 0x200, 0, 0) != -1) {
             D_801E6108 = g_SaveSlotFirst + 1;
             SAVE_BuildSlotImage();
             if (D_801E60FC != 0) {
                 D_801E60FC -= 1;
                 D_801E610C += 1;
             }
-            if (SAVE_AccessFile(1, date_label, 2, SAVE_FILE_SIZE, 0) != -1) {
+            if (((SaveAccessCallback)SAVE_AccessFile)(1, date_label, 2, SAVE_FILE_SIZE, 0) != -1) {
                 g_SaveCardStatus = SAVE_WRITE_STATUS_CREATED;
                 g_MenuStep.state = 0xC;
                 D_80148654       = 0x3C;

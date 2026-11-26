@@ -79,6 +79,9 @@ ASSERT_OFFSET(MenuListPanel, selected, 0x0D);
 ASSERT_OFFSET(MenuListPanel, unk_10, 0x10);
 ASSERT_OFFSET(MenuListPanel, names, 0x20);
 
+/* SAVE_AccessFile read for its s8 result. */
+typedef s8 (*SaveAccessCallback)(s32, s32, s32, s32, s32);
+
 /* The scratchpad work row behind g_Task while func_801D62DC fills it from
  * the selection table at 0x801E537C (three words per row). */
 typedef struct ShopSelection {

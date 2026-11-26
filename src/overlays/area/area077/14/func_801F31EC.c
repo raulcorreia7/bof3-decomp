@@ -1,4 +1,7 @@
+/* The shared area.h gives this symbol no arguments; this image's function reads two. */
+#define func_801F31EC Area_SharedVoidProto
 #include "area077_14.h"
+#undef func_801F31EC
 
 /* Draws the village panel at (x, y): the two blended fills, the raised and lowered edge rows, the
  * eight-pixel grid with the bright centre row, and the tinted marks; then the actor tint steps down. */

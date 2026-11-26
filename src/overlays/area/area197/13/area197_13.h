@@ -4,12 +4,8 @@
 /* The world04/area197/13 overlay: one file per split function
  * and its data. Only this image includes the file. */
 
-/* The shared area.h gives this symbol no arguments; this image's function reads four. */
-#define func_801F34A0 Area_SharedVoidProto
 #include "overlays/area/worlds/world04.h"
 #include "area/effects.h"
-#undef func_801F34A0
-
 /* The state handler banks the step dispatchers index. */
 extern u8       D_801F431C[];
 extern Callback D_801F4368[];
@@ -27,7 +23,6 @@ extern s8                  D_801F4A88[];
 s32                        func_801F2FC4(void);
 void                       func_801F30E4(void);
 void                       func_801F3110(u16 start, u16 end, Pos3* from, Pos3* to);
-void                       func_801F34A0(u16 start, u16 end, Pos3* from, Pos3* to);
 s32                        func_801F3368(void);
 
 void func_801F3474(void);
