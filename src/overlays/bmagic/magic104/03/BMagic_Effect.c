@@ -10,7 +10,7 @@ MATCH void func_801EEC80(void) {
     u8  slot;
     u32 i;
 
-    if (g_Battle.target_selector & 0x40) {
+    if (g_Battle.target_selector & BATTLE_TARGET_ENEMY_SIDE) {
         if (g_Battle.active_battler < 3) {
             TASK(PartyMember)->facing = g_BattleActiveActor->facing ^ 2;
         } else {

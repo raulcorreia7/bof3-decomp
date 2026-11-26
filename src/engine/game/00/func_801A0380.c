@@ -26,11 +26,11 @@ MATCH void func_801A0380(s16 x, s16 y, u16 type) {
             FAKE_ORDER_LOCK(done = 0);
             entry = *(u8**)(D_80181E40 + index);
             if (count > 0) {
-                table  = g_SceneFlagWords;
+                table  = (u8*)g_SceneFlagRows; /* the row offset is added first: retail's addu order */
                 limit  = count;
                 cursor = entry + 2;
                 do {
-                    if (SYS_TestFlag((void*)((*(cursor - 1) * 8) + (u32)table), *cursor) != 0) {
+                    if (SYS_TestFlag((void*)((*(cursor - 1) * SCENE_FLAG_ROW_BYTES) + (u32)table), *cursor) != 0) {
                         break;
                     }
                     done += 1;

@@ -705,7 +705,7 @@ void Menu_DrawCuePanel(MenuPanelTask* panel_task);
 void func_801E4E9C(MenuPanelTask* panel_task);
 void func_801E4FC8(s32 sprite_x, s32 sprite_y, u8 atlas_index, s32 shade_mode);
 /* Returns the save probe's signed byte result; its caller tests it against -1. */
-s8   SAVE_AccessFile(s32 port, s32 name, s32 mode, s32 size, s32 offset);
+s8   SAVE_AccessFile(u8 port, char* name, s32 mode, s32 size, s32 offset);
 u32  func_801EF200(void);
 s32  func_801EF27C(s32, s32, u8*);
 

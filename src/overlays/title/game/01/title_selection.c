@@ -56,7 +56,7 @@ MATCH void Title_StartSelectedGame(void) { /* func_801D0E54 */
         g_PlayClock.minutes    = 0u;
         g_PlayClock.hours      = 0u;
         g_AreaDrawFlags        = 0u;
-        Scene_Start(16);
+        Scene_Start(SCENARIO_TITLE);
         SYS_ThreadRegister(0, Game_RunMain);
         g_SysThreads[1].tail.title_screen.state = g_SysThreads[1].tail.title_screen.state + 1u;
     }

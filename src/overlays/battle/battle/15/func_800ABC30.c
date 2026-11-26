@@ -1,7 +1,5 @@
 #include "battle_15.h"
 
-void Battle_InitEnemy(s32 slot, u16 unit, s32 x, s32 y);
-
 MATCH void func_800ABC30(void) {
     s32 loop_count;
     s32 count;
@@ -11,7 +9,7 @@ MATCH void func_800ABC30(void) {
     g_Battle.enemy_count = 0;
     do {
         if (D_801463DC[loop_count & BYTE_MASK].active != 0) {
-            Battle_InitEnemy(count & BYTE_MASK, D_801463DC[loop_count & BYTE_MASK].id, D_801463DC[loop_count & BYTE_MASK].pos.x, D_801463DC[loop_count & BYTE_MASK].pos.y);
+            Battle_InitEnemy(count, D_801463DC[loop_count & BYTE_MASK].id, D_801463DC[loop_count & BYTE_MASK].pos.x, D_801463DC[loop_count & BYTE_MASK].pos.y);
             count += 1;
         }
         loop_count += 1;
