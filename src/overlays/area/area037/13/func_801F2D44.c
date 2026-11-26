@@ -1,9 +1,8 @@
 #include "area037_13.h"
 
-#ifdef NON_MATCHING
 /* Draws the rotating petal fan around the actor: sixteen Gouraud quads whose radius and shade
  * follow the frame count. */
-NON_MATCHING void func_801F2D44(void) {
+MATCH void func_801F2D44(void) {
     SVECTOR   position;
     SVECTOR   rotation;
     MATRIX    matrix;
@@ -36,8 +35,8 @@ NON_MATCHING void func_801F2D44(void) {
         quad->tpage = getTPage(TPAGE_DEPTH_4BIT, TPAGE_ABR_HALF, 704, 256);
         setUV4(quad, 0x20 - i * 2, 0xC0, 0x1E - i * 2, 0xC0, 0x20 - i * 2, 0xD8, 0x1E - i * 2, 0xD8);
         quad->clut = getClut(240, 483);
-        angle      = g_FrameCount * 512;
-        shade      = rcos(i == 0 ? angle & 0xFFF : (angle + (i - 1) * 512) & 0xFFF);
+        shade      = g_FrameCount * 512;
+        shade      = rcos(i == 0 ? shade & 0xFFF : (shade + (i - 1) * 512) & 0xFFF);
         if (i == 0) {
             quad->b0 = 128;
         } else {
@@ -52,8 +51,13 @@ NON_MATCHING void func_801F2D44(void) {
         g_ScratchPadVectors[0].vx = g_ScratchPadVectors[2].vx = -i * 12;
         g_ScratchPadVectors[1].vx = g_ScratchPadVectors[3].vx = -j * 12;
         angle                                                 = g_FrameCount * 512;
-        shade                                                 = rsin(i == 0 ? angle & 0xFFF : (angle - (i - 1) * 512) & 0xFFF);
-        g_ScratchPadVectors[0].vy                             = i == 0 ? (s16)i : shade * (i - 1) >> 13;
+        if (i == 0) {
+            angle &= 0xFFF;
+        } else {
+            angle = (angle - (i - 1) * 512) & 0xFFF;
+        }
+        shade                     = rsin(angle);
+        g_ScratchPadVectors[0].vy = i == 0 ? (s16)i : shade * (i - 1) >> 13;
         g_ScratchPadVectors[1].vy = g_ScratchPadVectors[2].vy = (u32)(rsin(((g_FrameCount - i) * 512) & 0xE00) * i) >> 13;
         k                                                     = i + 1;
         g_ScratchPadVectors[3].vy                             = rsin(((g_FrameCount - k) * 512) & 0xE00) * k >> 13;
@@ -66,6 +70,3 @@ NON_MATCHING void func_801F2D44(void) {
     GFX_ADD_LAYER_DRAW_MODE(GFX_LAYER_BATTLE_SCENE, getTPage(TPAGE_DEPTH_8BIT, TPAGE_ABR_HALF, 320, 256));
     PopMatrix();
 }
-#else
-INCLUDE_ASM(func_801F2D44);
-#endif
