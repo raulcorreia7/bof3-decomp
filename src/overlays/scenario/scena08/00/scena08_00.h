@@ -86,7 +86,7 @@ void func_801FE12C(void);
 
 void func_801FA19C(WorldPos* pos, s32* vx);
 
-void func_801F9F8C(WorldPos* pos, s32 unused, s32 jitter, s32 layer);
+void func_801F9F8C(WorldPos* pos, s32 unused, s16 jitter, s32 layer);
 
 void func_801F85F0(s16 x, s16 y, s16 radius);
 void func_801F8108(s32 x, s32 y);
