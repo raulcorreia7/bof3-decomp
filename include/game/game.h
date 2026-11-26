@@ -19,8 +19,7 @@
 /* Rows in the palette fade table g_PaletteFades. */
 #define PALETTE_FADE_COUNT 32
 
-/* `PaletteFade.flags` bit 0 marks a row in use (@source: write:GFX_PaletteAllocFade@0x8019651C,
- * read:GFX_PaletteFreeFade@0x80196670). */
+/* `PaletteFade.flags` bit 0 marks a row in use (@source: write:GFX_PaletteAllocFade@0x8019651C, read:GFX_PaletteFreeFade@0x80196670). */
 typedef enum PaletteFadeFlags {
     PALETTE_FADE_ACTIVE = 1 << 0,
 } PaletteFadeFlags;
@@ -80,7 +79,6 @@ typedef struct GraphicsPaletteAnimation {
 
 ASSERT_SIZE(GraphicsPaletteAnimation, 0x10);
 
-/* g_PaletteFades */
 extern PaletteFade              g_PaletteFades[PALETTE_FADE_COUNT];
 /* The palette animation slots. */
 /* D_80145D94 */
@@ -123,7 +121,7 @@ ASSERT_SIZE(GameAreaState, 0x20);
 
 /* D_80143F00 */
 extern GameAreaState g_GameArea;
-/* D_80143F03: the members of g_GameArea that the area and scenario overlays read on their own */
+/* g_GameCellType: the members of g_GameArea that the area and scenario overlays read on their own */
 extern u8            g_GameCellType;
 /* D_80143F04 */
 extern u16           g_GameLastAreaId;
@@ -422,11 +420,9 @@ extern u8        D_801CD8D0[116];
 extern u8        s_PartySlotOrder[4];
 extern s32       D_801CD954;
 
-/* The game system: the records, text and script formats the frontend and every
- * overlay read. A game source reaches it through game.h. */
+/* The game system: the records, text and script formats the frontend and every overlay read. */
 
-/* GAME.EMI entry points that other overlays call at their fixed address:
- * emi/etc/game/00 (GAME.EMI#0) is resident beside the field overlays. */
+/* GAME.EMI entry points that other overlays call at their fixed address: emi/etc/game/00 (GAME.EMI#0) is resident beside the field overlays. */
 
 /* Finds the first unused slot in the entry table at 0x80143FC8; the retail
  * callee reads no argument and zeroes $a0 before the scan. */

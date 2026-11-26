@@ -19,7 +19,6 @@ void       SYS_StartFrontend(void);
 void       SYS_EnterFrontend(void);
 /* func_801501E4 */
 void       SYS_CopyString(u8* dst, u8* src, s32 limit);
-/* SYS_InitScratchpad */
 /* func_8015AC8C */
 void       SYS_InitScratchpad(u8* panel);
 

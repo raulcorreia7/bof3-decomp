@@ -53,8 +53,7 @@ ASSERT_SIZE(ScenarioState, 0x10);
 /* D_80146870 */
 /* The byte nine bytes before g_ScenarioState; the field readers still name it by address. */
 extern ScenarioState g_ScenarioState; /* 0x80146870 */
-/* state_04 and step as one halfword (step in the high byte); area085 and
- * area105 compare the pair with one lhu. */
+/* state_04 and step as one halfword (step in the high byte); area085 and area105 compare the pair with one lhu. */
 #define SCENARIO_PROGRESS (*(u16*)&g_ScenarioState.state_04)
 
 /* Put the scene back at the state and step that Scene_Start begins it with. */

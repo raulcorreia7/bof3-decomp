@@ -5,8 +5,7 @@
 #include "psyq/libgte.h"
 #include "types.h"
 
-/* Packed vectors shared across images, named by what they hold; PsyQ vectors keep their SDK padding.
- * A role the code proves gets a typedef over one of these (WorldPos, SpriteScale, Angle3). */
+/* Packed vectors shared across images, named by what they hold; PsyQ vectors keep their SDK padding. */
 
 /* A map cell's column and row. */
 typedef struct Cell2 {

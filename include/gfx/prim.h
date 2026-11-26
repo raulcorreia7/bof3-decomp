@@ -7,11 +7,9 @@
 #include "engine/gfx/fade/fade.h"
 #include "engine/gfx/prim/prim.h"
 
-/* The shared primitive cursor and color packing used by the menu, field and
- * effect drawers. */
+/* The shared primitive cursor and color packing used by the menu, field and effect drawers. */
 
-/* A sprite rectangle in texture bytes: origin u, v and size w, h. The sprite
- * drawers copy it into a SPRT. */
+/* A sprite rectangle in texture bytes: origin u, v and size w, h. */
 typedef struct UvRect {
     u8 u;
     u8 v;
@@ -21,8 +19,7 @@ typedef struct UvRect {
 
 ASSERT_SIZE(UvRect, 0x4);
 
-/* A screen rectangle: the corner and the size. The effect and scene drawers
- * read the corner unsigned; the scena10 panel reads it signed. */
+/* A screen rectangle: the corner and the size. */
 typedef union RectU16 {
     struct {
         u16 x;
@@ -114,8 +111,7 @@ extern u8* g_GfxPrimCursor;
 /* D_80145AD4 */
 extern u8  g_UiTextFormatBuffer[];
 
-/* Queue a draw-mode primitive for the texture page at order-table slot 1: the
- * default texture window. */
+/* Queue a draw-mode primitive for the texture page at order-table slot 1: the default texture window. */
 static inline void GFX_AddDrawMode(s32 tpage) {
     GFX_SET_DRAW_MODE(tpage);
     GFX_AddPrim(GFX_LAYER_UI, sizeof(DR_MODE));
@@ -127,8 +123,7 @@ static inline void GFX_AddDitheredDrawMode(u32 layer, s32 tpage) {
     GFX_AddPrim(layer, sizeof(DR_MODE));
 }
 
-/* Queue a draw mode for the texture page `tpage` at order-table slot `layer`: the default texture
- * window, dithering off. */
+/* Queue a draw mode for the texture page `tpage` at order-table slot `layer`: the default texture window, dithering off. */
 #define GFX_ADD_LAYER_DRAW_MODE(layer, tpage) \
     GFX_SET_DRAW_MODE(tpage);                 \
     GFX_AddPrim((layer), sizeof(DR_MODE))
@@ -151,8 +146,7 @@ static inline void GFX_AddDitheredDrawMode(u32 layer, s32 tpage) {
 
 #define GFX_CURSOR(type) ((type*)g_GfxPrimCursor)
 
-/* Begin a semi-transparent, neutral-colour sprite at (x, y) on the shared
- * cursor and return it. */
+/* Begin a semi-transparent, neutral-colour sprite at (x, y) on the shared cursor and return it. */
 static inline SPRT* GfxBeginSprite(s32 x, s32 y, u32 clut) {
     SPRT* sprt = (SPRT*)g_GfxPrimCursor;
     SetSprt(sprt);
@@ -163,8 +157,7 @@ static inline SPRT* GfxBeginSprite(s32 x, s32 y, u32 clut) {
     return sprt;
 }
 
-/* Begin a poly on the shared cursor, with semi-transparency `semi_trans`, and return it. The caller sets its
- * points, colours and texture, then queues it with GFX_AddPrim. */
+/* Begin a poly on the shared cursor, with semi-transparency `semi_trans`, and return it. */
 static inline POLY_G3* GFX_BeginPolyG3(s32 semi_trans) {
     POLY_G3* prim = (POLY_G3*)g_GfxPrimCursor;
     SetPolyG3(prim);

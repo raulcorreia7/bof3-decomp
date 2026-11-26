@@ -10,13 +10,10 @@
  * the ScratchPad record is the default. A use that needs another width keeps a
  * FAKE: cast. */
 #ifdef FAKE_DECL_GAME_SCRATCH_BASE_SCALAR
-/* g_ScratchPad */
 extern u8 g_ScratchPad[];
 #elif defined(FAKE_DECL_GAME_SCRATCH_BASE_WORD)
-/* g_ScratchPad */
 extern s32 g_ScratchPad;
 #else
-/* g_ScratchPad */
 extern ScratchPad g_ScratchPad;
 #endif
 

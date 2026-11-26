@@ -115,9 +115,7 @@ ASSERT_OFFSET(SaveData, bonebreak_timer, 0xC80);
 ASSERT_OFFSET(SaveData, fairy_jobs, 0xCF0);
 ASSERT_SIZE(SaveData, SAVE_BLOCK_SIZE);
 
-/* g_SaveCardStatus holds a CardEvent (0 to 4) from the card driver. The two card screens add their own results
- * above it: the save screen of the shop overlay and the load screen of the start overlay.
- * The values overlap, so each screen has its own set. */
+/* g_SaveCardStatus holds a CardEvent (0 to 4) from the card driver. */
 enum {
     SAVE_WRITE_STATUS_NO_FILE       = 5,  /* GAME_TEXT_NO_SAVE_FILE */
     SAVE_WRITE_STATUS_WRITE_FAILED  = 6,  /* the write ended in a card error */

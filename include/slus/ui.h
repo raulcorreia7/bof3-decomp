@@ -6,8 +6,7 @@
 #include "engine/ui/message/message.h"
 #include "engine/ui/menu/menu.h"
 
-/* The text colour cells of stage palette row 0: the low nibble of a UI_TextDraw palette, the
- * cell argument of the other drawers. */
+/* The text colour cells of stage palette row 0: the low nibble of a UI_TextDraw palette, the cell argument of the other drawers. */
 enum {
     UI_TEXT_NORMAL    = 0,
     UI_TEXT_HIGHLIGHT = 2,

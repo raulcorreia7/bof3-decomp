@@ -92,8 +92,7 @@
 #define AREA_PALETTE_COLORS              256    /* colour words of one upload row */
 #define AREA_PALETTE_ROWS                32u    /* rows of one palette bank */
 
-/* The palette bank rows the BMAGIC and BATTLE families own: 26 is the BATL_OVR bank, 2 the BMAGIC/BATTLE slice at
- * AREA_PALETTE_ARENA_33C00. */
+/* The palette bank rows the BMAGIC and BATTLE families own: 26 is the BATL_OVR bank, 2 the BMAGIC/BATTLE slice at AREA_PALETTE_ARENA_33C00. */
 #define AREA_PALETTE_BATL_OVR_ROW        26
 #define AREA_PALETTE_BMAGIC_ROW          2
 /* Entry 0 of a palette cell is the transparent colour (the battle effects clear it); the visible colours start at entry 1. */
@@ -109,8 +108,7 @@ typedef struct PaletteRow {
 
 ASSERT_SIZE(PaletteRow, AREA_PALETTE_ROW);
 
-/* The rows of one palette bank: the arena holds the banks the families fill, the working copy
- * (g_GraphicsPaletteDst of include/gfx/prim.h) is what the engine uploads. */
+/* The rows of one palette bank. */
 typedef struct PaletteBank {
     PaletteRow rows[AREA_PALETTE_ROWS];
 } PaletteBank;
@@ -269,10 +267,7 @@ typedef enum PartyFloorDamage {
 /* g_Game.current->u.field.counter, the walk speed index: Teepo and Peco act on a rock only at the run index. */
 #define FIELD_SPEED_RUN                 4
 
-/* One +0x24 cell record: four signed corner heights, loaded as s8 by
- * `@0x801530D0`, `@0x8015684C` and `@0x80157CE4`, or whole by the cell side
- * drawer.
- */
+/* One +0x24 cell record: four signed corner heights, loaded as s8 by `@0x801530D0`, `@0x8015684C` and `@0x80157CE4`, or whole by the cell side drawer. */
 typedef union AreaCellCorners {
     s8  corner_height[4];
     u16 corner_pair[2]; /* the heights in pairs, as halfwords */
@@ -314,8 +309,7 @@ typedef union AreaTileRect {
         s8 u; /* signed: `lb a0,3(a1)` at 0x80155670; 0x80 reads as -128 */
     } fields;
 
-    /* The size pair and the page corner read as one signed halfword, as
-     * Area_ApplyTileToQuad does before masking the low byte. */
+    /* The size pair and the page corner read as one signed halfword, as Area_ApplyTileToQuad does before masking the low byte. */
     struct {
         u8  height;
         u8  width;
@@ -366,9 +360,7 @@ typedef struct AreaScripts {
     u32 section_offset[1]; /* 0x04 - L-1 entries, block-relative, strictly increasing */
 } AreaScripts;
 
-/* One section: `slot_size == 2 * M`, and the distinct `record_offset` values
- * increase strictly and tile the section, one stream each. The last section
- * runs to the end of the block. */
+/* One section: `slot_size == 2 * M`, and the distinct `record_offset` values increase strictly and tile the section, one stream each. */
 typedef struct AreaScriptSection {
     u16 slot_size;        /* 0x00 - == 2 * M */
     u16 record_offset[1]; /* 0x02 - M entries, relative to the section base */
@@ -508,8 +500,7 @@ ASSERT_OFFSET(PartyMemberMessages, tags, 0x00);
 ASSERT_OFFSET(PartyMemberMessages, messages, 0x04);
 ASSERT_SIZE(PartyMemberMessages, PARTY_MEMBER_MESSAGE_SIZE);
 
-/* The area view: the camera rotation, its matrix, the scroll target and the camera position.
- * The target cells are the integer halves of the two target coordinates. */
+/* The area view: the camera rotation, its matrix, the scroll target and the camera position. */
 typedef struct AreaCamera {
     CameraAngle angle;          /* 0x00 */
     CameraAngle previous_angle; /* 0x08 */
@@ -547,8 +538,7 @@ ASSERT_OFFSET(AreaMap, grid_column, 0x08);
 ASSERT_OFFSET(AreaMap, grid_row, 0x0A);
 ASSERT_SIZE(AreaMap, 0x0C);
 
-/* Finds the scene-table record for a wanted scene id and fills its palette and
- * tile fields (exe/slus_004_22@0x8014DD3C). */
+/* Finds the scene-table record for a wanted scene id and fills its palette and tile fields (exe/slus_004_22@0x8014DD3C). */
 
 void func_801CF564(void);
 void func_801CFB40(void);
