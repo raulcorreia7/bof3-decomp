@@ -186,6 +186,7 @@ UI_ListDrawScrollbar = { addr = 0x801AFA1C, type = "func", source = "Draws a lis
 Camera_SetMatrix = { addr = 0x801AFE18, type = "func", source = "Sets the GTE rotation and translation from the camera angle, height and offsets, and returns out_matrix unchanged." }
 Camera_ProjectPoint = { addr = 0x801AFF04, type = "func", source = "Projects the 16.16 position pos through RotTransPers and writes the result to screen_xy." }
 MATH_SetIdentity = { addr = 0x801AFF64, type = "func", source = "Writes 4096 to the three diagonal cells of a 3x3 s16 matrix and 0 to the other six." }
+MATH_TriangleWinding = { addr = 0x801AFF90, type = "func", source = "Cross product of (first - origin) and (second - first) in screen space: its sign says which side of the line origin-first the point second is on; callers use it to cull polygons by winding." }
 Game_ProjectWorldPoint = { addr = 0x801AFFD8, type = "func", source = "projects a world position through RotTrans and stores the screen pair; existing bottom-up proposal" }
 Party_RunLeader = { addr = 0x801B00F8, type = "func", source = "Runs the leader's frame: the per-frame helper, the countdown byte, then the mode handler g_PartyLeaderModes[header.mode]." }
 Actor_MovementUpdate = { addr = 0x801B0DFC, type = "func", source = "moves and animates the current actor rows, called by every area and scene timer" }

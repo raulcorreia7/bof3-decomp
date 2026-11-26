@@ -87,9 +87,9 @@ s32  func_801AF390(s16 x, s16 y, u8* table, s32 flags);
 u8   func_801AF5B0(s32 item_category, s32 character_index, s32 ability_type);
 /* func_801AFD10 */
 s32  func_801AFD10(u8* first_row, u8* scroll_y, u8* extra_rows, u8* scroll);
-/* GFX_TriangleWinding */
+/* MATH_TriangleWinding */
 /* func_801AFF90 */
-s16  GFX_TriangleWinding(Pos2* origin, Pos2* first_point, Pos2* second_point);
+s16  MATH_TriangleWinding(Pos2* origin, Pos2* first_point, Pos2* second_point);
 /* func_801B0E44 */
 u8   func_801B0E44(void);
 /* func_801B6610 */

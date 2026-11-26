@@ -1560,4 +1560,3 @@ _svm_vab_start = { addr = 0x80190BD8, alias = true, source = "PsyQ 3.7 LIBSND da
 _svm_envx_hist = { addr = 0x80190C18, alias = true, source = "PsyQ 3.7 LIBSND data symbol kept so the split accounts for the library data the game never names." }
 _svm_okof1 = { addr = 0x80190C58, alias = true, source = "PsyQ 3.7 LIBSND data symbol kept so the split accounts for the library data the game never names." }
 _svm_okof2 = { addr = 0x80190C5A, alias = true, source = "PsyQ 3.7 LIBSND data symbol kept so the split accounts for the library data the game never names." }
-GFX_TriangleWinding = { addr = 0x801AFF90, type = "func", source = "Cross product of (first - origin) and (second - first) in screen space: its sign says which side of the line origin-first the point second is on; callers use it to cull polygons by winding." }

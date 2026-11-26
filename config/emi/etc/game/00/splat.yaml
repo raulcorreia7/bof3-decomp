@@ -566,7 +566,7 @@ segments:
       - [0x1A618, c, ../../camera/Camera_SetMatrix]
       - [0x1A704, c, ../../camera/Camera_ProjectPoint]
       - [0x1A764, c, ../../sys/math/MATH_SetIdentity]
-      - [0x1A790, c, ../../gfx/prim/GFX_TriangleWinding]
+      - [0x1A790, c, ../../sys/math/MATH_TriangleWinding]
       - [0x1A7D8, c, ../../state/mode/Game_ProjectWorldPoint]
       - [0x1A8F8, c, ../../party/party/Party_RunLeader]
       - [0x1A96C, c, func_801B016C]
